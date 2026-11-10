@@ -7,9 +7,59 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [51]smithy.SchemaExtensions
+var (
+	eGetEntitlements                                  smithy.SchemaExtensions
+	e_AWSMPEntitlementService                         smithy.SchemaExtensions
+	e_Boolean                                         smithy.SchemaExtensions
+	e_Double                                          smithy.SchemaExtensions
+	eEntitlement                                      smithy.SchemaExtensions
+	eEntitlement_ProductCode                          smithy.SchemaExtensions
+	eEntitlement_Dimension                            smithy.SchemaExtensions
+	eEntitlement_CustomerIdentifier                   smithy.SchemaExtensions
+	eEntitlement_CustomerAWSAccountId                 smithy.SchemaExtensions
+	eEntitlement_Value                                smithy.SchemaExtensions
+	eEntitlement_ExpirationDate                       smithy.SchemaExtensions
+	eEntitlement_LicenseArn                           smithy.SchemaExtensions
+	e_EntitlementList                                 smithy.SchemaExtensions
+	e_EntitlementList_member                          smithy.SchemaExtensions
+	eEntitlementValue                                 smithy.SchemaExtensions
+	eEntitlementValue_IntegerValue                    smithy.SchemaExtensions
+	eEntitlementValue_DoubleValue                     smithy.SchemaExtensions
+	eEntitlementValue_BooleanValue                    smithy.SchemaExtensions
+	eEntitlementValue_StringValue                     smithy.SchemaExtensions
+	e_ErrorMessage                                    smithy.SchemaExtensions
+	e_FilterValue                                     smithy.SchemaExtensions
+	e_FilterValueList                                 smithy.SchemaExtensions
+	e_FilterValueList_member                          smithy.SchemaExtensions
+	eGetEntitlementFilterName                         smithy.SchemaExtensions
+	eGetEntitlementFilterName_CUSTOMER_IDENTIFIER     smithy.SchemaExtensions
+	eGetEntitlementFilterName_DIMENSION               smithy.SchemaExtensions
+	eGetEntitlementFilterName_CUSTOMER_AWS_ACCOUNT_ID smithy.SchemaExtensions
+	eGetEntitlementFilterName_LICENSE_ARN             smithy.SchemaExtensions
+	e_GetEntitlementFilters                           smithy.SchemaExtensions
+	e_GetEntitlementFilters_key                       smithy.SchemaExtensions
+	e_GetEntitlementFilters_value                     smithy.SchemaExtensions
+	e_Integer                                         smithy.SchemaExtensions
+	eInternalServiceErrorException                    smithy.SchemaExtensions
+	eInternalServiceErrorException_message            smithy.SchemaExtensions
+	eInvalidParameterException                        smithy.SchemaExtensions
+	eInvalidParameterException_message                smithy.SchemaExtensions
+	e_NonEmptyString                                  smithy.SchemaExtensions
+	e_PageSizeInteger                                 smithy.SchemaExtensions
+	e_ProductCode                                     smithy.SchemaExtensions
+	e_String                                          smithy.SchemaExtensions
+	eThrottlingException                              smithy.SchemaExtensions
+	eThrottlingException_message                      smithy.SchemaExtensions
+	e_Timestamp                                       smithy.SchemaExtensions
+	eGetEntitlementsRequest                           smithy.SchemaExtensions
+	eGetEntitlementsRequest_ProductCode               smithy.SchemaExtensions
+	eGetEntitlementsRequest_Filter                    smithy.SchemaExtensions
+	eGetEntitlementsRequest_NextToken                 smithy.SchemaExtensions
+	eGetEntitlementsRequest_MaxResults                smithy.SchemaExtensions
+	eGetEntitlementsResult                            smithy.SchemaExtensions
+	eGetEntitlementsResult_Entitlements               smithy.SchemaExtensions
+	eGetEntitlementsResult_NextToken                  smithy.SchemaExtensions
+)
 
 var (
 	iGetEntitlements               = smithy.ShapeID{Namespace: "com.amazonaws.marketplaceentitlementservice", Name: "GetEntitlements"}
@@ -53,58 +103,58 @@ var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottl
 var mGetEntitlementsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEntitlementsRequest_ProductCode, &sGetEntitlementsRequest_Filter, &sGetEntitlementsRequest_NextToken, &sGetEntitlementsRequest_MaxResults}}
 var mGetEntitlementsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEntitlementsResult_Entitlements, &sGetEntitlementsResult_NextToken}}
 
-var sGetEntitlements = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEntitlements, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var s_AWSMPEntitlementService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSMPEntitlementService, Type: smithy.ShapeTypeService, Ext: &ext[1]})
-var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[2]})
-var s_Double = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &ext[3]})
-var sEntitlement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntitlement, Members: &mEntitlement, Type: smithy.ShapeTypeStructure, Ext: &ext[4]})
-var s_EntitlementList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntitlementList, Members: &m_EntitlementList, Type: smithy.ShapeTypeList, Ext: &ext[12]})
-var sEntitlementValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntitlementValue, Members: &mEntitlementValue, Type: smithy.ShapeTypeStructure, Ext: &ext[14]})
-var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[19]})
-var s_FilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValue, Type: smithy.ShapeTypeString, Ext: &ext[20]})
-var s_FilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValueList, Members: &m_FilterValueList, Type: smithy.ShapeTypeList, Ext: &ext[21]})
-var sGetEntitlementFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEntitlementFilterName, Members: &mGetEntitlementFilterName, Type: smithy.ShapeTypeEnum, Ext: &ext[23]})
-var s_GetEntitlementFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GetEntitlementFilters, Members: &m_GetEntitlementFilters, Type: smithy.ShapeTypeMap, Ext: &ext[28]})
-var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[31]})
-var sInternalServiceErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServiceErrorException, Members: &mInternalServiceErrorException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[32]})
-var sInvalidParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterException, Members: &mInvalidParameterException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[34]})
-var s_NonEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var s_PageSizeInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PageSizeInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[37]})
-var s_ProductCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProductCode, Type: smithy.ShapeTypeString, Ext: &ext[38]})
-var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[39]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[40]})
-var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[42]})
-var sGetEntitlementsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEntitlementsRequest, Members: &mGetEntitlementsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[43]})
-var sGetEntitlementsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEntitlementsResult, Members: &mGetEntitlementsResult, Type: smithy.ShapeTypeStructure, Ext: &ext[48]})
+var sGetEntitlements = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEntitlements, Type: smithy.ShapeTypeOperation, Ext: &eGetEntitlements})
+var s_AWSMPEntitlementService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSMPEntitlementService, Type: smithy.ShapeTypeService, Ext: &e_AWSMPEntitlementService})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var s_Double = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &e_Double})
+var sEntitlement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntitlement, Members: &mEntitlement, Type: smithy.ShapeTypeStructure, Ext: &eEntitlement})
+var s_EntitlementList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntitlementList, Members: &m_EntitlementList, Type: smithy.ShapeTypeList, Ext: &e_EntitlementList})
+var sEntitlementValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntitlementValue, Members: &mEntitlementValue, Type: smithy.ShapeTypeStructure, Ext: &eEntitlementValue})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var s_FilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValue, Type: smithy.ShapeTypeString, Ext: &e_FilterValue})
+var s_FilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValueList, Members: &m_FilterValueList, Type: smithy.ShapeTypeList, Ext: &e_FilterValueList})
+var sGetEntitlementFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEntitlementFilterName, Members: &mGetEntitlementFilterName, Type: smithy.ShapeTypeEnum, Ext: &eGetEntitlementFilterName})
+var s_GetEntitlementFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GetEntitlementFilters, Members: &m_GetEntitlementFilters, Type: smithy.ShapeTypeMap, Ext: &e_GetEntitlementFilters})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &e_Integer})
+var sInternalServiceErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServiceErrorException, Members: &mInternalServiceErrorException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInternalServiceErrorException})
+var sInvalidParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterException, Members: &mInvalidParameterException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidParameterException})
+var s_NonEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_NonEmptyString})
+var s_PageSizeInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PageSizeInteger, Type: smithy.ShapeTypeInteger, Ext: &e_PageSizeInteger})
+var s_ProductCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProductCode, Type: smithy.ShapeTypeString, Ext: &e_ProductCode})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var sGetEntitlementsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEntitlementsRequest, Members: &mGetEntitlementsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetEntitlementsRequest})
+var sGetEntitlementsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEntitlementsResult, Members: &mGetEntitlementsResult, Type: smithy.ShapeTypeStructure, Ext: &eGetEntitlementsResult})
 
-var sEntitlement_ProductCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductCode", ID: &i_ProductCode, Type: smithy.ShapeTypeString, Ext: &ext[5]})
-var sEntitlement_Dimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimension", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ext[6]})
-var sEntitlement_CustomerIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerIdentifier", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ext[7]})
-var sEntitlement_CustomerAWSAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerAWSAccountId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ext[8]})
-var sEntitlement_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &iEntitlementValue, Members: &mEntitlementValue, Type: smithy.ShapeTypeStructure, Ext: &ext[9]})
-var sEntitlement_ExpirationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[10]})
-var sEntitlement_LicenseArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LicenseArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[11]})
-var s_EntitlementList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntitlement, Members: &mEntitlement, Type: smithy.ShapeTypeStructure, Ext: &ext[13]})
-var sEntitlementValue_IntegerValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegerValue", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[15]})
-var sEntitlementValue_DoubleValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DoubleValue", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &ext[16]})
-var sEntitlementValue_BooleanValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BooleanValue", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[17]})
-var sEntitlementValue_StringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StringValue", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[18]})
-var s_FilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FilterValue, Type: smithy.ShapeTypeString, Ext: &ext[22]})
-var sGetEntitlementFilterName_CUSTOMER_IDENTIFIER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_IDENTIFIER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[24]})
-var sGetEntitlementFilterName_DIMENSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIMENSION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[25]})
-var sGetEntitlementFilterName_CUSTOMER_AWS_ACCOUNT_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_AWS_ACCOUNT_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[26]})
-var sGetEntitlementFilterName_LICENSE_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LICENSE_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[27]})
-var s_GetEntitlementFilters_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iGetEntitlementFilterName, Members: &mGetEntitlementFilterName, Type: smithy.ShapeTypeEnum, Ext: &ext[29]})
-var s_GetEntitlementFilters_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_FilterValueList, Members: &m_FilterValueList, Type: smithy.ShapeTypeList, Ext: &ext[30]})
-var sInternalServiceErrorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var sInvalidParameterException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[41]})
-var sGetEntitlementsRequest_ProductCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductCode", ID: &i_ProductCode, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var sGetEntitlementsRequest_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &i_GetEntitlementFilters, Members: &m_GetEntitlementFilters, Type: smithy.ShapeTypeMap, Ext: &ext[45]})
-var sGetEntitlementsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ext[46]})
-var sGetEntitlementsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PageSizeInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[47]})
-var sGetEntitlementsResult_Entitlements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entitlements", ID: &i_EntitlementList, Members: &m_EntitlementList, Type: smithy.ShapeTypeList, Ext: &ext[49]})
-var sGetEntitlementsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ext[50]})
+var sEntitlement_ProductCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductCode", ID: &i_ProductCode, Type: smithy.ShapeTypeString, Ext: &eEntitlement_ProductCode})
+var sEntitlement_Dimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimension", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eEntitlement_Dimension})
+var sEntitlement_CustomerIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerIdentifier", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eEntitlement_CustomerIdentifier})
+var sEntitlement_CustomerAWSAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerAWSAccountId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eEntitlement_CustomerAWSAccountId})
+var sEntitlement_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &iEntitlementValue, Members: &mEntitlementValue, Type: smithy.ShapeTypeStructure, Ext: &eEntitlement_Value})
+var sEntitlement_ExpirationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eEntitlement_ExpirationDate})
+var sEntitlement_LicenseArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LicenseArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEntitlement_LicenseArn})
+var s_EntitlementList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntitlement, Members: &mEntitlement, Type: smithy.ShapeTypeStructure, Ext: &e_EntitlementList_member})
+var sEntitlementValue_IntegerValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegerValue", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eEntitlementValue_IntegerValue})
+var sEntitlementValue_DoubleValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DoubleValue", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eEntitlementValue_DoubleValue})
+var sEntitlementValue_BooleanValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BooleanValue", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eEntitlementValue_BooleanValue})
+var sEntitlementValue_StringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StringValue", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEntitlementValue_StringValue})
+var s_FilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FilterValue, Type: smithy.ShapeTypeString, Ext: &e_FilterValueList_member})
+var sGetEntitlementFilterName_CUSTOMER_IDENTIFIER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_IDENTIFIER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGetEntitlementFilterName_CUSTOMER_IDENTIFIER})
+var sGetEntitlementFilterName_DIMENSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIMENSION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGetEntitlementFilterName_DIMENSION})
+var sGetEntitlementFilterName_CUSTOMER_AWS_ACCOUNT_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_AWS_ACCOUNT_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGetEntitlementFilterName_CUSTOMER_AWS_ACCOUNT_ID})
+var sGetEntitlementFilterName_LICENSE_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LICENSE_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGetEntitlementFilterName_LICENSE_ARN})
+var s_GetEntitlementFilters_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iGetEntitlementFilterName, Members: &mGetEntitlementFilterName, Type: smithy.ShapeTypeEnum, Ext: &e_GetEntitlementFilters_key})
+var s_GetEntitlementFilters_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_FilterValueList, Members: &m_FilterValueList, Type: smithy.ShapeTypeList, Ext: &e_GetEntitlementFilters_value})
+var sInternalServiceErrorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServiceErrorException_message})
+var sInvalidParameterException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidParameterException_message})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sGetEntitlementsRequest_ProductCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductCode", ID: &i_ProductCode, Type: smithy.ShapeTypeString, Ext: &eGetEntitlementsRequest_ProductCode})
+var sGetEntitlementsRequest_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &i_GetEntitlementFilters, Members: &m_GetEntitlementFilters, Type: smithy.ShapeTypeMap, Ext: &eGetEntitlementsRequest_Filter})
+var sGetEntitlementsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eGetEntitlementsRequest_NextToken})
+var sGetEntitlementsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PageSizeInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetEntitlementsRequest_MaxResults})
+var sGetEntitlementsResult_Entitlements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entitlements", ID: &i_EntitlementList, Members: &m_EntitlementList, Type: smithy.ShapeTypeList, Ext: &eGetEntitlementsResult_Entitlements})
+var sGetEntitlementsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eGetEntitlementsResult_NextToken})
 
 var GetEntitlements = &sGetEntitlements
 

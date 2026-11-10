@@ -7,9 +7,261 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [253]smithy.SchemaExtensions
+var (
+	eBulkPublish                                               smithy.SchemaExtensions
+	eDeleteDataset                                             smithy.SchemaExtensions
+	eDescribeDataset                                           smithy.SchemaExtensions
+	eDescribeIdentityPoolUsage                                 smithy.SchemaExtensions
+	eDescribeIdentityUsage                                     smithy.SchemaExtensions
+	eGetBulkPublishDetails                                     smithy.SchemaExtensions
+	eGetCognitoEvents                                          smithy.SchemaExtensions
+	eGetIdentityPoolConfiguration                              smithy.SchemaExtensions
+	eListDatasets                                              smithy.SchemaExtensions
+	eListIdentityPoolUsage                                     smithy.SchemaExtensions
+	eListRecords                                               smithy.SchemaExtensions
+	eRegisterDevice                                            smithy.SchemaExtensions
+	eSetCognitoEvents                                          smithy.SchemaExtensions
+	eSetIdentityPoolConfiguration                              smithy.SchemaExtensions
+	eSubscribeToDataset                                        smithy.SchemaExtensions
+	eUnsubscribeFromDataset                                    smithy.SchemaExtensions
+	eUpdateRecords                                             smithy.SchemaExtensions
+	e_AWSCognitoSyncService                                    smithy.SchemaExtensions
+	eAlreadyStreamedException                                  smithy.SchemaExtensions
+	eAlreadyStreamedException_message                          smithy.SchemaExtensions
+	e_ApplicationArn                                           smithy.SchemaExtensions
+	e_ApplicationArnList                                       smithy.SchemaExtensions
+	e_ApplicationArnList_member                                smithy.SchemaExtensions
+	e_AssumeRoleArn                                            smithy.SchemaExtensions
+	e_Boolean                                                  smithy.SchemaExtensions
+	eBulkPublishStatus                                         smithy.SchemaExtensions
+	eBulkPublishStatus_NOT_STARTED                             smithy.SchemaExtensions
+	eBulkPublishStatus_IN_PROGRESS                             smithy.SchemaExtensions
+	eBulkPublishStatus_FAILED                                  smithy.SchemaExtensions
+	eBulkPublishStatus_SUCCEEDED                               smithy.SchemaExtensions
+	e_ClientContext                                            smithy.SchemaExtensions
+	e_CognitoEventType                                         smithy.SchemaExtensions
+	eCognitoStreams                                            smithy.SchemaExtensions
+	eCognitoStreams_StreamName                                 smithy.SchemaExtensions
+	eCognitoStreams_RoleArn                                    smithy.SchemaExtensions
+	eCognitoStreams_StreamingStatus                            smithy.SchemaExtensions
+	eConcurrentModificationException                           smithy.SchemaExtensions
+	eConcurrentModificationException_message                   smithy.SchemaExtensions
+	eDataset                                                   smithy.SchemaExtensions
+	eDataset_IdentityId                                        smithy.SchemaExtensions
+	eDataset_DatasetName                                       smithy.SchemaExtensions
+	eDataset_CreationDate                                      smithy.SchemaExtensions
+	eDataset_LastModifiedDate                                  smithy.SchemaExtensions
+	eDataset_LastModifiedBy                                    smithy.SchemaExtensions
+	eDataset_DataStorage                                       smithy.SchemaExtensions
+	eDataset_NumRecords                                        smithy.SchemaExtensions
+	e_DatasetList                                              smithy.SchemaExtensions
+	e_DatasetList_member                                       smithy.SchemaExtensions
+	e_DatasetName                                              smithy.SchemaExtensions
+	e_Date                                                     smithy.SchemaExtensions
+	e_DeviceId                                                 smithy.SchemaExtensions
+	eDuplicateRequestException                                 smithy.SchemaExtensions
+	eDuplicateRequestException_message                         smithy.SchemaExtensions
+	e_Events                                                   smithy.SchemaExtensions
+	e_Events_key                                               smithy.SchemaExtensions
+	e_Events_value                                             smithy.SchemaExtensions
+	e_ExceptionMessage                                         smithy.SchemaExtensions
+	e_IdentityId                                               smithy.SchemaExtensions
+	e_IdentityPoolId                                           smithy.SchemaExtensions
+	eIdentityPoolUsage                                         smithy.SchemaExtensions
+	eIdentityPoolUsage_IdentityPoolId                          smithy.SchemaExtensions
+	eIdentityPoolUsage_SyncSessionsCount                       smithy.SchemaExtensions
+	eIdentityPoolUsage_DataStorage                             smithy.SchemaExtensions
+	eIdentityPoolUsage_LastModifiedDate                        smithy.SchemaExtensions
+	e_IdentityPoolUsageList                                    smithy.SchemaExtensions
+	e_IdentityPoolUsageList_member                             smithy.SchemaExtensions
+	eIdentityUsage                                             smithy.SchemaExtensions
+	eIdentityUsage_IdentityId                                  smithy.SchemaExtensions
+	eIdentityUsage_IdentityPoolId                              smithy.SchemaExtensions
+	eIdentityUsage_LastModifiedDate                            smithy.SchemaExtensions
+	eIdentityUsage_DatasetCount                                smithy.SchemaExtensions
+	eIdentityUsage_DataStorage                                 smithy.SchemaExtensions
+	e_Integer                                                  smithy.SchemaExtensions
+	e_IntegerString                                            smithy.SchemaExtensions
+	eInternalErrorException                                    smithy.SchemaExtensions
+	eInternalErrorException_message                            smithy.SchemaExtensions
+	eInvalidConfigurationException                             smithy.SchemaExtensions
+	eInvalidConfigurationException_message                     smithy.SchemaExtensions
+	eInvalidLambdaFunctionOutputException                      smithy.SchemaExtensions
+	eInvalidLambdaFunctionOutputException_message              smithy.SchemaExtensions
+	eInvalidParameterException                                 smithy.SchemaExtensions
+	eInvalidParameterException_message                         smithy.SchemaExtensions
+	e_LambdaFunctionArn                                        smithy.SchemaExtensions
+	eLambdaThrottledException                                  smithy.SchemaExtensions
+	eLambdaThrottledException_message                          smithy.SchemaExtensions
+	eLimitExceededException                                    smithy.SchemaExtensions
+	eLimitExceededException_message                            smithy.SchemaExtensions
+	e_Long                                                     smithy.SchemaExtensions
+	e_MergedDatasetNameList                                    smithy.SchemaExtensions
+	e_MergedDatasetNameList_member                             smithy.SchemaExtensions
+	eNotAuthorizedException                                    smithy.SchemaExtensions
+	eNotAuthorizedException_message                            smithy.SchemaExtensions
+	eOperation                                                 smithy.SchemaExtensions
+	eOperation_replace                                         smithy.SchemaExtensions
+	eOperation_remove                                          smithy.SchemaExtensions
+	ePlatform                                                  smithy.SchemaExtensions
+	ePlatform_APNS                                             smithy.SchemaExtensions
+	ePlatform_APNS_SANDBOX                                     smithy.SchemaExtensions
+	ePlatform_GCM                                              smithy.SchemaExtensions
+	ePlatform_ADM                                              smithy.SchemaExtensions
+	ePushSync                                                  smithy.SchemaExtensions
+	ePushSync_ApplicationArns                                  smithy.SchemaExtensions
+	ePushSync_RoleArn                                          smithy.SchemaExtensions
+	e_PushToken                                                smithy.SchemaExtensions
+	eRecord                                                    smithy.SchemaExtensions
+	eRecord_Key                                                smithy.SchemaExtensions
+	eRecord_Value                                              smithy.SchemaExtensions
+	eRecord_SyncCount                                          smithy.SchemaExtensions
+	eRecord_LastModifiedDate                                   smithy.SchemaExtensions
+	eRecord_LastModifiedBy                                     smithy.SchemaExtensions
+	eRecord_DeviceLastModifiedDate                             smithy.SchemaExtensions
+	e_RecordKey                                                smithy.SchemaExtensions
+	e_RecordList                                               smithy.SchemaExtensions
+	e_RecordList_member                                        smithy.SchemaExtensions
+	eRecordPatch                                               smithy.SchemaExtensions
+	eRecordPatch_Op                                            smithy.SchemaExtensions
+	eRecordPatch_Key                                           smithy.SchemaExtensions
+	eRecordPatch_Value                                         smithy.SchemaExtensions
+	eRecordPatch_SyncCount                                     smithy.SchemaExtensions
+	eRecordPatch_DeviceLastModifiedDate                        smithy.SchemaExtensions
+	e_RecordPatchList                                          smithy.SchemaExtensions
+	e_RecordPatchList_member                                   smithy.SchemaExtensions
+	e_RecordValue                                              smithy.SchemaExtensions
+	eResourceConflictException                                 smithy.SchemaExtensions
+	eResourceConflictException_message                         smithy.SchemaExtensions
+	eResourceNotFoundException                                 smithy.SchemaExtensions
+	eResourceNotFoundException_message                         smithy.SchemaExtensions
+	eStreamingStatus                                           smithy.SchemaExtensions
+	eStreamingStatus_ENABLED                                   smithy.SchemaExtensions
+	eStreamingStatus_DISABLED                                  smithy.SchemaExtensions
+	e_StreamName                                               smithy.SchemaExtensions
+	e_String                                                   smithy.SchemaExtensions
+	e_SyncSessionToken                                         smithy.SchemaExtensions
+	eTooManyRequestsException                                  smithy.SchemaExtensions
+	eTooManyRequestsException_message                          smithy.SchemaExtensions
+	eBulkPublishRequest                                        smithy.SchemaExtensions
+	eBulkPublishRequest_IdentityPoolId                         smithy.SchemaExtensions
+	eBulkPublishResponse                                       smithy.SchemaExtensions
+	eBulkPublishResponse_IdentityPoolId                        smithy.SchemaExtensions
+	eDeleteDatasetRequest                                      smithy.SchemaExtensions
+	eDeleteDatasetRequest_IdentityPoolId                       smithy.SchemaExtensions
+	eDeleteDatasetRequest_IdentityId                           smithy.SchemaExtensions
+	eDeleteDatasetRequest_DatasetName                          smithy.SchemaExtensions
+	eDeleteDatasetResponse                                     smithy.SchemaExtensions
+	eDeleteDatasetResponse_Dataset                             smithy.SchemaExtensions
+	eDescribeDatasetRequest                                    smithy.SchemaExtensions
+	eDescribeDatasetRequest_IdentityPoolId                     smithy.SchemaExtensions
+	eDescribeDatasetRequest_IdentityId                         smithy.SchemaExtensions
+	eDescribeDatasetRequest_DatasetName                        smithy.SchemaExtensions
+	eDescribeDatasetResponse                                   smithy.SchemaExtensions
+	eDescribeDatasetResponse_Dataset                           smithy.SchemaExtensions
+	eDescribeIdentityPoolUsageRequest                          smithy.SchemaExtensions
+	eDescribeIdentityPoolUsageRequest_IdentityPoolId           smithy.SchemaExtensions
+	eDescribeIdentityPoolUsageResponse                         smithy.SchemaExtensions
+	eDescribeIdentityPoolUsageResponse_IdentityPoolUsage       smithy.SchemaExtensions
+	eDescribeIdentityUsageRequest                              smithy.SchemaExtensions
+	eDescribeIdentityUsageRequest_IdentityPoolId               smithy.SchemaExtensions
+	eDescribeIdentityUsageRequest_IdentityId                   smithy.SchemaExtensions
+	eDescribeIdentityUsageResponse                             smithy.SchemaExtensions
+	eDescribeIdentityUsageResponse_IdentityUsage               smithy.SchemaExtensions
+	eGetBulkPublishDetailsRequest                              smithy.SchemaExtensions
+	eGetBulkPublishDetailsRequest_IdentityPoolId               smithy.SchemaExtensions
+	eGetBulkPublishDetailsResponse                             smithy.SchemaExtensions
+	eGetBulkPublishDetailsResponse_IdentityPoolId              smithy.SchemaExtensions
+	eGetBulkPublishDetailsResponse_BulkPublishStartTime        smithy.SchemaExtensions
+	eGetBulkPublishDetailsResponse_BulkPublishCompleteTime     smithy.SchemaExtensions
+	eGetBulkPublishDetailsResponse_BulkPublishStatus           smithy.SchemaExtensions
+	eGetBulkPublishDetailsResponse_FailureMessage              smithy.SchemaExtensions
+	eGetCognitoEventsRequest                                   smithy.SchemaExtensions
+	eGetCognitoEventsRequest_IdentityPoolId                    smithy.SchemaExtensions
+	eGetCognitoEventsResponse                                  smithy.SchemaExtensions
+	eGetCognitoEventsResponse_Events                           smithy.SchemaExtensions
+	eGetIdentityPoolConfigurationRequest                       smithy.SchemaExtensions
+	eGetIdentityPoolConfigurationRequest_IdentityPoolId        smithy.SchemaExtensions
+	eGetIdentityPoolConfigurationResponse                      smithy.SchemaExtensions
+	eGetIdentityPoolConfigurationResponse_IdentityPoolId       smithy.SchemaExtensions
+	eGetIdentityPoolConfigurationResponse_PushSync             smithy.SchemaExtensions
+	eGetIdentityPoolConfigurationResponse_CognitoStreams       smithy.SchemaExtensions
+	eListDatasetsRequest                                       smithy.SchemaExtensions
+	eListDatasetsRequest_IdentityPoolId                        smithy.SchemaExtensions
+	eListDatasetsRequest_IdentityId                            smithy.SchemaExtensions
+	eListDatasetsRequest_NextToken                             smithy.SchemaExtensions
+	eListDatasetsRequest_MaxResults                            smithy.SchemaExtensions
+	eListDatasetsResponse                                      smithy.SchemaExtensions
+	eListDatasetsResponse_Datasets                             smithy.SchemaExtensions
+	eListDatasetsResponse_Count                                smithy.SchemaExtensions
+	eListDatasetsResponse_NextToken                            smithy.SchemaExtensions
+	eListIdentityPoolUsageRequest                              smithy.SchemaExtensions
+	eListIdentityPoolUsageRequest_NextToken                    smithy.SchemaExtensions
+	eListIdentityPoolUsageRequest_MaxResults                   smithy.SchemaExtensions
+	eListIdentityPoolUsageResponse                             smithy.SchemaExtensions
+	eListIdentityPoolUsageResponse_IdentityPoolUsages          smithy.SchemaExtensions
+	eListIdentityPoolUsageResponse_MaxResults                  smithy.SchemaExtensions
+	eListIdentityPoolUsageResponse_Count                       smithy.SchemaExtensions
+	eListIdentityPoolUsageResponse_NextToken                   smithy.SchemaExtensions
+	eListRecordsRequest                                        smithy.SchemaExtensions
+	eListRecordsRequest_IdentityPoolId                         smithy.SchemaExtensions
+	eListRecordsRequest_IdentityId                             smithy.SchemaExtensions
+	eListRecordsRequest_DatasetName                            smithy.SchemaExtensions
+	eListRecordsRequest_LastSyncCount                          smithy.SchemaExtensions
+	eListRecordsRequest_NextToken                              smithy.SchemaExtensions
+	eListRecordsRequest_MaxResults                             smithy.SchemaExtensions
+	eListRecordsRequest_SyncSessionToken                       smithy.SchemaExtensions
+	eListRecordsResponse                                       smithy.SchemaExtensions
+	eListRecordsResponse_Records                               smithy.SchemaExtensions
+	eListRecordsResponse_NextToken                             smithy.SchemaExtensions
+	eListRecordsResponse_Count                                 smithy.SchemaExtensions
+	eListRecordsResponse_DatasetSyncCount                      smithy.SchemaExtensions
+	eListRecordsResponse_LastModifiedBy                        smithy.SchemaExtensions
+	eListRecordsResponse_MergedDatasetNames                    smithy.SchemaExtensions
+	eListRecordsResponse_DatasetExists                         smithy.SchemaExtensions
+	eListRecordsResponse_DatasetDeletedAfterRequestedSyncCount smithy.SchemaExtensions
+	eListRecordsResponse_SyncSessionToken                      smithy.SchemaExtensions
+	eRegisterDeviceRequest                                     smithy.SchemaExtensions
+	eRegisterDeviceRequest_IdentityPoolId                      smithy.SchemaExtensions
+	eRegisterDeviceRequest_IdentityId                          smithy.SchemaExtensions
+	eRegisterDeviceRequest_Platform                            smithy.SchemaExtensions
+	eRegisterDeviceRequest_Token                               smithy.SchemaExtensions
+	eRegisterDeviceResponse                                    smithy.SchemaExtensions
+	eRegisterDeviceResponse_DeviceId                           smithy.SchemaExtensions
+	eSetCognitoEventsRequest                                   smithy.SchemaExtensions
+	eSetCognitoEventsRequest_IdentityPoolId                    smithy.SchemaExtensions
+	eSetCognitoEventsRequest_Events                            smithy.SchemaExtensions
+	eSetIdentityPoolConfigurationRequest                       smithy.SchemaExtensions
+	eSetIdentityPoolConfigurationRequest_IdentityPoolId        smithy.SchemaExtensions
+	eSetIdentityPoolConfigurationRequest_PushSync              smithy.SchemaExtensions
+	eSetIdentityPoolConfigurationRequest_CognitoStreams        smithy.SchemaExtensions
+	eSetIdentityPoolConfigurationResponse                      smithy.SchemaExtensions
+	eSetIdentityPoolConfigurationResponse_IdentityPoolId       smithy.SchemaExtensions
+	eSetIdentityPoolConfigurationResponse_PushSync             smithy.SchemaExtensions
+	eSetIdentityPoolConfigurationResponse_CognitoStreams       smithy.SchemaExtensions
+	eSubscribeToDatasetRequest                                 smithy.SchemaExtensions
+	eSubscribeToDatasetRequest_IdentityPoolId                  smithy.SchemaExtensions
+	eSubscribeToDatasetRequest_IdentityId                      smithy.SchemaExtensions
+	eSubscribeToDatasetRequest_DatasetName                     smithy.SchemaExtensions
+	eSubscribeToDatasetRequest_DeviceId                        smithy.SchemaExtensions
+	eSubscribeToDatasetResponse                                smithy.SchemaExtensions
+	eUnsubscribeFromDatasetRequest                             smithy.SchemaExtensions
+	eUnsubscribeFromDatasetRequest_IdentityPoolId              smithy.SchemaExtensions
+	eUnsubscribeFromDatasetRequest_IdentityId                  smithy.SchemaExtensions
+	eUnsubscribeFromDatasetRequest_DatasetName                 smithy.SchemaExtensions
+	eUnsubscribeFromDatasetRequest_DeviceId                    smithy.SchemaExtensions
+	eUnsubscribeFromDatasetResponse                            smithy.SchemaExtensions
+	eUpdateRecordsRequest                                      smithy.SchemaExtensions
+	eUpdateRecordsRequest_IdentityPoolId                       smithy.SchemaExtensions
+	eUpdateRecordsRequest_IdentityId                           smithy.SchemaExtensions
+	eUpdateRecordsRequest_DatasetName                          smithy.SchemaExtensions
+	eUpdateRecordsRequest_DeviceId                             smithy.SchemaExtensions
+	eUpdateRecordsRequest_RecordPatches                        smithy.SchemaExtensions
+	eUpdateRecordsRequest_SyncSessionToken                     smithy.SchemaExtensions
+	eUpdateRecordsRequest_ClientContext                        smithy.SchemaExtensions
+	eUpdateRecordsResponse                                     smithy.SchemaExtensions
+	eUpdateRecordsResponse_Records                             smithy.SchemaExtensions
+)
 
 var (
 	iBulkPublish                          = smithy.ShapeID{Namespace: "com.amazonaws.cognitosync", Name: "BulkPublish"}
@@ -269,260 +521,260 @@ var mUnsubscribeFromDatasetRequest = smithy.SchemaMembers{List: []*smithy.Schema
 var mUpdateRecordsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRecordsRequest_IdentityPoolId, &sUpdateRecordsRequest_IdentityId, &sUpdateRecordsRequest_DatasetName, &sUpdateRecordsRequest_DeviceId, &sUpdateRecordsRequest_RecordPatches, &sUpdateRecordsRequest_SyncSessionToken, &sUpdateRecordsRequest_ClientContext}}
 var mUpdateRecordsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRecordsResponse_Records}}
 
-var sBulkPublish = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBulkPublish, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sDeleteDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataset, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sDescribeDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDataset, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sDescribeIdentityPoolUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeIdentityPoolUsage, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sDescribeIdentityUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeIdentityUsage, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sGetBulkPublishDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBulkPublishDetails, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sGetCognitoEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCognitoEvents, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sGetIdentityPoolConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIdentityPoolConfiguration, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sListDatasets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasets, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sListIdentityPoolUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIdentityPoolUsage, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sListRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecords, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sRegisterDevice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterDevice, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sSetCognitoEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetCognitoEvents, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sSetIdentityPoolConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetIdentityPoolConfiguration, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sSubscribeToDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribeToDataset, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sUnsubscribeFromDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsubscribeFromDataset, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sUpdateRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecords, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var s_AWSCognitoSyncService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSCognitoSyncService, Traits: &t17, Type: smithy.ShapeTypeService, Ext: &ext[17]})
-var sAlreadyStreamedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlreadyStreamedException, Members: &mAlreadyStreamedException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &ext[18]})
-var s_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationArn, Type: smithy.ShapeTypeString, Ext: &ext[20]})
-var s_ApplicationArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationArnList, Members: &m_ApplicationArnList, Type: smithy.ShapeTypeList, Ext: &ext[21]})
-var s_AssumeRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssumeRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[23]})
-var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[24]})
-var sBulkPublishStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBulkPublishStatus, Members: &mBulkPublishStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[25]})
-var s_ClientContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientContext, Type: smithy.ShapeTypeString, Ext: &ext[30]})
-var s_CognitoEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CognitoEventType, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var sCognitoStreams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCognitoStreams, Members: &mCognitoStreams, Type: smithy.ShapeTypeStructure, Ext: &ext[32]})
-var sConcurrentModificationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentModificationException, Members: &mConcurrentModificationException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &ext[36]})
-var sDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataset, Members: &mDataset, Type: smithy.ShapeTypeStructure, Ext: &ext[38]})
-var s_DatasetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatasetList, Members: &m_DatasetList, Type: smithy.ShapeTypeList, Ext: &ext[46]})
-var s_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatasetName, Type: smithy.ShapeTypeString, Ext: &ext[48]})
-var s_Date = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &ext[49]})
-var s_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeviceId, Type: smithy.ShapeTypeString, Ext: &ext[50]})
-var sDuplicateRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplicateRequestException, Members: &mDuplicateRequestException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &ext[51]})
-var s_Events = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Events, Members: &m_Events, Type: smithy.ShapeTypeMap, Ext: &ext[53]})
-var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[56]})
-var s_IdentityId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityId, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var s_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityPoolId, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var sIdentityPoolUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentityPoolUsage, Members: &mIdentityPoolUsage, Type: smithy.ShapeTypeStructure, Ext: &ext[59]})
-var s_IdentityPoolUsageList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityPoolUsageList, Members: &m_IdentityPoolUsageList, Type: smithy.ShapeTypeList, Ext: &ext[64]})
-var sIdentityUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentityUsage, Members: &mIdentityUsage, Type: smithy.ShapeTypeStructure, Ext: &ext[66]})
-var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[72]})
-var s_IntegerString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerString, Type: smithy.ShapeTypeInteger, Ext: &ext[73]})
-var sInternalErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalErrorException, Members: &mInternalErrorException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var sInvalidConfigurationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidConfigurationException, Members: &mInvalidConfigurationException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &ext[76]})
-var sInvalidLambdaFunctionOutputException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidLambdaFunctionOutputException, Members: &mInvalidLambdaFunctionOutputException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &ext[78]})
-var sInvalidParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterException, Members: &mInvalidParameterException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var s_LambdaFunctionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LambdaFunctionArn, Type: smithy.ShapeTypeString, Ext: &ext[82]})
-var sLambdaThrottledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaThrottledException, Members: &mLambdaThrottledException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &ext[83]})
-var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &ext[85]})
-var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[87]})
-var s_MergedDatasetNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MergedDatasetNameList, Members: &m_MergedDatasetNameList, Type: smithy.ShapeTypeList, Ext: &ext[88]})
-var sNotAuthorizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotAuthorizedException, Members: &mNotAuthorizedException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &ext[90]})
-var sOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperation, Members: &mOperation, Type: smithy.ShapeTypeEnum, Ext: &ext[92]})
-var sPlatform = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlatform, Members: &mPlatform, Type: smithy.ShapeTypeEnum, Ext: &ext[95]})
-var sPushSync = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPushSync, Members: &mPushSync, Type: smithy.ShapeTypeStructure, Ext: &ext[100]})
-var s_PushToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PushToken, Type: smithy.ShapeTypeString, Ext: &ext[103]})
-var sRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecord, Members: &mRecord, Type: smithy.ShapeTypeStructure, Ext: &ext[104]})
-var s_RecordKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordKey, Type: smithy.ShapeTypeString, Ext: &ext[111]})
-var s_RecordList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordList, Members: &m_RecordList, Type: smithy.ShapeTypeList, Ext: &ext[112]})
-var sRecordPatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordPatch, Members: &mRecordPatch, Type: smithy.ShapeTypeStructure, Ext: &ext[114]})
-var s_RecordPatchList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordPatchList, Members: &m_RecordPatchList, Type: smithy.ShapeTypeList, Ext: &ext[120]})
-var s_RecordValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordValue, Type: smithy.ShapeTypeString, Ext: &ext[122]})
-var sResourceConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceConflictException, Members: &mResourceConflictException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &ext[123]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &ext[125]})
-var sStreamingStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamingStatus, Members: &mStreamingStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[127]})
-var s_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamName, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[131]})
-var s_SyncSessionToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SyncSessionToken, Type: smithy.ShapeTypeString, Ext: &ext[132]})
-var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &ext[133]})
-var sBulkPublishRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBulkPublishRequest, Members: &mBulkPublishRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[135]})
-var sBulkPublishResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBulkPublishResponse, Members: &mBulkPublishResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[137]})
-var sDeleteDatasetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDatasetRequest, Members: &mDeleteDatasetRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[139]})
-var sDeleteDatasetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDatasetResponse, Members: &mDeleteDatasetResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[143]})
-var sDescribeDatasetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDatasetRequest, Members: &mDescribeDatasetRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[145]})
-var sDescribeDatasetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDatasetResponse, Members: &mDescribeDatasetResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[149]})
-var sDescribeIdentityPoolUsageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeIdentityPoolUsageRequest, Members: &mDescribeIdentityPoolUsageRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[151]})
-var sDescribeIdentityPoolUsageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeIdentityPoolUsageResponse, Members: &mDescribeIdentityPoolUsageResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[153]})
-var sDescribeIdentityUsageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeIdentityUsageRequest, Members: &mDescribeIdentityUsageRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[155]})
-var sDescribeIdentityUsageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeIdentityUsageResponse, Members: &mDescribeIdentityUsageResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[158]})
-var sGetBulkPublishDetailsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBulkPublishDetailsRequest, Members: &mGetBulkPublishDetailsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[160]})
-var sGetBulkPublishDetailsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBulkPublishDetailsResponse, Members: &mGetBulkPublishDetailsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[162]})
-var sGetCognitoEventsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCognitoEventsRequest, Members: &mGetCognitoEventsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[168]})
-var sGetCognitoEventsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCognitoEventsResponse, Members: &mGetCognitoEventsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[170]})
-var sGetIdentityPoolConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIdentityPoolConfigurationRequest, Members: &mGetIdentityPoolConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[172]})
-var sGetIdentityPoolConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIdentityPoolConfigurationResponse, Members: &mGetIdentityPoolConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[174]})
-var sListDatasetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasetsRequest, Members: &mListDatasetsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[178]})
-var sListDatasetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasetsResponse, Members: &mListDatasetsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[183]})
-var sListIdentityPoolUsageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIdentityPoolUsageRequest, Members: &mListIdentityPoolUsageRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[187]})
-var sListIdentityPoolUsageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIdentityPoolUsageResponse, Members: &mListIdentityPoolUsageResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[190]})
-var sListRecordsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecordsRequest, Members: &mListRecordsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[195]})
-var sListRecordsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecordsResponse, Members: &mListRecordsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[203]})
-var sRegisterDeviceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterDeviceRequest, Members: &mRegisterDeviceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[213]})
-var sRegisterDeviceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterDeviceResponse, Members: &mRegisterDeviceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[218]})
-var sSetCognitoEventsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetCognitoEventsRequest, Members: &mSetCognitoEventsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[220]})
-var sSetIdentityPoolConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetIdentityPoolConfigurationRequest, Members: &mSetIdentityPoolConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[223]})
-var sSetIdentityPoolConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetIdentityPoolConfigurationResponse, Members: &mSetIdentityPoolConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[227]})
-var sSubscribeToDatasetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribeToDatasetRequest, Members: &mSubscribeToDatasetRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[231]})
-var sSubscribeToDatasetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribeToDatasetResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[236]})
-var sUnsubscribeFromDatasetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsubscribeFromDatasetRequest, Members: &mUnsubscribeFromDatasetRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[237]})
-var sUnsubscribeFromDatasetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsubscribeFromDatasetResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[242]})
-var sUpdateRecordsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecordsRequest, Members: &mUpdateRecordsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[243]})
-var sUpdateRecordsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecordsResponse, Members: &mUpdateRecordsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[251]})
+var sBulkPublish = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBulkPublish, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eBulkPublish})
+var sDeleteDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataset, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDataset})
+var sDescribeDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDataset, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eDescribeDataset})
+var sDescribeIdentityPoolUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeIdentityPoolUsage, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDescribeIdentityPoolUsage})
+var sDescribeIdentityUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeIdentityUsage, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDescribeIdentityUsage})
+var sGetBulkPublishDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBulkPublishDetails, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eGetBulkPublishDetails})
+var sGetCognitoEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCognitoEvents, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eGetCognitoEvents})
+var sGetIdentityPoolConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIdentityPoolConfiguration, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eGetIdentityPoolConfiguration})
+var sListDatasets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasets, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eListDatasets})
+var sListIdentityPoolUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIdentityPoolUsage, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eListIdentityPoolUsage})
+var sListRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecords, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eListRecords})
+var sRegisterDevice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterDevice, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eRegisterDevice})
+var sSetCognitoEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetCognitoEvents, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eSetCognitoEvents})
+var sSetIdentityPoolConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetIdentityPoolConfiguration, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eSetIdentityPoolConfiguration})
+var sSubscribeToDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribeToDataset, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eSubscribeToDataset})
+var sUnsubscribeFromDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsubscribeFromDataset, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eUnsubscribeFromDataset})
+var sUpdateRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecords, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRecords})
+var s_AWSCognitoSyncService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSCognitoSyncService, Traits: &t17, Type: smithy.ShapeTypeService, Ext: &e_AWSCognitoSyncService})
+var sAlreadyStreamedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlreadyStreamedException, Members: &mAlreadyStreamedException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eAlreadyStreamedException})
+var s_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationArn, Type: smithy.ShapeTypeString, Ext: &e_ApplicationArn})
+var s_ApplicationArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationArnList, Members: &m_ApplicationArnList, Type: smithy.ShapeTypeList, Ext: &e_ApplicationArnList})
+var s_AssumeRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssumeRoleArn, Type: smithy.ShapeTypeString, Ext: &e_AssumeRoleArn})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var sBulkPublishStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBulkPublishStatus, Members: &mBulkPublishStatus, Type: smithy.ShapeTypeEnum, Ext: &eBulkPublishStatus})
+var s_ClientContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientContext, Type: smithy.ShapeTypeString, Ext: &e_ClientContext})
+var s_CognitoEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CognitoEventType, Type: smithy.ShapeTypeString, Ext: &e_CognitoEventType})
+var sCognitoStreams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCognitoStreams, Members: &mCognitoStreams, Type: smithy.ShapeTypeStructure, Ext: &eCognitoStreams})
+var sConcurrentModificationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentModificationException, Members: &mConcurrentModificationException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eConcurrentModificationException})
+var sDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataset, Members: &mDataset, Type: smithy.ShapeTypeStructure, Ext: &eDataset})
+var s_DatasetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatasetList, Members: &m_DatasetList, Type: smithy.ShapeTypeList, Ext: &e_DatasetList})
+var s_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatasetName, Type: smithy.ShapeTypeString, Ext: &e_DatasetName})
+var s_Date = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &e_Date})
+var s_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeviceId, Type: smithy.ShapeTypeString, Ext: &e_DeviceId})
+var sDuplicateRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplicateRequestException, Members: &mDuplicateRequestException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &eDuplicateRequestException})
+var s_Events = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Events, Members: &m_Events, Type: smithy.ShapeTypeMap, Ext: &e_Events})
+var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &e_ExceptionMessage})
+var s_IdentityId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityId, Type: smithy.ShapeTypeString, Ext: &e_IdentityId})
+var s_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityPoolId, Type: smithy.ShapeTypeString, Ext: &e_IdentityPoolId})
+var sIdentityPoolUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentityPoolUsage, Members: &mIdentityPoolUsage, Type: smithy.ShapeTypeStructure, Ext: &eIdentityPoolUsage})
+var s_IdentityPoolUsageList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityPoolUsageList, Members: &m_IdentityPoolUsageList, Type: smithy.ShapeTypeList, Ext: &e_IdentityPoolUsageList})
+var sIdentityUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentityUsage, Members: &mIdentityUsage, Type: smithy.ShapeTypeStructure, Ext: &eIdentityUsage})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &e_Integer})
+var s_IntegerString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerString, Type: smithy.ShapeTypeInteger, Ext: &e_IntegerString})
+var sInternalErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalErrorException, Members: &mInternalErrorException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &eInternalErrorException})
+var sInvalidConfigurationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidConfigurationException, Members: &mInvalidConfigurationException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &eInvalidConfigurationException})
+var sInvalidLambdaFunctionOutputException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidLambdaFunctionOutputException, Members: &mInvalidLambdaFunctionOutputException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &eInvalidLambdaFunctionOutputException})
+var sInvalidParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterException, Members: &mInvalidParameterException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eInvalidParameterException})
+var s_LambdaFunctionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LambdaFunctionArn, Type: smithy.ShapeTypeString, Ext: &e_LambdaFunctionArn})
+var sLambdaThrottledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaThrottledException, Members: &mLambdaThrottledException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eLambdaThrottledException})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &e_Long})
+var s_MergedDatasetNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MergedDatasetNameList, Members: &m_MergedDatasetNameList, Type: smithy.ShapeTypeList, Ext: &e_MergedDatasetNameList})
+var sNotAuthorizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotAuthorizedException, Members: &mNotAuthorizedException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eNotAuthorizedException})
+var sOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperation, Members: &mOperation, Type: smithy.ShapeTypeEnum, Ext: &eOperation})
+var sPlatform = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlatform, Members: &mPlatform, Type: smithy.ShapeTypeEnum, Ext: &ePlatform})
+var sPushSync = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPushSync, Members: &mPushSync, Type: smithy.ShapeTypeStructure, Ext: &ePushSync})
+var s_PushToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PushToken, Type: smithy.ShapeTypeString, Ext: &e_PushToken})
+var sRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecord, Members: &mRecord, Type: smithy.ShapeTypeStructure, Ext: &eRecord})
+var s_RecordKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordKey, Type: smithy.ShapeTypeString, Ext: &e_RecordKey})
+var s_RecordList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordList, Members: &m_RecordList, Type: smithy.ShapeTypeList, Ext: &e_RecordList})
+var sRecordPatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordPatch, Members: &mRecordPatch, Type: smithy.ShapeTypeStructure, Ext: &eRecordPatch})
+var s_RecordPatchList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordPatchList, Members: &m_RecordPatchList, Type: smithy.ShapeTypeList, Ext: &e_RecordPatchList})
+var s_RecordValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordValue, Type: smithy.ShapeTypeString, Ext: &e_RecordValue})
+var sResourceConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceConflictException, Members: &mResourceConflictException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eResourceConflictException})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sStreamingStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamingStatus, Members: &mStreamingStatus, Type: smithy.ShapeTypeEnum, Ext: &eStreamingStatus})
+var s_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamName, Type: smithy.ShapeTypeString, Ext: &e_StreamName})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_SyncSessionToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SyncSessionToken, Type: smithy.ShapeTypeString, Ext: &e_SyncSessionToken})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &eTooManyRequestsException})
+var sBulkPublishRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBulkPublishRequest, Members: &mBulkPublishRequest, Type: smithy.ShapeTypeStructure, Ext: &eBulkPublishRequest})
+var sBulkPublishResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBulkPublishResponse, Members: &mBulkPublishResponse, Type: smithy.ShapeTypeStructure, Ext: &eBulkPublishResponse})
+var sDeleteDatasetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDatasetRequest, Members: &mDeleteDatasetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDatasetRequest})
+var sDeleteDatasetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDatasetResponse, Members: &mDeleteDatasetResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDatasetResponse})
+var sDescribeDatasetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDatasetRequest, Members: &mDescribeDatasetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDatasetRequest})
+var sDescribeDatasetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDatasetResponse, Members: &mDescribeDatasetResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDatasetResponse})
+var sDescribeIdentityPoolUsageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeIdentityPoolUsageRequest, Members: &mDescribeIdentityPoolUsageRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeIdentityPoolUsageRequest})
+var sDescribeIdentityPoolUsageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeIdentityPoolUsageResponse, Members: &mDescribeIdentityPoolUsageResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeIdentityPoolUsageResponse})
+var sDescribeIdentityUsageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeIdentityUsageRequest, Members: &mDescribeIdentityUsageRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeIdentityUsageRequest})
+var sDescribeIdentityUsageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeIdentityUsageResponse, Members: &mDescribeIdentityUsageResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeIdentityUsageResponse})
+var sGetBulkPublishDetailsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBulkPublishDetailsRequest, Members: &mGetBulkPublishDetailsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetBulkPublishDetailsRequest})
+var sGetBulkPublishDetailsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBulkPublishDetailsResponse, Members: &mGetBulkPublishDetailsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetBulkPublishDetailsResponse})
+var sGetCognitoEventsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCognitoEventsRequest, Members: &mGetCognitoEventsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetCognitoEventsRequest})
+var sGetCognitoEventsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCognitoEventsResponse, Members: &mGetCognitoEventsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetCognitoEventsResponse})
+var sGetIdentityPoolConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIdentityPoolConfigurationRequest, Members: &mGetIdentityPoolConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetIdentityPoolConfigurationRequest})
+var sGetIdentityPoolConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIdentityPoolConfigurationResponse, Members: &mGetIdentityPoolConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetIdentityPoolConfigurationResponse})
+var sListDatasetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasetsRequest, Members: &mListDatasetsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDatasetsRequest})
+var sListDatasetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasetsResponse, Members: &mListDatasetsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDatasetsResponse})
+var sListIdentityPoolUsageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIdentityPoolUsageRequest, Members: &mListIdentityPoolUsageRequest, Type: smithy.ShapeTypeStructure, Ext: &eListIdentityPoolUsageRequest})
+var sListIdentityPoolUsageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIdentityPoolUsageResponse, Members: &mListIdentityPoolUsageResponse, Type: smithy.ShapeTypeStructure, Ext: &eListIdentityPoolUsageResponse})
+var sListRecordsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecordsRequest, Members: &mListRecordsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRecordsRequest})
+var sListRecordsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecordsResponse, Members: &mListRecordsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRecordsResponse})
+var sRegisterDeviceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterDeviceRequest, Members: &mRegisterDeviceRequest, Type: smithy.ShapeTypeStructure, Ext: &eRegisterDeviceRequest})
+var sRegisterDeviceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterDeviceResponse, Members: &mRegisterDeviceResponse, Type: smithy.ShapeTypeStructure, Ext: &eRegisterDeviceResponse})
+var sSetCognitoEventsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetCognitoEventsRequest, Members: &mSetCognitoEventsRequest, Type: smithy.ShapeTypeStructure, Ext: &eSetCognitoEventsRequest})
+var sSetIdentityPoolConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetIdentityPoolConfigurationRequest, Members: &mSetIdentityPoolConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eSetIdentityPoolConfigurationRequest})
+var sSetIdentityPoolConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetIdentityPoolConfigurationResponse, Members: &mSetIdentityPoolConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eSetIdentityPoolConfigurationResponse})
+var sSubscribeToDatasetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribeToDatasetRequest, Members: &mSubscribeToDatasetRequest, Type: smithy.ShapeTypeStructure, Ext: &eSubscribeToDatasetRequest})
+var sSubscribeToDatasetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribeToDatasetResponse, Type: smithy.ShapeTypeStructure, Ext: &eSubscribeToDatasetResponse})
+var sUnsubscribeFromDatasetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsubscribeFromDatasetRequest, Members: &mUnsubscribeFromDatasetRequest, Type: smithy.ShapeTypeStructure, Ext: &eUnsubscribeFromDatasetRequest})
+var sUnsubscribeFromDatasetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsubscribeFromDatasetResponse, Type: smithy.ShapeTypeStructure, Ext: &eUnsubscribeFromDatasetResponse})
+var sUpdateRecordsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecordsRequest, Members: &mUpdateRecordsRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRecordsRequest})
+var sUpdateRecordsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecordsResponse, Members: &mUpdateRecordsResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRecordsResponse})
 
-var sAlreadyStreamedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[19]})
-var s_ApplicationArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ApplicationArn, Type: smithy.ShapeTypeString, Ext: &ext[22]})
-var sBulkPublishStatus_NOT_STARTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_STARTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[26]})
-var sBulkPublishStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[27]})
-var sBulkPublishStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
-var sBulkPublishStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[29]})
-var sCognitoStreams_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var sCognitoStreams_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_AssumeRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[34]})
-var sCognitoStreams_StreamingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamingStatus", ID: &iStreamingStatus, Members: &mStreamingStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[35]})
-var sConcurrentModificationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[37]})
-var sDataset_IdentityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityId", ID: &i_IdentityId, Type: smithy.ShapeTypeString, Ext: &ext[39]})
-var sDataset_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var sDataset_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &ext[41]})
-var sDataset_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &ext[42]})
-var sDataset_LastModifiedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedBy", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[43]})
-var sDataset_DataStorage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataStorage", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[44]})
-var sDataset_NumRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumRecords", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[45]})
-var s_DatasetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataset, Members: &mDataset, Type: smithy.ShapeTypeStructure, Ext: &ext[47]})
-var sDuplicateRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var s_Events_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_CognitoEventType, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var s_Events_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_LambdaFunctionArn, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var sIdentityPoolUsage_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Type: smithy.ShapeTypeString, Ext: &ext[60]})
-var sIdentityPoolUsage_SyncSessionsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncSessionsCount", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[61]})
-var sIdentityPoolUsage_DataStorage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataStorage", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[62]})
-var sIdentityPoolUsage_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &ext[63]})
-var s_IdentityPoolUsageList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIdentityPoolUsage, Members: &mIdentityPoolUsage, Type: smithy.ShapeTypeStructure, Ext: &ext[65]})
-var sIdentityUsage_IdentityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityId", ID: &i_IdentityId, Type: smithy.ShapeTypeString, Ext: &ext[67]})
-var sIdentityUsage_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Type: smithy.ShapeTypeString, Ext: &ext[68]})
-var sIdentityUsage_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &ext[69]})
-var sIdentityUsage_DatasetCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[70]})
-var sIdentityUsage_DataStorage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataStorage", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[71]})
-var sInternalErrorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[75]})
-var sInvalidConfigurationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[77]})
-var sInvalidLambdaFunctionOutputException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[79]})
-var sInvalidParameterException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[81]})
-var sLambdaThrottledException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[84]})
-var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[86]})
-var s_MergedDatasetNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[89]})
-var sNotAuthorizedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[91]})
-var sOperation_replace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replace", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[93]})
-var sOperation_remove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remove", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[94]})
-var sPlatform_APNS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APNS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[96]})
-var sPlatform_APNS_SANDBOX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APNS_SANDBOX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[97]})
-var sPlatform_GCM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GCM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[98]})
-var sPlatform_ADM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[99]})
-var sPushSync_ApplicationArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArns", ID: &i_ApplicationArnList, Members: &m_ApplicationArnList, Type: smithy.ShapeTypeList, Ext: &ext[101]})
-var sPushSync_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_AssumeRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var sRecord_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_RecordKey, Type: smithy.ShapeTypeString, Ext: &ext[105]})
-var sRecord_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_RecordValue, Type: smithy.ShapeTypeString, Ext: &ext[106]})
-var sRecord_SyncCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncCount", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[107]})
-var sRecord_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &ext[108]})
-var sRecord_LastModifiedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedBy", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[109]})
-var sRecord_DeviceLastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceLastModifiedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &ext[110]})
-var s_RecordList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecord, Members: &mRecord, Type: smithy.ShapeTypeStructure, Ext: &ext[113]})
-var sRecordPatch_Op = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Op", ID: &iOperation, Members: &mOperation, Type: smithy.ShapeTypeEnum, Ext: &ext[115]})
-var sRecordPatch_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_RecordKey, Type: smithy.ShapeTypeString, Ext: &ext[116]})
-var sRecordPatch_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_RecordValue, Type: smithy.ShapeTypeString, Ext: &ext[117]})
-var sRecordPatch_SyncCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncCount", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[118]})
-var sRecordPatch_DeviceLastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceLastModifiedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &ext[119]})
-var s_RecordPatchList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecordPatch, Members: &mRecordPatch, Type: smithy.ShapeTypeStructure, Ext: &ext[121]})
-var sResourceConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[124]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[126]})
-var sStreamingStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[128]})
-var sStreamingStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[129]})
-var sTooManyRequestsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[134]})
-var sBulkPublishRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[136]})
-var sBulkPublishResponse_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var sDeleteDatasetRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[140]})
-var sDeleteDatasetRequest_IdentityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityId", ID: &i_IdentityId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[141]})
-var sDeleteDatasetRequest_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[142]})
-var sDeleteDatasetResponse_Dataset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dataset", ID: &iDataset, Members: &mDataset, Type: smithy.ShapeTypeStructure, Ext: &ext[144]})
-var sDescribeDatasetRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[146]})
-var sDescribeDatasetRequest_IdentityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityId", ID: &i_IdentityId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[147]})
-var sDescribeDatasetRequest_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[148]})
-var sDescribeDatasetResponse_Dataset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dataset", ID: &iDataset, Members: &mDataset, Type: smithy.ShapeTypeStructure, Ext: &ext[150]})
-var sDescribeIdentityPoolUsageRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[152]})
-var sDescribeIdentityPoolUsageResponse_IdentityPoolUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolUsage", ID: &iIdentityPoolUsage, Members: &mIdentityPoolUsage, Type: smithy.ShapeTypeStructure, Ext: &ext[154]})
-var sDescribeIdentityUsageRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[156]})
-var sDescribeIdentityUsageRequest_IdentityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityId", ID: &i_IdentityId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[157]})
-var sDescribeIdentityUsageResponse_IdentityUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityUsage", ID: &iIdentityUsage, Members: &mIdentityUsage, Type: smithy.ShapeTypeStructure, Ext: &ext[159]})
-var sGetBulkPublishDetailsRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[161]})
-var sGetBulkPublishDetailsResponse_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Type: smithy.ShapeTypeString, Ext: &ext[163]})
-var sGetBulkPublishDetailsResponse_BulkPublishStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BulkPublishStartTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &ext[164]})
-var sGetBulkPublishDetailsResponse_BulkPublishCompleteTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BulkPublishCompleteTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &ext[165]})
-var sGetBulkPublishDetailsResponse_BulkPublishStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BulkPublishStatus", ID: &iBulkPublishStatus, Members: &mBulkPublishStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[166]})
-var sGetBulkPublishDetailsResponse_FailureMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[167]})
-var sGetCognitoEventsRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[169]})
-var sGetCognitoEventsResponse_Events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Events", ID: &i_Events, Members: &m_Events, Type: smithy.ShapeTypeMap, Ext: &ext[171]})
-var sGetIdentityPoolConfigurationRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[173]})
-var sGetIdentityPoolConfigurationResponse_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Type: smithy.ShapeTypeString, Ext: &ext[175]})
-var sGetIdentityPoolConfigurationResponse_PushSync = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PushSync", ID: &iPushSync, Members: &mPushSync, Type: smithy.ShapeTypeStructure, Ext: &ext[176]})
-var sGetIdentityPoolConfigurationResponse_CognitoStreams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CognitoStreams", ID: &iCognitoStreams, Members: &mCognitoStreams, Type: smithy.ShapeTypeStructure, Ext: &ext[177]})
-var sListDatasetsRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[179]})
-var sListDatasetsRequest_IdentityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityId", ID: &i_IdentityId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[180]})
-var sListDatasetsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ext[181]})
-var sListDatasetsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_IntegerString, Traits: &t33, Type: smithy.ShapeTypeInteger, Ext: &ext[182]})
-var sListDatasetsResponse_Datasets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Datasets", ID: &i_DatasetList, Members: &m_DatasetList, Type: smithy.ShapeTypeList, Ext: &ext[184]})
-var sListDatasetsResponse_Count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Count", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[185]})
-var sListDatasetsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[186]})
-var sListIdentityPoolUsageRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ext[188]})
-var sListIdentityPoolUsageRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_IntegerString, Traits: &t33, Type: smithy.ShapeTypeInteger, Ext: &ext[189]})
-var sListIdentityPoolUsageResponse_IdentityPoolUsages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolUsages", ID: &i_IdentityPoolUsageList, Members: &m_IdentityPoolUsageList, Type: smithy.ShapeTypeList, Ext: &ext[191]})
-var sListIdentityPoolUsageResponse_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[192]})
-var sListIdentityPoolUsageResponse_Count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Count", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[193]})
-var sListIdentityPoolUsageResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[194]})
-var sListRecordsRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[196]})
-var sListRecordsRequest_IdentityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityId", ID: &i_IdentityId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[197]})
-var sListRecordsRequest_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[198]})
-var sListRecordsRequest_LastSyncCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastSyncCount", ID: &i_Long, Traits: &t34, Type: smithy.ShapeTypeLong, Ext: &ext[199]})
-var sListRecordsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ext[200]})
-var sListRecordsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_IntegerString, Traits: &t33, Type: smithy.ShapeTypeInteger, Ext: &ext[201]})
-var sListRecordsRequest_SyncSessionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncSessionToken", ID: &i_SyncSessionToken, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[202]})
-var sListRecordsResponse_Records = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Records", ID: &i_RecordList, Members: &m_RecordList, Type: smithy.ShapeTypeList, Ext: &ext[204]})
-var sListRecordsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[205]})
-var sListRecordsResponse_Count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Count", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[206]})
-var sListRecordsResponse_DatasetSyncCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetSyncCount", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[207]})
-var sListRecordsResponse_LastModifiedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedBy", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[208]})
-var sListRecordsResponse_MergedDatasetNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MergedDatasetNames", ID: &i_MergedDatasetNameList, Members: &m_MergedDatasetNameList, Type: smithy.ShapeTypeList, Ext: &ext[209]})
-var sListRecordsResponse_DatasetExists = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetExists", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[210]})
-var sListRecordsResponse_DatasetDeletedAfterRequestedSyncCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetDeletedAfterRequestedSyncCount", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[211]})
-var sListRecordsResponse_SyncSessionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncSessionToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[212]})
-var sRegisterDeviceRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[214]})
-var sRegisterDeviceRequest_IdentityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityId", ID: &i_IdentityId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[215]})
-var sRegisterDeviceRequest_Platform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Platform", ID: &iPlatform, Members: &mPlatform, Type: smithy.ShapeTypeEnum, Ext: &ext[216]})
-var sRegisterDeviceRequest_Token = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Token", ID: &i_PushToken, Type: smithy.ShapeTypeString, Ext: &ext[217]})
-var sRegisterDeviceResponse_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Type: smithy.ShapeTypeString, Ext: &ext[219]})
-var sSetCognitoEventsRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[221]})
-var sSetCognitoEventsRequest_Events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Events", ID: &i_Events, Members: &m_Events, Type: smithy.ShapeTypeMap, Ext: &ext[222]})
-var sSetIdentityPoolConfigurationRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[224]})
-var sSetIdentityPoolConfigurationRequest_PushSync = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PushSync", ID: &iPushSync, Members: &mPushSync, Type: smithy.ShapeTypeStructure, Ext: &ext[225]})
-var sSetIdentityPoolConfigurationRequest_CognitoStreams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CognitoStreams", ID: &iCognitoStreams, Members: &mCognitoStreams, Type: smithy.ShapeTypeStructure, Ext: &ext[226]})
-var sSetIdentityPoolConfigurationResponse_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Type: smithy.ShapeTypeString, Ext: &ext[228]})
-var sSetIdentityPoolConfigurationResponse_PushSync = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PushSync", ID: &iPushSync, Members: &mPushSync, Type: smithy.ShapeTypeStructure, Ext: &ext[229]})
-var sSetIdentityPoolConfigurationResponse_CognitoStreams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CognitoStreams", ID: &iCognitoStreams, Members: &mCognitoStreams, Type: smithy.ShapeTypeStructure, Ext: &ext[230]})
-var sSubscribeToDatasetRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[232]})
-var sSubscribeToDatasetRequest_IdentityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityId", ID: &i_IdentityId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[233]})
-var sSubscribeToDatasetRequest_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[234]})
-var sSubscribeToDatasetRequest_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[235]})
-var sUnsubscribeFromDatasetRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[238]})
-var sUnsubscribeFromDatasetRequest_IdentityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityId", ID: &i_IdentityId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[239]})
-var sUnsubscribeFromDatasetRequest_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[240]})
-var sUnsubscribeFromDatasetRequest_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[241]})
-var sUpdateRecordsRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[244]})
-var sUpdateRecordsRequest_IdentityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityId", ID: &i_IdentityId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[245]})
-var sUpdateRecordsRequest_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[246]})
-var sUpdateRecordsRequest_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Type: smithy.ShapeTypeString, Ext: &ext[247]})
-var sUpdateRecordsRequest_RecordPatches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordPatches", ID: &i_RecordPatchList, Members: &m_RecordPatchList, Type: smithy.ShapeTypeList, Ext: &ext[248]})
-var sUpdateRecordsRequest_SyncSessionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncSessionToken", ID: &i_SyncSessionToken, Type: smithy.ShapeTypeString, Ext: &ext[249]})
-var sUpdateRecordsRequest_ClientContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientContext", ID: &i_ClientContext, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[250]})
-var sUpdateRecordsResponse_Records = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Records", ID: &i_RecordList, Members: &m_RecordList, Type: smithy.ShapeTypeList, Ext: &ext[252]})
+var sAlreadyStreamedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eAlreadyStreamedException_message})
+var s_ApplicationArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ApplicationArn, Type: smithy.ShapeTypeString, Ext: &e_ApplicationArnList_member})
+var sBulkPublishStatus_NOT_STARTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_STARTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBulkPublishStatus_NOT_STARTED})
+var sBulkPublishStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBulkPublishStatus_IN_PROGRESS})
+var sBulkPublishStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBulkPublishStatus_FAILED})
+var sBulkPublishStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBulkPublishStatus_SUCCEEDED})
+var sCognitoStreams_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString, Ext: &eCognitoStreams_StreamName})
+var sCognitoStreams_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_AssumeRoleArn, Type: smithy.ShapeTypeString, Ext: &eCognitoStreams_RoleArn})
+var sCognitoStreams_StreamingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamingStatus", ID: &iStreamingStatus, Members: &mStreamingStatus, Type: smithy.ShapeTypeEnum, Ext: &eCognitoStreams_StreamingStatus})
+var sConcurrentModificationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eConcurrentModificationException_message})
+var sDataset_IdentityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityId", ID: &i_IdentityId, Type: smithy.ShapeTypeString, Ext: &eDataset_IdentityId})
+var sDataset_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Type: smithy.ShapeTypeString, Ext: &eDataset_DatasetName})
+var sDataset_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eDataset_CreationDate})
+var sDataset_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eDataset_LastModifiedDate})
+var sDataset_LastModifiedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedBy", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDataset_LastModifiedBy})
+var sDataset_DataStorage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataStorage", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eDataset_DataStorage})
+var sDataset_NumRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumRecords", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eDataset_NumRecords})
+var s_DatasetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataset, Members: &mDataset, Type: smithy.ShapeTypeStructure, Ext: &e_DatasetList_member})
+var sDuplicateRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDuplicateRequestException_message})
+var s_Events_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_CognitoEventType, Type: smithy.ShapeTypeString, Ext: &e_Events_key})
+var s_Events_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_LambdaFunctionArn, Type: smithy.ShapeTypeString, Ext: &e_Events_value})
+var sIdentityPoolUsage_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Type: smithy.ShapeTypeString, Ext: &eIdentityPoolUsage_IdentityPoolId})
+var sIdentityPoolUsage_SyncSessionsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncSessionsCount", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eIdentityPoolUsage_SyncSessionsCount})
+var sIdentityPoolUsage_DataStorage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataStorage", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eIdentityPoolUsage_DataStorage})
+var sIdentityPoolUsage_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eIdentityPoolUsage_LastModifiedDate})
+var s_IdentityPoolUsageList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIdentityPoolUsage, Members: &mIdentityPoolUsage, Type: smithy.ShapeTypeStructure, Ext: &e_IdentityPoolUsageList_member})
+var sIdentityUsage_IdentityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityId", ID: &i_IdentityId, Type: smithy.ShapeTypeString, Ext: &eIdentityUsage_IdentityId})
+var sIdentityUsage_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Type: smithy.ShapeTypeString, Ext: &eIdentityUsage_IdentityPoolId})
+var sIdentityUsage_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eIdentityUsage_LastModifiedDate})
+var sIdentityUsage_DatasetCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eIdentityUsage_DatasetCount})
+var sIdentityUsage_DataStorage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataStorage", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eIdentityUsage_DataStorage})
+var sInternalErrorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInternalErrorException_message})
+var sInvalidConfigurationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidConfigurationException_message})
+var sInvalidLambdaFunctionOutputException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidLambdaFunctionOutputException_message})
+var sInvalidParameterException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidParameterException_message})
+var sLambdaThrottledException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eLambdaThrottledException_message})
+var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_message})
+var s_MergedDatasetNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_MergedDatasetNameList_member})
+var sNotAuthorizedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eNotAuthorizedException_message})
+var sOperation_replace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replace", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperation_replace})
+var sOperation_remove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remove", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperation_remove})
+var sPlatform_APNS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APNS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlatform_APNS})
+var sPlatform_APNS_SANDBOX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APNS_SANDBOX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlatform_APNS_SANDBOX})
+var sPlatform_GCM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GCM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlatform_GCM})
+var sPlatform_ADM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlatform_ADM})
+var sPushSync_ApplicationArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArns", ID: &i_ApplicationArnList, Members: &m_ApplicationArnList, Type: smithy.ShapeTypeList, Ext: &ePushSync_ApplicationArns})
+var sPushSync_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_AssumeRoleArn, Type: smithy.ShapeTypeString, Ext: &ePushSync_RoleArn})
+var sRecord_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_RecordKey, Type: smithy.ShapeTypeString, Ext: &eRecord_Key})
+var sRecord_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_RecordValue, Type: smithy.ShapeTypeString, Ext: &eRecord_Value})
+var sRecord_SyncCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncCount", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eRecord_SyncCount})
+var sRecord_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eRecord_LastModifiedDate})
+var sRecord_LastModifiedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedBy", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRecord_LastModifiedBy})
+var sRecord_DeviceLastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceLastModifiedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eRecord_DeviceLastModifiedDate})
+var s_RecordList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecord, Members: &mRecord, Type: smithy.ShapeTypeStructure, Ext: &e_RecordList_member})
+var sRecordPatch_Op = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Op", ID: &iOperation, Members: &mOperation, Type: smithy.ShapeTypeEnum, Ext: &eRecordPatch_Op})
+var sRecordPatch_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_RecordKey, Type: smithy.ShapeTypeString, Ext: &eRecordPatch_Key})
+var sRecordPatch_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_RecordValue, Type: smithy.ShapeTypeString, Ext: &eRecordPatch_Value})
+var sRecordPatch_SyncCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncCount", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eRecordPatch_SyncCount})
+var sRecordPatch_DeviceLastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceLastModifiedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eRecordPatch_DeviceLastModifiedDate})
+var s_RecordPatchList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecordPatch, Members: &mRecordPatch, Type: smithy.ShapeTypeStructure, Ext: &e_RecordPatchList_member})
+var sResourceConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eResourceConflictException_message})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sStreamingStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamingStatus_ENABLED})
+var sStreamingStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamingStatus_DISABLED})
+var sTooManyRequestsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eTooManyRequestsException_message})
+var sBulkPublishRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eBulkPublishRequest_IdentityPoolId})
+var sBulkPublishResponse_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Type: smithy.ShapeTypeString, Ext: &eBulkPublishResponse_IdentityPoolId})
+var sDeleteDatasetRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eDeleteDatasetRequest_IdentityPoolId})
+var sDeleteDatasetRequest_IdentityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityId", ID: &i_IdentityId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eDeleteDatasetRequest_IdentityId})
+var sDeleteDatasetRequest_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eDeleteDatasetRequest_DatasetName})
+var sDeleteDatasetResponse_Dataset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dataset", ID: &iDataset, Members: &mDataset, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDatasetResponse_Dataset})
+var sDescribeDatasetRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eDescribeDatasetRequest_IdentityPoolId})
+var sDescribeDatasetRequest_IdentityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityId", ID: &i_IdentityId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eDescribeDatasetRequest_IdentityId})
+var sDescribeDatasetRequest_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eDescribeDatasetRequest_DatasetName})
+var sDescribeDatasetResponse_Dataset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dataset", ID: &iDataset, Members: &mDataset, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDatasetResponse_Dataset})
+var sDescribeIdentityPoolUsageRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eDescribeIdentityPoolUsageRequest_IdentityPoolId})
+var sDescribeIdentityPoolUsageResponse_IdentityPoolUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolUsage", ID: &iIdentityPoolUsage, Members: &mIdentityPoolUsage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeIdentityPoolUsageResponse_IdentityPoolUsage})
+var sDescribeIdentityUsageRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eDescribeIdentityUsageRequest_IdentityPoolId})
+var sDescribeIdentityUsageRequest_IdentityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityId", ID: &i_IdentityId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eDescribeIdentityUsageRequest_IdentityId})
+var sDescribeIdentityUsageResponse_IdentityUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityUsage", ID: &iIdentityUsage, Members: &mIdentityUsage, Type: smithy.ShapeTypeStructure, Ext: &eDescribeIdentityUsageResponse_IdentityUsage})
+var sGetBulkPublishDetailsRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eGetBulkPublishDetailsRequest_IdentityPoolId})
+var sGetBulkPublishDetailsResponse_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Type: smithy.ShapeTypeString, Ext: &eGetBulkPublishDetailsResponse_IdentityPoolId})
+var sGetBulkPublishDetailsResponse_BulkPublishStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BulkPublishStartTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eGetBulkPublishDetailsResponse_BulkPublishStartTime})
+var sGetBulkPublishDetailsResponse_BulkPublishCompleteTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BulkPublishCompleteTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eGetBulkPublishDetailsResponse_BulkPublishCompleteTime})
+var sGetBulkPublishDetailsResponse_BulkPublishStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BulkPublishStatus", ID: &iBulkPublishStatus, Members: &mBulkPublishStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetBulkPublishDetailsResponse_BulkPublishStatus})
+var sGetBulkPublishDetailsResponse_FailureMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetBulkPublishDetailsResponse_FailureMessage})
+var sGetCognitoEventsRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eGetCognitoEventsRequest_IdentityPoolId})
+var sGetCognitoEventsResponse_Events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Events", ID: &i_Events, Members: &m_Events, Type: smithy.ShapeTypeMap, Ext: &eGetCognitoEventsResponse_Events})
+var sGetIdentityPoolConfigurationRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eGetIdentityPoolConfigurationRequest_IdentityPoolId})
+var sGetIdentityPoolConfigurationResponse_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Type: smithy.ShapeTypeString, Ext: &eGetIdentityPoolConfigurationResponse_IdentityPoolId})
+var sGetIdentityPoolConfigurationResponse_PushSync = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PushSync", ID: &iPushSync, Members: &mPushSync, Type: smithy.ShapeTypeStructure, Ext: &eGetIdentityPoolConfigurationResponse_PushSync})
+var sGetIdentityPoolConfigurationResponse_CognitoStreams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CognitoStreams", ID: &iCognitoStreams, Members: &mCognitoStreams, Type: smithy.ShapeTypeStructure, Ext: &eGetIdentityPoolConfigurationResponse_CognitoStreams})
+var sListDatasetsRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eListDatasetsRequest_IdentityPoolId})
+var sListDatasetsRequest_IdentityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityId", ID: &i_IdentityId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eListDatasetsRequest_IdentityId})
+var sListDatasetsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eListDatasetsRequest_NextToken})
+var sListDatasetsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_IntegerString, Traits: &t33, Type: smithy.ShapeTypeInteger, Ext: &eListDatasetsRequest_MaxResults})
+var sListDatasetsResponse_Datasets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Datasets", ID: &i_DatasetList, Members: &m_DatasetList, Type: smithy.ShapeTypeList, Ext: &eListDatasetsResponse_Datasets})
+var sListDatasetsResponse_Count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Count", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eListDatasetsResponse_Count})
+var sListDatasetsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListDatasetsResponse_NextToken})
+var sListIdentityPoolUsageRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eListIdentityPoolUsageRequest_NextToken})
+var sListIdentityPoolUsageRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_IntegerString, Traits: &t33, Type: smithy.ShapeTypeInteger, Ext: &eListIdentityPoolUsageRequest_MaxResults})
+var sListIdentityPoolUsageResponse_IdentityPoolUsages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolUsages", ID: &i_IdentityPoolUsageList, Members: &m_IdentityPoolUsageList, Type: smithy.ShapeTypeList, Ext: &eListIdentityPoolUsageResponse_IdentityPoolUsages})
+var sListIdentityPoolUsageResponse_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eListIdentityPoolUsageResponse_MaxResults})
+var sListIdentityPoolUsageResponse_Count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Count", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eListIdentityPoolUsageResponse_Count})
+var sListIdentityPoolUsageResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListIdentityPoolUsageResponse_NextToken})
+var sListRecordsRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eListRecordsRequest_IdentityPoolId})
+var sListRecordsRequest_IdentityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityId", ID: &i_IdentityId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eListRecordsRequest_IdentityId})
+var sListRecordsRequest_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eListRecordsRequest_DatasetName})
+var sListRecordsRequest_LastSyncCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastSyncCount", ID: &i_Long, Traits: &t34, Type: smithy.ShapeTypeLong, Ext: &eListRecordsRequest_LastSyncCount})
+var sListRecordsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eListRecordsRequest_NextToken})
+var sListRecordsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_IntegerString, Traits: &t33, Type: smithy.ShapeTypeInteger, Ext: &eListRecordsRequest_MaxResults})
+var sListRecordsRequest_SyncSessionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncSessionToken", ID: &i_SyncSessionToken, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eListRecordsRequest_SyncSessionToken})
+var sListRecordsResponse_Records = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Records", ID: &i_RecordList, Members: &m_RecordList, Type: smithy.ShapeTypeList, Ext: &eListRecordsResponse_Records})
+var sListRecordsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListRecordsResponse_NextToken})
+var sListRecordsResponse_Count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Count", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eListRecordsResponse_Count})
+var sListRecordsResponse_DatasetSyncCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetSyncCount", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eListRecordsResponse_DatasetSyncCount})
+var sListRecordsResponse_LastModifiedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedBy", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListRecordsResponse_LastModifiedBy})
+var sListRecordsResponse_MergedDatasetNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MergedDatasetNames", ID: &i_MergedDatasetNameList, Members: &m_MergedDatasetNameList, Type: smithy.ShapeTypeList, Ext: &eListRecordsResponse_MergedDatasetNames})
+var sListRecordsResponse_DatasetExists = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetExists", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eListRecordsResponse_DatasetExists})
+var sListRecordsResponse_DatasetDeletedAfterRequestedSyncCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetDeletedAfterRequestedSyncCount", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eListRecordsResponse_DatasetDeletedAfterRequestedSyncCount})
+var sListRecordsResponse_SyncSessionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncSessionToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListRecordsResponse_SyncSessionToken})
+var sRegisterDeviceRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eRegisterDeviceRequest_IdentityPoolId})
+var sRegisterDeviceRequest_IdentityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityId", ID: &i_IdentityId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eRegisterDeviceRequest_IdentityId})
+var sRegisterDeviceRequest_Platform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Platform", ID: &iPlatform, Members: &mPlatform, Type: smithy.ShapeTypeEnum, Ext: &eRegisterDeviceRequest_Platform})
+var sRegisterDeviceRequest_Token = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Token", ID: &i_PushToken, Type: smithy.ShapeTypeString, Ext: &eRegisterDeviceRequest_Token})
+var sRegisterDeviceResponse_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Type: smithy.ShapeTypeString, Ext: &eRegisterDeviceResponse_DeviceId})
+var sSetCognitoEventsRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eSetCognitoEventsRequest_IdentityPoolId})
+var sSetCognitoEventsRequest_Events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Events", ID: &i_Events, Members: &m_Events, Type: smithy.ShapeTypeMap, Ext: &eSetCognitoEventsRequest_Events})
+var sSetIdentityPoolConfigurationRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eSetIdentityPoolConfigurationRequest_IdentityPoolId})
+var sSetIdentityPoolConfigurationRequest_PushSync = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PushSync", ID: &iPushSync, Members: &mPushSync, Type: smithy.ShapeTypeStructure, Ext: &eSetIdentityPoolConfigurationRequest_PushSync})
+var sSetIdentityPoolConfigurationRequest_CognitoStreams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CognitoStreams", ID: &iCognitoStreams, Members: &mCognitoStreams, Type: smithy.ShapeTypeStructure, Ext: &eSetIdentityPoolConfigurationRequest_CognitoStreams})
+var sSetIdentityPoolConfigurationResponse_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Type: smithy.ShapeTypeString, Ext: &eSetIdentityPoolConfigurationResponse_IdentityPoolId})
+var sSetIdentityPoolConfigurationResponse_PushSync = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PushSync", ID: &iPushSync, Members: &mPushSync, Type: smithy.ShapeTypeStructure, Ext: &eSetIdentityPoolConfigurationResponse_PushSync})
+var sSetIdentityPoolConfigurationResponse_CognitoStreams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CognitoStreams", ID: &iCognitoStreams, Members: &mCognitoStreams, Type: smithy.ShapeTypeStructure, Ext: &eSetIdentityPoolConfigurationResponse_CognitoStreams})
+var sSubscribeToDatasetRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eSubscribeToDatasetRequest_IdentityPoolId})
+var sSubscribeToDatasetRequest_IdentityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityId", ID: &i_IdentityId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eSubscribeToDatasetRequest_IdentityId})
+var sSubscribeToDatasetRequest_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eSubscribeToDatasetRequest_DatasetName})
+var sSubscribeToDatasetRequest_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eSubscribeToDatasetRequest_DeviceId})
+var sUnsubscribeFromDatasetRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eUnsubscribeFromDatasetRequest_IdentityPoolId})
+var sUnsubscribeFromDatasetRequest_IdentityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityId", ID: &i_IdentityId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eUnsubscribeFromDatasetRequest_IdentityId})
+var sUnsubscribeFromDatasetRequest_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eUnsubscribeFromDatasetRequest_DatasetName})
+var sUnsubscribeFromDatasetRequest_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eUnsubscribeFromDatasetRequest_DeviceId})
+var sUpdateRecordsRequest_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eUpdateRecordsRequest_IdentityPoolId})
+var sUpdateRecordsRequest_IdentityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityId", ID: &i_IdentityId, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eUpdateRecordsRequest_IdentityId})
+var sUpdateRecordsRequest_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eUpdateRecordsRequest_DatasetName})
+var sUpdateRecordsRequest_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Type: smithy.ShapeTypeString, Ext: &eUpdateRecordsRequest_DeviceId})
+var sUpdateRecordsRequest_RecordPatches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordPatches", ID: &i_RecordPatchList, Members: &m_RecordPatchList, Type: smithy.ShapeTypeList, Ext: &eUpdateRecordsRequest_RecordPatches})
+var sUpdateRecordsRequest_SyncSessionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncSessionToken", ID: &i_SyncSessionToken, Type: smithy.ShapeTypeString, Ext: &eUpdateRecordsRequest_SyncSessionToken})
+var sUpdateRecordsRequest_ClientContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientContext", ID: &i_ClientContext, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eUpdateRecordsRequest_ClientContext})
+var sUpdateRecordsResponse_Records = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Records", ID: &i_RecordList, Members: &m_RecordList, Type: smithy.ShapeTypeList, Ext: &eUpdateRecordsResponse_Records})
 
 var BulkPublish = &sBulkPublish
 

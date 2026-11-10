@@ -7,9 +7,420 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [412]smithy.SchemaExtensions
+var (
+	eAddAttachmentsToSet                                                smithy.SchemaExtensions
+	eAddCommunicationToCase                                             smithy.SchemaExtensions
+	eCompleteAttachmentUpload                                           smithy.SchemaExtensions
+	eCreateCase                                                         smithy.SchemaExtensions
+	eDescribeAttachment                                                 smithy.SchemaExtensions
+	eDescribeAttachmentUploadStatus                                     smithy.SchemaExtensions
+	eDescribeCases                                                      smithy.SchemaExtensions
+	eDescribeCommunications                                             smithy.SchemaExtensions
+	eDescribeCreateCaseOptions                                          smithy.SchemaExtensions
+	eDescribeServices                                                   smithy.SchemaExtensions
+	eDescribeSeverityLevels                                             smithy.SchemaExtensions
+	eDescribeSupportedLanguages                                         smithy.SchemaExtensions
+	eDescribeTrustedAdvisorCheckRefreshStatuses                         smithy.SchemaExtensions
+	eDescribeTrustedAdvisorCheckResult                                  smithy.SchemaExtensions
+	eDescribeTrustedAdvisorChecks                                       smithy.SchemaExtensions
+	eDescribeTrustedAdvisorCheckSummaries                               smithy.SchemaExtensions
+	eGetAttachmentDownloadLink                                          smithy.SchemaExtensions
+	eGetAttachmentUploadLinks                                           smithy.SchemaExtensions
+	eRefreshTrustedAdvisorCheck                                         smithy.SchemaExtensions
+	eResolveCase                                                        smithy.SchemaExtensions
+	e_AWSSupport_20130415                                               smithy.SchemaExtensions
+	e_AfterTime                                                         smithy.SchemaExtensions
+	eAttachment                                                         smithy.SchemaExtensions
+	eAttachment_fileName                                                smithy.SchemaExtensions
+	eAttachment_data                                                    smithy.SchemaExtensions
+	eAttachmentDetails                                                  smithy.SchemaExtensions
+	eAttachmentDetails_attachmentId                                     smithy.SchemaExtensions
+	eAttachmentDetails_fileName                                         smithy.SchemaExtensions
+	e_AttachmentId                                                      smithy.SchemaExtensions
+	eAttachmentIdNotFound                                               smithy.SchemaExtensions
+	eAttachmentIdNotFound_message                                       smithy.SchemaExtensions
+	eAttachmentLimitExceeded                                            smithy.SchemaExtensions
+	eAttachmentLimitExceeded_message                                    smithy.SchemaExtensions
+	e_Attachments                                                       smithy.SchemaExtensions
+	e_Attachments_member                                                smithy.SchemaExtensions
+	e_AttachmentSet                                                     smithy.SchemaExtensions
+	e_AttachmentSet_member                                              smithy.SchemaExtensions
+	eAttachmentSetExpired                                               smithy.SchemaExtensions
+	eAttachmentSetExpired_message                                       smithy.SchemaExtensions
+	e_AttachmentSetId                                                   smithy.SchemaExtensions
+	eAttachmentSetIdNotFound                                            smithy.SchemaExtensions
+	eAttachmentSetIdNotFound_message                                    smithy.SchemaExtensions
+	eAttachmentSetSizeLimitExceeded                                     smithy.SchemaExtensions
+	eAttachmentSetSizeLimitExceeded_message                             smithy.SchemaExtensions
+	e_AvailabilityErrorMessage                                          smithy.SchemaExtensions
+	e_BeforeTime                                                        smithy.SchemaExtensions
+	e_Boolean                                                           smithy.SchemaExtensions
+	eCaseCreationLimitExceeded                                          smithy.SchemaExtensions
+	eCaseCreationLimitExceeded_message                                  smithy.SchemaExtensions
+	eCaseDetails                                                        smithy.SchemaExtensions
+	eCaseDetails_caseId                                                 smithy.SchemaExtensions
+	eCaseDetails_displayId                                              smithy.SchemaExtensions
+	eCaseDetails_subject                                                smithy.SchemaExtensions
+	eCaseDetails_status                                                 smithy.SchemaExtensions
+	eCaseDetails_serviceCode                                            smithy.SchemaExtensions
+	eCaseDetails_categoryCode                                           smithy.SchemaExtensions
+	eCaseDetails_severityCode                                           smithy.SchemaExtensions
+	eCaseDetails_submittedBy                                            smithy.SchemaExtensions
+	eCaseDetails_timeCreated                                            smithy.SchemaExtensions
+	eCaseDetails_recentCommunications                                   smithy.SchemaExtensions
+	eCaseDetails_ccEmailAddresses                                       smithy.SchemaExtensions
+	eCaseDetails_language                                               smithy.SchemaExtensions
+	e_CaseId                                                            smithy.SchemaExtensions
+	e_CaseIdList                                                        smithy.SchemaExtensions
+	e_CaseIdList_member                                                 smithy.SchemaExtensions
+	eCaseIdNotFound                                                     smithy.SchemaExtensions
+	eCaseIdNotFound_message                                             smithy.SchemaExtensions
+	e_CaseList                                                          smithy.SchemaExtensions
+	e_CaseList_member                                                   smithy.SchemaExtensions
+	e_CaseStatus                                                        smithy.SchemaExtensions
+	eCategory                                                           smithy.SchemaExtensions
+	eCategory_code                                                      smithy.SchemaExtensions
+	eCategory_name                                                      smithy.SchemaExtensions
+	e_CategoryCode                                                      smithy.SchemaExtensions
+	e_CategoryList                                                      smithy.SchemaExtensions
+	e_CategoryList_member                                               smithy.SchemaExtensions
+	e_CategoryName                                                      smithy.SchemaExtensions
+	e_CcEmailAddress                                                    smithy.SchemaExtensions
+	e_CcEmailAddressList                                                smithy.SchemaExtensions
+	e_CcEmailAddressList_member                                         smithy.SchemaExtensions
+	e_Code                                                              smithy.SchemaExtensions
+	eCommunication                                                      smithy.SchemaExtensions
+	eCommunication_caseId                                               smithy.SchemaExtensions
+	eCommunication_body                                                 smithy.SchemaExtensions
+	eCommunication_submittedBy                                          smithy.SchemaExtensions
+	eCommunication_timeCreated                                          smithy.SchemaExtensions
+	eCommunication_attachments                                          smithy.SchemaExtensions
+	eCommunication_attachmentSet                                        smithy.SchemaExtensions
+	e_CommunicationBody                                                 smithy.SchemaExtensions
+	e_CommunicationList                                                 smithy.SchemaExtensions
+	e_CommunicationList_member                                          smithy.SchemaExtensions
+	eCommunicationTypeOptions                                           smithy.SchemaExtensions
+	eCommunicationTypeOptions_type                                      smithy.SchemaExtensions
+	eCommunicationTypeOptions_supportedHours                            smithy.SchemaExtensions
+	eCommunicationTypeOptions_datesWithoutSupport                       smithy.SchemaExtensions
+	e_CommunicationTypeOptionsList                                      smithy.SchemaExtensions
+	e_CommunicationTypeOptionsList_member                               smithy.SchemaExtensions
+	eCompletedUpload                                                    smithy.SchemaExtensions
+	eCompletedUpload_partIndex                                          smithy.SchemaExtensions
+	eCompletedUpload_eTag                                               smithy.SchemaExtensions
+	e_CompletedUploadList                                               smithy.SchemaExtensions
+	e_CompletedUploadList_member                                        smithy.SchemaExtensions
+	e_CoralAvailabilityThrottledResource                                smithy.SchemaExtensions
+	e_CoralAvailabilityThrottlingReason                                 smithy.SchemaExtensions
+	e_Data                                                              smithy.SchemaExtensions
+	eDateInterval                                                       smithy.SchemaExtensions
+	eDateInterval_startDateTime                                         smithy.SchemaExtensions
+	eDateInterval_endDateTime                                           smithy.SchemaExtensions
+	e_DatesWithoutSupportList                                           smithy.SchemaExtensions
+	e_DatesWithoutSupportList_member                                    smithy.SchemaExtensions
+	eDescribeAttachmentLimitExceeded                                    smithy.SchemaExtensions
+	eDescribeAttachmentLimitExceeded_message                            smithy.SchemaExtensions
+	e_Display                                                           smithy.SchemaExtensions
+	e_DisplayId                                                         smithy.SchemaExtensions
+	e_Double                                                            smithy.SchemaExtensions
+	eDownloadUrl                                                        smithy.SchemaExtensions
+	eDownloadUrl_url                                                    smithy.SchemaExtensions
+	eDownloadUrl_expiryDate                                             smithy.SchemaExtensions
+	eDryRunOperationException                                           smithy.SchemaExtensions
+	eDryRunOperationException_message                                   smithy.SchemaExtensions
+	e_EndIndex                                                          smithy.SchemaExtensions
+	e_EndTime                                                           smithy.SchemaExtensions
+	e_ErrorMessage                                                      smithy.SchemaExtensions
+	e_ETag                                                              smithy.SchemaExtensions
+	e_ExpiryTime                                                        smithy.SchemaExtensions
+	e_FieldIntegerValue                                                 smithy.SchemaExtensions
+	e_FileName                                                          smithy.SchemaExtensions
+	e_FileSize                                                          smithy.SchemaExtensions
+	e_HttpsUrl                                                          smithy.SchemaExtensions
+	e_IncludeCommunications                                             smithy.SchemaExtensions
+	e_IncludeResolvedCases                                              smithy.SchemaExtensions
+	e_Integer                                                           smithy.SchemaExtensions
+	eInternalServerError                                                smithy.SchemaExtensions
+	eInternalServerError_message                                        smithy.SchemaExtensions
+	e_IssueType                                                         smithy.SchemaExtensions
+	e_Language                                                          smithy.SchemaExtensions
+	e_Long                                                              smithy.SchemaExtensions
+	e_MaxResults                                                        smithy.SchemaExtensions
+	e_NextToken                                                         smithy.SchemaExtensions
+	e_NullableBooleanType                                               smithy.SchemaExtensions
+	e_PartSizeBytes                                                     smithy.SchemaExtensions
+	eRecentCaseCommunications                                           smithy.SchemaExtensions
+	eRecentCaseCommunications_communications                            smithy.SchemaExtensions
+	eRecentCaseCommunications_nextToken                                 smithy.SchemaExtensions
+	e_Result                                                            smithy.SchemaExtensions
+	eService                                                            smithy.SchemaExtensions
+	eService_code                                                       smithy.SchemaExtensions
+	eService_name                                                       smithy.SchemaExtensions
+	eService_categories                                                 smithy.SchemaExtensions
+	e_ServiceCode                                                       smithy.SchemaExtensions
+	e_ServiceCode2                                                      smithy.SchemaExtensions
+	e_ServiceCodeList                                                   smithy.SchemaExtensions
+	e_ServiceCodeList_member                                            smithy.SchemaExtensions
+	e_ServiceList                                                       smithy.SchemaExtensions
+	e_ServiceList_member                                                smithy.SchemaExtensions
+	e_ServiceName                                                       smithy.SchemaExtensions
+	e_SeverityCode                                                      smithy.SchemaExtensions
+	eSeverityLevel                                                      smithy.SchemaExtensions
+	eSeverityLevel_code                                                 smithy.SchemaExtensions
+	eSeverityLevel_name                                                 smithy.SchemaExtensions
+	e_SeverityLevelCode                                                 smithy.SchemaExtensions
+	e_SeverityLevelName                                                 smithy.SchemaExtensions
+	e_SeverityLevelsList                                                smithy.SchemaExtensions
+	e_SeverityLevelsList_member                                         smithy.SchemaExtensions
+	e_StartIndex                                                        smithy.SchemaExtensions
+	e_StartTime                                                         smithy.SchemaExtensions
+	e_Status                                                            smithy.SchemaExtensions
+	e_String                                                            smithy.SchemaExtensions
+	e_StringList                                                        smithy.SchemaExtensions
+	e_StringList_member                                                 smithy.SchemaExtensions
+	e_Subject                                                           smithy.SchemaExtensions
+	e_SubmittedBy                                                       smithy.SchemaExtensions
+	eSupportedHour                                                      smithy.SchemaExtensions
+	eSupportedHour_startTime                                            smithy.SchemaExtensions
+	eSupportedHour_endTime                                              smithy.SchemaExtensions
+	e_SupportedHoursList                                                smithy.SchemaExtensions
+	e_SupportedHoursList_member                                         smithy.SchemaExtensions
+	eSupportedLanguage                                                  smithy.SchemaExtensions
+	eSupportedLanguage_code                                             smithy.SchemaExtensions
+	eSupportedLanguage_language                                         smithy.SchemaExtensions
+	eSupportedLanguage_display                                          smithy.SchemaExtensions
+	e_SupportedLanguagesList                                            smithy.SchemaExtensions
+	e_SupportedLanguagesList_member                                     smithy.SchemaExtensions
+	eThrottlingException                                                smithy.SchemaExtensions
+	eThrottlingException_message                                        smithy.SchemaExtensions
+	eThrottlingException_throttlingReasons                              smithy.SchemaExtensions
+	eThrottlingReason                                                   smithy.SchemaExtensions
+	eThrottlingReason_reason                                            smithy.SchemaExtensions
+	eThrottlingReason_resource                                          smithy.SchemaExtensions
+	e_ThrottlingReasonList                                              smithy.SchemaExtensions
+	e_ThrottlingReasonList_member                                       smithy.SchemaExtensions
+	e_TimeCreated                                                       smithy.SchemaExtensions
+	eTrustedAdvisorCategorySpecificSummary                              smithy.SchemaExtensions
+	eTrustedAdvisorCategorySpecificSummary_costOptimizing               smithy.SchemaExtensions
+	eTrustedAdvisorCheckDescription                                     smithy.SchemaExtensions
+	eTrustedAdvisorCheckDescription_id                                  smithy.SchemaExtensions
+	eTrustedAdvisorCheckDescription_name                                smithy.SchemaExtensions
+	eTrustedAdvisorCheckDescription_description                         smithy.SchemaExtensions
+	eTrustedAdvisorCheckDescription_category                            smithy.SchemaExtensions
+	eTrustedAdvisorCheckDescription_metadata                            smithy.SchemaExtensions
+	e_TrustedAdvisorCheckList                                           smithy.SchemaExtensions
+	e_TrustedAdvisorCheckList_member                                    smithy.SchemaExtensions
+	eTrustedAdvisorCheckRefreshStatus                                   smithy.SchemaExtensions
+	eTrustedAdvisorCheckRefreshStatus_checkId                           smithy.SchemaExtensions
+	eTrustedAdvisorCheckRefreshStatus_status                            smithy.SchemaExtensions
+	eTrustedAdvisorCheckRefreshStatus_millisUntilNextRefreshable        smithy.SchemaExtensions
+	e_TrustedAdvisorCheckRefreshStatusList                              smithy.SchemaExtensions
+	e_TrustedAdvisorCheckRefreshStatusList_member                       smithy.SchemaExtensions
+	eTrustedAdvisorCheckResult                                          smithy.SchemaExtensions
+	eTrustedAdvisorCheckResult_checkId                                  smithy.SchemaExtensions
+	eTrustedAdvisorCheckResult_timestamp                                smithy.SchemaExtensions
+	eTrustedAdvisorCheckResult_status                                   smithy.SchemaExtensions
+	eTrustedAdvisorCheckResult_resourcesSummary                         smithy.SchemaExtensions
+	eTrustedAdvisorCheckResult_categorySpecificSummary                  smithy.SchemaExtensions
+	eTrustedAdvisorCheckResult_flaggedResources                         smithy.SchemaExtensions
+	eTrustedAdvisorCheckSummary                                         smithy.SchemaExtensions
+	eTrustedAdvisorCheckSummary_checkId                                 smithy.SchemaExtensions
+	eTrustedAdvisorCheckSummary_timestamp                               smithy.SchemaExtensions
+	eTrustedAdvisorCheckSummary_status                                  smithy.SchemaExtensions
+	eTrustedAdvisorCheckSummary_hasFlaggedResources                     smithy.SchemaExtensions
+	eTrustedAdvisorCheckSummary_resourcesSummary                        smithy.SchemaExtensions
+	eTrustedAdvisorCheckSummary_categorySpecificSummary                 smithy.SchemaExtensions
+	e_TrustedAdvisorCheckSummaryList                                    smithy.SchemaExtensions
+	e_TrustedAdvisorCheckSummaryList_member                             smithy.SchemaExtensions
+	eTrustedAdvisorCostOptimizingSummary                                smithy.SchemaExtensions
+	eTrustedAdvisorCostOptimizingSummary_estimatedMonthlySavings        smithy.SchemaExtensions
+	eTrustedAdvisorCostOptimizingSummary_estimatedPercentMonthlySavings smithy.SchemaExtensions
+	eTrustedAdvisorResourceDetail                                       smithy.SchemaExtensions
+	eTrustedAdvisorResourceDetail_status                                smithy.SchemaExtensions
+	eTrustedAdvisorResourceDetail_region                                smithy.SchemaExtensions
+	eTrustedAdvisorResourceDetail_resourceId                            smithy.SchemaExtensions
+	eTrustedAdvisorResourceDetail_isSuppressed                          smithy.SchemaExtensions
+	eTrustedAdvisorResourceDetail_metadata                              smithy.SchemaExtensions
+	e_TrustedAdvisorResourceDetailList                                  smithy.SchemaExtensions
+	e_TrustedAdvisorResourceDetailList_member                           smithy.SchemaExtensions
+	eTrustedAdvisorResourcesSummary                                     smithy.SchemaExtensions
+	eTrustedAdvisorResourcesSummary_resourcesProcessed                  smithy.SchemaExtensions
+	eTrustedAdvisorResourcesSummary_resourcesFlagged                    smithy.SchemaExtensions
+	eTrustedAdvisorResourcesSummary_resourcesIgnored                    smithy.SchemaExtensions
+	eTrustedAdvisorResourcesSummary_resourcesSuppressed                 smithy.SchemaExtensions
+	e_Type                                                              smithy.SchemaExtensions
+	e_UploadId                                                          smithy.SchemaExtensions
+	eUploadIdNotFound                                                   smithy.SchemaExtensions
+	eUploadIdNotFound_message                                           smithy.SchemaExtensions
+	e_UploadIds                                                         smithy.SchemaExtensions
+	e_UploadIds_member                                                  smithy.SchemaExtensions
+	eUploadProgress                                                     smithy.SchemaExtensions
+	eUploadProgress_totalParts                                          smithy.SchemaExtensions
+	eUploadProgress_completedPartsCount                                 smithy.SchemaExtensions
+	eUploadRange                                                        smithy.SchemaExtensions
+	eUploadRange_startIndex                                             smithy.SchemaExtensions
+	eUploadRange_endIndex                                               smithy.SchemaExtensions
+	eUploadStatus                                                       smithy.SchemaExtensions
+	eUploadStatus_ATTACHMENT_READY                                      smithy.SchemaExtensions
+	eUploadStatus_ATTACHMENT_NOT_READY                                  smithy.SchemaExtensions
+	eUploadStatus_FAILED                                                smithy.SchemaExtensions
+	eUploadUrl                                                          smithy.SchemaExtensions
+	eUploadUrl_url                                                      smithy.SchemaExtensions
+	eUploadUrl_partIndex                                                smithy.SchemaExtensions
+	eUploadUrl_expiryDate                                               smithy.SchemaExtensions
+	e_UploadUrlList                                                     smithy.SchemaExtensions
+	e_UploadUrlList_member                                              smithy.SchemaExtensions
+	e_ValidatedCategoryCode                                             smithy.SchemaExtensions
+	e_ValidatedCommunicationBody                                        smithy.SchemaExtensions
+	e_ValidatedDateTime                                                 smithy.SchemaExtensions
+	e_ValidatedIssueTypeString                                          smithy.SchemaExtensions
+	e_ValidatedLanguageAvailability                                     smithy.SchemaExtensions
+	e_ValidatedServiceCode                                              smithy.SchemaExtensions
+	eAddAttachmentsToSetRequest                                         smithy.SchemaExtensions
+	eAddAttachmentsToSetRequest_attachmentSetId                         smithy.SchemaExtensions
+	eAddAttachmentsToSetRequest_attachments                             smithy.SchemaExtensions
+	eAddAttachmentsToSetRequest_dryRun                                  smithy.SchemaExtensions
+	eAddAttachmentsToSetResponse                                        smithy.SchemaExtensions
+	eAddAttachmentsToSetResponse_attachmentSetId                        smithy.SchemaExtensions
+	eAddAttachmentsToSetResponse_expiryTime                             smithy.SchemaExtensions
+	eAddCommunicationToCaseRequest                                      smithy.SchemaExtensions
+	eAddCommunicationToCaseRequest_caseId                               smithy.SchemaExtensions
+	eAddCommunicationToCaseRequest_communicationBody                    smithy.SchemaExtensions
+	eAddCommunicationToCaseRequest_ccEmailAddresses                     smithy.SchemaExtensions
+	eAddCommunicationToCaseRequest_attachmentSetId                      smithy.SchemaExtensions
+	eAddCommunicationToCaseRequest_uploadIds                            smithy.SchemaExtensions
+	eAddCommunicationToCaseRequest_dryRun                               smithy.SchemaExtensions
+	eAddCommunicationToCaseResponse                                     smithy.SchemaExtensions
+	eAddCommunicationToCaseResponse_result                              smithy.SchemaExtensions
+	eCompleteAttachmentUploadRequest                                    smithy.SchemaExtensions
+	eCompleteAttachmentUploadRequest_uploadId                           smithy.SchemaExtensions
+	eCompleteAttachmentUploadRequest_completedUploads                   smithy.SchemaExtensions
+	eCompleteAttachmentUploadRequest_dryRun                             smithy.SchemaExtensions
+	eCompleteAttachmentUploadResponse                                   smithy.SchemaExtensions
+	eCompleteAttachmentUploadResponse_uploadStatus                      smithy.SchemaExtensions
+	eCreateCaseRequest                                                  smithy.SchemaExtensions
+	eCreateCaseRequest_subject                                          smithy.SchemaExtensions
+	eCreateCaseRequest_serviceCode                                      smithy.SchemaExtensions
+	eCreateCaseRequest_severityCode                                     smithy.SchemaExtensions
+	eCreateCaseRequest_categoryCode                                     smithy.SchemaExtensions
+	eCreateCaseRequest_communicationBody                                smithy.SchemaExtensions
+	eCreateCaseRequest_ccEmailAddresses                                 smithy.SchemaExtensions
+	eCreateCaseRequest_language                                         smithy.SchemaExtensions
+	eCreateCaseRequest_issueType                                        smithy.SchemaExtensions
+	eCreateCaseRequest_attachmentSetId                                  smithy.SchemaExtensions
+	eCreateCaseRequest_uploadIds                                        smithy.SchemaExtensions
+	eCreateCaseRequest_dryRun                                           smithy.SchemaExtensions
+	eCreateCaseResponse                                                 smithy.SchemaExtensions
+	eCreateCaseResponse_caseId                                          smithy.SchemaExtensions
+	eDescribeAttachmentRequest                                          smithy.SchemaExtensions
+	eDescribeAttachmentRequest_attachmentId                             smithy.SchemaExtensions
+	eDescribeAttachmentRequest_dryRun                                   smithy.SchemaExtensions
+	eDescribeAttachmentResponse                                         smithy.SchemaExtensions
+	eDescribeAttachmentResponse_attachment                              smithy.SchemaExtensions
+	eDescribeAttachmentUploadStatusRequest                              smithy.SchemaExtensions
+	eDescribeAttachmentUploadStatusRequest_uploadId                     smithy.SchemaExtensions
+	eDescribeAttachmentUploadStatusRequest_dryRun                       smithy.SchemaExtensions
+	eDescribeAttachmentUploadStatusResponse                             smithy.SchemaExtensions
+	eDescribeAttachmentUploadStatusResponse_uploadStatus                smithy.SchemaExtensions
+	eDescribeAttachmentUploadStatusResponse_fileName                    smithy.SchemaExtensions
+	eDescribeAttachmentUploadStatusResponse_uploadProgress              smithy.SchemaExtensions
+	eDescribeCasesRequest                                               smithy.SchemaExtensions
+	eDescribeCasesRequest_caseIdList                                    smithy.SchemaExtensions
+	eDescribeCasesRequest_displayId                                     smithy.SchemaExtensions
+	eDescribeCasesRequest_afterTime                                     smithy.SchemaExtensions
+	eDescribeCasesRequest_beforeTime                                    smithy.SchemaExtensions
+	eDescribeCasesRequest_includeResolvedCases                          smithy.SchemaExtensions
+	eDescribeCasesRequest_nextToken                                     smithy.SchemaExtensions
+	eDescribeCasesRequest_maxResults                                    smithy.SchemaExtensions
+	eDescribeCasesRequest_language                                      smithy.SchemaExtensions
+	eDescribeCasesRequest_includeCommunications                         smithy.SchemaExtensions
+	eDescribeCasesRequest_dryRun                                        smithy.SchemaExtensions
+	eDescribeCasesResponse                                              smithy.SchemaExtensions
+	eDescribeCasesResponse_cases                                        smithy.SchemaExtensions
+	eDescribeCasesResponse_nextToken                                    smithy.SchemaExtensions
+	eDescribeCommunicationsRequest                                      smithy.SchemaExtensions
+	eDescribeCommunicationsRequest_caseId                               smithy.SchemaExtensions
+	eDescribeCommunicationsRequest_beforeTime                           smithy.SchemaExtensions
+	eDescribeCommunicationsRequest_afterTime                            smithy.SchemaExtensions
+	eDescribeCommunicationsRequest_nextToken                            smithy.SchemaExtensions
+	eDescribeCommunicationsRequest_maxResults                           smithy.SchemaExtensions
+	eDescribeCommunicationsRequest_dryRun                               smithy.SchemaExtensions
+	eDescribeCommunicationsResponse                                     smithy.SchemaExtensions
+	eDescribeCommunicationsResponse_communications                      smithy.SchemaExtensions
+	eDescribeCommunicationsResponse_nextToken                           smithy.SchemaExtensions
+	eDescribeCreateCaseOptionsRequest                                   smithy.SchemaExtensions
+	eDescribeCreateCaseOptionsRequest_issueType                         smithy.SchemaExtensions
+	eDescribeCreateCaseOptionsRequest_serviceCode                       smithy.SchemaExtensions
+	eDescribeCreateCaseOptionsRequest_language                          smithy.SchemaExtensions
+	eDescribeCreateCaseOptionsRequest_categoryCode                      smithy.SchemaExtensions
+	eDescribeCreateCaseOptionsRequest_dryRun                            smithy.SchemaExtensions
+	eDescribeCreateCaseOptionsResponse                                  smithy.SchemaExtensions
+	eDescribeCreateCaseOptionsResponse_languageAvailability             smithy.SchemaExtensions
+	eDescribeCreateCaseOptionsResponse_communicationTypes               smithy.SchemaExtensions
+	eDescribeServicesRequest                                            smithy.SchemaExtensions
+	eDescribeServicesRequest_serviceCodeList                            smithy.SchemaExtensions
+	eDescribeServicesRequest_language                                   smithy.SchemaExtensions
+	eDescribeServicesRequest_dryRun                                     smithy.SchemaExtensions
+	eDescribeServicesResponse                                           smithy.SchemaExtensions
+	eDescribeServicesResponse_services                                  smithy.SchemaExtensions
+	eDescribeSeverityLevelsRequest                                      smithy.SchemaExtensions
+	eDescribeSeverityLevelsRequest_language                             smithy.SchemaExtensions
+	eDescribeSeverityLevelsRequest_dryRun                               smithy.SchemaExtensions
+	eDescribeSeverityLevelsResponse                                     smithy.SchemaExtensions
+	eDescribeSeverityLevelsResponse_severityLevels                      smithy.SchemaExtensions
+	eDescribeSupportedLanguagesRequest                                  smithy.SchemaExtensions
+	eDescribeSupportedLanguagesRequest_issueType                        smithy.SchemaExtensions
+	eDescribeSupportedLanguagesRequest_serviceCode                      smithy.SchemaExtensions
+	eDescribeSupportedLanguagesRequest_categoryCode                     smithy.SchemaExtensions
+	eDescribeSupportedLanguagesRequest_dryRun                           smithy.SchemaExtensions
+	eDescribeSupportedLanguagesResponse                                 smithy.SchemaExtensions
+	eDescribeSupportedLanguagesResponse_supportedLanguages              smithy.SchemaExtensions
+	eDescribeTrustedAdvisorCheckRefreshStatusesRequest                  smithy.SchemaExtensions
+	eDescribeTrustedAdvisorCheckRefreshStatusesRequest_checkIds         smithy.SchemaExtensions
+	eDescribeTrustedAdvisorCheckRefreshStatusesResponse                 smithy.SchemaExtensions
+	eDescribeTrustedAdvisorCheckRefreshStatusesResponse_statuses        smithy.SchemaExtensions
+	eDescribeTrustedAdvisorCheckResultRequest                           smithy.SchemaExtensions
+	eDescribeTrustedAdvisorCheckResultRequest_checkId                   smithy.SchemaExtensions
+	eDescribeTrustedAdvisorCheckResultRequest_language                  smithy.SchemaExtensions
+	eDescribeTrustedAdvisorCheckResultResponse                          smithy.SchemaExtensions
+	eDescribeTrustedAdvisorCheckResultResponse_result                   smithy.SchemaExtensions
+	eDescribeTrustedAdvisorChecksRequest                                smithy.SchemaExtensions
+	eDescribeTrustedAdvisorChecksRequest_language                       smithy.SchemaExtensions
+	eDescribeTrustedAdvisorChecksResponse                               smithy.SchemaExtensions
+	eDescribeTrustedAdvisorChecksResponse_checks                        smithy.SchemaExtensions
+	eDescribeTrustedAdvisorCheckSummariesRequest                        smithy.SchemaExtensions
+	eDescribeTrustedAdvisorCheckSummariesRequest_checkIds               smithy.SchemaExtensions
+	eDescribeTrustedAdvisorCheckSummariesResponse                       smithy.SchemaExtensions
+	eDescribeTrustedAdvisorCheckSummariesResponse_summaries             smithy.SchemaExtensions
+	eGetAttachmentDownloadLinkRequest                                   smithy.SchemaExtensions
+	eGetAttachmentDownloadLinkRequest_attachmentId                      smithy.SchemaExtensions
+	eGetAttachmentDownloadLinkRequest_dryRun                            smithy.SchemaExtensions
+	eGetAttachmentDownloadLinkResponse                                  smithy.SchemaExtensions
+	eGetAttachmentDownloadLinkResponse_fileName                         smithy.SchemaExtensions
+	eGetAttachmentDownloadLinkResponse_downloadUrl                      smithy.SchemaExtensions
+	eGetAttachmentUploadLinksRequest                                    smithy.SchemaExtensions
+	eGetAttachmentUploadLinksRequest_fileName                           smithy.SchemaExtensions
+	eGetAttachmentUploadLinksRequest_fileSizeBytes                      smithy.SchemaExtensions
+	eGetAttachmentUploadLinksRequest_uploadId                           smithy.SchemaExtensions
+	eGetAttachmentUploadLinksRequest_uploadRange                        smithy.SchemaExtensions
+	eGetAttachmentUploadLinksRequest_dryRun                             smithy.SchemaExtensions
+	eGetAttachmentUploadLinksResponse                                   smithy.SchemaExtensions
+	eGetAttachmentUploadLinksResponse_uploadId                          smithy.SchemaExtensions
+	eGetAttachmentUploadLinksResponse_partSizeBytes                     smithy.SchemaExtensions
+	eGetAttachmentUploadLinksResponse_totalParts                        smithy.SchemaExtensions
+	eGetAttachmentUploadLinksResponse_nextIndex                         smithy.SchemaExtensions
+	eGetAttachmentUploadLinksResponse_uploadUrls                        smithy.SchemaExtensions
+	eRefreshTrustedAdvisorCheckRequest                                  smithy.SchemaExtensions
+	eRefreshTrustedAdvisorCheckRequest_checkId                          smithy.SchemaExtensions
+	eRefreshTrustedAdvisorCheckResponse                                 smithy.SchemaExtensions
+	eRefreshTrustedAdvisorCheckResponse_status                          smithy.SchemaExtensions
+	eResolveCaseRequest                                                 smithy.SchemaExtensions
+	eResolveCaseRequest_caseId                                          smithy.SchemaExtensions
+	eResolveCaseRequest_dryRun                                          smithy.SchemaExtensions
+	eResolveCaseResponse                                                smithy.SchemaExtensions
+	eResolveCaseResponse_initialCaseStatus                              smithy.SchemaExtensions
+	eResolveCaseResponse_finalCaseStatus                                smithy.SchemaExtensions
+)
 
 var (
 	iAddAttachmentsToSet                                = smithy.ShapeID{Namespace: "com.amazonaws.support", Name: "AddAttachmentsToSet"}
@@ -316,419 +727,419 @@ var mRefreshTrustedAdvisorCheckResponse = smithy.SchemaMembers{List: []*smithy.S
 var mResolveCaseRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sResolveCaseRequest_caseId, &sResolveCaseRequest_dryRun}}
 var mResolveCaseResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sResolveCaseResponse_initialCaseStatus, &sResolveCaseResponse_finalCaseStatus}}
 
-var sAddAttachmentsToSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddAttachmentsToSet, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sAddCommunicationToCase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddCommunicationToCase, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sCompleteAttachmentUpload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompleteAttachmentUpload, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sCreateCase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCase, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sDescribeAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAttachment, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sDescribeAttachmentUploadStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAttachmentUploadStatus, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sDescribeCases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCases, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sDescribeCommunications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCommunications, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sDescribeCreateCaseOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCreateCaseOptions, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sDescribeServices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServices, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sDescribeSeverityLevels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSeverityLevels, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sDescribeSupportedLanguages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSupportedLanguages, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sDescribeTrustedAdvisorCheckRefreshStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustedAdvisorCheckRefreshStatuses, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sDescribeTrustedAdvisorCheckResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustedAdvisorCheckResult, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sDescribeTrustedAdvisorChecks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustedAdvisorChecks, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sDescribeTrustedAdvisorCheckSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustedAdvisorCheckSummaries, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sGetAttachmentDownloadLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAttachmentDownloadLink, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sGetAttachmentUploadLinks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAttachmentUploadLinks, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sRefreshTrustedAdvisorCheck = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRefreshTrustedAdvisorCheck, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sResolveCase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolveCase, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var s_AWSSupport_20130415 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSSupport_20130415, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &ext[20]})
-var s_AfterTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AfterTime, Type: smithy.ShapeTypeString, Ext: &ext[21]})
-var sAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure, Ext: &ext[22]})
-var sAttachmentDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachmentDetails, Members: &mAttachmentDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[25]})
-var s_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttachmentId, Type: smithy.ShapeTypeString, Ext: &ext[28]})
-var sAttachmentIdNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachmentIdNotFound, Members: &mAttachmentIdNotFound, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[29]})
-var sAttachmentLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachmentLimitExceeded, Members: &mAttachmentLimitExceeded, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[31]})
-var s_Attachments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Attachments, Members: &m_Attachments, Type: smithy.ShapeTypeList, Ext: &ext[33]})
-var s_AttachmentSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttachmentSet, Members: &m_AttachmentSet, Type: smithy.ShapeTypeList, Ext: &ext[35]})
-var sAttachmentSetExpired = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachmentSetExpired, Members: &mAttachmentSetExpired, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var s_AttachmentSetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttachmentSetId, Type: smithy.ShapeTypeString, Ext: &ext[39]})
-var sAttachmentSetIdNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachmentSetIdNotFound, Members: &mAttachmentSetIdNotFound, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[40]})
-var sAttachmentSetSizeLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachmentSetSizeLimitExceeded, Members: &mAttachmentSetSizeLimitExceeded, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[42]})
-var s_AvailabilityErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var s_BeforeTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BeforeTime, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[46]})
-var sCaseCreationLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCaseCreationLimitExceeded, Members: &mCaseCreationLimitExceeded, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[47]})
-var sCaseDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCaseDetails, Members: &mCaseDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[49]})
-var s_CaseId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CaseId, Type: smithy.ShapeTypeString, Ext: &ext[62]})
-var s_CaseIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CaseIdList, Members: &m_CaseIdList, Type: smithy.ShapeTypeList, Ext: &ext[63]})
-var sCaseIdNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCaseIdNotFound, Members: &mCaseIdNotFound, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[65]})
-var s_CaseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CaseList, Members: &m_CaseList, Type: smithy.ShapeTypeList, Ext: &ext[67]})
-var s_CaseStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CaseStatus, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var sCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCategory, Members: &mCategory, Type: smithy.ShapeTypeStructure, Ext: &ext[70]})
-var s_CategoryCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CategoryCode, Type: smithy.ShapeTypeString, Ext: &ext[73]})
-var s_CategoryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &ext[74]})
-var s_CategoryName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CategoryName, Type: smithy.ShapeTypeString, Ext: &ext[76]})
-var s_CcEmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CcEmailAddress, Type: smithy.ShapeTypeString, Ext: &ext[77]})
-var s_CcEmailAddressList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CcEmailAddressList, Members: &m_CcEmailAddressList, Type: smithy.ShapeTypeList, Ext: &ext[78]})
-var s_Code = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Code, Type: smithy.ShapeTypeString, Ext: &ext[80]})
-var sCommunication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommunication, Members: &mCommunication, Type: smithy.ShapeTypeStructure, Ext: &ext[81]})
-var s_CommunicationBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommunicationBody, Type: smithy.ShapeTypeString, Ext: &ext[88]})
-var s_CommunicationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommunicationList, Members: &m_CommunicationList, Type: smithy.ShapeTypeList, Ext: &ext[89]})
-var sCommunicationTypeOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommunicationTypeOptions, Members: &mCommunicationTypeOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[91]})
-var s_CommunicationTypeOptionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommunicationTypeOptionsList, Members: &m_CommunicationTypeOptionsList, Type: smithy.ShapeTypeList, Ext: &ext[95]})
-var sCompletedUpload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompletedUpload, Members: &mCompletedUpload, Type: smithy.ShapeTypeStructure, Ext: &ext[97]})
-var s_CompletedUploadList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CompletedUploadList, Members: &m_CompletedUploadList, Type: smithy.ShapeTypeList, Ext: &ext[100]})
-var s_CoralAvailabilityThrottledResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoralAvailabilityThrottledResource, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var s_CoralAvailabilityThrottlingReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoralAvailabilityThrottlingReason, Type: smithy.ShapeTypeString, Ext: &ext[103]})
-var s_Data = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Data, Type: smithy.ShapeTypeBlob, Ext: &ext[104]})
-var sDateInterval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDateInterval, Members: &mDateInterval, Type: smithy.ShapeTypeStructure, Ext: &ext[105]})
-var s_DatesWithoutSupportList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatesWithoutSupportList, Members: &m_DatesWithoutSupportList, Type: smithy.ShapeTypeList, Ext: &ext[108]})
-var sDescribeAttachmentLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAttachmentLimitExceeded, Members: &mDescribeAttachmentLimitExceeded, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[110]})
-var s_Display = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Display, Type: smithy.ShapeTypeString, Ext: &ext[112]})
-var s_DisplayId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DisplayId, Type: smithy.ShapeTypeString, Ext: &ext[113]})
-var s_Double = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &ext[114]})
-var sDownloadUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDownloadUrl, Members: &mDownloadUrl, Type: smithy.ShapeTypeStructure, Ext: &ext[115]})
-var sDryRunOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDryRunOperationException, Members: &mDryRunOperationException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[118]})
-var s_EndIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndIndex, Type: smithy.ShapeTypeInteger, Ext: &ext[120]})
-var s_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndTime, Type: smithy.ShapeTypeString, Ext: &ext[121]})
-var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[122]})
-var s_ETag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ETag, Type: smithy.ShapeTypeString, Ext: &ext[123]})
-var s_ExpiryTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpiryTime, Type: smithy.ShapeTypeString, Ext: &ext[124]})
-var s_FieldIntegerValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldIntegerValue, Type: smithy.ShapeTypeInteger, Ext: &ext[125]})
-var s_FileName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileName, Type: smithy.ShapeTypeString, Ext: &ext[126]})
-var s_FileSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileSize, Type: smithy.ShapeTypeLong, Ext: &ext[127]})
-var s_HttpsUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpsUrl, Type: smithy.ShapeTypeString, Ext: &ext[128]})
-var s_IncludeCommunications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncludeCommunications, Type: smithy.ShapeTypeBoolean, Ext: &ext[129]})
-var s_IncludeResolvedCases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncludeResolvedCases, Type: smithy.ShapeTypeBoolean, Ext: &ext[130]})
-var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[131]})
-var sInternalServerError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerError, Members: &mInternalServerError, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[132]})
-var s_IssueType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IssueType, Type: smithy.ShapeTypeString, Ext: &ext[134]})
-var s_Language = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Language, Type: smithy.ShapeTypeString, Ext: &ext[135]})
-var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[136]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[137]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var s_NullableBooleanType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[139]})
-var s_PartSizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartSizeBytes, Type: smithy.ShapeTypeLong, Ext: &ext[140]})
-var sRecentCaseCommunications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecentCaseCommunications, Members: &mRecentCaseCommunications, Type: smithy.ShapeTypeStructure, Ext: &ext[141]})
-var s_Result = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Result, Type: smithy.ShapeTypeBoolean, Ext: &ext[144]})
-var sService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iService, Members: &mService, Type: smithy.ShapeTypeStructure, Ext: &ext[145]})
-var s_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &ext[149]})
-var s_ServiceCode2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceCode2, Type: smithy.ShapeTypeString, Ext: &ext[150]})
-var s_ServiceCodeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceCodeList, Members: &m_ServiceCodeList, Type: smithy.ShapeTypeList, Ext: &ext[151]})
-var s_ServiceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceList, Members: &m_ServiceList, Type: smithy.ShapeTypeList, Ext: &ext[153]})
-var s_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &ext[155]})
-var s_SeverityCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SeverityCode, Type: smithy.ShapeTypeString, Ext: &ext[156]})
-var sSeverityLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSeverityLevel, Members: &mSeverityLevel, Type: smithy.ShapeTypeStructure, Ext: &ext[157]})
-var s_SeverityLevelCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SeverityLevelCode, Type: smithy.ShapeTypeString, Ext: &ext[160]})
-var s_SeverityLevelName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SeverityLevelName, Type: smithy.ShapeTypeString, Ext: &ext[161]})
-var s_SeverityLevelsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SeverityLevelsList, Members: &m_SeverityLevelsList, Type: smithy.ShapeTypeList, Ext: &ext[162]})
-var s_StartIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartIndex, Type: smithy.ShapeTypeInteger, Ext: &ext[164]})
-var s_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartTime, Type: smithy.ShapeTypeString, Ext: &ext[165]})
-var s_Status = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &ext[166]})
-var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[167]})
-var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[168]})
-var s_Subject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Subject, Type: smithy.ShapeTypeString, Ext: &ext[170]})
-var s_SubmittedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubmittedBy, Type: smithy.ShapeTypeString, Ext: &ext[171]})
-var sSupportedHour = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupportedHour, Members: &mSupportedHour, Type: smithy.ShapeTypeStructure, Ext: &ext[172]})
-var s_SupportedHoursList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportedHoursList, Members: &m_SupportedHoursList, Type: smithy.ShapeTypeList, Ext: &ext[175]})
-var sSupportedLanguage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupportedLanguage, Members: &mSupportedLanguage, Type: smithy.ShapeTypeStructure, Ext: &ext[177]})
-var s_SupportedLanguagesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportedLanguagesList, Members: &m_SupportedLanguagesList, Type: smithy.ShapeTypeList, Ext: &ext[181]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[183]})
-var sThrottlingReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingReason, Members: &mThrottlingReason, Type: smithy.ShapeTypeStructure, Ext: &ext[186]})
-var s_ThrottlingReasonList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThrottlingReasonList, Members: &m_ThrottlingReasonList, Type: smithy.ShapeTypeList, Ext: &ext[189]})
-var s_TimeCreated = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeCreated, Type: smithy.ShapeTypeString, Ext: &ext[191]})
-var sTrustedAdvisorCategorySpecificSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustedAdvisorCategorySpecificSummary, Members: &mTrustedAdvisorCategorySpecificSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[192]})
-var sTrustedAdvisorCheckDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustedAdvisorCheckDescription, Members: &mTrustedAdvisorCheckDescription, Type: smithy.ShapeTypeStructure, Ext: &ext[194]})
-var s_TrustedAdvisorCheckList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrustedAdvisorCheckList, Members: &m_TrustedAdvisorCheckList, Type: smithy.ShapeTypeList, Ext: &ext[200]})
-var sTrustedAdvisorCheckRefreshStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustedAdvisorCheckRefreshStatus, Members: &mTrustedAdvisorCheckRefreshStatus, Type: smithy.ShapeTypeStructure, Ext: &ext[202]})
-var s_TrustedAdvisorCheckRefreshStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrustedAdvisorCheckRefreshStatusList, Members: &m_TrustedAdvisorCheckRefreshStatusList, Type: smithy.ShapeTypeList, Ext: &ext[206]})
-var sTrustedAdvisorCheckResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustedAdvisorCheckResult, Members: &mTrustedAdvisorCheckResult, Type: smithy.ShapeTypeStructure, Ext: &ext[208]})
-var sTrustedAdvisorCheckSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustedAdvisorCheckSummary, Members: &mTrustedAdvisorCheckSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[215]})
-var s_TrustedAdvisorCheckSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrustedAdvisorCheckSummaryList, Members: &m_TrustedAdvisorCheckSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[222]})
-var sTrustedAdvisorCostOptimizingSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustedAdvisorCostOptimizingSummary, Members: &mTrustedAdvisorCostOptimizingSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[224]})
-var sTrustedAdvisorResourceDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustedAdvisorResourceDetail, Members: &mTrustedAdvisorResourceDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[227]})
-var s_TrustedAdvisorResourceDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrustedAdvisorResourceDetailList, Members: &m_TrustedAdvisorResourceDetailList, Type: smithy.ShapeTypeList, Ext: &ext[233]})
-var sTrustedAdvisorResourcesSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustedAdvisorResourcesSummary, Members: &mTrustedAdvisorResourcesSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[235]})
-var s_Type = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Type, Type: smithy.ShapeTypeString, Ext: &ext[240]})
-var s_UploadId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UploadId, Type: smithy.ShapeTypeString, Ext: &ext[241]})
-var sUploadIdNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUploadIdNotFound, Members: &mUploadIdNotFound, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[242]})
-var s_UploadIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UploadIds, Members: &m_UploadIds, Type: smithy.ShapeTypeList, Ext: &ext[244]})
-var sUploadProgress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUploadProgress, Members: &mUploadProgress, Type: smithy.ShapeTypeStructure, Ext: &ext[246]})
-var sUploadRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUploadRange, Members: &mUploadRange, Type: smithy.ShapeTypeStructure, Ext: &ext[249]})
-var sUploadStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUploadStatus, Members: &mUploadStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[252]})
-var sUploadUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUploadUrl, Members: &mUploadUrl, Type: smithy.ShapeTypeStructure, Ext: &ext[256]})
-var s_UploadUrlList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UploadUrlList, Members: &m_UploadUrlList, Type: smithy.ShapeTypeList, Ext: &ext[260]})
-var s_ValidatedCategoryCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidatedCategoryCode, Type: smithy.ShapeTypeString, Ext: &ext[262]})
-var s_ValidatedCommunicationBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidatedCommunicationBody, Type: smithy.ShapeTypeString, Ext: &ext[263]})
-var s_ValidatedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidatedDateTime, Type: smithy.ShapeTypeString, Ext: &ext[264]})
-var s_ValidatedIssueTypeString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidatedIssueTypeString, Type: smithy.ShapeTypeString, Ext: &ext[265]})
-var s_ValidatedLanguageAvailability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidatedLanguageAvailability, Type: smithy.ShapeTypeString, Ext: &ext[266]})
-var s_ValidatedServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidatedServiceCode, Type: smithy.ShapeTypeString, Ext: &ext[267]})
-var sAddAttachmentsToSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddAttachmentsToSetRequest, Members: &mAddAttachmentsToSetRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[268]})
-var sAddAttachmentsToSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddAttachmentsToSetResponse, Members: &mAddAttachmentsToSetResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[272]})
-var sAddCommunicationToCaseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddCommunicationToCaseRequest, Members: &mAddCommunicationToCaseRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[275]})
-var sAddCommunicationToCaseResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddCommunicationToCaseResponse, Members: &mAddCommunicationToCaseResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[282]})
-var sCompleteAttachmentUploadRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompleteAttachmentUploadRequest, Members: &mCompleteAttachmentUploadRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[284]})
-var sCompleteAttachmentUploadResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompleteAttachmentUploadResponse, Members: &mCompleteAttachmentUploadResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[288]})
-var sCreateCaseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCaseRequest, Members: &mCreateCaseRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[290]})
-var sCreateCaseResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCaseResponse, Members: &mCreateCaseResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[302]})
-var sDescribeAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAttachmentRequest, Members: &mDescribeAttachmentRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[304]})
-var sDescribeAttachmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAttachmentResponse, Members: &mDescribeAttachmentResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[307]})
-var sDescribeAttachmentUploadStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAttachmentUploadStatusRequest, Members: &mDescribeAttachmentUploadStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[309]})
-var sDescribeAttachmentUploadStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAttachmentUploadStatusResponse, Members: &mDescribeAttachmentUploadStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[312]})
-var sDescribeCasesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCasesRequest, Members: &mDescribeCasesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[316]})
-var sDescribeCasesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCasesResponse, Members: &mDescribeCasesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[327]})
-var sDescribeCommunicationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCommunicationsRequest, Members: &mDescribeCommunicationsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[330]})
-var sDescribeCommunicationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCommunicationsResponse, Members: &mDescribeCommunicationsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[337]})
-var sDescribeCreateCaseOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCreateCaseOptionsRequest, Members: &mDescribeCreateCaseOptionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[340]})
-var sDescribeCreateCaseOptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCreateCaseOptionsResponse, Members: &mDescribeCreateCaseOptionsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[346]})
-var sDescribeServicesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServicesRequest, Members: &mDescribeServicesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[349]})
-var sDescribeServicesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServicesResponse, Members: &mDescribeServicesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[353]})
-var sDescribeSeverityLevelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSeverityLevelsRequest, Members: &mDescribeSeverityLevelsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[355]})
-var sDescribeSeverityLevelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSeverityLevelsResponse, Members: &mDescribeSeverityLevelsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[358]})
-var sDescribeSupportedLanguagesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSupportedLanguagesRequest, Members: &mDescribeSupportedLanguagesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[360]})
-var sDescribeSupportedLanguagesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSupportedLanguagesResponse, Members: &mDescribeSupportedLanguagesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[365]})
-var sDescribeTrustedAdvisorCheckRefreshStatusesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustedAdvisorCheckRefreshStatusesRequest, Members: &mDescribeTrustedAdvisorCheckRefreshStatusesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[367]})
-var sDescribeTrustedAdvisorCheckRefreshStatusesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustedAdvisorCheckRefreshStatusesResponse, Members: &mDescribeTrustedAdvisorCheckRefreshStatusesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[369]})
-var sDescribeTrustedAdvisorCheckResultRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustedAdvisorCheckResultRequest, Members: &mDescribeTrustedAdvisorCheckResultRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[371]})
-var sDescribeTrustedAdvisorCheckResultResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustedAdvisorCheckResultResponse, Members: &mDescribeTrustedAdvisorCheckResultResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[374]})
-var sDescribeTrustedAdvisorChecksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustedAdvisorChecksRequest, Members: &mDescribeTrustedAdvisorChecksRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[376]})
-var sDescribeTrustedAdvisorChecksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustedAdvisorChecksResponse, Members: &mDescribeTrustedAdvisorChecksResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[378]})
-var sDescribeTrustedAdvisorCheckSummariesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustedAdvisorCheckSummariesRequest, Members: &mDescribeTrustedAdvisorCheckSummariesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[380]})
-var sDescribeTrustedAdvisorCheckSummariesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustedAdvisorCheckSummariesResponse, Members: &mDescribeTrustedAdvisorCheckSummariesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[382]})
-var sGetAttachmentDownloadLinkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAttachmentDownloadLinkRequest, Members: &mGetAttachmentDownloadLinkRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[384]})
-var sGetAttachmentDownloadLinkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAttachmentDownloadLinkResponse, Members: &mGetAttachmentDownloadLinkResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[387]})
-var sGetAttachmentUploadLinksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAttachmentUploadLinksRequest, Members: &mGetAttachmentUploadLinksRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[390]})
-var sGetAttachmentUploadLinksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAttachmentUploadLinksResponse, Members: &mGetAttachmentUploadLinksResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[396]})
-var sRefreshTrustedAdvisorCheckRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRefreshTrustedAdvisorCheckRequest, Members: &mRefreshTrustedAdvisorCheckRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[402]})
-var sRefreshTrustedAdvisorCheckResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRefreshTrustedAdvisorCheckResponse, Members: &mRefreshTrustedAdvisorCheckResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[404]})
-var sResolveCaseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolveCaseRequest, Members: &mResolveCaseRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[406]})
-var sResolveCaseResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolveCaseResponse, Members: &mResolveCaseResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[409]})
+var sAddAttachmentsToSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddAttachmentsToSet, Type: smithy.ShapeTypeOperation, Ext: &eAddAttachmentsToSet})
+var sAddCommunicationToCase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddCommunicationToCase, Type: smithy.ShapeTypeOperation, Ext: &eAddCommunicationToCase})
+var sCompleteAttachmentUpload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompleteAttachmentUpload, Type: smithy.ShapeTypeOperation, Ext: &eCompleteAttachmentUpload})
+var sCreateCase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCase, Type: smithy.ShapeTypeOperation, Ext: &eCreateCase})
+var sDescribeAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAttachment, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAttachment})
+var sDescribeAttachmentUploadStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAttachmentUploadStatus, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAttachmentUploadStatus})
+var sDescribeCases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCases, Type: smithy.ShapeTypeOperation, Ext: &eDescribeCases})
+var sDescribeCommunications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCommunications, Type: smithy.ShapeTypeOperation, Ext: &eDescribeCommunications})
+var sDescribeCreateCaseOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCreateCaseOptions, Type: smithy.ShapeTypeOperation, Ext: &eDescribeCreateCaseOptions})
+var sDescribeServices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServices, Type: smithy.ShapeTypeOperation, Ext: &eDescribeServices})
+var sDescribeSeverityLevels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSeverityLevels, Type: smithy.ShapeTypeOperation, Ext: &eDescribeSeverityLevels})
+var sDescribeSupportedLanguages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSupportedLanguages, Type: smithy.ShapeTypeOperation, Ext: &eDescribeSupportedLanguages})
+var sDescribeTrustedAdvisorCheckRefreshStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustedAdvisorCheckRefreshStatuses, Type: smithy.ShapeTypeOperation, Ext: &eDescribeTrustedAdvisorCheckRefreshStatuses})
+var sDescribeTrustedAdvisorCheckResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustedAdvisorCheckResult, Type: smithy.ShapeTypeOperation, Ext: &eDescribeTrustedAdvisorCheckResult})
+var sDescribeTrustedAdvisorChecks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustedAdvisorChecks, Type: smithy.ShapeTypeOperation, Ext: &eDescribeTrustedAdvisorChecks})
+var sDescribeTrustedAdvisorCheckSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustedAdvisorCheckSummaries, Type: smithy.ShapeTypeOperation, Ext: &eDescribeTrustedAdvisorCheckSummaries})
+var sGetAttachmentDownloadLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAttachmentDownloadLink, Type: smithy.ShapeTypeOperation, Ext: &eGetAttachmentDownloadLink})
+var sGetAttachmentUploadLinks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAttachmentUploadLinks, Type: smithy.ShapeTypeOperation, Ext: &eGetAttachmentUploadLinks})
+var sRefreshTrustedAdvisorCheck = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRefreshTrustedAdvisorCheck, Type: smithy.ShapeTypeOperation, Ext: &eRefreshTrustedAdvisorCheck})
+var sResolveCase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolveCase, Type: smithy.ShapeTypeOperation, Ext: &eResolveCase})
+var s_AWSSupport_20130415 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSSupport_20130415, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &e_AWSSupport_20130415})
+var s_AfterTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AfterTime, Type: smithy.ShapeTypeString, Ext: &e_AfterTime})
+var sAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure, Ext: &eAttachment})
+var sAttachmentDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachmentDetails, Members: &mAttachmentDetails, Type: smithy.ShapeTypeStructure, Ext: &eAttachmentDetails})
+var s_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttachmentId, Type: smithy.ShapeTypeString, Ext: &e_AttachmentId})
+var sAttachmentIdNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachmentIdNotFound, Members: &mAttachmentIdNotFound, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eAttachmentIdNotFound})
+var sAttachmentLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachmentLimitExceeded, Members: &mAttachmentLimitExceeded, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eAttachmentLimitExceeded})
+var s_Attachments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Attachments, Members: &m_Attachments, Type: smithy.ShapeTypeList, Ext: &e_Attachments})
+var s_AttachmentSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttachmentSet, Members: &m_AttachmentSet, Type: smithy.ShapeTypeList, Ext: &e_AttachmentSet})
+var sAttachmentSetExpired = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachmentSetExpired, Members: &mAttachmentSetExpired, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eAttachmentSetExpired})
+var s_AttachmentSetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttachmentSetId, Type: smithy.ShapeTypeString, Ext: &e_AttachmentSetId})
+var sAttachmentSetIdNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachmentSetIdNotFound, Members: &mAttachmentSetIdNotFound, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eAttachmentSetIdNotFound})
+var sAttachmentSetSizeLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachmentSetSizeLimitExceeded, Members: &mAttachmentSetSizeLimitExceeded, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eAttachmentSetSizeLimitExceeded})
+var s_AvailabilityErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_AvailabilityErrorMessage})
+var s_BeforeTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BeforeTime, Type: smithy.ShapeTypeString, Ext: &e_BeforeTime})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var sCaseCreationLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCaseCreationLimitExceeded, Members: &mCaseCreationLimitExceeded, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eCaseCreationLimitExceeded})
+var sCaseDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCaseDetails, Members: &mCaseDetails, Type: smithy.ShapeTypeStructure, Ext: &eCaseDetails})
+var s_CaseId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CaseId, Type: smithy.ShapeTypeString, Ext: &e_CaseId})
+var s_CaseIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CaseIdList, Members: &m_CaseIdList, Type: smithy.ShapeTypeList, Ext: &e_CaseIdList})
+var sCaseIdNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCaseIdNotFound, Members: &mCaseIdNotFound, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eCaseIdNotFound})
+var s_CaseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CaseList, Members: &m_CaseList, Type: smithy.ShapeTypeList, Ext: &e_CaseList})
+var s_CaseStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CaseStatus, Type: smithy.ShapeTypeString, Ext: &e_CaseStatus})
+var sCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCategory, Members: &mCategory, Type: smithy.ShapeTypeStructure, Ext: &eCategory})
+var s_CategoryCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CategoryCode, Type: smithy.ShapeTypeString, Ext: &e_CategoryCode})
+var s_CategoryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &e_CategoryList})
+var s_CategoryName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CategoryName, Type: smithy.ShapeTypeString, Ext: &e_CategoryName})
+var s_CcEmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CcEmailAddress, Type: smithy.ShapeTypeString, Ext: &e_CcEmailAddress})
+var s_CcEmailAddressList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CcEmailAddressList, Members: &m_CcEmailAddressList, Type: smithy.ShapeTypeList, Ext: &e_CcEmailAddressList})
+var s_Code = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Code, Type: smithy.ShapeTypeString, Ext: &e_Code})
+var sCommunication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommunication, Members: &mCommunication, Type: smithy.ShapeTypeStructure, Ext: &eCommunication})
+var s_CommunicationBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommunicationBody, Type: smithy.ShapeTypeString, Ext: &e_CommunicationBody})
+var s_CommunicationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommunicationList, Members: &m_CommunicationList, Type: smithy.ShapeTypeList, Ext: &e_CommunicationList})
+var sCommunicationTypeOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommunicationTypeOptions, Members: &mCommunicationTypeOptions, Type: smithy.ShapeTypeStructure, Ext: &eCommunicationTypeOptions})
+var s_CommunicationTypeOptionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommunicationTypeOptionsList, Members: &m_CommunicationTypeOptionsList, Type: smithy.ShapeTypeList, Ext: &e_CommunicationTypeOptionsList})
+var sCompletedUpload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompletedUpload, Members: &mCompletedUpload, Type: smithy.ShapeTypeStructure, Ext: &eCompletedUpload})
+var s_CompletedUploadList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CompletedUploadList, Members: &m_CompletedUploadList, Type: smithy.ShapeTypeList, Ext: &e_CompletedUploadList})
+var s_CoralAvailabilityThrottledResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoralAvailabilityThrottledResource, Type: smithy.ShapeTypeString, Ext: &e_CoralAvailabilityThrottledResource})
+var s_CoralAvailabilityThrottlingReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoralAvailabilityThrottlingReason, Type: smithy.ShapeTypeString, Ext: &e_CoralAvailabilityThrottlingReason})
+var s_Data = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Data, Type: smithy.ShapeTypeBlob, Ext: &e_Data})
+var sDateInterval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDateInterval, Members: &mDateInterval, Type: smithy.ShapeTypeStructure, Ext: &eDateInterval})
+var s_DatesWithoutSupportList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatesWithoutSupportList, Members: &m_DatesWithoutSupportList, Type: smithy.ShapeTypeList, Ext: &e_DatesWithoutSupportList})
+var sDescribeAttachmentLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAttachmentLimitExceeded, Members: &mDescribeAttachmentLimitExceeded, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAttachmentLimitExceeded})
+var s_Display = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Display, Type: smithy.ShapeTypeString, Ext: &e_Display})
+var s_DisplayId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DisplayId, Type: smithy.ShapeTypeString, Ext: &e_DisplayId})
+var s_Double = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &e_Double})
+var sDownloadUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDownloadUrl, Members: &mDownloadUrl, Type: smithy.ShapeTypeStructure, Ext: &eDownloadUrl})
+var sDryRunOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDryRunOperationException, Members: &mDryRunOperationException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eDryRunOperationException})
+var s_EndIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndIndex, Type: smithy.ShapeTypeInteger, Ext: &e_EndIndex})
+var s_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndTime, Type: smithy.ShapeTypeString, Ext: &e_EndTime})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var s_ETag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ETag, Type: smithy.ShapeTypeString, Ext: &e_ETag})
+var s_ExpiryTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpiryTime, Type: smithy.ShapeTypeString, Ext: &e_ExpiryTime})
+var s_FieldIntegerValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldIntegerValue, Type: smithy.ShapeTypeInteger, Ext: &e_FieldIntegerValue})
+var s_FileName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileName, Type: smithy.ShapeTypeString, Ext: &e_FileName})
+var s_FileSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileSize, Type: smithy.ShapeTypeLong, Ext: &e_FileSize})
+var s_HttpsUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpsUrl, Type: smithy.ShapeTypeString, Ext: &e_HttpsUrl})
+var s_IncludeCommunications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncludeCommunications, Type: smithy.ShapeTypeBoolean, Ext: &e_IncludeCommunications})
+var s_IncludeResolvedCases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncludeResolvedCases, Type: smithy.ShapeTypeBoolean, Ext: &e_IncludeResolvedCases})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &e_Integer})
+var sInternalServerError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerError, Members: &mInternalServerError, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerError})
+var s_IssueType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IssueType, Type: smithy.ShapeTypeString, Ext: &e_IssueType})
+var s_Language = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Language, Type: smithy.ShapeTypeString, Ext: &e_Language})
+var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &e_Long})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var s_NullableBooleanType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &e_NullableBooleanType})
+var s_PartSizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartSizeBytes, Type: smithy.ShapeTypeLong, Ext: &e_PartSizeBytes})
+var sRecentCaseCommunications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecentCaseCommunications, Members: &mRecentCaseCommunications, Type: smithy.ShapeTypeStructure, Ext: &eRecentCaseCommunications})
+var s_Result = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Result, Type: smithy.ShapeTypeBoolean, Ext: &e_Result})
+var sService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iService, Members: &mService, Type: smithy.ShapeTypeStructure, Ext: &eService})
+var s_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &e_ServiceCode})
+var s_ServiceCode2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceCode2, Type: smithy.ShapeTypeString, Ext: &e_ServiceCode2})
+var s_ServiceCodeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceCodeList, Members: &m_ServiceCodeList, Type: smithy.ShapeTypeList, Ext: &e_ServiceCodeList})
+var s_ServiceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceList, Members: &m_ServiceList, Type: smithy.ShapeTypeList, Ext: &e_ServiceList})
+var s_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &e_ServiceName})
+var s_SeverityCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SeverityCode, Type: smithy.ShapeTypeString, Ext: &e_SeverityCode})
+var sSeverityLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSeverityLevel, Members: &mSeverityLevel, Type: smithy.ShapeTypeStructure, Ext: &eSeverityLevel})
+var s_SeverityLevelCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SeverityLevelCode, Type: smithy.ShapeTypeString, Ext: &e_SeverityLevelCode})
+var s_SeverityLevelName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SeverityLevelName, Type: smithy.ShapeTypeString, Ext: &e_SeverityLevelName})
+var s_SeverityLevelsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SeverityLevelsList, Members: &m_SeverityLevelsList, Type: smithy.ShapeTypeList, Ext: &e_SeverityLevelsList})
+var s_StartIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartIndex, Type: smithy.ShapeTypeInteger, Ext: &e_StartIndex})
+var s_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartTime, Type: smithy.ShapeTypeString, Ext: &e_StartTime})
+var s_Status = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &e_Status})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &e_StringList})
+var s_Subject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Subject, Type: smithy.ShapeTypeString, Ext: &e_Subject})
+var s_SubmittedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubmittedBy, Type: smithy.ShapeTypeString, Ext: &e_SubmittedBy})
+var sSupportedHour = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupportedHour, Members: &mSupportedHour, Type: smithy.ShapeTypeStructure, Ext: &eSupportedHour})
+var s_SupportedHoursList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportedHoursList, Members: &m_SupportedHoursList, Type: smithy.ShapeTypeList, Ext: &e_SupportedHoursList})
+var sSupportedLanguage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupportedLanguage, Members: &mSupportedLanguage, Type: smithy.ShapeTypeStructure, Ext: &eSupportedLanguage})
+var s_SupportedLanguagesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportedLanguagesList, Members: &m_SupportedLanguagesList, Type: smithy.ShapeTypeList, Ext: &e_SupportedLanguagesList})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sThrottlingReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingReason, Members: &mThrottlingReason, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingReason})
+var s_ThrottlingReasonList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThrottlingReasonList, Members: &m_ThrottlingReasonList, Type: smithy.ShapeTypeList, Ext: &e_ThrottlingReasonList})
+var s_TimeCreated = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeCreated, Type: smithy.ShapeTypeString, Ext: &e_TimeCreated})
+var sTrustedAdvisorCategorySpecificSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustedAdvisorCategorySpecificSummary, Members: &mTrustedAdvisorCategorySpecificSummary, Type: smithy.ShapeTypeStructure, Ext: &eTrustedAdvisorCategorySpecificSummary})
+var sTrustedAdvisorCheckDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustedAdvisorCheckDescription, Members: &mTrustedAdvisorCheckDescription, Type: smithy.ShapeTypeStructure, Ext: &eTrustedAdvisorCheckDescription})
+var s_TrustedAdvisorCheckList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrustedAdvisorCheckList, Members: &m_TrustedAdvisorCheckList, Type: smithy.ShapeTypeList, Ext: &e_TrustedAdvisorCheckList})
+var sTrustedAdvisorCheckRefreshStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustedAdvisorCheckRefreshStatus, Members: &mTrustedAdvisorCheckRefreshStatus, Type: smithy.ShapeTypeStructure, Ext: &eTrustedAdvisorCheckRefreshStatus})
+var s_TrustedAdvisorCheckRefreshStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrustedAdvisorCheckRefreshStatusList, Members: &m_TrustedAdvisorCheckRefreshStatusList, Type: smithy.ShapeTypeList, Ext: &e_TrustedAdvisorCheckRefreshStatusList})
+var sTrustedAdvisorCheckResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustedAdvisorCheckResult, Members: &mTrustedAdvisorCheckResult, Type: smithy.ShapeTypeStructure, Ext: &eTrustedAdvisorCheckResult})
+var sTrustedAdvisorCheckSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustedAdvisorCheckSummary, Members: &mTrustedAdvisorCheckSummary, Type: smithy.ShapeTypeStructure, Ext: &eTrustedAdvisorCheckSummary})
+var s_TrustedAdvisorCheckSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrustedAdvisorCheckSummaryList, Members: &m_TrustedAdvisorCheckSummaryList, Type: smithy.ShapeTypeList, Ext: &e_TrustedAdvisorCheckSummaryList})
+var sTrustedAdvisorCostOptimizingSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustedAdvisorCostOptimizingSummary, Members: &mTrustedAdvisorCostOptimizingSummary, Type: smithy.ShapeTypeStructure, Ext: &eTrustedAdvisorCostOptimizingSummary})
+var sTrustedAdvisorResourceDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustedAdvisorResourceDetail, Members: &mTrustedAdvisorResourceDetail, Type: smithy.ShapeTypeStructure, Ext: &eTrustedAdvisorResourceDetail})
+var s_TrustedAdvisorResourceDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrustedAdvisorResourceDetailList, Members: &m_TrustedAdvisorResourceDetailList, Type: smithy.ShapeTypeList, Ext: &e_TrustedAdvisorResourceDetailList})
+var sTrustedAdvisorResourcesSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustedAdvisorResourcesSummary, Members: &mTrustedAdvisorResourcesSummary, Type: smithy.ShapeTypeStructure, Ext: &eTrustedAdvisorResourcesSummary})
+var s_Type = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Type, Type: smithy.ShapeTypeString, Ext: &e_Type})
+var s_UploadId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UploadId, Type: smithy.ShapeTypeString, Ext: &e_UploadId})
+var sUploadIdNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUploadIdNotFound, Members: &mUploadIdNotFound, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eUploadIdNotFound})
+var s_UploadIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UploadIds, Members: &m_UploadIds, Type: smithy.ShapeTypeList, Ext: &e_UploadIds})
+var sUploadProgress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUploadProgress, Members: &mUploadProgress, Type: smithy.ShapeTypeStructure, Ext: &eUploadProgress})
+var sUploadRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUploadRange, Members: &mUploadRange, Type: smithy.ShapeTypeStructure, Ext: &eUploadRange})
+var sUploadStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUploadStatus, Members: &mUploadStatus, Type: smithy.ShapeTypeEnum, Ext: &eUploadStatus})
+var sUploadUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUploadUrl, Members: &mUploadUrl, Type: smithy.ShapeTypeStructure, Ext: &eUploadUrl})
+var s_UploadUrlList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UploadUrlList, Members: &m_UploadUrlList, Type: smithy.ShapeTypeList, Ext: &e_UploadUrlList})
+var s_ValidatedCategoryCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidatedCategoryCode, Type: smithy.ShapeTypeString, Ext: &e_ValidatedCategoryCode})
+var s_ValidatedCommunicationBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidatedCommunicationBody, Type: smithy.ShapeTypeString, Ext: &e_ValidatedCommunicationBody})
+var s_ValidatedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidatedDateTime, Type: smithy.ShapeTypeString, Ext: &e_ValidatedDateTime})
+var s_ValidatedIssueTypeString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidatedIssueTypeString, Type: smithy.ShapeTypeString, Ext: &e_ValidatedIssueTypeString})
+var s_ValidatedLanguageAvailability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidatedLanguageAvailability, Type: smithy.ShapeTypeString, Ext: &e_ValidatedLanguageAvailability})
+var s_ValidatedServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidatedServiceCode, Type: smithy.ShapeTypeString, Ext: &e_ValidatedServiceCode})
+var sAddAttachmentsToSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddAttachmentsToSetRequest, Members: &mAddAttachmentsToSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eAddAttachmentsToSetRequest})
+var sAddAttachmentsToSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddAttachmentsToSetResponse, Members: &mAddAttachmentsToSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eAddAttachmentsToSetResponse})
+var sAddCommunicationToCaseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddCommunicationToCaseRequest, Members: &mAddCommunicationToCaseRequest, Type: smithy.ShapeTypeStructure, Ext: &eAddCommunicationToCaseRequest})
+var sAddCommunicationToCaseResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddCommunicationToCaseResponse, Members: &mAddCommunicationToCaseResponse, Type: smithy.ShapeTypeStructure, Ext: &eAddCommunicationToCaseResponse})
+var sCompleteAttachmentUploadRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompleteAttachmentUploadRequest, Members: &mCompleteAttachmentUploadRequest, Type: smithy.ShapeTypeStructure, Ext: &eCompleteAttachmentUploadRequest})
+var sCompleteAttachmentUploadResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompleteAttachmentUploadResponse, Members: &mCompleteAttachmentUploadResponse, Type: smithy.ShapeTypeStructure, Ext: &eCompleteAttachmentUploadResponse})
+var sCreateCaseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCaseRequest, Members: &mCreateCaseRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateCaseRequest})
+var sCreateCaseResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCaseResponse, Members: &mCreateCaseResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateCaseResponse})
+var sDescribeAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAttachmentRequest, Members: &mDescribeAttachmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAttachmentRequest})
+var sDescribeAttachmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAttachmentResponse, Members: &mDescribeAttachmentResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAttachmentResponse})
+var sDescribeAttachmentUploadStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAttachmentUploadStatusRequest, Members: &mDescribeAttachmentUploadStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAttachmentUploadStatusRequest})
+var sDescribeAttachmentUploadStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAttachmentUploadStatusResponse, Members: &mDescribeAttachmentUploadStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAttachmentUploadStatusResponse})
+var sDescribeCasesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCasesRequest, Members: &mDescribeCasesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCasesRequest})
+var sDescribeCasesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCasesResponse, Members: &mDescribeCasesResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCasesResponse})
+var sDescribeCommunicationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCommunicationsRequest, Members: &mDescribeCommunicationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCommunicationsRequest})
+var sDescribeCommunicationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCommunicationsResponse, Members: &mDescribeCommunicationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCommunicationsResponse})
+var sDescribeCreateCaseOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCreateCaseOptionsRequest, Members: &mDescribeCreateCaseOptionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCreateCaseOptionsRequest})
+var sDescribeCreateCaseOptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCreateCaseOptionsResponse, Members: &mDescribeCreateCaseOptionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCreateCaseOptionsResponse})
+var sDescribeServicesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServicesRequest, Members: &mDescribeServicesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeServicesRequest})
+var sDescribeServicesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServicesResponse, Members: &mDescribeServicesResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeServicesResponse})
+var sDescribeSeverityLevelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSeverityLevelsRequest, Members: &mDescribeSeverityLevelsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSeverityLevelsRequest})
+var sDescribeSeverityLevelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSeverityLevelsResponse, Members: &mDescribeSeverityLevelsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSeverityLevelsResponse})
+var sDescribeSupportedLanguagesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSupportedLanguagesRequest, Members: &mDescribeSupportedLanguagesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSupportedLanguagesRequest})
+var sDescribeSupportedLanguagesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSupportedLanguagesResponse, Members: &mDescribeSupportedLanguagesResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSupportedLanguagesResponse})
+var sDescribeTrustedAdvisorCheckRefreshStatusesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustedAdvisorCheckRefreshStatusesRequest, Members: &mDescribeTrustedAdvisorCheckRefreshStatusesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTrustedAdvisorCheckRefreshStatusesRequest})
+var sDescribeTrustedAdvisorCheckRefreshStatusesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustedAdvisorCheckRefreshStatusesResponse, Members: &mDescribeTrustedAdvisorCheckRefreshStatusesResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTrustedAdvisorCheckRefreshStatusesResponse})
+var sDescribeTrustedAdvisorCheckResultRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustedAdvisorCheckResultRequest, Members: &mDescribeTrustedAdvisorCheckResultRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTrustedAdvisorCheckResultRequest})
+var sDescribeTrustedAdvisorCheckResultResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustedAdvisorCheckResultResponse, Members: &mDescribeTrustedAdvisorCheckResultResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTrustedAdvisorCheckResultResponse})
+var sDescribeTrustedAdvisorChecksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustedAdvisorChecksRequest, Members: &mDescribeTrustedAdvisorChecksRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTrustedAdvisorChecksRequest})
+var sDescribeTrustedAdvisorChecksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustedAdvisorChecksResponse, Members: &mDescribeTrustedAdvisorChecksResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTrustedAdvisorChecksResponse})
+var sDescribeTrustedAdvisorCheckSummariesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustedAdvisorCheckSummariesRequest, Members: &mDescribeTrustedAdvisorCheckSummariesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTrustedAdvisorCheckSummariesRequest})
+var sDescribeTrustedAdvisorCheckSummariesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustedAdvisorCheckSummariesResponse, Members: &mDescribeTrustedAdvisorCheckSummariesResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTrustedAdvisorCheckSummariesResponse})
+var sGetAttachmentDownloadLinkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAttachmentDownloadLinkRequest, Members: &mGetAttachmentDownloadLinkRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAttachmentDownloadLinkRequest})
+var sGetAttachmentDownloadLinkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAttachmentDownloadLinkResponse, Members: &mGetAttachmentDownloadLinkResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAttachmentDownloadLinkResponse})
+var sGetAttachmentUploadLinksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAttachmentUploadLinksRequest, Members: &mGetAttachmentUploadLinksRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAttachmentUploadLinksRequest})
+var sGetAttachmentUploadLinksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAttachmentUploadLinksResponse, Members: &mGetAttachmentUploadLinksResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAttachmentUploadLinksResponse})
+var sRefreshTrustedAdvisorCheckRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRefreshTrustedAdvisorCheckRequest, Members: &mRefreshTrustedAdvisorCheckRequest, Type: smithy.ShapeTypeStructure, Ext: &eRefreshTrustedAdvisorCheckRequest})
+var sRefreshTrustedAdvisorCheckResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRefreshTrustedAdvisorCheckResponse, Members: &mRefreshTrustedAdvisorCheckResponse, Type: smithy.ShapeTypeStructure, Ext: &eRefreshTrustedAdvisorCheckResponse})
+var sResolveCaseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolveCaseRequest, Members: &mResolveCaseRequest, Type: smithy.ShapeTypeStructure, Ext: &eResolveCaseRequest})
+var sResolveCaseResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolveCaseResponse, Members: &mResolveCaseResponse, Type: smithy.ShapeTypeStructure, Ext: &eResolveCaseResponse})
 
-var sAttachment_fileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileName", ID: &i_FileName, Type: smithy.ShapeTypeString, Ext: &ext[23]})
-var sAttachment_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_Data, Type: smithy.ShapeTypeBlob, Ext: &ext[24]})
-var sAttachmentDetails_attachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachmentId", ID: &i_AttachmentId, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var sAttachmentDetails_fileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileName", ID: &i_FileName, Type: smithy.ShapeTypeString, Ext: &ext[27]})
-var sAttachmentIdNotFound_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[30]})
-var sAttachmentLimitExceeded_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var s_Attachments_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure, Ext: &ext[34]})
-var s_AttachmentSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttachmentDetails, Members: &mAttachmentDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[36]})
-var sAttachmentSetExpired_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[38]})
-var sAttachmentSetIdNotFound_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[41]})
-var sAttachmentSetSizeLimitExceeded_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[43]})
-var sCaseCreationLimitExceeded_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[48]})
-var sCaseDetails_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Type: smithy.ShapeTypeString, Ext: &ext[50]})
-var sCaseDetails_displayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayId", ID: &i_DisplayId, Type: smithy.ShapeTypeString, Ext: &ext[51]})
-var sCaseDetails_subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subject", ID: &i_Subject, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var sCaseDetails_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &ext[53]})
-var sCaseDetails_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var sCaseDetails_categoryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categoryCode", ID: &i_CategoryCode, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var sCaseDetails_severityCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "severityCode", ID: &i_SeverityCode, Type: smithy.ShapeTypeString, Ext: &ext[56]})
-var sCaseDetails_submittedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "submittedBy", ID: &i_SubmittedBy, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var sCaseDetails_timeCreated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeCreated", ID: &i_TimeCreated, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var sCaseDetails_recentCommunications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recentCommunications", ID: &iRecentCaseCommunications, Members: &mRecentCaseCommunications, Type: smithy.ShapeTypeStructure, Ext: &ext[59]})
-var sCaseDetails_ccEmailAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ccEmailAddresses", ID: &i_CcEmailAddressList, Members: &m_CcEmailAddressList, Type: smithy.ShapeTypeList, Ext: &ext[60]})
-var sCaseDetails_language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "language", ID: &i_Language, Type: smithy.ShapeTypeString, Ext: &ext[61]})
-var s_CaseIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CaseId, Type: smithy.ShapeTypeString, Ext: &ext[64]})
-var sCaseIdNotFound_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[66]})
-var s_CaseList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCaseDetails, Members: &mCaseDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var sCategory_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_CategoryCode, Type: smithy.ShapeTypeString, Ext: &ext[71]})
-var sCategory_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CategoryName, Type: smithy.ShapeTypeString, Ext: &ext[72]})
-var s_CategoryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCategory, Members: &mCategory, Type: smithy.ShapeTypeStructure, Ext: &ext[75]})
-var s_CcEmailAddressList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CcEmailAddress, Type: smithy.ShapeTypeString, Ext: &ext[79]})
-var sCommunication_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Type: smithy.ShapeTypeString, Ext: &ext[82]})
-var sCommunication_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &i_ValidatedCommunicationBody, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var sCommunication_submittedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "submittedBy", ID: &i_SubmittedBy, Type: smithy.ShapeTypeString, Ext: &ext[84]})
-var sCommunication_timeCreated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeCreated", ID: &i_TimeCreated, Type: smithy.ShapeTypeString, Ext: &ext[85]})
-var sCommunication_attachments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachments", ID: &i_AttachmentSet, Members: &m_AttachmentSet, Type: smithy.ShapeTypeList, Ext: &ext[86]})
-var sCommunication_attachmentSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachmentSet", ID: &i_AttachmentSet, Members: &m_AttachmentSet, Type: smithy.ShapeTypeList, Ext: &ext[87]})
-var s_CommunicationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCommunication, Members: &mCommunication, Type: smithy.ShapeTypeStructure, Ext: &ext[90]})
-var sCommunicationTypeOptions_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_Type, Type: smithy.ShapeTypeString, Ext: &ext[92]})
-var sCommunicationTypeOptions_supportedHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedHours", ID: &i_SupportedHoursList, Members: &m_SupportedHoursList, Type: smithy.ShapeTypeList, Ext: &ext[93]})
-var sCommunicationTypeOptions_datesWithoutSupport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datesWithoutSupport", ID: &i_DatesWithoutSupportList, Members: &m_DatesWithoutSupportList, Type: smithy.ShapeTypeList, Ext: &ext[94]})
-var s_CommunicationTypeOptionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCommunicationTypeOptions, Members: &mCommunicationTypeOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[96]})
-var sCompletedUpload_partIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "partIndex", ID: &i_FieldIntegerValue, Type: smithy.ShapeTypeInteger, Ext: &ext[98]})
-var sCompletedUpload_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &i_ETag, Type: smithy.ShapeTypeString, Ext: &ext[99]})
-var s_CompletedUploadList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCompletedUpload, Members: &mCompletedUpload, Type: smithy.ShapeTypeStructure, Ext: &ext[101]})
-var sDateInterval_startDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startDateTime", ID: &i_ValidatedDateTime, Type: smithy.ShapeTypeString, Ext: &ext[106]})
-var sDateInterval_endDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endDateTime", ID: &i_ValidatedDateTime, Type: smithy.ShapeTypeString, Ext: &ext[107]})
-var s_DatesWithoutSupportList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDateInterval, Members: &mDateInterval, Type: smithy.ShapeTypeStructure, Ext: &ext[109]})
-var sDescribeAttachmentLimitExceeded_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[111]})
-var sDownloadUrl_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &i_HttpsUrl, Type: smithy.ShapeTypeString, Ext: &ext[116]})
-var sDownloadUrl_expiryDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiryDate", ID: &i_ValidatedDateTime, Type: smithy.ShapeTypeString, Ext: &ext[117]})
-var sDryRunOperationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[119]})
-var sInternalServerError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[133]})
-var sRecentCaseCommunications_communications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "communications", ID: &i_CommunicationList, Members: &m_CommunicationList, Type: smithy.ShapeTypeList, Ext: &ext[142]})
-var sRecentCaseCommunications_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[143]})
-var sService_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &ext[146]})
-var sService_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &ext[147]})
-var sService_categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categories", ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &ext[148]})
-var s_ServiceCodeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ServiceCode2, Type: smithy.ShapeTypeString, Ext: &ext[152]})
-var s_ServiceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iService, Members: &mService, Type: smithy.ShapeTypeStructure, Ext: &ext[154]})
-var sSeverityLevel_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_SeverityLevelCode, Type: smithy.ShapeTypeString, Ext: &ext[158]})
-var sSeverityLevel_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SeverityLevelName, Type: smithy.ShapeTypeString, Ext: &ext[159]})
-var s_SeverityLevelsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSeverityLevel, Members: &mSeverityLevel, Type: smithy.ShapeTypeStructure, Ext: &ext[163]})
-var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[169]})
-var sSupportedHour_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_StartTime, Type: smithy.ShapeTypeString, Ext: &ext[173]})
-var sSupportedHour_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_EndTime, Type: smithy.ShapeTypeString, Ext: &ext[174]})
-var s_SupportedHoursList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSupportedHour, Members: &mSupportedHour, Type: smithy.ShapeTypeStructure, Ext: &ext[176]})
-var sSupportedLanguage_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_Code, Type: smithy.ShapeTypeString, Ext: &ext[178]})
-var sSupportedLanguage_language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "language", ID: &i_Language, Type: smithy.ShapeTypeString, Ext: &ext[179]})
-var sSupportedLanguage_display = smithy.NewStaticSchema(smithy.StaticSchema{Member: "display", ID: &i_Display, Type: smithy.ShapeTypeString, Ext: &ext[180]})
-var s_SupportedLanguagesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSupportedLanguage, Members: &mSupportedLanguage, Type: smithy.ShapeTypeStructure, Ext: &ext[182]})
-var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_AvailabilityErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[184]})
-var sThrottlingException_throttlingReasons = smithy.NewStaticSchema(smithy.StaticSchema{Member: "throttlingReasons", ID: &i_ThrottlingReasonList, Members: &m_ThrottlingReasonList, Type: smithy.ShapeTypeList, Ext: &ext[185]})
-var sThrottlingReason_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_CoralAvailabilityThrottlingReason, Type: smithy.ShapeTypeString, Ext: &ext[187]})
-var sThrottlingReason_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &i_CoralAvailabilityThrottledResource, Type: smithy.ShapeTypeString, Ext: &ext[188]})
-var s_ThrottlingReasonList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iThrottlingReason, Members: &mThrottlingReason, Type: smithy.ShapeTypeStructure, Ext: &ext[190]})
-var sTrustedAdvisorCategorySpecificSummary_costOptimizing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "costOptimizing", ID: &iTrustedAdvisorCostOptimizingSummary, Members: &mTrustedAdvisorCostOptimizingSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[193]})
-var sTrustedAdvisorCheckDescription_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[195]})
-var sTrustedAdvisorCheckDescription_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[196]})
-var sTrustedAdvisorCheckDescription_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[197]})
-var sTrustedAdvisorCheckDescription_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[198]})
-var sTrustedAdvisorCheckDescription_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[199]})
-var s_TrustedAdvisorCheckList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTrustedAdvisorCheckDescription, Members: &mTrustedAdvisorCheckDescription, Type: smithy.ShapeTypeStructure, Ext: &ext[201]})
-var sTrustedAdvisorCheckRefreshStatus_checkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checkId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[203]})
-var sTrustedAdvisorCheckRefreshStatus_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[204]})
-var sTrustedAdvisorCheckRefreshStatus_millisUntilNextRefreshable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "millisUntilNextRefreshable", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[205]})
-var s_TrustedAdvisorCheckRefreshStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTrustedAdvisorCheckRefreshStatus, Members: &mTrustedAdvisorCheckRefreshStatus, Type: smithy.ShapeTypeStructure, Ext: &ext[207]})
-var sTrustedAdvisorCheckResult_checkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checkId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[209]})
-var sTrustedAdvisorCheckResult_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[210]})
-var sTrustedAdvisorCheckResult_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[211]})
-var sTrustedAdvisorCheckResult_resourcesSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourcesSummary", ID: &iTrustedAdvisorResourcesSummary, Members: &mTrustedAdvisorResourcesSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[212]})
-var sTrustedAdvisorCheckResult_categorySpecificSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categorySpecificSummary", ID: &iTrustedAdvisorCategorySpecificSummary, Members: &mTrustedAdvisorCategorySpecificSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[213]})
-var sTrustedAdvisorCheckResult_flaggedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flaggedResources", ID: &i_TrustedAdvisorResourceDetailList, Members: &m_TrustedAdvisorResourceDetailList, Type: smithy.ShapeTypeList, Ext: &ext[214]})
-var sTrustedAdvisorCheckSummary_checkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checkId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[216]})
-var sTrustedAdvisorCheckSummary_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[217]})
-var sTrustedAdvisorCheckSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[218]})
-var sTrustedAdvisorCheckSummary_hasFlaggedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hasFlaggedResources", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[219]})
-var sTrustedAdvisorCheckSummary_resourcesSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourcesSummary", ID: &iTrustedAdvisorResourcesSummary, Members: &mTrustedAdvisorResourcesSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[220]})
-var sTrustedAdvisorCheckSummary_categorySpecificSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categorySpecificSummary", ID: &iTrustedAdvisorCategorySpecificSummary, Members: &mTrustedAdvisorCategorySpecificSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[221]})
-var s_TrustedAdvisorCheckSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTrustedAdvisorCheckSummary, Members: &mTrustedAdvisorCheckSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[223]})
-var sTrustedAdvisorCostOptimizingSummary_estimatedMonthlySavings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "estimatedMonthlySavings", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &ext[225]})
-var sTrustedAdvisorCostOptimizingSummary_estimatedPercentMonthlySavings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "estimatedPercentMonthlySavings", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &ext[226]})
-var sTrustedAdvisorResourceDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[228]})
-var sTrustedAdvisorResourceDetail_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[229]})
-var sTrustedAdvisorResourceDetail_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[230]})
-var sTrustedAdvisorResourceDetail_isSuppressed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isSuppressed", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[231]})
-var sTrustedAdvisorResourceDetail_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[232]})
-var s_TrustedAdvisorResourceDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTrustedAdvisorResourceDetail, Members: &mTrustedAdvisorResourceDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[234]})
-var sTrustedAdvisorResourcesSummary_resourcesProcessed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourcesProcessed", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[236]})
-var sTrustedAdvisorResourcesSummary_resourcesFlagged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourcesFlagged", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[237]})
-var sTrustedAdvisorResourcesSummary_resourcesIgnored = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourcesIgnored", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[238]})
-var sTrustedAdvisorResourcesSummary_resourcesSuppressed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourcesSuppressed", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[239]})
-var sUploadIdNotFound_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[243]})
-var s_UploadIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_UploadId, Type: smithy.ShapeTypeString, Ext: &ext[245]})
-var sUploadProgress_totalParts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalParts", ID: &i_FieldIntegerValue, Type: smithy.ShapeTypeInteger, Ext: &ext[247]})
-var sUploadProgress_completedPartsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completedPartsCount", ID: &i_FieldIntegerValue, Type: smithy.ShapeTypeInteger, Ext: &ext[248]})
-var sUploadRange_startIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startIndex", ID: &i_StartIndex, Type: smithy.ShapeTypeInteger, Ext: &ext[250]})
-var sUploadRange_endIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endIndex", ID: &i_EndIndex, Type: smithy.ShapeTypeInteger, Ext: &ext[251]})
-var sUploadStatus_ATTACHMENT_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATTACHMENT_READY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[253]})
-var sUploadStatus_ATTACHMENT_NOT_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATTACHMENT_NOT_READY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[254]})
-var sUploadStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[255]})
-var sUploadUrl_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &i_HttpsUrl, Type: smithy.ShapeTypeString, Ext: &ext[257]})
-var sUploadUrl_partIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "partIndex", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[258]})
-var sUploadUrl_expiryDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiryDate", ID: &i_ValidatedDateTime, Type: smithy.ShapeTypeString, Ext: &ext[259]})
-var s_UploadUrlList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUploadUrl, Members: &mUploadUrl, Type: smithy.ShapeTypeStructure, Ext: &ext[261]})
-var sAddAttachmentsToSetRequest_attachmentSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachmentSetId", ID: &i_AttachmentSetId, Type: smithy.ShapeTypeString, Ext: &ext[269]})
-var sAddAttachmentsToSetRequest_attachments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachments", ID: &i_Attachments, Members: &m_Attachments, Type: smithy.ShapeTypeList, Ext: &ext[270]})
-var sAddAttachmentsToSetRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[271]})
-var sAddAttachmentsToSetResponse_attachmentSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachmentSetId", ID: &i_AttachmentSetId, Type: smithy.ShapeTypeString, Ext: &ext[273]})
-var sAddAttachmentsToSetResponse_expiryTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiryTime", ID: &i_ExpiryTime, Type: smithy.ShapeTypeString, Ext: &ext[274]})
-var sAddCommunicationToCaseRequest_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Type: smithy.ShapeTypeString, Ext: &ext[276]})
-var sAddCommunicationToCaseRequest_communicationBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "communicationBody", ID: &i_CommunicationBody, Type: smithy.ShapeTypeString, Ext: &ext[277]})
-var sAddCommunicationToCaseRequest_ccEmailAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ccEmailAddresses", ID: &i_CcEmailAddressList, Members: &m_CcEmailAddressList, Type: smithy.ShapeTypeList, Ext: &ext[278]})
-var sAddCommunicationToCaseRequest_attachmentSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachmentSetId", ID: &i_AttachmentSetId, Type: smithy.ShapeTypeString, Ext: &ext[279]})
-var sAddCommunicationToCaseRequest_uploadIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadIds", ID: &i_UploadIds, Members: &m_UploadIds, Type: smithy.ShapeTypeList, Ext: &ext[280]})
-var sAddCommunicationToCaseRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[281]})
-var sAddCommunicationToCaseResponse_result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "result", ID: &i_Result, Type: smithy.ShapeTypeBoolean, Ext: &ext[283]})
-var sCompleteAttachmentUploadRequest_uploadId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadId", ID: &i_UploadId, Type: smithy.ShapeTypeString, Ext: &ext[285]})
-var sCompleteAttachmentUploadRequest_completedUploads = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completedUploads", ID: &i_CompletedUploadList, Members: &m_CompletedUploadList, Type: smithy.ShapeTypeList, Ext: &ext[286]})
-var sCompleteAttachmentUploadRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[287]})
-var sCompleteAttachmentUploadResponse_uploadStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadStatus", ID: &iUploadStatus, Members: &mUploadStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[289]})
-var sCreateCaseRequest_subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subject", ID: &i_Subject, Type: smithy.ShapeTypeString, Ext: &ext[291]})
-var sCreateCaseRequest_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_ServiceCode2, Type: smithy.ShapeTypeString, Ext: &ext[292]})
-var sCreateCaseRequest_severityCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "severityCode", ID: &i_SeverityCode, Type: smithy.ShapeTypeString, Ext: &ext[293]})
-var sCreateCaseRequest_categoryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categoryCode", ID: &i_CategoryCode, Type: smithy.ShapeTypeString, Ext: &ext[294]})
-var sCreateCaseRequest_communicationBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "communicationBody", ID: &i_CommunicationBody, Type: smithy.ShapeTypeString, Ext: &ext[295]})
-var sCreateCaseRequest_ccEmailAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ccEmailAddresses", ID: &i_CcEmailAddressList, Members: &m_CcEmailAddressList, Type: smithy.ShapeTypeList, Ext: &ext[296]})
-var sCreateCaseRequest_language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "language", ID: &i_Language, Type: smithy.ShapeTypeString, Ext: &ext[297]})
-var sCreateCaseRequest_issueType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issueType", ID: &i_IssueType, Type: smithy.ShapeTypeString, Ext: &ext[298]})
-var sCreateCaseRequest_attachmentSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachmentSetId", ID: &i_AttachmentSetId, Type: smithy.ShapeTypeString, Ext: &ext[299]})
-var sCreateCaseRequest_uploadIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadIds", ID: &i_UploadIds, Members: &m_UploadIds, Type: smithy.ShapeTypeList, Ext: &ext[300]})
-var sCreateCaseRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[301]})
-var sCreateCaseResponse_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Type: smithy.ShapeTypeString, Ext: &ext[303]})
-var sDescribeAttachmentRequest_attachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachmentId", ID: &i_AttachmentId, Type: smithy.ShapeTypeString, Ext: &ext[305]})
-var sDescribeAttachmentRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[306]})
-var sDescribeAttachmentResponse_attachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachment", ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure, Ext: &ext[308]})
-var sDescribeAttachmentUploadStatusRequest_uploadId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadId", ID: &i_UploadId, Type: smithy.ShapeTypeString, Ext: &ext[310]})
-var sDescribeAttachmentUploadStatusRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[311]})
-var sDescribeAttachmentUploadStatusResponse_uploadStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadStatus", ID: &iUploadStatus, Members: &mUploadStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[313]})
-var sDescribeAttachmentUploadStatusResponse_fileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileName", ID: &i_FileName, Type: smithy.ShapeTypeString, Ext: &ext[314]})
-var sDescribeAttachmentUploadStatusResponse_uploadProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadProgress", ID: &iUploadProgress, Members: &mUploadProgress, Type: smithy.ShapeTypeStructure, Ext: &ext[315]})
-var sDescribeCasesRequest_caseIdList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseIdList", ID: &i_CaseIdList, Members: &m_CaseIdList, Type: smithy.ShapeTypeList, Ext: &ext[317]})
-var sDescribeCasesRequest_displayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayId", ID: &i_DisplayId, Type: smithy.ShapeTypeString, Ext: &ext[318]})
-var sDescribeCasesRequest_afterTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterTime", ID: &i_AfterTime, Type: smithy.ShapeTypeString, Ext: &ext[319]})
-var sDescribeCasesRequest_beforeTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeTime", ID: &i_BeforeTime, Type: smithy.ShapeTypeString, Ext: &ext[320]})
-var sDescribeCasesRequest_includeResolvedCases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeResolvedCases", ID: &i_IncludeResolvedCases, Type: smithy.ShapeTypeBoolean, Ext: &ext[321]})
-var sDescribeCasesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[322]})
-var sDescribeCasesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[323]})
-var sDescribeCasesRequest_language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "language", ID: &i_Language, Type: smithy.ShapeTypeString, Ext: &ext[324]})
-var sDescribeCasesRequest_includeCommunications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeCommunications", ID: &i_IncludeCommunications, Type: smithy.ShapeTypeBoolean, Ext: &ext[325]})
-var sDescribeCasesRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[326]})
-var sDescribeCasesResponse_cases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cases", ID: &i_CaseList, Members: &m_CaseList, Type: smithy.ShapeTypeList, Ext: &ext[328]})
-var sDescribeCasesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[329]})
-var sDescribeCommunicationsRequest_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Type: smithy.ShapeTypeString, Ext: &ext[331]})
-var sDescribeCommunicationsRequest_beforeTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeTime", ID: &i_BeforeTime, Type: smithy.ShapeTypeString, Ext: &ext[332]})
-var sDescribeCommunicationsRequest_afterTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterTime", ID: &i_AfterTime, Type: smithy.ShapeTypeString, Ext: &ext[333]})
-var sDescribeCommunicationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[334]})
-var sDescribeCommunicationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[335]})
-var sDescribeCommunicationsRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[336]})
-var sDescribeCommunicationsResponse_communications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "communications", ID: &i_CommunicationList, Members: &m_CommunicationList, Type: smithy.ShapeTypeList, Ext: &ext[338]})
-var sDescribeCommunicationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[339]})
-var sDescribeCreateCaseOptionsRequest_issueType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issueType", ID: &i_IssueType, Type: smithy.ShapeTypeString, Ext: &ext[341]})
-var sDescribeCreateCaseOptionsRequest_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_ServiceCode2, Type: smithy.ShapeTypeString, Ext: &ext[342]})
-var sDescribeCreateCaseOptionsRequest_language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "language", ID: &i_Language, Type: smithy.ShapeTypeString, Ext: &ext[343]})
-var sDescribeCreateCaseOptionsRequest_categoryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categoryCode", ID: &i_CategoryCode, Type: smithy.ShapeTypeString, Ext: &ext[344]})
-var sDescribeCreateCaseOptionsRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[345]})
-var sDescribeCreateCaseOptionsResponse_languageAvailability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "languageAvailability", ID: &i_ValidatedLanguageAvailability, Type: smithy.ShapeTypeString, Ext: &ext[347]})
-var sDescribeCreateCaseOptionsResponse_communicationTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "communicationTypes", ID: &i_CommunicationTypeOptionsList, Members: &m_CommunicationTypeOptionsList, Type: smithy.ShapeTypeList, Ext: &ext[348]})
-var sDescribeServicesRequest_serviceCodeList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCodeList", ID: &i_ServiceCodeList, Members: &m_ServiceCodeList, Type: smithy.ShapeTypeList, Ext: &ext[350]})
-var sDescribeServicesRequest_language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "language", ID: &i_Language, Type: smithy.ShapeTypeString, Ext: &ext[351]})
-var sDescribeServicesRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[352]})
-var sDescribeServicesResponse_services = smithy.NewStaticSchema(smithy.StaticSchema{Member: "services", ID: &i_ServiceList, Members: &m_ServiceList, Type: smithy.ShapeTypeList, Ext: &ext[354]})
-var sDescribeSeverityLevelsRequest_language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "language", ID: &i_Language, Type: smithy.ShapeTypeString, Ext: &ext[356]})
-var sDescribeSeverityLevelsRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[357]})
-var sDescribeSeverityLevelsResponse_severityLevels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "severityLevels", ID: &i_SeverityLevelsList, Members: &m_SeverityLevelsList, Type: smithy.ShapeTypeList, Ext: &ext[359]})
-var sDescribeSupportedLanguagesRequest_issueType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issueType", ID: &i_ValidatedIssueTypeString, Type: smithy.ShapeTypeString, Ext: &ext[361]})
-var sDescribeSupportedLanguagesRequest_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_ValidatedServiceCode, Type: smithy.ShapeTypeString, Ext: &ext[362]})
-var sDescribeSupportedLanguagesRequest_categoryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categoryCode", ID: &i_ValidatedCategoryCode, Type: smithy.ShapeTypeString, Ext: &ext[363]})
-var sDescribeSupportedLanguagesRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[364]})
-var sDescribeSupportedLanguagesResponse_supportedLanguages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedLanguages", ID: &i_SupportedLanguagesList, Members: &m_SupportedLanguagesList, Type: smithy.ShapeTypeList, Ext: &ext[366]})
-var sDescribeTrustedAdvisorCheckRefreshStatusesRequest_checkIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checkIds", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[368]})
-var sDescribeTrustedAdvisorCheckRefreshStatusesResponse_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_TrustedAdvisorCheckRefreshStatusList, Members: &m_TrustedAdvisorCheckRefreshStatusList, Type: smithy.ShapeTypeList, Ext: &ext[370]})
-var sDescribeTrustedAdvisorCheckResultRequest_checkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checkId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[372]})
-var sDescribeTrustedAdvisorCheckResultRequest_language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "language", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[373]})
-var sDescribeTrustedAdvisorCheckResultResponse_result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "result", ID: &iTrustedAdvisorCheckResult, Members: &mTrustedAdvisorCheckResult, Type: smithy.ShapeTypeStructure, Ext: &ext[375]})
-var sDescribeTrustedAdvisorChecksRequest_language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "language", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[377]})
-var sDescribeTrustedAdvisorChecksResponse_checks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checks", ID: &i_TrustedAdvisorCheckList, Members: &m_TrustedAdvisorCheckList, Type: smithy.ShapeTypeList, Ext: &ext[379]})
-var sDescribeTrustedAdvisorCheckSummariesRequest_checkIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checkIds", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[381]})
-var sDescribeTrustedAdvisorCheckSummariesResponse_summaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summaries", ID: &i_TrustedAdvisorCheckSummaryList, Members: &m_TrustedAdvisorCheckSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[383]})
-var sGetAttachmentDownloadLinkRequest_attachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachmentId", ID: &i_AttachmentId, Type: smithy.ShapeTypeString, Ext: &ext[385]})
-var sGetAttachmentDownloadLinkRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[386]})
-var sGetAttachmentDownloadLinkResponse_fileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileName", ID: &i_FileName, Type: smithy.ShapeTypeString, Ext: &ext[388]})
-var sGetAttachmentDownloadLinkResponse_downloadUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "downloadUrl", ID: &iDownloadUrl, Members: &mDownloadUrl, Type: smithy.ShapeTypeStructure, Ext: &ext[389]})
-var sGetAttachmentUploadLinksRequest_fileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileName", ID: &i_FileName, Type: smithy.ShapeTypeString, Ext: &ext[391]})
-var sGetAttachmentUploadLinksRequest_fileSizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSizeBytes", ID: &i_FileSize, Type: smithy.ShapeTypeLong, Ext: &ext[392]})
-var sGetAttachmentUploadLinksRequest_uploadId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadId", ID: &i_UploadId, Type: smithy.ShapeTypeString, Ext: &ext[393]})
-var sGetAttachmentUploadLinksRequest_uploadRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadRange", ID: &iUploadRange, Members: &mUploadRange, Type: smithy.ShapeTypeStructure, Ext: &ext[394]})
-var sGetAttachmentUploadLinksRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[395]})
-var sGetAttachmentUploadLinksResponse_uploadId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadId", ID: &i_UploadId, Type: smithy.ShapeTypeString, Ext: &ext[397]})
-var sGetAttachmentUploadLinksResponse_partSizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "partSizeBytes", ID: &i_PartSizeBytes, Type: smithy.ShapeTypeLong, Ext: &ext[398]})
-var sGetAttachmentUploadLinksResponse_totalParts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalParts", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[399]})
-var sGetAttachmentUploadLinksResponse_nextIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextIndex", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[400]})
-var sGetAttachmentUploadLinksResponse_uploadUrls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadUrls", ID: &i_UploadUrlList, Members: &m_UploadUrlList, Type: smithy.ShapeTypeList, Ext: &ext[401]})
-var sRefreshTrustedAdvisorCheckRequest_checkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checkId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[403]})
-var sRefreshTrustedAdvisorCheckResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTrustedAdvisorCheckRefreshStatus, Members: &mTrustedAdvisorCheckRefreshStatus, Type: smithy.ShapeTypeStructure, Ext: &ext[405]})
-var sResolveCaseRequest_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Type: smithy.ShapeTypeString, Ext: &ext[407]})
-var sResolveCaseRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[408]})
-var sResolveCaseResponse_initialCaseStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initialCaseStatus", ID: &i_CaseStatus, Type: smithy.ShapeTypeString, Ext: &ext[410]})
-var sResolveCaseResponse_finalCaseStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "finalCaseStatus", ID: &i_CaseStatus, Type: smithy.ShapeTypeString, Ext: &ext[411]})
+var sAttachment_fileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileName", ID: &i_FileName, Type: smithy.ShapeTypeString, Ext: &eAttachment_fileName})
+var sAttachment_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_Data, Type: smithy.ShapeTypeBlob, Ext: &eAttachment_data})
+var sAttachmentDetails_attachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachmentId", ID: &i_AttachmentId, Type: smithy.ShapeTypeString, Ext: &eAttachmentDetails_attachmentId})
+var sAttachmentDetails_fileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileName", ID: &i_FileName, Type: smithy.ShapeTypeString, Ext: &eAttachmentDetails_fileName})
+var sAttachmentIdNotFound_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAttachmentIdNotFound_message})
+var sAttachmentLimitExceeded_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAttachmentLimitExceeded_message})
+var s_Attachments_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure, Ext: &e_Attachments_member})
+var s_AttachmentSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttachmentDetails, Members: &mAttachmentDetails, Type: smithy.ShapeTypeStructure, Ext: &e_AttachmentSet_member})
+var sAttachmentSetExpired_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAttachmentSetExpired_message})
+var sAttachmentSetIdNotFound_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAttachmentSetIdNotFound_message})
+var sAttachmentSetSizeLimitExceeded_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAttachmentSetSizeLimitExceeded_message})
+var sCaseCreationLimitExceeded_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eCaseCreationLimitExceeded_message})
+var sCaseDetails_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Type: smithy.ShapeTypeString, Ext: &eCaseDetails_caseId})
+var sCaseDetails_displayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayId", ID: &i_DisplayId, Type: smithy.ShapeTypeString, Ext: &eCaseDetails_displayId})
+var sCaseDetails_subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subject", ID: &i_Subject, Type: smithy.ShapeTypeString, Ext: &eCaseDetails_subject})
+var sCaseDetails_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eCaseDetails_status})
+var sCaseDetails_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &eCaseDetails_serviceCode})
+var sCaseDetails_categoryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categoryCode", ID: &i_CategoryCode, Type: smithy.ShapeTypeString, Ext: &eCaseDetails_categoryCode})
+var sCaseDetails_severityCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "severityCode", ID: &i_SeverityCode, Type: smithy.ShapeTypeString, Ext: &eCaseDetails_severityCode})
+var sCaseDetails_submittedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "submittedBy", ID: &i_SubmittedBy, Type: smithy.ShapeTypeString, Ext: &eCaseDetails_submittedBy})
+var sCaseDetails_timeCreated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeCreated", ID: &i_TimeCreated, Type: smithy.ShapeTypeString, Ext: &eCaseDetails_timeCreated})
+var sCaseDetails_recentCommunications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recentCommunications", ID: &iRecentCaseCommunications, Members: &mRecentCaseCommunications, Type: smithy.ShapeTypeStructure, Ext: &eCaseDetails_recentCommunications})
+var sCaseDetails_ccEmailAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ccEmailAddresses", ID: &i_CcEmailAddressList, Members: &m_CcEmailAddressList, Type: smithy.ShapeTypeList, Ext: &eCaseDetails_ccEmailAddresses})
+var sCaseDetails_language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "language", ID: &i_Language, Type: smithy.ShapeTypeString, Ext: &eCaseDetails_language})
+var s_CaseIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CaseId, Type: smithy.ShapeTypeString, Ext: &e_CaseIdList_member})
+var sCaseIdNotFound_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eCaseIdNotFound_message})
+var s_CaseList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCaseDetails, Members: &mCaseDetails, Type: smithy.ShapeTypeStructure, Ext: &e_CaseList_member})
+var sCategory_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_CategoryCode, Type: smithy.ShapeTypeString, Ext: &eCategory_code})
+var sCategory_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CategoryName, Type: smithy.ShapeTypeString, Ext: &eCategory_name})
+var s_CategoryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCategory, Members: &mCategory, Type: smithy.ShapeTypeStructure, Ext: &e_CategoryList_member})
+var s_CcEmailAddressList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CcEmailAddress, Type: smithy.ShapeTypeString, Ext: &e_CcEmailAddressList_member})
+var sCommunication_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Type: smithy.ShapeTypeString, Ext: &eCommunication_caseId})
+var sCommunication_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &i_ValidatedCommunicationBody, Type: smithy.ShapeTypeString, Ext: &eCommunication_body})
+var sCommunication_submittedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "submittedBy", ID: &i_SubmittedBy, Type: smithy.ShapeTypeString, Ext: &eCommunication_submittedBy})
+var sCommunication_timeCreated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeCreated", ID: &i_TimeCreated, Type: smithy.ShapeTypeString, Ext: &eCommunication_timeCreated})
+var sCommunication_attachments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachments", ID: &i_AttachmentSet, Members: &m_AttachmentSet, Type: smithy.ShapeTypeList, Ext: &eCommunication_attachments})
+var sCommunication_attachmentSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachmentSet", ID: &i_AttachmentSet, Members: &m_AttachmentSet, Type: smithy.ShapeTypeList, Ext: &eCommunication_attachmentSet})
+var s_CommunicationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCommunication, Members: &mCommunication, Type: smithy.ShapeTypeStructure, Ext: &e_CommunicationList_member})
+var sCommunicationTypeOptions_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_Type, Type: smithy.ShapeTypeString, Ext: &eCommunicationTypeOptions_type})
+var sCommunicationTypeOptions_supportedHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedHours", ID: &i_SupportedHoursList, Members: &m_SupportedHoursList, Type: smithy.ShapeTypeList, Ext: &eCommunicationTypeOptions_supportedHours})
+var sCommunicationTypeOptions_datesWithoutSupport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datesWithoutSupport", ID: &i_DatesWithoutSupportList, Members: &m_DatesWithoutSupportList, Type: smithy.ShapeTypeList, Ext: &eCommunicationTypeOptions_datesWithoutSupport})
+var s_CommunicationTypeOptionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCommunicationTypeOptions, Members: &mCommunicationTypeOptions, Type: smithy.ShapeTypeStructure, Ext: &e_CommunicationTypeOptionsList_member})
+var sCompletedUpload_partIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "partIndex", ID: &i_FieldIntegerValue, Type: smithy.ShapeTypeInteger, Ext: &eCompletedUpload_partIndex})
+var sCompletedUpload_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &i_ETag, Type: smithy.ShapeTypeString, Ext: &eCompletedUpload_eTag})
+var s_CompletedUploadList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCompletedUpload, Members: &mCompletedUpload, Type: smithy.ShapeTypeStructure, Ext: &e_CompletedUploadList_member})
+var sDateInterval_startDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startDateTime", ID: &i_ValidatedDateTime, Type: smithy.ShapeTypeString, Ext: &eDateInterval_startDateTime})
+var sDateInterval_endDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endDateTime", ID: &i_ValidatedDateTime, Type: smithy.ShapeTypeString, Ext: &eDateInterval_endDateTime})
+var s_DatesWithoutSupportList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDateInterval, Members: &mDateInterval, Type: smithy.ShapeTypeStructure, Ext: &e_DatesWithoutSupportList_member})
+var sDescribeAttachmentLimitExceeded_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eDescribeAttachmentLimitExceeded_message})
+var sDownloadUrl_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &i_HttpsUrl, Type: smithy.ShapeTypeString, Ext: &eDownloadUrl_url})
+var sDownloadUrl_expiryDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiryDate", ID: &i_ValidatedDateTime, Type: smithy.ShapeTypeString, Ext: &eDownloadUrl_expiryDate})
+var sDryRunOperationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eDryRunOperationException_message})
+var sInternalServerError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerError_message})
+var sRecentCaseCommunications_communications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "communications", ID: &i_CommunicationList, Members: &m_CommunicationList, Type: smithy.ShapeTypeList, Ext: &eRecentCaseCommunications_communications})
+var sRecentCaseCommunications_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eRecentCaseCommunications_nextToken})
+var sService_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &eService_code})
+var sService_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &eService_name})
+var sService_categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categories", ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &eService_categories})
+var s_ServiceCodeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ServiceCode2, Type: smithy.ShapeTypeString, Ext: &e_ServiceCodeList_member})
+var s_ServiceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iService, Members: &mService, Type: smithy.ShapeTypeStructure, Ext: &e_ServiceList_member})
+var sSeverityLevel_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_SeverityLevelCode, Type: smithy.ShapeTypeString, Ext: &eSeverityLevel_code})
+var sSeverityLevel_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SeverityLevelName, Type: smithy.ShapeTypeString, Ext: &eSeverityLevel_name})
+var s_SeverityLevelsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSeverityLevel, Members: &mSeverityLevel, Type: smithy.ShapeTypeStructure, Ext: &e_SeverityLevelsList_member})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_StringList_member})
+var sSupportedHour_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_StartTime, Type: smithy.ShapeTypeString, Ext: &eSupportedHour_startTime})
+var sSupportedHour_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_EndTime, Type: smithy.ShapeTypeString, Ext: &eSupportedHour_endTime})
+var s_SupportedHoursList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSupportedHour, Members: &mSupportedHour, Type: smithy.ShapeTypeStructure, Ext: &e_SupportedHoursList_member})
+var sSupportedLanguage_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_Code, Type: smithy.ShapeTypeString, Ext: &eSupportedLanguage_code})
+var sSupportedLanguage_language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "language", ID: &i_Language, Type: smithy.ShapeTypeString, Ext: &eSupportedLanguage_language})
+var sSupportedLanguage_display = smithy.NewStaticSchema(smithy.StaticSchema{Member: "display", ID: &i_Display, Type: smithy.ShapeTypeString, Ext: &eSupportedLanguage_display})
+var s_SupportedLanguagesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSupportedLanguage, Members: &mSupportedLanguage, Type: smithy.ShapeTypeStructure, Ext: &e_SupportedLanguagesList_member})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_AvailabilityErrorMessage, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sThrottlingException_throttlingReasons = smithy.NewStaticSchema(smithy.StaticSchema{Member: "throttlingReasons", ID: &i_ThrottlingReasonList, Members: &m_ThrottlingReasonList, Type: smithy.ShapeTypeList, Ext: &eThrottlingException_throttlingReasons})
+var sThrottlingReason_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_CoralAvailabilityThrottlingReason, Type: smithy.ShapeTypeString, Ext: &eThrottlingReason_reason})
+var sThrottlingReason_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &i_CoralAvailabilityThrottledResource, Type: smithy.ShapeTypeString, Ext: &eThrottlingReason_resource})
+var s_ThrottlingReasonList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iThrottlingReason, Members: &mThrottlingReason, Type: smithy.ShapeTypeStructure, Ext: &e_ThrottlingReasonList_member})
+var sTrustedAdvisorCategorySpecificSummary_costOptimizing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "costOptimizing", ID: &iTrustedAdvisorCostOptimizingSummary, Members: &mTrustedAdvisorCostOptimizingSummary, Type: smithy.ShapeTypeStructure, Ext: &eTrustedAdvisorCategorySpecificSummary_costOptimizing})
+var sTrustedAdvisorCheckDescription_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTrustedAdvisorCheckDescription_id})
+var sTrustedAdvisorCheckDescription_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTrustedAdvisorCheckDescription_name})
+var sTrustedAdvisorCheckDescription_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTrustedAdvisorCheckDescription_description})
+var sTrustedAdvisorCheckDescription_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTrustedAdvisorCheckDescription_category})
+var sTrustedAdvisorCheckDescription_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eTrustedAdvisorCheckDescription_metadata})
+var s_TrustedAdvisorCheckList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTrustedAdvisorCheckDescription, Members: &mTrustedAdvisorCheckDescription, Type: smithy.ShapeTypeStructure, Ext: &e_TrustedAdvisorCheckList_member})
+var sTrustedAdvisorCheckRefreshStatus_checkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checkId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTrustedAdvisorCheckRefreshStatus_checkId})
+var sTrustedAdvisorCheckRefreshStatus_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTrustedAdvisorCheckRefreshStatus_status})
+var sTrustedAdvisorCheckRefreshStatus_millisUntilNextRefreshable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "millisUntilNextRefreshable", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eTrustedAdvisorCheckRefreshStatus_millisUntilNextRefreshable})
+var s_TrustedAdvisorCheckRefreshStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTrustedAdvisorCheckRefreshStatus, Members: &mTrustedAdvisorCheckRefreshStatus, Type: smithy.ShapeTypeStructure, Ext: &e_TrustedAdvisorCheckRefreshStatusList_member})
+var sTrustedAdvisorCheckResult_checkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checkId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTrustedAdvisorCheckResult_checkId})
+var sTrustedAdvisorCheckResult_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTrustedAdvisorCheckResult_timestamp})
+var sTrustedAdvisorCheckResult_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTrustedAdvisorCheckResult_status})
+var sTrustedAdvisorCheckResult_resourcesSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourcesSummary", ID: &iTrustedAdvisorResourcesSummary, Members: &mTrustedAdvisorResourcesSummary, Type: smithy.ShapeTypeStructure, Ext: &eTrustedAdvisorCheckResult_resourcesSummary})
+var sTrustedAdvisorCheckResult_categorySpecificSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categorySpecificSummary", ID: &iTrustedAdvisorCategorySpecificSummary, Members: &mTrustedAdvisorCategorySpecificSummary, Type: smithy.ShapeTypeStructure, Ext: &eTrustedAdvisorCheckResult_categorySpecificSummary})
+var sTrustedAdvisorCheckResult_flaggedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flaggedResources", ID: &i_TrustedAdvisorResourceDetailList, Members: &m_TrustedAdvisorResourceDetailList, Type: smithy.ShapeTypeList, Ext: &eTrustedAdvisorCheckResult_flaggedResources})
+var sTrustedAdvisorCheckSummary_checkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checkId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTrustedAdvisorCheckSummary_checkId})
+var sTrustedAdvisorCheckSummary_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTrustedAdvisorCheckSummary_timestamp})
+var sTrustedAdvisorCheckSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTrustedAdvisorCheckSummary_status})
+var sTrustedAdvisorCheckSummary_hasFlaggedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hasFlaggedResources", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eTrustedAdvisorCheckSummary_hasFlaggedResources})
+var sTrustedAdvisorCheckSummary_resourcesSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourcesSummary", ID: &iTrustedAdvisorResourcesSummary, Members: &mTrustedAdvisorResourcesSummary, Type: smithy.ShapeTypeStructure, Ext: &eTrustedAdvisorCheckSummary_resourcesSummary})
+var sTrustedAdvisorCheckSummary_categorySpecificSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categorySpecificSummary", ID: &iTrustedAdvisorCategorySpecificSummary, Members: &mTrustedAdvisorCategorySpecificSummary, Type: smithy.ShapeTypeStructure, Ext: &eTrustedAdvisorCheckSummary_categorySpecificSummary})
+var s_TrustedAdvisorCheckSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTrustedAdvisorCheckSummary, Members: &mTrustedAdvisorCheckSummary, Type: smithy.ShapeTypeStructure, Ext: &e_TrustedAdvisorCheckSummaryList_member})
+var sTrustedAdvisorCostOptimizingSummary_estimatedMonthlySavings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "estimatedMonthlySavings", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eTrustedAdvisorCostOptimizingSummary_estimatedMonthlySavings})
+var sTrustedAdvisorCostOptimizingSummary_estimatedPercentMonthlySavings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "estimatedPercentMonthlySavings", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eTrustedAdvisorCostOptimizingSummary_estimatedPercentMonthlySavings})
+var sTrustedAdvisorResourceDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTrustedAdvisorResourceDetail_status})
+var sTrustedAdvisorResourceDetail_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTrustedAdvisorResourceDetail_region})
+var sTrustedAdvisorResourceDetail_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTrustedAdvisorResourceDetail_resourceId})
+var sTrustedAdvisorResourceDetail_isSuppressed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isSuppressed", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eTrustedAdvisorResourceDetail_isSuppressed})
+var sTrustedAdvisorResourceDetail_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eTrustedAdvisorResourceDetail_metadata})
+var s_TrustedAdvisorResourceDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTrustedAdvisorResourceDetail, Members: &mTrustedAdvisorResourceDetail, Type: smithy.ShapeTypeStructure, Ext: &e_TrustedAdvisorResourceDetailList_member})
+var sTrustedAdvisorResourcesSummary_resourcesProcessed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourcesProcessed", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eTrustedAdvisorResourcesSummary_resourcesProcessed})
+var sTrustedAdvisorResourcesSummary_resourcesFlagged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourcesFlagged", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eTrustedAdvisorResourcesSummary_resourcesFlagged})
+var sTrustedAdvisorResourcesSummary_resourcesIgnored = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourcesIgnored", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eTrustedAdvisorResourcesSummary_resourcesIgnored})
+var sTrustedAdvisorResourcesSummary_resourcesSuppressed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourcesSuppressed", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eTrustedAdvisorResourcesSummary_resourcesSuppressed})
+var sUploadIdNotFound_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eUploadIdNotFound_message})
+var s_UploadIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_UploadId, Type: smithy.ShapeTypeString, Ext: &e_UploadIds_member})
+var sUploadProgress_totalParts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalParts", ID: &i_FieldIntegerValue, Type: smithy.ShapeTypeInteger, Ext: &eUploadProgress_totalParts})
+var sUploadProgress_completedPartsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completedPartsCount", ID: &i_FieldIntegerValue, Type: smithy.ShapeTypeInteger, Ext: &eUploadProgress_completedPartsCount})
+var sUploadRange_startIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startIndex", ID: &i_StartIndex, Type: smithy.ShapeTypeInteger, Ext: &eUploadRange_startIndex})
+var sUploadRange_endIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endIndex", ID: &i_EndIndex, Type: smithy.ShapeTypeInteger, Ext: &eUploadRange_endIndex})
+var sUploadStatus_ATTACHMENT_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATTACHMENT_READY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUploadStatus_ATTACHMENT_READY})
+var sUploadStatus_ATTACHMENT_NOT_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATTACHMENT_NOT_READY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUploadStatus_ATTACHMENT_NOT_READY})
+var sUploadStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUploadStatus_FAILED})
+var sUploadUrl_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &i_HttpsUrl, Type: smithy.ShapeTypeString, Ext: &eUploadUrl_url})
+var sUploadUrl_partIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "partIndex", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eUploadUrl_partIndex})
+var sUploadUrl_expiryDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiryDate", ID: &i_ValidatedDateTime, Type: smithy.ShapeTypeString, Ext: &eUploadUrl_expiryDate})
+var s_UploadUrlList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUploadUrl, Members: &mUploadUrl, Type: smithy.ShapeTypeStructure, Ext: &e_UploadUrlList_member})
+var sAddAttachmentsToSetRequest_attachmentSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachmentSetId", ID: &i_AttachmentSetId, Type: smithy.ShapeTypeString, Ext: &eAddAttachmentsToSetRequest_attachmentSetId})
+var sAddAttachmentsToSetRequest_attachments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachments", ID: &i_Attachments, Members: &m_Attachments, Type: smithy.ShapeTypeList, Ext: &eAddAttachmentsToSetRequest_attachments})
+var sAddAttachmentsToSetRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eAddAttachmentsToSetRequest_dryRun})
+var sAddAttachmentsToSetResponse_attachmentSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachmentSetId", ID: &i_AttachmentSetId, Type: smithy.ShapeTypeString, Ext: &eAddAttachmentsToSetResponse_attachmentSetId})
+var sAddAttachmentsToSetResponse_expiryTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiryTime", ID: &i_ExpiryTime, Type: smithy.ShapeTypeString, Ext: &eAddAttachmentsToSetResponse_expiryTime})
+var sAddCommunicationToCaseRequest_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Type: smithy.ShapeTypeString, Ext: &eAddCommunicationToCaseRequest_caseId})
+var sAddCommunicationToCaseRequest_communicationBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "communicationBody", ID: &i_CommunicationBody, Type: smithy.ShapeTypeString, Ext: &eAddCommunicationToCaseRequest_communicationBody})
+var sAddCommunicationToCaseRequest_ccEmailAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ccEmailAddresses", ID: &i_CcEmailAddressList, Members: &m_CcEmailAddressList, Type: smithy.ShapeTypeList, Ext: &eAddCommunicationToCaseRequest_ccEmailAddresses})
+var sAddCommunicationToCaseRequest_attachmentSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachmentSetId", ID: &i_AttachmentSetId, Type: smithy.ShapeTypeString, Ext: &eAddCommunicationToCaseRequest_attachmentSetId})
+var sAddCommunicationToCaseRequest_uploadIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadIds", ID: &i_UploadIds, Members: &m_UploadIds, Type: smithy.ShapeTypeList, Ext: &eAddCommunicationToCaseRequest_uploadIds})
+var sAddCommunicationToCaseRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eAddCommunicationToCaseRequest_dryRun})
+var sAddCommunicationToCaseResponse_result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "result", ID: &i_Result, Type: smithy.ShapeTypeBoolean, Ext: &eAddCommunicationToCaseResponse_result})
+var sCompleteAttachmentUploadRequest_uploadId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadId", ID: &i_UploadId, Type: smithy.ShapeTypeString, Ext: &eCompleteAttachmentUploadRequest_uploadId})
+var sCompleteAttachmentUploadRequest_completedUploads = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completedUploads", ID: &i_CompletedUploadList, Members: &m_CompletedUploadList, Type: smithy.ShapeTypeList, Ext: &eCompleteAttachmentUploadRequest_completedUploads})
+var sCompleteAttachmentUploadRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eCompleteAttachmentUploadRequest_dryRun})
+var sCompleteAttachmentUploadResponse_uploadStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadStatus", ID: &iUploadStatus, Members: &mUploadStatus, Type: smithy.ShapeTypeEnum, Ext: &eCompleteAttachmentUploadResponse_uploadStatus})
+var sCreateCaseRequest_subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subject", ID: &i_Subject, Type: smithy.ShapeTypeString, Ext: &eCreateCaseRequest_subject})
+var sCreateCaseRequest_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_ServiceCode2, Type: smithy.ShapeTypeString, Ext: &eCreateCaseRequest_serviceCode})
+var sCreateCaseRequest_severityCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "severityCode", ID: &i_SeverityCode, Type: smithy.ShapeTypeString, Ext: &eCreateCaseRequest_severityCode})
+var sCreateCaseRequest_categoryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categoryCode", ID: &i_CategoryCode, Type: smithy.ShapeTypeString, Ext: &eCreateCaseRequest_categoryCode})
+var sCreateCaseRequest_communicationBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "communicationBody", ID: &i_CommunicationBody, Type: smithy.ShapeTypeString, Ext: &eCreateCaseRequest_communicationBody})
+var sCreateCaseRequest_ccEmailAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ccEmailAddresses", ID: &i_CcEmailAddressList, Members: &m_CcEmailAddressList, Type: smithy.ShapeTypeList, Ext: &eCreateCaseRequest_ccEmailAddresses})
+var sCreateCaseRequest_language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "language", ID: &i_Language, Type: smithy.ShapeTypeString, Ext: &eCreateCaseRequest_language})
+var sCreateCaseRequest_issueType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issueType", ID: &i_IssueType, Type: smithy.ShapeTypeString, Ext: &eCreateCaseRequest_issueType})
+var sCreateCaseRequest_attachmentSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachmentSetId", ID: &i_AttachmentSetId, Type: smithy.ShapeTypeString, Ext: &eCreateCaseRequest_attachmentSetId})
+var sCreateCaseRequest_uploadIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadIds", ID: &i_UploadIds, Members: &m_UploadIds, Type: smithy.ShapeTypeList, Ext: &eCreateCaseRequest_uploadIds})
+var sCreateCaseRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eCreateCaseRequest_dryRun})
+var sCreateCaseResponse_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Type: smithy.ShapeTypeString, Ext: &eCreateCaseResponse_caseId})
+var sDescribeAttachmentRequest_attachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachmentId", ID: &i_AttachmentId, Type: smithy.ShapeTypeString, Ext: &eDescribeAttachmentRequest_attachmentId})
+var sDescribeAttachmentRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeAttachmentRequest_dryRun})
+var sDescribeAttachmentResponse_attachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachment", ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAttachmentResponse_attachment})
+var sDescribeAttachmentUploadStatusRequest_uploadId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadId", ID: &i_UploadId, Type: smithy.ShapeTypeString, Ext: &eDescribeAttachmentUploadStatusRequest_uploadId})
+var sDescribeAttachmentUploadStatusRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeAttachmentUploadStatusRequest_dryRun})
+var sDescribeAttachmentUploadStatusResponse_uploadStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadStatus", ID: &iUploadStatus, Members: &mUploadStatus, Type: smithy.ShapeTypeEnum, Ext: &eDescribeAttachmentUploadStatusResponse_uploadStatus})
+var sDescribeAttachmentUploadStatusResponse_fileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileName", ID: &i_FileName, Type: smithy.ShapeTypeString, Ext: &eDescribeAttachmentUploadStatusResponse_fileName})
+var sDescribeAttachmentUploadStatusResponse_uploadProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadProgress", ID: &iUploadProgress, Members: &mUploadProgress, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAttachmentUploadStatusResponse_uploadProgress})
+var sDescribeCasesRequest_caseIdList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseIdList", ID: &i_CaseIdList, Members: &m_CaseIdList, Type: smithy.ShapeTypeList, Ext: &eDescribeCasesRequest_caseIdList})
+var sDescribeCasesRequest_displayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayId", ID: &i_DisplayId, Type: smithy.ShapeTypeString, Ext: &eDescribeCasesRequest_displayId})
+var sDescribeCasesRequest_afterTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterTime", ID: &i_AfterTime, Type: smithy.ShapeTypeString, Ext: &eDescribeCasesRequest_afterTime})
+var sDescribeCasesRequest_beforeTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeTime", ID: &i_BeforeTime, Type: smithy.ShapeTypeString, Ext: &eDescribeCasesRequest_beforeTime})
+var sDescribeCasesRequest_includeResolvedCases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeResolvedCases", ID: &i_IncludeResolvedCases, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeCasesRequest_includeResolvedCases})
+var sDescribeCasesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeCasesRequest_nextToken})
+var sDescribeCasesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eDescribeCasesRequest_maxResults})
+var sDescribeCasesRequest_language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "language", ID: &i_Language, Type: smithy.ShapeTypeString, Ext: &eDescribeCasesRequest_language})
+var sDescribeCasesRequest_includeCommunications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeCommunications", ID: &i_IncludeCommunications, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeCasesRequest_includeCommunications})
+var sDescribeCasesRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeCasesRequest_dryRun})
+var sDescribeCasesResponse_cases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cases", ID: &i_CaseList, Members: &m_CaseList, Type: smithy.ShapeTypeList, Ext: &eDescribeCasesResponse_cases})
+var sDescribeCasesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeCasesResponse_nextToken})
+var sDescribeCommunicationsRequest_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Type: smithy.ShapeTypeString, Ext: &eDescribeCommunicationsRequest_caseId})
+var sDescribeCommunicationsRequest_beforeTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeTime", ID: &i_BeforeTime, Type: smithy.ShapeTypeString, Ext: &eDescribeCommunicationsRequest_beforeTime})
+var sDescribeCommunicationsRequest_afterTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterTime", ID: &i_AfterTime, Type: smithy.ShapeTypeString, Ext: &eDescribeCommunicationsRequest_afterTime})
+var sDescribeCommunicationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeCommunicationsRequest_nextToken})
+var sDescribeCommunicationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eDescribeCommunicationsRequest_maxResults})
+var sDescribeCommunicationsRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeCommunicationsRequest_dryRun})
+var sDescribeCommunicationsResponse_communications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "communications", ID: &i_CommunicationList, Members: &m_CommunicationList, Type: smithy.ShapeTypeList, Ext: &eDescribeCommunicationsResponse_communications})
+var sDescribeCommunicationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeCommunicationsResponse_nextToken})
+var sDescribeCreateCaseOptionsRequest_issueType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issueType", ID: &i_IssueType, Type: smithy.ShapeTypeString, Ext: &eDescribeCreateCaseOptionsRequest_issueType})
+var sDescribeCreateCaseOptionsRequest_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_ServiceCode2, Type: smithy.ShapeTypeString, Ext: &eDescribeCreateCaseOptionsRequest_serviceCode})
+var sDescribeCreateCaseOptionsRequest_language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "language", ID: &i_Language, Type: smithy.ShapeTypeString, Ext: &eDescribeCreateCaseOptionsRequest_language})
+var sDescribeCreateCaseOptionsRequest_categoryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categoryCode", ID: &i_CategoryCode, Type: smithy.ShapeTypeString, Ext: &eDescribeCreateCaseOptionsRequest_categoryCode})
+var sDescribeCreateCaseOptionsRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeCreateCaseOptionsRequest_dryRun})
+var sDescribeCreateCaseOptionsResponse_languageAvailability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "languageAvailability", ID: &i_ValidatedLanguageAvailability, Type: smithy.ShapeTypeString, Ext: &eDescribeCreateCaseOptionsResponse_languageAvailability})
+var sDescribeCreateCaseOptionsResponse_communicationTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "communicationTypes", ID: &i_CommunicationTypeOptionsList, Members: &m_CommunicationTypeOptionsList, Type: smithy.ShapeTypeList, Ext: &eDescribeCreateCaseOptionsResponse_communicationTypes})
+var sDescribeServicesRequest_serviceCodeList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCodeList", ID: &i_ServiceCodeList, Members: &m_ServiceCodeList, Type: smithy.ShapeTypeList, Ext: &eDescribeServicesRequest_serviceCodeList})
+var sDescribeServicesRequest_language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "language", ID: &i_Language, Type: smithy.ShapeTypeString, Ext: &eDescribeServicesRequest_language})
+var sDescribeServicesRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeServicesRequest_dryRun})
+var sDescribeServicesResponse_services = smithy.NewStaticSchema(smithy.StaticSchema{Member: "services", ID: &i_ServiceList, Members: &m_ServiceList, Type: smithy.ShapeTypeList, Ext: &eDescribeServicesResponse_services})
+var sDescribeSeverityLevelsRequest_language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "language", ID: &i_Language, Type: smithy.ShapeTypeString, Ext: &eDescribeSeverityLevelsRequest_language})
+var sDescribeSeverityLevelsRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeSeverityLevelsRequest_dryRun})
+var sDescribeSeverityLevelsResponse_severityLevels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "severityLevels", ID: &i_SeverityLevelsList, Members: &m_SeverityLevelsList, Type: smithy.ShapeTypeList, Ext: &eDescribeSeverityLevelsResponse_severityLevels})
+var sDescribeSupportedLanguagesRequest_issueType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issueType", ID: &i_ValidatedIssueTypeString, Type: smithy.ShapeTypeString, Ext: &eDescribeSupportedLanguagesRequest_issueType})
+var sDescribeSupportedLanguagesRequest_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_ValidatedServiceCode, Type: smithy.ShapeTypeString, Ext: &eDescribeSupportedLanguagesRequest_serviceCode})
+var sDescribeSupportedLanguagesRequest_categoryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categoryCode", ID: &i_ValidatedCategoryCode, Type: smithy.ShapeTypeString, Ext: &eDescribeSupportedLanguagesRequest_categoryCode})
+var sDescribeSupportedLanguagesRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeSupportedLanguagesRequest_dryRun})
+var sDescribeSupportedLanguagesResponse_supportedLanguages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedLanguages", ID: &i_SupportedLanguagesList, Members: &m_SupportedLanguagesList, Type: smithy.ShapeTypeList, Ext: &eDescribeSupportedLanguagesResponse_supportedLanguages})
+var sDescribeTrustedAdvisorCheckRefreshStatusesRequest_checkIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checkIds", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eDescribeTrustedAdvisorCheckRefreshStatusesRequest_checkIds})
+var sDescribeTrustedAdvisorCheckRefreshStatusesResponse_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_TrustedAdvisorCheckRefreshStatusList, Members: &m_TrustedAdvisorCheckRefreshStatusList, Type: smithy.ShapeTypeList, Ext: &eDescribeTrustedAdvisorCheckRefreshStatusesResponse_statuses})
+var sDescribeTrustedAdvisorCheckResultRequest_checkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checkId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeTrustedAdvisorCheckResultRequest_checkId})
+var sDescribeTrustedAdvisorCheckResultRequest_language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "language", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeTrustedAdvisorCheckResultRequest_language})
+var sDescribeTrustedAdvisorCheckResultResponse_result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "result", ID: &iTrustedAdvisorCheckResult, Members: &mTrustedAdvisorCheckResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTrustedAdvisorCheckResultResponse_result})
+var sDescribeTrustedAdvisorChecksRequest_language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "language", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeTrustedAdvisorChecksRequest_language})
+var sDescribeTrustedAdvisorChecksResponse_checks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checks", ID: &i_TrustedAdvisorCheckList, Members: &m_TrustedAdvisorCheckList, Type: smithy.ShapeTypeList, Ext: &eDescribeTrustedAdvisorChecksResponse_checks})
+var sDescribeTrustedAdvisorCheckSummariesRequest_checkIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checkIds", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eDescribeTrustedAdvisorCheckSummariesRequest_checkIds})
+var sDescribeTrustedAdvisorCheckSummariesResponse_summaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summaries", ID: &i_TrustedAdvisorCheckSummaryList, Members: &m_TrustedAdvisorCheckSummaryList, Type: smithy.ShapeTypeList, Ext: &eDescribeTrustedAdvisorCheckSummariesResponse_summaries})
+var sGetAttachmentDownloadLinkRequest_attachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachmentId", ID: &i_AttachmentId, Type: smithy.ShapeTypeString, Ext: &eGetAttachmentDownloadLinkRequest_attachmentId})
+var sGetAttachmentDownloadLinkRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eGetAttachmentDownloadLinkRequest_dryRun})
+var sGetAttachmentDownloadLinkResponse_fileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileName", ID: &i_FileName, Type: smithy.ShapeTypeString, Ext: &eGetAttachmentDownloadLinkResponse_fileName})
+var sGetAttachmentDownloadLinkResponse_downloadUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "downloadUrl", ID: &iDownloadUrl, Members: &mDownloadUrl, Type: smithy.ShapeTypeStructure, Ext: &eGetAttachmentDownloadLinkResponse_downloadUrl})
+var sGetAttachmentUploadLinksRequest_fileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileName", ID: &i_FileName, Type: smithy.ShapeTypeString, Ext: &eGetAttachmentUploadLinksRequest_fileName})
+var sGetAttachmentUploadLinksRequest_fileSizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSizeBytes", ID: &i_FileSize, Type: smithy.ShapeTypeLong, Ext: &eGetAttachmentUploadLinksRequest_fileSizeBytes})
+var sGetAttachmentUploadLinksRequest_uploadId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadId", ID: &i_UploadId, Type: smithy.ShapeTypeString, Ext: &eGetAttachmentUploadLinksRequest_uploadId})
+var sGetAttachmentUploadLinksRequest_uploadRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadRange", ID: &iUploadRange, Members: &mUploadRange, Type: smithy.ShapeTypeStructure, Ext: &eGetAttachmentUploadLinksRequest_uploadRange})
+var sGetAttachmentUploadLinksRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eGetAttachmentUploadLinksRequest_dryRun})
+var sGetAttachmentUploadLinksResponse_uploadId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadId", ID: &i_UploadId, Type: smithy.ShapeTypeString, Ext: &eGetAttachmentUploadLinksResponse_uploadId})
+var sGetAttachmentUploadLinksResponse_partSizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "partSizeBytes", ID: &i_PartSizeBytes, Type: smithy.ShapeTypeLong, Ext: &eGetAttachmentUploadLinksResponse_partSizeBytes})
+var sGetAttachmentUploadLinksResponse_totalParts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalParts", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eGetAttachmentUploadLinksResponse_totalParts})
+var sGetAttachmentUploadLinksResponse_nextIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextIndex", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eGetAttachmentUploadLinksResponse_nextIndex})
+var sGetAttachmentUploadLinksResponse_uploadUrls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadUrls", ID: &i_UploadUrlList, Members: &m_UploadUrlList, Type: smithy.ShapeTypeList, Ext: &eGetAttachmentUploadLinksResponse_uploadUrls})
+var sRefreshTrustedAdvisorCheckRequest_checkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checkId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRefreshTrustedAdvisorCheckRequest_checkId})
+var sRefreshTrustedAdvisorCheckResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTrustedAdvisorCheckRefreshStatus, Members: &mTrustedAdvisorCheckRefreshStatus, Type: smithy.ShapeTypeStructure, Ext: &eRefreshTrustedAdvisorCheckResponse_status})
+var sResolveCaseRequest_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Type: smithy.ShapeTypeString, Ext: &eResolveCaseRequest_caseId})
+var sResolveCaseRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eResolveCaseRequest_dryRun})
+var sResolveCaseResponse_initialCaseStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initialCaseStatus", ID: &i_CaseStatus, Type: smithy.ShapeTypeString, Ext: &eResolveCaseResponse_initialCaseStatus})
+var sResolveCaseResponse_finalCaseStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "finalCaseStatus", ID: &i_CaseStatus, Type: smithy.ShapeTypeString, Ext: &eResolveCaseResponse_finalCaseStatus})
 
 var AddAttachmentsToSet = &sAddAttachmentsToSet
 

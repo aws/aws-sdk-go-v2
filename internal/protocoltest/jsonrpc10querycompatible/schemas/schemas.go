@@ -7,9 +7,13 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [5]smithy.SchemaExtensions
+var (
+	eGetItem                smithy.SchemaExtensions
+	e_Json10QueryCompatible smithy.SchemaExtensions
+	eItemNotFound           smithy.SchemaExtensions
+	eGetItemInput           smithy.SchemaExtensions
+	eGetItemOutput          smithy.SchemaExtensions
+)
 
 var (
 	iGetItem                = smithy.ShapeID{Namespace: "aws.protocoltests.json", Name: "GetItem"}
@@ -23,11 +27,11 @@ var t0 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.AWSQueryCompatible{
 var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "aws.protocolstests.json#ItemNotFound",
 	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x200}
 
-var sGetItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetItem, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var s_Json10QueryCompatible = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Json10QueryCompatible, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &ext[1]})
-var sItemNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iItemNotFound, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[2]})
-var sGetItemInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetItemInput, Type: smithy.ShapeTypeStructure, Ext: &ext[3]})
-var sGetItemOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetItemOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[4]})
+var sGetItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetItem, Type: smithy.ShapeTypeOperation, Ext: &eGetItem})
+var s_Json10QueryCompatible = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Json10QueryCompatible, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &e_Json10QueryCompatible})
+var sItemNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iItemNotFound, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eItemNotFound})
+var sGetItemInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetItemInput, Type: smithy.ShapeTypeStructure, Ext: &eGetItemInput})
+var sGetItemOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetItemOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetItemOutput})
 
 var GetItem = &sGetItem
 

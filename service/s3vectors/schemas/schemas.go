@@ -7,9 +7,313 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [305]smithy.SchemaExtensions
+var (
+	eCreateIndex                                           smithy.SchemaExtensions
+	eCreateVectorBucket                                    smithy.SchemaExtensions
+	eDeleteIndex                                           smithy.SchemaExtensions
+	eDeleteVectorBucket                                    smithy.SchemaExtensions
+	eDeleteVectorBucketPolicy                              smithy.SchemaExtensions
+	eDeleteVectors                                         smithy.SchemaExtensions
+	eGetIndex                                              smithy.SchemaExtensions
+	eGetVectorBucket                                       smithy.SchemaExtensions
+	eGetVectorBucketPolicy                                 smithy.SchemaExtensions
+	eGetVectors                                            smithy.SchemaExtensions
+	eListIndexes                                           smithy.SchemaExtensions
+	eListTagsForResource                                   smithy.SchemaExtensions
+	eListVectorBuckets                                     smithy.SchemaExtensions
+	eListVectors                                           smithy.SchemaExtensions
+	ePutVectorBucketDefaultIndexMode                       smithy.SchemaExtensions
+	ePutVectorBucketPolicy                                 smithy.SchemaExtensions
+	ePutVectors                                            smithy.SchemaExtensions
+	eQueryVectors                                          smithy.SchemaExtensions
+	eTagResource                                           smithy.SchemaExtensions
+	eUntagResource                                         smithy.SchemaExtensions
+	eUpdateIndexMode                                       smithy.SchemaExtensions
+	e_S3Vectors                                            smithy.SchemaExtensions
+	eAccessDeniedException                                 smithy.SchemaExtensions
+	eAccessDeniedException_message                         smithy.SchemaExtensions
+	eConflictException                                     smithy.SchemaExtensions
+	eConflictException_message                             smithy.SchemaExtensions
+	eDataType                                              smithy.SchemaExtensions
+	eDataType_FLOAT32                                      smithy.SchemaExtensions
+	e_DeleteVectorsInputList                               smithy.SchemaExtensions
+	e_DeleteVectorsInputList_member                        smithy.SchemaExtensions
+	e_Dimension                                            smithy.SchemaExtensions
+	eDistanceMetric                                        smithy.SchemaExtensions
+	eDistanceMetric_EUCLIDEAN                              smithy.SchemaExtensions
+	eDistanceMetric_COSINE                                 smithy.SchemaExtensions
+	eEncryptionConfiguration                               smithy.SchemaExtensions
+	eEncryptionConfiguration_sseType                       smithy.SchemaExtensions
+	eEncryptionConfiguration_kmsKeyArn                     smithy.SchemaExtensions
+	e_ExceptionMessage                                     smithy.SchemaExtensions
+	e_Float32VectorData                                    smithy.SchemaExtensions
+	e_Float32VectorData_member                             smithy.SchemaExtensions
+	eGetOutputVector                                       smithy.SchemaExtensions
+	eGetOutputVector_key                                   smithy.SchemaExtensions
+	eGetOutputVector_data                                  smithy.SchemaExtensions
+	eGetOutputVector_metadata                              smithy.SchemaExtensions
+	e_GetVectorsInputList                                  smithy.SchemaExtensions
+	e_GetVectorsInputList_member                           smithy.SchemaExtensions
+	e_GetVectorsOutputList                                 smithy.SchemaExtensions
+	e_GetVectorsOutputList_member                          smithy.SchemaExtensions
+	eIndex                                                 smithy.SchemaExtensions
+	eIndex_vectorBucketName                                smithy.SchemaExtensions
+	eIndex_indexName                                       smithy.SchemaExtensions
+	eIndex_indexArn                                        smithy.SchemaExtensions
+	eIndex_creationTime                                    smithy.SchemaExtensions
+	eIndex_dataType                                        smithy.SchemaExtensions
+	eIndex_dimension                                       smithy.SchemaExtensions
+	eIndex_distanceMetric                                  smithy.SchemaExtensions
+	eIndex_metadataConfiguration                           smithy.SchemaExtensions
+	eIndex_encryptionConfiguration                         smithy.SchemaExtensions
+	eIndex_indexMode                                       smithy.SchemaExtensions
+	e_IndexArn                                             smithy.SchemaExtensions
+	eIndexMode                                             smithy.SchemaExtensions
+	eIndexMode_CLASSIC                                     smithy.SchemaExtensions
+	eIndexMode_ENHANCED                                    smithy.SchemaExtensions
+	e_IndexName                                            smithy.SchemaExtensions
+	eIndexSummary                                          smithy.SchemaExtensions
+	eIndexSummary_vectorBucketName                         smithy.SchemaExtensions
+	eIndexSummary_indexName                                smithy.SchemaExtensions
+	eIndexSummary_indexArn                                 smithy.SchemaExtensions
+	eIndexSummary_creationTime                             smithy.SchemaExtensions
+	eInternalServerException                               smithy.SchemaExtensions
+	eInternalServerException_message                       smithy.SchemaExtensions
+	eKmsDisabledException                                  smithy.SchemaExtensions
+	eKmsDisabledException_message                          smithy.SchemaExtensions
+	eKmsInvalidKeyUsageException                           smithy.SchemaExtensions
+	eKmsInvalidKeyUsageException_message                   smithy.SchemaExtensions
+	eKmsInvalidStateException                              smithy.SchemaExtensions
+	eKmsInvalidStateException_message                      smithy.SchemaExtensions
+	e_KmsKeyArn                                            smithy.SchemaExtensions
+	eKmsNotFoundException                                  smithy.SchemaExtensions
+	eKmsNotFoundException_message                          smithy.SchemaExtensions
+	e_ListIndexesMaxResults                                smithy.SchemaExtensions
+	e_ListIndexesNextToken                                 smithy.SchemaExtensions
+	e_ListIndexesOutputList                                smithy.SchemaExtensions
+	e_ListIndexesOutputList_member                         smithy.SchemaExtensions
+	e_ListIndexesPrefix                                    smithy.SchemaExtensions
+	eListOutputVector                                      smithy.SchemaExtensions
+	eListOutputVector_key                                  smithy.SchemaExtensions
+	eListOutputVector_data                                 smithy.SchemaExtensions
+	eListOutputVector_metadata                             smithy.SchemaExtensions
+	e_ListVectorBucketsMaxResults                          smithy.SchemaExtensions
+	e_ListVectorBucketsNextToken                           smithy.SchemaExtensions
+	e_ListVectorBucketsOutputList                          smithy.SchemaExtensions
+	e_ListVectorBucketsOutputList_member                   smithy.SchemaExtensions
+	e_ListVectorBucketsPrefix                              smithy.SchemaExtensions
+	e_ListVectorsMaxResults                                smithy.SchemaExtensions
+	e_ListVectorsNextToken                                 smithy.SchemaExtensions
+	e_ListVectorsOutputList                                smithy.SchemaExtensions
+	e_ListVectorsOutputList_member                         smithy.SchemaExtensions
+	e_ListVectorsSegmentCount                              smithy.SchemaExtensions
+	e_ListVectorsSegmentIndex                              smithy.SchemaExtensions
+	eMetadataConfiguration                                 smithy.SchemaExtensions
+	eMetadataConfiguration_nonFilterableMetadataKeys       smithy.SchemaExtensions
+	e_MetadataKey                                          smithy.SchemaExtensions
+	e_NonFilterableMetadataKeys                            smithy.SchemaExtensions
+	e_NonFilterableMetadataKeys_member                     smithy.SchemaExtensions
+	eNotFoundException                                     smithy.SchemaExtensions
+	eNotFoundException_message                             smithy.SchemaExtensions
+	ePutInputVector                                        smithy.SchemaExtensions
+	ePutInputVector_key                                    smithy.SchemaExtensions
+	ePutInputVector_data                                   smithy.SchemaExtensions
+	ePutInputVector_metadata                               smithy.SchemaExtensions
+	e_PutVectorsInputList                                  smithy.SchemaExtensions
+	e_PutVectorsInputList_member                           smithy.SchemaExtensions
+	eQueryOutputVector                                     smithy.SchemaExtensions
+	eQueryOutputVector_distance                            smithy.SchemaExtensions
+	eQueryOutputVector_key                                 smithy.SchemaExtensions
+	eQueryOutputVector_metadata                            smithy.SchemaExtensions
+	e_QueryVectorsNextToken                                smithy.SchemaExtensions
+	e_QueryVectorsOutputList                               smithy.SchemaExtensions
+	e_QueryVectorsOutputList_member                        smithy.SchemaExtensions
+	eRequestTimeoutException                               smithy.SchemaExtensions
+	eRequestTimeoutException_message                       smithy.SchemaExtensions
+	e_ResourceARN                                          smithy.SchemaExtensions
+	eServiceQuotaExceededException                         smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                 smithy.SchemaExtensions
+	eServiceUnavailableException                           smithy.SchemaExtensions
+	eServiceUnavailableException_message                   smithy.SchemaExtensions
+	eSseType                                               smithy.SchemaExtensions
+	eSseType_AES256                                        smithy.SchemaExtensions
+	eSseType_AWS_KMS                                       smithy.SchemaExtensions
+	e_TagKey                                               smithy.SchemaExtensions
+	e_TagKeyList                                           smithy.SchemaExtensions
+	e_TagKeyList_member                                    smithy.SchemaExtensions
+	e_TagsMap                                              smithy.SchemaExtensions
+	e_TagsMap_key                                          smithy.SchemaExtensions
+	e_TagsMap_value                                        smithy.SchemaExtensions
+	e_TagValue                                             smithy.SchemaExtensions
+	eTooManyRequestsException                              smithy.SchemaExtensions
+	eTooManyRequestsException_message                      smithy.SchemaExtensions
+	e_TopK                                                 smithy.SchemaExtensions
+	eValidationException                                   smithy.SchemaExtensions
+	eValidationException_message                           smithy.SchemaExtensions
+	eValidationException_fieldList                         smithy.SchemaExtensions
+	eValidationExceptionField                              smithy.SchemaExtensions
+	eValidationExceptionField_path                         smithy.SchemaExtensions
+	eValidationExceptionField_message                      smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                         smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member                  smithy.SchemaExtensions
+	eVectorBucket                                          smithy.SchemaExtensions
+	eVectorBucket_vectorBucketName                         smithy.SchemaExtensions
+	eVectorBucket_vectorBucketArn                          smithy.SchemaExtensions
+	eVectorBucket_creationTime                             smithy.SchemaExtensions
+	eVectorBucket_encryptionConfiguration                  smithy.SchemaExtensions
+	eVectorBucket_defaultIndexMode                         smithy.SchemaExtensions
+	e_VectorBucketArn                                      smithy.SchemaExtensions
+	e_VectorBucketName                                     smithy.SchemaExtensions
+	e_VectorBucketPolicy                                   smithy.SchemaExtensions
+	eVectorBucketSummary                                   smithy.SchemaExtensions
+	eVectorBucketSummary_vectorBucketName                  smithy.SchemaExtensions
+	eVectorBucketSummary_vectorBucketArn                   smithy.SchemaExtensions
+	eVectorBucketSummary_creationTime                      smithy.SchemaExtensions
+	eVectorData                                            smithy.SchemaExtensions
+	eVectorData_float32                                    smithy.SchemaExtensions
+	e_VectorKey                                            smithy.SchemaExtensions
+	e_VectorMetadata                                       smithy.SchemaExtensions
+	eCreateIndexInput                                      smithy.SchemaExtensions
+	eCreateIndexInput_vectorBucketName                     smithy.SchemaExtensions
+	eCreateIndexInput_vectorBucketArn                      smithy.SchemaExtensions
+	eCreateIndexInput_indexName                            smithy.SchemaExtensions
+	eCreateIndexInput_dataType                             smithy.SchemaExtensions
+	eCreateIndexInput_dimension                            smithy.SchemaExtensions
+	eCreateIndexInput_distanceMetric                       smithy.SchemaExtensions
+	eCreateIndexInput_metadataConfiguration                smithy.SchemaExtensions
+	eCreateIndexInput_encryptionConfiguration              smithy.SchemaExtensions
+	eCreateIndexInput_tags                                 smithy.SchemaExtensions
+	eCreateIndexOutput                                     smithy.SchemaExtensions
+	eCreateIndexOutput_indexArn                            smithy.SchemaExtensions
+	eCreateVectorBucketInput                               smithy.SchemaExtensions
+	eCreateVectorBucketInput_vectorBucketName              smithy.SchemaExtensions
+	eCreateVectorBucketInput_encryptionConfiguration       smithy.SchemaExtensions
+	eCreateVectorBucketInput_tags                          smithy.SchemaExtensions
+	eCreateVectorBucketOutput                              smithy.SchemaExtensions
+	eCreateVectorBucketOutput_vectorBucketArn              smithy.SchemaExtensions
+	eDeleteIndexInput                                      smithy.SchemaExtensions
+	eDeleteIndexInput_vectorBucketName                     smithy.SchemaExtensions
+	eDeleteIndexInput_indexName                            smithy.SchemaExtensions
+	eDeleteIndexInput_indexArn                             smithy.SchemaExtensions
+	eDeleteIndexOutput                                     smithy.SchemaExtensions
+	eDeleteVectorBucketInput                               smithy.SchemaExtensions
+	eDeleteVectorBucketInput_vectorBucketName              smithy.SchemaExtensions
+	eDeleteVectorBucketInput_vectorBucketArn               smithy.SchemaExtensions
+	eDeleteVectorBucketOutput                              smithy.SchemaExtensions
+	eDeleteVectorBucketPolicyInput                         smithy.SchemaExtensions
+	eDeleteVectorBucketPolicyInput_vectorBucketName        smithy.SchemaExtensions
+	eDeleteVectorBucketPolicyInput_vectorBucketArn         smithy.SchemaExtensions
+	eDeleteVectorBucketPolicyOutput                        smithy.SchemaExtensions
+	eDeleteVectorsInput                                    smithy.SchemaExtensions
+	eDeleteVectorsInput_vectorBucketName                   smithy.SchemaExtensions
+	eDeleteVectorsInput_indexName                          smithy.SchemaExtensions
+	eDeleteVectorsInput_indexArn                           smithy.SchemaExtensions
+	eDeleteVectorsInput_keys                               smithy.SchemaExtensions
+	eDeleteVectorsOutput                                   smithy.SchemaExtensions
+	eGetIndexInput                                         smithy.SchemaExtensions
+	eGetIndexInput_vectorBucketName                        smithy.SchemaExtensions
+	eGetIndexInput_indexName                               smithy.SchemaExtensions
+	eGetIndexInput_indexArn                                smithy.SchemaExtensions
+	eGetIndexOutput                                        smithy.SchemaExtensions
+	eGetIndexOutput_index                                  smithy.SchemaExtensions
+	eGetVectorBucketInput                                  smithy.SchemaExtensions
+	eGetVectorBucketInput_vectorBucketName                 smithy.SchemaExtensions
+	eGetVectorBucketInput_vectorBucketArn                  smithy.SchemaExtensions
+	eGetVectorBucketOutput                                 smithy.SchemaExtensions
+	eGetVectorBucketOutput_vectorBucket                    smithy.SchemaExtensions
+	eGetVectorBucketPolicyInput                            smithy.SchemaExtensions
+	eGetVectorBucketPolicyInput_vectorBucketName           smithy.SchemaExtensions
+	eGetVectorBucketPolicyInput_vectorBucketArn            smithy.SchemaExtensions
+	eGetVectorBucketPolicyOutput                           smithy.SchemaExtensions
+	eGetVectorBucketPolicyOutput_policy                    smithy.SchemaExtensions
+	eGetVectorsInput                                       smithy.SchemaExtensions
+	eGetVectorsInput_vectorBucketName                      smithy.SchemaExtensions
+	eGetVectorsInput_indexName                             smithy.SchemaExtensions
+	eGetVectorsInput_indexArn                              smithy.SchemaExtensions
+	eGetVectorsInput_keys                                  smithy.SchemaExtensions
+	eGetVectorsInput_returnData                            smithy.SchemaExtensions
+	eGetVectorsInput_returnMetadata                        smithy.SchemaExtensions
+	eGetVectorsOutput                                      smithy.SchemaExtensions
+	eGetVectorsOutput_vectors                              smithy.SchemaExtensions
+	eListIndexesInput                                      smithy.SchemaExtensions
+	eListIndexesInput_vectorBucketName                     smithy.SchemaExtensions
+	eListIndexesInput_vectorBucketArn                      smithy.SchemaExtensions
+	eListIndexesInput_maxResults                           smithy.SchemaExtensions
+	eListIndexesInput_nextToken                            smithy.SchemaExtensions
+	eListIndexesInput_prefix                               smithy.SchemaExtensions
+	eListIndexesOutput                                     smithy.SchemaExtensions
+	eListIndexesOutput_nextToken                           smithy.SchemaExtensions
+	eListIndexesOutput_indexes                             smithy.SchemaExtensions
+	eListTagsForResourceInput                              smithy.SchemaExtensions
+	eListTagsForResourceInput_resourceArn                  smithy.SchemaExtensions
+	eListTagsForResourceOutput                             smithy.SchemaExtensions
+	eListTagsForResourceOutput_tags                        smithy.SchemaExtensions
+	eListVectorBucketsInput                                smithy.SchemaExtensions
+	eListVectorBucketsInput_maxResults                     smithy.SchemaExtensions
+	eListVectorBucketsInput_nextToken                      smithy.SchemaExtensions
+	eListVectorBucketsInput_prefix                         smithy.SchemaExtensions
+	eListVectorBucketsOutput                               smithy.SchemaExtensions
+	eListVectorBucketsOutput_nextToken                     smithy.SchemaExtensions
+	eListVectorBucketsOutput_vectorBuckets                 smithy.SchemaExtensions
+	eListVectorsInput                                      smithy.SchemaExtensions
+	eListVectorsInput_vectorBucketName                     smithy.SchemaExtensions
+	eListVectorsInput_indexName                            smithy.SchemaExtensions
+	eListVectorsInput_indexArn                             smithy.SchemaExtensions
+	eListVectorsInput_maxResults                           smithy.SchemaExtensions
+	eListVectorsInput_nextToken                            smithy.SchemaExtensions
+	eListVectorsInput_segmentCount                         smithy.SchemaExtensions
+	eListVectorsInput_segmentIndex                         smithy.SchemaExtensions
+	eListVectorsInput_returnData                           smithy.SchemaExtensions
+	eListVectorsInput_returnMetadata                       smithy.SchemaExtensions
+	eListVectorsOutput                                     smithy.SchemaExtensions
+	eListVectorsOutput_nextToken                           smithy.SchemaExtensions
+	eListVectorsOutput_vectors                             smithy.SchemaExtensions
+	ePutVectorBucketDefaultIndexModeInput                  smithy.SchemaExtensions
+	ePutVectorBucketDefaultIndexModeInput_vectorBucketName smithy.SchemaExtensions
+	ePutVectorBucketDefaultIndexModeInput_vectorBucketArn  smithy.SchemaExtensions
+	ePutVectorBucketDefaultIndexModeInput_defaultIndexMode smithy.SchemaExtensions
+	ePutVectorBucketDefaultIndexModeOutput                 smithy.SchemaExtensions
+	ePutVectorBucketPolicyInput                            smithy.SchemaExtensions
+	ePutVectorBucketPolicyInput_vectorBucketName           smithy.SchemaExtensions
+	ePutVectorBucketPolicyInput_vectorBucketArn            smithy.SchemaExtensions
+	ePutVectorBucketPolicyInput_policy                     smithy.SchemaExtensions
+	ePutVectorBucketPolicyOutput                           smithy.SchemaExtensions
+	ePutVectorsInput                                       smithy.SchemaExtensions
+	ePutVectorsInput_vectorBucketName                      smithy.SchemaExtensions
+	ePutVectorsInput_indexName                             smithy.SchemaExtensions
+	ePutVectorsInput_indexArn                              smithy.SchemaExtensions
+	ePutVectorsInput_vectors                               smithy.SchemaExtensions
+	ePutVectorsOutput                                      smithy.SchemaExtensions
+	eQueryVectorsInput                                     smithy.SchemaExtensions
+	eQueryVectorsInput_vectorBucketName                    smithy.SchemaExtensions
+	eQueryVectorsInput_indexName                           smithy.SchemaExtensions
+	eQueryVectorsInput_indexArn                            smithy.SchemaExtensions
+	eQueryVectorsInput_topK                                smithy.SchemaExtensions
+	eQueryVectorsInput_queryVector                         smithy.SchemaExtensions
+	eQueryVectorsInput_filter                              smithy.SchemaExtensions
+	eQueryVectorsInput_queryMode                           smithy.SchemaExtensions
+	eQueryVectorsInput_returnMetadata                      smithy.SchemaExtensions
+	eQueryVectorsInput_returnDistance                      smithy.SchemaExtensions
+	eQueryVectorsInput_nextToken                           smithy.SchemaExtensions
+	eQueryVectorsOutput                                    smithy.SchemaExtensions
+	eQueryVectorsOutput_vectors                            smithy.SchemaExtensions
+	eQueryVectorsOutput_distanceMetric                     smithy.SchemaExtensions
+	eQueryVectorsOutput_nextToken                          smithy.SchemaExtensions
+	eTagResourceInput                                      smithy.SchemaExtensions
+	eTagResourceInput_resourceArn                          smithy.SchemaExtensions
+	eTagResourceInput_tags                                 smithy.SchemaExtensions
+	eTagResourceOutput                                     smithy.SchemaExtensions
+	eUntagResourceInput                                    smithy.SchemaExtensions
+	eUntagResourceInput_resourceArn                        smithy.SchemaExtensions
+	eUntagResourceInput_tagKeys                            smithy.SchemaExtensions
+	eUntagResourceOutput                                   smithy.SchemaExtensions
+	eUpdateIndexModeInput                                  smithy.SchemaExtensions
+	eUpdateIndexModeInput_vectorBucketName                 smithy.SchemaExtensions
+	eUpdateIndexModeInput_indexName                        smithy.SchemaExtensions
+	eUpdateIndexModeInput_indexArn                         smithy.SchemaExtensions
+	eUpdateIndexModeInput_indexMode                        smithy.SchemaExtensions
+	eUpdateIndexModeOutput                                 smithy.SchemaExtensions
+)
 
 var (
 	iCreateIndex                           = smithy.ShapeID{Namespace: "com.amazonaws.s3vectors", Name: "CreateIndex"}
@@ -315,312 +619,312 @@ var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourc
 var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_resourceArn, &sUntagResourceInput_tagKeys}}
 var mUpdateIndexModeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateIndexModeInput_vectorBucketName, &sUpdateIndexModeInput_indexName, &sUpdateIndexModeInput_indexArn, &sUpdateIndexModeInput_indexMode}}
 
-var sCreateIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIndex, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCreateVectorBucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVectorBucket, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sDeleteIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIndex, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sDeleteVectorBucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVectorBucket, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sDeleteVectorBucketPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVectorBucketPolicy, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sDeleteVectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVectors, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sGetIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIndex, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sGetVectorBucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVectorBucket, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sGetVectorBucketPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVectorBucketPolicy, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sGetVectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVectors, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sListIndexes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIndexes, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sListVectorBuckets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVectorBuckets, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sListVectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVectors, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sPutVectorBucketDefaultIndexMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVectorBucketDefaultIndexMode, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sPutVectorBucketPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVectorBucketPolicy, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sPutVectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVectors, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sQueryVectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryVectors, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var sUpdateIndexMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIndexMode, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &ext[20]})
-var s_S3Vectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Vectors, Type: smithy.ShapeTypeService, Ext: &ext[21]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &ext[22]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &ext[24]})
-var sDataType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataType, Members: &mDataType, Type: smithy.ShapeTypeEnum, Ext: &ext[26]})
-var s_DeleteVectorsInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeleteVectorsInputList, Members: &m_DeleteVectorsInputList, Type: smithy.ShapeTypeList, Ext: &ext[28]})
-var s_Dimension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Dimension, Type: smithy.ShapeTypeInteger, Ext: &ext[30]})
-var sDistanceMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDistanceMetric, Members: &mDistanceMetric, Type: smithy.ShapeTypeEnum, Ext: &ext[31]})
-var sEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[34]})
-var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[37]})
-var s_Float32VectorData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Float32VectorData, Members: &m_Float32VectorData, Type: smithy.ShapeTypeList, Ext: &ext[38]})
-var sGetOutputVector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOutputVector, Members: &mGetOutputVector, Type: smithy.ShapeTypeStructure, Ext: &ext[40]})
-var s_GetVectorsInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GetVectorsInputList, Members: &m_GetVectorsInputList, Type: smithy.ShapeTypeList, Ext: &ext[44]})
-var s_GetVectorsOutputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GetVectorsOutputList, Members: &m_GetVectorsOutputList, Type: smithy.ShapeTypeList, Ext: &ext[46]})
-var sIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIndex, Members: &mIndex, Type: smithy.ShapeTypeStructure, Ext: &ext[48]})
-var s_IndexArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IndexArn, Type: smithy.ShapeTypeString, Ext: &ext[59]})
-var sIndexMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIndexMode, Members: &mIndexMode, Type: smithy.ShapeTypeEnum, Ext: &ext[60]})
-var s_IndexName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IndexName, Type: smithy.ShapeTypeString, Ext: &ext[63]})
-var sIndexSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIndexSummary, Members: &mIndexSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[64]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &ext[69]})
-var sKmsDisabledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKmsDisabledException, Members: &mKmsDisabledException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &ext[71]})
-var sKmsInvalidKeyUsageException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKmsInvalidKeyUsageException, Members: &mKmsInvalidKeyUsageException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &ext[73]})
-var sKmsInvalidStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKmsInvalidStateException, Members: &mKmsInvalidStateException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &ext[75]})
-var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &ext[77]})
-var sKmsNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKmsNotFoundException, Members: &mKmsNotFoundException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &ext[78]})
-var s_ListIndexesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListIndexesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[80]})
-var s_ListIndexesNextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListIndexesNextToken, Type: smithy.ShapeTypeString, Ext: &ext[81]})
-var s_ListIndexesOutputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListIndexesOutputList, Members: &m_ListIndexesOutputList, Type: smithy.ShapeTypeList, Ext: &ext[82]})
-var s_ListIndexesPrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListIndexesPrefix, Type: smithy.ShapeTypeString, Ext: &ext[84]})
-var sListOutputVector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOutputVector, Members: &mListOutputVector, Type: smithy.ShapeTypeStructure, Ext: &ext[85]})
-var s_ListVectorBucketsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListVectorBucketsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[89]})
-var s_ListVectorBucketsNextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListVectorBucketsNextToken, Type: smithy.ShapeTypeString, Ext: &ext[90]})
-var s_ListVectorBucketsOutputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListVectorBucketsOutputList, Members: &m_ListVectorBucketsOutputList, Type: smithy.ShapeTypeList, Ext: &ext[91]})
-var s_ListVectorBucketsPrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListVectorBucketsPrefix, Type: smithy.ShapeTypeString, Ext: &ext[93]})
-var s_ListVectorsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListVectorsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[94]})
-var s_ListVectorsNextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListVectorsNextToken, Type: smithy.ShapeTypeString, Ext: &ext[95]})
-var s_ListVectorsOutputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListVectorsOutputList, Members: &m_ListVectorsOutputList, Type: smithy.ShapeTypeList, Ext: &ext[96]})
-var s_ListVectorsSegmentCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListVectorsSegmentCount, Type: smithy.ShapeTypeInteger, Ext: &ext[98]})
-var s_ListVectorsSegmentIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListVectorsSegmentIndex, Type: smithy.ShapeTypeInteger, Ext: &ext[99]})
-var sMetadataConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetadataConfiguration, Members: &mMetadataConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[100]})
-var s_MetadataKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetadataKey, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var s_NonFilterableMetadataKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonFilterableMetadataKeys, Members: &m_NonFilterableMetadataKeys, Type: smithy.ShapeTypeList, Ext: &ext[103]})
-var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &ext[105]})
-var sPutInputVector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutInputVector, Members: &mPutInputVector, Type: smithy.ShapeTypeStructure, Ext: &ext[107]})
-var s_PutVectorsInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PutVectorsInputList, Members: &m_PutVectorsInputList, Type: smithy.ShapeTypeList, Ext: &ext[111]})
-var sQueryOutputVector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryOutputVector, Members: &mQueryOutputVector, Type: smithy.ShapeTypeStructure, Ext: &ext[113]})
-var s_QueryVectorsNextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryVectorsNextToken, Type: smithy.ShapeTypeString, Ext: &ext[117]})
-var s_QueryVectorsOutputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryVectorsOutputList, Members: &m_QueryVectorsOutputList, Type: smithy.ShapeTypeList, Ext: &ext[118]})
-var sRequestTimeoutException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestTimeoutException, Members: &mRequestTimeoutException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var s_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceARN, Type: smithy.ShapeTypeString, Ext: &ext[122]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &ext[123]})
-var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &ext[125]})
-var sSseType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSseType, Members: &mSseType, Type: smithy.ShapeTypeEnum, Ext: &ext[127]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[131]})
-var s_TagsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &ext[133]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[136]})
-var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &ext[137]})
-var s_TopK = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TopK, Type: smithy.ShapeTypeInteger, Ext: &ext[139]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &ext[140]})
-var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[143]})
-var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[146]})
-var sVectorBucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVectorBucket, Members: &mVectorBucket, Type: smithy.ShapeTypeStructure, Ext: &ext[148]})
-var s_VectorBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VectorBucketArn, Type: smithy.ShapeTypeString, Ext: &ext[154]})
-var s_VectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &ext[155]})
-var s_VectorBucketPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VectorBucketPolicy, Type: smithy.ShapeTypeString, Ext: &ext[156]})
-var sVectorBucketSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVectorBucketSummary, Members: &mVectorBucketSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[157]})
-var sVectorData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVectorData, Members: &mVectorData, Type: smithy.ShapeTypeUnion, Ext: &ext[161]})
-var s_VectorKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VectorKey, Type: smithy.ShapeTypeString, Ext: &ext[163]})
-var s_VectorMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VectorMetadata, Type: smithy.ShapeTypeDocument, Ext: &ext[164]})
-var sCreateIndexInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIndexInput, Members: &mCreateIndexInput, Type: smithy.ShapeTypeStructure, Ext: &ext[165]})
-var sCreateIndexOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIndexOutput, Members: &mCreateIndexOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[175]})
-var sCreateVectorBucketInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVectorBucketInput, Members: &mCreateVectorBucketInput, Type: smithy.ShapeTypeStructure, Ext: &ext[177]})
-var sCreateVectorBucketOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVectorBucketOutput, Members: &mCreateVectorBucketOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[181]})
-var sDeleteIndexInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIndexInput, Members: &mDeleteIndexInput, Type: smithy.ShapeTypeStructure, Ext: &ext[183]})
-var sDeleteIndexOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIndexOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[187]})
-var sDeleteVectorBucketInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVectorBucketInput, Members: &mDeleteVectorBucketInput, Type: smithy.ShapeTypeStructure, Ext: &ext[188]})
-var sDeleteVectorBucketOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVectorBucketOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[191]})
-var sDeleteVectorBucketPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVectorBucketPolicyInput, Members: &mDeleteVectorBucketPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &ext[192]})
-var sDeleteVectorBucketPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVectorBucketPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[195]})
-var sDeleteVectorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVectorsInput, Members: &mDeleteVectorsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[196]})
-var sDeleteVectorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVectorsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[201]})
-var sGetIndexInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIndexInput, Members: &mGetIndexInput, Type: smithy.ShapeTypeStructure, Ext: &ext[202]})
-var sGetIndexOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIndexOutput, Members: &mGetIndexOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[206]})
-var sGetVectorBucketInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVectorBucketInput, Members: &mGetVectorBucketInput, Type: smithy.ShapeTypeStructure, Ext: &ext[208]})
-var sGetVectorBucketOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVectorBucketOutput, Members: &mGetVectorBucketOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[211]})
-var sGetVectorBucketPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVectorBucketPolicyInput, Members: &mGetVectorBucketPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &ext[213]})
-var sGetVectorBucketPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVectorBucketPolicyOutput, Members: &mGetVectorBucketPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[216]})
-var sGetVectorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVectorsInput, Members: &mGetVectorsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[218]})
-var sGetVectorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVectorsOutput, Members: &mGetVectorsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[225]})
-var sListIndexesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIndexesInput, Members: &mListIndexesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[227]})
-var sListIndexesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIndexesOutput, Members: &mListIndexesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[233]})
-var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[236]})
-var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[238]})
-var sListVectorBucketsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVectorBucketsInput, Members: &mListVectorBucketsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[240]})
-var sListVectorBucketsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVectorBucketsOutput, Members: &mListVectorBucketsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[244]})
-var sListVectorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVectorsInput, Members: &mListVectorsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[247]})
-var sListVectorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVectorsOutput, Members: &mListVectorsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[257]})
-var sPutVectorBucketDefaultIndexModeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVectorBucketDefaultIndexModeInput, Members: &mPutVectorBucketDefaultIndexModeInput, Type: smithy.ShapeTypeStructure, Ext: &ext[260]})
-var sPutVectorBucketDefaultIndexModeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVectorBucketDefaultIndexModeOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[264]})
-var sPutVectorBucketPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVectorBucketPolicyInput, Members: &mPutVectorBucketPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &ext[265]})
-var sPutVectorBucketPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVectorBucketPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[269]})
-var sPutVectorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVectorsInput, Members: &mPutVectorsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[270]})
-var sPutVectorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVectorsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[275]})
-var sQueryVectorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryVectorsInput, Members: &mQueryVectorsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[276]})
-var sQueryVectorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryVectorsOutput, Members: &mQueryVectorsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[287]})
-var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[291]})
-var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[294]})
-var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[295]})
-var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[298]})
-var sUpdateIndexModeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIndexModeInput, Members: &mUpdateIndexModeInput, Type: smithy.ShapeTypeStructure, Ext: &ext[299]})
-var sUpdateIndexModeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIndexModeOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[304]})
+var sCreateIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIndex, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateIndex})
+var sCreateVectorBucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVectorBucket, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateVectorBucket})
+var sDeleteIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIndex, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eDeleteIndex})
+var sDeleteVectorBucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVectorBucket, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDeleteVectorBucket})
+var sDeleteVectorBucketPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVectorBucketPolicy, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDeleteVectorBucketPolicy})
+var sDeleteVectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVectors, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDeleteVectors})
+var sGetIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIndex, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eGetIndex})
+var sGetVectorBucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVectorBucket, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eGetVectorBucket})
+var sGetVectorBucketPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVectorBucketPolicy, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eGetVectorBucketPolicy})
+var sGetVectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVectors, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eGetVectors})
+var sListIndexes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIndexes, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eListIndexes})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListVectorBuckets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVectorBuckets, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eListVectorBuckets})
+var sListVectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVectors, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eListVectors})
+var sPutVectorBucketDefaultIndexMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVectorBucketDefaultIndexMode, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ePutVectorBucketDefaultIndexMode})
+var sPutVectorBucketPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVectorBucketPolicy, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ePutVectorBucketPolicy})
+var sPutVectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVectors, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &ePutVectors})
+var sQueryVectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryVectors, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eQueryVectors})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateIndexMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIndexMode, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eUpdateIndexMode})
+var s_S3Vectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Vectors, Type: smithy.ShapeTypeService, Ext: &e_S3Vectors})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sDataType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataType, Members: &mDataType, Type: smithy.ShapeTypeEnum, Ext: &eDataType})
+var s_DeleteVectorsInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeleteVectorsInputList, Members: &m_DeleteVectorsInputList, Type: smithy.ShapeTypeList, Ext: &e_DeleteVectorsInputList})
+var s_Dimension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Dimension, Type: smithy.ShapeTypeInteger, Ext: &e_Dimension})
+var sDistanceMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDistanceMetric, Members: &mDistanceMetric, Type: smithy.ShapeTypeEnum, Ext: &eDistanceMetric})
+var sEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionConfiguration})
+var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &e_ExceptionMessage})
+var s_Float32VectorData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Float32VectorData, Members: &m_Float32VectorData, Type: smithy.ShapeTypeList, Ext: &e_Float32VectorData})
+var sGetOutputVector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOutputVector, Members: &mGetOutputVector, Type: smithy.ShapeTypeStructure, Ext: &eGetOutputVector})
+var s_GetVectorsInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GetVectorsInputList, Members: &m_GetVectorsInputList, Type: smithy.ShapeTypeList, Ext: &e_GetVectorsInputList})
+var s_GetVectorsOutputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GetVectorsOutputList, Members: &m_GetVectorsOutputList, Type: smithy.ShapeTypeList, Ext: &e_GetVectorsOutputList})
+var sIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIndex, Members: &mIndex, Type: smithy.ShapeTypeStructure, Ext: &eIndex})
+var s_IndexArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IndexArn, Type: smithy.ShapeTypeString, Ext: &e_IndexArn})
+var sIndexMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIndexMode, Members: &mIndexMode, Type: smithy.ShapeTypeEnum, Ext: &eIndexMode})
+var s_IndexName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IndexName, Type: smithy.ShapeTypeString, Ext: &e_IndexName})
+var sIndexSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIndexSummary, Members: &mIndexSummary, Type: smithy.ShapeTypeStructure, Ext: &eIndexSummary})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sKmsDisabledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKmsDisabledException, Members: &mKmsDisabledException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eKmsDisabledException})
+var sKmsInvalidKeyUsageException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKmsInvalidKeyUsageException, Members: &mKmsInvalidKeyUsageException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eKmsInvalidKeyUsageException})
+var sKmsInvalidStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKmsInvalidStateException, Members: &mKmsInvalidStateException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eKmsInvalidStateException})
+var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyArn})
+var sKmsNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKmsNotFoundException, Members: &mKmsNotFoundException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eKmsNotFoundException})
+var s_ListIndexesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListIndexesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListIndexesMaxResults})
+var s_ListIndexesNextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListIndexesNextToken, Type: smithy.ShapeTypeString, Ext: &e_ListIndexesNextToken})
+var s_ListIndexesOutputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListIndexesOutputList, Members: &m_ListIndexesOutputList, Type: smithy.ShapeTypeList, Ext: &e_ListIndexesOutputList})
+var s_ListIndexesPrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListIndexesPrefix, Type: smithy.ShapeTypeString, Ext: &e_ListIndexesPrefix})
+var sListOutputVector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOutputVector, Members: &mListOutputVector, Type: smithy.ShapeTypeStructure, Ext: &eListOutputVector})
+var s_ListVectorBucketsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListVectorBucketsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListVectorBucketsMaxResults})
+var s_ListVectorBucketsNextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListVectorBucketsNextToken, Type: smithy.ShapeTypeString, Ext: &e_ListVectorBucketsNextToken})
+var s_ListVectorBucketsOutputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListVectorBucketsOutputList, Members: &m_ListVectorBucketsOutputList, Type: smithy.ShapeTypeList, Ext: &e_ListVectorBucketsOutputList})
+var s_ListVectorBucketsPrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListVectorBucketsPrefix, Type: smithy.ShapeTypeString, Ext: &e_ListVectorBucketsPrefix})
+var s_ListVectorsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListVectorsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListVectorsMaxResults})
+var s_ListVectorsNextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListVectorsNextToken, Type: smithy.ShapeTypeString, Ext: &e_ListVectorsNextToken})
+var s_ListVectorsOutputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListVectorsOutputList, Members: &m_ListVectorsOutputList, Type: smithy.ShapeTypeList, Ext: &e_ListVectorsOutputList})
+var s_ListVectorsSegmentCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListVectorsSegmentCount, Type: smithy.ShapeTypeInteger, Ext: &e_ListVectorsSegmentCount})
+var s_ListVectorsSegmentIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListVectorsSegmentIndex, Type: smithy.ShapeTypeInteger, Ext: &e_ListVectorsSegmentIndex})
+var sMetadataConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetadataConfiguration, Members: &mMetadataConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eMetadataConfiguration})
+var s_MetadataKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetadataKey, Type: smithy.ShapeTypeString, Ext: &e_MetadataKey})
+var s_NonFilterableMetadataKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonFilterableMetadataKeys, Members: &m_NonFilterableMetadataKeys, Type: smithy.ShapeTypeList, Ext: &e_NonFilterableMetadataKeys})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eNotFoundException})
+var sPutInputVector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutInputVector, Members: &mPutInputVector, Type: smithy.ShapeTypeStructure, Ext: &ePutInputVector})
+var s_PutVectorsInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PutVectorsInputList, Members: &m_PutVectorsInputList, Type: smithy.ShapeTypeList, Ext: &e_PutVectorsInputList})
+var sQueryOutputVector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryOutputVector, Members: &mQueryOutputVector, Type: smithy.ShapeTypeStructure, Ext: &eQueryOutputVector})
+var s_QueryVectorsNextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryVectorsNextToken, Type: smithy.ShapeTypeString, Ext: &e_QueryVectorsNextToken})
+var s_QueryVectorsOutputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryVectorsOutputList, Members: &m_QueryVectorsOutputList, Type: smithy.ShapeTypeList, Ext: &e_QueryVectorsOutputList})
+var sRequestTimeoutException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestTimeoutException, Members: &mRequestTimeoutException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &eRequestTimeoutException})
+var s_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceARN, Type: smithy.ShapeTypeString, Ext: &e_ResourceARN})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eServiceUnavailableException})
+var sSseType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSseType, Members: &mSseType, Type: smithy.ShapeTypeEnum, Ext: &eSseType})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &e_TagsMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &eTooManyRequestsException})
+var s_TopK = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TopK, Type: smithy.ShapeTypeInteger, Ext: &e_TopK})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var sVectorBucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVectorBucket, Members: &mVectorBucket, Type: smithy.ShapeTypeStructure, Ext: &eVectorBucket})
+var s_VectorBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VectorBucketArn, Type: smithy.ShapeTypeString, Ext: &e_VectorBucketArn})
+var s_VectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &e_VectorBucketName})
+var s_VectorBucketPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VectorBucketPolicy, Type: smithy.ShapeTypeString, Ext: &e_VectorBucketPolicy})
+var sVectorBucketSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVectorBucketSummary, Members: &mVectorBucketSummary, Type: smithy.ShapeTypeStructure, Ext: &eVectorBucketSummary})
+var sVectorData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVectorData, Members: &mVectorData, Type: smithy.ShapeTypeUnion, Ext: &eVectorData})
+var s_VectorKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VectorKey, Type: smithy.ShapeTypeString, Ext: &e_VectorKey})
+var s_VectorMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VectorMetadata, Type: smithy.ShapeTypeDocument, Ext: &e_VectorMetadata})
+var sCreateIndexInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIndexInput, Members: &mCreateIndexInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateIndexInput})
+var sCreateIndexOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIndexOutput, Members: &mCreateIndexOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateIndexOutput})
+var sCreateVectorBucketInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVectorBucketInput, Members: &mCreateVectorBucketInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateVectorBucketInput})
+var sCreateVectorBucketOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVectorBucketOutput, Members: &mCreateVectorBucketOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateVectorBucketOutput})
+var sDeleteIndexInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIndexInput, Members: &mDeleteIndexInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteIndexInput})
+var sDeleteIndexOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIndexOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteIndexOutput})
+var sDeleteVectorBucketInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVectorBucketInput, Members: &mDeleteVectorBucketInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVectorBucketInput})
+var sDeleteVectorBucketOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVectorBucketOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVectorBucketOutput})
+var sDeleteVectorBucketPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVectorBucketPolicyInput, Members: &mDeleteVectorBucketPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVectorBucketPolicyInput})
+var sDeleteVectorBucketPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVectorBucketPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVectorBucketPolicyOutput})
+var sDeleteVectorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVectorsInput, Members: &mDeleteVectorsInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVectorsInput})
+var sDeleteVectorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVectorsOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVectorsOutput})
+var sGetIndexInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIndexInput, Members: &mGetIndexInput, Type: smithy.ShapeTypeStructure, Ext: &eGetIndexInput})
+var sGetIndexOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIndexOutput, Members: &mGetIndexOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetIndexOutput})
+var sGetVectorBucketInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVectorBucketInput, Members: &mGetVectorBucketInput, Type: smithy.ShapeTypeStructure, Ext: &eGetVectorBucketInput})
+var sGetVectorBucketOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVectorBucketOutput, Members: &mGetVectorBucketOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetVectorBucketOutput})
+var sGetVectorBucketPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVectorBucketPolicyInput, Members: &mGetVectorBucketPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &eGetVectorBucketPolicyInput})
+var sGetVectorBucketPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVectorBucketPolicyOutput, Members: &mGetVectorBucketPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetVectorBucketPolicyOutput})
+var sGetVectorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVectorsInput, Members: &mGetVectorsInput, Type: smithy.ShapeTypeStructure, Ext: &eGetVectorsInput})
+var sGetVectorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVectorsOutput, Members: &mGetVectorsOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetVectorsOutput})
+var sListIndexesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIndexesInput, Members: &mListIndexesInput, Type: smithy.ShapeTypeStructure, Ext: &eListIndexesInput})
+var sListIndexesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIndexesOutput, Members: &mListIndexesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListIndexesOutput})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceInput})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceOutput})
+var sListVectorBucketsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVectorBucketsInput, Members: &mListVectorBucketsInput, Type: smithy.ShapeTypeStructure, Ext: &eListVectorBucketsInput})
+var sListVectorBucketsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVectorBucketsOutput, Members: &mListVectorBucketsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListVectorBucketsOutput})
+var sListVectorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVectorsInput, Members: &mListVectorsInput, Type: smithy.ShapeTypeStructure, Ext: &eListVectorsInput})
+var sListVectorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVectorsOutput, Members: &mListVectorsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListVectorsOutput})
+var sPutVectorBucketDefaultIndexModeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVectorBucketDefaultIndexModeInput, Members: &mPutVectorBucketDefaultIndexModeInput, Type: smithy.ShapeTypeStructure, Ext: &ePutVectorBucketDefaultIndexModeInput})
+var sPutVectorBucketDefaultIndexModeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVectorBucketDefaultIndexModeOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutVectorBucketDefaultIndexModeOutput})
+var sPutVectorBucketPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVectorBucketPolicyInput, Members: &mPutVectorBucketPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &ePutVectorBucketPolicyInput})
+var sPutVectorBucketPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVectorBucketPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutVectorBucketPolicyOutput})
+var sPutVectorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVectorsInput, Members: &mPutVectorsInput, Type: smithy.ShapeTypeStructure, Ext: &ePutVectorsInput})
+var sPutVectorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVectorsOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutVectorsOutput})
+var sQueryVectorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryVectorsInput, Members: &mQueryVectorsInput, Type: smithy.ShapeTypeStructure, Ext: &eQueryVectorsInput})
+var sQueryVectorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryVectorsOutput, Members: &mQueryVectorsOutput, Type: smithy.ShapeTypeStructure, Ext: &eQueryVectorsOutput})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceInput})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceOutput})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceInput})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceOutput})
+var sUpdateIndexModeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIndexModeInput, Members: &mUpdateIndexModeInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateIndexModeInput})
+var sUpdateIndexModeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIndexModeOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateIndexModeOutput})
 
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[23]})
-var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[25]})
-var sDataType_FLOAT32 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLOAT32", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[27]})
-var s_DeleteVectorsInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_VectorKey, Type: smithy.ShapeTypeString, Ext: &ext[29]})
-var sDistanceMetric_EUCLIDEAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EUCLIDEAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[32]})
-var sDistanceMetric_COSINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COSINE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[33]})
-var sEncryptionConfiguration_sseType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sseType", ID: &iSseType, Members: &mSseType, Type: smithy.ShapeTypeEnum, Ext: &ext[35]})
-var sEncryptionConfiguration_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var s_Float32VectorData_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[39]})
-var sGetOutputVector_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_VectorKey, Type: smithy.ShapeTypeString, Ext: &ext[41]})
-var sGetOutputVector_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &iVectorData, Members: &mVectorData, Type: smithy.ShapeTypeUnion, Ext: &ext[42]})
-var sGetOutputVector_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &i_VectorMetadata, Type: smithy.ShapeTypeDocument, Ext: &ext[43]})
-var s_GetVectorsInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_VectorKey, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var s_GetVectorsOutputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGetOutputVector, Members: &mGetOutputVector, Type: smithy.ShapeTypeStructure, Ext: &ext[47]})
-var sIndex_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &ext[49]})
-var sIndex_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IndexName, Type: smithy.ShapeTypeString, Ext: &ext[50]})
-var sIndex_indexArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexArn", ID: &i_IndexArn, Type: smithy.ShapeTypeString, Ext: &ext[51]})
-var sIndex_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[52]})
-var sIndex_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &iDataType, Members: &mDataType, Type: smithy.ShapeTypeEnum, Ext: &ext[53]})
-var sIndex_dimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dimension", ID: &i_Dimension, Type: smithy.ShapeTypeInteger, Ext: &ext[54]})
-var sIndex_distanceMetric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "distanceMetric", ID: &iDistanceMetric, Members: &mDistanceMetric, Type: smithy.ShapeTypeEnum, Ext: &ext[55]})
-var sIndex_metadataConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataConfiguration", ID: &iMetadataConfiguration, Members: &mMetadataConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[56]})
-var sIndex_encryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[57]})
-var sIndex_indexMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexMode", ID: &iIndexMode, Members: &mIndexMode, Type: smithy.ShapeTypeEnum, Ext: &ext[58]})
-var sIndexMode_CLASSIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLASSIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[61]})
-var sIndexMode_ENHANCED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENHANCED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[62]})
-var sIndexSummary_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &ext[65]})
-var sIndexSummary_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IndexName, Type: smithy.ShapeTypeString, Ext: &ext[66]})
-var sIndexSummary_indexArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexArn", ID: &i_IndexArn, Type: smithy.ShapeTypeString, Ext: &ext[67]})
-var sIndexSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[68]})
-var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[70]})
-var sKmsDisabledException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[72]})
-var sKmsInvalidKeyUsageException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[74]})
-var sKmsInvalidStateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[76]})
-var sKmsNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[79]})
-var s_ListIndexesOutputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIndexSummary, Members: &mIndexSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[83]})
-var sListOutputVector_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_VectorKey, Type: smithy.ShapeTypeString, Ext: &ext[86]})
-var sListOutputVector_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &iVectorData, Members: &mVectorData, Type: smithy.ShapeTypeUnion, Ext: &ext[87]})
-var sListOutputVector_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &i_VectorMetadata, Type: smithy.ShapeTypeDocument, Ext: &ext[88]})
-var s_ListVectorBucketsOutputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVectorBucketSummary, Members: &mVectorBucketSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[92]})
-var s_ListVectorsOutputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListOutputVector, Members: &mListOutputVector, Type: smithy.ShapeTypeStructure, Ext: &ext[97]})
-var sMetadataConfiguration_nonFilterableMetadataKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nonFilterableMetadataKeys", ID: &i_NonFilterableMetadataKeys, Members: &m_NonFilterableMetadataKeys, Type: smithy.ShapeTypeList, Ext: &ext[101]})
-var s_NonFilterableMetadataKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_MetadataKey, Type: smithy.ShapeTypeString, Ext: &ext[104]})
-var sNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[106]})
-var sPutInputVector_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_VectorKey, Type: smithy.ShapeTypeString, Ext: &ext[108]})
-var sPutInputVector_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &iVectorData, Members: &mVectorData, Type: smithy.ShapeTypeUnion, Ext: &ext[109]})
-var sPutInputVector_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &i_VectorMetadata, Type: smithy.ShapeTypeDocument, Ext: &ext[110]})
-var s_PutVectorsInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPutInputVector, Members: &mPutInputVector, Type: smithy.ShapeTypeStructure, Ext: &ext[112]})
-var sQueryOutputVector_distance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "distance", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[114]})
-var sQueryOutputVector_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_VectorKey, Type: smithy.ShapeTypeString, Ext: &ext[115]})
-var sQueryOutputVector_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &i_VectorMetadata, Type: smithy.ShapeTypeDocument, Ext: &ext[116]})
-var s_QueryVectorsOutputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQueryOutputVector, Members: &mQueryOutputVector, Type: smithy.ShapeTypeStructure, Ext: &ext[119]})
-var sRequestTimeoutException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[121]})
-var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[124]})
-var sServiceUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[126]})
-var sSseType_AES256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AES256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[128]})
-var sSseType_AWS_KMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_KMS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[129]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[132]})
-var s_TagsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[134]})
-var s_TagsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[135]})
-var sTooManyRequestsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[141]})
-var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[142]})
-var sValidationExceptionField_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[144]})
-var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[145]})
-var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[147]})
-var sVectorBucket_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &ext[149]})
-var sVectorBucket_vectorBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketArn", ID: &i_VectorBucketArn, Type: smithy.ShapeTypeString, Ext: &ext[150]})
-var sVectorBucket_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[151]})
-var sVectorBucket_encryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[152]})
-var sVectorBucket_defaultIndexMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultIndexMode", ID: &iIndexMode, Members: &mIndexMode, Type: smithy.ShapeTypeEnum, Ext: &ext[153]})
-var sVectorBucketSummary_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &ext[158]})
-var sVectorBucketSummary_vectorBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketArn", ID: &i_VectorBucketArn, Type: smithy.ShapeTypeString, Ext: &ext[159]})
-var sVectorBucketSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[160]})
-var sVectorData_float32 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "float32", ID: &i_Float32VectorData, Members: &m_Float32VectorData, Type: smithy.ShapeTypeList, Ext: &ext[162]})
-var sCreateIndexInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &ext[166]})
-var sCreateIndexInput_vectorBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketArn", ID: &i_VectorBucketArn, Type: smithy.ShapeTypeString, Ext: &ext[167]})
-var sCreateIndexInput_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IndexName, Type: smithy.ShapeTypeString, Ext: &ext[168]})
-var sCreateIndexInput_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &iDataType, Members: &mDataType, Type: smithy.ShapeTypeEnum, Ext: &ext[169]})
-var sCreateIndexInput_dimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dimension", ID: &i_Dimension, Type: smithy.ShapeTypeInteger, Ext: &ext[170]})
-var sCreateIndexInput_distanceMetric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "distanceMetric", ID: &iDistanceMetric, Members: &mDistanceMetric, Type: smithy.ShapeTypeEnum, Ext: &ext[171]})
-var sCreateIndexInput_metadataConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataConfiguration", ID: &iMetadataConfiguration, Members: &mMetadataConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[172]})
-var sCreateIndexInput_encryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[173]})
-var sCreateIndexInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &ext[174]})
-var sCreateIndexOutput_indexArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexArn", ID: &i_IndexArn, Type: smithy.ShapeTypeString, Ext: &ext[176]})
-var sCreateVectorBucketInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &ext[178]})
-var sCreateVectorBucketInput_encryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[179]})
-var sCreateVectorBucketInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &ext[180]})
-var sCreateVectorBucketOutput_vectorBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketArn", ID: &i_VectorBucketArn, Type: smithy.ShapeTypeString, Ext: &ext[182]})
-var sDeleteIndexInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &ext[184]})
-var sDeleteIndexInput_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IndexName, Type: smithy.ShapeTypeString, Ext: &ext[185]})
-var sDeleteIndexInput_indexArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexArn", ID: &i_IndexArn, Type: smithy.ShapeTypeString, Ext: &ext[186]})
-var sDeleteVectorBucketInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &ext[189]})
-var sDeleteVectorBucketInput_vectorBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketArn", ID: &i_VectorBucketArn, Type: smithy.ShapeTypeString, Ext: &ext[190]})
-var sDeleteVectorBucketPolicyInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &ext[193]})
-var sDeleteVectorBucketPolicyInput_vectorBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketArn", ID: &i_VectorBucketArn, Type: smithy.ShapeTypeString, Ext: &ext[194]})
-var sDeleteVectorsInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &ext[197]})
-var sDeleteVectorsInput_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IndexName, Type: smithy.ShapeTypeString, Ext: &ext[198]})
-var sDeleteVectorsInput_indexArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexArn", ID: &i_IndexArn, Type: smithy.ShapeTypeString, Ext: &ext[199]})
-var sDeleteVectorsInput_keys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keys", ID: &i_DeleteVectorsInputList, Members: &m_DeleteVectorsInputList, Type: smithy.ShapeTypeList, Ext: &ext[200]})
-var sGetIndexInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &ext[203]})
-var sGetIndexInput_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IndexName, Type: smithy.ShapeTypeString, Ext: &ext[204]})
-var sGetIndexInput_indexArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexArn", ID: &i_IndexArn, Type: smithy.ShapeTypeString, Ext: &ext[205]})
-var sGetIndexOutput_index = smithy.NewStaticSchema(smithy.StaticSchema{Member: "index", ID: &iIndex, Members: &mIndex, Type: smithy.ShapeTypeStructure, Ext: &ext[207]})
-var sGetVectorBucketInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &ext[209]})
-var sGetVectorBucketInput_vectorBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketArn", ID: &i_VectorBucketArn, Type: smithy.ShapeTypeString, Ext: &ext[210]})
-var sGetVectorBucketOutput_vectorBucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucket", ID: &iVectorBucket, Members: &mVectorBucket, Type: smithy.ShapeTypeStructure, Ext: &ext[212]})
-var sGetVectorBucketPolicyInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &ext[214]})
-var sGetVectorBucketPolicyInput_vectorBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketArn", ID: &i_VectorBucketArn, Type: smithy.ShapeTypeString, Ext: &ext[215]})
-var sGetVectorBucketPolicyOutput_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &i_VectorBucketPolicy, Type: smithy.ShapeTypeString, Ext: &ext[217]})
-var sGetVectorsInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &ext[219]})
-var sGetVectorsInput_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IndexName, Type: smithy.ShapeTypeString, Ext: &ext[220]})
-var sGetVectorsInput_indexArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexArn", ID: &i_IndexArn, Type: smithy.ShapeTypeString, Ext: &ext[221]})
-var sGetVectorsInput_keys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keys", ID: &i_GetVectorsInputList, Members: &m_GetVectorsInputList, Type: smithy.ShapeTypeList, Ext: &ext[222]})
-var sGetVectorsInput_returnData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "returnData", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[223]})
-var sGetVectorsInput_returnMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "returnMetadata", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[224]})
-var sGetVectorsOutput_vectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectors", ID: &i_GetVectorsOutputList, Members: &m_GetVectorsOutputList, Type: smithy.ShapeTypeList, Ext: &ext[226]})
-var sListIndexesInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &ext[228]})
-var sListIndexesInput_vectorBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketArn", ID: &i_VectorBucketArn, Type: smithy.ShapeTypeString, Ext: &ext[229]})
-var sListIndexesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListIndexesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[230]})
-var sListIndexesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_ListIndexesNextToken, Type: smithy.ShapeTypeString, Ext: &ext[231]})
-var sListIndexesInput_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_ListIndexesPrefix, Type: smithy.ShapeTypeString, Ext: &ext[232]})
-var sListIndexesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_ListIndexesNextToken, Type: smithy.ShapeTypeString, Ext: &ext[234]})
-var sListIndexesOutput_indexes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexes", ID: &i_ListIndexesOutputList, Members: &m_ListIndexesOutputList, Type: smithy.ShapeTypeList, Ext: &ext[235]})
-var sListTagsForResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceARN, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[237]})
-var sListTagsForResourceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &ext[239]})
-var sListVectorBucketsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListVectorBucketsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[241]})
-var sListVectorBucketsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_ListVectorBucketsNextToken, Type: smithy.ShapeTypeString, Ext: &ext[242]})
-var sListVectorBucketsInput_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_ListVectorBucketsPrefix, Type: smithy.ShapeTypeString, Ext: &ext[243]})
-var sListVectorBucketsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_ListVectorBucketsNextToken, Type: smithy.ShapeTypeString, Ext: &ext[245]})
-var sListVectorBucketsOutput_vectorBuckets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBuckets", ID: &i_ListVectorBucketsOutputList, Members: &m_ListVectorBucketsOutputList, Type: smithy.ShapeTypeList, Ext: &ext[246]})
-var sListVectorsInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &ext[248]})
-var sListVectorsInput_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IndexName, Type: smithy.ShapeTypeString, Ext: &ext[249]})
-var sListVectorsInput_indexArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexArn", ID: &i_IndexArn, Type: smithy.ShapeTypeString, Ext: &ext[250]})
-var sListVectorsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListVectorsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[251]})
-var sListVectorsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_ListVectorsNextToken, Type: smithy.ShapeTypeString, Ext: &ext[252]})
-var sListVectorsInput_segmentCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "segmentCount", ID: &i_ListVectorsSegmentCount, Type: smithy.ShapeTypeInteger, Ext: &ext[253]})
-var sListVectorsInput_segmentIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "segmentIndex", ID: &i_ListVectorsSegmentIndex, Type: smithy.ShapeTypeInteger, Ext: &ext[254]})
-var sListVectorsInput_returnData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "returnData", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[255]})
-var sListVectorsInput_returnMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "returnMetadata", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[256]})
-var sListVectorsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_ListVectorsNextToken, Type: smithy.ShapeTypeString, Ext: &ext[258]})
-var sListVectorsOutput_vectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectors", ID: &i_ListVectorsOutputList, Members: &m_ListVectorsOutputList, Type: smithy.ShapeTypeList, Ext: &ext[259]})
-var sPutVectorBucketDefaultIndexModeInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &ext[261]})
-var sPutVectorBucketDefaultIndexModeInput_vectorBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketArn", ID: &i_VectorBucketArn, Type: smithy.ShapeTypeString, Ext: &ext[262]})
-var sPutVectorBucketDefaultIndexModeInput_defaultIndexMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultIndexMode", ID: &iIndexMode, Members: &mIndexMode, Type: smithy.ShapeTypeEnum, Ext: &ext[263]})
-var sPutVectorBucketPolicyInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &ext[266]})
-var sPutVectorBucketPolicyInput_vectorBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketArn", ID: &i_VectorBucketArn, Type: smithy.ShapeTypeString, Ext: &ext[267]})
-var sPutVectorBucketPolicyInput_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &i_VectorBucketPolicy, Type: smithy.ShapeTypeString, Ext: &ext[268]})
-var sPutVectorsInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &ext[271]})
-var sPutVectorsInput_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IndexName, Type: smithy.ShapeTypeString, Ext: &ext[272]})
-var sPutVectorsInput_indexArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexArn", ID: &i_IndexArn, Type: smithy.ShapeTypeString, Ext: &ext[273]})
-var sPutVectorsInput_vectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectors", ID: &i_PutVectorsInputList, Members: &m_PutVectorsInputList, Type: smithy.ShapeTypeList, Ext: &ext[274]})
-var sQueryVectorsInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &ext[277]})
-var sQueryVectorsInput_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IndexName, Type: smithy.ShapeTypeString, Ext: &ext[278]})
-var sQueryVectorsInput_indexArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexArn", ID: &i_IndexArn, Type: smithy.ShapeTypeString, Ext: &ext[279]})
-var sQueryVectorsInput_topK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topK", ID: &i_TopK, Type: smithy.ShapeTypeInteger, Ext: &ext[280]})
-var sQueryVectorsInput_queryVector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryVector", ID: &iVectorData, Members: &mVectorData, Type: smithy.ShapeTypeUnion, Ext: &ext[281]})
-var sQueryVectorsInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &ext[282]})
-var sQueryVectorsInput_queryMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryMode", ID: &iIndexMode, Members: &mIndexMode, Type: smithy.ShapeTypeEnum, Ext: &ext[283]})
-var sQueryVectorsInput_returnMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "returnMetadata", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[284]})
-var sQueryVectorsInput_returnDistance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "returnDistance", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[285]})
-var sQueryVectorsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_QueryVectorsNextToken, Type: smithy.ShapeTypeString, Ext: &ext[286]})
-var sQueryVectorsOutput_vectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectors", ID: &i_QueryVectorsOutputList, Members: &m_QueryVectorsOutputList, Type: smithy.ShapeTypeList, Ext: &ext[288]})
-var sQueryVectorsOutput_distanceMetric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "distanceMetric", ID: &iDistanceMetric, Members: &mDistanceMetric, Type: smithy.ShapeTypeEnum, Ext: &ext[289]})
-var sQueryVectorsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_QueryVectorsNextToken, Type: smithy.ShapeTypeString, Ext: &ext[290]})
-var sTagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceARN, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[292]})
-var sTagResourceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &ext[293]})
-var sUntagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceARN, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[296]})
-var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t32, Type: smithy.ShapeTypeList, Ext: &ext[297]})
-var sUpdateIndexModeInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &ext[300]})
-var sUpdateIndexModeInput_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IndexName, Type: smithy.ShapeTypeString, Ext: &ext[301]})
-var sUpdateIndexModeInput_indexArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexArn", ID: &i_IndexArn, Type: smithy.ShapeTypeString, Ext: &ext[302]})
-var sUpdateIndexModeInput_indexMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexMode", ID: &iIndexMode, Members: &mIndexMode, Type: smithy.ShapeTypeEnum, Ext: &ext[303]})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sDataType_FLOAT32 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLOAT32", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataType_FLOAT32})
+var s_DeleteVectorsInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_VectorKey, Type: smithy.ShapeTypeString, Ext: &e_DeleteVectorsInputList_member})
+var sDistanceMetric_EUCLIDEAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EUCLIDEAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDistanceMetric_EUCLIDEAN})
+var sDistanceMetric_COSINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COSINE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDistanceMetric_COSINE})
+var sEncryptionConfiguration_sseType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sseType", ID: &iSseType, Members: &mSseType, Type: smithy.ShapeTypeEnum, Ext: &eEncryptionConfiguration_sseType})
+var sEncryptionConfiguration_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eEncryptionConfiguration_kmsKeyArn})
+var s_Float32VectorData_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &e_Float32VectorData_member})
+var sGetOutputVector_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_VectorKey, Type: smithy.ShapeTypeString, Ext: &eGetOutputVector_key})
+var sGetOutputVector_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &iVectorData, Members: &mVectorData, Type: smithy.ShapeTypeUnion, Ext: &eGetOutputVector_data})
+var sGetOutputVector_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &i_VectorMetadata, Type: smithy.ShapeTypeDocument, Ext: &eGetOutputVector_metadata})
+var s_GetVectorsInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_VectorKey, Type: smithy.ShapeTypeString, Ext: &e_GetVectorsInputList_member})
+var s_GetVectorsOutputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGetOutputVector, Members: &mGetOutputVector, Type: smithy.ShapeTypeStructure, Ext: &e_GetVectorsOutputList_member})
+var sIndex_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &eIndex_vectorBucketName})
+var sIndex_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IndexName, Type: smithy.ShapeTypeString, Ext: &eIndex_indexName})
+var sIndex_indexArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexArn", ID: &i_IndexArn, Type: smithy.ShapeTypeString, Ext: &eIndex_indexArn})
+var sIndex_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eIndex_creationTime})
+var sIndex_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &iDataType, Members: &mDataType, Type: smithy.ShapeTypeEnum, Ext: &eIndex_dataType})
+var sIndex_dimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dimension", ID: &i_Dimension, Type: smithy.ShapeTypeInteger, Ext: &eIndex_dimension})
+var sIndex_distanceMetric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "distanceMetric", ID: &iDistanceMetric, Members: &mDistanceMetric, Type: smithy.ShapeTypeEnum, Ext: &eIndex_distanceMetric})
+var sIndex_metadataConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataConfiguration", ID: &iMetadataConfiguration, Members: &mMetadataConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIndex_metadataConfiguration})
+var sIndex_encryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIndex_encryptionConfiguration})
+var sIndex_indexMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexMode", ID: &iIndexMode, Members: &mIndexMode, Type: smithy.ShapeTypeEnum, Ext: &eIndex_indexMode})
+var sIndexMode_CLASSIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLASSIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIndexMode_CLASSIC})
+var sIndexMode_ENHANCED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENHANCED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIndexMode_ENHANCED})
+var sIndexSummary_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &eIndexSummary_vectorBucketName})
+var sIndexSummary_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IndexName, Type: smithy.ShapeTypeString, Ext: &eIndexSummary_indexName})
+var sIndexSummary_indexArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexArn", ID: &i_IndexArn, Type: smithy.ShapeTypeString, Ext: &eIndexSummary_indexArn})
+var sIndexSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eIndexSummary_creationTime})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sKmsDisabledException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eKmsDisabledException_message})
+var sKmsInvalidKeyUsageException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eKmsInvalidKeyUsageException_message})
+var sKmsInvalidStateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eKmsInvalidStateException_message})
+var sKmsNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eKmsNotFoundException_message})
+var s_ListIndexesOutputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIndexSummary, Members: &mIndexSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ListIndexesOutputList_member})
+var sListOutputVector_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_VectorKey, Type: smithy.ShapeTypeString, Ext: &eListOutputVector_key})
+var sListOutputVector_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &iVectorData, Members: &mVectorData, Type: smithy.ShapeTypeUnion, Ext: &eListOutputVector_data})
+var sListOutputVector_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &i_VectorMetadata, Type: smithy.ShapeTypeDocument, Ext: &eListOutputVector_metadata})
+var s_ListVectorBucketsOutputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVectorBucketSummary, Members: &mVectorBucketSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ListVectorBucketsOutputList_member})
+var s_ListVectorsOutputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListOutputVector, Members: &mListOutputVector, Type: smithy.ShapeTypeStructure, Ext: &e_ListVectorsOutputList_member})
+var sMetadataConfiguration_nonFilterableMetadataKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nonFilterableMetadataKeys", ID: &i_NonFilterableMetadataKeys, Members: &m_NonFilterableMetadataKeys, Type: smithy.ShapeTypeList, Ext: &eMetadataConfiguration_nonFilterableMetadataKeys})
+var s_NonFilterableMetadataKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_MetadataKey, Type: smithy.ShapeTypeString, Ext: &e_NonFilterableMetadataKeys_member})
+var sNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eNotFoundException_message})
+var sPutInputVector_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_VectorKey, Type: smithy.ShapeTypeString, Ext: &ePutInputVector_key})
+var sPutInputVector_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &iVectorData, Members: &mVectorData, Type: smithy.ShapeTypeUnion, Ext: &ePutInputVector_data})
+var sPutInputVector_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &i_VectorMetadata, Type: smithy.ShapeTypeDocument, Ext: &ePutInputVector_metadata})
+var s_PutVectorsInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPutInputVector, Members: &mPutInputVector, Type: smithy.ShapeTypeStructure, Ext: &e_PutVectorsInputList_member})
+var sQueryOutputVector_distance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "distance", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eQueryOutputVector_distance})
+var sQueryOutputVector_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_VectorKey, Type: smithy.ShapeTypeString, Ext: &eQueryOutputVector_key})
+var sQueryOutputVector_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &i_VectorMetadata, Type: smithy.ShapeTypeDocument, Ext: &eQueryOutputVector_metadata})
+var s_QueryVectorsOutputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQueryOutputVector, Members: &mQueryOutputVector, Type: smithy.ShapeTypeStructure, Ext: &e_QueryVectorsOutputList_member})
+var sRequestTimeoutException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eRequestTimeoutException_message})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sServiceUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailableException_message})
+var sSseType_AES256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AES256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSseType_AES256})
+var sSseType_AWS_KMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_KMS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSseType_AWS_KMS})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagsMap_key})
+var s_TagsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagsMap_value})
+var sTooManyRequestsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eTooManyRequestsException_message})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_fieldList})
+var sValidationExceptionField_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_path})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_message})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var sVectorBucket_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &eVectorBucket_vectorBucketName})
+var sVectorBucket_vectorBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketArn", ID: &i_VectorBucketArn, Type: smithy.ShapeTypeString, Ext: &eVectorBucket_vectorBucketArn})
+var sVectorBucket_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eVectorBucket_creationTime})
+var sVectorBucket_encryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eVectorBucket_encryptionConfiguration})
+var sVectorBucket_defaultIndexMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultIndexMode", ID: &iIndexMode, Members: &mIndexMode, Type: smithy.ShapeTypeEnum, Ext: &eVectorBucket_defaultIndexMode})
+var sVectorBucketSummary_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &eVectorBucketSummary_vectorBucketName})
+var sVectorBucketSummary_vectorBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketArn", ID: &i_VectorBucketArn, Type: smithy.ShapeTypeString, Ext: &eVectorBucketSummary_vectorBucketArn})
+var sVectorBucketSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eVectorBucketSummary_creationTime})
+var sVectorData_float32 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "float32", ID: &i_Float32VectorData, Members: &m_Float32VectorData, Type: smithy.ShapeTypeList, Ext: &eVectorData_float32})
+var sCreateIndexInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &eCreateIndexInput_vectorBucketName})
+var sCreateIndexInput_vectorBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketArn", ID: &i_VectorBucketArn, Type: smithy.ShapeTypeString, Ext: &eCreateIndexInput_vectorBucketArn})
+var sCreateIndexInput_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IndexName, Type: smithy.ShapeTypeString, Ext: &eCreateIndexInput_indexName})
+var sCreateIndexInput_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &iDataType, Members: &mDataType, Type: smithy.ShapeTypeEnum, Ext: &eCreateIndexInput_dataType})
+var sCreateIndexInput_dimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dimension", ID: &i_Dimension, Type: smithy.ShapeTypeInteger, Ext: &eCreateIndexInput_dimension})
+var sCreateIndexInput_distanceMetric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "distanceMetric", ID: &iDistanceMetric, Members: &mDistanceMetric, Type: smithy.ShapeTypeEnum, Ext: &eCreateIndexInput_distanceMetric})
+var sCreateIndexInput_metadataConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataConfiguration", ID: &iMetadataConfiguration, Members: &mMetadataConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateIndexInput_metadataConfiguration})
+var sCreateIndexInput_encryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateIndexInput_encryptionConfiguration})
+var sCreateIndexInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eCreateIndexInput_tags})
+var sCreateIndexOutput_indexArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexArn", ID: &i_IndexArn, Type: smithy.ShapeTypeString, Ext: &eCreateIndexOutput_indexArn})
+var sCreateVectorBucketInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &eCreateVectorBucketInput_vectorBucketName})
+var sCreateVectorBucketInput_encryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateVectorBucketInput_encryptionConfiguration})
+var sCreateVectorBucketInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eCreateVectorBucketInput_tags})
+var sCreateVectorBucketOutput_vectorBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketArn", ID: &i_VectorBucketArn, Type: smithy.ShapeTypeString, Ext: &eCreateVectorBucketOutput_vectorBucketArn})
+var sDeleteIndexInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &eDeleteIndexInput_vectorBucketName})
+var sDeleteIndexInput_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IndexName, Type: smithy.ShapeTypeString, Ext: &eDeleteIndexInput_indexName})
+var sDeleteIndexInput_indexArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexArn", ID: &i_IndexArn, Type: smithy.ShapeTypeString, Ext: &eDeleteIndexInput_indexArn})
+var sDeleteVectorBucketInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &eDeleteVectorBucketInput_vectorBucketName})
+var sDeleteVectorBucketInput_vectorBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketArn", ID: &i_VectorBucketArn, Type: smithy.ShapeTypeString, Ext: &eDeleteVectorBucketInput_vectorBucketArn})
+var sDeleteVectorBucketPolicyInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &eDeleteVectorBucketPolicyInput_vectorBucketName})
+var sDeleteVectorBucketPolicyInput_vectorBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketArn", ID: &i_VectorBucketArn, Type: smithy.ShapeTypeString, Ext: &eDeleteVectorBucketPolicyInput_vectorBucketArn})
+var sDeleteVectorsInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &eDeleteVectorsInput_vectorBucketName})
+var sDeleteVectorsInput_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IndexName, Type: smithy.ShapeTypeString, Ext: &eDeleteVectorsInput_indexName})
+var sDeleteVectorsInput_indexArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexArn", ID: &i_IndexArn, Type: smithy.ShapeTypeString, Ext: &eDeleteVectorsInput_indexArn})
+var sDeleteVectorsInput_keys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keys", ID: &i_DeleteVectorsInputList, Members: &m_DeleteVectorsInputList, Type: smithy.ShapeTypeList, Ext: &eDeleteVectorsInput_keys})
+var sGetIndexInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &eGetIndexInput_vectorBucketName})
+var sGetIndexInput_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IndexName, Type: smithy.ShapeTypeString, Ext: &eGetIndexInput_indexName})
+var sGetIndexInput_indexArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexArn", ID: &i_IndexArn, Type: smithy.ShapeTypeString, Ext: &eGetIndexInput_indexArn})
+var sGetIndexOutput_index = smithy.NewStaticSchema(smithy.StaticSchema{Member: "index", ID: &iIndex, Members: &mIndex, Type: smithy.ShapeTypeStructure, Ext: &eGetIndexOutput_index})
+var sGetVectorBucketInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &eGetVectorBucketInput_vectorBucketName})
+var sGetVectorBucketInput_vectorBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketArn", ID: &i_VectorBucketArn, Type: smithy.ShapeTypeString, Ext: &eGetVectorBucketInput_vectorBucketArn})
+var sGetVectorBucketOutput_vectorBucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucket", ID: &iVectorBucket, Members: &mVectorBucket, Type: smithy.ShapeTypeStructure, Ext: &eGetVectorBucketOutput_vectorBucket})
+var sGetVectorBucketPolicyInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &eGetVectorBucketPolicyInput_vectorBucketName})
+var sGetVectorBucketPolicyInput_vectorBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketArn", ID: &i_VectorBucketArn, Type: smithy.ShapeTypeString, Ext: &eGetVectorBucketPolicyInput_vectorBucketArn})
+var sGetVectorBucketPolicyOutput_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &i_VectorBucketPolicy, Type: smithy.ShapeTypeString, Ext: &eGetVectorBucketPolicyOutput_policy})
+var sGetVectorsInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &eGetVectorsInput_vectorBucketName})
+var sGetVectorsInput_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IndexName, Type: smithy.ShapeTypeString, Ext: &eGetVectorsInput_indexName})
+var sGetVectorsInput_indexArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexArn", ID: &i_IndexArn, Type: smithy.ShapeTypeString, Ext: &eGetVectorsInput_indexArn})
+var sGetVectorsInput_keys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keys", ID: &i_GetVectorsInputList, Members: &m_GetVectorsInputList, Type: smithy.ShapeTypeList, Ext: &eGetVectorsInput_keys})
+var sGetVectorsInput_returnData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "returnData", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eGetVectorsInput_returnData})
+var sGetVectorsInput_returnMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "returnMetadata", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eGetVectorsInput_returnMetadata})
+var sGetVectorsOutput_vectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectors", ID: &i_GetVectorsOutputList, Members: &m_GetVectorsOutputList, Type: smithy.ShapeTypeList, Ext: &eGetVectorsOutput_vectors})
+var sListIndexesInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &eListIndexesInput_vectorBucketName})
+var sListIndexesInput_vectorBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketArn", ID: &i_VectorBucketArn, Type: smithy.ShapeTypeString, Ext: &eListIndexesInput_vectorBucketArn})
+var sListIndexesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListIndexesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListIndexesInput_maxResults})
+var sListIndexesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_ListIndexesNextToken, Type: smithy.ShapeTypeString, Ext: &eListIndexesInput_nextToken})
+var sListIndexesInput_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_ListIndexesPrefix, Type: smithy.ShapeTypeString, Ext: &eListIndexesInput_prefix})
+var sListIndexesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_ListIndexesNextToken, Type: smithy.ShapeTypeString, Ext: &eListIndexesOutput_nextToken})
+var sListIndexesOutput_indexes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexes", ID: &i_ListIndexesOutputList, Members: &m_ListIndexesOutputList, Type: smithy.ShapeTypeList, Ext: &eListIndexesOutput_indexes})
+var sListTagsForResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceARN, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceInput_resourceArn})
+var sListTagsForResourceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceOutput_tags})
+var sListVectorBucketsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListVectorBucketsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListVectorBucketsInput_maxResults})
+var sListVectorBucketsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_ListVectorBucketsNextToken, Type: smithy.ShapeTypeString, Ext: &eListVectorBucketsInput_nextToken})
+var sListVectorBucketsInput_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_ListVectorBucketsPrefix, Type: smithy.ShapeTypeString, Ext: &eListVectorBucketsInput_prefix})
+var sListVectorBucketsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_ListVectorBucketsNextToken, Type: smithy.ShapeTypeString, Ext: &eListVectorBucketsOutput_nextToken})
+var sListVectorBucketsOutput_vectorBuckets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBuckets", ID: &i_ListVectorBucketsOutputList, Members: &m_ListVectorBucketsOutputList, Type: smithy.ShapeTypeList, Ext: &eListVectorBucketsOutput_vectorBuckets})
+var sListVectorsInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &eListVectorsInput_vectorBucketName})
+var sListVectorsInput_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IndexName, Type: smithy.ShapeTypeString, Ext: &eListVectorsInput_indexName})
+var sListVectorsInput_indexArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexArn", ID: &i_IndexArn, Type: smithy.ShapeTypeString, Ext: &eListVectorsInput_indexArn})
+var sListVectorsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListVectorsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListVectorsInput_maxResults})
+var sListVectorsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_ListVectorsNextToken, Type: smithy.ShapeTypeString, Ext: &eListVectorsInput_nextToken})
+var sListVectorsInput_segmentCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "segmentCount", ID: &i_ListVectorsSegmentCount, Type: smithy.ShapeTypeInteger, Ext: &eListVectorsInput_segmentCount})
+var sListVectorsInput_segmentIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "segmentIndex", ID: &i_ListVectorsSegmentIndex, Type: smithy.ShapeTypeInteger, Ext: &eListVectorsInput_segmentIndex})
+var sListVectorsInput_returnData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "returnData", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eListVectorsInput_returnData})
+var sListVectorsInput_returnMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "returnMetadata", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eListVectorsInput_returnMetadata})
+var sListVectorsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_ListVectorsNextToken, Type: smithy.ShapeTypeString, Ext: &eListVectorsOutput_nextToken})
+var sListVectorsOutput_vectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectors", ID: &i_ListVectorsOutputList, Members: &m_ListVectorsOutputList, Type: smithy.ShapeTypeList, Ext: &eListVectorsOutput_vectors})
+var sPutVectorBucketDefaultIndexModeInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &ePutVectorBucketDefaultIndexModeInput_vectorBucketName})
+var sPutVectorBucketDefaultIndexModeInput_vectorBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketArn", ID: &i_VectorBucketArn, Type: smithy.ShapeTypeString, Ext: &ePutVectorBucketDefaultIndexModeInput_vectorBucketArn})
+var sPutVectorBucketDefaultIndexModeInput_defaultIndexMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultIndexMode", ID: &iIndexMode, Members: &mIndexMode, Type: smithy.ShapeTypeEnum, Ext: &ePutVectorBucketDefaultIndexModeInput_defaultIndexMode})
+var sPutVectorBucketPolicyInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &ePutVectorBucketPolicyInput_vectorBucketName})
+var sPutVectorBucketPolicyInput_vectorBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketArn", ID: &i_VectorBucketArn, Type: smithy.ShapeTypeString, Ext: &ePutVectorBucketPolicyInput_vectorBucketArn})
+var sPutVectorBucketPolicyInput_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &i_VectorBucketPolicy, Type: smithy.ShapeTypeString, Ext: &ePutVectorBucketPolicyInput_policy})
+var sPutVectorsInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &ePutVectorsInput_vectorBucketName})
+var sPutVectorsInput_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IndexName, Type: smithy.ShapeTypeString, Ext: &ePutVectorsInput_indexName})
+var sPutVectorsInput_indexArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexArn", ID: &i_IndexArn, Type: smithy.ShapeTypeString, Ext: &ePutVectorsInput_indexArn})
+var sPutVectorsInput_vectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectors", ID: &i_PutVectorsInputList, Members: &m_PutVectorsInputList, Type: smithy.ShapeTypeList, Ext: &ePutVectorsInput_vectors})
+var sQueryVectorsInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &eQueryVectorsInput_vectorBucketName})
+var sQueryVectorsInput_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IndexName, Type: smithy.ShapeTypeString, Ext: &eQueryVectorsInput_indexName})
+var sQueryVectorsInput_indexArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexArn", ID: &i_IndexArn, Type: smithy.ShapeTypeString, Ext: &eQueryVectorsInput_indexArn})
+var sQueryVectorsInput_topK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topK", ID: &i_TopK, Type: smithy.ShapeTypeInteger, Ext: &eQueryVectorsInput_topK})
+var sQueryVectorsInput_queryVector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryVector", ID: &iVectorData, Members: &mVectorData, Type: smithy.ShapeTypeUnion, Ext: &eQueryVectorsInput_queryVector})
+var sQueryVectorsInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &eQueryVectorsInput_filter})
+var sQueryVectorsInput_queryMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryMode", ID: &iIndexMode, Members: &mIndexMode, Type: smithy.ShapeTypeEnum, Ext: &eQueryVectorsInput_queryMode})
+var sQueryVectorsInput_returnMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "returnMetadata", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eQueryVectorsInput_returnMetadata})
+var sQueryVectorsInput_returnDistance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "returnDistance", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eQueryVectorsInput_returnDistance})
+var sQueryVectorsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_QueryVectorsNextToken, Type: smithy.ShapeTypeString, Ext: &eQueryVectorsInput_nextToken})
+var sQueryVectorsOutput_vectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectors", ID: &i_QueryVectorsOutputList, Members: &m_QueryVectorsOutputList, Type: smithy.ShapeTypeList, Ext: &eQueryVectorsOutput_vectors})
+var sQueryVectorsOutput_distanceMetric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "distanceMetric", ID: &iDistanceMetric, Members: &mDistanceMetric, Type: smithy.ShapeTypeEnum, Ext: &eQueryVectorsOutput_distanceMetric})
+var sQueryVectorsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_QueryVectorsNextToken, Type: smithy.ShapeTypeString, Ext: &eQueryVectorsOutput_nextToken})
+var sTagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceARN, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eTagResourceInput_resourceArn})
+var sTagResourceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceInput_tags})
+var sUntagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceARN, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eUntagResourceInput_resourceArn})
+var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t32, Type: smithy.ShapeTypeList, Ext: &eUntagResourceInput_tagKeys})
+var sUpdateIndexModeInput_vectorBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorBucketName", ID: &i_VectorBucketName, Type: smithy.ShapeTypeString, Ext: &eUpdateIndexModeInput_vectorBucketName})
+var sUpdateIndexModeInput_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IndexName, Type: smithy.ShapeTypeString, Ext: &eUpdateIndexModeInput_indexName})
+var sUpdateIndexModeInput_indexArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexArn", ID: &i_IndexArn, Type: smithy.ShapeTypeString, Ext: &eUpdateIndexModeInput_indexArn})
+var sUpdateIndexModeInput_indexMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexMode", ID: &iIndexMode, Members: &mIndexMode, Type: smithy.ShapeTypeEnum, Ext: &eUpdateIndexModeInput_indexMode})
 
 var CreateIndex = &sCreateIndex
 

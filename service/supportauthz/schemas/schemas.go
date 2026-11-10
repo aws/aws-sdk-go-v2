@@ -7,9 +7,212 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [204]smithy.SchemaExtensions
+var (
+	eCreateSupportPermit                                   smithy.SchemaExtensions
+	eDeleteSupportPermit                                   smithy.SchemaExtensions
+	eGetAction                                             smithy.SchemaExtensions
+	eGetSupportPermit                                      smithy.SchemaExtensions
+	eListActions                                           smithy.SchemaExtensions
+	eListSupportPermitRequests                             smithy.SchemaExtensions
+	eListSupportPermits                                    smithy.SchemaExtensions
+	eListTagsForResource                                   smithy.SchemaExtensions
+	eRejectSupportPermitRequest                            smithy.SchemaExtensions
+	eTagResource                                           smithy.SchemaExtensions
+	eUntagResource                                         smithy.SchemaExtensions
+	e_SupportAuthZ                                         smithy.SchemaExtensions
+	eAccessDeniedException                                 smithy.SchemaExtensions
+	eAccessDeniedException_message                         smithy.SchemaExtensions
+	e_Action                                               smithy.SchemaExtensions
+	e_ActionDescription                                    smithy.SchemaExtensions
+	e_Actions                                              smithy.SchemaExtensions
+	e_Actions_member                                       smithy.SchemaExtensions
+	eActionSet                                             smithy.SchemaExtensions
+	eActionSet_allActions                                  smithy.SchemaExtensions
+	eActionSet_actions                                     smithy.SchemaExtensions
+	e_ActionSummaries                                      smithy.SchemaExtensions
+	e_ActionSummaries_member                               smithy.SchemaExtensions
+	eActionSummary                                         smithy.SchemaExtensions
+	eActionSummary_action                                  smithy.SchemaExtensions
+	eActionSummary_service                                 smithy.SchemaExtensions
+	eActionSummary_description                             smithy.SchemaExtensions
+	e_Arn                                                  smithy.SchemaExtensions
+	e_ClientToken                                          smithy.SchemaExtensions
+	eCondition                                             smithy.SchemaExtensions
+	eCondition_allowAfter                                  smithy.SchemaExtensions
+	eCondition_allowBefore                                 smithy.SchemaExtensions
+	e_Conditions                                           smithy.SchemaExtensions
+	e_Conditions_member                                    smithy.SchemaExtensions
+	eConflictException                                     smithy.SchemaExtensions
+	eConflictException_message                             smithy.SchemaExtensions
+	eConflictException_resourceId                          smithy.SchemaExtensions
+	eConflictException_resourceType                        smithy.SchemaExtensions
+	e_Description                                          smithy.SchemaExtensions
+	eInternalServerException                               smithy.SchemaExtensions
+	eInternalServerException_message                       smithy.SchemaExtensions
+	eInternalServerException_retryAfterSeconds             smithy.SchemaExtensions
+	e_KmsKeyArn                                            smithy.SchemaExtensions
+	e_MaxResults                                           smithy.SchemaExtensions
+	e_Name                                                 smithy.SchemaExtensions
+	e_NextToken                                            smithy.SchemaExtensions
+	ePermit                                                smithy.SchemaExtensions
+	ePermit_actions                                        smithy.SchemaExtensions
+	ePermit_resources                                      smithy.SchemaExtensions
+	ePermit_conditions                                     smithy.SchemaExtensions
+	e_RequestArn                                           smithy.SchemaExtensions
+	e_Resource                                             smithy.SchemaExtensions
+	eResourceNotFoundException                             smithy.SchemaExtensions
+	eResourceNotFoundException_message                     smithy.SchemaExtensions
+	eResourceNotFoundException_resourceId                  smithy.SchemaExtensions
+	eResourceNotFoundException_resourceType                smithy.SchemaExtensions
+	e_Resources                                            smithy.SchemaExtensions
+	e_Resources_member                                     smithy.SchemaExtensions
+	eResourceSet                                           smithy.SchemaExtensions
+	eResourceSet_allResourcesInRegion                      smithy.SchemaExtensions
+	eResourceSet_resources                                 smithy.SchemaExtensions
+	e_Service                                              smithy.SchemaExtensions
+	eServiceQuotaExceededException                         smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                 smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceId              smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceType            smithy.SchemaExtensions
+	eServiceQuotaExceededException_serviceCode             smithy.SchemaExtensions
+	eServiceQuotaExceededException_quotaCode               smithy.SchemaExtensions
+	eSigningKeyInfo                                        smithy.SchemaExtensions
+	eSigningKeyInfo_kmsKey                                 smithy.SchemaExtensions
+	e_SupportCaseDisplayId                                 smithy.SchemaExtensions
+	e_SupportPermitIdentifier                              smithy.SchemaExtensions
+	eSupportPermitRequest                                  smithy.SchemaExtensions
+	eSupportPermitRequest_requestArn                       smithy.SchemaExtensions
+	eSupportPermitRequest_permit                           smithy.SchemaExtensions
+	eSupportPermitRequest_supportCaseDisplayId             smithy.SchemaExtensions
+	eSupportPermitRequest_status                           smithy.SchemaExtensions
+	eSupportPermitRequest_createdAt                        smithy.SchemaExtensions
+	eSupportPermitRequest_updatedAt                        smithy.SchemaExtensions
+	e_SupportPermitRequests                                smithy.SchemaExtensions
+	e_SupportPermitRequests_member                         smithy.SchemaExtensions
+	eSupportPermitRequestStatus                            smithy.SchemaExtensions
+	eSupportPermitRequestStatus_PENDING                    smithy.SchemaExtensions
+	eSupportPermitRequestStatus_ACCEPTED                   smithy.SchemaExtensions
+	eSupportPermitRequestStatus_REJECTED                   smithy.SchemaExtensions
+	eSupportPermitRequestStatus_CANCELLED                  smithy.SchemaExtensions
+	eSupportPermitStatus                                   smithy.SchemaExtensions
+	eSupportPermitStatus_ACTIVE                            smithy.SchemaExtensions
+	eSupportPermitStatus_INACTIVE                          smithy.SchemaExtensions
+	eSupportPermitStatus_DELETING                          smithy.SchemaExtensions
+	e_SupportPermitStatuses                                smithy.SchemaExtensions
+	e_SupportPermitStatuses_member                         smithy.SchemaExtensions
+	e_SupportPermitSummaries                               smithy.SchemaExtensions
+	e_SupportPermitSummaries_member                        smithy.SchemaExtensions
+	eSupportPermitSummary                                  smithy.SchemaExtensions
+	eSupportPermitSummary_name                             smithy.SchemaExtensions
+	eSupportPermitSummary_arn                              smithy.SchemaExtensions
+	eSupportPermitSummary_permit                           smithy.SchemaExtensions
+	eSupportPermitSummary_status                           smithy.SchemaExtensions
+	eSupportPermitSummary_signingKeyInfo                   smithy.SchemaExtensions
+	eSupportPermitSummary_createdAt                        smithy.SchemaExtensions
+	eSupportPermitSummary_supportCaseDisplayId             smithy.SchemaExtensions
+	e_TagKey                                               smithy.SchemaExtensions
+	e_TagKeyList                                           smithy.SchemaExtensions
+	e_TagKeyList_member                                    smithy.SchemaExtensions
+	e_Tags                                                 smithy.SchemaExtensions
+	e_Tags_key                                             smithy.SchemaExtensions
+	e_Tags_value                                           smithy.SchemaExtensions
+	e_TagValue                                             smithy.SchemaExtensions
+	eThrottlingException                                   smithy.SchemaExtensions
+	eThrottlingException_message                           smithy.SchemaExtensions
+	eThrottlingException_retryAfterSeconds                 smithy.SchemaExtensions
+	eValidationException                                   smithy.SchemaExtensions
+	eValidationException_message                           smithy.SchemaExtensions
+	eValidationException_fieldList                         smithy.SchemaExtensions
+	eValidationExceptionField                              smithy.SchemaExtensions
+	eValidationExceptionField_path                         smithy.SchemaExtensions
+	eValidationExceptionField_message                      smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                         smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member                  smithy.SchemaExtensions
+	eCreateSupportPermitInput                              smithy.SchemaExtensions
+	eCreateSupportPermitInput_permit                       smithy.SchemaExtensions
+	eCreateSupportPermitInput_name                         smithy.SchemaExtensions
+	eCreateSupportPermitInput_description                  smithy.SchemaExtensions
+	eCreateSupportPermitInput_signingKeyInfo               smithy.SchemaExtensions
+	eCreateSupportPermitInput_supportCaseDisplayId         smithy.SchemaExtensions
+	eCreateSupportPermitInput_clientToken                  smithy.SchemaExtensions
+	eCreateSupportPermitInput_tags                         smithy.SchemaExtensions
+	eCreateSupportPermitOutput                             smithy.SchemaExtensions
+	eCreateSupportPermitOutput_name                        smithy.SchemaExtensions
+	eCreateSupportPermitOutput_arn                         smithy.SchemaExtensions
+	eCreateSupportPermitOutput_description                 smithy.SchemaExtensions
+	eCreateSupportPermitOutput_permit                      smithy.SchemaExtensions
+	eCreateSupportPermitOutput_status                      smithy.SchemaExtensions
+	eCreateSupportPermitOutput_signingKeyInfo              smithy.SchemaExtensions
+	eCreateSupportPermitOutput_createdAt                   smithy.SchemaExtensions
+	eCreateSupportPermitOutput_supportCaseDisplayId        smithy.SchemaExtensions
+	eCreateSupportPermitOutput_tags                        smithy.SchemaExtensions
+	eDeleteSupportPermitInput                              smithy.SchemaExtensions
+	eDeleteSupportPermitInput_supportPermitIdentifier      smithy.SchemaExtensions
+	eDeleteSupportPermitOutput                             smithy.SchemaExtensions
+	eDeleteSupportPermitOutput_name                        smithy.SchemaExtensions
+	eDeleteSupportPermitOutput_arn                         smithy.SchemaExtensions
+	eDeleteSupportPermitOutput_description                 smithy.SchemaExtensions
+	eDeleteSupportPermitOutput_permit                      smithy.SchemaExtensions
+	eDeleteSupportPermitOutput_status                      smithy.SchemaExtensions
+	eDeleteSupportPermitOutput_signingKeyInfo              smithy.SchemaExtensions
+	eDeleteSupportPermitOutput_createdAt                   smithy.SchemaExtensions
+	eDeleteSupportPermitOutput_supportCaseDisplayId        smithy.SchemaExtensions
+	eGetActionInput                                        smithy.SchemaExtensions
+	eGetActionInput_action                                 smithy.SchemaExtensions
+	eGetActionOutput                                       smithy.SchemaExtensions
+	eGetActionOutput_action                                smithy.SchemaExtensions
+	eGetActionOutput_service                               smithy.SchemaExtensions
+	eGetActionOutput_description                           smithy.SchemaExtensions
+	eGetSupportPermitInput                                 smithy.SchemaExtensions
+	eGetSupportPermitInput_supportPermitIdentifier         smithy.SchemaExtensions
+	eGetSupportPermitOutput                                smithy.SchemaExtensions
+	eGetSupportPermitOutput_name                           smithy.SchemaExtensions
+	eGetSupportPermitOutput_arn                            smithy.SchemaExtensions
+	eGetSupportPermitOutput_description                    smithy.SchemaExtensions
+	eGetSupportPermitOutput_permit                         smithy.SchemaExtensions
+	eGetSupportPermitOutput_status                         smithy.SchemaExtensions
+	eGetSupportPermitOutput_signingKeyInfo                 smithy.SchemaExtensions
+	eGetSupportPermitOutput_createdAt                      smithy.SchemaExtensions
+	eGetSupportPermitOutput_supportCaseDisplayId           smithy.SchemaExtensions
+	eGetSupportPermitOutput_tags                           smithy.SchemaExtensions
+	eListActionsInput                                      smithy.SchemaExtensions
+	eListActionsInput_nextToken                            smithy.SchemaExtensions
+	eListActionsInput_maxResults                           smithy.SchemaExtensions
+	eListActionsInput_service                              smithy.SchemaExtensions
+	eListActionsOutput                                     smithy.SchemaExtensions
+	eListActionsOutput_actionSummaries                     smithy.SchemaExtensions
+	eListActionsOutput_nextToken                           smithy.SchemaExtensions
+	eListSupportPermitRequestsInput                        smithy.SchemaExtensions
+	eListSupportPermitRequestsInput_nextToken              smithy.SchemaExtensions
+	eListSupportPermitRequestsInput_maxResults             smithy.SchemaExtensions
+	eListSupportPermitRequestsInput_supportCaseDisplayId   smithy.SchemaExtensions
+	eListSupportPermitRequestsOutput                       smithy.SchemaExtensions
+	eListSupportPermitRequestsOutput_supportPermitRequests smithy.SchemaExtensions
+	eListSupportPermitRequestsOutput_nextToken             smithy.SchemaExtensions
+	eListSupportPermitsInput                               smithy.SchemaExtensions
+	eListSupportPermitsInput_nextToken                     smithy.SchemaExtensions
+	eListSupportPermitsInput_maxResults                    smithy.SchemaExtensions
+	eListSupportPermitsInput_supportPermitStatuses         smithy.SchemaExtensions
+	eListSupportPermitsOutput                              smithy.SchemaExtensions
+	eListSupportPermitsOutput_supportPermits               smithy.SchemaExtensions
+	eListSupportPermitsOutput_nextToken                    smithy.SchemaExtensions
+	eListTagsForResourceInput                              smithy.SchemaExtensions
+	eListTagsForResourceInput_resourceArn                  smithy.SchemaExtensions
+	eListTagsForResourceOutput                             smithy.SchemaExtensions
+	eListTagsForResourceOutput_tags                        smithy.SchemaExtensions
+	eRejectSupportPermitRequestInput                       smithy.SchemaExtensions
+	eRejectSupportPermitRequestInput_requestArn            smithy.SchemaExtensions
+	eRejectSupportPermitRequestOutput                      smithy.SchemaExtensions
+	eRejectSupportPermitRequestOutput_requestArn           smithy.SchemaExtensions
+	eTagResourceInput                                      smithy.SchemaExtensions
+	eTagResourceInput_resourceArn                          smithy.SchemaExtensions
+	eTagResourceInput_tags                                 smithy.SchemaExtensions
+	eTagResourceOutput                                     smithy.SchemaExtensions
+	eUntagResourceInput                                    smithy.SchemaExtensions
+	eUntagResourceInput_resourceArn                        smithy.SchemaExtensions
+	eUntagResourceInput_tagKeys                            smithy.SchemaExtensions
+	eUntagResourceOutput                                   smithy.SchemaExtensions
+)
 
 var (
 	iCreateSupportPermit              = smithy.ShapeID{Namespace: "com.amazonaws.supportauthz", Name: "CreateSupportPermit"}
@@ -200,211 +403,211 @@ var mRejectSupportPermitRequestOutput = smithy.SchemaMembers{List: []*smithy.Sch
 var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_resourceArn, &sTagResourceInput_tags}}
 var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_resourceArn, &sUntagResourceInput_tagKeys}}
 
-var sCreateSupportPermit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSupportPermit, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sDeleteSupportPermit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSupportPermit, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sGetAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAction, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sGetSupportPermit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSupportPermit, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sListActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActions, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sListSupportPermitRequests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupportPermitRequests, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sListSupportPermits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupportPermits, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sRejectSupportPermitRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectSupportPermitRequest, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var s_SupportAuthZ = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportAuthZ, Type: smithy.ShapeTypeService, Ext: &ext[11]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &ext[12]})
-var s_Action = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Action, Type: smithy.ShapeTypeString, Ext: &ext[14]})
-var s_ActionDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionDescription, Type: smithy.ShapeTypeString, Ext: &ext[15]})
-var s_Actions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Actions, Members: &m_Actions, Type: smithy.ShapeTypeList, Ext: &ext[16]})
-var sActionSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionSet, Members: &mActionSet, Type: smithy.ShapeTypeUnion, Ext: &ext[18]})
-var s_ActionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionSummaries, Members: &m_ActionSummaries, Type: smithy.ShapeTypeList, Ext: &ext[21]})
-var sActionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionSummary, Members: &mActionSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[23]})
-var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[27]})
-var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[28]})
-var sCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCondition, Members: &mCondition, Type: smithy.ShapeTypeUnion, Ext: &ext[29]})
-var s_Conditions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Conditions, Members: &m_Conditions, Type: smithy.ShapeTypeList, Ext: &ext[32]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &ext[34]})
-var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[38]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &ext[39]})
-var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[43]})
-var s_Name = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var sPermit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPermit, Members: &mPermit, Type: smithy.ShapeTypeStructure, Ext: &ext[46]})
-var s_RequestArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestArn, Type: smithy.ShapeTypeString, Ext: &ext[50]})
-var s_Resource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Resource, Type: smithy.ShapeTypeString, Ext: &ext[51]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &ext[52]})
-var s_Resources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Resources, Members: &m_Resources, Type: smithy.ShapeTypeList, Ext: &ext[56]})
-var sResourceSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceSet, Members: &mResourceSet, Type: smithy.ShapeTypeUnion, Ext: &ext[58]})
-var s_Service = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Service, Type: smithy.ShapeTypeString, Ext: &ext[61]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &ext[62]})
-var sSigningKeyInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSigningKeyInfo, Members: &mSigningKeyInfo, Type: smithy.ShapeTypeUnion, Ext: &ext[68]})
-var s_SupportCaseDisplayId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportCaseDisplayId, Type: smithy.ShapeTypeString, Ext: &ext[70]})
-var s_SupportPermitIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportPermitIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[71]})
-var sSupportPermitRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupportPermitRequest, Members: &mSupportPermitRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var s_SupportPermitRequests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportPermitRequests, Members: &m_SupportPermitRequests, Type: smithy.ShapeTypeList, Ext: &ext[79]})
-var sSupportPermitRequestStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupportPermitRequestStatus, Members: &mSupportPermitRequestStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[81]})
-var sSupportPermitStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupportPermitStatus, Members: &mSupportPermitStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[86]})
-var s_SupportPermitStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportPermitStatuses, Members: &m_SupportPermitStatuses, Type: smithy.ShapeTypeList, Ext: &ext[90]})
-var s_SupportPermitSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportPermitSummaries, Members: &m_SupportPermitSummaries, Type: smithy.ShapeTypeList, Ext: &ext[92]})
-var sSupportPermitSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupportPermitSummary, Members: &mSupportPermitSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[94]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[103]})
-var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[105]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[108]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &ext[109]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &ext[112]})
-var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[115]})
-var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[118]})
-var sCreateSupportPermitInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSupportPermitInput, Members: &mCreateSupportPermitInput, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var sCreateSupportPermitOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSupportPermitOutput, Members: &mCreateSupportPermitOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[128]})
-var sDeleteSupportPermitInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSupportPermitInput, Members: &mDeleteSupportPermitInput, Type: smithy.ShapeTypeStructure, Ext: &ext[138]})
-var sDeleteSupportPermitOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSupportPermitOutput, Members: &mDeleteSupportPermitOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[140]})
-var sGetActionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetActionInput, Members: &mGetActionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[149]})
-var sGetActionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetActionOutput, Members: &mGetActionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[151]})
-var sGetSupportPermitInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSupportPermitInput, Members: &mGetSupportPermitInput, Type: smithy.ShapeTypeStructure, Ext: &ext[155]})
-var sGetSupportPermitOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSupportPermitOutput, Members: &mGetSupportPermitOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[157]})
-var sListActionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActionsInput, Members: &mListActionsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[167]})
-var sListActionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActionsOutput, Members: &mListActionsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[171]})
-var sListSupportPermitRequestsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupportPermitRequestsInput, Members: &mListSupportPermitRequestsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[174]})
-var sListSupportPermitRequestsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupportPermitRequestsOutput, Members: &mListSupportPermitRequestsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[178]})
-var sListSupportPermitsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupportPermitsInput, Members: &mListSupportPermitsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[181]})
-var sListSupportPermitsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupportPermitsOutput, Members: &mListSupportPermitsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[185]})
-var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[188]})
-var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[190]})
-var sRejectSupportPermitRequestInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectSupportPermitRequestInput, Members: &mRejectSupportPermitRequestInput, Type: smithy.ShapeTypeStructure, Ext: &ext[192]})
-var sRejectSupportPermitRequestOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectSupportPermitRequestOutput, Members: &mRejectSupportPermitRequestOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[194]})
-var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[196]})
-var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[199]})
-var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[200]})
-var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[203]})
+var sCreateSupportPermit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSupportPermit, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateSupportPermit})
+var sDeleteSupportPermit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSupportPermit, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eDeleteSupportPermit})
+var sGetAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAction, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eGetAction})
+var sGetSupportPermit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSupportPermit, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eGetSupportPermit})
+var sListActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActions, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eListActions})
+var sListSupportPermitRequests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupportPermitRequests, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eListSupportPermitRequests})
+var sListSupportPermits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupportPermits, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eListSupportPermits})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sRejectSupportPermitRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectSupportPermitRequest, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eRejectSupportPermitRequest})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var s_SupportAuthZ = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportAuthZ, Type: smithy.ShapeTypeService, Ext: &e_SupportAuthZ})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var s_Action = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Action, Type: smithy.ShapeTypeString, Ext: &e_Action})
+var s_ActionDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionDescription, Type: smithy.ShapeTypeString, Ext: &e_ActionDescription})
+var s_Actions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Actions, Members: &m_Actions, Type: smithy.ShapeTypeList, Ext: &e_Actions})
+var sActionSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionSet, Members: &mActionSet, Type: smithy.ShapeTypeUnion, Ext: &eActionSet})
+var s_ActionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionSummaries, Members: &m_ActionSummaries, Type: smithy.ShapeTypeList, Ext: &e_ActionSummaries})
+var sActionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionSummary, Members: &mActionSummary, Type: smithy.ShapeTypeStructure, Ext: &eActionSummary})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
+var sCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCondition, Members: &mCondition, Type: smithy.ShapeTypeUnion, Ext: &eCondition})
+var s_Conditions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Conditions, Members: &m_Conditions, Type: smithy.ShapeTypeList, Ext: &e_Conditions})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &e_Description})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyArn})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_Name = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &e_Name})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sPermit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPermit, Members: &mPermit, Type: smithy.ShapeTypeStructure, Ext: &ePermit})
+var s_RequestArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestArn, Type: smithy.ShapeTypeString, Ext: &e_RequestArn})
+var s_Resource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Resource, Type: smithy.ShapeTypeString, Ext: &e_Resource})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var s_Resources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Resources, Members: &m_Resources, Type: smithy.ShapeTypeList, Ext: &e_Resources})
+var sResourceSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceSet, Members: &mResourceSet, Type: smithy.ShapeTypeUnion, Ext: &eResourceSet})
+var s_Service = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Service, Type: smithy.ShapeTypeString, Ext: &e_Service})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sSigningKeyInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSigningKeyInfo, Members: &mSigningKeyInfo, Type: smithy.ShapeTypeUnion, Ext: &eSigningKeyInfo})
+var s_SupportCaseDisplayId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportCaseDisplayId, Type: smithy.ShapeTypeString, Ext: &e_SupportCaseDisplayId})
+var s_SupportPermitIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportPermitIdentifier, Type: smithy.ShapeTypeString, Ext: &e_SupportPermitIdentifier})
+var sSupportPermitRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupportPermitRequest, Members: &mSupportPermitRequest, Type: smithy.ShapeTypeStructure, Ext: &eSupportPermitRequest})
+var s_SupportPermitRequests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportPermitRequests, Members: &m_SupportPermitRequests, Type: smithy.ShapeTypeList, Ext: &e_SupportPermitRequests})
+var sSupportPermitRequestStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupportPermitRequestStatus, Members: &mSupportPermitRequestStatus, Type: smithy.ShapeTypeEnum, Ext: &eSupportPermitRequestStatus})
+var sSupportPermitStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupportPermitStatus, Members: &mSupportPermitStatus, Type: smithy.ShapeTypeEnum, Ext: &eSupportPermitStatus})
+var s_SupportPermitStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportPermitStatuses, Members: &m_SupportPermitStatuses, Type: smithy.ShapeTypeList, Ext: &e_SupportPermitStatuses})
+var s_SupportPermitSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportPermitSummaries, Members: &m_SupportPermitSummaries, Type: smithy.ShapeTypeList, Ext: &e_SupportPermitSummaries})
+var sSupportPermitSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupportPermitSummary, Members: &mSupportPermitSummary, Type: smithy.ShapeTypeStructure, Ext: &eSupportPermitSummary})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &e_Tags})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var sCreateSupportPermitInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSupportPermitInput, Members: &mCreateSupportPermitInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateSupportPermitInput})
+var sCreateSupportPermitOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSupportPermitOutput, Members: &mCreateSupportPermitOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateSupportPermitOutput})
+var sDeleteSupportPermitInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSupportPermitInput, Members: &mDeleteSupportPermitInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSupportPermitInput})
+var sDeleteSupportPermitOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSupportPermitOutput, Members: &mDeleteSupportPermitOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSupportPermitOutput})
+var sGetActionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetActionInput, Members: &mGetActionInput, Type: smithy.ShapeTypeStructure, Ext: &eGetActionInput})
+var sGetActionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetActionOutput, Members: &mGetActionOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetActionOutput})
+var sGetSupportPermitInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSupportPermitInput, Members: &mGetSupportPermitInput, Type: smithy.ShapeTypeStructure, Ext: &eGetSupportPermitInput})
+var sGetSupportPermitOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSupportPermitOutput, Members: &mGetSupportPermitOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetSupportPermitOutput})
+var sListActionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActionsInput, Members: &mListActionsInput, Type: smithy.ShapeTypeStructure, Ext: &eListActionsInput})
+var sListActionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActionsOutput, Members: &mListActionsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListActionsOutput})
+var sListSupportPermitRequestsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupportPermitRequestsInput, Members: &mListSupportPermitRequestsInput, Type: smithy.ShapeTypeStructure, Ext: &eListSupportPermitRequestsInput})
+var sListSupportPermitRequestsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupportPermitRequestsOutput, Members: &mListSupportPermitRequestsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListSupportPermitRequestsOutput})
+var sListSupportPermitsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupportPermitsInput, Members: &mListSupportPermitsInput, Type: smithy.ShapeTypeStructure, Ext: &eListSupportPermitsInput})
+var sListSupportPermitsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupportPermitsOutput, Members: &mListSupportPermitsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListSupportPermitsOutput})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceInput})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceOutput})
+var sRejectSupportPermitRequestInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectSupportPermitRequestInput, Members: &mRejectSupportPermitRequestInput, Type: smithy.ShapeTypeStructure, Ext: &eRejectSupportPermitRequestInput})
+var sRejectSupportPermitRequestOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectSupportPermitRequestOutput, Members: &mRejectSupportPermitRequestOutput, Type: smithy.ShapeTypeStructure, Ext: &eRejectSupportPermitRequestOutput})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceInput})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceOutput})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceInput})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceOutput})
 
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[13]})
-var s_Actions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Action, Type: smithy.ShapeTypeString, Ext: &ext[17]})
-var sActionSet_allActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allActions", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[19]})
-var sActionSet_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &i_Actions, Members: &m_Actions, Type: smithy.ShapeTypeList, Ext: &ext[20]})
-var s_ActionSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActionSummary, Members: &mActionSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[22]})
-var sActionSummary_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &i_Action, Type: smithy.ShapeTypeString, Ext: &ext[24]})
-var sActionSummary_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "service", ID: &i_Service, Type: smithy.ShapeTypeString, Ext: &ext[25]})
-var sActionSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ActionDescription, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var sCondition_allowAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowAfter", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[30]})
-var sCondition_allowBefore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowBefore", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[31]})
-var s_Conditions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCondition, Members: &mCondition, Type: smithy.ShapeTypeUnion, Ext: &ext[33]})
-var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[37]})
-var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var sInternalServerException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t14, Type: smithy.ShapeTypeInteger, Ext: &ext[41]})
-var sPermit_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &iActionSet, Members: &mActionSet, Type: smithy.ShapeTypeUnion, Ext: &ext[47]})
-var sPermit_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &iResourceSet, Members: &mResourceSet, Type: smithy.ShapeTypeUnion, Ext: &ext[48]})
-var sPermit_conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conditions", ID: &i_Conditions, Members: &m_Conditions, Type: smithy.ShapeTypeList, Ext: &ext[49]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[53]})
-var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var s_Resources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Resource, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var sResourceSet_allResourcesInRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allResourcesInRegion", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[59]})
-var sResourceSet_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_Resources, Members: &m_Resources, Type: smithy.ShapeTypeList, Ext: &ext[60]})
-var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[63]})
-var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[64]})
-var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[65]})
-var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[66]})
-var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[67]})
-var sSigningKeyInfo_kmsKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKey", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var sSupportPermitRequest_requestArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestArn", ID: &i_RequestArn, Type: smithy.ShapeTypeString, Ext: &ext[73]})
-var sSupportPermitRequest_permit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permit", ID: &iPermit, Members: &mPermit, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var sSupportPermitRequest_supportCaseDisplayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportCaseDisplayId", ID: &i_SupportCaseDisplayId, Type: smithy.ShapeTypeString, Ext: &ext[75]})
-var sSupportPermitRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSupportPermitRequestStatus, Members: &mSupportPermitRequestStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[76]})
-var sSupportPermitRequest_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[77]})
-var sSupportPermitRequest_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[78]})
-var s_SupportPermitRequests_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSupportPermitRequest, Members: &mSupportPermitRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var sSupportPermitRequestStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[82]})
-var sSupportPermitRequestStatus_ACCEPTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCEPTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[83]})
-var sSupportPermitRequestStatus_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[84]})
-var sSupportPermitRequestStatus_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[85]})
-var sSupportPermitStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[87]})
-var sSupportPermitStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[88]})
-var sSupportPermitStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[89]})
-var s_SupportPermitStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSupportPermitStatus, Members: &mSupportPermitStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[91]})
-var s_SupportPermitSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSupportPermitSummary, Members: &mSupportPermitSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[93]})
-var sSupportPermitSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &ext[95]})
-var sSupportPermitSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[96]})
-var sSupportPermitSummary_permit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permit", ID: &iPermit, Members: &mPermit, Type: smithy.ShapeTypeStructure, Ext: &ext[97]})
-var sSupportPermitSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSupportPermitStatus, Members: &mSupportPermitStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[98]})
-var sSupportPermitSummary_signingKeyInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingKeyInfo", ID: &iSigningKeyInfo, Members: &mSigningKeyInfo, Type: smithy.ShapeTypeUnion, Ext: &ext[99]})
-var sSupportPermitSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[100]})
-var sSupportPermitSummary_supportCaseDisplayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportCaseDisplayId", ID: &i_SupportCaseDisplayId, Type: smithy.ShapeTypeString, Ext: &ext[101]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[104]})
-var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[106]})
-var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[107]})
-var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[110]})
-var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t14, Type: smithy.ShapeTypeInteger, Ext: &ext[111]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[113]})
-var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[114]})
-var sValidationExceptionField_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[116]})
-var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[117]})
-var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[119]})
-var sCreateSupportPermitInput_permit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permit", ID: &iPermit, Members: &mPermit, Type: smithy.ShapeTypeStructure, Ext: &ext[121]})
-var sCreateSupportPermitInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &ext[122]})
-var sCreateSupportPermitInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[123]})
-var sCreateSupportPermitInput_signingKeyInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingKeyInfo", ID: &iSigningKeyInfo, Members: &mSigningKeyInfo, Type: smithy.ShapeTypeUnion, Ext: &ext[124]})
-var sCreateSupportPermitInput_supportCaseDisplayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportCaseDisplayId", ID: &i_SupportCaseDisplayId, Type: smithy.ShapeTypeString, Ext: &ext[125]})
-var sCreateSupportPermitInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[126]})
-var sCreateSupportPermitInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[127]})
-var sCreateSupportPermitOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &ext[129]})
-var sCreateSupportPermitOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var sCreateSupportPermitOutput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[131]})
-var sCreateSupportPermitOutput_permit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permit", ID: &iPermit, Members: &mPermit, Type: smithy.ShapeTypeStructure, Ext: &ext[132]})
-var sCreateSupportPermitOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSupportPermitStatus, Members: &mSupportPermitStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[133]})
-var sCreateSupportPermitOutput_signingKeyInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingKeyInfo", ID: &iSigningKeyInfo, Members: &mSigningKeyInfo, Type: smithy.ShapeTypeUnion, Ext: &ext[134]})
-var sCreateSupportPermitOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[135]})
-var sCreateSupportPermitOutput_supportCaseDisplayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportCaseDisplayId", ID: &i_SupportCaseDisplayId, Type: smithy.ShapeTypeString, Ext: &ext[136]})
-var sCreateSupportPermitOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[137]})
-var sDeleteSupportPermitInput_supportPermitIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportPermitIdentifier", ID: &i_Arn, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[139]})
-var sDeleteSupportPermitOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &ext[141]})
-var sDeleteSupportPermitOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[142]})
-var sDeleteSupportPermitOutput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[143]})
-var sDeleteSupportPermitOutput_permit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permit", ID: &iPermit, Members: &mPermit, Type: smithy.ShapeTypeStructure, Ext: &ext[144]})
-var sDeleteSupportPermitOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSupportPermitStatus, Members: &mSupportPermitStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[145]})
-var sDeleteSupportPermitOutput_signingKeyInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingKeyInfo", ID: &iSigningKeyInfo, Members: &mSigningKeyInfo, Type: smithy.ShapeTypeUnion, Ext: &ext[146]})
-var sDeleteSupportPermitOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[147]})
-var sDeleteSupportPermitOutput_supportCaseDisplayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportCaseDisplayId", ID: &i_SupportCaseDisplayId, Type: smithy.ShapeTypeString, Ext: &ext[148]})
-var sGetActionInput_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &i_Action, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[150]})
-var sGetActionOutput_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &i_Action, Type: smithy.ShapeTypeString, Ext: &ext[152]})
-var sGetActionOutput_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "service", ID: &i_Service, Type: smithy.ShapeTypeString, Ext: &ext[153]})
-var sGetActionOutput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ActionDescription, Type: smithy.ShapeTypeString, Ext: &ext[154]})
-var sGetSupportPermitInput_supportPermitIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportPermitIdentifier", ID: &i_SupportPermitIdentifier, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[156]})
-var sGetSupportPermitOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &ext[158]})
-var sGetSupportPermitOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[159]})
-var sGetSupportPermitOutput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[160]})
-var sGetSupportPermitOutput_permit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permit", ID: &iPermit, Members: &mPermit, Type: smithy.ShapeTypeStructure, Ext: &ext[161]})
-var sGetSupportPermitOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSupportPermitStatus, Members: &mSupportPermitStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[162]})
-var sGetSupportPermitOutput_signingKeyInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingKeyInfo", ID: &iSigningKeyInfo, Members: &mSigningKeyInfo, Type: smithy.ShapeTypeUnion, Ext: &ext[163]})
-var sGetSupportPermitOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[164]})
-var sGetSupportPermitOutput_supportCaseDisplayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportCaseDisplayId", ID: &i_SupportCaseDisplayId, Type: smithy.ShapeTypeString, Ext: &ext[165]})
-var sGetSupportPermitOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[166]})
-var sListActionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &ext[168]})
-var sListActionsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t21, Type: smithy.ShapeTypeInteger, Ext: &ext[169]})
-var sListActionsInput_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "service", ID: &i_Service, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[170]})
-var sListActionsOutput_actionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionSummaries", ID: &i_ActionSummaries, Members: &m_ActionSummaries, Type: smithy.ShapeTypeList, Ext: &ext[172]})
-var sListActionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[173]})
-var sListSupportPermitRequestsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &ext[175]})
-var sListSupportPermitRequestsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t21, Type: smithy.ShapeTypeInteger, Ext: &ext[176]})
-var sListSupportPermitRequestsInput_supportCaseDisplayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportCaseDisplayId", ID: &i_SupportCaseDisplayId, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[177]})
-var sListSupportPermitRequestsOutput_supportPermitRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportPermitRequests", ID: &i_SupportPermitRequests, Members: &m_SupportPermitRequests, Type: smithy.ShapeTypeList, Ext: &ext[179]})
-var sListSupportPermitRequestsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[180]})
-var sListSupportPermitsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &ext[182]})
-var sListSupportPermitsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t21, Type: smithy.ShapeTypeInteger, Ext: &ext[183]})
-var sListSupportPermitsInput_supportPermitStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportPermitStatuses", ID: &i_SupportPermitStatuses, Members: &m_SupportPermitStatuses, Traits: &t24, Type: smithy.ShapeTypeList, Ext: &ext[184]})
-var sListSupportPermitsOutput_supportPermits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportPermits", ID: &i_SupportPermitSummaries, Members: &m_SupportPermitSummaries, Type: smithy.ShapeTypeList, Ext: &ext[186]})
-var sListSupportPermitsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[187]})
-var sListTagsForResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[189]})
-var sListTagsForResourceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[191]})
-var sRejectSupportPermitRequestInput_requestArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestArn", ID: &i_RequestArn, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[193]})
-var sRejectSupportPermitRequestOutput_requestArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestArn", ID: &i_RequestArn, Type: smithy.ShapeTypeString, Ext: &ext[195]})
-var sTagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[197]})
-var sTagResourceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[198]})
-var sUntagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[201]})
-var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t25, Type: smithy.ShapeTypeList, Ext: &ext[202]})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var s_Actions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Action, Type: smithy.ShapeTypeString, Ext: &e_Actions_member})
+var sActionSet_allActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allActions", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionSet_allActions})
+var sActionSet_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &i_Actions, Members: &m_Actions, Type: smithy.ShapeTypeList, Ext: &eActionSet_actions})
+var s_ActionSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActionSummary, Members: &mActionSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ActionSummaries_member})
+var sActionSummary_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &i_Action, Type: smithy.ShapeTypeString, Ext: &eActionSummary_action})
+var sActionSummary_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "service", ID: &i_Service, Type: smithy.ShapeTypeString, Ext: &eActionSummary_service})
+var sActionSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ActionDescription, Type: smithy.ShapeTypeString, Ext: &eActionSummary_description})
+var sCondition_allowAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowAfter", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCondition_allowAfter})
+var sCondition_allowBefore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowBefore", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCondition_allowBefore})
+var s_Conditions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCondition, Members: &mCondition, Type: smithy.ShapeTypeUnion, Ext: &e_Conditions_member})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceId})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceType})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sInternalServerException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t14, Type: smithy.ShapeTypeInteger, Ext: &eInternalServerException_retryAfterSeconds})
+var sPermit_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &iActionSet, Members: &mActionSet, Type: smithy.ShapeTypeUnion, Ext: &ePermit_actions})
+var sPermit_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &iResourceSet, Members: &mResourceSet, Type: smithy.ShapeTypeUnion, Ext: &ePermit_resources})
+var sPermit_conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conditions", ID: &i_Conditions, Members: &m_Conditions, Type: smithy.ShapeTypeList, Ext: &ePermit_conditions})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceId})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceType})
+var s_Resources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Resource, Type: smithy.ShapeTypeString, Ext: &e_Resources_member})
+var sResourceSet_allResourcesInRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allResourcesInRegion", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceSet_allResourcesInRegion})
+var sResourceSet_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_Resources, Members: &m_Resources, Type: smithy.ShapeTypeList, Ext: &eResourceSet_resources})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceId})
+var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceType})
+var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_serviceCode})
+var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_quotaCode})
+var sSigningKeyInfo_kmsKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKey", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eSigningKeyInfo_kmsKey})
+var sSupportPermitRequest_requestArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestArn", ID: &i_RequestArn, Type: smithy.ShapeTypeString, Ext: &eSupportPermitRequest_requestArn})
+var sSupportPermitRequest_permit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permit", ID: &iPermit, Members: &mPermit, Type: smithy.ShapeTypeStructure, Ext: &eSupportPermitRequest_permit})
+var sSupportPermitRequest_supportCaseDisplayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportCaseDisplayId", ID: &i_SupportCaseDisplayId, Type: smithy.ShapeTypeString, Ext: &eSupportPermitRequest_supportCaseDisplayId})
+var sSupportPermitRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSupportPermitRequestStatus, Members: &mSupportPermitRequestStatus, Type: smithy.ShapeTypeEnum, Ext: &eSupportPermitRequest_status})
+var sSupportPermitRequest_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSupportPermitRequest_createdAt})
+var sSupportPermitRequest_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSupportPermitRequest_updatedAt})
+var s_SupportPermitRequests_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSupportPermitRequest, Members: &mSupportPermitRequest, Type: smithy.ShapeTypeStructure, Ext: &e_SupportPermitRequests_member})
+var sSupportPermitRequestStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSupportPermitRequestStatus_PENDING})
+var sSupportPermitRequestStatus_ACCEPTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCEPTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSupportPermitRequestStatus_ACCEPTED})
+var sSupportPermitRequestStatus_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSupportPermitRequestStatus_REJECTED})
+var sSupportPermitRequestStatus_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSupportPermitRequestStatus_CANCELLED})
+var sSupportPermitStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSupportPermitStatus_ACTIVE})
+var sSupportPermitStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSupportPermitStatus_INACTIVE})
+var sSupportPermitStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSupportPermitStatus_DELETING})
+var s_SupportPermitStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSupportPermitStatus, Members: &mSupportPermitStatus, Type: smithy.ShapeTypeEnum, Ext: &e_SupportPermitStatuses_member})
+var s_SupportPermitSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSupportPermitSummary, Members: &mSupportPermitSummary, Type: smithy.ShapeTypeStructure, Ext: &e_SupportPermitSummaries_member})
+var sSupportPermitSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eSupportPermitSummary_name})
+var sSupportPermitSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eSupportPermitSummary_arn})
+var sSupportPermitSummary_permit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permit", ID: &iPermit, Members: &mPermit, Type: smithy.ShapeTypeStructure, Ext: &eSupportPermitSummary_permit})
+var sSupportPermitSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSupportPermitStatus, Members: &mSupportPermitStatus, Type: smithy.ShapeTypeEnum, Ext: &eSupportPermitSummary_status})
+var sSupportPermitSummary_signingKeyInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingKeyInfo", ID: &iSigningKeyInfo, Members: &mSigningKeyInfo, Type: smithy.ShapeTypeUnion, Ext: &eSupportPermitSummary_signingKeyInfo})
+var sSupportPermitSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSupportPermitSummary_createdAt})
+var sSupportPermitSummary_supportCaseDisplayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportCaseDisplayId", ID: &i_SupportCaseDisplayId, Type: smithy.ShapeTypeString, Ext: &eSupportPermitSummary_supportCaseDisplayId})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_Tags_key})
+var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_Tags_value})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t14, Type: smithy.ShapeTypeInteger, Ext: &eThrottlingException_retryAfterSeconds})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_fieldList})
+var sValidationExceptionField_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_path})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_message})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var sCreateSupportPermitInput_permit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permit", ID: &iPermit, Members: &mPermit, Type: smithy.ShapeTypeStructure, Ext: &eCreateSupportPermitInput_permit})
+var sCreateSupportPermitInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateSupportPermitInput_name})
+var sCreateSupportPermitInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateSupportPermitInput_description})
+var sCreateSupportPermitInput_signingKeyInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingKeyInfo", ID: &iSigningKeyInfo, Members: &mSigningKeyInfo, Type: smithy.ShapeTypeUnion, Ext: &eCreateSupportPermitInput_signingKeyInfo})
+var sCreateSupportPermitInput_supportCaseDisplayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportCaseDisplayId", ID: &i_SupportCaseDisplayId, Type: smithy.ShapeTypeString, Ext: &eCreateSupportPermitInput_supportCaseDisplayId})
+var sCreateSupportPermitInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateSupportPermitInput_clientToken})
+var sCreateSupportPermitInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateSupportPermitInput_tags})
+var sCreateSupportPermitOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateSupportPermitOutput_name})
+var sCreateSupportPermitOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateSupportPermitOutput_arn})
+var sCreateSupportPermitOutput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateSupportPermitOutput_description})
+var sCreateSupportPermitOutput_permit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permit", ID: &iPermit, Members: &mPermit, Type: smithy.ShapeTypeStructure, Ext: &eCreateSupportPermitOutput_permit})
+var sCreateSupportPermitOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSupportPermitStatus, Members: &mSupportPermitStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateSupportPermitOutput_status})
+var sCreateSupportPermitOutput_signingKeyInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingKeyInfo", ID: &iSigningKeyInfo, Members: &mSigningKeyInfo, Type: smithy.ShapeTypeUnion, Ext: &eCreateSupportPermitOutput_signingKeyInfo})
+var sCreateSupportPermitOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateSupportPermitOutput_createdAt})
+var sCreateSupportPermitOutput_supportCaseDisplayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportCaseDisplayId", ID: &i_SupportCaseDisplayId, Type: smithy.ShapeTypeString, Ext: &eCreateSupportPermitOutput_supportCaseDisplayId})
+var sCreateSupportPermitOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateSupportPermitOutput_tags})
+var sDeleteSupportPermitInput_supportPermitIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportPermitIdentifier", ID: &i_Arn, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eDeleteSupportPermitInput_supportPermitIdentifier})
+var sDeleteSupportPermitOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDeleteSupportPermitOutput_name})
+var sDeleteSupportPermitOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDeleteSupportPermitOutput_arn})
+var sDeleteSupportPermitOutput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eDeleteSupportPermitOutput_description})
+var sDeleteSupportPermitOutput_permit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permit", ID: &iPermit, Members: &mPermit, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSupportPermitOutput_permit})
+var sDeleteSupportPermitOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSupportPermitStatus, Members: &mSupportPermitStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeleteSupportPermitOutput_status})
+var sDeleteSupportPermitOutput_signingKeyInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingKeyInfo", ID: &iSigningKeyInfo, Members: &mSigningKeyInfo, Type: smithy.ShapeTypeUnion, Ext: &eDeleteSupportPermitOutput_signingKeyInfo})
+var sDeleteSupportPermitOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDeleteSupportPermitOutput_createdAt})
+var sDeleteSupportPermitOutput_supportCaseDisplayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportCaseDisplayId", ID: &i_SupportCaseDisplayId, Type: smithy.ShapeTypeString, Ext: &eDeleteSupportPermitOutput_supportCaseDisplayId})
+var sGetActionInput_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &i_Action, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eGetActionInput_action})
+var sGetActionOutput_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &i_Action, Type: smithy.ShapeTypeString, Ext: &eGetActionOutput_action})
+var sGetActionOutput_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "service", ID: &i_Service, Type: smithy.ShapeTypeString, Ext: &eGetActionOutput_service})
+var sGetActionOutput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ActionDescription, Type: smithy.ShapeTypeString, Ext: &eGetActionOutput_description})
+var sGetSupportPermitInput_supportPermitIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportPermitIdentifier", ID: &i_SupportPermitIdentifier, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eGetSupportPermitInput_supportPermitIdentifier})
+var sGetSupportPermitOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eGetSupportPermitOutput_name})
+var sGetSupportPermitOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetSupportPermitOutput_arn})
+var sGetSupportPermitOutput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eGetSupportPermitOutput_description})
+var sGetSupportPermitOutput_permit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permit", ID: &iPermit, Members: &mPermit, Type: smithy.ShapeTypeStructure, Ext: &eGetSupportPermitOutput_permit})
+var sGetSupportPermitOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSupportPermitStatus, Members: &mSupportPermitStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetSupportPermitOutput_status})
+var sGetSupportPermitOutput_signingKeyInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingKeyInfo", ID: &iSigningKeyInfo, Members: &mSigningKeyInfo, Type: smithy.ShapeTypeUnion, Ext: &eGetSupportPermitOutput_signingKeyInfo})
+var sGetSupportPermitOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetSupportPermitOutput_createdAt})
+var sGetSupportPermitOutput_supportCaseDisplayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportCaseDisplayId", ID: &i_SupportCaseDisplayId, Type: smithy.ShapeTypeString, Ext: &eGetSupportPermitOutput_supportCaseDisplayId})
+var sGetSupportPermitOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eGetSupportPermitOutput_tags})
+var sListActionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eListActionsInput_nextToken})
+var sListActionsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t21, Type: smithy.ShapeTypeInteger, Ext: &eListActionsInput_maxResults})
+var sListActionsInput_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "service", ID: &i_Service, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eListActionsInput_service})
+var sListActionsOutput_actionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionSummaries", ID: &i_ActionSummaries, Members: &m_ActionSummaries, Type: smithy.ShapeTypeList, Ext: &eListActionsOutput_actionSummaries})
+var sListActionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListActionsOutput_nextToken})
+var sListSupportPermitRequestsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eListSupportPermitRequestsInput_nextToken})
+var sListSupportPermitRequestsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t21, Type: smithy.ShapeTypeInteger, Ext: &eListSupportPermitRequestsInput_maxResults})
+var sListSupportPermitRequestsInput_supportCaseDisplayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportCaseDisplayId", ID: &i_SupportCaseDisplayId, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eListSupportPermitRequestsInput_supportCaseDisplayId})
+var sListSupportPermitRequestsOutput_supportPermitRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportPermitRequests", ID: &i_SupportPermitRequests, Members: &m_SupportPermitRequests, Type: smithy.ShapeTypeList, Ext: &eListSupportPermitRequestsOutput_supportPermitRequests})
+var sListSupportPermitRequestsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListSupportPermitRequestsOutput_nextToken})
+var sListSupportPermitsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eListSupportPermitsInput_nextToken})
+var sListSupportPermitsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t21, Type: smithy.ShapeTypeInteger, Ext: &eListSupportPermitsInput_maxResults})
+var sListSupportPermitsInput_supportPermitStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportPermitStatuses", ID: &i_SupportPermitStatuses, Members: &m_SupportPermitStatuses, Traits: &t24, Type: smithy.ShapeTypeList, Ext: &eListSupportPermitsInput_supportPermitStatuses})
+var sListSupportPermitsOutput_supportPermits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportPermits", ID: &i_SupportPermitSummaries, Members: &m_SupportPermitSummaries, Type: smithy.ShapeTypeList, Ext: &eListSupportPermitsOutput_supportPermits})
+var sListSupportPermitsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListSupportPermitsOutput_nextToken})
+var sListTagsForResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceInput_resourceArn})
+var sListTagsForResourceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceOutput_tags})
+var sRejectSupportPermitRequestInput_requestArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestArn", ID: &i_RequestArn, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eRejectSupportPermitRequestInput_requestArn})
+var sRejectSupportPermitRequestOutput_requestArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestArn", ID: &i_RequestArn, Type: smithy.ShapeTypeString, Ext: &eRejectSupportPermitRequestOutput_requestArn})
+var sTagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eTagResourceInput_resourceArn})
+var sTagResourceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eTagResourceInput_tags})
+var sUntagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eUntagResourceInput_resourceArn})
+var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t25, Type: smithy.ShapeTypeList, Ext: &eUntagResourceInput_tagKeys})
 
 var CreateSupportPermit = &sCreateSupportPermit
 

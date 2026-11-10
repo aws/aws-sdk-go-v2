@@ -7,9 +7,36 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [28]smithy.SchemaExtensions
+var (
+	eSimpleScalarProperties                           smithy.SchemaExtensions
+	e_RestXmlWithNamespace                            smithy.SchemaExtensions
+	eNestedWithNamespace                              smithy.SchemaExtensions
+	eNestedWithNamespace_attrField                    smithy.SchemaExtensions
+	eSimpleScalarPropertiesRequest                    smithy.SchemaExtensions
+	eSimpleScalarPropertiesRequest_foo                smithy.SchemaExtensions
+	eSimpleScalarPropertiesRequest_stringValue        smithy.SchemaExtensions
+	eSimpleScalarPropertiesRequest_trueBooleanValue   smithy.SchemaExtensions
+	eSimpleScalarPropertiesRequest_falseBooleanValue  smithy.SchemaExtensions
+	eSimpleScalarPropertiesRequest_byteValue          smithy.SchemaExtensions
+	eSimpleScalarPropertiesRequest_shortValue         smithy.SchemaExtensions
+	eSimpleScalarPropertiesRequest_integerValue       smithy.SchemaExtensions
+	eSimpleScalarPropertiesRequest_longValue          smithy.SchemaExtensions
+	eSimpleScalarPropertiesRequest_floatValue         smithy.SchemaExtensions
+	eSimpleScalarPropertiesRequest_Nested             smithy.SchemaExtensions
+	eSimpleScalarPropertiesRequest_doubleValue        smithy.SchemaExtensions
+	eSimpleScalarPropertiesResponse                   smithy.SchemaExtensions
+	eSimpleScalarPropertiesResponse_foo               smithy.SchemaExtensions
+	eSimpleScalarPropertiesResponse_stringValue       smithy.SchemaExtensions
+	eSimpleScalarPropertiesResponse_trueBooleanValue  smithy.SchemaExtensions
+	eSimpleScalarPropertiesResponse_falseBooleanValue smithy.SchemaExtensions
+	eSimpleScalarPropertiesResponse_byteValue         smithy.SchemaExtensions
+	eSimpleScalarPropertiesResponse_shortValue        smithy.SchemaExtensions
+	eSimpleScalarPropertiesResponse_integerValue      smithy.SchemaExtensions
+	eSimpleScalarPropertiesResponse_longValue         smithy.SchemaExtensions
+	eSimpleScalarPropertiesResponse_floatValue        smithy.SchemaExtensions
+	eSimpleScalarPropertiesResponse_Nested            smithy.SchemaExtensions
+	eSimpleScalarPropertiesResponse_doubleValue       smithy.SchemaExtensions
+)
 
 var (
 	iSimpleScalarProperties         = smithy.ShapeID{Namespace: "aws.protocoltests.restxml.xmlns", Name: "SimpleScalarProperties"}
@@ -47,35 +74,35 @@ var mSimpleScalarPropertiesResponse = smithy.SchemaMembers{List: []*smithy.Schem
 	0, 0, 7, 6, 0, 0, 2, 0,
 }}
 
-var sSimpleScalarProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSimpleScalarProperties, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var s_RestXmlWithNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RestXmlWithNamespace, Traits: &t1, Type: smithy.ShapeTypeService, Ext: &ext[1]})
-var sNestedWithNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNestedWithNamespace, Members: &mNestedWithNamespace, Type: smithy.ShapeTypeStructure, Ext: &ext[2]})
-var sSimpleScalarPropertiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSimpleScalarPropertiesRequest, Members: &mSimpleScalarPropertiesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[4]})
-var sSimpleScalarPropertiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSimpleScalarPropertiesResponse, Members: &mSimpleScalarPropertiesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[16]})
+var sSimpleScalarProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSimpleScalarProperties, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eSimpleScalarProperties})
+var s_RestXmlWithNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RestXmlWithNamespace, Traits: &t1, Type: smithy.ShapeTypeService, Ext: &e_RestXmlWithNamespace})
+var sNestedWithNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNestedWithNamespace, Members: &mNestedWithNamespace, Type: smithy.ShapeTypeStructure, Ext: &eNestedWithNamespace})
+var sSimpleScalarPropertiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSimpleScalarPropertiesRequest, Members: &mSimpleScalarPropertiesRequest, Type: smithy.ShapeTypeStructure, Ext: &eSimpleScalarPropertiesRequest})
+var sSimpleScalarPropertiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSimpleScalarPropertiesResponse, Members: &mSimpleScalarPropertiesResponse, Type: smithy.ShapeTypeStructure, Ext: &eSimpleScalarPropertiesResponse})
 
-var sNestedWithNamespace_attrField = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attrField", ID: &pString, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[3]})
-var sSimpleScalarPropertiesRequest_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[5]})
-var sSimpleScalarPropertiesRequest_stringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[6]})
-var sSimpleScalarPropertiesRequest_trueBooleanValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trueBooleanValue", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[7]})
-var sSimpleScalarPropertiesRequest_falseBooleanValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "falseBooleanValue", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[8]})
-var sSimpleScalarPropertiesRequest_byteValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "byteValue", ID: &pByte, Type: smithy.ShapeTypeByte, Ext: &ext[9]})
-var sSimpleScalarPropertiesRequest_shortValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shortValue", ID: &pShort, Type: smithy.ShapeTypeShort, Ext: &ext[10]})
-var sSimpleScalarPropertiesRequest_integerValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerValue", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[11]})
-var sSimpleScalarPropertiesRequest_longValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "longValue", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[12]})
-var sSimpleScalarPropertiesRequest_floatValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "floatValue", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[13]})
-var sSimpleScalarPropertiesRequest_Nested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Nested", ID: &iNestedWithNamespace, Members: &mNestedWithNamespace, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &ext[14]})
-var sSimpleScalarPropertiesRequest_doubleValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "doubleValue", ID: &pDouble, Traits: &t5, Type: smithy.ShapeTypeDouble, Ext: &ext[15]})
-var sSimpleScalarPropertiesResponse_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[17]})
-var sSimpleScalarPropertiesResponse_stringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[18]})
-var sSimpleScalarPropertiesResponse_trueBooleanValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trueBooleanValue", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[19]})
-var sSimpleScalarPropertiesResponse_falseBooleanValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "falseBooleanValue", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[20]})
-var sSimpleScalarPropertiesResponse_byteValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "byteValue", ID: &pByte, Type: smithy.ShapeTypeByte, Ext: &ext[21]})
-var sSimpleScalarPropertiesResponse_shortValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shortValue", ID: &pShort, Type: smithy.ShapeTypeShort, Ext: &ext[22]})
-var sSimpleScalarPropertiesResponse_integerValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerValue", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[23]})
-var sSimpleScalarPropertiesResponse_longValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "longValue", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[24]})
-var sSimpleScalarPropertiesResponse_floatValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "floatValue", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[25]})
-var sSimpleScalarPropertiesResponse_Nested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Nested", ID: &iNestedWithNamespace, Members: &mNestedWithNamespace, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &ext[26]})
-var sSimpleScalarPropertiesResponse_doubleValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "doubleValue", ID: &pDouble, Traits: &t5, Type: smithy.ShapeTypeDouble, Ext: &ext[27]})
+var sNestedWithNamespace_attrField = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attrField", ID: &pString, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eNestedWithNamespace_attrField})
+var sSimpleScalarPropertiesRequest_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eSimpleScalarPropertiesRequest_foo})
+var sSimpleScalarPropertiesRequest_stringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSimpleScalarPropertiesRequest_stringValue})
+var sSimpleScalarPropertiesRequest_trueBooleanValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trueBooleanValue", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eSimpleScalarPropertiesRequest_trueBooleanValue})
+var sSimpleScalarPropertiesRequest_falseBooleanValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "falseBooleanValue", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eSimpleScalarPropertiesRequest_falseBooleanValue})
+var sSimpleScalarPropertiesRequest_byteValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "byteValue", ID: &pByte, Type: smithy.ShapeTypeByte, Ext: &eSimpleScalarPropertiesRequest_byteValue})
+var sSimpleScalarPropertiesRequest_shortValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shortValue", ID: &pShort, Type: smithy.ShapeTypeShort, Ext: &eSimpleScalarPropertiesRequest_shortValue})
+var sSimpleScalarPropertiesRequest_integerValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerValue", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSimpleScalarPropertiesRequest_integerValue})
+var sSimpleScalarPropertiesRequest_longValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "longValue", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eSimpleScalarPropertiesRequest_longValue})
+var sSimpleScalarPropertiesRequest_floatValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "floatValue", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eSimpleScalarPropertiesRequest_floatValue})
+var sSimpleScalarPropertiesRequest_Nested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Nested", ID: &iNestedWithNamespace, Members: &mNestedWithNamespace, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eSimpleScalarPropertiesRequest_Nested})
+var sSimpleScalarPropertiesRequest_doubleValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "doubleValue", ID: &pDouble, Traits: &t5, Type: smithy.ShapeTypeDouble, Ext: &eSimpleScalarPropertiesRequest_doubleValue})
+var sSimpleScalarPropertiesResponse_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eSimpleScalarPropertiesResponse_foo})
+var sSimpleScalarPropertiesResponse_stringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSimpleScalarPropertiesResponse_stringValue})
+var sSimpleScalarPropertiesResponse_trueBooleanValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trueBooleanValue", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eSimpleScalarPropertiesResponse_trueBooleanValue})
+var sSimpleScalarPropertiesResponse_falseBooleanValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "falseBooleanValue", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eSimpleScalarPropertiesResponse_falseBooleanValue})
+var sSimpleScalarPropertiesResponse_byteValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "byteValue", ID: &pByte, Type: smithy.ShapeTypeByte, Ext: &eSimpleScalarPropertiesResponse_byteValue})
+var sSimpleScalarPropertiesResponse_shortValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shortValue", ID: &pShort, Type: smithy.ShapeTypeShort, Ext: &eSimpleScalarPropertiesResponse_shortValue})
+var sSimpleScalarPropertiesResponse_integerValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerValue", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSimpleScalarPropertiesResponse_integerValue})
+var sSimpleScalarPropertiesResponse_longValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "longValue", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eSimpleScalarPropertiesResponse_longValue})
+var sSimpleScalarPropertiesResponse_floatValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "floatValue", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eSimpleScalarPropertiesResponse_floatValue})
+var sSimpleScalarPropertiesResponse_Nested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Nested", ID: &iNestedWithNamespace, Members: &mNestedWithNamespace, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eSimpleScalarPropertiesResponse_Nested})
+var sSimpleScalarPropertiesResponse_doubleValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "doubleValue", ID: &pDouble, Traits: &t5, Type: smithy.ShapeTypeDouble, Ext: &eSimpleScalarPropertiesResponse_doubleValue})
 
 var SimpleScalarProperties = &sSimpleScalarProperties
 

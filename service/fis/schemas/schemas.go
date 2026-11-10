@@ -7,9 +7,722 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [714]smithy.SchemaExtensions
+var (
+	eCreateExperimentTemplate                                                      smithy.SchemaExtensions
+	eCreateTargetAccountConfiguration                                              smithy.SchemaExtensions
+	eDeleteExperimentTemplate                                                      smithy.SchemaExtensions
+	eDeleteTargetAccountConfiguration                                              smithy.SchemaExtensions
+	eGetAction                                                                     smithy.SchemaExtensions
+	eGetExperiment                                                                 smithy.SchemaExtensions
+	eGetExperimentTargetAccountConfiguration                                       smithy.SchemaExtensions
+	eGetExperimentTemplate                                                         smithy.SchemaExtensions
+	eGetSafetyLever                                                                smithy.SchemaExtensions
+	eGetTargetAccountConfiguration                                                 smithy.SchemaExtensions
+	eGetTargetResourceType                                                         smithy.SchemaExtensions
+	eListActions                                                                   smithy.SchemaExtensions
+	eListExperimentResolvedTargets                                                 smithy.SchemaExtensions
+	eListExperiments                                                               smithy.SchemaExtensions
+	eListExperimentTargetAccountConfigurations                                     smithy.SchemaExtensions
+	eListExperimentTemplates                                                       smithy.SchemaExtensions
+	eListTagsForResource                                                           smithy.SchemaExtensions
+	eListTargetAccountConfigurations                                               smithy.SchemaExtensions
+	eListTargetResourceTypes                                                       smithy.SchemaExtensions
+	eStartExperiment                                                               smithy.SchemaExtensions
+	eStopExperiment                                                                smithy.SchemaExtensions
+	eTagResource                                                                   smithy.SchemaExtensions
+	eUntagResource                                                                 smithy.SchemaExtensions
+	eUpdateExperimentTemplate                                                      smithy.SchemaExtensions
+	eUpdateSafetyLeverState                                                        smithy.SchemaExtensions
+	eUpdateTargetAccountConfiguration                                              smithy.SchemaExtensions
+	e_FaultInjectionSimulator                                                      smithy.SchemaExtensions
+	eAccountTargeting                                                              smithy.SchemaExtensions
+	eAccountTargeting_SINGLE_ACCOUNT                                               smithy.SchemaExtensions
+	eAccountTargeting_MULTI_ACCOUNT                                                smithy.SchemaExtensions
+	eAction                                                                        smithy.SchemaExtensions
+	eAction_id                                                                     smithy.SchemaExtensions
+	eAction_arn                                                                    smithy.SchemaExtensions
+	eAction_description                                                            smithy.SchemaExtensions
+	eAction_parameters                                                             smithy.SchemaExtensions
+	eAction_targets                                                                smithy.SchemaExtensions
+	eAction_tags                                                                   smithy.SchemaExtensions
+	e_ActionDescription                                                            smithy.SchemaExtensions
+	e_ActionId                                                                     smithy.SchemaExtensions
+	eActionParameter                                                               smithy.SchemaExtensions
+	eActionParameter_description                                                   smithy.SchemaExtensions
+	eActionParameter_required                                                      smithy.SchemaExtensions
+	e_ActionParameterDescription                                                   smithy.SchemaExtensions
+	e_ActionParameterMap                                                           smithy.SchemaExtensions
+	e_ActionParameterMap_key                                                       smithy.SchemaExtensions
+	e_ActionParameterMap_value                                                     smithy.SchemaExtensions
+	e_ActionParameterName                                                          smithy.SchemaExtensions
+	e_ActionParameterRequired                                                      smithy.SchemaExtensions
+	eActionsMode                                                                   smithy.SchemaExtensions
+	eActionsMode_SKIP_ALL                                                          smithy.SchemaExtensions
+	eActionsMode_RUN_ALL                                                           smithy.SchemaExtensions
+	eActionSummary                                                                 smithy.SchemaExtensions
+	eActionSummary_id                                                              smithy.SchemaExtensions
+	eActionSummary_arn                                                             smithy.SchemaExtensions
+	eActionSummary_description                                                     smithy.SchemaExtensions
+	eActionSummary_targets                                                         smithy.SchemaExtensions
+	eActionSummary_tags                                                            smithy.SchemaExtensions
+	e_ActionSummaryList                                                            smithy.SchemaExtensions
+	e_ActionSummaryList_member                                                     smithy.SchemaExtensions
+	eActionTarget                                                                  smithy.SchemaExtensions
+	eActionTarget_resourceType                                                     smithy.SchemaExtensions
+	e_ActionTargetMap                                                              smithy.SchemaExtensions
+	e_ActionTargetMap_key                                                          smithy.SchemaExtensions
+	e_ActionTargetMap_value                                                        smithy.SchemaExtensions
+	e_ActionTargetName                                                             smithy.SchemaExtensions
+	e_ClientToken                                                                  smithy.SchemaExtensions
+	e_CloudWatchLogGroupArn                                                        smithy.SchemaExtensions
+	eConflictException                                                             smithy.SchemaExtensions
+	eConflictException_message                                                     smithy.SchemaExtensions
+	eCreateExperimentTemplateActionInput                                           smithy.SchemaExtensions
+	eCreateExperimentTemplateActionInput_actionId                                  smithy.SchemaExtensions
+	eCreateExperimentTemplateActionInput_description                               smithy.SchemaExtensions
+	eCreateExperimentTemplateActionInput_parameters                                smithy.SchemaExtensions
+	eCreateExperimentTemplateActionInput_targets                                   smithy.SchemaExtensions
+	eCreateExperimentTemplateActionInput_startAfter                                smithy.SchemaExtensions
+	e_CreateExperimentTemplateActionInputMap                                       smithy.SchemaExtensions
+	e_CreateExperimentTemplateActionInputMap_key                                   smithy.SchemaExtensions
+	e_CreateExperimentTemplateActionInputMap_value                                 smithy.SchemaExtensions
+	eCreateExperimentTemplateExperimentOptionsInput                                smithy.SchemaExtensions
+	eCreateExperimentTemplateExperimentOptionsInput_accountTargeting               smithy.SchemaExtensions
+	eCreateExperimentTemplateExperimentOptionsInput_emptyTargetResolutionMode      smithy.SchemaExtensions
+	eCreateExperimentTemplateLogConfigurationInput                                 smithy.SchemaExtensions
+	eCreateExperimentTemplateLogConfigurationInput_cloudWatchLogsConfiguration     smithy.SchemaExtensions
+	eCreateExperimentTemplateLogConfigurationInput_s3Configuration                 smithy.SchemaExtensions
+	eCreateExperimentTemplateLogConfigurationInput_logSchemaVersion                smithy.SchemaExtensions
+	eCreateExperimentTemplateReportConfigurationInput                              smithy.SchemaExtensions
+	eCreateExperimentTemplateReportConfigurationInput_outputs                      smithy.SchemaExtensions
+	eCreateExperimentTemplateReportConfigurationInput_dataSources                  smithy.SchemaExtensions
+	eCreateExperimentTemplateReportConfigurationInput_preExperimentDuration        smithy.SchemaExtensions
+	eCreateExperimentTemplateReportConfigurationInput_postExperimentDuration       smithy.SchemaExtensions
+	eCreateExperimentTemplateStopConditionInput                                    smithy.SchemaExtensions
+	eCreateExperimentTemplateStopConditionInput_source                             smithy.SchemaExtensions
+	eCreateExperimentTemplateStopConditionInput_value                              smithy.SchemaExtensions
+	e_CreateExperimentTemplateStopConditionInputList                               smithy.SchemaExtensions
+	e_CreateExperimentTemplateStopConditionInputList_member                        smithy.SchemaExtensions
+	eCreateExperimentTemplateTargetInput                                           smithy.SchemaExtensions
+	eCreateExperimentTemplateTargetInput_resourceType                              smithy.SchemaExtensions
+	eCreateExperimentTemplateTargetInput_resourceArns                              smithy.SchemaExtensions
+	eCreateExperimentTemplateTargetInput_resourceTags                              smithy.SchemaExtensions
+	eCreateExperimentTemplateTargetInput_filters                                   smithy.SchemaExtensions
+	eCreateExperimentTemplateTargetInput_selectionMode                             smithy.SchemaExtensions
+	eCreateExperimentTemplateTargetInput_parameters                                smithy.SchemaExtensions
+	e_CreateExperimentTemplateTargetInputMap                                       smithy.SchemaExtensions
+	e_CreateExperimentTemplateTargetInputMap_key                                   smithy.SchemaExtensions
+	e_CreateExperimentTemplateTargetInputMap_value                                 smithy.SchemaExtensions
+	e_CreationTime                                                                 smithy.SchemaExtensions
+	eEmptyTargetResolutionMode                                                     smithy.SchemaExtensions
+	eEmptyTargetResolutionMode_FAIL                                                smithy.SchemaExtensions
+	eEmptyTargetResolutionMode_SKIP                                                smithy.SchemaExtensions
+	e_ExceptionMessage                                                             smithy.SchemaExtensions
+	eExperiment                                                                    smithy.SchemaExtensions
+	eExperiment_id                                                                 smithy.SchemaExtensions
+	eExperiment_arn                                                                smithy.SchemaExtensions
+	eExperiment_experimentTemplateId                                               smithy.SchemaExtensions
+	eExperiment_roleArn                                                            smithy.SchemaExtensions
+	eExperiment_state                                                              smithy.SchemaExtensions
+	eExperiment_targets                                                            smithy.SchemaExtensions
+	eExperiment_actions                                                            smithy.SchemaExtensions
+	eExperiment_stopConditions                                                     smithy.SchemaExtensions
+	eExperiment_creationTime                                                       smithy.SchemaExtensions
+	eExperiment_startTime                                                          smithy.SchemaExtensions
+	eExperiment_endTime                                                            smithy.SchemaExtensions
+	eExperiment_tags                                                               smithy.SchemaExtensions
+	eExperiment_logConfiguration                                                   smithy.SchemaExtensions
+	eExperiment_experimentOptions                                                  smithy.SchemaExtensions
+	eExperiment_targetAccountConfigurationsCount                                   smithy.SchemaExtensions
+	eExperiment_experimentReportConfiguration                                      smithy.SchemaExtensions
+	eExperiment_experimentReport                                                   smithy.SchemaExtensions
+	eExperimentAction                                                              smithy.SchemaExtensions
+	eExperimentAction_actionId                                                     smithy.SchemaExtensions
+	eExperimentAction_description                                                  smithy.SchemaExtensions
+	eExperimentAction_parameters                                                   smithy.SchemaExtensions
+	eExperimentAction_targets                                                      smithy.SchemaExtensions
+	eExperimentAction_startAfter                                                   smithy.SchemaExtensions
+	eExperimentAction_state                                                        smithy.SchemaExtensions
+	eExperimentAction_startTime                                                    smithy.SchemaExtensions
+	eExperimentAction_endTime                                                      smithy.SchemaExtensions
+	e_ExperimentActionDescription                                                  smithy.SchemaExtensions
+	e_ExperimentActionEndTime                                                      smithy.SchemaExtensions
+	e_ExperimentActionMap                                                          smithy.SchemaExtensions
+	e_ExperimentActionMap_key                                                      smithy.SchemaExtensions
+	e_ExperimentActionMap_value                                                    smithy.SchemaExtensions
+	e_ExperimentActionName                                                         smithy.SchemaExtensions
+	e_ExperimentActionParameter                                                    smithy.SchemaExtensions
+	e_ExperimentActionParameterMap                                                 smithy.SchemaExtensions
+	e_ExperimentActionParameterMap_key                                             smithy.SchemaExtensions
+	e_ExperimentActionParameterMap_value                                           smithy.SchemaExtensions
+	e_ExperimentActionParameterName                                                smithy.SchemaExtensions
+	e_ExperimentActionStartAfter                                                   smithy.SchemaExtensions
+	e_ExperimentActionStartAfterList                                               smithy.SchemaExtensions
+	e_ExperimentActionStartAfterList_member                                        smithy.SchemaExtensions
+	e_ExperimentActionStartTime                                                    smithy.SchemaExtensions
+	eExperimentActionState                                                         smithy.SchemaExtensions
+	eExperimentActionState_status                                                  smithy.SchemaExtensions
+	eExperimentActionState_reason                                                  smithy.SchemaExtensions
+	eExperimentActionStatus                                                        smithy.SchemaExtensions
+	eExperimentActionStatus_pending                                                smithy.SchemaExtensions
+	eExperimentActionStatus_initiating                                             smithy.SchemaExtensions
+	eExperimentActionStatus_running                                                smithy.SchemaExtensions
+	eExperimentActionStatus_completed                                              smithy.SchemaExtensions
+	eExperimentActionStatus_cancelled                                              smithy.SchemaExtensions
+	eExperimentActionStatus_stopping                                               smithy.SchemaExtensions
+	eExperimentActionStatus_stopped                                                smithy.SchemaExtensions
+	eExperimentActionStatus_failed                                                 smithy.SchemaExtensions
+	eExperimentActionStatus_skipped                                                smithy.SchemaExtensions
+	e_ExperimentActionStatusReason                                                 smithy.SchemaExtensions
+	e_ExperimentActionTargetMap                                                    smithy.SchemaExtensions
+	e_ExperimentActionTargetMap_key                                                smithy.SchemaExtensions
+	e_ExperimentActionTargetMap_value                                              smithy.SchemaExtensions
+	e_ExperimentActionTargetName                                                   smithy.SchemaExtensions
+	eExperimentCloudWatchLogsLogConfiguration                                      smithy.SchemaExtensions
+	eExperimentCloudWatchLogsLogConfiguration_logGroupArn                          smithy.SchemaExtensions
+	e_ExperimentEndTime                                                            smithy.SchemaExtensions
+	eExperimentError                                                               smithy.SchemaExtensions
+	eExperimentError_accountId                                                     smithy.SchemaExtensions
+	eExperimentError_code                                                          smithy.SchemaExtensions
+	eExperimentError_location                                                      smithy.SchemaExtensions
+	e_ExperimentErrorAccountId                                                     smithy.SchemaExtensions
+	e_ExperimentErrorCode                                                          smithy.SchemaExtensions
+	e_ExperimentErrorLocation                                                      smithy.SchemaExtensions
+	e_ExperimentId                                                                 smithy.SchemaExtensions
+	eExperimentLogConfiguration                                                    smithy.SchemaExtensions
+	eExperimentLogConfiguration_cloudWatchLogsConfiguration                        smithy.SchemaExtensions
+	eExperimentLogConfiguration_s3Configuration                                    smithy.SchemaExtensions
+	eExperimentLogConfiguration_logSchemaVersion                                   smithy.SchemaExtensions
+	eExperimentOptions                                                             smithy.SchemaExtensions
+	eExperimentOptions_accountTargeting                                            smithy.SchemaExtensions
+	eExperimentOptions_emptyTargetResolutionMode                                   smithy.SchemaExtensions
+	eExperimentOptions_actionsMode                                                 smithy.SchemaExtensions
+	eExperimentReport                                                              smithy.SchemaExtensions
+	eExperimentReport_state                                                        smithy.SchemaExtensions
+	eExperimentReport_s3Reports                                                    smithy.SchemaExtensions
+	eExperimentReportConfiguration                                                 smithy.SchemaExtensions
+	eExperimentReportConfiguration_outputs                                         smithy.SchemaExtensions
+	eExperimentReportConfiguration_dataSources                                     smithy.SchemaExtensions
+	eExperimentReportConfiguration_preExperimentDuration                           smithy.SchemaExtensions
+	eExperimentReportConfiguration_postExperimentDuration                          smithy.SchemaExtensions
+	eExperimentReportConfigurationCloudWatchDashboard                              smithy.SchemaExtensions
+	eExperimentReportConfigurationCloudWatchDashboard_dashboardIdentifier          smithy.SchemaExtensions
+	e_ExperimentReportConfigurationCloudWatchDashboardList                         smithy.SchemaExtensions
+	e_ExperimentReportConfigurationCloudWatchDashboardList_member                  smithy.SchemaExtensions
+	eExperimentReportConfigurationDataSources                                      smithy.SchemaExtensions
+	eExperimentReportConfigurationDataSources_cloudWatchDashboards                 smithy.SchemaExtensions
+	eExperimentReportConfigurationOutputs                                          smithy.SchemaExtensions
+	eExperimentReportConfigurationOutputs_s3Configuration                          smithy.SchemaExtensions
+	eExperimentReportConfigurationOutputsS3Configuration                           smithy.SchemaExtensions
+	eExperimentReportConfigurationOutputsS3Configuration_bucketName                smithy.SchemaExtensions
+	eExperimentReportConfigurationOutputsS3Configuration_prefix                    smithy.SchemaExtensions
+	eExperimentReportError                                                         smithy.SchemaExtensions
+	eExperimentReportError_code                                                    smithy.SchemaExtensions
+	e_ExperimentReportErrorCode                                                    smithy.SchemaExtensions
+	e_ExperimentReportReason                                                       smithy.SchemaExtensions
+	eExperimentReportS3Report                                                      smithy.SchemaExtensions
+	eExperimentReportS3Report_arn                                                  smithy.SchemaExtensions
+	eExperimentReportS3Report_reportType                                           smithy.SchemaExtensions
+	e_ExperimentReportS3ReportArn                                                  smithy.SchemaExtensions
+	e_ExperimentReportS3ReportList                                                 smithy.SchemaExtensions
+	e_ExperimentReportS3ReportList_member                                          smithy.SchemaExtensions
+	e_ExperimentReportS3ReportType                                                 smithy.SchemaExtensions
+	eExperimentReportState                                                         smithy.SchemaExtensions
+	eExperimentReportState_status                                                  smithy.SchemaExtensions
+	eExperimentReportState_reason                                                  smithy.SchemaExtensions
+	eExperimentReportState_error                                                   smithy.SchemaExtensions
+	eExperimentReportStatus                                                        smithy.SchemaExtensions
+	eExperimentReportStatus_pending                                                smithy.SchemaExtensions
+	eExperimentReportStatus_running                                                smithy.SchemaExtensions
+	eExperimentReportStatus_completed                                              smithy.SchemaExtensions
+	eExperimentReportStatus_cancelled                                              smithy.SchemaExtensions
+	eExperimentReportStatus_failed                                                 smithy.SchemaExtensions
+	eExperimentS3LogConfiguration                                                  smithy.SchemaExtensions
+	eExperimentS3LogConfiguration_bucketName                                       smithy.SchemaExtensions
+	eExperimentS3LogConfiguration_prefix                                           smithy.SchemaExtensions
+	e_ExperimentStartTime                                                          smithy.SchemaExtensions
+	eExperimentState                                                               smithy.SchemaExtensions
+	eExperimentState_status                                                        smithy.SchemaExtensions
+	eExperimentState_reason                                                        smithy.SchemaExtensions
+	eExperimentState_error                                                         smithy.SchemaExtensions
+	eExperimentStatus                                                              smithy.SchemaExtensions
+	eExperimentStatus_pending                                                      smithy.SchemaExtensions
+	eExperimentStatus_initiating                                                   smithy.SchemaExtensions
+	eExperimentStatus_running                                                      smithy.SchemaExtensions
+	eExperimentStatus_completed                                                    smithy.SchemaExtensions
+	eExperimentStatus_stopping                                                     smithy.SchemaExtensions
+	eExperimentStatus_stopped                                                      smithy.SchemaExtensions
+	eExperimentStatus_failed                                                       smithy.SchemaExtensions
+	eExperimentStatus_cancelled                                                    smithy.SchemaExtensions
+	e_ExperimentStatusReason                                                       smithy.SchemaExtensions
+	eExperimentStopCondition                                                       smithy.SchemaExtensions
+	eExperimentStopCondition_source                                                smithy.SchemaExtensions
+	eExperimentStopCondition_value                                                 smithy.SchemaExtensions
+	e_ExperimentStopConditionList                                                  smithy.SchemaExtensions
+	e_ExperimentStopConditionList_member                                           smithy.SchemaExtensions
+	eExperimentSummary                                                             smithy.SchemaExtensions
+	eExperimentSummary_id                                                          smithy.SchemaExtensions
+	eExperimentSummary_arn                                                         smithy.SchemaExtensions
+	eExperimentSummary_experimentTemplateId                                        smithy.SchemaExtensions
+	eExperimentSummary_state                                                       smithy.SchemaExtensions
+	eExperimentSummary_creationTime                                                smithy.SchemaExtensions
+	eExperimentSummary_tags                                                        smithy.SchemaExtensions
+	eExperimentSummary_experimentOptions                                           smithy.SchemaExtensions
+	e_ExperimentSummaryList                                                        smithy.SchemaExtensions
+	e_ExperimentSummaryList_member                                                 smithy.SchemaExtensions
+	eExperimentTarget                                                              smithy.SchemaExtensions
+	eExperimentTarget_resourceType                                                 smithy.SchemaExtensions
+	eExperimentTarget_resourceArns                                                 smithy.SchemaExtensions
+	eExperimentTarget_resourceTags                                                 smithy.SchemaExtensions
+	eExperimentTarget_filters                                                      smithy.SchemaExtensions
+	eExperimentTarget_selectionMode                                                smithy.SchemaExtensions
+	eExperimentTarget_parameters                                                   smithy.SchemaExtensions
+	eExperimentTargetAccountConfiguration                                          smithy.SchemaExtensions
+	eExperimentTargetAccountConfiguration_roleArn                                  smithy.SchemaExtensions
+	eExperimentTargetAccountConfiguration_accountId                                smithy.SchemaExtensions
+	eExperimentTargetAccountConfiguration_description                              smithy.SchemaExtensions
+	e_ExperimentTargetAccountConfigurationList                                     smithy.SchemaExtensions
+	e_ExperimentTargetAccountConfigurationList_member                              smithy.SchemaExtensions
+	eExperimentTargetAccountConfigurationSummary                                   smithy.SchemaExtensions
+	eExperimentTargetAccountConfigurationSummary_roleArn                           smithy.SchemaExtensions
+	eExperimentTargetAccountConfigurationSummary_accountId                         smithy.SchemaExtensions
+	eExperimentTargetAccountConfigurationSummary_description                       smithy.SchemaExtensions
+	eExperimentTargetFilter                                                        smithy.SchemaExtensions
+	eExperimentTargetFilter_path                                                   smithy.SchemaExtensions
+	eExperimentTargetFilter_values                                                 smithy.SchemaExtensions
+	e_ExperimentTargetFilterList                                                   smithy.SchemaExtensions
+	e_ExperimentTargetFilterList_member                                            smithy.SchemaExtensions
+	e_ExperimentTargetFilterPath                                                   smithy.SchemaExtensions
+	e_ExperimentTargetFilterValue                                                  smithy.SchemaExtensions
+	e_ExperimentTargetFilterValues                                                 smithy.SchemaExtensions
+	e_ExperimentTargetFilterValues_member                                          smithy.SchemaExtensions
+	e_ExperimentTargetMap                                                          smithy.SchemaExtensions
+	e_ExperimentTargetMap_key                                                      smithy.SchemaExtensions
+	e_ExperimentTargetMap_value                                                    smithy.SchemaExtensions
+	e_ExperimentTargetName                                                         smithy.SchemaExtensions
+	e_ExperimentTargetParameterMap                                                 smithy.SchemaExtensions
+	e_ExperimentTargetParameterMap_key                                             smithy.SchemaExtensions
+	e_ExperimentTargetParameterMap_value                                           smithy.SchemaExtensions
+	e_ExperimentTargetParameterName                                                smithy.SchemaExtensions
+	e_ExperimentTargetParameterValue                                               smithy.SchemaExtensions
+	e_ExperimentTargetSelectionMode                                                smithy.SchemaExtensions
+	eExperimentTemplate                                                            smithy.SchemaExtensions
+	eExperimentTemplate_id                                                         smithy.SchemaExtensions
+	eExperimentTemplate_arn                                                        smithy.SchemaExtensions
+	eExperimentTemplate_description                                                smithy.SchemaExtensions
+	eExperimentTemplate_targets                                                    smithy.SchemaExtensions
+	eExperimentTemplate_actions                                                    smithy.SchemaExtensions
+	eExperimentTemplate_stopConditions                                             smithy.SchemaExtensions
+	eExperimentTemplate_creationTime                                               smithy.SchemaExtensions
+	eExperimentTemplate_lastUpdateTime                                             smithy.SchemaExtensions
+	eExperimentTemplate_roleArn                                                    smithy.SchemaExtensions
+	eExperimentTemplate_tags                                                       smithy.SchemaExtensions
+	eExperimentTemplate_logConfiguration                                           smithy.SchemaExtensions
+	eExperimentTemplate_experimentOptions                                          smithy.SchemaExtensions
+	eExperimentTemplate_targetAccountConfigurationsCount                           smithy.SchemaExtensions
+	eExperimentTemplate_experimentReportConfiguration                              smithy.SchemaExtensions
+	eExperimentTemplateAction                                                      smithy.SchemaExtensions
+	eExperimentTemplateAction_actionId                                             smithy.SchemaExtensions
+	eExperimentTemplateAction_description                                          smithy.SchemaExtensions
+	eExperimentTemplateAction_parameters                                           smithy.SchemaExtensions
+	eExperimentTemplateAction_targets                                              smithy.SchemaExtensions
+	eExperimentTemplateAction_startAfter                                           smithy.SchemaExtensions
+	e_ExperimentTemplateActionDescription                                          smithy.SchemaExtensions
+	e_ExperimentTemplateActionMap                                                  smithy.SchemaExtensions
+	e_ExperimentTemplateActionMap_key                                              smithy.SchemaExtensions
+	e_ExperimentTemplateActionMap_value                                            smithy.SchemaExtensions
+	e_ExperimentTemplateActionName                                                 smithy.SchemaExtensions
+	e_ExperimentTemplateActionParameter                                            smithy.SchemaExtensions
+	e_ExperimentTemplateActionParameterMap                                         smithy.SchemaExtensions
+	e_ExperimentTemplateActionParameterMap_key                                     smithy.SchemaExtensions
+	e_ExperimentTemplateActionParameterMap_value                                   smithy.SchemaExtensions
+	e_ExperimentTemplateActionParameterName                                        smithy.SchemaExtensions
+	e_ExperimentTemplateActionStartAfter                                           smithy.SchemaExtensions
+	e_ExperimentTemplateActionStartAfterList                                       smithy.SchemaExtensions
+	e_ExperimentTemplateActionStartAfterList_member                                smithy.SchemaExtensions
+	e_ExperimentTemplateActionTargetMap                                            smithy.SchemaExtensions
+	e_ExperimentTemplateActionTargetMap_key                                        smithy.SchemaExtensions
+	e_ExperimentTemplateActionTargetMap_value                                      smithy.SchemaExtensions
+	e_ExperimentTemplateActionTargetName                                           smithy.SchemaExtensions
+	eExperimentTemplateCloudWatchLogsLogConfiguration                              smithy.SchemaExtensions
+	eExperimentTemplateCloudWatchLogsLogConfiguration_logGroupArn                  smithy.SchemaExtensions
+	eExperimentTemplateCloudWatchLogsLogConfigurationInput                         smithy.SchemaExtensions
+	eExperimentTemplateCloudWatchLogsLogConfigurationInput_logGroupArn             smithy.SchemaExtensions
+	e_ExperimentTemplateDescription                                                smithy.SchemaExtensions
+	eExperimentTemplateExperimentOptions                                           smithy.SchemaExtensions
+	eExperimentTemplateExperimentOptions_accountTargeting                          smithy.SchemaExtensions
+	eExperimentTemplateExperimentOptions_emptyTargetResolutionMode                 smithy.SchemaExtensions
+	e_ExperimentTemplateId                                                         smithy.SchemaExtensions
+	eExperimentTemplateLogConfiguration                                            smithy.SchemaExtensions
+	eExperimentTemplateLogConfiguration_cloudWatchLogsConfiguration                smithy.SchemaExtensions
+	eExperimentTemplateLogConfiguration_s3Configuration                            smithy.SchemaExtensions
+	eExperimentTemplateLogConfiguration_logSchemaVersion                           smithy.SchemaExtensions
+	eExperimentTemplateReportConfiguration                                         smithy.SchemaExtensions
+	eExperimentTemplateReportConfiguration_outputs                                 smithy.SchemaExtensions
+	eExperimentTemplateReportConfiguration_dataSources                             smithy.SchemaExtensions
+	eExperimentTemplateReportConfiguration_preExperimentDuration                   smithy.SchemaExtensions
+	eExperimentTemplateReportConfiguration_postExperimentDuration                  smithy.SchemaExtensions
+	eExperimentTemplateReportConfigurationCloudWatchDashboard                      smithy.SchemaExtensions
+	eExperimentTemplateReportConfigurationCloudWatchDashboard_dashboardIdentifier  smithy.SchemaExtensions
+	e_ExperimentTemplateReportConfigurationCloudWatchDashboardList                 smithy.SchemaExtensions
+	e_ExperimentTemplateReportConfigurationCloudWatchDashboardList_member          smithy.SchemaExtensions
+	eExperimentTemplateReportConfigurationDataSources                              smithy.SchemaExtensions
+	eExperimentTemplateReportConfigurationDataSources_cloudWatchDashboards         smithy.SchemaExtensions
+	eExperimentTemplateReportConfigurationDataSourcesInput                         smithy.SchemaExtensions
+	eExperimentTemplateReportConfigurationDataSourcesInput_cloudWatchDashboards    smithy.SchemaExtensions
+	eExperimentTemplateReportConfigurationOutputs                                  smithy.SchemaExtensions
+	eExperimentTemplateReportConfigurationOutputs_s3Configuration                  smithy.SchemaExtensions
+	eExperimentTemplateReportConfigurationOutputsInput                             smithy.SchemaExtensions
+	eExperimentTemplateReportConfigurationOutputsInput_s3Configuration             smithy.SchemaExtensions
+	eExperimentTemplateS3LogConfiguration                                          smithy.SchemaExtensions
+	eExperimentTemplateS3LogConfiguration_bucketName                               smithy.SchemaExtensions
+	eExperimentTemplateS3LogConfiguration_prefix                                   smithy.SchemaExtensions
+	eExperimentTemplateS3LogConfigurationInput                                     smithy.SchemaExtensions
+	eExperimentTemplateS3LogConfigurationInput_bucketName                          smithy.SchemaExtensions
+	eExperimentTemplateS3LogConfigurationInput_prefix                              smithy.SchemaExtensions
+	eExperimentTemplateStopCondition                                               smithy.SchemaExtensions
+	eExperimentTemplateStopCondition_source                                        smithy.SchemaExtensions
+	eExperimentTemplateStopCondition_value                                         smithy.SchemaExtensions
+	e_ExperimentTemplateStopConditionList                                          smithy.SchemaExtensions
+	e_ExperimentTemplateStopConditionList_member                                   smithy.SchemaExtensions
+	eExperimentTemplateSummary                                                     smithy.SchemaExtensions
+	eExperimentTemplateSummary_id                                                  smithy.SchemaExtensions
+	eExperimentTemplateSummary_arn                                                 smithy.SchemaExtensions
+	eExperimentTemplateSummary_description                                         smithy.SchemaExtensions
+	eExperimentTemplateSummary_creationTime                                        smithy.SchemaExtensions
+	eExperimentTemplateSummary_lastUpdateTime                                      smithy.SchemaExtensions
+	eExperimentTemplateSummary_tags                                                smithy.SchemaExtensions
+	e_ExperimentTemplateSummaryList                                                smithy.SchemaExtensions
+	e_ExperimentTemplateSummaryList_member                                         smithy.SchemaExtensions
+	eExperimentTemplateTarget                                                      smithy.SchemaExtensions
+	eExperimentTemplateTarget_resourceType                                         smithy.SchemaExtensions
+	eExperimentTemplateTarget_resourceArns                                         smithy.SchemaExtensions
+	eExperimentTemplateTarget_resourceTags                                         smithy.SchemaExtensions
+	eExperimentTemplateTarget_filters                                              smithy.SchemaExtensions
+	eExperimentTemplateTarget_selectionMode                                        smithy.SchemaExtensions
+	eExperimentTemplateTarget_parameters                                           smithy.SchemaExtensions
+	eExperimentTemplateTargetFilter                                                smithy.SchemaExtensions
+	eExperimentTemplateTargetFilter_path                                           smithy.SchemaExtensions
+	eExperimentTemplateTargetFilter_values                                         smithy.SchemaExtensions
+	e_ExperimentTemplateTargetFilterInputList                                      smithy.SchemaExtensions
+	e_ExperimentTemplateTargetFilterInputList_member                               smithy.SchemaExtensions
+	e_ExperimentTemplateTargetFilterList                                           smithy.SchemaExtensions
+	e_ExperimentTemplateTargetFilterList_member                                    smithy.SchemaExtensions
+	e_ExperimentTemplateTargetFilterPath                                           smithy.SchemaExtensions
+	e_ExperimentTemplateTargetFilterValue                                          smithy.SchemaExtensions
+	e_ExperimentTemplateTargetFilterValues                                         smithy.SchemaExtensions
+	e_ExperimentTemplateTargetFilterValues_member                                  smithy.SchemaExtensions
+	eExperimentTemplateTargetInputFilter                                           smithy.SchemaExtensions
+	eExperimentTemplateTargetInputFilter_path                                      smithy.SchemaExtensions
+	eExperimentTemplateTargetInputFilter_values                                    smithy.SchemaExtensions
+	e_ExperimentTemplateTargetMap                                                  smithy.SchemaExtensions
+	e_ExperimentTemplateTargetMap_key                                              smithy.SchemaExtensions
+	e_ExperimentTemplateTargetMap_value                                            smithy.SchemaExtensions
+	e_ExperimentTemplateTargetName                                                 smithy.SchemaExtensions
+	e_ExperimentTemplateTargetParameterMap                                         smithy.SchemaExtensions
+	e_ExperimentTemplateTargetParameterMap_key                                     smithy.SchemaExtensions
+	e_ExperimentTemplateTargetParameterMap_value                                   smithy.SchemaExtensions
+	e_ExperimentTemplateTargetParameterName                                        smithy.SchemaExtensions
+	e_ExperimentTemplateTargetParameterValue                                       smithy.SchemaExtensions
+	e_ExperimentTemplateTargetSelectionMode                                        smithy.SchemaExtensions
+	e_LastUpdateTime                                                               smithy.SchemaExtensions
+	e_ListActionsMaxResults                                                        smithy.SchemaExtensions
+	e_ListExperimentResolvedTargetsMaxResults                                      smithy.SchemaExtensions
+	e_ListExperimentsMaxResults                                                    smithy.SchemaExtensions
+	e_ListExperimentTemplatesMaxResults                                            smithy.SchemaExtensions
+	e_ListTargetAccountConfigurationsMaxResults                                    smithy.SchemaExtensions
+	e_ListTargetResourceTypesMaxResults                                            smithy.SchemaExtensions
+	e_LogSchemaVersion                                                             smithy.SchemaExtensions
+	e_NextToken                                                                    smithy.SchemaExtensions
+	e_ReportConfigurationCloudWatchDashboardIdentifier                             smithy.SchemaExtensions
+	eReportConfigurationCloudWatchDashboardInput                                   smithy.SchemaExtensions
+	eReportConfigurationCloudWatchDashboardInput_dashboardIdentifier               smithy.SchemaExtensions
+	e_ReportConfigurationCloudWatchDashboardInputList                              smithy.SchemaExtensions
+	e_ReportConfigurationCloudWatchDashboardInputList_member                       smithy.SchemaExtensions
+	e_ReportConfigurationDuration                                                  smithy.SchemaExtensions
+	eReportConfigurationS3Output                                                   smithy.SchemaExtensions
+	eReportConfigurationS3Output_bucketName                                        smithy.SchemaExtensions
+	eReportConfigurationS3Output_prefix                                            smithy.SchemaExtensions
+	eReportConfigurationS3OutputInput                                              smithy.SchemaExtensions
+	eReportConfigurationS3OutputInput_bucketName                                   smithy.SchemaExtensions
+	eReportConfigurationS3OutputInput_prefix                                       smithy.SchemaExtensions
+	e_ReportConfigurationS3OutputPrefix                                            smithy.SchemaExtensions
+	eResolvedTarget                                                                smithy.SchemaExtensions
+	eResolvedTarget_resourceType                                                   smithy.SchemaExtensions
+	eResolvedTarget_targetName                                                     smithy.SchemaExtensions
+	eResolvedTarget_targetInformation                                              smithy.SchemaExtensions
+	e_ResolvedTargetList                                                           smithy.SchemaExtensions
+	e_ResolvedTargetList_member                                                    smithy.SchemaExtensions
+	e_ResourceArn                                                                  smithy.SchemaExtensions
+	e_ResourceArnList                                                              smithy.SchemaExtensions
+	e_ResourceArnList_member                                                       smithy.SchemaExtensions
+	eResourceNotFoundException                                                     smithy.SchemaExtensions
+	eResourceNotFoundException_message                                             smithy.SchemaExtensions
+	e_RoleArn                                                                      smithy.SchemaExtensions
+	e_S3BucketName                                                                 smithy.SchemaExtensions
+	e_S3ObjectKey                                                                  smithy.SchemaExtensions
+	eSafetyLever                                                                   smithy.SchemaExtensions
+	eSafetyLever_id                                                                smithy.SchemaExtensions
+	eSafetyLever_arn                                                               smithy.SchemaExtensions
+	eSafetyLever_state                                                             smithy.SchemaExtensions
+	e_SafetyLeverId                                                                smithy.SchemaExtensions
+	eSafetyLeverState                                                              smithy.SchemaExtensions
+	eSafetyLeverState_status                                                       smithy.SchemaExtensions
+	eSafetyLeverState_reason                                                       smithy.SchemaExtensions
+	eSafetyLeverStatus                                                             smithy.SchemaExtensions
+	eSafetyLeverStatus_DISENGAGED                                                  smithy.SchemaExtensions
+	eSafetyLeverStatus_ENGAGED                                                     smithy.SchemaExtensions
+	eSafetyLeverStatus_ENGAGING                                                    smithy.SchemaExtensions
+	eSafetyLeverStatusInput                                                        smithy.SchemaExtensions
+	eSafetyLeverStatusInput_DISENGAGED                                             smithy.SchemaExtensions
+	eSafetyLeverStatusInput_ENGAGED                                                smithy.SchemaExtensions
+	e_SafetyLeverStatusReason                                                      smithy.SchemaExtensions
+	eServiceQuotaExceededException                                                 smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                                         smithy.SchemaExtensions
+	eStartExperimentExperimentOptionsInput                                         smithy.SchemaExtensions
+	eStartExperimentExperimentOptionsInput_actionsMode                             smithy.SchemaExtensions
+	e_StopConditionSource                                                          smithy.SchemaExtensions
+	e_StopConditionValue                                                           smithy.SchemaExtensions
+	e_TagKey                                                                       smithy.SchemaExtensions
+	e_TagKeyList                                                                   smithy.SchemaExtensions
+	e_TagKeyList_member                                                            smithy.SchemaExtensions
+	e_TagMap                                                                       smithy.SchemaExtensions
+	e_TagMap_key                                                                   smithy.SchemaExtensions
+	e_TagMap_value                                                                 smithy.SchemaExtensions
+	e_TagValue                                                                     smithy.SchemaExtensions
+	eTargetAccountConfiguration                                                    smithy.SchemaExtensions
+	eTargetAccountConfiguration_roleArn                                            smithy.SchemaExtensions
+	eTargetAccountConfiguration_accountId                                          smithy.SchemaExtensions
+	eTargetAccountConfiguration_description                                        smithy.SchemaExtensions
+	e_TargetAccountConfigurationDescription                                        smithy.SchemaExtensions
+	e_TargetAccountConfigurationList                                               smithy.SchemaExtensions
+	e_TargetAccountConfigurationList_member                                        smithy.SchemaExtensions
+	e_TargetAccountConfigurationsCount                                             smithy.SchemaExtensions
+	eTargetAccountConfigurationSummary                                             smithy.SchemaExtensions
+	eTargetAccountConfigurationSummary_roleArn                                     smithy.SchemaExtensions
+	eTargetAccountConfigurationSummary_accountId                                   smithy.SchemaExtensions
+	eTargetAccountConfigurationSummary_description                                 smithy.SchemaExtensions
+	e_TargetAccountId                                                              smithy.SchemaExtensions
+	e_TargetInformationKey                                                         smithy.SchemaExtensions
+	e_TargetInformationMap                                                         smithy.SchemaExtensions
+	e_TargetInformationMap_key                                                     smithy.SchemaExtensions
+	e_TargetInformationMap_value                                                   smithy.SchemaExtensions
+	e_TargetInformationValue                                                       smithy.SchemaExtensions
+	e_TargetName                                                                   smithy.SchemaExtensions
+	eTargetResourceType                                                            smithy.SchemaExtensions
+	eTargetResourceType_resourceType                                               smithy.SchemaExtensions
+	eTargetResourceType_description                                                smithy.SchemaExtensions
+	eTargetResourceType_parameters                                                 smithy.SchemaExtensions
+	e_TargetResourceTypeDescription                                                smithy.SchemaExtensions
+	e_TargetResourceTypeId                                                         smithy.SchemaExtensions
+	eTargetResourceTypeParameter                                                   smithy.SchemaExtensions
+	eTargetResourceTypeParameter_description                                       smithy.SchemaExtensions
+	eTargetResourceTypeParameter_required                                          smithy.SchemaExtensions
+	e_TargetResourceTypeParameterDescription                                       smithy.SchemaExtensions
+	e_TargetResourceTypeParameterMap                                               smithy.SchemaExtensions
+	e_TargetResourceTypeParameterMap_key                                           smithy.SchemaExtensions
+	e_TargetResourceTypeParameterMap_value                                         smithy.SchemaExtensions
+	e_TargetResourceTypeParameterName                                              smithy.SchemaExtensions
+	e_TargetResourceTypeParameterRequired                                          smithy.SchemaExtensions
+	eTargetResourceTypeSummary                                                     smithy.SchemaExtensions
+	eTargetResourceTypeSummary_resourceType                                        smithy.SchemaExtensions
+	eTargetResourceTypeSummary_description                                         smithy.SchemaExtensions
+	e_TargetResourceTypeSummaryList                                                smithy.SchemaExtensions
+	e_TargetResourceTypeSummaryList_member                                         smithy.SchemaExtensions
+	eUpdateExperimentTemplateActionInputItem                                       smithy.SchemaExtensions
+	eUpdateExperimentTemplateActionInputItem_actionId                              smithy.SchemaExtensions
+	eUpdateExperimentTemplateActionInputItem_description                           smithy.SchemaExtensions
+	eUpdateExperimentTemplateActionInputItem_parameters                            smithy.SchemaExtensions
+	eUpdateExperimentTemplateActionInputItem_targets                               smithy.SchemaExtensions
+	eUpdateExperimentTemplateActionInputItem_startAfter                            smithy.SchemaExtensions
+	e_UpdateExperimentTemplateActionInputMap                                       smithy.SchemaExtensions
+	e_UpdateExperimentTemplateActionInputMap_key                                   smithy.SchemaExtensions
+	e_UpdateExperimentTemplateActionInputMap_value                                 smithy.SchemaExtensions
+	eUpdateExperimentTemplateExperimentOptionsInput                                smithy.SchemaExtensions
+	eUpdateExperimentTemplateExperimentOptionsInput_emptyTargetResolutionMode      smithy.SchemaExtensions
+	eUpdateExperimentTemplateLogConfigurationInput                                 smithy.SchemaExtensions
+	eUpdateExperimentTemplateLogConfigurationInput_cloudWatchLogsConfiguration     smithy.SchemaExtensions
+	eUpdateExperimentTemplateLogConfigurationInput_s3Configuration                 smithy.SchemaExtensions
+	eUpdateExperimentTemplateLogConfigurationInput_logSchemaVersion                smithy.SchemaExtensions
+	eUpdateExperimentTemplateReportConfigurationInput                              smithy.SchemaExtensions
+	eUpdateExperimentTemplateReportConfigurationInput_outputs                      smithy.SchemaExtensions
+	eUpdateExperimentTemplateReportConfigurationInput_dataSources                  smithy.SchemaExtensions
+	eUpdateExperimentTemplateReportConfigurationInput_preExperimentDuration        smithy.SchemaExtensions
+	eUpdateExperimentTemplateReportConfigurationInput_postExperimentDuration       smithy.SchemaExtensions
+	eUpdateExperimentTemplateStopConditionInput                                    smithy.SchemaExtensions
+	eUpdateExperimentTemplateStopConditionInput_source                             smithy.SchemaExtensions
+	eUpdateExperimentTemplateStopConditionInput_value                              smithy.SchemaExtensions
+	e_UpdateExperimentTemplateStopConditionInputList                               smithy.SchemaExtensions
+	e_UpdateExperimentTemplateStopConditionInputList_member                        smithy.SchemaExtensions
+	eUpdateExperimentTemplateTargetInput                                           smithy.SchemaExtensions
+	eUpdateExperimentTemplateTargetInput_resourceType                              smithy.SchemaExtensions
+	eUpdateExperimentTemplateTargetInput_resourceArns                              smithy.SchemaExtensions
+	eUpdateExperimentTemplateTargetInput_resourceTags                              smithy.SchemaExtensions
+	eUpdateExperimentTemplateTargetInput_filters                                   smithy.SchemaExtensions
+	eUpdateExperimentTemplateTargetInput_selectionMode                             smithy.SchemaExtensions
+	eUpdateExperimentTemplateTargetInput_parameters                                smithy.SchemaExtensions
+	e_UpdateExperimentTemplateTargetInputMap                                       smithy.SchemaExtensions
+	e_UpdateExperimentTemplateTargetInputMap_key                                   smithy.SchemaExtensions
+	e_UpdateExperimentTemplateTargetInputMap_value                                 smithy.SchemaExtensions
+	eUpdateSafetyLeverStateInput                                                   smithy.SchemaExtensions
+	eUpdateSafetyLeverStateInput_status                                            smithy.SchemaExtensions
+	eUpdateSafetyLeverStateInput_reason                                            smithy.SchemaExtensions
+	eValidationException                                                           smithy.SchemaExtensions
+	eValidationException_message                                                   smithy.SchemaExtensions
+	eCreateExperimentTemplateRequest                                               smithy.SchemaExtensions
+	eCreateExperimentTemplateRequest_clientToken                                   smithy.SchemaExtensions
+	eCreateExperimentTemplateRequest_description                                   smithy.SchemaExtensions
+	eCreateExperimentTemplateRequest_stopConditions                                smithy.SchemaExtensions
+	eCreateExperimentTemplateRequest_targets                                       smithy.SchemaExtensions
+	eCreateExperimentTemplateRequest_actions                                       smithy.SchemaExtensions
+	eCreateExperimentTemplateRequest_roleArn                                       smithy.SchemaExtensions
+	eCreateExperimentTemplateRequest_tags                                          smithy.SchemaExtensions
+	eCreateExperimentTemplateRequest_logConfiguration                              smithy.SchemaExtensions
+	eCreateExperimentTemplateRequest_experimentOptions                             smithy.SchemaExtensions
+	eCreateExperimentTemplateRequest_experimentReportConfiguration                 smithy.SchemaExtensions
+	eCreateExperimentTemplateResponse                                              smithy.SchemaExtensions
+	eCreateExperimentTemplateResponse_experimentTemplate                           smithy.SchemaExtensions
+	eCreateTargetAccountConfigurationRequest                                       smithy.SchemaExtensions
+	eCreateTargetAccountConfigurationRequest_clientToken                           smithy.SchemaExtensions
+	eCreateTargetAccountConfigurationRequest_experimentTemplateId                  smithy.SchemaExtensions
+	eCreateTargetAccountConfigurationRequest_accountId                             smithy.SchemaExtensions
+	eCreateTargetAccountConfigurationRequest_roleArn                               smithy.SchemaExtensions
+	eCreateTargetAccountConfigurationRequest_description                           smithy.SchemaExtensions
+	eCreateTargetAccountConfigurationResponse                                      smithy.SchemaExtensions
+	eCreateTargetAccountConfigurationResponse_targetAccountConfiguration           smithy.SchemaExtensions
+	eDeleteExperimentTemplateRequest                                               smithy.SchemaExtensions
+	eDeleteExperimentTemplateRequest_id                                            smithy.SchemaExtensions
+	eDeleteExperimentTemplateResponse                                              smithy.SchemaExtensions
+	eDeleteExperimentTemplateResponse_experimentTemplate                           smithy.SchemaExtensions
+	eDeleteTargetAccountConfigurationRequest                                       smithy.SchemaExtensions
+	eDeleteTargetAccountConfigurationRequest_experimentTemplateId                  smithy.SchemaExtensions
+	eDeleteTargetAccountConfigurationRequest_accountId                             smithy.SchemaExtensions
+	eDeleteTargetAccountConfigurationResponse                                      smithy.SchemaExtensions
+	eDeleteTargetAccountConfigurationResponse_targetAccountConfiguration           smithy.SchemaExtensions
+	eGetActionRequest                                                              smithy.SchemaExtensions
+	eGetActionRequest_id                                                           smithy.SchemaExtensions
+	eGetActionResponse                                                             smithy.SchemaExtensions
+	eGetActionResponse_action                                                      smithy.SchemaExtensions
+	eGetExperimentRequest                                                          smithy.SchemaExtensions
+	eGetExperimentRequest_id                                                       smithy.SchemaExtensions
+	eGetExperimentResponse                                                         smithy.SchemaExtensions
+	eGetExperimentResponse_experiment                                              smithy.SchemaExtensions
+	eGetExperimentTargetAccountConfigurationRequest                                smithy.SchemaExtensions
+	eGetExperimentTargetAccountConfigurationRequest_experimentId                   smithy.SchemaExtensions
+	eGetExperimentTargetAccountConfigurationRequest_accountId                      smithy.SchemaExtensions
+	eGetExperimentTargetAccountConfigurationResponse                               smithy.SchemaExtensions
+	eGetExperimentTargetAccountConfigurationResponse_targetAccountConfiguration    smithy.SchemaExtensions
+	eGetExperimentTemplateRequest                                                  smithy.SchemaExtensions
+	eGetExperimentTemplateRequest_id                                               smithy.SchemaExtensions
+	eGetExperimentTemplateResponse                                                 smithy.SchemaExtensions
+	eGetExperimentTemplateResponse_experimentTemplate                              smithy.SchemaExtensions
+	eGetSafetyLeverRequest                                                         smithy.SchemaExtensions
+	eGetSafetyLeverRequest_id                                                      smithy.SchemaExtensions
+	eGetSafetyLeverResponse                                                        smithy.SchemaExtensions
+	eGetSafetyLeverResponse_safetyLever                                            smithy.SchemaExtensions
+	eGetTargetAccountConfigurationRequest                                          smithy.SchemaExtensions
+	eGetTargetAccountConfigurationRequest_experimentTemplateId                     smithy.SchemaExtensions
+	eGetTargetAccountConfigurationRequest_accountId                                smithy.SchemaExtensions
+	eGetTargetAccountConfigurationResponse                                         smithy.SchemaExtensions
+	eGetTargetAccountConfigurationResponse_targetAccountConfiguration              smithy.SchemaExtensions
+	eGetTargetResourceTypeRequest                                                  smithy.SchemaExtensions
+	eGetTargetResourceTypeRequest_resourceType                                     smithy.SchemaExtensions
+	eGetTargetResourceTypeResponse                                                 smithy.SchemaExtensions
+	eGetTargetResourceTypeResponse_targetResourceType                              smithy.SchemaExtensions
+	eListActionsRequest                                                            smithy.SchemaExtensions
+	eListActionsRequest_maxResults                                                 smithy.SchemaExtensions
+	eListActionsRequest_nextToken                                                  smithy.SchemaExtensions
+	eListActionsResponse                                                           smithy.SchemaExtensions
+	eListActionsResponse_actions                                                   smithy.SchemaExtensions
+	eListActionsResponse_nextToken                                                 smithy.SchemaExtensions
+	eListExperimentResolvedTargetsRequest                                          smithy.SchemaExtensions
+	eListExperimentResolvedTargetsRequest_experimentId                             smithy.SchemaExtensions
+	eListExperimentResolvedTargetsRequest_maxResults                               smithy.SchemaExtensions
+	eListExperimentResolvedTargetsRequest_nextToken                                smithy.SchemaExtensions
+	eListExperimentResolvedTargetsRequest_targetName                               smithy.SchemaExtensions
+	eListExperimentResolvedTargetsResponse                                         smithy.SchemaExtensions
+	eListExperimentResolvedTargetsResponse_resolvedTargets                         smithy.SchemaExtensions
+	eListExperimentResolvedTargetsResponse_nextToken                               smithy.SchemaExtensions
+	eListExperimentsRequest                                                        smithy.SchemaExtensions
+	eListExperimentsRequest_maxResults                                             smithy.SchemaExtensions
+	eListExperimentsRequest_nextToken                                              smithy.SchemaExtensions
+	eListExperimentsRequest_experimentTemplateId                                   smithy.SchemaExtensions
+	eListExperimentsResponse                                                       smithy.SchemaExtensions
+	eListExperimentsResponse_experiments                                           smithy.SchemaExtensions
+	eListExperimentsResponse_nextToken                                             smithy.SchemaExtensions
+	eListExperimentTargetAccountConfigurationsRequest                              smithy.SchemaExtensions
+	eListExperimentTargetAccountConfigurationsRequest_experimentId                 smithy.SchemaExtensions
+	eListExperimentTargetAccountConfigurationsRequest_nextToken                    smithy.SchemaExtensions
+	eListExperimentTargetAccountConfigurationsResponse                             smithy.SchemaExtensions
+	eListExperimentTargetAccountConfigurationsResponse_targetAccountConfigurations smithy.SchemaExtensions
+	eListExperimentTargetAccountConfigurationsResponse_nextToken                   smithy.SchemaExtensions
+	eListExperimentTemplatesRequest                                                smithy.SchemaExtensions
+	eListExperimentTemplatesRequest_maxResults                                     smithy.SchemaExtensions
+	eListExperimentTemplatesRequest_nextToken                                      smithy.SchemaExtensions
+	eListExperimentTemplatesResponse                                               smithy.SchemaExtensions
+	eListExperimentTemplatesResponse_experimentTemplates                           smithy.SchemaExtensions
+	eListExperimentTemplatesResponse_nextToken                                     smithy.SchemaExtensions
+	eListTagsForResourceRequest                                                    smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceArn                                        smithy.SchemaExtensions
+	eListTagsForResourceResponse                                                   smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                                              smithy.SchemaExtensions
+	eListTargetAccountConfigurationsRequest                                        smithy.SchemaExtensions
+	eListTargetAccountConfigurationsRequest_experimentTemplateId                   smithy.SchemaExtensions
+	eListTargetAccountConfigurationsRequest_maxResults                             smithy.SchemaExtensions
+	eListTargetAccountConfigurationsRequest_nextToken                              smithy.SchemaExtensions
+	eListTargetAccountConfigurationsResponse                                       smithy.SchemaExtensions
+	eListTargetAccountConfigurationsResponse_targetAccountConfigurations           smithy.SchemaExtensions
+	eListTargetAccountConfigurationsResponse_nextToken                             smithy.SchemaExtensions
+	eListTargetResourceTypesRequest                                                smithy.SchemaExtensions
+	eListTargetResourceTypesRequest_maxResults                                     smithy.SchemaExtensions
+	eListTargetResourceTypesRequest_nextToken                                      smithy.SchemaExtensions
+	eListTargetResourceTypesResponse                                               smithy.SchemaExtensions
+	eListTargetResourceTypesResponse_targetResourceTypes                           smithy.SchemaExtensions
+	eListTargetResourceTypesResponse_nextToken                                     smithy.SchemaExtensions
+	eStartExperimentRequest                                                        smithy.SchemaExtensions
+	eStartExperimentRequest_clientToken                                            smithy.SchemaExtensions
+	eStartExperimentRequest_experimentTemplateId                                   smithy.SchemaExtensions
+	eStartExperimentRequest_experimentOptions                                      smithy.SchemaExtensions
+	eStartExperimentRequest_tags                                                   smithy.SchemaExtensions
+	eStartExperimentResponse                                                       smithy.SchemaExtensions
+	eStartExperimentResponse_experiment                                            smithy.SchemaExtensions
+	eStopExperimentRequest                                                         smithy.SchemaExtensions
+	eStopExperimentRequest_id                                                      smithy.SchemaExtensions
+	eStopExperimentResponse                                                        smithy.SchemaExtensions
+	eStopExperimentResponse_experiment                                             smithy.SchemaExtensions
+	eTagResourceRequest                                                            smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                                                smithy.SchemaExtensions
+	eTagResourceRequest_tags                                                       smithy.SchemaExtensions
+	eTagResourceResponse                                                           smithy.SchemaExtensions
+	eUntagResourceRequest                                                          smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                                              smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                                                  smithy.SchemaExtensions
+	eUntagResourceResponse                                                         smithy.SchemaExtensions
+	eUpdateExperimentTemplateRequest                                               smithy.SchemaExtensions
+	eUpdateExperimentTemplateRequest_id                                            smithy.SchemaExtensions
+	eUpdateExperimentTemplateRequest_description                                   smithy.SchemaExtensions
+	eUpdateExperimentTemplateRequest_stopConditions                                smithy.SchemaExtensions
+	eUpdateExperimentTemplateRequest_targets                                       smithy.SchemaExtensions
+	eUpdateExperimentTemplateRequest_actions                                       smithy.SchemaExtensions
+	eUpdateExperimentTemplateRequest_roleArn                                       smithy.SchemaExtensions
+	eUpdateExperimentTemplateRequest_logConfiguration                              smithy.SchemaExtensions
+	eUpdateExperimentTemplateRequest_experimentOptions                             smithy.SchemaExtensions
+	eUpdateExperimentTemplateRequest_experimentReportConfiguration                 smithy.SchemaExtensions
+	eUpdateExperimentTemplateResponse                                              smithy.SchemaExtensions
+	eUpdateExperimentTemplateResponse_experimentTemplate                           smithy.SchemaExtensions
+	eUpdateSafetyLeverStateRequest                                                 smithy.SchemaExtensions
+	eUpdateSafetyLeverStateRequest_id                                              smithy.SchemaExtensions
+	eUpdateSafetyLeverStateRequest_state                                           smithy.SchemaExtensions
+	eUpdateSafetyLeverStateResponse                                                smithy.SchemaExtensions
+	eUpdateSafetyLeverStateResponse_safetyLever                                    smithy.SchemaExtensions
+	eUpdateTargetAccountConfigurationRequest                                       smithy.SchemaExtensions
+	eUpdateTargetAccountConfigurationRequest_experimentTemplateId                  smithy.SchemaExtensions
+	eUpdateTargetAccountConfigurationRequest_accountId                             smithy.SchemaExtensions
+	eUpdateTargetAccountConfigurationRequest_roleArn                               smithy.SchemaExtensions
+	eUpdateTargetAccountConfigurationRequest_description                           smithy.SchemaExtensions
+	eUpdateTargetAccountConfigurationResponse                                      smithy.SchemaExtensions
+	eUpdateTargetAccountConfigurationResponse_targetAccountConfiguration           smithy.SchemaExtensions
+)
 
 var (
 	iCreateExperimentTemplate                                      = smithy.ShapeID{Namespace: "com.amazonaws.fis", Name: "CreateExperimentTemplate"}
@@ -591,721 +1304,721 @@ var mUpdateSafetyLeverStateResponse = smithy.SchemaMembers{List: []*smithy.Schem
 var mUpdateTargetAccountConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTargetAccountConfigurationRequest_experimentTemplateId, &sUpdateTargetAccountConfigurationRequest_accountId, &sUpdateTargetAccountConfigurationRequest_roleArn, &sUpdateTargetAccountConfigurationRequest_description}}
 var mUpdateTargetAccountConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTargetAccountConfigurationResponse_targetAccountConfiguration}}
 
-var sCreateExperimentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExperimentTemplate, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCreateTargetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTargetAccountConfiguration, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sDeleteExperimentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteExperimentTemplate, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sDeleteTargetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTargetAccountConfiguration, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sGetAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAction, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sGetExperiment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExperiment, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sGetExperimentTargetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExperimentTargetAccountConfiguration, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sGetExperimentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExperimentTemplate, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sGetSafetyLever = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSafetyLever, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sGetTargetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTargetAccountConfiguration, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sGetTargetResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTargetResourceType, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sListActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActions, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sListExperimentResolvedTargets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentResolvedTargets, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sListExperiments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperiments, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sListExperimentTargetAccountConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentTargetAccountConfigurations, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sListExperimentTemplates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentTemplates, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sListTargetAccountConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTargetAccountConfigurations, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sListTargetResourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTargetResourceTypes, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sStartExperiment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartExperiment, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var sStopExperiment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopExperiment, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &ext[20]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &ext[21]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &ext[22]})
-var sUpdateExperimentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExperimentTemplate, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &ext[23]})
-var sUpdateSafetyLeverState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSafetyLeverState, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &ext[24]})
-var sUpdateTargetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTargetAccountConfiguration, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &ext[25]})
-var s_FaultInjectionSimulator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FaultInjectionSimulator, Type: smithy.ShapeTypeService, Ext: &ext[26]})
-var sAccountTargeting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountTargeting, Members: &mAccountTargeting, Type: smithy.ShapeTypeEnum, Ext: &ext[27]})
-var sAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &ext[30]})
-var s_ActionDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionDescription, Type: smithy.ShapeTypeString, Ext: &ext[37]})
-var s_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &ext[38]})
-var sActionParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionParameter, Members: &mActionParameter, Type: smithy.ShapeTypeStructure, Ext: &ext[39]})
-var s_ActionParameterDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionParameterDescription, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var s_ActionParameterMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionParameterMap, Members: &m_ActionParameterMap, Type: smithy.ShapeTypeMap, Ext: &ext[43]})
-var s_ActionParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionParameterName, Type: smithy.ShapeTypeString, Ext: &ext[46]})
-var s_ActionParameterRequired = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionParameterRequired, Type: smithy.ShapeTypeBoolean, Ext: &ext[47]})
-var sActionsMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionsMode, Members: &mActionsMode, Type: smithy.ShapeTypeEnum, Ext: &ext[48]})
-var sActionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionSummary, Members: &mActionSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[51]})
-var s_ActionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionSummaryList, Members: &m_ActionSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[57]})
-var sActionTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionTarget, Members: &mActionTarget, Type: smithy.ShapeTypeStructure, Ext: &ext[59]})
-var s_ActionTargetMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionTargetMap, Members: &m_ActionTargetMap, Type: smithy.ShapeTypeMap, Ext: &ext[61]})
-var s_ActionTargetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionTargetName, Type: smithy.ShapeTypeString, Ext: &ext[64]})
-var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[65]})
-var s_CloudWatchLogGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudWatchLogGroupArn, Type: smithy.ShapeTypeString, Ext: &ext[66]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &ext[67]})
-var sCreateExperimentTemplateActionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExperimentTemplateActionInput, Members: &mCreateExperimentTemplateActionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[69]})
-var s_CreateExperimentTemplateActionInputMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateExperimentTemplateActionInputMap, Members: &m_CreateExperimentTemplateActionInputMap, Type: smithy.ShapeTypeMap, Ext: &ext[75]})
-var sCreateExperimentTemplateExperimentOptionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExperimentTemplateExperimentOptionsInput, Members: &mCreateExperimentTemplateExperimentOptionsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[78]})
-var sCreateExperimentTemplateLogConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExperimentTemplateLogConfigurationInput, Members: &mCreateExperimentTemplateLogConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[81]})
-var sCreateExperimentTemplateReportConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExperimentTemplateReportConfigurationInput, Members: &mCreateExperimentTemplateReportConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[85]})
-var sCreateExperimentTemplateStopConditionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExperimentTemplateStopConditionInput, Members: &mCreateExperimentTemplateStopConditionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[90]})
-var s_CreateExperimentTemplateStopConditionInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateExperimentTemplateStopConditionInputList, Members: &m_CreateExperimentTemplateStopConditionInputList, Type: smithy.ShapeTypeList, Ext: &ext[93]})
-var sCreateExperimentTemplateTargetInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExperimentTemplateTargetInput, Members: &mCreateExperimentTemplateTargetInput, Type: smithy.ShapeTypeStructure, Ext: &ext[95]})
-var s_CreateExperimentTemplateTargetInputMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateExperimentTemplateTargetInputMap, Members: &m_CreateExperimentTemplateTargetInputMap, Type: smithy.ShapeTypeMap, Ext: &ext[102]})
-var s_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreationTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[105]})
-var sEmptyTargetResolutionMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmptyTargetResolutionMode, Members: &mEmptyTargetResolutionMode, Type: smithy.ShapeTypeEnum, Ext: &ext[106]})
-var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[109]})
-var sExperiment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperiment, Members: &mExperiment, Type: smithy.ShapeTypeStructure, Ext: &ext[110]})
-var sExperimentAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentAction, Members: &mExperimentAction, Type: smithy.ShapeTypeStructure, Ext: &ext[128]})
-var s_ExperimentActionDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentActionDescription, Type: smithy.ShapeTypeString, Ext: &ext[137]})
-var s_ExperimentActionEndTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentActionEndTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[138]})
-var s_ExperimentActionMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentActionMap, Members: &m_ExperimentActionMap, Type: smithy.ShapeTypeMap, Ext: &ext[139]})
-var s_ExperimentActionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentActionName, Type: smithy.ShapeTypeString, Ext: &ext[142]})
-var s_ExperimentActionParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentActionParameter, Type: smithy.ShapeTypeString, Ext: &ext[143]})
-var s_ExperimentActionParameterMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentActionParameterMap, Members: &m_ExperimentActionParameterMap, Type: smithy.ShapeTypeMap, Ext: &ext[144]})
-var s_ExperimentActionParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentActionParameterName, Type: smithy.ShapeTypeString, Ext: &ext[147]})
-var s_ExperimentActionStartAfter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentActionStartAfter, Type: smithy.ShapeTypeString, Ext: &ext[148]})
-var s_ExperimentActionStartAfterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentActionStartAfterList, Members: &m_ExperimentActionStartAfterList, Type: smithy.ShapeTypeList, Ext: &ext[149]})
-var s_ExperimentActionStartTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentActionStartTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[151]})
-var sExperimentActionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentActionState, Members: &mExperimentActionState, Type: smithy.ShapeTypeStructure, Ext: &ext[152]})
-var sExperimentActionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentActionStatus, Members: &mExperimentActionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[155]})
-var s_ExperimentActionStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentActionStatusReason, Type: smithy.ShapeTypeString, Ext: &ext[165]})
-var s_ExperimentActionTargetMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentActionTargetMap, Members: &m_ExperimentActionTargetMap, Type: smithy.ShapeTypeMap, Ext: &ext[166]})
-var s_ExperimentActionTargetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentActionTargetName, Type: smithy.ShapeTypeString, Ext: &ext[169]})
-var sExperimentCloudWatchLogsLogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentCloudWatchLogsLogConfiguration, Members: &mExperimentCloudWatchLogsLogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[170]})
-var s_ExperimentEndTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentEndTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[172]})
-var sExperimentError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentError, Members: &mExperimentError, Type: smithy.ShapeTypeStructure, Ext: &ext[173]})
-var s_ExperimentErrorAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentErrorAccountId, Type: smithy.ShapeTypeString, Ext: &ext[177]})
-var s_ExperimentErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[178]})
-var s_ExperimentErrorLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentErrorLocation, Type: smithy.ShapeTypeString, Ext: &ext[179]})
-var s_ExperimentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentId, Type: smithy.ShapeTypeString, Ext: &ext[180]})
-var sExperimentLogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentLogConfiguration, Members: &mExperimentLogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[181]})
-var sExperimentOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentOptions, Members: &mExperimentOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[185]})
-var sExperimentReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentReport, Members: &mExperimentReport, Type: smithy.ShapeTypeStructure, Ext: &ext[189]})
-var sExperimentReportConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentReportConfiguration, Members: &mExperimentReportConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[192]})
-var sExperimentReportConfigurationCloudWatchDashboard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentReportConfigurationCloudWatchDashboard, Members: &mExperimentReportConfigurationCloudWatchDashboard, Type: smithy.ShapeTypeStructure, Ext: &ext[197]})
-var s_ExperimentReportConfigurationCloudWatchDashboardList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentReportConfigurationCloudWatchDashboardList, Members: &m_ExperimentReportConfigurationCloudWatchDashboardList, Type: smithy.ShapeTypeList, Ext: &ext[199]})
-var sExperimentReportConfigurationDataSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentReportConfigurationDataSources, Members: &mExperimentReportConfigurationDataSources, Type: smithy.ShapeTypeStructure, Ext: &ext[201]})
-var sExperimentReportConfigurationOutputs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentReportConfigurationOutputs, Members: &mExperimentReportConfigurationOutputs, Type: smithy.ShapeTypeStructure, Ext: &ext[203]})
-var sExperimentReportConfigurationOutputsS3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentReportConfigurationOutputsS3Configuration, Members: &mExperimentReportConfigurationOutputsS3Configuration, Type: smithy.ShapeTypeStructure, Ext: &ext[205]})
-var sExperimentReportError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentReportError, Members: &mExperimentReportError, Type: smithy.ShapeTypeStructure, Ext: &ext[208]})
-var s_ExperimentReportErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentReportErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[210]})
-var s_ExperimentReportReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentReportReason, Type: smithy.ShapeTypeString, Ext: &ext[211]})
-var sExperimentReportS3Report = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentReportS3Report, Members: &mExperimentReportS3Report, Type: smithy.ShapeTypeStructure, Ext: &ext[212]})
-var s_ExperimentReportS3ReportArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentReportS3ReportArn, Type: smithy.ShapeTypeString, Ext: &ext[215]})
-var s_ExperimentReportS3ReportList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentReportS3ReportList, Members: &m_ExperimentReportS3ReportList, Type: smithy.ShapeTypeList, Ext: &ext[216]})
-var s_ExperimentReportS3ReportType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentReportS3ReportType, Type: smithy.ShapeTypeString, Ext: &ext[218]})
-var sExperimentReportState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentReportState, Members: &mExperimentReportState, Type: smithy.ShapeTypeStructure, Ext: &ext[219]})
-var sExperimentReportStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentReportStatus, Members: &mExperimentReportStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[223]})
-var sExperimentS3LogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentS3LogConfiguration, Members: &mExperimentS3LogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[229]})
-var s_ExperimentStartTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentStartTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[232]})
-var sExperimentState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentState, Members: &mExperimentState, Type: smithy.ShapeTypeStructure, Ext: &ext[233]})
-var sExperimentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentStatus, Members: &mExperimentStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[237]})
-var s_ExperimentStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentStatusReason, Type: smithy.ShapeTypeString, Ext: &ext[246]})
-var sExperimentStopCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentStopCondition, Members: &mExperimentStopCondition, Type: smithy.ShapeTypeStructure, Ext: &ext[247]})
-var s_ExperimentStopConditionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentStopConditionList, Members: &m_ExperimentStopConditionList, Type: smithy.ShapeTypeList, Ext: &ext[250]})
-var sExperimentSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentSummary, Members: &mExperimentSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[252]})
-var s_ExperimentSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentSummaryList, Members: &m_ExperimentSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[260]})
-var sExperimentTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTarget, Members: &mExperimentTarget, Type: smithy.ShapeTypeStructure, Ext: &ext[262]})
-var sExperimentTargetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTargetAccountConfiguration, Members: &mExperimentTargetAccountConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[269]})
-var s_ExperimentTargetAccountConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTargetAccountConfigurationList, Members: &m_ExperimentTargetAccountConfigurationList, Type: smithy.ShapeTypeList, Ext: &ext[273]})
-var sExperimentTargetAccountConfigurationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTargetAccountConfigurationSummary, Members: &mExperimentTargetAccountConfigurationSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[275]})
-var sExperimentTargetFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTargetFilter, Members: &mExperimentTargetFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[279]})
-var s_ExperimentTargetFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTargetFilterList, Members: &m_ExperimentTargetFilterList, Type: smithy.ShapeTypeList, Ext: &ext[282]})
-var s_ExperimentTargetFilterPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTargetFilterPath, Type: smithy.ShapeTypeString, Ext: &ext[284]})
-var s_ExperimentTargetFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTargetFilterValue, Type: smithy.ShapeTypeString, Ext: &ext[285]})
-var s_ExperimentTargetFilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTargetFilterValues, Members: &m_ExperimentTargetFilterValues, Type: smithy.ShapeTypeList, Ext: &ext[286]})
-var s_ExperimentTargetMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTargetMap, Members: &m_ExperimentTargetMap, Type: smithy.ShapeTypeMap, Ext: &ext[288]})
-var s_ExperimentTargetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTargetName, Type: smithy.ShapeTypeString, Ext: &ext[291]})
-var s_ExperimentTargetParameterMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTargetParameterMap, Members: &m_ExperimentTargetParameterMap, Type: smithy.ShapeTypeMap, Ext: &ext[292]})
-var s_ExperimentTargetParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTargetParameterName, Type: smithy.ShapeTypeString, Ext: &ext[295]})
-var s_ExperimentTargetParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTargetParameterValue, Type: smithy.ShapeTypeString, Ext: &ext[296]})
-var s_ExperimentTargetSelectionMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTargetSelectionMode, Type: smithy.ShapeTypeString, Ext: &ext[297]})
-var sExperimentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplate, Members: &mExperimentTemplate, Type: smithy.ShapeTypeStructure, Ext: &ext[298]})
-var sExperimentTemplateAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateAction, Members: &mExperimentTemplateAction, Type: smithy.ShapeTypeStructure, Ext: &ext[313]})
-var s_ExperimentTemplateActionDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateActionDescription, Type: smithy.ShapeTypeString, Ext: &ext[319]})
-var s_ExperimentTemplateActionMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateActionMap, Members: &m_ExperimentTemplateActionMap, Type: smithy.ShapeTypeMap, Ext: &ext[320]})
-var s_ExperimentTemplateActionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateActionName, Type: smithy.ShapeTypeString, Ext: &ext[323]})
-var s_ExperimentTemplateActionParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateActionParameter, Type: smithy.ShapeTypeString, Ext: &ext[324]})
-var s_ExperimentTemplateActionParameterMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateActionParameterMap, Members: &m_ExperimentTemplateActionParameterMap, Type: smithy.ShapeTypeMap, Ext: &ext[325]})
-var s_ExperimentTemplateActionParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateActionParameterName, Type: smithy.ShapeTypeString, Ext: &ext[328]})
-var s_ExperimentTemplateActionStartAfter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateActionStartAfter, Type: smithy.ShapeTypeString, Ext: &ext[329]})
-var s_ExperimentTemplateActionStartAfterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateActionStartAfterList, Members: &m_ExperimentTemplateActionStartAfterList, Type: smithy.ShapeTypeList, Ext: &ext[330]})
-var s_ExperimentTemplateActionTargetMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateActionTargetMap, Members: &m_ExperimentTemplateActionTargetMap, Type: smithy.ShapeTypeMap, Ext: &ext[332]})
-var s_ExperimentTemplateActionTargetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateActionTargetName, Type: smithy.ShapeTypeString, Ext: &ext[335]})
-var sExperimentTemplateCloudWatchLogsLogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateCloudWatchLogsLogConfiguration, Members: &mExperimentTemplateCloudWatchLogsLogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[336]})
-var sExperimentTemplateCloudWatchLogsLogConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateCloudWatchLogsLogConfigurationInput, Members: &mExperimentTemplateCloudWatchLogsLogConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[338]})
-var s_ExperimentTemplateDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateDescription, Type: smithy.ShapeTypeString, Ext: &ext[340]})
-var sExperimentTemplateExperimentOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateExperimentOptions, Members: &mExperimentTemplateExperimentOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[341]})
-var s_ExperimentTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateId, Type: smithy.ShapeTypeString, Ext: &ext[344]})
-var sExperimentTemplateLogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateLogConfiguration, Members: &mExperimentTemplateLogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[345]})
-var sExperimentTemplateReportConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateReportConfiguration, Members: &mExperimentTemplateReportConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[349]})
-var sExperimentTemplateReportConfigurationCloudWatchDashboard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateReportConfigurationCloudWatchDashboard, Members: &mExperimentTemplateReportConfigurationCloudWatchDashboard, Type: smithy.ShapeTypeStructure, Ext: &ext[354]})
-var s_ExperimentTemplateReportConfigurationCloudWatchDashboardList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateReportConfigurationCloudWatchDashboardList, Members: &m_ExperimentTemplateReportConfigurationCloudWatchDashboardList, Type: smithy.ShapeTypeList, Ext: &ext[356]})
-var sExperimentTemplateReportConfigurationDataSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateReportConfigurationDataSources, Members: &mExperimentTemplateReportConfigurationDataSources, Type: smithy.ShapeTypeStructure, Ext: &ext[358]})
-var sExperimentTemplateReportConfigurationDataSourcesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateReportConfigurationDataSourcesInput, Members: &mExperimentTemplateReportConfigurationDataSourcesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[360]})
-var sExperimentTemplateReportConfigurationOutputs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateReportConfigurationOutputs, Members: &mExperimentTemplateReportConfigurationOutputs, Type: smithy.ShapeTypeStructure, Ext: &ext[362]})
-var sExperimentTemplateReportConfigurationOutputsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateReportConfigurationOutputsInput, Members: &mExperimentTemplateReportConfigurationOutputsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[364]})
-var sExperimentTemplateS3LogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateS3LogConfiguration, Members: &mExperimentTemplateS3LogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[366]})
-var sExperimentTemplateS3LogConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateS3LogConfigurationInput, Members: &mExperimentTemplateS3LogConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[369]})
-var sExperimentTemplateStopCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateStopCondition, Members: &mExperimentTemplateStopCondition, Type: smithy.ShapeTypeStructure, Ext: &ext[372]})
-var s_ExperimentTemplateStopConditionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateStopConditionList, Members: &m_ExperimentTemplateStopConditionList, Type: smithy.ShapeTypeList, Ext: &ext[375]})
-var sExperimentTemplateSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateSummary, Members: &mExperimentTemplateSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[377]})
-var s_ExperimentTemplateSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateSummaryList, Members: &m_ExperimentTemplateSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[384]})
-var sExperimentTemplateTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateTarget, Members: &mExperimentTemplateTarget, Type: smithy.ShapeTypeStructure, Ext: &ext[386]})
-var sExperimentTemplateTargetFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateTargetFilter, Members: &mExperimentTemplateTargetFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[393]})
-var s_ExperimentTemplateTargetFilterInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateTargetFilterInputList, Members: &m_ExperimentTemplateTargetFilterInputList, Type: smithy.ShapeTypeList, Ext: &ext[396]})
-var s_ExperimentTemplateTargetFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateTargetFilterList, Members: &m_ExperimentTemplateTargetFilterList, Type: smithy.ShapeTypeList, Ext: &ext[398]})
-var s_ExperimentTemplateTargetFilterPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateTargetFilterPath, Type: smithy.ShapeTypeString, Ext: &ext[400]})
-var s_ExperimentTemplateTargetFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateTargetFilterValue, Type: smithy.ShapeTypeString, Ext: &ext[401]})
-var s_ExperimentTemplateTargetFilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateTargetFilterValues, Members: &m_ExperimentTemplateTargetFilterValues, Type: smithy.ShapeTypeList, Ext: &ext[402]})
-var sExperimentTemplateTargetInputFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateTargetInputFilter, Members: &mExperimentTemplateTargetInputFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[404]})
-var s_ExperimentTemplateTargetMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateTargetMap, Members: &m_ExperimentTemplateTargetMap, Type: smithy.ShapeTypeMap, Ext: &ext[407]})
-var s_ExperimentTemplateTargetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateTargetName, Type: smithy.ShapeTypeString, Ext: &ext[410]})
-var s_ExperimentTemplateTargetParameterMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateTargetParameterMap, Members: &m_ExperimentTemplateTargetParameterMap, Type: smithy.ShapeTypeMap, Ext: &ext[411]})
-var s_ExperimentTemplateTargetParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateTargetParameterName, Type: smithy.ShapeTypeString, Ext: &ext[414]})
-var s_ExperimentTemplateTargetParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateTargetParameterValue, Type: smithy.ShapeTypeString, Ext: &ext[415]})
-var s_ExperimentTemplateTargetSelectionMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateTargetSelectionMode, Type: smithy.ShapeTypeString, Ext: &ext[416]})
-var s_LastUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastUpdateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[417]})
-var s_ListActionsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListActionsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[418]})
-var s_ListExperimentResolvedTargetsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListExperimentResolvedTargetsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[419]})
-var s_ListExperimentsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListExperimentsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[420]})
-var s_ListExperimentTemplatesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListExperimentTemplatesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[421]})
-var s_ListTargetAccountConfigurationsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListTargetAccountConfigurationsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[422]})
-var s_ListTargetResourceTypesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListTargetResourceTypesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[423]})
-var s_LogSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogSchemaVersion, Type: smithy.ShapeTypeInteger, Ext: &ext[424]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[425]})
-var s_ReportConfigurationCloudWatchDashboardIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportConfigurationCloudWatchDashboardIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[426]})
-var sReportConfigurationCloudWatchDashboardInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportConfigurationCloudWatchDashboardInput, Members: &mReportConfigurationCloudWatchDashboardInput, Type: smithy.ShapeTypeStructure, Ext: &ext[427]})
-var s_ReportConfigurationCloudWatchDashboardInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportConfigurationCloudWatchDashboardInputList, Members: &m_ReportConfigurationCloudWatchDashboardInputList, Type: smithy.ShapeTypeList, Ext: &ext[429]})
-var s_ReportConfigurationDuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportConfigurationDuration, Type: smithy.ShapeTypeString, Ext: &ext[431]})
-var sReportConfigurationS3Output = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportConfigurationS3Output, Members: &mReportConfigurationS3Output, Type: smithy.ShapeTypeStructure, Ext: &ext[432]})
-var sReportConfigurationS3OutputInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportConfigurationS3OutputInput, Members: &mReportConfigurationS3OutputInput, Type: smithy.ShapeTypeStructure, Ext: &ext[435]})
-var s_ReportConfigurationS3OutputPrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportConfigurationS3OutputPrefix, Type: smithy.ShapeTypeString, Ext: &ext[438]})
-var sResolvedTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolvedTarget, Members: &mResolvedTarget, Type: smithy.ShapeTypeStructure, Ext: &ext[439]})
-var s_ResolvedTargetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResolvedTargetList, Members: &m_ResolvedTargetList, Type: smithy.ShapeTypeList, Ext: &ext[443]})
-var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[445]})
-var s_ResourceArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList, Ext: &ext[446]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &ext[448]})
-var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[450]})
-var s_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &ext[451]})
-var s_S3ObjectKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3ObjectKey, Type: smithy.ShapeTypeString, Ext: &ext[452]})
-var sSafetyLever = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSafetyLever, Members: &mSafetyLever, Type: smithy.ShapeTypeStructure, Ext: &ext[453]})
-var s_SafetyLeverId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SafetyLeverId, Type: smithy.ShapeTypeString, Ext: &ext[457]})
-var sSafetyLeverState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSafetyLeverState, Members: &mSafetyLeverState, Type: smithy.ShapeTypeStructure, Ext: &ext[458]})
-var sSafetyLeverStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSafetyLeverStatus, Members: &mSafetyLeverStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[461]})
-var sSafetyLeverStatusInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSafetyLeverStatusInput, Members: &mSafetyLeverStatusInput, Type: smithy.ShapeTypeEnum, Ext: &ext[465]})
-var s_SafetyLeverStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SafetyLeverStatusReason, Type: smithy.ShapeTypeString, Ext: &ext[468]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &ext[469]})
-var sStartExperimentExperimentOptionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartExperimentExperimentOptionsInput, Members: &mStartExperimentExperimentOptionsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[471]})
-var s_StopConditionSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StopConditionSource, Type: smithy.ShapeTypeString, Ext: &ext[473]})
-var s_StopConditionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StopConditionValue, Type: smithy.ShapeTypeString, Ext: &ext[474]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[475]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[476]})
-var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[478]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[481]})
-var sTargetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetAccountConfiguration, Members: &mTargetAccountConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[482]})
-var s_TargetAccountConfigurationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetAccountConfigurationDescription, Type: smithy.ShapeTypeString, Ext: &ext[486]})
-var s_TargetAccountConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetAccountConfigurationList, Members: &m_TargetAccountConfigurationList, Type: smithy.ShapeTypeList, Ext: &ext[487]})
-var s_TargetAccountConfigurationsCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetAccountConfigurationsCount, Type: smithy.ShapeTypeLong, Ext: &ext[489]})
-var sTargetAccountConfigurationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetAccountConfigurationSummary, Members: &mTargetAccountConfigurationSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[490]})
-var s_TargetAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetAccountId, Type: smithy.ShapeTypeString, Ext: &ext[494]})
-var s_TargetInformationKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetInformationKey, Type: smithy.ShapeTypeString, Ext: &ext[495]})
-var s_TargetInformationMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetInformationMap, Members: &m_TargetInformationMap, Type: smithy.ShapeTypeMap, Ext: &ext[496]})
-var s_TargetInformationValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetInformationValue, Type: smithy.ShapeTypeString, Ext: &ext[499]})
-var s_TargetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetName, Type: smithy.ShapeTypeString, Ext: &ext[500]})
-var sTargetResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetResourceType, Members: &mTargetResourceType, Type: smithy.ShapeTypeStructure, Ext: &ext[501]})
-var s_TargetResourceTypeDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetResourceTypeDescription, Type: smithy.ShapeTypeString, Ext: &ext[505]})
-var s_TargetResourceTypeId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetResourceTypeId, Type: smithy.ShapeTypeString, Ext: &ext[506]})
-var sTargetResourceTypeParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetResourceTypeParameter, Members: &mTargetResourceTypeParameter, Type: smithy.ShapeTypeStructure, Ext: &ext[507]})
-var s_TargetResourceTypeParameterDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetResourceTypeParameterDescription, Type: smithy.ShapeTypeString, Ext: &ext[510]})
-var s_TargetResourceTypeParameterMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetResourceTypeParameterMap, Members: &m_TargetResourceTypeParameterMap, Type: smithy.ShapeTypeMap, Ext: &ext[511]})
-var s_TargetResourceTypeParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetResourceTypeParameterName, Type: smithy.ShapeTypeString, Ext: &ext[514]})
-var s_TargetResourceTypeParameterRequired = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetResourceTypeParameterRequired, Type: smithy.ShapeTypeBoolean, Ext: &ext[515]})
-var sTargetResourceTypeSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetResourceTypeSummary, Members: &mTargetResourceTypeSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[516]})
-var s_TargetResourceTypeSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetResourceTypeSummaryList, Members: &m_TargetResourceTypeSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[519]})
-var sUpdateExperimentTemplateActionInputItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExperimentTemplateActionInputItem, Members: &mUpdateExperimentTemplateActionInputItem, Type: smithy.ShapeTypeStructure, Ext: &ext[521]})
-var s_UpdateExperimentTemplateActionInputMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateExperimentTemplateActionInputMap, Members: &m_UpdateExperimentTemplateActionInputMap, Type: smithy.ShapeTypeMap, Ext: &ext[527]})
-var sUpdateExperimentTemplateExperimentOptionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExperimentTemplateExperimentOptionsInput, Members: &mUpdateExperimentTemplateExperimentOptionsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[530]})
-var sUpdateExperimentTemplateLogConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExperimentTemplateLogConfigurationInput, Members: &mUpdateExperimentTemplateLogConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[532]})
-var sUpdateExperimentTemplateReportConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExperimentTemplateReportConfigurationInput, Members: &mUpdateExperimentTemplateReportConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[536]})
-var sUpdateExperimentTemplateStopConditionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExperimentTemplateStopConditionInput, Members: &mUpdateExperimentTemplateStopConditionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[541]})
-var s_UpdateExperimentTemplateStopConditionInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateExperimentTemplateStopConditionInputList, Members: &m_UpdateExperimentTemplateStopConditionInputList, Type: smithy.ShapeTypeList, Ext: &ext[544]})
-var sUpdateExperimentTemplateTargetInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExperimentTemplateTargetInput, Members: &mUpdateExperimentTemplateTargetInput, Type: smithy.ShapeTypeStructure, Ext: &ext[546]})
-var s_UpdateExperimentTemplateTargetInputMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateExperimentTemplateTargetInputMap, Members: &m_UpdateExperimentTemplateTargetInputMap, Type: smithy.ShapeTypeMap, Ext: &ext[553]})
-var sUpdateSafetyLeverStateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSafetyLeverStateInput, Members: &mUpdateSafetyLeverStateInput, Type: smithy.ShapeTypeStructure, Ext: &ext[556]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &ext[559]})
-var sCreateExperimentTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExperimentTemplateRequest, Members: &mCreateExperimentTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[561]})
-var sCreateExperimentTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExperimentTemplateResponse, Members: &mCreateExperimentTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[572]})
-var sCreateTargetAccountConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTargetAccountConfigurationRequest, Members: &mCreateTargetAccountConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[574]})
-var sCreateTargetAccountConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTargetAccountConfigurationResponse, Members: &mCreateTargetAccountConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[580]})
-var sDeleteExperimentTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteExperimentTemplateRequest, Members: &mDeleteExperimentTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[582]})
-var sDeleteExperimentTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteExperimentTemplateResponse, Members: &mDeleteExperimentTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[584]})
-var sDeleteTargetAccountConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTargetAccountConfigurationRequest, Members: &mDeleteTargetAccountConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[586]})
-var sDeleteTargetAccountConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTargetAccountConfigurationResponse, Members: &mDeleteTargetAccountConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[589]})
-var sGetActionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetActionRequest, Members: &mGetActionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[591]})
-var sGetActionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetActionResponse, Members: &mGetActionResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[593]})
-var sGetExperimentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExperimentRequest, Members: &mGetExperimentRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[595]})
-var sGetExperimentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExperimentResponse, Members: &mGetExperimentResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[597]})
-var sGetExperimentTargetAccountConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExperimentTargetAccountConfigurationRequest, Members: &mGetExperimentTargetAccountConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[599]})
-var sGetExperimentTargetAccountConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExperimentTargetAccountConfigurationResponse, Members: &mGetExperimentTargetAccountConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[602]})
-var sGetExperimentTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExperimentTemplateRequest, Members: &mGetExperimentTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[604]})
-var sGetExperimentTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExperimentTemplateResponse, Members: &mGetExperimentTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[606]})
-var sGetSafetyLeverRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSafetyLeverRequest, Members: &mGetSafetyLeverRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[608]})
-var sGetSafetyLeverResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSafetyLeverResponse, Members: &mGetSafetyLeverResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[610]})
-var sGetTargetAccountConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTargetAccountConfigurationRequest, Members: &mGetTargetAccountConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[612]})
-var sGetTargetAccountConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTargetAccountConfigurationResponse, Members: &mGetTargetAccountConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[615]})
-var sGetTargetResourceTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTargetResourceTypeRequest, Members: &mGetTargetResourceTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[617]})
-var sGetTargetResourceTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTargetResourceTypeResponse, Members: &mGetTargetResourceTypeResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[619]})
-var sListActionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActionsRequest, Members: &mListActionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[621]})
-var sListActionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActionsResponse, Members: &mListActionsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[624]})
-var sListExperimentResolvedTargetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentResolvedTargetsRequest, Members: &mListExperimentResolvedTargetsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[627]})
-var sListExperimentResolvedTargetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentResolvedTargetsResponse, Members: &mListExperimentResolvedTargetsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[632]})
-var sListExperimentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentsRequest, Members: &mListExperimentsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[635]})
-var sListExperimentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentsResponse, Members: &mListExperimentsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[639]})
-var sListExperimentTargetAccountConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentTargetAccountConfigurationsRequest, Members: &mListExperimentTargetAccountConfigurationsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[642]})
-var sListExperimentTargetAccountConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentTargetAccountConfigurationsResponse, Members: &mListExperimentTargetAccountConfigurationsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[645]})
-var sListExperimentTemplatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentTemplatesRequest, Members: &mListExperimentTemplatesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[648]})
-var sListExperimentTemplatesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentTemplatesResponse, Members: &mListExperimentTemplatesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[651]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[654]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[656]})
-var sListTargetAccountConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTargetAccountConfigurationsRequest, Members: &mListTargetAccountConfigurationsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[658]})
-var sListTargetAccountConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTargetAccountConfigurationsResponse, Members: &mListTargetAccountConfigurationsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[662]})
-var sListTargetResourceTypesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTargetResourceTypesRequest, Members: &mListTargetResourceTypesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[665]})
-var sListTargetResourceTypesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTargetResourceTypesResponse, Members: &mListTargetResourceTypesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[668]})
-var sStartExperimentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartExperimentRequest, Members: &mStartExperimentRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[671]})
-var sStartExperimentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartExperimentResponse, Members: &mStartExperimentResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[676]})
-var sStopExperimentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopExperimentRequest, Members: &mStopExperimentRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[678]})
-var sStopExperimentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopExperimentResponse, Members: &mStopExperimentResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[680]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[682]})
-var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[685]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[686]})
-var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[689]})
-var sUpdateExperimentTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExperimentTemplateRequest, Members: &mUpdateExperimentTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[690]})
-var sUpdateExperimentTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExperimentTemplateResponse, Members: &mUpdateExperimentTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[700]})
-var sUpdateSafetyLeverStateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSafetyLeverStateRequest, Members: &mUpdateSafetyLeverStateRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[702]})
-var sUpdateSafetyLeverStateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSafetyLeverStateResponse, Members: &mUpdateSafetyLeverStateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[705]})
-var sUpdateTargetAccountConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTargetAccountConfigurationRequest, Members: &mUpdateTargetAccountConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[707]})
-var sUpdateTargetAccountConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTargetAccountConfigurationResponse, Members: &mUpdateTargetAccountConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[712]})
+var sCreateExperimentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExperimentTemplate, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateExperimentTemplate})
+var sCreateTargetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTargetAccountConfiguration, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateTargetAccountConfiguration})
+var sDeleteExperimentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteExperimentTemplate, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eDeleteExperimentTemplate})
+var sDeleteTargetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTargetAccountConfiguration, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTargetAccountConfiguration})
+var sGetAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAction, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eGetAction})
+var sGetExperiment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExperiment, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eGetExperiment})
+var sGetExperimentTargetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExperimentTargetAccountConfiguration, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eGetExperimentTargetAccountConfiguration})
+var sGetExperimentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExperimentTemplate, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eGetExperimentTemplate})
+var sGetSafetyLever = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSafetyLever, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eGetSafetyLever})
+var sGetTargetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTargetAccountConfiguration, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eGetTargetAccountConfiguration})
+var sGetTargetResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTargetResourceType, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eGetTargetResourceType})
+var sListActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActions, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eListActions})
+var sListExperimentResolvedTargets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentResolvedTargets, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eListExperimentResolvedTargets})
+var sListExperiments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperiments, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eListExperiments})
+var sListExperimentTargetAccountConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentTargetAccountConfigurations, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eListExperimentTargetAccountConfigurations})
+var sListExperimentTemplates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentTemplates, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eListExperimentTemplates})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListTargetAccountConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTargetAccountConfigurations, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eListTargetAccountConfigurations})
+var sListTargetResourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTargetResourceTypes, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eListTargetResourceTypes})
+var sStartExperiment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartExperiment, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eStartExperiment})
+var sStopExperiment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopExperiment, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eStopExperiment})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateExperimentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExperimentTemplate, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eUpdateExperimentTemplate})
+var sUpdateSafetyLeverState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSafetyLeverState, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eUpdateSafetyLeverState})
+var sUpdateTargetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTargetAccountConfiguration, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eUpdateTargetAccountConfiguration})
+var s_FaultInjectionSimulator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FaultInjectionSimulator, Type: smithy.ShapeTypeService, Ext: &e_FaultInjectionSimulator})
+var sAccountTargeting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountTargeting, Members: &mAccountTargeting, Type: smithy.ShapeTypeEnum, Ext: &eAccountTargeting})
+var sAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &eAction})
+var s_ActionDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionDescription, Type: smithy.ShapeTypeString, Ext: &e_ActionDescription})
+var s_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &e_ActionId})
+var sActionParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionParameter, Members: &mActionParameter, Type: smithy.ShapeTypeStructure, Ext: &eActionParameter})
+var s_ActionParameterDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionParameterDescription, Type: smithy.ShapeTypeString, Ext: &e_ActionParameterDescription})
+var s_ActionParameterMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionParameterMap, Members: &m_ActionParameterMap, Type: smithy.ShapeTypeMap, Ext: &e_ActionParameterMap})
+var s_ActionParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionParameterName, Type: smithy.ShapeTypeString, Ext: &e_ActionParameterName})
+var s_ActionParameterRequired = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionParameterRequired, Type: smithy.ShapeTypeBoolean, Ext: &e_ActionParameterRequired})
+var sActionsMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionsMode, Members: &mActionsMode, Type: smithy.ShapeTypeEnum, Ext: &eActionsMode})
+var sActionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionSummary, Members: &mActionSummary, Type: smithy.ShapeTypeStructure, Ext: &eActionSummary})
+var s_ActionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionSummaryList, Members: &m_ActionSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ActionSummaryList})
+var sActionTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionTarget, Members: &mActionTarget, Type: smithy.ShapeTypeStructure, Ext: &eActionTarget})
+var s_ActionTargetMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionTargetMap, Members: &m_ActionTargetMap, Type: smithy.ShapeTypeMap, Ext: &e_ActionTargetMap})
+var s_ActionTargetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionTargetName, Type: smithy.ShapeTypeString, Ext: &e_ActionTargetName})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
+var s_CloudWatchLogGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudWatchLogGroupArn, Type: smithy.ShapeTypeString, Ext: &e_CloudWatchLogGroupArn})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sCreateExperimentTemplateActionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExperimentTemplateActionInput, Members: &mCreateExperimentTemplateActionInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateExperimentTemplateActionInput})
+var s_CreateExperimentTemplateActionInputMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateExperimentTemplateActionInputMap, Members: &m_CreateExperimentTemplateActionInputMap, Type: smithy.ShapeTypeMap, Ext: &e_CreateExperimentTemplateActionInputMap})
+var sCreateExperimentTemplateExperimentOptionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExperimentTemplateExperimentOptionsInput, Members: &mCreateExperimentTemplateExperimentOptionsInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateExperimentTemplateExperimentOptionsInput})
+var sCreateExperimentTemplateLogConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExperimentTemplateLogConfigurationInput, Members: &mCreateExperimentTemplateLogConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateExperimentTemplateLogConfigurationInput})
+var sCreateExperimentTemplateReportConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExperimentTemplateReportConfigurationInput, Members: &mCreateExperimentTemplateReportConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateExperimentTemplateReportConfigurationInput})
+var sCreateExperimentTemplateStopConditionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExperimentTemplateStopConditionInput, Members: &mCreateExperimentTemplateStopConditionInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateExperimentTemplateStopConditionInput})
+var s_CreateExperimentTemplateStopConditionInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateExperimentTemplateStopConditionInputList, Members: &m_CreateExperimentTemplateStopConditionInputList, Type: smithy.ShapeTypeList, Ext: &e_CreateExperimentTemplateStopConditionInputList})
+var sCreateExperimentTemplateTargetInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExperimentTemplateTargetInput, Members: &mCreateExperimentTemplateTargetInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateExperimentTemplateTargetInput})
+var s_CreateExperimentTemplateTargetInputMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateExperimentTemplateTargetInputMap, Members: &m_CreateExperimentTemplateTargetInputMap, Type: smithy.ShapeTypeMap, Ext: &e_CreateExperimentTemplateTargetInputMap})
+var s_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreationTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_CreationTime})
+var sEmptyTargetResolutionMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmptyTargetResolutionMode, Members: &mEmptyTargetResolutionMode, Type: smithy.ShapeTypeEnum, Ext: &eEmptyTargetResolutionMode})
+var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &e_ExceptionMessage})
+var sExperiment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperiment, Members: &mExperiment, Type: smithy.ShapeTypeStructure, Ext: &eExperiment})
+var sExperimentAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentAction, Members: &mExperimentAction, Type: smithy.ShapeTypeStructure, Ext: &eExperimentAction})
+var s_ExperimentActionDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentActionDescription, Type: smithy.ShapeTypeString, Ext: &e_ExperimentActionDescription})
+var s_ExperimentActionEndTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentActionEndTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_ExperimentActionEndTime})
+var s_ExperimentActionMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentActionMap, Members: &m_ExperimentActionMap, Type: smithy.ShapeTypeMap, Ext: &e_ExperimentActionMap})
+var s_ExperimentActionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentActionName, Type: smithy.ShapeTypeString, Ext: &e_ExperimentActionName})
+var s_ExperimentActionParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentActionParameter, Type: smithy.ShapeTypeString, Ext: &e_ExperimentActionParameter})
+var s_ExperimentActionParameterMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentActionParameterMap, Members: &m_ExperimentActionParameterMap, Type: smithy.ShapeTypeMap, Ext: &e_ExperimentActionParameterMap})
+var s_ExperimentActionParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentActionParameterName, Type: smithy.ShapeTypeString, Ext: &e_ExperimentActionParameterName})
+var s_ExperimentActionStartAfter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentActionStartAfter, Type: smithy.ShapeTypeString, Ext: &e_ExperimentActionStartAfter})
+var s_ExperimentActionStartAfterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentActionStartAfterList, Members: &m_ExperimentActionStartAfterList, Type: smithy.ShapeTypeList, Ext: &e_ExperimentActionStartAfterList})
+var s_ExperimentActionStartTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentActionStartTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_ExperimentActionStartTime})
+var sExperimentActionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentActionState, Members: &mExperimentActionState, Type: smithy.ShapeTypeStructure, Ext: &eExperimentActionState})
+var sExperimentActionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentActionStatus, Members: &mExperimentActionStatus, Type: smithy.ShapeTypeEnum, Ext: &eExperimentActionStatus})
+var s_ExperimentActionStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentActionStatusReason, Type: smithy.ShapeTypeString, Ext: &e_ExperimentActionStatusReason})
+var s_ExperimentActionTargetMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentActionTargetMap, Members: &m_ExperimentActionTargetMap, Type: smithy.ShapeTypeMap, Ext: &e_ExperimentActionTargetMap})
+var s_ExperimentActionTargetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentActionTargetName, Type: smithy.ShapeTypeString, Ext: &e_ExperimentActionTargetName})
+var sExperimentCloudWatchLogsLogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentCloudWatchLogsLogConfiguration, Members: &mExperimentCloudWatchLogsLogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExperimentCloudWatchLogsLogConfiguration})
+var s_ExperimentEndTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentEndTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_ExperimentEndTime})
+var sExperimentError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentError, Members: &mExperimentError, Type: smithy.ShapeTypeStructure, Ext: &eExperimentError})
+var s_ExperimentErrorAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentErrorAccountId, Type: smithy.ShapeTypeString, Ext: &e_ExperimentErrorAccountId})
+var s_ExperimentErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentErrorCode, Type: smithy.ShapeTypeString, Ext: &e_ExperimentErrorCode})
+var s_ExperimentErrorLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentErrorLocation, Type: smithy.ShapeTypeString, Ext: &e_ExperimentErrorLocation})
+var s_ExperimentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentId, Type: smithy.ShapeTypeString, Ext: &e_ExperimentId})
+var sExperimentLogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentLogConfiguration, Members: &mExperimentLogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExperimentLogConfiguration})
+var sExperimentOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentOptions, Members: &mExperimentOptions, Type: smithy.ShapeTypeStructure, Ext: &eExperimentOptions})
+var sExperimentReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentReport, Members: &mExperimentReport, Type: smithy.ShapeTypeStructure, Ext: &eExperimentReport})
+var sExperimentReportConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentReportConfiguration, Members: &mExperimentReportConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExperimentReportConfiguration})
+var sExperimentReportConfigurationCloudWatchDashboard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentReportConfigurationCloudWatchDashboard, Members: &mExperimentReportConfigurationCloudWatchDashboard, Type: smithy.ShapeTypeStructure, Ext: &eExperimentReportConfigurationCloudWatchDashboard})
+var s_ExperimentReportConfigurationCloudWatchDashboardList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentReportConfigurationCloudWatchDashboardList, Members: &m_ExperimentReportConfigurationCloudWatchDashboardList, Type: smithy.ShapeTypeList, Ext: &e_ExperimentReportConfigurationCloudWatchDashboardList})
+var sExperimentReportConfigurationDataSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentReportConfigurationDataSources, Members: &mExperimentReportConfigurationDataSources, Type: smithy.ShapeTypeStructure, Ext: &eExperimentReportConfigurationDataSources})
+var sExperimentReportConfigurationOutputs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentReportConfigurationOutputs, Members: &mExperimentReportConfigurationOutputs, Type: smithy.ShapeTypeStructure, Ext: &eExperimentReportConfigurationOutputs})
+var sExperimentReportConfigurationOutputsS3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentReportConfigurationOutputsS3Configuration, Members: &mExperimentReportConfigurationOutputsS3Configuration, Type: smithy.ShapeTypeStructure, Ext: &eExperimentReportConfigurationOutputsS3Configuration})
+var sExperimentReportError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentReportError, Members: &mExperimentReportError, Type: smithy.ShapeTypeStructure, Ext: &eExperimentReportError})
+var s_ExperimentReportErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentReportErrorCode, Type: smithy.ShapeTypeString, Ext: &e_ExperimentReportErrorCode})
+var s_ExperimentReportReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentReportReason, Type: smithy.ShapeTypeString, Ext: &e_ExperimentReportReason})
+var sExperimentReportS3Report = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentReportS3Report, Members: &mExperimentReportS3Report, Type: smithy.ShapeTypeStructure, Ext: &eExperimentReportS3Report})
+var s_ExperimentReportS3ReportArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentReportS3ReportArn, Type: smithy.ShapeTypeString, Ext: &e_ExperimentReportS3ReportArn})
+var s_ExperimentReportS3ReportList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentReportS3ReportList, Members: &m_ExperimentReportS3ReportList, Type: smithy.ShapeTypeList, Ext: &e_ExperimentReportS3ReportList})
+var s_ExperimentReportS3ReportType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentReportS3ReportType, Type: smithy.ShapeTypeString, Ext: &e_ExperimentReportS3ReportType})
+var sExperimentReportState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentReportState, Members: &mExperimentReportState, Type: smithy.ShapeTypeStructure, Ext: &eExperimentReportState})
+var sExperimentReportStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentReportStatus, Members: &mExperimentReportStatus, Type: smithy.ShapeTypeEnum, Ext: &eExperimentReportStatus})
+var sExperimentS3LogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentS3LogConfiguration, Members: &mExperimentS3LogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExperimentS3LogConfiguration})
+var s_ExperimentStartTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentStartTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_ExperimentStartTime})
+var sExperimentState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentState, Members: &mExperimentState, Type: smithy.ShapeTypeStructure, Ext: &eExperimentState})
+var sExperimentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentStatus, Members: &mExperimentStatus, Type: smithy.ShapeTypeEnum, Ext: &eExperimentStatus})
+var s_ExperimentStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentStatusReason, Type: smithy.ShapeTypeString, Ext: &e_ExperimentStatusReason})
+var sExperimentStopCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentStopCondition, Members: &mExperimentStopCondition, Type: smithy.ShapeTypeStructure, Ext: &eExperimentStopCondition})
+var s_ExperimentStopConditionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentStopConditionList, Members: &m_ExperimentStopConditionList, Type: smithy.ShapeTypeList, Ext: &e_ExperimentStopConditionList})
+var sExperimentSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentSummary, Members: &mExperimentSummary, Type: smithy.ShapeTypeStructure, Ext: &eExperimentSummary})
+var s_ExperimentSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentSummaryList, Members: &m_ExperimentSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ExperimentSummaryList})
+var sExperimentTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTarget, Members: &mExperimentTarget, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTarget})
+var sExperimentTargetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTargetAccountConfiguration, Members: &mExperimentTargetAccountConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTargetAccountConfiguration})
+var s_ExperimentTargetAccountConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTargetAccountConfigurationList, Members: &m_ExperimentTargetAccountConfigurationList, Type: smithy.ShapeTypeList, Ext: &e_ExperimentTargetAccountConfigurationList})
+var sExperimentTargetAccountConfigurationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTargetAccountConfigurationSummary, Members: &mExperimentTargetAccountConfigurationSummary, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTargetAccountConfigurationSummary})
+var sExperimentTargetFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTargetFilter, Members: &mExperimentTargetFilter, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTargetFilter})
+var s_ExperimentTargetFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTargetFilterList, Members: &m_ExperimentTargetFilterList, Type: smithy.ShapeTypeList, Ext: &e_ExperimentTargetFilterList})
+var s_ExperimentTargetFilterPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTargetFilterPath, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTargetFilterPath})
+var s_ExperimentTargetFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTargetFilterValue, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTargetFilterValue})
+var s_ExperimentTargetFilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTargetFilterValues, Members: &m_ExperimentTargetFilterValues, Type: smithy.ShapeTypeList, Ext: &e_ExperimentTargetFilterValues})
+var s_ExperimentTargetMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTargetMap, Members: &m_ExperimentTargetMap, Type: smithy.ShapeTypeMap, Ext: &e_ExperimentTargetMap})
+var s_ExperimentTargetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTargetName, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTargetName})
+var s_ExperimentTargetParameterMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTargetParameterMap, Members: &m_ExperimentTargetParameterMap, Type: smithy.ShapeTypeMap, Ext: &e_ExperimentTargetParameterMap})
+var s_ExperimentTargetParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTargetParameterName, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTargetParameterName})
+var s_ExperimentTargetParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTargetParameterValue, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTargetParameterValue})
+var s_ExperimentTargetSelectionMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTargetSelectionMode, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTargetSelectionMode})
+var sExperimentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplate, Members: &mExperimentTemplate, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplate})
+var sExperimentTemplateAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateAction, Members: &mExperimentTemplateAction, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplateAction})
+var s_ExperimentTemplateActionDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateActionDescription, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTemplateActionDescription})
+var s_ExperimentTemplateActionMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateActionMap, Members: &m_ExperimentTemplateActionMap, Type: smithy.ShapeTypeMap, Ext: &e_ExperimentTemplateActionMap})
+var s_ExperimentTemplateActionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateActionName, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTemplateActionName})
+var s_ExperimentTemplateActionParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateActionParameter, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTemplateActionParameter})
+var s_ExperimentTemplateActionParameterMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateActionParameterMap, Members: &m_ExperimentTemplateActionParameterMap, Type: smithy.ShapeTypeMap, Ext: &e_ExperimentTemplateActionParameterMap})
+var s_ExperimentTemplateActionParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateActionParameterName, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTemplateActionParameterName})
+var s_ExperimentTemplateActionStartAfter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateActionStartAfter, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTemplateActionStartAfter})
+var s_ExperimentTemplateActionStartAfterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateActionStartAfterList, Members: &m_ExperimentTemplateActionStartAfterList, Type: smithy.ShapeTypeList, Ext: &e_ExperimentTemplateActionStartAfterList})
+var s_ExperimentTemplateActionTargetMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateActionTargetMap, Members: &m_ExperimentTemplateActionTargetMap, Type: smithy.ShapeTypeMap, Ext: &e_ExperimentTemplateActionTargetMap})
+var s_ExperimentTemplateActionTargetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateActionTargetName, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTemplateActionTargetName})
+var sExperimentTemplateCloudWatchLogsLogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateCloudWatchLogsLogConfiguration, Members: &mExperimentTemplateCloudWatchLogsLogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplateCloudWatchLogsLogConfiguration})
+var sExperimentTemplateCloudWatchLogsLogConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateCloudWatchLogsLogConfigurationInput, Members: &mExperimentTemplateCloudWatchLogsLogConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplateCloudWatchLogsLogConfigurationInput})
+var s_ExperimentTemplateDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateDescription, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTemplateDescription})
+var sExperimentTemplateExperimentOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateExperimentOptions, Members: &mExperimentTemplateExperimentOptions, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplateExperimentOptions})
+var s_ExperimentTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateId, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTemplateId})
+var sExperimentTemplateLogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateLogConfiguration, Members: &mExperimentTemplateLogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplateLogConfiguration})
+var sExperimentTemplateReportConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateReportConfiguration, Members: &mExperimentTemplateReportConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplateReportConfiguration})
+var sExperimentTemplateReportConfigurationCloudWatchDashboard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateReportConfigurationCloudWatchDashboard, Members: &mExperimentTemplateReportConfigurationCloudWatchDashboard, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplateReportConfigurationCloudWatchDashboard})
+var s_ExperimentTemplateReportConfigurationCloudWatchDashboardList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateReportConfigurationCloudWatchDashboardList, Members: &m_ExperimentTemplateReportConfigurationCloudWatchDashboardList, Type: smithy.ShapeTypeList, Ext: &e_ExperimentTemplateReportConfigurationCloudWatchDashboardList})
+var sExperimentTemplateReportConfigurationDataSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateReportConfigurationDataSources, Members: &mExperimentTemplateReportConfigurationDataSources, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplateReportConfigurationDataSources})
+var sExperimentTemplateReportConfigurationDataSourcesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateReportConfigurationDataSourcesInput, Members: &mExperimentTemplateReportConfigurationDataSourcesInput, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplateReportConfigurationDataSourcesInput})
+var sExperimentTemplateReportConfigurationOutputs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateReportConfigurationOutputs, Members: &mExperimentTemplateReportConfigurationOutputs, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplateReportConfigurationOutputs})
+var sExperimentTemplateReportConfigurationOutputsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateReportConfigurationOutputsInput, Members: &mExperimentTemplateReportConfigurationOutputsInput, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplateReportConfigurationOutputsInput})
+var sExperimentTemplateS3LogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateS3LogConfiguration, Members: &mExperimentTemplateS3LogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplateS3LogConfiguration})
+var sExperimentTemplateS3LogConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateS3LogConfigurationInput, Members: &mExperimentTemplateS3LogConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplateS3LogConfigurationInput})
+var sExperimentTemplateStopCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateStopCondition, Members: &mExperimentTemplateStopCondition, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplateStopCondition})
+var s_ExperimentTemplateStopConditionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateStopConditionList, Members: &m_ExperimentTemplateStopConditionList, Type: smithy.ShapeTypeList, Ext: &e_ExperimentTemplateStopConditionList})
+var sExperimentTemplateSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateSummary, Members: &mExperimentTemplateSummary, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplateSummary})
+var s_ExperimentTemplateSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateSummaryList, Members: &m_ExperimentTemplateSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ExperimentTemplateSummaryList})
+var sExperimentTemplateTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateTarget, Members: &mExperimentTemplateTarget, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplateTarget})
+var sExperimentTemplateTargetFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateTargetFilter, Members: &mExperimentTemplateTargetFilter, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplateTargetFilter})
+var s_ExperimentTemplateTargetFilterInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateTargetFilterInputList, Members: &m_ExperimentTemplateTargetFilterInputList, Type: smithy.ShapeTypeList, Ext: &e_ExperimentTemplateTargetFilterInputList})
+var s_ExperimentTemplateTargetFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateTargetFilterList, Members: &m_ExperimentTemplateTargetFilterList, Type: smithy.ShapeTypeList, Ext: &e_ExperimentTemplateTargetFilterList})
+var s_ExperimentTemplateTargetFilterPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateTargetFilterPath, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTemplateTargetFilterPath})
+var s_ExperimentTemplateTargetFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateTargetFilterValue, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTemplateTargetFilterValue})
+var s_ExperimentTemplateTargetFilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateTargetFilterValues, Members: &m_ExperimentTemplateTargetFilterValues, Type: smithy.ShapeTypeList, Ext: &e_ExperimentTemplateTargetFilterValues})
+var sExperimentTemplateTargetInputFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExperimentTemplateTargetInputFilter, Members: &mExperimentTemplateTargetInputFilter, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplateTargetInputFilter})
+var s_ExperimentTemplateTargetMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateTargetMap, Members: &m_ExperimentTemplateTargetMap, Type: smithy.ShapeTypeMap, Ext: &e_ExperimentTemplateTargetMap})
+var s_ExperimentTemplateTargetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateTargetName, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTemplateTargetName})
+var s_ExperimentTemplateTargetParameterMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateTargetParameterMap, Members: &m_ExperimentTemplateTargetParameterMap, Type: smithy.ShapeTypeMap, Ext: &e_ExperimentTemplateTargetParameterMap})
+var s_ExperimentTemplateTargetParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateTargetParameterName, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTemplateTargetParameterName})
+var s_ExperimentTemplateTargetParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateTargetParameterValue, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTemplateTargetParameterValue})
+var s_ExperimentTemplateTargetSelectionMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentTemplateTargetSelectionMode, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTemplateTargetSelectionMode})
+var s_LastUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastUpdateTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_LastUpdateTime})
+var s_ListActionsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListActionsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListActionsMaxResults})
+var s_ListExperimentResolvedTargetsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListExperimentResolvedTargetsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListExperimentResolvedTargetsMaxResults})
+var s_ListExperimentsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListExperimentsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListExperimentsMaxResults})
+var s_ListExperimentTemplatesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListExperimentTemplatesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListExperimentTemplatesMaxResults})
+var s_ListTargetAccountConfigurationsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListTargetAccountConfigurationsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListTargetAccountConfigurationsMaxResults})
+var s_ListTargetResourceTypesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListTargetResourceTypesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListTargetResourceTypesMaxResults})
+var s_LogSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogSchemaVersion, Type: smithy.ShapeTypeInteger, Ext: &e_LogSchemaVersion})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var s_ReportConfigurationCloudWatchDashboardIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportConfigurationCloudWatchDashboardIdentifier, Type: smithy.ShapeTypeString, Ext: &e_ReportConfigurationCloudWatchDashboardIdentifier})
+var sReportConfigurationCloudWatchDashboardInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportConfigurationCloudWatchDashboardInput, Members: &mReportConfigurationCloudWatchDashboardInput, Type: smithy.ShapeTypeStructure, Ext: &eReportConfigurationCloudWatchDashboardInput})
+var s_ReportConfigurationCloudWatchDashboardInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportConfigurationCloudWatchDashboardInputList, Members: &m_ReportConfigurationCloudWatchDashboardInputList, Type: smithy.ShapeTypeList, Ext: &e_ReportConfigurationCloudWatchDashboardInputList})
+var s_ReportConfigurationDuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportConfigurationDuration, Type: smithy.ShapeTypeString, Ext: &e_ReportConfigurationDuration})
+var sReportConfigurationS3Output = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportConfigurationS3Output, Members: &mReportConfigurationS3Output, Type: smithy.ShapeTypeStructure, Ext: &eReportConfigurationS3Output})
+var sReportConfigurationS3OutputInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportConfigurationS3OutputInput, Members: &mReportConfigurationS3OutputInput, Type: smithy.ShapeTypeStructure, Ext: &eReportConfigurationS3OutputInput})
+var s_ReportConfigurationS3OutputPrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportConfigurationS3OutputPrefix, Type: smithy.ShapeTypeString, Ext: &e_ReportConfigurationS3OutputPrefix})
+var sResolvedTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolvedTarget, Members: &mResolvedTarget, Type: smithy.ShapeTypeStructure, Ext: &eResolvedTarget})
+var s_ResolvedTargetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResolvedTargetList, Members: &m_ResolvedTargetList, Type: smithy.ShapeTypeList, Ext: &e_ResolvedTargetList})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArn})
+var s_ResourceArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList, Ext: &e_ResourceArnList})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &e_RoleArn})
+var s_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &e_S3BucketName})
+var s_S3ObjectKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3ObjectKey, Type: smithy.ShapeTypeString, Ext: &e_S3ObjectKey})
+var sSafetyLever = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSafetyLever, Members: &mSafetyLever, Type: smithy.ShapeTypeStructure, Ext: &eSafetyLever})
+var s_SafetyLeverId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SafetyLeverId, Type: smithy.ShapeTypeString, Ext: &e_SafetyLeverId})
+var sSafetyLeverState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSafetyLeverState, Members: &mSafetyLeverState, Type: smithy.ShapeTypeStructure, Ext: &eSafetyLeverState})
+var sSafetyLeverStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSafetyLeverStatus, Members: &mSafetyLeverStatus, Type: smithy.ShapeTypeEnum, Ext: &eSafetyLeverStatus})
+var sSafetyLeverStatusInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSafetyLeverStatusInput, Members: &mSafetyLeverStatusInput, Type: smithy.ShapeTypeEnum, Ext: &eSafetyLeverStatusInput})
+var s_SafetyLeverStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SafetyLeverStatusReason, Type: smithy.ShapeTypeString, Ext: &e_SafetyLeverStatusReason})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sStartExperimentExperimentOptionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartExperimentExperimentOptionsInput, Members: &mStartExperimentExperimentOptionsInput, Type: smithy.ShapeTypeStructure, Ext: &eStartExperimentExperimentOptionsInput})
+var s_StopConditionSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StopConditionSource, Type: smithy.ShapeTypeString, Ext: &e_StopConditionSource})
+var s_StopConditionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StopConditionValue, Type: smithy.ShapeTypeString, Ext: &e_StopConditionValue})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTargetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetAccountConfiguration, Members: &mTargetAccountConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eTargetAccountConfiguration})
+var s_TargetAccountConfigurationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetAccountConfigurationDescription, Type: smithy.ShapeTypeString, Ext: &e_TargetAccountConfigurationDescription})
+var s_TargetAccountConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetAccountConfigurationList, Members: &m_TargetAccountConfigurationList, Type: smithy.ShapeTypeList, Ext: &e_TargetAccountConfigurationList})
+var s_TargetAccountConfigurationsCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetAccountConfigurationsCount, Type: smithy.ShapeTypeLong, Ext: &e_TargetAccountConfigurationsCount})
+var sTargetAccountConfigurationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetAccountConfigurationSummary, Members: &mTargetAccountConfigurationSummary, Type: smithy.ShapeTypeStructure, Ext: &eTargetAccountConfigurationSummary})
+var s_TargetAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetAccountId, Type: smithy.ShapeTypeString, Ext: &e_TargetAccountId})
+var s_TargetInformationKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetInformationKey, Type: smithy.ShapeTypeString, Ext: &e_TargetInformationKey})
+var s_TargetInformationMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetInformationMap, Members: &m_TargetInformationMap, Type: smithy.ShapeTypeMap, Ext: &e_TargetInformationMap})
+var s_TargetInformationValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetInformationValue, Type: smithy.ShapeTypeString, Ext: &e_TargetInformationValue})
+var s_TargetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetName, Type: smithy.ShapeTypeString, Ext: &e_TargetName})
+var sTargetResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetResourceType, Members: &mTargetResourceType, Type: smithy.ShapeTypeStructure, Ext: &eTargetResourceType})
+var s_TargetResourceTypeDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetResourceTypeDescription, Type: smithy.ShapeTypeString, Ext: &e_TargetResourceTypeDescription})
+var s_TargetResourceTypeId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetResourceTypeId, Type: smithy.ShapeTypeString, Ext: &e_TargetResourceTypeId})
+var sTargetResourceTypeParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetResourceTypeParameter, Members: &mTargetResourceTypeParameter, Type: smithy.ShapeTypeStructure, Ext: &eTargetResourceTypeParameter})
+var s_TargetResourceTypeParameterDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetResourceTypeParameterDescription, Type: smithy.ShapeTypeString, Ext: &e_TargetResourceTypeParameterDescription})
+var s_TargetResourceTypeParameterMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetResourceTypeParameterMap, Members: &m_TargetResourceTypeParameterMap, Type: smithy.ShapeTypeMap, Ext: &e_TargetResourceTypeParameterMap})
+var s_TargetResourceTypeParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetResourceTypeParameterName, Type: smithy.ShapeTypeString, Ext: &e_TargetResourceTypeParameterName})
+var s_TargetResourceTypeParameterRequired = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetResourceTypeParameterRequired, Type: smithy.ShapeTypeBoolean, Ext: &e_TargetResourceTypeParameterRequired})
+var sTargetResourceTypeSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetResourceTypeSummary, Members: &mTargetResourceTypeSummary, Type: smithy.ShapeTypeStructure, Ext: &eTargetResourceTypeSummary})
+var s_TargetResourceTypeSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetResourceTypeSummaryList, Members: &m_TargetResourceTypeSummaryList, Type: smithy.ShapeTypeList, Ext: &e_TargetResourceTypeSummaryList})
+var sUpdateExperimentTemplateActionInputItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExperimentTemplateActionInputItem, Members: &mUpdateExperimentTemplateActionInputItem, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExperimentTemplateActionInputItem})
+var s_UpdateExperimentTemplateActionInputMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateExperimentTemplateActionInputMap, Members: &m_UpdateExperimentTemplateActionInputMap, Type: smithy.ShapeTypeMap, Ext: &e_UpdateExperimentTemplateActionInputMap})
+var sUpdateExperimentTemplateExperimentOptionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExperimentTemplateExperimentOptionsInput, Members: &mUpdateExperimentTemplateExperimentOptionsInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExperimentTemplateExperimentOptionsInput})
+var sUpdateExperimentTemplateLogConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExperimentTemplateLogConfigurationInput, Members: &mUpdateExperimentTemplateLogConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExperimentTemplateLogConfigurationInput})
+var sUpdateExperimentTemplateReportConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExperimentTemplateReportConfigurationInput, Members: &mUpdateExperimentTemplateReportConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExperimentTemplateReportConfigurationInput})
+var sUpdateExperimentTemplateStopConditionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExperimentTemplateStopConditionInput, Members: &mUpdateExperimentTemplateStopConditionInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExperimentTemplateStopConditionInput})
+var s_UpdateExperimentTemplateStopConditionInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateExperimentTemplateStopConditionInputList, Members: &m_UpdateExperimentTemplateStopConditionInputList, Type: smithy.ShapeTypeList, Ext: &e_UpdateExperimentTemplateStopConditionInputList})
+var sUpdateExperimentTemplateTargetInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExperimentTemplateTargetInput, Members: &mUpdateExperimentTemplateTargetInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExperimentTemplateTargetInput})
+var s_UpdateExperimentTemplateTargetInputMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateExperimentTemplateTargetInputMap, Members: &m_UpdateExperimentTemplateTargetInputMap, Type: smithy.ShapeTypeMap, Ext: &e_UpdateExperimentTemplateTargetInputMap})
+var sUpdateSafetyLeverStateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSafetyLeverStateInput, Members: &mUpdateSafetyLeverStateInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSafetyLeverStateInput})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sCreateExperimentTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExperimentTemplateRequest, Members: &mCreateExperimentTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateExperimentTemplateRequest})
+var sCreateExperimentTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateExperimentTemplateResponse, Members: &mCreateExperimentTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateExperimentTemplateResponse})
+var sCreateTargetAccountConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTargetAccountConfigurationRequest, Members: &mCreateTargetAccountConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateTargetAccountConfigurationRequest})
+var sCreateTargetAccountConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTargetAccountConfigurationResponse, Members: &mCreateTargetAccountConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateTargetAccountConfigurationResponse})
+var sDeleteExperimentTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteExperimentTemplateRequest, Members: &mDeleteExperimentTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteExperimentTemplateRequest})
+var sDeleteExperimentTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteExperimentTemplateResponse, Members: &mDeleteExperimentTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteExperimentTemplateResponse})
+var sDeleteTargetAccountConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTargetAccountConfigurationRequest, Members: &mDeleteTargetAccountConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTargetAccountConfigurationRequest})
+var sDeleteTargetAccountConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTargetAccountConfigurationResponse, Members: &mDeleteTargetAccountConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTargetAccountConfigurationResponse})
+var sGetActionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetActionRequest, Members: &mGetActionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetActionRequest})
+var sGetActionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetActionResponse, Members: &mGetActionResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetActionResponse})
+var sGetExperimentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExperimentRequest, Members: &mGetExperimentRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetExperimentRequest})
+var sGetExperimentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExperimentResponse, Members: &mGetExperimentResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetExperimentResponse})
+var sGetExperimentTargetAccountConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExperimentTargetAccountConfigurationRequest, Members: &mGetExperimentTargetAccountConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetExperimentTargetAccountConfigurationRequest})
+var sGetExperimentTargetAccountConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExperimentTargetAccountConfigurationResponse, Members: &mGetExperimentTargetAccountConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetExperimentTargetAccountConfigurationResponse})
+var sGetExperimentTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExperimentTemplateRequest, Members: &mGetExperimentTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetExperimentTemplateRequest})
+var sGetExperimentTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExperimentTemplateResponse, Members: &mGetExperimentTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetExperimentTemplateResponse})
+var sGetSafetyLeverRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSafetyLeverRequest, Members: &mGetSafetyLeverRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSafetyLeverRequest})
+var sGetSafetyLeverResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSafetyLeverResponse, Members: &mGetSafetyLeverResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSafetyLeverResponse})
+var sGetTargetAccountConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTargetAccountConfigurationRequest, Members: &mGetTargetAccountConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTargetAccountConfigurationRequest})
+var sGetTargetAccountConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTargetAccountConfigurationResponse, Members: &mGetTargetAccountConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTargetAccountConfigurationResponse})
+var sGetTargetResourceTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTargetResourceTypeRequest, Members: &mGetTargetResourceTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTargetResourceTypeRequest})
+var sGetTargetResourceTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTargetResourceTypeResponse, Members: &mGetTargetResourceTypeResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTargetResourceTypeResponse})
+var sListActionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActionsRequest, Members: &mListActionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListActionsRequest})
+var sListActionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActionsResponse, Members: &mListActionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListActionsResponse})
+var sListExperimentResolvedTargetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentResolvedTargetsRequest, Members: &mListExperimentResolvedTargetsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListExperimentResolvedTargetsRequest})
+var sListExperimentResolvedTargetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentResolvedTargetsResponse, Members: &mListExperimentResolvedTargetsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListExperimentResolvedTargetsResponse})
+var sListExperimentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentsRequest, Members: &mListExperimentsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListExperimentsRequest})
+var sListExperimentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentsResponse, Members: &mListExperimentsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListExperimentsResponse})
+var sListExperimentTargetAccountConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentTargetAccountConfigurationsRequest, Members: &mListExperimentTargetAccountConfigurationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListExperimentTargetAccountConfigurationsRequest})
+var sListExperimentTargetAccountConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentTargetAccountConfigurationsResponse, Members: &mListExperimentTargetAccountConfigurationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListExperimentTargetAccountConfigurationsResponse})
+var sListExperimentTemplatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentTemplatesRequest, Members: &mListExperimentTemplatesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListExperimentTemplatesRequest})
+var sListExperimentTemplatesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExperimentTemplatesResponse, Members: &mListExperimentTemplatesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListExperimentTemplatesResponse})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTargetAccountConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTargetAccountConfigurationsRequest, Members: &mListTargetAccountConfigurationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTargetAccountConfigurationsRequest})
+var sListTargetAccountConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTargetAccountConfigurationsResponse, Members: &mListTargetAccountConfigurationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTargetAccountConfigurationsResponse})
+var sListTargetResourceTypesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTargetResourceTypesRequest, Members: &mListTargetResourceTypesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTargetResourceTypesRequest})
+var sListTargetResourceTypesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTargetResourceTypesResponse, Members: &mListTargetResourceTypesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTargetResourceTypesResponse})
+var sStartExperimentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartExperimentRequest, Members: &mStartExperimentRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartExperimentRequest})
+var sStartExperimentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartExperimentResponse, Members: &mStartExperimentResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartExperimentResponse})
+var sStopExperimentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopExperimentRequest, Members: &mStopExperimentRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopExperimentRequest})
+var sStopExperimentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopExperimentResponse, Members: &mStopExperimentResponse, Type: smithy.ShapeTypeStructure, Ext: &eStopExperimentResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateExperimentTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExperimentTemplateRequest, Members: &mUpdateExperimentTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExperimentTemplateRequest})
+var sUpdateExperimentTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExperimentTemplateResponse, Members: &mUpdateExperimentTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExperimentTemplateResponse})
+var sUpdateSafetyLeverStateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSafetyLeverStateRequest, Members: &mUpdateSafetyLeverStateRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSafetyLeverStateRequest})
+var sUpdateSafetyLeverStateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSafetyLeverStateResponse, Members: &mUpdateSafetyLeverStateResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSafetyLeverStateResponse})
+var sUpdateTargetAccountConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTargetAccountConfigurationRequest, Members: &mUpdateTargetAccountConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTargetAccountConfigurationRequest})
+var sUpdateTargetAccountConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTargetAccountConfigurationResponse, Members: &mUpdateTargetAccountConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTargetAccountConfigurationResponse})
 
-var sAccountTargeting_SINGLE_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
-var sAccountTargeting_MULTI_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTI_ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[29]})
-var sAction_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var sAction_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var sAction_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ActionDescription, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var sAction_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_ActionParameterMap, Members: &m_ActionParameterMap, Type: smithy.ShapeTypeMap, Ext: &ext[34]})
-var sAction_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_ActionTargetMap, Members: &m_ActionTargetMap, Type: smithy.ShapeTypeMap, Ext: &ext[35]})
-var sAction_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[36]})
-var sActionParameter_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ActionParameterDescription, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var sActionParameter_required = smithy.NewStaticSchema(smithy.StaticSchema{Member: "required", ID: &i_ActionParameterRequired, Type: smithy.ShapeTypeBoolean, Ext: &ext[41]})
-var s_ActionParameterMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ActionParameterName, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var s_ActionParameterMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iActionParameter, Members: &mActionParameter, Type: smithy.ShapeTypeStructure, Ext: &ext[45]})
-var sActionsMode_SKIP_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SKIP_ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[49]})
-var sActionsMode_RUN_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUN_ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[50]})
-var sActionSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var sActionSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[53]})
-var sActionSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ActionDescription, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var sActionSummary_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_ActionTargetMap, Members: &m_ActionTargetMap, Type: smithy.ShapeTypeMap, Ext: &ext[55]})
-var sActionSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[56]})
-var s_ActionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActionSummary, Members: &mActionSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[58]})
-var sActionTarget_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_TargetResourceTypeId, Type: smithy.ShapeTypeString, Ext: &ext[60]})
-var s_ActionTargetMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ActionTargetName, Type: smithy.ShapeTypeString, Ext: &ext[62]})
-var s_ActionTargetMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iActionTarget, Members: &mActionTarget, Type: smithy.ShapeTypeStructure, Ext: &ext[63]})
-var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[68]})
-var sCreateExperimentTemplateActionInput_actionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionId", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &ext[70]})
-var sCreateExperimentTemplateActionInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ExperimentTemplateActionDescription, Type: smithy.ShapeTypeString, Ext: &ext[71]})
-var sCreateExperimentTemplateActionInput_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_ExperimentTemplateActionParameterMap, Members: &m_ExperimentTemplateActionParameterMap, Type: smithy.ShapeTypeMap, Ext: &ext[72]})
-var sCreateExperimentTemplateActionInput_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_ExperimentTemplateActionTargetMap, Members: &m_ExperimentTemplateActionTargetMap, Type: smithy.ShapeTypeMap, Ext: &ext[73]})
-var sCreateExperimentTemplateActionInput_startAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startAfter", ID: &i_ExperimentTemplateActionStartAfterList, Members: &m_ExperimentTemplateActionStartAfterList, Type: smithy.ShapeTypeList, Ext: &ext[74]})
-var s_CreateExperimentTemplateActionInputMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentTemplateActionName, Type: smithy.ShapeTypeString, Ext: &ext[76]})
-var s_CreateExperimentTemplateActionInputMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iCreateExperimentTemplateActionInput, Members: &mCreateExperimentTemplateActionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
-var sCreateExperimentTemplateExperimentOptionsInput_accountTargeting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountTargeting", ID: &iAccountTargeting, Members: &mAccountTargeting, Type: smithy.ShapeTypeEnum, Ext: &ext[79]})
-var sCreateExperimentTemplateExperimentOptionsInput_emptyTargetResolutionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emptyTargetResolutionMode", ID: &iEmptyTargetResolutionMode, Members: &mEmptyTargetResolutionMode, Type: smithy.ShapeTypeEnum, Ext: &ext[80]})
-var sCreateExperimentTemplateLogConfigurationInput_cloudWatchLogsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchLogsConfiguration", ID: &iExperimentTemplateCloudWatchLogsLogConfigurationInput, Members: &mExperimentTemplateCloudWatchLogsLogConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[82]})
-var sCreateExperimentTemplateLogConfigurationInput_s3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Configuration", ID: &iExperimentTemplateS3LogConfigurationInput, Members: &mExperimentTemplateS3LogConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[83]})
-var sCreateExperimentTemplateLogConfigurationInput_logSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logSchemaVersion", ID: &i_LogSchemaVersion, Type: smithy.ShapeTypeInteger, Ext: &ext[84]})
-var sCreateExperimentTemplateReportConfigurationInput_outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputs", ID: &iExperimentTemplateReportConfigurationOutputsInput, Members: &mExperimentTemplateReportConfigurationOutputsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[86]})
-var sCreateExperimentTemplateReportConfigurationInput_dataSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSources", ID: &iExperimentTemplateReportConfigurationDataSourcesInput, Members: &mExperimentTemplateReportConfigurationDataSourcesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[87]})
-var sCreateExperimentTemplateReportConfigurationInput_preExperimentDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preExperimentDuration", ID: &i_ReportConfigurationDuration, Type: smithy.ShapeTypeString, Ext: &ext[88]})
-var sCreateExperimentTemplateReportConfigurationInput_postExperimentDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postExperimentDuration", ID: &i_ReportConfigurationDuration, Type: smithy.ShapeTypeString, Ext: &ext[89]})
-var sCreateExperimentTemplateStopConditionInput_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_StopConditionSource, Type: smithy.ShapeTypeString, Ext: &ext[91]})
-var sCreateExperimentTemplateStopConditionInput_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StopConditionValue, Type: smithy.ShapeTypeString, Ext: &ext[92]})
-var s_CreateExperimentTemplateStopConditionInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCreateExperimentTemplateStopConditionInput, Members: &mCreateExperimentTemplateStopConditionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[94]})
-var sCreateExperimentTemplateTargetInput_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_TargetResourceTypeId, Type: smithy.ShapeTypeString, Ext: &ext[96]})
-var sCreateExperimentTemplateTargetInput_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList, Ext: &ext[97]})
-var sCreateExperimentTemplateTargetInput_resourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceTags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[98]})
-var sCreateExperimentTemplateTargetInput_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_ExperimentTemplateTargetFilterInputList, Members: &m_ExperimentTemplateTargetFilterInputList, Type: smithy.ShapeTypeList, Ext: &ext[99]})
-var sCreateExperimentTemplateTargetInput_selectionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "selectionMode", ID: &i_ExperimentTemplateTargetSelectionMode, Type: smithy.ShapeTypeString, Ext: &ext[100]})
-var sCreateExperimentTemplateTargetInput_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_ExperimentTemplateTargetParameterMap, Members: &m_ExperimentTemplateTargetParameterMap, Type: smithy.ShapeTypeMap, Ext: &ext[101]})
-var s_CreateExperimentTemplateTargetInputMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentTemplateTargetName, Type: smithy.ShapeTypeString, Ext: &ext[103]})
-var s_CreateExperimentTemplateTargetInputMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iCreateExperimentTemplateTargetInput, Members: &mCreateExperimentTemplateTargetInput, Type: smithy.ShapeTypeStructure, Ext: &ext[104]})
-var sEmptyTargetResolutionMode_FAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[107]})
-var sEmptyTargetResolutionMode_SKIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SKIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[108]})
-var sExperiment_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ExperimentId, Type: smithy.ShapeTypeString, Ext: &ext[111]})
-var sExperiment_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[112]})
-var sExperiment_experimentTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplateId", ID: &i_ExperimentTemplateId, Type: smithy.ShapeTypeString, Ext: &ext[113]})
-var sExperiment_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[114]})
-var sExperiment_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iExperimentState, Members: &mExperimentState, Type: smithy.ShapeTypeStructure, Ext: &ext[115]})
-var sExperiment_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_ExperimentTargetMap, Members: &m_ExperimentTargetMap, Type: smithy.ShapeTypeMap, Ext: &ext[116]})
-var sExperiment_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &i_ExperimentActionMap, Members: &m_ExperimentActionMap, Type: smithy.ShapeTypeMap, Ext: &ext[117]})
-var sExperiment_stopConditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stopConditions", ID: &i_ExperimentStopConditionList, Members: &m_ExperimentStopConditionList, Type: smithy.ShapeTypeList, Ext: &ext[118]})
-var sExperiment_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_CreationTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[119]})
-var sExperiment_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_ExperimentStartTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[120]})
-var sExperiment_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_ExperimentEndTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[121]})
-var sExperiment_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[122]})
-var sExperiment_logConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logConfiguration", ID: &iExperimentLogConfiguration, Members: &mExperimentLogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[123]})
-var sExperiment_experimentOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentOptions", ID: &iExperimentOptions, Members: &mExperimentOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[124]})
-var sExperiment_targetAccountConfigurationsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetAccountConfigurationsCount", ID: &i_TargetAccountConfigurationsCount, Type: smithy.ShapeTypeLong, Ext: &ext[125]})
-var sExperiment_experimentReportConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentReportConfiguration", ID: &iExperimentReportConfiguration, Members: &mExperimentReportConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var sExperiment_experimentReport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentReport", ID: &iExperimentReport, Members: &mExperimentReport, Type: smithy.ShapeTypeStructure, Ext: &ext[127]})
-var sExperimentAction_actionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionId", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &ext[129]})
-var sExperimentAction_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ExperimentActionDescription, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var sExperimentAction_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_ExperimentActionParameterMap, Members: &m_ExperimentActionParameterMap, Type: smithy.ShapeTypeMap, Ext: &ext[131]})
-var sExperimentAction_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_ExperimentActionTargetMap, Members: &m_ExperimentActionTargetMap, Type: smithy.ShapeTypeMap, Ext: &ext[132]})
-var sExperimentAction_startAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startAfter", ID: &i_ExperimentActionStartAfterList, Members: &m_ExperimentActionStartAfterList, Type: smithy.ShapeTypeList, Ext: &ext[133]})
-var sExperimentAction_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iExperimentActionState, Members: &mExperimentActionState, Type: smithy.ShapeTypeStructure, Ext: &ext[134]})
-var sExperimentAction_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_ExperimentActionStartTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[135]})
-var sExperimentAction_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_ExperimentActionEndTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[136]})
-var s_ExperimentActionMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentActionName, Type: smithy.ShapeTypeString, Ext: &ext[140]})
-var s_ExperimentActionMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iExperimentAction, Members: &mExperimentAction, Type: smithy.ShapeTypeStructure, Ext: &ext[141]})
-var s_ExperimentActionParameterMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentActionParameterName, Type: smithy.ShapeTypeString, Ext: &ext[145]})
-var s_ExperimentActionParameterMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ExperimentActionParameter, Type: smithy.ShapeTypeString, Ext: &ext[146]})
-var s_ExperimentActionStartAfterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ExperimentActionStartAfter, Type: smithy.ShapeTypeString, Ext: &ext[150]})
-var sExperimentActionState_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iExperimentActionStatus, Members: &mExperimentActionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[153]})
-var sExperimentActionState_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_ExperimentActionStatusReason, Type: smithy.ShapeTypeString, Ext: &ext[154]})
-var sExperimentActionStatus_pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pending", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[156]})
-var sExperimentActionStatus_initiating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initiating", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[157]})
-var sExperimentActionStatus_running = smithy.NewStaticSchema(smithy.StaticSchema{Member: "running", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[158]})
-var sExperimentActionStatus_completed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[159]})
-var sExperimentActionStatus_cancelled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cancelled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[160]})
-var sExperimentActionStatus_stopping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stopping", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[161]})
-var sExperimentActionStatus_stopped = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stopped", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[162]})
-var sExperimentActionStatus_failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[163]})
-var sExperimentActionStatus_skipped = smithy.NewStaticSchema(smithy.StaticSchema{Member: "skipped", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[164]})
-var s_ExperimentActionTargetMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentActionTargetName, Type: smithy.ShapeTypeString, Ext: &ext[167]})
-var s_ExperimentActionTargetMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ExperimentTargetName, Type: smithy.ShapeTypeString, Ext: &ext[168]})
-var sExperimentCloudWatchLogsLogConfiguration_logGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logGroupArn", ID: &i_CloudWatchLogGroupArn, Type: smithy.ShapeTypeString, Ext: &ext[171]})
-var sExperimentError_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_ExperimentErrorAccountId, Type: smithy.ShapeTypeString, Ext: &ext[174]})
-var sExperimentError_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_ExperimentErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[175]})
-var sExperimentError_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_ExperimentErrorLocation, Type: smithy.ShapeTypeString, Ext: &ext[176]})
-var sExperimentLogConfiguration_cloudWatchLogsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchLogsConfiguration", ID: &iExperimentCloudWatchLogsLogConfiguration, Members: &mExperimentCloudWatchLogsLogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[182]})
-var sExperimentLogConfiguration_s3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Configuration", ID: &iExperimentS3LogConfiguration, Members: &mExperimentS3LogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[183]})
-var sExperimentLogConfiguration_logSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logSchemaVersion", ID: &i_LogSchemaVersion, Type: smithy.ShapeTypeInteger, Ext: &ext[184]})
-var sExperimentOptions_accountTargeting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountTargeting", ID: &iAccountTargeting, Members: &mAccountTargeting, Type: smithy.ShapeTypeEnum, Ext: &ext[186]})
-var sExperimentOptions_emptyTargetResolutionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emptyTargetResolutionMode", ID: &iEmptyTargetResolutionMode, Members: &mEmptyTargetResolutionMode, Type: smithy.ShapeTypeEnum, Ext: &ext[187]})
-var sExperimentOptions_actionsMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionsMode", ID: &iActionsMode, Members: &mActionsMode, Type: smithy.ShapeTypeEnum, Ext: &ext[188]})
-var sExperimentReport_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iExperimentReportState, Members: &mExperimentReportState, Type: smithy.ShapeTypeStructure, Ext: &ext[190]})
-var sExperimentReport_s3Reports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Reports", ID: &i_ExperimentReportS3ReportList, Members: &m_ExperimentReportS3ReportList, Type: smithy.ShapeTypeList, Ext: &ext[191]})
-var sExperimentReportConfiguration_outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputs", ID: &iExperimentReportConfigurationOutputs, Members: &mExperimentReportConfigurationOutputs, Type: smithy.ShapeTypeStructure, Ext: &ext[193]})
-var sExperimentReportConfiguration_dataSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSources", ID: &iExperimentReportConfigurationDataSources, Members: &mExperimentReportConfigurationDataSources, Type: smithy.ShapeTypeStructure, Ext: &ext[194]})
-var sExperimentReportConfiguration_preExperimentDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preExperimentDuration", ID: &i_ReportConfigurationDuration, Type: smithy.ShapeTypeString, Ext: &ext[195]})
-var sExperimentReportConfiguration_postExperimentDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postExperimentDuration", ID: &i_ReportConfigurationDuration, Type: smithy.ShapeTypeString, Ext: &ext[196]})
-var sExperimentReportConfigurationCloudWatchDashboard_dashboardIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dashboardIdentifier", ID: &i_ReportConfigurationCloudWatchDashboardIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[198]})
-var s_ExperimentReportConfigurationCloudWatchDashboardList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExperimentReportConfigurationCloudWatchDashboard, Members: &mExperimentReportConfigurationCloudWatchDashboard, Type: smithy.ShapeTypeStructure, Ext: &ext[200]})
-var sExperimentReportConfigurationDataSources_cloudWatchDashboards = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchDashboards", ID: &i_ExperimentReportConfigurationCloudWatchDashboardList, Members: &m_ExperimentReportConfigurationCloudWatchDashboardList, Type: smithy.ShapeTypeList, Ext: &ext[202]})
-var sExperimentReportConfigurationOutputs_s3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Configuration", ID: &iExperimentReportConfigurationOutputsS3Configuration, Members: &mExperimentReportConfigurationOutputsS3Configuration, Type: smithy.ShapeTypeStructure, Ext: &ext[204]})
-var sExperimentReportConfigurationOutputsS3Configuration_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &ext[206]})
-var sExperimentReportConfigurationOutputsS3Configuration_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_ReportConfigurationS3OutputPrefix, Type: smithy.ShapeTypeString, Ext: &ext[207]})
-var sExperimentReportError_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_ExperimentReportErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[209]})
-var sExperimentReportS3Report_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ExperimentReportS3ReportArn, Type: smithy.ShapeTypeString, Ext: &ext[213]})
-var sExperimentReportS3Report_reportType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportType", ID: &i_ExperimentReportS3ReportType, Type: smithy.ShapeTypeString, Ext: &ext[214]})
-var s_ExperimentReportS3ReportList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExperimentReportS3Report, Members: &mExperimentReportS3Report, Type: smithy.ShapeTypeStructure, Ext: &ext[217]})
-var sExperimentReportState_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iExperimentReportStatus, Members: &mExperimentReportStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[220]})
-var sExperimentReportState_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_ExperimentReportReason, Type: smithy.ShapeTypeString, Ext: &ext[221]})
-var sExperimentReportState_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iExperimentReportError, Members: &mExperimentReportError, Type: smithy.ShapeTypeStructure, Ext: &ext[222]})
-var sExperimentReportStatus_pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pending", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[224]})
-var sExperimentReportStatus_running = smithy.NewStaticSchema(smithy.StaticSchema{Member: "running", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[225]})
-var sExperimentReportStatus_completed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[226]})
-var sExperimentReportStatus_cancelled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cancelled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[227]})
-var sExperimentReportStatus_failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[228]})
-var sExperimentS3LogConfiguration_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &ext[230]})
-var sExperimentS3LogConfiguration_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_S3ObjectKey, Type: smithy.ShapeTypeString, Ext: &ext[231]})
-var sExperimentState_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iExperimentStatus, Members: &mExperimentStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[234]})
-var sExperimentState_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_ExperimentStatusReason, Type: smithy.ShapeTypeString, Ext: &ext[235]})
-var sExperimentState_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iExperimentError, Members: &mExperimentError, Type: smithy.ShapeTypeStructure, Ext: &ext[236]})
-var sExperimentStatus_pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pending", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[238]})
-var sExperimentStatus_initiating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initiating", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[239]})
-var sExperimentStatus_running = smithy.NewStaticSchema(smithy.StaticSchema{Member: "running", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[240]})
-var sExperimentStatus_completed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[241]})
-var sExperimentStatus_stopping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stopping", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[242]})
-var sExperimentStatus_stopped = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stopped", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[243]})
-var sExperimentStatus_failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[244]})
-var sExperimentStatus_cancelled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cancelled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[245]})
-var sExperimentStopCondition_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_StopConditionSource, Type: smithy.ShapeTypeString, Ext: &ext[248]})
-var sExperimentStopCondition_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StopConditionValue, Type: smithy.ShapeTypeString, Ext: &ext[249]})
-var s_ExperimentStopConditionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExperimentStopCondition, Members: &mExperimentStopCondition, Type: smithy.ShapeTypeStructure, Ext: &ext[251]})
-var sExperimentSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ExperimentId, Type: smithy.ShapeTypeString, Ext: &ext[253]})
-var sExperimentSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[254]})
-var sExperimentSummary_experimentTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplateId", ID: &i_ExperimentTemplateId, Type: smithy.ShapeTypeString, Ext: &ext[255]})
-var sExperimentSummary_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iExperimentState, Members: &mExperimentState, Type: smithy.ShapeTypeStructure, Ext: &ext[256]})
-var sExperimentSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_CreationTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[257]})
-var sExperimentSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[258]})
-var sExperimentSummary_experimentOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentOptions", ID: &iExperimentOptions, Members: &mExperimentOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[259]})
-var s_ExperimentSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExperimentSummary, Members: &mExperimentSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[261]})
-var sExperimentTarget_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_TargetResourceTypeId, Type: smithy.ShapeTypeString, Ext: &ext[263]})
-var sExperimentTarget_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList, Ext: &ext[264]})
-var sExperimentTarget_resourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceTags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[265]})
-var sExperimentTarget_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_ExperimentTargetFilterList, Members: &m_ExperimentTargetFilterList, Type: smithy.ShapeTypeList, Ext: &ext[266]})
-var sExperimentTarget_selectionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "selectionMode", ID: &i_ExperimentTargetSelectionMode, Type: smithy.ShapeTypeString, Ext: &ext[267]})
-var sExperimentTarget_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_ExperimentTargetParameterMap, Members: &m_ExperimentTargetParameterMap, Type: smithy.ShapeTypeMap, Ext: &ext[268]})
-var sExperimentTargetAccountConfiguration_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[270]})
-var sExperimentTargetAccountConfiguration_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_TargetAccountId, Type: smithy.ShapeTypeString, Ext: &ext[271]})
-var sExperimentTargetAccountConfiguration_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_TargetAccountConfigurationDescription, Type: smithy.ShapeTypeString, Ext: &ext[272]})
-var s_ExperimentTargetAccountConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExperimentTargetAccountConfigurationSummary, Members: &mExperimentTargetAccountConfigurationSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[274]})
-var sExperimentTargetAccountConfigurationSummary_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[276]})
-var sExperimentTargetAccountConfigurationSummary_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_TargetAccountId, Type: smithy.ShapeTypeString, Ext: &ext[277]})
-var sExperimentTargetAccountConfigurationSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_TargetAccountConfigurationDescription, Type: smithy.ShapeTypeString, Ext: &ext[278]})
-var sExperimentTargetFilter_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &i_ExperimentTargetFilterPath, Type: smithy.ShapeTypeString, Ext: &ext[280]})
-var sExperimentTargetFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_ExperimentTargetFilterValues, Members: &m_ExperimentTargetFilterValues, Type: smithy.ShapeTypeList, Ext: &ext[281]})
-var s_ExperimentTargetFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExperimentTargetFilter, Members: &mExperimentTargetFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[283]})
-var s_ExperimentTargetFilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ExperimentTargetFilterValue, Type: smithy.ShapeTypeString, Ext: &ext[287]})
-var s_ExperimentTargetMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentTargetName, Type: smithy.ShapeTypeString, Ext: &ext[289]})
-var s_ExperimentTargetMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iExperimentTarget, Members: &mExperimentTarget, Type: smithy.ShapeTypeStructure, Ext: &ext[290]})
-var s_ExperimentTargetParameterMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentTargetParameterName, Type: smithy.ShapeTypeString, Ext: &ext[293]})
-var s_ExperimentTargetParameterMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ExperimentTargetParameterValue, Type: smithy.ShapeTypeString, Ext: &ext[294]})
-var sExperimentTemplate_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ExperimentTemplateId, Type: smithy.ShapeTypeString, Ext: &ext[299]})
-var sExperimentTemplate_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[300]})
-var sExperimentTemplate_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ExperimentTemplateDescription, Type: smithy.ShapeTypeString, Ext: &ext[301]})
-var sExperimentTemplate_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_ExperimentTemplateTargetMap, Members: &m_ExperimentTemplateTargetMap, Type: smithy.ShapeTypeMap, Ext: &ext[302]})
-var sExperimentTemplate_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &i_ExperimentTemplateActionMap, Members: &m_ExperimentTemplateActionMap, Type: smithy.ShapeTypeMap, Ext: &ext[303]})
-var sExperimentTemplate_stopConditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stopConditions", ID: &i_ExperimentTemplateStopConditionList, Members: &m_ExperimentTemplateStopConditionList, Type: smithy.ShapeTypeList, Ext: &ext[304]})
-var sExperimentTemplate_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_CreationTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[305]})
-var sExperimentTemplate_lastUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdateTime", ID: &i_LastUpdateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[306]})
-var sExperimentTemplate_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[307]})
-var sExperimentTemplate_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[308]})
-var sExperimentTemplate_logConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logConfiguration", ID: &iExperimentTemplateLogConfiguration, Members: &mExperimentTemplateLogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[309]})
-var sExperimentTemplate_experimentOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentOptions", ID: &iExperimentTemplateExperimentOptions, Members: &mExperimentTemplateExperimentOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[310]})
-var sExperimentTemplate_targetAccountConfigurationsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetAccountConfigurationsCount", ID: &i_TargetAccountConfigurationsCount, Type: smithy.ShapeTypeLong, Ext: &ext[311]})
-var sExperimentTemplate_experimentReportConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentReportConfiguration", ID: &iExperimentTemplateReportConfiguration, Members: &mExperimentTemplateReportConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[312]})
-var sExperimentTemplateAction_actionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionId", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &ext[314]})
-var sExperimentTemplateAction_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ExperimentTemplateActionDescription, Type: smithy.ShapeTypeString, Ext: &ext[315]})
-var sExperimentTemplateAction_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_ExperimentTemplateActionParameterMap, Members: &m_ExperimentTemplateActionParameterMap, Type: smithy.ShapeTypeMap, Ext: &ext[316]})
-var sExperimentTemplateAction_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_ExperimentTemplateActionTargetMap, Members: &m_ExperimentTemplateActionTargetMap, Type: smithy.ShapeTypeMap, Ext: &ext[317]})
-var sExperimentTemplateAction_startAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startAfter", ID: &i_ExperimentTemplateActionStartAfterList, Members: &m_ExperimentTemplateActionStartAfterList, Type: smithy.ShapeTypeList, Ext: &ext[318]})
-var s_ExperimentTemplateActionMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentTemplateActionName, Type: smithy.ShapeTypeString, Ext: &ext[321]})
-var s_ExperimentTemplateActionMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iExperimentTemplateAction, Members: &mExperimentTemplateAction, Type: smithy.ShapeTypeStructure, Ext: &ext[322]})
-var s_ExperimentTemplateActionParameterMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentTemplateActionParameterName, Type: smithy.ShapeTypeString, Ext: &ext[326]})
-var s_ExperimentTemplateActionParameterMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ExperimentTemplateActionParameter, Type: smithy.ShapeTypeString, Ext: &ext[327]})
-var s_ExperimentTemplateActionStartAfterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ExperimentTemplateActionStartAfter, Type: smithy.ShapeTypeString, Ext: &ext[331]})
-var s_ExperimentTemplateActionTargetMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentTemplateActionTargetName, Type: smithy.ShapeTypeString, Ext: &ext[333]})
-var s_ExperimentTemplateActionTargetMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ExperimentTemplateTargetName, Type: smithy.ShapeTypeString, Ext: &ext[334]})
-var sExperimentTemplateCloudWatchLogsLogConfiguration_logGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logGroupArn", ID: &i_CloudWatchLogGroupArn, Type: smithy.ShapeTypeString, Ext: &ext[337]})
-var sExperimentTemplateCloudWatchLogsLogConfigurationInput_logGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logGroupArn", ID: &i_CloudWatchLogGroupArn, Type: smithy.ShapeTypeString, Ext: &ext[339]})
-var sExperimentTemplateExperimentOptions_accountTargeting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountTargeting", ID: &iAccountTargeting, Members: &mAccountTargeting, Type: smithy.ShapeTypeEnum, Ext: &ext[342]})
-var sExperimentTemplateExperimentOptions_emptyTargetResolutionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emptyTargetResolutionMode", ID: &iEmptyTargetResolutionMode, Members: &mEmptyTargetResolutionMode, Type: smithy.ShapeTypeEnum, Ext: &ext[343]})
-var sExperimentTemplateLogConfiguration_cloudWatchLogsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchLogsConfiguration", ID: &iExperimentTemplateCloudWatchLogsLogConfiguration, Members: &mExperimentTemplateCloudWatchLogsLogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[346]})
-var sExperimentTemplateLogConfiguration_s3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Configuration", ID: &iExperimentTemplateS3LogConfiguration, Members: &mExperimentTemplateS3LogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[347]})
-var sExperimentTemplateLogConfiguration_logSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logSchemaVersion", ID: &i_LogSchemaVersion, Type: smithy.ShapeTypeInteger, Ext: &ext[348]})
-var sExperimentTemplateReportConfiguration_outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputs", ID: &iExperimentTemplateReportConfigurationOutputs, Members: &mExperimentTemplateReportConfigurationOutputs, Type: smithy.ShapeTypeStructure, Ext: &ext[350]})
-var sExperimentTemplateReportConfiguration_dataSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSources", ID: &iExperimentTemplateReportConfigurationDataSources, Members: &mExperimentTemplateReportConfigurationDataSources, Type: smithy.ShapeTypeStructure, Ext: &ext[351]})
-var sExperimentTemplateReportConfiguration_preExperimentDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preExperimentDuration", ID: &i_ReportConfigurationDuration, Type: smithy.ShapeTypeString, Ext: &ext[352]})
-var sExperimentTemplateReportConfiguration_postExperimentDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postExperimentDuration", ID: &i_ReportConfigurationDuration, Type: smithy.ShapeTypeString, Ext: &ext[353]})
-var sExperimentTemplateReportConfigurationCloudWatchDashboard_dashboardIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dashboardIdentifier", ID: &i_ReportConfigurationCloudWatchDashboardIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[355]})
-var s_ExperimentTemplateReportConfigurationCloudWatchDashboardList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExperimentTemplateReportConfigurationCloudWatchDashboard, Members: &mExperimentTemplateReportConfigurationCloudWatchDashboard, Type: smithy.ShapeTypeStructure, Ext: &ext[357]})
-var sExperimentTemplateReportConfigurationDataSources_cloudWatchDashboards = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchDashboards", ID: &i_ExperimentTemplateReportConfigurationCloudWatchDashboardList, Members: &m_ExperimentTemplateReportConfigurationCloudWatchDashboardList, Type: smithy.ShapeTypeList, Ext: &ext[359]})
-var sExperimentTemplateReportConfigurationDataSourcesInput_cloudWatchDashboards = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchDashboards", ID: &i_ReportConfigurationCloudWatchDashboardInputList, Members: &m_ReportConfigurationCloudWatchDashboardInputList, Type: smithy.ShapeTypeList, Ext: &ext[361]})
-var sExperimentTemplateReportConfigurationOutputs_s3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Configuration", ID: &iReportConfigurationS3Output, Members: &mReportConfigurationS3Output, Type: smithy.ShapeTypeStructure, Ext: &ext[363]})
-var sExperimentTemplateReportConfigurationOutputsInput_s3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Configuration", ID: &iReportConfigurationS3OutputInput, Members: &mReportConfigurationS3OutputInput, Type: smithy.ShapeTypeStructure, Ext: &ext[365]})
-var sExperimentTemplateS3LogConfiguration_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &ext[367]})
-var sExperimentTemplateS3LogConfiguration_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_S3ObjectKey, Type: smithy.ShapeTypeString, Ext: &ext[368]})
-var sExperimentTemplateS3LogConfigurationInput_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &ext[370]})
-var sExperimentTemplateS3LogConfigurationInput_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_S3ObjectKey, Type: smithy.ShapeTypeString, Ext: &ext[371]})
-var sExperimentTemplateStopCondition_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_StopConditionSource, Type: smithy.ShapeTypeString, Ext: &ext[373]})
-var sExperimentTemplateStopCondition_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StopConditionValue, Type: smithy.ShapeTypeString, Ext: &ext[374]})
-var s_ExperimentTemplateStopConditionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExperimentTemplateStopCondition, Members: &mExperimentTemplateStopCondition, Type: smithy.ShapeTypeStructure, Ext: &ext[376]})
-var sExperimentTemplateSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ExperimentTemplateId, Type: smithy.ShapeTypeString, Ext: &ext[378]})
-var sExperimentTemplateSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[379]})
-var sExperimentTemplateSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ExperimentTemplateDescription, Type: smithy.ShapeTypeString, Ext: &ext[380]})
-var sExperimentTemplateSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_CreationTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[381]})
-var sExperimentTemplateSummary_lastUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdateTime", ID: &i_LastUpdateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[382]})
-var sExperimentTemplateSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[383]})
-var s_ExperimentTemplateSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExperimentTemplateSummary, Members: &mExperimentTemplateSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[385]})
-var sExperimentTemplateTarget_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_TargetResourceTypeId, Type: smithy.ShapeTypeString, Ext: &ext[387]})
-var sExperimentTemplateTarget_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList, Ext: &ext[388]})
-var sExperimentTemplateTarget_resourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceTags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[389]})
-var sExperimentTemplateTarget_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_ExperimentTemplateTargetFilterList, Members: &m_ExperimentTemplateTargetFilterList, Type: smithy.ShapeTypeList, Ext: &ext[390]})
-var sExperimentTemplateTarget_selectionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "selectionMode", ID: &i_ExperimentTemplateTargetSelectionMode, Type: smithy.ShapeTypeString, Ext: &ext[391]})
-var sExperimentTemplateTarget_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_ExperimentTemplateTargetParameterMap, Members: &m_ExperimentTemplateTargetParameterMap, Type: smithy.ShapeTypeMap, Ext: &ext[392]})
-var sExperimentTemplateTargetFilter_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &i_ExperimentTemplateTargetFilterPath, Type: smithy.ShapeTypeString, Ext: &ext[394]})
-var sExperimentTemplateTargetFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_ExperimentTemplateTargetFilterValues, Members: &m_ExperimentTemplateTargetFilterValues, Type: smithy.ShapeTypeList, Ext: &ext[395]})
-var s_ExperimentTemplateTargetFilterInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExperimentTemplateTargetInputFilter, Members: &mExperimentTemplateTargetInputFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[397]})
-var s_ExperimentTemplateTargetFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExperimentTemplateTargetFilter, Members: &mExperimentTemplateTargetFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[399]})
-var s_ExperimentTemplateTargetFilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ExperimentTemplateTargetFilterValue, Type: smithy.ShapeTypeString, Ext: &ext[403]})
-var sExperimentTemplateTargetInputFilter_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &i_ExperimentTemplateTargetFilterPath, Type: smithy.ShapeTypeString, Ext: &ext[405]})
-var sExperimentTemplateTargetInputFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_ExperimentTemplateTargetFilterValues, Members: &m_ExperimentTemplateTargetFilterValues, Type: smithy.ShapeTypeList, Ext: &ext[406]})
-var s_ExperimentTemplateTargetMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentTemplateTargetName, Type: smithy.ShapeTypeString, Ext: &ext[408]})
-var s_ExperimentTemplateTargetMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iExperimentTemplateTarget, Members: &mExperimentTemplateTarget, Type: smithy.ShapeTypeStructure, Ext: &ext[409]})
-var s_ExperimentTemplateTargetParameterMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentTemplateTargetParameterName, Type: smithy.ShapeTypeString, Ext: &ext[412]})
-var s_ExperimentTemplateTargetParameterMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ExperimentTemplateTargetParameterValue, Type: smithy.ShapeTypeString, Ext: &ext[413]})
-var sReportConfigurationCloudWatchDashboardInput_dashboardIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dashboardIdentifier", ID: &i_ReportConfigurationCloudWatchDashboardIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[428]})
-var s_ReportConfigurationCloudWatchDashboardInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReportConfigurationCloudWatchDashboardInput, Members: &mReportConfigurationCloudWatchDashboardInput, Type: smithy.ShapeTypeStructure, Ext: &ext[430]})
-var sReportConfigurationS3Output_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &ext[433]})
-var sReportConfigurationS3Output_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_ReportConfigurationS3OutputPrefix, Type: smithy.ShapeTypeString, Ext: &ext[434]})
-var sReportConfigurationS3OutputInput_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &ext[436]})
-var sReportConfigurationS3OutputInput_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_ReportConfigurationS3OutputPrefix, Type: smithy.ShapeTypeString, Ext: &ext[437]})
-var sResolvedTarget_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_TargetResourceTypeId, Type: smithy.ShapeTypeString, Ext: &ext[440]})
-var sResolvedTarget_targetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetName", ID: &i_TargetName, Type: smithy.ShapeTypeString, Ext: &ext[441]})
-var sResolvedTarget_targetInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetInformation", ID: &i_TargetInformationMap, Members: &m_TargetInformationMap, Type: smithy.ShapeTypeMap, Ext: &ext[442]})
-var s_ResolvedTargetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResolvedTarget, Members: &mResolvedTarget, Type: smithy.ShapeTypeStructure, Ext: &ext[444]})
-var s_ResourceArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[447]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[449]})
-var sSafetyLever_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_SafetyLeverId, Type: smithy.ShapeTypeString, Ext: &ext[454]})
-var sSafetyLever_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[455]})
-var sSafetyLever_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iSafetyLeverState, Members: &mSafetyLeverState, Type: smithy.ShapeTypeStructure, Ext: &ext[456]})
-var sSafetyLeverState_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSafetyLeverStatus, Members: &mSafetyLeverStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[459]})
-var sSafetyLeverState_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_SafetyLeverStatusReason, Type: smithy.ShapeTypeString, Ext: &ext[460]})
-var sSafetyLeverStatus_DISENGAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISENGAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[462]})
-var sSafetyLeverStatus_ENGAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENGAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[463]})
-var sSafetyLeverStatus_ENGAGING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENGAGING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[464]})
-var sSafetyLeverStatusInput_DISENGAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISENGAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[466]})
-var sSafetyLeverStatusInput_ENGAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENGAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[467]})
-var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[470]})
-var sStartExperimentExperimentOptionsInput_actionsMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionsMode", ID: &iActionsMode, Members: &mActionsMode, Type: smithy.ShapeTypeEnum, Ext: &ext[472]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[477]})
-var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[479]})
-var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[480]})
-var sTargetAccountConfiguration_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[483]})
-var sTargetAccountConfiguration_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_TargetAccountId, Type: smithy.ShapeTypeString, Ext: &ext[484]})
-var sTargetAccountConfiguration_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_TargetAccountConfigurationDescription, Type: smithy.ShapeTypeString, Ext: &ext[485]})
-var s_TargetAccountConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTargetAccountConfigurationSummary, Members: &mTargetAccountConfigurationSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[488]})
-var sTargetAccountConfigurationSummary_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[491]})
-var sTargetAccountConfigurationSummary_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_TargetAccountId, Type: smithy.ShapeTypeString, Ext: &ext[492]})
-var sTargetAccountConfigurationSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_TargetAccountConfigurationDescription, Type: smithy.ShapeTypeString, Ext: &ext[493]})
-var s_TargetInformationMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TargetInformationKey, Type: smithy.ShapeTypeString, Ext: &ext[497]})
-var s_TargetInformationMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TargetInformationValue, Type: smithy.ShapeTypeString, Ext: &ext[498]})
-var sTargetResourceType_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_TargetResourceTypeId, Type: smithy.ShapeTypeString, Ext: &ext[502]})
-var sTargetResourceType_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_TargetResourceTypeDescription, Type: smithy.ShapeTypeString, Ext: &ext[503]})
-var sTargetResourceType_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_TargetResourceTypeParameterMap, Members: &m_TargetResourceTypeParameterMap, Type: smithy.ShapeTypeMap, Ext: &ext[504]})
-var sTargetResourceTypeParameter_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_TargetResourceTypeParameterDescription, Type: smithy.ShapeTypeString, Ext: &ext[508]})
-var sTargetResourceTypeParameter_required = smithy.NewStaticSchema(smithy.StaticSchema{Member: "required", ID: &i_TargetResourceTypeParameterRequired, Type: smithy.ShapeTypeBoolean, Ext: &ext[509]})
-var s_TargetResourceTypeParameterMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TargetResourceTypeParameterName, Type: smithy.ShapeTypeString, Ext: &ext[512]})
-var s_TargetResourceTypeParameterMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iTargetResourceTypeParameter, Members: &mTargetResourceTypeParameter, Type: smithy.ShapeTypeStructure, Ext: &ext[513]})
-var sTargetResourceTypeSummary_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_TargetResourceTypeId, Type: smithy.ShapeTypeString, Ext: &ext[517]})
-var sTargetResourceTypeSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_TargetResourceTypeDescription, Type: smithy.ShapeTypeString, Ext: &ext[518]})
-var s_TargetResourceTypeSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTargetResourceTypeSummary, Members: &mTargetResourceTypeSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[520]})
-var sUpdateExperimentTemplateActionInputItem_actionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionId", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &ext[522]})
-var sUpdateExperimentTemplateActionInputItem_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ExperimentTemplateActionDescription, Type: smithy.ShapeTypeString, Ext: &ext[523]})
-var sUpdateExperimentTemplateActionInputItem_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_ExperimentTemplateActionParameterMap, Members: &m_ExperimentTemplateActionParameterMap, Type: smithy.ShapeTypeMap, Ext: &ext[524]})
-var sUpdateExperimentTemplateActionInputItem_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_ExperimentTemplateActionTargetMap, Members: &m_ExperimentTemplateActionTargetMap, Type: smithy.ShapeTypeMap, Ext: &ext[525]})
-var sUpdateExperimentTemplateActionInputItem_startAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startAfter", ID: &i_ExperimentTemplateActionStartAfterList, Members: &m_ExperimentTemplateActionStartAfterList, Type: smithy.ShapeTypeList, Ext: &ext[526]})
-var s_UpdateExperimentTemplateActionInputMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentTemplateActionName, Type: smithy.ShapeTypeString, Ext: &ext[528]})
-var s_UpdateExperimentTemplateActionInputMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iUpdateExperimentTemplateActionInputItem, Members: &mUpdateExperimentTemplateActionInputItem, Type: smithy.ShapeTypeStructure, Ext: &ext[529]})
-var sUpdateExperimentTemplateExperimentOptionsInput_emptyTargetResolutionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emptyTargetResolutionMode", ID: &iEmptyTargetResolutionMode, Members: &mEmptyTargetResolutionMode, Type: smithy.ShapeTypeEnum, Ext: &ext[531]})
-var sUpdateExperimentTemplateLogConfigurationInput_cloudWatchLogsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchLogsConfiguration", ID: &iExperimentTemplateCloudWatchLogsLogConfigurationInput, Members: &mExperimentTemplateCloudWatchLogsLogConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[533]})
-var sUpdateExperimentTemplateLogConfigurationInput_s3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Configuration", ID: &iExperimentTemplateS3LogConfigurationInput, Members: &mExperimentTemplateS3LogConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[534]})
-var sUpdateExperimentTemplateLogConfigurationInput_logSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logSchemaVersion", ID: &i_LogSchemaVersion, Type: smithy.ShapeTypeInteger, Ext: &ext[535]})
-var sUpdateExperimentTemplateReportConfigurationInput_outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputs", ID: &iExperimentTemplateReportConfigurationOutputsInput, Members: &mExperimentTemplateReportConfigurationOutputsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[537]})
-var sUpdateExperimentTemplateReportConfigurationInput_dataSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSources", ID: &iExperimentTemplateReportConfigurationDataSourcesInput, Members: &mExperimentTemplateReportConfigurationDataSourcesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[538]})
-var sUpdateExperimentTemplateReportConfigurationInput_preExperimentDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preExperimentDuration", ID: &i_ReportConfigurationDuration, Type: smithy.ShapeTypeString, Ext: &ext[539]})
-var sUpdateExperimentTemplateReportConfigurationInput_postExperimentDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postExperimentDuration", ID: &i_ReportConfigurationDuration, Type: smithy.ShapeTypeString, Ext: &ext[540]})
-var sUpdateExperimentTemplateStopConditionInput_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_StopConditionSource, Type: smithy.ShapeTypeString, Ext: &ext[542]})
-var sUpdateExperimentTemplateStopConditionInput_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StopConditionValue, Type: smithy.ShapeTypeString, Ext: &ext[543]})
-var s_UpdateExperimentTemplateStopConditionInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUpdateExperimentTemplateStopConditionInput, Members: &mUpdateExperimentTemplateStopConditionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[545]})
-var sUpdateExperimentTemplateTargetInput_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_TargetResourceTypeId, Type: smithy.ShapeTypeString, Ext: &ext[547]})
-var sUpdateExperimentTemplateTargetInput_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList, Ext: &ext[548]})
-var sUpdateExperimentTemplateTargetInput_resourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceTags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[549]})
-var sUpdateExperimentTemplateTargetInput_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_ExperimentTemplateTargetFilterInputList, Members: &m_ExperimentTemplateTargetFilterInputList, Type: smithy.ShapeTypeList, Ext: &ext[550]})
-var sUpdateExperimentTemplateTargetInput_selectionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "selectionMode", ID: &i_ExperimentTemplateTargetSelectionMode, Type: smithy.ShapeTypeString, Ext: &ext[551]})
-var sUpdateExperimentTemplateTargetInput_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_ExperimentTemplateTargetParameterMap, Members: &m_ExperimentTemplateTargetParameterMap, Type: smithy.ShapeTypeMap, Ext: &ext[552]})
-var s_UpdateExperimentTemplateTargetInputMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentTemplateTargetName, Type: smithy.ShapeTypeString, Ext: &ext[554]})
-var s_UpdateExperimentTemplateTargetInputMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iUpdateExperimentTemplateTargetInput, Members: &mUpdateExperimentTemplateTargetInput, Type: smithy.ShapeTypeStructure, Ext: &ext[555]})
-var sUpdateSafetyLeverStateInput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSafetyLeverStatusInput, Members: &mSafetyLeverStatusInput, Type: smithy.ShapeTypeEnum, Ext: &ext[557]})
-var sUpdateSafetyLeverStateInput_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_SafetyLeverStatusReason, Type: smithy.ShapeTypeString, Ext: &ext[558]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[560]})
-var sCreateExperimentTemplateRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[562]})
-var sCreateExperimentTemplateRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ExperimentTemplateDescription, Type: smithy.ShapeTypeString, Ext: &ext[563]})
-var sCreateExperimentTemplateRequest_stopConditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stopConditions", ID: &i_CreateExperimentTemplateStopConditionInputList, Members: &m_CreateExperimentTemplateStopConditionInputList, Type: smithy.ShapeTypeList, Ext: &ext[564]})
-var sCreateExperimentTemplateRequest_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_CreateExperimentTemplateTargetInputMap, Members: &m_CreateExperimentTemplateTargetInputMap, Type: smithy.ShapeTypeMap, Ext: &ext[565]})
-var sCreateExperimentTemplateRequest_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &i_CreateExperimentTemplateActionInputMap, Members: &m_CreateExperimentTemplateActionInputMap, Type: smithy.ShapeTypeMap, Ext: &ext[566]})
-var sCreateExperimentTemplateRequest_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[567]})
-var sCreateExperimentTemplateRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[568]})
-var sCreateExperimentTemplateRequest_logConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logConfiguration", ID: &iCreateExperimentTemplateLogConfigurationInput, Members: &mCreateExperimentTemplateLogConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[569]})
-var sCreateExperimentTemplateRequest_experimentOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentOptions", ID: &iCreateExperimentTemplateExperimentOptionsInput, Members: &mCreateExperimentTemplateExperimentOptionsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[570]})
-var sCreateExperimentTemplateRequest_experimentReportConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentReportConfiguration", ID: &iCreateExperimentTemplateReportConfigurationInput, Members: &mCreateExperimentTemplateReportConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[571]})
-var sCreateExperimentTemplateResponse_experimentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplate", ID: &iExperimentTemplate, Members: &mExperimentTemplate, Type: smithy.ShapeTypeStructure, Ext: &ext[573]})
-var sCreateTargetAccountConfigurationRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[575]})
-var sCreateTargetAccountConfigurationRequest_experimentTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplateId", ID: &i_ExperimentTemplateId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[576]})
-var sCreateTargetAccountConfigurationRequest_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_TargetAccountId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[577]})
-var sCreateTargetAccountConfigurationRequest_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[578]})
-var sCreateTargetAccountConfigurationRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_TargetAccountConfigurationDescription, Type: smithy.ShapeTypeString, Ext: &ext[579]})
-var sCreateTargetAccountConfigurationResponse_targetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetAccountConfiguration", ID: &iTargetAccountConfiguration, Members: &mTargetAccountConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[581]})
-var sDeleteExperimentTemplateRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ExperimentTemplateId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[583]})
-var sDeleteExperimentTemplateResponse_experimentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplate", ID: &iExperimentTemplate, Members: &mExperimentTemplate, Type: smithy.ShapeTypeStructure, Ext: &ext[585]})
-var sDeleteTargetAccountConfigurationRequest_experimentTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplateId", ID: &i_ExperimentTemplateId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[587]})
-var sDeleteTargetAccountConfigurationRequest_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_TargetAccountId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[588]})
-var sDeleteTargetAccountConfigurationResponse_targetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetAccountConfiguration", ID: &iTargetAccountConfiguration, Members: &mTargetAccountConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[590]})
-var sGetActionRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ActionId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[592]})
-var sGetActionResponse_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &ext[594]})
-var sGetExperimentRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ExperimentId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[596]})
-var sGetExperimentResponse_experiment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experiment", ID: &iExperiment, Members: &mExperiment, Type: smithy.ShapeTypeStructure, Ext: &ext[598]})
-var sGetExperimentTargetAccountConfigurationRequest_experimentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentId", ID: &i_ExperimentId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[600]})
-var sGetExperimentTargetAccountConfigurationRequest_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_TargetAccountId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[601]})
-var sGetExperimentTargetAccountConfigurationResponse_targetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetAccountConfiguration", ID: &iExperimentTargetAccountConfiguration, Members: &mExperimentTargetAccountConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[603]})
-var sGetExperimentTemplateRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ExperimentTemplateId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[605]})
-var sGetExperimentTemplateResponse_experimentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplate", ID: &iExperimentTemplate, Members: &mExperimentTemplate, Type: smithy.ShapeTypeStructure, Ext: &ext[607]})
-var sGetSafetyLeverRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_SafetyLeverId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[609]})
-var sGetSafetyLeverResponse_safetyLever = smithy.NewStaticSchema(smithy.StaticSchema{Member: "safetyLever", ID: &iSafetyLever, Members: &mSafetyLever, Type: smithy.ShapeTypeStructure, Ext: &ext[611]})
-var sGetTargetAccountConfigurationRequest_experimentTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplateId", ID: &i_ExperimentTemplateId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[613]})
-var sGetTargetAccountConfigurationRequest_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_TargetAccountId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[614]})
-var sGetTargetAccountConfigurationResponse_targetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetAccountConfiguration", ID: &iTargetAccountConfiguration, Members: &mTargetAccountConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[616]})
-var sGetTargetResourceTypeRequest_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_TargetResourceTypeId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[618]})
-var sGetTargetResourceTypeResponse_targetResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetResourceType", ID: &iTargetResourceType, Members: &mTargetResourceType, Type: smithy.ShapeTypeStructure, Ext: &ext[620]})
-var sListActionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListActionsMaxResults, Traits: &t31, Type: smithy.ShapeTypeInteger, Ext: &ext[622]})
-var sListActionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ext[623]})
-var sListActionsResponse_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &i_ActionSummaryList, Members: &m_ActionSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[625]})
-var sListActionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[626]})
-var sListExperimentResolvedTargetsRequest_experimentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentId", ID: &i_ExperimentId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[628]})
-var sListExperimentResolvedTargetsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListExperimentResolvedTargetsMaxResults, Traits: &t31, Type: smithy.ShapeTypeInteger, Ext: &ext[629]})
-var sListExperimentResolvedTargetsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ext[630]})
-var sListExperimentResolvedTargetsRequest_targetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetName", ID: &i_TargetName, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[631]})
-var sListExperimentResolvedTargetsResponse_resolvedTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolvedTargets", ID: &i_ResolvedTargetList, Members: &m_ResolvedTargetList, Type: smithy.ShapeTypeList, Ext: &ext[633]})
-var sListExperimentResolvedTargetsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[634]})
-var sListExperimentsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListExperimentsMaxResults, Traits: &t31, Type: smithy.ShapeTypeInteger, Ext: &ext[636]})
-var sListExperimentsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ext[637]})
-var sListExperimentsRequest_experimentTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplateId", ID: &i_ExperimentTemplateId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[638]})
-var sListExperimentsResponse_experiments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experiments", ID: &i_ExperimentSummaryList, Members: &m_ExperimentSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[640]})
-var sListExperimentsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[641]})
-var sListExperimentTargetAccountConfigurationsRequest_experimentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentId", ID: &i_ExperimentId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[643]})
-var sListExperimentTargetAccountConfigurationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ext[644]})
-var sListExperimentTargetAccountConfigurationsResponse_targetAccountConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetAccountConfigurations", ID: &i_ExperimentTargetAccountConfigurationList, Members: &m_ExperimentTargetAccountConfigurationList, Type: smithy.ShapeTypeList, Ext: &ext[646]})
-var sListExperimentTargetAccountConfigurationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[647]})
-var sListExperimentTemplatesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListExperimentTemplatesMaxResults, Traits: &t31, Type: smithy.ShapeTypeInteger, Ext: &ext[649]})
-var sListExperimentTemplatesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ext[650]})
-var sListExperimentTemplatesResponse_experimentTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplates", ID: &i_ExperimentTemplateSummaryList, Members: &m_ExperimentTemplateSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[652]})
-var sListExperimentTemplatesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[653]})
-var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[655]})
-var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[657]})
-var sListTargetAccountConfigurationsRequest_experimentTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplateId", ID: &i_ExperimentTemplateId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[659]})
-var sListTargetAccountConfigurationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListTargetAccountConfigurationsMaxResults, Traits: &t31, Type: smithy.ShapeTypeInteger, Ext: &ext[660]})
-var sListTargetAccountConfigurationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ext[661]})
-var sListTargetAccountConfigurationsResponse_targetAccountConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetAccountConfigurations", ID: &i_TargetAccountConfigurationList, Members: &m_TargetAccountConfigurationList, Type: smithy.ShapeTypeList, Ext: &ext[663]})
-var sListTargetAccountConfigurationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[664]})
-var sListTargetResourceTypesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListTargetResourceTypesMaxResults, Traits: &t31, Type: smithy.ShapeTypeInteger, Ext: &ext[666]})
-var sListTargetResourceTypesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ext[667]})
-var sListTargetResourceTypesResponse_targetResourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetResourceTypes", ID: &i_TargetResourceTypeSummaryList, Members: &m_TargetResourceTypeSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[669]})
-var sListTargetResourceTypesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[670]})
-var sStartExperimentRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[672]})
-var sStartExperimentRequest_experimentTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplateId", ID: &i_ExperimentTemplateId, Type: smithy.ShapeTypeString, Ext: &ext[673]})
-var sStartExperimentRequest_experimentOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentOptions", ID: &iStartExperimentExperimentOptionsInput, Members: &mStartExperimentExperimentOptionsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[674]})
-var sStartExperimentRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[675]})
-var sStartExperimentResponse_experiment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experiment", ID: &iExperiment, Members: &mExperiment, Type: smithy.ShapeTypeStructure, Ext: &ext[677]})
-var sStopExperimentRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ExperimentId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[679]})
-var sStopExperimentResponse_experiment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experiment", ID: &iExperiment, Members: &mExperiment, Type: smithy.ShapeTypeStructure, Ext: &ext[681]})
-var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[683]})
-var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[684]})
-var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[687]})
-var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t35, Type: smithy.ShapeTypeList, Ext: &ext[688]})
-var sUpdateExperimentTemplateRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ExperimentTemplateId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[691]})
-var sUpdateExperimentTemplateRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ExperimentTemplateDescription, Type: smithy.ShapeTypeString, Ext: &ext[692]})
-var sUpdateExperimentTemplateRequest_stopConditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stopConditions", ID: &i_UpdateExperimentTemplateStopConditionInputList, Members: &m_UpdateExperimentTemplateStopConditionInputList, Type: smithy.ShapeTypeList, Ext: &ext[693]})
-var sUpdateExperimentTemplateRequest_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_UpdateExperimentTemplateTargetInputMap, Members: &m_UpdateExperimentTemplateTargetInputMap, Type: smithy.ShapeTypeMap, Ext: &ext[694]})
-var sUpdateExperimentTemplateRequest_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &i_UpdateExperimentTemplateActionInputMap, Members: &m_UpdateExperimentTemplateActionInputMap, Type: smithy.ShapeTypeMap, Ext: &ext[695]})
-var sUpdateExperimentTemplateRequest_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[696]})
-var sUpdateExperimentTemplateRequest_logConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logConfiguration", ID: &iUpdateExperimentTemplateLogConfigurationInput, Members: &mUpdateExperimentTemplateLogConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[697]})
-var sUpdateExperimentTemplateRequest_experimentOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentOptions", ID: &iUpdateExperimentTemplateExperimentOptionsInput, Members: &mUpdateExperimentTemplateExperimentOptionsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[698]})
-var sUpdateExperimentTemplateRequest_experimentReportConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentReportConfiguration", ID: &iUpdateExperimentTemplateReportConfigurationInput, Members: &mUpdateExperimentTemplateReportConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[699]})
-var sUpdateExperimentTemplateResponse_experimentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplate", ID: &iExperimentTemplate, Members: &mExperimentTemplate, Type: smithy.ShapeTypeStructure, Ext: &ext[701]})
-var sUpdateSafetyLeverStateRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_SafetyLeverId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[703]})
-var sUpdateSafetyLeverStateRequest_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iUpdateSafetyLeverStateInput, Members: &mUpdateSafetyLeverStateInput, Type: smithy.ShapeTypeStructure, Ext: &ext[704]})
-var sUpdateSafetyLeverStateResponse_safetyLever = smithy.NewStaticSchema(smithy.StaticSchema{Member: "safetyLever", ID: &iSafetyLever, Members: &mSafetyLever, Type: smithy.ShapeTypeStructure, Ext: &ext[706]})
-var sUpdateTargetAccountConfigurationRequest_experimentTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplateId", ID: &i_ExperimentTemplateId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[708]})
-var sUpdateTargetAccountConfigurationRequest_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_TargetAccountId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[709]})
-var sUpdateTargetAccountConfigurationRequest_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[710]})
-var sUpdateTargetAccountConfigurationRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_TargetAccountConfigurationDescription, Type: smithy.ShapeTypeString, Ext: &ext[711]})
-var sUpdateTargetAccountConfigurationResponse_targetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetAccountConfiguration", ID: &iTargetAccountConfiguration, Members: &mTargetAccountConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[713]})
+var sAccountTargeting_SINGLE_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccountTargeting_SINGLE_ACCOUNT})
+var sAccountTargeting_MULTI_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTI_ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccountTargeting_MULTI_ACCOUNT})
+var sAction_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &eAction_id})
+var sAction_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eAction_arn})
+var sAction_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ActionDescription, Type: smithy.ShapeTypeString, Ext: &eAction_description})
+var sAction_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_ActionParameterMap, Members: &m_ActionParameterMap, Type: smithy.ShapeTypeMap, Ext: &eAction_parameters})
+var sAction_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_ActionTargetMap, Members: &m_ActionTargetMap, Type: smithy.ShapeTypeMap, Ext: &eAction_targets})
+var sAction_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eAction_tags})
+var sActionParameter_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ActionParameterDescription, Type: smithy.ShapeTypeString, Ext: &eActionParameter_description})
+var sActionParameter_required = smithy.NewStaticSchema(smithy.StaticSchema{Member: "required", ID: &i_ActionParameterRequired, Type: smithy.ShapeTypeBoolean, Ext: &eActionParameter_required})
+var s_ActionParameterMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ActionParameterName, Type: smithy.ShapeTypeString, Ext: &e_ActionParameterMap_key})
+var s_ActionParameterMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iActionParameter, Members: &mActionParameter, Type: smithy.ShapeTypeStructure, Ext: &e_ActionParameterMap_value})
+var sActionsMode_SKIP_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SKIP_ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionsMode_SKIP_ALL})
+var sActionsMode_RUN_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUN_ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionsMode_RUN_ALL})
+var sActionSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &eActionSummary_id})
+var sActionSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eActionSummary_arn})
+var sActionSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ActionDescription, Type: smithy.ShapeTypeString, Ext: &eActionSummary_description})
+var sActionSummary_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_ActionTargetMap, Members: &m_ActionTargetMap, Type: smithy.ShapeTypeMap, Ext: &eActionSummary_targets})
+var sActionSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eActionSummary_tags})
+var s_ActionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActionSummary, Members: &mActionSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ActionSummaryList_member})
+var sActionTarget_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_TargetResourceTypeId, Type: smithy.ShapeTypeString, Ext: &eActionTarget_resourceType})
+var s_ActionTargetMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ActionTargetName, Type: smithy.ShapeTypeString, Ext: &e_ActionTargetMap_key})
+var s_ActionTargetMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iActionTarget, Members: &mActionTarget, Type: smithy.ShapeTypeStructure, Ext: &e_ActionTargetMap_value})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sCreateExperimentTemplateActionInput_actionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionId", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &eCreateExperimentTemplateActionInput_actionId})
+var sCreateExperimentTemplateActionInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ExperimentTemplateActionDescription, Type: smithy.ShapeTypeString, Ext: &eCreateExperimentTemplateActionInput_description})
+var sCreateExperimentTemplateActionInput_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_ExperimentTemplateActionParameterMap, Members: &m_ExperimentTemplateActionParameterMap, Type: smithy.ShapeTypeMap, Ext: &eCreateExperimentTemplateActionInput_parameters})
+var sCreateExperimentTemplateActionInput_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_ExperimentTemplateActionTargetMap, Members: &m_ExperimentTemplateActionTargetMap, Type: smithy.ShapeTypeMap, Ext: &eCreateExperimentTemplateActionInput_targets})
+var sCreateExperimentTemplateActionInput_startAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startAfter", ID: &i_ExperimentTemplateActionStartAfterList, Members: &m_ExperimentTemplateActionStartAfterList, Type: smithy.ShapeTypeList, Ext: &eCreateExperimentTemplateActionInput_startAfter})
+var s_CreateExperimentTemplateActionInputMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentTemplateActionName, Type: smithy.ShapeTypeString, Ext: &e_CreateExperimentTemplateActionInputMap_key})
+var s_CreateExperimentTemplateActionInputMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iCreateExperimentTemplateActionInput, Members: &mCreateExperimentTemplateActionInput, Type: smithy.ShapeTypeStructure, Ext: &e_CreateExperimentTemplateActionInputMap_value})
+var sCreateExperimentTemplateExperimentOptionsInput_accountTargeting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountTargeting", ID: &iAccountTargeting, Members: &mAccountTargeting, Type: smithy.ShapeTypeEnum, Ext: &eCreateExperimentTemplateExperimentOptionsInput_accountTargeting})
+var sCreateExperimentTemplateExperimentOptionsInput_emptyTargetResolutionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emptyTargetResolutionMode", ID: &iEmptyTargetResolutionMode, Members: &mEmptyTargetResolutionMode, Type: smithy.ShapeTypeEnum, Ext: &eCreateExperimentTemplateExperimentOptionsInput_emptyTargetResolutionMode})
+var sCreateExperimentTemplateLogConfigurationInput_cloudWatchLogsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchLogsConfiguration", ID: &iExperimentTemplateCloudWatchLogsLogConfigurationInput, Members: &mExperimentTemplateCloudWatchLogsLogConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateExperimentTemplateLogConfigurationInput_cloudWatchLogsConfiguration})
+var sCreateExperimentTemplateLogConfigurationInput_s3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Configuration", ID: &iExperimentTemplateS3LogConfigurationInput, Members: &mExperimentTemplateS3LogConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateExperimentTemplateLogConfigurationInput_s3Configuration})
+var sCreateExperimentTemplateLogConfigurationInput_logSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logSchemaVersion", ID: &i_LogSchemaVersion, Type: smithy.ShapeTypeInteger, Ext: &eCreateExperimentTemplateLogConfigurationInput_logSchemaVersion})
+var sCreateExperimentTemplateReportConfigurationInput_outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputs", ID: &iExperimentTemplateReportConfigurationOutputsInput, Members: &mExperimentTemplateReportConfigurationOutputsInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateExperimentTemplateReportConfigurationInput_outputs})
+var sCreateExperimentTemplateReportConfigurationInput_dataSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSources", ID: &iExperimentTemplateReportConfigurationDataSourcesInput, Members: &mExperimentTemplateReportConfigurationDataSourcesInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateExperimentTemplateReportConfigurationInput_dataSources})
+var sCreateExperimentTemplateReportConfigurationInput_preExperimentDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preExperimentDuration", ID: &i_ReportConfigurationDuration, Type: smithy.ShapeTypeString, Ext: &eCreateExperimentTemplateReportConfigurationInput_preExperimentDuration})
+var sCreateExperimentTemplateReportConfigurationInput_postExperimentDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postExperimentDuration", ID: &i_ReportConfigurationDuration, Type: smithy.ShapeTypeString, Ext: &eCreateExperimentTemplateReportConfigurationInput_postExperimentDuration})
+var sCreateExperimentTemplateStopConditionInput_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_StopConditionSource, Type: smithy.ShapeTypeString, Ext: &eCreateExperimentTemplateStopConditionInput_source})
+var sCreateExperimentTemplateStopConditionInput_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StopConditionValue, Type: smithy.ShapeTypeString, Ext: &eCreateExperimentTemplateStopConditionInput_value})
+var s_CreateExperimentTemplateStopConditionInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCreateExperimentTemplateStopConditionInput, Members: &mCreateExperimentTemplateStopConditionInput, Type: smithy.ShapeTypeStructure, Ext: &e_CreateExperimentTemplateStopConditionInputList_member})
+var sCreateExperimentTemplateTargetInput_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_TargetResourceTypeId, Type: smithy.ShapeTypeString, Ext: &eCreateExperimentTemplateTargetInput_resourceType})
+var sCreateExperimentTemplateTargetInput_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList, Ext: &eCreateExperimentTemplateTargetInput_resourceArns})
+var sCreateExperimentTemplateTargetInput_resourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceTags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateExperimentTemplateTargetInput_resourceTags})
+var sCreateExperimentTemplateTargetInput_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_ExperimentTemplateTargetFilterInputList, Members: &m_ExperimentTemplateTargetFilterInputList, Type: smithy.ShapeTypeList, Ext: &eCreateExperimentTemplateTargetInput_filters})
+var sCreateExperimentTemplateTargetInput_selectionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "selectionMode", ID: &i_ExperimentTemplateTargetSelectionMode, Type: smithy.ShapeTypeString, Ext: &eCreateExperimentTemplateTargetInput_selectionMode})
+var sCreateExperimentTemplateTargetInput_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_ExperimentTemplateTargetParameterMap, Members: &m_ExperimentTemplateTargetParameterMap, Type: smithy.ShapeTypeMap, Ext: &eCreateExperimentTemplateTargetInput_parameters})
+var s_CreateExperimentTemplateTargetInputMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentTemplateTargetName, Type: smithy.ShapeTypeString, Ext: &e_CreateExperimentTemplateTargetInputMap_key})
+var s_CreateExperimentTemplateTargetInputMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iCreateExperimentTemplateTargetInput, Members: &mCreateExperimentTemplateTargetInput, Type: smithy.ShapeTypeStructure, Ext: &e_CreateExperimentTemplateTargetInputMap_value})
+var sEmptyTargetResolutionMode_FAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEmptyTargetResolutionMode_FAIL})
+var sEmptyTargetResolutionMode_SKIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SKIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEmptyTargetResolutionMode_SKIP})
+var sExperiment_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ExperimentId, Type: smithy.ShapeTypeString, Ext: &eExperiment_id})
+var sExperiment_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eExperiment_arn})
+var sExperiment_experimentTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplateId", ID: &i_ExperimentTemplateId, Type: smithy.ShapeTypeString, Ext: &eExperiment_experimentTemplateId})
+var sExperiment_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eExperiment_roleArn})
+var sExperiment_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iExperimentState, Members: &mExperimentState, Type: smithy.ShapeTypeStructure, Ext: &eExperiment_state})
+var sExperiment_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_ExperimentTargetMap, Members: &m_ExperimentTargetMap, Type: smithy.ShapeTypeMap, Ext: &eExperiment_targets})
+var sExperiment_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &i_ExperimentActionMap, Members: &m_ExperimentActionMap, Type: smithy.ShapeTypeMap, Ext: &eExperiment_actions})
+var sExperiment_stopConditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stopConditions", ID: &i_ExperimentStopConditionList, Members: &m_ExperimentStopConditionList, Type: smithy.ShapeTypeList, Ext: &eExperiment_stopConditions})
+var sExperiment_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_CreationTime, Type: smithy.ShapeTypeTimestamp, Ext: &eExperiment_creationTime})
+var sExperiment_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_ExperimentStartTime, Type: smithy.ShapeTypeTimestamp, Ext: &eExperiment_startTime})
+var sExperiment_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_ExperimentEndTime, Type: smithy.ShapeTypeTimestamp, Ext: &eExperiment_endTime})
+var sExperiment_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eExperiment_tags})
+var sExperiment_logConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logConfiguration", ID: &iExperimentLogConfiguration, Members: &mExperimentLogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExperiment_logConfiguration})
+var sExperiment_experimentOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentOptions", ID: &iExperimentOptions, Members: &mExperimentOptions, Type: smithy.ShapeTypeStructure, Ext: &eExperiment_experimentOptions})
+var sExperiment_targetAccountConfigurationsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetAccountConfigurationsCount", ID: &i_TargetAccountConfigurationsCount, Type: smithy.ShapeTypeLong, Ext: &eExperiment_targetAccountConfigurationsCount})
+var sExperiment_experimentReportConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentReportConfiguration", ID: &iExperimentReportConfiguration, Members: &mExperimentReportConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExperiment_experimentReportConfiguration})
+var sExperiment_experimentReport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentReport", ID: &iExperimentReport, Members: &mExperimentReport, Type: smithy.ShapeTypeStructure, Ext: &eExperiment_experimentReport})
+var sExperimentAction_actionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionId", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &eExperimentAction_actionId})
+var sExperimentAction_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ExperimentActionDescription, Type: smithy.ShapeTypeString, Ext: &eExperimentAction_description})
+var sExperimentAction_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_ExperimentActionParameterMap, Members: &m_ExperimentActionParameterMap, Type: smithy.ShapeTypeMap, Ext: &eExperimentAction_parameters})
+var sExperimentAction_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_ExperimentActionTargetMap, Members: &m_ExperimentActionTargetMap, Type: smithy.ShapeTypeMap, Ext: &eExperimentAction_targets})
+var sExperimentAction_startAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startAfter", ID: &i_ExperimentActionStartAfterList, Members: &m_ExperimentActionStartAfterList, Type: smithy.ShapeTypeList, Ext: &eExperimentAction_startAfter})
+var sExperimentAction_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iExperimentActionState, Members: &mExperimentActionState, Type: smithy.ShapeTypeStructure, Ext: &eExperimentAction_state})
+var sExperimentAction_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_ExperimentActionStartTime, Type: smithy.ShapeTypeTimestamp, Ext: &eExperimentAction_startTime})
+var sExperimentAction_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_ExperimentActionEndTime, Type: smithy.ShapeTypeTimestamp, Ext: &eExperimentAction_endTime})
+var s_ExperimentActionMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentActionName, Type: smithy.ShapeTypeString, Ext: &e_ExperimentActionMap_key})
+var s_ExperimentActionMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iExperimentAction, Members: &mExperimentAction, Type: smithy.ShapeTypeStructure, Ext: &e_ExperimentActionMap_value})
+var s_ExperimentActionParameterMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentActionParameterName, Type: smithy.ShapeTypeString, Ext: &e_ExperimentActionParameterMap_key})
+var s_ExperimentActionParameterMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ExperimentActionParameter, Type: smithy.ShapeTypeString, Ext: &e_ExperimentActionParameterMap_value})
+var s_ExperimentActionStartAfterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ExperimentActionStartAfter, Type: smithy.ShapeTypeString, Ext: &e_ExperimentActionStartAfterList_member})
+var sExperimentActionState_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iExperimentActionStatus, Members: &mExperimentActionStatus, Type: smithy.ShapeTypeEnum, Ext: &eExperimentActionState_status})
+var sExperimentActionState_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_ExperimentActionStatusReason, Type: smithy.ShapeTypeString, Ext: &eExperimentActionState_reason})
+var sExperimentActionStatus_pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pending", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentActionStatus_pending})
+var sExperimentActionStatus_initiating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initiating", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentActionStatus_initiating})
+var sExperimentActionStatus_running = smithy.NewStaticSchema(smithy.StaticSchema{Member: "running", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentActionStatus_running})
+var sExperimentActionStatus_completed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentActionStatus_completed})
+var sExperimentActionStatus_cancelled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cancelled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentActionStatus_cancelled})
+var sExperimentActionStatus_stopping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stopping", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentActionStatus_stopping})
+var sExperimentActionStatus_stopped = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stopped", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentActionStatus_stopped})
+var sExperimentActionStatus_failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentActionStatus_failed})
+var sExperimentActionStatus_skipped = smithy.NewStaticSchema(smithy.StaticSchema{Member: "skipped", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentActionStatus_skipped})
+var s_ExperimentActionTargetMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentActionTargetName, Type: smithy.ShapeTypeString, Ext: &e_ExperimentActionTargetMap_key})
+var s_ExperimentActionTargetMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ExperimentTargetName, Type: smithy.ShapeTypeString, Ext: &e_ExperimentActionTargetMap_value})
+var sExperimentCloudWatchLogsLogConfiguration_logGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logGroupArn", ID: &i_CloudWatchLogGroupArn, Type: smithy.ShapeTypeString, Ext: &eExperimentCloudWatchLogsLogConfiguration_logGroupArn})
+var sExperimentError_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_ExperimentErrorAccountId, Type: smithy.ShapeTypeString, Ext: &eExperimentError_accountId})
+var sExperimentError_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_ExperimentErrorCode, Type: smithy.ShapeTypeString, Ext: &eExperimentError_code})
+var sExperimentError_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_ExperimentErrorLocation, Type: smithy.ShapeTypeString, Ext: &eExperimentError_location})
+var sExperimentLogConfiguration_cloudWatchLogsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchLogsConfiguration", ID: &iExperimentCloudWatchLogsLogConfiguration, Members: &mExperimentCloudWatchLogsLogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExperimentLogConfiguration_cloudWatchLogsConfiguration})
+var sExperimentLogConfiguration_s3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Configuration", ID: &iExperimentS3LogConfiguration, Members: &mExperimentS3LogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExperimentLogConfiguration_s3Configuration})
+var sExperimentLogConfiguration_logSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logSchemaVersion", ID: &i_LogSchemaVersion, Type: smithy.ShapeTypeInteger, Ext: &eExperimentLogConfiguration_logSchemaVersion})
+var sExperimentOptions_accountTargeting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountTargeting", ID: &iAccountTargeting, Members: &mAccountTargeting, Type: smithy.ShapeTypeEnum, Ext: &eExperimentOptions_accountTargeting})
+var sExperimentOptions_emptyTargetResolutionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emptyTargetResolutionMode", ID: &iEmptyTargetResolutionMode, Members: &mEmptyTargetResolutionMode, Type: smithy.ShapeTypeEnum, Ext: &eExperimentOptions_emptyTargetResolutionMode})
+var sExperimentOptions_actionsMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionsMode", ID: &iActionsMode, Members: &mActionsMode, Type: smithy.ShapeTypeEnum, Ext: &eExperimentOptions_actionsMode})
+var sExperimentReport_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iExperimentReportState, Members: &mExperimentReportState, Type: smithy.ShapeTypeStructure, Ext: &eExperimentReport_state})
+var sExperimentReport_s3Reports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Reports", ID: &i_ExperimentReportS3ReportList, Members: &m_ExperimentReportS3ReportList, Type: smithy.ShapeTypeList, Ext: &eExperimentReport_s3Reports})
+var sExperimentReportConfiguration_outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputs", ID: &iExperimentReportConfigurationOutputs, Members: &mExperimentReportConfigurationOutputs, Type: smithy.ShapeTypeStructure, Ext: &eExperimentReportConfiguration_outputs})
+var sExperimentReportConfiguration_dataSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSources", ID: &iExperimentReportConfigurationDataSources, Members: &mExperimentReportConfigurationDataSources, Type: smithy.ShapeTypeStructure, Ext: &eExperimentReportConfiguration_dataSources})
+var sExperimentReportConfiguration_preExperimentDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preExperimentDuration", ID: &i_ReportConfigurationDuration, Type: smithy.ShapeTypeString, Ext: &eExperimentReportConfiguration_preExperimentDuration})
+var sExperimentReportConfiguration_postExperimentDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postExperimentDuration", ID: &i_ReportConfigurationDuration, Type: smithy.ShapeTypeString, Ext: &eExperimentReportConfiguration_postExperimentDuration})
+var sExperimentReportConfigurationCloudWatchDashboard_dashboardIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dashboardIdentifier", ID: &i_ReportConfigurationCloudWatchDashboardIdentifier, Type: smithy.ShapeTypeString, Ext: &eExperimentReportConfigurationCloudWatchDashboard_dashboardIdentifier})
+var s_ExperimentReportConfigurationCloudWatchDashboardList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExperimentReportConfigurationCloudWatchDashboard, Members: &mExperimentReportConfigurationCloudWatchDashboard, Type: smithy.ShapeTypeStructure, Ext: &e_ExperimentReportConfigurationCloudWatchDashboardList_member})
+var sExperimentReportConfigurationDataSources_cloudWatchDashboards = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchDashboards", ID: &i_ExperimentReportConfigurationCloudWatchDashboardList, Members: &m_ExperimentReportConfigurationCloudWatchDashboardList, Type: smithy.ShapeTypeList, Ext: &eExperimentReportConfigurationDataSources_cloudWatchDashboards})
+var sExperimentReportConfigurationOutputs_s3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Configuration", ID: &iExperimentReportConfigurationOutputsS3Configuration, Members: &mExperimentReportConfigurationOutputsS3Configuration, Type: smithy.ShapeTypeStructure, Ext: &eExperimentReportConfigurationOutputs_s3Configuration})
+var sExperimentReportConfigurationOutputsS3Configuration_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &eExperimentReportConfigurationOutputsS3Configuration_bucketName})
+var sExperimentReportConfigurationOutputsS3Configuration_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_ReportConfigurationS3OutputPrefix, Type: smithy.ShapeTypeString, Ext: &eExperimentReportConfigurationOutputsS3Configuration_prefix})
+var sExperimentReportError_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_ExperimentReportErrorCode, Type: smithy.ShapeTypeString, Ext: &eExperimentReportError_code})
+var sExperimentReportS3Report_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ExperimentReportS3ReportArn, Type: smithy.ShapeTypeString, Ext: &eExperimentReportS3Report_arn})
+var sExperimentReportS3Report_reportType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportType", ID: &i_ExperimentReportS3ReportType, Type: smithy.ShapeTypeString, Ext: &eExperimentReportS3Report_reportType})
+var s_ExperimentReportS3ReportList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExperimentReportS3Report, Members: &mExperimentReportS3Report, Type: smithy.ShapeTypeStructure, Ext: &e_ExperimentReportS3ReportList_member})
+var sExperimentReportState_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iExperimentReportStatus, Members: &mExperimentReportStatus, Type: smithy.ShapeTypeEnum, Ext: &eExperimentReportState_status})
+var sExperimentReportState_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_ExperimentReportReason, Type: smithy.ShapeTypeString, Ext: &eExperimentReportState_reason})
+var sExperimentReportState_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iExperimentReportError, Members: &mExperimentReportError, Type: smithy.ShapeTypeStructure, Ext: &eExperimentReportState_error})
+var sExperimentReportStatus_pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pending", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentReportStatus_pending})
+var sExperimentReportStatus_running = smithy.NewStaticSchema(smithy.StaticSchema{Member: "running", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentReportStatus_running})
+var sExperimentReportStatus_completed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentReportStatus_completed})
+var sExperimentReportStatus_cancelled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cancelled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentReportStatus_cancelled})
+var sExperimentReportStatus_failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentReportStatus_failed})
+var sExperimentS3LogConfiguration_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &eExperimentS3LogConfiguration_bucketName})
+var sExperimentS3LogConfiguration_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_S3ObjectKey, Type: smithy.ShapeTypeString, Ext: &eExperimentS3LogConfiguration_prefix})
+var sExperimentState_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iExperimentStatus, Members: &mExperimentStatus, Type: smithy.ShapeTypeEnum, Ext: &eExperimentState_status})
+var sExperimentState_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_ExperimentStatusReason, Type: smithy.ShapeTypeString, Ext: &eExperimentState_reason})
+var sExperimentState_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iExperimentError, Members: &mExperimentError, Type: smithy.ShapeTypeStructure, Ext: &eExperimentState_error})
+var sExperimentStatus_pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pending", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentStatus_pending})
+var sExperimentStatus_initiating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initiating", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentStatus_initiating})
+var sExperimentStatus_running = smithy.NewStaticSchema(smithy.StaticSchema{Member: "running", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentStatus_running})
+var sExperimentStatus_completed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentStatus_completed})
+var sExperimentStatus_stopping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stopping", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentStatus_stopping})
+var sExperimentStatus_stopped = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stopped", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentStatus_stopped})
+var sExperimentStatus_failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentStatus_failed})
+var sExperimentStatus_cancelled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cancelled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExperimentStatus_cancelled})
+var sExperimentStopCondition_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_StopConditionSource, Type: smithy.ShapeTypeString, Ext: &eExperimentStopCondition_source})
+var sExperimentStopCondition_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StopConditionValue, Type: smithy.ShapeTypeString, Ext: &eExperimentStopCondition_value})
+var s_ExperimentStopConditionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExperimentStopCondition, Members: &mExperimentStopCondition, Type: smithy.ShapeTypeStructure, Ext: &e_ExperimentStopConditionList_member})
+var sExperimentSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ExperimentId, Type: smithy.ShapeTypeString, Ext: &eExperimentSummary_id})
+var sExperimentSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eExperimentSummary_arn})
+var sExperimentSummary_experimentTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplateId", ID: &i_ExperimentTemplateId, Type: smithy.ShapeTypeString, Ext: &eExperimentSummary_experimentTemplateId})
+var sExperimentSummary_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iExperimentState, Members: &mExperimentState, Type: smithy.ShapeTypeStructure, Ext: &eExperimentSummary_state})
+var sExperimentSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_CreationTime, Type: smithy.ShapeTypeTimestamp, Ext: &eExperimentSummary_creationTime})
+var sExperimentSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eExperimentSummary_tags})
+var sExperimentSummary_experimentOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentOptions", ID: &iExperimentOptions, Members: &mExperimentOptions, Type: smithy.ShapeTypeStructure, Ext: &eExperimentSummary_experimentOptions})
+var s_ExperimentSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExperimentSummary, Members: &mExperimentSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ExperimentSummaryList_member})
+var sExperimentTarget_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_TargetResourceTypeId, Type: smithy.ShapeTypeString, Ext: &eExperimentTarget_resourceType})
+var sExperimentTarget_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList, Ext: &eExperimentTarget_resourceArns})
+var sExperimentTarget_resourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceTags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eExperimentTarget_resourceTags})
+var sExperimentTarget_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_ExperimentTargetFilterList, Members: &m_ExperimentTargetFilterList, Type: smithy.ShapeTypeList, Ext: &eExperimentTarget_filters})
+var sExperimentTarget_selectionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "selectionMode", ID: &i_ExperimentTargetSelectionMode, Type: smithy.ShapeTypeString, Ext: &eExperimentTarget_selectionMode})
+var sExperimentTarget_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_ExperimentTargetParameterMap, Members: &m_ExperimentTargetParameterMap, Type: smithy.ShapeTypeMap, Ext: &eExperimentTarget_parameters})
+var sExperimentTargetAccountConfiguration_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eExperimentTargetAccountConfiguration_roleArn})
+var sExperimentTargetAccountConfiguration_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_TargetAccountId, Type: smithy.ShapeTypeString, Ext: &eExperimentTargetAccountConfiguration_accountId})
+var sExperimentTargetAccountConfiguration_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_TargetAccountConfigurationDescription, Type: smithy.ShapeTypeString, Ext: &eExperimentTargetAccountConfiguration_description})
+var s_ExperimentTargetAccountConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExperimentTargetAccountConfigurationSummary, Members: &mExperimentTargetAccountConfigurationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ExperimentTargetAccountConfigurationList_member})
+var sExperimentTargetAccountConfigurationSummary_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eExperimentTargetAccountConfigurationSummary_roleArn})
+var sExperimentTargetAccountConfigurationSummary_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_TargetAccountId, Type: smithy.ShapeTypeString, Ext: &eExperimentTargetAccountConfigurationSummary_accountId})
+var sExperimentTargetAccountConfigurationSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_TargetAccountConfigurationDescription, Type: smithy.ShapeTypeString, Ext: &eExperimentTargetAccountConfigurationSummary_description})
+var sExperimentTargetFilter_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &i_ExperimentTargetFilterPath, Type: smithy.ShapeTypeString, Ext: &eExperimentTargetFilter_path})
+var sExperimentTargetFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_ExperimentTargetFilterValues, Members: &m_ExperimentTargetFilterValues, Type: smithy.ShapeTypeList, Ext: &eExperimentTargetFilter_values})
+var s_ExperimentTargetFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExperimentTargetFilter, Members: &mExperimentTargetFilter, Type: smithy.ShapeTypeStructure, Ext: &e_ExperimentTargetFilterList_member})
+var s_ExperimentTargetFilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ExperimentTargetFilterValue, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTargetFilterValues_member})
+var s_ExperimentTargetMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentTargetName, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTargetMap_key})
+var s_ExperimentTargetMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iExperimentTarget, Members: &mExperimentTarget, Type: smithy.ShapeTypeStructure, Ext: &e_ExperimentTargetMap_value})
+var s_ExperimentTargetParameterMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentTargetParameterName, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTargetParameterMap_key})
+var s_ExperimentTargetParameterMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ExperimentTargetParameterValue, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTargetParameterMap_value})
+var sExperimentTemplate_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ExperimentTemplateId, Type: smithy.ShapeTypeString, Ext: &eExperimentTemplate_id})
+var sExperimentTemplate_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eExperimentTemplate_arn})
+var sExperimentTemplate_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ExperimentTemplateDescription, Type: smithy.ShapeTypeString, Ext: &eExperimentTemplate_description})
+var sExperimentTemplate_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_ExperimentTemplateTargetMap, Members: &m_ExperimentTemplateTargetMap, Type: smithy.ShapeTypeMap, Ext: &eExperimentTemplate_targets})
+var sExperimentTemplate_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &i_ExperimentTemplateActionMap, Members: &m_ExperimentTemplateActionMap, Type: smithy.ShapeTypeMap, Ext: &eExperimentTemplate_actions})
+var sExperimentTemplate_stopConditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stopConditions", ID: &i_ExperimentTemplateStopConditionList, Members: &m_ExperimentTemplateStopConditionList, Type: smithy.ShapeTypeList, Ext: &eExperimentTemplate_stopConditions})
+var sExperimentTemplate_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_CreationTime, Type: smithy.ShapeTypeTimestamp, Ext: &eExperimentTemplate_creationTime})
+var sExperimentTemplate_lastUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdateTime", ID: &i_LastUpdateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eExperimentTemplate_lastUpdateTime})
+var sExperimentTemplate_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eExperimentTemplate_roleArn})
+var sExperimentTemplate_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eExperimentTemplate_tags})
+var sExperimentTemplate_logConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logConfiguration", ID: &iExperimentTemplateLogConfiguration, Members: &mExperimentTemplateLogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplate_logConfiguration})
+var sExperimentTemplate_experimentOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentOptions", ID: &iExperimentTemplateExperimentOptions, Members: &mExperimentTemplateExperimentOptions, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplate_experimentOptions})
+var sExperimentTemplate_targetAccountConfigurationsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetAccountConfigurationsCount", ID: &i_TargetAccountConfigurationsCount, Type: smithy.ShapeTypeLong, Ext: &eExperimentTemplate_targetAccountConfigurationsCount})
+var sExperimentTemplate_experimentReportConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentReportConfiguration", ID: &iExperimentTemplateReportConfiguration, Members: &mExperimentTemplateReportConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplate_experimentReportConfiguration})
+var sExperimentTemplateAction_actionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionId", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &eExperimentTemplateAction_actionId})
+var sExperimentTemplateAction_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ExperimentTemplateActionDescription, Type: smithy.ShapeTypeString, Ext: &eExperimentTemplateAction_description})
+var sExperimentTemplateAction_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_ExperimentTemplateActionParameterMap, Members: &m_ExperimentTemplateActionParameterMap, Type: smithy.ShapeTypeMap, Ext: &eExperimentTemplateAction_parameters})
+var sExperimentTemplateAction_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_ExperimentTemplateActionTargetMap, Members: &m_ExperimentTemplateActionTargetMap, Type: smithy.ShapeTypeMap, Ext: &eExperimentTemplateAction_targets})
+var sExperimentTemplateAction_startAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startAfter", ID: &i_ExperimentTemplateActionStartAfterList, Members: &m_ExperimentTemplateActionStartAfterList, Type: smithy.ShapeTypeList, Ext: &eExperimentTemplateAction_startAfter})
+var s_ExperimentTemplateActionMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentTemplateActionName, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTemplateActionMap_key})
+var s_ExperimentTemplateActionMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iExperimentTemplateAction, Members: &mExperimentTemplateAction, Type: smithy.ShapeTypeStructure, Ext: &e_ExperimentTemplateActionMap_value})
+var s_ExperimentTemplateActionParameterMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentTemplateActionParameterName, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTemplateActionParameterMap_key})
+var s_ExperimentTemplateActionParameterMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ExperimentTemplateActionParameter, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTemplateActionParameterMap_value})
+var s_ExperimentTemplateActionStartAfterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ExperimentTemplateActionStartAfter, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTemplateActionStartAfterList_member})
+var s_ExperimentTemplateActionTargetMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentTemplateActionTargetName, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTemplateActionTargetMap_key})
+var s_ExperimentTemplateActionTargetMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ExperimentTemplateTargetName, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTemplateActionTargetMap_value})
+var sExperimentTemplateCloudWatchLogsLogConfiguration_logGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logGroupArn", ID: &i_CloudWatchLogGroupArn, Type: smithy.ShapeTypeString, Ext: &eExperimentTemplateCloudWatchLogsLogConfiguration_logGroupArn})
+var sExperimentTemplateCloudWatchLogsLogConfigurationInput_logGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logGroupArn", ID: &i_CloudWatchLogGroupArn, Type: smithy.ShapeTypeString, Ext: &eExperimentTemplateCloudWatchLogsLogConfigurationInput_logGroupArn})
+var sExperimentTemplateExperimentOptions_accountTargeting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountTargeting", ID: &iAccountTargeting, Members: &mAccountTargeting, Type: smithy.ShapeTypeEnum, Ext: &eExperimentTemplateExperimentOptions_accountTargeting})
+var sExperimentTemplateExperimentOptions_emptyTargetResolutionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emptyTargetResolutionMode", ID: &iEmptyTargetResolutionMode, Members: &mEmptyTargetResolutionMode, Type: smithy.ShapeTypeEnum, Ext: &eExperimentTemplateExperimentOptions_emptyTargetResolutionMode})
+var sExperimentTemplateLogConfiguration_cloudWatchLogsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchLogsConfiguration", ID: &iExperimentTemplateCloudWatchLogsLogConfiguration, Members: &mExperimentTemplateCloudWatchLogsLogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplateLogConfiguration_cloudWatchLogsConfiguration})
+var sExperimentTemplateLogConfiguration_s3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Configuration", ID: &iExperimentTemplateS3LogConfiguration, Members: &mExperimentTemplateS3LogConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplateLogConfiguration_s3Configuration})
+var sExperimentTemplateLogConfiguration_logSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logSchemaVersion", ID: &i_LogSchemaVersion, Type: smithy.ShapeTypeInteger, Ext: &eExperimentTemplateLogConfiguration_logSchemaVersion})
+var sExperimentTemplateReportConfiguration_outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputs", ID: &iExperimentTemplateReportConfigurationOutputs, Members: &mExperimentTemplateReportConfigurationOutputs, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplateReportConfiguration_outputs})
+var sExperimentTemplateReportConfiguration_dataSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSources", ID: &iExperimentTemplateReportConfigurationDataSources, Members: &mExperimentTemplateReportConfigurationDataSources, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplateReportConfiguration_dataSources})
+var sExperimentTemplateReportConfiguration_preExperimentDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preExperimentDuration", ID: &i_ReportConfigurationDuration, Type: smithy.ShapeTypeString, Ext: &eExperimentTemplateReportConfiguration_preExperimentDuration})
+var sExperimentTemplateReportConfiguration_postExperimentDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postExperimentDuration", ID: &i_ReportConfigurationDuration, Type: smithy.ShapeTypeString, Ext: &eExperimentTemplateReportConfiguration_postExperimentDuration})
+var sExperimentTemplateReportConfigurationCloudWatchDashboard_dashboardIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dashboardIdentifier", ID: &i_ReportConfigurationCloudWatchDashboardIdentifier, Type: smithy.ShapeTypeString, Ext: &eExperimentTemplateReportConfigurationCloudWatchDashboard_dashboardIdentifier})
+var s_ExperimentTemplateReportConfigurationCloudWatchDashboardList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExperimentTemplateReportConfigurationCloudWatchDashboard, Members: &mExperimentTemplateReportConfigurationCloudWatchDashboard, Type: smithy.ShapeTypeStructure, Ext: &e_ExperimentTemplateReportConfigurationCloudWatchDashboardList_member})
+var sExperimentTemplateReportConfigurationDataSources_cloudWatchDashboards = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchDashboards", ID: &i_ExperimentTemplateReportConfigurationCloudWatchDashboardList, Members: &m_ExperimentTemplateReportConfigurationCloudWatchDashboardList, Type: smithy.ShapeTypeList, Ext: &eExperimentTemplateReportConfigurationDataSources_cloudWatchDashboards})
+var sExperimentTemplateReportConfigurationDataSourcesInput_cloudWatchDashboards = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchDashboards", ID: &i_ReportConfigurationCloudWatchDashboardInputList, Members: &m_ReportConfigurationCloudWatchDashboardInputList, Type: smithy.ShapeTypeList, Ext: &eExperimentTemplateReportConfigurationDataSourcesInput_cloudWatchDashboards})
+var sExperimentTemplateReportConfigurationOutputs_s3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Configuration", ID: &iReportConfigurationS3Output, Members: &mReportConfigurationS3Output, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplateReportConfigurationOutputs_s3Configuration})
+var sExperimentTemplateReportConfigurationOutputsInput_s3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Configuration", ID: &iReportConfigurationS3OutputInput, Members: &mReportConfigurationS3OutputInput, Type: smithy.ShapeTypeStructure, Ext: &eExperimentTemplateReportConfigurationOutputsInput_s3Configuration})
+var sExperimentTemplateS3LogConfiguration_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &eExperimentTemplateS3LogConfiguration_bucketName})
+var sExperimentTemplateS3LogConfiguration_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_S3ObjectKey, Type: smithy.ShapeTypeString, Ext: &eExperimentTemplateS3LogConfiguration_prefix})
+var sExperimentTemplateS3LogConfigurationInput_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &eExperimentTemplateS3LogConfigurationInput_bucketName})
+var sExperimentTemplateS3LogConfigurationInput_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_S3ObjectKey, Type: smithy.ShapeTypeString, Ext: &eExperimentTemplateS3LogConfigurationInput_prefix})
+var sExperimentTemplateStopCondition_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_StopConditionSource, Type: smithy.ShapeTypeString, Ext: &eExperimentTemplateStopCondition_source})
+var sExperimentTemplateStopCondition_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StopConditionValue, Type: smithy.ShapeTypeString, Ext: &eExperimentTemplateStopCondition_value})
+var s_ExperimentTemplateStopConditionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExperimentTemplateStopCondition, Members: &mExperimentTemplateStopCondition, Type: smithy.ShapeTypeStructure, Ext: &e_ExperimentTemplateStopConditionList_member})
+var sExperimentTemplateSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ExperimentTemplateId, Type: smithy.ShapeTypeString, Ext: &eExperimentTemplateSummary_id})
+var sExperimentTemplateSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eExperimentTemplateSummary_arn})
+var sExperimentTemplateSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ExperimentTemplateDescription, Type: smithy.ShapeTypeString, Ext: &eExperimentTemplateSummary_description})
+var sExperimentTemplateSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_CreationTime, Type: smithy.ShapeTypeTimestamp, Ext: &eExperimentTemplateSummary_creationTime})
+var sExperimentTemplateSummary_lastUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdateTime", ID: &i_LastUpdateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eExperimentTemplateSummary_lastUpdateTime})
+var sExperimentTemplateSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eExperimentTemplateSummary_tags})
+var s_ExperimentTemplateSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExperimentTemplateSummary, Members: &mExperimentTemplateSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ExperimentTemplateSummaryList_member})
+var sExperimentTemplateTarget_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_TargetResourceTypeId, Type: smithy.ShapeTypeString, Ext: &eExperimentTemplateTarget_resourceType})
+var sExperimentTemplateTarget_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList, Ext: &eExperimentTemplateTarget_resourceArns})
+var sExperimentTemplateTarget_resourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceTags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eExperimentTemplateTarget_resourceTags})
+var sExperimentTemplateTarget_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_ExperimentTemplateTargetFilterList, Members: &m_ExperimentTemplateTargetFilterList, Type: smithy.ShapeTypeList, Ext: &eExperimentTemplateTarget_filters})
+var sExperimentTemplateTarget_selectionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "selectionMode", ID: &i_ExperimentTemplateTargetSelectionMode, Type: smithy.ShapeTypeString, Ext: &eExperimentTemplateTarget_selectionMode})
+var sExperimentTemplateTarget_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_ExperimentTemplateTargetParameterMap, Members: &m_ExperimentTemplateTargetParameterMap, Type: smithy.ShapeTypeMap, Ext: &eExperimentTemplateTarget_parameters})
+var sExperimentTemplateTargetFilter_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &i_ExperimentTemplateTargetFilterPath, Type: smithy.ShapeTypeString, Ext: &eExperimentTemplateTargetFilter_path})
+var sExperimentTemplateTargetFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_ExperimentTemplateTargetFilterValues, Members: &m_ExperimentTemplateTargetFilterValues, Type: smithy.ShapeTypeList, Ext: &eExperimentTemplateTargetFilter_values})
+var s_ExperimentTemplateTargetFilterInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExperimentTemplateTargetInputFilter, Members: &mExperimentTemplateTargetInputFilter, Type: smithy.ShapeTypeStructure, Ext: &e_ExperimentTemplateTargetFilterInputList_member})
+var s_ExperimentTemplateTargetFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExperimentTemplateTargetFilter, Members: &mExperimentTemplateTargetFilter, Type: smithy.ShapeTypeStructure, Ext: &e_ExperimentTemplateTargetFilterList_member})
+var s_ExperimentTemplateTargetFilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ExperimentTemplateTargetFilterValue, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTemplateTargetFilterValues_member})
+var sExperimentTemplateTargetInputFilter_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &i_ExperimentTemplateTargetFilterPath, Type: smithy.ShapeTypeString, Ext: &eExperimentTemplateTargetInputFilter_path})
+var sExperimentTemplateTargetInputFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_ExperimentTemplateTargetFilterValues, Members: &m_ExperimentTemplateTargetFilterValues, Type: smithy.ShapeTypeList, Ext: &eExperimentTemplateTargetInputFilter_values})
+var s_ExperimentTemplateTargetMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentTemplateTargetName, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTemplateTargetMap_key})
+var s_ExperimentTemplateTargetMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iExperimentTemplateTarget, Members: &mExperimentTemplateTarget, Type: smithy.ShapeTypeStructure, Ext: &e_ExperimentTemplateTargetMap_value})
+var s_ExperimentTemplateTargetParameterMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentTemplateTargetParameterName, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTemplateTargetParameterMap_key})
+var s_ExperimentTemplateTargetParameterMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ExperimentTemplateTargetParameterValue, Type: smithy.ShapeTypeString, Ext: &e_ExperimentTemplateTargetParameterMap_value})
+var sReportConfigurationCloudWatchDashboardInput_dashboardIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dashboardIdentifier", ID: &i_ReportConfigurationCloudWatchDashboardIdentifier, Type: smithy.ShapeTypeString, Ext: &eReportConfigurationCloudWatchDashboardInput_dashboardIdentifier})
+var s_ReportConfigurationCloudWatchDashboardInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReportConfigurationCloudWatchDashboardInput, Members: &mReportConfigurationCloudWatchDashboardInput, Type: smithy.ShapeTypeStructure, Ext: &e_ReportConfigurationCloudWatchDashboardInputList_member})
+var sReportConfigurationS3Output_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &eReportConfigurationS3Output_bucketName})
+var sReportConfigurationS3Output_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_ReportConfigurationS3OutputPrefix, Type: smithy.ShapeTypeString, Ext: &eReportConfigurationS3Output_prefix})
+var sReportConfigurationS3OutputInput_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &eReportConfigurationS3OutputInput_bucketName})
+var sReportConfigurationS3OutputInput_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_ReportConfigurationS3OutputPrefix, Type: smithy.ShapeTypeString, Ext: &eReportConfigurationS3OutputInput_prefix})
+var sResolvedTarget_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_TargetResourceTypeId, Type: smithy.ShapeTypeString, Ext: &eResolvedTarget_resourceType})
+var sResolvedTarget_targetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetName", ID: &i_TargetName, Type: smithy.ShapeTypeString, Ext: &eResolvedTarget_targetName})
+var sResolvedTarget_targetInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetInformation", ID: &i_TargetInformationMap, Members: &m_TargetInformationMap, Type: smithy.ShapeTypeMap, Ext: &eResolvedTarget_targetInformation})
+var s_ResolvedTargetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResolvedTarget, Members: &mResolvedTarget, Type: smithy.ShapeTypeStructure, Ext: &e_ResolvedTargetList_member})
+var s_ResourceArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArnList_member})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sSafetyLever_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_SafetyLeverId, Type: smithy.ShapeTypeString, Ext: &eSafetyLever_id})
+var sSafetyLever_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eSafetyLever_arn})
+var sSafetyLever_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iSafetyLeverState, Members: &mSafetyLeverState, Type: smithy.ShapeTypeStructure, Ext: &eSafetyLever_state})
+var sSafetyLeverState_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSafetyLeverStatus, Members: &mSafetyLeverStatus, Type: smithy.ShapeTypeEnum, Ext: &eSafetyLeverState_status})
+var sSafetyLeverState_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_SafetyLeverStatusReason, Type: smithy.ShapeTypeString, Ext: &eSafetyLeverState_reason})
+var sSafetyLeverStatus_DISENGAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISENGAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSafetyLeverStatus_DISENGAGED})
+var sSafetyLeverStatus_ENGAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENGAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSafetyLeverStatus_ENGAGED})
+var sSafetyLeverStatus_ENGAGING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENGAGING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSafetyLeverStatus_ENGAGING})
+var sSafetyLeverStatusInput_DISENGAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISENGAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSafetyLeverStatusInput_DISENGAGED})
+var sSafetyLeverStatusInput_ENGAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENGAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSafetyLeverStatusInput_ENGAGED})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sStartExperimentExperimentOptionsInput_actionsMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionsMode", ID: &iActionsMode, Members: &mActionsMode, Type: smithy.ShapeTypeEnum, Ext: &eStartExperimentExperimentOptionsInput_actionsMode})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var sTargetAccountConfiguration_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eTargetAccountConfiguration_roleArn})
+var sTargetAccountConfiguration_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_TargetAccountId, Type: smithy.ShapeTypeString, Ext: &eTargetAccountConfiguration_accountId})
+var sTargetAccountConfiguration_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_TargetAccountConfigurationDescription, Type: smithy.ShapeTypeString, Ext: &eTargetAccountConfiguration_description})
+var s_TargetAccountConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTargetAccountConfigurationSummary, Members: &mTargetAccountConfigurationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_TargetAccountConfigurationList_member})
+var sTargetAccountConfigurationSummary_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eTargetAccountConfigurationSummary_roleArn})
+var sTargetAccountConfigurationSummary_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_TargetAccountId, Type: smithy.ShapeTypeString, Ext: &eTargetAccountConfigurationSummary_accountId})
+var sTargetAccountConfigurationSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_TargetAccountConfigurationDescription, Type: smithy.ShapeTypeString, Ext: &eTargetAccountConfigurationSummary_description})
+var s_TargetInformationMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TargetInformationKey, Type: smithy.ShapeTypeString, Ext: &e_TargetInformationMap_key})
+var s_TargetInformationMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TargetInformationValue, Type: smithy.ShapeTypeString, Ext: &e_TargetInformationMap_value})
+var sTargetResourceType_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_TargetResourceTypeId, Type: smithy.ShapeTypeString, Ext: &eTargetResourceType_resourceType})
+var sTargetResourceType_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_TargetResourceTypeDescription, Type: smithy.ShapeTypeString, Ext: &eTargetResourceType_description})
+var sTargetResourceType_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_TargetResourceTypeParameterMap, Members: &m_TargetResourceTypeParameterMap, Type: smithy.ShapeTypeMap, Ext: &eTargetResourceType_parameters})
+var sTargetResourceTypeParameter_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_TargetResourceTypeParameterDescription, Type: smithy.ShapeTypeString, Ext: &eTargetResourceTypeParameter_description})
+var sTargetResourceTypeParameter_required = smithy.NewStaticSchema(smithy.StaticSchema{Member: "required", ID: &i_TargetResourceTypeParameterRequired, Type: smithy.ShapeTypeBoolean, Ext: &eTargetResourceTypeParameter_required})
+var s_TargetResourceTypeParameterMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TargetResourceTypeParameterName, Type: smithy.ShapeTypeString, Ext: &e_TargetResourceTypeParameterMap_key})
+var s_TargetResourceTypeParameterMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iTargetResourceTypeParameter, Members: &mTargetResourceTypeParameter, Type: smithy.ShapeTypeStructure, Ext: &e_TargetResourceTypeParameterMap_value})
+var sTargetResourceTypeSummary_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_TargetResourceTypeId, Type: smithy.ShapeTypeString, Ext: &eTargetResourceTypeSummary_resourceType})
+var sTargetResourceTypeSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_TargetResourceTypeDescription, Type: smithy.ShapeTypeString, Ext: &eTargetResourceTypeSummary_description})
+var s_TargetResourceTypeSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTargetResourceTypeSummary, Members: &mTargetResourceTypeSummary, Type: smithy.ShapeTypeStructure, Ext: &e_TargetResourceTypeSummaryList_member})
+var sUpdateExperimentTemplateActionInputItem_actionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionId", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &eUpdateExperimentTemplateActionInputItem_actionId})
+var sUpdateExperimentTemplateActionInputItem_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ExperimentTemplateActionDescription, Type: smithy.ShapeTypeString, Ext: &eUpdateExperimentTemplateActionInputItem_description})
+var sUpdateExperimentTemplateActionInputItem_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_ExperimentTemplateActionParameterMap, Members: &m_ExperimentTemplateActionParameterMap, Type: smithy.ShapeTypeMap, Ext: &eUpdateExperimentTemplateActionInputItem_parameters})
+var sUpdateExperimentTemplateActionInputItem_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_ExperimentTemplateActionTargetMap, Members: &m_ExperimentTemplateActionTargetMap, Type: smithy.ShapeTypeMap, Ext: &eUpdateExperimentTemplateActionInputItem_targets})
+var sUpdateExperimentTemplateActionInputItem_startAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startAfter", ID: &i_ExperimentTemplateActionStartAfterList, Members: &m_ExperimentTemplateActionStartAfterList, Type: smithy.ShapeTypeList, Ext: &eUpdateExperimentTemplateActionInputItem_startAfter})
+var s_UpdateExperimentTemplateActionInputMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentTemplateActionName, Type: smithy.ShapeTypeString, Ext: &e_UpdateExperimentTemplateActionInputMap_key})
+var s_UpdateExperimentTemplateActionInputMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iUpdateExperimentTemplateActionInputItem, Members: &mUpdateExperimentTemplateActionInputItem, Type: smithy.ShapeTypeStructure, Ext: &e_UpdateExperimentTemplateActionInputMap_value})
+var sUpdateExperimentTemplateExperimentOptionsInput_emptyTargetResolutionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emptyTargetResolutionMode", ID: &iEmptyTargetResolutionMode, Members: &mEmptyTargetResolutionMode, Type: smithy.ShapeTypeEnum, Ext: &eUpdateExperimentTemplateExperimentOptionsInput_emptyTargetResolutionMode})
+var sUpdateExperimentTemplateLogConfigurationInput_cloudWatchLogsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchLogsConfiguration", ID: &iExperimentTemplateCloudWatchLogsLogConfigurationInput, Members: &mExperimentTemplateCloudWatchLogsLogConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExperimentTemplateLogConfigurationInput_cloudWatchLogsConfiguration})
+var sUpdateExperimentTemplateLogConfigurationInput_s3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Configuration", ID: &iExperimentTemplateS3LogConfigurationInput, Members: &mExperimentTemplateS3LogConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExperimentTemplateLogConfigurationInput_s3Configuration})
+var sUpdateExperimentTemplateLogConfigurationInput_logSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logSchemaVersion", ID: &i_LogSchemaVersion, Type: smithy.ShapeTypeInteger, Ext: &eUpdateExperimentTemplateLogConfigurationInput_logSchemaVersion})
+var sUpdateExperimentTemplateReportConfigurationInput_outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputs", ID: &iExperimentTemplateReportConfigurationOutputsInput, Members: &mExperimentTemplateReportConfigurationOutputsInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExperimentTemplateReportConfigurationInput_outputs})
+var sUpdateExperimentTemplateReportConfigurationInput_dataSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSources", ID: &iExperimentTemplateReportConfigurationDataSourcesInput, Members: &mExperimentTemplateReportConfigurationDataSourcesInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExperimentTemplateReportConfigurationInput_dataSources})
+var sUpdateExperimentTemplateReportConfigurationInput_preExperimentDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preExperimentDuration", ID: &i_ReportConfigurationDuration, Type: smithy.ShapeTypeString, Ext: &eUpdateExperimentTemplateReportConfigurationInput_preExperimentDuration})
+var sUpdateExperimentTemplateReportConfigurationInput_postExperimentDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postExperimentDuration", ID: &i_ReportConfigurationDuration, Type: smithy.ShapeTypeString, Ext: &eUpdateExperimentTemplateReportConfigurationInput_postExperimentDuration})
+var sUpdateExperimentTemplateStopConditionInput_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_StopConditionSource, Type: smithy.ShapeTypeString, Ext: &eUpdateExperimentTemplateStopConditionInput_source})
+var sUpdateExperimentTemplateStopConditionInput_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StopConditionValue, Type: smithy.ShapeTypeString, Ext: &eUpdateExperimentTemplateStopConditionInput_value})
+var s_UpdateExperimentTemplateStopConditionInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUpdateExperimentTemplateStopConditionInput, Members: &mUpdateExperimentTemplateStopConditionInput, Type: smithy.ShapeTypeStructure, Ext: &e_UpdateExperimentTemplateStopConditionInputList_member})
+var sUpdateExperimentTemplateTargetInput_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_TargetResourceTypeId, Type: smithy.ShapeTypeString, Ext: &eUpdateExperimentTemplateTargetInput_resourceType})
+var sUpdateExperimentTemplateTargetInput_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList, Ext: &eUpdateExperimentTemplateTargetInput_resourceArns})
+var sUpdateExperimentTemplateTargetInput_resourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceTags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eUpdateExperimentTemplateTargetInput_resourceTags})
+var sUpdateExperimentTemplateTargetInput_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_ExperimentTemplateTargetFilterInputList, Members: &m_ExperimentTemplateTargetFilterInputList, Type: smithy.ShapeTypeList, Ext: &eUpdateExperimentTemplateTargetInput_filters})
+var sUpdateExperimentTemplateTargetInput_selectionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "selectionMode", ID: &i_ExperimentTemplateTargetSelectionMode, Type: smithy.ShapeTypeString, Ext: &eUpdateExperimentTemplateTargetInput_selectionMode})
+var sUpdateExperimentTemplateTargetInput_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_ExperimentTemplateTargetParameterMap, Members: &m_ExperimentTemplateTargetParameterMap, Type: smithy.ShapeTypeMap, Ext: &eUpdateExperimentTemplateTargetInput_parameters})
+var s_UpdateExperimentTemplateTargetInputMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExperimentTemplateTargetName, Type: smithy.ShapeTypeString, Ext: &e_UpdateExperimentTemplateTargetInputMap_key})
+var s_UpdateExperimentTemplateTargetInputMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iUpdateExperimentTemplateTargetInput, Members: &mUpdateExperimentTemplateTargetInput, Type: smithy.ShapeTypeStructure, Ext: &e_UpdateExperimentTemplateTargetInputMap_value})
+var sUpdateSafetyLeverStateInput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSafetyLeverStatusInput, Members: &mSafetyLeverStatusInput, Type: smithy.ShapeTypeEnum, Ext: &eUpdateSafetyLeverStateInput_status})
+var sUpdateSafetyLeverStateInput_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_SafetyLeverStatusReason, Type: smithy.ShapeTypeString, Ext: &eUpdateSafetyLeverStateInput_reason})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sCreateExperimentTemplateRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateExperimentTemplateRequest_clientToken})
+var sCreateExperimentTemplateRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ExperimentTemplateDescription, Type: smithy.ShapeTypeString, Ext: &eCreateExperimentTemplateRequest_description})
+var sCreateExperimentTemplateRequest_stopConditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stopConditions", ID: &i_CreateExperimentTemplateStopConditionInputList, Members: &m_CreateExperimentTemplateStopConditionInputList, Type: smithy.ShapeTypeList, Ext: &eCreateExperimentTemplateRequest_stopConditions})
+var sCreateExperimentTemplateRequest_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_CreateExperimentTemplateTargetInputMap, Members: &m_CreateExperimentTemplateTargetInputMap, Type: smithy.ShapeTypeMap, Ext: &eCreateExperimentTemplateRequest_targets})
+var sCreateExperimentTemplateRequest_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &i_CreateExperimentTemplateActionInputMap, Members: &m_CreateExperimentTemplateActionInputMap, Type: smithy.ShapeTypeMap, Ext: &eCreateExperimentTemplateRequest_actions})
+var sCreateExperimentTemplateRequest_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eCreateExperimentTemplateRequest_roleArn})
+var sCreateExperimentTemplateRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateExperimentTemplateRequest_tags})
+var sCreateExperimentTemplateRequest_logConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logConfiguration", ID: &iCreateExperimentTemplateLogConfigurationInput, Members: &mCreateExperimentTemplateLogConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateExperimentTemplateRequest_logConfiguration})
+var sCreateExperimentTemplateRequest_experimentOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentOptions", ID: &iCreateExperimentTemplateExperimentOptionsInput, Members: &mCreateExperimentTemplateExperimentOptionsInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateExperimentTemplateRequest_experimentOptions})
+var sCreateExperimentTemplateRequest_experimentReportConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentReportConfiguration", ID: &iCreateExperimentTemplateReportConfigurationInput, Members: &mCreateExperimentTemplateReportConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateExperimentTemplateRequest_experimentReportConfiguration})
+var sCreateExperimentTemplateResponse_experimentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplate", ID: &iExperimentTemplate, Members: &mExperimentTemplate, Type: smithy.ShapeTypeStructure, Ext: &eCreateExperimentTemplateResponse_experimentTemplate})
+var sCreateTargetAccountConfigurationRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateTargetAccountConfigurationRequest_clientToken})
+var sCreateTargetAccountConfigurationRequest_experimentTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplateId", ID: &i_ExperimentTemplateId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eCreateTargetAccountConfigurationRequest_experimentTemplateId})
+var sCreateTargetAccountConfigurationRequest_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_TargetAccountId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eCreateTargetAccountConfigurationRequest_accountId})
+var sCreateTargetAccountConfigurationRequest_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eCreateTargetAccountConfigurationRequest_roleArn})
+var sCreateTargetAccountConfigurationRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_TargetAccountConfigurationDescription, Type: smithy.ShapeTypeString, Ext: &eCreateTargetAccountConfigurationRequest_description})
+var sCreateTargetAccountConfigurationResponse_targetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetAccountConfiguration", ID: &iTargetAccountConfiguration, Members: &mTargetAccountConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateTargetAccountConfigurationResponse_targetAccountConfiguration})
+var sDeleteExperimentTemplateRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ExperimentTemplateId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eDeleteExperimentTemplateRequest_id})
+var sDeleteExperimentTemplateResponse_experimentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplate", ID: &iExperimentTemplate, Members: &mExperimentTemplate, Type: smithy.ShapeTypeStructure, Ext: &eDeleteExperimentTemplateResponse_experimentTemplate})
+var sDeleteTargetAccountConfigurationRequest_experimentTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplateId", ID: &i_ExperimentTemplateId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eDeleteTargetAccountConfigurationRequest_experimentTemplateId})
+var sDeleteTargetAccountConfigurationRequest_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_TargetAccountId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eDeleteTargetAccountConfigurationRequest_accountId})
+var sDeleteTargetAccountConfigurationResponse_targetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetAccountConfiguration", ID: &iTargetAccountConfiguration, Members: &mTargetAccountConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTargetAccountConfigurationResponse_targetAccountConfiguration})
+var sGetActionRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ActionId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eGetActionRequest_id})
+var sGetActionResponse_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &eGetActionResponse_action})
+var sGetExperimentRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ExperimentId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eGetExperimentRequest_id})
+var sGetExperimentResponse_experiment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experiment", ID: &iExperiment, Members: &mExperiment, Type: smithy.ShapeTypeStructure, Ext: &eGetExperimentResponse_experiment})
+var sGetExperimentTargetAccountConfigurationRequest_experimentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentId", ID: &i_ExperimentId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eGetExperimentTargetAccountConfigurationRequest_experimentId})
+var sGetExperimentTargetAccountConfigurationRequest_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_TargetAccountId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eGetExperimentTargetAccountConfigurationRequest_accountId})
+var sGetExperimentTargetAccountConfigurationResponse_targetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetAccountConfiguration", ID: &iExperimentTargetAccountConfiguration, Members: &mExperimentTargetAccountConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetExperimentTargetAccountConfigurationResponse_targetAccountConfiguration})
+var sGetExperimentTemplateRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ExperimentTemplateId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eGetExperimentTemplateRequest_id})
+var sGetExperimentTemplateResponse_experimentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplate", ID: &iExperimentTemplate, Members: &mExperimentTemplate, Type: smithy.ShapeTypeStructure, Ext: &eGetExperimentTemplateResponse_experimentTemplate})
+var sGetSafetyLeverRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_SafetyLeverId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eGetSafetyLeverRequest_id})
+var sGetSafetyLeverResponse_safetyLever = smithy.NewStaticSchema(smithy.StaticSchema{Member: "safetyLever", ID: &iSafetyLever, Members: &mSafetyLever, Type: smithy.ShapeTypeStructure, Ext: &eGetSafetyLeverResponse_safetyLever})
+var sGetTargetAccountConfigurationRequest_experimentTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplateId", ID: &i_ExperimentTemplateId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eGetTargetAccountConfigurationRequest_experimentTemplateId})
+var sGetTargetAccountConfigurationRequest_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_TargetAccountId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eGetTargetAccountConfigurationRequest_accountId})
+var sGetTargetAccountConfigurationResponse_targetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetAccountConfiguration", ID: &iTargetAccountConfiguration, Members: &mTargetAccountConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetTargetAccountConfigurationResponse_targetAccountConfiguration})
+var sGetTargetResourceTypeRequest_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_TargetResourceTypeId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eGetTargetResourceTypeRequest_resourceType})
+var sGetTargetResourceTypeResponse_targetResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetResourceType", ID: &iTargetResourceType, Members: &mTargetResourceType, Type: smithy.ShapeTypeStructure, Ext: &eGetTargetResourceTypeResponse_targetResourceType})
+var sListActionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListActionsMaxResults, Traits: &t31, Type: smithy.ShapeTypeInteger, Ext: &eListActionsRequest_maxResults})
+var sListActionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eListActionsRequest_nextToken})
+var sListActionsResponse_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &i_ActionSummaryList, Members: &m_ActionSummaryList, Type: smithy.ShapeTypeList, Ext: &eListActionsResponse_actions})
+var sListActionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListActionsResponse_nextToken})
+var sListExperimentResolvedTargetsRequest_experimentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentId", ID: &i_ExperimentId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eListExperimentResolvedTargetsRequest_experimentId})
+var sListExperimentResolvedTargetsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListExperimentResolvedTargetsMaxResults, Traits: &t31, Type: smithy.ShapeTypeInteger, Ext: &eListExperimentResolvedTargetsRequest_maxResults})
+var sListExperimentResolvedTargetsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eListExperimentResolvedTargetsRequest_nextToken})
+var sListExperimentResolvedTargetsRequest_targetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetName", ID: &i_TargetName, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eListExperimentResolvedTargetsRequest_targetName})
+var sListExperimentResolvedTargetsResponse_resolvedTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolvedTargets", ID: &i_ResolvedTargetList, Members: &m_ResolvedTargetList, Type: smithy.ShapeTypeList, Ext: &eListExperimentResolvedTargetsResponse_resolvedTargets})
+var sListExperimentResolvedTargetsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListExperimentResolvedTargetsResponse_nextToken})
+var sListExperimentsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListExperimentsMaxResults, Traits: &t31, Type: smithy.ShapeTypeInteger, Ext: &eListExperimentsRequest_maxResults})
+var sListExperimentsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eListExperimentsRequest_nextToken})
+var sListExperimentsRequest_experimentTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplateId", ID: &i_ExperimentTemplateId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eListExperimentsRequest_experimentTemplateId})
+var sListExperimentsResponse_experiments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experiments", ID: &i_ExperimentSummaryList, Members: &m_ExperimentSummaryList, Type: smithy.ShapeTypeList, Ext: &eListExperimentsResponse_experiments})
+var sListExperimentsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListExperimentsResponse_nextToken})
+var sListExperimentTargetAccountConfigurationsRequest_experimentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentId", ID: &i_ExperimentId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eListExperimentTargetAccountConfigurationsRequest_experimentId})
+var sListExperimentTargetAccountConfigurationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eListExperimentTargetAccountConfigurationsRequest_nextToken})
+var sListExperimentTargetAccountConfigurationsResponse_targetAccountConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetAccountConfigurations", ID: &i_ExperimentTargetAccountConfigurationList, Members: &m_ExperimentTargetAccountConfigurationList, Type: smithy.ShapeTypeList, Ext: &eListExperimentTargetAccountConfigurationsResponse_targetAccountConfigurations})
+var sListExperimentTargetAccountConfigurationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListExperimentTargetAccountConfigurationsResponse_nextToken})
+var sListExperimentTemplatesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListExperimentTemplatesMaxResults, Traits: &t31, Type: smithy.ShapeTypeInteger, Ext: &eListExperimentTemplatesRequest_maxResults})
+var sListExperimentTemplatesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eListExperimentTemplatesRequest_nextToken})
+var sListExperimentTemplatesResponse_experimentTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplates", ID: &i_ExperimentTemplateSummaryList, Members: &m_ExperimentTemplateSummaryList, Type: smithy.ShapeTypeList, Ext: &eListExperimentTemplatesResponse_experimentTemplates})
+var sListExperimentTemplatesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListExperimentTemplatesResponse_nextToken})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_tags})
+var sListTargetAccountConfigurationsRequest_experimentTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplateId", ID: &i_ExperimentTemplateId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eListTargetAccountConfigurationsRequest_experimentTemplateId})
+var sListTargetAccountConfigurationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListTargetAccountConfigurationsMaxResults, Traits: &t31, Type: smithy.ShapeTypeInteger, Ext: &eListTargetAccountConfigurationsRequest_maxResults})
+var sListTargetAccountConfigurationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eListTargetAccountConfigurationsRequest_nextToken})
+var sListTargetAccountConfigurationsResponse_targetAccountConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetAccountConfigurations", ID: &i_TargetAccountConfigurationList, Members: &m_TargetAccountConfigurationList, Type: smithy.ShapeTypeList, Ext: &eListTargetAccountConfigurationsResponse_targetAccountConfigurations})
+var sListTargetAccountConfigurationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTargetAccountConfigurationsResponse_nextToken})
+var sListTargetResourceTypesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListTargetResourceTypesMaxResults, Traits: &t31, Type: smithy.ShapeTypeInteger, Ext: &eListTargetResourceTypesRequest_maxResults})
+var sListTargetResourceTypesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eListTargetResourceTypesRequest_nextToken})
+var sListTargetResourceTypesResponse_targetResourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetResourceTypes", ID: &i_TargetResourceTypeSummaryList, Members: &m_TargetResourceTypeSummaryList, Type: smithy.ShapeTypeList, Ext: &eListTargetResourceTypesResponse_targetResourceTypes})
+var sListTargetResourceTypesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTargetResourceTypesResponse_nextToken})
+var sStartExperimentRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eStartExperimentRequest_clientToken})
+var sStartExperimentRequest_experimentTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplateId", ID: &i_ExperimentTemplateId, Type: smithy.ShapeTypeString, Ext: &eStartExperimentRequest_experimentTemplateId})
+var sStartExperimentRequest_experimentOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentOptions", ID: &iStartExperimentExperimentOptionsInput, Members: &mStartExperimentExperimentOptionsInput, Type: smithy.ShapeTypeStructure, Ext: &eStartExperimentRequest_experimentOptions})
+var sStartExperimentRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eStartExperimentRequest_tags})
+var sStartExperimentResponse_experiment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experiment", ID: &iExperiment, Members: &mExperiment, Type: smithy.ShapeTypeStructure, Ext: &eStartExperimentResponse_experiment})
+var sStopExperimentRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ExperimentId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eStopExperimentRequest_id})
+var sStopExperimentResponse_experiment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experiment", ID: &iExperiment, Members: &mExperiment, Type: smithy.ShapeTypeStructure, Ext: &eStopExperimentResponse_experiment})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_tags})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t35, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUpdateExperimentTemplateRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ExperimentTemplateId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eUpdateExperimentTemplateRequest_id})
+var sUpdateExperimentTemplateRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ExperimentTemplateDescription, Type: smithy.ShapeTypeString, Ext: &eUpdateExperimentTemplateRequest_description})
+var sUpdateExperimentTemplateRequest_stopConditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stopConditions", ID: &i_UpdateExperimentTemplateStopConditionInputList, Members: &m_UpdateExperimentTemplateStopConditionInputList, Type: smithy.ShapeTypeList, Ext: &eUpdateExperimentTemplateRequest_stopConditions})
+var sUpdateExperimentTemplateRequest_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_UpdateExperimentTemplateTargetInputMap, Members: &m_UpdateExperimentTemplateTargetInputMap, Type: smithy.ShapeTypeMap, Ext: &eUpdateExperimentTemplateRequest_targets})
+var sUpdateExperimentTemplateRequest_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &i_UpdateExperimentTemplateActionInputMap, Members: &m_UpdateExperimentTemplateActionInputMap, Type: smithy.ShapeTypeMap, Ext: &eUpdateExperimentTemplateRequest_actions})
+var sUpdateExperimentTemplateRequest_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eUpdateExperimentTemplateRequest_roleArn})
+var sUpdateExperimentTemplateRequest_logConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logConfiguration", ID: &iUpdateExperimentTemplateLogConfigurationInput, Members: &mUpdateExperimentTemplateLogConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExperimentTemplateRequest_logConfiguration})
+var sUpdateExperimentTemplateRequest_experimentOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentOptions", ID: &iUpdateExperimentTemplateExperimentOptionsInput, Members: &mUpdateExperimentTemplateExperimentOptionsInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExperimentTemplateRequest_experimentOptions})
+var sUpdateExperimentTemplateRequest_experimentReportConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentReportConfiguration", ID: &iUpdateExperimentTemplateReportConfigurationInput, Members: &mUpdateExperimentTemplateReportConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExperimentTemplateRequest_experimentReportConfiguration})
+var sUpdateExperimentTemplateResponse_experimentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplate", ID: &iExperimentTemplate, Members: &mExperimentTemplate, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExperimentTemplateResponse_experimentTemplate})
+var sUpdateSafetyLeverStateRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_SafetyLeverId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eUpdateSafetyLeverStateRequest_id})
+var sUpdateSafetyLeverStateRequest_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iUpdateSafetyLeverStateInput, Members: &mUpdateSafetyLeverStateInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSafetyLeverStateRequest_state})
+var sUpdateSafetyLeverStateResponse_safetyLever = smithy.NewStaticSchema(smithy.StaticSchema{Member: "safetyLever", ID: &iSafetyLever, Members: &mSafetyLever, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSafetyLeverStateResponse_safetyLever})
+var sUpdateTargetAccountConfigurationRequest_experimentTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "experimentTemplateId", ID: &i_ExperimentTemplateId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eUpdateTargetAccountConfigurationRequest_experimentTemplateId})
+var sUpdateTargetAccountConfigurationRequest_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_TargetAccountId, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eUpdateTargetAccountConfigurationRequest_accountId})
+var sUpdateTargetAccountConfigurationRequest_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eUpdateTargetAccountConfigurationRequest_roleArn})
+var sUpdateTargetAccountConfigurationRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_TargetAccountConfigurationDescription, Type: smithy.ShapeTypeString, Ext: &eUpdateTargetAccountConfigurationRequest_description})
+var sUpdateTargetAccountConfigurationResponse_targetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetAccountConfiguration", ID: &iTargetAccountConfiguration, Members: &mTargetAccountConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTargetAccountConfigurationResponse_targetAccountConfiguration})
 
 var CreateExperimentTemplate = &sCreateExperimentTemplate
 

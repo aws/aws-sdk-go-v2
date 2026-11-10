@@ -7,9 +7,60 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [52]smithy.SchemaExtensions
+var (
+	eQueryForecast                                smithy.SchemaExtensions
+	eQueryWhatIfForecast                          smithy.SchemaExtensions
+	e_AmazonForecastRuntime                       smithy.SchemaExtensions
+	e_Arn                                         smithy.SchemaExtensions
+	e_AttributeName                               smithy.SchemaExtensions
+	e_AttributeValue                              smithy.SchemaExtensions
+	eDataPoint                                    smithy.SchemaExtensions
+	eDataPoint_Timestamp                          smithy.SchemaExtensions
+	eDataPoint_Value                              smithy.SchemaExtensions
+	e_DateTime                                    smithy.SchemaExtensions
+	e_Double                                      smithy.SchemaExtensions
+	e_ErrorMessage                                smithy.SchemaExtensions
+	e_Filters                                     smithy.SchemaExtensions
+	e_Filters_key                                 smithy.SchemaExtensions
+	e_Filters_value                               smithy.SchemaExtensions
+	eForecast                                     smithy.SchemaExtensions
+	eForecast_Predictions                         smithy.SchemaExtensions
+	eInvalidInputException                        smithy.SchemaExtensions
+	eInvalidInputException_Message                smithy.SchemaExtensions
+	eInvalidNextTokenException                    smithy.SchemaExtensions
+	eInvalidNextTokenException_Message            smithy.SchemaExtensions
+	eLimitExceededException                       smithy.SchemaExtensions
+	eLimitExceededException_Message               smithy.SchemaExtensions
+	e_LongArn                                     smithy.SchemaExtensions
+	e_NextToken                                   smithy.SchemaExtensions
+	e_Predictions                                 smithy.SchemaExtensions
+	e_Predictions_key                             smithy.SchemaExtensions
+	e_Predictions_value                           smithy.SchemaExtensions
+	eResourceInUseException                       smithy.SchemaExtensions
+	eResourceInUseException_Message               smithy.SchemaExtensions
+	eResourceNotFoundException                    smithy.SchemaExtensions
+	eResourceNotFoundException_Message            smithy.SchemaExtensions
+	e_Statistic                                   smithy.SchemaExtensions
+	e_TimeSeries                                  smithy.SchemaExtensions
+	e_TimeSeries_member                           smithy.SchemaExtensions
+	e_Timestamp                                   smithy.SchemaExtensions
+	eQueryForecastRequest                         smithy.SchemaExtensions
+	eQueryForecastRequest_ForecastArn             smithy.SchemaExtensions
+	eQueryForecastRequest_StartDate               smithy.SchemaExtensions
+	eQueryForecastRequest_EndDate                 smithy.SchemaExtensions
+	eQueryForecastRequest_Filters                 smithy.SchemaExtensions
+	eQueryForecastRequest_NextToken               smithy.SchemaExtensions
+	eQueryForecastResponse                        smithy.SchemaExtensions
+	eQueryForecastResponse_Forecast               smithy.SchemaExtensions
+	eQueryWhatIfForecastRequest                   smithy.SchemaExtensions
+	eQueryWhatIfForecastRequest_WhatIfForecastArn smithy.SchemaExtensions
+	eQueryWhatIfForecastRequest_StartDate         smithy.SchemaExtensions
+	eQueryWhatIfForecastRequest_EndDate           smithy.SchemaExtensions
+	eQueryWhatIfForecastRequest_Filters           smithy.SchemaExtensions
+	eQueryWhatIfForecastRequest_NextToken         smithy.SchemaExtensions
+	eQueryWhatIfForecastResponse                  smithy.SchemaExtensions
+	eQueryWhatIfForecastResponse_Forecast         smithy.SchemaExtensions
+)
 
 var (
 	iQueryForecast               = smithy.ShapeID{Namespace: "com.amazonaws.forecastquery", Name: "QueryForecast"}
@@ -60,59 +111,59 @@ var mQueryForecastResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sQuery
 var mQueryWhatIfForecastRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryWhatIfForecastRequest_WhatIfForecastArn, &sQueryWhatIfForecastRequest_StartDate, &sQueryWhatIfForecastRequest_EndDate, &sQueryWhatIfForecastRequest_Filters, &sQueryWhatIfForecastRequest_NextToken}}
 var mQueryWhatIfForecastResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryWhatIfForecastResponse_Forecast}}
 
-var sQueryForecast = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryForecast, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sQueryWhatIfForecast = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryWhatIfForecast, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var s_AmazonForecastRuntime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonForecastRuntime, Type: smithy.ShapeTypeService, Ext: &ext[2]})
-var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[3]})
-var s_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &ext[4]})
-var s_AttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeValue, Type: smithy.ShapeTypeString, Ext: &ext[5]})
-var sDataPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataPoint, Members: &mDataPoint, Type: smithy.ShapeTypeStructure, Ext: &ext[6]})
-var s_DateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateTime, Type: smithy.ShapeTypeString, Ext: &ext[9]})
-var s_Double = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &ext[10]})
-var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[11]})
-var s_Filters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeMap, Ext: &ext[12]})
-var sForecast = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForecast, Members: &mForecast, Type: smithy.ShapeTypeStructure, Ext: &ext[15]})
-var sInvalidInputException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidInputException, Members: &mInvalidInputException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[17]})
-var sInvalidNextTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidNextTokenException, Members: &mInvalidNextTokenException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[19]})
-var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[21]})
-var s_LongArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LongArn, Type: smithy.ShapeTypeString, Ext: &ext[23]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[24]})
-var s_Predictions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Predictions, Members: &m_Predictions, Type: smithy.ShapeTypeMap, Ext: &ext[25]})
-var sResourceInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceInUseException, Members: &mResourceInUseException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[30]})
-var s_Statistic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Statistic, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var s_TimeSeries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeSeries, Members: &m_TimeSeries, Type: smithy.ShapeTypeList, Ext: &ext[33]})
-var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var sQueryForecastRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryForecastRequest, Members: &mQueryForecastRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[36]})
-var sQueryForecastResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryForecastResponse, Members: &mQueryForecastResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[42]})
-var sQueryWhatIfForecastRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryWhatIfForecastRequest, Members: &mQueryWhatIfForecastRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[44]})
-var sQueryWhatIfForecastResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryWhatIfForecastResponse, Members: &mQueryWhatIfForecastResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[50]})
+var sQueryForecast = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryForecast, Type: smithy.ShapeTypeOperation, Ext: &eQueryForecast})
+var sQueryWhatIfForecast = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryWhatIfForecast, Type: smithy.ShapeTypeOperation, Ext: &eQueryWhatIfForecast})
+var s_AmazonForecastRuntime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonForecastRuntime, Type: smithy.ShapeTypeService, Ext: &e_AmazonForecastRuntime})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var s_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &e_AttributeName})
+var s_AttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeValue, Type: smithy.ShapeTypeString, Ext: &e_AttributeValue})
+var sDataPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataPoint, Members: &mDataPoint, Type: smithy.ShapeTypeStructure, Ext: &eDataPoint})
+var s_DateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateTime, Type: smithy.ShapeTypeString, Ext: &e_DateTime})
+var s_Double = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &e_Double})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var s_Filters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeMap, Ext: &e_Filters})
+var sForecast = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForecast, Members: &mForecast, Type: smithy.ShapeTypeStructure, Ext: &eForecast})
+var sInvalidInputException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidInputException, Members: &mInvalidInputException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInvalidInputException})
+var sInvalidNextTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidNextTokenException, Members: &mInvalidNextTokenException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInvalidNextTokenException})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var s_LongArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LongArn, Type: smithy.ShapeTypeString, Ext: &e_LongArn})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var s_Predictions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Predictions, Members: &m_Predictions, Type: smithy.ShapeTypeMap, Ext: &e_Predictions})
+var sResourceInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceInUseException, Members: &mResourceInUseException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eResourceInUseException})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var s_Statistic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Statistic, Type: smithy.ShapeTypeString, Ext: &e_Statistic})
+var s_TimeSeries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeSeries, Members: &m_TimeSeries, Type: smithy.ShapeTypeList, Ext: &e_TimeSeries})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeString, Ext: &e_Timestamp})
+var sQueryForecastRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryForecastRequest, Members: &mQueryForecastRequest, Type: smithy.ShapeTypeStructure, Ext: &eQueryForecastRequest})
+var sQueryForecastResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryForecastResponse, Members: &mQueryForecastResponse, Type: smithy.ShapeTypeStructure, Ext: &eQueryForecastResponse})
+var sQueryWhatIfForecastRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryWhatIfForecastRequest, Members: &mQueryWhatIfForecastRequest, Type: smithy.ShapeTypeStructure, Ext: &eQueryWhatIfForecastRequest})
+var sQueryWhatIfForecastResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryWhatIfForecastResponse, Members: &mQueryWhatIfForecastResponse, Type: smithy.ShapeTypeStructure, Ext: &eQueryWhatIfForecastResponse})
 
-var sDataPoint_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeString, Ext: &ext[7]})
-var sDataPoint_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &ext[8]})
-var s_Filters_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &ext[13]})
-var s_Filters_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_AttributeValue, Type: smithy.ShapeTypeString, Ext: &ext[14]})
-var sForecast_Predictions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Predictions", ID: &i_Predictions, Members: &m_Predictions, Type: smithy.ShapeTypeMap, Ext: &ext[16]})
-var sInvalidInputException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[18]})
-var sInvalidNextTokenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[20]})
-var sLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[22]})
-var s_Predictions_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Statistic, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var s_Predictions_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TimeSeries, Members: &m_TimeSeries, Type: smithy.ShapeTypeList, Ext: &ext[27]})
-var sResourceInUseException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[29]})
-var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var s_TimeSeries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataPoint, Members: &mDataPoint, Type: smithy.ShapeTypeStructure, Ext: &ext[34]})
-var sQueryForecastRequest_ForecastArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[37]})
-var sQueryForecastRequest_StartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDate", ID: &i_DateTime, Type: smithy.ShapeTypeString, Ext: &ext[38]})
-var sQueryForecastRequest_EndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndDate", ID: &i_DateTime, Type: smithy.ShapeTypeString, Ext: &ext[39]})
-var sQueryForecastRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeMap, Ext: &ext[40]})
-var sQueryForecastRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[41]})
-var sQueryForecastResponse_Forecast = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Forecast", ID: &iForecast, Members: &mForecast, Type: smithy.ShapeTypeStructure, Ext: &ext[43]})
-var sQueryWhatIfForecastRequest_WhatIfForecastArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfForecastArn", ID: &i_LongArn, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var sQueryWhatIfForecastRequest_StartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDate", ID: &i_DateTime, Type: smithy.ShapeTypeString, Ext: &ext[46]})
-var sQueryWhatIfForecastRequest_EndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndDate", ID: &i_DateTime, Type: smithy.ShapeTypeString, Ext: &ext[47]})
-var sQueryWhatIfForecastRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeMap, Ext: &ext[48]})
-var sQueryWhatIfForecastRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[49]})
-var sQueryWhatIfForecastResponse_Forecast = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Forecast", ID: &iForecast, Members: &mForecast, Type: smithy.ShapeTypeStructure, Ext: &ext[51]})
+var sDataPoint_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeString, Ext: &eDataPoint_Timestamp})
+var sDataPoint_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eDataPoint_Value})
+var s_Filters_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &e_Filters_key})
+var s_Filters_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_AttributeValue, Type: smithy.ShapeTypeString, Ext: &e_Filters_value})
+var sForecast_Predictions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Predictions", ID: &i_Predictions, Members: &m_Predictions, Type: smithy.ShapeTypeMap, Ext: &eForecast_Predictions})
+var sInvalidInputException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidInputException_Message})
+var sInvalidNextTokenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidNextTokenException_Message})
+var sLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_Message})
+var s_Predictions_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Statistic, Type: smithy.ShapeTypeString, Ext: &e_Predictions_key})
+var s_Predictions_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TimeSeries, Members: &m_TimeSeries, Type: smithy.ShapeTypeList, Ext: &e_Predictions_value})
+var sResourceInUseException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceInUseException_Message})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var s_TimeSeries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataPoint, Members: &mDataPoint, Type: smithy.ShapeTypeStructure, Ext: &e_TimeSeries_member})
+var sQueryForecastRequest_ForecastArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eQueryForecastRequest_ForecastArn})
+var sQueryForecastRequest_StartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDate", ID: &i_DateTime, Type: smithy.ShapeTypeString, Ext: &eQueryForecastRequest_StartDate})
+var sQueryForecastRequest_EndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndDate", ID: &i_DateTime, Type: smithy.ShapeTypeString, Ext: &eQueryForecastRequest_EndDate})
+var sQueryForecastRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeMap, Ext: &eQueryForecastRequest_Filters})
+var sQueryForecastRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eQueryForecastRequest_NextToken})
+var sQueryForecastResponse_Forecast = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Forecast", ID: &iForecast, Members: &mForecast, Type: smithy.ShapeTypeStructure, Ext: &eQueryForecastResponse_Forecast})
+var sQueryWhatIfForecastRequest_WhatIfForecastArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhatIfForecastArn", ID: &i_LongArn, Type: smithy.ShapeTypeString, Ext: &eQueryWhatIfForecastRequest_WhatIfForecastArn})
+var sQueryWhatIfForecastRequest_StartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDate", ID: &i_DateTime, Type: smithy.ShapeTypeString, Ext: &eQueryWhatIfForecastRequest_StartDate})
+var sQueryWhatIfForecastRequest_EndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndDate", ID: &i_DateTime, Type: smithy.ShapeTypeString, Ext: &eQueryWhatIfForecastRequest_EndDate})
+var sQueryWhatIfForecastRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeMap, Ext: &eQueryWhatIfForecastRequest_Filters})
+var sQueryWhatIfForecastRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eQueryWhatIfForecastRequest_NextToken})
+var sQueryWhatIfForecastResponse_Forecast = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Forecast", ID: &iForecast, Members: &mForecast, Type: smithy.ShapeTypeStructure, Ext: &eQueryWhatIfForecastResponse_Forecast})
 
 var QueryForecast = &sQueryForecast
 

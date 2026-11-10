@@ -7,9 +7,49 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [41]smithy.SchemaExtensions
+var (
+	eGetMedia                                 smithy.SchemaExtensions
+	e_AWSAcuityInletService                   smithy.SchemaExtensions
+	eClientLimitExceededException             smithy.SchemaExtensions
+	eClientLimitExceededException_Message     smithy.SchemaExtensions
+	eConnectionLimitExceededException         smithy.SchemaExtensions
+	eConnectionLimitExceededException_Message smithy.SchemaExtensions
+	e_ContentType                             smithy.SchemaExtensions
+	e_ContinuationToken                       smithy.SchemaExtensions
+	e_ErrorMessage                            smithy.SchemaExtensions
+	e_FragmentNumberString                    smithy.SchemaExtensions
+	eInvalidArgumentException                 smithy.SchemaExtensions
+	eInvalidArgumentException_Message         smithy.SchemaExtensions
+	eInvalidEndpointException                 smithy.SchemaExtensions
+	eInvalidEndpointException_Message         smithy.SchemaExtensions
+	eNotAuthorizedException                   smithy.SchemaExtensions
+	eNotAuthorizedException_Message           smithy.SchemaExtensions
+	e_Payload                                 smithy.SchemaExtensions
+	e_ResourceARN                             smithy.SchemaExtensions
+	eResourceNotFoundException                smithy.SchemaExtensions
+	eResourceNotFoundException_Message        smithy.SchemaExtensions
+	eStartSelector                            smithy.SchemaExtensions
+	eStartSelector_StartSelectorType          smithy.SchemaExtensions
+	eStartSelector_AfterFragmentNumber        smithy.SchemaExtensions
+	eStartSelector_StartTimestamp             smithy.SchemaExtensions
+	eStartSelector_ContinuationToken          smithy.SchemaExtensions
+	eStartSelectorType                        smithy.SchemaExtensions
+	eStartSelectorType_FRAGMENT_NUMBER        smithy.SchemaExtensions
+	eStartSelectorType_SERVER_TIMESTAMP       smithy.SchemaExtensions
+	eStartSelectorType_PRODUCER_TIMESTAMP     smithy.SchemaExtensions
+	eStartSelectorType_NOW                    smithy.SchemaExtensions
+	eStartSelectorType_EARLIEST               smithy.SchemaExtensions
+	eStartSelectorType_CONTINUATION_TOKEN     smithy.SchemaExtensions
+	e_StreamName                              smithy.SchemaExtensions
+	e_Timestamp                               smithy.SchemaExtensions
+	eGetMediaInput                            smithy.SchemaExtensions
+	eGetMediaInput_StreamName                 smithy.SchemaExtensions
+	eGetMediaInput_StreamARN                  smithy.SchemaExtensions
+	eGetMediaInput_StartSelector              smithy.SchemaExtensions
+	eGetMediaOutput                           smithy.SchemaExtensions
+	eGetMediaOutput_ContentType               smithy.SchemaExtensions
+	eGetMediaOutput_Payload                   smithy.SchemaExtensions
+)
 
 var (
 	iGetMedia                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideomedia", Name: "GetMedia"}
@@ -56,48 +96,48 @@ var mStartSelectorType = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSele
 var mGetMediaInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMediaInput_StreamName, &sGetMediaInput_StreamARN, &sGetMediaInput_StartSelector}}
 var mGetMediaOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMediaOutput_ContentType, &sGetMediaOutput_Payload}}
 
-var sGetMedia = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMedia, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var s_AWSAcuityInletService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSAcuityInletService, Type: smithy.ShapeTypeService, Ext: &ext[1]})
-var sClientLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientLimitExceededException, Members: &mClientLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[2]})
-var sConnectionLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionLimitExceededException, Members: &mConnectionLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[4]})
-var s_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContentType, Type: smithy.ShapeTypeString, Ext: &ext[6]})
-var s_ContinuationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContinuationToken, Type: smithy.ShapeTypeString, Ext: &ext[7]})
-var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[8]})
-var s_FragmentNumberString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FragmentNumberString, Type: smithy.ShapeTypeString, Ext: &ext[9]})
-var sInvalidArgumentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidArgumentException, Members: &mInvalidArgumentException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[10]})
-var sInvalidEndpointException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidEndpointException, Members: &mInvalidEndpointException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[12]})
-var sNotAuthorizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotAuthorizedException, Members: &mNotAuthorizedException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[14]})
-var s_Payload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Payload, Traits: &t3, Type: smithy.ShapeTypeBlob, Ext: &ext[16]})
-var s_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceARN, Type: smithy.ShapeTypeString, Ext: &ext[17]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &ext[18]})
-var sStartSelector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSelector, Members: &mStartSelector, Type: smithy.ShapeTypeStructure, Ext: &ext[20]})
-var sStartSelectorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSelectorType, Members: &mStartSelectorType, Type: smithy.ShapeTypeEnum, Ext: &ext[25]})
-var s_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamName, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[33]})
-var sGetMediaInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMediaInput, Members: &mGetMediaInput, Type: smithy.ShapeTypeStructure, Ext: &ext[34]})
-var sGetMediaOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMediaOutput, Members: &mGetMediaOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[38]})
+var sGetMedia = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMedia, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eGetMedia})
+var s_AWSAcuityInletService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSAcuityInletService, Type: smithy.ShapeTypeService, Ext: &e_AWSAcuityInletService})
+var sClientLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientLimitExceededException, Members: &mClientLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eClientLimitExceededException})
+var sConnectionLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionLimitExceededException, Members: &mConnectionLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eConnectionLimitExceededException})
+var s_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContentType, Type: smithy.ShapeTypeString, Ext: &e_ContentType})
+var s_ContinuationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContinuationToken, Type: smithy.ShapeTypeString, Ext: &e_ContinuationToken})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var s_FragmentNumberString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FragmentNumberString, Type: smithy.ShapeTypeString, Ext: &e_FragmentNumberString})
+var sInvalidArgumentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidArgumentException, Members: &mInvalidArgumentException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidArgumentException})
+var sInvalidEndpointException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidEndpointException, Members: &mInvalidEndpointException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidEndpointException})
+var sNotAuthorizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotAuthorizedException, Members: &mNotAuthorizedException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eNotAuthorizedException})
+var s_Payload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Payload, Traits: &t3, Type: smithy.ShapeTypeBlob, Ext: &e_Payload})
+var s_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceARN, Type: smithy.ShapeTypeString, Ext: &e_ResourceARN})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sStartSelector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSelector, Members: &mStartSelector, Type: smithy.ShapeTypeStructure, Ext: &eStartSelector})
+var sStartSelectorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSelectorType, Members: &mStartSelectorType, Type: smithy.ShapeTypeEnum, Ext: &eStartSelectorType})
+var s_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamName, Type: smithy.ShapeTypeString, Ext: &e_StreamName})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var sGetMediaInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMediaInput, Members: &mGetMediaInput, Type: smithy.ShapeTypeStructure, Ext: &eGetMediaInput})
+var sGetMediaOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMediaOutput, Members: &mGetMediaOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetMediaOutput})
 
-var sClientLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[3]})
-var sConnectionLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[5]})
-var sInvalidArgumentException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[11]})
-var sInvalidEndpointException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[13]})
-var sNotAuthorizedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[15]})
-var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[19]})
-var sStartSelector_StartSelectorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartSelectorType", ID: &iStartSelectorType, Members: &mStartSelectorType, Type: smithy.ShapeTypeEnum, Ext: &ext[21]})
-var sStartSelector_AfterFragmentNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterFragmentNumber", ID: &i_FragmentNumberString, Type: smithy.ShapeTypeString, Ext: &ext[22]})
-var sStartSelector_StartTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[23]})
-var sStartSelector_ContinuationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContinuationToken", ID: &i_ContinuationToken, Type: smithy.ShapeTypeString, Ext: &ext[24]})
-var sStartSelectorType_FRAGMENT_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FRAGMENT_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[26]})
-var sStartSelectorType_SERVER_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVER_TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[27]})
-var sStartSelectorType_PRODUCER_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRODUCER_TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
-var sStartSelectorType_NOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[29]})
-var sStartSelectorType_EARLIEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EARLIEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[30]})
-var sStartSelectorType_CONTINUATION_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTINUATION_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[31]})
-var sGetMediaInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var sGetMediaInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var sGetMediaInput_StartSelector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartSelector", ID: &iStartSelector, Members: &mStartSelector, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var sGetMediaOutput_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_ContentType, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &ext[39]})
-var sGetMediaOutput_Payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Payload", ID: &i_Payload, Traits: &t6, Type: smithy.ShapeTypeBlob, Ext: &ext[40]})
+var sClientLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eClientLimitExceededException_Message})
+var sConnectionLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eConnectionLimitExceededException_Message})
+var sInvalidArgumentException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidArgumentException_Message})
+var sInvalidEndpointException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidEndpointException_Message})
+var sNotAuthorizedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eNotAuthorizedException_Message})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sStartSelector_StartSelectorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartSelectorType", ID: &iStartSelectorType, Members: &mStartSelectorType, Type: smithy.ShapeTypeEnum, Ext: &eStartSelector_StartSelectorType})
+var sStartSelector_AfterFragmentNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterFragmentNumber", ID: &i_FragmentNumberString, Type: smithy.ShapeTypeString, Ext: &eStartSelector_AfterFragmentNumber})
+var sStartSelector_StartTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eStartSelector_StartTimestamp})
+var sStartSelector_ContinuationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContinuationToken", ID: &i_ContinuationToken, Type: smithy.ShapeTypeString, Ext: &eStartSelector_ContinuationToken})
+var sStartSelectorType_FRAGMENT_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FRAGMENT_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStartSelectorType_FRAGMENT_NUMBER})
+var sStartSelectorType_SERVER_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVER_TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStartSelectorType_SERVER_TIMESTAMP})
+var sStartSelectorType_PRODUCER_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRODUCER_TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStartSelectorType_PRODUCER_TIMESTAMP})
+var sStartSelectorType_NOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStartSelectorType_NOW})
+var sStartSelectorType_EARLIEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EARLIEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStartSelectorType_EARLIEST})
+var sStartSelectorType_CONTINUATION_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTINUATION_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStartSelectorType_CONTINUATION_TOKEN})
+var sGetMediaInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString, Ext: &eGetMediaInput_StreamName})
+var sGetMediaInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString, Ext: &eGetMediaInput_StreamARN})
+var sGetMediaInput_StartSelector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartSelector", ID: &iStartSelector, Members: &mStartSelector, Type: smithy.ShapeTypeStructure, Ext: &eGetMediaInput_StartSelector})
+var sGetMediaOutput_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_ContentType, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &eGetMediaOutput_ContentType})
+var sGetMediaOutput_Payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Payload", ID: &i_Payload, Traits: &t6, Type: smithy.ShapeTypeBlob, Ext: &eGetMediaOutput_Payload})
 
 var GetMedia = &sGetMedia
 

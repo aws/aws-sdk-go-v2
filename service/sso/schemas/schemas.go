@@ -7,9 +7,72 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [64]smithy.SchemaExtensions
+var (
+	eGetRoleCredentials                         smithy.SchemaExtensions
+	eListAccountRoles                           smithy.SchemaExtensions
+	eListAccounts                               smithy.SchemaExtensions
+	eLogout                                     smithy.SchemaExtensions
+	e_SWBPortalService                          smithy.SchemaExtensions
+	e_AccessKeyType                             smithy.SchemaExtensions
+	e_AccessTokenType                           smithy.SchemaExtensions
+	e_AccountIdType                             smithy.SchemaExtensions
+	eAccountInfo                                smithy.SchemaExtensions
+	eAccountInfo_accountId                      smithy.SchemaExtensions
+	eAccountInfo_accountName                    smithy.SchemaExtensions
+	eAccountInfo_emailAddress                   smithy.SchemaExtensions
+	e_AccountListType                           smithy.SchemaExtensions
+	e_AccountListType_member                    smithy.SchemaExtensions
+	e_AccountNameType                           smithy.SchemaExtensions
+	e_EmailAddressType                          smithy.SchemaExtensions
+	e_ErrorDescription                          smithy.SchemaExtensions
+	e_ExpirationTimestampType                   smithy.SchemaExtensions
+	eInvalidRequestException                    smithy.SchemaExtensions
+	eInvalidRequestException_message            smithy.SchemaExtensions
+	e_MaxResultType                             smithy.SchemaExtensions
+	e_NextTokenType                             smithy.SchemaExtensions
+	eResourceNotFoundException                  smithy.SchemaExtensions
+	eResourceNotFoundException_message          smithy.SchemaExtensions
+	eRoleCredentials                            smithy.SchemaExtensions
+	eRoleCredentials_accessKeyId                smithy.SchemaExtensions
+	eRoleCredentials_secretAccessKey            smithy.SchemaExtensions
+	eRoleCredentials_sessionToken               smithy.SchemaExtensions
+	eRoleCredentials_expiration                 smithy.SchemaExtensions
+	eRoleInfo                                   smithy.SchemaExtensions
+	eRoleInfo_roleName                          smithy.SchemaExtensions
+	eRoleInfo_accountId                         smithy.SchemaExtensions
+	e_RoleListType                              smithy.SchemaExtensions
+	e_RoleListType_member                       smithy.SchemaExtensions
+	e_RoleNameType                              smithy.SchemaExtensions
+	e_SecretAccessKeyType                       smithy.SchemaExtensions
+	e_SessionTokenType                          smithy.SchemaExtensions
+	eTooManyRequestsException                   smithy.SchemaExtensions
+	eTooManyRequestsException_message           smithy.SchemaExtensions
+	eUnauthorizedException                      smithy.SchemaExtensions
+	eUnauthorizedException_message              smithy.SchemaExtensions
+	eGetRoleCredentialsRequest                  smithy.SchemaExtensions
+	eGetRoleCredentialsRequest_roleName         smithy.SchemaExtensions
+	eGetRoleCredentialsRequest_accountId        smithy.SchemaExtensions
+	eGetRoleCredentialsRequest_accessToken      smithy.SchemaExtensions
+	eGetRoleCredentialsResponse                 smithy.SchemaExtensions
+	eGetRoleCredentialsResponse_roleCredentials smithy.SchemaExtensions
+	eListAccountRolesRequest                    smithy.SchemaExtensions
+	eListAccountRolesRequest_nextToken          smithy.SchemaExtensions
+	eListAccountRolesRequest_maxResults         smithy.SchemaExtensions
+	eListAccountRolesRequest_accessToken        smithy.SchemaExtensions
+	eListAccountRolesRequest_accountId          smithy.SchemaExtensions
+	eListAccountRolesResponse                   smithy.SchemaExtensions
+	eListAccountRolesResponse_nextToken         smithy.SchemaExtensions
+	eListAccountRolesResponse_roleList          smithy.SchemaExtensions
+	eListAccountsRequest                        smithy.SchemaExtensions
+	eListAccountsRequest_nextToken              smithy.SchemaExtensions
+	eListAccountsRequest_maxResults             smithy.SchemaExtensions
+	eListAccountsRequest_accessToken            smithy.SchemaExtensions
+	eListAccountsResponse                       smithy.SchemaExtensions
+	eListAccountsResponse_nextToken             smithy.SchemaExtensions
+	eListAccountsResponse_accountList           smithy.SchemaExtensions
+	eLogoutRequest                              smithy.SchemaExtensions
+	eLogoutRequest_accessToken                  smithy.SchemaExtensions
+)
 
 var (
 	iGetRoleCredentials         = smithy.ShapeID{Namespace: "com.amazonaws.sso", Name: "GetRoleCredentials"}
@@ -88,71 +151,71 @@ var mListAccountsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAcc
 var mListAccountsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAccountsResponse_nextToken, &sListAccountsResponse_accountList}}
 var mLogoutRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sLogoutRequest_accessToken}}
 
-var sGetRoleCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoleCredentials, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sListAccountRoles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccountRoles, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sListAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccounts, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sLogout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogout, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var s_SWBPortalService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SWBPortalService, Type: smithy.ShapeTypeService, Ext: &ext[4]})
-var s_AccessKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessKeyType, Type: smithy.ShapeTypeString, Ext: &ext[5]})
-var s_AccessTokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessTokenType, Traits: &t4, Type: smithy.ShapeTypeString, Ext: &ext[6]})
-var s_AccountIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountIdType, Type: smithy.ShapeTypeString, Ext: &ext[7]})
-var sAccountInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountInfo, Members: &mAccountInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[8]})
-var s_AccountListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountListType, Members: &m_AccountListType, Type: smithy.ShapeTypeList, Ext: &ext[12]})
-var s_AccountNameType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountNameType, Type: smithy.ShapeTypeString, Ext: &ext[14]})
-var s_EmailAddressType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailAddressType, Type: smithy.ShapeTypeString, Ext: &ext[15]})
-var s_ErrorDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &ext[16]})
-var s_ExpirationTimestampType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpirationTimestampType, Type: smithy.ShapeTypeLong, Ext: &ext[17]})
-var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &ext[18]})
-var s_MaxResultType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultType, Type: smithy.ShapeTypeInteger, Ext: &ext[20]})
-var s_NextTokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextTokenType, Type: smithy.ShapeTypeString, Ext: &ext[21]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &ext[22]})
-var sRoleCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoleCredentials, Members: &mRoleCredentials, Type: smithy.ShapeTypeStructure, Ext: &ext[24]})
-var sRoleInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoleInfo, Members: &mRoleInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[29]})
-var s_RoleListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleListType, Members: &m_RoleListType, Type: smithy.ShapeTypeList, Ext: &ext[32]})
-var s_RoleNameType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleNameType, Type: smithy.ShapeTypeString, Ext: &ext[34]})
-var s_SecretAccessKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretAccessKeyType, Traits: &t4, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var s_SessionTokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionTokenType, Traits: &t4, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var sUnauthorizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthorizedException, Members: &mUnauthorizedException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &ext[39]})
-var sGetRoleCredentialsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoleCredentialsRequest, Members: &mGetRoleCredentialsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[41]})
-var sGetRoleCredentialsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoleCredentialsResponse, Members: &mGetRoleCredentialsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[45]})
-var sListAccountRolesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccountRolesRequest, Members: &mListAccountRolesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[47]})
-var sListAccountRolesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccountRolesResponse, Members: &mListAccountRolesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[52]})
-var sListAccountsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccountsRequest, Members: &mListAccountsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[55]})
-var sListAccountsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccountsResponse, Members: &mListAccountsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[59]})
-var sLogoutRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogoutRequest, Members: &mLogoutRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[62]})
+var sGetRoleCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoleCredentials, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eGetRoleCredentials})
+var sListAccountRoles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccountRoles, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eListAccountRoles})
+var sListAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccounts, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eListAccounts})
+var sLogout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogout, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eLogout})
+var s_SWBPortalService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SWBPortalService, Type: smithy.ShapeTypeService, Ext: &e_SWBPortalService})
+var s_AccessKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessKeyType, Type: smithy.ShapeTypeString, Ext: &e_AccessKeyType})
+var s_AccessTokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessTokenType, Traits: &t4, Type: smithy.ShapeTypeString, Ext: &e_AccessTokenType})
+var s_AccountIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountIdType, Type: smithy.ShapeTypeString, Ext: &e_AccountIdType})
+var sAccountInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountInfo, Members: &mAccountInfo, Type: smithy.ShapeTypeStructure, Ext: &eAccountInfo})
+var s_AccountListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountListType, Members: &m_AccountListType, Type: smithy.ShapeTypeList, Ext: &e_AccountListType})
+var s_AccountNameType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountNameType, Type: smithy.ShapeTypeString, Ext: &e_AccountNameType})
+var s_EmailAddressType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailAddressType, Type: smithy.ShapeTypeString, Ext: &e_EmailAddressType})
+var s_ErrorDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &e_ErrorDescription})
+var s_ExpirationTimestampType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpirationTimestampType, Type: smithy.ShapeTypeLong, Ext: &e_ExpirationTimestampType})
+var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRequestException})
+var s_MaxResultType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultType, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResultType})
+var s_NextTokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextTokenType, Type: smithy.ShapeTypeString, Ext: &e_NextTokenType})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sRoleCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoleCredentials, Members: &mRoleCredentials, Type: smithy.ShapeTypeStructure, Ext: &eRoleCredentials})
+var sRoleInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoleInfo, Members: &mRoleInfo, Type: smithy.ShapeTypeStructure, Ext: &eRoleInfo})
+var s_RoleListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleListType, Members: &m_RoleListType, Type: smithy.ShapeTypeList, Ext: &e_RoleListType})
+var s_RoleNameType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleNameType, Type: smithy.ShapeTypeString, Ext: &e_RoleNameType})
+var s_SecretAccessKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretAccessKeyType, Traits: &t4, Type: smithy.ShapeTypeString, Ext: &e_SecretAccessKeyType})
+var s_SessionTokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionTokenType, Traits: &t4, Type: smithy.ShapeTypeString, Ext: &e_SessionTokenType})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eTooManyRequestsException})
+var sUnauthorizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthorizedException, Members: &mUnauthorizedException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eUnauthorizedException})
+var sGetRoleCredentialsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoleCredentialsRequest, Members: &mGetRoleCredentialsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRoleCredentialsRequest})
+var sGetRoleCredentialsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoleCredentialsResponse, Members: &mGetRoleCredentialsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRoleCredentialsResponse})
+var sListAccountRolesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccountRolesRequest, Members: &mListAccountRolesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAccountRolesRequest})
+var sListAccountRolesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccountRolesResponse, Members: &mListAccountRolesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAccountRolesResponse})
+var sListAccountsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccountsRequest, Members: &mListAccountsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAccountsRequest})
+var sListAccountsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccountsResponse, Members: &mListAccountsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAccountsResponse})
+var sLogoutRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogoutRequest, Members: &mLogoutRequest, Type: smithy.ShapeTypeStructure, Ext: &eLogoutRequest})
 
-var sAccountInfo_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountIdType, Type: smithy.ShapeTypeString, Ext: &ext[9]})
-var sAccountInfo_accountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountName", ID: &i_AccountNameType, Type: smithy.ShapeTypeString, Ext: &ext[10]})
-var sAccountInfo_emailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emailAddress", ID: &i_EmailAddressType, Type: smithy.ShapeTypeString, Ext: &ext[11]})
-var s_AccountListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccountInfo, Members: &mAccountInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[13]})
-var sInvalidRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &ext[19]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &ext[23]})
-var sRoleCredentials_accessKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessKeyId", ID: &i_AccessKeyType, Type: smithy.ShapeTypeString, Ext: &ext[25]})
-var sRoleCredentials_secretAccessKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretAccessKey", ID: &i_SecretAccessKeyType, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var sRoleCredentials_sessionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionToken", ID: &i_SessionTokenType, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &ext[27]})
-var sRoleCredentials_expiration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiration", ID: &i_ExpirationTimestampType, Type: smithy.ShapeTypeLong, Ext: &ext[28]})
-var sRoleInfo_roleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleName", ID: &i_RoleNameType, Type: smithy.ShapeTypeString, Ext: &ext[30]})
-var sRoleInfo_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountIdType, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var s_RoleListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRoleInfo, Members: &mRoleInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[33]})
-var sTooManyRequestsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &ext[38]})
-var sUnauthorizedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var sGetRoleCredentialsRequest_roleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleName", ID: &i_RoleNameType, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var sGetRoleCredentialsRequest_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountIdType, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &ext[43]})
-var sGetRoleCredentialsRequest_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_AccessTokenType, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var sGetRoleCredentialsResponse_roleCredentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleCredentials", ID: &iRoleCredentials, Members: &mRoleCredentials, Type: smithy.ShapeTypeStructure, Ext: &ext[46]})
-var sListAccountRolesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextTokenType, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &ext[48]})
-var sListAccountRolesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResultType, Traits: &t14, Type: smithy.ShapeTypeInteger, Ext: &ext[49]})
-var sListAccountRolesRequest_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_AccessTokenType, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &ext[50]})
-var sListAccountRolesRequest_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountIdType, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &ext[51]})
-var sListAccountRolesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextTokenType, Type: smithy.ShapeTypeString, Ext: &ext[53]})
-var sListAccountRolesResponse_roleList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleList", ID: &i_RoleListType, Members: &m_RoleListType, Type: smithy.ShapeTypeList, Ext: &ext[54]})
-var sListAccountsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextTokenType, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &ext[56]})
-var sListAccountsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResultType, Traits: &t14, Type: smithy.ShapeTypeInteger, Ext: &ext[57]})
-var sListAccountsRequest_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_AccessTokenType, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var sListAccountsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextTokenType, Type: smithy.ShapeTypeString, Ext: &ext[60]})
-var sListAccountsResponse_accountList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountList", ID: &i_AccountListType, Members: &m_AccountListType, Type: smithy.ShapeTypeList, Ext: &ext[61]})
-var sLogoutRequest_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_AccessTokenType, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &ext[63]})
+var sAccountInfo_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountIdType, Type: smithy.ShapeTypeString, Ext: &eAccountInfo_accountId})
+var sAccountInfo_accountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountName", ID: &i_AccountNameType, Type: smithy.ShapeTypeString, Ext: &eAccountInfo_accountName})
+var sAccountInfo_emailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emailAddress", ID: &i_EmailAddressType, Type: smithy.ShapeTypeString, Ext: &eAccountInfo_emailAddress})
+var s_AccountListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccountInfo, Members: &mAccountInfo, Type: smithy.ShapeTypeStructure, Ext: &e_AccountListType_member})
+var sInvalidRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eInvalidRequestException_message})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sRoleCredentials_accessKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessKeyId", ID: &i_AccessKeyType, Type: smithy.ShapeTypeString, Ext: &eRoleCredentials_accessKeyId})
+var sRoleCredentials_secretAccessKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretAccessKey", ID: &i_SecretAccessKeyType, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &eRoleCredentials_secretAccessKey})
+var sRoleCredentials_sessionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionToken", ID: &i_SessionTokenType, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &eRoleCredentials_sessionToken})
+var sRoleCredentials_expiration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiration", ID: &i_ExpirationTimestampType, Type: smithy.ShapeTypeLong, Ext: &eRoleCredentials_expiration})
+var sRoleInfo_roleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleName", ID: &i_RoleNameType, Type: smithy.ShapeTypeString, Ext: &eRoleInfo_roleName})
+var sRoleInfo_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountIdType, Type: smithy.ShapeTypeString, Ext: &eRoleInfo_accountId})
+var s_RoleListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRoleInfo, Members: &mRoleInfo, Type: smithy.ShapeTypeStructure, Ext: &e_RoleListType_member})
+var sTooManyRequestsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eTooManyRequestsException_message})
+var sUnauthorizedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorDescription, Type: smithy.ShapeTypeString, Ext: &eUnauthorizedException_message})
+var sGetRoleCredentialsRequest_roleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleName", ID: &i_RoleNameType, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &eGetRoleCredentialsRequest_roleName})
+var sGetRoleCredentialsRequest_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountIdType, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &eGetRoleCredentialsRequest_accountId})
+var sGetRoleCredentialsRequest_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_AccessTokenType, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &eGetRoleCredentialsRequest_accessToken})
+var sGetRoleCredentialsResponse_roleCredentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleCredentials", ID: &iRoleCredentials, Members: &mRoleCredentials, Type: smithy.ShapeTypeStructure, Ext: &eGetRoleCredentialsResponse_roleCredentials})
+var sListAccountRolesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextTokenType, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eListAccountRolesRequest_nextToken})
+var sListAccountRolesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResultType, Traits: &t14, Type: smithy.ShapeTypeInteger, Ext: &eListAccountRolesRequest_maxResults})
+var sListAccountRolesRequest_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_AccessTokenType, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &eListAccountRolesRequest_accessToken})
+var sListAccountRolesRequest_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountIdType, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &eListAccountRolesRequest_accountId})
+var sListAccountRolesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextTokenType, Type: smithy.ShapeTypeString, Ext: &eListAccountRolesResponse_nextToken})
+var sListAccountRolesResponse_roleList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleList", ID: &i_RoleListType, Members: &m_RoleListType, Type: smithy.ShapeTypeList, Ext: &eListAccountRolesResponse_roleList})
+var sListAccountsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextTokenType, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eListAccountsRequest_nextToken})
+var sListAccountsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResultType, Traits: &t14, Type: smithy.ShapeTypeInteger, Ext: &eListAccountsRequest_maxResults})
+var sListAccountsRequest_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_AccessTokenType, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &eListAccountsRequest_accessToken})
+var sListAccountsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextTokenType, Type: smithy.ShapeTypeString, Ext: &eListAccountsResponse_nextToken})
+var sListAccountsResponse_accountList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountList", ID: &i_AccountListType, Members: &m_AccountListType, Type: smithy.ShapeTypeList, Ext: &eListAccountsResponse_accountList})
+var sLogoutRequest_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_AccessTokenType, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &eLogoutRequest_accessToken})
 
 var GetRoleCredentials = &sGetRoleCredentials
 

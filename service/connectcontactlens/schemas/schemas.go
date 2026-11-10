@@ -7,9 +7,117 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [109]smithy.SchemaExtensions
+var (
+	eListRealtimeContactAnalysisSegments                               smithy.SchemaExtensions
+	e_AmazonConnectContactLens                                         smithy.SchemaExtensions
+	eAccessDeniedException                                             smithy.SchemaExtensions
+	eAccessDeniedException_Message                                     smithy.SchemaExtensions
+	eCategories                                                        smithy.SchemaExtensions
+	eCategories_MatchedCategories                                      smithy.SchemaExtensions
+	eCategories_MatchedDetails                                         smithy.SchemaExtensions
+	eCategoryDetails                                                   smithy.SchemaExtensions
+	eCategoryDetails_PointsOfInterest                                  smithy.SchemaExtensions
+	e_CategoryName                                                     smithy.SchemaExtensions
+	e_CharacterOffset                                                  smithy.SchemaExtensions
+	eCharacterOffsets                                                  smithy.SchemaExtensions
+	eCharacterOffsets_BeginOffsetChar                                  smithy.SchemaExtensions
+	eCharacterOffsets_EndOffsetChar                                    smithy.SchemaExtensions
+	e_ContactId                                                        smithy.SchemaExtensions
+	eExtractedInformation                                              smithy.SchemaExtensions
+	eExtractedInformation_ExtractionDefinitionId                       smithy.SchemaExtensions
+	eExtractedInformation_ExtractionDefinitionName                     smithy.SchemaExtensions
+	eExtractedInformation_ExtractionDefinitionDisplayLabel             smithy.SchemaExtensions
+	eExtractedInformation_ExtractedValues                              smithy.SchemaExtensions
+	eExtractedInformation_FailureCode                                  smithy.SchemaExtensions
+	e_ExtractedInformationContent                                      smithy.SchemaExtensions
+	eExtractedInformationFailureCode                                   smithy.SchemaExtensions
+	eExtractedInformationFailureCode_QUOTA_EXCEEDED                    smithy.SchemaExtensions
+	eExtractedInformationFailureCode_INSUFFICIENT_CONVERSATION_CONTENT smithy.SchemaExtensions
+	eExtractedInformationFailureCode_FAILED_SAFETY_GUIDELINES          smithy.SchemaExtensions
+	eExtractedInformationFailureCode_INTERNAL_ERROR                    smithy.SchemaExtensions
+	eExtractedInformationFailureCode_MAX_PACKAGE_FEATURE_ONLY          smithy.SchemaExtensions
+	eExtractedInformationValue                                         smithy.SchemaExtensions
+	eExtractedInformationValue_Content                                 smithy.SchemaExtensions
+	eExtractedInformationValue_PointsOfInterest                        smithy.SchemaExtensions
+	e_ExtractedInformationValues                                       smithy.SchemaExtensions
+	e_ExtractedInformationValues_member                                smithy.SchemaExtensions
+	e_ExtractionDefinitionDisplayLabel                                 smithy.SchemaExtensions
+	e_ExtractionDefinitionId                                           smithy.SchemaExtensions
+	e_ExtractionDefinitionName                                         smithy.SchemaExtensions
+	e_InstanceId                                                       smithy.SchemaExtensions
+	eInternalServiceException                                          smithy.SchemaExtensions
+	eInternalServiceException_Message                                  smithy.SchemaExtensions
+	eInvalidRequestException                                           smithy.SchemaExtensions
+	eInvalidRequestException_Message                                   smithy.SchemaExtensions
+	eIssueDetected                                                     smithy.SchemaExtensions
+	eIssueDetected_CharacterOffsets                                    smithy.SchemaExtensions
+	e_IssuesDetected                                                   smithy.SchemaExtensions
+	e_IssuesDetected_member                                            smithy.SchemaExtensions
+	e_MatchedCategories                                                smithy.SchemaExtensions
+	e_MatchedCategories_member                                         smithy.SchemaExtensions
+	e_MatchedDetails                                                   smithy.SchemaExtensions
+	e_MatchedDetails_key                                               smithy.SchemaExtensions
+	e_MatchedDetails_value                                             smithy.SchemaExtensions
+	e_MaxResults                                                       smithy.SchemaExtensions
+	e_Message                                                          smithy.SchemaExtensions
+	e_NextToken                                                        smithy.SchemaExtensions
+	e_OffsetMillis                                                     smithy.SchemaExtensions
+	e_ParticipantId                                                    smithy.SchemaExtensions
+	e_ParticipantRole                                                  smithy.SchemaExtensions
+	ePointOfInterest                                                   smithy.SchemaExtensions
+	ePointOfInterest_BeginOffsetMillis                                 smithy.SchemaExtensions
+	ePointOfInterest_EndOffsetMillis                                   smithy.SchemaExtensions
+	e_PointsOfInterest                                                 smithy.SchemaExtensions
+	e_PointsOfInterest_member                                          smithy.SchemaExtensions
+	ePostContactSummary                                                smithy.SchemaExtensions
+	ePostContactSummary_Content                                        smithy.SchemaExtensions
+	ePostContactSummary_Status                                         smithy.SchemaExtensions
+	ePostContactSummary_FailureCode                                    smithy.SchemaExtensions
+	e_PostContactSummaryContent                                        smithy.SchemaExtensions
+	ePostContactSummaryFailureCode                                     smithy.SchemaExtensions
+	ePostContactSummaryFailureCode_QUOTA_EXCEEDED                      smithy.SchemaExtensions
+	ePostContactSummaryFailureCode_INSUFFICIENT_CONVERSATION_CONTENT   smithy.SchemaExtensions
+	ePostContactSummaryFailureCode_FAILED_SAFETY_GUIDELINES            smithy.SchemaExtensions
+	ePostContactSummaryFailureCode_INVALID_ANALYSIS_CONFIGURATION      smithy.SchemaExtensions
+	ePostContactSummaryFailureCode_INTERNAL_ERROR                      smithy.SchemaExtensions
+	ePostContactSummaryStatus                                          smithy.SchemaExtensions
+	ePostContactSummaryStatus_FAILED                                   smithy.SchemaExtensions
+	ePostContactSummaryStatus_COMPLETED                                smithy.SchemaExtensions
+	eRealtimeContactAnalysisSegment                                    smithy.SchemaExtensions
+	eRealtimeContactAnalysisSegment_Transcript                         smithy.SchemaExtensions
+	eRealtimeContactAnalysisSegment_Categories                         smithy.SchemaExtensions
+	eRealtimeContactAnalysisSegment_PostContactSummary                 smithy.SchemaExtensions
+	eRealtimeContactAnalysisSegment_ExtractedInformation               smithy.SchemaExtensions
+	e_RealtimeContactAnalysisSegments                                  smithy.SchemaExtensions
+	e_RealtimeContactAnalysisSegments_member                           smithy.SchemaExtensions
+	eResourceNotFoundException                                         smithy.SchemaExtensions
+	eResourceNotFoundException_Message                                 smithy.SchemaExtensions
+	eSentimentValue                                                    smithy.SchemaExtensions
+	eSentimentValue_POSITIVE                                           smithy.SchemaExtensions
+	eSentimentValue_NEUTRAL                                            smithy.SchemaExtensions
+	eSentimentValue_NEGATIVE                                           smithy.SchemaExtensions
+	eThrottlingException                                               smithy.SchemaExtensions
+	eThrottlingException_Message                                       smithy.SchemaExtensions
+	eTranscript                                                        smithy.SchemaExtensions
+	eTranscript_Id                                                     smithy.SchemaExtensions
+	eTranscript_ParticipantId                                          smithy.SchemaExtensions
+	eTranscript_ParticipantRole                                        smithy.SchemaExtensions
+	eTranscript_Content                                                smithy.SchemaExtensions
+	eTranscript_BeginOffsetMillis                                      smithy.SchemaExtensions
+	eTranscript_EndOffsetMillis                                        smithy.SchemaExtensions
+	eTranscript_Sentiment                                              smithy.SchemaExtensions
+	eTranscript_IssuesDetected                                         smithy.SchemaExtensions
+	e_TranscriptContent                                                smithy.SchemaExtensions
+	e_TranscriptId                                                     smithy.SchemaExtensions
+	eListRealtimeContactAnalysisSegmentsRequest                        smithy.SchemaExtensions
+	eListRealtimeContactAnalysisSegmentsRequest_InstanceId             smithy.SchemaExtensions
+	eListRealtimeContactAnalysisSegmentsRequest_ContactId              smithy.SchemaExtensions
+	eListRealtimeContactAnalysisSegmentsRequest_MaxResults             smithy.SchemaExtensions
+	eListRealtimeContactAnalysisSegmentsRequest_NextToken              smithy.SchemaExtensions
+	eListRealtimeContactAnalysisSegmentsResponse                       smithy.SchemaExtensions
+	eListRealtimeContactAnalysisSegmentsResponse_Segments              smithy.SchemaExtensions
+	eListRealtimeContactAnalysisSegmentsResponse_NextToken             smithy.SchemaExtensions
+)
 
 var (
 	iListRealtimeContactAnalysisSegments         = smithy.ShapeID{Namespace: "com.amazonaws.connectcontactlens", Name: "ListRealtimeContactAnalysisSegments"}
@@ -98,116 +206,116 @@ var mTranscript = smithy.SchemaMembers{List: []*smithy.Schema{&sTranscript_Id, &
 var mListRealtimeContactAnalysisSegmentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRealtimeContactAnalysisSegmentsRequest_InstanceId, &sListRealtimeContactAnalysisSegmentsRequest_ContactId, &sListRealtimeContactAnalysisSegmentsRequest_MaxResults, &sListRealtimeContactAnalysisSegmentsRequest_NextToken}}
 var mListRealtimeContactAnalysisSegmentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRealtimeContactAnalysisSegmentsResponse_Segments, &sListRealtimeContactAnalysisSegmentsResponse_NextToken}}
 
-var sListRealtimeContactAnalysisSegments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRealtimeContactAnalysisSegments, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var s_AmazonConnectContactLens = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonConnectContactLens, Type: smithy.ShapeTypeService, Ext: &ext[1]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[2]})
-var sCategories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCategories, Members: &mCategories, Type: smithy.ShapeTypeStructure, Ext: &ext[4]})
-var sCategoryDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCategoryDetails, Members: &mCategoryDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[7]})
-var s_CategoryName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CategoryName, Type: smithy.ShapeTypeString, Ext: &ext[9]})
-var s_CharacterOffset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CharacterOffset, Type: smithy.ShapeTypeInteger, Ext: &ext[10]})
-var sCharacterOffsets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCharacterOffsets, Members: &mCharacterOffsets, Type: smithy.ShapeTypeStructure, Ext: &ext[11]})
-var s_ContactId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactId, Type: smithy.ShapeTypeString, Ext: &ext[14]})
-var sExtractedInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtractedInformation, Members: &mExtractedInformation, Type: smithy.ShapeTypeStructure, Ext: &ext[15]})
-var s_ExtractedInformationContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtractedInformationContent, Type: smithy.ShapeTypeString, Ext: &ext[21]})
-var sExtractedInformationFailureCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtractedInformationFailureCode, Members: &mExtractedInformationFailureCode, Type: smithy.ShapeTypeEnum, Ext: &ext[22]})
-var sExtractedInformationValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtractedInformationValue, Members: &mExtractedInformationValue, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
-var s_ExtractedInformationValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtractedInformationValues, Members: &m_ExtractedInformationValues, Type: smithy.ShapeTypeList, Ext: &ext[31]})
-var s_ExtractionDefinitionDisplayLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtractionDefinitionDisplayLabel, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var s_ExtractionDefinitionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtractionDefinitionId, Type: smithy.ShapeTypeString, Ext: &ext[34]})
-var s_ExtractionDefinitionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtractionDefinitionName, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var s_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var sInternalServiceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServiceException, Members: &mInternalServiceException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[39]})
-var sIssueDetected = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIssueDetected, Members: &mIssueDetected, Type: smithy.ShapeTypeStructure, Ext: &ext[41]})
-var s_IssuesDetected = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IssuesDetected, Members: &m_IssuesDetected, Type: smithy.ShapeTypeList, Ext: &ext[43]})
-var s_MatchedCategories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MatchedCategories, Members: &m_MatchedCategories, Type: smithy.ShapeTypeList, Ext: &ext[45]})
-var s_MatchedDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MatchedDetails, Members: &m_MatchedDetails, Type: smithy.ShapeTypeMap, Ext: &ext[47]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[50]})
-var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[51]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var s_OffsetMillis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OffsetMillis, Type: smithy.ShapeTypeInteger, Ext: &ext[53]})
-var s_ParticipantId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParticipantId, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var s_ParticipantRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParticipantRole, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var sPointOfInterest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPointOfInterest, Members: &mPointOfInterest, Type: smithy.ShapeTypeStructure, Ext: &ext[56]})
-var s_PointsOfInterest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PointsOfInterest, Members: &m_PointsOfInterest, Type: smithy.ShapeTypeList, Ext: &ext[59]})
-var sPostContactSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostContactSummary, Members: &mPostContactSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[61]})
-var s_PostContactSummaryContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PostContactSummaryContent, Type: smithy.ShapeTypeString, Ext: &ext[65]})
-var sPostContactSummaryFailureCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostContactSummaryFailureCode, Members: &mPostContactSummaryFailureCode, Type: smithy.ShapeTypeEnum, Ext: &ext[66]})
-var sPostContactSummaryStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostContactSummaryStatus, Members: &mPostContactSummaryStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[72]})
-var sRealtimeContactAnalysisSegment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRealtimeContactAnalysisSegment, Members: &mRealtimeContactAnalysisSegment, Type: smithy.ShapeTypeStructure, Ext: &ext[75]})
-var s_RealtimeContactAnalysisSegments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RealtimeContactAnalysisSegments, Members: &m_RealtimeContactAnalysisSegments, Type: smithy.ShapeTypeList, Ext: &ext[80]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &ext[82]})
-var sSentimentValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSentimentValue, Members: &mSentimentValue, Type: smithy.ShapeTypeEnum, Ext: &ext[84]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &ext[88]})
-var sTranscript = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTranscript, Members: &mTranscript, Type: smithy.ShapeTypeStructure, Ext: &ext[90]})
-var s_TranscriptContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TranscriptContent, Type: smithy.ShapeTypeString, Ext: &ext[99]})
-var s_TranscriptId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TranscriptId, Type: smithy.ShapeTypeString, Ext: &ext[100]})
-var sListRealtimeContactAnalysisSegmentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRealtimeContactAnalysisSegmentsRequest, Members: &mListRealtimeContactAnalysisSegmentsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[101]})
-var sListRealtimeContactAnalysisSegmentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRealtimeContactAnalysisSegmentsResponse, Members: &mListRealtimeContactAnalysisSegmentsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[106]})
+var sListRealtimeContactAnalysisSegments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRealtimeContactAnalysisSegments, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eListRealtimeContactAnalysisSegments})
+var s_AmazonConnectContactLens = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonConnectContactLens, Type: smithy.ShapeTypeService, Ext: &e_AmazonConnectContactLens})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sCategories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCategories, Members: &mCategories, Type: smithy.ShapeTypeStructure, Ext: &eCategories})
+var sCategoryDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCategoryDetails, Members: &mCategoryDetails, Type: smithy.ShapeTypeStructure, Ext: &eCategoryDetails})
+var s_CategoryName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CategoryName, Type: smithy.ShapeTypeString, Ext: &e_CategoryName})
+var s_CharacterOffset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CharacterOffset, Type: smithy.ShapeTypeInteger, Ext: &e_CharacterOffset})
+var sCharacterOffsets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCharacterOffsets, Members: &mCharacterOffsets, Type: smithy.ShapeTypeStructure, Ext: &eCharacterOffsets})
+var s_ContactId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactId, Type: smithy.ShapeTypeString, Ext: &e_ContactId})
+var sExtractedInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtractedInformation, Members: &mExtractedInformation, Type: smithy.ShapeTypeStructure, Ext: &eExtractedInformation})
+var s_ExtractedInformationContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtractedInformationContent, Type: smithy.ShapeTypeString, Ext: &e_ExtractedInformationContent})
+var sExtractedInformationFailureCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtractedInformationFailureCode, Members: &mExtractedInformationFailureCode, Type: smithy.ShapeTypeEnum, Ext: &eExtractedInformationFailureCode})
+var sExtractedInformationValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtractedInformationValue, Members: &mExtractedInformationValue, Type: smithy.ShapeTypeStructure, Ext: &eExtractedInformationValue})
+var s_ExtractedInformationValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtractedInformationValues, Members: &m_ExtractedInformationValues, Type: smithy.ShapeTypeList, Ext: &e_ExtractedInformationValues})
+var s_ExtractionDefinitionDisplayLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtractionDefinitionDisplayLabel, Type: smithy.ShapeTypeString, Ext: &e_ExtractionDefinitionDisplayLabel})
+var s_ExtractionDefinitionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtractionDefinitionId, Type: smithy.ShapeTypeString, Ext: &e_ExtractionDefinitionId})
+var s_ExtractionDefinitionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtractionDefinitionName, Type: smithy.ShapeTypeString, Ext: &e_ExtractionDefinitionName})
+var s_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &e_InstanceId})
+var sInternalServiceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServiceException, Members: &mInternalServiceException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInternalServiceException})
+var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRequestException})
+var sIssueDetected = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIssueDetected, Members: &mIssueDetected, Type: smithy.ShapeTypeStructure, Ext: &eIssueDetected})
+var s_IssuesDetected = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IssuesDetected, Members: &m_IssuesDetected, Type: smithy.ShapeTypeList, Ext: &e_IssuesDetected})
+var s_MatchedCategories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MatchedCategories, Members: &m_MatchedCategories, Type: smithy.ShapeTypeList, Ext: &e_MatchedCategories})
+var s_MatchedDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MatchedDetails, Members: &m_MatchedDetails, Type: smithy.ShapeTypeMap, Ext: &e_MatchedDetails})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &e_Message})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var s_OffsetMillis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OffsetMillis, Type: smithy.ShapeTypeInteger, Ext: &e_OffsetMillis})
+var s_ParticipantId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParticipantId, Type: smithy.ShapeTypeString, Ext: &e_ParticipantId})
+var s_ParticipantRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParticipantRole, Type: smithy.ShapeTypeString, Ext: &e_ParticipantRole})
+var sPointOfInterest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPointOfInterest, Members: &mPointOfInterest, Type: smithy.ShapeTypeStructure, Ext: &ePointOfInterest})
+var s_PointsOfInterest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PointsOfInterest, Members: &m_PointsOfInterest, Type: smithy.ShapeTypeList, Ext: &e_PointsOfInterest})
+var sPostContactSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostContactSummary, Members: &mPostContactSummary, Type: smithy.ShapeTypeStructure, Ext: &ePostContactSummary})
+var s_PostContactSummaryContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PostContactSummaryContent, Type: smithy.ShapeTypeString, Ext: &e_PostContactSummaryContent})
+var sPostContactSummaryFailureCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostContactSummaryFailureCode, Members: &mPostContactSummaryFailureCode, Type: smithy.ShapeTypeEnum, Ext: &ePostContactSummaryFailureCode})
+var sPostContactSummaryStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostContactSummaryStatus, Members: &mPostContactSummaryStatus, Type: smithy.ShapeTypeEnum, Ext: &ePostContactSummaryStatus})
+var sRealtimeContactAnalysisSegment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRealtimeContactAnalysisSegment, Members: &mRealtimeContactAnalysisSegment, Type: smithy.ShapeTypeStructure, Ext: &eRealtimeContactAnalysisSegment})
+var s_RealtimeContactAnalysisSegments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RealtimeContactAnalysisSegments, Members: &m_RealtimeContactAnalysisSegments, Type: smithy.ShapeTypeList, Ext: &e_RealtimeContactAnalysisSegments})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sSentimentValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSentimentValue, Members: &mSentimentValue, Type: smithy.ShapeTypeEnum, Ext: &eSentimentValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sTranscript = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTranscript, Members: &mTranscript, Type: smithy.ShapeTypeStructure, Ext: &eTranscript})
+var s_TranscriptContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TranscriptContent, Type: smithy.ShapeTypeString, Ext: &e_TranscriptContent})
+var s_TranscriptId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TranscriptId, Type: smithy.ShapeTypeString, Ext: &e_TranscriptId})
+var sListRealtimeContactAnalysisSegmentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRealtimeContactAnalysisSegmentsRequest, Members: &mListRealtimeContactAnalysisSegmentsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRealtimeContactAnalysisSegmentsRequest})
+var sListRealtimeContactAnalysisSegmentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRealtimeContactAnalysisSegmentsResponse, Members: &mListRealtimeContactAnalysisSegmentsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRealtimeContactAnalysisSegmentsResponse})
 
-var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[3]})
-var sCategories_MatchedCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchedCategories", ID: &i_MatchedCategories, Members: &m_MatchedCategories, Type: smithy.ShapeTypeList, Ext: &ext[5]})
-var sCategories_MatchedDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchedDetails", ID: &i_MatchedDetails, Members: &m_MatchedDetails, Type: smithy.ShapeTypeMap, Ext: &ext[6]})
-var sCategoryDetails_PointsOfInterest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PointsOfInterest", ID: &i_PointsOfInterest, Members: &m_PointsOfInterest, Type: smithy.ShapeTypeList, Ext: &ext[8]})
-var sCharacterOffsets_BeginOffsetChar = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeginOffsetChar", ID: &i_CharacterOffset, Type: smithy.ShapeTypeInteger, Ext: &ext[12]})
-var sCharacterOffsets_EndOffsetChar = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndOffsetChar", ID: &i_CharacterOffset, Type: smithy.ShapeTypeInteger, Ext: &ext[13]})
-var sExtractedInformation_ExtractionDefinitionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtractionDefinitionId", ID: &i_ExtractionDefinitionId, Type: smithy.ShapeTypeString, Ext: &ext[16]})
-var sExtractedInformation_ExtractionDefinitionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtractionDefinitionName", ID: &i_ExtractionDefinitionName, Type: smithy.ShapeTypeString, Ext: &ext[17]})
-var sExtractedInformation_ExtractionDefinitionDisplayLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtractionDefinitionDisplayLabel", ID: &i_ExtractionDefinitionDisplayLabel, Type: smithy.ShapeTypeString, Ext: &ext[18]})
-var sExtractedInformation_ExtractedValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtractedValues", ID: &i_ExtractedInformationValues, Members: &m_ExtractedInformationValues, Type: smithy.ShapeTypeList, Ext: &ext[19]})
-var sExtractedInformation_FailureCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureCode", ID: &iExtractedInformationFailureCode, Members: &mExtractedInformationFailureCode, Type: smithy.ShapeTypeEnum, Ext: &ext[20]})
-var sExtractedInformationFailureCode_QUOTA_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUOTA_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[23]})
-var sExtractedInformationFailureCode_INSUFFICIENT_CONVERSATION_CONTENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSUFFICIENT_CONVERSATION_CONTENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[24]})
-var sExtractedInformationFailureCode_FAILED_SAFETY_GUIDELINES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_SAFETY_GUIDELINES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[25]})
-var sExtractedInformationFailureCode_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[26]})
-var sExtractedInformationFailureCode_MAX_PACKAGE_FEATURE_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAX_PACKAGE_FEATURE_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[27]})
-var sExtractedInformationValue_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i_ExtractedInformationContent, Type: smithy.ShapeTypeString, Ext: &ext[29]})
-var sExtractedInformationValue_PointsOfInterest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PointsOfInterest", ID: &i_PointsOfInterest, Members: &m_PointsOfInterest, Type: smithy.ShapeTypeList, Ext: &ext[30]})
-var s_ExtractedInformationValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExtractedInformationValue, Members: &mExtractedInformationValue, Type: smithy.ShapeTypeStructure, Ext: &ext[32]})
-var sInternalServiceException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[38]})
-var sInvalidRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var sIssueDetected_CharacterOffsets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CharacterOffsets", ID: &iCharacterOffsets, Members: &mCharacterOffsets, Type: smithy.ShapeTypeStructure, Ext: &ext[42]})
-var s_IssuesDetected_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIssueDetected, Members: &mIssueDetected, Type: smithy.ShapeTypeStructure, Ext: &ext[44]})
-var s_MatchedCategories_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CategoryName, Type: smithy.ShapeTypeString, Ext: &ext[46]})
-var s_MatchedDetails_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_CategoryName, Type: smithy.ShapeTypeString, Ext: &ext[48]})
-var s_MatchedDetails_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iCategoryDetails, Members: &mCategoryDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[49]})
-var sPointOfInterest_BeginOffsetMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeginOffsetMillis", ID: &i_OffsetMillis, Type: smithy.ShapeTypeInteger, Ext: &ext[57]})
-var sPointOfInterest_EndOffsetMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndOffsetMillis", ID: &i_OffsetMillis, Type: smithy.ShapeTypeInteger, Ext: &ext[58]})
-var s_PointsOfInterest_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPointOfInterest, Members: &mPointOfInterest, Type: smithy.ShapeTypeStructure, Ext: &ext[60]})
-var sPostContactSummary_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i_PostContactSummaryContent, Type: smithy.ShapeTypeString, Ext: &ext[62]})
-var sPostContactSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iPostContactSummaryStatus, Members: &mPostContactSummaryStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[63]})
-var sPostContactSummary_FailureCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureCode", ID: &iPostContactSummaryFailureCode, Members: &mPostContactSummaryFailureCode, Type: smithy.ShapeTypeEnum, Ext: &ext[64]})
-var sPostContactSummaryFailureCode_QUOTA_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUOTA_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[67]})
-var sPostContactSummaryFailureCode_INSUFFICIENT_CONVERSATION_CONTENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSUFFICIENT_CONVERSATION_CONTENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var sPostContactSummaryFailureCode_FAILED_SAFETY_GUIDELINES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_SAFETY_GUIDELINES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[69]})
-var sPostContactSummaryFailureCode_INVALID_ANALYSIS_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ANALYSIS_CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[70]})
-var sPostContactSummaryFailureCode_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[71]})
-var sPostContactSummaryStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[73]})
-var sPostContactSummaryStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var sRealtimeContactAnalysisSegment_Transcript = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Transcript", ID: &iTranscript, Members: &mTranscript, Type: smithy.ShapeTypeStructure, Ext: &ext[76]})
-var sRealtimeContactAnalysisSegment_Categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Categories", ID: &iCategories, Members: &mCategories, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
-var sRealtimeContactAnalysisSegment_PostContactSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostContactSummary", ID: &iPostContactSummary, Members: &mPostContactSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[78]})
-var sRealtimeContactAnalysisSegment_ExtractedInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtractedInformation", ID: &iExtractedInformation, Members: &mExtractedInformation, Type: smithy.ShapeTypeStructure, Ext: &ext[79]})
-var s_RealtimeContactAnalysisSegments_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRealtimeContactAnalysisSegment, Members: &mRealtimeContactAnalysisSegment, Type: smithy.ShapeTypeStructure, Ext: &ext[81]})
-var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var sSentimentValue_POSITIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POSITIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[85]})
-var sSentimentValue_NEUTRAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEUTRAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[86]})
-var sSentimentValue_NEGATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEGATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[87]})
-var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[89]})
-var sTranscript_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_TranscriptId, Type: smithy.ShapeTypeString, Ext: &ext[91]})
-var sTranscript_ParticipantId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParticipantId", ID: &i_ParticipantId, Type: smithy.ShapeTypeString, Ext: &ext[92]})
-var sTranscript_ParticipantRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParticipantRole", ID: &i_ParticipantRole, Type: smithy.ShapeTypeString, Ext: &ext[93]})
-var sTranscript_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i_TranscriptContent, Type: smithy.ShapeTypeString, Ext: &ext[94]})
-var sTranscript_BeginOffsetMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeginOffsetMillis", ID: &i_OffsetMillis, Type: smithy.ShapeTypeInteger, Ext: &ext[95]})
-var sTranscript_EndOffsetMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndOffsetMillis", ID: &i_OffsetMillis, Type: smithy.ShapeTypeInteger, Ext: &ext[96]})
-var sTranscript_Sentiment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sentiment", ID: &iSentimentValue, Members: &mSentimentValue, Type: smithy.ShapeTypeEnum, Ext: &ext[97]})
-var sTranscript_IssuesDetected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssuesDetected", ID: &i_IssuesDetected, Members: &m_IssuesDetected, Type: smithy.ShapeTypeList, Ext: &ext[98]})
-var sListRealtimeContactAnalysisSegmentsRequest_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceId", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var sListRealtimeContactAnalysisSegmentsRequest_ContactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactId", ID: &i_ContactId, Type: smithy.ShapeTypeString, Ext: &ext[103]})
-var sListRealtimeContactAnalysisSegmentsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[104]})
-var sListRealtimeContactAnalysisSegmentsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[105]})
-var sListRealtimeContactAnalysisSegmentsResponse_Segments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Segments", ID: &i_RealtimeContactAnalysisSegments, Members: &m_RealtimeContactAnalysisSegments, Type: smithy.ShapeTypeList, Ext: &ext[107]})
-var sListRealtimeContactAnalysisSegmentsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[108]})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var sCategories_MatchedCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchedCategories", ID: &i_MatchedCategories, Members: &m_MatchedCategories, Type: smithy.ShapeTypeList, Ext: &eCategories_MatchedCategories})
+var sCategories_MatchedDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchedDetails", ID: &i_MatchedDetails, Members: &m_MatchedDetails, Type: smithy.ShapeTypeMap, Ext: &eCategories_MatchedDetails})
+var sCategoryDetails_PointsOfInterest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PointsOfInterest", ID: &i_PointsOfInterest, Members: &m_PointsOfInterest, Type: smithy.ShapeTypeList, Ext: &eCategoryDetails_PointsOfInterest})
+var sCharacterOffsets_BeginOffsetChar = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeginOffsetChar", ID: &i_CharacterOffset, Type: smithy.ShapeTypeInteger, Ext: &eCharacterOffsets_BeginOffsetChar})
+var sCharacterOffsets_EndOffsetChar = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndOffsetChar", ID: &i_CharacterOffset, Type: smithy.ShapeTypeInteger, Ext: &eCharacterOffsets_EndOffsetChar})
+var sExtractedInformation_ExtractionDefinitionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtractionDefinitionId", ID: &i_ExtractionDefinitionId, Type: smithy.ShapeTypeString, Ext: &eExtractedInformation_ExtractionDefinitionId})
+var sExtractedInformation_ExtractionDefinitionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtractionDefinitionName", ID: &i_ExtractionDefinitionName, Type: smithy.ShapeTypeString, Ext: &eExtractedInformation_ExtractionDefinitionName})
+var sExtractedInformation_ExtractionDefinitionDisplayLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtractionDefinitionDisplayLabel", ID: &i_ExtractionDefinitionDisplayLabel, Type: smithy.ShapeTypeString, Ext: &eExtractedInformation_ExtractionDefinitionDisplayLabel})
+var sExtractedInformation_ExtractedValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtractedValues", ID: &i_ExtractedInformationValues, Members: &m_ExtractedInformationValues, Type: smithy.ShapeTypeList, Ext: &eExtractedInformation_ExtractedValues})
+var sExtractedInformation_FailureCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureCode", ID: &iExtractedInformationFailureCode, Members: &mExtractedInformationFailureCode, Type: smithy.ShapeTypeEnum, Ext: &eExtractedInformation_FailureCode})
+var sExtractedInformationFailureCode_QUOTA_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUOTA_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtractedInformationFailureCode_QUOTA_EXCEEDED})
+var sExtractedInformationFailureCode_INSUFFICIENT_CONVERSATION_CONTENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSUFFICIENT_CONVERSATION_CONTENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtractedInformationFailureCode_INSUFFICIENT_CONVERSATION_CONTENT})
+var sExtractedInformationFailureCode_FAILED_SAFETY_GUIDELINES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_SAFETY_GUIDELINES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtractedInformationFailureCode_FAILED_SAFETY_GUIDELINES})
+var sExtractedInformationFailureCode_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtractedInformationFailureCode_INTERNAL_ERROR})
+var sExtractedInformationFailureCode_MAX_PACKAGE_FEATURE_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAX_PACKAGE_FEATURE_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtractedInformationFailureCode_MAX_PACKAGE_FEATURE_ONLY})
+var sExtractedInformationValue_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i_ExtractedInformationContent, Type: smithy.ShapeTypeString, Ext: &eExtractedInformationValue_Content})
+var sExtractedInformationValue_PointsOfInterest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PointsOfInterest", ID: &i_PointsOfInterest, Members: &m_PointsOfInterest, Type: smithy.ShapeTypeList, Ext: &eExtractedInformationValue_PointsOfInterest})
+var s_ExtractedInformationValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExtractedInformationValue, Members: &mExtractedInformationValue, Type: smithy.ShapeTypeStructure, Ext: &e_ExtractedInformationValues_member})
+var sInternalServiceException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInternalServiceException_Message})
+var sInvalidRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidRequestException_Message})
+var sIssueDetected_CharacterOffsets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CharacterOffsets", ID: &iCharacterOffsets, Members: &mCharacterOffsets, Type: smithy.ShapeTypeStructure, Ext: &eIssueDetected_CharacterOffsets})
+var s_IssuesDetected_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIssueDetected, Members: &mIssueDetected, Type: smithy.ShapeTypeStructure, Ext: &e_IssuesDetected_member})
+var s_MatchedCategories_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CategoryName, Type: smithy.ShapeTypeString, Ext: &e_MatchedCategories_member})
+var s_MatchedDetails_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_CategoryName, Type: smithy.ShapeTypeString, Ext: &e_MatchedDetails_key})
+var s_MatchedDetails_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iCategoryDetails, Members: &mCategoryDetails, Type: smithy.ShapeTypeStructure, Ext: &e_MatchedDetails_value})
+var sPointOfInterest_BeginOffsetMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeginOffsetMillis", ID: &i_OffsetMillis, Type: smithy.ShapeTypeInteger, Ext: &ePointOfInterest_BeginOffsetMillis})
+var sPointOfInterest_EndOffsetMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndOffsetMillis", ID: &i_OffsetMillis, Type: smithy.ShapeTypeInteger, Ext: &ePointOfInterest_EndOffsetMillis})
+var s_PointsOfInterest_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPointOfInterest, Members: &mPointOfInterest, Type: smithy.ShapeTypeStructure, Ext: &e_PointsOfInterest_member})
+var sPostContactSummary_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i_PostContactSummaryContent, Type: smithy.ShapeTypeString, Ext: &ePostContactSummary_Content})
+var sPostContactSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iPostContactSummaryStatus, Members: &mPostContactSummaryStatus, Type: smithy.ShapeTypeEnum, Ext: &ePostContactSummary_Status})
+var sPostContactSummary_FailureCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureCode", ID: &iPostContactSummaryFailureCode, Members: &mPostContactSummaryFailureCode, Type: smithy.ShapeTypeEnum, Ext: &ePostContactSummary_FailureCode})
+var sPostContactSummaryFailureCode_QUOTA_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUOTA_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePostContactSummaryFailureCode_QUOTA_EXCEEDED})
+var sPostContactSummaryFailureCode_INSUFFICIENT_CONVERSATION_CONTENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSUFFICIENT_CONVERSATION_CONTENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePostContactSummaryFailureCode_INSUFFICIENT_CONVERSATION_CONTENT})
+var sPostContactSummaryFailureCode_FAILED_SAFETY_GUIDELINES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_SAFETY_GUIDELINES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePostContactSummaryFailureCode_FAILED_SAFETY_GUIDELINES})
+var sPostContactSummaryFailureCode_INVALID_ANALYSIS_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ANALYSIS_CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePostContactSummaryFailureCode_INVALID_ANALYSIS_CONFIGURATION})
+var sPostContactSummaryFailureCode_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePostContactSummaryFailureCode_INTERNAL_ERROR})
+var sPostContactSummaryStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePostContactSummaryStatus_FAILED})
+var sPostContactSummaryStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePostContactSummaryStatus_COMPLETED})
+var sRealtimeContactAnalysisSegment_Transcript = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Transcript", ID: &iTranscript, Members: &mTranscript, Type: smithy.ShapeTypeStructure, Ext: &eRealtimeContactAnalysisSegment_Transcript})
+var sRealtimeContactAnalysisSegment_Categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Categories", ID: &iCategories, Members: &mCategories, Type: smithy.ShapeTypeStructure, Ext: &eRealtimeContactAnalysisSegment_Categories})
+var sRealtimeContactAnalysisSegment_PostContactSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostContactSummary", ID: &iPostContactSummary, Members: &mPostContactSummary, Type: smithy.ShapeTypeStructure, Ext: &eRealtimeContactAnalysisSegment_PostContactSummary})
+var sRealtimeContactAnalysisSegment_ExtractedInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtractedInformation", ID: &iExtractedInformation, Members: &mExtractedInformation, Type: smithy.ShapeTypeStructure, Ext: &eRealtimeContactAnalysisSegment_ExtractedInformation})
+var s_RealtimeContactAnalysisSegments_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRealtimeContactAnalysisSegment, Members: &mRealtimeContactAnalysisSegment, Type: smithy.ShapeTypeStructure, Ext: &e_RealtimeContactAnalysisSegments_member})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sSentimentValue_POSITIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POSITIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSentimentValue_POSITIVE})
+var sSentimentValue_NEUTRAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEUTRAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSentimentValue_NEUTRAL})
+var sSentimentValue_NEGATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEGATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSentimentValue_NEGATIVE})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var sTranscript_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_TranscriptId, Type: smithy.ShapeTypeString, Ext: &eTranscript_Id})
+var sTranscript_ParticipantId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParticipantId", ID: &i_ParticipantId, Type: smithy.ShapeTypeString, Ext: &eTranscript_ParticipantId})
+var sTranscript_ParticipantRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParticipantRole", ID: &i_ParticipantRole, Type: smithy.ShapeTypeString, Ext: &eTranscript_ParticipantRole})
+var sTranscript_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i_TranscriptContent, Type: smithy.ShapeTypeString, Ext: &eTranscript_Content})
+var sTranscript_BeginOffsetMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeginOffsetMillis", ID: &i_OffsetMillis, Type: smithy.ShapeTypeInteger, Ext: &eTranscript_BeginOffsetMillis})
+var sTranscript_EndOffsetMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndOffsetMillis", ID: &i_OffsetMillis, Type: smithy.ShapeTypeInteger, Ext: &eTranscript_EndOffsetMillis})
+var sTranscript_Sentiment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sentiment", ID: &iSentimentValue, Members: &mSentimentValue, Type: smithy.ShapeTypeEnum, Ext: &eTranscript_Sentiment})
+var sTranscript_IssuesDetected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssuesDetected", ID: &i_IssuesDetected, Members: &m_IssuesDetected, Type: smithy.ShapeTypeList, Ext: &eTranscript_IssuesDetected})
+var sListRealtimeContactAnalysisSegmentsRequest_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceId", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &eListRealtimeContactAnalysisSegmentsRequest_InstanceId})
+var sListRealtimeContactAnalysisSegmentsRequest_ContactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactId", ID: &i_ContactId, Type: smithy.ShapeTypeString, Ext: &eListRealtimeContactAnalysisSegmentsRequest_ContactId})
+var sListRealtimeContactAnalysisSegmentsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListRealtimeContactAnalysisSegmentsRequest_MaxResults})
+var sListRealtimeContactAnalysisSegmentsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRealtimeContactAnalysisSegmentsRequest_NextToken})
+var sListRealtimeContactAnalysisSegmentsResponse_Segments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Segments", ID: &i_RealtimeContactAnalysisSegments, Members: &m_RealtimeContactAnalysisSegments, Type: smithy.ShapeTypeList, Ext: &eListRealtimeContactAnalysisSegmentsResponse_Segments})
+var sListRealtimeContactAnalysisSegmentsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRealtimeContactAnalysisSegmentsResponse_NextToken})
 
 var ListRealtimeContactAnalysisSegments = &sListRealtimeContactAnalysisSegments
 

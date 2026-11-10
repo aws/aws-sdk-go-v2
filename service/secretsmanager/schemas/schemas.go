@@ -7,9 +7,429 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [421]smithy.SchemaExtensions
+var (
+	eBatchGetSecretValue                                         smithy.SchemaExtensions
+	eCancelRotateSecret                                          smithy.SchemaExtensions
+	eCreateSecret                                                smithy.SchemaExtensions
+	eDeleteResourcePolicy                                        smithy.SchemaExtensions
+	eDeleteSecret                                                smithy.SchemaExtensions
+	eDescribeSecret                                              smithy.SchemaExtensions
+	eGetRandomPassword                                           smithy.SchemaExtensions
+	eGetResourcePolicy                                           smithy.SchemaExtensions
+	eGetSecretValue                                              smithy.SchemaExtensions
+	eListSecrets                                                 smithy.SchemaExtensions
+	eListSecretVersionIds                                        smithy.SchemaExtensions
+	ePutResourcePolicy                                           smithy.SchemaExtensions
+	ePutSecretValue                                              smithy.SchemaExtensions
+	eRemoveRegionsFromReplication                                smithy.SchemaExtensions
+	eReplicateSecretToRegions                                    smithy.SchemaExtensions
+	eRestoreSecret                                               smithy.SchemaExtensions
+	eRotateSecret                                                smithy.SchemaExtensions
+	eStopReplicationToReplica                                    smithy.SchemaExtensions
+	eTagResource                                                 smithy.SchemaExtensions
+	eUntagResource                                               smithy.SchemaExtensions
+	eUpdateSecret                                                smithy.SchemaExtensions
+	eUpdateSecretVersionStage                                    smithy.SchemaExtensions
+	eValidateResourcePolicy                                      smithy.SchemaExtensions
+	e_secretsmanager                                             smithy.SchemaExtensions
+	e_AddReplicaRegionListType                                   smithy.SchemaExtensions
+	e_AddReplicaRegionListType_member                            smithy.SchemaExtensions
+	e_APIErrorListType                                           smithy.SchemaExtensions
+	e_APIErrorListType_member                                    smithy.SchemaExtensions
+	eAPIErrorType                                                smithy.SchemaExtensions
+	eAPIErrorType_SecretId                                       smithy.SchemaExtensions
+	eAPIErrorType_ErrorCode                                      smithy.SchemaExtensions
+	eAPIErrorType_Message                                        smithy.SchemaExtensions
+	e_AutomaticallyRotateAfterDaysType                           smithy.SchemaExtensions
+	e_BooleanType                                                smithy.SchemaExtensions
+	e_ClientRequestTokenType                                     smithy.SchemaExtensions
+	e_CreatedDateType                                            smithy.SchemaExtensions
+	eDecryptionFailure                                           smithy.SchemaExtensions
+	eDecryptionFailure_Message                                   smithy.SchemaExtensions
+	e_DeletedDateType                                            smithy.SchemaExtensions
+	e_DeletionDateType                                           smithy.SchemaExtensions
+	e_DescriptionType                                            smithy.SchemaExtensions
+	e_DurationType                                               smithy.SchemaExtensions
+	eEncryptionFailure                                           smithy.SchemaExtensions
+	eEncryptionFailure_Message                                   smithy.SchemaExtensions
+	e_ErrorCode                                                  smithy.SchemaExtensions
+	e_ErrorMessage                                               smithy.SchemaExtensions
+	e_ExcludeCharactersType                                      smithy.SchemaExtensions
+	e_ExcludeLowercaseType                                       smithy.SchemaExtensions
+	e_ExcludeNumbersType                                         smithy.SchemaExtensions
+	e_ExcludePunctuationType                                     smithy.SchemaExtensions
+	e_ExcludeUppercaseType                                       smithy.SchemaExtensions
+	eExternalSecretRotationMetadataItem                          smithy.SchemaExtensions
+	eExternalSecretRotationMetadataItem_Key                      smithy.SchemaExtensions
+	eExternalSecretRotationMetadataItem_Value                    smithy.SchemaExtensions
+	e_ExternalSecretRotationMetadataItemKeyType                  smithy.SchemaExtensions
+	e_ExternalSecretRotationMetadataItemValueType                smithy.SchemaExtensions
+	e_ExternalSecretRotationMetadataType                         smithy.SchemaExtensions
+	e_ExternalSecretRotationMetadataType_member                  smithy.SchemaExtensions
+	eFilter                                                      smithy.SchemaExtensions
+	eFilter_Key                                                  smithy.SchemaExtensions
+	eFilter_Values                                               smithy.SchemaExtensions
+	eFilterNameStringType                                        smithy.SchemaExtensions
+	eFilterNameStringType_description                            smithy.SchemaExtensions
+	eFilterNameStringType_name                                   smithy.SchemaExtensions
+	eFilterNameStringType_tag_key                                smithy.SchemaExtensions
+	eFilterNameStringType_tag_value                              smithy.SchemaExtensions
+	eFilterNameStringType_primary_region                         smithy.SchemaExtensions
+	eFilterNameStringType_owning_service                         smithy.SchemaExtensions
+	eFilterNameStringType_all                                    smithy.SchemaExtensions
+	e_FiltersListType                                            smithy.SchemaExtensions
+	e_FiltersListType_member                                     smithy.SchemaExtensions
+	e_FilterValuesStringList                                     smithy.SchemaExtensions
+	e_FilterValuesStringList_member                              smithy.SchemaExtensions
+	e_FilterValueStringType                                      smithy.SchemaExtensions
+	e_IncludeSpaceType                                           smithy.SchemaExtensions
+	eInternalServiceError                                        smithy.SchemaExtensions
+	eInternalServiceError_Message                                smithy.SchemaExtensions
+	eInvalidNextTokenException                                   smithy.SchemaExtensions
+	eInvalidNextTokenException_Message                           smithy.SchemaExtensions
+	eInvalidParameterException                                   smithy.SchemaExtensions
+	eInvalidParameterException_Message                           smithy.SchemaExtensions
+	eInvalidRequestException                                     smithy.SchemaExtensions
+	eInvalidRequestException_Message                             smithy.SchemaExtensions
+	e_KmsKeyIdListType                                           smithy.SchemaExtensions
+	e_KmsKeyIdListType_member                                    smithy.SchemaExtensions
+	e_KmsKeyIdType                                               smithy.SchemaExtensions
+	e_LastAccessedDateType                                       smithy.SchemaExtensions
+	e_LastChangedDateType                                        smithy.SchemaExtensions
+	e_LastRotatedDateType                                        smithy.SchemaExtensions
+	eLimitExceededException                                      smithy.SchemaExtensions
+	eLimitExceededException_Message                              smithy.SchemaExtensions
+	eMalformedPolicyDocumentException                            smithy.SchemaExtensions
+	eMalformedPolicyDocumentException_Message                    smithy.SchemaExtensions
+	e_MaxResultsBatchType                                        smithy.SchemaExtensions
+	e_MaxResultsType                                             smithy.SchemaExtensions
+	e_MedeaTypeType                                              smithy.SchemaExtensions
+	e_NameType                                                   smithy.SchemaExtensions
+	e_NextRotationDateType                                       smithy.SchemaExtensions
+	e_NextTokenType                                              smithy.SchemaExtensions
+	e_NonEmptyResourcePolicyType                                 smithy.SchemaExtensions
+	e_OwningServiceType                                          smithy.SchemaExtensions
+	e_PasswordLengthType                                         smithy.SchemaExtensions
+	ePreconditionNotMetException                                 smithy.SchemaExtensions
+	ePreconditionNotMetException_Message                         smithy.SchemaExtensions
+	ePublicPolicyException                                       smithy.SchemaExtensions
+	ePublicPolicyException_Message                               smithy.SchemaExtensions
+	e_RandomPasswordType                                         smithy.SchemaExtensions
+	e_RecoveryWindowInDaysType                                   smithy.SchemaExtensions
+	e_RegionType                                                 smithy.SchemaExtensions
+	e_RemoveReplicaRegionListType                                smithy.SchemaExtensions
+	e_RemoveReplicaRegionListType_member                         smithy.SchemaExtensions
+	eReplicaRegionType                                           smithy.SchemaExtensions
+	eReplicaRegionType_Region                                    smithy.SchemaExtensions
+	eReplicaRegionType_KmsKeyId                                  smithy.SchemaExtensions
+	e_ReplicationStatusListType                                  smithy.SchemaExtensions
+	e_ReplicationStatusListType_member                           smithy.SchemaExtensions
+	eReplicationStatusType                                       smithy.SchemaExtensions
+	eReplicationStatusType_Region                                smithy.SchemaExtensions
+	eReplicationStatusType_KmsKeyId                              smithy.SchemaExtensions
+	eReplicationStatusType_Status                                smithy.SchemaExtensions
+	eReplicationStatusType_StatusMessage                         smithy.SchemaExtensions
+	eReplicationStatusType_LastAccessedDate                      smithy.SchemaExtensions
+	e_RequireEachIncludedTypeType                                smithy.SchemaExtensions
+	eResourceExistsException                                     smithy.SchemaExtensions
+	eResourceExistsException_Message                             smithy.SchemaExtensions
+	eResourceNotFoundException                                   smithy.SchemaExtensions
+	eResourceNotFoundException_Message                           smithy.SchemaExtensions
+	e_RoleARNType                                                smithy.SchemaExtensions
+	e_RotationEnabledType                                        smithy.SchemaExtensions
+	e_RotationLambdaARNType                                      smithy.SchemaExtensions
+	eRotationRulesType                                           smithy.SchemaExtensions
+	eRotationRulesType_AutomaticallyAfterDays                    smithy.SchemaExtensions
+	eRotationRulesType_Duration                                  smithy.SchemaExtensions
+	eRotationRulesType_ScheduleExpression                        smithy.SchemaExtensions
+	e_RotationTokenType                                          smithy.SchemaExtensions
+	e_ScheduleExpressionType                                     smithy.SchemaExtensions
+	e_SecretARNType                                              smithy.SchemaExtensions
+	e_SecretBinaryType                                           smithy.SchemaExtensions
+	e_SecretIdListType                                           smithy.SchemaExtensions
+	e_SecretIdListType_member                                    smithy.SchemaExtensions
+	e_SecretIdType                                               smithy.SchemaExtensions
+	eSecretListEntry                                             smithy.SchemaExtensions
+	eSecretListEntry_ARN                                         smithy.SchemaExtensions
+	eSecretListEntry_Name                                        smithy.SchemaExtensions
+	eSecretListEntry_Type                                        smithy.SchemaExtensions
+	eSecretListEntry_Description                                 smithy.SchemaExtensions
+	eSecretListEntry_KmsKeyId                                    smithy.SchemaExtensions
+	eSecretListEntry_RotationEnabled                             smithy.SchemaExtensions
+	eSecretListEntry_RotationLambdaARN                           smithy.SchemaExtensions
+	eSecretListEntry_RotationRules                               smithy.SchemaExtensions
+	eSecretListEntry_ExternalSecretRotationMetadata              smithy.SchemaExtensions
+	eSecretListEntry_ExternalSecretRotationRoleArn               smithy.SchemaExtensions
+	eSecretListEntry_LastRotatedDate                             smithy.SchemaExtensions
+	eSecretListEntry_LastChangedDate                             smithy.SchemaExtensions
+	eSecretListEntry_LastAccessedDate                            smithy.SchemaExtensions
+	eSecretListEntry_DeletedDate                                 smithy.SchemaExtensions
+	eSecretListEntry_NextRotationDate                            smithy.SchemaExtensions
+	eSecretListEntry_Tags                                        smithy.SchemaExtensions
+	eSecretListEntry_SecretVersionsToStages                      smithy.SchemaExtensions
+	eSecretListEntry_OwningService                               smithy.SchemaExtensions
+	eSecretListEntry_CreatedDate                                 smithy.SchemaExtensions
+	eSecretListEntry_PrimaryRegion                               smithy.SchemaExtensions
+	e_SecretListType                                             smithy.SchemaExtensions
+	e_SecretListType_member                                      smithy.SchemaExtensions
+	e_SecretNameType                                             smithy.SchemaExtensions
+	e_SecretStringType                                           smithy.SchemaExtensions
+	eSecretValueEntry                                            smithy.SchemaExtensions
+	eSecretValueEntry_ARN                                        smithy.SchemaExtensions
+	eSecretValueEntry_Name                                       smithy.SchemaExtensions
+	eSecretValueEntry_VersionId                                  smithy.SchemaExtensions
+	eSecretValueEntry_SecretBinary                               smithy.SchemaExtensions
+	eSecretValueEntry_SecretString                               smithy.SchemaExtensions
+	eSecretValueEntry_VersionStages                              smithy.SchemaExtensions
+	eSecretValueEntry_CreatedDate                                smithy.SchemaExtensions
+	e_SecretValuesType                                           smithy.SchemaExtensions
+	e_SecretValuesType_member                                    smithy.SchemaExtensions
+	e_SecretVersionIdType                                        smithy.SchemaExtensions
+	eSecretVersionsListEntry                                     smithy.SchemaExtensions
+	eSecretVersionsListEntry_VersionId                           smithy.SchemaExtensions
+	eSecretVersionsListEntry_VersionStages                       smithy.SchemaExtensions
+	eSecretVersionsListEntry_LastAccessedDate                    smithy.SchemaExtensions
+	eSecretVersionsListEntry_CreatedDate                         smithy.SchemaExtensions
+	eSecretVersionsListEntry_KmsKeyIds                           smithy.SchemaExtensions
+	e_SecretVersionsListType                                     smithy.SchemaExtensions
+	e_SecretVersionsListType_member                              smithy.SchemaExtensions
+	e_SecretVersionStagesType                                    smithy.SchemaExtensions
+	e_SecretVersionStagesType_member                             smithy.SchemaExtensions
+	e_SecretVersionStageType                                     smithy.SchemaExtensions
+	e_SecretVersionsToStagesMapType                              smithy.SchemaExtensions
+	e_SecretVersionsToStagesMapType_key                          smithy.SchemaExtensions
+	e_SecretVersionsToStagesMapType_value                        smithy.SchemaExtensions
+	eSortByType                                                  smithy.SchemaExtensions
+	eSortByType_created_date                                     smithy.SchemaExtensions
+	eSortByType_last_accessed_date                               smithy.SchemaExtensions
+	eSortByType_last_changed_date                                smithy.SchemaExtensions
+	eSortByType_name                                             smithy.SchemaExtensions
+	eSortOrderType                                               smithy.SchemaExtensions
+	eSortOrderType_asc                                           smithy.SchemaExtensions
+	eSortOrderType_desc                                          smithy.SchemaExtensions
+	e_StatusMessageType                                          smithy.SchemaExtensions
+	eStatusType                                                  smithy.SchemaExtensions
+	eStatusType_InSync                                           smithy.SchemaExtensions
+	eStatusType_Failed                                           smithy.SchemaExtensions
+	eStatusType_InProgress                                       smithy.SchemaExtensions
+	eTag                                                         smithy.SchemaExtensions
+	eTag_Key                                                     smithy.SchemaExtensions
+	eTag_Value                                                   smithy.SchemaExtensions
+	e_TagKeyListType                                             smithy.SchemaExtensions
+	e_TagKeyListType_member                                      smithy.SchemaExtensions
+	e_TagKeyType                                                 smithy.SchemaExtensions
+	e_TagListType                                                smithy.SchemaExtensions
+	e_TagListType_member                                         smithy.SchemaExtensions
+	e_TagValueType                                               smithy.SchemaExtensions
+	e_TimestampType                                              smithy.SchemaExtensions
+	eValidationErrorsEntry                                       smithy.SchemaExtensions
+	eValidationErrorsEntry_CheckName                             smithy.SchemaExtensions
+	eValidationErrorsEntry_ErrorMessage                          smithy.SchemaExtensions
+	e_ValidationErrorsType                                       smithy.SchemaExtensions
+	e_ValidationErrorsType_member                                smithy.SchemaExtensions
+	eBatchGetSecretValueRequest                                  smithy.SchemaExtensions
+	eBatchGetSecretValueRequest_SecretIdList                     smithy.SchemaExtensions
+	eBatchGetSecretValueRequest_Filters                          smithy.SchemaExtensions
+	eBatchGetSecretValueRequest_MaxResults                       smithy.SchemaExtensions
+	eBatchGetSecretValueRequest_NextToken                        smithy.SchemaExtensions
+	eBatchGetSecretValueResponse                                 smithy.SchemaExtensions
+	eBatchGetSecretValueResponse_SecretValues                    smithy.SchemaExtensions
+	eBatchGetSecretValueResponse_NextToken                       smithy.SchemaExtensions
+	eBatchGetSecretValueResponse_Errors                          smithy.SchemaExtensions
+	eCancelRotateSecretRequest                                   smithy.SchemaExtensions
+	eCancelRotateSecretRequest_SecretId                          smithy.SchemaExtensions
+	eCancelRotateSecretResponse                                  smithy.SchemaExtensions
+	eCancelRotateSecretResponse_ARN                              smithy.SchemaExtensions
+	eCancelRotateSecretResponse_Name                             smithy.SchemaExtensions
+	eCancelRotateSecretResponse_VersionId                        smithy.SchemaExtensions
+	eCreateSecretRequest                                         smithy.SchemaExtensions
+	eCreateSecretRequest_Name                                    smithy.SchemaExtensions
+	eCreateSecretRequest_ClientRequestToken                      smithy.SchemaExtensions
+	eCreateSecretRequest_Description                             smithy.SchemaExtensions
+	eCreateSecretRequest_KmsKeyId                                smithy.SchemaExtensions
+	eCreateSecretRequest_SecretBinary                            smithy.SchemaExtensions
+	eCreateSecretRequest_SecretString                            smithy.SchemaExtensions
+	eCreateSecretRequest_Tags                                    smithy.SchemaExtensions
+	eCreateSecretRequest_AddReplicaRegions                       smithy.SchemaExtensions
+	eCreateSecretRequest_ForceOverwriteReplicaSecret             smithy.SchemaExtensions
+	eCreateSecretRequest_Type                                    smithy.SchemaExtensions
+	eCreateSecretResponse                                        smithy.SchemaExtensions
+	eCreateSecretResponse_ARN                                    smithy.SchemaExtensions
+	eCreateSecretResponse_Name                                   smithy.SchemaExtensions
+	eCreateSecretResponse_VersionId                              smithy.SchemaExtensions
+	eCreateSecretResponse_ReplicationStatus                      smithy.SchemaExtensions
+	eDeleteResourcePolicyRequest                                 smithy.SchemaExtensions
+	eDeleteResourcePolicyRequest_SecretId                        smithy.SchemaExtensions
+	eDeleteResourcePolicyResponse                                smithy.SchemaExtensions
+	eDeleteResourcePolicyResponse_ARN                            smithy.SchemaExtensions
+	eDeleteResourcePolicyResponse_Name                           smithy.SchemaExtensions
+	eDeleteSecretRequest                                         smithy.SchemaExtensions
+	eDeleteSecretRequest_SecretId                                smithy.SchemaExtensions
+	eDeleteSecretRequest_RecoveryWindowInDays                    smithy.SchemaExtensions
+	eDeleteSecretRequest_ForceDeleteWithoutRecovery              smithy.SchemaExtensions
+	eDeleteSecretResponse                                        smithy.SchemaExtensions
+	eDeleteSecretResponse_ARN                                    smithy.SchemaExtensions
+	eDeleteSecretResponse_Name                                   smithy.SchemaExtensions
+	eDeleteSecretResponse_DeletionDate                           smithy.SchemaExtensions
+	eDescribeSecretRequest                                       smithy.SchemaExtensions
+	eDescribeSecretRequest_SecretId                              smithy.SchemaExtensions
+	eDescribeSecretResponse                                      smithy.SchemaExtensions
+	eDescribeSecretResponse_ARN                                  smithy.SchemaExtensions
+	eDescribeSecretResponse_Name                                 smithy.SchemaExtensions
+	eDescribeSecretResponse_Type                                 smithy.SchemaExtensions
+	eDescribeSecretResponse_Description                          smithy.SchemaExtensions
+	eDescribeSecretResponse_KmsKeyId                             smithy.SchemaExtensions
+	eDescribeSecretResponse_RotationEnabled                      smithy.SchemaExtensions
+	eDescribeSecretResponse_RotationLambdaARN                    smithy.SchemaExtensions
+	eDescribeSecretResponse_RotationRules                        smithy.SchemaExtensions
+	eDescribeSecretResponse_ExternalSecretRotationMetadata       smithy.SchemaExtensions
+	eDescribeSecretResponse_ExternalSecretRotationRoleArn        smithy.SchemaExtensions
+	eDescribeSecretResponse_LastRotatedDate                      smithy.SchemaExtensions
+	eDescribeSecretResponse_LastChangedDate                      smithy.SchemaExtensions
+	eDescribeSecretResponse_LastAccessedDate                     smithy.SchemaExtensions
+	eDescribeSecretResponse_DeletedDate                          smithy.SchemaExtensions
+	eDescribeSecretResponse_NextRotationDate                     smithy.SchemaExtensions
+	eDescribeSecretResponse_Tags                                 smithy.SchemaExtensions
+	eDescribeSecretResponse_VersionIdsToStages                   smithy.SchemaExtensions
+	eDescribeSecretResponse_OwningService                        smithy.SchemaExtensions
+	eDescribeSecretResponse_CreatedDate                          smithy.SchemaExtensions
+	eDescribeSecretResponse_PrimaryRegion                        smithy.SchemaExtensions
+	eDescribeSecretResponse_ReplicationStatus                    smithy.SchemaExtensions
+	eGetRandomPasswordRequest                                    smithy.SchemaExtensions
+	eGetRandomPasswordRequest_PasswordLength                     smithy.SchemaExtensions
+	eGetRandomPasswordRequest_ExcludeCharacters                  smithy.SchemaExtensions
+	eGetRandomPasswordRequest_ExcludeNumbers                     smithy.SchemaExtensions
+	eGetRandomPasswordRequest_ExcludePunctuation                 smithy.SchemaExtensions
+	eGetRandomPasswordRequest_ExcludeUppercase                   smithy.SchemaExtensions
+	eGetRandomPasswordRequest_ExcludeLowercase                   smithy.SchemaExtensions
+	eGetRandomPasswordRequest_IncludeSpace                       smithy.SchemaExtensions
+	eGetRandomPasswordRequest_RequireEachIncludedType            smithy.SchemaExtensions
+	eGetRandomPasswordResponse                                   smithy.SchemaExtensions
+	eGetRandomPasswordResponse_RandomPassword                    smithy.SchemaExtensions
+	eGetResourcePolicyRequest                                    smithy.SchemaExtensions
+	eGetResourcePolicyRequest_SecretId                           smithy.SchemaExtensions
+	eGetResourcePolicyResponse                                   smithy.SchemaExtensions
+	eGetResourcePolicyResponse_ARN                               smithy.SchemaExtensions
+	eGetResourcePolicyResponse_Name                              smithy.SchemaExtensions
+	eGetResourcePolicyResponse_ResourcePolicy                    smithy.SchemaExtensions
+	eGetSecretValueRequest                                       smithy.SchemaExtensions
+	eGetSecretValueRequest_SecretId                              smithy.SchemaExtensions
+	eGetSecretValueRequest_VersionId                             smithy.SchemaExtensions
+	eGetSecretValueRequest_VersionStage                          smithy.SchemaExtensions
+	eGetSecretValueResponse                                      smithy.SchemaExtensions
+	eGetSecretValueResponse_ARN                                  smithy.SchemaExtensions
+	eGetSecretValueResponse_Name                                 smithy.SchemaExtensions
+	eGetSecretValueResponse_VersionId                            smithy.SchemaExtensions
+	eGetSecretValueResponse_SecretBinary                         smithy.SchemaExtensions
+	eGetSecretValueResponse_SecretString                         smithy.SchemaExtensions
+	eGetSecretValueResponse_VersionStages                        smithy.SchemaExtensions
+	eGetSecretValueResponse_CreatedDate                          smithy.SchemaExtensions
+	eListSecretsRequest                                          smithy.SchemaExtensions
+	eListSecretsRequest_IncludePlannedDeletion                   smithy.SchemaExtensions
+	eListSecretsRequest_MaxResults                               smithy.SchemaExtensions
+	eListSecretsRequest_NextToken                                smithy.SchemaExtensions
+	eListSecretsRequest_Filters                                  smithy.SchemaExtensions
+	eListSecretsRequest_SortOrder                                smithy.SchemaExtensions
+	eListSecretsRequest_SortBy                                   smithy.SchemaExtensions
+	eListSecretsResponse                                         smithy.SchemaExtensions
+	eListSecretsResponse_SecretList                              smithy.SchemaExtensions
+	eListSecretsResponse_NextToken                               smithy.SchemaExtensions
+	eListSecretVersionIdsRequest                                 smithy.SchemaExtensions
+	eListSecretVersionIdsRequest_SecretId                        smithy.SchemaExtensions
+	eListSecretVersionIdsRequest_MaxResults                      smithy.SchemaExtensions
+	eListSecretVersionIdsRequest_NextToken                       smithy.SchemaExtensions
+	eListSecretVersionIdsRequest_IncludeDeprecated               smithy.SchemaExtensions
+	eListSecretVersionIdsResponse                                smithy.SchemaExtensions
+	eListSecretVersionIdsResponse_Versions                       smithy.SchemaExtensions
+	eListSecretVersionIdsResponse_NextToken                      smithy.SchemaExtensions
+	eListSecretVersionIdsResponse_ARN                            smithy.SchemaExtensions
+	eListSecretVersionIdsResponse_Name                           smithy.SchemaExtensions
+	ePutResourcePolicyRequest                                    smithy.SchemaExtensions
+	ePutResourcePolicyRequest_SecretId                           smithy.SchemaExtensions
+	ePutResourcePolicyRequest_ResourcePolicy                     smithy.SchemaExtensions
+	ePutResourcePolicyRequest_BlockPublicPolicy                  smithy.SchemaExtensions
+	ePutResourcePolicyResponse                                   smithy.SchemaExtensions
+	ePutResourcePolicyResponse_ARN                               smithy.SchemaExtensions
+	ePutResourcePolicyResponse_Name                              smithy.SchemaExtensions
+	ePutSecretValueRequest                                       smithy.SchemaExtensions
+	ePutSecretValueRequest_SecretId                              smithy.SchemaExtensions
+	ePutSecretValueRequest_ClientRequestToken                    smithy.SchemaExtensions
+	ePutSecretValueRequest_SecretBinary                          smithy.SchemaExtensions
+	ePutSecretValueRequest_SecretString                          smithy.SchemaExtensions
+	ePutSecretValueRequest_VersionStages                         smithy.SchemaExtensions
+	ePutSecretValueRequest_RotationToken                         smithy.SchemaExtensions
+	ePutSecretValueResponse                                      smithy.SchemaExtensions
+	ePutSecretValueResponse_ARN                                  smithy.SchemaExtensions
+	ePutSecretValueResponse_Name                                 smithy.SchemaExtensions
+	ePutSecretValueResponse_VersionId                            smithy.SchemaExtensions
+	ePutSecretValueResponse_VersionStages                        smithy.SchemaExtensions
+	eRemoveRegionsFromReplicationRequest                         smithy.SchemaExtensions
+	eRemoveRegionsFromReplicationRequest_SecretId                smithy.SchemaExtensions
+	eRemoveRegionsFromReplicationRequest_RemoveReplicaRegions    smithy.SchemaExtensions
+	eRemoveRegionsFromReplicationResponse                        smithy.SchemaExtensions
+	eRemoveRegionsFromReplicationResponse_ARN                    smithy.SchemaExtensions
+	eRemoveRegionsFromReplicationResponse_ReplicationStatus      smithy.SchemaExtensions
+	eReplicateSecretToRegionsRequest                             smithy.SchemaExtensions
+	eReplicateSecretToRegionsRequest_SecretId                    smithy.SchemaExtensions
+	eReplicateSecretToRegionsRequest_AddReplicaRegions           smithy.SchemaExtensions
+	eReplicateSecretToRegionsRequest_ForceOverwriteReplicaSecret smithy.SchemaExtensions
+	eReplicateSecretToRegionsResponse                            smithy.SchemaExtensions
+	eReplicateSecretToRegionsResponse_ARN                        smithy.SchemaExtensions
+	eReplicateSecretToRegionsResponse_ReplicationStatus          smithy.SchemaExtensions
+	eRestoreSecretRequest                                        smithy.SchemaExtensions
+	eRestoreSecretRequest_SecretId                               smithy.SchemaExtensions
+	eRestoreSecretResponse                                       smithy.SchemaExtensions
+	eRestoreSecretResponse_ARN                                   smithy.SchemaExtensions
+	eRestoreSecretResponse_Name                                  smithy.SchemaExtensions
+	eRotateSecretRequest                                         smithy.SchemaExtensions
+	eRotateSecretRequest_SecretId                                smithy.SchemaExtensions
+	eRotateSecretRequest_ClientRequestToken                      smithy.SchemaExtensions
+	eRotateSecretRequest_RotationLambdaARN                       smithy.SchemaExtensions
+	eRotateSecretRequest_RotationRules                           smithy.SchemaExtensions
+	eRotateSecretRequest_ExternalSecretRotationMetadata          smithy.SchemaExtensions
+	eRotateSecretRequest_ExternalSecretRotationRoleArn           smithy.SchemaExtensions
+	eRotateSecretRequest_RotateImmediately                       smithy.SchemaExtensions
+	eRotateSecretResponse                                        smithy.SchemaExtensions
+	eRotateSecretResponse_ARN                                    smithy.SchemaExtensions
+	eRotateSecretResponse_Name                                   smithy.SchemaExtensions
+	eRotateSecretResponse_VersionId                              smithy.SchemaExtensions
+	eStopReplicationToReplicaRequest                             smithy.SchemaExtensions
+	eStopReplicationToReplicaRequest_SecretId                    smithy.SchemaExtensions
+	eStopReplicationToReplicaResponse                            smithy.SchemaExtensions
+	eStopReplicationToReplicaResponse_ARN                        smithy.SchemaExtensions
+	eTagResourceRequest                                          smithy.SchemaExtensions
+	eTagResourceRequest_SecretId                                 smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                     smithy.SchemaExtensions
+	eUntagResourceRequest                                        smithy.SchemaExtensions
+	eUntagResourceRequest_SecretId                               smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                smithy.SchemaExtensions
+	eUpdateSecretRequest                                         smithy.SchemaExtensions
+	eUpdateSecretRequest_SecretId                                smithy.SchemaExtensions
+	eUpdateSecretRequest_ClientRequestToken                      smithy.SchemaExtensions
+	eUpdateSecretRequest_Description                             smithy.SchemaExtensions
+	eUpdateSecretRequest_KmsKeyId                                smithy.SchemaExtensions
+	eUpdateSecretRequest_SecretBinary                            smithy.SchemaExtensions
+	eUpdateSecretRequest_SecretString                            smithy.SchemaExtensions
+	eUpdateSecretRequest_Type                                    smithy.SchemaExtensions
+	eUpdateSecretResponse                                        smithy.SchemaExtensions
+	eUpdateSecretResponse_ARN                                    smithy.SchemaExtensions
+	eUpdateSecretResponse_Name                                   smithy.SchemaExtensions
+	eUpdateSecretResponse_VersionId                              smithy.SchemaExtensions
+	eUpdateSecretVersionStageRequest                             smithy.SchemaExtensions
+	eUpdateSecretVersionStageRequest_SecretId                    smithy.SchemaExtensions
+	eUpdateSecretVersionStageRequest_VersionStage                smithy.SchemaExtensions
+	eUpdateSecretVersionStageRequest_RemoveFromVersionId         smithy.SchemaExtensions
+	eUpdateSecretVersionStageRequest_MoveToVersionId             smithy.SchemaExtensions
+	eUpdateSecretVersionStageResponse                            smithy.SchemaExtensions
+	eUpdateSecretVersionStageResponse_ARN                        smithy.SchemaExtensions
+	eUpdateSecretVersionStageResponse_Name                       smithy.SchemaExtensions
+	eValidateResourcePolicyRequest                               smithy.SchemaExtensions
+	eValidateResourcePolicyRequest_SecretId                      smithy.SchemaExtensions
+	eValidateResourcePolicyRequest_ResourcePolicy                smithy.SchemaExtensions
+	eValidateResourcePolicyResponse                              smithy.SchemaExtensions
+	eValidateResourcePolicyResponse_PolicyValidationPassed       smithy.SchemaExtensions
+	eValidateResourcePolicyResponse_ValidationErrors             smithy.SchemaExtensions
+)
 
 var (
 	iBatchGetSecretValue                          = smithy.ShapeID{Namespace: "com.amazonaws.secretsmanager", Name: "BatchGetSecretValue"}
@@ -284,428 +704,428 @@ var mUpdateSecretVersionStageResponse = smithy.SchemaMembers{List: []*smithy.Sch
 var mValidateResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sValidateResourcePolicyRequest_SecretId, &sValidateResourcePolicyRequest_ResourcePolicy}}
 var mValidateResourcePolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sValidateResourcePolicyResponse_PolicyValidationPassed, &sValidateResourcePolicyResponse_ValidationErrors}}
 
-var sBatchGetSecretValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetSecretValue, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCancelRotateSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelRotateSecret, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sCreateSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSecret, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sDeleteResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicy, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sDeleteSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSecret, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sDescribeSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSecret, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sGetRandomPassword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRandomPassword, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sGetResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicy, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sGetSecretValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSecretValue, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sListSecrets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecrets, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sListSecretVersionIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecretVersionIds, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sPutResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicy, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sPutSecretValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSecretValue, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sRemoveRegionsFromReplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveRegionsFromReplication, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sReplicateSecretToRegions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicateSecretToRegions, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sRestoreSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreSecret, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sRotateSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateSecret, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sStopReplicationToReplica = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopReplicationToReplica, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var sUpdateSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSecret, Type: smithy.ShapeTypeOperation, Ext: &ext[20]})
-var sUpdateSecretVersionStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSecretVersionStage, Type: smithy.ShapeTypeOperation, Ext: &ext[21]})
-var sValidateResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidateResourcePolicy, Type: smithy.ShapeTypeOperation, Ext: &ext[22]})
-var s_secretsmanager = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_secretsmanager, Type: smithy.ShapeTypeService, Ext: &ext[23]})
-var s_AddReplicaRegionListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddReplicaRegionListType, Members: &m_AddReplicaRegionListType, Type: smithy.ShapeTypeList, Ext: &ext[24]})
-var s_APIErrorListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_APIErrorListType, Members: &m_APIErrorListType, Type: smithy.ShapeTypeList, Ext: &ext[26]})
-var sAPIErrorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAPIErrorType, Members: &mAPIErrorType, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
-var s_AutomaticallyRotateAfterDaysType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutomaticallyRotateAfterDaysType, Type: smithy.ShapeTypeLong, Ext: &ext[32]})
-var s_BooleanType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[33]})
-var s_ClientRequestTokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientRequestTokenType, Type: smithy.ShapeTypeString, Ext: &ext[34]})
-var s_CreatedDateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreatedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[35]})
-var sDecryptionFailure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecryptionFailure, Members: &mDecryptionFailure, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[36]})
-var s_DeletedDateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeletedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[38]})
-var s_DeletionDateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeletionDateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[39]})
-var s_DescriptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescriptionType, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var s_DurationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DurationType, Type: smithy.ShapeTypeString, Ext: &ext[41]})
-var sEncryptionFailure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionFailure, Members: &mEncryptionFailure, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[42]})
-var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var s_ExcludeCharactersType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludeCharactersType, Type: smithy.ShapeTypeString, Ext: &ext[46]})
-var s_ExcludeLowercaseType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludeLowercaseType, Type: smithy.ShapeTypeBoolean, Ext: &ext[47]})
-var s_ExcludeNumbersType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludeNumbersType, Type: smithy.ShapeTypeBoolean, Ext: &ext[48]})
-var s_ExcludePunctuationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludePunctuationType, Type: smithy.ShapeTypeBoolean, Ext: &ext[49]})
-var s_ExcludeUppercaseType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludeUppercaseType, Type: smithy.ShapeTypeBoolean, Ext: &ext[50]})
-var sExternalSecretRotationMetadataItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExternalSecretRotationMetadataItem, Members: &mExternalSecretRotationMetadataItem, Type: smithy.ShapeTypeStructure, Ext: &ext[51]})
-var s_ExternalSecretRotationMetadataItemKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalSecretRotationMetadataItemKeyType, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var s_ExternalSecretRotationMetadataItemValueType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalSecretRotationMetadataItemValueType, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var s_ExternalSecretRotationMetadataType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalSecretRotationMetadataType, Members: &m_ExternalSecretRotationMetadataType, Type: smithy.ShapeTypeList, Ext: &ext[56]})
-var sFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[58]})
-var sFilterNameStringType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterNameStringType, Members: &mFilterNameStringType, Type: smithy.ShapeTypeEnum, Ext: &ext[61]})
-var s_FiltersListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FiltersListType, Members: &m_FiltersListType, Type: smithy.ShapeTypeList, Ext: &ext[69]})
-var s_FilterValuesStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValuesStringList, Members: &m_FilterValuesStringList, Type: smithy.ShapeTypeList, Ext: &ext[71]})
-var s_FilterValueStringType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValueStringType, Type: smithy.ShapeTypeString, Ext: &ext[73]})
-var s_IncludeSpaceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncludeSpaceType, Type: smithy.ShapeTypeBoolean, Ext: &ext[74]})
-var sInternalServiceError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServiceError, Members: &mInternalServiceError, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[75]})
-var sInvalidNextTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidNextTokenException, Members: &mInvalidNextTokenException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
-var sInvalidParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterException, Members: &mInvalidParameterException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[79]})
-var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[81]})
-var s_KmsKeyIdListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyIdListType, Members: &m_KmsKeyIdListType, Type: smithy.ShapeTypeList, Ext: &ext[83]})
-var s_KmsKeyIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[85]})
-var s_LastAccessedDateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastAccessedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[86]})
-var s_LastChangedDateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastChangedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[87]})
-var s_LastRotatedDateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastRotatedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[88]})
-var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[89]})
-var sMalformedPolicyDocumentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedPolicyDocumentException, Members: &mMalformedPolicyDocumentException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[91]})
-var s_MaxResultsBatchType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsBatchType, Type: smithy.ShapeTypeInteger, Ext: &ext[93]})
-var s_MaxResultsType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsType, Type: smithy.ShapeTypeInteger, Ext: &ext[94]})
-var s_MedeaTypeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MedeaTypeType, Type: smithy.ShapeTypeString, Ext: &ext[95]})
-var s_NameType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NameType, Type: smithy.ShapeTypeString, Ext: &ext[96]})
-var s_NextRotationDateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextRotationDateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[97]})
-var s_NextTokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextTokenType, Type: smithy.ShapeTypeString, Ext: &ext[98]})
-var s_NonEmptyResourcePolicyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyResourcePolicyType, Type: smithy.ShapeTypeString, Ext: &ext[99]})
-var s_OwningServiceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OwningServiceType, Type: smithy.ShapeTypeString, Ext: &ext[100]})
-var s_PasswordLengthType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PasswordLengthType, Type: smithy.ShapeTypeLong, Ext: &ext[101]})
-var sPreconditionNotMetException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPreconditionNotMetException, Members: &mPreconditionNotMetException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[102]})
-var sPublicPolicyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublicPolicyException, Members: &mPublicPolicyException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[104]})
-var s_RandomPasswordType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RandomPasswordType, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[106]})
-var s_RecoveryWindowInDaysType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryWindowInDaysType, Type: smithy.ShapeTypeLong, Ext: &ext[107]})
-var s_RegionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionType, Type: smithy.ShapeTypeString, Ext: &ext[108]})
-var s_RemoveReplicaRegionListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RemoveReplicaRegionListType, Members: &m_RemoveReplicaRegionListType, Type: smithy.ShapeTypeList, Ext: &ext[109]})
-var sReplicaRegionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicaRegionType, Members: &mReplicaRegionType, Type: smithy.ShapeTypeStructure, Ext: &ext[111]})
-var s_ReplicationStatusListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplicationStatusListType, Members: &m_ReplicationStatusListType, Type: smithy.ShapeTypeList, Ext: &ext[114]})
-var sReplicationStatusType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationStatusType, Members: &mReplicationStatusType, Type: smithy.ShapeTypeStructure, Ext: &ext[116]})
-var s_RequireEachIncludedTypeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequireEachIncludedTypeType, Type: smithy.ShapeTypeBoolean, Ext: &ext[122]})
-var sResourceExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceExistsException, Members: &mResourceExistsException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[123]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[125]})
-var s_RoleARNType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleARNType, Type: smithy.ShapeTypeString, Ext: &ext[127]})
-var s_RotationEnabledType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RotationEnabledType, Type: smithy.ShapeTypeBoolean, Ext: &ext[128]})
-var s_RotationLambdaARNType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RotationLambdaARNType, Type: smithy.ShapeTypeString, Ext: &ext[129]})
-var sRotationRulesType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotationRulesType, Members: &mRotationRulesType, Type: smithy.ShapeTypeStructure, Ext: &ext[130]})
-var s_RotationTokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RotationTokenType, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[134]})
-var s_ScheduleExpressionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduleExpressionType, Type: smithy.ShapeTypeString, Ext: &ext[135]})
-var s_SecretARNType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &ext[136]})
-var s_SecretBinaryType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretBinaryType, Traits: &t2, Type: smithy.ShapeTypeBlob, Ext: &ext[137]})
-var s_SecretIdListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretIdListType, Members: &m_SecretIdListType, Type: smithy.ShapeTypeList, Ext: &ext[138]})
-var s_SecretIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &ext[140]})
-var sSecretListEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecretListEntry, Members: &mSecretListEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[141]})
-var s_SecretListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretListType, Members: &m_SecretListType, Type: smithy.ShapeTypeList, Ext: &ext[162]})
-var s_SecretNameType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &ext[164]})
-var s_SecretStringType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretStringType, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[165]})
-var sSecretValueEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecretValueEntry, Members: &mSecretValueEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[166]})
-var s_SecretValuesType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretValuesType, Members: &m_SecretValuesType, Type: smithy.ShapeTypeList, Ext: &ext[174]})
-var s_SecretVersionIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretVersionIdType, Type: smithy.ShapeTypeString, Ext: &ext[176]})
-var sSecretVersionsListEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecretVersionsListEntry, Members: &mSecretVersionsListEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[177]})
-var s_SecretVersionsListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretVersionsListType, Members: &m_SecretVersionsListType, Type: smithy.ShapeTypeList, Ext: &ext[183]})
-var s_SecretVersionStagesType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretVersionStagesType, Members: &m_SecretVersionStagesType, Type: smithy.ShapeTypeList, Ext: &ext[185]})
-var s_SecretVersionStageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretVersionStageType, Type: smithy.ShapeTypeString, Ext: &ext[187]})
-var s_SecretVersionsToStagesMapType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretVersionsToStagesMapType, Members: &m_SecretVersionsToStagesMapType, Type: smithy.ShapeTypeMap, Ext: &ext[188]})
-var sSortByType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortByType, Members: &mSortByType, Type: smithy.ShapeTypeEnum, Ext: &ext[191]})
-var sSortOrderType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortOrderType, Members: &mSortOrderType, Type: smithy.ShapeTypeEnum, Ext: &ext[196]})
-var s_StatusMessageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusMessageType, Type: smithy.ShapeTypeString, Ext: &ext[199]})
-var sStatusType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatusType, Members: &mStatusType, Type: smithy.ShapeTypeEnum, Ext: &ext[200]})
-var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[204]})
-var s_TagKeyListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyListType, Members: &m_TagKeyListType, Type: smithy.ShapeTypeList, Ext: &ext[207]})
-var s_TagKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyType, Type: smithy.ShapeTypeString, Ext: &ext[209]})
-var s_TagListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagListType, Members: &m_TagListType, Type: smithy.ShapeTypeList, Ext: &ext[210]})
-var s_TagValueType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValueType, Type: smithy.ShapeTypeString, Ext: &ext[212]})
-var s_TimestampType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimestampType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[213]})
-var sValidationErrorsEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationErrorsEntry, Members: &mValidationErrorsEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[214]})
-var s_ValidationErrorsType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationErrorsType, Members: &m_ValidationErrorsType, Type: smithy.ShapeTypeList, Ext: &ext[217]})
-var sBatchGetSecretValueRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetSecretValueRequest, Members: &mBatchGetSecretValueRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[219]})
-var sBatchGetSecretValueResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetSecretValueResponse, Members: &mBatchGetSecretValueResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[224]})
-var sCancelRotateSecretRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelRotateSecretRequest, Members: &mCancelRotateSecretRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[228]})
-var sCancelRotateSecretResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelRotateSecretResponse, Members: &mCancelRotateSecretResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[230]})
-var sCreateSecretRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSecretRequest, Members: &mCreateSecretRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[234]})
-var sCreateSecretResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSecretResponse, Members: &mCreateSecretResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[245]})
-var sDeleteResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyRequest, Members: &mDeleteResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[250]})
-var sDeleteResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyResponse, Members: &mDeleteResourcePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[252]})
-var sDeleteSecretRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSecretRequest, Members: &mDeleteSecretRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[255]})
-var sDeleteSecretResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSecretResponse, Members: &mDeleteSecretResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[259]})
-var sDescribeSecretRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSecretRequest, Members: &mDescribeSecretRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[263]})
-var sDescribeSecretResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSecretResponse, Members: &mDescribeSecretResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[265]})
-var sGetRandomPasswordRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRandomPasswordRequest, Members: &mGetRandomPasswordRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[287]})
-var sGetRandomPasswordResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRandomPasswordResponse, Members: &mGetRandomPasswordResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[296]})
-var sGetResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyRequest, Members: &mGetResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[298]})
-var sGetResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyResponse, Members: &mGetResourcePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[300]})
-var sGetSecretValueRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSecretValueRequest, Members: &mGetSecretValueRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[304]})
-var sGetSecretValueResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSecretValueResponse, Members: &mGetSecretValueResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[308]})
-var sListSecretsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecretsRequest, Members: &mListSecretsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[316]})
-var sListSecretsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecretsResponse, Members: &mListSecretsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[323]})
-var sListSecretVersionIdsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecretVersionIdsRequest, Members: &mListSecretVersionIdsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[326]})
-var sListSecretVersionIdsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecretVersionIdsResponse, Members: &mListSecretVersionIdsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[331]})
-var sPutResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyRequest, Members: &mPutResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[336]})
-var sPutResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyResponse, Members: &mPutResourcePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[340]})
-var sPutSecretValueRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSecretValueRequest, Members: &mPutSecretValueRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[343]})
-var sPutSecretValueResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSecretValueResponse, Members: &mPutSecretValueResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[350]})
-var sRemoveRegionsFromReplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveRegionsFromReplicationRequest, Members: &mRemoveRegionsFromReplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[355]})
-var sRemoveRegionsFromReplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveRegionsFromReplicationResponse, Members: &mRemoveRegionsFromReplicationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[358]})
-var sReplicateSecretToRegionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicateSecretToRegionsRequest, Members: &mReplicateSecretToRegionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[361]})
-var sReplicateSecretToRegionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicateSecretToRegionsResponse, Members: &mReplicateSecretToRegionsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[365]})
-var sRestoreSecretRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreSecretRequest, Members: &mRestoreSecretRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[368]})
-var sRestoreSecretResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreSecretResponse, Members: &mRestoreSecretResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[370]})
-var sRotateSecretRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateSecretRequest, Members: &mRotateSecretRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[373]})
-var sRotateSecretResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateSecretResponse, Members: &mRotateSecretResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[381]})
-var sStopReplicationToReplicaRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopReplicationToReplicaRequest, Members: &mStopReplicationToReplicaRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[385]})
-var sStopReplicationToReplicaResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopReplicationToReplicaResponse, Members: &mStopReplicationToReplicaResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[387]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[389]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[392]})
-var sUpdateSecretRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSecretRequest, Members: &mUpdateSecretRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[395]})
-var sUpdateSecretResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSecretResponse, Members: &mUpdateSecretResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[403]})
-var sUpdateSecretVersionStageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSecretVersionStageRequest, Members: &mUpdateSecretVersionStageRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[407]})
-var sUpdateSecretVersionStageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSecretVersionStageResponse, Members: &mUpdateSecretVersionStageResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[412]})
-var sValidateResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidateResourcePolicyRequest, Members: &mValidateResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[415]})
-var sValidateResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidateResourcePolicyResponse, Members: &mValidateResourcePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[418]})
+var sBatchGetSecretValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetSecretValue, Type: smithy.ShapeTypeOperation, Ext: &eBatchGetSecretValue})
+var sCancelRotateSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelRotateSecret, Type: smithy.ShapeTypeOperation, Ext: &eCancelRotateSecret})
+var sCreateSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSecret, Type: smithy.ShapeTypeOperation, Ext: &eCreateSecret})
+var sDeleteResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicy, Type: smithy.ShapeTypeOperation, Ext: &eDeleteResourcePolicy})
+var sDeleteSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSecret, Type: smithy.ShapeTypeOperation, Ext: &eDeleteSecret})
+var sDescribeSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSecret, Type: smithy.ShapeTypeOperation, Ext: &eDescribeSecret})
+var sGetRandomPassword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRandomPassword, Type: smithy.ShapeTypeOperation, Ext: &eGetRandomPassword})
+var sGetResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicy, Type: smithy.ShapeTypeOperation, Ext: &eGetResourcePolicy})
+var sGetSecretValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSecretValue, Type: smithy.ShapeTypeOperation, Ext: &eGetSecretValue})
+var sListSecrets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecrets, Type: smithy.ShapeTypeOperation, Ext: &eListSecrets})
+var sListSecretVersionIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecretVersionIds, Type: smithy.ShapeTypeOperation, Ext: &eListSecretVersionIds})
+var sPutResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicy, Type: smithy.ShapeTypeOperation, Ext: &ePutResourcePolicy})
+var sPutSecretValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSecretValue, Type: smithy.ShapeTypeOperation, Ext: &ePutSecretValue})
+var sRemoveRegionsFromReplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveRegionsFromReplication, Type: smithy.ShapeTypeOperation, Ext: &eRemoveRegionsFromReplication})
+var sReplicateSecretToRegions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicateSecretToRegions, Type: smithy.ShapeTypeOperation, Ext: &eReplicateSecretToRegions})
+var sRestoreSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreSecret, Type: smithy.ShapeTypeOperation, Ext: &eRestoreSecret})
+var sRotateSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateSecret, Type: smithy.ShapeTypeOperation, Ext: &eRotateSecret})
+var sStopReplicationToReplica = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopReplicationToReplica, Type: smithy.ShapeTypeOperation, Ext: &eStopReplicationToReplica})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSecret, Type: smithy.ShapeTypeOperation, Ext: &eUpdateSecret})
+var sUpdateSecretVersionStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSecretVersionStage, Type: smithy.ShapeTypeOperation, Ext: &eUpdateSecretVersionStage})
+var sValidateResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidateResourcePolicy, Type: smithy.ShapeTypeOperation, Ext: &eValidateResourcePolicy})
+var s_secretsmanager = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_secretsmanager, Type: smithy.ShapeTypeService, Ext: &e_secretsmanager})
+var s_AddReplicaRegionListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddReplicaRegionListType, Members: &m_AddReplicaRegionListType, Type: smithy.ShapeTypeList, Ext: &e_AddReplicaRegionListType})
+var s_APIErrorListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_APIErrorListType, Members: &m_APIErrorListType, Type: smithy.ShapeTypeList, Ext: &e_APIErrorListType})
+var sAPIErrorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAPIErrorType, Members: &mAPIErrorType, Type: smithy.ShapeTypeStructure, Ext: &eAPIErrorType})
+var s_AutomaticallyRotateAfterDaysType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutomaticallyRotateAfterDaysType, Type: smithy.ShapeTypeLong, Ext: &e_AutomaticallyRotateAfterDaysType})
+var s_BooleanType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &e_BooleanType})
+var s_ClientRequestTokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientRequestTokenType, Type: smithy.ShapeTypeString, Ext: &e_ClientRequestTokenType})
+var s_CreatedDateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreatedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &e_CreatedDateType})
+var sDecryptionFailure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecryptionFailure, Members: &mDecryptionFailure, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eDecryptionFailure})
+var s_DeletedDateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeletedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &e_DeletedDateType})
+var s_DeletionDateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeletionDateType, Type: smithy.ShapeTypeTimestamp, Ext: &e_DeletionDateType})
+var s_DescriptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescriptionType, Type: smithy.ShapeTypeString, Ext: &e_DescriptionType})
+var s_DurationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DurationType, Type: smithy.ShapeTypeString, Ext: &e_DurationType})
+var sEncryptionFailure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionFailure, Members: &mEncryptionFailure, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionFailure})
+var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &e_ErrorCode})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var s_ExcludeCharactersType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludeCharactersType, Type: smithy.ShapeTypeString, Ext: &e_ExcludeCharactersType})
+var s_ExcludeLowercaseType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludeLowercaseType, Type: smithy.ShapeTypeBoolean, Ext: &e_ExcludeLowercaseType})
+var s_ExcludeNumbersType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludeNumbersType, Type: smithy.ShapeTypeBoolean, Ext: &e_ExcludeNumbersType})
+var s_ExcludePunctuationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludePunctuationType, Type: smithy.ShapeTypeBoolean, Ext: &e_ExcludePunctuationType})
+var s_ExcludeUppercaseType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludeUppercaseType, Type: smithy.ShapeTypeBoolean, Ext: &e_ExcludeUppercaseType})
+var sExternalSecretRotationMetadataItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExternalSecretRotationMetadataItem, Members: &mExternalSecretRotationMetadataItem, Type: smithy.ShapeTypeStructure, Ext: &eExternalSecretRotationMetadataItem})
+var s_ExternalSecretRotationMetadataItemKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalSecretRotationMetadataItemKeyType, Type: smithy.ShapeTypeString, Ext: &e_ExternalSecretRotationMetadataItemKeyType})
+var s_ExternalSecretRotationMetadataItemValueType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalSecretRotationMetadataItemValueType, Type: smithy.ShapeTypeString, Ext: &e_ExternalSecretRotationMetadataItemValueType})
+var s_ExternalSecretRotationMetadataType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalSecretRotationMetadataType, Members: &m_ExternalSecretRotationMetadataType, Type: smithy.ShapeTypeList, Ext: &e_ExternalSecretRotationMetadataType})
+var sFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure, Ext: &eFilter})
+var sFilterNameStringType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterNameStringType, Members: &mFilterNameStringType, Type: smithy.ShapeTypeEnum, Ext: &eFilterNameStringType})
+var s_FiltersListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FiltersListType, Members: &m_FiltersListType, Type: smithy.ShapeTypeList, Ext: &e_FiltersListType})
+var s_FilterValuesStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValuesStringList, Members: &m_FilterValuesStringList, Type: smithy.ShapeTypeList, Ext: &e_FilterValuesStringList})
+var s_FilterValueStringType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValueStringType, Type: smithy.ShapeTypeString, Ext: &e_FilterValueStringType})
+var s_IncludeSpaceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncludeSpaceType, Type: smithy.ShapeTypeBoolean, Ext: &e_IncludeSpaceType})
+var sInternalServiceError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServiceError, Members: &mInternalServiceError, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInternalServiceError})
+var sInvalidNextTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidNextTokenException, Members: &mInvalidNextTokenException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInvalidNextTokenException})
+var sInvalidParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterException, Members: &mInvalidParameterException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInvalidParameterException})
+var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRequestException})
+var s_KmsKeyIdListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyIdListType, Members: &m_KmsKeyIdListType, Type: smithy.ShapeTypeList, Ext: &e_KmsKeyIdListType})
+var s_KmsKeyIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyIdType, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyIdType})
+var s_LastAccessedDateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastAccessedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &e_LastAccessedDateType})
+var s_LastChangedDateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastChangedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &e_LastChangedDateType})
+var s_LastRotatedDateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastRotatedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &e_LastRotatedDateType})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var sMalformedPolicyDocumentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedPolicyDocumentException, Members: &mMalformedPolicyDocumentException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eMalformedPolicyDocumentException})
+var s_MaxResultsBatchType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsBatchType, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResultsBatchType})
+var s_MaxResultsType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsType, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResultsType})
+var s_MedeaTypeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MedeaTypeType, Type: smithy.ShapeTypeString, Ext: &e_MedeaTypeType})
+var s_NameType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NameType, Type: smithy.ShapeTypeString, Ext: &e_NameType})
+var s_NextRotationDateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextRotationDateType, Type: smithy.ShapeTypeTimestamp, Ext: &e_NextRotationDateType})
+var s_NextTokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextTokenType, Type: smithy.ShapeTypeString, Ext: &e_NextTokenType})
+var s_NonEmptyResourcePolicyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyResourcePolicyType, Type: smithy.ShapeTypeString, Ext: &e_NonEmptyResourcePolicyType})
+var s_OwningServiceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OwningServiceType, Type: smithy.ShapeTypeString, Ext: &e_OwningServiceType})
+var s_PasswordLengthType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PasswordLengthType, Type: smithy.ShapeTypeLong, Ext: &e_PasswordLengthType})
+var sPreconditionNotMetException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPreconditionNotMetException, Members: &mPreconditionNotMetException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ePreconditionNotMetException})
+var sPublicPolicyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublicPolicyException, Members: &mPublicPolicyException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ePublicPolicyException})
+var s_RandomPasswordType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RandomPasswordType, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_RandomPasswordType})
+var s_RecoveryWindowInDaysType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryWindowInDaysType, Type: smithy.ShapeTypeLong, Ext: &e_RecoveryWindowInDaysType})
+var s_RegionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionType, Type: smithy.ShapeTypeString, Ext: &e_RegionType})
+var s_RemoveReplicaRegionListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RemoveReplicaRegionListType, Members: &m_RemoveReplicaRegionListType, Type: smithy.ShapeTypeList, Ext: &e_RemoveReplicaRegionListType})
+var sReplicaRegionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicaRegionType, Members: &mReplicaRegionType, Type: smithy.ShapeTypeStructure, Ext: &eReplicaRegionType})
+var s_ReplicationStatusListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplicationStatusListType, Members: &m_ReplicationStatusListType, Type: smithy.ShapeTypeList, Ext: &e_ReplicationStatusListType})
+var sReplicationStatusType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationStatusType, Members: &mReplicationStatusType, Type: smithy.ShapeTypeStructure, Ext: &eReplicationStatusType})
+var s_RequireEachIncludedTypeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequireEachIncludedTypeType, Type: smithy.ShapeTypeBoolean, Ext: &e_RequireEachIncludedTypeType})
+var sResourceExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceExistsException, Members: &mResourceExistsException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eResourceExistsException})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var s_RoleARNType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleARNType, Type: smithy.ShapeTypeString, Ext: &e_RoleARNType})
+var s_RotationEnabledType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RotationEnabledType, Type: smithy.ShapeTypeBoolean, Ext: &e_RotationEnabledType})
+var s_RotationLambdaARNType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RotationLambdaARNType, Type: smithy.ShapeTypeString, Ext: &e_RotationLambdaARNType})
+var sRotationRulesType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotationRulesType, Members: &mRotationRulesType, Type: smithy.ShapeTypeStructure, Ext: &eRotationRulesType})
+var s_RotationTokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RotationTokenType, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_RotationTokenType})
+var s_ScheduleExpressionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduleExpressionType, Type: smithy.ShapeTypeString, Ext: &e_ScheduleExpressionType})
+var s_SecretARNType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &e_SecretARNType})
+var s_SecretBinaryType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretBinaryType, Traits: &t2, Type: smithy.ShapeTypeBlob, Ext: &e_SecretBinaryType})
+var s_SecretIdListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretIdListType, Members: &m_SecretIdListType, Type: smithy.ShapeTypeList, Ext: &e_SecretIdListType})
+var s_SecretIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &e_SecretIdType})
+var sSecretListEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecretListEntry, Members: &mSecretListEntry, Type: smithy.ShapeTypeStructure, Ext: &eSecretListEntry})
+var s_SecretListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretListType, Members: &m_SecretListType, Type: smithy.ShapeTypeList, Ext: &e_SecretListType})
+var s_SecretNameType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &e_SecretNameType})
+var s_SecretStringType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretStringType, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_SecretStringType})
+var sSecretValueEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecretValueEntry, Members: &mSecretValueEntry, Type: smithy.ShapeTypeStructure, Ext: &eSecretValueEntry})
+var s_SecretValuesType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretValuesType, Members: &m_SecretValuesType, Type: smithy.ShapeTypeList, Ext: &e_SecretValuesType})
+var s_SecretVersionIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretVersionIdType, Type: smithy.ShapeTypeString, Ext: &e_SecretVersionIdType})
+var sSecretVersionsListEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecretVersionsListEntry, Members: &mSecretVersionsListEntry, Type: smithy.ShapeTypeStructure, Ext: &eSecretVersionsListEntry})
+var s_SecretVersionsListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretVersionsListType, Members: &m_SecretVersionsListType, Type: smithy.ShapeTypeList, Ext: &e_SecretVersionsListType})
+var s_SecretVersionStagesType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretVersionStagesType, Members: &m_SecretVersionStagesType, Type: smithy.ShapeTypeList, Ext: &e_SecretVersionStagesType})
+var s_SecretVersionStageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretVersionStageType, Type: smithy.ShapeTypeString, Ext: &e_SecretVersionStageType})
+var s_SecretVersionsToStagesMapType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretVersionsToStagesMapType, Members: &m_SecretVersionsToStagesMapType, Type: smithy.ShapeTypeMap, Ext: &e_SecretVersionsToStagesMapType})
+var sSortByType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortByType, Members: &mSortByType, Type: smithy.ShapeTypeEnum, Ext: &eSortByType})
+var sSortOrderType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortOrderType, Members: &mSortOrderType, Type: smithy.ShapeTypeEnum, Ext: &eSortOrderType})
+var s_StatusMessageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusMessageType, Type: smithy.ShapeTypeString, Ext: &e_StatusMessageType})
+var sStatusType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatusType, Members: &mStatusType, Type: smithy.ShapeTypeEnum, Ext: &eStatusType})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var s_TagKeyListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyListType, Members: &m_TagKeyListType, Type: smithy.ShapeTypeList, Ext: &e_TagKeyListType})
+var s_TagKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyType, Type: smithy.ShapeTypeString, Ext: &e_TagKeyType})
+var s_TagListType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagListType, Members: &m_TagListType, Type: smithy.ShapeTypeList, Ext: &e_TagListType})
+var s_TagValueType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValueType, Type: smithy.ShapeTypeString, Ext: &e_TagValueType})
+var s_TimestampType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimestampType, Type: smithy.ShapeTypeTimestamp, Ext: &e_TimestampType})
+var sValidationErrorsEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationErrorsEntry, Members: &mValidationErrorsEntry, Type: smithy.ShapeTypeStructure, Ext: &eValidationErrorsEntry})
+var s_ValidationErrorsType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationErrorsType, Members: &m_ValidationErrorsType, Type: smithy.ShapeTypeList, Ext: &e_ValidationErrorsType})
+var sBatchGetSecretValueRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetSecretValueRequest, Members: &mBatchGetSecretValueRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetSecretValueRequest})
+var sBatchGetSecretValueResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetSecretValueResponse, Members: &mBatchGetSecretValueResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetSecretValueResponse})
+var sCancelRotateSecretRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelRotateSecretRequest, Members: &mCancelRotateSecretRequest, Type: smithy.ShapeTypeStructure, Ext: &eCancelRotateSecretRequest})
+var sCancelRotateSecretResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelRotateSecretResponse, Members: &mCancelRotateSecretResponse, Type: smithy.ShapeTypeStructure, Ext: &eCancelRotateSecretResponse})
+var sCreateSecretRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSecretRequest, Members: &mCreateSecretRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateSecretRequest})
+var sCreateSecretResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSecretResponse, Members: &mCreateSecretResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateSecretResponse})
+var sDeleteResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyRequest, Members: &mDeleteResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResourcePolicyRequest})
+var sDeleteResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyResponse, Members: &mDeleteResourcePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResourcePolicyResponse})
+var sDeleteSecretRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSecretRequest, Members: &mDeleteSecretRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSecretRequest})
+var sDeleteSecretResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSecretResponse, Members: &mDeleteSecretResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSecretResponse})
+var sDescribeSecretRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSecretRequest, Members: &mDescribeSecretRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSecretRequest})
+var sDescribeSecretResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSecretResponse, Members: &mDescribeSecretResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSecretResponse})
+var sGetRandomPasswordRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRandomPasswordRequest, Members: &mGetRandomPasswordRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRandomPasswordRequest})
+var sGetRandomPasswordResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRandomPasswordResponse, Members: &mGetRandomPasswordResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRandomPasswordResponse})
+var sGetResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyRequest, Members: &mGetResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetResourcePolicyRequest})
+var sGetResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyResponse, Members: &mGetResourcePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetResourcePolicyResponse})
+var sGetSecretValueRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSecretValueRequest, Members: &mGetSecretValueRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSecretValueRequest})
+var sGetSecretValueResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSecretValueResponse, Members: &mGetSecretValueResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSecretValueResponse})
+var sListSecretsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecretsRequest, Members: &mListSecretsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListSecretsRequest})
+var sListSecretsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecretsResponse, Members: &mListSecretsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSecretsResponse})
+var sListSecretVersionIdsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecretVersionIdsRequest, Members: &mListSecretVersionIdsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListSecretVersionIdsRequest})
+var sListSecretVersionIdsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecretVersionIdsResponse, Members: &mListSecretVersionIdsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSecretVersionIdsResponse})
+var sPutResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyRequest, Members: &mPutResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutResourcePolicyRequest})
+var sPutResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyResponse, Members: &mPutResourcePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutResourcePolicyResponse})
+var sPutSecretValueRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSecretValueRequest, Members: &mPutSecretValueRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutSecretValueRequest})
+var sPutSecretValueResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSecretValueResponse, Members: &mPutSecretValueResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutSecretValueResponse})
+var sRemoveRegionsFromReplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveRegionsFromReplicationRequest, Members: &mRemoveRegionsFromReplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &eRemoveRegionsFromReplicationRequest})
+var sRemoveRegionsFromReplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveRegionsFromReplicationResponse, Members: &mRemoveRegionsFromReplicationResponse, Type: smithy.ShapeTypeStructure, Ext: &eRemoveRegionsFromReplicationResponse})
+var sReplicateSecretToRegionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicateSecretToRegionsRequest, Members: &mReplicateSecretToRegionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eReplicateSecretToRegionsRequest})
+var sReplicateSecretToRegionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicateSecretToRegionsResponse, Members: &mReplicateSecretToRegionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eReplicateSecretToRegionsResponse})
+var sRestoreSecretRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreSecretRequest, Members: &mRestoreSecretRequest, Type: smithy.ShapeTypeStructure, Ext: &eRestoreSecretRequest})
+var sRestoreSecretResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreSecretResponse, Members: &mRestoreSecretResponse, Type: smithy.ShapeTypeStructure, Ext: &eRestoreSecretResponse})
+var sRotateSecretRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateSecretRequest, Members: &mRotateSecretRequest, Type: smithy.ShapeTypeStructure, Ext: &eRotateSecretRequest})
+var sRotateSecretResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateSecretResponse, Members: &mRotateSecretResponse, Type: smithy.ShapeTypeStructure, Ext: &eRotateSecretResponse})
+var sStopReplicationToReplicaRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopReplicationToReplicaRequest, Members: &mStopReplicationToReplicaRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopReplicationToReplicaRequest})
+var sStopReplicationToReplicaResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopReplicationToReplicaResponse, Members: &mStopReplicationToReplicaResponse, Type: smithy.ShapeTypeStructure, Ext: &eStopReplicationToReplicaResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUpdateSecretRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSecretRequest, Members: &mUpdateSecretRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSecretRequest})
+var sUpdateSecretResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSecretResponse, Members: &mUpdateSecretResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSecretResponse})
+var sUpdateSecretVersionStageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSecretVersionStageRequest, Members: &mUpdateSecretVersionStageRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSecretVersionStageRequest})
+var sUpdateSecretVersionStageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSecretVersionStageResponse, Members: &mUpdateSecretVersionStageResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSecretVersionStageResponse})
+var sValidateResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidateResourcePolicyRequest, Members: &mValidateResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eValidateResourcePolicyRequest})
+var sValidateResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidateResourcePolicyResponse, Members: &mValidateResourcePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eValidateResourcePolicyResponse})
 
-var s_AddReplicaRegionListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReplicaRegionType, Members: &mReplicaRegionType, Type: smithy.ShapeTypeStructure, Ext: &ext[25]})
-var s_APIErrorListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAPIErrorType, Members: &mAPIErrorType, Type: smithy.ShapeTypeStructure, Ext: &ext[27]})
-var sAPIErrorType_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &ext[29]})
-var sAPIErrorType_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[30]})
-var sAPIErrorType_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var sDecryptionFailure_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[37]})
-var sEncryptionFailure_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[43]})
-var sExternalSecretRotationMetadataItem_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ExternalSecretRotationMetadataItemKeyType, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var sExternalSecretRotationMetadataItem_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_ExternalSecretRotationMetadataItemValueType, Type: smithy.ShapeTypeString, Ext: &ext[53]})
-var s_ExternalSecretRotationMetadataType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExternalSecretRotationMetadataItem, Members: &mExternalSecretRotationMetadataItem, Type: smithy.ShapeTypeStructure, Ext: &ext[57]})
-var sFilter_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &iFilterNameStringType, Members: &mFilterNameStringType, Type: smithy.ShapeTypeEnum, Ext: &ext[59]})
-var sFilter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_FilterValuesStringList, Members: &m_FilterValuesStringList, Type: smithy.ShapeTypeList, Ext: &ext[60]})
-var sFilterNameStringType_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[62]})
-var sFilterNameStringType_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[63]})
-var sFilterNameStringType_tag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tag_key", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[64]})
-var sFilterNameStringType_tag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tag_value", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[65]})
-var sFilterNameStringType_primary_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "primary_region", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[66]})
-var sFilterNameStringType_owning_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owning_service", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[67]})
-var sFilterNameStringType_all = smithy.NewStaticSchema(smithy.StaticSchema{Member: "all", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var s_FiltersListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[70]})
-var s_FilterValuesStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FilterValueStringType, Type: smithy.ShapeTypeString, Ext: &ext[72]})
-var sInternalServiceError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[76]})
-var sInvalidNextTokenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[78]})
-var sInvalidParameterException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[80]})
-var sInvalidRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[82]})
-var s_KmsKeyIdListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_KmsKeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[84]})
-var sLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[90]})
-var sMalformedPolicyDocumentException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[92]})
-var sPreconditionNotMetException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[103]})
-var sPublicPolicyException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[105]})
-var s_RemoveReplicaRegionListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RegionType, Type: smithy.ShapeTypeString, Ext: &ext[110]})
-var sReplicaRegionType_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_RegionType, Type: smithy.ShapeTypeString, Ext: &ext[112]})
-var sReplicaRegionType_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[113]})
-var s_ReplicationStatusListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReplicationStatusType, Members: &mReplicationStatusType, Type: smithy.ShapeTypeStructure, Ext: &ext[115]})
-var sReplicationStatusType_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_RegionType, Type: smithy.ShapeTypeString, Ext: &ext[117]})
-var sReplicationStatusType_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[118]})
-var sReplicationStatusType_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatusType, Members: &mStatusType, Type: smithy.ShapeTypeEnum, Ext: &ext[119]})
-var sReplicationStatusType_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_StatusMessageType, Type: smithy.ShapeTypeString, Ext: &ext[120]})
-var sReplicationStatusType_LastAccessedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastAccessedDate", ID: &i_LastAccessedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[121]})
-var sResourceExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[124]})
-var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[126]})
-var sRotationRulesType_AutomaticallyAfterDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomaticallyAfterDays", ID: &i_AutomaticallyRotateAfterDaysType, Type: smithy.ShapeTypeLong, Ext: &ext[131]})
-var sRotationRulesType_Duration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Duration", ID: &i_DurationType, Type: smithy.ShapeTypeString, Ext: &ext[132]})
-var sRotationRulesType_ScheduleExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleExpression", ID: &i_ScheduleExpressionType, Type: smithy.ShapeTypeString, Ext: &ext[133]})
-var s_SecretIdListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &ext[139]})
-var sSecretListEntry_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &ext[142]})
-var sSecretListEntry_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &ext[143]})
-var sSecretListEntry_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_MedeaTypeType, Type: smithy.ShapeTypeString, Ext: &ext[144]})
-var sSecretListEntry_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionType, Type: smithy.ShapeTypeString, Ext: &ext[145]})
-var sSecretListEntry_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[146]})
-var sSecretListEntry_RotationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationEnabled", ID: &i_RotationEnabledType, Type: smithy.ShapeTypeBoolean, Ext: &ext[147]})
-var sSecretListEntry_RotationLambdaARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationLambdaARN", ID: &i_RotationLambdaARNType, Type: smithy.ShapeTypeString, Ext: &ext[148]})
-var sSecretListEntry_RotationRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationRules", ID: &iRotationRulesType, Members: &mRotationRulesType, Type: smithy.ShapeTypeStructure, Ext: &ext[149]})
-var sSecretListEntry_ExternalSecretRotationMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalSecretRotationMetadata", ID: &i_ExternalSecretRotationMetadataType, Members: &m_ExternalSecretRotationMetadataType, Type: smithy.ShapeTypeList, Ext: &ext[150]})
-var sSecretListEntry_ExternalSecretRotationRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalSecretRotationRoleArn", ID: &i_RoleARNType, Type: smithy.ShapeTypeString, Ext: &ext[151]})
-var sSecretListEntry_LastRotatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastRotatedDate", ID: &i_LastRotatedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[152]})
-var sSecretListEntry_LastChangedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastChangedDate", ID: &i_LastChangedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[153]})
-var sSecretListEntry_LastAccessedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastAccessedDate", ID: &i_LastAccessedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[154]})
-var sSecretListEntry_DeletedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletedDate", ID: &i_DeletedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[155]})
-var sSecretListEntry_NextRotationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextRotationDate", ID: &i_NextRotationDateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[156]})
-var sSecretListEntry_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagListType, Members: &m_TagListType, Type: smithy.ShapeTypeList, Ext: &ext[157]})
-var sSecretListEntry_SecretVersionsToStages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretVersionsToStages", ID: &i_SecretVersionsToStagesMapType, Members: &m_SecretVersionsToStagesMapType, Type: smithy.ShapeTypeMap, Ext: &ext[158]})
-var sSecretListEntry_OwningService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwningService", ID: &i_OwningServiceType, Type: smithy.ShapeTypeString, Ext: &ext[159]})
-var sSecretListEntry_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i_TimestampType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[160]})
-var sSecretListEntry_PrimaryRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryRegion", ID: &i_RegionType, Type: smithy.ShapeTypeString, Ext: &ext[161]})
-var s_SecretListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSecretListEntry, Members: &mSecretListEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[163]})
-var sSecretValueEntry_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &ext[167]})
-var sSecretValueEntry_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &ext[168]})
-var sSecretValueEntry_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_SecretVersionIdType, Type: smithy.ShapeTypeString, Ext: &ext[169]})
-var sSecretValueEntry_SecretBinary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretBinary", ID: &i_SecretBinaryType, Traits: &t3, Type: smithy.ShapeTypeBlob, Ext: &ext[170]})
-var sSecretValueEntry_SecretString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretString", ID: &i_SecretStringType, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[171]})
-var sSecretValueEntry_VersionStages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionStages", ID: &i_SecretVersionStagesType, Members: &m_SecretVersionStagesType, Type: smithy.ShapeTypeList, Ext: &ext[172]})
-var sSecretValueEntry_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i_CreatedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[173]})
-var s_SecretValuesType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSecretValueEntry, Members: &mSecretValueEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[175]})
-var sSecretVersionsListEntry_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_SecretVersionIdType, Type: smithy.ShapeTypeString, Ext: &ext[178]})
-var sSecretVersionsListEntry_VersionStages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionStages", ID: &i_SecretVersionStagesType, Members: &m_SecretVersionStagesType, Type: smithy.ShapeTypeList, Ext: &ext[179]})
-var sSecretVersionsListEntry_LastAccessedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastAccessedDate", ID: &i_LastAccessedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[180]})
-var sSecretVersionsListEntry_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i_CreatedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[181]})
-var sSecretVersionsListEntry_KmsKeyIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyIds", ID: &i_KmsKeyIdListType, Members: &m_KmsKeyIdListType, Type: smithy.ShapeTypeList, Ext: &ext[182]})
-var s_SecretVersionsListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSecretVersionsListEntry, Members: &mSecretVersionsListEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[184]})
-var s_SecretVersionStagesType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecretVersionStageType, Type: smithy.ShapeTypeString, Ext: &ext[186]})
-var s_SecretVersionsToStagesMapType_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_SecretVersionIdType, Type: smithy.ShapeTypeString, Ext: &ext[189]})
-var s_SecretVersionsToStagesMapType_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_SecretVersionStagesType, Members: &m_SecretVersionStagesType, Type: smithy.ShapeTypeList, Ext: &ext[190]})
-var sSortByType_created_date = smithy.NewStaticSchema(smithy.StaticSchema{Member: "created_date", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[192]})
-var sSortByType_last_accessed_date = smithy.NewStaticSchema(smithy.StaticSchema{Member: "last_accessed_date", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[193]})
-var sSortByType_last_changed_date = smithy.NewStaticSchema(smithy.StaticSchema{Member: "last_changed_date", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[194]})
-var sSortByType_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[195]})
-var sSortOrderType_asc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asc", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[197]})
-var sSortOrderType_desc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "desc", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[198]})
-var sStatusType_InSync = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InSync", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[201]})
-var sStatusType_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[202]})
-var sStatusType_InProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[203]})
-var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKeyType, Type: smithy.ShapeTypeString, Ext: &ext[205]})
-var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValueType, Type: smithy.ShapeTypeString, Ext: &ext[206]})
-var s_TagKeyListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKeyType, Type: smithy.ShapeTypeString, Ext: &ext[208]})
-var s_TagListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[211]})
-var sValidationErrorsEntry_CheckName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CheckName", ID: &i_NameType, Type: smithy.ShapeTypeString, Ext: &ext[215]})
-var sValidationErrorsEntry_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[216]})
-var s_ValidationErrorsType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationErrorsEntry, Members: &mValidationErrorsEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[218]})
-var sBatchGetSecretValueRequest_SecretIdList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretIdList", ID: &i_SecretIdListType, Members: &m_SecretIdListType, Type: smithy.ShapeTypeList, Ext: &ext[220]})
-var sBatchGetSecretValueRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FiltersListType, Members: &m_FiltersListType, Type: smithy.ShapeTypeList, Ext: &ext[221]})
-var sBatchGetSecretValueRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsBatchType, Type: smithy.ShapeTypeInteger, Ext: &ext[222]})
-var sBatchGetSecretValueRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenType, Type: smithy.ShapeTypeString, Ext: &ext[223]})
-var sBatchGetSecretValueResponse_SecretValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretValues", ID: &i_SecretValuesType, Members: &m_SecretValuesType, Type: smithy.ShapeTypeList, Ext: &ext[225]})
-var sBatchGetSecretValueResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenType, Type: smithy.ShapeTypeString, Ext: &ext[226]})
-var sBatchGetSecretValueResponse_Errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errors", ID: &i_APIErrorListType, Members: &m_APIErrorListType, Type: smithy.ShapeTypeList, Ext: &ext[227]})
-var sCancelRotateSecretRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &ext[229]})
-var sCancelRotateSecretResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &ext[231]})
-var sCancelRotateSecretResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &ext[232]})
-var sCancelRotateSecretResponse_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_SecretVersionIdType, Type: smithy.ShapeTypeString, Ext: &ext[233]})
-var sCreateSecretRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NameType, Type: smithy.ShapeTypeString, Ext: &ext[235]})
-var sCreateSecretRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestTokenType, Type: smithy.ShapeTypeString, Ext: &ext[236]})
-var sCreateSecretRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionType, Type: smithy.ShapeTypeString, Ext: &ext[237]})
-var sCreateSecretRequest_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[238]})
-var sCreateSecretRequest_SecretBinary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretBinary", ID: &i_SecretBinaryType, Traits: &t3, Type: smithy.ShapeTypeBlob, Ext: &ext[239]})
-var sCreateSecretRequest_SecretString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretString", ID: &i_SecretStringType, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[240]})
-var sCreateSecretRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagListType, Members: &m_TagListType, Type: smithy.ShapeTypeList, Ext: &ext[241]})
-var sCreateSecretRequest_AddReplicaRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddReplicaRegions", ID: &i_AddReplicaRegionListType, Members: &m_AddReplicaRegionListType, Type: smithy.ShapeTypeList, Ext: &ext[242]})
-var sCreateSecretRequest_ForceOverwriteReplicaSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceOverwriteReplicaSecret", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[243]})
-var sCreateSecretRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_MedeaTypeType, Type: smithy.ShapeTypeString, Ext: &ext[244]})
-var sCreateSecretResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &ext[246]})
-var sCreateSecretResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &ext[247]})
-var sCreateSecretResponse_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_SecretVersionIdType, Type: smithy.ShapeTypeString, Ext: &ext[248]})
-var sCreateSecretResponse_ReplicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationStatus", ID: &i_ReplicationStatusListType, Members: &m_ReplicationStatusListType, Type: smithy.ShapeTypeList, Ext: &ext[249]})
-var sDeleteResourcePolicyRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &ext[251]})
-var sDeleteResourcePolicyResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &ext[253]})
-var sDeleteResourcePolicyResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NameType, Type: smithy.ShapeTypeString, Ext: &ext[254]})
-var sDeleteSecretRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &ext[256]})
-var sDeleteSecretRequest_RecoveryWindowInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecoveryWindowInDays", ID: &i_RecoveryWindowInDaysType, Type: smithy.ShapeTypeLong, Ext: &ext[257]})
-var sDeleteSecretRequest_ForceDeleteWithoutRecovery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceDeleteWithoutRecovery", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[258]})
-var sDeleteSecretResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &ext[260]})
-var sDeleteSecretResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &ext[261]})
-var sDeleteSecretResponse_DeletionDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionDate", ID: &i_DeletionDateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[262]})
-var sDescribeSecretRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &ext[264]})
-var sDescribeSecretResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &ext[266]})
-var sDescribeSecretResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &ext[267]})
-var sDescribeSecretResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_MedeaTypeType, Type: smithy.ShapeTypeString, Ext: &ext[268]})
-var sDescribeSecretResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionType, Type: smithy.ShapeTypeString, Ext: &ext[269]})
-var sDescribeSecretResponse_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[270]})
-var sDescribeSecretResponse_RotationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationEnabled", ID: &i_RotationEnabledType, Type: smithy.ShapeTypeBoolean, Ext: &ext[271]})
-var sDescribeSecretResponse_RotationLambdaARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationLambdaARN", ID: &i_RotationLambdaARNType, Type: smithy.ShapeTypeString, Ext: &ext[272]})
-var sDescribeSecretResponse_RotationRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationRules", ID: &iRotationRulesType, Members: &mRotationRulesType, Type: smithy.ShapeTypeStructure, Ext: &ext[273]})
-var sDescribeSecretResponse_ExternalSecretRotationMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalSecretRotationMetadata", ID: &i_ExternalSecretRotationMetadataType, Members: &m_ExternalSecretRotationMetadataType, Type: smithy.ShapeTypeList, Ext: &ext[274]})
-var sDescribeSecretResponse_ExternalSecretRotationRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalSecretRotationRoleArn", ID: &i_RoleARNType, Type: smithy.ShapeTypeString, Ext: &ext[275]})
-var sDescribeSecretResponse_LastRotatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastRotatedDate", ID: &i_LastRotatedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[276]})
-var sDescribeSecretResponse_LastChangedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastChangedDate", ID: &i_LastChangedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[277]})
-var sDescribeSecretResponse_LastAccessedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastAccessedDate", ID: &i_LastAccessedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[278]})
-var sDescribeSecretResponse_DeletedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletedDate", ID: &i_DeletedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[279]})
-var sDescribeSecretResponse_NextRotationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextRotationDate", ID: &i_NextRotationDateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[280]})
-var sDescribeSecretResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagListType, Members: &m_TagListType, Type: smithy.ShapeTypeList, Ext: &ext[281]})
-var sDescribeSecretResponse_VersionIdsToStages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionIdsToStages", ID: &i_SecretVersionsToStagesMapType, Members: &m_SecretVersionsToStagesMapType, Type: smithy.ShapeTypeMap, Ext: &ext[282]})
-var sDescribeSecretResponse_OwningService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwningService", ID: &i_OwningServiceType, Type: smithy.ShapeTypeString, Ext: &ext[283]})
-var sDescribeSecretResponse_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i_TimestampType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[284]})
-var sDescribeSecretResponse_PrimaryRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryRegion", ID: &i_RegionType, Type: smithy.ShapeTypeString, Ext: &ext[285]})
-var sDescribeSecretResponse_ReplicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationStatus", ID: &i_ReplicationStatusListType, Members: &m_ReplicationStatusListType, Type: smithy.ShapeTypeList, Ext: &ext[286]})
-var sGetRandomPasswordRequest_PasswordLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PasswordLength", ID: &i_PasswordLengthType, Type: smithy.ShapeTypeLong, Ext: &ext[288]})
-var sGetRandomPasswordRequest_ExcludeCharacters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeCharacters", ID: &i_ExcludeCharactersType, Type: smithy.ShapeTypeString, Ext: &ext[289]})
-var sGetRandomPasswordRequest_ExcludeNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeNumbers", ID: &i_ExcludeNumbersType, Type: smithy.ShapeTypeBoolean, Ext: &ext[290]})
-var sGetRandomPasswordRequest_ExcludePunctuation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludePunctuation", ID: &i_ExcludePunctuationType, Type: smithy.ShapeTypeBoolean, Ext: &ext[291]})
-var sGetRandomPasswordRequest_ExcludeUppercase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeUppercase", ID: &i_ExcludeUppercaseType, Type: smithy.ShapeTypeBoolean, Ext: &ext[292]})
-var sGetRandomPasswordRequest_ExcludeLowercase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeLowercase", ID: &i_ExcludeLowercaseType, Type: smithy.ShapeTypeBoolean, Ext: &ext[293]})
-var sGetRandomPasswordRequest_IncludeSpace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeSpace", ID: &i_IncludeSpaceType, Type: smithy.ShapeTypeBoolean, Ext: &ext[294]})
-var sGetRandomPasswordRequest_RequireEachIncludedType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequireEachIncludedType", ID: &i_RequireEachIncludedTypeType, Type: smithy.ShapeTypeBoolean, Ext: &ext[295]})
-var sGetRandomPasswordResponse_RandomPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RandomPassword", ID: &i_RandomPasswordType, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[297]})
-var sGetResourcePolicyRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &ext[299]})
-var sGetResourcePolicyResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &ext[301]})
-var sGetResourcePolicyResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NameType, Type: smithy.ShapeTypeString, Ext: &ext[302]})
-var sGetResourcePolicyResponse_ResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourcePolicy", ID: &i_NonEmptyResourcePolicyType, Type: smithy.ShapeTypeString, Ext: &ext[303]})
-var sGetSecretValueRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &ext[305]})
-var sGetSecretValueRequest_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_SecretVersionIdType, Type: smithy.ShapeTypeString, Ext: &ext[306]})
-var sGetSecretValueRequest_VersionStage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionStage", ID: &i_SecretVersionStageType, Type: smithy.ShapeTypeString, Ext: &ext[307]})
-var sGetSecretValueResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &ext[309]})
-var sGetSecretValueResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &ext[310]})
-var sGetSecretValueResponse_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_SecretVersionIdType, Type: smithy.ShapeTypeString, Ext: &ext[311]})
-var sGetSecretValueResponse_SecretBinary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretBinary", ID: &i_SecretBinaryType, Traits: &t3, Type: smithy.ShapeTypeBlob, Ext: &ext[312]})
-var sGetSecretValueResponse_SecretString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretString", ID: &i_SecretStringType, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[313]})
-var sGetSecretValueResponse_VersionStages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionStages", ID: &i_SecretVersionStagesType, Members: &m_SecretVersionStagesType, Type: smithy.ShapeTypeList, Ext: &ext[314]})
-var sGetSecretValueResponse_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i_CreatedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[315]})
-var sListSecretsRequest_IncludePlannedDeletion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludePlannedDeletion", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[317]})
-var sListSecretsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsType, Type: smithy.ShapeTypeInteger, Ext: &ext[318]})
-var sListSecretsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenType, Type: smithy.ShapeTypeString, Ext: &ext[319]})
-var sListSecretsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FiltersListType, Members: &m_FiltersListType, Type: smithy.ShapeTypeList, Ext: &ext[320]})
-var sListSecretsRequest_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrderType, Members: &mSortOrderType, Type: smithy.ShapeTypeEnum, Ext: &ext[321]})
-var sListSecretsRequest_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iSortByType, Members: &mSortByType, Type: smithy.ShapeTypeEnum, Ext: &ext[322]})
-var sListSecretsResponse_SecretList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretList", ID: &i_SecretListType, Members: &m_SecretListType, Type: smithy.ShapeTypeList, Ext: &ext[324]})
-var sListSecretsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenType, Type: smithy.ShapeTypeString, Ext: &ext[325]})
-var sListSecretVersionIdsRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &ext[327]})
-var sListSecretVersionIdsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsType, Type: smithy.ShapeTypeInteger, Ext: &ext[328]})
-var sListSecretVersionIdsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenType, Type: smithy.ShapeTypeString, Ext: &ext[329]})
-var sListSecretVersionIdsRequest_IncludeDeprecated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeDeprecated", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[330]})
-var sListSecretVersionIdsResponse_Versions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Versions", ID: &i_SecretVersionsListType, Members: &m_SecretVersionsListType, Type: smithy.ShapeTypeList, Ext: &ext[332]})
-var sListSecretVersionIdsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenType, Type: smithy.ShapeTypeString, Ext: &ext[333]})
-var sListSecretVersionIdsResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &ext[334]})
-var sListSecretVersionIdsResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &ext[335]})
-var sPutResourcePolicyRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &ext[337]})
-var sPutResourcePolicyRequest_ResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourcePolicy", ID: &i_NonEmptyResourcePolicyType, Type: smithy.ShapeTypeString, Ext: &ext[338]})
-var sPutResourcePolicyRequest_BlockPublicPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockPublicPolicy", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[339]})
-var sPutResourcePolicyResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &ext[341]})
-var sPutResourcePolicyResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NameType, Type: smithy.ShapeTypeString, Ext: &ext[342]})
-var sPutSecretValueRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &ext[344]})
-var sPutSecretValueRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestTokenType, Type: smithy.ShapeTypeString, Ext: &ext[345]})
-var sPutSecretValueRequest_SecretBinary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretBinary", ID: &i_SecretBinaryType, Traits: &t3, Type: smithy.ShapeTypeBlob, Ext: &ext[346]})
-var sPutSecretValueRequest_SecretString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretString", ID: &i_SecretStringType, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[347]})
-var sPutSecretValueRequest_VersionStages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionStages", ID: &i_SecretVersionStagesType, Members: &m_SecretVersionStagesType, Type: smithy.ShapeTypeList, Ext: &ext[348]})
-var sPutSecretValueRequest_RotationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationToken", ID: &i_RotationTokenType, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[349]})
-var sPutSecretValueResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &ext[351]})
-var sPutSecretValueResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &ext[352]})
-var sPutSecretValueResponse_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_SecretVersionIdType, Type: smithy.ShapeTypeString, Ext: &ext[353]})
-var sPutSecretValueResponse_VersionStages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionStages", ID: &i_SecretVersionStagesType, Members: &m_SecretVersionStagesType, Type: smithy.ShapeTypeList, Ext: &ext[354]})
-var sRemoveRegionsFromReplicationRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &ext[356]})
-var sRemoveRegionsFromReplicationRequest_RemoveReplicaRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveReplicaRegions", ID: &i_RemoveReplicaRegionListType, Members: &m_RemoveReplicaRegionListType, Type: smithy.ShapeTypeList, Ext: &ext[357]})
-var sRemoveRegionsFromReplicationResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &ext[359]})
-var sRemoveRegionsFromReplicationResponse_ReplicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationStatus", ID: &i_ReplicationStatusListType, Members: &m_ReplicationStatusListType, Type: smithy.ShapeTypeList, Ext: &ext[360]})
-var sReplicateSecretToRegionsRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &ext[362]})
-var sReplicateSecretToRegionsRequest_AddReplicaRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddReplicaRegions", ID: &i_AddReplicaRegionListType, Members: &m_AddReplicaRegionListType, Type: smithy.ShapeTypeList, Ext: &ext[363]})
-var sReplicateSecretToRegionsRequest_ForceOverwriteReplicaSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceOverwriteReplicaSecret", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[364]})
-var sReplicateSecretToRegionsResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &ext[366]})
-var sReplicateSecretToRegionsResponse_ReplicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationStatus", ID: &i_ReplicationStatusListType, Members: &m_ReplicationStatusListType, Type: smithy.ShapeTypeList, Ext: &ext[367]})
-var sRestoreSecretRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &ext[369]})
-var sRestoreSecretResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &ext[371]})
-var sRestoreSecretResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &ext[372]})
-var sRotateSecretRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &ext[374]})
-var sRotateSecretRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestTokenType, Type: smithy.ShapeTypeString, Ext: &ext[375]})
-var sRotateSecretRequest_RotationLambdaARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationLambdaARN", ID: &i_RotationLambdaARNType, Type: smithy.ShapeTypeString, Ext: &ext[376]})
-var sRotateSecretRequest_RotationRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationRules", ID: &iRotationRulesType, Members: &mRotationRulesType, Type: smithy.ShapeTypeStructure, Ext: &ext[377]})
-var sRotateSecretRequest_ExternalSecretRotationMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalSecretRotationMetadata", ID: &i_ExternalSecretRotationMetadataType, Members: &m_ExternalSecretRotationMetadataType, Type: smithy.ShapeTypeList, Ext: &ext[378]})
-var sRotateSecretRequest_ExternalSecretRotationRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalSecretRotationRoleArn", ID: &i_RoleARNType, Type: smithy.ShapeTypeString, Ext: &ext[379]})
-var sRotateSecretRequest_RotateImmediately = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotateImmediately", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[380]})
-var sRotateSecretResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &ext[382]})
-var sRotateSecretResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &ext[383]})
-var sRotateSecretResponse_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_SecretVersionIdType, Type: smithy.ShapeTypeString, Ext: &ext[384]})
-var sStopReplicationToReplicaRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &ext[386]})
-var sStopReplicationToReplicaResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &ext[388]})
-var sTagResourceRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &ext[390]})
-var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagListType, Members: &m_TagListType, Type: smithy.ShapeTypeList, Ext: &ext[391]})
-var sUntagResourceRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &ext[393]})
-var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyListType, Members: &m_TagKeyListType, Type: smithy.ShapeTypeList, Ext: &ext[394]})
-var sUpdateSecretRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &ext[396]})
-var sUpdateSecretRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestTokenType, Type: smithy.ShapeTypeString, Ext: &ext[397]})
-var sUpdateSecretRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionType, Type: smithy.ShapeTypeString, Ext: &ext[398]})
-var sUpdateSecretRequest_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[399]})
-var sUpdateSecretRequest_SecretBinary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretBinary", ID: &i_SecretBinaryType, Traits: &t3, Type: smithy.ShapeTypeBlob, Ext: &ext[400]})
-var sUpdateSecretRequest_SecretString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretString", ID: &i_SecretStringType, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[401]})
-var sUpdateSecretRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_MedeaTypeType, Type: smithy.ShapeTypeString, Ext: &ext[402]})
-var sUpdateSecretResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &ext[404]})
-var sUpdateSecretResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &ext[405]})
-var sUpdateSecretResponse_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_SecretVersionIdType, Type: smithy.ShapeTypeString, Ext: &ext[406]})
-var sUpdateSecretVersionStageRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &ext[408]})
-var sUpdateSecretVersionStageRequest_VersionStage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionStage", ID: &i_SecretVersionStageType, Type: smithy.ShapeTypeString, Ext: &ext[409]})
-var sUpdateSecretVersionStageRequest_RemoveFromVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveFromVersionId", ID: &i_SecretVersionIdType, Type: smithy.ShapeTypeString, Ext: &ext[410]})
-var sUpdateSecretVersionStageRequest_MoveToVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MoveToVersionId", ID: &i_SecretVersionIdType, Type: smithy.ShapeTypeString, Ext: &ext[411]})
-var sUpdateSecretVersionStageResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &ext[413]})
-var sUpdateSecretVersionStageResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &ext[414]})
-var sValidateResourcePolicyRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &ext[416]})
-var sValidateResourcePolicyRequest_ResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourcePolicy", ID: &i_NonEmptyResourcePolicyType, Type: smithy.ShapeTypeString, Ext: &ext[417]})
-var sValidateResourcePolicyResponse_PolicyValidationPassed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyValidationPassed", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[419]})
-var sValidateResourcePolicyResponse_ValidationErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationErrors", ID: &i_ValidationErrorsType, Members: &m_ValidationErrorsType, Type: smithy.ShapeTypeList, Ext: &ext[420]})
+var s_AddReplicaRegionListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReplicaRegionType, Members: &mReplicaRegionType, Type: smithy.ShapeTypeStructure, Ext: &e_AddReplicaRegionListType_member})
+var s_APIErrorListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAPIErrorType, Members: &mAPIErrorType, Type: smithy.ShapeTypeStructure, Ext: &e_APIErrorListType_member})
+var sAPIErrorType_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &eAPIErrorType_SecretId})
+var sAPIErrorType_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eAPIErrorType_ErrorCode})
+var sAPIErrorType_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAPIErrorType_Message})
+var sDecryptionFailure_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eDecryptionFailure_Message})
+var sEncryptionFailure_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eEncryptionFailure_Message})
+var sExternalSecretRotationMetadataItem_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ExternalSecretRotationMetadataItemKeyType, Type: smithy.ShapeTypeString, Ext: &eExternalSecretRotationMetadataItem_Key})
+var sExternalSecretRotationMetadataItem_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_ExternalSecretRotationMetadataItemValueType, Type: smithy.ShapeTypeString, Ext: &eExternalSecretRotationMetadataItem_Value})
+var s_ExternalSecretRotationMetadataType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExternalSecretRotationMetadataItem, Members: &mExternalSecretRotationMetadataItem, Type: smithy.ShapeTypeStructure, Ext: &e_ExternalSecretRotationMetadataType_member})
+var sFilter_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &iFilterNameStringType, Members: &mFilterNameStringType, Type: smithy.ShapeTypeEnum, Ext: &eFilter_Key})
+var sFilter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_FilterValuesStringList, Members: &m_FilterValuesStringList, Type: smithy.ShapeTypeList, Ext: &eFilter_Values})
+var sFilterNameStringType_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFilterNameStringType_description})
+var sFilterNameStringType_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFilterNameStringType_name})
+var sFilterNameStringType_tag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tag_key", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFilterNameStringType_tag_key})
+var sFilterNameStringType_tag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tag_value", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFilterNameStringType_tag_value})
+var sFilterNameStringType_primary_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "primary_region", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFilterNameStringType_primary_region})
+var sFilterNameStringType_owning_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owning_service", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFilterNameStringType_owning_service})
+var sFilterNameStringType_all = smithy.NewStaticSchema(smithy.StaticSchema{Member: "all", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFilterNameStringType_all})
+var s_FiltersListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure, Ext: &e_FiltersListType_member})
+var s_FilterValuesStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FilterValueStringType, Type: smithy.ShapeTypeString, Ext: &e_FilterValuesStringList_member})
+var sInternalServiceError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServiceError_Message})
+var sInvalidNextTokenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidNextTokenException_Message})
+var sInvalidParameterException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidParameterException_Message})
+var sInvalidRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidRequestException_Message})
+var s_KmsKeyIdListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_KmsKeyIdType, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyIdListType_member})
+var sLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_Message})
+var sMalformedPolicyDocumentException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eMalformedPolicyDocumentException_Message})
+var sPreconditionNotMetException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ePreconditionNotMetException_Message})
+var sPublicPolicyException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ePublicPolicyException_Message})
+var s_RemoveReplicaRegionListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RegionType, Type: smithy.ShapeTypeString, Ext: &e_RemoveReplicaRegionListType_member})
+var sReplicaRegionType_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_RegionType, Type: smithy.ShapeTypeString, Ext: &eReplicaRegionType_Region})
+var sReplicaRegionType_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyIdType, Type: smithy.ShapeTypeString, Ext: &eReplicaRegionType_KmsKeyId})
+var s_ReplicationStatusListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReplicationStatusType, Members: &mReplicationStatusType, Type: smithy.ShapeTypeStructure, Ext: &e_ReplicationStatusListType_member})
+var sReplicationStatusType_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_RegionType, Type: smithy.ShapeTypeString, Ext: &eReplicationStatusType_Region})
+var sReplicationStatusType_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyIdType, Type: smithy.ShapeTypeString, Ext: &eReplicationStatusType_KmsKeyId})
+var sReplicationStatusType_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatusType, Members: &mStatusType, Type: smithy.ShapeTypeEnum, Ext: &eReplicationStatusType_Status})
+var sReplicationStatusType_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_StatusMessageType, Type: smithy.ShapeTypeString, Ext: &eReplicationStatusType_StatusMessage})
+var sReplicationStatusType_LastAccessedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastAccessedDate", ID: &i_LastAccessedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &eReplicationStatusType_LastAccessedDate})
+var sResourceExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceExistsException_Message})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sRotationRulesType_AutomaticallyAfterDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomaticallyAfterDays", ID: &i_AutomaticallyRotateAfterDaysType, Type: smithy.ShapeTypeLong, Ext: &eRotationRulesType_AutomaticallyAfterDays})
+var sRotationRulesType_Duration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Duration", ID: &i_DurationType, Type: smithy.ShapeTypeString, Ext: &eRotationRulesType_Duration})
+var sRotationRulesType_ScheduleExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleExpression", ID: &i_ScheduleExpressionType, Type: smithy.ShapeTypeString, Ext: &eRotationRulesType_ScheduleExpression})
+var s_SecretIdListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &e_SecretIdListType_member})
+var sSecretListEntry_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &eSecretListEntry_ARN})
+var sSecretListEntry_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &eSecretListEntry_Name})
+var sSecretListEntry_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_MedeaTypeType, Type: smithy.ShapeTypeString, Ext: &eSecretListEntry_Type})
+var sSecretListEntry_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionType, Type: smithy.ShapeTypeString, Ext: &eSecretListEntry_Description})
+var sSecretListEntry_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyIdType, Type: smithy.ShapeTypeString, Ext: &eSecretListEntry_KmsKeyId})
+var sSecretListEntry_RotationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationEnabled", ID: &i_RotationEnabledType, Type: smithy.ShapeTypeBoolean, Ext: &eSecretListEntry_RotationEnabled})
+var sSecretListEntry_RotationLambdaARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationLambdaARN", ID: &i_RotationLambdaARNType, Type: smithy.ShapeTypeString, Ext: &eSecretListEntry_RotationLambdaARN})
+var sSecretListEntry_RotationRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationRules", ID: &iRotationRulesType, Members: &mRotationRulesType, Type: smithy.ShapeTypeStructure, Ext: &eSecretListEntry_RotationRules})
+var sSecretListEntry_ExternalSecretRotationMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalSecretRotationMetadata", ID: &i_ExternalSecretRotationMetadataType, Members: &m_ExternalSecretRotationMetadataType, Type: smithy.ShapeTypeList, Ext: &eSecretListEntry_ExternalSecretRotationMetadata})
+var sSecretListEntry_ExternalSecretRotationRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalSecretRotationRoleArn", ID: &i_RoleARNType, Type: smithy.ShapeTypeString, Ext: &eSecretListEntry_ExternalSecretRotationRoleArn})
+var sSecretListEntry_LastRotatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastRotatedDate", ID: &i_LastRotatedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &eSecretListEntry_LastRotatedDate})
+var sSecretListEntry_LastChangedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastChangedDate", ID: &i_LastChangedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &eSecretListEntry_LastChangedDate})
+var sSecretListEntry_LastAccessedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastAccessedDate", ID: &i_LastAccessedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &eSecretListEntry_LastAccessedDate})
+var sSecretListEntry_DeletedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletedDate", ID: &i_DeletedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &eSecretListEntry_DeletedDate})
+var sSecretListEntry_NextRotationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextRotationDate", ID: &i_NextRotationDateType, Type: smithy.ShapeTypeTimestamp, Ext: &eSecretListEntry_NextRotationDate})
+var sSecretListEntry_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagListType, Members: &m_TagListType, Type: smithy.ShapeTypeList, Ext: &eSecretListEntry_Tags})
+var sSecretListEntry_SecretVersionsToStages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretVersionsToStages", ID: &i_SecretVersionsToStagesMapType, Members: &m_SecretVersionsToStagesMapType, Type: smithy.ShapeTypeMap, Ext: &eSecretListEntry_SecretVersionsToStages})
+var sSecretListEntry_OwningService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwningService", ID: &i_OwningServiceType, Type: smithy.ShapeTypeString, Ext: &eSecretListEntry_OwningService})
+var sSecretListEntry_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i_TimestampType, Type: smithy.ShapeTypeTimestamp, Ext: &eSecretListEntry_CreatedDate})
+var sSecretListEntry_PrimaryRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryRegion", ID: &i_RegionType, Type: smithy.ShapeTypeString, Ext: &eSecretListEntry_PrimaryRegion})
+var s_SecretListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSecretListEntry, Members: &mSecretListEntry, Type: smithy.ShapeTypeStructure, Ext: &e_SecretListType_member})
+var sSecretValueEntry_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &eSecretValueEntry_ARN})
+var sSecretValueEntry_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &eSecretValueEntry_Name})
+var sSecretValueEntry_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_SecretVersionIdType, Type: smithy.ShapeTypeString, Ext: &eSecretValueEntry_VersionId})
+var sSecretValueEntry_SecretBinary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretBinary", ID: &i_SecretBinaryType, Traits: &t3, Type: smithy.ShapeTypeBlob, Ext: &eSecretValueEntry_SecretBinary})
+var sSecretValueEntry_SecretString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretString", ID: &i_SecretStringType, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eSecretValueEntry_SecretString})
+var sSecretValueEntry_VersionStages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionStages", ID: &i_SecretVersionStagesType, Members: &m_SecretVersionStagesType, Type: smithy.ShapeTypeList, Ext: &eSecretValueEntry_VersionStages})
+var sSecretValueEntry_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i_CreatedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &eSecretValueEntry_CreatedDate})
+var s_SecretValuesType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSecretValueEntry, Members: &mSecretValueEntry, Type: smithy.ShapeTypeStructure, Ext: &e_SecretValuesType_member})
+var sSecretVersionsListEntry_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_SecretVersionIdType, Type: smithy.ShapeTypeString, Ext: &eSecretVersionsListEntry_VersionId})
+var sSecretVersionsListEntry_VersionStages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionStages", ID: &i_SecretVersionStagesType, Members: &m_SecretVersionStagesType, Type: smithy.ShapeTypeList, Ext: &eSecretVersionsListEntry_VersionStages})
+var sSecretVersionsListEntry_LastAccessedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastAccessedDate", ID: &i_LastAccessedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &eSecretVersionsListEntry_LastAccessedDate})
+var sSecretVersionsListEntry_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i_CreatedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &eSecretVersionsListEntry_CreatedDate})
+var sSecretVersionsListEntry_KmsKeyIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyIds", ID: &i_KmsKeyIdListType, Members: &m_KmsKeyIdListType, Type: smithy.ShapeTypeList, Ext: &eSecretVersionsListEntry_KmsKeyIds})
+var s_SecretVersionsListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSecretVersionsListEntry, Members: &mSecretVersionsListEntry, Type: smithy.ShapeTypeStructure, Ext: &e_SecretVersionsListType_member})
+var s_SecretVersionStagesType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecretVersionStageType, Type: smithy.ShapeTypeString, Ext: &e_SecretVersionStagesType_member})
+var s_SecretVersionsToStagesMapType_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_SecretVersionIdType, Type: smithy.ShapeTypeString, Ext: &e_SecretVersionsToStagesMapType_key})
+var s_SecretVersionsToStagesMapType_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_SecretVersionStagesType, Members: &m_SecretVersionStagesType, Type: smithy.ShapeTypeList, Ext: &e_SecretVersionsToStagesMapType_value})
+var sSortByType_created_date = smithy.NewStaticSchema(smithy.StaticSchema{Member: "created_date", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortByType_created_date})
+var sSortByType_last_accessed_date = smithy.NewStaticSchema(smithy.StaticSchema{Member: "last_accessed_date", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortByType_last_accessed_date})
+var sSortByType_last_changed_date = smithy.NewStaticSchema(smithy.StaticSchema{Member: "last_changed_date", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortByType_last_changed_date})
+var sSortByType_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortByType_name})
+var sSortOrderType_asc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asc", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortOrderType_asc})
+var sSortOrderType_desc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "desc", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortOrderType_desc})
+var sStatusType_InSync = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InSync", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatusType_InSync})
+var sStatusType_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatusType_Failed})
+var sStatusType_InProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatusType_InProgress})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKeyType, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValueType, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKeyListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKeyType, Type: smithy.ShapeTypeString, Ext: &e_TagKeyListType_member})
+var s_TagListType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagListType_member})
+var sValidationErrorsEntry_CheckName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CheckName", ID: &i_NameType, Type: smithy.ShapeTypeString, Ext: &eValidationErrorsEntry_CheckName})
+var sValidationErrorsEntry_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eValidationErrorsEntry_ErrorMessage})
+var s_ValidationErrorsType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationErrorsEntry, Members: &mValidationErrorsEntry, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationErrorsType_member})
+var sBatchGetSecretValueRequest_SecretIdList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretIdList", ID: &i_SecretIdListType, Members: &m_SecretIdListType, Type: smithy.ShapeTypeList, Ext: &eBatchGetSecretValueRequest_SecretIdList})
+var sBatchGetSecretValueRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FiltersListType, Members: &m_FiltersListType, Type: smithy.ShapeTypeList, Ext: &eBatchGetSecretValueRequest_Filters})
+var sBatchGetSecretValueRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsBatchType, Type: smithy.ShapeTypeInteger, Ext: &eBatchGetSecretValueRequest_MaxResults})
+var sBatchGetSecretValueRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenType, Type: smithy.ShapeTypeString, Ext: &eBatchGetSecretValueRequest_NextToken})
+var sBatchGetSecretValueResponse_SecretValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretValues", ID: &i_SecretValuesType, Members: &m_SecretValuesType, Type: smithy.ShapeTypeList, Ext: &eBatchGetSecretValueResponse_SecretValues})
+var sBatchGetSecretValueResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenType, Type: smithy.ShapeTypeString, Ext: &eBatchGetSecretValueResponse_NextToken})
+var sBatchGetSecretValueResponse_Errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errors", ID: &i_APIErrorListType, Members: &m_APIErrorListType, Type: smithy.ShapeTypeList, Ext: &eBatchGetSecretValueResponse_Errors})
+var sCancelRotateSecretRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &eCancelRotateSecretRequest_SecretId})
+var sCancelRotateSecretResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &eCancelRotateSecretResponse_ARN})
+var sCancelRotateSecretResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &eCancelRotateSecretResponse_Name})
+var sCancelRotateSecretResponse_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_SecretVersionIdType, Type: smithy.ShapeTypeString, Ext: &eCancelRotateSecretResponse_VersionId})
+var sCreateSecretRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NameType, Type: smithy.ShapeTypeString, Ext: &eCreateSecretRequest_Name})
+var sCreateSecretRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestTokenType, Type: smithy.ShapeTypeString, Ext: &eCreateSecretRequest_ClientRequestToken})
+var sCreateSecretRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionType, Type: smithy.ShapeTypeString, Ext: &eCreateSecretRequest_Description})
+var sCreateSecretRequest_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyIdType, Type: smithy.ShapeTypeString, Ext: &eCreateSecretRequest_KmsKeyId})
+var sCreateSecretRequest_SecretBinary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretBinary", ID: &i_SecretBinaryType, Traits: &t3, Type: smithy.ShapeTypeBlob, Ext: &eCreateSecretRequest_SecretBinary})
+var sCreateSecretRequest_SecretString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretString", ID: &i_SecretStringType, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eCreateSecretRequest_SecretString})
+var sCreateSecretRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagListType, Members: &m_TagListType, Type: smithy.ShapeTypeList, Ext: &eCreateSecretRequest_Tags})
+var sCreateSecretRequest_AddReplicaRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddReplicaRegions", ID: &i_AddReplicaRegionListType, Members: &m_AddReplicaRegionListType, Type: smithy.ShapeTypeList, Ext: &eCreateSecretRequest_AddReplicaRegions})
+var sCreateSecretRequest_ForceOverwriteReplicaSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceOverwriteReplicaSecret", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eCreateSecretRequest_ForceOverwriteReplicaSecret})
+var sCreateSecretRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_MedeaTypeType, Type: smithy.ShapeTypeString, Ext: &eCreateSecretRequest_Type})
+var sCreateSecretResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &eCreateSecretResponse_ARN})
+var sCreateSecretResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &eCreateSecretResponse_Name})
+var sCreateSecretResponse_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_SecretVersionIdType, Type: smithy.ShapeTypeString, Ext: &eCreateSecretResponse_VersionId})
+var sCreateSecretResponse_ReplicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationStatus", ID: &i_ReplicationStatusListType, Members: &m_ReplicationStatusListType, Type: smithy.ShapeTypeList, Ext: &eCreateSecretResponse_ReplicationStatus})
+var sDeleteResourcePolicyRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &eDeleteResourcePolicyRequest_SecretId})
+var sDeleteResourcePolicyResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &eDeleteResourcePolicyResponse_ARN})
+var sDeleteResourcePolicyResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NameType, Type: smithy.ShapeTypeString, Ext: &eDeleteResourcePolicyResponse_Name})
+var sDeleteSecretRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &eDeleteSecretRequest_SecretId})
+var sDeleteSecretRequest_RecoveryWindowInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecoveryWindowInDays", ID: &i_RecoveryWindowInDaysType, Type: smithy.ShapeTypeLong, Ext: &eDeleteSecretRequest_RecoveryWindowInDays})
+var sDeleteSecretRequest_ForceDeleteWithoutRecovery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceDeleteWithoutRecovery", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eDeleteSecretRequest_ForceDeleteWithoutRecovery})
+var sDeleteSecretResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &eDeleteSecretResponse_ARN})
+var sDeleteSecretResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &eDeleteSecretResponse_Name})
+var sDeleteSecretResponse_DeletionDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionDate", ID: &i_DeletionDateType, Type: smithy.ShapeTypeTimestamp, Ext: &eDeleteSecretResponse_DeletionDate})
+var sDescribeSecretRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &eDescribeSecretRequest_SecretId})
+var sDescribeSecretResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &eDescribeSecretResponse_ARN})
+var sDescribeSecretResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &eDescribeSecretResponse_Name})
+var sDescribeSecretResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_MedeaTypeType, Type: smithy.ShapeTypeString, Ext: &eDescribeSecretResponse_Type})
+var sDescribeSecretResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionType, Type: smithy.ShapeTypeString, Ext: &eDescribeSecretResponse_Description})
+var sDescribeSecretResponse_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyIdType, Type: smithy.ShapeTypeString, Ext: &eDescribeSecretResponse_KmsKeyId})
+var sDescribeSecretResponse_RotationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationEnabled", ID: &i_RotationEnabledType, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeSecretResponse_RotationEnabled})
+var sDescribeSecretResponse_RotationLambdaARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationLambdaARN", ID: &i_RotationLambdaARNType, Type: smithy.ShapeTypeString, Ext: &eDescribeSecretResponse_RotationLambdaARN})
+var sDescribeSecretResponse_RotationRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationRules", ID: &iRotationRulesType, Members: &mRotationRulesType, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSecretResponse_RotationRules})
+var sDescribeSecretResponse_ExternalSecretRotationMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalSecretRotationMetadata", ID: &i_ExternalSecretRotationMetadataType, Members: &m_ExternalSecretRotationMetadataType, Type: smithy.ShapeTypeList, Ext: &eDescribeSecretResponse_ExternalSecretRotationMetadata})
+var sDescribeSecretResponse_ExternalSecretRotationRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalSecretRotationRoleArn", ID: &i_RoleARNType, Type: smithy.ShapeTypeString, Ext: &eDescribeSecretResponse_ExternalSecretRotationRoleArn})
+var sDescribeSecretResponse_LastRotatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastRotatedDate", ID: &i_LastRotatedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeSecretResponse_LastRotatedDate})
+var sDescribeSecretResponse_LastChangedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastChangedDate", ID: &i_LastChangedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeSecretResponse_LastChangedDate})
+var sDescribeSecretResponse_LastAccessedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastAccessedDate", ID: &i_LastAccessedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeSecretResponse_LastAccessedDate})
+var sDescribeSecretResponse_DeletedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletedDate", ID: &i_DeletedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeSecretResponse_DeletedDate})
+var sDescribeSecretResponse_NextRotationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextRotationDate", ID: &i_NextRotationDateType, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeSecretResponse_NextRotationDate})
+var sDescribeSecretResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagListType, Members: &m_TagListType, Type: smithy.ShapeTypeList, Ext: &eDescribeSecretResponse_Tags})
+var sDescribeSecretResponse_VersionIdsToStages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionIdsToStages", ID: &i_SecretVersionsToStagesMapType, Members: &m_SecretVersionsToStagesMapType, Type: smithy.ShapeTypeMap, Ext: &eDescribeSecretResponse_VersionIdsToStages})
+var sDescribeSecretResponse_OwningService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwningService", ID: &i_OwningServiceType, Type: smithy.ShapeTypeString, Ext: &eDescribeSecretResponse_OwningService})
+var sDescribeSecretResponse_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i_TimestampType, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeSecretResponse_CreatedDate})
+var sDescribeSecretResponse_PrimaryRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryRegion", ID: &i_RegionType, Type: smithy.ShapeTypeString, Ext: &eDescribeSecretResponse_PrimaryRegion})
+var sDescribeSecretResponse_ReplicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationStatus", ID: &i_ReplicationStatusListType, Members: &m_ReplicationStatusListType, Type: smithy.ShapeTypeList, Ext: &eDescribeSecretResponse_ReplicationStatus})
+var sGetRandomPasswordRequest_PasswordLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PasswordLength", ID: &i_PasswordLengthType, Type: smithy.ShapeTypeLong, Ext: &eGetRandomPasswordRequest_PasswordLength})
+var sGetRandomPasswordRequest_ExcludeCharacters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeCharacters", ID: &i_ExcludeCharactersType, Type: smithy.ShapeTypeString, Ext: &eGetRandomPasswordRequest_ExcludeCharacters})
+var sGetRandomPasswordRequest_ExcludeNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeNumbers", ID: &i_ExcludeNumbersType, Type: smithy.ShapeTypeBoolean, Ext: &eGetRandomPasswordRequest_ExcludeNumbers})
+var sGetRandomPasswordRequest_ExcludePunctuation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludePunctuation", ID: &i_ExcludePunctuationType, Type: smithy.ShapeTypeBoolean, Ext: &eGetRandomPasswordRequest_ExcludePunctuation})
+var sGetRandomPasswordRequest_ExcludeUppercase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeUppercase", ID: &i_ExcludeUppercaseType, Type: smithy.ShapeTypeBoolean, Ext: &eGetRandomPasswordRequest_ExcludeUppercase})
+var sGetRandomPasswordRequest_ExcludeLowercase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeLowercase", ID: &i_ExcludeLowercaseType, Type: smithy.ShapeTypeBoolean, Ext: &eGetRandomPasswordRequest_ExcludeLowercase})
+var sGetRandomPasswordRequest_IncludeSpace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeSpace", ID: &i_IncludeSpaceType, Type: smithy.ShapeTypeBoolean, Ext: &eGetRandomPasswordRequest_IncludeSpace})
+var sGetRandomPasswordRequest_RequireEachIncludedType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequireEachIncludedType", ID: &i_RequireEachIncludedTypeType, Type: smithy.ShapeTypeBoolean, Ext: &eGetRandomPasswordRequest_RequireEachIncludedType})
+var sGetRandomPasswordResponse_RandomPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RandomPassword", ID: &i_RandomPasswordType, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eGetRandomPasswordResponse_RandomPassword})
+var sGetResourcePolicyRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &eGetResourcePolicyRequest_SecretId})
+var sGetResourcePolicyResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &eGetResourcePolicyResponse_ARN})
+var sGetResourcePolicyResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NameType, Type: smithy.ShapeTypeString, Ext: &eGetResourcePolicyResponse_Name})
+var sGetResourcePolicyResponse_ResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourcePolicy", ID: &i_NonEmptyResourcePolicyType, Type: smithy.ShapeTypeString, Ext: &eGetResourcePolicyResponse_ResourcePolicy})
+var sGetSecretValueRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &eGetSecretValueRequest_SecretId})
+var sGetSecretValueRequest_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_SecretVersionIdType, Type: smithy.ShapeTypeString, Ext: &eGetSecretValueRequest_VersionId})
+var sGetSecretValueRequest_VersionStage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionStage", ID: &i_SecretVersionStageType, Type: smithy.ShapeTypeString, Ext: &eGetSecretValueRequest_VersionStage})
+var sGetSecretValueResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &eGetSecretValueResponse_ARN})
+var sGetSecretValueResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &eGetSecretValueResponse_Name})
+var sGetSecretValueResponse_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_SecretVersionIdType, Type: smithy.ShapeTypeString, Ext: &eGetSecretValueResponse_VersionId})
+var sGetSecretValueResponse_SecretBinary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretBinary", ID: &i_SecretBinaryType, Traits: &t3, Type: smithy.ShapeTypeBlob, Ext: &eGetSecretValueResponse_SecretBinary})
+var sGetSecretValueResponse_SecretString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretString", ID: &i_SecretStringType, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eGetSecretValueResponse_SecretString})
+var sGetSecretValueResponse_VersionStages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionStages", ID: &i_SecretVersionStagesType, Members: &m_SecretVersionStagesType, Type: smithy.ShapeTypeList, Ext: &eGetSecretValueResponse_VersionStages})
+var sGetSecretValueResponse_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i_CreatedDateType, Type: smithy.ShapeTypeTimestamp, Ext: &eGetSecretValueResponse_CreatedDate})
+var sListSecretsRequest_IncludePlannedDeletion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludePlannedDeletion", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eListSecretsRequest_IncludePlannedDeletion})
+var sListSecretsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsType, Type: smithy.ShapeTypeInteger, Ext: &eListSecretsRequest_MaxResults})
+var sListSecretsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenType, Type: smithy.ShapeTypeString, Ext: &eListSecretsRequest_NextToken})
+var sListSecretsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FiltersListType, Members: &m_FiltersListType, Type: smithy.ShapeTypeList, Ext: &eListSecretsRequest_Filters})
+var sListSecretsRequest_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrderType, Members: &mSortOrderType, Type: smithy.ShapeTypeEnum, Ext: &eListSecretsRequest_SortOrder})
+var sListSecretsRequest_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iSortByType, Members: &mSortByType, Type: smithy.ShapeTypeEnum, Ext: &eListSecretsRequest_SortBy})
+var sListSecretsResponse_SecretList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretList", ID: &i_SecretListType, Members: &m_SecretListType, Type: smithy.ShapeTypeList, Ext: &eListSecretsResponse_SecretList})
+var sListSecretsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenType, Type: smithy.ShapeTypeString, Ext: &eListSecretsResponse_NextToken})
+var sListSecretVersionIdsRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &eListSecretVersionIdsRequest_SecretId})
+var sListSecretVersionIdsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsType, Type: smithy.ShapeTypeInteger, Ext: &eListSecretVersionIdsRequest_MaxResults})
+var sListSecretVersionIdsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenType, Type: smithy.ShapeTypeString, Ext: &eListSecretVersionIdsRequest_NextToken})
+var sListSecretVersionIdsRequest_IncludeDeprecated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeDeprecated", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eListSecretVersionIdsRequest_IncludeDeprecated})
+var sListSecretVersionIdsResponse_Versions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Versions", ID: &i_SecretVersionsListType, Members: &m_SecretVersionsListType, Type: smithy.ShapeTypeList, Ext: &eListSecretVersionIdsResponse_Versions})
+var sListSecretVersionIdsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenType, Type: smithy.ShapeTypeString, Ext: &eListSecretVersionIdsResponse_NextToken})
+var sListSecretVersionIdsResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &eListSecretVersionIdsResponse_ARN})
+var sListSecretVersionIdsResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &eListSecretVersionIdsResponse_Name})
+var sPutResourcePolicyRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyRequest_SecretId})
+var sPutResourcePolicyRequest_ResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourcePolicy", ID: &i_NonEmptyResourcePolicyType, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyRequest_ResourcePolicy})
+var sPutResourcePolicyRequest_BlockPublicPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockPublicPolicy", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ePutResourcePolicyRequest_BlockPublicPolicy})
+var sPutResourcePolicyResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyResponse_ARN})
+var sPutResourcePolicyResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NameType, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyResponse_Name})
+var sPutSecretValueRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &ePutSecretValueRequest_SecretId})
+var sPutSecretValueRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestTokenType, Type: smithy.ShapeTypeString, Ext: &ePutSecretValueRequest_ClientRequestToken})
+var sPutSecretValueRequest_SecretBinary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretBinary", ID: &i_SecretBinaryType, Traits: &t3, Type: smithy.ShapeTypeBlob, Ext: &ePutSecretValueRequest_SecretBinary})
+var sPutSecretValueRequest_SecretString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretString", ID: &i_SecretStringType, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ePutSecretValueRequest_SecretString})
+var sPutSecretValueRequest_VersionStages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionStages", ID: &i_SecretVersionStagesType, Members: &m_SecretVersionStagesType, Type: smithy.ShapeTypeList, Ext: &ePutSecretValueRequest_VersionStages})
+var sPutSecretValueRequest_RotationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationToken", ID: &i_RotationTokenType, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ePutSecretValueRequest_RotationToken})
+var sPutSecretValueResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &ePutSecretValueResponse_ARN})
+var sPutSecretValueResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &ePutSecretValueResponse_Name})
+var sPutSecretValueResponse_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_SecretVersionIdType, Type: smithy.ShapeTypeString, Ext: &ePutSecretValueResponse_VersionId})
+var sPutSecretValueResponse_VersionStages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionStages", ID: &i_SecretVersionStagesType, Members: &m_SecretVersionStagesType, Type: smithy.ShapeTypeList, Ext: &ePutSecretValueResponse_VersionStages})
+var sRemoveRegionsFromReplicationRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &eRemoveRegionsFromReplicationRequest_SecretId})
+var sRemoveRegionsFromReplicationRequest_RemoveReplicaRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveReplicaRegions", ID: &i_RemoveReplicaRegionListType, Members: &m_RemoveReplicaRegionListType, Type: smithy.ShapeTypeList, Ext: &eRemoveRegionsFromReplicationRequest_RemoveReplicaRegions})
+var sRemoveRegionsFromReplicationResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &eRemoveRegionsFromReplicationResponse_ARN})
+var sRemoveRegionsFromReplicationResponse_ReplicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationStatus", ID: &i_ReplicationStatusListType, Members: &m_ReplicationStatusListType, Type: smithy.ShapeTypeList, Ext: &eRemoveRegionsFromReplicationResponse_ReplicationStatus})
+var sReplicateSecretToRegionsRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &eReplicateSecretToRegionsRequest_SecretId})
+var sReplicateSecretToRegionsRequest_AddReplicaRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddReplicaRegions", ID: &i_AddReplicaRegionListType, Members: &m_AddReplicaRegionListType, Type: smithy.ShapeTypeList, Ext: &eReplicateSecretToRegionsRequest_AddReplicaRegions})
+var sReplicateSecretToRegionsRequest_ForceOverwriteReplicaSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceOverwriteReplicaSecret", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eReplicateSecretToRegionsRequest_ForceOverwriteReplicaSecret})
+var sReplicateSecretToRegionsResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &eReplicateSecretToRegionsResponse_ARN})
+var sReplicateSecretToRegionsResponse_ReplicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationStatus", ID: &i_ReplicationStatusListType, Members: &m_ReplicationStatusListType, Type: smithy.ShapeTypeList, Ext: &eReplicateSecretToRegionsResponse_ReplicationStatus})
+var sRestoreSecretRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &eRestoreSecretRequest_SecretId})
+var sRestoreSecretResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &eRestoreSecretResponse_ARN})
+var sRestoreSecretResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &eRestoreSecretResponse_Name})
+var sRotateSecretRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &eRotateSecretRequest_SecretId})
+var sRotateSecretRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestTokenType, Type: smithy.ShapeTypeString, Ext: &eRotateSecretRequest_ClientRequestToken})
+var sRotateSecretRequest_RotationLambdaARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationLambdaARN", ID: &i_RotationLambdaARNType, Type: smithy.ShapeTypeString, Ext: &eRotateSecretRequest_RotationLambdaARN})
+var sRotateSecretRequest_RotationRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationRules", ID: &iRotationRulesType, Members: &mRotationRulesType, Type: smithy.ShapeTypeStructure, Ext: &eRotateSecretRequest_RotationRules})
+var sRotateSecretRequest_ExternalSecretRotationMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalSecretRotationMetadata", ID: &i_ExternalSecretRotationMetadataType, Members: &m_ExternalSecretRotationMetadataType, Type: smithy.ShapeTypeList, Ext: &eRotateSecretRequest_ExternalSecretRotationMetadata})
+var sRotateSecretRequest_ExternalSecretRotationRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalSecretRotationRoleArn", ID: &i_RoleARNType, Type: smithy.ShapeTypeString, Ext: &eRotateSecretRequest_ExternalSecretRotationRoleArn})
+var sRotateSecretRequest_RotateImmediately = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotateImmediately", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eRotateSecretRequest_RotateImmediately})
+var sRotateSecretResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &eRotateSecretResponse_ARN})
+var sRotateSecretResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &eRotateSecretResponse_Name})
+var sRotateSecretResponse_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_SecretVersionIdType, Type: smithy.ShapeTypeString, Ext: &eRotateSecretResponse_VersionId})
+var sStopReplicationToReplicaRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &eStopReplicationToReplicaRequest_SecretId})
+var sStopReplicationToReplicaResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &eStopReplicationToReplicaResponse_ARN})
+var sTagResourceRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_SecretId})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagListType, Members: &m_TagListType, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_Tags})
+var sUntagResourceRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_SecretId})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyListType, Members: &m_TagKeyListType, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUpdateSecretRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &eUpdateSecretRequest_SecretId})
+var sUpdateSecretRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestTokenType, Type: smithy.ShapeTypeString, Ext: &eUpdateSecretRequest_ClientRequestToken})
+var sUpdateSecretRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionType, Type: smithy.ShapeTypeString, Ext: &eUpdateSecretRequest_Description})
+var sUpdateSecretRequest_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyIdType, Type: smithy.ShapeTypeString, Ext: &eUpdateSecretRequest_KmsKeyId})
+var sUpdateSecretRequest_SecretBinary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretBinary", ID: &i_SecretBinaryType, Traits: &t3, Type: smithy.ShapeTypeBlob, Ext: &eUpdateSecretRequest_SecretBinary})
+var sUpdateSecretRequest_SecretString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretString", ID: &i_SecretStringType, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eUpdateSecretRequest_SecretString})
+var sUpdateSecretRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_MedeaTypeType, Type: smithy.ShapeTypeString, Ext: &eUpdateSecretRequest_Type})
+var sUpdateSecretResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &eUpdateSecretResponse_ARN})
+var sUpdateSecretResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &eUpdateSecretResponse_Name})
+var sUpdateSecretResponse_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_SecretVersionIdType, Type: smithy.ShapeTypeString, Ext: &eUpdateSecretResponse_VersionId})
+var sUpdateSecretVersionStageRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &eUpdateSecretVersionStageRequest_SecretId})
+var sUpdateSecretVersionStageRequest_VersionStage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionStage", ID: &i_SecretVersionStageType, Type: smithy.ShapeTypeString, Ext: &eUpdateSecretVersionStageRequest_VersionStage})
+var sUpdateSecretVersionStageRequest_RemoveFromVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveFromVersionId", ID: &i_SecretVersionIdType, Type: smithy.ShapeTypeString, Ext: &eUpdateSecretVersionStageRequest_RemoveFromVersionId})
+var sUpdateSecretVersionStageRequest_MoveToVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MoveToVersionId", ID: &i_SecretVersionIdType, Type: smithy.ShapeTypeString, Ext: &eUpdateSecretVersionStageRequest_MoveToVersionId})
+var sUpdateSecretVersionStageResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_SecretARNType, Type: smithy.ShapeTypeString, Ext: &eUpdateSecretVersionStageResponse_ARN})
+var sUpdateSecretVersionStageResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SecretNameType, Type: smithy.ShapeTypeString, Ext: &eUpdateSecretVersionStageResponse_Name})
+var sValidateResourcePolicyRequest_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretIdType, Type: smithy.ShapeTypeString, Ext: &eValidateResourcePolicyRequest_SecretId})
+var sValidateResourcePolicyRequest_ResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourcePolicy", ID: &i_NonEmptyResourcePolicyType, Type: smithy.ShapeTypeString, Ext: &eValidateResourcePolicyRequest_ResourcePolicy})
+var sValidateResourcePolicyResponse_PolicyValidationPassed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyValidationPassed", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eValidateResourcePolicyResponse_PolicyValidationPassed})
+var sValidateResourcePolicyResponse_ValidationErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationErrors", ID: &i_ValidationErrorsType, Members: &m_ValidationErrorsType, Type: smithy.ShapeTypeList, Ext: &eValidateResourcePolicyResponse_ValidationErrors})
 
 var BatchGetSecretValue = &sBatchGetSecretValue
 

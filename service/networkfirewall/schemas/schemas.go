@@ -7,9 +7,1806 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [1798]smithy.SchemaExtensions
+var (
+	eAcceptNetworkFirewallTransitGatewayAttachment                                        smithy.SchemaExtensions
+	eAssociateAvailabilityZones                                                           smithy.SchemaExtensions
+	eAssociateFirewallPolicy                                                              smithy.SchemaExtensions
+	eAssociateSubnets                                                                     smithy.SchemaExtensions
+	eAttachRuleGroupsToProxyConfiguration                                                 smithy.SchemaExtensions
+	eCreateContainerAssociation                                                           smithy.SchemaExtensions
+	eCreateFirewall                                                                       smithy.SchemaExtensions
+	eCreateFirewallPolicy                                                                 smithy.SchemaExtensions
+	eCreateProxy                                                                          smithy.SchemaExtensions
+	eCreateProxyConfiguration                                                             smithy.SchemaExtensions
+	eCreateProxyRuleGroup                                                                 smithy.SchemaExtensions
+	eCreateProxyRules                                                                     smithy.SchemaExtensions
+	eCreateRuleGroup                                                                      smithy.SchemaExtensions
+	eCreateTLSInspectionConfiguration                                                     smithy.SchemaExtensions
+	eCreateVpcEndpointAssociation                                                         smithy.SchemaExtensions
+	eDeleteContainerAssociation                                                           smithy.SchemaExtensions
+	eDeleteFirewall                                                                       smithy.SchemaExtensions
+	eDeleteFirewallPolicy                                                                 smithy.SchemaExtensions
+	eDeleteNetworkFirewallTransitGatewayAttachment                                        smithy.SchemaExtensions
+	eDeleteProxy                                                                          smithy.SchemaExtensions
+	eDeleteProxyConfiguration                                                             smithy.SchemaExtensions
+	eDeleteProxyRuleGroup                                                                 smithy.SchemaExtensions
+	eDeleteProxyRules                                                                     smithy.SchemaExtensions
+	eDeleteResourcePolicy                                                                 smithy.SchemaExtensions
+	eDeleteRuleGroup                                                                      smithy.SchemaExtensions
+	eDeleteTLSInspectionConfiguration                                                     smithy.SchemaExtensions
+	eDeleteVpcEndpointAssociation                                                         smithy.SchemaExtensions
+	eDescribeContainerAssociation                                                         smithy.SchemaExtensions
+	eDescribeFirewall                                                                     smithy.SchemaExtensions
+	eDescribeFirewallMetadata                                                             smithy.SchemaExtensions
+	eDescribeFirewallPolicy                                                               smithy.SchemaExtensions
+	eDescribeFlowOperation                                                                smithy.SchemaExtensions
+	eDescribeLoggingConfiguration                                                         smithy.SchemaExtensions
+	eDescribeProxy                                                                        smithy.SchemaExtensions
+	eDescribeProxyConfiguration                                                           smithy.SchemaExtensions
+	eDescribeProxyRule                                                                    smithy.SchemaExtensions
+	eDescribeProxyRuleGroup                                                               smithy.SchemaExtensions
+	eDescribeResourcePolicy                                                               smithy.SchemaExtensions
+	eDescribeRuleGroup                                                                    smithy.SchemaExtensions
+	eDescribeRuleGroupMetadata                                                            smithy.SchemaExtensions
+	eDescribeRuleGroupSummary                                                             smithy.SchemaExtensions
+	eDescribeTLSInspectionConfiguration                                                   smithy.SchemaExtensions
+	eDescribeVpcEndpointAssociation                                                       smithy.SchemaExtensions
+	eDetachRuleGroupsFromProxyConfiguration                                               smithy.SchemaExtensions
+	eDisassociateAvailabilityZones                                                        smithy.SchemaExtensions
+	eDisassociateSubnets                                                                  smithy.SchemaExtensions
+	eGetAnalysisReportResults                                                             smithy.SchemaExtensions
+	eListAnalysisReports                                                                  smithy.SchemaExtensions
+	eListContainerAssociations                                                            smithy.SchemaExtensions
+	eListFirewallPolicies                                                                 smithy.SchemaExtensions
+	eListFirewalls                                                                        smithy.SchemaExtensions
+	eListFlowOperationResults                                                             smithy.SchemaExtensions
+	eListFlowOperations                                                                   smithy.SchemaExtensions
+	eListProxies                                                                          smithy.SchemaExtensions
+	eListProxyConfigurations                                                              smithy.SchemaExtensions
+	eListProxyRuleGroups                                                                  smithy.SchemaExtensions
+	eListRuleGroups                                                                       smithy.SchemaExtensions
+	eListTagsForResource                                                                  smithy.SchemaExtensions
+	eListTLSInspectionConfigurations                                                      smithy.SchemaExtensions
+	eListVpcEndpointAssociations                                                          smithy.SchemaExtensions
+	ePutResourcePolicy                                                                    smithy.SchemaExtensions
+	eRejectNetworkFirewallTransitGatewayAttachment                                        smithy.SchemaExtensions
+	eStartAnalysisReport                                                                  smithy.SchemaExtensions
+	eStartFlowCapture                                                                     smithy.SchemaExtensions
+	eStartFlowFlush                                                                       smithy.SchemaExtensions
+	eTagResource                                                                          smithy.SchemaExtensions
+	eUntagResource                                                                        smithy.SchemaExtensions
+	eUpdateAvailabilityZoneChangeProtection                                               smithy.SchemaExtensions
+	eUpdateContainerAssociation                                                           smithy.SchemaExtensions
+	eUpdateFirewallAnalysisSettings                                                       smithy.SchemaExtensions
+	eUpdateFirewallDeleteProtection                                                       smithy.SchemaExtensions
+	eUpdateFirewallDescription                                                            smithy.SchemaExtensions
+	eUpdateFirewallEncryptionConfiguration                                                smithy.SchemaExtensions
+	eUpdateFirewallPolicy                                                                 smithy.SchemaExtensions
+	eUpdateFirewallPolicyChangeProtection                                                 smithy.SchemaExtensions
+	eUpdateLoggingConfiguration                                                           smithy.SchemaExtensions
+	eUpdateProxy                                                                          smithy.SchemaExtensions
+	eUpdateProxyConfiguration                                                             smithy.SchemaExtensions
+	eUpdateProxyRule                                                                      smithy.SchemaExtensions
+	eUpdateProxyRuleGroupPriorities                                                       smithy.SchemaExtensions
+	eUpdateProxyRulePriorities                                                            smithy.SchemaExtensions
+	eUpdateProxySettings                                                                  smithy.SchemaExtensions
+	eUpdateRuleGroup                                                                      smithy.SchemaExtensions
+	eUpdateSubnetChangeProtection                                                         smithy.SchemaExtensions
+	eUpdateTLSInspectionConfiguration                                                     smithy.SchemaExtensions
+	e_NetworkFirewall_20201112                                                            smithy.SchemaExtensions
+	eActionDefinition                                                                     smithy.SchemaExtensions
+	eActionDefinition_PublishMetricAction                                                 smithy.SchemaExtensions
+	e_ActionName                                                                          smithy.SchemaExtensions
+	eAddress                                                                              smithy.SchemaExtensions
+	eAddress_AddressDefinition                                                            smithy.SchemaExtensions
+	e_AddressDefinition                                                                   smithy.SchemaExtensions
+	e_Addresses                                                                           smithy.SchemaExtensions
+	e_Addresses_member                                                                    smithy.SchemaExtensions
+	e_Age                                                                                 smithy.SchemaExtensions
+	eAnalysisReport                                                                       smithy.SchemaExtensions
+	eAnalysisReport_AnalysisReportId                                                      smithy.SchemaExtensions
+	eAnalysisReport_AnalysisType                                                          smithy.SchemaExtensions
+	eAnalysisReport_ReportTime                                                            smithy.SchemaExtensions
+	eAnalysisReport_Status                                                                smithy.SchemaExtensions
+	e_AnalysisReportId                                                                    smithy.SchemaExtensions
+	e_AnalysisReportNextToken                                                             smithy.SchemaExtensions
+	e_AnalysisReportResults                                                               smithy.SchemaExtensions
+	e_AnalysisReportResults_member                                                        smithy.SchemaExtensions
+	e_AnalysisReports                                                                     smithy.SchemaExtensions
+	e_AnalysisReports_member                                                              smithy.SchemaExtensions
+	eAnalysisResult                                                                       smithy.SchemaExtensions
+	eAnalysisResult_IdentifiedRuleIds                                                     smithy.SchemaExtensions
+	eAnalysisResult_IdentifiedType                                                        smithy.SchemaExtensions
+	eAnalysisResult_AnalysisDetail                                                        smithy.SchemaExtensions
+	e_AnalysisResultList                                                                  smithy.SchemaExtensions
+	e_AnalysisResultList_member                                                           smithy.SchemaExtensions
+	eAnalysisTypeReportResult                                                             smithy.SchemaExtensions
+	eAnalysisTypeReportResult_Protocol                                                    smithy.SchemaExtensions
+	eAnalysisTypeReportResult_FirstAccessed                                               smithy.SchemaExtensions
+	eAnalysisTypeReportResult_LastAccessed                                                smithy.SchemaExtensions
+	eAnalysisTypeReportResult_Domain                                                      smithy.SchemaExtensions
+	eAnalysisTypeReportResult_Hits                                                        smithy.SchemaExtensions
+	eAnalysisTypeReportResult_UniqueSources                                               smithy.SchemaExtensions
+	e_AssociationSyncState                                                                smithy.SchemaExtensions
+	e_AssociationSyncState_key                                                            smithy.SchemaExtensions
+	e_AssociationSyncState_value                                                          smithy.SchemaExtensions
+	eAttachment                                                                           smithy.SchemaExtensions
+	eAttachment_SubnetId                                                                  smithy.SchemaExtensions
+	eAttachment_EndpointId                                                                smithy.SchemaExtensions
+	eAttachment_Status                                                                    smithy.SchemaExtensions
+	eAttachment_StatusMessage                                                             smithy.SchemaExtensions
+	eAttachment_DnsName                                                                   smithy.SchemaExtensions
+	e_AttachmentId                                                                        smithy.SchemaExtensions
+	eAttachmentStatus                                                                     smithy.SchemaExtensions
+	eAttachmentStatus_CREATING                                                            smithy.SchemaExtensions
+	eAttachmentStatus_DELETING                                                            smithy.SchemaExtensions
+	eAttachmentStatus_FAILED                                                              smithy.SchemaExtensions
+	eAttachmentStatus_ERROR                                                               smithy.SchemaExtensions
+	eAttachmentStatus_SCALING                                                             smithy.SchemaExtensions
+	eAttachmentStatus_READY                                                               smithy.SchemaExtensions
+	e_AvailabilityZone                                                                    smithy.SchemaExtensions
+	e_AvailabilityZoneId                                                                  smithy.SchemaExtensions
+	eAvailabilityZoneMapping                                                              smithy.SchemaExtensions
+	eAvailabilityZoneMapping_AvailabilityZone                                             smithy.SchemaExtensions
+	e_AvailabilityZoneMappings                                                            smithy.SchemaExtensions
+	e_AvailabilityZoneMappings_member                                                     smithy.SchemaExtensions
+	e_AvailabilityZoneMappingString                                                       smithy.SchemaExtensions
+	eAvailabilityZoneMetadata                                                             smithy.SchemaExtensions
+	eAvailabilityZoneMetadata_IPAddressType                                               smithy.SchemaExtensions
+	e_AWSAccountId                                                                        smithy.SchemaExtensions
+	e_AzSubnet                                                                            smithy.SchemaExtensions
+	e_AzSubnets                                                                           smithy.SchemaExtensions
+	e_AzSubnets_member                                                                    smithy.SchemaExtensions
+	eAZSyncState                                                                          smithy.SchemaExtensions
+	eAZSyncState_Attachment                                                               smithy.SchemaExtensions
+	e_Boolean                                                                             smithy.SchemaExtensions
+	e_ByteCount                                                                           smithy.SchemaExtensions
+	eCapacityUsageSummary                                                                 smithy.SchemaExtensions
+	eCapacityUsageSummary_CIDRs                                                           smithy.SchemaExtensions
+	e_Certificates                                                                        smithy.SchemaExtensions
+	e_Certificates_member                                                                 smithy.SchemaExtensions
+	eCheckCertificateRevocationStatusActions                                              smithy.SchemaExtensions
+	eCheckCertificateRevocationStatusActions_RevokedStatusAction                          smithy.SchemaExtensions
+	eCheckCertificateRevocationStatusActions_UnknownStatusAction                          smithy.SchemaExtensions
+	e_CIDRCount                                                                           smithy.SchemaExtensions
+	eCIDRSummary                                                                          smithy.SchemaExtensions
+	eCIDRSummary_AvailableCIDRCount                                                       smithy.SchemaExtensions
+	eCIDRSummary_UtilizedCIDRCount                                                        smithy.SchemaExtensions
+	eCIDRSummary_IPSetReferences                                                          smithy.SchemaExtensions
+	e_CollectionMember_String                                                             smithy.SchemaExtensions
+	e_ConditionKey                                                                        smithy.SchemaExtensions
+	e_ConditionOperator                                                                   smithy.SchemaExtensions
+	eConfigurationSyncState                                                               smithy.SchemaExtensions
+	eConfigurationSyncState_PENDING                                                       smithy.SchemaExtensions
+	eConfigurationSyncState_IN_SYNC                                                       smithy.SchemaExtensions
+	eConfigurationSyncState_CAPACITY_CONSTRAINED                                          smithy.SchemaExtensions
+	e_ContainerAssociationLastUpdatedTime                                                 smithy.SchemaExtensions
+	e_ContainerAssociations                                                               smithy.SchemaExtensions
+	e_ContainerAssociations_member                                                        smithy.SchemaExtensions
+	eContainerAssociationStatus                                                           smithy.SchemaExtensions
+	eContainerAssociationStatus_ACTIVE                                                    smithy.SchemaExtensions
+	eContainerAssociationStatus_CREATING                                                  smithy.SchemaExtensions
+	eContainerAssociationStatus_DELETING                                                  smithy.SchemaExtensions
+	eContainerAssociationStatus_UPDATING                                                  smithy.SchemaExtensions
+	eContainerAssociationSummary                                                          smithy.SchemaExtensions
+	eContainerAssociationSummary_Arn                                                      smithy.SchemaExtensions
+	eContainerAssociationSummary_Name                                                     smithy.SchemaExtensions
+	eContainerAttribute                                                                   smithy.SchemaExtensions
+	eContainerAttribute_Key                                                               smithy.SchemaExtensions
+	eContainerAttribute_Value                                                             smithy.SchemaExtensions
+	e_ContainerAttributeKey                                                               smithy.SchemaExtensions
+	e_ContainerAttributes                                                                 smithy.SchemaExtensions
+	e_ContainerAttributes_member                                                          smithy.SchemaExtensions
+	e_ContainerAttributeValue                                                             smithy.SchemaExtensions
+	eContainerMonitoringConfiguration                                                     smithy.SchemaExtensions
+	eContainerMonitoringConfiguration_ClusterArn                                          smithy.SchemaExtensions
+	eContainerMonitoringConfiguration_AttributeFilters                                    smithy.SchemaExtensions
+	e_ContainerMonitoringConfigurations                                                   smithy.SchemaExtensions
+	e_ContainerMonitoringConfigurations_member                                            smithy.SchemaExtensions
+	eContainerMonitoringType                                                              smithy.SchemaExtensions
+	eContainerMonitoringType_ECS                                                          smithy.SchemaExtensions
+	eContainerMonitoringType_EKS                                                          smithy.SchemaExtensions
+	e_Count                                                                               smithy.SchemaExtensions
+	eCreateProxyRule                                                                      smithy.SchemaExtensions
+	eCreateProxyRule_ProxyRuleName                                                        smithy.SchemaExtensions
+	eCreateProxyRule_Description                                                          smithy.SchemaExtensions
+	eCreateProxyRule_Action                                                               smithy.SchemaExtensions
+	eCreateProxyRule_Conditions                                                           smithy.SchemaExtensions
+	eCreateProxyRule_InsertPosition                                                       smithy.SchemaExtensions
+	e_CreateProxyRuleList                                                                 smithy.SchemaExtensions
+	e_CreateProxyRuleList_member                                                          smithy.SchemaExtensions
+	eCreateProxyRulesByRequestPhase                                                       smithy.SchemaExtensions
+	eCreateProxyRulesByRequestPhase_PreDNS                                                smithy.SchemaExtensions
+	eCreateProxyRulesByRequestPhase_PreREQUEST                                            smithy.SchemaExtensions
+	eCreateProxyRulesByRequestPhase_PostRESPONSE                                          smithy.SchemaExtensions
+	e_CreateTime                                                                          smithy.SchemaExtensions
+	eCustomAction                                                                         smithy.SchemaExtensions
+	eCustomAction_ActionName                                                              smithy.SchemaExtensions
+	eCustomAction_ActionDefinition                                                        smithy.SchemaExtensions
+	e_CustomActions                                                                       smithy.SchemaExtensions
+	e_CustomActions_member                                                                smithy.SchemaExtensions
+	e_DeepThreatInspection                                                                smithy.SchemaExtensions
+	e_DeleteTime                                                                          smithy.SchemaExtensions
+	eDescribeProxyResource                                                                smithy.SchemaExtensions
+	eDescribeProxyResource_ProxyName                                                      smithy.SchemaExtensions
+	eDescribeProxyResource_ProxyArn                                                       smithy.SchemaExtensions
+	eDescribeProxyResource_ProxyConfigurationName                                         smithy.SchemaExtensions
+	eDescribeProxyResource_ProxyConfigurationArn                                          smithy.SchemaExtensions
+	eDescribeProxyResource_NatGatewayId                                                   smithy.SchemaExtensions
+	eDescribeProxyResource_ProxyState                                                     smithy.SchemaExtensions
+	eDescribeProxyResource_ProxyModifyState                                               smithy.SchemaExtensions
+	eDescribeProxyResource_ListenerProperties                                             smithy.SchemaExtensions
+	eDescribeProxyResource_TlsInterceptProperties                                         smithy.SchemaExtensions
+	eDescribeProxyResource_VpcEndpointServiceName                                         smithy.SchemaExtensions
+	eDescribeProxyResource_PrivateDNSName                                                 smithy.SchemaExtensions
+	eDescribeProxyResource_CreateTime                                                     smithy.SchemaExtensions
+	eDescribeProxyResource_DeleteTime                                                     smithy.SchemaExtensions
+	eDescribeProxyResource_UpdateTime                                                     smithy.SchemaExtensions
+	eDescribeProxyResource_FailureCode                                                    smithy.SchemaExtensions
+	eDescribeProxyResource_FailureMessage                                                 smithy.SchemaExtensions
+	eDescribeProxyResource_Tags                                                           smithy.SchemaExtensions
+	e_Description                                                                         smithy.SchemaExtensions
+	e_Destination                                                                         smithy.SchemaExtensions
+	eDimension                                                                            smithy.SchemaExtensions
+	eDimension_Value                                                                      smithy.SchemaExtensions
+	e_Dimensions                                                                          smithy.SchemaExtensions
+	e_Dimensions_member                                                                   smithy.SchemaExtensions
+	e_DimensionValue                                                                      smithy.SchemaExtensions
+	eDNSExpiryExceptionPolicy                                                             smithy.SchemaExtensions
+	eDNSExpiryExceptionPolicy_REJECT                                                      smithy.SchemaExtensions
+	eDNSExpiryExceptionPolicy_DROP                                                        smithy.SchemaExtensions
+	eDNSExpiryExceptionPolicy_CONTINUE                                                    smithy.SchemaExtensions
+	e_DNSFirewallRuleGroupId                                                              smithy.SchemaExtensions
+	e_DnsName                                                                             smithy.SchemaExtensions
+	e_Domain                                                                              smithy.SchemaExtensions
+	eEnabledAnalysisType                                                                  smithy.SchemaExtensions
+	eEnabledAnalysisType_TLS_SNI                                                          smithy.SchemaExtensions
+	eEnabledAnalysisType_HTTP_HOST                                                        smithy.SchemaExtensions
+	e_EnabledAnalysisTypes                                                                smithy.SchemaExtensions
+	e_EnabledAnalysisTypes_member                                                         smithy.SchemaExtensions
+	e_EnableMonitoringDashboard                                                           smithy.SchemaExtensions
+	e_EnableTLSSessionHolding                                                             smithy.SchemaExtensions
+	eEncryptionConfiguration                                                              smithy.SchemaExtensions
+	eEncryptionConfiguration_KeyId                                                        smithy.SchemaExtensions
+	eEncryptionConfiguration_Type                                                         smithy.SchemaExtensions
+	eEncryptionType                                                                       smithy.SchemaExtensions
+	eEncryptionType_CUSTOMER_KMS                                                          smithy.SchemaExtensions
+	eEncryptionType_AWS_OWNED_KMS_KEY                                                     smithy.SchemaExtensions
+	e_EndpointId                                                                          smithy.SchemaExtensions
+	e_EndTime                                                                             smithy.SchemaExtensions
+	e_ErrorMessage                                                                        smithy.SchemaExtensions
+	e_FailureCode                                                                         smithy.SchemaExtensions
+	e_FailureMessage                                                                      smithy.SchemaExtensions
+	eFirewall                                                                             smithy.SchemaExtensions
+	eFirewall_FirewallName                                                                smithy.SchemaExtensions
+	eFirewall_FirewallArn                                                                 smithy.SchemaExtensions
+	eFirewall_FirewallPolicyArn                                                           smithy.SchemaExtensions
+	eFirewall_VpcId                                                                       smithy.SchemaExtensions
+	eFirewall_SubnetMappings                                                              smithy.SchemaExtensions
+	eFirewall_DeleteProtection                                                            smithy.SchemaExtensions
+	eFirewall_SubnetChangeProtection                                                      smithy.SchemaExtensions
+	eFirewall_FirewallPolicyChangeProtection                                              smithy.SchemaExtensions
+	eFirewall_Description                                                                 smithy.SchemaExtensions
+	eFirewall_FirewallId                                                                  smithy.SchemaExtensions
+	eFirewall_Tags                                                                        smithy.SchemaExtensions
+	eFirewall_EncryptionConfiguration                                                     smithy.SchemaExtensions
+	eFirewall_NumberOfAssociations                                                        smithy.SchemaExtensions
+	eFirewall_EnabledAnalysisTypes                                                        smithy.SchemaExtensions
+	eFirewall_TransitGatewayId                                                            smithy.SchemaExtensions
+	eFirewall_TransitGatewayOwnerAccountId                                                smithy.SchemaExtensions
+	eFirewall_AvailabilityZoneMappings                                                    smithy.SchemaExtensions
+	eFirewall_AvailabilityZoneChangeProtection                                            smithy.SchemaExtensions
+	eFirewall_NatGatewayMappings                                                          smithy.SchemaExtensions
+	eFirewall_ProxySettings                                                               smithy.SchemaExtensions
+	eFirewall_NoSourcePreservation                                                        smithy.SchemaExtensions
+	eFirewall_VpcEndpoint                                                                 smithy.SchemaExtensions
+	eFirewallMetadata                                                                     smithy.SchemaExtensions
+	eFirewallMetadata_FirewallName                                                        smithy.SchemaExtensions
+	eFirewallMetadata_FirewallArn                                                         smithy.SchemaExtensions
+	eFirewallMetadata_TransitGatewayAttachmentId                                          smithy.SchemaExtensions
+	e_FirewallPolicies                                                                    smithy.SchemaExtensions
+	e_FirewallPolicies_member                                                             smithy.SchemaExtensions
+	eFirewallPolicy                                                                       smithy.SchemaExtensions
+	eFirewallPolicy_StatelessRuleGroupReferences                                          smithy.SchemaExtensions
+	eFirewallPolicy_StatelessDefaultActions                                               smithy.SchemaExtensions
+	eFirewallPolicy_StatelessFragmentDefaultActions                                       smithy.SchemaExtensions
+	eFirewallPolicy_StatelessCustomActions                                                smithy.SchemaExtensions
+	eFirewallPolicy_StatefulRuleGroupReferences                                           smithy.SchemaExtensions
+	eFirewallPolicy_StatefulDefaultActions                                                smithy.SchemaExtensions
+	eFirewallPolicy_StatefulEngineOptions                                                 smithy.SchemaExtensions
+	eFirewallPolicy_TLSInspectionConfigurationArn                                         smithy.SchemaExtensions
+	eFirewallPolicy_PolicyVariables                                                       smithy.SchemaExtensions
+	eFirewallPolicy_EnableTLSSessionHolding                                               smithy.SchemaExtensions
+	eFirewallPolicy_Route53ResolvedIPValidation                                           smithy.SchemaExtensions
+	eFirewallPolicyError                                                                  smithy.SchemaExtensions
+	eFirewallPolicyError_Code                                                             smithy.SchemaExtensions
+	eFirewallPolicyError_Message                                                          smithy.SchemaExtensions
+	eFirewallPolicyError_ResourceId                                                       smithy.SchemaExtensions
+	eFirewallPolicyErrorCode                                                              smithy.SchemaExtensions
+	eFirewallPolicyErrorCode_DNS_FIREWALL_RULE_GROUP_UNAVAILABLE                          smithy.SchemaExtensions
+	eFirewallPolicyErrorCode_ROUTE53_RESOLVED_IP_VALIDATION_MISSING                       smithy.SchemaExtensions
+	e_FirewallPolicyErrorResourceId                                                       smithy.SchemaExtensions
+	e_FirewallPolicyErrors                                                                smithy.SchemaExtensions
+	e_FirewallPolicyErrors_member                                                         smithy.SchemaExtensions
+	eFirewallPolicyMetadata                                                               smithy.SchemaExtensions
+	eFirewallPolicyMetadata_Name                                                          smithy.SchemaExtensions
+	eFirewallPolicyMetadata_Arn                                                           smithy.SchemaExtensions
+	eFirewallPolicyResponse                                                               smithy.SchemaExtensions
+	eFirewallPolicyResponse_FirewallPolicyName                                            smithy.SchemaExtensions
+	eFirewallPolicyResponse_FirewallPolicyArn                                             smithy.SchemaExtensions
+	eFirewallPolicyResponse_FirewallPolicyId                                              smithy.SchemaExtensions
+	eFirewallPolicyResponse_Description                                                   smithy.SchemaExtensions
+	eFirewallPolicyResponse_FirewallPolicyStatus                                          smithy.SchemaExtensions
+	eFirewallPolicyResponse_StatusMessage                                                 smithy.SchemaExtensions
+	eFirewallPolicyResponse_Tags                                                          smithy.SchemaExtensions
+	eFirewallPolicyResponse_ConsumedStatelessRuleCapacity                                 smithy.SchemaExtensions
+	eFirewallPolicyResponse_ConsumedStatefulRuleCapacity                                  smithy.SchemaExtensions
+	eFirewallPolicyResponse_ConsumedStatefulDomainCapacity                                smithy.SchemaExtensions
+	eFirewallPolicyResponse_NumberOfAssociations                                          smithy.SchemaExtensions
+	eFirewallPolicyResponse_EncryptionConfiguration                                       smithy.SchemaExtensions
+	eFirewallPolicyResponse_Errors                                                        smithy.SchemaExtensions
+	eFirewallPolicyResponse_LastModifiedTime                                              smithy.SchemaExtensions
+	e_Firewalls                                                                           smithy.SchemaExtensions
+	e_Firewalls_member                                                                    smithy.SchemaExtensions
+	eFirewallStatus                                                                       smithy.SchemaExtensions
+	eFirewallStatus_Status                                                                smithy.SchemaExtensions
+	eFirewallStatus_ConfigurationSyncStateSummary                                         smithy.SchemaExtensions
+	eFirewallStatus_SyncStates                                                            smithy.SchemaExtensions
+	eFirewallStatus_CapacityUsageSummary                                                  smithy.SchemaExtensions
+	eFirewallStatus_TransitGatewayAttachmentSyncState                                     smithy.SchemaExtensions
+	eFirewallStatusValue                                                                  smithy.SchemaExtensions
+	eFirewallStatusValue_PROVISIONING                                                     smithy.SchemaExtensions
+	eFirewallStatusValue_DELETING                                                         smithy.SchemaExtensions
+	eFirewallStatusValue_READY                                                            smithy.SchemaExtensions
+	eFirewallStatusValue_FAILED                                                           smithy.SchemaExtensions
+	e_FirstAccessed                                                                       smithy.SchemaExtensions
+	e_Flags                                                                               smithy.SchemaExtensions
+	e_Flags_member                                                                        smithy.SchemaExtensions
+	eFlow                                                                                 smithy.SchemaExtensions
+	eFlow_SourceAddress                                                                   smithy.SchemaExtensions
+	eFlow_DestinationAddress                                                              smithy.SchemaExtensions
+	eFlow_SourcePort                                                                      smithy.SchemaExtensions
+	eFlow_DestinationPort                                                                 smithy.SchemaExtensions
+	eFlow_Protocol                                                                        smithy.SchemaExtensions
+	eFlow_Age                                                                             smithy.SchemaExtensions
+	eFlow_PacketCount                                                                     smithy.SchemaExtensions
+	eFlow_ByteCount                                                                       smithy.SchemaExtensions
+	eFlowFilter                                                                           smithy.SchemaExtensions
+	eFlowFilter_SourceAddress                                                             smithy.SchemaExtensions
+	eFlowFilter_DestinationAddress                                                        smithy.SchemaExtensions
+	eFlowFilter_SourcePort                                                                smithy.SchemaExtensions
+	eFlowFilter_DestinationPort                                                           smithy.SchemaExtensions
+	eFlowFilter_Protocols                                                                 smithy.SchemaExtensions
+	e_FlowFilters                                                                         smithy.SchemaExtensions
+	e_FlowFilters_member                                                                  smithy.SchemaExtensions
+	eFlowOperation                                                                        smithy.SchemaExtensions
+	eFlowOperation_MinimumFlowAgeInSeconds                                                smithy.SchemaExtensions
+	eFlowOperation_FlowFilters                                                            smithy.SchemaExtensions
+	e_FlowOperationId                                                                     smithy.SchemaExtensions
+	eFlowOperationMetadata                                                                smithy.SchemaExtensions
+	eFlowOperationMetadata_FlowOperationId                                                smithy.SchemaExtensions
+	eFlowOperationMetadata_FlowOperationType                                              smithy.SchemaExtensions
+	eFlowOperationMetadata_FlowRequestTimestamp                                           smithy.SchemaExtensions
+	eFlowOperationMetadata_FlowOperationStatus                                            smithy.SchemaExtensions
+	e_FlowOperations                                                                      smithy.SchemaExtensions
+	e_FlowOperations_member                                                               smithy.SchemaExtensions
+	eFlowOperationStatus                                                                  smithy.SchemaExtensions
+	eFlowOperationStatus_COMPLETED                                                        smithy.SchemaExtensions
+	eFlowOperationStatus_IN_PROGRESS                                                      smithy.SchemaExtensions
+	eFlowOperationStatus_FAILED                                                           smithy.SchemaExtensions
+	eFlowOperationStatus_COMPLETED_WITH_ERRORS                                            smithy.SchemaExtensions
+	eFlowOperationType                                                                    smithy.SchemaExtensions
+	eFlowOperationType_FLOW_FLUSH                                                         smithy.SchemaExtensions
+	eFlowOperationType_FLOW_CAPTURE                                                       smithy.SchemaExtensions
+	e_FlowRequestTimestamp                                                                smithy.SchemaExtensions
+	e_Flows                                                                               smithy.SchemaExtensions
+	e_Flows_member                                                                        smithy.SchemaExtensions
+	eFlowTimeouts                                                                         smithy.SchemaExtensions
+	eFlowTimeouts_TcpIdleTimeoutSeconds                                                   smithy.SchemaExtensions
+	eGeneratedRulesType                                                                   smithy.SchemaExtensions
+	eGeneratedRulesType_ALLOWLIST                                                         smithy.SchemaExtensions
+	eGeneratedRulesType_DENYLIST                                                          smithy.SchemaExtensions
+	eGeneratedRulesType_REJECTLIST                                                        smithy.SchemaExtensions
+	eGeneratedRulesType_ALERTLIST                                                         smithy.SchemaExtensions
+	e_HashMapKey                                                                          smithy.SchemaExtensions
+	e_HashMapValue                                                                        smithy.SchemaExtensions
+	eHeader                                                                               smithy.SchemaExtensions
+	eHeader_Protocol                                                                      smithy.SchemaExtensions
+	eHeader_Source                                                                        smithy.SchemaExtensions
+	eHeader_SourcePort                                                                    smithy.SchemaExtensions
+	eHeader_Direction                                                                     smithy.SchemaExtensions
+	eHeader_Destination                                                                   smithy.SchemaExtensions
+	eHeader_DestinationPort                                                               smithy.SchemaExtensions
+	eHits                                                                                 smithy.SchemaExtensions
+	eHits_Count                                                                           smithy.SchemaExtensions
+	eIdentifiedType                                                                       smithy.SchemaExtensions
+	eIdentifiedType_STATELESS_RULE_FORWARDING_ASYMMETRICALLY                              smithy.SchemaExtensions
+	eIdentifiedType_STATELESS_RULE_CONTAINS_TCP_FLAGS                                     smithy.SchemaExtensions
+	e_InsertPosition                                                                      smithy.SchemaExtensions
+	eInsufficientCapacityException                                                        smithy.SchemaExtensions
+	eInsufficientCapacityException_Message                                                smithy.SchemaExtensions
+	eInternalServerError                                                                  smithy.SchemaExtensions
+	eInternalServerError_Message                                                          smithy.SchemaExtensions
+	eInvalidOperationException                                                            smithy.SchemaExtensions
+	eInvalidOperationException_Message                                                    smithy.SchemaExtensions
+	eInvalidRequestException                                                              smithy.SchemaExtensions
+	eInvalidRequestException_Message                                                      smithy.SchemaExtensions
+	eInvalidResourcePolicyException                                                       smithy.SchemaExtensions
+	eInvalidResourcePolicyException_Message                                               smithy.SchemaExtensions
+	eInvalidTokenException                                                                smithy.SchemaExtensions
+	eInvalidTokenException_Message                                                        smithy.SchemaExtensions
+	eIPAddressType                                                                        smithy.SchemaExtensions
+	eIPAddressType_DUALSTACK                                                              smithy.SchemaExtensions
+	eIPAddressType_IPV4                                                                   smithy.SchemaExtensions
+	eIPAddressType_IPV6                                                                   smithy.SchemaExtensions
+	eIPSet                                                                                smithy.SchemaExtensions
+	eIPSet_Definition                                                                     smithy.SchemaExtensions
+	e_IPSetArn                                                                            smithy.SchemaExtensions
+	eIPSetMetadata                                                                        smithy.SchemaExtensions
+	eIPSetMetadata_ResolvedCIDRCount                                                      smithy.SchemaExtensions
+	e_IPSetMetadataMap                                                                    smithy.SchemaExtensions
+	e_IPSetMetadataMap_key                                                                smithy.SchemaExtensions
+	e_IPSetMetadataMap_value                                                              smithy.SchemaExtensions
+	eIPSetReference                                                                       smithy.SchemaExtensions
+	eIPSetReference_ReferenceArn                                                          smithy.SchemaExtensions
+	e_IPSetReferenceMap                                                                   smithy.SchemaExtensions
+	e_IPSetReferenceMap_key                                                               smithy.SchemaExtensions
+	e_IPSetReferenceMap_value                                                             smithy.SchemaExtensions
+	e_IPSetReferenceName                                                                  smithy.SchemaExtensions
+	e_IPSets                                                                              smithy.SchemaExtensions
+	e_IPSets_key                                                                          smithy.SchemaExtensions
+	e_IPSets_value                                                                        smithy.SchemaExtensions
+	e_KeyId                                                                               smithy.SchemaExtensions
+	e_Keyword                                                                             smithy.SchemaExtensions
+	e_LastAccessed                                                                        smithy.SchemaExtensions
+	e_LastUpdateTime                                                                      smithy.SchemaExtensions
+	eLimitExceededException                                                               smithy.SchemaExtensions
+	eLimitExceededException_Message                                                       smithy.SchemaExtensions
+	e_ListenerProperties                                                                  smithy.SchemaExtensions
+	e_ListenerProperties_member                                                           smithy.SchemaExtensions
+	e_ListenerPropertiesRequest                                                           smithy.SchemaExtensions
+	e_ListenerPropertiesRequest_member                                                    smithy.SchemaExtensions
+	eListenerProperty                                                                     smithy.SchemaExtensions
+	eListenerProperty_Port                                                                smithy.SchemaExtensions
+	eListenerProperty_Type                                                                smithy.SchemaExtensions
+	eListenerPropertyRequest                                                              smithy.SchemaExtensions
+	eListenerPropertyRequest_Port                                                         smithy.SchemaExtensions
+	eListenerPropertyRequest_Type                                                         smithy.SchemaExtensions
+	eListenerPropertyType                                                                 smithy.SchemaExtensions
+	eListenerPropertyType_HTTP                                                            smithy.SchemaExtensions
+	eListenerPropertyType_HTTPS                                                           smithy.SchemaExtensions
+	e_ListingName                                                                         smithy.SchemaExtensions
+	eLogDestinationConfig                                                                 smithy.SchemaExtensions
+	eLogDestinationConfig_LogType                                                         smithy.SchemaExtensions
+	eLogDestinationConfig_LogDestinationType                                              smithy.SchemaExtensions
+	eLogDestinationConfig_LogDestination                                                  smithy.SchemaExtensions
+	e_LogDestinationConfigs                                                               smithy.SchemaExtensions
+	e_LogDestinationConfigs_member                                                        smithy.SchemaExtensions
+	e_LogDestinationMap                                                                   smithy.SchemaExtensions
+	e_LogDestinationMap_key                                                               smithy.SchemaExtensions
+	e_LogDestinationMap_value                                                             smithy.SchemaExtensions
+	eLogDestinationPermissionException                                                    smithy.SchemaExtensions
+	eLogDestinationPermissionException_Message                                            smithy.SchemaExtensions
+	eLogDestinationType                                                                   smithy.SchemaExtensions
+	eLogDestinationType_S3                                                                smithy.SchemaExtensions
+	eLogDestinationType_CLOUDWATCH_LOGS                                                   smithy.SchemaExtensions
+	eLogDestinationType_KINESIS_DATA_FIREHOSE                                             smithy.SchemaExtensions
+	eLoggingConfiguration                                                                 smithy.SchemaExtensions
+	eLoggingConfiguration_LogDestinationConfigs                                           smithy.SchemaExtensions
+	eLogType                                                                              smithy.SchemaExtensions
+	eLogType_ALERT                                                                        smithy.SchemaExtensions
+	eLogType_FLOW                                                                         smithy.SchemaExtensions
+	eLogType_TLS                                                                          smithy.SchemaExtensions
+	eMatchAttributes                                                                      smithy.SchemaExtensions
+	eMatchAttributes_Sources                                                              smithy.SchemaExtensions
+	eMatchAttributes_Destinations                                                         smithy.SchemaExtensions
+	eMatchAttributes_SourcePorts                                                          smithy.SchemaExtensions
+	eMatchAttributes_DestinationPorts                                                     smithy.SchemaExtensions
+	eMatchAttributes_Protocols                                                            smithy.SchemaExtensions
+	eMatchAttributes_TCPFlags                                                             smithy.SchemaExtensions
+	eNatGatewayAttachment                                                                 smithy.SchemaExtensions
+	eNatGatewayAttachment_NatGatewayId                                                    smithy.SchemaExtensions
+	eNatGatewayAttachment_Status                                                          smithy.SchemaExtensions
+	eNatGatewayAttachment_StatusMessage                                                   smithy.SchemaExtensions
+	eNatGatewayAttachment_DnsName                                                         smithy.SchemaExtensions
+	e_NatGatewayAttachmentsList                                                           smithy.SchemaExtensions
+	e_NatGatewayAttachmentsList_member                                                    smithy.SchemaExtensions
+	eNatGatewayAttachmentStatus                                                           smithy.SchemaExtensions
+	eNatGatewayAttachmentStatus_CREATING                                                  smithy.SchemaExtensions
+	eNatGatewayAttachmentStatus_READY                                                     smithy.SchemaExtensions
+	eNatGatewayAttachmentStatus_UPDATING                                                  smithy.SchemaExtensions
+	eNatGatewayAttachmentStatus_FAILED                                                    smithy.SchemaExtensions
+	eNatGatewayAttachmentStatus_DELETING                                                  smithy.SchemaExtensions
+	e_NatGatewayId                                                                        smithy.SchemaExtensions
+	eNatGatewayMapping                                                                    smithy.SchemaExtensions
+	eNatGatewayMapping_NatGatewayId                                                       smithy.SchemaExtensions
+	e_NatGatewayMappingsList                                                              smithy.SchemaExtensions
+	e_NatGatewayMappingsList_member                                                       smithy.SchemaExtensions
+	e_NatGatewayPort                                                                      smithy.SchemaExtensions
+	e_NumberOfAssociations                                                                smithy.SchemaExtensions
+	eOverrideAction                                                                       smithy.SchemaExtensions
+	eOverrideAction_DROP_TO_ALERT                                                         smithy.SchemaExtensions
+	e_PacketCount                                                                         smithy.SchemaExtensions
+	e_PaginationMaxResults                                                                smithy.SchemaExtensions
+	e_PaginationToken                                                                     smithy.SchemaExtensions
+	ePerObjectStatus                                                                      smithy.SchemaExtensions
+	ePerObjectStatus_SyncStatus                                                           smithy.SchemaExtensions
+	ePerObjectStatus_UpdateToken                                                          smithy.SchemaExtensions
+	ePerObjectSyncStatus                                                                  smithy.SchemaExtensions
+	ePerObjectSyncStatus_PENDING                                                          smithy.SchemaExtensions
+	ePerObjectSyncStatus_IN_SYNC                                                          smithy.SchemaExtensions
+	ePerObjectSyncStatus_CAPACITY_CONSTRAINED                                             smithy.SchemaExtensions
+	ePerObjectSyncStatus_NOT_SUBSCRIBED                                                   smithy.SchemaExtensions
+	ePerObjectSyncStatus_DEPRECATED                                                       smithy.SchemaExtensions
+	e_PolicyString                                                                        smithy.SchemaExtensions
+	ePolicyVariables                                                                      smithy.SchemaExtensions
+	ePolicyVariables_RuleVariables                                                        smithy.SchemaExtensions
+	e_Port                                                                                smithy.SchemaExtensions
+	ePortRange                                                                            smithy.SchemaExtensions
+	ePortRange_FromPort                                                                   smithy.SchemaExtensions
+	ePortRange_ToPort                                                                     smithy.SchemaExtensions
+	e_PortRangeBound                                                                      smithy.SchemaExtensions
+	e_PortRanges                                                                          smithy.SchemaExtensions
+	e_PortRanges_member                                                                   smithy.SchemaExtensions
+	ePortSet                                                                              smithy.SchemaExtensions
+	ePortSet_Definition                                                                   smithy.SchemaExtensions
+	e_PortSets                                                                            smithy.SchemaExtensions
+	e_PortSets_key                                                                        smithy.SchemaExtensions
+	e_PortSets_value                                                                      smithy.SchemaExtensions
+	e_Priority                                                                            smithy.SchemaExtensions
+	e_PrivateDNSName                                                                      smithy.SchemaExtensions
+	e_ProductId                                                                           smithy.SchemaExtensions
+	e_ProtocolNumber                                                                      smithy.SchemaExtensions
+	e_ProtocolNumbers                                                                     smithy.SchemaExtensions
+	e_ProtocolNumbers_member                                                              smithy.SchemaExtensions
+	e_ProtocolString                                                                      smithy.SchemaExtensions
+	e_ProtocolStrings                                                                     smithy.SchemaExtensions
+	e_ProtocolStrings_member                                                              smithy.SchemaExtensions
+	e_Proxies                                                                             smithy.SchemaExtensions
+	e_Proxies_member                                                                      smithy.SchemaExtensions
+	eProxy                                                                                smithy.SchemaExtensions
+	eProxy_CreateTime                                                                     smithy.SchemaExtensions
+	eProxy_DeleteTime                                                                     smithy.SchemaExtensions
+	eProxy_UpdateTime                                                                     smithy.SchemaExtensions
+	eProxy_FailureCode                                                                    smithy.SchemaExtensions
+	eProxy_FailureMessage                                                                 smithy.SchemaExtensions
+	eProxy_ProxyState                                                                     smithy.SchemaExtensions
+	eProxy_ProxyModifyState                                                               smithy.SchemaExtensions
+	eProxy_NatGatewayId                                                                   smithy.SchemaExtensions
+	eProxy_ProxyConfigurationName                                                         smithy.SchemaExtensions
+	eProxy_ProxyConfigurationArn                                                          smithy.SchemaExtensions
+	eProxy_ProxyName                                                                      smithy.SchemaExtensions
+	eProxy_ProxyArn                                                                       smithy.SchemaExtensions
+	eProxy_ListenerProperties                                                             smithy.SchemaExtensions
+	eProxy_TlsInterceptProperties                                                         smithy.SchemaExtensions
+	eProxy_Tags                                                                           smithy.SchemaExtensions
+	e_ProxyConditionValue                                                                 smithy.SchemaExtensions
+	e_ProxyConditionValueList                                                             smithy.SchemaExtensions
+	e_ProxyConditionValueList_member                                                      smithy.SchemaExtensions
+	eProxyConfigDefaultRulePhaseActionsRequest                                            smithy.SchemaExtensions
+	eProxyConfigDefaultRulePhaseActionsRequest_PreDNS                                     smithy.SchemaExtensions
+	eProxyConfigDefaultRulePhaseActionsRequest_PreREQUEST                                 smithy.SchemaExtensions
+	eProxyConfigDefaultRulePhaseActionsRequest_PostRESPONSE                               smithy.SchemaExtensions
+	eProxyConfigRuleGroup                                                                 smithy.SchemaExtensions
+	eProxyConfigRuleGroup_ProxyRuleGroupName                                              smithy.SchemaExtensions
+	eProxyConfigRuleGroup_ProxyRuleGroupArn                                               smithy.SchemaExtensions
+	eProxyConfigRuleGroup_Type                                                            smithy.SchemaExtensions
+	eProxyConfigRuleGroup_Priority                                                        smithy.SchemaExtensions
+	e_ProxyConfigRuleGroupPriority                                                        smithy.SchemaExtensions
+	e_ProxyConfigRuleGroupSet                                                             smithy.SchemaExtensions
+	e_ProxyConfigRuleGroupSet_member                                                      smithy.SchemaExtensions
+	e_ProxyConfigRuleGroupType                                                            smithy.SchemaExtensions
+	eProxyConfiguration                                                                   smithy.SchemaExtensions
+	eProxyConfiguration_ProxyConfigurationName                                            smithy.SchemaExtensions
+	eProxyConfiguration_ProxyConfigurationArn                                             smithy.SchemaExtensions
+	eProxyConfiguration_Description                                                       smithy.SchemaExtensions
+	eProxyConfiguration_CreateTime                                                        smithy.SchemaExtensions
+	eProxyConfiguration_DeleteTime                                                        smithy.SchemaExtensions
+	eProxyConfiguration_RuleGroups                                                        smithy.SchemaExtensions
+	eProxyConfiguration_DefaultRulePhaseActions                                           smithy.SchemaExtensions
+	eProxyConfiguration_Tags                                                              smithy.SchemaExtensions
+	eProxyConfigurationMetadata                                                           smithy.SchemaExtensions
+	eProxyConfigurationMetadata_Name                                                      smithy.SchemaExtensions
+	eProxyConfigurationMetadata_Arn                                                       smithy.SchemaExtensions
+	e_ProxyConfigurations                                                                 smithy.SchemaExtensions
+	e_ProxyConfigurations_member                                                          smithy.SchemaExtensions
+	eProxyMetadata                                                                        smithy.SchemaExtensions
+	eProxyMetadata_Name                                                                   smithy.SchemaExtensions
+	eProxyMetadata_Arn                                                                    smithy.SchemaExtensions
+	eProxyModifyState                                                                     smithy.SchemaExtensions
+	eProxyModifyState_MODIFYING                                                           smithy.SchemaExtensions
+	eProxyModifyState_COMPLETED                                                           smithy.SchemaExtensions
+	eProxyModifyState_FAILED                                                              smithy.SchemaExtensions
+	eProxyRule                                                                            smithy.SchemaExtensions
+	eProxyRule_ProxyRuleName                                                              smithy.SchemaExtensions
+	eProxyRule_Description                                                                smithy.SchemaExtensions
+	eProxyRule_Action                                                                     smithy.SchemaExtensions
+	eProxyRule_Conditions                                                                 smithy.SchemaExtensions
+	eProxyRuleCondition                                                                   smithy.SchemaExtensions
+	eProxyRuleCondition_ConditionOperator                                                 smithy.SchemaExtensions
+	eProxyRuleCondition_ConditionKey                                                      smithy.SchemaExtensions
+	eProxyRuleCondition_ConditionValues                                                   smithy.SchemaExtensions
+	e_ProxyRuleConditionList                                                              smithy.SchemaExtensions
+	e_ProxyRuleConditionList_member                                                       smithy.SchemaExtensions
+	eProxyRuleGroup                                                                       smithy.SchemaExtensions
+	eProxyRuleGroup_ProxyRuleGroupName                                                    smithy.SchemaExtensions
+	eProxyRuleGroup_ProxyRuleGroupArn                                                     smithy.SchemaExtensions
+	eProxyRuleGroup_CreateTime                                                            smithy.SchemaExtensions
+	eProxyRuleGroup_DeleteTime                                                            smithy.SchemaExtensions
+	eProxyRuleGroup_Rules                                                                 smithy.SchemaExtensions
+	eProxyRuleGroup_Description                                                           smithy.SchemaExtensions
+	eProxyRuleGroup_Tags                                                                  smithy.SchemaExtensions
+	eProxyRuleGroupAttachment                                                             smithy.SchemaExtensions
+	eProxyRuleGroupAttachment_ProxyRuleGroupName                                          smithy.SchemaExtensions
+	eProxyRuleGroupAttachment_InsertPosition                                              smithy.SchemaExtensions
+	e_ProxyRuleGroupAttachmentList                                                        smithy.SchemaExtensions
+	e_ProxyRuleGroupAttachmentList_member                                                 smithy.SchemaExtensions
+	eProxyRuleGroupMetadata                                                               smithy.SchemaExtensions
+	eProxyRuleGroupMetadata_Name                                                          smithy.SchemaExtensions
+	eProxyRuleGroupMetadata_Arn                                                           smithy.SchemaExtensions
+	eProxyRuleGroupPriority                                                               smithy.SchemaExtensions
+	eProxyRuleGroupPriority_ProxyRuleGroupName                                            smithy.SchemaExtensions
+	eProxyRuleGroupPriority_NewPosition                                                   smithy.SchemaExtensions
+	e_ProxyRuleGroupPriorityList                                                          smithy.SchemaExtensions
+	e_ProxyRuleGroupPriorityList_member                                                   smithy.SchemaExtensions
+	eProxyRuleGroupPriorityResult                                                         smithy.SchemaExtensions
+	eProxyRuleGroupPriorityResult_ProxyRuleGroupName                                      smithy.SchemaExtensions
+	eProxyRuleGroupPriorityResult_Priority                                                smithy.SchemaExtensions
+	e_ProxyRuleGroupPriorityResultList                                                    smithy.SchemaExtensions
+	e_ProxyRuleGroupPriorityResultList_member                                             smithy.SchemaExtensions
+	e_ProxyRuleGroupPriorityResultPriority                                                smithy.SchemaExtensions
+	e_ProxyRuleGroups                                                                     smithy.SchemaExtensions
+	e_ProxyRuleGroups_member                                                              smithy.SchemaExtensions
+	e_ProxyRuleList                                                                       smithy.SchemaExtensions
+	e_ProxyRuleList_member                                                                smithy.SchemaExtensions
+	eProxyRulePhaseAction                                                                 smithy.SchemaExtensions
+	eProxyRulePhaseAction_ALLOW                                                           smithy.SchemaExtensions
+	eProxyRulePhaseAction_DENY                                                            smithy.SchemaExtensions
+	eProxyRulePhaseAction_ALERT                                                           smithy.SchemaExtensions
+	eProxyRulePriority                                                                    smithy.SchemaExtensions
+	eProxyRulePriority_ProxyRuleName                                                      smithy.SchemaExtensions
+	eProxyRulePriority_NewPosition                                                        smithy.SchemaExtensions
+	e_ProxyRulePriorityList                                                               smithy.SchemaExtensions
+	e_ProxyRulePriorityList_member                                                        smithy.SchemaExtensions
+	eProxyRulesByRequestPhase                                                             smithy.SchemaExtensions
+	eProxyRulesByRequestPhase_PreDNS                                                      smithy.SchemaExtensions
+	eProxyRulesByRequestPhase_PreREQUEST                                                  smithy.SchemaExtensions
+	eProxyRulesByRequestPhase_PostRESPONSE                                                smithy.SchemaExtensions
+	eProxySettings                                                                        smithy.SchemaExtensions
+	eProxySettings_ListenerProperties                                                     smithy.SchemaExtensions
+	eProxyState                                                                           smithy.SchemaExtensions
+	eProxyState_ATTACHING                                                                 smithy.SchemaExtensions
+	eProxyState_ATTACHED                                                                  smithy.SchemaExtensions
+	eProxyState_DETACHING                                                                 smithy.SchemaExtensions
+	eProxyState_DETACHED                                                                  smithy.SchemaExtensions
+	eProxyState_ATTACH_FAILED                                                             smithy.SchemaExtensions
+	eProxyState_DETACH_FAILED                                                             smithy.SchemaExtensions
+	ePublishMetricAction                                                                  smithy.SchemaExtensions
+	ePublishMetricAction_Dimensions                                                       smithy.SchemaExtensions
+	eReferenceSets                                                                        smithy.SchemaExtensions
+	eReferenceSets_IPSetReferences                                                        smithy.SchemaExtensions
+	e_ReportTime                                                                          smithy.SchemaExtensions
+	e_ResourceArn                                                                         smithy.SchemaExtensions
+	e_ResourceArnList                                                                     smithy.SchemaExtensions
+	e_ResourceArnList_member                                                              smithy.SchemaExtensions
+	e_ResourceId                                                                          smithy.SchemaExtensions
+	eResourceManagedStatus                                                                smithy.SchemaExtensions
+	eResourceManagedStatus_MANAGED                                                        smithy.SchemaExtensions
+	eResourceManagedStatus_ACCOUNT                                                        smithy.SchemaExtensions
+	eResourceManagedType                                                                  smithy.SchemaExtensions
+	eResourceManagedType_AWS_MANAGED_THREAT_SIGNATURES                                    smithy.SchemaExtensions
+	eResourceManagedType_AWS_MANAGED_DOMAIN_LISTS                                         smithy.SchemaExtensions
+	eResourceManagedType_ACTIVE_THREAT_DEFENSE                                            smithy.SchemaExtensions
+	eResourceManagedType_PARTNER_MANAGED                                                  smithy.SchemaExtensions
+	e_ResourceName                                                                        smithy.SchemaExtensions
+	e_ResourceNameList                                                                    smithy.SchemaExtensions
+	e_ResourceNameList_member                                                             smithy.SchemaExtensions
+	eResourceNotFoundException                                                            smithy.SchemaExtensions
+	eResourceNotFoundException_Message                                                    smithy.SchemaExtensions
+	eResourceOwnerCheckException                                                          smithy.SchemaExtensions
+	eResourceOwnerCheckException_Message                                                  smithy.SchemaExtensions
+	eResourceStatus                                                                       smithy.SchemaExtensions
+	eResourceStatus_ACTIVE                                                                smithy.SchemaExtensions
+	eResourceStatus_DELETING                                                              smithy.SchemaExtensions
+	eResourceStatus_ERROR                                                                 smithy.SchemaExtensions
+	eResourceStatus_UPDATING                                                              smithy.SchemaExtensions
+	e_ResourceStatusMessage                                                               smithy.SchemaExtensions
+	eRevocationCheckAction                                                                smithy.SchemaExtensions
+	eRevocationCheckAction_PASS                                                           smithy.SchemaExtensions
+	eRevocationCheckAction_DROP                                                           smithy.SchemaExtensions
+	eRevocationCheckAction_REJECT                                                         smithy.SchemaExtensions
+	eRoute53ResolvedIPValidation                                                          smithy.SchemaExtensions
+	eRoute53ResolvedIPValidation_Action                                                   smithy.SchemaExtensions
+	eRoute53ResolvedIPValidation_DNSFirewallRuleGroupId                                   smithy.SchemaExtensions
+	eRoute53ResolvedIPValidation_DNSExpiryExceptionPolicy                                 smithy.SchemaExtensions
+	eRoute53ResolvedIPValidation_BypassDestinationValidationIPRanges                      smithy.SchemaExtensions
+	eRoute53ResolvedIPValidation_SourceIPRanges                                           smithy.SchemaExtensions
+	eRoute53ResolvedIPValidationAction                                                    smithy.SchemaExtensions
+	eRoute53ResolvedIPValidationAction_REJECT                                             smithy.SchemaExtensions
+	eRoute53ResolvedIPValidationAction_DROP                                               smithy.SchemaExtensions
+	eRoute53ResolvedIPValidationAction_ALERT                                              smithy.SchemaExtensions
+	e_Route53ResolvedIPValidationAddresses                                                smithy.SchemaExtensions
+	e_Route53ResolvedIPValidationAddresses_member                                         smithy.SchemaExtensions
+	e_RuleCapacity                                                                        smithy.SchemaExtensions
+	eRuleDefinition                                                                       smithy.SchemaExtensions
+	eRuleDefinition_MatchAttributes                                                       smithy.SchemaExtensions
+	eRuleDefinition_Actions                                                               smithy.SchemaExtensions
+	eRuleGroup                                                                            smithy.SchemaExtensions
+	eRuleGroup_RuleVariables                                                              smithy.SchemaExtensions
+	eRuleGroup_ReferenceSets                                                              smithy.SchemaExtensions
+	eRuleGroup_RulesSource                                                                smithy.SchemaExtensions
+	eRuleGroup_StatefulRuleOptions                                                        smithy.SchemaExtensions
+	eRuleGroupMetadata                                                                    smithy.SchemaExtensions
+	eRuleGroupMetadata_Name                                                               smithy.SchemaExtensions
+	eRuleGroupMetadata_Arn                                                                smithy.SchemaExtensions
+	eRuleGroupMetadata_VendorName                                                         smithy.SchemaExtensions
+	eRuleGroupRequestPhase                                                                smithy.SchemaExtensions
+	eRuleGroupRequestPhase_PRE_DNS                                                        smithy.SchemaExtensions
+	eRuleGroupRequestPhase_PRE_REQ                                                        smithy.SchemaExtensions
+	eRuleGroupRequestPhase_POST_RES                                                       smithy.SchemaExtensions
+	eRuleGroupResponse                                                                    smithy.SchemaExtensions
+	eRuleGroupResponse_RuleGroupArn                                                       smithy.SchemaExtensions
+	eRuleGroupResponse_RuleGroupName                                                      smithy.SchemaExtensions
+	eRuleGroupResponse_RuleGroupId                                                        smithy.SchemaExtensions
+	eRuleGroupResponse_Description                                                        smithy.SchemaExtensions
+	eRuleGroupResponse_Type                                                               smithy.SchemaExtensions
+	eRuleGroupResponse_Capacity                                                           smithy.SchemaExtensions
+	eRuleGroupResponse_RuleGroupStatus                                                    smithy.SchemaExtensions
+	eRuleGroupResponse_Tags                                                               smithy.SchemaExtensions
+	eRuleGroupResponse_ConsumedCapacity                                                   smithy.SchemaExtensions
+	eRuleGroupResponse_NumberOfAssociations                                               smithy.SchemaExtensions
+	eRuleGroupResponse_EncryptionConfiguration                                            smithy.SchemaExtensions
+	eRuleGroupResponse_SourceMetadata                                                     smithy.SchemaExtensions
+	eRuleGroupResponse_SnsTopic                                                           smithy.SchemaExtensions
+	eRuleGroupResponse_LastModifiedTime                                                   smithy.SchemaExtensions
+	eRuleGroupResponse_AnalysisResults                                                    smithy.SchemaExtensions
+	eRuleGroupResponse_SummaryConfiguration                                               smithy.SchemaExtensions
+	e_RuleGroups                                                                          smithy.SchemaExtensions
+	e_RuleGroups_member                                                                   smithy.SchemaExtensions
+	eRuleGroupType                                                                        smithy.SchemaExtensions
+	eRuleGroupType_STATELESS                                                              smithy.SchemaExtensions
+	eRuleGroupType_STATEFUL                                                               smithy.SchemaExtensions
+	eRuleGroupType_STATEFUL_DOMAIN                                                        smithy.SchemaExtensions
+	e_RuleIdList                                                                          smithy.SchemaExtensions
+	e_RuleIdList_member                                                                   smithy.SchemaExtensions
+	eRuleOption                                                                           smithy.SchemaExtensions
+	eRuleOption_Keyword                                                                   smithy.SchemaExtensions
+	eRuleOption_Settings                                                                  smithy.SchemaExtensions
+	e_RuleOptions                                                                         smithy.SchemaExtensions
+	e_RuleOptions_member                                                                  smithy.SchemaExtensions
+	eRuleOrder                                                                            smithy.SchemaExtensions
+	eRuleOrder_DEFAULT_ACTION_ORDER                                                       smithy.SchemaExtensions
+	eRuleOrder_STRICT_ORDER                                                               smithy.SchemaExtensions
+	eRulesSource                                                                          smithy.SchemaExtensions
+	eRulesSource_RulesString                                                              smithy.SchemaExtensions
+	eRulesSource_RulesSourceList                                                          smithy.SchemaExtensions
+	eRulesSource_StatefulRules                                                            smithy.SchemaExtensions
+	eRulesSource_StatelessRulesAndCustomActions                                           smithy.SchemaExtensions
+	eRulesSourceList                                                                      smithy.SchemaExtensions
+	eRulesSourceList_Targets                                                              smithy.SchemaExtensions
+	eRulesSourceList_TargetTypes                                                          smithy.SchemaExtensions
+	eRulesSourceList_GeneratedRulesType                                                   smithy.SchemaExtensions
+	e_RulesString                                                                         smithy.SchemaExtensions
+	e_RuleSummaries                                                                       smithy.SchemaExtensions
+	e_RuleSummaries_member                                                                smithy.SchemaExtensions
+	eRuleSummary                                                                          smithy.SchemaExtensions
+	eRuleSummary_SID                                                                      smithy.SchemaExtensions
+	eRuleSummary_Msg                                                                      smithy.SchemaExtensions
+	eRuleSummary_Metadata                                                                 smithy.SchemaExtensions
+	e_RuleTargets                                                                         smithy.SchemaExtensions
+	e_RuleTargets_member                                                                  smithy.SchemaExtensions
+	e_RuleVariableName                                                                    smithy.SchemaExtensions
+	eRuleVariables                                                                        smithy.SchemaExtensions
+	eRuleVariables_IPSets                                                                 smithy.SchemaExtensions
+	eRuleVariables_PortSets                                                               smithy.SchemaExtensions
+	eServerCertificate                                                                    smithy.SchemaExtensions
+	eServerCertificate_ResourceArn                                                        smithy.SchemaExtensions
+	eServerCertificateConfiguration                                                       smithy.SchemaExtensions
+	eServerCertificateConfiguration_ServerCertificates                                    smithy.SchemaExtensions
+	eServerCertificateConfiguration_Scopes                                                smithy.SchemaExtensions
+	eServerCertificateConfiguration_CertificateAuthorityArn                               smithy.SchemaExtensions
+	eServerCertificateConfiguration_CheckCertificateRevocationStatus                      smithy.SchemaExtensions
+	e_ServerCertificateConfigurations                                                     smithy.SchemaExtensions
+	e_ServerCertificateConfigurations_member                                              smithy.SchemaExtensions
+	e_ServerCertificates                                                                  smithy.SchemaExtensions
+	e_ServerCertificates_member                                                           smithy.SchemaExtensions
+	eServerCertificateScope                                                               smithy.SchemaExtensions
+	eServerCertificateScope_Sources                                                       smithy.SchemaExtensions
+	eServerCertificateScope_Destinations                                                  smithy.SchemaExtensions
+	eServerCertificateScope_SourcePorts                                                   smithy.SchemaExtensions
+	eServerCertificateScope_DestinationPorts                                              smithy.SchemaExtensions
+	eServerCertificateScope_Protocols                                                     smithy.SchemaExtensions
+	e_ServerCertificateScopes                                                             smithy.SchemaExtensions
+	e_ServerCertificateScopes_member                                                      smithy.SchemaExtensions
+	e_Setting                                                                             smithy.SchemaExtensions
+	e_Settings                                                                            smithy.SchemaExtensions
+	e_Settings_member                                                                     smithy.SchemaExtensions
+	e_Source                                                                              smithy.SchemaExtensions
+	eSourceMetadata                                                                       smithy.SchemaExtensions
+	eSourceMetadata_SourceArn                                                             smithy.SchemaExtensions
+	eSourceMetadata_SourceUpdateToken                                                     smithy.SchemaExtensions
+	e_StartTime                                                                           smithy.SchemaExtensions
+	eStatefulAction                                                                       smithy.SchemaExtensions
+	eStatefulAction_PASS                                                                  smithy.SchemaExtensions
+	eStatefulAction_DROP                                                                  smithy.SchemaExtensions
+	eStatefulAction_ALERT                                                                 smithy.SchemaExtensions
+	eStatefulAction_REJECT                                                                smithy.SchemaExtensions
+	e_StatefulActions                                                                     smithy.SchemaExtensions
+	e_StatefulActions_member                                                              smithy.SchemaExtensions
+	eStatefulEngineOptions                                                                smithy.SchemaExtensions
+	eStatefulEngineOptions_RuleOrder                                                      smithy.SchemaExtensions
+	eStatefulEngineOptions_StreamExceptionPolicy                                          smithy.SchemaExtensions
+	eStatefulEngineOptions_FlowTimeouts                                                   smithy.SchemaExtensions
+	eStatefulRule                                                                         smithy.SchemaExtensions
+	eStatefulRule_Action                                                                  smithy.SchemaExtensions
+	eStatefulRule_Header                                                                  smithy.SchemaExtensions
+	eStatefulRule_RuleOptions                                                             smithy.SchemaExtensions
+	eStatefulRuleDirection                                                                smithy.SchemaExtensions
+	eStatefulRuleDirection_FORWARD                                                        smithy.SchemaExtensions
+	eStatefulRuleDirection_ANY                                                            smithy.SchemaExtensions
+	eStatefulRuleGroupOverride                                                            smithy.SchemaExtensions
+	eStatefulRuleGroupOverride_Action                                                     smithy.SchemaExtensions
+	eStatefulRuleGroupReference                                                           smithy.SchemaExtensions
+	eStatefulRuleGroupReference_ResourceArn                                               smithy.SchemaExtensions
+	eStatefulRuleGroupReference_Priority                                                  smithy.SchemaExtensions
+	eStatefulRuleGroupReference_Override                                                  smithy.SchemaExtensions
+	eStatefulRuleGroupReference_DeepThreatInspection                                      smithy.SchemaExtensions
+	e_StatefulRuleGroupReferences                                                         smithy.SchemaExtensions
+	e_StatefulRuleGroupReferences_member                                                  smithy.SchemaExtensions
+	eStatefulRuleOptions                                                                  smithy.SchemaExtensions
+	eStatefulRuleOptions_RuleOrder                                                        smithy.SchemaExtensions
+	eStatefulRuleProtocol                                                                 smithy.SchemaExtensions
+	eStatefulRuleProtocol_ANY                                                             smithy.SchemaExtensions
+	eStatefulRuleProtocol_TCP                                                             smithy.SchemaExtensions
+	eStatefulRuleProtocol_UDP                                                             smithy.SchemaExtensions
+	eStatefulRuleProtocol_ICMP                                                            smithy.SchemaExtensions
+	eStatefulRuleProtocol_HTTP                                                            smithy.SchemaExtensions
+	eStatefulRuleProtocol_FTP                                                             smithy.SchemaExtensions
+	eStatefulRuleProtocol_TLS                                                             smithy.SchemaExtensions
+	eStatefulRuleProtocol_SMB                                                             smithy.SchemaExtensions
+	eStatefulRuleProtocol_DNS                                                             smithy.SchemaExtensions
+	eStatefulRuleProtocol_DCERPC                                                          smithy.SchemaExtensions
+	eStatefulRuleProtocol_SSH                                                             smithy.SchemaExtensions
+	eStatefulRuleProtocol_SMTP                                                            smithy.SchemaExtensions
+	eStatefulRuleProtocol_IMAP                                                            smithy.SchemaExtensions
+	eStatefulRuleProtocol_MSN                                                             smithy.SchemaExtensions
+	eStatefulRuleProtocol_KRB5                                                            smithy.SchemaExtensions
+	eStatefulRuleProtocol_IKEV2                                                           smithy.SchemaExtensions
+	eStatefulRuleProtocol_TFTP                                                            smithy.SchemaExtensions
+	eStatefulRuleProtocol_NTP                                                             smithy.SchemaExtensions
+	eStatefulRuleProtocol_DHCP                                                            smithy.SchemaExtensions
+	eStatefulRuleProtocol_HTTP2                                                           smithy.SchemaExtensions
+	eStatefulRuleProtocol_QUIC                                                            smithy.SchemaExtensions
+	e_StatefulRules                                                                       smithy.SchemaExtensions
+	e_StatefulRules_member                                                                smithy.SchemaExtensions
+	e_StatelessActions                                                                    smithy.SchemaExtensions
+	e_StatelessActions_member                                                             smithy.SchemaExtensions
+	eStatelessRule                                                                        smithy.SchemaExtensions
+	eStatelessRule_RuleDefinition                                                         smithy.SchemaExtensions
+	eStatelessRule_Priority                                                               smithy.SchemaExtensions
+	eStatelessRuleGroupReference                                                          smithy.SchemaExtensions
+	eStatelessRuleGroupReference_ResourceArn                                              smithy.SchemaExtensions
+	eStatelessRuleGroupReference_Priority                                                 smithy.SchemaExtensions
+	e_StatelessRuleGroupReferences                                                        smithy.SchemaExtensions
+	e_StatelessRuleGroupReferences_member                                                 smithy.SchemaExtensions
+	e_StatelessRules                                                                      smithy.SchemaExtensions
+	e_StatelessRules_member                                                               smithy.SchemaExtensions
+	eStatelessRulesAndCustomActions                                                       smithy.SchemaExtensions
+	eStatelessRulesAndCustomActions_StatelessRules                                        smithy.SchemaExtensions
+	eStatelessRulesAndCustomActions_CustomActions                                         smithy.SchemaExtensions
+	e_Status                                                                              smithy.SchemaExtensions
+	e_StatusMessage                                                                       smithy.SchemaExtensions
+	e_StatusReason                                                                        smithy.SchemaExtensions
+	eStreamExceptionPolicy                                                                smithy.SchemaExtensions
+	eStreamExceptionPolicy_DROP                                                           smithy.SchemaExtensions
+	eStreamExceptionPolicy_CONTINUE                                                       smithy.SchemaExtensions
+	eStreamExceptionPolicy_REJECT                                                         smithy.SchemaExtensions
+	eSubnetMapping                                                                        smithy.SchemaExtensions
+	eSubnetMapping_SubnetId                                                               smithy.SchemaExtensions
+	eSubnetMapping_IPAddressType                                                          smithy.SchemaExtensions
+	e_SubnetMappings                                                                      smithy.SchemaExtensions
+	e_SubnetMappings_member                                                               smithy.SchemaExtensions
+	eSubscriptionStatus                                                                   smithy.SchemaExtensions
+	eSubscriptionStatus_NOT_SUBSCRIBED                                                    smithy.SchemaExtensions
+	eSubscriptionStatus_SUBSCRIBED                                                        smithy.SchemaExtensions
+	eSummary                                                                              smithy.SchemaExtensions
+	eSummary_RuleSummaries                                                                smithy.SchemaExtensions
+	eSummaryConfiguration                                                                 smithy.SchemaExtensions
+	eSummaryConfiguration_RuleOptions                                                     smithy.SchemaExtensions
+	eSummaryRuleOption                                                                    smithy.SchemaExtensions
+	eSummaryRuleOption_SID                                                                smithy.SchemaExtensions
+	eSummaryRuleOption_MSG                                                                smithy.SchemaExtensions
+	eSummaryRuleOption_METADATA                                                           smithy.SchemaExtensions
+	e_SummaryRuleOptions                                                                  smithy.SchemaExtensions
+	e_SummaryRuleOptions_member                                                           smithy.SchemaExtensions
+	e_SupportedAvailabilityZones                                                          smithy.SchemaExtensions
+	e_SupportedAvailabilityZones_key                                                      smithy.SchemaExtensions
+	e_SupportedAvailabilityZones_value                                                    smithy.SchemaExtensions
+	eSyncState                                                                            smithy.SchemaExtensions
+	eSyncState_Attachment                                                                 smithy.SchemaExtensions
+	eSyncState_Config                                                                     smithy.SchemaExtensions
+	eSyncState_NatGatewayAttachments                                                      smithy.SchemaExtensions
+	e_SyncStateConfig                                                                     smithy.SchemaExtensions
+	e_SyncStateConfig_key                                                                 smithy.SchemaExtensions
+	e_SyncStateConfig_value                                                               smithy.SchemaExtensions
+	e_SyncStates                                                                          smithy.SchemaExtensions
+	e_SyncStates_key                                                                      smithy.SchemaExtensions
+	e_SyncStates_value                                                                    smithy.SchemaExtensions
+	eTag                                                                                  smithy.SchemaExtensions
+	eTag_Key                                                                              smithy.SchemaExtensions
+	eTag_Value                                                                            smithy.SchemaExtensions
+	e_TagKey                                                                              smithy.SchemaExtensions
+	e_TagKeyList                                                                          smithy.SchemaExtensions
+	e_TagKeyList_member                                                                   smithy.SchemaExtensions
+	e_TagList                                                                             smithy.SchemaExtensions
+	e_TagList_member                                                                      smithy.SchemaExtensions
+	e_TagsPaginationMaxResults                                                            smithy.SchemaExtensions
+	e_TagValue                                                                            smithy.SchemaExtensions
+	eTargetType                                                                           smithy.SchemaExtensions
+	eTargetType_TLS_SNI                                                                   smithy.SchemaExtensions
+	eTargetType_HTTP_HOST                                                                 smithy.SchemaExtensions
+	eTargetType_AWS_ROUTE_53_RESOLVED_DOMAIN                                              smithy.SchemaExtensions
+	e_TargetTypes                                                                         smithy.SchemaExtensions
+	e_TargetTypes_member                                                                  smithy.SchemaExtensions
+	eTCPFlag                                                                              smithy.SchemaExtensions
+	eTCPFlag_FIN                                                                          smithy.SchemaExtensions
+	eTCPFlag_SYN                                                                          smithy.SchemaExtensions
+	eTCPFlag_RST                                                                          smithy.SchemaExtensions
+	eTCPFlag_PSH                                                                          smithy.SchemaExtensions
+	eTCPFlag_ACK                                                                          smithy.SchemaExtensions
+	eTCPFlag_URG                                                                          smithy.SchemaExtensions
+	eTCPFlag_ECE                                                                          smithy.SchemaExtensions
+	eTCPFlag_CWR                                                                          smithy.SchemaExtensions
+	eTCPFlagField                                                                         smithy.SchemaExtensions
+	eTCPFlagField_Flags                                                                   smithy.SchemaExtensions
+	eTCPFlagField_Masks                                                                   smithy.SchemaExtensions
+	e_TCPFlags                                                                            smithy.SchemaExtensions
+	e_TCPFlags_member                                                                     smithy.SchemaExtensions
+	e_TcpIdleTimeoutRangeBound                                                            smithy.SchemaExtensions
+	eThrottlingException                                                                  smithy.SchemaExtensions
+	eThrottlingException_Message                                                          smithy.SchemaExtensions
+	eTlsCertificateData                                                                   smithy.SchemaExtensions
+	eTlsCertificateData_CertificateArn                                                    smithy.SchemaExtensions
+	eTlsCertificateData_CertificateSerial                                                 smithy.SchemaExtensions
+	eTlsCertificateData_Status                                                            smithy.SchemaExtensions
+	eTlsCertificateData_StatusMessage                                                     smithy.SchemaExtensions
+	eTLSInspectionConfiguration                                                           smithy.SchemaExtensions
+	eTLSInspectionConfiguration_ServerCertificateConfigurations                           smithy.SchemaExtensions
+	eTLSInspectionConfigurationMetadata                                                   smithy.SchemaExtensions
+	eTLSInspectionConfigurationMetadata_Name                                              smithy.SchemaExtensions
+	eTLSInspectionConfigurationMetadata_Arn                                               smithy.SchemaExtensions
+	eTLSInspectionConfigurationResponse                                                   smithy.SchemaExtensions
+	eTLSInspectionConfigurationResponse_TLSInspectionConfigurationArn                     smithy.SchemaExtensions
+	eTLSInspectionConfigurationResponse_TLSInspectionConfigurationName                    smithy.SchemaExtensions
+	eTLSInspectionConfigurationResponse_TLSInspectionConfigurationId                      smithy.SchemaExtensions
+	eTLSInspectionConfigurationResponse_TLSInspectionConfigurationStatus                  smithy.SchemaExtensions
+	eTLSInspectionConfigurationResponse_Description                                       smithy.SchemaExtensions
+	eTLSInspectionConfigurationResponse_Tags                                              smithy.SchemaExtensions
+	eTLSInspectionConfigurationResponse_LastModifiedTime                                  smithy.SchemaExtensions
+	eTLSInspectionConfigurationResponse_NumberOfAssociations                              smithy.SchemaExtensions
+	eTLSInspectionConfigurationResponse_EncryptionConfiguration                           smithy.SchemaExtensions
+	eTLSInspectionConfigurationResponse_Certificates                                      smithy.SchemaExtensions
+	eTLSInspectionConfigurationResponse_CertificateAuthority                              smithy.SchemaExtensions
+	e_TLSInspectionConfigurations                                                         smithy.SchemaExtensions
+	e_TLSInspectionConfigurations_member                                                  smithy.SchemaExtensions
+	eTlsInterceptMode                                                                     smithy.SchemaExtensions
+	eTlsInterceptMode_ENABLED                                                             smithy.SchemaExtensions
+	eTlsInterceptMode_DISABLED                                                            smithy.SchemaExtensions
+	eTlsInterceptProperties                                                               smithy.SchemaExtensions
+	eTlsInterceptProperties_PcaArn                                                        smithy.SchemaExtensions
+	eTlsInterceptProperties_TlsInterceptMode                                              smithy.SchemaExtensions
+	eTlsInterceptPropertiesRequest                                                        smithy.SchemaExtensions
+	eTlsInterceptPropertiesRequest_PcaArn                                                 smithy.SchemaExtensions
+	eTlsInterceptPropertiesRequest_TlsInterceptMode                                       smithy.SchemaExtensions
+	e_TransitGatewayAttachmentId                                                          smithy.SchemaExtensions
+	eTransitGatewayAttachmentStatus                                                       smithy.SchemaExtensions
+	eTransitGatewayAttachmentStatus_CREATING                                              smithy.SchemaExtensions
+	eTransitGatewayAttachmentStatus_DELETING                                              smithy.SchemaExtensions
+	eTransitGatewayAttachmentStatus_DELETED                                               smithy.SchemaExtensions
+	eTransitGatewayAttachmentStatus_FAILED                                                smithy.SchemaExtensions
+	eTransitGatewayAttachmentStatus_ERROR                                                 smithy.SchemaExtensions
+	eTransitGatewayAttachmentStatus_READY                                                 smithy.SchemaExtensions
+	eTransitGatewayAttachmentStatus_PENDING_ACCEPTANCE                                    smithy.SchemaExtensions
+	eTransitGatewayAttachmentStatus_REJECTING                                             smithy.SchemaExtensions
+	eTransitGatewayAttachmentStatus_REJECTED                                              smithy.SchemaExtensions
+	eTransitGatewayAttachmentSyncState                                                    smithy.SchemaExtensions
+	eTransitGatewayAttachmentSyncState_AttachmentId                                       smithy.SchemaExtensions
+	eTransitGatewayAttachmentSyncState_TransitGatewayAttachmentStatus                     smithy.SchemaExtensions
+	eTransitGatewayAttachmentSyncState_StatusMessage                                      smithy.SchemaExtensions
+	e_TransitGatewayAttachmentSyncStateMessage                                            smithy.SchemaExtensions
+	e_TransitGatewayId                                                                    smithy.SchemaExtensions
+	eUniqueSources                                                                        smithy.SchemaExtensions
+	eUniqueSources_Count                                                                  smithy.SchemaExtensions
+	eUnsupportedOperationException                                                        smithy.SchemaExtensions
+	eUnsupportedOperationException_Message                                                smithy.SchemaExtensions
+	e_UpdateTime                                                                          smithy.SchemaExtensions
+	e_UpdateToken                                                                         smithy.SchemaExtensions
+	e_VariableDefinition                                                                  smithy.SchemaExtensions
+	e_VariableDefinitionList                                                              smithy.SchemaExtensions
+	e_VariableDefinitionList_member                                                       smithy.SchemaExtensions
+	e_VendorName                                                                          smithy.SchemaExtensions
+	eVpcEndpoint                                                                          smithy.SchemaExtensions
+	eVpcEndpoint_VpcId                                                                    smithy.SchemaExtensions
+	eVpcEndpoint_SubnetMappings                                                           smithy.SchemaExtensions
+	eVpcEndpointAssociation                                                               smithy.SchemaExtensions
+	eVpcEndpointAssociation_VpcEndpointAssociationId                                      smithy.SchemaExtensions
+	eVpcEndpointAssociation_VpcEndpointAssociationArn                                     smithy.SchemaExtensions
+	eVpcEndpointAssociation_FirewallArn                                                   smithy.SchemaExtensions
+	eVpcEndpointAssociation_VpcId                                                         smithy.SchemaExtensions
+	eVpcEndpointAssociation_SubnetMapping                                                 smithy.SchemaExtensions
+	eVpcEndpointAssociation_Description                                                   smithy.SchemaExtensions
+	eVpcEndpointAssociation_Tags                                                          smithy.SchemaExtensions
+	eVpcEndpointAssociationMetadata                                                       smithy.SchemaExtensions
+	eVpcEndpointAssociationMetadata_VpcEndpointAssociationArn                             smithy.SchemaExtensions
+	e_VpcEndpointAssociations                                                             smithy.SchemaExtensions
+	e_VpcEndpointAssociations_member                                                      smithy.SchemaExtensions
+	eVpcEndpointAssociationStatus                                                         smithy.SchemaExtensions
+	eVpcEndpointAssociationStatus_Status                                                  smithy.SchemaExtensions
+	eVpcEndpointAssociationStatus_AssociationSyncState                                    smithy.SchemaExtensions
+	e_VpcEndpointId                                                                       smithy.SchemaExtensions
+	e_VpcEndpointServiceName                                                              smithy.SchemaExtensions
+	e_VpcId                                                                               smithy.SchemaExtensions
+	e_VpcIds                                                                              smithy.SchemaExtensions
+	e_VpcIds_member                                                                       smithy.SchemaExtensions
+	eAcceptNetworkFirewallTransitGatewayAttachmentRequest                                 smithy.SchemaExtensions
+	eAcceptNetworkFirewallTransitGatewayAttachmentRequest_TransitGatewayAttachmentId      smithy.SchemaExtensions
+	eAcceptNetworkFirewallTransitGatewayAttachmentResponse                                smithy.SchemaExtensions
+	eAcceptNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentId     smithy.SchemaExtensions
+	eAcceptNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentStatus smithy.SchemaExtensions
+	eAssociateAvailabilityZonesRequest                                                    smithy.SchemaExtensions
+	eAssociateAvailabilityZonesRequest_UpdateToken                                        smithy.SchemaExtensions
+	eAssociateAvailabilityZonesRequest_FirewallArn                                        smithy.SchemaExtensions
+	eAssociateAvailabilityZonesRequest_FirewallName                                       smithy.SchemaExtensions
+	eAssociateAvailabilityZonesRequest_AvailabilityZoneMappings                           smithy.SchemaExtensions
+	eAssociateAvailabilityZonesResponse                                                   smithy.SchemaExtensions
+	eAssociateAvailabilityZonesResponse_FirewallArn                                       smithy.SchemaExtensions
+	eAssociateAvailabilityZonesResponse_FirewallName                                      smithy.SchemaExtensions
+	eAssociateAvailabilityZonesResponse_AvailabilityZoneMappings                          smithy.SchemaExtensions
+	eAssociateAvailabilityZonesResponse_UpdateToken                                       smithy.SchemaExtensions
+	eAssociateFirewallPolicyRequest                                                       smithy.SchemaExtensions
+	eAssociateFirewallPolicyRequest_UpdateToken                                           smithy.SchemaExtensions
+	eAssociateFirewallPolicyRequest_FirewallArn                                           smithy.SchemaExtensions
+	eAssociateFirewallPolicyRequest_FirewallName                                          smithy.SchemaExtensions
+	eAssociateFirewallPolicyRequest_FirewallPolicyArn                                     smithy.SchemaExtensions
+	eAssociateFirewallPolicyResponse                                                      smithy.SchemaExtensions
+	eAssociateFirewallPolicyResponse_FirewallArn                                          smithy.SchemaExtensions
+	eAssociateFirewallPolicyResponse_FirewallName                                         smithy.SchemaExtensions
+	eAssociateFirewallPolicyResponse_FirewallPolicyArn                                    smithy.SchemaExtensions
+	eAssociateFirewallPolicyResponse_UpdateToken                                          smithy.SchemaExtensions
+	eAssociateSubnetsRequest                                                              smithy.SchemaExtensions
+	eAssociateSubnetsRequest_UpdateToken                                                  smithy.SchemaExtensions
+	eAssociateSubnetsRequest_FirewallArn                                                  smithy.SchemaExtensions
+	eAssociateSubnetsRequest_FirewallName                                                 smithy.SchemaExtensions
+	eAssociateSubnetsRequest_SubnetMappings                                               smithy.SchemaExtensions
+	eAssociateSubnetsResponse                                                             smithy.SchemaExtensions
+	eAssociateSubnetsResponse_FirewallArn                                                 smithy.SchemaExtensions
+	eAssociateSubnetsResponse_FirewallName                                                smithy.SchemaExtensions
+	eAssociateSubnetsResponse_SubnetMappings                                              smithy.SchemaExtensions
+	eAssociateSubnetsResponse_UpdateToken                                                 smithy.SchemaExtensions
+	eAttachRuleGroupsToProxyConfigurationRequest                                          smithy.SchemaExtensions
+	eAttachRuleGroupsToProxyConfigurationRequest_ProxyConfigurationName                   smithy.SchemaExtensions
+	eAttachRuleGroupsToProxyConfigurationRequest_ProxyConfigurationArn                    smithy.SchemaExtensions
+	eAttachRuleGroupsToProxyConfigurationRequest_RuleGroups                               smithy.SchemaExtensions
+	eAttachRuleGroupsToProxyConfigurationRequest_UpdateToken                              smithy.SchemaExtensions
+	eAttachRuleGroupsToProxyConfigurationResponse                                         smithy.SchemaExtensions
+	eAttachRuleGroupsToProxyConfigurationResponse_ProxyConfiguration                      smithy.SchemaExtensions
+	eAttachRuleGroupsToProxyConfigurationResponse_UpdateToken                             smithy.SchemaExtensions
+	eCreateContainerAssociationRequest                                                    smithy.SchemaExtensions
+	eCreateContainerAssociationRequest_ContainerAssociationName                           smithy.SchemaExtensions
+	eCreateContainerAssociationRequest_Description                                        smithy.SchemaExtensions
+	eCreateContainerAssociationRequest_Type                                               smithy.SchemaExtensions
+	eCreateContainerAssociationRequest_ContainerMonitoringConfigurations                  smithy.SchemaExtensions
+	eCreateContainerAssociationRequest_Tags                                               smithy.SchemaExtensions
+	eCreateContainerAssociationResponse                                                   smithy.SchemaExtensions
+	eCreateContainerAssociationResponse_ContainerAssociationName                          smithy.SchemaExtensions
+	eCreateContainerAssociationResponse_ContainerAssociationArn                           smithy.SchemaExtensions
+	eCreateContainerAssociationResponse_Description                                       smithy.SchemaExtensions
+	eCreateContainerAssociationResponse_Type                                              smithy.SchemaExtensions
+	eCreateContainerAssociationResponse_ContainerMonitoringConfigurations                 smithy.SchemaExtensions
+	eCreateContainerAssociationResponse_Status                                            smithy.SchemaExtensions
+	eCreateContainerAssociationResponse_Tags                                              smithy.SchemaExtensions
+	eCreateContainerAssociationResponse_UpdateToken                                       smithy.SchemaExtensions
+	eCreateFirewallRequest                                                                smithy.SchemaExtensions
+	eCreateFirewallRequest_FirewallName                                                   smithy.SchemaExtensions
+	eCreateFirewallRequest_FirewallPolicyArn                                              smithy.SchemaExtensions
+	eCreateFirewallRequest_VpcId                                                          smithy.SchemaExtensions
+	eCreateFirewallRequest_SubnetMappings                                                 smithy.SchemaExtensions
+	eCreateFirewallRequest_DeleteProtection                                               smithy.SchemaExtensions
+	eCreateFirewallRequest_SubnetChangeProtection                                         smithy.SchemaExtensions
+	eCreateFirewallRequest_FirewallPolicyChangeProtection                                 smithy.SchemaExtensions
+	eCreateFirewallRequest_Description                                                    smithy.SchemaExtensions
+	eCreateFirewallRequest_Tags                                                           smithy.SchemaExtensions
+	eCreateFirewallRequest_EncryptionConfiguration                                        smithy.SchemaExtensions
+	eCreateFirewallRequest_EnabledAnalysisTypes                                           smithy.SchemaExtensions
+	eCreateFirewallRequest_TransitGatewayId                                               smithy.SchemaExtensions
+	eCreateFirewallRequest_AvailabilityZoneMappings                                       smithy.SchemaExtensions
+	eCreateFirewallRequest_AvailabilityZoneChangeProtection                               smithy.SchemaExtensions
+	eCreateFirewallRequest_NatGatewayMappings                                             smithy.SchemaExtensions
+	eCreateFirewallRequest_ProxySettings                                                  smithy.SchemaExtensions
+	eCreateFirewallRequest_NoSourcePreservation                                           smithy.SchemaExtensions
+	eCreateFirewallRequest_VpcEndpoint                                                    smithy.SchemaExtensions
+	eCreateFirewallResponse                                                               smithy.SchemaExtensions
+	eCreateFirewallResponse_Firewall                                                      smithy.SchemaExtensions
+	eCreateFirewallResponse_FirewallStatus                                                smithy.SchemaExtensions
+	eCreateFirewallPolicyRequest                                                          smithy.SchemaExtensions
+	eCreateFirewallPolicyRequest_FirewallPolicyName                                       smithy.SchemaExtensions
+	eCreateFirewallPolicyRequest_FirewallPolicy                                           smithy.SchemaExtensions
+	eCreateFirewallPolicyRequest_Description                                              smithy.SchemaExtensions
+	eCreateFirewallPolicyRequest_Tags                                                     smithy.SchemaExtensions
+	eCreateFirewallPolicyRequest_DryRun                                                   smithy.SchemaExtensions
+	eCreateFirewallPolicyRequest_EncryptionConfiguration                                  smithy.SchemaExtensions
+	eCreateFirewallPolicyResponse                                                         smithy.SchemaExtensions
+	eCreateFirewallPolicyResponse_UpdateToken                                             smithy.SchemaExtensions
+	eCreateFirewallPolicyResponse_FirewallPolicyResponse                                  smithy.SchemaExtensions
+	eCreateProxyConfigurationRequest                                                      smithy.SchemaExtensions
+	eCreateProxyConfigurationRequest_ProxyConfigurationName                               smithy.SchemaExtensions
+	eCreateProxyConfigurationRequest_Description                                          smithy.SchemaExtensions
+	eCreateProxyConfigurationRequest_RuleGroupNames                                       smithy.SchemaExtensions
+	eCreateProxyConfigurationRequest_RuleGroupArns                                        smithy.SchemaExtensions
+	eCreateProxyConfigurationRequest_DefaultRulePhaseActions                              smithy.SchemaExtensions
+	eCreateProxyConfigurationRequest_Tags                                                 smithy.SchemaExtensions
+	eCreateProxyConfigurationResponse                                                     smithy.SchemaExtensions
+	eCreateProxyConfigurationResponse_ProxyConfiguration                                  smithy.SchemaExtensions
+	eCreateProxyConfigurationResponse_UpdateToken                                         smithy.SchemaExtensions
+	eCreateProxyRequest                                                                   smithy.SchemaExtensions
+	eCreateProxyRequest_ProxyName                                                         smithy.SchemaExtensions
+	eCreateProxyRequest_NatGatewayId                                                      smithy.SchemaExtensions
+	eCreateProxyRequest_ProxyConfigurationName                                            smithy.SchemaExtensions
+	eCreateProxyRequest_ProxyConfigurationArn                                             smithy.SchemaExtensions
+	eCreateProxyRequest_ListenerProperties                                                smithy.SchemaExtensions
+	eCreateProxyRequest_TlsInterceptProperties                                            smithy.SchemaExtensions
+	eCreateProxyRequest_Tags                                                              smithy.SchemaExtensions
+	eCreateProxyResponse                                                                  smithy.SchemaExtensions
+	eCreateProxyResponse_Proxy                                                            smithy.SchemaExtensions
+	eCreateProxyResponse_UpdateToken                                                      smithy.SchemaExtensions
+	eCreateProxyRuleGroupRequest                                                          smithy.SchemaExtensions
+	eCreateProxyRuleGroupRequest_ProxyRuleGroupName                                       smithy.SchemaExtensions
+	eCreateProxyRuleGroupRequest_Description                                              smithy.SchemaExtensions
+	eCreateProxyRuleGroupRequest_Rules                                                    smithy.SchemaExtensions
+	eCreateProxyRuleGroupRequest_Tags                                                     smithy.SchemaExtensions
+	eCreateProxyRuleGroupResponse                                                         smithy.SchemaExtensions
+	eCreateProxyRuleGroupResponse_ProxyRuleGroup                                          smithy.SchemaExtensions
+	eCreateProxyRuleGroupResponse_UpdateToken                                             smithy.SchemaExtensions
+	eCreateProxyRulesRequest                                                              smithy.SchemaExtensions
+	eCreateProxyRulesRequest_ProxyRuleGroupArn                                            smithy.SchemaExtensions
+	eCreateProxyRulesRequest_ProxyRuleGroupName                                           smithy.SchemaExtensions
+	eCreateProxyRulesRequest_Rules                                                        smithy.SchemaExtensions
+	eCreateProxyRulesResponse                                                             smithy.SchemaExtensions
+	eCreateProxyRulesResponse_ProxyRuleGroup                                              smithy.SchemaExtensions
+	eCreateProxyRulesResponse_UpdateToken                                                 smithy.SchemaExtensions
+	eCreateRuleGroupRequest                                                               smithy.SchemaExtensions
+	eCreateRuleGroupRequest_RuleGroupName                                                 smithy.SchemaExtensions
+	eCreateRuleGroupRequest_RuleGroup                                                     smithy.SchemaExtensions
+	eCreateRuleGroupRequest_Rules                                                         smithy.SchemaExtensions
+	eCreateRuleGroupRequest_Type                                                          smithy.SchemaExtensions
+	eCreateRuleGroupRequest_Description                                                   smithy.SchemaExtensions
+	eCreateRuleGroupRequest_Capacity                                                      smithy.SchemaExtensions
+	eCreateRuleGroupRequest_Tags                                                          smithy.SchemaExtensions
+	eCreateRuleGroupRequest_DryRun                                                        smithy.SchemaExtensions
+	eCreateRuleGroupRequest_EncryptionConfiguration                                       smithy.SchemaExtensions
+	eCreateRuleGroupRequest_SourceMetadata                                                smithy.SchemaExtensions
+	eCreateRuleGroupRequest_AnalyzeRuleGroup                                              smithy.SchemaExtensions
+	eCreateRuleGroupRequest_SummaryConfiguration                                          smithy.SchemaExtensions
+	eCreateRuleGroupResponse                                                              smithy.SchemaExtensions
+	eCreateRuleGroupResponse_UpdateToken                                                  smithy.SchemaExtensions
+	eCreateRuleGroupResponse_RuleGroupResponse                                            smithy.SchemaExtensions
+	eCreateTLSInspectionConfigurationRequest                                              smithy.SchemaExtensions
+	eCreateTLSInspectionConfigurationRequest_TLSInspectionConfigurationName               smithy.SchemaExtensions
+	eCreateTLSInspectionConfigurationRequest_TLSInspectionConfiguration                   smithy.SchemaExtensions
+	eCreateTLSInspectionConfigurationRequest_Description                                  smithy.SchemaExtensions
+	eCreateTLSInspectionConfigurationRequest_Tags                                         smithy.SchemaExtensions
+	eCreateTLSInspectionConfigurationRequest_EncryptionConfiguration                      smithy.SchemaExtensions
+	eCreateTLSInspectionConfigurationResponse                                             smithy.SchemaExtensions
+	eCreateTLSInspectionConfigurationResponse_UpdateToken                                 smithy.SchemaExtensions
+	eCreateTLSInspectionConfigurationResponse_TLSInspectionConfigurationResponse          smithy.SchemaExtensions
+	eCreateVpcEndpointAssociationRequest                                                  smithy.SchemaExtensions
+	eCreateVpcEndpointAssociationRequest_FirewallArn                                      smithy.SchemaExtensions
+	eCreateVpcEndpointAssociationRequest_VpcId                                            smithy.SchemaExtensions
+	eCreateVpcEndpointAssociationRequest_SubnetMapping                                    smithy.SchemaExtensions
+	eCreateVpcEndpointAssociationRequest_Description                                      smithy.SchemaExtensions
+	eCreateVpcEndpointAssociationRequest_Tags                                             smithy.SchemaExtensions
+	eCreateVpcEndpointAssociationResponse                                                 smithy.SchemaExtensions
+	eCreateVpcEndpointAssociationResponse_VpcEndpointAssociation                          smithy.SchemaExtensions
+	eCreateVpcEndpointAssociationResponse_VpcEndpointAssociationStatus                    smithy.SchemaExtensions
+	eDeleteContainerAssociationRequest                                                    smithy.SchemaExtensions
+	eDeleteContainerAssociationRequest_ContainerAssociationName                           smithy.SchemaExtensions
+	eDeleteContainerAssociationRequest_ContainerAssociationArn                            smithy.SchemaExtensions
+	eDeleteContainerAssociationResponse                                                   smithy.SchemaExtensions
+	eDeleteContainerAssociationResponse_ContainerAssociationName                          smithy.SchemaExtensions
+	eDeleteContainerAssociationResponse_ContainerAssociationArn                           smithy.SchemaExtensions
+	eDeleteContainerAssociationResponse_Status                                            smithy.SchemaExtensions
+	eDeleteFirewallRequest                                                                smithy.SchemaExtensions
+	eDeleteFirewallRequest_FirewallName                                                   smithy.SchemaExtensions
+	eDeleteFirewallRequest_FirewallArn                                                    smithy.SchemaExtensions
+	eDeleteFirewallResponse                                                               smithy.SchemaExtensions
+	eDeleteFirewallResponse_Firewall                                                      smithy.SchemaExtensions
+	eDeleteFirewallResponse_FirewallStatus                                                smithy.SchemaExtensions
+	eDeleteFirewallPolicyRequest                                                          smithy.SchemaExtensions
+	eDeleteFirewallPolicyRequest_FirewallPolicyName                                       smithy.SchemaExtensions
+	eDeleteFirewallPolicyRequest_FirewallPolicyArn                                        smithy.SchemaExtensions
+	eDeleteFirewallPolicyResponse                                                         smithy.SchemaExtensions
+	eDeleteFirewallPolicyResponse_FirewallPolicyResponse                                  smithy.SchemaExtensions
+	eDeleteNetworkFirewallTransitGatewayAttachmentRequest                                 smithy.SchemaExtensions
+	eDeleteNetworkFirewallTransitGatewayAttachmentRequest_TransitGatewayAttachmentId      smithy.SchemaExtensions
+	eDeleteNetworkFirewallTransitGatewayAttachmentResponse                                smithy.SchemaExtensions
+	eDeleteNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentId     smithy.SchemaExtensions
+	eDeleteNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentStatus smithy.SchemaExtensions
+	eDeleteProxyConfigurationRequest                                                      smithy.SchemaExtensions
+	eDeleteProxyConfigurationRequest_ProxyConfigurationName                               smithy.SchemaExtensions
+	eDeleteProxyConfigurationRequest_ProxyConfigurationArn                                smithy.SchemaExtensions
+	eDeleteProxyConfigurationResponse                                                     smithy.SchemaExtensions
+	eDeleteProxyConfigurationResponse_ProxyConfigurationName                              smithy.SchemaExtensions
+	eDeleteProxyConfigurationResponse_ProxyConfigurationArn                               smithy.SchemaExtensions
+	eDeleteProxyRequest                                                                   smithy.SchemaExtensions
+	eDeleteProxyRequest_NatGatewayId                                                      smithy.SchemaExtensions
+	eDeleteProxyRequest_ProxyName                                                         smithy.SchemaExtensions
+	eDeleteProxyRequest_ProxyArn                                                          smithy.SchemaExtensions
+	eDeleteProxyResponse                                                                  smithy.SchemaExtensions
+	eDeleteProxyResponse_NatGatewayId                                                     smithy.SchemaExtensions
+	eDeleteProxyResponse_ProxyName                                                        smithy.SchemaExtensions
+	eDeleteProxyResponse_ProxyArn                                                         smithy.SchemaExtensions
+	eDeleteProxyRuleGroupRequest                                                          smithy.SchemaExtensions
+	eDeleteProxyRuleGroupRequest_ProxyRuleGroupName                                       smithy.SchemaExtensions
+	eDeleteProxyRuleGroupRequest_ProxyRuleGroupArn                                        smithy.SchemaExtensions
+	eDeleteProxyRuleGroupResponse                                                         smithy.SchemaExtensions
+	eDeleteProxyRuleGroupResponse_ProxyRuleGroupName                                      smithy.SchemaExtensions
+	eDeleteProxyRuleGroupResponse_ProxyRuleGroupArn                                       smithy.SchemaExtensions
+	eDeleteProxyRulesRequest                                                              smithy.SchemaExtensions
+	eDeleteProxyRulesRequest_ProxyRuleGroupArn                                            smithy.SchemaExtensions
+	eDeleteProxyRulesRequest_ProxyRuleGroupName                                           smithy.SchemaExtensions
+	eDeleteProxyRulesRequest_Rules                                                        smithy.SchemaExtensions
+	eDeleteProxyRulesResponse                                                             smithy.SchemaExtensions
+	eDeleteProxyRulesResponse_ProxyRuleGroup                                              smithy.SchemaExtensions
+	eDeleteResourcePolicyRequest                                                          smithy.SchemaExtensions
+	eDeleteResourcePolicyRequest_ResourceArn                                              smithy.SchemaExtensions
+	eDeleteResourcePolicyResponse                                                         smithy.SchemaExtensions
+	eDeleteRuleGroupRequest                                                               smithy.SchemaExtensions
+	eDeleteRuleGroupRequest_RuleGroupName                                                 smithy.SchemaExtensions
+	eDeleteRuleGroupRequest_RuleGroupArn                                                  smithy.SchemaExtensions
+	eDeleteRuleGroupRequest_Type                                                          smithy.SchemaExtensions
+	eDeleteRuleGroupResponse                                                              smithy.SchemaExtensions
+	eDeleteRuleGroupResponse_RuleGroupResponse                                            smithy.SchemaExtensions
+	eDeleteTLSInspectionConfigurationRequest                                              smithy.SchemaExtensions
+	eDeleteTLSInspectionConfigurationRequest_TLSInspectionConfigurationArn                smithy.SchemaExtensions
+	eDeleteTLSInspectionConfigurationRequest_TLSInspectionConfigurationName               smithy.SchemaExtensions
+	eDeleteTLSInspectionConfigurationResponse                                             smithy.SchemaExtensions
+	eDeleteTLSInspectionConfigurationResponse_TLSInspectionConfigurationResponse          smithy.SchemaExtensions
+	eDeleteVpcEndpointAssociationRequest                                                  smithy.SchemaExtensions
+	eDeleteVpcEndpointAssociationRequest_VpcEndpointAssociationArn                        smithy.SchemaExtensions
+	eDeleteVpcEndpointAssociationResponse                                                 smithy.SchemaExtensions
+	eDeleteVpcEndpointAssociationResponse_VpcEndpointAssociation                          smithy.SchemaExtensions
+	eDeleteVpcEndpointAssociationResponse_VpcEndpointAssociationStatus                    smithy.SchemaExtensions
+	eDescribeContainerAssociationRequest                                                  smithy.SchemaExtensions
+	eDescribeContainerAssociationRequest_ContainerAssociationName                         smithy.SchemaExtensions
+	eDescribeContainerAssociationRequest_ContainerAssociationArn                          smithy.SchemaExtensions
+	eDescribeContainerAssociationResponse                                                 smithy.SchemaExtensions
+	eDescribeContainerAssociationResponse_ContainerAssociationName                        smithy.SchemaExtensions
+	eDescribeContainerAssociationResponse_ContainerAssociationArn                         smithy.SchemaExtensions
+	eDescribeContainerAssociationResponse_Description                                     smithy.SchemaExtensions
+	eDescribeContainerAssociationResponse_Type                                            smithy.SchemaExtensions
+	eDescribeContainerAssociationResponse_ContainerMonitoringConfigurations               smithy.SchemaExtensions
+	eDescribeContainerAssociationResponse_Status                                          smithy.SchemaExtensions
+	eDescribeContainerAssociationResponse_ResolvedCidrCount                               smithy.SchemaExtensions
+	eDescribeContainerAssociationResponse_LastUpdatedTime                                 smithy.SchemaExtensions
+	eDescribeContainerAssociationResponse_Tags                                            smithy.SchemaExtensions
+	eDescribeContainerAssociationResponse_UpdateToken                                     smithy.SchemaExtensions
+	eDescribeFirewallRequest                                                              smithy.SchemaExtensions
+	eDescribeFirewallRequest_FirewallName                                                 smithy.SchemaExtensions
+	eDescribeFirewallRequest_FirewallArn                                                  smithy.SchemaExtensions
+	eDescribeFirewallMetadataRequest                                                      smithy.SchemaExtensions
+	eDescribeFirewallMetadataRequest_FirewallArn                                          smithy.SchemaExtensions
+	eDescribeFirewallMetadataResponse                                                     smithy.SchemaExtensions
+	eDescribeFirewallMetadataResponse_FirewallArn                                         smithy.SchemaExtensions
+	eDescribeFirewallMetadataResponse_FirewallPolicyArn                                   smithy.SchemaExtensions
+	eDescribeFirewallMetadataResponse_Description                                         smithy.SchemaExtensions
+	eDescribeFirewallMetadataResponse_Status                                              smithy.SchemaExtensions
+	eDescribeFirewallMetadataResponse_SupportedAvailabilityZones                          smithy.SchemaExtensions
+	eDescribeFirewallMetadataResponse_TransitGatewayAttachmentId                          smithy.SchemaExtensions
+	eDescribeFirewallResponse                                                             smithy.SchemaExtensions
+	eDescribeFirewallResponse_UpdateToken                                                 smithy.SchemaExtensions
+	eDescribeFirewallResponse_Firewall                                                    smithy.SchemaExtensions
+	eDescribeFirewallResponse_FirewallStatus                                              smithy.SchemaExtensions
+	eDescribeFirewallPolicyRequest                                                        smithy.SchemaExtensions
+	eDescribeFirewallPolicyRequest_FirewallPolicyName                                     smithy.SchemaExtensions
+	eDescribeFirewallPolicyRequest_FirewallPolicyArn                                      smithy.SchemaExtensions
+	eDescribeFirewallPolicyResponse                                                       smithy.SchemaExtensions
+	eDescribeFirewallPolicyResponse_UpdateToken                                           smithy.SchemaExtensions
+	eDescribeFirewallPolicyResponse_FirewallPolicyResponse                                smithy.SchemaExtensions
+	eDescribeFirewallPolicyResponse_FirewallPolicy                                        smithy.SchemaExtensions
+	eDescribeFlowOperationRequest                                                         smithy.SchemaExtensions
+	eDescribeFlowOperationRequest_FirewallArn                                             smithy.SchemaExtensions
+	eDescribeFlowOperationRequest_AvailabilityZone                                        smithy.SchemaExtensions
+	eDescribeFlowOperationRequest_AvailabilityZoneId                                      smithy.SchemaExtensions
+	eDescribeFlowOperationRequest_VpcEndpointAssociationArn                               smithy.SchemaExtensions
+	eDescribeFlowOperationRequest_VpcEndpointId                                           smithy.SchemaExtensions
+	eDescribeFlowOperationRequest_FlowOperationId                                         smithy.SchemaExtensions
+	eDescribeFlowOperationResponse                                                        smithy.SchemaExtensions
+	eDescribeFlowOperationResponse_FirewallArn                                            smithy.SchemaExtensions
+	eDescribeFlowOperationResponse_AvailabilityZone                                       smithy.SchemaExtensions
+	eDescribeFlowOperationResponse_AvailabilityZoneId                                     smithy.SchemaExtensions
+	eDescribeFlowOperationResponse_VpcEndpointAssociationArn                              smithy.SchemaExtensions
+	eDescribeFlowOperationResponse_VpcEndpointId                                          smithy.SchemaExtensions
+	eDescribeFlowOperationResponse_FlowOperationId                                        smithy.SchemaExtensions
+	eDescribeFlowOperationResponse_FlowOperationType                                      smithy.SchemaExtensions
+	eDescribeFlowOperationResponse_FlowOperationStatus                                    smithy.SchemaExtensions
+	eDescribeFlowOperationResponse_StatusMessage                                          smithy.SchemaExtensions
+	eDescribeFlowOperationResponse_FlowRequestTimestamp                                   smithy.SchemaExtensions
+	eDescribeFlowOperationResponse_FlowOperation                                          smithy.SchemaExtensions
+	eDescribeLoggingConfigurationRequest                                                  smithy.SchemaExtensions
+	eDescribeLoggingConfigurationRequest_FirewallArn                                      smithy.SchemaExtensions
+	eDescribeLoggingConfigurationRequest_FirewallName                                     smithy.SchemaExtensions
+	eDescribeLoggingConfigurationResponse                                                 smithy.SchemaExtensions
+	eDescribeLoggingConfigurationResponse_FirewallArn                                     smithy.SchemaExtensions
+	eDescribeLoggingConfigurationResponse_LoggingConfiguration                            smithy.SchemaExtensions
+	eDescribeLoggingConfigurationResponse_EnableMonitoringDashboard                       smithy.SchemaExtensions
+	eDescribeProxyConfigurationRequest                                                    smithy.SchemaExtensions
+	eDescribeProxyConfigurationRequest_ProxyConfigurationName                             smithy.SchemaExtensions
+	eDescribeProxyConfigurationRequest_ProxyConfigurationArn                              smithy.SchemaExtensions
+	eDescribeProxyConfigurationResponse                                                   smithy.SchemaExtensions
+	eDescribeProxyConfigurationResponse_ProxyConfiguration                                smithy.SchemaExtensions
+	eDescribeProxyConfigurationResponse_UpdateToken                                       smithy.SchemaExtensions
+	eDescribeProxyRequest                                                                 smithy.SchemaExtensions
+	eDescribeProxyRequest_ProxyName                                                       smithy.SchemaExtensions
+	eDescribeProxyRequest_ProxyArn                                                        smithy.SchemaExtensions
+	eDescribeProxyResponse                                                                smithy.SchemaExtensions
+	eDescribeProxyResponse_Proxy                                                          smithy.SchemaExtensions
+	eDescribeProxyResponse_UpdateToken                                                    smithy.SchemaExtensions
+	eDescribeProxyRuleGroupRequest                                                        smithy.SchemaExtensions
+	eDescribeProxyRuleGroupRequest_ProxyRuleGroupName                                     smithy.SchemaExtensions
+	eDescribeProxyRuleGroupRequest_ProxyRuleGroupArn                                      smithy.SchemaExtensions
+	eDescribeProxyRuleGroupResponse                                                       smithy.SchemaExtensions
+	eDescribeProxyRuleGroupResponse_ProxyRuleGroup                                        smithy.SchemaExtensions
+	eDescribeProxyRuleGroupResponse_UpdateToken                                           smithy.SchemaExtensions
+	eDescribeProxyRuleRequest                                                             smithy.SchemaExtensions
+	eDescribeProxyRuleRequest_ProxyRuleName                                               smithy.SchemaExtensions
+	eDescribeProxyRuleRequest_ProxyRuleGroupName                                          smithy.SchemaExtensions
+	eDescribeProxyRuleRequest_ProxyRuleGroupArn                                           smithy.SchemaExtensions
+	eDescribeProxyRuleResponse                                                            smithy.SchemaExtensions
+	eDescribeProxyRuleResponse_ProxyRule                                                  smithy.SchemaExtensions
+	eDescribeProxyRuleResponse_UpdateToken                                                smithy.SchemaExtensions
+	eDescribeResourcePolicyRequest                                                        smithy.SchemaExtensions
+	eDescribeResourcePolicyRequest_ResourceArn                                            smithy.SchemaExtensions
+	eDescribeResourcePolicyResponse                                                       smithy.SchemaExtensions
+	eDescribeResourcePolicyResponse_Policy                                                smithy.SchemaExtensions
+	eDescribeRuleGroupRequest                                                             smithy.SchemaExtensions
+	eDescribeRuleGroupRequest_RuleGroupName                                               smithy.SchemaExtensions
+	eDescribeRuleGroupRequest_RuleGroupArn                                                smithy.SchemaExtensions
+	eDescribeRuleGroupRequest_Type                                                        smithy.SchemaExtensions
+	eDescribeRuleGroupRequest_AnalyzeRuleGroup                                            smithy.SchemaExtensions
+	eDescribeRuleGroupMetadataRequest                                                     smithy.SchemaExtensions
+	eDescribeRuleGroupMetadataRequest_RuleGroupName                                       smithy.SchemaExtensions
+	eDescribeRuleGroupMetadataRequest_RuleGroupArn                                        smithy.SchemaExtensions
+	eDescribeRuleGroupMetadataRequest_Type                                                smithy.SchemaExtensions
+	eDescribeRuleGroupMetadataResponse                                                    smithy.SchemaExtensions
+	eDescribeRuleGroupMetadataResponse_RuleGroupArn                                       smithy.SchemaExtensions
+	eDescribeRuleGroupMetadataResponse_RuleGroupName                                      smithy.SchemaExtensions
+	eDescribeRuleGroupMetadataResponse_Description                                        smithy.SchemaExtensions
+	eDescribeRuleGroupMetadataResponse_Type                                               smithy.SchemaExtensions
+	eDescribeRuleGroupMetadataResponse_Capacity                                           smithy.SchemaExtensions
+	eDescribeRuleGroupMetadataResponse_StatefulRuleOptions                                smithy.SchemaExtensions
+	eDescribeRuleGroupMetadataResponse_LastModifiedTime                                   smithy.SchemaExtensions
+	eDescribeRuleGroupMetadataResponse_VendorName                                         smithy.SchemaExtensions
+	eDescribeRuleGroupMetadataResponse_ProductId                                          smithy.SchemaExtensions
+	eDescribeRuleGroupMetadataResponse_ListingName                                        smithy.SchemaExtensions
+	eDescribeRuleGroupResponse                                                            smithy.SchemaExtensions
+	eDescribeRuleGroupResponse_UpdateToken                                                smithy.SchemaExtensions
+	eDescribeRuleGroupResponse_RuleGroup                                                  smithy.SchemaExtensions
+	eDescribeRuleGroupResponse_RuleGroupResponse                                          smithy.SchemaExtensions
+	eDescribeRuleGroupSummaryRequest                                                      smithy.SchemaExtensions
+	eDescribeRuleGroupSummaryRequest_RuleGroupName                                        smithy.SchemaExtensions
+	eDescribeRuleGroupSummaryRequest_RuleGroupArn                                         smithy.SchemaExtensions
+	eDescribeRuleGroupSummaryRequest_Type                                                 smithy.SchemaExtensions
+	eDescribeRuleGroupSummaryResponse                                                     smithy.SchemaExtensions
+	eDescribeRuleGroupSummaryResponse_RuleGroupName                                       smithy.SchemaExtensions
+	eDescribeRuleGroupSummaryResponse_Description                                         smithy.SchemaExtensions
+	eDescribeRuleGroupSummaryResponse_Summary                                             smithy.SchemaExtensions
+	eDescribeTLSInspectionConfigurationRequest                                            smithy.SchemaExtensions
+	eDescribeTLSInspectionConfigurationRequest_TLSInspectionConfigurationArn              smithy.SchemaExtensions
+	eDescribeTLSInspectionConfigurationRequest_TLSInspectionConfigurationName             smithy.SchemaExtensions
+	eDescribeTLSInspectionConfigurationResponse                                           smithy.SchemaExtensions
+	eDescribeTLSInspectionConfigurationResponse_UpdateToken                               smithy.SchemaExtensions
+	eDescribeTLSInspectionConfigurationResponse_TLSInspectionConfiguration                smithy.SchemaExtensions
+	eDescribeTLSInspectionConfigurationResponse_TLSInspectionConfigurationResponse        smithy.SchemaExtensions
+	eDescribeVpcEndpointAssociationRequest                                                smithy.SchemaExtensions
+	eDescribeVpcEndpointAssociationRequest_VpcEndpointAssociationArn                      smithy.SchemaExtensions
+	eDescribeVpcEndpointAssociationResponse                                               smithy.SchemaExtensions
+	eDescribeVpcEndpointAssociationResponse_VpcEndpointAssociation                        smithy.SchemaExtensions
+	eDescribeVpcEndpointAssociationResponse_VpcEndpointAssociationStatus                  smithy.SchemaExtensions
+	eDetachRuleGroupsFromProxyConfigurationRequest                                        smithy.SchemaExtensions
+	eDetachRuleGroupsFromProxyConfigurationRequest_ProxyConfigurationName                 smithy.SchemaExtensions
+	eDetachRuleGroupsFromProxyConfigurationRequest_ProxyConfigurationArn                  smithy.SchemaExtensions
+	eDetachRuleGroupsFromProxyConfigurationRequest_RuleGroupNames                         smithy.SchemaExtensions
+	eDetachRuleGroupsFromProxyConfigurationRequest_RuleGroupArns                          smithy.SchemaExtensions
+	eDetachRuleGroupsFromProxyConfigurationRequest_UpdateToken                            smithy.SchemaExtensions
+	eDetachRuleGroupsFromProxyConfigurationResponse                                       smithy.SchemaExtensions
+	eDetachRuleGroupsFromProxyConfigurationResponse_ProxyConfiguration                    smithy.SchemaExtensions
+	eDetachRuleGroupsFromProxyConfigurationResponse_UpdateToken                           smithy.SchemaExtensions
+	eDisassociateAvailabilityZonesRequest                                                 smithy.SchemaExtensions
+	eDisassociateAvailabilityZonesRequest_UpdateToken                                     smithy.SchemaExtensions
+	eDisassociateAvailabilityZonesRequest_FirewallArn                                     smithy.SchemaExtensions
+	eDisassociateAvailabilityZonesRequest_FirewallName                                    smithy.SchemaExtensions
+	eDisassociateAvailabilityZonesRequest_AvailabilityZoneMappings                        smithy.SchemaExtensions
+	eDisassociateAvailabilityZonesResponse                                                smithy.SchemaExtensions
+	eDisassociateAvailabilityZonesResponse_FirewallArn                                    smithy.SchemaExtensions
+	eDisassociateAvailabilityZonesResponse_FirewallName                                   smithy.SchemaExtensions
+	eDisassociateAvailabilityZonesResponse_AvailabilityZoneMappings                       smithy.SchemaExtensions
+	eDisassociateAvailabilityZonesResponse_UpdateToken                                    smithy.SchemaExtensions
+	eDisassociateSubnetsRequest                                                           smithy.SchemaExtensions
+	eDisassociateSubnetsRequest_UpdateToken                                               smithy.SchemaExtensions
+	eDisassociateSubnetsRequest_FirewallArn                                               smithy.SchemaExtensions
+	eDisassociateSubnetsRequest_FirewallName                                              smithy.SchemaExtensions
+	eDisassociateSubnetsRequest_SubnetIds                                                 smithy.SchemaExtensions
+	eDisassociateSubnetsResponse                                                          smithy.SchemaExtensions
+	eDisassociateSubnetsResponse_FirewallArn                                              smithy.SchemaExtensions
+	eDisassociateSubnetsResponse_FirewallName                                             smithy.SchemaExtensions
+	eDisassociateSubnetsResponse_SubnetMappings                                           smithy.SchemaExtensions
+	eDisassociateSubnetsResponse_UpdateToken                                              smithy.SchemaExtensions
+	eGetAnalysisReportResultsRequest                                                      smithy.SchemaExtensions
+	eGetAnalysisReportResultsRequest_FirewallName                                         smithy.SchemaExtensions
+	eGetAnalysisReportResultsRequest_AnalysisReportId                                     smithy.SchemaExtensions
+	eGetAnalysisReportResultsRequest_FirewallArn                                          smithy.SchemaExtensions
+	eGetAnalysisReportResultsRequest_NextToken                                            smithy.SchemaExtensions
+	eGetAnalysisReportResultsRequest_MaxResults                                           smithy.SchemaExtensions
+	eGetAnalysisReportResultsResponse                                                     smithy.SchemaExtensions
+	eGetAnalysisReportResultsResponse_Status                                              smithy.SchemaExtensions
+	eGetAnalysisReportResultsResponse_StartTime                                           smithy.SchemaExtensions
+	eGetAnalysisReportResultsResponse_EndTime                                             smithy.SchemaExtensions
+	eGetAnalysisReportResultsResponse_ReportTime                                          smithy.SchemaExtensions
+	eGetAnalysisReportResultsResponse_AnalysisType                                        smithy.SchemaExtensions
+	eGetAnalysisReportResultsResponse_NextToken                                           smithy.SchemaExtensions
+	eGetAnalysisReportResultsResponse_AnalysisReportResults                               smithy.SchemaExtensions
+	eListAnalysisReportsRequest                                                           smithy.SchemaExtensions
+	eListAnalysisReportsRequest_FirewallName                                              smithy.SchemaExtensions
+	eListAnalysisReportsRequest_FirewallArn                                               smithy.SchemaExtensions
+	eListAnalysisReportsRequest_NextToken                                                 smithy.SchemaExtensions
+	eListAnalysisReportsRequest_MaxResults                                                smithy.SchemaExtensions
+	eListAnalysisReportsResponse                                                          smithy.SchemaExtensions
+	eListAnalysisReportsResponse_AnalysisReports                                          smithy.SchemaExtensions
+	eListAnalysisReportsResponse_NextToken                                                smithy.SchemaExtensions
+	eListContainerAssociationsRequest                                                     smithy.SchemaExtensions
+	eListContainerAssociationsRequest_MaxResults                                          smithy.SchemaExtensions
+	eListContainerAssociationsRequest_NextToken                                           smithy.SchemaExtensions
+	eListContainerAssociationsResponse                                                    smithy.SchemaExtensions
+	eListContainerAssociationsResponse_ContainerAssociations                              smithy.SchemaExtensions
+	eListContainerAssociationsResponse_NextToken                                          smithy.SchemaExtensions
+	eListFirewallPoliciesRequest                                                          smithy.SchemaExtensions
+	eListFirewallPoliciesRequest_NextToken                                                smithy.SchemaExtensions
+	eListFirewallPoliciesRequest_MaxResults                                               smithy.SchemaExtensions
+	eListFirewallPoliciesResponse                                                         smithy.SchemaExtensions
+	eListFirewallPoliciesResponse_NextToken                                               smithy.SchemaExtensions
+	eListFirewallPoliciesResponse_FirewallPolicies                                        smithy.SchemaExtensions
+	eListFirewallsRequest                                                                 smithy.SchemaExtensions
+	eListFirewallsRequest_NextToken                                                       smithy.SchemaExtensions
+	eListFirewallsRequest_VpcIds                                                          smithy.SchemaExtensions
+	eListFirewallsRequest_MaxResults                                                      smithy.SchemaExtensions
+	eListFirewallsResponse                                                                smithy.SchemaExtensions
+	eListFirewallsResponse_NextToken                                                      smithy.SchemaExtensions
+	eListFirewallsResponse_Firewalls                                                      smithy.SchemaExtensions
+	eListFlowOperationResultsRequest                                                      smithy.SchemaExtensions
+	eListFlowOperationResultsRequest_FirewallArn                                          smithy.SchemaExtensions
+	eListFlowOperationResultsRequest_FlowOperationId                                      smithy.SchemaExtensions
+	eListFlowOperationResultsRequest_NextToken                                            smithy.SchemaExtensions
+	eListFlowOperationResultsRequest_MaxResults                                           smithy.SchemaExtensions
+	eListFlowOperationResultsRequest_AvailabilityZone                                     smithy.SchemaExtensions
+	eListFlowOperationResultsRequest_AvailabilityZoneId                                   smithy.SchemaExtensions
+	eListFlowOperationResultsRequest_VpcEndpointId                                        smithy.SchemaExtensions
+	eListFlowOperationResultsRequest_VpcEndpointAssociationArn                            smithy.SchemaExtensions
+	eListFlowOperationResultsResponse                                                     smithy.SchemaExtensions
+	eListFlowOperationResultsResponse_FirewallArn                                         smithy.SchemaExtensions
+	eListFlowOperationResultsResponse_AvailabilityZone                                    smithy.SchemaExtensions
+	eListFlowOperationResultsResponse_AvailabilityZoneId                                  smithy.SchemaExtensions
+	eListFlowOperationResultsResponse_VpcEndpointAssociationArn                           smithy.SchemaExtensions
+	eListFlowOperationResultsResponse_VpcEndpointId                                       smithy.SchemaExtensions
+	eListFlowOperationResultsResponse_FlowOperationId                                     smithy.SchemaExtensions
+	eListFlowOperationResultsResponse_FlowOperationStatus                                 smithy.SchemaExtensions
+	eListFlowOperationResultsResponse_StatusMessage                                       smithy.SchemaExtensions
+	eListFlowOperationResultsResponse_FlowRequestTimestamp                                smithy.SchemaExtensions
+	eListFlowOperationResultsResponse_Flows                                               smithy.SchemaExtensions
+	eListFlowOperationResultsResponse_NextToken                                           smithy.SchemaExtensions
+	eListFlowOperationsRequest                                                            smithy.SchemaExtensions
+	eListFlowOperationsRequest_FirewallArn                                                smithy.SchemaExtensions
+	eListFlowOperationsRequest_AvailabilityZone                                           smithy.SchemaExtensions
+	eListFlowOperationsRequest_AvailabilityZoneId                                         smithy.SchemaExtensions
+	eListFlowOperationsRequest_VpcEndpointAssociationArn                                  smithy.SchemaExtensions
+	eListFlowOperationsRequest_VpcEndpointId                                              smithy.SchemaExtensions
+	eListFlowOperationsRequest_FlowOperationType                                          smithy.SchemaExtensions
+	eListFlowOperationsRequest_NextToken                                                  smithy.SchemaExtensions
+	eListFlowOperationsRequest_MaxResults                                                 smithy.SchemaExtensions
+	eListFlowOperationsResponse                                                           smithy.SchemaExtensions
+	eListFlowOperationsResponse_FlowOperations                                            smithy.SchemaExtensions
+	eListFlowOperationsResponse_NextToken                                                 smithy.SchemaExtensions
+	eListProxiesRequest                                                                   smithy.SchemaExtensions
+	eListProxiesRequest_NextToken                                                         smithy.SchemaExtensions
+	eListProxiesRequest_MaxResults                                                        smithy.SchemaExtensions
+	eListProxiesResponse                                                                  smithy.SchemaExtensions
+	eListProxiesResponse_Proxies                                                          smithy.SchemaExtensions
+	eListProxiesResponse_NextToken                                                        smithy.SchemaExtensions
+	eListProxyConfigurationsRequest                                                       smithy.SchemaExtensions
+	eListProxyConfigurationsRequest_NextToken                                             smithy.SchemaExtensions
+	eListProxyConfigurationsRequest_MaxResults                                            smithy.SchemaExtensions
+	eListProxyConfigurationsResponse                                                      smithy.SchemaExtensions
+	eListProxyConfigurationsResponse_ProxyConfigurations                                  smithy.SchemaExtensions
+	eListProxyConfigurationsResponse_NextToken                                            smithy.SchemaExtensions
+	eListProxyRuleGroupsRequest                                                           smithy.SchemaExtensions
+	eListProxyRuleGroupsRequest_NextToken                                                 smithy.SchemaExtensions
+	eListProxyRuleGroupsRequest_MaxResults                                                smithy.SchemaExtensions
+	eListProxyRuleGroupsResponse                                                          smithy.SchemaExtensions
+	eListProxyRuleGroupsResponse_ProxyRuleGroups                                          smithy.SchemaExtensions
+	eListProxyRuleGroupsResponse_NextToken                                                smithy.SchemaExtensions
+	eListRuleGroupsRequest                                                                smithy.SchemaExtensions
+	eListRuleGroupsRequest_NextToken                                                      smithy.SchemaExtensions
+	eListRuleGroupsRequest_MaxResults                                                     smithy.SchemaExtensions
+	eListRuleGroupsRequest_Scope                                                          smithy.SchemaExtensions
+	eListRuleGroupsRequest_ManagedType                                                    smithy.SchemaExtensions
+	eListRuleGroupsRequest_SubscriptionStatus                                             smithy.SchemaExtensions
+	eListRuleGroupsRequest_Type                                                           smithy.SchemaExtensions
+	eListRuleGroupsResponse                                                               smithy.SchemaExtensions
+	eListRuleGroupsResponse_NextToken                                                     smithy.SchemaExtensions
+	eListRuleGroupsResponse_RuleGroups                                                    smithy.SchemaExtensions
+	eListTagsForResourceRequest                                                           smithy.SchemaExtensions
+	eListTagsForResourceRequest_NextToken                                                 smithy.SchemaExtensions
+	eListTagsForResourceRequest_MaxResults                                                smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn                                               smithy.SchemaExtensions
+	eListTagsForResourceResponse                                                          smithy.SchemaExtensions
+	eListTagsForResourceResponse_NextToken                                                smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                                                     smithy.SchemaExtensions
+	eListTLSInspectionConfigurationsRequest                                               smithy.SchemaExtensions
+	eListTLSInspectionConfigurationsRequest_NextToken                                     smithy.SchemaExtensions
+	eListTLSInspectionConfigurationsRequest_MaxResults                                    smithy.SchemaExtensions
+	eListTLSInspectionConfigurationsResponse                                              smithy.SchemaExtensions
+	eListTLSInspectionConfigurationsResponse_NextToken                                    smithy.SchemaExtensions
+	eListTLSInspectionConfigurationsResponse_TLSInspectionConfigurations                  smithy.SchemaExtensions
+	eListVpcEndpointAssociationsRequest                                                   smithy.SchemaExtensions
+	eListVpcEndpointAssociationsRequest_NextToken                                         smithy.SchemaExtensions
+	eListVpcEndpointAssociationsRequest_MaxResults                                        smithy.SchemaExtensions
+	eListVpcEndpointAssociationsRequest_FirewallArn                                       smithy.SchemaExtensions
+	eListVpcEndpointAssociationsResponse                                                  smithy.SchemaExtensions
+	eListVpcEndpointAssociationsResponse_NextToken                                        smithy.SchemaExtensions
+	eListVpcEndpointAssociationsResponse_VpcEndpointAssociations                          smithy.SchemaExtensions
+	ePutResourcePolicyRequest                                                             smithy.SchemaExtensions
+	ePutResourcePolicyRequest_ResourceArn                                                 smithy.SchemaExtensions
+	ePutResourcePolicyRequest_Policy                                                      smithy.SchemaExtensions
+	ePutResourcePolicyResponse                                                            smithy.SchemaExtensions
+	eRejectNetworkFirewallTransitGatewayAttachmentRequest                                 smithy.SchemaExtensions
+	eRejectNetworkFirewallTransitGatewayAttachmentRequest_TransitGatewayAttachmentId      smithy.SchemaExtensions
+	eRejectNetworkFirewallTransitGatewayAttachmentResponse                                smithy.SchemaExtensions
+	eRejectNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentId     smithy.SchemaExtensions
+	eRejectNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentStatus smithy.SchemaExtensions
+	eStartAnalysisReportRequest                                                           smithy.SchemaExtensions
+	eStartAnalysisReportRequest_FirewallName                                              smithy.SchemaExtensions
+	eStartAnalysisReportRequest_FirewallArn                                               smithy.SchemaExtensions
+	eStartAnalysisReportRequest_AnalysisType                                              smithy.SchemaExtensions
+	eStartAnalysisReportResponse                                                          smithy.SchemaExtensions
+	eStartAnalysisReportResponse_AnalysisReportId                                         smithy.SchemaExtensions
+	eStartFlowCaptureRequest                                                              smithy.SchemaExtensions
+	eStartFlowCaptureRequest_FirewallArn                                                  smithy.SchemaExtensions
+	eStartFlowCaptureRequest_AvailabilityZone                                             smithy.SchemaExtensions
+	eStartFlowCaptureRequest_AvailabilityZoneId                                           smithy.SchemaExtensions
+	eStartFlowCaptureRequest_VpcEndpointAssociationArn                                    smithy.SchemaExtensions
+	eStartFlowCaptureRequest_VpcEndpointId                                                smithy.SchemaExtensions
+	eStartFlowCaptureRequest_MinimumFlowAgeInSeconds                                      smithy.SchemaExtensions
+	eStartFlowCaptureRequest_FlowFilters                                                  smithy.SchemaExtensions
+	eStartFlowCaptureResponse                                                             smithy.SchemaExtensions
+	eStartFlowCaptureResponse_FirewallArn                                                 smithy.SchemaExtensions
+	eStartFlowCaptureResponse_FlowOperationId                                             smithy.SchemaExtensions
+	eStartFlowCaptureResponse_FlowOperationStatus                                         smithy.SchemaExtensions
+	eStartFlowFlushRequest                                                                smithy.SchemaExtensions
+	eStartFlowFlushRequest_FirewallArn                                                    smithy.SchemaExtensions
+	eStartFlowFlushRequest_AvailabilityZone                                               smithy.SchemaExtensions
+	eStartFlowFlushRequest_AvailabilityZoneId                                             smithy.SchemaExtensions
+	eStartFlowFlushRequest_VpcEndpointAssociationArn                                      smithy.SchemaExtensions
+	eStartFlowFlushRequest_VpcEndpointId                                                  smithy.SchemaExtensions
+	eStartFlowFlushRequest_MinimumFlowAgeInSeconds                                        smithy.SchemaExtensions
+	eStartFlowFlushRequest_FlowFilters                                                    smithy.SchemaExtensions
+	eStartFlowFlushResponse                                                               smithy.SchemaExtensions
+	eStartFlowFlushResponse_FirewallArn                                                   smithy.SchemaExtensions
+	eStartFlowFlushResponse_FlowOperationId                                               smithy.SchemaExtensions
+	eStartFlowFlushResponse_FlowOperationStatus                                           smithy.SchemaExtensions
+	eTagResourceRequest                                                                   smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                                                       smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                                              smithy.SchemaExtensions
+	eTagResourceResponse                                                                  smithy.SchemaExtensions
+	eUntagResourceRequest                                                                 smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                                                     smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                                         smithy.SchemaExtensions
+	eUntagResourceResponse                                                                smithy.SchemaExtensions
+	eUpdateAvailabilityZoneChangeProtectionRequest                                        smithy.SchemaExtensions
+	eUpdateAvailabilityZoneChangeProtectionRequest_UpdateToken                            smithy.SchemaExtensions
+	eUpdateAvailabilityZoneChangeProtectionRequest_FirewallArn                            smithy.SchemaExtensions
+	eUpdateAvailabilityZoneChangeProtectionRequest_FirewallName                           smithy.SchemaExtensions
+	eUpdateAvailabilityZoneChangeProtectionRequest_AvailabilityZoneChangeProtection       smithy.SchemaExtensions
+	eUpdateAvailabilityZoneChangeProtectionResponse                                       smithy.SchemaExtensions
+	eUpdateAvailabilityZoneChangeProtectionResponse_UpdateToken                           smithy.SchemaExtensions
+	eUpdateAvailabilityZoneChangeProtectionResponse_FirewallArn                           smithy.SchemaExtensions
+	eUpdateAvailabilityZoneChangeProtectionResponse_FirewallName                          smithy.SchemaExtensions
+	eUpdateAvailabilityZoneChangeProtectionResponse_AvailabilityZoneChangeProtection      smithy.SchemaExtensions
+	eUpdateContainerAssociationRequest                                                    smithy.SchemaExtensions
+	eUpdateContainerAssociationRequest_ContainerAssociationName                           smithy.SchemaExtensions
+	eUpdateContainerAssociationRequest_ContainerAssociationArn                            smithy.SchemaExtensions
+	eUpdateContainerAssociationRequest_Description                                        smithy.SchemaExtensions
+	eUpdateContainerAssociationRequest_Type                                               smithy.SchemaExtensions
+	eUpdateContainerAssociationRequest_ContainerMonitoringConfigurations                  smithy.SchemaExtensions
+	eUpdateContainerAssociationRequest_Tags                                               smithy.SchemaExtensions
+	eUpdateContainerAssociationRequest_UpdateToken                                        smithy.SchemaExtensions
+	eUpdateContainerAssociationResponse                                                   smithy.SchemaExtensions
+	eUpdateContainerAssociationResponse_ContainerAssociationName                          smithy.SchemaExtensions
+	eUpdateContainerAssociationResponse_ContainerAssociationArn                           smithy.SchemaExtensions
+	eUpdateContainerAssociationResponse_Description                                       smithy.SchemaExtensions
+	eUpdateContainerAssociationResponse_Type                                              smithy.SchemaExtensions
+	eUpdateContainerAssociationResponse_ContainerMonitoringConfigurations                 smithy.SchemaExtensions
+	eUpdateContainerAssociationResponse_Status                                            smithy.SchemaExtensions
+	eUpdateContainerAssociationResponse_Tags                                              smithy.SchemaExtensions
+	eUpdateContainerAssociationResponse_UpdateToken                                       smithy.SchemaExtensions
+	eUpdateFirewallAnalysisSettingsRequest                                                smithy.SchemaExtensions
+	eUpdateFirewallAnalysisSettingsRequest_EnabledAnalysisTypes                           smithy.SchemaExtensions
+	eUpdateFirewallAnalysisSettingsRequest_FirewallArn                                    smithy.SchemaExtensions
+	eUpdateFirewallAnalysisSettingsRequest_FirewallName                                   smithy.SchemaExtensions
+	eUpdateFirewallAnalysisSettingsRequest_UpdateToken                                    smithy.SchemaExtensions
+	eUpdateFirewallAnalysisSettingsResponse                                               smithy.SchemaExtensions
+	eUpdateFirewallAnalysisSettingsResponse_EnabledAnalysisTypes                          smithy.SchemaExtensions
+	eUpdateFirewallAnalysisSettingsResponse_FirewallArn                                   smithy.SchemaExtensions
+	eUpdateFirewallAnalysisSettingsResponse_FirewallName                                  smithy.SchemaExtensions
+	eUpdateFirewallAnalysisSettingsResponse_UpdateToken                                   smithy.SchemaExtensions
+	eUpdateFirewallDeleteProtectionRequest                                                smithy.SchemaExtensions
+	eUpdateFirewallDeleteProtectionRequest_UpdateToken                                    smithy.SchemaExtensions
+	eUpdateFirewallDeleteProtectionRequest_FirewallArn                                    smithy.SchemaExtensions
+	eUpdateFirewallDeleteProtectionRequest_FirewallName                                   smithy.SchemaExtensions
+	eUpdateFirewallDeleteProtectionRequest_DeleteProtection                               smithy.SchemaExtensions
+	eUpdateFirewallDeleteProtectionResponse                                               smithy.SchemaExtensions
+	eUpdateFirewallDeleteProtectionResponse_FirewallArn                                   smithy.SchemaExtensions
+	eUpdateFirewallDeleteProtectionResponse_FirewallName                                  smithy.SchemaExtensions
+	eUpdateFirewallDeleteProtectionResponse_DeleteProtection                              smithy.SchemaExtensions
+	eUpdateFirewallDeleteProtectionResponse_UpdateToken                                   smithy.SchemaExtensions
+	eUpdateFirewallDescriptionRequest                                                     smithy.SchemaExtensions
+	eUpdateFirewallDescriptionRequest_UpdateToken                                         smithy.SchemaExtensions
+	eUpdateFirewallDescriptionRequest_FirewallArn                                         smithy.SchemaExtensions
+	eUpdateFirewallDescriptionRequest_FirewallName                                        smithy.SchemaExtensions
+	eUpdateFirewallDescriptionRequest_Description                                         smithy.SchemaExtensions
+	eUpdateFirewallDescriptionResponse                                                    smithy.SchemaExtensions
+	eUpdateFirewallDescriptionResponse_FirewallArn                                        smithy.SchemaExtensions
+	eUpdateFirewallDescriptionResponse_FirewallName                                       smithy.SchemaExtensions
+	eUpdateFirewallDescriptionResponse_Description                                        smithy.SchemaExtensions
+	eUpdateFirewallDescriptionResponse_UpdateToken                                        smithy.SchemaExtensions
+	eUpdateFirewallEncryptionConfigurationRequest                                         smithy.SchemaExtensions
+	eUpdateFirewallEncryptionConfigurationRequest_UpdateToken                             smithy.SchemaExtensions
+	eUpdateFirewallEncryptionConfigurationRequest_FirewallArn                             smithy.SchemaExtensions
+	eUpdateFirewallEncryptionConfigurationRequest_FirewallName                            smithy.SchemaExtensions
+	eUpdateFirewallEncryptionConfigurationRequest_EncryptionConfiguration                 smithy.SchemaExtensions
+	eUpdateFirewallEncryptionConfigurationResponse                                        smithy.SchemaExtensions
+	eUpdateFirewallEncryptionConfigurationResponse_FirewallArn                            smithy.SchemaExtensions
+	eUpdateFirewallEncryptionConfigurationResponse_FirewallName                           smithy.SchemaExtensions
+	eUpdateFirewallEncryptionConfigurationResponse_UpdateToken                            smithy.SchemaExtensions
+	eUpdateFirewallEncryptionConfigurationResponse_EncryptionConfiguration                smithy.SchemaExtensions
+	eUpdateFirewallPolicyChangeProtectionRequest                                          smithy.SchemaExtensions
+	eUpdateFirewallPolicyChangeProtectionRequest_UpdateToken                              smithy.SchemaExtensions
+	eUpdateFirewallPolicyChangeProtectionRequest_FirewallArn                              smithy.SchemaExtensions
+	eUpdateFirewallPolicyChangeProtectionRequest_FirewallName                             smithy.SchemaExtensions
+	eUpdateFirewallPolicyChangeProtectionRequest_FirewallPolicyChangeProtection           smithy.SchemaExtensions
+	eUpdateFirewallPolicyChangeProtectionResponse                                         smithy.SchemaExtensions
+	eUpdateFirewallPolicyChangeProtectionResponse_UpdateToken                             smithy.SchemaExtensions
+	eUpdateFirewallPolicyChangeProtectionResponse_FirewallArn                             smithy.SchemaExtensions
+	eUpdateFirewallPolicyChangeProtectionResponse_FirewallName                            smithy.SchemaExtensions
+	eUpdateFirewallPolicyChangeProtectionResponse_FirewallPolicyChangeProtection          smithy.SchemaExtensions
+	eUpdateFirewallPolicyRequest                                                          smithy.SchemaExtensions
+	eUpdateFirewallPolicyRequest_UpdateToken                                              smithy.SchemaExtensions
+	eUpdateFirewallPolicyRequest_FirewallPolicyArn                                        smithy.SchemaExtensions
+	eUpdateFirewallPolicyRequest_FirewallPolicyName                                       smithy.SchemaExtensions
+	eUpdateFirewallPolicyRequest_FirewallPolicy                                           smithy.SchemaExtensions
+	eUpdateFirewallPolicyRequest_Description                                              smithy.SchemaExtensions
+	eUpdateFirewallPolicyRequest_DryRun                                                   smithy.SchemaExtensions
+	eUpdateFirewallPolicyRequest_EncryptionConfiguration                                  smithy.SchemaExtensions
+	eUpdateFirewallPolicyResponse                                                         smithy.SchemaExtensions
+	eUpdateFirewallPolicyResponse_UpdateToken                                             smithy.SchemaExtensions
+	eUpdateFirewallPolicyResponse_FirewallPolicyResponse                                  smithy.SchemaExtensions
+	eUpdateLoggingConfigurationRequest                                                    smithy.SchemaExtensions
+	eUpdateLoggingConfigurationRequest_FirewallArn                                        smithy.SchemaExtensions
+	eUpdateLoggingConfigurationRequest_FirewallName                                       smithy.SchemaExtensions
+	eUpdateLoggingConfigurationRequest_LoggingConfiguration                               smithy.SchemaExtensions
+	eUpdateLoggingConfigurationRequest_EnableMonitoringDashboard                          smithy.SchemaExtensions
+	eUpdateLoggingConfigurationResponse                                                   smithy.SchemaExtensions
+	eUpdateLoggingConfigurationResponse_FirewallArn                                       smithy.SchemaExtensions
+	eUpdateLoggingConfigurationResponse_FirewallName                                      smithy.SchemaExtensions
+	eUpdateLoggingConfigurationResponse_LoggingConfiguration                              smithy.SchemaExtensions
+	eUpdateLoggingConfigurationResponse_EnableMonitoringDashboard                         smithy.SchemaExtensions
+	eUpdateProxyConfigurationRequest                                                      smithy.SchemaExtensions
+	eUpdateProxyConfigurationRequest_ProxyConfigurationName                               smithy.SchemaExtensions
+	eUpdateProxyConfigurationRequest_ProxyConfigurationArn                                smithy.SchemaExtensions
+	eUpdateProxyConfigurationRequest_DefaultRulePhaseActions                              smithy.SchemaExtensions
+	eUpdateProxyConfigurationRequest_UpdateToken                                          smithy.SchemaExtensions
+	eUpdateProxyConfigurationResponse                                                     smithy.SchemaExtensions
+	eUpdateProxyConfigurationResponse_ProxyConfiguration                                  smithy.SchemaExtensions
+	eUpdateProxyConfigurationResponse_UpdateToken                                         smithy.SchemaExtensions
+	eUpdateProxyRequest                                                                   smithy.SchemaExtensions
+	eUpdateProxyRequest_NatGatewayId                                                      smithy.SchemaExtensions
+	eUpdateProxyRequest_ProxyName                                                         smithy.SchemaExtensions
+	eUpdateProxyRequest_ProxyArn                                                          smithy.SchemaExtensions
+	eUpdateProxyRequest_ListenerPropertiesToAdd                                           smithy.SchemaExtensions
+	eUpdateProxyRequest_ListenerPropertiesToRemove                                        smithy.SchemaExtensions
+	eUpdateProxyRequest_TlsInterceptProperties                                            smithy.SchemaExtensions
+	eUpdateProxyRequest_UpdateToken                                                       smithy.SchemaExtensions
+	eUpdateProxyResponse                                                                  smithy.SchemaExtensions
+	eUpdateProxyResponse_Proxy                                                            smithy.SchemaExtensions
+	eUpdateProxyResponse_UpdateToken                                                      smithy.SchemaExtensions
+	eUpdateProxyRuleGroupPrioritiesRequest                                                smithy.SchemaExtensions
+	eUpdateProxyRuleGroupPrioritiesRequest_ProxyConfigurationName                         smithy.SchemaExtensions
+	eUpdateProxyRuleGroupPrioritiesRequest_ProxyConfigurationArn                          smithy.SchemaExtensions
+	eUpdateProxyRuleGroupPrioritiesRequest_RuleGroups                                     smithy.SchemaExtensions
+	eUpdateProxyRuleGroupPrioritiesRequest_UpdateToken                                    smithy.SchemaExtensions
+	eUpdateProxyRuleGroupPrioritiesResponse                                               smithy.SchemaExtensions
+	eUpdateProxyRuleGroupPrioritiesResponse_ProxyRuleGroups                               smithy.SchemaExtensions
+	eUpdateProxyRuleGroupPrioritiesResponse_UpdateToken                                   smithy.SchemaExtensions
+	eUpdateProxyRuleRequest                                                               smithy.SchemaExtensions
+	eUpdateProxyRuleRequest_ProxyRuleGroupName                                            smithy.SchemaExtensions
+	eUpdateProxyRuleRequest_ProxyRuleGroupArn                                             smithy.SchemaExtensions
+	eUpdateProxyRuleRequest_ProxyRuleName                                                 smithy.SchemaExtensions
+	eUpdateProxyRuleRequest_Description                                                   smithy.SchemaExtensions
+	eUpdateProxyRuleRequest_Action                                                        smithy.SchemaExtensions
+	eUpdateProxyRuleRequest_AddConditions                                                 smithy.SchemaExtensions
+	eUpdateProxyRuleRequest_RemoveConditions                                              smithy.SchemaExtensions
+	eUpdateProxyRuleRequest_UpdateToken                                                   smithy.SchemaExtensions
+	eUpdateProxyRuleResponse                                                              smithy.SchemaExtensions
+	eUpdateProxyRuleResponse_ProxyRule                                                    smithy.SchemaExtensions
+	eUpdateProxyRuleResponse_RemovedConditions                                            smithy.SchemaExtensions
+	eUpdateProxyRuleResponse_UpdateToken                                                  smithy.SchemaExtensions
+	eUpdateProxyRulePrioritiesRequest                                                     smithy.SchemaExtensions
+	eUpdateProxyRulePrioritiesRequest_ProxyRuleGroupName                                  smithy.SchemaExtensions
+	eUpdateProxyRulePrioritiesRequest_ProxyRuleGroupArn                                   smithy.SchemaExtensions
+	eUpdateProxyRulePrioritiesRequest_RuleGroupRequestPhase                               smithy.SchemaExtensions
+	eUpdateProxyRulePrioritiesRequest_Rules                                               smithy.SchemaExtensions
+	eUpdateProxyRulePrioritiesRequest_UpdateToken                                         smithy.SchemaExtensions
+	eUpdateProxyRulePrioritiesResponse                                                    smithy.SchemaExtensions
+	eUpdateProxyRulePrioritiesResponse_ProxyRuleGroupName                                 smithy.SchemaExtensions
+	eUpdateProxyRulePrioritiesResponse_ProxyRuleGroupArn                                  smithy.SchemaExtensions
+	eUpdateProxyRulePrioritiesResponse_RuleGroupRequestPhase                              smithy.SchemaExtensions
+	eUpdateProxyRulePrioritiesResponse_Rules                                              smithy.SchemaExtensions
+	eUpdateProxyRulePrioritiesResponse_UpdateToken                                        smithy.SchemaExtensions
+	eUpdateProxySettingsRequest                                                           smithy.SchemaExtensions
+	eUpdateProxySettingsRequest_FirewallArn                                               smithy.SchemaExtensions
+	eUpdateProxySettingsRequest_FirewallName                                              smithy.SchemaExtensions
+	eUpdateProxySettingsRequest_UpdateToken                                               smithy.SchemaExtensions
+	eUpdateProxySettingsRequest_ProxySettings                                             smithy.SchemaExtensions
+	eUpdateProxySettingsResponse                                                          smithy.SchemaExtensions
+	eUpdateProxySettingsResponse_FirewallArn                                              smithy.SchemaExtensions
+	eUpdateProxySettingsResponse_FirewallName                                             smithy.SchemaExtensions
+	eUpdateProxySettingsResponse_UpdateToken                                              smithy.SchemaExtensions
+	eUpdateProxySettingsResponse_ProxySettings                                            smithy.SchemaExtensions
+	eUpdateRuleGroupRequest                                                               smithy.SchemaExtensions
+	eUpdateRuleGroupRequest_UpdateToken                                                   smithy.SchemaExtensions
+	eUpdateRuleGroupRequest_RuleGroupArn                                                  smithy.SchemaExtensions
+	eUpdateRuleGroupRequest_RuleGroupName                                                 smithy.SchemaExtensions
+	eUpdateRuleGroupRequest_RuleGroup                                                     smithy.SchemaExtensions
+	eUpdateRuleGroupRequest_Rules                                                         smithy.SchemaExtensions
+	eUpdateRuleGroupRequest_Type                                                          smithy.SchemaExtensions
+	eUpdateRuleGroupRequest_Description                                                   smithy.SchemaExtensions
+	eUpdateRuleGroupRequest_DryRun                                                        smithy.SchemaExtensions
+	eUpdateRuleGroupRequest_EncryptionConfiguration                                       smithy.SchemaExtensions
+	eUpdateRuleGroupRequest_SourceMetadata                                                smithy.SchemaExtensions
+	eUpdateRuleGroupRequest_AnalyzeRuleGroup                                              smithy.SchemaExtensions
+	eUpdateRuleGroupRequest_SummaryConfiguration                                          smithy.SchemaExtensions
+	eUpdateRuleGroupResponse                                                              smithy.SchemaExtensions
+	eUpdateRuleGroupResponse_UpdateToken                                                  smithy.SchemaExtensions
+	eUpdateRuleGroupResponse_RuleGroupResponse                                            smithy.SchemaExtensions
+	eUpdateSubnetChangeProtectionRequest                                                  smithy.SchemaExtensions
+	eUpdateSubnetChangeProtectionRequest_UpdateToken                                      smithy.SchemaExtensions
+	eUpdateSubnetChangeProtectionRequest_FirewallArn                                      smithy.SchemaExtensions
+	eUpdateSubnetChangeProtectionRequest_FirewallName                                     smithy.SchemaExtensions
+	eUpdateSubnetChangeProtectionRequest_SubnetChangeProtection                           smithy.SchemaExtensions
+	eUpdateSubnetChangeProtectionResponse                                                 smithy.SchemaExtensions
+	eUpdateSubnetChangeProtectionResponse_UpdateToken                                     smithy.SchemaExtensions
+	eUpdateSubnetChangeProtectionResponse_FirewallArn                                     smithy.SchemaExtensions
+	eUpdateSubnetChangeProtectionResponse_FirewallName                                    smithy.SchemaExtensions
+	eUpdateSubnetChangeProtectionResponse_SubnetChangeProtection                          smithy.SchemaExtensions
+	eUpdateTLSInspectionConfigurationRequest                                              smithy.SchemaExtensions
+	eUpdateTLSInspectionConfigurationRequest_TLSInspectionConfigurationArn                smithy.SchemaExtensions
+	eUpdateTLSInspectionConfigurationRequest_TLSInspectionConfigurationName               smithy.SchemaExtensions
+	eUpdateTLSInspectionConfigurationRequest_TLSInspectionConfiguration                   smithy.SchemaExtensions
+	eUpdateTLSInspectionConfigurationRequest_Description                                  smithy.SchemaExtensions
+	eUpdateTLSInspectionConfigurationRequest_EncryptionConfiguration                      smithy.SchemaExtensions
+	eUpdateTLSInspectionConfigurationRequest_UpdateToken                                  smithy.SchemaExtensions
+	eUpdateTLSInspectionConfigurationResponse                                             smithy.SchemaExtensions
+	eUpdateTLSInspectionConfigurationResponse_UpdateToken                                 smithy.SchemaExtensions
+	eUpdateTLSInspectionConfigurationResponse_TLSInspectionConfigurationResponse          smithy.SchemaExtensions
+)
 
 var (
 	iAcceptNetworkFirewallTransitGatewayAttachment         = smithy.ShapeID{Namespace: "com.amazonaws.networkfirewall", Name: "AcceptNetworkFirewallTransitGatewayAttachment"}
@@ -1064,1805 +2861,1805 @@ var mUpdateSubnetChangeProtectionResponse = smithy.SchemaMembers{List: []*smithy
 var mUpdateTLSInspectionConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTLSInspectionConfigurationRequest_TLSInspectionConfigurationArn, &sUpdateTLSInspectionConfigurationRequest_TLSInspectionConfigurationName, &sUpdateTLSInspectionConfigurationRequest_TLSInspectionConfiguration, &sUpdateTLSInspectionConfigurationRequest_Description, &sUpdateTLSInspectionConfigurationRequest_EncryptionConfiguration, &sUpdateTLSInspectionConfigurationRequest_UpdateToken}}
 var mUpdateTLSInspectionConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTLSInspectionConfigurationResponse_UpdateToken, &sUpdateTLSInspectionConfigurationResponse_TLSInspectionConfigurationResponse}}
 
-var sAcceptNetworkFirewallTransitGatewayAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptNetworkFirewallTransitGatewayAttachment, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sAssociateAvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateAvailabilityZones, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sAssociateFirewallPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateFirewallPolicy, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sAssociateSubnets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateSubnets, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sAttachRuleGroupsToProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachRuleGroupsToProxyConfiguration, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sCreateContainerAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateContainerAssociation, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sCreateFirewall = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFirewall, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sCreateFirewallPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFirewallPolicy, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sCreateProxy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxy, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sCreateProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxyConfiguration, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sCreateProxyRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxyRuleGroup, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sCreateProxyRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxyRules, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sCreateRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRuleGroup, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sCreateTLSInspectionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTLSInspectionConfiguration, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sCreateVpcEndpointAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcEndpointAssociation, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sDeleteContainerAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteContainerAssociation, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sDeleteFirewall = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFirewall, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sDeleteFirewallPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFirewallPolicy, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sDeleteNetworkFirewallTransitGatewayAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNetworkFirewallTransitGatewayAttachment, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sDeleteProxy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxy, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var sDeleteProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxyConfiguration, Type: smithy.ShapeTypeOperation, Ext: &ext[20]})
-var sDeleteProxyRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxyRuleGroup, Type: smithy.ShapeTypeOperation, Ext: &ext[21]})
-var sDeleteProxyRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxyRules, Type: smithy.ShapeTypeOperation, Ext: &ext[22]})
-var sDeleteResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicy, Type: smithy.ShapeTypeOperation, Ext: &ext[23]})
-var sDeleteRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRuleGroup, Type: smithy.ShapeTypeOperation, Ext: &ext[24]})
-var sDeleteTLSInspectionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTLSInspectionConfiguration, Type: smithy.ShapeTypeOperation, Ext: &ext[25]})
-var sDeleteVpcEndpointAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVpcEndpointAssociation, Type: smithy.ShapeTypeOperation, Ext: &ext[26]})
-var sDescribeContainerAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeContainerAssociation, Type: smithy.ShapeTypeOperation, Ext: &ext[27]})
-var sDescribeFirewall = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFirewall, Type: smithy.ShapeTypeOperation, Ext: &ext[28]})
-var sDescribeFirewallMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFirewallMetadata, Type: smithy.ShapeTypeOperation, Ext: &ext[29]})
-var sDescribeFirewallPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFirewallPolicy, Type: smithy.ShapeTypeOperation, Ext: &ext[30]})
-var sDescribeFlowOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFlowOperation, Type: smithy.ShapeTypeOperation, Ext: &ext[31]})
-var sDescribeLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoggingConfiguration, Type: smithy.ShapeTypeOperation, Ext: &ext[32]})
-var sDescribeProxy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProxy, Type: smithy.ShapeTypeOperation, Ext: &ext[33]})
-var sDescribeProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProxyConfiguration, Type: smithy.ShapeTypeOperation, Ext: &ext[34]})
-var sDescribeProxyRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProxyRule, Type: smithy.ShapeTypeOperation, Ext: &ext[35]})
-var sDescribeProxyRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProxyRuleGroup, Type: smithy.ShapeTypeOperation, Ext: &ext[36]})
-var sDescribeResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeResourcePolicy, Type: smithy.ShapeTypeOperation, Ext: &ext[37]})
-var sDescribeRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuleGroup, Type: smithy.ShapeTypeOperation, Ext: &ext[38]})
-var sDescribeRuleGroupMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuleGroupMetadata, Type: smithy.ShapeTypeOperation, Ext: &ext[39]})
-var sDescribeRuleGroupSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuleGroupSummary, Type: smithy.ShapeTypeOperation, Ext: &ext[40]})
-var sDescribeTLSInspectionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTLSInspectionConfiguration, Type: smithy.ShapeTypeOperation, Ext: &ext[41]})
-var sDescribeVpcEndpointAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVpcEndpointAssociation, Type: smithy.ShapeTypeOperation, Ext: &ext[42]})
-var sDetachRuleGroupsFromProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetachRuleGroupsFromProxyConfiguration, Type: smithy.ShapeTypeOperation, Ext: &ext[43]})
-var sDisassociateAvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateAvailabilityZones, Type: smithy.ShapeTypeOperation, Ext: &ext[44]})
-var sDisassociateSubnets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateSubnets, Type: smithy.ShapeTypeOperation, Ext: &ext[45]})
-var sGetAnalysisReportResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAnalysisReportResults, Type: smithy.ShapeTypeOperation, Ext: &ext[46]})
-var sListAnalysisReports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAnalysisReports, Type: smithy.ShapeTypeOperation, Ext: &ext[47]})
-var sListContainerAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListContainerAssociations, Type: smithy.ShapeTypeOperation, Ext: &ext[48]})
-var sListFirewallPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFirewallPolicies, Type: smithy.ShapeTypeOperation, Ext: &ext[49]})
-var sListFirewalls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFirewalls, Type: smithy.ShapeTypeOperation, Ext: &ext[50]})
-var sListFlowOperationResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFlowOperationResults, Type: smithy.ShapeTypeOperation, Ext: &ext[51]})
-var sListFlowOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFlowOperations, Type: smithy.ShapeTypeOperation, Ext: &ext[52]})
-var sListProxies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProxies, Type: smithy.ShapeTypeOperation, Ext: &ext[53]})
-var sListProxyConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProxyConfigurations, Type: smithy.ShapeTypeOperation, Ext: &ext[54]})
-var sListProxyRuleGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProxyRuleGroups, Type: smithy.ShapeTypeOperation, Ext: &ext[55]})
-var sListRuleGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleGroups, Type: smithy.ShapeTypeOperation, Ext: &ext[56]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &ext[57]})
-var sListTLSInspectionConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTLSInspectionConfigurations, Type: smithy.ShapeTypeOperation, Ext: &ext[58]})
-var sListVpcEndpointAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcEndpointAssociations, Type: smithy.ShapeTypeOperation, Ext: &ext[59]})
-var sPutResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicy, Type: smithy.ShapeTypeOperation, Ext: &ext[60]})
-var sRejectNetworkFirewallTransitGatewayAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectNetworkFirewallTransitGatewayAttachment, Type: smithy.ShapeTypeOperation, Ext: &ext[61]})
-var sStartAnalysisReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAnalysisReport, Type: smithy.ShapeTypeOperation, Ext: &ext[62]})
-var sStartFlowCapture = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFlowCapture, Type: smithy.ShapeTypeOperation, Ext: &ext[63]})
-var sStartFlowFlush = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFlowFlush, Type: smithy.ShapeTypeOperation, Ext: &ext[64]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[65]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[66]})
-var sUpdateAvailabilityZoneChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAvailabilityZoneChangeProtection, Type: smithy.ShapeTypeOperation, Ext: &ext[67]})
-var sUpdateContainerAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateContainerAssociation, Type: smithy.ShapeTypeOperation, Ext: &ext[68]})
-var sUpdateFirewallAnalysisSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallAnalysisSettings, Type: smithy.ShapeTypeOperation, Ext: &ext[69]})
-var sUpdateFirewallDeleteProtection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallDeleteProtection, Type: smithy.ShapeTypeOperation, Ext: &ext[70]})
-var sUpdateFirewallDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallDescription, Type: smithy.ShapeTypeOperation, Ext: &ext[71]})
-var sUpdateFirewallEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallEncryptionConfiguration, Type: smithy.ShapeTypeOperation, Ext: &ext[72]})
-var sUpdateFirewallPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallPolicy, Type: smithy.ShapeTypeOperation, Ext: &ext[73]})
-var sUpdateFirewallPolicyChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallPolicyChangeProtection, Type: smithy.ShapeTypeOperation, Ext: &ext[74]})
-var sUpdateLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLoggingConfiguration, Type: smithy.ShapeTypeOperation, Ext: &ext[75]})
-var sUpdateProxy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxy, Type: smithy.ShapeTypeOperation, Ext: &ext[76]})
-var sUpdateProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyConfiguration, Type: smithy.ShapeTypeOperation, Ext: &ext[77]})
-var sUpdateProxyRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyRule, Type: smithy.ShapeTypeOperation, Ext: &ext[78]})
-var sUpdateProxyRuleGroupPriorities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyRuleGroupPriorities, Type: smithy.ShapeTypeOperation, Ext: &ext[79]})
-var sUpdateProxyRulePriorities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyRulePriorities, Type: smithy.ShapeTypeOperation, Ext: &ext[80]})
-var sUpdateProxySettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxySettings, Type: smithy.ShapeTypeOperation, Ext: &ext[81]})
-var sUpdateRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRuleGroup, Type: smithy.ShapeTypeOperation, Ext: &ext[82]})
-var sUpdateSubnetChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubnetChangeProtection, Type: smithy.ShapeTypeOperation, Ext: &ext[83]})
-var sUpdateTLSInspectionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTLSInspectionConfiguration, Type: smithy.ShapeTypeOperation, Ext: &ext[84]})
-var s_NetworkFirewall_20201112 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkFirewall_20201112, Type: smithy.ShapeTypeService, Ext: &ext[85]})
-var sActionDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionDefinition, Members: &mActionDefinition, Type: smithy.ShapeTypeStructure, Ext: &ext[86]})
-var s_ActionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &ext[88]})
-var sAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &ext[89]})
-var s_AddressDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddressDefinition, Type: smithy.ShapeTypeString, Ext: &ext[91]})
-var s_Addresses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Addresses, Members: &m_Addresses, Type: smithy.ShapeTypeList, Ext: &ext[92]})
-var s_Age = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Age, Type: smithy.ShapeTypeInteger, Ext: &ext[94]})
-var sAnalysisReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalysisReport, Members: &mAnalysisReport, Type: smithy.ShapeTypeStructure, Ext: &ext[95]})
-var s_AnalysisReportId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnalysisReportId, Type: smithy.ShapeTypeString, Ext: &ext[100]})
-var s_AnalysisReportNextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnalysisReportNextToken, Type: smithy.ShapeTypeString, Ext: &ext[101]})
-var s_AnalysisReportResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnalysisReportResults, Members: &m_AnalysisReportResults, Type: smithy.ShapeTypeList, Ext: &ext[102]})
-var s_AnalysisReports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnalysisReports, Members: &m_AnalysisReports, Type: smithy.ShapeTypeList, Ext: &ext[104]})
-var sAnalysisResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalysisResult, Members: &mAnalysisResult, Type: smithy.ShapeTypeStructure, Ext: &ext[106]})
-var s_AnalysisResultList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnalysisResultList, Members: &m_AnalysisResultList, Type: smithy.ShapeTypeList, Ext: &ext[110]})
-var sAnalysisTypeReportResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalysisTypeReportResult, Members: &mAnalysisTypeReportResult, Type: smithy.ShapeTypeStructure, Ext: &ext[112]})
-var s_AssociationSyncState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociationSyncState, Members: &m_AssociationSyncState, Type: smithy.ShapeTypeMap, Ext: &ext[119]})
-var sAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure, Ext: &ext[122]})
-var s_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttachmentId, Type: smithy.ShapeTypeString, Ext: &ext[128]})
-var sAttachmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachmentStatus, Members: &mAttachmentStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[129]})
-var s_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[136]})
-var s_AvailabilityZoneId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZoneId, Type: smithy.ShapeTypeString, Ext: &ext[137]})
-var sAvailabilityZoneMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAvailabilityZoneMapping, Members: &mAvailabilityZoneMapping, Type: smithy.ShapeTypeStructure, Ext: &ext[138]})
-var s_AvailabilityZoneMappings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZoneMappings, Members: &m_AvailabilityZoneMappings, Type: smithy.ShapeTypeList, Ext: &ext[140]})
-var s_AvailabilityZoneMappingString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZoneMappingString, Type: smithy.ShapeTypeString, Ext: &ext[142]})
-var sAvailabilityZoneMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAvailabilityZoneMetadata, Members: &mAvailabilityZoneMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[143]})
-var s_AWSAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSAccountId, Type: smithy.ShapeTypeString, Ext: &ext[145]})
-var s_AzSubnet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AzSubnet, Type: smithy.ShapeTypeString, Ext: &ext[146]})
-var s_AzSubnets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AzSubnets, Members: &m_AzSubnets, Type: smithy.ShapeTypeList, Ext: &ext[147]})
-var sAZSyncState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAZSyncState, Members: &mAZSyncState, Type: smithy.ShapeTypeStructure, Ext: &ext[149]})
-var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[151]})
-var s_ByteCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ByteCount, Type: smithy.ShapeTypeLong, Ext: &ext[152]})
-var sCapacityUsageSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacityUsageSummary, Members: &mCapacityUsageSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[153]})
-var s_Certificates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Certificates, Members: &m_Certificates, Type: smithy.ShapeTypeList, Ext: &ext[155]})
-var sCheckCertificateRevocationStatusActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCheckCertificateRevocationStatusActions, Members: &mCheckCertificateRevocationStatusActions, Type: smithy.ShapeTypeStructure, Ext: &ext[157]})
-var s_CIDRCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CIDRCount, Type: smithy.ShapeTypeInteger, Ext: &ext[160]})
-var sCIDRSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCIDRSummary, Members: &mCIDRSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[161]})
-var s_CollectionMember_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectionMember_String, Type: smithy.ShapeTypeString, Ext: &ext[165]})
-var s_ConditionKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConditionKey, Type: smithy.ShapeTypeString, Ext: &ext[166]})
-var s_ConditionOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConditionOperator, Type: smithy.ShapeTypeString, Ext: &ext[167]})
-var sConfigurationSyncState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationSyncState, Members: &mConfigurationSyncState, Type: smithy.ShapeTypeEnum, Ext: &ext[168]})
-var s_ContainerAssociationLastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerAssociationLastUpdatedTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[172]})
-var s_ContainerAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerAssociations, Members: &m_ContainerAssociations, Type: smithy.ShapeTypeList, Ext: &ext[173]})
-var sContainerAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerAssociationStatus, Members: &mContainerAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[175]})
-var sContainerAssociationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerAssociationSummary, Members: &mContainerAssociationSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[180]})
-var sContainerAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerAttribute, Members: &mContainerAttribute, Type: smithy.ShapeTypeStructure, Ext: &ext[183]})
-var s_ContainerAttributeKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerAttributeKey, Type: smithy.ShapeTypeString, Ext: &ext[186]})
-var s_ContainerAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerAttributes, Members: &m_ContainerAttributes, Type: smithy.ShapeTypeList, Ext: &ext[187]})
-var s_ContainerAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerAttributeValue, Type: smithy.ShapeTypeString, Ext: &ext[189]})
-var sContainerMonitoringConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerMonitoringConfiguration, Members: &mContainerMonitoringConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[190]})
-var s_ContainerMonitoringConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerMonitoringConfigurations, Members: &m_ContainerMonitoringConfigurations, Type: smithy.ShapeTypeList, Ext: &ext[193]})
-var sContainerMonitoringType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerMonitoringType, Members: &mContainerMonitoringType, Type: smithy.ShapeTypeEnum, Ext: &ext[195]})
-var s_Count = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &ext[198]})
-var sCreateProxyRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxyRule, Members: &mCreateProxyRule, Type: smithy.ShapeTypeStructure, Ext: &ext[199]})
-var s_CreateProxyRuleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateProxyRuleList, Members: &m_CreateProxyRuleList, Type: smithy.ShapeTypeList, Ext: &ext[205]})
-var sCreateProxyRulesByRequestPhase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxyRulesByRequestPhase, Members: &mCreateProxyRulesByRequestPhase, Type: smithy.ShapeTypeStructure, Ext: &ext[207]})
-var s_CreateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[211]})
-var sCustomAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomAction, Members: &mCustomAction, Type: smithy.ShapeTypeStructure, Ext: &ext[212]})
-var s_CustomActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomActions, Members: &m_CustomActions, Type: smithy.ShapeTypeList, Ext: &ext[215]})
-var s_DeepThreatInspection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeepThreatInspection, Type: smithy.ShapeTypeBoolean, Ext: &ext[217]})
-var s_DeleteTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeleteTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[218]})
-var sDescribeProxyResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProxyResource, Members: &mDescribeProxyResource, Type: smithy.ShapeTypeStructure, Ext: &ext[219]})
-var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[237]})
-var s_Destination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Destination, Type: smithy.ShapeTypeString, Ext: &ext[238]})
-var sDimension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeStructure, Ext: &ext[239]})
-var s_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList, Ext: &ext[241]})
-var s_DimensionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionValue, Type: smithy.ShapeTypeString, Ext: &ext[243]})
-var sDNSExpiryExceptionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDNSExpiryExceptionPolicy, Members: &mDNSExpiryExceptionPolicy, Type: smithy.ShapeTypeEnum, Ext: &ext[244]})
-var s_DNSFirewallRuleGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DNSFirewallRuleGroupId, Type: smithy.ShapeTypeString, Ext: &ext[248]})
-var s_DnsName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DnsName, Type: smithy.ShapeTypeString, Ext: &ext[249]})
-var s_Domain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Domain, Type: smithy.ShapeTypeString, Ext: &ext[250]})
-var sEnabledAnalysisType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledAnalysisType, Members: &mEnabledAnalysisType, Type: smithy.ShapeTypeEnum, Ext: &ext[251]})
-var s_EnabledAnalysisTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledAnalysisTypes, Members: &m_EnabledAnalysisTypes, Type: smithy.ShapeTypeList, Ext: &ext[254]})
-var s_EnableMonitoringDashboard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnableMonitoringDashboard, Type: smithy.ShapeTypeBoolean, Ext: &ext[256]})
-var s_EnableTLSSessionHolding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnableTLSSessionHolding, Type: smithy.ShapeTypeBoolean, Ext: &ext[257]})
-var sEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[258]})
-var sEncryptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum, Ext: &ext[261]})
-var s_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndpointId, Type: smithy.ShapeTypeString, Ext: &ext[264]})
-var s_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[265]})
-var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[266]})
-var s_FailureCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailureCode, Type: smithy.ShapeTypeString, Ext: &ext[267]})
-var s_FailureMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailureMessage, Type: smithy.ShapeTypeString, Ext: &ext[268]})
-var sFirewall = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewall, Members: &mFirewall, Type: smithy.ShapeTypeStructure, Ext: &ext[269]})
-var sFirewallMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallMetadata, Members: &mFirewallMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[292]})
-var s_FirewallPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FirewallPolicies, Members: &m_FirewallPolicies, Type: smithy.ShapeTypeList, Ext: &ext[296]})
-var sFirewallPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallPolicy, Members: &mFirewallPolicy, Type: smithy.ShapeTypeStructure, Ext: &ext[298]})
-var sFirewallPolicyError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallPolicyError, Members: &mFirewallPolicyError, Type: smithy.ShapeTypeStructure, Ext: &ext[310]})
-var sFirewallPolicyErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallPolicyErrorCode, Members: &mFirewallPolicyErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[314]})
-var s_FirewallPolicyErrorResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FirewallPolicyErrorResourceId, Type: smithy.ShapeTypeString, Ext: &ext[317]})
-var s_FirewallPolicyErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FirewallPolicyErrors, Members: &m_FirewallPolicyErrors, Type: smithy.ShapeTypeList, Ext: &ext[318]})
-var sFirewallPolicyMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallPolicyMetadata, Members: &mFirewallPolicyMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[320]})
-var sFirewallPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallPolicyResponse, Members: &mFirewallPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[323]})
-var s_Firewalls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Firewalls, Members: &m_Firewalls, Type: smithy.ShapeTypeList, Ext: &ext[338]})
-var sFirewallStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallStatus, Members: &mFirewallStatus, Type: smithy.ShapeTypeStructure, Ext: &ext[340]})
-var sFirewallStatusValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallStatusValue, Members: &mFirewallStatusValue, Type: smithy.ShapeTypeEnum, Ext: &ext[346]})
-var s_FirstAccessed = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FirstAccessed, Type: smithy.ShapeTypeTimestamp, Ext: &ext[351]})
-var s_Flags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Flags, Members: &m_Flags, Type: smithy.ShapeTypeList, Ext: &ext[352]})
-var sFlow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFlow, Members: &mFlow, Type: smithy.ShapeTypeStructure, Ext: &ext[354]})
-var sFlowFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFlowFilter, Members: &mFlowFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[363]})
-var s_FlowFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FlowFilters, Members: &m_FlowFilters, Type: smithy.ShapeTypeList, Ext: &ext[369]})
-var sFlowOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFlowOperation, Members: &mFlowOperation, Type: smithy.ShapeTypeStructure, Ext: &ext[371]})
-var s_FlowOperationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FlowOperationId, Type: smithy.ShapeTypeString, Ext: &ext[374]})
-var sFlowOperationMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFlowOperationMetadata, Members: &mFlowOperationMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[375]})
-var s_FlowOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FlowOperations, Members: &m_FlowOperations, Type: smithy.ShapeTypeList, Ext: &ext[380]})
-var sFlowOperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFlowOperationStatus, Members: &mFlowOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[382]})
-var sFlowOperationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFlowOperationType, Members: &mFlowOperationType, Type: smithy.ShapeTypeEnum, Ext: &ext[387]})
-var s_FlowRequestTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FlowRequestTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[390]})
-var s_Flows = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Flows, Members: &m_Flows, Type: smithy.ShapeTypeList, Ext: &ext[391]})
-var sFlowTimeouts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFlowTimeouts, Members: &mFlowTimeouts, Type: smithy.ShapeTypeStructure, Ext: &ext[393]})
-var sGeneratedRulesType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeneratedRulesType, Members: &mGeneratedRulesType, Type: smithy.ShapeTypeEnum, Ext: &ext[395]})
-var s_HashMapKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HashMapKey, Type: smithy.ShapeTypeString, Ext: &ext[400]})
-var s_HashMapValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HashMapValue, Type: smithy.ShapeTypeString, Ext: &ext[401]})
-var sHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHeader, Members: &mHeader, Type: smithy.ShapeTypeStructure, Ext: &ext[402]})
-var sHits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHits, Members: &mHits, Type: smithy.ShapeTypeStructure, Ext: &ext[409]})
-var sIdentifiedType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentifiedType, Members: &mIdentifiedType, Type: smithy.ShapeTypeEnum, Ext: &ext[411]})
-var s_InsertPosition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsertPosition, Type: smithy.ShapeTypeInteger, Ext: &ext[414]})
-var sInsufficientCapacityException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsufficientCapacityException, Members: &mInsufficientCapacityException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[415]})
-var sInternalServerError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerError, Members: &mInternalServerError, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[417]})
-var sInvalidOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidOperationException, Members: &mInvalidOperationException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[419]})
-var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[421]})
-var sInvalidResourcePolicyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidResourcePolicyException, Members: &mInvalidResourcePolicyException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[423]})
-var sInvalidTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTokenException, Members: &mInvalidTokenException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[425]})
-var sIPAddressType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIPAddressType, Members: &mIPAddressType, Type: smithy.ShapeTypeEnum, Ext: &ext[427]})
-var sIPSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIPSet, Members: &mIPSet, Type: smithy.ShapeTypeStructure, Ext: &ext[431]})
-var s_IPSetArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPSetArn, Type: smithy.ShapeTypeString, Ext: &ext[433]})
-var sIPSetMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIPSetMetadata, Members: &mIPSetMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[434]})
-var s_IPSetMetadataMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPSetMetadataMap, Members: &m_IPSetMetadataMap, Type: smithy.ShapeTypeMap, Ext: &ext[436]})
-var sIPSetReference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIPSetReference, Members: &mIPSetReference, Type: smithy.ShapeTypeStructure, Ext: &ext[439]})
-var s_IPSetReferenceMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPSetReferenceMap, Members: &m_IPSetReferenceMap, Type: smithy.ShapeTypeMap, Ext: &ext[441]})
-var s_IPSetReferenceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPSetReferenceName, Type: smithy.ShapeTypeString, Ext: &ext[444]})
-var s_IPSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPSets, Members: &m_IPSets, Type: smithy.ShapeTypeMap, Ext: &ext[445]})
-var s_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyId, Type: smithy.ShapeTypeString, Ext: &ext[448]})
-var s_Keyword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Keyword, Type: smithy.ShapeTypeString, Ext: &ext[449]})
-var s_LastAccessed = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastAccessed, Type: smithy.ShapeTypeTimestamp, Ext: &ext[450]})
-var s_LastUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastUpdateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[451]})
-var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[452]})
-var s_ListenerProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListenerProperties, Members: &m_ListenerProperties, Type: smithy.ShapeTypeList, Ext: &ext[454]})
-var s_ListenerPropertiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListenerPropertiesRequest, Members: &m_ListenerPropertiesRequest, Type: smithy.ShapeTypeList, Ext: &ext[456]})
-var sListenerProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListenerProperty, Members: &mListenerProperty, Type: smithy.ShapeTypeStructure, Ext: &ext[458]})
-var sListenerPropertyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListenerPropertyRequest, Members: &mListenerPropertyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[461]})
-var sListenerPropertyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListenerPropertyType, Members: &mListenerPropertyType, Type: smithy.ShapeTypeEnum, Ext: &ext[464]})
-var s_ListingName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListingName, Type: smithy.ShapeTypeString, Ext: &ext[467]})
-var sLogDestinationConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogDestinationConfig, Members: &mLogDestinationConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[468]})
-var s_LogDestinationConfigs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogDestinationConfigs, Members: &m_LogDestinationConfigs, Type: smithy.ShapeTypeList, Ext: &ext[472]})
-var s_LogDestinationMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogDestinationMap, Members: &m_LogDestinationMap, Type: smithy.ShapeTypeMap, Ext: &ext[474]})
-var sLogDestinationPermissionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogDestinationPermissionException, Members: &mLogDestinationPermissionException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[477]})
-var sLogDestinationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogDestinationType, Members: &mLogDestinationType, Type: smithy.ShapeTypeEnum, Ext: &ext[479]})
-var sLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoggingConfiguration, Members: &mLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[483]})
-var sLogType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogType, Members: &mLogType, Type: smithy.ShapeTypeEnum, Ext: &ext[485]})
-var sMatchAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMatchAttributes, Members: &mMatchAttributes, Type: smithy.ShapeTypeStructure, Ext: &ext[489]})
-var sNatGatewayAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNatGatewayAttachment, Members: &mNatGatewayAttachment, Type: smithy.ShapeTypeStructure, Ext: &ext[496]})
-var s_NatGatewayAttachmentsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NatGatewayAttachmentsList, Members: &m_NatGatewayAttachmentsList, Type: smithy.ShapeTypeList, Ext: &ext[501]})
-var sNatGatewayAttachmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNatGatewayAttachmentStatus, Members: &mNatGatewayAttachmentStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[503]})
-var s_NatGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NatGatewayId, Type: smithy.ShapeTypeString, Ext: &ext[509]})
-var sNatGatewayMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNatGatewayMapping, Members: &mNatGatewayMapping, Type: smithy.ShapeTypeStructure, Ext: &ext[510]})
-var s_NatGatewayMappingsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NatGatewayMappingsList, Members: &m_NatGatewayMappingsList, Type: smithy.ShapeTypeList, Ext: &ext[512]})
-var s_NatGatewayPort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NatGatewayPort, Type: smithy.ShapeTypeInteger, Ext: &ext[514]})
-var s_NumberOfAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberOfAssociations, Type: smithy.ShapeTypeInteger, Ext: &ext[515]})
-var sOverrideAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOverrideAction, Members: &mOverrideAction, Type: smithy.ShapeTypeEnum, Ext: &ext[516]})
-var s_PacketCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PacketCount, Type: smithy.ShapeTypeInteger, Ext: &ext[518]})
-var s_PaginationMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[519]})
-var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[520]})
-var sPerObjectStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPerObjectStatus, Members: &mPerObjectStatus, Type: smithy.ShapeTypeStructure, Ext: &ext[521]})
-var sPerObjectSyncStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPerObjectSyncStatus, Members: &mPerObjectSyncStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[524]})
-var s_PolicyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyString, Type: smithy.ShapeTypeString, Ext: &ext[530]})
-var sPolicyVariables = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyVariables, Members: &mPolicyVariables, Type: smithy.ShapeTypeStructure, Ext: &ext[531]})
-var s_Port = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Port, Type: smithy.ShapeTypeString, Ext: &ext[533]})
-var sPortRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPortRange, Members: &mPortRange, Type: smithy.ShapeTypeStructure, Ext: &ext[534]})
-var s_PortRangeBound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PortRangeBound, Type: smithy.ShapeTypeInteger, Ext: &ext[537]})
-var s_PortRanges = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PortRanges, Members: &m_PortRanges, Type: smithy.ShapeTypeList, Ext: &ext[538]})
-var sPortSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPortSet, Members: &mPortSet, Type: smithy.ShapeTypeStructure, Ext: &ext[540]})
-var s_PortSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PortSets, Members: &m_PortSets, Type: smithy.ShapeTypeMap, Ext: &ext[542]})
-var s_Priority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Priority, Type: smithy.ShapeTypeInteger, Ext: &ext[545]})
-var s_PrivateDNSName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrivateDNSName, Type: smithy.ShapeTypeString, Ext: &ext[546]})
-var s_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProductId, Type: smithy.ShapeTypeString, Ext: &ext[547]})
-var s_ProtocolNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProtocolNumber, Type: smithy.ShapeTypeInteger, Ext: &ext[548]})
-var s_ProtocolNumbers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProtocolNumbers, Members: &m_ProtocolNumbers, Type: smithy.ShapeTypeList, Ext: &ext[549]})
-var s_ProtocolString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProtocolString, Type: smithy.ShapeTypeString, Ext: &ext[551]})
-var s_ProtocolStrings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProtocolStrings, Members: &m_ProtocolStrings, Type: smithy.ShapeTypeList, Ext: &ext[552]})
-var s_Proxies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Proxies, Members: &m_Proxies, Type: smithy.ShapeTypeList, Ext: &ext[554]})
-var sProxy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxy, Members: &mProxy, Type: smithy.ShapeTypeStructure, Ext: &ext[556]})
-var s_ProxyConditionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyConditionValue, Type: smithy.ShapeTypeString, Ext: &ext[572]})
-var s_ProxyConditionValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyConditionValueList, Members: &m_ProxyConditionValueList, Type: smithy.ShapeTypeList, Ext: &ext[573]})
-var sProxyConfigDefaultRulePhaseActionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyConfigDefaultRulePhaseActionsRequest, Members: &mProxyConfigDefaultRulePhaseActionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[575]})
-var sProxyConfigRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyConfigRuleGroup, Members: &mProxyConfigRuleGroup, Type: smithy.ShapeTypeStructure, Ext: &ext[579]})
-var s_ProxyConfigRuleGroupPriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyConfigRuleGroupPriority, Type: smithy.ShapeTypeInteger, Ext: &ext[584]})
-var s_ProxyConfigRuleGroupSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyConfigRuleGroupSet, Members: &m_ProxyConfigRuleGroupSet, Type: smithy.ShapeTypeList, Ext: &ext[585]})
-var s_ProxyConfigRuleGroupType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyConfigRuleGroupType, Type: smithy.ShapeTypeString, Ext: &ext[587]})
-var sProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyConfiguration, Members: &mProxyConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[588]})
-var sProxyConfigurationMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyConfigurationMetadata, Members: &mProxyConfigurationMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[597]})
-var s_ProxyConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyConfigurations, Members: &m_ProxyConfigurations, Type: smithy.ShapeTypeList, Ext: &ext[600]})
-var sProxyMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyMetadata, Members: &mProxyMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[602]})
-var sProxyModifyState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyModifyState, Members: &mProxyModifyState, Type: smithy.ShapeTypeEnum, Ext: &ext[605]})
-var sProxyRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyRule, Members: &mProxyRule, Type: smithy.ShapeTypeStructure, Ext: &ext[609]})
-var sProxyRuleCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyRuleCondition, Members: &mProxyRuleCondition, Type: smithy.ShapeTypeStructure, Ext: &ext[614]})
-var s_ProxyRuleConditionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyRuleConditionList, Members: &m_ProxyRuleConditionList, Type: smithy.ShapeTypeList, Ext: &ext[618]})
-var sProxyRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyRuleGroup, Members: &mProxyRuleGroup, Type: smithy.ShapeTypeStructure, Ext: &ext[620]})
-var sProxyRuleGroupAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyRuleGroupAttachment, Members: &mProxyRuleGroupAttachment, Type: smithy.ShapeTypeStructure, Ext: &ext[628]})
-var s_ProxyRuleGroupAttachmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyRuleGroupAttachmentList, Members: &m_ProxyRuleGroupAttachmentList, Type: smithy.ShapeTypeList, Ext: &ext[631]})
-var sProxyRuleGroupMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyRuleGroupMetadata, Members: &mProxyRuleGroupMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[633]})
-var sProxyRuleGroupPriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyRuleGroupPriority, Members: &mProxyRuleGroupPriority, Type: smithy.ShapeTypeStructure, Ext: &ext[636]})
-var s_ProxyRuleGroupPriorityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyRuleGroupPriorityList, Members: &m_ProxyRuleGroupPriorityList, Type: smithy.ShapeTypeList, Ext: &ext[639]})
-var sProxyRuleGroupPriorityResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyRuleGroupPriorityResult, Members: &mProxyRuleGroupPriorityResult, Type: smithy.ShapeTypeStructure, Ext: &ext[641]})
-var s_ProxyRuleGroupPriorityResultList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyRuleGroupPriorityResultList, Members: &m_ProxyRuleGroupPriorityResultList, Type: smithy.ShapeTypeList, Ext: &ext[644]})
-var s_ProxyRuleGroupPriorityResultPriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyRuleGroupPriorityResultPriority, Type: smithy.ShapeTypeInteger, Ext: &ext[646]})
-var s_ProxyRuleGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyRuleGroups, Members: &m_ProxyRuleGroups, Type: smithy.ShapeTypeList, Ext: &ext[647]})
-var s_ProxyRuleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyRuleList, Members: &m_ProxyRuleList, Type: smithy.ShapeTypeList, Ext: &ext[649]})
-var sProxyRulePhaseAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyRulePhaseAction, Members: &mProxyRulePhaseAction, Type: smithy.ShapeTypeEnum, Ext: &ext[651]})
-var sProxyRulePriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyRulePriority, Members: &mProxyRulePriority, Type: smithy.ShapeTypeStructure, Ext: &ext[655]})
-var s_ProxyRulePriorityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyRulePriorityList, Members: &m_ProxyRulePriorityList, Type: smithy.ShapeTypeList, Ext: &ext[658]})
-var sProxyRulesByRequestPhase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyRulesByRequestPhase, Members: &mProxyRulesByRequestPhase, Type: smithy.ShapeTypeStructure, Ext: &ext[660]})
-var sProxySettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxySettings, Members: &mProxySettings, Type: smithy.ShapeTypeStructure, Ext: &ext[664]})
-var sProxyState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyState, Members: &mProxyState, Type: smithy.ShapeTypeEnum, Ext: &ext[666]})
-var sPublishMetricAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishMetricAction, Members: &mPublishMetricAction, Type: smithy.ShapeTypeStructure, Ext: &ext[673]})
-var sReferenceSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReferenceSets, Members: &mReferenceSets, Type: smithy.ShapeTypeStructure, Ext: &ext[675]})
-var s_ReportTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[677]})
-var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[678]})
-var s_ResourceArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList, Ext: &ext[679]})
-var s_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &ext[681]})
-var sResourceManagedStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceManagedStatus, Members: &mResourceManagedStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[682]})
-var sResourceManagedType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceManagedType, Members: &mResourceManagedType, Type: smithy.ShapeTypeEnum, Ext: &ext[685]})
-var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[690]})
-var s_ResourceNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceNameList, Members: &m_ResourceNameList, Type: smithy.ShapeTypeList, Ext: &ext[691]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[693]})
-var sResourceOwnerCheckException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceOwnerCheckException, Members: &mResourceOwnerCheckException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[695]})
-var sResourceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceStatus, Members: &mResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[697]})
-var s_ResourceStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceStatusMessage, Type: smithy.ShapeTypeString, Ext: &ext[702]})
-var sRevocationCheckAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevocationCheckAction, Members: &mRevocationCheckAction, Type: smithy.ShapeTypeEnum, Ext: &ext[703]})
-var sRoute53ResolvedIPValidation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoute53ResolvedIPValidation, Members: &mRoute53ResolvedIPValidation, Type: smithy.ShapeTypeStructure, Ext: &ext[707]})
-var sRoute53ResolvedIPValidationAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoute53ResolvedIPValidationAction, Members: &mRoute53ResolvedIPValidationAction, Type: smithy.ShapeTypeEnum, Ext: &ext[713]})
-var s_Route53ResolvedIPValidationAddresses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Route53ResolvedIPValidationAddresses, Members: &m_Route53ResolvedIPValidationAddresses, Type: smithy.ShapeTypeList, Ext: &ext[717]})
-var s_RuleCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleCapacity, Type: smithy.ShapeTypeInteger, Ext: &ext[719]})
-var sRuleDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleDefinition, Members: &mRuleDefinition, Type: smithy.ShapeTypeStructure, Ext: &ext[720]})
-var sRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleGroup, Members: &mRuleGroup, Type: smithy.ShapeTypeStructure, Ext: &ext[723]})
-var sRuleGroupMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleGroupMetadata, Members: &mRuleGroupMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[728]})
-var sRuleGroupRequestPhase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleGroupRequestPhase, Members: &mRuleGroupRequestPhase, Type: smithy.ShapeTypeEnum, Ext: &ext[732]})
-var sRuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleGroupResponse, Members: &mRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[736]})
-var s_RuleGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleGroups, Members: &m_RuleGroups, Type: smithy.ShapeTypeList, Ext: &ext[753]})
-var sRuleGroupType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleGroupType, Members: &mRuleGroupType, Type: smithy.ShapeTypeEnum, Ext: &ext[755]})
-var s_RuleIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleIdList, Members: &m_RuleIdList, Type: smithy.ShapeTypeList, Ext: &ext[759]})
-var sRuleOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleOption, Members: &mRuleOption, Type: smithy.ShapeTypeStructure, Ext: &ext[761]})
-var s_RuleOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleOptions, Members: &m_RuleOptions, Type: smithy.ShapeTypeList, Ext: &ext[764]})
-var sRuleOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleOrder, Members: &mRuleOrder, Type: smithy.ShapeTypeEnum, Ext: &ext[766]})
-var sRulesSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRulesSource, Members: &mRulesSource, Type: smithy.ShapeTypeStructure, Ext: &ext[769]})
-var sRulesSourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRulesSourceList, Members: &mRulesSourceList, Type: smithy.ShapeTypeStructure, Ext: &ext[774]})
-var s_RulesString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RulesString, Type: smithy.ShapeTypeString, Ext: &ext[778]})
-var s_RuleSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleSummaries, Members: &m_RuleSummaries, Type: smithy.ShapeTypeList, Ext: &ext[779]})
-var sRuleSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleSummary, Members: &mRuleSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[781]})
-var s_RuleTargets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleTargets, Members: &m_RuleTargets, Type: smithy.ShapeTypeList, Ext: &ext[785]})
-var s_RuleVariableName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleVariableName, Type: smithy.ShapeTypeString, Ext: &ext[787]})
-var sRuleVariables = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleVariables, Members: &mRuleVariables, Type: smithy.ShapeTypeStructure, Ext: &ext[788]})
-var sServerCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerCertificate, Members: &mServerCertificate, Type: smithy.ShapeTypeStructure, Ext: &ext[791]})
-var sServerCertificateConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerCertificateConfiguration, Members: &mServerCertificateConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[793]})
-var s_ServerCertificateConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServerCertificateConfigurations, Members: &m_ServerCertificateConfigurations, Type: smithy.ShapeTypeList, Ext: &ext[798]})
-var s_ServerCertificates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServerCertificates, Members: &m_ServerCertificates, Type: smithy.ShapeTypeList, Ext: &ext[800]})
-var sServerCertificateScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerCertificateScope, Members: &mServerCertificateScope, Type: smithy.ShapeTypeStructure, Ext: &ext[802]})
-var s_ServerCertificateScopes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServerCertificateScopes, Members: &m_ServerCertificateScopes, Type: smithy.ShapeTypeList, Ext: &ext[808]})
-var s_Setting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Setting, Type: smithy.ShapeTypeString, Ext: &ext[810]})
-var s_Settings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Settings, Members: &m_Settings, Type: smithy.ShapeTypeList, Ext: &ext[811]})
-var s_Source = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Source, Type: smithy.ShapeTypeString, Ext: &ext[813]})
-var sSourceMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceMetadata, Members: &mSourceMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[814]})
-var s_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[817]})
-var sStatefulAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatefulAction, Members: &mStatefulAction, Type: smithy.ShapeTypeEnum, Ext: &ext[818]})
-var s_StatefulActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatefulActions, Members: &m_StatefulActions, Type: smithy.ShapeTypeList, Ext: &ext[823]})
-var sStatefulEngineOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatefulEngineOptions, Members: &mStatefulEngineOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[825]})
-var sStatefulRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatefulRule, Members: &mStatefulRule, Type: smithy.ShapeTypeStructure, Ext: &ext[829]})
-var sStatefulRuleDirection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatefulRuleDirection, Members: &mStatefulRuleDirection, Type: smithy.ShapeTypeEnum, Ext: &ext[833]})
-var sStatefulRuleGroupOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatefulRuleGroupOverride, Members: &mStatefulRuleGroupOverride, Type: smithy.ShapeTypeStructure, Ext: &ext[836]})
-var sStatefulRuleGroupReference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatefulRuleGroupReference, Members: &mStatefulRuleGroupReference, Type: smithy.ShapeTypeStructure, Ext: &ext[838]})
-var s_StatefulRuleGroupReferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatefulRuleGroupReferences, Members: &m_StatefulRuleGroupReferences, Type: smithy.ShapeTypeList, Ext: &ext[843]})
-var sStatefulRuleOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatefulRuleOptions, Members: &mStatefulRuleOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[845]})
-var sStatefulRuleProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatefulRuleProtocol, Members: &mStatefulRuleProtocol, Type: smithy.ShapeTypeEnum, Ext: &ext[847]})
-var s_StatefulRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatefulRules, Members: &m_StatefulRules, Type: smithy.ShapeTypeList, Ext: &ext[869]})
-var s_StatelessActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatelessActions, Members: &m_StatelessActions, Type: smithy.ShapeTypeList, Ext: &ext[871]})
-var sStatelessRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatelessRule, Members: &mStatelessRule, Type: smithy.ShapeTypeStructure, Ext: &ext[873]})
-var sStatelessRuleGroupReference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatelessRuleGroupReference, Members: &mStatelessRuleGroupReference, Type: smithy.ShapeTypeStructure, Ext: &ext[876]})
-var s_StatelessRuleGroupReferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatelessRuleGroupReferences, Members: &m_StatelessRuleGroupReferences, Type: smithy.ShapeTypeList, Ext: &ext[879]})
-var s_StatelessRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatelessRules, Members: &m_StatelessRules, Type: smithy.ShapeTypeList, Ext: &ext[881]})
-var sStatelessRulesAndCustomActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatelessRulesAndCustomActions, Members: &mStatelessRulesAndCustomActions, Type: smithy.ShapeTypeStructure, Ext: &ext[883]})
-var s_Status = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &ext[886]})
-var s_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusMessage, Type: smithy.ShapeTypeString, Ext: &ext[887]})
-var s_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusReason, Type: smithy.ShapeTypeString, Ext: &ext[888]})
-var sStreamExceptionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamExceptionPolicy, Members: &mStreamExceptionPolicy, Type: smithy.ShapeTypeEnum, Ext: &ext[889]})
-var sSubnetMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubnetMapping, Members: &mSubnetMapping, Type: smithy.ShapeTypeStructure, Ext: &ext[893]})
-var s_SubnetMappings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetMappings, Members: &m_SubnetMappings, Type: smithy.ShapeTypeList, Ext: &ext[896]})
-var sSubscriptionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscriptionStatus, Members: &mSubscriptionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[898]})
-var sSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSummary, Members: &mSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[901]})
-var sSummaryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSummaryConfiguration, Members: &mSummaryConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[903]})
-var sSummaryRuleOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSummaryRuleOption, Members: &mSummaryRuleOption, Type: smithy.ShapeTypeEnum, Ext: &ext[905]})
-var s_SummaryRuleOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SummaryRuleOptions, Members: &m_SummaryRuleOptions, Type: smithy.ShapeTypeList, Ext: &ext[909]})
-var s_SupportedAvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportedAvailabilityZones, Members: &m_SupportedAvailabilityZones, Type: smithy.ShapeTypeMap, Ext: &ext[911]})
-var sSyncState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncState, Members: &mSyncState, Type: smithy.ShapeTypeStructure, Ext: &ext[914]})
-var s_SyncStateConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SyncStateConfig, Members: &m_SyncStateConfig, Type: smithy.ShapeTypeMap, Ext: &ext[918]})
-var s_SyncStates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SyncStates, Members: &m_SyncStates, Type: smithy.ShapeTypeMap, Ext: &ext[921]})
-var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[924]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[927]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[928]})
-var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[930]})
-var s_TagsPaginationMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagsPaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[932]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[933]})
-var sTargetType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetType, Members: &mTargetType, Type: smithy.ShapeTypeEnum, Ext: &ext[934]})
-var s_TargetTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetTypes, Members: &m_TargetTypes, Type: smithy.ShapeTypeList, Ext: &ext[938]})
-var sTCPFlag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTCPFlag, Members: &mTCPFlag, Type: smithy.ShapeTypeEnum, Ext: &ext[940]})
-var sTCPFlagField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTCPFlagField, Members: &mTCPFlagField, Type: smithy.ShapeTypeStructure, Ext: &ext[949]})
-var s_TCPFlags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TCPFlags, Members: &m_TCPFlags, Type: smithy.ShapeTypeList, Ext: &ext[952]})
-var s_TcpIdleTimeoutRangeBound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TcpIdleTimeoutRangeBound, Type: smithy.ShapeTypeInteger, Ext: &ext[954]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[955]})
-var sTlsCertificateData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTlsCertificateData, Members: &mTlsCertificateData, Type: smithy.ShapeTypeStructure, Ext: &ext[957]})
-var sTLSInspectionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTLSInspectionConfiguration, Members: &mTLSInspectionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[962]})
-var sTLSInspectionConfigurationMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTLSInspectionConfigurationMetadata, Members: &mTLSInspectionConfigurationMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[964]})
-var sTLSInspectionConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTLSInspectionConfigurationResponse, Members: &mTLSInspectionConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[967]})
-var s_TLSInspectionConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TLSInspectionConfigurations, Members: &m_TLSInspectionConfigurations, Type: smithy.ShapeTypeList, Ext: &ext[979]})
-var sTlsInterceptMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTlsInterceptMode, Members: &mTlsInterceptMode, Type: smithy.ShapeTypeEnum, Ext: &ext[981]})
-var sTlsInterceptProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTlsInterceptProperties, Members: &mTlsInterceptProperties, Type: smithy.ShapeTypeStructure, Ext: &ext[984]})
-var sTlsInterceptPropertiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTlsInterceptPropertiesRequest, Members: &mTlsInterceptPropertiesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[987]})
-var s_TransitGatewayAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TransitGatewayAttachmentId, Type: smithy.ShapeTypeString, Ext: &ext[990]})
-var sTransitGatewayAttachmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransitGatewayAttachmentStatus, Members: &mTransitGatewayAttachmentStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[991]})
-var sTransitGatewayAttachmentSyncState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransitGatewayAttachmentSyncState, Members: &mTransitGatewayAttachmentSyncState, Type: smithy.ShapeTypeStructure, Ext: &ext[1001]})
-var s_TransitGatewayAttachmentSyncStateMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TransitGatewayAttachmentSyncStateMessage, Type: smithy.ShapeTypeString, Ext: &ext[1005]})
-var s_TransitGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TransitGatewayId, Type: smithy.ShapeTypeString, Ext: &ext[1006]})
-var sUniqueSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUniqueSources, Members: &mUniqueSources, Type: smithy.ShapeTypeStructure, Ext: &ext[1007]})
-var sUnsupportedOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedOperationException, Members: &mUnsupportedOperationException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[1009]})
-var s_UpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[1011]})
-var s_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1012]})
-var s_VariableDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VariableDefinition, Type: smithy.ShapeTypeString, Ext: &ext[1013]})
-var s_VariableDefinitionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VariableDefinitionList, Members: &m_VariableDefinitionList, Type: smithy.ShapeTypeList, Ext: &ext[1014]})
-var s_VendorName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VendorName, Type: smithy.ShapeTypeString, Ext: &ext[1016]})
-var sVpcEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcEndpoint, Members: &mVpcEndpoint, Type: smithy.ShapeTypeStructure, Ext: &ext[1017]})
-var sVpcEndpointAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcEndpointAssociation, Members: &mVpcEndpointAssociation, Type: smithy.ShapeTypeStructure, Ext: &ext[1020]})
-var sVpcEndpointAssociationMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcEndpointAssociationMetadata, Members: &mVpcEndpointAssociationMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[1028]})
-var s_VpcEndpointAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointAssociations, Members: &m_VpcEndpointAssociations, Type: smithy.ShapeTypeList, Ext: &ext[1030]})
-var sVpcEndpointAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcEndpointAssociationStatus, Members: &mVpcEndpointAssociationStatus, Type: smithy.ShapeTypeStructure, Ext: &ext[1032]})
-var s_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &ext[1035]})
-var s_VpcEndpointServiceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointServiceName, Type: smithy.ShapeTypeString, Ext: &ext[1036]})
-var s_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &ext[1037]})
-var s_VpcIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcIds, Members: &m_VpcIds, Type: smithy.ShapeTypeList, Ext: &ext[1038]})
-var sAcceptNetworkFirewallTransitGatewayAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptNetworkFirewallTransitGatewayAttachmentRequest, Members: &mAcceptNetworkFirewallTransitGatewayAttachmentRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1040]})
-var sAcceptNetworkFirewallTransitGatewayAttachmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptNetworkFirewallTransitGatewayAttachmentResponse, Members: &mAcceptNetworkFirewallTransitGatewayAttachmentResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1042]})
-var sAssociateAvailabilityZonesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateAvailabilityZonesRequest, Members: &mAssociateAvailabilityZonesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1045]})
-var sAssociateAvailabilityZonesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateAvailabilityZonesResponse, Members: &mAssociateAvailabilityZonesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1050]})
-var sAssociateFirewallPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateFirewallPolicyRequest, Members: &mAssociateFirewallPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1055]})
-var sAssociateFirewallPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateFirewallPolicyResponse, Members: &mAssociateFirewallPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1060]})
-var sAssociateSubnetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateSubnetsRequest, Members: &mAssociateSubnetsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1065]})
-var sAssociateSubnetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateSubnetsResponse, Members: &mAssociateSubnetsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1070]})
-var sAttachRuleGroupsToProxyConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachRuleGroupsToProxyConfigurationRequest, Members: &mAttachRuleGroupsToProxyConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1075]})
-var sAttachRuleGroupsToProxyConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachRuleGroupsToProxyConfigurationResponse, Members: &mAttachRuleGroupsToProxyConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1080]})
-var sCreateContainerAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateContainerAssociationRequest, Members: &mCreateContainerAssociationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1083]})
-var sCreateContainerAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateContainerAssociationResponse, Members: &mCreateContainerAssociationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1089]})
-var sCreateFirewallRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFirewallRequest, Members: &mCreateFirewallRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1098]})
-var sCreateFirewallResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFirewallResponse, Members: &mCreateFirewallResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1117]})
-var sCreateFirewallPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFirewallPolicyRequest, Members: &mCreateFirewallPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1120]})
-var sCreateFirewallPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFirewallPolicyResponse, Members: &mCreateFirewallPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1127]})
-var sCreateProxyConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxyConfigurationRequest, Members: &mCreateProxyConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1130]})
-var sCreateProxyConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxyConfigurationResponse, Members: &mCreateProxyConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1137]})
-var sCreateProxyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxyRequest, Members: &mCreateProxyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1140]})
-var sCreateProxyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxyResponse, Members: &mCreateProxyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1148]})
-var sCreateProxyRuleGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxyRuleGroupRequest, Members: &mCreateProxyRuleGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1151]})
-var sCreateProxyRuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxyRuleGroupResponse, Members: &mCreateProxyRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1156]})
-var sCreateProxyRulesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxyRulesRequest, Members: &mCreateProxyRulesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1159]})
-var sCreateProxyRulesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxyRulesResponse, Members: &mCreateProxyRulesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1163]})
-var sCreateRuleGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRuleGroupRequest, Members: &mCreateRuleGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1166]})
-var sCreateRuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRuleGroupResponse, Members: &mCreateRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1179]})
-var sCreateTLSInspectionConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTLSInspectionConfigurationRequest, Members: &mCreateTLSInspectionConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1182]})
-var sCreateTLSInspectionConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTLSInspectionConfigurationResponse, Members: &mCreateTLSInspectionConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1188]})
-var sCreateVpcEndpointAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcEndpointAssociationRequest, Members: &mCreateVpcEndpointAssociationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1191]})
-var sCreateVpcEndpointAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcEndpointAssociationResponse, Members: &mCreateVpcEndpointAssociationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1197]})
-var sDeleteContainerAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteContainerAssociationRequest, Members: &mDeleteContainerAssociationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1200]})
-var sDeleteContainerAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteContainerAssociationResponse, Members: &mDeleteContainerAssociationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1203]})
-var sDeleteFirewallRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFirewallRequest, Members: &mDeleteFirewallRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1207]})
-var sDeleteFirewallResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFirewallResponse, Members: &mDeleteFirewallResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1210]})
-var sDeleteFirewallPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFirewallPolicyRequest, Members: &mDeleteFirewallPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1213]})
-var sDeleteFirewallPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFirewallPolicyResponse, Members: &mDeleteFirewallPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1216]})
-var sDeleteNetworkFirewallTransitGatewayAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNetworkFirewallTransitGatewayAttachmentRequest, Members: &mDeleteNetworkFirewallTransitGatewayAttachmentRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1218]})
-var sDeleteNetworkFirewallTransitGatewayAttachmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNetworkFirewallTransitGatewayAttachmentResponse, Members: &mDeleteNetworkFirewallTransitGatewayAttachmentResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1220]})
-var sDeleteProxyConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxyConfigurationRequest, Members: &mDeleteProxyConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1223]})
-var sDeleteProxyConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxyConfigurationResponse, Members: &mDeleteProxyConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1226]})
-var sDeleteProxyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxyRequest, Members: &mDeleteProxyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1229]})
-var sDeleteProxyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxyResponse, Members: &mDeleteProxyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1233]})
-var sDeleteProxyRuleGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxyRuleGroupRequest, Members: &mDeleteProxyRuleGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1237]})
-var sDeleteProxyRuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxyRuleGroupResponse, Members: &mDeleteProxyRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1240]})
-var sDeleteProxyRulesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxyRulesRequest, Members: &mDeleteProxyRulesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1243]})
-var sDeleteProxyRulesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxyRulesResponse, Members: &mDeleteProxyRulesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1247]})
-var sDeleteResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyRequest, Members: &mDeleteResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1249]})
-var sDeleteResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1251]})
-var sDeleteRuleGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRuleGroupRequest, Members: &mDeleteRuleGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1252]})
-var sDeleteRuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRuleGroupResponse, Members: &mDeleteRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1256]})
-var sDeleteTLSInspectionConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTLSInspectionConfigurationRequest, Members: &mDeleteTLSInspectionConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1258]})
-var sDeleteTLSInspectionConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTLSInspectionConfigurationResponse, Members: &mDeleteTLSInspectionConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1261]})
-var sDeleteVpcEndpointAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVpcEndpointAssociationRequest, Members: &mDeleteVpcEndpointAssociationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1263]})
-var sDeleteVpcEndpointAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVpcEndpointAssociationResponse, Members: &mDeleteVpcEndpointAssociationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1265]})
-var sDescribeContainerAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeContainerAssociationRequest, Members: &mDescribeContainerAssociationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1268]})
-var sDescribeContainerAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeContainerAssociationResponse, Members: &mDescribeContainerAssociationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1271]})
-var sDescribeFirewallRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFirewallRequest, Members: &mDescribeFirewallRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1282]})
-var sDescribeFirewallMetadataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFirewallMetadataRequest, Members: &mDescribeFirewallMetadataRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1285]})
-var sDescribeFirewallMetadataResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFirewallMetadataResponse, Members: &mDescribeFirewallMetadataResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1287]})
-var sDescribeFirewallResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFirewallResponse, Members: &mDescribeFirewallResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1294]})
-var sDescribeFirewallPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFirewallPolicyRequest, Members: &mDescribeFirewallPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1298]})
-var sDescribeFirewallPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFirewallPolicyResponse, Members: &mDescribeFirewallPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1301]})
-var sDescribeFlowOperationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFlowOperationRequest, Members: &mDescribeFlowOperationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1305]})
-var sDescribeFlowOperationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFlowOperationResponse, Members: &mDescribeFlowOperationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1312]})
-var sDescribeLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoggingConfigurationRequest, Members: &mDescribeLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1324]})
-var sDescribeLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoggingConfigurationResponse, Members: &mDescribeLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1327]})
-var sDescribeProxyConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProxyConfigurationRequest, Members: &mDescribeProxyConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1331]})
-var sDescribeProxyConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProxyConfigurationResponse, Members: &mDescribeProxyConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1334]})
-var sDescribeProxyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProxyRequest, Members: &mDescribeProxyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1337]})
-var sDescribeProxyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProxyResponse, Members: &mDescribeProxyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1340]})
-var sDescribeProxyRuleGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProxyRuleGroupRequest, Members: &mDescribeProxyRuleGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1343]})
-var sDescribeProxyRuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProxyRuleGroupResponse, Members: &mDescribeProxyRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1346]})
-var sDescribeProxyRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProxyRuleRequest, Members: &mDescribeProxyRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1349]})
-var sDescribeProxyRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProxyRuleResponse, Members: &mDescribeProxyRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1353]})
-var sDescribeResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeResourcePolicyRequest, Members: &mDescribeResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1356]})
-var sDescribeResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeResourcePolicyResponse, Members: &mDescribeResourcePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1358]})
-var sDescribeRuleGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuleGroupRequest, Members: &mDescribeRuleGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1360]})
-var sDescribeRuleGroupMetadataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuleGroupMetadataRequest, Members: &mDescribeRuleGroupMetadataRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1365]})
-var sDescribeRuleGroupMetadataResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuleGroupMetadataResponse, Members: &mDescribeRuleGroupMetadataResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1369]})
-var sDescribeRuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuleGroupResponse, Members: &mDescribeRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1380]})
-var sDescribeRuleGroupSummaryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuleGroupSummaryRequest, Members: &mDescribeRuleGroupSummaryRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1384]})
-var sDescribeRuleGroupSummaryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuleGroupSummaryResponse, Members: &mDescribeRuleGroupSummaryResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1388]})
-var sDescribeTLSInspectionConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTLSInspectionConfigurationRequest, Members: &mDescribeTLSInspectionConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1392]})
-var sDescribeTLSInspectionConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTLSInspectionConfigurationResponse, Members: &mDescribeTLSInspectionConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1395]})
-var sDescribeVpcEndpointAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVpcEndpointAssociationRequest, Members: &mDescribeVpcEndpointAssociationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1399]})
-var sDescribeVpcEndpointAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVpcEndpointAssociationResponse, Members: &mDescribeVpcEndpointAssociationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1401]})
-var sDetachRuleGroupsFromProxyConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetachRuleGroupsFromProxyConfigurationRequest, Members: &mDetachRuleGroupsFromProxyConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1404]})
-var sDetachRuleGroupsFromProxyConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetachRuleGroupsFromProxyConfigurationResponse, Members: &mDetachRuleGroupsFromProxyConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1410]})
-var sDisassociateAvailabilityZonesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateAvailabilityZonesRequest, Members: &mDisassociateAvailabilityZonesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1413]})
-var sDisassociateAvailabilityZonesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateAvailabilityZonesResponse, Members: &mDisassociateAvailabilityZonesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1418]})
-var sDisassociateSubnetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateSubnetsRequest, Members: &mDisassociateSubnetsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1423]})
-var sDisassociateSubnetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateSubnetsResponse, Members: &mDisassociateSubnetsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1428]})
-var sGetAnalysisReportResultsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAnalysisReportResultsRequest, Members: &mGetAnalysisReportResultsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1433]})
-var sGetAnalysisReportResultsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAnalysisReportResultsResponse, Members: &mGetAnalysisReportResultsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1439]})
-var sListAnalysisReportsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAnalysisReportsRequest, Members: &mListAnalysisReportsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1447]})
-var sListAnalysisReportsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAnalysisReportsResponse, Members: &mListAnalysisReportsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1452]})
-var sListContainerAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListContainerAssociationsRequest, Members: &mListContainerAssociationsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1455]})
-var sListContainerAssociationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListContainerAssociationsResponse, Members: &mListContainerAssociationsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1458]})
-var sListFirewallPoliciesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFirewallPoliciesRequest, Members: &mListFirewallPoliciesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1461]})
-var sListFirewallPoliciesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFirewallPoliciesResponse, Members: &mListFirewallPoliciesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1464]})
-var sListFirewallsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFirewallsRequest, Members: &mListFirewallsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1467]})
-var sListFirewallsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFirewallsResponse, Members: &mListFirewallsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1471]})
-var sListFlowOperationResultsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFlowOperationResultsRequest, Members: &mListFlowOperationResultsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1474]})
-var sListFlowOperationResultsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFlowOperationResultsResponse, Members: &mListFlowOperationResultsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1483]})
-var sListFlowOperationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFlowOperationsRequest, Members: &mListFlowOperationsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1495]})
-var sListFlowOperationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFlowOperationsResponse, Members: &mListFlowOperationsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1504]})
-var sListProxiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProxiesRequest, Members: &mListProxiesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1507]})
-var sListProxiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProxiesResponse, Members: &mListProxiesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1510]})
-var sListProxyConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProxyConfigurationsRequest, Members: &mListProxyConfigurationsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1513]})
-var sListProxyConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProxyConfigurationsResponse, Members: &mListProxyConfigurationsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1516]})
-var sListProxyRuleGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProxyRuleGroupsRequest, Members: &mListProxyRuleGroupsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1519]})
-var sListProxyRuleGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProxyRuleGroupsResponse, Members: &mListProxyRuleGroupsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1522]})
-var sListRuleGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleGroupsRequest, Members: &mListRuleGroupsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1525]})
-var sListRuleGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleGroupsResponse, Members: &mListRuleGroupsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1532]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1535]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1539]})
-var sListTLSInspectionConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTLSInspectionConfigurationsRequest, Members: &mListTLSInspectionConfigurationsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1542]})
-var sListTLSInspectionConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTLSInspectionConfigurationsResponse, Members: &mListTLSInspectionConfigurationsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1545]})
-var sListVpcEndpointAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcEndpointAssociationsRequest, Members: &mListVpcEndpointAssociationsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1548]})
-var sListVpcEndpointAssociationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcEndpointAssociationsResponse, Members: &mListVpcEndpointAssociationsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1552]})
-var sPutResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyRequest, Members: &mPutResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1555]})
-var sPutResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1558]})
-var sRejectNetworkFirewallTransitGatewayAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectNetworkFirewallTransitGatewayAttachmentRequest, Members: &mRejectNetworkFirewallTransitGatewayAttachmentRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1559]})
-var sRejectNetworkFirewallTransitGatewayAttachmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectNetworkFirewallTransitGatewayAttachmentResponse, Members: &mRejectNetworkFirewallTransitGatewayAttachmentResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1561]})
-var sStartAnalysisReportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAnalysisReportRequest, Members: &mStartAnalysisReportRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1564]})
-var sStartAnalysisReportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAnalysisReportResponse, Members: &mStartAnalysisReportResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1568]})
-var sStartFlowCaptureRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFlowCaptureRequest, Members: &mStartFlowCaptureRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1570]})
-var sStartFlowCaptureResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFlowCaptureResponse, Members: &mStartFlowCaptureResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1578]})
-var sStartFlowFlushRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFlowFlushRequest, Members: &mStartFlowFlushRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1582]})
-var sStartFlowFlushResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFlowFlushResponse, Members: &mStartFlowFlushResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1590]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1594]})
-var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1597]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1598]})
-var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1601]})
-var sUpdateAvailabilityZoneChangeProtectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAvailabilityZoneChangeProtectionRequest, Members: &mUpdateAvailabilityZoneChangeProtectionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1602]})
-var sUpdateAvailabilityZoneChangeProtectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAvailabilityZoneChangeProtectionResponse, Members: &mUpdateAvailabilityZoneChangeProtectionResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1607]})
-var sUpdateContainerAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateContainerAssociationRequest, Members: &mUpdateContainerAssociationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1612]})
-var sUpdateContainerAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateContainerAssociationResponse, Members: &mUpdateContainerAssociationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1620]})
-var sUpdateFirewallAnalysisSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallAnalysisSettingsRequest, Members: &mUpdateFirewallAnalysisSettingsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1629]})
-var sUpdateFirewallAnalysisSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallAnalysisSettingsResponse, Members: &mUpdateFirewallAnalysisSettingsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1634]})
-var sUpdateFirewallDeleteProtectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallDeleteProtectionRequest, Members: &mUpdateFirewallDeleteProtectionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1639]})
-var sUpdateFirewallDeleteProtectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallDeleteProtectionResponse, Members: &mUpdateFirewallDeleteProtectionResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1644]})
-var sUpdateFirewallDescriptionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallDescriptionRequest, Members: &mUpdateFirewallDescriptionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1649]})
-var sUpdateFirewallDescriptionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallDescriptionResponse, Members: &mUpdateFirewallDescriptionResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1654]})
-var sUpdateFirewallEncryptionConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallEncryptionConfigurationRequest, Members: &mUpdateFirewallEncryptionConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1659]})
-var sUpdateFirewallEncryptionConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallEncryptionConfigurationResponse, Members: &mUpdateFirewallEncryptionConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1664]})
-var sUpdateFirewallPolicyChangeProtectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallPolicyChangeProtectionRequest, Members: &mUpdateFirewallPolicyChangeProtectionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1669]})
-var sUpdateFirewallPolicyChangeProtectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallPolicyChangeProtectionResponse, Members: &mUpdateFirewallPolicyChangeProtectionResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1674]})
-var sUpdateFirewallPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallPolicyRequest, Members: &mUpdateFirewallPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1679]})
-var sUpdateFirewallPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallPolicyResponse, Members: &mUpdateFirewallPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1687]})
-var sUpdateLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLoggingConfigurationRequest, Members: &mUpdateLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1690]})
-var sUpdateLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLoggingConfigurationResponse, Members: &mUpdateLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1695]})
-var sUpdateProxyConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyConfigurationRequest, Members: &mUpdateProxyConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1700]})
-var sUpdateProxyConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyConfigurationResponse, Members: &mUpdateProxyConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1705]})
-var sUpdateProxyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyRequest, Members: &mUpdateProxyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1708]})
-var sUpdateProxyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyResponse, Members: &mUpdateProxyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1716]})
-var sUpdateProxyRuleGroupPrioritiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyRuleGroupPrioritiesRequest, Members: &mUpdateProxyRuleGroupPrioritiesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1719]})
-var sUpdateProxyRuleGroupPrioritiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyRuleGroupPrioritiesResponse, Members: &mUpdateProxyRuleGroupPrioritiesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1724]})
-var sUpdateProxyRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyRuleRequest, Members: &mUpdateProxyRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1727]})
-var sUpdateProxyRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyRuleResponse, Members: &mUpdateProxyRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1736]})
-var sUpdateProxyRulePrioritiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyRulePrioritiesRequest, Members: &mUpdateProxyRulePrioritiesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1740]})
-var sUpdateProxyRulePrioritiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyRulePrioritiesResponse, Members: &mUpdateProxyRulePrioritiesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1746]})
-var sUpdateProxySettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxySettingsRequest, Members: &mUpdateProxySettingsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1752]})
-var sUpdateProxySettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxySettingsResponse, Members: &mUpdateProxySettingsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1757]})
-var sUpdateRuleGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRuleGroupRequest, Members: &mUpdateRuleGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1762]})
-var sUpdateRuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRuleGroupResponse, Members: &mUpdateRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1775]})
-var sUpdateSubnetChangeProtectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubnetChangeProtectionRequest, Members: &mUpdateSubnetChangeProtectionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1778]})
-var sUpdateSubnetChangeProtectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubnetChangeProtectionResponse, Members: &mUpdateSubnetChangeProtectionResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1783]})
-var sUpdateTLSInspectionConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTLSInspectionConfigurationRequest, Members: &mUpdateTLSInspectionConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1788]})
-var sUpdateTLSInspectionConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTLSInspectionConfigurationResponse, Members: &mUpdateTLSInspectionConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1795]})
+var sAcceptNetworkFirewallTransitGatewayAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptNetworkFirewallTransitGatewayAttachment, Type: smithy.ShapeTypeOperation, Ext: &eAcceptNetworkFirewallTransitGatewayAttachment})
+var sAssociateAvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateAvailabilityZones, Type: smithy.ShapeTypeOperation, Ext: &eAssociateAvailabilityZones})
+var sAssociateFirewallPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateFirewallPolicy, Type: smithy.ShapeTypeOperation, Ext: &eAssociateFirewallPolicy})
+var sAssociateSubnets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateSubnets, Type: smithy.ShapeTypeOperation, Ext: &eAssociateSubnets})
+var sAttachRuleGroupsToProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachRuleGroupsToProxyConfiguration, Type: smithy.ShapeTypeOperation, Ext: &eAttachRuleGroupsToProxyConfiguration})
+var sCreateContainerAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateContainerAssociation, Type: smithy.ShapeTypeOperation, Ext: &eCreateContainerAssociation})
+var sCreateFirewall = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFirewall, Type: smithy.ShapeTypeOperation, Ext: &eCreateFirewall})
+var sCreateFirewallPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFirewallPolicy, Type: smithy.ShapeTypeOperation, Ext: &eCreateFirewallPolicy})
+var sCreateProxy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxy, Type: smithy.ShapeTypeOperation, Ext: &eCreateProxy})
+var sCreateProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxyConfiguration, Type: smithy.ShapeTypeOperation, Ext: &eCreateProxyConfiguration})
+var sCreateProxyRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxyRuleGroup, Type: smithy.ShapeTypeOperation, Ext: &eCreateProxyRuleGroup})
+var sCreateProxyRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxyRules, Type: smithy.ShapeTypeOperation, Ext: &eCreateProxyRules})
+var sCreateRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRuleGroup, Type: smithy.ShapeTypeOperation, Ext: &eCreateRuleGroup})
+var sCreateTLSInspectionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTLSInspectionConfiguration, Type: smithy.ShapeTypeOperation, Ext: &eCreateTLSInspectionConfiguration})
+var sCreateVpcEndpointAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcEndpointAssociation, Type: smithy.ShapeTypeOperation, Ext: &eCreateVpcEndpointAssociation})
+var sDeleteContainerAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteContainerAssociation, Type: smithy.ShapeTypeOperation, Ext: &eDeleteContainerAssociation})
+var sDeleteFirewall = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFirewall, Type: smithy.ShapeTypeOperation, Ext: &eDeleteFirewall})
+var sDeleteFirewallPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFirewallPolicy, Type: smithy.ShapeTypeOperation, Ext: &eDeleteFirewallPolicy})
+var sDeleteNetworkFirewallTransitGatewayAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNetworkFirewallTransitGatewayAttachment, Type: smithy.ShapeTypeOperation, Ext: &eDeleteNetworkFirewallTransitGatewayAttachment})
+var sDeleteProxy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxy, Type: smithy.ShapeTypeOperation, Ext: &eDeleteProxy})
+var sDeleteProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxyConfiguration, Type: smithy.ShapeTypeOperation, Ext: &eDeleteProxyConfiguration})
+var sDeleteProxyRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxyRuleGroup, Type: smithy.ShapeTypeOperation, Ext: &eDeleteProxyRuleGroup})
+var sDeleteProxyRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxyRules, Type: smithy.ShapeTypeOperation, Ext: &eDeleteProxyRules})
+var sDeleteResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicy, Type: smithy.ShapeTypeOperation, Ext: &eDeleteResourcePolicy})
+var sDeleteRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRuleGroup, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRuleGroup})
+var sDeleteTLSInspectionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTLSInspectionConfiguration, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTLSInspectionConfiguration})
+var sDeleteVpcEndpointAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVpcEndpointAssociation, Type: smithy.ShapeTypeOperation, Ext: &eDeleteVpcEndpointAssociation})
+var sDescribeContainerAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeContainerAssociation, Type: smithy.ShapeTypeOperation, Ext: &eDescribeContainerAssociation})
+var sDescribeFirewall = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFirewall, Type: smithy.ShapeTypeOperation, Ext: &eDescribeFirewall})
+var sDescribeFirewallMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFirewallMetadata, Type: smithy.ShapeTypeOperation, Ext: &eDescribeFirewallMetadata})
+var sDescribeFirewallPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFirewallPolicy, Type: smithy.ShapeTypeOperation, Ext: &eDescribeFirewallPolicy})
+var sDescribeFlowOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFlowOperation, Type: smithy.ShapeTypeOperation, Ext: &eDescribeFlowOperation})
+var sDescribeLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoggingConfiguration, Type: smithy.ShapeTypeOperation, Ext: &eDescribeLoggingConfiguration})
+var sDescribeProxy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProxy, Type: smithy.ShapeTypeOperation, Ext: &eDescribeProxy})
+var sDescribeProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProxyConfiguration, Type: smithy.ShapeTypeOperation, Ext: &eDescribeProxyConfiguration})
+var sDescribeProxyRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProxyRule, Type: smithy.ShapeTypeOperation, Ext: &eDescribeProxyRule})
+var sDescribeProxyRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProxyRuleGroup, Type: smithy.ShapeTypeOperation, Ext: &eDescribeProxyRuleGroup})
+var sDescribeResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeResourcePolicy, Type: smithy.ShapeTypeOperation, Ext: &eDescribeResourcePolicy})
+var sDescribeRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuleGroup, Type: smithy.ShapeTypeOperation, Ext: &eDescribeRuleGroup})
+var sDescribeRuleGroupMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuleGroupMetadata, Type: smithy.ShapeTypeOperation, Ext: &eDescribeRuleGroupMetadata})
+var sDescribeRuleGroupSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuleGroupSummary, Type: smithy.ShapeTypeOperation, Ext: &eDescribeRuleGroupSummary})
+var sDescribeTLSInspectionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTLSInspectionConfiguration, Type: smithy.ShapeTypeOperation, Ext: &eDescribeTLSInspectionConfiguration})
+var sDescribeVpcEndpointAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVpcEndpointAssociation, Type: smithy.ShapeTypeOperation, Ext: &eDescribeVpcEndpointAssociation})
+var sDetachRuleGroupsFromProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetachRuleGroupsFromProxyConfiguration, Type: smithy.ShapeTypeOperation, Ext: &eDetachRuleGroupsFromProxyConfiguration})
+var sDisassociateAvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateAvailabilityZones, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateAvailabilityZones})
+var sDisassociateSubnets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateSubnets, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateSubnets})
+var sGetAnalysisReportResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAnalysisReportResults, Type: smithy.ShapeTypeOperation, Ext: &eGetAnalysisReportResults})
+var sListAnalysisReports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAnalysisReports, Type: smithy.ShapeTypeOperation, Ext: &eListAnalysisReports})
+var sListContainerAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListContainerAssociations, Type: smithy.ShapeTypeOperation, Ext: &eListContainerAssociations})
+var sListFirewallPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFirewallPolicies, Type: smithy.ShapeTypeOperation, Ext: &eListFirewallPolicies})
+var sListFirewalls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFirewalls, Type: smithy.ShapeTypeOperation, Ext: &eListFirewalls})
+var sListFlowOperationResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFlowOperationResults, Type: smithy.ShapeTypeOperation, Ext: &eListFlowOperationResults})
+var sListFlowOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFlowOperations, Type: smithy.ShapeTypeOperation, Ext: &eListFlowOperations})
+var sListProxies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProxies, Type: smithy.ShapeTypeOperation, Ext: &eListProxies})
+var sListProxyConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProxyConfigurations, Type: smithy.ShapeTypeOperation, Ext: &eListProxyConfigurations})
+var sListProxyRuleGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProxyRuleGroups, Type: smithy.ShapeTypeOperation, Ext: &eListProxyRuleGroups})
+var sListRuleGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleGroups, Type: smithy.ShapeTypeOperation, Ext: &eListRuleGroups})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListTLSInspectionConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTLSInspectionConfigurations, Type: smithy.ShapeTypeOperation, Ext: &eListTLSInspectionConfigurations})
+var sListVpcEndpointAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcEndpointAssociations, Type: smithy.ShapeTypeOperation, Ext: &eListVpcEndpointAssociations})
+var sPutResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicy, Type: smithy.ShapeTypeOperation, Ext: &ePutResourcePolicy})
+var sRejectNetworkFirewallTransitGatewayAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectNetworkFirewallTransitGatewayAttachment, Type: smithy.ShapeTypeOperation, Ext: &eRejectNetworkFirewallTransitGatewayAttachment})
+var sStartAnalysisReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAnalysisReport, Type: smithy.ShapeTypeOperation, Ext: &eStartAnalysisReport})
+var sStartFlowCapture = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFlowCapture, Type: smithy.ShapeTypeOperation, Ext: &eStartFlowCapture})
+var sStartFlowFlush = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFlowFlush, Type: smithy.ShapeTypeOperation, Ext: &eStartFlowFlush})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateAvailabilityZoneChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAvailabilityZoneChangeProtection, Type: smithy.ShapeTypeOperation, Ext: &eUpdateAvailabilityZoneChangeProtection})
+var sUpdateContainerAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateContainerAssociation, Type: smithy.ShapeTypeOperation, Ext: &eUpdateContainerAssociation})
+var sUpdateFirewallAnalysisSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallAnalysisSettings, Type: smithy.ShapeTypeOperation, Ext: &eUpdateFirewallAnalysisSettings})
+var sUpdateFirewallDeleteProtection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallDeleteProtection, Type: smithy.ShapeTypeOperation, Ext: &eUpdateFirewallDeleteProtection})
+var sUpdateFirewallDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallDescription, Type: smithy.ShapeTypeOperation, Ext: &eUpdateFirewallDescription})
+var sUpdateFirewallEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallEncryptionConfiguration, Type: smithy.ShapeTypeOperation, Ext: &eUpdateFirewallEncryptionConfiguration})
+var sUpdateFirewallPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallPolicy, Type: smithy.ShapeTypeOperation, Ext: &eUpdateFirewallPolicy})
+var sUpdateFirewallPolicyChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallPolicyChangeProtection, Type: smithy.ShapeTypeOperation, Ext: &eUpdateFirewallPolicyChangeProtection})
+var sUpdateLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLoggingConfiguration, Type: smithy.ShapeTypeOperation, Ext: &eUpdateLoggingConfiguration})
+var sUpdateProxy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxy, Type: smithy.ShapeTypeOperation, Ext: &eUpdateProxy})
+var sUpdateProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyConfiguration, Type: smithy.ShapeTypeOperation, Ext: &eUpdateProxyConfiguration})
+var sUpdateProxyRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyRule, Type: smithy.ShapeTypeOperation, Ext: &eUpdateProxyRule})
+var sUpdateProxyRuleGroupPriorities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyRuleGroupPriorities, Type: smithy.ShapeTypeOperation, Ext: &eUpdateProxyRuleGroupPriorities})
+var sUpdateProxyRulePriorities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyRulePriorities, Type: smithy.ShapeTypeOperation, Ext: &eUpdateProxyRulePriorities})
+var sUpdateProxySettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxySettings, Type: smithy.ShapeTypeOperation, Ext: &eUpdateProxySettings})
+var sUpdateRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRuleGroup, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRuleGroup})
+var sUpdateSubnetChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubnetChangeProtection, Type: smithy.ShapeTypeOperation, Ext: &eUpdateSubnetChangeProtection})
+var sUpdateTLSInspectionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTLSInspectionConfiguration, Type: smithy.ShapeTypeOperation, Ext: &eUpdateTLSInspectionConfiguration})
+var s_NetworkFirewall_20201112 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkFirewall_20201112, Type: smithy.ShapeTypeService, Ext: &e_NetworkFirewall_20201112})
+var sActionDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionDefinition, Members: &mActionDefinition, Type: smithy.ShapeTypeStructure, Ext: &eActionDefinition})
+var s_ActionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &e_ActionName})
+var sAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eAddress})
+var s_AddressDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddressDefinition, Type: smithy.ShapeTypeString, Ext: &e_AddressDefinition})
+var s_Addresses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Addresses, Members: &m_Addresses, Type: smithy.ShapeTypeList, Ext: &e_Addresses})
+var s_Age = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Age, Type: smithy.ShapeTypeInteger, Ext: &e_Age})
+var sAnalysisReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalysisReport, Members: &mAnalysisReport, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisReport})
+var s_AnalysisReportId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnalysisReportId, Type: smithy.ShapeTypeString, Ext: &e_AnalysisReportId})
+var s_AnalysisReportNextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnalysisReportNextToken, Type: smithy.ShapeTypeString, Ext: &e_AnalysisReportNextToken})
+var s_AnalysisReportResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnalysisReportResults, Members: &m_AnalysisReportResults, Type: smithy.ShapeTypeList, Ext: &e_AnalysisReportResults})
+var s_AnalysisReports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnalysisReports, Members: &m_AnalysisReports, Type: smithy.ShapeTypeList, Ext: &e_AnalysisReports})
+var sAnalysisResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalysisResult, Members: &mAnalysisResult, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisResult})
+var s_AnalysisResultList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnalysisResultList, Members: &m_AnalysisResultList, Type: smithy.ShapeTypeList, Ext: &e_AnalysisResultList})
+var sAnalysisTypeReportResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalysisTypeReportResult, Members: &mAnalysisTypeReportResult, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisTypeReportResult})
+var s_AssociationSyncState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociationSyncState, Members: &m_AssociationSyncState, Type: smithy.ShapeTypeMap, Ext: &e_AssociationSyncState})
+var sAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure, Ext: &eAttachment})
+var s_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttachmentId, Type: smithy.ShapeTypeString, Ext: &e_AttachmentId})
+var sAttachmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachmentStatus, Members: &mAttachmentStatus, Type: smithy.ShapeTypeEnum, Ext: &eAttachmentStatus})
+var s_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &e_AvailabilityZone})
+var s_AvailabilityZoneId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZoneId, Type: smithy.ShapeTypeString, Ext: &e_AvailabilityZoneId})
+var sAvailabilityZoneMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAvailabilityZoneMapping, Members: &mAvailabilityZoneMapping, Type: smithy.ShapeTypeStructure, Ext: &eAvailabilityZoneMapping})
+var s_AvailabilityZoneMappings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZoneMappings, Members: &m_AvailabilityZoneMappings, Type: smithy.ShapeTypeList, Ext: &e_AvailabilityZoneMappings})
+var s_AvailabilityZoneMappingString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZoneMappingString, Type: smithy.ShapeTypeString, Ext: &e_AvailabilityZoneMappingString})
+var sAvailabilityZoneMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAvailabilityZoneMetadata, Members: &mAvailabilityZoneMetadata, Type: smithy.ShapeTypeStructure, Ext: &eAvailabilityZoneMetadata})
+var s_AWSAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSAccountId, Type: smithy.ShapeTypeString, Ext: &e_AWSAccountId})
+var s_AzSubnet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AzSubnet, Type: smithy.ShapeTypeString, Ext: &e_AzSubnet})
+var s_AzSubnets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AzSubnets, Members: &m_AzSubnets, Type: smithy.ShapeTypeList, Ext: &e_AzSubnets})
+var sAZSyncState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAZSyncState, Members: &mAZSyncState, Type: smithy.ShapeTypeStructure, Ext: &eAZSyncState})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var s_ByteCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ByteCount, Type: smithy.ShapeTypeLong, Ext: &e_ByteCount})
+var sCapacityUsageSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacityUsageSummary, Members: &mCapacityUsageSummary, Type: smithy.ShapeTypeStructure, Ext: &eCapacityUsageSummary})
+var s_Certificates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Certificates, Members: &m_Certificates, Type: smithy.ShapeTypeList, Ext: &e_Certificates})
+var sCheckCertificateRevocationStatusActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCheckCertificateRevocationStatusActions, Members: &mCheckCertificateRevocationStatusActions, Type: smithy.ShapeTypeStructure, Ext: &eCheckCertificateRevocationStatusActions})
+var s_CIDRCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CIDRCount, Type: smithy.ShapeTypeInteger, Ext: &e_CIDRCount})
+var sCIDRSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCIDRSummary, Members: &mCIDRSummary, Type: smithy.ShapeTypeStructure, Ext: &eCIDRSummary})
+var s_CollectionMember_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectionMember_String, Type: smithy.ShapeTypeString, Ext: &e_CollectionMember_String})
+var s_ConditionKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConditionKey, Type: smithy.ShapeTypeString, Ext: &e_ConditionKey})
+var s_ConditionOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConditionOperator, Type: smithy.ShapeTypeString, Ext: &e_ConditionOperator})
+var sConfigurationSyncState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationSyncState, Members: &mConfigurationSyncState, Type: smithy.ShapeTypeEnum, Ext: &eConfigurationSyncState})
+var s_ContainerAssociationLastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerAssociationLastUpdatedTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_ContainerAssociationLastUpdatedTime})
+var s_ContainerAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerAssociations, Members: &m_ContainerAssociations, Type: smithy.ShapeTypeList, Ext: &e_ContainerAssociations})
+var sContainerAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerAssociationStatus, Members: &mContainerAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &eContainerAssociationStatus})
+var sContainerAssociationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerAssociationSummary, Members: &mContainerAssociationSummary, Type: smithy.ShapeTypeStructure, Ext: &eContainerAssociationSummary})
+var sContainerAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerAttribute, Members: &mContainerAttribute, Type: smithy.ShapeTypeStructure, Ext: &eContainerAttribute})
+var s_ContainerAttributeKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerAttributeKey, Type: smithy.ShapeTypeString, Ext: &e_ContainerAttributeKey})
+var s_ContainerAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerAttributes, Members: &m_ContainerAttributes, Type: smithy.ShapeTypeList, Ext: &e_ContainerAttributes})
+var s_ContainerAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerAttributeValue, Type: smithy.ShapeTypeString, Ext: &e_ContainerAttributeValue})
+var sContainerMonitoringConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerMonitoringConfiguration, Members: &mContainerMonitoringConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eContainerMonitoringConfiguration})
+var s_ContainerMonitoringConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerMonitoringConfigurations, Members: &m_ContainerMonitoringConfigurations, Type: smithy.ShapeTypeList, Ext: &e_ContainerMonitoringConfigurations})
+var sContainerMonitoringType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerMonitoringType, Members: &mContainerMonitoringType, Type: smithy.ShapeTypeEnum, Ext: &eContainerMonitoringType})
+var s_Count = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &e_Count})
+var sCreateProxyRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxyRule, Members: &mCreateProxyRule, Type: smithy.ShapeTypeStructure, Ext: &eCreateProxyRule})
+var s_CreateProxyRuleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateProxyRuleList, Members: &m_CreateProxyRuleList, Type: smithy.ShapeTypeList, Ext: &e_CreateProxyRuleList})
+var sCreateProxyRulesByRequestPhase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxyRulesByRequestPhase, Members: &mCreateProxyRulesByRequestPhase, Type: smithy.ShapeTypeStructure, Ext: &eCreateProxyRulesByRequestPhase})
+var s_CreateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_CreateTime})
+var sCustomAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomAction, Members: &mCustomAction, Type: smithy.ShapeTypeStructure, Ext: &eCustomAction})
+var s_CustomActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomActions, Members: &m_CustomActions, Type: smithy.ShapeTypeList, Ext: &e_CustomActions})
+var s_DeepThreatInspection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeepThreatInspection, Type: smithy.ShapeTypeBoolean, Ext: &e_DeepThreatInspection})
+var s_DeleteTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeleteTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_DeleteTime})
+var sDescribeProxyResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProxyResource, Members: &mDescribeProxyResource, Type: smithy.ShapeTypeStructure, Ext: &eDescribeProxyResource})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &e_Description})
+var s_Destination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Destination, Type: smithy.ShapeTypeString, Ext: &e_Destination})
+var sDimension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeStructure, Ext: &eDimension})
+var s_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList, Ext: &e_Dimensions})
+var s_DimensionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionValue, Type: smithy.ShapeTypeString, Ext: &e_DimensionValue})
+var sDNSExpiryExceptionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDNSExpiryExceptionPolicy, Members: &mDNSExpiryExceptionPolicy, Type: smithy.ShapeTypeEnum, Ext: &eDNSExpiryExceptionPolicy})
+var s_DNSFirewallRuleGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DNSFirewallRuleGroupId, Type: smithy.ShapeTypeString, Ext: &e_DNSFirewallRuleGroupId})
+var s_DnsName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DnsName, Type: smithy.ShapeTypeString, Ext: &e_DnsName})
+var s_Domain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Domain, Type: smithy.ShapeTypeString, Ext: &e_Domain})
+var sEnabledAnalysisType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledAnalysisType, Members: &mEnabledAnalysisType, Type: smithy.ShapeTypeEnum, Ext: &eEnabledAnalysisType})
+var s_EnabledAnalysisTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledAnalysisTypes, Members: &m_EnabledAnalysisTypes, Type: smithy.ShapeTypeList, Ext: &e_EnabledAnalysisTypes})
+var s_EnableMonitoringDashboard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnableMonitoringDashboard, Type: smithy.ShapeTypeBoolean, Ext: &e_EnableMonitoringDashboard})
+var s_EnableTLSSessionHolding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnableTLSSessionHolding, Type: smithy.ShapeTypeBoolean, Ext: &e_EnableTLSSessionHolding})
+var sEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionConfiguration})
+var sEncryptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum, Ext: &eEncryptionType})
+var s_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndpointId, Type: smithy.ShapeTypeString, Ext: &e_EndpointId})
+var s_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_EndTime})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var s_FailureCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailureCode, Type: smithy.ShapeTypeString, Ext: &e_FailureCode})
+var s_FailureMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailureMessage, Type: smithy.ShapeTypeString, Ext: &e_FailureMessage})
+var sFirewall = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewall, Members: &mFirewall, Type: smithy.ShapeTypeStructure, Ext: &eFirewall})
+var sFirewallMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallMetadata, Members: &mFirewallMetadata, Type: smithy.ShapeTypeStructure, Ext: &eFirewallMetadata})
+var s_FirewallPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FirewallPolicies, Members: &m_FirewallPolicies, Type: smithy.ShapeTypeList, Ext: &e_FirewallPolicies})
+var sFirewallPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallPolicy, Members: &mFirewallPolicy, Type: smithy.ShapeTypeStructure, Ext: &eFirewallPolicy})
+var sFirewallPolicyError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallPolicyError, Members: &mFirewallPolicyError, Type: smithy.ShapeTypeStructure, Ext: &eFirewallPolicyError})
+var sFirewallPolicyErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallPolicyErrorCode, Members: &mFirewallPolicyErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eFirewallPolicyErrorCode})
+var s_FirewallPolicyErrorResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FirewallPolicyErrorResourceId, Type: smithy.ShapeTypeString, Ext: &e_FirewallPolicyErrorResourceId})
+var s_FirewallPolicyErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FirewallPolicyErrors, Members: &m_FirewallPolicyErrors, Type: smithy.ShapeTypeList, Ext: &e_FirewallPolicyErrors})
+var sFirewallPolicyMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallPolicyMetadata, Members: &mFirewallPolicyMetadata, Type: smithy.ShapeTypeStructure, Ext: &eFirewallPolicyMetadata})
+var sFirewallPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallPolicyResponse, Members: &mFirewallPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eFirewallPolicyResponse})
+var s_Firewalls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Firewalls, Members: &m_Firewalls, Type: smithy.ShapeTypeList, Ext: &e_Firewalls})
+var sFirewallStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallStatus, Members: &mFirewallStatus, Type: smithy.ShapeTypeStructure, Ext: &eFirewallStatus})
+var sFirewallStatusValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallStatusValue, Members: &mFirewallStatusValue, Type: smithy.ShapeTypeEnum, Ext: &eFirewallStatusValue})
+var s_FirstAccessed = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FirstAccessed, Type: smithy.ShapeTypeTimestamp, Ext: &e_FirstAccessed})
+var s_Flags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Flags, Members: &m_Flags, Type: smithy.ShapeTypeList, Ext: &e_Flags})
+var sFlow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFlow, Members: &mFlow, Type: smithy.ShapeTypeStructure, Ext: &eFlow})
+var sFlowFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFlowFilter, Members: &mFlowFilter, Type: smithy.ShapeTypeStructure, Ext: &eFlowFilter})
+var s_FlowFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FlowFilters, Members: &m_FlowFilters, Type: smithy.ShapeTypeList, Ext: &e_FlowFilters})
+var sFlowOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFlowOperation, Members: &mFlowOperation, Type: smithy.ShapeTypeStructure, Ext: &eFlowOperation})
+var s_FlowOperationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FlowOperationId, Type: smithy.ShapeTypeString, Ext: &e_FlowOperationId})
+var sFlowOperationMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFlowOperationMetadata, Members: &mFlowOperationMetadata, Type: smithy.ShapeTypeStructure, Ext: &eFlowOperationMetadata})
+var s_FlowOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FlowOperations, Members: &m_FlowOperations, Type: smithy.ShapeTypeList, Ext: &e_FlowOperations})
+var sFlowOperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFlowOperationStatus, Members: &mFlowOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &eFlowOperationStatus})
+var sFlowOperationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFlowOperationType, Members: &mFlowOperationType, Type: smithy.ShapeTypeEnum, Ext: &eFlowOperationType})
+var s_FlowRequestTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FlowRequestTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_FlowRequestTimestamp})
+var s_Flows = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Flows, Members: &m_Flows, Type: smithy.ShapeTypeList, Ext: &e_Flows})
+var sFlowTimeouts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFlowTimeouts, Members: &mFlowTimeouts, Type: smithy.ShapeTypeStructure, Ext: &eFlowTimeouts})
+var sGeneratedRulesType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeneratedRulesType, Members: &mGeneratedRulesType, Type: smithy.ShapeTypeEnum, Ext: &eGeneratedRulesType})
+var s_HashMapKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HashMapKey, Type: smithy.ShapeTypeString, Ext: &e_HashMapKey})
+var s_HashMapValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HashMapValue, Type: smithy.ShapeTypeString, Ext: &e_HashMapValue})
+var sHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHeader, Members: &mHeader, Type: smithy.ShapeTypeStructure, Ext: &eHeader})
+var sHits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHits, Members: &mHits, Type: smithy.ShapeTypeStructure, Ext: &eHits})
+var sIdentifiedType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentifiedType, Members: &mIdentifiedType, Type: smithy.ShapeTypeEnum, Ext: &eIdentifiedType})
+var s_InsertPosition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsertPosition, Type: smithy.ShapeTypeInteger, Ext: &e_InsertPosition})
+var sInsufficientCapacityException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsufficientCapacityException, Members: &mInsufficientCapacityException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInsufficientCapacityException})
+var sInternalServerError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerError, Members: &mInternalServerError, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerError})
+var sInvalidOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidOperationException, Members: &mInvalidOperationException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidOperationException})
+var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRequestException})
+var sInvalidResourcePolicyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidResourcePolicyException, Members: &mInvalidResourcePolicyException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidResourcePolicyException})
+var sInvalidTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTokenException, Members: &mInvalidTokenException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidTokenException})
+var sIPAddressType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIPAddressType, Members: &mIPAddressType, Type: smithy.ShapeTypeEnum, Ext: &eIPAddressType})
+var sIPSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIPSet, Members: &mIPSet, Type: smithy.ShapeTypeStructure, Ext: &eIPSet})
+var s_IPSetArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPSetArn, Type: smithy.ShapeTypeString, Ext: &e_IPSetArn})
+var sIPSetMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIPSetMetadata, Members: &mIPSetMetadata, Type: smithy.ShapeTypeStructure, Ext: &eIPSetMetadata})
+var s_IPSetMetadataMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPSetMetadataMap, Members: &m_IPSetMetadataMap, Type: smithy.ShapeTypeMap, Ext: &e_IPSetMetadataMap})
+var sIPSetReference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIPSetReference, Members: &mIPSetReference, Type: smithy.ShapeTypeStructure, Ext: &eIPSetReference})
+var s_IPSetReferenceMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPSetReferenceMap, Members: &m_IPSetReferenceMap, Type: smithy.ShapeTypeMap, Ext: &e_IPSetReferenceMap})
+var s_IPSetReferenceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPSetReferenceName, Type: smithy.ShapeTypeString, Ext: &e_IPSetReferenceName})
+var s_IPSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPSets, Members: &m_IPSets, Type: smithy.ShapeTypeMap, Ext: &e_IPSets})
+var s_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyId, Type: smithy.ShapeTypeString, Ext: &e_KeyId})
+var s_Keyword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Keyword, Type: smithy.ShapeTypeString, Ext: &e_Keyword})
+var s_LastAccessed = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastAccessed, Type: smithy.ShapeTypeTimestamp, Ext: &e_LastAccessed})
+var s_LastUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastUpdateTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_LastUpdateTime})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var s_ListenerProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListenerProperties, Members: &m_ListenerProperties, Type: smithy.ShapeTypeList, Ext: &e_ListenerProperties})
+var s_ListenerPropertiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListenerPropertiesRequest, Members: &m_ListenerPropertiesRequest, Type: smithy.ShapeTypeList, Ext: &e_ListenerPropertiesRequest})
+var sListenerProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListenerProperty, Members: &mListenerProperty, Type: smithy.ShapeTypeStructure, Ext: &eListenerProperty})
+var sListenerPropertyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListenerPropertyRequest, Members: &mListenerPropertyRequest, Type: smithy.ShapeTypeStructure, Ext: &eListenerPropertyRequest})
+var sListenerPropertyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListenerPropertyType, Members: &mListenerPropertyType, Type: smithy.ShapeTypeEnum, Ext: &eListenerPropertyType})
+var s_ListingName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListingName, Type: smithy.ShapeTypeString, Ext: &e_ListingName})
+var sLogDestinationConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogDestinationConfig, Members: &mLogDestinationConfig, Type: smithy.ShapeTypeStructure, Ext: &eLogDestinationConfig})
+var s_LogDestinationConfigs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogDestinationConfigs, Members: &m_LogDestinationConfigs, Type: smithy.ShapeTypeList, Ext: &e_LogDestinationConfigs})
+var s_LogDestinationMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogDestinationMap, Members: &m_LogDestinationMap, Type: smithy.ShapeTypeMap, Ext: &e_LogDestinationMap})
+var sLogDestinationPermissionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogDestinationPermissionException, Members: &mLogDestinationPermissionException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eLogDestinationPermissionException})
+var sLogDestinationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogDestinationType, Members: &mLogDestinationType, Type: smithy.ShapeTypeEnum, Ext: &eLogDestinationType})
+var sLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoggingConfiguration, Members: &mLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eLoggingConfiguration})
+var sLogType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogType, Members: &mLogType, Type: smithy.ShapeTypeEnum, Ext: &eLogType})
+var sMatchAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMatchAttributes, Members: &mMatchAttributes, Type: smithy.ShapeTypeStructure, Ext: &eMatchAttributes})
+var sNatGatewayAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNatGatewayAttachment, Members: &mNatGatewayAttachment, Type: smithy.ShapeTypeStructure, Ext: &eNatGatewayAttachment})
+var s_NatGatewayAttachmentsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NatGatewayAttachmentsList, Members: &m_NatGatewayAttachmentsList, Type: smithy.ShapeTypeList, Ext: &e_NatGatewayAttachmentsList})
+var sNatGatewayAttachmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNatGatewayAttachmentStatus, Members: &mNatGatewayAttachmentStatus, Type: smithy.ShapeTypeEnum, Ext: &eNatGatewayAttachmentStatus})
+var s_NatGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NatGatewayId, Type: smithy.ShapeTypeString, Ext: &e_NatGatewayId})
+var sNatGatewayMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNatGatewayMapping, Members: &mNatGatewayMapping, Type: smithy.ShapeTypeStructure, Ext: &eNatGatewayMapping})
+var s_NatGatewayMappingsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NatGatewayMappingsList, Members: &m_NatGatewayMappingsList, Type: smithy.ShapeTypeList, Ext: &e_NatGatewayMappingsList})
+var s_NatGatewayPort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NatGatewayPort, Type: smithy.ShapeTypeInteger, Ext: &e_NatGatewayPort})
+var s_NumberOfAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberOfAssociations, Type: smithy.ShapeTypeInteger, Ext: &e_NumberOfAssociations})
+var sOverrideAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOverrideAction, Members: &mOverrideAction, Type: smithy.ShapeTypeEnum, Ext: &eOverrideAction})
+var s_PacketCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PacketCount, Type: smithy.ShapeTypeInteger, Ext: &e_PacketCount})
+var s_PaginationMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_PaginationMaxResults})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &e_PaginationToken})
+var sPerObjectStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPerObjectStatus, Members: &mPerObjectStatus, Type: smithy.ShapeTypeStructure, Ext: &ePerObjectStatus})
+var sPerObjectSyncStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPerObjectSyncStatus, Members: &mPerObjectSyncStatus, Type: smithy.ShapeTypeEnum, Ext: &ePerObjectSyncStatus})
+var s_PolicyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyString, Type: smithy.ShapeTypeString, Ext: &e_PolicyString})
+var sPolicyVariables = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyVariables, Members: &mPolicyVariables, Type: smithy.ShapeTypeStructure, Ext: &ePolicyVariables})
+var s_Port = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Port, Type: smithy.ShapeTypeString, Ext: &e_Port})
+var sPortRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPortRange, Members: &mPortRange, Type: smithy.ShapeTypeStructure, Ext: &ePortRange})
+var s_PortRangeBound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PortRangeBound, Type: smithy.ShapeTypeInteger, Ext: &e_PortRangeBound})
+var s_PortRanges = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PortRanges, Members: &m_PortRanges, Type: smithy.ShapeTypeList, Ext: &e_PortRanges})
+var sPortSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPortSet, Members: &mPortSet, Type: smithy.ShapeTypeStructure, Ext: &ePortSet})
+var s_PortSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PortSets, Members: &m_PortSets, Type: smithy.ShapeTypeMap, Ext: &e_PortSets})
+var s_Priority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Priority, Type: smithy.ShapeTypeInteger, Ext: &e_Priority})
+var s_PrivateDNSName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrivateDNSName, Type: smithy.ShapeTypeString, Ext: &e_PrivateDNSName})
+var s_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProductId, Type: smithy.ShapeTypeString, Ext: &e_ProductId})
+var s_ProtocolNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProtocolNumber, Type: smithy.ShapeTypeInteger, Ext: &e_ProtocolNumber})
+var s_ProtocolNumbers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProtocolNumbers, Members: &m_ProtocolNumbers, Type: smithy.ShapeTypeList, Ext: &e_ProtocolNumbers})
+var s_ProtocolString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProtocolString, Type: smithy.ShapeTypeString, Ext: &e_ProtocolString})
+var s_ProtocolStrings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProtocolStrings, Members: &m_ProtocolStrings, Type: smithy.ShapeTypeList, Ext: &e_ProtocolStrings})
+var s_Proxies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Proxies, Members: &m_Proxies, Type: smithy.ShapeTypeList, Ext: &e_Proxies})
+var sProxy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxy, Members: &mProxy, Type: smithy.ShapeTypeStructure, Ext: &eProxy})
+var s_ProxyConditionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyConditionValue, Type: smithy.ShapeTypeString, Ext: &e_ProxyConditionValue})
+var s_ProxyConditionValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyConditionValueList, Members: &m_ProxyConditionValueList, Type: smithy.ShapeTypeList, Ext: &e_ProxyConditionValueList})
+var sProxyConfigDefaultRulePhaseActionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyConfigDefaultRulePhaseActionsRequest, Members: &mProxyConfigDefaultRulePhaseActionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eProxyConfigDefaultRulePhaseActionsRequest})
+var sProxyConfigRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyConfigRuleGroup, Members: &mProxyConfigRuleGroup, Type: smithy.ShapeTypeStructure, Ext: &eProxyConfigRuleGroup})
+var s_ProxyConfigRuleGroupPriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyConfigRuleGroupPriority, Type: smithy.ShapeTypeInteger, Ext: &e_ProxyConfigRuleGroupPriority})
+var s_ProxyConfigRuleGroupSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyConfigRuleGroupSet, Members: &m_ProxyConfigRuleGroupSet, Type: smithy.ShapeTypeList, Ext: &e_ProxyConfigRuleGroupSet})
+var s_ProxyConfigRuleGroupType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyConfigRuleGroupType, Type: smithy.ShapeTypeString, Ext: &e_ProxyConfigRuleGroupType})
+var sProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyConfiguration, Members: &mProxyConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eProxyConfiguration})
+var sProxyConfigurationMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyConfigurationMetadata, Members: &mProxyConfigurationMetadata, Type: smithy.ShapeTypeStructure, Ext: &eProxyConfigurationMetadata})
+var s_ProxyConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyConfigurations, Members: &m_ProxyConfigurations, Type: smithy.ShapeTypeList, Ext: &e_ProxyConfigurations})
+var sProxyMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyMetadata, Members: &mProxyMetadata, Type: smithy.ShapeTypeStructure, Ext: &eProxyMetadata})
+var sProxyModifyState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyModifyState, Members: &mProxyModifyState, Type: smithy.ShapeTypeEnum, Ext: &eProxyModifyState})
+var sProxyRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyRule, Members: &mProxyRule, Type: smithy.ShapeTypeStructure, Ext: &eProxyRule})
+var sProxyRuleCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyRuleCondition, Members: &mProxyRuleCondition, Type: smithy.ShapeTypeStructure, Ext: &eProxyRuleCondition})
+var s_ProxyRuleConditionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyRuleConditionList, Members: &m_ProxyRuleConditionList, Type: smithy.ShapeTypeList, Ext: &e_ProxyRuleConditionList})
+var sProxyRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyRuleGroup, Members: &mProxyRuleGroup, Type: smithy.ShapeTypeStructure, Ext: &eProxyRuleGroup})
+var sProxyRuleGroupAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyRuleGroupAttachment, Members: &mProxyRuleGroupAttachment, Type: smithy.ShapeTypeStructure, Ext: &eProxyRuleGroupAttachment})
+var s_ProxyRuleGroupAttachmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyRuleGroupAttachmentList, Members: &m_ProxyRuleGroupAttachmentList, Type: smithy.ShapeTypeList, Ext: &e_ProxyRuleGroupAttachmentList})
+var sProxyRuleGroupMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyRuleGroupMetadata, Members: &mProxyRuleGroupMetadata, Type: smithy.ShapeTypeStructure, Ext: &eProxyRuleGroupMetadata})
+var sProxyRuleGroupPriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyRuleGroupPriority, Members: &mProxyRuleGroupPriority, Type: smithy.ShapeTypeStructure, Ext: &eProxyRuleGroupPriority})
+var s_ProxyRuleGroupPriorityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyRuleGroupPriorityList, Members: &m_ProxyRuleGroupPriorityList, Type: smithy.ShapeTypeList, Ext: &e_ProxyRuleGroupPriorityList})
+var sProxyRuleGroupPriorityResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyRuleGroupPriorityResult, Members: &mProxyRuleGroupPriorityResult, Type: smithy.ShapeTypeStructure, Ext: &eProxyRuleGroupPriorityResult})
+var s_ProxyRuleGroupPriorityResultList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyRuleGroupPriorityResultList, Members: &m_ProxyRuleGroupPriorityResultList, Type: smithy.ShapeTypeList, Ext: &e_ProxyRuleGroupPriorityResultList})
+var s_ProxyRuleGroupPriorityResultPriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyRuleGroupPriorityResultPriority, Type: smithy.ShapeTypeInteger, Ext: &e_ProxyRuleGroupPriorityResultPriority})
+var s_ProxyRuleGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyRuleGroups, Members: &m_ProxyRuleGroups, Type: smithy.ShapeTypeList, Ext: &e_ProxyRuleGroups})
+var s_ProxyRuleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyRuleList, Members: &m_ProxyRuleList, Type: smithy.ShapeTypeList, Ext: &e_ProxyRuleList})
+var sProxyRulePhaseAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyRulePhaseAction, Members: &mProxyRulePhaseAction, Type: smithy.ShapeTypeEnum, Ext: &eProxyRulePhaseAction})
+var sProxyRulePriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyRulePriority, Members: &mProxyRulePriority, Type: smithy.ShapeTypeStructure, Ext: &eProxyRulePriority})
+var s_ProxyRulePriorityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxyRulePriorityList, Members: &m_ProxyRulePriorityList, Type: smithy.ShapeTypeList, Ext: &e_ProxyRulePriorityList})
+var sProxyRulesByRequestPhase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyRulesByRequestPhase, Members: &mProxyRulesByRequestPhase, Type: smithy.ShapeTypeStructure, Ext: &eProxyRulesByRequestPhase})
+var sProxySettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxySettings, Members: &mProxySettings, Type: smithy.ShapeTypeStructure, Ext: &eProxySettings})
+var sProxyState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyState, Members: &mProxyState, Type: smithy.ShapeTypeEnum, Ext: &eProxyState})
+var sPublishMetricAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishMetricAction, Members: &mPublishMetricAction, Type: smithy.ShapeTypeStructure, Ext: &ePublishMetricAction})
+var sReferenceSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReferenceSets, Members: &mReferenceSets, Type: smithy.ShapeTypeStructure, Ext: &eReferenceSets})
+var s_ReportTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_ReportTime})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArn})
+var s_ResourceArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList, Ext: &e_ResourceArnList})
+var s_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &e_ResourceId})
+var sResourceManagedStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceManagedStatus, Members: &mResourceManagedStatus, Type: smithy.ShapeTypeEnum, Ext: &eResourceManagedStatus})
+var sResourceManagedType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceManagedType, Members: &mResourceManagedType, Type: smithy.ShapeTypeEnum, Ext: &eResourceManagedType})
+var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &e_ResourceName})
+var s_ResourceNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceNameList, Members: &m_ResourceNameList, Type: smithy.ShapeTypeList, Ext: &e_ResourceNameList})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceOwnerCheckException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceOwnerCheckException, Members: &mResourceOwnerCheckException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eResourceOwnerCheckException})
+var sResourceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceStatus, Members: &mResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eResourceStatus})
+var s_ResourceStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceStatusMessage, Type: smithy.ShapeTypeString, Ext: &e_ResourceStatusMessage})
+var sRevocationCheckAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevocationCheckAction, Members: &mRevocationCheckAction, Type: smithy.ShapeTypeEnum, Ext: &eRevocationCheckAction})
+var sRoute53ResolvedIPValidation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoute53ResolvedIPValidation, Members: &mRoute53ResolvedIPValidation, Type: smithy.ShapeTypeStructure, Ext: &eRoute53ResolvedIPValidation})
+var sRoute53ResolvedIPValidationAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoute53ResolvedIPValidationAction, Members: &mRoute53ResolvedIPValidationAction, Type: smithy.ShapeTypeEnum, Ext: &eRoute53ResolvedIPValidationAction})
+var s_Route53ResolvedIPValidationAddresses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Route53ResolvedIPValidationAddresses, Members: &m_Route53ResolvedIPValidationAddresses, Type: smithy.ShapeTypeList, Ext: &e_Route53ResolvedIPValidationAddresses})
+var s_RuleCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleCapacity, Type: smithy.ShapeTypeInteger, Ext: &e_RuleCapacity})
+var sRuleDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleDefinition, Members: &mRuleDefinition, Type: smithy.ShapeTypeStructure, Ext: &eRuleDefinition})
+var sRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleGroup, Members: &mRuleGroup, Type: smithy.ShapeTypeStructure, Ext: &eRuleGroup})
+var sRuleGroupMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleGroupMetadata, Members: &mRuleGroupMetadata, Type: smithy.ShapeTypeStructure, Ext: &eRuleGroupMetadata})
+var sRuleGroupRequestPhase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleGroupRequestPhase, Members: &mRuleGroupRequestPhase, Type: smithy.ShapeTypeEnum, Ext: &eRuleGroupRequestPhase})
+var sRuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleGroupResponse, Members: &mRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eRuleGroupResponse})
+var s_RuleGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleGroups, Members: &m_RuleGroups, Type: smithy.ShapeTypeList, Ext: &e_RuleGroups})
+var sRuleGroupType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleGroupType, Members: &mRuleGroupType, Type: smithy.ShapeTypeEnum, Ext: &eRuleGroupType})
+var s_RuleIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleIdList, Members: &m_RuleIdList, Type: smithy.ShapeTypeList, Ext: &e_RuleIdList})
+var sRuleOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleOption, Members: &mRuleOption, Type: smithy.ShapeTypeStructure, Ext: &eRuleOption})
+var s_RuleOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleOptions, Members: &m_RuleOptions, Type: smithy.ShapeTypeList, Ext: &e_RuleOptions})
+var sRuleOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleOrder, Members: &mRuleOrder, Type: smithy.ShapeTypeEnum, Ext: &eRuleOrder})
+var sRulesSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRulesSource, Members: &mRulesSource, Type: smithy.ShapeTypeStructure, Ext: &eRulesSource})
+var sRulesSourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRulesSourceList, Members: &mRulesSourceList, Type: smithy.ShapeTypeStructure, Ext: &eRulesSourceList})
+var s_RulesString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RulesString, Type: smithy.ShapeTypeString, Ext: &e_RulesString})
+var s_RuleSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleSummaries, Members: &m_RuleSummaries, Type: smithy.ShapeTypeList, Ext: &e_RuleSummaries})
+var sRuleSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleSummary, Members: &mRuleSummary, Type: smithy.ShapeTypeStructure, Ext: &eRuleSummary})
+var s_RuleTargets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleTargets, Members: &m_RuleTargets, Type: smithy.ShapeTypeList, Ext: &e_RuleTargets})
+var s_RuleVariableName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleVariableName, Type: smithy.ShapeTypeString, Ext: &e_RuleVariableName})
+var sRuleVariables = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleVariables, Members: &mRuleVariables, Type: smithy.ShapeTypeStructure, Ext: &eRuleVariables})
+var sServerCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerCertificate, Members: &mServerCertificate, Type: smithy.ShapeTypeStructure, Ext: &eServerCertificate})
+var sServerCertificateConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerCertificateConfiguration, Members: &mServerCertificateConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eServerCertificateConfiguration})
+var s_ServerCertificateConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServerCertificateConfigurations, Members: &m_ServerCertificateConfigurations, Type: smithy.ShapeTypeList, Ext: &e_ServerCertificateConfigurations})
+var s_ServerCertificates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServerCertificates, Members: &m_ServerCertificates, Type: smithy.ShapeTypeList, Ext: &e_ServerCertificates})
+var sServerCertificateScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerCertificateScope, Members: &mServerCertificateScope, Type: smithy.ShapeTypeStructure, Ext: &eServerCertificateScope})
+var s_ServerCertificateScopes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServerCertificateScopes, Members: &m_ServerCertificateScopes, Type: smithy.ShapeTypeList, Ext: &e_ServerCertificateScopes})
+var s_Setting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Setting, Type: smithy.ShapeTypeString, Ext: &e_Setting})
+var s_Settings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Settings, Members: &m_Settings, Type: smithy.ShapeTypeList, Ext: &e_Settings})
+var s_Source = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Source, Type: smithy.ShapeTypeString, Ext: &e_Source})
+var sSourceMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceMetadata, Members: &mSourceMetadata, Type: smithy.ShapeTypeStructure, Ext: &eSourceMetadata})
+var s_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_StartTime})
+var sStatefulAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatefulAction, Members: &mStatefulAction, Type: smithy.ShapeTypeEnum, Ext: &eStatefulAction})
+var s_StatefulActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatefulActions, Members: &m_StatefulActions, Type: smithy.ShapeTypeList, Ext: &e_StatefulActions})
+var sStatefulEngineOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatefulEngineOptions, Members: &mStatefulEngineOptions, Type: smithy.ShapeTypeStructure, Ext: &eStatefulEngineOptions})
+var sStatefulRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatefulRule, Members: &mStatefulRule, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRule})
+var sStatefulRuleDirection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatefulRuleDirection, Members: &mStatefulRuleDirection, Type: smithy.ShapeTypeEnum, Ext: &eStatefulRuleDirection})
+var sStatefulRuleGroupOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatefulRuleGroupOverride, Members: &mStatefulRuleGroupOverride, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleGroupOverride})
+var sStatefulRuleGroupReference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatefulRuleGroupReference, Members: &mStatefulRuleGroupReference, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleGroupReference})
+var s_StatefulRuleGroupReferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatefulRuleGroupReferences, Members: &m_StatefulRuleGroupReferences, Type: smithy.ShapeTypeList, Ext: &e_StatefulRuleGroupReferences})
+var sStatefulRuleOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatefulRuleOptions, Members: &mStatefulRuleOptions, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleOptions})
+var sStatefulRuleProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatefulRuleProtocol, Members: &mStatefulRuleProtocol, Type: smithy.ShapeTypeEnum, Ext: &eStatefulRuleProtocol})
+var s_StatefulRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatefulRules, Members: &m_StatefulRules, Type: smithy.ShapeTypeList, Ext: &e_StatefulRules})
+var s_StatelessActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatelessActions, Members: &m_StatelessActions, Type: smithy.ShapeTypeList, Ext: &e_StatelessActions})
+var sStatelessRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatelessRule, Members: &mStatelessRule, Type: smithy.ShapeTypeStructure, Ext: &eStatelessRule})
+var sStatelessRuleGroupReference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatelessRuleGroupReference, Members: &mStatelessRuleGroupReference, Type: smithy.ShapeTypeStructure, Ext: &eStatelessRuleGroupReference})
+var s_StatelessRuleGroupReferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatelessRuleGroupReferences, Members: &m_StatelessRuleGroupReferences, Type: smithy.ShapeTypeList, Ext: &e_StatelessRuleGroupReferences})
+var s_StatelessRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatelessRules, Members: &m_StatelessRules, Type: smithy.ShapeTypeList, Ext: &e_StatelessRules})
+var sStatelessRulesAndCustomActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatelessRulesAndCustomActions, Members: &mStatelessRulesAndCustomActions, Type: smithy.ShapeTypeStructure, Ext: &eStatelessRulesAndCustomActions})
+var s_Status = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &e_Status})
+var s_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusMessage, Type: smithy.ShapeTypeString, Ext: &e_StatusMessage})
+var s_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusReason, Type: smithy.ShapeTypeString, Ext: &e_StatusReason})
+var sStreamExceptionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamExceptionPolicy, Members: &mStreamExceptionPolicy, Type: smithy.ShapeTypeEnum, Ext: &eStreamExceptionPolicy})
+var sSubnetMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubnetMapping, Members: &mSubnetMapping, Type: smithy.ShapeTypeStructure, Ext: &eSubnetMapping})
+var s_SubnetMappings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetMappings, Members: &m_SubnetMappings, Type: smithy.ShapeTypeList, Ext: &e_SubnetMappings})
+var sSubscriptionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscriptionStatus, Members: &mSubscriptionStatus, Type: smithy.ShapeTypeEnum, Ext: &eSubscriptionStatus})
+var sSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSummary, Members: &mSummary, Type: smithy.ShapeTypeStructure, Ext: &eSummary})
+var sSummaryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSummaryConfiguration, Members: &mSummaryConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSummaryConfiguration})
+var sSummaryRuleOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSummaryRuleOption, Members: &mSummaryRuleOption, Type: smithy.ShapeTypeEnum, Ext: &eSummaryRuleOption})
+var s_SummaryRuleOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SummaryRuleOptions, Members: &m_SummaryRuleOptions, Type: smithy.ShapeTypeList, Ext: &e_SummaryRuleOptions})
+var s_SupportedAvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportedAvailabilityZones, Members: &m_SupportedAvailabilityZones, Type: smithy.ShapeTypeMap, Ext: &e_SupportedAvailabilityZones})
+var sSyncState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncState, Members: &mSyncState, Type: smithy.ShapeTypeStructure, Ext: &eSyncState})
+var s_SyncStateConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SyncStateConfig, Members: &m_SyncStateConfig, Type: smithy.ShapeTypeMap, Ext: &e_SyncStateConfig})
+var s_SyncStates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SyncStates, Members: &m_SyncStates, Type: smithy.ShapeTypeMap, Ext: &e_SyncStates})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagsPaginationMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagsPaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_TagsPaginationMaxResults})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTargetType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetType, Members: &mTargetType, Type: smithy.ShapeTypeEnum, Ext: &eTargetType})
+var s_TargetTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetTypes, Members: &m_TargetTypes, Type: smithy.ShapeTypeList, Ext: &e_TargetTypes})
+var sTCPFlag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTCPFlag, Members: &mTCPFlag, Type: smithy.ShapeTypeEnum, Ext: &eTCPFlag})
+var sTCPFlagField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTCPFlagField, Members: &mTCPFlagField, Type: smithy.ShapeTypeStructure, Ext: &eTCPFlagField})
+var s_TCPFlags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TCPFlags, Members: &m_TCPFlags, Type: smithy.ShapeTypeList, Ext: &e_TCPFlags})
+var s_TcpIdleTimeoutRangeBound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TcpIdleTimeoutRangeBound, Type: smithy.ShapeTypeInteger, Ext: &e_TcpIdleTimeoutRangeBound})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sTlsCertificateData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTlsCertificateData, Members: &mTlsCertificateData, Type: smithy.ShapeTypeStructure, Ext: &eTlsCertificateData})
+var sTLSInspectionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTLSInspectionConfiguration, Members: &mTLSInspectionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eTLSInspectionConfiguration})
+var sTLSInspectionConfigurationMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTLSInspectionConfigurationMetadata, Members: &mTLSInspectionConfigurationMetadata, Type: smithy.ShapeTypeStructure, Ext: &eTLSInspectionConfigurationMetadata})
+var sTLSInspectionConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTLSInspectionConfigurationResponse, Members: &mTLSInspectionConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eTLSInspectionConfigurationResponse})
+var s_TLSInspectionConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TLSInspectionConfigurations, Members: &m_TLSInspectionConfigurations, Type: smithy.ShapeTypeList, Ext: &e_TLSInspectionConfigurations})
+var sTlsInterceptMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTlsInterceptMode, Members: &mTlsInterceptMode, Type: smithy.ShapeTypeEnum, Ext: &eTlsInterceptMode})
+var sTlsInterceptProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTlsInterceptProperties, Members: &mTlsInterceptProperties, Type: smithy.ShapeTypeStructure, Ext: &eTlsInterceptProperties})
+var sTlsInterceptPropertiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTlsInterceptPropertiesRequest, Members: &mTlsInterceptPropertiesRequest, Type: smithy.ShapeTypeStructure, Ext: &eTlsInterceptPropertiesRequest})
+var s_TransitGatewayAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TransitGatewayAttachmentId, Type: smithy.ShapeTypeString, Ext: &e_TransitGatewayAttachmentId})
+var sTransitGatewayAttachmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransitGatewayAttachmentStatus, Members: &mTransitGatewayAttachmentStatus, Type: smithy.ShapeTypeEnum, Ext: &eTransitGatewayAttachmentStatus})
+var sTransitGatewayAttachmentSyncState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransitGatewayAttachmentSyncState, Members: &mTransitGatewayAttachmentSyncState, Type: smithy.ShapeTypeStructure, Ext: &eTransitGatewayAttachmentSyncState})
+var s_TransitGatewayAttachmentSyncStateMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TransitGatewayAttachmentSyncStateMessage, Type: smithy.ShapeTypeString, Ext: &e_TransitGatewayAttachmentSyncStateMessage})
+var s_TransitGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TransitGatewayId, Type: smithy.ShapeTypeString, Ext: &e_TransitGatewayId})
+var sUniqueSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUniqueSources, Members: &mUniqueSources, Type: smithy.ShapeTypeStructure, Ext: &eUniqueSources})
+var sUnsupportedOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedOperationException, Members: &mUnsupportedOperationException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eUnsupportedOperationException})
+var s_UpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_UpdateTime})
+var s_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &e_UpdateToken})
+var s_VariableDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VariableDefinition, Type: smithy.ShapeTypeString, Ext: &e_VariableDefinition})
+var s_VariableDefinitionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VariableDefinitionList, Members: &m_VariableDefinitionList, Type: smithy.ShapeTypeList, Ext: &e_VariableDefinitionList})
+var s_VendorName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VendorName, Type: smithy.ShapeTypeString, Ext: &e_VendorName})
+var sVpcEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcEndpoint, Members: &mVpcEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eVpcEndpoint})
+var sVpcEndpointAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcEndpointAssociation, Members: &mVpcEndpointAssociation, Type: smithy.ShapeTypeStructure, Ext: &eVpcEndpointAssociation})
+var sVpcEndpointAssociationMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcEndpointAssociationMetadata, Members: &mVpcEndpointAssociationMetadata, Type: smithy.ShapeTypeStructure, Ext: &eVpcEndpointAssociationMetadata})
+var s_VpcEndpointAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointAssociations, Members: &m_VpcEndpointAssociations, Type: smithy.ShapeTypeList, Ext: &e_VpcEndpointAssociations})
+var sVpcEndpointAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcEndpointAssociationStatus, Members: &mVpcEndpointAssociationStatus, Type: smithy.ShapeTypeStructure, Ext: &eVpcEndpointAssociationStatus})
+var s_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &e_VpcEndpointId})
+var s_VpcEndpointServiceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointServiceName, Type: smithy.ShapeTypeString, Ext: &e_VpcEndpointServiceName})
+var s_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &e_VpcId})
+var s_VpcIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcIds, Members: &m_VpcIds, Type: smithy.ShapeTypeList, Ext: &e_VpcIds})
+var sAcceptNetworkFirewallTransitGatewayAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptNetworkFirewallTransitGatewayAttachmentRequest, Members: &mAcceptNetworkFirewallTransitGatewayAttachmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eAcceptNetworkFirewallTransitGatewayAttachmentRequest})
+var sAcceptNetworkFirewallTransitGatewayAttachmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptNetworkFirewallTransitGatewayAttachmentResponse, Members: &mAcceptNetworkFirewallTransitGatewayAttachmentResponse, Type: smithy.ShapeTypeStructure, Ext: &eAcceptNetworkFirewallTransitGatewayAttachmentResponse})
+var sAssociateAvailabilityZonesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateAvailabilityZonesRequest, Members: &mAssociateAvailabilityZonesRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateAvailabilityZonesRequest})
+var sAssociateAvailabilityZonesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateAvailabilityZonesResponse, Members: &mAssociateAvailabilityZonesResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssociateAvailabilityZonesResponse})
+var sAssociateFirewallPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateFirewallPolicyRequest, Members: &mAssociateFirewallPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateFirewallPolicyRequest})
+var sAssociateFirewallPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateFirewallPolicyResponse, Members: &mAssociateFirewallPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssociateFirewallPolicyResponse})
+var sAssociateSubnetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateSubnetsRequest, Members: &mAssociateSubnetsRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateSubnetsRequest})
+var sAssociateSubnetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateSubnetsResponse, Members: &mAssociateSubnetsResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssociateSubnetsResponse})
+var sAttachRuleGroupsToProxyConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachRuleGroupsToProxyConfigurationRequest, Members: &mAttachRuleGroupsToProxyConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eAttachRuleGroupsToProxyConfigurationRequest})
+var sAttachRuleGroupsToProxyConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachRuleGroupsToProxyConfigurationResponse, Members: &mAttachRuleGroupsToProxyConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eAttachRuleGroupsToProxyConfigurationResponse})
+var sCreateContainerAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateContainerAssociationRequest, Members: &mCreateContainerAssociationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateContainerAssociationRequest})
+var sCreateContainerAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateContainerAssociationResponse, Members: &mCreateContainerAssociationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateContainerAssociationResponse})
+var sCreateFirewallRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFirewallRequest, Members: &mCreateFirewallRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateFirewallRequest})
+var sCreateFirewallResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFirewallResponse, Members: &mCreateFirewallResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateFirewallResponse})
+var sCreateFirewallPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFirewallPolicyRequest, Members: &mCreateFirewallPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateFirewallPolicyRequest})
+var sCreateFirewallPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFirewallPolicyResponse, Members: &mCreateFirewallPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateFirewallPolicyResponse})
+var sCreateProxyConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxyConfigurationRequest, Members: &mCreateProxyConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateProxyConfigurationRequest})
+var sCreateProxyConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxyConfigurationResponse, Members: &mCreateProxyConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateProxyConfigurationResponse})
+var sCreateProxyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxyRequest, Members: &mCreateProxyRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateProxyRequest})
+var sCreateProxyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxyResponse, Members: &mCreateProxyResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateProxyResponse})
+var sCreateProxyRuleGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxyRuleGroupRequest, Members: &mCreateProxyRuleGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateProxyRuleGroupRequest})
+var sCreateProxyRuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxyRuleGroupResponse, Members: &mCreateProxyRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateProxyRuleGroupResponse})
+var sCreateProxyRulesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxyRulesRequest, Members: &mCreateProxyRulesRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateProxyRulesRequest})
+var sCreateProxyRulesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxyRulesResponse, Members: &mCreateProxyRulesResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateProxyRulesResponse})
+var sCreateRuleGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRuleGroupRequest, Members: &mCreateRuleGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleGroupRequest})
+var sCreateRuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRuleGroupResponse, Members: &mCreateRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleGroupResponse})
+var sCreateTLSInspectionConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTLSInspectionConfigurationRequest, Members: &mCreateTLSInspectionConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateTLSInspectionConfigurationRequest})
+var sCreateTLSInspectionConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTLSInspectionConfigurationResponse, Members: &mCreateTLSInspectionConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateTLSInspectionConfigurationResponse})
+var sCreateVpcEndpointAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcEndpointAssociationRequest, Members: &mCreateVpcEndpointAssociationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateVpcEndpointAssociationRequest})
+var sCreateVpcEndpointAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcEndpointAssociationResponse, Members: &mCreateVpcEndpointAssociationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateVpcEndpointAssociationResponse})
+var sDeleteContainerAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteContainerAssociationRequest, Members: &mDeleteContainerAssociationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteContainerAssociationRequest})
+var sDeleteContainerAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteContainerAssociationResponse, Members: &mDeleteContainerAssociationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteContainerAssociationResponse})
+var sDeleteFirewallRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFirewallRequest, Members: &mDeleteFirewallRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFirewallRequest})
+var sDeleteFirewallResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFirewallResponse, Members: &mDeleteFirewallResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFirewallResponse})
+var sDeleteFirewallPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFirewallPolicyRequest, Members: &mDeleteFirewallPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFirewallPolicyRequest})
+var sDeleteFirewallPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFirewallPolicyResponse, Members: &mDeleteFirewallPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFirewallPolicyResponse})
+var sDeleteNetworkFirewallTransitGatewayAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNetworkFirewallTransitGatewayAttachmentRequest, Members: &mDeleteNetworkFirewallTransitGatewayAttachmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteNetworkFirewallTransitGatewayAttachmentRequest})
+var sDeleteNetworkFirewallTransitGatewayAttachmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNetworkFirewallTransitGatewayAttachmentResponse, Members: &mDeleteNetworkFirewallTransitGatewayAttachmentResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteNetworkFirewallTransitGatewayAttachmentResponse})
+var sDeleteProxyConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxyConfigurationRequest, Members: &mDeleteProxyConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteProxyConfigurationRequest})
+var sDeleteProxyConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxyConfigurationResponse, Members: &mDeleteProxyConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteProxyConfigurationResponse})
+var sDeleteProxyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxyRequest, Members: &mDeleteProxyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteProxyRequest})
+var sDeleteProxyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxyResponse, Members: &mDeleteProxyResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteProxyResponse})
+var sDeleteProxyRuleGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxyRuleGroupRequest, Members: &mDeleteProxyRuleGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteProxyRuleGroupRequest})
+var sDeleteProxyRuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxyRuleGroupResponse, Members: &mDeleteProxyRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteProxyRuleGroupResponse})
+var sDeleteProxyRulesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxyRulesRequest, Members: &mDeleteProxyRulesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteProxyRulesRequest})
+var sDeleteProxyRulesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxyRulesResponse, Members: &mDeleteProxyRulesResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteProxyRulesResponse})
+var sDeleteResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyRequest, Members: &mDeleteResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResourcePolicyRequest})
+var sDeleteResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResourcePolicyResponse})
+var sDeleteRuleGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRuleGroupRequest, Members: &mDeleteRuleGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRuleGroupRequest})
+var sDeleteRuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRuleGroupResponse, Members: &mDeleteRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRuleGroupResponse})
+var sDeleteTLSInspectionConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTLSInspectionConfigurationRequest, Members: &mDeleteTLSInspectionConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTLSInspectionConfigurationRequest})
+var sDeleteTLSInspectionConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTLSInspectionConfigurationResponse, Members: &mDeleteTLSInspectionConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTLSInspectionConfigurationResponse})
+var sDeleteVpcEndpointAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVpcEndpointAssociationRequest, Members: &mDeleteVpcEndpointAssociationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVpcEndpointAssociationRequest})
+var sDeleteVpcEndpointAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVpcEndpointAssociationResponse, Members: &mDeleteVpcEndpointAssociationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVpcEndpointAssociationResponse})
+var sDescribeContainerAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeContainerAssociationRequest, Members: &mDescribeContainerAssociationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeContainerAssociationRequest})
+var sDescribeContainerAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeContainerAssociationResponse, Members: &mDescribeContainerAssociationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeContainerAssociationResponse})
+var sDescribeFirewallRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFirewallRequest, Members: &mDescribeFirewallRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeFirewallRequest})
+var sDescribeFirewallMetadataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFirewallMetadataRequest, Members: &mDescribeFirewallMetadataRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeFirewallMetadataRequest})
+var sDescribeFirewallMetadataResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFirewallMetadataResponse, Members: &mDescribeFirewallMetadataResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeFirewallMetadataResponse})
+var sDescribeFirewallResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFirewallResponse, Members: &mDescribeFirewallResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeFirewallResponse})
+var sDescribeFirewallPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFirewallPolicyRequest, Members: &mDescribeFirewallPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeFirewallPolicyRequest})
+var sDescribeFirewallPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFirewallPolicyResponse, Members: &mDescribeFirewallPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeFirewallPolicyResponse})
+var sDescribeFlowOperationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFlowOperationRequest, Members: &mDescribeFlowOperationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeFlowOperationRequest})
+var sDescribeFlowOperationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFlowOperationResponse, Members: &mDescribeFlowOperationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeFlowOperationResponse})
+var sDescribeLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoggingConfigurationRequest, Members: &mDescribeLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLoggingConfigurationRequest})
+var sDescribeLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoggingConfigurationResponse, Members: &mDescribeLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLoggingConfigurationResponse})
+var sDescribeProxyConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProxyConfigurationRequest, Members: &mDescribeProxyConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeProxyConfigurationRequest})
+var sDescribeProxyConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProxyConfigurationResponse, Members: &mDescribeProxyConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeProxyConfigurationResponse})
+var sDescribeProxyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProxyRequest, Members: &mDescribeProxyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeProxyRequest})
+var sDescribeProxyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProxyResponse, Members: &mDescribeProxyResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeProxyResponse})
+var sDescribeProxyRuleGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProxyRuleGroupRequest, Members: &mDescribeProxyRuleGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeProxyRuleGroupRequest})
+var sDescribeProxyRuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProxyRuleGroupResponse, Members: &mDescribeProxyRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeProxyRuleGroupResponse})
+var sDescribeProxyRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProxyRuleRequest, Members: &mDescribeProxyRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeProxyRuleRequest})
+var sDescribeProxyRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProxyRuleResponse, Members: &mDescribeProxyRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeProxyRuleResponse})
+var sDescribeResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeResourcePolicyRequest, Members: &mDescribeResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeResourcePolicyRequest})
+var sDescribeResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeResourcePolicyResponse, Members: &mDescribeResourcePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeResourcePolicyResponse})
+var sDescribeRuleGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuleGroupRequest, Members: &mDescribeRuleGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRuleGroupRequest})
+var sDescribeRuleGroupMetadataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuleGroupMetadataRequest, Members: &mDescribeRuleGroupMetadataRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRuleGroupMetadataRequest})
+var sDescribeRuleGroupMetadataResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuleGroupMetadataResponse, Members: &mDescribeRuleGroupMetadataResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRuleGroupMetadataResponse})
+var sDescribeRuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuleGroupResponse, Members: &mDescribeRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRuleGroupResponse})
+var sDescribeRuleGroupSummaryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuleGroupSummaryRequest, Members: &mDescribeRuleGroupSummaryRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRuleGroupSummaryRequest})
+var sDescribeRuleGroupSummaryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuleGroupSummaryResponse, Members: &mDescribeRuleGroupSummaryResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRuleGroupSummaryResponse})
+var sDescribeTLSInspectionConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTLSInspectionConfigurationRequest, Members: &mDescribeTLSInspectionConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTLSInspectionConfigurationRequest})
+var sDescribeTLSInspectionConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTLSInspectionConfigurationResponse, Members: &mDescribeTLSInspectionConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTLSInspectionConfigurationResponse})
+var sDescribeVpcEndpointAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVpcEndpointAssociationRequest, Members: &mDescribeVpcEndpointAssociationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeVpcEndpointAssociationRequest})
+var sDescribeVpcEndpointAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVpcEndpointAssociationResponse, Members: &mDescribeVpcEndpointAssociationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeVpcEndpointAssociationResponse})
+var sDetachRuleGroupsFromProxyConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetachRuleGroupsFromProxyConfigurationRequest, Members: &mDetachRuleGroupsFromProxyConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDetachRuleGroupsFromProxyConfigurationRequest})
+var sDetachRuleGroupsFromProxyConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetachRuleGroupsFromProxyConfigurationResponse, Members: &mDetachRuleGroupsFromProxyConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDetachRuleGroupsFromProxyConfigurationResponse})
+var sDisassociateAvailabilityZonesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateAvailabilityZonesRequest, Members: &mDisassociateAvailabilityZonesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateAvailabilityZonesRequest})
+var sDisassociateAvailabilityZonesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateAvailabilityZonesResponse, Members: &mDisassociateAvailabilityZonesResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateAvailabilityZonesResponse})
+var sDisassociateSubnetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateSubnetsRequest, Members: &mDisassociateSubnetsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateSubnetsRequest})
+var sDisassociateSubnetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateSubnetsResponse, Members: &mDisassociateSubnetsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateSubnetsResponse})
+var sGetAnalysisReportResultsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAnalysisReportResultsRequest, Members: &mGetAnalysisReportResultsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAnalysisReportResultsRequest})
+var sGetAnalysisReportResultsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAnalysisReportResultsResponse, Members: &mGetAnalysisReportResultsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAnalysisReportResultsResponse})
+var sListAnalysisReportsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAnalysisReportsRequest, Members: &mListAnalysisReportsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAnalysisReportsRequest})
+var sListAnalysisReportsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAnalysisReportsResponse, Members: &mListAnalysisReportsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAnalysisReportsResponse})
+var sListContainerAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListContainerAssociationsRequest, Members: &mListContainerAssociationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListContainerAssociationsRequest})
+var sListContainerAssociationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListContainerAssociationsResponse, Members: &mListContainerAssociationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListContainerAssociationsResponse})
+var sListFirewallPoliciesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFirewallPoliciesRequest, Members: &mListFirewallPoliciesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListFirewallPoliciesRequest})
+var sListFirewallPoliciesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFirewallPoliciesResponse, Members: &mListFirewallPoliciesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListFirewallPoliciesResponse})
+var sListFirewallsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFirewallsRequest, Members: &mListFirewallsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListFirewallsRequest})
+var sListFirewallsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFirewallsResponse, Members: &mListFirewallsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListFirewallsResponse})
+var sListFlowOperationResultsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFlowOperationResultsRequest, Members: &mListFlowOperationResultsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListFlowOperationResultsRequest})
+var sListFlowOperationResultsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFlowOperationResultsResponse, Members: &mListFlowOperationResultsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListFlowOperationResultsResponse})
+var sListFlowOperationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFlowOperationsRequest, Members: &mListFlowOperationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListFlowOperationsRequest})
+var sListFlowOperationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFlowOperationsResponse, Members: &mListFlowOperationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListFlowOperationsResponse})
+var sListProxiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProxiesRequest, Members: &mListProxiesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListProxiesRequest})
+var sListProxiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProxiesResponse, Members: &mListProxiesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListProxiesResponse})
+var sListProxyConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProxyConfigurationsRequest, Members: &mListProxyConfigurationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListProxyConfigurationsRequest})
+var sListProxyConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProxyConfigurationsResponse, Members: &mListProxyConfigurationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListProxyConfigurationsResponse})
+var sListProxyRuleGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProxyRuleGroupsRequest, Members: &mListProxyRuleGroupsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListProxyRuleGroupsRequest})
+var sListProxyRuleGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProxyRuleGroupsResponse, Members: &mListProxyRuleGroupsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListProxyRuleGroupsResponse})
+var sListRuleGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleGroupsRequest, Members: &mListRuleGroupsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRuleGroupsRequest})
+var sListRuleGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleGroupsResponse, Members: &mListRuleGroupsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRuleGroupsResponse})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTLSInspectionConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTLSInspectionConfigurationsRequest, Members: &mListTLSInspectionConfigurationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTLSInspectionConfigurationsRequest})
+var sListTLSInspectionConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTLSInspectionConfigurationsResponse, Members: &mListTLSInspectionConfigurationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTLSInspectionConfigurationsResponse})
+var sListVpcEndpointAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcEndpointAssociationsRequest, Members: &mListVpcEndpointAssociationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListVpcEndpointAssociationsRequest})
+var sListVpcEndpointAssociationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcEndpointAssociationsResponse, Members: &mListVpcEndpointAssociationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListVpcEndpointAssociationsResponse})
+var sPutResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyRequest, Members: &mPutResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutResourcePolicyRequest})
+var sPutResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutResourcePolicyResponse})
+var sRejectNetworkFirewallTransitGatewayAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectNetworkFirewallTransitGatewayAttachmentRequest, Members: &mRejectNetworkFirewallTransitGatewayAttachmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eRejectNetworkFirewallTransitGatewayAttachmentRequest})
+var sRejectNetworkFirewallTransitGatewayAttachmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectNetworkFirewallTransitGatewayAttachmentResponse, Members: &mRejectNetworkFirewallTransitGatewayAttachmentResponse, Type: smithy.ShapeTypeStructure, Ext: &eRejectNetworkFirewallTransitGatewayAttachmentResponse})
+var sStartAnalysisReportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAnalysisReportRequest, Members: &mStartAnalysisReportRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartAnalysisReportRequest})
+var sStartAnalysisReportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAnalysisReportResponse, Members: &mStartAnalysisReportResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartAnalysisReportResponse})
+var sStartFlowCaptureRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFlowCaptureRequest, Members: &mStartFlowCaptureRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartFlowCaptureRequest})
+var sStartFlowCaptureResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFlowCaptureResponse, Members: &mStartFlowCaptureResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartFlowCaptureResponse})
+var sStartFlowFlushRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFlowFlushRequest, Members: &mStartFlowFlushRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartFlowFlushRequest})
+var sStartFlowFlushResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFlowFlushResponse, Members: &mStartFlowFlushResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartFlowFlushResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateAvailabilityZoneChangeProtectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAvailabilityZoneChangeProtectionRequest, Members: &mUpdateAvailabilityZoneChangeProtectionRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAvailabilityZoneChangeProtectionRequest})
+var sUpdateAvailabilityZoneChangeProtectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAvailabilityZoneChangeProtectionResponse, Members: &mUpdateAvailabilityZoneChangeProtectionResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAvailabilityZoneChangeProtectionResponse})
+var sUpdateContainerAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateContainerAssociationRequest, Members: &mUpdateContainerAssociationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateContainerAssociationRequest})
+var sUpdateContainerAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateContainerAssociationResponse, Members: &mUpdateContainerAssociationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateContainerAssociationResponse})
+var sUpdateFirewallAnalysisSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallAnalysisSettingsRequest, Members: &mUpdateFirewallAnalysisSettingsRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFirewallAnalysisSettingsRequest})
+var sUpdateFirewallAnalysisSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallAnalysisSettingsResponse, Members: &mUpdateFirewallAnalysisSettingsResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFirewallAnalysisSettingsResponse})
+var sUpdateFirewallDeleteProtectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallDeleteProtectionRequest, Members: &mUpdateFirewallDeleteProtectionRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFirewallDeleteProtectionRequest})
+var sUpdateFirewallDeleteProtectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallDeleteProtectionResponse, Members: &mUpdateFirewallDeleteProtectionResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFirewallDeleteProtectionResponse})
+var sUpdateFirewallDescriptionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallDescriptionRequest, Members: &mUpdateFirewallDescriptionRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFirewallDescriptionRequest})
+var sUpdateFirewallDescriptionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallDescriptionResponse, Members: &mUpdateFirewallDescriptionResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFirewallDescriptionResponse})
+var sUpdateFirewallEncryptionConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallEncryptionConfigurationRequest, Members: &mUpdateFirewallEncryptionConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFirewallEncryptionConfigurationRequest})
+var sUpdateFirewallEncryptionConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallEncryptionConfigurationResponse, Members: &mUpdateFirewallEncryptionConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFirewallEncryptionConfigurationResponse})
+var sUpdateFirewallPolicyChangeProtectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallPolicyChangeProtectionRequest, Members: &mUpdateFirewallPolicyChangeProtectionRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFirewallPolicyChangeProtectionRequest})
+var sUpdateFirewallPolicyChangeProtectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallPolicyChangeProtectionResponse, Members: &mUpdateFirewallPolicyChangeProtectionResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFirewallPolicyChangeProtectionResponse})
+var sUpdateFirewallPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallPolicyRequest, Members: &mUpdateFirewallPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFirewallPolicyRequest})
+var sUpdateFirewallPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFirewallPolicyResponse, Members: &mUpdateFirewallPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFirewallPolicyResponse})
+var sUpdateLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLoggingConfigurationRequest, Members: &mUpdateLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLoggingConfigurationRequest})
+var sUpdateLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLoggingConfigurationResponse, Members: &mUpdateLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLoggingConfigurationResponse})
+var sUpdateProxyConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyConfigurationRequest, Members: &mUpdateProxyConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProxyConfigurationRequest})
+var sUpdateProxyConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyConfigurationResponse, Members: &mUpdateProxyConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProxyConfigurationResponse})
+var sUpdateProxyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyRequest, Members: &mUpdateProxyRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProxyRequest})
+var sUpdateProxyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyResponse, Members: &mUpdateProxyResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProxyResponse})
+var sUpdateProxyRuleGroupPrioritiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyRuleGroupPrioritiesRequest, Members: &mUpdateProxyRuleGroupPrioritiesRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProxyRuleGroupPrioritiesRequest})
+var sUpdateProxyRuleGroupPrioritiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyRuleGroupPrioritiesResponse, Members: &mUpdateProxyRuleGroupPrioritiesResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProxyRuleGroupPrioritiesResponse})
+var sUpdateProxyRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyRuleRequest, Members: &mUpdateProxyRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProxyRuleRequest})
+var sUpdateProxyRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyRuleResponse, Members: &mUpdateProxyRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProxyRuleResponse})
+var sUpdateProxyRulePrioritiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyRulePrioritiesRequest, Members: &mUpdateProxyRulePrioritiesRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProxyRulePrioritiesRequest})
+var sUpdateProxyRulePrioritiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxyRulePrioritiesResponse, Members: &mUpdateProxyRulePrioritiesResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProxyRulePrioritiesResponse})
+var sUpdateProxySettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxySettingsRequest, Members: &mUpdateProxySettingsRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProxySettingsRequest})
+var sUpdateProxySettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxySettingsResponse, Members: &mUpdateProxySettingsResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProxySettingsResponse})
+var sUpdateRuleGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRuleGroupRequest, Members: &mUpdateRuleGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRuleGroupRequest})
+var sUpdateRuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRuleGroupResponse, Members: &mUpdateRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRuleGroupResponse})
+var sUpdateSubnetChangeProtectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubnetChangeProtectionRequest, Members: &mUpdateSubnetChangeProtectionRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSubnetChangeProtectionRequest})
+var sUpdateSubnetChangeProtectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubnetChangeProtectionResponse, Members: &mUpdateSubnetChangeProtectionResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSubnetChangeProtectionResponse})
+var sUpdateTLSInspectionConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTLSInspectionConfigurationRequest, Members: &mUpdateTLSInspectionConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTLSInspectionConfigurationRequest})
+var sUpdateTLSInspectionConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTLSInspectionConfigurationResponse, Members: &mUpdateTLSInspectionConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTLSInspectionConfigurationResponse})
 
-var sActionDefinition_PublishMetricAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublishMetricAction", ID: &iPublishMetricAction, Members: &mPublishMetricAction, Type: smithy.ShapeTypeStructure, Ext: &ext[87]})
-var sAddress_AddressDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressDefinition", ID: &i_AddressDefinition, Type: smithy.ShapeTypeString, Ext: &ext[90]})
-var s_Addresses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &ext[93]})
-var sAnalysisReport_AnalysisReportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisReportId", ID: &i_AnalysisReportId, Type: smithy.ShapeTypeString, Ext: &ext[96]})
-var sAnalysisReport_AnalysisType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisType", ID: &iEnabledAnalysisType, Members: &mEnabledAnalysisType, Type: smithy.ShapeTypeEnum, Ext: &ext[97]})
-var sAnalysisReport_ReportTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportTime", ID: &i_ReportTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[98]})
-var sAnalysisReport_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &ext[99]})
-var s_AnalysisReportResults_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAnalysisTypeReportResult, Members: &mAnalysisTypeReportResult, Type: smithy.ShapeTypeStructure, Ext: &ext[103]})
-var s_AnalysisReports_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAnalysisReport, Members: &mAnalysisReport, Type: smithy.ShapeTypeStructure, Ext: &ext[105]})
-var sAnalysisResult_IdentifiedRuleIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentifiedRuleIds", ID: &i_RuleIdList, Members: &m_RuleIdList, Type: smithy.ShapeTypeList, Ext: &ext[107]})
-var sAnalysisResult_IdentifiedType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentifiedType", ID: &iIdentifiedType, Members: &mIdentifiedType, Type: smithy.ShapeTypeEnum, Ext: &ext[108]})
-var sAnalysisResult_AnalysisDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisDetail", ID: &i_CollectionMember_String, Type: smithy.ShapeTypeString, Ext: &ext[109]})
-var s_AnalysisResultList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAnalysisResult, Members: &mAnalysisResult, Type: smithy.ShapeTypeStructure, Ext: &ext[111]})
-var sAnalysisTypeReportResult_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &i_CollectionMember_String, Type: smithy.ShapeTypeString, Ext: &ext[113]})
-var sAnalysisTypeReportResult_FirstAccessed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirstAccessed", ID: &i_FirstAccessed, Type: smithy.ShapeTypeTimestamp, Ext: &ext[114]})
-var sAnalysisTypeReportResult_LastAccessed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastAccessed", ID: &i_LastAccessed, Type: smithy.ShapeTypeTimestamp, Ext: &ext[115]})
-var sAnalysisTypeReportResult_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_Domain, Type: smithy.ShapeTypeString, Ext: &ext[116]})
-var sAnalysisTypeReportResult_Hits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Hits", ID: &iHits, Members: &mHits, Type: smithy.ShapeTypeStructure, Ext: &ext[117]})
-var sAnalysisTypeReportResult_UniqueSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UniqueSources", ID: &iUniqueSources, Members: &mUniqueSources, Type: smithy.ShapeTypeStructure, Ext: &ext[118]})
-var s_AssociationSyncState_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[120]})
-var s_AssociationSyncState_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iAZSyncState, Members: &mAZSyncState, Type: smithy.ShapeTypeStructure, Ext: &ext[121]})
-var sAttachment_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetId", ID: &i_AzSubnet, Type: smithy.ShapeTypeString, Ext: &ext[123]})
-var sAttachment_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointId", ID: &i_EndpointId, Type: smithy.ShapeTypeString, Ext: &ext[124]})
-var sAttachment_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAttachmentStatus, Members: &mAttachmentStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[125]})
-var sAttachment_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString, Ext: &ext[126]})
-var sAttachment_DnsName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsName", ID: &i_DnsName, Type: smithy.ShapeTypeString, Ext: &ext[127]})
-var sAttachmentStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[130]})
-var sAttachmentStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[131]})
-var sAttachmentStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[132]})
-var sAttachmentStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[133]})
-var sAttachmentStatus_SCALING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCALING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[134]})
-var sAttachmentStatus_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[135]})
-var sAvailabilityZoneMapping_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_AvailabilityZoneMappingString, Type: smithy.ShapeTypeString, Ext: &ext[139]})
-var s_AvailabilityZoneMappings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAvailabilityZoneMapping, Members: &mAvailabilityZoneMapping, Type: smithy.ShapeTypeStructure, Ext: &ext[141]})
-var sAvailabilityZoneMetadata_IPAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPAddressType", ID: &iIPAddressType, Members: &mIPAddressType, Type: smithy.ShapeTypeEnum, Ext: &ext[144]})
-var s_AzSubnets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AzSubnet, Type: smithy.ShapeTypeString, Ext: &ext[148]})
-var sAZSyncState_Attachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attachment", ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure, Ext: &ext[150]})
-var sCapacityUsageSummary_CIDRs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CIDRs", ID: &iCIDRSummary, Members: &mCIDRSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[154]})
-var s_Certificates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTlsCertificateData, Members: &mTlsCertificateData, Type: smithy.ShapeTypeStructure, Ext: &ext[156]})
-var sCheckCertificateRevocationStatusActions_RevokedStatusAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevokedStatusAction", ID: &iRevocationCheckAction, Members: &mRevocationCheckAction, Type: smithy.ShapeTypeEnum, Ext: &ext[158]})
-var sCheckCertificateRevocationStatusActions_UnknownStatusAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnknownStatusAction", ID: &iRevocationCheckAction, Members: &mRevocationCheckAction, Type: smithy.ShapeTypeEnum, Ext: &ext[159]})
-var sCIDRSummary_AvailableCIDRCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailableCIDRCount", ID: &i_CIDRCount, Type: smithy.ShapeTypeInteger, Ext: &ext[162]})
-var sCIDRSummary_UtilizedCIDRCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UtilizedCIDRCount", ID: &i_CIDRCount, Type: smithy.ShapeTypeInteger, Ext: &ext[163]})
-var sCIDRSummary_IPSetReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPSetReferences", ID: &i_IPSetMetadataMap, Members: &m_IPSetMetadataMap, Type: smithy.ShapeTypeMap, Ext: &ext[164]})
-var sConfigurationSyncState_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[169]})
-var sConfigurationSyncState_IN_SYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_SYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[170]})
-var sConfigurationSyncState_CAPACITY_CONSTRAINED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CAPACITY_CONSTRAINED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[171]})
-var s_ContainerAssociations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContainerAssociationSummary, Members: &mContainerAssociationSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[174]})
-var sContainerAssociationStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[176]})
-var sContainerAssociationStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[177]})
-var sContainerAssociationStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[178]})
-var sContainerAssociationStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[179]})
-var sContainerAssociationSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[181]})
-var sContainerAssociationSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[182]})
-var sContainerAttribute_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ContainerAttributeKey, Type: smithy.ShapeTypeString, Ext: &ext[184]})
-var sContainerAttribute_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_ContainerAttributeValue, Type: smithy.ShapeTypeString, Ext: &ext[185]})
-var s_ContainerAttributes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContainerAttribute, Members: &mContainerAttribute, Type: smithy.ShapeTypeStructure, Ext: &ext[188]})
-var sContainerMonitoringConfiguration_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[191]})
-var sContainerMonitoringConfiguration_AttributeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeFilters", ID: &i_ContainerAttributes, Members: &m_ContainerAttributes, Type: smithy.ShapeTypeList, Ext: &ext[192]})
-var s_ContainerMonitoringConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContainerMonitoringConfiguration, Members: &mContainerMonitoringConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[194]})
-var sContainerMonitoringType_ECS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[196]})
-var sContainerMonitoringType_EKS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EKS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[197]})
-var sCreateProxyRule_ProxyRuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[200]})
-var sCreateProxyRule_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[201]})
-var sCreateProxyRule_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iProxyRulePhaseAction, Members: &mProxyRulePhaseAction, Type: smithy.ShapeTypeEnum, Ext: &ext[202]})
-var sCreateProxyRule_Conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Conditions", ID: &i_ProxyRuleConditionList, Members: &m_ProxyRuleConditionList, Type: smithy.ShapeTypeList, Ext: &ext[203]})
-var sCreateProxyRule_InsertPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsertPosition", ID: &i_InsertPosition, Type: smithy.ShapeTypeInteger, Ext: &ext[204]})
-var s_CreateProxyRuleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCreateProxyRule, Members: &mCreateProxyRule, Type: smithy.ShapeTypeStructure, Ext: &ext[206]})
-var sCreateProxyRulesByRequestPhase_PreDNS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreDNS", ID: &i_CreateProxyRuleList, Members: &m_CreateProxyRuleList, Type: smithy.ShapeTypeList, Ext: &ext[208]})
-var sCreateProxyRulesByRequestPhase_PreREQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreREQUEST", ID: &i_CreateProxyRuleList, Members: &m_CreateProxyRuleList, Type: smithy.ShapeTypeList, Ext: &ext[209]})
-var sCreateProxyRulesByRequestPhase_PostRESPONSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostRESPONSE", ID: &i_CreateProxyRuleList, Members: &m_CreateProxyRuleList, Type: smithy.ShapeTypeList, Ext: &ext[210]})
-var sCustomAction_ActionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionName", ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &ext[213]})
-var sCustomAction_ActionDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionDefinition", ID: &iActionDefinition, Members: &mActionDefinition, Type: smithy.ShapeTypeStructure, Ext: &ext[214]})
-var s_CustomActions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomAction, Members: &mCustomAction, Type: smithy.ShapeTypeStructure, Ext: &ext[216]})
-var sDescribeProxyResource_ProxyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[220]})
-var sDescribeProxyResource_ProxyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[221]})
-var sDescribeProxyResource_ProxyConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[222]})
-var sDescribeProxyResource_ProxyConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[223]})
-var sDescribeProxyResource_NatGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayId", ID: &i_NatGatewayId, Type: smithy.ShapeTypeString, Ext: &ext[224]})
-var sDescribeProxyResource_ProxyState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyState", ID: &iProxyState, Members: &mProxyState, Type: smithy.ShapeTypeEnum, Ext: &ext[225]})
-var sDescribeProxyResource_ProxyModifyState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyModifyState", ID: &iProxyModifyState, Members: &mProxyModifyState, Type: smithy.ShapeTypeEnum, Ext: &ext[226]})
-var sDescribeProxyResource_ListenerProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerProperties", ID: &i_ListenerProperties, Members: &m_ListenerProperties, Type: smithy.ShapeTypeList, Ext: &ext[227]})
-var sDescribeProxyResource_TlsInterceptProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsInterceptProperties", ID: &iTlsInterceptProperties, Members: &mTlsInterceptProperties, Type: smithy.ShapeTypeStructure, Ext: &ext[228]})
-var sDescribeProxyResource_VpcEndpointServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointServiceName", ID: &i_VpcEndpointServiceName, Type: smithy.ShapeTypeString, Ext: &ext[229]})
-var sDescribeProxyResource_PrivateDNSName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateDNSName", ID: &i_PrivateDNSName, Type: smithy.ShapeTypeString, Ext: &ext[230]})
-var sDescribeProxyResource_CreateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateTime", ID: &i_CreateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[231]})
-var sDescribeProxyResource_DeleteTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteTime", ID: &i_DeleteTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[232]})
-var sDescribeProxyResource_UpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateTime", ID: &i_UpdateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[233]})
-var sDescribeProxyResource_FailureCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureCode", ID: &i_FailureCode, Type: smithy.ShapeTypeString, Ext: &ext[234]})
-var sDescribeProxyResource_FailureMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureMessage", ID: &i_FailureMessage, Type: smithy.ShapeTypeString, Ext: &ext[235]})
-var sDescribeProxyResource_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[236]})
-var sDimension_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_DimensionValue, Type: smithy.ShapeTypeString, Ext: &ext[240]})
-var s_Dimensions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeStructure, Ext: &ext[242]})
-var sDNSExpiryExceptionPolicy_REJECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[245]})
-var sDNSExpiryExceptionPolicy_DROP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DROP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[246]})
-var sDNSExpiryExceptionPolicy_CONTINUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTINUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[247]})
-var sEnabledAnalysisType_TLS_SNI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLS_SNI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[252]})
-var sEnabledAnalysisType_HTTP_HOST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP_HOST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[253]})
-var s_EnabledAnalysisTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnabledAnalysisType, Members: &mEnabledAnalysisType, Type: smithy.ShapeTypeEnum, Ext: &ext[255]})
-var sEncryptionConfiguration_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyId, Type: smithy.ShapeTypeString, Ext: &ext[259]})
-var sEncryptionConfiguration_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum, Ext: &ext[260]})
-var sEncryptionType_CUSTOMER_KMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_KMS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[262]})
-var sEncryptionType_AWS_OWNED_KMS_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_OWNED_KMS_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[263]})
-var sFirewall_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[270]})
-var sFirewall_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[271]})
-var sFirewall_FirewallPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[272]})
-var sFirewall_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &ext[273]})
-var sFirewall_SubnetMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetMappings", ID: &i_SubnetMappings, Members: &m_SubnetMappings, Type: smithy.ShapeTypeList, Ext: &ext[274]})
-var sFirewall_DeleteProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[275]})
-var sFirewall_SubnetChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetChangeProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[276]})
-var sFirewall_FirewallPolicyChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyChangeProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[277]})
-var sFirewall_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[278]})
-var sFirewall_FirewallId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &ext[279]})
-var sFirewall_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[280]})
-var sFirewall_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[281]})
-var sFirewall_NumberOfAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfAssociations", ID: &i_NumberOfAssociations, Type: smithy.ShapeTypeInteger, Ext: &ext[282]})
-var sFirewall_EnabledAnalysisTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledAnalysisTypes", ID: &i_EnabledAnalysisTypes, Members: &m_EnabledAnalysisTypes, Type: smithy.ShapeTypeList, Ext: &ext[283]})
-var sFirewall_TransitGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayId", ID: &i_TransitGatewayId, Type: smithy.ShapeTypeString, Ext: &ext[284]})
-var sFirewall_TransitGatewayOwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayOwnerAccountId", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString, Ext: &ext[285]})
-var sFirewall_AvailabilityZoneMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneMappings", ID: &i_AvailabilityZoneMappings, Members: &m_AvailabilityZoneMappings, Type: smithy.ShapeTypeList, Ext: &ext[286]})
-var sFirewall_AvailabilityZoneChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneChangeProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[287]})
-var sFirewall_NatGatewayMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayMappings", ID: &i_NatGatewayMappingsList, Members: &m_NatGatewayMappingsList, Type: smithy.ShapeTypeList, Ext: &ext[288]})
-var sFirewall_ProxySettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxySettings", ID: &iProxySettings, Members: &mProxySettings, Type: smithy.ShapeTypeStructure, Ext: &ext[289]})
-var sFirewall_NoSourcePreservation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NoSourcePreservation", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[290]})
-var sFirewall_VpcEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpoint", ID: &iVpcEndpoint, Members: &mVpcEndpoint, Type: smithy.ShapeTypeStructure, Ext: &ext[291]})
-var sFirewallMetadata_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[293]})
-var sFirewallMetadata_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[294]})
-var sFirewallMetadata_TransitGatewayAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentId", ID: &i_TransitGatewayAttachmentId, Type: smithy.ShapeTypeString, Ext: &ext[295]})
-var s_FirewallPolicies_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFirewallPolicyMetadata, Members: &mFirewallPolicyMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[297]})
-var sFirewallPolicy_StatelessRuleGroupReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatelessRuleGroupReferences", ID: &i_StatelessRuleGroupReferences, Members: &m_StatelessRuleGroupReferences, Type: smithy.ShapeTypeList, Ext: &ext[299]})
-var sFirewallPolicy_StatelessDefaultActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatelessDefaultActions", ID: &i_StatelessActions, Members: &m_StatelessActions, Type: smithy.ShapeTypeList, Ext: &ext[300]})
-var sFirewallPolicy_StatelessFragmentDefaultActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatelessFragmentDefaultActions", ID: &i_StatelessActions, Members: &m_StatelessActions, Type: smithy.ShapeTypeList, Ext: &ext[301]})
-var sFirewallPolicy_StatelessCustomActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatelessCustomActions", ID: &i_CustomActions, Members: &m_CustomActions, Type: smithy.ShapeTypeList, Ext: &ext[302]})
-var sFirewallPolicy_StatefulRuleGroupReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatefulRuleGroupReferences", ID: &i_StatefulRuleGroupReferences, Members: &m_StatefulRuleGroupReferences, Type: smithy.ShapeTypeList, Ext: &ext[303]})
-var sFirewallPolicy_StatefulDefaultActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatefulDefaultActions", ID: &i_StatefulActions, Members: &m_StatefulActions, Type: smithy.ShapeTypeList, Ext: &ext[304]})
-var sFirewallPolicy_StatefulEngineOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatefulEngineOptions", ID: &iStatefulEngineOptions, Members: &mStatefulEngineOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[305]})
-var sFirewallPolicy_TLSInspectionConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[306]})
-var sFirewallPolicy_PolicyVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyVariables", ID: &iPolicyVariables, Members: &mPolicyVariables, Type: smithy.ShapeTypeStructure, Ext: &ext[307]})
-var sFirewallPolicy_EnableTLSSessionHolding = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableTLSSessionHolding", ID: &i_EnableTLSSessionHolding, Type: smithy.ShapeTypeBoolean, Ext: &ext[308]})
-var sFirewallPolicy_Route53ResolvedIPValidation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Route53ResolvedIPValidation", ID: &iRoute53ResolvedIPValidation, Members: &mRoute53ResolvedIPValidation, Type: smithy.ShapeTypeStructure, Ext: &ext[309]})
-var sFirewallPolicyError_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iFirewallPolicyErrorCode, Members: &mFirewallPolicyErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[311]})
-var sFirewallPolicyError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_StatusReason, Type: smithy.ShapeTypeString, Ext: &ext[312]})
-var sFirewallPolicyError_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_FirewallPolicyErrorResourceId, Type: smithy.ShapeTypeString, Ext: &ext[313]})
-var sFirewallPolicyErrorCode_DNS_FIREWALL_RULE_GROUP_UNAVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNS_FIREWALL_RULE_GROUP_UNAVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[315]})
-var sFirewallPolicyErrorCode_ROUTE53_RESOLVED_IP_VALIDATION_MISSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROUTE53_RESOLVED_IP_VALIDATION_MISSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[316]})
-var s_FirewallPolicyErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFirewallPolicyError, Members: &mFirewallPolicyError, Type: smithy.ShapeTypeStructure, Ext: &ext[319]})
-var sFirewallPolicyMetadata_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[321]})
-var sFirewallPolicyMetadata_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[322]})
-var sFirewallPolicyResponse_FirewallPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[324]})
-var sFirewallPolicyResponse_FirewallPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[325]})
-var sFirewallPolicyResponse_FirewallPolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &ext[326]})
-var sFirewallPolicyResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[327]})
-var sFirewallPolicyResponse_FirewallPolicyStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyStatus", ID: &iResourceStatus, Members: &mResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[328]})
-var sFirewallPolicyResponse_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_ResourceStatusMessage, Type: smithy.ShapeTypeString, Ext: &ext[329]})
-var sFirewallPolicyResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[330]})
-var sFirewallPolicyResponse_ConsumedStatelessRuleCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumedStatelessRuleCapacity", ID: &i_RuleCapacity, Type: smithy.ShapeTypeInteger, Ext: &ext[331]})
-var sFirewallPolicyResponse_ConsumedStatefulRuleCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumedStatefulRuleCapacity", ID: &i_RuleCapacity, Type: smithy.ShapeTypeInteger, Ext: &ext[332]})
-var sFirewallPolicyResponse_ConsumedStatefulDomainCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumedStatefulDomainCapacity", ID: &i_RuleCapacity, Type: smithy.ShapeTypeInteger, Ext: &ext[333]})
-var sFirewallPolicyResponse_NumberOfAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfAssociations", ID: &i_NumberOfAssociations, Type: smithy.ShapeTypeInteger, Ext: &ext[334]})
-var sFirewallPolicyResponse_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[335]})
-var sFirewallPolicyResponse_Errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errors", ID: &i_FirewallPolicyErrors, Members: &m_FirewallPolicyErrors, Type: smithy.ShapeTypeList, Ext: &ext[336]})
-var sFirewallPolicyResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_LastUpdateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[337]})
-var s_Firewalls_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFirewallMetadata, Members: &mFirewallMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[339]})
-var sFirewallStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iFirewallStatusValue, Members: &mFirewallStatusValue, Type: smithy.ShapeTypeEnum, Ext: &ext[341]})
-var sFirewallStatus_ConfigurationSyncStateSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSyncStateSummary", ID: &iConfigurationSyncState, Members: &mConfigurationSyncState, Type: smithy.ShapeTypeEnum, Ext: &ext[342]})
-var sFirewallStatus_SyncStates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncStates", ID: &i_SyncStates, Members: &m_SyncStates, Type: smithy.ShapeTypeMap, Ext: &ext[343]})
-var sFirewallStatus_CapacityUsageSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityUsageSummary", ID: &iCapacityUsageSummary, Members: &mCapacityUsageSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[344]})
-var sFirewallStatus_TransitGatewayAttachmentSyncState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentSyncState", ID: &iTransitGatewayAttachmentSyncState, Members: &mTransitGatewayAttachmentSyncState, Type: smithy.ShapeTypeStructure, Ext: &ext[345]})
-var sFirewallStatusValue_PROVISIONING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROVISIONING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[347]})
-var sFirewallStatusValue_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[348]})
-var sFirewallStatusValue_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[349]})
-var sFirewallStatusValue_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[350]})
-var s_Flags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTCPFlag, Members: &mTCPFlag, Type: smithy.ShapeTypeEnum, Ext: &ext[353]})
-var sFlow_SourceAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceAddress", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &ext[355]})
-var sFlow_DestinationAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationAddress", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &ext[356]})
-var sFlow_SourcePort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourcePort", ID: &i_Port, Type: smithy.ShapeTypeString, Ext: &ext[357]})
-var sFlow_DestinationPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationPort", ID: &i_Port, Type: smithy.ShapeTypeString, Ext: &ext[358]})
-var sFlow_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &i_ProtocolString, Type: smithy.ShapeTypeString, Ext: &ext[359]})
-var sFlow_Age = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Age", ID: &i_Age, Type: smithy.ShapeTypeInteger, Ext: &ext[360]})
-var sFlow_PacketCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PacketCount", ID: &i_PacketCount, Type: smithy.ShapeTypeInteger, Ext: &ext[361]})
-var sFlow_ByteCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ByteCount", ID: &i_ByteCount, Type: smithy.ShapeTypeLong, Ext: &ext[362]})
-var sFlowFilter_SourceAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceAddress", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &ext[364]})
-var sFlowFilter_DestinationAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationAddress", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &ext[365]})
-var sFlowFilter_SourcePort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourcePort", ID: &i_Port, Type: smithy.ShapeTypeString, Ext: &ext[366]})
-var sFlowFilter_DestinationPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationPort", ID: &i_Port, Type: smithy.ShapeTypeString, Ext: &ext[367]})
-var sFlowFilter_Protocols = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocols", ID: &i_ProtocolStrings, Members: &m_ProtocolStrings, Type: smithy.ShapeTypeList, Ext: &ext[368]})
-var s_FlowFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFlowFilter, Members: &mFlowFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[370]})
-var sFlowOperation_MinimumFlowAgeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimumFlowAgeInSeconds", ID: &i_Age, Type: smithy.ShapeTypeInteger, Ext: &ext[372]})
-var sFlowOperation_FlowFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowFilters", ID: &i_FlowFilters, Members: &m_FlowFilters, Type: smithy.ShapeTypeList, Ext: &ext[373]})
-var sFlowOperationMetadata_FlowOperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationId", ID: &i_FlowOperationId, Type: smithy.ShapeTypeString, Ext: &ext[376]})
-var sFlowOperationMetadata_FlowOperationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationType", ID: &iFlowOperationType, Members: &mFlowOperationType, Type: smithy.ShapeTypeEnum, Ext: &ext[377]})
-var sFlowOperationMetadata_FlowRequestTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowRequestTimestamp", ID: &i_FlowRequestTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[378]})
-var sFlowOperationMetadata_FlowOperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationStatus", ID: &iFlowOperationStatus, Members: &mFlowOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[379]})
-var s_FlowOperations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFlowOperationMetadata, Members: &mFlowOperationMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[381]})
-var sFlowOperationStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[383]})
-var sFlowOperationStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[384]})
-var sFlowOperationStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[385]})
-var sFlowOperationStatus_COMPLETED_WITH_ERRORS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED_WITH_ERRORS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[386]})
-var sFlowOperationType_FLOW_FLUSH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLOW_FLUSH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[388]})
-var sFlowOperationType_FLOW_CAPTURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLOW_CAPTURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[389]})
-var s_Flows_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFlow, Members: &mFlow, Type: smithy.ShapeTypeStructure, Ext: &ext[392]})
-var sFlowTimeouts_TcpIdleTimeoutSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TcpIdleTimeoutSeconds", ID: &i_TcpIdleTimeoutRangeBound, Type: smithy.ShapeTypeInteger, Ext: &ext[394]})
-var sGeneratedRulesType_ALLOWLIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOWLIST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[396]})
-var sGeneratedRulesType_DENYLIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENYLIST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[397]})
-var sGeneratedRulesType_REJECTLIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTLIST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[398]})
-var sGeneratedRulesType_ALERTLIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALERTLIST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[399]})
-var sHeader_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iStatefulRuleProtocol, Members: &mStatefulRuleProtocol, Type: smithy.ShapeTypeEnum, Ext: &ext[403]})
-var sHeader_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &i_Source, Type: smithy.ShapeTypeString, Ext: &ext[404]})
-var sHeader_SourcePort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourcePort", ID: &i_Port, Type: smithy.ShapeTypeString, Ext: &ext[405]})
-var sHeader_Direction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Direction", ID: &iStatefulRuleDirection, Members: &mStatefulRuleDirection, Type: smithy.ShapeTypeEnum, Ext: &ext[406]})
-var sHeader_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &i_Destination, Type: smithy.ShapeTypeString, Ext: &ext[407]})
-var sHeader_DestinationPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationPort", ID: &i_Port, Type: smithy.ShapeTypeString, Ext: &ext[408]})
-var sHits_Count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Count", ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &ext[410]})
-var sIdentifiedType_STATELESS_RULE_FORWARDING_ASYMMETRICALLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STATELESS_RULE_FORWARDING_ASYMMETRICALLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[412]})
-var sIdentifiedType_STATELESS_RULE_CONTAINS_TCP_FLAGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STATELESS_RULE_CONTAINS_TCP_FLAGS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[413]})
-var sInsufficientCapacityException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[416]})
-var sInternalServerError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[418]})
-var sInvalidOperationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[420]})
-var sInvalidRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[422]})
-var sInvalidResourcePolicyException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[424]})
-var sInvalidTokenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[426]})
-var sIPAddressType_DUALSTACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUALSTACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[428]})
-var sIPAddressType_IPV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[429]})
-var sIPAddressType_IPV6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV6", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[430]})
-var sIPSet_Definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Definition", ID: &i_VariableDefinitionList, Members: &m_VariableDefinitionList, Type: smithy.ShapeTypeList, Ext: &ext[432]})
-var sIPSetMetadata_ResolvedCIDRCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResolvedCIDRCount", ID: &i_CIDRCount, Type: smithy.ShapeTypeInteger, Ext: &ext[435]})
-var s_IPSetMetadataMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_IPSetArn, Type: smithy.ShapeTypeString, Ext: &ext[437]})
-var s_IPSetMetadataMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iIPSetMetadata, Members: &mIPSetMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[438]})
-var sIPSetReference_ReferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReferenceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[440]})
-var s_IPSetReferenceMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_IPSetReferenceName, Type: smithy.ShapeTypeString, Ext: &ext[442]})
-var s_IPSetReferenceMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iIPSetReference, Members: &mIPSetReference, Type: smithy.ShapeTypeStructure, Ext: &ext[443]})
-var s_IPSets_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_RuleVariableName, Type: smithy.ShapeTypeString, Ext: &ext[446]})
-var s_IPSets_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iIPSet, Members: &mIPSet, Type: smithy.ShapeTypeStructure, Ext: &ext[447]})
-var sLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[453]})
-var s_ListenerProperties_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListenerProperty, Members: &mListenerProperty, Type: smithy.ShapeTypeStructure, Ext: &ext[455]})
-var s_ListenerPropertiesRequest_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListenerPropertyRequest, Members: &mListenerPropertyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[457]})
-var sListenerProperty_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_NatGatewayPort, Type: smithy.ShapeTypeInteger, Ext: &ext[459]})
-var sListenerProperty_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iListenerPropertyType, Members: &mListenerPropertyType, Type: smithy.ShapeTypeEnum, Ext: &ext[460]})
-var sListenerPropertyRequest_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_NatGatewayPort, Type: smithy.ShapeTypeInteger, Ext: &ext[462]})
-var sListenerPropertyRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iListenerPropertyType, Members: &mListenerPropertyType, Type: smithy.ShapeTypeEnum, Ext: &ext[463]})
-var sListenerPropertyType_HTTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[465]})
-var sListenerPropertyType_HTTPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTPS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[466]})
-var sLogDestinationConfig_LogType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogType", ID: &iLogType, Members: &mLogType, Type: smithy.ShapeTypeEnum, Ext: &ext[469]})
-var sLogDestinationConfig_LogDestinationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogDestinationType", ID: &iLogDestinationType, Members: &mLogDestinationType, Type: smithy.ShapeTypeEnum, Ext: &ext[470]})
-var sLogDestinationConfig_LogDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogDestination", ID: &i_LogDestinationMap, Members: &m_LogDestinationMap, Type: smithy.ShapeTypeMap, Ext: &ext[471]})
-var s_LogDestinationConfigs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLogDestinationConfig, Members: &mLogDestinationConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[473]})
-var s_LogDestinationMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_HashMapKey, Type: smithy.ShapeTypeString, Ext: &ext[475]})
-var s_LogDestinationMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_HashMapValue, Type: smithy.ShapeTypeString, Ext: &ext[476]})
-var sLogDestinationPermissionException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[478]})
-var sLogDestinationType_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[480]})
-var sLogDestinationType_CLOUDWATCH_LOGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOUDWATCH_LOGS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[481]})
-var sLogDestinationType_KINESIS_DATA_FIREHOSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KINESIS_DATA_FIREHOSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[482]})
-var sLoggingConfiguration_LogDestinationConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogDestinationConfigs", ID: &i_LogDestinationConfigs, Members: &m_LogDestinationConfigs, Type: smithy.ShapeTypeList, Ext: &ext[484]})
-var sLogType_ALERT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALERT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[486]})
-var sLogType_FLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[487]})
-var sLogType_TLS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[488]})
-var sMatchAttributes_Sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sources", ID: &i_Addresses, Members: &m_Addresses, Type: smithy.ShapeTypeList, Ext: &ext[490]})
-var sMatchAttributes_Destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destinations", ID: &i_Addresses, Members: &m_Addresses, Type: smithy.ShapeTypeList, Ext: &ext[491]})
-var sMatchAttributes_SourcePorts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourcePorts", ID: &i_PortRanges, Members: &m_PortRanges, Type: smithy.ShapeTypeList, Ext: &ext[492]})
-var sMatchAttributes_DestinationPorts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationPorts", ID: &i_PortRanges, Members: &m_PortRanges, Type: smithy.ShapeTypeList, Ext: &ext[493]})
-var sMatchAttributes_Protocols = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocols", ID: &i_ProtocolNumbers, Members: &m_ProtocolNumbers, Type: smithy.ShapeTypeList, Ext: &ext[494]})
-var sMatchAttributes_TCPFlags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TCPFlags", ID: &i_TCPFlags, Members: &m_TCPFlags, Type: smithy.ShapeTypeList, Ext: &ext[495]})
-var sNatGatewayAttachment_NatGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayId", ID: &i_NatGatewayId, Type: smithy.ShapeTypeString, Ext: &ext[497]})
-var sNatGatewayAttachment_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iNatGatewayAttachmentStatus, Members: &mNatGatewayAttachmentStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[498]})
-var sNatGatewayAttachment_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_StatusReason, Type: smithy.ShapeTypeString, Ext: &ext[499]})
-var sNatGatewayAttachment_DnsName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsName", ID: &i_DnsName, Type: smithy.ShapeTypeString, Ext: &ext[500]})
-var s_NatGatewayAttachmentsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNatGatewayAttachment, Members: &mNatGatewayAttachment, Type: smithy.ShapeTypeStructure, Ext: &ext[502]})
-var sNatGatewayAttachmentStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[504]})
-var sNatGatewayAttachmentStatus_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[505]})
-var sNatGatewayAttachmentStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[506]})
-var sNatGatewayAttachmentStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[507]})
-var sNatGatewayAttachmentStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[508]})
-var sNatGatewayMapping_NatGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayId", ID: &i_NatGatewayId, Type: smithy.ShapeTypeString, Ext: &ext[511]})
-var s_NatGatewayMappingsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNatGatewayMapping, Members: &mNatGatewayMapping, Type: smithy.ShapeTypeStructure, Ext: &ext[513]})
-var sOverrideAction_DROP_TO_ALERT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DROP_TO_ALERT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[517]})
-var sPerObjectStatus_SyncStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncStatus", ID: &iPerObjectSyncStatus, Members: &mPerObjectSyncStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[522]})
-var sPerObjectStatus_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[523]})
-var sPerObjectSyncStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[525]})
-var sPerObjectSyncStatus_IN_SYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_SYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[526]})
-var sPerObjectSyncStatus_CAPACITY_CONSTRAINED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CAPACITY_CONSTRAINED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[527]})
-var sPerObjectSyncStatus_NOT_SUBSCRIBED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_SUBSCRIBED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[528]})
-var sPerObjectSyncStatus_DEPRECATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPRECATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[529]})
-var sPolicyVariables_RuleVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleVariables", ID: &i_IPSets, Members: &m_IPSets, Type: smithy.ShapeTypeMap, Ext: &ext[532]})
-var sPortRange_FromPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FromPort", ID: &i_PortRangeBound, Type: smithy.ShapeTypeInteger, Ext: &ext[535]})
-var sPortRange_ToPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ToPort", ID: &i_PortRangeBound, Type: smithy.ShapeTypeInteger, Ext: &ext[536]})
-var s_PortRanges_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPortRange, Members: &mPortRange, Type: smithy.ShapeTypeStructure, Ext: &ext[539]})
-var sPortSet_Definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Definition", ID: &i_VariableDefinitionList, Members: &m_VariableDefinitionList, Type: smithy.ShapeTypeList, Ext: &ext[541]})
-var s_PortSets_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_RuleVariableName, Type: smithy.ShapeTypeString, Ext: &ext[543]})
-var s_PortSets_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iPortSet, Members: &mPortSet, Type: smithy.ShapeTypeStructure, Ext: &ext[544]})
-var s_ProtocolNumbers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ProtocolNumber, Type: smithy.ShapeTypeInteger, Ext: &ext[550]})
-var s_ProtocolStrings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ProtocolString, Type: smithy.ShapeTypeString, Ext: &ext[553]})
-var s_Proxies_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProxyMetadata, Members: &mProxyMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[555]})
-var sProxy_CreateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateTime", ID: &i_CreateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[557]})
-var sProxy_DeleteTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteTime", ID: &i_DeleteTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[558]})
-var sProxy_UpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateTime", ID: &i_UpdateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[559]})
-var sProxy_FailureCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureCode", ID: &i_FailureCode, Type: smithy.ShapeTypeString, Ext: &ext[560]})
-var sProxy_FailureMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureMessage", ID: &i_FailureMessage, Type: smithy.ShapeTypeString, Ext: &ext[561]})
-var sProxy_ProxyState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyState", ID: &iProxyState, Members: &mProxyState, Type: smithy.ShapeTypeEnum, Ext: &ext[562]})
-var sProxy_ProxyModifyState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyModifyState", ID: &iProxyModifyState, Members: &mProxyModifyState, Type: smithy.ShapeTypeEnum, Ext: &ext[563]})
-var sProxy_NatGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayId", ID: &i_NatGatewayId, Type: smithy.ShapeTypeString, Ext: &ext[564]})
-var sProxy_ProxyConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[565]})
-var sProxy_ProxyConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[566]})
-var sProxy_ProxyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[567]})
-var sProxy_ProxyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[568]})
-var sProxy_ListenerProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerProperties", ID: &i_ListenerProperties, Members: &m_ListenerProperties, Type: smithy.ShapeTypeList, Ext: &ext[569]})
-var sProxy_TlsInterceptProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsInterceptProperties", ID: &iTlsInterceptProperties, Members: &mTlsInterceptProperties, Type: smithy.ShapeTypeStructure, Ext: &ext[570]})
-var sProxy_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[571]})
-var s_ProxyConditionValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ProxyConditionValue, Type: smithy.ShapeTypeString, Ext: &ext[574]})
-var sProxyConfigDefaultRulePhaseActionsRequest_PreDNS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreDNS", ID: &iProxyRulePhaseAction, Members: &mProxyRulePhaseAction, Type: smithy.ShapeTypeEnum, Ext: &ext[576]})
-var sProxyConfigDefaultRulePhaseActionsRequest_PreREQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreREQUEST", ID: &iProxyRulePhaseAction, Members: &mProxyRulePhaseAction, Type: smithy.ShapeTypeEnum, Ext: &ext[577]})
-var sProxyConfigDefaultRulePhaseActionsRequest_PostRESPONSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostRESPONSE", ID: &iProxyRulePhaseAction, Members: &mProxyRulePhaseAction, Type: smithy.ShapeTypeEnum, Ext: &ext[578]})
-var sProxyConfigRuleGroup_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[580]})
-var sProxyConfigRuleGroup_ProxyRuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[581]})
-var sProxyConfigRuleGroup_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_ProxyConfigRuleGroupType, Type: smithy.ShapeTypeString, Ext: &ext[582]})
-var sProxyConfigRuleGroup_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_ProxyConfigRuleGroupPriority, Type: smithy.ShapeTypeInteger, Ext: &ext[583]})
-var s_ProxyConfigRuleGroupSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProxyConfigRuleGroup, Members: &mProxyConfigRuleGroup, Type: smithy.ShapeTypeStructure, Ext: &ext[586]})
-var sProxyConfiguration_ProxyConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[589]})
-var sProxyConfiguration_ProxyConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[590]})
-var sProxyConfiguration_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[591]})
-var sProxyConfiguration_CreateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateTime", ID: &i_CreateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[592]})
-var sProxyConfiguration_DeleteTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteTime", ID: &i_DeleteTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[593]})
-var sProxyConfiguration_RuleGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroups", ID: &i_ProxyConfigRuleGroupSet, Members: &m_ProxyConfigRuleGroupSet, Type: smithy.ShapeTypeList, Ext: &ext[594]})
-var sProxyConfiguration_DefaultRulePhaseActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultRulePhaseActions", ID: &iProxyConfigDefaultRulePhaseActionsRequest, Members: &mProxyConfigDefaultRulePhaseActionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[595]})
-var sProxyConfiguration_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[596]})
-var sProxyConfigurationMetadata_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[598]})
-var sProxyConfigurationMetadata_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[599]})
-var s_ProxyConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProxyConfigurationMetadata, Members: &mProxyConfigurationMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[601]})
-var sProxyMetadata_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[603]})
-var sProxyMetadata_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[604]})
-var sProxyModifyState_MODIFYING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODIFYING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[606]})
-var sProxyModifyState_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[607]})
-var sProxyModifyState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[608]})
-var sProxyRule_ProxyRuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[610]})
-var sProxyRule_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[611]})
-var sProxyRule_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iProxyRulePhaseAction, Members: &mProxyRulePhaseAction, Type: smithy.ShapeTypeEnum, Ext: &ext[612]})
-var sProxyRule_Conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Conditions", ID: &i_ProxyRuleConditionList, Members: &m_ProxyRuleConditionList, Type: smithy.ShapeTypeList, Ext: &ext[613]})
-var sProxyRuleCondition_ConditionOperator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConditionOperator", ID: &i_ConditionOperator, Type: smithy.ShapeTypeString, Ext: &ext[615]})
-var sProxyRuleCondition_ConditionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConditionKey", ID: &i_ConditionKey, Type: smithy.ShapeTypeString, Ext: &ext[616]})
-var sProxyRuleCondition_ConditionValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConditionValues", ID: &i_ProxyConditionValueList, Members: &m_ProxyConditionValueList, Type: smithy.ShapeTypeList, Ext: &ext[617]})
-var s_ProxyRuleConditionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProxyRuleCondition, Members: &mProxyRuleCondition, Type: smithy.ShapeTypeStructure, Ext: &ext[619]})
-var sProxyRuleGroup_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[621]})
-var sProxyRuleGroup_ProxyRuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[622]})
-var sProxyRuleGroup_CreateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateTime", ID: &i_CreateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[623]})
-var sProxyRuleGroup_DeleteTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteTime", ID: &i_DeleteTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[624]})
-var sProxyRuleGroup_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &iProxyRulesByRequestPhase, Members: &mProxyRulesByRequestPhase, Type: smithy.ShapeTypeStructure, Ext: &ext[625]})
-var sProxyRuleGroup_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[626]})
-var sProxyRuleGroup_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[627]})
-var sProxyRuleGroupAttachment_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[629]})
-var sProxyRuleGroupAttachment_InsertPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsertPosition", ID: &i_InsertPosition, Type: smithy.ShapeTypeInteger, Ext: &ext[630]})
-var s_ProxyRuleGroupAttachmentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProxyRuleGroupAttachment, Members: &mProxyRuleGroupAttachment, Type: smithy.ShapeTypeStructure, Ext: &ext[632]})
-var sProxyRuleGroupMetadata_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[634]})
-var sProxyRuleGroupMetadata_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[635]})
-var sProxyRuleGroupPriority_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[637]})
-var sProxyRuleGroupPriority_NewPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewPosition", ID: &i_InsertPosition, Type: smithy.ShapeTypeInteger, Ext: &ext[638]})
-var s_ProxyRuleGroupPriorityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProxyRuleGroupPriority, Members: &mProxyRuleGroupPriority, Type: smithy.ShapeTypeStructure, Ext: &ext[640]})
-var sProxyRuleGroupPriorityResult_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[642]})
-var sProxyRuleGroupPriorityResult_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_ProxyRuleGroupPriorityResultPriority, Type: smithy.ShapeTypeInteger, Ext: &ext[643]})
-var s_ProxyRuleGroupPriorityResultList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProxyRuleGroupPriorityResult, Members: &mProxyRuleGroupPriorityResult, Type: smithy.ShapeTypeStructure, Ext: &ext[645]})
-var s_ProxyRuleGroups_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProxyRuleGroupMetadata, Members: &mProxyRuleGroupMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[648]})
-var s_ProxyRuleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProxyRule, Members: &mProxyRule, Type: smithy.ShapeTypeStructure, Ext: &ext[650]})
-var sProxyRulePhaseAction_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[652]})
-var sProxyRulePhaseAction_DENY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[653]})
-var sProxyRulePhaseAction_ALERT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALERT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[654]})
-var sProxyRulePriority_ProxyRuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[656]})
-var sProxyRulePriority_NewPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewPosition", ID: &i_InsertPosition, Type: smithy.ShapeTypeInteger, Ext: &ext[657]})
-var s_ProxyRulePriorityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProxyRulePriority, Members: &mProxyRulePriority, Type: smithy.ShapeTypeStructure, Ext: &ext[659]})
-var sProxyRulesByRequestPhase_PreDNS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreDNS", ID: &i_ProxyRuleList, Members: &m_ProxyRuleList, Type: smithy.ShapeTypeList, Ext: &ext[661]})
-var sProxyRulesByRequestPhase_PreREQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreREQUEST", ID: &i_ProxyRuleList, Members: &m_ProxyRuleList, Type: smithy.ShapeTypeList, Ext: &ext[662]})
-var sProxyRulesByRequestPhase_PostRESPONSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostRESPONSE", ID: &i_ProxyRuleList, Members: &m_ProxyRuleList, Type: smithy.ShapeTypeList, Ext: &ext[663]})
-var sProxySettings_ListenerProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerProperties", ID: &i_ListenerProperties, Members: &m_ListenerProperties, Type: smithy.ShapeTypeList, Ext: &ext[665]})
-var sProxyState_ATTACHING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATTACHING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[667]})
-var sProxyState_ATTACHED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATTACHED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[668]})
-var sProxyState_DETACHING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DETACHING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[669]})
-var sProxyState_DETACHED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DETACHED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[670]})
-var sProxyState_ATTACH_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATTACH_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[671]})
-var sProxyState_DETACH_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DETACH_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[672]})
-var sPublishMetricAction_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList, Ext: &ext[674]})
-var sReferenceSets_IPSetReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPSetReferences", ID: &i_IPSetReferenceMap, Members: &m_IPSetReferenceMap, Type: smithy.ShapeTypeMap, Ext: &ext[676]})
-var s_ResourceArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[680]})
-var sResourceManagedStatus_MANAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[683]})
-var sResourceManagedStatus_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[684]})
-var sResourceManagedType_AWS_MANAGED_THREAT_SIGNATURES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_MANAGED_THREAT_SIGNATURES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[686]})
-var sResourceManagedType_AWS_MANAGED_DOMAIN_LISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_MANAGED_DOMAIN_LISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[687]})
-var sResourceManagedType_ACTIVE_THREAT_DEFENSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE_THREAT_DEFENSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[688]})
-var sResourceManagedType_PARTNER_MANAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARTNER_MANAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[689]})
-var s_ResourceNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[692]})
-var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[694]})
-var sResourceOwnerCheckException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[696]})
-var sResourceStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[698]})
-var sResourceStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[699]})
-var sResourceStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[700]})
-var sResourceStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[701]})
-var sRevocationCheckAction_PASS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PASS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[704]})
-var sRevocationCheckAction_DROP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DROP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[705]})
-var sRevocationCheckAction_REJECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[706]})
-var sRoute53ResolvedIPValidation_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iRoute53ResolvedIPValidationAction, Members: &mRoute53ResolvedIPValidationAction, Type: smithy.ShapeTypeEnum, Ext: &ext[708]})
-var sRoute53ResolvedIPValidation_DNSFirewallRuleGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNSFirewallRuleGroupId", ID: &i_DNSFirewallRuleGroupId, Type: smithy.ShapeTypeString, Ext: &ext[709]})
-var sRoute53ResolvedIPValidation_DNSExpiryExceptionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNSExpiryExceptionPolicy", ID: &iDNSExpiryExceptionPolicy, Members: &mDNSExpiryExceptionPolicy, Type: smithy.ShapeTypeEnum, Ext: &ext[710]})
-var sRoute53ResolvedIPValidation_BypassDestinationValidationIPRanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BypassDestinationValidationIPRanges", ID: &i_Route53ResolvedIPValidationAddresses, Members: &m_Route53ResolvedIPValidationAddresses, Type: smithy.ShapeTypeList, Ext: &ext[711]})
-var sRoute53ResolvedIPValidation_SourceIPRanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceIPRanges", ID: &i_Route53ResolvedIPValidationAddresses, Members: &m_Route53ResolvedIPValidationAddresses, Type: smithy.ShapeTypeList, Ext: &ext[712]})
-var sRoute53ResolvedIPValidationAction_REJECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[714]})
-var sRoute53ResolvedIPValidationAction_DROP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DROP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[715]})
-var sRoute53ResolvedIPValidationAction_ALERT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALERT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[716]})
-var s_Route53ResolvedIPValidationAddresses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &ext[718]})
-var sRuleDefinition_MatchAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchAttributes", ID: &iMatchAttributes, Members: &mMatchAttributes, Type: smithy.ShapeTypeStructure, Ext: &ext[721]})
-var sRuleDefinition_Actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Actions", ID: &i_StatelessActions, Members: &m_StatelessActions, Type: smithy.ShapeTypeList, Ext: &ext[722]})
-var sRuleGroup_RuleVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleVariables", ID: &iRuleVariables, Members: &mRuleVariables, Type: smithy.ShapeTypeStructure, Ext: &ext[724]})
-var sRuleGroup_ReferenceSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReferenceSets", ID: &iReferenceSets, Members: &mReferenceSets, Type: smithy.ShapeTypeStructure, Ext: &ext[725]})
-var sRuleGroup_RulesSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RulesSource", ID: &iRulesSource, Members: &mRulesSource, Type: smithy.ShapeTypeStructure, Ext: &ext[726]})
-var sRuleGroup_StatefulRuleOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatefulRuleOptions", ID: &iStatefulRuleOptions, Members: &mStatefulRuleOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[727]})
-var sRuleGroupMetadata_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[729]})
-var sRuleGroupMetadata_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[730]})
-var sRuleGroupMetadata_VendorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VendorName", ID: &i_VendorName, Type: smithy.ShapeTypeString, Ext: &ext[731]})
-var sRuleGroupRequestPhase_PRE_DNS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE_DNS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[733]})
-var sRuleGroupRequestPhase_PRE_REQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE_REQ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[734]})
-var sRuleGroupRequestPhase_POST_RES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POST_RES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[735]})
-var sRuleGroupResponse_RuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[737]})
-var sRuleGroupResponse_RuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[738]})
-var sRuleGroupResponse_RuleGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &ext[739]})
-var sRuleGroupResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[740]})
-var sRuleGroupResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRuleGroupType, Members: &mRuleGroupType, Type: smithy.ShapeTypeEnum, Ext: &ext[741]})
-var sRuleGroupResponse_Capacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Capacity", ID: &i_RuleCapacity, Type: smithy.ShapeTypeInteger, Ext: &ext[742]})
-var sRuleGroupResponse_RuleGroupStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupStatus", ID: &iResourceStatus, Members: &mResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[743]})
-var sRuleGroupResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[744]})
-var sRuleGroupResponse_ConsumedCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumedCapacity", ID: &i_RuleCapacity, Type: smithy.ShapeTypeInteger, Ext: &ext[745]})
-var sRuleGroupResponse_NumberOfAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfAssociations", ID: &i_NumberOfAssociations, Type: smithy.ShapeTypeInteger, Ext: &ext[746]})
-var sRuleGroupResponse_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[747]})
-var sRuleGroupResponse_SourceMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceMetadata", ID: &iSourceMetadata, Members: &mSourceMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[748]})
-var sRuleGroupResponse_SnsTopic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopic", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[749]})
-var sRuleGroupResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_LastUpdateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[750]})
-var sRuleGroupResponse_AnalysisResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisResults", ID: &i_AnalysisResultList, Members: &m_AnalysisResultList, Type: smithy.ShapeTypeList, Ext: &ext[751]})
-var sRuleGroupResponse_SummaryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SummaryConfiguration", ID: &iSummaryConfiguration, Members: &mSummaryConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[752]})
-var s_RuleGroups_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleGroupMetadata, Members: &mRuleGroupMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[754]})
-var sRuleGroupType_STATELESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STATELESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[756]})
-var sRuleGroupType_STATEFUL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STATEFUL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[757]})
-var sRuleGroupType_STATEFUL_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STATEFUL_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[758]})
-var s_RuleIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CollectionMember_String, Type: smithy.ShapeTypeString, Ext: &ext[760]})
-var sRuleOption_Keyword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Keyword", ID: &i_Keyword, Type: smithy.ShapeTypeString, Ext: &ext[762]})
-var sRuleOption_Settings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Settings", ID: &i_Settings, Members: &m_Settings, Type: smithy.ShapeTypeList, Ext: &ext[763]})
-var s_RuleOptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleOption, Members: &mRuleOption, Type: smithy.ShapeTypeStructure, Ext: &ext[765]})
-var sRuleOrder_DEFAULT_ACTION_ORDER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT_ACTION_ORDER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[767]})
-var sRuleOrder_STRICT_ORDER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRICT_ORDER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[768]})
-var sRulesSource_RulesString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RulesString", ID: &i_RulesString, Type: smithy.ShapeTypeString, Ext: &ext[770]})
-var sRulesSource_RulesSourceList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RulesSourceList", ID: &iRulesSourceList, Members: &mRulesSourceList, Type: smithy.ShapeTypeStructure, Ext: &ext[771]})
-var sRulesSource_StatefulRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatefulRules", ID: &i_StatefulRules, Members: &m_StatefulRules, Type: smithy.ShapeTypeList, Ext: &ext[772]})
-var sRulesSource_StatelessRulesAndCustomActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatelessRulesAndCustomActions", ID: &iStatelessRulesAndCustomActions, Members: &mStatelessRulesAndCustomActions, Type: smithy.ShapeTypeStructure, Ext: &ext[773]})
-var sRulesSourceList_Targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Targets", ID: &i_RuleTargets, Members: &m_RuleTargets, Type: smithy.ShapeTypeList, Ext: &ext[775]})
-var sRulesSourceList_TargetTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetTypes", ID: &i_TargetTypes, Members: &m_TargetTypes, Type: smithy.ShapeTypeList, Ext: &ext[776]})
-var sRulesSourceList_GeneratedRulesType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeneratedRulesType", ID: &iGeneratedRulesType, Members: &mGeneratedRulesType, Type: smithy.ShapeTypeEnum, Ext: &ext[777]})
-var s_RuleSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleSummary, Members: &mRuleSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[780]})
-var sRuleSummary_SID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SID", ID: &i_CollectionMember_String, Type: smithy.ShapeTypeString, Ext: &ext[782]})
-var sRuleSummary_Msg = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Msg", ID: &i_CollectionMember_String, Type: smithy.ShapeTypeString, Ext: &ext[783]})
-var sRuleSummary_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metadata", ID: &i_CollectionMember_String, Type: smithy.ShapeTypeString, Ext: &ext[784]})
-var s_RuleTargets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CollectionMember_String, Type: smithy.ShapeTypeString, Ext: &ext[786]})
-var sRuleVariables_IPSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPSets", ID: &i_IPSets, Members: &m_IPSets, Type: smithy.ShapeTypeMap, Ext: &ext[789]})
-var sRuleVariables_PortSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortSets", ID: &i_PortSets, Members: &m_PortSets, Type: smithy.ShapeTypeMap, Ext: &ext[790]})
-var sServerCertificate_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[792]})
-var sServerCertificateConfiguration_ServerCertificates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerCertificates", ID: &i_ServerCertificates, Members: &m_ServerCertificates, Type: smithy.ShapeTypeList, Ext: &ext[794]})
-var sServerCertificateConfiguration_Scopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scopes", ID: &i_ServerCertificateScopes, Members: &m_ServerCertificateScopes, Type: smithy.ShapeTypeList, Ext: &ext[795]})
-var sServerCertificateConfiguration_CertificateAuthorityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthorityArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[796]})
-var sServerCertificateConfiguration_CheckCertificateRevocationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CheckCertificateRevocationStatus", ID: &iCheckCertificateRevocationStatusActions, Members: &mCheckCertificateRevocationStatusActions, Type: smithy.ShapeTypeStructure, Ext: &ext[797]})
-var s_ServerCertificateConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServerCertificateConfiguration, Members: &mServerCertificateConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[799]})
-var s_ServerCertificates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServerCertificate, Members: &mServerCertificate, Type: smithy.ShapeTypeStructure, Ext: &ext[801]})
-var sServerCertificateScope_Sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sources", ID: &i_Addresses, Members: &m_Addresses, Type: smithy.ShapeTypeList, Ext: &ext[803]})
-var sServerCertificateScope_Destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destinations", ID: &i_Addresses, Members: &m_Addresses, Type: smithy.ShapeTypeList, Ext: &ext[804]})
-var sServerCertificateScope_SourcePorts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourcePorts", ID: &i_PortRanges, Members: &m_PortRanges, Type: smithy.ShapeTypeList, Ext: &ext[805]})
-var sServerCertificateScope_DestinationPorts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationPorts", ID: &i_PortRanges, Members: &m_PortRanges, Type: smithy.ShapeTypeList, Ext: &ext[806]})
-var sServerCertificateScope_Protocols = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocols", ID: &i_ProtocolNumbers, Members: &m_ProtocolNumbers, Type: smithy.ShapeTypeList, Ext: &ext[807]})
-var s_ServerCertificateScopes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServerCertificateScope, Members: &mServerCertificateScope, Type: smithy.ShapeTypeStructure, Ext: &ext[809]})
-var s_Settings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Setting, Type: smithy.ShapeTypeString, Ext: &ext[812]})
-var sSourceMetadata_SourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[815]})
-var sSourceMetadata_SourceUpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceUpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[816]})
-var sStatefulAction_PASS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PASS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[819]})
-var sStatefulAction_DROP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DROP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[820]})
-var sStatefulAction_ALERT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALERT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[821]})
-var sStatefulAction_REJECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[822]})
-var s_StatefulActions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CollectionMember_String, Type: smithy.ShapeTypeString, Ext: &ext[824]})
-var sStatefulEngineOptions_RuleOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleOrder", ID: &iRuleOrder, Members: &mRuleOrder, Type: smithy.ShapeTypeEnum, Ext: &ext[826]})
-var sStatefulEngineOptions_StreamExceptionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamExceptionPolicy", ID: &iStreamExceptionPolicy, Members: &mStreamExceptionPolicy, Type: smithy.ShapeTypeEnum, Ext: &ext[827]})
-var sStatefulEngineOptions_FlowTimeouts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowTimeouts", ID: &iFlowTimeouts, Members: &mFlowTimeouts, Type: smithy.ShapeTypeStructure, Ext: &ext[828]})
-var sStatefulRule_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iStatefulAction, Members: &mStatefulAction, Type: smithy.ShapeTypeEnum, Ext: &ext[830]})
-var sStatefulRule_Header = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Header", ID: &iHeader, Members: &mHeader, Type: smithy.ShapeTypeStructure, Ext: &ext[831]})
-var sStatefulRule_RuleOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleOptions", ID: &i_RuleOptions, Members: &m_RuleOptions, Type: smithy.ShapeTypeList, Ext: &ext[832]})
-var sStatefulRuleDirection_FORWARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FORWARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[834]})
-var sStatefulRuleDirection_ANY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[835]})
-var sStatefulRuleGroupOverride_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iOverrideAction, Members: &mOverrideAction, Type: smithy.ShapeTypeEnum, Ext: &ext[837]})
-var sStatefulRuleGroupReference_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[839]})
-var sStatefulRuleGroupReference_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_Priority, Type: smithy.ShapeTypeInteger, Ext: &ext[840]})
-var sStatefulRuleGroupReference_Override = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Override", ID: &iStatefulRuleGroupOverride, Members: &mStatefulRuleGroupOverride, Type: smithy.ShapeTypeStructure, Ext: &ext[841]})
-var sStatefulRuleGroupReference_DeepThreatInspection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeepThreatInspection", ID: &i_DeepThreatInspection, Type: smithy.ShapeTypeBoolean, Ext: &ext[842]})
-var s_StatefulRuleGroupReferences_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStatefulRuleGroupReference, Members: &mStatefulRuleGroupReference, Type: smithy.ShapeTypeStructure, Ext: &ext[844]})
-var sStatefulRuleOptions_RuleOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleOrder", ID: &iRuleOrder, Members: &mRuleOrder, Type: smithy.ShapeTypeEnum, Ext: &ext[846]})
-var sStatefulRuleProtocol_ANY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[848]})
-var sStatefulRuleProtocol_TCP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TCP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[849]})
-var sStatefulRuleProtocol_UDP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UDP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[850]})
-var sStatefulRuleProtocol_ICMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ICMP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[851]})
-var sStatefulRuleProtocol_HTTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[852]})
-var sStatefulRuleProtocol_FTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FTP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[853]})
-var sStatefulRuleProtocol_TLS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[854]})
-var sStatefulRuleProtocol_SMB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[855]})
-var sStatefulRuleProtocol_DNS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[856]})
-var sStatefulRuleProtocol_DCERPC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DCERPC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[857]})
-var sStatefulRuleProtocol_SSH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[858]})
-var sStatefulRuleProtocol_SMTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMTP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[859]})
-var sStatefulRuleProtocol_IMAP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMAP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[860]})
-var sStatefulRuleProtocol_MSN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MSN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[861]})
-var sStatefulRuleProtocol_KRB5 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KRB5", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[862]})
-var sStatefulRuleProtocol_IKEV2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IKEV2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[863]})
-var sStatefulRuleProtocol_TFTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TFTP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[864]})
-var sStatefulRuleProtocol_NTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NTP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[865]})
-var sStatefulRuleProtocol_DHCP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DHCP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[866]})
-var sStatefulRuleProtocol_HTTP2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[867]})
-var sStatefulRuleProtocol_QUIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[868]})
-var s_StatefulRules_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStatefulRule, Members: &mStatefulRule, Type: smithy.ShapeTypeStructure, Ext: &ext[870]})
-var s_StatelessActions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CollectionMember_String, Type: smithy.ShapeTypeString, Ext: &ext[872]})
-var sStatelessRule_RuleDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleDefinition", ID: &iRuleDefinition, Members: &mRuleDefinition, Type: smithy.ShapeTypeStructure, Ext: &ext[874]})
-var sStatelessRule_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_Priority, Type: smithy.ShapeTypeInteger, Ext: &ext[875]})
-var sStatelessRuleGroupReference_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[877]})
-var sStatelessRuleGroupReference_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_Priority, Type: smithy.ShapeTypeInteger, Ext: &ext[878]})
-var s_StatelessRuleGroupReferences_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStatelessRuleGroupReference, Members: &mStatelessRuleGroupReference, Type: smithy.ShapeTypeStructure, Ext: &ext[880]})
-var s_StatelessRules_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStatelessRule, Members: &mStatelessRule, Type: smithy.ShapeTypeStructure, Ext: &ext[882]})
-var sStatelessRulesAndCustomActions_StatelessRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatelessRules", ID: &i_StatelessRules, Members: &m_StatelessRules, Type: smithy.ShapeTypeList, Ext: &ext[884]})
-var sStatelessRulesAndCustomActions_CustomActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomActions", ID: &i_CustomActions, Members: &m_CustomActions, Type: smithy.ShapeTypeList, Ext: &ext[885]})
-var sStreamExceptionPolicy_DROP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DROP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[890]})
-var sStreamExceptionPolicy_CONTINUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTINUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[891]})
-var sStreamExceptionPolicy_REJECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[892]})
-var sSubnetMapping_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetId", ID: &i_CollectionMember_String, Type: smithy.ShapeTypeString, Ext: &ext[894]})
-var sSubnetMapping_IPAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPAddressType", ID: &iIPAddressType, Members: &mIPAddressType, Type: smithy.ShapeTypeEnum, Ext: &ext[895]})
-var s_SubnetMappings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSubnetMapping, Members: &mSubnetMapping, Type: smithy.ShapeTypeStructure, Ext: &ext[897]})
-var sSubscriptionStatus_NOT_SUBSCRIBED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_SUBSCRIBED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[899]})
-var sSubscriptionStatus_SUBSCRIBED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBSCRIBED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[900]})
-var sSummary_RuleSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleSummaries", ID: &i_RuleSummaries, Members: &m_RuleSummaries, Type: smithy.ShapeTypeList, Ext: &ext[902]})
-var sSummaryConfiguration_RuleOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleOptions", ID: &i_SummaryRuleOptions, Members: &m_SummaryRuleOptions, Type: smithy.ShapeTypeList, Ext: &ext[904]})
-var sSummaryRuleOption_SID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[906]})
-var sSummaryRuleOption_MSG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MSG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[907]})
-var sSummaryRuleOption_METADATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "METADATA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[908]})
-var s_SummaryRuleOptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSummaryRuleOption, Members: &mSummaryRuleOption, Type: smithy.ShapeTypeEnum, Ext: &ext[910]})
-var s_SupportedAvailabilityZones_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[912]})
-var s_SupportedAvailabilityZones_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iAvailabilityZoneMetadata, Members: &mAvailabilityZoneMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[913]})
-var sSyncState_Attachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attachment", ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure, Ext: &ext[915]})
-var sSyncState_Config = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Config", ID: &i_SyncStateConfig, Members: &m_SyncStateConfig, Type: smithy.ShapeTypeMap, Ext: &ext[916]})
-var sSyncState_NatGatewayAttachments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayAttachments", ID: &i_NatGatewayAttachmentsList, Members: &m_NatGatewayAttachmentsList, Type: smithy.ShapeTypeList, Ext: &ext[917]})
-var s_SyncStateConfig_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[919]})
-var s_SyncStateConfig_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iPerObjectStatus, Members: &mPerObjectStatus, Type: smithy.ShapeTypeStructure, Ext: &ext[920]})
-var s_SyncStates_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[922]})
-var s_SyncStates_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iSyncState, Members: &mSyncState, Type: smithy.ShapeTypeStructure, Ext: &ext[923]})
-var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[925]})
-var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[926]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[929]})
-var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[931]})
-var sTargetType_TLS_SNI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLS_SNI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[935]})
-var sTargetType_HTTP_HOST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP_HOST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[936]})
-var sTargetType_AWS_ROUTE_53_RESOLVED_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_ROUTE_53_RESOLVED_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[937]})
-var s_TargetTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTargetType, Members: &mTargetType, Type: smithy.ShapeTypeEnum, Ext: &ext[939]})
-var sTCPFlag_FIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[941]})
-var sTCPFlag_SYN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[942]})
-var sTCPFlag_RST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[943]})
-var sTCPFlag_PSH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PSH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[944]})
-var sTCPFlag_ACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[945]})
-var sTCPFlag_URG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "URG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[946]})
-var sTCPFlag_ECE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[947]})
-var sTCPFlag_CWR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CWR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[948]})
-var sTCPFlagField_Flags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Flags", ID: &i_Flags, Members: &m_Flags, Type: smithy.ShapeTypeList, Ext: &ext[950]})
-var sTCPFlagField_Masks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Masks", ID: &i_Flags, Members: &m_Flags, Type: smithy.ShapeTypeList, Ext: &ext[951]})
-var s_TCPFlags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTCPFlagField, Members: &mTCPFlagField, Type: smithy.ShapeTypeStructure, Ext: &ext[953]})
-var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[956]})
-var sTlsCertificateData_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[958]})
-var sTlsCertificateData_CertificateSerial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateSerial", ID: &i_CollectionMember_String, Type: smithy.ShapeTypeString, Ext: &ext[959]})
-var sTlsCertificateData_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_CollectionMember_String, Type: smithy.ShapeTypeString, Ext: &ext[960]})
-var sTlsCertificateData_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_StatusReason, Type: smithy.ShapeTypeString, Ext: &ext[961]})
-var sTLSInspectionConfiguration_ServerCertificateConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerCertificateConfigurations", ID: &i_ServerCertificateConfigurations, Members: &m_ServerCertificateConfigurations, Type: smithy.ShapeTypeList, Ext: &ext[963]})
-var sTLSInspectionConfigurationMetadata_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[965]})
-var sTLSInspectionConfigurationMetadata_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[966]})
-var sTLSInspectionConfigurationResponse_TLSInspectionConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[968]})
-var sTLSInspectionConfigurationResponse_TLSInspectionConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[969]})
-var sTLSInspectionConfigurationResponse_TLSInspectionConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &ext[970]})
-var sTLSInspectionConfigurationResponse_TLSInspectionConfigurationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationStatus", ID: &iResourceStatus, Members: &mResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[971]})
-var sTLSInspectionConfigurationResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[972]})
-var sTLSInspectionConfigurationResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[973]})
-var sTLSInspectionConfigurationResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_LastUpdateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[974]})
-var sTLSInspectionConfigurationResponse_NumberOfAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfAssociations", ID: &i_NumberOfAssociations, Type: smithy.ShapeTypeInteger, Ext: &ext[975]})
-var sTLSInspectionConfigurationResponse_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[976]})
-var sTLSInspectionConfigurationResponse_Certificates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificates", ID: &i_Certificates, Members: &m_Certificates, Type: smithy.ShapeTypeList, Ext: &ext[977]})
-var sTLSInspectionConfigurationResponse_CertificateAuthority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthority", ID: &iTlsCertificateData, Members: &mTlsCertificateData, Type: smithy.ShapeTypeStructure, Ext: &ext[978]})
-var s_TLSInspectionConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTLSInspectionConfigurationMetadata, Members: &mTLSInspectionConfigurationMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[980]})
-var sTlsInterceptMode_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[982]})
-var sTlsInterceptMode_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[983]})
-var sTlsInterceptProperties_PcaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PcaArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[985]})
-var sTlsInterceptProperties_TlsInterceptMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsInterceptMode", ID: &iTlsInterceptMode, Members: &mTlsInterceptMode, Type: smithy.ShapeTypeEnum, Ext: &ext[986]})
-var sTlsInterceptPropertiesRequest_PcaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PcaArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[988]})
-var sTlsInterceptPropertiesRequest_TlsInterceptMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsInterceptMode", ID: &iTlsInterceptMode, Members: &mTlsInterceptMode, Type: smithy.ShapeTypeEnum, Ext: &ext[989]})
-var sTransitGatewayAttachmentStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[992]})
-var sTransitGatewayAttachmentStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[993]})
-var sTransitGatewayAttachmentStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[994]})
-var sTransitGatewayAttachmentStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[995]})
-var sTransitGatewayAttachmentStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[996]})
-var sTransitGatewayAttachmentStatus_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[997]})
-var sTransitGatewayAttachmentStatus_PENDING_ACCEPTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_ACCEPTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[998]})
-var sTransitGatewayAttachmentStatus_REJECTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[999]})
-var sTransitGatewayAttachmentStatus_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[1000]})
-var sTransitGatewayAttachmentSyncState_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentId", ID: &i_AttachmentId, Type: smithy.ShapeTypeString, Ext: &ext[1002]})
-var sTransitGatewayAttachmentSyncState_TransitGatewayAttachmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentStatus", ID: &iTransitGatewayAttachmentStatus, Members: &mTransitGatewayAttachmentStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[1003]})
-var sTransitGatewayAttachmentSyncState_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_TransitGatewayAttachmentSyncStateMessage, Type: smithy.ShapeTypeString, Ext: &ext[1004]})
-var sUniqueSources_Count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Count", ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &ext[1008]})
-var sUnsupportedOperationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[1010]})
-var s_VariableDefinitionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_VariableDefinition, Type: smithy.ShapeTypeString, Ext: &ext[1015]})
-var sVpcEndpoint_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &ext[1018]})
-var sVpcEndpoint_SubnetMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetMappings", ID: &i_SubnetMappings, Members: &m_SubnetMappings, Type: smithy.ShapeTypeList, Ext: &ext[1019]})
-var sVpcEndpointAssociation_VpcEndpointAssociationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &ext[1021]})
-var sVpcEndpointAssociation_VpcEndpointAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1022]})
-var sVpcEndpointAssociation_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1023]})
-var sVpcEndpointAssociation_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &ext[1024]})
-var sVpcEndpointAssociation_SubnetMapping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetMapping", ID: &iSubnetMapping, Members: &mSubnetMapping, Type: smithy.ShapeTypeStructure, Ext: &ext[1025]})
-var sVpcEndpointAssociation_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[1026]})
-var sVpcEndpointAssociation_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[1027]})
-var sVpcEndpointAssociationMetadata_VpcEndpointAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1029]})
-var s_VpcEndpointAssociations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVpcEndpointAssociationMetadata, Members: &mVpcEndpointAssociationMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[1031]})
-var sVpcEndpointAssociationStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iFirewallStatusValue, Members: &mFirewallStatusValue, Type: smithy.ShapeTypeEnum, Ext: &ext[1033]})
-var sVpcEndpointAssociationStatus_AssociationSyncState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociationSyncState", ID: &i_AssociationSyncState, Members: &m_AssociationSyncState, Type: smithy.ShapeTypeMap, Ext: &ext[1034]})
-var s_VpcIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &ext[1039]})
-var sAcceptNetworkFirewallTransitGatewayAttachmentRequest_TransitGatewayAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentId", ID: &i_TransitGatewayAttachmentId, Type: smithy.ShapeTypeString, Ext: &ext[1041]})
-var sAcceptNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentId", ID: &i_TransitGatewayAttachmentId, Type: smithy.ShapeTypeString, Ext: &ext[1043]})
-var sAcceptNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentStatus", ID: &iTransitGatewayAttachmentStatus, Members: &mTransitGatewayAttachmentStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[1044]})
-var sAssociateAvailabilityZonesRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1046]})
-var sAssociateAvailabilityZonesRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1047]})
-var sAssociateAvailabilityZonesRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1048]})
-var sAssociateAvailabilityZonesRequest_AvailabilityZoneMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneMappings", ID: &i_AvailabilityZoneMappings, Members: &m_AvailabilityZoneMappings, Type: smithy.ShapeTypeList, Ext: &ext[1049]})
-var sAssociateAvailabilityZonesResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1051]})
-var sAssociateAvailabilityZonesResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1052]})
-var sAssociateAvailabilityZonesResponse_AvailabilityZoneMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneMappings", ID: &i_AvailabilityZoneMappings, Members: &m_AvailabilityZoneMappings, Type: smithy.ShapeTypeList, Ext: &ext[1053]})
-var sAssociateAvailabilityZonesResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1054]})
-var sAssociateFirewallPolicyRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1056]})
-var sAssociateFirewallPolicyRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1057]})
-var sAssociateFirewallPolicyRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1058]})
-var sAssociateFirewallPolicyRequest_FirewallPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1059]})
-var sAssociateFirewallPolicyResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1061]})
-var sAssociateFirewallPolicyResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1062]})
-var sAssociateFirewallPolicyResponse_FirewallPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1063]})
-var sAssociateFirewallPolicyResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1064]})
-var sAssociateSubnetsRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1066]})
-var sAssociateSubnetsRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1067]})
-var sAssociateSubnetsRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1068]})
-var sAssociateSubnetsRequest_SubnetMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetMappings", ID: &i_SubnetMappings, Members: &m_SubnetMappings, Type: smithy.ShapeTypeList, Ext: &ext[1069]})
-var sAssociateSubnetsResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1071]})
-var sAssociateSubnetsResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1072]})
-var sAssociateSubnetsResponse_SubnetMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetMappings", ID: &i_SubnetMappings, Members: &m_SubnetMappings, Type: smithy.ShapeTypeList, Ext: &ext[1073]})
-var sAssociateSubnetsResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1074]})
-var sAttachRuleGroupsToProxyConfigurationRequest_ProxyConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1076]})
-var sAttachRuleGroupsToProxyConfigurationRequest_ProxyConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1077]})
-var sAttachRuleGroupsToProxyConfigurationRequest_RuleGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroups", ID: &i_ProxyRuleGroupAttachmentList, Members: &m_ProxyRuleGroupAttachmentList, Type: smithy.ShapeTypeList, Ext: &ext[1078]})
-var sAttachRuleGroupsToProxyConfigurationRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1079]})
-var sAttachRuleGroupsToProxyConfigurationResponse_ProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfiguration", ID: &iProxyConfiguration, Members: &mProxyConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[1081]})
-var sAttachRuleGroupsToProxyConfigurationResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1082]})
-var sCreateContainerAssociationRequest_ContainerAssociationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1084]})
-var sCreateContainerAssociationRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[1085]})
-var sCreateContainerAssociationRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iContainerMonitoringType, Members: &mContainerMonitoringType, Type: smithy.ShapeTypeEnum, Ext: &ext[1086]})
-var sCreateContainerAssociationRequest_ContainerMonitoringConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerMonitoringConfigurations", ID: &i_ContainerMonitoringConfigurations, Members: &m_ContainerMonitoringConfigurations, Type: smithy.ShapeTypeList, Ext: &ext[1087]})
-var sCreateContainerAssociationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[1088]})
-var sCreateContainerAssociationResponse_ContainerAssociationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1090]})
-var sCreateContainerAssociationResponse_ContainerAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1091]})
-var sCreateContainerAssociationResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[1092]})
-var sCreateContainerAssociationResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iContainerMonitoringType, Members: &mContainerMonitoringType, Type: smithy.ShapeTypeEnum, Ext: &ext[1093]})
-var sCreateContainerAssociationResponse_ContainerMonitoringConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerMonitoringConfigurations", ID: &i_ContainerMonitoringConfigurations, Members: &m_ContainerMonitoringConfigurations, Type: smithy.ShapeTypeList, Ext: &ext[1094]})
-var sCreateContainerAssociationResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iContainerAssociationStatus, Members: &mContainerAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[1095]})
-var sCreateContainerAssociationResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[1096]})
-var sCreateContainerAssociationResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1097]})
-var sCreateFirewallRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1099]})
-var sCreateFirewallRequest_FirewallPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1100]})
-var sCreateFirewallRequest_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &ext[1101]})
-var sCreateFirewallRequest_SubnetMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetMappings", ID: &i_SubnetMappings, Members: &m_SubnetMappings, Type: smithy.ShapeTypeList, Ext: &ext[1102]})
-var sCreateFirewallRequest_DeleteProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[1103]})
-var sCreateFirewallRequest_SubnetChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetChangeProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[1104]})
-var sCreateFirewallRequest_FirewallPolicyChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyChangeProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[1105]})
-var sCreateFirewallRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[1106]})
-var sCreateFirewallRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[1107]})
-var sCreateFirewallRequest_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[1108]})
-var sCreateFirewallRequest_EnabledAnalysisTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledAnalysisTypes", ID: &i_EnabledAnalysisTypes, Members: &m_EnabledAnalysisTypes, Type: smithy.ShapeTypeList, Ext: &ext[1109]})
-var sCreateFirewallRequest_TransitGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayId", ID: &i_TransitGatewayId, Type: smithy.ShapeTypeString, Ext: &ext[1110]})
-var sCreateFirewallRequest_AvailabilityZoneMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneMappings", ID: &i_AvailabilityZoneMappings, Members: &m_AvailabilityZoneMappings, Type: smithy.ShapeTypeList, Ext: &ext[1111]})
-var sCreateFirewallRequest_AvailabilityZoneChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneChangeProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[1112]})
-var sCreateFirewallRequest_NatGatewayMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayMappings", ID: &i_NatGatewayMappingsList, Members: &m_NatGatewayMappingsList, Type: smithy.ShapeTypeList, Ext: &ext[1113]})
-var sCreateFirewallRequest_ProxySettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxySettings", ID: &iProxySettings, Members: &mProxySettings, Type: smithy.ShapeTypeStructure, Ext: &ext[1114]})
-var sCreateFirewallRequest_NoSourcePreservation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NoSourcePreservation", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[1115]})
-var sCreateFirewallRequest_VpcEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpoint", ID: &iVpcEndpoint, Members: &mVpcEndpoint, Type: smithy.ShapeTypeStructure, Ext: &ext[1116]})
-var sCreateFirewallResponse_Firewall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Firewall", ID: &iFirewall, Members: &mFirewall, Type: smithy.ShapeTypeStructure, Ext: &ext[1118]})
-var sCreateFirewallResponse_FirewallStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallStatus", ID: &iFirewallStatus, Members: &mFirewallStatus, Type: smithy.ShapeTypeStructure, Ext: &ext[1119]})
-var sCreateFirewallPolicyRequest_FirewallPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1121]})
-var sCreateFirewallPolicyRequest_FirewallPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicy", ID: &iFirewallPolicy, Members: &mFirewallPolicy, Type: smithy.ShapeTypeStructure, Ext: &ext[1122]})
-var sCreateFirewallPolicyRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[1123]})
-var sCreateFirewallPolicyRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[1124]})
-var sCreateFirewallPolicyRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[1125]})
-var sCreateFirewallPolicyRequest_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[1126]})
-var sCreateFirewallPolicyResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1128]})
-var sCreateFirewallPolicyResponse_FirewallPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyResponse", ID: &iFirewallPolicyResponse, Members: &mFirewallPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1129]})
-var sCreateProxyConfigurationRequest_ProxyConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1131]})
-var sCreateProxyConfigurationRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[1132]})
-var sCreateProxyConfigurationRequest_RuleGroupNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupNames", ID: &i_ResourceNameList, Members: &m_ResourceNameList, Type: smithy.ShapeTypeList, Ext: &ext[1133]})
-var sCreateProxyConfigurationRequest_RuleGroupArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupArns", ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList, Ext: &ext[1134]})
-var sCreateProxyConfigurationRequest_DefaultRulePhaseActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultRulePhaseActions", ID: &iProxyConfigDefaultRulePhaseActionsRequest, Members: &mProxyConfigDefaultRulePhaseActionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1135]})
-var sCreateProxyConfigurationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[1136]})
-var sCreateProxyConfigurationResponse_ProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfiguration", ID: &iProxyConfiguration, Members: &mProxyConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[1138]})
-var sCreateProxyConfigurationResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1139]})
-var sCreateProxyRequest_ProxyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1141]})
-var sCreateProxyRequest_NatGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayId", ID: &i_NatGatewayId, Type: smithy.ShapeTypeString, Ext: &ext[1142]})
-var sCreateProxyRequest_ProxyConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1143]})
-var sCreateProxyRequest_ProxyConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1144]})
-var sCreateProxyRequest_ListenerProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerProperties", ID: &i_ListenerPropertiesRequest, Members: &m_ListenerPropertiesRequest, Type: smithy.ShapeTypeList, Ext: &ext[1145]})
-var sCreateProxyRequest_TlsInterceptProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsInterceptProperties", ID: &iTlsInterceptPropertiesRequest, Members: &mTlsInterceptPropertiesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1146]})
-var sCreateProxyRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[1147]})
-var sCreateProxyResponse_Proxy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Proxy", ID: &iProxy, Members: &mProxy, Type: smithy.ShapeTypeStructure, Ext: &ext[1149]})
-var sCreateProxyResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1150]})
-var sCreateProxyRuleGroupRequest_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1152]})
-var sCreateProxyRuleGroupRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[1153]})
-var sCreateProxyRuleGroupRequest_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &iProxyRulesByRequestPhase, Members: &mProxyRulesByRequestPhase, Type: smithy.ShapeTypeStructure, Ext: &ext[1154]})
-var sCreateProxyRuleGroupRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[1155]})
-var sCreateProxyRuleGroupResponse_ProxyRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroup", ID: &iProxyRuleGroup, Members: &mProxyRuleGroup, Type: smithy.ShapeTypeStructure, Ext: &ext[1157]})
-var sCreateProxyRuleGroupResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1158]})
-var sCreateProxyRulesRequest_ProxyRuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1160]})
-var sCreateProxyRulesRequest_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1161]})
-var sCreateProxyRulesRequest_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &iCreateProxyRulesByRequestPhase, Members: &mCreateProxyRulesByRequestPhase, Type: smithy.ShapeTypeStructure, Ext: &ext[1162]})
-var sCreateProxyRulesResponse_ProxyRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroup", ID: &iProxyRuleGroup, Members: &mProxyRuleGroup, Type: smithy.ShapeTypeStructure, Ext: &ext[1164]})
-var sCreateProxyRulesResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1165]})
-var sCreateRuleGroupRequest_RuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1167]})
-var sCreateRuleGroupRequest_RuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroup", ID: &iRuleGroup, Members: &mRuleGroup, Type: smithy.ShapeTypeStructure, Ext: &ext[1168]})
-var sCreateRuleGroupRequest_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_RulesString, Type: smithy.ShapeTypeString, Ext: &ext[1169]})
-var sCreateRuleGroupRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRuleGroupType, Members: &mRuleGroupType, Type: smithy.ShapeTypeEnum, Ext: &ext[1170]})
-var sCreateRuleGroupRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[1171]})
-var sCreateRuleGroupRequest_Capacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Capacity", ID: &i_RuleCapacity, Type: smithy.ShapeTypeInteger, Ext: &ext[1172]})
-var sCreateRuleGroupRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[1173]})
-var sCreateRuleGroupRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[1174]})
-var sCreateRuleGroupRequest_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[1175]})
-var sCreateRuleGroupRequest_SourceMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceMetadata", ID: &iSourceMetadata, Members: &mSourceMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[1176]})
-var sCreateRuleGroupRequest_AnalyzeRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalyzeRuleGroup", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[1177]})
-var sCreateRuleGroupRequest_SummaryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SummaryConfiguration", ID: &iSummaryConfiguration, Members: &mSummaryConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[1178]})
-var sCreateRuleGroupResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1180]})
-var sCreateRuleGroupResponse_RuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupResponse", ID: &iRuleGroupResponse, Members: &mRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1181]})
-var sCreateTLSInspectionConfigurationRequest_TLSInspectionConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1183]})
-var sCreateTLSInspectionConfigurationRequest_TLSInspectionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfiguration", ID: &iTLSInspectionConfiguration, Members: &mTLSInspectionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[1184]})
-var sCreateTLSInspectionConfigurationRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[1185]})
-var sCreateTLSInspectionConfigurationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[1186]})
-var sCreateTLSInspectionConfigurationRequest_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[1187]})
-var sCreateTLSInspectionConfigurationResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1189]})
-var sCreateTLSInspectionConfigurationResponse_TLSInspectionConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationResponse", ID: &iTLSInspectionConfigurationResponse, Members: &mTLSInspectionConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1190]})
-var sCreateVpcEndpointAssociationRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1192]})
-var sCreateVpcEndpointAssociationRequest_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &ext[1193]})
-var sCreateVpcEndpointAssociationRequest_SubnetMapping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetMapping", ID: &iSubnetMapping, Members: &mSubnetMapping, Type: smithy.ShapeTypeStructure, Ext: &ext[1194]})
-var sCreateVpcEndpointAssociationRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[1195]})
-var sCreateVpcEndpointAssociationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[1196]})
-var sCreateVpcEndpointAssociationResponse_VpcEndpointAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociation", ID: &iVpcEndpointAssociation, Members: &mVpcEndpointAssociation, Type: smithy.ShapeTypeStructure, Ext: &ext[1198]})
-var sCreateVpcEndpointAssociationResponse_VpcEndpointAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationStatus", ID: &iVpcEndpointAssociationStatus, Members: &mVpcEndpointAssociationStatus, Type: smithy.ShapeTypeStructure, Ext: &ext[1199]})
-var sDeleteContainerAssociationRequest_ContainerAssociationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1201]})
-var sDeleteContainerAssociationRequest_ContainerAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1202]})
-var sDeleteContainerAssociationResponse_ContainerAssociationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1204]})
-var sDeleteContainerAssociationResponse_ContainerAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1205]})
-var sDeleteContainerAssociationResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iContainerAssociationStatus, Members: &mContainerAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[1206]})
-var sDeleteFirewallRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1208]})
-var sDeleteFirewallRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1209]})
-var sDeleteFirewallResponse_Firewall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Firewall", ID: &iFirewall, Members: &mFirewall, Type: smithy.ShapeTypeStructure, Ext: &ext[1211]})
-var sDeleteFirewallResponse_FirewallStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallStatus", ID: &iFirewallStatus, Members: &mFirewallStatus, Type: smithy.ShapeTypeStructure, Ext: &ext[1212]})
-var sDeleteFirewallPolicyRequest_FirewallPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1214]})
-var sDeleteFirewallPolicyRequest_FirewallPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1215]})
-var sDeleteFirewallPolicyResponse_FirewallPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyResponse", ID: &iFirewallPolicyResponse, Members: &mFirewallPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1217]})
-var sDeleteNetworkFirewallTransitGatewayAttachmentRequest_TransitGatewayAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentId", ID: &i_TransitGatewayAttachmentId, Type: smithy.ShapeTypeString, Ext: &ext[1219]})
-var sDeleteNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentId", ID: &i_TransitGatewayAttachmentId, Type: smithy.ShapeTypeString, Ext: &ext[1221]})
-var sDeleteNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentStatus", ID: &iTransitGatewayAttachmentStatus, Members: &mTransitGatewayAttachmentStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[1222]})
-var sDeleteProxyConfigurationRequest_ProxyConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1224]})
-var sDeleteProxyConfigurationRequest_ProxyConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1225]})
-var sDeleteProxyConfigurationResponse_ProxyConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1227]})
-var sDeleteProxyConfigurationResponse_ProxyConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1228]})
-var sDeleteProxyRequest_NatGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayId", ID: &i_NatGatewayId, Type: smithy.ShapeTypeString, Ext: &ext[1230]})
-var sDeleteProxyRequest_ProxyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1231]})
-var sDeleteProxyRequest_ProxyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1232]})
-var sDeleteProxyResponse_NatGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayId", ID: &i_NatGatewayId, Type: smithy.ShapeTypeString, Ext: &ext[1234]})
-var sDeleteProxyResponse_ProxyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1235]})
-var sDeleteProxyResponse_ProxyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1236]})
-var sDeleteProxyRuleGroupRequest_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1238]})
-var sDeleteProxyRuleGroupRequest_ProxyRuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1239]})
-var sDeleteProxyRuleGroupResponse_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1241]})
-var sDeleteProxyRuleGroupResponse_ProxyRuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1242]})
-var sDeleteProxyRulesRequest_ProxyRuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1244]})
-var sDeleteProxyRulesRequest_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1245]})
-var sDeleteProxyRulesRequest_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_ResourceNameList, Members: &m_ResourceNameList, Type: smithy.ShapeTypeList, Ext: &ext[1246]})
-var sDeleteProxyRulesResponse_ProxyRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroup", ID: &iProxyRuleGroup, Members: &mProxyRuleGroup, Type: smithy.ShapeTypeStructure, Ext: &ext[1248]})
-var sDeleteResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1250]})
-var sDeleteRuleGroupRequest_RuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1253]})
-var sDeleteRuleGroupRequest_RuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1254]})
-var sDeleteRuleGroupRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRuleGroupType, Members: &mRuleGroupType, Type: smithy.ShapeTypeEnum, Ext: &ext[1255]})
-var sDeleteRuleGroupResponse_RuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupResponse", ID: &iRuleGroupResponse, Members: &mRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1257]})
-var sDeleteTLSInspectionConfigurationRequest_TLSInspectionConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1259]})
-var sDeleteTLSInspectionConfigurationRequest_TLSInspectionConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1260]})
-var sDeleteTLSInspectionConfigurationResponse_TLSInspectionConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationResponse", ID: &iTLSInspectionConfigurationResponse, Members: &mTLSInspectionConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1262]})
-var sDeleteVpcEndpointAssociationRequest_VpcEndpointAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1264]})
-var sDeleteVpcEndpointAssociationResponse_VpcEndpointAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociation", ID: &iVpcEndpointAssociation, Members: &mVpcEndpointAssociation, Type: smithy.ShapeTypeStructure, Ext: &ext[1266]})
-var sDeleteVpcEndpointAssociationResponse_VpcEndpointAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationStatus", ID: &iVpcEndpointAssociationStatus, Members: &mVpcEndpointAssociationStatus, Type: smithy.ShapeTypeStructure, Ext: &ext[1267]})
-var sDescribeContainerAssociationRequest_ContainerAssociationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1269]})
-var sDescribeContainerAssociationRequest_ContainerAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1270]})
-var sDescribeContainerAssociationResponse_ContainerAssociationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1272]})
-var sDescribeContainerAssociationResponse_ContainerAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1273]})
-var sDescribeContainerAssociationResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[1274]})
-var sDescribeContainerAssociationResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iContainerMonitoringType, Members: &mContainerMonitoringType, Type: smithy.ShapeTypeEnum, Ext: &ext[1275]})
-var sDescribeContainerAssociationResponse_ContainerMonitoringConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerMonitoringConfigurations", ID: &i_ContainerMonitoringConfigurations, Members: &m_ContainerMonitoringConfigurations, Type: smithy.ShapeTypeList, Ext: &ext[1276]})
-var sDescribeContainerAssociationResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iContainerAssociationStatus, Members: &mContainerAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[1277]})
-var sDescribeContainerAssociationResponse_ResolvedCidrCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResolvedCidrCount", ID: &i_CIDRCount, Type: smithy.ShapeTypeInteger, Ext: &ext[1278]})
-var sDescribeContainerAssociationResponse_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &i_ContainerAssociationLastUpdatedTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[1279]})
-var sDescribeContainerAssociationResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[1280]})
-var sDescribeContainerAssociationResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1281]})
-var sDescribeFirewallRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1283]})
-var sDescribeFirewallRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1284]})
-var sDescribeFirewallMetadataRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1286]})
-var sDescribeFirewallMetadataResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1288]})
-var sDescribeFirewallMetadataResponse_FirewallPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1289]})
-var sDescribeFirewallMetadataResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[1290]})
-var sDescribeFirewallMetadataResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iFirewallStatusValue, Members: &mFirewallStatusValue, Type: smithy.ShapeTypeEnum, Ext: &ext[1291]})
-var sDescribeFirewallMetadataResponse_SupportedAvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportedAvailabilityZones", ID: &i_SupportedAvailabilityZones, Members: &m_SupportedAvailabilityZones, Type: smithy.ShapeTypeMap, Ext: &ext[1292]})
-var sDescribeFirewallMetadataResponse_TransitGatewayAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentId", ID: &i_TransitGatewayAttachmentId, Type: smithy.ShapeTypeString, Ext: &ext[1293]})
-var sDescribeFirewallResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1295]})
-var sDescribeFirewallResponse_Firewall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Firewall", ID: &iFirewall, Members: &mFirewall, Type: smithy.ShapeTypeStructure, Ext: &ext[1296]})
-var sDescribeFirewallResponse_FirewallStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallStatus", ID: &iFirewallStatus, Members: &mFirewallStatus, Type: smithy.ShapeTypeStructure, Ext: &ext[1297]})
-var sDescribeFirewallPolicyRequest_FirewallPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1299]})
-var sDescribeFirewallPolicyRequest_FirewallPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1300]})
-var sDescribeFirewallPolicyResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1302]})
-var sDescribeFirewallPolicyResponse_FirewallPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyResponse", ID: &iFirewallPolicyResponse, Members: &mFirewallPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1303]})
-var sDescribeFirewallPolicyResponse_FirewallPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicy", ID: &iFirewallPolicy, Members: &mFirewallPolicy, Type: smithy.ShapeTypeStructure, Ext: &ext[1304]})
-var sDescribeFlowOperationRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1306]})
-var sDescribeFlowOperationRequest_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[1307]})
-var sDescribeFlowOperationRequest_AvailabilityZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneId", ID: &i_AvailabilityZoneId, Type: smithy.ShapeTypeString, Ext: &ext[1308]})
-var sDescribeFlowOperationRequest_VpcEndpointAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1309]})
-var sDescribeFlowOperationRequest_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &ext[1310]})
-var sDescribeFlowOperationRequest_FlowOperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationId", ID: &i_FlowOperationId, Type: smithy.ShapeTypeString, Ext: &ext[1311]})
-var sDescribeFlowOperationResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1313]})
-var sDescribeFlowOperationResponse_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[1314]})
-var sDescribeFlowOperationResponse_AvailabilityZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneId", ID: &i_AvailabilityZoneId, Type: smithy.ShapeTypeString, Ext: &ext[1315]})
-var sDescribeFlowOperationResponse_VpcEndpointAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1316]})
-var sDescribeFlowOperationResponse_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &ext[1317]})
-var sDescribeFlowOperationResponse_FlowOperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationId", ID: &i_FlowOperationId, Type: smithy.ShapeTypeString, Ext: &ext[1318]})
-var sDescribeFlowOperationResponse_FlowOperationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationType", ID: &iFlowOperationType, Members: &mFlowOperationType, Type: smithy.ShapeTypeEnum, Ext: &ext[1319]})
-var sDescribeFlowOperationResponse_FlowOperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationStatus", ID: &iFlowOperationStatus, Members: &mFlowOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[1320]})
-var sDescribeFlowOperationResponse_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_StatusReason, Type: smithy.ShapeTypeString, Ext: &ext[1321]})
-var sDescribeFlowOperationResponse_FlowRequestTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowRequestTimestamp", ID: &i_FlowRequestTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[1322]})
-var sDescribeFlowOperationResponse_FlowOperation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperation", ID: &iFlowOperation, Members: &mFlowOperation, Type: smithy.ShapeTypeStructure, Ext: &ext[1323]})
-var sDescribeLoggingConfigurationRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1325]})
-var sDescribeLoggingConfigurationRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1326]})
-var sDescribeLoggingConfigurationResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1328]})
-var sDescribeLoggingConfigurationResponse_LoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingConfiguration", ID: &iLoggingConfiguration, Members: &mLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[1329]})
-var sDescribeLoggingConfigurationResponse_EnableMonitoringDashboard = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableMonitoringDashboard", ID: &i_EnableMonitoringDashboard, Type: smithy.ShapeTypeBoolean, Ext: &ext[1330]})
-var sDescribeProxyConfigurationRequest_ProxyConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1332]})
-var sDescribeProxyConfigurationRequest_ProxyConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1333]})
-var sDescribeProxyConfigurationResponse_ProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfiguration", ID: &iProxyConfiguration, Members: &mProxyConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[1335]})
-var sDescribeProxyConfigurationResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1336]})
-var sDescribeProxyRequest_ProxyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1338]})
-var sDescribeProxyRequest_ProxyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1339]})
-var sDescribeProxyResponse_Proxy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Proxy", ID: &iDescribeProxyResource, Members: &mDescribeProxyResource, Type: smithy.ShapeTypeStructure, Ext: &ext[1341]})
-var sDescribeProxyResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1342]})
-var sDescribeProxyRuleGroupRequest_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1344]})
-var sDescribeProxyRuleGroupRequest_ProxyRuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1345]})
-var sDescribeProxyRuleGroupResponse_ProxyRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroup", ID: &iProxyRuleGroup, Members: &mProxyRuleGroup, Type: smithy.ShapeTypeStructure, Ext: &ext[1347]})
-var sDescribeProxyRuleGroupResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1348]})
-var sDescribeProxyRuleRequest_ProxyRuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1350]})
-var sDescribeProxyRuleRequest_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1351]})
-var sDescribeProxyRuleRequest_ProxyRuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1352]})
-var sDescribeProxyRuleResponse_ProxyRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRule", ID: &iProxyRule, Members: &mProxyRule, Type: smithy.ShapeTypeStructure, Ext: &ext[1354]})
-var sDescribeProxyRuleResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1355]})
-var sDescribeResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1357]})
-var sDescribeResourcePolicyResponse_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_PolicyString, Type: smithy.ShapeTypeString, Ext: &ext[1359]})
-var sDescribeRuleGroupRequest_RuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1361]})
-var sDescribeRuleGroupRequest_RuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1362]})
-var sDescribeRuleGroupRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRuleGroupType, Members: &mRuleGroupType, Type: smithy.ShapeTypeEnum, Ext: &ext[1363]})
-var sDescribeRuleGroupRequest_AnalyzeRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalyzeRuleGroup", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[1364]})
-var sDescribeRuleGroupMetadataRequest_RuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1366]})
-var sDescribeRuleGroupMetadataRequest_RuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1367]})
-var sDescribeRuleGroupMetadataRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRuleGroupType, Members: &mRuleGroupType, Type: smithy.ShapeTypeEnum, Ext: &ext[1368]})
-var sDescribeRuleGroupMetadataResponse_RuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1370]})
-var sDescribeRuleGroupMetadataResponse_RuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1371]})
-var sDescribeRuleGroupMetadataResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[1372]})
-var sDescribeRuleGroupMetadataResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRuleGroupType, Members: &mRuleGroupType, Type: smithy.ShapeTypeEnum, Ext: &ext[1373]})
-var sDescribeRuleGroupMetadataResponse_Capacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Capacity", ID: &i_RuleCapacity, Type: smithy.ShapeTypeInteger, Ext: &ext[1374]})
-var sDescribeRuleGroupMetadataResponse_StatefulRuleOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatefulRuleOptions", ID: &iStatefulRuleOptions, Members: &mStatefulRuleOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[1375]})
-var sDescribeRuleGroupMetadataResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_LastUpdateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[1376]})
-var sDescribeRuleGroupMetadataResponse_VendorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VendorName", ID: &i_VendorName, Type: smithy.ShapeTypeString, Ext: &ext[1377]})
-var sDescribeRuleGroupMetadataResponse_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_ProductId, Type: smithy.ShapeTypeString, Ext: &ext[1378]})
-var sDescribeRuleGroupMetadataResponse_ListingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListingName", ID: &i_ListingName, Type: smithy.ShapeTypeString, Ext: &ext[1379]})
-var sDescribeRuleGroupResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1381]})
-var sDescribeRuleGroupResponse_RuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroup", ID: &iRuleGroup, Members: &mRuleGroup, Type: smithy.ShapeTypeStructure, Ext: &ext[1382]})
-var sDescribeRuleGroupResponse_RuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupResponse", ID: &iRuleGroupResponse, Members: &mRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1383]})
-var sDescribeRuleGroupSummaryRequest_RuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1385]})
-var sDescribeRuleGroupSummaryRequest_RuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1386]})
-var sDescribeRuleGroupSummaryRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRuleGroupType, Members: &mRuleGroupType, Type: smithy.ShapeTypeEnum, Ext: &ext[1387]})
-var sDescribeRuleGroupSummaryResponse_RuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1389]})
-var sDescribeRuleGroupSummaryResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[1390]})
-var sDescribeRuleGroupSummaryResponse_Summary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Summary", ID: &iSummary, Members: &mSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[1391]})
-var sDescribeTLSInspectionConfigurationRequest_TLSInspectionConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1393]})
-var sDescribeTLSInspectionConfigurationRequest_TLSInspectionConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1394]})
-var sDescribeTLSInspectionConfigurationResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1396]})
-var sDescribeTLSInspectionConfigurationResponse_TLSInspectionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfiguration", ID: &iTLSInspectionConfiguration, Members: &mTLSInspectionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[1397]})
-var sDescribeTLSInspectionConfigurationResponse_TLSInspectionConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationResponse", ID: &iTLSInspectionConfigurationResponse, Members: &mTLSInspectionConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1398]})
-var sDescribeVpcEndpointAssociationRequest_VpcEndpointAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1400]})
-var sDescribeVpcEndpointAssociationResponse_VpcEndpointAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociation", ID: &iVpcEndpointAssociation, Members: &mVpcEndpointAssociation, Type: smithy.ShapeTypeStructure, Ext: &ext[1402]})
-var sDescribeVpcEndpointAssociationResponse_VpcEndpointAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationStatus", ID: &iVpcEndpointAssociationStatus, Members: &mVpcEndpointAssociationStatus, Type: smithy.ShapeTypeStructure, Ext: &ext[1403]})
-var sDetachRuleGroupsFromProxyConfigurationRequest_ProxyConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1405]})
-var sDetachRuleGroupsFromProxyConfigurationRequest_ProxyConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1406]})
-var sDetachRuleGroupsFromProxyConfigurationRequest_RuleGroupNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupNames", ID: &i_ResourceNameList, Members: &m_ResourceNameList, Type: smithy.ShapeTypeList, Ext: &ext[1407]})
-var sDetachRuleGroupsFromProxyConfigurationRequest_RuleGroupArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupArns", ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList, Ext: &ext[1408]})
-var sDetachRuleGroupsFromProxyConfigurationRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1409]})
-var sDetachRuleGroupsFromProxyConfigurationResponse_ProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfiguration", ID: &iProxyConfiguration, Members: &mProxyConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[1411]})
-var sDetachRuleGroupsFromProxyConfigurationResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1412]})
-var sDisassociateAvailabilityZonesRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1414]})
-var sDisassociateAvailabilityZonesRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1415]})
-var sDisassociateAvailabilityZonesRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1416]})
-var sDisassociateAvailabilityZonesRequest_AvailabilityZoneMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneMappings", ID: &i_AvailabilityZoneMappings, Members: &m_AvailabilityZoneMappings, Type: smithy.ShapeTypeList, Ext: &ext[1417]})
-var sDisassociateAvailabilityZonesResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1419]})
-var sDisassociateAvailabilityZonesResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1420]})
-var sDisassociateAvailabilityZonesResponse_AvailabilityZoneMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneMappings", ID: &i_AvailabilityZoneMappings, Members: &m_AvailabilityZoneMappings, Type: smithy.ShapeTypeList, Ext: &ext[1421]})
-var sDisassociateAvailabilityZonesResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1422]})
-var sDisassociateSubnetsRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1424]})
-var sDisassociateSubnetsRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1425]})
-var sDisassociateSubnetsRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1426]})
-var sDisassociateSubnetsRequest_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_AzSubnets, Members: &m_AzSubnets, Type: smithy.ShapeTypeList, Ext: &ext[1427]})
-var sDisassociateSubnetsResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1429]})
-var sDisassociateSubnetsResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1430]})
-var sDisassociateSubnetsResponse_SubnetMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetMappings", ID: &i_SubnetMappings, Members: &m_SubnetMappings, Type: smithy.ShapeTypeList, Ext: &ext[1431]})
-var sDisassociateSubnetsResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1432]})
-var sGetAnalysisReportResultsRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1434]})
-var sGetAnalysisReportResultsRequest_AnalysisReportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisReportId", ID: &i_AnalysisReportId, Type: smithy.ShapeTypeString, Ext: &ext[1435]})
-var sGetAnalysisReportResultsRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1436]})
-var sGetAnalysisReportResultsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_AnalysisReportNextToken, Type: smithy.ShapeTypeString, Ext: &ext[1437]})
-var sGetAnalysisReportResultsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1438]})
-var sGetAnalysisReportResultsResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &ext[1440]})
-var sGetAnalysisReportResultsResponse_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[1441]})
-var sGetAnalysisReportResultsResponse_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_EndTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[1442]})
-var sGetAnalysisReportResultsResponse_ReportTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportTime", ID: &i_ReportTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[1443]})
-var sGetAnalysisReportResultsResponse_AnalysisType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisType", ID: &iEnabledAnalysisType, Members: &mEnabledAnalysisType, Type: smithy.ShapeTypeEnum, Ext: &ext[1444]})
-var sGetAnalysisReportResultsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_AnalysisReportNextToken, Type: smithy.ShapeTypeString, Ext: &ext[1445]})
-var sGetAnalysisReportResultsResponse_AnalysisReportResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisReportResults", ID: &i_AnalysisReportResults, Members: &m_AnalysisReportResults, Type: smithy.ShapeTypeList, Ext: &ext[1446]})
-var sListAnalysisReportsRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1448]})
-var sListAnalysisReportsRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1449]})
-var sListAnalysisReportsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[1450]})
-var sListAnalysisReportsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1451]})
-var sListAnalysisReportsResponse_AnalysisReports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisReports", ID: &i_AnalysisReports, Members: &m_AnalysisReports, Type: smithy.ShapeTypeList, Ext: &ext[1453]})
-var sListAnalysisReportsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[1454]})
-var sListContainerAssociationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1456]})
-var sListContainerAssociationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[1457]})
-var sListContainerAssociationsResponse_ContainerAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociations", ID: &i_ContainerAssociations, Members: &m_ContainerAssociations, Type: smithy.ShapeTypeList, Ext: &ext[1459]})
-var sListContainerAssociationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[1460]})
-var sListFirewallPoliciesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[1462]})
-var sListFirewallPoliciesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1463]})
-var sListFirewallPoliciesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[1465]})
-var sListFirewallPoliciesResponse_FirewallPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicies", ID: &i_FirewallPolicies, Members: &m_FirewallPolicies, Type: smithy.ShapeTypeList, Ext: &ext[1466]})
-var sListFirewallsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[1468]})
-var sListFirewallsRequest_VpcIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcIds", ID: &i_VpcIds, Members: &m_VpcIds, Type: smithy.ShapeTypeList, Ext: &ext[1469]})
-var sListFirewallsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1470]})
-var sListFirewallsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[1472]})
-var sListFirewallsResponse_Firewalls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Firewalls", ID: &i_Firewalls, Members: &m_Firewalls, Type: smithy.ShapeTypeList, Ext: &ext[1473]})
-var sListFlowOperationResultsRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1475]})
-var sListFlowOperationResultsRequest_FlowOperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationId", ID: &i_FlowOperationId, Type: smithy.ShapeTypeString, Ext: &ext[1476]})
-var sListFlowOperationResultsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[1477]})
-var sListFlowOperationResultsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1478]})
-var sListFlowOperationResultsRequest_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[1479]})
-var sListFlowOperationResultsRequest_AvailabilityZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneId", ID: &i_AvailabilityZoneId, Type: smithy.ShapeTypeString, Ext: &ext[1480]})
-var sListFlowOperationResultsRequest_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &ext[1481]})
-var sListFlowOperationResultsRequest_VpcEndpointAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1482]})
-var sListFlowOperationResultsResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1484]})
-var sListFlowOperationResultsResponse_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[1485]})
-var sListFlowOperationResultsResponse_AvailabilityZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneId", ID: &i_AvailabilityZoneId, Type: smithy.ShapeTypeString, Ext: &ext[1486]})
-var sListFlowOperationResultsResponse_VpcEndpointAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1487]})
-var sListFlowOperationResultsResponse_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &ext[1488]})
-var sListFlowOperationResultsResponse_FlowOperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationId", ID: &i_FlowOperationId, Type: smithy.ShapeTypeString, Ext: &ext[1489]})
-var sListFlowOperationResultsResponse_FlowOperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationStatus", ID: &iFlowOperationStatus, Members: &mFlowOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[1490]})
-var sListFlowOperationResultsResponse_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_StatusReason, Type: smithy.ShapeTypeString, Ext: &ext[1491]})
-var sListFlowOperationResultsResponse_FlowRequestTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowRequestTimestamp", ID: &i_FlowRequestTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[1492]})
-var sListFlowOperationResultsResponse_Flows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Flows", ID: &i_Flows, Members: &m_Flows, Type: smithy.ShapeTypeList, Ext: &ext[1493]})
-var sListFlowOperationResultsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[1494]})
-var sListFlowOperationsRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1496]})
-var sListFlowOperationsRequest_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[1497]})
-var sListFlowOperationsRequest_AvailabilityZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneId", ID: &i_AvailabilityZoneId, Type: smithy.ShapeTypeString, Ext: &ext[1498]})
-var sListFlowOperationsRequest_VpcEndpointAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1499]})
-var sListFlowOperationsRequest_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &ext[1500]})
-var sListFlowOperationsRequest_FlowOperationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationType", ID: &iFlowOperationType, Members: &mFlowOperationType, Type: smithy.ShapeTypeEnum, Ext: &ext[1501]})
-var sListFlowOperationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[1502]})
-var sListFlowOperationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1503]})
-var sListFlowOperationsResponse_FlowOperations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperations", ID: &i_FlowOperations, Members: &m_FlowOperations, Type: smithy.ShapeTypeList, Ext: &ext[1505]})
-var sListFlowOperationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[1506]})
-var sListProxiesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[1508]})
-var sListProxiesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1509]})
-var sListProxiesResponse_Proxies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Proxies", ID: &i_Proxies, Members: &m_Proxies, Type: smithy.ShapeTypeList, Ext: &ext[1511]})
-var sListProxiesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[1512]})
-var sListProxyConfigurationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[1514]})
-var sListProxyConfigurationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1515]})
-var sListProxyConfigurationsResponse_ProxyConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurations", ID: &i_ProxyConfigurations, Members: &m_ProxyConfigurations, Type: smithy.ShapeTypeList, Ext: &ext[1517]})
-var sListProxyConfigurationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[1518]})
-var sListProxyRuleGroupsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[1520]})
-var sListProxyRuleGroupsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1521]})
-var sListProxyRuleGroupsResponse_ProxyRuleGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroups", ID: &i_ProxyRuleGroups, Members: &m_ProxyRuleGroups, Type: smithy.ShapeTypeList, Ext: &ext[1523]})
-var sListProxyRuleGroupsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[1524]})
-var sListRuleGroupsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[1526]})
-var sListRuleGroupsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1527]})
-var sListRuleGroupsRequest_Scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scope", ID: &iResourceManagedStatus, Members: &mResourceManagedStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[1528]})
-var sListRuleGroupsRequest_ManagedType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedType", ID: &iResourceManagedType, Members: &mResourceManagedType, Type: smithy.ShapeTypeEnum, Ext: &ext[1529]})
-var sListRuleGroupsRequest_SubscriptionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionStatus", ID: &iSubscriptionStatus, Members: &mSubscriptionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[1530]})
-var sListRuleGroupsRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRuleGroupType, Members: &mRuleGroupType, Type: smithy.ShapeTypeEnum, Ext: &ext[1531]})
-var sListRuleGroupsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[1533]})
-var sListRuleGroupsResponse_RuleGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroups", ID: &i_RuleGroups, Members: &m_RuleGroups, Type: smithy.ShapeTypeList, Ext: &ext[1534]})
-var sListTagsForResourceRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[1536]})
-var sListTagsForResourceRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_TagsPaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1537]})
-var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1538]})
-var sListTagsForResourceResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[1540]})
-var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[1541]})
-var sListTLSInspectionConfigurationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[1543]})
-var sListTLSInspectionConfigurationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1544]})
-var sListTLSInspectionConfigurationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[1546]})
-var sListTLSInspectionConfigurationsResponse_TLSInspectionConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurations", ID: &i_TLSInspectionConfigurations, Members: &m_TLSInspectionConfigurations, Type: smithy.ShapeTypeList, Ext: &ext[1547]})
-var sListVpcEndpointAssociationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[1549]})
-var sListVpcEndpointAssociationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1550]})
-var sListVpcEndpointAssociationsRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1551]})
-var sListVpcEndpointAssociationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[1553]})
-var sListVpcEndpointAssociationsResponse_VpcEndpointAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociations", ID: &i_VpcEndpointAssociations, Members: &m_VpcEndpointAssociations, Type: smithy.ShapeTypeList, Ext: &ext[1554]})
-var sPutResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1556]})
-var sPutResourcePolicyRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_PolicyString, Type: smithy.ShapeTypeString, Ext: &ext[1557]})
-var sRejectNetworkFirewallTransitGatewayAttachmentRequest_TransitGatewayAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentId", ID: &i_TransitGatewayAttachmentId, Type: smithy.ShapeTypeString, Ext: &ext[1560]})
-var sRejectNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentId", ID: &i_TransitGatewayAttachmentId, Type: smithy.ShapeTypeString, Ext: &ext[1562]})
-var sRejectNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentStatus", ID: &iTransitGatewayAttachmentStatus, Members: &mTransitGatewayAttachmentStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[1563]})
-var sStartAnalysisReportRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1565]})
-var sStartAnalysisReportRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1566]})
-var sStartAnalysisReportRequest_AnalysisType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisType", ID: &iEnabledAnalysisType, Members: &mEnabledAnalysisType, Type: smithy.ShapeTypeEnum, Ext: &ext[1567]})
-var sStartAnalysisReportResponse_AnalysisReportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisReportId", ID: &i_AnalysisReportId, Type: smithy.ShapeTypeString, Ext: &ext[1569]})
-var sStartFlowCaptureRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1571]})
-var sStartFlowCaptureRequest_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[1572]})
-var sStartFlowCaptureRequest_AvailabilityZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneId", ID: &i_AvailabilityZoneId, Type: smithy.ShapeTypeString, Ext: &ext[1573]})
-var sStartFlowCaptureRequest_VpcEndpointAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1574]})
-var sStartFlowCaptureRequest_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &ext[1575]})
-var sStartFlowCaptureRequest_MinimumFlowAgeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimumFlowAgeInSeconds", ID: &i_Age, Type: smithy.ShapeTypeInteger, Ext: &ext[1576]})
-var sStartFlowCaptureRequest_FlowFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowFilters", ID: &i_FlowFilters, Members: &m_FlowFilters, Type: smithy.ShapeTypeList, Ext: &ext[1577]})
-var sStartFlowCaptureResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1579]})
-var sStartFlowCaptureResponse_FlowOperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationId", ID: &i_FlowOperationId, Type: smithy.ShapeTypeString, Ext: &ext[1580]})
-var sStartFlowCaptureResponse_FlowOperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationStatus", ID: &iFlowOperationStatus, Members: &mFlowOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[1581]})
-var sStartFlowFlushRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1583]})
-var sStartFlowFlushRequest_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[1584]})
-var sStartFlowFlushRequest_AvailabilityZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneId", ID: &i_AvailabilityZoneId, Type: smithy.ShapeTypeString, Ext: &ext[1585]})
-var sStartFlowFlushRequest_VpcEndpointAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1586]})
-var sStartFlowFlushRequest_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &ext[1587]})
-var sStartFlowFlushRequest_MinimumFlowAgeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimumFlowAgeInSeconds", ID: &i_Age, Type: smithy.ShapeTypeInteger, Ext: &ext[1588]})
-var sStartFlowFlushRequest_FlowFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowFilters", ID: &i_FlowFilters, Members: &m_FlowFilters, Type: smithy.ShapeTypeList, Ext: &ext[1589]})
-var sStartFlowFlushResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1591]})
-var sStartFlowFlushResponse_FlowOperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationId", ID: &i_FlowOperationId, Type: smithy.ShapeTypeString, Ext: &ext[1592]})
-var sStartFlowFlushResponse_FlowOperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationStatus", ID: &iFlowOperationStatus, Members: &mFlowOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[1593]})
-var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1595]})
-var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[1596]})
-var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1599]})
-var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[1600]})
-var sUpdateAvailabilityZoneChangeProtectionRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1603]})
-var sUpdateAvailabilityZoneChangeProtectionRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1604]})
-var sUpdateAvailabilityZoneChangeProtectionRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1605]})
-var sUpdateAvailabilityZoneChangeProtectionRequest_AvailabilityZoneChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneChangeProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[1606]})
-var sUpdateAvailabilityZoneChangeProtectionResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1608]})
-var sUpdateAvailabilityZoneChangeProtectionResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1609]})
-var sUpdateAvailabilityZoneChangeProtectionResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1610]})
-var sUpdateAvailabilityZoneChangeProtectionResponse_AvailabilityZoneChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneChangeProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[1611]})
-var sUpdateContainerAssociationRequest_ContainerAssociationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1613]})
-var sUpdateContainerAssociationRequest_ContainerAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1614]})
-var sUpdateContainerAssociationRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[1615]})
-var sUpdateContainerAssociationRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iContainerMonitoringType, Members: &mContainerMonitoringType, Type: smithy.ShapeTypeEnum, Ext: &ext[1616]})
-var sUpdateContainerAssociationRequest_ContainerMonitoringConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerMonitoringConfigurations", ID: &i_ContainerMonitoringConfigurations, Members: &m_ContainerMonitoringConfigurations, Type: smithy.ShapeTypeList, Ext: &ext[1617]})
-var sUpdateContainerAssociationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[1618]})
-var sUpdateContainerAssociationRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1619]})
-var sUpdateContainerAssociationResponse_ContainerAssociationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1621]})
-var sUpdateContainerAssociationResponse_ContainerAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1622]})
-var sUpdateContainerAssociationResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[1623]})
-var sUpdateContainerAssociationResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iContainerMonitoringType, Members: &mContainerMonitoringType, Type: smithy.ShapeTypeEnum, Ext: &ext[1624]})
-var sUpdateContainerAssociationResponse_ContainerMonitoringConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerMonitoringConfigurations", ID: &i_ContainerMonitoringConfigurations, Members: &m_ContainerMonitoringConfigurations, Type: smithy.ShapeTypeList, Ext: &ext[1625]})
-var sUpdateContainerAssociationResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iContainerAssociationStatus, Members: &mContainerAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[1626]})
-var sUpdateContainerAssociationResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[1627]})
-var sUpdateContainerAssociationResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1628]})
-var sUpdateFirewallAnalysisSettingsRequest_EnabledAnalysisTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledAnalysisTypes", ID: &i_EnabledAnalysisTypes, Members: &m_EnabledAnalysisTypes, Type: smithy.ShapeTypeList, Ext: &ext[1630]})
-var sUpdateFirewallAnalysisSettingsRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1631]})
-var sUpdateFirewallAnalysisSettingsRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1632]})
-var sUpdateFirewallAnalysisSettingsRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1633]})
-var sUpdateFirewallAnalysisSettingsResponse_EnabledAnalysisTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledAnalysisTypes", ID: &i_EnabledAnalysisTypes, Members: &m_EnabledAnalysisTypes, Type: smithy.ShapeTypeList, Ext: &ext[1635]})
-var sUpdateFirewallAnalysisSettingsResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1636]})
-var sUpdateFirewallAnalysisSettingsResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1637]})
-var sUpdateFirewallAnalysisSettingsResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1638]})
-var sUpdateFirewallDeleteProtectionRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1640]})
-var sUpdateFirewallDeleteProtectionRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1641]})
-var sUpdateFirewallDeleteProtectionRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1642]})
-var sUpdateFirewallDeleteProtectionRequest_DeleteProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[1643]})
-var sUpdateFirewallDeleteProtectionResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1645]})
-var sUpdateFirewallDeleteProtectionResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1646]})
-var sUpdateFirewallDeleteProtectionResponse_DeleteProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[1647]})
-var sUpdateFirewallDeleteProtectionResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1648]})
-var sUpdateFirewallDescriptionRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1650]})
-var sUpdateFirewallDescriptionRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1651]})
-var sUpdateFirewallDescriptionRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1652]})
-var sUpdateFirewallDescriptionRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[1653]})
-var sUpdateFirewallDescriptionResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1655]})
-var sUpdateFirewallDescriptionResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1656]})
-var sUpdateFirewallDescriptionResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[1657]})
-var sUpdateFirewallDescriptionResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1658]})
-var sUpdateFirewallEncryptionConfigurationRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1660]})
-var sUpdateFirewallEncryptionConfigurationRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1661]})
-var sUpdateFirewallEncryptionConfigurationRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1662]})
-var sUpdateFirewallEncryptionConfigurationRequest_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[1663]})
-var sUpdateFirewallEncryptionConfigurationResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1665]})
-var sUpdateFirewallEncryptionConfigurationResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1666]})
-var sUpdateFirewallEncryptionConfigurationResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1667]})
-var sUpdateFirewallEncryptionConfigurationResponse_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[1668]})
-var sUpdateFirewallPolicyChangeProtectionRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1670]})
-var sUpdateFirewallPolicyChangeProtectionRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1671]})
-var sUpdateFirewallPolicyChangeProtectionRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1672]})
-var sUpdateFirewallPolicyChangeProtectionRequest_FirewallPolicyChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyChangeProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[1673]})
-var sUpdateFirewallPolicyChangeProtectionResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1675]})
-var sUpdateFirewallPolicyChangeProtectionResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1676]})
-var sUpdateFirewallPolicyChangeProtectionResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1677]})
-var sUpdateFirewallPolicyChangeProtectionResponse_FirewallPolicyChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyChangeProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[1678]})
-var sUpdateFirewallPolicyRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1680]})
-var sUpdateFirewallPolicyRequest_FirewallPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1681]})
-var sUpdateFirewallPolicyRequest_FirewallPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1682]})
-var sUpdateFirewallPolicyRequest_FirewallPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicy", ID: &iFirewallPolicy, Members: &mFirewallPolicy, Type: smithy.ShapeTypeStructure, Ext: &ext[1683]})
-var sUpdateFirewallPolicyRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[1684]})
-var sUpdateFirewallPolicyRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[1685]})
-var sUpdateFirewallPolicyRequest_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[1686]})
-var sUpdateFirewallPolicyResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1688]})
-var sUpdateFirewallPolicyResponse_FirewallPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyResponse", ID: &iFirewallPolicyResponse, Members: &mFirewallPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1689]})
-var sUpdateLoggingConfigurationRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1691]})
-var sUpdateLoggingConfigurationRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1692]})
-var sUpdateLoggingConfigurationRequest_LoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingConfiguration", ID: &iLoggingConfiguration, Members: &mLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[1693]})
-var sUpdateLoggingConfigurationRequest_EnableMonitoringDashboard = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableMonitoringDashboard", ID: &i_EnableMonitoringDashboard, Type: smithy.ShapeTypeBoolean, Ext: &ext[1694]})
-var sUpdateLoggingConfigurationResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1696]})
-var sUpdateLoggingConfigurationResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1697]})
-var sUpdateLoggingConfigurationResponse_LoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingConfiguration", ID: &iLoggingConfiguration, Members: &mLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[1698]})
-var sUpdateLoggingConfigurationResponse_EnableMonitoringDashboard = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableMonitoringDashboard", ID: &i_EnableMonitoringDashboard, Type: smithy.ShapeTypeBoolean, Ext: &ext[1699]})
-var sUpdateProxyConfigurationRequest_ProxyConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1701]})
-var sUpdateProxyConfigurationRequest_ProxyConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1702]})
-var sUpdateProxyConfigurationRequest_DefaultRulePhaseActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultRulePhaseActions", ID: &iProxyConfigDefaultRulePhaseActionsRequest, Members: &mProxyConfigDefaultRulePhaseActionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1703]})
-var sUpdateProxyConfigurationRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1704]})
-var sUpdateProxyConfigurationResponse_ProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfiguration", ID: &iProxyConfiguration, Members: &mProxyConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[1706]})
-var sUpdateProxyConfigurationResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1707]})
-var sUpdateProxyRequest_NatGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayId", ID: &i_NatGatewayId, Type: smithy.ShapeTypeString, Ext: &ext[1709]})
-var sUpdateProxyRequest_ProxyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1710]})
-var sUpdateProxyRequest_ProxyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1711]})
-var sUpdateProxyRequest_ListenerPropertiesToAdd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerPropertiesToAdd", ID: &i_ListenerPropertiesRequest, Members: &m_ListenerPropertiesRequest, Type: smithy.ShapeTypeList, Ext: &ext[1712]})
-var sUpdateProxyRequest_ListenerPropertiesToRemove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerPropertiesToRemove", ID: &i_ListenerPropertiesRequest, Members: &m_ListenerPropertiesRequest, Type: smithy.ShapeTypeList, Ext: &ext[1713]})
-var sUpdateProxyRequest_TlsInterceptProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsInterceptProperties", ID: &iTlsInterceptPropertiesRequest, Members: &mTlsInterceptPropertiesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1714]})
-var sUpdateProxyRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1715]})
-var sUpdateProxyResponse_Proxy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Proxy", ID: &iProxy, Members: &mProxy, Type: smithy.ShapeTypeStructure, Ext: &ext[1717]})
-var sUpdateProxyResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1718]})
-var sUpdateProxyRuleGroupPrioritiesRequest_ProxyConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1720]})
-var sUpdateProxyRuleGroupPrioritiesRequest_ProxyConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1721]})
-var sUpdateProxyRuleGroupPrioritiesRequest_RuleGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroups", ID: &i_ProxyRuleGroupPriorityList, Members: &m_ProxyRuleGroupPriorityList, Type: smithy.ShapeTypeList, Ext: &ext[1722]})
-var sUpdateProxyRuleGroupPrioritiesRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1723]})
-var sUpdateProxyRuleGroupPrioritiesResponse_ProxyRuleGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroups", ID: &i_ProxyRuleGroupPriorityResultList, Members: &m_ProxyRuleGroupPriorityResultList, Type: smithy.ShapeTypeList, Ext: &ext[1725]})
-var sUpdateProxyRuleGroupPrioritiesResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1726]})
-var sUpdateProxyRuleRequest_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1728]})
-var sUpdateProxyRuleRequest_ProxyRuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1729]})
-var sUpdateProxyRuleRequest_ProxyRuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1730]})
-var sUpdateProxyRuleRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[1731]})
-var sUpdateProxyRuleRequest_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iProxyRulePhaseAction, Members: &mProxyRulePhaseAction, Type: smithy.ShapeTypeEnum, Ext: &ext[1732]})
-var sUpdateProxyRuleRequest_AddConditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddConditions", ID: &i_ProxyRuleConditionList, Members: &m_ProxyRuleConditionList, Type: smithy.ShapeTypeList, Ext: &ext[1733]})
-var sUpdateProxyRuleRequest_RemoveConditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveConditions", ID: &i_ProxyRuleConditionList, Members: &m_ProxyRuleConditionList, Type: smithy.ShapeTypeList, Ext: &ext[1734]})
-var sUpdateProxyRuleRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1735]})
-var sUpdateProxyRuleResponse_ProxyRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRule", ID: &iProxyRule, Members: &mProxyRule, Type: smithy.ShapeTypeStructure, Ext: &ext[1737]})
-var sUpdateProxyRuleResponse_RemovedConditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemovedConditions", ID: &i_ProxyRuleConditionList, Members: &m_ProxyRuleConditionList, Type: smithy.ShapeTypeList, Ext: &ext[1738]})
-var sUpdateProxyRuleResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1739]})
-var sUpdateProxyRulePrioritiesRequest_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1741]})
-var sUpdateProxyRulePrioritiesRequest_ProxyRuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1742]})
-var sUpdateProxyRulePrioritiesRequest_RuleGroupRequestPhase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupRequestPhase", ID: &iRuleGroupRequestPhase, Members: &mRuleGroupRequestPhase, Type: smithy.ShapeTypeEnum, Ext: &ext[1743]})
-var sUpdateProxyRulePrioritiesRequest_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_ProxyRulePriorityList, Members: &m_ProxyRulePriorityList, Type: smithy.ShapeTypeList, Ext: &ext[1744]})
-var sUpdateProxyRulePrioritiesRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1745]})
-var sUpdateProxyRulePrioritiesResponse_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1747]})
-var sUpdateProxyRulePrioritiesResponse_ProxyRuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1748]})
-var sUpdateProxyRulePrioritiesResponse_RuleGroupRequestPhase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupRequestPhase", ID: &iRuleGroupRequestPhase, Members: &mRuleGroupRequestPhase, Type: smithy.ShapeTypeEnum, Ext: &ext[1749]})
-var sUpdateProxyRulePrioritiesResponse_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_ProxyRulePriorityList, Members: &m_ProxyRulePriorityList, Type: smithy.ShapeTypeList, Ext: &ext[1750]})
-var sUpdateProxyRulePrioritiesResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1751]})
-var sUpdateProxySettingsRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1753]})
-var sUpdateProxySettingsRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1754]})
-var sUpdateProxySettingsRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1755]})
-var sUpdateProxySettingsRequest_ProxySettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxySettings", ID: &iProxySettings, Members: &mProxySettings, Type: smithy.ShapeTypeStructure, Ext: &ext[1756]})
-var sUpdateProxySettingsResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1758]})
-var sUpdateProxySettingsResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1759]})
-var sUpdateProxySettingsResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1760]})
-var sUpdateProxySettingsResponse_ProxySettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxySettings", ID: &iProxySettings, Members: &mProxySettings, Type: smithy.ShapeTypeStructure, Ext: &ext[1761]})
-var sUpdateRuleGroupRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1763]})
-var sUpdateRuleGroupRequest_RuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1764]})
-var sUpdateRuleGroupRequest_RuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1765]})
-var sUpdateRuleGroupRequest_RuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroup", ID: &iRuleGroup, Members: &mRuleGroup, Type: smithy.ShapeTypeStructure, Ext: &ext[1766]})
-var sUpdateRuleGroupRequest_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_RulesString, Type: smithy.ShapeTypeString, Ext: &ext[1767]})
-var sUpdateRuleGroupRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRuleGroupType, Members: &mRuleGroupType, Type: smithy.ShapeTypeEnum, Ext: &ext[1768]})
-var sUpdateRuleGroupRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[1769]})
-var sUpdateRuleGroupRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[1770]})
-var sUpdateRuleGroupRequest_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[1771]})
-var sUpdateRuleGroupRequest_SourceMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceMetadata", ID: &iSourceMetadata, Members: &mSourceMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[1772]})
-var sUpdateRuleGroupRequest_AnalyzeRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalyzeRuleGroup", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[1773]})
-var sUpdateRuleGroupRequest_SummaryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SummaryConfiguration", ID: &iSummaryConfiguration, Members: &mSummaryConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[1774]})
-var sUpdateRuleGroupResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1776]})
-var sUpdateRuleGroupResponse_RuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupResponse", ID: &iRuleGroupResponse, Members: &mRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1777]})
-var sUpdateSubnetChangeProtectionRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1779]})
-var sUpdateSubnetChangeProtectionRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1780]})
-var sUpdateSubnetChangeProtectionRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1781]})
-var sUpdateSubnetChangeProtectionRequest_SubnetChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetChangeProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[1782]})
-var sUpdateSubnetChangeProtectionResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1784]})
-var sUpdateSubnetChangeProtectionResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1785]})
-var sUpdateSubnetChangeProtectionResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1786]})
-var sUpdateSubnetChangeProtectionResponse_SubnetChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetChangeProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[1787]})
-var sUpdateTLSInspectionConfigurationRequest_TLSInspectionConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1789]})
-var sUpdateTLSInspectionConfigurationRequest_TLSInspectionConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[1790]})
-var sUpdateTLSInspectionConfigurationRequest_TLSInspectionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfiguration", ID: &iTLSInspectionConfiguration, Members: &mTLSInspectionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[1791]})
-var sUpdateTLSInspectionConfigurationRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[1792]})
-var sUpdateTLSInspectionConfigurationRequest_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[1793]})
-var sUpdateTLSInspectionConfigurationRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1794]})
-var sUpdateTLSInspectionConfigurationResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ext[1796]})
-var sUpdateTLSInspectionConfigurationResponse_TLSInspectionConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationResponse", ID: &iTLSInspectionConfigurationResponse, Members: &mTLSInspectionConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1797]})
+var sActionDefinition_PublishMetricAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublishMetricAction", ID: &iPublishMetricAction, Members: &mPublishMetricAction, Type: smithy.ShapeTypeStructure, Ext: &eActionDefinition_PublishMetricAction})
+var sAddress_AddressDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressDefinition", ID: &i_AddressDefinition, Type: smithy.ShapeTypeString, Ext: &eAddress_AddressDefinition})
+var s_Addresses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &e_Addresses_member})
+var sAnalysisReport_AnalysisReportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisReportId", ID: &i_AnalysisReportId, Type: smithy.ShapeTypeString, Ext: &eAnalysisReport_AnalysisReportId})
+var sAnalysisReport_AnalysisType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisType", ID: &iEnabledAnalysisType, Members: &mEnabledAnalysisType, Type: smithy.ShapeTypeEnum, Ext: &eAnalysisReport_AnalysisType})
+var sAnalysisReport_ReportTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportTime", ID: &i_ReportTime, Type: smithy.ShapeTypeTimestamp, Ext: &eAnalysisReport_ReportTime})
+var sAnalysisReport_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eAnalysisReport_Status})
+var s_AnalysisReportResults_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAnalysisTypeReportResult, Members: &mAnalysisTypeReportResult, Type: smithy.ShapeTypeStructure, Ext: &e_AnalysisReportResults_member})
+var s_AnalysisReports_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAnalysisReport, Members: &mAnalysisReport, Type: smithy.ShapeTypeStructure, Ext: &e_AnalysisReports_member})
+var sAnalysisResult_IdentifiedRuleIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentifiedRuleIds", ID: &i_RuleIdList, Members: &m_RuleIdList, Type: smithy.ShapeTypeList, Ext: &eAnalysisResult_IdentifiedRuleIds})
+var sAnalysisResult_IdentifiedType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentifiedType", ID: &iIdentifiedType, Members: &mIdentifiedType, Type: smithy.ShapeTypeEnum, Ext: &eAnalysisResult_IdentifiedType})
+var sAnalysisResult_AnalysisDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisDetail", ID: &i_CollectionMember_String, Type: smithy.ShapeTypeString, Ext: &eAnalysisResult_AnalysisDetail})
+var s_AnalysisResultList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAnalysisResult, Members: &mAnalysisResult, Type: smithy.ShapeTypeStructure, Ext: &e_AnalysisResultList_member})
+var sAnalysisTypeReportResult_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &i_CollectionMember_String, Type: smithy.ShapeTypeString, Ext: &eAnalysisTypeReportResult_Protocol})
+var sAnalysisTypeReportResult_FirstAccessed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirstAccessed", ID: &i_FirstAccessed, Type: smithy.ShapeTypeTimestamp, Ext: &eAnalysisTypeReportResult_FirstAccessed})
+var sAnalysisTypeReportResult_LastAccessed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastAccessed", ID: &i_LastAccessed, Type: smithy.ShapeTypeTimestamp, Ext: &eAnalysisTypeReportResult_LastAccessed})
+var sAnalysisTypeReportResult_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_Domain, Type: smithy.ShapeTypeString, Ext: &eAnalysisTypeReportResult_Domain})
+var sAnalysisTypeReportResult_Hits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Hits", ID: &iHits, Members: &mHits, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisTypeReportResult_Hits})
+var sAnalysisTypeReportResult_UniqueSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UniqueSources", ID: &iUniqueSources, Members: &mUniqueSources, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisTypeReportResult_UniqueSources})
+var s_AssociationSyncState_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &e_AssociationSyncState_key})
+var s_AssociationSyncState_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iAZSyncState, Members: &mAZSyncState, Type: smithy.ShapeTypeStructure, Ext: &e_AssociationSyncState_value})
+var sAttachment_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetId", ID: &i_AzSubnet, Type: smithy.ShapeTypeString, Ext: &eAttachment_SubnetId})
+var sAttachment_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointId", ID: &i_EndpointId, Type: smithy.ShapeTypeString, Ext: &eAttachment_EndpointId})
+var sAttachment_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAttachmentStatus, Members: &mAttachmentStatus, Type: smithy.ShapeTypeEnum, Ext: &eAttachment_Status})
+var sAttachment_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString, Ext: &eAttachment_StatusMessage})
+var sAttachment_DnsName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsName", ID: &i_DnsName, Type: smithy.ShapeTypeString, Ext: &eAttachment_DnsName})
+var sAttachmentStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAttachmentStatus_CREATING})
+var sAttachmentStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAttachmentStatus_DELETING})
+var sAttachmentStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAttachmentStatus_FAILED})
+var sAttachmentStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAttachmentStatus_ERROR})
+var sAttachmentStatus_SCALING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCALING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAttachmentStatus_SCALING})
+var sAttachmentStatus_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAttachmentStatus_READY})
+var sAvailabilityZoneMapping_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_AvailabilityZoneMappingString, Type: smithy.ShapeTypeString, Ext: &eAvailabilityZoneMapping_AvailabilityZone})
+var s_AvailabilityZoneMappings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAvailabilityZoneMapping, Members: &mAvailabilityZoneMapping, Type: smithy.ShapeTypeStructure, Ext: &e_AvailabilityZoneMappings_member})
+var sAvailabilityZoneMetadata_IPAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPAddressType", ID: &iIPAddressType, Members: &mIPAddressType, Type: smithy.ShapeTypeEnum, Ext: &eAvailabilityZoneMetadata_IPAddressType})
+var s_AzSubnets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AzSubnet, Type: smithy.ShapeTypeString, Ext: &e_AzSubnets_member})
+var sAZSyncState_Attachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attachment", ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure, Ext: &eAZSyncState_Attachment})
+var sCapacityUsageSummary_CIDRs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CIDRs", ID: &iCIDRSummary, Members: &mCIDRSummary, Type: smithy.ShapeTypeStructure, Ext: &eCapacityUsageSummary_CIDRs})
+var s_Certificates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTlsCertificateData, Members: &mTlsCertificateData, Type: smithy.ShapeTypeStructure, Ext: &e_Certificates_member})
+var sCheckCertificateRevocationStatusActions_RevokedStatusAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevokedStatusAction", ID: &iRevocationCheckAction, Members: &mRevocationCheckAction, Type: smithy.ShapeTypeEnum, Ext: &eCheckCertificateRevocationStatusActions_RevokedStatusAction})
+var sCheckCertificateRevocationStatusActions_UnknownStatusAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnknownStatusAction", ID: &iRevocationCheckAction, Members: &mRevocationCheckAction, Type: smithy.ShapeTypeEnum, Ext: &eCheckCertificateRevocationStatusActions_UnknownStatusAction})
+var sCIDRSummary_AvailableCIDRCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailableCIDRCount", ID: &i_CIDRCount, Type: smithy.ShapeTypeInteger, Ext: &eCIDRSummary_AvailableCIDRCount})
+var sCIDRSummary_UtilizedCIDRCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UtilizedCIDRCount", ID: &i_CIDRCount, Type: smithy.ShapeTypeInteger, Ext: &eCIDRSummary_UtilizedCIDRCount})
+var sCIDRSummary_IPSetReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPSetReferences", ID: &i_IPSetMetadataMap, Members: &m_IPSetMetadataMap, Type: smithy.ShapeTypeMap, Ext: &eCIDRSummary_IPSetReferences})
+var sConfigurationSyncState_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationSyncState_PENDING})
+var sConfigurationSyncState_IN_SYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_SYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationSyncState_IN_SYNC})
+var sConfigurationSyncState_CAPACITY_CONSTRAINED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CAPACITY_CONSTRAINED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConfigurationSyncState_CAPACITY_CONSTRAINED})
+var s_ContainerAssociations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContainerAssociationSummary, Members: &mContainerAssociationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ContainerAssociations_member})
+var sContainerAssociationStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContainerAssociationStatus_ACTIVE})
+var sContainerAssociationStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContainerAssociationStatus_CREATING})
+var sContainerAssociationStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContainerAssociationStatus_DELETING})
+var sContainerAssociationStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContainerAssociationStatus_UPDATING})
+var sContainerAssociationSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eContainerAssociationSummary_Arn})
+var sContainerAssociationSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eContainerAssociationSummary_Name})
+var sContainerAttribute_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ContainerAttributeKey, Type: smithy.ShapeTypeString, Ext: &eContainerAttribute_Key})
+var sContainerAttribute_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_ContainerAttributeValue, Type: smithy.ShapeTypeString, Ext: &eContainerAttribute_Value})
+var s_ContainerAttributes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContainerAttribute, Members: &mContainerAttribute, Type: smithy.ShapeTypeStructure, Ext: &e_ContainerAttributes_member})
+var sContainerMonitoringConfiguration_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eContainerMonitoringConfiguration_ClusterArn})
+var sContainerMonitoringConfiguration_AttributeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeFilters", ID: &i_ContainerAttributes, Members: &m_ContainerAttributes, Type: smithy.ShapeTypeList, Ext: &eContainerMonitoringConfiguration_AttributeFilters})
+var s_ContainerMonitoringConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContainerMonitoringConfiguration, Members: &mContainerMonitoringConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_ContainerMonitoringConfigurations_member})
+var sContainerMonitoringType_ECS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContainerMonitoringType_ECS})
+var sContainerMonitoringType_EKS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EKS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContainerMonitoringType_EKS})
+var sCreateProxyRule_ProxyRuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateProxyRule_ProxyRuleName})
+var sCreateProxyRule_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateProxyRule_Description})
+var sCreateProxyRule_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iProxyRulePhaseAction, Members: &mProxyRulePhaseAction, Type: smithy.ShapeTypeEnum, Ext: &eCreateProxyRule_Action})
+var sCreateProxyRule_Conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Conditions", ID: &i_ProxyRuleConditionList, Members: &m_ProxyRuleConditionList, Type: smithy.ShapeTypeList, Ext: &eCreateProxyRule_Conditions})
+var sCreateProxyRule_InsertPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsertPosition", ID: &i_InsertPosition, Type: smithy.ShapeTypeInteger, Ext: &eCreateProxyRule_InsertPosition})
+var s_CreateProxyRuleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCreateProxyRule, Members: &mCreateProxyRule, Type: smithy.ShapeTypeStructure, Ext: &e_CreateProxyRuleList_member})
+var sCreateProxyRulesByRequestPhase_PreDNS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreDNS", ID: &i_CreateProxyRuleList, Members: &m_CreateProxyRuleList, Type: smithy.ShapeTypeList, Ext: &eCreateProxyRulesByRequestPhase_PreDNS})
+var sCreateProxyRulesByRequestPhase_PreREQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreREQUEST", ID: &i_CreateProxyRuleList, Members: &m_CreateProxyRuleList, Type: smithy.ShapeTypeList, Ext: &eCreateProxyRulesByRequestPhase_PreREQUEST})
+var sCreateProxyRulesByRequestPhase_PostRESPONSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostRESPONSE", ID: &i_CreateProxyRuleList, Members: &m_CreateProxyRuleList, Type: smithy.ShapeTypeList, Ext: &eCreateProxyRulesByRequestPhase_PostRESPONSE})
+var sCustomAction_ActionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionName", ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &eCustomAction_ActionName})
+var sCustomAction_ActionDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionDefinition", ID: &iActionDefinition, Members: &mActionDefinition, Type: smithy.ShapeTypeStructure, Ext: &eCustomAction_ActionDefinition})
+var s_CustomActions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomAction, Members: &mCustomAction, Type: smithy.ShapeTypeStructure, Ext: &e_CustomActions_member})
+var sDescribeProxyResource_ProxyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDescribeProxyResource_ProxyName})
+var sDescribeProxyResource_ProxyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeProxyResource_ProxyArn})
+var sDescribeProxyResource_ProxyConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDescribeProxyResource_ProxyConfigurationName})
+var sDescribeProxyResource_ProxyConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeProxyResource_ProxyConfigurationArn})
+var sDescribeProxyResource_NatGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayId", ID: &i_NatGatewayId, Type: smithy.ShapeTypeString, Ext: &eDescribeProxyResource_NatGatewayId})
+var sDescribeProxyResource_ProxyState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyState", ID: &iProxyState, Members: &mProxyState, Type: smithy.ShapeTypeEnum, Ext: &eDescribeProxyResource_ProxyState})
+var sDescribeProxyResource_ProxyModifyState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyModifyState", ID: &iProxyModifyState, Members: &mProxyModifyState, Type: smithy.ShapeTypeEnum, Ext: &eDescribeProxyResource_ProxyModifyState})
+var sDescribeProxyResource_ListenerProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerProperties", ID: &i_ListenerProperties, Members: &m_ListenerProperties, Type: smithy.ShapeTypeList, Ext: &eDescribeProxyResource_ListenerProperties})
+var sDescribeProxyResource_TlsInterceptProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsInterceptProperties", ID: &iTlsInterceptProperties, Members: &mTlsInterceptProperties, Type: smithy.ShapeTypeStructure, Ext: &eDescribeProxyResource_TlsInterceptProperties})
+var sDescribeProxyResource_VpcEndpointServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointServiceName", ID: &i_VpcEndpointServiceName, Type: smithy.ShapeTypeString, Ext: &eDescribeProxyResource_VpcEndpointServiceName})
+var sDescribeProxyResource_PrivateDNSName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateDNSName", ID: &i_PrivateDNSName, Type: smithy.ShapeTypeString, Ext: &eDescribeProxyResource_PrivateDNSName})
+var sDescribeProxyResource_CreateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateTime", ID: &i_CreateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeProxyResource_CreateTime})
+var sDescribeProxyResource_DeleteTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteTime", ID: &i_DeleteTime, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeProxyResource_DeleteTime})
+var sDescribeProxyResource_UpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateTime", ID: &i_UpdateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeProxyResource_UpdateTime})
+var sDescribeProxyResource_FailureCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureCode", ID: &i_FailureCode, Type: smithy.ShapeTypeString, Ext: &eDescribeProxyResource_FailureCode})
+var sDescribeProxyResource_FailureMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureMessage", ID: &i_FailureMessage, Type: smithy.ShapeTypeString, Ext: &eDescribeProxyResource_FailureMessage})
+var sDescribeProxyResource_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eDescribeProxyResource_Tags})
+var sDimension_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_DimensionValue, Type: smithy.ShapeTypeString, Ext: &eDimension_Value})
+var s_Dimensions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeStructure, Ext: &e_Dimensions_member})
+var sDNSExpiryExceptionPolicy_REJECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDNSExpiryExceptionPolicy_REJECT})
+var sDNSExpiryExceptionPolicy_DROP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DROP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDNSExpiryExceptionPolicy_DROP})
+var sDNSExpiryExceptionPolicy_CONTINUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTINUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDNSExpiryExceptionPolicy_CONTINUE})
+var sEnabledAnalysisType_TLS_SNI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLS_SNI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnabledAnalysisType_TLS_SNI})
+var sEnabledAnalysisType_HTTP_HOST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP_HOST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnabledAnalysisType_HTTP_HOST})
+var s_EnabledAnalysisTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnabledAnalysisType, Members: &mEnabledAnalysisType, Type: smithy.ShapeTypeEnum, Ext: &e_EnabledAnalysisTypes_member})
+var sEncryptionConfiguration_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyId, Type: smithy.ShapeTypeString, Ext: &eEncryptionConfiguration_KeyId})
+var sEncryptionConfiguration_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum, Ext: &eEncryptionConfiguration_Type})
+var sEncryptionType_CUSTOMER_KMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_KMS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionType_CUSTOMER_KMS})
+var sEncryptionType_AWS_OWNED_KMS_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_OWNED_KMS_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionType_AWS_OWNED_KMS_KEY})
+var sFirewall_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eFirewall_FirewallName})
+var sFirewall_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eFirewall_FirewallArn})
+var sFirewall_FirewallPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eFirewall_FirewallPolicyArn})
+var sFirewall_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &eFirewall_VpcId})
+var sFirewall_SubnetMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetMappings", ID: &i_SubnetMappings, Members: &m_SubnetMappings, Type: smithy.ShapeTypeList, Ext: &eFirewall_SubnetMappings})
+var sFirewall_DeleteProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eFirewall_DeleteProtection})
+var sFirewall_SubnetChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetChangeProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eFirewall_SubnetChangeProtection})
+var sFirewall_FirewallPolicyChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyChangeProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eFirewall_FirewallPolicyChangeProtection})
+var sFirewall_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eFirewall_Description})
+var sFirewall_FirewallId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eFirewall_FirewallId})
+var sFirewall_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eFirewall_Tags})
+var sFirewall_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eFirewall_EncryptionConfiguration})
+var sFirewall_NumberOfAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfAssociations", ID: &i_NumberOfAssociations, Type: smithy.ShapeTypeInteger, Ext: &eFirewall_NumberOfAssociations})
+var sFirewall_EnabledAnalysisTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledAnalysisTypes", ID: &i_EnabledAnalysisTypes, Members: &m_EnabledAnalysisTypes, Type: smithy.ShapeTypeList, Ext: &eFirewall_EnabledAnalysisTypes})
+var sFirewall_TransitGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayId", ID: &i_TransitGatewayId, Type: smithy.ShapeTypeString, Ext: &eFirewall_TransitGatewayId})
+var sFirewall_TransitGatewayOwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayOwnerAccountId", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString, Ext: &eFirewall_TransitGatewayOwnerAccountId})
+var sFirewall_AvailabilityZoneMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneMappings", ID: &i_AvailabilityZoneMappings, Members: &m_AvailabilityZoneMappings, Type: smithy.ShapeTypeList, Ext: &eFirewall_AvailabilityZoneMappings})
+var sFirewall_AvailabilityZoneChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneChangeProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eFirewall_AvailabilityZoneChangeProtection})
+var sFirewall_NatGatewayMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayMappings", ID: &i_NatGatewayMappingsList, Members: &m_NatGatewayMappingsList, Type: smithy.ShapeTypeList, Ext: &eFirewall_NatGatewayMappings})
+var sFirewall_ProxySettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxySettings", ID: &iProxySettings, Members: &mProxySettings, Type: smithy.ShapeTypeStructure, Ext: &eFirewall_ProxySettings})
+var sFirewall_NoSourcePreservation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NoSourcePreservation", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eFirewall_NoSourcePreservation})
+var sFirewall_VpcEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpoint", ID: &iVpcEndpoint, Members: &mVpcEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eFirewall_VpcEndpoint})
+var sFirewallMetadata_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eFirewallMetadata_FirewallName})
+var sFirewallMetadata_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eFirewallMetadata_FirewallArn})
+var sFirewallMetadata_TransitGatewayAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentId", ID: &i_TransitGatewayAttachmentId, Type: smithy.ShapeTypeString, Ext: &eFirewallMetadata_TransitGatewayAttachmentId})
+var s_FirewallPolicies_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFirewallPolicyMetadata, Members: &mFirewallPolicyMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_FirewallPolicies_member})
+var sFirewallPolicy_StatelessRuleGroupReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatelessRuleGroupReferences", ID: &i_StatelessRuleGroupReferences, Members: &m_StatelessRuleGroupReferences, Type: smithy.ShapeTypeList, Ext: &eFirewallPolicy_StatelessRuleGroupReferences})
+var sFirewallPolicy_StatelessDefaultActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatelessDefaultActions", ID: &i_StatelessActions, Members: &m_StatelessActions, Type: smithy.ShapeTypeList, Ext: &eFirewallPolicy_StatelessDefaultActions})
+var sFirewallPolicy_StatelessFragmentDefaultActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatelessFragmentDefaultActions", ID: &i_StatelessActions, Members: &m_StatelessActions, Type: smithy.ShapeTypeList, Ext: &eFirewallPolicy_StatelessFragmentDefaultActions})
+var sFirewallPolicy_StatelessCustomActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatelessCustomActions", ID: &i_CustomActions, Members: &m_CustomActions, Type: smithy.ShapeTypeList, Ext: &eFirewallPolicy_StatelessCustomActions})
+var sFirewallPolicy_StatefulRuleGroupReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatefulRuleGroupReferences", ID: &i_StatefulRuleGroupReferences, Members: &m_StatefulRuleGroupReferences, Type: smithy.ShapeTypeList, Ext: &eFirewallPolicy_StatefulRuleGroupReferences})
+var sFirewallPolicy_StatefulDefaultActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatefulDefaultActions", ID: &i_StatefulActions, Members: &m_StatefulActions, Type: smithy.ShapeTypeList, Ext: &eFirewallPolicy_StatefulDefaultActions})
+var sFirewallPolicy_StatefulEngineOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatefulEngineOptions", ID: &iStatefulEngineOptions, Members: &mStatefulEngineOptions, Type: smithy.ShapeTypeStructure, Ext: &eFirewallPolicy_StatefulEngineOptions})
+var sFirewallPolicy_TLSInspectionConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eFirewallPolicy_TLSInspectionConfigurationArn})
+var sFirewallPolicy_PolicyVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyVariables", ID: &iPolicyVariables, Members: &mPolicyVariables, Type: smithy.ShapeTypeStructure, Ext: &eFirewallPolicy_PolicyVariables})
+var sFirewallPolicy_EnableTLSSessionHolding = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableTLSSessionHolding", ID: &i_EnableTLSSessionHolding, Type: smithy.ShapeTypeBoolean, Ext: &eFirewallPolicy_EnableTLSSessionHolding})
+var sFirewallPolicy_Route53ResolvedIPValidation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Route53ResolvedIPValidation", ID: &iRoute53ResolvedIPValidation, Members: &mRoute53ResolvedIPValidation, Type: smithy.ShapeTypeStructure, Ext: &eFirewallPolicy_Route53ResolvedIPValidation})
+var sFirewallPolicyError_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iFirewallPolicyErrorCode, Members: &mFirewallPolicyErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eFirewallPolicyError_Code})
+var sFirewallPolicyError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_StatusReason, Type: smithy.ShapeTypeString, Ext: &eFirewallPolicyError_Message})
+var sFirewallPolicyError_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_FirewallPolicyErrorResourceId, Type: smithy.ShapeTypeString, Ext: &eFirewallPolicyError_ResourceId})
+var sFirewallPolicyErrorCode_DNS_FIREWALL_RULE_GROUP_UNAVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNS_FIREWALL_RULE_GROUP_UNAVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFirewallPolicyErrorCode_DNS_FIREWALL_RULE_GROUP_UNAVAILABLE})
+var sFirewallPolicyErrorCode_ROUTE53_RESOLVED_IP_VALIDATION_MISSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROUTE53_RESOLVED_IP_VALIDATION_MISSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFirewallPolicyErrorCode_ROUTE53_RESOLVED_IP_VALIDATION_MISSING})
+var s_FirewallPolicyErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFirewallPolicyError, Members: &mFirewallPolicyError, Type: smithy.ShapeTypeStructure, Ext: &e_FirewallPolicyErrors_member})
+var sFirewallPolicyMetadata_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eFirewallPolicyMetadata_Name})
+var sFirewallPolicyMetadata_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eFirewallPolicyMetadata_Arn})
+var sFirewallPolicyResponse_FirewallPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eFirewallPolicyResponse_FirewallPolicyName})
+var sFirewallPolicyResponse_FirewallPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eFirewallPolicyResponse_FirewallPolicyArn})
+var sFirewallPolicyResponse_FirewallPolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eFirewallPolicyResponse_FirewallPolicyId})
+var sFirewallPolicyResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eFirewallPolicyResponse_Description})
+var sFirewallPolicyResponse_FirewallPolicyStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyStatus", ID: &iResourceStatus, Members: &mResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eFirewallPolicyResponse_FirewallPolicyStatus})
+var sFirewallPolicyResponse_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_ResourceStatusMessage, Type: smithy.ShapeTypeString, Ext: &eFirewallPolicyResponse_StatusMessage})
+var sFirewallPolicyResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eFirewallPolicyResponse_Tags})
+var sFirewallPolicyResponse_ConsumedStatelessRuleCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumedStatelessRuleCapacity", ID: &i_RuleCapacity, Type: smithy.ShapeTypeInteger, Ext: &eFirewallPolicyResponse_ConsumedStatelessRuleCapacity})
+var sFirewallPolicyResponse_ConsumedStatefulRuleCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumedStatefulRuleCapacity", ID: &i_RuleCapacity, Type: smithy.ShapeTypeInteger, Ext: &eFirewallPolicyResponse_ConsumedStatefulRuleCapacity})
+var sFirewallPolicyResponse_ConsumedStatefulDomainCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumedStatefulDomainCapacity", ID: &i_RuleCapacity, Type: smithy.ShapeTypeInteger, Ext: &eFirewallPolicyResponse_ConsumedStatefulDomainCapacity})
+var sFirewallPolicyResponse_NumberOfAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfAssociations", ID: &i_NumberOfAssociations, Type: smithy.ShapeTypeInteger, Ext: &eFirewallPolicyResponse_NumberOfAssociations})
+var sFirewallPolicyResponse_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eFirewallPolicyResponse_EncryptionConfiguration})
+var sFirewallPolicyResponse_Errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errors", ID: &i_FirewallPolicyErrors, Members: &m_FirewallPolicyErrors, Type: smithy.ShapeTypeList, Ext: &eFirewallPolicyResponse_Errors})
+var sFirewallPolicyResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_LastUpdateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eFirewallPolicyResponse_LastModifiedTime})
+var s_Firewalls_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFirewallMetadata, Members: &mFirewallMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_Firewalls_member})
+var sFirewallStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iFirewallStatusValue, Members: &mFirewallStatusValue, Type: smithy.ShapeTypeEnum, Ext: &eFirewallStatus_Status})
+var sFirewallStatus_ConfigurationSyncStateSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSyncStateSummary", ID: &iConfigurationSyncState, Members: &mConfigurationSyncState, Type: smithy.ShapeTypeEnum, Ext: &eFirewallStatus_ConfigurationSyncStateSummary})
+var sFirewallStatus_SyncStates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncStates", ID: &i_SyncStates, Members: &m_SyncStates, Type: smithy.ShapeTypeMap, Ext: &eFirewallStatus_SyncStates})
+var sFirewallStatus_CapacityUsageSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityUsageSummary", ID: &iCapacityUsageSummary, Members: &mCapacityUsageSummary, Type: smithy.ShapeTypeStructure, Ext: &eFirewallStatus_CapacityUsageSummary})
+var sFirewallStatus_TransitGatewayAttachmentSyncState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentSyncState", ID: &iTransitGatewayAttachmentSyncState, Members: &mTransitGatewayAttachmentSyncState, Type: smithy.ShapeTypeStructure, Ext: &eFirewallStatus_TransitGatewayAttachmentSyncState})
+var sFirewallStatusValue_PROVISIONING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROVISIONING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFirewallStatusValue_PROVISIONING})
+var sFirewallStatusValue_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFirewallStatusValue_DELETING})
+var sFirewallStatusValue_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFirewallStatusValue_READY})
+var sFirewallStatusValue_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFirewallStatusValue_FAILED})
+var s_Flags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTCPFlag, Members: &mTCPFlag, Type: smithy.ShapeTypeEnum, Ext: &e_Flags_member})
+var sFlow_SourceAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceAddress", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eFlow_SourceAddress})
+var sFlow_DestinationAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationAddress", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eFlow_DestinationAddress})
+var sFlow_SourcePort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourcePort", ID: &i_Port, Type: smithy.ShapeTypeString, Ext: &eFlow_SourcePort})
+var sFlow_DestinationPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationPort", ID: &i_Port, Type: smithy.ShapeTypeString, Ext: &eFlow_DestinationPort})
+var sFlow_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &i_ProtocolString, Type: smithy.ShapeTypeString, Ext: &eFlow_Protocol})
+var sFlow_Age = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Age", ID: &i_Age, Type: smithy.ShapeTypeInteger, Ext: &eFlow_Age})
+var sFlow_PacketCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PacketCount", ID: &i_PacketCount, Type: smithy.ShapeTypeInteger, Ext: &eFlow_PacketCount})
+var sFlow_ByteCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ByteCount", ID: &i_ByteCount, Type: smithy.ShapeTypeLong, Ext: &eFlow_ByteCount})
+var sFlowFilter_SourceAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceAddress", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eFlowFilter_SourceAddress})
+var sFlowFilter_DestinationAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationAddress", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eFlowFilter_DestinationAddress})
+var sFlowFilter_SourcePort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourcePort", ID: &i_Port, Type: smithy.ShapeTypeString, Ext: &eFlowFilter_SourcePort})
+var sFlowFilter_DestinationPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationPort", ID: &i_Port, Type: smithy.ShapeTypeString, Ext: &eFlowFilter_DestinationPort})
+var sFlowFilter_Protocols = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocols", ID: &i_ProtocolStrings, Members: &m_ProtocolStrings, Type: smithy.ShapeTypeList, Ext: &eFlowFilter_Protocols})
+var s_FlowFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFlowFilter, Members: &mFlowFilter, Type: smithy.ShapeTypeStructure, Ext: &e_FlowFilters_member})
+var sFlowOperation_MinimumFlowAgeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimumFlowAgeInSeconds", ID: &i_Age, Type: smithy.ShapeTypeInteger, Ext: &eFlowOperation_MinimumFlowAgeInSeconds})
+var sFlowOperation_FlowFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowFilters", ID: &i_FlowFilters, Members: &m_FlowFilters, Type: smithy.ShapeTypeList, Ext: &eFlowOperation_FlowFilters})
+var sFlowOperationMetadata_FlowOperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationId", ID: &i_FlowOperationId, Type: smithy.ShapeTypeString, Ext: &eFlowOperationMetadata_FlowOperationId})
+var sFlowOperationMetadata_FlowOperationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationType", ID: &iFlowOperationType, Members: &mFlowOperationType, Type: smithy.ShapeTypeEnum, Ext: &eFlowOperationMetadata_FlowOperationType})
+var sFlowOperationMetadata_FlowRequestTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowRequestTimestamp", ID: &i_FlowRequestTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eFlowOperationMetadata_FlowRequestTimestamp})
+var sFlowOperationMetadata_FlowOperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationStatus", ID: &iFlowOperationStatus, Members: &mFlowOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &eFlowOperationMetadata_FlowOperationStatus})
+var s_FlowOperations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFlowOperationMetadata, Members: &mFlowOperationMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_FlowOperations_member})
+var sFlowOperationStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFlowOperationStatus_COMPLETED})
+var sFlowOperationStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFlowOperationStatus_IN_PROGRESS})
+var sFlowOperationStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFlowOperationStatus_FAILED})
+var sFlowOperationStatus_COMPLETED_WITH_ERRORS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED_WITH_ERRORS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFlowOperationStatus_COMPLETED_WITH_ERRORS})
+var sFlowOperationType_FLOW_FLUSH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLOW_FLUSH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFlowOperationType_FLOW_FLUSH})
+var sFlowOperationType_FLOW_CAPTURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLOW_CAPTURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFlowOperationType_FLOW_CAPTURE})
+var s_Flows_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFlow, Members: &mFlow, Type: smithy.ShapeTypeStructure, Ext: &e_Flows_member})
+var sFlowTimeouts_TcpIdleTimeoutSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TcpIdleTimeoutSeconds", ID: &i_TcpIdleTimeoutRangeBound, Type: smithy.ShapeTypeInteger, Ext: &eFlowTimeouts_TcpIdleTimeoutSeconds})
+var sGeneratedRulesType_ALLOWLIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOWLIST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeneratedRulesType_ALLOWLIST})
+var sGeneratedRulesType_DENYLIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENYLIST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeneratedRulesType_DENYLIST})
+var sGeneratedRulesType_REJECTLIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTLIST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeneratedRulesType_REJECTLIST})
+var sGeneratedRulesType_ALERTLIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALERTLIST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeneratedRulesType_ALERTLIST})
+var sHeader_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iStatefulRuleProtocol, Members: &mStatefulRuleProtocol, Type: smithy.ShapeTypeEnum, Ext: &eHeader_Protocol})
+var sHeader_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &i_Source, Type: smithy.ShapeTypeString, Ext: &eHeader_Source})
+var sHeader_SourcePort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourcePort", ID: &i_Port, Type: smithy.ShapeTypeString, Ext: &eHeader_SourcePort})
+var sHeader_Direction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Direction", ID: &iStatefulRuleDirection, Members: &mStatefulRuleDirection, Type: smithy.ShapeTypeEnum, Ext: &eHeader_Direction})
+var sHeader_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &i_Destination, Type: smithy.ShapeTypeString, Ext: &eHeader_Destination})
+var sHeader_DestinationPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationPort", ID: &i_Port, Type: smithy.ShapeTypeString, Ext: &eHeader_DestinationPort})
+var sHits_Count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Count", ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &eHits_Count})
+var sIdentifiedType_STATELESS_RULE_FORWARDING_ASYMMETRICALLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STATELESS_RULE_FORWARDING_ASYMMETRICALLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIdentifiedType_STATELESS_RULE_FORWARDING_ASYMMETRICALLY})
+var sIdentifiedType_STATELESS_RULE_CONTAINS_TCP_FLAGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STATELESS_RULE_CONTAINS_TCP_FLAGS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIdentifiedType_STATELESS_RULE_CONTAINS_TCP_FLAGS})
+var sInsufficientCapacityException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInsufficientCapacityException_Message})
+var sInternalServerError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerError_Message})
+var sInvalidOperationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidOperationException_Message})
+var sInvalidRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidRequestException_Message})
+var sInvalidResourcePolicyException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidResourcePolicyException_Message})
+var sInvalidTokenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidTokenException_Message})
+var sIPAddressType_DUALSTACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUALSTACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIPAddressType_DUALSTACK})
+var sIPAddressType_IPV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIPAddressType_IPV4})
+var sIPAddressType_IPV6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV6", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIPAddressType_IPV6})
+var sIPSet_Definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Definition", ID: &i_VariableDefinitionList, Members: &m_VariableDefinitionList, Type: smithy.ShapeTypeList, Ext: &eIPSet_Definition})
+var sIPSetMetadata_ResolvedCIDRCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResolvedCIDRCount", ID: &i_CIDRCount, Type: smithy.ShapeTypeInteger, Ext: &eIPSetMetadata_ResolvedCIDRCount})
+var s_IPSetMetadataMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_IPSetArn, Type: smithy.ShapeTypeString, Ext: &e_IPSetMetadataMap_key})
+var s_IPSetMetadataMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iIPSetMetadata, Members: &mIPSetMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_IPSetMetadataMap_value})
+var sIPSetReference_ReferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReferenceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eIPSetReference_ReferenceArn})
+var s_IPSetReferenceMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_IPSetReferenceName, Type: smithy.ShapeTypeString, Ext: &e_IPSetReferenceMap_key})
+var s_IPSetReferenceMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iIPSetReference, Members: &mIPSetReference, Type: smithy.ShapeTypeStructure, Ext: &e_IPSetReferenceMap_value})
+var s_IPSets_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_RuleVariableName, Type: smithy.ShapeTypeString, Ext: &e_IPSets_key})
+var s_IPSets_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iIPSet, Members: &mIPSet, Type: smithy.ShapeTypeStructure, Ext: &e_IPSets_value})
+var sLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_Message})
+var s_ListenerProperties_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListenerProperty, Members: &mListenerProperty, Type: smithy.ShapeTypeStructure, Ext: &e_ListenerProperties_member})
+var s_ListenerPropertiesRequest_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListenerPropertyRequest, Members: &mListenerPropertyRequest, Type: smithy.ShapeTypeStructure, Ext: &e_ListenerPropertiesRequest_member})
+var sListenerProperty_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_NatGatewayPort, Type: smithy.ShapeTypeInteger, Ext: &eListenerProperty_Port})
+var sListenerProperty_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iListenerPropertyType, Members: &mListenerPropertyType, Type: smithy.ShapeTypeEnum, Ext: &eListenerProperty_Type})
+var sListenerPropertyRequest_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_NatGatewayPort, Type: smithy.ShapeTypeInteger, Ext: &eListenerPropertyRequest_Port})
+var sListenerPropertyRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iListenerPropertyType, Members: &mListenerPropertyType, Type: smithy.ShapeTypeEnum, Ext: &eListenerPropertyRequest_Type})
+var sListenerPropertyType_HTTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListenerPropertyType_HTTP})
+var sListenerPropertyType_HTTPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTPS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListenerPropertyType_HTTPS})
+var sLogDestinationConfig_LogType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogType", ID: &iLogType, Members: &mLogType, Type: smithy.ShapeTypeEnum, Ext: &eLogDestinationConfig_LogType})
+var sLogDestinationConfig_LogDestinationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogDestinationType", ID: &iLogDestinationType, Members: &mLogDestinationType, Type: smithy.ShapeTypeEnum, Ext: &eLogDestinationConfig_LogDestinationType})
+var sLogDestinationConfig_LogDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogDestination", ID: &i_LogDestinationMap, Members: &m_LogDestinationMap, Type: smithy.ShapeTypeMap, Ext: &eLogDestinationConfig_LogDestination})
+var s_LogDestinationConfigs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLogDestinationConfig, Members: &mLogDestinationConfig, Type: smithy.ShapeTypeStructure, Ext: &e_LogDestinationConfigs_member})
+var s_LogDestinationMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_HashMapKey, Type: smithy.ShapeTypeString, Ext: &e_LogDestinationMap_key})
+var s_LogDestinationMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_HashMapValue, Type: smithy.ShapeTypeString, Ext: &e_LogDestinationMap_value})
+var sLogDestinationPermissionException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eLogDestinationPermissionException_Message})
+var sLogDestinationType_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLogDestinationType_S3})
+var sLogDestinationType_CLOUDWATCH_LOGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOUDWATCH_LOGS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLogDestinationType_CLOUDWATCH_LOGS})
+var sLogDestinationType_KINESIS_DATA_FIREHOSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KINESIS_DATA_FIREHOSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLogDestinationType_KINESIS_DATA_FIREHOSE})
+var sLoggingConfiguration_LogDestinationConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogDestinationConfigs", ID: &i_LogDestinationConfigs, Members: &m_LogDestinationConfigs, Type: smithy.ShapeTypeList, Ext: &eLoggingConfiguration_LogDestinationConfigs})
+var sLogType_ALERT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALERT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLogType_ALERT})
+var sLogType_FLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLogType_FLOW})
+var sLogType_TLS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLogType_TLS})
+var sMatchAttributes_Sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sources", ID: &i_Addresses, Members: &m_Addresses, Type: smithy.ShapeTypeList, Ext: &eMatchAttributes_Sources})
+var sMatchAttributes_Destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destinations", ID: &i_Addresses, Members: &m_Addresses, Type: smithy.ShapeTypeList, Ext: &eMatchAttributes_Destinations})
+var sMatchAttributes_SourcePorts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourcePorts", ID: &i_PortRanges, Members: &m_PortRanges, Type: smithy.ShapeTypeList, Ext: &eMatchAttributes_SourcePorts})
+var sMatchAttributes_DestinationPorts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationPorts", ID: &i_PortRanges, Members: &m_PortRanges, Type: smithy.ShapeTypeList, Ext: &eMatchAttributes_DestinationPorts})
+var sMatchAttributes_Protocols = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocols", ID: &i_ProtocolNumbers, Members: &m_ProtocolNumbers, Type: smithy.ShapeTypeList, Ext: &eMatchAttributes_Protocols})
+var sMatchAttributes_TCPFlags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TCPFlags", ID: &i_TCPFlags, Members: &m_TCPFlags, Type: smithy.ShapeTypeList, Ext: &eMatchAttributes_TCPFlags})
+var sNatGatewayAttachment_NatGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayId", ID: &i_NatGatewayId, Type: smithy.ShapeTypeString, Ext: &eNatGatewayAttachment_NatGatewayId})
+var sNatGatewayAttachment_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iNatGatewayAttachmentStatus, Members: &mNatGatewayAttachmentStatus, Type: smithy.ShapeTypeEnum, Ext: &eNatGatewayAttachment_Status})
+var sNatGatewayAttachment_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_StatusReason, Type: smithy.ShapeTypeString, Ext: &eNatGatewayAttachment_StatusMessage})
+var sNatGatewayAttachment_DnsName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsName", ID: &i_DnsName, Type: smithy.ShapeTypeString, Ext: &eNatGatewayAttachment_DnsName})
+var s_NatGatewayAttachmentsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNatGatewayAttachment, Members: &mNatGatewayAttachment, Type: smithy.ShapeTypeStructure, Ext: &e_NatGatewayAttachmentsList_member})
+var sNatGatewayAttachmentStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNatGatewayAttachmentStatus_CREATING})
+var sNatGatewayAttachmentStatus_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNatGatewayAttachmentStatus_READY})
+var sNatGatewayAttachmentStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNatGatewayAttachmentStatus_UPDATING})
+var sNatGatewayAttachmentStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNatGatewayAttachmentStatus_FAILED})
+var sNatGatewayAttachmentStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNatGatewayAttachmentStatus_DELETING})
+var sNatGatewayMapping_NatGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayId", ID: &i_NatGatewayId, Type: smithy.ShapeTypeString, Ext: &eNatGatewayMapping_NatGatewayId})
+var s_NatGatewayMappingsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNatGatewayMapping, Members: &mNatGatewayMapping, Type: smithy.ShapeTypeStructure, Ext: &e_NatGatewayMappingsList_member})
+var sOverrideAction_DROP_TO_ALERT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DROP_TO_ALERT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOverrideAction_DROP_TO_ALERT})
+var sPerObjectStatus_SyncStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncStatus", ID: &iPerObjectSyncStatus, Members: &mPerObjectSyncStatus, Type: smithy.ShapeTypeEnum, Ext: &ePerObjectStatus_SyncStatus})
+var sPerObjectStatus_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &ePerObjectStatus_UpdateToken})
+var sPerObjectSyncStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePerObjectSyncStatus_PENDING})
+var sPerObjectSyncStatus_IN_SYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_SYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePerObjectSyncStatus_IN_SYNC})
+var sPerObjectSyncStatus_CAPACITY_CONSTRAINED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CAPACITY_CONSTRAINED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePerObjectSyncStatus_CAPACITY_CONSTRAINED})
+var sPerObjectSyncStatus_NOT_SUBSCRIBED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_SUBSCRIBED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePerObjectSyncStatus_NOT_SUBSCRIBED})
+var sPerObjectSyncStatus_DEPRECATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPRECATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePerObjectSyncStatus_DEPRECATED})
+var sPolicyVariables_RuleVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleVariables", ID: &i_IPSets, Members: &m_IPSets, Type: smithy.ShapeTypeMap, Ext: &ePolicyVariables_RuleVariables})
+var sPortRange_FromPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FromPort", ID: &i_PortRangeBound, Type: smithy.ShapeTypeInteger, Ext: &ePortRange_FromPort})
+var sPortRange_ToPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ToPort", ID: &i_PortRangeBound, Type: smithy.ShapeTypeInteger, Ext: &ePortRange_ToPort})
+var s_PortRanges_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPortRange, Members: &mPortRange, Type: smithy.ShapeTypeStructure, Ext: &e_PortRanges_member})
+var sPortSet_Definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Definition", ID: &i_VariableDefinitionList, Members: &m_VariableDefinitionList, Type: smithy.ShapeTypeList, Ext: &ePortSet_Definition})
+var s_PortSets_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_RuleVariableName, Type: smithy.ShapeTypeString, Ext: &e_PortSets_key})
+var s_PortSets_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iPortSet, Members: &mPortSet, Type: smithy.ShapeTypeStructure, Ext: &e_PortSets_value})
+var s_ProtocolNumbers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ProtocolNumber, Type: smithy.ShapeTypeInteger, Ext: &e_ProtocolNumbers_member})
+var s_ProtocolStrings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ProtocolString, Type: smithy.ShapeTypeString, Ext: &e_ProtocolStrings_member})
+var s_Proxies_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProxyMetadata, Members: &mProxyMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_Proxies_member})
+var sProxy_CreateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateTime", ID: &i_CreateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eProxy_CreateTime})
+var sProxy_DeleteTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteTime", ID: &i_DeleteTime, Type: smithy.ShapeTypeTimestamp, Ext: &eProxy_DeleteTime})
+var sProxy_UpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateTime", ID: &i_UpdateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eProxy_UpdateTime})
+var sProxy_FailureCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureCode", ID: &i_FailureCode, Type: smithy.ShapeTypeString, Ext: &eProxy_FailureCode})
+var sProxy_FailureMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureMessage", ID: &i_FailureMessage, Type: smithy.ShapeTypeString, Ext: &eProxy_FailureMessage})
+var sProxy_ProxyState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyState", ID: &iProxyState, Members: &mProxyState, Type: smithy.ShapeTypeEnum, Ext: &eProxy_ProxyState})
+var sProxy_ProxyModifyState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyModifyState", ID: &iProxyModifyState, Members: &mProxyModifyState, Type: smithy.ShapeTypeEnum, Ext: &eProxy_ProxyModifyState})
+var sProxy_NatGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayId", ID: &i_NatGatewayId, Type: smithy.ShapeTypeString, Ext: &eProxy_NatGatewayId})
+var sProxy_ProxyConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eProxy_ProxyConfigurationName})
+var sProxy_ProxyConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eProxy_ProxyConfigurationArn})
+var sProxy_ProxyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eProxy_ProxyName})
+var sProxy_ProxyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eProxy_ProxyArn})
+var sProxy_ListenerProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerProperties", ID: &i_ListenerProperties, Members: &m_ListenerProperties, Type: smithy.ShapeTypeList, Ext: &eProxy_ListenerProperties})
+var sProxy_TlsInterceptProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsInterceptProperties", ID: &iTlsInterceptProperties, Members: &mTlsInterceptProperties, Type: smithy.ShapeTypeStructure, Ext: &eProxy_TlsInterceptProperties})
+var sProxy_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eProxy_Tags})
+var s_ProxyConditionValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ProxyConditionValue, Type: smithy.ShapeTypeString, Ext: &e_ProxyConditionValueList_member})
+var sProxyConfigDefaultRulePhaseActionsRequest_PreDNS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreDNS", ID: &iProxyRulePhaseAction, Members: &mProxyRulePhaseAction, Type: smithy.ShapeTypeEnum, Ext: &eProxyConfigDefaultRulePhaseActionsRequest_PreDNS})
+var sProxyConfigDefaultRulePhaseActionsRequest_PreREQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreREQUEST", ID: &iProxyRulePhaseAction, Members: &mProxyRulePhaseAction, Type: smithy.ShapeTypeEnum, Ext: &eProxyConfigDefaultRulePhaseActionsRequest_PreREQUEST})
+var sProxyConfigDefaultRulePhaseActionsRequest_PostRESPONSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostRESPONSE", ID: &iProxyRulePhaseAction, Members: &mProxyRulePhaseAction, Type: smithy.ShapeTypeEnum, Ext: &eProxyConfigDefaultRulePhaseActionsRequest_PostRESPONSE})
+var sProxyConfigRuleGroup_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eProxyConfigRuleGroup_ProxyRuleGroupName})
+var sProxyConfigRuleGroup_ProxyRuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eProxyConfigRuleGroup_ProxyRuleGroupArn})
+var sProxyConfigRuleGroup_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_ProxyConfigRuleGroupType, Type: smithy.ShapeTypeString, Ext: &eProxyConfigRuleGroup_Type})
+var sProxyConfigRuleGroup_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_ProxyConfigRuleGroupPriority, Type: smithy.ShapeTypeInteger, Ext: &eProxyConfigRuleGroup_Priority})
+var s_ProxyConfigRuleGroupSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProxyConfigRuleGroup, Members: &mProxyConfigRuleGroup, Type: smithy.ShapeTypeStructure, Ext: &e_ProxyConfigRuleGroupSet_member})
+var sProxyConfiguration_ProxyConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eProxyConfiguration_ProxyConfigurationName})
+var sProxyConfiguration_ProxyConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eProxyConfiguration_ProxyConfigurationArn})
+var sProxyConfiguration_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eProxyConfiguration_Description})
+var sProxyConfiguration_CreateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateTime", ID: &i_CreateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eProxyConfiguration_CreateTime})
+var sProxyConfiguration_DeleteTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteTime", ID: &i_DeleteTime, Type: smithy.ShapeTypeTimestamp, Ext: &eProxyConfiguration_DeleteTime})
+var sProxyConfiguration_RuleGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroups", ID: &i_ProxyConfigRuleGroupSet, Members: &m_ProxyConfigRuleGroupSet, Type: smithy.ShapeTypeList, Ext: &eProxyConfiguration_RuleGroups})
+var sProxyConfiguration_DefaultRulePhaseActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultRulePhaseActions", ID: &iProxyConfigDefaultRulePhaseActionsRequest, Members: &mProxyConfigDefaultRulePhaseActionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eProxyConfiguration_DefaultRulePhaseActions})
+var sProxyConfiguration_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eProxyConfiguration_Tags})
+var sProxyConfigurationMetadata_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eProxyConfigurationMetadata_Name})
+var sProxyConfigurationMetadata_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eProxyConfigurationMetadata_Arn})
+var s_ProxyConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProxyConfigurationMetadata, Members: &mProxyConfigurationMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_ProxyConfigurations_member})
+var sProxyMetadata_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eProxyMetadata_Name})
+var sProxyMetadata_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eProxyMetadata_Arn})
+var sProxyModifyState_MODIFYING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODIFYING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProxyModifyState_MODIFYING})
+var sProxyModifyState_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProxyModifyState_COMPLETED})
+var sProxyModifyState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProxyModifyState_FAILED})
+var sProxyRule_ProxyRuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eProxyRule_ProxyRuleName})
+var sProxyRule_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eProxyRule_Description})
+var sProxyRule_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iProxyRulePhaseAction, Members: &mProxyRulePhaseAction, Type: smithy.ShapeTypeEnum, Ext: &eProxyRule_Action})
+var sProxyRule_Conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Conditions", ID: &i_ProxyRuleConditionList, Members: &m_ProxyRuleConditionList, Type: smithy.ShapeTypeList, Ext: &eProxyRule_Conditions})
+var sProxyRuleCondition_ConditionOperator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConditionOperator", ID: &i_ConditionOperator, Type: smithy.ShapeTypeString, Ext: &eProxyRuleCondition_ConditionOperator})
+var sProxyRuleCondition_ConditionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConditionKey", ID: &i_ConditionKey, Type: smithy.ShapeTypeString, Ext: &eProxyRuleCondition_ConditionKey})
+var sProxyRuleCondition_ConditionValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConditionValues", ID: &i_ProxyConditionValueList, Members: &m_ProxyConditionValueList, Type: smithy.ShapeTypeList, Ext: &eProxyRuleCondition_ConditionValues})
+var s_ProxyRuleConditionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProxyRuleCondition, Members: &mProxyRuleCondition, Type: smithy.ShapeTypeStructure, Ext: &e_ProxyRuleConditionList_member})
+var sProxyRuleGroup_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eProxyRuleGroup_ProxyRuleGroupName})
+var sProxyRuleGroup_ProxyRuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eProxyRuleGroup_ProxyRuleGroupArn})
+var sProxyRuleGroup_CreateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateTime", ID: &i_CreateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eProxyRuleGroup_CreateTime})
+var sProxyRuleGroup_DeleteTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteTime", ID: &i_DeleteTime, Type: smithy.ShapeTypeTimestamp, Ext: &eProxyRuleGroup_DeleteTime})
+var sProxyRuleGroup_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &iProxyRulesByRequestPhase, Members: &mProxyRulesByRequestPhase, Type: smithy.ShapeTypeStructure, Ext: &eProxyRuleGroup_Rules})
+var sProxyRuleGroup_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eProxyRuleGroup_Description})
+var sProxyRuleGroup_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eProxyRuleGroup_Tags})
+var sProxyRuleGroupAttachment_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eProxyRuleGroupAttachment_ProxyRuleGroupName})
+var sProxyRuleGroupAttachment_InsertPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsertPosition", ID: &i_InsertPosition, Type: smithy.ShapeTypeInteger, Ext: &eProxyRuleGroupAttachment_InsertPosition})
+var s_ProxyRuleGroupAttachmentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProxyRuleGroupAttachment, Members: &mProxyRuleGroupAttachment, Type: smithy.ShapeTypeStructure, Ext: &e_ProxyRuleGroupAttachmentList_member})
+var sProxyRuleGroupMetadata_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eProxyRuleGroupMetadata_Name})
+var sProxyRuleGroupMetadata_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eProxyRuleGroupMetadata_Arn})
+var sProxyRuleGroupPriority_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eProxyRuleGroupPriority_ProxyRuleGroupName})
+var sProxyRuleGroupPriority_NewPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewPosition", ID: &i_InsertPosition, Type: smithy.ShapeTypeInteger, Ext: &eProxyRuleGroupPriority_NewPosition})
+var s_ProxyRuleGroupPriorityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProxyRuleGroupPriority, Members: &mProxyRuleGroupPriority, Type: smithy.ShapeTypeStructure, Ext: &e_ProxyRuleGroupPriorityList_member})
+var sProxyRuleGroupPriorityResult_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eProxyRuleGroupPriorityResult_ProxyRuleGroupName})
+var sProxyRuleGroupPriorityResult_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_ProxyRuleGroupPriorityResultPriority, Type: smithy.ShapeTypeInteger, Ext: &eProxyRuleGroupPriorityResult_Priority})
+var s_ProxyRuleGroupPriorityResultList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProxyRuleGroupPriorityResult, Members: &mProxyRuleGroupPriorityResult, Type: smithy.ShapeTypeStructure, Ext: &e_ProxyRuleGroupPriorityResultList_member})
+var s_ProxyRuleGroups_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProxyRuleGroupMetadata, Members: &mProxyRuleGroupMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_ProxyRuleGroups_member})
+var s_ProxyRuleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProxyRule, Members: &mProxyRule, Type: smithy.ShapeTypeStructure, Ext: &e_ProxyRuleList_member})
+var sProxyRulePhaseAction_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProxyRulePhaseAction_ALLOW})
+var sProxyRulePhaseAction_DENY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProxyRulePhaseAction_DENY})
+var sProxyRulePhaseAction_ALERT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALERT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProxyRulePhaseAction_ALERT})
+var sProxyRulePriority_ProxyRuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eProxyRulePriority_ProxyRuleName})
+var sProxyRulePriority_NewPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewPosition", ID: &i_InsertPosition, Type: smithy.ShapeTypeInteger, Ext: &eProxyRulePriority_NewPosition})
+var s_ProxyRulePriorityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProxyRulePriority, Members: &mProxyRulePriority, Type: smithy.ShapeTypeStructure, Ext: &e_ProxyRulePriorityList_member})
+var sProxyRulesByRequestPhase_PreDNS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreDNS", ID: &i_ProxyRuleList, Members: &m_ProxyRuleList, Type: smithy.ShapeTypeList, Ext: &eProxyRulesByRequestPhase_PreDNS})
+var sProxyRulesByRequestPhase_PreREQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreREQUEST", ID: &i_ProxyRuleList, Members: &m_ProxyRuleList, Type: smithy.ShapeTypeList, Ext: &eProxyRulesByRequestPhase_PreREQUEST})
+var sProxyRulesByRequestPhase_PostRESPONSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostRESPONSE", ID: &i_ProxyRuleList, Members: &m_ProxyRuleList, Type: smithy.ShapeTypeList, Ext: &eProxyRulesByRequestPhase_PostRESPONSE})
+var sProxySettings_ListenerProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerProperties", ID: &i_ListenerProperties, Members: &m_ListenerProperties, Type: smithy.ShapeTypeList, Ext: &eProxySettings_ListenerProperties})
+var sProxyState_ATTACHING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATTACHING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProxyState_ATTACHING})
+var sProxyState_ATTACHED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATTACHED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProxyState_ATTACHED})
+var sProxyState_DETACHING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DETACHING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProxyState_DETACHING})
+var sProxyState_DETACHED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DETACHED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProxyState_DETACHED})
+var sProxyState_ATTACH_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATTACH_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProxyState_ATTACH_FAILED})
+var sProxyState_DETACH_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DETACH_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProxyState_DETACH_FAILED})
+var sPublishMetricAction_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList, Ext: &ePublishMetricAction_Dimensions})
+var sReferenceSets_IPSetReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPSetReferences", ID: &i_IPSetReferenceMap, Members: &m_IPSetReferenceMap, Type: smithy.ShapeTypeMap, Ext: &eReferenceSets_IPSetReferences})
+var s_ResourceArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArnList_member})
+var sResourceManagedStatus_MANAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceManagedStatus_MANAGED})
+var sResourceManagedStatus_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceManagedStatus_ACCOUNT})
+var sResourceManagedType_AWS_MANAGED_THREAT_SIGNATURES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_MANAGED_THREAT_SIGNATURES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceManagedType_AWS_MANAGED_THREAT_SIGNATURES})
+var sResourceManagedType_AWS_MANAGED_DOMAIN_LISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_MANAGED_DOMAIN_LISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceManagedType_AWS_MANAGED_DOMAIN_LISTS})
+var sResourceManagedType_ACTIVE_THREAT_DEFENSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE_THREAT_DEFENSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceManagedType_ACTIVE_THREAT_DEFENSE})
+var sResourceManagedType_PARTNER_MANAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARTNER_MANAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceManagedType_PARTNER_MANAGED})
+var s_ResourceNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &e_ResourceNameList_member})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sResourceOwnerCheckException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceOwnerCheckException_Message})
+var sResourceStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceStatus_ACTIVE})
+var sResourceStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceStatus_DELETING})
+var sResourceStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceStatus_ERROR})
+var sResourceStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceStatus_UPDATING})
+var sRevocationCheckAction_PASS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PASS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevocationCheckAction_PASS})
+var sRevocationCheckAction_DROP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DROP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevocationCheckAction_DROP})
+var sRevocationCheckAction_REJECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevocationCheckAction_REJECT})
+var sRoute53ResolvedIPValidation_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iRoute53ResolvedIPValidationAction, Members: &mRoute53ResolvedIPValidationAction, Type: smithy.ShapeTypeEnum, Ext: &eRoute53ResolvedIPValidation_Action})
+var sRoute53ResolvedIPValidation_DNSFirewallRuleGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNSFirewallRuleGroupId", ID: &i_DNSFirewallRuleGroupId, Type: smithy.ShapeTypeString, Ext: &eRoute53ResolvedIPValidation_DNSFirewallRuleGroupId})
+var sRoute53ResolvedIPValidation_DNSExpiryExceptionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNSExpiryExceptionPolicy", ID: &iDNSExpiryExceptionPolicy, Members: &mDNSExpiryExceptionPolicy, Type: smithy.ShapeTypeEnum, Ext: &eRoute53ResolvedIPValidation_DNSExpiryExceptionPolicy})
+var sRoute53ResolvedIPValidation_BypassDestinationValidationIPRanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BypassDestinationValidationIPRanges", ID: &i_Route53ResolvedIPValidationAddresses, Members: &m_Route53ResolvedIPValidationAddresses, Type: smithy.ShapeTypeList, Ext: &eRoute53ResolvedIPValidation_BypassDestinationValidationIPRanges})
+var sRoute53ResolvedIPValidation_SourceIPRanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceIPRanges", ID: &i_Route53ResolvedIPValidationAddresses, Members: &m_Route53ResolvedIPValidationAddresses, Type: smithy.ShapeTypeList, Ext: &eRoute53ResolvedIPValidation_SourceIPRanges})
+var sRoute53ResolvedIPValidationAction_REJECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRoute53ResolvedIPValidationAction_REJECT})
+var sRoute53ResolvedIPValidationAction_DROP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DROP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRoute53ResolvedIPValidationAction_DROP})
+var sRoute53ResolvedIPValidationAction_ALERT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALERT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRoute53ResolvedIPValidationAction_ALERT})
+var s_Route53ResolvedIPValidationAddresses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &e_Route53ResolvedIPValidationAddresses_member})
+var sRuleDefinition_MatchAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchAttributes", ID: &iMatchAttributes, Members: &mMatchAttributes, Type: smithy.ShapeTypeStructure, Ext: &eRuleDefinition_MatchAttributes})
+var sRuleDefinition_Actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Actions", ID: &i_StatelessActions, Members: &m_StatelessActions, Type: smithy.ShapeTypeList, Ext: &eRuleDefinition_Actions})
+var sRuleGroup_RuleVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleVariables", ID: &iRuleVariables, Members: &mRuleVariables, Type: smithy.ShapeTypeStructure, Ext: &eRuleGroup_RuleVariables})
+var sRuleGroup_ReferenceSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReferenceSets", ID: &iReferenceSets, Members: &mReferenceSets, Type: smithy.ShapeTypeStructure, Ext: &eRuleGroup_ReferenceSets})
+var sRuleGroup_RulesSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RulesSource", ID: &iRulesSource, Members: &mRulesSource, Type: smithy.ShapeTypeStructure, Ext: &eRuleGroup_RulesSource})
+var sRuleGroup_StatefulRuleOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatefulRuleOptions", ID: &iStatefulRuleOptions, Members: &mStatefulRuleOptions, Type: smithy.ShapeTypeStructure, Ext: &eRuleGroup_StatefulRuleOptions})
+var sRuleGroupMetadata_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eRuleGroupMetadata_Name})
+var sRuleGroupMetadata_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eRuleGroupMetadata_Arn})
+var sRuleGroupMetadata_VendorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VendorName", ID: &i_VendorName, Type: smithy.ShapeTypeString, Ext: &eRuleGroupMetadata_VendorName})
+var sRuleGroupRequestPhase_PRE_DNS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE_DNS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleGroupRequestPhase_PRE_DNS})
+var sRuleGroupRequestPhase_PRE_REQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE_REQ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleGroupRequestPhase_PRE_REQ})
+var sRuleGroupRequestPhase_POST_RES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POST_RES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleGroupRequestPhase_POST_RES})
+var sRuleGroupResponse_RuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eRuleGroupResponse_RuleGroupArn})
+var sRuleGroupResponse_RuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eRuleGroupResponse_RuleGroupName})
+var sRuleGroupResponse_RuleGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eRuleGroupResponse_RuleGroupId})
+var sRuleGroupResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eRuleGroupResponse_Description})
+var sRuleGroupResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRuleGroupType, Members: &mRuleGroupType, Type: smithy.ShapeTypeEnum, Ext: &eRuleGroupResponse_Type})
+var sRuleGroupResponse_Capacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Capacity", ID: &i_RuleCapacity, Type: smithy.ShapeTypeInteger, Ext: &eRuleGroupResponse_Capacity})
+var sRuleGroupResponse_RuleGroupStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupStatus", ID: &iResourceStatus, Members: &mResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eRuleGroupResponse_RuleGroupStatus})
+var sRuleGroupResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eRuleGroupResponse_Tags})
+var sRuleGroupResponse_ConsumedCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumedCapacity", ID: &i_RuleCapacity, Type: smithy.ShapeTypeInteger, Ext: &eRuleGroupResponse_ConsumedCapacity})
+var sRuleGroupResponse_NumberOfAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfAssociations", ID: &i_NumberOfAssociations, Type: smithy.ShapeTypeInteger, Ext: &eRuleGroupResponse_NumberOfAssociations})
+var sRuleGroupResponse_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eRuleGroupResponse_EncryptionConfiguration})
+var sRuleGroupResponse_SourceMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceMetadata", ID: &iSourceMetadata, Members: &mSourceMetadata, Type: smithy.ShapeTypeStructure, Ext: &eRuleGroupResponse_SourceMetadata})
+var sRuleGroupResponse_SnsTopic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopic", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eRuleGroupResponse_SnsTopic})
+var sRuleGroupResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_LastUpdateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eRuleGroupResponse_LastModifiedTime})
+var sRuleGroupResponse_AnalysisResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisResults", ID: &i_AnalysisResultList, Members: &m_AnalysisResultList, Type: smithy.ShapeTypeList, Ext: &eRuleGroupResponse_AnalysisResults})
+var sRuleGroupResponse_SummaryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SummaryConfiguration", ID: &iSummaryConfiguration, Members: &mSummaryConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eRuleGroupResponse_SummaryConfiguration})
+var s_RuleGroups_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleGroupMetadata, Members: &mRuleGroupMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_RuleGroups_member})
+var sRuleGroupType_STATELESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STATELESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleGroupType_STATELESS})
+var sRuleGroupType_STATEFUL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STATEFUL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleGroupType_STATEFUL})
+var sRuleGroupType_STATEFUL_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STATEFUL_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleGroupType_STATEFUL_DOMAIN})
+var s_RuleIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CollectionMember_String, Type: smithy.ShapeTypeString, Ext: &e_RuleIdList_member})
+var sRuleOption_Keyword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Keyword", ID: &i_Keyword, Type: smithy.ShapeTypeString, Ext: &eRuleOption_Keyword})
+var sRuleOption_Settings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Settings", ID: &i_Settings, Members: &m_Settings, Type: smithy.ShapeTypeList, Ext: &eRuleOption_Settings})
+var s_RuleOptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleOption, Members: &mRuleOption, Type: smithy.ShapeTypeStructure, Ext: &e_RuleOptions_member})
+var sRuleOrder_DEFAULT_ACTION_ORDER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT_ACTION_ORDER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleOrder_DEFAULT_ACTION_ORDER})
+var sRuleOrder_STRICT_ORDER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRICT_ORDER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleOrder_STRICT_ORDER})
+var sRulesSource_RulesString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RulesString", ID: &i_RulesString, Type: smithy.ShapeTypeString, Ext: &eRulesSource_RulesString})
+var sRulesSource_RulesSourceList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RulesSourceList", ID: &iRulesSourceList, Members: &mRulesSourceList, Type: smithy.ShapeTypeStructure, Ext: &eRulesSource_RulesSourceList})
+var sRulesSource_StatefulRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatefulRules", ID: &i_StatefulRules, Members: &m_StatefulRules, Type: smithy.ShapeTypeList, Ext: &eRulesSource_StatefulRules})
+var sRulesSource_StatelessRulesAndCustomActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatelessRulesAndCustomActions", ID: &iStatelessRulesAndCustomActions, Members: &mStatelessRulesAndCustomActions, Type: smithy.ShapeTypeStructure, Ext: &eRulesSource_StatelessRulesAndCustomActions})
+var sRulesSourceList_Targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Targets", ID: &i_RuleTargets, Members: &m_RuleTargets, Type: smithy.ShapeTypeList, Ext: &eRulesSourceList_Targets})
+var sRulesSourceList_TargetTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetTypes", ID: &i_TargetTypes, Members: &m_TargetTypes, Type: smithy.ShapeTypeList, Ext: &eRulesSourceList_TargetTypes})
+var sRulesSourceList_GeneratedRulesType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeneratedRulesType", ID: &iGeneratedRulesType, Members: &mGeneratedRulesType, Type: smithy.ShapeTypeEnum, Ext: &eRulesSourceList_GeneratedRulesType})
+var s_RuleSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleSummary, Members: &mRuleSummary, Type: smithy.ShapeTypeStructure, Ext: &e_RuleSummaries_member})
+var sRuleSummary_SID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SID", ID: &i_CollectionMember_String, Type: smithy.ShapeTypeString, Ext: &eRuleSummary_SID})
+var sRuleSummary_Msg = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Msg", ID: &i_CollectionMember_String, Type: smithy.ShapeTypeString, Ext: &eRuleSummary_Msg})
+var sRuleSummary_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metadata", ID: &i_CollectionMember_String, Type: smithy.ShapeTypeString, Ext: &eRuleSummary_Metadata})
+var s_RuleTargets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CollectionMember_String, Type: smithy.ShapeTypeString, Ext: &e_RuleTargets_member})
+var sRuleVariables_IPSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPSets", ID: &i_IPSets, Members: &m_IPSets, Type: smithy.ShapeTypeMap, Ext: &eRuleVariables_IPSets})
+var sRuleVariables_PortSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortSets", ID: &i_PortSets, Members: &m_PortSets, Type: smithy.ShapeTypeMap, Ext: &eRuleVariables_PortSets})
+var sServerCertificate_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eServerCertificate_ResourceArn})
+var sServerCertificateConfiguration_ServerCertificates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerCertificates", ID: &i_ServerCertificates, Members: &m_ServerCertificates, Type: smithy.ShapeTypeList, Ext: &eServerCertificateConfiguration_ServerCertificates})
+var sServerCertificateConfiguration_Scopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scopes", ID: &i_ServerCertificateScopes, Members: &m_ServerCertificateScopes, Type: smithy.ShapeTypeList, Ext: &eServerCertificateConfiguration_Scopes})
+var sServerCertificateConfiguration_CertificateAuthorityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthorityArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eServerCertificateConfiguration_CertificateAuthorityArn})
+var sServerCertificateConfiguration_CheckCertificateRevocationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CheckCertificateRevocationStatus", ID: &iCheckCertificateRevocationStatusActions, Members: &mCheckCertificateRevocationStatusActions, Type: smithy.ShapeTypeStructure, Ext: &eServerCertificateConfiguration_CheckCertificateRevocationStatus})
+var s_ServerCertificateConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServerCertificateConfiguration, Members: &mServerCertificateConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_ServerCertificateConfigurations_member})
+var s_ServerCertificates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServerCertificate, Members: &mServerCertificate, Type: smithy.ShapeTypeStructure, Ext: &e_ServerCertificates_member})
+var sServerCertificateScope_Sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sources", ID: &i_Addresses, Members: &m_Addresses, Type: smithy.ShapeTypeList, Ext: &eServerCertificateScope_Sources})
+var sServerCertificateScope_Destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destinations", ID: &i_Addresses, Members: &m_Addresses, Type: smithy.ShapeTypeList, Ext: &eServerCertificateScope_Destinations})
+var sServerCertificateScope_SourcePorts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourcePorts", ID: &i_PortRanges, Members: &m_PortRanges, Type: smithy.ShapeTypeList, Ext: &eServerCertificateScope_SourcePorts})
+var sServerCertificateScope_DestinationPorts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationPorts", ID: &i_PortRanges, Members: &m_PortRanges, Type: smithy.ShapeTypeList, Ext: &eServerCertificateScope_DestinationPorts})
+var sServerCertificateScope_Protocols = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocols", ID: &i_ProtocolNumbers, Members: &m_ProtocolNumbers, Type: smithy.ShapeTypeList, Ext: &eServerCertificateScope_Protocols})
+var s_ServerCertificateScopes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServerCertificateScope, Members: &mServerCertificateScope, Type: smithy.ShapeTypeStructure, Ext: &e_ServerCertificateScopes_member})
+var s_Settings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Setting, Type: smithy.ShapeTypeString, Ext: &e_Settings_member})
+var sSourceMetadata_SourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eSourceMetadata_SourceArn})
+var sSourceMetadata_SourceUpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceUpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eSourceMetadata_SourceUpdateToken})
+var sStatefulAction_PASS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PASS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulAction_PASS})
+var sStatefulAction_DROP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DROP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulAction_DROP})
+var sStatefulAction_ALERT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALERT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulAction_ALERT})
+var sStatefulAction_REJECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulAction_REJECT})
+var s_StatefulActions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CollectionMember_String, Type: smithy.ShapeTypeString, Ext: &e_StatefulActions_member})
+var sStatefulEngineOptions_RuleOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleOrder", ID: &iRuleOrder, Members: &mRuleOrder, Type: smithy.ShapeTypeEnum, Ext: &eStatefulEngineOptions_RuleOrder})
+var sStatefulEngineOptions_StreamExceptionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamExceptionPolicy", ID: &iStreamExceptionPolicy, Members: &mStreamExceptionPolicy, Type: smithy.ShapeTypeEnum, Ext: &eStatefulEngineOptions_StreamExceptionPolicy})
+var sStatefulEngineOptions_FlowTimeouts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowTimeouts", ID: &iFlowTimeouts, Members: &mFlowTimeouts, Type: smithy.ShapeTypeStructure, Ext: &eStatefulEngineOptions_FlowTimeouts})
+var sStatefulRule_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iStatefulAction, Members: &mStatefulAction, Type: smithy.ShapeTypeEnum, Ext: &eStatefulRule_Action})
+var sStatefulRule_Header = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Header", ID: &iHeader, Members: &mHeader, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRule_Header})
+var sStatefulRule_RuleOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleOptions", ID: &i_RuleOptions, Members: &m_RuleOptions, Type: smithy.ShapeTypeList, Ext: &eStatefulRule_RuleOptions})
+var sStatefulRuleDirection_FORWARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FORWARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleDirection_FORWARD})
+var sStatefulRuleDirection_ANY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleDirection_ANY})
+var sStatefulRuleGroupOverride_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iOverrideAction, Members: &mOverrideAction, Type: smithy.ShapeTypeEnum, Ext: &eStatefulRuleGroupOverride_Action})
+var sStatefulRuleGroupReference_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eStatefulRuleGroupReference_ResourceArn})
+var sStatefulRuleGroupReference_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_Priority, Type: smithy.ShapeTypeInteger, Ext: &eStatefulRuleGroupReference_Priority})
+var sStatefulRuleGroupReference_Override = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Override", ID: &iStatefulRuleGroupOverride, Members: &mStatefulRuleGroupOverride, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleGroupReference_Override})
+var sStatefulRuleGroupReference_DeepThreatInspection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeepThreatInspection", ID: &i_DeepThreatInspection, Type: smithy.ShapeTypeBoolean, Ext: &eStatefulRuleGroupReference_DeepThreatInspection})
+var s_StatefulRuleGroupReferences_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStatefulRuleGroupReference, Members: &mStatefulRuleGroupReference, Type: smithy.ShapeTypeStructure, Ext: &e_StatefulRuleGroupReferences_member})
+var sStatefulRuleOptions_RuleOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleOrder", ID: &iRuleOrder, Members: &mRuleOrder, Type: smithy.ShapeTypeEnum, Ext: &eStatefulRuleOptions_RuleOrder})
+var sStatefulRuleProtocol_ANY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleProtocol_ANY})
+var sStatefulRuleProtocol_TCP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TCP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleProtocol_TCP})
+var sStatefulRuleProtocol_UDP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UDP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleProtocol_UDP})
+var sStatefulRuleProtocol_ICMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ICMP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleProtocol_ICMP})
+var sStatefulRuleProtocol_HTTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleProtocol_HTTP})
+var sStatefulRuleProtocol_FTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FTP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleProtocol_FTP})
+var sStatefulRuleProtocol_TLS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleProtocol_TLS})
+var sStatefulRuleProtocol_SMB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleProtocol_SMB})
+var sStatefulRuleProtocol_DNS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleProtocol_DNS})
+var sStatefulRuleProtocol_DCERPC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DCERPC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleProtocol_DCERPC})
+var sStatefulRuleProtocol_SSH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleProtocol_SSH})
+var sStatefulRuleProtocol_SMTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMTP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleProtocol_SMTP})
+var sStatefulRuleProtocol_IMAP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMAP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleProtocol_IMAP})
+var sStatefulRuleProtocol_MSN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MSN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleProtocol_MSN})
+var sStatefulRuleProtocol_KRB5 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KRB5", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleProtocol_KRB5})
+var sStatefulRuleProtocol_IKEV2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IKEV2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleProtocol_IKEV2})
+var sStatefulRuleProtocol_TFTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TFTP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleProtocol_TFTP})
+var sStatefulRuleProtocol_NTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NTP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleProtocol_NTP})
+var sStatefulRuleProtocol_DHCP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DHCP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleProtocol_DHCP})
+var sStatefulRuleProtocol_HTTP2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleProtocol_HTTP2})
+var sStatefulRuleProtocol_QUIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatefulRuleProtocol_QUIC})
+var s_StatefulRules_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStatefulRule, Members: &mStatefulRule, Type: smithy.ShapeTypeStructure, Ext: &e_StatefulRules_member})
+var s_StatelessActions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CollectionMember_String, Type: smithy.ShapeTypeString, Ext: &e_StatelessActions_member})
+var sStatelessRule_RuleDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleDefinition", ID: &iRuleDefinition, Members: &mRuleDefinition, Type: smithy.ShapeTypeStructure, Ext: &eStatelessRule_RuleDefinition})
+var sStatelessRule_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_Priority, Type: smithy.ShapeTypeInteger, Ext: &eStatelessRule_Priority})
+var sStatelessRuleGroupReference_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eStatelessRuleGroupReference_ResourceArn})
+var sStatelessRuleGroupReference_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_Priority, Type: smithy.ShapeTypeInteger, Ext: &eStatelessRuleGroupReference_Priority})
+var s_StatelessRuleGroupReferences_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStatelessRuleGroupReference, Members: &mStatelessRuleGroupReference, Type: smithy.ShapeTypeStructure, Ext: &e_StatelessRuleGroupReferences_member})
+var s_StatelessRules_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStatelessRule, Members: &mStatelessRule, Type: smithy.ShapeTypeStructure, Ext: &e_StatelessRules_member})
+var sStatelessRulesAndCustomActions_StatelessRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatelessRules", ID: &i_StatelessRules, Members: &m_StatelessRules, Type: smithy.ShapeTypeList, Ext: &eStatelessRulesAndCustomActions_StatelessRules})
+var sStatelessRulesAndCustomActions_CustomActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomActions", ID: &i_CustomActions, Members: &m_CustomActions, Type: smithy.ShapeTypeList, Ext: &eStatelessRulesAndCustomActions_CustomActions})
+var sStreamExceptionPolicy_DROP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DROP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamExceptionPolicy_DROP})
+var sStreamExceptionPolicy_CONTINUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTINUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamExceptionPolicy_CONTINUE})
+var sStreamExceptionPolicy_REJECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamExceptionPolicy_REJECT})
+var sSubnetMapping_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetId", ID: &i_CollectionMember_String, Type: smithy.ShapeTypeString, Ext: &eSubnetMapping_SubnetId})
+var sSubnetMapping_IPAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPAddressType", ID: &iIPAddressType, Members: &mIPAddressType, Type: smithy.ShapeTypeEnum, Ext: &eSubnetMapping_IPAddressType})
+var s_SubnetMappings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSubnetMapping, Members: &mSubnetMapping, Type: smithy.ShapeTypeStructure, Ext: &e_SubnetMappings_member})
+var sSubscriptionStatus_NOT_SUBSCRIBED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_SUBSCRIBED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSubscriptionStatus_NOT_SUBSCRIBED})
+var sSubscriptionStatus_SUBSCRIBED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBSCRIBED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSubscriptionStatus_SUBSCRIBED})
+var sSummary_RuleSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleSummaries", ID: &i_RuleSummaries, Members: &m_RuleSummaries, Type: smithy.ShapeTypeList, Ext: &eSummary_RuleSummaries})
+var sSummaryConfiguration_RuleOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleOptions", ID: &i_SummaryRuleOptions, Members: &m_SummaryRuleOptions, Type: smithy.ShapeTypeList, Ext: &eSummaryConfiguration_RuleOptions})
+var sSummaryRuleOption_SID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSummaryRuleOption_SID})
+var sSummaryRuleOption_MSG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MSG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSummaryRuleOption_MSG})
+var sSummaryRuleOption_METADATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "METADATA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSummaryRuleOption_METADATA})
+var s_SummaryRuleOptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSummaryRuleOption, Members: &mSummaryRuleOption, Type: smithy.ShapeTypeEnum, Ext: &e_SummaryRuleOptions_member})
+var s_SupportedAvailabilityZones_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &e_SupportedAvailabilityZones_key})
+var s_SupportedAvailabilityZones_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iAvailabilityZoneMetadata, Members: &mAvailabilityZoneMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_SupportedAvailabilityZones_value})
+var sSyncState_Attachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attachment", ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure, Ext: &eSyncState_Attachment})
+var sSyncState_Config = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Config", ID: &i_SyncStateConfig, Members: &m_SyncStateConfig, Type: smithy.ShapeTypeMap, Ext: &eSyncState_Config})
+var sSyncState_NatGatewayAttachments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayAttachments", ID: &i_NatGatewayAttachmentsList, Members: &m_NatGatewayAttachmentsList, Type: smithy.ShapeTypeList, Ext: &eSyncState_NatGatewayAttachments})
+var s_SyncStateConfig_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &e_SyncStateConfig_key})
+var s_SyncStateConfig_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iPerObjectStatus, Members: &mPerObjectStatus, Type: smithy.ShapeTypeStructure, Ext: &e_SyncStateConfig_value})
+var s_SyncStates_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &e_SyncStates_key})
+var s_SyncStates_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iSyncState, Members: &mSyncState, Type: smithy.ShapeTypeStructure, Ext: &e_SyncStates_value})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var sTargetType_TLS_SNI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLS_SNI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetType_TLS_SNI})
+var sTargetType_HTTP_HOST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP_HOST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetType_HTTP_HOST})
+var sTargetType_AWS_ROUTE_53_RESOLVED_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_ROUTE_53_RESOLVED_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetType_AWS_ROUTE_53_RESOLVED_DOMAIN})
+var s_TargetTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTargetType, Members: &mTargetType, Type: smithy.ShapeTypeEnum, Ext: &e_TargetTypes_member})
+var sTCPFlag_FIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTCPFlag_FIN})
+var sTCPFlag_SYN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTCPFlag_SYN})
+var sTCPFlag_RST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTCPFlag_RST})
+var sTCPFlag_PSH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PSH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTCPFlag_PSH})
+var sTCPFlag_ACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTCPFlag_ACK})
+var sTCPFlag_URG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "URG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTCPFlag_URG})
+var sTCPFlag_ECE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTCPFlag_ECE})
+var sTCPFlag_CWR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CWR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTCPFlag_CWR})
+var sTCPFlagField_Flags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Flags", ID: &i_Flags, Members: &m_Flags, Type: smithy.ShapeTypeList, Ext: &eTCPFlagField_Flags})
+var sTCPFlagField_Masks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Masks", ID: &i_Flags, Members: &m_Flags, Type: smithy.ShapeTypeList, Ext: &eTCPFlagField_Masks})
+var s_TCPFlags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTCPFlagField, Members: &mTCPFlagField, Type: smithy.ShapeTypeStructure, Ext: &e_TCPFlags_member})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var sTlsCertificateData_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eTlsCertificateData_CertificateArn})
+var sTlsCertificateData_CertificateSerial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateSerial", ID: &i_CollectionMember_String, Type: smithy.ShapeTypeString, Ext: &eTlsCertificateData_CertificateSerial})
+var sTlsCertificateData_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_CollectionMember_String, Type: smithy.ShapeTypeString, Ext: &eTlsCertificateData_Status})
+var sTlsCertificateData_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_StatusReason, Type: smithy.ShapeTypeString, Ext: &eTlsCertificateData_StatusMessage})
+var sTLSInspectionConfiguration_ServerCertificateConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerCertificateConfigurations", ID: &i_ServerCertificateConfigurations, Members: &m_ServerCertificateConfigurations, Type: smithy.ShapeTypeList, Ext: &eTLSInspectionConfiguration_ServerCertificateConfigurations})
+var sTLSInspectionConfigurationMetadata_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eTLSInspectionConfigurationMetadata_Name})
+var sTLSInspectionConfigurationMetadata_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eTLSInspectionConfigurationMetadata_Arn})
+var sTLSInspectionConfigurationResponse_TLSInspectionConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eTLSInspectionConfigurationResponse_TLSInspectionConfigurationArn})
+var sTLSInspectionConfigurationResponse_TLSInspectionConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eTLSInspectionConfigurationResponse_TLSInspectionConfigurationName})
+var sTLSInspectionConfigurationResponse_TLSInspectionConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eTLSInspectionConfigurationResponse_TLSInspectionConfigurationId})
+var sTLSInspectionConfigurationResponse_TLSInspectionConfigurationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationStatus", ID: &iResourceStatus, Members: &mResourceStatus, Type: smithy.ShapeTypeEnum, Ext: &eTLSInspectionConfigurationResponse_TLSInspectionConfigurationStatus})
+var sTLSInspectionConfigurationResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eTLSInspectionConfigurationResponse_Description})
+var sTLSInspectionConfigurationResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTLSInspectionConfigurationResponse_Tags})
+var sTLSInspectionConfigurationResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_LastUpdateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eTLSInspectionConfigurationResponse_LastModifiedTime})
+var sTLSInspectionConfigurationResponse_NumberOfAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfAssociations", ID: &i_NumberOfAssociations, Type: smithy.ShapeTypeInteger, Ext: &eTLSInspectionConfigurationResponse_NumberOfAssociations})
+var sTLSInspectionConfigurationResponse_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eTLSInspectionConfigurationResponse_EncryptionConfiguration})
+var sTLSInspectionConfigurationResponse_Certificates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificates", ID: &i_Certificates, Members: &m_Certificates, Type: smithy.ShapeTypeList, Ext: &eTLSInspectionConfigurationResponse_Certificates})
+var sTLSInspectionConfigurationResponse_CertificateAuthority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthority", ID: &iTlsCertificateData, Members: &mTlsCertificateData, Type: smithy.ShapeTypeStructure, Ext: &eTLSInspectionConfigurationResponse_CertificateAuthority})
+var s_TLSInspectionConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTLSInspectionConfigurationMetadata, Members: &mTLSInspectionConfigurationMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_TLSInspectionConfigurations_member})
+var sTlsInterceptMode_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTlsInterceptMode_ENABLED})
+var sTlsInterceptMode_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTlsInterceptMode_DISABLED})
+var sTlsInterceptProperties_PcaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PcaArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eTlsInterceptProperties_PcaArn})
+var sTlsInterceptProperties_TlsInterceptMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsInterceptMode", ID: &iTlsInterceptMode, Members: &mTlsInterceptMode, Type: smithy.ShapeTypeEnum, Ext: &eTlsInterceptProperties_TlsInterceptMode})
+var sTlsInterceptPropertiesRequest_PcaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PcaArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eTlsInterceptPropertiesRequest_PcaArn})
+var sTlsInterceptPropertiesRequest_TlsInterceptMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsInterceptMode", ID: &iTlsInterceptMode, Members: &mTlsInterceptMode, Type: smithy.ShapeTypeEnum, Ext: &eTlsInterceptPropertiesRequest_TlsInterceptMode})
+var sTransitGatewayAttachmentStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTransitGatewayAttachmentStatus_CREATING})
+var sTransitGatewayAttachmentStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTransitGatewayAttachmentStatus_DELETING})
+var sTransitGatewayAttachmentStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTransitGatewayAttachmentStatus_DELETED})
+var sTransitGatewayAttachmentStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTransitGatewayAttachmentStatus_FAILED})
+var sTransitGatewayAttachmentStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTransitGatewayAttachmentStatus_ERROR})
+var sTransitGatewayAttachmentStatus_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTransitGatewayAttachmentStatus_READY})
+var sTransitGatewayAttachmentStatus_PENDING_ACCEPTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_ACCEPTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTransitGatewayAttachmentStatus_PENDING_ACCEPTANCE})
+var sTransitGatewayAttachmentStatus_REJECTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTransitGatewayAttachmentStatus_REJECTING})
+var sTransitGatewayAttachmentStatus_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTransitGatewayAttachmentStatus_REJECTED})
+var sTransitGatewayAttachmentSyncState_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentId", ID: &i_AttachmentId, Type: smithy.ShapeTypeString, Ext: &eTransitGatewayAttachmentSyncState_AttachmentId})
+var sTransitGatewayAttachmentSyncState_TransitGatewayAttachmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentStatus", ID: &iTransitGatewayAttachmentStatus, Members: &mTransitGatewayAttachmentStatus, Type: smithy.ShapeTypeEnum, Ext: &eTransitGatewayAttachmentSyncState_TransitGatewayAttachmentStatus})
+var sTransitGatewayAttachmentSyncState_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_TransitGatewayAttachmentSyncStateMessage, Type: smithy.ShapeTypeString, Ext: &eTransitGatewayAttachmentSyncState_StatusMessage})
+var sUniqueSources_Count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Count", ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &eUniqueSources_Count})
+var sUnsupportedOperationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eUnsupportedOperationException_Message})
+var s_VariableDefinitionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_VariableDefinition, Type: smithy.ShapeTypeString, Ext: &e_VariableDefinitionList_member})
+var sVpcEndpoint_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &eVpcEndpoint_VpcId})
+var sVpcEndpoint_SubnetMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetMappings", ID: &i_SubnetMappings, Members: &m_SubnetMappings, Type: smithy.ShapeTypeList, Ext: &eVpcEndpoint_SubnetMappings})
+var sVpcEndpointAssociation_VpcEndpointAssociationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eVpcEndpointAssociation_VpcEndpointAssociationId})
+var sVpcEndpointAssociation_VpcEndpointAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eVpcEndpointAssociation_VpcEndpointAssociationArn})
+var sVpcEndpointAssociation_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eVpcEndpointAssociation_FirewallArn})
+var sVpcEndpointAssociation_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &eVpcEndpointAssociation_VpcId})
+var sVpcEndpointAssociation_SubnetMapping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetMapping", ID: &iSubnetMapping, Members: &mSubnetMapping, Type: smithy.ShapeTypeStructure, Ext: &eVpcEndpointAssociation_SubnetMapping})
+var sVpcEndpointAssociation_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eVpcEndpointAssociation_Description})
+var sVpcEndpointAssociation_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eVpcEndpointAssociation_Tags})
+var sVpcEndpointAssociationMetadata_VpcEndpointAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eVpcEndpointAssociationMetadata_VpcEndpointAssociationArn})
+var s_VpcEndpointAssociations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVpcEndpointAssociationMetadata, Members: &mVpcEndpointAssociationMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_VpcEndpointAssociations_member})
+var sVpcEndpointAssociationStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iFirewallStatusValue, Members: &mFirewallStatusValue, Type: smithy.ShapeTypeEnum, Ext: &eVpcEndpointAssociationStatus_Status})
+var sVpcEndpointAssociationStatus_AssociationSyncState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociationSyncState", ID: &i_AssociationSyncState, Members: &m_AssociationSyncState, Type: smithy.ShapeTypeMap, Ext: &eVpcEndpointAssociationStatus_AssociationSyncState})
+var s_VpcIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &e_VpcIds_member})
+var sAcceptNetworkFirewallTransitGatewayAttachmentRequest_TransitGatewayAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentId", ID: &i_TransitGatewayAttachmentId, Type: smithy.ShapeTypeString, Ext: &eAcceptNetworkFirewallTransitGatewayAttachmentRequest_TransitGatewayAttachmentId})
+var sAcceptNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentId", ID: &i_TransitGatewayAttachmentId, Type: smithy.ShapeTypeString, Ext: &eAcceptNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentId})
+var sAcceptNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentStatus", ID: &iTransitGatewayAttachmentStatus, Members: &mTransitGatewayAttachmentStatus, Type: smithy.ShapeTypeEnum, Ext: &eAcceptNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentStatus})
+var sAssociateAvailabilityZonesRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eAssociateAvailabilityZonesRequest_UpdateToken})
+var sAssociateAvailabilityZonesRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eAssociateAvailabilityZonesRequest_FirewallArn})
+var sAssociateAvailabilityZonesRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eAssociateAvailabilityZonesRequest_FirewallName})
+var sAssociateAvailabilityZonesRequest_AvailabilityZoneMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneMappings", ID: &i_AvailabilityZoneMappings, Members: &m_AvailabilityZoneMappings, Type: smithy.ShapeTypeList, Ext: &eAssociateAvailabilityZonesRequest_AvailabilityZoneMappings})
+var sAssociateAvailabilityZonesResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eAssociateAvailabilityZonesResponse_FirewallArn})
+var sAssociateAvailabilityZonesResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eAssociateAvailabilityZonesResponse_FirewallName})
+var sAssociateAvailabilityZonesResponse_AvailabilityZoneMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneMappings", ID: &i_AvailabilityZoneMappings, Members: &m_AvailabilityZoneMappings, Type: smithy.ShapeTypeList, Ext: &eAssociateAvailabilityZonesResponse_AvailabilityZoneMappings})
+var sAssociateAvailabilityZonesResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eAssociateAvailabilityZonesResponse_UpdateToken})
+var sAssociateFirewallPolicyRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eAssociateFirewallPolicyRequest_UpdateToken})
+var sAssociateFirewallPolicyRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eAssociateFirewallPolicyRequest_FirewallArn})
+var sAssociateFirewallPolicyRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eAssociateFirewallPolicyRequest_FirewallName})
+var sAssociateFirewallPolicyRequest_FirewallPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eAssociateFirewallPolicyRequest_FirewallPolicyArn})
+var sAssociateFirewallPolicyResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eAssociateFirewallPolicyResponse_FirewallArn})
+var sAssociateFirewallPolicyResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eAssociateFirewallPolicyResponse_FirewallName})
+var sAssociateFirewallPolicyResponse_FirewallPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eAssociateFirewallPolicyResponse_FirewallPolicyArn})
+var sAssociateFirewallPolicyResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eAssociateFirewallPolicyResponse_UpdateToken})
+var sAssociateSubnetsRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eAssociateSubnetsRequest_UpdateToken})
+var sAssociateSubnetsRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eAssociateSubnetsRequest_FirewallArn})
+var sAssociateSubnetsRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eAssociateSubnetsRequest_FirewallName})
+var sAssociateSubnetsRequest_SubnetMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetMappings", ID: &i_SubnetMappings, Members: &m_SubnetMappings, Type: smithy.ShapeTypeList, Ext: &eAssociateSubnetsRequest_SubnetMappings})
+var sAssociateSubnetsResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eAssociateSubnetsResponse_FirewallArn})
+var sAssociateSubnetsResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eAssociateSubnetsResponse_FirewallName})
+var sAssociateSubnetsResponse_SubnetMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetMappings", ID: &i_SubnetMappings, Members: &m_SubnetMappings, Type: smithy.ShapeTypeList, Ext: &eAssociateSubnetsResponse_SubnetMappings})
+var sAssociateSubnetsResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eAssociateSubnetsResponse_UpdateToken})
+var sAttachRuleGroupsToProxyConfigurationRequest_ProxyConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eAttachRuleGroupsToProxyConfigurationRequest_ProxyConfigurationName})
+var sAttachRuleGroupsToProxyConfigurationRequest_ProxyConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eAttachRuleGroupsToProxyConfigurationRequest_ProxyConfigurationArn})
+var sAttachRuleGroupsToProxyConfigurationRequest_RuleGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroups", ID: &i_ProxyRuleGroupAttachmentList, Members: &m_ProxyRuleGroupAttachmentList, Type: smithy.ShapeTypeList, Ext: &eAttachRuleGroupsToProxyConfigurationRequest_RuleGroups})
+var sAttachRuleGroupsToProxyConfigurationRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eAttachRuleGroupsToProxyConfigurationRequest_UpdateToken})
+var sAttachRuleGroupsToProxyConfigurationResponse_ProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfiguration", ID: &iProxyConfiguration, Members: &mProxyConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAttachRuleGroupsToProxyConfigurationResponse_ProxyConfiguration})
+var sAttachRuleGroupsToProxyConfigurationResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eAttachRuleGroupsToProxyConfigurationResponse_UpdateToken})
+var sCreateContainerAssociationRequest_ContainerAssociationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateContainerAssociationRequest_ContainerAssociationName})
+var sCreateContainerAssociationRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateContainerAssociationRequest_Description})
+var sCreateContainerAssociationRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iContainerMonitoringType, Members: &mContainerMonitoringType, Type: smithy.ShapeTypeEnum, Ext: &eCreateContainerAssociationRequest_Type})
+var sCreateContainerAssociationRequest_ContainerMonitoringConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerMonitoringConfigurations", ID: &i_ContainerMonitoringConfigurations, Members: &m_ContainerMonitoringConfigurations, Type: smithy.ShapeTypeList, Ext: &eCreateContainerAssociationRequest_ContainerMonitoringConfigurations})
+var sCreateContainerAssociationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateContainerAssociationRequest_Tags})
+var sCreateContainerAssociationResponse_ContainerAssociationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateContainerAssociationResponse_ContainerAssociationName})
+var sCreateContainerAssociationResponse_ContainerAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eCreateContainerAssociationResponse_ContainerAssociationArn})
+var sCreateContainerAssociationResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateContainerAssociationResponse_Description})
+var sCreateContainerAssociationResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iContainerMonitoringType, Members: &mContainerMonitoringType, Type: smithy.ShapeTypeEnum, Ext: &eCreateContainerAssociationResponse_Type})
+var sCreateContainerAssociationResponse_ContainerMonitoringConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerMonitoringConfigurations", ID: &i_ContainerMonitoringConfigurations, Members: &m_ContainerMonitoringConfigurations, Type: smithy.ShapeTypeList, Ext: &eCreateContainerAssociationResponse_ContainerMonitoringConfigurations})
+var sCreateContainerAssociationResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iContainerAssociationStatus, Members: &mContainerAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateContainerAssociationResponse_Status})
+var sCreateContainerAssociationResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateContainerAssociationResponse_Tags})
+var sCreateContainerAssociationResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eCreateContainerAssociationResponse_UpdateToken})
+var sCreateFirewallRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateFirewallRequest_FirewallName})
+var sCreateFirewallRequest_FirewallPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eCreateFirewallRequest_FirewallPolicyArn})
+var sCreateFirewallRequest_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &eCreateFirewallRequest_VpcId})
+var sCreateFirewallRequest_SubnetMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetMappings", ID: &i_SubnetMappings, Members: &m_SubnetMappings, Type: smithy.ShapeTypeList, Ext: &eCreateFirewallRequest_SubnetMappings})
+var sCreateFirewallRequest_DeleteProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateFirewallRequest_DeleteProtection})
+var sCreateFirewallRequest_SubnetChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetChangeProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateFirewallRequest_SubnetChangeProtection})
+var sCreateFirewallRequest_FirewallPolicyChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyChangeProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateFirewallRequest_FirewallPolicyChangeProtection})
+var sCreateFirewallRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateFirewallRequest_Description})
+var sCreateFirewallRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateFirewallRequest_Tags})
+var sCreateFirewallRequest_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateFirewallRequest_EncryptionConfiguration})
+var sCreateFirewallRequest_EnabledAnalysisTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledAnalysisTypes", ID: &i_EnabledAnalysisTypes, Members: &m_EnabledAnalysisTypes, Type: smithy.ShapeTypeList, Ext: &eCreateFirewallRequest_EnabledAnalysisTypes})
+var sCreateFirewallRequest_TransitGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayId", ID: &i_TransitGatewayId, Type: smithy.ShapeTypeString, Ext: &eCreateFirewallRequest_TransitGatewayId})
+var sCreateFirewallRequest_AvailabilityZoneMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneMappings", ID: &i_AvailabilityZoneMappings, Members: &m_AvailabilityZoneMappings, Type: smithy.ShapeTypeList, Ext: &eCreateFirewallRequest_AvailabilityZoneMappings})
+var sCreateFirewallRequest_AvailabilityZoneChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneChangeProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateFirewallRequest_AvailabilityZoneChangeProtection})
+var sCreateFirewallRequest_NatGatewayMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayMappings", ID: &i_NatGatewayMappingsList, Members: &m_NatGatewayMappingsList, Type: smithy.ShapeTypeList, Ext: &eCreateFirewallRequest_NatGatewayMappings})
+var sCreateFirewallRequest_ProxySettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxySettings", ID: &iProxySettings, Members: &mProxySettings, Type: smithy.ShapeTypeStructure, Ext: &eCreateFirewallRequest_ProxySettings})
+var sCreateFirewallRequest_NoSourcePreservation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NoSourcePreservation", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateFirewallRequest_NoSourcePreservation})
+var sCreateFirewallRequest_VpcEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpoint", ID: &iVpcEndpoint, Members: &mVpcEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eCreateFirewallRequest_VpcEndpoint})
+var sCreateFirewallResponse_Firewall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Firewall", ID: &iFirewall, Members: &mFirewall, Type: smithy.ShapeTypeStructure, Ext: &eCreateFirewallResponse_Firewall})
+var sCreateFirewallResponse_FirewallStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallStatus", ID: &iFirewallStatus, Members: &mFirewallStatus, Type: smithy.ShapeTypeStructure, Ext: &eCreateFirewallResponse_FirewallStatus})
+var sCreateFirewallPolicyRequest_FirewallPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateFirewallPolicyRequest_FirewallPolicyName})
+var sCreateFirewallPolicyRequest_FirewallPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicy", ID: &iFirewallPolicy, Members: &mFirewallPolicy, Type: smithy.ShapeTypeStructure, Ext: &eCreateFirewallPolicyRequest_FirewallPolicy})
+var sCreateFirewallPolicyRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateFirewallPolicyRequest_Description})
+var sCreateFirewallPolicyRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateFirewallPolicyRequest_Tags})
+var sCreateFirewallPolicyRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateFirewallPolicyRequest_DryRun})
+var sCreateFirewallPolicyRequest_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateFirewallPolicyRequest_EncryptionConfiguration})
+var sCreateFirewallPolicyResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eCreateFirewallPolicyResponse_UpdateToken})
+var sCreateFirewallPolicyResponse_FirewallPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyResponse", ID: &iFirewallPolicyResponse, Members: &mFirewallPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateFirewallPolicyResponse_FirewallPolicyResponse})
+var sCreateProxyConfigurationRequest_ProxyConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateProxyConfigurationRequest_ProxyConfigurationName})
+var sCreateProxyConfigurationRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateProxyConfigurationRequest_Description})
+var sCreateProxyConfigurationRequest_RuleGroupNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupNames", ID: &i_ResourceNameList, Members: &m_ResourceNameList, Type: smithy.ShapeTypeList, Ext: &eCreateProxyConfigurationRequest_RuleGroupNames})
+var sCreateProxyConfigurationRequest_RuleGroupArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupArns", ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList, Ext: &eCreateProxyConfigurationRequest_RuleGroupArns})
+var sCreateProxyConfigurationRequest_DefaultRulePhaseActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultRulePhaseActions", ID: &iProxyConfigDefaultRulePhaseActionsRequest, Members: &mProxyConfigDefaultRulePhaseActionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateProxyConfigurationRequest_DefaultRulePhaseActions})
+var sCreateProxyConfigurationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateProxyConfigurationRequest_Tags})
+var sCreateProxyConfigurationResponse_ProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfiguration", ID: &iProxyConfiguration, Members: &mProxyConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateProxyConfigurationResponse_ProxyConfiguration})
+var sCreateProxyConfigurationResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eCreateProxyConfigurationResponse_UpdateToken})
+var sCreateProxyRequest_ProxyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateProxyRequest_ProxyName})
+var sCreateProxyRequest_NatGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayId", ID: &i_NatGatewayId, Type: smithy.ShapeTypeString, Ext: &eCreateProxyRequest_NatGatewayId})
+var sCreateProxyRequest_ProxyConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateProxyRequest_ProxyConfigurationName})
+var sCreateProxyRequest_ProxyConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eCreateProxyRequest_ProxyConfigurationArn})
+var sCreateProxyRequest_ListenerProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerProperties", ID: &i_ListenerPropertiesRequest, Members: &m_ListenerPropertiesRequest, Type: smithy.ShapeTypeList, Ext: &eCreateProxyRequest_ListenerProperties})
+var sCreateProxyRequest_TlsInterceptProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsInterceptProperties", ID: &iTlsInterceptPropertiesRequest, Members: &mTlsInterceptPropertiesRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateProxyRequest_TlsInterceptProperties})
+var sCreateProxyRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateProxyRequest_Tags})
+var sCreateProxyResponse_Proxy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Proxy", ID: &iProxy, Members: &mProxy, Type: smithy.ShapeTypeStructure, Ext: &eCreateProxyResponse_Proxy})
+var sCreateProxyResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eCreateProxyResponse_UpdateToken})
+var sCreateProxyRuleGroupRequest_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateProxyRuleGroupRequest_ProxyRuleGroupName})
+var sCreateProxyRuleGroupRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateProxyRuleGroupRequest_Description})
+var sCreateProxyRuleGroupRequest_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &iProxyRulesByRequestPhase, Members: &mProxyRulesByRequestPhase, Type: smithy.ShapeTypeStructure, Ext: &eCreateProxyRuleGroupRequest_Rules})
+var sCreateProxyRuleGroupRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateProxyRuleGroupRequest_Tags})
+var sCreateProxyRuleGroupResponse_ProxyRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroup", ID: &iProxyRuleGroup, Members: &mProxyRuleGroup, Type: smithy.ShapeTypeStructure, Ext: &eCreateProxyRuleGroupResponse_ProxyRuleGroup})
+var sCreateProxyRuleGroupResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eCreateProxyRuleGroupResponse_UpdateToken})
+var sCreateProxyRulesRequest_ProxyRuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eCreateProxyRulesRequest_ProxyRuleGroupArn})
+var sCreateProxyRulesRequest_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateProxyRulesRequest_ProxyRuleGroupName})
+var sCreateProxyRulesRequest_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &iCreateProxyRulesByRequestPhase, Members: &mCreateProxyRulesByRequestPhase, Type: smithy.ShapeTypeStructure, Ext: &eCreateProxyRulesRequest_Rules})
+var sCreateProxyRulesResponse_ProxyRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroup", ID: &iProxyRuleGroup, Members: &mProxyRuleGroup, Type: smithy.ShapeTypeStructure, Ext: &eCreateProxyRulesResponse_ProxyRuleGroup})
+var sCreateProxyRulesResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eCreateProxyRulesResponse_UpdateToken})
+var sCreateRuleGroupRequest_RuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateRuleGroupRequest_RuleGroupName})
+var sCreateRuleGroupRequest_RuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroup", ID: &iRuleGroup, Members: &mRuleGroup, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleGroupRequest_RuleGroup})
+var sCreateRuleGroupRequest_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_RulesString, Type: smithy.ShapeTypeString, Ext: &eCreateRuleGroupRequest_Rules})
+var sCreateRuleGroupRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRuleGroupType, Members: &mRuleGroupType, Type: smithy.ShapeTypeEnum, Ext: &eCreateRuleGroupRequest_Type})
+var sCreateRuleGroupRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateRuleGroupRequest_Description})
+var sCreateRuleGroupRequest_Capacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Capacity", ID: &i_RuleCapacity, Type: smithy.ShapeTypeInteger, Ext: &eCreateRuleGroupRequest_Capacity})
+var sCreateRuleGroupRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateRuleGroupRequest_Tags})
+var sCreateRuleGroupRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateRuleGroupRequest_DryRun})
+var sCreateRuleGroupRequest_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleGroupRequest_EncryptionConfiguration})
+var sCreateRuleGroupRequest_SourceMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceMetadata", ID: &iSourceMetadata, Members: &mSourceMetadata, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleGroupRequest_SourceMetadata})
+var sCreateRuleGroupRequest_AnalyzeRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalyzeRuleGroup", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateRuleGroupRequest_AnalyzeRuleGroup})
+var sCreateRuleGroupRequest_SummaryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SummaryConfiguration", ID: &iSummaryConfiguration, Members: &mSummaryConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleGroupRequest_SummaryConfiguration})
+var sCreateRuleGroupResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eCreateRuleGroupResponse_UpdateToken})
+var sCreateRuleGroupResponse_RuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupResponse", ID: &iRuleGroupResponse, Members: &mRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateRuleGroupResponse_RuleGroupResponse})
+var sCreateTLSInspectionConfigurationRequest_TLSInspectionConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateTLSInspectionConfigurationRequest_TLSInspectionConfigurationName})
+var sCreateTLSInspectionConfigurationRequest_TLSInspectionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfiguration", ID: &iTLSInspectionConfiguration, Members: &mTLSInspectionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateTLSInspectionConfigurationRequest_TLSInspectionConfiguration})
+var sCreateTLSInspectionConfigurationRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateTLSInspectionConfigurationRequest_Description})
+var sCreateTLSInspectionConfigurationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateTLSInspectionConfigurationRequest_Tags})
+var sCreateTLSInspectionConfigurationRequest_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateTLSInspectionConfigurationRequest_EncryptionConfiguration})
+var sCreateTLSInspectionConfigurationResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eCreateTLSInspectionConfigurationResponse_UpdateToken})
+var sCreateTLSInspectionConfigurationResponse_TLSInspectionConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationResponse", ID: &iTLSInspectionConfigurationResponse, Members: &mTLSInspectionConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateTLSInspectionConfigurationResponse_TLSInspectionConfigurationResponse})
+var sCreateVpcEndpointAssociationRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eCreateVpcEndpointAssociationRequest_FirewallArn})
+var sCreateVpcEndpointAssociationRequest_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &eCreateVpcEndpointAssociationRequest_VpcId})
+var sCreateVpcEndpointAssociationRequest_SubnetMapping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetMapping", ID: &iSubnetMapping, Members: &mSubnetMapping, Type: smithy.ShapeTypeStructure, Ext: &eCreateVpcEndpointAssociationRequest_SubnetMapping})
+var sCreateVpcEndpointAssociationRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateVpcEndpointAssociationRequest_Description})
+var sCreateVpcEndpointAssociationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateVpcEndpointAssociationRequest_Tags})
+var sCreateVpcEndpointAssociationResponse_VpcEndpointAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociation", ID: &iVpcEndpointAssociation, Members: &mVpcEndpointAssociation, Type: smithy.ShapeTypeStructure, Ext: &eCreateVpcEndpointAssociationResponse_VpcEndpointAssociation})
+var sCreateVpcEndpointAssociationResponse_VpcEndpointAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationStatus", ID: &iVpcEndpointAssociationStatus, Members: &mVpcEndpointAssociationStatus, Type: smithy.ShapeTypeStructure, Ext: &eCreateVpcEndpointAssociationResponse_VpcEndpointAssociationStatus})
+var sDeleteContainerAssociationRequest_ContainerAssociationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDeleteContainerAssociationRequest_ContainerAssociationName})
+var sDeleteContainerAssociationRequest_ContainerAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDeleteContainerAssociationRequest_ContainerAssociationArn})
+var sDeleteContainerAssociationResponse_ContainerAssociationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDeleteContainerAssociationResponse_ContainerAssociationName})
+var sDeleteContainerAssociationResponse_ContainerAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDeleteContainerAssociationResponse_ContainerAssociationArn})
+var sDeleteContainerAssociationResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iContainerAssociationStatus, Members: &mContainerAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeleteContainerAssociationResponse_Status})
+var sDeleteFirewallRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDeleteFirewallRequest_FirewallName})
+var sDeleteFirewallRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDeleteFirewallRequest_FirewallArn})
+var sDeleteFirewallResponse_Firewall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Firewall", ID: &iFirewall, Members: &mFirewall, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFirewallResponse_Firewall})
+var sDeleteFirewallResponse_FirewallStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallStatus", ID: &iFirewallStatus, Members: &mFirewallStatus, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFirewallResponse_FirewallStatus})
+var sDeleteFirewallPolicyRequest_FirewallPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDeleteFirewallPolicyRequest_FirewallPolicyName})
+var sDeleteFirewallPolicyRequest_FirewallPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDeleteFirewallPolicyRequest_FirewallPolicyArn})
+var sDeleteFirewallPolicyResponse_FirewallPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyResponse", ID: &iFirewallPolicyResponse, Members: &mFirewallPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFirewallPolicyResponse_FirewallPolicyResponse})
+var sDeleteNetworkFirewallTransitGatewayAttachmentRequest_TransitGatewayAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentId", ID: &i_TransitGatewayAttachmentId, Type: smithy.ShapeTypeString, Ext: &eDeleteNetworkFirewallTransitGatewayAttachmentRequest_TransitGatewayAttachmentId})
+var sDeleteNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentId", ID: &i_TransitGatewayAttachmentId, Type: smithy.ShapeTypeString, Ext: &eDeleteNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentId})
+var sDeleteNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentStatus", ID: &iTransitGatewayAttachmentStatus, Members: &mTransitGatewayAttachmentStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeleteNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentStatus})
+var sDeleteProxyConfigurationRequest_ProxyConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDeleteProxyConfigurationRequest_ProxyConfigurationName})
+var sDeleteProxyConfigurationRequest_ProxyConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDeleteProxyConfigurationRequest_ProxyConfigurationArn})
+var sDeleteProxyConfigurationResponse_ProxyConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDeleteProxyConfigurationResponse_ProxyConfigurationName})
+var sDeleteProxyConfigurationResponse_ProxyConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDeleteProxyConfigurationResponse_ProxyConfigurationArn})
+var sDeleteProxyRequest_NatGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayId", ID: &i_NatGatewayId, Type: smithy.ShapeTypeString, Ext: &eDeleteProxyRequest_NatGatewayId})
+var sDeleteProxyRequest_ProxyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDeleteProxyRequest_ProxyName})
+var sDeleteProxyRequest_ProxyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDeleteProxyRequest_ProxyArn})
+var sDeleteProxyResponse_NatGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayId", ID: &i_NatGatewayId, Type: smithy.ShapeTypeString, Ext: &eDeleteProxyResponse_NatGatewayId})
+var sDeleteProxyResponse_ProxyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDeleteProxyResponse_ProxyName})
+var sDeleteProxyResponse_ProxyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDeleteProxyResponse_ProxyArn})
+var sDeleteProxyRuleGroupRequest_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDeleteProxyRuleGroupRequest_ProxyRuleGroupName})
+var sDeleteProxyRuleGroupRequest_ProxyRuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDeleteProxyRuleGroupRequest_ProxyRuleGroupArn})
+var sDeleteProxyRuleGroupResponse_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDeleteProxyRuleGroupResponse_ProxyRuleGroupName})
+var sDeleteProxyRuleGroupResponse_ProxyRuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDeleteProxyRuleGroupResponse_ProxyRuleGroupArn})
+var sDeleteProxyRulesRequest_ProxyRuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDeleteProxyRulesRequest_ProxyRuleGroupArn})
+var sDeleteProxyRulesRequest_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDeleteProxyRulesRequest_ProxyRuleGroupName})
+var sDeleteProxyRulesRequest_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_ResourceNameList, Members: &m_ResourceNameList, Type: smithy.ShapeTypeList, Ext: &eDeleteProxyRulesRequest_Rules})
+var sDeleteProxyRulesResponse_ProxyRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroup", ID: &iProxyRuleGroup, Members: &mProxyRuleGroup, Type: smithy.ShapeTypeStructure, Ext: &eDeleteProxyRulesResponse_ProxyRuleGroup})
+var sDeleteResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDeleteResourcePolicyRequest_ResourceArn})
+var sDeleteRuleGroupRequest_RuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDeleteRuleGroupRequest_RuleGroupName})
+var sDeleteRuleGroupRequest_RuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDeleteRuleGroupRequest_RuleGroupArn})
+var sDeleteRuleGroupRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRuleGroupType, Members: &mRuleGroupType, Type: smithy.ShapeTypeEnum, Ext: &eDeleteRuleGroupRequest_Type})
+var sDeleteRuleGroupResponse_RuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupResponse", ID: &iRuleGroupResponse, Members: &mRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRuleGroupResponse_RuleGroupResponse})
+var sDeleteTLSInspectionConfigurationRequest_TLSInspectionConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDeleteTLSInspectionConfigurationRequest_TLSInspectionConfigurationArn})
+var sDeleteTLSInspectionConfigurationRequest_TLSInspectionConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDeleteTLSInspectionConfigurationRequest_TLSInspectionConfigurationName})
+var sDeleteTLSInspectionConfigurationResponse_TLSInspectionConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationResponse", ID: &iTLSInspectionConfigurationResponse, Members: &mTLSInspectionConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTLSInspectionConfigurationResponse_TLSInspectionConfigurationResponse})
+var sDeleteVpcEndpointAssociationRequest_VpcEndpointAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDeleteVpcEndpointAssociationRequest_VpcEndpointAssociationArn})
+var sDeleteVpcEndpointAssociationResponse_VpcEndpointAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociation", ID: &iVpcEndpointAssociation, Members: &mVpcEndpointAssociation, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVpcEndpointAssociationResponse_VpcEndpointAssociation})
+var sDeleteVpcEndpointAssociationResponse_VpcEndpointAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationStatus", ID: &iVpcEndpointAssociationStatus, Members: &mVpcEndpointAssociationStatus, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVpcEndpointAssociationResponse_VpcEndpointAssociationStatus})
+var sDescribeContainerAssociationRequest_ContainerAssociationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDescribeContainerAssociationRequest_ContainerAssociationName})
+var sDescribeContainerAssociationRequest_ContainerAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeContainerAssociationRequest_ContainerAssociationArn})
+var sDescribeContainerAssociationResponse_ContainerAssociationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDescribeContainerAssociationResponse_ContainerAssociationName})
+var sDescribeContainerAssociationResponse_ContainerAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeContainerAssociationResponse_ContainerAssociationArn})
+var sDescribeContainerAssociationResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eDescribeContainerAssociationResponse_Description})
+var sDescribeContainerAssociationResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iContainerMonitoringType, Members: &mContainerMonitoringType, Type: smithy.ShapeTypeEnum, Ext: &eDescribeContainerAssociationResponse_Type})
+var sDescribeContainerAssociationResponse_ContainerMonitoringConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerMonitoringConfigurations", ID: &i_ContainerMonitoringConfigurations, Members: &m_ContainerMonitoringConfigurations, Type: smithy.ShapeTypeList, Ext: &eDescribeContainerAssociationResponse_ContainerMonitoringConfigurations})
+var sDescribeContainerAssociationResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iContainerAssociationStatus, Members: &mContainerAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &eDescribeContainerAssociationResponse_Status})
+var sDescribeContainerAssociationResponse_ResolvedCidrCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResolvedCidrCount", ID: &i_CIDRCount, Type: smithy.ShapeTypeInteger, Ext: &eDescribeContainerAssociationResponse_ResolvedCidrCount})
+var sDescribeContainerAssociationResponse_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &i_ContainerAssociationLastUpdatedTime, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeContainerAssociationResponse_LastUpdatedTime})
+var sDescribeContainerAssociationResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eDescribeContainerAssociationResponse_Tags})
+var sDescribeContainerAssociationResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eDescribeContainerAssociationResponse_UpdateToken})
+var sDescribeFirewallRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDescribeFirewallRequest_FirewallName})
+var sDescribeFirewallRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeFirewallRequest_FirewallArn})
+var sDescribeFirewallMetadataRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeFirewallMetadataRequest_FirewallArn})
+var sDescribeFirewallMetadataResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeFirewallMetadataResponse_FirewallArn})
+var sDescribeFirewallMetadataResponse_FirewallPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeFirewallMetadataResponse_FirewallPolicyArn})
+var sDescribeFirewallMetadataResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eDescribeFirewallMetadataResponse_Description})
+var sDescribeFirewallMetadataResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iFirewallStatusValue, Members: &mFirewallStatusValue, Type: smithy.ShapeTypeEnum, Ext: &eDescribeFirewallMetadataResponse_Status})
+var sDescribeFirewallMetadataResponse_SupportedAvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportedAvailabilityZones", ID: &i_SupportedAvailabilityZones, Members: &m_SupportedAvailabilityZones, Type: smithy.ShapeTypeMap, Ext: &eDescribeFirewallMetadataResponse_SupportedAvailabilityZones})
+var sDescribeFirewallMetadataResponse_TransitGatewayAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentId", ID: &i_TransitGatewayAttachmentId, Type: smithy.ShapeTypeString, Ext: &eDescribeFirewallMetadataResponse_TransitGatewayAttachmentId})
+var sDescribeFirewallResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eDescribeFirewallResponse_UpdateToken})
+var sDescribeFirewallResponse_Firewall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Firewall", ID: &iFirewall, Members: &mFirewall, Type: smithy.ShapeTypeStructure, Ext: &eDescribeFirewallResponse_Firewall})
+var sDescribeFirewallResponse_FirewallStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallStatus", ID: &iFirewallStatus, Members: &mFirewallStatus, Type: smithy.ShapeTypeStructure, Ext: &eDescribeFirewallResponse_FirewallStatus})
+var sDescribeFirewallPolicyRequest_FirewallPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDescribeFirewallPolicyRequest_FirewallPolicyName})
+var sDescribeFirewallPolicyRequest_FirewallPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeFirewallPolicyRequest_FirewallPolicyArn})
+var sDescribeFirewallPolicyResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eDescribeFirewallPolicyResponse_UpdateToken})
+var sDescribeFirewallPolicyResponse_FirewallPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyResponse", ID: &iFirewallPolicyResponse, Members: &mFirewallPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeFirewallPolicyResponse_FirewallPolicyResponse})
+var sDescribeFirewallPolicyResponse_FirewallPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicy", ID: &iFirewallPolicy, Members: &mFirewallPolicy, Type: smithy.ShapeTypeStructure, Ext: &eDescribeFirewallPolicyResponse_FirewallPolicy})
+var sDescribeFlowOperationRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeFlowOperationRequest_FirewallArn})
+var sDescribeFlowOperationRequest_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &eDescribeFlowOperationRequest_AvailabilityZone})
+var sDescribeFlowOperationRequest_AvailabilityZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneId", ID: &i_AvailabilityZoneId, Type: smithy.ShapeTypeString, Ext: &eDescribeFlowOperationRequest_AvailabilityZoneId})
+var sDescribeFlowOperationRequest_VpcEndpointAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeFlowOperationRequest_VpcEndpointAssociationArn})
+var sDescribeFlowOperationRequest_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &eDescribeFlowOperationRequest_VpcEndpointId})
+var sDescribeFlowOperationRequest_FlowOperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationId", ID: &i_FlowOperationId, Type: smithy.ShapeTypeString, Ext: &eDescribeFlowOperationRequest_FlowOperationId})
+var sDescribeFlowOperationResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeFlowOperationResponse_FirewallArn})
+var sDescribeFlowOperationResponse_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &eDescribeFlowOperationResponse_AvailabilityZone})
+var sDescribeFlowOperationResponse_AvailabilityZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneId", ID: &i_AvailabilityZoneId, Type: smithy.ShapeTypeString, Ext: &eDescribeFlowOperationResponse_AvailabilityZoneId})
+var sDescribeFlowOperationResponse_VpcEndpointAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeFlowOperationResponse_VpcEndpointAssociationArn})
+var sDescribeFlowOperationResponse_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &eDescribeFlowOperationResponse_VpcEndpointId})
+var sDescribeFlowOperationResponse_FlowOperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationId", ID: &i_FlowOperationId, Type: smithy.ShapeTypeString, Ext: &eDescribeFlowOperationResponse_FlowOperationId})
+var sDescribeFlowOperationResponse_FlowOperationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationType", ID: &iFlowOperationType, Members: &mFlowOperationType, Type: smithy.ShapeTypeEnum, Ext: &eDescribeFlowOperationResponse_FlowOperationType})
+var sDescribeFlowOperationResponse_FlowOperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationStatus", ID: &iFlowOperationStatus, Members: &mFlowOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &eDescribeFlowOperationResponse_FlowOperationStatus})
+var sDescribeFlowOperationResponse_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_StatusReason, Type: smithy.ShapeTypeString, Ext: &eDescribeFlowOperationResponse_StatusMessage})
+var sDescribeFlowOperationResponse_FlowRequestTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowRequestTimestamp", ID: &i_FlowRequestTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeFlowOperationResponse_FlowRequestTimestamp})
+var sDescribeFlowOperationResponse_FlowOperation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperation", ID: &iFlowOperation, Members: &mFlowOperation, Type: smithy.ShapeTypeStructure, Ext: &eDescribeFlowOperationResponse_FlowOperation})
+var sDescribeLoggingConfigurationRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLoggingConfigurationRequest_FirewallArn})
+var sDescribeLoggingConfigurationRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDescribeLoggingConfigurationRequest_FirewallName})
+var sDescribeLoggingConfigurationResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLoggingConfigurationResponse_FirewallArn})
+var sDescribeLoggingConfigurationResponse_LoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingConfiguration", ID: &iLoggingConfiguration, Members: &mLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLoggingConfigurationResponse_LoggingConfiguration})
+var sDescribeLoggingConfigurationResponse_EnableMonitoringDashboard = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableMonitoringDashboard", ID: &i_EnableMonitoringDashboard, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeLoggingConfigurationResponse_EnableMonitoringDashboard})
+var sDescribeProxyConfigurationRequest_ProxyConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDescribeProxyConfigurationRequest_ProxyConfigurationName})
+var sDescribeProxyConfigurationRequest_ProxyConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeProxyConfigurationRequest_ProxyConfigurationArn})
+var sDescribeProxyConfigurationResponse_ProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfiguration", ID: &iProxyConfiguration, Members: &mProxyConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDescribeProxyConfigurationResponse_ProxyConfiguration})
+var sDescribeProxyConfigurationResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eDescribeProxyConfigurationResponse_UpdateToken})
+var sDescribeProxyRequest_ProxyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDescribeProxyRequest_ProxyName})
+var sDescribeProxyRequest_ProxyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeProxyRequest_ProxyArn})
+var sDescribeProxyResponse_Proxy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Proxy", ID: &iDescribeProxyResource, Members: &mDescribeProxyResource, Type: smithy.ShapeTypeStructure, Ext: &eDescribeProxyResponse_Proxy})
+var sDescribeProxyResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eDescribeProxyResponse_UpdateToken})
+var sDescribeProxyRuleGroupRequest_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDescribeProxyRuleGroupRequest_ProxyRuleGroupName})
+var sDescribeProxyRuleGroupRequest_ProxyRuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeProxyRuleGroupRequest_ProxyRuleGroupArn})
+var sDescribeProxyRuleGroupResponse_ProxyRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroup", ID: &iProxyRuleGroup, Members: &mProxyRuleGroup, Type: smithy.ShapeTypeStructure, Ext: &eDescribeProxyRuleGroupResponse_ProxyRuleGroup})
+var sDescribeProxyRuleGroupResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eDescribeProxyRuleGroupResponse_UpdateToken})
+var sDescribeProxyRuleRequest_ProxyRuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDescribeProxyRuleRequest_ProxyRuleName})
+var sDescribeProxyRuleRequest_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDescribeProxyRuleRequest_ProxyRuleGroupName})
+var sDescribeProxyRuleRequest_ProxyRuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeProxyRuleRequest_ProxyRuleGroupArn})
+var sDescribeProxyRuleResponse_ProxyRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRule", ID: &iProxyRule, Members: &mProxyRule, Type: smithy.ShapeTypeStructure, Ext: &eDescribeProxyRuleResponse_ProxyRule})
+var sDescribeProxyRuleResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eDescribeProxyRuleResponse_UpdateToken})
+var sDescribeResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeResourcePolicyRequest_ResourceArn})
+var sDescribeResourcePolicyResponse_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_PolicyString, Type: smithy.ShapeTypeString, Ext: &eDescribeResourcePolicyResponse_Policy})
+var sDescribeRuleGroupRequest_RuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDescribeRuleGroupRequest_RuleGroupName})
+var sDescribeRuleGroupRequest_RuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeRuleGroupRequest_RuleGroupArn})
+var sDescribeRuleGroupRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRuleGroupType, Members: &mRuleGroupType, Type: smithy.ShapeTypeEnum, Ext: &eDescribeRuleGroupRequest_Type})
+var sDescribeRuleGroupRequest_AnalyzeRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalyzeRuleGroup", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeRuleGroupRequest_AnalyzeRuleGroup})
+var sDescribeRuleGroupMetadataRequest_RuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDescribeRuleGroupMetadataRequest_RuleGroupName})
+var sDescribeRuleGroupMetadataRequest_RuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeRuleGroupMetadataRequest_RuleGroupArn})
+var sDescribeRuleGroupMetadataRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRuleGroupType, Members: &mRuleGroupType, Type: smithy.ShapeTypeEnum, Ext: &eDescribeRuleGroupMetadataRequest_Type})
+var sDescribeRuleGroupMetadataResponse_RuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeRuleGroupMetadataResponse_RuleGroupArn})
+var sDescribeRuleGroupMetadataResponse_RuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDescribeRuleGroupMetadataResponse_RuleGroupName})
+var sDescribeRuleGroupMetadataResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eDescribeRuleGroupMetadataResponse_Description})
+var sDescribeRuleGroupMetadataResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRuleGroupType, Members: &mRuleGroupType, Type: smithy.ShapeTypeEnum, Ext: &eDescribeRuleGroupMetadataResponse_Type})
+var sDescribeRuleGroupMetadataResponse_Capacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Capacity", ID: &i_RuleCapacity, Type: smithy.ShapeTypeInteger, Ext: &eDescribeRuleGroupMetadataResponse_Capacity})
+var sDescribeRuleGroupMetadataResponse_StatefulRuleOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatefulRuleOptions", ID: &iStatefulRuleOptions, Members: &mStatefulRuleOptions, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRuleGroupMetadataResponse_StatefulRuleOptions})
+var sDescribeRuleGroupMetadataResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_LastUpdateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeRuleGroupMetadataResponse_LastModifiedTime})
+var sDescribeRuleGroupMetadataResponse_VendorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VendorName", ID: &i_VendorName, Type: smithy.ShapeTypeString, Ext: &eDescribeRuleGroupMetadataResponse_VendorName})
+var sDescribeRuleGroupMetadataResponse_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_ProductId, Type: smithy.ShapeTypeString, Ext: &eDescribeRuleGroupMetadataResponse_ProductId})
+var sDescribeRuleGroupMetadataResponse_ListingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListingName", ID: &i_ListingName, Type: smithy.ShapeTypeString, Ext: &eDescribeRuleGroupMetadataResponse_ListingName})
+var sDescribeRuleGroupResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eDescribeRuleGroupResponse_UpdateToken})
+var sDescribeRuleGroupResponse_RuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroup", ID: &iRuleGroup, Members: &mRuleGroup, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRuleGroupResponse_RuleGroup})
+var sDescribeRuleGroupResponse_RuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupResponse", ID: &iRuleGroupResponse, Members: &mRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRuleGroupResponse_RuleGroupResponse})
+var sDescribeRuleGroupSummaryRequest_RuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDescribeRuleGroupSummaryRequest_RuleGroupName})
+var sDescribeRuleGroupSummaryRequest_RuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeRuleGroupSummaryRequest_RuleGroupArn})
+var sDescribeRuleGroupSummaryRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRuleGroupType, Members: &mRuleGroupType, Type: smithy.ShapeTypeEnum, Ext: &eDescribeRuleGroupSummaryRequest_Type})
+var sDescribeRuleGroupSummaryResponse_RuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDescribeRuleGroupSummaryResponse_RuleGroupName})
+var sDescribeRuleGroupSummaryResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eDescribeRuleGroupSummaryResponse_Description})
+var sDescribeRuleGroupSummaryResponse_Summary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Summary", ID: &iSummary, Members: &mSummary, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRuleGroupSummaryResponse_Summary})
+var sDescribeTLSInspectionConfigurationRequest_TLSInspectionConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeTLSInspectionConfigurationRequest_TLSInspectionConfigurationArn})
+var sDescribeTLSInspectionConfigurationRequest_TLSInspectionConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDescribeTLSInspectionConfigurationRequest_TLSInspectionConfigurationName})
+var sDescribeTLSInspectionConfigurationResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eDescribeTLSInspectionConfigurationResponse_UpdateToken})
+var sDescribeTLSInspectionConfigurationResponse_TLSInspectionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfiguration", ID: &iTLSInspectionConfiguration, Members: &mTLSInspectionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTLSInspectionConfigurationResponse_TLSInspectionConfiguration})
+var sDescribeTLSInspectionConfigurationResponse_TLSInspectionConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationResponse", ID: &iTLSInspectionConfigurationResponse, Members: &mTLSInspectionConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTLSInspectionConfigurationResponse_TLSInspectionConfigurationResponse})
+var sDescribeVpcEndpointAssociationRequest_VpcEndpointAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDescribeVpcEndpointAssociationRequest_VpcEndpointAssociationArn})
+var sDescribeVpcEndpointAssociationResponse_VpcEndpointAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociation", ID: &iVpcEndpointAssociation, Members: &mVpcEndpointAssociation, Type: smithy.ShapeTypeStructure, Ext: &eDescribeVpcEndpointAssociationResponse_VpcEndpointAssociation})
+var sDescribeVpcEndpointAssociationResponse_VpcEndpointAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationStatus", ID: &iVpcEndpointAssociationStatus, Members: &mVpcEndpointAssociationStatus, Type: smithy.ShapeTypeStructure, Ext: &eDescribeVpcEndpointAssociationResponse_VpcEndpointAssociationStatus})
+var sDetachRuleGroupsFromProxyConfigurationRequest_ProxyConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDetachRuleGroupsFromProxyConfigurationRequest_ProxyConfigurationName})
+var sDetachRuleGroupsFromProxyConfigurationRequest_ProxyConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDetachRuleGroupsFromProxyConfigurationRequest_ProxyConfigurationArn})
+var sDetachRuleGroupsFromProxyConfigurationRequest_RuleGroupNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupNames", ID: &i_ResourceNameList, Members: &m_ResourceNameList, Type: smithy.ShapeTypeList, Ext: &eDetachRuleGroupsFromProxyConfigurationRequest_RuleGroupNames})
+var sDetachRuleGroupsFromProxyConfigurationRequest_RuleGroupArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupArns", ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList, Ext: &eDetachRuleGroupsFromProxyConfigurationRequest_RuleGroupArns})
+var sDetachRuleGroupsFromProxyConfigurationRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eDetachRuleGroupsFromProxyConfigurationRequest_UpdateToken})
+var sDetachRuleGroupsFromProxyConfigurationResponse_ProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfiguration", ID: &iProxyConfiguration, Members: &mProxyConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDetachRuleGroupsFromProxyConfigurationResponse_ProxyConfiguration})
+var sDetachRuleGroupsFromProxyConfigurationResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eDetachRuleGroupsFromProxyConfigurationResponse_UpdateToken})
+var sDisassociateAvailabilityZonesRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eDisassociateAvailabilityZonesRequest_UpdateToken})
+var sDisassociateAvailabilityZonesRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDisassociateAvailabilityZonesRequest_FirewallArn})
+var sDisassociateAvailabilityZonesRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDisassociateAvailabilityZonesRequest_FirewallName})
+var sDisassociateAvailabilityZonesRequest_AvailabilityZoneMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneMappings", ID: &i_AvailabilityZoneMappings, Members: &m_AvailabilityZoneMappings, Type: smithy.ShapeTypeList, Ext: &eDisassociateAvailabilityZonesRequest_AvailabilityZoneMappings})
+var sDisassociateAvailabilityZonesResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDisassociateAvailabilityZonesResponse_FirewallArn})
+var sDisassociateAvailabilityZonesResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDisassociateAvailabilityZonesResponse_FirewallName})
+var sDisassociateAvailabilityZonesResponse_AvailabilityZoneMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneMappings", ID: &i_AvailabilityZoneMappings, Members: &m_AvailabilityZoneMappings, Type: smithy.ShapeTypeList, Ext: &eDisassociateAvailabilityZonesResponse_AvailabilityZoneMappings})
+var sDisassociateAvailabilityZonesResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eDisassociateAvailabilityZonesResponse_UpdateToken})
+var sDisassociateSubnetsRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eDisassociateSubnetsRequest_UpdateToken})
+var sDisassociateSubnetsRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDisassociateSubnetsRequest_FirewallArn})
+var sDisassociateSubnetsRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDisassociateSubnetsRequest_FirewallName})
+var sDisassociateSubnetsRequest_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_AzSubnets, Members: &m_AzSubnets, Type: smithy.ShapeTypeList, Ext: &eDisassociateSubnetsRequest_SubnetIds})
+var sDisassociateSubnetsResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDisassociateSubnetsResponse_FirewallArn})
+var sDisassociateSubnetsResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDisassociateSubnetsResponse_FirewallName})
+var sDisassociateSubnetsResponse_SubnetMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetMappings", ID: &i_SubnetMappings, Members: &m_SubnetMappings, Type: smithy.ShapeTypeList, Ext: &eDisassociateSubnetsResponse_SubnetMappings})
+var sDisassociateSubnetsResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eDisassociateSubnetsResponse_UpdateToken})
+var sGetAnalysisReportResultsRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eGetAnalysisReportResultsRequest_FirewallName})
+var sGetAnalysisReportResultsRequest_AnalysisReportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisReportId", ID: &i_AnalysisReportId, Type: smithy.ShapeTypeString, Ext: &eGetAnalysisReportResultsRequest_AnalysisReportId})
+var sGetAnalysisReportResultsRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eGetAnalysisReportResultsRequest_FirewallArn})
+var sGetAnalysisReportResultsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_AnalysisReportNextToken, Type: smithy.ShapeTypeString, Ext: &eGetAnalysisReportResultsRequest_NextToken})
+var sGetAnalysisReportResultsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetAnalysisReportResultsRequest_MaxResults})
+var sGetAnalysisReportResultsResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString, Ext: &eGetAnalysisReportResultsResponse_Status})
+var sGetAnalysisReportResultsResponse_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp, Ext: &eGetAnalysisReportResultsResponse_StartTime})
+var sGetAnalysisReportResultsResponse_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_EndTime, Type: smithy.ShapeTypeTimestamp, Ext: &eGetAnalysisReportResultsResponse_EndTime})
+var sGetAnalysisReportResultsResponse_ReportTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportTime", ID: &i_ReportTime, Type: smithy.ShapeTypeTimestamp, Ext: &eGetAnalysisReportResultsResponse_ReportTime})
+var sGetAnalysisReportResultsResponse_AnalysisType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisType", ID: &iEnabledAnalysisType, Members: &mEnabledAnalysisType, Type: smithy.ShapeTypeEnum, Ext: &eGetAnalysisReportResultsResponse_AnalysisType})
+var sGetAnalysisReportResultsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_AnalysisReportNextToken, Type: smithy.ShapeTypeString, Ext: &eGetAnalysisReportResultsResponse_NextToken})
+var sGetAnalysisReportResultsResponse_AnalysisReportResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisReportResults", ID: &i_AnalysisReportResults, Members: &m_AnalysisReportResults, Type: smithy.ShapeTypeList, Ext: &eGetAnalysisReportResultsResponse_AnalysisReportResults})
+var sListAnalysisReportsRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eListAnalysisReportsRequest_FirewallName})
+var sListAnalysisReportsRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eListAnalysisReportsRequest_FirewallArn})
+var sListAnalysisReportsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListAnalysisReportsRequest_NextToken})
+var sListAnalysisReportsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListAnalysisReportsRequest_MaxResults})
+var sListAnalysisReportsResponse_AnalysisReports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisReports", ID: &i_AnalysisReports, Members: &m_AnalysisReports, Type: smithy.ShapeTypeList, Ext: &eListAnalysisReportsResponse_AnalysisReports})
+var sListAnalysisReportsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListAnalysisReportsResponse_NextToken})
+var sListContainerAssociationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListContainerAssociationsRequest_MaxResults})
+var sListContainerAssociationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListContainerAssociationsRequest_NextToken})
+var sListContainerAssociationsResponse_ContainerAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociations", ID: &i_ContainerAssociations, Members: &m_ContainerAssociations, Type: smithy.ShapeTypeList, Ext: &eListContainerAssociationsResponse_ContainerAssociations})
+var sListContainerAssociationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListContainerAssociationsResponse_NextToken})
+var sListFirewallPoliciesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListFirewallPoliciesRequest_NextToken})
+var sListFirewallPoliciesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListFirewallPoliciesRequest_MaxResults})
+var sListFirewallPoliciesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListFirewallPoliciesResponse_NextToken})
+var sListFirewallPoliciesResponse_FirewallPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicies", ID: &i_FirewallPolicies, Members: &m_FirewallPolicies, Type: smithy.ShapeTypeList, Ext: &eListFirewallPoliciesResponse_FirewallPolicies})
+var sListFirewallsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListFirewallsRequest_NextToken})
+var sListFirewallsRequest_VpcIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcIds", ID: &i_VpcIds, Members: &m_VpcIds, Type: smithy.ShapeTypeList, Ext: &eListFirewallsRequest_VpcIds})
+var sListFirewallsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListFirewallsRequest_MaxResults})
+var sListFirewallsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListFirewallsResponse_NextToken})
+var sListFirewallsResponse_Firewalls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Firewalls", ID: &i_Firewalls, Members: &m_Firewalls, Type: smithy.ShapeTypeList, Ext: &eListFirewallsResponse_Firewalls})
+var sListFlowOperationResultsRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eListFlowOperationResultsRequest_FirewallArn})
+var sListFlowOperationResultsRequest_FlowOperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationId", ID: &i_FlowOperationId, Type: smithy.ShapeTypeString, Ext: &eListFlowOperationResultsRequest_FlowOperationId})
+var sListFlowOperationResultsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListFlowOperationResultsRequest_NextToken})
+var sListFlowOperationResultsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListFlowOperationResultsRequest_MaxResults})
+var sListFlowOperationResultsRequest_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &eListFlowOperationResultsRequest_AvailabilityZone})
+var sListFlowOperationResultsRequest_AvailabilityZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneId", ID: &i_AvailabilityZoneId, Type: smithy.ShapeTypeString, Ext: &eListFlowOperationResultsRequest_AvailabilityZoneId})
+var sListFlowOperationResultsRequest_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &eListFlowOperationResultsRequest_VpcEndpointId})
+var sListFlowOperationResultsRequest_VpcEndpointAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eListFlowOperationResultsRequest_VpcEndpointAssociationArn})
+var sListFlowOperationResultsResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eListFlowOperationResultsResponse_FirewallArn})
+var sListFlowOperationResultsResponse_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &eListFlowOperationResultsResponse_AvailabilityZone})
+var sListFlowOperationResultsResponse_AvailabilityZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneId", ID: &i_AvailabilityZoneId, Type: smithy.ShapeTypeString, Ext: &eListFlowOperationResultsResponse_AvailabilityZoneId})
+var sListFlowOperationResultsResponse_VpcEndpointAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eListFlowOperationResultsResponse_VpcEndpointAssociationArn})
+var sListFlowOperationResultsResponse_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &eListFlowOperationResultsResponse_VpcEndpointId})
+var sListFlowOperationResultsResponse_FlowOperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationId", ID: &i_FlowOperationId, Type: smithy.ShapeTypeString, Ext: &eListFlowOperationResultsResponse_FlowOperationId})
+var sListFlowOperationResultsResponse_FlowOperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationStatus", ID: &iFlowOperationStatus, Members: &mFlowOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &eListFlowOperationResultsResponse_FlowOperationStatus})
+var sListFlowOperationResultsResponse_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_StatusReason, Type: smithy.ShapeTypeString, Ext: &eListFlowOperationResultsResponse_StatusMessage})
+var sListFlowOperationResultsResponse_FlowRequestTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowRequestTimestamp", ID: &i_FlowRequestTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListFlowOperationResultsResponse_FlowRequestTimestamp})
+var sListFlowOperationResultsResponse_Flows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Flows", ID: &i_Flows, Members: &m_Flows, Type: smithy.ShapeTypeList, Ext: &eListFlowOperationResultsResponse_Flows})
+var sListFlowOperationResultsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListFlowOperationResultsResponse_NextToken})
+var sListFlowOperationsRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eListFlowOperationsRequest_FirewallArn})
+var sListFlowOperationsRequest_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &eListFlowOperationsRequest_AvailabilityZone})
+var sListFlowOperationsRequest_AvailabilityZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneId", ID: &i_AvailabilityZoneId, Type: smithy.ShapeTypeString, Ext: &eListFlowOperationsRequest_AvailabilityZoneId})
+var sListFlowOperationsRequest_VpcEndpointAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eListFlowOperationsRequest_VpcEndpointAssociationArn})
+var sListFlowOperationsRequest_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &eListFlowOperationsRequest_VpcEndpointId})
+var sListFlowOperationsRequest_FlowOperationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationType", ID: &iFlowOperationType, Members: &mFlowOperationType, Type: smithy.ShapeTypeEnum, Ext: &eListFlowOperationsRequest_FlowOperationType})
+var sListFlowOperationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListFlowOperationsRequest_NextToken})
+var sListFlowOperationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListFlowOperationsRequest_MaxResults})
+var sListFlowOperationsResponse_FlowOperations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperations", ID: &i_FlowOperations, Members: &m_FlowOperations, Type: smithy.ShapeTypeList, Ext: &eListFlowOperationsResponse_FlowOperations})
+var sListFlowOperationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListFlowOperationsResponse_NextToken})
+var sListProxiesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListProxiesRequest_NextToken})
+var sListProxiesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListProxiesRequest_MaxResults})
+var sListProxiesResponse_Proxies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Proxies", ID: &i_Proxies, Members: &m_Proxies, Type: smithy.ShapeTypeList, Ext: &eListProxiesResponse_Proxies})
+var sListProxiesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListProxiesResponse_NextToken})
+var sListProxyConfigurationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListProxyConfigurationsRequest_NextToken})
+var sListProxyConfigurationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListProxyConfigurationsRequest_MaxResults})
+var sListProxyConfigurationsResponse_ProxyConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurations", ID: &i_ProxyConfigurations, Members: &m_ProxyConfigurations, Type: smithy.ShapeTypeList, Ext: &eListProxyConfigurationsResponse_ProxyConfigurations})
+var sListProxyConfigurationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListProxyConfigurationsResponse_NextToken})
+var sListProxyRuleGroupsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListProxyRuleGroupsRequest_NextToken})
+var sListProxyRuleGroupsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListProxyRuleGroupsRequest_MaxResults})
+var sListProxyRuleGroupsResponse_ProxyRuleGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroups", ID: &i_ProxyRuleGroups, Members: &m_ProxyRuleGroups, Type: smithy.ShapeTypeList, Ext: &eListProxyRuleGroupsResponse_ProxyRuleGroups})
+var sListProxyRuleGroupsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListProxyRuleGroupsResponse_NextToken})
+var sListRuleGroupsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRuleGroupsRequest_NextToken})
+var sListRuleGroupsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListRuleGroupsRequest_MaxResults})
+var sListRuleGroupsRequest_Scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scope", ID: &iResourceManagedStatus, Members: &mResourceManagedStatus, Type: smithy.ShapeTypeEnum, Ext: &eListRuleGroupsRequest_Scope})
+var sListRuleGroupsRequest_ManagedType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedType", ID: &iResourceManagedType, Members: &mResourceManagedType, Type: smithy.ShapeTypeEnum, Ext: &eListRuleGroupsRequest_ManagedType})
+var sListRuleGroupsRequest_SubscriptionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionStatus", ID: &iSubscriptionStatus, Members: &mSubscriptionStatus, Type: smithy.ShapeTypeEnum, Ext: &eListRuleGroupsRequest_SubscriptionStatus})
+var sListRuleGroupsRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRuleGroupType, Members: &mRuleGroupType, Type: smithy.ShapeTypeEnum, Ext: &eListRuleGroupsRequest_Type})
+var sListRuleGroupsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRuleGroupsResponse_NextToken})
+var sListRuleGroupsResponse_RuleGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroups", ID: &i_RuleGroups, Members: &m_RuleGroups, Type: smithy.ShapeTypeList, Ext: &eListRuleGroupsResponse_RuleGroups})
+var sListTagsForResourceRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_NextToken})
+var sListTagsForResourceRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_TagsPaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListTagsForResourceRequest_MaxResults})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceResponse_NextToken})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_Tags})
+var sListTLSInspectionConfigurationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListTLSInspectionConfigurationsRequest_NextToken})
+var sListTLSInspectionConfigurationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListTLSInspectionConfigurationsRequest_MaxResults})
+var sListTLSInspectionConfigurationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListTLSInspectionConfigurationsResponse_NextToken})
+var sListTLSInspectionConfigurationsResponse_TLSInspectionConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurations", ID: &i_TLSInspectionConfigurations, Members: &m_TLSInspectionConfigurations, Type: smithy.ShapeTypeList, Ext: &eListTLSInspectionConfigurationsResponse_TLSInspectionConfigurations})
+var sListVpcEndpointAssociationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListVpcEndpointAssociationsRequest_NextToken})
+var sListVpcEndpointAssociationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListVpcEndpointAssociationsRequest_MaxResults})
+var sListVpcEndpointAssociationsRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eListVpcEndpointAssociationsRequest_FirewallArn})
+var sListVpcEndpointAssociationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListVpcEndpointAssociationsResponse_NextToken})
+var sListVpcEndpointAssociationsResponse_VpcEndpointAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociations", ID: &i_VpcEndpointAssociations, Members: &m_VpcEndpointAssociations, Type: smithy.ShapeTypeList, Ext: &eListVpcEndpointAssociationsResponse_VpcEndpointAssociations})
+var sPutResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyRequest_ResourceArn})
+var sPutResourcePolicyRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_PolicyString, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyRequest_Policy})
+var sRejectNetworkFirewallTransitGatewayAttachmentRequest_TransitGatewayAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentId", ID: &i_TransitGatewayAttachmentId, Type: smithy.ShapeTypeString, Ext: &eRejectNetworkFirewallTransitGatewayAttachmentRequest_TransitGatewayAttachmentId})
+var sRejectNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentId", ID: &i_TransitGatewayAttachmentId, Type: smithy.ShapeTypeString, Ext: &eRejectNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentId})
+var sRejectNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentStatus", ID: &iTransitGatewayAttachmentStatus, Members: &mTransitGatewayAttachmentStatus, Type: smithy.ShapeTypeEnum, Ext: &eRejectNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentStatus})
+var sStartAnalysisReportRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eStartAnalysisReportRequest_FirewallName})
+var sStartAnalysisReportRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eStartAnalysisReportRequest_FirewallArn})
+var sStartAnalysisReportRequest_AnalysisType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisType", ID: &iEnabledAnalysisType, Members: &mEnabledAnalysisType, Type: smithy.ShapeTypeEnum, Ext: &eStartAnalysisReportRequest_AnalysisType})
+var sStartAnalysisReportResponse_AnalysisReportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalysisReportId", ID: &i_AnalysisReportId, Type: smithy.ShapeTypeString, Ext: &eStartAnalysisReportResponse_AnalysisReportId})
+var sStartFlowCaptureRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eStartFlowCaptureRequest_FirewallArn})
+var sStartFlowCaptureRequest_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &eStartFlowCaptureRequest_AvailabilityZone})
+var sStartFlowCaptureRequest_AvailabilityZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneId", ID: &i_AvailabilityZoneId, Type: smithy.ShapeTypeString, Ext: &eStartFlowCaptureRequest_AvailabilityZoneId})
+var sStartFlowCaptureRequest_VpcEndpointAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eStartFlowCaptureRequest_VpcEndpointAssociationArn})
+var sStartFlowCaptureRequest_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &eStartFlowCaptureRequest_VpcEndpointId})
+var sStartFlowCaptureRequest_MinimumFlowAgeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimumFlowAgeInSeconds", ID: &i_Age, Type: smithy.ShapeTypeInteger, Ext: &eStartFlowCaptureRequest_MinimumFlowAgeInSeconds})
+var sStartFlowCaptureRequest_FlowFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowFilters", ID: &i_FlowFilters, Members: &m_FlowFilters, Type: smithy.ShapeTypeList, Ext: &eStartFlowCaptureRequest_FlowFilters})
+var sStartFlowCaptureResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eStartFlowCaptureResponse_FirewallArn})
+var sStartFlowCaptureResponse_FlowOperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationId", ID: &i_FlowOperationId, Type: smithy.ShapeTypeString, Ext: &eStartFlowCaptureResponse_FlowOperationId})
+var sStartFlowCaptureResponse_FlowOperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationStatus", ID: &iFlowOperationStatus, Members: &mFlowOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &eStartFlowCaptureResponse_FlowOperationStatus})
+var sStartFlowFlushRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eStartFlowFlushRequest_FirewallArn})
+var sStartFlowFlushRequest_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &eStartFlowFlushRequest_AvailabilityZone})
+var sStartFlowFlushRequest_AvailabilityZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneId", ID: &i_AvailabilityZoneId, Type: smithy.ShapeTypeString, Ext: &eStartFlowFlushRequest_AvailabilityZoneId})
+var sStartFlowFlushRequest_VpcEndpointAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eStartFlowFlushRequest_VpcEndpointAssociationArn})
+var sStartFlowFlushRequest_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &eStartFlowFlushRequest_VpcEndpointId})
+var sStartFlowFlushRequest_MinimumFlowAgeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimumFlowAgeInSeconds", ID: &i_Age, Type: smithy.ShapeTypeInteger, Ext: &eStartFlowFlushRequest_MinimumFlowAgeInSeconds})
+var sStartFlowFlushRequest_FlowFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowFilters", ID: &i_FlowFilters, Members: &m_FlowFilters, Type: smithy.ShapeTypeList, Ext: &eStartFlowFlushRequest_FlowFilters})
+var sStartFlowFlushResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eStartFlowFlushResponse_FirewallArn})
+var sStartFlowFlushResponse_FlowOperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationId", ID: &i_FlowOperationId, Type: smithy.ShapeTypeString, Ext: &eStartFlowFlushResponse_FlowOperationId})
+var sStartFlowFlushResponse_FlowOperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowOperationStatus", ID: &iFlowOperationStatus, Members: &mFlowOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &eStartFlowFlushResponse_FlowOperationStatus})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_Tags})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUpdateAvailabilityZoneChangeProtectionRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateAvailabilityZoneChangeProtectionRequest_UpdateToken})
+var sUpdateAvailabilityZoneChangeProtectionRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateAvailabilityZoneChangeProtectionRequest_FirewallArn})
+var sUpdateAvailabilityZoneChangeProtectionRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateAvailabilityZoneChangeProtectionRequest_FirewallName})
+var sUpdateAvailabilityZoneChangeProtectionRequest_AvailabilityZoneChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneChangeProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateAvailabilityZoneChangeProtectionRequest_AvailabilityZoneChangeProtection})
+var sUpdateAvailabilityZoneChangeProtectionResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateAvailabilityZoneChangeProtectionResponse_UpdateToken})
+var sUpdateAvailabilityZoneChangeProtectionResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateAvailabilityZoneChangeProtectionResponse_FirewallArn})
+var sUpdateAvailabilityZoneChangeProtectionResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateAvailabilityZoneChangeProtectionResponse_FirewallName})
+var sUpdateAvailabilityZoneChangeProtectionResponse_AvailabilityZoneChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneChangeProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateAvailabilityZoneChangeProtectionResponse_AvailabilityZoneChangeProtection})
+var sUpdateContainerAssociationRequest_ContainerAssociationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateContainerAssociationRequest_ContainerAssociationName})
+var sUpdateContainerAssociationRequest_ContainerAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateContainerAssociationRequest_ContainerAssociationArn})
+var sUpdateContainerAssociationRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateContainerAssociationRequest_Description})
+var sUpdateContainerAssociationRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iContainerMonitoringType, Members: &mContainerMonitoringType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateContainerAssociationRequest_Type})
+var sUpdateContainerAssociationRequest_ContainerMonitoringConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerMonitoringConfigurations", ID: &i_ContainerMonitoringConfigurations, Members: &m_ContainerMonitoringConfigurations, Type: smithy.ShapeTypeList, Ext: &eUpdateContainerAssociationRequest_ContainerMonitoringConfigurations})
+var sUpdateContainerAssociationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eUpdateContainerAssociationRequest_Tags})
+var sUpdateContainerAssociationRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateContainerAssociationRequest_UpdateToken})
+var sUpdateContainerAssociationResponse_ContainerAssociationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateContainerAssociationResponse_ContainerAssociationName})
+var sUpdateContainerAssociationResponse_ContainerAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerAssociationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateContainerAssociationResponse_ContainerAssociationArn})
+var sUpdateContainerAssociationResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateContainerAssociationResponse_Description})
+var sUpdateContainerAssociationResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iContainerMonitoringType, Members: &mContainerMonitoringType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateContainerAssociationResponse_Type})
+var sUpdateContainerAssociationResponse_ContainerMonitoringConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerMonitoringConfigurations", ID: &i_ContainerMonitoringConfigurations, Members: &m_ContainerMonitoringConfigurations, Type: smithy.ShapeTypeList, Ext: &eUpdateContainerAssociationResponse_ContainerMonitoringConfigurations})
+var sUpdateContainerAssociationResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iContainerAssociationStatus, Members: &mContainerAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateContainerAssociationResponse_Status})
+var sUpdateContainerAssociationResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eUpdateContainerAssociationResponse_Tags})
+var sUpdateContainerAssociationResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateContainerAssociationResponse_UpdateToken})
+var sUpdateFirewallAnalysisSettingsRequest_EnabledAnalysisTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledAnalysisTypes", ID: &i_EnabledAnalysisTypes, Members: &m_EnabledAnalysisTypes, Type: smithy.ShapeTypeList, Ext: &eUpdateFirewallAnalysisSettingsRequest_EnabledAnalysisTypes})
+var sUpdateFirewallAnalysisSettingsRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallAnalysisSettingsRequest_FirewallArn})
+var sUpdateFirewallAnalysisSettingsRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallAnalysisSettingsRequest_FirewallName})
+var sUpdateFirewallAnalysisSettingsRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallAnalysisSettingsRequest_UpdateToken})
+var sUpdateFirewallAnalysisSettingsResponse_EnabledAnalysisTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledAnalysisTypes", ID: &i_EnabledAnalysisTypes, Members: &m_EnabledAnalysisTypes, Type: smithy.ShapeTypeList, Ext: &eUpdateFirewallAnalysisSettingsResponse_EnabledAnalysisTypes})
+var sUpdateFirewallAnalysisSettingsResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallAnalysisSettingsResponse_FirewallArn})
+var sUpdateFirewallAnalysisSettingsResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallAnalysisSettingsResponse_FirewallName})
+var sUpdateFirewallAnalysisSettingsResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallAnalysisSettingsResponse_UpdateToken})
+var sUpdateFirewallDeleteProtectionRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallDeleteProtectionRequest_UpdateToken})
+var sUpdateFirewallDeleteProtectionRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallDeleteProtectionRequest_FirewallArn})
+var sUpdateFirewallDeleteProtectionRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallDeleteProtectionRequest_FirewallName})
+var sUpdateFirewallDeleteProtectionRequest_DeleteProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateFirewallDeleteProtectionRequest_DeleteProtection})
+var sUpdateFirewallDeleteProtectionResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallDeleteProtectionResponse_FirewallArn})
+var sUpdateFirewallDeleteProtectionResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallDeleteProtectionResponse_FirewallName})
+var sUpdateFirewallDeleteProtectionResponse_DeleteProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateFirewallDeleteProtectionResponse_DeleteProtection})
+var sUpdateFirewallDeleteProtectionResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallDeleteProtectionResponse_UpdateToken})
+var sUpdateFirewallDescriptionRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallDescriptionRequest_UpdateToken})
+var sUpdateFirewallDescriptionRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallDescriptionRequest_FirewallArn})
+var sUpdateFirewallDescriptionRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallDescriptionRequest_FirewallName})
+var sUpdateFirewallDescriptionRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallDescriptionRequest_Description})
+var sUpdateFirewallDescriptionResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallDescriptionResponse_FirewallArn})
+var sUpdateFirewallDescriptionResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallDescriptionResponse_FirewallName})
+var sUpdateFirewallDescriptionResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallDescriptionResponse_Description})
+var sUpdateFirewallDescriptionResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallDescriptionResponse_UpdateToken})
+var sUpdateFirewallEncryptionConfigurationRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallEncryptionConfigurationRequest_UpdateToken})
+var sUpdateFirewallEncryptionConfigurationRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallEncryptionConfigurationRequest_FirewallArn})
+var sUpdateFirewallEncryptionConfigurationRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallEncryptionConfigurationRequest_FirewallName})
+var sUpdateFirewallEncryptionConfigurationRequest_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFirewallEncryptionConfigurationRequest_EncryptionConfiguration})
+var sUpdateFirewallEncryptionConfigurationResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallEncryptionConfigurationResponse_FirewallArn})
+var sUpdateFirewallEncryptionConfigurationResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallEncryptionConfigurationResponse_FirewallName})
+var sUpdateFirewallEncryptionConfigurationResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallEncryptionConfigurationResponse_UpdateToken})
+var sUpdateFirewallEncryptionConfigurationResponse_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFirewallEncryptionConfigurationResponse_EncryptionConfiguration})
+var sUpdateFirewallPolicyChangeProtectionRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallPolicyChangeProtectionRequest_UpdateToken})
+var sUpdateFirewallPolicyChangeProtectionRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallPolicyChangeProtectionRequest_FirewallArn})
+var sUpdateFirewallPolicyChangeProtectionRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallPolicyChangeProtectionRequest_FirewallName})
+var sUpdateFirewallPolicyChangeProtectionRequest_FirewallPolicyChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyChangeProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateFirewallPolicyChangeProtectionRequest_FirewallPolicyChangeProtection})
+var sUpdateFirewallPolicyChangeProtectionResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallPolicyChangeProtectionResponse_UpdateToken})
+var sUpdateFirewallPolicyChangeProtectionResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallPolicyChangeProtectionResponse_FirewallArn})
+var sUpdateFirewallPolicyChangeProtectionResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallPolicyChangeProtectionResponse_FirewallName})
+var sUpdateFirewallPolicyChangeProtectionResponse_FirewallPolicyChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyChangeProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateFirewallPolicyChangeProtectionResponse_FirewallPolicyChangeProtection})
+var sUpdateFirewallPolicyRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallPolicyRequest_UpdateToken})
+var sUpdateFirewallPolicyRequest_FirewallPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallPolicyRequest_FirewallPolicyArn})
+var sUpdateFirewallPolicyRequest_FirewallPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallPolicyRequest_FirewallPolicyName})
+var sUpdateFirewallPolicyRequest_FirewallPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicy", ID: &iFirewallPolicy, Members: &mFirewallPolicy, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFirewallPolicyRequest_FirewallPolicy})
+var sUpdateFirewallPolicyRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallPolicyRequest_Description})
+var sUpdateFirewallPolicyRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateFirewallPolicyRequest_DryRun})
+var sUpdateFirewallPolicyRequest_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFirewallPolicyRequest_EncryptionConfiguration})
+var sUpdateFirewallPolicyResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateFirewallPolicyResponse_UpdateToken})
+var sUpdateFirewallPolicyResponse_FirewallPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyResponse", ID: &iFirewallPolicyResponse, Members: &mFirewallPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFirewallPolicyResponse_FirewallPolicyResponse})
+var sUpdateLoggingConfigurationRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateLoggingConfigurationRequest_FirewallArn})
+var sUpdateLoggingConfigurationRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateLoggingConfigurationRequest_FirewallName})
+var sUpdateLoggingConfigurationRequest_LoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingConfiguration", ID: &iLoggingConfiguration, Members: &mLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLoggingConfigurationRequest_LoggingConfiguration})
+var sUpdateLoggingConfigurationRequest_EnableMonitoringDashboard = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableMonitoringDashboard", ID: &i_EnableMonitoringDashboard, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateLoggingConfigurationRequest_EnableMonitoringDashboard})
+var sUpdateLoggingConfigurationResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateLoggingConfigurationResponse_FirewallArn})
+var sUpdateLoggingConfigurationResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateLoggingConfigurationResponse_FirewallName})
+var sUpdateLoggingConfigurationResponse_LoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingConfiguration", ID: &iLoggingConfiguration, Members: &mLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLoggingConfigurationResponse_LoggingConfiguration})
+var sUpdateLoggingConfigurationResponse_EnableMonitoringDashboard = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableMonitoringDashboard", ID: &i_EnableMonitoringDashboard, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateLoggingConfigurationResponse_EnableMonitoringDashboard})
+var sUpdateProxyConfigurationRequest_ProxyConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateProxyConfigurationRequest_ProxyConfigurationName})
+var sUpdateProxyConfigurationRequest_ProxyConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateProxyConfigurationRequest_ProxyConfigurationArn})
+var sUpdateProxyConfigurationRequest_DefaultRulePhaseActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultRulePhaseActions", ID: &iProxyConfigDefaultRulePhaseActionsRequest, Members: &mProxyConfigDefaultRulePhaseActionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProxyConfigurationRequest_DefaultRulePhaseActions})
+var sUpdateProxyConfigurationRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateProxyConfigurationRequest_UpdateToken})
+var sUpdateProxyConfigurationResponse_ProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfiguration", ID: &iProxyConfiguration, Members: &mProxyConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProxyConfigurationResponse_ProxyConfiguration})
+var sUpdateProxyConfigurationResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateProxyConfigurationResponse_UpdateToken})
+var sUpdateProxyRequest_NatGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayId", ID: &i_NatGatewayId, Type: smithy.ShapeTypeString, Ext: &eUpdateProxyRequest_NatGatewayId})
+var sUpdateProxyRequest_ProxyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateProxyRequest_ProxyName})
+var sUpdateProxyRequest_ProxyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateProxyRequest_ProxyArn})
+var sUpdateProxyRequest_ListenerPropertiesToAdd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerPropertiesToAdd", ID: &i_ListenerPropertiesRequest, Members: &m_ListenerPropertiesRequest, Type: smithy.ShapeTypeList, Ext: &eUpdateProxyRequest_ListenerPropertiesToAdd})
+var sUpdateProxyRequest_ListenerPropertiesToRemove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerPropertiesToRemove", ID: &i_ListenerPropertiesRequest, Members: &m_ListenerPropertiesRequest, Type: smithy.ShapeTypeList, Ext: &eUpdateProxyRequest_ListenerPropertiesToRemove})
+var sUpdateProxyRequest_TlsInterceptProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsInterceptProperties", ID: &iTlsInterceptPropertiesRequest, Members: &mTlsInterceptPropertiesRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProxyRequest_TlsInterceptProperties})
+var sUpdateProxyRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateProxyRequest_UpdateToken})
+var sUpdateProxyResponse_Proxy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Proxy", ID: &iProxy, Members: &mProxy, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProxyResponse_Proxy})
+var sUpdateProxyResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateProxyResponse_UpdateToken})
+var sUpdateProxyRuleGroupPrioritiesRequest_ProxyConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateProxyRuleGroupPrioritiesRequest_ProxyConfigurationName})
+var sUpdateProxyRuleGroupPrioritiesRequest_ProxyConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateProxyRuleGroupPrioritiesRequest_ProxyConfigurationArn})
+var sUpdateProxyRuleGroupPrioritiesRequest_RuleGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroups", ID: &i_ProxyRuleGroupPriorityList, Members: &m_ProxyRuleGroupPriorityList, Type: smithy.ShapeTypeList, Ext: &eUpdateProxyRuleGroupPrioritiesRequest_RuleGroups})
+var sUpdateProxyRuleGroupPrioritiesRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateProxyRuleGroupPrioritiesRequest_UpdateToken})
+var sUpdateProxyRuleGroupPrioritiesResponse_ProxyRuleGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroups", ID: &i_ProxyRuleGroupPriorityResultList, Members: &m_ProxyRuleGroupPriorityResultList, Type: smithy.ShapeTypeList, Ext: &eUpdateProxyRuleGroupPrioritiesResponse_ProxyRuleGroups})
+var sUpdateProxyRuleGroupPrioritiesResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateProxyRuleGroupPrioritiesResponse_UpdateToken})
+var sUpdateProxyRuleRequest_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateProxyRuleRequest_ProxyRuleGroupName})
+var sUpdateProxyRuleRequest_ProxyRuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateProxyRuleRequest_ProxyRuleGroupArn})
+var sUpdateProxyRuleRequest_ProxyRuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateProxyRuleRequest_ProxyRuleName})
+var sUpdateProxyRuleRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateProxyRuleRequest_Description})
+var sUpdateProxyRuleRequest_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iProxyRulePhaseAction, Members: &mProxyRulePhaseAction, Type: smithy.ShapeTypeEnum, Ext: &eUpdateProxyRuleRequest_Action})
+var sUpdateProxyRuleRequest_AddConditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddConditions", ID: &i_ProxyRuleConditionList, Members: &m_ProxyRuleConditionList, Type: smithy.ShapeTypeList, Ext: &eUpdateProxyRuleRequest_AddConditions})
+var sUpdateProxyRuleRequest_RemoveConditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveConditions", ID: &i_ProxyRuleConditionList, Members: &m_ProxyRuleConditionList, Type: smithy.ShapeTypeList, Ext: &eUpdateProxyRuleRequest_RemoveConditions})
+var sUpdateProxyRuleRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateProxyRuleRequest_UpdateToken})
+var sUpdateProxyRuleResponse_ProxyRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRule", ID: &iProxyRule, Members: &mProxyRule, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProxyRuleResponse_ProxyRule})
+var sUpdateProxyRuleResponse_RemovedConditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemovedConditions", ID: &i_ProxyRuleConditionList, Members: &m_ProxyRuleConditionList, Type: smithy.ShapeTypeList, Ext: &eUpdateProxyRuleResponse_RemovedConditions})
+var sUpdateProxyRuleResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateProxyRuleResponse_UpdateToken})
+var sUpdateProxyRulePrioritiesRequest_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateProxyRulePrioritiesRequest_ProxyRuleGroupName})
+var sUpdateProxyRulePrioritiesRequest_ProxyRuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateProxyRulePrioritiesRequest_ProxyRuleGroupArn})
+var sUpdateProxyRulePrioritiesRequest_RuleGroupRequestPhase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupRequestPhase", ID: &iRuleGroupRequestPhase, Members: &mRuleGroupRequestPhase, Type: smithy.ShapeTypeEnum, Ext: &eUpdateProxyRulePrioritiesRequest_RuleGroupRequestPhase})
+var sUpdateProxyRulePrioritiesRequest_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_ProxyRulePriorityList, Members: &m_ProxyRulePriorityList, Type: smithy.ShapeTypeList, Ext: &eUpdateProxyRulePrioritiesRequest_Rules})
+var sUpdateProxyRulePrioritiesRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateProxyRulePrioritiesRequest_UpdateToken})
+var sUpdateProxyRulePrioritiesResponse_ProxyRuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateProxyRulePrioritiesResponse_ProxyRuleGroupName})
+var sUpdateProxyRulePrioritiesResponse_ProxyRuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyRuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateProxyRulePrioritiesResponse_ProxyRuleGroupArn})
+var sUpdateProxyRulePrioritiesResponse_RuleGroupRequestPhase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupRequestPhase", ID: &iRuleGroupRequestPhase, Members: &mRuleGroupRequestPhase, Type: smithy.ShapeTypeEnum, Ext: &eUpdateProxyRulePrioritiesResponse_RuleGroupRequestPhase})
+var sUpdateProxyRulePrioritiesResponse_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_ProxyRulePriorityList, Members: &m_ProxyRulePriorityList, Type: smithy.ShapeTypeList, Ext: &eUpdateProxyRulePrioritiesResponse_Rules})
+var sUpdateProxyRulePrioritiesResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateProxyRulePrioritiesResponse_UpdateToken})
+var sUpdateProxySettingsRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateProxySettingsRequest_FirewallArn})
+var sUpdateProxySettingsRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateProxySettingsRequest_FirewallName})
+var sUpdateProxySettingsRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateProxySettingsRequest_UpdateToken})
+var sUpdateProxySettingsRequest_ProxySettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxySettings", ID: &iProxySettings, Members: &mProxySettings, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProxySettingsRequest_ProxySettings})
+var sUpdateProxySettingsResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateProxySettingsResponse_FirewallArn})
+var sUpdateProxySettingsResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateProxySettingsResponse_FirewallName})
+var sUpdateProxySettingsResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateProxySettingsResponse_UpdateToken})
+var sUpdateProxySettingsResponse_ProxySettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxySettings", ID: &iProxySettings, Members: &mProxySettings, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProxySettingsResponse_ProxySettings})
+var sUpdateRuleGroupRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateRuleGroupRequest_UpdateToken})
+var sUpdateRuleGroupRequest_RuleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateRuleGroupRequest_RuleGroupArn})
+var sUpdateRuleGroupRequest_RuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateRuleGroupRequest_RuleGroupName})
+var sUpdateRuleGroupRequest_RuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroup", ID: &iRuleGroup, Members: &mRuleGroup, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRuleGroupRequest_RuleGroup})
+var sUpdateRuleGroupRequest_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_RulesString, Type: smithy.ShapeTypeString, Ext: &eUpdateRuleGroupRequest_Rules})
+var sUpdateRuleGroupRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRuleGroupType, Members: &mRuleGroupType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateRuleGroupRequest_Type})
+var sUpdateRuleGroupRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateRuleGroupRequest_Description})
+var sUpdateRuleGroupRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateRuleGroupRequest_DryRun})
+var sUpdateRuleGroupRequest_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRuleGroupRequest_EncryptionConfiguration})
+var sUpdateRuleGroupRequest_SourceMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceMetadata", ID: &iSourceMetadata, Members: &mSourceMetadata, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRuleGroupRequest_SourceMetadata})
+var sUpdateRuleGroupRequest_AnalyzeRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalyzeRuleGroup", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateRuleGroupRequest_AnalyzeRuleGroup})
+var sUpdateRuleGroupRequest_SummaryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SummaryConfiguration", ID: &iSummaryConfiguration, Members: &mSummaryConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRuleGroupRequest_SummaryConfiguration})
+var sUpdateRuleGroupResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateRuleGroupResponse_UpdateToken})
+var sUpdateRuleGroupResponse_RuleGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupResponse", ID: &iRuleGroupResponse, Members: &mRuleGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRuleGroupResponse_RuleGroupResponse})
+var sUpdateSubnetChangeProtectionRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateSubnetChangeProtectionRequest_UpdateToken})
+var sUpdateSubnetChangeProtectionRequest_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateSubnetChangeProtectionRequest_FirewallArn})
+var sUpdateSubnetChangeProtectionRequest_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateSubnetChangeProtectionRequest_FirewallName})
+var sUpdateSubnetChangeProtectionRequest_SubnetChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetChangeProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateSubnetChangeProtectionRequest_SubnetChangeProtection})
+var sUpdateSubnetChangeProtectionResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateSubnetChangeProtectionResponse_UpdateToken})
+var sUpdateSubnetChangeProtectionResponse_FirewallArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateSubnetChangeProtectionResponse_FirewallArn})
+var sUpdateSubnetChangeProtectionResponse_FirewallName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateSubnetChangeProtectionResponse_FirewallName})
+var sUpdateSubnetChangeProtectionResponse_SubnetChangeProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetChangeProtection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateSubnetChangeProtectionResponse_SubnetChangeProtection})
+var sUpdateTLSInspectionConfigurationRequest_TLSInspectionConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdateTLSInspectionConfigurationRequest_TLSInspectionConfigurationArn})
+var sUpdateTLSInspectionConfigurationRequest_TLSInspectionConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateTLSInspectionConfigurationRequest_TLSInspectionConfigurationName})
+var sUpdateTLSInspectionConfigurationRequest_TLSInspectionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfiguration", ID: &iTLSInspectionConfiguration, Members: &mTLSInspectionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTLSInspectionConfigurationRequest_TLSInspectionConfiguration})
+var sUpdateTLSInspectionConfigurationRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateTLSInspectionConfigurationRequest_Description})
+var sUpdateTLSInspectionConfigurationRequest_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTLSInspectionConfigurationRequest_EncryptionConfiguration})
+var sUpdateTLSInspectionConfigurationRequest_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateTLSInspectionConfigurationRequest_UpdateToken})
+var sUpdateTLSInspectionConfigurationResponse_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString, Ext: &eUpdateTLSInspectionConfigurationResponse_UpdateToken})
+var sUpdateTLSInspectionConfigurationResponse_TLSInspectionConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLSInspectionConfigurationResponse", ID: &iTLSInspectionConfigurationResponse, Members: &mTLSInspectionConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTLSInspectionConfigurationResponse_TLSInspectionConfigurationResponse})
 
 var AcceptNetworkFirewallTransitGatewayAttachment = &sAcceptNetworkFirewallTransitGatewayAttachment
 

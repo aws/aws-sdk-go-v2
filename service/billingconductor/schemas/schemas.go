@@ -7,9 +7,819 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [811]smithy.SchemaExtensions
+var (
+	eAssociateAccounts                                                                     smithy.SchemaExtensions
+	eAssociatePricingRules                                                                 smithy.SchemaExtensions
+	eBatchAssociateResourcesToCustomLineItem                                               smithy.SchemaExtensions
+	eBatchDisassociateResourcesFromCustomLineItem                                          smithy.SchemaExtensions
+	eCreateBillingGroup                                                                    smithy.SchemaExtensions
+	eCreateCustomLineItem                                                                  smithy.SchemaExtensions
+	eCreatePricingPlan                                                                     smithy.SchemaExtensions
+	eCreatePricingRule                                                                     smithy.SchemaExtensions
+	eDeleteBillingGroup                                                                    smithy.SchemaExtensions
+	eDeleteCustomLineItem                                                                  smithy.SchemaExtensions
+	eDeletePricingPlan                                                                     smithy.SchemaExtensions
+	eDeletePricingRule                                                                     smithy.SchemaExtensions
+	eDisassociateAccounts                                                                  smithy.SchemaExtensions
+	eDisassociatePricingRules                                                              smithy.SchemaExtensions
+	eGetBillingGroupCostReport                                                             smithy.SchemaExtensions
+	eGetBillingTransferPreference                                                          smithy.SchemaExtensions
+	eListAccountAssociations                                                               smithy.SchemaExtensions
+	eListBillingGroupCostReports                                                           smithy.SchemaExtensions
+	eListBillingGroups                                                                     smithy.SchemaExtensions
+	eListCustomLineItems                                                                   smithy.SchemaExtensions
+	eListCustomLineItemVersions                                                            smithy.SchemaExtensions
+	eListPricingPlans                                                                      smithy.SchemaExtensions
+	eListPricingPlansAssociatedWithPricingRule                                             smithy.SchemaExtensions
+	eListPricingRules                                                                      smithy.SchemaExtensions
+	eListPricingRulesAssociatedToPricingPlan                                               smithy.SchemaExtensions
+	eListResourcesAssociatedToCustomLineItem                                               smithy.SchemaExtensions
+	eListTagsForResource                                                                   smithy.SchemaExtensions
+	eTagResource                                                                           smithy.SchemaExtensions
+	eUntagResource                                                                         smithy.SchemaExtensions
+	eUpdateBillingGroup                                                                    smithy.SchemaExtensions
+	eUpdateBillingTransferPreference                                                       smithy.SchemaExtensions
+	eUpdateCustomLineItem                                                                  smithy.SchemaExtensions
+	eUpdatePricingPlan                                                                     smithy.SchemaExtensions
+	eUpdatePricingRule                                                                     smithy.SchemaExtensions
+	e_AWSBillingConductor                                                                  smithy.SchemaExtensions
+	eAccessDeniedException                                                                 smithy.SchemaExtensions
+	eAccessDeniedException_Message                                                         smithy.SchemaExtensions
+	e_AccountAssociationsList                                                              smithy.SchemaExtensions
+	e_AccountAssociationsList_member                                                       smithy.SchemaExtensions
+	eAccountAssociationsListElement                                                        smithy.SchemaExtensions
+	eAccountAssociationsListElement_AccountId                                              smithy.SchemaExtensions
+	eAccountAssociationsListElement_BillingGroupArn                                        smithy.SchemaExtensions
+	eAccountAssociationsListElement_AccountName                                            smithy.SchemaExtensions
+	eAccountAssociationsListElement_AccountEmail                                           smithy.SchemaExtensions
+	e_AccountEmail                                                                         smithy.SchemaExtensions
+	eAccountGrouping                                                                       smithy.SchemaExtensions
+	eAccountGrouping_LinkedAccountIds                                                      smithy.SchemaExtensions
+	eAccountGrouping_AutoAssociate                                                         smithy.SchemaExtensions
+	eAccountGrouping_ResponsibilityTransferArn                                             smithy.SchemaExtensions
+	e_AccountId                                                                            smithy.SchemaExtensions
+	e_AccountIdFilterList                                                                  smithy.SchemaExtensions
+	e_AccountIdFilterList_member                                                           smithy.SchemaExtensions
+	e_AccountIdList                                                                        smithy.SchemaExtensions
+	e_AccountIdList_member                                                                 smithy.SchemaExtensions
+	e_AccountName                                                                          smithy.SchemaExtensions
+	e_Arn                                                                                  smithy.SchemaExtensions
+	eAssociateResourceError                                                                smithy.SchemaExtensions
+	eAssociateResourceError_Message                                                        smithy.SchemaExtensions
+	eAssociateResourceError_Reason                                                         smithy.SchemaExtensions
+	eAssociateResourceErrorReason                                                          smithy.SchemaExtensions
+	eAssociateResourceErrorReason_INVALID_ARN                                              smithy.SchemaExtensions
+	eAssociateResourceErrorReason_SERVICE_LIMIT_EXCEEDED                                   smithy.SchemaExtensions
+	eAssociateResourceErrorReason_ILLEGAL_CUSTOMLINEITEM                                   smithy.SchemaExtensions
+	eAssociateResourceErrorReason_INTERNAL_SERVER_EXCEPTION                                smithy.SchemaExtensions
+	eAssociateResourceErrorReason_INVALID_BILLING_PERIOD_RANGE                             smithy.SchemaExtensions
+	eAssociateResourceResponseElement                                                      smithy.SchemaExtensions
+	eAssociateResourceResponseElement_Arn                                                  smithy.SchemaExtensions
+	eAssociateResourceResponseElement_Error                                                smithy.SchemaExtensions
+	e_AssociateResourcesResponseList                                                       smithy.SchemaExtensions
+	e_AssociateResourcesResponseList_member                                                smithy.SchemaExtensions
+	e_Association                                                                          smithy.SchemaExtensions
+	eAttribute                                                                             smithy.SchemaExtensions
+	eAttribute_Key                                                                         smithy.SchemaExtensions
+	eAttribute_Value                                                                       smithy.SchemaExtensions
+	e_AttributesList                                                                       smithy.SchemaExtensions
+	e_AttributesList_member                                                                smithy.SchemaExtensions
+	e_AttributeValue                                                                       smithy.SchemaExtensions
+	e_AttributeValueList                                                                   smithy.SchemaExtensions
+	e_AttributeValueList_member                                                            smithy.SchemaExtensions
+	eAutoTransferBillingGroupCreationPreference                                            smithy.SchemaExtensions
+	eAutoTransferBillingGroupCreationPreference_Enabled                                    smithy.SchemaExtensions
+	eAutoTransferBillingGroupCreationPreference_PricingPlanArn                             smithy.SchemaExtensions
+	e_AWSCost                                                                              smithy.SchemaExtensions
+	e_BillingEntity                                                                        smithy.SchemaExtensions
+	e_BillingGroupArn                                                                      smithy.SchemaExtensions
+	e_BillingGroupArnList                                                                  smithy.SchemaExtensions
+	e_BillingGroupArnList_member                                                           smithy.SchemaExtensions
+	eBillingGroupCostReportElement                                                         smithy.SchemaExtensions
+	eBillingGroupCostReportElement_Arn                                                     smithy.SchemaExtensions
+	eBillingGroupCostReportElement_AWSCost                                                 smithy.SchemaExtensions
+	eBillingGroupCostReportElement_ProformaCost                                            smithy.SchemaExtensions
+	eBillingGroupCostReportElement_Margin                                                  smithy.SchemaExtensions
+	eBillingGroupCostReportElement_MarginPercentage                                        smithy.SchemaExtensions
+	eBillingGroupCostReportElement_Currency                                                smithy.SchemaExtensions
+	e_BillingGroupCostReportList                                                           smithy.SchemaExtensions
+	e_BillingGroupCostReportList_member                                                    smithy.SchemaExtensions
+	eBillingGroupCostReportResultElement                                                   smithy.SchemaExtensions
+	eBillingGroupCostReportResultElement_Arn                                               smithy.SchemaExtensions
+	eBillingGroupCostReportResultElement_AWSCost                                           smithy.SchemaExtensions
+	eBillingGroupCostReportResultElement_ProformaCost                                      smithy.SchemaExtensions
+	eBillingGroupCostReportResultElement_Margin                                            smithy.SchemaExtensions
+	eBillingGroupCostReportResultElement_MarginPercentage                                  smithy.SchemaExtensions
+	eBillingGroupCostReportResultElement_Currency                                          smithy.SchemaExtensions
+	eBillingGroupCostReportResultElement_Attributes                                        smithy.SchemaExtensions
+	e_BillingGroupCostReportResultsList                                                    smithy.SchemaExtensions
+	e_BillingGroupCostReportResultsList_member                                             smithy.SchemaExtensions
+	e_BillingGroupDescription                                                              smithy.SchemaExtensions
+	e_BillingGroupFullArn                                                                  smithy.SchemaExtensions
+	e_BillingGroupList                                                                     smithy.SchemaExtensions
+	e_BillingGroupList_member                                                              smithy.SchemaExtensions
+	eBillingGroupListElement                                                               smithy.SchemaExtensions
+	eBillingGroupListElement_Name                                                          smithy.SchemaExtensions
+	eBillingGroupListElement_Arn                                                           smithy.SchemaExtensions
+	eBillingGroupListElement_Description                                                   smithy.SchemaExtensions
+	eBillingGroupListElement_PrimaryAccountId                                              smithy.SchemaExtensions
+	eBillingGroupListElement_ComputationPreference                                         smithy.SchemaExtensions
+	eBillingGroupListElement_Size                                                          smithy.SchemaExtensions
+	eBillingGroupListElement_CreationTime                                                  smithy.SchemaExtensions
+	eBillingGroupListElement_LastModifiedTime                                              smithy.SchemaExtensions
+	eBillingGroupListElement_Status                                                        smithy.SchemaExtensions
+	eBillingGroupListElement_StatusReason                                                  smithy.SchemaExtensions
+	eBillingGroupListElement_AccountGrouping                                               smithy.SchemaExtensions
+	eBillingGroupListElement_BillingGroupType                                              smithy.SchemaExtensions
+	e_BillingGroupName                                                                     smithy.SchemaExtensions
+	eBillingGroupStatus                                                                    smithy.SchemaExtensions
+	eBillingGroupStatus_ACTIVE                                                             smithy.SchemaExtensions
+	eBillingGroupStatus_PRIMARY_ACCOUNT_MISSING                                            smithy.SchemaExtensions
+	eBillingGroupStatus_PENDING                                                            smithy.SchemaExtensions
+	e_BillingGroupStatusList                                                               smithy.SchemaExtensions
+	e_BillingGroupStatusList_member                                                        smithy.SchemaExtensions
+	e_BillingGroupStatusReason                                                             smithy.SchemaExtensions
+	eBillingGroupType                                                                      smithy.SchemaExtensions
+	eBillingGroupType_STANDARD                                                             smithy.SchemaExtensions
+	eBillingGroupType_TRANSFER_BILLING                                                     smithy.SchemaExtensions
+	e_BillingGroupTypeList                                                                 smithy.SchemaExtensions
+	e_BillingGroupTypeList_member                                                          smithy.SchemaExtensions
+	e_BillingPeriod                                                                        smithy.SchemaExtensions
+	eBillingPeriodRange                                                                    smithy.SchemaExtensions
+	eBillingPeriodRange_InclusiveStartBillingPeriod                                        smithy.SchemaExtensions
+	eBillingPeriodRange_ExclusiveEndBillingPeriod                                          smithy.SchemaExtensions
+	e_ClientToken                                                                          smithy.SchemaExtensions
+	eComputationPreference                                                                 smithy.SchemaExtensions
+	eComputationPreference_PricingPlanArn                                                  smithy.SchemaExtensions
+	eComputationRuleEnum                                                                   smithy.SchemaExtensions
+	eComputationRuleEnum_ITEMIZED                                                          smithy.SchemaExtensions
+	eComputationRuleEnum_CONSOLIDATED                                                      smithy.SchemaExtensions
+	eConflictException                                                                     smithy.SchemaExtensions
+	eConflictException_Message                                                             smithy.SchemaExtensions
+	eConflictException_ResourceId                                                          smithy.SchemaExtensions
+	eConflictException_ResourceType                                                        smithy.SchemaExtensions
+	eConflictException_Reason                                                              smithy.SchemaExtensions
+	eConflictExceptionReason                                                               smithy.SchemaExtensions
+	eConflictExceptionReason_RESOURCE_NAME_CONFLICT                                        smithy.SchemaExtensions
+	eConflictExceptionReason_PRICING_RULE_IN_PRICING_PLAN_CONFLICT                         smithy.SchemaExtensions
+	eConflictExceptionReason_PRICING_PLAN_ATTACHED_TO_BILLING_GROUP_DELETE_CONFLICT        smithy.SchemaExtensions
+	eConflictExceptionReason_PRICING_PLAN_REFERENCED_BY_PREFERENCE_DELETE_CONFLICT         smithy.SchemaExtensions
+	eConflictExceptionReason_PRICING_RULE_ATTACHED_TO_PRICING_PLAN_DELETE_CONFLICT         smithy.SchemaExtensions
+	eConflictExceptionReason_WRITE_CONFLICT_RETRY                                          smithy.SchemaExtensions
+	eCreateFreeTierConfig                                                                  smithy.SchemaExtensions
+	eCreateFreeTierConfig_Activated                                                        smithy.SchemaExtensions
+	eCreateTieringInput                                                                    smithy.SchemaExtensions
+	eCreateTieringInput_FreeTier                                                           smithy.SchemaExtensions
+	eCreateTieringInput_CustomTiers                                                        smithy.SchemaExtensions
+	e_Currency                                                                             smithy.SchemaExtensions
+	eCurrencyCode                                                                          smithy.SchemaExtensions
+	eCurrencyCode_USD                                                                      smithy.SchemaExtensions
+	eCurrencyCode_CNY                                                                      smithy.SchemaExtensions
+	e_CustomLineItemArn                                                                    smithy.SchemaExtensions
+	e_CustomLineItemArns                                                                   smithy.SchemaExtensions
+	e_CustomLineItemArns_member                                                            smithy.SchemaExtensions
+	e_CustomLineItemAssociationElement                                                     smithy.SchemaExtensions
+	e_CustomLineItemAssociationsList                                                       smithy.SchemaExtensions
+	e_CustomLineItemAssociationsList_member                                                smithy.SchemaExtensions
+	e_CustomLineItemBatchAssociationsList                                                  smithy.SchemaExtensions
+	e_CustomLineItemBatchAssociationsList_member                                           smithy.SchemaExtensions
+	e_CustomLineItemBatchDisassociationsList                                               smithy.SchemaExtensions
+	e_CustomLineItemBatchDisassociationsList_member                                        smithy.SchemaExtensions
+	eCustomLineItemBillingPeriodRange                                                      smithy.SchemaExtensions
+	eCustomLineItemBillingPeriodRange_InclusiveStartBillingPeriod                          smithy.SchemaExtensions
+	eCustomLineItemBillingPeriodRange_ExclusiveEndBillingPeriod                            smithy.SchemaExtensions
+	eCustomLineItemChargeDetails                                                           smithy.SchemaExtensions
+	eCustomLineItemChargeDetails_Flat                                                      smithy.SchemaExtensions
+	eCustomLineItemChargeDetails_Percentage                                                smithy.SchemaExtensions
+	eCustomLineItemChargeDetails_Type                                                      smithy.SchemaExtensions
+	eCustomLineItemChargeDetails_LineItemFilters                                           smithy.SchemaExtensions
+	e_CustomLineItemChargeValue                                                            smithy.SchemaExtensions
+	e_CustomLineItemDescription                                                            smithy.SchemaExtensions
+	eCustomLineItemFlatChargeDetails                                                       smithy.SchemaExtensions
+	eCustomLineItemFlatChargeDetails_ChargeValue                                           smithy.SchemaExtensions
+	e_CustomLineItemList                                                                   smithy.SchemaExtensions
+	e_CustomLineItemList_member                                                            smithy.SchemaExtensions
+	eCustomLineItemListElement                                                             smithy.SchemaExtensions
+	eCustomLineItemListElement_Arn                                                         smithy.SchemaExtensions
+	eCustomLineItemListElement_Name                                                        smithy.SchemaExtensions
+	eCustomLineItemListElement_ChargeDetails                                               smithy.SchemaExtensions
+	eCustomLineItemListElement_CurrencyCode                                                smithy.SchemaExtensions
+	eCustomLineItemListElement_Description                                                 smithy.SchemaExtensions
+	eCustomLineItemListElement_ProductCode                                                 smithy.SchemaExtensions
+	eCustomLineItemListElement_BillingGroupArn                                             smithy.SchemaExtensions
+	eCustomLineItemListElement_CreationTime                                                smithy.SchemaExtensions
+	eCustomLineItemListElement_LastModifiedTime                                            smithy.SchemaExtensions
+	eCustomLineItemListElement_AssociationSize                                             smithy.SchemaExtensions
+	eCustomLineItemListElement_AccountId                                                   smithy.SchemaExtensions
+	eCustomLineItemListElement_ComputationRule                                             smithy.SchemaExtensions
+	eCustomLineItemListElement_PresentationDetails                                         smithy.SchemaExtensions
+	e_CustomLineItemName                                                                   smithy.SchemaExtensions
+	e_CustomLineItemNameList                                                               smithy.SchemaExtensions
+	e_CustomLineItemNameList_member                                                        smithy.SchemaExtensions
+	eCustomLineItemPercentageChargeDetails                                                 smithy.SchemaExtensions
+	eCustomLineItemPercentageChargeDetails_PercentageValue                                 smithy.SchemaExtensions
+	eCustomLineItemPercentageChargeDetails_AssociatedValues                                smithy.SchemaExtensions
+	e_CustomLineItemPercentageChargeValue                                                  smithy.SchemaExtensions
+	e_CustomLineItemProductCode                                                            smithy.SchemaExtensions
+	eCustomLineItemRelationship                                                            smithy.SchemaExtensions
+	eCustomLineItemRelationship_PARENT                                                     smithy.SchemaExtensions
+	eCustomLineItemRelationship_CHILD                                                      smithy.SchemaExtensions
+	eCustomLineItemType                                                                    smithy.SchemaExtensions
+	eCustomLineItemType_CREDIT                                                             smithy.SchemaExtensions
+	eCustomLineItemType_FEE                                                                smithy.SchemaExtensions
+	e_CustomLineItemVersionList                                                            smithy.SchemaExtensions
+	e_CustomLineItemVersionList_member                                                     smithy.SchemaExtensions
+	eCustomLineItemVersionListElement                                                      smithy.SchemaExtensions
+	eCustomLineItemVersionListElement_Name                                                 smithy.SchemaExtensions
+	eCustomLineItemVersionListElement_ChargeDetails                                        smithy.SchemaExtensions
+	eCustomLineItemVersionListElement_CurrencyCode                                         smithy.SchemaExtensions
+	eCustomLineItemVersionListElement_Description                                          smithy.SchemaExtensions
+	eCustomLineItemVersionListElement_ProductCode                                          smithy.SchemaExtensions
+	eCustomLineItemVersionListElement_BillingGroupArn                                      smithy.SchemaExtensions
+	eCustomLineItemVersionListElement_CreationTime                                         smithy.SchemaExtensions
+	eCustomLineItemVersionListElement_LastModifiedTime                                     smithy.SchemaExtensions
+	eCustomLineItemVersionListElement_AssociationSize                                      smithy.SchemaExtensions
+	eCustomLineItemVersionListElement_StartBillingPeriod                                   smithy.SchemaExtensions
+	eCustomLineItemVersionListElement_EndBillingPeriod                                     smithy.SchemaExtensions
+	eCustomLineItemVersionListElement_Arn                                                  smithy.SchemaExtensions
+	eCustomLineItemVersionListElement_StartTime                                            smithy.SchemaExtensions
+	eCustomLineItemVersionListElement_AccountId                                            smithy.SchemaExtensions
+	eCustomLineItemVersionListElement_ComputationRule                                      smithy.SchemaExtensions
+	eCustomLineItemVersionListElement_PresentationDetails                                  smithy.SchemaExtensions
+	eCustomTier                                                                            smithy.SchemaExtensions
+	eCustomTier_BeginRangeInclusive                                                        smithy.SchemaExtensions
+	eCustomTier_EndRangeExclusive                                                          smithy.SchemaExtensions
+	eCustomTier_RateValue                                                                  smithy.SchemaExtensions
+	e_CustomTierBeginRangeInclusive                                                        smithy.SchemaExtensions
+	e_CustomTierEndRangeExclusive                                                          smithy.SchemaExtensions
+	e_CustomTierRateValue                                                                  smithy.SchemaExtensions
+	e_CustomTiersList                                                                      smithy.SchemaExtensions
+	e_CustomTiersList_member                                                               smithy.SchemaExtensions
+	eDisassociateResourceResponseElement                                                   smithy.SchemaExtensions
+	eDisassociateResourceResponseElement_Arn                                               smithy.SchemaExtensions
+	eDisassociateResourceResponseElement_Error                                             smithy.SchemaExtensions
+	e_DisassociateResourcesResponseList                                                    smithy.SchemaExtensions
+	e_DisassociateResourcesResponseList_member                                             smithy.SchemaExtensions
+	eFreeTierConfig                                                                        smithy.SchemaExtensions
+	eFreeTierConfig_Activated                                                              smithy.SchemaExtensions
+	eGroupByAttributeName                                                                  smithy.SchemaExtensions
+	eGroupByAttributeName_PRODUCT_NAME                                                     smithy.SchemaExtensions
+	eGroupByAttributeName_BILLING_PERIOD                                                   smithy.SchemaExtensions
+	e_GroupByAttributesList                                                                smithy.SchemaExtensions
+	e_GroupByAttributesList_member                                                         smithy.SchemaExtensions
+	e_Instant                                                                              smithy.SchemaExtensions
+	eInternalServerException                                                               smithy.SchemaExtensions
+	eInternalServerException_Message                                                       smithy.SchemaExtensions
+	eInternalServerException_RetryAfterSeconds                                             smithy.SchemaExtensions
+	eLineItemFilter                                                                        smithy.SchemaExtensions
+	eLineItemFilter_Attribute                                                              smithy.SchemaExtensions
+	eLineItemFilter_MatchOption                                                            smithy.SchemaExtensions
+	eLineItemFilter_Values                                                                 smithy.SchemaExtensions
+	eLineItemFilter_AttributeValues                                                        smithy.SchemaExtensions
+	eLineItemFilterAttributeName                                                           smithy.SchemaExtensions
+	eLineItemFilterAttributeName_LINE_ITEM_TYPE                                            smithy.SchemaExtensions
+	eLineItemFilterAttributeName_SERVICE                                                   smithy.SchemaExtensions
+	e_LineItemFiltersList                                                                  smithy.SchemaExtensions
+	e_LineItemFiltersList_member                                                           smithy.SchemaExtensions
+	eLineItemFilterValue                                                                   smithy.SchemaExtensions
+	eLineItemFilterValue_SAVINGS_PLAN_NEGATION                                             smithy.SchemaExtensions
+	e_LineItemFilterValuesList                                                             smithy.SchemaExtensions
+	e_LineItemFilterValuesList_member                                                      smithy.SchemaExtensions
+	eListAccountAssociationsFilter                                                         smithy.SchemaExtensions
+	eListAccountAssociationsFilter_Association                                             smithy.SchemaExtensions
+	eListAccountAssociationsFilter_AccountId                                               smithy.SchemaExtensions
+	eListAccountAssociationsFilter_AccountIds                                              smithy.SchemaExtensions
+	eListBillingGroupAccountGrouping                                                       smithy.SchemaExtensions
+	eListBillingGroupAccountGrouping_AutoAssociate                                         smithy.SchemaExtensions
+	eListBillingGroupAccountGrouping_ResponsibilityTransferArn                             smithy.SchemaExtensions
+	eListBillingGroupCostReportsFilter                                                     smithy.SchemaExtensions
+	eListBillingGroupCostReportsFilter_BillingGroupArns                                    smithy.SchemaExtensions
+	eListBillingGroupsFilter                                                               smithy.SchemaExtensions
+	eListBillingGroupsFilter_Arns                                                          smithy.SchemaExtensions
+	eListBillingGroupsFilter_PricingPlan                                                   smithy.SchemaExtensions
+	eListBillingGroupsFilter_Statuses                                                      smithy.SchemaExtensions
+	eListBillingGroupsFilter_AutoAssociate                                                 smithy.SchemaExtensions
+	eListBillingGroupsFilter_PrimaryAccountIds                                             smithy.SchemaExtensions
+	eListBillingGroupsFilter_BillingGroupTypes                                             smithy.SchemaExtensions
+	eListBillingGroupsFilter_Names                                                         smithy.SchemaExtensions
+	eListBillingGroupsFilter_ResponsibilityTransferArns                                    smithy.SchemaExtensions
+	eListCustomLineItemChargeDetails                                                       smithy.SchemaExtensions
+	eListCustomLineItemChargeDetails_Flat                                                  smithy.SchemaExtensions
+	eListCustomLineItemChargeDetails_Percentage                                            smithy.SchemaExtensions
+	eListCustomLineItemChargeDetails_Type                                                  smithy.SchemaExtensions
+	eListCustomLineItemChargeDetails_LineItemFilters                                       smithy.SchemaExtensions
+	eListCustomLineItemFlatChargeDetails                                                   smithy.SchemaExtensions
+	eListCustomLineItemFlatChargeDetails_ChargeValue                                       smithy.SchemaExtensions
+	eListCustomLineItemPercentageChargeDetails                                             smithy.SchemaExtensions
+	eListCustomLineItemPercentageChargeDetails_PercentageValue                             smithy.SchemaExtensions
+	eListCustomLineItemsFilter                                                             smithy.SchemaExtensions
+	eListCustomLineItemsFilter_Names                                                       smithy.SchemaExtensions
+	eListCustomLineItemsFilter_BillingGroups                                               smithy.SchemaExtensions
+	eListCustomLineItemsFilter_Arns                                                        smithy.SchemaExtensions
+	eListCustomLineItemsFilter_AccountIds                                                  smithy.SchemaExtensions
+	eListCustomLineItemVersionsBillingPeriodRangeFilter                                    smithy.SchemaExtensions
+	eListCustomLineItemVersionsBillingPeriodRangeFilter_StartBillingPeriod                 smithy.SchemaExtensions
+	eListCustomLineItemVersionsBillingPeriodRangeFilter_EndBillingPeriod                   smithy.SchemaExtensions
+	eListCustomLineItemVersionsFilter                                                      smithy.SchemaExtensions
+	eListCustomLineItemVersionsFilter_BillingPeriodRange                                   smithy.SchemaExtensions
+	eListPricingPlansFilter                                                                smithy.SchemaExtensions
+	eListPricingPlansFilter_Arns                                                           smithy.SchemaExtensions
+	eListPricingRulesFilter                                                                smithy.SchemaExtensions
+	eListPricingRulesFilter_Arns                                                           smithy.SchemaExtensions
+	eListResourcesAssociatedToCustomLineItemFilter                                         smithy.SchemaExtensions
+	eListResourcesAssociatedToCustomLineItemFilter_Relationship                            smithy.SchemaExtensions
+	eListResourcesAssociatedToCustomLineItemResponseElement                                smithy.SchemaExtensions
+	eListResourcesAssociatedToCustomLineItemResponseElement_Arn                            smithy.SchemaExtensions
+	eListResourcesAssociatedToCustomLineItemResponseElement_Relationship                   smithy.SchemaExtensions
+	eListResourcesAssociatedToCustomLineItemResponseElement_EndBillingPeriod               smithy.SchemaExtensions
+	e_ListResourcesAssociatedToCustomLineItemResponseList                                  smithy.SchemaExtensions
+	e_ListResourcesAssociatedToCustomLineItemResponseList_member                           smithy.SchemaExtensions
+	e_Margin                                                                               smithy.SchemaExtensions
+	e_MarginPercentage                                                                     smithy.SchemaExtensions
+	eMatchOption                                                                           smithy.SchemaExtensions
+	eMatchOption_NOT_EQUAL                                                                 smithy.SchemaExtensions
+	eMatchOption_EQUAL                                                                     smithy.SchemaExtensions
+	e_MaxBillingGroupCostReportResults                                                     smithy.SchemaExtensions
+	e_MaxBillingGroupResults                                                               smithy.SchemaExtensions
+	e_MaxCustomLineItemResults                                                             smithy.SchemaExtensions
+	e_MaxPricingPlanResults                                                                smithy.SchemaExtensions
+	e_MaxPricingRuleResults                                                                smithy.SchemaExtensions
+	e_ModifierPercentage                                                                   smithy.SchemaExtensions
+	e_NumberOfAccounts                                                                     smithy.SchemaExtensions
+	e_NumberOfAssociatedPricingRules                                                       smithy.SchemaExtensions
+	e_NumberOfAssociations                                                                 smithy.SchemaExtensions
+	e_NumberOfPricingPlansAssociatedWith                                                   smithy.SchemaExtensions
+	e_Operation                                                                            smithy.SchemaExtensions
+	ePresentationObject                                                                    smithy.SchemaExtensions
+	ePresentationObject_Service                                                            smithy.SchemaExtensions
+	e_PricingPlanArn                                                                       smithy.SchemaExtensions
+	e_PricingPlanArns                                                                      smithy.SchemaExtensions
+	e_PricingPlanArns_member                                                               smithy.SchemaExtensions
+	e_PricingPlanDescription                                                               smithy.SchemaExtensions
+	e_PricingPlanFullArn                                                                   smithy.SchemaExtensions
+	e_PricingPlanList                                                                      smithy.SchemaExtensions
+	e_PricingPlanList_member                                                               smithy.SchemaExtensions
+	ePricingPlanListElement                                                                smithy.SchemaExtensions
+	ePricingPlanListElement_Name                                                           smithy.SchemaExtensions
+	ePricingPlanListElement_Arn                                                            smithy.SchemaExtensions
+	ePricingPlanListElement_Description                                                    smithy.SchemaExtensions
+	ePricingPlanListElement_Size                                                           smithy.SchemaExtensions
+	ePricingPlanListElement_CreationTime                                                   smithy.SchemaExtensions
+	ePricingPlanListElement_LastModifiedTime                                               smithy.SchemaExtensions
+	e_PricingPlanName                                                                      smithy.SchemaExtensions
+	e_PricingRuleArn                                                                       smithy.SchemaExtensions
+	e_PricingRuleArns                                                                      smithy.SchemaExtensions
+	e_PricingRuleArns_member                                                               smithy.SchemaExtensions
+	e_PricingRuleArnsInput                                                                 smithy.SchemaExtensions
+	e_PricingRuleArnsInput_member                                                          smithy.SchemaExtensions
+	e_PricingRuleArnsNonEmptyInput                                                         smithy.SchemaExtensions
+	e_PricingRuleArnsNonEmptyInput_member                                                  smithy.SchemaExtensions
+	e_PricingRuleDescription                                                               smithy.SchemaExtensions
+	e_PricingRuleList                                                                      smithy.SchemaExtensions
+	e_PricingRuleList_member                                                               smithy.SchemaExtensions
+	ePricingRuleListElement                                                                smithy.SchemaExtensions
+	ePricingRuleListElement_Name                                                           smithy.SchemaExtensions
+	ePricingRuleListElement_Arn                                                            smithy.SchemaExtensions
+	ePricingRuleListElement_Description                                                    smithy.SchemaExtensions
+	ePricingRuleListElement_Scope                                                          smithy.SchemaExtensions
+	ePricingRuleListElement_Type                                                           smithy.SchemaExtensions
+	ePricingRuleListElement_ModifierPercentage                                             smithy.SchemaExtensions
+	ePricingRuleListElement_Service                                                        smithy.SchemaExtensions
+	ePricingRuleListElement_AssociatedPricingPlanCount                                     smithy.SchemaExtensions
+	ePricingRuleListElement_CreationTime                                                   smithy.SchemaExtensions
+	ePricingRuleListElement_LastModifiedTime                                               smithy.SchemaExtensions
+	ePricingRuleListElement_BillingEntity                                                  smithy.SchemaExtensions
+	ePricingRuleListElement_Tiering                                                        smithy.SchemaExtensions
+	ePricingRuleListElement_UsageType                                                      smithy.SchemaExtensions
+	ePricingRuleListElement_Operation                                                      smithy.SchemaExtensions
+	e_PricingRuleName                                                                      smithy.SchemaExtensions
+	ePricingRuleScope                                                                      smithy.SchemaExtensions
+	ePricingRuleScope_GLOBAL                                                               smithy.SchemaExtensions
+	ePricingRuleScope_SERVICE                                                              smithy.SchemaExtensions
+	ePricingRuleScope_BILLING_ENTITY                                                       smithy.SchemaExtensions
+	ePricingRuleScope_SKU                                                                  smithy.SchemaExtensions
+	ePricingRuleType                                                                       smithy.SchemaExtensions
+	ePricingRuleType_MARKUP                                                                smithy.SchemaExtensions
+	ePricingRuleType_DISCOUNT                                                              smithy.SchemaExtensions
+	ePricingRuleType_TIERING                                                               smithy.SchemaExtensions
+	e_PrimaryAccountIdList                                                                 smithy.SchemaExtensions
+	e_PrimaryAccountIdList_member                                                          smithy.SchemaExtensions
+	e_ProformaCost                                                                         smithy.SchemaExtensions
+	eResourceNotFoundException                                                             smithy.SchemaExtensions
+	eResourceNotFoundException_Message                                                     smithy.SchemaExtensions
+	eResourceNotFoundException_ResourceId                                                  smithy.SchemaExtensions
+	eResourceNotFoundException_ResourceType                                                smithy.SchemaExtensions
+	e_ResponsibilityTransferArn                                                            smithy.SchemaExtensions
+	e_ResponsibilityTransferArnsList                                                       smithy.SchemaExtensions
+	e_ResponsibilityTransferArnsList_member                                                smithy.SchemaExtensions
+	e_RetryAfterSeconds                                                                    smithy.SchemaExtensions
+	eSearchOption                                                                          smithy.SchemaExtensions
+	eSearchOption_STARTS_WITH                                                              smithy.SchemaExtensions
+	e_SearchValue                                                                          smithy.SchemaExtensions
+	e_Service                                                                              smithy.SchemaExtensions
+	eServiceLimitExceededException                                                         smithy.SchemaExtensions
+	eServiceLimitExceededException_Message                                                 smithy.SchemaExtensions
+	eServiceLimitExceededException_ResourceId                                              smithy.SchemaExtensions
+	eServiceLimitExceededException_ResourceType                                            smithy.SchemaExtensions
+	eServiceLimitExceededException_LimitCode                                               smithy.SchemaExtensions
+	eServiceLimitExceededException_ServiceCode                                             smithy.SchemaExtensions
+	e_String                                                                               smithy.SchemaExtensions
+	eStringSearch                                                                          smithy.SchemaExtensions
+	eStringSearch_SearchOption                                                             smithy.SchemaExtensions
+	eStringSearch_SearchValue                                                              smithy.SchemaExtensions
+	e_StringSearches                                                                       smithy.SchemaExtensions
+	e_StringSearches_member                                                                smithy.SchemaExtensions
+	e_TagKey                                                                               smithy.SchemaExtensions
+	e_TagKeyList                                                                           smithy.SchemaExtensions
+	e_TagKeyList_member                                                                    smithy.SchemaExtensions
+	e_TagMap                                                                               smithy.SchemaExtensions
+	e_TagMap_key                                                                           smithy.SchemaExtensions
+	e_TagMap_value                                                                         smithy.SchemaExtensions
+	e_TagValue                                                                             smithy.SchemaExtensions
+	eThrottlingException                                                                   smithy.SchemaExtensions
+	eThrottlingException_Message                                                           smithy.SchemaExtensions
+	eThrottlingException_RetryAfterSeconds                                                 smithy.SchemaExtensions
+	eTiering                                                                               smithy.SchemaExtensions
+	eTiering_FreeTier                                                                      smithy.SchemaExtensions
+	eTiering_CustomTiers                                                                   smithy.SchemaExtensions
+	e_TieringActivated                                                                     smithy.SchemaExtensions
+	e_Token                                                                                smithy.SchemaExtensions
+	eUpdateBillingGroupAccountGrouping                                                     smithy.SchemaExtensions
+	eUpdateBillingGroupAccountGrouping_AutoAssociate                                       smithy.SchemaExtensions
+	eUpdateBillingGroupAccountGrouping_ResponsibilityTransferArn                           smithy.SchemaExtensions
+	eUpdateCustomLineItemChargeDetails                                                     smithy.SchemaExtensions
+	eUpdateCustomLineItemChargeDetails_Flat                                                smithy.SchemaExtensions
+	eUpdateCustomLineItemChargeDetails_Percentage                                          smithy.SchemaExtensions
+	eUpdateCustomLineItemChargeDetails_LineItemFilters                                     smithy.SchemaExtensions
+	eUpdateCustomLineItemFlatChargeDetails                                                 smithy.SchemaExtensions
+	eUpdateCustomLineItemFlatChargeDetails_ChargeValue                                     smithy.SchemaExtensions
+	eUpdateCustomLineItemPercentageChargeDetails                                           smithy.SchemaExtensions
+	eUpdateCustomLineItemPercentageChargeDetails_PercentageValue                           smithy.SchemaExtensions
+	eUpdateFreeTierConfig                                                                  smithy.SchemaExtensions
+	eUpdateFreeTierConfig_Activated                                                        smithy.SchemaExtensions
+	eUpdateTieringInput                                                                    smithy.SchemaExtensions
+	eUpdateTieringInput_FreeTier                                                           smithy.SchemaExtensions
+	eUpdateTieringInput_CustomTiers                                                        smithy.SchemaExtensions
+	e_UsageType                                                                            smithy.SchemaExtensions
+	eValidationException                                                                   smithy.SchemaExtensions
+	eValidationException_Message                                                           smithy.SchemaExtensions
+	eValidationException_Reason                                                            smithy.SchemaExtensions
+	eValidationException_Fields                                                            smithy.SchemaExtensions
+	eValidationExceptionField                                                              smithy.SchemaExtensions
+	eValidationExceptionField_Name                                                         smithy.SchemaExtensions
+	eValidationExceptionField_Message                                                      smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                                                         smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member                                                  smithy.SchemaExtensions
+	eValidationExceptionReason                                                             smithy.SchemaExtensions
+	eValidationExceptionReason_UNKNOWN_OPERATION                                           smithy.SchemaExtensions
+	eValidationExceptionReason_CANNOT_PARSE                                                smithy.SchemaExtensions
+	eValidationExceptionReason_FIELD_VALIDATION_FAILED                                     smithy.SchemaExtensions
+	eValidationExceptionReason_OTHER                                                       smithy.SchemaExtensions
+	eValidationExceptionReason_PRIMARY_NOT_ASSOCIATED                                      smithy.SchemaExtensions
+	eValidationExceptionReason_PRIMARY_CANNOT_DISASSOCIATE                                 smithy.SchemaExtensions
+	eValidationExceptionReason_ACCOUNTS_NOT_ASSOCIATED                                     smithy.SchemaExtensions
+	eValidationExceptionReason_ACCOUNTS_ALREADY_ASSOCIATED                                 smithy.SchemaExtensions
+	eValidationExceptionReason_ILLEGAL_PRIMARY_ACCOUNT                                     smithy.SchemaExtensions
+	eValidationExceptionReason_ILLEGAL_ACCOUNTS                                            smithy.SchemaExtensions
+	eValidationExceptionReason_MISMATCHED_BILLINGGROUP_ARN                                 smithy.SchemaExtensions
+	eValidationExceptionReason_MISSING_BILLINGGROUP                                        smithy.SchemaExtensions
+	eValidationExceptionReason_MISMATCHED_CUSTOMLINEITEM_ARN                               smithy.SchemaExtensions
+	eValidationExceptionReason_ILLEGAL_BILLING_PERIOD                                      smithy.SchemaExtensions
+	eValidationExceptionReason_ILLEGAL_BILLING_PERIOD_RANGE                                smithy.SchemaExtensions
+	eValidationExceptionReason_TOO_MANY_ACCOUNTS_IN_REQUEST                                smithy.SchemaExtensions
+	eValidationExceptionReason_DUPLICATE_ACCOUNT                                           smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_BILLING_GROUP_STATUS                                smithy.SchemaExtensions
+	eValidationExceptionReason_MISMATCHED_PRICINGPLAN_ARN                                  smithy.SchemaExtensions
+	eValidationExceptionReason_MISSING_PRICINGPLAN                                         smithy.SchemaExtensions
+	eValidationExceptionReason_MISMATCHED_PRICINGRULE_ARN                                  smithy.SchemaExtensions
+	eValidationExceptionReason_DUPLICATE_PRICINGRULE_ARNS                                  smithy.SchemaExtensions
+	eValidationExceptionReason_MISSING_COSTCATEGORY                                        smithy.SchemaExtensions
+	eValidationExceptionReason_ILLEGAL_EXPRESSION                                          smithy.SchemaExtensions
+	eValidationExceptionReason_ILLEGAL_SCOPE                                               smithy.SchemaExtensions
+	eValidationExceptionReason_ILLEGAL_SERVICE                                             smithy.SchemaExtensions
+	eValidationExceptionReason_PRICINGRULES_NOT_EXIST                                      smithy.SchemaExtensions
+	eValidationExceptionReason_PRICINGRULES_ALREADY_ASSOCIATED                             smithy.SchemaExtensions
+	eValidationExceptionReason_PRICINGRULES_NOT_ASSOCIATED                                 smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_TIME_RANGE                                          smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_BILLINGVIEW_ARN                                     smithy.SchemaExtensions
+	eValidationExceptionReason_MISMATCHED_BILLINGVIEW_ARN                                  smithy.SchemaExtensions
+	eValidationExceptionReason_ILLEGAL_CUSTOMLINEITEM                                      smithy.SchemaExtensions
+	eValidationExceptionReason_MISSING_CUSTOMLINEITEM                                      smithy.SchemaExtensions
+	eValidationExceptionReason_ILLEGAL_CUSTOMLINEITEM_UPDATE                               smithy.SchemaExtensions
+	eValidationExceptionReason_TOO_MANY_CUSTOMLINEITEMS_IN_REQUEST                         smithy.SchemaExtensions
+	eValidationExceptionReason_ILLEGAL_CHARGE_DETAILS                                      smithy.SchemaExtensions
+	eValidationExceptionReason_ILLEGAL_UPDATE_CHARGE_DETAILS                               smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_ARN                                                 smithy.SchemaExtensions
+	eValidationExceptionReason_ILLEGAL_RESOURCE_ARNS                                       smithy.SchemaExtensions
+	eValidationExceptionReason_ILLEGAL_CUSTOMLINEITEM_MODIFICATION                         smithy.SchemaExtensions
+	eValidationExceptionReason_MISSING_LINKED_ACCOUNT_IDS                                  smithy.SchemaExtensions
+	eValidationExceptionReason_MULTIPLE_LINKED_ACCOUNT_IDS                                 smithy.SchemaExtensions
+	eValidationExceptionReason_MISSING_PRICING_PLAN_ARN                                    smithy.SchemaExtensions
+	eValidationExceptionReason_MULTIPLE_PRICING_PLAN_ARN                                   smithy.SchemaExtensions
+	eValidationExceptionReason_ILLEGAL_CHILD_ASSOCIATE_RESOURCE                            smithy.SchemaExtensions
+	eValidationExceptionReason_CUSTOM_LINE_ITEM_ASSOCIATION_EXISTS                         smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_BILLING_GROUP                                       smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_BILLING_PERIOD_FOR_OPERATION                        smithy.SchemaExtensions
+	eValidationExceptionReason_ILLEGAL_BILLING_ENTITY                                      smithy.SchemaExtensions
+	eValidationExceptionReason_ILLEGAL_MODIFIER_PERCENTAGE                                 smithy.SchemaExtensions
+	eValidationExceptionReason_ILLEGAL_TYPE                                                smithy.SchemaExtensions
+	eValidationExceptionReason_ILLEGAL_BILLING_GROUP_TYPE                                  smithy.SchemaExtensions
+	eValidationExceptionReason_ILLEGAL_BILLING_GROUP_PRICING_PLAN                          smithy.SchemaExtensions
+	eValidationExceptionReason_ILLEGAL_ENDED_BILLINGGROUP                                  smithy.SchemaExtensions
+	eValidationExceptionReason_ILLEGAL_TIERING_INPUT                                       smithy.SchemaExtensions
+	eValidationExceptionReason_ILLEGAL_OPERATION                                           smithy.SchemaExtensions
+	eValidationExceptionReason_ILLEGAL_USAGE_TYPE                                          smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_SKU_COMBO                                           smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_FILTER                                              smithy.SchemaExtensions
+	eValidationExceptionReason_TOO_MANY_AUTO_ASSOCIATE_BILLING_GROUPS                      smithy.SchemaExtensions
+	eValidationExceptionReason_CANNOT_DELETE_AUTO_ASSOCIATE_BILLING_GROUP                  smithy.SchemaExtensions
+	eValidationExceptionReason_ILLEGAL_ACCOUNT_ID                                          smithy.SchemaExtensions
+	eValidationExceptionReason_BILLING_GROUP_ALREADY_EXIST_IN_CURRENT_BILLING_PERIOD       smithy.SchemaExtensions
+	eValidationExceptionReason_ILLEGAL_COMPUTATION_RULE                                    smithy.SchemaExtensions
+	eValidationExceptionReason_ILLEGAL_LINE_ITEM_FILTER                                    smithy.SchemaExtensions
+	eAssociateAccountsInput                                                                smithy.SchemaExtensions
+	eAssociateAccountsInput_Arn                                                            smithy.SchemaExtensions
+	eAssociateAccountsInput_AccountIds                                                     smithy.SchemaExtensions
+	eAssociateAccountsOutput                                                               smithy.SchemaExtensions
+	eAssociateAccountsOutput_Arn                                                           smithy.SchemaExtensions
+	eAssociatePricingRulesInput                                                            smithy.SchemaExtensions
+	eAssociatePricingRulesInput_Arn                                                        smithy.SchemaExtensions
+	eAssociatePricingRulesInput_PricingRuleArns                                            smithy.SchemaExtensions
+	eAssociatePricingRulesOutput                                                           smithy.SchemaExtensions
+	eAssociatePricingRulesOutput_Arn                                                       smithy.SchemaExtensions
+	eBatchAssociateResourcesToCustomLineItemInput                                          smithy.SchemaExtensions
+	eBatchAssociateResourcesToCustomLineItemInput_TargetArn                                smithy.SchemaExtensions
+	eBatchAssociateResourcesToCustomLineItemInput_ResourceArns                             smithy.SchemaExtensions
+	eBatchAssociateResourcesToCustomLineItemInput_BillingPeriodRange                       smithy.SchemaExtensions
+	eBatchAssociateResourcesToCustomLineItemOutput                                         smithy.SchemaExtensions
+	eBatchAssociateResourcesToCustomLineItemOutput_SuccessfullyAssociatedResources         smithy.SchemaExtensions
+	eBatchAssociateResourcesToCustomLineItemOutput_FailedAssociatedResources               smithy.SchemaExtensions
+	eBatchDisassociateResourcesFromCustomLineItemInput                                     smithy.SchemaExtensions
+	eBatchDisassociateResourcesFromCustomLineItemInput_TargetArn                           smithy.SchemaExtensions
+	eBatchDisassociateResourcesFromCustomLineItemInput_ResourceArns                        smithy.SchemaExtensions
+	eBatchDisassociateResourcesFromCustomLineItemInput_BillingPeriodRange                  smithy.SchemaExtensions
+	eBatchDisassociateResourcesFromCustomLineItemOutput                                    smithy.SchemaExtensions
+	eBatchDisassociateResourcesFromCustomLineItemOutput_SuccessfullyDisassociatedResources smithy.SchemaExtensions
+	eBatchDisassociateResourcesFromCustomLineItemOutput_FailedDisassociatedResources       smithy.SchemaExtensions
+	eCreateBillingGroupInput                                                               smithy.SchemaExtensions
+	eCreateBillingGroupInput_ClientToken                                                   smithy.SchemaExtensions
+	eCreateBillingGroupInput_Name                                                          smithy.SchemaExtensions
+	eCreateBillingGroupInput_AccountGrouping                                               smithy.SchemaExtensions
+	eCreateBillingGroupInput_ComputationPreference                                         smithy.SchemaExtensions
+	eCreateBillingGroupInput_PrimaryAccountId                                              smithy.SchemaExtensions
+	eCreateBillingGroupInput_Description                                                   smithy.SchemaExtensions
+	eCreateBillingGroupInput_Tags                                                          smithy.SchemaExtensions
+	eCreateBillingGroupOutput                                                              smithy.SchemaExtensions
+	eCreateBillingGroupOutput_Arn                                                          smithy.SchemaExtensions
+	eCreateCustomLineItemInput                                                             smithy.SchemaExtensions
+	eCreateCustomLineItemInput_ClientToken                                                 smithy.SchemaExtensions
+	eCreateCustomLineItemInput_Name                                                        smithy.SchemaExtensions
+	eCreateCustomLineItemInput_Description                                                 smithy.SchemaExtensions
+	eCreateCustomLineItemInput_BillingGroupArn                                             smithy.SchemaExtensions
+	eCreateCustomLineItemInput_BillingPeriodRange                                          smithy.SchemaExtensions
+	eCreateCustomLineItemInput_Tags                                                        smithy.SchemaExtensions
+	eCreateCustomLineItemInput_ChargeDetails                                               smithy.SchemaExtensions
+	eCreateCustomLineItemInput_AccountId                                                   smithy.SchemaExtensions
+	eCreateCustomLineItemInput_ComputationRule                                             smithy.SchemaExtensions
+	eCreateCustomLineItemInput_PresentationDetails                                         smithy.SchemaExtensions
+	eCreateCustomLineItemOutput                                                            smithy.SchemaExtensions
+	eCreateCustomLineItemOutput_Arn                                                        smithy.SchemaExtensions
+	eCreatePricingPlanInput                                                                smithy.SchemaExtensions
+	eCreatePricingPlanInput_ClientToken                                                    smithy.SchemaExtensions
+	eCreatePricingPlanInput_Name                                                           smithy.SchemaExtensions
+	eCreatePricingPlanInput_Description                                                    smithy.SchemaExtensions
+	eCreatePricingPlanInput_PricingRuleArns                                                smithy.SchemaExtensions
+	eCreatePricingPlanInput_Tags                                                           smithy.SchemaExtensions
+	eCreatePricingPlanOutput                                                               smithy.SchemaExtensions
+	eCreatePricingPlanOutput_Arn                                                           smithy.SchemaExtensions
+	eCreatePricingRuleInput                                                                smithy.SchemaExtensions
+	eCreatePricingRuleInput_ClientToken                                                    smithy.SchemaExtensions
+	eCreatePricingRuleInput_Name                                                           smithy.SchemaExtensions
+	eCreatePricingRuleInput_Description                                                    smithy.SchemaExtensions
+	eCreatePricingRuleInput_Scope                                                          smithy.SchemaExtensions
+	eCreatePricingRuleInput_Type                                                           smithy.SchemaExtensions
+	eCreatePricingRuleInput_ModifierPercentage                                             smithy.SchemaExtensions
+	eCreatePricingRuleInput_Service                                                        smithy.SchemaExtensions
+	eCreatePricingRuleInput_Tags                                                           smithy.SchemaExtensions
+	eCreatePricingRuleInput_BillingEntity                                                  smithy.SchemaExtensions
+	eCreatePricingRuleInput_Tiering                                                        smithy.SchemaExtensions
+	eCreatePricingRuleInput_UsageType                                                      smithy.SchemaExtensions
+	eCreatePricingRuleInput_Operation                                                      smithy.SchemaExtensions
+	eCreatePricingRuleOutput                                                               smithy.SchemaExtensions
+	eCreatePricingRuleOutput_Arn                                                           smithy.SchemaExtensions
+	eDeleteBillingGroupInput                                                               smithy.SchemaExtensions
+	eDeleteBillingGroupInput_Arn                                                           smithy.SchemaExtensions
+	eDeleteBillingGroupOutput                                                              smithy.SchemaExtensions
+	eDeleteBillingGroupOutput_Arn                                                          smithy.SchemaExtensions
+	eDeleteCustomLineItemInput                                                             smithy.SchemaExtensions
+	eDeleteCustomLineItemInput_Arn                                                         smithy.SchemaExtensions
+	eDeleteCustomLineItemInput_BillingPeriodRange                                          smithy.SchemaExtensions
+	eDeleteCustomLineItemOutput                                                            smithy.SchemaExtensions
+	eDeleteCustomLineItemOutput_Arn                                                        smithy.SchemaExtensions
+	eDeletePricingPlanInput                                                                smithy.SchemaExtensions
+	eDeletePricingPlanInput_Arn                                                            smithy.SchemaExtensions
+	eDeletePricingPlanOutput                                                               smithy.SchemaExtensions
+	eDeletePricingPlanOutput_Arn                                                           smithy.SchemaExtensions
+	eDeletePricingRuleInput                                                                smithy.SchemaExtensions
+	eDeletePricingRuleInput_Arn                                                            smithy.SchemaExtensions
+	eDeletePricingRuleOutput                                                               smithy.SchemaExtensions
+	eDeletePricingRuleOutput_Arn                                                           smithy.SchemaExtensions
+	eDisassociateAccountsInput                                                             smithy.SchemaExtensions
+	eDisassociateAccountsInput_Arn                                                         smithy.SchemaExtensions
+	eDisassociateAccountsInput_AccountIds                                                  smithy.SchemaExtensions
+	eDisassociateAccountsOutput                                                            smithy.SchemaExtensions
+	eDisassociateAccountsOutput_Arn                                                        smithy.SchemaExtensions
+	eDisassociatePricingRulesInput                                                         smithy.SchemaExtensions
+	eDisassociatePricingRulesInput_Arn                                                     smithy.SchemaExtensions
+	eDisassociatePricingRulesInput_PricingRuleArns                                         smithy.SchemaExtensions
+	eDisassociatePricingRulesOutput                                                        smithy.SchemaExtensions
+	eDisassociatePricingRulesOutput_Arn                                                    smithy.SchemaExtensions
+	eGetBillingGroupCostReportInput                                                        smithy.SchemaExtensions
+	eGetBillingGroupCostReportInput_Arn                                                    smithy.SchemaExtensions
+	eGetBillingGroupCostReportInput_BillingPeriodRange                                     smithy.SchemaExtensions
+	eGetBillingGroupCostReportInput_GroupBy                                                smithy.SchemaExtensions
+	eGetBillingGroupCostReportInput_MaxResults                                             smithy.SchemaExtensions
+	eGetBillingGroupCostReportInput_NextToken                                              smithy.SchemaExtensions
+	eGetBillingGroupCostReportOutput                                                       smithy.SchemaExtensions
+	eGetBillingGroupCostReportOutput_BillingGroupCostReportResults                         smithy.SchemaExtensions
+	eGetBillingGroupCostReportOutput_NextToken                                             smithy.SchemaExtensions
+	eGetBillingTransferPreferenceInput                                                     smithy.SchemaExtensions
+	eGetBillingTransferPreferenceInput_ResponsibilityTransferArn                           smithy.SchemaExtensions
+	eGetBillingTransferPreferenceOutput                                                    smithy.SchemaExtensions
+	eGetBillingTransferPreferenceOutput_ResponsibilityTransferArn                          smithy.SchemaExtensions
+	eGetBillingTransferPreferenceOutput_AutoBillingTransferBillingGroupCreation            smithy.SchemaExtensions
+	eGetBillingTransferPreferenceOutput_LastModifiedTime                                   smithy.SchemaExtensions
+	eListAccountAssociationsInput                                                          smithy.SchemaExtensions
+	eListAccountAssociationsInput_BillingPeriod                                            smithy.SchemaExtensions
+	eListAccountAssociationsInput_Filters                                                  smithy.SchemaExtensions
+	eListAccountAssociationsInput_NextToken                                                smithy.SchemaExtensions
+	eListAccountAssociationsOutput                                                         smithy.SchemaExtensions
+	eListAccountAssociationsOutput_LinkedAccounts                                          smithy.SchemaExtensions
+	eListAccountAssociationsOutput_NextToken                                               smithy.SchemaExtensions
+	eListBillingGroupCostReportsInput                                                      smithy.SchemaExtensions
+	eListBillingGroupCostReportsInput_BillingPeriod                                        smithy.SchemaExtensions
+	eListBillingGroupCostReportsInput_MaxResults                                           smithy.SchemaExtensions
+	eListBillingGroupCostReportsInput_NextToken                                            smithy.SchemaExtensions
+	eListBillingGroupCostReportsInput_Filters                                              smithy.SchemaExtensions
+	eListBillingGroupCostReportsOutput                                                     smithy.SchemaExtensions
+	eListBillingGroupCostReportsOutput_BillingGroupCostReports                             smithy.SchemaExtensions
+	eListBillingGroupCostReportsOutput_NextToken                                           smithy.SchemaExtensions
+	eListBillingGroupsInput                                                                smithy.SchemaExtensions
+	eListBillingGroupsInput_BillingPeriod                                                  smithy.SchemaExtensions
+	eListBillingGroupsInput_MaxResults                                                     smithy.SchemaExtensions
+	eListBillingGroupsInput_NextToken                                                      smithy.SchemaExtensions
+	eListBillingGroupsInput_Filters                                                        smithy.SchemaExtensions
+	eListBillingGroupsOutput                                                               smithy.SchemaExtensions
+	eListBillingGroupsOutput_BillingGroups                                                 smithy.SchemaExtensions
+	eListBillingGroupsOutput_NextToken                                                     smithy.SchemaExtensions
+	eListCustomLineItemsInput                                                              smithy.SchemaExtensions
+	eListCustomLineItemsInput_BillingPeriod                                                smithy.SchemaExtensions
+	eListCustomLineItemsInput_MaxResults                                                   smithy.SchemaExtensions
+	eListCustomLineItemsInput_NextToken                                                    smithy.SchemaExtensions
+	eListCustomLineItemsInput_Filters                                                      smithy.SchemaExtensions
+	eListCustomLineItemsOutput                                                             smithy.SchemaExtensions
+	eListCustomLineItemsOutput_CustomLineItems                                             smithy.SchemaExtensions
+	eListCustomLineItemsOutput_NextToken                                                   smithy.SchemaExtensions
+	eListCustomLineItemVersionsInput                                                       smithy.SchemaExtensions
+	eListCustomLineItemVersionsInput_Arn                                                   smithy.SchemaExtensions
+	eListCustomLineItemVersionsInput_MaxResults                                            smithy.SchemaExtensions
+	eListCustomLineItemVersionsInput_NextToken                                             smithy.SchemaExtensions
+	eListCustomLineItemVersionsInput_Filters                                               smithy.SchemaExtensions
+	eListCustomLineItemVersionsOutput                                                      smithy.SchemaExtensions
+	eListCustomLineItemVersionsOutput_CustomLineItemVersions                               smithy.SchemaExtensions
+	eListCustomLineItemVersionsOutput_NextToken                                            smithy.SchemaExtensions
+	eListPricingPlansAssociatedWithPricingRuleInput                                        smithy.SchemaExtensions
+	eListPricingPlansAssociatedWithPricingRuleInput_BillingPeriod                          smithy.SchemaExtensions
+	eListPricingPlansAssociatedWithPricingRuleInput_PricingRuleArn                         smithy.SchemaExtensions
+	eListPricingPlansAssociatedWithPricingRuleInput_MaxResults                             smithy.SchemaExtensions
+	eListPricingPlansAssociatedWithPricingRuleInput_NextToken                              smithy.SchemaExtensions
+	eListPricingPlansAssociatedWithPricingRuleOutput                                       smithy.SchemaExtensions
+	eListPricingPlansAssociatedWithPricingRuleOutput_BillingPeriod                         smithy.SchemaExtensions
+	eListPricingPlansAssociatedWithPricingRuleOutput_PricingRuleArn                        smithy.SchemaExtensions
+	eListPricingPlansAssociatedWithPricingRuleOutput_PricingPlanArns                       smithy.SchemaExtensions
+	eListPricingPlansAssociatedWithPricingRuleOutput_NextToken                             smithy.SchemaExtensions
+	eListPricingPlansInput                                                                 smithy.SchemaExtensions
+	eListPricingPlansInput_BillingPeriod                                                   smithy.SchemaExtensions
+	eListPricingPlansInput_Filters                                                         smithy.SchemaExtensions
+	eListPricingPlansInput_MaxResults                                                      smithy.SchemaExtensions
+	eListPricingPlansInput_NextToken                                                       smithy.SchemaExtensions
+	eListPricingPlansOutput                                                                smithy.SchemaExtensions
+	eListPricingPlansOutput_BillingPeriod                                                  smithy.SchemaExtensions
+	eListPricingPlansOutput_PricingPlans                                                   smithy.SchemaExtensions
+	eListPricingPlansOutput_NextToken                                                      smithy.SchemaExtensions
+	eListPricingRulesAssociatedToPricingPlanInput                                          smithy.SchemaExtensions
+	eListPricingRulesAssociatedToPricingPlanInput_BillingPeriod                            smithy.SchemaExtensions
+	eListPricingRulesAssociatedToPricingPlanInput_PricingPlanArn                           smithy.SchemaExtensions
+	eListPricingRulesAssociatedToPricingPlanInput_MaxResults                               smithy.SchemaExtensions
+	eListPricingRulesAssociatedToPricingPlanInput_NextToken                                smithy.SchemaExtensions
+	eListPricingRulesAssociatedToPricingPlanOutput                                         smithy.SchemaExtensions
+	eListPricingRulesAssociatedToPricingPlanOutput_BillingPeriod                           smithy.SchemaExtensions
+	eListPricingRulesAssociatedToPricingPlanOutput_PricingPlanArn                          smithy.SchemaExtensions
+	eListPricingRulesAssociatedToPricingPlanOutput_PricingRuleArns                         smithy.SchemaExtensions
+	eListPricingRulesAssociatedToPricingPlanOutput_NextToken                               smithy.SchemaExtensions
+	eListPricingRulesInput                                                                 smithy.SchemaExtensions
+	eListPricingRulesInput_BillingPeriod                                                   smithy.SchemaExtensions
+	eListPricingRulesInput_Filters                                                         smithy.SchemaExtensions
+	eListPricingRulesInput_MaxResults                                                      smithy.SchemaExtensions
+	eListPricingRulesInput_NextToken                                                       smithy.SchemaExtensions
+	eListPricingRulesOutput                                                                smithy.SchemaExtensions
+	eListPricingRulesOutput_BillingPeriod                                                  smithy.SchemaExtensions
+	eListPricingRulesOutput_PricingRules                                                   smithy.SchemaExtensions
+	eListPricingRulesOutput_NextToken                                                      smithy.SchemaExtensions
+	eListResourcesAssociatedToCustomLineItemInput                                          smithy.SchemaExtensions
+	eListResourcesAssociatedToCustomLineItemInput_BillingPeriod                            smithy.SchemaExtensions
+	eListResourcesAssociatedToCustomLineItemInput_Arn                                      smithy.SchemaExtensions
+	eListResourcesAssociatedToCustomLineItemInput_MaxResults                               smithy.SchemaExtensions
+	eListResourcesAssociatedToCustomLineItemInput_NextToken                                smithy.SchemaExtensions
+	eListResourcesAssociatedToCustomLineItemInput_Filters                                  smithy.SchemaExtensions
+	eListResourcesAssociatedToCustomLineItemOutput                                         smithy.SchemaExtensions
+	eListResourcesAssociatedToCustomLineItemOutput_Arn                                     smithy.SchemaExtensions
+	eListResourcesAssociatedToCustomLineItemOutput_AssociatedResources                     smithy.SchemaExtensions
+	eListResourcesAssociatedToCustomLineItemOutput_NextToken                               smithy.SchemaExtensions
+	eListTagsForResourceRequest                                                            smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn                                                smithy.SchemaExtensions
+	eListTagsForResourceResponse                                                           smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                                                      smithy.SchemaExtensions
+	eTagResourceRequest                                                                    smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                                                        smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                                               smithy.SchemaExtensions
+	eTagResourceResponse                                                                   smithy.SchemaExtensions
+	eUntagResourceRequest                                                                  smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                                                      smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                                          smithy.SchemaExtensions
+	eUntagResourceResponse                                                                 smithy.SchemaExtensions
+	eUpdateBillingGroupInput                                                               smithy.SchemaExtensions
+	eUpdateBillingGroupInput_Arn                                                           smithy.SchemaExtensions
+	eUpdateBillingGroupInput_Name                                                          smithy.SchemaExtensions
+	eUpdateBillingGroupInput_Status                                                        smithy.SchemaExtensions
+	eUpdateBillingGroupInput_ComputationPreference                                         smithy.SchemaExtensions
+	eUpdateBillingGroupInput_Description                                                   smithy.SchemaExtensions
+	eUpdateBillingGroupInput_AccountGrouping                                               smithy.SchemaExtensions
+	eUpdateBillingGroupOutput                                                              smithy.SchemaExtensions
+	eUpdateBillingGroupOutput_Arn                                                          smithy.SchemaExtensions
+	eUpdateBillingGroupOutput_Name                                                         smithy.SchemaExtensions
+	eUpdateBillingGroupOutput_Description                                                  smithy.SchemaExtensions
+	eUpdateBillingGroupOutput_PrimaryAccountId                                             smithy.SchemaExtensions
+	eUpdateBillingGroupOutput_PricingPlanArn                                               smithy.SchemaExtensions
+	eUpdateBillingGroupOutput_Size                                                         smithy.SchemaExtensions
+	eUpdateBillingGroupOutput_LastModifiedTime                                             smithy.SchemaExtensions
+	eUpdateBillingGroupOutput_Status                                                       smithy.SchemaExtensions
+	eUpdateBillingGroupOutput_StatusReason                                                 smithy.SchemaExtensions
+	eUpdateBillingGroupOutput_AccountGrouping                                              smithy.SchemaExtensions
+	eUpdateBillingTransferPreferenceInput                                                  smithy.SchemaExtensions
+	eUpdateBillingTransferPreferenceInput_ClientToken                                      smithy.SchemaExtensions
+	eUpdateBillingTransferPreferenceInput_ResponsibilityTransferArn                        smithy.SchemaExtensions
+	eUpdateBillingTransferPreferenceInput_AutoBillingTransferBillingGroupCreation          smithy.SchemaExtensions
+	eUpdateBillingTransferPreferenceOutput                                                 smithy.SchemaExtensions
+	eUpdateBillingTransferPreferenceOutput_ResponsibilityTransferArn                       smithy.SchemaExtensions
+	eUpdateBillingTransferPreferenceOutput_AutoBillingTransferBillingGroupCreation         smithy.SchemaExtensions
+	eUpdateBillingTransferPreferenceOutput_LastModifiedTime                                smithy.SchemaExtensions
+	eUpdateCustomLineItemInput                                                             smithy.SchemaExtensions
+	eUpdateCustomLineItemInput_Arn                                                         smithy.SchemaExtensions
+	eUpdateCustomLineItemInput_Name                                                        smithy.SchemaExtensions
+	eUpdateCustomLineItemInput_Description                                                 smithy.SchemaExtensions
+	eUpdateCustomLineItemInput_ChargeDetails                                               smithy.SchemaExtensions
+	eUpdateCustomLineItemInput_BillingPeriodRange                                          smithy.SchemaExtensions
+	eUpdateCustomLineItemOutput                                                            smithy.SchemaExtensions
+	eUpdateCustomLineItemOutput_Arn                                                        smithy.SchemaExtensions
+	eUpdateCustomLineItemOutput_BillingGroupArn                                            smithy.SchemaExtensions
+	eUpdateCustomLineItemOutput_Name                                                       smithy.SchemaExtensions
+	eUpdateCustomLineItemOutput_Description                                                smithy.SchemaExtensions
+	eUpdateCustomLineItemOutput_ChargeDetails                                              smithy.SchemaExtensions
+	eUpdateCustomLineItemOutput_LastModifiedTime                                           smithy.SchemaExtensions
+	eUpdateCustomLineItemOutput_AssociationSize                                            smithy.SchemaExtensions
+	eUpdatePricingPlanInput                                                                smithy.SchemaExtensions
+	eUpdatePricingPlanInput_Arn                                                            smithy.SchemaExtensions
+	eUpdatePricingPlanInput_Name                                                           smithy.SchemaExtensions
+	eUpdatePricingPlanInput_Description                                                    smithy.SchemaExtensions
+	eUpdatePricingPlanOutput                                                               smithy.SchemaExtensions
+	eUpdatePricingPlanOutput_Arn                                                           smithy.SchemaExtensions
+	eUpdatePricingPlanOutput_Name                                                          smithy.SchemaExtensions
+	eUpdatePricingPlanOutput_Description                                                   smithy.SchemaExtensions
+	eUpdatePricingPlanOutput_Size                                                          smithy.SchemaExtensions
+	eUpdatePricingPlanOutput_LastModifiedTime                                              smithy.SchemaExtensions
+	eUpdatePricingRuleInput                                                                smithy.SchemaExtensions
+	eUpdatePricingRuleInput_Arn                                                            smithy.SchemaExtensions
+	eUpdatePricingRuleInput_Name                                                           smithy.SchemaExtensions
+	eUpdatePricingRuleInput_Description                                                    smithy.SchemaExtensions
+	eUpdatePricingRuleInput_Type                                                           smithy.SchemaExtensions
+	eUpdatePricingRuleInput_ModifierPercentage                                             smithy.SchemaExtensions
+	eUpdatePricingRuleInput_Tiering                                                        smithy.SchemaExtensions
+	eUpdatePricingRuleOutput                                                               smithy.SchemaExtensions
+	eUpdatePricingRuleOutput_Arn                                                           smithy.SchemaExtensions
+	eUpdatePricingRuleOutput_Name                                                          smithy.SchemaExtensions
+	eUpdatePricingRuleOutput_Description                                                   smithy.SchemaExtensions
+	eUpdatePricingRuleOutput_Scope                                                         smithy.SchemaExtensions
+	eUpdatePricingRuleOutput_Type                                                          smithy.SchemaExtensions
+	eUpdatePricingRuleOutput_ModifierPercentage                                            smithy.SchemaExtensions
+	eUpdatePricingRuleOutput_Service                                                       smithy.SchemaExtensions
+	eUpdatePricingRuleOutput_AssociatedPricingPlanCount                                    smithy.SchemaExtensions
+	eUpdatePricingRuleOutput_LastModifiedTime                                              smithy.SchemaExtensions
+	eUpdatePricingRuleOutput_BillingEntity                                                 smithy.SchemaExtensions
+	eUpdatePricingRuleOutput_Tiering                                                       smithy.SchemaExtensions
+	eUpdatePricingRuleOutput_UsageType                                                     smithy.SchemaExtensions
+	eUpdatePricingRuleOutput_Operation                                                     smithy.SchemaExtensions
+)
 
 var (
 	iAssociateAccounts                                      = smithy.ShapeID{Namespace: "com.amazonaws.billingconductor", Name: "AssociateAccounts"}
@@ -615,818 +1425,818 @@ var mUpdatePricingRuleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpd
 	13, 0, 0, 11, 0, 0, 12, 0,
 }}
 
-var sAssociateAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateAccounts, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sAssociatePricingRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatePricingRules, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sBatchAssociateResourcesToCustomLineItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateResourcesToCustomLineItem, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sBatchDisassociateResourcesFromCustomLineItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateResourcesFromCustomLineItem, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sCreateBillingGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBillingGroup, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sCreateCustomLineItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomLineItem, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sCreatePricingPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePricingPlan, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sCreatePricingRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePricingRule, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sDeleteBillingGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBillingGroup, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sDeleteCustomLineItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomLineItem, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sDeletePricingPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePricingPlan, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sDeletePricingRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePricingRule, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sDisassociateAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateAccounts, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sDisassociatePricingRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociatePricingRules, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sGetBillingGroupCostReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBillingGroupCostReport, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sGetBillingTransferPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBillingTransferPreference, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sListAccountAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccountAssociations, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sListBillingGroupCostReports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBillingGroupCostReports, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sListBillingGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBillingGroups, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sListCustomLineItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomLineItems, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var sListCustomLineItemVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomLineItemVersions, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &ext[20]})
-var sListPricingPlans = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingPlans, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &ext[21]})
-var sListPricingPlansAssociatedWithPricingRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingPlansAssociatedWithPricingRule, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &ext[22]})
-var sListPricingRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingRules, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &ext[23]})
-var sListPricingRulesAssociatedToPricingPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingRulesAssociatedToPricingPlan, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &ext[24]})
-var sListResourcesAssociatedToCustomLineItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcesAssociatedToCustomLineItem, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &ext[25]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &ext[26]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &ext[27]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &ext[28]})
-var sUpdateBillingGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBillingGroup, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &ext[29]})
-var sUpdateBillingTransferPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBillingTransferPreference, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &ext[30]})
-var sUpdateCustomLineItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomLineItem, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &ext[31]})
-var sUpdatePricingPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePricingPlan, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &ext[32]})
-var sUpdatePricingRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePricingRule, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &ext[33]})
-var s_AWSBillingConductor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSBillingConductor, Type: smithy.ShapeTypeService, Ext: &ext[34]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t34, Type: smithy.ShapeTypeStructure, Ext: &ext[35]})
-var s_AccountAssociationsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountAssociationsList, Members: &m_AccountAssociationsList, Type: smithy.ShapeTypeList, Ext: &ext[37]})
-var sAccountAssociationsListElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountAssociationsListElement, Members: &mAccountAssociationsListElement, Type: smithy.ShapeTypeStructure, Ext: &ext[39]})
-var s_AccountEmail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountEmail, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var sAccountGrouping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountGrouping, Members: &mAccountGrouping, Type: smithy.ShapeTypeStructure, Ext: &ext[45]})
-var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[49]})
-var s_AccountIdFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountIdFilterList, Members: &m_AccountIdFilterList, Type: smithy.ShapeTypeList, Ext: &ext[50]})
-var s_AccountIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList, Ext: &ext[52]})
-var s_AccountName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountName, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var sAssociateResourceError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResourceError, Members: &mAssociateResourceError, Type: smithy.ShapeTypeStructure, Ext: &ext[56]})
-var sAssociateResourceErrorReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResourceErrorReason, Members: &mAssociateResourceErrorReason, Type: smithy.ShapeTypeEnum, Ext: &ext[59]})
-var sAssociateResourceResponseElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResourceResponseElement, Members: &mAssociateResourceResponseElement, Type: smithy.ShapeTypeStructure, Ext: &ext[65]})
-var s_AssociateResourcesResponseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociateResourcesResponseList, Members: &m_AssociateResourcesResponseList, Type: smithy.ShapeTypeList, Ext: &ext[68]})
-var s_Association = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Association, Type: smithy.ShapeTypeString, Ext: &ext[70]})
-var sAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttribute, Members: &mAttribute, Type: smithy.ShapeTypeStructure, Ext: &ext[71]})
-var s_AttributesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributesList, Members: &m_AttributesList, Type: smithy.ShapeTypeList, Ext: &ext[74]})
-var s_AttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeValue, Type: smithy.ShapeTypeString, Ext: &ext[76]})
-var s_AttributeValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeValueList, Members: &m_AttributeValueList, Type: smithy.ShapeTypeList, Ext: &ext[77]})
-var sAutoTransferBillingGroupCreationPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoTransferBillingGroupCreationPreference, Members: &mAutoTransferBillingGroupCreationPreference, Type: smithy.ShapeTypeStructure, Ext: &ext[79]})
-var s_AWSCost = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSCost, Type: smithy.ShapeTypeString, Ext: &ext[82]})
-var s_BillingEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingEntity, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var s_BillingGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &ext[84]})
-var s_BillingGroupArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingGroupArnList, Members: &m_BillingGroupArnList, Type: smithy.ShapeTypeList, Ext: &ext[85]})
-var sBillingGroupCostReportElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBillingGroupCostReportElement, Members: &mBillingGroupCostReportElement, Type: smithy.ShapeTypeStructure, Ext: &ext[87]})
-var s_BillingGroupCostReportList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingGroupCostReportList, Members: &m_BillingGroupCostReportList, Type: smithy.ShapeTypeList, Ext: &ext[94]})
-var sBillingGroupCostReportResultElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBillingGroupCostReportResultElement, Members: &mBillingGroupCostReportResultElement, Type: smithy.ShapeTypeStructure, Ext: &ext[96]})
-var s_BillingGroupCostReportResultsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingGroupCostReportResultsList, Members: &m_BillingGroupCostReportResultsList, Type: smithy.ShapeTypeList, Ext: &ext[104]})
-var s_BillingGroupDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingGroupDescription, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[106]})
-var s_BillingGroupFullArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingGroupFullArn, Type: smithy.ShapeTypeString, Ext: &ext[107]})
-var s_BillingGroupList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingGroupList, Members: &m_BillingGroupList, Type: smithy.ShapeTypeList, Ext: &ext[108]})
-var sBillingGroupListElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBillingGroupListElement, Members: &mBillingGroupListElement, Type: smithy.ShapeTypeStructure, Ext: &ext[110]})
-var s_BillingGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingGroupName, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[123]})
-var sBillingGroupStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBillingGroupStatus, Members: &mBillingGroupStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[124]})
-var s_BillingGroupStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingGroupStatusList, Members: &m_BillingGroupStatusList, Type: smithy.ShapeTypeList, Ext: &ext[128]})
-var s_BillingGroupStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingGroupStatusReason, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var sBillingGroupType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBillingGroupType, Members: &mBillingGroupType, Type: smithy.ShapeTypeEnum, Ext: &ext[131]})
-var s_BillingGroupTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingGroupTypeList, Members: &m_BillingGroupTypeList, Type: smithy.ShapeTypeList, Ext: &ext[134]})
-var s_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &ext[136]})
-var sBillingPeriodRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBillingPeriodRange, Members: &mBillingPeriodRange, Type: smithy.ShapeTypeStructure, Ext: &ext[137]})
-var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[140]})
-var sComputationPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputationPreference, Members: &mComputationPreference, Type: smithy.ShapeTypeStructure, Ext: &ext[141]})
-var sComputationRuleEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputationRuleEnum, Members: &mComputationRuleEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[143]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &ext[146]})
-var sConflictExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictExceptionReason, Members: &mConflictExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[151]})
-var sCreateFreeTierConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFreeTierConfig, Members: &mCreateFreeTierConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[158]})
-var sCreateTieringInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTieringInput, Members: &mCreateTieringInput, Type: smithy.ShapeTypeStructure, Ext: &ext[160]})
-var s_Currency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Currency, Type: smithy.ShapeTypeString, Ext: &ext[163]})
-var sCurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCurrencyCode, Members: &mCurrencyCode, Type: smithy.ShapeTypeEnum, Ext: &ext[164]})
-var s_CustomLineItemArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &ext[167]})
-var s_CustomLineItemArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemArns, Members: &m_CustomLineItemArns, Type: smithy.ShapeTypeList, Ext: &ext[168]})
-var s_CustomLineItemAssociationElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemAssociationElement, Type: smithy.ShapeTypeString, Ext: &ext[170]})
-var s_CustomLineItemAssociationsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemAssociationsList, Members: &m_CustomLineItemAssociationsList, Type: smithy.ShapeTypeList, Ext: &ext[171]})
-var s_CustomLineItemBatchAssociationsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemBatchAssociationsList, Members: &m_CustomLineItemBatchAssociationsList, Type: smithy.ShapeTypeList, Ext: &ext[173]})
-var s_CustomLineItemBatchDisassociationsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemBatchDisassociationsList, Members: &m_CustomLineItemBatchDisassociationsList, Type: smithy.ShapeTypeList, Ext: &ext[175]})
-var sCustomLineItemBillingPeriodRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomLineItemBillingPeriodRange, Members: &mCustomLineItemBillingPeriodRange, Type: smithy.ShapeTypeStructure, Ext: &ext[177]})
-var sCustomLineItemChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomLineItemChargeDetails, Members: &mCustomLineItemChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[180]})
-var s_CustomLineItemChargeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemChargeValue, Type: smithy.ShapeTypeDouble, Ext: &ext[185]})
-var s_CustomLineItemDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemDescription, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[186]})
-var sCustomLineItemFlatChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomLineItemFlatChargeDetails, Members: &mCustomLineItemFlatChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[187]})
-var s_CustomLineItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemList, Members: &m_CustomLineItemList, Type: smithy.ShapeTypeList, Ext: &ext[189]})
-var sCustomLineItemListElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomLineItemListElement, Members: &mCustomLineItemListElement, Type: smithy.ShapeTypeStructure, Ext: &ext[191]})
-var s_CustomLineItemName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemName, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[205]})
-var s_CustomLineItemNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemNameList, Members: &m_CustomLineItemNameList, Type: smithy.ShapeTypeList, Ext: &ext[206]})
-var sCustomLineItemPercentageChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomLineItemPercentageChargeDetails, Members: &mCustomLineItemPercentageChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[208]})
-var s_CustomLineItemPercentageChargeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemPercentageChargeValue, Type: smithy.ShapeTypeDouble, Ext: &ext[211]})
-var s_CustomLineItemProductCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemProductCode, Type: smithy.ShapeTypeString, Ext: &ext[212]})
-var sCustomLineItemRelationship = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomLineItemRelationship, Members: &mCustomLineItemRelationship, Type: smithy.ShapeTypeEnum, Ext: &ext[213]})
-var sCustomLineItemType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomLineItemType, Members: &mCustomLineItemType, Type: smithy.ShapeTypeEnum, Ext: &ext[216]})
-var s_CustomLineItemVersionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemVersionList, Members: &m_CustomLineItemVersionList, Type: smithy.ShapeTypeList, Ext: &ext[219]})
-var sCustomLineItemVersionListElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomLineItemVersionListElement, Members: &mCustomLineItemVersionListElement, Type: smithy.ShapeTypeStructure, Ext: &ext[221]})
-var sCustomTier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomTier, Members: &mCustomTier, Type: smithy.ShapeTypeStructure, Ext: &ext[238]})
-var s_CustomTierBeginRangeInclusive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomTierBeginRangeInclusive, Type: smithy.ShapeTypeDouble, Ext: &ext[242]})
-var s_CustomTierEndRangeExclusive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomTierEndRangeExclusive, Type: smithy.ShapeTypeDouble, Ext: &ext[243]})
-var s_CustomTierRateValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomTierRateValue, Type: smithy.ShapeTypeDouble, Ext: &ext[244]})
-var s_CustomTiersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomTiersList, Members: &m_CustomTiersList, Type: smithy.ShapeTypeList, Ext: &ext[245]})
-var sDisassociateResourceResponseElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateResourceResponseElement, Members: &mDisassociateResourceResponseElement, Type: smithy.ShapeTypeStructure, Ext: &ext[247]})
-var s_DisassociateResourcesResponseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DisassociateResourcesResponseList, Members: &m_DisassociateResourcesResponseList, Type: smithy.ShapeTypeList, Ext: &ext[250]})
-var sFreeTierConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFreeTierConfig, Members: &mFreeTierConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[252]})
-var sGroupByAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroupByAttributeName, Members: &mGroupByAttributeName, Type: smithy.ShapeTypeEnum, Ext: &ext[254]})
-var s_GroupByAttributesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupByAttributesList, Members: &m_GroupByAttributesList, Type: smithy.ShapeTypeList, Ext: &ext[257]})
-var s_Instant = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &ext[259]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t38, Type: smithy.ShapeTypeStructure, Ext: &ext[260]})
-var sLineItemFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLineItemFilter, Members: &mLineItemFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[263]})
-var sLineItemFilterAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLineItemFilterAttributeName, Members: &mLineItemFilterAttributeName, Type: smithy.ShapeTypeEnum, Ext: &ext[268]})
-var s_LineItemFiltersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LineItemFiltersList, Members: &m_LineItemFiltersList, Type: smithy.ShapeTypeList, Ext: &ext[271]})
-var sLineItemFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLineItemFilterValue, Members: &mLineItemFilterValue, Type: smithy.ShapeTypeEnum, Ext: &ext[273]})
-var s_LineItemFilterValuesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LineItemFilterValuesList, Members: &m_LineItemFilterValuesList, Type: smithy.ShapeTypeList, Ext: &ext[275]})
-var sListAccountAssociationsFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccountAssociationsFilter, Members: &mListAccountAssociationsFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[277]})
-var sListBillingGroupAccountGrouping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBillingGroupAccountGrouping, Members: &mListBillingGroupAccountGrouping, Type: smithy.ShapeTypeStructure, Ext: &ext[281]})
-var sListBillingGroupCostReportsFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBillingGroupCostReportsFilter, Members: &mListBillingGroupCostReportsFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[284]})
-var sListBillingGroupsFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBillingGroupsFilter, Members: &mListBillingGroupsFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[286]})
-var sListCustomLineItemChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomLineItemChargeDetails, Members: &mListCustomLineItemChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[295]})
-var sListCustomLineItemFlatChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomLineItemFlatChargeDetails, Members: &mListCustomLineItemFlatChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[300]})
-var sListCustomLineItemPercentageChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomLineItemPercentageChargeDetails, Members: &mListCustomLineItemPercentageChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[302]})
-var sListCustomLineItemsFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomLineItemsFilter, Members: &mListCustomLineItemsFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[304]})
-var sListCustomLineItemVersionsBillingPeriodRangeFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomLineItemVersionsBillingPeriodRangeFilter, Members: &mListCustomLineItemVersionsBillingPeriodRangeFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[309]})
-var sListCustomLineItemVersionsFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomLineItemVersionsFilter, Members: &mListCustomLineItemVersionsFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[312]})
-var sListPricingPlansFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingPlansFilter, Members: &mListPricingPlansFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[314]})
-var sListPricingRulesFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingRulesFilter, Members: &mListPricingRulesFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[316]})
-var sListResourcesAssociatedToCustomLineItemFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcesAssociatedToCustomLineItemFilter, Members: &mListResourcesAssociatedToCustomLineItemFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[318]})
-var sListResourcesAssociatedToCustomLineItemResponseElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcesAssociatedToCustomLineItemResponseElement, Members: &mListResourcesAssociatedToCustomLineItemResponseElement, Type: smithy.ShapeTypeStructure, Ext: &ext[320]})
-var s_ListResourcesAssociatedToCustomLineItemResponseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListResourcesAssociatedToCustomLineItemResponseList, Members: &m_ListResourcesAssociatedToCustomLineItemResponseList, Type: smithy.ShapeTypeList, Ext: &ext[324]})
-var s_Margin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Margin, Type: smithy.ShapeTypeString, Ext: &ext[326]})
-var s_MarginPercentage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MarginPercentage, Type: smithy.ShapeTypeString, Ext: &ext[327]})
-var sMatchOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMatchOption, Members: &mMatchOption, Type: smithy.ShapeTypeEnum, Ext: &ext[328]})
-var s_MaxBillingGroupCostReportResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxBillingGroupCostReportResults, Type: smithy.ShapeTypeInteger, Ext: &ext[331]})
-var s_MaxBillingGroupResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxBillingGroupResults, Type: smithy.ShapeTypeInteger, Ext: &ext[332]})
-var s_MaxCustomLineItemResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxCustomLineItemResults, Type: smithy.ShapeTypeInteger, Ext: &ext[333]})
-var s_MaxPricingPlanResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxPricingPlanResults, Type: smithy.ShapeTypeInteger, Ext: &ext[334]})
-var s_MaxPricingRuleResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxPricingRuleResults, Type: smithy.ShapeTypeInteger, Ext: &ext[335]})
-var s_ModifierPercentage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ModifierPercentage, Type: smithy.ShapeTypeDouble, Ext: &ext[336]})
-var s_NumberOfAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberOfAccounts, Type: smithy.ShapeTypeLong, Ext: &ext[337]})
-var s_NumberOfAssociatedPricingRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberOfAssociatedPricingRules, Type: smithy.ShapeTypeLong, Ext: &ext[338]})
-var s_NumberOfAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberOfAssociations, Type: smithy.ShapeTypeLong, Ext: &ext[339]})
-var s_NumberOfPricingPlansAssociatedWith = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberOfPricingPlansAssociatedWith, Type: smithy.ShapeTypeLong, Ext: &ext[340]})
-var s_Operation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Operation, Type: smithy.ShapeTypeString, Ext: &ext[341]})
-var sPresentationObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPresentationObject, Members: &mPresentationObject, Type: smithy.ShapeTypeStructure, Ext: &ext[342]})
-var s_PricingPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &ext[344]})
-var s_PricingPlanArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingPlanArns, Members: &m_PricingPlanArns, Type: smithy.ShapeTypeList, Ext: &ext[345]})
-var s_PricingPlanDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingPlanDescription, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[347]})
-var s_PricingPlanFullArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingPlanFullArn, Type: smithy.ShapeTypeString, Ext: &ext[348]})
-var s_PricingPlanList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingPlanList, Members: &m_PricingPlanList, Type: smithy.ShapeTypeList, Ext: &ext[349]})
-var sPricingPlanListElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPricingPlanListElement, Members: &mPricingPlanListElement, Type: smithy.ShapeTypeStructure, Ext: &ext[351]})
-var s_PricingPlanName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingPlanName, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[358]})
-var s_PricingRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingRuleArn, Type: smithy.ShapeTypeString, Ext: &ext[359]})
-var s_PricingRuleArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingRuleArns, Members: &m_PricingRuleArns, Type: smithy.ShapeTypeList, Ext: &ext[360]})
-var s_PricingRuleArnsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingRuleArnsInput, Members: &m_PricingRuleArnsInput, Type: smithy.ShapeTypeList, Ext: &ext[362]})
-var s_PricingRuleArnsNonEmptyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingRuleArnsNonEmptyInput, Members: &m_PricingRuleArnsNonEmptyInput, Type: smithy.ShapeTypeList, Ext: &ext[364]})
-var s_PricingRuleDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingRuleDescription, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[366]})
-var s_PricingRuleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingRuleList, Members: &m_PricingRuleList, Type: smithy.ShapeTypeList, Ext: &ext[367]})
-var sPricingRuleListElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPricingRuleListElement, Members: &mPricingRuleListElement, Type: smithy.ShapeTypeStructure, Ext: &ext[369]})
-var s_PricingRuleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingRuleName, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[384]})
-var sPricingRuleScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPricingRuleScope, Members: &mPricingRuleScope, Type: smithy.ShapeTypeEnum, Ext: &ext[385]})
-var sPricingRuleType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPricingRuleType, Members: &mPricingRuleType, Type: smithy.ShapeTypeEnum, Ext: &ext[390]})
-var s_PrimaryAccountIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrimaryAccountIdList, Members: &m_PrimaryAccountIdList, Type: smithy.ShapeTypeList, Ext: &ext[394]})
-var s_ProformaCost = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProformaCost, Type: smithy.ShapeTypeString, Ext: &ext[396]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &ext[397]})
-var s_ResponsibilityTransferArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResponsibilityTransferArn, Type: smithy.ShapeTypeString, Ext: &ext[401]})
-var s_ResponsibilityTransferArnsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResponsibilityTransferArnsList, Members: &m_ResponsibilityTransferArnsList, Type: smithy.ShapeTypeList, Ext: &ext[402]})
-var s_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetryAfterSeconds, Type: smithy.ShapeTypeInteger, Ext: &ext[404]})
-var sSearchOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchOption, Members: &mSearchOption, Type: smithy.ShapeTypeEnum, Ext: &ext[405]})
-var s_SearchValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchValue, Type: smithy.ShapeTypeString, Ext: &ext[407]})
-var s_Service = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Service, Type: smithy.ShapeTypeString, Ext: &ext[408]})
-var sServiceLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLimitExceededException, Members: &mServiceLimitExceededException, Traits: &t41, Type: smithy.ShapeTypeStructure, Ext: &ext[409]})
-var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[415]})
-var sStringSearch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStringSearch, Members: &mStringSearch, Type: smithy.ShapeTypeStructure, Ext: &ext[416]})
-var s_StringSearches = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringSearches, Members: &m_StringSearches, Type: smithy.ShapeTypeList, Ext: &ext[419]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[421]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[422]})
-var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[424]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[427]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t42, Type: smithy.ShapeTypeStructure, Ext: &ext[428]})
-var sTiering = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTiering, Members: &mTiering, Type: smithy.ShapeTypeStructure, Ext: &ext[431]})
-var s_TieringActivated = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TieringActivated, Type: smithy.ShapeTypeBoolean, Ext: &ext[434]})
-var s_Token = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[435]})
-var sUpdateBillingGroupAccountGrouping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBillingGroupAccountGrouping, Members: &mUpdateBillingGroupAccountGrouping, Type: smithy.ShapeTypeStructure, Ext: &ext[436]})
-var sUpdateCustomLineItemChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomLineItemChargeDetails, Members: &mUpdateCustomLineItemChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[439]})
-var sUpdateCustomLineItemFlatChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomLineItemFlatChargeDetails, Members: &mUpdateCustomLineItemFlatChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[443]})
-var sUpdateCustomLineItemPercentageChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomLineItemPercentageChargeDetails, Members: &mUpdateCustomLineItemPercentageChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[445]})
-var sUpdateFreeTierConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFreeTierConfig, Members: &mUpdateFreeTierConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[447]})
-var sUpdateTieringInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTieringInput, Members: &mUpdateTieringInput, Type: smithy.ShapeTypeStructure, Ext: &ext[449]})
-var s_UsageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UsageType, Type: smithy.ShapeTypeString, Ext: &ext[452]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t43, Type: smithy.ShapeTypeStructure, Ext: &ext[453]})
-var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[457]})
-var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[460]})
-var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[462]})
-var sAssociateAccountsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateAccountsInput, Members: &mAssociateAccountsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[529]})
-var sAssociateAccountsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateAccountsOutput, Members: &mAssociateAccountsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[532]})
-var sAssociatePricingRulesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatePricingRulesInput, Members: &mAssociatePricingRulesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[534]})
-var sAssociatePricingRulesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatePricingRulesOutput, Members: &mAssociatePricingRulesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[537]})
-var sBatchAssociateResourcesToCustomLineItemInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateResourcesToCustomLineItemInput, Members: &mBatchAssociateResourcesToCustomLineItemInput, Type: smithy.ShapeTypeStructure, Ext: &ext[539]})
-var sBatchAssociateResourcesToCustomLineItemOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateResourcesToCustomLineItemOutput, Members: &mBatchAssociateResourcesToCustomLineItemOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[543]})
-var sBatchDisassociateResourcesFromCustomLineItemInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateResourcesFromCustomLineItemInput, Members: &mBatchDisassociateResourcesFromCustomLineItemInput, Type: smithy.ShapeTypeStructure, Ext: &ext[546]})
-var sBatchDisassociateResourcesFromCustomLineItemOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateResourcesFromCustomLineItemOutput, Members: &mBatchDisassociateResourcesFromCustomLineItemOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[550]})
-var sCreateBillingGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBillingGroupInput, Members: &mCreateBillingGroupInput, Type: smithy.ShapeTypeStructure, Ext: &ext[553]})
-var sCreateBillingGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBillingGroupOutput, Members: &mCreateBillingGroupOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[561]})
-var sCreateCustomLineItemInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomLineItemInput, Members: &mCreateCustomLineItemInput, Type: smithy.ShapeTypeStructure, Ext: &ext[563]})
-var sCreateCustomLineItemOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomLineItemOutput, Members: &mCreateCustomLineItemOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[574]})
-var sCreatePricingPlanInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePricingPlanInput, Members: &mCreatePricingPlanInput, Type: smithy.ShapeTypeStructure, Ext: &ext[576]})
-var sCreatePricingPlanOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePricingPlanOutput, Members: &mCreatePricingPlanOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[582]})
-var sCreatePricingRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePricingRuleInput, Members: &mCreatePricingRuleInput, Type: smithy.ShapeTypeStructure, Ext: &ext[584]})
-var sCreatePricingRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePricingRuleOutput, Members: &mCreatePricingRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[597]})
-var sDeleteBillingGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBillingGroupInput, Members: &mDeleteBillingGroupInput, Type: smithy.ShapeTypeStructure, Ext: &ext[599]})
-var sDeleteBillingGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBillingGroupOutput, Members: &mDeleteBillingGroupOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[601]})
-var sDeleteCustomLineItemInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomLineItemInput, Members: &mDeleteCustomLineItemInput, Type: smithy.ShapeTypeStructure, Ext: &ext[603]})
-var sDeleteCustomLineItemOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomLineItemOutput, Members: &mDeleteCustomLineItemOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[606]})
-var sDeletePricingPlanInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePricingPlanInput, Members: &mDeletePricingPlanInput, Type: smithy.ShapeTypeStructure, Ext: &ext[608]})
-var sDeletePricingPlanOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePricingPlanOutput, Members: &mDeletePricingPlanOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[610]})
-var sDeletePricingRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePricingRuleInput, Members: &mDeletePricingRuleInput, Type: smithy.ShapeTypeStructure, Ext: &ext[612]})
-var sDeletePricingRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePricingRuleOutput, Members: &mDeletePricingRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[614]})
-var sDisassociateAccountsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateAccountsInput, Members: &mDisassociateAccountsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[616]})
-var sDisassociateAccountsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateAccountsOutput, Members: &mDisassociateAccountsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[619]})
-var sDisassociatePricingRulesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociatePricingRulesInput, Members: &mDisassociatePricingRulesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[621]})
-var sDisassociatePricingRulesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociatePricingRulesOutput, Members: &mDisassociatePricingRulesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[624]})
-var sGetBillingGroupCostReportInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBillingGroupCostReportInput, Members: &mGetBillingGroupCostReportInput, Type: smithy.ShapeTypeStructure, Ext: &ext[626]})
-var sGetBillingGroupCostReportOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBillingGroupCostReportOutput, Members: &mGetBillingGroupCostReportOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[632]})
-var sGetBillingTransferPreferenceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBillingTransferPreferenceInput, Members: &mGetBillingTransferPreferenceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[635]})
-var sGetBillingTransferPreferenceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBillingTransferPreferenceOutput, Members: &mGetBillingTransferPreferenceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[637]})
-var sListAccountAssociationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccountAssociationsInput, Members: &mListAccountAssociationsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[641]})
-var sListAccountAssociationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccountAssociationsOutput, Members: &mListAccountAssociationsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[645]})
-var sListBillingGroupCostReportsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBillingGroupCostReportsInput, Members: &mListBillingGroupCostReportsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[648]})
-var sListBillingGroupCostReportsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBillingGroupCostReportsOutput, Members: &mListBillingGroupCostReportsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[653]})
-var sListBillingGroupsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBillingGroupsInput, Members: &mListBillingGroupsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[656]})
-var sListBillingGroupsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBillingGroupsOutput, Members: &mListBillingGroupsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[661]})
-var sListCustomLineItemsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomLineItemsInput, Members: &mListCustomLineItemsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[664]})
-var sListCustomLineItemsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomLineItemsOutput, Members: &mListCustomLineItemsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[669]})
-var sListCustomLineItemVersionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomLineItemVersionsInput, Members: &mListCustomLineItemVersionsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[672]})
-var sListCustomLineItemVersionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomLineItemVersionsOutput, Members: &mListCustomLineItemVersionsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[677]})
-var sListPricingPlansAssociatedWithPricingRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingPlansAssociatedWithPricingRuleInput, Members: &mListPricingPlansAssociatedWithPricingRuleInput, Type: smithy.ShapeTypeStructure, Ext: &ext[680]})
-var sListPricingPlansAssociatedWithPricingRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingPlansAssociatedWithPricingRuleOutput, Members: &mListPricingPlansAssociatedWithPricingRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[685]})
-var sListPricingPlansInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingPlansInput, Members: &mListPricingPlansInput, Type: smithy.ShapeTypeStructure, Ext: &ext[690]})
-var sListPricingPlansOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingPlansOutput, Members: &mListPricingPlansOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[695]})
-var sListPricingRulesAssociatedToPricingPlanInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingRulesAssociatedToPricingPlanInput, Members: &mListPricingRulesAssociatedToPricingPlanInput, Type: smithy.ShapeTypeStructure, Ext: &ext[699]})
-var sListPricingRulesAssociatedToPricingPlanOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingRulesAssociatedToPricingPlanOutput, Members: &mListPricingRulesAssociatedToPricingPlanOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[704]})
-var sListPricingRulesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingRulesInput, Members: &mListPricingRulesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[709]})
-var sListPricingRulesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingRulesOutput, Members: &mListPricingRulesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[714]})
-var sListResourcesAssociatedToCustomLineItemInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcesAssociatedToCustomLineItemInput, Members: &mListResourcesAssociatedToCustomLineItemInput, Type: smithy.ShapeTypeStructure, Ext: &ext[718]})
-var sListResourcesAssociatedToCustomLineItemOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcesAssociatedToCustomLineItemOutput, Members: &mListResourcesAssociatedToCustomLineItemOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[724]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[728]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[730]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[732]})
-var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[735]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[736]})
-var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[739]})
-var sUpdateBillingGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBillingGroupInput, Members: &mUpdateBillingGroupInput, Type: smithy.ShapeTypeStructure, Ext: &ext[740]})
-var sUpdateBillingGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBillingGroupOutput, Members: &mUpdateBillingGroupOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[747]})
-var sUpdateBillingTransferPreferenceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBillingTransferPreferenceInput, Members: &mUpdateBillingTransferPreferenceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[758]})
-var sUpdateBillingTransferPreferenceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBillingTransferPreferenceOutput, Members: &mUpdateBillingTransferPreferenceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[762]})
-var sUpdateCustomLineItemInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomLineItemInput, Members: &mUpdateCustomLineItemInput, Type: smithy.ShapeTypeStructure, Ext: &ext[766]})
-var sUpdateCustomLineItemOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomLineItemOutput, Members: &mUpdateCustomLineItemOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[772]})
-var sUpdatePricingPlanInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePricingPlanInput, Members: &mUpdatePricingPlanInput, Type: smithy.ShapeTypeStructure, Ext: &ext[780]})
-var sUpdatePricingPlanOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePricingPlanOutput, Members: &mUpdatePricingPlanOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[784]})
-var sUpdatePricingRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePricingRuleInput, Members: &mUpdatePricingRuleInput, Type: smithy.ShapeTypeStructure, Ext: &ext[790]})
-var sUpdatePricingRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePricingRuleOutput, Members: &mUpdatePricingRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[797]})
+var sAssociateAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateAccounts, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eAssociateAccounts})
+var sAssociatePricingRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatePricingRules, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eAssociatePricingRules})
+var sBatchAssociateResourcesToCustomLineItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateResourcesToCustomLineItem, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eBatchAssociateResourcesToCustomLineItem})
+var sBatchDisassociateResourcesFromCustomLineItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateResourcesFromCustomLineItem, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eBatchDisassociateResourcesFromCustomLineItem})
+var sCreateBillingGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBillingGroup, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreateBillingGroup})
+var sCreateCustomLineItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomLineItem, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eCreateCustomLineItem})
+var sCreatePricingPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePricingPlan, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eCreatePricingPlan})
+var sCreatePricingRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePricingRule, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eCreatePricingRule})
+var sDeleteBillingGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBillingGroup, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDeleteBillingGroup})
+var sDeleteCustomLineItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomLineItem, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eDeleteCustomLineItem})
+var sDeletePricingPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePricingPlan, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eDeletePricingPlan})
+var sDeletePricingRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePricingRule, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eDeletePricingRule})
+var sDisassociateAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateAccounts, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateAccounts})
+var sDisassociatePricingRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociatePricingRules, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eDisassociatePricingRules})
+var sGetBillingGroupCostReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBillingGroupCostReport, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eGetBillingGroupCostReport})
+var sGetBillingTransferPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBillingTransferPreference, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eGetBillingTransferPreference})
+var sListAccountAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccountAssociations, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eListAccountAssociations})
+var sListBillingGroupCostReports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBillingGroupCostReports, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eListBillingGroupCostReports})
+var sListBillingGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBillingGroups, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eListBillingGroups})
+var sListCustomLineItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomLineItems, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eListCustomLineItems})
+var sListCustomLineItemVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomLineItemVersions, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eListCustomLineItemVersions})
+var sListPricingPlans = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingPlans, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eListPricingPlans})
+var sListPricingPlansAssociatedWithPricingRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingPlansAssociatedWithPricingRule, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eListPricingPlansAssociatedWithPricingRule})
+var sListPricingRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingRules, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eListPricingRules})
+var sListPricingRulesAssociatedToPricingPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingRulesAssociatedToPricingPlan, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eListPricingRulesAssociatedToPricingPlan})
+var sListResourcesAssociatedToCustomLineItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcesAssociatedToCustomLineItem, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eListResourcesAssociatedToCustomLineItem})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateBillingGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBillingGroup, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eUpdateBillingGroup})
+var sUpdateBillingTransferPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBillingTransferPreference, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eUpdateBillingTransferPreference})
+var sUpdateCustomLineItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomLineItem, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &eUpdateCustomLineItem})
+var sUpdatePricingPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePricingPlan, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &eUpdatePricingPlan})
+var sUpdatePricingRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePricingRule, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &eUpdatePricingRule})
+var s_AWSBillingConductor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSBillingConductor, Type: smithy.ShapeTypeService, Ext: &e_AWSBillingConductor})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t34, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var s_AccountAssociationsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountAssociationsList, Members: &m_AccountAssociationsList, Type: smithy.ShapeTypeList, Ext: &e_AccountAssociationsList})
+var sAccountAssociationsListElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountAssociationsListElement, Members: &mAccountAssociationsListElement, Type: smithy.ShapeTypeStructure, Ext: &eAccountAssociationsListElement})
+var s_AccountEmail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountEmail, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &e_AccountEmail})
+var sAccountGrouping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountGrouping, Members: &mAccountGrouping, Type: smithy.ShapeTypeStructure, Ext: &eAccountGrouping})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountId})
+var s_AccountIdFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountIdFilterList, Members: &m_AccountIdFilterList, Type: smithy.ShapeTypeList, Ext: &e_AccountIdFilterList})
+var s_AccountIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList, Ext: &e_AccountIdList})
+var s_AccountName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountName, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &e_AccountName})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var sAssociateResourceError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResourceError, Members: &mAssociateResourceError, Type: smithy.ShapeTypeStructure, Ext: &eAssociateResourceError})
+var sAssociateResourceErrorReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResourceErrorReason, Members: &mAssociateResourceErrorReason, Type: smithy.ShapeTypeEnum, Ext: &eAssociateResourceErrorReason})
+var sAssociateResourceResponseElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResourceResponseElement, Members: &mAssociateResourceResponseElement, Type: smithy.ShapeTypeStructure, Ext: &eAssociateResourceResponseElement})
+var s_AssociateResourcesResponseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociateResourcesResponseList, Members: &m_AssociateResourcesResponseList, Type: smithy.ShapeTypeList, Ext: &e_AssociateResourcesResponseList})
+var s_Association = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Association, Type: smithy.ShapeTypeString, Ext: &e_Association})
+var sAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttribute, Members: &mAttribute, Type: smithy.ShapeTypeStructure, Ext: &eAttribute})
+var s_AttributesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributesList, Members: &m_AttributesList, Type: smithy.ShapeTypeList, Ext: &e_AttributesList})
+var s_AttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeValue, Type: smithy.ShapeTypeString, Ext: &e_AttributeValue})
+var s_AttributeValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeValueList, Members: &m_AttributeValueList, Type: smithy.ShapeTypeList, Ext: &e_AttributeValueList})
+var sAutoTransferBillingGroupCreationPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoTransferBillingGroupCreationPreference, Members: &mAutoTransferBillingGroupCreationPreference, Type: smithy.ShapeTypeStructure, Ext: &eAutoTransferBillingGroupCreationPreference})
+var s_AWSCost = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSCost, Type: smithy.ShapeTypeString, Ext: &e_AWSCost})
+var s_BillingEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingEntity, Type: smithy.ShapeTypeString, Ext: &e_BillingEntity})
+var s_BillingGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &e_BillingGroupArn})
+var s_BillingGroupArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingGroupArnList, Members: &m_BillingGroupArnList, Type: smithy.ShapeTypeList, Ext: &e_BillingGroupArnList})
+var sBillingGroupCostReportElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBillingGroupCostReportElement, Members: &mBillingGroupCostReportElement, Type: smithy.ShapeTypeStructure, Ext: &eBillingGroupCostReportElement})
+var s_BillingGroupCostReportList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingGroupCostReportList, Members: &m_BillingGroupCostReportList, Type: smithy.ShapeTypeList, Ext: &e_BillingGroupCostReportList})
+var sBillingGroupCostReportResultElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBillingGroupCostReportResultElement, Members: &mBillingGroupCostReportResultElement, Type: smithy.ShapeTypeStructure, Ext: &eBillingGroupCostReportResultElement})
+var s_BillingGroupCostReportResultsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingGroupCostReportResultsList, Members: &m_BillingGroupCostReportResultsList, Type: smithy.ShapeTypeList, Ext: &e_BillingGroupCostReportResultsList})
+var s_BillingGroupDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingGroupDescription, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &e_BillingGroupDescription})
+var s_BillingGroupFullArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingGroupFullArn, Type: smithy.ShapeTypeString, Ext: &e_BillingGroupFullArn})
+var s_BillingGroupList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingGroupList, Members: &m_BillingGroupList, Type: smithy.ShapeTypeList, Ext: &e_BillingGroupList})
+var sBillingGroupListElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBillingGroupListElement, Members: &mBillingGroupListElement, Type: smithy.ShapeTypeStructure, Ext: &eBillingGroupListElement})
+var s_BillingGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingGroupName, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &e_BillingGroupName})
+var sBillingGroupStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBillingGroupStatus, Members: &mBillingGroupStatus, Type: smithy.ShapeTypeEnum, Ext: &eBillingGroupStatus})
+var s_BillingGroupStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingGroupStatusList, Members: &m_BillingGroupStatusList, Type: smithy.ShapeTypeList, Ext: &e_BillingGroupStatusList})
+var s_BillingGroupStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingGroupStatusReason, Type: smithy.ShapeTypeString, Ext: &e_BillingGroupStatusReason})
+var sBillingGroupType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBillingGroupType, Members: &mBillingGroupType, Type: smithy.ShapeTypeEnum, Ext: &eBillingGroupType})
+var s_BillingGroupTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingGroupTypeList, Members: &m_BillingGroupTypeList, Type: smithy.ShapeTypeList, Ext: &e_BillingGroupTypeList})
+var s_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &e_BillingPeriod})
+var sBillingPeriodRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBillingPeriodRange, Members: &mBillingPeriodRange, Type: smithy.ShapeTypeStructure, Ext: &eBillingPeriodRange})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
+var sComputationPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputationPreference, Members: &mComputationPreference, Type: smithy.ShapeTypeStructure, Ext: &eComputationPreference})
+var sComputationRuleEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputationRuleEnum, Members: &mComputationRuleEnum, Type: smithy.ShapeTypeEnum, Ext: &eComputationRuleEnum})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictExceptionReason, Members: &mConflictExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eConflictExceptionReason})
+var sCreateFreeTierConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFreeTierConfig, Members: &mCreateFreeTierConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateFreeTierConfig})
+var sCreateTieringInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTieringInput, Members: &mCreateTieringInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateTieringInput})
+var s_Currency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Currency, Type: smithy.ShapeTypeString, Ext: &e_Currency})
+var sCurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCurrencyCode, Members: &mCurrencyCode, Type: smithy.ShapeTypeEnum, Ext: &eCurrencyCode})
+var s_CustomLineItemArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &e_CustomLineItemArn})
+var s_CustomLineItemArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemArns, Members: &m_CustomLineItemArns, Type: smithy.ShapeTypeList, Ext: &e_CustomLineItemArns})
+var s_CustomLineItemAssociationElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemAssociationElement, Type: smithy.ShapeTypeString, Ext: &e_CustomLineItemAssociationElement})
+var s_CustomLineItemAssociationsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemAssociationsList, Members: &m_CustomLineItemAssociationsList, Type: smithy.ShapeTypeList, Ext: &e_CustomLineItemAssociationsList})
+var s_CustomLineItemBatchAssociationsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemBatchAssociationsList, Members: &m_CustomLineItemBatchAssociationsList, Type: smithy.ShapeTypeList, Ext: &e_CustomLineItemBatchAssociationsList})
+var s_CustomLineItemBatchDisassociationsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemBatchDisassociationsList, Members: &m_CustomLineItemBatchDisassociationsList, Type: smithy.ShapeTypeList, Ext: &e_CustomLineItemBatchDisassociationsList})
+var sCustomLineItemBillingPeriodRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomLineItemBillingPeriodRange, Members: &mCustomLineItemBillingPeriodRange, Type: smithy.ShapeTypeStructure, Ext: &eCustomLineItemBillingPeriodRange})
+var sCustomLineItemChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomLineItemChargeDetails, Members: &mCustomLineItemChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &eCustomLineItemChargeDetails})
+var s_CustomLineItemChargeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemChargeValue, Type: smithy.ShapeTypeDouble, Ext: &e_CustomLineItemChargeValue})
+var s_CustomLineItemDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemDescription, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &e_CustomLineItemDescription})
+var sCustomLineItemFlatChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomLineItemFlatChargeDetails, Members: &mCustomLineItemFlatChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &eCustomLineItemFlatChargeDetails})
+var s_CustomLineItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemList, Members: &m_CustomLineItemList, Type: smithy.ShapeTypeList, Ext: &e_CustomLineItemList})
+var sCustomLineItemListElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomLineItemListElement, Members: &mCustomLineItemListElement, Type: smithy.ShapeTypeStructure, Ext: &eCustomLineItemListElement})
+var s_CustomLineItemName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemName, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &e_CustomLineItemName})
+var s_CustomLineItemNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemNameList, Members: &m_CustomLineItemNameList, Type: smithy.ShapeTypeList, Ext: &e_CustomLineItemNameList})
+var sCustomLineItemPercentageChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomLineItemPercentageChargeDetails, Members: &mCustomLineItemPercentageChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &eCustomLineItemPercentageChargeDetails})
+var s_CustomLineItemPercentageChargeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemPercentageChargeValue, Type: smithy.ShapeTypeDouble, Ext: &e_CustomLineItemPercentageChargeValue})
+var s_CustomLineItemProductCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemProductCode, Type: smithy.ShapeTypeString, Ext: &e_CustomLineItemProductCode})
+var sCustomLineItemRelationship = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomLineItemRelationship, Members: &mCustomLineItemRelationship, Type: smithy.ShapeTypeEnum, Ext: &eCustomLineItemRelationship})
+var sCustomLineItemType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomLineItemType, Members: &mCustomLineItemType, Type: smithy.ShapeTypeEnum, Ext: &eCustomLineItemType})
+var s_CustomLineItemVersionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomLineItemVersionList, Members: &m_CustomLineItemVersionList, Type: smithy.ShapeTypeList, Ext: &e_CustomLineItemVersionList})
+var sCustomLineItemVersionListElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomLineItemVersionListElement, Members: &mCustomLineItemVersionListElement, Type: smithy.ShapeTypeStructure, Ext: &eCustomLineItemVersionListElement})
+var sCustomTier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomTier, Members: &mCustomTier, Type: smithy.ShapeTypeStructure, Ext: &eCustomTier})
+var s_CustomTierBeginRangeInclusive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomTierBeginRangeInclusive, Type: smithy.ShapeTypeDouble, Ext: &e_CustomTierBeginRangeInclusive})
+var s_CustomTierEndRangeExclusive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomTierEndRangeExclusive, Type: smithy.ShapeTypeDouble, Ext: &e_CustomTierEndRangeExclusive})
+var s_CustomTierRateValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomTierRateValue, Type: smithy.ShapeTypeDouble, Ext: &e_CustomTierRateValue})
+var s_CustomTiersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomTiersList, Members: &m_CustomTiersList, Type: smithy.ShapeTypeList, Ext: &e_CustomTiersList})
+var sDisassociateResourceResponseElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateResourceResponseElement, Members: &mDisassociateResourceResponseElement, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateResourceResponseElement})
+var s_DisassociateResourcesResponseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DisassociateResourcesResponseList, Members: &m_DisassociateResourcesResponseList, Type: smithy.ShapeTypeList, Ext: &e_DisassociateResourcesResponseList})
+var sFreeTierConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFreeTierConfig, Members: &mFreeTierConfig, Type: smithy.ShapeTypeStructure, Ext: &eFreeTierConfig})
+var sGroupByAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroupByAttributeName, Members: &mGroupByAttributeName, Type: smithy.ShapeTypeEnum, Ext: &eGroupByAttributeName})
+var s_GroupByAttributesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupByAttributesList, Members: &m_GroupByAttributesList, Type: smithy.ShapeTypeList, Ext: &e_GroupByAttributesList})
+var s_Instant = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &e_Instant})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t38, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sLineItemFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLineItemFilter, Members: &mLineItemFilter, Type: smithy.ShapeTypeStructure, Ext: &eLineItemFilter})
+var sLineItemFilterAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLineItemFilterAttributeName, Members: &mLineItemFilterAttributeName, Type: smithy.ShapeTypeEnum, Ext: &eLineItemFilterAttributeName})
+var s_LineItemFiltersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LineItemFiltersList, Members: &m_LineItemFiltersList, Type: smithy.ShapeTypeList, Ext: &e_LineItemFiltersList})
+var sLineItemFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLineItemFilterValue, Members: &mLineItemFilterValue, Type: smithy.ShapeTypeEnum, Ext: &eLineItemFilterValue})
+var s_LineItemFilterValuesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LineItemFilterValuesList, Members: &m_LineItemFilterValuesList, Type: smithy.ShapeTypeList, Ext: &e_LineItemFilterValuesList})
+var sListAccountAssociationsFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccountAssociationsFilter, Members: &mListAccountAssociationsFilter, Type: smithy.ShapeTypeStructure, Ext: &eListAccountAssociationsFilter})
+var sListBillingGroupAccountGrouping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBillingGroupAccountGrouping, Members: &mListBillingGroupAccountGrouping, Type: smithy.ShapeTypeStructure, Ext: &eListBillingGroupAccountGrouping})
+var sListBillingGroupCostReportsFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBillingGroupCostReportsFilter, Members: &mListBillingGroupCostReportsFilter, Type: smithy.ShapeTypeStructure, Ext: &eListBillingGroupCostReportsFilter})
+var sListBillingGroupsFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBillingGroupsFilter, Members: &mListBillingGroupsFilter, Type: smithy.ShapeTypeStructure, Ext: &eListBillingGroupsFilter})
+var sListCustomLineItemChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomLineItemChargeDetails, Members: &mListCustomLineItemChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &eListCustomLineItemChargeDetails})
+var sListCustomLineItemFlatChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomLineItemFlatChargeDetails, Members: &mListCustomLineItemFlatChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &eListCustomLineItemFlatChargeDetails})
+var sListCustomLineItemPercentageChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomLineItemPercentageChargeDetails, Members: &mListCustomLineItemPercentageChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &eListCustomLineItemPercentageChargeDetails})
+var sListCustomLineItemsFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomLineItemsFilter, Members: &mListCustomLineItemsFilter, Type: smithy.ShapeTypeStructure, Ext: &eListCustomLineItemsFilter})
+var sListCustomLineItemVersionsBillingPeriodRangeFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomLineItemVersionsBillingPeriodRangeFilter, Members: &mListCustomLineItemVersionsBillingPeriodRangeFilter, Type: smithy.ShapeTypeStructure, Ext: &eListCustomLineItemVersionsBillingPeriodRangeFilter})
+var sListCustomLineItemVersionsFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomLineItemVersionsFilter, Members: &mListCustomLineItemVersionsFilter, Type: smithy.ShapeTypeStructure, Ext: &eListCustomLineItemVersionsFilter})
+var sListPricingPlansFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingPlansFilter, Members: &mListPricingPlansFilter, Type: smithy.ShapeTypeStructure, Ext: &eListPricingPlansFilter})
+var sListPricingRulesFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingRulesFilter, Members: &mListPricingRulesFilter, Type: smithy.ShapeTypeStructure, Ext: &eListPricingRulesFilter})
+var sListResourcesAssociatedToCustomLineItemFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcesAssociatedToCustomLineItemFilter, Members: &mListResourcesAssociatedToCustomLineItemFilter, Type: smithy.ShapeTypeStructure, Ext: &eListResourcesAssociatedToCustomLineItemFilter})
+var sListResourcesAssociatedToCustomLineItemResponseElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcesAssociatedToCustomLineItemResponseElement, Members: &mListResourcesAssociatedToCustomLineItemResponseElement, Type: smithy.ShapeTypeStructure, Ext: &eListResourcesAssociatedToCustomLineItemResponseElement})
+var s_ListResourcesAssociatedToCustomLineItemResponseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListResourcesAssociatedToCustomLineItemResponseList, Members: &m_ListResourcesAssociatedToCustomLineItemResponseList, Type: smithy.ShapeTypeList, Ext: &e_ListResourcesAssociatedToCustomLineItemResponseList})
+var s_Margin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Margin, Type: smithy.ShapeTypeString, Ext: &e_Margin})
+var s_MarginPercentage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MarginPercentage, Type: smithy.ShapeTypeString, Ext: &e_MarginPercentage})
+var sMatchOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMatchOption, Members: &mMatchOption, Type: smithy.ShapeTypeEnum, Ext: &eMatchOption})
+var s_MaxBillingGroupCostReportResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxBillingGroupCostReportResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxBillingGroupCostReportResults})
+var s_MaxBillingGroupResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxBillingGroupResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxBillingGroupResults})
+var s_MaxCustomLineItemResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxCustomLineItemResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxCustomLineItemResults})
+var s_MaxPricingPlanResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxPricingPlanResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxPricingPlanResults})
+var s_MaxPricingRuleResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxPricingRuleResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxPricingRuleResults})
+var s_ModifierPercentage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ModifierPercentage, Type: smithy.ShapeTypeDouble, Ext: &e_ModifierPercentage})
+var s_NumberOfAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberOfAccounts, Type: smithy.ShapeTypeLong, Ext: &e_NumberOfAccounts})
+var s_NumberOfAssociatedPricingRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberOfAssociatedPricingRules, Type: smithy.ShapeTypeLong, Ext: &e_NumberOfAssociatedPricingRules})
+var s_NumberOfAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberOfAssociations, Type: smithy.ShapeTypeLong, Ext: &e_NumberOfAssociations})
+var s_NumberOfPricingPlansAssociatedWith = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberOfPricingPlansAssociatedWith, Type: smithy.ShapeTypeLong, Ext: &e_NumberOfPricingPlansAssociatedWith})
+var s_Operation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Operation, Type: smithy.ShapeTypeString, Ext: &e_Operation})
+var sPresentationObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPresentationObject, Members: &mPresentationObject, Type: smithy.ShapeTypeStructure, Ext: &ePresentationObject})
+var s_PricingPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &e_PricingPlanArn})
+var s_PricingPlanArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingPlanArns, Members: &m_PricingPlanArns, Type: smithy.ShapeTypeList, Ext: &e_PricingPlanArns})
+var s_PricingPlanDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingPlanDescription, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &e_PricingPlanDescription})
+var s_PricingPlanFullArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingPlanFullArn, Type: smithy.ShapeTypeString, Ext: &e_PricingPlanFullArn})
+var s_PricingPlanList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingPlanList, Members: &m_PricingPlanList, Type: smithy.ShapeTypeList, Ext: &e_PricingPlanList})
+var sPricingPlanListElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPricingPlanListElement, Members: &mPricingPlanListElement, Type: smithy.ShapeTypeStructure, Ext: &ePricingPlanListElement})
+var s_PricingPlanName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingPlanName, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &e_PricingPlanName})
+var s_PricingRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingRuleArn, Type: smithy.ShapeTypeString, Ext: &e_PricingRuleArn})
+var s_PricingRuleArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingRuleArns, Members: &m_PricingRuleArns, Type: smithy.ShapeTypeList, Ext: &e_PricingRuleArns})
+var s_PricingRuleArnsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingRuleArnsInput, Members: &m_PricingRuleArnsInput, Type: smithy.ShapeTypeList, Ext: &e_PricingRuleArnsInput})
+var s_PricingRuleArnsNonEmptyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingRuleArnsNonEmptyInput, Members: &m_PricingRuleArnsNonEmptyInput, Type: smithy.ShapeTypeList, Ext: &e_PricingRuleArnsNonEmptyInput})
+var s_PricingRuleDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingRuleDescription, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &e_PricingRuleDescription})
+var s_PricingRuleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingRuleList, Members: &m_PricingRuleList, Type: smithy.ShapeTypeList, Ext: &e_PricingRuleList})
+var sPricingRuleListElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPricingRuleListElement, Members: &mPricingRuleListElement, Type: smithy.ShapeTypeStructure, Ext: &ePricingRuleListElement})
+var s_PricingRuleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingRuleName, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &e_PricingRuleName})
+var sPricingRuleScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPricingRuleScope, Members: &mPricingRuleScope, Type: smithy.ShapeTypeEnum, Ext: &ePricingRuleScope})
+var sPricingRuleType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPricingRuleType, Members: &mPricingRuleType, Type: smithy.ShapeTypeEnum, Ext: &ePricingRuleType})
+var s_PrimaryAccountIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrimaryAccountIdList, Members: &m_PrimaryAccountIdList, Type: smithy.ShapeTypeList, Ext: &e_PrimaryAccountIdList})
+var s_ProformaCost = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProformaCost, Type: smithy.ShapeTypeString, Ext: &e_ProformaCost})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var s_ResponsibilityTransferArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResponsibilityTransferArn, Type: smithy.ShapeTypeString, Ext: &e_ResponsibilityTransferArn})
+var s_ResponsibilityTransferArnsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResponsibilityTransferArnsList, Members: &m_ResponsibilityTransferArnsList, Type: smithy.ShapeTypeList, Ext: &e_ResponsibilityTransferArnsList})
+var s_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetryAfterSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_RetryAfterSeconds})
+var sSearchOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchOption, Members: &mSearchOption, Type: smithy.ShapeTypeEnum, Ext: &eSearchOption})
+var s_SearchValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchValue, Type: smithy.ShapeTypeString, Ext: &e_SearchValue})
+var s_Service = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Service, Type: smithy.ShapeTypeString, Ext: &e_Service})
+var sServiceLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLimitExceededException, Members: &mServiceLimitExceededException, Traits: &t41, Type: smithy.ShapeTypeStructure, Ext: &eServiceLimitExceededException})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var sStringSearch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStringSearch, Members: &mStringSearch, Type: smithy.ShapeTypeStructure, Ext: &eStringSearch})
+var s_StringSearches = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringSearches, Members: &m_StringSearches, Type: smithy.ShapeTypeList, Ext: &e_StringSearches})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t42, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sTiering = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTiering, Members: &mTiering, Type: smithy.ShapeTypeStructure, Ext: &eTiering})
+var s_TieringActivated = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TieringActivated, Type: smithy.ShapeTypeBoolean, Ext: &e_TieringActivated})
+var s_Token = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &e_Token})
+var sUpdateBillingGroupAccountGrouping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBillingGroupAccountGrouping, Members: &mUpdateBillingGroupAccountGrouping, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBillingGroupAccountGrouping})
+var sUpdateCustomLineItemChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomLineItemChargeDetails, Members: &mUpdateCustomLineItemChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCustomLineItemChargeDetails})
+var sUpdateCustomLineItemFlatChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomLineItemFlatChargeDetails, Members: &mUpdateCustomLineItemFlatChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCustomLineItemFlatChargeDetails})
+var sUpdateCustomLineItemPercentageChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomLineItemPercentageChargeDetails, Members: &mUpdateCustomLineItemPercentageChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCustomLineItemPercentageChargeDetails})
+var sUpdateFreeTierConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFreeTierConfig, Members: &mUpdateFreeTierConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateFreeTierConfig})
+var sUpdateTieringInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTieringInput, Members: &mUpdateTieringInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTieringInput})
+var s_UsageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UsageType, Type: smithy.ShapeTypeString, Ext: &e_UsageType})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t43, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
+var sAssociateAccountsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateAccountsInput, Members: &mAssociateAccountsInput, Type: smithy.ShapeTypeStructure, Ext: &eAssociateAccountsInput})
+var sAssociateAccountsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateAccountsOutput, Members: &mAssociateAccountsOutput, Type: smithy.ShapeTypeStructure, Ext: &eAssociateAccountsOutput})
+var sAssociatePricingRulesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatePricingRulesInput, Members: &mAssociatePricingRulesInput, Type: smithy.ShapeTypeStructure, Ext: &eAssociatePricingRulesInput})
+var sAssociatePricingRulesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatePricingRulesOutput, Members: &mAssociatePricingRulesOutput, Type: smithy.ShapeTypeStructure, Ext: &eAssociatePricingRulesOutput})
+var sBatchAssociateResourcesToCustomLineItemInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateResourcesToCustomLineItemInput, Members: &mBatchAssociateResourcesToCustomLineItemInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchAssociateResourcesToCustomLineItemInput})
+var sBatchAssociateResourcesToCustomLineItemOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateResourcesToCustomLineItemOutput, Members: &mBatchAssociateResourcesToCustomLineItemOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchAssociateResourcesToCustomLineItemOutput})
+var sBatchDisassociateResourcesFromCustomLineItemInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateResourcesFromCustomLineItemInput, Members: &mBatchDisassociateResourcesFromCustomLineItemInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchDisassociateResourcesFromCustomLineItemInput})
+var sBatchDisassociateResourcesFromCustomLineItemOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateResourcesFromCustomLineItemOutput, Members: &mBatchDisassociateResourcesFromCustomLineItemOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchDisassociateResourcesFromCustomLineItemOutput})
+var sCreateBillingGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBillingGroupInput, Members: &mCreateBillingGroupInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateBillingGroupInput})
+var sCreateBillingGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBillingGroupOutput, Members: &mCreateBillingGroupOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateBillingGroupOutput})
+var sCreateCustomLineItemInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomLineItemInput, Members: &mCreateCustomLineItemInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateCustomLineItemInput})
+var sCreateCustomLineItemOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomLineItemOutput, Members: &mCreateCustomLineItemOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateCustomLineItemOutput})
+var sCreatePricingPlanInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePricingPlanInput, Members: &mCreatePricingPlanInput, Type: smithy.ShapeTypeStructure, Ext: &eCreatePricingPlanInput})
+var sCreatePricingPlanOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePricingPlanOutput, Members: &mCreatePricingPlanOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreatePricingPlanOutput})
+var sCreatePricingRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePricingRuleInput, Members: &mCreatePricingRuleInput, Type: smithy.ShapeTypeStructure, Ext: &eCreatePricingRuleInput})
+var sCreatePricingRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePricingRuleOutput, Members: &mCreatePricingRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreatePricingRuleOutput})
+var sDeleteBillingGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBillingGroupInput, Members: &mDeleteBillingGroupInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBillingGroupInput})
+var sDeleteBillingGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBillingGroupOutput, Members: &mDeleteBillingGroupOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBillingGroupOutput})
+var sDeleteCustomLineItemInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomLineItemInput, Members: &mDeleteCustomLineItemInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteCustomLineItemInput})
+var sDeleteCustomLineItemOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomLineItemOutput, Members: &mDeleteCustomLineItemOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteCustomLineItemOutput})
+var sDeletePricingPlanInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePricingPlanInput, Members: &mDeletePricingPlanInput, Type: smithy.ShapeTypeStructure, Ext: &eDeletePricingPlanInput})
+var sDeletePricingPlanOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePricingPlanOutput, Members: &mDeletePricingPlanOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeletePricingPlanOutput})
+var sDeletePricingRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePricingRuleInput, Members: &mDeletePricingRuleInput, Type: smithy.ShapeTypeStructure, Ext: &eDeletePricingRuleInput})
+var sDeletePricingRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePricingRuleOutput, Members: &mDeletePricingRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeletePricingRuleOutput})
+var sDisassociateAccountsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateAccountsInput, Members: &mDisassociateAccountsInput, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateAccountsInput})
+var sDisassociateAccountsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateAccountsOutput, Members: &mDisassociateAccountsOutput, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateAccountsOutput})
+var sDisassociatePricingRulesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociatePricingRulesInput, Members: &mDisassociatePricingRulesInput, Type: smithy.ShapeTypeStructure, Ext: &eDisassociatePricingRulesInput})
+var sDisassociatePricingRulesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociatePricingRulesOutput, Members: &mDisassociatePricingRulesOutput, Type: smithy.ShapeTypeStructure, Ext: &eDisassociatePricingRulesOutput})
+var sGetBillingGroupCostReportInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBillingGroupCostReportInput, Members: &mGetBillingGroupCostReportInput, Type: smithy.ShapeTypeStructure, Ext: &eGetBillingGroupCostReportInput})
+var sGetBillingGroupCostReportOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBillingGroupCostReportOutput, Members: &mGetBillingGroupCostReportOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetBillingGroupCostReportOutput})
+var sGetBillingTransferPreferenceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBillingTransferPreferenceInput, Members: &mGetBillingTransferPreferenceInput, Type: smithy.ShapeTypeStructure, Ext: &eGetBillingTransferPreferenceInput})
+var sGetBillingTransferPreferenceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBillingTransferPreferenceOutput, Members: &mGetBillingTransferPreferenceOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetBillingTransferPreferenceOutput})
+var sListAccountAssociationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccountAssociationsInput, Members: &mListAccountAssociationsInput, Type: smithy.ShapeTypeStructure, Ext: &eListAccountAssociationsInput})
+var sListAccountAssociationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccountAssociationsOutput, Members: &mListAccountAssociationsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListAccountAssociationsOutput})
+var sListBillingGroupCostReportsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBillingGroupCostReportsInput, Members: &mListBillingGroupCostReportsInput, Type: smithy.ShapeTypeStructure, Ext: &eListBillingGroupCostReportsInput})
+var sListBillingGroupCostReportsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBillingGroupCostReportsOutput, Members: &mListBillingGroupCostReportsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListBillingGroupCostReportsOutput})
+var sListBillingGroupsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBillingGroupsInput, Members: &mListBillingGroupsInput, Type: smithy.ShapeTypeStructure, Ext: &eListBillingGroupsInput})
+var sListBillingGroupsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBillingGroupsOutput, Members: &mListBillingGroupsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListBillingGroupsOutput})
+var sListCustomLineItemsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomLineItemsInput, Members: &mListCustomLineItemsInput, Type: smithy.ShapeTypeStructure, Ext: &eListCustomLineItemsInput})
+var sListCustomLineItemsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomLineItemsOutput, Members: &mListCustomLineItemsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListCustomLineItemsOutput})
+var sListCustomLineItemVersionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomLineItemVersionsInput, Members: &mListCustomLineItemVersionsInput, Type: smithy.ShapeTypeStructure, Ext: &eListCustomLineItemVersionsInput})
+var sListCustomLineItemVersionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomLineItemVersionsOutput, Members: &mListCustomLineItemVersionsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListCustomLineItemVersionsOutput})
+var sListPricingPlansAssociatedWithPricingRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingPlansAssociatedWithPricingRuleInput, Members: &mListPricingPlansAssociatedWithPricingRuleInput, Type: smithy.ShapeTypeStructure, Ext: &eListPricingPlansAssociatedWithPricingRuleInput})
+var sListPricingPlansAssociatedWithPricingRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingPlansAssociatedWithPricingRuleOutput, Members: &mListPricingPlansAssociatedWithPricingRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &eListPricingPlansAssociatedWithPricingRuleOutput})
+var sListPricingPlansInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingPlansInput, Members: &mListPricingPlansInput, Type: smithy.ShapeTypeStructure, Ext: &eListPricingPlansInput})
+var sListPricingPlansOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingPlansOutput, Members: &mListPricingPlansOutput, Type: smithy.ShapeTypeStructure, Ext: &eListPricingPlansOutput})
+var sListPricingRulesAssociatedToPricingPlanInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingRulesAssociatedToPricingPlanInput, Members: &mListPricingRulesAssociatedToPricingPlanInput, Type: smithy.ShapeTypeStructure, Ext: &eListPricingRulesAssociatedToPricingPlanInput})
+var sListPricingRulesAssociatedToPricingPlanOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingRulesAssociatedToPricingPlanOutput, Members: &mListPricingRulesAssociatedToPricingPlanOutput, Type: smithy.ShapeTypeStructure, Ext: &eListPricingRulesAssociatedToPricingPlanOutput})
+var sListPricingRulesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingRulesInput, Members: &mListPricingRulesInput, Type: smithy.ShapeTypeStructure, Ext: &eListPricingRulesInput})
+var sListPricingRulesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricingRulesOutput, Members: &mListPricingRulesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListPricingRulesOutput})
+var sListResourcesAssociatedToCustomLineItemInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcesAssociatedToCustomLineItemInput, Members: &mListResourcesAssociatedToCustomLineItemInput, Type: smithy.ShapeTypeStructure, Ext: &eListResourcesAssociatedToCustomLineItemInput})
+var sListResourcesAssociatedToCustomLineItemOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcesAssociatedToCustomLineItemOutput, Members: &mListResourcesAssociatedToCustomLineItemOutput, Type: smithy.ShapeTypeStructure, Ext: &eListResourcesAssociatedToCustomLineItemOutput})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateBillingGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBillingGroupInput, Members: &mUpdateBillingGroupInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBillingGroupInput})
+var sUpdateBillingGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBillingGroupOutput, Members: &mUpdateBillingGroupOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBillingGroupOutput})
+var sUpdateBillingTransferPreferenceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBillingTransferPreferenceInput, Members: &mUpdateBillingTransferPreferenceInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBillingTransferPreferenceInput})
+var sUpdateBillingTransferPreferenceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBillingTransferPreferenceOutput, Members: &mUpdateBillingTransferPreferenceOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBillingTransferPreferenceOutput})
+var sUpdateCustomLineItemInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomLineItemInput, Members: &mUpdateCustomLineItemInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCustomLineItemInput})
+var sUpdateCustomLineItemOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomLineItemOutput, Members: &mUpdateCustomLineItemOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCustomLineItemOutput})
+var sUpdatePricingPlanInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePricingPlanInput, Members: &mUpdatePricingPlanInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePricingPlanInput})
+var sUpdatePricingPlanOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePricingPlanOutput, Members: &mUpdatePricingPlanOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePricingPlanOutput})
+var sUpdatePricingRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePricingRuleInput, Members: &mUpdatePricingRuleInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePricingRuleInput})
+var sUpdatePricingRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePricingRuleOutput, Members: &mUpdatePricingRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePricingRuleOutput})
 
-var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var s_AccountAssociationsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccountAssociationsListElement, Members: &mAccountAssociationsListElement, Type: smithy.ShapeTypeStructure, Ext: &ext[38]})
-var sAccountAssociationsListElement_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var sAccountAssociationsListElement_BillingGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingGroupArn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &ext[41]})
-var sAccountAssociationsListElement_AccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountName", ID: &i_AccountName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var sAccountAssociationsListElement_AccountEmail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountEmail", ID: &i_AccountEmail, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[43]})
-var sAccountGrouping_LinkedAccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkedAccountIds", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList, Ext: &ext[46]})
-var sAccountGrouping_AutoAssociate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoAssociate", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[47]})
-var sAccountGrouping_ResponsibilityTransferArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponsibilityTransferArn", ID: &i_ResponsibilityTransferArn, Type: smithy.ShapeTypeString, Ext: &ext[48]})
-var s_AccountIdFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[51]})
-var s_AccountIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[53]})
-var sAssociateResourceError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var sAssociateResourceError_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iAssociateResourceErrorReason, Members: &mAssociateResourceErrorReason, Type: smithy.ShapeTypeEnum, Ext: &ext[58]})
-var sAssociateResourceErrorReason_INVALID_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[60]})
-var sAssociateResourceErrorReason_SERVICE_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[61]})
-var sAssociateResourceErrorReason_ILLEGAL_CUSTOMLINEITEM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_CUSTOMLINEITEM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[62]})
-var sAssociateResourceErrorReason_INTERNAL_SERVER_EXCEPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_SERVER_EXCEPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[63]})
-var sAssociateResourceErrorReason_INVALID_BILLING_PERIOD_RANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_BILLING_PERIOD_RANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[64]})
-var sAssociateResourceResponseElement_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_CustomLineItemAssociationElement, Type: smithy.ShapeTypeString, Ext: &ext[66]})
-var sAssociateResourceResponseElement_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &iAssociateResourceError, Members: &mAssociateResourceError, Type: smithy.ShapeTypeStructure, Ext: &ext[67]})
-var s_AssociateResourcesResponseList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssociateResourceResponseElement, Members: &mAssociateResourceResponseElement, Type: smithy.ShapeTypeStructure, Ext: &ext[69]})
-var sAttribute_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[72]})
-var sAttribute_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[73]})
-var s_AttributesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttribute, Members: &mAttribute, Type: smithy.ShapeTypeStructure, Ext: &ext[75]})
-var s_AttributeValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AttributeValue, Type: smithy.ShapeTypeString, Ext: &ext[78]})
-var sAutoTransferBillingGroupCreationPreference_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[80]})
-var sAutoTransferBillingGroupCreationPreference_PricingPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingPlanArn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &ext[81]})
-var s_BillingGroupArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &ext[86]})
-var sBillingGroupCostReportElement_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &ext[88]})
-var sBillingGroupCostReportElement_AWSCost = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWSCost", ID: &i_AWSCost, Type: smithy.ShapeTypeString, Ext: &ext[89]})
-var sBillingGroupCostReportElement_ProformaCost = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProformaCost", ID: &i_ProformaCost, Type: smithy.ShapeTypeString, Ext: &ext[90]})
-var sBillingGroupCostReportElement_Margin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Margin", ID: &i_Margin, Type: smithy.ShapeTypeString, Ext: &ext[91]})
-var sBillingGroupCostReportElement_MarginPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarginPercentage", ID: &i_MarginPercentage, Type: smithy.ShapeTypeString, Ext: &ext[92]})
-var sBillingGroupCostReportElement_Currency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Currency", ID: &i_Currency, Type: smithy.ShapeTypeString, Ext: &ext[93]})
-var s_BillingGroupCostReportList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBillingGroupCostReportElement, Members: &mBillingGroupCostReportElement, Type: smithy.ShapeTypeStructure, Ext: &ext[95]})
-var sBillingGroupCostReportResultElement_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &ext[97]})
-var sBillingGroupCostReportResultElement_AWSCost = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWSCost", ID: &i_AWSCost, Type: smithy.ShapeTypeString, Ext: &ext[98]})
-var sBillingGroupCostReportResultElement_ProformaCost = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProformaCost", ID: &i_ProformaCost, Type: smithy.ShapeTypeString, Ext: &ext[99]})
-var sBillingGroupCostReportResultElement_Margin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Margin", ID: &i_Margin, Type: smithy.ShapeTypeString, Ext: &ext[100]})
-var sBillingGroupCostReportResultElement_MarginPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarginPercentage", ID: &i_MarginPercentage, Type: smithy.ShapeTypeString, Ext: &ext[101]})
-var sBillingGroupCostReportResultElement_Currency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Currency", ID: &i_Currency, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var sBillingGroupCostReportResultElement_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_AttributesList, Members: &m_AttributesList, Type: smithy.ShapeTypeList, Ext: &ext[103]})
-var s_BillingGroupCostReportResultsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBillingGroupCostReportResultElement, Members: &mBillingGroupCostReportResultElement, Type: smithy.ShapeTypeStructure, Ext: &ext[105]})
-var s_BillingGroupList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBillingGroupListElement, Members: &mBillingGroupListElement, Type: smithy.ShapeTypeStructure, Ext: &ext[109]})
-var sBillingGroupListElement_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_BillingGroupName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[111]})
-var sBillingGroupListElement_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &ext[112]})
-var sBillingGroupListElement_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_BillingGroupDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[113]})
-var sBillingGroupListElement_PrimaryAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[114]})
-var sBillingGroupListElement_ComputationPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputationPreference", ID: &iComputationPreference, Members: &mComputationPreference, Type: smithy.ShapeTypeStructure, Ext: &ext[115]})
-var sBillingGroupListElement_Size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Size", ID: &i_NumberOfAccounts, Type: smithy.ShapeTypeLong, Ext: &ext[116]})
-var sBillingGroupListElement_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &ext[117]})
-var sBillingGroupListElement_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &ext[118]})
-var sBillingGroupListElement_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iBillingGroupStatus, Members: &mBillingGroupStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[119]})
-var sBillingGroupListElement_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &i_BillingGroupStatusReason, Type: smithy.ShapeTypeString, Ext: &ext[120]})
-var sBillingGroupListElement_AccountGrouping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountGrouping", ID: &iListBillingGroupAccountGrouping, Members: &mListBillingGroupAccountGrouping, Type: smithy.ShapeTypeStructure, Ext: &ext[121]})
-var sBillingGroupListElement_BillingGroupType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingGroupType", ID: &iBillingGroupType, Members: &mBillingGroupType, Type: smithy.ShapeTypeEnum, Ext: &ext[122]})
-var sBillingGroupStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[125]})
-var sBillingGroupStatus_PRIMARY_ACCOUNT_MISSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIMARY_ACCOUNT_MISSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var sBillingGroupStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[127]})
-var s_BillingGroupStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBillingGroupStatus, Members: &mBillingGroupStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[129]})
-var sBillingGroupType_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[132]})
-var sBillingGroupType_TRANSFER_BILLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSFER_BILLING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[133]})
-var s_BillingGroupTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBillingGroupType, Members: &mBillingGroupType, Type: smithy.ShapeTypeEnum, Ext: &ext[135]})
-var sBillingPeriodRange_InclusiveStartBillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InclusiveStartBillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var sBillingPeriodRange_ExclusiveEndBillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExclusiveEndBillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &ext[139]})
-var sComputationPreference_PricingPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingPlanArn", ID: &i_PricingPlanFullArn, Type: smithy.ShapeTypeString, Ext: &ext[142]})
-var sComputationRuleEnum_ITEMIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ITEMIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[144]})
-var sComputationRuleEnum_CONSOLIDATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONSOLIDATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[145]})
-var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[147]})
-var sConflictException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[148]})
-var sConflictException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[149]})
-var sConflictException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iConflictExceptionReason, Members: &mConflictExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[150]})
-var sConflictExceptionReason_RESOURCE_NAME_CONFLICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_NAME_CONFLICT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[152]})
-var sConflictExceptionReason_PRICING_RULE_IN_PRICING_PLAN_CONFLICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRICING_RULE_IN_PRICING_PLAN_CONFLICT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[153]})
-var sConflictExceptionReason_PRICING_PLAN_ATTACHED_TO_BILLING_GROUP_DELETE_CONFLICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRICING_PLAN_ATTACHED_TO_BILLING_GROUP_DELETE_CONFLICT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[154]})
-var sConflictExceptionReason_PRICING_PLAN_REFERENCED_BY_PREFERENCE_DELETE_CONFLICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRICING_PLAN_REFERENCED_BY_PREFERENCE_DELETE_CONFLICT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[155]})
-var sConflictExceptionReason_PRICING_RULE_ATTACHED_TO_PRICING_PLAN_DELETE_CONFLICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRICING_RULE_ATTACHED_TO_PRICING_PLAN_DELETE_CONFLICT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[156]})
-var sConflictExceptionReason_WRITE_CONFLICT_RETRY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WRITE_CONFLICT_RETRY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[157]})
-var sCreateFreeTierConfig_Activated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Activated", ID: &i_TieringActivated, Type: smithy.ShapeTypeBoolean, Ext: &ext[159]})
-var sCreateTieringInput_FreeTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FreeTier", ID: &iCreateFreeTierConfig, Members: &mCreateFreeTierConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[161]})
-var sCreateTieringInput_CustomTiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomTiers", ID: &i_CustomTiersList, Members: &m_CustomTiersList, Type: smithy.ShapeTypeList, Ext: &ext[162]})
-var sCurrencyCode_USD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[165]})
-var sCurrencyCode_CNY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CNY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[166]})
-var s_CustomLineItemArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &ext[169]})
-var s_CustomLineItemAssociationsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CustomLineItemAssociationElement, Type: smithy.ShapeTypeString, Ext: &ext[172]})
-var s_CustomLineItemBatchAssociationsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CustomLineItemAssociationElement, Type: smithy.ShapeTypeString, Ext: &ext[174]})
-var s_CustomLineItemBatchDisassociationsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CustomLineItemAssociationElement, Type: smithy.ShapeTypeString, Ext: &ext[176]})
-var sCustomLineItemBillingPeriodRange_InclusiveStartBillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InclusiveStartBillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &ext[178]})
-var sCustomLineItemBillingPeriodRange_ExclusiveEndBillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExclusiveEndBillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &ext[179]})
-var sCustomLineItemChargeDetails_Flat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Flat", ID: &iCustomLineItemFlatChargeDetails, Members: &mCustomLineItemFlatChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[181]})
-var sCustomLineItemChargeDetails_Percentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Percentage", ID: &iCustomLineItemPercentageChargeDetails, Members: &mCustomLineItemPercentageChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[182]})
-var sCustomLineItemChargeDetails_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iCustomLineItemType, Members: &mCustomLineItemType, Type: smithy.ShapeTypeEnum, Ext: &ext[183]})
-var sCustomLineItemChargeDetails_LineItemFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LineItemFilters", ID: &i_LineItemFiltersList, Members: &m_LineItemFiltersList, Type: smithy.ShapeTypeList, Ext: &ext[184]})
-var sCustomLineItemFlatChargeDetails_ChargeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChargeValue", ID: &i_CustomLineItemChargeValue, Type: smithy.ShapeTypeDouble, Ext: &ext[188]})
-var s_CustomLineItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomLineItemListElement, Members: &mCustomLineItemListElement, Type: smithy.ShapeTypeStructure, Ext: &ext[190]})
-var sCustomLineItemListElement_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &ext[192]})
-var sCustomLineItemListElement_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CustomLineItemName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[193]})
-var sCustomLineItemListElement_ChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChargeDetails", ID: &iListCustomLineItemChargeDetails, Members: &mListCustomLineItemChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[194]})
-var sCustomLineItemListElement_CurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrencyCode", ID: &iCurrencyCode, Members: &mCurrencyCode, Type: smithy.ShapeTypeEnum, Ext: &ext[195]})
-var sCustomLineItemListElement_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_CustomLineItemDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[196]})
-var sCustomLineItemListElement_ProductCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductCode", ID: &i_CustomLineItemProductCode, Type: smithy.ShapeTypeString, Ext: &ext[197]})
-var sCustomLineItemListElement_BillingGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingGroupArn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &ext[198]})
-var sCustomLineItemListElement_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &ext[199]})
-var sCustomLineItemListElement_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &ext[200]})
-var sCustomLineItemListElement_AssociationSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociationSize", ID: &i_NumberOfAssociations, Type: smithy.ShapeTypeLong, Ext: &ext[201]})
-var sCustomLineItemListElement_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[202]})
-var sCustomLineItemListElement_ComputationRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputationRule", ID: &iComputationRuleEnum, Members: &mComputationRuleEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[203]})
-var sCustomLineItemListElement_PresentationDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PresentationDetails", ID: &iPresentationObject, Members: &mPresentationObject, Type: smithy.ShapeTypeStructure, Ext: &ext[204]})
-var s_CustomLineItemNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CustomLineItemName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[207]})
-var sCustomLineItemPercentageChargeDetails_PercentageValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentageValue", ID: &i_CustomLineItemPercentageChargeValue, Type: smithy.ShapeTypeDouble, Ext: &ext[209]})
-var sCustomLineItemPercentageChargeDetails_AssociatedValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedValues", ID: &i_CustomLineItemAssociationsList, Members: &m_CustomLineItemAssociationsList, Type: smithy.ShapeTypeList, Ext: &ext[210]})
-var sCustomLineItemRelationship_PARENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[214]})
-var sCustomLineItemRelationship_CHILD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHILD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[215]})
-var sCustomLineItemType_CREDIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREDIT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[217]})
-var sCustomLineItemType_FEE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FEE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[218]})
-var s_CustomLineItemVersionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomLineItemVersionListElement, Members: &mCustomLineItemVersionListElement, Type: smithy.ShapeTypeStructure, Ext: &ext[220]})
-var sCustomLineItemVersionListElement_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CustomLineItemName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[222]})
-var sCustomLineItemVersionListElement_ChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChargeDetails", ID: &iListCustomLineItemChargeDetails, Members: &mListCustomLineItemChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[223]})
-var sCustomLineItemVersionListElement_CurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrencyCode", ID: &iCurrencyCode, Members: &mCurrencyCode, Type: smithy.ShapeTypeEnum, Ext: &ext[224]})
-var sCustomLineItemVersionListElement_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_CustomLineItemDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[225]})
-var sCustomLineItemVersionListElement_ProductCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductCode", ID: &i_CustomLineItemProductCode, Type: smithy.ShapeTypeString, Ext: &ext[226]})
-var sCustomLineItemVersionListElement_BillingGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingGroupArn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &ext[227]})
-var sCustomLineItemVersionListElement_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &ext[228]})
-var sCustomLineItemVersionListElement_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &ext[229]})
-var sCustomLineItemVersionListElement_AssociationSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociationSize", ID: &i_NumberOfAssociations, Type: smithy.ShapeTypeLong, Ext: &ext[230]})
-var sCustomLineItemVersionListElement_StartBillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartBillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &ext[231]})
-var sCustomLineItemVersionListElement_EndBillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndBillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &ext[232]})
-var sCustomLineItemVersionListElement_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &ext[233]})
-var sCustomLineItemVersionListElement_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &ext[234]})
-var sCustomLineItemVersionListElement_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[235]})
-var sCustomLineItemVersionListElement_ComputationRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputationRule", ID: &iComputationRuleEnum, Members: &mComputationRuleEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[236]})
-var sCustomLineItemVersionListElement_PresentationDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PresentationDetails", ID: &iPresentationObject, Members: &mPresentationObject, Type: smithy.ShapeTypeStructure, Ext: &ext[237]})
-var sCustomTier_BeginRangeInclusive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeginRangeInclusive", ID: &i_CustomTierBeginRangeInclusive, Type: smithy.ShapeTypeDouble, Ext: &ext[239]})
-var sCustomTier_EndRangeExclusive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndRangeExclusive", ID: &i_CustomTierEndRangeExclusive, Type: smithy.ShapeTypeDouble, Ext: &ext[240]})
-var sCustomTier_RateValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RateValue", ID: &i_CustomTierRateValue, Type: smithy.ShapeTypeDouble, Ext: &ext[241]})
-var s_CustomTiersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomTier, Members: &mCustomTier, Type: smithy.ShapeTypeStructure, Ext: &ext[246]})
-var sDisassociateResourceResponseElement_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_CustomLineItemAssociationElement, Type: smithy.ShapeTypeString, Ext: &ext[248]})
-var sDisassociateResourceResponseElement_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &iAssociateResourceError, Members: &mAssociateResourceError, Type: smithy.ShapeTypeStructure, Ext: &ext[249]})
-var s_DisassociateResourcesResponseList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDisassociateResourceResponseElement, Members: &mDisassociateResourceResponseElement, Type: smithy.ShapeTypeStructure, Ext: &ext[251]})
-var sFreeTierConfig_Activated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Activated", ID: &i_TieringActivated, Type: smithy.ShapeTypeBoolean, Ext: &ext[253]})
-var sGroupByAttributeName_PRODUCT_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRODUCT_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[255]})
-var sGroupByAttributeName_BILLING_PERIOD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BILLING_PERIOD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[256]})
-var s_GroupByAttributesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGroupByAttributeName, Members: &mGroupByAttributeName, Type: smithy.ShapeTypeEnum, Ext: &ext[258]})
-var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[261]})
-var sInternalServerException_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryAfterSeconds", ID: &i_RetryAfterSeconds, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &ext[262]})
-var sLineItemFilter_Attribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attribute", ID: &iLineItemFilterAttributeName, Members: &mLineItemFilterAttributeName, Type: smithy.ShapeTypeEnum, Ext: &ext[264]})
-var sLineItemFilter_MatchOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchOption", ID: &iMatchOption, Members: &mMatchOption, Type: smithy.ShapeTypeEnum, Ext: &ext[265]})
-var sLineItemFilter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_LineItemFilterValuesList, Members: &m_LineItemFilterValuesList, Type: smithy.ShapeTypeList, Ext: &ext[266]})
-var sLineItemFilter_AttributeValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeValues", ID: &i_AttributeValueList, Members: &m_AttributeValueList, Type: smithy.ShapeTypeList, Ext: &ext[267]})
-var sLineItemFilterAttributeName_LINE_ITEM_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINE_ITEM_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[269]})
-var sLineItemFilterAttributeName_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[270]})
-var s_LineItemFiltersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLineItemFilter, Members: &mLineItemFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[272]})
-var sLineItemFilterValue_SAVINGS_PLAN_NEGATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAVINGS_PLAN_NEGATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[274]})
-var s_LineItemFilterValuesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLineItemFilterValue, Members: &mLineItemFilterValue, Type: smithy.ShapeTypeEnum, Ext: &ext[276]})
-var sListAccountAssociationsFilter_Association = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Association", ID: &i_Association, Type: smithy.ShapeTypeString, Ext: &ext[278]})
-var sListAccountAssociationsFilter_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[279]})
-var sListAccountAssociationsFilter_AccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountIds", ID: &i_AccountIdFilterList, Members: &m_AccountIdFilterList, Type: smithy.ShapeTypeList, Ext: &ext[280]})
-var sListBillingGroupAccountGrouping_AutoAssociate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoAssociate", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[282]})
-var sListBillingGroupAccountGrouping_ResponsibilityTransferArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponsibilityTransferArn", ID: &i_ResponsibilityTransferArn, Type: smithy.ShapeTypeString, Ext: &ext[283]})
-var sListBillingGroupCostReportsFilter_BillingGroupArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingGroupArns", ID: &i_BillingGroupArnList, Members: &m_BillingGroupArnList, Type: smithy.ShapeTypeList, Ext: &ext[285]})
-var sListBillingGroupsFilter_Arns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arns", ID: &i_BillingGroupArnList, Members: &m_BillingGroupArnList, Type: smithy.ShapeTypeList, Ext: &ext[287]})
-var sListBillingGroupsFilter_PricingPlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingPlan", ID: &i_PricingPlanFullArn, Type: smithy.ShapeTypeString, Ext: &ext[288]})
-var sListBillingGroupsFilter_Statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Statuses", ID: &i_BillingGroupStatusList, Members: &m_BillingGroupStatusList, Type: smithy.ShapeTypeList, Ext: &ext[289]})
-var sListBillingGroupsFilter_AutoAssociate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoAssociate", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[290]})
-var sListBillingGroupsFilter_PrimaryAccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryAccountIds", ID: &i_PrimaryAccountIdList, Members: &m_PrimaryAccountIdList, Type: smithy.ShapeTypeList, Ext: &ext[291]})
-var sListBillingGroupsFilter_BillingGroupTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingGroupTypes", ID: &i_BillingGroupTypeList, Members: &m_BillingGroupTypeList, Type: smithy.ShapeTypeList, Ext: &ext[292]})
-var sListBillingGroupsFilter_Names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Names", ID: &i_StringSearches, Members: &m_StringSearches, Type: smithy.ShapeTypeList, Ext: &ext[293]})
-var sListBillingGroupsFilter_ResponsibilityTransferArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponsibilityTransferArns", ID: &i_ResponsibilityTransferArnsList, Members: &m_ResponsibilityTransferArnsList, Type: smithy.ShapeTypeList, Ext: &ext[294]})
-var sListCustomLineItemChargeDetails_Flat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Flat", ID: &iListCustomLineItemFlatChargeDetails, Members: &mListCustomLineItemFlatChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[296]})
-var sListCustomLineItemChargeDetails_Percentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Percentage", ID: &iListCustomLineItemPercentageChargeDetails, Members: &mListCustomLineItemPercentageChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[297]})
-var sListCustomLineItemChargeDetails_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iCustomLineItemType, Members: &mCustomLineItemType, Type: smithy.ShapeTypeEnum, Ext: &ext[298]})
-var sListCustomLineItemChargeDetails_LineItemFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LineItemFilters", ID: &i_LineItemFiltersList, Members: &m_LineItemFiltersList, Type: smithy.ShapeTypeList, Ext: &ext[299]})
-var sListCustomLineItemFlatChargeDetails_ChargeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChargeValue", ID: &i_CustomLineItemChargeValue, Type: smithy.ShapeTypeDouble, Ext: &ext[301]})
-var sListCustomLineItemPercentageChargeDetails_PercentageValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentageValue", ID: &i_CustomLineItemPercentageChargeValue, Type: smithy.ShapeTypeDouble, Ext: &ext[303]})
-var sListCustomLineItemsFilter_Names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Names", ID: &i_CustomLineItemNameList, Members: &m_CustomLineItemNameList, Type: smithy.ShapeTypeList, Ext: &ext[305]})
-var sListCustomLineItemsFilter_BillingGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingGroups", ID: &i_BillingGroupArnList, Members: &m_BillingGroupArnList, Type: smithy.ShapeTypeList, Ext: &ext[306]})
-var sListCustomLineItemsFilter_Arns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arns", ID: &i_CustomLineItemArns, Members: &m_CustomLineItemArns, Type: smithy.ShapeTypeList, Ext: &ext[307]})
-var sListCustomLineItemsFilter_AccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountIds", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList, Ext: &ext[308]})
-var sListCustomLineItemVersionsBillingPeriodRangeFilter_StartBillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartBillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &ext[310]})
-var sListCustomLineItemVersionsBillingPeriodRangeFilter_EndBillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndBillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &ext[311]})
-var sListCustomLineItemVersionsFilter_BillingPeriodRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriodRange", ID: &iListCustomLineItemVersionsBillingPeriodRangeFilter, Members: &mListCustomLineItemVersionsBillingPeriodRangeFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[313]})
-var sListPricingPlansFilter_Arns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arns", ID: &i_PricingPlanArns, Members: &m_PricingPlanArns, Type: smithy.ShapeTypeList, Ext: &ext[315]})
-var sListPricingRulesFilter_Arns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arns", ID: &i_PricingRuleArns, Members: &m_PricingRuleArns, Type: smithy.ShapeTypeList, Ext: &ext[317]})
-var sListResourcesAssociatedToCustomLineItemFilter_Relationship = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Relationship", ID: &iCustomLineItemRelationship, Members: &mCustomLineItemRelationship, Type: smithy.ShapeTypeEnum, Ext: &ext[319]})
-var sListResourcesAssociatedToCustomLineItemResponseElement_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_CustomLineItemAssociationElement, Type: smithy.ShapeTypeString, Ext: &ext[321]})
-var sListResourcesAssociatedToCustomLineItemResponseElement_Relationship = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Relationship", ID: &iCustomLineItemRelationship, Members: &mCustomLineItemRelationship, Type: smithy.ShapeTypeEnum, Ext: &ext[322]})
-var sListResourcesAssociatedToCustomLineItemResponseElement_EndBillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndBillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &ext[323]})
-var s_ListResourcesAssociatedToCustomLineItemResponseList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListResourcesAssociatedToCustomLineItemResponseElement, Members: &mListResourcesAssociatedToCustomLineItemResponseElement, Type: smithy.ShapeTypeStructure, Ext: &ext[325]})
-var sMatchOption_NOT_EQUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_EQUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[329]})
-var sMatchOption_EQUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[330]})
-var sPresentationObject_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &i_Service, Type: smithy.ShapeTypeString, Ext: &ext[343]})
-var s_PricingPlanArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &ext[346]})
-var s_PricingPlanList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPricingPlanListElement, Members: &mPricingPlanListElement, Type: smithy.ShapeTypeStructure, Ext: &ext[350]})
-var sPricingPlanListElement_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PricingPlanName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[352]})
-var sPricingPlanListElement_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &ext[353]})
-var sPricingPlanListElement_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PricingPlanDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[354]})
-var sPricingPlanListElement_Size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Size", ID: &i_NumberOfAssociatedPricingRules, Type: smithy.ShapeTypeLong, Ext: &ext[355]})
-var sPricingPlanListElement_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &ext[356]})
-var sPricingPlanListElement_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &ext[357]})
-var s_PricingRuleArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PricingRuleArn, Type: smithy.ShapeTypeString, Ext: &ext[361]})
-var s_PricingRuleArnsInput_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PricingRuleArn, Type: smithy.ShapeTypeString, Ext: &ext[363]})
-var s_PricingRuleArnsNonEmptyInput_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PricingRuleArn, Type: smithy.ShapeTypeString, Ext: &ext[365]})
-var s_PricingRuleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPricingRuleListElement, Members: &mPricingRuleListElement, Type: smithy.ShapeTypeStructure, Ext: &ext[368]})
-var sPricingRuleListElement_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PricingRuleName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[370]})
-var sPricingRuleListElement_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingRuleArn, Type: smithy.ShapeTypeString, Ext: &ext[371]})
-var sPricingRuleListElement_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PricingRuleDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[372]})
-var sPricingRuleListElement_Scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scope", ID: &iPricingRuleScope, Members: &mPricingRuleScope, Type: smithy.ShapeTypeEnum, Ext: &ext[373]})
-var sPricingRuleListElement_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iPricingRuleType, Members: &mPricingRuleType, Type: smithy.ShapeTypeEnum, Ext: &ext[374]})
-var sPricingRuleListElement_ModifierPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifierPercentage", ID: &i_ModifierPercentage, Type: smithy.ShapeTypeDouble, Ext: &ext[375]})
-var sPricingRuleListElement_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &i_Service, Type: smithy.ShapeTypeString, Ext: &ext[376]})
-var sPricingRuleListElement_AssociatedPricingPlanCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedPricingPlanCount", ID: &i_NumberOfPricingPlansAssociatedWith, Type: smithy.ShapeTypeLong, Ext: &ext[377]})
-var sPricingRuleListElement_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &ext[378]})
-var sPricingRuleListElement_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &ext[379]})
-var sPricingRuleListElement_BillingEntity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingEntity", ID: &i_BillingEntity, Type: smithy.ShapeTypeString, Ext: &ext[380]})
-var sPricingRuleListElement_Tiering = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tiering", ID: &iTiering, Members: &mTiering, Type: smithy.ShapeTypeStructure, Ext: &ext[381]})
-var sPricingRuleListElement_UsageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageType", ID: &i_UsageType, Type: smithy.ShapeTypeString, Ext: &ext[382]})
-var sPricingRuleListElement_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i_Operation, Type: smithy.ShapeTypeString, Ext: &ext[383]})
-var sPricingRuleScope_GLOBAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GLOBAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[386]})
-var sPricingRuleScope_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[387]})
-var sPricingRuleScope_BILLING_ENTITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BILLING_ENTITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[388]})
-var sPricingRuleScope_SKU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SKU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[389]})
-var sPricingRuleType_MARKUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MARKUP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[391]})
-var sPricingRuleType_DISCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[392]})
-var sPricingRuleType_TIERING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIERING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[393]})
-var s_PrimaryAccountIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[395]})
-var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[398]})
-var sResourceNotFoundException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[399]})
-var sResourceNotFoundException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[400]})
-var s_ResponsibilityTransferArnsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResponsibilityTransferArn, Type: smithy.ShapeTypeString, Ext: &ext[403]})
-var sSearchOption_STARTS_WITH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STARTS_WITH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[406]})
-var sServiceLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[410]})
-var sServiceLimitExceededException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[411]})
-var sServiceLimitExceededException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[412]})
-var sServiceLimitExceededException_LimitCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LimitCode", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[413]})
-var sServiceLimitExceededException_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[414]})
-var sStringSearch_SearchOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchOption", ID: &iSearchOption, Members: &mSearchOption, Type: smithy.ShapeTypeEnum, Ext: &ext[417]})
-var sStringSearch_SearchValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchValue", ID: &i_SearchValue, Type: smithy.ShapeTypeString, Ext: &ext[418]})
-var s_StringSearches_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStringSearch, Members: &mStringSearch, Type: smithy.ShapeTypeStructure, Ext: &ext[420]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[423]})
-var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[425]})
-var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[426]})
-var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[429]})
-var sThrottlingException_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryAfterSeconds", ID: &i_RetryAfterSeconds, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &ext[430]})
-var sTiering_FreeTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FreeTier", ID: &iFreeTierConfig, Members: &mFreeTierConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[432]})
-var sTiering_CustomTiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomTiers", ID: &i_CustomTiersList, Members: &m_CustomTiersList, Type: smithy.ShapeTypeList, Ext: &ext[433]})
-var sUpdateBillingGroupAccountGrouping_AutoAssociate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoAssociate", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[437]})
-var sUpdateBillingGroupAccountGrouping_ResponsibilityTransferArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponsibilityTransferArn", ID: &i_ResponsibilityTransferArn, Type: smithy.ShapeTypeString, Ext: &ext[438]})
-var sUpdateCustomLineItemChargeDetails_Flat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Flat", ID: &iUpdateCustomLineItemFlatChargeDetails, Members: &mUpdateCustomLineItemFlatChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[440]})
-var sUpdateCustomLineItemChargeDetails_Percentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Percentage", ID: &iUpdateCustomLineItemPercentageChargeDetails, Members: &mUpdateCustomLineItemPercentageChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[441]})
-var sUpdateCustomLineItemChargeDetails_LineItemFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LineItemFilters", ID: &i_LineItemFiltersList, Members: &m_LineItemFiltersList, Type: smithy.ShapeTypeList, Ext: &ext[442]})
-var sUpdateCustomLineItemFlatChargeDetails_ChargeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChargeValue", ID: &i_CustomLineItemChargeValue, Type: smithy.ShapeTypeDouble, Ext: &ext[444]})
-var sUpdateCustomLineItemPercentageChargeDetails_PercentageValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentageValue", ID: &i_CustomLineItemPercentageChargeValue, Type: smithy.ShapeTypeDouble, Ext: &ext[446]})
-var sUpdateFreeTierConfig_Activated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Activated", ID: &i_TieringActivated, Type: smithy.ShapeTypeBoolean, Ext: &ext[448]})
-var sUpdateTieringInput_FreeTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FreeTier", ID: &iUpdateFreeTierConfig, Members: &mUpdateFreeTierConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[450]})
-var sUpdateTieringInput_CustomTiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomTiers", ID: &i_CustomTiersList, Members: &m_CustomTiersList, Type: smithy.ShapeTypeList, Ext: &ext[451]})
-var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[454]})
-var sValidationException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[455]})
-var sValidationException_Fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fields", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[456]})
-var sValidationExceptionField_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[458]})
-var sValidationExceptionField_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[459]})
-var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[461]})
-var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[463]})
-var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[464]})
-var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[465]})
-var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[466]})
-var sValidationExceptionReason_PRIMARY_NOT_ASSOCIATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIMARY_NOT_ASSOCIATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[467]})
-var sValidationExceptionReason_PRIMARY_CANNOT_DISASSOCIATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIMARY_CANNOT_DISASSOCIATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[468]})
-var sValidationExceptionReason_ACCOUNTS_NOT_ASSOCIATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNTS_NOT_ASSOCIATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[469]})
-var sValidationExceptionReason_ACCOUNTS_ALREADY_ASSOCIATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNTS_ALREADY_ASSOCIATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[470]})
-var sValidationExceptionReason_ILLEGAL_PRIMARY_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_PRIMARY_ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[471]})
-var sValidationExceptionReason_ILLEGAL_ACCOUNTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_ACCOUNTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[472]})
-var sValidationExceptionReason_MISMATCHED_BILLINGGROUP_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISMATCHED_BILLINGGROUP_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[473]})
-var sValidationExceptionReason_MISSING_BILLINGGROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING_BILLINGGROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[474]})
-var sValidationExceptionReason_MISMATCHED_CUSTOMLINEITEM_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISMATCHED_CUSTOMLINEITEM_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[475]})
-var sValidationExceptionReason_ILLEGAL_BILLING_PERIOD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_BILLING_PERIOD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[476]})
-var sValidationExceptionReason_ILLEGAL_BILLING_PERIOD_RANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_BILLING_PERIOD_RANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[477]})
-var sValidationExceptionReason_TOO_MANY_ACCOUNTS_IN_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOO_MANY_ACCOUNTS_IN_REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[478]})
-var sValidationExceptionReason_DUPLICATE_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUPLICATE_ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[479]})
-var sValidationExceptionReason_INVALID_BILLING_GROUP_STATUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_BILLING_GROUP_STATUS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[480]})
-var sValidationExceptionReason_MISMATCHED_PRICINGPLAN_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISMATCHED_PRICINGPLAN_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[481]})
-var sValidationExceptionReason_MISSING_PRICINGPLAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING_PRICINGPLAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[482]})
-var sValidationExceptionReason_MISMATCHED_PRICINGRULE_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISMATCHED_PRICINGRULE_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[483]})
-var sValidationExceptionReason_DUPLICATE_PRICINGRULE_ARNS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUPLICATE_PRICINGRULE_ARNS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[484]})
-var sValidationExceptionReason_MISSING_COSTCATEGORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING_COSTCATEGORY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[485]})
-var sValidationExceptionReason_ILLEGAL_EXPRESSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_EXPRESSION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[486]})
-var sValidationExceptionReason_ILLEGAL_SCOPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_SCOPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[487]})
-var sValidationExceptionReason_ILLEGAL_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[488]})
-var sValidationExceptionReason_PRICINGRULES_NOT_EXIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRICINGRULES_NOT_EXIST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[489]})
-var sValidationExceptionReason_PRICINGRULES_ALREADY_ASSOCIATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRICINGRULES_ALREADY_ASSOCIATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[490]})
-var sValidationExceptionReason_PRICINGRULES_NOT_ASSOCIATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRICINGRULES_NOT_ASSOCIATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[491]})
-var sValidationExceptionReason_INVALID_TIME_RANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_TIME_RANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[492]})
-var sValidationExceptionReason_INVALID_BILLINGVIEW_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_BILLINGVIEW_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[493]})
-var sValidationExceptionReason_MISMATCHED_BILLINGVIEW_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISMATCHED_BILLINGVIEW_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[494]})
-var sValidationExceptionReason_ILLEGAL_CUSTOMLINEITEM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_CUSTOMLINEITEM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[495]})
-var sValidationExceptionReason_MISSING_CUSTOMLINEITEM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING_CUSTOMLINEITEM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[496]})
-var sValidationExceptionReason_ILLEGAL_CUSTOMLINEITEM_UPDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_CUSTOMLINEITEM_UPDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[497]})
-var sValidationExceptionReason_TOO_MANY_CUSTOMLINEITEMS_IN_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOO_MANY_CUSTOMLINEITEMS_IN_REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[498]})
-var sValidationExceptionReason_ILLEGAL_CHARGE_DETAILS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_CHARGE_DETAILS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[499]})
-var sValidationExceptionReason_ILLEGAL_UPDATE_CHARGE_DETAILS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_UPDATE_CHARGE_DETAILS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[500]})
-var sValidationExceptionReason_INVALID_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[501]})
-var sValidationExceptionReason_ILLEGAL_RESOURCE_ARNS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_RESOURCE_ARNS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[502]})
-var sValidationExceptionReason_ILLEGAL_CUSTOMLINEITEM_MODIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_CUSTOMLINEITEM_MODIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[503]})
-var sValidationExceptionReason_MISSING_LINKED_ACCOUNT_IDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING_LINKED_ACCOUNT_IDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[504]})
-var sValidationExceptionReason_MULTIPLE_LINKED_ACCOUNT_IDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIPLE_LINKED_ACCOUNT_IDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[505]})
-var sValidationExceptionReason_MISSING_PRICING_PLAN_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING_PRICING_PLAN_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[506]})
-var sValidationExceptionReason_MULTIPLE_PRICING_PLAN_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIPLE_PRICING_PLAN_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[507]})
-var sValidationExceptionReason_ILLEGAL_CHILD_ASSOCIATE_RESOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_CHILD_ASSOCIATE_RESOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[508]})
-var sValidationExceptionReason_CUSTOM_LINE_ITEM_ASSOCIATION_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM_LINE_ITEM_ASSOCIATION_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[509]})
-var sValidationExceptionReason_INVALID_BILLING_GROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_BILLING_GROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[510]})
-var sValidationExceptionReason_INVALID_BILLING_PERIOD_FOR_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_BILLING_PERIOD_FOR_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[511]})
-var sValidationExceptionReason_ILLEGAL_BILLING_ENTITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_BILLING_ENTITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[512]})
-var sValidationExceptionReason_ILLEGAL_MODIFIER_PERCENTAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_MODIFIER_PERCENTAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[513]})
-var sValidationExceptionReason_ILLEGAL_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[514]})
-var sValidationExceptionReason_ILLEGAL_BILLING_GROUP_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_BILLING_GROUP_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[515]})
-var sValidationExceptionReason_ILLEGAL_BILLING_GROUP_PRICING_PLAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_BILLING_GROUP_PRICING_PLAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[516]})
-var sValidationExceptionReason_ILLEGAL_ENDED_BILLINGGROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_ENDED_BILLINGGROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[517]})
-var sValidationExceptionReason_ILLEGAL_TIERING_INPUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_TIERING_INPUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[518]})
-var sValidationExceptionReason_ILLEGAL_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[519]})
-var sValidationExceptionReason_ILLEGAL_USAGE_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_USAGE_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[520]})
-var sValidationExceptionReason_INVALID_SKU_COMBO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_SKU_COMBO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[521]})
-var sValidationExceptionReason_INVALID_FILTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_FILTER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[522]})
-var sValidationExceptionReason_TOO_MANY_AUTO_ASSOCIATE_BILLING_GROUPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOO_MANY_AUTO_ASSOCIATE_BILLING_GROUPS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[523]})
-var sValidationExceptionReason_CANNOT_DELETE_AUTO_ASSOCIATE_BILLING_GROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_DELETE_AUTO_ASSOCIATE_BILLING_GROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[524]})
-var sValidationExceptionReason_ILLEGAL_ACCOUNT_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_ACCOUNT_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[525]})
-var sValidationExceptionReason_BILLING_GROUP_ALREADY_EXIST_IN_CURRENT_BILLING_PERIOD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BILLING_GROUP_ALREADY_EXIST_IN_CURRENT_BILLING_PERIOD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[526]})
-var sValidationExceptionReason_ILLEGAL_COMPUTATION_RULE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_COMPUTATION_RULE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[527]})
-var sValidationExceptionReason_ILLEGAL_LINE_ITEM_FILTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_LINE_ITEM_FILTER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[528]})
-var sAssociateAccountsInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &ext[530]})
-var sAssociateAccountsInput_AccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountIds", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList, Ext: &ext[531]})
-var sAssociateAccountsOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &ext[533]})
-var sAssociatePricingRulesInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &ext[535]})
-var sAssociatePricingRulesInput_PricingRuleArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingRuleArns", ID: &i_PricingRuleArnsNonEmptyInput, Members: &m_PricingRuleArnsNonEmptyInput, Type: smithy.ShapeTypeList, Ext: &ext[536]})
-var sAssociatePricingRulesOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &ext[538]})
-var sBatchAssociateResourcesToCustomLineItemInput_TargetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetArn", ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &ext[540]})
-var sBatchAssociateResourcesToCustomLineItemInput_ResourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArns", ID: &i_CustomLineItemBatchAssociationsList, Members: &m_CustomLineItemBatchAssociationsList, Type: smithy.ShapeTypeList, Ext: &ext[541]})
-var sBatchAssociateResourcesToCustomLineItemInput_BillingPeriodRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriodRange", ID: &iCustomLineItemBillingPeriodRange, Members: &mCustomLineItemBillingPeriodRange, Type: smithy.ShapeTypeStructure, Ext: &ext[542]})
-var sBatchAssociateResourcesToCustomLineItemOutput_SuccessfullyAssociatedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuccessfullyAssociatedResources", ID: &i_AssociateResourcesResponseList, Members: &m_AssociateResourcesResponseList, Type: smithy.ShapeTypeList, Ext: &ext[544]})
-var sBatchAssociateResourcesToCustomLineItemOutput_FailedAssociatedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedAssociatedResources", ID: &i_AssociateResourcesResponseList, Members: &m_AssociateResourcesResponseList, Type: smithy.ShapeTypeList, Ext: &ext[545]})
-var sBatchDisassociateResourcesFromCustomLineItemInput_TargetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetArn", ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &ext[547]})
-var sBatchDisassociateResourcesFromCustomLineItemInput_ResourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArns", ID: &i_CustomLineItemBatchDisassociationsList, Members: &m_CustomLineItemBatchDisassociationsList, Type: smithy.ShapeTypeList, Ext: &ext[548]})
-var sBatchDisassociateResourcesFromCustomLineItemInput_BillingPeriodRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriodRange", ID: &iCustomLineItemBillingPeriodRange, Members: &mCustomLineItemBillingPeriodRange, Type: smithy.ShapeTypeStructure, Ext: &ext[549]})
-var sBatchDisassociateResourcesFromCustomLineItemOutput_SuccessfullyDisassociatedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuccessfullyDisassociatedResources", ID: &i_DisassociateResourcesResponseList, Members: &m_DisassociateResourcesResponseList, Type: smithy.ShapeTypeList, Ext: &ext[551]})
-var sBatchDisassociateResourcesFromCustomLineItemOutput_FailedDisassociatedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedDisassociatedResources", ID: &i_DisassociateResourcesResponseList, Members: &m_DisassociateResourcesResponseList, Type: smithy.ShapeTypeList, Ext: &ext[552]})
-var sCreateBillingGroupInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &ext[554]})
-var sCreateBillingGroupInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_BillingGroupName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[555]})
-var sCreateBillingGroupInput_AccountGrouping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountGrouping", ID: &iAccountGrouping, Members: &mAccountGrouping, Type: smithy.ShapeTypeStructure, Ext: &ext[556]})
-var sCreateBillingGroupInput_ComputationPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputationPreference", ID: &iComputationPreference, Members: &mComputationPreference, Type: smithy.ShapeTypeStructure, Ext: &ext[557]})
-var sCreateBillingGroupInput_PrimaryAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[558]})
-var sCreateBillingGroupInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_BillingGroupDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[559]})
-var sCreateBillingGroupInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[560]})
-var sCreateBillingGroupOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &ext[562]})
-var sCreateCustomLineItemInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &ext[564]})
-var sCreateCustomLineItemInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CustomLineItemName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[565]})
-var sCreateCustomLineItemInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_CustomLineItemDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[566]})
-var sCreateCustomLineItemInput_BillingGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingGroupArn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &ext[567]})
-var sCreateCustomLineItemInput_BillingPeriodRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriodRange", ID: &iCustomLineItemBillingPeriodRange, Members: &mCustomLineItemBillingPeriodRange, Type: smithy.ShapeTypeStructure, Ext: &ext[568]})
-var sCreateCustomLineItemInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[569]})
-var sCreateCustomLineItemInput_ChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChargeDetails", ID: &iCustomLineItemChargeDetails, Members: &mCustomLineItemChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[570]})
-var sCreateCustomLineItemInput_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[571]})
-var sCreateCustomLineItemInput_ComputationRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputationRule", ID: &iComputationRuleEnum, Members: &mComputationRuleEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[572]})
-var sCreateCustomLineItemInput_PresentationDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PresentationDetails", ID: &iPresentationObject, Members: &mPresentationObject, Type: smithy.ShapeTypeStructure, Ext: &ext[573]})
-var sCreateCustomLineItemOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &ext[575]})
-var sCreatePricingPlanInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &ext[577]})
-var sCreatePricingPlanInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PricingPlanName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[578]})
-var sCreatePricingPlanInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PricingPlanDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[579]})
-var sCreatePricingPlanInput_PricingRuleArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingRuleArns", ID: &i_PricingRuleArnsInput, Members: &m_PricingRuleArnsInput, Type: smithy.ShapeTypeList, Ext: &ext[580]})
-var sCreatePricingPlanInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[581]})
-var sCreatePricingPlanOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &ext[583]})
-var sCreatePricingRuleInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &ext[585]})
-var sCreatePricingRuleInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PricingRuleName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[586]})
-var sCreatePricingRuleInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PricingRuleDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[587]})
-var sCreatePricingRuleInput_Scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scope", ID: &iPricingRuleScope, Members: &mPricingRuleScope, Type: smithy.ShapeTypeEnum, Ext: &ext[588]})
-var sCreatePricingRuleInput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iPricingRuleType, Members: &mPricingRuleType, Type: smithy.ShapeTypeEnum, Ext: &ext[589]})
-var sCreatePricingRuleInput_ModifierPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifierPercentage", ID: &i_ModifierPercentage, Type: smithy.ShapeTypeDouble, Ext: &ext[590]})
-var sCreatePricingRuleInput_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &i_Service, Type: smithy.ShapeTypeString, Ext: &ext[591]})
-var sCreatePricingRuleInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[592]})
-var sCreatePricingRuleInput_BillingEntity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingEntity", ID: &i_BillingEntity, Type: smithy.ShapeTypeString, Ext: &ext[593]})
-var sCreatePricingRuleInput_Tiering = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tiering", ID: &iCreateTieringInput, Members: &mCreateTieringInput, Type: smithy.ShapeTypeStructure, Ext: &ext[594]})
-var sCreatePricingRuleInput_UsageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageType", ID: &i_UsageType, Type: smithy.ShapeTypeString, Ext: &ext[595]})
-var sCreatePricingRuleInput_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i_Operation, Type: smithy.ShapeTypeString, Ext: &ext[596]})
-var sCreatePricingRuleOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingRuleArn, Type: smithy.ShapeTypeString, Ext: &ext[598]})
-var sDeleteBillingGroupInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &ext[600]})
-var sDeleteBillingGroupOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &ext[602]})
-var sDeleteCustomLineItemInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &ext[604]})
-var sDeleteCustomLineItemInput_BillingPeriodRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriodRange", ID: &iCustomLineItemBillingPeriodRange, Members: &mCustomLineItemBillingPeriodRange, Type: smithy.ShapeTypeStructure, Ext: &ext[605]})
-var sDeleteCustomLineItemOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &ext[607]})
-var sDeletePricingPlanInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &ext[609]})
-var sDeletePricingPlanOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &ext[611]})
-var sDeletePricingRuleInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingRuleArn, Type: smithy.ShapeTypeString, Ext: &ext[613]})
-var sDeletePricingRuleOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingRuleArn, Type: smithy.ShapeTypeString, Ext: &ext[615]})
-var sDisassociateAccountsInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &ext[617]})
-var sDisassociateAccountsInput_AccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountIds", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList, Ext: &ext[618]})
-var sDisassociateAccountsOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &ext[620]})
-var sDisassociatePricingRulesInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &ext[622]})
-var sDisassociatePricingRulesInput_PricingRuleArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingRuleArns", ID: &i_PricingRuleArnsNonEmptyInput, Members: &m_PricingRuleArnsNonEmptyInput, Type: smithy.ShapeTypeList, Ext: &ext[623]})
-var sDisassociatePricingRulesOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &ext[625]})
-var sGetBillingGroupCostReportInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &ext[627]})
-var sGetBillingGroupCostReportInput_BillingPeriodRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriodRange", ID: &iBillingPeriodRange, Members: &mBillingPeriodRange, Type: smithy.ShapeTypeStructure, Ext: &ext[628]})
-var sGetBillingGroupCostReportInput_GroupBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupBy", ID: &i_GroupByAttributesList, Members: &m_GroupByAttributesList, Type: smithy.ShapeTypeList, Ext: &ext[629]})
-var sGetBillingGroupCostReportInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxBillingGroupCostReportResults, Type: smithy.ShapeTypeInteger, Ext: &ext[630]})
-var sGetBillingGroupCostReportInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[631]})
-var sGetBillingGroupCostReportOutput_BillingGroupCostReportResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingGroupCostReportResults", ID: &i_BillingGroupCostReportResultsList, Members: &m_BillingGroupCostReportResultsList, Type: smithy.ShapeTypeList, Ext: &ext[633]})
-var sGetBillingGroupCostReportOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[634]})
-var sGetBillingTransferPreferenceInput_ResponsibilityTransferArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponsibilityTransferArn", ID: &i_ResponsibilityTransferArn, Type: smithy.ShapeTypeString, Ext: &ext[636]})
-var sGetBillingTransferPreferenceOutput_ResponsibilityTransferArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponsibilityTransferArn", ID: &i_ResponsibilityTransferArn, Type: smithy.ShapeTypeString, Ext: &ext[638]})
-var sGetBillingTransferPreferenceOutput_AutoBillingTransferBillingGroupCreation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoBillingTransferBillingGroupCreation", ID: &iAutoTransferBillingGroupCreationPreference, Members: &mAutoTransferBillingGroupCreationPreference, Type: smithy.ShapeTypeStructure, Ext: &ext[639]})
-var sGetBillingTransferPreferenceOutput_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &ext[640]})
-var sListAccountAssociationsInput_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &ext[642]})
-var sListAccountAssociationsInput_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iListAccountAssociationsFilter, Members: &mListAccountAssociationsFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[643]})
-var sListAccountAssociationsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[644]})
-var sListAccountAssociationsOutput_LinkedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkedAccounts", ID: &i_AccountAssociationsList, Members: &m_AccountAssociationsList, Type: smithy.ShapeTypeList, Ext: &ext[646]})
-var sListAccountAssociationsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[647]})
-var sListBillingGroupCostReportsInput_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &ext[649]})
-var sListBillingGroupCostReportsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxBillingGroupResults, Type: smithy.ShapeTypeInteger, Ext: &ext[650]})
-var sListBillingGroupCostReportsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[651]})
-var sListBillingGroupCostReportsInput_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iListBillingGroupCostReportsFilter, Members: &mListBillingGroupCostReportsFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[652]})
-var sListBillingGroupCostReportsOutput_BillingGroupCostReports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingGroupCostReports", ID: &i_BillingGroupCostReportList, Members: &m_BillingGroupCostReportList, Type: smithy.ShapeTypeList, Ext: &ext[654]})
-var sListBillingGroupCostReportsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[655]})
-var sListBillingGroupsInput_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &ext[657]})
-var sListBillingGroupsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxBillingGroupResults, Type: smithy.ShapeTypeInteger, Ext: &ext[658]})
-var sListBillingGroupsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[659]})
-var sListBillingGroupsInput_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iListBillingGroupsFilter, Members: &mListBillingGroupsFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[660]})
-var sListBillingGroupsOutput_BillingGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingGroups", ID: &i_BillingGroupList, Members: &m_BillingGroupList, Type: smithy.ShapeTypeList, Ext: &ext[662]})
-var sListBillingGroupsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[663]})
-var sListCustomLineItemsInput_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &ext[665]})
-var sListCustomLineItemsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxCustomLineItemResults, Type: smithy.ShapeTypeInteger, Ext: &ext[666]})
-var sListCustomLineItemsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[667]})
-var sListCustomLineItemsInput_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iListCustomLineItemsFilter, Members: &mListCustomLineItemsFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[668]})
-var sListCustomLineItemsOutput_CustomLineItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomLineItems", ID: &i_CustomLineItemList, Members: &m_CustomLineItemList, Type: smithy.ShapeTypeList, Ext: &ext[670]})
-var sListCustomLineItemsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[671]})
-var sListCustomLineItemVersionsInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &ext[673]})
-var sListCustomLineItemVersionsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxCustomLineItemResults, Type: smithy.ShapeTypeInteger, Ext: &ext[674]})
-var sListCustomLineItemVersionsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[675]})
-var sListCustomLineItemVersionsInput_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iListCustomLineItemVersionsFilter, Members: &mListCustomLineItemVersionsFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[676]})
-var sListCustomLineItemVersionsOutput_CustomLineItemVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomLineItemVersions", ID: &i_CustomLineItemVersionList, Members: &m_CustomLineItemVersionList, Type: smithy.ShapeTypeList, Ext: &ext[678]})
-var sListCustomLineItemVersionsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[679]})
-var sListPricingPlansAssociatedWithPricingRuleInput_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &ext[681]})
-var sListPricingPlansAssociatedWithPricingRuleInput_PricingRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingRuleArn", ID: &i_PricingRuleArn, Type: smithy.ShapeTypeString, Ext: &ext[682]})
-var sListPricingPlansAssociatedWithPricingRuleInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxPricingRuleResults, Type: smithy.ShapeTypeInteger, Ext: &ext[683]})
-var sListPricingPlansAssociatedWithPricingRuleInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[684]})
-var sListPricingPlansAssociatedWithPricingRuleOutput_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &ext[686]})
-var sListPricingPlansAssociatedWithPricingRuleOutput_PricingRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingRuleArn", ID: &i_PricingRuleArn, Type: smithy.ShapeTypeString, Ext: &ext[687]})
-var sListPricingPlansAssociatedWithPricingRuleOutput_PricingPlanArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingPlanArns", ID: &i_PricingPlanArns, Members: &m_PricingPlanArns, Type: smithy.ShapeTypeList, Ext: &ext[688]})
-var sListPricingPlansAssociatedWithPricingRuleOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[689]})
-var sListPricingPlansInput_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &ext[691]})
-var sListPricingPlansInput_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iListPricingPlansFilter, Members: &mListPricingPlansFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[692]})
-var sListPricingPlansInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxPricingPlanResults, Type: smithy.ShapeTypeInteger, Ext: &ext[693]})
-var sListPricingPlansInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[694]})
-var sListPricingPlansOutput_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &ext[696]})
-var sListPricingPlansOutput_PricingPlans = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingPlans", ID: &i_PricingPlanList, Members: &m_PricingPlanList, Type: smithy.ShapeTypeList, Ext: &ext[697]})
-var sListPricingPlansOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[698]})
-var sListPricingRulesAssociatedToPricingPlanInput_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &ext[700]})
-var sListPricingRulesAssociatedToPricingPlanInput_PricingPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingPlanArn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &ext[701]})
-var sListPricingRulesAssociatedToPricingPlanInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxPricingPlanResults, Type: smithy.ShapeTypeInteger, Ext: &ext[702]})
-var sListPricingRulesAssociatedToPricingPlanInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[703]})
-var sListPricingRulesAssociatedToPricingPlanOutput_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &ext[705]})
-var sListPricingRulesAssociatedToPricingPlanOutput_PricingPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingPlanArn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &ext[706]})
-var sListPricingRulesAssociatedToPricingPlanOutput_PricingRuleArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingRuleArns", ID: &i_PricingRuleArns, Members: &m_PricingRuleArns, Type: smithy.ShapeTypeList, Ext: &ext[707]})
-var sListPricingRulesAssociatedToPricingPlanOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[708]})
-var sListPricingRulesInput_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &ext[710]})
-var sListPricingRulesInput_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iListPricingRulesFilter, Members: &mListPricingRulesFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[711]})
-var sListPricingRulesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxPricingRuleResults, Type: smithy.ShapeTypeInteger, Ext: &ext[712]})
-var sListPricingRulesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[713]})
-var sListPricingRulesOutput_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &ext[715]})
-var sListPricingRulesOutput_PricingRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingRules", ID: &i_PricingRuleList, Members: &m_PricingRuleList, Type: smithy.ShapeTypeList, Ext: &ext[716]})
-var sListPricingRulesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[717]})
-var sListResourcesAssociatedToCustomLineItemInput_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &ext[719]})
-var sListResourcesAssociatedToCustomLineItemInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &ext[720]})
-var sListResourcesAssociatedToCustomLineItemInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxCustomLineItemResults, Type: smithy.ShapeTypeInteger, Ext: &ext[721]})
-var sListResourcesAssociatedToCustomLineItemInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[722]})
-var sListResourcesAssociatedToCustomLineItemInput_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iListResourcesAssociatedToCustomLineItemFilter, Members: &mListResourcesAssociatedToCustomLineItemFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[723]})
-var sListResourcesAssociatedToCustomLineItemOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &ext[725]})
-var sListResourcesAssociatedToCustomLineItemOutput_AssociatedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedResources", ID: &i_ListResourcesAssociatedToCustomLineItemResponseList, Members: &m_ListResourcesAssociatedToCustomLineItemResponseList, Type: smithy.ShapeTypeList, Ext: &ext[726]})
-var sListResourcesAssociatedToCustomLineItemOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[727]})
-var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &ext[729]})
-var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[731]})
-var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &ext[733]})
-var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[734]})
-var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &ext[737]})
-var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t46, Type: smithy.ShapeTypeList, Ext: &ext[738]})
-var sUpdateBillingGroupInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &ext[741]})
-var sUpdateBillingGroupInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_BillingGroupName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[742]})
-var sUpdateBillingGroupInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iBillingGroupStatus, Members: &mBillingGroupStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[743]})
-var sUpdateBillingGroupInput_ComputationPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputationPreference", ID: &iComputationPreference, Members: &mComputationPreference, Type: smithy.ShapeTypeStructure, Ext: &ext[744]})
-var sUpdateBillingGroupInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_BillingGroupDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[745]})
-var sUpdateBillingGroupInput_AccountGrouping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountGrouping", ID: &iUpdateBillingGroupAccountGrouping, Members: &mUpdateBillingGroupAccountGrouping, Type: smithy.ShapeTypeStructure, Ext: &ext[746]})
-var sUpdateBillingGroupOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &ext[748]})
-var sUpdateBillingGroupOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_BillingGroupName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[749]})
-var sUpdateBillingGroupOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_BillingGroupDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[750]})
-var sUpdateBillingGroupOutput_PrimaryAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[751]})
-var sUpdateBillingGroupOutput_PricingPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingPlanArn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &ext[752]})
-var sUpdateBillingGroupOutput_Size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Size", ID: &i_NumberOfAccounts, Type: smithy.ShapeTypeLong, Ext: &ext[753]})
-var sUpdateBillingGroupOutput_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &ext[754]})
-var sUpdateBillingGroupOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iBillingGroupStatus, Members: &mBillingGroupStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[755]})
-var sUpdateBillingGroupOutput_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &i_BillingGroupStatusReason, Type: smithy.ShapeTypeString, Ext: &ext[756]})
-var sUpdateBillingGroupOutput_AccountGrouping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountGrouping", ID: &iUpdateBillingGroupAccountGrouping, Members: &mUpdateBillingGroupAccountGrouping, Type: smithy.ShapeTypeStructure, Ext: &ext[757]})
-var sUpdateBillingTransferPreferenceInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &ext[759]})
-var sUpdateBillingTransferPreferenceInput_ResponsibilityTransferArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponsibilityTransferArn", ID: &i_ResponsibilityTransferArn, Type: smithy.ShapeTypeString, Ext: &ext[760]})
-var sUpdateBillingTransferPreferenceInput_AutoBillingTransferBillingGroupCreation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoBillingTransferBillingGroupCreation", ID: &iAutoTransferBillingGroupCreationPreference, Members: &mAutoTransferBillingGroupCreationPreference, Type: smithy.ShapeTypeStructure, Ext: &ext[761]})
-var sUpdateBillingTransferPreferenceOutput_ResponsibilityTransferArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponsibilityTransferArn", ID: &i_ResponsibilityTransferArn, Type: smithy.ShapeTypeString, Ext: &ext[763]})
-var sUpdateBillingTransferPreferenceOutput_AutoBillingTransferBillingGroupCreation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoBillingTransferBillingGroupCreation", ID: &iAutoTransferBillingGroupCreationPreference, Members: &mAutoTransferBillingGroupCreationPreference, Type: smithy.ShapeTypeStructure, Ext: &ext[764]})
-var sUpdateBillingTransferPreferenceOutput_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &ext[765]})
-var sUpdateCustomLineItemInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &ext[767]})
-var sUpdateCustomLineItemInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CustomLineItemName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[768]})
-var sUpdateCustomLineItemInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_CustomLineItemDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[769]})
-var sUpdateCustomLineItemInput_ChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChargeDetails", ID: &iUpdateCustomLineItemChargeDetails, Members: &mUpdateCustomLineItemChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[770]})
-var sUpdateCustomLineItemInput_BillingPeriodRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriodRange", ID: &iCustomLineItemBillingPeriodRange, Members: &mCustomLineItemBillingPeriodRange, Type: smithy.ShapeTypeStructure, Ext: &ext[771]})
-var sUpdateCustomLineItemOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &ext[773]})
-var sUpdateCustomLineItemOutput_BillingGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingGroupArn", ID: &i_BillingGroupFullArn, Type: smithy.ShapeTypeString, Ext: &ext[774]})
-var sUpdateCustomLineItemOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CustomLineItemName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[775]})
-var sUpdateCustomLineItemOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_CustomLineItemDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[776]})
-var sUpdateCustomLineItemOutput_ChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChargeDetails", ID: &iListCustomLineItemChargeDetails, Members: &mListCustomLineItemChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[777]})
-var sUpdateCustomLineItemOutput_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &ext[778]})
-var sUpdateCustomLineItemOutput_AssociationSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociationSize", ID: &i_NumberOfAssociations, Type: smithy.ShapeTypeLong, Ext: &ext[779]})
-var sUpdatePricingPlanInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &ext[781]})
-var sUpdatePricingPlanInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PricingPlanName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[782]})
-var sUpdatePricingPlanInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PricingPlanDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[783]})
-var sUpdatePricingPlanOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &ext[785]})
-var sUpdatePricingPlanOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PricingPlanName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[786]})
-var sUpdatePricingPlanOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PricingPlanDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[787]})
-var sUpdatePricingPlanOutput_Size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Size", ID: &i_NumberOfAssociatedPricingRules, Type: smithy.ShapeTypeLong, Ext: &ext[788]})
-var sUpdatePricingPlanOutput_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &ext[789]})
-var sUpdatePricingRuleInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingRuleArn, Type: smithy.ShapeTypeString, Ext: &ext[791]})
-var sUpdatePricingRuleInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PricingRuleName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[792]})
-var sUpdatePricingRuleInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PricingRuleDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[793]})
-var sUpdatePricingRuleInput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iPricingRuleType, Members: &mPricingRuleType, Type: smithy.ShapeTypeEnum, Ext: &ext[794]})
-var sUpdatePricingRuleInput_ModifierPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifierPercentage", ID: &i_ModifierPercentage, Type: smithy.ShapeTypeDouble, Ext: &ext[795]})
-var sUpdatePricingRuleInput_Tiering = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tiering", ID: &iUpdateTieringInput, Members: &mUpdateTieringInput, Type: smithy.ShapeTypeStructure, Ext: &ext[796]})
-var sUpdatePricingRuleOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingRuleArn, Type: smithy.ShapeTypeString, Ext: &ext[798]})
-var sUpdatePricingRuleOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PricingRuleName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[799]})
-var sUpdatePricingRuleOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PricingRuleDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[800]})
-var sUpdatePricingRuleOutput_Scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scope", ID: &iPricingRuleScope, Members: &mPricingRuleScope, Type: smithy.ShapeTypeEnum, Ext: &ext[801]})
-var sUpdatePricingRuleOutput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iPricingRuleType, Members: &mPricingRuleType, Type: smithy.ShapeTypeEnum, Ext: &ext[802]})
-var sUpdatePricingRuleOutput_ModifierPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifierPercentage", ID: &i_ModifierPercentage, Type: smithy.ShapeTypeDouble, Ext: &ext[803]})
-var sUpdatePricingRuleOutput_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &i_Service, Type: smithy.ShapeTypeString, Ext: &ext[804]})
-var sUpdatePricingRuleOutput_AssociatedPricingPlanCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedPricingPlanCount", ID: &i_NumberOfPricingPlansAssociatedWith, Type: smithy.ShapeTypeLong, Ext: &ext[805]})
-var sUpdatePricingRuleOutput_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &ext[806]})
-var sUpdatePricingRuleOutput_BillingEntity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingEntity", ID: &i_BillingEntity, Type: smithy.ShapeTypeString, Ext: &ext[807]})
-var sUpdatePricingRuleOutput_Tiering = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tiering", ID: &iUpdateTieringInput, Members: &mUpdateTieringInput, Type: smithy.ShapeTypeStructure, Ext: &ext[808]})
-var sUpdatePricingRuleOutput_UsageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageType", ID: &i_UsageType, Type: smithy.ShapeTypeString, Ext: &ext[809]})
-var sUpdatePricingRuleOutput_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i_Operation, Type: smithy.ShapeTypeString, Ext: &ext[810]})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var s_AccountAssociationsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccountAssociationsListElement, Members: &mAccountAssociationsListElement, Type: smithy.ShapeTypeStructure, Ext: &e_AccountAssociationsList_member})
+var sAccountAssociationsListElement_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eAccountAssociationsListElement_AccountId})
+var sAccountAssociationsListElement_BillingGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingGroupArn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &eAccountAssociationsListElement_BillingGroupArn})
+var sAccountAssociationsListElement_AccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountName", ID: &i_AccountName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eAccountAssociationsListElement_AccountName})
+var sAccountAssociationsListElement_AccountEmail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountEmail", ID: &i_AccountEmail, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eAccountAssociationsListElement_AccountEmail})
+var sAccountGrouping_LinkedAccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkedAccountIds", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList, Ext: &eAccountGrouping_LinkedAccountIds})
+var sAccountGrouping_AutoAssociate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoAssociate", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eAccountGrouping_AutoAssociate})
+var sAccountGrouping_ResponsibilityTransferArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponsibilityTransferArn", ID: &i_ResponsibilityTransferArn, Type: smithy.ShapeTypeString, Ext: &eAccountGrouping_ResponsibilityTransferArn})
+var s_AccountIdFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountIdFilterList_member})
+var s_AccountIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountIdList_member})
+var sAssociateResourceError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssociateResourceError_Message})
+var sAssociateResourceError_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iAssociateResourceErrorReason, Members: &mAssociateResourceErrorReason, Type: smithy.ShapeTypeEnum, Ext: &eAssociateResourceError_Reason})
+var sAssociateResourceErrorReason_INVALID_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAssociateResourceErrorReason_INVALID_ARN})
+var sAssociateResourceErrorReason_SERVICE_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAssociateResourceErrorReason_SERVICE_LIMIT_EXCEEDED})
+var sAssociateResourceErrorReason_ILLEGAL_CUSTOMLINEITEM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_CUSTOMLINEITEM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAssociateResourceErrorReason_ILLEGAL_CUSTOMLINEITEM})
+var sAssociateResourceErrorReason_INTERNAL_SERVER_EXCEPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_SERVER_EXCEPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAssociateResourceErrorReason_INTERNAL_SERVER_EXCEPTION})
+var sAssociateResourceErrorReason_INVALID_BILLING_PERIOD_RANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_BILLING_PERIOD_RANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAssociateResourceErrorReason_INVALID_BILLING_PERIOD_RANGE})
+var sAssociateResourceResponseElement_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_CustomLineItemAssociationElement, Type: smithy.ShapeTypeString, Ext: &eAssociateResourceResponseElement_Arn})
+var sAssociateResourceResponseElement_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &iAssociateResourceError, Members: &mAssociateResourceError, Type: smithy.ShapeTypeStructure, Ext: &eAssociateResourceResponseElement_Error})
+var s_AssociateResourcesResponseList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssociateResourceResponseElement, Members: &mAssociateResourceResponseElement, Type: smithy.ShapeTypeStructure, Ext: &e_AssociateResourcesResponseList_member})
+var sAttribute_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAttribute_Key})
+var sAttribute_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAttribute_Value})
+var s_AttributesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttribute, Members: &mAttribute, Type: smithy.ShapeTypeStructure, Ext: &e_AttributesList_member})
+var s_AttributeValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AttributeValue, Type: smithy.ShapeTypeString, Ext: &e_AttributeValueList_member})
+var sAutoTransferBillingGroupCreationPreference_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eAutoTransferBillingGroupCreationPreference_Enabled})
+var sAutoTransferBillingGroupCreationPreference_PricingPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingPlanArn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &eAutoTransferBillingGroupCreationPreference_PricingPlanArn})
+var s_BillingGroupArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &e_BillingGroupArnList_member})
+var sBillingGroupCostReportElement_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &eBillingGroupCostReportElement_Arn})
+var sBillingGroupCostReportElement_AWSCost = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWSCost", ID: &i_AWSCost, Type: smithy.ShapeTypeString, Ext: &eBillingGroupCostReportElement_AWSCost})
+var sBillingGroupCostReportElement_ProformaCost = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProformaCost", ID: &i_ProformaCost, Type: smithy.ShapeTypeString, Ext: &eBillingGroupCostReportElement_ProformaCost})
+var sBillingGroupCostReportElement_Margin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Margin", ID: &i_Margin, Type: smithy.ShapeTypeString, Ext: &eBillingGroupCostReportElement_Margin})
+var sBillingGroupCostReportElement_MarginPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarginPercentage", ID: &i_MarginPercentage, Type: smithy.ShapeTypeString, Ext: &eBillingGroupCostReportElement_MarginPercentage})
+var sBillingGroupCostReportElement_Currency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Currency", ID: &i_Currency, Type: smithy.ShapeTypeString, Ext: &eBillingGroupCostReportElement_Currency})
+var s_BillingGroupCostReportList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBillingGroupCostReportElement, Members: &mBillingGroupCostReportElement, Type: smithy.ShapeTypeStructure, Ext: &e_BillingGroupCostReportList_member})
+var sBillingGroupCostReportResultElement_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &eBillingGroupCostReportResultElement_Arn})
+var sBillingGroupCostReportResultElement_AWSCost = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWSCost", ID: &i_AWSCost, Type: smithy.ShapeTypeString, Ext: &eBillingGroupCostReportResultElement_AWSCost})
+var sBillingGroupCostReportResultElement_ProformaCost = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProformaCost", ID: &i_ProformaCost, Type: smithy.ShapeTypeString, Ext: &eBillingGroupCostReportResultElement_ProformaCost})
+var sBillingGroupCostReportResultElement_Margin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Margin", ID: &i_Margin, Type: smithy.ShapeTypeString, Ext: &eBillingGroupCostReportResultElement_Margin})
+var sBillingGroupCostReportResultElement_MarginPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarginPercentage", ID: &i_MarginPercentage, Type: smithy.ShapeTypeString, Ext: &eBillingGroupCostReportResultElement_MarginPercentage})
+var sBillingGroupCostReportResultElement_Currency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Currency", ID: &i_Currency, Type: smithy.ShapeTypeString, Ext: &eBillingGroupCostReportResultElement_Currency})
+var sBillingGroupCostReportResultElement_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_AttributesList, Members: &m_AttributesList, Type: smithy.ShapeTypeList, Ext: &eBillingGroupCostReportResultElement_Attributes})
+var s_BillingGroupCostReportResultsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBillingGroupCostReportResultElement, Members: &mBillingGroupCostReportResultElement, Type: smithy.ShapeTypeStructure, Ext: &e_BillingGroupCostReportResultsList_member})
+var s_BillingGroupList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBillingGroupListElement, Members: &mBillingGroupListElement, Type: smithy.ShapeTypeStructure, Ext: &e_BillingGroupList_member})
+var sBillingGroupListElement_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_BillingGroupName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eBillingGroupListElement_Name})
+var sBillingGroupListElement_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &eBillingGroupListElement_Arn})
+var sBillingGroupListElement_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_BillingGroupDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eBillingGroupListElement_Description})
+var sBillingGroupListElement_PrimaryAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eBillingGroupListElement_PrimaryAccountId})
+var sBillingGroupListElement_ComputationPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputationPreference", ID: &iComputationPreference, Members: &mComputationPreference, Type: smithy.ShapeTypeStructure, Ext: &eBillingGroupListElement_ComputationPreference})
+var sBillingGroupListElement_Size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Size", ID: &i_NumberOfAccounts, Type: smithy.ShapeTypeLong, Ext: &eBillingGroupListElement_Size})
+var sBillingGroupListElement_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &eBillingGroupListElement_CreationTime})
+var sBillingGroupListElement_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &eBillingGroupListElement_LastModifiedTime})
+var sBillingGroupListElement_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iBillingGroupStatus, Members: &mBillingGroupStatus, Type: smithy.ShapeTypeEnum, Ext: &eBillingGroupListElement_Status})
+var sBillingGroupListElement_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &i_BillingGroupStatusReason, Type: smithy.ShapeTypeString, Ext: &eBillingGroupListElement_StatusReason})
+var sBillingGroupListElement_AccountGrouping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountGrouping", ID: &iListBillingGroupAccountGrouping, Members: &mListBillingGroupAccountGrouping, Type: smithy.ShapeTypeStructure, Ext: &eBillingGroupListElement_AccountGrouping})
+var sBillingGroupListElement_BillingGroupType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingGroupType", ID: &iBillingGroupType, Members: &mBillingGroupType, Type: smithy.ShapeTypeEnum, Ext: &eBillingGroupListElement_BillingGroupType})
+var sBillingGroupStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBillingGroupStatus_ACTIVE})
+var sBillingGroupStatus_PRIMARY_ACCOUNT_MISSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIMARY_ACCOUNT_MISSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBillingGroupStatus_PRIMARY_ACCOUNT_MISSING})
+var sBillingGroupStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBillingGroupStatus_PENDING})
+var s_BillingGroupStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBillingGroupStatus, Members: &mBillingGroupStatus, Type: smithy.ShapeTypeEnum, Ext: &e_BillingGroupStatusList_member})
+var sBillingGroupType_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBillingGroupType_STANDARD})
+var sBillingGroupType_TRANSFER_BILLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSFER_BILLING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBillingGroupType_TRANSFER_BILLING})
+var s_BillingGroupTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBillingGroupType, Members: &mBillingGroupType, Type: smithy.ShapeTypeEnum, Ext: &e_BillingGroupTypeList_member})
+var sBillingPeriodRange_InclusiveStartBillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InclusiveStartBillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &eBillingPeriodRange_InclusiveStartBillingPeriod})
+var sBillingPeriodRange_ExclusiveEndBillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExclusiveEndBillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &eBillingPeriodRange_ExclusiveEndBillingPeriod})
+var sComputationPreference_PricingPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingPlanArn", ID: &i_PricingPlanFullArn, Type: smithy.ShapeTypeString, Ext: &eComputationPreference_PricingPlanArn})
+var sComputationRuleEnum_ITEMIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ITEMIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputationRuleEnum_ITEMIZED})
+var sComputationRuleEnum_CONSOLIDATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONSOLIDATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputationRuleEnum_CONSOLIDATED})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var sConflictException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eConflictException_ResourceId})
+var sConflictException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eConflictException_ResourceType})
+var sConflictException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iConflictExceptionReason, Members: &mConflictExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eConflictException_Reason})
+var sConflictExceptionReason_RESOURCE_NAME_CONFLICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_NAME_CONFLICT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictExceptionReason_RESOURCE_NAME_CONFLICT})
+var sConflictExceptionReason_PRICING_RULE_IN_PRICING_PLAN_CONFLICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRICING_RULE_IN_PRICING_PLAN_CONFLICT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictExceptionReason_PRICING_RULE_IN_PRICING_PLAN_CONFLICT})
+var sConflictExceptionReason_PRICING_PLAN_ATTACHED_TO_BILLING_GROUP_DELETE_CONFLICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRICING_PLAN_ATTACHED_TO_BILLING_GROUP_DELETE_CONFLICT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictExceptionReason_PRICING_PLAN_ATTACHED_TO_BILLING_GROUP_DELETE_CONFLICT})
+var sConflictExceptionReason_PRICING_PLAN_REFERENCED_BY_PREFERENCE_DELETE_CONFLICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRICING_PLAN_REFERENCED_BY_PREFERENCE_DELETE_CONFLICT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictExceptionReason_PRICING_PLAN_REFERENCED_BY_PREFERENCE_DELETE_CONFLICT})
+var sConflictExceptionReason_PRICING_RULE_ATTACHED_TO_PRICING_PLAN_DELETE_CONFLICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRICING_RULE_ATTACHED_TO_PRICING_PLAN_DELETE_CONFLICT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictExceptionReason_PRICING_RULE_ATTACHED_TO_PRICING_PLAN_DELETE_CONFLICT})
+var sConflictExceptionReason_WRITE_CONFLICT_RETRY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WRITE_CONFLICT_RETRY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictExceptionReason_WRITE_CONFLICT_RETRY})
+var sCreateFreeTierConfig_Activated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Activated", ID: &i_TieringActivated, Type: smithy.ShapeTypeBoolean, Ext: &eCreateFreeTierConfig_Activated})
+var sCreateTieringInput_FreeTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FreeTier", ID: &iCreateFreeTierConfig, Members: &mCreateFreeTierConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateTieringInput_FreeTier})
+var sCreateTieringInput_CustomTiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomTiers", ID: &i_CustomTiersList, Members: &m_CustomTiersList, Type: smithy.ShapeTypeList, Ext: &eCreateTieringInput_CustomTiers})
+var sCurrencyCode_USD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_USD})
+var sCurrencyCode_CNY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CNY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_CNY})
+var s_CustomLineItemArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &e_CustomLineItemArns_member})
+var s_CustomLineItemAssociationsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CustomLineItemAssociationElement, Type: smithy.ShapeTypeString, Ext: &e_CustomLineItemAssociationsList_member})
+var s_CustomLineItemBatchAssociationsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CustomLineItemAssociationElement, Type: smithy.ShapeTypeString, Ext: &e_CustomLineItemBatchAssociationsList_member})
+var s_CustomLineItemBatchDisassociationsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CustomLineItemAssociationElement, Type: smithy.ShapeTypeString, Ext: &e_CustomLineItemBatchDisassociationsList_member})
+var sCustomLineItemBillingPeriodRange_InclusiveStartBillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InclusiveStartBillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &eCustomLineItemBillingPeriodRange_InclusiveStartBillingPeriod})
+var sCustomLineItemBillingPeriodRange_ExclusiveEndBillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExclusiveEndBillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &eCustomLineItemBillingPeriodRange_ExclusiveEndBillingPeriod})
+var sCustomLineItemChargeDetails_Flat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Flat", ID: &iCustomLineItemFlatChargeDetails, Members: &mCustomLineItemFlatChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &eCustomLineItemChargeDetails_Flat})
+var sCustomLineItemChargeDetails_Percentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Percentage", ID: &iCustomLineItemPercentageChargeDetails, Members: &mCustomLineItemPercentageChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &eCustomLineItemChargeDetails_Percentage})
+var sCustomLineItemChargeDetails_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iCustomLineItemType, Members: &mCustomLineItemType, Type: smithy.ShapeTypeEnum, Ext: &eCustomLineItemChargeDetails_Type})
+var sCustomLineItemChargeDetails_LineItemFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LineItemFilters", ID: &i_LineItemFiltersList, Members: &m_LineItemFiltersList, Type: smithy.ShapeTypeList, Ext: &eCustomLineItemChargeDetails_LineItemFilters})
+var sCustomLineItemFlatChargeDetails_ChargeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChargeValue", ID: &i_CustomLineItemChargeValue, Type: smithy.ShapeTypeDouble, Ext: &eCustomLineItemFlatChargeDetails_ChargeValue})
+var s_CustomLineItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomLineItemListElement, Members: &mCustomLineItemListElement, Type: smithy.ShapeTypeStructure, Ext: &e_CustomLineItemList_member})
+var sCustomLineItemListElement_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &eCustomLineItemListElement_Arn})
+var sCustomLineItemListElement_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CustomLineItemName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eCustomLineItemListElement_Name})
+var sCustomLineItemListElement_ChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChargeDetails", ID: &iListCustomLineItemChargeDetails, Members: &mListCustomLineItemChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &eCustomLineItemListElement_ChargeDetails})
+var sCustomLineItemListElement_CurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrencyCode", ID: &iCurrencyCode, Members: &mCurrencyCode, Type: smithy.ShapeTypeEnum, Ext: &eCustomLineItemListElement_CurrencyCode})
+var sCustomLineItemListElement_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_CustomLineItemDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eCustomLineItemListElement_Description})
+var sCustomLineItemListElement_ProductCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductCode", ID: &i_CustomLineItemProductCode, Type: smithy.ShapeTypeString, Ext: &eCustomLineItemListElement_ProductCode})
+var sCustomLineItemListElement_BillingGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingGroupArn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &eCustomLineItemListElement_BillingGroupArn})
+var sCustomLineItemListElement_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &eCustomLineItemListElement_CreationTime})
+var sCustomLineItemListElement_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &eCustomLineItemListElement_LastModifiedTime})
+var sCustomLineItemListElement_AssociationSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociationSize", ID: &i_NumberOfAssociations, Type: smithy.ShapeTypeLong, Ext: &eCustomLineItemListElement_AssociationSize})
+var sCustomLineItemListElement_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eCustomLineItemListElement_AccountId})
+var sCustomLineItemListElement_ComputationRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputationRule", ID: &iComputationRuleEnum, Members: &mComputationRuleEnum, Type: smithy.ShapeTypeEnum, Ext: &eCustomLineItemListElement_ComputationRule})
+var sCustomLineItemListElement_PresentationDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PresentationDetails", ID: &iPresentationObject, Members: &mPresentationObject, Type: smithy.ShapeTypeStructure, Ext: &eCustomLineItemListElement_PresentationDetails})
+var s_CustomLineItemNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CustomLineItemName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &e_CustomLineItemNameList_member})
+var sCustomLineItemPercentageChargeDetails_PercentageValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentageValue", ID: &i_CustomLineItemPercentageChargeValue, Type: smithy.ShapeTypeDouble, Ext: &eCustomLineItemPercentageChargeDetails_PercentageValue})
+var sCustomLineItemPercentageChargeDetails_AssociatedValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedValues", ID: &i_CustomLineItemAssociationsList, Members: &m_CustomLineItemAssociationsList, Type: smithy.ShapeTypeList, Ext: &eCustomLineItemPercentageChargeDetails_AssociatedValues})
+var sCustomLineItemRelationship_PARENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomLineItemRelationship_PARENT})
+var sCustomLineItemRelationship_CHILD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHILD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomLineItemRelationship_CHILD})
+var sCustomLineItemType_CREDIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREDIT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomLineItemType_CREDIT})
+var sCustomLineItemType_FEE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FEE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomLineItemType_FEE})
+var s_CustomLineItemVersionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomLineItemVersionListElement, Members: &mCustomLineItemVersionListElement, Type: smithy.ShapeTypeStructure, Ext: &e_CustomLineItemVersionList_member})
+var sCustomLineItemVersionListElement_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CustomLineItemName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eCustomLineItemVersionListElement_Name})
+var sCustomLineItemVersionListElement_ChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChargeDetails", ID: &iListCustomLineItemChargeDetails, Members: &mListCustomLineItemChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &eCustomLineItemVersionListElement_ChargeDetails})
+var sCustomLineItemVersionListElement_CurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrencyCode", ID: &iCurrencyCode, Members: &mCurrencyCode, Type: smithy.ShapeTypeEnum, Ext: &eCustomLineItemVersionListElement_CurrencyCode})
+var sCustomLineItemVersionListElement_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_CustomLineItemDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eCustomLineItemVersionListElement_Description})
+var sCustomLineItemVersionListElement_ProductCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductCode", ID: &i_CustomLineItemProductCode, Type: smithy.ShapeTypeString, Ext: &eCustomLineItemVersionListElement_ProductCode})
+var sCustomLineItemVersionListElement_BillingGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingGroupArn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &eCustomLineItemVersionListElement_BillingGroupArn})
+var sCustomLineItemVersionListElement_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &eCustomLineItemVersionListElement_CreationTime})
+var sCustomLineItemVersionListElement_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &eCustomLineItemVersionListElement_LastModifiedTime})
+var sCustomLineItemVersionListElement_AssociationSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociationSize", ID: &i_NumberOfAssociations, Type: smithy.ShapeTypeLong, Ext: &eCustomLineItemVersionListElement_AssociationSize})
+var sCustomLineItemVersionListElement_StartBillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartBillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &eCustomLineItemVersionListElement_StartBillingPeriod})
+var sCustomLineItemVersionListElement_EndBillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndBillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &eCustomLineItemVersionListElement_EndBillingPeriod})
+var sCustomLineItemVersionListElement_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &eCustomLineItemVersionListElement_Arn})
+var sCustomLineItemVersionListElement_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &eCustomLineItemVersionListElement_StartTime})
+var sCustomLineItemVersionListElement_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eCustomLineItemVersionListElement_AccountId})
+var sCustomLineItemVersionListElement_ComputationRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputationRule", ID: &iComputationRuleEnum, Members: &mComputationRuleEnum, Type: smithy.ShapeTypeEnum, Ext: &eCustomLineItemVersionListElement_ComputationRule})
+var sCustomLineItemVersionListElement_PresentationDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PresentationDetails", ID: &iPresentationObject, Members: &mPresentationObject, Type: smithy.ShapeTypeStructure, Ext: &eCustomLineItemVersionListElement_PresentationDetails})
+var sCustomTier_BeginRangeInclusive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeginRangeInclusive", ID: &i_CustomTierBeginRangeInclusive, Type: smithy.ShapeTypeDouble, Ext: &eCustomTier_BeginRangeInclusive})
+var sCustomTier_EndRangeExclusive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndRangeExclusive", ID: &i_CustomTierEndRangeExclusive, Type: smithy.ShapeTypeDouble, Ext: &eCustomTier_EndRangeExclusive})
+var sCustomTier_RateValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RateValue", ID: &i_CustomTierRateValue, Type: smithy.ShapeTypeDouble, Ext: &eCustomTier_RateValue})
+var s_CustomTiersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomTier, Members: &mCustomTier, Type: smithy.ShapeTypeStructure, Ext: &e_CustomTiersList_member})
+var sDisassociateResourceResponseElement_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_CustomLineItemAssociationElement, Type: smithy.ShapeTypeString, Ext: &eDisassociateResourceResponseElement_Arn})
+var sDisassociateResourceResponseElement_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &iAssociateResourceError, Members: &mAssociateResourceError, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateResourceResponseElement_Error})
+var s_DisassociateResourcesResponseList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDisassociateResourceResponseElement, Members: &mDisassociateResourceResponseElement, Type: smithy.ShapeTypeStructure, Ext: &e_DisassociateResourcesResponseList_member})
+var sFreeTierConfig_Activated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Activated", ID: &i_TieringActivated, Type: smithy.ShapeTypeBoolean, Ext: &eFreeTierConfig_Activated})
+var sGroupByAttributeName_PRODUCT_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRODUCT_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGroupByAttributeName_PRODUCT_NAME})
+var sGroupByAttributeName_BILLING_PERIOD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BILLING_PERIOD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGroupByAttributeName_BILLING_PERIOD})
+var s_GroupByAttributesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGroupByAttributeName, Members: &mGroupByAttributeName, Type: smithy.ShapeTypeEnum, Ext: &e_GroupByAttributesList_member})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var sInternalServerException_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryAfterSeconds", ID: &i_RetryAfterSeconds, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eInternalServerException_RetryAfterSeconds})
+var sLineItemFilter_Attribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attribute", ID: &iLineItemFilterAttributeName, Members: &mLineItemFilterAttributeName, Type: smithy.ShapeTypeEnum, Ext: &eLineItemFilter_Attribute})
+var sLineItemFilter_MatchOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchOption", ID: &iMatchOption, Members: &mMatchOption, Type: smithy.ShapeTypeEnum, Ext: &eLineItemFilter_MatchOption})
+var sLineItemFilter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_LineItemFilterValuesList, Members: &m_LineItemFilterValuesList, Type: smithy.ShapeTypeList, Ext: &eLineItemFilter_Values})
+var sLineItemFilter_AttributeValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeValues", ID: &i_AttributeValueList, Members: &m_AttributeValueList, Type: smithy.ShapeTypeList, Ext: &eLineItemFilter_AttributeValues})
+var sLineItemFilterAttributeName_LINE_ITEM_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINE_ITEM_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLineItemFilterAttributeName_LINE_ITEM_TYPE})
+var sLineItemFilterAttributeName_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLineItemFilterAttributeName_SERVICE})
+var s_LineItemFiltersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLineItemFilter, Members: &mLineItemFilter, Type: smithy.ShapeTypeStructure, Ext: &e_LineItemFiltersList_member})
+var sLineItemFilterValue_SAVINGS_PLAN_NEGATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAVINGS_PLAN_NEGATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLineItemFilterValue_SAVINGS_PLAN_NEGATION})
+var s_LineItemFilterValuesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLineItemFilterValue, Members: &mLineItemFilterValue, Type: smithy.ShapeTypeEnum, Ext: &e_LineItemFilterValuesList_member})
+var sListAccountAssociationsFilter_Association = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Association", ID: &i_Association, Type: smithy.ShapeTypeString, Ext: &eListAccountAssociationsFilter_Association})
+var sListAccountAssociationsFilter_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eListAccountAssociationsFilter_AccountId})
+var sListAccountAssociationsFilter_AccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountIds", ID: &i_AccountIdFilterList, Members: &m_AccountIdFilterList, Type: smithy.ShapeTypeList, Ext: &eListAccountAssociationsFilter_AccountIds})
+var sListBillingGroupAccountGrouping_AutoAssociate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoAssociate", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eListBillingGroupAccountGrouping_AutoAssociate})
+var sListBillingGroupAccountGrouping_ResponsibilityTransferArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponsibilityTransferArn", ID: &i_ResponsibilityTransferArn, Type: smithy.ShapeTypeString, Ext: &eListBillingGroupAccountGrouping_ResponsibilityTransferArn})
+var sListBillingGroupCostReportsFilter_BillingGroupArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingGroupArns", ID: &i_BillingGroupArnList, Members: &m_BillingGroupArnList, Type: smithy.ShapeTypeList, Ext: &eListBillingGroupCostReportsFilter_BillingGroupArns})
+var sListBillingGroupsFilter_Arns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arns", ID: &i_BillingGroupArnList, Members: &m_BillingGroupArnList, Type: smithy.ShapeTypeList, Ext: &eListBillingGroupsFilter_Arns})
+var sListBillingGroupsFilter_PricingPlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingPlan", ID: &i_PricingPlanFullArn, Type: smithy.ShapeTypeString, Ext: &eListBillingGroupsFilter_PricingPlan})
+var sListBillingGroupsFilter_Statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Statuses", ID: &i_BillingGroupStatusList, Members: &m_BillingGroupStatusList, Type: smithy.ShapeTypeList, Ext: &eListBillingGroupsFilter_Statuses})
+var sListBillingGroupsFilter_AutoAssociate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoAssociate", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eListBillingGroupsFilter_AutoAssociate})
+var sListBillingGroupsFilter_PrimaryAccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryAccountIds", ID: &i_PrimaryAccountIdList, Members: &m_PrimaryAccountIdList, Type: smithy.ShapeTypeList, Ext: &eListBillingGroupsFilter_PrimaryAccountIds})
+var sListBillingGroupsFilter_BillingGroupTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingGroupTypes", ID: &i_BillingGroupTypeList, Members: &m_BillingGroupTypeList, Type: smithy.ShapeTypeList, Ext: &eListBillingGroupsFilter_BillingGroupTypes})
+var sListBillingGroupsFilter_Names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Names", ID: &i_StringSearches, Members: &m_StringSearches, Type: smithy.ShapeTypeList, Ext: &eListBillingGroupsFilter_Names})
+var sListBillingGroupsFilter_ResponsibilityTransferArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponsibilityTransferArns", ID: &i_ResponsibilityTransferArnsList, Members: &m_ResponsibilityTransferArnsList, Type: smithy.ShapeTypeList, Ext: &eListBillingGroupsFilter_ResponsibilityTransferArns})
+var sListCustomLineItemChargeDetails_Flat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Flat", ID: &iListCustomLineItemFlatChargeDetails, Members: &mListCustomLineItemFlatChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &eListCustomLineItemChargeDetails_Flat})
+var sListCustomLineItemChargeDetails_Percentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Percentage", ID: &iListCustomLineItemPercentageChargeDetails, Members: &mListCustomLineItemPercentageChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &eListCustomLineItemChargeDetails_Percentage})
+var sListCustomLineItemChargeDetails_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iCustomLineItemType, Members: &mCustomLineItemType, Type: smithy.ShapeTypeEnum, Ext: &eListCustomLineItemChargeDetails_Type})
+var sListCustomLineItemChargeDetails_LineItemFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LineItemFilters", ID: &i_LineItemFiltersList, Members: &m_LineItemFiltersList, Type: smithy.ShapeTypeList, Ext: &eListCustomLineItemChargeDetails_LineItemFilters})
+var sListCustomLineItemFlatChargeDetails_ChargeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChargeValue", ID: &i_CustomLineItemChargeValue, Type: smithy.ShapeTypeDouble, Ext: &eListCustomLineItemFlatChargeDetails_ChargeValue})
+var sListCustomLineItemPercentageChargeDetails_PercentageValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentageValue", ID: &i_CustomLineItemPercentageChargeValue, Type: smithy.ShapeTypeDouble, Ext: &eListCustomLineItemPercentageChargeDetails_PercentageValue})
+var sListCustomLineItemsFilter_Names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Names", ID: &i_CustomLineItemNameList, Members: &m_CustomLineItemNameList, Type: smithy.ShapeTypeList, Ext: &eListCustomLineItemsFilter_Names})
+var sListCustomLineItemsFilter_BillingGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingGroups", ID: &i_BillingGroupArnList, Members: &m_BillingGroupArnList, Type: smithy.ShapeTypeList, Ext: &eListCustomLineItemsFilter_BillingGroups})
+var sListCustomLineItemsFilter_Arns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arns", ID: &i_CustomLineItemArns, Members: &m_CustomLineItemArns, Type: smithy.ShapeTypeList, Ext: &eListCustomLineItemsFilter_Arns})
+var sListCustomLineItemsFilter_AccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountIds", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList, Ext: &eListCustomLineItemsFilter_AccountIds})
+var sListCustomLineItemVersionsBillingPeriodRangeFilter_StartBillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartBillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &eListCustomLineItemVersionsBillingPeriodRangeFilter_StartBillingPeriod})
+var sListCustomLineItemVersionsBillingPeriodRangeFilter_EndBillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndBillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &eListCustomLineItemVersionsBillingPeriodRangeFilter_EndBillingPeriod})
+var sListCustomLineItemVersionsFilter_BillingPeriodRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriodRange", ID: &iListCustomLineItemVersionsBillingPeriodRangeFilter, Members: &mListCustomLineItemVersionsBillingPeriodRangeFilter, Type: smithy.ShapeTypeStructure, Ext: &eListCustomLineItemVersionsFilter_BillingPeriodRange})
+var sListPricingPlansFilter_Arns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arns", ID: &i_PricingPlanArns, Members: &m_PricingPlanArns, Type: smithy.ShapeTypeList, Ext: &eListPricingPlansFilter_Arns})
+var sListPricingRulesFilter_Arns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arns", ID: &i_PricingRuleArns, Members: &m_PricingRuleArns, Type: smithy.ShapeTypeList, Ext: &eListPricingRulesFilter_Arns})
+var sListResourcesAssociatedToCustomLineItemFilter_Relationship = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Relationship", ID: &iCustomLineItemRelationship, Members: &mCustomLineItemRelationship, Type: smithy.ShapeTypeEnum, Ext: &eListResourcesAssociatedToCustomLineItemFilter_Relationship})
+var sListResourcesAssociatedToCustomLineItemResponseElement_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_CustomLineItemAssociationElement, Type: smithy.ShapeTypeString, Ext: &eListResourcesAssociatedToCustomLineItemResponseElement_Arn})
+var sListResourcesAssociatedToCustomLineItemResponseElement_Relationship = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Relationship", ID: &iCustomLineItemRelationship, Members: &mCustomLineItemRelationship, Type: smithy.ShapeTypeEnum, Ext: &eListResourcesAssociatedToCustomLineItemResponseElement_Relationship})
+var sListResourcesAssociatedToCustomLineItemResponseElement_EndBillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndBillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &eListResourcesAssociatedToCustomLineItemResponseElement_EndBillingPeriod})
+var s_ListResourcesAssociatedToCustomLineItemResponseList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListResourcesAssociatedToCustomLineItemResponseElement, Members: &mListResourcesAssociatedToCustomLineItemResponseElement, Type: smithy.ShapeTypeStructure, Ext: &e_ListResourcesAssociatedToCustomLineItemResponseList_member})
+var sMatchOption_NOT_EQUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_EQUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMatchOption_NOT_EQUAL})
+var sMatchOption_EQUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMatchOption_EQUAL})
+var sPresentationObject_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &i_Service, Type: smithy.ShapeTypeString, Ext: &ePresentationObject_Service})
+var s_PricingPlanArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &e_PricingPlanArns_member})
+var s_PricingPlanList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPricingPlanListElement, Members: &mPricingPlanListElement, Type: smithy.ShapeTypeStructure, Ext: &e_PricingPlanList_member})
+var sPricingPlanListElement_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PricingPlanName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ePricingPlanListElement_Name})
+var sPricingPlanListElement_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &ePricingPlanListElement_Arn})
+var sPricingPlanListElement_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PricingPlanDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ePricingPlanListElement_Description})
+var sPricingPlanListElement_Size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Size", ID: &i_NumberOfAssociatedPricingRules, Type: smithy.ShapeTypeLong, Ext: &ePricingPlanListElement_Size})
+var sPricingPlanListElement_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &ePricingPlanListElement_CreationTime})
+var sPricingPlanListElement_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &ePricingPlanListElement_LastModifiedTime})
+var s_PricingRuleArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PricingRuleArn, Type: smithy.ShapeTypeString, Ext: &e_PricingRuleArns_member})
+var s_PricingRuleArnsInput_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PricingRuleArn, Type: smithy.ShapeTypeString, Ext: &e_PricingRuleArnsInput_member})
+var s_PricingRuleArnsNonEmptyInput_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PricingRuleArn, Type: smithy.ShapeTypeString, Ext: &e_PricingRuleArnsNonEmptyInput_member})
+var s_PricingRuleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPricingRuleListElement, Members: &mPricingRuleListElement, Type: smithy.ShapeTypeStructure, Ext: &e_PricingRuleList_member})
+var sPricingRuleListElement_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PricingRuleName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ePricingRuleListElement_Name})
+var sPricingRuleListElement_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingRuleArn, Type: smithy.ShapeTypeString, Ext: &ePricingRuleListElement_Arn})
+var sPricingRuleListElement_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PricingRuleDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ePricingRuleListElement_Description})
+var sPricingRuleListElement_Scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scope", ID: &iPricingRuleScope, Members: &mPricingRuleScope, Type: smithy.ShapeTypeEnum, Ext: &ePricingRuleListElement_Scope})
+var sPricingRuleListElement_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iPricingRuleType, Members: &mPricingRuleType, Type: smithy.ShapeTypeEnum, Ext: &ePricingRuleListElement_Type})
+var sPricingRuleListElement_ModifierPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifierPercentage", ID: &i_ModifierPercentage, Type: smithy.ShapeTypeDouble, Ext: &ePricingRuleListElement_ModifierPercentage})
+var sPricingRuleListElement_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &i_Service, Type: smithy.ShapeTypeString, Ext: &ePricingRuleListElement_Service})
+var sPricingRuleListElement_AssociatedPricingPlanCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedPricingPlanCount", ID: &i_NumberOfPricingPlansAssociatedWith, Type: smithy.ShapeTypeLong, Ext: &ePricingRuleListElement_AssociatedPricingPlanCount})
+var sPricingRuleListElement_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &ePricingRuleListElement_CreationTime})
+var sPricingRuleListElement_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &ePricingRuleListElement_LastModifiedTime})
+var sPricingRuleListElement_BillingEntity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingEntity", ID: &i_BillingEntity, Type: smithy.ShapeTypeString, Ext: &ePricingRuleListElement_BillingEntity})
+var sPricingRuleListElement_Tiering = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tiering", ID: &iTiering, Members: &mTiering, Type: smithy.ShapeTypeStructure, Ext: &ePricingRuleListElement_Tiering})
+var sPricingRuleListElement_UsageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageType", ID: &i_UsageType, Type: smithy.ShapeTypeString, Ext: &ePricingRuleListElement_UsageType})
+var sPricingRuleListElement_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i_Operation, Type: smithy.ShapeTypeString, Ext: &ePricingRuleListElement_Operation})
+var sPricingRuleScope_GLOBAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GLOBAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePricingRuleScope_GLOBAL})
+var sPricingRuleScope_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePricingRuleScope_SERVICE})
+var sPricingRuleScope_BILLING_ENTITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BILLING_ENTITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePricingRuleScope_BILLING_ENTITY})
+var sPricingRuleScope_SKU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SKU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePricingRuleScope_SKU})
+var sPricingRuleType_MARKUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MARKUP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePricingRuleType_MARKUP})
+var sPricingRuleType_DISCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePricingRuleType_DISCOUNT})
+var sPricingRuleType_TIERING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIERING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePricingRuleType_TIERING})
+var s_PrimaryAccountIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_PrimaryAccountIdList_member})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sResourceNotFoundException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_ResourceId})
+var sResourceNotFoundException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_ResourceType})
+var s_ResponsibilityTransferArnsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResponsibilityTransferArn, Type: smithy.ShapeTypeString, Ext: &e_ResponsibilityTransferArnsList_member})
+var sSearchOption_STARTS_WITH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STARTS_WITH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchOption_STARTS_WITH})
+var sServiceLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceLimitExceededException_Message})
+var sServiceLimitExceededException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceLimitExceededException_ResourceId})
+var sServiceLimitExceededException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceLimitExceededException_ResourceType})
+var sServiceLimitExceededException_LimitCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LimitCode", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceLimitExceededException_LimitCode})
+var sServiceLimitExceededException_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceLimitExceededException_ServiceCode})
+var sStringSearch_SearchOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchOption", ID: &iSearchOption, Members: &mSearchOption, Type: smithy.ShapeTypeEnum, Ext: &eStringSearch_SearchOption})
+var sStringSearch_SearchValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchValue", ID: &i_SearchValue, Type: smithy.ShapeTypeString, Ext: &eStringSearch_SearchValue})
+var s_StringSearches_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStringSearch, Members: &mStringSearch, Type: smithy.ShapeTypeStructure, Ext: &e_StringSearches_member})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var sThrottlingException_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryAfterSeconds", ID: &i_RetryAfterSeconds, Traits: &t39, Type: smithy.ShapeTypeInteger, Ext: &eThrottlingException_RetryAfterSeconds})
+var sTiering_FreeTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FreeTier", ID: &iFreeTierConfig, Members: &mFreeTierConfig, Type: smithy.ShapeTypeStructure, Ext: &eTiering_FreeTier})
+var sTiering_CustomTiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomTiers", ID: &i_CustomTiersList, Members: &m_CustomTiersList, Type: smithy.ShapeTypeList, Ext: &eTiering_CustomTiers})
+var sUpdateBillingGroupAccountGrouping_AutoAssociate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoAssociate", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateBillingGroupAccountGrouping_AutoAssociate})
+var sUpdateBillingGroupAccountGrouping_ResponsibilityTransferArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponsibilityTransferArn", ID: &i_ResponsibilityTransferArn, Type: smithy.ShapeTypeString, Ext: &eUpdateBillingGroupAccountGrouping_ResponsibilityTransferArn})
+var sUpdateCustomLineItemChargeDetails_Flat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Flat", ID: &iUpdateCustomLineItemFlatChargeDetails, Members: &mUpdateCustomLineItemFlatChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCustomLineItemChargeDetails_Flat})
+var sUpdateCustomLineItemChargeDetails_Percentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Percentage", ID: &iUpdateCustomLineItemPercentageChargeDetails, Members: &mUpdateCustomLineItemPercentageChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCustomLineItemChargeDetails_Percentage})
+var sUpdateCustomLineItemChargeDetails_LineItemFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LineItemFilters", ID: &i_LineItemFiltersList, Members: &m_LineItemFiltersList, Type: smithy.ShapeTypeList, Ext: &eUpdateCustomLineItemChargeDetails_LineItemFilters})
+var sUpdateCustomLineItemFlatChargeDetails_ChargeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChargeValue", ID: &i_CustomLineItemChargeValue, Type: smithy.ShapeTypeDouble, Ext: &eUpdateCustomLineItemFlatChargeDetails_ChargeValue})
+var sUpdateCustomLineItemPercentageChargeDetails_PercentageValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentageValue", ID: &i_CustomLineItemPercentageChargeValue, Type: smithy.ShapeTypeDouble, Ext: &eUpdateCustomLineItemPercentageChargeDetails_PercentageValue})
+var sUpdateFreeTierConfig_Activated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Activated", ID: &i_TieringActivated, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateFreeTierConfig_Activated})
+var sUpdateTieringInput_FreeTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FreeTier", ID: &iUpdateFreeTierConfig, Members: &mUpdateFreeTierConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTieringInput_FreeTier})
+var sUpdateTieringInput_CustomTiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomTiers", ID: &i_CustomTiersList, Members: &m_CustomTiersList, Type: smithy.ShapeTypeList, Ext: &eUpdateTieringInput_CustomTiers})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sValidationException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_Reason})
+var sValidationException_Fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fields", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_Fields})
+var sValidationExceptionField_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_Name})
+var sValidationExceptionField_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_Message})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_UNKNOWN_OPERATION})
+var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_CANNOT_PARSE})
+var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_FIELD_VALIDATION_FAILED})
+var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_OTHER})
+var sValidationExceptionReason_PRIMARY_NOT_ASSOCIATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIMARY_NOT_ASSOCIATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_PRIMARY_NOT_ASSOCIATED})
+var sValidationExceptionReason_PRIMARY_CANNOT_DISASSOCIATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIMARY_CANNOT_DISASSOCIATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_PRIMARY_CANNOT_DISASSOCIATE})
+var sValidationExceptionReason_ACCOUNTS_NOT_ASSOCIATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNTS_NOT_ASSOCIATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ACCOUNTS_NOT_ASSOCIATED})
+var sValidationExceptionReason_ACCOUNTS_ALREADY_ASSOCIATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNTS_ALREADY_ASSOCIATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ACCOUNTS_ALREADY_ASSOCIATED})
+var sValidationExceptionReason_ILLEGAL_PRIMARY_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_PRIMARY_ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ILLEGAL_PRIMARY_ACCOUNT})
+var sValidationExceptionReason_ILLEGAL_ACCOUNTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_ACCOUNTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ILLEGAL_ACCOUNTS})
+var sValidationExceptionReason_MISMATCHED_BILLINGGROUP_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISMATCHED_BILLINGGROUP_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_MISMATCHED_BILLINGGROUP_ARN})
+var sValidationExceptionReason_MISSING_BILLINGGROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING_BILLINGGROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_MISSING_BILLINGGROUP})
+var sValidationExceptionReason_MISMATCHED_CUSTOMLINEITEM_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISMATCHED_CUSTOMLINEITEM_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_MISMATCHED_CUSTOMLINEITEM_ARN})
+var sValidationExceptionReason_ILLEGAL_BILLING_PERIOD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_BILLING_PERIOD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ILLEGAL_BILLING_PERIOD})
+var sValidationExceptionReason_ILLEGAL_BILLING_PERIOD_RANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_BILLING_PERIOD_RANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ILLEGAL_BILLING_PERIOD_RANGE})
+var sValidationExceptionReason_TOO_MANY_ACCOUNTS_IN_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOO_MANY_ACCOUNTS_IN_REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_TOO_MANY_ACCOUNTS_IN_REQUEST})
+var sValidationExceptionReason_DUPLICATE_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUPLICATE_ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_DUPLICATE_ACCOUNT})
+var sValidationExceptionReason_INVALID_BILLING_GROUP_STATUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_BILLING_GROUP_STATUS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_BILLING_GROUP_STATUS})
+var sValidationExceptionReason_MISMATCHED_PRICINGPLAN_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISMATCHED_PRICINGPLAN_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_MISMATCHED_PRICINGPLAN_ARN})
+var sValidationExceptionReason_MISSING_PRICINGPLAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING_PRICINGPLAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_MISSING_PRICINGPLAN})
+var sValidationExceptionReason_MISMATCHED_PRICINGRULE_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISMATCHED_PRICINGRULE_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_MISMATCHED_PRICINGRULE_ARN})
+var sValidationExceptionReason_DUPLICATE_PRICINGRULE_ARNS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUPLICATE_PRICINGRULE_ARNS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_DUPLICATE_PRICINGRULE_ARNS})
+var sValidationExceptionReason_MISSING_COSTCATEGORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING_COSTCATEGORY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_MISSING_COSTCATEGORY})
+var sValidationExceptionReason_ILLEGAL_EXPRESSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_EXPRESSION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ILLEGAL_EXPRESSION})
+var sValidationExceptionReason_ILLEGAL_SCOPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_SCOPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ILLEGAL_SCOPE})
+var sValidationExceptionReason_ILLEGAL_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ILLEGAL_SERVICE})
+var sValidationExceptionReason_PRICINGRULES_NOT_EXIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRICINGRULES_NOT_EXIST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_PRICINGRULES_NOT_EXIST})
+var sValidationExceptionReason_PRICINGRULES_ALREADY_ASSOCIATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRICINGRULES_ALREADY_ASSOCIATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_PRICINGRULES_ALREADY_ASSOCIATED})
+var sValidationExceptionReason_PRICINGRULES_NOT_ASSOCIATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRICINGRULES_NOT_ASSOCIATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_PRICINGRULES_NOT_ASSOCIATED})
+var sValidationExceptionReason_INVALID_TIME_RANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_TIME_RANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_TIME_RANGE})
+var sValidationExceptionReason_INVALID_BILLINGVIEW_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_BILLINGVIEW_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_BILLINGVIEW_ARN})
+var sValidationExceptionReason_MISMATCHED_BILLINGVIEW_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISMATCHED_BILLINGVIEW_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_MISMATCHED_BILLINGVIEW_ARN})
+var sValidationExceptionReason_ILLEGAL_CUSTOMLINEITEM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_CUSTOMLINEITEM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ILLEGAL_CUSTOMLINEITEM})
+var sValidationExceptionReason_MISSING_CUSTOMLINEITEM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING_CUSTOMLINEITEM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_MISSING_CUSTOMLINEITEM})
+var sValidationExceptionReason_ILLEGAL_CUSTOMLINEITEM_UPDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_CUSTOMLINEITEM_UPDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ILLEGAL_CUSTOMLINEITEM_UPDATE})
+var sValidationExceptionReason_TOO_MANY_CUSTOMLINEITEMS_IN_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOO_MANY_CUSTOMLINEITEMS_IN_REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_TOO_MANY_CUSTOMLINEITEMS_IN_REQUEST})
+var sValidationExceptionReason_ILLEGAL_CHARGE_DETAILS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_CHARGE_DETAILS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ILLEGAL_CHARGE_DETAILS})
+var sValidationExceptionReason_ILLEGAL_UPDATE_CHARGE_DETAILS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_UPDATE_CHARGE_DETAILS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ILLEGAL_UPDATE_CHARGE_DETAILS})
+var sValidationExceptionReason_INVALID_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_ARN})
+var sValidationExceptionReason_ILLEGAL_RESOURCE_ARNS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_RESOURCE_ARNS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ILLEGAL_RESOURCE_ARNS})
+var sValidationExceptionReason_ILLEGAL_CUSTOMLINEITEM_MODIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_CUSTOMLINEITEM_MODIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ILLEGAL_CUSTOMLINEITEM_MODIFICATION})
+var sValidationExceptionReason_MISSING_LINKED_ACCOUNT_IDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING_LINKED_ACCOUNT_IDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_MISSING_LINKED_ACCOUNT_IDS})
+var sValidationExceptionReason_MULTIPLE_LINKED_ACCOUNT_IDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIPLE_LINKED_ACCOUNT_IDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_MULTIPLE_LINKED_ACCOUNT_IDS})
+var sValidationExceptionReason_MISSING_PRICING_PLAN_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING_PRICING_PLAN_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_MISSING_PRICING_PLAN_ARN})
+var sValidationExceptionReason_MULTIPLE_PRICING_PLAN_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIPLE_PRICING_PLAN_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_MULTIPLE_PRICING_PLAN_ARN})
+var sValidationExceptionReason_ILLEGAL_CHILD_ASSOCIATE_RESOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_CHILD_ASSOCIATE_RESOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ILLEGAL_CHILD_ASSOCIATE_RESOURCE})
+var sValidationExceptionReason_CUSTOM_LINE_ITEM_ASSOCIATION_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM_LINE_ITEM_ASSOCIATION_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_CUSTOM_LINE_ITEM_ASSOCIATION_EXISTS})
+var sValidationExceptionReason_INVALID_BILLING_GROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_BILLING_GROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_BILLING_GROUP})
+var sValidationExceptionReason_INVALID_BILLING_PERIOD_FOR_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_BILLING_PERIOD_FOR_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_BILLING_PERIOD_FOR_OPERATION})
+var sValidationExceptionReason_ILLEGAL_BILLING_ENTITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_BILLING_ENTITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ILLEGAL_BILLING_ENTITY})
+var sValidationExceptionReason_ILLEGAL_MODIFIER_PERCENTAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_MODIFIER_PERCENTAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ILLEGAL_MODIFIER_PERCENTAGE})
+var sValidationExceptionReason_ILLEGAL_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ILLEGAL_TYPE})
+var sValidationExceptionReason_ILLEGAL_BILLING_GROUP_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_BILLING_GROUP_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ILLEGAL_BILLING_GROUP_TYPE})
+var sValidationExceptionReason_ILLEGAL_BILLING_GROUP_PRICING_PLAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_BILLING_GROUP_PRICING_PLAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ILLEGAL_BILLING_GROUP_PRICING_PLAN})
+var sValidationExceptionReason_ILLEGAL_ENDED_BILLINGGROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_ENDED_BILLINGGROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ILLEGAL_ENDED_BILLINGGROUP})
+var sValidationExceptionReason_ILLEGAL_TIERING_INPUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_TIERING_INPUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ILLEGAL_TIERING_INPUT})
+var sValidationExceptionReason_ILLEGAL_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ILLEGAL_OPERATION})
+var sValidationExceptionReason_ILLEGAL_USAGE_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_USAGE_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ILLEGAL_USAGE_TYPE})
+var sValidationExceptionReason_INVALID_SKU_COMBO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_SKU_COMBO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_SKU_COMBO})
+var sValidationExceptionReason_INVALID_FILTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_FILTER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_FILTER})
+var sValidationExceptionReason_TOO_MANY_AUTO_ASSOCIATE_BILLING_GROUPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOO_MANY_AUTO_ASSOCIATE_BILLING_GROUPS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_TOO_MANY_AUTO_ASSOCIATE_BILLING_GROUPS})
+var sValidationExceptionReason_CANNOT_DELETE_AUTO_ASSOCIATE_BILLING_GROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_DELETE_AUTO_ASSOCIATE_BILLING_GROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_CANNOT_DELETE_AUTO_ASSOCIATE_BILLING_GROUP})
+var sValidationExceptionReason_ILLEGAL_ACCOUNT_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_ACCOUNT_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ILLEGAL_ACCOUNT_ID})
+var sValidationExceptionReason_BILLING_GROUP_ALREADY_EXIST_IN_CURRENT_BILLING_PERIOD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BILLING_GROUP_ALREADY_EXIST_IN_CURRENT_BILLING_PERIOD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_BILLING_GROUP_ALREADY_EXIST_IN_CURRENT_BILLING_PERIOD})
+var sValidationExceptionReason_ILLEGAL_COMPUTATION_RULE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_COMPUTATION_RULE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ILLEGAL_COMPUTATION_RULE})
+var sValidationExceptionReason_ILLEGAL_LINE_ITEM_FILTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_LINE_ITEM_FILTER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ILLEGAL_LINE_ITEM_FILTER})
+var sAssociateAccountsInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &eAssociateAccountsInput_Arn})
+var sAssociateAccountsInput_AccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountIds", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList, Ext: &eAssociateAccountsInput_AccountIds})
+var sAssociateAccountsOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &eAssociateAccountsOutput_Arn})
+var sAssociatePricingRulesInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &eAssociatePricingRulesInput_Arn})
+var sAssociatePricingRulesInput_PricingRuleArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingRuleArns", ID: &i_PricingRuleArnsNonEmptyInput, Members: &m_PricingRuleArnsNonEmptyInput, Type: smithy.ShapeTypeList, Ext: &eAssociatePricingRulesInput_PricingRuleArns})
+var sAssociatePricingRulesOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &eAssociatePricingRulesOutput_Arn})
+var sBatchAssociateResourcesToCustomLineItemInput_TargetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetArn", ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &eBatchAssociateResourcesToCustomLineItemInput_TargetArn})
+var sBatchAssociateResourcesToCustomLineItemInput_ResourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArns", ID: &i_CustomLineItemBatchAssociationsList, Members: &m_CustomLineItemBatchAssociationsList, Type: smithy.ShapeTypeList, Ext: &eBatchAssociateResourcesToCustomLineItemInput_ResourceArns})
+var sBatchAssociateResourcesToCustomLineItemInput_BillingPeriodRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriodRange", ID: &iCustomLineItemBillingPeriodRange, Members: &mCustomLineItemBillingPeriodRange, Type: smithy.ShapeTypeStructure, Ext: &eBatchAssociateResourcesToCustomLineItemInput_BillingPeriodRange})
+var sBatchAssociateResourcesToCustomLineItemOutput_SuccessfullyAssociatedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuccessfullyAssociatedResources", ID: &i_AssociateResourcesResponseList, Members: &m_AssociateResourcesResponseList, Type: smithy.ShapeTypeList, Ext: &eBatchAssociateResourcesToCustomLineItemOutput_SuccessfullyAssociatedResources})
+var sBatchAssociateResourcesToCustomLineItemOutput_FailedAssociatedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedAssociatedResources", ID: &i_AssociateResourcesResponseList, Members: &m_AssociateResourcesResponseList, Type: smithy.ShapeTypeList, Ext: &eBatchAssociateResourcesToCustomLineItemOutput_FailedAssociatedResources})
+var sBatchDisassociateResourcesFromCustomLineItemInput_TargetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetArn", ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &eBatchDisassociateResourcesFromCustomLineItemInput_TargetArn})
+var sBatchDisassociateResourcesFromCustomLineItemInput_ResourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArns", ID: &i_CustomLineItemBatchDisassociationsList, Members: &m_CustomLineItemBatchDisassociationsList, Type: smithy.ShapeTypeList, Ext: &eBatchDisassociateResourcesFromCustomLineItemInput_ResourceArns})
+var sBatchDisassociateResourcesFromCustomLineItemInput_BillingPeriodRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriodRange", ID: &iCustomLineItemBillingPeriodRange, Members: &mCustomLineItemBillingPeriodRange, Type: smithy.ShapeTypeStructure, Ext: &eBatchDisassociateResourcesFromCustomLineItemInput_BillingPeriodRange})
+var sBatchDisassociateResourcesFromCustomLineItemOutput_SuccessfullyDisassociatedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuccessfullyDisassociatedResources", ID: &i_DisassociateResourcesResponseList, Members: &m_DisassociateResourcesResponseList, Type: smithy.ShapeTypeList, Ext: &eBatchDisassociateResourcesFromCustomLineItemOutput_SuccessfullyDisassociatedResources})
+var sBatchDisassociateResourcesFromCustomLineItemOutput_FailedDisassociatedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedDisassociatedResources", ID: &i_DisassociateResourcesResponseList, Members: &m_DisassociateResourcesResponseList, Type: smithy.ShapeTypeList, Ext: &eBatchDisassociateResourcesFromCustomLineItemOutput_FailedDisassociatedResources})
+var sCreateBillingGroupInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &eCreateBillingGroupInput_ClientToken})
+var sCreateBillingGroupInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_BillingGroupName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eCreateBillingGroupInput_Name})
+var sCreateBillingGroupInput_AccountGrouping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountGrouping", ID: &iAccountGrouping, Members: &mAccountGrouping, Type: smithy.ShapeTypeStructure, Ext: &eCreateBillingGroupInput_AccountGrouping})
+var sCreateBillingGroupInput_ComputationPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputationPreference", ID: &iComputationPreference, Members: &mComputationPreference, Type: smithy.ShapeTypeStructure, Ext: &eCreateBillingGroupInput_ComputationPreference})
+var sCreateBillingGroupInput_PrimaryAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eCreateBillingGroupInput_PrimaryAccountId})
+var sCreateBillingGroupInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_BillingGroupDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eCreateBillingGroupInput_Description})
+var sCreateBillingGroupInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateBillingGroupInput_Tags})
+var sCreateBillingGroupOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &eCreateBillingGroupOutput_Arn})
+var sCreateCustomLineItemInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &eCreateCustomLineItemInput_ClientToken})
+var sCreateCustomLineItemInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CustomLineItemName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eCreateCustomLineItemInput_Name})
+var sCreateCustomLineItemInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_CustomLineItemDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eCreateCustomLineItemInput_Description})
+var sCreateCustomLineItemInput_BillingGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingGroupArn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &eCreateCustomLineItemInput_BillingGroupArn})
+var sCreateCustomLineItemInput_BillingPeriodRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriodRange", ID: &iCustomLineItemBillingPeriodRange, Members: &mCustomLineItemBillingPeriodRange, Type: smithy.ShapeTypeStructure, Ext: &eCreateCustomLineItemInput_BillingPeriodRange})
+var sCreateCustomLineItemInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateCustomLineItemInput_Tags})
+var sCreateCustomLineItemInput_ChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChargeDetails", ID: &iCustomLineItemChargeDetails, Members: &mCustomLineItemChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &eCreateCustomLineItemInput_ChargeDetails})
+var sCreateCustomLineItemInput_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eCreateCustomLineItemInput_AccountId})
+var sCreateCustomLineItemInput_ComputationRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputationRule", ID: &iComputationRuleEnum, Members: &mComputationRuleEnum, Type: smithy.ShapeTypeEnum, Ext: &eCreateCustomLineItemInput_ComputationRule})
+var sCreateCustomLineItemInput_PresentationDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PresentationDetails", ID: &iPresentationObject, Members: &mPresentationObject, Type: smithy.ShapeTypeStructure, Ext: &eCreateCustomLineItemInput_PresentationDetails})
+var sCreateCustomLineItemOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &eCreateCustomLineItemOutput_Arn})
+var sCreatePricingPlanInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &eCreatePricingPlanInput_ClientToken})
+var sCreatePricingPlanInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PricingPlanName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eCreatePricingPlanInput_Name})
+var sCreatePricingPlanInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PricingPlanDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eCreatePricingPlanInput_Description})
+var sCreatePricingPlanInput_PricingRuleArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingRuleArns", ID: &i_PricingRuleArnsInput, Members: &m_PricingRuleArnsInput, Type: smithy.ShapeTypeList, Ext: &eCreatePricingPlanInput_PricingRuleArns})
+var sCreatePricingPlanInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreatePricingPlanInput_Tags})
+var sCreatePricingPlanOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &eCreatePricingPlanOutput_Arn})
+var sCreatePricingRuleInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &eCreatePricingRuleInput_ClientToken})
+var sCreatePricingRuleInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PricingRuleName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eCreatePricingRuleInput_Name})
+var sCreatePricingRuleInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PricingRuleDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eCreatePricingRuleInput_Description})
+var sCreatePricingRuleInput_Scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scope", ID: &iPricingRuleScope, Members: &mPricingRuleScope, Type: smithy.ShapeTypeEnum, Ext: &eCreatePricingRuleInput_Scope})
+var sCreatePricingRuleInput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iPricingRuleType, Members: &mPricingRuleType, Type: smithy.ShapeTypeEnum, Ext: &eCreatePricingRuleInput_Type})
+var sCreatePricingRuleInput_ModifierPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifierPercentage", ID: &i_ModifierPercentage, Type: smithy.ShapeTypeDouble, Ext: &eCreatePricingRuleInput_ModifierPercentage})
+var sCreatePricingRuleInput_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &i_Service, Type: smithy.ShapeTypeString, Ext: &eCreatePricingRuleInput_Service})
+var sCreatePricingRuleInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreatePricingRuleInput_Tags})
+var sCreatePricingRuleInput_BillingEntity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingEntity", ID: &i_BillingEntity, Type: smithy.ShapeTypeString, Ext: &eCreatePricingRuleInput_BillingEntity})
+var sCreatePricingRuleInput_Tiering = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tiering", ID: &iCreateTieringInput, Members: &mCreateTieringInput, Type: smithy.ShapeTypeStructure, Ext: &eCreatePricingRuleInput_Tiering})
+var sCreatePricingRuleInput_UsageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageType", ID: &i_UsageType, Type: smithy.ShapeTypeString, Ext: &eCreatePricingRuleInput_UsageType})
+var sCreatePricingRuleInput_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i_Operation, Type: smithy.ShapeTypeString, Ext: &eCreatePricingRuleInput_Operation})
+var sCreatePricingRuleOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingRuleArn, Type: smithy.ShapeTypeString, Ext: &eCreatePricingRuleOutput_Arn})
+var sDeleteBillingGroupInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &eDeleteBillingGroupInput_Arn})
+var sDeleteBillingGroupOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &eDeleteBillingGroupOutput_Arn})
+var sDeleteCustomLineItemInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &eDeleteCustomLineItemInput_Arn})
+var sDeleteCustomLineItemInput_BillingPeriodRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriodRange", ID: &iCustomLineItemBillingPeriodRange, Members: &mCustomLineItemBillingPeriodRange, Type: smithy.ShapeTypeStructure, Ext: &eDeleteCustomLineItemInput_BillingPeriodRange})
+var sDeleteCustomLineItemOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &eDeleteCustomLineItemOutput_Arn})
+var sDeletePricingPlanInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &eDeletePricingPlanInput_Arn})
+var sDeletePricingPlanOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &eDeletePricingPlanOutput_Arn})
+var sDeletePricingRuleInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingRuleArn, Type: smithy.ShapeTypeString, Ext: &eDeletePricingRuleInput_Arn})
+var sDeletePricingRuleOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingRuleArn, Type: smithy.ShapeTypeString, Ext: &eDeletePricingRuleOutput_Arn})
+var sDisassociateAccountsInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &eDisassociateAccountsInput_Arn})
+var sDisassociateAccountsInput_AccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountIds", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList, Ext: &eDisassociateAccountsInput_AccountIds})
+var sDisassociateAccountsOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &eDisassociateAccountsOutput_Arn})
+var sDisassociatePricingRulesInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &eDisassociatePricingRulesInput_Arn})
+var sDisassociatePricingRulesInput_PricingRuleArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingRuleArns", ID: &i_PricingRuleArnsNonEmptyInput, Members: &m_PricingRuleArnsNonEmptyInput, Type: smithy.ShapeTypeList, Ext: &eDisassociatePricingRulesInput_PricingRuleArns})
+var sDisassociatePricingRulesOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &eDisassociatePricingRulesOutput_Arn})
+var sGetBillingGroupCostReportInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &eGetBillingGroupCostReportInput_Arn})
+var sGetBillingGroupCostReportInput_BillingPeriodRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriodRange", ID: &iBillingPeriodRange, Members: &mBillingPeriodRange, Type: smithy.ShapeTypeStructure, Ext: &eGetBillingGroupCostReportInput_BillingPeriodRange})
+var sGetBillingGroupCostReportInput_GroupBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupBy", ID: &i_GroupByAttributesList, Members: &m_GroupByAttributesList, Type: smithy.ShapeTypeList, Ext: &eGetBillingGroupCostReportInput_GroupBy})
+var sGetBillingGroupCostReportInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxBillingGroupCostReportResults, Type: smithy.ShapeTypeInteger, Ext: &eGetBillingGroupCostReportInput_MaxResults})
+var sGetBillingGroupCostReportInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eGetBillingGroupCostReportInput_NextToken})
+var sGetBillingGroupCostReportOutput_BillingGroupCostReportResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingGroupCostReportResults", ID: &i_BillingGroupCostReportResultsList, Members: &m_BillingGroupCostReportResultsList, Type: smithy.ShapeTypeList, Ext: &eGetBillingGroupCostReportOutput_BillingGroupCostReportResults})
+var sGetBillingGroupCostReportOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eGetBillingGroupCostReportOutput_NextToken})
+var sGetBillingTransferPreferenceInput_ResponsibilityTransferArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponsibilityTransferArn", ID: &i_ResponsibilityTransferArn, Type: smithy.ShapeTypeString, Ext: &eGetBillingTransferPreferenceInput_ResponsibilityTransferArn})
+var sGetBillingTransferPreferenceOutput_ResponsibilityTransferArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponsibilityTransferArn", ID: &i_ResponsibilityTransferArn, Type: smithy.ShapeTypeString, Ext: &eGetBillingTransferPreferenceOutput_ResponsibilityTransferArn})
+var sGetBillingTransferPreferenceOutput_AutoBillingTransferBillingGroupCreation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoBillingTransferBillingGroupCreation", ID: &iAutoTransferBillingGroupCreationPreference, Members: &mAutoTransferBillingGroupCreationPreference, Type: smithy.ShapeTypeStructure, Ext: &eGetBillingTransferPreferenceOutput_AutoBillingTransferBillingGroupCreation})
+var sGetBillingTransferPreferenceOutput_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &eGetBillingTransferPreferenceOutput_LastModifiedTime})
+var sListAccountAssociationsInput_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &eListAccountAssociationsInput_BillingPeriod})
+var sListAccountAssociationsInput_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iListAccountAssociationsFilter, Members: &mListAccountAssociationsFilter, Type: smithy.ShapeTypeStructure, Ext: &eListAccountAssociationsInput_Filters})
+var sListAccountAssociationsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListAccountAssociationsInput_NextToken})
+var sListAccountAssociationsOutput_LinkedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkedAccounts", ID: &i_AccountAssociationsList, Members: &m_AccountAssociationsList, Type: smithy.ShapeTypeList, Ext: &eListAccountAssociationsOutput_LinkedAccounts})
+var sListAccountAssociationsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListAccountAssociationsOutput_NextToken})
+var sListBillingGroupCostReportsInput_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &eListBillingGroupCostReportsInput_BillingPeriod})
+var sListBillingGroupCostReportsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxBillingGroupResults, Type: smithy.ShapeTypeInteger, Ext: &eListBillingGroupCostReportsInput_MaxResults})
+var sListBillingGroupCostReportsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListBillingGroupCostReportsInput_NextToken})
+var sListBillingGroupCostReportsInput_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iListBillingGroupCostReportsFilter, Members: &mListBillingGroupCostReportsFilter, Type: smithy.ShapeTypeStructure, Ext: &eListBillingGroupCostReportsInput_Filters})
+var sListBillingGroupCostReportsOutput_BillingGroupCostReports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingGroupCostReports", ID: &i_BillingGroupCostReportList, Members: &m_BillingGroupCostReportList, Type: smithy.ShapeTypeList, Ext: &eListBillingGroupCostReportsOutput_BillingGroupCostReports})
+var sListBillingGroupCostReportsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListBillingGroupCostReportsOutput_NextToken})
+var sListBillingGroupsInput_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &eListBillingGroupsInput_BillingPeriod})
+var sListBillingGroupsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxBillingGroupResults, Type: smithy.ShapeTypeInteger, Ext: &eListBillingGroupsInput_MaxResults})
+var sListBillingGroupsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListBillingGroupsInput_NextToken})
+var sListBillingGroupsInput_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iListBillingGroupsFilter, Members: &mListBillingGroupsFilter, Type: smithy.ShapeTypeStructure, Ext: &eListBillingGroupsInput_Filters})
+var sListBillingGroupsOutput_BillingGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingGroups", ID: &i_BillingGroupList, Members: &m_BillingGroupList, Type: smithy.ShapeTypeList, Ext: &eListBillingGroupsOutput_BillingGroups})
+var sListBillingGroupsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListBillingGroupsOutput_NextToken})
+var sListCustomLineItemsInput_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &eListCustomLineItemsInput_BillingPeriod})
+var sListCustomLineItemsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxCustomLineItemResults, Type: smithy.ShapeTypeInteger, Ext: &eListCustomLineItemsInput_MaxResults})
+var sListCustomLineItemsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListCustomLineItemsInput_NextToken})
+var sListCustomLineItemsInput_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iListCustomLineItemsFilter, Members: &mListCustomLineItemsFilter, Type: smithy.ShapeTypeStructure, Ext: &eListCustomLineItemsInput_Filters})
+var sListCustomLineItemsOutput_CustomLineItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomLineItems", ID: &i_CustomLineItemList, Members: &m_CustomLineItemList, Type: smithy.ShapeTypeList, Ext: &eListCustomLineItemsOutput_CustomLineItems})
+var sListCustomLineItemsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListCustomLineItemsOutput_NextToken})
+var sListCustomLineItemVersionsInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &eListCustomLineItemVersionsInput_Arn})
+var sListCustomLineItemVersionsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxCustomLineItemResults, Type: smithy.ShapeTypeInteger, Ext: &eListCustomLineItemVersionsInput_MaxResults})
+var sListCustomLineItemVersionsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListCustomLineItemVersionsInput_NextToken})
+var sListCustomLineItemVersionsInput_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iListCustomLineItemVersionsFilter, Members: &mListCustomLineItemVersionsFilter, Type: smithy.ShapeTypeStructure, Ext: &eListCustomLineItemVersionsInput_Filters})
+var sListCustomLineItemVersionsOutput_CustomLineItemVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomLineItemVersions", ID: &i_CustomLineItemVersionList, Members: &m_CustomLineItemVersionList, Type: smithy.ShapeTypeList, Ext: &eListCustomLineItemVersionsOutput_CustomLineItemVersions})
+var sListCustomLineItemVersionsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListCustomLineItemVersionsOutput_NextToken})
+var sListPricingPlansAssociatedWithPricingRuleInput_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &eListPricingPlansAssociatedWithPricingRuleInput_BillingPeriod})
+var sListPricingPlansAssociatedWithPricingRuleInput_PricingRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingRuleArn", ID: &i_PricingRuleArn, Type: smithy.ShapeTypeString, Ext: &eListPricingPlansAssociatedWithPricingRuleInput_PricingRuleArn})
+var sListPricingPlansAssociatedWithPricingRuleInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxPricingRuleResults, Type: smithy.ShapeTypeInteger, Ext: &eListPricingPlansAssociatedWithPricingRuleInput_MaxResults})
+var sListPricingPlansAssociatedWithPricingRuleInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListPricingPlansAssociatedWithPricingRuleInput_NextToken})
+var sListPricingPlansAssociatedWithPricingRuleOutput_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &eListPricingPlansAssociatedWithPricingRuleOutput_BillingPeriod})
+var sListPricingPlansAssociatedWithPricingRuleOutput_PricingRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingRuleArn", ID: &i_PricingRuleArn, Type: smithy.ShapeTypeString, Ext: &eListPricingPlansAssociatedWithPricingRuleOutput_PricingRuleArn})
+var sListPricingPlansAssociatedWithPricingRuleOutput_PricingPlanArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingPlanArns", ID: &i_PricingPlanArns, Members: &m_PricingPlanArns, Type: smithy.ShapeTypeList, Ext: &eListPricingPlansAssociatedWithPricingRuleOutput_PricingPlanArns})
+var sListPricingPlansAssociatedWithPricingRuleOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListPricingPlansAssociatedWithPricingRuleOutput_NextToken})
+var sListPricingPlansInput_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &eListPricingPlansInput_BillingPeriod})
+var sListPricingPlansInput_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iListPricingPlansFilter, Members: &mListPricingPlansFilter, Type: smithy.ShapeTypeStructure, Ext: &eListPricingPlansInput_Filters})
+var sListPricingPlansInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxPricingPlanResults, Type: smithy.ShapeTypeInteger, Ext: &eListPricingPlansInput_MaxResults})
+var sListPricingPlansInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListPricingPlansInput_NextToken})
+var sListPricingPlansOutput_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &eListPricingPlansOutput_BillingPeriod})
+var sListPricingPlansOutput_PricingPlans = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingPlans", ID: &i_PricingPlanList, Members: &m_PricingPlanList, Type: smithy.ShapeTypeList, Ext: &eListPricingPlansOutput_PricingPlans})
+var sListPricingPlansOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListPricingPlansOutput_NextToken})
+var sListPricingRulesAssociatedToPricingPlanInput_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &eListPricingRulesAssociatedToPricingPlanInput_BillingPeriod})
+var sListPricingRulesAssociatedToPricingPlanInput_PricingPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingPlanArn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &eListPricingRulesAssociatedToPricingPlanInput_PricingPlanArn})
+var sListPricingRulesAssociatedToPricingPlanInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxPricingPlanResults, Type: smithy.ShapeTypeInteger, Ext: &eListPricingRulesAssociatedToPricingPlanInput_MaxResults})
+var sListPricingRulesAssociatedToPricingPlanInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListPricingRulesAssociatedToPricingPlanInput_NextToken})
+var sListPricingRulesAssociatedToPricingPlanOutput_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &eListPricingRulesAssociatedToPricingPlanOutput_BillingPeriod})
+var sListPricingRulesAssociatedToPricingPlanOutput_PricingPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingPlanArn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &eListPricingRulesAssociatedToPricingPlanOutput_PricingPlanArn})
+var sListPricingRulesAssociatedToPricingPlanOutput_PricingRuleArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingRuleArns", ID: &i_PricingRuleArns, Members: &m_PricingRuleArns, Type: smithy.ShapeTypeList, Ext: &eListPricingRulesAssociatedToPricingPlanOutput_PricingRuleArns})
+var sListPricingRulesAssociatedToPricingPlanOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListPricingRulesAssociatedToPricingPlanOutput_NextToken})
+var sListPricingRulesInput_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &eListPricingRulesInput_BillingPeriod})
+var sListPricingRulesInput_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iListPricingRulesFilter, Members: &mListPricingRulesFilter, Type: smithy.ShapeTypeStructure, Ext: &eListPricingRulesInput_Filters})
+var sListPricingRulesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxPricingRuleResults, Type: smithy.ShapeTypeInteger, Ext: &eListPricingRulesInput_MaxResults})
+var sListPricingRulesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListPricingRulesInput_NextToken})
+var sListPricingRulesOutput_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &eListPricingRulesOutput_BillingPeriod})
+var sListPricingRulesOutput_PricingRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingRules", ID: &i_PricingRuleList, Members: &m_PricingRuleList, Type: smithy.ShapeTypeList, Ext: &eListPricingRulesOutput_PricingRules})
+var sListPricingRulesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListPricingRulesOutput_NextToken})
+var sListResourcesAssociatedToCustomLineItemInput_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &i_BillingPeriod, Type: smithy.ShapeTypeString, Ext: &eListResourcesAssociatedToCustomLineItemInput_BillingPeriod})
+var sListResourcesAssociatedToCustomLineItemInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &eListResourcesAssociatedToCustomLineItemInput_Arn})
+var sListResourcesAssociatedToCustomLineItemInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxCustomLineItemResults, Type: smithy.ShapeTypeInteger, Ext: &eListResourcesAssociatedToCustomLineItemInput_MaxResults})
+var sListResourcesAssociatedToCustomLineItemInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListResourcesAssociatedToCustomLineItemInput_NextToken})
+var sListResourcesAssociatedToCustomLineItemInput_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iListResourcesAssociatedToCustomLineItemFilter, Members: &mListResourcesAssociatedToCustomLineItemFilter, Type: smithy.ShapeTypeStructure, Ext: &eListResourcesAssociatedToCustomLineItemInput_Filters})
+var sListResourcesAssociatedToCustomLineItemOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &eListResourcesAssociatedToCustomLineItemOutput_Arn})
+var sListResourcesAssociatedToCustomLineItemOutput_AssociatedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedResources", ID: &i_ListResourcesAssociatedToCustomLineItemResponseList, Members: &m_ListResourcesAssociatedToCustomLineItemResponseList, Type: smithy.ShapeTypeList, Ext: &eListResourcesAssociatedToCustomLineItemOutput_AssociatedResources})
+var sListResourcesAssociatedToCustomLineItemOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eListResourcesAssociatedToCustomLineItemOutput_NextToken})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_Tags})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_Tags})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t46, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUpdateBillingGroupInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &eUpdateBillingGroupInput_Arn})
+var sUpdateBillingGroupInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_BillingGroupName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eUpdateBillingGroupInput_Name})
+var sUpdateBillingGroupInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iBillingGroupStatus, Members: &mBillingGroupStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateBillingGroupInput_Status})
+var sUpdateBillingGroupInput_ComputationPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputationPreference", ID: &iComputationPreference, Members: &mComputationPreference, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBillingGroupInput_ComputationPreference})
+var sUpdateBillingGroupInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_BillingGroupDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eUpdateBillingGroupInput_Description})
+var sUpdateBillingGroupInput_AccountGrouping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountGrouping", ID: &iUpdateBillingGroupAccountGrouping, Members: &mUpdateBillingGroupAccountGrouping, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBillingGroupInput_AccountGrouping})
+var sUpdateBillingGroupOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BillingGroupArn, Type: smithy.ShapeTypeString, Ext: &eUpdateBillingGroupOutput_Arn})
+var sUpdateBillingGroupOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_BillingGroupName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eUpdateBillingGroupOutput_Name})
+var sUpdateBillingGroupOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_BillingGroupDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eUpdateBillingGroupOutput_Description})
+var sUpdateBillingGroupOutput_PrimaryAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eUpdateBillingGroupOutput_PrimaryAccountId})
+var sUpdateBillingGroupOutput_PricingPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingPlanArn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &eUpdateBillingGroupOutput_PricingPlanArn})
+var sUpdateBillingGroupOutput_Size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Size", ID: &i_NumberOfAccounts, Type: smithy.ShapeTypeLong, Ext: &eUpdateBillingGroupOutput_Size})
+var sUpdateBillingGroupOutput_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &eUpdateBillingGroupOutput_LastModifiedTime})
+var sUpdateBillingGroupOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iBillingGroupStatus, Members: &mBillingGroupStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateBillingGroupOutput_Status})
+var sUpdateBillingGroupOutput_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &i_BillingGroupStatusReason, Type: smithy.ShapeTypeString, Ext: &eUpdateBillingGroupOutput_StatusReason})
+var sUpdateBillingGroupOutput_AccountGrouping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountGrouping", ID: &iUpdateBillingGroupAccountGrouping, Members: &mUpdateBillingGroupAccountGrouping, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBillingGroupOutput_AccountGrouping})
+var sUpdateBillingTransferPreferenceInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &eUpdateBillingTransferPreferenceInput_ClientToken})
+var sUpdateBillingTransferPreferenceInput_ResponsibilityTransferArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponsibilityTransferArn", ID: &i_ResponsibilityTransferArn, Type: smithy.ShapeTypeString, Ext: &eUpdateBillingTransferPreferenceInput_ResponsibilityTransferArn})
+var sUpdateBillingTransferPreferenceInput_AutoBillingTransferBillingGroupCreation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoBillingTransferBillingGroupCreation", ID: &iAutoTransferBillingGroupCreationPreference, Members: &mAutoTransferBillingGroupCreationPreference, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBillingTransferPreferenceInput_AutoBillingTransferBillingGroupCreation})
+var sUpdateBillingTransferPreferenceOutput_ResponsibilityTransferArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponsibilityTransferArn", ID: &i_ResponsibilityTransferArn, Type: smithy.ShapeTypeString, Ext: &eUpdateBillingTransferPreferenceOutput_ResponsibilityTransferArn})
+var sUpdateBillingTransferPreferenceOutput_AutoBillingTransferBillingGroupCreation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoBillingTransferBillingGroupCreation", ID: &iAutoTransferBillingGroupCreationPreference, Members: &mAutoTransferBillingGroupCreationPreference, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBillingTransferPreferenceOutput_AutoBillingTransferBillingGroupCreation})
+var sUpdateBillingTransferPreferenceOutput_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &eUpdateBillingTransferPreferenceOutput_LastModifiedTime})
+var sUpdateCustomLineItemInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &eUpdateCustomLineItemInput_Arn})
+var sUpdateCustomLineItemInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CustomLineItemName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eUpdateCustomLineItemInput_Name})
+var sUpdateCustomLineItemInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_CustomLineItemDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eUpdateCustomLineItemInput_Description})
+var sUpdateCustomLineItemInput_ChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChargeDetails", ID: &iUpdateCustomLineItemChargeDetails, Members: &mUpdateCustomLineItemChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCustomLineItemInput_ChargeDetails})
+var sUpdateCustomLineItemInput_BillingPeriodRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriodRange", ID: &iCustomLineItemBillingPeriodRange, Members: &mCustomLineItemBillingPeriodRange, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCustomLineItemInput_BillingPeriodRange})
+var sUpdateCustomLineItemOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_CustomLineItemArn, Type: smithy.ShapeTypeString, Ext: &eUpdateCustomLineItemOutput_Arn})
+var sUpdateCustomLineItemOutput_BillingGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingGroupArn", ID: &i_BillingGroupFullArn, Type: smithy.ShapeTypeString, Ext: &eUpdateCustomLineItemOutput_BillingGroupArn})
+var sUpdateCustomLineItemOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CustomLineItemName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eUpdateCustomLineItemOutput_Name})
+var sUpdateCustomLineItemOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_CustomLineItemDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eUpdateCustomLineItemOutput_Description})
+var sUpdateCustomLineItemOutput_ChargeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChargeDetails", ID: &iListCustomLineItemChargeDetails, Members: &mListCustomLineItemChargeDetails, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCustomLineItemOutput_ChargeDetails})
+var sUpdateCustomLineItemOutput_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &eUpdateCustomLineItemOutput_LastModifiedTime})
+var sUpdateCustomLineItemOutput_AssociationSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociationSize", ID: &i_NumberOfAssociations, Type: smithy.ShapeTypeLong, Ext: &eUpdateCustomLineItemOutput_AssociationSize})
+var sUpdatePricingPlanInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &eUpdatePricingPlanInput_Arn})
+var sUpdatePricingPlanInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PricingPlanName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eUpdatePricingPlanInput_Name})
+var sUpdatePricingPlanInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PricingPlanDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eUpdatePricingPlanInput_Description})
+var sUpdatePricingPlanOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingPlanArn, Type: smithy.ShapeTypeString, Ext: &eUpdatePricingPlanOutput_Arn})
+var sUpdatePricingPlanOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PricingPlanName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eUpdatePricingPlanOutput_Name})
+var sUpdatePricingPlanOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PricingPlanDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eUpdatePricingPlanOutput_Description})
+var sUpdatePricingPlanOutput_Size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Size", ID: &i_NumberOfAssociatedPricingRules, Type: smithy.ShapeTypeLong, Ext: &eUpdatePricingPlanOutput_Size})
+var sUpdatePricingPlanOutput_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &eUpdatePricingPlanOutput_LastModifiedTime})
+var sUpdatePricingRuleInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingRuleArn, Type: smithy.ShapeTypeString, Ext: &eUpdatePricingRuleInput_Arn})
+var sUpdatePricingRuleInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PricingRuleName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eUpdatePricingRuleInput_Name})
+var sUpdatePricingRuleInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PricingRuleDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eUpdatePricingRuleInput_Description})
+var sUpdatePricingRuleInput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iPricingRuleType, Members: &mPricingRuleType, Type: smithy.ShapeTypeEnum, Ext: &eUpdatePricingRuleInput_Type})
+var sUpdatePricingRuleInput_ModifierPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifierPercentage", ID: &i_ModifierPercentage, Type: smithy.ShapeTypeDouble, Ext: &eUpdatePricingRuleInput_ModifierPercentage})
+var sUpdatePricingRuleInput_Tiering = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tiering", ID: &iUpdateTieringInput, Members: &mUpdateTieringInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePricingRuleInput_Tiering})
+var sUpdatePricingRuleOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PricingRuleArn, Type: smithy.ShapeTypeString, Ext: &eUpdatePricingRuleOutput_Arn})
+var sUpdatePricingRuleOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PricingRuleName, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eUpdatePricingRuleOutput_Name})
+var sUpdatePricingRuleOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PricingRuleDescription, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eUpdatePricingRuleOutput_Description})
+var sUpdatePricingRuleOutput_Scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scope", ID: &iPricingRuleScope, Members: &mPricingRuleScope, Type: smithy.ShapeTypeEnum, Ext: &eUpdatePricingRuleOutput_Scope})
+var sUpdatePricingRuleOutput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iPricingRuleType, Members: &mPricingRuleType, Type: smithy.ShapeTypeEnum, Ext: &eUpdatePricingRuleOutput_Type})
+var sUpdatePricingRuleOutput_ModifierPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifierPercentage", ID: &i_ModifierPercentage, Type: smithy.ShapeTypeDouble, Ext: &eUpdatePricingRuleOutput_ModifierPercentage})
+var sUpdatePricingRuleOutput_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &i_Service, Type: smithy.ShapeTypeString, Ext: &eUpdatePricingRuleOutput_Service})
+var sUpdatePricingRuleOutput_AssociatedPricingPlanCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedPricingPlanCount", ID: &i_NumberOfPricingPlansAssociatedWith, Type: smithy.ShapeTypeLong, Ext: &eUpdatePricingRuleOutput_AssociatedPricingPlanCount})
+var sUpdatePricingRuleOutput_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Instant, Type: smithy.ShapeTypeLong, Ext: &eUpdatePricingRuleOutput_LastModifiedTime})
+var sUpdatePricingRuleOutput_BillingEntity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingEntity", ID: &i_BillingEntity, Type: smithy.ShapeTypeString, Ext: &eUpdatePricingRuleOutput_BillingEntity})
+var sUpdatePricingRuleOutput_Tiering = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tiering", ID: &iUpdateTieringInput, Members: &mUpdateTieringInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePricingRuleOutput_Tiering})
+var sUpdatePricingRuleOutput_UsageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageType", ID: &i_UsageType, Type: smithy.ShapeTypeString, Ext: &eUpdatePricingRuleOutput_UsageType})
+var sUpdatePricingRuleOutput_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i_Operation, Type: smithy.ShapeTypeString, Ext: &eUpdatePricingRuleOutput_Operation})
 
 var AssociateAccounts = &sAssociateAccounts
 

@@ -7,9 +7,594 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [586]smithy.SchemaExtensions
+var (
+	eCreateBudget                                                                smithy.SchemaExtensions
+	eCreateBudgetAction                                                          smithy.SchemaExtensions
+	eCreateNotification                                                          smithy.SchemaExtensions
+	eCreateSubscriber                                                            smithy.SchemaExtensions
+	eDeleteBudget                                                                smithy.SchemaExtensions
+	eDeleteBudgetAction                                                          smithy.SchemaExtensions
+	eDeleteNotification                                                          smithy.SchemaExtensions
+	eDeleteSubscriber                                                            smithy.SchemaExtensions
+	eDescribeBudget                                                              smithy.SchemaExtensions
+	eDescribeBudgetAction                                                        smithy.SchemaExtensions
+	eDescribeBudgetActionHistories                                               smithy.SchemaExtensions
+	eDescribeBudgetActionsForAccount                                             smithy.SchemaExtensions
+	eDescribeBudgetActionsForBudget                                              smithy.SchemaExtensions
+	eDescribeBudgetNotificationsForAccount                                       smithy.SchemaExtensions
+	eDescribeBudgetPerformanceHistory                                            smithy.SchemaExtensions
+	eDescribeBudgets                                                             smithy.SchemaExtensions
+	eDescribeNotificationsForBudget                                              smithy.SchemaExtensions
+	eDescribeSubscribersForNotification                                          smithy.SchemaExtensions
+	eExecuteBudgetAction                                                         smithy.SchemaExtensions
+	eListTagsForResource                                                         smithy.SchemaExtensions
+	eTagResource                                                                 smithy.SchemaExtensions
+	eUntagResource                                                               smithy.SchemaExtensions
+	eUpdateBudget                                                                smithy.SchemaExtensions
+	eUpdateBudgetAction                                                          smithy.SchemaExtensions
+	eUpdateNotification                                                          smithy.SchemaExtensions
+	eUpdateSubscriber                                                            smithy.SchemaExtensions
+	e_AWSBudgetServiceGateway                                                    smithy.SchemaExtensions
+	eAccessDeniedException                                                       smithy.SchemaExtensions
+	eAccessDeniedException_Message                                               smithy.SchemaExtensions
+	e_AccountId                                                                  smithy.SchemaExtensions
+	eAction                                                                      smithy.SchemaExtensions
+	eAction_ActionId                                                             smithy.SchemaExtensions
+	eAction_BudgetName                                                           smithy.SchemaExtensions
+	eAction_NotificationType                                                     smithy.SchemaExtensions
+	eAction_ActionType                                                           smithy.SchemaExtensions
+	eAction_ActionThreshold                                                      smithy.SchemaExtensions
+	eAction_Definition                                                           smithy.SchemaExtensions
+	eAction_ExecutionRoleArn                                                     smithy.SchemaExtensions
+	eAction_ApprovalModel                                                        smithy.SchemaExtensions
+	eAction_Status                                                               smithy.SchemaExtensions
+	eAction_Subscribers                                                          smithy.SchemaExtensions
+	e_ActionHistories                                                            smithy.SchemaExtensions
+	e_ActionHistories_member                                                     smithy.SchemaExtensions
+	eActionHistory                                                               smithy.SchemaExtensions
+	eActionHistory_Timestamp                                                     smithy.SchemaExtensions
+	eActionHistory_Status                                                        smithy.SchemaExtensions
+	eActionHistory_EventType                                                     smithy.SchemaExtensions
+	eActionHistory_ActionHistoryDetails                                          smithy.SchemaExtensions
+	eActionHistoryDetails                                                        smithy.SchemaExtensions
+	eActionHistoryDetails_Message                                                smithy.SchemaExtensions
+	eActionHistoryDetails_Action                                                 smithy.SchemaExtensions
+	e_ActionId                                                                   smithy.SchemaExtensions
+	e_Actions                                                                    smithy.SchemaExtensions
+	e_Actions_member                                                             smithy.SchemaExtensions
+	eActionStatus                                                                smithy.SchemaExtensions
+	eActionStatus_Standby                                                        smithy.SchemaExtensions
+	eActionStatus_Pending                                                        smithy.SchemaExtensions
+	eActionStatus_Execution_In_Progress                                          smithy.SchemaExtensions
+	eActionStatus_Execution_Success                                              smithy.SchemaExtensions
+	eActionStatus_Execution_Failure                                              smithy.SchemaExtensions
+	eActionStatus_Reverse_In_Progress                                            smithy.SchemaExtensions
+	eActionStatus_Reverse_Success                                                smithy.SchemaExtensions
+	eActionStatus_Reverse_Failure                                                smithy.SchemaExtensions
+	eActionStatus_Reset_In_Progress                                              smithy.SchemaExtensions
+	eActionStatus_Reset_Failure                                                  smithy.SchemaExtensions
+	eActionSubType                                                               smithy.SchemaExtensions
+	eActionSubType_STOP_EC2                                                      smithy.SchemaExtensions
+	eActionSubType_STOP_RDS                                                      smithy.SchemaExtensions
+	eActionThreshold                                                             smithy.SchemaExtensions
+	eActionThreshold_ActionThresholdValue                                        smithy.SchemaExtensions
+	eActionThreshold_ActionThresholdType                                         smithy.SchemaExtensions
+	eActionType                                                                  smithy.SchemaExtensions
+	eActionType_IAM                                                              smithy.SchemaExtensions
+	eActionType_SCP                                                              smithy.SchemaExtensions
+	eActionType_SSM                                                              smithy.SchemaExtensions
+	e_AdjustmentPeriod                                                           smithy.SchemaExtensions
+	e_AmazonResourceName                                                         smithy.SchemaExtensions
+	eApprovalModel                                                               smithy.SchemaExtensions
+	eApprovalModel_AUTO                                                          smithy.SchemaExtensions
+	eApprovalModel_MANUAL                                                        smithy.SchemaExtensions
+	eAutoAdjustData                                                              smithy.SchemaExtensions
+	eAutoAdjustData_AutoAdjustType                                               smithy.SchemaExtensions
+	eAutoAdjustData_HistoricalOptions                                            smithy.SchemaExtensions
+	eAutoAdjustData_LastAutoAdjustTime                                           smithy.SchemaExtensions
+	eAutoAdjustType                                                              smithy.SchemaExtensions
+	eAutoAdjustType_HISTORICAL                                                   smithy.SchemaExtensions
+	eAutoAdjustType_FORECAST                                                     smithy.SchemaExtensions
+	e_BillingViewArn                                                             smithy.SchemaExtensions
+	eBillingViewHealthStatusException                                            smithy.SchemaExtensions
+	eBillingViewHealthStatusException_Message                                    smithy.SchemaExtensions
+	eBudget                                                                      smithy.SchemaExtensions
+	eBudget_BudgetName                                                           smithy.SchemaExtensions
+	eBudget_BudgetLimit                                                          smithy.SchemaExtensions
+	eBudget_PlannedBudgetLimits                                                  smithy.SchemaExtensions
+	eBudget_CostFilters                                                          smithy.SchemaExtensions
+	eBudget_CostTypes                                                            smithy.SchemaExtensions
+	eBudget_TimeUnit                                                             smithy.SchemaExtensions
+	eBudget_TimePeriod                                                           smithy.SchemaExtensions
+	eBudget_CalculatedSpend                                                      smithy.SchemaExtensions
+	eBudget_BudgetType                                                           smithy.SchemaExtensions
+	eBudget_LastUpdatedTime                                                      smithy.SchemaExtensions
+	eBudget_AutoAdjustData                                                       smithy.SchemaExtensions
+	eBudget_FilterExpression                                                     smithy.SchemaExtensions
+	eBudget_Metrics                                                              smithy.SchemaExtensions
+	eBudget_BillingViewArn                                                       smithy.SchemaExtensions
+	eBudget_HealthStatus                                                         smithy.SchemaExtensions
+	eBudgetedAndActualAmounts                                                    smithy.SchemaExtensions
+	eBudgetedAndActualAmounts_BudgetedAmount                                     smithy.SchemaExtensions
+	eBudgetedAndActualAmounts_ActualAmount                                       smithy.SchemaExtensions
+	eBudgetedAndActualAmounts_TimePeriod                                         smithy.SchemaExtensions
+	e_BudgetedAndActualAmountsList                                               smithy.SchemaExtensions
+	e_BudgetedAndActualAmountsList_member                                        smithy.SchemaExtensions
+	e_BudgetName                                                                 smithy.SchemaExtensions
+	eBudgetNotificationsForAccount                                               smithy.SchemaExtensions
+	eBudgetNotificationsForAccount_Notifications                                 smithy.SchemaExtensions
+	eBudgetNotificationsForAccount_BudgetName                                    smithy.SchemaExtensions
+	e_BudgetNotificationsForAccountList                                          smithy.SchemaExtensions
+	e_BudgetNotificationsForAccountList_member                                   smithy.SchemaExtensions
+	eBudgetPerformanceHistory                                                    smithy.SchemaExtensions
+	eBudgetPerformanceHistory_BudgetName                                         smithy.SchemaExtensions
+	eBudgetPerformanceHistory_BudgetType                                         smithy.SchemaExtensions
+	eBudgetPerformanceHistory_CostFilters                                        smithy.SchemaExtensions
+	eBudgetPerformanceHistory_CostTypes                                          smithy.SchemaExtensions
+	eBudgetPerformanceHistory_TimeUnit                                           smithy.SchemaExtensions
+	eBudgetPerformanceHistory_BillingViewArn                                     smithy.SchemaExtensions
+	eBudgetPerformanceHistory_BudgetedAndActualAmountsList                       smithy.SchemaExtensions
+	eBudgetPerformanceHistory_FilterExpression                                   smithy.SchemaExtensions
+	eBudgetPerformanceHistory_Metrics                                            smithy.SchemaExtensions
+	e_Budgets                                                                    smithy.SchemaExtensions
+	e_Budgets_member                                                             smithy.SchemaExtensions
+	eBudgetType                                                                  smithy.SchemaExtensions
+	eBudgetType_Usage                                                            smithy.SchemaExtensions
+	eBudgetType_Cost                                                             smithy.SchemaExtensions
+	eBudgetType_RIUtilization                                                    smithy.SchemaExtensions
+	eBudgetType_RICoverage                                                       smithy.SchemaExtensions
+	eBudgetType_SPUtilization                                                    smithy.SchemaExtensions
+	eBudgetType_SPCoverage                                                       smithy.SchemaExtensions
+	eCalculatedSpend                                                             smithy.SchemaExtensions
+	eCalculatedSpend_ActualSpend                                                 smithy.SchemaExtensions
+	eCalculatedSpend_ForecastedSpend                                             smithy.SchemaExtensions
+	eComparisonOperator                                                          smithy.SchemaExtensions
+	eComparisonOperator_GREATER_THAN                                             smithy.SchemaExtensions
+	eComparisonOperator_LESS_THAN                                                smithy.SchemaExtensions
+	eComparisonOperator_EQUAL_TO                                                 smithy.SchemaExtensions
+	e_CostCategoryName                                                           smithy.SchemaExtensions
+	eCostCategoryValues                                                          smithy.SchemaExtensions
+	eCostCategoryValues_Key                                                      smithy.SchemaExtensions
+	eCostCategoryValues_Values                                                   smithy.SchemaExtensions
+	eCostCategoryValues_MatchOptions                                             smithy.SchemaExtensions
+	e_CostFilters                                                                smithy.SchemaExtensions
+	e_CostFilters_key                                                            smithy.SchemaExtensions
+	e_CostFilters_value                                                          smithy.SchemaExtensions
+	eCostTypes                                                                   smithy.SchemaExtensions
+	eCostTypes_IncludeTax                                                        smithy.SchemaExtensions
+	eCostTypes_IncludeSubscription                                               smithy.SchemaExtensions
+	eCostTypes_UseBlended                                                        smithy.SchemaExtensions
+	eCostTypes_IncludeRefund                                                     smithy.SchemaExtensions
+	eCostTypes_IncludeCredit                                                     smithy.SchemaExtensions
+	eCostTypes_IncludeUpfront                                                    smithy.SchemaExtensions
+	eCostTypes_IncludeRecurring                                                  smithy.SchemaExtensions
+	eCostTypes_IncludeOtherSubscription                                          smithy.SchemaExtensions
+	eCostTypes_IncludeSupport                                                    smithy.SchemaExtensions
+	eCostTypes_IncludeDiscount                                                   smithy.SchemaExtensions
+	eCostTypes_UseAmortized                                                      smithy.SchemaExtensions
+	eCreationLimitExceededException                                              smithy.SchemaExtensions
+	eCreationLimitExceededException_Message                                      smithy.SchemaExtensions
+	eDefinition                                                                  smithy.SchemaExtensions
+	eDefinition_IamActionDefinition                                              smithy.SchemaExtensions
+	eDefinition_ScpActionDefinition                                              smithy.SchemaExtensions
+	eDefinition_SsmActionDefinition                                              smithy.SchemaExtensions
+	eDimension                                                                   smithy.SchemaExtensions
+	eDimension_AZ                                                                smithy.SchemaExtensions
+	eDimension_INSTANCE_TYPE                                                     smithy.SchemaExtensions
+	eDimension_LINKED_ACCOUNT                                                    smithy.SchemaExtensions
+	eDimension_LINKED_ACCOUNT_NAME                                               smithy.SchemaExtensions
+	eDimension_OPERATION                                                         smithy.SchemaExtensions
+	eDimension_PURCHASE_TYPE                                                     smithy.SchemaExtensions
+	eDimension_REGION                                                            smithy.SchemaExtensions
+	eDimension_SERVICE                                                           smithy.SchemaExtensions
+	eDimension_SERVICE_CODE                                                      smithy.SchemaExtensions
+	eDimension_USAGE_TYPE                                                        smithy.SchemaExtensions
+	eDimension_USAGE_TYPE_GROUP                                                  smithy.SchemaExtensions
+	eDimension_RECORD_TYPE                                                       smithy.SchemaExtensions
+	eDimension_OPERATING_SYSTEM                                                  smithy.SchemaExtensions
+	eDimension_TENANCY                                                           smithy.SchemaExtensions
+	eDimension_SCOPE                                                             smithy.SchemaExtensions
+	eDimension_PLATFORM                                                          smithy.SchemaExtensions
+	eDimension_SUBSCRIPTION_ID                                                   smithy.SchemaExtensions
+	eDimension_LEGAL_ENTITY_NAME                                                 smithy.SchemaExtensions
+	eDimension_INVOICING_ENTITY                                                  smithy.SchemaExtensions
+	eDimension_DEPLOYMENT_OPTION                                                 smithy.SchemaExtensions
+	eDimension_DATABASE_ENGINE                                                   smithy.SchemaExtensions
+	eDimension_CACHE_ENGINE                                                      smithy.SchemaExtensions
+	eDimension_INSTANCE_TYPE_FAMILY                                              smithy.SchemaExtensions
+	eDimension_BILLING_ENTITY                                                    smithy.SchemaExtensions
+	eDimension_RESERVATION_ID                                                    smithy.SchemaExtensions
+	eDimension_RESOURCE_ID                                                       smithy.SchemaExtensions
+	eDimension_RIGHTSIZING_TYPE                                                  smithy.SchemaExtensions
+	eDimension_SAVINGS_PLANS_TYPE                                                smithy.SchemaExtensions
+	eDimension_SAVINGS_PLAN_ARN                                                  smithy.SchemaExtensions
+	eDimension_PAYMENT_OPTION                                                    smithy.SchemaExtensions
+	eDimension_RESERVATION_MODIFIED                                              smithy.SchemaExtensions
+	eDimension_TAG_KEY                                                           smithy.SchemaExtensions
+	eDimension_COST_CATEGORY_NAME                                                smithy.SchemaExtensions
+	e_DimensionValue                                                             smithy.SchemaExtensions
+	e_DimensionValues                                                            smithy.SchemaExtensions
+	e_DimensionValues_member                                                     smithy.SchemaExtensions
+	eDuplicateRecordException                                                    smithy.SchemaExtensions
+	eDuplicateRecordException_Message                                            smithy.SchemaExtensions
+	e_errorMessage                                                               smithy.SchemaExtensions
+	eEventType                                                                   smithy.SchemaExtensions
+	eEventType_System                                                            smithy.SchemaExtensions
+	eEventType_CreateAction                                                      smithy.SchemaExtensions
+	eEventType_DeleteAction                                                      smithy.SchemaExtensions
+	eEventType_UpdateAction                                                      smithy.SchemaExtensions
+	eEventType_ExecuteAction                                                     smithy.SchemaExtensions
+	eExecutionType                                                               smithy.SchemaExtensions
+	eExecutionType_ApproveBudgetAction                                           smithy.SchemaExtensions
+	eExecutionType_RetryBudgetAction                                             smithy.SchemaExtensions
+	eExecutionType_ReverseBudgetAction                                           smithy.SchemaExtensions
+	eExecutionType_ResetBudgetAction                                             smithy.SchemaExtensions
+	eExpiredNextTokenException                                                   smithy.SchemaExtensions
+	eExpiredNextTokenException_Message                                           smithy.SchemaExtensions
+	eExpression                                                                  smithy.SchemaExtensions
+	eExpression_Or                                                               smithy.SchemaExtensions
+	eExpression_And                                                              smithy.SchemaExtensions
+	eExpression_Not                                                              smithy.SchemaExtensions
+	eExpression_Dimensions                                                       smithy.SchemaExtensions
+	eExpression_Tags                                                             smithy.SchemaExtensions
+	eExpression_CostCategories                                                   smithy.SchemaExtensions
+	eExpression_ProductAttributes                                                smithy.SchemaExtensions
+	eExpressionDimensionValues                                                   smithy.SchemaExtensions
+	eExpressionDimensionValues_Key                                               smithy.SchemaExtensions
+	eExpressionDimensionValues_Values                                            smithy.SchemaExtensions
+	eExpressionDimensionValues_MatchOptions                                      smithy.SchemaExtensions
+	e_Expressions                                                                smithy.SchemaExtensions
+	e_Expressions_member                                                         smithy.SchemaExtensions
+	e_GenericString                                                              smithy.SchemaExtensions
+	e_GenericTimestamp                                                           smithy.SchemaExtensions
+	e_Group                                                                      smithy.SchemaExtensions
+	e_Groups                                                                     smithy.SchemaExtensions
+	e_Groups_member                                                              smithy.SchemaExtensions
+	eHealthStatus                                                                smithy.SchemaExtensions
+	eHealthStatus_Status                                                         smithy.SchemaExtensions
+	eHealthStatus_StatusReason                                                   smithy.SchemaExtensions
+	eHealthStatus_LastUpdatedTime                                                smithy.SchemaExtensions
+	eHealthStatusReason                                                          smithy.SchemaExtensions
+	eHealthStatusReason_BILLING_VIEW_NO_ACCESS                                   smithy.SchemaExtensions
+	eHealthStatusReason_BILLING_VIEW_UNHEALTHY                                   smithy.SchemaExtensions
+	eHealthStatusReason_FILTER_INVALID                                           smithy.SchemaExtensions
+	eHealthStatusReason_MULTI_YEAR_HISTORICAL_DATA_DISABLED                      smithy.SchemaExtensions
+	eHealthStatusValue                                                           smithy.SchemaExtensions
+	eHealthStatusValue_HEALTHY                                                   smithy.SchemaExtensions
+	eHealthStatusValue_UNHEALTHY                                                 smithy.SchemaExtensions
+	eHistoricalOptions                                                           smithy.SchemaExtensions
+	eHistoricalOptions_BudgetAdjustmentPeriod                                    smithy.SchemaExtensions
+	eHistoricalOptions_LookBackAvailablePeriods                                  smithy.SchemaExtensions
+	eIamActionDefinition                                                         smithy.SchemaExtensions
+	eIamActionDefinition_PolicyArn                                               smithy.SchemaExtensions
+	eIamActionDefinition_Roles                                                   smithy.SchemaExtensions
+	eIamActionDefinition_Groups                                                  smithy.SchemaExtensions
+	eIamActionDefinition_Users                                                   smithy.SchemaExtensions
+	e_InstanceId                                                                 smithy.SchemaExtensions
+	e_InstanceIds                                                                smithy.SchemaExtensions
+	e_InstanceIds_member                                                         smithy.SchemaExtensions
+	eInternalErrorException                                                      smithy.SchemaExtensions
+	eInternalErrorException_Message                                              smithy.SchemaExtensions
+	eInvalidNextTokenException                                                   smithy.SchemaExtensions
+	eInvalidNextTokenException_Message                                           smithy.SchemaExtensions
+	eInvalidParameterException                                                   smithy.SchemaExtensions
+	eInvalidParameterException_Message                                           smithy.SchemaExtensions
+	eMatchOption                                                                 smithy.SchemaExtensions
+	eMatchOption_EQUALS                                                          smithy.SchemaExtensions
+	eMatchOption_ABSENT                                                          smithy.SchemaExtensions
+	eMatchOption_STARTS_WITH                                                     smithy.SchemaExtensions
+	eMatchOption_ENDS_WITH                                                       smithy.SchemaExtensions
+	eMatchOption_CONTAINS                                                        smithy.SchemaExtensions
+	eMatchOption_GREATER_THAN_OR_EQUAL                                           smithy.SchemaExtensions
+	eMatchOption_CASE_SENSITIVE                                                  smithy.SchemaExtensions
+	eMatchOption_CASE_INSENSITIVE                                                smithy.SchemaExtensions
+	e_MatchOptions                                                               smithy.SchemaExtensions
+	e_MatchOptions_member                                                        smithy.SchemaExtensions
+	e_MaxResults                                                                 smithy.SchemaExtensions
+	e_MaxResultsBudgetNotifications                                              smithy.SchemaExtensions
+	e_MaxResultsDescribeBudgets                                                  smithy.SchemaExtensions
+	eMetric                                                                      smithy.SchemaExtensions
+	eMetric_BLENDED_COST                                                         smithy.SchemaExtensions
+	eMetric_UNBLENDED_COST                                                       smithy.SchemaExtensions
+	eMetric_AMORTIZED_COST                                                       smithy.SchemaExtensions
+	eMetric_NET_UNBLENDED_COST                                                   smithy.SchemaExtensions
+	eMetric_NET_AMORTIZED_COST                                                   smithy.SchemaExtensions
+	eMetric_USAGE_QUANTITY                                                       smithy.SchemaExtensions
+	eMetric_NORMALIZED_USAGE_AMOUNT                                              smithy.SchemaExtensions
+	eMetric_HOURS                                                                smithy.SchemaExtensions
+	e_Metrics                                                                    smithy.SchemaExtensions
+	e_Metrics_member                                                             smithy.SchemaExtensions
+	eNotFoundException                                                           smithy.SchemaExtensions
+	eNotFoundException_Message                                                   smithy.SchemaExtensions
+	eNotification                                                                smithy.SchemaExtensions
+	eNotification_NotificationType                                               smithy.SchemaExtensions
+	eNotification_ComparisonOperator                                             smithy.SchemaExtensions
+	eNotification_Threshold                                                      smithy.SchemaExtensions
+	eNotification_ThresholdType                                                  smithy.SchemaExtensions
+	eNotification_NotificationState                                              smithy.SchemaExtensions
+	e_Notifications                                                              smithy.SchemaExtensions
+	e_Notifications_member                                                       smithy.SchemaExtensions
+	eNotificationState                                                           smithy.SchemaExtensions
+	eNotificationState_OK                                                        smithy.SchemaExtensions
+	eNotificationState_ALARM                                                     smithy.SchemaExtensions
+	e_NotificationThreshold                                                      smithy.SchemaExtensions
+	eNotificationType                                                            smithy.SchemaExtensions
+	eNotificationType_ACTUAL                                                     smithy.SchemaExtensions
+	eNotificationType_FORECASTED                                                 smithy.SchemaExtensions
+	eNotificationWithSubscribers                                                 smithy.SchemaExtensions
+	eNotificationWithSubscribers_Notification                                    smithy.SchemaExtensions
+	eNotificationWithSubscribers_Subscribers                                     smithy.SchemaExtensions
+	e_NotificationWithSubscribersList                                            smithy.SchemaExtensions
+	e_NotificationWithSubscribersList_member                                     smithy.SchemaExtensions
+	e_NullableBoolean                                                            smithy.SchemaExtensions
+	e_NumericValue                                                               smithy.SchemaExtensions
+	e_PlannedBudgetLimits                                                        smithy.SchemaExtensions
+	e_PlannedBudgetLimits_key                                                    smithy.SchemaExtensions
+	e_PlannedBudgetLimits_value                                                  smithy.SchemaExtensions
+	e_PolicyArn                                                                  smithy.SchemaExtensions
+	e_PolicyId                                                                   smithy.SchemaExtensions
+	e_ProductAttributeName                                                       smithy.SchemaExtensions
+	eProductAttributeValues                                                      smithy.SchemaExtensions
+	eProductAttributeValues_Key                                                  smithy.SchemaExtensions
+	eProductAttributeValues_Values                                               smithy.SchemaExtensions
+	eProductAttributeValues_MatchOptions                                         smithy.SchemaExtensions
+	e_Region                                                                     smithy.SchemaExtensions
+	eResourceLockedException                                                     smithy.SchemaExtensions
+	eResourceLockedException_Message                                             smithy.SchemaExtensions
+	eResourceTag                                                                 smithy.SchemaExtensions
+	eResourceTag_Key                                                             smithy.SchemaExtensions
+	eResourceTag_Value                                                           smithy.SchemaExtensions
+	e_ResourceTagKey                                                             smithy.SchemaExtensions
+	e_ResourceTagKeyList                                                         smithy.SchemaExtensions
+	e_ResourceTagKeyList_member                                                  smithy.SchemaExtensions
+	e_ResourceTagList                                                            smithy.SchemaExtensions
+	e_ResourceTagList_member                                                     smithy.SchemaExtensions
+	e_ResourceTagValue                                                           smithy.SchemaExtensions
+	e_Role                                                                       smithy.SchemaExtensions
+	e_RoleArn                                                                    smithy.SchemaExtensions
+	e_Roles                                                                      smithy.SchemaExtensions
+	e_Roles_member                                                               smithy.SchemaExtensions
+	eScpActionDefinition                                                         smithy.SchemaExtensions
+	eScpActionDefinition_PolicyId                                                smithy.SchemaExtensions
+	eScpActionDefinition_TargetIds                                               smithy.SchemaExtensions
+	eServiceQuotaExceededException                                               smithy.SchemaExtensions
+	eServiceQuotaExceededException_Message                                       smithy.SchemaExtensions
+	eSpend                                                                       smithy.SchemaExtensions
+	eSpend_Amount                                                                smithy.SchemaExtensions
+	eSpend_Unit                                                                  smithy.SchemaExtensions
+	eSsmActionDefinition                                                         smithy.SchemaExtensions
+	eSsmActionDefinition_ActionSubType                                           smithy.SchemaExtensions
+	eSsmActionDefinition_Region                                                  smithy.SchemaExtensions
+	eSsmActionDefinition_InstanceIds                                             smithy.SchemaExtensions
+	eSubscriber                                                                  smithy.SchemaExtensions
+	eSubscriber_SubscriptionType                                                 smithy.SchemaExtensions
+	eSubscriber_Address                                                          smithy.SchemaExtensions
+	e_SubscriberAddress                                                          smithy.SchemaExtensions
+	e_Subscribers                                                                smithy.SchemaExtensions
+	e_Subscribers_member                                                         smithy.SchemaExtensions
+	eSubscriptionType                                                            smithy.SchemaExtensions
+	eSubscriptionType_SNS                                                        smithy.SchemaExtensions
+	eSubscriptionType_EMAIL                                                      smithy.SchemaExtensions
+	e_TagKey                                                                     smithy.SchemaExtensions
+	eTagValues                                                                   smithy.SchemaExtensions
+	eTagValues_Key                                                               smithy.SchemaExtensions
+	eTagValues_Values                                                            smithy.SchemaExtensions
+	eTagValues_MatchOptions                                                      smithy.SchemaExtensions
+	e_TargetId                                                                   smithy.SchemaExtensions
+	e_TargetIds                                                                  smithy.SchemaExtensions
+	e_TargetIds_member                                                           smithy.SchemaExtensions
+	eThresholdType                                                               smithy.SchemaExtensions
+	eThresholdType_PERCENTAGE                                                    smithy.SchemaExtensions
+	eThresholdType_ABSOLUTE_VALUE                                                smithy.SchemaExtensions
+	eThrottlingException                                                         smithy.SchemaExtensions
+	eThrottlingException_Message                                                 smithy.SchemaExtensions
+	eTimePeriod                                                                  smithy.SchemaExtensions
+	eTimePeriod_Start                                                            smithy.SchemaExtensions
+	eTimePeriod_End                                                              smithy.SchemaExtensions
+	eTimeUnit                                                                    smithy.SchemaExtensions
+	eTimeUnit_DAILY                                                              smithy.SchemaExtensions
+	eTimeUnit_MONTHLY                                                            smithy.SchemaExtensions
+	eTimeUnit_QUARTERLY                                                          smithy.SchemaExtensions
+	eTimeUnit_ANNUALLY                                                           smithy.SchemaExtensions
+	eTimeUnit_CUSTOM                                                             smithy.SchemaExtensions
+	e_UnitValue                                                                  smithy.SchemaExtensions
+	e_User                                                                       smithy.SchemaExtensions
+	e_Users                                                                      smithy.SchemaExtensions
+	e_Users_member                                                               smithy.SchemaExtensions
+	e_Value                                                                      smithy.SchemaExtensions
+	e_Values                                                                     smithy.SchemaExtensions
+	e_Values_member                                                              smithy.SchemaExtensions
+	eCreateBudgetActionRequest                                                   smithy.SchemaExtensions
+	eCreateBudgetActionRequest_AccountId                                         smithy.SchemaExtensions
+	eCreateBudgetActionRequest_BudgetName                                        smithy.SchemaExtensions
+	eCreateBudgetActionRequest_NotificationType                                  smithy.SchemaExtensions
+	eCreateBudgetActionRequest_ActionType                                        smithy.SchemaExtensions
+	eCreateBudgetActionRequest_ActionThreshold                                   smithy.SchemaExtensions
+	eCreateBudgetActionRequest_Definition                                        smithy.SchemaExtensions
+	eCreateBudgetActionRequest_ExecutionRoleArn                                  smithy.SchemaExtensions
+	eCreateBudgetActionRequest_ApprovalModel                                     smithy.SchemaExtensions
+	eCreateBudgetActionRequest_Subscribers                                       smithy.SchemaExtensions
+	eCreateBudgetActionRequest_ResourceTags                                      smithy.SchemaExtensions
+	eCreateBudgetActionResponse                                                  smithy.SchemaExtensions
+	eCreateBudgetActionResponse_AccountId                                        smithy.SchemaExtensions
+	eCreateBudgetActionResponse_BudgetName                                       smithy.SchemaExtensions
+	eCreateBudgetActionResponse_ActionId                                         smithy.SchemaExtensions
+	eCreateBudgetRequest                                                         smithy.SchemaExtensions
+	eCreateBudgetRequest_AccountId                                               smithy.SchemaExtensions
+	eCreateBudgetRequest_Budget                                                  smithy.SchemaExtensions
+	eCreateBudgetRequest_NotificationsWithSubscribers                            smithy.SchemaExtensions
+	eCreateBudgetRequest_ResourceTags                                            smithy.SchemaExtensions
+	eCreateBudgetResponse                                                        smithy.SchemaExtensions
+	eCreateNotificationRequest                                                   smithy.SchemaExtensions
+	eCreateNotificationRequest_AccountId                                         smithy.SchemaExtensions
+	eCreateNotificationRequest_BudgetName                                        smithy.SchemaExtensions
+	eCreateNotificationRequest_Notification                                      smithy.SchemaExtensions
+	eCreateNotificationRequest_Subscribers                                       smithy.SchemaExtensions
+	eCreateNotificationResponse                                                  smithy.SchemaExtensions
+	eCreateSubscriberRequest                                                     smithy.SchemaExtensions
+	eCreateSubscriberRequest_AccountId                                           smithy.SchemaExtensions
+	eCreateSubscriberRequest_BudgetName                                          smithy.SchemaExtensions
+	eCreateSubscriberRequest_Notification                                        smithy.SchemaExtensions
+	eCreateSubscriberRequest_Subscriber                                          smithy.SchemaExtensions
+	eCreateSubscriberResponse                                                    smithy.SchemaExtensions
+	eDeleteBudgetActionRequest                                                   smithy.SchemaExtensions
+	eDeleteBudgetActionRequest_AccountId                                         smithy.SchemaExtensions
+	eDeleteBudgetActionRequest_BudgetName                                        smithy.SchemaExtensions
+	eDeleteBudgetActionRequest_ActionId                                          smithy.SchemaExtensions
+	eDeleteBudgetActionResponse                                                  smithy.SchemaExtensions
+	eDeleteBudgetActionResponse_AccountId                                        smithy.SchemaExtensions
+	eDeleteBudgetActionResponse_BudgetName                                       smithy.SchemaExtensions
+	eDeleteBudgetActionResponse_Action                                           smithy.SchemaExtensions
+	eDeleteBudgetRequest                                                         smithy.SchemaExtensions
+	eDeleteBudgetRequest_AccountId                                               smithy.SchemaExtensions
+	eDeleteBudgetRequest_BudgetName                                              smithy.SchemaExtensions
+	eDeleteBudgetResponse                                                        smithy.SchemaExtensions
+	eDeleteNotificationRequest                                                   smithy.SchemaExtensions
+	eDeleteNotificationRequest_AccountId                                         smithy.SchemaExtensions
+	eDeleteNotificationRequest_BudgetName                                        smithy.SchemaExtensions
+	eDeleteNotificationRequest_Notification                                      smithy.SchemaExtensions
+	eDeleteNotificationResponse                                                  smithy.SchemaExtensions
+	eDeleteSubscriberRequest                                                     smithy.SchemaExtensions
+	eDeleteSubscriberRequest_AccountId                                           smithy.SchemaExtensions
+	eDeleteSubscriberRequest_BudgetName                                          smithy.SchemaExtensions
+	eDeleteSubscriberRequest_Notification                                        smithy.SchemaExtensions
+	eDeleteSubscriberRequest_Subscriber                                          smithy.SchemaExtensions
+	eDeleteSubscriberResponse                                                    smithy.SchemaExtensions
+	eDescribeBudgetActionHistoriesRequest                                        smithy.SchemaExtensions
+	eDescribeBudgetActionHistoriesRequest_AccountId                              smithy.SchemaExtensions
+	eDescribeBudgetActionHistoriesRequest_BudgetName                             smithy.SchemaExtensions
+	eDescribeBudgetActionHistoriesRequest_ActionId                               smithy.SchemaExtensions
+	eDescribeBudgetActionHistoriesRequest_TimePeriod                             smithy.SchemaExtensions
+	eDescribeBudgetActionHistoriesRequest_MaxResults                             smithy.SchemaExtensions
+	eDescribeBudgetActionHistoriesRequest_NextToken                              smithy.SchemaExtensions
+	eDescribeBudgetActionHistoriesResponse                                       smithy.SchemaExtensions
+	eDescribeBudgetActionHistoriesResponse_ActionHistories                       smithy.SchemaExtensions
+	eDescribeBudgetActionHistoriesResponse_NextToken                             smithy.SchemaExtensions
+	eDescribeBudgetActionRequest                                                 smithy.SchemaExtensions
+	eDescribeBudgetActionRequest_AccountId                                       smithy.SchemaExtensions
+	eDescribeBudgetActionRequest_BudgetName                                      smithy.SchemaExtensions
+	eDescribeBudgetActionRequest_ActionId                                        smithy.SchemaExtensions
+	eDescribeBudgetActionResponse                                                smithy.SchemaExtensions
+	eDescribeBudgetActionResponse_AccountId                                      smithy.SchemaExtensions
+	eDescribeBudgetActionResponse_BudgetName                                     smithy.SchemaExtensions
+	eDescribeBudgetActionResponse_Action                                         smithy.SchemaExtensions
+	eDescribeBudgetActionsForAccountRequest                                      smithy.SchemaExtensions
+	eDescribeBudgetActionsForAccountRequest_AccountId                            smithy.SchemaExtensions
+	eDescribeBudgetActionsForAccountRequest_MaxResults                           smithy.SchemaExtensions
+	eDescribeBudgetActionsForAccountRequest_NextToken                            smithy.SchemaExtensions
+	eDescribeBudgetActionsForAccountResponse                                     smithy.SchemaExtensions
+	eDescribeBudgetActionsForAccountResponse_Actions                             smithy.SchemaExtensions
+	eDescribeBudgetActionsForAccountResponse_NextToken                           smithy.SchemaExtensions
+	eDescribeBudgetActionsForBudgetRequest                                       smithy.SchemaExtensions
+	eDescribeBudgetActionsForBudgetRequest_AccountId                             smithy.SchemaExtensions
+	eDescribeBudgetActionsForBudgetRequest_BudgetName                            smithy.SchemaExtensions
+	eDescribeBudgetActionsForBudgetRequest_MaxResults                            smithy.SchemaExtensions
+	eDescribeBudgetActionsForBudgetRequest_NextToken                             smithy.SchemaExtensions
+	eDescribeBudgetActionsForBudgetResponse                                      smithy.SchemaExtensions
+	eDescribeBudgetActionsForBudgetResponse_Actions                              smithy.SchemaExtensions
+	eDescribeBudgetActionsForBudgetResponse_NextToken                            smithy.SchemaExtensions
+	eDescribeBudgetRequest                                                       smithy.SchemaExtensions
+	eDescribeBudgetRequest_AccountId                                             smithy.SchemaExtensions
+	eDescribeBudgetRequest_BudgetName                                            smithy.SchemaExtensions
+	eDescribeBudgetRequest_ShowFilterExpression                                  smithy.SchemaExtensions
+	eDescribeBudgetNotificationsForAccountRequest                                smithy.SchemaExtensions
+	eDescribeBudgetNotificationsForAccountRequest_AccountId                      smithy.SchemaExtensions
+	eDescribeBudgetNotificationsForAccountRequest_MaxResults                     smithy.SchemaExtensions
+	eDescribeBudgetNotificationsForAccountRequest_NextToken                      smithy.SchemaExtensions
+	eDescribeBudgetNotificationsForAccountResponse                               smithy.SchemaExtensions
+	eDescribeBudgetNotificationsForAccountResponse_BudgetNotificationsForAccount smithy.SchemaExtensions
+	eDescribeBudgetNotificationsForAccountResponse_NextToken                     smithy.SchemaExtensions
+	eDescribeBudgetResponse                                                      smithy.SchemaExtensions
+	eDescribeBudgetResponse_Budget                                               smithy.SchemaExtensions
+	eDescribeBudgetPerformanceHistoryRequest                                     smithy.SchemaExtensions
+	eDescribeBudgetPerformanceHistoryRequest_AccountId                           smithy.SchemaExtensions
+	eDescribeBudgetPerformanceHistoryRequest_BudgetName                          smithy.SchemaExtensions
+	eDescribeBudgetPerformanceHistoryRequest_TimePeriod                          smithy.SchemaExtensions
+	eDescribeBudgetPerformanceHistoryRequest_MaxResults                          smithy.SchemaExtensions
+	eDescribeBudgetPerformanceHistoryRequest_NextToken                           smithy.SchemaExtensions
+	eDescribeBudgetPerformanceHistoryResponse                                    smithy.SchemaExtensions
+	eDescribeBudgetPerformanceHistoryResponse_BudgetPerformanceHistory           smithy.SchemaExtensions
+	eDescribeBudgetPerformanceHistoryResponse_NextToken                          smithy.SchemaExtensions
+	eDescribeBudgetsRequest                                                      smithy.SchemaExtensions
+	eDescribeBudgetsRequest_AccountId                                            smithy.SchemaExtensions
+	eDescribeBudgetsRequest_MaxResults                                           smithy.SchemaExtensions
+	eDescribeBudgetsRequest_NextToken                                            smithy.SchemaExtensions
+	eDescribeBudgetsRequest_ShowFilterExpression                                 smithy.SchemaExtensions
+	eDescribeBudgetsResponse                                                     smithy.SchemaExtensions
+	eDescribeBudgetsResponse_Budgets                                             smithy.SchemaExtensions
+	eDescribeBudgetsResponse_NextToken                                           smithy.SchemaExtensions
+	eDescribeNotificationsForBudgetRequest                                       smithy.SchemaExtensions
+	eDescribeNotificationsForBudgetRequest_AccountId                             smithy.SchemaExtensions
+	eDescribeNotificationsForBudgetRequest_BudgetName                            smithy.SchemaExtensions
+	eDescribeNotificationsForBudgetRequest_MaxResults                            smithy.SchemaExtensions
+	eDescribeNotificationsForBudgetRequest_NextToken                             smithy.SchemaExtensions
+	eDescribeNotificationsForBudgetResponse                                      smithy.SchemaExtensions
+	eDescribeNotificationsForBudgetResponse_Notifications                        smithy.SchemaExtensions
+	eDescribeNotificationsForBudgetResponse_NextToken                            smithy.SchemaExtensions
+	eDescribeSubscribersForNotificationRequest                                   smithy.SchemaExtensions
+	eDescribeSubscribersForNotificationRequest_AccountId                         smithy.SchemaExtensions
+	eDescribeSubscribersForNotificationRequest_BudgetName                        smithy.SchemaExtensions
+	eDescribeSubscribersForNotificationRequest_Notification                      smithy.SchemaExtensions
+	eDescribeSubscribersForNotificationRequest_MaxResults                        smithy.SchemaExtensions
+	eDescribeSubscribersForNotificationRequest_NextToken                         smithy.SchemaExtensions
+	eDescribeSubscribersForNotificationResponse                                  smithy.SchemaExtensions
+	eDescribeSubscribersForNotificationResponse_Subscribers                      smithy.SchemaExtensions
+	eDescribeSubscribersForNotificationResponse_NextToken                        smithy.SchemaExtensions
+	eExecuteBudgetActionRequest                                                  smithy.SchemaExtensions
+	eExecuteBudgetActionRequest_AccountId                                        smithy.SchemaExtensions
+	eExecuteBudgetActionRequest_BudgetName                                       smithy.SchemaExtensions
+	eExecuteBudgetActionRequest_ActionId                                         smithy.SchemaExtensions
+	eExecuteBudgetActionRequest_ExecutionType                                    smithy.SchemaExtensions
+	eExecuteBudgetActionResponse                                                 smithy.SchemaExtensions
+	eExecuteBudgetActionResponse_AccountId                                       smithy.SchemaExtensions
+	eExecuteBudgetActionResponse_BudgetName                                      smithy.SchemaExtensions
+	eExecuteBudgetActionResponse_ActionId                                        smithy.SchemaExtensions
+	eExecuteBudgetActionResponse_ExecutionType                                   smithy.SchemaExtensions
+	eListTagsForResourceRequest                                                  smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceARN                                      smithy.SchemaExtensions
+	eListTagsForResourceResponse                                                 smithy.SchemaExtensions
+	eListTagsForResourceResponse_ResourceTags                                    smithy.SchemaExtensions
+	eTagResourceRequest                                                          smithy.SchemaExtensions
+	eTagResourceRequest_ResourceARN                                              smithy.SchemaExtensions
+	eTagResourceRequest_ResourceTags                                             smithy.SchemaExtensions
+	eTagResourceResponse                                                         smithy.SchemaExtensions
+	eUntagResourceRequest                                                        smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceARN                                            smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceTagKeys                                        smithy.SchemaExtensions
+	eUntagResourceResponse                                                       smithy.SchemaExtensions
+	eUpdateBudgetActionRequest                                                   smithy.SchemaExtensions
+	eUpdateBudgetActionRequest_AccountId                                         smithy.SchemaExtensions
+	eUpdateBudgetActionRequest_BudgetName                                        smithy.SchemaExtensions
+	eUpdateBudgetActionRequest_ActionId                                          smithy.SchemaExtensions
+	eUpdateBudgetActionRequest_NotificationType                                  smithy.SchemaExtensions
+	eUpdateBudgetActionRequest_ActionThreshold                                   smithy.SchemaExtensions
+	eUpdateBudgetActionRequest_Definition                                        smithy.SchemaExtensions
+	eUpdateBudgetActionRequest_ExecutionRoleArn                                  smithy.SchemaExtensions
+	eUpdateBudgetActionRequest_ApprovalModel                                     smithy.SchemaExtensions
+	eUpdateBudgetActionRequest_Subscribers                                       smithy.SchemaExtensions
+	eUpdateBudgetActionResponse                                                  smithy.SchemaExtensions
+	eUpdateBudgetActionResponse_AccountId                                        smithy.SchemaExtensions
+	eUpdateBudgetActionResponse_BudgetName                                       smithy.SchemaExtensions
+	eUpdateBudgetActionResponse_OldAction                                        smithy.SchemaExtensions
+	eUpdateBudgetActionResponse_NewAction                                        smithy.SchemaExtensions
+	eUpdateBudgetRequest                                                         smithy.SchemaExtensions
+	eUpdateBudgetRequest_AccountId                                               smithy.SchemaExtensions
+	eUpdateBudgetRequest_NewBudget                                               smithy.SchemaExtensions
+	eUpdateBudgetResponse                                                        smithy.SchemaExtensions
+	eUpdateNotificationRequest                                                   smithy.SchemaExtensions
+	eUpdateNotificationRequest_AccountId                                         smithy.SchemaExtensions
+	eUpdateNotificationRequest_BudgetName                                        smithy.SchemaExtensions
+	eUpdateNotificationRequest_OldNotification                                   smithy.SchemaExtensions
+	eUpdateNotificationRequest_NewNotification                                   smithy.SchemaExtensions
+	eUpdateNotificationResponse                                                  smithy.SchemaExtensions
+	eUpdateSubscriberRequest                                                     smithy.SchemaExtensions
+	eUpdateSubscriberRequest_AccountId                                           smithy.SchemaExtensions
+	eUpdateSubscriberRequest_BudgetName                                          smithy.SchemaExtensions
+	eUpdateSubscriberRequest_Notification                                        smithy.SchemaExtensions
+	eUpdateSubscriberRequest_OldSubscriber                                       smithy.SchemaExtensions
+	eUpdateSubscriberRequest_NewSubscriber                                       smithy.SchemaExtensions
+	eUpdateSubscriberResponse                                                    smithy.SchemaExtensions
+)
 
 var (
 	iCreateBudget                                  = smithy.ShapeID{Namespace: "com.amazonaws.budgets", Name: "CreateBudget"}
@@ -370,599 +955,599 @@ var mUpdateBudgetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateB
 var mUpdateNotificationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateNotificationRequest_AccountId, &sUpdateNotificationRequest_BudgetName, &sUpdateNotificationRequest_OldNotification, &sUpdateNotificationRequest_NewNotification}}
 var mUpdateSubscriberRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSubscriberRequest_AccountId, &sUpdateSubscriberRequest_BudgetName, &sUpdateSubscriberRequest_Notification, &sUpdateSubscriberRequest_OldSubscriber, &sUpdateSubscriberRequest_NewSubscriber}}
 
-var sCreateBudget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBudget, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCreateBudgetAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBudgetAction, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sCreateNotification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNotification, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sCreateSubscriber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscriber, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sDeleteBudget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBudget, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sDeleteBudgetAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBudgetAction, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sDeleteNotification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNotification, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sDeleteSubscriber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSubscriber, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sDescribeBudget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudget, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sDescribeBudgetAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetAction, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sDescribeBudgetActionHistories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetActionHistories, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sDescribeBudgetActionsForAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetActionsForAccount, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sDescribeBudgetActionsForBudget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetActionsForBudget, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sDescribeBudgetNotificationsForAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetNotificationsForAccount, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sDescribeBudgetPerformanceHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetPerformanceHistory, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sDescribeBudgets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgets, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sDescribeNotificationsForBudget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeNotificationsForBudget, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sDescribeSubscribersForNotification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSubscribersForNotification, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sExecuteBudgetAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteBudgetAction, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[20]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[21]})
-var sUpdateBudget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBudget, Type: smithy.ShapeTypeOperation, Ext: &ext[22]})
-var sUpdateBudgetAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBudgetAction, Type: smithy.ShapeTypeOperation, Ext: &ext[23]})
-var sUpdateNotification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotification, Type: smithy.ShapeTypeOperation, Ext: &ext[24]})
-var sUpdateSubscriber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubscriber, Type: smithy.ShapeTypeOperation, Ext: &ext[25]})
-var s_AWSBudgetServiceGateway = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSBudgetServiceGateway, Type: smithy.ShapeTypeService, Ext: &ext[26]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[27]})
-var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[29]})
-var sAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &ext[30]})
-var s_ActionHistories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionHistories, Members: &m_ActionHistories, Type: smithy.ShapeTypeList, Ext: &ext[41]})
-var sActionHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionHistory, Members: &mActionHistory, Type: smithy.ShapeTypeStructure, Ext: &ext[43]})
-var sActionHistoryDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionHistoryDetails, Members: &mActionHistoryDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[48]})
-var s_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &ext[51]})
-var s_Actions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Actions, Members: &m_Actions, Type: smithy.ShapeTypeList, Ext: &ext[52]})
-var sActionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionStatus, Members: &mActionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[54]})
-var sActionSubType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionSubType, Members: &mActionSubType, Type: smithy.ShapeTypeEnum, Ext: &ext[65]})
-var sActionThreshold = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionThreshold, Members: &mActionThreshold, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var sActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionType, Members: &mActionType, Type: smithy.ShapeTypeEnum, Ext: &ext[71]})
-var s_AdjustmentPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdjustmentPeriod, Type: smithy.ShapeTypeInteger, Ext: &ext[75]})
-var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[76]})
-var sApprovalModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalModel, Members: &mApprovalModel, Type: smithy.ShapeTypeEnum, Ext: &ext[77]})
-var sAutoAdjustData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoAdjustData, Members: &mAutoAdjustData, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var sAutoAdjustType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoAdjustType, Members: &mAutoAdjustType, Type: smithy.ShapeTypeEnum, Ext: &ext[84]})
-var s_BillingViewArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingViewArn, Type: smithy.ShapeTypeString, Ext: &ext[87]})
-var sBillingViewHealthStatusException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBillingViewHealthStatusException, Members: &mBillingViewHealthStatusException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[88]})
-var sBudget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBudget, Members: &mBudget, Type: smithy.ShapeTypeStructure, Ext: &ext[90]})
-var sBudgetedAndActualAmounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBudgetedAndActualAmounts, Members: &mBudgetedAndActualAmounts, Type: smithy.ShapeTypeStructure, Ext: &ext[106]})
-var s_BudgetedAndActualAmountsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BudgetedAndActualAmountsList, Members: &m_BudgetedAndActualAmountsList, Type: smithy.ShapeTypeList, Ext: &ext[110]})
-var s_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[112]})
-var sBudgetNotificationsForAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBudgetNotificationsForAccount, Members: &mBudgetNotificationsForAccount, Type: smithy.ShapeTypeStructure, Ext: &ext[113]})
-var s_BudgetNotificationsForAccountList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BudgetNotificationsForAccountList, Members: &m_BudgetNotificationsForAccountList, Type: smithy.ShapeTypeList, Ext: &ext[116]})
-var sBudgetPerformanceHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBudgetPerformanceHistory, Members: &mBudgetPerformanceHistory, Type: smithy.ShapeTypeStructure, Ext: &ext[118]})
-var s_Budgets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Budgets, Members: &m_Budgets, Type: smithy.ShapeTypeList, Ext: &ext[128]})
-var sBudgetType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBudgetType, Members: &mBudgetType, Type: smithy.ShapeTypeEnum, Ext: &ext[130]})
-var sCalculatedSpend = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCalculatedSpend, Members: &mCalculatedSpend, Type: smithy.ShapeTypeStructure, Ext: &ext[137]})
-var sComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComparisonOperator, Members: &mComparisonOperator, Type: smithy.ShapeTypeEnum, Ext: &ext[140]})
-var s_CostCategoryName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CostCategoryName, Type: smithy.ShapeTypeString, Ext: &ext[144]})
-var sCostCategoryValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCostCategoryValues, Members: &mCostCategoryValues, Type: smithy.ShapeTypeStructure, Ext: &ext[145]})
-var s_CostFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CostFilters, Members: &m_CostFilters, Type: smithy.ShapeTypeMap, Ext: &ext[149]})
-var sCostTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCostTypes, Members: &mCostTypes, Type: smithy.ShapeTypeStructure, Ext: &ext[152]})
-var sCreationLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreationLimitExceededException, Members: &mCreationLimitExceededException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[164]})
-var sDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefinition, Members: &mDefinition, Type: smithy.ShapeTypeStructure, Ext: &ext[166]})
-var sDimension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeEnum, Ext: &ext[170]})
-var s_DimensionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionValue, Type: smithy.ShapeTypeString, Ext: &ext[204]})
-var s_DimensionValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionValues, Members: &m_DimensionValues, Type: smithy.ShapeTypeList, Ext: &ext[205]})
-var sDuplicateRecordException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplicateRecordException, Members: &mDuplicateRecordException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[207]})
-var s_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &ext[209]})
-var sEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeEnum, Ext: &ext[210]})
-var sExecutionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionType, Members: &mExecutionType, Type: smithy.ShapeTypeEnum, Ext: &ext[216]})
-var sExpiredNextTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpiredNextTokenException, Members: &mExpiredNextTokenException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[221]})
-var sExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpression, Members: &mExpression, Type: smithy.ShapeTypeStructure, Ext: &ext[223]})
-var sExpressionDimensionValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpressionDimensionValues, Members: &mExpressionDimensionValues, Type: smithy.ShapeTypeStructure, Ext: &ext[231]})
-var s_Expressions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Expressions, Members: &m_Expressions, Type: smithy.ShapeTypeList, Ext: &ext[235]})
-var s_GenericString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &ext[237]})
-var s_GenericTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GenericTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[238]})
-var s_Group = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Group, Type: smithy.ShapeTypeString, Ext: &ext[239]})
-var s_Groups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Groups, Members: &m_Groups, Type: smithy.ShapeTypeList, Ext: &ext[240]})
-var sHealthStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthStatus, Members: &mHealthStatus, Type: smithy.ShapeTypeStructure, Ext: &ext[242]})
-var sHealthStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthStatusReason, Members: &mHealthStatusReason, Type: smithy.ShapeTypeEnum, Ext: &ext[246]})
-var sHealthStatusValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthStatusValue, Members: &mHealthStatusValue, Type: smithy.ShapeTypeEnum, Ext: &ext[251]})
-var sHistoricalOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHistoricalOptions, Members: &mHistoricalOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[254]})
-var sIamActionDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIamActionDefinition, Members: &mIamActionDefinition, Type: smithy.ShapeTypeStructure, Ext: &ext[257]})
-var s_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &ext[262]})
-var s_InstanceIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceIds, Members: &m_InstanceIds, Type: smithy.ShapeTypeList, Ext: &ext[263]})
-var sInternalErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalErrorException, Members: &mInternalErrorException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &ext[265]})
-var sInvalidNextTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidNextTokenException, Members: &mInvalidNextTokenException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[267]})
-var sInvalidParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterException, Members: &mInvalidParameterException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[269]})
-var sMatchOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMatchOption, Members: &mMatchOption, Type: smithy.ShapeTypeEnum, Ext: &ext[271]})
-var s_MatchOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MatchOptions, Members: &m_MatchOptions, Type: smithy.ShapeTypeList, Ext: &ext[280]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[282]})
-var s_MaxResultsBudgetNotifications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsBudgetNotifications, Type: smithy.ShapeTypeInteger, Ext: &ext[283]})
-var s_MaxResultsDescribeBudgets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsDescribeBudgets, Type: smithy.ShapeTypeInteger, Ext: &ext[284]})
-var sMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetric, Members: &mMetric, Type: smithy.ShapeTypeEnum, Ext: &ext[285]})
-var s_Metrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Metrics, Members: &m_Metrics, Type: smithy.ShapeTypeList, Ext: &ext[294]})
-var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &ext[296]})
-var sNotification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &ext[298]})
-var s_Notifications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Notifications, Members: &m_Notifications, Type: smithy.ShapeTypeList, Ext: &ext[304]})
-var sNotificationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationState, Members: &mNotificationState, Type: smithy.ShapeTypeEnum, Ext: &ext[306]})
-var s_NotificationThreshold = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationThreshold, Type: smithy.ShapeTypeDouble, Ext: &ext[309]})
-var sNotificationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationType, Members: &mNotificationType, Type: smithy.ShapeTypeEnum, Ext: &ext[310]})
-var sNotificationWithSubscribers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationWithSubscribers, Members: &mNotificationWithSubscribers, Type: smithy.ShapeTypeStructure, Ext: &ext[313]})
-var s_NotificationWithSubscribersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationWithSubscribersList, Members: &m_NotificationWithSubscribersList, Type: smithy.ShapeTypeList, Ext: &ext[316]})
-var s_NullableBoolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[318]})
-var s_NumericValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumericValue, Type: smithy.ShapeTypeString, Ext: &ext[319]})
-var s_PlannedBudgetLimits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlannedBudgetLimits, Members: &m_PlannedBudgetLimits, Type: smithy.ShapeTypeMap, Ext: &ext[320]})
-var s_PolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyArn, Type: smithy.ShapeTypeString, Ext: &ext[323]})
-var s_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &ext[324]})
-var s_ProductAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProductAttributeName, Type: smithy.ShapeTypeString, Ext: &ext[325]})
-var sProductAttributeValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProductAttributeValues, Members: &mProductAttributeValues, Type: smithy.ShapeTypeStructure, Ext: &ext[326]})
-var s_Region = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &ext[330]})
-var sResourceLockedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceLockedException, Members: &mResourceLockedException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &ext[331]})
-var sResourceTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceTag, Members: &mResourceTag, Type: smithy.ShapeTypeStructure, Ext: &ext[333]})
-var s_ResourceTagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagKey, Type: smithy.ShapeTypeString, Ext: &ext[336]})
-var s_ResourceTagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagKeyList, Members: &m_ResourceTagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[337]})
-var s_ResourceTagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList, Ext: &ext[339]})
-var s_ResourceTagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagValue, Type: smithy.ShapeTypeString, Ext: &ext[341]})
-var s_Role = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Role, Type: smithy.ShapeTypeString, Ext: &ext[342]})
-var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[343]})
-var s_Roles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Roles, Members: &m_Roles, Type: smithy.ShapeTypeList, Ext: &ext[344]})
-var sScpActionDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScpActionDefinition, Members: &mScpActionDefinition, Type: smithy.ShapeTypeStructure, Ext: &ext[346]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &ext[349]})
-var sSpend = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpend, Members: &mSpend, Type: smithy.ShapeTypeStructure, Ext: &ext[351]})
-var sSsmActionDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSsmActionDefinition, Members: &mSsmActionDefinition, Type: smithy.ShapeTypeStructure, Ext: &ext[354]})
-var sSubscriber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscriber, Members: &mSubscriber, Type: smithy.ShapeTypeStructure, Ext: &ext[358]})
-var s_SubscriberAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubscriberAddress, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[361]})
-var s_Subscribers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Subscribers, Members: &m_Subscribers, Type: smithy.ShapeTypeList, Ext: &ext[362]})
-var sSubscriptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscriptionType, Members: &mSubscriptionType, Type: smithy.ShapeTypeEnum, Ext: &ext[364]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[367]})
-var sTagValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagValues, Members: &mTagValues, Type: smithy.ShapeTypeStructure, Ext: &ext[368]})
-var s_TargetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetId, Type: smithy.ShapeTypeString, Ext: &ext[372]})
-var s_TargetIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetIds, Members: &m_TargetIds, Type: smithy.ShapeTypeList, Ext: &ext[373]})
-var sThresholdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThresholdType, Members: &mThresholdType, Type: smithy.ShapeTypeEnum, Ext: &ext[375]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[378]})
-var sTimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &ext[380]})
-var sTimeUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeUnit, Members: &mTimeUnit, Type: smithy.ShapeTypeEnum, Ext: &ext[383]})
-var s_UnitValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UnitValue, Type: smithy.ShapeTypeString, Ext: &ext[389]})
-var s_User = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_User, Type: smithy.ShapeTypeString, Ext: &ext[390]})
-var s_Users = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Users, Members: &m_Users, Type: smithy.ShapeTypeList, Ext: &ext[391]})
-var s_Value = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Value, Type: smithy.ShapeTypeString, Ext: &ext[393]})
-var s_Values = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList, Ext: &ext[394]})
-var sCreateBudgetActionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBudgetActionRequest, Members: &mCreateBudgetActionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[396]})
-var sCreateBudgetActionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBudgetActionResponse, Members: &mCreateBudgetActionResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[407]})
-var sCreateBudgetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBudgetRequest, Members: &mCreateBudgetRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[411]})
-var sCreateBudgetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBudgetResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[416]})
-var sCreateNotificationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNotificationRequest, Members: &mCreateNotificationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[417]})
-var sCreateNotificationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNotificationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[422]})
-var sCreateSubscriberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscriberRequest, Members: &mCreateSubscriberRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[423]})
-var sCreateSubscriberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscriberResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[428]})
-var sDeleteBudgetActionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBudgetActionRequest, Members: &mDeleteBudgetActionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[429]})
-var sDeleteBudgetActionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBudgetActionResponse, Members: &mDeleteBudgetActionResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[433]})
-var sDeleteBudgetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBudgetRequest, Members: &mDeleteBudgetRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[437]})
-var sDeleteBudgetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBudgetResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[440]})
-var sDeleteNotificationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNotificationRequest, Members: &mDeleteNotificationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[441]})
-var sDeleteNotificationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNotificationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[445]})
-var sDeleteSubscriberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSubscriberRequest, Members: &mDeleteSubscriberRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[446]})
-var sDeleteSubscriberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSubscriberResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[451]})
-var sDescribeBudgetActionHistoriesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetActionHistoriesRequest, Members: &mDescribeBudgetActionHistoriesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[452]})
-var sDescribeBudgetActionHistoriesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetActionHistoriesResponse, Members: &mDescribeBudgetActionHistoriesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[459]})
-var sDescribeBudgetActionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetActionRequest, Members: &mDescribeBudgetActionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[462]})
-var sDescribeBudgetActionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetActionResponse, Members: &mDescribeBudgetActionResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[466]})
-var sDescribeBudgetActionsForAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetActionsForAccountRequest, Members: &mDescribeBudgetActionsForAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[470]})
-var sDescribeBudgetActionsForAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetActionsForAccountResponse, Members: &mDescribeBudgetActionsForAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[474]})
-var sDescribeBudgetActionsForBudgetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetActionsForBudgetRequest, Members: &mDescribeBudgetActionsForBudgetRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[477]})
-var sDescribeBudgetActionsForBudgetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetActionsForBudgetResponse, Members: &mDescribeBudgetActionsForBudgetResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[482]})
-var sDescribeBudgetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetRequest, Members: &mDescribeBudgetRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[485]})
-var sDescribeBudgetNotificationsForAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetNotificationsForAccountRequest, Members: &mDescribeBudgetNotificationsForAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[489]})
-var sDescribeBudgetNotificationsForAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetNotificationsForAccountResponse, Members: &mDescribeBudgetNotificationsForAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[493]})
-var sDescribeBudgetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetResponse, Members: &mDescribeBudgetResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[496]})
-var sDescribeBudgetPerformanceHistoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetPerformanceHistoryRequest, Members: &mDescribeBudgetPerformanceHistoryRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[498]})
-var sDescribeBudgetPerformanceHistoryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetPerformanceHistoryResponse, Members: &mDescribeBudgetPerformanceHistoryResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[504]})
-var sDescribeBudgetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetsRequest, Members: &mDescribeBudgetsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[507]})
-var sDescribeBudgetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetsResponse, Members: &mDescribeBudgetsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[512]})
-var sDescribeNotificationsForBudgetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeNotificationsForBudgetRequest, Members: &mDescribeNotificationsForBudgetRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[515]})
-var sDescribeNotificationsForBudgetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeNotificationsForBudgetResponse, Members: &mDescribeNotificationsForBudgetResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[520]})
-var sDescribeSubscribersForNotificationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSubscribersForNotificationRequest, Members: &mDescribeSubscribersForNotificationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[523]})
-var sDescribeSubscribersForNotificationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSubscribersForNotificationResponse, Members: &mDescribeSubscribersForNotificationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[529]})
-var sExecuteBudgetActionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteBudgetActionRequest, Members: &mExecuteBudgetActionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[532]})
-var sExecuteBudgetActionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteBudgetActionResponse, Members: &mExecuteBudgetActionResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[537]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[542]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[544]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[546]})
-var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[549]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[550]})
-var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[553]})
-var sUpdateBudgetActionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBudgetActionRequest, Members: &mUpdateBudgetActionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[554]})
-var sUpdateBudgetActionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBudgetActionResponse, Members: &mUpdateBudgetActionResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[564]})
-var sUpdateBudgetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBudgetRequest, Members: &mUpdateBudgetRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[569]})
-var sUpdateBudgetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBudgetResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[572]})
-var sUpdateNotificationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotificationRequest, Members: &mUpdateNotificationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[573]})
-var sUpdateNotificationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotificationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[578]})
-var sUpdateSubscriberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubscriberRequest, Members: &mUpdateSubscriberRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[579]})
-var sUpdateSubscriberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubscriberResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[585]})
+var sCreateBudget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBudget, Type: smithy.ShapeTypeOperation, Ext: &eCreateBudget})
+var sCreateBudgetAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBudgetAction, Type: smithy.ShapeTypeOperation, Ext: &eCreateBudgetAction})
+var sCreateNotification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNotification, Type: smithy.ShapeTypeOperation, Ext: &eCreateNotification})
+var sCreateSubscriber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscriber, Type: smithy.ShapeTypeOperation, Ext: &eCreateSubscriber})
+var sDeleteBudget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBudget, Type: smithy.ShapeTypeOperation, Ext: &eDeleteBudget})
+var sDeleteBudgetAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBudgetAction, Type: smithy.ShapeTypeOperation, Ext: &eDeleteBudgetAction})
+var sDeleteNotification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNotification, Type: smithy.ShapeTypeOperation, Ext: &eDeleteNotification})
+var sDeleteSubscriber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSubscriber, Type: smithy.ShapeTypeOperation, Ext: &eDeleteSubscriber})
+var sDescribeBudget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudget, Type: smithy.ShapeTypeOperation, Ext: &eDescribeBudget})
+var sDescribeBudgetAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetAction, Type: smithy.ShapeTypeOperation, Ext: &eDescribeBudgetAction})
+var sDescribeBudgetActionHistories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetActionHistories, Type: smithy.ShapeTypeOperation, Ext: &eDescribeBudgetActionHistories})
+var sDescribeBudgetActionsForAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetActionsForAccount, Type: smithy.ShapeTypeOperation, Ext: &eDescribeBudgetActionsForAccount})
+var sDescribeBudgetActionsForBudget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetActionsForBudget, Type: smithy.ShapeTypeOperation, Ext: &eDescribeBudgetActionsForBudget})
+var sDescribeBudgetNotificationsForAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetNotificationsForAccount, Type: smithy.ShapeTypeOperation, Ext: &eDescribeBudgetNotificationsForAccount})
+var sDescribeBudgetPerformanceHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetPerformanceHistory, Type: smithy.ShapeTypeOperation, Ext: &eDescribeBudgetPerformanceHistory})
+var sDescribeBudgets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgets, Type: smithy.ShapeTypeOperation, Ext: &eDescribeBudgets})
+var sDescribeNotificationsForBudget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeNotificationsForBudget, Type: smithy.ShapeTypeOperation, Ext: &eDescribeNotificationsForBudget})
+var sDescribeSubscribersForNotification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSubscribersForNotification, Type: smithy.ShapeTypeOperation, Ext: &eDescribeSubscribersForNotification})
+var sExecuteBudgetAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteBudgetAction, Type: smithy.ShapeTypeOperation, Ext: &eExecuteBudgetAction})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateBudget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBudget, Type: smithy.ShapeTypeOperation, Ext: &eUpdateBudget})
+var sUpdateBudgetAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBudgetAction, Type: smithy.ShapeTypeOperation, Ext: &eUpdateBudgetAction})
+var sUpdateNotification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotification, Type: smithy.ShapeTypeOperation, Ext: &eUpdateNotification})
+var sUpdateSubscriber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubscriber, Type: smithy.ShapeTypeOperation, Ext: &eUpdateSubscriber})
+var s_AWSBudgetServiceGateway = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSBudgetServiceGateway, Type: smithy.ShapeTypeService, Ext: &e_AWSBudgetServiceGateway})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountId})
+var sAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &eAction})
+var s_ActionHistories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionHistories, Members: &m_ActionHistories, Type: smithy.ShapeTypeList, Ext: &e_ActionHistories})
+var sActionHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionHistory, Members: &mActionHistory, Type: smithy.ShapeTypeStructure, Ext: &eActionHistory})
+var sActionHistoryDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionHistoryDetails, Members: &mActionHistoryDetails, Type: smithy.ShapeTypeStructure, Ext: &eActionHistoryDetails})
+var s_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &e_ActionId})
+var s_Actions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Actions, Members: &m_Actions, Type: smithy.ShapeTypeList, Ext: &e_Actions})
+var sActionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionStatus, Members: &mActionStatus, Type: smithy.ShapeTypeEnum, Ext: &eActionStatus})
+var sActionSubType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionSubType, Members: &mActionSubType, Type: smithy.ShapeTypeEnum, Ext: &eActionSubType})
+var sActionThreshold = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionThreshold, Members: &mActionThreshold, Type: smithy.ShapeTypeStructure, Ext: &eActionThreshold})
+var sActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionType, Members: &mActionType, Type: smithy.ShapeTypeEnum, Ext: &eActionType})
+var s_AdjustmentPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdjustmentPeriod, Type: smithy.ShapeTypeInteger, Ext: &e_AdjustmentPeriod})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &e_AmazonResourceName})
+var sApprovalModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalModel, Members: &mApprovalModel, Type: smithy.ShapeTypeEnum, Ext: &eApprovalModel})
+var sAutoAdjustData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoAdjustData, Members: &mAutoAdjustData, Type: smithy.ShapeTypeStructure, Ext: &eAutoAdjustData})
+var sAutoAdjustType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoAdjustType, Members: &mAutoAdjustType, Type: smithy.ShapeTypeEnum, Ext: &eAutoAdjustType})
+var s_BillingViewArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingViewArn, Type: smithy.ShapeTypeString, Ext: &e_BillingViewArn})
+var sBillingViewHealthStatusException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBillingViewHealthStatusException, Members: &mBillingViewHealthStatusException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eBillingViewHealthStatusException})
+var sBudget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBudget, Members: &mBudget, Type: smithy.ShapeTypeStructure, Ext: &eBudget})
+var sBudgetedAndActualAmounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBudgetedAndActualAmounts, Members: &mBudgetedAndActualAmounts, Type: smithy.ShapeTypeStructure, Ext: &eBudgetedAndActualAmounts})
+var s_BudgetedAndActualAmountsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BudgetedAndActualAmountsList, Members: &m_BudgetedAndActualAmountsList, Type: smithy.ShapeTypeList, Ext: &e_BudgetedAndActualAmountsList})
+var s_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &e_BudgetName})
+var sBudgetNotificationsForAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBudgetNotificationsForAccount, Members: &mBudgetNotificationsForAccount, Type: smithy.ShapeTypeStructure, Ext: &eBudgetNotificationsForAccount})
+var s_BudgetNotificationsForAccountList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BudgetNotificationsForAccountList, Members: &m_BudgetNotificationsForAccountList, Type: smithy.ShapeTypeList, Ext: &e_BudgetNotificationsForAccountList})
+var sBudgetPerformanceHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBudgetPerformanceHistory, Members: &mBudgetPerformanceHistory, Type: smithy.ShapeTypeStructure, Ext: &eBudgetPerformanceHistory})
+var s_Budgets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Budgets, Members: &m_Budgets, Type: smithy.ShapeTypeList, Ext: &e_Budgets})
+var sBudgetType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBudgetType, Members: &mBudgetType, Type: smithy.ShapeTypeEnum, Ext: &eBudgetType})
+var sCalculatedSpend = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCalculatedSpend, Members: &mCalculatedSpend, Type: smithy.ShapeTypeStructure, Ext: &eCalculatedSpend})
+var sComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComparisonOperator, Members: &mComparisonOperator, Type: smithy.ShapeTypeEnum, Ext: &eComparisonOperator})
+var s_CostCategoryName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CostCategoryName, Type: smithy.ShapeTypeString, Ext: &e_CostCategoryName})
+var sCostCategoryValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCostCategoryValues, Members: &mCostCategoryValues, Type: smithy.ShapeTypeStructure, Ext: &eCostCategoryValues})
+var s_CostFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CostFilters, Members: &m_CostFilters, Type: smithy.ShapeTypeMap, Ext: &e_CostFilters})
+var sCostTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCostTypes, Members: &mCostTypes, Type: smithy.ShapeTypeStructure, Ext: &eCostTypes})
+var sCreationLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreationLimitExceededException, Members: &mCreationLimitExceededException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eCreationLimitExceededException})
+var sDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefinition, Members: &mDefinition, Type: smithy.ShapeTypeStructure, Ext: &eDefinition})
+var sDimension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeEnum, Ext: &eDimension})
+var s_DimensionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionValue, Type: smithy.ShapeTypeString, Ext: &e_DimensionValue})
+var s_DimensionValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionValues, Members: &m_DimensionValues, Type: smithy.ShapeTypeList, Ext: &e_DimensionValues})
+var sDuplicateRecordException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplicateRecordException, Members: &mDuplicateRecordException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eDuplicateRecordException})
+var s_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &e_errorMessage})
+var sEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeEnum, Ext: &eEventType})
+var sExecutionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionType, Members: &mExecutionType, Type: smithy.ShapeTypeEnum, Ext: &eExecutionType})
+var sExpiredNextTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpiredNextTokenException, Members: &mExpiredNextTokenException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eExpiredNextTokenException})
+var sExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpression, Members: &mExpression, Type: smithy.ShapeTypeStructure, Ext: &eExpression})
+var sExpressionDimensionValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpressionDimensionValues, Members: &mExpressionDimensionValues, Type: smithy.ShapeTypeStructure, Ext: &eExpressionDimensionValues})
+var s_Expressions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Expressions, Members: &m_Expressions, Type: smithy.ShapeTypeList, Ext: &e_Expressions})
+var s_GenericString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &e_GenericString})
+var s_GenericTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GenericTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_GenericTimestamp})
+var s_Group = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Group, Type: smithy.ShapeTypeString, Ext: &e_Group})
+var s_Groups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Groups, Members: &m_Groups, Type: smithy.ShapeTypeList, Ext: &e_Groups})
+var sHealthStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthStatus, Members: &mHealthStatus, Type: smithy.ShapeTypeStructure, Ext: &eHealthStatus})
+var sHealthStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthStatusReason, Members: &mHealthStatusReason, Type: smithy.ShapeTypeEnum, Ext: &eHealthStatusReason})
+var sHealthStatusValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthStatusValue, Members: &mHealthStatusValue, Type: smithy.ShapeTypeEnum, Ext: &eHealthStatusValue})
+var sHistoricalOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHistoricalOptions, Members: &mHistoricalOptions, Type: smithy.ShapeTypeStructure, Ext: &eHistoricalOptions})
+var sIamActionDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIamActionDefinition, Members: &mIamActionDefinition, Type: smithy.ShapeTypeStructure, Ext: &eIamActionDefinition})
+var s_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &e_InstanceId})
+var s_InstanceIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceIds, Members: &m_InstanceIds, Type: smithy.ShapeTypeList, Ext: &e_InstanceIds})
+var sInternalErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalErrorException, Members: &mInternalErrorException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eInternalErrorException})
+var sInvalidNextTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidNextTokenException, Members: &mInvalidNextTokenException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidNextTokenException})
+var sInvalidParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterException, Members: &mInvalidParameterException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidParameterException})
+var sMatchOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMatchOption, Members: &mMatchOption, Type: smithy.ShapeTypeEnum, Ext: &eMatchOption})
+var s_MatchOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MatchOptions, Members: &m_MatchOptions, Type: smithy.ShapeTypeList, Ext: &e_MatchOptions})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_MaxResultsBudgetNotifications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsBudgetNotifications, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResultsBudgetNotifications})
+var s_MaxResultsDescribeBudgets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsDescribeBudgets, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResultsDescribeBudgets})
+var sMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetric, Members: &mMetric, Type: smithy.ShapeTypeEnum, Ext: &eMetric})
+var s_Metrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Metrics, Members: &m_Metrics, Type: smithy.ShapeTypeList, Ext: &e_Metrics})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eNotFoundException})
+var sNotification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &eNotification})
+var s_Notifications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Notifications, Members: &m_Notifications, Type: smithy.ShapeTypeList, Ext: &e_Notifications})
+var sNotificationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationState, Members: &mNotificationState, Type: smithy.ShapeTypeEnum, Ext: &eNotificationState})
+var s_NotificationThreshold = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationThreshold, Type: smithy.ShapeTypeDouble, Ext: &e_NotificationThreshold})
+var sNotificationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationType, Members: &mNotificationType, Type: smithy.ShapeTypeEnum, Ext: &eNotificationType})
+var sNotificationWithSubscribers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationWithSubscribers, Members: &mNotificationWithSubscribers, Type: smithy.ShapeTypeStructure, Ext: &eNotificationWithSubscribers})
+var s_NotificationWithSubscribersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationWithSubscribersList, Members: &m_NotificationWithSubscribersList, Type: smithy.ShapeTypeList, Ext: &e_NotificationWithSubscribersList})
+var s_NullableBoolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &e_NullableBoolean})
+var s_NumericValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumericValue, Type: smithy.ShapeTypeString, Ext: &e_NumericValue})
+var s_PlannedBudgetLimits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlannedBudgetLimits, Members: &m_PlannedBudgetLimits, Type: smithy.ShapeTypeMap, Ext: &e_PlannedBudgetLimits})
+var s_PolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyArn, Type: smithy.ShapeTypeString, Ext: &e_PolicyArn})
+var s_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &e_PolicyId})
+var s_ProductAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProductAttributeName, Type: smithy.ShapeTypeString, Ext: &e_ProductAttributeName})
+var sProductAttributeValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProductAttributeValues, Members: &mProductAttributeValues, Type: smithy.ShapeTypeStructure, Ext: &eProductAttributeValues})
+var s_Region = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &e_Region})
+var sResourceLockedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceLockedException, Members: &mResourceLockedException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eResourceLockedException})
+var sResourceTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceTag, Members: &mResourceTag, Type: smithy.ShapeTypeStructure, Ext: &eResourceTag})
+var s_ResourceTagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagKey, Type: smithy.ShapeTypeString, Ext: &e_ResourceTagKey})
+var s_ResourceTagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagKeyList, Members: &m_ResourceTagKeyList, Type: smithy.ShapeTypeList, Ext: &e_ResourceTagKeyList})
+var s_ResourceTagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList, Ext: &e_ResourceTagList})
+var s_ResourceTagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagValue, Type: smithy.ShapeTypeString, Ext: &e_ResourceTagValue})
+var s_Role = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Role, Type: smithy.ShapeTypeString, Ext: &e_Role})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &e_RoleArn})
+var s_Roles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Roles, Members: &m_Roles, Type: smithy.ShapeTypeList, Ext: &e_Roles})
+var sScpActionDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScpActionDefinition, Members: &mScpActionDefinition, Type: smithy.ShapeTypeStructure, Ext: &eScpActionDefinition})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sSpend = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpend, Members: &mSpend, Type: smithy.ShapeTypeStructure, Ext: &eSpend})
+var sSsmActionDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSsmActionDefinition, Members: &mSsmActionDefinition, Type: smithy.ShapeTypeStructure, Ext: &eSsmActionDefinition})
+var sSubscriber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscriber, Members: &mSubscriber, Type: smithy.ShapeTypeStructure, Ext: &eSubscriber})
+var s_SubscriberAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubscriberAddress, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &e_SubscriberAddress})
+var s_Subscribers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Subscribers, Members: &m_Subscribers, Type: smithy.ShapeTypeList, Ext: &e_Subscribers})
+var sSubscriptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscriptionType, Members: &mSubscriptionType, Type: smithy.ShapeTypeEnum, Ext: &eSubscriptionType})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var sTagValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagValues, Members: &mTagValues, Type: smithy.ShapeTypeStructure, Ext: &eTagValues})
+var s_TargetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetId, Type: smithy.ShapeTypeString, Ext: &e_TargetId})
+var s_TargetIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetIds, Members: &m_TargetIds, Type: smithy.ShapeTypeList, Ext: &e_TargetIds})
+var sThresholdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThresholdType, Members: &mThresholdType, Type: smithy.ShapeTypeEnum, Ext: &eThresholdType})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sTimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &eTimePeriod})
+var sTimeUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeUnit, Members: &mTimeUnit, Type: smithy.ShapeTypeEnum, Ext: &eTimeUnit})
+var s_UnitValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UnitValue, Type: smithy.ShapeTypeString, Ext: &e_UnitValue})
+var s_User = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_User, Type: smithy.ShapeTypeString, Ext: &e_User})
+var s_Users = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Users, Members: &m_Users, Type: smithy.ShapeTypeList, Ext: &e_Users})
+var s_Value = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Value, Type: smithy.ShapeTypeString, Ext: &e_Value})
+var s_Values = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList, Ext: &e_Values})
+var sCreateBudgetActionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBudgetActionRequest, Members: &mCreateBudgetActionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateBudgetActionRequest})
+var sCreateBudgetActionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBudgetActionResponse, Members: &mCreateBudgetActionResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateBudgetActionResponse})
+var sCreateBudgetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBudgetRequest, Members: &mCreateBudgetRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateBudgetRequest})
+var sCreateBudgetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBudgetResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateBudgetResponse})
+var sCreateNotificationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNotificationRequest, Members: &mCreateNotificationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateNotificationRequest})
+var sCreateNotificationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNotificationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateNotificationResponse})
+var sCreateSubscriberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscriberRequest, Members: &mCreateSubscriberRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateSubscriberRequest})
+var sCreateSubscriberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscriberResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateSubscriberResponse})
+var sDeleteBudgetActionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBudgetActionRequest, Members: &mDeleteBudgetActionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBudgetActionRequest})
+var sDeleteBudgetActionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBudgetActionResponse, Members: &mDeleteBudgetActionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBudgetActionResponse})
+var sDeleteBudgetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBudgetRequest, Members: &mDeleteBudgetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBudgetRequest})
+var sDeleteBudgetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBudgetResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBudgetResponse})
+var sDeleteNotificationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNotificationRequest, Members: &mDeleteNotificationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteNotificationRequest})
+var sDeleteNotificationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNotificationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteNotificationResponse})
+var sDeleteSubscriberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSubscriberRequest, Members: &mDeleteSubscriberRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSubscriberRequest})
+var sDeleteSubscriberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSubscriberResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSubscriberResponse})
+var sDescribeBudgetActionHistoriesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetActionHistoriesRequest, Members: &mDescribeBudgetActionHistoriesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBudgetActionHistoriesRequest})
+var sDescribeBudgetActionHistoriesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetActionHistoriesResponse, Members: &mDescribeBudgetActionHistoriesResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBudgetActionHistoriesResponse})
+var sDescribeBudgetActionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetActionRequest, Members: &mDescribeBudgetActionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBudgetActionRequest})
+var sDescribeBudgetActionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetActionResponse, Members: &mDescribeBudgetActionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBudgetActionResponse})
+var sDescribeBudgetActionsForAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetActionsForAccountRequest, Members: &mDescribeBudgetActionsForAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBudgetActionsForAccountRequest})
+var sDescribeBudgetActionsForAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetActionsForAccountResponse, Members: &mDescribeBudgetActionsForAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBudgetActionsForAccountResponse})
+var sDescribeBudgetActionsForBudgetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetActionsForBudgetRequest, Members: &mDescribeBudgetActionsForBudgetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBudgetActionsForBudgetRequest})
+var sDescribeBudgetActionsForBudgetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetActionsForBudgetResponse, Members: &mDescribeBudgetActionsForBudgetResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBudgetActionsForBudgetResponse})
+var sDescribeBudgetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetRequest, Members: &mDescribeBudgetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBudgetRequest})
+var sDescribeBudgetNotificationsForAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetNotificationsForAccountRequest, Members: &mDescribeBudgetNotificationsForAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBudgetNotificationsForAccountRequest})
+var sDescribeBudgetNotificationsForAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetNotificationsForAccountResponse, Members: &mDescribeBudgetNotificationsForAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBudgetNotificationsForAccountResponse})
+var sDescribeBudgetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetResponse, Members: &mDescribeBudgetResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBudgetResponse})
+var sDescribeBudgetPerformanceHistoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetPerformanceHistoryRequest, Members: &mDescribeBudgetPerformanceHistoryRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBudgetPerformanceHistoryRequest})
+var sDescribeBudgetPerformanceHistoryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetPerformanceHistoryResponse, Members: &mDescribeBudgetPerformanceHistoryResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBudgetPerformanceHistoryResponse})
+var sDescribeBudgetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetsRequest, Members: &mDescribeBudgetsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBudgetsRequest})
+var sDescribeBudgetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBudgetsResponse, Members: &mDescribeBudgetsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBudgetsResponse})
+var sDescribeNotificationsForBudgetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeNotificationsForBudgetRequest, Members: &mDescribeNotificationsForBudgetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeNotificationsForBudgetRequest})
+var sDescribeNotificationsForBudgetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeNotificationsForBudgetResponse, Members: &mDescribeNotificationsForBudgetResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeNotificationsForBudgetResponse})
+var sDescribeSubscribersForNotificationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSubscribersForNotificationRequest, Members: &mDescribeSubscribersForNotificationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSubscribersForNotificationRequest})
+var sDescribeSubscribersForNotificationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSubscribersForNotificationResponse, Members: &mDescribeSubscribersForNotificationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSubscribersForNotificationResponse})
+var sExecuteBudgetActionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteBudgetActionRequest, Members: &mExecuteBudgetActionRequest, Type: smithy.ShapeTypeStructure, Ext: &eExecuteBudgetActionRequest})
+var sExecuteBudgetActionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteBudgetActionResponse, Members: &mExecuteBudgetActionResponse, Type: smithy.ShapeTypeStructure, Ext: &eExecuteBudgetActionResponse})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateBudgetActionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBudgetActionRequest, Members: &mUpdateBudgetActionRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBudgetActionRequest})
+var sUpdateBudgetActionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBudgetActionResponse, Members: &mUpdateBudgetActionResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBudgetActionResponse})
+var sUpdateBudgetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBudgetRequest, Members: &mUpdateBudgetRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBudgetRequest})
+var sUpdateBudgetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBudgetResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBudgetResponse})
+var sUpdateNotificationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotificationRequest, Members: &mUpdateNotificationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateNotificationRequest})
+var sUpdateNotificationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotificationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateNotificationResponse})
+var sUpdateSubscriberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubscriberRequest, Members: &mUpdateSubscriberRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSubscriberRequest})
+var sUpdateSubscriberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubscriberResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSubscriberResponse})
 
-var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &ext[28]})
-var sAction_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionId", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var sAction_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var sAction_NotificationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationType", ID: &iNotificationType, Members: &mNotificationType, Type: smithy.ShapeTypeEnum, Ext: &ext[33]})
-var sAction_ActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionType", ID: &iActionType, Members: &mActionType, Type: smithy.ShapeTypeEnum, Ext: &ext[34]})
-var sAction_ActionThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionThreshold", ID: &iActionThreshold, Members: &mActionThreshold, Type: smithy.ShapeTypeStructure, Ext: &ext[35]})
-var sAction_Definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Definition", ID: &iDefinition, Members: &mDefinition, Type: smithy.ShapeTypeStructure, Ext: &ext[36]})
-var sAction_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[37]})
-var sAction_ApprovalModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApprovalModel", ID: &iApprovalModel, Members: &mApprovalModel, Type: smithy.ShapeTypeEnum, Ext: &ext[38]})
-var sAction_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iActionStatus, Members: &mActionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[39]})
-var sAction_Subscribers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subscribers", ID: &i_Subscribers, Members: &m_Subscribers, Type: smithy.ShapeTypeList, Ext: &ext[40]})
-var s_ActionHistories_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActionHistory, Members: &mActionHistory, Type: smithy.ShapeTypeStructure, Ext: &ext[42]})
-var sActionHistory_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_GenericTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[44]})
-var sActionHistory_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iActionStatus, Members: &mActionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[45]})
-var sActionHistory_EventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventType", ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeEnum, Ext: &ext[46]})
-var sActionHistory_ActionHistoryDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionHistoryDetails", ID: &iActionHistoryDetails, Members: &mActionHistoryDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[47]})
-var sActionHistoryDetails_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &ext[49]})
-var sActionHistoryDetails_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &ext[50]})
-var s_Actions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &ext[53]})
-var sActionStatus_Standby = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Standby", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[55]})
-var sActionStatus_Pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pending", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[56]})
-var sActionStatus_Execution_In_Progress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Execution_In_Progress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[57]})
-var sActionStatus_Execution_Success = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Execution_Success", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[58]})
-var sActionStatus_Execution_Failure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Execution_Failure", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[59]})
-var sActionStatus_Reverse_In_Progress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reverse_In_Progress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[60]})
-var sActionStatus_Reverse_Success = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reverse_Success", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[61]})
-var sActionStatus_Reverse_Failure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reverse_Failure", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[62]})
-var sActionStatus_Reset_In_Progress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reset_In_Progress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[63]})
-var sActionStatus_Reset_Failure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reset_Failure", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[64]})
-var sActionSubType_STOP_EC2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOP_EC2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[66]})
-var sActionSubType_STOP_RDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOP_RDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[67]})
-var sActionThreshold_ActionThresholdValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionThresholdValue", ID: &i_NotificationThreshold, Type: smithy.ShapeTypeDouble, Ext: &ext[69]})
-var sActionThreshold_ActionThresholdType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionThresholdType", ID: &iThresholdType, Members: &mThresholdType, Type: smithy.ShapeTypeEnum, Ext: &ext[70]})
-var sActionType_IAM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sActionType_SCP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[73]})
-var sActionType_SSM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var sApprovalModel_AUTO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[78]})
-var sApprovalModel_MANUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[79]})
-var sAutoAdjustData_AutoAdjustType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoAdjustType", ID: &iAutoAdjustType, Members: &mAutoAdjustType, Type: smithy.ShapeTypeEnum, Ext: &ext[81]})
-var sAutoAdjustData_HistoricalOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HistoricalOptions", ID: &iHistoricalOptions, Members: &mHistoricalOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[82]})
-var sAutoAdjustData_LastAutoAdjustTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastAutoAdjustTime", ID: &i_GenericTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[83]})
-var sAutoAdjustType_HISTORICAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HISTORICAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[85]})
-var sAutoAdjustType_FORECAST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FORECAST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[86]})
-var sBillingViewHealthStatusException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &ext[89]})
-var sBudget_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[91]})
-var sBudget_BudgetLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetLimit", ID: &iSpend, Members: &mSpend, Type: smithy.ShapeTypeStructure, Ext: &ext[92]})
-var sBudget_PlannedBudgetLimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlannedBudgetLimits", ID: &i_PlannedBudgetLimits, Members: &m_PlannedBudgetLimits, Type: smithy.ShapeTypeMap, Ext: &ext[93]})
-var sBudget_CostFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CostFilters", ID: &i_CostFilters, Members: &m_CostFilters, Type: smithy.ShapeTypeMap, Ext: &ext[94]})
-var sBudget_CostTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CostTypes", ID: &iCostTypes, Members: &mCostTypes, Type: smithy.ShapeTypeStructure, Ext: &ext[95]})
-var sBudget_TimeUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeUnit", ID: &iTimeUnit, Members: &mTimeUnit, Type: smithy.ShapeTypeEnum, Ext: &ext[96]})
-var sBudget_TimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimePeriod", ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &ext[97]})
-var sBudget_CalculatedSpend = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CalculatedSpend", ID: &iCalculatedSpend, Members: &mCalculatedSpend, Type: smithy.ShapeTypeStructure, Ext: &ext[98]})
-var sBudget_BudgetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetType", ID: &iBudgetType, Members: &mBudgetType, Type: smithy.ShapeTypeEnum, Ext: &ext[99]})
-var sBudget_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &i_GenericTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[100]})
-var sBudget_AutoAdjustData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoAdjustData", ID: &iAutoAdjustData, Members: &mAutoAdjustData, Type: smithy.ShapeTypeStructure, Ext: &ext[101]})
-var sBudget_FilterExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterExpression", ID: &iExpression, Members: &mExpression, Type: smithy.ShapeTypeStructure, Ext: &ext[102]})
-var sBudget_Metrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metrics", ID: &i_Metrics, Members: &m_Metrics, Type: smithy.ShapeTypeList, Ext: &ext[103]})
-var sBudget_BillingViewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingViewArn", ID: &i_BillingViewArn, Type: smithy.ShapeTypeString, Ext: &ext[104]})
-var sBudget_HealthStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthStatus", ID: &iHealthStatus, Members: &mHealthStatus, Type: smithy.ShapeTypeStructure, Ext: &ext[105]})
-var sBudgetedAndActualAmounts_BudgetedAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetedAmount", ID: &iSpend, Members: &mSpend, Type: smithy.ShapeTypeStructure, Ext: &ext[107]})
-var sBudgetedAndActualAmounts_ActualAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActualAmount", ID: &iSpend, Members: &mSpend, Type: smithy.ShapeTypeStructure, Ext: &ext[108]})
-var sBudgetedAndActualAmounts_TimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimePeriod", ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &ext[109]})
-var s_BudgetedAndActualAmountsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBudgetedAndActualAmounts, Members: &mBudgetedAndActualAmounts, Type: smithy.ShapeTypeStructure, Ext: &ext[111]})
-var sBudgetNotificationsForAccount_Notifications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notifications", ID: &i_Notifications, Members: &m_Notifications, Type: smithy.ShapeTypeList, Ext: &ext[114]})
-var sBudgetNotificationsForAccount_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[115]})
-var s_BudgetNotificationsForAccountList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBudgetNotificationsForAccount, Members: &mBudgetNotificationsForAccount, Type: smithy.ShapeTypeStructure, Ext: &ext[117]})
-var sBudgetPerformanceHistory_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[119]})
-var sBudgetPerformanceHistory_BudgetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetType", ID: &iBudgetType, Members: &mBudgetType, Type: smithy.ShapeTypeEnum, Ext: &ext[120]})
-var sBudgetPerformanceHistory_CostFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CostFilters", ID: &i_CostFilters, Members: &m_CostFilters, Type: smithy.ShapeTypeMap, Ext: &ext[121]})
-var sBudgetPerformanceHistory_CostTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CostTypes", ID: &iCostTypes, Members: &mCostTypes, Type: smithy.ShapeTypeStructure, Ext: &ext[122]})
-var sBudgetPerformanceHistory_TimeUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeUnit", ID: &iTimeUnit, Members: &mTimeUnit, Type: smithy.ShapeTypeEnum, Ext: &ext[123]})
-var sBudgetPerformanceHistory_BillingViewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingViewArn", ID: &i_BillingViewArn, Type: smithy.ShapeTypeString, Ext: &ext[124]})
-var sBudgetPerformanceHistory_BudgetedAndActualAmountsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetedAndActualAmountsList", ID: &i_BudgetedAndActualAmountsList, Members: &m_BudgetedAndActualAmountsList, Type: smithy.ShapeTypeList, Ext: &ext[125]})
-var sBudgetPerformanceHistory_FilterExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterExpression", ID: &iExpression, Members: &mExpression, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var sBudgetPerformanceHistory_Metrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metrics", ID: &i_Metrics, Members: &m_Metrics, Type: smithy.ShapeTypeList, Ext: &ext[127]})
-var s_Budgets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBudget, Members: &mBudget, Type: smithy.ShapeTypeStructure, Ext: &ext[129]})
-var sBudgetType_Usage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Usage", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[131]})
-var sBudgetType_Cost = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cost", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[132]})
-var sBudgetType_RIUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RIUtilization", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[133]})
-var sBudgetType_RICoverage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RICoverage", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[134]})
-var sBudgetType_SPUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPUtilization", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[135]})
-var sBudgetType_SPCoverage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPCoverage", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[136]})
-var sCalculatedSpend_ActualSpend = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActualSpend", ID: &iSpend, Members: &mSpend, Type: smithy.ShapeTypeStructure, Ext: &ext[138]})
-var sCalculatedSpend_ForecastedSpend = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastedSpend", ID: &iSpend, Members: &mSpend, Type: smithy.ShapeTypeStructure, Ext: &ext[139]})
-var sComparisonOperator_GREATER_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[141]})
-var sComparisonOperator_LESS_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[142]})
-var sComparisonOperator_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[143]})
-var sCostCategoryValues_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_CostCategoryName, Type: smithy.ShapeTypeString, Ext: &ext[146]})
-var sCostCategoryValues_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList, Ext: &ext[147]})
-var sCostCategoryValues_MatchOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchOptions", ID: &i_MatchOptions, Members: &m_MatchOptions, Type: smithy.ShapeTypeList, Ext: &ext[148]})
-var s_CostFilters_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &ext[150]})
-var s_CostFilters_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_DimensionValues, Members: &m_DimensionValues, Type: smithy.ShapeTypeList, Ext: &ext[151]})
-var sCostTypes_IncludeTax = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeTax", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[153]})
-var sCostTypes_IncludeSubscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeSubscription", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[154]})
-var sCostTypes_UseBlended = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UseBlended", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[155]})
-var sCostTypes_IncludeRefund = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeRefund", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[156]})
-var sCostTypes_IncludeCredit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeCredit", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[157]})
-var sCostTypes_IncludeUpfront = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeUpfront", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[158]})
-var sCostTypes_IncludeRecurring = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeRecurring", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[159]})
-var sCostTypes_IncludeOtherSubscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeOtherSubscription", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[160]})
-var sCostTypes_IncludeSupport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeSupport", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[161]})
-var sCostTypes_IncludeDiscount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeDiscount", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[162]})
-var sCostTypes_UseAmortized = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UseAmortized", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[163]})
-var sCreationLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &ext[165]})
-var sDefinition_IamActionDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamActionDefinition", ID: &iIamActionDefinition, Members: &mIamActionDefinition, Type: smithy.ShapeTypeStructure, Ext: &ext[167]})
-var sDefinition_ScpActionDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScpActionDefinition", ID: &iScpActionDefinition, Members: &mScpActionDefinition, Type: smithy.ShapeTypeStructure, Ext: &ext[168]})
-var sDefinition_SsmActionDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SsmActionDefinition", ID: &iSsmActionDefinition, Members: &mSsmActionDefinition, Type: smithy.ShapeTypeStructure, Ext: &ext[169]})
-var sDimension_AZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[171]})
-var sDimension_INSTANCE_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTANCE_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[172]})
-var sDimension_LINKED_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINKED_ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[173]})
-var sDimension_LINKED_ACCOUNT_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINKED_ACCOUNT_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[174]})
-var sDimension_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[175]})
-var sDimension_PURCHASE_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PURCHASE_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[176]})
-var sDimension_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[177]})
-var sDimension_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[178]})
-var sDimension_SERVICE_CODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_CODE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[179]})
-var sDimension_USAGE_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USAGE_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[180]})
-var sDimension_USAGE_TYPE_GROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USAGE_TYPE_GROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[181]})
-var sDimension_RECORD_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECORD_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[182]})
-var sDimension_OPERATING_SYSTEM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATING_SYSTEM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[183]})
-var sDimension_TENANCY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TENANCY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[184]})
-var sDimension_SCOPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCOPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[185]})
-var sDimension_PLATFORM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PLATFORM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[186]})
-var sDimension_SUBSCRIPTION_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBSCRIPTION_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[187]})
-var sDimension_LEGAL_ENTITY_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LEGAL_ENTITY_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[188]})
-var sDimension_INVOICING_ENTITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVOICING_ENTITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[189]})
-var sDimension_DEPLOYMENT_OPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPLOYMENT_OPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[190]})
-var sDimension_DATABASE_ENGINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATABASE_ENGINE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[191]})
-var sDimension_CACHE_ENGINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CACHE_ENGINE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[192]})
-var sDimension_INSTANCE_TYPE_FAMILY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTANCE_TYPE_FAMILY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[193]})
-var sDimension_BILLING_ENTITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BILLING_ENTITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[194]})
-var sDimension_RESERVATION_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESERVATION_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[195]})
-var sDimension_RESOURCE_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[196]})
-var sDimension_RIGHTSIZING_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RIGHTSIZING_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[197]})
-var sDimension_SAVINGS_PLANS_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAVINGS_PLANS_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[198]})
-var sDimension_SAVINGS_PLAN_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAVINGS_PLAN_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[199]})
-var sDimension_PAYMENT_OPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAYMENT_OPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[200]})
-var sDimension_RESERVATION_MODIFIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESERVATION_MODIFIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[201]})
-var sDimension_TAG_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TAG_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[202]})
-var sDimension_COST_CATEGORY_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COST_CATEGORY_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[203]})
-var s_DimensionValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DimensionValue, Type: smithy.ShapeTypeString, Ext: &ext[206]})
-var sDuplicateRecordException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &ext[208]})
-var sEventType_System = smithy.NewStaticSchema(smithy.StaticSchema{Member: "System", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[211]})
-var sEventType_CreateAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateAction", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[212]})
-var sEventType_DeleteAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteAction", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[213]})
-var sEventType_UpdateAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateAction", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[214]})
-var sEventType_ExecuteAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecuteAction", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[215]})
-var sExecutionType_ApproveBudgetAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApproveBudgetAction", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[217]})
-var sExecutionType_RetryBudgetAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryBudgetAction", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[218]})
-var sExecutionType_ReverseBudgetAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReverseBudgetAction", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[219]})
-var sExecutionType_ResetBudgetAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResetBudgetAction", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[220]})
-var sExpiredNextTokenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &ext[222]})
-var sExpression_Or = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Or", ID: &i_Expressions, Members: &m_Expressions, Type: smithy.ShapeTypeList, Ext: &ext[224]})
-var sExpression_And = smithy.NewStaticSchema(smithy.StaticSchema{Member: "And", ID: &i_Expressions, Members: &m_Expressions, Type: smithy.ShapeTypeList, Ext: &ext[225]})
-var sExpression_Not = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Not", ID: &iExpression, Type: smithy.ShapeTypeStructure, Ext: &ext[226]})
-var sExpression_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &iExpressionDimensionValues, Members: &mExpressionDimensionValues, Type: smithy.ShapeTypeStructure, Ext: &ext[227]})
-var sExpression_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &iTagValues, Members: &mTagValues, Type: smithy.ShapeTypeStructure, Ext: &ext[228]})
-var sExpression_CostCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CostCategories", ID: &iCostCategoryValues, Members: &mCostCategoryValues, Type: smithy.ShapeTypeStructure, Ext: &ext[229]})
-var sExpression_ProductAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductAttributes", ID: &iProductAttributeValues, Members: &mProductAttributeValues, Type: smithy.ShapeTypeStructure, Ext: &ext[230]})
-var sExpressionDimensionValues_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeEnum, Ext: &ext[232]})
-var sExpressionDimensionValues_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList, Ext: &ext[233]})
-var sExpressionDimensionValues_MatchOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchOptions", ID: &i_MatchOptions, Members: &m_MatchOptions, Type: smithy.ShapeTypeList, Ext: &ext[234]})
-var s_Expressions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExpression, Type: smithy.ShapeTypeStructure, Ext: &ext[236]})
-var s_Groups_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Group, Type: smithy.ShapeTypeString, Ext: &ext[241]})
-var sHealthStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iHealthStatusValue, Members: &mHealthStatusValue, Type: smithy.ShapeTypeEnum, Ext: &ext[243]})
-var sHealthStatus_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iHealthStatusReason, Members: &mHealthStatusReason, Type: smithy.ShapeTypeEnum, Ext: &ext[244]})
-var sHealthStatus_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &i_GenericTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[245]})
-var sHealthStatusReason_BILLING_VIEW_NO_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BILLING_VIEW_NO_ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[247]})
-var sHealthStatusReason_BILLING_VIEW_UNHEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BILLING_VIEW_UNHEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[248]})
-var sHealthStatusReason_FILTER_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILTER_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[249]})
-var sHealthStatusReason_MULTI_YEAR_HISTORICAL_DATA_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTI_YEAR_HISTORICAL_DATA_DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[250]})
-var sHealthStatusValue_HEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[252]})
-var sHealthStatusValue_UNHEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNHEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[253]})
-var sHistoricalOptions_BudgetAdjustmentPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetAdjustmentPeriod", ID: &i_AdjustmentPeriod, Type: smithy.ShapeTypeInteger, Ext: &ext[255]})
-var sHistoricalOptions_LookBackAvailablePeriods = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LookBackAvailablePeriods", ID: &i_AdjustmentPeriod, Type: smithy.ShapeTypeInteger, Ext: &ext[256]})
-var sIamActionDefinition_PolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyArn", ID: &i_PolicyArn, Type: smithy.ShapeTypeString, Ext: &ext[258]})
-var sIamActionDefinition_Roles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Roles", ID: &i_Roles, Members: &m_Roles, Type: smithy.ShapeTypeList, Ext: &ext[259]})
-var sIamActionDefinition_Groups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Groups", ID: &i_Groups, Members: &m_Groups, Type: smithy.ShapeTypeList, Ext: &ext[260]})
-var sIamActionDefinition_Users = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Users", ID: &i_Users, Members: &m_Users, Type: smithy.ShapeTypeList, Ext: &ext[261]})
-var s_InstanceIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &ext[264]})
-var sInternalErrorException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &ext[266]})
-var sInvalidNextTokenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &ext[268]})
-var sInvalidParameterException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &ext[270]})
-var sMatchOption_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[272]})
-var sMatchOption_ABSENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ABSENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[273]})
-var sMatchOption_STARTS_WITH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STARTS_WITH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[274]})
-var sMatchOption_ENDS_WITH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENDS_WITH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[275]})
-var sMatchOption_CONTAINS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTAINS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[276]})
-var sMatchOption_GREATER_THAN_OR_EQUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN_OR_EQUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[277]})
-var sMatchOption_CASE_SENSITIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CASE_SENSITIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[278]})
-var sMatchOption_CASE_INSENSITIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CASE_INSENSITIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[279]})
-var s_MatchOptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMatchOption, Members: &mMatchOption, Type: smithy.ShapeTypeEnum, Ext: &ext[281]})
-var sMetric_BLENDED_COST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BLENDED_COST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[286]})
-var sMetric_UNBLENDED_COST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNBLENDED_COST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[287]})
-var sMetric_AMORTIZED_COST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMORTIZED_COST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[288]})
-var sMetric_NET_UNBLENDED_COST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NET_UNBLENDED_COST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[289]})
-var sMetric_NET_AMORTIZED_COST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NET_AMORTIZED_COST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[290]})
-var sMetric_USAGE_QUANTITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USAGE_QUANTITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[291]})
-var sMetric_NORMALIZED_USAGE_AMOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NORMALIZED_USAGE_AMOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[292]})
-var sMetric_HOURS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOURS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[293]})
-var s_Metrics_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetric, Members: &mMetric, Type: smithy.ShapeTypeEnum, Ext: &ext[295]})
-var sNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &ext[297]})
-var sNotification_NotificationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationType", ID: &iNotificationType, Members: &mNotificationType, Type: smithy.ShapeTypeEnum, Ext: &ext[299]})
-var sNotification_ComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComparisonOperator", ID: &iComparisonOperator, Members: &mComparisonOperator, Type: smithy.ShapeTypeEnum, Ext: &ext[300]})
-var sNotification_Threshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Threshold", ID: &i_NotificationThreshold, Type: smithy.ShapeTypeDouble, Ext: &ext[301]})
-var sNotification_ThresholdType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThresholdType", ID: &iThresholdType, Members: &mThresholdType, Type: smithy.ShapeTypeEnum, Ext: &ext[302]})
-var sNotification_NotificationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationState", ID: &iNotificationState, Members: &mNotificationState, Type: smithy.ShapeTypeEnum, Ext: &ext[303]})
-var s_Notifications_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &ext[305]})
-var sNotificationState_OK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[307]})
-var sNotificationState_ALARM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALARM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[308]})
-var sNotificationType_ACTUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[311]})
-var sNotificationType_FORECASTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FORECASTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[312]})
-var sNotificationWithSubscribers_Notification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notification", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &ext[314]})
-var sNotificationWithSubscribers_Subscribers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subscribers", ID: &i_Subscribers, Members: &m_Subscribers, Type: smithy.ShapeTypeList, Ext: &ext[315]})
-var s_NotificationWithSubscribersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNotificationWithSubscribers, Members: &mNotificationWithSubscribers, Type: smithy.ShapeTypeStructure, Ext: &ext[317]})
-var s_PlannedBudgetLimits_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &ext[321]})
-var s_PlannedBudgetLimits_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iSpend, Members: &mSpend, Type: smithy.ShapeTypeStructure, Ext: &ext[322]})
-var sProductAttributeValues_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ProductAttributeName, Type: smithy.ShapeTypeString, Ext: &ext[327]})
-var sProductAttributeValues_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList, Ext: &ext[328]})
-var sProductAttributeValues_MatchOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchOptions", ID: &i_MatchOptions, Members: &m_MatchOptions, Type: smithy.ShapeTypeList, Ext: &ext[329]})
-var sResourceLockedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &ext[332]})
-var sResourceTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ResourceTagKey, Type: smithy.ShapeTypeString, Ext: &ext[334]})
-var sResourceTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_ResourceTagValue, Type: smithy.ShapeTypeString, Ext: &ext[335]})
-var s_ResourceTagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceTagKey, Type: smithy.ShapeTypeString, Ext: &ext[338]})
-var s_ResourceTagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceTag, Members: &mResourceTag, Type: smithy.ShapeTypeStructure, Ext: &ext[340]})
-var s_Roles_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Role, Type: smithy.ShapeTypeString, Ext: &ext[345]})
-var sScpActionDefinition_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &ext[347]})
-var sScpActionDefinition_TargetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetIds", ID: &i_TargetIds, Members: &m_TargetIds, Type: smithy.ShapeTypeList, Ext: &ext[348]})
-var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &ext[350]})
-var sSpend_Amount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Amount", ID: &i_NumericValue, Type: smithy.ShapeTypeString, Ext: &ext[352]})
-var sSpend_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &i_UnitValue, Type: smithy.ShapeTypeString, Ext: &ext[353]})
-var sSsmActionDefinition_ActionSubType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionSubType", ID: &iActionSubType, Members: &mActionSubType, Type: smithy.ShapeTypeEnum, Ext: &ext[355]})
-var sSsmActionDefinition_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &ext[356]})
-var sSsmActionDefinition_InstanceIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceIds", ID: &i_InstanceIds, Members: &m_InstanceIds, Type: smithy.ShapeTypeList, Ext: &ext[357]})
-var sSubscriber_SubscriptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionType", ID: &iSubscriptionType, Members: &mSubscriptionType, Type: smithy.ShapeTypeEnum, Ext: &ext[359]})
-var sSubscriber_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &i_SubscriberAddress, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &ext[360]})
-var s_Subscribers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSubscriber, Members: &mSubscriber, Type: smithy.ShapeTypeStructure, Ext: &ext[363]})
-var sSubscriptionType_SNS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[365]})
-var sSubscriptionType_EMAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[366]})
-var sTagValues_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[369]})
-var sTagValues_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList, Ext: &ext[370]})
-var sTagValues_MatchOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchOptions", ID: &i_MatchOptions, Members: &m_MatchOptions, Type: smithy.ShapeTypeList, Ext: &ext[371]})
-var s_TargetIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TargetId, Type: smithy.ShapeTypeString, Ext: &ext[374]})
-var sThresholdType_PERCENTAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERCENTAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[376]})
-var sThresholdType_ABSOLUTE_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ABSOLUTE_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[377]})
-var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &ext[379]})
-var sTimePeriod_Start = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Start", ID: &i_GenericTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[381]})
-var sTimePeriod_End = smithy.NewStaticSchema(smithy.StaticSchema{Member: "End", ID: &i_GenericTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[382]})
-var sTimeUnit_DAILY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAILY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[384]})
-var sTimeUnit_MONTHLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONTHLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[385]})
-var sTimeUnit_QUARTERLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUARTERLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[386]})
-var sTimeUnit_ANNUALLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANNUALLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[387]})
-var sTimeUnit_CUSTOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[388]})
-var s_Users_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_User, Type: smithy.ShapeTypeString, Ext: &ext[392]})
-var s_Values_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Value, Type: smithy.ShapeTypeString, Ext: &ext[395]})
-var sCreateBudgetActionRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[397]})
-var sCreateBudgetActionRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[398]})
-var sCreateBudgetActionRequest_NotificationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationType", ID: &iNotificationType, Members: &mNotificationType, Type: smithy.ShapeTypeEnum, Ext: &ext[399]})
-var sCreateBudgetActionRequest_ActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionType", ID: &iActionType, Members: &mActionType, Type: smithy.ShapeTypeEnum, Ext: &ext[400]})
-var sCreateBudgetActionRequest_ActionThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionThreshold", ID: &iActionThreshold, Members: &mActionThreshold, Type: smithy.ShapeTypeStructure, Ext: &ext[401]})
-var sCreateBudgetActionRequest_Definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Definition", ID: &iDefinition, Members: &mDefinition, Type: smithy.ShapeTypeStructure, Ext: &ext[402]})
-var sCreateBudgetActionRequest_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[403]})
-var sCreateBudgetActionRequest_ApprovalModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApprovalModel", ID: &iApprovalModel, Members: &mApprovalModel, Type: smithy.ShapeTypeEnum, Ext: &ext[404]})
-var sCreateBudgetActionRequest_Subscribers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subscribers", ID: &i_Subscribers, Members: &m_Subscribers, Type: smithy.ShapeTypeList, Ext: &ext[405]})
-var sCreateBudgetActionRequest_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList, Ext: &ext[406]})
-var sCreateBudgetActionResponse_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[408]})
-var sCreateBudgetActionResponse_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[409]})
-var sCreateBudgetActionResponse_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionId", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &ext[410]})
-var sCreateBudgetRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[412]})
-var sCreateBudgetRequest_Budget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Budget", ID: &iBudget, Members: &mBudget, Type: smithy.ShapeTypeStructure, Ext: &ext[413]})
-var sCreateBudgetRequest_NotificationsWithSubscribers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationsWithSubscribers", ID: &i_NotificationWithSubscribersList, Members: &m_NotificationWithSubscribersList, Type: smithy.ShapeTypeList, Ext: &ext[414]})
-var sCreateBudgetRequest_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList, Ext: &ext[415]})
-var sCreateNotificationRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[418]})
-var sCreateNotificationRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[419]})
-var sCreateNotificationRequest_Notification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notification", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &ext[420]})
-var sCreateNotificationRequest_Subscribers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subscribers", ID: &i_Subscribers, Members: &m_Subscribers, Type: smithy.ShapeTypeList, Ext: &ext[421]})
-var sCreateSubscriberRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[424]})
-var sCreateSubscriberRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[425]})
-var sCreateSubscriberRequest_Notification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notification", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &ext[426]})
-var sCreateSubscriberRequest_Subscriber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subscriber", ID: &iSubscriber, Members: &mSubscriber, Type: smithy.ShapeTypeStructure, Ext: &ext[427]})
-var sDeleteBudgetActionRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[430]})
-var sDeleteBudgetActionRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[431]})
-var sDeleteBudgetActionRequest_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionId", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &ext[432]})
-var sDeleteBudgetActionResponse_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[434]})
-var sDeleteBudgetActionResponse_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[435]})
-var sDeleteBudgetActionResponse_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &ext[436]})
-var sDeleteBudgetRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[438]})
-var sDeleteBudgetRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[439]})
-var sDeleteNotificationRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[442]})
-var sDeleteNotificationRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[443]})
-var sDeleteNotificationRequest_Notification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notification", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &ext[444]})
-var sDeleteSubscriberRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[447]})
-var sDeleteSubscriberRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[448]})
-var sDeleteSubscriberRequest_Notification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notification", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &ext[449]})
-var sDeleteSubscriberRequest_Subscriber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subscriber", ID: &iSubscriber, Members: &mSubscriber, Type: smithy.ShapeTypeStructure, Ext: &ext[450]})
-var sDescribeBudgetActionHistoriesRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[453]})
-var sDescribeBudgetActionHistoriesRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[454]})
-var sDescribeBudgetActionHistoriesRequest_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionId", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &ext[455]})
-var sDescribeBudgetActionHistoriesRequest_TimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimePeriod", ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &ext[456]})
-var sDescribeBudgetActionHistoriesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[457]})
-var sDescribeBudgetActionHistoriesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &ext[458]})
-var sDescribeBudgetActionHistoriesResponse_ActionHistories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionHistories", ID: &i_ActionHistories, Members: &m_ActionHistories, Type: smithy.ShapeTypeList, Ext: &ext[460]})
-var sDescribeBudgetActionHistoriesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &ext[461]})
-var sDescribeBudgetActionRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[463]})
-var sDescribeBudgetActionRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[464]})
-var sDescribeBudgetActionRequest_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionId", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &ext[465]})
-var sDescribeBudgetActionResponse_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[467]})
-var sDescribeBudgetActionResponse_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[468]})
-var sDescribeBudgetActionResponse_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &ext[469]})
-var sDescribeBudgetActionsForAccountRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[471]})
-var sDescribeBudgetActionsForAccountRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[472]})
-var sDescribeBudgetActionsForAccountRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &ext[473]})
-var sDescribeBudgetActionsForAccountResponse_Actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Actions", ID: &i_Actions, Members: &m_Actions, Type: smithy.ShapeTypeList, Ext: &ext[475]})
-var sDescribeBudgetActionsForAccountResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &ext[476]})
-var sDescribeBudgetActionsForBudgetRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[478]})
-var sDescribeBudgetActionsForBudgetRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[479]})
-var sDescribeBudgetActionsForBudgetRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[480]})
-var sDescribeBudgetActionsForBudgetRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &ext[481]})
-var sDescribeBudgetActionsForBudgetResponse_Actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Actions", ID: &i_Actions, Members: &m_Actions, Type: smithy.ShapeTypeList, Ext: &ext[483]})
-var sDescribeBudgetActionsForBudgetResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &ext[484]})
-var sDescribeBudgetRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[486]})
-var sDescribeBudgetRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[487]})
-var sDescribeBudgetRequest_ShowFilterExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShowFilterExpression", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[488]})
-var sDescribeBudgetNotificationsForAccountRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[490]})
-var sDescribeBudgetNotificationsForAccountRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsBudgetNotifications, Type: smithy.ShapeTypeInteger, Ext: &ext[491]})
-var sDescribeBudgetNotificationsForAccountRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &ext[492]})
-var sDescribeBudgetNotificationsForAccountResponse_BudgetNotificationsForAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetNotificationsForAccount", ID: &i_BudgetNotificationsForAccountList, Members: &m_BudgetNotificationsForAccountList, Type: smithy.ShapeTypeList, Ext: &ext[494]})
-var sDescribeBudgetNotificationsForAccountResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &ext[495]})
-var sDescribeBudgetResponse_Budget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Budget", ID: &iBudget, Members: &mBudget, Type: smithy.ShapeTypeStructure, Ext: &ext[497]})
-var sDescribeBudgetPerformanceHistoryRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[499]})
-var sDescribeBudgetPerformanceHistoryRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[500]})
-var sDescribeBudgetPerformanceHistoryRequest_TimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimePeriod", ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &ext[501]})
-var sDescribeBudgetPerformanceHistoryRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[502]})
-var sDescribeBudgetPerformanceHistoryRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &ext[503]})
-var sDescribeBudgetPerformanceHistoryResponse_BudgetPerformanceHistory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetPerformanceHistory", ID: &iBudgetPerformanceHistory, Members: &mBudgetPerformanceHistory, Type: smithy.ShapeTypeStructure, Ext: &ext[505]})
-var sDescribeBudgetPerformanceHistoryResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &ext[506]})
-var sDescribeBudgetsRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[508]})
-var sDescribeBudgetsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsDescribeBudgets, Type: smithy.ShapeTypeInteger, Ext: &ext[509]})
-var sDescribeBudgetsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &ext[510]})
-var sDescribeBudgetsRequest_ShowFilterExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShowFilterExpression", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[511]})
-var sDescribeBudgetsResponse_Budgets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Budgets", ID: &i_Budgets, Members: &m_Budgets, Type: smithy.ShapeTypeList, Ext: &ext[513]})
-var sDescribeBudgetsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &ext[514]})
-var sDescribeNotificationsForBudgetRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[516]})
-var sDescribeNotificationsForBudgetRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[517]})
-var sDescribeNotificationsForBudgetRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[518]})
-var sDescribeNotificationsForBudgetRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &ext[519]})
-var sDescribeNotificationsForBudgetResponse_Notifications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notifications", ID: &i_Notifications, Members: &m_Notifications, Type: smithy.ShapeTypeList, Ext: &ext[521]})
-var sDescribeNotificationsForBudgetResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &ext[522]})
-var sDescribeSubscribersForNotificationRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[524]})
-var sDescribeSubscribersForNotificationRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[525]})
-var sDescribeSubscribersForNotificationRequest_Notification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notification", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &ext[526]})
-var sDescribeSubscribersForNotificationRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[527]})
-var sDescribeSubscribersForNotificationRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &ext[528]})
-var sDescribeSubscribersForNotificationResponse_Subscribers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subscribers", ID: &i_Subscribers, Members: &m_Subscribers, Type: smithy.ShapeTypeList, Ext: &ext[530]})
-var sDescribeSubscribersForNotificationResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &ext[531]})
-var sExecuteBudgetActionRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[533]})
-var sExecuteBudgetActionRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[534]})
-var sExecuteBudgetActionRequest_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionId", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &ext[535]})
-var sExecuteBudgetActionRequest_ExecutionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionType", ID: &iExecutionType, Members: &mExecutionType, Type: smithy.ShapeTypeEnum, Ext: &ext[536]})
-var sExecuteBudgetActionResponse_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[538]})
-var sExecuteBudgetActionResponse_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[539]})
-var sExecuteBudgetActionResponse_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionId", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &ext[540]})
-var sExecuteBudgetActionResponse_ExecutionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionType", ID: &iExecutionType, Members: &mExecutionType, Type: smithy.ShapeTypeEnum, Ext: &ext[541]})
-var sListTagsForResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[543]})
-var sListTagsForResourceResponse_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList, Ext: &ext[545]})
-var sTagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[547]})
-var sTagResourceRequest_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList, Ext: &ext[548]})
-var sUntagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[551]})
-var sUntagResourceRequest_ResourceTagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTagKeys", ID: &i_ResourceTagKeyList, Members: &m_ResourceTagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[552]})
-var sUpdateBudgetActionRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[555]})
-var sUpdateBudgetActionRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[556]})
-var sUpdateBudgetActionRequest_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionId", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &ext[557]})
-var sUpdateBudgetActionRequest_NotificationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationType", ID: &iNotificationType, Members: &mNotificationType, Type: smithy.ShapeTypeEnum, Ext: &ext[558]})
-var sUpdateBudgetActionRequest_ActionThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionThreshold", ID: &iActionThreshold, Members: &mActionThreshold, Type: smithy.ShapeTypeStructure, Ext: &ext[559]})
-var sUpdateBudgetActionRequest_Definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Definition", ID: &iDefinition, Members: &mDefinition, Type: smithy.ShapeTypeStructure, Ext: &ext[560]})
-var sUpdateBudgetActionRequest_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[561]})
-var sUpdateBudgetActionRequest_ApprovalModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApprovalModel", ID: &iApprovalModel, Members: &mApprovalModel, Type: smithy.ShapeTypeEnum, Ext: &ext[562]})
-var sUpdateBudgetActionRequest_Subscribers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subscribers", ID: &i_Subscribers, Members: &m_Subscribers, Type: smithy.ShapeTypeList, Ext: &ext[563]})
-var sUpdateBudgetActionResponse_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[565]})
-var sUpdateBudgetActionResponse_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[566]})
-var sUpdateBudgetActionResponse_OldAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OldAction", ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &ext[567]})
-var sUpdateBudgetActionResponse_NewAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewAction", ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &ext[568]})
-var sUpdateBudgetRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[570]})
-var sUpdateBudgetRequest_NewBudget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewBudget", ID: &iBudget, Members: &mBudget, Type: smithy.ShapeTypeStructure, Ext: &ext[571]})
-var sUpdateNotificationRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[574]})
-var sUpdateNotificationRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[575]})
-var sUpdateNotificationRequest_OldNotification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OldNotification", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &ext[576]})
-var sUpdateNotificationRequest_NewNotification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewNotification", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &ext[577]})
-var sUpdateSubscriberRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[580]})
-var sUpdateSubscriberRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &ext[581]})
-var sUpdateSubscriberRequest_Notification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notification", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &ext[582]})
-var sUpdateSubscriberRequest_OldSubscriber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OldSubscriber", ID: &iSubscriber, Members: &mSubscriber, Type: smithy.ShapeTypeStructure, Ext: &ext[583]})
-var sUpdateSubscriberRequest_NewSubscriber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewSubscriber", ID: &iSubscriber, Members: &mSubscriber, Type: smithy.ShapeTypeStructure, Ext: &ext[584]})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var sAction_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionId", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &eAction_ActionId})
+var sAction_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eAction_BudgetName})
+var sAction_NotificationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationType", ID: &iNotificationType, Members: &mNotificationType, Type: smithy.ShapeTypeEnum, Ext: &eAction_NotificationType})
+var sAction_ActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionType", ID: &iActionType, Members: &mActionType, Type: smithy.ShapeTypeEnum, Ext: &eAction_ActionType})
+var sAction_ActionThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionThreshold", ID: &iActionThreshold, Members: &mActionThreshold, Type: smithy.ShapeTypeStructure, Ext: &eAction_ActionThreshold})
+var sAction_Definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Definition", ID: &iDefinition, Members: &mDefinition, Type: smithy.ShapeTypeStructure, Ext: &eAction_Definition})
+var sAction_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eAction_ExecutionRoleArn})
+var sAction_ApprovalModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApprovalModel", ID: &iApprovalModel, Members: &mApprovalModel, Type: smithy.ShapeTypeEnum, Ext: &eAction_ApprovalModel})
+var sAction_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iActionStatus, Members: &mActionStatus, Type: smithy.ShapeTypeEnum, Ext: &eAction_Status})
+var sAction_Subscribers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subscribers", ID: &i_Subscribers, Members: &m_Subscribers, Type: smithy.ShapeTypeList, Ext: &eAction_Subscribers})
+var s_ActionHistories_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActionHistory, Members: &mActionHistory, Type: smithy.ShapeTypeStructure, Ext: &e_ActionHistories_member})
+var sActionHistory_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_GenericTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eActionHistory_Timestamp})
+var sActionHistory_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iActionStatus, Members: &mActionStatus, Type: smithy.ShapeTypeEnum, Ext: &eActionHistory_Status})
+var sActionHistory_EventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventType", ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeEnum, Ext: &eActionHistory_EventType})
+var sActionHistory_ActionHistoryDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionHistoryDetails", ID: &iActionHistoryDetails, Members: &mActionHistoryDetails, Type: smithy.ShapeTypeStructure, Ext: &eActionHistory_ActionHistoryDetails})
+var sActionHistoryDetails_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eActionHistoryDetails_Message})
+var sActionHistoryDetails_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &eActionHistoryDetails_Action})
+var s_Actions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &e_Actions_member})
+var sActionStatus_Standby = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Standby", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionStatus_Standby})
+var sActionStatus_Pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pending", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionStatus_Pending})
+var sActionStatus_Execution_In_Progress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Execution_In_Progress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionStatus_Execution_In_Progress})
+var sActionStatus_Execution_Success = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Execution_Success", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionStatus_Execution_Success})
+var sActionStatus_Execution_Failure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Execution_Failure", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionStatus_Execution_Failure})
+var sActionStatus_Reverse_In_Progress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reverse_In_Progress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionStatus_Reverse_In_Progress})
+var sActionStatus_Reverse_Success = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reverse_Success", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionStatus_Reverse_Success})
+var sActionStatus_Reverse_Failure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reverse_Failure", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionStatus_Reverse_Failure})
+var sActionStatus_Reset_In_Progress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reset_In_Progress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionStatus_Reset_In_Progress})
+var sActionStatus_Reset_Failure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reset_Failure", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionStatus_Reset_Failure})
+var sActionSubType_STOP_EC2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOP_EC2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionSubType_STOP_EC2})
+var sActionSubType_STOP_RDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOP_RDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionSubType_STOP_RDS})
+var sActionThreshold_ActionThresholdValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionThresholdValue", ID: &i_NotificationThreshold, Type: smithy.ShapeTypeDouble, Ext: &eActionThreshold_ActionThresholdValue})
+var sActionThreshold_ActionThresholdType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionThresholdType", ID: &iThresholdType, Members: &mThresholdType, Type: smithy.ShapeTypeEnum, Ext: &eActionThreshold_ActionThresholdType})
+var sActionType_IAM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionType_IAM})
+var sActionType_SCP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionType_SCP})
+var sActionType_SSM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionType_SSM})
+var sApprovalModel_AUTO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApprovalModel_AUTO})
+var sApprovalModel_MANUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApprovalModel_MANUAL})
+var sAutoAdjustData_AutoAdjustType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoAdjustType", ID: &iAutoAdjustType, Members: &mAutoAdjustType, Type: smithy.ShapeTypeEnum, Ext: &eAutoAdjustData_AutoAdjustType})
+var sAutoAdjustData_HistoricalOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HistoricalOptions", ID: &iHistoricalOptions, Members: &mHistoricalOptions, Type: smithy.ShapeTypeStructure, Ext: &eAutoAdjustData_HistoricalOptions})
+var sAutoAdjustData_LastAutoAdjustTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastAutoAdjustTime", ID: &i_GenericTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAutoAdjustData_LastAutoAdjustTime})
+var sAutoAdjustType_HISTORICAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HISTORICAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutoAdjustType_HISTORICAL})
+var sAutoAdjustType_FORECAST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FORECAST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutoAdjustType_FORECAST})
+var sBillingViewHealthStatusException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eBillingViewHealthStatusException_Message})
+var sBudget_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eBudget_BudgetName})
+var sBudget_BudgetLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetLimit", ID: &iSpend, Members: &mSpend, Type: smithy.ShapeTypeStructure, Ext: &eBudget_BudgetLimit})
+var sBudget_PlannedBudgetLimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlannedBudgetLimits", ID: &i_PlannedBudgetLimits, Members: &m_PlannedBudgetLimits, Type: smithy.ShapeTypeMap, Ext: &eBudget_PlannedBudgetLimits})
+var sBudget_CostFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CostFilters", ID: &i_CostFilters, Members: &m_CostFilters, Type: smithy.ShapeTypeMap, Ext: &eBudget_CostFilters})
+var sBudget_CostTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CostTypes", ID: &iCostTypes, Members: &mCostTypes, Type: smithy.ShapeTypeStructure, Ext: &eBudget_CostTypes})
+var sBudget_TimeUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeUnit", ID: &iTimeUnit, Members: &mTimeUnit, Type: smithy.ShapeTypeEnum, Ext: &eBudget_TimeUnit})
+var sBudget_TimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimePeriod", ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &eBudget_TimePeriod})
+var sBudget_CalculatedSpend = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CalculatedSpend", ID: &iCalculatedSpend, Members: &mCalculatedSpend, Type: smithy.ShapeTypeStructure, Ext: &eBudget_CalculatedSpend})
+var sBudget_BudgetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetType", ID: &iBudgetType, Members: &mBudgetType, Type: smithy.ShapeTypeEnum, Ext: &eBudget_BudgetType})
+var sBudget_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &i_GenericTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eBudget_LastUpdatedTime})
+var sBudget_AutoAdjustData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoAdjustData", ID: &iAutoAdjustData, Members: &mAutoAdjustData, Type: smithy.ShapeTypeStructure, Ext: &eBudget_AutoAdjustData})
+var sBudget_FilterExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterExpression", ID: &iExpression, Members: &mExpression, Type: smithy.ShapeTypeStructure, Ext: &eBudget_FilterExpression})
+var sBudget_Metrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metrics", ID: &i_Metrics, Members: &m_Metrics, Type: smithy.ShapeTypeList, Ext: &eBudget_Metrics})
+var sBudget_BillingViewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingViewArn", ID: &i_BillingViewArn, Type: smithy.ShapeTypeString, Ext: &eBudget_BillingViewArn})
+var sBudget_HealthStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthStatus", ID: &iHealthStatus, Members: &mHealthStatus, Type: smithy.ShapeTypeStructure, Ext: &eBudget_HealthStatus})
+var sBudgetedAndActualAmounts_BudgetedAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetedAmount", ID: &iSpend, Members: &mSpend, Type: smithy.ShapeTypeStructure, Ext: &eBudgetedAndActualAmounts_BudgetedAmount})
+var sBudgetedAndActualAmounts_ActualAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActualAmount", ID: &iSpend, Members: &mSpend, Type: smithy.ShapeTypeStructure, Ext: &eBudgetedAndActualAmounts_ActualAmount})
+var sBudgetedAndActualAmounts_TimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimePeriod", ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &eBudgetedAndActualAmounts_TimePeriod})
+var s_BudgetedAndActualAmountsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBudgetedAndActualAmounts, Members: &mBudgetedAndActualAmounts, Type: smithy.ShapeTypeStructure, Ext: &e_BudgetedAndActualAmountsList_member})
+var sBudgetNotificationsForAccount_Notifications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notifications", ID: &i_Notifications, Members: &m_Notifications, Type: smithy.ShapeTypeList, Ext: &eBudgetNotificationsForAccount_Notifications})
+var sBudgetNotificationsForAccount_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eBudgetNotificationsForAccount_BudgetName})
+var s_BudgetNotificationsForAccountList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBudgetNotificationsForAccount, Members: &mBudgetNotificationsForAccount, Type: smithy.ShapeTypeStructure, Ext: &e_BudgetNotificationsForAccountList_member})
+var sBudgetPerformanceHistory_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eBudgetPerformanceHistory_BudgetName})
+var sBudgetPerformanceHistory_BudgetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetType", ID: &iBudgetType, Members: &mBudgetType, Type: smithy.ShapeTypeEnum, Ext: &eBudgetPerformanceHistory_BudgetType})
+var sBudgetPerformanceHistory_CostFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CostFilters", ID: &i_CostFilters, Members: &m_CostFilters, Type: smithy.ShapeTypeMap, Ext: &eBudgetPerformanceHistory_CostFilters})
+var sBudgetPerformanceHistory_CostTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CostTypes", ID: &iCostTypes, Members: &mCostTypes, Type: smithy.ShapeTypeStructure, Ext: &eBudgetPerformanceHistory_CostTypes})
+var sBudgetPerformanceHistory_TimeUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeUnit", ID: &iTimeUnit, Members: &mTimeUnit, Type: smithy.ShapeTypeEnum, Ext: &eBudgetPerformanceHistory_TimeUnit})
+var sBudgetPerformanceHistory_BillingViewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingViewArn", ID: &i_BillingViewArn, Type: smithy.ShapeTypeString, Ext: &eBudgetPerformanceHistory_BillingViewArn})
+var sBudgetPerformanceHistory_BudgetedAndActualAmountsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetedAndActualAmountsList", ID: &i_BudgetedAndActualAmountsList, Members: &m_BudgetedAndActualAmountsList, Type: smithy.ShapeTypeList, Ext: &eBudgetPerformanceHistory_BudgetedAndActualAmountsList})
+var sBudgetPerformanceHistory_FilterExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterExpression", ID: &iExpression, Members: &mExpression, Type: smithy.ShapeTypeStructure, Ext: &eBudgetPerformanceHistory_FilterExpression})
+var sBudgetPerformanceHistory_Metrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metrics", ID: &i_Metrics, Members: &m_Metrics, Type: smithy.ShapeTypeList, Ext: &eBudgetPerformanceHistory_Metrics})
+var s_Budgets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBudget, Members: &mBudget, Type: smithy.ShapeTypeStructure, Ext: &e_Budgets_member})
+var sBudgetType_Usage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Usage", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBudgetType_Usage})
+var sBudgetType_Cost = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cost", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBudgetType_Cost})
+var sBudgetType_RIUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RIUtilization", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBudgetType_RIUtilization})
+var sBudgetType_RICoverage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RICoverage", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBudgetType_RICoverage})
+var sBudgetType_SPUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPUtilization", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBudgetType_SPUtilization})
+var sBudgetType_SPCoverage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPCoverage", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBudgetType_SPCoverage})
+var sCalculatedSpend_ActualSpend = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActualSpend", ID: &iSpend, Members: &mSpend, Type: smithy.ShapeTypeStructure, Ext: &eCalculatedSpend_ActualSpend})
+var sCalculatedSpend_ForecastedSpend = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastedSpend", ID: &iSpend, Members: &mSpend, Type: smithy.ShapeTypeStructure, Ext: &eCalculatedSpend_ForecastedSpend})
+var sComparisonOperator_GREATER_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparisonOperator_GREATER_THAN})
+var sComparisonOperator_LESS_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparisonOperator_LESS_THAN})
+var sComparisonOperator_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparisonOperator_EQUAL_TO})
+var sCostCategoryValues_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_CostCategoryName, Type: smithy.ShapeTypeString, Ext: &eCostCategoryValues_Key})
+var sCostCategoryValues_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList, Ext: &eCostCategoryValues_Values})
+var sCostCategoryValues_MatchOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchOptions", ID: &i_MatchOptions, Members: &m_MatchOptions, Type: smithy.ShapeTypeList, Ext: &eCostCategoryValues_MatchOptions})
+var s_CostFilters_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &e_CostFilters_key})
+var s_CostFilters_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_DimensionValues, Members: &m_DimensionValues, Type: smithy.ShapeTypeList, Ext: &e_CostFilters_value})
+var sCostTypes_IncludeTax = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeTax", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCostTypes_IncludeTax})
+var sCostTypes_IncludeSubscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeSubscription", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCostTypes_IncludeSubscription})
+var sCostTypes_UseBlended = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UseBlended", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCostTypes_UseBlended})
+var sCostTypes_IncludeRefund = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeRefund", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCostTypes_IncludeRefund})
+var sCostTypes_IncludeCredit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeCredit", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCostTypes_IncludeCredit})
+var sCostTypes_IncludeUpfront = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeUpfront", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCostTypes_IncludeUpfront})
+var sCostTypes_IncludeRecurring = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeRecurring", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCostTypes_IncludeRecurring})
+var sCostTypes_IncludeOtherSubscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeOtherSubscription", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCostTypes_IncludeOtherSubscription})
+var sCostTypes_IncludeSupport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeSupport", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCostTypes_IncludeSupport})
+var sCostTypes_IncludeDiscount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeDiscount", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCostTypes_IncludeDiscount})
+var sCostTypes_UseAmortized = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UseAmortized", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCostTypes_UseAmortized})
+var sCreationLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eCreationLimitExceededException_Message})
+var sDefinition_IamActionDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamActionDefinition", ID: &iIamActionDefinition, Members: &mIamActionDefinition, Type: smithy.ShapeTypeStructure, Ext: &eDefinition_IamActionDefinition})
+var sDefinition_ScpActionDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScpActionDefinition", ID: &iScpActionDefinition, Members: &mScpActionDefinition, Type: smithy.ShapeTypeStructure, Ext: &eDefinition_ScpActionDefinition})
+var sDefinition_SsmActionDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SsmActionDefinition", ID: &iSsmActionDefinition, Members: &mSsmActionDefinition, Type: smithy.ShapeTypeStructure, Ext: &eDefinition_SsmActionDefinition})
+var sDimension_AZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_AZ})
+var sDimension_INSTANCE_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTANCE_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_INSTANCE_TYPE})
+var sDimension_LINKED_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINKED_ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_LINKED_ACCOUNT})
+var sDimension_LINKED_ACCOUNT_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINKED_ACCOUNT_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_LINKED_ACCOUNT_NAME})
+var sDimension_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_OPERATION})
+var sDimension_PURCHASE_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PURCHASE_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_PURCHASE_TYPE})
+var sDimension_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_REGION})
+var sDimension_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_SERVICE})
+var sDimension_SERVICE_CODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_CODE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_SERVICE_CODE})
+var sDimension_USAGE_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USAGE_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_USAGE_TYPE})
+var sDimension_USAGE_TYPE_GROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USAGE_TYPE_GROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_USAGE_TYPE_GROUP})
+var sDimension_RECORD_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECORD_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_RECORD_TYPE})
+var sDimension_OPERATING_SYSTEM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATING_SYSTEM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_OPERATING_SYSTEM})
+var sDimension_TENANCY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TENANCY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_TENANCY})
+var sDimension_SCOPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCOPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_SCOPE})
+var sDimension_PLATFORM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PLATFORM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_PLATFORM})
+var sDimension_SUBSCRIPTION_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBSCRIPTION_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_SUBSCRIPTION_ID})
+var sDimension_LEGAL_ENTITY_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LEGAL_ENTITY_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_LEGAL_ENTITY_NAME})
+var sDimension_INVOICING_ENTITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVOICING_ENTITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_INVOICING_ENTITY})
+var sDimension_DEPLOYMENT_OPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPLOYMENT_OPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_DEPLOYMENT_OPTION})
+var sDimension_DATABASE_ENGINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATABASE_ENGINE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_DATABASE_ENGINE})
+var sDimension_CACHE_ENGINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CACHE_ENGINE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_CACHE_ENGINE})
+var sDimension_INSTANCE_TYPE_FAMILY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTANCE_TYPE_FAMILY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_INSTANCE_TYPE_FAMILY})
+var sDimension_BILLING_ENTITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BILLING_ENTITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_BILLING_ENTITY})
+var sDimension_RESERVATION_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESERVATION_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_RESERVATION_ID})
+var sDimension_RESOURCE_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_RESOURCE_ID})
+var sDimension_RIGHTSIZING_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RIGHTSIZING_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_RIGHTSIZING_TYPE})
+var sDimension_SAVINGS_PLANS_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAVINGS_PLANS_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_SAVINGS_PLANS_TYPE})
+var sDimension_SAVINGS_PLAN_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAVINGS_PLAN_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_SAVINGS_PLAN_ARN})
+var sDimension_PAYMENT_OPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAYMENT_OPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_PAYMENT_OPTION})
+var sDimension_RESERVATION_MODIFIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESERVATION_MODIFIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_RESERVATION_MODIFIED})
+var sDimension_TAG_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TAG_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_TAG_KEY})
+var sDimension_COST_CATEGORY_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COST_CATEGORY_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_COST_CATEGORY_NAME})
+var s_DimensionValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DimensionValue, Type: smithy.ShapeTypeString, Ext: &e_DimensionValues_member})
+var sDuplicateRecordException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eDuplicateRecordException_Message})
+var sEventType_System = smithy.NewStaticSchema(smithy.StaticSchema{Member: "System", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventType_System})
+var sEventType_CreateAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateAction", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventType_CreateAction})
+var sEventType_DeleteAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteAction", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventType_DeleteAction})
+var sEventType_UpdateAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateAction", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventType_UpdateAction})
+var sEventType_ExecuteAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecuteAction", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventType_ExecuteAction})
+var sExecutionType_ApproveBudgetAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApproveBudgetAction", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExecutionType_ApproveBudgetAction})
+var sExecutionType_RetryBudgetAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryBudgetAction", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExecutionType_RetryBudgetAction})
+var sExecutionType_ReverseBudgetAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReverseBudgetAction", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExecutionType_ReverseBudgetAction})
+var sExecutionType_ResetBudgetAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResetBudgetAction", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExecutionType_ResetBudgetAction})
+var sExpiredNextTokenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eExpiredNextTokenException_Message})
+var sExpression_Or = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Or", ID: &i_Expressions, Members: &m_Expressions, Type: smithy.ShapeTypeList, Ext: &eExpression_Or})
+var sExpression_And = smithy.NewStaticSchema(smithy.StaticSchema{Member: "And", ID: &i_Expressions, Members: &m_Expressions, Type: smithy.ShapeTypeList, Ext: &eExpression_And})
+var sExpression_Not = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Not", ID: &iExpression, Type: smithy.ShapeTypeStructure, Ext: &eExpression_Not})
+var sExpression_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &iExpressionDimensionValues, Members: &mExpressionDimensionValues, Type: smithy.ShapeTypeStructure, Ext: &eExpression_Dimensions})
+var sExpression_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &iTagValues, Members: &mTagValues, Type: smithy.ShapeTypeStructure, Ext: &eExpression_Tags})
+var sExpression_CostCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CostCategories", ID: &iCostCategoryValues, Members: &mCostCategoryValues, Type: smithy.ShapeTypeStructure, Ext: &eExpression_CostCategories})
+var sExpression_ProductAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductAttributes", ID: &iProductAttributeValues, Members: &mProductAttributeValues, Type: smithy.ShapeTypeStructure, Ext: &eExpression_ProductAttributes})
+var sExpressionDimensionValues_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeEnum, Ext: &eExpressionDimensionValues_Key})
+var sExpressionDimensionValues_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList, Ext: &eExpressionDimensionValues_Values})
+var sExpressionDimensionValues_MatchOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchOptions", ID: &i_MatchOptions, Members: &m_MatchOptions, Type: smithy.ShapeTypeList, Ext: &eExpressionDimensionValues_MatchOptions})
+var s_Expressions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExpression, Type: smithy.ShapeTypeStructure, Ext: &e_Expressions_member})
+var s_Groups_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Group, Type: smithy.ShapeTypeString, Ext: &e_Groups_member})
+var sHealthStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iHealthStatusValue, Members: &mHealthStatusValue, Type: smithy.ShapeTypeEnum, Ext: &eHealthStatus_Status})
+var sHealthStatus_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iHealthStatusReason, Members: &mHealthStatusReason, Type: smithy.ShapeTypeEnum, Ext: &eHealthStatus_StatusReason})
+var sHealthStatus_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &i_GenericTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eHealthStatus_LastUpdatedTime})
+var sHealthStatusReason_BILLING_VIEW_NO_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BILLING_VIEW_NO_ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHealthStatusReason_BILLING_VIEW_NO_ACCESS})
+var sHealthStatusReason_BILLING_VIEW_UNHEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BILLING_VIEW_UNHEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHealthStatusReason_BILLING_VIEW_UNHEALTHY})
+var sHealthStatusReason_FILTER_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILTER_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHealthStatusReason_FILTER_INVALID})
+var sHealthStatusReason_MULTI_YEAR_HISTORICAL_DATA_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTI_YEAR_HISTORICAL_DATA_DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHealthStatusReason_MULTI_YEAR_HISTORICAL_DATA_DISABLED})
+var sHealthStatusValue_HEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHealthStatusValue_HEALTHY})
+var sHealthStatusValue_UNHEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNHEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHealthStatusValue_UNHEALTHY})
+var sHistoricalOptions_BudgetAdjustmentPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetAdjustmentPeriod", ID: &i_AdjustmentPeriod, Type: smithy.ShapeTypeInteger, Ext: &eHistoricalOptions_BudgetAdjustmentPeriod})
+var sHistoricalOptions_LookBackAvailablePeriods = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LookBackAvailablePeriods", ID: &i_AdjustmentPeriod, Type: smithy.ShapeTypeInteger, Ext: &eHistoricalOptions_LookBackAvailablePeriods})
+var sIamActionDefinition_PolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyArn", ID: &i_PolicyArn, Type: smithy.ShapeTypeString, Ext: &eIamActionDefinition_PolicyArn})
+var sIamActionDefinition_Roles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Roles", ID: &i_Roles, Members: &m_Roles, Type: smithy.ShapeTypeList, Ext: &eIamActionDefinition_Roles})
+var sIamActionDefinition_Groups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Groups", ID: &i_Groups, Members: &m_Groups, Type: smithy.ShapeTypeList, Ext: &eIamActionDefinition_Groups})
+var sIamActionDefinition_Users = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Users", ID: &i_Users, Members: &m_Users, Type: smithy.ShapeTypeList, Ext: &eIamActionDefinition_Users})
+var s_InstanceIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &e_InstanceIds_member})
+var sInternalErrorException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalErrorException_Message})
+var sInvalidNextTokenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidNextTokenException_Message})
+var sInvalidParameterException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidParameterException_Message})
+var sMatchOption_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMatchOption_EQUALS})
+var sMatchOption_ABSENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ABSENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMatchOption_ABSENT})
+var sMatchOption_STARTS_WITH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STARTS_WITH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMatchOption_STARTS_WITH})
+var sMatchOption_ENDS_WITH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENDS_WITH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMatchOption_ENDS_WITH})
+var sMatchOption_CONTAINS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTAINS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMatchOption_CONTAINS})
+var sMatchOption_GREATER_THAN_OR_EQUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN_OR_EQUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMatchOption_GREATER_THAN_OR_EQUAL})
+var sMatchOption_CASE_SENSITIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CASE_SENSITIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMatchOption_CASE_SENSITIVE})
+var sMatchOption_CASE_INSENSITIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CASE_INSENSITIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMatchOption_CASE_INSENSITIVE})
+var s_MatchOptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMatchOption, Members: &mMatchOption, Type: smithy.ShapeTypeEnum, Ext: &e_MatchOptions_member})
+var sMetric_BLENDED_COST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BLENDED_COST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetric_BLENDED_COST})
+var sMetric_UNBLENDED_COST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNBLENDED_COST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetric_UNBLENDED_COST})
+var sMetric_AMORTIZED_COST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMORTIZED_COST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetric_AMORTIZED_COST})
+var sMetric_NET_UNBLENDED_COST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NET_UNBLENDED_COST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetric_NET_UNBLENDED_COST})
+var sMetric_NET_AMORTIZED_COST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NET_AMORTIZED_COST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetric_NET_AMORTIZED_COST})
+var sMetric_USAGE_QUANTITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USAGE_QUANTITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetric_USAGE_QUANTITY})
+var sMetric_NORMALIZED_USAGE_AMOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NORMALIZED_USAGE_AMOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetric_NORMALIZED_USAGE_AMOUNT})
+var sMetric_HOURS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOURS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetric_HOURS})
+var s_Metrics_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetric, Members: &mMetric, Type: smithy.ShapeTypeEnum, Ext: &e_Metrics_member})
+var sNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eNotFoundException_Message})
+var sNotification_NotificationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationType", ID: &iNotificationType, Members: &mNotificationType, Type: smithy.ShapeTypeEnum, Ext: &eNotification_NotificationType})
+var sNotification_ComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComparisonOperator", ID: &iComparisonOperator, Members: &mComparisonOperator, Type: smithy.ShapeTypeEnum, Ext: &eNotification_ComparisonOperator})
+var sNotification_Threshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Threshold", ID: &i_NotificationThreshold, Type: smithy.ShapeTypeDouble, Ext: &eNotification_Threshold})
+var sNotification_ThresholdType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThresholdType", ID: &iThresholdType, Members: &mThresholdType, Type: smithy.ShapeTypeEnum, Ext: &eNotification_ThresholdType})
+var sNotification_NotificationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationState", ID: &iNotificationState, Members: &mNotificationState, Type: smithy.ShapeTypeEnum, Ext: &eNotification_NotificationState})
+var s_Notifications_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &e_Notifications_member})
+var sNotificationState_OK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNotificationState_OK})
+var sNotificationState_ALARM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALARM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNotificationState_ALARM})
+var sNotificationType_ACTUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNotificationType_ACTUAL})
+var sNotificationType_FORECASTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FORECASTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNotificationType_FORECASTED})
+var sNotificationWithSubscribers_Notification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notification", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &eNotificationWithSubscribers_Notification})
+var sNotificationWithSubscribers_Subscribers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subscribers", ID: &i_Subscribers, Members: &m_Subscribers, Type: smithy.ShapeTypeList, Ext: &eNotificationWithSubscribers_Subscribers})
+var s_NotificationWithSubscribersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNotificationWithSubscribers, Members: &mNotificationWithSubscribers, Type: smithy.ShapeTypeStructure, Ext: &e_NotificationWithSubscribersList_member})
+var s_PlannedBudgetLimits_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &e_PlannedBudgetLimits_key})
+var s_PlannedBudgetLimits_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iSpend, Members: &mSpend, Type: smithy.ShapeTypeStructure, Ext: &e_PlannedBudgetLimits_value})
+var sProductAttributeValues_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ProductAttributeName, Type: smithy.ShapeTypeString, Ext: &eProductAttributeValues_Key})
+var sProductAttributeValues_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList, Ext: &eProductAttributeValues_Values})
+var sProductAttributeValues_MatchOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchOptions", ID: &i_MatchOptions, Members: &m_MatchOptions, Type: smithy.ShapeTypeList, Ext: &eProductAttributeValues_MatchOptions})
+var sResourceLockedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceLockedException_Message})
+var sResourceTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ResourceTagKey, Type: smithy.ShapeTypeString, Ext: &eResourceTag_Key})
+var sResourceTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_ResourceTagValue, Type: smithy.ShapeTypeString, Ext: &eResourceTag_Value})
+var s_ResourceTagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceTagKey, Type: smithy.ShapeTypeString, Ext: &e_ResourceTagKeyList_member})
+var s_ResourceTagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceTag, Members: &mResourceTag, Type: smithy.ShapeTypeStructure, Ext: &e_ResourceTagList_member})
+var s_Roles_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Role, Type: smithy.ShapeTypeString, Ext: &e_Roles_member})
+var sScpActionDefinition_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &eScpActionDefinition_PolicyId})
+var sScpActionDefinition_TargetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetIds", ID: &i_TargetIds, Members: &m_TargetIds, Type: smithy.ShapeTypeList, Ext: &eScpActionDefinition_TargetIds})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_Message})
+var sSpend_Amount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Amount", ID: &i_NumericValue, Type: smithy.ShapeTypeString, Ext: &eSpend_Amount})
+var sSpend_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &i_UnitValue, Type: smithy.ShapeTypeString, Ext: &eSpend_Unit})
+var sSsmActionDefinition_ActionSubType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionSubType", ID: &iActionSubType, Members: &mActionSubType, Type: smithy.ShapeTypeEnum, Ext: &eSsmActionDefinition_ActionSubType})
+var sSsmActionDefinition_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_Region, Type: smithy.ShapeTypeString, Ext: &eSsmActionDefinition_Region})
+var sSsmActionDefinition_InstanceIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceIds", ID: &i_InstanceIds, Members: &m_InstanceIds, Type: smithy.ShapeTypeList, Ext: &eSsmActionDefinition_InstanceIds})
+var sSubscriber_SubscriptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionType", ID: &iSubscriptionType, Members: &mSubscriptionType, Type: smithy.ShapeTypeEnum, Ext: &eSubscriber_SubscriptionType})
+var sSubscriber_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &i_SubscriberAddress, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eSubscriber_Address})
+var s_Subscribers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSubscriber, Members: &mSubscriber, Type: smithy.ShapeTypeStructure, Ext: &e_Subscribers_member})
+var sSubscriptionType_SNS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSubscriptionType_SNS})
+var sSubscriptionType_EMAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSubscriptionType_EMAIL})
+var sTagValues_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTagValues_Key})
+var sTagValues_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList, Ext: &eTagValues_Values})
+var sTagValues_MatchOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchOptions", ID: &i_MatchOptions, Members: &m_MatchOptions, Type: smithy.ShapeTypeList, Ext: &eTagValues_MatchOptions})
+var s_TargetIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TargetId, Type: smithy.ShapeTypeString, Ext: &e_TargetIds_member})
+var sThresholdType_PERCENTAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERCENTAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eThresholdType_PERCENTAGE})
+var sThresholdType_ABSOLUTE_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ABSOLUTE_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eThresholdType_ABSOLUTE_VALUE})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_errorMessage, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var sTimePeriod_Start = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Start", ID: &i_GenericTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTimePeriod_Start})
+var sTimePeriod_End = smithy.NewStaticSchema(smithy.StaticSchema{Member: "End", ID: &i_GenericTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTimePeriod_End})
+var sTimeUnit_DAILY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAILY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeUnit_DAILY})
+var sTimeUnit_MONTHLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONTHLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeUnit_MONTHLY})
+var sTimeUnit_QUARTERLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUARTERLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeUnit_QUARTERLY})
+var sTimeUnit_ANNUALLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANNUALLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeUnit_ANNUALLY})
+var sTimeUnit_CUSTOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeUnit_CUSTOM})
+var s_Users_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_User, Type: smithy.ShapeTypeString, Ext: &e_Users_member})
+var s_Values_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Value, Type: smithy.ShapeTypeString, Ext: &e_Values_member})
+var sCreateBudgetActionRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eCreateBudgetActionRequest_AccountId})
+var sCreateBudgetActionRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eCreateBudgetActionRequest_BudgetName})
+var sCreateBudgetActionRequest_NotificationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationType", ID: &iNotificationType, Members: &mNotificationType, Type: smithy.ShapeTypeEnum, Ext: &eCreateBudgetActionRequest_NotificationType})
+var sCreateBudgetActionRequest_ActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionType", ID: &iActionType, Members: &mActionType, Type: smithy.ShapeTypeEnum, Ext: &eCreateBudgetActionRequest_ActionType})
+var sCreateBudgetActionRequest_ActionThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionThreshold", ID: &iActionThreshold, Members: &mActionThreshold, Type: smithy.ShapeTypeStructure, Ext: &eCreateBudgetActionRequest_ActionThreshold})
+var sCreateBudgetActionRequest_Definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Definition", ID: &iDefinition, Members: &mDefinition, Type: smithy.ShapeTypeStructure, Ext: &eCreateBudgetActionRequest_Definition})
+var sCreateBudgetActionRequest_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eCreateBudgetActionRequest_ExecutionRoleArn})
+var sCreateBudgetActionRequest_ApprovalModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApprovalModel", ID: &iApprovalModel, Members: &mApprovalModel, Type: smithy.ShapeTypeEnum, Ext: &eCreateBudgetActionRequest_ApprovalModel})
+var sCreateBudgetActionRequest_Subscribers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subscribers", ID: &i_Subscribers, Members: &m_Subscribers, Type: smithy.ShapeTypeList, Ext: &eCreateBudgetActionRequest_Subscribers})
+var sCreateBudgetActionRequest_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList, Ext: &eCreateBudgetActionRequest_ResourceTags})
+var sCreateBudgetActionResponse_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eCreateBudgetActionResponse_AccountId})
+var sCreateBudgetActionResponse_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eCreateBudgetActionResponse_BudgetName})
+var sCreateBudgetActionResponse_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionId", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &eCreateBudgetActionResponse_ActionId})
+var sCreateBudgetRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eCreateBudgetRequest_AccountId})
+var sCreateBudgetRequest_Budget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Budget", ID: &iBudget, Members: &mBudget, Type: smithy.ShapeTypeStructure, Ext: &eCreateBudgetRequest_Budget})
+var sCreateBudgetRequest_NotificationsWithSubscribers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationsWithSubscribers", ID: &i_NotificationWithSubscribersList, Members: &m_NotificationWithSubscribersList, Type: smithy.ShapeTypeList, Ext: &eCreateBudgetRequest_NotificationsWithSubscribers})
+var sCreateBudgetRequest_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList, Ext: &eCreateBudgetRequest_ResourceTags})
+var sCreateNotificationRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eCreateNotificationRequest_AccountId})
+var sCreateNotificationRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eCreateNotificationRequest_BudgetName})
+var sCreateNotificationRequest_Notification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notification", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &eCreateNotificationRequest_Notification})
+var sCreateNotificationRequest_Subscribers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subscribers", ID: &i_Subscribers, Members: &m_Subscribers, Type: smithy.ShapeTypeList, Ext: &eCreateNotificationRequest_Subscribers})
+var sCreateSubscriberRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eCreateSubscriberRequest_AccountId})
+var sCreateSubscriberRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eCreateSubscriberRequest_BudgetName})
+var sCreateSubscriberRequest_Notification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notification", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &eCreateSubscriberRequest_Notification})
+var sCreateSubscriberRequest_Subscriber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subscriber", ID: &iSubscriber, Members: &mSubscriber, Type: smithy.ShapeTypeStructure, Ext: &eCreateSubscriberRequest_Subscriber})
+var sDeleteBudgetActionRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDeleteBudgetActionRequest_AccountId})
+var sDeleteBudgetActionRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eDeleteBudgetActionRequest_BudgetName})
+var sDeleteBudgetActionRequest_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionId", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &eDeleteBudgetActionRequest_ActionId})
+var sDeleteBudgetActionResponse_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDeleteBudgetActionResponse_AccountId})
+var sDeleteBudgetActionResponse_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eDeleteBudgetActionResponse_BudgetName})
+var sDeleteBudgetActionResponse_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBudgetActionResponse_Action})
+var sDeleteBudgetRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDeleteBudgetRequest_AccountId})
+var sDeleteBudgetRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eDeleteBudgetRequest_BudgetName})
+var sDeleteNotificationRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDeleteNotificationRequest_AccountId})
+var sDeleteNotificationRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eDeleteNotificationRequest_BudgetName})
+var sDeleteNotificationRequest_Notification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notification", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &eDeleteNotificationRequest_Notification})
+var sDeleteSubscriberRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDeleteSubscriberRequest_AccountId})
+var sDeleteSubscriberRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eDeleteSubscriberRequest_BudgetName})
+var sDeleteSubscriberRequest_Notification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notification", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSubscriberRequest_Notification})
+var sDeleteSubscriberRequest_Subscriber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subscriber", ID: &iSubscriber, Members: &mSubscriber, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSubscriberRequest_Subscriber})
+var sDescribeBudgetActionHistoriesRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetActionHistoriesRequest_AccountId})
+var sDescribeBudgetActionHistoriesRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetActionHistoriesRequest_BudgetName})
+var sDescribeBudgetActionHistoriesRequest_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionId", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetActionHistoriesRequest_ActionId})
+var sDescribeBudgetActionHistoriesRequest_TimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimePeriod", ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBudgetActionHistoriesRequest_TimePeriod})
+var sDescribeBudgetActionHistoriesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eDescribeBudgetActionHistoriesRequest_MaxResults})
+var sDescribeBudgetActionHistoriesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetActionHistoriesRequest_NextToken})
+var sDescribeBudgetActionHistoriesResponse_ActionHistories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionHistories", ID: &i_ActionHistories, Members: &m_ActionHistories, Type: smithy.ShapeTypeList, Ext: &eDescribeBudgetActionHistoriesResponse_ActionHistories})
+var sDescribeBudgetActionHistoriesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetActionHistoriesResponse_NextToken})
+var sDescribeBudgetActionRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetActionRequest_AccountId})
+var sDescribeBudgetActionRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetActionRequest_BudgetName})
+var sDescribeBudgetActionRequest_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionId", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetActionRequest_ActionId})
+var sDescribeBudgetActionResponse_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetActionResponse_AccountId})
+var sDescribeBudgetActionResponse_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetActionResponse_BudgetName})
+var sDescribeBudgetActionResponse_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBudgetActionResponse_Action})
+var sDescribeBudgetActionsForAccountRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetActionsForAccountRequest_AccountId})
+var sDescribeBudgetActionsForAccountRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eDescribeBudgetActionsForAccountRequest_MaxResults})
+var sDescribeBudgetActionsForAccountRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetActionsForAccountRequest_NextToken})
+var sDescribeBudgetActionsForAccountResponse_Actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Actions", ID: &i_Actions, Members: &m_Actions, Type: smithy.ShapeTypeList, Ext: &eDescribeBudgetActionsForAccountResponse_Actions})
+var sDescribeBudgetActionsForAccountResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetActionsForAccountResponse_NextToken})
+var sDescribeBudgetActionsForBudgetRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetActionsForBudgetRequest_AccountId})
+var sDescribeBudgetActionsForBudgetRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetActionsForBudgetRequest_BudgetName})
+var sDescribeBudgetActionsForBudgetRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eDescribeBudgetActionsForBudgetRequest_MaxResults})
+var sDescribeBudgetActionsForBudgetRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetActionsForBudgetRequest_NextToken})
+var sDescribeBudgetActionsForBudgetResponse_Actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Actions", ID: &i_Actions, Members: &m_Actions, Type: smithy.ShapeTypeList, Ext: &eDescribeBudgetActionsForBudgetResponse_Actions})
+var sDescribeBudgetActionsForBudgetResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetActionsForBudgetResponse_NextToken})
+var sDescribeBudgetRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetRequest_AccountId})
+var sDescribeBudgetRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetRequest_BudgetName})
+var sDescribeBudgetRequest_ShowFilterExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShowFilterExpression", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeBudgetRequest_ShowFilterExpression})
+var sDescribeBudgetNotificationsForAccountRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetNotificationsForAccountRequest_AccountId})
+var sDescribeBudgetNotificationsForAccountRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsBudgetNotifications, Type: smithy.ShapeTypeInteger, Ext: &eDescribeBudgetNotificationsForAccountRequest_MaxResults})
+var sDescribeBudgetNotificationsForAccountRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetNotificationsForAccountRequest_NextToken})
+var sDescribeBudgetNotificationsForAccountResponse_BudgetNotificationsForAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetNotificationsForAccount", ID: &i_BudgetNotificationsForAccountList, Members: &m_BudgetNotificationsForAccountList, Type: smithy.ShapeTypeList, Ext: &eDescribeBudgetNotificationsForAccountResponse_BudgetNotificationsForAccount})
+var sDescribeBudgetNotificationsForAccountResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetNotificationsForAccountResponse_NextToken})
+var sDescribeBudgetResponse_Budget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Budget", ID: &iBudget, Members: &mBudget, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBudgetResponse_Budget})
+var sDescribeBudgetPerformanceHistoryRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetPerformanceHistoryRequest_AccountId})
+var sDescribeBudgetPerformanceHistoryRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetPerformanceHistoryRequest_BudgetName})
+var sDescribeBudgetPerformanceHistoryRequest_TimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimePeriod", ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBudgetPerformanceHistoryRequest_TimePeriod})
+var sDescribeBudgetPerformanceHistoryRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eDescribeBudgetPerformanceHistoryRequest_MaxResults})
+var sDescribeBudgetPerformanceHistoryRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetPerformanceHistoryRequest_NextToken})
+var sDescribeBudgetPerformanceHistoryResponse_BudgetPerformanceHistory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetPerformanceHistory", ID: &iBudgetPerformanceHistory, Members: &mBudgetPerformanceHistory, Type: smithy.ShapeTypeStructure, Ext: &eDescribeBudgetPerformanceHistoryResponse_BudgetPerformanceHistory})
+var sDescribeBudgetPerformanceHistoryResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetPerformanceHistoryResponse_NextToken})
+var sDescribeBudgetsRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetsRequest_AccountId})
+var sDescribeBudgetsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsDescribeBudgets, Type: smithy.ShapeTypeInteger, Ext: &eDescribeBudgetsRequest_MaxResults})
+var sDescribeBudgetsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetsRequest_NextToken})
+var sDescribeBudgetsRequest_ShowFilterExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShowFilterExpression", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeBudgetsRequest_ShowFilterExpression})
+var sDescribeBudgetsResponse_Budgets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Budgets", ID: &i_Budgets, Members: &m_Budgets, Type: smithy.ShapeTypeList, Ext: &eDescribeBudgetsResponse_Budgets})
+var sDescribeBudgetsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eDescribeBudgetsResponse_NextToken})
+var sDescribeNotificationsForBudgetRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDescribeNotificationsForBudgetRequest_AccountId})
+var sDescribeNotificationsForBudgetRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eDescribeNotificationsForBudgetRequest_BudgetName})
+var sDescribeNotificationsForBudgetRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eDescribeNotificationsForBudgetRequest_MaxResults})
+var sDescribeNotificationsForBudgetRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eDescribeNotificationsForBudgetRequest_NextToken})
+var sDescribeNotificationsForBudgetResponse_Notifications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notifications", ID: &i_Notifications, Members: &m_Notifications, Type: smithy.ShapeTypeList, Ext: &eDescribeNotificationsForBudgetResponse_Notifications})
+var sDescribeNotificationsForBudgetResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eDescribeNotificationsForBudgetResponse_NextToken})
+var sDescribeSubscribersForNotificationRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDescribeSubscribersForNotificationRequest_AccountId})
+var sDescribeSubscribersForNotificationRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eDescribeSubscribersForNotificationRequest_BudgetName})
+var sDescribeSubscribersForNotificationRequest_Notification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notification", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSubscribersForNotificationRequest_Notification})
+var sDescribeSubscribersForNotificationRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eDescribeSubscribersForNotificationRequest_MaxResults})
+var sDescribeSubscribersForNotificationRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eDescribeSubscribersForNotificationRequest_NextToken})
+var sDescribeSubscribersForNotificationResponse_Subscribers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subscribers", ID: &i_Subscribers, Members: &m_Subscribers, Type: smithy.ShapeTypeList, Ext: &eDescribeSubscribersForNotificationResponse_Subscribers})
+var sDescribeSubscribersForNotificationResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString, Ext: &eDescribeSubscribersForNotificationResponse_NextToken})
+var sExecuteBudgetActionRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eExecuteBudgetActionRequest_AccountId})
+var sExecuteBudgetActionRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eExecuteBudgetActionRequest_BudgetName})
+var sExecuteBudgetActionRequest_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionId", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &eExecuteBudgetActionRequest_ActionId})
+var sExecuteBudgetActionRequest_ExecutionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionType", ID: &iExecutionType, Members: &mExecutionType, Type: smithy.ShapeTypeEnum, Ext: &eExecuteBudgetActionRequest_ExecutionType})
+var sExecuteBudgetActionResponse_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eExecuteBudgetActionResponse_AccountId})
+var sExecuteBudgetActionResponse_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eExecuteBudgetActionResponse_BudgetName})
+var sExecuteBudgetActionResponse_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionId", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &eExecuteBudgetActionResponse_ActionId})
+var sExecuteBudgetActionResponse_ExecutionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionType", ID: &iExecutionType, Members: &mExecutionType, Type: smithy.ShapeTypeEnum, Ext: &eExecuteBudgetActionResponse_ExecutionType})
+var sListTagsForResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceARN})
+var sListTagsForResourceResponse_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_ResourceTags})
+var sTagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceARN})
+var sTagResourceRequest_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_ResourceTags})
+var sUntagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceARN})
+var sUntagResourceRequest_ResourceTagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTagKeys", ID: &i_ResourceTagKeyList, Members: &m_ResourceTagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_ResourceTagKeys})
+var sUpdateBudgetActionRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eUpdateBudgetActionRequest_AccountId})
+var sUpdateBudgetActionRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eUpdateBudgetActionRequest_BudgetName})
+var sUpdateBudgetActionRequest_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionId", ID: &i_ActionId, Type: smithy.ShapeTypeString, Ext: &eUpdateBudgetActionRequest_ActionId})
+var sUpdateBudgetActionRequest_NotificationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationType", ID: &iNotificationType, Members: &mNotificationType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateBudgetActionRequest_NotificationType})
+var sUpdateBudgetActionRequest_ActionThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionThreshold", ID: &iActionThreshold, Members: &mActionThreshold, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBudgetActionRequest_ActionThreshold})
+var sUpdateBudgetActionRequest_Definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Definition", ID: &iDefinition, Members: &mDefinition, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBudgetActionRequest_Definition})
+var sUpdateBudgetActionRequest_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eUpdateBudgetActionRequest_ExecutionRoleArn})
+var sUpdateBudgetActionRequest_ApprovalModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApprovalModel", ID: &iApprovalModel, Members: &mApprovalModel, Type: smithy.ShapeTypeEnum, Ext: &eUpdateBudgetActionRequest_ApprovalModel})
+var sUpdateBudgetActionRequest_Subscribers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subscribers", ID: &i_Subscribers, Members: &m_Subscribers, Type: smithy.ShapeTypeList, Ext: &eUpdateBudgetActionRequest_Subscribers})
+var sUpdateBudgetActionResponse_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eUpdateBudgetActionResponse_AccountId})
+var sUpdateBudgetActionResponse_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eUpdateBudgetActionResponse_BudgetName})
+var sUpdateBudgetActionResponse_OldAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OldAction", ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBudgetActionResponse_OldAction})
+var sUpdateBudgetActionResponse_NewAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewAction", ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBudgetActionResponse_NewAction})
+var sUpdateBudgetRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eUpdateBudgetRequest_AccountId})
+var sUpdateBudgetRequest_NewBudget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewBudget", ID: &iBudget, Members: &mBudget, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBudgetRequest_NewBudget})
+var sUpdateNotificationRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eUpdateNotificationRequest_AccountId})
+var sUpdateNotificationRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eUpdateNotificationRequest_BudgetName})
+var sUpdateNotificationRequest_OldNotification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OldNotification", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &eUpdateNotificationRequest_OldNotification})
+var sUpdateNotificationRequest_NewNotification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewNotification", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &eUpdateNotificationRequest_NewNotification})
+var sUpdateSubscriberRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eUpdateSubscriberRequest_AccountId})
+var sUpdateSubscriberRequest_BudgetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BudgetName", ID: &i_BudgetName, Type: smithy.ShapeTypeString, Ext: &eUpdateSubscriberRequest_BudgetName})
+var sUpdateSubscriberRequest_Notification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notification", ID: &iNotification, Members: &mNotification, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSubscriberRequest_Notification})
+var sUpdateSubscriberRequest_OldSubscriber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OldSubscriber", ID: &iSubscriber, Members: &mSubscriber, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSubscriberRequest_OldSubscriber})
+var sUpdateSubscriberRequest_NewSubscriber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewSubscriber", ID: &iSubscriber, Members: &mSubscriber, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSubscriberRequest_NewSubscriber})
 
 // Members of recursive shapes would make the variables' initializers refer to
 // each other in a cycle, which Go rejects, so they are completed here.
 func init() {
-	sExpression_Not = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Not", ID: &iExpression, Members: &mExpression, Type: smithy.ShapeTypeStructure, Ext: &ext[226]})
-	s_Expressions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExpression, Members: &mExpression, Type: smithy.ShapeTypeStructure, Ext: &ext[236]})
+	sExpression_Not = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Not", ID: &iExpression, Members: &mExpression, Type: smithy.ShapeTypeStructure, Ext: &eExpression_Not})
+	s_Expressions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExpression, Members: &mExpression, Type: smithy.ShapeTypeStructure, Ext: &e_Expressions_member})
 }
 
 var CreateBudget = &sCreateBudget

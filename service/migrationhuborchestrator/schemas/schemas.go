@@ -7,9 +7,575 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [567]smithy.SchemaExtensions
+var (
+	eCreateTemplate                                                smithy.SchemaExtensions
+	eCreateWorkflow                                                smithy.SchemaExtensions
+	eCreateWorkflowStep                                            smithy.SchemaExtensions
+	eCreateWorkflowStepGroup                                       smithy.SchemaExtensions
+	eDeleteTemplate                                                smithy.SchemaExtensions
+	eDeleteWorkflow                                                smithy.SchemaExtensions
+	eDeleteWorkflowStep                                            smithy.SchemaExtensions
+	eDeleteWorkflowStepGroup                                       smithy.SchemaExtensions
+	eGetTemplate                                                   smithy.SchemaExtensions
+	eGetTemplateStep                                               smithy.SchemaExtensions
+	eGetTemplateStepGroup                                          smithy.SchemaExtensions
+	eGetWorkflow                                                   smithy.SchemaExtensions
+	eGetWorkflowStep                                               smithy.SchemaExtensions
+	eGetWorkflowStepGroup                                          smithy.SchemaExtensions
+	eListPlugins                                                   smithy.SchemaExtensions
+	eListTagsForResource                                           smithy.SchemaExtensions
+	eListTemplates                                                 smithy.SchemaExtensions
+	eListTemplateStepGroups                                        smithy.SchemaExtensions
+	eListTemplateSteps                                             smithy.SchemaExtensions
+	eListWorkflows                                                 smithy.SchemaExtensions
+	eListWorkflowStepGroups                                        smithy.SchemaExtensions
+	eListWorkflowSteps                                             smithy.SchemaExtensions
+	eRetryWorkflowStep                                             smithy.SchemaExtensions
+	eStartWorkflow                                                 smithy.SchemaExtensions
+	eStopWorkflow                                                  smithy.SchemaExtensions
+	eTagResource                                                   smithy.SchemaExtensions
+	eUntagResource                                                 smithy.SchemaExtensions
+	eUpdateTemplate                                                smithy.SchemaExtensions
+	eUpdateWorkflow                                                smithy.SchemaExtensions
+	eUpdateWorkflowStep                                            smithy.SchemaExtensions
+	eUpdateWorkflowStepGroup                                       smithy.SchemaExtensions
+	e_AWSMigrationHubOrchestrator                                  smithy.SchemaExtensions
+	eAccessDeniedException                                         smithy.SchemaExtensions
+	eAccessDeniedException_message                                 smithy.SchemaExtensions
+	e_ApplicationConfigurationName                                 smithy.SchemaExtensions
+	e_ClientToken                                                  smithy.SchemaExtensions
+	eConflictException                                             smithy.SchemaExtensions
+	eConflictException_message                                     smithy.SchemaExtensions
+	e_DataType                                                     smithy.SchemaExtensions
+	eInternalServerException                                       smithy.SchemaExtensions
+	eInternalServerException_message                               smithy.SchemaExtensions
+	e_IPAddress                                                    smithy.SchemaExtensions
+	e_MaxResults                                                   smithy.SchemaExtensions
+	e_MaxStringList                                                smithy.SchemaExtensions
+	e_MaxStringList_member                                         smithy.SchemaExtensions
+	e_MaxStringValue                                               smithy.SchemaExtensions
+	e_MigrationWorkflowDescription                                 smithy.SchemaExtensions
+	e_MigrationWorkflowId                                          smithy.SchemaExtensions
+	e_MigrationWorkflowName                                        smithy.SchemaExtensions
+	e_MigrationWorkflowStatusEnum                                  smithy.SchemaExtensions
+	eMigrationWorkflowSummary                                      smithy.SchemaExtensions
+	eMigrationWorkflowSummary_id                                   smithy.SchemaExtensions
+	eMigrationWorkflowSummary_name                                 smithy.SchemaExtensions
+	eMigrationWorkflowSummary_templateId                           smithy.SchemaExtensions
+	eMigrationWorkflowSummary_adsApplicationConfigurationName      smithy.SchemaExtensions
+	eMigrationWorkflowSummary_status                               smithy.SchemaExtensions
+	eMigrationWorkflowSummary_creationTime                         smithy.SchemaExtensions
+	eMigrationWorkflowSummary_endTime                              smithy.SchemaExtensions
+	eMigrationWorkflowSummary_statusMessage                        smithy.SchemaExtensions
+	eMigrationWorkflowSummary_completedSteps                       smithy.SchemaExtensions
+	eMigrationWorkflowSummary_totalSteps                           smithy.SchemaExtensions
+	e_MigrationWorkflowSummaryList                                 smithy.SchemaExtensions
+	e_MigrationWorkflowSummaryList_member                          smithy.SchemaExtensions
+	e_NextToken                                                    smithy.SchemaExtensions
+	e_Owner                                                        smithy.SchemaExtensions
+	ePlatformCommand                                               smithy.SchemaExtensions
+	ePlatformCommand_linux                                         smithy.SchemaExtensions
+	ePlatformCommand_windows                                       smithy.SchemaExtensions
+	ePlatformScriptKey                                             smithy.SchemaExtensions
+	ePlatformScriptKey_linux                                       smithy.SchemaExtensions
+	ePlatformScriptKey_windows                                     smithy.SchemaExtensions
+	e_PluginHealth                                                 smithy.SchemaExtensions
+	e_PluginId                                                     smithy.SchemaExtensions
+	e_PluginSummaries                                              smithy.SchemaExtensions
+	e_PluginSummaries_member                                       smithy.SchemaExtensions
+	ePluginSummary                                                 smithy.SchemaExtensions
+	ePluginSummary_pluginId                                        smithy.SchemaExtensions
+	ePluginSummary_hostname                                        smithy.SchemaExtensions
+	ePluginSummary_status                                          smithy.SchemaExtensions
+	ePluginSummary_ipAddress                                       smithy.SchemaExtensions
+	ePluginSummary_version                                         smithy.SchemaExtensions
+	ePluginSummary_registeredTime                                  smithy.SchemaExtensions
+	e_PluginVersion                                                smithy.SchemaExtensions
+	e_ResourceArn                                                  smithy.SchemaExtensions
+	eResourceNotFoundException                                     smithy.SchemaExtensions
+	eResourceNotFoundException_message                             smithy.SchemaExtensions
+	e_RunEnvironment                                               smithy.SchemaExtensions
+	e_S3Bucket                                                     smithy.SchemaExtensions
+	e_S3Key                                                        smithy.SchemaExtensions
+	e_StepActionType                                               smithy.SchemaExtensions
+	eStepAutomationConfiguration                                   smithy.SchemaExtensions
+	eStepAutomationConfiguration_scriptLocationS3Bucket            smithy.SchemaExtensions
+	eStepAutomationConfiguration_scriptLocationS3Key               smithy.SchemaExtensions
+	eStepAutomationConfiguration_command                           smithy.SchemaExtensions
+	eStepAutomationConfiguration_runEnvironment                    smithy.SchemaExtensions
+	eStepAutomationConfiguration_targetType                        smithy.SchemaExtensions
+	e_StepDescription                                              smithy.SchemaExtensions
+	e_StepGroupDescription                                         smithy.SchemaExtensions
+	e_StepGroupId                                                  smithy.SchemaExtensions
+	e_StepGroupName                                                smithy.SchemaExtensions
+	e_StepGroupStatus                                              smithy.SchemaExtensions
+	e_StepId                                                       smithy.SchemaExtensions
+	eStepInput                                                     smithy.SchemaExtensions
+	eStepInput_integerValue                                        smithy.SchemaExtensions
+	eStepInput_stringValue                                         smithy.SchemaExtensions
+	eStepInput_listOfStringsValue                                  smithy.SchemaExtensions
+	eStepInput_mapOfStringValue                                    smithy.SchemaExtensions
+	e_StepInputParameters                                          smithy.SchemaExtensions
+	e_StepInputParameters_key                                      smithy.SchemaExtensions
+	e_StepInputParameters_value                                    smithy.SchemaExtensions
+	e_StepInputParametersKey                                       smithy.SchemaExtensions
+	e_StepName                                                     smithy.SchemaExtensions
+	eStepOutput                                                    smithy.SchemaExtensions
+	eStepOutput_name                                               smithy.SchemaExtensions
+	eStepOutput_dataType                                           smithy.SchemaExtensions
+	eStepOutput_required                                           smithy.SchemaExtensions
+	e_StepOutputList                                               smithy.SchemaExtensions
+	e_StepOutputList_member                                        smithy.SchemaExtensions
+	e_StepStatus                                                   smithy.SchemaExtensions
+	e_StringList                                                   smithy.SchemaExtensions
+	e_StringList_member                                            smithy.SchemaExtensions
+	e_StringListMember                                             smithy.SchemaExtensions
+	e_StringMap                                                    smithy.SchemaExtensions
+	e_StringMap_key                                                smithy.SchemaExtensions
+	e_StringMap_value                                              smithy.SchemaExtensions
+	e_StringMapKey                                                 smithy.SchemaExtensions
+	e_StringMapValue                                               smithy.SchemaExtensions
+	e_StringValue                                                  smithy.SchemaExtensions
+	e_TagKey                                                       smithy.SchemaExtensions
+	e_TagKeyList                                                   smithy.SchemaExtensions
+	e_TagKeyList_member                                            smithy.SchemaExtensions
+	e_TagMap                                                       smithy.SchemaExtensions
+	e_TagMap_key                                                   smithy.SchemaExtensions
+	e_TagMap_value                                                 smithy.SchemaExtensions
+	e_TagValue                                                     smithy.SchemaExtensions
+	e_TargetType                                                   smithy.SchemaExtensions
+	e_TemplateId                                                   smithy.SchemaExtensions
+	eTemplateInput                                                 smithy.SchemaExtensions
+	eTemplateInput_inputName                                       smithy.SchemaExtensions
+	eTemplateInput_dataType                                        smithy.SchemaExtensions
+	eTemplateInput_required                                        smithy.SchemaExtensions
+	e_TemplateInputList                                            smithy.SchemaExtensions
+	e_TemplateInputList_member                                     smithy.SchemaExtensions
+	e_TemplateInputName                                            smithy.SchemaExtensions
+	e_TemplateName                                                 smithy.SchemaExtensions
+	eTemplateSource                                                smithy.SchemaExtensions
+	eTemplateSource_workflowId                                     smithy.SchemaExtensions
+	e_TemplateStatus                                               smithy.SchemaExtensions
+	eTemplateStepGroupSummary                                      smithy.SchemaExtensions
+	eTemplateStepGroupSummary_id                                   smithy.SchemaExtensions
+	eTemplateStepGroupSummary_name                                 smithy.SchemaExtensions
+	eTemplateStepGroupSummary_previous                             smithy.SchemaExtensions
+	eTemplateStepGroupSummary_next                                 smithy.SchemaExtensions
+	e_TemplateStepGroupSummaryList                                 smithy.SchemaExtensions
+	e_TemplateStepGroupSummaryList_member                          smithy.SchemaExtensions
+	eTemplateStepSummary                                           smithy.SchemaExtensions
+	eTemplateStepSummary_id                                        smithy.SchemaExtensions
+	eTemplateStepSummary_stepGroupId                               smithy.SchemaExtensions
+	eTemplateStepSummary_templateId                                smithy.SchemaExtensions
+	eTemplateStepSummary_name                                      smithy.SchemaExtensions
+	eTemplateStepSummary_stepActionType                            smithy.SchemaExtensions
+	eTemplateStepSummary_targetType                                smithy.SchemaExtensions
+	eTemplateStepSummary_owner                                     smithy.SchemaExtensions
+	eTemplateStepSummary_previous                                  smithy.SchemaExtensions
+	eTemplateStepSummary_next                                      smithy.SchemaExtensions
+	e_TemplateStepSummaryList                                      smithy.SchemaExtensions
+	e_TemplateStepSummaryList_member                               smithy.SchemaExtensions
+	eTemplateSummary                                               smithy.SchemaExtensions
+	eTemplateSummary_id                                            smithy.SchemaExtensions
+	eTemplateSummary_name                                          smithy.SchemaExtensions
+	eTemplateSummary_arn                                           smithy.SchemaExtensions
+	eTemplateSummary_description                                   smithy.SchemaExtensions
+	e_TemplateSummaryList                                          smithy.SchemaExtensions
+	e_TemplateSummaryList_member                                   smithy.SchemaExtensions
+	eThrottlingException                                           smithy.SchemaExtensions
+	eThrottlingException_message                                   smithy.SchemaExtensions
+	eTool                                                          smithy.SchemaExtensions
+	eTool_name                                                     smithy.SchemaExtensions
+	eTool_url                                                      smithy.SchemaExtensions
+	e_ToolsList                                                    smithy.SchemaExtensions
+	e_ToolsList_member                                             smithy.SchemaExtensions
+	eValidationException                                           smithy.SchemaExtensions
+	eValidationException_message                                   smithy.SchemaExtensions
+	eWorkflowStepAutomationConfiguration                           smithy.SchemaExtensions
+	eWorkflowStepAutomationConfiguration_scriptLocationS3Bucket    smithy.SchemaExtensions
+	eWorkflowStepAutomationConfiguration_scriptLocationS3Key       smithy.SchemaExtensions
+	eWorkflowStepAutomationConfiguration_command                   smithy.SchemaExtensions
+	eWorkflowStepAutomationConfiguration_runEnvironment            smithy.SchemaExtensions
+	eWorkflowStepAutomationConfiguration_targetType                smithy.SchemaExtensions
+	e_WorkflowStepGroupsSummaryList                                smithy.SchemaExtensions
+	e_WorkflowStepGroupsSummaryList_member                         smithy.SchemaExtensions
+	eWorkflowStepGroupSummary                                      smithy.SchemaExtensions
+	eWorkflowStepGroupSummary_id                                   smithy.SchemaExtensions
+	eWorkflowStepGroupSummary_name                                 smithy.SchemaExtensions
+	eWorkflowStepGroupSummary_owner                                smithy.SchemaExtensions
+	eWorkflowStepGroupSummary_status                               smithy.SchemaExtensions
+	eWorkflowStepGroupSummary_previous                             smithy.SchemaExtensions
+	eWorkflowStepGroupSummary_next                                 smithy.SchemaExtensions
+	eWorkflowStepOutput                                            smithy.SchemaExtensions
+	eWorkflowStepOutput_name                                       smithy.SchemaExtensions
+	eWorkflowStepOutput_dataType                                   smithy.SchemaExtensions
+	eWorkflowStepOutput_required                                   smithy.SchemaExtensions
+	eWorkflowStepOutput_value                                      smithy.SchemaExtensions
+	e_WorkflowStepOutputList                                       smithy.SchemaExtensions
+	e_WorkflowStepOutputList_member                                smithy.SchemaExtensions
+	e_WorkflowStepOutputName                                       smithy.SchemaExtensions
+	eWorkflowStepOutputUnion                                       smithy.SchemaExtensions
+	eWorkflowStepOutputUnion_integerValue                          smithy.SchemaExtensions
+	eWorkflowStepOutputUnion_stringValue                           smithy.SchemaExtensions
+	eWorkflowStepOutputUnion_listOfStringValue                     smithy.SchemaExtensions
+	e_WorkflowStepsSummaryList                                     smithy.SchemaExtensions
+	e_WorkflowStepsSummaryList_member                              smithy.SchemaExtensions
+	eWorkflowStepSummary                                           smithy.SchemaExtensions
+	eWorkflowStepSummary_stepId                                    smithy.SchemaExtensions
+	eWorkflowStepSummary_name                                      smithy.SchemaExtensions
+	eWorkflowStepSummary_stepActionType                            smithy.SchemaExtensions
+	eWorkflowStepSummary_owner                                     smithy.SchemaExtensions
+	eWorkflowStepSummary_previous                                  smithy.SchemaExtensions
+	eWorkflowStepSummary_next                                      smithy.SchemaExtensions
+	eWorkflowStepSummary_status                                    smithy.SchemaExtensions
+	eWorkflowStepSummary_statusMessage                             smithy.SchemaExtensions
+	eWorkflowStepSummary_noOfSrvCompleted                          smithy.SchemaExtensions
+	eWorkflowStepSummary_noOfSrvFailed                             smithy.SchemaExtensions
+	eWorkflowStepSummary_totalNoOfSrv                              smithy.SchemaExtensions
+	eWorkflowStepSummary_description                               smithy.SchemaExtensions
+	eWorkflowStepSummary_scriptLocation                            smithy.SchemaExtensions
+	eCreateTemplateRequest                                         smithy.SchemaExtensions
+	eCreateTemplateRequest_templateName                            smithy.SchemaExtensions
+	eCreateTemplateRequest_templateDescription                     smithy.SchemaExtensions
+	eCreateTemplateRequest_templateSource                          smithy.SchemaExtensions
+	eCreateTemplateRequest_clientToken                             smithy.SchemaExtensions
+	eCreateTemplateRequest_tags                                    smithy.SchemaExtensions
+	eCreateTemplateResponse                                        smithy.SchemaExtensions
+	eCreateTemplateResponse_templateId                             smithy.SchemaExtensions
+	eCreateTemplateResponse_templateArn                            smithy.SchemaExtensions
+	eCreateTemplateResponse_tags                                   smithy.SchemaExtensions
+	eCreateMigrationWorkflowRequest                                smithy.SchemaExtensions
+	eCreateMigrationWorkflowRequest_name                           smithy.SchemaExtensions
+	eCreateMigrationWorkflowRequest_description                    smithy.SchemaExtensions
+	eCreateMigrationWorkflowRequest_templateId                     smithy.SchemaExtensions
+	eCreateMigrationWorkflowRequest_applicationConfigurationId     smithy.SchemaExtensions
+	eCreateMigrationWorkflowRequest_inputParameters                smithy.SchemaExtensions
+	eCreateMigrationWorkflowRequest_stepTargets                    smithy.SchemaExtensions
+	eCreateMigrationWorkflowRequest_tags                           smithy.SchemaExtensions
+	eCreateMigrationWorkflowResponse                               smithy.SchemaExtensions
+	eCreateMigrationWorkflowResponse_id                            smithy.SchemaExtensions
+	eCreateMigrationWorkflowResponse_arn                           smithy.SchemaExtensions
+	eCreateMigrationWorkflowResponse_name                          smithy.SchemaExtensions
+	eCreateMigrationWorkflowResponse_description                   smithy.SchemaExtensions
+	eCreateMigrationWorkflowResponse_templateId                    smithy.SchemaExtensions
+	eCreateMigrationWorkflowResponse_adsApplicationConfigurationId smithy.SchemaExtensions
+	eCreateMigrationWorkflowResponse_workflowInputs                smithy.SchemaExtensions
+	eCreateMigrationWorkflowResponse_stepTargets                   smithy.SchemaExtensions
+	eCreateMigrationWorkflowResponse_status                        smithy.SchemaExtensions
+	eCreateMigrationWorkflowResponse_creationTime                  smithy.SchemaExtensions
+	eCreateMigrationWorkflowResponse_tags                          smithy.SchemaExtensions
+	eCreateWorkflowStepGroupRequest                                smithy.SchemaExtensions
+	eCreateWorkflowStepGroupRequest_workflowId                     smithy.SchemaExtensions
+	eCreateWorkflowStepGroupRequest_name                           smithy.SchemaExtensions
+	eCreateWorkflowStepGroupRequest_description                    smithy.SchemaExtensions
+	eCreateWorkflowStepGroupRequest_next                           smithy.SchemaExtensions
+	eCreateWorkflowStepGroupRequest_previous                       smithy.SchemaExtensions
+	eCreateWorkflowStepGroupResponse                               smithy.SchemaExtensions
+	eCreateWorkflowStepGroupResponse_workflowId                    smithy.SchemaExtensions
+	eCreateWorkflowStepGroupResponse_name                          smithy.SchemaExtensions
+	eCreateWorkflowStepGroupResponse_id                            smithy.SchemaExtensions
+	eCreateWorkflowStepGroupResponse_description                   smithy.SchemaExtensions
+	eCreateWorkflowStepGroupResponse_tools                         smithy.SchemaExtensions
+	eCreateWorkflowStepGroupResponse_next                          smithy.SchemaExtensions
+	eCreateWorkflowStepGroupResponse_previous                      smithy.SchemaExtensions
+	eCreateWorkflowStepGroupResponse_creationTime                  smithy.SchemaExtensions
+	eCreateWorkflowStepRequest                                     smithy.SchemaExtensions
+	eCreateWorkflowStepRequest_name                                smithy.SchemaExtensions
+	eCreateWorkflowStepRequest_stepGroupId                         smithy.SchemaExtensions
+	eCreateWorkflowStepRequest_workflowId                          smithy.SchemaExtensions
+	eCreateWorkflowStepRequest_stepActionType                      smithy.SchemaExtensions
+	eCreateWorkflowStepRequest_description                         smithy.SchemaExtensions
+	eCreateWorkflowStepRequest_workflowStepAutomationConfiguration smithy.SchemaExtensions
+	eCreateWorkflowStepRequest_stepTarget                          smithy.SchemaExtensions
+	eCreateWorkflowStepRequest_outputs                             smithy.SchemaExtensions
+	eCreateWorkflowStepRequest_previous                            smithy.SchemaExtensions
+	eCreateWorkflowStepRequest_next                                smithy.SchemaExtensions
+	eCreateWorkflowStepResponse                                    smithy.SchemaExtensions
+	eCreateWorkflowStepResponse_id                                 smithy.SchemaExtensions
+	eCreateWorkflowStepResponse_stepGroupId                        smithy.SchemaExtensions
+	eCreateWorkflowStepResponse_workflowId                         smithy.SchemaExtensions
+	eCreateWorkflowStepResponse_name                               smithy.SchemaExtensions
+	eDeleteTemplateRequest                                         smithy.SchemaExtensions
+	eDeleteTemplateRequest_id                                      smithy.SchemaExtensions
+	eDeleteTemplateResponse                                        smithy.SchemaExtensions
+	eDeleteMigrationWorkflowRequest                                smithy.SchemaExtensions
+	eDeleteMigrationWorkflowRequest_id                             smithy.SchemaExtensions
+	eDeleteMigrationWorkflowResponse                               smithy.SchemaExtensions
+	eDeleteMigrationWorkflowResponse_id                            smithy.SchemaExtensions
+	eDeleteMigrationWorkflowResponse_arn                           smithy.SchemaExtensions
+	eDeleteMigrationWorkflowResponse_status                        smithy.SchemaExtensions
+	eDeleteWorkflowStepGroupRequest                                smithy.SchemaExtensions
+	eDeleteWorkflowStepGroupRequest_workflowId                     smithy.SchemaExtensions
+	eDeleteWorkflowStepGroupRequest_id                             smithy.SchemaExtensions
+	eDeleteWorkflowStepGroupResponse                               smithy.SchemaExtensions
+	eDeleteWorkflowStepRequest                                     smithy.SchemaExtensions
+	eDeleteWorkflowStepRequest_id                                  smithy.SchemaExtensions
+	eDeleteWorkflowStepRequest_stepGroupId                         smithy.SchemaExtensions
+	eDeleteWorkflowStepRequest_workflowId                          smithy.SchemaExtensions
+	eDeleteWorkflowStepResponse                                    smithy.SchemaExtensions
+	eGetMigrationWorkflowTemplateRequest                           smithy.SchemaExtensions
+	eGetMigrationWorkflowTemplateRequest_id                        smithy.SchemaExtensions
+	eGetMigrationWorkflowTemplateResponse                          smithy.SchemaExtensions
+	eGetMigrationWorkflowTemplateResponse_id                       smithy.SchemaExtensions
+	eGetMigrationWorkflowTemplateResponse_templateArn              smithy.SchemaExtensions
+	eGetMigrationWorkflowTemplateResponse_name                     smithy.SchemaExtensions
+	eGetMigrationWorkflowTemplateResponse_description              smithy.SchemaExtensions
+	eGetMigrationWorkflowTemplateResponse_inputs                   smithy.SchemaExtensions
+	eGetMigrationWorkflowTemplateResponse_tools                    smithy.SchemaExtensions
+	eGetMigrationWorkflowTemplateResponse_creationTime             smithy.SchemaExtensions
+	eGetMigrationWorkflowTemplateResponse_owner                    smithy.SchemaExtensions
+	eGetMigrationWorkflowTemplateResponse_status                   smithy.SchemaExtensions
+	eGetMigrationWorkflowTemplateResponse_statusMessage            smithy.SchemaExtensions
+	eGetMigrationWorkflowTemplateResponse_templateClass            smithy.SchemaExtensions
+	eGetMigrationWorkflowTemplateResponse_tags                     smithy.SchemaExtensions
+	eGetTemplateStepGroupRequest                                   smithy.SchemaExtensions
+	eGetTemplateStepGroupRequest_templateId                        smithy.SchemaExtensions
+	eGetTemplateStepGroupRequest_id                                smithy.SchemaExtensions
+	eGetTemplateStepGroupResponse                                  smithy.SchemaExtensions
+	eGetTemplateStepGroupResponse_templateId                       smithy.SchemaExtensions
+	eGetTemplateStepGroupResponse_id                               smithy.SchemaExtensions
+	eGetTemplateStepGroupResponse_name                             smithy.SchemaExtensions
+	eGetTemplateStepGroupResponse_description                      smithy.SchemaExtensions
+	eGetTemplateStepGroupResponse_status                           smithy.SchemaExtensions
+	eGetTemplateStepGroupResponse_creationTime                     smithy.SchemaExtensions
+	eGetTemplateStepGroupResponse_lastModifiedTime                 smithy.SchemaExtensions
+	eGetTemplateStepGroupResponse_tools                            smithy.SchemaExtensions
+	eGetTemplateStepGroupResponse_previous                         smithy.SchemaExtensions
+	eGetTemplateStepGroupResponse_next                             smithy.SchemaExtensions
+	eGetTemplateStepRequest                                        smithy.SchemaExtensions
+	eGetTemplateStepRequest_id                                     smithy.SchemaExtensions
+	eGetTemplateStepRequest_templateId                             smithy.SchemaExtensions
+	eGetTemplateStepRequest_stepGroupId                            smithy.SchemaExtensions
+	eGetTemplateStepResponse                                       smithy.SchemaExtensions
+	eGetTemplateStepResponse_id                                    smithy.SchemaExtensions
+	eGetTemplateStepResponse_stepGroupId                           smithy.SchemaExtensions
+	eGetTemplateStepResponse_templateId                            smithy.SchemaExtensions
+	eGetTemplateStepResponse_name                                  smithy.SchemaExtensions
+	eGetTemplateStepResponse_description                           smithy.SchemaExtensions
+	eGetTemplateStepResponse_stepActionType                        smithy.SchemaExtensions
+	eGetTemplateStepResponse_creationTime                          smithy.SchemaExtensions
+	eGetTemplateStepResponse_previous                              smithy.SchemaExtensions
+	eGetTemplateStepResponse_next                                  smithy.SchemaExtensions
+	eGetTemplateStepResponse_outputs                               smithy.SchemaExtensions
+	eGetTemplateStepResponse_stepAutomationConfiguration           smithy.SchemaExtensions
+	eGetMigrationWorkflowRequest                                   smithy.SchemaExtensions
+	eGetMigrationWorkflowRequest_id                                smithy.SchemaExtensions
+	eGetMigrationWorkflowResponse                                  smithy.SchemaExtensions
+	eGetMigrationWorkflowResponse_id                               smithy.SchemaExtensions
+	eGetMigrationWorkflowResponse_arn                              smithy.SchemaExtensions
+	eGetMigrationWorkflowResponse_name                             smithy.SchemaExtensions
+	eGetMigrationWorkflowResponse_description                      smithy.SchemaExtensions
+	eGetMigrationWorkflowResponse_templateId                       smithy.SchemaExtensions
+	eGetMigrationWorkflowResponse_adsApplicationConfigurationId    smithy.SchemaExtensions
+	eGetMigrationWorkflowResponse_adsApplicationName               smithy.SchemaExtensions
+	eGetMigrationWorkflowResponse_status                           smithy.SchemaExtensions
+	eGetMigrationWorkflowResponse_statusMessage                    smithy.SchemaExtensions
+	eGetMigrationWorkflowResponse_creationTime                     smithy.SchemaExtensions
+	eGetMigrationWorkflowResponse_lastStartTime                    smithy.SchemaExtensions
+	eGetMigrationWorkflowResponse_lastStopTime                     smithy.SchemaExtensions
+	eGetMigrationWorkflowResponse_lastModifiedTime                 smithy.SchemaExtensions
+	eGetMigrationWorkflowResponse_endTime                          smithy.SchemaExtensions
+	eGetMigrationWorkflowResponse_tools                            smithy.SchemaExtensions
+	eGetMigrationWorkflowResponse_totalSteps                       smithy.SchemaExtensions
+	eGetMigrationWorkflowResponse_completedSteps                   smithy.SchemaExtensions
+	eGetMigrationWorkflowResponse_workflowInputs                   smithy.SchemaExtensions
+	eGetMigrationWorkflowResponse_tags                             smithy.SchemaExtensions
+	eGetMigrationWorkflowResponse_workflowBucket                   smithy.SchemaExtensions
+	eGetWorkflowStepGroupRequest                                   smithy.SchemaExtensions
+	eGetWorkflowStepGroupRequest_id                                smithy.SchemaExtensions
+	eGetWorkflowStepGroupRequest_workflowId                        smithy.SchemaExtensions
+	eGetWorkflowStepGroupResponse                                  smithy.SchemaExtensions
+	eGetWorkflowStepGroupResponse_id                               smithy.SchemaExtensions
+	eGetWorkflowStepGroupResponse_workflowId                       smithy.SchemaExtensions
+	eGetWorkflowStepGroupResponse_name                             smithy.SchemaExtensions
+	eGetWorkflowStepGroupResponse_description                      smithy.SchemaExtensions
+	eGetWorkflowStepGroupResponse_status                           smithy.SchemaExtensions
+	eGetWorkflowStepGroupResponse_owner                            smithy.SchemaExtensions
+	eGetWorkflowStepGroupResponse_creationTime                     smithy.SchemaExtensions
+	eGetWorkflowStepGroupResponse_lastModifiedTime                 smithy.SchemaExtensions
+	eGetWorkflowStepGroupResponse_endTime                          smithy.SchemaExtensions
+	eGetWorkflowStepGroupResponse_tools                            smithy.SchemaExtensions
+	eGetWorkflowStepGroupResponse_previous                         smithy.SchemaExtensions
+	eGetWorkflowStepGroupResponse_next                             smithy.SchemaExtensions
+	eGetWorkflowStepRequest                                        smithy.SchemaExtensions
+	eGetWorkflowStepRequest_workflowId                             smithy.SchemaExtensions
+	eGetWorkflowStepRequest_stepGroupId                            smithy.SchemaExtensions
+	eGetWorkflowStepRequest_id                                     smithy.SchemaExtensions
+	eGetWorkflowStepResponse                                       smithy.SchemaExtensions
+	eGetWorkflowStepResponse_name                                  smithy.SchemaExtensions
+	eGetWorkflowStepResponse_stepGroupId                           smithy.SchemaExtensions
+	eGetWorkflowStepResponse_workflowId                            smithy.SchemaExtensions
+	eGetWorkflowStepResponse_stepId                                smithy.SchemaExtensions
+	eGetWorkflowStepResponse_description                           smithy.SchemaExtensions
+	eGetWorkflowStepResponse_stepActionType                        smithy.SchemaExtensions
+	eGetWorkflowStepResponse_owner                                 smithy.SchemaExtensions
+	eGetWorkflowStepResponse_workflowStepAutomationConfiguration   smithy.SchemaExtensions
+	eGetWorkflowStepResponse_stepTarget                            smithy.SchemaExtensions
+	eGetWorkflowStepResponse_outputs                               smithy.SchemaExtensions
+	eGetWorkflowStepResponse_previous                              smithy.SchemaExtensions
+	eGetWorkflowStepResponse_next                                  smithy.SchemaExtensions
+	eGetWorkflowStepResponse_status                                smithy.SchemaExtensions
+	eGetWorkflowStepResponse_statusMessage                         smithy.SchemaExtensions
+	eGetWorkflowStepResponse_scriptOutputLocation                  smithy.SchemaExtensions
+	eGetWorkflowStepResponse_creationTime                          smithy.SchemaExtensions
+	eGetWorkflowStepResponse_lastStartTime                         smithy.SchemaExtensions
+	eGetWorkflowStepResponse_endTime                               smithy.SchemaExtensions
+	eGetWorkflowStepResponse_noOfSrvCompleted                      smithy.SchemaExtensions
+	eGetWorkflowStepResponse_noOfSrvFailed                         smithy.SchemaExtensions
+	eGetWorkflowStepResponse_totalNoOfSrv                          smithy.SchemaExtensions
+	eListPluginsRequest                                            smithy.SchemaExtensions
+	eListPluginsRequest_maxResults                                 smithy.SchemaExtensions
+	eListPluginsRequest_nextToken                                  smithy.SchemaExtensions
+	eListPluginsResponse                                           smithy.SchemaExtensions
+	eListPluginsResponse_nextToken                                 smithy.SchemaExtensions
+	eListPluginsResponse_plugins                                   smithy.SchemaExtensions
+	eListTagsForResourceRequest                                    smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceArn                        smithy.SchemaExtensions
+	eListTagsForResourceResponse                                   smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                              smithy.SchemaExtensions
+	eListMigrationWorkflowTemplatesRequest                         smithy.SchemaExtensions
+	eListMigrationWorkflowTemplatesRequest_maxResults              smithy.SchemaExtensions
+	eListMigrationWorkflowTemplatesRequest_nextToken               smithy.SchemaExtensions
+	eListMigrationWorkflowTemplatesRequest_name                    smithy.SchemaExtensions
+	eListMigrationWorkflowTemplatesResponse                        smithy.SchemaExtensions
+	eListMigrationWorkflowTemplatesResponse_nextToken              smithy.SchemaExtensions
+	eListMigrationWorkflowTemplatesResponse_templateSummary        smithy.SchemaExtensions
+	eListTemplateStepGroupsRequest                                 smithy.SchemaExtensions
+	eListTemplateStepGroupsRequest_maxResults                      smithy.SchemaExtensions
+	eListTemplateStepGroupsRequest_nextToken                       smithy.SchemaExtensions
+	eListTemplateStepGroupsRequest_templateId                      smithy.SchemaExtensions
+	eListTemplateStepGroupsResponse                                smithy.SchemaExtensions
+	eListTemplateStepGroupsResponse_nextToken                      smithy.SchemaExtensions
+	eListTemplateStepGroupsResponse_templateStepGroupSummary       smithy.SchemaExtensions
+	eListTemplateStepsRequest                                      smithy.SchemaExtensions
+	eListTemplateStepsRequest_maxResults                           smithy.SchemaExtensions
+	eListTemplateStepsRequest_nextToken                            smithy.SchemaExtensions
+	eListTemplateStepsRequest_templateId                           smithy.SchemaExtensions
+	eListTemplateStepsRequest_stepGroupId                          smithy.SchemaExtensions
+	eListTemplateStepsResponse                                     smithy.SchemaExtensions
+	eListTemplateStepsResponse_nextToken                           smithy.SchemaExtensions
+	eListTemplateStepsResponse_templateStepSummaryList             smithy.SchemaExtensions
+	eListMigrationWorkflowsRequest                                 smithy.SchemaExtensions
+	eListMigrationWorkflowsRequest_maxResults                      smithy.SchemaExtensions
+	eListMigrationWorkflowsRequest_nextToken                       smithy.SchemaExtensions
+	eListMigrationWorkflowsRequest_templateId                      smithy.SchemaExtensions
+	eListMigrationWorkflowsRequest_adsApplicationConfigurationName smithy.SchemaExtensions
+	eListMigrationWorkflowsRequest_status                          smithy.SchemaExtensions
+	eListMigrationWorkflowsRequest_name                            smithy.SchemaExtensions
+	eListMigrationWorkflowsResponse                                smithy.SchemaExtensions
+	eListMigrationWorkflowsResponse_nextToken                      smithy.SchemaExtensions
+	eListMigrationWorkflowsResponse_migrationWorkflowSummary       smithy.SchemaExtensions
+	eListWorkflowStepGroupsRequest                                 smithy.SchemaExtensions
+	eListWorkflowStepGroupsRequest_nextToken                       smithy.SchemaExtensions
+	eListWorkflowStepGroupsRequest_maxResults                      smithy.SchemaExtensions
+	eListWorkflowStepGroupsRequest_workflowId                      smithy.SchemaExtensions
+	eListWorkflowStepGroupsResponse                                smithy.SchemaExtensions
+	eListWorkflowStepGroupsResponse_nextToken                      smithy.SchemaExtensions
+	eListWorkflowStepGroupsResponse_workflowStepGroupsSummary      smithy.SchemaExtensions
+	eListWorkflowStepsRequest                                      smithy.SchemaExtensions
+	eListWorkflowStepsRequest_nextToken                            smithy.SchemaExtensions
+	eListWorkflowStepsRequest_maxResults                           smithy.SchemaExtensions
+	eListWorkflowStepsRequest_workflowId                           smithy.SchemaExtensions
+	eListWorkflowStepsRequest_stepGroupId                          smithy.SchemaExtensions
+	eListWorkflowStepsResponse                                     smithy.SchemaExtensions
+	eListWorkflowStepsResponse_nextToken                           smithy.SchemaExtensions
+	eListWorkflowStepsResponse_workflowStepsSummary                smithy.SchemaExtensions
+	eRetryWorkflowStepRequest                                      smithy.SchemaExtensions
+	eRetryWorkflowStepRequest_workflowId                           smithy.SchemaExtensions
+	eRetryWorkflowStepRequest_stepGroupId                          smithy.SchemaExtensions
+	eRetryWorkflowStepRequest_id                                   smithy.SchemaExtensions
+	eRetryWorkflowStepResponse                                     smithy.SchemaExtensions
+	eRetryWorkflowStepResponse_stepGroupId                         smithy.SchemaExtensions
+	eRetryWorkflowStepResponse_workflowId                          smithy.SchemaExtensions
+	eRetryWorkflowStepResponse_id                                  smithy.SchemaExtensions
+	eRetryWorkflowStepResponse_status                              smithy.SchemaExtensions
+	eStartMigrationWorkflowRequest                                 smithy.SchemaExtensions
+	eStartMigrationWorkflowRequest_id                              smithy.SchemaExtensions
+	eStartMigrationWorkflowResponse                                smithy.SchemaExtensions
+	eStartMigrationWorkflowResponse_id                             smithy.SchemaExtensions
+	eStartMigrationWorkflowResponse_arn                            smithy.SchemaExtensions
+	eStartMigrationWorkflowResponse_status                         smithy.SchemaExtensions
+	eStartMigrationWorkflowResponse_statusMessage                  smithy.SchemaExtensions
+	eStartMigrationWorkflowResponse_lastStartTime                  smithy.SchemaExtensions
+	eStopMigrationWorkflowRequest                                  smithy.SchemaExtensions
+	eStopMigrationWorkflowRequest_id                               smithy.SchemaExtensions
+	eStopMigrationWorkflowResponse                                 smithy.SchemaExtensions
+	eStopMigrationWorkflowResponse_id                              smithy.SchemaExtensions
+	eStopMigrationWorkflowResponse_arn                             smithy.SchemaExtensions
+	eStopMigrationWorkflowResponse_status                          smithy.SchemaExtensions
+	eStopMigrationWorkflowResponse_statusMessage                   smithy.SchemaExtensions
+	eStopMigrationWorkflowResponse_lastStopTime                    smithy.SchemaExtensions
+	eTagResourceRequest                                            smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                                smithy.SchemaExtensions
+	eTagResourceRequest_tags                                       smithy.SchemaExtensions
+	eTagResourceResponse                                           smithy.SchemaExtensions
+	eUntagResourceRequest                                          smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                              smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                                  smithy.SchemaExtensions
+	eUntagResourceResponse                                         smithy.SchemaExtensions
+	eUpdateTemplateRequest                                         smithy.SchemaExtensions
+	eUpdateTemplateRequest_id                                      smithy.SchemaExtensions
+	eUpdateTemplateRequest_templateName                            smithy.SchemaExtensions
+	eUpdateTemplateRequest_templateDescription                     smithy.SchemaExtensions
+	eUpdateTemplateRequest_clientToken                             smithy.SchemaExtensions
+	eUpdateTemplateResponse                                        smithy.SchemaExtensions
+	eUpdateTemplateResponse_templateId                             smithy.SchemaExtensions
+	eUpdateTemplateResponse_templateArn                            smithy.SchemaExtensions
+	eUpdateTemplateResponse_tags                                   smithy.SchemaExtensions
+	eUpdateMigrationWorkflowRequest                                smithy.SchemaExtensions
+	eUpdateMigrationWorkflowRequest_id                             smithy.SchemaExtensions
+	eUpdateMigrationWorkflowRequest_name                           smithy.SchemaExtensions
+	eUpdateMigrationWorkflowRequest_description                    smithy.SchemaExtensions
+	eUpdateMigrationWorkflowRequest_inputParameters                smithy.SchemaExtensions
+	eUpdateMigrationWorkflowRequest_stepTargets                    smithy.SchemaExtensions
+	eUpdateMigrationWorkflowResponse                               smithy.SchemaExtensions
+	eUpdateMigrationWorkflowResponse_id                            smithy.SchemaExtensions
+	eUpdateMigrationWorkflowResponse_arn                           smithy.SchemaExtensions
+	eUpdateMigrationWorkflowResponse_name                          smithy.SchemaExtensions
+	eUpdateMigrationWorkflowResponse_description                   smithy.SchemaExtensions
+	eUpdateMigrationWorkflowResponse_templateId                    smithy.SchemaExtensions
+	eUpdateMigrationWorkflowResponse_adsApplicationConfigurationId smithy.SchemaExtensions
+	eUpdateMigrationWorkflowResponse_workflowInputs                smithy.SchemaExtensions
+	eUpdateMigrationWorkflowResponse_stepTargets                   smithy.SchemaExtensions
+	eUpdateMigrationWorkflowResponse_status                        smithy.SchemaExtensions
+	eUpdateMigrationWorkflowResponse_creationTime                  smithy.SchemaExtensions
+	eUpdateMigrationWorkflowResponse_lastModifiedTime              smithy.SchemaExtensions
+	eUpdateMigrationWorkflowResponse_tags                          smithy.SchemaExtensions
+	eUpdateWorkflowStepGroupRequest                                smithy.SchemaExtensions
+	eUpdateWorkflowStepGroupRequest_workflowId                     smithy.SchemaExtensions
+	eUpdateWorkflowStepGroupRequest_id                             smithy.SchemaExtensions
+	eUpdateWorkflowStepGroupRequest_name                           smithy.SchemaExtensions
+	eUpdateWorkflowStepGroupRequest_description                    smithy.SchemaExtensions
+	eUpdateWorkflowStepGroupRequest_next                           smithy.SchemaExtensions
+	eUpdateWorkflowStepGroupRequest_previous                       smithy.SchemaExtensions
+	eUpdateWorkflowStepGroupResponse                               smithy.SchemaExtensions
+	eUpdateWorkflowStepGroupResponse_workflowId                    smithy.SchemaExtensions
+	eUpdateWorkflowStepGroupResponse_name                          smithy.SchemaExtensions
+	eUpdateWorkflowStepGroupResponse_id                            smithy.SchemaExtensions
+	eUpdateWorkflowStepGroupResponse_description                   smithy.SchemaExtensions
+	eUpdateWorkflowStepGroupResponse_tools                         smithy.SchemaExtensions
+	eUpdateWorkflowStepGroupResponse_next                          smithy.SchemaExtensions
+	eUpdateWorkflowStepGroupResponse_previous                      smithy.SchemaExtensions
+	eUpdateWorkflowStepGroupResponse_lastModifiedTime              smithy.SchemaExtensions
+	eUpdateWorkflowStepRequest                                     smithy.SchemaExtensions
+	eUpdateWorkflowStepRequest_id                                  smithy.SchemaExtensions
+	eUpdateWorkflowStepRequest_stepGroupId                         smithy.SchemaExtensions
+	eUpdateWorkflowStepRequest_workflowId                          smithy.SchemaExtensions
+	eUpdateWorkflowStepRequest_name                                smithy.SchemaExtensions
+	eUpdateWorkflowStepRequest_description                         smithy.SchemaExtensions
+	eUpdateWorkflowStepRequest_stepActionType                      smithy.SchemaExtensions
+	eUpdateWorkflowStepRequest_workflowStepAutomationConfiguration smithy.SchemaExtensions
+	eUpdateWorkflowStepRequest_stepTarget                          smithy.SchemaExtensions
+	eUpdateWorkflowStepRequest_outputs                             smithy.SchemaExtensions
+	eUpdateWorkflowStepRequest_previous                            smithy.SchemaExtensions
+	eUpdateWorkflowStepRequest_next                                smithy.SchemaExtensions
+	eUpdateWorkflowStepRequest_status                              smithy.SchemaExtensions
+	eUpdateWorkflowStepResponse                                    smithy.SchemaExtensions
+	eUpdateWorkflowStepResponse_id                                 smithy.SchemaExtensions
+	eUpdateWorkflowStepResponse_stepGroupId                        smithy.SchemaExtensions
+	eUpdateWorkflowStepResponse_workflowId                         smithy.SchemaExtensions
+	eUpdateWorkflowStepResponse_name                               smithy.SchemaExtensions
+)
 
 var (
 	iCreateTemplate                         = smithy.ShapeID{Namespace: "com.amazonaws.migrationhuborchestrator", Name: "CreateTemplate"}
@@ -446,574 +1012,574 @@ var mUpdateWorkflowStepRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sU
 }}
 var mUpdateWorkflowStepResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWorkflowStepResponse_id, &sUpdateWorkflowStepResponse_stepGroupId, &sUpdateWorkflowStepResponse_workflowId, &sUpdateWorkflowStepResponse_name}}
 
-var sCreateTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTemplate, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCreateWorkflow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkflow, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sCreateWorkflowStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkflowStep, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sCreateWorkflowStepGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkflowStepGroup, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sDeleteTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTemplate, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sDeleteWorkflow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkflow, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sDeleteWorkflowStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkflowStep, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sDeleteWorkflowStepGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkflowStepGroup, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sGetTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplate, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sGetTemplateStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplateStep, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sGetTemplateStepGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplateStepGroup, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sGetWorkflow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflow, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sGetWorkflowStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflowStep, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sGetWorkflowStepGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflowStepGroup, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sListPlugins = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPlugins, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sListTemplates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTemplates, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sListTemplateStepGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTemplateStepGroups, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sListTemplateSteps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTemplateSteps, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sListWorkflows = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflows, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var sListWorkflowStepGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowStepGroups, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &ext[20]})
-var sListWorkflowSteps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowSteps, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &ext[21]})
-var sRetryWorkflowStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryWorkflowStep, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &ext[22]})
-var sStartWorkflow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartWorkflow, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &ext[23]})
-var sStopWorkflow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopWorkflow, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &ext[24]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &ext[25]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &ext[26]})
-var sUpdateTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTemplate, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &ext[27]})
-var sUpdateWorkflow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkflow, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &ext[28]})
-var sUpdateWorkflowStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkflowStep, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &ext[29]})
-var sUpdateWorkflowStepGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkflowStepGroup, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &ext[30]})
-var s_AWSMigrationHubOrchestrator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSMigrationHubOrchestrator, Type: smithy.ShapeTypeService, Ext: &ext[31]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &ext[32]})
-var s_ApplicationConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationConfigurationName, Type: smithy.ShapeTypeString, Ext: &ext[34]})
-var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &ext[36]})
-var s_DataType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataType, Type: smithy.ShapeTypeString, Ext: &ext[38]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &ext[39]})
-var s_IPAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPAddress, Type: smithy.ShapeTypeString, Ext: &ext[41]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[42]})
-var s_MaxStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxStringList, Members: &m_MaxStringList, Type: smithy.ShapeTypeList, Ext: &ext[43]})
-var s_MaxStringValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxStringValue, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var s_MigrationWorkflowDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationWorkflowDescription, Type: smithy.ShapeTypeString, Ext: &ext[46]})
-var s_MigrationWorkflowId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationWorkflowId, Type: smithy.ShapeTypeString, Ext: &ext[47]})
-var s_MigrationWorkflowName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationWorkflowName, Type: smithy.ShapeTypeString, Ext: &ext[48]})
-var s_MigrationWorkflowStatusEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationWorkflowStatusEnum, Type: smithy.ShapeTypeString, Ext: &ext[49]})
-var sMigrationWorkflowSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationWorkflowSummary, Members: &mMigrationWorkflowSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[50]})
-var s_MigrationWorkflowSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationWorkflowSummaryList, Members: &m_MigrationWorkflowSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[61]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[63]})
-var s_Owner = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Owner, Type: smithy.ShapeTypeString, Ext: &ext[64]})
-var sPlatformCommand = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlatformCommand, Members: &mPlatformCommand, Type: smithy.ShapeTypeStructure, Ext: &ext[65]})
-var sPlatformScriptKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlatformScriptKey, Members: &mPlatformScriptKey, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var s_PluginHealth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PluginHealth, Type: smithy.ShapeTypeString, Ext: &ext[71]})
-var s_PluginId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PluginId, Type: smithy.ShapeTypeString, Ext: &ext[72]})
-var s_PluginSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PluginSummaries, Members: &m_PluginSummaries, Type: smithy.ShapeTypeList, Ext: &ext[73]})
-var sPluginSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPluginSummary, Members: &mPluginSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[75]})
-var s_PluginVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PluginVersion, Type: smithy.ShapeTypeString, Ext: &ext[82]})
-var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t34, Type: smithy.ShapeTypeStructure, Ext: &ext[84]})
-var s_RunEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RunEnvironment, Type: smithy.ShapeTypeString, Ext: &ext[86]})
-var s_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Bucket, Type: smithy.ShapeTypeString, Ext: &ext[87]})
-var s_S3Key = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Key, Type: smithy.ShapeTypeString, Ext: &ext[88]})
-var s_StepActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepActionType, Type: smithy.ShapeTypeString, Ext: &ext[89]})
-var sStepAutomationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStepAutomationConfiguration, Members: &mStepAutomationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[90]})
-var s_StepDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepDescription, Type: smithy.ShapeTypeString, Ext: &ext[96]})
-var s_StepGroupDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepGroupDescription, Type: smithy.ShapeTypeString, Ext: &ext[97]})
-var s_StepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepGroupId, Type: smithy.ShapeTypeString, Ext: &ext[98]})
-var s_StepGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepGroupName, Type: smithy.ShapeTypeString, Ext: &ext[99]})
-var s_StepGroupStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepGroupStatus, Type: smithy.ShapeTypeString, Ext: &ext[100]})
-var s_StepId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepId, Type: smithy.ShapeTypeString, Ext: &ext[101]})
-var sStepInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStepInput, Members: &mStepInput, Type: smithy.ShapeTypeUnion, Ext: &ext[102]})
-var s_StepInputParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepInputParameters, Members: &m_StepInputParameters, Traits: &t35, Type: smithy.ShapeTypeMap, Ext: &ext[107]})
-var s_StepInputParametersKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepInputParametersKey, Type: smithy.ShapeTypeString, Ext: &ext[110]})
-var s_StepName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepName, Type: smithy.ShapeTypeString, Ext: &ext[111]})
-var sStepOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStepOutput, Members: &mStepOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[112]})
-var s_StepOutputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepOutputList, Members: &m_StepOutputList, Type: smithy.ShapeTypeList, Ext: &ext[116]})
-var s_StepStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepStatus, Type: smithy.ShapeTypeString, Ext: &ext[118]})
-var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[119]})
-var s_StringListMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringListMember, Type: smithy.ShapeTypeString, Ext: &ext[121]})
-var s_StringMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap, Ext: &ext[122]})
-var s_StringMapKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringMapKey, Type: smithy.ShapeTypeString, Ext: &ext[125]})
-var s_StringMapValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringMapValue, Type: smithy.ShapeTypeString, Ext: &ext[126]})
-var s_StringValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringValue, Type: smithy.ShapeTypeString, Ext: &ext[127]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[128]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[129]})
-var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[131]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[134]})
-var s_TargetType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetType, Type: smithy.ShapeTypeString, Ext: &ext[135]})
-var s_TemplateId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateId, Type: smithy.ShapeTypeString, Ext: &ext[136]})
-var sTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplateInput, Members: &mTemplateInput, Type: smithy.ShapeTypeStructure, Ext: &ext[137]})
-var s_TemplateInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateInputList, Members: &m_TemplateInputList, Type: smithy.ShapeTypeList, Ext: &ext[141]})
-var s_TemplateInputName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateInputName, Type: smithy.ShapeTypeString, Ext: &ext[143]})
-var s_TemplateName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateName, Type: smithy.ShapeTypeString, Ext: &ext[144]})
-var sTemplateSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplateSource, Members: &mTemplateSource, Type: smithy.ShapeTypeUnion, Ext: &ext[145]})
-var s_TemplateStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateStatus, Type: smithy.ShapeTypeString, Ext: &ext[147]})
-var sTemplateStepGroupSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplateStepGroupSummary, Members: &mTemplateStepGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[148]})
-var s_TemplateStepGroupSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateStepGroupSummaryList, Members: &m_TemplateStepGroupSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[153]})
-var sTemplateStepSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplateStepSummary, Members: &mTemplateStepSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[155]})
-var s_TemplateStepSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateStepSummaryList, Members: &m_TemplateStepSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[165]})
-var sTemplateSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplateSummary, Members: &mTemplateSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[167]})
-var s_TemplateSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateSummaryList, Members: &m_TemplateSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[172]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &ext[174]})
-var sTool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTool, Members: &mTool, Type: smithy.ShapeTypeStructure, Ext: &ext[176]})
-var s_ToolsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ToolsList, Members: &m_ToolsList, Type: smithy.ShapeTypeList, Ext: &ext[179]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &ext[181]})
-var sWorkflowStepAutomationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowStepAutomationConfiguration, Members: &mWorkflowStepAutomationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[183]})
-var s_WorkflowStepGroupsSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowStepGroupsSummaryList, Members: &m_WorkflowStepGroupsSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[189]})
-var sWorkflowStepGroupSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowStepGroupSummary, Members: &mWorkflowStepGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[191]})
-var sWorkflowStepOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowStepOutput, Members: &mWorkflowStepOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[198]})
-var s_WorkflowStepOutputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowStepOutputList, Members: &m_WorkflowStepOutputList, Type: smithy.ShapeTypeList, Ext: &ext[203]})
-var s_WorkflowStepOutputName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowStepOutputName, Type: smithy.ShapeTypeString, Ext: &ext[205]})
-var sWorkflowStepOutputUnion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowStepOutputUnion, Members: &mWorkflowStepOutputUnion, Type: smithy.ShapeTypeUnion, Ext: &ext[206]})
-var s_WorkflowStepsSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowStepsSummaryList, Members: &m_WorkflowStepsSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[210]})
-var sWorkflowStepSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowStepSummary, Members: &mWorkflowStepSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[212]})
-var sCreateTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTemplateRequest, Members: &mCreateTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[226]})
-var sCreateTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTemplateResponse, Members: &mCreateTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[232]})
-var sCreateMigrationWorkflowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMigrationWorkflowRequest, Members: &mCreateMigrationWorkflowRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[236]})
-var sCreateMigrationWorkflowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMigrationWorkflowResponse, Members: &mCreateMigrationWorkflowResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[244]})
-var sCreateWorkflowStepGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkflowStepGroupRequest, Members: &mCreateWorkflowStepGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[256]})
-var sCreateWorkflowStepGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkflowStepGroupResponse, Members: &mCreateWorkflowStepGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[262]})
-var sCreateWorkflowStepRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkflowStepRequest, Members: &mCreateWorkflowStepRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[271]})
-var sCreateWorkflowStepResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkflowStepResponse, Members: &mCreateWorkflowStepResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[282]})
-var sDeleteTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTemplateRequest, Members: &mDeleteTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[287]})
-var sDeleteTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[289]})
-var sDeleteMigrationWorkflowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMigrationWorkflowRequest, Members: &mDeleteMigrationWorkflowRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[290]})
-var sDeleteMigrationWorkflowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMigrationWorkflowResponse, Members: &mDeleteMigrationWorkflowResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[292]})
-var sDeleteWorkflowStepGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkflowStepGroupRequest, Members: &mDeleteWorkflowStepGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[296]})
-var sDeleteWorkflowStepGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkflowStepGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[299]})
-var sDeleteWorkflowStepRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkflowStepRequest, Members: &mDeleteWorkflowStepRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[300]})
-var sDeleteWorkflowStepResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkflowStepResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[304]})
-var sGetMigrationWorkflowTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMigrationWorkflowTemplateRequest, Members: &mGetMigrationWorkflowTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[305]})
-var sGetMigrationWorkflowTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMigrationWorkflowTemplateResponse, Members: &mGetMigrationWorkflowTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[307]})
-var sGetTemplateStepGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplateStepGroupRequest, Members: &mGetTemplateStepGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[320]})
-var sGetTemplateStepGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplateStepGroupResponse, Members: &mGetTemplateStepGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[323]})
-var sGetTemplateStepRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplateStepRequest, Members: &mGetTemplateStepRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[334]})
-var sGetTemplateStepResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplateStepResponse, Members: &mGetTemplateStepResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[338]})
-var sGetMigrationWorkflowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMigrationWorkflowRequest, Members: &mGetMigrationWorkflowRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[350]})
-var sGetMigrationWorkflowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMigrationWorkflowResponse, Members: &mGetMigrationWorkflowResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[352]})
-var sGetWorkflowStepGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflowStepGroupRequest, Members: &mGetWorkflowStepGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[373]})
-var sGetWorkflowStepGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflowStepGroupResponse, Members: &mGetWorkflowStepGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[376]})
-var sGetWorkflowStepRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflowStepRequest, Members: &mGetWorkflowStepRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[389]})
-var sGetWorkflowStepResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflowStepResponse, Members: &mGetWorkflowStepResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[393]})
-var sListPluginsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPluginsRequest, Members: &mListPluginsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[415]})
-var sListPluginsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPluginsResponse, Members: &mListPluginsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[418]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[421]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[423]})
-var sListMigrationWorkflowTemplatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMigrationWorkflowTemplatesRequest, Members: &mListMigrationWorkflowTemplatesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[425]})
-var sListMigrationWorkflowTemplatesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMigrationWorkflowTemplatesResponse, Members: &mListMigrationWorkflowTemplatesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[429]})
-var sListTemplateStepGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTemplateStepGroupsRequest, Members: &mListTemplateStepGroupsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[432]})
-var sListTemplateStepGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTemplateStepGroupsResponse, Members: &mListTemplateStepGroupsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[436]})
-var sListTemplateStepsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTemplateStepsRequest, Members: &mListTemplateStepsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[439]})
-var sListTemplateStepsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTemplateStepsResponse, Members: &mListTemplateStepsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[444]})
-var sListMigrationWorkflowsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMigrationWorkflowsRequest, Members: &mListMigrationWorkflowsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[447]})
-var sListMigrationWorkflowsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMigrationWorkflowsResponse, Members: &mListMigrationWorkflowsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[454]})
-var sListWorkflowStepGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowStepGroupsRequest, Members: &mListWorkflowStepGroupsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[457]})
-var sListWorkflowStepGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowStepGroupsResponse, Members: &mListWorkflowStepGroupsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[461]})
-var sListWorkflowStepsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowStepsRequest, Members: &mListWorkflowStepsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[464]})
-var sListWorkflowStepsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowStepsResponse, Members: &mListWorkflowStepsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[469]})
-var sRetryWorkflowStepRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryWorkflowStepRequest, Members: &mRetryWorkflowStepRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[472]})
-var sRetryWorkflowStepResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryWorkflowStepResponse, Members: &mRetryWorkflowStepResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[476]})
-var sStartMigrationWorkflowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartMigrationWorkflowRequest, Members: &mStartMigrationWorkflowRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[481]})
-var sStartMigrationWorkflowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartMigrationWorkflowResponse, Members: &mStartMigrationWorkflowResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[483]})
-var sStopMigrationWorkflowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopMigrationWorkflowRequest, Members: &mStopMigrationWorkflowRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[489]})
-var sStopMigrationWorkflowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopMigrationWorkflowResponse, Members: &mStopMigrationWorkflowResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[491]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[497]})
-var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[500]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[501]})
-var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[504]})
-var sUpdateTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTemplateRequest, Members: &mUpdateTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[505]})
-var sUpdateTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTemplateResponse, Members: &mUpdateTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[510]})
-var sUpdateMigrationWorkflowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMigrationWorkflowRequest, Members: &mUpdateMigrationWorkflowRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[514]})
-var sUpdateMigrationWorkflowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMigrationWorkflowResponse, Members: &mUpdateMigrationWorkflowResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[520]})
-var sUpdateWorkflowStepGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkflowStepGroupRequest, Members: &mUpdateWorkflowStepGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[533]})
-var sUpdateWorkflowStepGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkflowStepGroupResponse, Members: &mUpdateWorkflowStepGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[540]})
-var sUpdateWorkflowStepRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkflowStepRequest, Members: &mUpdateWorkflowStepRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[549]})
-var sUpdateWorkflowStepResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkflowStepResponse, Members: &mUpdateWorkflowStepResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[562]})
+var sCreateTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTemplate, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateTemplate})
+var sCreateWorkflow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkflow, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateWorkflow})
+var sCreateWorkflowStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkflowStep, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateWorkflowStep})
+var sCreateWorkflowStepGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkflowStepGroup, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateWorkflowStepGroup})
+var sDeleteTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTemplate, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTemplate})
+var sDeleteWorkflow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkflow, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDeleteWorkflow})
+var sDeleteWorkflowStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkflowStep, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eDeleteWorkflowStep})
+var sDeleteWorkflowStepGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkflowStepGroup, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDeleteWorkflowStepGroup})
+var sGetTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplate, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eGetTemplate})
+var sGetTemplateStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplateStep, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eGetTemplateStep})
+var sGetTemplateStepGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplateStepGroup, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eGetTemplateStepGroup})
+var sGetWorkflow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflow, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eGetWorkflow})
+var sGetWorkflowStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflowStep, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eGetWorkflowStep})
+var sGetWorkflowStepGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflowStepGroup, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eGetWorkflowStepGroup})
+var sListPlugins = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPlugins, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eListPlugins})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListTemplates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTemplates, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eListTemplates})
+var sListTemplateStepGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTemplateStepGroups, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eListTemplateStepGroups})
+var sListTemplateSteps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTemplateSteps, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eListTemplateSteps})
+var sListWorkflows = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflows, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eListWorkflows})
+var sListWorkflowStepGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowStepGroups, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eListWorkflowStepGroups})
+var sListWorkflowSteps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowSteps, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eListWorkflowSteps})
+var sRetryWorkflowStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryWorkflowStep, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eRetryWorkflowStep})
+var sStartWorkflow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartWorkflow, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eStartWorkflow})
+var sStopWorkflow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopWorkflow, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eStopWorkflow})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTemplate, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eUpdateTemplate})
+var sUpdateWorkflow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkflow, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eUpdateWorkflow})
+var sUpdateWorkflowStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkflowStep, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eUpdateWorkflowStep})
+var sUpdateWorkflowStepGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkflowStepGroup, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eUpdateWorkflowStepGroup})
+var s_AWSMigrationHubOrchestrator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSMigrationHubOrchestrator, Type: smithy.ShapeTypeService, Ext: &e_AWSMigrationHubOrchestrator})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var s_ApplicationConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationConfigurationName, Type: smithy.ShapeTypeString, Ext: &e_ApplicationConfigurationName})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var s_DataType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataType, Type: smithy.ShapeTypeString, Ext: &e_DataType})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var s_IPAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPAddress, Type: smithy.ShapeTypeString, Ext: &e_IPAddress})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_MaxStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxStringList, Members: &m_MaxStringList, Type: smithy.ShapeTypeList, Ext: &e_MaxStringList})
+var s_MaxStringValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxStringValue, Type: smithy.ShapeTypeString, Ext: &e_MaxStringValue})
+var s_MigrationWorkflowDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationWorkflowDescription, Type: smithy.ShapeTypeString, Ext: &e_MigrationWorkflowDescription})
+var s_MigrationWorkflowId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationWorkflowId, Type: smithy.ShapeTypeString, Ext: &e_MigrationWorkflowId})
+var s_MigrationWorkflowName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationWorkflowName, Type: smithy.ShapeTypeString, Ext: &e_MigrationWorkflowName})
+var s_MigrationWorkflowStatusEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationWorkflowStatusEnum, Type: smithy.ShapeTypeString, Ext: &e_MigrationWorkflowStatusEnum})
+var sMigrationWorkflowSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationWorkflowSummary, Members: &mMigrationWorkflowSummary, Type: smithy.ShapeTypeStructure, Ext: &eMigrationWorkflowSummary})
+var s_MigrationWorkflowSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationWorkflowSummaryList, Members: &m_MigrationWorkflowSummaryList, Type: smithy.ShapeTypeList, Ext: &e_MigrationWorkflowSummaryList})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var s_Owner = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Owner, Type: smithy.ShapeTypeString, Ext: &e_Owner})
+var sPlatformCommand = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlatformCommand, Members: &mPlatformCommand, Type: smithy.ShapeTypeStructure, Ext: &ePlatformCommand})
+var sPlatformScriptKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlatformScriptKey, Members: &mPlatformScriptKey, Type: smithy.ShapeTypeStructure, Ext: &ePlatformScriptKey})
+var s_PluginHealth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PluginHealth, Type: smithy.ShapeTypeString, Ext: &e_PluginHealth})
+var s_PluginId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PluginId, Type: smithy.ShapeTypeString, Ext: &e_PluginId})
+var s_PluginSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PluginSummaries, Members: &m_PluginSummaries, Type: smithy.ShapeTypeList, Ext: &e_PluginSummaries})
+var sPluginSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPluginSummary, Members: &mPluginSummary, Type: smithy.ShapeTypeStructure, Ext: &ePluginSummary})
+var s_PluginVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PluginVersion, Type: smithy.ShapeTypeString, Ext: &e_PluginVersion})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArn})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t34, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var s_RunEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RunEnvironment, Type: smithy.ShapeTypeString, Ext: &e_RunEnvironment})
+var s_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Bucket, Type: smithy.ShapeTypeString, Ext: &e_S3Bucket})
+var s_S3Key = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Key, Type: smithy.ShapeTypeString, Ext: &e_S3Key})
+var s_StepActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepActionType, Type: smithy.ShapeTypeString, Ext: &e_StepActionType})
+var sStepAutomationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStepAutomationConfiguration, Members: &mStepAutomationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eStepAutomationConfiguration})
+var s_StepDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepDescription, Type: smithy.ShapeTypeString, Ext: &e_StepDescription})
+var s_StepGroupDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepGroupDescription, Type: smithy.ShapeTypeString, Ext: &e_StepGroupDescription})
+var s_StepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepGroupId, Type: smithy.ShapeTypeString, Ext: &e_StepGroupId})
+var s_StepGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepGroupName, Type: smithy.ShapeTypeString, Ext: &e_StepGroupName})
+var s_StepGroupStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepGroupStatus, Type: smithy.ShapeTypeString, Ext: &e_StepGroupStatus})
+var s_StepId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepId, Type: smithy.ShapeTypeString, Ext: &e_StepId})
+var sStepInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStepInput, Members: &mStepInput, Type: smithy.ShapeTypeUnion, Ext: &eStepInput})
+var s_StepInputParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepInputParameters, Members: &m_StepInputParameters, Traits: &t35, Type: smithy.ShapeTypeMap, Ext: &e_StepInputParameters})
+var s_StepInputParametersKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepInputParametersKey, Type: smithy.ShapeTypeString, Ext: &e_StepInputParametersKey})
+var s_StepName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepName, Type: smithy.ShapeTypeString, Ext: &e_StepName})
+var sStepOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStepOutput, Members: &mStepOutput, Type: smithy.ShapeTypeStructure, Ext: &eStepOutput})
+var s_StepOutputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepOutputList, Members: &m_StepOutputList, Type: smithy.ShapeTypeList, Ext: &e_StepOutputList})
+var s_StepStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepStatus, Type: smithy.ShapeTypeString, Ext: &e_StepStatus})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &e_StringList})
+var s_StringListMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringListMember, Type: smithy.ShapeTypeString, Ext: &e_StringListMember})
+var s_StringMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap, Ext: &e_StringMap})
+var s_StringMapKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringMapKey, Type: smithy.ShapeTypeString, Ext: &e_StringMapKey})
+var s_StringMapValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringMapValue, Type: smithy.ShapeTypeString, Ext: &e_StringMapValue})
+var s_StringValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringValue, Type: smithy.ShapeTypeString, Ext: &e_StringValue})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_TargetType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetType, Type: smithy.ShapeTypeString, Ext: &e_TargetType})
+var s_TemplateId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateId, Type: smithy.ShapeTypeString, Ext: &e_TemplateId})
+var sTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplateInput, Members: &mTemplateInput, Type: smithy.ShapeTypeStructure, Ext: &eTemplateInput})
+var s_TemplateInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateInputList, Members: &m_TemplateInputList, Type: smithy.ShapeTypeList, Ext: &e_TemplateInputList})
+var s_TemplateInputName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateInputName, Type: smithy.ShapeTypeString, Ext: &e_TemplateInputName})
+var s_TemplateName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateName, Type: smithy.ShapeTypeString, Ext: &e_TemplateName})
+var sTemplateSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplateSource, Members: &mTemplateSource, Type: smithy.ShapeTypeUnion, Ext: &eTemplateSource})
+var s_TemplateStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateStatus, Type: smithy.ShapeTypeString, Ext: &e_TemplateStatus})
+var sTemplateStepGroupSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplateStepGroupSummary, Members: &mTemplateStepGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &eTemplateStepGroupSummary})
+var s_TemplateStepGroupSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateStepGroupSummaryList, Members: &m_TemplateStepGroupSummaryList, Type: smithy.ShapeTypeList, Ext: &e_TemplateStepGroupSummaryList})
+var sTemplateStepSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplateStepSummary, Members: &mTemplateStepSummary, Type: smithy.ShapeTypeStructure, Ext: &eTemplateStepSummary})
+var s_TemplateStepSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateStepSummaryList, Members: &m_TemplateStepSummaryList, Type: smithy.ShapeTypeList, Ext: &e_TemplateStepSummaryList})
+var sTemplateSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplateSummary, Members: &mTemplateSummary, Type: smithy.ShapeTypeStructure, Ext: &eTemplateSummary})
+var s_TemplateSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateSummaryList, Members: &m_TemplateSummaryList, Type: smithy.ShapeTypeList, Ext: &e_TemplateSummaryList})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sTool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTool, Members: &mTool, Type: smithy.ShapeTypeStructure, Ext: &eTool})
+var s_ToolsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ToolsList, Members: &m_ToolsList, Type: smithy.ShapeTypeList, Ext: &e_ToolsList})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sWorkflowStepAutomationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowStepAutomationConfiguration, Members: &mWorkflowStepAutomationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eWorkflowStepAutomationConfiguration})
+var s_WorkflowStepGroupsSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowStepGroupsSummaryList, Members: &m_WorkflowStepGroupsSummaryList, Type: smithy.ShapeTypeList, Ext: &e_WorkflowStepGroupsSummaryList})
+var sWorkflowStepGroupSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowStepGroupSummary, Members: &mWorkflowStepGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &eWorkflowStepGroupSummary})
+var sWorkflowStepOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowStepOutput, Members: &mWorkflowStepOutput, Type: smithy.ShapeTypeStructure, Ext: &eWorkflowStepOutput})
+var s_WorkflowStepOutputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowStepOutputList, Members: &m_WorkflowStepOutputList, Type: smithy.ShapeTypeList, Ext: &e_WorkflowStepOutputList})
+var s_WorkflowStepOutputName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowStepOutputName, Type: smithy.ShapeTypeString, Ext: &e_WorkflowStepOutputName})
+var sWorkflowStepOutputUnion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowStepOutputUnion, Members: &mWorkflowStepOutputUnion, Type: smithy.ShapeTypeUnion, Ext: &eWorkflowStepOutputUnion})
+var s_WorkflowStepsSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowStepsSummaryList, Members: &m_WorkflowStepsSummaryList, Type: smithy.ShapeTypeList, Ext: &e_WorkflowStepsSummaryList})
+var sWorkflowStepSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowStepSummary, Members: &mWorkflowStepSummary, Type: smithy.ShapeTypeStructure, Ext: &eWorkflowStepSummary})
+var sCreateTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTemplateRequest, Members: &mCreateTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateTemplateRequest})
+var sCreateTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTemplateResponse, Members: &mCreateTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateTemplateResponse})
+var sCreateMigrationWorkflowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMigrationWorkflowRequest, Members: &mCreateMigrationWorkflowRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateMigrationWorkflowRequest})
+var sCreateMigrationWorkflowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMigrationWorkflowResponse, Members: &mCreateMigrationWorkflowResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateMigrationWorkflowResponse})
+var sCreateWorkflowStepGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkflowStepGroupRequest, Members: &mCreateWorkflowStepGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateWorkflowStepGroupRequest})
+var sCreateWorkflowStepGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkflowStepGroupResponse, Members: &mCreateWorkflowStepGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateWorkflowStepGroupResponse})
+var sCreateWorkflowStepRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkflowStepRequest, Members: &mCreateWorkflowStepRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateWorkflowStepRequest})
+var sCreateWorkflowStepResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkflowStepResponse, Members: &mCreateWorkflowStepResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateWorkflowStepResponse})
+var sDeleteTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTemplateRequest, Members: &mDeleteTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTemplateRequest})
+var sDeleteTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTemplateResponse})
+var sDeleteMigrationWorkflowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMigrationWorkflowRequest, Members: &mDeleteMigrationWorkflowRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMigrationWorkflowRequest})
+var sDeleteMigrationWorkflowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMigrationWorkflowResponse, Members: &mDeleteMigrationWorkflowResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMigrationWorkflowResponse})
+var sDeleteWorkflowStepGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkflowStepGroupRequest, Members: &mDeleteWorkflowStepGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteWorkflowStepGroupRequest})
+var sDeleteWorkflowStepGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkflowStepGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteWorkflowStepGroupResponse})
+var sDeleteWorkflowStepRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkflowStepRequest, Members: &mDeleteWorkflowStepRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteWorkflowStepRequest})
+var sDeleteWorkflowStepResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkflowStepResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteWorkflowStepResponse})
+var sGetMigrationWorkflowTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMigrationWorkflowTemplateRequest, Members: &mGetMigrationWorkflowTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetMigrationWorkflowTemplateRequest})
+var sGetMigrationWorkflowTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMigrationWorkflowTemplateResponse, Members: &mGetMigrationWorkflowTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetMigrationWorkflowTemplateResponse})
+var sGetTemplateStepGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplateStepGroupRequest, Members: &mGetTemplateStepGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTemplateStepGroupRequest})
+var sGetTemplateStepGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplateStepGroupResponse, Members: &mGetTemplateStepGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTemplateStepGroupResponse})
+var sGetTemplateStepRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplateStepRequest, Members: &mGetTemplateStepRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetTemplateStepRequest})
+var sGetTemplateStepResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplateStepResponse, Members: &mGetTemplateStepResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetTemplateStepResponse})
+var sGetMigrationWorkflowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMigrationWorkflowRequest, Members: &mGetMigrationWorkflowRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetMigrationWorkflowRequest})
+var sGetMigrationWorkflowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMigrationWorkflowResponse, Members: &mGetMigrationWorkflowResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetMigrationWorkflowResponse})
+var sGetWorkflowStepGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflowStepGroupRequest, Members: &mGetWorkflowStepGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetWorkflowStepGroupRequest})
+var sGetWorkflowStepGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflowStepGroupResponse, Members: &mGetWorkflowStepGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetWorkflowStepGroupResponse})
+var sGetWorkflowStepRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflowStepRequest, Members: &mGetWorkflowStepRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetWorkflowStepRequest})
+var sGetWorkflowStepResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflowStepResponse, Members: &mGetWorkflowStepResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetWorkflowStepResponse})
+var sListPluginsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPluginsRequest, Members: &mListPluginsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPluginsRequest})
+var sListPluginsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPluginsResponse, Members: &mListPluginsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListPluginsResponse})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListMigrationWorkflowTemplatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMigrationWorkflowTemplatesRequest, Members: &mListMigrationWorkflowTemplatesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListMigrationWorkflowTemplatesRequest})
+var sListMigrationWorkflowTemplatesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMigrationWorkflowTemplatesResponse, Members: &mListMigrationWorkflowTemplatesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListMigrationWorkflowTemplatesResponse})
+var sListTemplateStepGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTemplateStepGroupsRequest, Members: &mListTemplateStepGroupsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTemplateStepGroupsRequest})
+var sListTemplateStepGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTemplateStepGroupsResponse, Members: &mListTemplateStepGroupsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTemplateStepGroupsResponse})
+var sListTemplateStepsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTemplateStepsRequest, Members: &mListTemplateStepsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTemplateStepsRequest})
+var sListTemplateStepsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTemplateStepsResponse, Members: &mListTemplateStepsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTemplateStepsResponse})
+var sListMigrationWorkflowsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMigrationWorkflowsRequest, Members: &mListMigrationWorkflowsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListMigrationWorkflowsRequest})
+var sListMigrationWorkflowsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMigrationWorkflowsResponse, Members: &mListMigrationWorkflowsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListMigrationWorkflowsResponse})
+var sListWorkflowStepGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowStepGroupsRequest, Members: &mListWorkflowStepGroupsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListWorkflowStepGroupsRequest})
+var sListWorkflowStepGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowStepGroupsResponse, Members: &mListWorkflowStepGroupsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListWorkflowStepGroupsResponse})
+var sListWorkflowStepsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowStepsRequest, Members: &mListWorkflowStepsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListWorkflowStepsRequest})
+var sListWorkflowStepsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowStepsResponse, Members: &mListWorkflowStepsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListWorkflowStepsResponse})
+var sRetryWorkflowStepRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryWorkflowStepRequest, Members: &mRetryWorkflowStepRequest, Type: smithy.ShapeTypeStructure, Ext: &eRetryWorkflowStepRequest})
+var sRetryWorkflowStepResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryWorkflowStepResponse, Members: &mRetryWorkflowStepResponse, Type: smithy.ShapeTypeStructure, Ext: &eRetryWorkflowStepResponse})
+var sStartMigrationWorkflowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartMigrationWorkflowRequest, Members: &mStartMigrationWorkflowRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartMigrationWorkflowRequest})
+var sStartMigrationWorkflowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartMigrationWorkflowResponse, Members: &mStartMigrationWorkflowResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartMigrationWorkflowResponse})
+var sStopMigrationWorkflowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopMigrationWorkflowRequest, Members: &mStopMigrationWorkflowRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopMigrationWorkflowRequest})
+var sStopMigrationWorkflowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopMigrationWorkflowResponse, Members: &mStopMigrationWorkflowResponse, Type: smithy.ShapeTypeStructure, Ext: &eStopMigrationWorkflowResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTemplateRequest, Members: &mUpdateTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTemplateRequest})
+var sUpdateTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTemplateResponse, Members: &mUpdateTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTemplateResponse})
+var sUpdateMigrationWorkflowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMigrationWorkflowRequest, Members: &mUpdateMigrationWorkflowRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMigrationWorkflowRequest})
+var sUpdateMigrationWorkflowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMigrationWorkflowResponse, Members: &mUpdateMigrationWorkflowResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMigrationWorkflowResponse})
+var sUpdateWorkflowStepGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkflowStepGroupRequest, Members: &mUpdateWorkflowStepGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWorkflowStepGroupRequest})
+var sUpdateWorkflowStepGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkflowStepGroupResponse, Members: &mUpdateWorkflowStepGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWorkflowStepGroupResponse})
+var sUpdateWorkflowStepRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkflowStepRequest, Members: &mUpdateWorkflowStepRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWorkflowStepRequest})
+var sUpdateWorkflowStepResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkflowStepResponse, Members: &mUpdateWorkflowStepResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWorkflowStepResponse})
 
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[37]})
-var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var s_MaxStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_MaxStringValue, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var sMigrationWorkflowSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MigrationWorkflowId, Type: smithy.ShapeTypeString, Ext: &ext[51]})
-var sMigrationWorkflowSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var sMigrationWorkflowSummary_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[53]})
-var sMigrationWorkflowSummary_adsApplicationConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adsApplicationConfigurationName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var sMigrationWorkflowSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_MigrationWorkflowStatusEnum, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var sMigrationWorkflowSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[56]})
-var sMigrationWorkflowSummary_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[57]})
-var sMigrationWorkflowSummary_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var sMigrationWorkflowSummary_completedSteps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completedSteps", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[59]})
-var sMigrationWorkflowSummary_totalSteps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalSteps", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[60]})
-var s_MigrationWorkflowSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMigrationWorkflowSummary, Members: &mMigrationWorkflowSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[62]})
-var sPlatformCommand_linux = smithy.NewStaticSchema(smithy.StaticSchema{Member: "linux", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[66]})
-var sPlatformCommand_windows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "windows", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[67]})
-var sPlatformScriptKey_linux = smithy.NewStaticSchema(smithy.StaticSchema{Member: "linux", ID: &i_S3Key, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var sPlatformScriptKey_windows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "windows", ID: &i_S3Key, Type: smithy.ShapeTypeString, Ext: &ext[70]})
-var s_PluginSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPluginSummary, Members: &mPluginSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var sPluginSummary_pluginId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pluginId", ID: &i_PluginId, Type: smithy.ShapeTypeString, Ext: &ext[76]})
-var sPluginSummary_hostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostname", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[77]})
-var sPluginSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_PluginHealth, Type: smithy.ShapeTypeString, Ext: &ext[78]})
-var sPluginSummary_ipAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAddress", ID: &i_IPAddress, Type: smithy.ShapeTypeString, Ext: &ext[79]})
-var sPluginSummary_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_PluginVersion, Type: smithy.ShapeTypeString, Ext: &ext[80]})
-var sPluginSummary_registeredTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registeredTime", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[81]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[85]})
-var sStepAutomationConfiguration_scriptLocationS3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scriptLocationS3Bucket", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[91]})
-var sStepAutomationConfiguration_scriptLocationS3Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scriptLocationS3Key", ID: &iPlatformScriptKey, Members: &mPlatformScriptKey, Type: smithy.ShapeTypeStructure, Ext: &ext[92]})
-var sStepAutomationConfiguration_command = smithy.NewStaticSchema(smithy.StaticSchema{Member: "command", ID: &iPlatformCommand, Members: &mPlatformCommand, Type: smithy.ShapeTypeStructure, Ext: &ext[93]})
-var sStepAutomationConfiguration_runEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runEnvironment", ID: &i_RunEnvironment, Type: smithy.ShapeTypeString, Ext: &ext[94]})
-var sStepAutomationConfiguration_targetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetType", ID: &i_TargetType, Type: smithy.ShapeTypeString, Ext: &ext[95]})
-var sStepInput_integerValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerValue", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[103]})
-var sStepInput_stringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValue", ID: &i_StringValue, Type: smithy.ShapeTypeString, Ext: &ext[104]})
-var sStepInput_listOfStringsValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listOfStringsValue", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[105]})
-var sStepInput_mapOfStringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mapOfStringValue", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap, Ext: &ext[106]})
-var s_StepInputParameters_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_StepInputParametersKey, Type: smithy.ShapeTypeString, Ext: &ext[108]})
-var s_StepInputParameters_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iStepInput, Members: &mStepInput, Type: smithy.ShapeTypeUnion, Ext: &ext[109]})
-var sStepOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[113]})
-var sStepOutput_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &i_DataType, Type: smithy.ShapeTypeString, Ext: &ext[114]})
-var sStepOutput_required = smithy.NewStaticSchema(smithy.StaticSchema{Member: "required", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[115]})
-var s_StepOutputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStepOutput, Members: &mStepOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[117]})
-var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_StringListMember, Type: smithy.ShapeTypeString, Ext: &ext[120]})
-var s_StringMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_StringMapKey, Type: smithy.ShapeTypeString, Ext: &ext[123]})
-var s_StringMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StringMapValue, Type: smithy.ShapeTypeString, Ext: &ext[124]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[132]})
-var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[133]})
-var sTemplateInput_inputName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputName", ID: &i_TemplateInputName, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var sTemplateInput_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &i_DataType, Type: smithy.ShapeTypeString, Ext: &ext[139]})
-var sTemplateInput_required = smithy.NewStaticSchema(smithy.StaticSchema{Member: "required", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[140]})
-var s_TemplateInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTemplateInput, Members: &mTemplateInput, Type: smithy.ShapeTypeStructure, Ext: &ext[142]})
-var sTemplateSource_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_MigrationWorkflowId, Type: smithy.ShapeTypeString, Ext: &ext[146]})
-var sTemplateStepGroupSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[149]})
-var sTemplateStepGroupSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[150]})
-var sTemplateStepGroupSummary_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[151]})
-var sTemplateStepGroupSummary_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[152]})
-var s_TemplateStepGroupSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTemplateStepGroupSummary, Members: &mTemplateStepGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[154]})
-var sTemplateStepSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[156]})
-var sTemplateStepSummary_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[157]})
-var sTemplateStepSummary_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[158]})
-var sTemplateStepSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[159]})
-var sTemplateStepSummary_stepActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepActionType", ID: &i_StepActionType, Type: smithy.ShapeTypeString, Ext: &ext[160]})
-var sTemplateStepSummary_targetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetType", ID: &i_TargetType, Type: smithy.ShapeTypeString, Ext: &ext[161]})
-var sTemplateStepSummary_owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owner", ID: &i_Owner, Type: smithy.ShapeTypeString, Ext: &ext[162]})
-var sTemplateStepSummary_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[163]})
-var sTemplateStepSummary_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[164]})
-var s_TemplateStepSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTemplateStepSummary, Members: &mTemplateStepSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[166]})
-var sTemplateSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[168]})
-var sTemplateSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[169]})
-var sTemplateSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[170]})
-var sTemplateSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[171]})
-var s_TemplateSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTemplateSummary, Members: &mTemplateSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[173]})
-var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[175]})
-var sTool_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[177]})
-var sTool_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[178]})
-var s_ToolsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTool, Members: &mTool, Type: smithy.ShapeTypeStructure, Ext: &ext[180]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[182]})
-var sWorkflowStepAutomationConfiguration_scriptLocationS3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scriptLocationS3Bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString, Ext: &ext[184]})
-var sWorkflowStepAutomationConfiguration_scriptLocationS3Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scriptLocationS3Key", ID: &iPlatformScriptKey, Members: &mPlatformScriptKey, Type: smithy.ShapeTypeStructure, Ext: &ext[185]})
-var sWorkflowStepAutomationConfiguration_command = smithy.NewStaticSchema(smithy.StaticSchema{Member: "command", ID: &iPlatformCommand, Members: &mPlatformCommand, Type: smithy.ShapeTypeStructure, Ext: &ext[186]})
-var sWorkflowStepAutomationConfiguration_runEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runEnvironment", ID: &i_RunEnvironment, Type: smithy.ShapeTypeString, Ext: &ext[187]})
-var sWorkflowStepAutomationConfiguration_targetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetType", ID: &i_TargetType, Type: smithy.ShapeTypeString, Ext: &ext[188]})
-var s_WorkflowStepGroupsSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkflowStepGroupSummary, Members: &mWorkflowStepGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[190]})
-var sWorkflowStepGroupSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[192]})
-var sWorkflowStepGroupSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[193]})
-var sWorkflowStepGroupSummary_owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owner", ID: &i_Owner, Type: smithy.ShapeTypeString, Ext: &ext[194]})
-var sWorkflowStepGroupSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_StepGroupStatus, Type: smithy.ShapeTypeString, Ext: &ext[195]})
-var sWorkflowStepGroupSummary_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[196]})
-var sWorkflowStepGroupSummary_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[197]})
-var sWorkflowStepOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_WorkflowStepOutputName, Type: smithy.ShapeTypeString, Ext: &ext[199]})
-var sWorkflowStepOutput_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &i_DataType, Type: smithy.ShapeTypeString, Ext: &ext[200]})
-var sWorkflowStepOutput_required = smithy.NewStaticSchema(smithy.StaticSchema{Member: "required", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[201]})
-var sWorkflowStepOutput_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iWorkflowStepOutputUnion, Members: &mWorkflowStepOutputUnion, Type: smithy.ShapeTypeUnion, Ext: &ext[202]})
-var s_WorkflowStepOutputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkflowStepOutput, Members: &mWorkflowStepOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[204]})
-var sWorkflowStepOutputUnion_integerValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerValue", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[207]})
-var sWorkflowStepOutputUnion_stringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValue", ID: &i_MaxStringValue, Type: smithy.ShapeTypeString, Ext: &ext[208]})
-var sWorkflowStepOutputUnion_listOfStringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listOfStringValue", ID: &i_MaxStringList, Members: &m_MaxStringList, Type: smithy.ShapeTypeList, Ext: &ext[209]})
-var s_WorkflowStepsSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkflowStepSummary, Members: &mWorkflowStepSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[211]})
-var sWorkflowStepSummary_stepId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[213]})
-var sWorkflowStepSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[214]})
-var sWorkflowStepSummary_stepActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepActionType", ID: &i_StepActionType, Type: smithy.ShapeTypeString, Ext: &ext[215]})
-var sWorkflowStepSummary_owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owner", ID: &i_Owner, Type: smithy.ShapeTypeString, Ext: &ext[216]})
-var sWorkflowStepSummary_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[217]})
-var sWorkflowStepSummary_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[218]})
-var sWorkflowStepSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_StepStatus, Type: smithy.ShapeTypeString, Ext: &ext[219]})
-var sWorkflowStepSummary_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[220]})
-var sWorkflowStepSummary_noOfSrvCompleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "noOfSrvCompleted", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[221]})
-var sWorkflowStepSummary_noOfSrvFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "noOfSrvFailed", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[222]})
-var sWorkflowStepSummary_totalNoOfSrv = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalNoOfSrv", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[223]})
-var sWorkflowStepSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[224]})
-var sWorkflowStepSummary_scriptLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scriptLocation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[225]})
-var sCreateTemplateRequest_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[227]})
-var sCreateTemplateRequest_templateDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateDescription", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[228]})
-var sCreateTemplateRequest_templateSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateSource", ID: &iTemplateSource, Members: &mTemplateSource, Type: smithy.ShapeTypeUnion, Ext: &ext[229]})
-var sCreateTemplateRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[230]})
-var sCreateTemplateRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[231]})
-var sCreateTemplateResponse_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[233]})
-var sCreateTemplateResponse_templateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[234]})
-var sCreateTemplateResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap, Ext: &ext[235]})
-var sCreateMigrationWorkflowRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[237]})
-var sCreateMigrationWorkflowRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[238]})
-var sCreateMigrationWorkflowRequest_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[239]})
-var sCreateMigrationWorkflowRequest_applicationConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationConfigurationId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[240]})
-var sCreateMigrationWorkflowRequest_inputParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputParameters", ID: &i_StepInputParameters, Members: &m_StepInputParameters, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &ext[241]})
-var sCreateMigrationWorkflowRequest_stepTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepTargets", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[242]})
-var sCreateMigrationWorkflowRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap, Ext: &ext[243]})
-var sCreateMigrationWorkflowResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MigrationWorkflowId, Type: smithy.ShapeTypeString, Ext: &ext[245]})
-var sCreateMigrationWorkflowResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[246]})
-var sCreateMigrationWorkflowResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[247]})
-var sCreateMigrationWorkflowResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[248]})
-var sCreateMigrationWorkflowResponse_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[249]})
-var sCreateMigrationWorkflowResponse_adsApplicationConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adsApplicationConfigurationId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[250]})
-var sCreateMigrationWorkflowResponse_workflowInputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowInputs", ID: &i_StepInputParameters, Members: &m_StepInputParameters, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &ext[251]})
-var sCreateMigrationWorkflowResponse_stepTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepTargets", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[252]})
-var sCreateMigrationWorkflowResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_MigrationWorkflowStatusEnum, Type: smithy.ShapeTypeString, Ext: &ext[253]})
-var sCreateMigrationWorkflowResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[254]})
-var sCreateMigrationWorkflowResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap, Ext: &ext[255]})
-var sCreateWorkflowStepGroupRequest_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_MigrationWorkflowId, Type: smithy.ShapeTypeString, Ext: &ext[257]})
-var sCreateWorkflowStepGroupRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_StepGroupName, Type: smithy.ShapeTypeString, Ext: &ext[258]})
-var sCreateWorkflowStepGroupRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_StepGroupDescription, Type: smithy.ShapeTypeString, Ext: &ext[259]})
-var sCreateWorkflowStepGroupRequest_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[260]})
-var sCreateWorkflowStepGroupRequest_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[261]})
-var sCreateWorkflowStepGroupResponse_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[263]})
-var sCreateWorkflowStepGroupResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[264]})
-var sCreateWorkflowStepGroupResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[265]})
-var sCreateWorkflowStepGroupResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[266]})
-var sCreateWorkflowStepGroupResponse_tools = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tools", ID: &i_ToolsList, Members: &m_ToolsList, Type: smithy.ShapeTypeList, Ext: &ext[267]})
-var sCreateWorkflowStepGroupResponse_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[268]})
-var sCreateWorkflowStepGroupResponse_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[269]})
-var sCreateWorkflowStepGroupResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[270]})
-var sCreateWorkflowStepRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_MigrationWorkflowName, Type: smithy.ShapeTypeString, Ext: &ext[272]})
-var sCreateWorkflowStepRequest_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &i_StepGroupId, Type: smithy.ShapeTypeString, Ext: &ext[273]})
-var sCreateWorkflowStepRequest_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_MigrationWorkflowId, Type: smithy.ShapeTypeString, Ext: &ext[274]})
-var sCreateWorkflowStepRequest_stepActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepActionType", ID: &i_StepActionType, Type: smithy.ShapeTypeString, Ext: &ext[275]})
-var sCreateWorkflowStepRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_MigrationWorkflowDescription, Type: smithy.ShapeTypeString, Ext: &ext[276]})
-var sCreateWorkflowStepRequest_workflowStepAutomationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowStepAutomationConfiguration", ID: &iWorkflowStepAutomationConfiguration, Members: &mWorkflowStepAutomationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[277]})
-var sCreateWorkflowStepRequest_stepTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepTarget", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[278]})
-var sCreateWorkflowStepRequest_outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputs", ID: &i_WorkflowStepOutputList, Members: &m_WorkflowStepOutputList, Type: smithy.ShapeTypeList, Ext: &ext[279]})
-var sCreateWorkflowStepRequest_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[280]})
-var sCreateWorkflowStepRequest_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[281]})
-var sCreateWorkflowStepResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[283]})
-var sCreateWorkflowStepResponse_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[284]})
-var sCreateWorkflowStepResponse_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[285]})
-var sCreateWorkflowStepResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[286]})
-var sDeleteTemplateRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_TemplateId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[288]})
-var sDeleteMigrationWorkflowRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MigrationWorkflowId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[291]})
-var sDeleteMigrationWorkflowResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MigrationWorkflowId, Type: smithy.ShapeTypeString, Ext: &ext[293]})
-var sDeleteMigrationWorkflowResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[294]})
-var sDeleteMigrationWorkflowResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_MigrationWorkflowStatusEnum, Type: smithy.ShapeTypeString, Ext: &ext[295]})
-var sDeleteWorkflowStepGroupRequest_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_MigrationWorkflowId, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &ext[297]})
-var sDeleteWorkflowStepGroupRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_StepGroupId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[298]})
-var sDeleteWorkflowStepRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_StepId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[301]})
-var sDeleteWorkflowStepRequest_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &i_StepGroupId, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &ext[302]})
-var sDeleteWorkflowStepRequest_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_MigrationWorkflowId, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &ext[303]})
-var sGetMigrationWorkflowTemplateRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_TemplateId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[306]})
-var sGetMigrationWorkflowTemplateResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[308]})
-var sGetMigrationWorkflowTemplateResponse_templateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[309]})
-var sGetMigrationWorkflowTemplateResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[310]})
-var sGetMigrationWorkflowTemplateResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[311]})
-var sGetMigrationWorkflowTemplateResponse_inputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputs", ID: &i_TemplateInputList, Members: &m_TemplateInputList, Type: smithy.ShapeTypeList, Ext: &ext[312]})
-var sGetMigrationWorkflowTemplateResponse_tools = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tools", ID: &i_ToolsList, Members: &m_ToolsList, Type: smithy.ShapeTypeList, Ext: &ext[313]})
-var sGetMigrationWorkflowTemplateResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[314]})
-var sGetMigrationWorkflowTemplateResponse_owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owner", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[315]})
-var sGetMigrationWorkflowTemplateResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_TemplateStatus, Type: smithy.ShapeTypeString, Ext: &ext[316]})
-var sGetMigrationWorkflowTemplateResponse_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[317]})
-var sGetMigrationWorkflowTemplateResponse_templateClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateClass", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[318]})
-var sGetMigrationWorkflowTemplateResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap, Ext: &ext[319]})
-var sGetTemplateStepGroupRequest_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &i_TemplateId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[321]})
-var sGetTemplateStepGroupRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_StepGroupId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[322]})
-var sGetTemplateStepGroupResponse_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[324]})
-var sGetTemplateStepGroupResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[325]})
-var sGetTemplateStepGroupResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[326]})
-var sGetTemplateStepGroupResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[327]})
-var sGetTemplateStepGroupResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_StepGroupStatus, Type: smithy.ShapeTypeString, Ext: &ext[328]})
-var sGetTemplateStepGroupResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[329]})
-var sGetTemplateStepGroupResponse_lastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[330]})
-var sGetTemplateStepGroupResponse_tools = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tools", ID: &i_ToolsList, Members: &m_ToolsList, Type: smithy.ShapeTypeList, Ext: &ext[331]})
-var sGetTemplateStepGroupResponse_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[332]})
-var sGetTemplateStepGroupResponse_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[333]})
-var sGetTemplateStepRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_StepId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[335]})
-var sGetTemplateStepRequest_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &i_TemplateId, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &ext[336]})
-var sGetTemplateStepRequest_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &i_StepGroupId, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &ext[337]})
-var sGetTemplateStepResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_StepId, Type: smithy.ShapeTypeString, Ext: &ext[339]})
-var sGetTemplateStepResponse_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &i_StepGroupId, Type: smithy.ShapeTypeString, Ext: &ext[340]})
-var sGetTemplateStepResponse_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &i_TemplateId, Type: smithy.ShapeTypeString, Ext: &ext[341]})
-var sGetTemplateStepResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[342]})
-var sGetTemplateStepResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[343]})
-var sGetTemplateStepResponse_stepActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepActionType", ID: &i_StepActionType, Type: smithy.ShapeTypeString, Ext: &ext[344]})
-var sGetTemplateStepResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[345]})
-var sGetTemplateStepResponse_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[346]})
-var sGetTemplateStepResponse_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[347]})
-var sGetTemplateStepResponse_outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputs", ID: &i_StepOutputList, Members: &m_StepOutputList, Type: smithy.ShapeTypeList, Ext: &ext[348]})
-var sGetTemplateStepResponse_stepAutomationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepAutomationConfiguration", ID: &iStepAutomationConfiguration, Members: &mStepAutomationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[349]})
-var sGetMigrationWorkflowRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MigrationWorkflowId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[351]})
-var sGetMigrationWorkflowResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MigrationWorkflowId, Type: smithy.ShapeTypeString, Ext: &ext[353]})
-var sGetMigrationWorkflowResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[354]})
-var sGetMigrationWorkflowResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[355]})
-var sGetMigrationWorkflowResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[356]})
-var sGetMigrationWorkflowResponse_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[357]})
-var sGetMigrationWorkflowResponse_adsApplicationConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adsApplicationConfigurationId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[358]})
-var sGetMigrationWorkflowResponse_adsApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adsApplicationName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[359]})
-var sGetMigrationWorkflowResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_MigrationWorkflowStatusEnum, Type: smithy.ShapeTypeString, Ext: &ext[360]})
-var sGetMigrationWorkflowResponse_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[361]})
-var sGetMigrationWorkflowResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[362]})
-var sGetMigrationWorkflowResponse_lastStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastStartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[363]})
-var sGetMigrationWorkflowResponse_lastStopTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastStopTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[364]})
-var sGetMigrationWorkflowResponse_lastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[365]})
-var sGetMigrationWorkflowResponse_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[366]})
-var sGetMigrationWorkflowResponse_tools = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tools", ID: &i_ToolsList, Members: &m_ToolsList, Type: smithy.ShapeTypeList, Ext: &ext[367]})
-var sGetMigrationWorkflowResponse_totalSteps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalSteps", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[368]})
-var sGetMigrationWorkflowResponse_completedSteps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completedSteps", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[369]})
-var sGetMigrationWorkflowResponse_workflowInputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowInputs", ID: &i_StepInputParameters, Members: &m_StepInputParameters, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &ext[370]})
-var sGetMigrationWorkflowResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap, Ext: &ext[371]})
-var sGetMigrationWorkflowResponse_workflowBucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowBucket", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[372]})
-var sGetWorkflowStepGroupRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_StepGroupId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[374]})
-var sGetWorkflowStepGroupRequest_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_MigrationWorkflowId, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &ext[375]})
-var sGetWorkflowStepGroupResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_StepGroupId, Type: smithy.ShapeTypeString, Ext: &ext[377]})
-var sGetWorkflowStepGroupResponse_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[378]})
-var sGetWorkflowStepGroupResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[379]})
-var sGetWorkflowStepGroupResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[380]})
-var sGetWorkflowStepGroupResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_StepGroupStatus, Type: smithy.ShapeTypeString, Ext: &ext[381]})
-var sGetWorkflowStepGroupResponse_owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owner", ID: &i_Owner, Type: smithy.ShapeTypeString, Ext: &ext[382]})
-var sGetWorkflowStepGroupResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[383]})
-var sGetWorkflowStepGroupResponse_lastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[384]})
-var sGetWorkflowStepGroupResponse_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[385]})
-var sGetWorkflowStepGroupResponse_tools = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tools", ID: &i_ToolsList, Members: &m_ToolsList, Type: smithy.ShapeTypeList, Ext: &ext[386]})
-var sGetWorkflowStepGroupResponse_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[387]})
-var sGetWorkflowStepGroupResponse_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[388]})
-var sGetWorkflowStepRequest_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_MigrationWorkflowId, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &ext[390]})
-var sGetWorkflowStepRequest_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &i_StepGroupId, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &ext[391]})
-var sGetWorkflowStepRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_StepId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[392]})
-var sGetWorkflowStepResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[394]})
-var sGetWorkflowStepResponse_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[395]})
-var sGetWorkflowStepResponse_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[396]})
-var sGetWorkflowStepResponse_stepId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[397]})
-var sGetWorkflowStepResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[398]})
-var sGetWorkflowStepResponse_stepActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepActionType", ID: &i_StepActionType, Type: smithy.ShapeTypeString, Ext: &ext[399]})
-var sGetWorkflowStepResponse_owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owner", ID: &i_Owner, Type: smithy.ShapeTypeString, Ext: &ext[400]})
-var sGetWorkflowStepResponse_workflowStepAutomationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowStepAutomationConfiguration", ID: &iWorkflowStepAutomationConfiguration, Members: &mWorkflowStepAutomationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[401]})
-var sGetWorkflowStepResponse_stepTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepTarget", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[402]})
-var sGetWorkflowStepResponse_outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputs", ID: &i_WorkflowStepOutputList, Members: &m_WorkflowStepOutputList, Type: smithy.ShapeTypeList, Ext: &ext[403]})
-var sGetWorkflowStepResponse_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[404]})
-var sGetWorkflowStepResponse_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[405]})
-var sGetWorkflowStepResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_StepStatus, Type: smithy.ShapeTypeString, Ext: &ext[406]})
-var sGetWorkflowStepResponse_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[407]})
-var sGetWorkflowStepResponse_scriptOutputLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scriptOutputLocation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[408]})
-var sGetWorkflowStepResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[409]})
-var sGetWorkflowStepResponse_lastStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastStartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[410]})
-var sGetWorkflowStepResponse_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[411]})
-var sGetWorkflowStepResponse_noOfSrvCompleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "noOfSrvCompleted", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[412]})
-var sGetWorkflowStepResponse_noOfSrvFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "noOfSrvFailed", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[413]})
-var sGetWorkflowStepResponse_totalNoOfSrv = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalNoOfSrv", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[414]})
-var sListPluginsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t43, Type: smithy.ShapeTypeInteger, Ext: &ext[416]})
-var sListPluginsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &ext[417]})
-var sListPluginsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[419]})
-var sListPluginsResponse_plugins = smithy.NewStaticSchema(smithy.StaticSchema{Member: "plugins", ID: &i_PluginSummaries, Members: &m_PluginSummaries, Type: smithy.ShapeTypeList, Ext: &ext[420]})
-var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[422]})
-var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[424]})
-var sListMigrationWorkflowTemplatesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t43, Type: smithy.ShapeTypeInteger, Ext: &ext[426]})
-var sListMigrationWorkflowTemplatesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &ext[427]})
-var sListMigrationWorkflowTemplatesRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TemplateName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &ext[428]})
-var sListMigrationWorkflowTemplatesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[430]})
-var sListMigrationWorkflowTemplatesResponse_templateSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateSummary", ID: &i_TemplateSummaryList, Members: &m_TemplateSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[431]})
-var sListTemplateStepGroupsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t43, Type: smithy.ShapeTypeInteger, Ext: &ext[433]})
-var sListTemplateStepGroupsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &ext[434]})
-var sListTemplateStepGroupsRequest_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &i_TemplateId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[435]})
-var sListTemplateStepGroupsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[437]})
-var sListTemplateStepGroupsResponse_templateStepGroupSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateStepGroupSummary", ID: &i_TemplateStepGroupSummaryList, Members: &m_TemplateStepGroupSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[438]})
-var sListTemplateStepsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t43, Type: smithy.ShapeTypeInteger, Ext: &ext[440]})
-var sListTemplateStepsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &ext[441]})
-var sListTemplateStepsRequest_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &i_TemplateId, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &ext[442]})
-var sListTemplateStepsRequest_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &i_StepGroupId, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &ext[443]})
-var sListTemplateStepsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[445]})
-var sListTemplateStepsResponse_templateStepSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateStepSummaryList", ID: &i_TemplateStepSummaryList, Members: &m_TemplateStepSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[446]})
-var sListMigrationWorkflowsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t43, Type: smithy.ShapeTypeInteger, Ext: &ext[448]})
-var sListMigrationWorkflowsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &ext[449]})
-var sListMigrationWorkflowsRequest_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &i_TemplateId, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &ext[450]})
-var sListMigrationWorkflowsRequest_adsApplicationConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adsApplicationConfigurationName", ID: &i_ApplicationConfigurationName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[451]})
-var sListMigrationWorkflowsRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_MigrationWorkflowStatusEnum, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &ext[452]})
-var sListMigrationWorkflowsRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &ext[453]})
-var sListMigrationWorkflowsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[455]})
-var sListMigrationWorkflowsResponse_migrationWorkflowSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationWorkflowSummary", ID: &i_MigrationWorkflowSummaryList, Members: &m_MigrationWorkflowSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[456]})
-var sListWorkflowStepGroupsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &ext[458]})
-var sListWorkflowStepGroupsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t43, Type: smithy.ShapeTypeInteger, Ext: &ext[459]})
-var sListWorkflowStepGroupsRequest_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_MigrationWorkflowId, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &ext[460]})
-var sListWorkflowStepGroupsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[462]})
-var sListWorkflowStepGroupsResponse_workflowStepGroupsSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowStepGroupsSummary", ID: &i_WorkflowStepGroupsSummaryList, Members: &m_WorkflowStepGroupsSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[463]})
-var sListWorkflowStepsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &ext[465]})
-var sListWorkflowStepsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t43, Type: smithy.ShapeTypeInteger, Ext: &ext[466]})
-var sListWorkflowStepsRequest_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_MigrationWorkflowId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[467]})
-var sListWorkflowStepsRequest_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &i_StepGroupId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[468]})
-var sListWorkflowStepsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[470]})
-var sListWorkflowStepsResponse_workflowStepsSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowStepsSummary", ID: &i_WorkflowStepsSummaryList, Members: &m_WorkflowStepsSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[471]})
-var sRetryWorkflowStepRequest_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_MigrationWorkflowId, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &ext[473]})
-var sRetryWorkflowStepRequest_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &i_StepGroupId, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &ext[474]})
-var sRetryWorkflowStepRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_StepId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[475]})
-var sRetryWorkflowStepResponse_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[477]})
-var sRetryWorkflowStepResponse_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[478]})
-var sRetryWorkflowStepResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[479]})
-var sRetryWorkflowStepResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_StepStatus, Type: smithy.ShapeTypeString, Ext: &ext[480]})
-var sStartMigrationWorkflowRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MigrationWorkflowId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[482]})
-var sStartMigrationWorkflowResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MigrationWorkflowId, Type: smithy.ShapeTypeString, Ext: &ext[484]})
-var sStartMigrationWorkflowResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[485]})
-var sStartMigrationWorkflowResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_MigrationWorkflowStatusEnum, Type: smithy.ShapeTypeString, Ext: &ext[486]})
-var sStartMigrationWorkflowResponse_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[487]})
-var sStartMigrationWorkflowResponse_lastStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastStartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[488]})
-var sStopMigrationWorkflowRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MigrationWorkflowId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[490]})
-var sStopMigrationWorkflowResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MigrationWorkflowId, Type: smithy.ShapeTypeString, Ext: &ext[492]})
-var sStopMigrationWorkflowResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[493]})
-var sStopMigrationWorkflowResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_MigrationWorkflowStatusEnum, Type: smithy.ShapeTypeString, Ext: &ext[494]})
-var sStopMigrationWorkflowResponse_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[495]})
-var sStopMigrationWorkflowResponse_lastStopTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastStopTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[496]})
-var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[498]})
-var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[499]})
-var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[502]})
-var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t48, Type: smithy.ShapeTypeList, Ext: &ext[503]})
-var sUpdateTemplateRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_TemplateId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[506]})
-var sUpdateTemplateRequest_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[507]})
-var sUpdateTemplateRequest_templateDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateDescription", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[508]})
-var sUpdateTemplateRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[509]})
-var sUpdateTemplateResponse_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[511]})
-var sUpdateTemplateResponse_templateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[512]})
-var sUpdateTemplateResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap, Ext: &ext[513]})
-var sUpdateMigrationWorkflowRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MigrationWorkflowId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[515]})
-var sUpdateMigrationWorkflowRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[516]})
-var sUpdateMigrationWorkflowRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[517]})
-var sUpdateMigrationWorkflowRequest_inputParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputParameters", ID: &i_StepInputParameters, Members: &m_StepInputParameters, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &ext[518]})
-var sUpdateMigrationWorkflowRequest_stepTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepTargets", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[519]})
-var sUpdateMigrationWorkflowResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MigrationWorkflowId, Type: smithy.ShapeTypeString, Ext: &ext[521]})
-var sUpdateMigrationWorkflowResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[522]})
-var sUpdateMigrationWorkflowResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[523]})
-var sUpdateMigrationWorkflowResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[524]})
-var sUpdateMigrationWorkflowResponse_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[525]})
-var sUpdateMigrationWorkflowResponse_adsApplicationConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adsApplicationConfigurationId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[526]})
-var sUpdateMigrationWorkflowResponse_workflowInputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowInputs", ID: &i_StepInputParameters, Members: &m_StepInputParameters, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &ext[527]})
-var sUpdateMigrationWorkflowResponse_stepTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepTargets", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[528]})
-var sUpdateMigrationWorkflowResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_MigrationWorkflowStatusEnum, Type: smithy.ShapeTypeString, Ext: &ext[529]})
-var sUpdateMigrationWorkflowResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[530]})
-var sUpdateMigrationWorkflowResponse_lastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[531]})
-var sUpdateMigrationWorkflowResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap, Ext: &ext[532]})
-var sUpdateWorkflowStepGroupRequest_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_MigrationWorkflowId, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &ext[534]})
-var sUpdateWorkflowStepGroupRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_StepGroupId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[535]})
-var sUpdateWorkflowStepGroupRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_StepGroupName, Type: smithy.ShapeTypeString, Ext: &ext[536]})
-var sUpdateWorkflowStepGroupRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_StepGroupDescription, Type: smithy.ShapeTypeString, Ext: &ext[537]})
-var sUpdateWorkflowStepGroupRequest_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[538]})
-var sUpdateWorkflowStepGroupRequest_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[539]})
-var sUpdateWorkflowStepGroupResponse_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[541]})
-var sUpdateWorkflowStepGroupResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[542]})
-var sUpdateWorkflowStepGroupResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[543]})
-var sUpdateWorkflowStepGroupResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[544]})
-var sUpdateWorkflowStepGroupResponse_tools = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tools", ID: &i_ToolsList, Members: &m_ToolsList, Type: smithy.ShapeTypeList, Ext: &ext[545]})
-var sUpdateWorkflowStepGroupResponse_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[546]})
-var sUpdateWorkflowStepGroupResponse_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[547]})
-var sUpdateWorkflowStepGroupResponse_lastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[548]})
-var sUpdateWorkflowStepRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_StepId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[550]})
-var sUpdateWorkflowStepRequest_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &i_StepGroupId, Type: smithy.ShapeTypeString, Ext: &ext[551]})
-var sUpdateWorkflowStepRequest_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_MigrationWorkflowId, Type: smithy.ShapeTypeString, Ext: &ext[552]})
-var sUpdateWorkflowStepRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_StepName, Type: smithy.ShapeTypeString, Ext: &ext[553]})
-var sUpdateWorkflowStepRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_StepDescription, Type: smithy.ShapeTypeString, Ext: &ext[554]})
-var sUpdateWorkflowStepRequest_stepActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepActionType", ID: &i_StepActionType, Type: smithy.ShapeTypeString, Ext: &ext[555]})
-var sUpdateWorkflowStepRequest_workflowStepAutomationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowStepAutomationConfiguration", ID: &iWorkflowStepAutomationConfiguration, Members: &mWorkflowStepAutomationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[556]})
-var sUpdateWorkflowStepRequest_stepTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepTarget", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[557]})
-var sUpdateWorkflowStepRequest_outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputs", ID: &i_WorkflowStepOutputList, Members: &m_WorkflowStepOutputList, Type: smithy.ShapeTypeList, Ext: &ext[558]})
-var sUpdateWorkflowStepRequest_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[559]})
-var sUpdateWorkflowStepRequest_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[560]})
-var sUpdateWorkflowStepRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_StepStatus, Type: smithy.ShapeTypeString, Ext: &ext[561]})
-var sUpdateWorkflowStepResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_StepId, Type: smithy.ShapeTypeString, Ext: &ext[563]})
-var sUpdateWorkflowStepResponse_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[564]})
-var sUpdateWorkflowStepResponse_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[565]})
-var sUpdateWorkflowStepResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[566]})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var s_MaxStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_MaxStringValue, Type: smithy.ShapeTypeString, Ext: &e_MaxStringList_member})
+var sMigrationWorkflowSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MigrationWorkflowId, Type: smithy.ShapeTypeString, Ext: &eMigrationWorkflowSummary_id})
+var sMigrationWorkflowSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMigrationWorkflowSummary_name})
+var sMigrationWorkflowSummary_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMigrationWorkflowSummary_templateId})
+var sMigrationWorkflowSummary_adsApplicationConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adsApplicationConfigurationName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMigrationWorkflowSummary_adsApplicationConfigurationName})
+var sMigrationWorkflowSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_MigrationWorkflowStatusEnum, Type: smithy.ShapeTypeString, Ext: &eMigrationWorkflowSummary_status})
+var sMigrationWorkflowSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMigrationWorkflowSummary_creationTime})
+var sMigrationWorkflowSummary_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMigrationWorkflowSummary_endTime})
+var sMigrationWorkflowSummary_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMigrationWorkflowSummary_statusMessage})
+var sMigrationWorkflowSummary_completedSteps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completedSteps", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eMigrationWorkflowSummary_completedSteps})
+var sMigrationWorkflowSummary_totalSteps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalSteps", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eMigrationWorkflowSummary_totalSteps})
+var s_MigrationWorkflowSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMigrationWorkflowSummary, Members: &mMigrationWorkflowSummary, Type: smithy.ShapeTypeStructure, Ext: &e_MigrationWorkflowSummaryList_member})
+var sPlatformCommand_linux = smithy.NewStaticSchema(smithy.StaticSchema{Member: "linux", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePlatformCommand_linux})
+var sPlatformCommand_windows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "windows", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePlatformCommand_windows})
+var sPlatformScriptKey_linux = smithy.NewStaticSchema(smithy.StaticSchema{Member: "linux", ID: &i_S3Key, Type: smithy.ShapeTypeString, Ext: &ePlatformScriptKey_linux})
+var sPlatformScriptKey_windows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "windows", ID: &i_S3Key, Type: smithy.ShapeTypeString, Ext: &ePlatformScriptKey_windows})
+var s_PluginSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPluginSummary, Members: &mPluginSummary, Type: smithy.ShapeTypeStructure, Ext: &e_PluginSummaries_member})
+var sPluginSummary_pluginId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pluginId", ID: &i_PluginId, Type: smithy.ShapeTypeString, Ext: &ePluginSummary_pluginId})
+var sPluginSummary_hostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostname", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePluginSummary_hostname})
+var sPluginSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_PluginHealth, Type: smithy.ShapeTypeString, Ext: &ePluginSummary_status})
+var sPluginSummary_ipAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAddress", ID: &i_IPAddress, Type: smithy.ShapeTypeString, Ext: &ePluginSummary_ipAddress})
+var sPluginSummary_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_PluginVersion, Type: smithy.ShapeTypeString, Ext: &ePluginSummary_version})
+var sPluginSummary_registeredTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registeredTime", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePluginSummary_registeredTime})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sStepAutomationConfiguration_scriptLocationS3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scriptLocationS3Bucket", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eStepAutomationConfiguration_scriptLocationS3Bucket})
+var sStepAutomationConfiguration_scriptLocationS3Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scriptLocationS3Key", ID: &iPlatformScriptKey, Members: &mPlatformScriptKey, Type: smithy.ShapeTypeStructure, Ext: &eStepAutomationConfiguration_scriptLocationS3Key})
+var sStepAutomationConfiguration_command = smithy.NewStaticSchema(smithy.StaticSchema{Member: "command", ID: &iPlatformCommand, Members: &mPlatformCommand, Type: smithy.ShapeTypeStructure, Ext: &eStepAutomationConfiguration_command})
+var sStepAutomationConfiguration_runEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runEnvironment", ID: &i_RunEnvironment, Type: smithy.ShapeTypeString, Ext: &eStepAutomationConfiguration_runEnvironment})
+var sStepAutomationConfiguration_targetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetType", ID: &i_TargetType, Type: smithy.ShapeTypeString, Ext: &eStepAutomationConfiguration_targetType})
+var sStepInput_integerValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerValue", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eStepInput_integerValue})
+var sStepInput_stringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValue", ID: &i_StringValue, Type: smithy.ShapeTypeString, Ext: &eStepInput_stringValue})
+var sStepInput_listOfStringsValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listOfStringsValue", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eStepInput_listOfStringsValue})
+var sStepInput_mapOfStringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mapOfStringValue", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap, Ext: &eStepInput_mapOfStringValue})
+var s_StepInputParameters_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_StepInputParametersKey, Type: smithy.ShapeTypeString, Ext: &e_StepInputParameters_key})
+var s_StepInputParameters_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iStepInput, Members: &mStepInput, Type: smithy.ShapeTypeUnion, Ext: &e_StepInputParameters_value})
+var sStepOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eStepOutput_name})
+var sStepOutput_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &i_DataType, Type: smithy.ShapeTypeString, Ext: &eStepOutput_dataType})
+var sStepOutput_required = smithy.NewStaticSchema(smithy.StaticSchema{Member: "required", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eStepOutput_required})
+var s_StepOutputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStepOutput, Members: &mStepOutput, Type: smithy.ShapeTypeStructure, Ext: &e_StepOutputList_member})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_StringListMember, Type: smithy.ShapeTypeString, Ext: &e_StringList_member})
+var s_StringMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_StringMapKey, Type: smithy.ShapeTypeString, Ext: &e_StringMap_key})
+var s_StringMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StringMapValue, Type: smithy.ShapeTypeString, Ext: &e_StringMap_value})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var sTemplateInput_inputName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputName", ID: &i_TemplateInputName, Type: smithy.ShapeTypeString, Ext: &eTemplateInput_inputName})
+var sTemplateInput_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &i_DataType, Type: smithy.ShapeTypeString, Ext: &eTemplateInput_dataType})
+var sTemplateInput_required = smithy.NewStaticSchema(smithy.StaticSchema{Member: "required", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eTemplateInput_required})
+var s_TemplateInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTemplateInput, Members: &mTemplateInput, Type: smithy.ShapeTypeStructure, Ext: &e_TemplateInputList_member})
+var sTemplateSource_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_MigrationWorkflowId, Type: smithy.ShapeTypeString, Ext: &eTemplateSource_workflowId})
+var sTemplateStepGroupSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTemplateStepGroupSummary_id})
+var sTemplateStepGroupSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTemplateStepGroupSummary_name})
+var sTemplateStepGroupSummary_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eTemplateStepGroupSummary_previous})
+var sTemplateStepGroupSummary_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eTemplateStepGroupSummary_next})
+var s_TemplateStepGroupSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTemplateStepGroupSummary, Members: &mTemplateStepGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &e_TemplateStepGroupSummaryList_member})
+var sTemplateStepSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTemplateStepSummary_id})
+var sTemplateStepSummary_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTemplateStepSummary_stepGroupId})
+var sTemplateStepSummary_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTemplateStepSummary_templateId})
+var sTemplateStepSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTemplateStepSummary_name})
+var sTemplateStepSummary_stepActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepActionType", ID: &i_StepActionType, Type: smithy.ShapeTypeString, Ext: &eTemplateStepSummary_stepActionType})
+var sTemplateStepSummary_targetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetType", ID: &i_TargetType, Type: smithy.ShapeTypeString, Ext: &eTemplateStepSummary_targetType})
+var sTemplateStepSummary_owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owner", ID: &i_Owner, Type: smithy.ShapeTypeString, Ext: &eTemplateStepSummary_owner})
+var sTemplateStepSummary_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eTemplateStepSummary_previous})
+var sTemplateStepSummary_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eTemplateStepSummary_next})
+var s_TemplateStepSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTemplateStepSummary, Members: &mTemplateStepSummary, Type: smithy.ShapeTypeStructure, Ext: &e_TemplateStepSummaryList_member})
+var sTemplateSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTemplateSummary_id})
+var sTemplateSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTemplateSummary_name})
+var sTemplateSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTemplateSummary_arn})
+var sTemplateSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTemplateSummary_description})
+var s_TemplateSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTemplateSummary, Members: &mTemplateSummary, Type: smithy.ShapeTypeStructure, Ext: &e_TemplateSummaryList_member})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sTool_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTool_name})
+var sTool_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTool_url})
+var s_ToolsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTool, Members: &mTool, Type: smithy.ShapeTypeStructure, Ext: &e_ToolsList_member})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sWorkflowStepAutomationConfiguration_scriptLocationS3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scriptLocationS3Bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString, Ext: &eWorkflowStepAutomationConfiguration_scriptLocationS3Bucket})
+var sWorkflowStepAutomationConfiguration_scriptLocationS3Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scriptLocationS3Key", ID: &iPlatformScriptKey, Members: &mPlatformScriptKey, Type: smithy.ShapeTypeStructure, Ext: &eWorkflowStepAutomationConfiguration_scriptLocationS3Key})
+var sWorkflowStepAutomationConfiguration_command = smithy.NewStaticSchema(smithy.StaticSchema{Member: "command", ID: &iPlatformCommand, Members: &mPlatformCommand, Type: smithy.ShapeTypeStructure, Ext: &eWorkflowStepAutomationConfiguration_command})
+var sWorkflowStepAutomationConfiguration_runEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runEnvironment", ID: &i_RunEnvironment, Type: smithy.ShapeTypeString, Ext: &eWorkflowStepAutomationConfiguration_runEnvironment})
+var sWorkflowStepAutomationConfiguration_targetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetType", ID: &i_TargetType, Type: smithy.ShapeTypeString, Ext: &eWorkflowStepAutomationConfiguration_targetType})
+var s_WorkflowStepGroupsSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkflowStepGroupSummary, Members: &mWorkflowStepGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &e_WorkflowStepGroupsSummaryList_member})
+var sWorkflowStepGroupSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWorkflowStepGroupSummary_id})
+var sWorkflowStepGroupSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWorkflowStepGroupSummary_name})
+var sWorkflowStepGroupSummary_owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owner", ID: &i_Owner, Type: smithy.ShapeTypeString, Ext: &eWorkflowStepGroupSummary_owner})
+var sWorkflowStepGroupSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_StepGroupStatus, Type: smithy.ShapeTypeString, Ext: &eWorkflowStepGroupSummary_status})
+var sWorkflowStepGroupSummary_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eWorkflowStepGroupSummary_previous})
+var sWorkflowStepGroupSummary_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eWorkflowStepGroupSummary_next})
+var sWorkflowStepOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_WorkflowStepOutputName, Type: smithy.ShapeTypeString, Ext: &eWorkflowStepOutput_name})
+var sWorkflowStepOutput_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &i_DataType, Type: smithy.ShapeTypeString, Ext: &eWorkflowStepOutput_dataType})
+var sWorkflowStepOutput_required = smithy.NewStaticSchema(smithy.StaticSchema{Member: "required", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eWorkflowStepOutput_required})
+var sWorkflowStepOutput_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iWorkflowStepOutputUnion, Members: &mWorkflowStepOutputUnion, Type: smithy.ShapeTypeUnion, Ext: &eWorkflowStepOutput_value})
+var s_WorkflowStepOutputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkflowStepOutput, Members: &mWorkflowStepOutput, Type: smithy.ShapeTypeStructure, Ext: &e_WorkflowStepOutputList_member})
+var sWorkflowStepOutputUnion_integerValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerValue", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eWorkflowStepOutputUnion_integerValue})
+var sWorkflowStepOutputUnion_stringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValue", ID: &i_MaxStringValue, Type: smithy.ShapeTypeString, Ext: &eWorkflowStepOutputUnion_stringValue})
+var sWorkflowStepOutputUnion_listOfStringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listOfStringValue", ID: &i_MaxStringList, Members: &m_MaxStringList, Type: smithy.ShapeTypeList, Ext: &eWorkflowStepOutputUnion_listOfStringValue})
+var s_WorkflowStepsSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkflowStepSummary, Members: &mWorkflowStepSummary, Type: smithy.ShapeTypeStructure, Ext: &e_WorkflowStepsSummaryList_member})
+var sWorkflowStepSummary_stepId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWorkflowStepSummary_stepId})
+var sWorkflowStepSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWorkflowStepSummary_name})
+var sWorkflowStepSummary_stepActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepActionType", ID: &i_StepActionType, Type: smithy.ShapeTypeString, Ext: &eWorkflowStepSummary_stepActionType})
+var sWorkflowStepSummary_owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owner", ID: &i_Owner, Type: smithy.ShapeTypeString, Ext: &eWorkflowStepSummary_owner})
+var sWorkflowStepSummary_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eWorkflowStepSummary_previous})
+var sWorkflowStepSummary_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eWorkflowStepSummary_next})
+var sWorkflowStepSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_StepStatus, Type: smithy.ShapeTypeString, Ext: &eWorkflowStepSummary_status})
+var sWorkflowStepSummary_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWorkflowStepSummary_statusMessage})
+var sWorkflowStepSummary_noOfSrvCompleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "noOfSrvCompleted", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eWorkflowStepSummary_noOfSrvCompleted})
+var sWorkflowStepSummary_noOfSrvFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "noOfSrvFailed", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eWorkflowStepSummary_noOfSrvFailed})
+var sWorkflowStepSummary_totalNoOfSrv = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalNoOfSrv", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eWorkflowStepSummary_totalNoOfSrv})
+var sWorkflowStepSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWorkflowStepSummary_description})
+var sWorkflowStepSummary_scriptLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scriptLocation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWorkflowStepSummary_scriptLocation})
+var sCreateTemplateRequest_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateTemplateRequest_templateName})
+var sCreateTemplateRequest_templateDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateDescription", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateTemplateRequest_templateDescription})
+var sCreateTemplateRequest_templateSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateSource", ID: &iTemplateSource, Members: &mTemplateSource, Type: smithy.ShapeTypeUnion, Ext: &eCreateTemplateRequest_templateSource})
+var sCreateTemplateRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateTemplateRequest_clientToken})
+var sCreateTemplateRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateTemplateRequest_tags})
+var sCreateTemplateResponse_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateTemplateResponse_templateId})
+var sCreateTemplateResponse_templateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateTemplateResponse_templateArn})
+var sCreateTemplateResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap, Ext: &eCreateTemplateResponse_tags})
+var sCreateMigrationWorkflowRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateMigrationWorkflowRequest_name})
+var sCreateMigrationWorkflowRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateMigrationWorkflowRequest_description})
+var sCreateMigrationWorkflowRequest_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateMigrationWorkflowRequest_templateId})
+var sCreateMigrationWorkflowRequest_applicationConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationConfigurationId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateMigrationWorkflowRequest_applicationConfigurationId})
+var sCreateMigrationWorkflowRequest_inputParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputParameters", ID: &i_StepInputParameters, Members: &m_StepInputParameters, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eCreateMigrationWorkflowRequest_inputParameters})
+var sCreateMigrationWorkflowRequest_stepTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepTargets", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eCreateMigrationWorkflowRequest_stepTargets})
+var sCreateMigrationWorkflowRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap, Ext: &eCreateMigrationWorkflowRequest_tags})
+var sCreateMigrationWorkflowResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MigrationWorkflowId, Type: smithy.ShapeTypeString, Ext: &eCreateMigrationWorkflowResponse_id})
+var sCreateMigrationWorkflowResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateMigrationWorkflowResponse_arn})
+var sCreateMigrationWorkflowResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateMigrationWorkflowResponse_name})
+var sCreateMigrationWorkflowResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateMigrationWorkflowResponse_description})
+var sCreateMigrationWorkflowResponse_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateMigrationWorkflowResponse_templateId})
+var sCreateMigrationWorkflowResponse_adsApplicationConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adsApplicationConfigurationId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateMigrationWorkflowResponse_adsApplicationConfigurationId})
+var sCreateMigrationWorkflowResponse_workflowInputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowInputs", ID: &i_StepInputParameters, Members: &m_StepInputParameters, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eCreateMigrationWorkflowResponse_workflowInputs})
+var sCreateMigrationWorkflowResponse_stepTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepTargets", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eCreateMigrationWorkflowResponse_stepTargets})
+var sCreateMigrationWorkflowResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_MigrationWorkflowStatusEnum, Type: smithy.ShapeTypeString, Ext: &eCreateMigrationWorkflowResponse_status})
+var sCreateMigrationWorkflowResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateMigrationWorkflowResponse_creationTime})
+var sCreateMigrationWorkflowResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap, Ext: &eCreateMigrationWorkflowResponse_tags})
+var sCreateWorkflowStepGroupRequest_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_MigrationWorkflowId, Type: smithy.ShapeTypeString, Ext: &eCreateWorkflowStepGroupRequest_workflowId})
+var sCreateWorkflowStepGroupRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_StepGroupName, Type: smithy.ShapeTypeString, Ext: &eCreateWorkflowStepGroupRequest_name})
+var sCreateWorkflowStepGroupRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_StepGroupDescription, Type: smithy.ShapeTypeString, Ext: &eCreateWorkflowStepGroupRequest_description})
+var sCreateWorkflowStepGroupRequest_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eCreateWorkflowStepGroupRequest_next})
+var sCreateWorkflowStepGroupRequest_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eCreateWorkflowStepGroupRequest_previous})
+var sCreateWorkflowStepGroupResponse_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateWorkflowStepGroupResponse_workflowId})
+var sCreateWorkflowStepGroupResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateWorkflowStepGroupResponse_name})
+var sCreateWorkflowStepGroupResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateWorkflowStepGroupResponse_id})
+var sCreateWorkflowStepGroupResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateWorkflowStepGroupResponse_description})
+var sCreateWorkflowStepGroupResponse_tools = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tools", ID: &i_ToolsList, Members: &m_ToolsList, Type: smithy.ShapeTypeList, Ext: &eCreateWorkflowStepGroupResponse_tools})
+var sCreateWorkflowStepGroupResponse_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eCreateWorkflowStepGroupResponse_next})
+var sCreateWorkflowStepGroupResponse_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eCreateWorkflowStepGroupResponse_previous})
+var sCreateWorkflowStepGroupResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateWorkflowStepGroupResponse_creationTime})
+var sCreateWorkflowStepRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_MigrationWorkflowName, Type: smithy.ShapeTypeString, Ext: &eCreateWorkflowStepRequest_name})
+var sCreateWorkflowStepRequest_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &i_StepGroupId, Type: smithy.ShapeTypeString, Ext: &eCreateWorkflowStepRequest_stepGroupId})
+var sCreateWorkflowStepRequest_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_MigrationWorkflowId, Type: smithy.ShapeTypeString, Ext: &eCreateWorkflowStepRequest_workflowId})
+var sCreateWorkflowStepRequest_stepActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepActionType", ID: &i_StepActionType, Type: smithy.ShapeTypeString, Ext: &eCreateWorkflowStepRequest_stepActionType})
+var sCreateWorkflowStepRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_MigrationWorkflowDescription, Type: smithy.ShapeTypeString, Ext: &eCreateWorkflowStepRequest_description})
+var sCreateWorkflowStepRequest_workflowStepAutomationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowStepAutomationConfiguration", ID: &iWorkflowStepAutomationConfiguration, Members: &mWorkflowStepAutomationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateWorkflowStepRequest_workflowStepAutomationConfiguration})
+var sCreateWorkflowStepRequest_stepTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepTarget", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eCreateWorkflowStepRequest_stepTarget})
+var sCreateWorkflowStepRequest_outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputs", ID: &i_WorkflowStepOutputList, Members: &m_WorkflowStepOutputList, Type: smithy.ShapeTypeList, Ext: &eCreateWorkflowStepRequest_outputs})
+var sCreateWorkflowStepRequest_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eCreateWorkflowStepRequest_previous})
+var sCreateWorkflowStepRequest_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eCreateWorkflowStepRequest_next})
+var sCreateWorkflowStepResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateWorkflowStepResponse_id})
+var sCreateWorkflowStepResponse_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateWorkflowStepResponse_stepGroupId})
+var sCreateWorkflowStepResponse_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateWorkflowStepResponse_workflowId})
+var sCreateWorkflowStepResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateWorkflowStepResponse_name})
+var sDeleteTemplateRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_TemplateId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eDeleteTemplateRequest_id})
+var sDeleteMigrationWorkflowRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MigrationWorkflowId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eDeleteMigrationWorkflowRequest_id})
+var sDeleteMigrationWorkflowResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MigrationWorkflowId, Type: smithy.ShapeTypeString, Ext: &eDeleteMigrationWorkflowResponse_id})
+var sDeleteMigrationWorkflowResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeleteMigrationWorkflowResponse_arn})
+var sDeleteMigrationWorkflowResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_MigrationWorkflowStatusEnum, Type: smithy.ShapeTypeString, Ext: &eDeleteMigrationWorkflowResponse_status})
+var sDeleteWorkflowStepGroupRequest_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_MigrationWorkflowId, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eDeleteWorkflowStepGroupRequest_workflowId})
+var sDeleteWorkflowStepGroupRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_StepGroupId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eDeleteWorkflowStepGroupRequest_id})
+var sDeleteWorkflowStepRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_StepId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eDeleteWorkflowStepRequest_id})
+var sDeleteWorkflowStepRequest_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &i_StepGroupId, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eDeleteWorkflowStepRequest_stepGroupId})
+var sDeleteWorkflowStepRequest_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_MigrationWorkflowId, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eDeleteWorkflowStepRequest_workflowId})
+var sGetMigrationWorkflowTemplateRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_TemplateId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eGetMigrationWorkflowTemplateRequest_id})
+var sGetMigrationWorkflowTemplateResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMigrationWorkflowTemplateResponse_id})
+var sGetMigrationWorkflowTemplateResponse_templateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMigrationWorkflowTemplateResponse_templateArn})
+var sGetMigrationWorkflowTemplateResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMigrationWorkflowTemplateResponse_name})
+var sGetMigrationWorkflowTemplateResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMigrationWorkflowTemplateResponse_description})
+var sGetMigrationWorkflowTemplateResponse_inputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputs", ID: &i_TemplateInputList, Members: &m_TemplateInputList, Type: smithy.ShapeTypeList, Ext: &eGetMigrationWorkflowTemplateResponse_inputs})
+var sGetMigrationWorkflowTemplateResponse_tools = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tools", ID: &i_ToolsList, Members: &m_ToolsList, Type: smithy.ShapeTypeList, Ext: &eGetMigrationWorkflowTemplateResponse_tools})
+var sGetMigrationWorkflowTemplateResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMigrationWorkflowTemplateResponse_creationTime})
+var sGetMigrationWorkflowTemplateResponse_owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owner", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMigrationWorkflowTemplateResponse_owner})
+var sGetMigrationWorkflowTemplateResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_TemplateStatus, Type: smithy.ShapeTypeString, Ext: &eGetMigrationWorkflowTemplateResponse_status})
+var sGetMigrationWorkflowTemplateResponse_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMigrationWorkflowTemplateResponse_statusMessage})
+var sGetMigrationWorkflowTemplateResponse_templateClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateClass", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMigrationWorkflowTemplateResponse_templateClass})
+var sGetMigrationWorkflowTemplateResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap, Ext: &eGetMigrationWorkflowTemplateResponse_tags})
+var sGetTemplateStepGroupRequest_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &i_TemplateId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eGetTemplateStepGroupRequest_templateId})
+var sGetTemplateStepGroupRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_StepGroupId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eGetTemplateStepGroupRequest_id})
+var sGetTemplateStepGroupResponse_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetTemplateStepGroupResponse_templateId})
+var sGetTemplateStepGroupResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetTemplateStepGroupResponse_id})
+var sGetTemplateStepGroupResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetTemplateStepGroupResponse_name})
+var sGetTemplateStepGroupResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetTemplateStepGroupResponse_description})
+var sGetTemplateStepGroupResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_StepGroupStatus, Type: smithy.ShapeTypeString, Ext: &eGetTemplateStepGroupResponse_status})
+var sGetTemplateStepGroupResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetTemplateStepGroupResponse_creationTime})
+var sGetTemplateStepGroupResponse_lastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetTemplateStepGroupResponse_lastModifiedTime})
+var sGetTemplateStepGroupResponse_tools = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tools", ID: &i_ToolsList, Members: &m_ToolsList, Type: smithy.ShapeTypeList, Ext: &eGetTemplateStepGroupResponse_tools})
+var sGetTemplateStepGroupResponse_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eGetTemplateStepGroupResponse_previous})
+var sGetTemplateStepGroupResponse_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eGetTemplateStepGroupResponse_next})
+var sGetTemplateStepRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_StepId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eGetTemplateStepRequest_id})
+var sGetTemplateStepRequest_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &i_TemplateId, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &eGetTemplateStepRequest_templateId})
+var sGetTemplateStepRequest_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &i_StepGroupId, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eGetTemplateStepRequest_stepGroupId})
+var sGetTemplateStepResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_StepId, Type: smithy.ShapeTypeString, Ext: &eGetTemplateStepResponse_id})
+var sGetTemplateStepResponse_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &i_StepGroupId, Type: smithy.ShapeTypeString, Ext: &eGetTemplateStepResponse_stepGroupId})
+var sGetTemplateStepResponse_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &i_TemplateId, Type: smithy.ShapeTypeString, Ext: &eGetTemplateStepResponse_templateId})
+var sGetTemplateStepResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetTemplateStepResponse_name})
+var sGetTemplateStepResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetTemplateStepResponse_description})
+var sGetTemplateStepResponse_stepActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepActionType", ID: &i_StepActionType, Type: smithy.ShapeTypeString, Ext: &eGetTemplateStepResponse_stepActionType})
+var sGetTemplateStepResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetTemplateStepResponse_creationTime})
+var sGetTemplateStepResponse_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eGetTemplateStepResponse_previous})
+var sGetTemplateStepResponse_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eGetTemplateStepResponse_next})
+var sGetTemplateStepResponse_outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputs", ID: &i_StepOutputList, Members: &m_StepOutputList, Type: smithy.ShapeTypeList, Ext: &eGetTemplateStepResponse_outputs})
+var sGetTemplateStepResponse_stepAutomationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepAutomationConfiguration", ID: &iStepAutomationConfiguration, Members: &mStepAutomationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetTemplateStepResponse_stepAutomationConfiguration})
+var sGetMigrationWorkflowRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MigrationWorkflowId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eGetMigrationWorkflowRequest_id})
+var sGetMigrationWorkflowResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MigrationWorkflowId, Type: smithy.ShapeTypeString, Ext: &eGetMigrationWorkflowResponse_id})
+var sGetMigrationWorkflowResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMigrationWorkflowResponse_arn})
+var sGetMigrationWorkflowResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMigrationWorkflowResponse_name})
+var sGetMigrationWorkflowResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMigrationWorkflowResponse_description})
+var sGetMigrationWorkflowResponse_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMigrationWorkflowResponse_templateId})
+var sGetMigrationWorkflowResponse_adsApplicationConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adsApplicationConfigurationId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMigrationWorkflowResponse_adsApplicationConfigurationId})
+var sGetMigrationWorkflowResponse_adsApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adsApplicationName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMigrationWorkflowResponse_adsApplicationName})
+var sGetMigrationWorkflowResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_MigrationWorkflowStatusEnum, Type: smithy.ShapeTypeString, Ext: &eGetMigrationWorkflowResponse_status})
+var sGetMigrationWorkflowResponse_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMigrationWorkflowResponse_statusMessage})
+var sGetMigrationWorkflowResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMigrationWorkflowResponse_creationTime})
+var sGetMigrationWorkflowResponse_lastStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastStartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMigrationWorkflowResponse_lastStartTime})
+var sGetMigrationWorkflowResponse_lastStopTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastStopTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMigrationWorkflowResponse_lastStopTime})
+var sGetMigrationWorkflowResponse_lastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMigrationWorkflowResponse_lastModifiedTime})
+var sGetMigrationWorkflowResponse_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMigrationWorkflowResponse_endTime})
+var sGetMigrationWorkflowResponse_tools = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tools", ID: &i_ToolsList, Members: &m_ToolsList, Type: smithy.ShapeTypeList, Ext: &eGetMigrationWorkflowResponse_tools})
+var sGetMigrationWorkflowResponse_totalSteps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalSteps", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetMigrationWorkflowResponse_totalSteps})
+var sGetMigrationWorkflowResponse_completedSteps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completedSteps", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetMigrationWorkflowResponse_completedSteps})
+var sGetMigrationWorkflowResponse_workflowInputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowInputs", ID: &i_StepInputParameters, Members: &m_StepInputParameters, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eGetMigrationWorkflowResponse_workflowInputs})
+var sGetMigrationWorkflowResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap, Ext: &eGetMigrationWorkflowResponse_tags})
+var sGetMigrationWorkflowResponse_workflowBucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowBucket", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMigrationWorkflowResponse_workflowBucket})
+var sGetWorkflowStepGroupRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_StepGroupId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowStepGroupRequest_id})
+var sGetWorkflowStepGroupRequest_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_MigrationWorkflowId, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowStepGroupRequest_workflowId})
+var sGetWorkflowStepGroupResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_StepGroupId, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowStepGroupResponse_id})
+var sGetWorkflowStepGroupResponse_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowStepGroupResponse_workflowId})
+var sGetWorkflowStepGroupResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowStepGroupResponse_name})
+var sGetWorkflowStepGroupResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowStepGroupResponse_description})
+var sGetWorkflowStepGroupResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_StepGroupStatus, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowStepGroupResponse_status})
+var sGetWorkflowStepGroupResponse_owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owner", ID: &i_Owner, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowStepGroupResponse_owner})
+var sGetWorkflowStepGroupResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetWorkflowStepGroupResponse_creationTime})
+var sGetWorkflowStepGroupResponse_lastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetWorkflowStepGroupResponse_lastModifiedTime})
+var sGetWorkflowStepGroupResponse_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetWorkflowStepGroupResponse_endTime})
+var sGetWorkflowStepGroupResponse_tools = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tools", ID: &i_ToolsList, Members: &m_ToolsList, Type: smithy.ShapeTypeList, Ext: &eGetWorkflowStepGroupResponse_tools})
+var sGetWorkflowStepGroupResponse_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eGetWorkflowStepGroupResponse_previous})
+var sGetWorkflowStepGroupResponse_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eGetWorkflowStepGroupResponse_next})
+var sGetWorkflowStepRequest_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_MigrationWorkflowId, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowStepRequest_workflowId})
+var sGetWorkflowStepRequest_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &i_StepGroupId, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowStepRequest_stepGroupId})
+var sGetWorkflowStepRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_StepId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowStepRequest_id})
+var sGetWorkflowStepResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowStepResponse_name})
+var sGetWorkflowStepResponse_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowStepResponse_stepGroupId})
+var sGetWorkflowStepResponse_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowStepResponse_workflowId})
+var sGetWorkflowStepResponse_stepId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowStepResponse_stepId})
+var sGetWorkflowStepResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowStepResponse_description})
+var sGetWorkflowStepResponse_stepActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepActionType", ID: &i_StepActionType, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowStepResponse_stepActionType})
+var sGetWorkflowStepResponse_owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owner", ID: &i_Owner, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowStepResponse_owner})
+var sGetWorkflowStepResponse_workflowStepAutomationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowStepAutomationConfiguration", ID: &iWorkflowStepAutomationConfiguration, Members: &mWorkflowStepAutomationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetWorkflowStepResponse_workflowStepAutomationConfiguration})
+var sGetWorkflowStepResponse_stepTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepTarget", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eGetWorkflowStepResponse_stepTarget})
+var sGetWorkflowStepResponse_outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputs", ID: &i_WorkflowStepOutputList, Members: &m_WorkflowStepOutputList, Type: smithy.ShapeTypeList, Ext: &eGetWorkflowStepResponse_outputs})
+var sGetWorkflowStepResponse_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eGetWorkflowStepResponse_previous})
+var sGetWorkflowStepResponse_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eGetWorkflowStepResponse_next})
+var sGetWorkflowStepResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_StepStatus, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowStepResponse_status})
+var sGetWorkflowStepResponse_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowStepResponse_statusMessage})
+var sGetWorkflowStepResponse_scriptOutputLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scriptOutputLocation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetWorkflowStepResponse_scriptOutputLocation})
+var sGetWorkflowStepResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetWorkflowStepResponse_creationTime})
+var sGetWorkflowStepResponse_lastStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastStartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetWorkflowStepResponse_lastStartTime})
+var sGetWorkflowStepResponse_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetWorkflowStepResponse_endTime})
+var sGetWorkflowStepResponse_noOfSrvCompleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "noOfSrvCompleted", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetWorkflowStepResponse_noOfSrvCompleted})
+var sGetWorkflowStepResponse_noOfSrvFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "noOfSrvFailed", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetWorkflowStepResponse_noOfSrvFailed})
+var sGetWorkflowStepResponse_totalNoOfSrv = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalNoOfSrv", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetWorkflowStepResponse_totalNoOfSrv})
+var sListPluginsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t43, Type: smithy.ShapeTypeInteger, Ext: &eListPluginsRequest_maxResults})
+var sListPluginsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &eListPluginsRequest_nextToken})
+var sListPluginsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPluginsResponse_nextToken})
+var sListPluginsResponse_plugins = smithy.NewStaticSchema(smithy.StaticSchema{Member: "plugins", ID: &i_PluginSummaries, Members: &m_PluginSummaries, Type: smithy.ShapeTypeList, Ext: &eListPluginsResponse_plugins})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_tags})
+var sListMigrationWorkflowTemplatesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t43, Type: smithy.ShapeTypeInteger, Ext: &eListMigrationWorkflowTemplatesRequest_maxResults})
+var sListMigrationWorkflowTemplatesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &eListMigrationWorkflowTemplatesRequest_nextToken})
+var sListMigrationWorkflowTemplatesRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TemplateName, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eListMigrationWorkflowTemplatesRequest_name})
+var sListMigrationWorkflowTemplatesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListMigrationWorkflowTemplatesResponse_nextToken})
+var sListMigrationWorkflowTemplatesResponse_templateSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateSummary", ID: &i_TemplateSummaryList, Members: &m_TemplateSummaryList, Type: smithy.ShapeTypeList, Ext: &eListMigrationWorkflowTemplatesResponse_templateSummary})
+var sListTemplateStepGroupsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t43, Type: smithy.ShapeTypeInteger, Ext: &eListTemplateStepGroupsRequest_maxResults})
+var sListTemplateStepGroupsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &eListTemplateStepGroupsRequest_nextToken})
+var sListTemplateStepGroupsRequest_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &i_TemplateId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eListTemplateStepGroupsRequest_templateId})
+var sListTemplateStepGroupsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTemplateStepGroupsResponse_nextToken})
+var sListTemplateStepGroupsResponse_templateStepGroupSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateStepGroupSummary", ID: &i_TemplateStepGroupSummaryList, Members: &m_TemplateStepGroupSummaryList, Type: smithy.ShapeTypeList, Ext: &eListTemplateStepGroupsResponse_templateStepGroupSummary})
+var sListTemplateStepsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t43, Type: smithy.ShapeTypeInteger, Ext: &eListTemplateStepsRequest_maxResults})
+var sListTemplateStepsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &eListTemplateStepsRequest_nextToken})
+var sListTemplateStepsRequest_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &i_TemplateId, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &eListTemplateStepsRequest_templateId})
+var sListTemplateStepsRequest_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &i_StepGroupId, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eListTemplateStepsRequest_stepGroupId})
+var sListTemplateStepsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTemplateStepsResponse_nextToken})
+var sListTemplateStepsResponse_templateStepSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateStepSummaryList", ID: &i_TemplateStepSummaryList, Members: &m_TemplateStepSummaryList, Type: smithy.ShapeTypeList, Ext: &eListTemplateStepsResponse_templateStepSummaryList})
+var sListMigrationWorkflowsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t43, Type: smithy.ShapeTypeInteger, Ext: &eListMigrationWorkflowsRequest_maxResults})
+var sListMigrationWorkflowsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &eListMigrationWorkflowsRequest_nextToken})
+var sListMigrationWorkflowsRequest_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &i_TemplateId, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &eListMigrationWorkflowsRequest_templateId})
+var sListMigrationWorkflowsRequest_adsApplicationConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adsApplicationConfigurationName", ID: &i_ApplicationConfigurationName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eListMigrationWorkflowsRequest_adsApplicationConfigurationName})
+var sListMigrationWorkflowsRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_MigrationWorkflowStatusEnum, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eListMigrationWorkflowsRequest_status})
+var sListMigrationWorkflowsRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eListMigrationWorkflowsRequest_name})
+var sListMigrationWorkflowsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListMigrationWorkflowsResponse_nextToken})
+var sListMigrationWorkflowsResponse_migrationWorkflowSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationWorkflowSummary", ID: &i_MigrationWorkflowSummaryList, Members: &m_MigrationWorkflowSummaryList, Type: smithy.ShapeTypeList, Ext: &eListMigrationWorkflowsResponse_migrationWorkflowSummary})
+var sListWorkflowStepGroupsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &eListWorkflowStepGroupsRequest_nextToken})
+var sListWorkflowStepGroupsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t43, Type: smithy.ShapeTypeInteger, Ext: &eListWorkflowStepGroupsRequest_maxResults})
+var sListWorkflowStepGroupsRequest_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_MigrationWorkflowId, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListWorkflowStepGroupsRequest_workflowId})
+var sListWorkflowStepGroupsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListWorkflowStepGroupsResponse_nextToken})
+var sListWorkflowStepGroupsResponse_workflowStepGroupsSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowStepGroupsSummary", ID: &i_WorkflowStepGroupsSummaryList, Members: &m_WorkflowStepGroupsSummaryList, Type: smithy.ShapeTypeList, Ext: &eListWorkflowStepGroupsResponse_workflowStepGroupsSummary})
+var sListWorkflowStepsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &eListWorkflowStepsRequest_nextToken})
+var sListWorkflowStepsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t43, Type: smithy.ShapeTypeInteger, Ext: &eListWorkflowStepsRequest_maxResults})
+var sListWorkflowStepsRequest_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_MigrationWorkflowId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eListWorkflowStepsRequest_workflowId})
+var sListWorkflowStepsRequest_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &i_StepGroupId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eListWorkflowStepsRequest_stepGroupId})
+var sListWorkflowStepsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListWorkflowStepsResponse_nextToken})
+var sListWorkflowStepsResponse_workflowStepsSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowStepsSummary", ID: &i_WorkflowStepsSummaryList, Members: &m_WorkflowStepsSummaryList, Type: smithy.ShapeTypeList, Ext: &eListWorkflowStepsResponse_workflowStepsSummary})
+var sRetryWorkflowStepRequest_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_MigrationWorkflowId, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eRetryWorkflowStepRequest_workflowId})
+var sRetryWorkflowStepRequest_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &i_StepGroupId, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eRetryWorkflowStepRequest_stepGroupId})
+var sRetryWorkflowStepRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_StepId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eRetryWorkflowStepRequest_id})
+var sRetryWorkflowStepResponse_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRetryWorkflowStepResponse_stepGroupId})
+var sRetryWorkflowStepResponse_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRetryWorkflowStepResponse_workflowId})
+var sRetryWorkflowStepResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRetryWorkflowStepResponse_id})
+var sRetryWorkflowStepResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_StepStatus, Type: smithy.ShapeTypeString, Ext: &eRetryWorkflowStepResponse_status})
+var sStartMigrationWorkflowRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MigrationWorkflowId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eStartMigrationWorkflowRequest_id})
+var sStartMigrationWorkflowResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MigrationWorkflowId, Type: smithy.ShapeTypeString, Ext: &eStartMigrationWorkflowResponse_id})
+var sStartMigrationWorkflowResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eStartMigrationWorkflowResponse_arn})
+var sStartMigrationWorkflowResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_MigrationWorkflowStatusEnum, Type: smithy.ShapeTypeString, Ext: &eStartMigrationWorkflowResponse_status})
+var sStartMigrationWorkflowResponse_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eStartMigrationWorkflowResponse_statusMessage})
+var sStartMigrationWorkflowResponse_lastStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastStartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eStartMigrationWorkflowResponse_lastStartTime})
+var sStopMigrationWorkflowRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MigrationWorkflowId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eStopMigrationWorkflowRequest_id})
+var sStopMigrationWorkflowResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MigrationWorkflowId, Type: smithy.ShapeTypeString, Ext: &eStopMigrationWorkflowResponse_id})
+var sStopMigrationWorkflowResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eStopMigrationWorkflowResponse_arn})
+var sStopMigrationWorkflowResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_MigrationWorkflowStatusEnum, Type: smithy.ShapeTypeString, Ext: &eStopMigrationWorkflowResponse_status})
+var sStopMigrationWorkflowResponse_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eStopMigrationWorkflowResponse_statusMessage})
+var sStopMigrationWorkflowResponse_lastStopTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastStopTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eStopMigrationWorkflowResponse_lastStopTime})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_tags})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t48, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUpdateTemplateRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_TemplateId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eUpdateTemplateRequest_id})
+var sUpdateTemplateRequest_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateTemplateRequest_templateName})
+var sUpdateTemplateRequest_templateDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateDescription", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateTemplateRequest_templateDescription})
+var sUpdateTemplateRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eUpdateTemplateRequest_clientToken})
+var sUpdateTemplateResponse_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateTemplateResponse_templateId})
+var sUpdateTemplateResponse_templateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateTemplateResponse_templateArn})
+var sUpdateTemplateResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap, Ext: &eUpdateTemplateResponse_tags})
+var sUpdateMigrationWorkflowRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MigrationWorkflowId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eUpdateMigrationWorkflowRequest_id})
+var sUpdateMigrationWorkflowRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateMigrationWorkflowRequest_name})
+var sUpdateMigrationWorkflowRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateMigrationWorkflowRequest_description})
+var sUpdateMigrationWorkflowRequest_inputParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputParameters", ID: &i_StepInputParameters, Members: &m_StepInputParameters, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eUpdateMigrationWorkflowRequest_inputParameters})
+var sUpdateMigrationWorkflowRequest_stepTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepTargets", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eUpdateMigrationWorkflowRequest_stepTargets})
+var sUpdateMigrationWorkflowResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MigrationWorkflowId, Type: smithy.ShapeTypeString, Ext: &eUpdateMigrationWorkflowResponse_id})
+var sUpdateMigrationWorkflowResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateMigrationWorkflowResponse_arn})
+var sUpdateMigrationWorkflowResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateMigrationWorkflowResponse_name})
+var sUpdateMigrationWorkflowResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateMigrationWorkflowResponse_description})
+var sUpdateMigrationWorkflowResponse_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateMigrationWorkflowResponse_templateId})
+var sUpdateMigrationWorkflowResponse_adsApplicationConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adsApplicationConfigurationId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateMigrationWorkflowResponse_adsApplicationConfigurationId})
+var sUpdateMigrationWorkflowResponse_workflowInputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowInputs", ID: &i_StepInputParameters, Members: &m_StepInputParameters, Traits: &t38, Type: smithy.ShapeTypeMap, Ext: &eUpdateMigrationWorkflowResponse_workflowInputs})
+var sUpdateMigrationWorkflowResponse_stepTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepTargets", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eUpdateMigrationWorkflowResponse_stepTargets})
+var sUpdateMigrationWorkflowResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_MigrationWorkflowStatusEnum, Type: smithy.ShapeTypeString, Ext: &eUpdateMigrationWorkflowResponse_status})
+var sUpdateMigrationWorkflowResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateMigrationWorkflowResponse_creationTime})
+var sUpdateMigrationWorkflowResponse_lastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateMigrationWorkflowResponse_lastModifiedTime})
+var sUpdateMigrationWorkflowResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap, Ext: &eUpdateMigrationWorkflowResponse_tags})
+var sUpdateWorkflowStepGroupRequest_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_MigrationWorkflowId, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkflowStepGroupRequest_workflowId})
+var sUpdateWorkflowStepGroupRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_StepGroupId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkflowStepGroupRequest_id})
+var sUpdateWorkflowStepGroupRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_StepGroupName, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkflowStepGroupRequest_name})
+var sUpdateWorkflowStepGroupRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_StepGroupDescription, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkflowStepGroupRequest_description})
+var sUpdateWorkflowStepGroupRequest_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eUpdateWorkflowStepGroupRequest_next})
+var sUpdateWorkflowStepGroupRequest_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eUpdateWorkflowStepGroupRequest_previous})
+var sUpdateWorkflowStepGroupResponse_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkflowStepGroupResponse_workflowId})
+var sUpdateWorkflowStepGroupResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkflowStepGroupResponse_name})
+var sUpdateWorkflowStepGroupResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkflowStepGroupResponse_id})
+var sUpdateWorkflowStepGroupResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkflowStepGroupResponse_description})
+var sUpdateWorkflowStepGroupResponse_tools = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tools", ID: &i_ToolsList, Members: &m_ToolsList, Type: smithy.ShapeTypeList, Ext: &eUpdateWorkflowStepGroupResponse_tools})
+var sUpdateWorkflowStepGroupResponse_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eUpdateWorkflowStepGroupResponse_next})
+var sUpdateWorkflowStepGroupResponse_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eUpdateWorkflowStepGroupResponse_previous})
+var sUpdateWorkflowStepGroupResponse_lastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateWorkflowStepGroupResponse_lastModifiedTime})
+var sUpdateWorkflowStepRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_StepId, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkflowStepRequest_id})
+var sUpdateWorkflowStepRequest_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &i_StepGroupId, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkflowStepRequest_stepGroupId})
+var sUpdateWorkflowStepRequest_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_MigrationWorkflowId, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkflowStepRequest_workflowId})
+var sUpdateWorkflowStepRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_StepName, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkflowStepRequest_name})
+var sUpdateWorkflowStepRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_StepDescription, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkflowStepRequest_description})
+var sUpdateWorkflowStepRequest_stepActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepActionType", ID: &i_StepActionType, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkflowStepRequest_stepActionType})
+var sUpdateWorkflowStepRequest_workflowStepAutomationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowStepAutomationConfiguration", ID: &iWorkflowStepAutomationConfiguration, Members: &mWorkflowStepAutomationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWorkflowStepRequest_workflowStepAutomationConfiguration})
+var sUpdateWorkflowStepRequest_stepTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepTarget", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eUpdateWorkflowStepRequest_stepTarget})
+var sUpdateWorkflowStepRequest_outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputs", ID: &i_WorkflowStepOutputList, Members: &m_WorkflowStepOutputList, Type: smithy.ShapeTypeList, Ext: &eUpdateWorkflowStepRequest_outputs})
+var sUpdateWorkflowStepRequest_previous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previous", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eUpdateWorkflowStepRequest_previous})
+var sUpdateWorkflowStepRequest_next = smithy.NewStaticSchema(smithy.StaticSchema{Member: "next", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eUpdateWorkflowStepRequest_next})
+var sUpdateWorkflowStepRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_StepStatus, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkflowStepRequest_status})
+var sUpdateWorkflowStepResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_StepId, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkflowStepResponse_id})
+var sUpdateWorkflowStepResponse_stepGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepGroupId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkflowStepResponse_stepGroupId})
+var sUpdateWorkflowStepResponse_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkflowStepResponse_workflowId})
+var sUpdateWorkflowStepResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateWorkflowStepResponse_name})
 
 var CreateTemplate = &sCreateTemplate
 

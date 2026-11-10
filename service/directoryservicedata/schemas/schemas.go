@@ -7,9 +7,332 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [324]smithy.SchemaExtensions
+var (
+	eAddGroupMember                                          smithy.SchemaExtensions
+	eCreateGroup                                             smithy.SchemaExtensions
+	eCreateUser                                              smithy.SchemaExtensions
+	eDeleteGroup                                             smithy.SchemaExtensions
+	eDeleteUser                                              smithy.SchemaExtensions
+	eDescribeGroup                                           smithy.SchemaExtensions
+	eDescribeUser                                            smithy.SchemaExtensions
+	eDisableUser                                             smithy.SchemaExtensions
+	eListGroupMembers                                        smithy.SchemaExtensions
+	eListGroups                                              smithy.SchemaExtensions
+	eListGroupsForMember                                     smithy.SchemaExtensions
+	eListUsers                                               smithy.SchemaExtensions
+	eRemoveGroupMember                                       smithy.SchemaExtensions
+	eSearchGroups                                            smithy.SchemaExtensions
+	eSearchUsers                                             smithy.SchemaExtensions
+	eUpdateGroup                                             smithy.SchemaExtensions
+	eUpdateUser                                              smithy.SchemaExtensions
+	e_DirectoryServiceData                                   smithy.SchemaExtensions
+	eAccessDeniedException                                   smithy.SchemaExtensions
+	eAccessDeniedException_Message                           smithy.SchemaExtensions
+	eAccessDeniedException_Reason                            smithy.SchemaExtensions
+	eAccessDeniedReason                                      smithy.SchemaExtensions
+	eAccessDeniedReason_IAM_AUTH                             smithy.SchemaExtensions
+	eAccessDeniedReason_DIRECTORY_AUTH                       smithy.SchemaExtensions
+	eAccessDeniedReason_DATA_DISABLED                        smithy.SchemaExtensions
+	e_Attributes                                             smithy.SchemaExtensions
+	e_Attributes_key                                         smithy.SchemaExtensions
+	e_Attributes_value                                       smithy.SchemaExtensions
+	eAttributeValue                                          smithy.SchemaExtensions
+	eAttributeValue_S                                        smithy.SchemaExtensions
+	eAttributeValue_N                                        smithy.SchemaExtensions
+	eAttributeValue_BOOL                                     smithy.SchemaExtensions
+	eAttributeValue_SS                                       smithy.SchemaExtensions
+	e_BooleanAttributeValue                                  smithy.SchemaExtensions
+	e_ClientToken                                            smithy.SchemaExtensions
+	eConflictException                                       smithy.SchemaExtensions
+	eConflictException_Message                               smithy.SchemaExtensions
+	e_DirectoryId                                            smithy.SchemaExtensions
+	eDirectoryUnavailableException                           smithy.SchemaExtensions
+	eDirectoryUnavailableException_Message                   smithy.SchemaExtensions
+	eDirectoryUnavailableException_Reason                    smithy.SchemaExtensions
+	eDirectoryUnavailableReason                              smithy.SchemaExtensions
+	eDirectoryUnavailableReason_INVALID_DIRECTORY_STATE      smithy.SchemaExtensions
+	eDirectoryUnavailableReason_DIRECTORY_TIMEOUT            smithy.SchemaExtensions
+	eDirectoryUnavailableReason_DIRECTORY_RESOURCES_EXCEEDED smithy.SchemaExtensions
+	eDirectoryUnavailableReason_NO_DISK_SPACE                smithy.SchemaExtensions
+	eDirectoryUnavailableReason_TRUST_AUTH_FAILURE           smithy.SchemaExtensions
+	e_DistinguishedName                                      smithy.SchemaExtensions
+	e_EmailAddress                                           smithy.SchemaExtensions
+	e_ExceptionMessage                                       smithy.SchemaExtensions
+	e_GivenName                                              smithy.SchemaExtensions
+	eGroup                                                   smithy.SchemaExtensions
+	eGroup_SID                                               smithy.SchemaExtensions
+	eGroup_SAMAccountName                                    smithy.SchemaExtensions
+	eGroup_DistinguishedName                                 smithy.SchemaExtensions
+	eGroup_GroupType                                         smithy.SchemaExtensions
+	eGroup_GroupScope                                        smithy.SchemaExtensions
+	eGroup_OtherAttributes                                   smithy.SchemaExtensions
+	e_GroupList                                              smithy.SchemaExtensions
+	e_GroupList_member                                       smithy.SchemaExtensions
+	e_GroupName                                              smithy.SchemaExtensions
+	eGroupScope                                              smithy.SchemaExtensions
+	eGroupScope_DOMAIN_LOCAL                                 smithy.SchemaExtensions
+	eGroupScope_GLOBAL                                       smithy.SchemaExtensions
+	eGroupScope_UNIVERSAL                                    smithy.SchemaExtensions
+	eGroupScope_BUILTIN_LOCAL                                smithy.SchemaExtensions
+	eGroupSummary                                            smithy.SchemaExtensions
+	eGroupSummary_SID                                        smithy.SchemaExtensions
+	eGroupSummary_SAMAccountName                             smithy.SchemaExtensions
+	eGroupSummary_GroupType                                  smithy.SchemaExtensions
+	eGroupSummary_GroupScope                                 smithy.SchemaExtensions
+	e_GroupSummaryList                                       smithy.SchemaExtensions
+	e_GroupSummaryList_member                                smithy.SchemaExtensions
+	eGroupType                                               smithy.SchemaExtensions
+	eGroupType_DISTRIBUTION                                  smithy.SchemaExtensions
+	eGroupType_SECURITY                                      smithy.SchemaExtensions
+	eInternalServerException                                 smithy.SchemaExtensions
+	eInternalServerException_Message                         smithy.SchemaExtensions
+	e_LdapDisplayName                                        smithy.SchemaExtensions
+	e_LdapDisplayNameList                                    smithy.SchemaExtensions
+	e_LdapDisplayNameList_member                             smithy.SchemaExtensions
+	e_MaxResults                                             smithy.SchemaExtensions
+	eMember                                                  smithy.SchemaExtensions
+	eMember_SID                                              smithy.SchemaExtensions
+	eMember_SAMAccountName                                   smithy.SchemaExtensions
+	eMember_MemberType                                       smithy.SchemaExtensions
+	e_MemberList                                             smithy.SchemaExtensions
+	e_MemberList_member                                      smithy.SchemaExtensions
+	e_MemberName                                             smithy.SchemaExtensions
+	eMemberType                                              smithy.SchemaExtensions
+	eMemberType_USER                                         smithy.SchemaExtensions
+	eMemberType_GROUP                                        smithy.SchemaExtensions
+	eMemberType_COMPUTER                                     smithy.SchemaExtensions
+	e_NextToken                                              smithy.SchemaExtensions
+	e_NumberAttributeValue                                   smithy.SchemaExtensions
+	e_Realm                                                  smithy.SchemaExtensions
+	eResourceNotFoundException                               smithy.SchemaExtensions
+	eResourceNotFoundException_Message                       smithy.SchemaExtensions
+	e_SearchString                                           smithy.SchemaExtensions
+	e_SID                                                    smithy.SchemaExtensions
+	e_StringAttributeValue                                   smithy.SchemaExtensions
+	e_StringSetAttributeValue                                smithy.SchemaExtensions
+	e_StringSetAttributeValue_member                         smithy.SchemaExtensions
+	e_Surname                                                smithy.SchemaExtensions
+	eThrottlingException                                     smithy.SchemaExtensions
+	eThrottlingException_Message                             smithy.SchemaExtensions
+	eThrottlingException_RetryAfterSeconds                   smithy.SchemaExtensions
+	eUpdateType                                              smithy.SchemaExtensions
+	eUpdateType_ADD                                          smithy.SchemaExtensions
+	eUpdateType_REPLACE                                      smithy.SchemaExtensions
+	eUpdateType_REMOVE                                       smithy.SchemaExtensions
+	eUser                                                    smithy.SchemaExtensions
+	eUser_SID                                                smithy.SchemaExtensions
+	eUser_SAMAccountName                                     smithy.SchemaExtensions
+	eUser_DistinguishedName                                  smithy.SchemaExtensions
+	eUser_UserPrincipalName                                  smithy.SchemaExtensions
+	eUser_EmailAddress                                       smithy.SchemaExtensions
+	eUser_GivenName                                          smithy.SchemaExtensions
+	eUser_Surname                                            smithy.SchemaExtensions
+	eUser_Enabled                                            smithy.SchemaExtensions
+	eUser_OtherAttributes                                    smithy.SchemaExtensions
+	e_UserList                                               smithy.SchemaExtensions
+	e_UserList_member                                        smithy.SchemaExtensions
+	e_UserName                                               smithy.SchemaExtensions
+	e_UserPrincipalName                                      smithy.SchemaExtensions
+	eUserSummary                                             smithy.SchemaExtensions
+	eUserSummary_SID                                         smithy.SchemaExtensions
+	eUserSummary_SAMAccountName                              smithy.SchemaExtensions
+	eUserSummary_GivenName                                   smithy.SchemaExtensions
+	eUserSummary_Surname                                     smithy.SchemaExtensions
+	eUserSummary_Enabled                                     smithy.SchemaExtensions
+	e_UserSummaryList                                        smithy.SchemaExtensions
+	e_UserSummaryList_member                                 smithy.SchemaExtensions
+	eValidationException                                     smithy.SchemaExtensions
+	eValidationException_Message                             smithy.SchemaExtensions
+	eValidationException_Reason                              smithy.SchemaExtensions
+	eValidationExceptionReason                               smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_REALM                 smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_DIRECTORY_TYPE        smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_SECONDARY_REGION      smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_NEXT_TOKEN            smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_ATTRIBUTE_VALUE       smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_ATTRIBUTE_NAME        smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_ATTRIBUTE_FOR_USER    smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_ATTRIBUTE_FOR_GROUP   smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_ATTRIBUTE_FOR_SEARCH  smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_ATTRIBUTE_FOR_MODIFY  smithy.SchemaExtensions
+	eValidationExceptionReason_DUPLICATE_ATTRIBUTE           smithy.SchemaExtensions
+	eValidationExceptionReason_MISSING_ATTRIBUTE             smithy.SchemaExtensions
+	eValidationExceptionReason_ATTRIBUTE_EXISTS              smithy.SchemaExtensions
+	eValidationExceptionReason_LDAP_SIZE_LIMIT_EXCEEDED      smithy.SchemaExtensions
+	eValidationExceptionReason_LDAP_UNSUPPORTED_OPERATION    smithy.SchemaExtensions
+	eAddGroupMemberRequest                                   smithy.SchemaExtensions
+	eAddGroupMemberRequest_DirectoryId                       smithy.SchemaExtensions
+	eAddGroupMemberRequest_GroupName                         smithy.SchemaExtensions
+	eAddGroupMemberRequest_MemberName                        smithy.SchemaExtensions
+	eAddGroupMemberRequest_MemberRealm                       smithy.SchemaExtensions
+	eAddGroupMemberRequest_ClientToken                       smithy.SchemaExtensions
+	eAddGroupMemberResult                                    smithy.SchemaExtensions
+	eCreateGroupRequest                                      smithy.SchemaExtensions
+	eCreateGroupRequest_DirectoryId                          smithy.SchemaExtensions
+	eCreateGroupRequest_SAMAccountName                       smithy.SchemaExtensions
+	eCreateGroupRequest_GroupType                            smithy.SchemaExtensions
+	eCreateGroupRequest_GroupScope                           smithy.SchemaExtensions
+	eCreateGroupRequest_OtherAttributes                      smithy.SchemaExtensions
+	eCreateGroupRequest_ClientToken                          smithy.SchemaExtensions
+	eCreateGroupResult                                       smithy.SchemaExtensions
+	eCreateGroupResult_DirectoryId                           smithy.SchemaExtensions
+	eCreateGroupResult_SAMAccountName                        smithy.SchemaExtensions
+	eCreateGroupResult_SID                                   smithy.SchemaExtensions
+	eCreateUserRequest                                       smithy.SchemaExtensions
+	eCreateUserRequest_DirectoryId                           smithy.SchemaExtensions
+	eCreateUserRequest_SAMAccountName                        smithy.SchemaExtensions
+	eCreateUserRequest_EmailAddress                          smithy.SchemaExtensions
+	eCreateUserRequest_GivenName                             smithy.SchemaExtensions
+	eCreateUserRequest_Surname                               smithy.SchemaExtensions
+	eCreateUserRequest_OtherAttributes                       smithy.SchemaExtensions
+	eCreateUserRequest_ClientToken                           smithy.SchemaExtensions
+	eCreateUserResult                                        smithy.SchemaExtensions
+	eCreateUserResult_DirectoryId                            smithy.SchemaExtensions
+	eCreateUserResult_SID                                    smithy.SchemaExtensions
+	eCreateUserResult_SAMAccountName                         smithy.SchemaExtensions
+	eDeleteGroupRequest                                      smithy.SchemaExtensions
+	eDeleteGroupRequest_DirectoryId                          smithy.SchemaExtensions
+	eDeleteGroupRequest_SAMAccountName                       smithy.SchemaExtensions
+	eDeleteGroupRequest_ClientToken                          smithy.SchemaExtensions
+	eDeleteGroupResult                                       smithy.SchemaExtensions
+	eDeleteUserRequest                                       smithy.SchemaExtensions
+	eDeleteUserRequest_DirectoryId                           smithy.SchemaExtensions
+	eDeleteUserRequest_SAMAccountName                        smithy.SchemaExtensions
+	eDeleteUserRequest_ClientToken                           smithy.SchemaExtensions
+	eDeleteUserResult                                        smithy.SchemaExtensions
+	eDescribeGroupRequest                                    smithy.SchemaExtensions
+	eDescribeGroupRequest_DirectoryId                        smithy.SchemaExtensions
+	eDescribeGroupRequest_Realm                              smithy.SchemaExtensions
+	eDescribeGroupRequest_SAMAccountName                     smithy.SchemaExtensions
+	eDescribeGroupRequest_OtherAttributes                    smithy.SchemaExtensions
+	eDescribeGroupResult                                     smithy.SchemaExtensions
+	eDescribeGroupResult_DirectoryId                         smithy.SchemaExtensions
+	eDescribeGroupResult_Realm                               smithy.SchemaExtensions
+	eDescribeGroupResult_SID                                 smithy.SchemaExtensions
+	eDescribeGroupResult_SAMAccountName                      smithy.SchemaExtensions
+	eDescribeGroupResult_DistinguishedName                   smithy.SchemaExtensions
+	eDescribeGroupResult_GroupType                           smithy.SchemaExtensions
+	eDescribeGroupResult_GroupScope                          smithy.SchemaExtensions
+	eDescribeGroupResult_OtherAttributes                     smithy.SchemaExtensions
+	eDescribeUserRequest                                     smithy.SchemaExtensions
+	eDescribeUserRequest_DirectoryId                         smithy.SchemaExtensions
+	eDescribeUserRequest_SAMAccountName                      smithy.SchemaExtensions
+	eDescribeUserRequest_OtherAttributes                     smithy.SchemaExtensions
+	eDescribeUserRequest_Realm                               smithy.SchemaExtensions
+	eDescribeUserResult                                      smithy.SchemaExtensions
+	eDescribeUserResult_DirectoryId                          smithy.SchemaExtensions
+	eDescribeUserResult_Realm                                smithy.SchemaExtensions
+	eDescribeUserResult_SID                                  smithy.SchemaExtensions
+	eDescribeUserResult_SAMAccountName                       smithy.SchemaExtensions
+	eDescribeUserResult_DistinguishedName                    smithy.SchemaExtensions
+	eDescribeUserResult_UserPrincipalName                    smithy.SchemaExtensions
+	eDescribeUserResult_EmailAddress                         smithy.SchemaExtensions
+	eDescribeUserResult_GivenName                            smithy.SchemaExtensions
+	eDescribeUserResult_Surname                              smithy.SchemaExtensions
+	eDescribeUserResult_Enabled                              smithy.SchemaExtensions
+	eDescribeUserResult_OtherAttributes                      smithy.SchemaExtensions
+	eDisableUserRequest                                      smithy.SchemaExtensions
+	eDisableUserRequest_DirectoryId                          smithy.SchemaExtensions
+	eDisableUserRequest_SAMAccountName                       smithy.SchemaExtensions
+	eDisableUserRequest_ClientToken                          smithy.SchemaExtensions
+	eDisableUserResult                                       smithy.SchemaExtensions
+	eListGroupMembersRequest                                 smithy.SchemaExtensions
+	eListGroupMembersRequest_DirectoryId                     smithy.SchemaExtensions
+	eListGroupMembersRequest_Realm                           smithy.SchemaExtensions
+	eListGroupMembersRequest_MemberRealm                     smithy.SchemaExtensions
+	eListGroupMembersRequest_SAMAccountName                  smithy.SchemaExtensions
+	eListGroupMembersRequest_NextToken                       smithy.SchemaExtensions
+	eListGroupMembersRequest_MaxResults                      smithy.SchemaExtensions
+	eListGroupMembersResult                                  smithy.SchemaExtensions
+	eListGroupMembersResult_DirectoryId                      smithy.SchemaExtensions
+	eListGroupMembersResult_Realm                            smithy.SchemaExtensions
+	eListGroupMembersResult_MemberRealm                      smithy.SchemaExtensions
+	eListGroupMembersResult_Members                          smithy.SchemaExtensions
+	eListGroupMembersResult_NextToken                        smithy.SchemaExtensions
+	eListGroupsForMemberRequest                              smithy.SchemaExtensions
+	eListGroupsForMemberRequest_DirectoryId                  smithy.SchemaExtensions
+	eListGroupsForMemberRequest_Realm                        smithy.SchemaExtensions
+	eListGroupsForMemberRequest_MemberRealm                  smithy.SchemaExtensions
+	eListGroupsForMemberRequest_SAMAccountName               smithy.SchemaExtensions
+	eListGroupsForMemberRequest_NextToken                    smithy.SchemaExtensions
+	eListGroupsForMemberRequest_MaxResults                   smithy.SchemaExtensions
+	eListGroupsForMemberResult                               smithy.SchemaExtensions
+	eListGroupsForMemberResult_DirectoryId                   smithy.SchemaExtensions
+	eListGroupsForMemberResult_Realm                         smithy.SchemaExtensions
+	eListGroupsForMemberResult_MemberRealm                   smithy.SchemaExtensions
+	eListGroupsForMemberResult_Groups                        smithy.SchemaExtensions
+	eListGroupsForMemberResult_NextToken                     smithy.SchemaExtensions
+	eListGroupsRequest                                       smithy.SchemaExtensions
+	eListGroupsRequest_DirectoryId                           smithy.SchemaExtensions
+	eListGroupsRequest_Realm                                 smithy.SchemaExtensions
+	eListGroupsRequest_NextToken                             smithy.SchemaExtensions
+	eListGroupsRequest_MaxResults                            smithy.SchemaExtensions
+	eListGroupsResult                                        smithy.SchemaExtensions
+	eListGroupsResult_DirectoryId                            smithy.SchemaExtensions
+	eListGroupsResult_Realm                                  smithy.SchemaExtensions
+	eListGroupsResult_Groups                                 smithy.SchemaExtensions
+	eListGroupsResult_NextToken                              smithy.SchemaExtensions
+	eListUsersRequest                                        smithy.SchemaExtensions
+	eListUsersRequest_DirectoryId                            smithy.SchemaExtensions
+	eListUsersRequest_Realm                                  smithy.SchemaExtensions
+	eListUsersRequest_NextToken                              smithy.SchemaExtensions
+	eListUsersRequest_MaxResults                             smithy.SchemaExtensions
+	eListUsersResult                                         smithy.SchemaExtensions
+	eListUsersResult_DirectoryId                             smithy.SchemaExtensions
+	eListUsersResult_Realm                                   smithy.SchemaExtensions
+	eListUsersResult_Users                                   smithy.SchemaExtensions
+	eListUsersResult_NextToken                               smithy.SchemaExtensions
+	eRemoveGroupMemberRequest                                smithy.SchemaExtensions
+	eRemoveGroupMemberRequest_DirectoryId                    smithy.SchemaExtensions
+	eRemoveGroupMemberRequest_GroupName                      smithy.SchemaExtensions
+	eRemoveGroupMemberRequest_MemberName                     smithy.SchemaExtensions
+	eRemoveGroupMemberRequest_MemberRealm                    smithy.SchemaExtensions
+	eRemoveGroupMemberRequest_ClientToken                    smithy.SchemaExtensions
+	eRemoveGroupMemberResult                                 smithy.SchemaExtensions
+	eSearchGroupsRequest                                     smithy.SchemaExtensions
+	eSearchGroupsRequest_DirectoryId                         smithy.SchemaExtensions
+	eSearchGroupsRequest_SearchString                        smithy.SchemaExtensions
+	eSearchGroupsRequest_SearchAttributes                    smithy.SchemaExtensions
+	eSearchGroupsRequest_Realm                               smithy.SchemaExtensions
+	eSearchGroupsRequest_NextToken                           smithy.SchemaExtensions
+	eSearchGroupsRequest_MaxResults                          smithy.SchemaExtensions
+	eSearchGroupsResult                                      smithy.SchemaExtensions
+	eSearchGroupsResult_DirectoryId                          smithy.SchemaExtensions
+	eSearchGroupsResult_Realm                                smithy.SchemaExtensions
+	eSearchGroupsResult_Groups                               smithy.SchemaExtensions
+	eSearchGroupsResult_NextToken                            smithy.SchemaExtensions
+	eSearchUsersRequest                                      smithy.SchemaExtensions
+	eSearchUsersRequest_DirectoryId                          smithy.SchemaExtensions
+	eSearchUsersRequest_Realm                                smithy.SchemaExtensions
+	eSearchUsersRequest_SearchString                         smithy.SchemaExtensions
+	eSearchUsersRequest_SearchAttributes                     smithy.SchemaExtensions
+	eSearchUsersRequest_NextToken                            smithy.SchemaExtensions
+	eSearchUsersRequest_MaxResults                           smithy.SchemaExtensions
+	eSearchUsersResult                                       smithy.SchemaExtensions
+	eSearchUsersResult_DirectoryId                           smithy.SchemaExtensions
+	eSearchUsersResult_Realm                                 smithy.SchemaExtensions
+	eSearchUsersResult_Users                                 smithy.SchemaExtensions
+	eSearchUsersResult_NextToken                             smithy.SchemaExtensions
+	eUpdateGroupRequest                                      smithy.SchemaExtensions
+	eUpdateGroupRequest_DirectoryId                          smithy.SchemaExtensions
+	eUpdateGroupRequest_SAMAccountName                       smithy.SchemaExtensions
+	eUpdateGroupRequest_GroupType                            smithy.SchemaExtensions
+	eUpdateGroupRequest_GroupScope                           smithy.SchemaExtensions
+	eUpdateGroupRequest_OtherAttributes                      smithy.SchemaExtensions
+	eUpdateGroupRequest_UpdateType                           smithy.SchemaExtensions
+	eUpdateGroupRequest_ClientToken                          smithy.SchemaExtensions
+	eUpdateGroupResult                                       smithy.SchemaExtensions
+	eUpdateUserRequest                                       smithy.SchemaExtensions
+	eUpdateUserRequest_DirectoryId                           smithy.SchemaExtensions
+	eUpdateUserRequest_SAMAccountName                        smithy.SchemaExtensions
+	eUpdateUserRequest_EmailAddress                          smithy.SchemaExtensions
+	eUpdateUserRequest_GivenName                             smithy.SchemaExtensions
+	eUpdateUserRequest_Surname                               smithy.SchemaExtensions
+	eUpdateUserRequest_OtherAttributes                       smithy.SchemaExtensions
+	eUpdateUserRequest_UpdateType                            smithy.SchemaExtensions
+	eUpdateUserRequest_ClientToken                           smithy.SchemaExtensions
+	eUpdateUserResult                                        smithy.SchemaExtensions
+)
 
 var (
 	iAddGroupMember                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservicedata", Name: "AddGroupMember"}
@@ -245,331 +568,331 @@ var mSearchUsersResult = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchUse
 var mUpdateGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGroupRequest_DirectoryId, &sUpdateGroupRequest_SAMAccountName, &sUpdateGroupRequest_GroupType, &sUpdateGroupRequest_GroupScope, &sUpdateGroupRequest_OtherAttributes, &sUpdateGroupRequest_UpdateType, &sUpdateGroupRequest_ClientToken}}
 var mUpdateUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateUserRequest_DirectoryId, &sUpdateUserRequest_SAMAccountName, &sUpdateUserRequest_EmailAddress, &sUpdateUserRequest_GivenName, &sUpdateUserRequest_Surname, &sUpdateUserRequest_OtherAttributes, &sUpdateUserRequest_UpdateType, &sUpdateUserRequest_ClientToken}}
 
-var sAddGroupMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddGroupMember, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCreateGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGroup, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sCreateUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUser, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sDeleteGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGroup, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sDeleteUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUser, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sDescribeGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeGroup, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sDescribeUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUser, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sDisableUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableUser, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sListGroupMembers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupMembers, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sListGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroups, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sListGroupsForMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupsForMember, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sListUsers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUsers, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sRemoveGroupMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveGroupMember, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sSearchGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchGroups, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sSearchUsers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchUsers, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sUpdateGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGroup, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sUpdateUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUser, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var s_DirectoryServiceData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryServiceData, Traits: &t17, Type: smithy.ShapeTypeService, Ext: &ext[17]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &ext[18]})
-var sAccessDeniedReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedReason, Members: &mAccessDeniedReason, Type: smithy.ShapeTypeEnum, Ext: &ext[21]})
-var s_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &ext[25]})
-var sAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttributeValue, Members: &mAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &ext[28]})
-var s_BooleanAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanAttributeValue, Traits: &t20, Type: smithy.ShapeTypeBoolean, Ext: &ext[33]})
-var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[34]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &ext[35]})
-var s_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryId, Type: smithy.ShapeTypeString, Ext: &ext[37]})
-var sDirectoryUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryUnavailableException, Members: &mDirectoryUnavailableException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &ext[38]})
-var sDirectoryUnavailableReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryUnavailableReason, Members: &mDirectoryUnavailableReason, Type: smithy.ShapeTypeEnum, Ext: &ext[41]})
-var s_DistinguishedName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DistinguishedName, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &ext[47]})
-var s_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailAddress, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &ext[48]})
-var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[49]})
-var s_GivenName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GivenName, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &ext[50]})
-var sGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroup, Members: &mGroup, Type: smithy.ShapeTypeStructure, Ext: &ext[51]})
-var s_GroupList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupList, Members: &m_GroupList, Type: smithy.ShapeTypeList, Ext: &ext[58]})
-var s_GroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &ext[60]})
-var sGroupScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroupScope, Members: &mGroupScope, Type: smithy.ShapeTypeEnum, Ext: &ext[61]})
-var sGroupSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroupSummary, Members: &mGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[66]})
-var s_GroupSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupSummaryList, Members: &m_GroupSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[71]})
-var sGroupType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroupType, Members: &mGroupType, Type: smithy.ShapeTypeEnum, Ext: &ext[73]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &ext[76]})
-var s_LdapDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LdapDisplayName, Type: smithy.ShapeTypeString, Ext: &ext[78]})
-var s_LdapDisplayNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LdapDisplayNameList, Members: &m_LdapDisplayNameList, Type: smithy.ShapeTypeList, Ext: &ext[79]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[81]})
-var sMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMember, Members: &mMember, Type: smithy.ShapeTypeStructure, Ext: &ext[82]})
-var s_MemberList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MemberList, Members: &m_MemberList, Type: smithy.ShapeTypeList, Ext: &ext[86]})
-var s_MemberName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MemberName, Type: smithy.ShapeTypeString, Ext: &ext[88]})
-var sMemberType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMemberType, Members: &mMemberType, Type: smithy.ShapeTypeEnum, Ext: &ext[89]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &ext[93]})
-var s_NumberAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberAttributeValue, Traits: &t20, Type: smithy.ShapeTypeLong, Ext: &ext[94]})
-var s_Realm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &ext[95]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &ext[96]})
-var s_SearchString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchString, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &ext[98]})
-var s_SID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SID, Type: smithy.ShapeTypeString, Ext: &ext[99]})
-var s_StringAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringAttributeValue, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &ext[100]})
-var s_StringSetAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringSetAttributeValue, Members: &m_StringSetAttributeValue, Traits: &t20, Type: smithy.ShapeTypeList, Ext: &ext[101]})
-var s_Surname = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Surname, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &ext[103]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &ext[104]})
-var sUpdateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateType, Members: &mUpdateType, Type: smithy.ShapeTypeEnum, Ext: &ext[107]})
-var sUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUser, Members: &mUser, Type: smithy.ShapeTypeStructure, Ext: &ext[111]})
-var s_UserList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserList, Members: &m_UserList, Type: smithy.ShapeTypeList, Ext: &ext[121]})
-var s_UserName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserName, Type: smithy.ShapeTypeString, Ext: &ext[123]})
-var s_UserPrincipalName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserPrincipalName, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &ext[124]})
-var sUserSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserSummary, Members: &mUserSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[125]})
-var s_UserSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserSummaryList, Members: &m_UserSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[131]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &ext[133]})
-var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[136]})
-var sAddGroupMemberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddGroupMemberRequest, Members: &mAddGroupMemberRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[152]})
-var sAddGroupMemberResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddGroupMemberResult, Type: smithy.ShapeTypeStructure, Ext: &ext[158]})
-var sCreateGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGroupRequest, Members: &mCreateGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[159]})
-var sCreateGroupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGroupResult, Members: &mCreateGroupResult, Type: smithy.ShapeTypeStructure, Ext: &ext[166]})
-var sCreateUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUserRequest, Members: &mCreateUserRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[170]})
-var sCreateUserResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUserResult, Members: &mCreateUserResult, Type: smithy.ShapeTypeStructure, Ext: &ext[178]})
-var sDeleteGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGroupRequest, Members: &mDeleteGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[182]})
-var sDeleteGroupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGroupResult, Type: smithy.ShapeTypeStructure, Ext: &ext[186]})
-var sDeleteUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUserRequest, Members: &mDeleteUserRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[187]})
-var sDeleteUserResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUserResult, Type: smithy.ShapeTypeStructure, Ext: &ext[191]})
-var sDescribeGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeGroupRequest, Members: &mDescribeGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[192]})
-var sDescribeGroupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeGroupResult, Members: &mDescribeGroupResult, Type: smithy.ShapeTypeStructure, Ext: &ext[197]})
-var sDescribeUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUserRequest, Members: &mDescribeUserRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[206]})
-var sDescribeUserResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUserResult, Members: &mDescribeUserResult, Type: smithy.ShapeTypeStructure, Ext: &ext[211]})
-var sDisableUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableUserRequest, Members: &mDisableUserRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[223]})
-var sDisableUserResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableUserResult, Type: smithy.ShapeTypeStructure, Ext: &ext[227]})
-var sListGroupMembersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupMembersRequest, Members: &mListGroupMembersRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[228]})
-var sListGroupMembersResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupMembersResult, Members: &mListGroupMembersResult, Type: smithy.ShapeTypeStructure, Ext: &ext[235]})
-var sListGroupsForMemberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupsForMemberRequest, Members: &mListGroupsForMemberRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[241]})
-var sListGroupsForMemberResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupsForMemberResult, Members: &mListGroupsForMemberResult, Type: smithy.ShapeTypeStructure, Ext: &ext[248]})
-var sListGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupsRequest, Members: &mListGroupsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[254]})
-var sListGroupsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupsResult, Members: &mListGroupsResult, Type: smithy.ShapeTypeStructure, Ext: &ext[259]})
-var sListUsersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUsersRequest, Members: &mListUsersRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[264]})
-var sListUsersResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUsersResult, Members: &mListUsersResult, Type: smithy.ShapeTypeStructure, Ext: &ext[269]})
-var sRemoveGroupMemberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveGroupMemberRequest, Members: &mRemoveGroupMemberRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[274]})
-var sRemoveGroupMemberResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveGroupMemberResult, Type: smithy.ShapeTypeStructure, Ext: &ext[280]})
-var sSearchGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchGroupsRequest, Members: &mSearchGroupsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[281]})
-var sSearchGroupsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchGroupsResult, Members: &mSearchGroupsResult, Type: smithy.ShapeTypeStructure, Ext: &ext[288]})
-var sSearchUsersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchUsersRequest, Members: &mSearchUsersRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[293]})
-var sSearchUsersResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchUsersResult, Members: &mSearchUsersResult, Type: smithy.ShapeTypeStructure, Ext: &ext[300]})
-var sUpdateGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGroupRequest, Members: &mUpdateGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[305]})
-var sUpdateGroupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGroupResult, Type: smithy.ShapeTypeStructure, Ext: &ext[313]})
-var sUpdateUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUserRequest, Members: &mUpdateUserRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[314]})
-var sUpdateUserResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUserResult, Type: smithy.ShapeTypeStructure, Ext: &ext[323]})
+var sAddGroupMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddGroupMember, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eAddGroupMember})
+var sCreateGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGroup, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateGroup})
+var sCreateUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUser, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateUser})
+var sDeleteGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGroup, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDeleteGroup})
+var sDeleteUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUser, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDeleteUser})
+var sDescribeGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeGroup, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDescribeGroup})
+var sDescribeUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUser, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eDescribeUser})
+var sDisableUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableUser, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDisableUser})
+var sListGroupMembers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupMembers, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eListGroupMembers})
+var sListGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroups, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eListGroups})
+var sListGroupsForMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupsForMember, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eListGroupsForMember})
+var sListUsers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUsers, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eListUsers})
+var sRemoveGroupMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveGroupMember, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eRemoveGroupMember})
+var sSearchGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchGroups, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eSearchGroups})
+var sSearchUsers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchUsers, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eSearchUsers})
+var sUpdateGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGroup, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eUpdateGroup})
+var sUpdateUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUser, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eUpdateUser})
+var s_DirectoryServiceData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryServiceData, Traits: &t17, Type: smithy.ShapeTypeService, Ext: &e_DirectoryServiceData})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedReason, Members: &mAccessDeniedReason, Type: smithy.ShapeTypeEnum, Ext: &eAccessDeniedReason})
+var s_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &e_Attributes})
+var sAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttributeValue, Members: &mAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &eAttributeValue})
+var s_BooleanAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanAttributeValue, Traits: &t20, Type: smithy.ShapeTypeBoolean, Ext: &e_BooleanAttributeValue})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var s_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryId, Type: smithy.ShapeTypeString, Ext: &e_DirectoryId})
+var sDirectoryUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryUnavailableException, Members: &mDirectoryUnavailableException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &eDirectoryUnavailableException})
+var sDirectoryUnavailableReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryUnavailableReason, Members: &mDirectoryUnavailableReason, Type: smithy.ShapeTypeEnum, Ext: &eDirectoryUnavailableReason})
+var s_DistinguishedName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DistinguishedName, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &e_DistinguishedName})
+var s_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailAddress, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &e_EmailAddress})
+var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &e_ExceptionMessage})
+var s_GivenName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GivenName, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &e_GivenName})
+var sGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroup, Members: &mGroup, Type: smithy.ShapeTypeStructure, Ext: &eGroup})
+var s_GroupList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupList, Members: &m_GroupList, Type: smithy.ShapeTypeList, Ext: &e_GroupList})
+var s_GroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &e_GroupName})
+var sGroupScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroupScope, Members: &mGroupScope, Type: smithy.ShapeTypeEnum, Ext: &eGroupScope})
+var sGroupSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroupSummary, Members: &mGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &eGroupSummary})
+var s_GroupSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupSummaryList, Members: &m_GroupSummaryList, Type: smithy.ShapeTypeList, Ext: &e_GroupSummaryList})
+var sGroupType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroupType, Members: &mGroupType, Type: smithy.ShapeTypeEnum, Ext: &eGroupType})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var s_LdapDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LdapDisplayName, Type: smithy.ShapeTypeString, Ext: &e_LdapDisplayName})
+var s_LdapDisplayNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LdapDisplayNameList, Members: &m_LdapDisplayNameList, Type: smithy.ShapeTypeList, Ext: &e_LdapDisplayNameList})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var sMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMember, Members: &mMember, Type: smithy.ShapeTypeStructure, Ext: &eMember})
+var s_MemberList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MemberList, Members: &m_MemberList, Type: smithy.ShapeTypeList, Ext: &e_MemberList})
+var s_MemberName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MemberName, Type: smithy.ShapeTypeString, Ext: &e_MemberName})
+var sMemberType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMemberType, Members: &mMemberType, Type: smithy.ShapeTypeEnum, Ext: &eMemberType})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var s_NumberAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberAttributeValue, Traits: &t20, Type: smithy.ShapeTypeLong, Ext: &e_NumberAttributeValue})
+var s_Realm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &e_Realm})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var s_SearchString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchString, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &e_SearchString})
+var s_SID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SID, Type: smithy.ShapeTypeString, Ext: &e_SID})
+var s_StringAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringAttributeValue, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &e_StringAttributeValue})
+var s_StringSetAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringSetAttributeValue, Members: &m_StringSetAttributeValue, Traits: &t20, Type: smithy.ShapeTypeList, Ext: &e_StringSetAttributeValue})
+var s_Surname = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Surname, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &e_Surname})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sUpdateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateType, Members: &mUpdateType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateType})
+var sUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUser, Members: &mUser, Type: smithy.ShapeTypeStructure, Ext: &eUser})
+var s_UserList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserList, Members: &m_UserList, Type: smithy.ShapeTypeList, Ext: &e_UserList})
+var s_UserName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserName, Type: smithy.ShapeTypeString, Ext: &e_UserName})
+var s_UserPrincipalName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserPrincipalName, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &e_UserPrincipalName})
+var sUserSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserSummary, Members: &mUserSummary, Type: smithy.ShapeTypeStructure, Ext: &eUserSummary})
+var s_UserSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserSummaryList, Members: &m_UserSummaryList, Type: smithy.ShapeTypeList, Ext: &e_UserSummaryList})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
+var sAddGroupMemberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddGroupMemberRequest, Members: &mAddGroupMemberRequest, Type: smithy.ShapeTypeStructure, Ext: &eAddGroupMemberRequest})
+var sAddGroupMemberResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddGroupMemberResult, Type: smithy.ShapeTypeStructure, Ext: &eAddGroupMemberResult})
+var sCreateGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGroupRequest, Members: &mCreateGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateGroupRequest})
+var sCreateGroupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGroupResult, Members: &mCreateGroupResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateGroupResult})
+var sCreateUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUserRequest, Members: &mCreateUserRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateUserRequest})
+var sCreateUserResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUserResult, Members: &mCreateUserResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateUserResult})
+var sDeleteGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGroupRequest, Members: &mDeleteGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteGroupRequest})
+var sDeleteGroupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGroupResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteGroupResult})
+var sDeleteUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUserRequest, Members: &mDeleteUserRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteUserRequest})
+var sDeleteUserResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUserResult, Type: smithy.ShapeTypeStructure, Ext: &eDeleteUserResult})
+var sDescribeGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeGroupRequest, Members: &mDescribeGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeGroupRequest})
+var sDescribeGroupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeGroupResult, Members: &mDescribeGroupResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeGroupResult})
+var sDescribeUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUserRequest, Members: &mDescribeUserRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeUserRequest})
+var sDescribeUserResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUserResult, Members: &mDescribeUserResult, Type: smithy.ShapeTypeStructure, Ext: &eDescribeUserResult})
+var sDisableUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableUserRequest, Members: &mDisableUserRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisableUserRequest})
+var sDisableUserResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableUserResult, Type: smithy.ShapeTypeStructure, Ext: &eDisableUserResult})
+var sListGroupMembersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupMembersRequest, Members: &mListGroupMembersRequest, Type: smithy.ShapeTypeStructure, Ext: &eListGroupMembersRequest})
+var sListGroupMembersResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupMembersResult, Members: &mListGroupMembersResult, Type: smithy.ShapeTypeStructure, Ext: &eListGroupMembersResult})
+var sListGroupsForMemberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupsForMemberRequest, Members: &mListGroupsForMemberRequest, Type: smithy.ShapeTypeStructure, Ext: &eListGroupsForMemberRequest})
+var sListGroupsForMemberResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupsForMemberResult, Members: &mListGroupsForMemberResult, Type: smithy.ShapeTypeStructure, Ext: &eListGroupsForMemberResult})
+var sListGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupsRequest, Members: &mListGroupsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListGroupsRequest})
+var sListGroupsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupsResult, Members: &mListGroupsResult, Type: smithy.ShapeTypeStructure, Ext: &eListGroupsResult})
+var sListUsersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUsersRequest, Members: &mListUsersRequest, Type: smithy.ShapeTypeStructure, Ext: &eListUsersRequest})
+var sListUsersResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUsersResult, Members: &mListUsersResult, Type: smithy.ShapeTypeStructure, Ext: &eListUsersResult})
+var sRemoveGroupMemberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveGroupMemberRequest, Members: &mRemoveGroupMemberRequest, Type: smithy.ShapeTypeStructure, Ext: &eRemoveGroupMemberRequest})
+var sRemoveGroupMemberResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveGroupMemberResult, Type: smithy.ShapeTypeStructure, Ext: &eRemoveGroupMemberResult})
+var sSearchGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchGroupsRequest, Members: &mSearchGroupsRequest, Type: smithy.ShapeTypeStructure, Ext: &eSearchGroupsRequest})
+var sSearchGroupsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchGroupsResult, Members: &mSearchGroupsResult, Type: smithy.ShapeTypeStructure, Ext: &eSearchGroupsResult})
+var sSearchUsersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchUsersRequest, Members: &mSearchUsersRequest, Type: smithy.ShapeTypeStructure, Ext: &eSearchUsersRequest})
+var sSearchUsersResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchUsersResult, Members: &mSearchUsersResult, Type: smithy.ShapeTypeStructure, Ext: &eSearchUsersResult})
+var sUpdateGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGroupRequest, Members: &mUpdateGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGroupRequest})
+var sUpdateGroupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGroupResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGroupResult})
+var sUpdateUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUserRequest, Members: &mUpdateUserRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateUserRequest})
+var sUpdateUserResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUserResult, Type: smithy.ShapeTypeStructure, Ext: &eUpdateUserResult})
 
-var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[19]})
-var sAccessDeniedException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iAccessDeniedReason, Members: &mAccessDeniedReason, Type: smithy.ShapeTypeEnum, Ext: &ext[20]})
-var sAccessDeniedReason_IAM_AUTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAM_AUTH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[22]})
-var sAccessDeniedReason_DIRECTORY_AUTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECTORY_AUTH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[23]})
-var sAccessDeniedReason_DATA_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATA_DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[24]})
-var s_Attributes_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_LdapDisplayName, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var s_Attributes_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iAttributeValue, Members: &mAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &ext[27]})
-var sAttributeValue_S = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S", ID: &i_StringAttributeValue, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[29]})
-var sAttributeValue_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "N", ID: &i_NumberAttributeValue, Traits: &t19, Type: smithy.ShapeTypeLong, Ext: &ext[30]})
-var sAttributeValue_BOOL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOOL", ID: &i_BooleanAttributeValue, Traits: &t19, Type: smithy.ShapeTypeBoolean, Ext: &ext[31]})
-var sAttributeValue_SS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SS", ID: &i_StringSetAttributeValue, Members: &m_StringSetAttributeValue, Traits: &t19, Type: smithy.ShapeTypeList, Ext: &ext[32]})
-var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var sDirectoryUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[39]})
-var sDirectoryUnavailableException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iDirectoryUnavailableReason, Members: &mDirectoryUnavailableReason, Type: smithy.ShapeTypeEnum, Ext: &ext[40]})
-var sDirectoryUnavailableReason_INVALID_DIRECTORY_STATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_DIRECTORY_STATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[42]})
-var sDirectoryUnavailableReason_DIRECTORY_TIMEOUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECTORY_TIMEOUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[43]})
-var sDirectoryUnavailableReason_DIRECTORY_RESOURCES_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECTORY_RESOURCES_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[44]})
-var sDirectoryUnavailableReason_NO_DISK_SPACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_DISK_SPACE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[45]})
-var sDirectoryUnavailableReason_TRUST_AUTH_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRUST_AUTH_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[46]})
-var sGroup_SID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SID", ID: &i_SID, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var sGroup_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &ext[53]})
-var sGroup_DistinguishedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DistinguishedName", ID: &i_DistinguishedName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var sGroup_GroupType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupType", ID: &iGroupType, Members: &mGroupType, Type: smithy.ShapeTypeEnum, Ext: &ext[55]})
-var sGroup_GroupScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupScope", ID: &iGroupScope, Members: &mGroupScope, Type: smithy.ShapeTypeEnum, Ext: &ext[56]})
-var sGroup_OtherAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &ext[57]})
-var s_GroupList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGroup, Members: &mGroup, Type: smithy.ShapeTypeStructure, Ext: &ext[59]})
-var sGroupScope_DOMAIN_LOCAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_LOCAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[62]})
-var sGroupScope_GLOBAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GLOBAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[63]})
-var sGroupScope_UNIVERSAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNIVERSAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[64]})
-var sGroupScope_BUILTIN_LOCAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILTIN_LOCAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[65]})
-var sGroupSummary_SID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SID", ID: &i_SID, Type: smithy.ShapeTypeString, Ext: &ext[67]})
-var sGroupSummary_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &ext[68]})
-var sGroupSummary_GroupType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupType", ID: &iGroupType, Members: &mGroupType, Type: smithy.ShapeTypeEnum, Ext: &ext[69]})
-var sGroupSummary_GroupScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupScope", ID: &iGroupScope, Members: &mGroupScope, Type: smithy.ShapeTypeEnum, Ext: &ext[70]})
-var s_GroupSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGroupSummary, Members: &mGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sGroupType_DISTRIBUTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRIBUTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var sGroupType_SECURITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECURITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[75]})
-var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[77]})
-var s_LdapDisplayNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LdapDisplayName, Type: smithy.ShapeTypeString, Ext: &ext[80]})
-var sMember_SID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SID", ID: &i_SID, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var sMember_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_MemberName, Type: smithy.ShapeTypeString, Ext: &ext[84]})
-var sMember_MemberType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberType", ID: &iMemberType, Members: &mMemberType, Type: smithy.ShapeTypeEnum, Ext: &ext[85]})
-var s_MemberList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMember, Members: &mMember, Type: smithy.ShapeTypeStructure, Ext: &ext[87]})
-var sMemberType_USER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[90]})
-var sMemberType_GROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[91]})
-var sMemberType_COMPUTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPUTER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[92]})
-var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[97]})
-var s_StringSetAttributeValue_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_StringAttributeValue, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[105]})
-var sThrottlingException_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryAfterSeconds", ID: &pInteger, Traits: &t26, Type: smithy.ShapeTypeInteger, Ext: &ext[106]})
-var sUpdateType_ADD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[108]})
-var sUpdateType_REPLACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPLACE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[109]})
-var sUpdateType_REMOVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REMOVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[110]})
-var sUser_SID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SID", ID: &i_SID, Type: smithy.ShapeTypeString, Ext: &ext[112]})
-var sUser_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_UserName, Type: smithy.ShapeTypeString, Ext: &ext[113]})
-var sUser_DistinguishedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DistinguishedName", ID: &i_DistinguishedName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[114]})
-var sUser_UserPrincipalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserPrincipalName", ID: &i_UserPrincipalName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[115]})
-var sUser_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailAddress", ID: &i_EmailAddress, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[116]})
-var sUser_GivenName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GivenName", ID: &i_GivenName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[117]})
-var sUser_Surname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Surname", ID: &i_Surname, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[118]})
-var sUser_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[119]})
-var sUser_OtherAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &ext[120]})
-var s_UserList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUser, Members: &mUser, Type: smithy.ShapeTypeStructure, Ext: &ext[122]})
-var sUserSummary_SID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SID", ID: &i_SID, Type: smithy.ShapeTypeString, Ext: &ext[126]})
-var sUserSummary_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_UserName, Type: smithy.ShapeTypeString, Ext: &ext[127]})
-var sUserSummary_GivenName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GivenName", ID: &i_GivenName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[128]})
-var sUserSummary_Surname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Surname", ID: &i_Surname, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[129]})
-var sUserSummary_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[130]})
-var s_UserSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUserSummary, Members: &mUserSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[132]})
-var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[134]})
-var sValidationException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[135]})
-var sValidationExceptionReason_INVALID_REALM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_REALM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[137]})
-var sValidationExceptionReason_INVALID_DIRECTORY_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_DIRECTORY_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[138]})
-var sValidationExceptionReason_INVALID_SECONDARY_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_SECONDARY_REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[139]})
-var sValidationExceptionReason_INVALID_NEXT_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_NEXT_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[140]})
-var sValidationExceptionReason_INVALID_ATTRIBUTE_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ATTRIBUTE_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[141]})
-var sValidationExceptionReason_INVALID_ATTRIBUTE_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ATTRIBUTE_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[142]})
-var sValidationExceptionReason_INVALID_ATTRIBUTE_FOR_USER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ATTRIBUTE_FOR_USER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[143]})
-var sValidationExceptionReason_INVALID_ATTRIBUTE_FOR_GROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ATTRIBUTE_FOR_GROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[144]})
-var sValidationExceptionReason_INVALID_ATTRIBUTE_FOR_SEARCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ATTRIBUTE_FOR_SEARCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[145]})
-var sValidationExceptionReason_INVALID_ATTRIBUTE_FOR_MODIFY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ATTRIBUTE_FOR_MODIFY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[146]})
-var sValidationExceptionReason_DUPLICATE_ATTRIBUTE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUPLICATE_ATTRIBUTE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[147]})
-var sValidationExceptionReason_MISSING_ATTRIBUTE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING_ATTRIBUTE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[148]})
-var sValidationExceptionReason_ATTRIBUTE_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATTRIBUTE_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[149]})
-var sValidationExceptionReason_LDAP_SIZE_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LDAP_SIZE_LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[150]})
-var sValidationExceptionReason_LDAP_UNSUPPORTED_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LDAP_UNSUPPORTED_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[151]})
-var sAddGroupMemberRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[153]})
-var sAddGroupMemberRequest_GroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupName", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &ext[154]})
-var sAddGroupMemberRequest_MemberName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberName", ID: &i_MemberName, Type: smithy.ShapeTypeString, Ext: &ext[155]})
-var sAddGroupMemberRequest_MemberRealm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberRealm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &ext[156]})
-var sAddGroupMemberRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[157]})
-var sCreateGroupRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[160]})
-var sCreateGroupRequest_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &ext[161]})
-var sCreateGroupRequest_GroupType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupType", ID: &iGroupType, Members: &mGroupType, Type: smithy.ShapeTypeEnum, Ext: &ext[162]})
-var sCreateGroupRequest_GroupScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupScope", ID: &iGroupScope, Members: &mGroupScope, Type: smithy.ShapeTypeEnum, Ext: &ext[163]})
-var sCreateGroupRequest_OtherAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &ext[164]})
-var sCreateGroupRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[165]})
-var sCreateGroupResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString, Ext: &ext[167]})
-var sCreateGroupResult_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &ext[168]})
-var sCreateGroupResult_SID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SID", ID: &i_SID, Type: smithy.ShapeTypeString, Ext: &ext[169]})
-var sCreateUserRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[171]})
-var sCreateUserRequest_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_UserName, Type: smithy.ShapeTypeString, Ext: &ext[172]})
-var sCreateUserRequest_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailAddress", ID: &i_EmailAddress, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[173]})
-var sCreateUserRequest_GivenName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GivenName", ID: &i_GivenName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[174]})
-var sCreateUserRequest_Surname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Surname", ID: &i_Surname, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[175]})
-var sCreateUserRequest_OtherAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &ext[176]})
-var sCreateUserRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[177]})
-var sCreateUserResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString, Ext: &ext[179]})
-var sCreateUserResult_SID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SID", ID: &i_SID, Type: smithy.ShapeTypeString, Ext: &ext[180]})
-var sCreateUserResult_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_UserName, Type: smithy.ShapeTypeString, Ext: &ext[181]})
-var sDeleteGroupRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[183]})
-var sDeleteGroupRequest_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &ext[184]})
-var sDeleteGroupRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[185]})
-var sDeleteUserRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[188]})
-var sDeleteUserRequest_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_UserName, Type: smithy.ShapeTypeString, Ext: &ext[189]})
-var sDeleteUserRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[190]})
-var sDescribeGroupRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[193]})
-var sDescribeGroupRequest_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &ext[194]})
-var sDescribeGroupRequest_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &ext[195]})
-var sDescribeGroupRequest_OtherAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherAttributes", ID: &i_LdapDisplayNameList, Members: &m_LdapDisplayNameList, Type: smithy.ShapeTypeList, Ext: &ext[196]})
-var sDescribeGroupResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString, Ext: &ext[198]})
-var sDescribeGroupResult_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &ext[199]})
-var sDescribeGroupResult_SID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SID", ID: &i_SID, Type: smithy.ShapeTypeString, Ext: &ext[200]})
-var sDescribeGroupResult_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &ext[201]})
-var sDescribeGroupResult_DistinguishedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DistinguishedName", ID: &i_DistinguishedName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[202]})
-var sDescribeGroupResult_GroupType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupType", ID: &iGroupType, Members: &mGroupType, Type: smithy.ShapeTypeEnum, Ext: &ext[203]})
-var sDescribeGroupResult_GroupScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupScope", ID: &iGroupScope, Members: &mGroupScope, Type: smithy.ShapeTypeEnum, Ext: &ext[204]})
-var sDescribeGroupResult_OtherAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &ext[205]})
-var sDescribeUserRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[207]})
-var sDescribeUserRequest_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_UserName, Type: smithy.ShapeTypeString, Ext: &ext[208]})
-var sDescribeUserRequest_OtherAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherAttributes", ID: &i_LdapDisplayNameList, Members: &m_LdapDisplayNameList, Type: smithy.ShapeTypeList, Ext: &ext[209]})
-var sDescribeUserRequest_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &ext[210]})
-var sDescribeUserResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString, Ext: &ext[212]})
-var sDescribeUserResult_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &ext[213]})
-var sDescribeUserResult_SID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SID", ID: &i_SID, Type: smithy.ShapeTypeString, Ext: &ext[214]})
-var sDescribeUserResult_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_UserName, Type: smithy.ShapeTypeString, Ext: &ext[215]})
-var sDescribeUserResult_DistinguishedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DistinguishedName", ID: &i_DistinguishedName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[216]})
-var sDescribeUserResult_UserPrincipalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserPrincipalName", ID: &i_UserPrincipalName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[217]})
-var sDescribeUserResult_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailAddress", ID: &i_EmailAddress, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[218]})
-var sDescribeUserResult_GivenName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GivenName", ID: &i_GivenName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[219]})
-var sDescribeUserResult_Surname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Surname", ID: &i_Surname, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[220]})
-var sDescribeUserResult_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[221]})
-var sDescribeUserResult_OtherAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &ext[222]})
-var sDisableUserRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[224]})
-var sDisableUserRequest_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_UserName, Type: smithy.ShapeTypeString, Ext: &ext[225]})
-var sDisableUserRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[226]})
-var sListGroupMembersRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[229]})
-var sListGroupMembersRequest_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &ext[230]})
-var sListGroupMembersRequest_MemberRealm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberRealm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &ext[231]})
-var sListGroupMembersRequest_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &ext[232]})
-var sListGroupMembersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[233]})
-var sListGroupMembersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[234]})
-var sListGroupMembersResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString, Ext: &ext[236]})
-var sListGroupMembersResult_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &ext[237]})
-var sListGroupMembersResult_MemberRealm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberRealm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &ext[238]})
-var sListGroupMembersResult_Members = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Members", ID: &i_MemberList, Members: &m_MemberList, Type: smithy.ShapeTypeList, Ext: &ext[239]})
-var sListGroupMembersResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[240]})
-var sListGroupsForMemberRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[242]})
-var sListGroupsForMemberRequest_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &ext[243]})
-var sListGroupsForMemberRequest_MemberRealm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberRealm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &ext[244]})
-var sListGroupsForMemberRequest_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_MemberName, Type: smithy.ShapeTypeString, Ext: &ext[245]})
-var sListGroupsForMemberRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[246]})
-var sListGroupsForMemberRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[247]})
-var sListGroupsForMemberResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString, Ext: &ext[249]})
-var sListGroupsForMemberResult_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &ext[250]})
-var sListGroupsForMemberResult_MemberRealm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberRealm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &ext[251]})
-var sListGroupsForMemberResult_Groups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Groups", ID: &i_GroupSummaryList, Members: &m_GroupSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[252]})
-var sListGroupsForMemberResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[253]})
-var sListGroupsRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[255]})
-var sListGroupsRequest_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &ext[256]})
-var sListGroupsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[257]})
-var sListGroupsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[258]})
-var sListGroupsResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString, Ext: &ext[260]})
-var sListGroupsResult_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &ext[261]})
-var sListGroupsResult_Groups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Groups", ID: &i_GroupSummaryList, Members: &m_GroupSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[262]})
-var sListGroupsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[263]})
-var sListUsersRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[265]})
-var sListUsersRequest_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &ext[266]})
-var sListUsersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[267]})
-var sListUsersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[268]})
-var sListUsersResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString, Ext: &ext[270]})
-var sListUsersResult_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &ext[271]})
-var sListUsersResult_Users = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Users", ID: &i_UserSummaryList, Members: &m_UserSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[272]})
-var sListUsersResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[273]})
-var sRemoveGroupMemberRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[275]})
-var sRemoveGroupMemberRequest_GroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupName", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &ext[276]})
-var sRemoveGroupMemberRequest_MemberName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberName", ID: &i_MemberName, Type: smithy.ShapeTypeString, Ext: &ext[277]})
-var sRemoveGroupMemberRequest_MemberRealm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberRealm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &ext[278]})
-var sRemoveGroupMemberRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[279]})
-var sSearchGroupsRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[282]})
-var sSearchGroupsRequest_SearchString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchString", ID: &i_SearchString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[283]})
-var sSearchGroupsRequest_SearchAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchAttributes", ID: &i_LdapDisplayNameList, Members: &m_LdapDisplayNameList, Type: smithy.ShapeTypeList, Ext: &ext[284]})
-var sSearchGroupsRequest_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &ext[285]})
-var sSearchGroupsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[286]})
-var sSearchGroupsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[287]})
-var sSearchGroupsResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString, Ext: &ext[289]})
-var sSearchGroupsResult_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &ext[290]})
-var sSearchGroupsResult_Groups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Groups", ID: &i_GroupList, Members: &m_GroupList, Type: smithy.ShapeTypeList, Ext: &ext[291]})
-var sSearchGroupsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[292]})
-var sSearchUsersRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[294]})
-var sSearchUsersRequest_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &ext[295]})
-var sSearchUsersRequest_SearchString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchString", ID: &i_SearchString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[296]})
-var sSearchUsersRequest_SearchAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchAttributes", ID: &i_LdapDisplayNameList, Members: &m_LdapDisplayNameList, Type: smithy.ShapeTypeList, Ext: &ext[297]})
-var sSearchUsersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[298]})
-var sSearchUsersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[299]})
-var sSearchUsersResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString, Ext: &ext[301]})
-var sSearchUsersResult_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &ext[302]})
-var sSearchUsersResult_Users = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Users", ID: &i_UserList, Members: &m_UserList, Type: smithy.ShapeTypeList, Ext: &ext[303]})
-var sSearchUsersResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[304]})
-var sUpdateGroupRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[306]})
-var sUpdateGroupRequest_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &ext[307]})
-var sUpdateGroupRequest_GroupType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupType", ID: &iGroupType, Members: &mGroupType, Type: smithy.ShapeTypeEnum, Ext: &ext[308]})
-var sUpdateGroupRequest_GroupScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupScope", ID: &iGroupScope, Members: &mGroupScope, Type: smithy.ShapeTypeEnum, Ext: &ext[309]})
-var sUpdateGroupRequest_OtherAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &ext[310]})
-var sUpdateGroupRequest_UpdateType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateType", ID: &iUpdateType, Members: &mUpdateType, Type: smithy.ShapeTypeEnum, Ext: &ext[311]})
-var sUpdateGroupRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[312]})
-var sUpdateUserRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[315]})
-var sUpdateUserRequest_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_UserName, Type: smithy.ShapeTypeString, Ext: &ext[316]})
-var sUpdateUserRequest_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailAddress", ID: &i_EmailAddress, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[317]})
-var sUpdateUserRequest_GivenName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GivenName", ID: &i_GivenName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[318]})
-var sUpdateUserRequest_Surname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Surname", ID: &i_Surname, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[319]})
-var sUpdateUserRequest_OtherAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &ext[320]})
-var sUpdateUserRequest_UpdateType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateType", ID: &iUpdateType, Members: &mUpdateType, Type: smithy.ShapeTypeEnum, Ext: &ext[321]})
-var sUpdateUserRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[322]})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var sAccessDeniedException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iAccessDeniedReason, Members: &mAccessDeniedReason, Type: smithy.ShapeTypeEnum, Ext: &eAccessDeniedException_Reason})
+var sAccessDeniedReason_IAM_AUTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAM_AUTH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedReason_IAM_AUTH})
+var sAccessDeniedReason_DIRECTORY_AUTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECTORY_AUTH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedReason_DIRECTORY_AUTH})
+var sAccessDeniedReason_DATA_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATA_DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedReason_DATA_DISABLED})
+var s_Attributes_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_LdapDisplayName, Type: smithy.ShapeTypeString, Ext: &e_Attributes_key})
+var s_Attributes_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iAttributeValue, Members: &mAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &e_Attributes_value})
+var sAttributeValue_S = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S", ID: &i_StringAttributeValue, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eAttributeValue_S})
+var sAttributeValue_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "N", ID: &i_NumberAttributeValue, Traits: &t19, Type: smithy.ShapeTypeLong, Ext: &eAttributeValue_N})
+var sAttributeValue_BOOL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOOL", ID: &i_BooleanAttributeValue, Traits: &t19, Type: smithy.ShapeTypeBoolean, Ext: &eAttributeValue_BOOL})
+var sAttributeValue_SS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SS", ID: &i_StringSetAttributeValue, Members: &m_StringSetAttributeValue, Traits: &t19, Type: smithy.ShapeTypeList, Ext: &eAttributeValue_SS})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var sDirectoryUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDirectoryUnavailableException_Message})
+var sDirectoryUnavailableException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iDirectoryUnavailableReason, Members: &mDirectoryUnavailableReason, Type: smithy.ShapeTypeEnum, Ext: &eDirectoryUnavailableException_Reason})
+var sDirectoryUnavailableReason_INVALID_DIRECTORY_STATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_DIRECTORY_STATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDirectoryUnavailableReason_INVALID_DIRECTORY_STATE})
+var sDirectoryUnavailableReason_DIRECTORY_TIMEOUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECTORY_TIMEOUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDirectoryUnavailableReason_DIRECTORY_TIMEOUT})
+var sDirectoryUnavailableReason_DIRECTORY_RESOURCES_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECTORY_RESOURCES_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDirectoryUnavailableReason_DIRECTORY_RESOURCES_EXCEEDED})
+var sDirectoryUnavailableReason_NO_DISK_SPACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_DISK_SPACE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDirectoryUnavailableReason_NO_DISK_SPACE})
+var sDirectoryUnavailableReason_TRUST_AUTH_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRUST_AUTH_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDirectoryUnavailableReason_TRUST_AUTH_FAILURE})
+var sGroup_SID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SID", ID: &i_SID, Type: smithy.ShapeTypeString, Ext: &eGroup_SID})
+var sGroup_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &eGroup_SAMAccountName})
+var sGroup_DistinguishedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DistinguishedName", ID: &i_DistinguishedName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eGroup_DistinguishedName})
+var sGroup_GroupType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupType", ID: &iGroupType, Members: &mGroupType, Type: smithy.ShapeTypeEnum, Ext: &eGroup_GroupType})
+var sGroup_GroupScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupScope", ID: &iGroupScope, Members: &mGroupScope, Type: smithy.ShapeTypeEnum, Ext: &eGroup_GroupScope})
+var sGroup_OtherAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eGroup_OtherAttributes})
+var s_GroupList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGroup, Members: &mGroup, Type: smithy.ShapeTypeStructure, Ext: &e_GroupList_member})
+var sGroupScope_DOMAIN_LOCAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_LOCAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGroupScope_DOMAIN_LOCAL})
+var sGroupScope_GLOBAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GLOBAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGroupScope_GLOBAL})
+var sGroupScope_UNIVERSAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNIVERSAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGroupScope_UNIVERSAL})
+var sGroupScope_BUILTIN_LOCAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILTIN_LOCAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGroupScope_BUILTIN_LOCAL})
+var sGroupSummary_SID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SID", ID: &i_SID, Type: smithy.ShapeTypeString, Ext: &eGroupSummary_SID})
+var sGroupSummary_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &eGroupSummary_SAMAccountName})
+var sGroupSummary_GroupType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupType", ID: &iGroupType, Members: &mGroupType, Type: smithy.ShapeTypeEnum, Ext: &eGroupSummary_GroupType})
+var sGroupSummary_GroupScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupScope", ID: &iGroupScope, Members: &mGroupScope, Type: smithy.ShapeTypeEnum, Ext: &eGroupSummary_GroupScope})
+var s_GroupSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGroupSummary, Members: &mGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &e_GroupSummaryList_member})
+var sGroupType_DISTRIBUTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRIBUTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGroupType_DISTRIBUTION})
+var sGroupType_SECURITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECURITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGroupType_SECURITY})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var s_LdapDisplayNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LdapDisplayName, Type: smithy.ShapeTypeString, Ext: &e_LdapDisplayNameList_member})
+var sMember_SID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SID", ID: &i_SID, Type: smithy.ShapeTypeString, Ext: &eMember_SID})
+var sMember_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_MemberName, Type: smithy.ShapeTypeString, Ext: &eMember_SAMAccountName})
+var sMember_MemberType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberType", ID: &iMemberType, Members: &mMemberType, Type: smithy.ShapeTypeEnum, Ext: &eMember_MemberType})
+var s_MemberList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMember, Members: &mMember, Type: smithy.ShapeTypeStructure, Ext: &e_MemberList_member})
+var sMemberType_USER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMemberType_USER})
+var sMemberType_GROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMemberType_GROUP})
+var sMemberType_COMPUTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPUTER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMemberType_COMPUTER})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var s_StringSetAttributeValue_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_StringAttributeValue, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &e_StringSetAttributeValue_member})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var sThrottlingException_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryAfterSeconds", ID: &pInteger, Traits: &t26, Type: smithy.ShapeTypeInteger, Ext: &eThrottlingException_RetryAfterSeconds})
+var sUpdateType_ADD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUpdateType_ADD})
+var sUpdateType_REPLACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPLACE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUpdateType_REPLACE})
+var sUpdateType_REMOVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REMOVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUpdateType_REMOVE})
+var sUser_SID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SID", ID: &i_SID, Type: smithy.ShapeTypeString, Ext: &eUser_SID})
+var sUser_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_UserName, Type: smithy.ShapeTypeString, Ext: &eUser_SAMAccountName})
+var sUser_DistinguishedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DistinguishedName", ID: &i_DistinguishedName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eUser_DistinguishedName})
+var sUser_UserPrincipalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserPrincipalName", ID: &i_UserPrincipalName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eUser_UserPrincipalName})
+var sUser_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailAddress", ID: &i_EmailAddress, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eUser_EmailAddress})
+var sUser_GivenName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GivenName", ID: &i_GivenName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eUser_GivenName})
+var sUser_Surname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Surname", ID: &i_Surname, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eUser_Surname})
+var sUser_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUser_Enabled})
+var sUser_OtherAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eUser_OtherAttributes})
+var s_UserList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUser, Members: &mUser, Type: smithy.ShapeTypeStructure, Ext: &e_UserList_member})
+var sUserSummary_SID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SID", ID: &i_SID, Type: smithy.ShapeTypeString, Ext: &eUserSummary_SID})
+var sUserSummary_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_UserName, Type: smithy.ShapeTypeString, Ext: &eUserSummary_SAMAccountName})
+var sUserSummary_GivenName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GivenName", ID: &i_GivenName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eUserSummary_GivenName})
+var sUserSummary_Surname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Surname", ID: &i_Surname, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eUserSummary_Surname})
+var sUserSummary_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUserSummary_Enabled})
+var s_UserSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUserSummary, Members: &mUserSummary, Type: smithy.ShapeTypeStructure, Ext: &e_UserSummaryList_member})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sValidationException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_Reason})
+var sValidationExceptionReason_INVALID_REALM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_REALM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_REALM})
+var sValidationExceptionReason_INVALID_DIRECTORY_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_DIRECTORY_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_DIRECTORY_TYPE})
+var sValidationExceptionReason_INVALID_SECONDARY_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_SECONDARY_REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_SECONDARY_REGION})
+var sValidationExceptionReason_INVALID_NEXT_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_NEXT_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_NEXT_TOKEN})
+var sValidationExceptionReason_INVALID_ATTRIBUTE_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ATTRIBUTE_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_ATTRIBUTE_VALUE})
+var sValidationExceptionReason_INVALID_ATTRIBUTE_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ATTRIBUTE_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_ATTRIBUTE_NAME})
+var sValidationExceptionReason_INVALID_ATTRIBUTE_FOR_USER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ATTRIBUTE_FOR_USER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_ATTRIBUTE_FOR_USER})
+var sValidationExceptionReason_INVALID_ATTRIBUTE_FOR_GROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ATTRIBUTE_FOR_GROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_ATTRIBUTE_FOR_GROUP})
+var sValidationExceptionReason_INVALID_ATTRIBUTE_FOR_SEARCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ATTRIBUTE_FOR_SEARCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_ATTRIBUTE_FOR_SEARCH})
+var sValidationExceptionReason_INVALID_ATTRIBUTE_FOR_MODIFY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ATTRIBUTE_FOR_MODIFY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_ATTRIBUTE_FOR_MODIFY})
+var sValidationExceptionReason_DUPLICATE_ATTRIBUTE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUPLICATE_ATTRIBUTE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_DUPLICATE_ATTRIBUTE})
+var sValidationExceptionReason_MISSING_ATTRIBUTE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING_ATTRIBUTE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_MISSING_ATTRIBUTE})
+var sValidationExceptionReason_ATTRIBUTE_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATTRIBUTE_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ATTRIBUTE_EXISTS})
+var sValidationExceptionReason_LDAP_SIZE_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LDAP_SIZE_LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_LDAP_SIZE_LIMIT_EXCEEDED})
+var sValidationExceptionReason_LDAP_UNSUPPORTED_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LDAP_UNSUPPORTED_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_LDAP_UNSUPPORTED_OPERATION})
+var sAddGroupMemberRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eAddGroupMemberRequest_DirectoryId})
+var sAddGroupMemberRequest_GroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupName", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &eAddGroupMemberRequest_GroupName})
+var sAddGroupMemberRequest_MemberName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberName", ID: &i_MemberName, Type: smithy.ShapeTypeString, Ext: &eAddGroupMemberRequest_MemberName})
+var sAddGroupMemberRequest_MemberRealm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberRealm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &eAddGroupMemberRequest_MemberRealm})
+var sAddGroupMemberRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eAddGroupMemberRequest_ClientToken})
+var sCreateGroupRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eCreateGroupRequest_DirectoryId})
+var sCreateGroupRequest_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &eCreateGroupRequest_SAMAccountName})
+var sCreateGroupRequest_GroupType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupType", ID: &iGroupType, Members: &mGroupType, Type: smithy.ShapeTypeEnum, Ext: &eCreateGroupRequest_GroupType})
+var sCreateGroupRequest_GroupScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupScope", ID: &iGroupScope, Members: &mGroupScope, Type: smithy.ShapeTypeEnum, Ext: &eCreateGroupRequest_GroupScope})
+var sCreateGroupRequest_OtherAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eCreateGroupRequest_OtherAttributes})
+var sCreateGroupRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateGroupRequest_ClientToken})
+var sCreateGroupResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString, Ext: &eCreateGroupResult_DirectoryId})
+var sCreateGroupResult_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &eCreateGroupResult_SAMAccountName})
+var sCreateGroupResult_SID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SID", ID: &i_SID, Type: smithy.ShapeTypeString, Ext: &eCreateGroupResult_SID})
+var sCreateUserRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eCreateUserRequest_DirectoryId})
+var sCreateUserRequest_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_UserName, Type: smithy.ShapeTypeString, Ext: &eCreateUserRequest_SAMAccountName})
+var sCreateUserRequest_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailAddress", ID: &i_EmailAddress, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eCreateUserRequest_EmailAddress})
+var sCreateUserRequest_GivenName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GivenName", ID: &i_GivenName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eCreateUserRequest_GivenName})
+var sCreateUserRequest_Surname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Surname", ID: &i_Surname, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eCreateUserRequest_Surname})
+var sCreateUserRequest_OtherAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eCreateUserRequest_OtherAttributes})
+var sCreateUserRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateUserRequest_ClientToken})
+var sCreateUserResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString, Ext: &eCreateUserResult_DirectoryId})
+var sCreateUserResult_SID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SID", ID: &i_SID, Type: smithy.ShapeTypeString, Ext: &eCreateUserResult_SID})
+var sCreateUserResult_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_UserName, Type: smithy.ShapeTypeString, Ext: &eCreateUserResult_SAMAccountName})
+var sDeleteGroupRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eDeleteGroupRequest_DirectoryId})
+var sDeleteGroupRequest_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &eDeleteGroupRequest_SAMAccountName})
+var sDeleteGroupRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eDeleteGroupRequest_ClientToken})
+var sDeleteUserRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eDeleteUserRequest_DirectoryId})
+var sDeleteUserRequest_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_UserName, Type: smithy.ShapeTypeString, Ext: &eDeleteUserRequest_SAMAccountName})
+var sDeleteUserRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eDeleteUserRequest_ClientToken})
+var sDescribeGroupRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eDescribeGroupRequest_DirectoryId})
+var sDescribeGroupRequest_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &eDescribeGroupRequest_Realm})
+var sDescribeGroupRequest_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &eDescribeGroupRequest_SAMAccountName})
+var sDescribeGroupRequest_OtherAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherAttributes", ID: &i_LdapDisplayNameList, Members: &m_LdapDisplayNameList, Type: smithy.ShapeTypeList, Ext: &eDescribeGroupRequest_OtherAttributes})
+var sDescribeGroupResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString, Ext: &eDescribeGroupResult_DirectoryId})
+var sDescribeGroupResult_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &eDescribeGroupResult_Realm})
+var sDescribeGroupResult_SID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SID", ID: &i_SID, Type: smithy.ShapeTypeString, Ext: &eDescribeGroupResult_SID})
+var sDescribeGroupResult_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &eDescribeGroupResult_SAMAccountName})
+var sDescribeGroupResult_DistinguishedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DistinguishedName", ID: &i_DistinguishedName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eDescribeGroupResult_DistinguishedName})
+var sDescribeGroupResult_GroupType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupType", ID: &iGroupType, Members: &mGroupType, Type: smithy.ShapeTypeEnum, Ext: &eDescribeGroupResult_GroupType})
+var sDescribeGroupResult_GroupScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupScope", ID: &iGroupScope, Members: &mGroupScope, Type: smithy.ShapeTypeEnum, Ext: &eDescribeGroupResult_GroupScope})
+var sDescribeGroupResult_OtherAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eDescribeGroupResult_OtherAttributes})
+var sDescribeUserRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eDescribeUserRequest_DirectoryId})
+var sDescribeUserRequest_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_UserName, Type: smithy.ShapeTypeString, Ext: &eDescribeUserRequest_SAMAccountName})
+var sDescribeUserRequest_OtherAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherAttributes", ID: &i_LdapDisplayNameList, Members: &m_LdapDisplayNameList, Type: smithy.ShapeTypeList, Ext: &eDescribeUserRequest_OtherAttributes})
+var sDescribeUserRequest_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &eDescribeUserRequest_Realm})
+var sDescribeUserResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResult_DirectoryId})
+var sDescribeUserResult_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResult_Realm})
+var sDescribeUserResult_SID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SID", ID: &i_SID, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResult_SID})
+var sDescribeUserResult_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_UserName, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResult_SAMAccountName})
+var sDescribeUserResult_DistinguishedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DistinguishedName", ID: &i_DistinguishedName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResult_DistinguishedName})
+var sDescribeUserResult_UserPrincipalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserPrincipalName", ID: &i_UserPrincipalName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResult_UserPrincipalName})
+var sDescribeUserResult_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailAddress", ID: &i_EmailAddress, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResult_EmailAddress})
+var sDescribeUserResult_GivenName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GivenName", ID: &i_GivenName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResult_GivenName})
+var sDescribeUserResult_Surname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Surname", ID: &i_Surname, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eDescribeUserResult_Surname})
+var sDescribeUserResult_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeUserResult_Enabled})
+var sDescribeUserResult_OtherAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eDescribeUserResult_OtherAttributes})
+var sDisableUserRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eDisableUserRequest_DirectoryId})
+var sDisableUserRequest_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_UserName, Type: smithy.ShapeTypeString, Ext: &eDisableUserRequest_SAMAccountName})
+var sDisableUserRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eDisableUserRequest_ClientToken})
+var sListGroupMembersRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eListGroupMembersRequest_DirectoryId})
+var sListGroupMembersRequest_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &eListGroupMembersRequest_Realm})
+var sListGroupMembersRequest_MemberRealm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberRealm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &eListGroupMembersRequest_MemberRealm})
+var sListGroupMembersRequest_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &eListGroupMembersRequest_SAMAccountName})
+var sListGroupMembersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eListGroupMembersRequest_NextToken})
+var sListGroupMembersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListGroupMembersRequest_MaxResults})
+var sListGroupMembersResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString, Ext: &eListGroupMembersResult_DirectoryId})
+var sListGroupMembersResult_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &eListGroupMembersResult_Realm})
+var sListGroupMembersResult_MemberRealm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberRealm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &eListGroupMembersResult_MemberRealm})
+var sListGroupMembersResult_Members = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Members", ID: &i_MemberList, Members: &m_MemberList, Type: smithy.ShapeTypeList, Ext: &eListGroupMembersResult_Members})
+var sListGroupMembersResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eListGroupMembersResult_NextToken})
+var sListGroupsForMemberRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eListGroupsForMemberRequest_DirectoryId})
+var sListGroupsForMemberRequest_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &eListGroupsForMemberRequest_Realm})
+var sListGroupsForMemberRequest_MemberRealm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberRealm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &eListGroupsForMemberRequest_MemberRealm})
+var sListGroupsForMemberRequest_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_MemberName, Type: smithy.ShapeTypeString, Ext: &eListGroupsForMemberRequest_SAMAccountName})
+var sListGroupsForMemberRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eListGroupsForMemberRequest_NextToken})
+var sListGroupsForMemberRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListGroupsForMemberRequest_MaxResults})
+var sListGroupsForMemberResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString, Ext: &eListGroupsForMemberResult_DirectoryId})
+var sListGroupsForMemberResult_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &eListGroupsForMemberResult_Realm})
+var sListGroupsForMemberResult_MemberRealm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberRealm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &eListGroupsForMemberResult_MemberRealm})
+var sListGroupsForMemberResult_Groups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Groups", ID: &i_GroupSummaryList, Members: &m_GroupSummaryList, Type: smithy.ShapeTypeList, Ext: &eListGroupsForMemberResult_Groups})
+var sListGroupsForMemberResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eListGroupsForMemberResult_NextToken})
+var sListGroupsRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eListGroupsRequest_DirectoryId})
+var sListGroupsRequest_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &eListGroupsRequest_Realm})
+var sListGroupsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eListGroupsRequest_NextToken})
+var sListGroupsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListGroupsRequest_MaxResults})
+var sListGroupsResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString, Ext: &eListGroupsResult_DirectoryId})
+var sListGroupsResult_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &eListGroupsResult_Realm})
+var sListGroupsResult_Groups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Groups", ID: &i_GroupSummaryList, Members: &m_GroupSummaryList, Type: smithy.ShapeTypeList, Ext: &eListGroupsResult_Groups})
+var sListGroupsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eListGroupsResult_NextToken})
+var sListUsersRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eListUsersRequest_DirectoryId})
+var sListUsersRequest_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &eListUsersRequest_Realm})
+var sListUsersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eListUsersRequest_NextToken})
+var sListUsersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListUsersRequest_MaxResults})
+var sListUsersResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString, Ext: &eListUsersResult_DirectoryId})
+var sListUsersResult_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &eListUsersResult_Realm})
+var sListUsersResult_Users = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Users", ID: &i_UserSummaryList, Members: &m_UserSummaryList, Type: smithy.ShapeTypeList, Ext: &eListUsersResult_Users})
+var sListUsersResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eListUsersResult_NextToken})
+var sRemoveGroupMemberRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eRemoveGroupMemberRequest_DirectoryId})
+var sRemoveGroupMemberRequest_GroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupName", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &eRemoveGroupMemberRequest_GroupName})
+var sRemoveGroupMemberRequest_MemberName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberName", ID: &i_MemberName, Type: smithy.ShapeTypeString, Ext: &eRemoveGroupMemberRequest_MemberName})
+var sRemoveGroupMemberRequest_MemberRealm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberRealm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &eRemoveGroupMemberRequest_MemberRealm})
+var sRemoveGroupMemberRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eRemoveGroupMemberRequest_ClientToken})
+var sSearchGroupsRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eSearchGroupsRequest_DirectoryId})
+var sSearchGroupsRequest_SearchString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchString", ID: &i_SearchString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eSearchGroupsRequest_SearchString})
+var sSearchGroupsRequest_SearchAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchAttributes", ID: &i_LdapDisplayNameList, Members: &m_LdapDisplayNameList, Type: smithy.ShapeTypeList, Ext: &eSearchGroupsRequest_SearchAttributes})
+var sSearchGroupsRequest_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &eSearchGroupsRequest_Realm})
+var sSearchGroupsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eSearchGroupsRequest_NextToken})
+var sSearchGroupsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eSearchGroupsRequest_MaxResults})
+var sSearchGroupsResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString, Ext: &eSearchGroupsResult_DirectoryId})
+var sSearchGroupsResult_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &eSearchGroupsResult_Realm})
+var sSearchGroupsResult_Groups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Groups", ID: &i_GroupList, Members: &m_GroupList, Type: smithy.ShapeTypeList, Ext: &eSearchGroupsResult_Groups})
+var sSearchGroupsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eSearchGroupsResult_NextToken})
+var sSearchUsersRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eSearchUsersRequest_DirectoryId})
+var sSearchUsersRequest_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &eSearchUsersRequest_Realm})
+var sSearchUsersRequest_SearchString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchString", ID: &i_SearchString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eSearchUsersRequest_SearchString})
+var sSearchUsersRequest_SearchAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchAttributes", ID: &i_LdapDisplayNameList, Members: &m_LdapDisplayNameList, Type: smithy.ShapeTypeList, Ext: &eSearchUsersRequest_SearchAttributes})
+var sSearchUsersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eSearchUsersRequest_NextToken})
+var sSearchUsersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eSearchUsersRequest_MaxResults})
+var sSearchUsersResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString, Ext: &eSearchUsersResult_DirectoryId})
+var sSearchUsersResult_Realm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Realm", ID: &i_Realm, Type: smithy.ShapeTypeString, Ext: &eSearchUsersResult_Realm})
+var sSearchUsersResult_Users = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Users", ID: &i_UserList, Members: &m_UserList, Type: smithy.ShapeTypeList, Ext: &eSearchUsersResult_Users})
+var sSearchUsersResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eSearchUsersResult_NextToken})
+var sUpdateGroupRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eUpdateGroupRequest_DirectoryId})
+var sUpdateGroupRequest_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_GroupName, Type: smithy.ShapeTypeString, Ext: &eUpdateGroupRequest_SAMAccountName})
+var sUpdateGroupRequest_GroupType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupType", ID: &iGroupType, Members: &mGroupType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateGroupRequest_GroupType})
+var sUpdateGroupRequest_GroupScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupScope", ID: &iGroupScope, Members: &mGroupScope, Type: smithy.ShapeTypeEnum, Ext: &eUpdateGroupRequest_GroupScope})
+var sUpdateGroupRequest_OtherAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eUpdateGroupRequest_OtherAttributes})
+var sUpdateGroupRequest_UpdateType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateType", ID: &iUpdateType, Members: &mUpdateType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateGroupRequest_UpdateType})
+var sUpdateGroupRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eUpdateGroupRequest_ClientToken})
+var sUpdateUserRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eUpdateUserRequest_DirectoryId})
+var sUpdateUserRequest_SAMAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMAccountName", ID: &i_UserName, Type: smithy.ShapeTypeString, Ext: &eUpdateUserRequest_SAMAccountName})
+var sUpdateUserRequest_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailAddress", ID: &i_EmailAddress, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eUpdateUserRequest_EmailAddress})
+var sUpdateUserRequest_GivenName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GivenName", ID: &i_GivenName, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eUpdateUserRequest_GivenName})
+var sUpdateUserRequest_Surname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Surname", ID: &i_Surname, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eUpdateUserRequest_Surname})
+var sUpdateUserRequest_OtherAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eUpdateUserRequest_OtherAttributes})
+var sUpdateUserRequest_UpdateType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateType", ID: &iUpdateType, Members: &mUpdateType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateUserRequest_UpdateType})
+var sUpdateUserRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eUpdateUserRequest_ClientToken})
 
 var AddGroupMember = &sAddGroupMember
 

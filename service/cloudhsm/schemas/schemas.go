@@ -7,9 +7,237 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [229]smithy.SchemaExtensions
+var (
+	eAddTagsToResource                                 smithy.SchemaExtensions
+	eCreateHapg                                        smithy.SchemaExtensions
+	eCreateHsm                                         smithy.SchemaExtensions
+	eCreateLunaClient                                  smithy.SchemaExtensions
+	eDeleteHapg                                        smithy.SchemaExtensions
+	eDeleteHsm                                         smithy.SchemaExtensions
+	eDeleteLunaClient                                  smithy.SchemaExtensions
+	eDescribeHapg                                      smithy.SchemaExtensions
+	eDescribeHsm                                       smithy.SchemaExtensions
+	eDescribeLunaClient                                smithy.SchemaExtensions
+	eGetConfig                                         smithy.SchemaExtensions
+	eListAvailableZones                                smithy.SchemaExtensions
+	eListHapgs                                         smithy.SchemaExtensions
+	eListHsms                                          smithy.SchemaExtensions
+	eListLunaClients                                   smithy.SchemaExtensions
+	eListTagsForResource                               smithy.SchemaExtensions
+	eModifyHapg                                        smithy.SchemaExtensions
+	eModifyHsm                                         smithy.SchemaExtensions
+	eModifyLunaClient                                  smithy.SchemaExtensions
+	eRemoveTagsFromResource                            smithy.SchemaExtensions
+	e_CloudHsmFrontendService                          smithy.SchemaExtensions
+	e_AZ                                               smithy.SchemaExtensions
+	e_AZList                                           smithy.SchemaExtensions
+	e_AZList_member                                    smithy.SchemaExtensions
+	e_Boolean                                          smithy.SchemaExtensions
+	e_Certificate                                      smithy.SchemaExtensions
+	e_CertificateFingerprint                           smithy.SchemaExtensions
+	e_ClientArn                                        smithy.SchemaExtensions
+	e_ClientLabel                                      smithy.SchemaExtensions
+	e_ClientList                                       smithy.SchemaExtensions
+	e_ClientList_member                                smithy.SchemaExtensions
+	e_ClientToken                                      smithy.SchemaExtensions
+	eClientVersion                                     smithy.SchemaExtensions
+	eClientVersion_FIVE_ONE                            smithy.SchemaExtensions
+	eClientVersion_FIVE_THREE                          smithy.SchemaExtensions
+	eCloudHsmInternalException                         smithy.SchemaExtensions
+	eCloudHsmInternalException_message                 smithy.SchemaExtensions
+	eCloudHsmInternalException_retryable               smithy.SchemaExtensions
+	eCloudHsmObjectState                               smithy.SchemaExtensions
+	eCloudHsmObjectState_READY                         smithy.SchemaExtensions
+	eCloudHsmObjectState_UPDATING                      smithy.SchemaExtensions
+	eCloudHsmObjectState_DEGRADED                      smithy.SchemaExtensions
+	eCloudHsmServiceException                          smithy.SchemaExtensions
+	eCloudHsmServiceException_message                  smithy.SchemaExtensions
+	eCloudHsmServiceException_retryable                smithy.SchemaExtensions
+	e_EniId                                            smithy.SchemaExtensions
+	e_ExternalId                                       smithy.SchemaExtensions
+	e_HapgArn                                          smithy.SchemaExtensions
+	e_HapgList                                         smithy.SchemaExtensions
+	e_HapgList_member                                  smithy.SchemaExtensions
+	e_HsmArn                                           smithy.SchemaExtensions
+	e_HsmList                                          smithy.SchemaExtensions
+	e_HsmList_member                                   smithy.SchemaExtensions
+	e_HsmSerialNumber                                  smithy.SchemaExtensions
+	eHsmStatus                                         smithy.SchemaExtensions
+	eHsmStatus_PENDING                                 smithy.SchemaExtensions
+	eHsmStatus_RUNNING                                 smithy.SchemaExtensions
+	eHsmStatus_UPDATING                                smithy.SchemaExtensions
+	eHsmStatus_SUSPENDED                               smithy.SchemaExtensions
+	eHsmStatus_TERMINATING                             smithy.SchemaExtensions
+	eHsmStatus_TERMINATED                              smithy.SchemaExtensions
+	eHsmStatus_DEGRADED                                smithy.SchemaExtensions
+	e_IamRoleArn                                       smithy.SchemaExtensions
+	eInvalidRequestException                           smithy.SchemaExtensions
+	eInvalidRequestException_message                   smithy.SchemaExtensions
+	eInvalidRequestException_retryable                 smithy.SchemaExtensions
+	e_IpAddress                                        smithy.SchemaExtensions
+	e_Label                                            smithy.SchemaExtensions
+	e_PaginationToken                                  smithy.SchemaExtensions
+	e_PartitionArn                                     smithy.SchemaExtensions
+	e_PartitionList                                    smithy.SchemaExtensions
+	e_PartitionList_member                             smithy.SchemaExtensions
+	e_PartitionSerial                                  smithy.SchemaExtensions
+	e_PartitionSerialList                              smithy.SchemaExtensions
+	e_PartitionSerialList_member                       smithy.SchemaExtensions
+	e_SshKey                                           smithy.SchemaExtensions
+	e_String                                           smithy.SchemaExtensions
+	e_SubnetId                                         smithy.SchemaExtensions
+	eSubscriptionType                                  smithy.SchemaExtensions
+	eSubscriptionType_PRODUCTION                       smithy.SchemaExtensions
+	eTag                                               smithy.SchemaExtensions
+	eTag_Key                                           smithy.SchemaExtensions
+	eTag_Value                                         smithy.SchemaExtensions
+	e_TagKey                                           smithy.SchemaExtensions
+	e_TagKeyList                                       smithy.SchemaExtensions
+	e_TagKeyList_member                                smithy.SchemaExtensions
+	e_TagList                                          smithy.SchemaExtensions
+	e_TagList_member                                   smithy.SchemaExtensions
+	e_TagValue                                         smithy.SchemaExtensions
+	e_Timestamp                                        smithy.SchemaExtensions
+	e_VpcId                                            smithy.SchemaExtensions
+	eAddTagsToResourceRequest                          smithy.SchemaExtensions
+	eAddTagsToResourceRequest_ResourceArn              smithy.SchemaExtensions
+	eAddTagsToResourceRequest_TagList                  smithy.SchemaExtensions
+	eAddTagsToResourceResponse                         smithy.SchemaExtensions
+	eAddTagsToResourceResponse_Status                  smithy.SchemaExtensions
+	eCreateHapgRequest                                 smithy.SchemaExtensions
+	eCreateHapgRequest_Label                           smithy.SchemaExtensions
+	eCreateHapgResponse                                smithy.SchemaExtensions
+	eCreateHapgResponse_HapgArn                        smithy.SchemaExtensions
+	eCreateHsmRequest                                  smithy.SchemaExtensions
+	eCreateHsmRequest_SubnetId                         smithy.SchemaExtensions
+	eCreateHsmRequest_SshKey                           smithy.SchemaExtensions
+	eCreateHsmRequest_EniIp                            smithy.SchemaExtensions
+	eCreateHsmRequest_IamRoleArn                       smithy.SchemaExtensions
+	eCreateHsmRequest_ExternalId                       smithy.SchemaExtensions
+	eCreateHsmRequest_SubscriptionType                 smithy.SchemaExtensions
+	eCreateHsmRequest_ClientToken                      smithy.SchemaExtensions
+	eCreateHsmRequest_SyslogIp                         smithy.SchemaExtensions
+	eCreateHsmResponse                                 smithy.SchemaExtensions
+	eCreateHsmResponse_HsmArn                          smithy.SchemaExtensions
+	eCreateLunaClientRequest                           smithy.SchemaExtensions
+	eCreateLunaClientRequest_Label                     smithy.SchemaExtensions
+	eCreateLunaClientRequest_Certificate               smithy.SchemaExtensions
+	eCreateLunaClientResponse                          smithy.SchemaExtensions
+	eCreateLunaClientResponse_ClientArn                smithy.SchemaExtensions
+	eDeleteHapgRequest                                 smithy.SchemaExtensions
+	eDeleteHapgRequest_HapgArn                         smithy.SchemaExtensions
+	eDeleteHapgResponse                                smithy.SchemaExtensions
+	eDeleteHapgResponse_Status                         smithy.SchemaExtensions
+	eDeleteHsmRequest                                  smithy.SchemaExtensions
+	eDeleteHsmRequest_HsmArn                           smithy.SchemaExtensions
+	eDeleteHsmResponse                                 smithy.SchemaExtensions
+	eDeleteHsmResponse_Status                          smithy.SchemaExtensions
+	eDeleteLunaClientRequest                           smithy.SchemaExtensions
+	eDeleteLunaClientRequest_ClientArn                 smithy.SchemaExtensions
+	eDeleteLunaClientResponse                          smithy.SchemaExtensions
+	eDeleteLunaClientResponse_Status                   smithy.SchemaExtensions
+	eDescribeHapgRequest                               smithy.SchemaExtensions
+	eDescribeHapgRequest_HapgArn                       smithy.SchemaExtensions
+	eDescribeHapgResponse                              smithy.SchemaExtensions
+	eDescribeHapgResponse_HapgArn                      smithy.SchemaExtensions
+	eDescribeHapgResponse_HapgSerial                   smithy.SchemaExtensions
+	eDescribeHapgResponse_HsmsLastActionFailed         smithy.SchemaExtensions
+	eDescribeHapgResponse_HsmsPendingDeletion          smithy.SchemaExtensions
+	eDescribeHapgResponse_HsmsPendingRegistration      smithy.SchemaExtensions
+	eDescribeHapgResponse_Label                        smithy.SchemaExtensions
+	eDescribeHapgResponse_LastModifiedTimestamp        smithy.SchemaExtensions
+	eDescribeHapgResponse_PartitionSerialList          smithy.SchemaExtensions
+	eDescribeHapgResponse_State                        smithy.SchemaExtensions
+	eDescribeHsmRequest                                smithy.SchemaExtensions
+	eDescribeHsmRequest_HsmArn                         smithy.SchemaExtensions
+	eDescribeHsmRequest_HsmSerialNumber                smithy.SchemaExtensions
+	eDescribeHsmResponse                               smithy.SchemaExtensions
+	eDescribeHsmResponse_HsmArn                        smithy.SchemaExtensions
+	eDescribeHsmResponse_Status                        smithy.SchemaExtensions
+	eDescribeHsmResponse_StatusDetails                 smithy.SchemaExtensions
+	eDescribeHsmResponse_AvailabilityZone              smithy.SchemaExtensions
+	eDescribeHsmResponse_EniId                         smithy.SchemaExtensions
+	eDescribeHsmResponse_EniIp                         smithy.SchemaExtensions
+	eDescribeHsmResponse_SubscriptionType              smithy.SchemaExtensions
+	eDescribeHsmResponse_SubscriptionStartDate         smithy.SchemaExtensions
+	eDescribeHsmResponse_SubscriptionEndDate           smithy.SchemaExtensions
+	eDescribeHsmResponse_VpcId                         smithy.SchemaExtensions
+	eDescribeHsmResponse_SubnetId                      smithy.SchemaExtensions
+	eDescribeHsmResponse_IamRoleArn                    smithy.SchemaExtensions
+	eDescribeHsmResponse_SerialNumber                  smithy.SchemaExtensions
+	eDescribeHsmResponse_VendorName                    smithy.SchemaExtensions
+	eDescribeHsmResponse_HsmType                       smithy.SchemaExtensions
+	eDescribeHsmResponse_SoftwareVersion               smithy.SchemaExtensions
+	eDescribeHsmResponse_SshPublicKey                  smithy.SchemaExtensions
+	eDescribeHsmResponse_SshKeyLastUpdated             smithy.SchemaExtensions
+	eDescribeHsmResponse_ServerCertUri                 smithy.SchemaExtensions
+	eDescribeHsmResponse_ServerCertLastUpdated         smithy.SchemaExtensions
+	eDescribeHsmResponse_Partitions                    smithy.SchemaExtensions
+	eDescribeLunaClientRequest                         smithy.SchemaExtensions
+	eDescribeLunaClientRequest_ClientArn               smithy.SchemaExtensions
+	eDescribeLunaClientRequest_CertificateFingerprint  smithy.SchemaExtensions
+	eDescribeLunaClientResponse                        smithy.SchemaExtensions
+	eDescribeLunaClientResponse_ClientArn              smithy.SchemaExtensions
+	eDescribeLunaClientResponse_Certificate            smithy.SchemaExtensions
+	eDescribeLunaClientResponse_CertificateFingerprint smithy.SchemaExtensions
+	eDescribeLunaClientResponse_LastModifiedTimestamp  smithy.SchemaExtensions
+	eDescribeLunaClientResponse_Label                  smithy.SchemaExtensions
+	eGetConfigRequest                                  smithy.SchemaExtensions
+	eGetConfigRequest_ClientArn                        smithy.SchemaExtensions
+	eGetConfigRequest_ClientVersion                    smithy.SchemaExtensions
+	eGetConfigRequest_HapgList                         smithy.SchemaExtensions
+	eGetConfigResponse                                 smithy.SchemaExtensions
+	eGetConfigResponse_ConfigType                      smithy.SchemaExtensions
+	eGetConfigResponse_ConfigFile                      smithy.SchemaExtensions
+	eGetConfigResponse_ConfigCred                      smithy.SchemaExtensions
+	eListAvailableZonesRequest                         smithy.SchemaExtensions
+	eListAvailableZonesResponse                        smithy.SchemaExtensions
+	eListAvailableZonesResponse_AZList                 smithy.SchemaExtensions
+	eListHapgsRequest                                  smithy.SchemaExtensions
+	eListHapgsRequest_NextToken                        smithy.SchemaExtensions
+	eListHapgsResponse                                 smithy.SchemaExtensions
+	eListHapgsResponse_HapgList                        smithy.SchemaExtensions
+	eListHapgsResponse_NextToken                       smithy.SchemaExtensions
+	eListHsmsRequest                                   smithy.SchemaExtensions
+	eListHsmsRequest_NextToken                         smithy.SchemaExtensions
+	eListHsmsResponse                                  smithy.SchemaExtensions
+	eListHsmsResponse_HsmList                          smithy.SchemaExtensions
+	eListHsmsResponse_NextToken                        smithy.SchemaExtensions
+	eListLunaClientsRequest                            smithy.SchemaExtensions
+	eListLunaClientsRequest_NextToken                  smithy.SchemaExtensions
+	eListLunaClientsResponse                           smithy.SchemaExtensions
+	eListLunaClientsResponse_ClientList                smithy.SchemaExtensions
+	eListLunaClientsResponse_NextToken                 smithy.SchemaExtensions
+	eListTagsForResourceRequest                        smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn            smithy.SchemaExtensions
+	eListTagsForResourceResponse                       smithy.SchemaExtensions
+	eListTagsForResourceResponse_TagList               smithy.SchemaExtensions
+	eModifyHapgRequest                                 smithy.SchemaExtensions
+	eModifyHapgRequest_HapgArn                         smithy.SchemaExtensions
+	eModifyHapgRequest_Label                           smithy.SchemaExtensions
+	eModifyHapgRequest_PartitionSerialList             smithy.SchemaExtensions
+	eModifyHapgResponse                                smithy.SchemaExtensions
+	eModifyHapgResponse_HapgArn                        smithy.SchemaExtensions
+	eModifyHsmRequest                                  smithy.SchemaExtensions
+	eModifyHsmRequest_HsmArn                           smithy.SchemaExtensions
+	eModifyHsmRequest_SubnetId                         smithy.SchemaExtensions
+	eModifyHsmRequest_EniIp                            smithy.SchemaExtensions
+	eModifyHsmRequest_IamRoleArn                       smithy.SchemaExtensions
+	eModifyHsmRequest_ExternalId                       smithy.SchemaExtensions
+	eModifyHsmRequest_SyslogIp                         smithy.SchemaExtensions
+	eModifyHsmResponse                                 smithy.SchemaExtensions
+	eModifyHsmResponse_HsmArn                          smithy.SchemaExtensions
+	eModifyLunaClientRequest                           smithy.SchemaExtensions
+	eModifyLunaClientRequest_ClientArn                 smithy.SchemaExtensions
+	eModifyLunaClientRequest_Certificate               smithy.SchemaExtensions
+	eModifyLunaClientResponse                          smithy.SchemaExtensions
+	eModifyLunaClientResponse_ClientArn                smithy.SchemaExtensions
+	eRemoveTagsFromResourceRequest                     smithy.SchemaExtensions
+	eRemoveTagsFromResourceRequest_ResourceArn         smithy.SchemaExtensions
+	eRemoveTagsFromResourceRequest_TagKeyList          smithy.SchemaExtensions
+	eRemoveTagsFromResourceResponse                    smithy.SchemaExtensions
+	eRemoveTagsFromResourceResponse_Status             smithy.SchemaExtensions
+)
 
 var (
 	iAddTagsToResource              = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "AddTagsToResource"}
@@ -195,236 +423,236 @@ var mModifyLunaClientResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sMo
 var mRemoveTagsFromResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveTagsFromResourceRequest_ResourceArn, &sRemoveTagsFromResourceRequest_TagKeyList}}
 var mRemoveTagsFromResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveTagsFromResourceResponse_Status}}
 
-var sAddTagsToResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsToResource, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCreateHapg = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHapg, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sCreateHsm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHsm, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sCreateLunaClient = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLunaClient, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sDeleteHapg = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHapg, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sDeleteHsm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHsm, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sDeleteLunaClient = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLunaClient, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sDescribeHapg = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHapg, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sDescribeHsm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHsm, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sDescribeLunaClient = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLunaClient, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sGetConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfig, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sListAvailableZones = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAvailableZones, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sListHapgs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHapgs, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sListHsms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHsms, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sListLunaClients = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLunaClients, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sModifyHapg = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyHapg, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sModifyHsm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyHsm, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sModifyLunaClient = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyLunaClient, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sRemoveTagsFromResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsFromResource, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var s_CloudHsmFrontendService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudHsmFrontendService, Type: smithy.ShapeTypeService, Ext: &ext[20]})
-var s_AZ = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AZ, Type: smithy.ShapeTypeString, Ext: &ext[21]})
-var s_AZList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AZList, Members: &m_AZList, Type: smithy.ShapeTypeList, Ext: &ext[22]})
-var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[24]})
-var s_Certificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Certificate, Type: smithy.ShapeTypeString, Ext: &ext[25]})
-var s_CertificateFingerprint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateFingerprint, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var s_ClientArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientArn, Type: smithy.ShapeTypeString, Ext: &ext[27]})
-var s_ClientLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientLabel, Type: smithy.ShapeTypeString, Ext: &ext[28]})
-var s_ClientList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientList, Members: &m_ClientList, Type: smithy.ShapeTypeList, Ext: &ext[29]})
-var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var sClientVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientVersion, Members: &mClientVersion, Type: smithy.ShapeTypeEnum, Ext: &ext[32]})
-var sCloudHsmInternalException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudHsmInternalException, Members: &mCloudHsmInternalException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[35]})
-var sCloudHsmObjectState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudHsmObjectState, Members: &mCloudHsmObjectState, Type: smithy.ShapeTypeEnum, Ext: &ext[38]})
-var sCloudHsmServiceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudHsmServiceException, Members: &mCloudHsmServiceException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[42]})
-var s_EniId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EniId, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var s_ExternalId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalId, Type: smithy.ShapeTypeString, Ext: &ext[46]})
-var s_HapgArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HapgArn, Type: smithy.ShapeTypeString, Ext: &ext[47]})
-var s_HapgList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HapgList, Members: &m_HapgList, Type: smithy.ShapeTypeList, Ext: &ext[48]})
-var s_HsmArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HsmArn, Type: smithy.ShapeTypeString, Ext: &ext[50]})
-var s_HsmList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HsmList, Members: &m_HsmList, Type: smithy.ShapeTypeList, Ext: &ext[51]})
-var s_HsmSerialNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HsmSerialNumber, Type: smithy.ShapeTypeString, Ext: &ext[53]})
-var sHsmStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHsmStatus, Members: &mHsmStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[54]})
-var s_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[62]})
-var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[63]})
-var s_IpAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpAddress, Type: smithy.ShapeTypeString, Ext: &ext[66]})
-var s_Label = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Label, Type: smithy.ShapeTypeString, Ext: &ext[67]})
-var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[68]})
-var s_PartitionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartitionArn, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var s_PartitionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartitionList, Members: &m_PartitionList, Type: smithy.ShapeTypeList, Ext: &ext[70]})
-var s_PartitionSerial = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartitionSerial, Type: smithy.ShapeTypeString, Ext: &ext[72]})
-var s_PartitionSerialList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartitionSerialList, Members: &m_PartitionSerialList, Type: smithy.ShapeTypeList, Ext: &ext[73]})
-var s_SshKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SshKey, Type: smithy.ShapeTypeString, Ext: &ext[75]})
-var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[76]})
-var s_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &ext[77]})
-var sSubscriptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscriptionType, Members: &mSubscriptionType, Type: smithy.ShapeTypeEnum, Ext: &ext[78]})
-var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[84]})
-var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[86]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[88]})
-var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeString, Ext: &ext[89]})
-var s_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &ext[90]})
-var sAddTagsToResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsToResourceRequest, Members: &mAddTagsToResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[91]})
-var sAddTagsToResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsToResourceResponse, Members: &mAddTagsToResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[94]})
-var sCreateHapgRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHapgRequest, Members: &mCreateHapgRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[96]})
-var sCreateHapgResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHapgResponse, Members: &mCreateHapgResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[98]})
-var sCreateHsmRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHsmRequest, Members: &mCreateHsmRequest, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[100]})
-var sCreateHsmResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHsmResponse, Members: &mCreateHsmResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[109]})
-var sCreateLunaClientRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLunaClientRequest, Members: &mCreateLunaClientRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[111]})
-var sCreateLunaClientResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLunaClientResponse, Members: &mCreateLunaClientResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[114]})
-var sDeleteHapgRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHapgRequest, Members: &mDeleteHapgRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[116]})
-var sDeleteHapgResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHapgResponse, Members: &mDeleteHapgResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[118]})
-var sDeleteHsmRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHsmRequest, Members: &mDeleteHsmRequest, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var sDeleteHsmResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHsmResponse, Members: &mDeleteHsmResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[122]})
-var sDeleteLunaClientRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLunaClientRequest, Members: &mDeleteLunaClientRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[124]})
-var sDeleteLunaClientResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLunaClientResponse, Members: &mDeleteLunaClientResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var sDescribeHapgRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHapgRequest, Members: &mDescribeHapgRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[128]})
-var sDescribeHapgResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHapgResponse, Members: &mDescribeHapgResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[130]})
-var sDescribeHsmRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHsmRequest, Members: &mDescribeHsmRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[140]})
-var sDescribeHsmResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHsmResponse, Members: &mDescribeHsmResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[143]})
-var sDescribeLunaClientRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLunaClientRequest, Members: &mDescribeLunaClientRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[165]})
-var sDescribeLunaClientResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLunaClientResponse, Members: &mDescribeLunaClientResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[168]})
-var sGetConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigRequest, Members: &mGetConfigRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[174]})
-var sGetConfigResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigResponse, Members: &mGetConfigResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[178]})
-var sListAvailableZonesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAvailableZonesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[182]})
-var sListAvailableZonesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAvailableZonesResponse, Members: &mListAvailableZonesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[183]})
-var sListHapgsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHapgsRequest, Members: &mListHapgsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[185]})
-var sListHapgsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHapgsResponse, Members: &mListHapgsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[187]})
-var sListHsmsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHsmsRequest, Members: &mListHsmsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[190]})
-var sListHsmsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHsmsResponse, Members: &mListHsmsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[192]})
-var sListLunaClientsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLunaClientsRequest, Members: &mListLunaClientsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[195]})
-var sListLunaClientsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLunaClientsResponse, Members: &mListLunaClientsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[197]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[200]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[202]})
-var sModifyHapgRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyHapgRequest, Members: &mModifyHapgRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[204]})
-var sModifyHapgResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyHapgResponse, Members: &mModifyHapgResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[208]})
-var sModifyHsmRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyHsmRequest, Members: &mModifyHsmRequest, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &ext[210]})
-var sModifyHsmResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyHsmResponse, Members: &mModifyHsmResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[217]})
-var sModifyLunaClientRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyLunaClientRequest, Members: &mModifyLunaClientRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[219]})
-var sModifyLunaClientResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyLunaClientResponse, Members: &mModifyLunaClientResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[222]})
-var sRemoveTagsFromResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsFromResourceRequest, Members: &mRemoveTagsFromResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[224]})
-var sRemoveTagsFromResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsFromResourceResponse, Members: &mRemoveTagsFromResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[227]})
+var sAddTagsToResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsToResource, Type: smithy.ShapeTypeOperation, Ext: &eAddTagsToResource})
+var sCreateHapg = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHapg, Type: smithy.ShapeTypeOperation, Ext: &eCreateHapg})
+var sCreateHsm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHsm, Type: smithy.ShapeTypeOperation, Ext: &eCreateHsm})
+var sCreateLunaClient = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLunaClient, Type: smithy.ShapeTypeOperation, Ext: &eCreateLunaClient})
+var sDeleteHapg = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHapg, Type: smithy.ShapeTypeOperation, Ext: &eDeleteHapg})
+var sDeleteHsm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHsm, Type: smithy.ShapeTypeOperation, Ext: &eDeleteHsm})
+var sDeleteLunaClient = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLunaClient, Type: smithy.ShapeTypeOperation, Ext: &eDeleteLunaClient})
+var sDescribeHapg = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHapg, Type: smithy.ShapeTypeOperation, Ext: &eDescribeHapg})
+var sDescribeHsm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHsm, Type: smithy.ShapeTypeOperation, Ext: &eDescribeHsm})
+var sDescribeLunaClient = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLunaClient, Type: smithy.ShapeTypeOperation, Ext: &eDescribeLunaClient})
+var sGetConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfig, Type: smithy.ShapeTypeOperation, Ext: &eGetConfig})
+var sListAvailableZones = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAvailableZones, Type: smithy.ShapeTypeOperation, Ext: &eListAvailableZones})
+var sListHapgs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHapgs, Type: smithy.ShapeTypeOperation, Ext: &eListHapgs})
+var sListHsms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHsms, Type: smithy.ShapeTypeOperation, Ext: &eListHsms})
+var sListLunaClients = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLunaClients, Type: smithy.ShapeTypeOperation, Ext: &eListLunaClients})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sModifyHapg = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyHapg, Type: smithy.ShapeTypeOperation, Ext: &eModifyHapg})
+var sModifyHsm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyHsm, Type: smithy.ShapeTypeOperation, Ext: &eModifyHsm})
+var sModifyLunaClient = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyLunaClient, Type: smithy.ShapeTypeOperation, Ext: &eModifyLunaClient})
+var sRemoveTagsFromResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsFromResource, Type: smithy.ShapeTypeOperation, Ext: &eRemoveTagsFromResource})
+var s_CloudHsmFrontendService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudHsmFrontendService, Type: smithy.ShapeTypeService, Ext: &e_CloudHsmFrontendService})
+var s_AZ = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AZ, Type: smithy.ShapeTypeString, Ext: &e_AZ})
+var s_AZList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AZList, Members: &m_AZList, Type: smithy.ShapeTypeList, Ext: &e_AZList})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var s_Certificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Certificate, Type: smithy.ShapeTypeString, Ext: &e_Certificate})
+var s_CertificateFingerprint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateFingerprint, Type: smithy.ShapeTypeString, Ext: &e_CertificateFingerprint})
+var s_ClientArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientArn, Type: smithy.ShapeTypeString, Ext: &e_ClientArn})
+var s_ClientLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientLabel, Type: smithy.ShapeTypeString, Ext: &e_ClientLabel})
+var s_ClientList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientList, Members: &m_ClientList, Type: smithy.ShapeTypeList, Ext: &e_ClientList})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
+var sClientVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientVersion, Members: &mClientVersion, Type: smithy.ShapeTypeEnum, Ext: &eClientVersion})
+var sCloudHsmInternalException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudHsmInternalException, Members: &mCloudHsmInternalException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eCloudHsmInternalException})
+var sCloudHsmObjectState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudHsmObjectState, Members: &mCloudHsmObjectState, Type: smithy.ShapeTypeEnum, Ext: &eCloudHsmObjectState})
+var sCloudHsmServiceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudHsmServiceException, Members: &mCloudHsmServiceException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eCloudHsmServiceException})
+var s_EniId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EniId, Type: smithy.ShapeTypeString, Ext: &e_EniId})
+var s_ExternalId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalId, Type: smithy.ShapeTypeString, Ext: &e_ExternalId})
+var s_HapgArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HapgArn, Type: smithy.ShapeTypeString, Ext: &e_HapgArn})
+var s_HapgList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HapgList, Members: &m_HapgList, Type: smithy.ShapeTypeList, Ext: &e_HapgList})
+var s_HsmArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HsmArn, Type: smithy.ShapeTypeString, Ext: &e_HsmArn})
+var s_HsmList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HsmList, Members: &m_HsmList, Type: smithy.ShapeTypeList, Ext: &e_HsmList})
+var s_HsmSerialNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HsmSerialNumber, Type: smithy.ShapeTypeString, Ext: &e_HsmSerialNumber})
+var sHsmStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHsmStatus, Members: &mHsmStatus, Type: smithy.ShapeTypeEnum, Ext: &eHsmStatus})
+var s_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &e_IamRoleArn})
+var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRequestException})
+var s_IpAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpAddress, Type: smithy.ShapeTypeString, Ext: &e_IpAddress})
+var s_Label = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Label, Type: smithy.ShapeTypeString, Ext: &e_Label})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &e_PaginationToken})
+var s_PartitionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartitionArn, Type: smithy.ShapeTypeString, Ext: &e_PartitionArn})
+var s_PartitionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartitionList, Members: &m_PartitionList, Type: smithy.ShapeTypeList, Ext: &e_PartitionList})
+var s_PartitionSerial = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartitionSerial, Type: smithy.ShapeTypeString, Ext: &e_PartitionSerial})
+var s_PartitionSerialList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartitionSerialList, Members: &m_PartitionSerialList, Type: smithy.ShapeTypeList, Ext: &e_PartitionSerialList})
+var s_SshKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SshKey, Type: smithy.ShapeTypeString, Ext: &e_SshKey})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &e_SubnetId})
+var sSubscriptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscriptionType, Members: &mSubscriptionType, Type: smithy.ShapeTypeEnum, Ext: &eSubscriptionType})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeString, Ext: &e_Timestamp})
+var s_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &e_VpcId})
+var sAddTagsToResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsToResourceRequest, Members: &mAddTagsToResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eAddTagsToResourceRequest})
+var sAddTagsToResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsToResourceResponse, Members: &mAddTagsToResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eAddTagsToResourceResponse})
+var sCreateHapgRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHapgRequest, Members: &mCreateHapgRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateHapgRequest})
+var sCreateHapgResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHapgResponse, Members: &mCreateHapgResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateHapgResponse})
+var sCreateHsmRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHsmRequest, Members: &mCreateHsmRequest, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eCreateHsmRequest})
+var sCreateHsmResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHsmResponse, Members: &mCreateHsmResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateHsmResponse})
+var sCreateLunaClientRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLunaClientRequest, Members: &mCreateLunaClientRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateLunaClientRequest})
+var sCreateLunaClientResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLunaClientResponse, Members: &mCreateLunaClientResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateLunaClientResponse})
+var sDeleteHapgRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHapgRequest, Members: &mDeleteHapgRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteHapgRequest})
+var sDeleteHapgResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHapgResponse, Members: &mDeleteHapgResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteHapgResponse})
+var sDeleteHsmRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHsmRequest, Members: &mDeleteHsmRequest, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eDeleteHsmRequest})
+var sDeleteHsmResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHsmResponse, Members: &mDeleteHsmResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteHsmResponse})
+var sDeleteLunaClientRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLunaClientRequest, Members: &mDeleteLunaClientRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLunaClientRequest})
+var sDeleteLunaClientResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLunaClientResponse, Members: &mDeleteLunaClientResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLunaClientResponse})
+var sDescribeHapgRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHapgRequest, Members: &mDescribeHapgRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeHapgRequest})
+var sDescribeHapgResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHapgResponse, Members: &mDescribeHapgResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeHapgResponse})
+var sDescribeHsmRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHsmRequest, Members: &mDescribeHsmRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeHsmRequest})
+var sDescribeHsmResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHsmResponse, Members: &mDescribeHsmResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeHsmResponse})
+var sDescribeLunaClientRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLunaClientRequest, Members: &mDescribeLunaClientRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLunaClientRequest})
+var sDescribeLunaClientResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLunaClientResponse, Members: &mDescribeLunaClientResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeLunaClientResponse})
+var sGetConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigRequest, Members: &mGetConfigRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetConfigRequest})
+var sGetConfigResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigResponse, Members: &mGetConfigResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetConfigResponse})
+var sListAvailableZonesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAvailableZonesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAvailableZonesRequest})
+var sListAvailableZonesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAvailableZonesResponse, Members: &mListAvailableZonesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAvailableZonesResponse})
+var sListHapgsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHapgsRequest, Members: &mListHapgsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListHapgsRequest})
+var sListHapgsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHapgsResponse, Members: &mListHapgsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListHapgsResponse})
+var sListHsmsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHsmsRequest, Members: &mListHsmsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListHsmsRequest})
+var sListHsmsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHsmsResponse, Members: &mListHsmsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListHsmsResponse})
+var sListLunaClientsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLunaClientsRequest, Members: &mListLunaClientsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListLunaClientsRequest})
+var sListLunaClientsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLunaClientsResponse, Members: &mListLunaClientsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListLunaClientsResponse})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sModifyHapgRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyHapgRequest, Members: &mModifyHapgRequest, Type: smithy.ShapeTypeStructure, Ext: &eModifyHapgRequest})
+var sModifyHapgResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyHapgResponse, Members: &mModifyHapgResponse, Type: smithy.ShapeTypeStructure, Ext: &eModifyHapgResponse})
+var sModifyHsmRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyHsmRequest, Members: &mModifyHsmRequest, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eModifyHsmRequest})
+var sModifyHsmResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyHsmResponse, Members: &mModifyHsmResponse, Type: smithy.ShapeTypeStructure, Ext: &eModifyHsmResponse})
+var sModifyLunaClientRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyLunaClientRequest, Members: &mModifyLunaClientRequest, Type: smithy.ShapeTypeStructure, Ext: &eModifyLunaClientRequest})
+var sModifyLunaClientResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyLunaClientResponse, Members: &mModifyLunaClientResponse, Type: smithy.ShapeTypeStructure, Ext: &eModifyLunaClientResponse})
+var sRemoveTagsFromResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsFromResourceRequest, Members: &mRemoveTagsFromResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eRemoveTagsFromResourceRequest})
+var sRemoveTagsFromResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsFromResourceResponse, Members: &mRemoveTagsFromResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eRemoveTagsFromResourceResponse})
 
-var s_AZList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AZ, Type: smithy.ShapeTypeString, Ext: &ext[23]})
-var s_ClientList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ClientArn, Type: smithy.ShapeTypeString, Ext: &ext[30]})
-var sClientVersion_FIVE_ONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIVE_ONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[33]})
-var sClientVersion_FIVE_THREE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIVE_THREE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[34]})
-var sCloudHsmInternalException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var sCloudHsmInternalException_retryable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[37]})
-var sCloudHsmObjectState_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[39]})
-var sCloudHsmObjectState_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[40]})
-var sCloudHsmObjectState_DEGRADED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEGRADED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[41]})
-var sCloudHsmServiceException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[43]})
-var sCloudHsmServiceException_retryable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[44]})
-var s_HapgList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_HapgArn, Type: smithy.ShapeTypeString, Ext: &ext[49]})
-var s_HsmList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_HsmArn, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var sHsmStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[55]})
-var sHsmStatus_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[56]})
-var sHsmStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[57]})
-var sHsmStatus_SUSPENDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[58]})
-var sHsmStatus_TERMINATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[59]})
-var sHsmStatus_TERMINATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[60]})
-var sHsmStatus_DEGRADED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEGRADED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[61]})
-var sInvalidRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[64]})
-var sInvalidRequestException_retryable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[65]})
-var s_PartitionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PartitionArn, Type: smithy.ShapeTypeString, Ext: &ext[71]})
-var s_PartitionSerialList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PartitionSerial, Type: smithy.ShapeTypeString, Ext: &ext[74]})
-var sSubscriptionType_PRODUCTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRODUCTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[79]})
-var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[81]})
-var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[82]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[85]})
-var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[87]})
-var sAddTagsToResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[92]})
-var sAddTagsToResourceRequest_TagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[93]})
-var sAddTagsToResourceResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[95]})
-var sCreateHapgRequest_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_Label, Type: smithy.ShapeTypeString, Ext: &ext[97]})
-var sCreateHapgResponse_HapgArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgArn", ID: &i_HapgArn, Type: smithy.ShapeTypeString, Ext: &ext[99]})
-var sCreateHsmRequest_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetId", ID: &i_SubnetId, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[101]})
-var sCreateHsmRequest_SshKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SshKey", ID: &i_SshKey, Traits: &t4, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var sCreateHsmRequest_EniIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EniIp", ID: &i_IpAddress, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &ext[103]})
-var sCreateHsmRequest_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_IamRoleArn, Traits: &t6, Type: smithy.ShapeTypeString, Ext: &ext[104]})
-var sCreateHsmRequest_ExternalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalId", ID: &i_ExternalId, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &ext[105]})
-var sCreateHsmRequest_SubscriptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionType", ID: &iSubscriptionType, Members: &mSubscriptionType, Traits: &t8, Type: smithy.ShapeTypeEnum, Ext: &ext[106]})
-var sCreateHsmRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[107]})
-var sCreateHsmRequest_SyslogIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyslogIp", ID: &i_IpAddress, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &ext[108]})
-var sCreateHsmResponse_HsmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmArn", ID: &i_HsmArn, Type: smithy.ShapeTypeString, Ext: &ext[110]})
-var sCreateLunaClientRequest_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_ClientLabel, Type: smithy.ShapeTypeString, Ext: &ext[112]})
-var sCreateLunaClientRequest_Certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificate", ID: &i_Certificate, Type: smithy.ShapeTypeString, Ext: &ext[113]})
-var sCreateLunaClientResponse_ClientArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientArn", ID: &i_ClientArn, Type: smithy.ShapeTypeString, Ext: &ext[115]})
-var sDeleteHapgRequest_HapgArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgArn", ID: &i_HapgArn, Type: smithy.ShapeTypeString, Ext: &ext[117]})
-var sDeleteHapgResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[119]})
-var sDeleteHsmRequest_HsmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmArn", ID: &i_HsmArn, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &ext[121]})
-var sDeleteHsmResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[123]})
-var sDeleteLunaClientRequest_ClientArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientArn", ID: &i_ClientArn, Type: smithy.ShapeTypeString, Ext: &ext[125]})
-var sDeleteLunaClientResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[127]})
-var sDescribeHapgRequest_HapgArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgArn", ID: &i_HapgArn, Type: smithy.ShapeTypeString, Ext: &ext[129]})
-var sDescribeHapgResponse_HapgArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgArn", ID: &i_HapgArn, Type: smithy.ShapeTypeString, Ext: &ext[131]})
-var sDescribeHapgResponse_HapgSerial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgSerial", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[132]})
-var sDescribeHapgResponse_HsmsLastActionFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmsLastActionFailed", ID: &i_HsmList, Members: &m_HsmList, Type: smithy.ShapeTypeList, Ext: &ext[133]})
-var sDescribeHapgResponse_HsmsPendingDeletion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmsPendingDeletion", ID: &i_HsmList, Members: &m_HsmList, Type: smithy.ShapeTypeList, Ext: &ext[134]})
-var sDescribeHapgResponse_HsmsPendingRegistration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmsPendingRegistration", ID: &i_HsmList, Members: &m_HsmList, Type: smithy.ShapeTypeList, Ext: &ext[135]})
-var sDescribeHapgResponse_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_Label, Type: smithy.ShapeTypeString, Ext: &ext[136]})
-var sDescribeHapgResponse_LastModifiedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeString, Ext: &ext[137]})
-var sDescribeHapgResponse_PartitionSerialList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartitionSerialList", ID: &i_PartitionSerialList, Members: &m_PartitionSerialList, Type: smithy.ShapeTypeList, Ext: &ext[138]})
-var sDescribeHapgResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iCloudHsmObjectState, Members: &mCloudHsmObjectState, Type: smithy.ShapeTypeEnum, Ext: &ext[139]})
-var sDescribeHsmRequest_HsmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmArn", ID: &i_HsmArn, Type: smithy.ShapeTypeString, Ext: &ext[141]})
-var sDescribeHsmRequest_HsmSerialNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmSerialNumber", ID: &i_HsmSerialNumber, Type: smithy.ShapeTypeString, Ext: &ext[142]})
-var sDescribeHsmResponse_HsmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmArn", ID: &i_HsmArn, Type: smithy.ShapeTypeString, Ext: &ext[144]})
-var sDescribeHsmResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iHsmStatus, Members: &mHsmStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[145]})
-var sDescribeHsmResponse_StatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusDetails", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[146]})
-var sDescribeHsmResponse_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_AZ, Type: smithy.ShapeTypeString, Ext: &ext[147]})
-var sDescribeHsmResponse_EniId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EniId", ID: &i_EniId, Type: smithy.ShapeTypeString, Ext: &ext[148]})
-var sDescribeHsmResponse_EniIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EniIp", ID: &i_IpAddress, Type: smithy.ShapeTypeString, Ext: &ext[149]})
-var sDescribeHsmResponse_SubscriptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionType", ID: &iSubscriptionType, Members: &mSubscriptionType, Type: smithy.ShapeTypeEnum, Ext: &ext[150]})
-var sDescribeHsmResponse_SubscriptionStartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionStartDate", ID: &i_Timestamp, Type: smithy.ShapeTypeString, Ext: &ext[151]})
-var sDescribeHsmResponse_SubscriptionEndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionEndDate", ID: &i_Timestamp, Type: smithy.ShapeTypeString, Ext: &ext[152]})
-var sDescribeHsmResponse_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &ext[153]})
-var sDescribeHsmResponse_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &ext[154]})
-var sDescribeHsmResponse_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[155]})
-var sDescribeHsmResponse_SerialNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SerialNumber", ID: &i_HsmSerialNumber, Type: smithy.ShapeTypeString, Ext: &ext[156]})
-var sDescribeHsmResponse_VendorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VendorName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[157]})
-var sDescribeHsmResponse_HsmType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[158]})
-var sDescribeHsmResponse_SoftwareVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SoftwareVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[159]})
-var sDescribeHsmResponse_SshPublicKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SshPublicKey", ID: &i_SshKey, Type: smithy.ShapeTypeString, Ext: &ext[160]})
-var sDescribeHsmResponse_SshKeyLastUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SshKeyLastUpdated", ID: &i_Timestamp, Type: smithy.ShapeTypeString, Ext: &ext[161]})
-var sDescribeHsmResponse_ServerCertUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerCertUri", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[162]})
-var sDescribeHsmResponse_ServerCertLastUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerCertLastUpdated", ID: &i_Timestamp, Type: smithy.ShapeTypeString, Ext: &ext[163]})
-var sDescribeHsmResponse_Partitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Partitions", ID: &i_PartitionList, Members: &m_PartitionList, Type: smithy.ShapeTypeList, Ext: &ext[164]})
-var sDescribeLunaClientRequest_ClientArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientArn", ID: &i_ClientArn, Type: smithy.ShapeTypeString, Ext: &ext[166]})
-var sDescribeLunaClientRequest_CertificateFingerprint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateFingerprint", ID: &i_CertificateFingerprint, Type: smithy.ShapeTypeString, Ext: &ext[167]})
-var sDescribeLunaClientResponse_ClientArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientArn", ID: &i_ClientArn, Type: smithy.ShapeTypeString, Ext: &ext[169]})
-var sDescribeLunaClientResponse_Certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificate", ID: &i_Certificate, Type: smithy.ShapeTypeString, Ext: &ext[170]})
-var sDescribeLunaClientResponse_CertificateFingerprint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateFingerprint", ID: &i_CertificateFingerprint, Type: smithy.ShapeTypeString, Ext: &ext[171]})
-var sDescribeLunaClientResponse_LastModifiedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeString, Ext: &ext[172]})
-var sDescribeLunaClientResponse_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_Label, Type: smithy.ShapeTypeString, Ext: &ext[173]})
-var sGetConfigRequest_ClientArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientArn", ID: &i_ClientArn, Type: smithy.ShapeTypeString, Ext: &ext[175]})
-var sGetConfigRequest_ClientVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientVersion", ID: &iClientVersion, Members: &mClientVersion, Type: smithy.ShapeTypeEnum, Ext: &ext[176]})
-var sGetConfigRequest_HapgList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgList", ID: &i_HapgList, Members: &m_HapgList, Type: smithy.ShapeTypeList, Ext: &ext[177]})
-var sGetConfigResponse_ConfigType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[179]})
-var sGetConfigResponse_ConfigFile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigFile", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[180]})
-var sGetConfigResponse_ConfigCred = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigCred", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[181]})
-var sListAvailableZonesResponse_AZList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZList", ID: &i_AZList, Members: &m_AZList, Type: smithy.ShapeTypeList, Ext: &ext[184]})
-var sListHapgsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[186]})
-var sListHapgsResponse_HapgList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgList", ID: &i_HapgList, Members: &m_HapgList, Type: smithy.ShapeTypeList, Ext: &ext[188]})
-var sListHapgsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[189]})
-var sListHsmsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[191]})
-var sListHsmsResponse_HsmList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmList", ID: &i_HsmList, Members: &m_HsmList, Type: smithy.ShapeTypeList, Ext: &ext[193]})
-var sListHsmsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[194]})
-var sListLunaClientsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[196]})
-var sListLunaClientsResponse_ClientList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientList", ID: &i_ClientList, Members: &m_ClientList, Type: smithy.ShapeTypeList, Ext: &ext[198]})
-var sListLunaClientsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[199]})
-var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[201]})
-var sListTagsForResourceResponse_TagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[203]})
-var sModifyHapgRequest_HapgArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgArn", ID: &i_HapgArn, Type: smithy.ShapeTypeString, Ext: &ext[205]})
-var sModifyHapgRequest_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_Label, Type: smithy.ShapeTypeString, Ext: &ext[206]})
-var sModifyHapgRequest_PartitionSerialList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartitionSerialList", ID: &i_PartitionSerialList, Members: &m_PartitionSerialList, Type: smithy.ShapeTypeList, Ext: &ext[207]})
-var sModifyHapgResponse_HapgArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgArn", ID: &i_HapgArn, Type: smithy.ShapeTypeString, Ext: &ext[209]})
-var sModifyHsmRequest_HsmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmArn", ID: &i_HsmArn, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &ext[211]})
-var sModifyHsmRequest_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetId", ID: &i_SubnetId, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[212]})
-var sModifyHsmRequest_EniIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EniIp", ID: &i_IpAddress, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &ext[213]})
-var sModifyHsmRequest_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_IamRoleArn, Traits: &t6, Type: smithy.ShapeTypeString, Ext: &ext[214]})
-var sModifyHsmRequest_ExternalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalId", ID: &i_ExternalId, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &ext[215]})
-var sModifyHsmRequest_SyslogIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyslogIp", ID: &i_IpAddress, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &ext[216]})
-var sModifyHsmResponse_HsmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmArn", ID: &i_HsmArn, Type: smithy.ShapeTypeString, Ext: &ext[218]})
-var sModifyLunaClientRequest_ClientArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientArn", ID: &i_ClientArn, Type: smithy.ShapeTypeString, Ext: &ext[220]})
-var sModifyLunaClientRequest_Certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificate", ID: &i_Certificate, Type: smithy.ShapeTypeString, Ext: &ext[221]})
-var sModifyLunaClientResponse_ClientArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientArn", ID: &i_ClientArn, Type: smithy.ShapeTypeString, Ext: &ext[223]})
-var sRemoveTagsFromResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[225]})
-var sRemoveTagsFromResourceRequest_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeyList", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[226]})
-var sRemoveTagsFromResourceResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[228]})
+var s_AZList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AZ, Type: smithy.ShapeTypeString, Ext: &e_AZList_member})
+var s_ClientList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ClientArn, Type: smithy.ShapeTypeString, Ext: &e_ClientList_member})
+var sClientVersion_FIVE_ONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIVE_ONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClientVersion_FIVE_ONE})
+var sClientVersion_FIVE_THREE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIVE_THREE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClientVersion_FIVE_THREE})
+var sCloudHsmInternalException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCloudHsmInternalException_message})
+var sCloudHsmInternalException_retryable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCloudHsmInternalException_retryable})
+var sCloudHsmObjectState_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCloudHsmObjectState_READY})
+var sCloudHsmObjectState_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCloudHsmObjectState_UPDATING})
+var sCloudHsmObjectState_DEGRADED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEGRADED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCloudHsmObjectState_DEGRADED})
+var sCloudHsmServiceException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCloudHsmServiceException_message})
+var sCloudHsmServiceException_retryable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCloudHsmServiceException_retryable})
+var s_HapgList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_HapgArn, Type: smithy.ShapeTypeString, Ext: &e_HapgList_member})
+var s_HsmList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_HsmArn, Type: smithy.ShapeTypeString, Ext: &e_HsmList_member})
+var sHsmStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHsmStatus_PENDING})
+var sHsmStatus_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHsmStatus_RUNNING})
+var sHsmStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHsmStatus_UPDATING})
+var sHsmStatus_SUSPENDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHsmStatus_SUSPENDED})
+var sHsmStatus_TERMINATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHsmStatus_TERMINATING})
+var sHsmStatus_TERMINATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHsmStatus_TERMINATED})
+var sHsmStatus_DEGRADED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEGRADED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHsmStatus_DEGRADED})
+var sInvalidRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInvalidRequestException_message})
+var sInvalidRequestException_retryable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eInvalidRequestException_retryable})
+var s_PartitionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PartitionArn, Type: smithy.ShapeTypeString, Ext: &e_PartitionList_member})
+var s_PartitionSerialList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PartitionSerial, Type: smithy.ShapeTypeString, Ext: &e_PartitionSerialList_member})
+var sSubscriptionType_PRODUCTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRODUCTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSubscriptionType_PRODUCTION})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var sAddTagsToResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAddTagsToResourceRequest_ResourceArn})
+var sAddTagsToResourceRequest_TagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eAddTagsToResourceRequest_TagList})
+var sAddTagsToResourceResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAddTagsToResourceResponse_Status})
+var sCreateHapgRequest_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_Label, Type: smithy.ShapeTypeString, Ext: &eCreateHapgRequest_Label})
+var sCreateHapgResponse_HapgArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgArn", ID: &i_HapgArn, Type: smithy.ShapeTypeString, Ext: &eCreateHapgResponse_HapgArn})
+var sCreateHsmRequest_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetId", ID: &i_SubnetId, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eCreateHsmRequest_SubnetId})
+var sCreateHsmRequest_SshKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SshKey", ID: &i_SshKey, Traits: &t4, Type: smithy.ShapeTypeString, Ext: &eCreateHsmRequest_SshKey})
+var sCreateHsmRequest_EniIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EniIp", ID: &i_IpAddress, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &eCreateHsmRequest_EniIp})
+var sCreateHsmRequest_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_IamRoleArn, Traits: &t6, Type: smithy.ShapeTypeString, Ext: &eCreateHsmRequest_IamRoleArn})
+var sCreateHsmRequest_ExternalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalId", ID: &i_ExternalId, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &eCreateHsmRequest_ExternalId})
+var sCreateHsmRequest_SubscriptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionType", ID: &iSubscriptionType, Members: &mSubscriptionType, Traits: &t8, Type: smithy.ShapeTypeEnum, Ext: &eCreateHsmRequest_SubscriptionType})
+var sCreateHsmRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eCreateHsmRequest_ClientToken})
+var sCreateHsmRequest_SyslogIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyslogIp", ID: &i_IpAddress, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &eCreateHsmRequest_SyslogIp})
+var sCreateHsmResponse_HsmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmArn", ID: &i_HsmArn, Type: smithy.ShapeTypeString, Ext: &eCreateHsmResponse_HsmArn})
+var sCreateLunaClientRequest_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_ClientLabel, Type: smithy.ShapeTypeString, Ext: &eCreateLunaClientRequest_Label})
+var sCreateLunaClientRequest_Certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificate", ID: &i_Certificate, Type: smithy.ShapeTypeString, Ext: &eCreateLunaClientRequest_Certificate})
+var sCreateLunaClientResponse_ClientArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientArn", ID: &i_ClientArn, Type: smithy.ShapeTypeString, Ext: &eCreateLunaClientResponse_ClientArn})
+var sDeleteHapgRequest_HapgArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgArn", ID: &i_HapgArn, Type: smithy.ShapeTypeString, Ext: &eDeleteHapgRequest_HapgArn})
+var sDeleteHapgResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteHapgResponse_Status})
+var sDeleteHsmRequest_HsmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmArn", ID: &i_HsmArn, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &eDeleteHsmRequest_HsmArn})
+var sDeleteHsmResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteHsmResponse_Status})
+var sDeleteLunaClientRequest_ClientArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientArn", ID: &i_ClientArn, Type: smithy.ShapeTypeString, Ext: &eDeleteLunaClientRequest_ClientArn})
+var sDeleteLunaClientResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteLunaClientResponse_Status})
+var sDescribeHapgRequest_HapgArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgArn", ID: &i_HapgArn, Type: smithy.ShapeTypeString, Ext: &eDescribeHapgRequest_HapgArn})
+var sDescribeHapgResponse_HapgArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgArn", ID: &i_HapgArn, Type: smithy.ShapeTypeString, Ext: &eDescribeHapgResponse_HapgArn})
+var sDescribeHapgResponse_HapgSerial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgSerial", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeHapgResponse_HapgSerial})
+var sDescribeHapgResponse_HsmsLastActionFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmsLastActionFailed", ID: &i_HsmList, Members: &m_HsmList, Type: smithy.ShapeTypeList, Ext: &eDescribeHapgResponse_HsmsLastActionFailed})
+var sDescribeHapgResponse_HsmsPendingDeletion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmsPendingDeletion", ID: &i_HsmList, Members: &m_HsmList, Type: smithy.ShapeTypeList, Ext: &eDescribeHapgResponse_HsmsPendingDeletion})
+var sDescribeHapgResponse_HsmsPendingRegistration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmsPendingRegistration", ID: &i_HsmList, Members: &m_HsmList, Type: smithy.ShapeTypeList, Ext: &eDescribeHapgResponse_HsmsPendingRegistration})
+var sDescribeHapgResponse_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_Label, Type: smithy.ShapeTypeString, Ext: &eDescribeHapgResponse_Label})
+var sDescribeHapgResponse_LastModifiedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeString, Ext: &eDescribeHapgResponse_LastModifiedTimestamp})
+var sDescribeHapgResponse_PartitionSerialList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartitionSerialList", ID: &i_PartitionSerialList, Members: &m_PartitionSerialList, Type: smithy.ShapeTypeList, Ext: &eDescribeHapgResponse_PartitionSerialList})
+var sDescribeHapgResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iCloudHsmObjectState, Members: &mCloudHsmObjectState, Type: smithy.ShapeTypeEnum, Ext: &eDescribeHapgResponse_State})
+var sDescribeHsmRequest_HsmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmArn", ID: &i_HsmArn, Type: smithy.ShapeTypeString, Ext: &eDescribeHsmRequest_HsmArn})
+var sDescribeHsmRequest_HsmSerialNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmSerialNumber", ID: &i_HsmSerialNumber, Type: smithy.ShapeTypeString, Ext: &eDescribeHsmRequest_HsmSerialNumber})
+var sDescribeHsmResponse_HsmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmArn", ID: &i_HsmArn, Type: smithy.ShapeTypeString, Ext: &eDescribeHsmResponse_HsmArn})
+var sDescribeHsmResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iHsmStatus, Members: &mHsmStatus, Type: smithy.ShapeTypeEnum, Ext: &eDescribeHsmResponse_Status})
+var sDescribeHsmResponse_StatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusDetails", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeHsmResponse_StatusDetails})
+var sDescribeHsmResponse_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_AZ, Type: smithy.ShapeTypeString, Ext: &eDescribeHsmResponse_AvailabilityZone})
+var sDescribeHsmResponse_EniId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EniId", ID: &i_EniId, Type: smithy.ShapeTypeString, Ext: &eDescribeHsmResponse_EniId})
+var sDescribeHsmResponse_EniIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EniIp", ID: &i_IpAddress, Type: smithy.ShapeTypeString, Ext: &eDescribeHsmResponse_EniIp})
+var sDescribeHsmResponse_SubscriptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionType", ID: &iSubscriptionType, Members: &mSubscriptionType, Type: smithy.ShapeTypeEnum, Ext: &eDescribeHsmResponse_SubscriptionType})
+var sDescribeHsmResponse_SubscriptionStartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionStartDate", ID: &i_Timestamp, Type: smithy.ShapeTypeString, Ext: &eDescribeHsmResponse_SubscriptionStartDate})
+var sDescribeHsmResponse_SubscriptionEndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionEndDate", ID: &i_Timestamp, Type: smithy.ShapeTypeString, Ext: &eDescribeHsmResponse_SubscriptionEndDate})
+var sDescribeHsmResponse_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &eDescribeHsmResponse_VpcId})
+var sDescribeHsmResponse_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &eDescribeHsmResponse_SubnetId})
+var sDescribeHsmResponse_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eDescribeHsmResponse_IamRoleArn})
+var sDescribeHsmResponse_SerialNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SerialNumber", ID: &i_HsmSerialNumber, Type: smithy.ShapeTypeString, Ext: &eDescribeHsmResponse_SerialNumber})
+var sDescribeHsmResponse_VendorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VendorName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeHsmResponse_VendorName})
+var sDescribeHsmResponse_HsmType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeHsmResponse_HsmType})
+var sDescribeHsmResponse_SoftwareVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SoftwareVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeHsmResponse_SoftwareVersion})
+var sDescribeHsmResponse_SshPublicKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SshPublicKey", ID: &i_SshKey, Type: smithy.ShapeTypeString, Ext: &eDescribeHsmResponse_SshPublicKey})
+var sDescribeHsmResponse_SshKeyLastUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SshKeyLastUpdated", ID: &i_Timestamp, Type: smithy.ShapeTypeString, Ext: &eDescribeHsmResponse_SshKeyLastUpdated})
+var sDescribeHsmResponse_ServerCertUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerCertUri", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDescribeHsmResponse_ServerCertUri})
+var sDescribeHsmResponse_ServerCertLastUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerCertLastUpdated", ID: &i_Timestamp, Type: smithy.ShapeTypeString, Ext: &eDescribeHsmResponse_ServerCertLastUpdated})
+var sDescribeHsmResponse_Partitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Partitions", ID: &i_PartitionList, Members: &m_PartitionList, Type: smithy.ShapeTypeList, Ext: &eDescribeHsmResponse_Partitions})
+var sDescribeLunaClientRequest_ClientArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientArn", ID: &i_ClientArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLunaClientRequest_ClientArn})
+var sDescribeLunaClientRequest_CertificateFingerprint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateFingerprint", ID: &i_CertificateFingerprint, Type: smithy.ShapeTypeString, Ext: &eDescribeLunaClientRequest_CertificateFingerprint})
+var sDescribeLunaClientResponse_ClientArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientArn", ID: &i_ClientArn, Type: smithy.ShapeTypeString, Ext: &eDescribeLunaClientResponse_ClientArn})
+var sDescribeLunaClientResponse_Certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificate", ID: &i_Certificate, Type: smithy.ShapeTypeString, Ext: &eDescribeLunaClientResponse_Certificate})
+var sDescribeLunaClientResponse_CertificateFingerprint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateFingerprint", ID: &i_CertificateFingerprint, Type: smithy.ShapeTypeString, Ext: &eDescribeLunaClientResponse_CertificateFingerprint})
+var sDescribeLunaClientResponse_LastModifiedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeString, Ext: &eDescribeLunaClientResponse_LastModifiedTimestamp})
+var sDescribeLunaClientResponse_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_Label, Type: smithy.ShapeTypeString, Ext: &eDescribeLunaClientResponse_Label})
+var sGetConfigRequest_ClientArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientArn", ID: &i_ClientArn, Type: smithy.ShapeTypeString, Ext: &eGetConfigRequest_ClientArn})
+var sGetConfigRequest_ClientVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientVersion", ID: &iClientVersion, Members: &mClientVersion, Type: smithy.ShapeTypeEnum, Ext: &eGetConfigRequest_ClientVersion})
+var sGetConfigRequest_HapgList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgList", ID: &i_HapgList, Members: &m_HapgList, Type: smithy.ShapeTypeList, Ext: &eGetConfigRequest_HapgList})
+var sGetConfigResponse_ConfigType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetConfigResponse_ConfigType})
+var sGetConfigResponse_ConfigFile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigFile", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetConfigResponse_ConfigFile})
+var sGetConfigResponse_ConfigCred = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigCred", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetConfigResponse_ConfigCred})
+var sListAvailableZonesResponse_AZList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZList", ID: &i_AZList, Members: &m_AZList, Type: smithy.ShapeTypeList, Ext: &eListAvailableZonesResponse_AZList})
+var sListHapgsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListHapgsRequest_NextToken})
+var sListHapgsResponse_HapgList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgList", ID: &i_HapgList, Members: &m_HapgList, Type: smithy.ShapeTypeList, Ext: &eListHapgsResponse_HapgList})
+var sListHapgsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListHapgsResponse_NextToken})
+var sListHsmsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListHsmsRequest_NextToken})
+var sListHsmsResponse_HsmList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmList", ID: &i_HsmList, Members: &m_HsmList, Type: smithy.ShapeTypeList, Ext: &eListHsmsResponse_HsmList})
+var sListHsmsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListHsmsResponse_NextToken})
+var sListLunaClientsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListLunaClientsRequest_NextToken})
+var sListLunaClientsResponse_ClientList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientList", ID: &i_ClientList, Members: &m_ClientList, Type: smithy.ShapeTypeList, Ext: &eListLunaClientsResponse_ClientList})
+var sListLunaClientsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListLunaClientsResponse_NextToken})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceResponse_TagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_TagList})
+var sModifyHapgRequest_HapgArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgArn", ID: &i_HapgArn, Type: smithy.ShapeTypeString, Ext: &eModifyHapgRequest_HapgArn})
+var sModifyHapgRequest_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_Label, Type: smithy.ShapeTypeString, Ext: &eModifyHapgRequest_Label})
+var sModifyHapgRequest_PartitionSerialList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartitionSerialList", ID: &i_PartitionSerialList, Members: &m_PartitionSerialList, Type: smithy.ShapeTypeList, Ext: &eModifyHapgRequest_PartitionSerialList})
+var sModifyHapgResponse_HapgArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgArn", ID: &i_HapgArn, Type: smithy.ShapeTypeString, Ext: &eModifyHapgResponse_HapgArn})
+var sModifyHsmRequest_HsmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmArn", ID: &i_HsmArn, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &eModifyHsmRequest_HsmArn})
+var sModifyHsmRequest_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetId", ID: &i_SubnetId, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eModifyHsmRequest_SubnetId})
+var sModifyHsmRequest_EniIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EniIp", ID: &i_IpAddress, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &eModifyHsmRequest_EniIp})
+var sModifyHsmRequest_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_IamRoleArn, Traits: &t6, Type: smithy.ShapeTypeString, Ext: &eModifyHsmRequest_IamRoleArn})
+var sModifyHsmRequest_ExternalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalId", ID: &i_ExternalId, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &eModifyHsmRequest_ExternalId})
+var sModifyHsmRequest_SyslogIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyslogIp", ID: &i_IpAddress, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &eModifyHsmRequest_SyslogIp})
+var sModifyHsmResponse_HsmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmArn", ID: &i_HsmArn, Type: smithy.ShapeTypeString, Ext: &eModifyHsmResponse_HsmArn})
+var sModifyLunaClientRequest_ClientArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientArn", ID: &i_ClientArn, Type: smithy.ShapeTypeString, Ext: &eModifyLunaClientRequest_ClientArn})
+var sModifyLunaClientRequest_Certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificate", ID: &i_Certificate, Type: smithy.ShapeTypeString, Ext: &eModifyLunaClientRequest_Certificate})
+var sModifyLunaClientResponse_ClientArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientArn", ID: &i_ClientArn, Type: smithy.ShapeTypeString, Ext: &eModifyLunaClientResponse_ClientArn})
+var sRemoveTagsFromResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRemoveTagsFromResourceRequest_ResourceArn})
+var sRemoveTagsFromResourceRequest_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeyList", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eRemoveTagsFromResourceRequest_TagKeyList})
+var sRemoveTagsFromResourceResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRemoveTagsFromResourceResponse_Status})
 
 var AddTagsToResource = &sAddTagsToResource
 

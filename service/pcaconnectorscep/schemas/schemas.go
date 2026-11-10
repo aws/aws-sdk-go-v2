@@ -7,9 +7,187 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [179]smithy.SchemaExtensions
+var (
+	eCreateChallenge                                          smithy.SchemaExtensions
+	eCreateConnector                                          smithy.SchemaExtensions
+	eDeleteChallenge                                          smithy.SchemaExtensions
+	eDeleteConnector                                          smithy.SchemaExtensions
+	eGetChallengeMetadata                                     smithy.SchemaExtensions
+	eGetChallengePassword                                     smithy.SchemaExtensions
+	eGetConnector                                             smithy.SchemaExtensions
+	eListChallengeMetadata                                    smithy.SchemaExtensions
+	eListConnectors                                           smithy.SchemaExtensions
+	eListTagsForResource                                      smithy.SchemaExtensions
+	eTagResource                                              smithy.SchemaExtensions
+	eUntagResource                                            smithy.SchemaExtensions
+	e_PcaConnectorScep                                        smithy.SchemaExtensions
+	eAccessDeniedException                                    smithy.SchemaExtensions
+	eAccessDeniedException_Message                            smithy.SchemaExtensions
+	e_AzureApplicationId                                      smithy.SchemaExtensions
+	e_AzureDomain                                             smithy.SchemaExtensions
+	eBadRequestException                                      smithy.SchemaExtensions
+	eBadRequestException_Message                              smithy.SchemaExtensions
+	e_CertificateAuthorityArn                                 smithy.SchemaExtensions
+	eChallenge                                                smithy.SchemaExtensions
+	eChallenge_Arn                                            smithy.SchemaExtensions
+	eChallenge_ConnectorArn                                   smithy.SchemaExtensions
+	eChallenge_CreatedAt                                      smithy.SchemaExtensions
+	eChallenge_UpdatedAt                                      smithy.SchemaExtensions
+	eChallenge_Password                                       smithy.SchemaExtensions
+	e_ChallengeArn                                            smithy.SchemaExtensions
+	eChallengeMetadata                                        smithy.SchemaExtensions
+	eChallengeMetadata_Arn                                    smithy.SchemaExtensions
+	eChallengeMetadata_ConnectorArn                           smithy.SchemaExtensions
+	eChallengeMetadata_CreatedAt                              smithy.SchemaExtensions
+	eChallengeMetadata_UpdatedAt                              smithy.SchemaExtensions
+	e_ChallengeMetadataList                                   smithy.SchemaExtensions
+	e_ChallengeMetadataList_member                            smithy.SchemaExtensions
+	eChallengeMetadataSummary                                 smithy.SchemaExtensions
+	eChallengeMetadataSummary_Arn                             smithy.SchemaExtensions
+	eChallengeMetadataSummary_ConnectorArn                    smithy.SchemaExtensions
+	eChallengeMetadataSummary_CreatedAt                       smithy.SchemaExtensions
+	eChallengeMetadataSummary_UpdatedAt                       smithy.SchemaExtensions
+	e_ClientToken                                             smithy.SchemaExtensions
+	eConflictException                                        smithy.SchemaExtensions
+	eConflictException_Message                                smithy.SchemaExtensions
+	eConflictException_ResourceId                             smithy.SchemaExtensions
+	eConflictException_ResourceType                           smithy.SchemaExtensions
+	eConnector                                                smithy.SchemaExtensions
+	eConnector_Arn                                            smithy.SchemaExtensions
+	eConnector_CertificateAuthorityArn                        smithy.SchemaExtensions
+	eConnector_Type                                           smithy.SchemaExtensions
+	eConnector_MobileDeviceManagement                         smithy.SchemaExtensions
+	eConnector_OpenIdConfiguration                            smithy.SchemaExtensions
+	eConnector_Status                                         smithy.SchemaExtensions
+	eConnector_StatusReason                                   smithy.SchemaExtensions
+	eConnector_Endpoint                                       smithy.SchemaExtensions
+	eConnector_CreatedAt                                      smithy.SchemaExtensions
+	eConnector_UpdatedAt                                      smithy.SchemaExtensions
+	e_ConnectorArn                                            smithy.SchemaExtensions
+	e_ConnectorList                                           smithy.SchemaExtensions
+	e_ConnectorList_member                                    smithy.SchemaExtensions
+	eConnectorStatus                                          smithy.SchemaExtensions
+	eConnectorStatus_CREATING                                 smithy.SchemaExtensions
+	eConnectorStatus_ACTIVE                                   smithy.SchemaExtensions
+	eConnectorStatus_DELETING                                 smithy.SchemaExtensions
+	eConnectorStatus_FAILED                                   smithy.SchemaExtensions
+	eConnectorStatusReason                                    smithy.SchemaExtensions
+	eConnectorStatusReason_INTERNAL_FAILURE                   smithy.SchemaExtensions
+	eConnectorStatusReason_PRIVATECA_ACCESS_DENIED            smithy.SchemaExtensions
+	eConnectorStatusReason_PRIVATECA_INVALID_STATE            smithy.SchemaExtensions
+	eConnectorStatusReason_PRIVATECA_RESOURCE_NOT_FOUND       smithy.SchemaExtensions
+	eConnectorStatusReason_VPC_ENDPOINT_RESOURCE_NOT_FOUND    smithy.SchemaExtensions
+	eConnectorStatusReason_VPC_ENDPOINT_DNS_ENTRIES_NOT_FOUND smithy.SchemaExtensions
+	eConnectorSummary                                         smithy.SchemaExtensions
+	eConnectorSummary_Arn                                     smithy.SchemaExtensions
+	eConnectorSummary_CertificateAuthorityArn                 smithy.SchemaExtensions
+	eConnectorSummary_Type                                    smithy.SchemaExtensions
+	eConnectorSummary_MobileDeviceManagement                  smithy.SchemaExtensions
+	eConnectorSummary_OpenIdConfiguration                     smithy.SchemaExtensions
+	eConnectorSummary_Status                                  smithy.SchemaExtensions
+	eConnectorSummary_StatusReason                            smithy.SchemaExtensions
+	eConnectorSummary_Endpoint                                smithy.SchemaExtensions
+	eConnectorSummary_CreatedAt                               smithy.SchemaExtensions
+	eConnectorSummary_UpdatedAt                               smithy.SchemaExtensions
+	eConnectorType                                            smithy.SchemaExtensions
+	eConnectorType_GENERAL_PURPOSE                            smithy.SchemaExtensions
+	eConnectorType_INTUNE                                     smithy.SchemaExtensions
+	eInternalServerException                                  smithy.SchemaExtensions
+	eInternalServerException_Message                          smithy.SchemaExtensions
+	eIntuneConfiguration                                      smithy.SchemaExtensions
+	eIntuneConfiguration_AzureApplicationId                   smithy.SchemaExtensions
+	eIntuneConfiguration_Domain                               smithy.SchemaExtensions
+	e_MaxResults                                              smithy.SchemaExtensions
+	eMobileDeviceManagement                                   smithy.SchemaExtensions
+	eMobileDeviceManagement_Intune                            smithy.SchemaExtensions
+	e_NextToken                                               smithy.SchemaExtensions
+	eOpenIdConfiguration                                      smithy.SchemaExtensions
+	eOpenIdConfiguration_Issuer                               smithy.SchemaExtensions
+	eOpenIdConfiguration_Subject                              smithy.SchemaExtensions
+	eOpenIdConfiguration_Audience                             smithy.SchemaExtensions
+	eResourceNotFoundException                                smithy.SchemaExtensions
+	eResourceNotFoundException_Message                        smithy.SchemaExtensions
+	eResourceNotFoundException_ResourceId                     smithy.SchemaExtensions
+	eResourceNotFoundException_ResourceType                   smithy.SchemaExtensions
+	e_SensitiveString                                         smithy.SchemaExtensions
+	eServiceQuotaExceededException                            smithy.SchemaExtensions
+	eServiceQuotaExceededException_Message                    smithy.SchemaExtensions
+	eServiceQuotaExceededException_ResourceType               smithy.SchemaExtensions
+	eServiceQuotaExceededException_ServiceCode                smithy.SchemaExtensions
+	eServiceQuotaExceededException_QuotaCode                  smithy.SchemaExtensions
+	e_TagKeyList                                              smithy.SchemaExtensions
+	e_TagKeyList_member                                       smithy.SchemaExtensions
+	e_Tags                                                    smithy.SchemaExtensions
+	e_Tags_key                                                smithy.SchemaExtensions
+	e_Tags_value                                              smithy.SchemaExtensions
+	eThrottlingException                                      smithy.SchemaExtensions
+	eThrottlingException_Message                              smithy.SchemaExtensions
+	eValidationException                                      smithy.SchemaExtensions
+	eValidationException_Message                              smithy.SchemaExtensions
+	eValidationException_Reason                               smithy.SchemaExtensions
+	eValidationExceptionReason                                smithy.SchemaExtensions
+	eValidationExceptionReason_CA_CERT_VALIDITY_TOO_SHORT     smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_CA_USAGE_MODE          smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_CONNECTOR_TYPE         smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_STATE                  smithy.SchemaExtensions
+	eValidationExceptionReason_NO_CLIENT_TOKEN                smithy.SchemaExtensions
+	eValidationExceptionReason_UNKNOWN_OPERATION              smithy.SchemaExtensions
+	eValidationExceptionReason_OTHER                          smithy.SchemaExtensions
+	e_VpcEndpointId                                           smithy.SchemaExtensions
+	eCreateChallengeRequest                                   smithy.SchemaExtensions
+	eCreateChallengeRequest_ConnectorArn                      smithy.SchemaExtensions
+	eCreateChallengeRequest_ClientToken                       smithy.SchemaExtensions
+	eCreateChallengeRequest_Tags                              smithy.SchemaExtensions
+	eCreateChallengeResponse                                  smithy.SchemaExtensions
+	eCreateChallengeResponse_Challenge                        smithy.SchemaExtensions
+	eCreateConnectorRequest                                   smithy.SchemaExtensions
+	eCreateConnectorRequest_CertificateAuthorityArn           smithy.SchemaExtensions
+	eCreateConnectorRequest_MobileDeviceManagement            smithy.SchemaExtensions
+	eCreateConnectorRequest_VpcEndpointId                     smithy.SchemaExtensions
+	eCreateConnectorRequest_ClientToken                       smithy.SchemaExtensions
+	eCreateConnectorRequest_Tags                              smithy.SchemaExtensions
+	eCreateConnectorResponse                                  smithy.SchemaExtensions
+	eCreateConnectorResponse_ConnectorArn                     smithy.SchemaExtensions
+	eDeleteChallengeRequest                                   smithy.SchemaExtensions
+	eDeleteChallengeRequest_ChallengeArn                      smithy.SchemaExtensions
+	eDeleteConnectorRequest                                   smithy.SchemaExtensions
+	eDeleteConnectorRequest_ConnectorArn                      smithy.SchemaExtensions
+	eGetChallengeMetadataRequest                              smithy.SchemaExtensions
+	eGetChallengeMetadataRequest_ChallengeArn                 smithy.SchemaExtensions
+	eGetChallengeMetadataResponse                             smithy.SchemaExtensions
+	eGetChallengeMetadataResponse_ChallengeMetadata           smithy.SchemaExtensions
+	eGetChallengePasswordRequest                              smithy.SchemaExtensions
+	eGetChallengePasswordRequest_ChallengeArn                 smithy.SchemaExtensions
+	eGetChallengePasswordResponse                             smithy.SchemaExtensions
+	eGetChallengePasswordResponse_Password                    smithy.SchemaExtensions
+	eGetConnectorRequest                                      smithy.SchemaExtensions
+	eGetConnectorRequest_ConnectorArn                         smithy.SchemaExtensions
+	eGetConnectorResponse                                     smithy.SchemaExtensions
+	eGetConnectorResponse_Connector                           smithy.SchemaExtensions
+	eListChallengeMetadataRequest                             smithy.SchemaExtensions
+	eListChallengeMetadataRequest_MaxResults                  smithy.SchemaExtensions
+	eListChallengeMetadataRequest_NextToken                   smithy.SchemaExtensions
+	eListChallengeMetadataRequest_ConnectorArn                smithy.SchemaExtensions
+	eListChallengeMetadataResponse                            smithy.SchemaExtensions
+	eListChallengeMetadataResponse_Challenges                 smithy.SchemaExtensions
+	eListChallengeMetadataResponse_NextToken                  smithy.SchemaExtensions
+	eListConnectorsRequest                                    smithy.SchemaExtensions
+	eListConnectorsRequest_MaxResults                         smithy.SchemaExtensions
+	eListConnectorsRequest_NextToken                          smithy.SchemaExtensions
+	eListConnectorsResponse                                   smithy.SchemaExtensions
+	eListConnectorsResponse_Connectors                        smithy.SchemaExtensions
+	eListConnectorsResponse_NextToken                         smithy.SchemaExtensions
+	eListTagsForResourceRequest                               smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn                   smithy.SchemaExtensions
+	eListTagsForResourceResponse                              smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                         smithy.SchemaExtensions
+	eTagResourceRequest                                       smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                           smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                  smithy.SchemaExtensions
+	eUntagResourceRequest                                     smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                         smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                             smithy.SchemaExtensions
+)
 
 var (
 	iCreateChallenge               = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorscep", Name: "CreateChallenge"}
@@ -186,186 +364,186 @@ var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&
 var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
 var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
 
-var sCreateChallenge = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChallenge, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCreateConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnector, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sDeleteChallenge = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChallenge, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sDeleteConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnector, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sGetChallengeMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChallengeMetadata, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sGetChallengePassword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChallengePassword, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sGetConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnector, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sListChallengeMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChallengeMetadata, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sListConnectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectors, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var s_PcaConnectorScep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PcaConnectorScep, Type: smithy.ShapeTypeService, Ext: &ext[12]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &ext[13]})
-var s_AzureApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AzureApplicationId, Type: smithy.ShapeTypeString, Ext: &ext[15]})
-var s_AzureDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AzureDomain, Type: smithy.ShapeTypeString, Ext: &ext[16]})
-var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &ext[17]})
-var s_CertificateAuthorityArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateAuthorityArn, Type: smithy.ShapeTypeString, Ext: &ext[19]})
-var sChallenge = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChallenge, Members: &mChallenge, Type: smithy.ShapeTypeStructure, Ext: &ext[20]})
-var s_ChallengeArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChallengeArn, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var sChallengeMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChallengeMetadata, Members: &mChallengeMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[27]})
-var s_ChallengeMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChallengeMetadataList, Members: &m_ChallengeMetadataList, Type: smithy.ShapeTypeList, Ext: &ext[32]})
-var sChallengeMetadataSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChallengeMetadataSummary, Members: &mChallengeMetadataSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[34]})
-var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[39]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &ext[40]})
-var sConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnector, Members: &mConnector, Type: smithy.ShapeTypeStructure, Ext: &ext[44]})
-var s_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorArn, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var s_ConnectorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorList, Members: &m_ConnectorList, Type: smithy.ShapeTypeList, Ext: &ext[56]})
-var sConnectorStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorStatus, Members: &mConnectorStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[58]})
-var sConnectorStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorStatusReason, Members: &mConnectorStatusReason, Type: smithy.ShapeTypeEnum, Ext: &ext[63]})
-var sConnectorSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorSummary, Members: &mConnectorSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[70]})
-var sConnectorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorType, Members: &mConnectorType, Type: smithy.ShapeTypeEnum, Ext: &ext[81]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &ext[84]})
-var sIntuneConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntuneConfiguration, Members: &mIntuneConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[86]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[89]})
-var sMobileDeviceManagement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMobileDeviceManagement, Members: &mMobileDeviceManagement, Type: smithy.ShapeTypeUnion, Ext: &ext[90]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[92]})
-var sOpenIdConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenIdConfiguration, Members: &mOpenIdConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[93]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &ext[97]})
-var s_SensitiveString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &ext[101]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &ext[102]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[107]})
-var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[109]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &ext[112]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &ext[114]})
-var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[117]})
-var s_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &ext[125]})
-var sCreateChallengeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChallengeRequest, Members: &mCreateChallengeRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var sCreateChallengeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChallengeResponse, Members: &mCreateChallengeResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[130]})
-var sCreateConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectorRequest, Members: &mCreateConnectorRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[132]})
-var sCreateConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectorResponse, Members: &mCreateConnectorResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[138]})
-var sDeleteChallengeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChallengeRequest, Members: &mDeleteChallengeRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[140]})
-var sDeleteConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectorRequest, Members: &mDeleteConnectorRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[142]})
-var sGetChallengeMetadataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChallengeMetadataRequest, Members: &mGetChallengeMetadataRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[144]})
-var sGetChallengeMetadataResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChallengeMetadataResponse, Members: &mGetChallengeMetadataResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[146]})
-var sGetChallengePasswordRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChallengePasswordRequest, Members: &mGetChallengePasswordRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[148]})
-var sGetChallengePasswordResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChallengePasswordResponse, Members: &mGetChallengePasswordResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[150]})
-var sGetConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectorRequest, Members: &mGetConnectorRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[152]})
-var sGetConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectorResponse, Members: &mGetConnectorResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[154]})
-var sListChallengeMetadataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChallengeMetadataRequest, Members: &mListChallengeMetadataRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[156]})
-var sListChallengeMetadataResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChallengeMetadataResponse, Members: &mListChallengeMetadataResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[160]})
-var sListConnectorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectorsRequest, Members: &mListConnectorsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[163]})
-var sListConnectorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectorsResponse, Members: &mListConnectorsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[166]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[169]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[171]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[173]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[176]})
+var sCreateChallenge = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChallenge, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateChallenge})
+var sCreateConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnector, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateConnector})
+var sDeleteChallenge = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChallenge, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eDeleteChallenge})
+var sDeleteConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnector, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDeleteConnector})
+var sGetChallengeMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChallengeMetadata, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eGetChallengeMetadata})
+var sGetChallengePassword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChallengePassword, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eGetChallengePassword})
+var sGetConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnector, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eGetConnector})
+var sListChallengeMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChallengeMetadata, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eListChallengeMetadata})
+var sListConnectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectors, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eListConnectors})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var s_PcaConnectorScep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PcaConnectorScep, Type: smithy.ShapeTypeService, Ext: &e_PcaConnectorScep})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var s_AzureApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AzureApplicationId, Type: smithy.ShapeTypeString, Ext: &e_AzureApplicationId})
+var s_AzureDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AzureDomain, Type: smithy.ShapeTypeString, Ext: &e_AzureDomain})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eBadRequestException})
+var s_CertificateAuthorityArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateAuthorityArn, Type: smithy.ShapeTypeString, Ext: &e_CertificateAuthorityArn})
+var sChallenge = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChallenge, Members: &mChallenge, Type: smithy.ShapeTypeStructure, Ext: &eChallenge})
+var s_ChallengeArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChallengeArn, Type: smithy.ShapeTypeString, Ext: &e_ChallengeArn})
+var sChallengeMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChallengeMetadata, Members: &mChallengeMetadata, Type: smithy.ShapeTypeStructure, Ext: &eChallengeMetadata})
+var s_ChallengeMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChallengeMetadataList, Members: &m_ChallengeMetadataList, Type: smithy.ShapeTypeList, Ext: &e_ChallengeMetadataList})
+var sChallengeMetadataSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChallengeMetadataSummary, Members: &mChallengeMetadataSummary, Type: smithy.ShapeTypeStructure, Ext: &eChallengeMetadataSummary})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnector, Members: &mConnector, Type: smithy.ShapeTypeStructure, Ext: &eConnector})
+var s_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorArn, Type: smithy.ShapeTypeString, Ext: &e_ConnectorArn})
+var s_ConnectorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorList, Members: &m_ConnectorList, Type: smithy.ShapeTypeList, Ext: &e_ConnectorList})
+var sConnectorStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorStatus, Members: &mConnectorStatus, Type: smithy.ShapeTypeEnum, Ext: &eConnectorStatus})
+var sConnectorStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorStatusReason, Members: &mConnectorStatusReason, Type: smithy.ShapeTypeEnum, Ext: &eConnectorStatusReason})
+var sConnectorSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorSummary, Members: &mConnectorSummary, Type: smithy.ShapeTypeStructure, Ext: &eConnectorSummary})
+var sConnectorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorType, Members: &mConnectorType, Type: smithy.ShapeTypeEnum, Ext: &eConnectorType})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sIntuneConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntuneConfiguration, Members: &mIntuneConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eIntuneConfiguration})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var sMobileDeviceManagement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMobileDeviceManagement, Members: &mMobileDeviceManagement, Type: smithy.ShapeTypeUnion, Ext: &eMobileDeviceManagement})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sOpenIdConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenIdConfiguration, Members: &mOpenIdConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eOpenIdConfiguration})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var s_SensitiveString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &e_SensitiveString})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &e_Tags})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
+var s_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &e_VpcEndpointId})
+var sCreateChallengeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChallengeRequest, Members: &mCreateChallengeRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateChallengeRequest})
+var sCreateChallengeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChallengeResponse, Members: &mCreateChallengeResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateChallengeResponse})
+var sCreateConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectorRequest, Members: &mCreateConnectorRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateConnectorRequest})
+var sCreateConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectorResponse, Members: &mCreateConnectorResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateConnectorResponse})
+var sDeleteChallengeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChallengeRequest, Members: &mDeleteChallengeRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteChallengeRequest})
+var sDeleteConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectorRequest, Members: &mDeleteConnectorRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteConnectorRequest})
+var sGetChallengeMetadataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChallengeMetadataRequest, Members: &mGetChallengeMetadataRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetChallengeMetadataRequest})
+var sGetChallengeMetadataResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChallengeMetadataResponse, Members: &mGetChallengeMetadataResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetChallengeMetadataResponse})
+var sGetChallengePasswordRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChallengePasswordRequest, Members: &mGetChallengePasswordRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetChallengePasswordRequest})
+var sGetChallengePasswordResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChallengePasswordResponse, Members: &mGetChallengePasswordResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetChallengePasswordResponse})
+var sGetConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectorRequest, Members: &mGetConnectorRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetConnectorRequest})
+var sGetConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectorResponse, Members: &mGetConnectorResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetConnectorResponse})
+var sListChallengeMetadataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChallengeMetadataRequest, Members: &mListChallengeMetadataRequest, Type: smithy.ShapeTypeStructure, Ext: &eListChallengeMetadataRequest})
+var sListChallengeMetadataResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChallengeMetadataResponse, Members: &mListChallengeMetadataResponse, Type: smithy.ShapeTypeStructure, Ext: &eListChallengeMetadataResponse})
+var sListConnectorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectorsRequest, Members: &mListConnectorsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListConnectorsRequest})
+var sListConnectorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectorsResponse, Members: &mListConnectorsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListConnectorsResponse})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
 
-var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[14]})
-var sBadRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[18]})
-var sChallenge_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ChallengeArn, Type: smithy.ShapeTypeString, Ext: &ext[21]})
-var sChallenge_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Type: smithy.ShapeTypeString, Ext: &ext[22]})
-var sChallenge_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[23]})
-var sChallenge_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[24]})
-var sChallenge_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_SensitiveString, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[25]})
-var sChallengeMetadata_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ChallengeArn, Type: smithy.ShapeTypeString, Ext: &ext[28]})
-var sChallengeMetadata_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Type: smithy.ShapeTypeString, Ext: &ext[29]})
-var sChallengeMetadata_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[30]})
-var sChallengeMetadata_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[31]})
-var s_ChallengeMetadataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChallengeMetadataSummary, Members: &mChallengeMetadataSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[33]})
-var sChallengeMetadataSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ChallengeArn, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var sChallengeMetadataSummary_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var sChallengeMetadataSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[37]})
-var sChallengeMetadataSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[38]})
-var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[41]})
-var sConflictException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var sConflictException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[43]})
-var sConnector_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ConnectorArn, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var sConnector_CertificateAuthorityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthorityArn", ID: &i_CertificateAuthorityArn, Type: smithy.ShapeTypeString, Ext: &ext[46]})
-var sConnector_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iConnectorType, Members: &mConnectorType, Type: smithy.ShapeTypeEnum, Ext: &ext[47]})
-var sConnector_MobileDeviceManagement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MobileDeviceManagement", ID: &iMobileDeviceManagement, Members: &mMobileDeviceManagement, Type: smithy.ShapeTypeUnion, Ext: &ext[48]})
-var sConnector_OpenIdConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenIdConfiguration", ID: &iOpenIdConfiguration, Members: &mOpenIdConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[49]})
-var sConnector_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iConnectorStatus, Members: &mConnectorStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[50]})
-var sConnector_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iConnectorStatusReason, Members: &mConnectorStatusReason, Type: smithy.ShapeTypeEnum, Ext: &ext[51]})
-var sConnector_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var sConnector_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[53]})
-var sConnector_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[54]})
-var s_ConnectorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnectorSummary, Members: &mConnectorSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[57]})
-var sConnectorStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[59]})
-var sConnectorStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[60]})
-var sConnectorStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[61]})
-var sConnectorStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[62]})
-var sConnectorStatusReason_INTERNAL_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[64]})
-var sConnectorStatusReason_PRIVATECA_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIVATECA_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[65]})
-var sConnectorStatusReason_PRIVATECA_INVALID_STATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIVATECA_INVALID_STATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[66]})
-var sConnectorStatusReason_PRIVATECA_RESOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIVATECA_RESOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[67]})
-var sConnectorStatusReason_VPC_ENDPOINT_RESOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC_ENDPOINT_RESOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var sConnectorStatusReason_VPC_ENDPOINT_DNS_ENTRIES_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC_ENDPOINT_DNS_ENTRIES_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[69]})
-var sConnectorSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ConnectorArn, Type: smithy.ShapeTypeString, Ext: &ext[71]})
-var sConnectorSummary_CertificateAuthorityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthorityArn", ID: &i_CertificateAuthorityArn, Type: smithy.ShapeTypeString, Ext: &ext[72]})
-var sConnectorSummary_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iConnectorType, Members: &mConnectorType, Type: smithy.ShapeTypeEnum, Ext: &ext[73]})
-var sConnectorSummary_MobileDeviceManagement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MobileDeviceManagement", ID: &iMobileDeviceManagement, Members: &mMobileDeviceManagement, Type: smithy.ShapeTypeUnion, Ext: &ext[74]})
-var sConnectorSummary_OpenIdConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenIdConfiguration", ID: &iOpenIdConfiguration, Members: &mOpenIdConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[75]})
-var sConnectorSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iConnectorStatus, Members: &mConnectorStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[76]})
-var sConnectorSummary_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iConnectorStatusReason, Members: &mConnectorStatusReason, Type: smithy.ShapeTypeEnum, Ext: &ext[77]})
-var sConnectorSummary_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[78]})
-var sConnectorSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[79]})
-var sConnectorSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[80]})
-var sConnectorType_GENERAL_PURPOSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GENERAL_PURPOSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[82]})
-var sConnectorType_INTUNE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTUNE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[83]})
-var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[85]})
-var sIntuneConfiguration_AzureApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AzureApplicationId", ID: &i_AzureApplicationId, Type: smithy.ShapeTypeString, Ext: &ext[87]})
-var sIntuneConfiguration_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_AzureDomain, Type: smithy.ShapeTypeString, Ext: &ext[88]})
-var sMobileDeviceManagement_Intune = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Intune", ID: &iIntuneConfiguration, Members: &mIntuneConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[91]})
-var sOpenIdConfiguration_Issuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Issuer", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[94]})
-var sOpenIdConfiguration_Subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subject", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[95]})
-var sOpenIdConfiguration_Audience = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Audience", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[96]})
-var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[98]})
-var sResourceNotFoundException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[99]})
-var sResourceNotFoundException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[100]})
-var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[103]})
-var sServiceQuotaExceededException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[104]})
-var sServiceQuotaExceededException_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[105]})
-var sServiceQuotaExceededException_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[106]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[108]})
-var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[110]})
-var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[111]})
-var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[113]})
-var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[115]})
-var sValidationException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[116]})
-var sValidationExceptionReason_CA_CERT_VALIDITY_TOO_SHORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CA_CERT_VALIDITY_TOO_SHORT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[118]})
-var sValidationExceptionReason_INVALID_CA_USAGE_MODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_CA_USAGE_MODE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[119]})
-var sValidationExceptionReason_INVALID_CONNECTOR_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_CONNECTOR_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var sValidationExceptionReason_INVALID_STATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_STATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[121]})
-var sValidationExceptionReason_NO_CLIENT_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_CLIENT_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[122]})
-var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[123]})
-var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[124]})
-var sCreateChallengeRequest_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Type: smithy.ShapeTypeString, Ext: &ext[127]})
-var sCreateChallengeRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[128]})
-var sCreateChallengeRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[129]})
-var sCreateChallengeResponse_Challenge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Challenge", ID: &iChallenge, Members: &mChallenge, Type: smithy.ShapeTypeStructure, Ext: &ext[131]})
-var sCreateConnectorRequest_CertificateAuthorityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthorityArn", ID: &i_CertificateAuthorityArn, Type: smithy.ShapeTypeString, Ext: &ext[133]})
-var sCreateConnectorRequest_MobileDeviceManagement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MobileDeviceManagement", ID: &iMobileDeviceManagement, Members: &mMobileDeviceManagement, Type: smithy.ShapeTypeUnion, Ext: &ext[134]})
-var sCreateConnectorRequest_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &ext[135]})
-var sCreateConnectorRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[136]})
-var sCreateConnectorRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[137]})
-var sCreateConnectorResponse_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Type: smithy.ShapeTypeString, Ext: &ext[139]})
-var sDeleteChallengeRequest_ChallengeArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChallengeArn", ID: &i_ChallengeArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[141]})
-var sDeleteConnectorRequest_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[143]})
-var sGetChallengeMetadataRequest_ChallengeArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChallengeArn", ID: &i_ChallengeArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[145]})
-var sGetChallengeMetadataResponse_ChallengeMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChallengeMetadata", ID: &iChallengeMetadata, Members: &mChallengeMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[147]})
-var sGetChallengePasswordRequest_ChallengeArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChallengeArn", ID: &i_ChallengeArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[149]})
-var sGetChallengePasswordResponse_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_SensitiveString, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[151]})
-var sGetConnectorRequest_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[153]})
-var sGetConnectorResponse_Connector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Connector", ID: &iConnector, Members: &mConnector, Type: smithy.ShapeTypeStructure, Ext: &ext[155]})
-var sListChallengeMetadataRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t22, Type: smithy.ShapeTypeInteger, Ext: &ext[157]})
-var sListChallengeMetadataRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[158]})
-var sListChallengeMetadataRequest_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &ext[159]})
-var sListChallengeMetadataResponse_Challenges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Challenges", ID: &i_ChallengeMetadataList, Members: &m_ChallengeMetadataList, Type: smithy.ShapeTypeList, Ext: &ext[161]})
-var sListChallengeMetadataResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[162]})
-var sListConnectorsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t22, Type: smithy.ShapeTypeInteger, Ext: &ext[164]})
-var sListConnectorsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[165]})
-var sListConnectorsResponse_Connectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Connectors", ID: &i_ConnectorList, Members: &m_ConnectorList, Type: smithy.ShapeTypeList, Ext: &ext[167]})
-var sListConnectorsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[168]})
-var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &pString, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[170]})
-var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[172]})
-var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &pString, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[174]})
-var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[175]})
-var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &pString, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[177]})
-var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t25, Type: smithy.ShapeTypeList, Ext: &ext[178]})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var sBadRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBadRequestException_Message})
+var sChallenge_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ChallengeArn, Type: smithy.ShapeTypeString, Ext: &eChallenge_Arn})
+var sChallenge_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Type: smithy.ShapeTypeString, Ext: &eChallenge_ConnectorArn})
+var sChallenge_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChallenge_CreatedAt})
+var sChallenge_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChallenge_UpdatedAt})
+var sChallenge_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_SensitiveString, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eChallenge_Password})
+var sChallengeMetadata_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ChallengeArn, Type: smithy.ShapeTypeString, Ext: &eChallengeMetadata_Arn})
+var sChallengeMetadata_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Type: smithy.ShapeTypeString, Ext: &eChallengeMetadata_ConnectorArn})
+var sChallengeMetadata_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChallengeMetadata_CreatedAt})
+var sChallengeMetadata_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChallengeMetadata_UpdatedAt})
+var s_ChallengeMetadataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChallengeMetadataSummary, Members: &mChallengeMetadataSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ChallengeMetadataList_member})
+var sChallengeMetadataSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ChallengeArn, Type: smithy.ShapeTypeString, Ext: &eChallengeMetadataSummary_Arn})
+var sChallengeMetadataSummary_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Type: smithy.ShapeTypeString, Ext: &eChallengeMetadataSummary_ConnectorArn})
+var sChallengeMetadataSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChallengeMetadataSummary_CreatedAt})
+var sChallengeMetadataSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChallengeMetadataSummary_UpdatedAt})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var sConflictException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_ResourceId})
+var sConflictException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_ResourceType})
+var sConnector_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ConnectorArn, Type: smithy.ShapeTypeString, Ext: &eConnector_Arn})
+var sConnector_CertificateAuthorityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthorityArn", ID: &i_CertificateAuthorityArn, Type: smithy.ShapeTypeString, Ext: &eConnector_CertificateAuthorityArn})
+var sConnector_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iConnectorType, Members: &mConnectorType, Type: smithy.ShapeTypeEnum, Ext: &eConnector_Type})
+var sConnector_MobileDeviceManagement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MobileDeviceManagement", ID: &iMobileDeviceManagement, Members: &mMobileDeviceManagement, Type: smithy.ShapeTypeUnion, Ext: &eConnector_MobileDeviceManagement})
+var sConnector_OpenIdConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenIdConfiguration", ID: &iOpenIdConfiguration, Members: &mOpenIdConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eConnector_OpenIdConfiguration})
+var sConnector_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iConnectorStatus, Members: &mConnectorStatus, Type: smithy.ShapeTypeEnum, Ext: &eConnector_Status})
+var sConnector_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iConnectorStatusReason, Members: &mConnectorStatusReason, Type: smithy.ShapeTypeEnum, Ext: &eConnector_StatusReason})
+var sConnector_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConnector_Endpoint})
+var sConnector_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eConnector_CreatedAt})
+var sConnector_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eConnector_UpdatedAt})
+var s_ConnectorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnectorSummary, Members: &mConnectorSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ConnectorList_member})
+var sConnectorStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectorStatus_CREATING})
+var sConnectorStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectorStatus_ACTIVE})
+var sConnectorStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectorStatus_DELETING})
+var sConnectorStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectorStatus_FAILED})
+var sConnectorStatusReason_INTERNAL_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectorStatusReason_INTERNAL_FAILURE})
+var sConnectorStatusReason_PRIVATECA_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIVATECA_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectorStatusReason_PRIVATECA_ACCESS_DENIED})
+var sConnectorStatusReason_PRIVATECA_INVALID_STATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIVATECA_INVALID_STATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectorStatusReason_PRIVATECA_INVALID_STATE})
+var sConnectorStatusReason_PRIVATECA_RESOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIVATECA_RESOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectorStatusReason_PRIVATECA_RESOURCE_NOT_FOUND})
+var sConnectorStatusReason_VPC_ENDPOINT_RESOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC_ENDPOINT_RESOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectorStatusReason_VPC_ENDPOINT_RESOURCE_NOT_FOUND})
+var sConnectorStatusReason_VPC_ENDPOINT_DNS_ENTRIES_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC_ENDPOINT_DNS_ENTRIES_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectorStatusReason_VPC_ENDPOINT_DNS_ENTRIES_NOT_FOUND})
+var sConnectorSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ConnectorArn, Type: smithy.ShapeTypeString, Ext: &eConnectorSummary_Arn})
+var sConnectorSummary_CertificateAuthorityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthorityArn", ID: &i_CertificateAuthorityArn, Type: smithy.ShapeTypeString, Ext: &eConnectorSummary_CertificateAuthorityArn})
+var sConnectorSummary_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iConnectorType, Members: &mConnectorType, Type: smithy.ShapeTypeEnum, Ext: &eConnectorSummary_Type})
+var sConnectorSummary_MobileDeviceManagement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MobileDeviceManagement", ID: &iMobileDeviceManagement, Members: &mMobileDeviceManagement, Type: smithy.ShapeTypeUnion, Ext: &eConnectorSummary_MobileDeviceManagement})
+var sConnectorSummary_OpenIdConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenIdConfiguration", ID: &iOpenIdConfiguration, Members: &mOpenIdConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eConnectorSummary_OpenIdConfiguration})
+var sConnectorSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iConnectorStatus, Members: &mConnectorStatus, Type: smithy.ShapeTypeEnum, Ext: &eConnectorSummary_Status})
+var sConnectorSummary_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iConnectorStatusReason, Members: &mConnectorStatusReason, Type: smithy.ShapeTypeEnum, Ext: &eConnectorSummary_StatusReason})
+var sConnectorSummary_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConnectorSummary_Endpoint})
+var sConnectorSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eConnectorSummary_CreatedAt})
+var sConnectorSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eConnectorSummary_UpdatedAt})
+var sConnectorType_GENERAL_PURPOSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GENERAL_PURPOSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectorType_GENERAL_PURPOSE})
+var sConnectorType_INTUNE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTUNE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectorType_INTUNE})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var sIntuneConfiguration_AzureApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AzureApplicationId", ID: &i_AzureApplicationId, Type: smithy.ShapeTypeString, Ext: &eIntuneConfiguration_AzureApplicationId})
+var sIntuneConfiguration_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_AzureDomain, Type: smithy.ShapeTypeString, Ext: &eIntuneConfiguration_Domain})
+var sMobileDeviceManagement_Intune = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Intune", ID: &iIntuneConfiguration, Members: &mIntuneConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eMobileDeviceManagement_Intune})
+var sOpenIdConfiguration_Issuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Issuer", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eOpenIdConfiguration_Issuer})
+var sOpenIdConfiguration_Subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subject", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eOpenIdConfiguration_Subject})
+var sOpenIdConfiguration_Audience = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Audience", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eOpenIdConfiguration_Audience})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sResourceNotFoundException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_ResourceId})
+var sResourceNotFoundException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_ResourceType})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_Message})
+var sServiceQuotaExceededException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_ResourceType})
+var sServiceQuotaExceededException_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_ServiceCode})
+var sServiceQuotaExceededException_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_QuotaCode})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_Tags_key})
+var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_Tags_value})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sValidationException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_Reason})
+var sValidationExceptionReason_CA_CERT_VALIDITY_TOO_SHORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CA_CERT_VALIDITY_TOO_SHORT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_CA_CERT_VALIDITY_TOO_SHORT})
+var sValidationExceptionReason_INVALID_CA_USAGE_MODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_CA_USAGE_MODE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_CA_USAGE_MODE})
+var sValidationExceptionReason_INVALID_CONNECTOR_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_CONNECTOR_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_CONNECTOR_TYPE})
+var sValidationExceptionReason_INVALID_STATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_STATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_STATE})
+var sValidationExceptionReason_NO_CLIENT_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_CLIENT_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_NO_CLIENT_TOKEN})
+var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_UNKNOWN_OPERATION})
+var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_OTHER})
+var sCreateChallengeRequest_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Type: smithy.ShapeTypeString, Ext: &eCreateChallengeRequest_ConnectorArn})
+var sCreateChallengeRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateChallengeRequest_ClientToken})
+var sCreateChallengeRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateChallengeRequest_Tags})
+var sCreateChallengeResponse_Challenge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Challenge", ID: &iChallenge, Members: &mChallenge, Type: smithy.ShapeTypeStructure, Ext: &eCreateChallengeResponse_Challenge})
+var sCreateConnectorRequest_CertificateAuthorityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthorityArn", ID: &i_CertificateAuthorityArn, Type: smithy.ShapeTypeString, Ext: &eCreateConnectorRequest_CertificateAuthorityArn})
+var sCreateConnectorRequest_MobileDeviceManagement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MobileDeviceManagement", ID: &iMobileDeviceManagement, Members: &mMobileDeviceManagement, Type: smithy.ShapeTypeUnion, Ext: &eCreateConnectorRequest_MobileDeviceManagement})
+var sCreateConnectorRequest_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString, Ext: &eCreateConnectorRequest_VpcEndpointId})
+var sCreateConnectorRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateConnectorRequest_ClientToken})
+var sCreateConnectorRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateConnectorRequest_Tags})
+var sCreateConnectorResponse_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Type: smithy.ShapeTypeString, Ext: &eCreateConnectorResponse_ConnectorArn})
+var sDeleteChallengeRequest_ChallengeArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChallengeArn", ID: &i_ChallengeArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eDeleteChallengeRequest_ChallengeArn})
+var sDeleteConnectorRequest_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eDeleteConnectorRequest_ConnectorArn})
+var sGetChallengeMetadataRequest_ChallengeArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChallengeArn", ID: &i_ChallengeArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eGetChallengeMetadataRequest_ChallengeArn})
+var sGetChallengeMetadataResponse_ChallengeMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChallengeMetadata", ID: &iChallengeMetadata, Members: &mChallengeMetadata, Type: smithy.ShapeTypeStructure, Ext: &eGetChallengeMetadataResponse_ChallengeMetadata})
+var sGetChallengePasswordRequest_ChallengeArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChallengeArn", ID: &i_ChallengeArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eGetChallengePasswordRequest_ChallengeArn})
+var sGetChallengePasswordResponse_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_SensitiveString, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eGetChallengePasswordResponse_Password})
+var sGetConnectorRequest_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eGetConnectorRequest_ConnectorArn})
+var sGetConnectorResponse_Connector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Connector", ID: &iConnector, Members: &mConnector, Type: smithy.ShapeTypeStructure, Ext: &eGetConnectorResponse_Connector})
+var sListChallengeMetadataRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t22, Type: smithy.ShapeTypeInteger, Ext: &eListChallengeMetadataRequest_MaxResults})
+var sListChallengeMetadataRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eListChallengeMetadataRequest_NextToken})
+var sListChallengeMetadataRequest_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &eListChallengeMetadataRequest_ConnectorArn})
+var sListChallengeMetadataResponse_Challenges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Challenges", ID: &i_ChallengeMetadataList, Members: &m_ChallengeMetadataList, Type: smithy.ShapeTypeList, Ext: &eListChallengeMetadataResponse_Challenges})
+var sListChallengeMetadataResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListChallengeMetadataResponse_NextToken})
+var sListConnectorsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t22, Type: smithy.ShapeTypeInteger, Ext: &eListConnectorsRequest_MaxResults})
+var sListConnectorsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eListConnectorsRequest_NextToken})
+var sListConnectorsResponse_Connectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Connectors", ID: &i_ConnectorList, Members: &m_ConnectorList, Type: smithy.ShapeTypeList, Ext: &eListConnectorsResponse_Connectors})
+var sListConnectorsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListConnectorsResponse_NextToken})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &pString, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_Tags})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &pString, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_Tags})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &pString, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t25, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
 
 var CreateChallenge = &sCreateChallenge
 

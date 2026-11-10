@@ -7,9 +7,120 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [112]smithy.SchemaExtensions
+var (
+	eActivateEmailContact                              smithy.SchemaExtensions
+	eCreateEmailContact                                smithy.SchemaExtensions
+	eDeleteEmailContact                                smithy.SchemaExtensions
+	eGetEmailContact                                   smithy.SchemaExtensions
+	eListEmailContacts                                 smithy.SchemaExtensions
+	eListTagsForResource                               smithy.SchemaExtensions
+	eSendActivationCode                                smithy.SchemaExtensions
+	eTagResource                                       smithy.SchemaExtensions
+	eUntagResource                                     smithy.SchemaExtensions
+	e_NotificationsContacts                            smithy.SchemaExtensions
+	eAccessDeniedException                             smithy.SchemaExtensions
+	eAccessDeniedException_message                     smithy.SchemaExtensions
+	eConflictException                                 smithy.SchemaExtensions
+	eConflictException_message                         smithy.SchemaExtensions
+	eConflictException_resourceId                      smithy.SchemaExtensions
+	eConflictException_resourceType                    smithy.SchemaExtensions
+	e_CreationTime                                     smithy.SchemaExtensions
+	eEmailContact                                      smithy.SchemaExtensions
+	eEmailContact_arn                                  smithy.SchemaExtensions
+	eEmailContact_name                                 smithy.SchemaExtensions
+	eEmailContact_address                              smithy.SchemaExtensions
+	eEmailContact_status                               smithy.SchemaExtensions
+	eEmailContact_creationTime                         smithy.SchemaExtensions
+	eEmailContact_updateTime                           smithy.SchemaExtensions
+	e_EmailContactAddress                              smithy.SchemaExtensions
+	e_EmailContactArn                                  smithy.SchemaExtensions
+	e_EmailContactName                                 smithy.SchemaExtensions
+	e_EmailContacts                                    smithy.SchemaExtensions
+	e_EmailContacts_member                             smithy.SchemaExtensions
+	e_EmailContactStatus                               smithy.SchemaExtensions
+	e_ErrorMessage                                     smithy.SchemaExtensions
+	eInternalServerException                           smithy.SchemaExtensions
+	eInternalServerException_message                   smithy.SchemaExtensions
+	e_QuotaCode                                        smithy.SchemaExtensions
+	e_ResourceId                                       smithy.SchemaExtensions
+	eResourceNotFoundException                         smithy.SchemaExtensions
+	eResourceNotFoundException_message                 smithy.SchemaExtensions
+	eResourceNotFoundException_resourceId              smithy.SchemaExtensions
+	eResourceNotFoundException_resourceType            smithy.SchemaExtensions
+	e_ResourceType                                     smithy.SchemaExtensions
+	e_SensitiveEmailContactAddress                     smithy.SchemaExtensions
+	e_ServiceCode                                      smithy.SchemaExtensions
+	eServiceQuotaExceededException                     smithy.SchemaExtensions
+	eServiceQuotaExceededException_message             smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceId          smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceType        smithy.SchemaExtensions
+	eServiceQuotaExceededException_serviceCode         smithy.SchemaExtensions
+	eServiceQuotaExceededException_quotaCode           smithy.SchemaExtensions
+	e_TagKey                                           smithy.SchemaExtensions
+	e_TagKeys                                          smithy.SchemaExtensions
+	e_TagKeys_member                                   smithy.SchemaExtensions
+	e_TagMap                                           smithy.SchemaExtensions
+	e_TagMap_key                                       smithy.SchemaExtensions
+	e_TagMap_value                                     smithy.SchemaExtensions
+	e_TagValue                                         smithy.SchemaExtensions
+	eThrottlingException                               smithy.SchemaExtensions
+	eThrottlingException_message                       smithy.SchemaExtensions
+	eThrottlingException_serviceCode                   smithy.SchemaExtensions
+	eThrottlingException_quotaCode                     smithy.SchemaExtensions
+	eThrottlingException_retryAfterSeconds             smithy.SchemaExtensions
+	e_Token                                            smithy.SchemaExtensions
+	e_UpdateTime                                       smithy.SchemaExtensions
+	eValidationException                               smithy.SchemaExtensions
+	eValidationException_message                       smithy.SchemaExtensions
+	eValidationException_reason                        smithy.SchemaExtensions
+	eValidationException_fieldList                     smithy.SchemaExtensions
+	eValidationExceptionField                          smithy.SchemaExtensions
+	eValidationExceptionField_name                     smithy.SchemaExtensions
+	eValidationExceptionField_message                  smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                     smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member              smithy.SchemaExtensions
+	eValidationExceptionReason                         smithy.SchemaExtensions
+	eValidationExceptionReason_FIELD_VALIDATION_FAILED smithy.SchemaExtensions
+	eValidationExceptionReason_OTHER                   smithy.SchemaExtensions
+	eActivateEmailContactRequest                       smithy.SchemaExtensions
+	eActivateEmailContactRequest_arn                   smithy.SchemaExtensions
+	eActivateEmailContactRequest_code                  smithy.SchemaExtensions
+	eActivateEmailContactResponse                      smithy.SchemaExtensions
+	eCreateEmailContactRequest                         smithy.SchemaExtensions
+	eCreateEmailContactRequest_name                    smithy.SchemaExtensions
+	eCreateEmailContactRequest_emailAddress            smithy.SchemaExtensions
+	eCreateEmailContactRequest_tags                    smithy.SchemaExtensions
+	eCreateEmailContactResponse                        smithy.SchemaExtensions
+	eCreateEmailContactResponse_arn                    smithy.SchemaExtensions
+	eDeleteEmailContactRequest                         smithy.SchemaExtensions
+	eDeleteEmailContactRequest_arn                     smithy.SchemaExtensions
+	eDeleteEmailContactResponse                        smithy.SchemaExtensions
+	eGetEmailContactRequest                            smithy.SchemaExtensions
+	eGetEmailContactRequest_arn                        smithy.SchemaExtensions
+	eGetEmailContactResponse                           smithy.SchemaExtensions
+	eGetEmailContactResponse_emailContact              smithy.SchemaExtensions
+	eListEmailContactsRequest                          smithy.SchemaExtensions
+	eListEmailContactsRequest_maxResults               smithy.SchemaExtensions
+	eListEmailContactsRequest_nextToken                smithy.SchemaExtensions
+	eListEmailContactsResponse                         smithy.SchemaExtensions
+	eListEmailContactsResponse_nextToken               smithy.SchemaExtensions
+	eListEmailContactsResponse_emailContacts           smithy.SchemaExtensions
+	eListTagsForResourceRequest                        smithy.SchemaExtensions
+	eListTagsForResourceRequest_arn                    smithy.SchemaExtensions
+	eListTagsForResourceResponse                       smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                  smithy.SchemaExtensions
+	eSendActivationCodeRequest                         smithy.SchemaExtensions
+	eSendActivationCodeRequest_arn                     smithy.SchemaExtensions
+	eSendActivationCodeResponse                        smithy.SchemaExtensions
+	eTagResourceRequest                                smithy.SchemaExtensions
+	eTagResourceRequest_arn                            smithy.SchemaExtensions
+	eTagResourceRequest_tags                           smithy.SchemaExtensions
+	eTagResourceResponse                               smithy.SchemaExtensions
+	eUntagResourceRequest                              smithy.SchemaExtensions
+	eUntagResourceRequest_arn                          smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                      smithy.SchemaExtensions
+	eUntagResourceResponse                             smithy.SchemaExtensions
+)
 
 var (
 	iActivateEmailContact          = smithy.ShapeID{Namespace: "com.amazonaws.notificationscontacts", Name: "ActivateEmailContact"}
@@ -147,119 +258,119 @@ var mSendActivationCodeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sS
 var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_arn, &sTagResourceRequest_tags}}
 var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_arn, &sUntagResourceRequest_tagKeys}}
 
-var sActivateEmailContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivateEmailContact, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCreateEmailContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEmailContact, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sDeleteEmailContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEmailContact, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sGetEmailContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEmailContact, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sListEmailContacts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEmailContacts, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sSendActivationCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendActivationCode, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var s_NotificationsContacts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationsContacts, Type: smithy.ShapeTypeService, Ext: &ext[9]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &ext[10]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &ext[12]})
-var s_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreationTime, Traits: &t11, Type: smithy.ShapeTypeTimestamp, Ext: &ext[16]})
-var sEmailContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmailContact, Members: &mEmailContact, Type: smithy.ShapeTypeStructure, Ext: &ext[17]})
-var s_EmailContactAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailContactAddress, Type: smithy.ShapeTypeString, Ext: &ext[24]})
-var s_EmailContactArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailContactArn, Type: smithy.ShapeTypeString, Ext: &ext[25]})
-var s_EmailContactName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailContactName, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var s_EmailContacts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailContacts, Members: &m_EmailContacts, Type: smithy.ShapeTypeList, Ext: &ext[27]})
-var s_EmailContactStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailContactStatus, Type: smithy.ShapeTypeString, Ext: &ext[29]})
-var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[30]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &ext[31]})
-var s_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var s_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &ext[34]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &ext[35]})
-var s_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &ext[39]})
-var s_SensitiveEmailContactAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveEmailContactAddress, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var s_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &ext[41]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &ext[42]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[48]})
-var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &ext[49]})
-var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[51]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &ext[55]})
-var s_Token = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Token, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[60]})
-var s_UpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateTime, Traits: &t11, Type: smithy.ShapeTypeTimestamp, Ext: &ext[61]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &ext[62]})
-var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[66]})
-var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[69]})
-var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[71]})
-var sActivateEmailContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivateEmailContactRequest, Members: &mActivateEmailContactRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var sActivateEmailContactResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivateEmailContactResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
-var sCreateEmailContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEmailContactRequest, Members: &mCreateEmailContactRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[78]})
-var sCreateEmailContactResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEmailContactResponse, Members: &mCreateEmailContactResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[82]})
-var sDeleteEmailContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEmailContactRequest, Members: &mDeleteEmailContactRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[84]})
-var sDeleteEmailContactResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEmailContactResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[86]})
-var sGetEmailContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEmailContactRequest, Members: &mGetEmailContactRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[87]})
-var sGetEmailContactResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEmailContactResponse, Members: &mGetEmailContactResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[89]})
-var sListEmailContactsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEmailContactsRequest, Members: &mListEmailContactsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[91]})
-var sListEmailContactsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEmailContactsResponse, Members: &mListEmailContactsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[94]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[97]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[99]})
-var sSendActivationCodeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendActivationCodeRequest, Members: &mSendActivationCodeRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[101]})
-var sSendActivationCodeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendActivationCodeResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[103]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[104]})
-var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[107]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[108]})
-var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[111]})
+var sActivateEmailContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivateEmailContact, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eActivateEmailContact})
+var sCreateEmailContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEmailContact, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateEmailContact})
+var sDeleteEmailContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEmailContact, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eDeleteEmailContact})
+var sGetEmailContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEmailContact, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eGetEmailContact})
+var sListEmailContacts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEmailContacts, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eListEmailContacts})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sSendActivationCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendActivationCode, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eSendActivationCode})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var s_NotificationsContacts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationsContacts, Type: smithy.ShapeTypeService, Ext: &e_NotificationsContacts})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var s_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreationTime, Traits: &t11, Type: smithy.ShapeTypeTimestamp, Ext: &e_CreationTime})
+var sEmailContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmailContact, Members: &mEmailContact, Type: smithy.ShapeTypeStructure, Ext: &eEmailContact})
+var s_EmailContactAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailContactAddress, Type: smithy.ShapeTypeString, Ext: &e_EmailContactAddress})
+var s_EmailContactArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailContactArn, Type: smithy.ShapeTypeString, Ext: &e_EmailContactArn})
+var s_EmailContactName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailContactName, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &e_EmailContactName})
+var s_EmailContacts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailContacts, Members: &m_EmailContacts, Type: smithy.ShapeTypeList, Ext: &e_EmailContacts})
+var s_EmailContactStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailContactStatus, Type: smithy.ShapeTypeString, Ext: &e_EmailContactStatus})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var s_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &e_QuotaCode})
+var s_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &e_ResourceId})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var s_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &e_ResourceType})
+var s_SensitiveEmailContactAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveEmailContactAddress, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &e_SensitiveEmailContactAddress})
+var s_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &e_ServiceCode})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &e_TagKeys})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var s_Token = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Token, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &e_Token})
+var s_UpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateTime, Traits: &t11, Type: smithy.ShapeTypeTimestamp, Ext: &e_UpdateTime})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
+var sActivateEmailContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivateEmailContactRequest, Members: &mActivateEmailContactRequest, Type: smithy.ShapeTypeStructure, Ext: &eActivateEmailContactRequest})
+var sActivateEmailContactResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivateEmailContactResponse, Type: smithy.ShapeTypeStructure, Ext: &eActivateEmailContactResponse})
+var sCreateEmailContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEmailContactRequest, Members: &mCreateEmailContactRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateEmailContactRequest})
+var sCreateEmailContactResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEmailContactResponse, Members: &mCreateEmailContactResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateEmailContactResponse})
+var sDeleteEmailContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEmailContactRequest, Members: &mDeleteEmailContactRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteEmailContactRequest})
+var sDeleteEmailContactResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEmailContactResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteEmailContactResponse})
+var sGetEmailContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEmailContactRequest, Members: &mGetEmailContactRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetEmailContactRequest})
+var sGetEmailContactResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEmailContactResponse, Members: &mGetEmailContactResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetEmailContactResponse})
+var sListEmailContactsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEmailContactsRequest, Members: &mListEmailContactsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListEmailContactsRequest})
+var sListEmailContactsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEmailContactsResponse, Members: &mListEmailContactsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListEmailContactsResponse})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sSendActivationCodeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendActivationCodeRequest, Members: &mSendActivationCodeRequest, Type: smithy.ShapeTypeStructure, Ext: &eSendActivationCodeRequest})
+var sSendActivationCodeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendActivationCodeResponse, Type: smithy.ShapeTypeStructure, Ext: &eSendActivationCodeResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
 
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[11]})
-var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[13]})
-var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &ext[14]})
-var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &ext[15]})
-var sEmailContact_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EmailContactArn, Type: smithy.ShapeTypeString, Ext: &ext[18]})
-var sEmailContact_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_EmailContactName, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &ext[19]})
-var sEmailContact_address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "address", ID: &i_SensitiveEmailContactAddress, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &ext[20]})
-var sEmailContact_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_EmailContactStatus, Type: smithy.ShapeTypeString, Ext: &ext[21]})
-var sEmailContact_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_CreationTime, Traits: &t13, Type: smithy.ShapeTypeTimestamp, Ext: &ext[22]})
-var sEmailContact_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &i_UpdateTime, Traits: &t13, Type: smithy.ShapeTypeTimestamp, Ext: &ext[23]})
-var s_EmailContacts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEmailContact, Members: &mEmailContact, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
-var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &ext[37]})
-var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &ext[38]})
-var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[43]})
-var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &ext[46]})
-var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &ext[47]})
-var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[50]})
-var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[53]})
-var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[56]})
-var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t19, Type: smithy.ShapeTypeInteger, Ext: &ext[59]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[63]})
-var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[64]})
-var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[65]})
-var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[67]})
-var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[68]})
-var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[70]})
-var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[73]})
-var sActivateEmailContactRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EmailContactArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[75]})
-var sActivateEmailContactRequest_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_Token, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[76]})
-var sCreateEmailContactRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_EmailContactName, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &ext[79]})
-var sCreateEmailContactRequest_emailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emailAddress", ID: &i_EmailContactAddress, Type: smithy.ShapeTypeString, Ext: &ext[80]})
-var sCreateEmailContactRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[81]})
-var sCreateEmailContactResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EmailContactArn, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var sDeleteEmailContactRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EmailContactArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[85]})
-var sGetEmailContactRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EmailContactArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[88]})
-var sGetEmailContactResponse_emailContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emailContact", ID: &iEmailContact, Members: &mEmailContact, Type: smithy.ShapeTypeStructure, Ext: &ext[90]})
-var sListEmailContactsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t23, Type: smithy.ShapeTypeInteger, Ext: &ext[92]})
-var sListEmailContactsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &ext[93]})
-var sListEmailContactsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[95]})
-var sListEmailContactsResponse_emailContacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emailContacts", ID: &i_EmailContacts, Members: &m_EmailContacts, Type: smithy.ShapeTypeList, Ext: &ext[96]})
-var sListTagsForResourceRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EmailContactArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[98]})
-var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[100]})
-var sSendActivationCodeRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EmailContactArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var sTagResourceRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EmailContactArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[105]})
-var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[106]})
-var sUntagResourceRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EmailContactArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[109]})
-var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Traits: &t25, Type: smithy.ShapeTypeList, Ext: &ext[110]})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceId})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceType})
+var sEmailContact_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EmailContactArn, Type: smithy.ShapeTypeString, Ext: &eEmailContact_arn})
+var sEmailContact_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_EmailContactName, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &eEmailContact_name})
+var sEmailContact_address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "address", ID: &i_SensitiveEmailContactAddress, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &eEmailContact_address})
+var sEmailContact_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_EmailContactStatus, Type: smithy.ShapeTypeString, Ext: &eEmailContact_status})
+var sEmailContact_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_CreationTime, Traits: &t13, Type: smithy.ShapeTypeTimestamp, Ext: &eEmailContact_creationTime})
+var sEmailContact_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &i_UpdateTime, Traits: &t13, Type: smithy.ShapeTypeTimestamp, Ext: &eEmailContact_updateTime})
+var s_EmailContacts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEmailContact, Members: &mEmailContact, Type: smithy.ShapeTypeStructure, Ext: &e_EmailContacts_member})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceId})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceType})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceId})
+var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceType})
+var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_serviceCode})
+var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_quotaCode})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeys_member})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_serviceCode})
+var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_quotaCode})
+var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t19, Type: smithy.ShapeTypeInteger, Ext: &eThrottlingException_retryAfterSeconds})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_reason})
+var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_fieldList})
+var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_name})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_message})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_FIELD_VALIDATION_FAILED})
+var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_OTHER})
+var sActivateEmailContactRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EmailContactArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eActivateEmailContactRequest_arn})
+var sActivateEmailContactRequest_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_Token, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eActivateEmailContactRequest_code})
+var sCreateEmailContactRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_EmailContactName, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &eCreateEmailContactRequest_name})
+var sCreateEmailContactRequest_emailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emailAddress", ID: &i_EmailContactAddress, Type: smithy.ShapeTypeString, Ext: &eCreateEmailContactRequest_emailAddress})
+var sCreateEmailContactRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateEmailContactRequest_tags})
+var sCreateEmailContactResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EmailContactArn, Type: smithy.ShapeTypeString, Ext: &eCreateEmailContactResponse_arn})
+var sDeleteEmailContactRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EmailContactArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eDeleteEmailContactRequest_arn})
+var sGetEmailContactRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EmailContactArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eGetEmailContactRequest_arn})
+var sGetEmailContactResponse_emailContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emailContact", ID: &iEmailContact, Members: &mEmailContact, Type: smithy.ShapeTypeStructure, Ext: &eGetEmailContactResponse_emailContact})
+var sListEmailContactsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t23, Type: smithy.ShapeTypeInteger, Ext: &eListEmailContactsRequest_maxResults})
+var sListEmailContactsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &eListEmailContactsRequest_nextToken})
+var sListEmailContactsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListEmailContactsResponse_nextToken})
+var sListEmailContactsResponse_emailContacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emailContacts", ID: &i_EmailContacts, Members: &m_EmailContacts, Type: smithy.ShapeTypeList, Ext: &eListEmailContactsResponse_emailContacts})
+var sListTagsForResourceRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EmailContactArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_arn})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_tags})
+var sSendActivationCodeRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EmailContactArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eSendActivationCodeRequest_arn})
+var sTagResourceRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EmailContactArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_arn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_tags})
+var sUntagResourceRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EmailContactArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_arn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Traits: &t25, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
 
 var ActivateEmailContact = &sActivateEmailContact
 

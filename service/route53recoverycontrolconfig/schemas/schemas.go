@@ -7,9 +7,291 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [283]smithy.SchemaExtensions
+var (
+	eCreateCluster                                              smithy.SchemaExtensions
+	eCreateControlPanel                                         smithy.SchemaExtensions
+	eCreateRoutingControl                                       smithy.SchemaExtensions
+	eCreateSafetyRule                                           smithy.SchemaExtensions
+	eDeleteCluster                                              smithy.SchemaExtensions
+	eDeleteControlPanel                                         smithy.SchemaExtensions
+	eDeleteRoutingControl                                       smithy.SchemaExtensions
+	eDeleteSafetyRule                                           smithy.SchemaExtensions
+	eDescribeCluster                                            smithy.SchemaExtensions
+	eDescribeControlPanel                                       smithy.SchemaExtensions
+	eDescribeRoutingControl                                     smithy.SchemaExtensions
+	eDescribeSafetyRule                                         smithy.SchemaExtensions
+	eGetResourcePolicy                                          smithy.SchemaExtensions
+	eListAssociatedRoute53HealthChecks                          smithy.SchemaExtensions
+	eListClusters                                               smithy.SchemaExtensions
+	eListControlPanels                                          smithy.SchemaExtensions
+	eListRoutingControls                                        smithy.SchemaExtensions
+	eListSafetyRules                                            smithy.SchemaExtensions
+	eListTagsForResource                                        smithy.SchemaExtensions
+	eTagResource                                                smithy.SchemaExtensions
+	eUntagResource                                              smithy.SchemaExtensions
+	eUpdateCluster                                              smithy.SchemaExtensions
+	eUpdateControlPanel                                         smithy.SchemaExtensions
+	eUpdateRoutingControl                                       smithy.SchemaExtensions
+	eUpdateSafetyRule                                           smithy.SchemaExtensions
+	e_Route53RecoveryControlConfig                              smithy.SchemaExtensions
+	e___boolean                                                 smithy.SchemaExtensions
+	e___integer                                                 smithy.SchemaExtensions
+	e___listOf__string                                          smithy.SchemaExtensions
+	e___listOf__string_member                                   smithy.SchemaExtensions
+	e___listOf__stringMax36PatternS                             smithy.SchemaExtensions
+	e___listOf__stringMax36PatternS_member                      smithy.SchemaExtensions
+	e___listOf__stringMin1Max256PatternAZaZ09                   smithy.SchemaExtensions
+	e___listOf__stringMin1Max256PatternAZaZ09_member            smithy.SchemaExtensions
+	e___listOfCluster                                           smithy.SchemaExtensions
+	e___listOfCluster_member                                    smithy.SchemaExtensions
+	e___listOfClusterEndpoint                                   smithy.SchemaExtensions
+	e___listOfClusterEndpoint_member                            smithy.SchemaExtensions
+	e___listOfControlPanel                                      smithy.SchemaExtensions
+	e___listOfControlPanel_member                               smithy.SchemaExtensions
+	e___listOfRoutingControl                                    smithy.SchemaExtensions
+	e___listOfRoutingControl_member                             smithy.SchemaExtensions
+	e___listOfRule                                              smithy.SchemaExtensions
+	e___listOfRule_member                                       smithy.SchemaExtensions
+	e___mapOf__stringMin0Max256PatternS                         smithy.SchemaExtensions
+	e___mapOf__stringMin0Max256PatternS_key                     smithy.SchemaExtensions
+	e___mapOf__stringMin0Max256PatternS_value                   smithy.SchemaExtensions
+	e___policy                                                  smithy.SchemaExtensions
+	e___string                                                  smithy.SchemaExtensions
+	e___stringMax36PatternS                                     smithy.SchemaExtensions
+	e___stringMin0Max256PatternS                                smithy.SchemaExtensions
+	e___stringMin12Max12PatternD12                              smithy.SchemaExtensions
+	e___stringMin1Max128PatternAZaZ09                           smithy.SchemaExtensions
+	e___stringMin1Max256PatternAZaZ09                           smithy.SchemaExtensions
+	e___stringMin1Max32PatternS                                 smithy.SchemaExtensions
+	e___stringMin1Max64PatternS                                 smithy.SchemaExtensions
+	e___stringMin1Max8096PatternS                               smithy.SchemaExtensions
+	eAccessDeniedException                                      smithy.SchemaExtensions
+	eAccessDeniedException_Message                              smithy.SchemaExtensions
+	eAssertionRule                                              smithy.SchemaExtensions
+	eAssertionRule_AssertedControls                             smithy.SchemaExtensions
+	eAssertionRule_ControlPanelArn                              smithy.SchemaExtensions
+	eAssertionRule_Name                                         smithy.SchemaExtensions
+	eAssertionRule_RuleConfig                                   smithy.SchemaExtensions
+	eAssertionRule_SafetyRuleArn                                smithy.SchemaExtensions
+	eAssertionRule_Status                                       smithy.SchemaExtensions
+	eAssertionRule_WaitPeriodMs                                 smithy.SchemaExtensions
+	eAssertionRule_Owner                                        smithy.SchemaExtensions
+	eAssertionRuleUpdate                                        smithy.SchemaExtensions
+	eAssertionRuleUpdate_Name                                   smithy.SchemaExtensions
+	eAssertionRuleUpdate_SafetyRuleArn                          smithy.SchemaExtensions
+	eAssertionRuleUpdate_WaitPeriodMs                           smithy.SchemaExtensions
+	eCluster                                                    smithy.SchemaExtensions
+	eCluster_ClusterArn                                         smithy.SchemaExtensions
+	eCluster_ClusterEndpoints                                   smithy.SchemaExtensions
+	eCluster_Name                                               smithy.SchemaExtensions
+	eCluster_Status                                             smithy.SchemaExtensions
+	eCluster_Owner                                              smithy.SchemaExtensions
+	eCluster_NetworkType                                        smithy.SchemaExtensions
+	eClusterEndpoint                                            smithy.SchemaExtensions
+	eClusterEndpoint_Endpoint                                   smithy.SchemaExtensions
+	eClusterEndpoint_Region                                     smithy.SchemaExtensions
+	eConflictException                                          smithy.SchemaExtensions
+	eConflictException_Message                                  smithy.SchemaExtensions
+	eControlPanel                                               smithy.SchemaExtensions
+	eControlPanel_ClusterArn                                    smithy.SchemaExtensions
+	eControlPanel_ControlPanelArn                               smithy.SchemaExtensions
+	eControlPanel_DefaultControlPanel                           smithy.SchemaExtensions
+	eControlPanel_Name                                          smithy.SchemaExtensions
+	eControlPanel_RoutingControlCount                           smithy.SchemaExtensions
+	eControlPanel_Status                                        smithy.SchemaExtensions
+	eControlPanel_Owner                                         smithy.SchemaExtensions
+	eGatingRule                                                 smithy.SchemaExtensions
+	eGatingRule_ControlPanelArn                                 smithy.SchemaExtensions
+	eGatingRule_GatingControls                                  smithy.SchemaExtensions
+	eGatingRule_Name                                            smithy.SchemaExtensions
+	eGatingRule_RuleConfig                                      smithy.SchemaExtensions
+	eGatingRule_SafetyRuleArn                                   smithy.SchemaExtensions
+	eGatingRule_Status                                          smithy.SchemaExtensions
+	eGatingRule_TargetControls                                  smithy.SchemaExtensions
+	eGatingRule_WaitPeriodMs                                    smithy.SchemaExtensions
+	eGatingRule_Owner                                           smithy.SchemaExtensions
+	eGatingRuleUpdate                                           smithy.SchemaExtensions
+	eGatingRuleUpdate_Name                                      smithy.SchemaExtensions
+	eGatingRuleUpdate_SafetyRuleArn                             smithy.SchemaExtensions
+	eGatingRuleUpdate_WaitPeriodMs                              smithy.SchemaExtensions
+	eInternalServerException                                    smithy.SchemaExtensions
+	eInternalServerException_Message                            smithy.SchemaExtensions
+	e_MaxResults                                                smithy.SchemaExtensions
+	eNetworkType                                                smithy.SchemaExtensions
+	eNetworkType_IPV4                                           smithy.SchemaExtensions
+	eNetworkType_DUALSTACK                                      smithy.SchemaExtensions
+	eNewAssertionRule                                           smithy.SchemaExtensions
+	eNewAssertionRule_AssertedControls                          smithy.SchemaExtensions
+	eNewAssertionRule_ControlPanelArn                           smithy.SchemaExtensions
+	eNewAssertionRule_Name                                      smithy.SchemaExtensions
+	eNewAssertionRule_RuleConfig                                smithy.SchemaExtensions
+	eNewAssertionRule_WaitPeriodMs                              smithy.SchemaExtensions
+	eNewGatingRule                                              smithy.SchemaExtensions
+	eNewGatingRule_ControlPanelArn                              smithy.SchemaExtensions
+	eNewGatingRule_GatingControls                               smithy.SchemaExtensions
+	eNewGatingRule_Name                                         smithy.SchemaExtensions
+	eNewGatingRule_RuleConfig                                   smithy.SchemaExtensions
+	eNewGatingRule_TargetControls                               smithy.SchemaExtensions
+	eNewGatingRule_WaitPeriodMs                                 smithy.SchemaExtensions
+	eResourceNotFoundException                                  smithy.SchemaExtensions
+	eResourceNotFoundException_Message                          smithy.SchemaExtensions
+	eRoutingControl                                             smithy.SchemaExtensions
+	eRoutingControl_ControlPanelArn                             smithy.SchemaExtensions
+	eRoutingControl_Name                                        smithy.SchemaExtensions
+	eRoutingControl_RoutingControlArn                           smithy.SchemaExtensions
+	eRoutingControl_Status                                      smithy.SchemaExtensions
+	eRoutingControl_Owner                                       smithy.SchemaExtensions
+	eRule                                                       smithy.SchemaExtensions
+	eRule_ASSERTION                                             smithy.SchemaExtensions
+	eRule_GATING                                                smithy.SchemaExtensions
+	eRuleConfig                                                 smithy.SchemaExtensions
+	eRuleConfig_Inverted                                        smithy.SchemaExtensions
+	eRuleConfig_Threshold                                       smithy.SchemaExtensions
+	eRuleConfig_Type                                            smithy.SchemaExtensions
+	eRuleType                                                   smithy.SchemaExtensions
+	eRuleType_ATLEAST                                           smithy.SchemaExtensions
+	eRuleType_AND                                               smithy.SchemaExtensions
+	eRuleType_OR                                                smithy.SchemaExtensions
+	eServiceQuotaExceededException                              smithy.SchemaExtensions
+	eServiceQuotaExceededException_Message                      smithy.SchemaExtensions
+	eStatus                                                     smithy.SchemaExtensions
+	eStatus_PENDING                                             smithy.SchemaExtensions
+	eStatus_DEPLOYED                                            smithy.SchemaExtensions
+	eStatus_PENDING_DELETION                                    smithy.SchemaExtensions
+	eThrottlingException                                        smithy.SchemaExtensions
+	eThrottlingException_Message                                smithy.SchemaExtensions
+	eValidationException                                        smithy.SchemaExtensions
+	eValidationException_Message                                smithy.SchemaExtensions
+	eCreateClusterRequest                                       smithy.SchemaExtensions
+	eCreateClusterRequest_ClientToken                           smithy.SchemaExtensions
+	eCreateClusterRequest_ClusterName                           smithy.SchemaExtensions
+	eCreateClusterRequest_Tags                                  smithy.SchemaExtensions
+	eCreateClusterRequest_NetworkType                           smithy.SchemaExtensions
+	eCreateClusterResponse                                      smithy.SchemaExtensions
+	eCreateClusterResponse_Cluster                              smithy.SchemaExtensions
+	eCreateControlPanelRequest                                  smithy.SchemaExtensions
+	eCreateControlPanelRequest_ClientToken                      smithy.SchemaExtensions
+	eCreateControlPanelRequest_ClusterArn                       smithy.SchemaExtensions
+	eCreateControlPanelRequest_ControlPanelName                 smithy.SchemaExtensions
+	eCreateControlPanelRequest_Tags                             smithy.SchemaExtensions
+	eCreateControlPanelResponse                                 smithy.SchemaExtensions
+	eCreateControlPanelResponse_ControlPanel                    smithy.SchemaExtensions
+	eCreateRoutingControlRequest                                smithy.SchemaExtensions
+	eCreateRoutingControlRequest_ClientToken                    smithy.SchemaExtensions
+	eCreateRoutingControlRequest_ClusterArn                     smithy.SchemaExtensions
+	eCreateRoutingControlRequest_ControlPanelArn                smithy.SchemaExtensions
+	eCreateRoutingControlRequest_RoutingControlName             smithy.SchemaExtensions
+	eCreateRoutingControlResponse                               smithy.SchemaExtensions
+	eCreateRoutingControlResponse_RoutingControl                smithy.SchemaExtensions
+	eCreateSafetyRuleRequest                                    smithy.SchemaExtensions
+	eCreateSafetyRuleRequest_AssertionRule                      smithy.SchemaExtensions
+	eCreateSafetyRuleRequest_ClientToken                        smithy.SchemaExtensions
+	eCreateSafetyRuleRequest_GatingRule                         smithy.SchemaExtensions
+	eCreateSafetyRuleRequest_Tags                               smithy.SchemaExtensions
+	eCreateSafetyRuleResponse                                   smithy.SchemaExtensions
+	eCreateSafetyRuleResponse_AssertionRule                     smithy.SchemaExtensions
+	eCreateSafetyRuleResponse_GatingRule                        smithy.SchemaExtensions
+	eDeleteClusterRequest                                       smithy.SchemaExtensions
+	eDeleteClusterRequest_ClusterArn                            smithy.SchemaExtensions
+	eDeleteClusterResponse                                      smithy.SchemaExtensions
+	eDeleteControlPanelRequest                                  smithy.SchemaExtensions
+	eDeleteControlPanelRequest_ControlPanelArn                  smithy.SchemaExtensions
+	eDeleteControlPanelResponse                                 smithy.SchemaExtensions
+	eDeleteRoutingControlRequest                                smithy.SchemaExtensions
+	eDeleteRoutingControlRequest_RoutingControlArn              smithy.SchemaExtensions
+	eDeleteRoutingControlResponse                               smithy.SchemaExtensions
+	eDeleteSafetyRuleRequest                                    smithy.SchemaExtensions
+	eDeleteSafetyRuleRequest_SafetyRuleArn                      smithy.SchemaExtensions
+	eDeleteSafetyRuleResponse                                   smithy.SchemaExtensions
+	eDescribeClusterRequest                                     smithy.SchemaExtensions
+	eDescribeClusterRequest_ClusterArn                          smithy.SchemaExtensions
+	eDescribeClusterResponse                                    smithy.SchemaExtensions
+	eDescribeClusterResponse_Cluster                            smithy.SchemaExtensions
+	eDescribeControlPanelRequest                                smithy.SchemaExtensions
+	eDescribeControlPanelRequest_ControlPanelArn                smithy.SchemaExtensions
+	eDescribeControlPanelResponse                               smithy.SchemaExtensions
+	eDescribeControlPanelResponse_ControlPanel                  smithy.SchemaExtensions
+	eDescribeRoutingControlRequest                              smithy.SchemaExtensions
+	eDescribeRoutingControlRequest_RoutingControlArn            smithy.SchemaExtensions
+	eDescribeRoutingControlResponse                             smithy.SchemaExtensions
+	eDescribeRoutingControlResponse_RoutingControl              smithy.SchemaExtensions
+	eDescribeSafetyRuleRequest                                  smithy.SchemaExtensions
+	eDescribeSafetyRuleRequest_SafetyRuleArn                    smithy.SchemaExtensions
+	eDescribeSafetyRuleResponse                                 smithy.SchemaExtensions
+	eDescribeSafetyRuleResponse_AssertionRule                   smithy.SchemaExtensions
+	eDescribeSafetyRuleResponse_GatingRule                      smithy.SchemaExtensions
+	eGetResourcePolicyRequest                                   smithy.SchemaExtensions
+	eGetResourcePolicyRequest_ResourceArn                       smithy.SchemaExtensions
+	eGetResourcePolicyResponse                                  smithy.SchemaExtensions
+	eGetResourcePolicyResponse_Policy                           smithy.SchemaExtensions
+	eListAssociatedRoute53HealthChecksRequest                   smithy.SchemaExtensions
+	eListAssociatedRoute53HealthChecksRequest_MaxResults        smithy.SchemaExtensions
+	eListAssociatedRoute53HealthChecksRequest_NextToken         smithy.SchemaExtensions
+	eListAssociatedRoute53HealthChecksRequest_RoutingControlArn smithy.SchemaExtensions
+	eListAssociatedRoute53HealthChecksResponse                  smithy.SchemaExtensions
+	eListAssociatedRoute53HealthChecksResponse_HealthCheckIds   smithy.SchemaExtensions
+	eListAssociatedRoute53HealthChecksResponse_NextToken        smithy.SchemaExtensions
+	eListClustersRequest                                        smithy.SchemaExtensions
+	eListClustersRequest_MaxResults                             smithy.SchemaExtensions
+	eListClustersRequest_NextToken                              smithy.SchemaExtensions
+	eListClustersResponse                                       smithy.SchemaExtensions
+	eListClustersResponse_Clusters                              smithy.SchemaExtensions
+	eListClustersResponse_NextToken                             smithy.SchemaExtensions
+	eListControlPanelsRequest                                   smithy.SchemaExtensions
+	eListControlPanelsRequest_ClusterArn                        smithy.SchemaExtensions
+	eListControlPanelsRequest_MaxResults                        smithy.SchemaExtensions
+	eListControlPanelsRequest_NextToken                         smithy.SchemaExtensions
+	eListControlPanelsResponse                                  smithy.SchemaExtensions
+	eListControlPanelsResponse_ControlPanels                    smithy.SchemaExtensions
+	eListControlPanelsResponse_NextToken                        smithy.SchemaExtensions
+	eListRoutingControlsRequest                                 smithy.SchemaExtensions
+	eListRoutingControlsRequest_ControlPanelArn                 smithy.SchemaExtensions
+	eListRoutingControlsRequest_MaxResults                      smithy.SchemaExtensions
+	eListRoutingControlsRequest_NextToken                       smithy.SchemaExtensions
+	eListRoutingControlsResponse                                smithy.SchemaExtensions
+	eListRoutingControlsResponse_NextToken                      smithy.SchemaExtensions
+	eListRoutingControlsResponse_RoutingControls                smithy.SchemaExtensions
+	eListSafetyRulesRequest                                     smithy.SchemaExtensions
+	eListSafetyRulesRequest_ControlPanelArn                     smithy.SchemaExtensions
+	eListSafetyRulesRequest_MaxResults                          smithy.SchemaExtensions
+	eListSafetyRulesRequest_NextToken                           smithy.SchemaExtensions
+	eListSafetyRulesResponse                                    smithy.SchemaExtensions
+	eListSafetyRulesResponse_NextToken                          smithy.SchemaExtensions
+	eListSafetyRulesResponse_SafetyRules                        smithy.SchemaExtensions
+	eListTagsForResourceRequest                                 smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn                     smithy.SchemaExtensions
+	eListTagsForResourceResponse                                smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                           smithy.SchemaExtensions
+	eTagResourceRequest                                         smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                             smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                    smithy.SchemaExtensions
+	eTagResourceResponse                                        smithy.SchemaExtensions
+	eUntagResourceRequest                                       smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                           smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                               smithy.SchemaExtensions
+	eUntagResourceResponse                                      smithy.SchemaExtensions
+	eUpdateClusterRequest                                       smithy.SchemaExtensions
+	eUpdateClusterRequest_ClusterArn                            smithy.SchemaExtensions
+	eUpdateClusterRequest_NetworkType                           smithy.SchemaExtensions
+	eUpdateClusterResponse                                      smithy.SchemaExtensions
+	eUpdateClusterResponse_Cluster                              smithy.SchemaExtensions
+	eUpdateControlPanelRequest                                  smithy.SchemaExtensions
+	eUpdateControlPanelRequest_ControlPanelArn                  smithy.SchemaExtensions
+	eUpdateControlPanelRequest_ControlPanelName                 smithy.SchemaExtensions
+	eUpdateControlPanelResponse                                 smithy.SchemaExtensions
+	eUpdateControlPanelResponse_ControlPanel                    smithy.SchemaExtensions
+	eUpdateRoutingControlRequest                                smithy.SchemaExtensions
+	eUpdateRoutingControlRequest_RoutingControlArn              smithy.SchemaExtensions
+	eUpdateRoutingControlRequest_RoutingControlName             smithy.SchemaExtensions
+	eUpdateRoutingControlResponse                               smithy.SchemaExtensions
+	eUpdateRoutingControlResponse_RoutingControl                smithy.SchemaExtensions
+	eUpdateSafetyRuleRequest                                    smithy.SchemaExtensions
+	eUpdateSafetyRuleRequest_AssertionRuleUpdate                smithy.SchemaExtensions
+	eUpdateSafetyRuleRequest_GatingRuleUpdate                   smithy.SchemaExtensions
+	eUpdateSafetyRuleResponse                                   smithy.SchemaExtensions
+	eUpdateSafetyRuleResponse_AssertionRule                     smithy.SchemaExtensions
+	eUpdateSafetyRuleResponse_GatingRule                        smithy.SchemaExtensions
+)
 
 var (
 	iCreateCluster                             = smithy.ShapeID{Namespace: "com.amazonaws.route53recoverycontrolconfig", Name: "CreateCluster"}
@@ -303,290 +585,290 @@ var mUpdateRoutingControlResponse = smithy.SchemaMembers{List: []*smithy.Schema{
 var mUpdateSafetyRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSafetyRuleRequest_AssertionRuleUpdate, &sUpdateSafetyRuleRequest_GatingRuleUpdate}}
 var mUpdateSafetyRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSafetyRuleResponse_AssertionRule, &sUpdateSafetyRuleResponse_GatingRule}}
 
-var sCreateCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCluster, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCreateControlPanel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateControlPanel, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sCreateRoutingControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRoutingControl, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sCreateSafetyRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSafetyRule, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sDeleteCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCluster, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sDeleteControlPanel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteControlPanel, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sDeleteRoutingControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRoutingControl, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sDeleteSafetyRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSafetyRule, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sDescribeCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCluster, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sDescribeControlPanel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeControlPanel, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sDescribeRoutingControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRoutingControl, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sDescribeSafetyRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSafetyRule, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sGetResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicy, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sListAssociatedRoute53HealthChecks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedRoute53HealthChecks, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sListClusters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClusters, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sListControlPanels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControlPanels, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sListRoutingControls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoutingControls, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sListSafetyRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSafetyRules, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &ext[20]})
-var sUpdateCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCluster, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &ext[21]})
-var sUpdateControlPanel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateControlPanel, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &ext[22]})
-var sUpdateRoutingControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoutingControl, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &ext[23]})
-var sUpdateSafetyRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSafetyRule, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &ext[24]})
-var s_Route53RecoveryControlConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Route53RecoveryControlConfig, Type: smithy.ShapeTypeService, Ext: &ext[25]})
-var s___boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[26]})
-var s___integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &ext[27]})
-var s___listOf__string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOf__string, Members: &m___listOf__string, Type: smithy.ShapeTypeList, Ext: &ext[28]})
-var s___listOf__stringMax36PatternS = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOf__stringMax36PatternS, Members: &m___listOf__stringMax36PatternS, Type: smithy.ShapeTypeList, Ext: &ext[30]})
-var s___listOf__stringMin1Max256PatternAZaZ09 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOf__stringMin1Max256PatternAZaZ09, Members: &m___listOf__stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeList, Ext: &ext[32]})
-var s___listOfCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfCluster, Members: &m___listOfCluster, Type: smithy.ShapeTypeList, Ext: &ext[34]})
-var s___listOfClusterEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfClusterEndpoint, Members: &m___listOfClusterEndpoint, Type: smithy.ShapeTypeList, Ext: &ext[36]})
-var s___listOfControlPanel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfControlPanel, Members: &m___listOfControlPanel, Type: smithy.ShapeTypeList, Ext: &ext[38]})
-var s___listOfRoutingControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfRoutingControl, Members: &m___listOfRoutingControl, Type: smithy.ShapeTypeList, Ext: &ext[40]})
-var s___listOfRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfRule, Members: &m___listOfRule, Type: smithy.ShapeTypeList, Ext: &ext[42]})
-var s___mapOf__stringMin0Max256PatternS = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___mapOf__stringMin0Max256PatternS, Members: &m___mapOf__stringMin0Max256PatternS, Type: smithy.ShapeTypeMap, Ext: &ext[44]})
-var s___policy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___policy, Type: smithy.ShapeTypeString, Ext: &ext[47]})
-var s___string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ext[48]})
-var s___stringMax36PatternS = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMax36PatternS, Type: smithy.ShapeTypeString, Ext: &ext[49]})
-var s___stringMin0Max256PatternS = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin0Max256PatternS, Type: smithy.ShapeTypeString, Ext: &ext[50]})
-var s___stringMin12Max12PatternD12 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin12Max12PatternD12, Type: smithy.ShapeTypeString, Ext: &ext[51]})
-var s___stringMin1Max128PatternAZaZ09 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max128PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var s___stringMin1Max256PatternAZaZ09 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &ext[53]})
-var s___stringMin1Max32PatternS = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max32PatternS, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var s___stringMin1Max64PatternS = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var s___stringMin1Max8096PatternS = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max8096PatternS, Type: smithy.ShapeTypeString, Ext: &ext[56]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &ext[57]})
-var sAssertionRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssertionRule, Members: &mAssertionRule, Type: smithy.ShapeTypeStructure, Ext: &ext[59]})
-var sAssertionRuleUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssertionRuleUpdate, Members: &mAssertionRuleUpdate, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var sCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sClusterEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterEndpoint, Members: &mClusterEndpoint, Type: smithy.ShapeTypeStructure, Ext: &ext[79]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &ext[82]})
-var sControlPanel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlPanel, Members: &mControlPanel, Type: smithy.ShapeTypeStructure, Ext: &ext[84]})
-var sGatingRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGatingRule, Members: &mGatingRule, Type: smithy.ShapeTypeStructure, Ext: &ext[92]})
-var sGatingRuleUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGatingRuleUpdate, Members: &mGatingRuleUpdate, Type: smithy.ShapeTypeStructure, Ext: &ext[102]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &ext[106]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[108]})
-var sNetworkType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum, Ext: &ext[109]})
-var sNewAssertionRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNewAssertionRule, Members: &mNewAssertionRule, Type: smithy.ShapeTypeStructure, Ext: &ext[112]})
-var sNewGatingRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNewGatingRule, Members: &mNewGatingRule, Type: smithy.ShapeTypeStructure, Ext: &ext[118]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &ext[125]})
-var sRoutingControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoutingControl, Members: &mRoutingControl, Type: smithy.ShapeTypeStructure, Ext: &ext[127]})
-var sRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure, Ext: &ext[133]})
-var sRuleConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleConfig, Members: &mRuleConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[136]})
-var sRuleType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleType, Members: &mRuleType, Type: smithy.ShapeTypeEnum, Ext: &ext[140]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &ext[144]})
-var sStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[146]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &ext[150]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &ext[152]})
-var sCreateClusterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateClusterRequest, Members: &mCreateClusterRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[154]})
-var sCreateClusterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateClusterResponse, Members: &mCreateClusterResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[159]})
-var sCreateControlPanelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateControlPanelRequest, Members: &mCreateControlPanelRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[161]})
-var sCreateControlPanelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateControlPanelResponse, Members: &mCreateControlPanelResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[166]})
-var sCreateRoutingControlRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRoutingControlRequest, Members: &mCreateRoutingControlRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[168]})
-var sCreateRoutingControlResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRoutingControlResponse, Members: &mCreateRoutingControlResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[173]})
-var sCreateSafetyRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSafetyRuleRequest, Members: &mCreateSafetyRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[175]})
-var sCreateSafetyRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSafetyRuleResponse, Members: &mCreateSafetyRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[180]})
-var sDeleteClusterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteClusterRequest, Members: &mDeleteClusterRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[183]})
-var sDeleteClusterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteClusterResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[185]})
-var sDeleteControlPanelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteControlPanelRequest, Members: &mDeleteControlPanelRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[186]})
-var sDeleteControlPanelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteControlPanelResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[188]})
-var sDeleteRoutingControlRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRoutingControlRequest, Members: &mDeleteRoutingControlRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[189]})
-var sDeleteRoutingControlResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRoutingControlResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[191]})
-var sDeleteSafetyRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSafetyRuleRequest, Members: &mDeleteSafetyRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[192]})
-var sDeleteSafetyRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSafetyRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[194]})
-var sDescribeClusterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeClusterRequest, Members: &mDescribeClusterRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[195]})
-var sDescribeClusterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeClusterResponse, Members: &mDescribeClusterResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[197]})
-var sDescribeControlPanelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeControlPanelRequest, Members: &mDescribeControlPanelRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[199]})
-var sDescribeControlPanelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeControlPanelResponse, Members: &mDescribeControlPanelResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[201]})
-var sDescribeRoutingControlRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRoutingControlRequest, Members: &mDescribeRoutingControlRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[203]})
-var sDescribeRoutingControlResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRoutingControlResponse, Members: &mDescribeRoutingControlResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[205]})
-var sDescribeSafetyRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSafetyRuleRequest, Members: &mDescribeSafetyRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[207]})
-var sDescribeSafetyRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSafetyRuleResponse, Members: &mDescribeSafetyRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[209]})
-var sGetResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyRequest, Members: &mGetResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[212]})
-var sGetResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyResponse, Members: &mGetResourcePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[214]})
-var sListAssociatedRoute53HealthChecksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedRoute53HealthChecksRequest, Members: &mListAssociatedRoute53HealthChecksRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[216]})
-var sListAssociatedRoute53HealthChecksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedRoute53HealthChecksResponse, Members: &mListAssociatedRoute53HealthChecksResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[220]})
-var sListClustersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClustersRequest, Members: &mListClustersRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[223]})
-var sListClustersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClustersResponse, Members: &mListClustersResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[226]})
-var sListControlPanelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControlPanelsRequest, Members: &mListControlPanelsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[229]})
-var sListControlPanelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControlPanelsResponse, Members: &mListControlPanelsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[233]})
-var sListRoutingControlsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoutingControlsRequest, Members: &mListRoutingControlsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[236]})
-var sListRoutingControlsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoutingControlsResponse, Members: &mListRoutingControlsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[240]})
-var sListSafetyRulesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSafetyRulesRequest, Members: &mListSafetyRulesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[243]})
-var sListSafetyRulesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSafetyRulesResponse, Members: &mListSafetyRulesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[247]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[250]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[252]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[254]})
-var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[257]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[258]})
-var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[261]})
-var sUpdateClusterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateClusterRequest, Members: &mUpdateClusterRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[262]})
-var sUpdateClusterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateClusterResponse, Members: &mUpdateClusterResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[265]})
-var sUpdateControlPanelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateControlPanelRequest, Members: &mUpdateControlPanelRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[267]})
-var sUpdateControlPanelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateControlPanelResponse, Members: &mUpdateControlPanelResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[270]})
-var sUpdateRoutingControlRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoutingControlRequest, Members: &mUpdateRoutingControlRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[272]})
-var sUpdateRoutingControlResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoutingControlResponse, Members: &mUpdateRoutingControlResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[275]})
-var sUpdateSafetyRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSafetyRuleRequest, Members: &mUpdateSafetyRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[277]})
-var sUpdateSafetyRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSafetyRuleResponse, Members: &mUpdateSafetyRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[280]})
+var sCreateCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCluster, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateCluster})
+var sCreateControlPanel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateControlPanel, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateControlPanel})
+var sCreateRoutingControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRoutingControl, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateRoutingControl})
+var sCreateSafetyRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSafetyRule, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateSafetyRule})
+var sDeleteCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCluster, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDeleteCluster})
+var sDeleteControlPanel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteControlPanel, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDeleteControlPanel})
+var sDeleteRoutingControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRoutingControl, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRoutingControl})
+var sDeleteSafetyRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSafetyRule, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDeleteSafetyRule})
+var sDescribeCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCluster, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDescribeCluster})
+var sDescribeControlPanel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeControlPanel, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eDescribeControlPanel})
+var sDescribeRoutingControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRoutingControl, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eDescribeRoutingControl})
+var sDescribeSafetyRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSafetyRule, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eDescribeSafetyRule})
+var sGetResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicy, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eGetResourcePolicy})
+var sListAssociatedRoute53HealthChecks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedRoute53HealthChecks, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eListAssociatedRoute53HealthChecks})
+var sListClusters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClusters, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eListClusters})
+var sListControlPanels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControlPanels, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eListControlPanels})
+var sListRoutingControls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoutingControls, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eListRoutingControls})
+var sListSafetyRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSafetyRules, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eListSafetyRules})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCluster, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eUpdateCluster})
+var sUpdateControlPanel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateControlPanel, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eUpdateControlPanel})
+var sUpdateRoutingControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoutingControl, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRoutingControl})
+var sUpdateSafetyRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSafetyRule, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eUpdateSafetyRule})
+var s_Route53RecoveryControlConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Route53RecoveryControlConfig, Type: smithy.ShapeTypeService, Ext: &e_Route53RecoveryControlConfig})
+var s___boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___boolean, Type: smithy.ShapeTypeBoolean, Ext: &e___boolean})
+var s___integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &e___integer})
+var s___listOf__string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOf__string, Members: &m___listOf__string, Type: smithy.ShapeTypeList, Ext: &e___listOf__string})
+var s___listOf__stringMax36PatternS = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOf__stringMax36PatternS, Members: &m___listOf__stringMax36PatternS, Type: smithy.ShapeTypeList, Ext: &e___listOf__stringMax36PatternS})
+var s___listOf__stringMin1Max256PatternAZaZ09 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOf__stringMin1Max256PatternAZaZ09, Members: &m___listOf__stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeList, Ext: &e___listOf__stringMin1Max256PatternAZaZ09})
+var s___listOfCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfCluster, Members: &m___listOfCluster, Type: smithy.ShapeTypeList, Ext: &e___listOfCluster})
+var s___listOfClusterEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfClusterEndpoint, Members: &m___listOfClusterEndpoint, Type: smithy.ShapeTypeList, Ext: &e___listOfClusterEndpoint})
+var s___listOfControlPanel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfControlPanel, Members: &m___listOfControlPanel, Type: smithy.ShapeTypeList, Ext: &e___listOfControlPanel})
+var s___listOfRoutingControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfRoutingControl, Members: &m___listOfRoutingControl, Type: smithy.ShapeTypeList, Ext: &e___listOfRoutingControl})
+var s___listOfRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfRule, Members: &m___listOfRule, Type: smithy.ShapeTypeList, Ext: &e___listOfRule})
+var s___mapOf__stringMin0Max256PatternS = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___mapOf__stringMin0Max256PatternS, Members: &m___mapOf__stringMin0Max256PatternS, Type: smithy.ShapeTypeMap, Ext: &e___mapOf__stringMin0Max256PatternS})
+var s___policy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___policy, Type: smithy.ShapeTypeString, Ext: &e___policy})
+var s___string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e___string})
+var s___stringMax36PatternS = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMax36PatternS, Type: smithy.ShapeTypeString, Ext: &e___stringMax36PatternS})
+var s___stringMin0Max256PatternS = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin0Max256PatternS, Type: smithy.ShapeTypeString, Ext: &e___stringMin0Max256PatternS})
+var s___stringMin12Max12PatternD12 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin12Max12PatternD12, Type: smithy.ShapeTypeString, Ext: &e___stringMin12Max12PatternD12})
+var s___stringMin1Max128PatternAZaZ09 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max128PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &e___stringMin1Max128PatternAZaZ09})
+var s___stringMin1Max256PatternAZaZ09 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &e___stringMin1Max256PatternAZaZ09})
+var s___stringMin1Max32PatternS = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max32PatternS, Type: smithy.ShapeTypeString, Ext: &e___stringMin1Max32PatternS})
+var s___stringMin1Max64PatternS = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &e___stringMin1Max64PatternS})
+var s___stringMin1Max8096PatternS = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max8096PatternS, Type: smithy.ShapeTypeString, Ext: &e___stringMin1Max8096PatternS})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAssertionRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssertionRule, Members: &mAssertionRule, Type: smithy.ShapeTypeStructure, Ext: &eAssertionRule})
+var sAssertionRuleUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssertionRuleUpdate, Members: &mAssertionRuleUpdate, Type: smithy.ShapeTypeStructure, Ext: &eAssertionRuleUpdate})
+var sCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure, Ext: &eCluster})
+var sClusterEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterEndpoint, Members: &mClusterEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eClusterEndpoint})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sControlPanel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlPanel, Members: &mControlPanel, Type: smithy.ShapeTypeStructure, Ext: &eControlPanel})
+var sGatingRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGatingRule, Members: &mGatingRule, Type: smithy.ShapeTypeStructure, Ext: &eGatingRule})
+var sGatingRuleUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGatingRuleUpdate, Members: &mGatingRuleUpdate, Type: smithy.ShapeTypeStructure, Ext: &eGatingRuleUpdate})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var sNetworkType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum, Ext: &eNetworkType})
+var sNewAssertionRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNewAssertionRule, Members: &mNewAssertionRule, Type: smithy.ShapeTypeStructure, Ext: &eNewAssertionRule})
+var sNewGatingRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNewGatingRule, Members: &mNewGatingRule, Type: smithy.ShapeTypeStructure, Ext: &eNewGatingRule})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sRoutingControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoutingControl, Members: &mRoutingControl, Type: smithy.ShapeTypeStructure, Ext: &eRoutingControl})
+var sRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure, Ext: &eRule})
+var sRuleConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleConfig, Members: &mRuleConfig, Type: smithy.ShapeTypeStructure, Ext: &eRuleConfig})
+var sRuleType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleType, Members: &mRuleType, Type: smithy.ShapeTypeEnum, Ext: &eRuleType})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eStatus})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sCreateClusterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateClusterRequest, Members: &mCreateClusterRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterRequest})
+var sCreateClusterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateClusterResponse, Members: &mCreateClusterResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterResponse})
+var sCreateControlPanelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateControlPanelRequest, Members: &mCreateControlPanelRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateControlPanelRequest})
+var sCreateControlPanelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateControlPanelResponse, Members: &mCreateControlPanelResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateControlPanelResponse})
+var sCreateRoutingControlRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRoutingControlRequest, Members: &mCreateRoutingControlRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateRoutingControlRequest})
+var sCreateRoutingControlResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRoutingControlResponse, Members: &mCreateRoutingControlResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateRoutingControlResponse})
+var sCreateSafetyRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSafetyRuleRequest, Members: &mCreateSafetyRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateSafetyRuleRequest})
+var sCreateSafetyRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSafetyRuleResponse, Members: &mCreateSafetyRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateSafetyRuleResponse})
+var sDeleteClusterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteClusterRequest, Members: &mDeleteClusterRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteClusterRequest})
+var sDeleteClusterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteClusterResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteClusterResponse})
+var sDeleteControlPanelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteControlPanelRequest, Members: &mDeleteControlPanelRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteControlPanelRequest})
+var sDeleteControlPanelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteControlPanelResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteControlPanelResponse})
+var sDeleteRoutingControlRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRoutingControlRequest, Members: &mDeleteRoutingControlRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRoutingControlRequest})
+var sDeleteRoutingControlResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRoutingControlResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRoutingControlResponse})
+var sDeleteSafetyRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSafetyRuleRequest, Members: &mDeleteSafetyRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSafetyRuleRequest})
+var sDeleteSafetyRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSafetyRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSafetyRuleResponse})
+var sDescribeClusterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeClusterRequest, Members: &mDescribeClusterRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeClusterRequest})
+var sDescribeClusterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeClusterResponse, Members: &mDescribeClusterResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeClusterResponse})
+var sDescribeControlPanelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeControlPanelRequest, Members: &mDescribeControlPanelRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeControlPanelRequest})
+var sDescribeControlPanelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeControlPanelResponse, Members: &mDescribeControlPanelResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeControlPanelResponse})
+var sDescribeRoutingControlRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRoutingControlRequest, Members: &mDescribeRoutingControlRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRoutingControlRequest})
+var sDescribeRoutingControlResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRoutingControlResponse, Members: &mDescribeRoutingControlResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRoutingControlResponse})
+var sDescribeSafetyRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSafetyRuleRequest, Members: &mDescribeSafetyRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSafetyRuleRequest})
+var sDescribeSafetyRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSafetyRuleResponse, Members: &mDescribeSafetyRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSafetyRuleResponse})
+var sGetResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyRequest, Members: &mGetResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetResourcePolicyRequest})
+var sGetResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyResponse, Members: &mGetResourcePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetResourcePolicyResponse})
+var sListAssociatedRoute53HealthChecksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedRoute53HealthChecksRequest, Members: &mListAssociatedRoute53HealthChecksRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAssociatedRoute53HealthChecksRequest})
+var sListAssociatedRoute53HealthChecksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedRoute53HealthChecksResponse, Members: &mListAssociatedRoute53HealthChecksResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAssociatedRoute53HealthChecksResponse})
+var sListClustersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClustersRequest, Members: &mListClustersRequest, Type: smithy.ShapeTypeStructure, Ext: &eListClustersRequest})
+var sListClustersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClustersResponse, Members: &mListClustersResponse, Type: smithy.ShapeTypeStructure, Ext: &eListClustersResponse})
+var sListControlPanelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControlPanelsRequest, Members: &mListControlPanelsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListControlPanelsRequest})
+var sListControlPanelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControlPanelsResponse, Members: &mListControlPanelsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListControlPanelsResponse})
+var sListRoutingControlsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoutingControlsRequest, Members: &mListRoutingControlsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRoutingControlsRequest})
+var sListRoutingControlsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoutingControlsResponse, Members: &mListRoutingControlsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRoutingControlsResponse})
+var sListSafetyRulesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSafetyRulesRequest, Members: &mListSafetyRulesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListSafetyRulesRequest})
+var sListSafetyRulesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSafetyRulesResponse, Members: &mListSafetyRulesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSafetyRulesResponse})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateClusterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateClusterRequest, Members: &mUpdateClusterRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateClusterRequest})
+var sUpdateClusterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateClusterResponse, Members: &mUpdateClusterResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateClusterResponse})
+var sUpdateControlPanelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateControlPanelRequest, Members: &mUpdateControlPanelRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateControlPanelRequest})
+var sUpdateControlPanelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateControlPanelResponse, Members: &mUpdateControlPanelResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateControlPanelResponse})
+var sUpdateRoutingControlRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoutingControlRequest, Members: &mUpdateRoutingControlRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRoutingControlRequest})
+var sUpdateRoutingControlResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoutingControlResponse, Members: &mUpdateRoutingControlResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRoutingControlResponse})
+var sUpdateSafetyRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSafetyRuleRequest, Members: &mUpdateSafetyRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSafetyRuleRequest})
+var sUpdateSafetyRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSafetyRuleResponse, Members: &mUpdateSafetyRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSafetyRuleResponse})
 
-var s___listOf__string_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ext[29]})
-var s___listOf__stringMax36PatternS_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i___stringMax36PatternS, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var s___listOf__stringMin1Max256PatternAZaZ09_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var s___listOfCluster_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure, Ext: &ext[35]})
-var s___listOfClusterEndpoint_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iClusterEndpoint, Members: &mClusterEndpoint, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var s___listOfControlPanel_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iControlPanel, Members: &mControlPanel, Type: smithy.ShapeTypeStructure, Ext: &ext[39]})
-var s___listOfRoutingControl_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRoutingControl, Members: &mRoutingControl, Type: smithy.ShapeTypeStructure, Ext: &ext[41]})
-var s___listOfRule_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure, Ext: &ext[43]})
-var s___mapOf__stringMin0Max256PatternS_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var s___mapOf__stringMin0Max256PatternS_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i___stringMin0Max256PatternS, Type: smithy.ShapeTypeString, Ext: &ext[46]})
-var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var sAssertionRule_AssertedControls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssertedControls", ID: &i___listOf__stringMin1Max256PatternAZaZ09, Members: &m___listOf__stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeList, Ext: &ext[60]})
-var sAssertionRule_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &ext[61]})
-var sAssertionRule_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &ext[62]})
-var sAssertionRule_RuleConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleConfig", ID: &iRuleConfig, Members: &mRuleConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[63]})
-var sAssertionRule_SafetyRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SafetyRuleArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &ext[64]})
-var sAssertionRule_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[65]})
-var sAssertionRule_WaitPeriodMs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WaitPeriodMs", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &ext[66]})
-var sAssertionRule_Owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Owner", ID: &i___stringMin12Max12PatternD12, Type: smithy.ShapeTypeString, Ext: &ext[67]})
-var sAssertionRuleUpdate_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var sAssertionRuleUpdate_SafetyRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SafetyRuleArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &ext[70]})
-var sAssertionRuleUpdate_WaitPeriodMs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WaitPeriodMs", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &ext[71]})
-var sCluster_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &ext[73]})
-var sCluster_ClusterEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterEndpoints", ID: &i___listOfClusterEndpoint, Members: &m___listOfClusterEndpoint, Type: smithy.ShapeTypeList, Ext: &ext[74]})
-var sCluster_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &ext[75]})
-var sCluster_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[76]})
-var sCluster_Owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Owner", ID: &i___stringMin12Max12PatternD12, Type: smithy.ShapeTypeString, Ext: &ext[77]})
-var sCluster_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum, Ext: &ext[78]})
-var sClusterEndpoint_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &i___stringMin1Max128PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &ext[80]})
-var sClusterEndpoint_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i___stringMin1Max32PatternS, Type: smithy.ShapeTypeString, Ext: &ext[81]})
-var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var sControlPanel_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &ext[85]})
-var sControlPanel_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &ext[86]})
-var sControlPanel_DefaultControlPanel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultControlPanel", ID: &i___boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[87]})
-var sControlPanel_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &ext[88]})
-var sControlPanel_RoutingControlCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlCount", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &ext[89]})
-var sControlPanel_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[90]})
-var sControlPanel_Owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Owner", ID: &i___stringMin12Max12PatternD12, Type: smithy.ShapeTypeString, Ext: &ext[91]})
-var sGatingRule_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &ext[93]})
-var sGatingRule_GatingControls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatingControls", ID: &i___listOf__stringMin1Max256PatternAZaZ09, Members: &m___listOf__stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeList, Ext: &ext[94]})
-var sGatingRule_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &ext[95]})
-var sGatingRule_RuleConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleConfig", ID: &iRuleConfig, Members: &mRuleConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[96]})
-var sGatingRule_SafetyRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SafetyRuleArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &ext[97]})
-var sGatingRule_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[98]})
-var sGatingRule_TargetControls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetControls", ID: &i___listOf__stringMin1Max256PatternAZaZ09, Members: &m___listOf__stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeList, Ext: &ext[99]})
-var sGatingRule_WaitPeriodMs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WaitPeriodMs", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &ext[100]})
-var sGatingRule_Owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Owner", ID: &i___stringMin12Max12PatternD12, Type: smithy.ShapeTypeString, Ext: &ext[101]})
-var sGatingRuleUpdate_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &ext[103]})
-var sGatingRuleUpdate_SafetyRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SafetyRuleArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &ext[104]})
-var sGatingRuleUpdate_WaitPeriodMs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WaitPeriodMs", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &ext[105]})
-var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[107]})
-var sNetworkType_IPV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[110]})
-var sNetworkType_DUALSTACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUALSTACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[111]})
-var sNewAssertionRule_AssertedControls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssertedControls", ID: &i___listOf__stringMin1Max256PatternAZaZ09, Members: &m___listOf__stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeList, Ext: &ext[113]})
-var sNewAssertionRule_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &ext[114]})
-var sNewAssertionRule_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &ext[115]})
-var sNewAssertionRule_RuleConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleConfig", ID: &iRuleConfig, Members: &mRuleConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[116]})
-var sNewAssertionRule_WaitPeriodMs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WaitPeriodMs", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &ext[117]})
-var sNewGatingRule_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &ext[119]})
-var sNewGatingRule_GatingControls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatingControls", ID: &i___listOf__stringMin1Max256PatternAZaZ09, Members: &m___listOf__stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeList, Ext: &ext[120]})
-var sNewGatingRule_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &ext[121]})
-var sNewGatingRule_RuleConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleConfig", ID: &iRuleConfig, Members: &mRuleConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[122]})
-var sNewGatingRule_TargetControls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetControls", ID: &i___listOf__stringMin1Max256PatternAZaZ09, Members: &m___listOf__stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeList, Ext: &ext[123]})
-var sNewGatingRule_WaitPeriodMs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WaitPeriodMs", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &ext[124]})
-var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[126]})
-var sRoutingControl_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &ext[128]})
-var sRoutingControl_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &ext[129]})
-var sRoutingControl_RoutingControlArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var sRoutingControl_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[131]})
-var sRoutingControl_Owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Owner", ID: &i___stringMin12Max12PatternD12, Type: smithy.ShapeTypeString, Ext: &ext[132]})
-var sRule_ASSERTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASSERTION", ID: &iAssertionRule, Members: &mAssertionRule, Type: smithy.ShapeTypeStructure, Ext: &ext[134]})
-var sRule_GATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GATING", ID: &iGatingRule, Members: &mGatingRule, Type: smithy.ShapeTypeStructure, Ext: &ext[135]})
-var sRuleConfig_Inverted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Inverted", ID: &i___boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[137]})
-var sRuleConfig_Threshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Threshold", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &ext[138]})
-var sRuleConfig_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRuleType, Members: &mRuleType, Type: smithy.ShapeTypeEnum, Ext: &ext[139]})
-var sRuleType_ATLEAST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATLEAST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[141]})
-var sRuleType_AND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[142]})
-var sRuleType_OR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[143]})
-var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[145]})
-var sStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[147]})
-var sStatus_DEPLOYED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPLOYED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[148]})
-var sStatus_PENDING_DELETION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_DELETION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[149]})
-var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[151]})
-var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[153]})
-var sCreateClusterRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &ext[155]})
-var sCreateClusterRequest_ClusterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterName", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &ext[156]})
-var sCreateClusterRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__stringMin0Max256PatternS, Members: &m___mapOf__stringMin0Max256PatternS, Type: smithy.ShapeTypeMap, Ext: &ext[157]})
-var sCreateClusterRequest_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum, Ext: &ext[158]})
-var sCreateClusterResponse_Cluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cluster", ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure, Ext: &ext[160]})
-var sCreateControlPanelRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &ext[162]})
-var sCreateControlPanelRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &ext[163]})
-var sCreateControlPanelRequest_ControlPanelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelName", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &ext[164]})
-var sCreateControlPanelRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__stringMin0Max256PatternS, Members: &m___mapOf__stringMin0Max256PatternS, Type: smithy.ShapeTypeMap, Ext: &ext[165]})
-var sCreateControlPanelResponse_ControlPanel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanel", ID: &iControlPanel, Members: &mControlPanel, Type: smithy.ShapeTypeStructure, Ext: &ext[167]})
-var sCreateRoutingControlRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &ext[169]})
-var sCreateRoutingControlRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &ext[170]})
-var sCreateRoutingControlRequest_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &ext[171]})
-var sCreateRoutingControlRequest_RoutingControlName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlName", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &ext[172]})
-var sCreateRoutingControlResponse_RoutingControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControl", ID: &iRoutingControl, Members: &mRoutingControl, Type: smithy.ShapeTypeStructure, Ext: &ext[174]})
-var sCreateSafetyRuleRequest_AssertionRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssertionRule", ID: &iNewAssertionRule, Members: &mNewAssertionRule, Type: smithy.ShapeTypeStructure, Ext: &ext[176]})
-var sCreateSafetyRuleRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &ext[177]})
-var sCreateSafetyRuleRequest_GatingRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatingRule", ID: &iNewGatingRule, Members: &mNewGatingRule, Type: smithy.ShapeTypeStructure, Ext: &ext[178]})
-var sCreateSafetyRuleRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__stringMin0Max256PatternS, Members: &m___mapOf__stringMin0Max256PatternS, Type: smithy.ShapeTypeMap, Ext: &ext[179]})
-var sCreateSafetyRuleResponse_AssertionRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssertionRule", ID: &iAssertionRule, Members: &mAssertionRule, Type: smithy.ShapeTypeStructure, Ext: &ext[181]})
-var sCreateSafetyRuleResponse_GatingRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatingRule", ID: &iGatingRule, Members: &mGatingRule, Type: smithy.ShapeTypeStructure, Ext: &ext[182]})
-var sDeleteClusterRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[184]})
-var sDeleteControlPanelRequest_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[187]})
-var sDeleteRoutingControlRequest_RoutingControlArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[190]})
-var sDeleteSafetyRuleRequest_SafetyRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SafetyRuleArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[193]})
-var sDescribeClusterRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[196]})
-var sDescribeClusterResponse_Cluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cluster", ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure, Ext: &ext[198]})
-var sDescribeControlPanelRequest_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[200]})
-var sDescribeControlPanelResponse_ControlPanel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanel", ID: &iControlPanel, Members: &mControlPanel, Type: smithy.ShapeTypeStructure, Ext: &ext[202]})
-var sDescribeRoutingControlRequest_RoutingControlArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[204]})
-var sDescribeRoutingControlResponse_RoutingControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControl", ID: &iRoutingControl, Members: &mRoutingControl, Type: smithy.ShapeTypeStructure, Ext: &ext[206]})
-var sDescribeSafetyRuleRequest_SafetyRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SafetyRuleArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[208]})
-var sDescribeSafetyRuleResponse_AssertionRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssertionRule", ID: &iAssertionRule, Members: &mAssertionRule, Type: smithy.ShapeTypeStructure, Ext: &ext[210]})
-var sDescribeSafetyRuleResponse_GatingRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatingRule", ID: &iGatingRule, Members: &mGatingRule, Type: smithy.ShapeTypeStructure, Ext: &ext[211]})
-var sGetResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[213]})
-var sGetResourcePolicyResponse_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i___policy, Type: smithy.ShapeTypeString, Ext: &ext[215]})
-var sListAssociatedRoute53HealthChecksRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t34, Type: smithy.ShapeTypeInteger, Ext: &ext[217]})
-var sListAssociatedRoute53HealthChecksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[218]})
-var sListAssociatedRoute53HealthChecksRequest_RoutingControlArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[219]})
-var sListAssociatedRoute53HealthChecksResponse_HealthCheckIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckIds", ID: &i___listOf__stringMax36PatternS, Members: &m___listOf__stringMax36PatternS, Type: smithy.ShapeTypeList, Ext: &ext[221]})
-var sListAssociatedRoute53HealthChecksResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___stringMin1Max8096PatternS, Type: smithy.ShapeTypeString, Ext: &ext[222]})
-var sListClustersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t34, Type: smithy.ShapeTypeInteger, Ext: &ext[224]})
-var sListClustersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[225]})
-var sListClustersResponse_Clusters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Clusters", ID: &i___listOfCluster, Members: &m___listOfCluster, Type: smithy.ShapeTypeList, Ext: &ext[227]})
-var sListClustersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___stringMin1Max8096PatternS, Type: smithy.ShapeTypeString, Ext: &ext[228]})
-var sListControlPanelsRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[230]})
-var sListControlPanelsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t34, Type: smithy.ShapeTypeInteger, Ext: &ext[231]})
-var sListControlPanelsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[232]})
-var sListControlPanelsResponse_ControlPanels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanels", ID: &i___listOfControlPanel, Members: &m___listOfControlPanel, Type: smithy.ShapeTypeList, Ext: &ext[234]})
-var sListControlPanelsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___stringMin1Max8096PatternS, Type: smithy.ShapeTypeString, Ext: &ext[235]})
-var sListRoutingControlsRequest_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[237]})
-var sListRoutingControlsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t34, Type: smithy.ShapeTypeInteger, Ext: &ext[238]})
-var sListRoutingControlsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[239]})
-var sListRoutingControlsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___stringMin1Max8096PatternS, Type: smithy.ShapeTypeString, Ext: &ext[241]})
-var sListRoutingControlsResponse_RoutingControls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControls", ID: &i___listOfRoutingControl, Members: &m___listOfRoutingControl, Type: smithy.ShapeTypeList, Ext: &ext[242]})
-var sListSafetyRulesRequest_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[244]})
-var sListSafetyRulesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t34, Type: smithy.ShapeTypeInteger, Ext: &ext[245]})
-var sListSafetyRulesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[246]})
-var sListSafetyRulesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___stringMin1Max8096PatternS, Type: smithy.ShapeTypeString, Ext: &ext[248]})
-var sListSafetyRulesResponse_SafetyRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SafetyRules", ID: &i___listOfRule, Members: &m___listOfRule, Type: smithy.ShapeTypeList, Ext: &ext[249]})
-var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[251]})
-var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__stringMin0Max256PatternS, Members: &m___mapOf__stringMin0Max256PatternS, Type: smithy.ShapeTypeMap, Ext: &ext[253]})
-var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[255]})
-var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__stringMin0Max256PatternS, Members: &m___mapOf__stringMin0Max256PatternS, Type: smithy.ShapeTypeMap, Ext: &ext[256]})
-var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[259]})
-var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t37, Type: smithy.ShapeTypeList, Ext: &ext[260]})
-var sUpdateClusterRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &ext[263]})
-var sUpdateClusterRequest_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum, Ext: &ext[264]})
-var sUpdateClusterResponse_Cluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cluster", ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure, Ext: &ext[266]})
-var sUpdateControlPanelRequest_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &ext[268]})
-var sUpdateControlPanelRequest_ControlPanelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelName", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &ext[269]})
-var sUpdateControlPanelResponse_ControlPanel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanel", ID: &iControlPanel, Members: &mControlPanel, Type: smithy.ShapeTypeStructure, Ext: &ext[271]})
-var sUpdateRoutingControlRequest_RoutingControlArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &ext[273]})
-var sUpdateRoutingControlRequest_RoutingControlName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlName", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &ext[274]})
-var sUpdateRoutingControlResponse_RoutingControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControl", ID: &iRoutingControl, Members: &mRoutingControl, Type: smithy.ShapeTypeStructure, Ext: &ext[276]})
-var sUpdateSafetyRuleRequest_AssertionRuleUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssertionRuleUpdate", ID: &iAssertionRuleUpdate, Members: &mAssertionRuleUpdate, Type: smithy.ShapeTypeStructure, Ext: &ext[278]})
-var sUpdateSafetyRuleRequest_GatingRuleUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatingRuleUpdate", ID: &iGatingRuleUpdate, Members: &mGatingRuleUpdate, Type: smithy.ShapeTypeStructure, Ext: &ext[279]})
-var sUpdateSafetyRuleResponse_AssertionRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssertionRule", ID: &iAssertionRule, Members: &mAssertionRule, Type: smithy.ShapeTypeStructure, Ext: &ext[281]})
-var sUpdateSafetyRuleResponse_GatingRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatingRule", ID: &iGatingRule, Members: &mGatingRule, Type: smithy.ShapeTypeStructure, Ext: &ext[282]})
+var s___listOf__string_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e___listOf__string_member})
+var s___listOf__stringMax36PatternS_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i___stringMax36PatternS, Type: smithy.ShapeTypeString, Ext: &e___listOf__stringMax36PatternS_member})
+var s___listOf__stringMin1Max256PatternAZaZ09_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &e___listOf__stringMin1Max256PatternAZaZ09_member})
+var s___listOfCluster_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure, Ext: &e___listOfCluster_member})
+var s___listOfClusterEndpoint_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iClusterEndpoint, Members: &mClusterEndpoint, Type: smithy.ShapeTypeStructure, Ext: &e___listOfClusterEndpoint_member})
+var s___listOfControlPanel_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iControlPanel, Members: &mControlPanel, Type: smithy.ShapeTypeStructure, Ext: &e___listOfControlPanel_member})
+var s___listOfRoutingControl_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRoutingControl, Members: &mRoutingControl, Type: smithy.ShapeTypeStructure, Ext: &e___listOfRoutingControl_member})
+var s___listOfRule_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure, Ext: &e___listOfRule_member})
+var s___mapOf__stringMin0Max256PatternS_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e___mapOf__stringMin0Max256PatternS_key})
+var s___mapOf__stringMin0Max256PatternS_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i___stringMin0Max256PatternS, Type: smithy.ShapeTypeString, Ext: &e___mapOf__stringMin0Max256PatternS_value})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var sAssertionRule_AssertedControls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssertedControls", ID: &i___listOf__stringMin1Max256PatternAZaZ09, Members: &m___listOf__stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeList, Ext: &eAssertionRule_AssertedControls})
+var sAssertionRule_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &eAssertionRule_ControlPanelArn})
+var sAssertionRule_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &eAssertionRule_Name})
+var sAssertionRule_RuleConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleConfig", ID: &iRuleConfig, Members: &mRuleConfig, Type: smithy.ShapeTypeStructure, Ext: &eAssertionRule_RuleConfig})
+var sAssertionRule_SafetyRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SafetyRuleArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &eAssertionRule_SafetyRuleArn})
+var sAssertionRule_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eAssertionRule_Status})
+var sAssertionRule_WaitPeriodMs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WaitPeriodMs", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eAssertionRule_WaitPeriodMs})
+var sAssertionRule_Owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Owner", ID: &i___stringMin12Max12PatternD12, Type: smithy.ShapeTypeString, Ext: &eAssertionRule_Owner})
+var sAssertionRuleUpdate_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &eAssertionRuleUpdate_Name})
+var sAssertionRuleUpdate_SafetyRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SafetyRuleArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &eAssertionRuleUpdate_SafetyRuleArn})
+var sAssertionRuleUpdate_WaitPeriodMs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WaitPeriodMs", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eAssertionRuleUpdate_WaitPeriodMs})
+var sCluster_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &eCluster_ClusterArn})
+var sCluster_ClusterEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterEndpoints", ID: &i___listOfClusterEndpoint, Members: &m___listOfClusterEndpoint, Type: smithy.ShapeTypeList, Ext: &eCluster_ClusterEndpoints})
+var sCluster_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &eCluster_Name})
+var sCluster_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eCluster_Status})
+var sCluster_Owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Owner", ID: &i___stringMin12Max12PatternD12, Type: smithy.ShapeTypeString, Ext: &eCluster_Owner})
+var sCluster_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum, Ext: &eCluster_NetworkType})
+var sClusterEndpoint_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &i___stringMin1Max128PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &eClusterEndpoint_Endpoint})
+var sClusterEndpoint_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i___stringMin1Max32PatternS, Type: smithy.ShapeTypeString, Ext: &eClusterEndpoint_Region})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var sControlPanel_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &eControlPanel_ClusterArn})
+var sControlPanel_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &eControlPanel_ControlPanelArn})
+var sControlPanel_DefaultControlPanel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultControlPanel", ID: &i___boolean, Type: smithy.ShapeTypeBoolean, Ext: &eControlPanel_DefaultControlPanel})
+var sControlPanel_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &eControlPanel_Name})
+var sControlPanel_RoutingControlCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlCount", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eControlPanel_RoutingControlCount})
+var sControlPanel_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eControlPanel_Status})
+var sControlPanel_Owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Owner", ID: &i___stringMin12Max12PatternD12, Type: smithy.ShapeTypeString, Ext: &eControlPanel_Owner})
+var sGatingRule_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &eGatingRule_ControlPanelArn})
+var sGatingRule_GatingControls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatingControls", ID: &i___listOf__stringMin1Max256PatternAZaZ09, Members: &m___listOf__stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeList, Ext: &eGatingRule_GatingControls})
+var sGatingRule_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &eGatingRule_Name})
+var sGatingRule_RuleConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleConfig", ID: &iRuleConfig, Members: &mRuleConfig, Type: smithy.ShapeTypeStructure, Ext: &eGatingRule_RuleConfig})
+var sGatingRule_SafetyRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SafetyRuleArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &eGatingRule_SafetyRuleArn})
+var sGatingRule_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eGatingRule_Status})
+var sGatingRule_TargetControls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetControls", ID: &i___listOf__stringMin1Max256PatternAZaZ09, Members: &m___listOf__stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeList, Ext: &eGatingRule_TargetControls})
+var sGatingRule_WaitPeriodMs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WaitPeriodMs", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eGatingRule_WaitPeriodMs})
+var sGatingRule_Owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Owner", ID: &i___stringMin12Max12PatternD12, Type: smithy.ShapeTypeString, Ext: &eGatingRule_Owner})
+var sGatingRuleUpdate_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &eGatingRuleUpdate_Name})
+var sGatingRuleUpdate_SafetyRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SafetyRuleArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &eGatingRuleUpdate_SafetyRuleArn})
+var sGatingRuleUpdate_WaitPeriodMs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WaitPeriodMs", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eGatingRuleUpdate_WaitPeriodMs})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var sNetworkType_IPV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkType_IPV4})
+var sNetworkType_DUALSTACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUALSTACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkType_DUALSTACK})
+var sNewAssertionRule_AssertedControls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssertedControls", ID: &i___listOf__stringMin1Max256PatternAZaZ09, Members: &m___listOf__stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeList, Ext: &eNewAssertionRule_AssertedControls})
+var sNewAssertionRule_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &eNewAssertionRule_ControlPanelArn})
+var sNewAssertionRule_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &eNewAssertionRule_Name})
+var sNewAssertionRule_RuleConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleConfig", ID: &iRuleConfig, Members: &mRuleConfig, Type: smithy.ShapeTypeStructure, Ext: &eNewAssertionRule_RuleConfig})
+var sNewAssertionRule_WaitPeriodMs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WaitPeriodMs", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eNewAssertionRule_WaitPeriodMs})
+var sNewGatingRule_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &eNewGatingRule_ControlPanelArn})
+var sNewGatingRule_GatingControls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatingControls", ID: &i___listOf__stringMin1Max256PatternAZaZ09, Members: &m___listOf__stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeList, Ext: &eNewGatingRule_GatingControls})
+var sNewGatingRule_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &eNewGatingRule_Name})
+var sNewGatingRule_RuleConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleConfig", ID: &iRuleConfig, Members: &mRuleConfig, Type: smithy.ShapeTypeStructure, Ext: &eNewGatingRule_RuleConfig})
+var sNewGatingRule_TargetControls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetControls", ID: &i___listOf__stringMin1Max256PatternAZaZ09, Members: &m___listOf__stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeList, Ext: &eNewGatingRule_TargetControls})
+var sNewGatingRule_WaitPeriodMs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WaitPeriodMs", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eNewGatingRule_WaitPeriodMs})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sRoutingControl_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &eRoutingControl_ControlPanelArn})
+var sRoutingControl_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &eRoutingControl_Name})
+var sRoutingControl_RoutingControlArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &eRoutingControl_RoutingControlArn})
+var sRoutingControl_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eRoutingControl_Status})
+var sRoutingControl_Owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Owner", ID: &i___stringMin12Max12PatternD12, Type: smithy.ShapeTypeString, Ext: &eRoutingControl_Owner})
+var sRule_ASSERTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASSERTION", ID: &iAssertionRule, Members: &mAssertionRule, Type: smithy.ShapeTypeStructure, Ext: &eRule_ASSERTION})
+var sRule_GATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GATING", ID: &iGatingRule, Members: &mGatingRule, Type: smithy.ShapeTypeStructure, Ext: &eRule_GATING})
+var sRuleConfig_Inverted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Inverted", ID: &i___boolean, Type: smithy.ShapeTypeBoolean, Ext: &eRuleConfig_Inverted})
+var sRuleConfig_Threshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Threshold", ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &eRuleConfig_Threshold})
+var sRuleConfig_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRuleType, Members: &mRuleType, Type: smithy.ShapeTypeEnum, Ext: &eRuleConfig_Type})
+var sRuleType_ATLEAST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATLEAST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleType_ATLEAST})
+var sRuleType_AND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleType_AND})
+var sRuleType_OR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleType_OR})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_Message})
+var sStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_PENDING})
+var sStatus_DEPLOYED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPLOYED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_DEPLOYED})
+var sStatus_PENDING_DELETION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_DELETION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_PENDING_DELETION})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sCreateClusterRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &eCreateClusterRequest_ClientToken})
+var sCreateClusterRequest_ClusterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterName", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &eCreateClusterRequest_ClusterName})
+var sCreateClusterRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__stringMin0Max256PatternS, Members: &m___mapOf__stringMin0Max256PatternS, Type: smithy.ShapeTypeMap, Ext: &eCreateClusterRequest_Tags})
+var sCreateClusterRequest_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum, Ext: &eCreateClusterRequest_NetworkType})
+var sCreateClusterResponse_Cluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cluster", ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterResponse_Cluster})
+var sCreateControlPanelRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &eCreateControlPanelRequest_ClientToken})
+var sCreateControlPanelRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &eCreateControlPanelRequest_ClusterArn})
+var sCreateControlPanelRequest_ControlPanelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelName", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &eCreateControlPanelRequest_ControlPanelName})
+var sCreateControlPanelRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__stringMin0Max256PatternS, Members: &m___mapOf__stringMin0Max256PatternS, Type: smithy.ShapeTypeMap, Ext: &eCreateControlPanelRequest_Tags})
+var sCreateControlPanelResponse_ControlPanel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanel", ID: &iControlPanel, Members: &mControlPanel, Type: smithy.ShapeTypeStructure, Ext: &eCreateControlPanelResponse_ControlPanel})
+var sCreateRoutingControlRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &eCreateRoutingControlRequest_ClientToken})
+var sCreateRoutingControlRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &eCreateRoutingControlRequest_ClusterArn})
+var sCreateRoutingControlRequest_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &eCreateRoutingControlRequest_ControlPanelArn})
+var sCreateRoutingControlRequest_RoutingControlName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlName", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &eCreateRoutingControlRequest_RoutingControlName})
+var sCreateRoutingControlResponse_RoutingControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControl", ID: &iRoutingControl, Members: &mRoutingControl, Type: smithy.ShapeTypeStructure, Ext: &eCreateRoutingControlResponse_RoutingControl})
+var sCreateSafetyRuleRequest_AssertionRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssertionRule", ID: &iNewAssertionRule, Members: &mNewAssertionRule, Type: smithy.ShapeTypeStructure, Ext: &eCreateSafetyRuleRequest_AssertionRule})
+var sCreateSafetyRuleRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &eCreateSafetyRuleRequest_ClientToken})
+var sCreateSafetyRuleRequest_GatingRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatingRule", ID: &iNewGatingRule, Members: &mNewGatingRule, Type: smithy.ShapeTypeStructure, Ext: &eCreateSafetyRuleRequest_GatingRule})
+var sCreateSafetyRuleRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__stringMin0Max256PatternS, Members: &m___mapOf__stringMin0Max256PatternS, Type: smithy.ShapeTypeMap, Ext: &eCreateSafetyRuleRequest_Tags})
+var sCreateSafetyRuleResponse_AssertionRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssertionRule", ID: &iAssertionRule, Members: &mAssertionRule, Type: smithy.ShapeTypeStructure, Ext: &eCreateSafetyRuleResponse_AssertionRule})
+var sCreateSafetyRuleResponse_GatingRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatingRule", ID: &iGatingRule, Members: &mGatingRule, Type: smithy.ShapeTypeStructure, Ext: &eCreateSafetyRuleResponse_GatingRule})
+var sDeleteClusterRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eDeleteClusterRequest_ClusterArn})
+var sDeleteControlPanelRequest_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eDeleteControlPanelRequest_ControlPanelArn})
+var sDeleteRoutingControlRequest_RoutingControlArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eDeleteRoutingControlRequest_RoutingControlArn})
+var sDeleteSafetyRuleRequest_SafetyRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SafetyRuleArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eDeleteSafetyRuleRequest_SafetyRuleArn})
+var sDescribeClusterRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eDescribeClusterRequest_ClusterArn})
+var sDescribeClusterResponse_Cluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cluster", ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure, Ext: &eDescribeClusterResponse_Cluster})
+var sDescribeControlPanelRequest_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eDescribeControlPanelRequest_ControlPanelArn})
+var sDescribeControlPanelResponse_ControlPanel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanel", ID: &iControlPanel, Members: &mControlPanel, Type: smithy.ShapeTypeStructure, Ext: &eDescribeControlPanelResponse_ControlPanel})
+var sDescribeRoutingControlRequest_RoutingControlArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eDescribeRoutingControlRequest_RoutingControlArn})
+var sDescribeRoutingControlResponse_RoutingControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControl", ID: &iRoutingControl, Members: &mRoutingControl, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRoutingControlResponse_RoutingControl})
+var sDescribeSafetyRuleRequest_SafetyRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SafetyRuleArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eDescribeSafetyRuleRequest_SafetyRuleArn})
+var sDescribeSafetyRuleResponse_AssertionRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssertionRule", ID: &iAssertionRule, Members: &mAssertionRule, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSafetyRuleResponse_AssertionRule})
+var sDescribeSafetyRuleResponse_GatingRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatingRule", ID: &iGatingRule, Members: &mGatingRule, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSafetyRuleResponse_GatingRule})
+var sGetResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eGetResourcePolicyRequest_ResourceArn})
+var sGetResourcePolicyResponse_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i___policy, Type: smithy.ShapeTypeString, Ext: &eGetResourcePolicyResponse_Policy})
+var sListAssociatedRoute53HealthChecksRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t34, Type: smithy.ShapeTypeInteger, Ext: &eListAssociatedRoute53HealthChecksRequest_MaxResults})
+var sListAssociatedRoute53HealthChecksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eListAssociatedRoute53HealthChecksRequest_NextToken})
+var sListAssociatedRoute53HealthChecksRequest_RoutingControlArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eListAssociatedRoute53HealthChecksRequest_RoutingControlArn})
+var sListAssociatedRoute53HealthChecksResponse_HealthCheckIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckIds", ID: &i___listOf__stringMax36PatternS, Members: &m___listOf__stringMax36PatternS, Type: smithy.ShapeTypeList, Ext: &eListAssociatedRoute53HealthChecksResponse_HealthCheckIds})
+var sListAssociatedRoute53HealthChecksResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___stringMin1Max8096PatternS, Type: smithy.ShapeTypeString, Ext: &eListAssociatedRoute53HealthChecksResponse_NextToken})
+var sListClustersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t34, Type: smithy.ShapeTypeInteger, Ext: &eListClustersRequest_MaxResults})
+var sListClustersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eListClustersRequest_NextToken})
+var sListClustersResponse_Clusters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Clusters", ID: &i___listOfCluster, Members: &m___listOfCluster, Type: smithy.ShapeTypeList, Ext: &eListClustersResponse_Clusters})
+var sListClustersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___stringMin1Max8096PatternS, Type: smithy.ShapeTypeString, Ext: &eListClustersResponse_NextToken})
+var sListControlPanelsRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___string, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eListControlPanelsRequest_ClusterArn})
+var sListControlPanelsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t34, Type: smithy.ShapeTypeInteger, Ext: &eListControlPanelsRequest_MaxResults})
+var sListControlPanelsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eListControlPanelsRequest_NextToken})
+var sListControlPanelsResponse_ControlPanels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanels", ID: &i___listOfControlPanel, Members: &m___listOfControlPanel, Type: smithy.ShapeTypeList, Ext: &eListControlPanelsResponse_ControlPanels})
+var sListControlPanelsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___stringMin1Max8096PatternS, Type: smithy.ShapeTypeString, Ext: &eListControlPanelsResponse_NextToken})
+var sListRoutingControlsRequest_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eListRoutingControlsRequest_ControlPanelArn})
+var sListRoutingControlsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t34, Type: smithy.ShapeTypeInteger, Ext: &eListRoutingControlsRequest_MaxResults})
+var sListRoutingControlsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eListRoutingControlsRequest_NextToken})
+var sListRoutingControlsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___stringMin1Max8096PatternS, Type: smithy.ShapeTypeString, Ext: &eListRoutingControlsResponse_NextToken})
+var sListRoutingControlsResponse_RoutingControls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControls", ID: &i___listOfRoutingControl, Members: &m___listOfRoutingControl, Type: smithy.ShapeTypeList, Ext: &eListRoutingControlsResponse_RoutingControls})
+var sListSafetyRulesRequest_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eListSafetyRulesRequest_ControlPanelArn})
+var sListSafetyRulesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t34, Type: smithy.ShapeTypeInteger, Ext: &eListSafetyRulesRequest_MaxResults})
+var sListSafetyRulesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eListSafetyRulesRequest_NextToken})
+var sListSafetyRulesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___stringMin1Max8096PatternS, Type: smithy.ShapeTypeString, Ext: &eListSafetyRulesResponse_NextToken})
+var sListSafetyRulesResponse_SafetyRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SafetyRules", ID: &i___listOfRule, Members: &m___listOfRule, Type: smithy.ShapeTypeList, Ext: &eListSafetyRulesResponse_SafetyRules})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__stringMin0Max256PatternS, Members: &m___mapOf__stringMin0Max256PatternS, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_Tags})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__stringMin0Max256PatternS, Members: &m___mapOf__stringMin0Max256PatternS, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_Tags})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t37, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUpdateClusterRequest_ClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &eUpdateClusterRequest_ClusterArn})
+var sUpdateClusterRequest_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateClusterRequest_NetworkType})
+var sUpdateClusterResponse_Cluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cluster", ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure, Ext: &eUpdateClusterResponse_Cluster})
+var sUpdateControlPanelRequest_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &eUpdateControlPanelRequest_ControlPanelArn})
+var sUpdateControlPanelRequest_ControlPanelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelName", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &eUpdateControlPanelRequest_ControlPanelName})
+var sUpdateControlPanelResponse_ControlPanel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanel", ID: &iControlPanel, Members: &mControlPanel, Type: smithy.ShapeTypeStructure, Ext: &eUpdateControlPanelResponse_ControlPanel})
+var sUpdateRoutingControlRequest_RoutingControlArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlArn", ID: &i___stringMin1Max256PatternAZaZ09, Type: smithy.ShapeTypeString, Ext: &eUpdateRoutingControlRequest_RoutingControlArn})
+var sUpdateRoutingControlRequest_RoutingControlName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlName", ID: &i___stringMin1Max64PatternS, Type: smithy.ShapeTypeString, Ext: &eUpdateRoutingControlRequest_RoutingControlName})
+var sUpdateRoutingControlResponse_RoutingControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControl", ID: &iRoutingControl, Members: &mRoutingControl, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRoutingControlResponse_RoutingControl})
+var sUpdateSafetyRuleRequest_AssertionRuleUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssertionRuleUpdate", ID: &iAssertionRuleUpdate, Members: &mAssertionRuleUpdate, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSafetyRuleRequest_AssertionRuleUpdate})
+var sUpdateSafetyRuleRequest_GatingRuleUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatingRuleUpdate", ID: &iGatingRuleUpdate, Members: &mGatingRuleUpdate, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSafetyRuleRequest_GatingRuleUpdate})
+var sUpdateSafetyRuleResponse_AssertionRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssertionRule", ID: &iAssertionRule, Members: &mAssertionRule, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSafetyRuleResponse_AssertionRule})
+var sUpdateSafetyRuleResponse_GatingRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatingRule", ID: &iGatingRule, Members: &mGatingRule, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSafetyRuleResponse_GatingRule})
 
 var CreateCluster = &sCreateCluster
 

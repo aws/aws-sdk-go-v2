@@ -7,9 +7,87 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [79]smithy.SchemaExtensions
+var (
+	eBatchGetMetrics                            smithy.SchemaExtensions
+	eBatchPutMetrics                            smithy.SchemaExtensions
+	e_SageMakerMetricsService                   smithy.SchemaExtensions
+	eBatchPutMetricsError                       smithy.SchemaExtensions
+	eBatchPutMetricsError_Code                  smithy.SchemaExtensions
+	eBatchPutMetricsError_MetricIndex           smithy.SchemaExtensions
+	e_BatchPutMetricsErrorList                  smithy.SchemaExtensions
+	e_BatchPutMetricsErrorList_member           smithy.SchemaExtensions
+	e_Double                                    smithy.SchemaExtensions
+	e_ExperimentEntityName                      smithy.SchemaExtensions
+	e_Integer                                   smithy.SchemaExtensions
+	e_Long                                      smithy.SchemaExtensions
+	e_Message                                   smithy.SchemaExtensions
+	e_MetricName                                smithy.SchemaExtensions
+	eMetricQuery                                smithy.SchemaExtensions
+	eMetricQuery_MetricName                     smithy.SchemaExtensions
+	eMetricQuery_ResourceArn                    smithy.SchemaExtensions
+	eMetricQuery_MetricStat                     smithy.SchemaExtensions
+	eMetricQuery_Period                         smithy.SchemaExtensions
+	eMetricQuery_XAxisType                      smithy.SchemaExtensions
+	eMetricQuery_Start                          smithy.SchemaExtensions
+	eMetricQuery_End                            smithy.SchemaExtensions
+	e_MetricQueryList                           smithy.SchemaExtensions
+	e_MetricQueryList_member                    smithy.SchemaExtensions
+	eMetricQueryResult                          smithy.SchemaExtensions
+	eMetricQueryResult_Status                   smithy.SchemaExtensions
+	eMetricQueryResult_Message                  smithy.SchemaExtensions
+	eMetricQueryResult_XAxisValues              smithy.SchemaExtensions
+	eMetricQueryResult_MetricValues             smithy.SchemaExtensions
+	e_MetricQueryResultList                     smithy.SchemaExtensions
+	e_MetricQueryResultList_member              smithy.SchemaExtensions
+	eMetricQueryResultStatus                    smithy.SchemaExtensions
+	eMetricQueryResultStatus_COMPLETE           smithy.SchemaExtensions
+	eMetricQueryResultStatus_TRUNCATED          smithy.SchemaExtensions
+	eMetricQueryResultStatus_INTERNAL_ERROR     smithy.SchemaExtensions
+	eMetricQueryResultStatus_VALIDATION_ERROR   smithy.SchemaExtensions
+	eMetricStatistic                            smithy.SchemaExtensions
+	eMetricStatistic_MIN                        smithy.SchemaExtensions
+	eMetricStatistic_MAX                        smithy.SchemaExtensions
+	eMetricStatistic_AVG                        smithy.SchemaExtensions
+	eMetricStatistic_COUNT                      smithy.SchemaExtensions
+	eMetricStatistic_STD_DEV                    smithy.SchemaExtensions
+	eMetricStatistic_LAST                       smithy.SchemaExtensions
+	e_MetricValues                              smithy.SchemaExtensions
+	e_MetricValues_member                       smithy.SchemaExtensions
+	ePeriod                                     smithy.SchemaExtensions
+	ePeriod_ONE_MINUTE                          smithy.SchemaExtensions
+	ePeriod_FIVE_MINUTE                         smithy.SchemaExtensions
+	ePeriod_ONE_HOUR                            smithy.SchemaExtensions
+	ePeriod_ITERATION_NUMBER                    smithy.SchemaExtensions
+	ePutMetricsErrorCode                        smithy.SchemaExtensions
+	ePutMetricsErrorCode_METRIC_LIMIT_EXCEEDED  smithy.SchemaExtensions
+	ePutMetricsErrorCode_INTERNAL_ERROR         smithy.SchemaExtensions
+	ePutMetricsErrorCode_VALIDATION_ERROR       smithy.SchemaExtensions
+	ePutMetricsErrorCode_CONFLICT_ERROR         smithy.SchemaExtensions
+	eRawMetricData                              smithy.SchemaExtensions
+	eRawMetricData_MetricName                   smithy.SchemaExtensions
+	eRawMetricData_Timestamp                    smithy.SchemaExtensions
+	eRawMetricData_Step                         smithy.SchemaExtensions
+	eRawMetricData_Value                        smithy.SchemaExtensions
+	e_RawMetricDataList                         smithy.SchemaExtensions
+	e_RawMetricDataList_member                  smithy.SchemaExtensions
+	e_SageMakerResourceArn                      smithy.SchemaExtensions
+	e_Step                                      smithy.SchemaExtensions
+	e_Timestamp                                 smithy.SchemaExtensions
+	eXAxisType                                  smithy.SchemaExtensions
+	eXAxisType_ITERATION_NUMBER                 smithy.SchemaExtensions
+	eXAxisType_TIMESTAMP                        smithy.SchemaExtensions
+	e_XAxisValues                               smithy.SchemaExtensions
+	e_XAxisValues_member                        smithy.SchemaExtensions
+	eBatchGetMetricsRequest                     smithy.SchemaExtensions
+	eBatchGetMetricsRequest_MetricQueries       smithy.SchemaExtensions
+	eBatchGetMetricsResponse                    smithy.SchemaExtensions
+	eBatchGetMetricsResponse_MetricQueryResults smithy.SchemaExtensions
+	eBatchPutMetricsRequest                     smithy.SchemaExtensions
+	eBatchPutMetricsRequest_TrialComponentName  smithy.SchemaExtensions
+	eBatchPutMetricsRequest_MetricData          smithy.SchemaExtensions
+	eBatchPutMetricsResponse                    smithy.SchemaExtensions
+	eBatchPutMetricsResponse_Errors             smithy.SchemaExtensions
+)
 
 var (
 	iBatchGetMetrics           = smithy.ShapeID{Namespace: "com.amazonaws.sagemakermetrics", Name: "BatchGetMetrics"}
@@ -73,86 +151,86 @@ var mBatchGetMetricsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBat
 var mBatchPutMetricsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchPutMetricsRequest_TrialComponentName, &sBatchPutMetricsRequest_MetricData}}
 var mBatchPutMetricsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchPutMetricsResponse_Errors}}
 
-var sBatchGetMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetMetrics, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sBatchPutMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchPutMetrics, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var s_SageMakerMetricsService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SageMakerMetricsService, Type: smithy.ShapeTypeService, Ext: &ext[2]})
-var sBatchPutMetricsError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchPutMetricsError, Members: &mBatchPutMetricsError, Type: smithy.ShapeTypeStructure, Ext: &ext[3]})
-var s_BatchPutMetricsErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchPutMetricsErrorList, Members: &m_BatchPutMetricsErrorList, Type: smithy.ShapeTypeList, Ext: &ext[6]})
-var s_Double = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &ext[8]})
-var s_ExperimentEntityName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentEntityName, Type: smithy.ShapeTypeString, Ext: &ext[9]})
-var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[10]})
-var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[11]})
-var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[12]})
-var s_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &ext[13]})
-var sMetricQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricQuery, Members: &mMetricQuery, Type: smithy.ShapeTypeStructure, Ext: &ext[14]})
-var s_MetricQueryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricQueryList, Members: &m_MetricQueryList, Type: smithy.ShapeTypeList, Ext: &ext[22]})
-var sMetricQueryResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricQueryResult, Members: &mMetricQueryResult, Type: smithy.ShapeTypeStructure, Ext: &ext[24]})
-var s_MetricQueryResultList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricQueryResultList, Members: &m_MetricQueryResultList, Type: smithy.ShapeTypeList, Ext: &ext[29]})
-var sMetricQueryResultStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricQueryResultStatus, Members: &mMetricQueryResultStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[31]})
-var sMetricStatistic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricStatistic, Members: &mMetricStatistic, Type: smithy.ShapeTypeEnum, Ext: &ext[36]})
-var s_MetricValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricValues, Members: &m_MetricValues, Type: smithy.ShapeTypeList, Ext: &ext[43]})
-var sPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPeriod, Members: &mPeriod, Type: smithy.ShapeTypeEnum, Ext: &ext[45]})
-var sPutMetricsErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMetricsErrorCode, Members: &mPutMetricsErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[50]})
-var sRawMetricData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRawMetricData, Members: &mRawMetricData, Type: smithy.ShapeTypeStructure, Ext: &ext[55]})
-var s_RawMetricDataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RawMetricDataList, Members: &m_RawMetricDataList, Type: smithy.ShapeTypeList, Ext: &ext[60]})
-var s_SageMakerResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SageMakerResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[62]})
-var s_Step = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Step, Type: smithy.ShapeTypeInteger, Ext: &ext[63]})
-var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[64]})
-var sXAxisType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXAxisType, Members: &mXAxisType, Type: smithy.ShapeTypeEnum, Ext: &ext[65]})
-var s_XAxisValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XAxisValues, Members: &m_XAxisValues, Type: smithy.ShapeTypeList, Ext: &ext[68]})
-var sBatchGetMetricsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetMetricsRequest, Members: &mBatchGetMetricsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[70]})
-var sBatchGetMetricsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetMetricsResponse, Members: &mBatchGetMetricsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sBatchPutMetricsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchPutMetricsRequest, Members: &mBatchPutMetricsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var sBatchPutMetricsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchPutMetricsResponse, Members: &mBatchPutMetricsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
+var sBatchGetMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetMetrics, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eBatchGetMetrics})
+var sBatchPutMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchPutMetrics, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eBatchPutMetrics})
+var s_SageMakerMetricsService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SageMakerMetricsService, Type: smithy.ShapeTypeService, Ext: &e_SageMakerMetricsService})
+var sBatchPutMetricsError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchPutMetricsError, Members: &mBatchPutMetricsError, Type: smithy.ShapeTypeStructure, Ext: &eBatchPutMetricsError})
+var s_BatchPutMetricsErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchPutMetricsErrorList, Members: &m_BatchPutMetricsErrorList, Type: smithy.ShapeTypeList, Ext: &e_BatchPutMetricsErrorList})
+var s_Double = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &e_Double})
+var s_ExperimentEntityName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExperimentEntityName, Type: smithy.ShapeTypeString, Ext: &e_ExperimentEntityName})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &e_Integer})
+var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &e_Long})
+var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &e_Message})
+var s_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &e_MetricName})
+var sMetricQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricQuery, Members: &mMetricQuery, Type: smithy.ShapeTypeStructure, Ext: &eMetricQuery})
+var s_MetricQueryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricQueryList, Members: &m_MetricQueryList, Type: smithy.ShapeTypeList, Ext: &e_MetricQueryList})
+var sMetricQueryResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricQueryResult, Members: &mMetricQueryResult, Type: smithy.ShapeTypeStructure, Ext: &eMetricQueryResult})
+var s_MetricQueryResultList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricQueryResultList, Members: &m_MetricQueryResultList, Type: smithy.ShapeTypeList, Ext: &e_MetricQueryResultList})
+var sMetricQueryResultStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricQueryResultStatus, Members: &mMetricQueryResultStatus, Type: smithy.ShapeTypeEnum, Ext: &eMetricQueryResultStatus})
+var sMetricStatistic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricStatistic, Members: &mMetricStatistic, Type: smithy.ShapeTypeEnum, Ext: &eMetricStatistic})
+var s_MetricValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricValues, Members: &m_MetricValues, Type: smithy.ShapeTypeList, Ext: &e_MetricValues})
+var sPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPeriod, Members: &mPeriod, Type: smithy.ShapeTypeEnum, Ext: &ePeriod})
+var sPutMetricsErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMetricsErrorCode, Members: &mPutMetricsErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ePutMetricsErrorCode})
+var sRawMetricData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRawMetricData, Members: &mRawMetricData, Type: smithy.ShapeTypeStructure, Ext: &eRawMetricData})
+var s_RawMetricDataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RawMetricDataList, Members: &m_RawMetricDataList, Type: smithy.ShapeTypeList, Ext: &e_RawMetricDataList})
+var s_SageMakerResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SageMakerResourceArn, Type: smithy.ShapeTypeString, Ext: &e_SageMakerResourceArn})
+var s_Step = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Step, Type: smithy.ShapeTypeInteger, Ext: &e_Step})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var sXAxisType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXAxisType, Members: &mXAxisType, Type: smithy.ShapeTypeEnum, Ext: &eXAxisType})
+var s_XAxisValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XAxisValues, Members: &m_XAxisValues, Type: smithy.ShapeTypeList, Ext: &e_XAxisValues})
+var sBatchGetMetricsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetMetricsRequest, Members: &mBatchGetMetricsRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetMetricsRequest})
+var sBatchGetMetricsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetMetricsResponse, Members: &mBatchGetMetricsResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetMetricsResponse})
+var sBatchPutMetricsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchPutMetricsRequest, Members: &mBatchPutMetricsRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchPutMetricsRequest})
+var sBatchPutMetricsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchPutMetricsResponse, Members: &mBatchPutMetricsResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchPutMetricsResponse})
 
-var sBatchPutMetricsError_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iPutMetricsErrorCode, Members: &mPutMetricsErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[4]})
-var sBatchPutMetricsError_MetricIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricIndex", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[5]})
-var s_BatchPutMetricsErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchPutMetricsError, Members: &mBatchPutMetricsError, Type: smithy.ShapeTypeStructure, Ext: &ext[7]})
-var sMetricQuery_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &ext[15]})
-var sMetricQuery_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_SageMakerResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[16]})
-var sMetricQuery_MetricStat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricStat", ID: &iMetricStatistic, Members: &mMetricStatistic, Type: smithy.ShapeTypeEnum, Ext: &ext[17]})
-var sMetricQuery_Period = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Period", ID: &iPeriod, Members: &mPeriod, Type: smithy.ShapeTypeEnum, Ext: &ext[18]})
-var sMetricQuery_XAxisType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XAxisType", ID: &iXAxisType, Members: &mXAxisType, Type: smithy.ShapeTypeEnum, Ext: &ext[19]})
-var sMetricQuery_Start = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Start", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[20]})
-var sMetricQuery_End = smithy.NewStaticSchema(smithy.StaticSchema{Member: "End", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[21]})
-var s_MetricQueryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricQuery, Members: &mMetricQuery, Type: smithy.ShapeTypeStructure, Ext: &ext[23]})
-var sMetricQueryResult_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iMetricQueryResultStatus, Members: &mMetricQueryResultStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[25]})
-var sMetricQueryResult_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var sMetricQueryResult_XAxisValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XAxisValues", ID: &i_XAxisValues, Members: &m_XAxisValues, Type: smithy.ShapeTypeList, Ext: &ext[27]})
-var sMetricQueryResult_MetricValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricValues", ID: &i_MetricValues, Members: &m_MetricValues, Type: smithy.ShapeTypeList, Ext: &ext[28]})
-var s_MetricQueryResultList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricQueryResult, Members: &mMetricQueryResult, Type: smithy.ShapeTypeStructure, Ext: &ext[30]})
-var sMetricQueryResultStatus_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[32]})
-var sMetricQueryResultStatus_TRUNCATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRUNCATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[33]})
-var sMetricQueryResultStatus_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[34]})
-var sMetricQueryResultStatus_VALIDATION_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATION_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[35]})
-var sMetricStatistic_MIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var sMetricStatistic_MAX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[38]})
-var sMetricStatistic_AVG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[39]})
-var sMetricStatistic_COUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[40]})
-var sMetricStatistic_STD_DEV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STD_DEV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[41]})
-var sMetricStatistic_LAST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[42]})
-var s_MetricValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &ext[44]})
-var sPeriod_ONE_MINUTE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONE_MINUTE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[46]})
-var sPeriod_FIVE_MINUTE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIVE_MINUTE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[47]})
-var sPeriod_ONE_HOUR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONE_HOUR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[48]})
-var sPeriod_ITERATION_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ITERATION_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[49]})
-var sPutMetricsErrorCode_METRIC_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "METRIC_LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[51]})
-var sPutMetricsErrorCode_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[52]})
-var sPutMetricsErrorCode_VALIDATION_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATION_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[53]})
-var sPutMetricsErrorCode_CONFLICT_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFLICT_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[54]})
-var sRawMetricData_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &ext[56]})
-var sRawMetricData_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[57]})
-var sRawMetricData_Step = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Step", ID: &i_Step, Type: smithy.ShapeTypeInteger, Ext: &ext[58]})
-var sRawMetricData_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &ext[59]})
-var s_RawMetricDataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRawMetricData, Members: &mRawMetricData, Type: smithy.ShapeTypeStructure, Ext: &ext[61]})
-var sXAxisType_ITERATION_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ITERATION_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[66]})
-var sXAxisType_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[67]})
-var s_XAxisValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[69]})
-var sBatchGetMetricsRequest_MetricQueries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricQueries", ID: &i_MetricQueryList, Members: &m_MetricQueryList, Type: smithy.ShapeTypeList, Ext: &ext[71]})
-var sBatchGetMetricsResponse_MetricQueryResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricQueryResults", ID: &i_MetricQueryResultList, Members: &m_MetricQueryResultList, Type: smithy.ShapeTypeList, Ext: &ext[73]})
-var sBatchPutMetricsRequest_TrialComponentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrialComponentName", ID: &i_ExperimentEntityName, Type: smithy.ShapeTypeString, Ext: &ext[75]})
-var sBatchPutMetricsRequest_MetricData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricData", ID: &i_RawMetricDataList, Members: &m_RawMetricDataList, Type: smithy.ShapeTypeList, Ext: &ext[76]})
-var sBatchPutMetricsResponse_Errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errors", ID: &i_BatchPutMetricsErrorList, Members: &m_BatchPutMetricsErrorList, Type: smithy.ShapeTypeList, Ext: &ext[78]})
+var sBatchPutMetricsError_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iPutMetricsErrorCode, Members: &mPutMetricsErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eBatchPutMetricsError_Code})
+var sBatchPutMetricsError_MetricIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricIndex", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eBatchPutMetricsError_MetricIndex})
+var s_BatchPutMetricsErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchPutMetricsError, Members: &mBatchPutMetricsError, Type: smithy.ShapeTypeStructure, Ext: &e_BatchPutMetricsErrorList_member})
+var sMetricQuery_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eMetricQuery_MetricName})
+var sMetricQuery_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_SageMakerResourceArn, Type: smithy.ShapeTypeString, Ext: &eMetricQuery_ResourceArn})
+var sMetricQuery_MetricStat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricStat", ID: &iMetricStatistic, Members: &mMetricStatistic, Type: smithy.ShapeTypeEnum, Ext: &eMetricQuery_MetricStat})
+var sMetricQuery_Period = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Period", ID: &iPeriod, Members: &mPeriod, Type: smithy.ShapeTypeEnum, Ext: &eMetricQuery_Period})
+var sMetricQuery_XAxisType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XAxisType", ID: &iXAxisType, Members: &mXAxisType, Type: smithy.ShapeTypeEnum, Ext: &eMetricQuery_XAxisType})
+var sMetricQuery_Start = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Start", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eMetricQuery_Start})
+var sMetricQuery_End = smithy.NewStaticSchema(smithy.StaticSchema{Member: "End", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eMetricQuery_End})
+var s_MetricQueryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricQuery, Members: &mMetricQuery, Type: smithy.ShapeTypeStructure, Ext: &e_MetricQueryList_member})
+var sMetricQueryResult_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iMetricQueryResultStatus, Members: &mMetricQueryResultStatus, Type: smithy.ShapeTypeEnum, Ext: &eMetricQueryResult_Status})
+var sMetricQueryResult_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eMetricQueryResult_Message})
+var sMetricQueryResult_XAxisValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XAxisValues", ID: &i_XAxisValues, Members: &m_XAxisValues, Type: smithy.ShapeTypeList, Ext: &eMetricQueryResult_XAxisValues})
+var sMetricQueryResult_MetricValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricValues", ID: &i_MetricValues, Members: &m_MetricValues, Type: smithy.ShapeTypeList, Ext: &eMetricQueryResult_MetricValues})
+var s_MetricQueryResultList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricQueryResult, Members: &mMetricQueryResult, Type: smithy.ShapeTypeStructure, Ext: &e_MetricQueryResultList_member})
+var sMetricQueryResultStatus_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricQueryResultStatus_COMPLETE})
+var sMetricQueryResultStatus_TRUNCATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRUNCATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricQueryResultStatus_TRUNCATED})
+var sMetricQueryResultStatus_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricQueryResultStatus_INTERNAL_ERROR})
+var sMetricQueryResultStatus_VALIDATION_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATION_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricQueryResultStatus_VALIDATION_ERROR})
+var sMetricStatistic_MIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricStatistic_MIN})
+var sMetricStatistic_MAX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricStatistic_MAX})
+var sMetricStatistic_AVG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricStatistic_AVG})
+var sMetricStatistic_COUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricStatistic_COUNT})
+var sMetricStatistic_STD_DEV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STD_DEV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricStatistic_STD_DEV})
+var sMetricStatistic_LAST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricStatistic_LAST})
+var s_MetricValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &e_MetricValues_member})
+var sPeriod_ONE_MINUTE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONE_MINUTE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePeriod_ONE_MINUTE})
+var sPeriod_FIVE_MINUTE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIVE_MINUTE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePeriod_FIVE_MINUTE})
+var sPeriod_ONE_HOUR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONE_HOUR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePeriod_ONE_HOUR})
+var sPeriod_ITERATION_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ITERATION_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePeriod_ITERATION_NUMBER})
+var sPutMetricsErrorCode_METRIC_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "METRIC_LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePutMetricsErrorCode_METRIC_LIMIT_EXCEEDED})
+var sPutMetricsErrorCode_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePutMetricsErrorCode_INTERNAL_ERROR})
+var sPutMetricsErrorCode_VALIDATION_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATION_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePutMetricsErrorCode_VALIDATION_ERROR})
+var sPutMetricsErrorCode_CONFLICT_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFLICT_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePutMetricsErrorCode_CONFLICT_ERROR})
+var sRawMetricData_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString, Ext: &eRawMetricData_MetricName})
+var sRawMetricData_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRawMetricData_Timestamp})
+var sRawMetricData_Step = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Step", ID: &i_Step, Type: smithy.ShapeTypeInteger, Ext: &eRawMetricData_Step})
+var sRawMetricData_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_Double, Type: smithy.ShapeTypeDouble, Ext: &eRawMetricData_Value})
+var s_RawMetricDataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRawMetricData, Members: &mRawMetricData, Type: smithy.ShapeTypeStructure, Ext: &e_RawMetricDataList_member})
+var sXAxisType_ITERATION_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ITERATION_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eXAxisType_ITERATION_NUMBER})
+var sXAxisType_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eXAxisType_TIMESTAMP})
+var s_XAxisValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &e_XAxisValues_member})
+var sBatchGetMetricsRequest_MetricQueries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricQueries", ID: &i_MetricQueryList, Members: &m_MetricQueryList, Type: smithy.ShapeTypeList, Ext: &eBatchGetMetricsRequest_MetricQueries})
+var sBatchGetMetricsResponse_MetricQueryResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricQueryResults", ID: &i_MetricQueryResultList, Members: &m_MetricQueryResultList, Type: smithy.ShapeTypeList, Ext: &eBatchGetMetricsResponse_MetricQueryResults})
+var sBatchPutMetricsRequest_TrialComponentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrialComponentName", ID: &i_ExperimentEntityName, Type: smithy.ShapeTypeString, Ext: &eBatchPutMetricsRequest_TrialComponentName})
+var sBatchPutMetricsRequest_MetricData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricData", ID: &i_RawMetricDataList, Members: &m_RawMetricDataList, Type: smithy.ShapeTypeList, Ext: &eBatchPutMetricsRequest_MetricData})
+var sBatchPutMetricsResponse_Errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errors", ID: &i_BatchPutMetricsErrorList, Members: &m_BatchPutMetricsErrorList, Type: smithy.ShapeTypeList, Ext: &eBatchPutMetricsResponse_Errors})
 
 var BatchGetMetrics = &sBatchGetMetrics
 

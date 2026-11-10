@@ -7,9 +7,221 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [213]smithy.SchemaExtensions
+var (
+	eAcceptConnectionProposal                         smithy.SchemaExtensions
+	eCreateConnection                                 smithy.SchemaExtensions
+	eDeleteConnection                                 smithy.SchemaExtensions
+	eDescribeConnectionProposal                       smithy.SchemaExtensions
+	eGetConnection                                    smithy.SchemaExtensions
+	eGetEnvironment                                   smithy.SchemaExtensions
+	eListAttachPoints                                 smithy.SchemaExtensions
+	eListConnections                                  smithy.SchemaExtensions
+	eListEnvironments                                 smithy.SchemaExtensions
+	eListTagsForResource                              smithy.SchemaExtensions
+	eTagResource                                      smithy.SchemaExtensions
+	eUntagResource                                    smithy.SchemaExtensions
+	eUpdateConnection                                 smithy.SchemaExtensions
+	e_Interconnect                                    smithy.SchemaExtensions
+	eAccessDeniedException                            smithy.SchemaExtensions
+	eAccessDeniedException_message                    smithy.SchemaExtensions
+	e_ActivationKey                                   smithy.SchemaExtensions
+	e_AmazonResourceName                              smithy.SchemaExtensions
+	eAttachPoint                                      smithy.SchemaExtensions
+	eAttachPoint_directConnectGateway                 smithy.SchemaExtensions
+	eAttachPoint_arn                                  smithy.SchemaExtensions
+	eAttachPointDescriptor                            smithy.SchemaExtensions
+	eAttachPointDescriptor_type                       smithy.SchemaExtensions
+	eAttachPointDescriptor_identifier                 smithy.SchemaExtensions
+	eAttachPointDescriptor_name                       smithy.SchemaExtensions
+	e_AttachPointDescriptorList                       smithy.SchemaExtensions
+	e_AttachPointDescriptorList_member                smithy.SchemaExtensions
+	eAttachPointType                                  smithy.SchemaExtensions
+	eAttachPointType_DirectConnectGateway             smithy.SchemaExtensions
+	e_BandwidthList                                   smithy.SchemaExtensions
+	e_BandwidthList_member                            smithy.SchemaExtensions
+	eBandwidths                                       smithy.SchemaExtensions
+	eBandwidths_available                             smithy.SchemaExtensions
+	eBandwidths_supported                             smithy.SchemaExtensions
+	e_BillingTier                                     smithy.SchemaExtensions
+	e_CloudServiceProvider                            smithy.SchemaExtensions
+	eConnection                                       smithy.SchemaExtensions
+	eConnection_id                                    smithy.SchemaExtensions
+	eConnection_arn                                   smithy.SchemaExtensions
+	eConnection_description                           smithy.SchemaExtensions
+	eConnection_bandwidth                             smithy.SchemaExtensions
+	eConnection_attachPoint                           smithy.SchemaExtensions
+	eConnection_environmentId                         smithy.SchemaExtensions
+	eConnection_provider                              smithy.SchemaExtensions
+	eConnection_location                              smithy.SchemaExtensions
+	eConnection_type                                  smithy.SchemaExtensions
+	eConnection_state                                 smithy.SchemaExtensions
+	eConnection_sharedId                              smithy.SchemaExtensions
+	eConnection_billingTier                           smithy.SchemaExtensions
+	eConnection_ownerAccount                          smithy.SchemaExtensions
+	eConnection_activationKey                         smithy.SchemaExtensions
+	eConnection_tags                                  smithy.SchemaExtensions
+	e_ConnectionBandwidth                             smithy.SchemaExtensions
+	e_ConnectionDescription                           smithy.SchemaExtensions
+	e_ConnectionId                                    smithy.SchemaExtensions
+	e_ConnectionSharedId                              smithy.SchemaExtensions
+	eConnectionState                                  smithy.SchemaExtensions
+	eConnectionState_AVAILABLE                        smithy.SchemaExtensions
+	eConnectionState_REQUESTED                        smithy.SchemaExtensions
+	eConnectionState_PENDING                          smithy.SchemaExtensions
+	eConnectionState_DOWN                             smithy.SchemaExtensions
+	eConnectionState_DELETING                         smithy.SchemaExtensions
+	eConnectionState_DELETED                          smithy.SchemaExtensions
+	eConnectionState_FAILED                           smithy.SchemaExtensions
+	eConnectionState_UPDATING                         smithy.SchemaExtensions
+	e_ConnectionSummariesList                         smithy.SchemaExtensions
+	e_ConnectionSummariesList_member                  smithy.SchemaExtensions
+	eConnectionSummary                                smithy.SchemaExtensions
+	eConnectionSummary_id                             smithy.SchemaExtensions
+	eConnectionSummary_arn                            smithy.SchemaExtensions
+	eConnectionSummary_description                    smithy.SchemaExtensions
+	eConnectionSummary_bandwidth                      smithy.SchemaExtensions
+	eConnectionSummary_attachPoint                    smithy.SchemaExtensions
+	eConnectionSummary_environmentId                  smithy.SchemaExtensions
+	eConnectionSummary_provider                       smithy.SchemaExtensions
+	eConnectionSummary_location                       smithy.SchemaExtensions
+	eConnectionSummary_type                           smithy.SchemaExtensions
+	eConnectionSummary_state                          smithy.SchemaExtensions
+	eConnectionSummary_sharedId                       smithy.SchemaExtensions
+	eConnectionSummary_billingTier                    smithy.SchemaExtensions
+	e_DirectConnectGatewayAttachPoint                 smithy.SchemaExtensions
+	eEnvironment                                      smithy.SchemaExtensions
+	eEnvironment_provider                             smithy.SchemaExtensions
+	eEnvironment_location                             smithy.SchemaExtensions
+	eEnvironment_environmentId                        smithy.SchemaExtensions
+	eEnvironment_state                                smithy.SchemaExtensions
+	eEnvironment_bandwidths                           smithy.SchemaExtensions
+	eEnvironment_type                                 smithy.SchemaExtensions
+	eEnvironment_activationPageUrl                    smithy.SchemaExtensions
+	eEnvironment_remoteIdentifierType                 smithy.SchemaExtensions
+	e_EnvironmentId                                   smithy.SchemaExtensions
+	e_EnvironmentList                                 smithy.SchemaExtensions
+	e_EnvironmentList_member                          smithy.SchemaExtensions
+	eEnvironmentState                                 smithy.SchemaExtensions
+	eEnvironmentState_AVAILABLE                       smithy.SchemaExtensions
+	eEnvironmentState_LIMITED                         smithy.SchemaExtensions
+	eEnvironmentState_UNAVAILABLE                     smithy.SchemaExtensions
+	eInterconnectClientException                      smithy.SchemaExtensions
+	eInterconnectClientException_message              smithy.SchemaExtensions
+	eInterconnectServerException                      smithy.SchemaExtensions
+	eInterconnectServerException_message              smithy.SchemaExtensions
+	eInterconnectValidationException                  smithy.SchemaExtensions
+	eInterconnectValidationException_message          smithy.SchemaExtensions
+	e_LastMileProvider                                smithy.SchemaExtensions
+	e_Location                                        smithy.SchemaExtensions
+	e_MaxResults                                      smithy.SchemaExtensions
+	e_NextToken                                       smithy.SchemaExtensions
+	e_OwnerAccountId                                  smithy.SchemaExtensions
+	e_ProductType                                     smithy.SchemaExtensions
+	eProvider                                         smithy.SchemaExtensions
+	eProvider_cloudServiceProvider                    smithy.SchemaExtensions
+	eProvider_lastMileProvider                        smithy.SchemaExtensions
+	eRemoteAccountIdentifier                          smithy.SchemaExtensions
+	eRemoteAccountIdentifier_identifier               smithy.SchemaExtensions
+	eRemoteAccountIdentifierType                      smithy.SchemaExtensions
+	eRemoteAccountIdentifierType_ACCOUNT              smithy.SchemaExtensions
+	eRemoteAccountIdentifierType_EMAIL                smithy.SchemaExtensions
+	e_RemoteOwnerAccount                              smithy.SchemaExtensions
+	eResourceNotFoundException                        smithy.SchemaExtensions
+	eResourceNotFoundException_message                smithy.SchemaExtensions
+	eServiceQuotaExceededException                    smithy.SchemaExtensions
+	eServiceQuotaExceededException_message            smithy.SchemaExtensions
+	e_TagKey                                          smithy.SchemaExtensions
+	e_TagKeyList                                      smithy.SchemaExtensions
+	e_TagKeyList_member                               smithy.SchemaExtensions
+	e_TagMap                                          smithy.SchemaExtensions
+	e_TagMap_key                                      smithy.SchemaExtensions
+	e_TagMap_value                                    smithy.SchemaExtensions
+	e_TagValue                                        smithy.SchemaExtensions
+	eThrottlingException                              smithy.SchemaExtensions
+	eThrottlingException_message                      smithy.SchemaExtensions
+	eAcceptConnectionProposalRequest                  smithy.SchemaExtensions
+	eAcceptConnectionProposalRequest_attachPoint      smithy.SchemaExtensions
+	eAcceptConnectionProposalRequest_activationKey    smithy.SchemaExtensions
+	eAcceptConnectionProposalRequest_description      smithy.SchemaExtensions
+	eAcceptConnectionProposalRequest_tags             smithy.SchemaExtensions
+	eAcceptConnectionProposalRequest_clientToken      smithy.SchemaExtensions
+	eAcceptConnectionProposalResponse                 smithy.SchemaExtensions
+	eAcceptConnectionProposalResponse_connection      smithy.SchemaExtensions
+	eCreateConnectionRequest                          smithy.SchemaExtensions
+	eCreateConnectionRequest_description              smithy.SchemaExtensions
+	eCreateConnectionRequest_bandwidth                smithy.SchemaExtensions
+	eCreateConnectionRequest_attachPoint              smithy.SchemaExtensions
+	eCreateConnectionRequest_environmentId            smithy.SchemaExtensions
+	eCreateConnectionRequest_remoteAccount            smithy.SchemaExtensions
+	eCreateConnectionRequest_tags                     smithy.SchemaExtensions
+	eCreateConnectionRequest_clientToken              smithy.SchemaExtensions
+	eCreateConnectionResponse                         smithy.SchemaExtensions
+	eCreateConnectionResponse_connection              smithy.SchemaExtensions
+	eDeleteConnectionRequest                          smithy.SchemaExtensions
+	eDeleteConnectionRequest_identifier               smithy.SchemaExtensions
+	eDeleteConnectionRequest_clientToken              smithy.SchemaExtensions
+	eDeleteConnectionResponse                         smithy.SchemaExtensions
+	eDeleteConnectionResponse_connection              smithy.SchemaExtensions
+	eDescribeConnectionProposalRequest                smithy.SchemaExtensions
+	eDescribeConnectionProposalRequest_activationKey  smithy.SchemaExtensions
+	eDescribeConnectionProposalResponse               smithy.SchemaExtensions
+	eDescribeConnectionProposalResponse_bandwidth     smithy.SchemaExtensions
+	eDescribeConnectionProposalResponse_environmentId smithy.SchemaExtensions
+	eDescribeConnectionProposalResponse_provider      smithy.SchemaExtensions
+	eDescribeConnectionProposalResponse_location      smithy.SchemaExtensions
+	eGetConnectionRequest                             smithy.SchemaExtensions
+	eGetConnectionRequest_identifier                  smithy.SchemaExtensions
+	eGetConnectionResponse                            smithy.SchemaExtensions
+	eGetConnectionResponse_connection                 smithy.SchemaExtensions
+	eGetEnvironmentRequest                            smithy.SchemaExtensions
+	eGetEnvironmentRequest_id                         smithy.SchemaExtensions
+	eGetEnvironmentResponse                           smithy.SchemaExtensions
+	eGetEnvironmentResponse_environment               smithy.SchemaExtensions
+	eListAttachPointsRequest                          smithy.SchemaExtensions
+	eListAttachPointsRequest_environmentId            smithy.SchemaExtensions
+	eListAttachPointsRequest_maxResults               smithy.SchemaExtensions
+	eListAttachPointsRequest_nextToken                smithy.SchemaExtensions
+	eListAttachPointsResponse                         smithy.SchemaExtensions
+	eListAttachPointsResponse_attachPoints            smithy.SchemaExtensions
+	eListAttachPointsResponse_nextToken               smithy.SchemaExtensions
+	eListConnectionsRequest                           smithy.SchemaExtensions
+	eListConnectionsRequest_maxResults                smithy.SchemaExtensions
+	eListConnectionsRequest_nextToken                 smithy.SchemaExtensions
+	eListConnectionsRequest_state                     smithy.SchemaExtensions
+	eListConnectionsRequest_environmentId             smithy.SchemaExtensions
+	eListConnectionsRequest_provider                  smithy.SchemaExtensions
+	eListConnectionsRequest_attachPoint               smithy.SchemaExtensions
+	eListConnectionsResponse                          smithy.SchemaExtensions
+	eListConnectionsResponse_connections              smithy.SchemaExtensions
+	eListConnectionsResponse_nextToken                smithy.SchemaExtensions
+	eListEnvironmentsRequest                          smithy.SchemaExtensions
+	eListEnvironmentsRequest_maxResults               smithy.SchemaExtensions
+	eListEnvironmentsRequest_nextToken                smithy.SchemaExtensions
+	eListEnvironmentsRequest_provider                 smithy.SchemaExtensions
+	eListEnvironmentsRequest_location                 smithy.SchemaExtensions
+	eListEnvironmentsResponse                         smithy.SchemaExtensions
+	eListEnvironmentsResponse_environments            smithy.SchemaExtensions
+	eListEnvironmentsResponse_nextToken               smithy.SchemaExtensions
+	eListTagsForResourceRequest                       smithy.SchemaExtensions
+	eListTagsForResourceRequest_arn                   smithy.SchemaExtensions
+	eListTagsForResourceResponse                      smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                 smithy.SchemaExtensions
+	eTagResourceRequest                               smithy.SchemaExtensions
+	eTagResourceRequest_arn                           smithy.SchemaExtensions
+	eTagResourceRequest_tags                          smithy.SchemaExtensions
+	eTagResourceResponse                              smithy.SchemaExtensions
+	eUntagResourceRequest                             smithy.SchemaExtensions
+	eUntagResourceRequest_arn                         smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                     smithy.SchemaExtensions
+	eUntagResourceResponse                            smithy.SchemaExtensions
+	eUpdateConnectionRequest                          smithy.SchemaExtensions
+	eUpdateConnectionRequest_identifier               smithy.SchemaExtensions
+	eUpdateConnectionRequest_description              smithy.SchemaExtensions
+	eUpdateConnectionRequest_bandwidth                smithy.SchemaExtensions
+	eUpdateConnectionRequest_clientToken              smithy.SchemaExtensions
+	eUpdateConnectionResponse                         smithy.SchemaExtensions
+	eUpdateConnectionResponse_connection              smithy.SchemaExtensions
+)
 
 var (
 	iAcceptConnectionProposal           = smithy.ShapeID{Namespace: "com.amazonaws.interconnect", Name: "AcceptConnectionProposal"}
@@ -165,220 +377,220 @@ var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagR
 var mUpdateConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectionRequest_identifier, &sUpdateConnectionRequest_description, &sUpdateConnectionRequest_bandwidth, &sUpdateConnectionRequest_clientToken}}
 var mUpdateConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectionResponse_connection}}
 
-var sAcceptConnectionProposal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptConnectionProposal, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCreateConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnection, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sDeleteConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnection, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sDescribeConnectionProposal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectionProposal, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sGetConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnection, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sGetEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnvironment, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sListAttachPoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttachPoints, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sListConnections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnections, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sListEnvironments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironments, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sUpdateConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnection, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var s_Interconnect = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Interconnect, Type: smithy.ShapeTypeService, Ext: &ext[13]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[14]})
-var s_ActivationKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActivationKey, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[16]})
-var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[17]})
-var sAttachPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachPoint, Members: &mAttachPoint, Type: smithy.ShapeTypeUnion, Ext: &ext[18]})
-var sAttachPointDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachPointDescriptor, Members: &mAttachPointDescriptor, Type: smithy.ShapeTypeStructure, Ext: &ext[21]})
-var s_AttachPointDescriptorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttachPointDescriptorList, Members: &m_AttachPointDescriptorList, Type: smithy.ShapeTypeList, Ext: &ext[25]})
-var sAttachPointType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachPointType, Members: &mAttachPointType, Type: smithy.ShapeTypeEnum, Ext: &ext[27]})
-var s_BandwidthList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BandwidthList, Members: &m_BandwidthList, Type: smithy.ShapeTypeList, Ext: &ext[29]})
-var sBandwidths = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBandwidths, Members: &mBandwidths, Type: smithy.ShapeTypeStructure, Ext: &ext[31]})
-var s_BillingTier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingTier, Type: smithy.ShapeTypeInteger, Ext: &ext[34]})
-var s_CloudServiceProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudServiceProvider, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var sConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure, Ext: &ext[36]})
-var s_ConnectionBandwidth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionBandwidth, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var s_ConnectionDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionDescription, Type: smithy.ShapeTypeString, Ext: &ext[53]})
-var s_ConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionId, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var s_ConnectionSharedId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionSharedId, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var sConnectionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeEnum, Ext: &ext[56]})
-var s_ConnectionSummariesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionSummariesList, Members: &m_ConnectionSummariesList, Type: smithy.ShapeTypeList, Ext: &ext[65]})
-var sConnectionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionSummary, Members: &mConnectionSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[67]})
-var s_DirectConnectGatewayAttachPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectConnectGatewayAttachPoint, Type: smithy.ShapeTypeString, Ext: &ext[80]})
-var sEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironment, Members: &mEnvironment, Type: smithy.ShapeTypeStructure, Ext: &ext[81]})
-var s_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &ext[90]})
-var s_EnvironmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentList, Members: &m_EnvironmentList, Type: smithy.ShapeTypeList, Ext: &ext[91]})
-var sEnvironmentState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentState, Members: &mEnvironmentState, Type: smithy.ShapeTypeEnum, Ext: &ext[93]})
-var sInterconnectClientException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInterconnectClientException, Members: &mInterconnectClientException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[97]})
-var sInterconnectServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInterconnectServerException, Members: &mInterconnectServerException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &ext[99]})
-var sInterconnectValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInterconnectValidationException, Members: &mInterconnectValidationException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[101]})
-var s_LastMileProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastMileProvider, Type: smithy.ShapeTypeString, Ext: &ext[103]})
-var s_Location = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Location, Type: smithy.ShapeTypeString, Ext: &ext[104]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[105]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[106]})
-var s_OwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OwnerAccountId, Type: smithy.ShapeTypeString, Ext: &ext[107]})
-var s_ProductType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProductType, Type: smithy.ShapeTypeString, Ext: &ext[108]})
-var sProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProvider, Members: &mProvider, Type: smithy.ShapeTypeUnion, Ext: &ext[109]})
-var sRemoteAccountIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoteAccountIdentifier, Members: &mRemoteAccountIdentifier, Type: smithy.ShapeTypeUnion, Ext: &ext[112]})
-var sRemoteAccountIdentifierType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoteAccountIdentifierType, Members: &mRemoteAccountIdentifierType, Type: smithy.ShapeTypeEnum, Ext: &ext[114]})
-var s_RemoteOwnerAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RemoteOwnerAccount, Type: smithy.ShapeTypeString, Ext: &ext[117]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &ext[118]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[122]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[123]})
-var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[125]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[128]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &ext[129]})
-var sAcceptConnectionProposalRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptConnectionProposalRequest, Members: &mAcceptConnectionProposalRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[131]})
-var sAcceptConnectionProposalResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptConnectionProposalResponse, Members: &mAcceptConnectionProposalResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[137]})
-var sCreateConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectionRequest, Members: &mCreateConnectionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[139]})
-var sCreateConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectionResponse, Members: &mCreateConnectionResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[147]})
-var sDeleteConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectionRequest, Members: &mDeleteConnectionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[149]})
-var sDeleteConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectionResponse, Members: &mDeleteConnectionResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[152]})
-var sDescribeConnectionProposalRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectionProposalRequest, Members: &mDescribeConnectionProposalRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[154]})
-var sDescribeConnectionProposalResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectionProposalResponse, Members: &mDescribeConnectionProposalResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[156]})
-var sGetConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectionRequest, Members: &mGetConnectionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[161]})
-var sGetConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectionResponse, Members: &mGetConnectionResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[163]})
-var sGetEnvironmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnvironmentRequest, Members: &mGetEnvironmentRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[165]})
-var sGetEnvironmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnvironmentResponse, Members: &mGetEnvironmentResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[167]})
-var sListAttachPointsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttachPointsRequest, Members: &mListAttachPointsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[169]})
-var sListAttachPointsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttachPointsResponse, Members: &mListAttachPointsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[173]})
-var sListConnectionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectionsRequest, Members: &mListConnectionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[176]})
-var sListConnectionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectionsResponse, Members: &mListConnectionsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[183]})
-var sListEnvironmentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironmentsRequest, Members: &mListEnvironmentsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[186]})
-var sListEnvironmentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironmentsResponse, Members: &mListEnvironmentsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[191]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[194]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[196]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[198]})
-var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[201]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[202]})
-var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[205]})
-var sUpdateConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectionRequest, Members: &mUpdateConnectionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[206]})
-var sUpdateConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectionResponse, Members: &mUpdateConnectionResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[211]})
+var sAcceptConnectionProposal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptConnectionProposal, Type: smithy.ShapeTypeOperation, Ext: &eAcceptConnectionProposal})
+var sCreateConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnection, Type: smithy.ShapeTypeOperation, Ext: &eCreateConnection})
+var sDeleteConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnection, Type: smithy.ShapeTypeOperation, Ext: &eDeleteConnection})
+var sDescribeConnectionProposal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectionProposal, Type: smithy.ShapeTypeOperation, Ext: &eDescribeConnectionProposal})
+var sGetConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnection, Type: smithy.ShapeTypeOperation, Ext: &eGetConnection})
+var sGetEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnvironment, Type: smithy.ShapeTypeOperation, Ext: &eGetEnvironment})
+var sListAttachPoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttachPoints, Type: smithy.ShapeTypeOperation, Ext: &eListAttachPoints})
+var sListConnections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnections, Type: smithy.ShapeTypeOperation, Ext: &eListConnections})
+var sListEnvironments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironments, Type: smithy.ShapeTypeOperation, Ext: &eListEnvironments})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnection, Type: smithy.ShapeTypeOperation, Ext: &eUpdateConnection})
+var s_Interconnect = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Interconnect, Type: smithy.ShapeTypeService, Ext: &e_Interconnect})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var s_ActivationKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActivationKey, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_ActivationKey})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &e_AmazonResourceName})
+var sAttachPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachPoint, Members: &mAttachPoint, Type: smithy.ShapeTypeUnion, Ext: &eAttachPoint})
+var sAttachPointDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachPointDescriptor, Members: &mAttachPointDescriptor, Type: smithy.ShapeTypeStructure, Ext: &eAttachPointDescriptor})
+var s_AttachPointDescriptorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttachPointDescriptorList, Members: &m_AttachPointDescriptorList, Type: smithy.ShapeTypeList, Ext: &e_AttachPointDescriptorList})
+var sAttachPointType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachPointType, Members: &mAttachPointType, Type: smithy.ShapeTypeEnum, Ext: &eAttachPointType})
+var s_BandwidthList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BandwidthList, Members: &m_BandwidthList, Type: smithy.ShapeTypeList, Ext: &e_BandwidthList})
+var sBandwidths = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBandwidths, Members: &mBandwidths, Type: smithy.ShapeTypeStructure, Ext: &eBandwidths})
+var s_BillingTier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingTier, Type: smithy.ShapeTypeInteger, Ext: &e_BillingTier})
+var s_CloudServiceProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudServiceProvider, Type: smithy.ShapeTypeString, Ext: &e_CloudServiceProvider})
+var sConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure, Ext: &eConnection})
+var s_ConnectionBandwidth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionBandwidth, Type: smithy.ShapeTypeString, Ext: &e_ConnectionBandwidth})
+var s_ConnectionDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionDescription, Type: smithy.ShapeTypeString, Ext: &e_ConnectionDescription})
+var s_ConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionId, Type: smithy.ShapeTypeString, Ext: &e_ConnectionId})
+var s_ConnectionSharedId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionSharedId, Type: smithy.ShapeTypeString, Ext: &e_ConnectionSharedId})
+var sConnectionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeEnum, Ext: &eConnectionState})
+var s_ConnectionSummariesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionSummariesList, Members: &m_ConnectionSummariesList, Type: smithy.ShapeTypeList, Ext: &e_ConnectionSummariesList})
+var sConnectionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionSummary, Members: &mConnectionSummary, Type: smithy.ShapeTypeStructure, Ext: &eConnectionSummary})
+var s_DirectConnectGatewayAttachPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectConnectGatewayAttachPoint, Type: smithy.ShapeTypeString, Ext: &e_DirectConnectGatewayAttachPoint})
+var sEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironment, Members: &mEnvironment, Type: smithy.ShapeTypeStructure, Ext: &eEnvironment})
+var s_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &e_EnvironmentId})
+var s_EnvironmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentList, Members: &m_EnvironmentList, Type: smithy.ShapeTypeList, Ext: &e_EnvironmentList})
+var sEnvironmentState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentState, Members: &mEnvironmentState, Type: smithy.ShapeTypeEnum, Ext: &eEnvironmentState})
+var sInterconnectClientException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInterconnectClientException, Members: &mInterconnectClientException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eInterconnectClientException})
+var sInterconnectServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInterconnectServerException, Members: &mInterconnectServerException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eInterconnectServerException})
+var sInterconnectValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInterconnectValidationException, Members: &mInterconnectValidationException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eInterconnectValidationException})
+var s_LastMileProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastMileProvider, Type: smithy.ShapeTypeString, Ext: &e_LastMileProvider})
+var s_Location = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Location, Type: smithy.ShapeTypeString, Ext: &e_Location})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var s_OwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OwnerAccountId, Type: smithy.ShapeTypeString, Ext: &e_OwnerAccountId})
+var s_ProductType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProductType, Type: smithy.ShapeTypeString, Ext: &e_ProductType})
+var sProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProvider, Members: &mProvider, Type: smithy.ShapeTypeUnion, Ext: &eProvider})
+var sRemoteAccountIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoteAccountIdentifier, Members: &mRemoteAccountIdentifier, Type: smithy.ShapeTypeUnion, Ext: &eRemoteAccountIdentifier})
+var sRemoteAccountIdentifierType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoteAccountIdentifierType, Members: &mRemoteAccountIdentifierType, Type: smithy.ShapeTypeEnum, Ext: &eRemoteAccountIdentifierType})
+var s_RemoteOwnerAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RemoteOwnerAccount, Type: smithy.ShapeTypeString, Ext: &e_RemoteOwnerAccount})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sAcceptConnectionProposalRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptConnectionProposalRequest, Members: &mAcceptConnectionProposalRequest, Type: smithy.ShapeTypeStructure, Ext: &eAcceptConnectionProposalRequest})
+var sAcceptConnectionProposalResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptConnectionProposalResponse, Members: &mAcceptConnectionProposalResponse, Type: smithy.ShapeTypeStructure, Ext: &eAcceptConnectionProposalResponse})
+var sCreateConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectionRequest, Members: &mCreateConnectionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateConnectionRequest})
+var sCreateConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectionResponse, Members: &mCreateConnectionResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateConnectionResponse})
+var sDeleteConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectionRequest, Members: &mDeleteConnectionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteConnectionRequest})
+var sDeleteConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectionResponse, Members: &mDeleteConnectionResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteConnectionResponse})
+var sDescribeConnectionProposalRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectionProposalRequest, Members: &mDescribeConnectionProposalRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConnectionProposalRequest})
+var sDescribeConnectionProposalResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectionProposalResponse, Members: &mDescribeConnectionProposalResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeConnectionProposalResponse})
+var sGetConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectionRequest, Members: &mGetConnectionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetConnectionRequest})
+var sGetConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectionResponse, Members: &mGetConnectionResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetConnectionResponse})
+var sGetEnvironmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnvironmentRequest, Members: &mGetEnvironmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetEnvironmentRequest})
+var sGetEnvironmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnvironmentResponse, Members: &mGetEnvironmentResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetEnvironmentResponse})
+var sListAttachPointsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttachPointsRequest, Members: &mListAttachPointsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAttachPointsRequest})
+var sListAttachPointsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttachPointsResponse, Members: &mListAttachPointsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAttachPointsResponse})
+var sListConnectionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectionsRequest, Members: &mListConnectionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListConnectionsRequest})
+var sListConnectionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectionsResponse, Members: &mListConnectionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListConnectionsResponse})
+var sListEnvironmentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironmentsRequest, Members: &mListEnvironmentsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListEnvironmentsRequest})
+var sListEnvironmentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironmentsResponse, Members: &mListEnvironmentsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListEnvironmentsResponse})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectionRequest, Members: &mUpdateConnectionRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConnectionRequest})
+var sUpdateConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectionResponse, Members: &mUpdateConnectionResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConnectionResponse})
 
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[15]})
-var sAttachPoint_directConnectGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGateway", ID: &i_DirectConnectGatewayAttachPoint, Type: smithy.ShapeTypeString, Ext: &ext[19]})
-var sAttachPoint_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[20]})
-var sAttachPointDescriptor_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iAttachPointType, Members: &mAttachPointType, Type: smithy.ShapeTypeEnum, Ext: &ext[22]})
-var sAttachPointDescriptor_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[23]})
-var sAttachPointDescriptor_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[24]})
-var s_AttachPointDescriptorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttachPointDescriptor, Members: &mAttachPointDescriptor, Type: smithy.ShapeTypeStructure, Ext: &ext[26]})
-var sAttachPointType_DirectConnectGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectConnectGateway", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
-var s_BandwidthList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ConnectionBandwidth, Type: smithy.ShapeTypeString, Ext: &ext[30]})
-var sBandwidths_available = smithy.NewStaticSchema(smithy.StaticSchema{Member: "available", ID: &i_BandwidthList, Members: &m_BandwidthList, Type: smithy.ShapeTypeList, Ext: &ext[32]})
-var sBandwidths_supported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supported", ID: &i_BandwidthList, Members: &m_BandwidthList, Type: smithy.ShapeTypeList, Ext: &ext[33]})
-var sConnection_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ConnectionId, Type: smithy.ShapeTypeString, Ext: &ext[37]})
-var sConnection_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[38]})
-var sConnection_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ConnectionDescription, Type: smithy.ShapeTypeString, Ext: &ext[39]})
-var sConnection_bandwidth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidth", ID: &i_ConnectionBandwidth, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var sConnection_attachPoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachPoint", ID: &iAttachPoint, Members: &mAttachPoint, Type: smithy.ShapeTypeUnion, Ext: &ext[41]})
-var sConnection_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var sConnection_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &iProvider, Members: &mProvider, Type: smithy.ShapeTypeUnion, Ext: &ext[43]})
-var sConnection_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_Location, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var sConnection_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_ProductType, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var sConnection_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeEnum, Ext: &ext[46]})
-var sConnection_sharedId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sharedId", ID: &i_ConnectionSharedId, Type: smithy.ShapeTypeString, Ext: &ext[47]})
-var sConnection_billingTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "billingTier", ID: &i_BillingTier, Type: smithy.ShapeTypeInteger, Ext: &ext[48]})
-var sConnection_ownerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerAccount", ID: &i_OwnerAccountId, Type: smithy.ShapeTypeString, Ext: &ext[49]})
-var sConnection_activationKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activationKey", ID: &i_ActivationKey, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[50]})
-var sConnection_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[51]})
-var sConnectionState_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[57]})
-var sConnectionState_REQUESTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUESTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[58]})
-var sConnectionState_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[59]})
-var sConnectionState_DOWN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOWN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[60]})
-var sConnectionState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[61]})
-var sConnectionState_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[62]})
-var sConnectionState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[63]})
-var sConnectionState_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[64]})
-var s_ConnectionSummariesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnectionSummary, Members: &mConnectionSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[66]})
-var sConnectionSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ConnectionId, Type: smithy.ShapeTypeString, Ext: &ext[68]})
-var sConnectionSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var sConnectionSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ConnectionDescription, Type: smithy.ShapeTypeString, Ext: &ext[70]})
-var sConnectionSummary_bandwidth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidth", ID: &i_ConnectionBandwidth, Type: smithy.ShapeTypeString, Ext: &ext[71]})
-var sConnectionSummary_attachPoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachPoint", ID: &iAttachPoint, Members: &mAttachPoint, Type: smithy.ShapeTypeUnion, Ext: &ext[72]})
-var sConnectionSummary_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &ext[73]})
-var sConnectionSummary_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &iProvider, Members: &mProvider, Type: smithy.ShapeTypeUnion, Ext: &ext[74]})
-var sConnectionSummary_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_Location, Type: smithy.ShapeTypeString, Ext: &ext[75]})
-var sConnectionSummary_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_ProductType, Type: smithy.ShapeTypeString, Ext: &ext[76]})
-var sConnectionSummary_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeEnum, Ext: &ext[77]})
-var sConnectionSummary_sharedId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sharedId", ID: &i_ConnectionSharedId, Type: smithy.ShapeTypeString, Ext: &ext[78]})
-var sConnectionSummary_billingTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "billingTier", ID: &i_BillingTier, Type: smithy.ShapeTypeInteger, Ext: &ext[79]})
-var sEnvironment_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &iProvider, Members: &mProvider, Type: smithy.ShapeTypeUnion, Ext: &ext[82]})
-var sEnvironment_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_Location, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var sEnvironment_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &ext[84]})
-var sEnvironment_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iEnvironmentState, Members: &mEnvironmentState, Type: smithy.ShapeTypeEnum, Ext: &ext[85]})
-var sEnvironment_bandwidths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidths", ID: &iBandwidths, Members: &mBandwidths, Type: smithy.ShapeTypeStructure, Ext: &ext[86]})
-var sEnvironment_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_ProductType, Type: smithy.ShapeTypeString, Ext: &ext[87]})
-var sEnvironment_activationPageUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activationPageUrl", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[88]})
-var sEnvironment_remoteIdentifierType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteIdentifierType", ID: &iRemoteAccountIdentifierType, Members: &mRemoteAccountIdentifierType, Type: smithy.ShapeTypeEnum, Ext: &ext[89]})
-var s_EnvironmentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnvironment, Members: &mEnvironment, Type: smithy.ShapeTypeStructure, Ext: &ext[92]})
-var sEnvironmentState_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[94]})
-var sEnvironmentState_LIMITED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LIMITED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[95]})
-var sEnvironmentState_UNAVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNAVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[96]})
-var sInterconnectClientException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[98]})
-var sInterconnectServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[100]})
-var sInterconnectValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var sProvider_cloudServiceProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudServiceProvider", ID: &i_CloudServiceProvider, Type: smithy.ShapeTypeString, Ext: &ext[110]})
-var sProvider_lastMileProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastMileProvider", ID: &i_LastMileProvider, Type: smithy.ShapeTypeString, Ext: &ext[111]})
-var sRemoteAccountIdentifier_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_RemoteOwnerAccount, Type: smithy.ShapeTypeString, Ext: &ext[113]})
-var sRemoteAccountIdentifierType_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[115]})
-var sRemoteAccountIdentifierType_EMAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[116]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[119]})
-var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[121]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[124]})
-var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[126]})
-var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[127]})
-var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var sAcceptConnectionProposalRequest_attachPoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachPoint", ID: &iAttachPoint, Members: &mAttachPoint, Type: smithy.ShapeTypeUnion, Ext: &ext[132]})
-var sAcceptConnectionProposalRequest_activationKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activationKey", ID: &i_ActivationKey, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[133]})
-var sAcceptConnectionProposalRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ConnectionDescription, Type: smithy.ShapeTypeString, Ext: &ext[134]})
-var sAcceptConnectionProposalRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[135]})
-var sAcceptConnectionProposalRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[136]})
-var sAcceptConnectionProposalResponse_connection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connection", ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure, Ext: &ext[138]})
-var sCreateConnectionRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ConnectionDescription, Type: smithy.ShapeTypeString, Ext: &ext[140]})
-var sCreateConnectionRequest_bandwidth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidth", ID: &i_ConnectionBandwidth, Type: smithy.ShapeTypeString, Ext: &ext[141]})
-var sCreateConnectionRequest_attachPoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachPoint", ID: &iAttachPoint, Members: &mAttachPoint, Type: smithy.ShapeTypeUnion, Ext: &ext[142]})
-var sCreateConnectionRequest_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &ext[143]})
-var sCreateConnectionRequest_remoteAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteAccount", ID: &iRemoteAccountIdentifier, Members: &mRemoteAccountIdentifier, Type: smithy.ShapeTypeUnion, Ext: &ext[144]})
-var sCreateConnectionRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[145]})
-var sCreateConnectionRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[146]})
-var sCreateConnectionResponse_connection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connection", ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure, Ext: &ext[148]})
-var sDeleteConnectionRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_ConnectionId, Type: smithy.ShapeTypeString, Ext: &ext[150]})
-var sDeleteConnectionRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[151]})
-var sDeleteConnectionResponse_connection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connection", ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure, Ext: &ext[153]})
-var sDescribeConnectionProposalRequest_activationKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activationKey", ID: &i_ActivationKey, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[155]})
-var sDescribeConnectionProposalResponse_bandwidth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidth", ID: &i_ConnectionBandwidth, Type: smithy.ShapeTypeString, Ext: &ext[157]})
-var sDescribeConnectionProposalResponse_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &ext[158]})
-var sDescribeConnectionProposalResponse_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &iProvider, Members: &mProvider, Type: smithy.ShapeTypeUnion, Ext: &ext[159]})
-var sDescribeConnectionProposalResponse_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_Location, Type: smithy.ShapeTypeString, Ext: &ext[160]})
-var sGetConnectionRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_ConnectionId, Type: smithy.ShapeTypeString, Ext: &ext[162]})
-var sGetConnectionResponse_connection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connection", ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure, Ext: &ext[164]})
-var sGetEnvironmentRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &ext[166]})
-var sGetEnvironmentResponse_environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environment", ID: &iEnvironment, Members: &mEnvironment, Type: smithy.ShapeTypeStructure, Ext: &ext[168]})
-var sListAttachPointsRequest_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &ext[170]})
-var sListAttachPointsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[171]})
-var sListAttachPointsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[172]})
-var sListAttachPointsResponse_attachPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachPoints", ID: &i_AttachPointDescriptorList, Members: &m_AttachPointDescriptorList, Type: smithy.ShapeTypeList, Ext: &ext[174]})
-var sListAttachPointsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[175]})
-var sListConnectionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[177]})
-var sListConnectionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[178]})
-var sListConnectionsRequest_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeEnum, Ext: &ext[179]})
-var sListConnectionsRequest_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &ext[180]})
-var sListConnectionsRequest_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &iProvider, Members: &mProvider, Type: smithy.ShapeTypeUnion, Ext: &ext[181]})
-var sListConnectionsRequest_attachPoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachPoint", ID: &iAttachPoint, Members: &mAttachPoint, Type: smithy.ShapeTypeUnion, Ext: &ext[182]})
-var sListConnectionsResponse_connections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connections", ID: &i_ConnectionSummariesList, Members: &m_ConnectionSummariesList, Type: smithy.ShapeTypeList, Ext: &ext[184]})
-var sListConnectionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[185]})
-var sListEnvironmentsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[187]})
-var sListEnvironmentsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[188]})
-var sListEnvironmentsRequest_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &iProvider, Members: &mProvider, Type: smithy.ShapeTypeUnion, Ext: &ext[189]})
-var sListEnvironmentsRequest_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_Location, Type: smithy.ShapeTypeString, Ext: &ext[190]})
-var sListEnvironmentsResponse_environments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environments", ID: &i_EnvironmentList, Members: &m_EnvironmentList, Type: smithy.ShapeTypeList, Ext: &ext[192]})
-var sListEnvironmentsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[193]})
-var sListTagsForResourceRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[195]})
-var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[197]})
-var sTagResourceRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[199]})
-var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[200]})
-var sUntagResourceRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[203]})
-var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[204]})
-var sUpdateConnectionRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_ConnectionId, Type: smithy.ShapeTypeString, Ext: &ext[207]})
-var sUpdateConnectionRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ConnectionDescription, Type: smithy.ShapeTypeString, Ext: &ext[208]})
-var sUpdateConnectionRequest_bandwidth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidth", ID: &i_ConnectionBandwidth, Type: smithy.ShapeTypeString, Ext: &ext[209]})
-var sUpdateConnectionRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[210]})
-var sUpdateConnectionResponse_connection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connection", ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure, Ext: &ext[212]})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAttachPoint_directConnectGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGateway", ID: &i_DirectConnectGatewayAttachPoint, Type: smithy.ShapeTypeString, Ext: &eAttachPoint_directConnectGateway})
+var sAttachPoint_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eAttachPoint_arn})
+var sAttachPointDescriptor_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iAttachPointType, Members: &mAttachPointType, Type: smithy.ShapeTypeEnum, Ext: &eAttachPointDescriptor_type})
+var sAttachPointDescriptor_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAttachPointDescriptor_identifier})
+var sAttachPointDescriptor_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAttachPointDescriptor_name})
+var s_AttachPointDescriptorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttachPointDescriptor, Members: &mAttachPointDescriptor, Type: smithy.ShapeTypeStructure, Ext: &e_AttachPointDescriptorList_member})
+var sAttachPointType_DirectConnectGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectConnectGateway", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAttachPointType_DirectConnectGateway})
+var s_BandwidthList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ConnectionBandwidth, Type: smithy.ShapeTypeString, Ext: &e_BandwidthList_member})
+var sBandwidths_available = smithy.NewStaticSchema(smithy.StaticSchema{Member: "available", ID: &i_BandwidthList, Members: &m_BandwidthList, Type: smithy.ShapeTypeList, Ext: &eBandwidths_available})
+var sBandwidths_supported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supported", ID: &i_BandwidthList, Members: &m_BandwidthList, Type: smithy.ShapeTypeList, Ext: &eBandwidths_supported})
+var sConnection_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ConnectionId, Type: smithy.ShapeTypeString, Ext: &eConnection_id})
+var sConnection_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eConnection_arn})
+var sConnection_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ConnectionDescription, Type: smithy.ShapeTypeString, Ext: &eConnection_description})
+var sConnection_bandwidth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidth", ID: &i_ConnectionBandwidth, Type: smithy.ShapeTypeString, Ext: &eConnection_bandwidth})
+var sConnection_attachPoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachPoint", ID: &iAttachPoint, Members: &mAttachPoint, Type: smithy.ShapeTypeUnion, Ext: &eConnection_attachPoint})
+var sConnection_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &eConnection_environmentId})
+var sConnection_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &iProvider, Members: &mProvider, Type: smithy.ShapeTypeUnion, Ext: &eConnection_provider})
+var sConnection_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_Location, Type: smithy.ShapeTypeString, Ext: &eConnection_location})
+var sConnection_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_ProductType, Type: smithy.ShapeTypeString, Ext: &eConnection_type})
+var sConnection_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeEnum, Ext: &eConnection_state})
+var sConnection_sharedId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sharedId", ID: &i_ConnectionSharedId, Type: smithy.ShapeTypeString, Ext: &eConnection_sharedId})
+var sConnection_billingTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "billingTier", ID: &i_BillingTier, Type: smithy.ShapeTypeInteger, Ext: &eConnection_billingTier})
+var sConnection_ownerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerAccount", ID: &i_OwnerAccountId, Type: smithy.ShapeTypeString, Ext: &eConnection_ownerAccount})
+var sConnection_activationKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activationKey", ID: &i_ActivationKey, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eConnection_activationKey})
+var sConnection_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eConnection_tags})
+var sConnectionState_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionState_AVAILABLE})
+var sConnectionState_REQUESTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUESTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionState_REQUESTED})
+var sConnectionState_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionState_PENDING})
+var sConnectionState_DOWN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOWN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionState_DOWN})
+var sConnectionState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionState_DELETING})
+var sConnectionState_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionState_DELETED})
+var sConnectionState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionState_FAILED})
+var sConnectionState_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionState_UPDATING})
+var s_ConnectionSummariesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnectionSummary, Members: &mConnectionSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ConnectionSummariesList_member})
+var sConnectionSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ConnectionId, Type: smithy.ShapeTypeString, Ext: &eConnectionSummary_id})
+var sConnectionSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eConnectionSummary_arn})
+var sConnectionSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ConnectionDescription, Type: smithy.ShapeTypeString, Ext: &eConnectionSummary_description})
+var sConnectionSummary_bandwidth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidth", ID: &i_ConnectionBandwidth, Type: smithy.ShapeTypeString, Ext: &eConnectionSummary_bandwidth})
+var sConnectionSummary_attachPoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachPoint", ID: &iAttachPoint, Members: &mAttachPoint, Type: smithy.ShapeTypeUnion, Ext: &eConnectionSummary_attachPoint})
+var sConnectionSummary_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &eConnectionSummary_environmentId})
+var sConnectionSummary_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &iProvider, Members: &mProvider, Type: smithy.ShapeTypeUnion, Ext: &eConnectionSummary_provider})
+var sConnectionSummary_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_Location, Type: smithy.ShapeTypeString, Ext: &eConnectionSummary_location})
+var sConnectionSummary_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_ProductType, Type: smithy.ShapeTypeString, Ext: &eConnectionSummary_type})
+var sConnectionSummary_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeEnum, Ext: &eConnectionSummary_state})
+var sConnectionSummary_sharedId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sharedId", ID: &i_ConnectionSharedId, Type: smithy.ShapeTypeString, Ext: &eConnectionSummary_sharedId})
+var sConnectionSummary_billingTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "billingTier", ID: &i_BillingTier, Type: smithy.ShapeTypeInteger, Ext: &eConnectionSummary_billingTier})
+var sEnvironment_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &iProvider, Members: &mProvider, Type: smithy.ShapeTypeUnion, Ext: &eEnvironment_provider})
+var sEnvironment_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_Location, Type: smithy.ShapeTypeString, Ext: &eEnvironment_location})
+var sEnvironment_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &eEnvironment_environmentId})
+var sEnvironment_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iEnvironmentState, Members: &mEnvironmentState, Type: smithy.ShapeTypeEnum, Ext: &eEnvironment_state})
+var sEnvironment_bandwidths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidths", ID: &iBandwidths, Members: &mBandwidths, Type: smithy.ShapeTypeStructure, Ext: &eEnvironment_bandwidths})
+var sEnvironment_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_ProductType, Type: smithy.ShapeTypeString, Ext: &eEnvironment_type})
+var sEnvironment_activationPageUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activationPageUrl", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEnvironment_activationPageUrl})
+var sEnvironment_remoteIdentifierType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteIdentifierType", ID: &iRemoteAccountIdentifierType, Members: &mRemoteAccountIdentifierType, Type: smithy.ShapeTypeEnum, Ext: &eEnvironment_remoteIdentifierType})
+var s_EnvironmentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnvironment, Members: &mEnvironment, Type: smithy.ShapeTypeStructure, Ext: &e_EnvironmentList_member})
+var sEnvironmentState_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentState_AVAILABLE})
+var sEnvironmentState_LIMITED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LIMITED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentState_LIMITED})
+var sEnvironmentState_UNAVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNAVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentState_UNAVAILABLE})
+var sInterconnectClientException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInterconnectClientException_message})
+var sInterconnectServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInterconnectServerException_message})
+var sInterconnectValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInterconnectValidationException_message})
+var sProvider_cloudServiceProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudServiceProvider", ID: &i_CloudServiceProvider, Type: smithy.ShapeTypeString, Ext: &eProvider_cloudServiceProvider})
+var sProvider_lastMileProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastMileProvider", ID: &i_LastMileProvider, Type: smithy.ShapeTypeString, Ext: &eProvider_lastMileProvider})
+var sRemoteAccountIdentifier_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_RemoteOwnerAccount, Type: smithy.ShapeTypeString, Ext: &eRemoteAccountIdentifier_identifier})
+var sRemoteAccountIdentifierType_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRemoteAccountIdentifierType_ACCOUNT})
+var sRemoteAccountIdentifierType_EMAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRemoteAccountIdentifierType_EMAIL})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sAcceptConnectionProposalRequest_attachPoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachPoint", ID: &iAttachPoint, Members: &mAttachPoint, Type: smithy.ShapeTypeUnion, Ext: &eAcceptConnectionProposalRequest_attachPoint})
+var sAcceptConnectionProposalRequest_activationKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activationKey", ID: &i_ActivationKey, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eAcceptConnectionProposalRequest_activationKey})
+var sAcceptConnectionProposalRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ConnectionDescription, Type: smithy.ShapeTypeString, Ext: &eAcceptConnectionProposalRequest_description})
+var sAcceptConnectionProposalRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eAcceptConnectionProposalRequest_tags})
+var sAcceptConnectionProposalRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAcceptConnectionProposalRequest_clientToken})
+var sAcceptConnectionProposalResponse_connection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connection", ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure, Ext: &eAcceptConnectionProposalResponse_connection})
+var sCreateConnectionRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ConnectionDescription, Type: smithy.ShapeTypeString, Ext: &eCreateConnectionRequest_description})
+var sCreateConnectionRequest_bandwidth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidth", ID: &i_ConnectionBandwidth, Type: smithy.ShapeTypeString, Ext: &eCreateConnectionRequest_bandwidth})
+var sCreateConnectionRequest_attachPoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachPoint", ID: &iAttachPoint, Members: &mAttachPoint, Type: smithy.ShapeTypeUnion, Ext: &eCreateConnectionRequest_attachPoint})
+var sCreateConnectionRequest_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &eCreateConnectionRequest_environmentId})
+var sCreateConnectionRequest_remoteAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteAccount", ID: &iRemoteAccountIdentifier, Members: &mRemoteAccountIdentifier, Type: smithy.ShapeTypeUnion, Ext: &eCreateConnectionRequest_remoteAccount})
+var sCreateConnectionRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateConnectionRequest_tags})
+var sCreateConnectionRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateConnectionRequest_clientToken})
+var sCreateConnectionResponse_connection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connection", ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure, Ext: &eCreateConnectionResponse_connection})
+var sDeleteConnectionRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_ConnectionId, Type: smithy.ShapeTypeString, Ext: &eDeleteConnectionRequest_identifier})
+var sDeleteConnectionRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeleteConnectionRequest_clientToken})
+var sDeleteConnectionResponse_connection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connection", ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure, Ext: &eDeleteConnectionResponse_connection})
+var sDescribeConnectionProposalRequest_activationKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activationKey", ID: &i_ActivationKey, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eDescribeConnectionProposalRequest_activationKey})
+var sDescribeConnectionProposalResponse_bandwidth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidth", ID: &i_ConnectionBandwidth, Type: smithy.ShapeTypeString, Ext: &eDescribeConnectionProposalResponse_bandwidth})
+var sDescribeConnectionProposalResponse_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &eDescribeConnectionProposalResponse_environmentId})
+var sDescribeConnectionProposalResponse_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &iProvider, Members: &mProvider, Type: smithy.ShapeTypeUnion, Ext: &eDescribeConnectionProposalResponse_provider})
+var sDescribeConnectionProposalResponse_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_Location, Type: smithy.ShapeTypeString, Ext: &eDescribeConnectionProposalResponse_location})
+var sGetConnectionRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_ConnectionId, Type: smithy.ShapeTypeString, Ext: &eGetConnectionRequest_identifier})
+var sGetConnectionResponse_connection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connection", ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure, Ext: &eGetConnectionResponse_connection})
+var sGetEnvironmentRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &eGetEnvironmentRequest_id})
+var sGetEnvironmentResponse_environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environment", ID: &iEnvironment, Members: &mEnvironment, Type: smithy.ShapeTypeStructure, Ext: &eGetEnvironmentResponse_environment})
+var sListAttachPointsRequest_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &eListAttachPointsRequest_environmentId})
+var sListAttachPointsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListAttachPointsRequest_maxResults})
+var sListAttachPointsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListAttachPointsRequest_nextToken})
+var sListAttachPointsResponse_attachPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachPoints", ID: &i_AttachPointDescriptorList, Members: &m_AttachPointDescriptorList, Type: smithy.ShapeTypeList, Ext: &eListAttachPointsResponse_attachPoints})
+var sListAttachPointsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListAttachPointsResponse_nextToken})
+var sListConnectionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListConnectionsRequest_maxResults})
+var sListConnectionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListConnectionsRequest_nextToken})
+var sListConnectionsRequest_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeEnum, Ext: &eListConnectionsRequest_state})
+var sListConnectionsRequest_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString, Ext: &eListConnectionsRequest_environmentId})
+var sListConnectionsRequest_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &iProvider, Members: &mProvider, Type: smithy.ShapeTypeUnion, Ext: &eListConnectionsRequest_provider})
+var sListConnectionsRequest_attachPoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachPoint", ID: &iAttachPoint, Members: &mAttachPoint, Type: smithy.ShapeTypeUnion, Ext: &eListConnectionsRequest_attachPoint})
+var sListConnectionsResponse_connections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connections", ID: &i_ConnectionSummariesList, Members: &m_ConnectionSummariesList, Type: smithy.ShapeTypeList, Ext: &eListConnectionsResponse_connections})
+var sListConnectionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListConnectionsResponse_nextToken})
+var sListEnvironmentsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListEnvironmentsRequest_maxResults})
+var sListEnvironmentsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListEnvironmentsRequest_nextToken})
+var sListEnvironmentsRequest_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &iProvider, Members: &mProvider, Type: smithy.ShapeTypeUnion, Ext: &eListEnvironmentsRequest_provider})
+var sListEnvironmentsRequest_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_Location, Type: smithy.ShapeTypeString, Ext: &eListEnvironmentsRequest_location})
+var sListEnvironmentsResponse_environments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environments", ID: &i_EnvironmentList, Members: &m_EnvironmentList, Type: smithy.ShapeTypeList, Ext: &eListEnvironmentsResponse_environments})
+var sListEnvironmentsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListEnvironmentsResponse_nextToken})
+var sListTagsForResourceRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_arn})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_tags})
+var sTagResourceRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_arn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_tags})
+var sUntagResourceRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_arn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUpdateConnectionRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_ConnectionId, Type: smithy.ShapeTypeString, Ext: &eUpdateConnectionRequest_identifier})
+var sUpdateConnectionRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ConnectionDescription, Type: smithy.ShapeTypeString, Ext: &eUpdateConnectionRequest_description})
+var sUpdateConnectionRequest_bandwidth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidth", ID: &i_ConnectionBandwidth, Type: smithy.ShapeTypeString, Ext: &eUpdateConnectionRequest_bandwidth})
+var sUpdateConnectionRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateConnectionRequest_clientToken})
+var sUpdateConnectionResponse_connection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connection", ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConnectionResponse_connection})
 
 var AcceptConnectionProposal = &sAcceptConnectionProposal
 

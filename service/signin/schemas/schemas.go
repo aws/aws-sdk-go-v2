@@ -7,9 +7,235 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [227]smithy.SchemaExtensions
+var (
+	eCreateOAuth2Token                                                         smithy.SchemaExtensions
+	eCreateOAuth2TokenWithIAM                                                  smithy.SchemaExtensions
+	eCreateOAuth2TokenWithTokenExchange                                        smithy.SchemaExtensions
+	eDeleteConsoleAuthorizationConfiguration                                   smithy.SchemaExtensions
+	eDeleteResourcePermissionStatement                                         smithy.SchemaExtensions
+	eGetConsoleAuthorizationConfiguration                                      smithy.SchemaExtensions
+	eGetResourcePolicy                                                         smithy.SchemaExtensions
+	eIntrospectOAuth2TokenWithIAM                                              smithy.SchemaExtensions
+	eListResourcePermissionStatements                                          smithy.SchemaExtensions
+	ePutConsoleAuthorizationConfiguration                                      smithy.SchemaExtensions
+	ePutResourcePermissionStatement                                            smithy.SchemaExtensions
+	eRevokeOAuth2TokenWithIAM                                                  smithy.SchemaExtensions
+	e_Signin                                                                   smithy.SchemaExtensions
+	eAccessDeniedException                                                     smithy.SchemaExtensions
+	eAccessDeniedException_error                                               smithy.SchemaExtensions
+	eAccessDeniedException_message                                             smithy.SchemaExtensions
+	eAccessToken                                                               smithy.SchemaExtensions
+	eAccessToken_accessKeyId                                                   smithy.SchemaExtensions
+	eAccessToken_secretAccessKey                                               smithy.SchemaExtensions
+	eAccessToken_sessionToken                                                  smithy.SchemaExtensions
+	e_AccountId                                                                smithy.SchemaExtensions
+	e_AuthorizationCode                                                        smithy.SchemaExtensions
+	e_BearerTokenType                                                          smithy.SchemaExtensions
+	e_ClientCredentialsGrantType                                               smithy.SchemaExtensions
+	e_ClientId                                                                 smithy.SchemaExtensions
+	e_ClientToken                                                              smithy.SchemaExtensions
+	e_CodeVerifier                                                             smithy.SchemaExtensions
+	e_Condition                                                                smithy.SchemaExtensions
+	e_Condition_key                                                            smithy.SchemaExtensions
+	e_Condition_value                                                          smithy.SchemaExtensions
+	e_ConditionBlock                                                           smithy.SchemaExtensions
+	e_ConditionBlock_key                                                       smithy.SchemaExtensions
+	e_ConditionBlock_value                                                     smithy.SchemaExtensions
+	e_ConditionType                                                            smithy.SchemaExtensions
+	e_ConditionValues                                                          smithy.SchemaExtensions
+	e_ConditionValues_member                                                   smithy.SchemaExtensions
+	eConflictException                                                         smithy.SchemaExtensions
+	eConflictException_error                                                   smithy.SchemaExtensions
+	eConflictException_message                                                 smithy.SchemaExtensions
+	e_ConsolePermissionMaxResults                                              smithy.SchemaExtensions
+	eCreateOAuth2TokenRequestBody                                              smithy.SchemaExtensions
+	eCreateOAuth2TokenRequestBody_clientId                                     smithy.SchemaExtensions
+	eCreateOAuth2TokenRequestBody_grantType                                    smithy.SchemaExtensions
+	eCreateOAuth2TokenRequestBody_code                                         smithy.SchemaExtensions
+	eCreateOAuth2TokenRequestBody_redirectUri                                  smithy.SchemaExtensions
+	eCreateOAuth2TokenRequestBody_codeVerifier                                 smithy.SchemaExtensions
+	eCreateOAuth2TokenRequestBody_refreshToken                                 smithy.SchemaExtensions
+	eCreateOAuth2TokenResponseBody                                             smithy.SchemaExtensions
+	eCreateOAuth2TokenResponseBody_accessToken                                 smithy.SchemaExtensions
+	eCreateOAuth2TokenResponseBody_tokenType                                   smithy.SchemaExtensions
+	eCreateOAuth2TokenResponseBody_expiresIn                                   smithy.SchemaExtensions
+	eCreateOAuth2TokenResponseBody_refreshToken                                smithy.SchemaExtensions
+	eCreateOAuth2TokenResponseBody_idToken                                     smithy.SchemaExtensions
+	e_ExcludedPrincipal                                                        smithy.SchemaExtensions
+	e_ExpiresIn                                                                smithy.SchemaExtensions
+	e_GrantType                                                                smithy.SchemaExtensions
+	e_IdToken                                                                  smithy.SchemaExtensions
+	eInternalServerException                                                   smithy.SchemaExtensions
+	eInternalServerException_error                                             smithy.SchemaExtensions
+	eInternalServerException_message                                           smithy.SchemaExtensions
+	e_IntrospectedTokenType                                                    smithy.SchemaExtensions
+	e_IntrospectionToken                                                       smithy.SchemaExtensions
+	eInvalidGrantException                                                     smithy.SchemaExtensions
+	eInvalidGrantException_error                                               smithy.SchemaExtensions
+	eInvalidGrantException_message                                             smithy.SchemaExtensions
+	eInvalidScopeException                                                     smithy.SchemaExtensions
+	eInvalidScopeException_error                                               smithy.SchemaExtensions
+	eInvalidScopeException_message                                             smithy.SchemaExtensions
+	e_IssuedOAuthAccessTokenType                                               smithy.SchemaExtensions
+	e_NextToken                                                                smithy.SchemaExtensions
+	eOAuth2ErrorCode                                                           smithy.SchemaExtensions
+	eOAuth2ErrorCode_TOKEN_EXPIRED                                             smithy.SchemaExtensions
+	eOAuth2ErrorCode_USER_CREDENTIALS_CHANGED                                  smithy.SchemaExtensions
+	eOAuth2ErrorCode_INSUFFICIENT_PERMISSIONS                                  smithy.SchemaExtensions
+	eOAuth2ErrorCode_AUTHCODE_EXPIRED                                          smithy.SchemaExtensions
+	eOAuth2ErrorCode_SERVER_ERROR                                              smithy.SchemaExtensions
+	eOAuth2ErrorCode_INVALID_REQUEST                                           smithy.SchemaExtensions
+	eOAuth2ErrorCode_RESOURCE_NOT_FOUND                                        smithy.SchemaExtensions
+	eOAuth2ErrorCode_CONFLICT                                                  smithy.SchemaExtensions
+	eOAuth2ErrorCode_SERVICE_QUOTA_EXCEEDED                                    smithy.SchemaExtensions
+	eOAuth2ErrorCode_OAUTH_UNSUPPORTED_GRANT_TYPE                              smithy.SchemaExtensions
+	eOAuth2ErrorCode_OAUTH_INVALID_REQUEST                                     smithy.SchemaExtensions
+	eOAuth2ErrorCode_OAUTH_INVALID_GRANT                                       smithy.SchemaExtensions
+	eOAuth2ErrorCode_OAUTH_INVALID_SCOPE                                       smithy.SchemaExtensions
+	eOAuth2ErrorCode_OAUTH_INVALID_TARGET                                      smithy.SchemaExtensions
+	eOAuth2ErrorCode_OAUTH_RATE_EXCEEDED                                       smithy.SchemaExtensions
+	eOAuth2ErrorCode_OAUTH_SERVICE_UNAVAILABLE                                 smithy.SchemaExtensions
+	e_OAuthAccessToken                                                         smithy.SchemaExtensions
+	e_PermissionStatementSummaries                                             smithy.SchemaExtensions
+	e_PermissionStatementSummaries_member                                      smithy.SchemaExtensions
+	ePermissionStatementSummary                                                smithy.SchemaExtensions
+	ePermissionStatementSummary_sid                                            smithy.SchemaExtensions
+	ePermissionStatementSummary_condition                                      smithy.SchemaExtensions
+	e_PolicyActions                                                            smithy.SchemaExtensions
+	e_PolicyActions_member                                                     smithy.SchemaExtensions
+	ePolicyStatement                                                           smithy.SchemaExtensions
+	ePolicyStatement_effect                                                    smithy.SchemaExtensions
+	ePolicyStatement_principal                                                 smithy.SchemaExtensions
+	ePolicyStatement_action                                                    smithy.SchemaExtensions
+	ePolicyStatement_resource                                                  smithy.SchemaExtensions
+	ePolicyStatement_condition                                                 smithy.SchemaExtensions
+	e_PolicyStatements                                                         smithy.SchemaExtensions
+	e_PolicyStatements_member                                                  smithy.SchemaExtensions
+	e_Principal                                                                smithy.SchemaExtensions
+	e_Principal_key                                                            smithy.SchemaExtensions
+	e_Principal_value                                                          smithy.SchemaExtensions
+	e_RedirectUri                                                              smithy.SchemaExtensions
+	e_RefreshToken                                                             smithy.SchemaExtensions
+	e_RequestedRegion                                                          smithy.SchemaExtensions
+	e_Resource                                                                 smithy.SchemaExtensions
+	eResourceNotFoundException                                                 smithy.SchemaExtensions
+	eResourceNotFoundException_error                                           smithy.SchemaExtensions
+	eResourceNotFoundException_message                                         smithy.SchemaExtensions
+	e_RevocationToken                                                          smithy.SchemaExtensions
+	e_Scope                                                                    smithy.SchemaExtensions
+	eServiceQuotaExceededException                                             smithy.SchemaExtensions
+	eServiceQuotaExceededException_error                                       smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                                     smithy.SchemaExtensions
+	eServiceUnavailableException                                               smithy.SchemaExtensions
+	eServiceUnavailableException_error                                         smithy.SchemaExtensions
+	eServiceUnavailableException_message                                       smithy.SchemaExtensions
+	eSigninResourceBasedPolicy                                                 smithy.SchemaExtensions
+	eSigninResourceBasedPolicy_version                                         smithy.SchemaExtensions
+	eSigninResourceBasedPolicy_statement                                       smithy.SchemaExtensions
+	e_SourceIp                                                                 smithy.SchemaExtensions
+	e_SourceVpc                                                                smithy.SchemaExtensions
+	e_SourceVpce                                                               smithy.SchemaExtensions
+	e_StatementId                                                              smithy.SchemaExtensions
+	e_SubjectToken                                                             smithy.SchemaExtensions
+	e_SubjectTokenType                                                         smithy.SchemaExtensions
+	e_TargetId                                                                 smithy.SchemaExtensions
+	e_TokenExchangeGrantType                                                   smithy.SchemaExtensions
+	e_TokenExpiresIn                                                           smithy.SchemaExtensions
+	e_TokenType                                                                smithy.SchemaExtensions
+	e_TokenTypeHint                                                            smithy.SchemaExtensions
+	eTooManyRequestsError                                                      smithy.SchemaExtensions
+	eTooManyRequestsError_error                                                smithy.SchemaExtensions
+	eTooManyRequestsError_message                                              smithy.SchemaExtensions
+	eValidationException                                                       smithy.SchemaExtensions
+	eValidationException_error                                                 smithy.SchemaExtensions
+	eValidationException_message                                               smithy.SchemaExtensions
+	e_VpcSourceIp                                                              smithy.SchemaExtensions
+	eCreateOAuth2TokenRequest                                                  smithy.SchemaExtensions
+	eCreateOAuth2TokenRequest_tokenInput                                       smithy.SchemaExtensions
+	eCreateOAuth2TokenResponse                                                 smithy.SchemaExtensions
+	eCreateOAuth2TokenResponse_tokenOutput                                     smithy.SchemaExtensions
+	eCreateOAuth2TokenWithIAMRequest                                           smithy.SchemaExtensions
+	eCreateOAuth2TokenWithIAMRequest_grantType                                 smithy.SchemaExtensions
+	eCreateOAuth2TokenWithIAMRequest_resource                                  smithy.SchemaExtensions
+	eCreateOAuth2TokenWithIAMResponse                                          smithy.SchemaExtensions
+	eCreateOAuth2TokenWithIAMResponse_accessToken                              smithy.SchemaExtensions
+	eCreateOAuth2TokenWithIAMResponse_tokenType                                smithy.SchemaExtensions
+	eCreateOAuth2TokenWithIAMResponse_expiresIn                                smithy.SchemaExtensions
+	eCreateOAuth2TokenWithTokenExchangeRequest                                 smithy.SchemaExtensions
+	eCreateOAuth2TokenWithTokenExchangeRequest_grantType                       smithy.SchemaExtensions
+	eCreateOAuth2TokenWithTokenExchangeRequest_subjectToken                    smithy.SchemaExtensions
+	eCreateOAuth2TokenWithTokenExchangeRequest_subjectTokenType                smithy.SchemaExtensions
+	eCreateOAuth2TokenWithTokenExchangeRequest_resource                        smithy.SchemaExtensions
+	eCreateOAuth2TokenWithTokenExchangeRequest_scope                           smithy.SchemaExtensions
+	eCreateOAuth2TokenWithTokenExchangeResponse                                smithy.SchemaExtensions
+	eCreateOAuth2TokenWithTokenExchangeResponse_accessToken                    smithy.SchemaExtensions
+	eCreateOAuth2TokenWithTokenExchangeResponse_issuedTokenType                smithy.SchemaExtensions
+	eCreateOAuth2TokenWithTokenExchangeResponse_tokenType                      smithy.SchemaExtensions
+	eCreateOAuth2TokenWithTokenExchangeResponse_expiresIn                      smithy.SchemaExtensions
+	eDeleteConsoleAuthorizationConfigurationInput                              smithy.SchemaExtensions
+	eDeleteConsoleAuthorizationConfigurationInput_targetId                     smithy.SchemaExtensions
+	eDeleteConsoleAuthorizationConfigurationOutput                             smithy.SchemaExtensions
+	eDeleteConsoleAuthorizationConfigurationOutput_targetId                    smithy.SchemaExtensions
+	eDeleteConsoleAuthorizationConfigurationOutput_scope                       smithy.SchemaExtensions
+	eDeleteConsoleAuthorizationConfigurationOutput_consoleAuthorizationEnabled smithy.SchemaExtensions
+	eDeleteResourcePermissionStatementInput                                    smithy.SchemaExtensions
+	eDeleteResourcePermissionStatementInput_statementId                        smithy.SchemaExtensions
+	eDeleteResourcePermissionStatementInput_clientToken                        smithy.SchemaExtensions
+	eDeleteResourcePermissionStatementOutput                                   smithy.SchemaExtensions
+	eGetConsoleAuthorizationConfigurationInput                                 smithy.SchemaExtensions
+	eGetConsoleAuthorizationConfigurationInput_targetId                        smithy.SchemaExtensions
+	eGetConsoleAuthorizationConfigurationOutput                                smithy.SchemaExtensions
+	eGetConsoleAuthorizationConfigurationOutput_targetId                       smithy.SchemaExtensions
+	eGetConsoleAuthorizationConfigurationOutput_scope                          smithy.SchemaExtensions
+	eGetConsoleAuthorizationConfigurationOutput_consoleAuthorizationEnabled    smithy.SchemaExtensions
+	eGetResourcePolicyInput                                                    smithy.SchemaExtensions
+	eGetResourcePolicyOutput                                                   smithy.SchemaExtensions
+	eGetResourcePolicyOutput_signinResourceBasedPolicy                         smithy.SchemaExtensions
+	eIntrospectOAuth2TokenWithIAMRequest                                       smithy.SchemaExtensions
+	eIntrospectOAuth2TokenWithIAMRequest_token                                 smithy.SchemaExtensions
+	eIntrospectOAuth2TokenWithIAMRequest_tokenTypeHint                         smithy.SchemaExtensions
+	eIntrospectOAuth2TokenWithIAMResponse                                      smithy.SchemaExtensions
+	eIntrospectOAuth2TokenWithIAMResponse_active                               smithy.SchemaExtensions
+	eIntrospectOAuth2TokenWithIAMResponse_clientId                             smithy.SchemaExtensions
+	eIntrospectOAuth2TokenWithIAMResponse_userId                               smithy.SchemaExtensions
+	eIntrospectOAuth2TokenWithIAMResponse_tokenType                            smithy.SchemaExtensions
+	eIntrospectOAuth2TokenWithIAMResponse_exp                                  smithy.SchemaExtensions
+	eIntrospectOAuth2TokenWithIAMResponse_iat                                  smithy.SchemaExtensions
+	eIntrospectOAuth2TokenWithIAMResponse_nbf                                  smithy.SchemaExtensions
+	eIntrospectOAuth2TokenWithIAMResponse_sub                                  smithy.SchemaExtensions
+	eIntrospectOAuth2TokenWithIAMResponse_aud                                  smithy.SchemaExtensions
+	eIntrospectOAuth2TokenWithIAMResponse_iss                                  smithy.SchemaExtensions
+	eIntrospectOAuth2TokenWithIAMResponse_jti                                  smithy.SchemaExtensions
+	eIntrospectOAuth2TokenWithIAMResponse_accountId                            smithy.SchemaExtensions
+	eIntrospectOAuth2TokenWithIAMResponse_signinSession                        smithy.SchemaExtensions
+	eIntrospectOAuth2TokenWithIAMResponse_resource                             smithy.SchemaExtensions
+	eListResourcePermissionStatementsInput                                     smithy.SchemaExtensions
+	eListResourcePermissionStatementsInput_maxResults                          smithy.SchemaExtensions
+	eListResourcePermissionStatementsInput_nextToken                           smithy.SchemaExtensions
+	eListResourcePermissionStatementsOutput                                    smithy.SchemaExtensions
+	eListResourcePermissionStatementsOutput_permissionStatements               smithy.SchemaExtensions
+	eListResourcePermissionStatementsOutput_nextToken                          smithy.SchemaExtensions
+	ePutConsoleAuthorizationConfigurationInput                                 smithy.SchemaExtensions
+	ePutConsoleAuthorizationConfigurationInput_targetId                        smithy.SchemaExtensions
+	ePutConsoleAuthorizationConfigurationOutput                                smithy.SchemaExtensions
+	ePutConsoleAuthorizationConfigurationOutput_targetId                       smithy.SchemaExtensions
+	ePutConsoleAuthorizationConfigurationOutput_scope                          smithy.SchemaExtensions
+	ePutConsoleAuthorizationConfigurationOutput_consoleAuthorizationEnabled    smithy.SchemaExtensions
+	ePutResourcePermissionStatementInput                                       smithy.SchemaExtensions
+	ePutResourcePermissionStatementInput_sourceVpc                             smithy.SchemaExtensions
+	ePutResourcePermissionStatementInput_signinSourceVpce                      smithy.SchemaExtensions
+	ePutResourcePermissionStatementInput_consoleSourceVpce                     smithy.SchemaExtensions
+	ePutResourcePermissionStatementInput_vpcSourceIp                           smithy.SchemaExtensions
+	ePutResourcePermissionStatementInput_sourceIp                              smithy.SchemaExtensions
+	ePutResourcePermissionStatementInput_requestedRegion                       smithy.SchemaExtensions
+	ePutResourcePermissionStatementInput_excludedPrincipal                     smithy.SchemaExtensions
+	ePutResourcePermissionStatementInput_clientToken                           smithy.SchemaExtensions
+	ePutResourcePermissionStatementOutput                                      smithy.SchemaExtensions
+	ePutResourcePermissionStatementOutput_statementId                          smithy.SchemaExtensions
+	eRevokeOAuth2TokenWithIAMRequest                                           smithy.SchemaExtensions
+	eRevokeOAuth2TokenWithIAMRequest_token                                     smithy.SchemaExtensions
+	eRevokeOAuth2TokenWithIAMResponse                                          smithy.SchemaExtensions
+)
 
 var (
 	iCreateOAuth2Token                             = smithy.ShapeID{Namespace: "com.amazonaws.signin", Name: "CreateOAuth2Token"}
@@ -254,234 +480,234 @@ var mPutResourcePermissionStatementInput = smithy.SchemaMembers{List: []*smithy.
 var mPutResourcePermissionStatementOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourcePermissionStatementOutput_statementId}}
 var mRevokeOAuth2TokenWithIAMRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRevokeOAuth2TokenWithIAMRequest_token}}
 
-var sCreateOAuth2Token = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOAuth2Token, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCreateOAuth2TokenWithIAM = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOAuth2TokenWithIAM, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sCreateOAuth2TokenWithTokenExchange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOAuth2TokenWithTokenExchange, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sDeleteConsoleAuthorizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConsoleAuthorizationConfiguration, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sDeleteResourcePermissionStatement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePermissionStatement, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sGetConsoleAuthorizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConsoleAuthorizationConfiguration, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sGetResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicy, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sIntrospectOAuth2TokenWithIAM = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntrospectOAuth2TokenWithIAM, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sListResourcePermissionStatements = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcePermissionStatements, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sPutConsoleAuthorizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConsoleAuthorizationConfiguration, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sPutResourcePermissionStatement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePermissionStatement, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sRevokeOAuth2TokenWithIAM = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeOAuth2TokenWithIAM, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var s_Signin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Signin, Type: smithy.ShapeTypeService, Ext: &ext[12]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &ext[13]})
-var sAccessToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessToken, Members: &mAccessToken, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &ext[16]})
-var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[20]})
-var s_AuthorizationCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthorizationCode, Type: smithy.ShapeTypeString, Ext: &ext[21]})
-var s_BearerTokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BearerTokenType, Type: smithy.ShapeTypeString, Ext: &ext[22]})
-var s_ClientCredentialsGrantType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientCredentialsGrantType, Type: smithy.ShapeTypeString, Ext: &ext[23]})
-var s_ClientId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientId, Type: smithy.ShapeTypeString, Ext: &ext[24]})
-var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[25]})
-var s_CodeVerifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeVerifier, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var s_Condition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Condition, Members: &m_Condition, Type: smithy.ShapeTypeMap, Ext: &ext[27]})
-var s_ConditionBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConditionBlock, Members: &m_ConditionBlock, Type: smithy.ShapeTypeMap, Ext: &ext[30]})
-var s_ConditionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConditionType, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var s_ConditionValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConditionValues, Members: &m_ConditionValues, Type: smithy.ShapeTypeList, Ext: &ext[34]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &ext[36]})
-var s_ConsolePermissionMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConsolePermissionMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[39]})
-var sCreateOAuth2TokenRequestBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOAuth2TokenRequestBody, Members: &mCreateOAuth2TokenRequestBody, Type: smithy.ShapeTypeStructure, Ext: &ext[40]})
-var sCreateOAuth2TokenResponseBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOAuth2TokenResponseBody, Members: &mCreateOAuth2TokenResponseBody, Type: smithy.ShapeTypeStructure, Ext: &ext[47]})
-var s_ExcludedPrincipal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludedPrincipal, Type: smithy.ShapeTypeString, Ext: &ext[53]})
-var s_ExpiresIn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpiresIn, Type: smithy.ShapeTypeInteger, Ext: &ext[54]})
-var s_GrantType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GrantType, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var s_IdToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdToken, Type: smithy.ShapeTypeString, Ext: &ext[56]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &ext[57]})
-var s_IntrospectedTokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntrospectedTokenType, Type: smithy.ShapeTypeString, Ext: &ext[60]})
-var s_IntrospectionToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntrospectionToken, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &ext[61]})
-var sInvalidGrantException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidGrantException, Members: &mInvalidGrantException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &ext[62]})
-var sInvalidScopeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidScopeException, Members: &mInvalidScopeException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &ext[65]})
-var s_IssuedOAuthAccessTokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IssuedOAuthAccessTokenType, Type: smithy.ShapeTypeString, Ext: &ext[68]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var sOAuth2ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOAuth2ErrorCode, Members: &mOAuth2ErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[70]})
-var s_OAuthAccessToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OAuthAccessToken, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &ext[87]})
-var s_PermissionStatementSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PermissionStatementSummaries, Members: &m_PermissionStatementSummaries, Type: smithy.ShapeTypeList, Ext: &ext[88]})
-var sPermissionStatementSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPermissionStatementSummary, Members: &mPermissionStatementSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[90]})
-var s_PolicyActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyActions, Members: &m_PolicyActions, Type: smithy.ShapeTypeList, Ext: &ext[93]})
-var sPolicyStatement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyStatement, Members: &mPolicyStatement, Type: smithy.ShapeTypeStructure, Ext: &ext[95]})
-var s_PolicyStatements = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyStatements, Members: &m_PolicyStatements, Type: smithy.ShapeTypeList, Ext: &ext[101]})
-var s_Principal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Principal, Members: &m_Principal, Type: smithy.ShapeTypeMap, Ext: &ext[103]})
-var s_RedirectUri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RedirectUri, Type: smithy.ShapeTypeString, Ext: &ext[106]})
-var s_RefreshToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RefreshToken, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &ext[107]})
-var s_RequestedRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestedRegion, Type: smithy.ShapeTypeString, Ext: &ext[108]})
-var s_Resource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Resource, Type: smithy.ShapeTypeString, Ext: &ext[109]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t34, Type: smithy.ShapeTypeStructure, Ext: &ext[110]})
-var s_RevocationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevocationToken, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &ext[113]})
-var s_Scope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Scope, Type: smithy.ShapeTypeString, Ext: &ext[114]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t35, Type: smithy.ShapeTypeStructure, Ext: &ext[115]})
-var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &ext[118]})
-var sSigninResourceBasedPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSigninResourceBasedPolicy, Members: &mSigninResourceBasedPolicy, Type: smithy.ShapeTypeStructure, Ext: &ext[121]})
-var s_SourceIp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceIp, Type: smithy.ShapeTypeString, Ext: &ext[124]})
-var s_SourceVpc = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceVpc, Type: smithy.ShapeTypeString, Ext: &ext[125]})
-var s_SourceVpce = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceVpce, Type: smithy.ShapeTypeString, Ext: &ext[126]})
-var s_StatementId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatementId, Type: smithy.ShapeTypeString, Ext: &ext[127]})
-var s_SubjectToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubjectToken, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &ext[128]})
-var s_SubjectTokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubjectTokenType, Type: smithy.ShapeTypeString, Ext: &ext[129]})
-var s_TargetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetId, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var s_TokenExchangeGrantType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TokenExchangeGrantType, Type: smithy.ShapeTypeString, Ext: &ext[131]})
-var s_TokenExpiresIn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TokenExpiresIn, Type: smithy.ShapeTypeInteger, Ext: &ext[132]})
-var s_TokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TokenType, Type: smithy.ShapeTypeString, Ext: &ext[133]})
-var s_TokenTypeHint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TokenTypeHint, Type: smithy.ShapeTypeString, Ext: &ext[134]})
-var sTooManyRequestsError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsError, Members: &mTooManyRequestsError, Traits: &t39, Type: smithy.ShapeTypeStructure, Ext: &ext[135]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &ext[138]})
-var s_VpcSourceIp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcSourceIp, Type: smithy.ShapeTypeString, Ext: &ext[141]})
-var sCreateOAuth2TokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOAuth2TokenRequest, Members: &mCreateOAuth2TokenRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[142]})
-var sCreateOAuth2TokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOAuth2TokenResponse, Members: &mCreateOAuth2TokenResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[144]})
-var sCreateOAuth2TokenWithIAMRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOAuth2TokenWithIAMRequest, Members: &mCreateOAuth2TokenWithIAMRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[146]})
-var sCreateOAuth2TokenWithIAMResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOAuth2TokenWithIAMResponse, Members: &mCreateOAuth2TokenWithIAMResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[149]})
-var sCreateOAuth2TokenWithTokenExchangeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOAuth2TokenWithTokenExchangeRequest, Members: &mCreateOAuth2TokenWithTokenExchangeRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[153]})
-var sCreateOAuth2TokenWithTokenExchangeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOAuth2TokenWithTokenExchangeResponse, Members: &mCreateOAuth2TokenWithTokenExchangeResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[159]})
-var sDeleteConsoleAuthorizationConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConsoleAuthorizationConfigurationInput, Members: &mDeleteConsoleAuthorizationConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[164]})
-var sDeleteConsoleAuthorizationConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConsoleAuthorizationConfigurationOutput, Members: &mDeleteConsoleAuthorizationConfigurationOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[166]})
-var sDeleteResourcePermissionStatementInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePermissionStatementInput, Members: &mDeleteResourcePermissionStatementInput, Type: smithy.ShapeTypeStructure, Ext: &ext[170]})
-var sDeleteResourcePermissionStatementOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePermissionStatementOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[173]})
-var sGetConsoleAuthorizationConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConsoleAuthorizationConfigurationInput, Members: &mGetConsoleAuthorizationConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[174]})
-var sGetConsoleAuthorizationConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConsoleAuthorizationConfigurationOutput, Members: &mGetConsoleAuthorizationConfigurationOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[176]})
-var sGetResourcePolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyInput, Type: smithy.ShapeTypeStructure, Ext: &ext[180]})
-var sGetResourcePolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyOutput, Members: &mGetResourcePolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[181]})
-var sIntrospectOAuth2TokenWithIAMRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntrospectOAuth2TokenWithIAMRequest, Members: &mIntrospectOAuth2TokenWithIAMRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[183]})
-var sIntrospectOAuth2TokenWithIAMResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntrospectOAuth2TokenWithIAMResponse, Members: &mIntrospectOAuth2TokenWithIAMResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[186]})
-var sListResourcePermissionStatementsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcePermissionStatementsInput, Members: &mListResourcePermissionStatementsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[201]})
-var sListResourcePermissionStatementsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcePermissionStatementsOutput, Members: &mListResourcePermissionStatementsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[204]})
-var sPutConsoleAuthorizationConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConsoleAuthorizationConfigurationInput, Members: &mPutConsoleAuthorizationConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[207]})
-var sPutConsoleAuthorizationConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConsoleAuthorizationConfigurationOutput, Members: &mPutConsoleAuthorizationConfigurationOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[209]})
-var sPutResourcePermissionStatementInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePermissionStatementInput, Members: &mPutResourcePermissionStatementInput, Type: smithy.ShapeTypeStructure, Ext: &ext[213]})
-var sPutResourcePermissionStatementOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePermissionStatementOutput, Members: &mPutResourcePermissionStatementOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[222]})
-var sRevokeOAuth2TokenWithIAMRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeOAuth2TokenWithIAMRequest, Members: &mRevokeOAuth2TokenWithIAMRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[224]})
-var sRevokeOAuth2TokenWithIAMResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeOAuth2TokenWithIAMResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[226]})
+var sCreateOAuth2Token = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOAuth2Token, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateOAuth2Token})
+var sCreateOAuth2TokenWithIAM = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOAuth2TokenWithIAM, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateOAuth2TokenWithIAM})
+var sCreateOAuth2TokenWithTokenExchange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOAuth2TokenWithTokenExchange, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateOAuth2TokenWithTokenExchange})
+var sDeleteConsoleAuthorizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConsoleAuthorizationConfiguration, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDeleteConsoleAuthorizationConfiguration})
+var sDeleteResourcePermissionStatement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePermissionStatement, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDeleteResourcePermissionStatement})
+var sGetConsoleAuthorizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConsoleAuthorizationConfiguration, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eGetConsoleAuthorizationConfiguration})
+var sGetResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicy, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eGetResourcePolicy})
+var sIntrospectOAuth2TokenWithIAM = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntrospectOAuth2TokenWithIAM, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eIntrospectOAuth2TokenWithIAM})
+var sListResourcePermissionStatements = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcePermissionStatements, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eListResourcePermissionStatements})
+var sPutConsoleAuthorizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConsoleAuthorizationConfiguration, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ePutConsoleAuthorizationConfiguration})
+var sPutResourcePermissionStatement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePermissionStatement, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ePutResourcePermissionStatement})
+var sRevokeOAuth2TokenWithIAM = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeOAuth2TokenWithIAM, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eRevokeOAuth2TokenWithIAM})
+var s_Signin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Signin, Type: smithy.ShapeTypeService, Ext: &e_Signin})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessToken, Members: &mAccessToken, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eAccessToken})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountId})
+var s_AuthorizationCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthorizationCode, Type: smithy.ShapeTypeString, Ext: &e_AuthorizationCode})
+var s_BearerTokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BearerTokenType, Type: smithy.ShapeTypeString, Ext: &e_BearerTokenType})
+var s_ClientCredentialsGrantType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientCredentialsGrantType, Type: smithy.ShapeTypeString, Ext: &e_ClientCredentialsGrantType})
+var s_ClientId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientId, Type: smithy.ShapeTypeString, Ext: &e_ClientId})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
+var s_CodeVerifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeVerifier, Type: smithy.ShapeTypeString, Ext: &e_CodeVerifier})
+var s_Condition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Condition, Members: &m_Condition, Type: smithy.ShapeTypeMap, Ext: &e_Condition})
+var s_ConditionBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConditionBlock, Members: &m_ConditionBlock, Type: smithy.ShapeTypeMap, Ext: &e_ConditionBlock})
+var s_ConditionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConditionType, Type: smithy.ShapeTypeString, Ext: &e_ConditionType})
+var s_ConditionValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConditionValues, Members: &m_ConditionValues, Type: smithy.ShapeTypeList, Ext: &e_ConditionValues})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var s_ConsolePermissionMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConsolePermissionMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ConsolePermissionMaxResults})
+var sCreateOAuth2TokenRequestBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOAuth2TokenRequestBody, Members: &mCreateOAuth2TokenRequestBody, Type: smithy.ShapeTypeStructure, Ext: &eCreateOAuth2TokenRequestBody})
+var sCreateOAuth2TokenResponseBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOAuth2TokenResponseBody, Members: &mCreateOAuth2TokenResponseBody, Type: smithy.ShapeTypeStructure, Ext: &eCreateOAuth2TokenResponseBody})
+var s_ExcludedPrincipal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludedPrincipal, Type: smithy.ShapeTypeString, Ext: &e_ExcludedPrincipal})
+var s_ExpiresIn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpiresIn, Type: smithy.ShapeTypeInteger, Ext: &e_ExpiresIn})
+var s_GrantType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GrantType, Type: smithy.ShapeTypeString, Ext: &e_GrantType})
+var s_IdToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdToken, Type: smithy.ShapeTypeString, Ext: &e_IdToken})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var s_IntrospectedTokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntrospectedTokenType, Type: smithy.ShapeTypeString, Ext: &e_IntrospectedTokenType})
+var s_IntrospectionToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntrospectionToken, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &e_IntrospectionToken})
+var sInvalidGrantException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidGrantException, Members: &mInvalidGrantException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eInvalidGrantException})
+var sInvalidScopeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidScopeException, Members: &mInvalidScopeException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eInvalidScopeException})
+var s_IssuedOAuthAccessTokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IssuedOAuthAccessTokenType, Type: smithy.ShapeTypeString, Ext: &e_IssuedOAuthAccessTokenType})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sOAuth2ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOAuth2ErrorCode, Members: &mOAuth2ErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eOAuth2ErrorCode})
+var s_OAuthAccessToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OAuthAccessToken, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &e_OAuthAccessToken})
+var s_PermissionStatementSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PermissionStatementSummaries, Members: &m_PermissionStatementSummaries, Type: smithy.ShapeTypeList, Ext: &e_PermissionStatementSummaries})
+var sPermissionStatementSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPermissionStatementSummary, Members: &mPermissionStatementSummary, Type: smithy.ShapeTypeStructure, Ext: &ePermissionStatementSummary})
+var s_PolicyActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyActions, Members: &m_PolicyActions, Type: smithy.ShapeTypeList, Ext: &e_PolicyActions})
+var sPolicyStatement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyStatement, Members: &mPolicyStatement, Type: smithy.ShapeTypeStructure, Ext: &ePolicyStatement})
+var s_PolicyStatements = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyStatements, Members: &m_PolicyStatements, Type: smithy.ShapeTypeList, Ext: &e_PolicyStatements})
+var s_Principal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Principal, Members: &m_Principal, Type: smithy.ShapeTypeMap, Ext: &e_Principal})
+var s_RedirectUri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RedirectUri, Type: smithy.ShapeTypeString, Ext: &e_RedirectUri})
+var s_RefreshToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RefreshToken, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &e_RefreshToken})
+var s_RequestedRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestedRegion, Type: smithy.ShapeTypeString, Ext: &e_RequestedRegion})
+var s_Resource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Resource, Type: smithy.ShapeTypeString, Ext: &e_Resource})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t34, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var s_RevocationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevocationToken, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &e_RevocationToken})
+var s_Scope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Scope, Type: smithy.ShapeTypeString, Ext: &e_Scope})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t35, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &eServiceUnavailableException})
+var sSigninResourceBasedPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSigninResourceBasedPolicy, Members: &mSigninResourceBasedPolicy, Type: smithy.ShapeTypeStructure, Ext: &eSigninResourceBasedPolicy})
+var s_SourceIp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceIp, Type: smithy.ShapeTypeString, Ext: &e_SourceIp})
+var s_SourceVpc = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceVpc, Type: smithy.ShapeTypeString, Ext: &e_SourceVpc})
+var s_SourceVpce = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceVpce, Type: smithy.ShapeTypeString, Ext: &e_SourceVpce})
+var s_StatementId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatementId, Type: smithy.ShapeTypeString, Ext: &e_StatementId})
+var s_SubjectToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubjectToken, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &e_SubjectToken})
+var s_SubjectTokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubjectTokenType, Type: smithy.ShapeTypeString, Ext: &e_SubjectTokenType})
+var s_TargetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetId, Type: smithy.ShapeTypeString, Ext: &e_TargetId})
+var s_TokenExchangeGrantType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TokenExchangeGrantType, Type: smithy.ShapeTypeString, Ext: &e_TokenExchangeGrantType})
+var s_TokenExpiresIn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TokenExpiresIn, Type: smithy.ShapeTypeInteger, Ext: &e_TokenExpiresIn})
+var s_TokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TokenType, Type: smithy.ShapeTypeString, Ext: &e_TokenType})
+var s_TokenTypeHint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TokenTypeHint, Type: smithy.ShapeTypeString, Ext: &e_TokenTypeHint})
+var sTooManyRequestsError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsError, Members: &mTooManyRequestsError, Traits: &t39, Type: smithy.ShapeTypeStructure, Ext: &eTooManyRequestsError})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var s_VpcSourceIp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcSourceIp, Type: smithy.ShapeTypeString, Ext: &e_VpcSourceIp})
+var sCreateOAuth2TokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOAuth2TokenRequest, Members: &mCreateOAuth2TokenRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateOAuth2TokenRequest})
+var sCreateOAuth2TokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOAuth2TokenResponse, Members: &mCreateOAuth2TokenResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateOAuth2TokenResponse})
+var sCreateOAuth2TokenWithIAMRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOAuth2TokenWithIAMRequest, Members: &mCreateOAuth2TokenWithIAMRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateOAuth2TokenWithIAMRequest})
+var sCreateOAuth2TokenWithIAMResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOAuth2TokenWithIAMResponse, Members: &mCreateOAuth2TokenWithIAMResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateOAuth2TokenWithIAMResponse})
+var sCreateOAuth2TokenWithTokenExchangeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOAuth2TokenWithTokenExchangeRequest, Members: &mCreateOAuth2TokenWithTokenExchangeRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateOAuth2TokenWithTokenExchangeRequest})
+var sCreateOAuth2TokenWithTokenExchangeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOAuth2TokenWithTokenExchangeResponse, Members: &mCreateOAuth2TokenWithTokenExchangeResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateOAuth2TokenWithTokenExchangeResponse})
+var sDeleteConsoleAuthorizationConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConsoleAuthorizationConfigurationInput, Members: &mDeleteConsoleAuthorizationConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteConsoleAuthorizationConfigurationInput})
+var sDeleteConsoleAuthorizationConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConsoleAuthorizationConfigurationOutput, Members: &mDeleteConsoleAuthorizationConfigurationOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteConsoleAuthorizationConfigurationOutput})
+var sDeleteResourcePermissionStatementInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePermissionStatementInput, Members: &mDeleteResourcePermissionStatementInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResourcePermissionStatementInput})
+var sDeleteResourcePermissionStatementOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePermissionStatementOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResourcePermissionStatementOutput})
+var sGetConsoleAuthorizationConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConsoleAuthorizationConfigurationInput, Members: &mGetConsoleAuthorizationConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &eGetConsoleAuthorizationConfigurationInput})
+var sGetConsoleAuthorizationConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConsoleAuthorizationConfigurationOutput, Members: &mGetConsoleAuthorizationConfigurationOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetConsoleAuthorizationConfigurationOutput})
+var sGetResourcePolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyInput, Type: smithy.ShapeTypeStructure, Ext: &eGetResourcePolicyInput})
+var sGetResourcePolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyOutput, Members: &mGetResourcePolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetResourcePolicyOutput})
+var sIntrospectOAuth2TokenWithIAMRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntrospectOAuth2TokenWithIAMRequest, Members: &mIntrospectOAuth2TokenWithIAMRequest, Type: smithy.ShapeTypeStructure, Ext: &eIntrospectOAuth2TokenWithIAMRequest})
+var sIntrospectOAuth2TokenWithIAMResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntrospectOAuth2TokenWithIAMResponse, Members: &mIntrospectOAuth2TokenWithIAMResponse, Type: smithy.ShapeTypeStructure, Ext: &eIntrospectOAuth2TokenWithIAMResponse})
+var sListResourcePermissionStatementsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcePermissionStatementsInput, Members: &mListResourcePermissionStatementsInput, Type: smithy.ShapeTypeStructure, Ext: &eListResourcePermissionStatementsInput})
+var sListResourcePermissionStatementsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcePermissionStatementsOutput, Members: &mListResourcePermissionStatementsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListResourcePermissionStatementsOutput})
+var sPutConsoleAuthorizationConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConsoleAuthorizationConfigurationInput, Members: &mPutConsoleAuthorizationConfigurationInput, Type: smithy.ShapeTypeStructure, Ext: &ePutConsoleAuthorizationConfigurationInput})
+var sPutConsoleAuthorizationConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConsoleAuthorizationConfigurationOutput, Members: &mPutConsoleAuthorizationConfigurationOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutConsoleAuthorizationConfigurationOutput})
+var sPutResourcePermissionStatementInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePermissionStatementInput, Members: &mPutResourcePermissionStatementInput, Type: smithy.ShapeTypeStructure, Ext: &ePutResourcePermissionStatementInput})
+var sPutResourcePermissionStatementOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePermissionStatementOutput, Members: &mPutResourcePermissionStatementOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutResourcePermissionStatementOutput})
+var sRevokeOAuth2TokenWithIAMRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeOAuth2TokenWithIAMRequest, Members: &mRevokeOAuth2TokenWithIAMRequest, Type: smithy.ShapeTypeStructure, Ext: &eRevokeOAuth2TokenWithIAMRequest})
+var sRevokeOAuth2TokenWithIAMResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeOAuth2TokenWithIAMResponse, Type: smithy.ShapeTypeStructure, Ext: &eRevokeOAuth2TokenWithIAMResponse})
 
-var sAccessDeniedException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iOAuth2ErrorCode, Members: &mOAuth2ErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[14]})
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[15]})
-var sAccessToken_accessKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessKeyId", ID: &pString, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[17]})
-var sAccessToken_secretAccessKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretAccessKey", ID: &pString, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &ext[18]})
-var sAccessToken_sessionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionToken", ID: &pString, Traits: &t16, Type: smithy.ShapeTypeString, Ext: &ext[19]})
-var s_Condition_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[28]})
-var s_Condition_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ConditionValues, Members: &m_ConditionValues, Type: smithy.ShapeTypeList, Ext: &ext[29]})
-var s_ConditionBlock_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ConditionType, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var s_ConditionBlock_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_Condition, Members: &m_Condition, Type: smithy.ShapeTypeMap, Ext: &ext[32]})
-var s_ConditionValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var sConflictException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iOAuth2ErrorCode, Members: &mOAuth2ErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[37]})
-var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[38]})
-var sCreateOAuth2TokenRequestBody_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_ClientId, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &ext[41]})
-var sCreateOAuth2TokenRequestBody_grantType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "grantType", ID: &i_GrantType, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var sCreateOAuth2TokenRequestBody_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_AuthorizationCode, Type: smithy.ShapeTypeString, Ext: &ext[43]})
-var sCreateOAuth2TokenRequestBody_redirectUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "redirectUri", ID: &i_RedirectUri, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var sCreateOAuth2TokenRequestBody_codeVerifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeVerifier", ID: &i_CodeVerifier, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var sCreateOAuth2TokenRequestBody_refreshToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "refreshToken", ID: &i_RefreshToken, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[46]})
-var sCreateOAuth2TokenResponseBody_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &iAccessToken, Members: &mAccessToken, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &ext[48]})
-var sCreateOAuth2TokenResponseBody_tokenType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenType", ID: &i_TokenType, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &ext[49]})
-var sCreateOAuth2TokenResponseBody_expiresIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiresIn", ID: &i_ExpiresIn, Traits: &t25, Type: smithy.ShapeTypeInteger, Ext: &ext[50]})
-var sCreateOAuth2TokenResponseBody_refreshToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "refreshToken", ID: &i_RefreshToken, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[51]})
-var sCreateOAuth2TokenResponseBody_idToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idToken", ID: &i_IdToken, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var sInternalServerException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iOAuth2ErrorCode, Members: &mOAuth2ErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[58]})
-var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[59]})
-var sInvalidGrantException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iOAuth2ErrorCode, Members: &mOAuth2ErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[63]})
-var sInvalidGrantException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[64]})
-var sInvalidScopeException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iOAuth2ErrorCode, Members: &mOAuth2ErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[66]})
-var sInvalidScopeException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[67]})
-var sOAuth2ErrorCode_TOKEN_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOKEN_EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[71]})
-var sOAuth2ErrorCode_USER_CREDENTIALS_CHANGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER_CREDENTIALS_CHANGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sOAuth2ErrorCode_INSUFFICIENT_PERMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSUFFICIENT_PERMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[73]})
-var sOAuth2ErrorCode_AUTHCODE_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTHCODE_EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var sOAuth2ErrorCode_SERVER_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVER_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[75]})
-var sOAuth2ErrorCode_INVALID_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[76]})
-var sOAuth2ErrorCode_RESOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
-var sOAuth2ErrorCode_CONFLICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFLICT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[78]})
-var sOAuth2ErrorCode_SERVICE_QUOTA_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_QUOTA_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[79]})
-var sOAuth2ErrorCode_OAUTH_UNSUPPORTED_GRANT_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAUTH_UNSUPPORTED_GRANT_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var sOAuth2ErrorCode_OAUTH_INVALID_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAUTH_INVALID_REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[81]})
-var sOAuth2ErrorCode_OAUTH_INVALID_GRANT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAUTH_INVALID_GRANT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[82]})
-var sOAuth2ErrorCode_OAUTH_INVALID_SCOPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAUTH_INVALID_SCOPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[83]})
-var sOAuth2ErrorCode_OAUTH_INVALID_TARGET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAUTH_INVALID_TARGET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[84]})
-var sOAuth2ErrorCode_OAUTH_RATE_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAUTH_RATE_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[85]})
-var sOAuth2ErrorCode_OAUTH_SERVICE_UNAVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAUTH_SERVICE_UNAVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[86]})
-var s_PermissionStatementSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPermissionStatementSummary, Members: &mPermissionStatementSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[89]})
-var sPermissionStatementSummary_sid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sid", ID: &i_StatementId, Type: smithy.ShapeTypeString, Ext: &ext[91]})
-var sPermissionStatementSummary_condition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "condition", ID: &i_ConditionBlock, Members: &m_ConditionBlock, Type: smithy.ShapeTypeMap, Ext: &ext[92]})
-var s_PolicyActions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[94]})
-var sPolicyStatement_effect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "effect", ID: &pString, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &ext[96]})
-var sPolicyStatement_principal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principal", ID: &i_Principal, Members: &m_Principal, Traits: &t30, Type: smithy.ShapeTypeMap, Ext: &ext[97]})
-var sPolicyStatement_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &i_PolicyActions, Members: &m_PolicyActions, Traits: &t31, Type: smithy.ShapeTypeList, Ext: &ext[98]})
-var sPolicyStatement_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &pString, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ext[99]})
-var sPolicyStatement_condition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "condition", ID: &i_ConditionBlock, Members: &m_ConditionBlock, Traits: &t33, Type: smithy.ShapeTypeMap, Ext: &ext[100]})
-var s_PolicyStatements_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPolicyStatement, Members: &mPolicyStatement, Type: smithy.ShapeTypeStructure, Ext: &ext[102]})
-var s_Principal_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[104]})
-var s_Principal_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[105]})
-var sResourceNotFoundException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iOAuth2ErrorCode, Members: &mOAuth2ErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[111]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[112]})
-var sServiceQuotaExceededException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iOAuth2ErrorCode, Members: &mOAuth2ErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[116]})
-var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[117]})
-var sServiceUnavailableException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iOAuth2ErrorCode, Members: &mOAuth2ErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[119]})
-var sServiceUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[120]})
-var sSigninResourceBasedPolicy_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &pString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &ext[122]})
-var sSigninResourceBasedPolicy_statement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statement", ID: &i_PolicyStatements, Members: &m_PolicyStatements, Traits: &t38, Type: smithy.ShapeTypeList, Ext: &ext[123]})
-var sTooManyRequestsError_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iOAuth2ErrorCode, Members: &mOAuth2ErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[136]})
-var sTooManyRequestsError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[137]})
-var sValidationException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iOAuth2ErrorCode, Members: &mOAuth2ErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[139]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[140]})
-var sCreateOAuth2TokenRequest_tokenInput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenInput", ID: &iCreateOAuth2TokenRequestBody, Members: &mCreateOAuth2TokenRequestBody, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &ext[143]})
-var sCreateOAuth2TokenResponse_tokenOutput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenOutput", ID: &iCreateOAuth2TokenResponseBody, Members: &mCreateOAuth2TokenResponseBody, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &ext[145]})
-var sCreateOAuth2TokenWithIAMRequest_grantType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "grantType", ID: &i_ClientCredentialsGrantType, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &ext[147]})
-var sCreateOAuth2TokenWithIAMRequest_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &i_Resource, Type: smithy.ShapeTypeString, Ext: &ext[148]})
-var sCreateOAuth2TokenWithIAMResponse_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_OAuthAccessToken, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &ext[150]})
-var sCreateOAuth2TokenWithIAMResponse_tokenType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenType", ID: &i_BearerTokenType, Traits: &t43, Type: smithy.ShapeTypeString, Ext: &ext[151]})
-var sCreateOAuth2TokenWithIAMResponse_expiresIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiresIn", ID: &i_TokenExpiresIn, Traits: &t44, Type: smithy.ShapeTypeInteger, Ext: &ext[152]})
-var sCreateOAuth2TokenWithTokenExchangeRequest_grantType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "grantType", ID: &i_TokenExchangeGrantType, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &ext[154]})
-var sCreateOAuth2TokenWithTokenExchangeRequest_subjectToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subjectToken", ID: &i_SubjectToken, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &ext[155]})
-var sCreateOAuth2TokenWithTokenExchangeRequest_subjectTokenType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subjectTokenType", ID: &i_SubjectTokenType, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[156]})
-var sCreateOAuth2TokenWithTokenExchangeRequest_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &i_Resource, Type: smithy.ShapeTypeString, Ext: &ext[157]})
-var sCreateOAuth2TokenWithTokenExchangeRequest_scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scope", ID: &i_Scope, Type: smithy.ShapeTypeString, Ext: &ext[158]})
-var sCreateOAuth2TokenWithTokenExchangeResponse_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_OAuthAccessToken, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &ext[160]})
-var sCreateOAuth2TokenWithTokenExchangeResponse_issuedTokenType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issuedTokenType", ID: &i_IssuedOAuthAccessTokenType, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &ext[161]})
-var sCreateOAuth2TokenWithTokenExchangeResponse_tokenType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenType", ID: &i_BearerTokenType, Traits: &t43, Type: smithy.ShapeTypeString, Ext: &ext[162]})
-var sCreateOAuth2TokenWithTokenExchangeResponse_expiresIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiresIn", ID: &i_TokenExpiresIn, Traits: &t44, Type: smithy.ShapeTypeInteger, Ext: &ext[163]})
-var sDeleteConsoleAuthorizationConfigurationInput_targetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetId", ID: &i_TargetId, Type: smithy.ShapeTypeString, Ext: &ext[165]})
-var sDeleteConsoleAuthorizationConfigurationOutput_targetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetId", ID: &i_TargetId, Type: smithy.ShapeTypeString, Ext: &ext[167]})
-var sDeleteConsoleAuthorizationConfigurationOutput_scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scope", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[168]})
-var sDeleteConsoleAuthorizationConfigurationOutput_consoleAuthorizationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consoleAuthorizationEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[169]})
-var sDeleteResourcePermissionStatementInput_statementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statementId", ID: &i_StatementId, Type: smithy.ShapeTypeString, Ext: &ext[171]})
-var sDeleteResourcePermissionStatementInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[172]})
-var sGetConsoleAuthorizationConfigurationInput_targetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetId", ID: &i_TargetId, Type: smithy.ShapeTypeString, Ext: &ext[175]})
-var sGetConsoleAuthorizationConfigurationOutput_targetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetId", ID: &i_TargetId, Type: smithy.ShapeTypeString, Ext: &ext[177]})
-var sGetConsoleAuthorizationConfigurationOutput_scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scope", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[178]})
-var sGetConsoleAuthorizationConfigurationOutput_consoleAuthorizationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consoleAuthorizationEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[179]})
-var sGetResourcePolicyOutput_signinResourceBasedPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signinResourceBasedPolicy", ID: &iSigninResourceBasedPolicy, Members: &mSigninResourceBasedPolicy, Type: smithy.ShapeTypeStructure, Ext: &ext[182]})
-var sIntrospectOAuth2TokenWithIAMRequest_token = smithy.NewStaticSchema(smithy.StaticSchema{Member: "token", ID: &i_IntrospectionToken, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &ext[184]})
-var sIntrospectOAuth2TokenWithIAMRequest_tokenTypeHint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenTypeHint", ID: &i_TokenTypeHint, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &ext[185]})
-var sIntrospectOAuth2TokenWithIAMResponse_active = smithy.NewStaticSchema(smithy.StaticSchema{Member: "active", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[187]})
-var sIntrospectOAuth2TokenWithIAMResponse_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &pString, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &ext[188]})
-var sIntrospectOAuth2TokenWithIAMResponse_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &pString, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &ext[189]})
-var sIntrospectOAuth2TokenWithIAMResponse_tokenType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenType", ID: &i_IntrospectedTokenType, Traits: &t43, Type: smithy.ShapeTypeString, Ext: &ext[190]})
-var sIntrospectOAuth2TokenWithIAMResponse_exp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exp", ID: &pLong, Traits: &t52, Type: smithy.ShapeTypeLong, Ext: &ext[191]})
-var sIntrospectOAuth2TokenWithIAMResponse_iat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iat", ID: &pLong, Traits: &t53, Type: smithy.ShapeTypeLong, Ext: &ext[192]})
-var sIntrospectOAuth2TokenWithIAMResponse_nbf = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nbf", ID: &pLong, Traits: &t54, Type: smithy.ShapeTypeLong, Ext: &ext[193]})
-var sIntrospectOAuth2TokenWithIAMResponse_sub = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sub", ID: &pString, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &ext[194]})
-var sIntrospectOAuth2TokenWithIAMResponse_aud = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aud", ID: &pString, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &ext[195]})
-var sIntrospectOAuth2TokenWithIAMResponse_iss = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iss", ID: &pString, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &ext[196]})
-var sIntrospectOAuth2TokenWithIAMResponse_jti = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jti", ID: &pString, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &ext[197]})
-var sIntrospectOAuth2TokenWithIAMResponse_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &ext[198]})
-var sIntrospectOAuth2TokenWithIAMResponse_signinSession = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signinSession", ID: &pString, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &ext[199]})
-var sIntrospectOAuth2TokenWithIAMResponse_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &i_Resource, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &ext[200]})
-var sListResourcePermissionStatementsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ConsolePermissionMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[202]})
-var sListResourcePermissionStatementsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[203]})
-var sListResourcePermissionStatementsOutput_permissionStatements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionStatements", ID: &i_PermissionStatementSummaries, Members: &m_PermissionStatementSummaries, Type: smithy.ShapeTypeList, Ext: &ext[205]})
-var sListResourcePermissionStatementsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[206]})
-var sPutConsoleAuthorizationConfigurationInput_targetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetId", ID: &i_TargetId, Type: smithy.ShapeTypeString, Ext: &ext[208]})
-var sPutConsoleAuthorizationConfigurationOutput_targetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetId", ID: &i_TargetId, Type: smithy.ShapeTypeString, Ext: &ext[210]})
-var sPutConsoleAuthorizationConfigurationOutput_scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scope", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[211]})
-var sPutConsoleAuthorizationConfigurationOutput_consoleAuthorizationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consoleAuthorizationEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[212]})
-var sPutResourcePermissionStatementInput_sourceVpc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceVpc", ID: &i_SourceVpc, Type: smithy.ShapeTypeString, Ext: &ext[214]})
-var sPutResourcePermissionStatementInput_signinSourceVpce = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signinSourceVpce", ID: &i_SourceVpce, Type: smithy.ShapeTypeString, Ext: &ext[215]})
-var sPutResourcePermissionStatementInput_consoleSourceVpce = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consoleSourceVpce", ID: &i_SourceVpce, Type: smithy.ShapeTypeString, Ext: &ext[216]})
-var sPutResourcePermissionStatementInput_vpcSourceIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcSourceIp", ID: &i_VpcSourceIp, Type: smithy.ShapeTypeString, Ext: &ext[217]})
-var sPutResourcePermissionStatementInput_sourceIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceIp", ID: &i_SourceIp, Type: smithy.ShapeTypeString, Ext: &ext[218]})
-var sPutResourcePermissionStatementInput_requestedRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestedRegion", ID: &i_RequestedRegion, Type: smithy.ShapeTypeString, Ext: &ext[219]})
-var sPutResourcePermissionStatementInput_excludedPrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "excludedPrincipal", ID: &i_ExcludedPrincipal, Type: smithy.ShapeTypeString, Ext: &ext[220]})
-var sPutResourcePermissionStatementInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[221]})
-var sPutResourcePermissionStatementOutput_statementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statementId", ID: &i_StatementId, Type: smithy.ShapeTypeString, Ext: &ext[223]})
-var sRevokeOAuth2TokenWithIAMRequest_token = smithy.NewStaticSchema(smithy.StaticSchema{Member: "token", ID: &i_RevocationToken, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &ext[225]})
+var sAccessDeniedException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iOAuth2ErrorCode, Members: &mOAuth2ErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eAccessDeniedException_error})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAccessToken_accessKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessKeyId", ID: &pString, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eAccessToken_accessKeyId})
+var sAccessToken_secretAccessKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretAccessKey", ID: &pString, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &eAccessToken_secretAccessKey})
+var sAccessToken_sessionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionToken", ID: &pString, Traits: &t16, Type: smithy.ShapeTypeString, Ext: &eAccessToken_sessionToken})
+var s_Condition_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_Condition_key})
+var s_Condition_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ConditionValues, Members: &m_ConditionValues, Type: smithy.ShapeTypeList, Ext: &e_Condition_value})
+var s_ConditionBlock_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ConditionType, Type: smithy.ShapeTypeString, Ext: &e_ConditionBlock_key})
+var s_ConditionBlock_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_Condition, Members: &m_Condition, Type: smithy.ShapeTypeMap, Ext: &e_ConditionBlock_value})
+var s_ConditionValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_ConditionValues_member})
+var sConflictException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iOAuth2ErrorCode, Members: &mOAuth2ErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eConflictException_error})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sCreateOAuth2TokenRequestBody_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_ClientId, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &eCreateOAuth2TokenRequestBody_clientId})
+var sCreateOAuth2TokenRequestBody_grantType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "grantType", ID: &i_GrantType, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eCreateOAuth2TokenRequestBody_grantType})
+var sCreateOAuth2TokenRequestBody_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_AuthorizationCode, Type: smithy.ShapeTypeString, Ext: &eCreateOAuth2TokenRequestBody_code})
+var sCreateOAuth2TokenRequestBody_redirectUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "redirectUri", ID: &i_RedirectUri, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eCreateOAuth2TokenRequestBody_redirectUri})
+var sCreateOAuth2TokenRequestBody_codeVerifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeVerifier", ID: &i_CodeVerifier, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eCreateOAuth2TokenRequestBody_codeVerifier})
+var sCreateOAuth2TokenRequestBody_refreshToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "refreshToken", ID: &i_RefreshToken, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eCreateOAuth2TokenRequestBody_refreshToken})
+var sCreateOAuth2TokenResponseBody_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &iAccessToken, Members: &mAccessToken, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &eCreateOAuth2TokenResponseBody_accessToken})
+var sCreateOAuth2TokenResponseBody_tokenType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenType", ID: &i_TokenType, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &eCreateOAuth2TokenResponseBody_tokenType})
+var sCreateOAuth2TokenResponseBody_expiresIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiresIn", ID: &i_ExpiresIn, Traits: &t25, Type: smithy.ShapeTypeInteger, Ext: &eCreateOAuth2TokenResponseBody_expiresIn})
+var sCreateOAuth2TokenResponseBody_refreshToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "refreshToken", ID: &i_RefreshToken, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eCreateOAuth2TokenResponseBody_refreshToken})
+var sCreateOAuth2TokenResponseBody_idToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idToken", ID: &i_IdToken, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eCreateOAuth2TokenResponseBody_idToken})
+var sInternalServerException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iOAuth2ErrorCode, Members: &mOAuth2ErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eInternalServerException_error})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sInvalidGrantException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iOAuth2ErrorCode, Members: &mOAuth2ErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eInvalidGrantException_error})
+var sInvalidGrantException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInvalidGrantException_message})
+var sInvalidScopeException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iOAuth2ErrorCode, Members: &mOAuth2ErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eInvalidScopeException_error})
+var sInvalidScopeException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInvalidScopeException_message})
+var sOAuth2ErrorCode_TOKEN_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOKEN_EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOAuth2ErrorCode_TOKEN_EXPIRED})
+var sOAuth2ErrorCode_USER_CREDENTIALS_CHANGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER_CREDENTIALS_CHANGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOAuth2ErrorCode_USER_CREDENTIALS_CHANGED})
+var sOAuth2ErrorCode_INSUFFICIENT_PERMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSUFFICIENT_PERMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOAuth2ErrorCode_INSUFFICIENT_PERMISSIONS})
+var sOAuth2ErrorCode_AUTHCODE_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTHCODE_EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOAuth2ErrorCode_AUTHCODE_EXPIRED})
+var sOAuth2ErrorCode_SERVER_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVER_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOAuth2ErrorCode_SERVER_ERROR})
+var sOAuth2ErrorCode_INVALID_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOAuth2ErrorCode_INVALID_REQUEST})
+var sOAuth2ErrorCode_RESOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOAuth2ErrorCode_RESOURCE_NOT_FOUND})
+var sOAuth2ErrorCode_CONFLICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFLICT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOAuth2ErrorCode_CONFLICT})
+var sOAuth2ErrorCode_SERVICE_QUOTA_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_QUOTA_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOAuth2ErrorCode_SERVICE_QUOTA_EXCEEDED})
+var sOAuth2ErrorCode_OAUTH_UNSUPPORTED_GRANT_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAUTH_UNSUPPORTED_GRANT_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOAuth2ErrorCode_OAUTH_UNSUPPORTED_GRANT_TYPE})
+var sOAuth2ErrorCode_OAUTH_INVALID_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAUTH_INVALID_REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOAuth2ErrorCode_OAUTH_INVALID_REQUEST})
+var sOAuth2ErrorCode_OAUTH_INVALID_GRANT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAUTH_INVALID_GRANT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOAuth2ErrorCode_OAUTH_INVALID_GRANT})
+var sOAuth2ErrorCode_OAUTH_INVALID_SCOPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAUTH_INVALID_SCOPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOAuth2ErrorCode_OAUTH_INVALID_SCOPE})
+var sOAuth2ErrorCode_OAUTH_INVALID_TARGET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAUTH_INVALID_TARGET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOAuth2ErrorCode_OAUTH_INVALID_TARGET})
+var sOAuth2ErrorCode_OAUTH_RATE_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAUTH_RATE_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOAuth2ErrorCode_OAUTH_RATE_EXCEEDED})
+var sOAuth2ErrorCode_OAUTH_SERVICE_UNAVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAUTH_SERVICE_UNAVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOAuth2ErrorCode_OAUTH_SERVICE_UNAVAILABLE})
+var s_PermissionStatementSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPermissionStatementSummary, Members: &mPermissionStatementSummary, Type: smithy.ShapeTypeStructure, Ext: &e_PermissionStatementSummaries_member})
+var sPermissionStatementSummary_sid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sid", ID: &i_StatementId, Type: smithy.ShapeTypeString, Ext: &ePermissionStatementSummary_sid})
+var sPermissionStatementSummary_condition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "condition", ID: &i_ConditionBlock, Members: &m_ConditionBlock, Type: smithy.ShapeTypeMap, Ext: &ePermissionStatementSummary_condition})
+var s_PolicyActions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_PolicyActions_member})
+var sPolicyStatement_effect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "effect", ID: &pString, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &ePolicyStatement_effect})
+var sPolicyStatement_principal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principal", ID: &i_Principal, Members: &m_Principal, Traits: &t30, Type: smithy.ShapeTypeMap, Ext: &ePolicyStatement_principal})
+var sPolicyStatement_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &i_PolicyActions, Members: &m_PolicyActions, Traits: &t31, Type: smithy.ShapeTypeList, Ext: &ePolicyStatement_action})
+var sPolicyStatement_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &pString, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ePolicyStatement_resource})
+var sPolicyStatement_condition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "condition", ID: &i_ConditionBlock, Members: &m_ConditionBlock, Traits: &t33, Type: smithy.ShapeTypeMap, Ext: &ePolicyStatement_condition})
+var s_PolicyStatements_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPolicyStatement, Members: &mPolicyStatement, Type: smithy.ShapeTypeStructure, Ext: &e_PolicyStatements_member})
+var s_Principal_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_Principal_key})
+var s_Principal_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_Principal_value})
+var sResourceNotFoundException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iOAuth2ErrorCode, Members: &mOAuth2ErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eResourceNotFoundException_error})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sServiceQuotaExceededException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iOAuth2ErrorCode, Members: &mOAuth2ErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eServiceQuotaExceededException_error})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sServiceUnavailableException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iOAuth2ErrorCode, Members: &mOAuth2ErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eServiceUnavailableException_error})
+var sServiceUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailableException_message})
+var sSigninResourceBasedPolicy_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &pString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eSigninResourceBasedPolicy_version})
+var sSigninResourceBasedPolicy_statement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statement", ID: &i_PolicyStatements, Members: &m_PolicyStatements, Traits: &t38, Type: smithy.ShapeTypeList, Ext: &eSigninResourceBasedPolicy_statement})
+var sTooManyRequestsError_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iOAuth2ErrorCode, Members: &mOAuth2ErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eTooManyRequestsError_error})
+var sTooManyRequestsError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTooManyRequestsError_message})
+var sValidationException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iOAuth2ErrorCode, Members: &mOAuth2ErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_error})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sCreateOAuth2TokenRequest_tokenInput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenInput", ID: &iCreateOAuth2TokenRequestBody, Members: &mCreateOAuth2TokenRequestBody, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eCreateOAuth2TokenRequest_tokenInput})
+var sCreateOAuth2TokenResponse_tokenOutput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenOutput", ID: &iCreateOAuth2TokenResponseBody, Members: &mCreateOAuth2TokenResponseBody, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eCreateOAuth2TokenResponse_tokenOutput})
+var sCreateOAuth2TokenWithIAMRequest_grantType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "grantType", ID: &i_ClientCredentialsGrantType, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eCreateOAuth2TokenWithIAMRequest_grantType})
+var sCreateOAuth2TokenWithIAMRequest_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &i_Resource, Type: smithy.ShapeTypeString, Ext: &eCreateOAuth2TokenWithIAMRequest_resource})
+var sCreateOAuth2TokenWithIAMResponse_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_OAuthAccessToken, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &eCreateOAuth2TokenWithIAMResponse_accessToken})
+var sCreateOAuth2TokenWithIAMResponse_tokenType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenType", ID: &i_BearerTokenType, Traits: &t43, Type: smithy.ShapeTypeString, Ext: &eCreateOAuth2TokenWithIAMResponse_tokenType})
+var sCreateOAuth2TokenWithIAMResponse_expiresIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiresIn", ID: &i_TokenExpiresIn, Traits: &t44, Type: smithy.ShapeTypeInteger, Ext: &eCreateOAuth2TokenWithIAMResponse_expiresIn})
+var sCreateOAuth2TokenWithTokenExchangeRequest_grantType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "grantType", ID: &i_TokenExchangeGrantType, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eCreateOAuth2TokenWithTokenExchangeRequest_grantType})
+var sCreateOAuth2TokenWithTokenExchangeRequest_subjectToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subjectToken", ID: &i_SubjectToken, Traits: &t45, Type: smithy.ShapeTypeString, Ext: &eCreateOAuth2TokenWithTokenExchangeRequest_subjectToken})
+var sCreateOAuth2TokenWithTokenExchangeRequest_subjectTokenType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subjectTokenType", ID: &i_SubjectTokenType, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eCreateOAuth2TokenWithTokenExchangeRequest_subjectTokenType})
+var sCreateOAuth2TokenWithTokenExchangeRequest_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &i_Resource, Type: smithy.ShapeTypeString, Ext: &eCreateOAuth2TokenWithTokenExchangeRequest_resource})
+var sCreateOAuth2TokenWithTokenExchangeRequest_scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scope", ID: &i_Scope, Type: smithy.ShapeTypeString, Ext: &eCreateOAuth2TokenWithTokenExchangeRequest_scope})
+var sCreateOAuth2TokenWithTokenExchangeResponse_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_OAuthAccessToken, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &eCreateOAuth2TokenWithTokenExchangeResponse_accessToken})
+var sCreateOAuth2TokenWithTokenExchangeResponse_issuedTokenType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issuedTokenType", ID: &i_IssuedOAuthAccessTokenType, Traits: &t47, Type: smithy.ShapeTypeString, Ext: &eCreateOAuth2TokenWithTokenExchangeResponse_issuedTokenType})
+var sCreateOAuth2TokenWithTokenExchangeResponse_tokenType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenType", ID: &i_BearerTokenType, Traits: &t43, Type: smithy.ShapeTypeString, Ext: &eCreateOAuth2TokenWithTokenExchangeResponse_tokenType})
+var sCreateOAuth2TokenWithTokenExchangeResponse_expiresIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiresIn", ID: &i_TokenExpiresIn, Traits: &t44, Type: smithy.ShapeTypeInteger, Ext: &eCreateOAuth2TokenWithTokenExchangeResponse_expiresIn})
+var sDeleteConsoleAuthorizationConfigurationInput_targetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetId", ID: &i_TargetId, Type: smithy.ShapeTypeString, Ext: &eDeleteConsoleAuthorizationConfigurationInput_targetId})
+var sDeleteConsoleAuthorizationConfigurationOutput_targetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetId", ID: &i_TargetId, Type: smithy.ShapeTypeString, Ext: &eDeleteConsoleAuthorizationConfigurationOutput_targetId})
+var sDeleteConsoleAuthorizationConfigurationOutput_scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scope", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeleteConsoleAuthorizationConfigurationOutput_scope})
+var sDeleteConsoleAuthorizationConfigurationOutput_consoleAuthorizationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consoleAuthorizationEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eDeleteConsoleAuthorizationConfigurationOutput_consoleAuthorizationEnabled})
+var sDeleteResourcePermissionStatementInput_statementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statementId", ID: &i_StatementId, Type: smithy.ShapeTypeString, Ext: &eDeleteResourcePermissionStatementInput_statementId})
+var sDeleteResourcePermissionStatementInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eDeleteResourcePermissionStatementInput_clientToken})
+var sGetConsoleAuthorizationConfigurationInput_targetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetId", ID: &i_TargetId, Type: smithy.ShapeTypeString, Ext: &eGetConsoleAuthorizationConfigurationInput_targetId})
+var sGetConsoleAuthorizationConfigurationOutput_targetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetId", ID: &i_TargetId, Type: smithy.ShapeTypeString, Ext: &eGetConsoleAuthorizationConfigurationOutput_targetId})
+var sGetConsoleAuthorizationConfigurationOutput_scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scope", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetConsoleAuthorizationConfigurationOutput_scope})
+var sGetConsoleAuthorizationConfigurationOutput_consoleAuthorizationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consoleAuthorizationEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eGetConsoleAuthorizationConfigurationOutput_consoleAuthorizationEnabled})
+var sGetResourcePolicyOutput_signinResourceBasedPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signinResourceBasedPolicy", ID: &iSigninResourceBasedPolicy, Members: &mSigninResourceBasedPolicy, Type: smithy.ShapeTypeStructure, Ext: &eGetResourcePolicyOutput_signinResourceBasedPolicy})
+var sIntrospectOAuth2TokenWithIAMRequest_token = smithy.NewStaticSchema(smithy.StaticSchema{Member: "token", ID: &i_IntrospectionToken, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eIntrospectOAuth2TokenWithIAMRequest_token})
+var sIntrospectOAuth2TokenWithIAMRequest_tokenTypeHint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenTypeHint", ID: &i_TokenTypeHint, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eIntrospectOAuth2TokenWithIAMRequest_tokenTypeHint})
+var sIntrospectOAuth2TokenWithIAMResponse_active = smithy.NewStaticSchema(smithy.StaticSchema{Member: "active", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eIntrospectOAuth2TokenWithIAMResponse_active})
+var sIntrospectOAuth2TokenWithIAMResponse_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &pString, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &eIntrospectOAuth2TokenWithIAMResponse_clientId})
+var sIntrospectOAuth2TokenWithIAMResponse_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &pString, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eIntrospectOAuth2TokenWithIAMResponse_userId})
+var sIntrospectOAuth2TokenWithIAMResponse_tokenType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenType", ID: &i_IntrospectedTokenType, Traits: &t43, Type: smithy.ShapeTypeString, Ext: &eIntrospectOAuth2TokenWithIAMResponse_tokenType})
+var sIntrospectOAuth2TokenWithIAMResponse_exp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exp", ID: &pLong, Traits: &t52, Type: smithy.ShapeTypeLong, Ext: &eIntrospectOAuth2TokenWithIAMResponse_exp})
+var sIntrospectOAuth2TokenWithIAMResponse_iat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iat", ID: &pLong, Traits: &t53, Type: smithy.ShapeTypeLong, Ext: &eIntrospectOAuth2TokenWithIAMResponse_iat})
+var sIntrospectOAuth2TokenWithIAMResponse_nbf = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nbf", ID: &pLong, Traits: &t54, Type: smithy.ShapeTypeLong, Ext: &eIntrospectOAuth2TokenWithIAMResponse_nbf})
+var sIntrospectOAuth2TokenWithIAMResponse_sub = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sub", ID: &pString, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eIntrospectOAuth2TokenWithIAMResponse_sub})
+var sIntrospectOAuth2TokenWithIAMResponse_aud = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aud", ID: &pString, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eIntrospectOAuth2TokenWithIAMResponse_aud})
+var sIntrospectOAuth2TokenWithIAMResponse_iss = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iss", ID: &pString, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eIntrospectOAuth2TokenWithIAMResponse_iss})
+var sIntrospectOAuth2TokenWithIAMResponse_jti = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jti", ID: &pString, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eIntrospectOAuth2TokenWithIAMResponse_jti})
+var sIntrospectOAuth2TokenWithIAMResponse_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Traits: &t59, Type: smithy.ShapeTypeString, Ext: &eIntrospectOAuth2TokenWithIAMResponse_accountId})
+var sIntrospectOAuth2TokenWithIAMResponse_signinSession = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signinSession", ID: &pString, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eIntrospectOAuth2TokenWithIAMResponse_signinSession})
+var sIntrospectOAuth2TokenWithIAMResponse_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &i_Resource, Traits: &t61, Type: smithy.ShapeTypeString, Ext: &eIntrospectOAuth2TokenWithIAMResponse_resource})
+var sListResourcePermissionStatementsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ConsolePermissionMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListResourcePermissionStatementsInput_maxResults})
+var sListResourcePermissionStatementsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListResourcePermissionStatementsInput_nextToken})
+var sListResourcePermissionStatementsOutput_permissionStatements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissionStatements", ID: &i_PermissionStatementSummaries, Members: &m_PermissionStatementSummaries, Type: smithy.ShapeTypeList, Ext: &eListResourcePermissionStatementsOutput_permissionStatements})
+var sListResourcePermissionStatementsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListResourcePermissionStatementsOutput_nextToken})
+var sPutConsoleAuthorizationConfigurationInput_targetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetId", ID: &i_TargetId, Type: smithy.ShapeTypeString, Ext: &ePutConsoleAuthorizationConfigurationInput_targetId})
+var sPutConsoleAuthorizationConfigurationOutput_targetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetId", ID: &i_TargetId, Type: smithy.ShapeTypeString, Ext: &ePutConsoleAuthorizationConfigurationOutput_targetId})
+var sPutConsoleAuthorizationConfigurationOutput_scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scope", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePutConsoleAuthorizationConfigurationOutput_scope})
+var sPutConsoleAuthorizationConfigurationOutput_consoleAuthorizationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consoleAuthorizationEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ePutConsoleAuthorizationConfigurationOutput_consoleAuthorizationEnabled})
+var sPutResourcePermissionStatementInput_sourceVpc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceVpc", ID: &i_SourceVpc, Type: smithy.ShapeTypeString, Ext: &ePutResourcePermissionStatementInput_sourceVpc})
+var sPutResourcePermissionStatementInput_signinSourceVpce = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signinSourceVpce", ID: &i_SourceVpce, Type: smithy.ShapeTypeString, Ext: &ePutResourcePermissionStatementInput_signinSourceVpce})
+var sPutResourcePermissionStatementInput_consoleSourceVpce = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consoleSourceVpce", ID: &i_SourceVpce, Type: smithy.ShapeTypeString, Ext: &ePutResourcePermissionStatementInput_consoleSourceVpce})
+var sPutResourcePermissionStatementInput_vpcSourceIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcSourceIp", ID: &i_VpcSourceIp, Type: smithy.ShapeTypeString, Ext: &ePutResourcePermissionStatementInput_vpcSourceIp})
+var sPutResourcePermissionStatementInput_sourceIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceIp", ID: &i_SourceIp, Type: smithy.ShapeTypeString, Ext: &ePutResourcePermissionStatementInput_sourceIp})
+var sPutResourcePermissionStatementInput_requestedRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestedRegion", ID: &i_RequestedRegion, Type: smithy.ShapeTypeString, Ext: &ePutResourcePermissionStatementInput_requestedRegion})
+var sPutResourcePermissionStatementInput_excludedPrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "excludedPrincipal", ID: &i_ExcludedPrincipal, Type: smithy.ShapeTypeString, Ext: &ePutResourcePermissionStatementInput_excludedPrincipal})
+var sPutResourcePermissionStatementInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ePutResourcePermissionStatementInput_clientToken})
+var sPutResourcePermissionStatementOutput_statementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statementId", ID: &i_StatementId, Type: smithy.ShapeTypeString, Ext: &ePutResourcePermissionStatementOutput_statementId})
+var sRevokeOAuth2TokenWithIAMRequest_token = smithy.NewStaticSchema(smithy.StaticSchema{Member: "token", ID: &i_RevocationToken, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eRevokeOAuth2TokenWithIAMRequest_token})
 
 var CreateOAuth2Token = &sCreateOAuth2Token
 

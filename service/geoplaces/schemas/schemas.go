@@ -7,9 +7,840 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [832]smithy.SchemaExtensions
+var (
+	eAutocomplete                                                   smithy.SchemaExtensions
+	eGeocode                                                        smithy.SchemaExtensions
+	eGetPlace                                                       smithy.SchemaExtensions
+	eReverseGeocode                                                 smithy.SchemaExtensions
+	eSearchNearby                                                   smithy.SchemaExtensions
+	eSearchText                                                     smithy.SchemaExtensions
+	eSuggest                                                        smithy.SchemaExtensions
+	e_PlacesService                                                 smithy.SchemaExtensions
+	eAccessDeniedException                                          smithy.SchemaExtensions
+	eAccessDeniedException_Message                                  smithy.SchemaExtensions
+	eAccessPoint                                                    smithy.SchemaExtensions
+	eAccessPoint_Position                                           smithy.SchemaExtensions
+	eAccessPoint_Type                                               smithy.SchemaExtensions
+	eAccessPoint_Primary                                            smithy.SchemaExtensions
+	eAccessPoint_Label                                              smithy.SchemaExtensions
+	e_AccessPointList                                               smithy.SchemaExtensions
+	e_AccessPointList_member                                        smithy.SchemaExtensions
+	eAccessPointType                                                smithy.SchemaExtensions
+	eAccessPointType_DELIVERY                                       smithy.SchemaExtensions
+	eAccessPointType_EMERGENCY                                      smithy.SchemaExtensions
+	eAccessPointType_ENTRANCE                                       smithy.SchemaExtensions
+	eAccessPointType_LOADING                                        smithy.SchemaExtensions
+	eAccessPointType_OTHER                                          smithy.SchemaExtensions
+	eAccessPointType_PARKING                                        smithy.SchemaExtensions
+	eAccessPointType_TAXI                                           smithy.SchemaExtensions
+	eAccessRestriction                                              smithy.SchemaExtensions
+	eAccessRestriction_Restricted                                   smithy.SchemaExtensions
+	eAccessRestriction_Categories                                   smithy.SchemaExtensions
+	e_AccessRestrictionList                                         smithy.SchemaExtensions
+	e_AccessRestrictionList_member                                  smithy.SchemaExtensions
+	eAddress                                                        smithy.SchemaExtensions
+	eAddress_Label                                                  smithy.SchemaExtensions
+	eAddress_Country                                                smithy.SchemaExtensions
+	eAddress_Region                                                 smithy.SchemaExtensions
+	eAddress_SubRegion                                              smithy.SchemaExtensions
+	eAddress_Locality                                               smithy.SchemaExtensions
+	eAddress_District                                               smithy.SchemaExtensions
+	eAddress_SubDistrict                                            smithy.SchemaExtensions
+	eAddress_PostalCode                                             smithy.SchemaExtensions
+	eAddress_Block                                                  smithy.SchemaExtensions
+	eAddress_SubBlock                                               smithy.SchemaExtensions
+	eAddress_Intersection                                           smithy.SchemaExtensions
+	eAddress_Street                                                 smithy.SchemaExtensions
+	eAddress_StreetComponents                                       smithy.SchemaExtensions
+	eAddress_AddressNumber                                          smithy.SchemaExtensions
+	eAddress_Building                                               smithy.SchemaExtensions
+	eAddress_SecondaryAddressComponents                             smithy.SchemaExtensions
+	eAddressComponentMatchScores                                    smithy.SchemaExtensions
+	eAddressComponentMatchScores_Country                            smithy.SchemaExtensions
+	eAddressComponentMatchScores_Region                             smithy.SchemaExtensions
+	eAddressComponentMatchScores_SubRegion                          smithy.SchemaExtensions
+	eAddressComponentMatchScores_Locality                           smithy.SchemaExtensions
+	eAddressComponentMatchScores_District                           smithy.SchemaExtensions
+	eAddressComponentMatchScores_SubDistrict                        smithy.SchemaExtensions
+	eAddressComponentMatchScores_PostalCode                         smithy.SchemaExtensions
+	eAddressComponentMatchScores_Block                              smithy.SchemaExtensions
+	eAddressComponentMatchScores_SubBlock                           smithy.SchemaExtensions
+	eAddressComponentMatchScores_Intersection                       smithy.SchemaExtensions
+	eAddressComponentMatchScores_AddressNumber                      smithy.SchemaExtensions
+	eAddressComponentMatchScores_Building                           smithy.SchemaExtensions
+	eAddressComponentMatchScores_SecondaryAddressComponents         smithy.SchemaExtensions
+	eAddressComponentPhonemes                                       smithy.SchemaExtensions
+	eAddressComponentPhonemes_Country                               smithy.SchemaExtensions
+	eAddressComponentPhonemes_Region                                smithy.SchemaExtensions
+	eAddressComponentPhonemes_SubRegion                             smithy.SchemaExtensions
+	eAddressComponentPhonemes_Locality                              smithy.SchemaExtensions
+	eAddressComponentPhonemes_District                              smithy.SchemaExtensions
+	eAddressComponentPhonemes_SubDistrict                           smithy.SchemaExtensions
+	eAddressComponentPhonemes_Block                                 smithy.SchemaExtensions
+	eAddressComponentPhonemes_SubBlock                              smithy.SchemaExtensions
+	eAddressComponentPhonemes_Street                                smithy.SchemaExtensions
+	eAddressTranslationComponent                                    smithy.SchemaExtensions
+	eAddressTranslationComponent_DISTRICT                           smithy.SchemaExtensions
+	eAddressTranslationComponent_LOCALITY                           smithy.SchemaExtensions
+	eAddressTranslationComponent_REGION                             smithy.SchemaExtensions
+	eAddressTranslationComponent_SUB_REGION                         smithy.SchemaExtensions
+	e_AddressTranslationComponentList                               smithy.SchemaExtensions
+	e_AddressTranslationComponentList_member                        smithy.SchemaExtensions
+	eAdminNames                                                     smithy.SchemaExtensions
+	eAdminNames_Names                                               smithy.SchemaExtensions
+	eAdminNames_Preference                                          smithy.SchemaExtensions
+	e_AdminNamesList                                                smithy.SchemaExtensions
+	e_AdminNamesList_member                                         smithy.SchemaExtensions
+	eAdminNamesPreference                                           smithy.SchemaExtensions
+	eAdminNamesPreference_ALTERNATIVE                               smithy.SchemaExtensions
+	eAdminNamesPreference_PRIMARY                                   smithy.SchemaExtensions
+	e_ApiKey                                                        smithy.SchemaExtensions
+	eAutocompleteAdditionalFeature                                  smithy.SchemaExtensions
+	eAutocompleteAdditionalFeature_CORE                             smithy.SchemaExtensions
+	e_AutocompleteAdditionalFeatureList                             smithy.SchemaExtensions
+	e_AutocompleteAdditionalFeatureList_member                      smithy.SchemaExtensions
+	eAutocompleteAddressHighlights                                  smithy.SchemaExtensions
+	eAutocompleteAddressHighlights_Label                            smithy.SchemaExtensions
+	eAutocompleteAddressHighlights_Country                          smithy.SchemaExtensions
+	eAutocompleteAddressHighlights_Region                           smithy.SchemaExtensions
+	eAutocompleteAddressHighlights_SubRegion                        smithy.SchemaExtensions
+	eAutocompleteAddressHighlights_Locality                         smithy.SchemaExtensions
+	eAutocompleteAddressHighlights_District                         smithy.SchemaExtensions
+	eAutocompleteAddressHighlights_SubDistrict                      smithy.SchemaExtensions
+	eAutocompleteAddressHighlights_Street                           smithy.SchemaExtensions
+	eAutocompleteAddressHighlights_Block                            smithy.SchemaExtensions
+	eAutocompleteAddressHighlights_SubBlock                         smithy.SchemaExtensions
+	eAutocompleteAddressHighlights_Intersection                     smithy.SchemaExtensions
+	eAutocompleteAddressHighlights_PostalCode                       smithy.SchemaExtensions
+	eAutocompleteAddressHighlights_AddressNumber                    smithy.SchemaExtensions
+	eAutocompleteAddressHighlights_Building                         smithy.SchemaExtensions
+	eAutocompleteFilter                                             smithy.SchemaExtensions
+	eAutocompleteFilter_BoundingBox                                 smithy.SchemaExtensions
+	eAutocompleteFilter_Circle                                      smithy.SchemaExtensions
+	eAutocompleteFilter_IncludeCountries                            smithy.SchemaExtensions
+	eAutocompleteFilter_IncludePlaceTypes                           smithy.SchemaExtensions
+	eAutocompleteFilterPlaceType                                    smithy.SchemaExtensions
+	eAutocompleteFilterPlaceType_LOCALITY                           smithy.SchemaExtensions
+	eAutocompleteFilterPlaceType_POSTAL_CODE                        smithy.SchemaExtensions
+	eAutocompleteFilterPlaceType_STREET                             smithy.SchemaExtensions
+	eAutocompleteFilterPlaceType_INTERSECTION                       smithy.SchemaExtensions
+	eAutocompleteFilterPlaceType_POINT_ADDRESS                      smithy.SchemaExtensions
+	eAutocompleteFilterPlaceType_INTERPOLATED_ADDRESS               smithy.SchemaExtensions
+	eAutocompleteFilterPlaceType_COUNTRY                            smithy.SchemaExtensions
+	eAutocompleteFilterPlaceType_REGION                             smithy.SchemaExtensions
+	e_AutocompleteFilterPlaceTypeList                               smithy.SchemaExtensions
+	e_AutocompleteFilterPlaceTypeList_member                        smithy.SchemaExtensions
+	eAutocompleteHighlights                                         smithy.SchemaExtensions
+	eAutocompleteHighlights_Title                                   smithy.SchemaExtensions
+	eAutocompleteHighlights_Address                                 smithy.SchemaExtensions
+	eAutocompleteIntendedUse                                        smithy.SchemaExtensions
+	eAutocompleteIntendedUse_SINGLE_USE                             smithy.SchemaExtensions
+	eAutocompleteResultItem                                         smithy.SchemaExtensions
+	eAutocompleteResultItem_PlaceId                                 smithy.SchemaExtensions
+	eAutocompleteResultItem_PlaceType                               smithy.SchemaExtensions
+	eAutocompleteResultItem_Title                                   smithy.SchemaExtensions
+	eAutocompleteResultItem_Address                                 smithy.SchemaExtensions
+	eAutocompleteResultItem_Distance                                smithy.SchemaExtensions
+	eAutocompleteResultItem_Language                                smithy.SchemaExtensions
+	eAutocompleteResultItem_PoliticalView                           smithy.SchemaExtensions
+	eAutocompleteResultItem_Highlights                              smithy.SchemaExtensions
+	eAutocompleteResultItem_EstimatedPointAddress                   smithy.SchemaExtensions
+	e_AutocompleteResultItemList                                    smithy.SchemaExtensions
+	e_AutocompleteResultItemList_member                             smithy.SchemaExtensions
+	e_BoundingBox                                                   smithy.SchemaExtensions
+	e_BoundingBox_member                                            smithy.SchemaExtensions
+	eBusinessChain                                                  smithy.SchemaExtensions
+	eBusinessChain_Name                                             smithy.SchemaExtensions
+	eBusinessChain_Id                                               smithy.SchemaExtensions
+	e_BusinessChainList                                             smithy.SchemaExtensions
+	e_BusinessChainList_member                                      smithy.SchemaExtensions
+	eCategory                                                       smithy.SchemaExtensions
+	eCategory_Id                                                    smithy.SchemaExtensions
+	eCategory_Name                                                  smithy.SchemaExtensions
+	eCategory_LocalizedName                                         smithy.SchemaExtensions
+	eCategory_Primary                                               smithy.SchemaExtensions
+	e_CategoryList                                                  smithy.SchemaExtensions
+	e_CategoryList_member                                           smithy.SchemaExtensions
+	eComponentMatchScores                                           smithy.SchemaExtensions
+	eComponentMatchScores_Title                                     smithy.SchemaExtensions
+	eComponentMatchScores_Address                                   smithy.SchemaExtensions
+	eContactDetails                                                 smithy.SchemaExtensions
+	eContactDetails_Label                                           smithy.SchemaExtensions
+	eContactDetails_Value                                           smithy.SchemaExtensions
+	eContactDetails_Categories                                      smithy.SchemaExtensions
+	e_ContactDetailsList                                            smithy.SchemaExtensions
+	e_ContactDetailsList_member                                     smithy.SchemaExtensions
+	eContacts                                                       smithy.SchemaExtensions
+	eContacts_Phones                                                smithy.SchemaExtensions
+	eContacts_Faxes                                                 smithy.SchemaExtensions
+	eContacts_Websites                                              smithy.SchemaExtensions
+	eContacts_Emails                                                smithy.SchemaExtensions
+	eCountry                                                        smithy.SchemaExtensions
+	eCountry_Code2                                                  smithy.SchemaExtensions
+	eCountry_Code3                                                  smithy.SchemaExtensions
+	eCountry_Name                                                   smithy.SchemaExtensions
+	e_CountryCode                                                   smithy.SchemaExtensions
+	e_CountryCode2                                                  smithy.SchemaExtensions
+	e_CountryCode3                                                  smithy.SchemaExtensions
+	e_CountryCodeList                                               smithy.SchemaExtensions
+	e_CountryCodeList_member                                        smithy.SchemaExtensions
+	eCountryHighlights                                              smithy.SchemaExtensions
+	eCountryHighlights_Code                                         smithy.SchemaExtensions
+	eCountryHighlights_Name                                         smithy.SchemaExtensions
+	eCrossReference                                                 smithy.SchemaExtensions
+	eCrossReference_Source                                          smithy.SchemaExtensions
+	eCrossReference_SourcePlaceId                                   smithy.SchemaExtensions
+	eCrossReference_SourceCategories                                smithy.SchemaExtensions
+	e_CrossReferenceList                                            smithy.SchemaExtensions
+	e_CrossReferenceList_member                                     smithy.SchemaExtensions
+	e_DistanceMeters                                                smithy.SchemaExtensions
+	e_DurationSeconds                                               smithy.SchemaExtensions
+	e_FilterBusinessChainList                                       smithy.SchemaExtensions
+	e_FilterBusinessChainList_member                                smithy.SchemaExtensions
+	e_FilterCategoryList                                            smithy.SchemaExtensions
+	e_FilterCategoryList_member                                     smithy.SchemaExtensions
+	eFilterCircle                                                   smithy.SchemaExtensions
+	eFilterCircle_Center                                            smithy.SchemaExtensions
+	eFilterCircle_Radius                                            smithy.SchemaExtensions
+	e_FilterFoodTypeList                                            smithy.SchemaExtensions
+	e_FilterFoodTypeList_member                                     smithy.SchemaExtensions
+	eFoodType                                                       smithy.SchemaExtensions
+	eFoodType_LocalizedName                                         smithy.SchemaExtensions
+	eFoodType_Id                                                    smithy.SchemaExtensions
+	eFoodType_Primary                                               smithy.SchemaExtensions
+	e_FoodTypeList                                                  smithy.SchemaExtensions
+	e_FoodTypeList_member                                           smithy.SchemaExtensions
+	eGeocodeAdditionalFeature                                       smithy.SchemaExtensions
+	eGeocodeAdditionalFeature_TIME_ZONE                             smithy.SchemaExtensions
+	eGeocodeAdditionalFeature_ACCESS                                smithy.SchemaExtensions
+	eGeocodeAdditionalFeature_SECONDARY_ADDRESSES                   smithy.SchemaExtensions
+	eGeocodeAdditionalFeature_INTERSECTIONS                         smithy.SchemaExtensions
+	e_GeocodeAdditionalFeatureList                                  smithy.SchemaExtensions
+	e_GeocodeAdditionalFeatureList_member                           smithy.SchemaExtensions
+	eGeocodeAddressNamesMode                                        smithy.SchemaExtensions
+	eGeocodeAddressNamesMode_MATCHED                                smithy.SchemaExtensions
+	eGeocodeAddressNamesMode_ADMINISTRATIVE                         smithy.SchemaExtensions
+	eGeocodeFilter                                                  smithy.SchemaExtensions
+	eGeocodeFilter_IncludeCountries                                 smithy.SchemaExtensions
+	eGeocodeFilter_IncludePlaceTypes                                smithy.SchemaExtensions
+	eGeocodeFilterPlaceType                                         smithy.SchemaExtensions
+	eGeocodeFilterPlaceType_LOCALITY                                smithy.SchemaExtensions
+	eGeocodeFilterPlaceType_POSTAL_CODE                             smithy.SchemaExtensions
+	eGeocodeFilterPlaceType_INTERSECTION                            smithy.SchemaExtensions
+	eGeocodeFilterPlaceType_STREET                                  smithy.SchemaExtensions
+	eGeocodeFilterPlaceType_POINT_ADDRESS                           smithy.SchemaExtensions
+	eGeocodeFilterPlaceType_INTERPOLATED_ADDRESS                    smithy.SchemaExtensions
+	eGeocodeFilterPlaceType_SECONDARY_ADDRESS                       smithy.SchemaExtensions
+	eGeocodeFilterPlaceType_POINT_OF_INTEREST                       smithy.SchemaExtensions
+	eGeocodeFilterPlaceType_COUNTRY                                 smithy.SchemaExtensions
+	eGeocodeFilterPlaceType_REGION                                  smithy.SchemaExtensions
+	e_GeocodeFilterPlaceTypeList                                    smithy.SchemaExtensions
+	e_GeocodeFilterPlaceTypeList_member                             smithy.SchemaExtensions
+	eGeocodeIntendedUse                                             smithy.SchemaExtensions
+	eGeocodeIntendedUse_SINGLE_USE                                  smithy.SchemaExtensions
+	eGeocodeIntendedUse_STORAGE                                     smithy.SchemaExtensions
+	eGeocodeParsedQuery                                             smithy.SchemaExtensions
+	eGeocodeParsedQuery_Title                                       smithy.SchemaExtensions
+	eGeocodeParsedQuery_Address                                     smithy.SchemaExtensions
+	eGeocodeParsedQueryAddressComponents                            smithy.SchemaExtensions
+	eGeocodeParsedQueryAddressComponents_Country                    smithy.SchemaExtensions
+	eGeocodeParsedQueryAddressComponents_Region                     smithy.SchemaExtensions
+	eGeocodeParsedQueryAddressComponents_SubRegion                  smithy.SchemaExtensions
+	eGeocodeParsedQueryAddressComponents_Locality                   smithy.SchemaExtensions
+	eGeocodeParsedQueryAddressComponents_District                   smithy.SchemaExtensions
+	eGeocodeParsedQueryAddressComponents_SubDistrict                smithy.SchemaExtensions
+	eGeocodeParsedQueryAddressComponents_PostalCode                 smithy.SchemaExtensions
+	eGeocodeParsedQueryAddressComponents_Block                      smithy.SchemaExtensions
+	eGeocodeParsedQueryAddressComponents_SubBlock                   smithy.SchemaExtensions
+	eGeocodeParsedQueryAddressComponents_Street                     smithy.SchemaExtensions
+	eGeocodeParsedQueryAddressComponents_AddressNumber              smithy.SchemaExtensions
+	eGeocodeParsedQueryAddressComponents_Building                   smithy.SchemaExtensions
+	eGeocodeParsedQueryAddressComponents_SecondaryAddressComponents smithy.SchemaExtensions
+	eGeocodeParsedQueryAddressComponents_OtherComponents            smithy.SchemaExtensions
+	eGeocodeQueryComponents                                         smithy.SchemaExtensions
+	eGeocodeQueryComponents_Country                                 smithy.SchemaExtensions
+	eGeocodeQueryComponents_Region                                  smithy.SchemaExtensions
+	eGeocodeQueryComponents_SubRegion                               smithy.SchemaExtensions
+	eGeocodeQueryComponents_Locality                                smithy.SchemaExtensions
+	eGeocodeQueryComponents_District                                smithy.SchemaExtensions
+	eGeocodeQueryComponents_Street                                  smithy.SchemaExtensions
+	eGeocodeQueryComponents_AddressNumber                           smithy.SchemaExtensions
+	eGeocodeQueryComponents_PostalCode                              smithy.SchemaExtensions
+	eGeocodeResultItem                                              smithy.SchemaExtensions
+	eGeocodeResultItem_PlaceId                                      smithy.SchemaExtensions
+	eGeocodeResultItem_PlaceType                                    smithy.SchemaExtensions
+	eGeocodeResultItem_Title                                        smithy.SchemaExtensions
+	eGeocodeResultItem_Address                                      smithy.SchemaExtensions
+	eGeocodeResultItem_AddressNumberCorrected                       smithy.SchemaExtensions
+	eGeocodeResultItem_PostalCodeDetails                            smithy.SchemaExtensions
+	eGeocodeResultItem_Position                                     smithy.SchemaExtensions
+	eGeocodeResultItem_Distance                                     smithy.SchemaExtensions
+	eGeocodeResultItem_MapView                                      smithy.SchemaExtensions
+	eGeocodeResultItem_Categories                                   smithy.SchemaExtensions
+	eGeocodeResultItem_FoodTypes                                    smithy.SchemaExtensions
+	eGeocodeResultItem_AccessPoints                                 smithy.SchemaExtensions
+	eGeocodeResultItem_TimeZone                                     smithy.SchemaExtensions
+	eGeocodeResultItem_PoliticalView                                smithy.SchemaExtensions
+	eGeocodeResultItem_MatchScores                                  smithy.SchemaExtensions
+	eGeocodeResultItem_ParsedQuery                                  smithy.SchemaExtensions
+	eGeocodeResultItem_Intersections                                smithy.SchemaExtensions
+	eGeocodeResultItem_MainAddress                                  smithy.SchemaExtensions
+	eGeocodeResultItem_SecondaryAddresses                           smithy.SchemaExtensions
+	eGeocodeResultItem_Translations                                 smithy.SchemaExtensions
+	eGeocodeResultItem_EstimatedPointAddress                        smithy.SchemaExtensions
+	e_GeocodeResultItemList                                         smithy.SchemaExtensions
+	e_GeocodeResultItemList_member                                  smithy.SchemaExtensions
+	eGetPlaceAdditionalFeature                                      smithy.SchemaExtensions
+	eGetPlaceAdditionalFeature_TIME_ZONE                            smithy.SchemaExtensions
+	eGetPlaceAdditionalFeature_PHONEMES                             smithy.SchemaExtensions
+	eGetPlaceAdditionalFeature_ACCESS                               smithy.SchemaExtensions
+	eGetPlaceAdditionalFeature_CONTACT                              smithy.SchemaExtensions
+	eGetPlaceAdditionalFeature_SECONDARY_ADDRESSES                  smithy.SchemaExtensions
+	eGetPlaceAdditionalFeature_CROSS_REFERENCES                     smithy.SchemaExtensions
+	e_GetPlaceAdditionalFeatureList                                 smithy.SchemaExtensions
+	e_GetPlaceAdditionalFeatureList_member                          smithy.SchemaExtensions
+	eGetPlaceAddressNamesMode                                       smithy.SchemaExtensions
+	eGetPlaceAddressNamesMode_ADMINISTRATIVE                        smithy.SchemaExtensions
+	eGetPlaceIntendedUse                                            smithy.SchemaExtensions
+	eGetPlaceIntendedUse_SINGLE_USE                                 smithy.SchemaExtensions
+	eGetPlaceIntendedUse_STORAGE                                    smithy.SchemaExtensions
+	e_Heading                                                       smithy.SchemaExtensions
+	eHighlight                                                      smithy.SchemaExtensions
+	eHighlight_StartIndex                                           smithy.SchemaExtensions
+	eHighlight_EndIndex                                             smithy.SchemaExtensions
+	eHighlight_Value                                                smithy.SchemaExtensions
+	e_HighlightList                                                 smithy.SchemaExtensions
+	e_HighlightList_member                                          smithy.SchemaExtensions
+	eInternalServerException                                        smithy.SchemaExtensions
+	eInternalServerException_Message                                smithy.SchemaExtensions
+	eIntersection                                                   smithy.SchemaExtensions
+	eIntersection_PlaceId                                           smithy.SchemaExtensions
+	eIntersection_Title                                             smithy.SchemaExtensions
+	eIntersection_Address                                           smithy.SchemaExtensions
+	eIntersection_Position                                          smithy.SchemaExtensions
+	eIntersection_Distance                                          smithy.SchemaExtensions
+	eIntersection_RouteDistance                                     smithy.SchemaExtensions
+	eIntersection_MapView                                           smithy.SchemaExtensions
+	eIntersection_AccessPoints                                      smithy.SchemaExtensions
+	e_IntersectionHighlightsList                                    smithy.SchemaExtensions
+	e_IntersectionHighlightsList_member                             smithy.SchemaExtensions
+	e_IntersectionList                                              smithy.SchemaExtensions
+	e_IntersectionList_member                                       smithy.SchemaExtensions
+	e_IntersectionStreet                                            smithy.SchemaExtensions
+	e_IntersectionStreetList                                        smithy.SchemaExtensions
+	e_IntersectionStreetList_member                                 smithy.SchemaExtensions
+	e_LanguageTag                                                   smithy.SchemaExtensions
+	e_MatchScore                                                    smithy.SchemaExtensions
+	eMatchScoreDetails                                              smithy.SchemaExtensions
+	eMatchScoreDetails_Overall                                      smithy.SchemaExtensions
+	eMatchScoreDetails_Components                                   smithy.SchemaExtensions
+	e_MatchScoreList                                                smithy.SchemaExtensions
+	e_MatchScoreList_member                                         smithy.SchemaExtensions
+	eOpeningHours                                                   smithy.SchemaExtensions
+	eOpeningHours_Display                                           smithy.SchemaExtensions
+	eOpeningHours_OpenNow                                           smithy.SchemaExtensions
+	eOpeningHours_Components                                        smithy.SchemaExtensions
+	eOpeningHours_Categories                                        smithy.SchemaExtensions
+	eOpeningHoursComponents                                         smithy.SchemaExtensions
+	eOpeningHoursComponents_OpenTime                                smithy.SchemaExtensions
+	eOpeningHoursComponents_OpenDuration                            smithy.SchemaExtensions
+	eOpeningHoursComponents_Recurrence                              smithy.SchemaExtensions
+	e_OpeningHoursComponentsList                                    smithy.SchemaExtensions
+	e_OpeningHoursComponentsList_member                             smithy.SchemaExtensions
+	e_OpeningHoursDisplay                                           smithy.SchemaExtensions
+	e_OpeningHoursDisplayList                                       smithy.SchemaExtensions
+	e_OpeningHoursDisplayList_member                                smithy.SchemaExtensions
+	e_OpeningHoursList                                              smithy.SchemaExtensions
+	e_OpeningHoursList_member                                       smithy.SchemaExtensions
+	eParsedQueryComponent                                           smithy.SchemaExtensions
+	eParsedQueryComponent_StartIndex                                smithy.SchemaExtensions
+	eParsedQueryComponent_EndIndex                                  smithy.SchemaExtensions
+	eParsedQueryComponent_Value                                     smithy.SchemaExtensions
+	eParsedQueryComponent_QueryComponent                            smithy.SchemaExtensions
+	e_ParsedQueryComponentList                                      smithy.SchemaExtensions
+	e_ParsedQueryComponentList_member                               smithy.SchemaExtensions
+	eParsedQuerySecondaryAddressComponent                           smithy.SchemaExtensions
+	eParsedQuerySecondaryAddressComponent_StartIndex                smithy.SchemaExtensions
+	eParsedQuerySecondaryAddressComponent_EndIndex                  smithy.SchemaExtensions
+	eParsedQuerySecondaryAddressComponent_Value                     smithy.SchemaExtensions
+	eParsedQuerySecondaryAddressComponent_Number                    smithy.SchemaExtensions
+	eParsedQuerySecondaryAddressComponent_Designator                smithy.SchemaExtensions
+	e_ParsedQuerySecondaryAddressComponentList                      smithy.SchemaExtensions
+	e_ParsedQuerySecondaryAddressComponentList_member               smithy.SchemaExtensions
+	ePhonemeDetails                                                 smithy.SchemaExtensions
+	ePhonemeDetails_Title                                           smithy.SchemaExtensions
+	ePhonemeDetails_Address                                         smithy.SchemaExtensions
+	ePhonemeTranscription                                           smithy.SchemaExtensions
+	ePhonemeTranscription_Value                                     smithy.SchemaExtensions
+	ePhonemeTranscription_Language                                  smithy.SchemaExtensions
+	ePhonemeTranscription_Preferred                                 smithy.SchemaExtensions
+	e_PhonemeTranscriptionList                                      smithy.SchemaExtensions
+	e_PhonemeTranscriptionList_member                               smithy.SchemaExtensions
+	ePlaceAttribute                                                 smithy.SchemaExtensions
+	ePlaceAttribute_DRIVE_THROUGH                                   smithy.SchemaExtensions
+	e_PlaceAttributeList                                            smithy.SchemaExtensions
+	e_PlaceAttributeList_member                                     smithy.SchemaExtensions
+	ePlaceType                                                      smithy.SchemaExtensions
+	ePlaceType_COUNTRY                                              smithy.SchemaExtensions
+	ePlaceType_REGION                                               smithy.SchemaExtensions
+	ePlaceType_SUB_REGION                                           smithy.SchemaExtensions
+	ePlaceType_LOCALITY                                             smithy.SchemaExtensions
+	ePlaceType_DISTRICT                                             smithy.SchemaExtensions
+	ePlaceType_SUB_DISTRICT                                         smithy.SchemaExtensions
+	ePlaceType_POSTAL_CODE                                          smithy.SchemaExtensions
+	ePlaceType_BLOCK                                                smithy.SchemaExtensions
+	ePlaceType_SUB_BLOCK                                            smithy.SchemaExtensions
+	ePlaceType_INTERSECTION                                         smithy.SchemaExtensions
+	ePlaceType_STREET                                               smithy.SchemaExtensions
+	ePlaceType_POINT_OF_INTEREST                                    smithy.SchemaExtensions
+	ePlaceType_POINT_ADDRESS                                        smithy.SchemaExtensions
+	ePlaceType_INTERPOLATED_ADDRESS                                 smithy.SchemaExtensions
+	ePlaceType_SECONDARY_ADDRESS                                    smithy.SchemaExtensions
+	ePlaceType_INFERRED_SECONDARY_ADDRESS                           smithy.SchemaExtensions
+	e_Position                                                      smithy.SchemaExtensions
+	e_Position_member                                               smithy.SchemaExtensions
+	ePostalAuthority                                                smithy.SchemaExtensions
+	ePostalAuthority_USPS                                           smithy.SchemaExtensions
+	ePostalCodeDetails                                              smithy.SchemaExtensions
+	ePostalCodeDetails_PostalCode                                   smithy.SchemaExtensions
+	ePostalCodeDetails_PostalAuthority                              smithy.SchemaExtensions
+	ePostalCodeDetails_PostalCodeType                               smithy.SchemaExtensions
+	ePostalCodeDetails_UspsZip                                      smithy.SchemaExtensions
+	ePostalCodeDetails_UspsZipPlus4                                 smithy.SchemaExtensions
+	e_PostalCodeDetailsList                                         smithy.SchemaExtensions
+	e_PostalCodeDetailsList_member                                  smithy.SchemaExtensions
+	ePostalCodeMode                                                 smithy.SchemaExtensions
+	ePostalCodeMode_MERGE_ALL_SPANNED_LOCALITIES                    smithy.SchemaExtensions
+	ePostalCodeMode_ENUMERATE_SPANNED_LOCALITIES                    smithy.SchemaExtensions
+	ePostalCodeMode_ENUMERATE_SPANNED_DISTRICTS                     smithy.SchemaExtensions
+	ePostalCodeType                                                 smithy.SchemaExtensions
+	ePostalCodeType_USPS_ZIP                                        smithy.SchemaExtensions
+	ePostalCodeType_USPS_ZIP_PLUS_4                                 smithy.SchemaExtensions
+	eQueryRefinement                                                smithy.SchemaExtensions
+	eQueryRefinement_RefinedTerm                                    smithy.SchemaExtensions
+	eQueryRefinement_OriginalTerm                                   smithy.SchemaExtensions
+	eQueryRefinement_StartIndex                                     smithy.SchemaExtensions
+	eQueryRefinement_EndIndex                                       smithy.SchemaExtensions
+	e_QueryRefinementList                                           smithy.SchemaExtensions
+	e_QueryRefinementList_member                                    smithy.SchemaExtensions
+	eQueryType                                                      smithy.SchemaExtensions
+	eQueryType_CATEGORY                                             smithy.SchemaExtensions
+	eQueryType_BUSINESS_CHAIN                                       smithy.SchemaExtensions
+	eRecordTypeCode                                                 smithy.SchemaExtensions
+	eRecordTypeCode_FIRM                                            smithy.SchemaExtensions
+	eRecordTypeCode_GENERAL                                         smithy.SchemaExtensions
+	eRecordTypeCode_HIGH_RISE                                       smithy.SchemaExtensions
+	eRecordTypeCode_POST_OFFICE_BOX                                 smithy.SchemaExtensions
+	eRecordTypeCode_RURAL                                           smithy.SchemaExtensions
+	eRecordTypeCode_STREET                                          smithy.SchemaExtensions
+	eRegion                                                         smithy.SchemaExtensions
+	eRegion_Code                                                    smithy.SchemaExtensions
+	eRegion_Name                                                    smithy.SchemaExtensions
+	eRegionHighlights                                               smithy.SchemaExtensions
+	eRegionHighlights_Code                                          smithy.SchemaExtensions
+	eRegionHighlights_Name                                          smithy.SchemaExtensions
+	eRelatedPlace                                                   smithy.SchemaExtensions
+	eRelatedPlace_PlaceId                                           smithy.SchemaExtensions
+	eRelatedPlace_PlaceType                                         smithy.SchemaExtensions
+	eRelatedPlace_Title                                             smithy.SchemaExtensions
+	eRelatedPlace_Address                                           smithy.SchemaExtensions
+	eRelatedPlace_Position                                          smithy.SchemaExtensions
+	eRelatedPlace_AccessPoints                                      smithy.SchemaExtensions
+	e_RelatedPlaceList                                              smithy.SchemaExtensions
+	e_RelatedPlaceList_member                                       smithy.SchemaExtensions
+	eReverseGeocodeAdditionalFeature                                smithy.SchemaExtensions
+	eReverseGeocodeAdditionalFeature_TIME_ZONE                      smithy.SchemaExtensions
+	eReverseGeocodeAdditionalFeature_ACCESS                         smithy.SchemaExtensions
+	eReverseGeocodeAdditionalFeature_INTERSECTIONS                  smithy.SchemaExtensions
+	e_ReverseGeocodeAdditionalFeatureList                           smithy.SchemaExtensions
+	e_ReverseGeocodeAdditionalFeatureList_member                    smithy.SchemaExtensions
+	eReverseGeocodeAddressNamesMode                                 smithy.SchemaExtensions
+	eReverseGeocodeAddressNamesMode_ADMINISTRATIVE                  smithy.SchemaExtensions
+	eReverseGeocodeFilter                                           smithy.SchemaExtensions
+	eReverseGeocodeFilter_IncludePlaceTypes                         smithy.SchemaExtensions
+	eReverseGeocodeFilterPlaceType                                  smithy.SchemaExtensions
+	eReverseGeocodeFilterPlaceType_LOCALITY                         smithy.SchemaExtensions
+	eReverseGeocodeFilterPlaceType_INTERSECTION                     smithy.SchemaExtensions
+	eReverseGeocodeFilterPlaceType_STREET                           smithy.SchemaExtensions
+	eReverseGeocodeFilterPlaceType_POINT_ADDRESS                    smithy.SchemaExtensions
+	eReverseGeocodeFilterPlaceType_INTERPOLATED_ADDRESS             smithy.SchemaExtensions
+	eReverseGeocodeFilterPlaceType_SECONDARY_ADDRESS                smithy.SchemaExtensions
+	eReverseGeocodeFilterPlaceType_POINT_OF_INTEREST                smithy.SchemaExtensions
+	e_ReverseGeocodeFilterPlaceTypeList                             smithy.SchemaExtensions
+	e_ReverseGeocodeFilterPlaceTypeList_member                      smithy.SchemaExtensions
+	eReverseGeocodeIntendedUse                                      smithy.SchemaExtensions
+	eReverseGeocodeIntendedUse_SINGLE_USE                           smithy.SchemaExtensions
+	eReverseGeocodeIntendedUse_STORAGE                              smithy.SchemaExtensions
+	eReverseGeocodeResultItem                                       smithy.SchemaExtensions
+	eReverseGeocodeResultItem_PlaceId                               smithy.SchemaExtensions
+	eReverseGeocodeResultItem_PlaceType                             smithy.SchemaExtensions
+	eReverseGeocodeResultItem_Title                                 smithy.SchemaExtensions
+	eReverseGeocodeResultItem_Address                               smithy.SchemaExtensions
+	eReverseGeocodeResultItem_AddressNumberCorrected                smithy.SchemaExtensions
+	eReverseGeocodeResultItem_PostalCodeDetails                     smithy.SchemaExtensions
+	eReverseGeocodeResultItem_Position                              smithy.SchemaExtensions
+	eReverseGeocodeResultItem_Distance                              smithy.SchemaExtensions
+	eReverseGeocodeResultItem_MapView                               smithy.SchemaExtensions
+	eReverseGeocodeResultItem_Categories                            smithy.SchemaExtensions
+	eReverseGeocodeResultItem_FoodTypes                             smithy.SchemaExtensions
+	eReverseGeocodeResultItem_AccessPoints                          smithy.SchemaExtensions
+	eReverseGeocodeResultItem_TimeZone                              smithy.SchemaExtensions
+	eReverseGeocodeResultItem_PoliticalView                         smithy.SchemaExtensions
+	eReverseGeocodeResultItem_Intersections                         smithy.SchemaExtensions
+	eReverseGeocodeResultItem_MainAddress                           smithy.SchemaExtensions
+	eReverseGeocodeResultItem_EstimatedPointAddress                 smithy.SchemaExtensions
+	e_ReverseGeocodeResultItemList                                  smithy.SchemaExtensions
+	e_ReverseGeocodeResultItemList_member                           smithy.SchemaExtensions
+	eSearchNearbyAdditionalFeature                                  smithy.SchemaExtensions
+	eSearchNearbyAdditionalFeature_TIME_ZONE                        smithy.SchemaExtensions
+	eSearchNearbyAdditionalFeature_PHONEMES                         smithy.SchemaExtensions
+	eSearchNearbyAdditionalFeature_ACCESS                           smithy.SchemaExtensions
+	eSearchNearbyAdditionalFeature_CONTACT                          smithy.SchemaExtensions
+	eSearchNearbyAdditionalFeature_CROSS_REFERENCES                 smithy.SchemaExtensions
+	e_SearchNearbyAdditionalFeatureList                             smithy.SchemaExtensions
+	e_SearchNearbyAdditionalFeatureList_member                      smithy.SchemaExtensions
+	eSearchNearbyFilter                                             smithy.SchemaExtensions
+	eSearchNearbyFilter_BoundingBox                                 smithy.SchemaExtensions
+	eSearchNearbyFilter_IncludeCountries                            smithy.SchemaExtensions
+	eSearchNearbyFilter_IncludeCategories                           smithy.SchemaExtensions
+	eSearchNearbyFilter_ExcludeCategories                           smithy.SchemaExtensions
+	eSearchNearbyFilter_IncludeBusinessChains                       smithy.SchemaExtensions
+	eSearchNearbyFilter_ExcludeBusinessChains                       smithy.SchemaExtensions
+	eSearchNearbyFilter_IncludeFoodTypes                            smithy.SchemaExtensions
+	eSearchNearbyFilter_ExcludeFoodTypes                            smithy.SchemaExtensions
+	eSearchNearbyIntendedUse                                        smithy.SchemaExtensions
+	eSearchNearbyIntendedUse_SINGLE_USE                             smithy.SchemaExtensions
+	eSearchNearbyIntendedUse_STORAGE                                smithy.SchemaExtensions
+	eSearchNearbyResultItem                                         smithy.SchemaExtensions
+	eSearchNearbyResultItem_PlaceId                                 smithy.SchemaExtensions
+	eSearchNearbyResultItem_PlaceType                               smithy.SchemaExtensions
+	eSearchNearbyResultItem_Title                                   smithy.SchemaExtensions
+	eSearchNearbyResultItem_Address                                 smithy.SchemaExtensions
+	eSearchNearbyResultItem_AddressNumberCorrected                  smithy.SchemaExtensions
+	eSearchNearbyResultItem_Position                                smithy.SchemaExtensions
+	eSearchNearbyResultItem_Distance                                smithy.SchemaExtensions
+	eSearchNearbyResultItem_MapView                                 smithy.SchemaExtensions
+	eSearchNearbyResultItem_Categories                              smithy.SchemaExtensions
+	eSearchNearbyResultItem_FoodTypes                               smithy.SchemaExtensions
+	eSearchNearbyResultItem_BusinessChains                          smithy.SchemaExtensions
+	eSearchNearbyResultItem_Contacts                                smithy.SchemaExtensions
+	eSearchNearbyResultItem_OpeningHours                            smithy.SchemaExtensions
+	eSearchNearbyResultItem_AccessPoints                            smithy.SchemaExtensions
+	eSearchNearbyResultItem_AccessRestrictions                      smithy.SchemaExtensions
+	eSearchNearbyResultItem_TimeZone                                smithy.SchemaExtensions
+	eSearchNearbyResultItem_PoliticalView                           smithy.SchemaExtensions
+	eSearchNearbyResultItem_Phonemes                                smithy.SchemaExtensions
+	eSearchNearbyResultItem_PlaceAttributes                         smithy.SchemaExtensions
+	eSearchNearbyResultItem_CrossReferences                         smithy.SchemaExtensions
+	e_SearchNearbyResultItemList                                    smithy.SchemaExtensions
+	e_SearchNearbyResultItemList_member                             smithy.SchemaExtensions
+	eSearchTextAdditionalFeature                                    smithy.SchemaExtensions
+	eSearchTextAdditionalFeature_TIME_ZONE                          smithy.SchemaExtensions
+	eSearchTextAdditionalFeature_PHONEMES                           smithy.SchemaExtensions
+	eSearchTextAdditionalFeature_ACCESS                             smithy.SchemaExtensions
+	eSearchTextAdditionalFeature_CONTACT                            smithy.SchemaExtensions
+	eSearchTextAdditionalFeature_CROSS_REFERENCES                   smithy.SchemaExtensions
+	e_SearchTextAdditionalFeatureList                               smithy.SchemaExtensions
+	e_SearchTextAdditionalFeatureList_member                        smithy.SchemaExtensions
+	eSearchTextFilter                                               smithy.SchemaExtensions
+	eSearchTextFilter_BoundingBox                                   smithy.SchemaExtensions
+	eSearchTextFilter_Circle                                        smithy.SchemaExtensions
+	eSearchTextFilter_IncludeCountries                              smithy.SchemaExtensions
+	eSearchTextIntendedUse                                          smithy.SchemaExtensions
+	eSearchTextIntendedUse_SINGLE_USE                               smithy.SchemaExtensions
+	eSearchTextIntendedUse_STORAGE                                  smithy.SchemaExtensions
+	eSearchTextResultItem                                           smithy.SchemaExtensions
+	eSearchTextResultItem_PlaceId                                   smithy.SchemaExtensions
+	eSearchTextResultItem_PlaceType                                 smithy.SchemaExtensions
+	eSearchTextResultItem_Title                                     smithy.SchemaExtensions
+	eSearchTextResultItem_Address                                   smithy.SchemaExtensions
+	eSearchTextResultItem_AddressNumberCorrected                    smithy.SchemaExtensions
+	eSearchTextResultItem_Position                                  smithy.SchemaExtensions
+	eSearchTextResultItem_Distance                                  smithy.SchemaExtensions
+	eSearchTextResultItem_MapView                                   smithy.SchemaExtensions
+	eSearchTextResultItem_Categories                                smithy.SchemaExtensions
+	eSearchTextResultItem_FoodTypes                                 smithy.SchemaExtensions
+	eSearchTextResultItem_BusinessChains                            smithy.SchemaExtensions
+	eSearchTextResultItem_Contacts                                  smithy.SchemaExtensions
+	eSearchTextResultItem_OpeningHours                              smithy.SchemaExtensions
+	eSearchTextResultItem_AccessPoints                              smithy.SchemaExtensions
+	eSearchTextResultItem_AccessRestrictions                        smithy.SchemaExtensions
+	eSearchTextResultItem_TimeZone                                  smithy.SchemaExtensions
+	eSearchTextResultItem_PoliticalView                             smithy.SchemaExtensions
+	eSearchTextResultItem_Phonemes                                  smithy.SchemaExtensions
+	eSearchTextResultItem_PlaceAttributes                           smithy.SchemaExtensions
+	eSearchTextResultItem_CrossReferences                           smithy.SchemaExtensions
+	e_SearchTextResultItemList                                      smithy.SchemaExtensions
+	e_SearchTextResultItemList_member                               smithy.SchemaExtensions
+	eSearchTextTravelMode                                           smithy.SchemaExtensions
+	eSearchTextTravelMode_CAR                                       smithy.SchemaExtensions
+	eSearchTextTravelMode_SCOOTER                                   smithy.SchemaExtensions
+	eSearchTextTravelMode_TRUCK                                     smithy.SchemaExtensions
+	eSecondaryAddressComponent                                      smithy.SchemaExtensions
+	eSecondaryAddressComponent_Number                               smithy.SchemaExtensions
+	eSecondaryAddressComponent_Designator                           smithy.SchemaExtensions
+	e_SecondaryAddressComponentList                                 smithy.SchemaExtensions
+	e_SecondaryAddressComponentList_member                          smithy.SchemaExtensions
+	eSecondaryAddressComponentMatchScore                            smithy.SchemaExtensions
+	eSecondaryAddressComponentMatchScore_Number                     smithy.SchemaExtensions
+	e_SecondaryAddressComponentMatchScoreList                       smithy.SchemaExtensions
+	e_SecondaryAddressComponentMatchScoreList_member                smithy.SchemaExtensions
+	e_SensitiveBoolean                                              smithy.SchemaExtensions
+	e_SensitiveString                                               smithy.SchemaExtensions
+	eStreetComponents                                               smithy.SchemaExtensions
+	eStreetComponents_BaseName                                      smithy.SchemaExtensions
+	eStreetComponents_Type                                          smithy.SchemaExtensions
+	eStreetComponents_TypePlacement                                 smithy.SchemaExtensions
+	eStreetComponents_TypeSeparator                                 smithy.SchemaExtensions
+	eStreetComponents_Prefix                                        smithy.SchemaExtensions
+	eStreetComponents_Suffix                                        smithy.SchemaExtensions
+	eStreetComponents_Direction                                     smithy.SchemaExtensions
+	eStreetComponents_Language                                      smithy.SchemaExtensions
+	e_StreetComponentsList                                          smithy.SchemaExtensions
+	e_StreetComponentsList_member                                   smithy.SchemaExtensions
+	eSubRegion                                                      smithy.SchemaExtensions
+	eSubRegion_Code                                                 smithy.SchemaExtensions
+	eSubRegion_Name                                                 smithy.SchemaExtensions
+	eSubRegionHighlights                                            smithy.SchemaExtensions
+	eSubRegionHighlights_Code                                       smithy.SchemaExtensions
+	eSubRegionHighlights_Name                                       smithy.SchemaExtensions
+	eSuggestAdditionalFeature                                       smithy.SchemaExtensions
+	eSuggestAdditionalFeature_CORE                                  smithy.SchemaExtensions
+	eSuggestAdditionalFeature_TIME_ZONE                             smithy.SchemaExtensions
+	eSuggestAdditionalFeature_PHONEMES                              smithy.SchemaExtensions
+	eSuggestAdditionalFeature_ACCESS                                smithy.SchemaExtensions
+	eSuggestAdditionalFeature_CROSS_REFERENCES                      smithy.SchemaExtensions
+	e_SuggestAdditionalFeatureList                                  smithy.SchemaExtensions
+	e_SuggestAdditionalFeatureList_member                           smithy.SchemaExtensions
+	eSuggestAddressHighlights                                       smithy.SchemaExtensions
+	eSuggestAddressHighlights_Label                                 smithy.SchemaExtensions
+	eSuggestFilter                                                  smithy.SchemaExtensions
+	eSuggestFilter_BoundingBox                                      smithy.SchemaExtensions
+	eSuggestFilter_Circle                                           smithy.SchemaExtensions
+	eSuggestFilter_IncludeCountries                                 smithy.SchemaExtensions
+	eSuggestHighlights                                              smithy.SchemaExtensions
+	eSuggestHighlights_Title                                        smithy.SchemaExtensions
+	eSuggestHighlights_Address                                      smithy.SchemaExtensions
+	eSuggestIntendedUse                                             smithy.SchemaExtensions
+	eSuggestIntendedUse_SINGLE_USE                                  smithy.SchemaExtensions
+	eSuggestPlaceResult                                             smithy.SchemaExtensions
+	eSuggestPlaceResult_PlaceId                                     smithy.SchemaExtensions
+	eSuggestPlaceResult_PlaceType                                   smithy.SchemaExtensions
+	eSuggestPlaceResult_Address                                     smithy.SchemaExtensions
+	eSuggestPlaceResult_Position                                    smithy.SchemaExtensions
+	eSuggestPlaceResult_Distance                                    smithy.SchemaExtensions
+	eSuggestPlaceResult_MapView                                     smithy.SchemaExtensions
+	eSuggestPlaceResult_Categories                                  smithy.SchemaExtensions
+	eSuggestPlaceResult_FoodTypes                                   smithy.SchemaExtensions
+	eSuggestPlaceResult_BusinessChains                              smithy.SchemaExtensions
+	eSuggestPlaceResult_AccessPoints                                smithy.SchemaExtensions
+	eSuggestPlaceResult_AccessRestrictions                          smithy.SchemaExtensions
+	eSuggestPlaceResult_TimeZone                                    smithy.SchemaExtensions
+	eSuggestPlaceResult_PoliticalView                               smithy.SchemaExtensions
+	eSuggestPlaceResult_Phonemes                                    smithy.SchemaExtensions
+	eSuggestPlaceResult_PlaceAttributes                             smithy.SchemaExtensions
+	eSuggestPlaceResult_CrossReferences                             smithy.SchemaExtensions
+	eSuggestQueryResult                                             smithy.SchemaExtensions
+	eSuggestQueryResult_QueryId                                     smithy.SchemaExtensions
+	eSuggestQueryResult_QueryType                                   smithy.SchemaExtensions
+	eSuggestResultItem                                              smithy.SchemaExtensions
+	eSuggestResultItem_Title                                        smithy.SchemaExtensions
+	eSuggestResultItem_SuggestResultItemType                        smithy.SchemaExtensions
+	eSuggestResultItem_Place                                        smithy.SchemaExtensions
+	eSuggestResultItem_Query                                        smithy.SchemaExtensions
+	eSuggestResultItem_Highlights                                   smithy.SchemaExtensions
+	e_SuggestResultItemList                                         smithy.SchemaExtensions
+	e_SuggestResultItemList_member                                  smithy.SchemaExtensions
+	eSuggestResultItemType                                          smithy.SchemaExtensions
+	eSuggestResultItemType_PLACE                                    smithy.SchemaExtensions
+	eSuggestResultItemType_QUERY                                    smithy.SchemaExtensions
+	eSuggestTravelMode                                              smithy.SchemaExtensions
+	eSuggestTravelMode_CAR                                          smithy.SchemaExtensions
+	eSuggestTravelMode_SCOOTER                                      smithy.SchemaExtensions
+	eSuggestTravelMode_TRUCK                                        smithy.SchemaExtensions
+	eThrottlingException                                            smithy.SchemaExtensions
+	eThrottlingException_Message                                    smithy.SchemaExtensions
+	eTimeZone                                                       smithy.SchemaExtensions
+	eTimeZone_Name                                                  smithy.SchemaExtensions
+	eTimeZone_Offset                                                smithy.SchemaExtensions
+	eTimeZone_OffsetSeconds                                         smithy.SchemaExtensions
+	e_Token                                                         smithy.SchemaExtensions
+	eTranslationDetails                                             smithy.SchemaExtensions
+	eTranslationDetails_Locality                                    smithy.SchemaExtensions
+	eTranslationDetails_Region                                      smithy.SchemaExtensions
+	eTranslationDetails_District                                    smithy.SchemaExtensions
+	eTranslationDetails_SubRegion                                   smithy.SchemaExtensions
+	eTranslationName                                                smithy.SchemaExtensions
+	eTranslationName_Value                                          smithy.SchemaExtensions
+	eTranslationName_Language                                       smithy.SchemaExtensions
+	eTranslationName_Type                                           smithy.SchemaExtensions
+	eTranslationName_Primary                                        smithy.SchemaExtensions
+	eTranslationName_Transliterated                                 smithy.SchemaExtensions
+	e_TranslationNameList                                           smithy.SchemaExtensions
+	e_TranslationNameList_member                                    smithy.SchemaExtensions
+	eTranslationNameType                                            smithy.SchemaExtensions
+	eTranslationNameType_ABBREVIATION                               smithy.SchemaExtensions
+	eTranslationNameType_AREA_CODE                                  smithy.SchemaExtensions
+	eTranslationNameType_BASE_NAME                                  smithy.SchemaExtensions
+	eTranslationNameType_EXONYM                                     smithy.SchemaExtensions
+	eTranslationNameType_SHORTENED                                  smithy.SchemaExtensions
+	eTranslationNameType_SYNONYM                                    smithy.SchemaExtensions
+	eTypePlacement                                                  smithy.SchemaExtensions
+	eTypePlacement_BEFORE_BASE_NAME                                 smithy.SchemaExtensions
+	eTypePlacement_AFTER_BASE_NAME                                  smithy.SchemaExtensions
+	e_TypeSeparator                                                 smithy.SchemaExtensions
+	eUspsZip                                                        smithy.SchemaExtensions
+	eUspsZip_ZipClassificationCode                                  smithy.SchemaExtensions
+	eUspsZipPlus4                                                   smithy.SchemaExtensions
+	eUspsZipPlus4_RecordTypeCode                                    smithy.SchemaExtensions
+	eValidationException                                            smithy.SchemaExtensions
+	eValidationException_Message                                    smithy.SchemaExtensions
+	eValidationException_Reason                                     smithy.SchemaExtensions
+	eValidationException_FieldList                                  smithy.SchemaExtensions
+	eValidationExceptionField                                       smithy.SchemaExtensions
+	eValidationExceptionField_Name                                  smithy.SchemaExtensions
+	eValidationExceptionField_Message                               smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                                  smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member                           smithy.SchemaExtensions
+	eValidationExceptionReason                                      smithy.SchemaExtensions
+	eValidationExceptionReason_UNKNOWN_OPERATION                    smithy.SchemaExtensions
+	eValidationExceptionReason_MISSING                              smithy.SchemaExtensions
+	eValidationExceptionReason_CANNOT_PARSE                         smithy.SchemaExtensions
+	eValidationExceptionReason_FIELD_VALIDATION_FAILED              smithy.SchemaExtensions
+	eValidationExceptionReason_OTHER                                smithy.SchemaExtensions
+	eValidationExceptionReason_UNKNOWN_FIELD                        smithy.SchemaExtensions
+	eZipClassificationCode                                          smithy.SchemaExtensions
+	eZipClassificationCode_MILITARY                                 smithy.SchemaExtensions
+	eZipClassificationCode_POST_OFFICE_BOXES                        smithy.SchemaExtensions
+	eZipClassificationCode_UNIQUE                                   smithy.SchemaExtensions
+	eAutocompleteRequest                                            smithy.SchemaExtensions
+	eAutocompleteRequest_QueryText                                  smithy.SchemaExtensions
+	eAutocompleteRequest_MaxResults                                 smithy.SchemaExtensions
+	eAutocompleteRequest_BiasPosition                               smithy.SchemaExtensions
+	eAutocompleteRequest_Filter                                     smithy.SchemaExtensions
+	eAutocompleteRequest_PostalCodeMode                             smithy.SchemaExtensions
+	eAutocompleteRequest_AdditionalFeatures                         smithy.SchemaExtensions
+	eAutocompleteRequest_Language                                   smithy.SchemaExtensions
+	eAutocompleteRequest_PoliticalView                              smithy.SchemaExtensions
+	eAutocompleteRequest_IntendedUse                                smithy.SchemaExtensions
+	eAutocompleteRequest_Key                                        smithy.SchemaExtensions
+	eAutocompleteResponse                                           smithy.SchemaExtensions
+	eAutocompleteResponse_PricingBucket                             smithy.SchemaExtensions
+	eAutocompleteResponse_ResultItems                               smithy.SchemaExtensions
+	eGeocodeRequest                                                 smithy.SchemaExtensions
+	eGeocodeRequest_QueryText                                       smithy.SchemaExtensions
+	eGeocodeRequest_QueryComponents                                 smithy.SchemaExtensions
+	eGeocodeRequest_MaxResults                                      smithy.SchemaExtensions
+	eGeocodeRequest_BiasPosition                                    smithy.SchemaExtensions
+	eGeocodeRequest_Filter                                          smithy.SchemaExtensions
+	eGeocodeRequest_AdditionalFeatures                              smithy.SchemaExtensions
+	eGeocodeRequest_Language                                        smithy.SchemaExtensions
+	eGeocodeRequest_PoliticalView                                   smithy.SchemaExtensions
+	eGeocodeRequest_IntendedUse                                     smithy.SchemaExtensions
+	eGeocodeRequest_Key                                             smithy.SchemaExtensions
+	eGeocodeRequest_PostalCodeMode                                  smithy.SchemaExtensions
+	eGeocodeRequest_AddressTranslations                             smithy.SchemaExtensions
+	eGeocodeRequest_AddressNamesMode                                smithy.SchemaExtensions
+	eGeocodeResponse                                                smithy.SchemaExtensions
+	eGeocodeResponse_PricingBucket                                  smithy.SchemaExtensions
+	eGeocodeResponse_ResultItems                                    smithy.SchemaExtensions
+	eGetPlaceRequest                                                smithy.SchemaExtensions
+	eGetPlaceRequest_PlaceId                                        smithy.SchemaExtensions
+	eGetPlaceRequest_AdditionalFeatures                             smithy.SchemaExtensions
+	eGetPlaceRequest_Language                                       smithy.SchemaExtensions
+	eGetPlaceRequest_PoliticalView                                  smithy.SchemaExtensions
+	eGetPlaceRequest_IntendedUse                                    smithy.SchemaExtensions
+	eGetPlaceRequest_Key                                            smithy.SchemaExtensions
+	eGetPlaceRequest_AddressNamesMode                               smithy.SchemaExtensions
+	eGetPlaceResponse                                               smithy.SchemaExtensions
+	eGetPlaceResponse_PlaceId                                       smithy.SchemaExtensions
+	eGetPlaceResponse_PlaceType                                     smithy.SchemaExtensions
+	eGetPlaceResponse_Title                                         smithy.SchemaExtensions
+	eGetPlaceResponse_PricingBucket                                 smithy.SchemaExtensions
+	eGetPlaceResponse_Address                                       smithy.SchemaExtensions
+	eGetPlaceResponse_AddressNumberCorrected                        smithy.SchemaExtensions
+	eGetPlaceResponse_PostalCodeDetails                             smithy.SchemaExtensions
+	eGetPlaceResponse_Position                                      smithy.SchemaExtensions
+	eGetPlaceResponse_MapView                                       smithy.SchemaExtensions
+	eGetPlaceResponse_Categories                                    smithy.SchemaExtensions
+	eGetPlaceResponse_FoodTypes                                     smithy.SchemaExtensions
+	eGetPlaceResponse_BusinessChains                                smithy.SchemaExtensions
+	eGetPlaceResponse_Contacts                                      smithy.SchemaExtensions
+	eGetPlaceResponse_OpeningHours                                  smithy.SchemaExtensions
+	eGetPlaceResponse_AccessPoints                                  smithy.SchemaExtensions
+	eGetPlaceResponse_AccessRestrictions                            smithy.SchemaExtensions
+	eGetPlaceResponse_TimeZone                                      smithy.SchemaExtensions
+	eGetPlaceResponse_PoliticalView                                 smithy.SchemaExtensions
+	eGetPlaceResponse_Phonemes                                      smithy.SchemaExtensions
+	eGetPlaceResponse_MainAddress                                   smithy.SchemaExtensions
+	eGetPlaceResponse_SecondaryAddresses                            smithy.SchemaExtensions
+	eGetPlaceResponse_PlaceAttributes                               smithy.SchemaExtensions
+	eGetPlaceResponse_EstimatedPointAddress                         smithy.SchemaExtensions
+	eGetPlaceResponse_CrossReferences                               smithy.SchemaExtensions
+	eReverseGeocodeRequest                                          smithy.SchemaExtensions
+	eReverseGeocodeRequest_QueryPosition                            smithy.SchemaExtensions
+	eReverseGeocodeRequest_QueryRadius                              smithy.SchemaExtensions
+	eReverseGeocodeRequest_MaxResults                               smithy.SchemaExtensions
+	eReverseGeocodeRequest_Filter                                   smithy.SchemaExtensions
+	eReverseGeocodeRequest_AdditionalFeatures                       smithy.SchemaExtensions
+	eReverseGeocodeRequest_Language                                 smithy.SchemaExtensions
+	eReverseGeocodeRequest_PoliticalView                            smithy.SchemaExtensions
+	eReverseGeocodeRequest_IntendedUse                              smithy.SchemaExtensions
+	eReverseGeocodeRequest_Key                                      smithy.SchemaExtensions
+	eReverseGeocodeRequest_Heading                                  smithy.SchemaExtensions
+	eReverseGeocodeRequest_AddressNamesMode                         smithy.SchemaExtensions
+	eReverseGeocodeResponse                                         smithy.SchemaExtensions
+	eReverseGeocodeResponse_PricingBucket                           smithy.SchemaExtensions
+	eReverseGeocodeResponse_ResultItems                             smithy.SchemaExtensions
+	eSearchNearbyRequest                                            smithy.SchemaExtensions
+	eSearchNearbyRequest_QueryPosition                              smithy.SchemaExtensions
+	eSearchNearbyRequest_QueryRadius                                smithy.SchemaExtensions
+	eSearchNearbyRequest_MaxResults                                 smithy.SchemaExtensions
+	eSearchNearbyRequest_Filter                                     smithy.SchemaExtensions
+	eSearchNearbyRequest_AdditionalFeatures                         smithy.SchemaExtensions
+	eSearchNearbyRequest_Language                                   smithy.SchemaExtensions
+	eSearchNearbyRequest_PoliticalView                              smithy.SchemaExtensions
+	eSearchNearbyRequest_IntendedUse                                smithy.SchemaExtensions
+	eSearchNearbyRequest_NextToken                                  smithy.SchemaExtensions
+	eSearchNearbyRequest_Key                                        smithy.SchemaExtensions
+	eSearchNearbyResponse                                           smithy.SchemaExtensions
+	eSearchNearbyResponse_PricingBucket                             smithy.SchemaExtensions
+	eSearchNearbyResponse_ResultItems                               smithy.SchemaExtensions
+	eSearchNearbyResponse_NextToken                                 smithy.SchemaExtensions
+	eSearchTextRequest                                              smithy.SchemaExtensions
+	eSearchTextRequest_QueryText                                    smithy.SchemaExtensions
+	eSearchTextRequest_QueryId                                      smithy.SchemaExtensions
+	eSearchTextRequest_MaxResults                                   smithy.SchemaExtensions
+	eSearchTextRequest_BiasPosition                                 smithy.SchemaExtensions
+	eSearchTextRequest_Filter                                       smithy.SchemaExtensions
+	eSearchTextRequest_AdditionalFeatures                           smithy.SchemaExtensions
+	eSearchTextRequest_Language                                     smithy.SchemaExtensions
+	eSearchTextRequest_PoliticalView                                smithy.SchemaExtensions
+	eSearchTextRequest_IntendedUse                                  smithy.SchemaExtensions
+	eSearchTextRequest_NextToken                                    smithy.SchemaExtensions
+	eSearchTextRequest_TravelMode                                   smithy.SchemaExtensions
+	eSearchTextRequest_Key                                          smithy.SchemaExtensions
+	eSearchTextResponse                                             smithy.SchemaExtensions
+	eSearchTextResponse_PricingBucket                               smithy.SchemaExtensions
+	eSearchTextResponse_ResultItems                                 smithy.SchemaExtensions
+	eSearchTextResponse_NextToken                                   smithy.SchemaExtensions
+	eSuggestRequest                                                 smithy.SchemaExtensions
+	eSuggestRequest_QueryText                                       smithy.SchemaExtensions
+	eSuggestRequest_MaxResults                                      smithy.SchemaExtensions
+	eSuggestRequest_MaxQueryRefinements                             smithy.SchemaExtensions
+	eSuggestRequest_BiasPosition                                    smithy.SchemaExtensions
+	eSuggestRequest_Filter                                          smithy.SchemaExtensions
+	eSuggestRequest_AdditionalFeatures                              smithy.SchemaExtensions
+	eSuggestRequest_Language                                        smithy.SchemaExtensions
+	eSuggestRequest_PoliticalView                                   smithy.SchemaExtensions
+	eSuggestRequest_IntendedUse                                     smithy.SchemaExtensions
+	eSuggestRequest_TravelMode                                      smithy.SchemaExtensions
+	eSuggestRequest_Key                                             smithy.SchemaExtensions
+	eSuggestResponse                                                smithy.SchemaExtensions
+	eSuggestResponse_PricingBucket                                  smithy.SchemaExtensions
+	eSuggestResponse_ResultItems                                    smithy.SchemaExtensions
+	eSuggestResponse_QueryRefinements                               smithy.SchemaExtensions
+)
 
 var (
 	iAutocomplete                              = smithy.ShapeID{Namespace: "com.amazonaws.geoplaces", Name: "Autocomplete"}
@@ -483,839 +1314,839 @@ var mSuggestRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSuggestReque
 }}
 var mSuggestResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSuggestResponse_PricingBucket, &sSuggestResponse_ResultItems, &sSuggestResponse_QueryRefinements}}
 
-var sAutocomplete = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutocomplete, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sGeocode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeocode, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sGetPlace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPlace, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sReverseGeocode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReverseGeocode, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sSearchNearby = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchNearby, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sSearchText = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchText, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sSuggest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggest, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var s_PlacesService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlacesService, Type: smithy.ShapeTypeService, Ext: &ext[7]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &ext[8]})
-var sAccessPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessPoint, Members: &mAccessPoint, Type: smithy.ShapeTypeStructure, Ext: &ext[10]})
-var s_AccessPointList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessPointList, Members: &m_AccessPointList, Type: smithy.ShapeTypeList, Ext: &ext[15]})
-var sAccessPointType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessPointType, Members: &mAccessPointType, Type: smithy.ShapeTypeEnum, Ext: &ext[17]})
-var sAccessRestriction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessRestriction, Members: &mAccessRestriction, Type: smithy.ShapeTypeStructure, Ext: &ext[25]})
-var s_AccessRestrictionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessRestrictionList, Members: &m_AccessRestrictionList, Type: smithy.ShapeTypeList, Ext: &ext[28]})
-var sAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &ext[30]})
-var sAddressComponentMatchScores = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddressComponentMatchScores, Members: &mAddressComponentMatchScores, Type: smithy.ShapeTypeStructure, Ext: &ext[47]})
-var sAddressComponentPhonemes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddressComponentPhonemes, Members: &mAddressComponentPhonemes, Type: smithy.ShapeTypeStructure, Ext: &ext[61]})
-var sAddressTranslationComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddressTranslationComponent, Members: &mAddressTranslationComponent, Type: smithy.ShapeTypeEnum, Ext: &ext[71]})
-var s_AddressTranslationComponentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddressTranslationComponentList, Members: &m_AddressTranslationComponentList, Type: smithy.ShapeTypeList, Ext: &ext[76]})
-var sAdminNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdminNames, Members: &mAdminNames, Type: smithy.ShapeTypeStructure, Ext: &ext[78]})
-var s_AdminNamesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdminNamesList, Members: &m_AdminNamesList, Type: smithy.ShapeTypeList, Ext: &ext[81]})
-var sAdminNamesPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdminNamesPreference, Members: &mAdminNamesPreference, Type: smithy.ShapeTypeEnum, Ext: &ext[83]})
-var s_ApiKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApiKey, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &ext[86]})
-var sAutocompleteAdditionalFeature = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutocompleteAdditionalFeature, Members: &mAutocompleteAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &ext[87]})
-var s_AutocompleteAdditionalFeatureList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutocompleteAdditionalFeatureList, Members: &m_AutocompleteAdditionalFeatureList, Type: smithy.ShapeTypeList, Ext: &ext[89]})
-var sAutocompleteAddressHighlights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutocompleteAddressHighlights, Members: &mAutocompleteAddressHighlights, Type: smithy.ShapeTypeStructure, Ext: &ext[91]})
-var sAutocompleteFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutocompleteFilter, Members: &mAutocompleteFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[106]})
-var sAutocompleteFilterPlaceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutocompleteFilterPlaceType, Members: &mAutocompleteFilterPlaceType, Type: smithy.ShapeTypeEnum, Ext: &ext[111]})
-var s_AutocompleteFilterPlaceTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutocompleteFilterPlaceTypeList, Members: &m_AutocompleteFilterPlaceTypeList, Type: smithy.ShapeTypeList, Ext: &ext[120]})
-var sAutocompleteHighlights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutocompleteHighlights, Members: &mAutocompleteHighlights, Type: smithy.ShapeTypeStructure, Ext: &ext[122]})
-var sAutocompleteIntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutocompleteIntendedUse, Members: &mAutocompleteIntendedUse, Type: smithy.ShapeTypeEnum, Ext: &ext[125]})
-var sAutocompleteResultItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutocompleteResultItem, Members: &mAutocompleteResultItem, Type: smithy.ShapeTypeStructure, Ext: &ext[127]})
-var s_AutocompleteResultItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutocompleteResultItemList, Members: &m_AutocompleteResultItemList, Type: smithy.ShapeTypeList, Ext: &ext[137]})
-var s_BoundingBox = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BoundingBox, Members: &m_BoundingBox, Traits: &t10, Type: smithy.ShapeTypeList, Ext: &ext[139]})
-var sBusinessChain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBusinessChain, Members: &mBusinessChain, Type: smithy.ShapeTypeStructure, Ext: &ext[141]})
-var s_BusinessChainList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BusinessChainList, Members: &m_BusinessChainList, Type: smithy.ShapeTypeList, Ext: &ext[144]})
-var sCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCategory, Members: &mCategory, Type: smithy.ShapeTypeStructure, Ext: &ext[146]})
-var s_CategoryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &ext[151]})
-var sComponentMatchScores = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentMatchScores, Members: &mComponentMatchScores, Type: smithy.ShapeTypeStructure, Ext: &ext[153]})
-var sContactDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContactDetails, Members: &mContactDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[156]})
-var s_ContactDetailsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactDetailsList, Members: &m_ContactDetailsList, Type: smithy.ShapeTypeList, Ext: &ext[160]})
-var sContacts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContacts, Members: &mContacts, Type: smithy.ShapeTypeStructure, Ext: &ext[162]})
-var sCountry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCountry, Members: &mCountry, Type: smithy.ShapeTypeStructure, Ext: &ext[167]})
-var s_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CountryCode, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &ext[171]})
-var s_CountryCode2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CountryCode2, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &ext[172]})
-var s_CountryCode3 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CountryCode3, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &ext[173]})
-var s_CountryCodeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CountryCodeList, Members: &m_CountryCodeList, Type: smithy.ShapeTypeList, Ext: &ext[174]})
-var sCountryHighlights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCountryHighlights, Members: &mCountryHighlights, Type: smithy.ShapeTypeStructure, Ext: &ext[176]})
-var sCrossReference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCrossReference, Members: &mCrossReference, Type: smithy.ShapeTypeStructure, Ext: &ext[179]})
-var s_CrossReferenceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CrossReferenceList, Members: &m_CrossReferenceList, Type: smithy.ShapeTypeList, Ext: &ext[183]})
-var s_DistanceMeters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DistanceMeters, Traits: &t10, Type: smithy.ShapeTypeLong, Ext: &ext[185]})
-var s_DurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DurationSeconds, Traits: &t10, Type: smithy.ShapeTypeLong, Ext: &ext[186]})
-var s_FilterBusinessChainList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterBusinessChainList, Members: &m_FilterBusinessChainList, Type: smithy.ShapeTypeList, Ext: &ext[187]})
-var s_FilterCategoryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterCategoryList, Members: &m_FilterCategoryList, Type: smithy.ShapeTypeList, Ext: &ext[189]})
-var sFilterCircle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterCircle, Members: &mFilterCircle, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &ext[191]})
-var s_FilterFoodTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterFoodTypeList, Members: &m_FilterFoodTypeList, Type: smithy.ShapeTypeList, Ext: &ext[194]})
-var sFoodType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFoodType, Members: &mFoodType, Type: smithy.ShapeTypeStructure, Ext: &ext[196]})
-var s_FoodTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FoodTypeList, Members: &m_FoodTypeList, Type: smithy.ShapeTypeList, Ext: &ext[200]})
-var sGeocodeAdditionalFeature = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeocodeAdditionalFeature, Members: &mGeocodeAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &ext[202]})
-var s_GeocodeAdditionalFeatureList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GeocodeAdditionalFeatureList, Members: &m_GeocodeAdditionalFeatureList, Type: smithy.ShapeTypeList, Ext: &ext[207]})
-var sGeocodeAddressNamesMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeocodeAddressNamesMode, Members: &mGeocodeAddressNamesMode, Type: smithy.ShapeTypeEnum, Ext: &ext[209]})
-var sGeocodeFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeocodeFilter, Members: &mGeocodeFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[212]})
-var sGeocodeFilterPlaceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeocodeFilterPlaceType, Members: &mGeocodeFilterPlaceType, Traits: &t10, Type: smithy.ShapeTypeEnum, Ext: &ext[215]})
-var s_GeocodeFilterPlaceTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GeocodeFilterPlaceTypeList, Members: &m_GeocodeFilterPlaceTypeList, Type: smithy.ShapeTypeList, Ext: &ext[226]})
-var sGeocodeIntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeocodeIntendedUse, Members: &mGeocodeIntendedUse, Type: smithy.ShapeTypeEnum, Ext: &ext[228]})
-var sGeocodeParsedQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeocodeParsedQuery, Members: &mGeocodeParsedQuery, Type: smithy.ShapeTypeStructure, Ext: &ext[231]})
-var sGeocodeParsedQueryAddressComponents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeocodeParsedQueryAddressComponents, Members: &mGeocodeParsedQueryAddressComponents, Type: smithy.ShapeTypeStructure, Ext: &ext[234]})
-var sGeocodeQueryComponents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeocodeQueryComponents, Members: &mGeocodeQueryComponents, Type: smithy.ShapeTypeStructure, Ext: &ext[249]})
-var sGeocodeResultItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeocodeResultItem, Members: &mGeocodeResultItem, Type: smithy.ShapeTypeStructure, Ext: &ext[258]})
-var s_GeocodeResultItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GeocodeResultItemList, Members: &m_GeocodeResultItemList, Type: smithy.ShapeTypeList, Ext: &ext[280]})
-var sGetPlaceAdditionalFeature = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPlaceAdditionalFeature, Members: &mGetPlaceAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &ext[282]})
-var s_GetPlaceAdditionalFeatureList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GetPlaceAdditionalFeatureList, Members: &m_GetPlaceAdditionalFeatureList, Type: smithy.ShapeTypeList, Ext: &ext[289]})
-var sGetPlaceAddressNamesMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPlaceAddressNamesMode, Members: &mGetPlaceAddressNamesMode, Type: smithy.ShapeTypeEnum, Ext: &ext[291]})
-var sGetPlaceIntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPlaceIntendedUse, Members: &mGetPlaceIntendedUse, Type: smithy.ShapeTypeEnum, Ext: &ext[293]})
-var s_Heading = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Heading, Traits: &t10, Type: smithy.ShapeTypeDouble, Ext: &ext[296]})
-var sHighlight = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHighlight, Members: &mHighlight, Type: smithy.ShapeTypeStructure, Ext: &ext[297]})
-var s_HighlightList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &ext[301]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &ext[303]})
-var sIntersection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntersection, Members: &mIntersection, Type: smithy.ShapeTypeStructure, Ext: &ext[305]})
-var s_IntersectionHighlightsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntersectionHighlightsList, Members: &m_IntersectionHighlightsList, Type: smithy.ShapeTypeList, Ext: &ext[314]})
-var s_IntersectionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntersectionList, Members: &m_IntersectionList, Type: smithy.ShapeTypeList, Ext: &ext[316]})
-var s_IntersectionStreet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntersectionStreet, Type: smithy.ShapeTypeString, Ext: &ext[318]})
-var s_IntersectionStreetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntersectionStreetList, Members: &m_IntersectionStreetList, Type: smithy.ShapeTypeList, Ext: &ext[319]})
-var s_LanguageTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LanguageTag, Type: smithy.ShapeTypeString, Ext: &ext[321]})
-var s_MatchScore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &ext[322]})
-var sMatchScoreDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMatchScoreDetails, Members: &mMatchScoreDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[323]})
-var s_MatchScoreList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MatchScoreList, Members: &m_MatchScoreList, Type: smithy.ShapeTypeList, Ext: &ext[326]})
-var sOpeningHours = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpeningHours, Members: &mOpeningHours, Type: smithy.ShapeTypeStructure, Ext: &ext[328]})
-var sOpeningHoursComponents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpeningHoursComponents, Members: &mOpeningHoursComponents, Type: smithy.ShapeTypeStructure, Ext: &ext[333]})
-var s_OpeningHoursComponentsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OpeningHoursComponentsList, Members: &m_OpeningHoursComponentsList, Type: smithy.ShapeTypeList, Ext: &ext[337]})
-var s_OpeningHoursDisplay = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OpeningHoursDisplay, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &ext[339]})
-var s_OpeningHoursDisplayList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OpeningHoursDisplayList, Members: &m_OpeningHoursDisplayList, Type: smithy.ShapeTypeList, Ext: &ext[340]})
-var s_OpeningHoursList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OpeningHoursList, Members: &m_OpeningHoursList, Type: smithy.ShapeTypeList, Ext: &ext[342]})
-var sParsedQueryComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParsedQueryComponent, Members: &mParsedQueryComponent, Type: smithy.ShapeTypeStructure, Ext: &ext[344]})
-var s_ParsedQueryComponentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &ext[349]})
-var sParsedQuerySecondaryAddressComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParsedQuerySecondaryAddressComponent, Members: &mParsedQuerySecondaryAddressComponent, Type: smithy.ShapeTypeStructure, Ext: &ext[351]})
-var s_ParsedQuerySecondaryAddressComponentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParsedQuerySecondaryAddressComponentList, Members: &m_ParsedQuerySecondaryAddressComponentList, Type: smithy.ShapeTypeList, Ext: &ext[357]})
-var sPhonemeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhonemeDetails, Members: &mPhonemeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[359]})
-var sPhonemeTranscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhonemeTranscription, Members: &mPhonemeTranscription, Type: smithy.ShapeTypeStructure, Ext: &ext[362]})
-var s_PhonemeTranscriptionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhonemeTranscriptionList, Members: &m_PhonemeTranscriptionList, Type: smithy.ShapeTypeList, Ext: &ext[366]})
-var sPlaceAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlaceAttribute, Members: &mPlaceAttribute, Traits: &t10, Type: smithy.ShapeTypeEnum, Ext: &ext[368]})
-var s_PlaceAttributeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlaceAttributeList, Members: &m_PlaceAttributeList, Type: smithy.ShapeTypeList, Ext: &ext[370]})
-var sPlaceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlaceType, Members: &mPlaceType, Traits: &t10, Type: smithy.ShapeTypeEnum, Ext: &ext[372]})
-var s_Position = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Position, Members: &m_Position, Traits: &t10, Type: smithy.ShapeTypeList, Ext: &ext[389]})
-var sPostalAuthority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostalAuthority, Members: &mPostalAuthority, Traits: &t10, Type: smithy.ShapeTypeEnum, Ext: &ext[391]})
-var sPostalCodeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostalCodeDetails, Members: &mPostalCodeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[393]})
-var s_PostalCodeDetailsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PostalCodeDetailsList, Members: &m_PostalCodeDetailsList, Type: smithy.ShapeTypeList, Ext: &ext[399]})
-var sPostalCodeMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostalCodeMode, Members: &mPostalCodeMode, Type: smithy.ShapeTypeEnum, Ext: &ext[401]})
-var sPostalCodeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostalCodeType, Members: &mPostalCodeType, Traits: &t10, Type: smithy.ShapeTypeEnum, Ext: &ext[405]})
-var sQueryRefinement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryRefinement, Members: &mQueryRefinement, Type: smithy.ShapeTypeStructure, Ext: &ext[408]})
-var s_QueryRefinementList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryRefinementList, Members: &m_QueryRefinementList, Type: smithy.ShapeTypeList, Ext: &ext[413]})
-var sQueryType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryType, Members: &mQueryType, Type: smithy.ShapeTypeEnum, Ext: &ext[415]})
-var sRecordTypeCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordTypeCode, Members: &mRecordTypeCode, Traits: &t10, Type: smithy.ShapeTypeEnum, Ext: &ext[418]})
-var sRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegion, Members: &mRegion, Type: smithy.ShapeTypeStructure, Ext: &ext[425]})
-var sRegionHighlights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegionHighlights, Members: &mRegionHighlights, Type: smithy.ShapeTypeStructure, Ext: &ext[428]})
-var sRelatedPlace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelatedPlace, Members: &mRelatedPlace, Type: smithy.ShapeTypeStructure, Ext: &ext[431]})
-var s_RelatedPlaceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelatedPlaceList, Members: &m_RelatedPlaceList, Type: smithy.ShapeTypeList, Ext: &ext[438]})
-var sReverseGeocodeAdditionalFeature = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReverseGeocodeAdditionalFeature, Members: &mReverseGeocodeAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &ext[440]})
-var s_ReverseGeocodeAdditionalFeatureList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReverseGeocodeAdditionalFeatureList, Members: &m_ReverseGeocodeAdditionalFeatureList, Type: smithy.ShapeTypeList, Ext: &ext[444]})
-var sReverseGeocodeAddressNamesMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReverseGeocodeAddressNamesMode, Members: &mReverseGeocodeAddressNamesMode, Type: smithy.ShapeTypeEnum, Ext: &ext[446]})
-var sReverseGeocodeFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReverseGeocodeFilter, Members: &mReverseGeocodeFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[448]})
-var sReverseGeocodeFilterPlaceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReverseGeocodeFilterPlaceType, Members: &mReverseGeocodeFilterPlaceType, Type: smithy.ShapeTypeEnum, Ext: &ext[450]})
-var s_ReverseGeocodeFilterPlaceTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReverseGeocodeFilterPlaceTypeList, Members: &m_ReverseGeocodeFilterPlaceTypeList, Type: smithy.ShapeTypeList, Ext: &ext[458]})
-var sReverseGeocodeIntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReverseGeocodeIntendedUse, Members: &mReverseGeocodeIntendedUse, Type: smithy.ShapeTypeEnum, Ext: &ext[460]})
-var sReverseGeocodeResultItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReverseGeocodeResultItem, Members: &mReverseGeocodeResultItem, Type: smithy.ShapeTypeStructure, Ext: &ext[463]})
-var s_ReverseGeocodeResultItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReverseGeocodeResultItemList, Members: &m_ReverseGeocodeResultItemList, Type: smithy.ShapeTypeList, Ext: &ext[481]})
-var sSearchNearbyAdditionalFeature = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchNearbyAdditionalFeature, Members: &mSearchNearbyAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &ext[483]})
-var s_SearchNearbyAdditionalFeatureList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchNearbyAdditionalFeatureList, Members: &m_SearchNearbyAdditionalFeatureList, Type: smithy.ShapeTypeList, Ext: &ext[489]})
-var sSearchNearbyFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchNearbyFilter, Members: &mSearchNearbyFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[491]})
-var sSearchNearbyIntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchNearbyIntendedUse, Members: &mSearchNearbyIntendedUse, Type: smithy.ShapeTypeEnum, Ext: &ext[500]})
-var sSearchNearbyResultItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchNearbyResultItem, Members: &mSearchNearbyResultItem, Type: smithy.ShapeTypeStructure, Ext: &ext[503]})
-var s_SearchNearbyResultItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchNearbyResultItemList, Members: &m_SearchNearbyResultItemList, Type: smithy.ShapeTypeList, Ext: &ext[524]})
-var sSearchTextAdditionalFeature = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchTextAdditionalFeature, Members: &mSearchTextAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &ext[526]})
-var s_SearchTextAdditionalFeatureList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchTextAdditionalFeatureList, Members: &m_SearchTextAdditionalFeatureList, Type: smithy.ShapeTypeList, Ext: &ext[532]})
-var sSearchTextFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchTextFilter, Members: &mSearchTextFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[534]})
-var sSearchTextIntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchTextIntendedUse, Members: &mSearchTextIntendedUse, Type: smithy.ShapeTypeEnum, Ext: &ext[538]})
-var sSearchTextResultItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchTextResultItem, Members: &mSearchTextResultItem, Type: smithy.ShapeTypeStructure, Ext: &ext[541]})
-var s_SearchTextResultItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchTextResultItemList, Members: &m_SearchTextResultItemList, Type: smithy.ShapeTypeList, Ext: &ext[562]})
-var sSearchTextTravelMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchTextTravelMode, Members: &mSearchTextTravelMode, Type: smithy.ShapeTypeEnum, Ext: &ext[564]})
-var sSecondaryAddressComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecondaryAddressComponent, Members: &mSecondaryAddressComponent, Type: smithy.ShapeTypeStructure, Ext: &ext[568]})
-var s_SecondaryAddressComponentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecondaryAddressComponentList, Members: &m_SecondaryAddressComponentList, Type: smithy.ShapeTypeList, Ext: &ext[571]})
-var sSecondaryAddressComponentMatchScore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecondaryAddressComponentMatchScore, Members: &mSecondaryAddressComponentMatchScore, Type: smithy.ShapeTypeStructure, Ext: &ext[573]})
-var s_SecondaryAddressComponentMatchScoreList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecondaryAddressComponentMatchScoreList, Members: &m_SecondaryAddressComponentMatchScoreList, Type: smithy.ShapeTypeList, Ext: &ext[575]})
-var s_SensitiveBoolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveBoolean, Traits: &t10, Type: smithy.ShapeTypeBoolean, Ext: &ext[577]})
-var s_SensitiveString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveString, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &ext[578]})
-var sStreetComponents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreetComponents, Members: &mStreetComponents, Type: smithy.ShapeTypeStructure, Ext: &ext[579]})
-var s_StreetComponentsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreetComponentsList, Members: &m_StreetComponentsList, Type: smithy.ShapeTypeList, Ext: &ext[588]})
-var sSubRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubRegion, Members: &mSubRegion, Type: smithy.ShapeTypeStructure, Ext: &ext[590]})
-var sSubRegionHighlights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubRegionHighlights, Members: &mSubRegionHighlights, Type: smithy.ShapeTypeStructure, Ext: &ext[593]})
-var sSuggestAdditionalFeature = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestAdditionalFeature, Members: &mSuggestAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &ext[596]})
-var s_SuggestAdditionalFeatureList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SuggestAdditionalFeatureList, Members: &m_SuggestAdditionalFeatureList, Type: smithy.ShapeTypeList, Ext: &ext[602]})
-var sSuggestAddressHighlights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestAddressHighlights, Members: &mSuggestAddressHighlights, Type: smithy.ShapeTypeStructure, Ext: &ext[604]})
-var sSuggestFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestFilter, Members: &mSuggestFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[606]})
-var sSuggestHighlights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestHighlights, Members: &mSuggestHighlights, Type: smithy.ShapeTypeStructure, Ext: &ext[610]})
-var sSuggestIntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestIntendedUse, Members: &mSuggestIntendedUse, Type: smithy.ShapeTypeEnum, Ext: &ext[613]})
-var sSuggestPlaceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestPlaceResult, Members: &mSuggestPlaceResult, Type: smithy.ShapeTypeStructure, Ext: &ext[615]})
-var sSuggestQueryResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestQueryResult, Members: &mSuggestQueryResult, Type: smithy.ShapeTypeStructure, Ext: &ext[632]})
-var sSuggestResultItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestResultItem, Members: &mSuggestResultItem, Type: smithy.ShapeTypeStructure, Ext: &ext[635]})
-var s_SuggestResultItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SuggestResultItemList, Members: &m_SuggestResultItemList, Type: smithy.ShapeTypeList, Ext: &ext[641]})
-var sSuggestResultItemType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestResultItemType, Members: &mSuggestResultItemType, Type: smithy.ShapeTypeEnum, Ext: &ext[643]})
-var sSuggestTravelMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestTravelMode, Members: &mSuggestTravelMode, Type: smithy.ShapeTypeEnum, Ext: &ext[646]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &ext[650]})
-var sTimeZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeZone, Members: &mTimeZone, Type: smithy.ShapeTypeStructure, Ext: &ext[652]})
-var s_Token = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[656]})
-var sTranslationDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTranslationDetails, Members: &mTranslationDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[657]})
-var sTranslationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTranslationName, Members: &mTranslationName, Type: smithy.ShapeTypeStructure, Ext: &ext[662]})
-var s_TranslationNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TranslationNameList, Members: &m_TranslationNameList, Type: smithy.ShapeTypeList, Ext: &ext[668]})
-var sTranslationNameType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTranslationNameType, Members: &mTranslationNameType, Type: smithy.ShapeTypeEnum, Ext: &ext[670]})
-var sTypePlacement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTypePlacement, Members: &mTypePlacement, Type: smithy.ShapeTypeEnum, Ext: &ext[677]})
-var s_TypeSeparator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TypeSeparator, Type: smithy.ShapeTypeString, Ext: &ext[680]})
-var sUspsZip = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUspsZip, Members: &mUspsZip, Type: smithy.ShapeTypeStructure, Ext: &ext[681]})
-var sUspsZipPlus4 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUspsZipPlus4, Members: &mUspsZipPlus4, Type: smithy.ShapeTypeStructure, Ext: &ext[683]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &ext[685]})
-var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[689]})
-var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[692]})
-var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[694]})
-var sZipClassificationCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iZipClassificationCode, Members: &mZipClassificationCode, Traits: &t10, Type: smithy.ShapeTypeEnum, Ext: &ext[701]})
-var sAutocompleteRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutocompleteRequest, Members: &mAutocompleteRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[705]})
-var sAutocompleteResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutocompleteResponse, Members: &mAutocompleteResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[716]})
-var sGeocodeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeocodeRequest, Members: &mGeocodeRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[719]})
-var sGeocodeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeocodeResponse, Members: &mGeocodeResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[733]})
-var sGetPlaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPlaceRequest, Members: &mGetPlaceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[736]})
-var sGetPlaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPlaceResponse, Members: &mGetPlaceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[744]})
-var sReverseGeocodeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReverseGeocodeRequest, Members: &mReverseGeocodeRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[769]})
-var sReverseGeocodeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReverseGeocodeResponse, Members: &mReverseGeocodeResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[781]})
-var sSearchNearbyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchNearbyRequest, Members: &mSearchNearbyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[784]})
-var sSearchNearbyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchNearbyResponse, Members: &mSearchNearbyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[795]})
-var sSearchTextRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchTextRequest, Members: &mSearchTextRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[799]})
-var sSearchTextResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchTextResponse, Members: &mSearchTextResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[812]})
-var sSuggestRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestRequest, Members: &mSuggestRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[816]})
-var sSuggestResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestResponse, Members: &mSuggestResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[828]})
+var sAutocomplete = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutocomplete, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eAutocomplete})
+var sGeocode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeocode, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eGeocode})
+var sGetPlace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPlace, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eGetPlace})
+var sReverseGeocode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReverseGeocode, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eReverseGeocode})
+var sSearchNearby = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchNearby, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eSearchNearby})
+var sSearchText = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchText, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eSearchText})
+var sSuggest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggest, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eSuggest})
+var s_PlacesService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlacesService, Type: smithy.ShapeTypeService, Ext: &e_PlacesService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessPoint, Members: &mAccessPoint, Type: smithy.ShapeTypeStructure, Ext: &eAccessPoint})
+var s_AccessPointList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessPointList, Members: &m_AccessPointList, Type: smithy.ShapeTypeList, Ext: &e_AccessPointList})
+var sAccessPointType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessPointType, Members: &mAccessPointType, Type: smithy.ShapeTypeEnum, Ext: &eAccessPointType})
+var sAccessRestriction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessRestriction, Members: &mAccessRestriction, Type: smithy.ShapeTypeStructure, Ext: &eAccessRestriction})
+var s_AccessRestrictionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessRestrictionList, Members: &m_AccessRestrictionList, Type: smithy.ShapeTypeList, Ext: &e_AccessRestrictionList})
+var sAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eAddress})
+var sAddressComponentMatchScores = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddressComponentMatchScores, Members: &mAddressComponentMatchScores, Type: smithy.ShapeTypeStructure, Ext: &eAddressComponentMatchScores})
+var sAddressComponentPhonemes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddressComponentPhonemes, Members: &mAddressComponentPhonemes, Type: smithy.ShapeTypeStructure, Ext: &eAddressComponentPhonemes})
+var sAddressTranslationComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddressTranslationComponent, Members: &mAddressTranslationComponent, Type: smithy.ShapeTypeEnum, Ext: &eAddressTranslationComponent})
+var s_AddressTranslationComponentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddressTranslationComponentList, Members: &m_AddressTranslationComponentList, Type: smithy.ShapeTypeList, Ext: &e_AddressTranslationComponentList})
+var sAdminNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdminNames, Members: &mAdminNames, Type: smithy.ShapeTypeStructure, Ext: &eAdminNames})
+var s_AdminNamesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdminNamesList, Members: &m_AdminNamesList, Type: smithy.ShapeTypeList, Ext: &e_AdminNamesList})
+var sAdminNamesPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdminNamesPreference, Members: &mAdminNamesPreference, Type: smithy.ShapeTypeEnum, Ext: &eAdminNamesPreference})
+var s_ApiKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApiKey, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &e_ApiKey})
+var sAutocompleteAdditionalFeature = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutocompleteAdditionalFeature, Members: &mAutocompleteAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &eAutocompleteAdditionalFeature})
+var s_AutocompleteAdditionalFeatureList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutocompleteAdditionalFeatureList, Members: &m_AutocompleteAdditionalFeatureList, Type: smithy.ShapeTypeList, Ext: &e_AutocompleteAdditionalFeatureList})
+var sAutocompleteAddressHighlights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutocompleteAddressHighlights, Members: &mAutocompleteAddressHighlights, Type: smithy.ShapeTypeStructure, Ext: &eAutocompleteAddressHighlights})
+var sAutocompleteFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutocompleteFilter, Members: &mAutocompleteFilter, Type: smithy.ShapeTypeStructure, Ext: &eAutocompleteFilter})
+var sAutocompleteFilterPlaceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutocompleteFilterPlaceType, Members: &mAutocompleteFilterPlaceType, Type: smithy.ShapeTypeEnum, Ext: &eAutocompleteFilterPlaceType})
+var s_AutocompleteFilterPlaceTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutocompleteFilterPlaceTypeList, Members: &m_AutocompleteFilterPlaceTypeList, Type: smithy.ShapeTypeList, Ext: &e_AutocompleteFilterPlaceTypeList})
+var sAutocompleteHighlights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutocompleteHighlights, Members: &mAutocompleteHighlights, Type: smithy.ShapeTypeStructure, Ext: &eAutocompleteHighlights})
+var sAutocompleteIntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutocompleteIntendedUse, Members: &mAutocompleteIntendedUse, Type: smithy.ShapeTypeEnum, Ext: &eAutocompleteIntendedUse})
+var sAutocompleteResultItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutocompleteResultItem, Members: &mAutocompleteResultItem, Type: smithy.ShapeTypeStructure, Ext: &eAutocompleteResultItem})
+var s_AutocompleteResultItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutocompleteResultItemList, Members: &m_AutocompleteResultItemList, Type: smithy.ShapeTypeList, Ext: &e_AutocompleteResultItemList})
+var s_BoundingBox = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BoundingBox, Members: &m_BoundingBox, Traits: &t10, Type: smithy.ShapeTypeList, Ext: &e_BoundingBox})
+var sBusinessChain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBusinessChain, Members: &mBusinessChain, Type: smithy.ShapeTypeStructure, Ext: &eBusinessChain})
+var s_BusinessChainList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BusinessChainList, Members: &m_BusinessChainList, Type: smithy.ShapeTypeList, Ext: &e_BusinessChainList})
+var sCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCategory, Members: &mCategory, Type: smithy.ShapeTypeStructure, Ext: &eCategory})
+var s_CategoryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &e_CategoryList})
+var sComponentMatchScores = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentMatchScores, Members: &mComponentMatchScores, Type: smithy.ShapeTypeStructure, Ext: &eComponentMatchScores})
+var sContactDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContactDetails, Members: &mContactDetails, Type: smithy.ShapeTypeStructure, Ext: &eContactDetails})
+var s_ContactDetailsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactDetailsList, Members: &m_ContactDetailsList, Type: smithy.ShapeTypeList, Ext: &e_ContactDetailsList})
+var sContacts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContacts, Members: &mContacts, Type: smithy.ShapeTypeStructure, Ext: &eContacts})
+var sCountry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCountry, Members: &mCountry, Type: smithy.ShapeTypeStructure, Ext: &eCountry})
+var s_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CountryCode, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &e_CountryCode})
+var s_CountryCode2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CountryCode2, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &e_CountryCode2})
+var s_CountryCode3 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CountryCode3, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &e_CountryCode3})
+var s_CountryCodeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CountryCodeList, Members: &m_CountryCodeList, Type: smithy.ShapeTypeList, Ext: &e_CountryCodeList})
+var sCountryHighlights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCountryHighlights, Members: &mCountryHighlights, Type: smithy.ShapeTypeStructure, Ext: &eCountryHighlights})
+var sCrossReference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCrossReference, Members: &mCrossReference, Type: smithy.ShapeTypeStructure, Ext: &eCrossReference})
+var s_CrossReferenceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CrossReferenceList, Members: &m_CrossReferenceList, Type: smithy.ShapeTypeList, Ext: &e_CrossReferenceList})
+var s_DistanceMeters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DistanceMeters, Traits: &t10, Type: smithy.ShapeTypeLong, Ext: &e_DistanceMeters})
+var s_DurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DurationSeconds, Traits: &t10, Type: smithy.ShapeTypeLong, Ext: &e_DurationSeconds})
+var s_FilterBusinessChainList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterBusinessChainList, Members: &m_FilterBusinessChainList, Type: smithy.ShapeTypeList, Ext: &e_FilterBusinessChainList})
+var s_FilterCategoryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterCategoryList, Members: &m_FilterCategoryList, Type: smithy.ShapeTypeList, Ext: &e_FilterCategoryList})
+var sFilterCircle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterCircle, Members: &mFilterCircle, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eFilterCircle})
+var s_FilterFoodTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterFoodTypeList, Members: &m_FilterFoodTypeList, Type: smithy.ShapeTypeList, Ext: &e_FilterFoodTypeList})
+var sFoodType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFoodType, Members: &mFoodType, Type: smithy.ShapeTypeStructure, Ext: &eFoodType})
+var s_FoodTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FoodTypeList, Members: &m_FoodTypeList, Type: smithy.ShapeTypeList, Ext: &e_FoodTypeList})
+var sGeocodeAdditionalFeature = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeocodeAdditionalFeature, Members: &mGeocodeAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &eGeocodeAdditionalFeature})
+var s_GeocodeAdditionalFeatureList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GeocodeAdditionalFeatureList, Members: &m_GeocodeAdditionalFeatureList, Type: smithy.ShapeTypeList, Ext: &e_GeocodeAdditionalFeatureList})
+var sGeocodeAddressNamesMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeocodeAddressNamesMode, Members: &mGeocodeAddressNamesMode, Type: smithy.ShapeTypeEnum, Ext: &eGeocodeAddressNamesMode})
+var sGeocodeFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeocodeFilter, Members: &mGeocodeFilter, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeFilter})
+var sGeocodeFilterPlaceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeocodeFilterPlaceType, Members: &mGeocodeFilterPlaceType, Traits: &t10, Type: smithy.ShapeTypeEnum, Ext: &eGeocodeFilterPlaceType})
+var s_GeocodeFilterPlaceTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GeocodeFilterPlaceTypeList, Members: &m_GeocodeFilterPlaceTypeList, Type: smithy.ShapeTypeList, Ext: &e_GeocodeFilterPlaceTypeList})
+var sGeocodeIntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeocodeIntendedUse, Members: &mGeocodeIntendedUse, Type: smithy.ShapeTypeEnum, Ext: &eGeocodeIntendedUse})
+var sGeocodeParsedQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeocodeParsedQuery, Members: &mGeocodeParsedQuery, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeParsedQuery})
+var sGeocodeParsedQueryAddressComponents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeocodeParsedQueryAddressComponents, Members: &mGeocodeParsedQueryAddressComponents, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeParsedQueryAddressComponents})
+var sGeocodeQueryComponents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeocodeQueryComponents, Members: &mGeocodeQueryComponents, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeQueryComponents})
+var sGeocodeResultItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeocodeResultItem, Members: &mGeocodeResultItem, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeResultItem})
+var s_GeocodeResultItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GeocodeResultItemList, Members: &m_GeocodeResultItemList, Type: smithy.ShapeTypeList, Ext: &e_GeocodeResultItemList})
+var sGetPlaceAdditionalFeature = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPlaceAdditionalFeature, Members: &mGetPlaceAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &eGetPlaceAdditionalFeature})
+var s_GetPlaceAdditionalFeatureList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GetPlaceAdditionalFeatureList, Members: &m_GetPlaceAdditionalFeatureList, Type: smithy.ShapeTypeList, Ext: &e_GetPlaceAdditionalFeatureList})
+var sGetPlaceAddressNamesMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPlaceAddressNamesMode, Members: &mGetPlaceAddressNamesMode, Type: smithy.ShapeTypeEnum, Ext: &eGetPlaceAddressNamesMode})
+var sGetPlaceIntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPlaceIntendedUse, Members: &mGetPlaceIntendedUse, Type: smithy.ShapeTypeEnum, Ext: &eGetPlaceIntendedUse})
+var s_Heading = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Heading, Traits: &t10, Type: smithy.ShapeTypeDouble, Ext: &e_Heading})
+var sHighlight = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHighlight, Members: &mHighlight, Type: smithy.ShapeTypeStructure, Ext: &eHighlight})
+var s_HighlightList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &e_HighlightList})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sIntersection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntersection, Members: &mIntersection, Type: smithy.ShapeTypeStructure, Ext: &eIntersection})
+var s_IntersectionHighlightsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntersectionHighlightsList, Members: &m_IntersectionHighlightsList, Type: smithy.ShapeTypeList, Ext: &e_IntersectionHighlightsList})
+var s_IntersectionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntersectionList, Members: &m_IntersectionList, Type: smithy.ShapeTypeList, Ext: &e_IntersectionList})
+var s_IntersectionStreet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntersectionStreet, Type: smithy.ShapeTypeString, Ext: &e_IntersectionStreet})
+var s_IntersectionStreetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntersectionStreetList, Members: &m_IntersectionStreetList, Type: smithy.ShapeTypeList, Ext: &e_IntersectionStreetList})
+var s_LanguageTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LanguageTag, Type: smithy.ShapeTypeString, Ext: &e_LanguageTag})
+var s_MatchScore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &e_MatchScore})
+var sMatchScoreDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMatchScoreDetails, Members: &mMatchScoreDetails, Type: smithy.ShapeTypeStructure, Ext: &eMatchScoreDetails})
+var s_MatchScoreList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MatchScoreList, Members: &m_MatchScoreList, Type: smithy.ShapeTypeList, Ext: &e_MatchScoreList})
+var sOpeningHours = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpeningHours, Members: &mOpeningHours, Type: smithy.ShapeTypeStructure, Ext: &eOpeningHours})
+var sOpeningHoursComponents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpeningHoursComponents, Members: &mOpeningHoursComponents, Type: smithy.ShapeTypeStructure, Ext: &eOpeningHoursComponents})
+var s_OpeningHoursComponentsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OpeningHoursComponentsList, Members: &m_OpeningHoursComponentsList, Type: smithy.ShapeTypeList, Ext: &e_OpeningHoursComponentsList})
+var s_OpeningHoursDisplay = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OpeningHoursDisplay, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &e_OpeningHoursDisplay})
+var s_OpeningHoursDisplayList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OpeningHoursDisplayList, Members: &m_OpeningHoursDisplayList, Type: smithy.ShapeTypeList, Ext: &e_OpeningHoursDisplayList})
+var s_OpeningHoursList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OpeningHoursList, Members: &m_OpeningHoursList, Type: smithy.ShapeTypeList, Ext: &e_OpeningHoursList})
+var sParsedQueryComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParsedQueryComponent, Members: &mParsedQueryComponent, Type: smithy.ShapeTypeStructure, Ext: &eParsedQueryComponent})
+var s_ParsedQueryComponentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &e_ParsedQueryComponentList})
+var sParsedQuerySecondaryAddressComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParsedQuerySecondaryAddressComponent, Members: &mParsedQuerySecondaryAddressComponent, Type: smithy.ShapeTypeStructure, Ext: &eParsedQuerySecondaryAddressComponent})
+var s_ParsedQuerySecondaryAddressComponentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParsedQuerySecondaryAddressComponentList, Members: &m_ParsedQuerySecondaryAddressComponentList, Type: smithy.ShapeTypeList, Ext: &e_ParsedQuerySecondaryAddressComponentList})
+var sPhonemeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhonemeDetails, Members: &mPhonemeDetails, Type: smithy.ShapeTypeStructure, Ext: &ePhonemeDetails})
+var sPhonemeTranscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhonemeTranscription, Members: &mPhonemeTranscription, Type: smithy.ShapeTypeStructure, Ext: &ePhonemeTranscription})
+var s_PhonemeTranscriptionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhonemeTranscriptionList, Members: &m_PhonemeTranscriptionList, Type: smithy.ShapeTypeList, Ext: &e_PhonemeTranscriptionList})
+var sPlaceAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlaceAttribute, Members: &mPlaceAttribute, Traits: &t10, Type: smithy.ShapeTypeEnum, Ext: &ePlaceAttribute})
+var s_PlaceAttributeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlaceAttributeList, Members: &m_PlaceAttributeList, Type: smithy.ShapeTypeList, Ext: &e_PlaceAttributeList})
+var sPlaceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlaceType, Members: &mPlaceType, Traits: &t10, Type: smithy.ShapeTypeEnum, Ext: &ePlaceType})
+var s_Position = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Position, Members: &m_Position, Traits: &t10, Type: smithy.ShapeTypeList, Ext: &e_Position})
+var sPostalAuthority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostalAuthority, Members: &mPostalAuthority, Traits: &t10, Type: smithy.ShapeTypeEnum, Ext: &ePostalAuthority})
+var sPostalCodeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostalCodeDetails, Members: &mPostalCodeDetails, Type: smithy.ShapeTypeStructure, Ext: &ePostalCodeDetails})
+var s_PostalCodeDetailsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PostalCodeDetailsList, Members: &m_PostalCodeDetailsList, Type: smithy.ShapeTypeList, Ext: &e_PostalCodeDetailsList})
+var sPostalCodeMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostalCodeMode, Members: &mPostalCodeMode, Type: smithy.ShapeTypeEnum, Ext: &ePostalCodeMode})
+var sPostalCodeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostalCodeType, Members: &mPostalCodeType, Traits: &t10, Type: smithy.ShapeTypeEnum, Ext: &ePostalCodeType})
+var sQueryRefinement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryRefinement, Members: &mQueryRefinement, Type: smithy.ShapeTypeStructure, Ext: &eQueryRefinement})
+var s_QueryRefinementList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryRefinementList, Members: &m_QueryRefinementList, Type: smithy.ShapeTypeList, Ext: &e_QueryRefinementList})
+var sQueryType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryType, Members: &mQueryType, Type: smithy.ShapeTypeEnum, Ext: &eQueryType})
+var sRecordTypeCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordTypeCode, Members: &mRecordTypeCode, Traits: &t10, Type: smithy.ShapeTypeEnum, Ext: &eRecordTypeCode})
+var sRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegion, Members: &mRegion, Type: smithy.ShapeTypeStructure, Ext: &eRegion})
+var sRegionHighlights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegionHighlights, Members: &mRegionHighlights, Type: smithy.ShapeTypeStructure, Ext: &eRegionHighlights})
+var sRelatedPlace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelatedPlace, Members: &mRelatedPlace, Type: smithy.ShapeTypeStructure, Ext: &eRelatedPlace})
+var s_RelatedPlaceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelatedPlaceList, Members: &m_RelatedPlaceList, Type: smithy.ShapeTypeList, Ext: &e_RelatedPlaceList})
+var sReverseGeocodeAdditionalFeature = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReverseGeocodeAdditionalFeature, Members: &mReverseGeocodeAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &eReverseGeocodeAdditionalFeature})
+var s_ReverseGeocodeAdditionalFeatureList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReverseGeocodeAdditionalFeatureList, Members: &m_ReverseGeocodeAdditionalFeatureList, Type: smithy.ShapeTypeList, Ext: &e_ReverseGeocodeAdditionalFeatureList})
+var sReverseGeocodeAddressNamesMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReverseGeocodeAddressNamesMode, Members: &mReverseGeocodeAddressNamesMode, Type: smithy.ShapeTypeEnum, Ext: &eReverseGeocodeAddressNamesMode})
+var sReverseGeocodeFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReverseGeocodeFilter, Members: &mReverseGeocodeFilter, Type: smithy.ShapeTypeStructure, Ext: &eReverseGeocodeFilter})
+var sReverseGeocodeFilterPlaceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReverseGeocodeFilterPlaceType, Members: &mReverseGeocodeFilterPlaceType, Type: smithy.ShapeTypeEnum, Ext: &eReverseGeocodeFilterPlaceType})
+var s_ReverseGeocodeFilterPlaceTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReverseGeocodeFilterPlaceTypeList, Members: &m_ReverseGeocodeFilterPlaceTypeList, Type: smithy.ShapeTypeList, Ext: &e_ReverseGeocodeFilterPlaceTypeList})
+var sReverseGeocodeIntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReverseGeocodeIntendedUse, Members: &mReverseGeocodeIntendedUse, Type: smithy.ShapeTypeEnum, Ext: &eReverseGeocodeIntendedUse})
+var sReverseGeocodeResultItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReverseGeocodeResultItem, Members: &mReverseGeocodeResultItem, Type: smithy.ShapeTypeStructure, Ext: &eReverseGeocodeResultItem})
+var s_ReverseGeocodeResultItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReverseGeocodeResultItemList, Members: &m_ReverseGeocodeResultItemList, Type: smithy.ShapeTypeList, Ext: &e_ReverseGeocodeResultItemList})
+var sSearchNearbyAdditionalFeature = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchNearbyAdditionalFeature, Members: &mSearchNearbyAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &eSearchNearbyAdditionalFeature})
+var s_SearchNearbyAdditionalFeatureList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchNearbyAdditionalFeatureList, Members: &m_SearchNearbyAdditionalFeatureList, Type: smithy.ShapeTypeList, Ext: &e_SearchNearbyAdditionalFeatureList})
+var sSearchNearbyFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchNearbyFilter, Members: &mSearchNearbyFilter, Type: smithy.ShapeTypeStructure, Ext: &eSearchNearbyFilter})
+var sSearchNearbyIntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchNearbyIntendedUse, Members: &mSearchNearbyIntendedUse, Type: smithy.ShapeTypeEnum, Ext: &eSearchNearbyIntendedUse})
+var sSearchNearbyResultItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchNearbyResultItem, Members: &mSearchNearbyResultItem, Type: smithy.ShapeTypeStructure, Ext: &eSearchNearbyResultItem})
+var s_SearchNearbyResultItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchNearbyResultItemList, Members: &m_SearchNearbyResultItemList, Type: smithy.ShapeTypeList, Ext: &e_SearchNearbyResultItemList})
+var sSearchTextAdditionalFeature = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchTextAdditionalFeature, Members: &mSearchTextAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &eSearchTextAdditionalFeature})
+var s_SearchTextAdditionalFeatureList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchTextAdditionalFeatureList, Members: &m_SearchTextAdditionalFeatureList, Type: smithy.ShapeTypeList, Ext: &e_SearchTextAdditionalFeatureList})
+var sSearchTextFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchTextFilter, Members: &mSearchTextFilter, Type: smithy.ShapeTypeStructure, Ext: &eSearchTextFilter})
+var sSearchTextIntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchTextIntendedUse, Members: &mSearchTextIntendedUse, Type: smithy.ShapeTypeEnum, Ext: &eSearchTextIntendedUse})
+var sSearchTextResultItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchTextResultItem, Members: &mSearchTextResultItem, Type: smithy.ShapeTypeStructure, Ext: &eSearchTextResultItem})
+var s_SearchTextResultItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchTextResultItemList, Members: &m_SearchTextResultItemList, Type: smithy.ShapeTypeList, Ext: &e_SearchTextResultItemList})
+var sSearchTextTravelMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchTextTravelMode, Members: &mSearchTextTravelMode, Type: smithy.ShapeTypeEnum, Ext: &eSearchTextTravelMode})
+var sSecondaryAddressComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecondaryAddressComponent, Members: &mSecondaryAddressComponent, Type: smithy.ShapeTypeStructure, Ext: &eSecondaryAddressComponent})
+var s_SecondaryAddressComponentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecondaryAddressComponentList, Members: &m_SecondaryAddressComponentList, Type: smithy.ShapeTypeList, Ext: &e_SecondaryAddressComponentList})
+var sSecondaryAddressComponentMatchScore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecondaryAddressComponentMatchScore, Members: &mSecondaryAddressComponentMatchScore, Type: smithy.ShapeTypeStructure, Ext: &eSecondaryAddressComponentMatchScore})
+var s_SecondaryAddressComponentMatchScoreList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecondaryAddressComponentMatchScoreList, Members: &m_SecondaryAddressComponentMatchScoreList, Type: smithy.ShapeTypeList, Ext: &e_SecondaryAddressComponentMatchScoreList})
+var s_SensitiveBoolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveBoolean, Traits: &t10, Type: smithy.ShapeTypeBoolean, Ext: &e_SensitiveBoolean})
+var s_SensitiveString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveString, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &e_SensitiveString})
+var sStreetComponents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreetComponents, Members: &mStreetComponents, Type: smithy.ShapeTypeStructure, Ext: &eStreetComponents})
+var s_StreetComponentsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreetComponentsList, Members: &m_StreetComponentsList, Type: smithy.ShapeTypeList, Ext: &e_StreetComponentsList})
+var sSubRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubRegion, Members: &mSubRegion, Type: smithy.ShapeTypeStructure, Ext: &eSubRegion})
+var sSubRegionHighlights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubRegionHighlights, Members: &mSubRegionHighlights, Type: smithy.ShapeTypeStructure, Ext: &eSubRegionHighlights})
+var sSuggestAdditionalFeature = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestAdditionalFeature, Members: &mSuggestAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &eSuggestAdditionalFeature})
+var s_SuggestAdditionalFeatureList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SuggestAdditionalFeatureList, Members: &m_SuggestAdditionalFeatureList, Type: smithy.ShapeTypeList, Ext: &e_SuggestAdditionalFeatureList})
+var sSuggestAddressHighlights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestAddressHighlights, Members: &mSuggestAddressHighlights, Type: smithy.ShapeTypeStructure, Ext: &eSuggestAddressHighlights})
+var sSuggestFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestFilter, Members: &mSuggestFilter, Type: smithy.ShapeTypeStructure, Ext: &eSuggestFilter})
+var sSuggestHighlights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestHighlights, Members: &mSuggestHighlights, Type: smithy.ShapeTypeStructure, Ext: &eSuggestHighlights})
+var sSuggestIntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestIntendedUse, Members: &mSuggestIntendedUse, Type: smithy.ShapeTypeEnum, Ext: &eSuggestIntendedUse})
+var sSuggestPlaceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestPlaceResult, Members: &mSuggestPlaceResult, Type: smithy.ShapeTypeStructure, Ext: &eSuggestPlaceResult})
+var sSuggestQueryResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestQueryResult, Members: &mSuggestQueryResult, Type: smithy.ShapeTypeStructure, Ext: &eSuggestQueryResult})
+var sSuggestResultItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestResultItem, Members: &mSuggestResultItem, Type: smithy.ShapeTypeStructure, Ext: &eSuggestResultItem})
+var s_SuggestResultItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SuggestResultItemList, Members: &m_SuggestResultItemList, Type: smithy.ShapeTypeList, Ext: &e_SuggestResultItemList})
+var sSuggestResultItemType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestResultItemType, Members: &mSuggestResultItemType, Type: smithy.ShapeTypeEnum, Ext: &eSuggestResultItemType})
+var sSuggestTravelMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestTravelMode, Members: &mSuggestTravelMode, Type: smithy.ShapeTypeEnum, Ext: &eSuggestTravelMode})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sTimeZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeZone, Members: &mTimeZone, Type: smithy.ShapeTypeStructure, Ext: &eTimeZone})
+var s_Token = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &e_Token})
+var sTranslationDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTranslationDetails, Members: &mTranslationDetails, Type: smithy.ShapeTypeStructure, Ext: &eTranslationDetails})
+var sTranslationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTranslationName, Members: &mTranslationName, Type: smithy.ShapeTypeStructure, Ext: &eTranslationName})
+var s_TranslationNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TranslationNameList, Members: &m_TranslationNameList, Type: smithy.ShapeTypeList, Ext: &e_TranslationNameList})
+var sTranslationNameType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTranslationNameType, Members: &mTranslationNameType, Type: smithy.ShapeTypeEnum, Ext: &eTranslationNameType})
+var sTypePlacement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTypePlacement, Members: &mTypePlacement, Type: smithy.ShapeTypeEnum, Ext: &eTypePlacement})
+var s_TypeSeparator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TypeSeparator, Type: smithy.ShapeTypeString, Ext: &e_TypeSeparator})
+var sUspsZip = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUspsZip, Members: &mUspsZip, Type: smithy.ShapeTypeStructure, Ext: &eUspsZip})
+var sUspsZipPlus4 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUspsZipPlus4, Members: &mUspsZipPlus4, Type: smithy.ShapeTypeStructure, Ext: &eUspsZipPlus4})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
+var sZipClassificationCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iZipClassificationCode, Members: &mZipClassificationCode, Traits: &t10, Type: smithy.ShapeTypeEnum, Ext: &eZipClassificationCode})
+var sAutocompleteRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutocompleteRequest, Members: &mAutocompleteRequest, Type: smithy.ShapeTypeStructure, Ext: &eAutocompleteRequest})
+var sAutocompleteResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutocompleteResponse, Members: &mAutocompleteResponse, Type: smithy.ShapeTypeStructure, Ext: &eAutocompleteResponse})
+var sGeocodeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeocodeRequest, Members: &mGeocodeRequest, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeRequest})
+var sGeocodeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeocodeResponse, Members: &mGeocodeResponse, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeResponse})
+var sGetPlaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPlaceRequest, Members: &mGetPlaceRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaceRequest})
+var sGetPlaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPlaceResponse, Members: &mGetPlaceResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaceResponse})
+var sReverseGeocodeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReverseGeocodeRequest, Members: &mReverseGeocodeRequest, Type: smithy.ShapeTypeStructure, Ext: &eReverseGeocodeRequest})
+var sReverseGeocodeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReverseGeocodeResponse, Members: &mReverseGeocodeResponse, Type: smithy.ShapeTypeStructure, Ext: &eReverseGeocodeResponse})
+var sSearchNearbyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchNearbyRequest, Members: &mSearchNearbyRequest, Type: smithy.ShapeTypeStructure, Ext: &eSearchNearbyRequest})
+var sSearchNearbyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchNearbyResponse, Members: &mSearchNearbyResponse, Type: smithy.ShapeTypeStructure, Ext: &eSearchNearbyResponse})
+var sSearchTextRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchTextRequest, Members: &mSearchTextRequest, Type: smithy.ShapeTypeStructure, Ext: &eSearchTextRequest})
+var sSearchTextResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchTextResponse, Members: &mSearchTextResponse, Type: smithy.ShapeTypeStructure, Ext: &eSearchTextResponse})
+var sSuggestRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestRequest, Members: &mSuggestRequest, Type: smithy.ShapeTypeStructure, Ext: &eSuggestRequest})
+var sSuggestResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestResponse, Members: &mSuggestResponse, Type: smithy.ShapeTypeStructure, Ext: &eSuggestResponse})
 
-var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &ext[9]})
-var sAccessPoint_Position = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Position", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[11]})
-var sAccessPoint_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iAccessPointType, Members: &mAccessPointType, Type: smithy.ShapeTypeEnum, Ext: &ext[12]})
-var sAccessPoint_Primary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Primary", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &ext[13]})
-var sAccessPoint_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[14]})
-var s_AccessPointList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccessPoint, Members: &mAccessPoint, Type: smithy.ShapeTypeStructure, Ext: &ext[16]})
-var sAccessPointType_DELIVERY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELIVERY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[18]})
-var sAccessPointType_EMERGENCY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMERGENCY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[19]})
-var sAccessPointType_ENTRANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENTRANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[20]})
-var sAccessPointType_LOADING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOADING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[21]})
-var sAccessPointType_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[22]})
-var sAccessPointType_PARKING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARKING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[23]})
-var sAccessPointType_TAXI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TAXI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[24]})
-var sAccessRestriction_Restricted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Restricted", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &ext[26]})
-var sAccessRestriction_Categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Categories", ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &ext[27]})
-var s_AccessRestrictionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccessRestriction, Members: &mAccessRestriction, Type: smithy.ShapeTypeStructure, Ext: &ext[29]})
-var sAddress_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var sAddress_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &iCountry, Members: &mCountry, Type: smithy.ShapeTypeStructure, Ext: &ext[32]})
-var sAddress_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &iRegion, Members: &mRegion, Type: smithy.ShapeTypeStructure, Ext: &ext[33]})
-var sAddress_SubRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubRegion", ID: &iSubRegion, Members: &mSubRegion, Type: smithy.ShapeTypeStructure, Ext: &ext[34]})
-var sAddress_Locality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locality", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var sAddress_District = smithy.NewStaticSchema(smithy.StaticSchema{Member: "District", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var sAddress_SubDistrict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubDistrict", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[37]})
-var sAddress_PostalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCode", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[38]})
-var sAddress_Block = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Block", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[39]})
-var sAddress_SubBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubBlock", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var sAddress_Intersection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Intersection", ID: &i_IntersectionStreetList, Members: &m_IntersectionStreetList, Type: smithy.ShapeTypeList, Ext: &ext[41]})
-var sAddress_Street = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Street", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var sAddress_StreetComponents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreetComponents", ID: &i_StreetComponentsList, Members: &m_StreetComponentsList, Type: smithy.ShapeTypeList, Ext: &ext[43]})
-var sAddress_AddressNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressNumber", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var sAddress_Building = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Building", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var sAddress_SecondaryAddressComponents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecondaryAddressComponents", ID: &i_SecondaryAddressComponentList, Members: &m_SecondaryAddressComponentList, Type: smithy.ShapeTypeList, Ext: &ext[46]})
-var sAddressComponentMatchScores_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &ext[48]})
-var sAddressComponentMatchScores_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &ext[49]})
-var sAddressComponentMatchScores_SubRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubRegion", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &ext[50]})
-var sAddressComponentMatchScores_Locality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locality", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &ext[51]})
-var sAddressComponentMatchScores_District = smithy.NewStaticSchema(smithy.StaticSchema{Member: "District", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &ext[52]})
-var sAddressComponentMatchScores_SubDistrict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubDistrict", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &ext[53]})
-var sAddressComponentMatchScores_PostalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCode", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &ext[54]})
-var sAddressComponentMatchScores_Block = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Block", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &ext[55]})
-var sAddressComponentMatchScores_SubBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubBlock", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &ext[56]})
-var sAddressComponentMatchScores_Intersection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Intersection", ID: &i_MatchScoreList, Members: &m_MatchScoreList, Type: smithy.ShapeTypeList, Ext: &ext[57]})
-var sAddressComponentMatchScores_AddressNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressNumber", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &ext[58]})
-var sAddressComponentMatchScores_Building = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Building", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &ext[59]})
-var sAddressComponentMatchScores_SecondaryAddressComponents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecondaryAddressComponents", ID: &i_SecondaryAddressComponentMatchScoreList, Members: &m_SecondaryAddressComponentMatchScoreList, Type: smithy.ShapeTypeList, Ext: &ext[60]})
-var sAddressComponentPhonemes_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &i_PhonemeTranscriptionList, Members: &m_PhonemeTranscriptionList, Type: smithy.ShapeTypeList, Ext: &ext[62]})
-var sAddressComponentPhonemes_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_PhonemeTranscriptionList, Members: &m_PhonemeTranscriptionList, Type: smithy.ShapeTypeList, Ext: &ext[63]})
-var sAddressComponentPhonemes_SubRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubRegion", ID: &i_PhonemeTranscriptionList, Members: &m_PhonemeTranscriptionList, Type: smithy.ShapeTypeList, Ext: &ext[64]})
-var sAddressComponentPhonemes_Locality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locality", ID: &i_PhonemeTranscriptionList, Members: &m_PhonemeTranscriptionList, Type: smithy.ShapeTypeList, Ext: &ext[65]})
-var sAddressComponentPhonemes_District = smithy.NewStaticSchema(smithy.StaticSchema{Member: "District", ID: &i_PhonemeTranscriptionList, Members: &m_PhonemeTranscriptionList, Type: smithy.ShapeTypeList, Ext: &ext[66]})
-var sAddressComponentPhonemes_SubDistrict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubDistrict", ID: &i_PhonemeTranscriptionList, Members: &m_PhonemeTranscriptionList, Type: smithy.ShapeTypeList, Ext: &ext[67]})
-var sAddressComponentPhonemes_Block = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Block", ID: &i_PhonemeTranscriptionList, Members: &m_PhonemeTranscriptionList, Type: smithy.ShapeTypeList, Ext: &ext[68]})
-var sAddressComponentPhonemes_SubBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubBlock", ID: &i_PhonemeTranscriptionList, Members: &m_PhonemeTranscriptionList, Type: smithy.ShapeTypeList, Ext: &ext[69]})
-var sAddressComponentPhonemes_Street = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Street", ID: &i_PhonemeTranscriptionList, Members: &m_PhonemeTranscriptionList, Type: smithy.ShapeTypeList, Ext: &ext[70]})
-var sAddressTranslationComponent_DISTRICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRICT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sAddressTranslationComponent_LOCALITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCALITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[73]})
-var sAddressTranslationComponent_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var sAddressTranslationComponent_SUB_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUB_REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[75]})
-var s_AddressTranslationComponentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAddressTranslationComponent, Members: &mAddressTranslationComponent, Type: smithy.ShapeTypeEnum, Ext: &ext[77]})
-var sAdminNames_Names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Names", ID: &i_TranslationNameList, Members: &m_TranslationNameList, Type: smithy.ShapeTypeList, Ext: &ext[79]})
-var sAdminNames_Preference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Preference", ID: &iAdminNamesPreference, Members: &mAdminNamesPreference, Type: smithy.ShapeTypeEnum, Ext: &ext[80]})
-var s_AdminNamesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdminNames, Members: &mAdminNames, Type: smithy.ShapeTypeStructure, Ext: &ext[82]})
-var sAdminNamesPreference_ALTERNATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALTERNATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[84]})
-var sAdminNamesPreference_PRIMARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIMARY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[85]})
-var sAutocompleteAdditionalFeature_CORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[88]})
-var s_AutocompleteAdditionalFeatureList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAutocompleteAdditionalFeature, Members: &mAutocompleteAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &ext[90]})
-var sAutocompleteAddressHighlights_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &ext[92]})
-var sAutocompleteAddressHighlights_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &iCountryHighlights, Members: &mCountryHighlights, Type: smithy.ShapeTypeStructure, Ext: &ext[93]})
-var sAutocompleteAddressHighlights_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &iRegionHighlights, Members: &mRegionHighlights, Type: smithy.ShapeTypeStructure, Ext: &ext[94]})
-var sAutocompleteAddressHighlights_SubRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubRegion", ID: &iSubRegionHighlights, Members: &mSubRegionHighlights, Type: smithy.ShapeTypeStructure, Ext: &ext[95]})
-var sAutocompleteAddressHighlights_Locality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locality", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &ext[96]})
-var sAutocompleteAddressHighlights_District = smithy.NewStaticSchema(smithy.StaticSchema{Member: "District", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &ext[97]})
-var sAutocompleteAddressHighlights_SubDistrict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubDistrict", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &ext[98]})
-var sAutocompleteAddressHighlights_Street = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Street", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &ext[99]})
-var sAutocompleteAddressHighlights_Block = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Block", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &ext[100]})
-var sAutocompleteAddressHighlights_SubBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubBlock", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &ext[101]})
-var sAutocompleteAddressHighlights_Intersection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Intersection", ID: &i_IntersectionHighlightsList, Members: &m_IntersectionHighlightsList, Type: smithy.ShapeTypeList, Ext: &ext[102]})
-var sAutocompleteAddressHighlights_PostalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCode", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &ext[103]})
-var sAutocompleteAddressHighlights_AddressNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressNumber", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &ext[104]})
-var sAutocompleteAddressHighlights_Building = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Building", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &ext[105]})
-var sAutocompleteFilter_BoundingBox = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BoundingBox", ID: &i_BoundingBox, Members: &m_BoundingBox, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[107]})
-var sAutocompleteFilter_Circle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Circle", ID: &iFilterCircle, Members: &mFilterCircle, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &ext[108]})
-var sAutocompleteFilter_IncludeCountries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeCountries", ID: &i_CountryCodeList, Members: &m_CountryCodeList, Type: smithy.ShapeTypeList, Ext: &ext[109]})
-var sAutocompleteFilter_IncludePlaceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludePlaceTypes", ID: &i_AutocompleteFilterPlaceTypeList, Members: &m_AutocompleteFilterPlaceTypeList, Type: smithy.ShapeTypeList, Ext: &ext[110]})
-var sAutocompleteFilterPlaceType_LOCALITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCALITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[112]})
-var sAutocompleteFilterPlaceType_POSTAL_CODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POSTAL_CODE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[113]})
-var sAutocompleteFilterPlaceType_STREET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STREET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[114]})
-var sAutocompleteFilterPlaceType_INTERSECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERSECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[115]})
-var sAutocompleteFilterPlaceType_POINT_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POINT_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[116]})
-var sAutocompleteFilterPlaceType_INTERPOLATED_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERPOLATED_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[117]})
-var sAutocompleteFilterPlaceType_COUNTRY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COUNTRY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[118]})
-var sAutocompleteFilterPlaceType_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[119]})
-var s_AutocompleteFilterPlaceTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAutocompleteFilterPlaceType, Members: &mAutocompleteFilterPlaceType, Type: smithy.ShapeTypeEnum, Ext: &ext[121]})
-var sAutocompleteHighlights_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &ext[123]})
-var sAutocompleteHighlights_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAutocompleteAddressHighlights, Members: &mAutocompleteAddressHighlights, Type: smithy.ShapeTypeStructure, Ext: &ext[124]})
-var sAutocompleteIntendedUse_SINGLE_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var sAutocompleteResultItem_PlaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceId", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[128]})
-var sAutocompleteResultItem_PlaceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceType", ID: &iPlaceType, Members: &mPlaceType, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &ext[129]})
-var sAutocompleteResultItem_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var sAutocompleteResultItem_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &ext[131]})
-var sAutocompleteResultItem_Distance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Distance", ID: &i_DistanceMeters, Traits: &t9, Type: smithy.ShapeTypeLong, Ext: &ext[132]})
-var sAutocompleteResultItem_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i_LanguageTag, Type: smithy.ShapeTypeString, Ext: &ext[133]})
-var sAutocompleteResultItem_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode3, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[134]})
-var sAutocompleteResultItem_Highlights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Highlights", ID: &iAutocompleteHighlights, Members: &mAutocompleteHighlights, Type: smithy.ShapeTypeStructure, Ext: &ext[135]})
-var sAutocompleteResultItem_EstimatedPointAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EstimatedPointAddress", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &ext[136]})
-var s_AutocompleteResultItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAutocompleteResultItem, Members: &mAutocompleteResultItem, Type: smithy.ShapeTypeStructure, Ext: &ext[138]})
-var s_BoundingBox_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[140]})
-var sBusinessChain_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[142]})
-var sBusinessChain_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[143]})
-var s_BusinessChainList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBusinessChain, Members: &mBusinessChain, Type: smithy.ShapeTypeStructure, Ext: &ext[145]})
-var sCategory_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[147]})
-var sCategory_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[148]})
-var sCategory_LocalizedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocalizedName", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[149]})
-var sCategory_Primary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Primary", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &ext[150]})
-var s_CategoryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCategory, Members: &mCategory, Type: smithy.ShapeTypeStructure, Ext: &ext[152]})
-var sComponentMatchScores_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &ext[154]})
-var sComponentMatchScores_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddressComponentMatchScores, Members: &mAddressComponentMatchScores, Type: smithy.ShapeTypeStructure, Ext: &ext[155]})
-var sContactDetails_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[157]})
-var sContactDetails_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[158]})
-var sContactDetails_Categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Categories", ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &ext[159]})
-var s_ContactDetailsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContactDetails, Members: &mContactDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[161]})
-var sContacts_Phones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Phones", ID: &i_ContactDetailsList, Members: &m_ContactDetailsList, Type: smithy.ShapeTypeList, Ext: &ext[163]})
-var sContacts_Faxes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Faxes", ID: &i_ContactDetailsList, Members: &m_ContactDetailsList, Type: smithy.ShapeTypeList, Ext: &ext[164]})
-var sContacts_Websites = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Websites", ID: &i_ContactDetailsList, Members: &m_ContactDetailsList, Type: smithy.ShapeTypeList, Ext: &ext[165]})
-var sContacts_Emails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Emails", ID: &i_ContactDetailsList, Members: &m_ContactDetailsList, Type: smithy.ShapeTypeList, Ext: &ext[166]})
-var sCountry_Code2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code2", ID: &i_CountryCode2, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[168]})
-var sCountry_Code3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code3", ID: &i_CountryCode3, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[169]})
-var sCountry_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[170]})
-var s_CountryCodeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CountryCode, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[175]})
-var sCountryHighlights_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &ext[177]})
-var sCountryHighlights_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &ext[178]})
-var sCrossReference_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[180]})
-var sCrossReference_SourcePlaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourcePlaceId", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[181]})
-var sCrossReference_SourceCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceCategories", ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &ext[182]})
-var s_CrossReferenceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCrossReference, Members: &mCrossReference, Type: smithy.ShapeTypeStructure, Ext: &ext[184]})
-var s_FilterBusinessChainList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[188]})
-var s_FilterCategoryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[190]})
-var sFilterCircle_Center = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Center", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[192]})
-var sFilterCircle_Radius = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Radius", ID: &i_DistanceMeters, Traits: &t9, Type: smithy.ShapeTypeLong, Ext: &ext[193]})
-var s_FilterFoodTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[195]})
-var sFoodType_LocalizedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocalizedName", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[197]})
-var sFoodType_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[198]})
-var sFoodType_Primary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Primary", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &ext[199]})
-var s_FoodTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFoodType, Members: &mFoodType, Type: smithy.ShapeTypeStructure, Ext: &ext[201]})
-var sGeocodeAdditionalFeature_TIME_ZONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_ZONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[203]})
-var sGeocodeAdditionalFeature_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[204]})
-var sGeocodeAdditionalFeature_SECONDARY_ADDRESSES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECONDARY_ADDRESSES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[205]})
-var sGeocodeAdditionalFeature_INTERSECTIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERSECTIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[206]})
-var s_GeocodeAdditionalFeatureList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGeocodeAdditionalFeature, Members: &mGeocodeAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &ext[208]})
-var sGeocodeAddressNamesMode_MATCHED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MATCHED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[210]})
-var sGeocodeAddressNamesMode_ADMINISTRATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADMINISTRATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[211]})
-var sGeocodeFilter_IncludeCountries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeCountries", ID: &i_CountryCodeList, Members: &m_CountryCodeList, Type: smithy.ShapeTypeList, Ext: &ext[213]})
-var sGeocodeFilter_IncludePlaceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludePlaceTypes", ID: &i_GeocodeFilterPlaceTypeList, Members: &m_GeocodeFilterPlaceTypeList, Type: smithy.ShapeTypeList, Ext: &ext[214]})
-var sGeocodeFilterPlaceType_LOCALITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCALITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[216]})
-var sGeocodeFilterPlaceType_POSTAL_CODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POSTAL_CODE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[217]})
-var sGeocodeFilterPlaceType_INTERSECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERSECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[218]})
-var sGeocodeFilterPlaceType_STREET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STREET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[219]})
-var sGeocodeFilterPlaceType_POINT_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POINT_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[220]})
-var sGeocodeFilterPlaceType_INTERPOLATED_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERPOLATED_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[221]})
-var sGeocodeFilterPlaceType_SECONDARY_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECONDARY_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[222]})
-var sGeocodeFilterPlaceType_POINT_OF_INTEREST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POINT_OF_INTEREST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[223]})
-var sGeocodeFilterPlaceType_COUNTRY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COUNTRY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[224]})
-var sGeocodeFilterPlaceType_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[225]})
-var s_GeocodeFilterPlaceTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGeocodeFilterPlaceType, Members: &mGeocodeFilterPlaceType, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &ext[227]})
-var sGeocodeIntendedUse_SINGLE_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[229]})
-var sGeocodeIntendedUse_STORAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STORAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[230]})
-var sGeocodeParsedQuery_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &ext[232]})
-var sGeocodeParsedQuery_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iGeocodeParsedQueryAddressComponents, Members: &mGeocodeParsedQueryAddressComponents, Type: smithy.ShapeTypeStructure, Ext: &ext[233]})
-var sGeocodeParsedQueryAddressComponents_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &ext[235]})
-var sGeocodeParsedQueryAddressComponents_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &ext[236]})
-var sGeocodeParsedQueryAddressComponents_SubRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubRegion", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &ext[237]})
-var sGeocodeParsedQueryAddressComponents_Locality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locality", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &ext[238]})
-var sGeocodeParsedQueryAddressComponents_District = smithy.NewStaticSchema(smithy.StaticSchema{Member: "District", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &ext[239]})
-var sGeocodeParsedQueryAddressComponents_SubDistrict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubDistrict", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &ext[240]})
-var sGeocodeParsedQueryAddressComponents_PostalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCode", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &ext[241]})
-var sGeocodeParsedQueryAddressComponents_Block = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Block", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &ext[242]})
-var sGeocodeParsedQueryAddressComponents_SubBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubBlock", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &ext[243]})
-var sGeocodeParsedQueryAddressComponents_Street = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Street", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &ext[244]})
-var sGeocodeParsedQueryAddressComponents_AddressNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressNumber", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &ext[245]})
-var sGeocodeParsedQueryAddressComponents_Building = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Building", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &ext[246]})
-var sGeocodeParsedQueryAddressComponents_SecondaryAddressComponents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecondaryAddressComponents", ID: &i_ParsedQuerySecondaryAddressComponentList, Members: &m_ParsedQuerySecondaryAddressComponentList, Type: smithy.ShapeTypeList, Ext: &ext[247]})
-var sGeocodeParsedQueryAddressComponents_OtherComponents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherComponents", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &ext[248]})
-var sGeocodeQueryComponents_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[250]})
-var sGeocodeQueryComponents_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[251]})
-var sGeocodeQueryComponents_SubRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubRegion", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[252]})
-var sGeocodeQueryComponents_Locality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locality", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[253]})
-var sGeocodeQueryComponents_District = smithy.NewStaticSchema(smithy.StaticSchema{Member: "District", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[254]})
-var sGeocodeQueryComponents_Street = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Street", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[255]})
-var sGeocodeQueryComponents_AddressNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressNumber", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[256]})
-var sGeocodeQueryComponents_PostalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCode", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[257]})
-var sGeocodeResultItem_PlaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceId", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[259]})
-var sGeocodeResultItem_PlaceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceType", ID: &iPlaceType, Members: &mPlaceType, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &ext[260]})
-var sGeocodeResultItem_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[261]})
-var sGeocodeResultItem_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &ext[262]})
-var sGeocodeResultItem_AddressNumberCorrected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressNumberCorrected", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &ext[263]})
-var sGeocodeResultItem_PostalCodeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCodeDetails", ID: &i_PostalCodeDetailsList, Members: &m_PostalCodeDetailsList, Type: smithy.ShapeTypeList, Ext: &ext[264]})
-var sGeocodeResultItem_Position = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Position", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[265]})
-var sGeocodeResultItem_Distance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Distance", ID: &i_DistanceMeters, Traits: &t9, Type: smithy.ShapeTypeLong, Ext: &ext[266]})
-var sGeocodeResultItem_MapView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MapView", ID: &i_BoundingBox, Members: &m_BoundingBox, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[267]})
-var sGeocodeResultItem_Categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Categories", ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &ext[268]})
-var sGeocodeResultItem_FoodTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FoodTypes", ID: &i_FoodTypeList, Members: &m_FoodTypeList, Type: smithy.ShapeTypeList, Ext: &ext[269]})
-var sGeocodeResultItem_AccessPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPoints", ID: &i_AccessPointList, Members: &m_AccessPointList, Type: smithy.ShapeTypeList, Ext: &ext[270]})
-var sGeocodeResultItem_TimeZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeZone", ID: &iTimeZone, Members: &mTimeZone, Type: smithy.ShapeTypeStructure, Ext: &ext[271]})
-var sGeocodeResultItem_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode3, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[272]})
-var sGeocodeResultItem_MatchScores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchScores", ID: &iMatchScoreDetails, Members: &mMatchScoreDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[273]})
-var sGeocodeResultItem_ParsedQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParsedQuery", ID: &iGeocodeParsedQuery, Members: &mGeocodeParsedQuery, Type: smithy.ShapeTypeStructure, Ext: &ext[274]})
-var sGeocodeResultItem_Intersections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Intersections", ID: &i_IntersectionList, Members: &m_IntersectionList, Type: smithy.ShapeTypeList, Ext: &ext[275]})
-var sGeocodeResultItem_MainAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MainAddress", ID: &iRelatedPlace, Members: &mRelatedPlace, Type: smithy.ShapeTypeStructure, Ext: &ext[276]})
-var sGeocodeResultItem_SecondaryAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecondaryAddresses", ID: &i_RelatedPlaceList, Members: &m_RelatedPlaceList, Type: smithy.ShapeTypeList, Ext: &ext[277]})
-var sGeocodeResultItem_Translations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Translations", ID: &iTranslationDetails, Members: &mTranslationDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[278]})
-var sGeocodeResultItem_EstimatedPointAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EstimatedPointAddress", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &ext[279]})
-var s_GeocodeResultItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGeocodeResultItem, Members: &mGeocodeResultItem, Type: smithy.ShapeTypeStructure, Ext: &ext[281]})
-var sGetPlaceAdditionalFeature_TIME_ZONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_ZONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[283]})
-var sGetPlaceAdditionalFeature_PHONEMES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PHONEMES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[284]})
-var sGetPlaceAdditionalFeature_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[285]})
-var sGetPlaceAdditionalFeature_CONTACT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTACT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[286]})
-var sGetPlaceAdditionalFeature_SECONDARY_ADDRESSES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECONDARY_ADDRESSES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[287]})
-var sGetPlaceAdditionalFeature_CROSS_REFERENCES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CROSS_REFERENCES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[288]})
-var s_GetPlaceAdditionalFeatureList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGetPlaceAdditionalFeature, Members: &mGetPlaceAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &ext[290]})
-var sGetPlaceAddressNamesMode_ADMINISTRATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADMINISTRATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[292]})
-var sGetPlaceIntendedUse_SINGLE_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[294]})
-var sGetPlaceIntendedUse_STORAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STORAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[295]})
-var sHighlight_StartIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartIndex", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[298]})
-var sHighlight_EndIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndIndex", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[299]})
-var sHighlight_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[300]})
-var s_HighlightList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHighlight, Members: &mHighlight, Type: smithy.ShapeTypeStructure, Ext: &ext[302]})
-var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &ext[304]})
-var sIntersection_PlaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceId", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[306]})
-var sIntersection_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[307]})
-var sIntersection_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &ext[308]})
-var sIntersection_Position = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Position", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[309]})
-var sIntersection_Distance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Distance", ID: &i_DistanceMeters, Traits: &t9, Type: smithy.ShapeTypeLong, Ext: &ext[310]})
-var sIntersection_RouteDistance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteDistance", ID: &i_DistanceMeters, Traits: &t9, Type: smithy.ShapeTypeLong, Ext: &ext[311]})
-var sIntersection_MapView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MapView", ID: &i_BoundingBox, Members: &m_BoundingBox, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[312]})
-var sIntersection_AccessPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPoints", ID: &i_AccessPointList, Members: &m_AccessPointList, Type: smithy.ShapeTypeList, Ext: &ext[313]})
-var s_IntersectionHighlightsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &ext[315]})
-var s_IntersectionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIntersection, Members: &mIntersection, Type: smithy.ShapeTypeStructure, Ext: &ext[317]})
-var s_IntersectionStreetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_IntersectionStreet, Type: smithy.ShapeTypeString, Ext: &ext[320]})
-var sMatchScoreDetails_Overall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Overall", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &ext[324]})
-var sMatchScoreDetails_Components = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Components", ID: &iComponentMatchScores, Members: &mComponentMatchScores, Type: smithy.ShapeTypeStructure, Ext: &ext[325]})
-var s_MatchScoreList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &ext[327]})
-var sOpeningHours_Display = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Display", ID: &i_OpeningHoursDisplayList, Members: &m_OpeningHoursDisplayList, Type: smithy.ShapeTypeList, Ext: &ext[329]})
-var sOpeningHours_OpenNow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenNow", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &ext[330]})
-var sOpeningHours_Components = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Components", ID: &i_OpeningHoursComponentsList, Members: &m_OpeningHoursComponentsList, Type: smithy.ShapeTypeList, Ext: &ext[331]})
-var sOpeningHours_Categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Categories", ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &ext[332]})
-var sOpeningHoursComponents_OpenTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenTime", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[334]})
-var sOpeningHoursComponents_OpenDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenDuration", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[335]})
-var sOpeningHoursComponents_Recurrence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Recurrence", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[336]})
-var s_OpeningHoursComponentsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOpeningHoursComponents, Members: &mOpeningHoursComponents, Type: smithy.ShapeTypeStructure, Ext: &ext[338]})
-var s_OpeningHoursDisplayList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OpeningHoursDisplay, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[341]})
-var s_OpeningHoursList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOpeningHours, Members: &mOpeningHours, Type: smithy.ShapeTypeStructure, Ext: &ext[343]})
-var sParsedQueryComponent_StartIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartIndex", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[345]})
-var sParsedQueryComponent_EndIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndIndex", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[346]})
-var sParsedQueryComponent_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[347]})
-var sParsedQueryComponent_QueryComponent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryComponent", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[348]})
-var s_ParsedQueryComponentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iParsedQueryComponent, Members: &mParsedQueryComponent, Type: smithy.ShapeTypeStructure, Ext: &ext[350]})
-var sParsedQuerySecondaryAddressComponent_StartIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartIndex", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[352]})
-var sParsedQuerySecondaryAddressComponent_EndIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndIndex", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[353]})
-var sParsedQuerySecondaryAddressComponent_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[354]})
-var sParsedQuerySecondaryAddressComponent_Number = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Number", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[355]})
-var sParsedQuerySecondaryAddressComponent_Designator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Designator", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[356]})
-var s_ParsedQuerySecondaryAddressComponentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iParsedQuerySecondaryAddressComponent, Members: &mParsedQuerySecondaryAddressComponent, Type: smithy.ShapeTypeStructure, Ext: &ext[358]})
-var sPhonemeDetails_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_PhonemeTranscriptionList, Members: &m_PhonemeTranscriptionList, Type: smithy.ShapeTypeList, Ext: &ext[360]})
-var sPhonemeDetails_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddressComponentPhonemes, Members: &mAddressComponentPhonemes, Type: smithy.ShapeTypeStructure, Ext: &ext[361]})
-var sPhonemeTranscription_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[363]})
-var sPhonemeTranscription_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i_LanguageTag, Type: smithy.ShapeTypeString, Ext: &ext[364]})
-var sPhonemeTranscription_Preferred = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Preferred", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &ext[365]})
-var s_PhonemeTranscriptionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPhonemeTranscription, Members: &mPhonemeTranscription, Type: smithy.ShapeTypeStructure, Ext: &ext[367]})
-var sPlaceAttribute_DRIVE_THROUGH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRIVE_THROUGH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[369]})
-var s_PlaceAttributeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPlaceAttribute, Members: &mPlaceAttribute, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &ext[371]})
-var sPlaceType_COUNTRY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COUNTRY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[373]})
-var sPlaceType_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[374]})
-var sPlaceType_SUB_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUB_REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[375]})
-var sPlaceType_LOCALITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCALITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[376]})
-var sPlaceType_DISTRICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRICT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[377]})
-var sPlaceType_SUB_DISTRICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUB_DISTRICT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[378]})
-var sPlaceType_POSTAL_CODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POSTAL_CODE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[379]})
-var sPlaceType_BLOCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BLOCK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[380]})
-var sPlaceType_SUB_BLOCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUB_BLOCK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[381]})
-var sPlaceType_INTERSECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERSECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[382]})
-var sPlaceType_STREET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STREET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[383]})
-var sPlaceType_POINT_OF_INTEREST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POINT_OF_INTEREST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[384]})
-var sPlaceType_POINT_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POINT_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[385]})
-var sPlaceType_INTERPOLATED_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERPOLATED_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[386]})
-var sPlaceType_SECONDARY_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECONDARY_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[387]})
-var sPlaceType_INFERRED_SECONDARY_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFERRED_SECONDARY_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[388]})
-var s_Position_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[390]})
-var sPostalAuthority_USPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USPS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[392]})
-var sPostalCodeDetails_PostalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCode", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[394]})
-var sPostalCodeDetails_PostalAuthority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalAuthority", ID: &iPostalAuthority, Members: &mPostalAuthority, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &ext[395]})
-var sPostalCodeDetails_PostalCodeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCodeType", ID: &iPostalCodeType, Members: &mPostalCodeType, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &ext[396]})
-var sPostalCodeDetails_UspsZip = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UspsZip", ID: &iUspsZip, Members: &mUspsZip, Type: smithy.ShapeTypeStructure, Ext: &ext[397]})
-var sPostalCodeDetails_UspsZipPlus4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UspsZipPlus4", ID: &iUspsZipPlus4, Members: &mUspsZipPlus4, Type: smithy.ShapeTypeStructure, Ext: &ext[398]})
-var s_PostalCodeDetailsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPostalCodeDetails, Members: &mPostalCodeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[400]})
-var sPostalCodeMode_MERGE_ALL_SPANNED_LOCALITIES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MERGE_ALL_SPANNED_LOCALITIES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[402]})
-var sPostalCodeMode_ENUMERATE_SPANNED_LOCALITIES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENUMERATE_SPANNED_LOCALITIES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[403]})
-var sPostalCodeMode_ENUMERATE_SPANNED_DISTRICTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENUMERATE_SPANNED_DISTRICTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[404]})
-var sPostalCodeType_USPS_ZIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USPS_ZIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[406]})
-var sPostalCodeType_USPS_ZIP_PLUS_4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USPS_ZIP_PLUS_4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[407]})
-var sQueryRefinement_RefinedTerm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RefinedTerm", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[409]})
-var sQueryRefinement_OriginalTerm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginalTerm", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[410]})
-var sQueryRefinement_StartIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartIndex", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[411]})
-var sQueryRefinement_EndIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndIndex", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[412]})
-var s_QueryRefinementList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQueryRefinement, Members: &mQueryRefinement, Type: smithy.ShapeTypeStructure, Ext: &ext[414]})
-var sQueryType_CATEGORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CATEGORY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[416]})
-var sQueryType_BUSINESS_CHAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUSINESS_CHAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[417]})
-var sRecordTypeCode_FIRM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIRM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[419]})
-var sRecordTypeCode_GENERAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GENERAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[420]})
-var sRecordTypeCode_HIGH_RISE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIGH_RISE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[421]})
-var sRecordTypeCode_POST_OFFICE_BOX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POST_OFFICE_BOX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[422]})
-var sRecordTypeCode_RURAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RURAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[423]})
-var sRecordTypeCode_STREET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STREET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[424]})
-var sRegion_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[426]})
-var sRegion_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[427]})
-var sRegionHighlights_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &ext[429]})
-var sRegionHighlights_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &ext[430]})
-var sRelatedPlace_PlaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceId", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[432]})
-var sRelatedPlace_PlaceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceType", ID: &iPlaceType, Members: &mPlaceType, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &ext[433]})
-var sRelatedPlace_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[434]})
-var sRelatedPlace_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &ext[435]})
-var sRelatedPlace_Position = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Position", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[436]})
-var sRelatedPlace_AccessPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPoints", ID: &i_AccessPointList, Members: &m_AccessPointList, Type: smithy.ShapeTypeList, Ext: &ext[437]})
-var s_RelatedPlaceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRelatedPlace, Members: &mRelatedPlace, Type: smithy.ShapeTypeStructure, Ext: &ext[439]})
-var sReverseGeocodeAdditionalFeature_TIME_ZONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_ZONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[441]})
-var sReverseGeocodeAdditionalFeature_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[442]})
-var sReverseGeocodeAdditionalFeature_INTERSECTIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERSECTIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[443]})
-var s_ReverseGeocodeAdditionalFeatureList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReverseGeocodeAdditionalFeature, Members: &mReverseGeocodeAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &ext[445]})
-var sReverseGeocodeAddressNamesMode_ADMINISTRATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADMINISTRATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[447]})
-var sReverseGeocodeFilter_IncludePlaceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludePlaceTypes", ID: &i_ReverseGeocodeFilterPlaceTypeList, Members: &m_ReverseGeocodeFilterPlaceTypeList, Type: smithy.ShapeTypeList, Ext: &ext[449]})
-var sReverseGeocodeFilterPlaceType_LOCALITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCALITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[451]})
-var sReverseGeocodeFilterPlaceType_INTERSECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERSECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[452]})
-var sReverseGeocodeFilterPlaceType_STREET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STREET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[453]})
-var sReverseGeocodeFilterPlaceType_POINT_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POINT_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[454]})
-var sReverseGeocodeFilterPlaceType_INTERPOLATED_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERPOLATED_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[455]})
-var sReverseGeocodeFilterPlaceType_SECONDARY_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECONDARY_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[456]})
-var sReverseGeocodeFilterPlaceType_POINT_OF_INTEREST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POINT_OF_INTEREST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[457]})
-var s_ReverseGeocodeFilterPlaceTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReverseGeocodeFilterPlaceType, Members: &mReverseGeocodeFilterPlaceType, Type: smithy.ShapeTypeEnum, Ext: &ext[459]})
-var sReverseGeocodeIntendedUse_SINGLE_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[461]})
-var sReverseGeocodeIntendedUse_STORAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STORAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[462]})
-var sReverseGeocodeResultItem_PlaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceId", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[464]})
-var sReverseGeocodeResultItem_PlaceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceType", ID: &iPlaceType, Members: &mPlaceType, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &ext[465]})
-var sReverseGeocodeResultItem_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[466]})
-var sReverseGeocodeResultItem_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &ext[467]})
-var sReverseGeocodeResultItem_AddressNumberCorrected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressNumberCorrected", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &ext[468]})
-var sReverseGeocodeResultItem_PostalCodeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCodeDetails", ID: &i_PostalCodeDetailsList, Members: &m_PostalCodeDetailsList, Type: smithy.ShapeTypeList, Ext: &ext[469]})
-var sReverseGeocodeResultItem_Position = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Position", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[470]})
-var sReverseGeocodeResultItem_Distance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Distance", ID: &i_DistanceMeters, Traits: &t9, Type: smithy.ShapeTypeLong, Ext: &ext[471]})
-var sReverseGeocodeResultItem_MapView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MapView", ID: &i_BoundingBox, Members: &m_BoundingBox, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[472]})
-var sReverseGeocodeResultItem_Categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Categories", ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &ext[473]})
-var sReverseGeocodeResultItem_FoodTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FoodTypes", ID: &i_FoodTypeList, Members: &m_FoodTypeList, Type: smithy.ShapeTypeList, Ext: &ext[474]})
-var sReverseGeocodeResultItem_AccessPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPoints", ID: &i_AccessPointList, Members: &m_AccessPointList, Type: smithy.ShapeTypeList, Ext: &ext[475]})
-var sReverseGeocodeResultItem_TimeZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeZone", ID: &iTimeZone, Members: &mTimeZone, Type: smithy.ShapeTypeStructure, Ext: &ext[476]})
-var sReverseGeocodeResultItem_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode3, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[477]})
-var sReverseGeocodeResultItem_Intersections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Intersections", ID: &i_IntersectionList, Members: &m_IntersectionList, Type: smithy.ShapeTypeList, Ext: &ext[478]})
-var sReverseGeocodeResultItem_MainAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MainAddress", ID: &iRelatedPlace, Members: &mRelatedPlace, Type: smithy.ShapeTypeStructure, Ext: &ext[479]})
-var sReverseGeocodeResultItem_EstimatedPointAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EstimatedPointAddress", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &ext[480]})
-var s_ReverseGeocodeResultItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReverseGeocodeResultItem, Members: &mReverseGeocodeResultItem, Type: smithy.ShapeTypeStructure, Ext: &ext[482]})
-var sSearchNearbyAdditionalFeature_TIME_ZONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_ZONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[484]})
-var sSearchNearbyAdditionalFeature_PHONEMES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PHONEMES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[485]})
-var sSearchNearbyAdditionalFeature_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[486]})
-var sSearchNearbyAdditionalFeature_CONTACT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTACT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[487]})
-var sSearchNearbyAdditionalFeature_CROSS_REFERENCES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CROSS_REFERENCES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[488]})
-var s_SearchNearbyAdditionalFeatureList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchNearbyAdditionalFeature, Members: &mSearchNearbyAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &ext[490]})
-var sSearchNearbyFilter_BoundingBox = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BoundingBox", ID: &i_BoundingBox, Members: &m_BoundingBox, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[492]})
-var sSearchNearbyFilter_IncludeCountries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeCountries", ID: &i_CountryCodeList, Members: &m_CountryCodeList, Type: smithy.ShapeTypeList, Ext: &ext[493]})
-var sSearchNearbyFilter_IncludeCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeCategories", ID: &i_FilterCategoryList, Members: &m_FilterCategoryList, Type: smithy.ShapeTypeList, Ext: &ext[494]})
-var sSearchNearbyFilter_ExcludeCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeCategories", ID: &i_FilterCategoryList, Members: &m_FilterCategoryList, Type: smithy.ShapeTypeList, Ext: &ext[495]})
-var sSearchNearbyFilter_IncludeBusinessChains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeBusinessChains", ID: &i_FilterBusinessChainList, Members: &m_FilterBusinessChainList, Type: smithy.ShapeTypeList, Ext: &ext[496]})
-var sSearchNearbyFilter_ExcludeBusinessChains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeBusinessChains", ID: &i_FilterBusinessChainList, Members: &m_FilterBusinessChainList, Type: smithy.ShapeTypeList, Ext: &ext[497]})
-var sSearchNearbyFilter_IncludeFoodTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeFoodTypes", ID: &i_FilterFoodTypeList, Members: &m_FilterFoodTypeList, Type: smithy.ShapeTypeList, Ext: &ext[498]})
-var sSearchNearbyFilter_ExcludeFoodTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeFoodTypes", ID: &i_FilterFoodTypeList, Members: &m_FilterFoodTypeList, Type: smithy.ShapeTypeList, Ext: &ext[499]})
-var sSearchNearbyIntendedUse_SINGLE_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[501]})
-var sSearchNearbyIntendedUse_STORAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STORAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[502]})
-var sSearchNearbyResultItem_PlaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceId", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[504]})
-var sSearchNearbyResultItem_PlaceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceType", ID: &iPlaceType, Members: &mPlaceType, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &ext[505]})
-var sSearchNearbyResultItem_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[506]})
-var sSearchNearbyResultItem_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &ext[507]})
-var sSearchNearbyResultItem_AddressNumberCorrected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressNumberCorrected", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &ext[508]})
-var sSearchNearbyResultItem_Position = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Position", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[509]})
-var sSearchNearbyResultItem_Distance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Distance", ID: &i_DistanceMeters, Traits: &t9, Type: smithy.ShapeTypeLong, Ext: &ext[510]})
-var sSearchNearbyResultItem_MapView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MapView", ID: &i_BoundingBox, Members: &m_BoundingBox, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[511]})
-var sSearchNearbyResultItem_Categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Categories", ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &ext[512]})
-var sSearchNearbyResultItem_FoodTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FoodTypes", ID: &i_FoodTypeList, Members: &m_FoodTypeList, Type: smithy.ShapeTypeList, Ext: &ext[513]})
-var sSearchNearbyResultItem_BusinessChains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BusinessChains", ID: &i_BusinessChainList, Members: &m_BusinessChainList, Type: smithy.ShapeTypeList, Ext: &ext[514]})
-var sSearchNearbyResultItem_Contacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contacts", ID: &iContacts, Members: &mContacts, Type: smithy.ShapeTypeStructure, Ext: &ext[515]})
-var sSearchNearbyResultItem_OpeningHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpeningHours", ID: &i_OpeningHoursList, Members: &m_OpeningHoursList, Type: smithy.ShapeTypeList, Ext: &ext[516]})
-var sSearchNearbyResultItem_AccessPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPoints", ID: &i_AccessPointList, Members: &m_AccessPointList, Type: smithy.ShapeTypeList, Ext: &ext[517]})
-var sSearchNearbyResultItem_AccessRestrictions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessRestrictions", ID: &i_AccessRestrictionList, Members: &m_AccessRestrictionList, Type: smithy.ShapeTypeList, Ext: &ext[518]})
-var sSearchNearbyResultItem_TimeZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeZone", ID: &iTimeZone, Members: &mTimeZone, Type: smithy.ShapeTypeStructure, Ext: &ext[519]})
-var sSearchNearbyResultItem_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode3, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[520]})
-var sSearchNearbyResultItem_Phonemes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Phonemes", ID: &iPhonemeDetails, Members: &mPhonemeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[521]})
-var sSearchNearbyResultItem_PlaceAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceAttributes", ID: &i_PlaceAttributeList, Members: &m_PlaceAttributeList, Type: smithy.ShapeTypeList, Ext: &ext[522]})
-var sSearchNearbyResultItem_CrossReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossReferences", ID: &i_CrossReferenceList, Members: &m_CrossReferenceList, Type: smithy.ShapeTypeList, Ext: &ext[523]})
-var s_SearchNearbyResultItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchNearbyResultItem, Members: &mSearchNearbyResultItem, Type: smithy.ShapeTypeStructure, Ext: &ext[525]})
-var sSearchTextAdditionalFeature_TIME_ZONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_ZONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[527]})
-var sSearchTextAdditionalFeature_PHONEMES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PHONEMES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[528]})
-var sSearchTextAdditionalFeature_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[529]})
-var sSearchTextAdditionalFeature_CONTACT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTACT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[530]})
-var sSearchTextAdditionalFeature_CROSS_REFERENCES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CROSS_REFERENCES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[531]})
-var s_SearchTextAdditionalFeatureList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchTextAdditionalFeature, Members: &mSearchTextAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &ext[533]})
-var sSearchTextFilter_BoundingBox = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BoundingBox", ID: &i_BoundingBox, Members: &m_BoundingBox, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[535]})
-var sSearchTextFilter_Circle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Circle", ID: &iFilterCircle, Members: &mFilterCircle, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &ext[536]})
-var sSearchTextFilter_IncludeCountries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeCountries", ID: &i_CountryCodeList, Members: &m_CountryCodeList, Type: smithy.ShapeTypeList, Ext: &ext[537]})
-var sSearchTextIntendedUse_SINGLE_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[539]})
-var sSearchTextIntendedUse_STORAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STORAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[540]})
-var sSearchTextResultItem_PlaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceId", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[542]})
-var sSearchTextResultItem_PlaceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceType", ID: &iPlaceType, Members: &mPlaceType, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &ext[543]})
-var sSearchTextResultItem_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[544]})
-var sSearchTextResultItem_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &ext[545]})
-var sSearchTextResultItem_AddressNumberCorrected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressNumberCorrected", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &ext[546]})
-var sSearchTextResultItem_Position = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Position", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[547]})
-var sSearchTextResultItem_Distance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Distance", ID: &i_DistanceMeters, Traits: &t9, Type: smithy.ShapeTypeLong, Ext: &ext[548]})
-var sSearchTextResultItem_MapView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MapView", ID: &i_BoundingBox, Members: &m_BoundingBox, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[549]})
-var sSearchTextResultItem_Categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Categories", ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &ext[550]})
-var sSearchTextResultItem_FoodTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FoodTypes", ID: &i_FoodTypeList, Members: &m_FoodTypeList, Type: smithy.ShapeTypeList, Ext: &ext[551]})
-var sSearchTextResultItem_BusinessChains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BusinessChains", ID: &i_BusinessChainList, Members: &m_BusinessChainList, Type: smithy.ShapeTypeList, Ext: &ext[552]})
-var sSearchTextResultItem_Contacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contacts", ID: &iContacts, Members: &mContacts, Type: smithy.ShapeTypeStructure, Ext: &ext[553]})
-var sSearchTextResultItem_OpeningHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpeningHours", ID: &i_OpeningHoursList, Members: &m_OpeningHoursList, Type: smithy.ShapeTypeList, Ext: &ext[554]})
-var sSearchTextResultItem_AccessPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPoints", ID: &i_AccessPointList, Members: &m_AccessPointList, Type: smithy.ShapeTypeList, Ext: &ext[555]})
-var sSearchTextResultItem_AccessRestrictions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessRestrictions", ID: &i_AccessRestrictionList, Members: &m_AccessRestrictionList, Type: smithy.ShapeTypeList, Ext: &ext[556]})
-var sSearchTextResultItem_TimeZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeZone", ID: &iTimeZone, Members: &mTimeZone, Type: smithy.ShapeTypeStructure, Ext: &ext[557]})
-var sSearchTextResultItem_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode3, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[558]})
-var sSearchTextResultItem_Phonemes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Phonemes", ID: &iPhonemeDetails, Members: &mPhonemeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[559]})
-var sSearchTextResultItem_PlaceAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceAttributes", ID: &i_PlaceAttributeList, Members: &m_PlaceAttributeList, Type: smithy.ShapeTypeList, Ext: &ext[560]})
-var sSearchTextResultItem_CrossReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossReferences", ID: &i_CrossReferenceList, Members: &m_CrossReferenceList, Type: smithy.ShapeTypeList, Ext: &ext[561]})
-var s_SearchTextResultItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchTextResultItem, Members: &mSearchTextResultItem, Type: smithy.ShapeTypeStructure, Ext: &ext[563]})
-var sSearchTextTravelMode_CAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[565]})
-var sSearchTextTravelMode_SCOOTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCOOTER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[566]})
-var sSearchTextTravelMode_TRUCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRUCK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[567]})
-var sSecondaryAddressComponent_Number = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Number", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[569]})
-var sSecondaryAddressComponent_Designator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Designator", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[570]})
-var s_SecondaryAddressComponentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSecondaryAddressComponent, Members: &mSecondaryAddressComponent, Type: smithy.ShapeTypeStructure, Ext: &ext[572]})
-var sSecondaryAddressComponentMatchScore_Number = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Number", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &ext[574]})
-var s_SecondaryAddressComponentMatchScoreList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSecondaryAddressComponentMatchScore, Members: &mSecondaryAddressComponentMatchScore, Type: smithy.ShapeTypeStructure, Ext: &ext[576]})
-var sStreetComponents_BaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BaseName", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[580]})
-var sStreetComponents_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[581]})
-var sStreetComponents_TypePlacement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypePlacement", ID: &iTypePlacement, Members: &mTypePlacement, Type: smithy.ShapeTypeEnum, Ext: &ext[582]})
-var sStreetComponents_TypeSeparator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeSeparator", ID: &i_TypeSeparator, Type: smithy.ShapeTypeString, Ext: &ext[583]})
-var sStreetComponents_Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prefix", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[584]})
-var sStreetComponents_Suffix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Suffix", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[585]})
-var sStreetComponents_Direction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Direction", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[586]})
-var sStreetComponents_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i_LanguageTag, Type: smithy.ShapeTypeString, Ext: &ext[587]})
-var s_StreetComponentsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStreetComponents, Members: &mStreetComponents, Type: smithy.ShapeTypeStructure, Ext: &ext[589]})
-var sSubRegion_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[591]})
-var sSubRegion_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[592]})
-var sSubRegionHighlights_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &ext[594]})
-var sSubRegionHighlights_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &ext[595]})
-var sSuggestAdditionalFeature_CORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[597]})
-var sSuggestAdditionalFeature_TIME_ZONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_ZONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[598]})
-var sSuggestAdditionalFeature_PHONEMES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PHONEMES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[599]})
-var sSuggestAdditionalFeature_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[600]})
-var sSuggestAdditionalFeature_CROSS_REFERENCES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CROSS_REFERENCES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[601]})
-var s_SuggestAdditionalFeatureList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSuggestAdditionalFeature, Members: &mSuggestAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &ext[603]})
-var sSuggestAddressHighlights_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &ext[605]})
-var sSuggestFilter_BoundingBox = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BoundingBox", ID: &i_BoundingBox, Members: &m_BoundingBox, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[607]})
-var sSuggestFilter_Circle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Circle", ID: &iFilterCircle, Members: &mFilterCircle, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &ext[608]})
-var sSuggestFilter_IncludeCountries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeCountries", ID: &i_CountryCodeList, Members: &m_CountryCodeList, Type: smithy.ShapeTypeList, Ext: &ext[609]})
-var sSuggestHighlights_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &ext[611]})
-var sSuggestHighlights_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iSuggestAddressHighlights, Members: &mSuggestAddressHighlights, Type: smithy.ShapeTypeStructure, Ext: &ext[612]})
-var sSuggestIntendedUse_SINGLE_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[614]})
-var sSuggestPlaceResult_PlaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceId", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[616]})
-var sSuggestPlaceResult_PlaceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceType", ID: &iPlaceType, Members: &mPlaceType, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &ext[617]})
-var sSuggestPlaceResult_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &ext[618]})
-var sSuggestPlaceResult_Position = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Position", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[619]})
-var sSuggestPlaceResult_Distance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Distance", ID: &i_DistanceMeters, Traits: &t9, Type: smithy.ShapeTypeLong, Ext: &ext[620]})
-var sSuggestPlaceResult_MapView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MapView", ID: &i_BoundingBox, Members: &m_BoundingBox, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[621]})
-var sSuggestPlaceResult_Categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Categories", ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &ext[622]})
-var sSuggestPlaceResult_FoodTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FoodTypes", ID: &i_FoodTypeList, Members: &m_FoodTypeList, Type: smithy.ShapeTypeList, Ext: &ext[623]})
-var sSuggestPlaceResult_BusinessChains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BusinessChains", ID: &i_BusinessChainList, Members: &m_BusinessChainList, Type: smithy.ShapeTypeList, Ext: &ext[624]})
-var sSuggestPlaceResult_AccessPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPoints", ID: &i_AccessPointList, Members: &m_AccessPointList, Type: smithy.ShapeTypeList, Ext: &ext[625]})
-var sSuggestPlaceResult_AccessRestrictions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessRestrictions", ID: &i_AccessRestrictionList, Members: &m_AccessRestrictionList, Type: smithy.ShapeTypeList, Ext: &ext[626]})
-var sSuggestPlaceResult_TimeZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeZone", ID: &iTimeZone, Members: &mTimeZone, Type: smithy.ShapeTypeStructure, Ext: &ext[627]})
-var sSuggestPlaceResult_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode3, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[628]})
-var sSuggestPlaceResult_Phonemes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Phonemes", ID: &iPhonemeDetails, Members: &mPhonemeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[629]})
-var sSuggestPlaceResult_PlaceAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceAttributes", ID: &i_PlaceAttributeList, Members: &m_PlaceAttributeList, Type: smithy.ShapeTypeList, Ext: &ext[630]})
-var sSuggestPlaceResult_CrossReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossReferences", ID: &i_CrossReferenceList, Members: &m_CrossReferenceList, Type: smithy.ShapeTypeList, Ext: &ext[631]})
-var sSuggestQueryResult_QueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryId", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[633]})
-var sSuggestQueryResult_QueryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryType", ID: &iQueryType, Members: &mQueryType, Type: smithy.ShapeTypeEnum, Ext: &ext[634]})
-var sSuggestResultItem_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[636]})
-var sSuggestResultItem_SuggestResultItemType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuggestResultItemType", ID: &iSuggestResultItemType, Members: &mSuggestResultItemType, Type: smithy.ShapeTypeEnum, Ext: &ext[637]})
-var sSuggestResultItem_Place = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Place", ID: &iSuggestPlaceResult, Members: &mSuggestPlaceResult, Type: smithy.ShapeTypeStructure, Ext: &ext[638]})
-var sSuggestResultItem_Query = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Query", ID: &iSuggestQueryResult, Members: &mSuggestQueryResult, Type: smithy.ShapeTypeStructure, Ext: &ext[639]})
-var sSuggestResultItem_Highlights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Highlights", ID: &iSuggestHighlights, Members: &mSuggestHighlights, Type: smithy.ShapeTypeStructure, Ext: &ext[640]})
-var s_SuggestResultItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSuggestResultItem, Members: &mSuggestResultItem, Type: smithy.ShapeTypeStructure, Ext: &ext[642]})
-var sSuggestResultItemType_PLACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PLACE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[644]})
-var sSuggestResultItemType_QUERY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUERY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[645]})
-var sSuggestTravelMode_CAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[647]})
-var sSuggestTravelMode_SCOOTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCOOTER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[648]})
-var sSuggestTravelMode_TRUCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRUCK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[649]})
-var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &ext[651]})
-var sTimeZone_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[653]})
-var sTimeZone_Offset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Offset", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[654]})
-var sTimeZone_OffsetSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OffsetSeconds", ID: &i_DurationSeconds, Traits: &t9, Type: smithy.ShapeTypeLong, Ext: &ext[655]})
-var sTranslationDetails_Locality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locality", ID: &i_AdminNamesList, Members: &m_AdminNamesList, Type: smithy.ShapeTypeList, Ext: &ext[658]})
-var sTranslationDetails_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_AdminNamesList, Members: &m_AdminNamesList, Type: smithy.ShapeTypeList, Ext: &ext[659]})
-var sTranslationDetails_District = smithy.NewStaticSchema(smithy.StaticSchema{Member: "District", ID: &i_AdminNamesList, Members: &m_AdminNamesList, Type: smithy.ShapeTypeList, Ext: &ext[660]})
-var sTranslationDetails_SubRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubRegion", ID: &i_AdminNamesList, Members: &m_AdminNamesList, Type: smithy.ShapeTypeList, Ext: &ext[661]})
-var sTranslationName_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[663]})
-var sTranslationName_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i_LanguageTag, Type: smithy.ShapeTypeString, Ext: &ext[664]})
-var sTranslationName_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iTranslationNameType, Members: &mTranslationNameType, Type: smithy.ShapeTypeEnum, Ext: &ext[665]})
-var sTranslationName_Primary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Primary", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &ext[666]})
-var sTranslationName_Transliterated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Transliterated", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &ext[667]})
-var s_TranslationNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTranslationName, Members: &mTranslationName, Type: smithy.ShapeTypeStructure, Ext: &ext[669]})
-var sTranslationNameType_ABBREVIATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ABBREVIATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[671]})
-var sTranslationNameType_AREA_CODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AREA_CODE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[672]})
-var sTranslationNameType_BASE_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BASE_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[673]})
-var sTranslationNameType_EXONYM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXONYM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[674]})
-var sTranslationNameType_SHORTENED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHORTENED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[675]})
-var sTranslationNameType_SYNONYM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYNONYM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[676]})
-var sTypePlacement_BEFORE_BASE_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEFORE_BASE_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[678]})
-var sTypePlacement_AFTER_BASE_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AFTER_BASE_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[679]})
-var sUspsZip_ZipClassificationCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZipClassificationCode", ID: &iZipClassificationCode, Members: &mZipClassificationCode, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &ext[682]})
-var sUspsZipPlus4_RecordTypeCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordTypeCode", ID: &iRecordTypeCode, Members: &mRecordTypeCode, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &ext[684]})
-var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &ext[686]})
-var sValidationException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Traits: &t14, Type: smithy.ShapeTypeEnum, Ext: &ext[687]})
-var sValidationException_FieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Traits: &t15, Type: smithy.ShapeTypeList, Ext: &ext[688]})
-var sValidationExceptionField_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Traits: &t16, Type: smithy.ShapeTypeString, Ext: &ext[690]})
-var sValidationExceptionField_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &ext[691]})
-var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[693]})
-var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[695]})
-var sValidationExceptionReason_MISSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[696]})
-var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[697]})
-var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[698]})
-var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[699]})
-var sValidationExceptionReason_UNKNOWN_FIELD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_FIELD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[700]})
-var sZipClassificationCode_MILITARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MILITARY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[702]})
-var sZipClassificationCode_POST_OFFICE_BOXES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POST_OFFICE_BOXES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[703]})
-var sZipClassificationCode_UNIQUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNIQUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[704]})
-var sAutocompleteRequest_QueryText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryText", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[706]})
-var sAutocompleteRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[707]})
-var sAutocompleteRequest_BiasPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BiasPosition", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[708]})
-var sAutocompleteRequest_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &iAutocompleteFilter, Members: &mAutocompleteFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[709]})
-var sAutocompleteRequest_PostalCodeMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCodeMode", ID: &iPostalCodeMode, Members: &mPostalCodeMode, Type: smithy.ShapeTypeEnum, Ext: &ext[710]})
-var sAutocompleteRequest_AdditionalFeatures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalFeatures", ID: &i_AutocompleteAdditionalFeatureList, Members: &m_AutocompleteAdditionalFeatureList, Type: smithy.ShapeTypeList, Ext: &ext[711]})
-var sAutocompleteRequest_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i_LanguageTag, Type: smithy.ShapeTypeString, Ext: &ext[712]})
-var sAutocompleteRequest_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[713]})
-var sAutocompleteRequest_IntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntendedUse", ID: &iAutocompleteIntendedUse, Members: &mAutocompleteIntendedUse, Type: smithy.ShapeTypeEnum, Ext: &ext[714]})
-var sAutocompleteRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ApiKey, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[715]})
-var sAutocompleteResponse_PricingBucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingBucket", ID: &pString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &ext[717]})
-var sAutocompleteResponse_ResultItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultItems", ID: &i_AutocompleteResultItemList, Members: &m_AutocompleteResultItemList, Type: smithy.ShapeTypeList, Ext: &ext[718]})
-var sGeocodeRequest_QueryText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryText", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[720]})
-var sGeocodeRequest_QueryComponents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryComponents", ID: &iGeocodeQueryComponents, Members: &mGeocodeQueryComponents, Type: smithy.ShapeTypeStructure, Ext: &ext[721]})
-var sGeocodeRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[722]})
-var sGeocodeRequest_BiasPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BiasPosition", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[723]})
-var sGeocodeRequest_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &iGeocodeFilter, Members: &mGeocodeFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[724]})
-var sGeocodeRequest_AdditionalFeatures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalFeatures", ID: &i_GeocodeAdditionalFeatureList, Members: &m_GeocodeAdditionalFeatureList, Type: smithy.ShapeTypeList, Ext: &ext[725]})
-var sGeocodeRequest_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i_LanguageTag, Type: smithy.ShapeTypeString, Ext: &ext[726]})
-var sGeocodeRequest_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[727]})
-var sGeocodeRequest_IntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntendedUse", ID: &iGeocodeIntendedUse, Members: &mGeocodeIntendedUse, Type: smithy.ShapeTypeEnum, Ext: &ext[728]})
-var sGeocodeRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ApiKey, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[729]})
-var sGeocodeRequest_PostalCodeMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCodeMode", ID: &iPostalCodeMode, Members: &mPostalCodeMode, Type: smithy.ShapeTypeEnum, Ext: &ext[730]})
-var sGeocodeRequest_AddressTranslations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressTranslations", ID: &i_AddressTranslationComponentList, Members: &m_AddressTranslationComponentList, Type: smithy.ShapeTypeList, Ext: &ext[731]})
-var sGeocodeRequest_AddressNamesMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressNamesMode", ID: &iGeocodeAddressNamesMode, Members: &mGeocodeAddressNamesMode, Type: smithy.ShapeTypeEnum, Ext: &ext[732]})
-var sGeocodeResponse_PricingBucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingBucket", ID: &pString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &ext[734]})
-var sGeocodeResponse_ResultItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultItems", ID: &i_GeocodeResultItemList, Members: &m_GeocodeResultItemList, Type: smithy.ShapeTypeList, Ext: &ext[735]})
-var sGetPlaceRequest_PlaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceId", ID: &i_SensitiveString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[737]})
-var sGetPlaceRequest_AdditionalFeatures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalFeatures", ID: &i_GetPlaceAdditionalFeatureList, Members: &m_GetPlaceAdditionalFeatureList, Traits: &t20, Type: smithy.ShapeTypeList, Ext: &ext[738]})
-var sGetPlaceRequest_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i_LanguageTag, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[739]})
-var sGetPlaceRequest_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[740]})
-var sGetPlaceRequest_IntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntendedUse", ID: &iGetPlaceIntendedUse, Members: &mGetPlaceIntendedUse, Traits: &t23, Type: smithy.ShapeTypeEnum, Ext: &ext[741]})
-var sGetPlaceRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ApiKey, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[742]})
-var sGetPlaceRequest_AddressNamesMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressNamesMode", ID: &iGetPlaceAddressNamesMode, Members: &mGetPlaceAddressNamesMode, Traits: &t24, Type: smithy.ShapeTypeEnum, Ext: &ext[743]})
-var sGetPlaceResponse_PlaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceId", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[745]})
-var sGetPlaceResponse_PlaceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceType", ID: &iPlaceType, Members: &mPlaceType, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &ext[746]})
-var sGetPlaceResponse_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[747]})
-var sGetPlaceResponse_PricingBucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingBucket", ID: &pString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &ext[748]})
-var sGetPlaceResponse_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &ext[749]})
-var sGetPlaceResponse_AddressNumberCorrected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressNumberCorrected", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &ext[750]})
-var sGetPlaceResponse_PostalCodeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCodeDetails", ID: &i_PostalCodeDetailsList, Members: &m_PostalCodeDetailsList, Type: smithy.ShapeTypeList, Ext: &ext[751]})
-var sGetPlaceResponse_Position = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Position", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[752]})
-var sGetPlaceResponse_MapView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MapView", ID: &i_BoundingBox, Members: &m_BoundingBox, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[753]})
-var sGetPlaceResponse_Categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Categories", ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &ext[754]})
-var sGetPlaceResponse_FoodTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FoodTypes", ID: &i_FoodTypeList, Members: &m_FoodTypeList, Type: smithy.ShapeTypeList, Ext: &ext[755]})
-var sGetPlaceResponse_BusinessChains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BusinessChains", ID: &i_BusinessChainList, Members: &m_BusinessChainList, Type: smithy.ShapeTypeList, Ext: &ext[756]})
-var sGetPlaceResponse_Contacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contacts", ID: &iContacts, Members: &mContacts, Type: smithy.ShapeTypeStructure, Ext: &ext[757]})
-var sGetPlaceResponse_OpeningHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpeningHours", ID: &i_OpeningHoursList, Members: &m_OpeningHoursList, Type: smithy.ShapeTypeList, Ext: &ext[758]})
-var sGetPlaceResponse_AccessPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPoints", ID: &i_AccessPointList, Members: &m_AccessPointList, Type: smithy.ShapeTypeList, Ext: &ext[759]})
-var sGetPlaceResponse_AccessRestrictions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessRestrictions", ID: &i_AccessRestrictionList, Members: &m_AccessRestrictionList, Type: smithy.ShapeTypeList, Ext: &ext[760]})
-var sGetPlaceResponse_TimeZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeZone", ID: &iTimeZone, Members: &mTimeZone, Type: smithy.ShapeTypeStructure, Ext: &ext[761]})
-var sGetPlaceResponse_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode3, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[762]})
-var sGetPlaceResponse_Phonemes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Phonemes", ID: &iPhonemeDetails, Members: &mPhonemeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[763]})
-var sGetPlaceResponse_MainAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MainAddress", ID: &iRelatedPlace, Members: &mRelatedPlace, Type: smithy.ShapeTypeStructure, Ext: &ext[764]})
-var sGetPlaceResponse_SecondaryAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecondaryAddresses", ID: &i_RelatedPlaceList, Members: &m_RelatedPlaceList, Type: smithy.ShapeTypeList, Ext: &ext[765]})
-var sGetPlaceResponse_PlaceAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceAttributes", ID: &i_PlaceAttributeList, Members: &m_PlaceAttributeList, Type: smithy.ShapeTypeList, Ext: &ext[766]})
-var sGetPlaceResponse_EstimatedPointAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EstimatedPointAddress", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &ext[767]})
-var sGetPlaceResponse_CrossReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossReferences", ID: &i_CrossReferenceList, Members: &m_CrossReferenceList, Type: smithy.ShapeTypeList, Ext: &ext[768]})
-var sReverseGeocodeRequest_QueryPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryPosition", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[770]})
-var sReverseGeocodeRequest_QueryRadius = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryRadius", ID: &i_DistanceMeters, Traits: &t9, Type: smithy.ShapeTypeLong, Ext: &ext[771]})
-var sReverseGeocodeRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[772]})
-var sReverseGeocodeRequest_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &iReverseGeocodeFilter, Members: &mReverseGeocodeFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[773]})
-var sReverseGeocodeRequest_AdditionalFeatures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalFeatures", ID: &i_ReverseGeocodeAdditionalFeatureList, Members: &m_ReverseGeocodeAdditionalFeatureList, Type: smithy.ShapeTypeList, Ext: &ext[774]})
-var sReverseGeocodeRequest_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i_LanguageTag, Type: smithy.ShapeTypeString, Ext: &ext[775]})
-var sReverseGeocodeRequest_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[776]})
-var sReverseGeocodeRequest_IntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntendedUse", ID: &iReverseGeocodeIntendedUse, Members: &mReverseGeocodeIntendedUse, Type: smithy.ShapeTypeEnum, Ext: &ext[777]})
-var sReverseGeocodeRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ApiKey, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[778]})
-var sReverseGeocodeRequest_Heading = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Heading", ID: &i_Heading, Traits: &t9, Type: smithy.ShapeTypeDouble, Ext: &ext[779]})
-var sReverseGeocodeRequest_AddressNamesMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressNamesMode", ID: &iReverseGeocodeAddressNamesMode, Members: &mReverseGeocodeAddressNamesMode, Type: smithy.ShapeTypeEnum, Ext: &ext[780]})
-var sReverseGeocodeResponse_PricingBucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingBucket", ID: &pString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &ext[782]})
-var sReverseGeocodeResponse_ResultItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultItems", ID: &i_ReverseGeocodeResultItemList, Members: &m_ReverseGeocodeResultItemList, Type: smithy.ShapeTypeList, Ext: &ext[783]})
-var sSearchNearbyRequest_QueryPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryPosition", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[785]})
-var sSearchNearbyRequest_QueryRadius = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryRadius", ID: &i_DistanceMeters, Traits: &t9, Type: smithy.ShapeTypeLong, Ext: &ext[786]})
-var sSearchNearbyRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[787]})
-var sSearchNearbyRequest_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &iSearchNearbyFilter, Members: &mSearchNearbyFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[788]})
-var sSearchNearbyRequest_AdditionalFeatures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalFeatures", ID: &i_SearchNearbyAdditionalFeatureList, Members: &m_SearchNearbyAdditionalFeatureList, Type: smithy.ShapeTypeList, Ext: &ext[789]})
-var sSearchNearbyRequest_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i_LanguageTag, Type: smithy.ShapeTypeString, Ext: &ext[790]})
-var sSearchNearbyRequest_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[791]})
-var sSearchNearbyRequest_IntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntendedUse", ID: &iSearchNearbyIntendedUse, Members: &mSearchNearbyIntendedUse, Type: smithy.ShapeTypeEnum, Ext: &ext[792]})
-var sSearchNearbyRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[793]})
-var sSearchNearbyRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ApiKey, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[794]})
-var sSearchNearbyResponse_PricingBucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingBucket", ID: &pString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &ext[796]})
-var sSearchNearbyResponse_ResultItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultItems", ID: &i_SearchNearbyResultItemList, Members: &m_SearchNearbyResultItemList, Type: smithy.ShapeTypeList, Ext: &ext[797]})
-var sSearchNearbyResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[798]})
-var sSearchTextRequest_QueryText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryText", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[800]})
-var sSearchTextRequest_QueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryId", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[801]})
-var sSearchTextRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[802]})
-var sSearchTextRequest_BiasPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BiasPosition", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[803]})
-var sSearchTextRequest_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &iSearchTextFilter, Members: &mSearchTextFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[804]})
-var sSearchTextRequest_AdditionalFeatures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalFeatures", ID: &i_SearchTextAdditionalFeatureList, Members: &m_SearchTextAdditionalFeatureList, Type: smithy.ShapeTypeList, Ext: &ext[805]})
-var sSearchTextRequest_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i_LanguageTag, Type: smithy.ShapeTypeString, Ext: &ext[806]})
-var sSearchTextRequest_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[807]})
-var sSearchTextRequest_IntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntendedUse", ID: &iSearchTextIntendedUse, Members: &mSearchTextIntendedUse, Type: smithy.ShapeTypeEnum, Ext: &ext[808]})
-var sSearchTextRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[809]})
-var sSearchTextRequest_TravelMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TravelMode", ID: &iSearchTextTravelMode, Members: &mSearchTextTravelMode, Type: smithy.ShapeTypeEnum, Ext: &ext[810]})
-var sSearchTextRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ApiKey, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[811]})
-var sSearchTextResponse_PricingBucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingBucket", ID: &pString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &ext[813]})
-var sSearchTextResponse_ResultItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultItems", ID: &i_SearchTextResultItemList, Members: &m_SearchTextResultItemList, Type: smithy.ShapeTypeList, Ext: &ext[814]})
-var sSearchTextResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &ext[815]})
-var sSuggestRequest_QueryText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryText", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[817]})
-var sSuggestRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[818]})
-var sSuggestRequest_MaxQueryRefinements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxQueryRefinements", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[819]})
-var sSuggestRequest_BiasPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BiasPosition", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[820]})
-var sSuggestRequest_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &iSuggestFilter, Members: &mSuggestFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[821]})
-var sSuggestRequest_AdditionalFeatures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalFeatures", ID: &i_SuggestAdditionalFeatureList, Members: &m_SuggestAdditionalFeatureList, Type: smithy.ShapeTypeList, Ext: &ext[822]})
-var sSuggestRequest_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i_LanguageTag, Type: smithy.ShapeTypeString, Ext: &ext[823]})
-var sSuggestRequest_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[824]})
-var sSuggestRequest_IntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntendedUse", ID: &iSuggestIntendedUse, Members: &mSuggestIntendedUse, Type: smithy.ShapeTypeEnum, Ext: &ext[825]})
-var sSuggestRequest_TravelMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TravelMode", ID: &iSuggestTravelMode, Members: &mSuggestTravelMode, Type: smithy.ShapeTypeEnum, Ext: &ext[826]})
-var sSuggestRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ApiKey, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[827]})
-var sSuggestResponse_PricingBucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingBucket", ID: &pString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &ext[829]})
-var sSuggestResponse_ResultItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultItems", ID: &i_SuggestResultItemList, Members: &m_SuggestResultItemList, Type: smithy.ShapeTypeList, Ext: &ext[830]})
-var sSuggestResponse_QueryRefinements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryRefinements", ID: &i_QueryRefinementList, Members: &m_QueryRefinementList, Type: smithy.ShapeTypeList, Ext: &ext[831]})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var sAccessPoint_Position = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Position", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eAccessPoint_Position})
+var sAccessPoint_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iAccessPointType, Members: &mAccessPointType, Type: smithy.ShapeTypeEnum, Ext: &eAccessPoint_Type})
+var sAccessPoint_Primary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Primary", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &eAccessPoint_Primary})
+var sAccessPoint_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eAccessPoint_Label})
+var s_AccessPointList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccessPoint, Members: &mAccessPoint, Type: smithy.ShapeTypeStructure, Ext: &e_AccessPointList_member})
+var sAccessPointType_DELIVERY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELIVERY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessPointType_DELIVERY})
+var sAccessPointType_EMERGENCY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMERGENCY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessPointType_EMERGENCY})
+var sAccessPointType_ENTRANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENTRANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessPointType_ENTRANCE})
+var sAccessPointType_LOADING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOADING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessPointType_LOADING})
+var sAccessPointType_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessPointType_OTHER})
+var sAccessPointType_PARKING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARKING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessPointType_PARKING})
+var sAccessPointType_TAXI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TAXI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessPointType_TAXI})
+var sAccessRestriction_Restricted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Restricted", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &eAccessRestriction_Restricted})
+var sAccessRestriction_Categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Categories", ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &eAccessRestriction_Categories})
+var s_AccessRestrictionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccessRestriction, Members: &mAccessRestriction, Type: smithy.ShapeTypeStructure, Ext: &e_AccessRestrictionList_member})
+var sAddress_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eAddress_Label})
+var sAddress_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &iCountry, Members: &mCountry, Type: smithy.ShapeTypeStructure, Ext: &eAddress_Country})
+var sAddress_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &iRegion, Members: &mRegion, Type: smithy.ShapeTypeStructure, Ext: &eAddress_Region})
+var sAddress_SubRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubRegion", ID: &iSubRegion, Members: &mSubRegion, Type: smithy.ShapeTypeStructure, Ext: &eAddress_SubRegion})
+var sAddress_Locality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locality", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eAddress_Locality})
+var sAddress_District = smithy.NewStaticSchema(smithy.StaticSchema{Member: "District", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eAddress_District})
+var sAddress_SubDistrict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubDistrict", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eAddress_SubDistrict})
+var sAddress_PostalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCode", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eAddress_PostalCode})
+var sAddress_Block = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Block", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eAddress_Block})
+var sAddress_SubBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubBlock", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eAddress_SubBlock})
+var sAddress_Intersection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Intersection", ID: &i_IntersectionStreetList, Members: &m_IntersectionStreetList, Type: smithy.ShapeTypeList, Ext: &eAddress_Intersection})
+var sAddress_Street = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Street", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eAddress_Street})
+var sAddress_StreetComponents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreetComponents", ID: &i_StreetComponentsList, Members: &m_StreetComponentsList, Type: smithy.ShapeTypeList, Ext: &eAddress_StreetComponents})
+var sAddress_AddressNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressNumber", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eAddress_AddressNumber})
+var sAddress_Building = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Building", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eAddress_Building})
+var sAddress_SecondaryAddressComponents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecondaryAddressComponents", ID: &i_SecondaryAddressComponentList, Members: &m_SecondaryAddressComponentList, Type: smithy.ShapeTypeList, Ext: &eAddress_SecondaryAddressComponents})
+var sAddressComponentMatchScores_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &eAddressComponentMatchScores_Country})
+var sAddressComponentMatchScores_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &eAddressComponentMatchScores_Region})
+var sAddressComponentMatchScores_SubRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubRegion", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &eAddressComponentMatchScores_SubRegion})
+var sAddressComponentMatchScores_Locality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locality", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &eAddressComponentMatchScores_Locality})
+var sAddressComponentMatchScores_District = smithy.NewStaticSchema(smithy.StaticSchema{Member: "District", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &eAddressComponentMatchScores_District})
+var sAddressComponentMatchScores_SubDistrict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubDistrict", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &eAddressComponentMatchScores_SubDistrict})
+var sAddressComponentMatchScores_PostalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCode", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &eAddressComponentMatchScores_PostalCode})
+var sAddressComponentMatchScores_Block = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Block", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &eAddressComponentMatchScores_Block})
+var sAddressComponentMatchScores_SubBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubBlock", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &eAddressComponentMatchScores_SubBlock})
+var sAddressComponentMatchScores_Intersection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Intersection", ID: &i_MatchScoreList, Members: &m_MatchScoreList, Type: smithy.ShapeTypeList, Ext: &eAddressComponentMatchScores_Intersection})
+var sAddressComponentMatchScores_AddressNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressNumber", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &eAddressComponentMatchScores_AddressNumber})
+var sAddressComponentMatchScores_Building = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Building", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &eAddressComponentMatchScores_Building})
+var sAddressComponentMatchScores_SecondaryAddressComponents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecondaryAddressComponents", ID: &i_SecondaryAddressComponentMatchScoreList, Members: &m_SecondaryAddressComponentMatchScoreList, Type: smithy.ShapeTypeList, Ext: &eAddressComponentMatchScores_SecondaryAddressComponents})
+var sAddressComponentPhonemes_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &i_PhonemeTranscriptionList, Members: &m_PhonemeTranscriptionList, Type: smithy.ShapeTypeList, Ext: &eAddressComponentPhonemes_Country})
+var sAddressComponentPhonemes_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_PhonemeTranscriptionList, Members: &m_PhonemeTranscriptionList, Type: smithy.ShapeTypeList, Ext: &eAddressComponentPhonemes_Region})
+var sAddressComponentPhonemes_SubRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubRegion", ID: &i_PhonemeTranscriptionList, Members: &m_PhonemeTranscriptionList, Type: smithy.ShapeTypeList, Ext: &eAddressComponentPhonemes_SubRegion})
+var sAddressComponentPhonemes_Locality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locality", ID: &i_PhonemeTranscriptionList, Members: &m_PhonemeTranscriptionList, Type: smithy.ShapeTypeList, Ext: &eAddressComponentPhonemes_Locality})
+var sAddressComponentPhonemes_District = smithy.NewStaticSchema(smithy.StaticSchema{Member: "District", ID: &i_PhonemeTranscriptionList, Members: &m_PhonemeTranscriptionList, Type: smithy.ShapeTypeList, Ext: &eAddressComponentPhonemes_District})
+var sAddressComponentPhonemes_SubDistrict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubDistrict", ID: &i_PhonemeTranscriptionList, Members: &m_PhonemeTranscriptionList, Type: smithy.ShapeTypeList, Ext: &eAddressComponentPhonemes_SubDistrict})
+var sAddressComponentPhonemes_Block = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Block", ID: &i_PhonemeTranscriptionList, Members: &m_PhonemeTranscriptionList, Type: smithy.ShapeTypeList, Ext: &eAddressComponentPhonemes_Block})
+var sAddressComponentPhonemes_SubBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubBlock", ID: &i_PhonemeTranscriptionList, Members: &m_PhonemeTranscriptionList, Type: smithy.ShapeTypeList, Ext: &eAddressComponentPhonemes_SubBlock})
+var sAddressComponentPhonemes_Street = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Street", ID: &i_PhonemeTranscriptionList, Members: &m_PhonemeTranscriptionList, Type: smithy.ShapeTypeList, Ext: &eAddressComponentPhonemes_Street})
+var sAddressTranslationComponent_DISTRICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRICT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAddressTranslationComponent_DISTRICT})
+var sAddressTranslationComponent_LOCALITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCALITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAddressTranslationComponent_LOCALITY})
+var sAddressTranslationComponent_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAddressTranslationComponent_REGION})
+var sAddressTranslationComponent_SUB_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUB_REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAddressTranslationComponent_SUB_REGION})
+var s_AddressTranslationComponentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAddressTranslationComponent, Members: &mAddressTranslationComponent, Type: smithy.ShapeTypeEnum, Ext: &e_AddressTranslationComponentList_member})
+var sAdminNames_Names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Names", ID: &i_TranslationNameList, Members: &m_TranslationNameList, Type: smithy.ShapeTypeList, Ext: &eAdminNames_Names})
+var sAdminNames_Preference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Preference", ID: &iAdminNamesPreference, Members: &mAdminNamesPreference, Type: smithy.ShapeTypeEnum, Ext: &eAdminNames_Preference})
+var s_AdminNamesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdminNames, Members: &mAdminNames, Type: smithy.ShapeTypeStructure, Ext: &e_AdminNamesList_member})
+var sAdminNamesPreference_ALTERNATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALTERNATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdminNamesPreference_ALTERNATIVE})
+var sAdminNamesPreference_PRIMARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIMARY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdminNamesPreference_PRIMARY})
+var sAutocompleteAdditionalFeature_CORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutocompleteAdditionalFeature_CORE})
+var s_AutocompleteAdditionalFeatureList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAutocompleteAdditionalFeature, Members: &mAutocompleteAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &e_AutocompleteAdditionalFeatureList_member})
+var sAutocompleteAddressHighlights_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &eAutocompleteAddressHighlights_Label})
+var sAutocompleteAddressHighlights_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &iCountryHighlights, Members: &mCountryHighlights, Type: smithy.ShapeTypeStructure, Ext: &eAutocompleteAddressHighlights_Country})
+var sAutocompleteAddressHighlights_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &iRegionHighlights, Members: &mRegionHighlights, Type: smithy.ShapeTypeStructure, Ext: &eAutocompleteAddressHighlights_Region})
+var sAutocompleteAddressHighlights_SubRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubRegion", ID: &iSubRegionHighlights, Members: &mSubRegionHighlights, Type: smithy.ShapeTypeStructure, Ext: &eAutocompleteAddressHighlights_SubRegion})
+var sAutocompleteAddressHighlights_Locality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locality", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &eAutocompleteAddressHighlights_Locality})
+var sAutocompleteAddressHighlights_District = smithy.NewStaticSchema(smithy.StaticSchema{Member: "District", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &eAutocompleteAddressHighlights_District})
+var sAutocompleteAddressHighlights_SubDistrict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubDistrict", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &eAutocompleteAddressHighlights_SubDistrict})
+var sAutocompleteAddressHighlights_Street = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Street", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &eAutocompleteAddressHighlights_Street})
+var sAutocompleteAddressHighlights_Block = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Block", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &eAutocompleteAddressHighlights_Block})
+var sAutocompleteAddressHighlights_SubBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubBlock", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &eAutocompleteAddressHighlights_SubBlock})
+var sAutocompleteAddressHighlights_Intersection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Intersection", ID: &i_IntersectionHighlightsList, Members: &m_IntersectionHighlightsList, Type: smithy.ShapeTypeList, Ext: &eAutocompleteAddressHighlights_Intersection})
+var sAutocompleteAddressHighlights_PostalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCode", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &eAutocompleteAddressHighlights_PostalCode})
+var sAutocompleteAddressHighlights_AddressNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressNumber", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &eAutocompleteAddressHighlights_AddressNumber})
+var sAutocompleteAddressHighlights_Building = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Building", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &eAutocompleteAddressHighlights_Building})
+var sAutocompleteFilter_BoundingBox = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BoundingBox", ID: &i_BoundingBox, Members: &m_BoundingBox, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eAutocompleteFilter_BoundingBox})
+var sAutocompleteFilter_Circle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Circle", ID: &iFilterCircle, Members: &mFilterCircle, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eAutocompleteFilter_Circle})
+var sAutocompleteFilter_IncludeCountries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeCountries", ID: &i_CountryCodeList, Members: &m_CountryCodeList, Type: smithy.ShapeTypeList, Ext: &eAutocompleteFilter_IncludeCountries})
+var sAutocompleteFilter_IncludePlaceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludePlaceTypes", ID: &i_AutocompleteFilterPlaceTypeList, Members: &m_AutocompleteFilterPlaceTypeList, Type: smithy.ShapeTypeList, Ext: &eAutocompleteFilter_IncludePlaceTypes})
+var sAutocompleteFilterPlaceType_LOCALITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCALITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutocompleteFilterPlaceType_LOCALITY})
+var sAutocompleteFilterPlaceType_POSTAL_CODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POSTAL_CODE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutocompleteFilterPlaceType_POSTAL_CODE})
+var sAutocompleteFilterPlaceType_STREET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STREET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutocompleteFilterPlaceType_STREET})
+var sAutocompleteFilterPlaceType_INTERSECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERSECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutocompleteFilterPlaceType_INTERSECTION})
+var sAutocompleteFilterPlaceType_POINT_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POINT_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutocompleteFilterPlaceType_POINT_ADDRESS})
+var sAutocompleteFilterPlaceType_INTERPOLATED_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERPOLATED_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutocompleteFilterPlaceType_INTERPOLATED_ADDRESS})
+var sAutocompleteFilterPlaceType_COUNTRY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COUNTRY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutocompleteFilterPlaceType_COUNTRY})
+var sAutocompleteFilterPlaceType_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutocompleteFilterPlaceType_REGION})
+var s_AutocompleteFilterPlaceTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAutocompleteFilterPlaceType, Members: &mAutocompleteFilterPlaceType, Type: smithy.ShapeTypeEnum, Ext: &e_AutocompleteFilterPlaceTypeList_member})
+var sAutocompleteHighlights_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &eAutocompleteHighlights_Title})
+var sAutocompleteHighlights_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAutocompleteAddressHighlights, Members: &mAutocompleteAddressHighlights, Type: smithy.ShapeTypeStructure, Ext: &eAutocompleteHighlights_Address})
+var sAutocompleteIntendedUse_SINGLE_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutocompleteIntendedUse_SINGLE_USE})
+var sAutocompleteResultItem_PlaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceId", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eAutocompleteResultItem_PlaceId})
+var sAutocompleteResultItem_PlaceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceType", ID: &iPlaceType, Members: &mPlaceType, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &eAutocompleteResultItem_PlaceType})
+var sAutocompleteResultItem_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eAutocompleteResultItem_Title})
+var sAutocompleteResultItem_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eAutocompleteResultItem_Address})
+var sAutocompleteResultItem_Distance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Distance", ID: &i_DistanceMeters, Traits: &t9, Type: smithy.ShapeTypeLong, Ext: &eAutocompleteResultItem_Distance})
+var sAutocompleteResultItem_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i_LanguageTag, Type: smithy.ShapeTypeString, Ext: &eAutocompleteResultItem_Language})
+var sAutocompleteResultItem_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode3, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eAutocompleteResultItem_PoliticalView})
+var sAutocompleteResultItem_Highlights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Highlights", ID: &iAutocompleteHighlights, Members: &mAutocompleteHighlights, Type: smithy.ShapeTypeStructure, Ext: &eAutocompleteResultItem_Highlights})
+var sAutocompleteResultItem_EstimatedPointAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EstimatedPointAddress", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &eAutocompleteResultItem_EstimatedPointAddress})
+var s_AutocompleteResultItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAutocompleteResultItem, Members: &mAutocompleteResultItem, Type: smithy.ShapeTypeStructure, Ext: &e_AutocompleteResultItemList_member})
+var s_BoundingBox_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &e_BoundingBox_member})
+var sBusinessChain_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eBusinessChain_Name})
+var sBusinessChain_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eBusinessChain_Id})
+var s_BusinessChainList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBusinessChain, Members: &mBusinessChain, Type: smithy.ShapeTypeStructure, Ext: &e_BusinessChainList_member})
+var sCategory_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eCategory_Id})
+var sCategory_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eCategory_Name})
+var sCategory_LocalizedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocalizedName", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eCategory_LocalizedName})
+var sCategory_Primary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Primary", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &eCategory_Primary})
+var s_CategoryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCategory, Members: &mCategory, Type: smithy.ShapeTypeStructure, Ext: &e_CategoryList_member})
+var sComponentMatchScores_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &eComponentMatchScores_Title})
+var sComponentMatchScores_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddressComponentMatchScores, Members: &mAddressComponentMatchScores, Type: smithy.ShapeTypeStructure, Ext: &eComponentMatchScores_Address})
+var sContactDetails_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eContactDetails_Label})
+var sContactDetails_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eContactDetails_Value})
+var sContactDetails_Categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Categories", ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &eContactDetails_Categories})
+var s_ContactDetailsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContactDetails, Members: &mContactDetails, Type: smithy.ShapeTypeStructure, Ext: &e_ContactDetailsList_member})
+var sContacts_Phones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Phones", ID: &i_ContactDetailsList, Members: &m_ContactDetailsList, Type: smithy.ShapeTypeList, Ext: &eContacts_Phones})
+var sContacts_Faxes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Faxes", ID: &i_ContactDetailsList, Members: &m_ContactDetailsList, Type: smithy.ShapeTypeList, Ext: &eContacts_Faxes})
+var sContacts_Websites = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Websites", ID: &i_ContactDetailsList, Members: &m_ContactDetailsList, Type: smithy.ShapeTypeList, Ext: &eContacts_Websites})
+var sContacts_Emails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Emails", ID: &i_ContactDetailsList, Members: &m_ContactDetailsList, Type: smithy.ShapeTypeList, Ext: &eContacts_Emails})
+var sCountry_Code2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code2", ID: &i_CountryCode2, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eCountry_Code2})
+var sCountry_Code3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code3", ID: &i_CountryCode3, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eCountry_Code3})
+var sCountry_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eCountry_Name})
+var s_CountryCodeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CountryCode, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &e_CountryCodeList_member})
+var sCountryHighlights_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &eCountryHighlights_Code})
+var sCountryHighlights_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &eCountryHighlights_Name})
+var sCrossReference_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eCrossReference_Source})
+var sCrossReference_SourcePlaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourcePlaceId", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eCrossReference_SourcePlaceId})
+var sCrossReference_SourceCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceCategories", ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &eCrossReference_SourceCategories})
+var s_CrossReferenceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCrossReference, Members: &mCrossReference, Type: smithy.ShapeTypeStructure, Ext: &e_CrossReferenceList_member})
+var s_FilterBusinessChainList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &e_FilterBusinessChainList_member})
+var s_FilterCategoryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &e_FilterCategoryList_member})
+var sFilterCircle_Center = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Center", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eFilterCircle_Center})
+var sFilterCircle_Radius = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Radius", ID: &i_DistanceMeters, Traits: &t9, Type: smithy.ShapeTypeLong, Ext: &eFilterCircle_Radius})
+var s_FilterFoodTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &e_FilterFoodTypeList_member})
+var sFoodType_LocalizedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocalizedName", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eFoodType_LocalizedName})
+var sFoodType_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eFoodType_Id})
+var sFoodType_Primary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Primary", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &eFoodType_Primary})
+var s_FoodTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFoodType, Members: &mFoodType, Type: smithy.ShapeTypeStructure, Ext: &e_FoodTypeList_member})
+var sGeocodeAdditionalFeature_TIME_ZONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_ZONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeAdditionalFeature_TIME_ZONE})
+var sGeocodeAdditionalFeature_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeAdditionalFeature_ACCESS})
+var sGeocodeAdditionalFeature_SECONDARY_ADDRESSES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECONDARY_ADDRESSES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeAdditionalFeature_SECONDARY_ADDRESSES})
+var sGeocodeAdditionalFeature_INTERSECTIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERSECTIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeAdditionalFeature_INTERSECTIONS})
+var s_GeocodeAdditionalFeatureList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGeocodeAdditionalFeature, Members: &mGeocodeAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &e_GeocodeAdditionalFeatureList_member})
+var sGeocodeAddressNamesMode_MATCHED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MATCHED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeAddressNamesMode_MATCHED})
+var sGeocodeAddressNamesMode_ADMINISTRATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADMINISTRATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeAddressNamesMode_ADMINISTRATIVE})
+var sGeocodeFilter_IncludeCountries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeCountries", ID: &i_CountryCodeList, Members: &m_CountryCodeList, Type: smithy.ShapeTypeList, Ext: &eGeocodeFilter_IncludeCountries})
+var sGeocodeFilter_IncludePlaceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludePlaceTypes", ID: &i_GeocodeFilterPlaceTypeList, Members: &m_GeocodeFilterPlaceTypeList, Type: smithy.ShapeTypeList, Ext: &eGeocodeFilter_IncludePlaceTypes})
+var sGeocodeFilterPlaceType_LOCALITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCALITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeFilterPlaceType_LOCALITY})
+var sGeocodeFilterPlaceType_POSTAL_CODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POSTAL_CODE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeFilterPlaceType_POSTAL_CODE})
+var sGeocodeFilterPlaceType_INTERSECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERSECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeFilterPlaceType_INTERSECTION})
+var sGeocodeFilterPlaceType_STREET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STREET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeFilterPlaceType_STREET})
+var sGeocodeFilterPlaceType_POINT_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POINT_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeFilterPlaceType_POINT_ADDRESS})
+var sGeocodeFilterPlaceType_INTERPOLATED_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERPOLATED_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeFilterPlaceType_INTERPOLATED_ADDRESS})
+var sGeocodeFilterPlaceType_SECONDARY_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECONDARY_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeFilterPlaceType_SECONDARY_ADDRESS})
+var sGeocodeFilterPlaceType_POINT_OF_INTEREST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POINT_OF_INTEREST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeFilterPlaceType_POINT_OF_INTEREST})
+var sGeocodeFilterPlaceType_COUNTRY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COUNTRY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeFilterPlaceType_COUNTRY})
+var sGeocodeFilterPlaceType_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeFilterPlaceType_REGION})
+var s_GeocodeFilterPlaceTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGeocodeFilterPlaceType, Members: &mGeocodeFilterPlaceType, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &e_GeocodeFilterPlaceTypeList_member})
+var sGeocodeIntendedUse_SINGLE_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeIntendedUse_SINGLE_USE})
+var sGeocodeIntendedUse_STORAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STORAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeIntendedUse_STORAGE})
+var sGeocodeParsedQuery_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &eGeocodeParsedQuery_Title})
+var sGeocodeParsedQuery_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iGeocodeParsedQueryAddressComponents, Members: &mGeocodeParsedQueryAddressComponents, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeParsedQuery_Address})
+var sGeocodeParsedQueryAddressComponents_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &eGeocodeParsedQueryAddressComponents_Country})
+var sGeocodeParsedQueryAddressComponents_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &eGeocodeParsedQueryAddressComponents_Region})
+var sGeocodeParsedQueryAddressComponents_SubRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubRegion", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &eGeocodeParsedQueryAddressComponents_SubRegion})
+var sGeocodeParsedQueryAddressComponents_Locality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locality", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &eGeocodeParsedQueryAddressComponents_Locality})
+var sGeocodeParsedQueryAddressComponents_District = smithy.NewStaticSchema(smithy.StaticSchema{Member: "District", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &eGeocodeParsedQueryAddressComponents_District})
+var sGeocodeParsedQueryAddressComponents_SubDistrict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubDistrict", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &eGeocodeParsedQueryAddressComponents_SubDistrict})
+var sGeocodeParsedQueryAddressComponents_PostalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCode", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &eGeocodeParsedQueryAddressComponents_PostalCode})
+var sGeocodeParsedQueryAddressComponents_Block = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Block", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &eGeocodeParsedQueryAddressComponents_Block})
+var sGeocodeParsedQueryAddressComponents_SubBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubBlock", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &eGeocodeParsedQueryAddressComponents_SubBlock})
+var sGeocodeParsedQueryAddressComponents_Street = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Street", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &eGeocodeParsedQueryAddressComponents_Street})
+var sGeocodeParsedQueryAddressComponents_AddressNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressNumber", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &eGeocodeParsedQueryAddressComponents_AddressNumber})
+var sGeocodeParsedQueryAddressComponents_Building = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Building", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &eGeocodeParsedQueryAddressComponents_Building})
+var sGeocodeParsedQueryAddressComponents_SecondaryAddressComponents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecondaryAddressComponents", ID: &i_ParsedQuerySecondaryAddressComponentList, Members: &m_ParsedQuerySecondaryAddressComponentList, Type: smithy.ShapeTypeList, Ext: &eGeocodeParsedQueryAddressComponents_SecondaryAddressComponents})
+var sGeocodeParsedQueryAddressComponents_OtherComponents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherComponents", ID: &i_ParsedQueryComponentList, Members: &m_ParsedQueryComponentList, Type: smithy.ShapeTypeList, Ext: &eGeocodeParsedQueryAddressComponents_OtherComponents})
+var sGeocodeQueryComponents_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eGeocodeQueryComponents_Country})
+var sGeocodeQueryComponents_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eGeocodeQueryComponents_Region})
+var sGeocodeQueryComponents_SubRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubRegion", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eGeocodeQueryComponents_SubRegion})
+var sGeocodeQueryComponents_Locality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locality", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eGeocodeQueryComponents_Locality})
+var sGeocodeQueryComponents_District = smithy.NewStaticSchema(smithy.StaticSchema{Member: "District", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eGeocodeQueryComponents_District})
+var sGeocodeQueryComponents_Street = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Street", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eGeocodeQueryComponents_Street})
+var sGeocodeQueryComponents_AddressNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressNumber", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eGeocodeQueryComponents_AddressNumber})
+var sGeocodeQueryComponents_PostalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCode", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eGeocodeQueryComponents_PostalCode})
+var sGeocodeResultItem_PlaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceId", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eGeocodeResultItem_PlaceId})
+var sGeocodeResultItem_PlaceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceType", ID: &iPlaceType, Members: &mPlaceType, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &eGeocodeResultItem_PlaceType})
+var sGeocodeResultItem_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eGeocodeResultItem_Title})
+var sGeocodeResultItem_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeResultItem_Address})
+var sGeocodeResultItem_AddressNumberCorrected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressNumberCorrected", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &eGeocodeResultItem_AddressNumberCorrected})
+var sGeocodeResultItem_PostalCodeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCodeDetails", ID: &i_PostalCodeDetailsList, Members: &m_PostalCodeDetailsList, Type: smithy.ShapeTypeList, Ext: &eGeocodeResultItem_PostalCodeDetails})
+var sGeocodeResultItem_Position = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Position", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eGeocodeResultItem_Position})
+var sGeocodeResultItem_Distance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Distance", ID: &i_DistanceMeters, Traits: &t9, Type: smithy.ShapeTypeLong, Ext: &eGeocodeResultItem_Distance})
+var sGeocodeResultItem_MapView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MapView", ID: &i_BoundingBox, Members: &m_BoundingBox, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eGeocodeResultItem_MapView})
+var sGeocodeResultItem_Categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Categories", ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &eGeocodeResultItem_Categories})
+var sGeocodeResultItem_FoodTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FoodTypes", ID: &i_FoodTypeList, Members: &m_FoodTypeList, Type: smithy.ShapeTypeList, Ext: &eGeocodeResultItem_FoodTypes})
+var sGeocodeResultItem_AccessPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPoints", ID: &i_AccessPointList, Members: &m_AccessPointList, Type: smithy.ShapeTypeList, Ext: &eGeocodeResultItem_AccessPoints})
+var sGeocodeResultItem_TimeZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeZone", ID: &iTimeZone, Members: &mTimeZone, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeResultItem_TimeZone})
+var sGeocodeResultItem_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode3, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eGeocodeResultItem_PoliticalView})
+var sGeocodeResultItem_MatchScores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchScores", ID: &iMatchScoreDetails, Members: &mMatchScoreDetails, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeResultItem_MatchScores})
+var sGeocodeResultItem_ParsedQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParsedQuery", ID: &iGeocodeParsedQuery, Members: &mGeocodeParsedQuery, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeResultItem_ParsedQuery})
+var sGeocodeResultItem_Intersections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Intersections", ID: &i_IntersectionList, Members: &m_IntersectionList, Type: smithy.ShapeTypeList, Ext: &eGeocodeResultItem_Intersections})
+var sGeocodeResultItem_MainAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MainAddress", ID: &iRelatedPlace, Members: &mRelatedPlace, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeResultItem_MainAddress})
+var sGeocodeResultItem_SecondaryAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecondaryAddresses", ID: &i_RelatedPlaceList, Members: &m_RelatedPlaceList, Type: smithy.ShapeTypeList, Ext: &eGeocodeResultItem_SecondaryAddresses})
+var sGeocodeResultItem_Translations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Translations", ID: &iTranslationDetails, Members: &mTranslationDetails, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeResultItem_Translations})
+var sGeocodeResultItem_EstimatedPointAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EstimatedPointAddress", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &eGeocodeResultItem_EstimatedPointAddress})
+var s_GeocodeResultItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGeocodeResultItem, Members: &mGeocodeResultItem, Type: smithy.ShapeTypeStructure, Ext: &e_GeocodeResultItemList_member})
+var sGetPlaceAdditionalFeature_TIME_ZONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_ZONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaceAdditionalFeature_TIME_ZONE})
+var sGetPlaceAdditionalFeature_PHONEMES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PHONEMES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaceAdditionalFeature_PHONEMES})
+var sGetPlaceAdditionalFeature_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaceAdditionalFeature_ACCESS})
+var sGetPlaceAdditionalFeature_CONTACT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTACT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaceAdditionalFeature_CONTACT})
+var sGetPlaceAdditionalFeature_SECONDARY_ADDRESSES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECONDARY_ADDRESSES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaceAdditionalFeature_SECONDARY_ADDRESSES})
+var sGetPlaceAdditionalFeature_CROSS_REFERENCES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CROSS_REFERENCES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaceAdditionalFeature_CROSS_REFERENCES})
+var s_GetPlaceAdditionalFeatureList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGetPlaceAdditionalFeature, Members: &mGetPlaceAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &e_GetPlaceAdditionalFeatureList_member})
+var sGetPlaceAddressNamesMode_ADMINISTRATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADMINISTRATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaceAddressNamesMode_ADMINISTRATIVE})
+var sGetPlaceIntendedUse_SINGLE_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaceIntendedUse_SINGLE_USE})
+var sGetPlaceIntendedUse_STORAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STORAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaceIntendedUse_STORAGE})
+var sHighlight_StartIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartIndex", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eHighlight_StartIndex})
+var sHighlight_EndIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndIndex", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eHighlight_EndIndex})
+var sHighlight_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eHighlight_Value})
+var s_HighlightList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHighlight, Members: &mHighlight, Type: smithy.ShapeTypeStructure, Ext: &e_HighlightList_member})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var sIntersection_PlaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceId", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eIntersection_PlaceId})
+var sIntersection_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eIntersection_Title})
+var sIntersection_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eIntersection_Address})
+var sIntersection_Position = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Position", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eIntersection_Position})
+var sIntersection_Distance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Distance", ID: &i_DistanceMeters, Traits: &t9, Type: smithy.ShapeTypeLong, Ext: &eIntersection_Distance})
+var sIntersection_RouteDistance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteDistance", ID: &i_DistanceMeters, Traits: &t9, Type: smithy.ShapeTypeLong, Ext: &eIntersection_RouteDistance})
+var sIntersection_MapView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MapView", ID: &i_BoundingBox, Members: &m_BoundingBox, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eIntersection_MapView})
+var sIntersection_AccessPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPoints", ID: &i_AccessPointList, Members: &m_AccessPointList, Type: smithy.ShapeTypeList, Ext: &eIntersection_AccessPoints})
+var s_IntersectionHighlightsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &e_IntersectionHighlightsList_member})
+var s_IntersectionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIntersection, Members: &mIntersection, Type: smithy.ShapeTypeStructure, Ext: &e_IntersectionList_member})
+var s_IntersectionStreetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_IntersectionStreet, Type: smithy.ShapeTypeString, Ext: &e_IntersectionStreetList_member})
+var sMatchScoreDetails_Overall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Overall", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &eMatchScoreDetails_Overall})
+var sMatchScoreDetails_Components = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Components", ID: &iComponentMatchScores, Members: &mComponentMatchScores, Type: smithy.ShapeTypeStructure, Ext: &eMatchScoreDetails_Components})
+var s_MatchScoreList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &e_MatchScoreList_member})
+var sOpeningHours_Display = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Display", ID: &i_OpeningHoursDisplayList, Members: &m_OpeningHoursDisplayList, Type: smithy.ShapeTypeList, Ext: &eOpeningHours_Display})
+var sOpeningHours_OpenNow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenNow", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &eOpeningHours_OpenNow})
+var sOpeningHours_Components = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Components", ID: &i_OpeningHoursComponentsList, Members: &m_OpeningHoursComponentsList, Type: smithy.ShapeTypeList, Ext: &eOpeningHours_Components})
+var sOpeningHours_Categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Categories", ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &eOpeningHours_Categories})
+var sOpeningHoursComponents_OpenTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenTime", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eOpeningHoursComponents_OpenTime})
+var sOpeningHoursComponents_OpenDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenDuration", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eOpeningHoursComponents_OpenDuration})
+var sOpeningHoursComponents_Recurrence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Recurrence", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eOpeningHoursComponents_Recurrence})
+var s_OpeningHoursComponentsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOpeningHoursComponents, Members: &mOpeningHoursComponents, Type: smithy.ShapeTypeStructure, Ext: &e_OpeningHoursComponentsList_member})
+var s_OpeningHoursDisplayList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OpeningHoursDisplay, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &e_OpeningHoursDisplayList_member})
+var s_OpeningHoursList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOpeningHours, Members: &mOpeningHours, Type: smithy.ShapeTypeStructure, Ext: &e_OpeningHoursList_member})
+var sParsedQueryComponent_StartIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartIndex", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eParsedQueryComponent_StartIndex})
+var sParsedQueryComponent_EndIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndIndex", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eParsedQueryComponent_EndIndex})
+var sParsedQueryComponent_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eParsedQueryComponent_Value})
+var sParsedQueryComponent_QueryComponent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryComponent", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eParsedQueryComponent_QueryComponent})
+var s_ParsedQueryComponentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iParsedQueryComponent, Members: &mParsedQueryComponent, Type: smithy.ShapeTypeStructure, Ext: &e_ParsedQueryComponentList_member})
+var sParsedQuerySecondaryAddressComponent_StartIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartIndex", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eParsedQuerySecondaryAddressComponent_StartIndex})
+var sParsedQuerySecondaryAddressComponent_EndIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndIndex", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eParsedQuerySecondaryAddressComponent_EndIndex})
+var sParsedQuerySecondaryAddressComponent_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eParsedQuerySecondaryAddressComponent_Value})
+var sParsedQuerySecondaryAddressComponent_Number = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Number", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eParsedQuerySecondaryAddressComponent_Number})
+var sParsedQuerySecondaryAddressComponent_Designator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Designator", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eParsedQuerySecondaryAddressComponent_Designator})
+var s_ParsedQuerySecondaryAddressComponentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iParsedQuerySecondaryAddressComponent, Members: &mParsedQuerySecondaryAddressComponent, Type: smithy.ShapeTypeStructure, Ext: &e_ParsedQuerySecondaryAddressComponentList_member})
+var sPhonemeDetails_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_PhonemeTranscriptionList, Members: &m_PhonemeTranscriptionList, Type: smithy.ShapeTypeList, Ext: &ePhonemeDetails_Title})
+var sPhonemeDetails_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddressComponentPhonemes, Members: &mAddressComponentPhonemes, Type: smithy.ShapeTypeStructure, Ext: &ePhonemeDetails_Address})
+var sPhonemeTranscription_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ePhonemeTranscription_Value})
+var sPhonemeTranscription_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i_LanguageTag, Type: smithy.ShapeTypeString, Ext: &ePhonemeTranscription_Language})
+var sPhonemeTranscription_Preferred = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Preferred", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &ePhonemeTranscription_Preferred})
+var s_PhonemeTranscriptionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPhonemeTranscription, Members: &mPhonemeTranscription, Type: smithy.ShapeTypeStructure, Ext: &e_PhonemeTranscriptionList_member})
+var sPlaceAttribute_DRIVE_THROUGH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRIVE_THROUGH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlaceAttribute_DRIVE_THROUGH})
+var s_PlaceAttributeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPlaceAttribute, Members: &mPlaceAttribute, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &e_PlaceAttributeList_member})
+var sPlaceType_COUNTRY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COUNTRY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlaceType_COUNTRY})
+var sPlaceType_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlaceType_REGION})
+var sPlaceType_SUB_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUB_REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlaceType_SUB_REGION})
+var sPlaceType_LOCALITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCALITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlaceType_LOCALITY})
+var sPlaceType_DISTRICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRICT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlaceType_DISTRICT})
+var sPlaceType_SUB_DISTRICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUB_DISTRICT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlaceType_SUB_DISTRICT})
+var sPlaceType_POSTAL_CODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POSTAL_CODE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlaceType_POSTAL_CODE})
+var sPlaceType_BLOCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BLOCK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlaceType_BLOCK})
+var sPlaceType_SUB_BLOCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUB_BLOCK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlaceType_SUB_BLOCK})
+var sPlaceType_INTERSECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERSECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlaceType_INTERSECTION})
+var sPlaceType_STREET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STREET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlaceType_STREET})
+var sPlaceType_POINT_OF_INTEREST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POINT_OF_INTEREST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlaceType_POINT_OF_INTEREST})
+var sPlaceType_POINT_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POINT_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlaceType_POINT_ADDRESS})
+var sPlaceType_INTERPOLATED_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERPOLATED_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlaceType_INTERPOLATED_ADDRESS})
+var sPlaceType_SECONDARY_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECONDARY_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlaceType_SECONDARY_ADDRESS})
+var sPlaceType_INFERRED_SECONDARY_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFERRED_SECONDARY_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlaceType_INFERRED_SECONDARY_ADDRESS})
+var s_Position_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &e_Position_member})
+var sPostalAuthority_USPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USPS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePostalAuthority_USPS})
+var sPostalCodeDetails_PostalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCode", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ePostalCodeDetails_PostalCode})
+var sPostalCodeDetails_PostalAuthority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalAuthority", ID: &iPostalAuthority, Members: &mPostalAuthority, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &ePostalCodeDetails_PostalAuthority})
+var sPostalCodeDetails_PostalCodeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCodeType", ID: &iPostalCodeType, Members: &mPostalCodeType, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &ePostalCodeDetails_PostalCodeType})
+var sPostalCodeDetails_UspsZip = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UspsZip", ID: &iUspsZip, Members: &mUspsZip, Type: smithy.ShapeTypeStructure, Ext: &ePostalCodeDetails_UspsZip})
+var sPostalCodeDetails_UspsZipPlus4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UspsZipPlus4", ID: &iUspsZipPlus4, Members: &mUspsZipPlus4, Type: smithy.ShapeTypeStructure, Ext: &ePostalCodeDetails_UspsZipPlus4})
+var s_PostalCodeDetailsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPostalCodeDetails, Members: &mPostalCodeDetails, Type: smithy.ShapeTypeStructure, Ext: &e_PostalCodeDetailsList_member})
+var sPostalCodeMode_MERGE_ALL_SPANNED_LOCALITIES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MERGE_ALL_SPANNED_LOCALITIES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePostalCodeMode_MERGE_ALL_SPANNED_LOCALITIES})
+var sPostalCodeMode_ENUMERATE_SPANNED_LOCALITIES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENUMERATE_SPANNED_LOCALITIES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePostalCodeMode_ENUMERATE_SPANNED_LOCALITIES})
+var sPostalCodeMode_ENUMERATE_SPANNED_DISTRICTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENUMERATE_SPANNED_DISTRICTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePostalCodeMode_ENUMERATE_SPANNED_DISTRICTS})
+var sPostalCodeType_USPS_ZIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USPS_ZIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePostalCodeType_USPS_ZIP})
+var sPostalCodeType_USPS_ZIP_PLUS_4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USPS_ZIP_PLUS_4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePostalCodeType_USPS_ZIP_PLUS_4})
+var sQueryRefinement_RefinedTerm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RefinedTerm", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eQueryRefinement_RefinedTerm})
+var sQueryRefinement_OriginalTerm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginalTerm", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eQueryRefinement_OriginalTerm})
+var sQueryRefinement_StartIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartIndex", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eQueryRefinement_StartIndex})
+var sQueryRefinement_EndIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndIndex", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eQueryRefinement_EndIndex})
+var s_QueryRefinementList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQueryRefinement, Members: &mQueryRefinement, Type: smithy.ShapeTypeStructure, Ext: &e_QueryRefinementList_member})
+var sQueryType_CATEGORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CATEGORY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQueryType_CATEGORY})
+var sQueryType_BUSINESS_CHAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUSINESS_CHAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQueryType_BUSINESS_CHAIN})
+var sRecordTypeCode_FIRM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIRM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecordTypeCode_FIRM})
+var sRecordTypeCode_GENERAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GENERAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecordTypeCode_GENERAL})
+var sRecordTypeCode_HIGH_RISE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIGH_RISE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecordTypeCode_HIGH_RISE})
+var sRecordTypeCode_POST_OFFICE_BOX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POST_OFFICE_BOX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecordTypeCode_POST_OFFICE_BOX})
+var sRecordTypeCode_RURAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RURAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecordTypeCode_RURAL})
+var sRecordTypeCode_STREET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STREET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecordTypeCode_STREET})
+var sRegion_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eRegion_Code})
+var sRegion_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eRegion_Name})
+var sRegionHighlights_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &eRegionHighlights_Code})
+var sRegionHighlights_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &eRegionHighlights_Name})
+var sRelatedPlace_PlaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceId", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eRelatedPlace_PlaceId})
+var sRelatedPlace_PlaceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceType", ID: &iPlaceType, Members: &mPlaceType, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &eRelatedPlace_PlaceType})
+var sRelatedPlace_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eRelatedPlace_Title})
+var sRelatedPlace_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eRelatedPlace_Address})
+var sRelatedPlace_Position = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Position", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eRelatedPlace_Position})
+var sRelatedPlace_AccessPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPoints", ID: &i_AccessPointList, Members: &m_AccessPointList, Type: smithy.ShapeTypeList, Ext: &eRelatedPlace_AccessPoints})
+var s_RelatedPlaceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRelatedPlace, Members: &mRelatedPlace, Type: smithy.ShapeTypeStructure, Ext: &e_RelatedPlaceList_member})
+var sReverseGeocodeAdditionalFeature_TIME_ZONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_ZONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReverseGeocodeAdditionalFeature_TIME_ZONE})
+var sReverseGeocodeAdditionalFeature_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReverseGeocodeAdditionalFeature_ACCESS})
+var sReverseGeocodeAdditionalFeature_INTERSECTIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERSECTIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReverseGeocodeAdditionalFeature_INTERSECTIONS})
+var s_ReverseGeocodeAdditionalFeatureList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReverseGeocodeAdditionalFeature, Members: &mReverseGeocodeAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &e_ReverseGeocodeAdditionalFeatureList_member})
+var sReverseGeocodeAddressNamesMode_ADMINISTRATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADMINISTRATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReverseGeocodeAddressNamesMode_ADMINISTRATIVE})
+var sReverseGeocodeFilter_IncludePlaceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludePlaceTypes", ID: &i_ReverseGeocodeFilterPlaceTypeList, Members: &m_ReverseGeocodeFilterPlaceTypeList, Type: smithy.ShapeTypeList, Ext: &eReverseGeocodeFilter_IncludePlaceTypes})
+var sReverseGeocodeFilterPlaceType_LOCALITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCALITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReverseGeocodeFilterPlaceType_LOCALITY})
+var sReverseGeocodeFilterPlaceType_INTERSECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERSECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReverseGeocodeFilterPlaceType_INTERSECTION})
+var sReverseGeocodeFilterPlaceType_STREET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STREET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReverseGeocodeFilterPlaceType_STREET})
+var sReverseGeocodeFilterPlaceType_POINT_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POINT_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReverseGeocodeFilterPlaceType_POINT_ADDRESS})
+var sReverseGeocodeFilterPlaceType_INTERPOLATED_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERPOLATED_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReverseGeocodeFilterPlaceType_INTERPOLATED_ADDRESS})
+var sReverseGeocodeFilterPlaceType_SECONDARY_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECONDARY_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReverseGeocodeFilterPlaceType_SECONDARY_ADDRESS})
+var sReverseGeocodeFilterPlaceType_POINT_OF_INTEREST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POINT_OF_INTEREST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReverseGeocodeFilterPlaceType_POINT_OF_INTEREST})
+var s_ReverseGeocodeFilterPlaceTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReverseGeocodeFilterPlaceType, Members: &mReverseGeocodeFilterPlaceType, Type: smithy.ShapeTypeEnum, Ext: &e_ReverseGeocodeFilterPlaceTypeList_member})
+var sReverseGeocodeIntendedUse_SINGLE_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReverseGeocodeIntendedUse_SINGLE_USE})
+var sReverseGeocodeIntendedUse_STORAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STORAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReverseGeocodeIntendedUse_STORAGE})
+var sReverseGeocodeResultItem_PlaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceId", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eReverseGeocodeResultItem_PlaceId})
+var sReverseGeocodeResultItem_PlaceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceType", ID: &iPlaceType, Members: &mPlaceType, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &eReverseGeocodeResultItem_PlaceType})
+var sReverseGeocodeResultItem_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eReverseGeocodeResultItem_Title})
+var sReverseGeocodeResultItem_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eReverseGeocodeResultItem_Address})
+var sReverseGeocodeResultItem_AddressNumberCorrected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressNumberCorrected", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &eReverseGeocodeResultItem_AddressNumberCorrected})
+var sReverseGeocodeResultItem_PostalCodeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCodeDetails", ID: &i_PostalCodeDetailsList, Members: &m_PostalCodeDetailsList, Type: smithy.ShapeTypeList, Ext: &eReverseGeocodeResultItem_PostalCodeDetails})
+var sReverseGeocodeResultItem_Position = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Position", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eReverseGeocodeResultItem_Position})
+var sReverseGeocodeResultItem_Distance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Distance", ID: &i_DistanceMeters, Traits: &t9, Type: smithy.ShapeTypeLong, Ext: &eReverseGeocodeResultItem_Distance})
+var sReverseGeocodeResultItem_MapView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MapView", ID: &i_BoundingBox, Members: &m_BoundingBox, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eReverseGeocodeResultItem_MapView})
+var sReverseGeocodeResultItem_Categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Categories", ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &eReverseGeocodeResultItem_Categories})
+var sReverseGeocodeResultItem_FoodTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FoodTypes", ID: &i_FoodTypeList, Members: &m_FoodTypeList, Type: smithy.ShapeTypeList, Ext: &eReverseGeocodeResultItem_FoodTypes})
+var sReverseGeocodeResultItem_AccessPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPoints", ID: &i_AccessPointList, Members: &m_AccessPointList, Type: smithy.ShapeTypeList, Ext: &eReverseGeocodeResultItem_AccessPoints})
+var sReverseGeocodeResultItem_TimeZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeZone", ID: &iTimeZone, Members: &mTimeZone, Type: smithy.ShapeTypeStructure, Ext: &eReverseGeocodeResultItem_TimeZone})
+var sReverseGeocodeResultItem_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode3, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eReverseGeocodeResultItem_PoliticalView})
+var sReverseGeocodeResultItem_Intersections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Intersections", ID: &i_IntersectionList, Members: &m_IntersectionList, Type: smithy.ShapeTypeList, Ext: &eReverseGeocodeResultItem_Intersections})
+var sReverseGeocodeResultItem_MainAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MainAddress", ID: &iRelatedPlace, Members: &mRelatedPlace, Type: smithy.ShapeTypeStructure, Ext: &eReverseGeocodeResultItem_MainAddress})
+var sReverseGeocodeResultItem_EstimatedPointAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EstimatedPointAddress", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &eReverseGeocodeResultItem_EstimatedPointAddress})
+var s_ReverseGeocodeResultItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReverseGeocodeResultItem, Members: &mReverseGeocodeResultItem, Type: smithy.ShapeTypeStructure, Ext: &e_ReverseGeocodeResultItemList_member})
+var sSearchNearbyAdditionalFeature_TIME_ZONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_ZONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchNearbyAdditionalFeature_TIME_ZONE})
+var sSearchNearbyAdditionalFeature_PHONEMES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PHONEMES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchNearbyAdditionalFeature_PHONEMES})
+var sSearchNearbyAdditionalFeature_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchNearbyAdditionalFeature_ACCESS})
+var sSearchNearbyAdditionalFeature_CONTACT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTACT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchNearbyAdditionalFeature_CONTACT})
+var sSearchNearbyAdditionalFeature_CROSS_REFERENCES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CROSS_REFERENCES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchNearbyAdditionalFeature_CROSS_REFERENCES})
+var s_SearchNearbyAdditionalFeatureList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchNearbyAdditionalFeature, Members: &mSearchNearbyAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &e_SearchNearbyAdditionalFeatureList_member})
+var sSearchNearbyFilter_BoundingBox = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BoundingBox", ID: &i_BoundingBox, Members: &m_BoundingBox, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eSearchNearbyFilter_BoundingBox})
+var sSearchNearbyFilter_IncludeCountries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeCountries", ID: &i_CountryCodeList, Members: &m_CountryCodeList, Type: smithy.ShapeTypeList, Ext: &eSearchNearbyFilter_IncludeCountries})
+var sSearchNearbyFilter_IncludeCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeCategories", ID: &i_FilterCategoryList, Members: &m_FilterCategoryList, Type: smithy.ShapeTypeList, Ext: &eSearchNearbyFilter_IncludeCategories})
+var sSearchNearbyFilter_ExcludeCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeCategories", ID: &i_FilterCategoryList, Members: &m_FilterCategoryList, Type: smithy.ShapeTypeList, Ext: &eSearchNearbyFilter_ExcludeCategories})
+var sSearchNearbyFilter_IncludeBusinessChains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeBusinessChains", ID: &i_FilterBusinessChainList, Members: &m_FilterBusinessChainList, Type: smithy.ShapeTypeList, Ext: &eSearchNearbyFilter_IncludeBusinessChains})
+var sSearchNearbyFilter_ExcludeBusinessChains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeBusinessChains", ID: &i_FilterBusinessChainList, Members: &m_FilterBusinessChainList, Type: smithy.ShapeTypeList, Ext: &eSearchNearbyFilter_ExcludeBusinessChains})
+var sSearchNearbyFilter_IncludeFoodTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeFoodTypes", ID: &i_FilterFoodTypeList, Members: &m_FilterFoodTypeList, Type: smithy.ShapeTypeList, Ext: &eSearchNearbyFilter_IncludeFoodTypes})
+var sSearchNearbyFilter_ExcludeFoodTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeFoodTypes", ID: &i_FilterFoodTypeList, Members: &m_FilterFoodTypeList, Type: smithy.ShapeTypeList, Ext: &eSearchNearbyFilter_ExcludeFoodTypes})
+var sSearchNearbyIntendedUse_SINGLE_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchNearbyIntendedUse_SINGLE_USE})
+var sSearchNearbyIntendedUse_STORAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STORAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchNearbyIntendedUse_STORAGE})
+var sSearchNearbyResultItem_PlaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceId", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eSearchNearbyResultItem_PlaceId})
+var sSearchNearbyResultItem_PlaceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceType", ID: &iPlaceType, Members: &mPlaceType, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &eSearchNearbyResultItem_PlaceType})
+var sSearchNearbyResultItem_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eSearchNearbyResultItem_Title})
+var sSearchNearbyResultItem_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eSearchNearbyResultItem_Address})
+var sSearchNearbyResultItem_AddressNumberCorrected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressNumberCorrected", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &eSearchNearbyResultItem_AddressNumberCorrected})
+var sSearchNearbyResultItem_Position = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Position", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eSearchNearbyResultItem_Position})
+var sSearchNearbyResultItem_Distance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Distance", ID: &i_DistanceMeters, Traits: &t9, Type: smithy.ShapeTypeLong, Ext: &eSearchNearbyResultItem_Distance})
+var sSearchNearbyResultItem_MapView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MapView", ID: &i_BoundingBox, Members: &m_BoundingBox, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eSearchNearbyResultItem_MapView})
+var sSearchNearbyResultItem_Categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Categories", ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &eSearchNearbyResultItem_Categories})
+var sSearchNearbyResultItem_FoodTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FoodTypes", ID: &i_FoodTypeList, Members: &m_FoodTypeList, Type: smithy.ShapeTypeList, Ext: &eSearchNearbyResultItem_FoodTypes})
+var sSearchNearbyResultItem_BusinessChains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BusinessChains", ID: &i_BusinessChainList, Members: &m_BusinessChainList, Type: smithy.ShapeTypeList, Ext: &eSearchNearbyResultItem_BusinessChains})
+var sSearchNearbyResultItem_Contacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contacts", ID: &iContacts, Members: &mContacts, Type: smithy.ShapeTypeStructure, Ext: &eSearchNearbyResultItem_Contacts})
+var sSearchNearbyResultItem_OpeningHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpeningHours", ID: &i_OpeningHoursList, Members: &m_OpeningHoursList, Type: smithy.ShapeTypeList, Ext: &eSearchNearbyResultItem_OpeningHours})
+var sSearchNearbyResultItem_AccessPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPoints", ID: &i_AccessPointList, Members: &m_AccessPointList, Type: smithy.ShapeTypeList, Ext: &eSearchNearbyResultItem_AccessPoints})
+var sSearchNearbyResultItem_AccessRestrictions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessRestrictions", ID: &i_AccessRestrictionList, Members: &m_AccessRestrictionList, Type: smithy.ShapeTypeList, Ext: &eSearchNearbyResultItem_AccessRestrictions})
+var sSearchNearbyResultItem_TimeZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeZone", ID: &iTimeZone, Members: &mTimeZone, Type: smithy.ShapeTypeStructure, Ext: &eSearchNearbyResultItem_TimeZone})
+var sSearchNearbyResultItem_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode3, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eSearchNearbyResultItem_PoliticalView})
+var sSearchNearbyResultItem_Phonemes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Phonemes", ID: &iPhonemeDetails, Members: &mPhonemeDetails, Type: smithy.ShapeTypeStructure, Ext: &eSearchNearbyResultItem_Phonemes})
+var sSearchNearbyResultItem_PlaceAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceAttributes", ID: &i_PlaceAttributeList, Members: &m_PlaceAttributeList, Type: smithy.ShapeTypeList, Ext: &eSearchNearbyResultItem_PlaceAttributes})
+var sSearchNearbyResultItem_CrossReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossReferences", ID: &i_CrossReferenceList, Members: &m_CrossReferenceList, Type: smithy.ShapeTypeList, Ext: &eSearchNearbyResultItem_CrossReferences})
+var s_SearchNearbyResultItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchNearbyResultItem, Members: &mSearchNearbyResultItem, Type: smithy.ShapeTypeStructure, Ext: &e_SearchNearbyResultItemList_member})
+var sSearchTextAdditionalFeature_TIME_ZONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_ZONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchTextAdditionalFeature_TIME_ZONE})
+var sSearchTextAdditionalFeature_PHONEMES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PHONEMES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchTextAdditionalFeature_PHONEMES})
+var sSearchTextAdditionalFeature_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchTextAdditionalFeature_ACCESS})
+var sSearchTextAdditionalFeature_CONTACT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTACT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchTextAdditionalFeature_CONTACT})
+var sSearchTextAdditionalFeature_CROSS_REFERENCES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CROSS_REFERENCES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchTextAdditionalFeature_CROSS_REFERENCES})
+var s_SearchTextAdditionalFeatureList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchTextAdditionalFeature, Members: &mSearchTextAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &e_SearchTextAdditionalFeatureList_member})
+var sSearchTextFilter_BoundingBox = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BoundingBox", ID: &i_BoundingBox, Members: &m_BoundingBox, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eSearchTextFilter_BoundingBox})
+var sSearchTextFilter_Circle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Circle", ID: &iFilterCircle, Members: &mFilterCircle, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eSearchTextFilter_Circle})
+var sSearchTextFilter_IncludeCountries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeCountries", ID: &i_CountryCodeList, Members: &m_CountryCodeList, Type: smithy.ShapeTypeList, Ext: &eSearchTextFilter_IncludeCountries})
+var sSearchTextIntendedUse_SINGLE_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchTextIntendedUse_SINGLE_USE})
+var sSearchTextIntendedUse_STORAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STORAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchTextIntendedUse_STORAGE})
+var sSearchTextResultItem_PlaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceId", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eSearchTextResultItem_PlaceId})
+var sSearchTextResultItem_PlaceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceType", ID: &iPlaceType, Members: &mPlaceType, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &eSearchTextResultItem_PlaceType})
+var sSearchTextResultItem_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eSearchTextResultItem_Title})
+var sSearchTextResultItem_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eSearchTextResultItem_Address})
+var sSearchTextResultItem_AddressNumberCorrected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressNumberCorrected", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &eSearchTextResultItem_AddressNumberCorrected})
+var sSearchTextResultItem_Position = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Position", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eSearchTextResultItem_Position})
+var sSearchTextResultItem_Distance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Distance", ID: &i_DistanceMeters, Traits: &t9, Type: smithy.ShapeTypeLong, Ext: &eSearchTextResultItem_Distance})
+var sSearchTextResultItem_MapView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MapView", ID: &i_BoundingBox, Members: &m_BoundingBox, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eSearchTextResultItem_MapView})
+var sSearchTextResultItem_Categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Categories", ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &eSearchTextResultItem_Categories})
+var sSearchTextResultItem_FoodTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FoodTypes", ID: &i_FoodTypeList, Members: &m_FoodTypeList, Type: smithy.ShapeTypeList, Ext: &eSearchTextResultItem_FoodTypes})
+var sSearchTextResultItem_BusinessChains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BusinessChains", ID: &i_BusinessChainList, Members: &m_BusinessChainList, Type: smithy.ShapeTypeList, Ext: &eSearchTextResultItem_BusinessChains})
+var sSearchTextResultItem_Contacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contacts", ID: &iContacts, Members: &mContacts, Type: smithy.ShapeTypeStructure, Ext: &eSearchTextResultItem_Contacts})
+var sSearchTextResultItem_OpeningHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpeningHours", ID: &i_OpeningHoursList, Members: &m_OpeningHoursList, Type: smithy.ShapeTypeList, Ext: &eSearchTextResultItem_OpeningHours})
+var sSearchTextResultItem_AccessPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPoints", ID: &i_AccessPointList, Members: &m_AccessPointList, Type: smithy.ShapeTypeList, Ext: &eSearchTextResultItem_AccessPoints})
+var sSearchTextResultItem_AccessRestrictions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessRestrictions", ID: &i_AccessRestrictionList, Members: &m_AccessRestrictionList, Type: smithy.ShapeTypeList, Ext: &eSearchTextResultItem_AccessRestrictions})
+var sSearchTextResultItem_TimeZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeZone", ID: &iTimeZone, Members: &mTimeZone, Type: smithy.ShapeTypeStructure, Ext: &eSearchTextResultItem_TimeZone})
+var sSearchTextResultItem_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode3, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eSearchTextResultItem_PoliticalView})
+var sSearchTextResultItem_Phonemes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Phonemes", ID: &iPhonemeDetails, Members: &mPhonemeDetails, Type: smithy.ShapeTypeStructure, Ext: &eSearchTextResultItem_Phonemes})
+var sSearchTextResultItem_PlaceAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceAttributes", ID: &i_PlaceAttributeList, Members: &m_PlaceAttributeList, Type: smithy.ShapeTypeList, Ext: &eSearchTextResultItem_PlaceAttributes})
+var sSearchTextResultItem_CrossReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossReferences", ID: &i_CrossReferenceList, Members: &m_CrossReferenceList, Type: smithy.ShapeTypeList, Ext: &eSearchTextResultItem_CrossReferences})
+var s_SearchTextResultItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchTextResultItem, Members: &mSearchTextResultItem, Type: smithy.ShapeTypeStructure, Ext: &e_SearchTextResultItemList_member})
+var sSearchTextTravelMode_CAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchTextTravelMode_CAR})
+var sSearchTextTravelMode_SCOOTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCOOTER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchTextTravelMode_SCOOTER})
+var sSearchTextTravelMode_TRUCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRUCK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSearchTextTravelMode_TRUCK})
+var sSecondaryAddressComponent_Number = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Number", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eSecondaryAddressComponent_Number})
+var sSecondaryAddressComponent_Designator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Designator", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eSecondaryAddressComponent_Designator})
+var s_SecondaryAddressComponentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSecondaryAddressComponent, Members: &mSecondaryAddressComponent, Type: smithy.ShapeTypeStructure, Ext: &e_SecondaryAddressComponentList_member})
+var sSecondaryAddressComponentMatchScore_Number = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Number", ID: &i_MatchScore, Type: smithy.ShapeTypeDouble, Ext: &eSecondaryAddressComponentMatchScore_Number})
+var s_SecondaryAddressComponentMatchScoreList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSecondaryAddressComponentMatchScore, Members: &mSecondaryAddressComponentMatchScore, Type: smithy.ShapeTypeStructure, Ext: &e_SecondaryAddressComponentMatchScoreList_member})
+var sStreetComponents_BaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BaseName", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eStreetComponents_BaseName})
+var sStreetComponents_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eStreetComponents_Type})
+var sStreetComponents_TypePlacement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypePlacement", ID: &iTypePlacement, Members: &mTypePlacement, Type: smithy.ShapeTypeEnum, Ext: &eStreetComponents_TypePlacement})
+var sStreetComponents_TypeSeparator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeSeparator", ID: &i_TypeSeparator, Type: smithy.ShapeTypeString, Ext: &eStreetComponents_TypeSeparator})
+var sStreetComponents_Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prefix", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eStreetComponents_Prefix})
+var sStreetComponents_Suffix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Suffix", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eStreetComponents_Suffix})
+var sStreetComponents_Direction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Direction", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eStreetComponents_Direction})
+var sStreetComponents_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i_LanguageTag, Type: smithy.ShapeTypeString, Ext: &eStreetComponents_Language})
+var s_StreetComponentsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStreetComponents, Members: &mStreetComponents, Type: smithy.ShapeTypeStructure, Ext: &e_StreetComponentsList_member})
+var sSubRegion_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eSubRegion_Code})
+var sSubRegion_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eSubRegion_Name})
+var sSubRegionHighlights_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &eSubRegionHighlights_Code})
+var sSubRegionHighlights_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &eSubRegionHighlights_Name})
+var sSuggestAdditionalFeature_CORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSuggestAdditionalFeature_CORE})
+var sSuggestAdditionalFeature_TIME_ZONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_ZONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSuggestAdditionalFeature_TIME_ZONE})
+var sSuggestAdditionalFeature_PHONEMES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PHONEMES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSuggestAdditionalFeature_PHONEMES})
+var sSuggestAdditionalFeature_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSuggestAdditionalFeature_ACCESS})
+var sSuggestAdditionalFeature_CROSS_REFERENCES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CROSS_REFERENCES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSuggestAdditionalFeature_CROSS_REFERENCES})
+var s_SuggestAdditionalFeatureList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSuggestAdditionalFeature, Members: &mSuggestAdditionalFeature, Type: smithy.ShapeTypeEnum, Ext: &e_SuggestAdditionalFeatureList_member})
+var sSuggestAddressHighlights_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &eSuggestAddressHighlights_Label})
+var sSuggestFilter_BoundingBox = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BoundingBox", ID: &i_BoundingBox, Members: &m_BoundingBox, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eSuggestFilter_BoundingBox})
+var sSuggestFilter_Circle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Circle", ID: &iFilterCircle, Members: &mFilterCircle, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eSuggestFilter_Circle})
+var sSuggestFilter_IncludeCountries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeCountries", ID: &i_CountryCodeList, Members: &m_CountryCodeList, Type: smithy.ShapeTypeList, Ext: &eSuggestFilter_IncludeCountries})
+var sSuggestHighlights_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_HighlightList, Members: &m_HighlightList, Type: smithy.ShapeTypeList, Ext: &eSuggestHighlights_Title})
+var sSuggestHighlights_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iSuggestAddressHighlights, Members: &mSuggestAddressHighlights, Type: smithy.ShapeTypeStructure, Ext: &eSuggestHighlights_Address})
+var sSuggestIntendedUse_SINGLE_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSuggestIntendedUse_SINGLE_USE})
+var sSuggestPlaceResult_PlaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceId", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eSuggestPlaceResult_PlaceId})
+var sSuggestPlaceResult_PlaceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceType", ID: &iPlaceType, Members: &mPlaceType, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &eSuggestPlaceResult_PlaceType})
+var sSuggestPlaceResult_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eSuggestPlaceResult_Address})
+var sSuggestPlaceResult_Position = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Position", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eSuggestPlaceResult_Position})
+var sSuggestPlaceResult_Distance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Distance", ID: &i_DistanceMeters, Traits: &t9, Type: smithy.ShapeTypeLong, Ext: &eSuggestPlaceResult_Distance})
+var sSuggestPlaceResult_MapView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MapView", ID: &i_BoundingBox, Members: &m_BoundingBox, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eSuggestPlaceResult_MapView})
+var sSuggestPlaceResult_Categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Categories", ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &eSuggestPlaceResult_Categories})
+var sSuggestPlaceResult_FoodTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FoodTypes", ID: &i_FoodTypeList, Members: &m_FoodTypeList, Type: smithy.ShapeTypeList, Ext: &eSuggestPlaceResult_FoodTypes})
+var sSuggestPlaceResult_BusinessChains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BusinessChains", ID: &i_BusinessChainList, Members: &m_BusinessChainList, Type: smithy.ShapeTypeList, Ext: &eSuggestPlaceResult_BusinessChains})
+var sSuggestPlaceResult_AccessPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPoints", ID: &i_AccessPointList, Members: &m_AccessPointList, Type: smithy.ShapeTypeList, Ext: &eSuggestPlaceResult_AccessPoints})
+var sSuggestPlaceResult_AccessRestrictions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessRestrictions", ID: &i_AccessRestrictionList, Members: &m_AccessRestrictionList, Type: smithy.ShapeTypeList, Ext: &eSuggestPlaceResult_AccessRestrictions})
+var sSuggestPlaceResult_TimeZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeZone", ID: &iTimeZone, Members: &mTimeZone, Type: smithy.ShapeTypeStructure, Ext: &eSuggestPlaceResult_TimeZone})
+var sSuggestPlaceResult_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode3, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eSuggestPlaceResult_PoliticalView})
+var sSuggestPlaceResult_Phonemes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Phonemes", ID: &iPhonemeDetails, Members: &mPhonemeDetails, Type: smithy.ShapeTypeStructure, Ext: &eSuggestPlaceResult_Phonemes})
+var sSuggestPlaceResult_PlaceAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceAttributes", ID: &i_PlaceAttributeList, Members: &m_PlaceAttributeList, Type: smithy.ShapeTypeList, Ext: &eSuggestPlaceResult_PlaceAttributes})
+var sSuggestPlaceResult_CrossReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossReferences", ID: &i_CrossReferenceList, Members: &m_CrossReferenceList, Type: smithy.ShapeTypeList, Ext: &eSuggestPlaceResult_CrossReferences})
+var sSuggestQueryResult_QueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryId", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eSuggestQueryResult_QueryId})
+var sSuggestQueryResult_QueryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryType", ID: &iQueryType, Members: &mQueryType, Type: smithy.ShapeTypeEnum, Ext: &eSuggestQueryResult_QueryType})
+var sSuggestResultItem_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eSuggestResultItem_Title})
+var sSuggestResultItem_SuggestResultItemType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuggestResultItemType", ID: &iSuggestResultItemType, Members: &mSuggestResultItemType, Type: smithy.ShapeTypeEnum, Ext: &eSuggestResultItem_SuggestResultItemType})
+var sSuggestResultItem_Place = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Place", ID: &iSuggestPlaceResult, Members: &mSuggestPlaceResult, Type: smithy.ShapeTypeStructure, Ext: &eSuggestResultItem_Place})
+var sSuggestResultItem_Query = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Query", ID: &iSuggestQueryResult, Members: &mSuggestQueryResult, Type: smithy.ShapeTypeStructure, Ext: &eSuggestResultItem_Query})
+var sSuggestResultItem_Highlights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Highlights", ID: &iSuggestHighlights, Members: &mSuggestHighlights, Type: smithy.ShapeTypeStructure, Ext: &eSuggestResultItem_Highlights})
+var s_SuggestResultItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSuggestResultItem, Members: &mSuggestResultItem, Type: smithy.ShapeTypeStructure, Ext: &e_SuggestResultItemList_member})
+var sSuggestResultItemType_PLACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PLACE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSuggestResultItemType_PLACE})
+var sSuggestResultItemType_QUERY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUERY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSuggestResultItemType_QUERY})
+var sSuggestTravelMode_CAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSuggestTravelMode_CAR})
+var sSuggestTravelMode_SCOOTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCOOTER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSuggestTravelMode_SCOOTER})
+var sSuggestTravelMode_TRUCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRUCK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSuggestTravelMode_TRUCK})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var sTimeZone_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eTimeZone_Name})
+var sTimeZone_Offset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Offset", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eTimeZone_Offset})
+var sTimeZone_OffsetSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OffsetSeconds", ID: &i_DurationSeconds, Traits: &t9, Type: smithy.ShapeTypeLong, Ext: &eTimeZone_OffsetSeconds})
+var sTranslationDetails_Locality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locality", ID: &i_AdminNamesList, Members: &m_AdminNamesList, Type: smithy.ShapeTypeList, Ext: &eTranslationDetails_Locality})
+var sTranslationDetails_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_AdminNamesList, Members: &m_AdminNamesList, Type: smithy.ShapeTypeList, Ext: &eTranslationDetails_Region})
+var sTranslationDetails_District = smithy.NewStaticSchema(smithy.StaticSchema{Member: "District", ID: &i_AdminNamesList, Members: &m_AdminNamesList, Type: smithy.ShapeTypeList, Ext: &eTranslationDetails_District})
+var sTranslationDetails_SubRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubRegion", ID: &i_AdminNamesList, Members: &m_AdminNamesList, Type: smithy.ShapeTypeList, Ext: &eTranslationDetails_SubRegion})
+var sTranslationName_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eTranslationName_Value})
+var sTranslationName_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i_LanguageTag, Type: smithy.ShapeTypeString, Ext: &eTranslationName_Language})
+var sTranslationName_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iTranslationNameType, Members: &mTranslationNameType, Type: smithy.ShapeTypeEnum, Ext: &eTranslationName_Type})
+var sTranslationName_Primary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Primary", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &eTranslationName_Primary})
+var sTranslationName_Transliterated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Transliterated", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &eTranslationName_Transliterated})
+var s_TranslationNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTranslationName, Members: &mTranslationName, Type: smithy.ShapeTypeStructure, Ext: &e_TranslationNameList_member})
+var sTranslationNameType_ABBREVIATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ABBREVIATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTranslationNameType_ABBREVIATION})
+var sTranslationNameType_AREA_CODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AREA_CODE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTranslationNameType_AREA_CODE})
+var sTranslationNameType_BASE_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BASE_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTranslationNameType_BASE_NAME})
+var sTranslationNameType_EXONYM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXONYM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTranslationNameType_EXONYM})
+var sTranslationNameType_SHORTENED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHORTENED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTranslationNameType_SHORTENED})
+var sTranslationNameType_SYNONYM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYNONYM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTranslationNameType_SYNONYM})
+var sTypePlacement_BEFORE_BASE_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEFORE_BASE_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTypePlacement_BEFORE_BASE_NAME})
+var sTypePlacement_AFTER_BASE_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AFTER_BASE_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTypePlacement_AFTER_BASE_NAME})
+var sUspsZip_ZipClassificationCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZipClassificationCode", ID: &iZipClassificationCode, Members: &mZipClassificationCode, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &eUspsZip_ZipClassificationCode})
+var sUspsZipPlus4_RecordTypeCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordTypeCode", ID: &iRecordTypeCode, Members: &mRecordTypeCode, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &eUspsZipPlus4_RecordTypeCode})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sValidationException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Traits: &t14, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_Reason})
+var sValidationException_FieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Traits: &t15, Type: smithy.ShapeTypeList, Ext: &eValidationException_FieldList})
+var sValidationExceptionField_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Traits: &t16, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_Name})
+var sValidationExceptionField_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_Message})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_UNKNOWN_OPERATION})
+var sValidationExceptionReason_MISSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_MISSING})
+var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_CANNOT_PARSE})
+var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_FIELD_VALIDATION_FAILED})
+var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_OTHER})
+var sValidationExceptionReason_UNKNOWN_FIELD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_FIELD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_UNKNOWN_FIELD})
+var sZipClassificationCode_MILITARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MILITARY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eZipClassificationCode_MILITARY})
+var sZipClassificationCode_POST_OFFICE_BOXES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POST_OFFICE_BOXES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eZipClassificationCode_POST_OFFICE_BOXES})
+var sZipClassificationCode_UNIQUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNIQUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eZipClassificationCode_UNIQUE})
+var sAutocompleteRequest_QueryText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryText", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eAutocompleteRequest_QueryText})
+var sAutocompleteRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eAutocompleteRequest_MaxResults})
+var sAutocompleteRequest_BiasPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BiasPosition", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eAutocompleteRequest_BiasPosition})
+var sAutocompleteRequest_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &iAutocompleteFilter, Members: &mAutocompleteFilter, Type: smithy.ShapeTypeStructure, Ext: &eAutocompleteRequest_Filter})
+var sAutocompleteRequest_PostalCodeMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCodeMode", ID: &iPostalCodeMode, Members: &mPostalCodeMode, Type: smithy.ShapeTypeEnum, Ext: &eAutocompleteRequest_PostalCodeMode})
+var sAutocompleteRequest_AdditionalFeatures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalFeatures", ID: &i_AutocompleteAdditionalFeatureList, Members: &m_AutocompleteAdditionalFeatureList, Type: smithy.ShapeTypeList, Ext: &eAutocompleteRequest_AdditionalFeatures})
+var sAutocompleteRequest_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i_LanguageTag, Type: smithy.ShapeTypeString, Ext: &eAutocompleteRequest_Language})
+var sAutocompleteRequest_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eAutocompleteRequest_PoliticalView})
+var sAutocompleteRequest_IntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntendedUse", ID: &iAutocompleteIntendedUse, Members: &mAutocompleteIntendedUse, Type: smithy.ShapeTypeEnum, Ext: &eAutocompleteRequest_IntendedUse})
+var sAutocompleteRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ApiKey, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eAutocompleteRequest_Key})
+var sAutocompleteResponse_PricingBucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingBucket", ID: &pString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &eAutocompleteResponse_PricingBucket})
+var sAutocompleteResponse_ResultItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultItems", ID: &i_AutocompleteResultItemList, Members: &m_AutocompleteResultItemList, Type: smithy.ShapeTypeList, Ext: &eAutocompleteResponse_ResultItems})
+var sGeocodeRequest_QueryText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryText", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eGeocodeRequest_QueryText})
+var sGeocodeRequest_QueryComponents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryComponents", ID: &iGeocodeQueryComponents, Members: &mGeocodeQueryComponents, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeRequest_QueryComponents})
+var sGeocodeRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGeocodeRequest_MaxResults})
+var sGeocodeRequest_BiasPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BiasPosition", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eGeocodeRequest_BiasPosition})
+var sGeocodeRequest_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &iGeocodeFilter, Members: &mGeocodeFilter, Type: smithy.ShapeTypeStructure, Ext: &eGeocodeRequest_Filter})
+var sGeocodeRequest_AdditionalFeatures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalFeatures", ID: &i_GeocodeAdditionalFeatureList, Members: &m_GeocodeAdditionalFeatureList, Type: smithy.ShapeTypeList, Ext: &eGeocodeRequest_AdditionalFeatures})
+var sGeocodeRequest_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i_LanguageTag, Type: smithy.ShapeTypeString, Ext: &eGeocodeRequest_Language})
+var sGeocodeRequest_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eGeocodeRequest_PoliticalView})
+var sGeocodeRequest_IntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntendedUse", ID: &iGeocodeIntendedUse, Members: &mGeocodeIntendedUse, Type: smithy.ShapeTypeEnum, Ext: &eGeocodeRequest_IntendedUse})
+var sGeocodeRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ApiKey, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eGeocodeRequest_Key})
+var sGeocodeRequest_PostalCodeMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCodeMode", ID: &iPostalCodeMode, Members: &mPostalCodeMode, Type: smithy.ShapeTypeEnum, Ext: &eGeocodeRequest_PostalCodeMode})
+var sGeocodeRequest_AddressTranslations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressTranslations", ID: &i_AddressTranslationComponentList, Members: &m_AddressTranslationComponentList, Type: smithy.ShapeTypeList, Ext: &eGeocodeRequest_AddressTranslations})
+var sGeocodeRequest_AddressNamesMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressNamesMode", ID: &iGeocodeAddressNamesMode, Members: &mGeocodeAddressNamesMode, Type: smithy.ShapeTypeEnum, Ext: &eGeocodeRequest_AddressNamesMode})
+var sGeocodeResponse_PricingBucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingBucket", ID: &pString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &eGeocodeResponse_PricingBucket})
+var sGeocodeResponse_ResultItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultItems", ID: &i_GeocodeResultItemList, Members: &m_GeocodeResultItemList, Type: smithy.ShapeTypeList, Ext: &eGeocodeResponse_ResultItems})
+var sGetPlaceRequest_PlaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceId", ID: &i_SensitiveString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eGetPlaceRequest_PlaceId})
+var sGetPlaceRequest_AdditionalFeatures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalFeatures", ID: &i_GetPlaceAdditionalFeatureList, Members: &m_GetPlaceAdditionalFeatureList, Traits: &t20, Type: smithy.ShapeTypeList, Ext: &eGetPlaceRequest_AdditionalFeatures})
+var sGetPlaceRequest_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i_LanguageTag, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eGetPlaceRequest_Language})
+var sGetPlaceRequest_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eGetPlaceRequest_PoliticalView})
+var sGetPlaceRequest_IntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntendedUse", ID: &iGetPlaceIntendedUse, Members: &mGetPlaceIntendedUse, Traits: &t23, Type: smithy.ShapeTypeEnum, Ext: &eGetPlaceRequest_IntendedUse})
+var sGetPlaceRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ApiKey, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eGetPlaceRequest_Key})
+var sGetPlaceRequest_AddressNamesMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressNamesMode", ID: &iGetPlaceAddressNamesMode, Members: &mGetPlaceAddressNamesMode, Traits: &t24, Type: smithy.ShapeTypeEnum, Ext: &eGetPlaceRequest_AddressNamesMode})
+var sGetPlaceResponse_PlaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceId", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eGetPlaceResponse_PlaceId})
+var sGetPlaceResponse_PlaceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceType", ID: &iPlaceType, Members: &mPlaceType, Traits: &t9, Type: smithy.ShapeTypeEnum, Ext: &eGetPlaceResponse_PlaceType})
+var sGetPlaceResponse_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eGetPlaceResponse_Title})
+var sGetPlaceResponse_PricingBucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingBucket", ID: &pString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &eGetPlaceResponse_PricingBucket})
+var sGetPlaceResponse_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaceResponse_Address})
+var sGetPlaceResponse_AddressNumberCorrected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressNumberCorrected", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &eGetPlaceResponse_AddressNumberCorrected})
+var sGetPlaceResponse_PostalCodeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCodeDetails", ID: &i_PostalCodeDetailsList, Members: &m_PostalCodeDetailsList, Type: smithy.ShapeTypeList, Ext: &eGetPlaceResponse_PostalCodeDetails})
+var sGetPlaceResponse_Position = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Position", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eGetPlaceResponse_Position})
+var sGetPlaceResponse_MapView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MapView", ID: &i_BoundingBox, Members: &m_BoundingBox, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eGetPlaceResponse_MapView})
+var sGetPlaceResponse_Categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Categories", ID: &i_CategoryList, Members: &m_CategoryList, Type: smithy.ShapeTypeList, Ext: &eGetPlaceResponse_Categories})
+var sGetPlaceResponse_FoodTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FoodTypes", ID: &i_FoodTypeList, Members: &m_FoodTypeList, Type: smithy.ShapeTypeList, Ext: &eGetPlaceResponse_FoodTypes})
+var sGetPlaceResponse_BusinessChains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BusinessChains", ID: &i_BusinessChainList, Members: &m_BusinessChainList, Type: smithy.ShapeTypeList, Ext: &eGetPlaceResponse_BusinessChains})
+var sGetPlaceResponse_Contacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contacts", ID: &iContacts, Members: &mContacts, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaceResponse_Contacts})
+var sGetPlaceResponse_OpeningHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpeningHours", ID: &i_OpeningHoursList, Members: &m_OpeningHoursList, Type: smithy.ShapeTypeList, Ext: &eGetPlaceResponse_OpeningHours})
+var sGetPlaceResponse_AccessPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPoints", ID: &i_AccessPointList, Members: &m_AccessPointList, Type: smithy.ShapeTypeList, Ext: &eGetPlaceResponse_AccessPoints})
+var sGetPlaceResponse_AccessRestrictions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessRestrictions", ID: &i_AccessRestrictionList, Members: &m_AccessRestrictionList, Type: smithy.ShapeTypeList, Ext: &eGetPlaceResponse_AccessRestrictions})
+var sGetPlaceResponse_TimeZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeZone", ID: &iTimeZone, Members: &mTimeZone, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaceResponse_TimeZone})
+var sGetPlaceResponse_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode3, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eGetPlaceResponse_PoliticalView})
+var sGetPlaceResponse_Phonemes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Phonemes", ID: &iPhonemeDetails, Members: &mPhonemeDetails, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaceResponse_Phonemes})
+var sGetPlaceResponse_MainAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MainAddress", ID: &iRelatedPlace, Members: &mRelatedPlace, Type: smithy.ShapeTypeStructure, Ext: &eGetPlaceResponse_MainAddress})
+var sGetPlaceResponse_SecondaryAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecondaryAddresses", ID: &i_RelatedPlaceList, Members: &m_RelatedPlaceList, Type: smithy.ShapeTypeList, Ext: &eGetPlaceResponse_SecondaryAddresses})
+var sGetPlaceResponse_PlaceAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaceAttributes", ID: &i_PlaceAttributeList, Members: &m_PlaceAttributeList, Type: smithy.ShapeTypeList, Ext: &eGetPlaceResponse_PlaceAttributes})
+var sGetPlaceResponse_EstimatedPointAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EstimatedPointAddress", ID: &i_SensitiveBoolean, Traits: &t9, Type: smithy.ShapeTypeBoolean, Ext: &eGetPlaceResponse_EstimatedPointAddress})
+var sGetPlaceResponse_CrossReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossReferences", ID: &i_CrossReferenceList, Members: &m_CrossReferenceList, Type: smithy.ShapeTypeList, Ext: &eGetPlaceResponse_CrossReferences})
+var sReverseGeocodeRequest_QueryPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryPosition", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eReverseGeocodeRequest_QueryPosition})
+var sReverseGeocodeRequest_QueryRadius = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryRadius", ID: &i_DistanceMeters, Traits: &t9, Type: smithy.ShapeTypeLong, Ext: &eReverseGeocodeRequest_QueryRadius})
+var sReverseGeocodeRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eReverseGeocodeRequest_MaxResults})
+var sReverseGeocodeRequest_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &iReverseGeocodeFilter, Members: &mReverseGeocodeFilter, Type: smithy.ShapeTypeStructure, Ext: &eReverseGeocodeRequest_Filter})
+var sReverseGeocodeRequest_AdditionalFeatures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalFeatures", ID: &i_ReverseGeocodeAdditionalFeatureList, Members: &m_ReverseGeocodeAdditionalFeatureList, Type: smithy.ShapeTypeList, Ext: &eReverseGeocodeRequest_AdditionalFeatures})
+var sReverseGeocodeRequest_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i_LanguageTag, Type: smithy.ShapeTypeString, Ext: &eReverseGeocodeRequest_Language})
+var sReverseGeocodeRequest_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eReverseGeocodeRequest_PoliticalView})
+var sReverseGeocodeRequest_IntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntendedUse", ID: &iReverseGeocodeIntendedUse, Members: &mReverseGeocodeIntendedUse, Type: smithy.ShapeTypeEnum, Ext: &eReverseGeocodeRequest_IntendedUse})
+var sReverseGeocodeRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ApiKey, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eReverseGeocodeRequest_Key})
+var sReverseGeocodeRequest_Heading = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Heading", ID: &i_Heading, Traits: &t9, Type: smithy.ShapeTypeDouble, Ext: &eReverseGeocodeRequest_Heading})
+var sReverseGeocodeRequest_AddressNamesMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressNamesMode", ID: &iReverseGeocodeAddressNamesMode, Members: &mReverseGeocodeAddressNamesMode, Type: smithy.ShapeTypeEnum, Ext: &eReverseGeocodeRequest_AddressNamesMode})
+var sReverseGeocodeResponse_PricingBucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingBucket", ID: &pString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &eReverseGeocodeResponse_PricingBucket})
+var sReverseGeocodeResponse_ResultItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultItems", ID: &i_ReverseGeocodeResultItemList, Members: &m_ReverseGeocodeResultItemList, Type: smithy.ShapeTypeList, Ext: &eReverseGeocodeResponse_ResultItems})
+var sSearchNearbyRequest_QueryPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryPosition", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eSearchNearbyRequest_QueryPosition})
+var sSearchNearbyRequest_QueryRadius = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryRadius", ID: &i_DistanceMeters, Traits: &t9, Type: smithy.ShapeTypeLong, Ext: &eSearchNearbyRequest_QueryRadius})
+var sSearchNearbyRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSearchNearbyRequest_MaxResults})
+var sSearchNearbyRequest_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &iSearchNearbyFilter, Members: &mSearchNearbyFilter, Type: smithy.ShapeTypeStructure, Ext: &eSearchNearbyRequest_Filter})
+var sSearchNearbyRequest_AdditionalFeatures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalFeatures", ID: &i_SearchNearbyAdditionalFeatureList, Members: &m_SearchNearbyAdditionalFeatureList, Type: smithy.ShapeTypeList, Ext: &eSearchNearbyRequest_AdditionalFeatures})
+var sSearchNearbyRequest_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i_LanguageTag, Type: smithy.ShapeTypeString, Ext: &eSearchNearbyRequest_Language})
+var sSearchNearbyRequest_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eSearchNearbyRequest_PoliticalView})
+var sSearchNearbyRequest_IntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntendedUse", ID: &iSearchNearbyIntendedUse, Members: &mSearchNearbyIntendedUse, Type: smithy.ShapeTypeEnum, Ext: &eSearchNearbyRequest_IntendedUse})
+var sSearchNearbyRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eSearchNearbyRequest_NextToken})
+var sSearchNearbyRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ApiKey, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eSearchNearbyRequest_Key})
+var sSearchNearbyResponse_PricingBucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingBucket", ID: &pString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &eSearchNearbyResponse_PricingBucket})
+var sSearchNearbyResponse_ResultItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultItems", ID: &i_SearchNearbyResultItemList, Members: &m_SearchNearbyResultItemList, Type: smithy.ShapeTypeList, Ext: &eSearchNearbyResponse_ResultItems})
+var sSearchNearbyResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eSearchNearbyResponse_NextToken})
+var sSearchTextRequest_QueryText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryText", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eSearchTextRequest_QueryText})
+var sSearchTextRequest_QueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryId", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eSearchTextRequest_QueryId})
+var sSearchTextRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSearchTextRequest_MaxResults})
+var sSearchTextRequest_BiasPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BiasPosition", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eSearchTextRequest_BiasPosition})
+var sSearchTextRequest_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &iSearchTextFilter, Members: &mSearchTextFilter, Type: smithy.ShapeTypeStructure, Ext: &eSearchTextRequest_Filter})
+var sSearchTextRequest_AdditionalFeatures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalFeatures", ID: &i_SearchTextAdditionalFeatureList, Members: &m_SearchTextAdditionalFeatureList, Type: smithy.ShapeTypeList, Ext: &eSearchTextRequest_AdditionalFeatures})
+var sSearchTextRequest_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i_LanguageTag, Type: smithy.ShapeTypeString, Ext: &eSearchTextRequest_Language})
+var sSearchTextRequest_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eSearchTextRequest_PoliticalView})
+var sSearchTextRequest_IntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntendedUse", ID: &iSearchTextIntendedUse, Members: &mSearchTextIntendedUse, Type: smithy.ShapeTypeEnum, Ext: &eSearchTextRequest_IntendedUse})
+var sSearchTextRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eSearchTextRequest_NextToken})
+var sSearchTextRequest_TravelMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TravelMode", ID: &iSearchTextTravelMode, Members: &mSearchTextTravelMode, Type: smithy.ShapeTypeEnum, Ext: &eSearchTextRequest_TravelMode})
+var sSearchTextRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ApiKey, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eSearchTextRequest_Key})
+var sSearchTextResponse_PricingBucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingBucket", ID: &pString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &eSearchTextResponse_PricingBucket})
+var sSearchTextResponse_ResultItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultItems", ID: &i_SearchTextResultItemList, Members: &m_SearchTextResultItemList, Type: smithy.ShapeTypeList, Ext: &eSearchTextResponse_ResultItems})
+var sSearchTextResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString, Ext: &eSearchTextResponse_NextToken})
+var sSuggestRequest_QueryText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryText", ID: &i_SensitiveString, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eSuggestRequest_QueryText})
+var sSuggestRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSuggestRequest_MaxResults})
+var sSuggestRequest_MaxQueryRefinements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxQueryRefinements", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSuggestRequest_MaxQueryRefinements})
+var sSuggestRequest_BiasPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BiasPosition", ID: &i_Position, Members: &m_Position, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eSuggestRequest_BiasPosition})
+var sSuggestRequest_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &iSuggestFilter, Members: &mSuggestFilter, Type: smithy.ShapeTypeStructure, Ext: &eSuggestRequest_Filter})
+var sSuggestRequest_AdditionalFeatures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalFeatures", ID: &i_SuggestAdditionalFeatureList, Members: &m_SuggestAdditionalFeatureList, Type: smithy.ShapeTypeList, Ext: &eSuggestRequest_AdditionalFeatures})
+var sSuggestRequest_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i_LanguageTag, Type: smithy.ShapeTypeString, Ext: &eSuggestRequest_Language})
+var sSuggestRequest_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eSuggestRequest_PoliticalView})
+var sSuggestRequest_IntendedUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntendedUse", ID: &iSuggestIntendedUse, Members: &mSuggestIntendedUse, Type: smithy.ShapeTypeEnum, Ext: &eSuggestRequest_IntendedUse})
+var sSuggestRequest_TravelMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TravelMode", ID: &iSuggestTravelMode, Members: &mSuggestTravelMode, Type: smithy.ShapeTypeEnum, Ext: &eSuggestRequest_TravelMode})
+var sSuggestRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ApiKey, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eSuggestRequest_Key})
+var sSuggestResponse_PricingBucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingBucket", ID: &pString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &eSuggestResponse_PricingBucket})
+var sSuggestResponse_ResultItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultItems", ID: &i_SuggestResultItemList, Members: &m_SuggestResultItemList, Type: smithy.ShapeTypeList, Ext: &eSuggestResponse_ResultItems})
+var sSuggestResponse_QueryRefinements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryRefinements", ID: &i_QueryRefinementList, Members: &m_QueryRefinementList, Type: smithy.ShapeTypeList, Ext: &eSuggestResponse_QueryRefinements})
 
 var Autocomplete = &sAutocomplete
 

@@ -7,9 +7,792 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [784]smithy.SchemaExtensions
+var (
+	eAllQueryStringTypes                                             smithy.SchemaExtensions
+	eConstantAndVariableQueryString                                  smithy.SchemaExtensions
+	eConstantQueryString                                             smithy.SchemaExtensions
+	eContentTypeParameters                                           smithy.SchemaExtensions
+	eDatetimeOffsets                                                 smithy.SchemaExtensions
+	eDocumentType                                                    smithy.SchemaExtensions
+	eDocumentTypeAsMapValue                                          smithy.SchemaExtensions
+	eDocumentTypeAsPayload                                           smithy.SchemaExtensions
+	eDuplexStream                                                    smithy.SchemaExtensions
+	eDuplexStreamWithDistinctStreams                                 smithy.SchemaExtensions
+	eDuplexStreamWithInitialMessages                                 smithy.SchemaExtensions
+	eEmptyInputAndEmptyOutput                                        smithy.SchemaExtensions
+	eEndpointOperation                                               smithy.SchemaExtensions
+	eEndpointWithHostLabelOperation                                  smithy.SchemaExtensions
+	eFractionalSeconds                                               smithy.SchemaExtensions
+	eGreetingWithErrors                                              smithy.SchemaExtensions
+	eHostWithPathOperation                                           smithy.SchemaExtensions
+	eHttpChecksumRequired                                            smithy.SchemaExtensions
+	eHttpEmptyPrefixHeaders                                          smithy.SchemaExtensions
+	eHttpEnumPayload                                                 smithy.SchemaExtensions
+	eHttpPayloadTraits                                               smithy.SchemaExtensions
+	eHttpPayloadTraitsWithMediaType                                  smithy.SchemaExtensions
+	eHttpPayloadWithStructure                                        smithy.SchemaExtensions
+	eHttpPayloadWithUnion                                            smithy.SchemaExtensions
+	eHttpPrefixHeaders                                               smithy.SchemaExtensions
+	eHttpPrefixHeadersInResponse                                     smithy.SchemaExtensions
+	eHttpQueryParamsOnlyOperation                                    smithy.SchemaExtensions
+	eHttpRequestWithFloatLabels                                      smithy.SchemaExtensions
+	eHttpRequestWithGreedyLabelInPath                                smithy.SchemaExtensions
+	eHttpRequestWithLabels                                           smithy.SchemaExtensions
+	eHttpRequestWithLabelsAndTimestampFormat                         smithy.SchemaExtensions
+	eHttpRequestWithRegexLiteral                                     smithy.SchemaExtensions
+	eHttpResponseCode                                                smithy.SchemaExtensions
+	eHttpStringPayload                                               smithy.SchemaExtensions
+	eIgnoreQueryParamsInResponse                                     smithy.SchemaExtensions
+	eInputAndOutputWithHeaders                                       smithy.SchemaExtensions
+	eInputStream                                                     smithy.SchemaExtensions
+	eInputStreamWithInitialRequest                                   smithy.SchemaExtensions
+	eJsonBlobs                                                       smithy.SchemaExtensions
+	eJsonEnums                                                       smithy.SchemaExtensions
+	eJsonIntEnums                                                    smithy.SchemaExtensions
+	eJsonLists                                                       smithy.SchemaExtensions
+	eJsonMaps                                                        smithy.SchemaExtensions
+	eJsonTimestamps                                                  smithy.SchemaExtensions
+	eJsonUnions                                                      smithy.SchemaExtensions
+	eMalformedAcceptWithBody                                         smithy.SchemaExtensions
+	eMalformedAcceptWithGenericString                                smithy.SchemaExtensions
+	eMalformedAcceptWithPayload                                      smithy.SchemaExtensions
+	eMalformedBlob                                                   smithy.SchemaExtensions
+	eMalformedBoolean                                                smithy.SchemaExtensions
+	eMalformedByte                                                   smithy.SchemaExtensions
+	eMalformedContentTypeWithBody                                    smithy.SchemaExtensions
+	eMalformedContentTypeWithGenericString                           smithy.SchemaExtensions
+	eMalformedContentTypeWithoutBody                                 smithy.SchemaExtensions
+	eMalformedContentTypeWithoutBodyEmptyInput                       smithy.SchemaExtensions
+	eMalformedContentTypeWithPayload                                 smithy.SchemaExtensions
+	eMalformedDouble                                                 smithy.SchemaExtensions
+	eMalformedFloat                                                  smithy.SchemaExtensions
+	eMalformedInteger                                                smithy.SchemaExtensions
+	eMalformedList                                                   smithy.SchemaExtensions
+	eMalformedLong                                                   smithy.SchemaExtensions
+	eMalformedMap                                                    smithy.SchemaExtensions
+	eMalformedRequestBody                                            smithy.SchemaExtensions
+	eMalformedShort                                                  smithy.SchemaExtensions
+	eMalformedString                                                 smithy.SchemaExtensions
+	eMalformedTimestampBodyDateTime                                  smithy.SchemaExtensions
+	eMalformedTimestampBodyDefault                                   smithy.SchemaExtensions
+	eMalformedTimestampBodyHttpDate                                  smithy.SchemaExtensions
+	eMalformedTimestampHeaderDateTime                                smithy.SchemaExtensions
+	eMalformedTimestampHeaderDefault                                 smithy.SchemaExtensions
+	eMalformedTimestampHeaderEpoch                                   smithy.SchemaExtensions
+	eMalformedTimestampPathDefault                                   smithy.SchemaExtensions
+	eMalformedTimestampPathEpoch                                     smithy.SchemaExtensions
+	eMalformedTimestampPathHttpDate                                  smithy.SchemaExtensions
+	eMalformedTimestampQueryDefault                                  smithy.SchemaExtensions
+	eMalformedTimestampQueryEpoch                                    smithy.SchemaExtensions
+	eMalformedTimestampQueryHttpDate                                 smithy.SchemaExtensions
+	eMalformedUnion                                                  smithy.SchemaExtensions
+	eMediaTypeHeader                                                 smithy.SchemaExtensions
+	eNoInputAndNoOutput                                              smithy.SchemaExtensions
+	eNoInputAndOutput                                                smithy.SchemaExtensions
+	eNullAndEmptyHeadersClient                                       smithy.SchemaExtensions
+	eNullAndEmptyHeadersServer                                       smithy.SchemaExtensions
+	eOmitsNullSerializesEmptyString                                  smithy.SchemaExtensions
+	eOmitsSerializingEmptyLists                                      smithy.SchemaExtensions
+	eOperationWithDefaults                                           smithy.SchemaExtensions
+	eOperationWithNestedStructure                                    smithy.SchemaExtensions
+	eOutputStream                                                    smithy.SchemaExtensions
+	eOutputStreamWithInitialResponse                                 smithy.SchemaExtensions
+	ePostPlayerAction                                                smithy.SchemaExtensions
+	ePostUnionWithJsonName                                           smithy.SchemaExtensions
+	ePutWithContentEncoding                                          smithy.SchemaExtensions
+	eQueryIdempotencyTokenAutoFill                                   smithy.SchemaExtensions
+	eQueryParamsAsStringListMap                                      smithy.SchemaExtensions
+	eQueryPrecedence                                                 smithy.SchemaExtensions
+	eRecursiveShapes                                                 smithy.SchemaExtensions
+	eResponseCodeHttpFallback                                        smithy.SchemaExtensions
+	eResponseCodeRequired                                            smithy.SchemaExtensions
+	eSimpleScalarProperties                                          smithy.SchemaExtensions
+	eSparseJsonLists                                                 smithy.SchemaExtensions
+	eSparseJsonMaps                                                  smithy.SchemaExtensions
+	eStreamingTraits                                                 smithy.SchemaExtensions
+	eStreamingTraitsRequireLength                                    smithy.SchemaExtensions
+	eStreamingTraitsWithMediaType                                    smithy.SchemaExtensions
+	eTestBodyStructure                                               smithy.SchemaExtensions
+	eTestGetNoInputNoPayload                                         smithy.SchemaExtensions
+	eTestGetNoPayload                                                smithy.SchemaExtensions
+	eTestPayloadBlob                                                 smithy.SchemaExtensions
+	eTestPayloadStructure                                            smithy.SchemaExtensions
+	eTestPostNoInputNoPayload                                        smithy.SchemaExtensions
+	eTestPostNoPayload                                               smithy.SchemaExtensions
+	eTimestampFormatHeaders                                          smithy.SchemaExtensions
+	eUnitInputAndOutput                                              smithy.SchemaExtensions
+	e_RestJson                                                       smithy.SchemaExtensions
+	eBlobPayloadEvent                                                smithy.SchemaExtensions
+	eBlobPayloadEvent_payload                                        smithy.SchemaExtensions
+	eClientOptionalDefaults                                          smithy.SchemaExtensions
+	eClientOptionalDefaults_member                                   smithy.SchemaExtensions
+	eComplexError                                                    smithy.SchemaExtensions
+	eComplexError_Header                                             smithy.SchemaExtensions
+	eComplexError_TopLevel                                           smithy.SchemaExtensions
+	eComplexError_Nested                                             smithy.SchemaExtensions
+	eComplexNestedErrorData                                          smithy.SchemaExtensions
+	eComplexNestedErrorData_Foo                                      smithy.SchemaExtensions
+	eDefaults                                                        smithy.SchemaExtensions
+	eDefaults_defaultString                                          smithy.SchemaExtensions
+	eDefaults_defaultBoolean                                         smithy.SchemaExtensions
+	eDefaults_defaultList                                            smithy.SchemaExtensions
+	eDefaults_defaultDocumentMap                                     smithy.SchemaExtensions
+	eDefaults_defaultDocumentString                                  smithy.SchemaExtensions
+	eDefaults_defaultDocumentBoolean                                 smithy.SchemaExtensions
+	eDefaults_defaultDocumentList                                    smithy.SchemaExtensions
+	eDefaults_defaultNullDocument                                    smithy.SchemaExtensions
+	eDefaults_defaultTimestamp                                       smithy.SchemaExtensions
+	eDefaults_defaultBlob                                            smithy.SchemaExtensions
+	eDefaults_defaultByte                                            smithy.SchemaExtensions
+	eDefaults_defaultShort                                           smithy.SchemaExtensions
+	eDefaults_defaultInteger                                         smithy.SchemaExtensions
+	eDefaults_defaultLong                                            smithy.SchemaExtensions
+	eDefaults_defaultFloat                                           smithy.SchemaExtensions
+	eDefaults_defaultDouble                                          smithy.SchemaExtensions
+	eDefaults_defaultMap                                             smithy.SchemaExtensions
+	eDefaults_defaultEnum                                            smithy.SchemaExtensions
+	eDefaults_defaultIntEnum                                         smithy.SchemaExtensions
+	eDefaults_emptyString                                            smithy.SchemaExtensions
+	eDefaults_falseBoolean                                           smithy.SchemaExtensions
+	eDefaults_emptyBlob                                              smithy.SchemaExtensions
+	eDefaults_zeroByte                                               smithy.SchemaExtensions
+	eDefaults_zeroShort                                              smithy.SchemaExtensions
+	eDefaults_zeroInteger                                            smithy.SchemaExtensions
+	eDefaults_zeroLong                                               smithy.SchemaExtensions
+	eDefaults_zeroFloat                                              smithy.SchemaExtensions
+	eDefaults_zeroDouble                                             smithy.SchemaExtensions
+	e_DenseBooleanMap                                                smithy.SchemaExtensions
+	e_DenseBooleanMap_key                                            smithy.SchemaExtensions
+	e_DenseBooleanMap_value                                          smithy.SchemaExtensions
+	e_DenseNumberMap                                                 smithy.SchemaExtensions
+	e_DenseNumberMap_key                                             smithy.SchemaExtensions
+	e_DenseNumberMap_value                                           smithy.SchemaExtensions
+	e_DenseSetMap                                                    smithy.SchemaExtensions
+	e_DenseSetMap_key                                                smithy.SchemaExtensions
+	e_DenseSetMap_value                                              smithy.SchemaExtensions
+	e_DenseStringMap                                                 smithy.SchemaExtensions
+	e_DenseStringMap_key                                             smithy.SchemaExtensions
+	e_DenseStringMap_value                                           smithy.SchemaExtensions
+	e_DenseStructMap                                                 smithy.SchemaExtensions
+	e_DenseStructMap_key                                             smithy.SchemaExtensions
+	e_DenseStructMap_value                                           smithy.SchemaExtensions
+	eDialog                                                          smithy.SchemaExtensions
+	eDialog_language                                                 smithy.SchemaExtensions
+	eDialog_greeting                                                 smithy.SchemaExtensions
+	eDialog_farewell                                                 smithy.SchemaExtensions
+	e_DialogList                                                     smithy.SchemaExtensions
+	e_DialogList_member                                              smithy.SchemaExtensions
+	e_DialogMap                                                      smithy.SchemaExtensions
+	e_DialogMap_key                                                  smithy.SchemaExtensions
+	e_DialogMap_value                                                smithy.SchemaExtensions
+	e_Document                                                       smithy.SchemaExtensions
+	e_DocumentValuedMap                                              smithy.SchemaExtensions
+	e_DocumentValuedMap_key                                          smithy.SchemaExtensions
+	e_DocumentValuedMap_value                                        smithy.SchemaExtensions
+	eErrorEvent                                                      smithy.SchemaExtensions
+	eErrorEvent_message                                              smithy.SchemaExtensions
+	eEventStream                                                     smithy.SchemaExtensions
+	eEventStream_headers                                             smithy.SchemaExtensions
+	eEventStream_blobPayload                                         smithy.SchemaExtensions
+	eEventStream_stringPayload                                       smithy.SchemaExtensions
+	eEventStream_structurePayload                                    smithy.SchemaExtensions
+	eEventStream_unionPayload                                        smithy.SchemaExtensions
+	eEventStream_headersAndExplicitPayload                           smithy.SchemaExtensions
+	eEventStream_headersAndImplicitPayload                           smithy.SchemaExtensions
+	eEventStream_error                                               smithy.SchemaExtensions
+	eFarewell                                                        smithy.SchemaExtensions
+	eFarewell_phrase                                                 smithy.SchemaExtensions
+	e_FiniteStreamingBlob                                            smithy.SchemaExtensions
+	eFooError                                                        smithy.SchemaExtensions
+	eHeadersAndExplicitPayloadEvent                                  smithy.SchemaExtensions
+	eHeadersAndExplicitPayloadEvent_header                           smithy.SchemaExtensions
+	eHeadersAndExplicitPayloadEvent_payload                          smithy.SchemaExtensions
+	eHeadersAndImplicitPayloadEvent                                  smithy.SchemaExtensions
+	eHeadersAndImplicitPayloadEvent_header                           smithy.SchemaExtensions
+	eHeadersAndImplicitPayloadEvent_payload                          smithy.SchemaExtensions
+	eHeadersEvent                                                    smithy.SchemaExtensions
+	eHeadersEvent_booleanHeader                                      smithy.SchemaExtensions
+	eHeadersEvent_byteHeader                                         smithy.SchemaExtensions
+	eHeadersEvent_shortHeader                                        smithy.SchemaExtensions
+	eHeadersEvent_intHeader                                          smithy.SchemaExtensions
+	eHeadersEvent_longHeader                                         smithy.SchemaExtensions
+	eHeadersEvent_blobHeader                                         smithy.SchemaExtensions
+	eHeadersEvent_stringHeader                                       smithy.SchemaExtensions
+	eHeadersEvent_timestampHeader                                    smithy.SchemaExtensions
+	eInvalidGreeting                                                 smithy.SchemaExtensions
+	eInvalidGreeting_Message                                         smithy.SchemaExtensions
+	e_JsonHeaderString                                               smithy.SchemaExtensions
+	e_JsonValue                                                      smithy.SchemaExtensions
+	eMyUnion                                                         smithy.SchemaExtensions
+	eMyUnion_stringValue                                             smithy.SchemaExtensions
+	eMyUnion_booleanValue                                            smithy.SchemaExtensions
+	eMyUnion_numberValue                                             smithy.SchemaExtensions
+	eMyUnion_blobValue                                               smithy.SchemaExtensions
+	eMyUnion_timestampValue                                          smithy.SchemaExtensions
+	eMyUnion_enumValue                                               smithy.SchemaExtensions
+	eMyUnion_listValue                                               smithy.SchemaExtensions
+	eMyUnion_mapValue                                                smithy.SchemaExtensions
+	eMyUnion_structureValue                                          smithy.SchemaExtensions
+	eMyUnion_renamedStructureValue                                   smithy.SchemaExtensions
+	eMyUnion_unionValue                                              smithy.SchemaExtensions
+	eNestedPayload                                                   smithy.SchemaExtensions
+	eNestedPayload_greeting                                          smithy.SchemaExtensions
+	eNestedPayload_name                                              smithy.SchemaExtensions
+	eNestedUnion                                                     smithy.SchemaExtensions
+	eNestedUnion_stringValue                                         smithy.SchemaExtensions
+	ePayloadConfig                                                   smithy.SchemaExtensions
+	ePayloadConfig_data                                              smithy.SchemaExtensions
+	ePayloadStructure                                                smithy.SchemaExtensions
+	ePayloadStructure_structureMember                                smithy.SchemaExtensions
+	ePayloadUnion                                                    smithy.SchemaExtensions
+	ePayloadUnion_unionMember                                        smithy.SchemaExtensions
+	ePlayerAction                                                    smithy.SchemaExtensions
+	ePlayerAction_quit                                               smithy.SchemaExtensions
+	e_QueryMap                                                       smithy.SchemaExtensions
+	e_QueryMap_key                                                   smithy.SchemaExtensions
+	e_QueryMap_value                                                 smithy.SchemaExtensions
+	eRecursiveShapesInputOutputNested1                               smithy.SchemaExtensions
+	eRecursiveShapesInputOutputNested1_foo                           smithy.SchemaExtensions
+	eRecursiveShapesInputOutputNested1_nested                        smithy.SchemaExtensions
+	eRecursiveShapesInputOutputNested2                               smithy.SchemaExtensions
+	eRecursiveShapesInputOutputNested2_bar                           smithy.SchemaExtensions
+	eRecursiveShapesInputOutputNested2_recursiveMember               smithy.SchemaExtensions
+	eServiceUnavailableError                                         smithy.SchemaExtensions
+	eServiceUnavailableError_message                                 smithy.SchemaExtensions
+	e_SimpleList                                                     smithy.SchemaExtensions
+	e_SimpleList_member                                              smithy.SchemaExtensions
+	e_SimpleMap                                                      smithy.SchemaExtensions
+	e_SimpleMap_key                                                  smithy.SchemaExtensions
+	e_SimpleMap_value                                                smithy.SchemaExtensions
+	eSimpleUnion                                                     smithy.SchemaExtensions
+	eSimpleUnion_int                                                 smithy.SchemaExtensions
+	eSimpleUnion_string                                              smithy.SchemaExtensions
+	eSingletonEvent                                                  smithy.SchemaExtensions
+	eSingletonEvent_value                                            smithy.SchemaExtensions
+	eSingletonEventStream                                            smithy.SchemaExtensions
+	eSingletonEventStream_singleton                                  smithy.SchemaExtensions
+	e_SparseBooleanMap                                               smithy.SchemaExtensions
+	e_SparseBooleanMap_key                                           smithy.SchemaExtensions
+	e_SparseBooleanMap_value                                         smithy.SchemaExtensions
+	e_SparseNumberMap                                                smithy.SchemaExtensions
+	e_SparseNumberMap_key                                            smithy.SchemaExtensions
+	e_SparseNumberMap_value                                          smithy.SchemaExtensions
+	e_SparseSetMap                                                   smithy.SchemaExtensions
+	e_SparseSetMap_key                                               smithy.SchemaExtensions
+	e_SparseSetMap_value                                             smithy.SchemaExtensions
+	e_SparseStructMap                                                smithy.SchemaExtensions
+	e_SparseStructMap_key                                            smithy.SchemaExtensions
+	e_SparseStructMap_value                                          smithy.SchemaExtensions
+	e_StreamingBlob                                                  smithy.SchemaExtensions
+	e_StreamingTextPlainBlob                                         smithy.SchemaExtensions
+	eStringEnum                                                      smithy.SchemaExtensions
+	eStringEnum_V                                                    smithy.SchemaExtensions
+	eStringPayloadEvent                                              smithy.SchemaExtensions
+	eStringPayloadEvent_payload                                      smithy.SchemaExtensions
+	e_StructureList                                                  smithy.SchemaExtensions
+	e_StructureList_member                                           smithy.SchemaExtensions
+	eStructureListMember                                             smithy.SchemaExtensions
+	eStructureListMember_a                                           smithy.SchemaExtensions
+	eStructureListMember_b                                           smithy.SchemaExtensions
+	eStructurePayloadEvent                                           smithy.SchemaExtensions
+	eStructurePayloadEvent_payload                                   smithy.SchemaExtensions
+	eTestConfig                                                      smithy.SchemaExtensions
+	eTestConfig_timeout                                              smithy.SchemaExtensions
+	eTestEnum                                                        smithy.SchemaExtensions
+	eTestEnum_FOO                                                    smithy.SchemaExtensions
+	eTestEnum_BAR                                                    smithy.SchemaExtensions
+	eTestEnum_BAZ                                                    smithy.SchemaExtensions
+	e_TestIntEnum                                                    smithy.SchemaExtensions
+	e_TestIntEnum_ONE                                                smithy.SchemaExtensions
+	e_TestIntEnum_TWO                                                smithy.SchemaExtensions
+	e_TestStringList                                                 smithy.SchemaExtensions
+	e_TestStringList_member                                          smithy.SchemaExtensions
+	e_TestStringMap                                                  smithy.SchemaExtensions
+	e_TestStringMap_key                                              smithy.SchemaExtensions
+	e_TestStringMap_value                                            smithy.SchemaExtensions
+	eTopLevel                                                        smithy.SchemaExtensions
+	eTopLevel_dialog                                                 smithy.SchemaExtensions
+	eTopLevel_dialogList                                             smithy.SchemaExtensions
+	eTopLevel_dialogMap                                              smithy.SchemaExtensions
+	eUnionPayload                                                    smithy.SchemaExtensions
+	eUnionPayload_greeting                                           smithy.SchemaExtensions
+	eUnionPayloadEvent                                               smithy.SchemaExtensions
+	eUnionPayloadEvent_payload                                       smithy.SchemaExtensions
+	eUnionWithJsonName                                               smithy.SchemaExtensions
+	eUnionWithJsonName_foo                                           smithy.SchemaExtensions
+	eUnionWithJsonName_bar                                           smithy.SchemaExtensions
+	eUnionWithJsonName_baz                                           smithy.SchemaExtensions
+	eRenamedGreeting                                                 smithy.SchemaExtensions
+	eRenamedGreeting_salutation                                      smithy.SchemaExtensions
+	e_BooleanList                                                    smithy.SchemaExtensions
+	e_BooleanList_member                                             smithy.SchemaExtensions
+	e_DateTime                                                       smithy.SchemaExtensions
+	e_DoubleList                                                     smithy.SchemaExtensions
+	e_DoubleList_member                                              smithy.SchemaExtensions
+	e_EpochSeconds                                                   smithy.SchemaExtensions
+	eFooEnum                                                         smithy.SchemaExtensions
+	eFooEnum_FOO                                                     smithy.SchemaExtensions
+	eFooEnum_BAZ                                                     smithy.SchemaExtensions
+	eFooEnum_BAR                                                     smithy.SchemaExtensions
+	eFooEnum_ONE                                                     smithy.SchemaExtensions
+	eFooEnum_ZERO                                                    smithy.SchemaExtensions
+	e_FooEnumList                                                    smithy.SchemaExtensions
+	e_FooEnumList_member                                             smithy.SchemaExtensions
+	e_FooEnumMap                                                     smithy.SchemaExtensions
+	e_FooEnumMap_key                                                 smithy.SchemaExtensions
+	e_FooEnumMap_value                                               smithy.SchemaExtensions
+	e_FooEnumSet                                                     smithy.SchemaExtensions
+	e_FooEnumSet_member                                              smithy.SchemaExtensions
+	eGreetingStruct                                                  smithy.SchemaExtensions
+	eGreetingStruct_hi                                               smithy.SchemaExtensions
+	e_HttpDate                                                       smithy.SchemaExtensions
+	e_IntegerEnum                                                    smithy.SchemaExtensions
+	e_IntegerEnum_A                                                  smithy.SchemaExtensions
+	e_IntegerEnum_B                                                  smithy.SchemaExtensions
+	e_IntegerEnum_C                                                  smithy.SchemaExtensions
+	e_IntegerEnumList                                                smithy.SchemaExtensions
+	e_IntegerEnumList_member                                         smithy.SchemaExtensions
+	e_IntegerEnumMap                                                 smithy.SchemaExtensions
+	e_IntegerEnumMap_key                                             smithy.SchemaExtensions
+	e_IntegerEnumMap_value                                           smithy.SchemaExtensions
+	e_IntegerEnumSet                                                 smithy.SchemaExtensions
+	e_IntegerEnumSet_member                                          smithy.SchemaExtensions
+	e_IntegerList                                                    smithy.SchemaExtensions
+	e_IntegerList_member                                             smithy.SchemaExtensions
+	e_IntegerSet                                                     smithy.SchemaExtensions
+	e_IntegerSet_member                                              smithy.SchemaExtensions
+	e_JpegBlob                                                       smithy.SchemaExtensions
+	e_NestedStringList                                               smithy.SchemaExtensions
+	e_NestedStringList_member                                        smithy.SchemaExtensions
+	e_SparseShortList                                                smithy.SchemaExtensions
+	e_SparseShortList_member                                         smithy.SchemaExtensions
+	e_SparseStringList                                               smithy.SchemaExtensions
+	e_SparseStringList_member                                        smithy.SchemaExtensions
+	e_SparseStringMap                                                smithy.SchemaExtensions
+	e_SparseStringMap_key                                            smithy.SchemaExtensions
+	e_SparseStringMap_value                                          smithy.SchemaExtensions
+	e_StringList                                                     smithy.SchemaExtensions
+	e_StringList_member                                              smithy.SchemaExtensions
+	e_StringListMap                                                  smithy.SchemaExtensions
+	e_StringListMap_key                                              smithy.SchemaExtensions
+	e_StringListMap_value                                            smithy.SchemaExtensions
+	e_StringMap                                                      smithy.SchemaExtensions
+	e_StringMap_key                                                  smithy.SchemaExtensions
+	e_StringMap_value                                                smithy.SchemaExtensions
+	e_StringSet                                                      smithy.SchemaExtensions
+	e_StringSet_member                                               smithy.SchemaExtensions
+	e_TextPlainBlob                                                  smithy.SchemaExtensions
+	e_TimestampList                                                  smithy.SchemaExtensions
+	e_TimestampList_member                                           smithy.SchemaExtensions
+	eAllQueryStringTypesInput                                        smithy.SchemaExtensions
+	eAllQueryStringTypesInput_queryString                            smithy.SchemaExtensions
+	eAllQueryStringTypesInput_queryStringList                        smithy.SchemaExtensions
+	eAllQueryStringTypesInput_queryStringSet                         smithy.SchemaExtensions
+	eAllQueryStringTypesInput_queryByte                              smithy.SchemaExtensions
+	eAllQueryStringTypesInput_queryShort                             smithy.SchemaExtensions
+	eAllQueryStringTypesInput_queryInteger                           smithy.SchemaExtensions
+	eAllQueryStringTypesInput_queryIntegerList                       smithy.SchemaExtensions
+	eAllQueryStringTypesInput_queryIntegerSet                        smithy.SchemaExtensions
+	eAllQueryStringTypesInput_queryLong                              smithy.SchemaExtensions
+	eAllQueryStringTypesInput_queryFloat                             smithy.SchemaExtensions
+	eAllQueryStringTypesInput_queryDouble                            smithy.SchemaExtensions
+	eAllQueryStringTypesInput_queryDoubleList                        smithy.SchemaExtensions
+	eAllQueryStringTypesInput_queryBoolean                           smithy.SchemaExtensions
+	eAllQueryStringTypesInput_queryBooleanList                       smithy.SchemaExtensions
+	eAllQueryStringTypesInput_queryTimestamp                         smithy.SchemaExtensions
+	eAllQueryStringTypesInput_queryTimestampList                     smithy.SchemaExtensions
+	eAllQueryStringTypesInput_queryEnum                              smithy.SchemaExtensions
+	eAllQueryStringTypesInput_queryEnumList                          smithy.SchemaExtensions
+	eAllQueryStringTypesInput_queryIntegerEnum                       smithy.SchemaExtensions
+	eAllQueryStringTypesInput_queryIntegerEnumList                   smithy.SchemaExtensions
+	eAllQueryStringTypesInput_queryParamsMapOfStringList             smithy.SchemaExtensions
+	eConstantAndVariableQueryStringInput                             smithy.SchemaExtensions
+	eConstantAndVariableQueryStringInput_baz                         smithy.SchemaExtensions
+	eConstantAndVariableQueryStringInput_maybeSet                    smithy.SchemaExtensions
+	eConstantQueryStringInput                                        smithy.SchemaExtensions
+	eConstantQueryStringInput_hello                                  smithy.SchemaExtensions
+	eContentTypeParametersInput                                      smithy.SchemaExtensions
+	eContentTypeParametersInput_value                                smithy.SchemaExtensions
+	eContentTypeParametersOutput                                     smithy.SchemaExtensions
+	eDatetimeOffsetsOutput                                           smithy.SchemaExtensions
+	eDatetimeOffsetsOutput_datetime                                  smithy.SchemaExtensions
+	eDocumentTypeAsMapValueInputOutput                               smithy.SchemaExtensions
+	eDocumentTypeAsMapValueInputOutput_docValuedMap                  smithy.SchemaExtensions
+	eDocumentTypeAsPayloadInputOutput                                smithy.SchemaExtensions
+	eDocumentTypeAsPayloadInputOutput_documentValue                  smithy.SchemaExtensions
+	eDocumentTypeInputOutput                                         smithy.SchemaExtensions
+	eDocumentTypeInputOutput_stringValue                             smithy.SchemaExtensions
+	eDocumentTypeInputOutput_documentValue                           smithy.SchemaExtensions
+	eDuplexStreamInput                                               smithy.SchemaExtensions
+	eDuplexStreamInput_stream                                        smithy.SchemaExtensions
+	eDuplexStreamOutput                                              smithy.SchemaExtensions
+	eDuplexStreamOutput_stream                                       smithy.SchemaExtensions
+	eDuplexStreamWithDistinctStreamsInput                            smithy.SchemaExtensions
+	eDuplexStreamWithDistinctStreamsInput_stream                     smithy.SchemaExtensions
+	eDuplexStreamWithDistinctStreamsOutput                           smithy.SchemaExtensions
+	eDuplexStreamWithDistinctStreamsOutput_stream                    smithy.SchemaExtensions
+	eDuplexStreamWithInitialMessagesInput                            smithy.SchemaExtensions
+	eDuplexStreamWithInitialMessagesInput_initialRequestMember       smithy.SchemaExtensions
+	eDuplexStreamWithInitialMessagesInput_stream                     smithy.SchemaExtensions
+	eDuplexStreamWithInitialMessagesOutput                           smithy.SchemaExtensions
+	eDuplexStreamWithInitialMessagesOutput_initialResponseMember     smithy.SchemaExtensions
+	eDuplexStreamWithInitialMessagesOutput_stream                    smithy.SchemaExtensions
+	eEmptyInputAndEmptyOutputInput                                   smithy.SchemaExtensions
+	eEmptyInputAndEmptyOutputOutput                                  smithy.SchemaExtensions
+	eHostLabelInput                                                  smithy.SchemaExtensions
+	eHostLabelInput_label                                            smithy.SchemaExtensions
+	eFractionalSecondsOutput                                         smithy.SchemaExtensions
+	eFractionalSecondsOutput_datetime                                smithy.SchemaExtensions
+	eGreetingWithErrorsOutput                                        smithy.SchemaExtensions
+	eGreetingWithErrorsOutput_greeting                               smithy.SchemaExtensions
+	eHttpChecksumRequiredInputOutput                                 smithy.SchemaExtensions
+	eHttpChecksumRequiredInputOutput_foo                             smithy.SchemaExtensions
+	eHttpEmptyPrefixHeadersInput                                     smithy.SchemaExtensions
+	eHttpEmptyPrefixHeadersInput_prefixHeaders                       smithy.SchemaExtensions
+	eHttpEmptyPrefixHeadersInput_specificHeader                      smithy.SchemaExtensions
+	eHttpEmptyPrefixHeadersOutput                                    smithy.SchemaExtensions
+	eHttpEmptyPrefixHeadersOutput_prefixHeaders                      smithy.SchemaExtensions
+	eHttpEmptyPrefixHeadersOutput_specificHeader                     smithy.SchemaExtensions
+	eEnumPayloadInput                                                smithy.SchemaExtensions
+	eEnumPayloadInput_payload                                        smithy.SchemaExtensions
+	eHttpPayloadTraitsInputOutput                                    smithy.SchemaExtensions
+	eHttpPayloadTraitsInputOutput_foo                                smithy.SchemaExtensions
+	eHttpPayloadTraitsInputOutput_blob                               smithy.SchemaExtensions
+	eHttpPayloadTraitsWithMediaTypeInputOutput                       smithy.SchemaExtensions
+	eHttpPayloadTraitsWithMediaTypeInputOutput_foo                   smithy.SchemaExtensions
+	eHttpPayloadTraitsWithMediaTypeInputOutput_blob                  smithy.SchemaExtensions
+	eHttpPayloadWithStructureInputOutput                             smithy.SchemaExtensions
+	eHttpPayloadWithStructureInputOutput_nested                      smithy.SchemaExtensions
+	eHttpPayloadWithUnionInputOutput                                 smithy.SchemaExtensions
+	eHttpPayloadWithUnionInputOutput_nested                          smithy.SchemaExtensions
+	eHttpPrefixHeadersInput                                          smithy.SchemaExtensions
+	eHttpPrefixHeadersInput_foo                                      smithy.SchemaExtensions
+	eHttpPrefixHeadersInput_fooMap                                   smithy.SchemaExtensions
+	eHttpPrefixHeadersInResponseInput                                smithy.SchemaExtensions
+	eHttpPrefixHeadersInResponseOutput                               smithy.SchemaExtensions
+	eHttpPrefixHeadersInResponseOutput_prefixHeaders                 smithy.SchemaExtensions
+	eHttpPrefixHeadersOutput                                         smithy.SchemaExtensions
+	eHttpPrefixHeadersOutput_foo                                     smithy.SchemaExtensions
+	eHttpPrefixHeadersOutput_fooMap                                  smithy.SchemaExtensions
+	eHttpQueryParamsOnlyInput                                        smithy.SchemaExtensions
+	eHttpQueryParamsOnlyInput_queryMap                               smithy.SchemaExtensions
+	eHttpRequestWithFloatLabelsInput                                 smithy.SchemaExtensions
+	eHttpRequestWithFloatLabelsInput_float                           smithy.SchemaExtensions
+	eHttpRequestWithFloatLabelsInput_double                          smithy.SchemaExtensions
+	eHttpRequestWithGreedyLabelInPathInput                           smithy.SchemaExtensions
+	eHttpRequestWithGreedyLabelInPathInput_foo                       smithy.SchemaExtensions
+	eHttpRequestWithGreedyLabelInPathInput_baz                       smithy.SchemaExtensions
+	eHttpRequestWithLabelsAndTimestampFormatInput                    smithy.SchemaExtensions
+	eHttpRequestWithLabelsAndTimestampFormatInput_memberEpochSeconds smithy.SchemaExtensions
+	eHttpRequestWithLabelsAndTimestampFormatInput_memberHttpDate     smithy.SchemaExtensions
+	eHttpRequestWithLabelsAndTimestampFormatInput_memberDateTime     smithy.SchemaExtensions
+	eHttpRequestWithLabelsAndTimestampFormatInput_defaultFormat      smithy.SchemaExtensions
+	eHttpRequestWithLabelsAndTimestampFormatInput_targetEpochSeconds smithy.SchemaExtensions
+	eHttpRequestWithLabelsAndTimestampFormatInput_targetHttpDate     smithy.SchemaExtensions
+	eHttpRequestWithLabelsAndTimestampFormatInput_targetDateTime     smithy.SchemaExtensions
+	eHttpRequestWithLabelsInput                                      smithy.SchemaExtensions
+	eHttpRequestWithLabelsInput_string                               smithy.SchemaExtensions
+	eHttpRequestWithLabelsInput_short                                smithy.SchemaExtensions
+	eHttpRequestWithLabelsInput_integer                              smithy.SchemaExtensions
+	eHttpRequestWithLabelsInput_long                                 smithy.SchemaExtensions
+	eHttpRequestWithLabelsInput_float                                smithy.SchemaExtensions
+	eHttpRequestWithLabelsInput_double                               smithy.SchemaExtensions
+	eHttpRequestWithLabelsInput_boolean                              smithy.SchemaExtensions
+	eHttpRequestWithLabelsInput_timestamp                            smithy.SchemaExtensions
+	eHttpRequestWithRegexLiteralInput                                smithy.SchemaExtensions
+	eHttpRequestWithRegexLiteralInput_str                            smithy.SchemaExtensions
+	eHttpResponseCodeOutput                                          smithy.SchemaExtensions
+	eHttpResponseCodeOutput_Status                                   smithy.SchemaExtensions
+	eStringPayloadInput                                              smithy.SchemaExtensions
+	eStringPayloadInput_payload                                      smithy.SchemaExtensions
+	eIgnoreQueryParamsInResponseOutput                               smithy.SchemaExtensions
+	eIgnoreQueryParamsInResponseOutput_baz                           smithy.SchemaExtensions
+	eInputAndOutputWithHeadersIO                                     smithy.SchemaExtensions
+	eInputAndOutputWithHeadersIO_headerString                        smithy.SchemaExtensions
+	eInputAndOutputWithHeadersIO_headerByte                          smithy.SchemaExtensions
+	eInputAndOutputWithHeadersIO_headerShort                         smithy.SchemaExtensions
+	eInputAndOutputWithHeadersIO_headerInteger                       smithy.SchemaExtensions
+	eInputAndOutputWithHeadersIO_headerLong                          smithy.SchemaExtensions
+	eInputAndOutputWithHeadersIO_headerFloat                         smithy.SchemaExtensions
+	eInputAndOutputWithHeadersIO_headerDouble                        smithy.SchemaExtensions
+	eInputAndOutputWithHeadersIO_headerTrueBool                      smithy.SchemaExtensions
+	eInputAndOutputWithHeadersIO_headerFalseBool                     smithy.SchemaExtensions
+	eInputAndOutputWithHeadersIO_headerStringList                    smithy.SchemaExtensions
+	eInputAndOutputWithHeadersIO_headerStringSet                     smithy.SchemaExtensions
+	eInputAndOutputWithHeadersIO_headerIntegerList                   smithy.SchemaExtensions
+	eInputAndOutputWithHeadersIO_headerBooleanList                   smithy.SchemaExtensions
+	eInputAndOutputWithHeadersIO_headerTimestampList                 smithy.SchemaExtensions
+	eInputAndOutputWithHeadersIO_headerEnum                          smithy.SchemaExtensions
+	eInputAndOutputWithHeadersIO_headerEnumList                      smithy.SchemaExtensions
+	eInputAndOutputWithHeadersIO_headerIntegerEnum                   smithy.SchemaExtensions
+	eInputAndOutputWithHeadersIO_headerIntegerEnumList               smithy.SchemaExtensions
+	eInputStreamInput                                                smithy.SchemaExtensions
+	eInputStreamInput_stream                                         smithy.SchemaExtensions
+	eInputStreamWithInitialRequestInput                              smithy.SchemaExtensions
+	eInputStreamWithInitialRequestInput_initialRequestMember         smithy.SchemaExtensions
+	eInputStreamWithInitialRequestInput_stream                       smithy.SchemaExtensions
+	eJsonBlobsInputOutput                                            smithy.SchemaExtensions
+	eJsonBlobsInputOutput_data                                       smithy.SchemaExtensions
+	eJsonEnumsInputOutput                                            smithy.SchemaExtensions
+	eJsonEnumsInputOutput_fooEnum1                                   smithy.SchemaExtensions
+	eJsonEnumsInputOutput_fooEnum2                                   smithy.SchemaExtensions
+	eJsonEnumsInputOutput_fooEnum3                                   smithy.SchemaExtensions
+	eJsonEnumsInputOutput_fooEnumList                                smithy.SchemaExtensions
+	eJsonEnumsInputOutput_fooEnumSet                                 smithy.SchemaExtensions
+	eJsonEnumsInputOutput_fooEnumMap                                 smithy.SchemaExtensions
+	eJsonIntEnumsInputOutput                                         smithy.SchemaExtensions
+	eJsonIntEnumsInputOutput_integerEnum1                            smithy.SchemaExtensions
+	eJsonIntEnumsInputOutput_integerEnum2                            smithy.SchemaExtensions
+	eJsonIntEnumsInputOutput_integerEnum3                            smithy.SchemaExtensions
+	eJsonIntEnumsInputOutput_integerEnumList                         smithy.SchemaExtensions
+	eJsonIntEnumsInputOutput_integerEnumSet                          smithy.SchemaExtensions
+	eJsonIntEnumsInputOutput_integerEnumMap                          smithy.SchemaExtensions
+	eJsonListsInputOutput                                            smithy.SchemaExtensions
+	eJsonListsInputOutput_stringList                                 smithy.SchemaExtensions
+	eJsonListsInputOutput_stringSet                                  smithy.SchemaExtensions
+	eJsonListsInputOutput_integerList                                smithy.SchemaExtensions
+	eJsonListsInputOutput_booleanList                                smithy.SchemaExtensions
+	eJsonListsInputOutput_timestampList                              smithy.SchemaExtensions
+	eJsonListsInputOutput_enumList                                   smithy.SchemaExtensions
+	eJsonListsInputOutput_intEnumList                                smithy.SchemaExtensions
+	eJsonListsInputOutput_nestedStringList                           smithy.SchemaExtensions
+	eJsonListsInputOutput_structureList                              smithy.SchemaExtensions
+	eJsonMapsInputOutput                                             smithy.SchemaExtensions
+	eJsonMapsInputOutput_denseStructMap                              smithy.SchemaExtensions
+	eJsonMapsInputOutput_denseNumberMap                              smithy.SchemaExtensions
+	eJsonMapsInputOutput_denseBooleanMap                             smithy.SchemaExtensions
+	eJsonMapsInputOutput_denseStringMap                              smithy.SchemaExtensions
+	eJsonMapsInputOutput_denseSetMap                                 smithy.SchemaExtensions
+	eJsonTimestampsInputOutput                                       smithy.SchemaExtensions
+	eJsonTimestampsInputOutput_normal                                smithy.SchemaExtensions
+	eJsonTimestampsInputOutput_dateTime                              smithy.SchemaExtensions
+	eJsonTimestampsInputOutput_dateTimeOnTarget                      smithy.SchemaExtensions
+	eJsonTimestampsInputOutput_epochSeconds                          smithy.SchemaExtensions
+	eJsonTimestampsInputOutput_epochSecondsOnTarget                  smithy.SchemaExtensions
+	eJsonTimestampsInputOutput_httpDate                              smithy.SchemaExtensions
+	eJsonTimestampsInputOutput_httpDateOnTarget                      smithy.SchemaExtensions
+	eUnionInputOutput                                                smithy.SchemaExtensions
+	eUnionInputOutput_contents                                       smithy.SchemaExtensions
+	eMalformedAcceptWithGenericStringOutput                          smithy.SchemaExtensions
+	eMalformedAcceptWithGenericStringOutput_payload                  smithy.SchemaExtensions
+	eMalformedAcceptWithPayloadOutput                                smithy.SchemaExtensions
+	eMalformedAcceptWithPayloadOutput_payload                        smithy.SchemaExtensions
+	eMalformedBlobInput                                              smithy.SchemaExtensions
+	eMalformedBlobInput_blob                                         smithy.SchemaExtensions
+	eMalformedBooleanInput                                           smithy.SchemaExtensions
+	eMalformedBooleanInput_booleanInBody                             smithy.SchemaExtensions
+	eMalformedBooleanInput_booleanInPath                             smithy.SchemaExtensions
+	eMalformedBooleanInput_booleanInQuery                            smithy.SchemaExtensions
+	eMalformedBooleanInput_booleanInHeader                           smithy.SchemaExtensions
+	eMalformedByteInput                                              smithy.SchemaExtensions
+	eMalformedByteInput_byteInBody                                   smithy.SchemaExtensions
+	eMalformedByteInput_byteInPath                                   smithy.SchemaExtensions
+	eMalformedByteInput_byteInQuery                                  smithy.SchemaExtensions
+	eMalformedByteInput_byteInHeader                                 smithy.SchemaExtensions
+	eMalformedContentTypeWithGenericStringInput                      smithy.SchemaExtensions
+	eMalformedContentTypeWithGenericStringInput_payload              smithy.SchemaExtensions
+	eMalformedContentTypeWithoutBodyEmptyInputInput                  smithy.SchemaExtensions
+	eMalformedContentTypeWithoutBodyEmptyInputInput_header           smithy.SchemaExtensions
+	eMalformedContentTypeWithPayloadInput                            smithy.SchemaExtensions
+	eMalformedContentTypeWithPayloadInput_payload                    smithy.SchemaExtensions
+	eMalformedDoubleInput                                            smithy.SchemaExtensions
+	eMalformedDoubleInput_doubleInBody                               smithy.SchemaExtensions
+	eMalformedDoubleInput_doubleInPath                               smithy.SchemaExtensions
+	eMalformedDoubleInput_doubleInQuery                              smithy.SchemaExtensions
+	eMalformedDoubleInput_doubleInHeader                             smithy.SchemaExtensions
+	eMalformedFloatInput                                             smithy.SchemaExtensions
+	eMalformedFloatInput_floatInBody                                 smithy.SchemaExtensions
+	eMalformedFloatInput_floatInPath                                 smithy.SchemaExtensions
+	eMalformedFloatInput_floatInQuery                                smithy.SchemaExtensions
+	eMalformedFloatInput_floatInHeader                               smithy.SchemaExtensions
+	eMalformedIntegerInput                                           smithy.SchemaExtensions
+	eMalformedIntegerInput_integerInBody                             smithy.SchemaExtensions
+	eMalformedIntegerInput_integerInPath                             smithy.SchemaExtensions
+	eMalformedIntegerInput_integerInQuery                            smithy.SchemaExtensions
+	eMalformedIntegerInput_integerInHeader                           smithy.SchemaExtensions
+	eMalformedListInput                                              smithy.SchemaExtensions
+	eMalformedListInput_bodyList                                     smithy.SchemaExtensions
+	eMalformedLongInput                                              smithy.SchemaExtensions
+	eMalformedLongInput_longInBody                                   smithy.SchemaExtensions
+	eMalformedLongInput_longInPath                                   smithy.SchemaExtensions
+	eMalformedLongInput_longInQuery                                  smithy.SchemaExtensions
+	eMalformedLongInput_longInHeader                                 smithy.SchemaExtensions
+	eMalformedMapInput                                               smithy.SchemaExtensions
+	eMalformedMapInput_bodyMap                                       smithy.SchemaExtensions
+	eMalformedRequestBodyInput                                       smithy.SchemaExtensions
+	eMalformedRequestBodyInput_int                                   smithy.SchemaExtensions
+	eMalformedRequestBodyInput_float                                 smithy.SchemaExtensions
+	eMalformedShortInput                                             smithy.SchemaExtensions
+	eMalformedShortInput_shortInBody                                 smithy.SchemaExtensions
+	eMalformedShortInput_shortInPath                                 smithy.SchemaExtensions
+	eMalformedShortInput_shortInQuery                                smithy.SchemaExtensions
+	eMalformedShortInput_shortInHeader                               smithy.SchemaExtensions
+	eMalformedStringInput                                            smithy.SchemaExtensions
+	eMalformedStringInput_blob                                       smithy.SchemaExtensions
+	eMalformedTimestampBodyDateTimeInput                             smithy.SchemaExtensions
+	eMalformedTimestampBodyDateTimeInput_timestamp                   smithy.SchemaExtensions
+	eMalformedTimestampBodyDefaultInput                              smithy.SchemaExtensions
+	eMalformedTimestampBodyDefaultInput_timestamp                    smithy.SchemaExtensions
+	eMalformedTimestampBodyHttpDateInput                             smithy.SchemaExtensions
+	eMalformedTimestampBodyHttpDateInput_timestamp                   smithy.SchemaExtensions
+	eMalformedTimestampHeaderDateTimeInput                           smithy.SchemaExtensions
+	eMalformedTimestampHeaderDateTimeInput_timestamp                 smithy.SchemaExtensions
+	eMalformedTimestampHeaderDefaultInput                            smithy.SchemaExtensions
+	eMalformedTimestampHeaderDefaultInput_timestamp                  smithy.SchemaExtensions
+	eMalformedTimestampHeaderEpochInput                              smithy.SchemaExtensions
+	eMalformedTimestampHeaderEpochInput_timestamp                    smithy.SchemaExtensions
+	eMalformedTimestampPathDefaultInput                              smithy.SchemaExtensions
+	eMalformedTimestampPathDefaultInput_timestamp                    smithy.SchemaExtensions
+	eMalformedTimestampPathEpochInput                                smithy.SchemaExtensions
+	eMalformedTimestampPathEpochInput_timestamp                      smithy.SchemaExtensions
+	eMalformedTimestampPathHttpDateInput                             smithy.SchemaExtensions
+	eMalformedTimestampPathHttpDateInput_timestamp                   smithy.SchemaExtensions
+	eMalformedTimestampQueryDefaultInput                             smithy.SchemaExtensions
+	eMalformedTimestampQueryDefaultInput_timestamp                   smithy.SchemaExtensions
+	eMalformedTimestampQueryEpochInput                               smithy.SchemaExtensions
+	eMalformedTimestampQueryEpochInput_timestamp                     smithy.SchemaExtensions
+	eMalformedTimestampQueryHttpDateInput                            smithy.SchemaExtensions
+	eMalformedTimestampQueryHttpDateInput_timestamp                  smithy.SchemaExtensions
+	eMalformedUnionInput                                             smithy.SchemaExtensions
+	eMalformedUnionInput_union                                       smithy.SchemaExtensions
+	eMediaTypeHeaderInput                                            smithy.SchemaExtensions
+	eMediaTypeHeaderInput_json                                       smithy.SchemaExtensions
+	eMediaTypeHeaderOutput                                           smithy.SchemaExtensions
+	eMediaTypeHeaderOutput_json                                      smithy.SchemaExtensions
+	eNoInputAndOutputOutput                                          smithy.SchemaExtensions
+	eNullAndEmptyHeadersIO                                           smithy.SchemaExtensions
+	eNullAndEmptyHeadersIO_a                                         smithy.SchemaExtensions
+	eNullAndEmptyHeadersIO_b                                         smithy.SchemaExtensions
+	eNullAndEmptyHeadersIO_c                                         smithy.SchemaExtensions
+	eOmitsNullSerializesEmptyStringInput                             smithy.SchemaExtensions
+	eOmitsNullSerializesEmptyStringInput_nullValue                   smithy.SchemaExtensions
+	eOmitsNullSerializesEmptyStringInput_emptyString                 smithy.SchemaExtensions
+	eOmitsSerializingEmptyListsInput                                 smithy.SchemaExtensions
+	eOmitsSerializingEmptyListsInput_queryStringList                 smithy.SchemaExtensions
+	eOmitsSerializingEmptyListsInput_queryIntegerList                smithy.SchemaExtensions
+	eOmitsSerializingEmptyListsInput_queryDoubleList                 smithy.SchemaExtensions
+	eOmitsSerializingEmptyListsInput_queryBooleanList                smithy.SchemaExtensions
+	eOmitsSerializingEmptyListsInput_queryTimestampList              smithy.SchemaExtensions
+	eOmitsSerializingEmptyListsInput_queryEnumList                   smithy.SchemaExtensions
+	eOmitsSerializingEmptyListsInput_queryIntegerEnumList            smithy.SchemaExtensions
+	eOperationWithDefaultsInput                                      smithy.SchemaExtensions
+	eOperationWithDefaultsInput_defaults                             smithy.SchemaExtensions
+	eOperationWithDefaultsInput_clientOptionalDefaults               smithy.SchemaExtensions
+	eOperationWithDefaultsInput_topLevelDefault                      smithy.SchemaExtensions
+	eOperationWithDefaultsInput_otherTopLevelDefault                 smithy.SchemaExtensions
+	eOperationWithDefaultsOutput                                     smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_defaultString                       smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_defaultBoolean                      smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_defaultList                         smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_defaultDocumentMap                  smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_defaultDocumentString               smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_defaultDocumentBoolean              smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_defaultDocumentList                 smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_defaultNullDocument                 smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_defaultTimestamp                    smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_defaultBlob                         smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_defaultByte                         smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_defaultShort                        smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_defaultInteger                      smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_defaultLong                         smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_defaultFloat                        smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_defaultDouble                       smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_defaultMap                          smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_defaultEnum                         smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_defaultIntEnum                      smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_emptyString                         smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_falseBoolean                        smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_emptyBlob                           smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_zeroByte                            smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_zeroShort                           smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_zeroInteger                         smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_zeroLong                            smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_zeroFloat                           smithy.SchemaExtensions
+	eOperationWithDefaultsOutput_zeroDouble                          smithy.SchemaExtensions
+	eOperationWithNestedStructureInput                               smithy.SchemaExtensions
+	eOperationWithNestedStructureInput_topLevel                      smithy.SchemaExtensions
+	eOperationWithNestedStructureOutput                              smithy.SchemaExtensions
+	eOperationWithNestedStructureOutput_dialog                       smithy.SchemaExtensions
+	eOperationWithNestedStructureOutput_dialogList                   smithy.SchemaExtensions
+	eOperationWithNestedStructureOutput_dialogMap                    smithy.SchemaExtensions
+	eOutputStreamOutput                                              smithy.SchemaExtensions
+	eOutputStreamOutput_stream                                       smithy.SchemaExtensions
+	eOutputStreamWithInitialResponseOutput                           smithy.SchemaExtensions
+	eOutputStreamWithInitialResponseOutput_initialResponseMember     smithy.SchemaExtensions
+	eOutputStreamWithInitialResponseOutput_stream                    smithy.SchemaExtensions
+	ePostPlayerActionInput                                           smithy.SchemaExtensions
+	ePostPlayerActionInput_action                                    smithy.SchemaExtensions
+	ePostPlayerActionOutput                                          smithy.SchemaExtensions
+	ePostPlayerActionOutput_action                                   smithy.SchemaExtensions
+	ePostUnionWithJsonNameInput                                      smithy.SchemaExtensions
+	ePostUnionWithJsonNameInput_value                                smithy.SchemaExtensions
+	ePostUnionWithJsonNameOutput                                     smithy.SchemaExtensions
+	ePostUnionWithJsonNameOutput_value                               smithy.SchemaExtensions
+	ePutWithContentEncodingInput                                     smithy.SchemaExtensions
+	ePutWithContentEncodingInput_encoding                            smithy.SchemaExtensions
+	ePutWithContentEncodingInput_data                                smithy.SchemaExtensions
+	eQueryIdempotencyTokenAutoFillInput                              smithy.SchemaExtensions
+	eQueryIdempotencyTokenAutoFillInput_token                        smithy.SchemaExtensions
+	eQueryParamsAsStringListMapInput                                 smithy.SchemaExtensions
+	eQueryParamsAsStringListMapInput_qux                             smithy.SchemaExtensions
+	eQueryParamsAsStringListMapInput_foo                             smithy.SchemaExtensions
+	eQueryPrecedenceInput                                            smithy.SchemaExtensions
+	eQueryPrecedenceInput_foo                                        smithy.SchemaExtensions
+	eQueryPrecedenceInput_baz                                        smithy.SchemaExtensions
+	eRecursiveShapesInputOutput                                      smithy.SchemaExtensions
+	eRecursiveShapesInputOutput_nested                               smithy.SchemaExtensions
+	eResponseCodeHttpFallbackInputOutput                             smithy.SchemaExtensions
+	eResponseCodeRequiredOutput                                      smithy.SchemaExtensions
+	eResponseCodeRequiredOutput_responseCode                         smithy.SchemaExtensions
+	eSimpleScalarPropertiesInputOutput                               smithy.SchemaExtensions
+	eSimpleScalarPropertiesInputOutput_foo                           smithy.SchemaExtensions
+	eSimpleScalarPropertiesInputOutput_stringValue                   smithy.SchemaExtensions
+	eSimpleScalarPropertiesInputOutput_trueBooleanValue              smithy.SchemaExtensions
+	eSimpleScalarPropertiesInputOutput_falseBooleanValue             smithy.SchemaExtensions
+	eSimpleScalarPropertiesInputOutput_byteValue                     smithy.SchemaExtensions
+	eSimpleScalarPropertiesInputOutput_shortValue                    smithy.SchemaExtensions
+	eSimpleScalarPropertiesInputOutput_integerValue                  smithy.SchemaExtensions
+	eSimpleScalarPropertiesInputOutput_longValue                     smithy.SchemaExtensions
+	eSimpleScalarPropertiesInputOutput_floatValue                    smithy.SchemaExtensions
+	eSimpleScalarPropertiesInputOutput_doubleValue                   smithy.SchemaExtensions
+	eSparseJsonListsInputOutput                                      smithy.SchemaExtensions
+	eSparseJsonListsInputOutput_sparseStringList                     smithy.SchemaExtensions
+	eSparseJsonListsInputOutput_sparseShortList                      smithy.SchemaExtensions
+	eSparseJsonMapsInputOutput                                       smithy.SchemaExtensions
+	eSparseJsonMapsInputOutput_sparseStructMap                       smithy.SchemaExtensions
+	eSparseJsonMapsInputOutput_sparseNumberMap                       smithy.SchemaExtensions
+	eSparseJsonMapsInputOutput_sparseBooleanMap                      smithy.SchemaExtensions
+	eSparseJsonMapsInputOutput_sparseStringMap                       smithy.SchemaExtensions
+	eSparseJsonMapsInputOutput_sparseSetMap                          smithy.SchemaExtensions
+	eStreamingTraitsInputOutput                                      smithy.SchemaExtensions
+	eStreamingTraitsInputOutput_foo                                  smithy.SchemaExtensions
+	eStreamingTraitsInputOutput_blob                                 smithy.SchemaExtensions
+	eStreamingTraitsRequireLengthInput                               smithy.SchemaExtensions
+	eStreamingTraitsRequireLengthInput_foo                           smithy.SchemaExtensions
+	eStreamingTraitsRequireLengthInput_blob                          smithy.SchemaExtensions
+	eStreamingTraitsWithMediaTypeInputOutput                         smithy.SchemaExtensions
+	eStreamingTraitsWithMediaTypeInputOutput_foo                     smithy.SchemaExtensions
+	eStreamingTraitsWithMediaTypeInputOutput_blob                    smithy.SchemaExtensions
+	eTestBodyStructureInputOutput                                    smithy.SchemaExtensions
+	eTestBodyStructureInputOutput_testId                             smithy.SchemaExtensions
+	eTestBodyStructureInputOutput_testConfig                         smithy.SchemaExtensions
+	eTestNoPayloadInputOutput                                        smithy.SchemaExtensions
+	eTestNoPayloadInputOutput_testId                                 smithy.SchemaExtensions
+	eTestPayloadBlobInputOutput                                      smithy.SchemaExtensions
+	eTestPayloadBlobInputOutput_contentType                          smithy.SchemaExtensions
+	eTestPayloadBlobInputOutput_data                                 smithy.SchemaExtensions
+	eTestPayloadStructureInputOutput                                 smithy.SchemaExtensions
+	eTestPayloadStructureInputOutput_testId                          smithy.SchemaExtensions
+	eTestPayloadStructureInputOutput_payloadConfig                   smithy.SchemaExtensions
+	eTimestampFormatHeadersIO                                        smithy.SchemaExtensions
+	eTimestampFormatHeadersIO_memberEpochSeconds                     smithy.SchemaExtensions
+	eTimestampFormatHeadersIO_memberHttpDate                         smithy.SchemaExtensions
+	eTimestampFormatHeadersIO_memberDateTime                         smithy.SchemaExtensions
+	eTimestampFormatHeadersIO_defaultFormat                          smithy.SchemaExtensions
+	eTimestampFormatHeadersIO_targetEpochSeconds                     smithy.SchemaExtensions
+	eTimestampFormatHeadersIO_targetHttpDate                         smithy.SchemaExtensions
+	eTimestampFormatHeadersIO_targetDateTime                         smithy.SchemaExtensions
+)
 
 var (
 	iAllQueryStringTypes                            = smithy.ShapeID{Namespace: "aws.protocoltests.restjson", Name: "AllQueryStringTypes"}
@@ -1028,796 +1811,796 @@ var mTestPayloadBlobInputOutput = smithy.SchemaMembers{List: []*smithy.Schema{&s
 var mTestPayloadStructureInputOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sTestPayloadStructureInputOutput_testId, &sTestPayloadStructureInputOutput_payloadConfig}}
 var mTimestampFormatHeadersIO = smithy.SchemaMembers{List: []*smithy.Schema{&sTimestampFormatHeadersIO_memberEpochSeconds, &sTimestampFormatHeadersIO_memberHttpDate, &sTimestampFormatHeadersIO_memberDateTime, &sTimestampFormatHeadersIO_defaultFormat, &sTimestampFormatHeadersIO_targetEpochSeconds, &sTimestampFormatHeadersIO_targetHttpDate, &sTimestampFormatHeadersIO_targetDateTime}}
 
-var sAllQueryStringTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAllQueryStringTypes, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sConstantAndVariableQueryString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConstantAndVariableQueryString, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sConstantQueryString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConstantQueryString, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sContentTypeParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentTypeParameters, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sDatetimeOffsets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatetimeOffsets, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sDocumentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentType, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sDocumentTypeAsMapValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentTypeAsMapValue, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sDocumentTypeAsPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentTypeAsPayload, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sDuplexStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplexStream, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sDuplexStreamWithDistinctStreams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplexStreamWithDistinctStreams, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sDuplexStreamWithInitialMessages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplexStreamWithInitialMessages, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sEmptyInputAndEmptyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmptyInputAndEmptyOutput, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sEndpointOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointOperation, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sEndpointWithHostLabelOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointWithHostLabelOperation, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sFractionalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFractionalSeconds, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sGreetingWithErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGreetingWithErrors, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sHostWithPathOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHostWithPathOperation, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sHttpChecksumRequired = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpChecksumRequired, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sHttpEmptyPrefixHeaders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEmptyPrefixHeaders, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sHttpEnumPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEnumPayload, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var sHttpPayloadTraits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPayloadTraits, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &ext[20]})
-var sHttpPayloadTraitsWithMediaType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPayloadTraitsWithMediaType, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &ext[21]})
-var sHttpPayloadWithStructure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPayloadWithStructure, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &ext[22]})
-var sHttpPayloadWithUnion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPayloadWithUnion, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &ext[23]})
-var sHttpPrefixHeaders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPrefixHeaders, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &ext[24]})
-var sHttpPrefixHeadersInResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPrefixHeadersInResponse, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &ext[25]})
-var sHttpQueryParamsOnlyOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpQueryParamsOnlyOperation, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &ext[26]})
-var sHttpRequestWithFloatLabels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRequestWithFloatLabels, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &ext[27]})
-var sHttpRequestWithGreedyLabelInPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRequestWithGreedyLabelInPath, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &ext[28]})
-var sHttpRequestWithLabels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRequestWithLabels, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &ext[29]})
-var sHttpRequestWithLabelsAndTimestampFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRequestWithLabelsAndTimestampFormat, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &ext[30]})
-var sHttpRequestWithRegexLiteral = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRequestWithRegexLiteral, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &ext[31]})
-var sHttpResponseCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpResponseCode, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &ext[32]})
-var sHttpStringPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpStringPayload, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &ext[33]})
-var sIgnoreQueryParamsInResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIgnoreQueryParamsInResponse, Traits: &t34, Type: smithy.ShapeTypeOperation, Ext: &ext[34]})
-var sInputAndOutputWithHeaders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputAndOutputWithHeaders, Traits: &t35, Type: smithy.ShapeTypeOperation, Ext: &ext[35]})
-var sInputStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputStream, Traits: &t36, Type: smithy.ShapeTypeOperation, Ext: &ext[36]})
-var sInputStreamWithInitialRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputStreamWithInitialRequest, Traits: &t37, Type: smithy.ShapeTypeOperation, Ext: &ext[37]})
-var sJsonBlobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonBlobs, Traits: &t38, Type: smithy.ShapeTypeOperation, Ext: &ext[38]})
-var sJsonEnums = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonEnums, Traits: &t39, Type: smithy.ShapeTypeOperation, Ext: &ext[39]})
-var sJsonIntEnums = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonIntEnums, Traits: &t40, Type: smithy.ShapeTypeOperation, Ext: &ext[40]})
-var sJsonLists = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonLists, Traits: &t41, Type: smithy.ShapeTypeOperation, Ext: &ext[41]})
-var sJsonMaps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonMaps, Traits: &t42, Type: smithy.ShapeTypeOperation, Ext: &ext[42]})
-var sJsonTimestamps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonTimestamps, Traits: &t43, Type: smithy.ShapeTypeOperation, Ext: &ext[43]})
-var sJsonUnions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonUnions, Traits: &t44, Type: smithy.ShapeTypeOperation, Ext: &ext[44]})
-var sMalformedAcceptWithBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedAcceptWithBody, Traits: &t45, Type: smithy.ShapeTypeOperation, Ext: &ext[45]})
-var sMalformedAcceptWithGenericString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedAcceptWithGenericString, Traits: &t46, Type: smithy.ShapeTypeOperation, Ext: &ext[46]})
-var sMalformedAcceptWithPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedAcceptWithPayload, Traits: &t47, Type: smithy.ShapeTypeOperation, Ext: &ext[47]})
-var sMalformedBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedBlob, Traits: &t48, Type: smithy.ShapeTypeOperation, Ext: &ext[48]})
-var sMalformedBoolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedBoolean, Traits: &t49, Type: smithy.ShapeTypeOperation, Ext: &ext[49]})
-var sMalformedByte = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedByte, Traits: &t50, Type: smithy.ShapeTypeOperation, Ext: &ext[50]})
-var sMalformedContentTypeWithBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedContentTypeWithBody, Traits: &t51, Type: smithy.ShapeTypeOperation, Ext: &ext[51]})
-var sMalformedContentTypeWithGenericString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedContentTypeWithGenericString, Traits: &t52, Type: smithy.ShapeTypeOperation, Ext: &ext[52]})
-var sMalformedContentTypeWithoutBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedContentTypeWithoutBody, Traits: &t53, Type: smithy.ShapeTypeOperation, Ext: &ext[53]})
-var sMalformedContentTypeWithoutBodyEmptyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedContentTypeWithoutBodyEmptyInput, Traits: &t54, Type: smithy.ShapeTypeOperation, Ext: &ext[54]})
-var sMalformedContentTypeWithPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedContentTypeWithPayload, Traits: &t55, Type: smithy.ShapeTypeOperation, Ext: &ext[55]})
-var sMalformedDouble = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedDouble, Traits: &t56, Type: smithy.ShapeTypeOperation, Ext: &ext[56]})
-var sMalformedFloat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedFloat, Traits: &t57, Type: smithy.ShapeTypeOperation, Ext: &ext[57]})
-var sMalformedInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedInteger, Traits: &t58, Type: smithy.ShapeTypeOperation, Ext: &ext[58]})
-var sMalformedList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedList, Traits: &t59, Type: smithy.ShapeTypeOperation, Ext: &ext[59]})
-var sMalformedLong = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedLong, Traits: &t60, Type: smithy.ShapeTypeOperation, Ext: &ext[60]})
-var sMalformedMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedMap, Traits: &t61, Type: smithy.ShapeTypeOperation, Ext: &ext[61]})
-var sMalformedRequestBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedRequestBody, Traits: &t62, Type: smithy.ShapeTypeOperation, Ext: &ext[62]})
-var sMalformedShort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedShort, Traits: &t63, Type: smithy.ShapeTypeOperation, Ext: &ext[63]})
-var sMalformedString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedString, Traits: &t64, Type: smithy.ShapeTypeOperation, Ext: &ext[64]})
-var sMalformedTimestampBodyDateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampBodyDateTime, Traits: &t65, Type: smithy.ShapeTypeOperation, Ext: &ext[65]})
-var sMalformedTimestampBodyDefault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampBodyDefault, Traits: &t66, Type: smithy.ShapeTypeOperation, Ext: &ext[66]})
-var sMalformedTimestampBodyHttpDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampBodyHttpDate, Traits: &t67, Type: smithy.ShapeTypeOperation, Ext: &ext[67]})
-var sMalformedTimestampHeaderDateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampHeaderDateTime, Traits: &t68, Type: smithy.ShapeTypeOperation, Ext: &ext[68]})
-var sMalformedTimestampHeaderDefault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampHeaderDefault, Traits: &t69, Type: smithy.ShapeTypeOperation, Ext: &ext[69]})
-var sMalformedTimestampHeaderEpoch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampHeaderEpoch, Traits: &t70, Type: smithy.ShapeTypeOperation, Ext: &ext[70]})
-var sMalformedTimestampPathDefault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampPathDefault, Traits: &t71, Type: smithy.ShapeTypeOperation, Ext: &ext[71]})
-var sMalformedTimestampPathEpoch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampPathEpoch, Traits: &t72, Type: smithy.ShapeTypeOperation, Ext: &ext[72]})
-var sMalformedTimestampPathHttpDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampPathHttpDate, Traits: &t73, Type: smithy.ShapeTypeOperation, Ext: &ext[73]})
-var sMalformedTimestampQueryDefault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampQueryDefault, Traits: &t74, Type: smithy.ShapeTypeOperation, Ext: &ext[74]})
-var sMalformedTimestampQueryEpoch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampQueryEpoch, Traits: &t75, Type: smithy.ShapeTypeOperation, Ext: &ext[75]})
-var sMalformedTimestampQueryHttpDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampQueryHttpDate, Traits: &t76, Type: smithy.ShapeTypeOperation, Ext: &ext[76]})
-var sMalformedUnion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedUnion, Traits: &t77, Type: smithy.ShapeTypeOperation, Ext: &ext[77]})
-var sMediaTypeHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaTypeHeader, Traits: &t78, Type: smithy.ShapeTypeOperation, Ext: &ext[78]})
-var sNoInputAndNoOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoInputAndNoOutput, Traits: &t79, Type: smithy.ShapeTypeOperation, Ext: &ext[79]})
-var sNoInputAndOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoInputAndOutput, Traits: &t80, Type: smithy.ShapeTypeOperation, Ext: &ext[80]})
-var sNullAndEmptyHeadersClient = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNullAndEmptyHeadersClient, Traits: &t81, Type: smithy.ShapeTypeOperation, Ext: &ext[81]})
-var sNullAndEmptyHeadersServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNullAndEmptyHeadersServer, Traits: &t82, Type: smithy.ShapeTypeOperation, Ext: &ext[82]})
-var sOmitsNullSerializesEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOmitsNullSerializesEmptyString, Traits: &t83, Type: smithy.ShapeTypeOperation, Ext: &ext[83]})
-var sOmitsSerializingEmptyLists = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOmitsSerializingEmptyLists, Traits: &t84, Type: smithy.ShapeTypeOperation, Ext: &ext[84]})
-var sOperationWithDefaults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationWithDefaults, Traits: &t85, Type: smithy.ShapeTypeOperation, Ext: &ext[85]})
-var sOperationWithNestedStructure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationWithNestedStructure, Traits: &t86, Type: smithy.ShapeTypeOperation, Ext: &ext[86]})
-var sOutputStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputStream, Traits: &t87, Type: smithy.ShapeTypeOperation, Ext: &ext[87]})
-var sOutputStreamWithInitialResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputStreamWithInitialResponse, Traits: &t88, Type: smithy.ShapeTypeOperation, Ext: &ext[88]})
-var sPostPlayerAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostPlayerAction, Traits: &t89, Type: smithy.ShapeTypeOperation, Ext: &ext[89]})
-var sPostUnionWithJsonName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostUnionWithJsonName, Traits: &t90, Type: smithy.ShapeTypeOperation, Ext: &ext[90]})
-var sPutWithContentEncoding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutWithContentEncoding, Traits: &t91, Type: smithy.ShapeTypeOperation, Ext: &ext[91]})
-var sQueryIdempotencyTokenAutoFill = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryIdempotencyTokenAutoFill, Traits: &t92, Type: smithy.ShapeTypeOperation, Ext: &ext[92]})
-var sQueryParamsAsStringListMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryParamsAsStringListMap, Traits: &t93, Type: smithy.ShapeTypeOperation, Ext: &ext[93]})
-var sQueryPrecedence = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryPrecedence, Traits: &t94, Type: smithy.ShapeTypeOperation, Ext: &ext[94]})
-var sRecursiveShapes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecursiveShapes, Traits: &t95, Type: smithy.ShapeTypeOperation, Ext: &ext[95]})
-var sResponseCodeHttpFallback = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResponseCodeHttpFallback, Traits: &t96, Type: smithy.ShapeTypeOperation, Ext: &ext[96]})
-var sResponseCodeRequired = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResponseCodeRequired, Traits: &t97, Type: smithy.ShapeTypeOperation, Ext: &ext[97]})
-var sSimpleScalarProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSimpleScalarProperties, Traits: &t98, Type: smithy.ShapeTypeOperation, Ext: &ext[98]})
-var sSparseJsonLists = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSparseJsonLists, Traits: &t99, Type: smithy.ShapeTypeOperation, Ext: &ext[99]})
-var sSparseJsonMaps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSparseJsonMaps, Traits: &t100, Type: smithy.ShapeTypeOperation, Ext: &ext[100]})
-var sStreamingTraits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamingTraits, Traits: &t101, Type: smithy.ShapeTypeOperation, Ext: &ext[101]})
-var sStreamingTraitsRequireLength = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamingTraitsRequireLength, Traits: &t102, Type: smithy.ShapeTypeOperation, Ext: &ext[102]})
-var sStreamingTraitsWithMediaType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamingTraitsWithMediaType, Traits: &t103, Type: smithy.ShapeTypeOperation, Ext: &ext[103]})
-var sTestBodyStructure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestBodyStructure, Traits: &t104, Type: smithy.ShapeTypeOperation, Ext: &ext[104]})
-var sTestGetNoInputNoPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestGetNoInputNoPayload, Traits: &t105, Type: smithy.ShapeTypeOperation, Ext: &ext[105]})
-var sTestGetNoPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestGetNoPayload, Traits: &t106, Type: smithy.ShapeTypeOperation, Ext: &ext[106]})
-var sTestPayloadBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestPayloadBlob, Traits: &t107, Type: smithy.ShapeTypeOperation, Ext: &ext[107]})
-var sTestPayloadStructure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestPayloadStructure, Traits: &t108, Type: smithy.ShapeTypeOperation, Ext: &ext[108]})
-var sTestPostNoInputNoPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestPostNoInputNoPayload, Traits: &t109, Type: smithy.ShapeTypeOperation, Ext: &ext[109]})
-var sTestPostNoPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestPostNoPayload, Traits: &t110, Type: smithy.ShapeTypeOperation, Ext: &ext[110]})
-var sTimestampFormatHeaders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimestampFormatHeaders, Traits: &t111, Type: smithy.ShapeTypeOperation, Ext: &ext[111]})
-var sUnitInputAndOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnitInputAndOutput, Traits: &t112, Type: smithy.ShapeTypeOperation, Ext: &ext[112]})
-var s_RestJson = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RestJson, Type: smithy.ShapeTypeService, Ext: &ext[113]})
-var sBlobPayloadEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlobPayloadEvent, Members: &mBlobPayloadEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[114]})
-var sClientOptionalDefaults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientOptionalDefaults, Members: &mClientOptionalDefaults, Type: smithy.ShapeTypeStructure, Ext: &ext[116]})
-var sComplexError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComplexError, Members: &mComplexError, Traits: &t114, Type: smithy.ShapeTypeStructure, Ext: &ext[118]})
-var sComplexNestedErrorData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComplexNestedErrorData, Members: &mComplexNestedErrorData, Type: smithy.ShapeTypeStructure, Ext: &ext[122]})
-var sDefaults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefaults, Members: &mDefaults, Type: smithy.ShapeTypeStructure, Ext: &ext[124]})
-var s_DenseBooleanMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DenseBooleanMap, Members: &m_DenseBooleanMap, Type: smithy.ShapeTypeMap, Ext: &ext[153]})
-var s_DenseNumberMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DenseNumberMap, Members: &m_DenseNumberMap, Type: smithy.ShapeTypeMap, Ext: &ext[156]})
-var s_DenseSetMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DenseSetMap, Members: &m_DenseSetMap, Type: smithy.ShapeTypeMap, Ext: &ext[159]})
-var s_DenseStringMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DenseStringMap, Members: &m_DenseStringMap, Type: smithy.ShapeTypeMap, Ext: &ext[162]})
-var s_DenseStructMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DenseStructMap, Members: &m_DenseStructMap, Type: smithy.ShapeTypeMap, Ext: &ext[165]})
-var sDialog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDialog, Members: &mDialog, Type: smithy.ShapeTypeStructure, Ext: &ext[168]})
-var s_DialogList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DialogList, Members: &m_DialogList, Type: smithy.ShapeTypeList, Ext: &ext[172]})
-var s_DialogMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DialogMap, Members: &m_DialogMap, Type: smithy.ShapeTypeMap, Ext: &ext[174]})
-var s_Document = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Document, Type: smithy.ShapeTypeDocument, Ext: &ext[177]})
-var s_DocumentValuedMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DocumentValuedMap, Members: &m_DocumentValuedMap, Type: smithy.ShapeTypeMap, Ext: &ext[178]})
-var sErrorEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorEvent, Members: &mErrorEvent, Traits: &t117, Type: smithy.ShapeTypeStructure, Ext: &ext[181]})
-var sEventStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventStream, Members: &mEventStream, Traits: &t118, Type: smithy.ShapeTypeUnion, Ext: &ext[183]})
-var sFarewell = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFarewell, Members: &mFarewell, Type: smithy.ShapeTypeStructure, Ext: &ext[192]})
-var s_FiniteStreamingBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FiniteStreamingBlob, Traits: &t118, Type: smithy.ShapeTypeBlob, Ext: &ext[194]})
-var sFooError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFooError, Traits: &t119, Type: smithy.ShapeTypeStructure, Ext: &ext[195]})
-var sHeadersAndExplicitPayloadEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHeadersAndExplicitPayloadEvent, Members: &mHeadersAndExplicitPayloadEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[196]})
-var sHeadersAndImplicitPayloadEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHeadersAndImplicitPayloadEvent, Members: &mHeadersAndImplicitPayloadEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[199]})
-var sHeadersEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHeadersEvent, Members: &mHeadersEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[202]})
-var sInvalidGreeting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidGreeting, Members: &mInvalidGreeting, Traits: &t122, Type: smithy.ShapeTypeStructure, Ext: &ext[211]})
-var s_JsonHeaderString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JsonHeaderString, Traits: &t123, Type: smithy.ShapeTypeString, Ext: &ext[213]})
-var s_JsonValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JsonValue, Traits: &t123, Type: smithy.ShapeTypeString, Ext: &ext[214]})
-var sMyUnion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMyUnion, Members: &mMyUnion, Type: smithy.ShapeTypeUnion, Ext: &ext[215]})
-var sNestedPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNestedPayload, Members: &mNestedPayload, Type: smithy.ShapeTypeStructure, Ext: &ext[227]})
-var sNestedUnion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNestedUnion, Members: &mNestedUnion, Type: smithy.ShapeTypeUnion, Ext: &ext[230]})
-var sPayloadConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPayloadConfig, Members: &mPayloadConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[232]})
-var sPayloadStructure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPayloadStructure, Members: &mPayloadStructure, Type: smithy.ShapeTypeStructure, Ext: &ext[234]})
-var sPayloadUnion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPayloadUnion, Members: &mPayloadUnion, Type: smithy.ShapeTypeUnion, Ext: &ext[236]})
-var sPlayerAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlayerAction, Members: &mPlayerAction, Type: smithy.ShapeTypeUnion, Ext: &ext[238]})
-var s_QueryMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryMap, Members: &m_QueryMap, Type: smithy.ShapeTypeMap, Ext: &ext[240]})
-var sRecursiveShapesInputOutputNested1 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecursiveShapesInputOutputNested1, Members: &mRecursiveShapesInputOutputNested1, Type: smithy.ShapeTypeStructure, Ext: &ext[243]})
-var sRecursiveShapesInputOutputNested2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecursiveShapesInputOutputNested2, Members: &mRecursiveShapesInputOutputNested2, Type: smithy.ShapeTypeStructure, Ext: &ext[246]})
-var sServiceUnavailableError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableError, Members: &mServiceUnavailableError, Traits: &t119, Type: smithy.ShapeTypeStructure, Ext: &ext[249]})
-var s_SimpleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SimpleList, Members: &m_SimpleList, Type: smithy.ShapeTypeList, Ext: &ext[251]})
-var s_SimpleMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SimpleMap, Members: &m_SimpleMap, Type: smithy.ShapeTypeMap, Ext: &ext[253]})
-var sSimpleUnion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSimpleUnion, Members: &mSimpleUnion, Type: smithy.ShapeTypeUnion, Ext: &ext[256]})
-var sSingletonEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSingletonEvent, Members: &mSingletonEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[259]})
-var sSingletonEventStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSingletonEventStream, Members: &mSingletonEventStream, Type: smithy.ShapeTypeUnion, Ext: &ext[261]})
-var s_SparseBooleanMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SparseBooleanMap, Members: &m_SparseBooleanMap, Type: smithy.ShapeTypeMap, Ext: &ext[263]})
-var s_SparseNumberMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SparseNumberMap, Members: &m_SparseNumberMap, Type: smithy.ShapeTypeMap, Ext: &ext[266]})
-var s_SparseSetMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SparseSetMap, Members: &m_SparseSetMap, Type: smithy.ShapeTypeMap, Ext: &ext[269]})
-var s_SparseStructMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SparseStructMap, Members: &m_SparseStructMap, Type: smithy.ShapeTypeMap, Ext: &ext[272]})
-var s_StreamingBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamingBlob, Traits: &t118, Type: smithy.ShapeTypeBlob, Ext: &ext[275]})
-var s_StreamingTextPlainBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamingTextPlainBlob, Traits: &t124, Type: smithy.ShapeTypeBlob, Ext: &ext[276]})
-var sStringEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStringEnum, Members: &mStringEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[277]})
-var sStringPayloadEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStringPayloadEvent, Members: &mStringPayloadEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[279]})
-var s_StructureList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StructureList, Members: &m_StructureList, Type: smithy.ShapeTypeList, Ext: &ext[281]})
-var sStructureListMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStructureListMember, Members: &mStructureListMember, Type: smithy.ShapeTypeStructure, Ext: &ext[283]})
-var sStructurePayloadEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStructurePayloadEvent, Members: &mStructurePayloadEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[286]})
-var sTestConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestConfig, Members: &mTestConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[288]})
-var sTestEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestEnum, Members: &mTestEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[290]})
-var s_TestIntEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TestIntEnum, Members: &m_TestIntEnum, Type: smithy.ShapeTypeIntEnum, Ext: &ext[294]})
-var s_TestStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TestStringList, Members: &m_TestStringList, Type: smithy.ShapeTypeList, Ext: &ext[297]})
-var s_TestStringMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TestStringMap, Members: &m_TestStringMap, Type: smithy.ShapeTypeMap, Ext: &ext[299]})
-var sTopLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTopLevel, Members: &mTopLevel, Type: smithy.ShapeTypeStructure, Ext: &ext[302]})
-var sUnionPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnionPayload, Members: &mUnionPayload, Type: smithy.ShapeTypeUnion, Ext: &ext[306]})
-var sUnionPayloadEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnionPayloadEvent, Members: &mUnionPayloadEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[308]})
-var sUnionWithJsonName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnionWithJsonName, Members: &mUnionWithJsonName, Type: smithy.ShapeTypeUnion, Ext: &ext[310]})
-var sRenamedGreeting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRenamedGreeting, Members: &mRenamedGreeting, Type: smithy.ShapeTypeStructure, Ext: &ext[314]})
-var s_BooleanList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanList, Members: &m_BooleanList, Type: smithy.ShapeTypeList, Ext: &ext[316]})
-var s_DateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateTime, Traits: &t129, Type: smithy.ShapeTypeTimestamp, Ext: &ext[318]})
-var s_DoubleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DoubleList, Members: &m_DoubleList, Type: smithy.ShapeTypeList, Ext: &ext[319]})
-var s_EpochSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EpochSeconds, Traits: &t130, Type: smithy.ShapeTypeTimestamp, Ext: &ext[321]})
-var sFooEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFooEnum, Members: &mFooEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[322]})
-var s_FooEnumList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FooEnumList, Members: &m_FooEnumList, Type: smithy.ShapeTypeList, Ext: &ext[328]})
-var s_FooEnumMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FooEnumMap, Members: &m_FooEnumMap, Type: smithy.ShapeTypeMap, Ext: &ext[330]})
-var s_FooEnumSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FooEnumSet, Members: &m_FooEnumSet, Type: smithy.ShapeTypeList, Ext: &ext[333]})
-var sGreetingStruct = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGreetingStruct, Members: &mGreetingStruct, Type: smithy.ShapeTypeStructure, Ext: &ext[335]})
-var s_HttpDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpDate, Traits: &t131, Type: smithy.ShapeTypeTimestamp, Ext: &ext[337]})
-var s_IntegerEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerEnum, Members: &m_IntegerEnum, Type: smithy.ShapeTypeIntEnum, Ext: &ext[338]})
-var s_IntegerEnumList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerEnumList, Members: &m_IntegerEnumList, Type: smithy.ShapeTypeList, Ext: &ext[342]})
-var s_IntegerEnumMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerEnumMap, Members: &m_IntegerEnumMap, Type: smithy.ShapeTypeMap, Ext: &ext[344]})
-var s_IntegerEnumSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerEnumSet, Members: &m_IntegerEnumSet, Type: smithy.ShapeTypeList, Ext: &ext[347]})
-var s_IntegerList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerList, Members: &m_IntegerList, Type: smithy.ShapeTypeList, Ext: &ext[349]})
-var s_IntegerSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerSet, Members: &m_IntegerSet, Type: smithy.ShapeTypeList, Ext: &ext[351]})
-var s_JpegBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JpegBlob, Traits: &t132, Type: smithy.ShapeTypeBlob, Ext: &ext[353]})
-var s_NestedStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NestedStringList, Members: &m_NestedStringList, Type: smithy.ShapeTypeList, Ext: &ext[354]})
-var s_SparseShortList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SparseShortList, Members: &m_SparseShortList, Type: smithy.ShapeTypeList, Ext: &ext[356]})
-var s_SparseStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SparseStringList, Members: &m_SparseStringList, Type: smithy.ShapeTypeList, Ext: &ext[358]})
-var s_SparseStringMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SparseStringMap, Members: &m_SparseStringMap, Type: smithy.ShapeTypeMap, Ext: &ext[360]})
-var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[363]})
-var s_StringListMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringListMap, Members: &m_StringListMap, Type: smithy.ShapeTypeMap, Ext: &ext[365]})
-var s_StringMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap, Ext: &ext[368]})
-var s_StringSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringSet, Members: &m_StringSet, Type: smithy.ShapeTypeList, Ext: &ext[371]})
-var s_TextPlainBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TextPlainBlob, Traits: &t133, Type: smithy.ShapeTypeBlob, Ext: &ext[373]})
-var s_TimestampList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimestampList, Members: &m_TimestampList, Type: smithy.ShapeTypeList, Ext: &ext[374]})
-var sAllQueryStringTypesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAllQueryStringTypesInput, Members: &mAllQueryStringTypesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[376]})
-var sConstantAndVariableQueryStringInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConstantAndVariableQueryStringInput, Members: &mConstantAndVariableQueryStringInput, Type: smithy.ShapeTypeStructure, Ext: &ext[398]})
-var sConstantQueryStringInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConstantQueryStringInput, Members: &mConstantQueryStringInput, Type: smithy.ShapeTypeStructure, Ext: &ext[401]})
-var sContentTypeParametersInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentTypeParametersInput, Members: &mContentTypeParametersInput, Type: smithy.ShapeTypeStructure, Ext: &ext[403]})
-var sContentTypeParametersOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentTypeParametersOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[405]})
-var sDatetimeOffsetsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatetimeOffsetsOutput, Members: &mDatetimeOffsetsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[406]})
-var sDocumentTypeAsMapValueInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentTypeAsMapValueInputOutput, Members: &mDocumentTypeAsMapValueInputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[408]})
-var sDocumentTypeAsPayloadInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentTypeAsPayloadInputOutput, Members: &mDocumentTypeAsPayloadInputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[410]})
-var sDocumentTypeInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentTypeInputOutput, Members: &mDocumentTypeInputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[412]})
-var sDuplexStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplexStreamInput, Members: &mDuplexStreamInput, Type: smithy.ShapeTypeStructure, Ext: &ext[415]})
-var sDuplexStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplexStreamOutput, Members: &mDuplexStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[417]})
-var sDuplexStreamWithDistinctStreamsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplexStreamWithDistinctStreamsInput, Members: &mDuplexStreamWithDistinctStreamsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[419]})
-var sDuplexStreamWithDistinctStreamsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplexStreamWithDistinctStreamsOutput, Members: &mDuplexStreamWithDistinctStreamsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[421]})
-var sDuplexStreamWithInitialMessagesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplexStreamWithInitialMessagesInput, Members: &mDuplexStreamWithInitialMessagesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[423]})
-var sDuplexStreamWithInitialMessagesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplexStreamWithInitialMessagesOutput, Members: &mDuplexStreamWithInitialMessagesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[426]})
-var sEmptyInputAndEmptyOutputInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmptyInputAndEmptyOutputInput, Type: smithy.ShapeTypeStructure, Ext: &ext[429]})
-var sEmptyInputAndEmptyOutputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmptyInputAndEmptyOutputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[430]})
-var sHostLabelInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHostLabelInput, Members: &mHostLabelInput, Type: smithy.ShapeTypeStructure, Ext: &ext[431]})
-var sFractionalSecondsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFractionalSecondsOutput, Members: &mFractionalSecondsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[433]})
-var sGreetingWithErrorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGreetingWithErrorsOutput, Members: &mGreetingWithErrorsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[435]})
-var sHttpChecksumRequiredInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpChecksumRequiredInputOutput, Members: &mHttpChecksumRequiredInputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[437]})
-var sHttpEmptyPrefixHeadersInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEmptyPrefixHeadersInput, Members: &mHttpEmptyPrefixHeadersInput, Type: smithy.ShapeTypeStructure, Ext: &ext[439]})
-var sHttpEmptyPrefixHeadersOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEmptyPrefixHeadersOutput, Members: &mHttpEmptyPrefixHeadersOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[442]})
-var sEnumPayloadInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnumPayloadInput, Members: &mEnumPayloadInput, Type: smithy.ShapeTypeStructure, Ext: &ext[445]})
-var sHttpPayloadTraitsInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPayloadTraitsInputOutput, Members: &mHttpPayloadTraitsInputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[447]})
-var sHttpPayloadTraitsWithMediaTypeInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPayloadTraitsWithMediaTypeInputOutput, Members: &mHttpPayloadTraitsWithMediaTypeInputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[450]})
-var sHttpPayloadWithStructureInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPayloadWithStructureInputOutput, Members: &mHttpPayloadWithStructureInputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[453]})
-var sHttpPayloadWithUnionInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPayloadWithUnionInputOutput, Members: &mHttpPayloadWithUnionInputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[455]})
-var sHttpPrefixHeadersInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPrefixHeadersInput, Members: &mHttpPrefixHeadersInput, Type: smithy.ShapeTypeStructure, Ext: &ext[457]})
-var sHttpPrefixHeadersInResponseInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPrefixHeadersInResponseInput, Type: smithy.ShapeTypeStructure, Ext: &ext[460]})
-var sHttpPrefixHeadersInResponseOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPrefixHeadersInResponseOutput, Members: &mHttpPrefixHeadersInResponseOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[461]})
-var sHttpPrefixHeadersOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPrefixHeadersOutput, Members: &mHttpPrefixHeadersOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[463]})
-var sHttpQueryParamsOnlyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpQueryParamsOnlyInput, Members: &mHttpQueryParamsOnlyInput, Type: smithy.ShapeTypeStructure, Ext: &ext[466]})
-var sHttpRequestWithFloatLabelsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRequestWithFloatLabelsInput, Members: &mHttpRequestWithFloatLabelsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[468]})
-var sHttpRequestWithGreedyLabelInPathInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRequestWithGreedyLabelInPathInput, Members: &mHttpRequestWithGreedyLabelInPathInput, Type: smithy.ShapeTypeStructure, Ext: &ext[471]})
-var sHttpRequestWithLabelsAndTimestampFormatInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRequestWithLabelsAndTimestampFormatInput, Members: &mHttpRequestWithLabelsAndTimestampFormatInput, Type: smithy.ShapeTypeStructure, Ext: &ext[474]})
-var sHttpRequestWithLabelsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRequestWithLabelsInput, Members: &mHttpRequestWithLabelsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[482]})
-var sHttpRequestWithRegexLiteralInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRequestWithRegexLiteralInput, Members: &mHttpRequestWithRegexLiteralInput, Type: smithy.ShapeTypeStructure, Ext: &ext[491]})
-var sHttpResponseCodeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpResponseCodeOutput, Members: &mHttpResponseCodeOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[493]})
-var sStringPayloadInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStringPayloadInput, Members: &mStringPayloadInput, Type: smithy.ShapeTypeStructure, Ext: &ext[495]})
-var sIgnoreQueryParamsInResponseOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIgnoreQueryParamsInResponseOutput, Members: &mIgnoreQueryParamsInResponseOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[497]})
-var sInputAndOutputWithHeadersIO = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputAndOutputWithHeadersIO, Members: &mInputAndOutputWithHeadersIO, Type: smithy.ShapeTypeStructure, Ext: &ext[499]})
-var sInputStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputStreamInput, Members: &mInputStreamInput, Type: smithy.ShapeTypeStructure, Ext: &ext[518]})
-var sInputStreamWithInitialRequestInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputStreamWithInitialRequestInput, Members: &mInputStreamWithInitialRequestInput, Type: smithy.ShapeTypeStructure, Ext: &ext[520]})
-var sJsonBlobsInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonBlobsInputOutput, Members: &mJsonBlobsInputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[523]})
-var sJsonEnumsInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonEnumsInputOutput, Members: &mJsonEnumsInputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[525]})
-var sJsonIntEnumsInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonIntEnumsInputOutput, Members: &mJsonIntEnumsInputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[532]})
-var sJsonListsInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonListsInputOutput, Members: &mJsonListsInputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[539]})
-var sJsonMapsInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonMapsInputOutput, Members: &mJsonMapsInputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[549]})
-var sJsonTimestampsInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonTimestampsInputOutput, Members: &mJsonTimestampsInputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[555]})
-var sUnionInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnionInputOutput, Members: &mUnionInputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[563]})
-var sMalformedAcceptWithGenericStringOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedAcceptWithGenericStringOutput, Members: &mMalformedAcceptWithGenericStringOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[565]})
-var sMalformedAcceptWithPayloadOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedAcceptWithPayloadOutput, Members: &mMalformedAcceptWithPayloadOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[567]})
-var sMalformedBlobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedBlobInput, Members: &mMalformedBlobInput, Type: smithy.ShapeTypeStructure, Ext: &ext[569]})
-var sMalformedBooleanInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedBooleanInput, Members: &mMalformedBooleanInput, Type: smithy.ShapeTypeStructure, Ext: &ext[571]})
-var sMalformedByteInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedByteInput, Members: &mMalformedByteInput, Type: smithy.ShapeTypeStructure, Ext: &ext[576]})
-var sMalformedContentTypeWithGenericStringInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedContentTypeWithGenericStringInput, Members: &mMalformedContentTypeWithGenericStringInput, Type: smithy.ShapeTypeStructure, Ext: &ext[581]})
-var sMalformedContentTypeWithoutBodyEmptyInputInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedContentTypeWithoutBodyEmptyInputInput, Members: &mMalformedContentTypeWithoutBodyEmptyInputInput, Type: smithy.ShapeTypeStructure, Ext: &ext[583]})
-var sMalformedContentTypeWithPayloadInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedContentTypeWithPayloadInput, Members: &mMalformedContentTypeWithPayloadInput, Type: smithy.ShapeTypeStructure, Ext: &ext[585]})
-var sMalformedDoubleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedDoubleInput, Members: &mMalformedDoubleInput, Type: smithy.ShapeTypeStructure, Ext: &ext[587]})
-var sMalformedFloatInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedFloatInput, Members: &mMalformedFloatInput, Type: smithy.ShapeTypeStructure, Ext: &ext[592]})
-var sMalformedIntegerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedIntegerInput, Members: &mMalformedIntegerInput, Type: smithy.ShapeTypeStructure, Ext: &ext[597]})
-var sMalformedListInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedListInput, Members: &mMalformedListInput, Type: smithy.ShapeTypeStructure, Ext: &ext[602]})
-var sMalformedLongInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedLongInput, Members: &mMalformedLongInput, Type: smithy.ShapeTypeStructure, Ext: &ext[604]})
-var sMalformedMapInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedMapInput, Members: &mMalformedMapInput, Type: smithy.ShapeTypeStructure, Ext: &ext[609]})
-var sMalformedRequestBodyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedRequestBodyInput, Members: &mMalformedRequestBodyInput, Type: smithy.ShapeTypeStructure, Ext: &ext[611]})
-var sMalformedShortInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedShortInput, Members: &mMalformedShortInput, Type: smithy.ShapeTypeStructure, Ext: &ext[614]})
-var sMalformedStringInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedStringInput, Members: &mMalformedStringInput, Type: smithy.ShapeTypeStructure, Ext: &ext[619]})
-var sMalformedTimestampBodyDateTimeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampBodyDateTimeInput, Members: &mMalformedTimestampBodyDateTimeInput, Type: smithy.ShapeTypeStructure, Ext: &ext[621]})
-var sMalformedTimestampBodyDefaultInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampBodyDefaultInput, Members: &mMalformedTimestampBodyDefaultInput, Type: smithy.ShapeTypeStructure, Ext: &ext[623]})
-var sMalformedTimestampBodyHttpDateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampBodyHttpDateInput, Members: &mMalformedTimestampBodyHttpDateInput, Type: smithy.ShapeTypeStructure, Ext: &ext[625]})
-var sMalformedTimestampHeaderDateTimeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampHeaderDateTimeInput, Members: &mMalformedTimestampHeaderDateTimeInput, Type: smithy.ShapeTypeStructure, Ext: &ext[627]})
-var sMalformedTimestampHeaderDefaultInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampHeaderDefaultInput, Members: &mMalformedTimestampHeaderDefaultInput, Type: smithy.ShapeTypeStructure, Ext: &ext[629]})
-var sMalformedTimestampHeaderEpochInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampHeaderEpochInput, Members: &mMalformedTimestampHeaderEpochInput, Type: smithy.ShapeTypeStructure, Ext: &ext[631]})
-var sMalformedTimestampPathDefaultInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampPathDefaultInput, Members: &mMalformedTimestampPathDefaultInput, Type: smithy.ShapeTypeStructure, Ext: &ext[633]})
-var sMalformedTimestampPathEpochInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampPathEpochInput, Members: &mMalformedTimestampPathEpochInput, Type: smithy.ShapeTypeStructure, Ext: &ext[635]})
-var sMalformedTimestampPathHttpDateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampPathHttpDateInput, Members: &mMalformedTimestampPathHttpDateInput, Type: smithy.ShapeTypeStructure, Ext: &ext[637]})
-var sMalformedTimestampQueryDefaultInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampQueryDefaultInput, Members: &mMalformedTimestampQueryDefaultInput, Type: smithy.ShapeTypeStructure, Ext: &ext[639]})
-var sMalformedTimestampQueryEpochInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampQueryEpochInput, Members: &mMalformedTimestampQueryEpochInput, Type: smithy.ShapeTypeStructure, Ext: &ext[641]})
-var sMalformedTimestampQueryHttpDateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampQueryHttpDateInput, Members: &mMalformedTimestampQueryHttpDateInput, Type: smithy.ShapeTypeStructure, Ext: &ext[643]})
-var sMalformedUnionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedUnionInput, Members: &mMalformedUnionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[645]})
-var sMediaTypeHeaderInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaTypeHeaderInput, Members: &mMediaTypeHeaderInput, Type: smithy.ShapeTypeStructure, Ext: &ext[647]})
-var sMediaTypeHeaderOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaTypeHeaderOutput, Members: &mMediaTypeHeaderOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[649]})
-var sNoInputAndOutputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoInputAndOutputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[651]})
-var sNullAndEmptyHeadersIO = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNullAndEmptyHeadersIO, Members: &mNullAndEmptyHeadersIO, Type: smithy.ShapeTypeStructure, Ext: &ext[652]})
-var sOmitsNullSerializesEmptyStringInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOmitsNullSerializesEmptyStringInput, Members: &mOmitsNullSerializesEmptyStringInput, Type: smithy.ShapeTypeStructure, Ext: &ext[656]})
-var sOmitsSerializingEmptyListsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOmitsSerializingEmptyListsInput, Members: &mOmitsSerializingEmptyListsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[659]})
-var sOperationWithDefaultsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationWithDefaultsInput, Members: &mOperationWithDefaultsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[667]})
-var sOperationWithDefaultsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationWithDefaultsOutput, Members: &mOperationWithDefaultsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[672]})
-var sOperationWithNestedStructureInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationWithNestedStructureInput, Members: &mOperationWithNestedStructureInput, Type: smithy.ShapeTypeStructure, Ext: &ext[701]})
-var sOperationWithNestedStructureOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationWithNestedStructureOutput, Members: &mOperationWithNestedStructureOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[703]})
-var sOutputStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputStreamOutput, Members: &mOutputStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[707]})
-var sOutputStreamWithInitialResponseOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputStreamWithInitialResponseOutput, Members: &mOutputStreamWithInitialResponseOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[709]})
-var sPostPlayerActionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostPlayerActionInput, Members: &mPostPlayerActionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[712]})
-var sPostPlayerActionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostPlayerActionOutput, Members: &mPostPlayerActionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[714]})
-var sPostUnionWithJsonNameInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostUnionWithJsonNameInput, Members: &mPostUnionWithJsonNameInput, Type: smithy.ShapeTypeStructure, Ext: &ext[716]})
-var sPostUnionWithJsonNameOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostUnionWithJsonNameOutput, Members: &mPostUnionWithJsonNameOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[718]})
-var sPutWithContentEncodingInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutWithContentEncodingInput, Members: &mPutWithContentEncodingInput, Type: smithy.ShapeTypeStructure, Ext: &ext[720]})
-var sQueryIdempotencyTokenAutoFillInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryIdempotencyTokenAutoFillInput, Members: &mQueryIdempotencyTokenAutoFillInput, Type: smithy.ShapeTypeStructure, Ext: &ext[723]})
-var sQueryParamsAsStringListMapInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryParamsAsStringListMapInput, Members: &mQueryParamsAsStringListMapInput, Type: smithy.ShapeTypeStructure, Ext: &ext[725]})
-var sQueryPrecedenceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryPrecedenceInput, Members: &mQueryPrecedenceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[728]})
-var sRecursiveShapesInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecursiveShapesInputOutput, Members: &mRecursiveShapesInputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[731]})
-var sResponseCodeHttpFallbackInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResponseCodeHttpFallbackInputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[733]})
-var sResponseCodeRequiredOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResponseCodeRequiredOutput, Members: &mResponseCodeRequiredOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[734]})
-var sSimpleScalarPropertiesInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSimpleScalarPropertiesInputOutput, Members: &mSimpleScalarPropertiesInputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[736]})
-var sSparseJsonListsInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSparseJsonListsInputOutput, Members: &mSparseJsonListsInputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[747]})
-var sSparseJsonMapsInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSparseJsonMapsInputOutput, Members: &mSparseJsonMapsInputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[750]})
-var sStreamingTraitsInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamingTraitsInputOutput, Members: &mStreamingTraitsInputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[756]})
-var sStreamingTraitsRequireLengthInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamingTraitsRequireLengthInput, Members: &mStreamingTraitsRequireLengthInput, Type: smithy.ShapeTypeStructure, Ext: &ext[759]})
-var sStreamingTraitsWithMediaTypeInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamingTraitsWithMediaTypeInputOutput, Members: &mStreamingTraitsWithMediaTypeInputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[762]})
-var sTestBodyStructureInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestBodyStructureInputOutput, Members: &mTestBodyStructureInputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[765]})
-var sTestNoPayloadInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestNoPayloadInputOutput, Members: &mTestNoPayloadInputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[768]})
-var sTestPayloadBlobInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestPayloadBlobInputOutput, Members: &mTestPayloadBlobInputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[770]})
-var sTestPayloadStructureInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestPayloadStructureInputOutput, Members: &mTestPayloadStructureInputOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[773]})
-var sTimestampFormatHeadersIO = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimestampFormatHeadersIO, Members: &mTimestampFormatHeadersIO, Type: smithy.ShapeTypeStructure, Ext: &ext[776]})
+var sAllQueryStringTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAllQueryStringTypes, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eAllQueryStringTypes})
+var sConstantAndVariableQueryString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConstantAndVariableQueryString, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eConstantAndVariableQueryString})
+var sConstantQueryString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConstantQueryString, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eConstantQueryString})
+var sContentTypeParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentTypeParameters, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eContentTypeParameters})
+var sDatetimeOffsets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatetimeOffsets, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDatetimeOffsets})
+var sDocumentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentType, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDocumentType})
+var sDocumentTypeAsMapValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentTypeAsMapValue, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eDocumentTypeAsMapValue})
+var sDocumentTypeAsPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentTypeAsPayload, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDocumentTypeAsPayload})
+var sDuplexStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplexStream, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDuplexStream})
+var sDuplexStreamWithDistinctStreams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplexStreamWithDistinctStreams, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eDuplexStreamWithDistinctStreams})
+var sDuplexStreamWithInitialMessages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplexStreamWithInitialMessages, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eDuplexStreamWithInitialMessages})
+var sEmptyInputAndEmptyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmptyInputAndEmptyOutput, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eEmptyInputAndEmptyOutput})
+var sEndpointOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointOperation, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eEndpointOperation})
+var sEndpointWithHostLabelOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointWithHostLabelOperation, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eEndpointWithHostLabelOperation})
+var sFractionalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFractionalSeconds, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eFractionalSeconds})
+var sGreetingWithErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGreetingWithErrors, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eGreetingWithErrors})
+var sHostWithPathOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHostWithPathOperation, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eHostWithPathOperation})
+var sHttpChecksumRequired = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpChecksumRequired, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eHttpChecksumRequired})
+var sHttpEmptyPrefixHeaders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEmptyPrefixHeaders, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eHttpEmptyPrefixHeaders})
+var sHttpEnumPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEnumPayload, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eHttpEnumPayload})
+var sHttpPayloadTraits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPayloadTraits, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eHttpPayloadTraits})
+var sHttpPayloadTraitsWithMediaType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPayloadTraitsWithMediaType, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eHttpPayloadTraitsWithMediaType})
+var sHttpPayloadWithStructure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPayloadWithStructure, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eHttpPayloadWithStructure})
+var sHttpPayloadWithUnion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPayloadWithUnion, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eHttpPayloadWithUnion})
+var sHttpPrefixHeaders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPrefixHeaders, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eHttpPrefixHeaders})
+var sHttpPrefixHeadersInResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPrefixHeadersInResponse, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eHttpPrefixHeadersInResponse})
+var sHttpQueryParamsOnlyOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpQueryParamsOnlyOperation, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eHttpQueryParamsOnlyOperation})
+var sHttpRequestWithFloatLabels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRequestWithFloatLabels, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eHttpRequestWithFloatLabels})
+var sHttpRequestWithGreedyLabelInPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRequestWithGreedyLabelInPath, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eHttpRequestWithGreedyLabelInPath})
+var sHttpRequestWithLabels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRequestWithLabels, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eHttpRequestWithLabels})
+var sHttpRequestWithLabelsAndTimestampFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRequestWithLabelsAndTimestampFormat, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eHttpRequestWithLabelsAndTimestampFormat})
+var sHttpRequestWithRegexLiteral = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRequestWithRegexLiteral, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &eHttpRequestWithRegexLiteral})
+var sHttpResponseCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpResponseCode, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &eHttpResponseCode})
+var sHttpStringPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpStringPayload, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &eHttpStringPayload})
+var sIgnoreQueryParamsInResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIgnoreQueryParamsInResponse, Traits: &t34, Type: smithy.ShapeTypeOperation, Ext: &eIgnoreQueryParamsInResponse})
+var sInputAndOutputWithHeaders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputAndOutputWithHeaders, Traits: &t35, Type: smithy.ShapeTypeOperation, Ext: &eInputAndOutputWithHeaders})
+var sInputStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputStream, Traits: &t36, Type: smithy.ShapeTypeOperation, Ext: &eInputStream})
+var sInputStreamWithInitialRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputStreamWithInitialRequest, Traits: &t37, Type: smithy.ShapeTypeOperation, Ext: &eInputStreamWithInitialRequest})
+var sJsonBlobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonBlobs, Traits: &t38, Type: smithy.ShapeTypeOperation, Ext: &eJsonBlobs})
+var sJsonEnums = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonEnums, Traits: &t39, Type: smithy.ShapeTypeOperation, Ext: &eJsonEnums})
+var sJsonIntEnums = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonIntEnums, Traits: &t40, Type: smithy.ShapeTypeOperation, Ext: &eJsonIntEnums})
+var sJsonLists = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonLists, Traits: &t41, Type: smithy.ShapeTypeOperation, Ext: &eJsonLists})
+var sJsonMaps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonMaps, Traits: &t42, Type: smithy.ShapeTypeOperation, Ext: &eJsonMaps})
+var sJsonTimestamps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonTimestamps, Traits: &t43, Type: smithy.ShapeTypeOperation, Ext: &eJsonTimestamps})
+var sJsonUnions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonUnions, Traits: &t44, Type: smithy.ShapeTypeOperation, Ext: &eJsonUnions})
+var sMalformedAcceptWithBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedAcceptWithBody, Traits: &t45, Type: smithy.ShapeTypeOperation, Ext: &eMalformedAcceptWithBody})
+var sMalformedAcceptWithGenericString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedAcceptWithGenericString, Traits: &t46, Type: smithy.ShapeTypeOperation, Ext: &eMalformedAcceptWithGenericString})
+var sMalformedAcceptWithPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedAcceptWithPayload, Traits: &t47, Type: smithy.ShapeTypeOperation, Ext: &eMalformedAcceptWithPayload})
+var sMalformedBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedBlob, Traits: &t48, Type: smithy.ShapeTypeOperation, Ext: &eMalformedBlob})
+var sMalformedBoolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedBoolean, Traits: &t49, Type: smithy.ShapeTypeOperation, Ext: &eMalformedBoolean})
+var sMalformedByte = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedByte, Traits: &t50, Type: smithy.ShapeTypeOperation, Ext: &eMalformedByte})
+var sMalformedContentTypeWithBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedContentTypeWithBody, Traits: &t51, Type: smithy.ShapeTypeOperation, Ext: &eMalformedContentTypeWithBody})
+var sMalformedContentTypeWithGenericString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedContentTypeWithGenericString, Traits: &t52, Type: smithy.ShapeTypeOperation, Ext: &eMalformedContentTypeWithGenericString})
+var sMalformedContentTypeWithoutBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedContentTypeWithoutBody, Traits: &t53, Type: smithy.ShapeTypeOperation, Ext: &eMalformedContentTypeWithoutBody})
+var sMalformedContentTypeWithoutBodyEmptyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedContentTypeWithoutBodyEmptyInput, Traits: &t54, Type: smithy.ShapeTypeOperation, Ext: &eMalformedContentTypeWithoutBodyEmptyInput})
+var sMalformedContentTypeWithPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedContentTypeWithPayload, Traits: &t55, Type: smithy.ShapeTypeOperation, Ext: &eMalformedContentTypeWithPayload})
+var sMalformedDouble = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedDouble, Traits: &t56, Type: smithy.ShapeTypeOperation, Ext: &eMalformedDouble})
+var sMalformedFloat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedFloat, Traits: &t57, Type: smithy.ShapeTypeOperation, Ext: &eMalformedFloat})
+var sMalformedInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedInteger, Traits: &t58, Type: smithy.ShapeTypeOperation, Ext: &eMalformedInteger})
+var sMalformedList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedList, Traits: &t59, Type: smithy.ShapeTypeOperation, Ext: &eMalformedList})
+var sMalformedLong = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedLong, Traits: &t60, Type: smithy.ShapeTypeOperation, Ext: &eMalformedLong})
+var sMalformedMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedMap, Traits: &t61, Type: smithy.ShapeTypeOperation, Ext: &eMalformedMap})
+var sMalformedRequestBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedRequestBody, Traits: &t62, Type: smithy.ShapeTypeOperation, Ext: &eMalformedRequestBody})
+var sMalformedShort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedShort, Traits: &t63, Type: smithy.ShapeTypeOperation, Ext: &eMalformedShort})
+var sMalformedString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedString, Traits: &t64, Type: smithy.ShapeTypeOperation, Ext: &eMalformedString})
+var sMalformedTimestampBodyDateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampBodyDateTime, Traits: &t65, Type: smithy.ShapeTypeOperation, Ext: &eMalformedTimestampBodyDateTime})
+var sMalformedTimestampBodyDefault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampBodyDefault, Traits: &t66, Type: smithy.ShapeTypeOperation, Ext: &eMalformedTimestampBodyDefault})
+var sMalformedTimestampBodyHttpDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampBodyHttpDate, Traits: &t67, Type: smithy.ShapeTypeOperation, Ext: &eMalformedTimestampBodyHttpDate})
+var sMalformedTimestampHeaderDateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampHeaderDateTime, Traits: &t68, Type: smithy.ShapeTypeOperation, Ext: &eMalformedTimestampHeaderDateTime})
+var sMalformedTimestampHeaderDefault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampHeaderDefault, Traits: &t69, Type: smithy.ShapeTypeOperation, Ext: &eMalformedTimestampHeaderDefault})
+var sMalformedTimestampHeaderEpoch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampHeaderEpoch, Traits: &t70, Type: smithy.ShapeTypeOperation, Ext: &eMalformedTimestampHeaderEpoch})
+var sMalformedTimestampPathDefault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampPathDefault, Traits: &t71, Type: smithy.ShapeTypeOperation, Ext: &eMalformedTimestampPathDefault})
+var sMalformedTimestampPathEpoch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampPathEpoch, Traits: &t72, Type: smithy.ShapeTypeOperation, Ext: &eMalformedTimestampPathEpoch})
+var sMalformedTimestampPathHttpDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampPathHttpDate, Traits: &t73, Type: smithy.ShapeTypeOperation, Ext: &eMalformedTimestampPathHttpDate})
+var sMalformedTimestampQueryDefault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampQueryDefault, Traits: &t74, Type: smithy.ShapeTypeOperation, Ext: &eMalformedTimestampQueryDefault})
+var sMalformedTimestampQueryEpoch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampQueryEpoch, Traits: &t75, Type: smithy.ShapeTypeOperation, Ext: &eMalformedTimestampQueryEpoch})
+var sMalformedTimestampQueryHttpDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampQueryHttpDate, Traits: &t76, Type: smithy.ShapeTypeOperation, Ext: &eMalformedTimestampQueryHttpDate})
+var sMalformedUnion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedUnion, Traits: &t77, Type: smithy.ShapeTypeOperation, Ext: &eMalformedUnion})
+var sMediaTypeHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaTypeHeader, Traits: &t78, Type: smithy.ShapeTypeOperation, Ext: &eMediaTypeHeader})
+var sNoInputAndNoOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoInputAndNoOutput, Traits: &t79, Type: smithy.ShapeTypeOperation, Ext: &eNoInputAndNoOutput})
+var sNoInputAndOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoInputAndOutput, Traits: &t80, Type: smithy.ShapeTypeOperation, Ext: &eNoInputAndOutput})
+var sNullAndEmptyHeadersClient = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNullAndEmptyHeadersClient, Traits: &t81, Type: smithy.ShapeTypeOperation, Ext: &eNullAndEmptyHeadersClient})
+var sNullAndEmptyHeadersServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNullAndEmptyHeadersServer, Traits: &t82, Type: smithy.ShapeTypeOperation, Ext: &eNullAndEmptyHeadersServer})
+var sOmitsNullSerializesEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOmitsNullSerializesEmptyString, Traits: &t83, Type: smithy.ShapeTypeOperation, Ext: &eOmitsNullSerializesEmptyString})
+var sOmitsSerializingEmptyLists = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOmitsSerializingEmptyLists, Traits: &t84, Type: smithy.ShapeTypeOperation, Ext: &eOmitsSerializingEmptyLists})
+var sOperationWithDefaults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationWithDefaults, Traits: &t85, Type: smithy.ShapeTypeOperation, Ext: &eOperationWithDefaults})
+var sOperationWithNestedStructure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationWithNestedStructure, Traits: &t86, Type: smithy.ShapeTypeOperation, Ext: &eOperationWithNestedStructure})
+var sOutputStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputStream, Traits: &t87, Type: smithy.ShapeTypeOperation, Ext: &eOutputStream})
+var sOutputStreamWithInitialResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputStreamWithInitialResponse, Traits: &t88, Type: smithy.ShapeTypeOperation, Ext: &eOutputStreamWithInitialResponse})
+var sPostPlayerAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostPlayerAction, Traits: &t89, Type: smithy.ShapeTypeOperation, Ext: &ePostPlayerAction})
+var sPostUnionWithJsonName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostUnionWithJsonName, Traits: &t90, Type: smithy.ShapeTypeOperation, Ext: &ePostUnionWithJsonName})
+var sPutWithContentEncoding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutWithContentEncoding, Traits: &t91, Type: smithy.ShapeTypeOperation, Ext: &ePutWithContentEncoding})
+var sQueryIdempotencyTokenAutoFill = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryIdempotencyTokenAutoFill, Traits: &t92, Type: smithy.ShapeTypeOperation, Ext: &eQueryIdempotencyTokenAutoFill})
+var sQueryParamsAsStringListMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryParamsAsStringListMap, Traits: &t93, Type: smithy.ShapeTypeOperation, Ext: &eQueryParamsAsStringListMap})
+var sQueryPrecedence = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryPrecedence, Traits: &t94, Type: smithy.ShapeTypeOperation, Ext: &eQueryPrecedence})
+var sRecursiveShapes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecursiveShapes, Traits: &t95, Type: smithy.ShapeTypeOperation, Ext: &eRecursiveShapes})
+var sResponseCodeHttpFallback = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResponseCodeHttpFallback, Traits: &t96, Type: smithy.ShapeTypeOperation, Ext: &eResponseCodeHttpFallback})
+var sResponseCodeRequired = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResponseCodeRequired, Traits: &t97, Type: smithy.ShapeTypeOperation, Ext: &eResponseCodeRequired})
+var sSimpleScalarProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSimpleScalarProperties, Traits: &t98, Type: smithy.ShapeTypeOperation, Ext: &eSimpleScalarProperties})
+var sSparseJsonLists = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSparseJsonLists, Traits: &t99, Type: smithy.ShapeTypeOperation, Ext: &eSparseJsonLists})
+var sSparseJsonMaps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSparseJsonMaps, Traits: &t100, Type: smithy.ShapeTypeOperation, Ext: &eSparseJsonMaps})
+var sStreamingTraits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamingTraits, Traits: &t101, Type: smithy.ShapeTypeOperation, Ext: &eStreamingTraits})
+var sStreamingTraitsRequireLength = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamingTraitsRequireLength, Traits: &t102, Type: smithy.ShapeTypeOperation, Ext: &eStreamingTraitsRequireLength})
+var sStreamingTraitsWithMediaType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamingTraitsWithMediaType, Traits: &t103, Type: smithy.ShapeTypeOperation, Ext: &eStreamingTraitsWithMediaType})
+var sTestBodyStructure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestBodyStructure, Traits: &t104, Type: smithy.ShapeTypeOperation, Ext: &eTestBodyStructure})
+var sTestGetNoInputNoPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestGetNoInputNoPayload, Traits: &t105, Type: smithy.ShapeTypeOperation, Ext: &eTestGetNoInputNoPayload})
+var sTestGetNoPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestGetNoPayload, Traits: &t106, Type: smithy.ShapeTypeOperation, Ext: &eTestGetNoPayload})
+var sTestPayloadBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestPayloadBlob, Traits: &t107, Type: smithy.ShapeTypeOperation, Ext: &eTestPayloadBlob})
+var sTestPayloadStructure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestPayloadStructure, Traits: &t108, Type: smithy.ShapeTypeOperation, Ext: &eTestPayloadStructure})
+var sTestPostNoInputNoPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestPostNoInputNoPayload, Traits: &t109, Type: smithy.ShapeTypeOperation, Ext: &eTestPostNoInputNoPayload})
+var sTestPostNoPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestPostNoPayload, Traits: &t110, Type: smithy.ShapeTypeOperation, Ext: &eTestPostNoPayload})
+var sTimestampFormatHeaders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimestampFormatHeaders, Traits: &t111, Type: smithy.ShapeTypeOperation, Ext: &eTimestampFormatHeaders})
+var sUnitInputAndOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnitInputAndOutput, Traits: &t112, Type: smithy.ShapeTypeOperation, Ext: &eUnitInputAndOutput})
+var s_RestJson = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RestJson, Type: smithy.ShapeTypeService, Ext: &e_RestJson})
+var sBlobPayloadEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlobPayloadEvent, Members: &mBlobPayloadEvent, Type: smithy.ShapeTypeStructure, Ext: &eBlobPayloadEvent})
+var sClientOptionalDefaults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientOptionalDefaults, Members: &mClientOptionalDefaults, Type: smithy.ShapeTypeStructure, Ext: &eClientOptionalDefaults})
+var sComplexError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComplexError, Members: &mComplexError, Traits: &t114, Type: smithy.ShapeTypeStructure, Ext: &eComplexError})
+var sComplexNestedErrorData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComplexNestedErrorData, Members: &mComplexNestedErrorData, Type: smithy.ShapeTypeStructure, Ext: &eComplexNestedErrorData})
+var sDefaults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefaults, Members: &mDefaults, Type: smithy.ShapeTypeStructure, Ext: &eDefaults})
+var s_DenseBooleanMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DenseBooleanMap, Members: &m_DenseBooleanMap, Type: smithy.ShapeTypeMap, Ext: &e_DenseBooleanMap})
+var s_DenseNumberMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DenseNumberMap, Members: &m_DenseNumberMap, Type: smithy.ShapeTypeMap, Ext: &e_DenseNumberMap})
+var s_DenseSetMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DenseSetMap, Members: &m_DenseSetMap, Type: smithy.ShapeTypeMap, Ext: &e_DenseSetMap})
+var s_DenseStringMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DenseStringMap, Members: &m_DenseStringMap, Type: smithy.ShapeTypeMap, Ext: &e_DenseStringMap})
+var s_DenseStructMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DenseStructMap, Members: &m_DenseStructMap, Type: smithy.ShapeTypeMap, Ext: &e_DenseStructMap})
+var sDialog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDialog, Members: &mDialog, Type: smithy.ShapeTypeStructure, Ext: &eDialog})
+var s_DialogList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DialogList, Members: &m_DialogList, Type: smithy.ShapeTypeList, Ext: &e_DialogList})
+var s_DialogMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DialogMap, Members: &m_DialogMap, Type: smithy.ShapeTypeMap, Ext: &e_DialogMap})
+var s_Document = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Document, Type: smithy.ShapeTypeDocument, Ext: &e_Document})
+var s_DocumentValuedMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DocumentValuedMap, Members: &m_DocumentValuedMap, Type: smithy.ShapeTypeMap, Ext: &e_DocumentValuedMap})
+var sErrorEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorEvent, Members: &mErrorEvent, Traits: &t117, Type: smithy.ShapeTypeStructure, Ext: &eErrorEvent})
+var sEventStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventStream, Members: &mEventStream, Traits: &t118, Type: smithy.ShapeTypeUnion, Ext: &eEventStream})
+var sFarewell = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFarewell, Members: &mFarewell, Type: smithy.ShapeTypeStructure, Ext: &eFarewell})
+var s_FiniteStreamingBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FiniteStreamingBlob, Traits: &t118, Type: smithy.ShapeTypeBlob, Ext: &e_FiniteStreamingBlob})
+var sFooError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFooError, Traits: &t119, Type: smithy.ShapeTypeStructure, Ext: &eFooError})
+var sHeadersAndExplicitPayloadEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHeadersAndExplicitPayloadEvent, Members: &mHeadersAndExplicitPayloadEvent, Type: smithy.ShapeTypeStructure, Ext: &eHeadersAndExplicitPayloadEvent})
+var sHeadersAndImplicitPayloadEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHeadersAndImplicitPayloadEvent, Members: &mHeadersAndImplicitPayloadEvent, Type: smithy.ShapeTypeStructure, Ext: &eHeadersAndImplicitPayloadEvent})
+var sHeadersEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHeadersEvent, Members: &mHeadersEvent, Type: smithy.ShapeTypeStructure, Ext: &eHeadersEvent})
+var sInvalidGreeting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidGreeting, Members: &mInvalidGreeting, Traits: &t122, Type: smithy.ShapeTypeStructure, Ext: &eInvalidGreeting})
+var s_JsonHeaderString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JsonHeaderString, Traits: &t123, Type: smithy.ShapeTypeString, Ext: &e_JsonHeaderString})
+var s_JsonValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JsonValue, Traits: &t123, Type: smithy.ShapeTypeString, Ext: &e_JsonValue})
+var sMyUnion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMyUnion, Members: &mMyUnion, Type: smithy.ShapeTypeUnion, Ext: &eMyUnion})
+var sNestedPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNestedPayload, Members: &mNestedPayload, Type: smithy.ShapeTypeStructure, Ext: &eNestedPayload})
+var sNestedUnion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNestedUnion, Members: &mNestedUnion, Type: smithy.ShapeTypeUnion, Ext: &eNestedUnion})
+var sPayloadConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPayloadConfig, Members: &mPayloadConfig, Type: smithy.ShapeTypeStructure, Ext: &ePayloadConfig})
+var sPayloadStructure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPayloadStructure, Members: &mPayloadStructure, Type: smithy.ShapeTypeStructure, Ext: &ePayloadStructure})
+var sPayloadUnion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPayloadUnion, Members: &mPayloadUnion, Type: smithy.ShapeTypeUnion, Ext: &ePayloadUnion})
+var sPlayerAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlayerAction, Members: &mPlayerAction, Type: smithy.ShapeTypeUnion, Ext: &ePlayerAction})
+var s_QueryMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryMap, Members: &m_QueryMap, Type: smithy.ShapeTypeMap, Ext: &e_QueryMap})
+var sRecursiveShapesInputOutputNested1 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecursiveShapesInputOutputNested1, Members: &mRecursiveShapesInputOutputNested1, Type: smithy.ShapeTypeStructure, Ext: &eRecursiveShapesInputOutputNested1})
+var sRecursiveShapesInputOutputNested2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecursiveShapesInputOutputNested2, Members: &mRecursiveShapesInputOutputNested2, Type: smithy.ShapeTypeStructure, Ext: &eRecursiveShapesInputOutputNested2})
+var sServiceUnavailableError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableError, Members: &mServiceUnavailableError, Traits: &t119, Type: smithy.ShapeTypeStructure, Ext: &eServiceUnavailableError})
+var s_SimpleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SimpleList, Members: &m_SimpleList, Type: smithy.ShapeTypeList, Ext: &e_SimpleList})
+var s_SimpleMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SimpleMap, Members: &m_SimpleMap, Type: smithy.ShapeTypeMap, Ext: &e_SimpleMap})
+var sSimpleUnion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSimpleUnion, Members: &mSimpleUnion, Type: smithy.ShapeTypeUnion, Ext: &eSimpleUnion})
+var sSingletonEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSingletonEvent, Members: &mSingletonEvent, Type: smithy.ShapeTypeStructure, Ext: &eSingletonEvent})
+var sSingletonEventStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSingletonEventStream, Members: &mSingletonEventStream, Type: smithy.ShapeTypeUnion, Ext: &eSingletonEventStream})
+var s_SparseBooleanMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SparseBooleanMap, Members: &m_SparseBooleanMap, Type: smithy.ShapeTypeMap, Ext: &e_SparseBooleanMap})
+var s_SparseNumberMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SparseNumberMap, Members: &m_SparseNumberMap, Type: smithy.ShapeTypeMap, Ext: &e_SparseNumberMap})
+var s_SparseSetMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SparseSetMap, Members: &m_SparseSetMap, Type: smithy.ShapeTypeMap, Ext: &e_SparseSetMap})
+var s_SparseStructMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SparseStructMap, Members: &m_SparseStructMap, Type: smithy.ShapeTypeMap, Ext: &e_SparseStructMap})
+var s_StreamingBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamingBlob, Traits: &t118, Type: smithy.ShapeTypeBlob, Ext: &e_StreamingBlob})
+var s_StreamingTextPlainBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamingTextPlainBlob, Traits: &t124, Type: smithy.ShapeTypeBlob, Ext: &e_StreamingTextPlainBlob})
+var sStringEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStringEnum, Members: &mStringEnum, Type: smithy.ShapeTypeEnum, Ext: &eStringEnum})
+var sStringPayloadEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStringPayloadEvent, Members: &mStringPayloadEvent, Type: smithy.ShapeTypeStructure, Ext: &eStringPayloadEvent})
+var s_StructureList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StructureList, Members: &m_StructureList, Type: smithy.ShapeTypeList, Ext: &e_StructureList})
+var sStructureListMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStructureListMember, Members: &mStructureListMember, Type: smithy.ShapeTypeStructure, Ext: &eStructureListMember})
+var sStructurePayloadEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStructurePayloadEvent, Members: &mStructurePayloadEvent, Type: smithy.ShapeTypeStructure, Ext: &eStructurePayloadEvent})
+var sTestConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestConfig, Members: &mTestConfig, Type: smithy.ShapeTypeStructure, Ext: &eTestConfig})
+var sTestEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestEnum, Members: &mTestEnum, Type: smithy.ShapeTypeEnum, Ext: &eTestEnum})
+var s_TestIntEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TestIntEnum, Members: &m_TestIntEnum, Type: smithy.ShapeTypeIntEnum, Ext: &e_TestIntEnum})
+var s_TestStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TestStringList, Members: &m_TestStringList, Type: smithy.ShapeTypeList, Ext: &e_TestStringList})
+var s_TestStringMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TestStringMap, Members: &m_TestStringMap, Type: smithy.ShapeTypeMap, Ext: &e_TestStringMap})
+var sTopLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTopLevel, Members: &mTopLevel, Type: smithy.ShapeTypeStructure, Ext: &eTopLevel})
+var sUnionPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnionPayload, Members: &mUnionPayload, Type: smithy.ShapeTypeUnion, Ext: &eUnionPayload})
+var sUnionPayloadEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnionPayloadEvent, Members: &mUnionPayloadEvent, Type: smithy.ShapeTypeStructure, Ext: &eUnionPayloadEvent})
+var sUnionWithJsonName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnionWithJsonName, Members: &mUnionWithJsonName, Type: smithy.ShapeTypeUnion, Ext: &eUnionWithJsonName})
+var sRenamedGreeting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRenamedGreeting, Members: &mRenamedGreeting, Type: smithy.ShapeTypeStructure, Ext: &eRenamedGreeting})
+var s_BooleanList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanList, Members: &m_BooleanList, Type: smithy.ShapeTypeList, Ext: &e_BooleanList})
+var s_DateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateTime, Traits: &t129, Type: smithy.ShapeTypeTimestamp, Ext: &e_DateTime})
+var s_DoubleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DoubleList, Members: &m_DoubleList, Type: smithy.ShapeTypeList, Ext: &e_DoubleList})
+var s_EpochSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EpochSeconds, Traits: &t130, Type: smithy.ShapeTypeTimestamp, Ext: &e_EpochSeconds})
+var sFooEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFooEnum, Members: &mFooEnum, Type: smithy.ShapeTypeEnum, Ext: &eFooEnum})
+var s_FooEnumList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FooEnumList, Members: &m_FooEnumList, Type: smithy.ShapeTypeList, Ext: &e_FooEnumList})
+var s_FooEnumMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FooEnumMap, Members: &m_FooEnumMap, Type: smithy.ShapeTypeMap, Ext: &e_FooEnumMap})
+var s_FooEnumSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FooEnumSet, Members: &m_FooEnumSet, Type: smithy.ShapeTypeList, Ext: &e_FooEnumSet})
+var sGreetingStruct = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGreetingStruct, Members: &mGreetingStruct, Type: smithy.ShapeTypeStructure, Ext: &eGreetingStruct})
+var s_HttpDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpDate, Traits: &t131, Type: smithy.ShapeTypeTimestamp, Ext: &e_HttpDate})
+var s_IntegerEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerEnum, Members: &m_IntegerEnum, Type: smithy.ShapeTypeIntEnum, Ext: &e_IntegerEnum})
+var s_IntegerEnumList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerEnumList, Members: &m_IntegerEnumList, Type: smithy.ShapeTypeList, Ext: &e_IntegerEnumList})
+var s_IntegerEnumMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerEnumMap, Members: &m_IntegerEnumMap, Type: smithy.ShapeTypeMap, Ext: &e_IntegerEnumMap})
+var s_IntegerEnumSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerEnumSet, Members: &m_IntegerEnumSet, Type: smithy.ShapeTypeList, Ext: &e_IntegerEnumSet})
+var s_IntegerList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerList, Members: &m_IntegerList, Type: smithy.ShapeTypeList, Ext: &e_IntegerList})
+var s_IntegerSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerSet, Members: &m_IntegerSet, Type: smithy.ShapeTypeList, Ext: &e_IntegerSet})
+var s_JpegBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JpegBlob, Traits: &t132, Type: smithy.ShapeTypeBlob, Ext: &e_JpegBlob})
+var s_NestedStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NestedStringList, Members: &m_NestedStringList, Type: smithy.ShapeTypeList, Ext: &e_NestedStringList})
+var s_SparseShortList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SparseShortList, Members: &m_SparseShortList, Type: smithy.ShapeTypeList, Ext: &e_SparseShortList})
+var s_SparseStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SparseStringList, Members: &m_SparseStringList, Type: smithy.ShapeTypeList, Ext: &e_SparseStringList})
+var s_SparseStringMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SparseStringMap, Members: &m_SparseStringMap, Type: smithy.ShapeTypeMap, Ext: &e_SparseStringMap})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &e_StringList})
+var s_StringListMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringListMap, Members: &m_StringListMap, Type: smithy.ShapeTypeMap, Ext: &e_StringListMap})
+var s_StringMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap, Ext: &e_StringMap})
+var s_StringSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringSet, Members: &m_StringSet, Type: smithy.ShapeTypeList, Ext: &e_StringSet})
+var s_TextPlainBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TextPlainBlob, Traits: &t133, Type: smithy.ShapeTypeBlob, Ext: &e_TextPlainBlob})
+var s_TimestampList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimestampList, Members: &m_TimestampList, Type: smithy.ShapeTypeList, Ext: &e_TimestampList})
+var sAllQueryStringTypesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAllQueryStringTypesInput, Members: &mAllQueryStringTypesInput, Type: smithy.ShapeTypeStructure, Ext: &eAllQueryStringTypesInput})
+var sConstantAndVariableQueryStringInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConstantAndVariableQueryStringInput, Members: &mConstantAndVariableQueryStringInput, Type: smithy.ShapeTypeStructure, Ext: &eConstantAndVariableQueryStringInput})
+var sConstantQueryStringInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConstantQueryStringInput, Members: &mConstantQueryStringInput, Type: smithy.ShapeTypeStructure, Ext: &eConstantQueryStringInput})
+var sContentTypeParametersInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentTypeParametersInput, Members: &mContentTypeParametersInput, Type: smithy.ShapeTypeStructure, Ext: &eContentTypeParametersInput})
+var sContentTypeParametersOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentTypeParametersOutput, Type: smithy.ShapeTypeStructure, Ext: &eContentTypeParametersOutput})
+var sDatetimeOffsetsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatetimeOffsetsOutput, Members: &mDatetimeOffsetsOutput, Type: smithy.ShapeTypeStructure, Ext: &eDatetimeOffsetsOutput})
+var sDocumentTypeAsMapValueInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentTypeAsMapValueInputOutput, Members: &mDocumentTypeAsMapValueInputOutput, Type: smithy.ShapeTypeStructure, Ext: &eDocumentTypeAsMapValueInputOutput})
+var sDocumentTypeAsPayloadInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentTypeAsPayloadInputOutput, Members: &mDocumentTypeAsPayloadInputOutput, Type: smithy.ShapeTypeStructure, Ext: &eDocumentTypeAsPayloadInputOutput})
+var sDocumentTypeInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentTypeInputOutput, Members: &mDocumentTypeInputOutput, Type: smithy.ShapeTypeStructure, Ext: &eDocumentTypeInputOutput})
+var sDuplexStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplexStreamInput, Members: &mDuplexStreamInput, Type: smithy.ShapeTypeStructure, Ext: &eDuplexStreamInput})
+var sDuplexStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplexStreamOutput, Members: &mDuplexStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &eDuplexStreamOutput})
+var sDuplexStreamWithDistinctStreamsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplexStreamWithDistinctStreamsInput, Members: &mDuplexStreamWithDistinctStreamsInput, Type: smithy.ShapeTypeStructure, Ext: &eDuplexStreamWithDistinctStreamsInput})
+var sDuplexStreamWithDistinctStreamsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplexStreamWithDistinctStreamsOutput, Members: &mDuplexStreamWithDistinctStreamsOutput, Type: smithy.ShapeTypeStructure, Ext: &eDuplexStreamWithDistinctStreamsOutput})
+var sDuplexStreamWithInitialMessagesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplexStreamWithInitialMessagesInput, Members: &mDuplexStreamWithInitialMessagesInput, Type: smithy.ShapeTypeStructure, Ext: &eDuplexStreamWithInitialMessagesInput})
+var sDuplexStreamWithInitialMessagesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplexStreamWithInitialMessagesOutput, Members: &mDuplexStreamWithInitialMessagesOutput, Type: smithy.ShapeTypeStructure, Ext: &eDuplexStreamWithInitialMessagesOutput})
+var sEmptyInputAndEmptyOutputInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmptyInputAndEmptyOutputInput, Type: smithy.ShapeTypeStructure, Ext: &eEmptyInputAndEmptyOutputInput})
+var sEmptyInputAndEmptyOutputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmptyInputAndEmptyOutputOutput, Type: smithy.ShapeTypeStructure, Ext: &eEmptyInputAndEmptyOutputOutput})
+var sHostLabelInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHostLabelInput, Members: &mHostLabelInput, Type: smithy.ShapeTypeStructure, Ext: &eHostLabelInput})
+var sFractionalSecondsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFractionalSecondsOutput, Members: &mFractionalSecondsOutput, Type: smithy.ShapeTypeStructure, Ext: &eFractionalSecondsOutput})
+var sGreetingWithErrorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGreetingWithErrorsOutput, Members: &mGreetingWithErrorsOutput, Type: smithy.ShapeTypeStructure, Ext: &eGreetingWithErrorsOutput})
+var sHttpChecksumRequiredInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpChecksumRequiredInputOutput, Members: &mHttpChecksumRequiredInputOutput, Type: smithy.ShapeTypeStructure, Ext: &eHttpChecksumRequiredInputOutput})
+var sHttpEmptyPrefixHeadersInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEmptyPrefixHeadersInput, Members: &mHttpEmptyPrefixHeadersInput, Type: smithy.ShapeTypeStructure, Ext: &eHttpEmptyPrefixHeadersInput})
+var sHttpEmptyPrefixHeadersOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEmptyPrefixHeadersOutput, Members: &mHttpEmptyPrefixHeadersOutput, Type: smithy.ShapeTypeStructure, Ext: &eHttpEmptyPrefixHeadersOutput})
+var sEnumPayloadInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnumPayloadInput, Members: &mEnumPayloadInput, Type: smithy.ShapeTypeStructure, Ext: &eEnumPayloadInput})
+var sHttpPayloadTraitsInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPayloadTraitsInputOutput, Members: &mHttpPayloadTraitsInputOutput, Type: smithy.ShapeTypeStructure, Ext: &eHttpPayloadTraitsInputOutput})
+var sHttpPayloadTraitsWithMediaTypeInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPayloadTraitsWithMediaTypeInputOutput, Members: &mHttpPayloadTraitsWithMediaTypeInputOutput, Type: smithy.ShapeTypeStructure, Ext: &eHttpPayloadTraitsWithMediaTypeInputOutput})
+var sHttpPayloadWithStructureInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPayloadWithStructureInputOutput, Members: &mHttpPayloadWithStructureInputOutput, Type: smithy.ShapeTypeStructure, Ext: &eHttpPayloadWithStructureInputOutput})
+var sHttpPayloadWithUnionInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPayloadWithUnionInputOutput, Members: &mHttpPayloadWithUnionInputOutput, Type: smithy.ShapeTypeStructure, Ext: &eHttpPayloadWithUnionInputOutput})
+var sHttpPrefixHeadersInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPrefixHeadersInput, Members: &mHttpPrefixHeadersInput, Type: smithy.ShapeTypeStructure, Ext: &eHttpPrefixHeadersInput})
+var sHttpPrefixHeadersInResponseInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPrefixHeadersInResponseInput, Type: smithy.ShapeTypeStructure, Ext: &eHttpPrefixHeadersInResponseInput})
+var sHttpPrefixHeadersInResponseOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPrefixHeadersInResponseOutput, Members: &mHttpPrefixHeadersInResponseOutput, Type: smithy.ShapeTypeStructure, Ext: &eHttpPrefixHeadersInResponseOutput})
+var sHttpPrefixHeadersOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpPrefixHeadersOutput, Members: &mHttpPrefixHeadersOutput, Type: smithy.ShapeTypeStructure, Ext: &eHttpPrefixHeadersOutput})
+var sHttpQueryParamsOnlyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpQueryParamsOnlyInput, Members: &mHttpQueryParamsOnlyInput, Type: smithy.ShapeTypeStructure, Ext: &eHttpQueryParamsOnlyInput})
+var sHttpRequestWithFloatLabelsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRequestWithFloatLabelsInput, Members: &mHttpRequestWithFloatLabelsInput, Type: smithy.ShapeTypeStructure, Ext: &eHttpRequestWithFloatLabelsInput})
+var sHttpRequestWithGreedyLabelInPathInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRequestWithGreedyLabelInPathInput, Members: &mHttpRequestWithGreedyLabelInPathInput, Type: smithy.ShapeTypeStructure, Ext: &eHttpRequestWithGreedyLabelInPathInput})
+var sHttpRequestWithLabelsAndTimestampFormatInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRequestWithLabelsAndTimestampFormatInput, Members: &mHttpRequestWithLabelsAndTimestampFormatInput, Type: smithy.ShapeTypeStructure, Ext: &eHttpRequestWithLabelsAndTimestampFormatInput})
+var sHttpRequestWithLabelsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRequestWithLabelsInput, Members: &mHttpRequestWithLabelsInput, Type: smithy.ShapeTypeStructure, Ext: &eHttpRequestWithLabelsInput})
+var sHttpRequestWithRegexLiteralInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpRequestWithRegexLiteralInput, Members: &mHttpRequestWithRegexLiteralInput, Type: smithy.ShapeTypeStructure, Ext: &eHttpRequestWithRegexLiteralInput})
+var sHttpResponseCodeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpResponseCodeOutput, Members: &mHttpResponseCodeOutput, Type: smithy.ShapeTypeStructure, Ext: &eHttpResponseCodeOutput})
+var sStringPayloadInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStringPayloadInput, Members: &mStringPayloadInput, Type: smithy.ShapeTypeStructure, Ext: &eStringPayloadInput})
+var sIgnoreQueryParamsInResponseOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIgnoreQueryParamsInResponseOutput, Members: &mIgnoreQueryParamsInResponseOutput, Type: smithy.ShapeTypeStructure, Ext: &eIgnoreQueryParamsInResponseOutput})
+var sInputAndOutputWithHeadersIO = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputAndOutputWithHeadersIO, Members: &mInputAndOutputWithHeadersIO, Type: smithy.ShapeTypeStructure, Ext: &eInputAndOutputWithHeadersIO})
+var sInputStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputStreamInput, Members: &mInputStreamInput, Type: smithy.ShapeTypeStructure, Ext: &eInputStreamInput})
+var sInputStreamWithInitialRequestInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputStreamWithInitialRequestInput, Members: &mInputStreamWithInitialRequestInput, Type: smithy.ShapeTypeStructure, Ext: &eInputStreamWithInitialRequestInput})
+var sJsonBlobsInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonBlobsInputOutput, Members: &mJsonBlobsInputOutput, Type: smithy.ShapeTypeStructure, Ext: &eJsonBlobsInputOutput})
+var sJsonEnumsInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonEnumsInputOutput, Members: &mJsonEnumsInputOutput, Type: smithy.ShapeTypeStructure, Ext: &eJsonEnumsInputOutput})
+var sJsonIntEnumsInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonIntEnumsInputOutput, Members: &mJsonIntEnumsInputOutput, Type: smithy.ShapeTypeStructure, Ext: &eJsonIntEnumsInputOutput})
+var sJsonListsInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonListsInputOutput, Members: &mJsonListsInputOutput, Type: smithy.ShapeTypeStructure, Ext: &eJsonListsInputOutput})
+var sJsonMapsInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonMapsInputOutput, Members: &mJsonMapsInputOutput, Type: smithy.ShapeTypeStructure, Ext: &eJsonMapsInputOutput})
+var sJsonTimestampsInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonTimestampsInputOutput, Members: &mJsonTimestampsInputOutput, Type: smithy.ShapeTypeStructure, Ext: &eJsonTimestampsInputOutput})
+var sUnionInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnionInputOutput, Members: &mUnionInputOutput, Type: smithy.ShapeTypeStructure, Ext: &eUnionInputOutput})
+var sMalformedAcceptWithGenericStringOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedAcceptWithGenericStringOutput, Members: &mMalformedAcceptWithGenericStringOutput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedAcceptWithGenericStringOutput})
+var sMalformedAcceptWithPayloadOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedAcceptWithPayloadOutput, Members: &mMalformedAcceptWithPayloadOutput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedAcceptWithPayloadOutput})
+var sMalformedBlobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedBlobInput, Members: &mMalformedBlobInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedBlobInput})
+var sMalformedBooleanInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedBooleanInput, Members: &mMalformedBooleanInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedBooleanInput})
+var sMalformedByteInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedByteInput, Members: &mMalformedByteInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedByteInput})
+var sMalformedContentTypeWithGenericStringInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedContentTypeWithGenericStringInput, Members: &mMalformedContentTypeWithGenericStringInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedContentTypeWithGenericStringInput})
+var sMalformedContentTypeWithoutBodyEmptyInputInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedContentTypeWithoutBodyEmptyInputInput, Members: &mMalformedContentTypeWithoutBodyEmptyInputInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedContentTypeWithoutBodyEmptyInputInput})
+var sMalformedContentTypeWithPayloadInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedContentTypeWithPayloadInput, Members: &mMalformedContentTypeWithPayloadInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedContentTypeWithPayloadInput})
+var sMalformedDoubleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedDoubleInput, Members: &mMalformedDoubleInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedDoubleInput})
+var sMalformedFloatInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedFloatInput, Members: &mMalformedFloatInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedFloatInput})
+var sMalformedIntegerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedIntegerInput, Members: &mMalformedIntegerInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedIntegerInput})
+var sMalformedListInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedListInput, Members: &mMalformedListInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedListInput})
+var sMalformedLongInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedLongInput, Members: &mMalformedLongInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedLongInput})
+var sMalformedMapInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedMapInput, Members: &mMalformedMapInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedMapInput})
+var sMalformedRequestBodyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedRequestBodyInput, Members: &mMalformedRequestBodyInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedRequestBodyInput})
+var sMalformedShortInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedShortInput, Members: &mMalformedShortInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedShortInput})
+var sMalformedStringInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedStringInput, Members: &mMalformedStringInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedStringInput})
+var sMalformedTimestampBodyDateTimeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampBodyDateTimeInput, Members: &mMalformedTimestampBodyDateTimeInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedTimestampBodyDateTimeInput})
+var sMalformedTimestampBodyDefaultInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampBodyDefaultInput, Members: &mMalformedTimestampBodyDefaultInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedTimestampBodyDefaultInput})
+var sMalformedTimestampBodyHttpDateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampBodyHttpDateInput, Members: &mMalformedTimestampBodyHttpDateInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedTimestampBodyHttpDateInput})
+var sMalformedTimestampHeaderDateTimeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampHeaderDateTimeInput, Members: &mMalformedTimestampHeaderDateTimeInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedTimestampHeaderDateTimeInput})
+var sMalformedTimestampHeaderDefaultInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampHeaderDefaultInput, Members: &mMalformedTimestampHeaderDefaultInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedTimestampHeaderDefaultInput})
+var sMalformedTimestampHeaderEpochInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampHeaderEpochInput, Members: &mMalformedTimestampHeaderEpochInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedTimestampHeaderEpochInput})
+var sMalformedTimestampPathDefaultInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampPathDefaultInput, Members: &mMalformedTimestampPathDefaultInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedTimestampPathDefaultInput})
+var sMalformedTimestampPathEpochInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampPathEpochInput, Members: &mMalformedTimestampPathEpochInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedTimestampPathEpochInput})
+var sMalformedTimestampPathHttpDateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampPathHttpDateInput, Members: &mMalformedTimestampPathHttpDateInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedTimestampPathHttpDateInput})
+var sMalformedTimestampQueryDefaultInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampQueryDefaultInput, Members: &mMalformedTimestampQueryDefaultInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedTimestampQueryDefaultInput})
+var sMalformedTimestampQueryEpochInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampQueryEpochInput, Members: &mMalformedTimestampQueryEpochInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedTimestampQueryEpochInput})
+var sMalformedTimestampQueryHttpDateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedTimestampQueryHttpDateInput, Members: &mMalformedTimestampQueryHttpDateInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedTimestampQueryHttpDateInput})
+var sMalformedUnionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedUnionInput, Members: &mMalformedUnionInput, Type: smithy.ShapeTypeStructure, Ext: &eMalformedUnionInput})
+var sMediaTypeHeaderInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaTypeHeaderInput, Members: &mMediaTypeHeaderInput, Type: smithy.ShapeTypeStructure, Ext: &eMediaTypeHeaderInput})
+var sMediaTypeHeaderOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaTypeHeaderOutput, Members: &mMediaTypeHeaderOutput, Type: smithy.ShapeTypeStructure, Ext: &eMediaTypeHeaderOutput})
+var sNoInputAndOutputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoInputAndOutputOutput, Type: smithy.ShapeTypeStructure, Ext: &eNoInputAndOutputOutput})
+var sNullAndEmptyHeadersIO = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNullAndEmptyHeadersIO, Members: &mNullAndEmptyHeadersIO, Type: smithy.ShapeTypeStructure, Ext: &eNullAndEmptyHeadersIO})
+var sOmitsNullSerializesEmptyStringInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOmitsNullSerializesEmptyStringInput, Members: &mOmitsNullSerializesEmptyStringInput, Type: smithy.ShapeTypeStructure, Ext: &eOmitsNullSerializesEmptyStringInput})
+var sOmitsSerializingEmptyListsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOmitsSerializingEmptyListsInput, Members: &mOmitsSerializingEmptyListsInput, Type: smithy.ShapeTypeStructure, Ext: &eOmitsSerializingEmptyListsInput})
+var sOperationWithDefaultsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationWithDefaultsInput, Members: &mOperationWithDefaultsInput, Type: smithy.ShapeTypeStructure, Ext: &eOperationWithDefaultsInput})
+var sOperationWithDefaultsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationWithDefaultsOutput, Members: &mOperationWithDefaultsOutput, Type: smithy.ShapeTypeStructure, Ext: &eOperationWithDefaultsOutput})
+var sOperationWithNestedStructureInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationWithNestedStructureInput, Members: &mOperationWithNestedStructureInput, Type: smithy.ShapeTypeStructure, Ext: &eOperationWithNestedStructureInput})
+var sOperationWithNestedStructureOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationWithNestedStructureOutput, Members: &mOperationWithNestedStructureOutput, Type: smithy.ShapeTypeStructure, Ext: &eOperationWithNestedStructureOutput})
+var sOutputStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputStreamOutput, Members: &mOutputStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &eOutputStreamOutput})
+var sOutputStreamWithInitialResponseOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputStreamWithInitialResponseOutput, Members: &mOutputStreamWithInitialResponseOutput, Type: smithy.ShapeTypeStructure, Ext: &eOutputStreamWithInitialResponseOutput})
+var sPostPlayerActionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostPlayerActionInput, Members: &mPostPlayerActionInput, Type: smithy.ShapeTypeStructure, Ext: &ePostPlayerActionInput})
+var sPostPlayerActionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostPlayerActionOutput, Members: &mPostPlayerActionOutput, Type: smithy.ShapeTypeStructure, Ext: &ePostPlayerActionOutput})
+var sPostUnionWithJsonNameInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostUnionWithJsonNameInput, Members: &mPostUnionWithJsonNameInput, Type: smithy.ShapeTypeStructure, Ext: &ePostUnionWithJsonNameInput})
+var sPostUnionWithJsonNameOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostUnionWithJsonNameOutput, Members: &mPostUnionWithJsonNameOutput, Type: smithy.ShapeTypeStructure, Ext: &ePostUnionWithJsonNameOutput})
+var sPutWithContentEncodingInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutWithContentEncodingInput, Members: &mPutWithContentEncodingInput, Type: smithy.ShapeTypeStructure, Ext: &ePutWithContentEncodingInput})
+var sQueryIdempotencyTokenAutoFillInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryIdempotencyTokenAutoFillInput, Members: &mQueryIdempotencyTokenAutoFillInput, Type: smithy.ShapeTypeStructure, Ext: &eQueryIdempotencyTokenAutoFillInput})
+var sQueryParamsAsStringListMapInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryParamsAsStringListMapInput, Members: &mQueryParamsAsStringListMapInput, Type: smithy.ShapeTypeStructure, Ext: &eQueryParamsAsStringListMapInput})
+var sQueryPrecedenceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryPrecedenceInput, Members: &mQueryPrecedenceInput, Type: smithy.ShapeTypeStructure, Ext: &eQueryPrecedenceInput})
+var sRecursiveShapesInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecursiveShapesInputOutput, Members: &mRecursiveShapesInputOutput, Type: smithy.ShapeTypeStructure, Ext: &eRecursiveShapesInputOutput})
+var sResponseCodeHttpFallbackInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResponseCodeHttpFallbackInputOutput, Type: smithy.ShapeTypeStructure, Ext: &eResponseCodeHttpFallbackInputOutput})
+var sResponseCodeRequiredOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResponseCodeRequiredOutput, Members: &mResponseCodeRequiredOutput, Type: smithy.ShapeTypeStructure, Ext: &eResponseCodeRequiredOutput})
+var sSimpleScalarPropertiesInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSimpleScalarPropertiesInputOutput, Members: &mSimpleScalarPropertiesInputOutput, Type: smithy.ShapeTypeStructure, Ext: &eSimpleScalarPropertiesInputOutput})
+var sSparseJsonListsInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSparseJsonListsInputOutput, Members: &mSparseJsonListsInputOutput, Type: smithy.ShapeTypeStructure, Ext: &eSparseJsonListsInputOutput})
+var sSparseJsonMapsInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSparseJsonMapsInputOutput, Members: &mSparseJsonMapsInputOutput, Type: smithy.ShapeTypeStructure, Ext: &eSparseJsonMapsInputOutput})
+var sStreamingTraitsInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamingTraitsInputOutput, Members: &mStreamingTraitsInputOutput, Type: smithy.ShapeTypeStructure, Ext: &eStreamingTraitsInputOutput})
+var sStreamingTraitsRequireLengthInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamingTraitsRequireLengthInput, Members: &mStreamingTraitsRequireLengthInput, Type: smithy.ShapeTypeStructure, Ext: &eStreamingTraitsRequireLengthInput})
+var sStreamingTraitsWithMediaTypeInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamingTraitsWithMediaTypeInputOutput, Members: &mStreamingTraitsWithMediaTypeInputOutput, Type: smithy.ShapeTypeStructure, Ext: &eStreamingTraitsWithMediaTypeInputOutput})
+var sTestBodyStructureInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestBodyStructureInputOutput, Members: &mTestBodyStructureInputOutput, Type: smithy.ShapeTypeStructure, Ext: &eTestBodyStructureInputOutput})
+var sTestNoPayloadInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestNoPayloadInputOutput, Members: &mTestNoPayloadInputOutput, Type: smithy.ShapeTypeStructure, Ext: &eTestNoPayloadInputOutput})
+var sTestPayloadBlobInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestPayloadBlobInputOutput, Members: &mTestPayloadBlobInputOutput, Type: smithy.ShapeTypeStructure, Ext: &eTestPayloadBlobInputOutput})
+var sTestPayloadStructureInputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestPayloadStructureInputOutput, Members: &mTestPayloadStructureInputOutput, Type: smithy.ShapeTypeStructure, Ext: &eTestPayloadStructureInputOutput})
+var sTimestampFormatHeadersIO = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimestampFormatHeadersIO, Members: &mTimestampFormatHeadersIO, Type: smithy.ShapeTypeStructure, Ext: &eTimestampFormatHeadersIO})
 
-var sBlobPayloadEvent_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &pBlob, Traits: &t113, Type: smithy.ShapeTypeBlob, Ext: &ext[115]})
-var sClientOptionalDefaults_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[117]})
-var sComplexError_Header = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Header", ID: &pString, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &ext[119]})
-var sComplexError_TopLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopLevel", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[120]})
-var sComplexError_Nested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Nested", ID: &iComplexNestedErrorData, Members: &mComplexNestedErrorData, Type: smithy.ShapeTypeStructure, Ext: &ext[121]})
-var sComplexNestedErrorData_Foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Foo", ID: &pString, Traits: &t116, Type: smithy.ShapeTypeString, Ext: &ext[123]})
-var sDefaults_defaultString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultString", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[125]})
-var sDefaults_defaultBoolean = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultBoolean", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[126]})
-var sDefaults_defaultList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultList", ID: &i_TestStringList, Members: &m_TestStringList, Type: smithy.ShapeTypeList, Ext: &ext[127]})
-var sDefaults_defaultDocumentMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultDocumentMap", ID: &i_Document, Type: smithy.ShapeTypeDocument, Ext: &ext[128]})
-var sDefaults_defaultDocumentString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultDocumentString", ID: &i_Document, Type: smithy.ShapeTypeDocument, Ext: &ext[129]})
-var sDefaults_defaultDocumentBoolean = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultDocumentBoolean", ID: &i_Document, Type: smithy.ShapeTypeDocument, Ext: &ext[130]})
-var sDefaults_defaultDocumentList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultDocumentList", ID: &i_Document, Type: smithy.ShapeTypeDocument, Ext: &ext[131]})
-var sDefaults_defaultNullDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultNullDocument", ID: &i_Document, Type: smithy.ShapeTypeDocument, Ext: &ext[132]})
-var sDefaults_defaultTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[133]})
-var sDefaults_defaultBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultBlob", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &ext[134]})
-var sDefaults_defaultByte = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultByte", ID: &pByte, Type: smithy.ShapeTypeByte, Ext: &ext[135]})
-var sDefaults_defaultShort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultShort", ID: &pShort, Type: smithy.ShapeTypeShort, Ext: &ext[136]})
-var sDefaults_defaultInteger = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultInteger", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[137]})
-var sDefaults_defaultLong = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultLong", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[138]})
-var sDefaults_defaultFloat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultFloat", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[139]})
-var sDefaults_defaultDouble = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultDouble", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[140]})
-var sDefaults_defaultMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultMap", ID: &i_TestStringMap, Members: &m_TestStringMap, Type: smithy.ShapeTypeMap, Ext: &ext[141]})
-var sDefaults_defaultEnum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultEnum", ID: &iTestEnum, Members: &mTestEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[142]})
-var sDefaults_defaultIntEnum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultIntEnum", ID: &i_TestIntEnum, Members: &m_TestIntEnum, Type: smithy.ShapeTypeIntEnum, Ext: &ext[143]})
-var sDefaults_emptyString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emptyString", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[144]})
-var sDefaults_falseBoolean = smithy.NewStaticSchema(smithy.StaticSchema{Member: "falseBoolean", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[145]})
-var sDefaults_emptyBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emptyBlob", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &ext[146]})
-var sDefaults_zeroByte = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zeroByte", ID: &pByte, Type: smithy.ShapeTypeByte, Ext: &ext[147]})
-var sDefaults_zeroShort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zeroShort", ID: &pShort, Type: smithy.ShapeTypeShort, Ext: &ext[148]})
-var sDefaults_zeroInteger = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zeroInteger", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[149]})
-var sDefaults_zeroLong = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zeroLong", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[150]})
-var sDefaults_zeroFloat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zeroFloat", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[151]})
-var sDefaults_zeroDouble = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zeroDouble", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[152]})
-var s_DenseBooleanMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[154]})
-var s_DenseBooleanMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[155]})
-var s_DenseNumberMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[157]})
-var s_DenseNumberMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[158]})
-var s_DenseSetMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[160]})
-var s_DenseSetMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StringSet, Members: &m_StringSet, Type: smithy.ShapeTypeList, Ext: &ext[161]})
-var s_DenseStringMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[163]})
-var s_DenseStringMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[164]})
-var s_DenseStructMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[166]})
-var s_DenseStructMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iGreetingStruct, Members: &mGreetingStruct, Type: smithy.ShapeTypeStructure, Ext: &ext[167]})
-var sDialog_language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "language", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[169]})
-var sDialog_greeting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "greeting", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[170]})
-var sDialog_farewell = smithy.NewStaticSchema(smithy.StaticSchema{Member: "farewell", ID: &iFarewell, Members: &mFarewell, Type: smithy.ShapeTypeStructure, Ext: &ext[171]})
-var s_DialogList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDialog, Members: &mDialog, Type: smithy.ShapeTypeStructure, Ext: &ext[173]})
-var s_DialogMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[175]})
-var s_DialogMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iDialog, Members: &mDialog, Type: smithy.ShapeTypeStructure, Ext: &ext[176]})
-var s_DocumentValuedMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[179]})
-var s_DocumentValuedMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_Document, Type: smithy.ShapeTypeDocument, Ext: &ext[180]})
-var sErrorEvent_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[182]})
-var sEventStream_headers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headers", ID: &iHeadersEvent, Members: &mHeadersEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[184]})
-var sEventStream_blobPayload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobPayload", ID: &iBlobPayloadEvent, Members: &mBlobPayloadEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[185]})
-var sEventStream_stringPayload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringPayload", ID: &iStringPayloadEvent, Members: &mStringPayloadEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[186]})
-var sEventStream_structurePayload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "structurePayload", ID: &iStructurePayloadEvent, Members: &mStructurePayloadEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[187]})
-var sEventStream_unionPayload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unionPayload", ID: &iUnionPayloadEvent, Members: &mUnionPayloadEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[188]})
-var sEventStream_headersAndExplicitPayload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headersAndExplicitPayload", ID: &iHeadersAndExplicitPayloadEvent, Members: &mHeadersAndExplicitPayloadEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[189]})
-var sEventStream_headersAndImplicitPayload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headersAndImplicitPayload", ID: &iHeadersAndImplicitPayloadEvent, Members: &mHeadersAndImplicitPayloadEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[190]})
-var sEventStream_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iErrorEvent, Members: &mErrorEvent, Traits: &t117, Type: smithy.ShapeTypeStructure, Ext: &ext[191]})
-var sFarewell_phrase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phrase", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[193]})
-var sHeadersAndExplicitPayloadEvent_header = smithy.NewStaticSchema(smithy.StaticSchema{Member: "header", ID: &pString, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &ext[197]})
-var sHeadersAndExplicitPayloadEvent_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &iPayloadStructure, Members: &mPayloadStructure, Traits: &t113, Type: smithy.ShapeTypeStructure, Ext: &ext[198]})
-var sHeadersAndImplicitPayloadEvent_header = smithy.NewStaticSchema(smithy.StaticSchema{Member: "header", ID: &pString, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &ext[200]})
-var sHeadersAndImplicitPayloadEvent_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[201]})
-var sHeadersEvent_booleanHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "booleanHeader", ID: &pBoolean, Traits: &t120, Type: smithy.ShapeTypeBoolean, Ext: &ext[203]})
-var sHeadersEvent_byteHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "byteHeader", ID: &pByte, Traits: &t120, Type: smithy.ShapeTypeByte, Ext: &ext[204]})
-var sHeadersEvent_shortHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shortHeader", ID: &pShort, Traits: &t120, Type: smithy.ShapeTypeShort, Ext: &ext[205]})
-var sHeadersEvent_intHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intHeader", ID: &pInteger, Traits: &t120, Type: smithy.ShapeTypeInteger, Ext: &ext[206]})
-var sHeadersEvent_longHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "longHeader", ID: &pLong, Traits: &t120, Type: smithy.ShapeTypeLong, Ext: &ext[207]})
-var sHeadersEvent_blobHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobHeader", ID: &pBlob, Traits: &t120, Type: smithy.ShapeTypeBlob, Ext: &ext[208]})
-var sHeadersEvent_stringHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringHeader", ID: &pString, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &ext[209]})
-var sHeadersEvent_timestampHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestampHeader", ID: &i_DateTime, Traits: &t121, Type: smithy.ShapeTypeTimestamp, Ext: &ext[210]})
-var sInvalidGreeting_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[212]})
-var sMyUnion_stringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[216]})
-var sMyUnion_booleanValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "booleanValue", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[217]})
-var sMyUnion_numberValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numberValue", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[218]})
-var sMyUnion_blobValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobValue", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &ext[219]})
-var sMyUnion_timestampValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestampValue", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[220]})
-var sMyUnion_enumValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enumValue", ID: &iFooEnum, Members: &mFooEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[221]})
-var sMyUnion_listValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listValue", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[222]})
-var sMyUnion_mapValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mapValue", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap, Ext: &ext[223]})
-var sMyUnion_structureValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "structureValue", ID: &iGreetingStruct, Members: &mGreetingStruct, Type: smithy.ShapeTypeStructure, Ext: &ext[224]})
-var sMyUnion_renamedStructureValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "renamedStructureValue", ID: &iRenamedGreeting, Members: &mRenamedGreeting, Type: smithy.ShapeTypeStructure, Ext: &ext[225]})
-var sMyUnion_unionValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unionValue", ID: &iNestedUnion, Members: &mNestedUnion, Type: smithy.ShapeTypeUnion, Ext: &ext[226]})
-var sNestedPayload_greeting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "greeting", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[228]})
-var sNestedPayload_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[229]})
-var sNestedUnion_stringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[231]})
-var sPayloadConfig_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[233]})
-var sPayloadStructure_structureMember = smithy.NewStaticSchema(smithy.StaticSchema{Member: "structureMember", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[235]})
-var sPayloadUnion_unionMember = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unionMember", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[237]})
-var sPlayerAction_quit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quit", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[239]})
-var s_QueryMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[241]})
-var s_QueryMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[242]})
-var sRecursiveShapesInputOutputNested1_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[244]})
-var sRecursiveShapesInputOutputNested1_nested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nested", ID: &iRecursiveShapesInputOutputNested2, Members: &mRecursiveShapesInputOutputNested2, Type: smithy.ShapeTypeStructure, Ext: &ext[245]})
-var sRecursiveShapesInputOutputNested2_bar = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bar", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[247]})
-var sRecursiveShapesInputOutputNested2_recursiveMember = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recursiveMember", ID: &iRecursiveShapesInputOutputNested1, Type: smithy.ShapeTypeStructure, Ext: &ext[248]})
-var sServiceUnavailableError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[250]})
-var s_SimpleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[252]})
-var s_SimpleMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[254]})
-var s_SimpleMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[255]})
-var sSimpleUnion_int = smithy.NewStaticSchema(smithy.StaticSchema{Member: "int", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[257]})
-var sSimpleUnion_string = smithy.NewStaticSchema(smithy.StaticSchema{Member: "string", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[258]})
-var sSingletonEvent_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[260]})
-var sSingletonEventStream_singleton = smithy.NewStaticSchema(smithy.StaticSchema{Member: "singleton", ID: &iSingletonEvent, Members: &mSingletonEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[262]})
-var s_SparseBooleanMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[264]})
-var s_SparseBooleanMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[265]})
-var s_SparseNumberMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[267]})
-var s_SparseNumberMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[268]})
-var s_SparseSetMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[270]})
-var s_SparseSetMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StringSet, Members: &m_StringSet, Type: smithy.ShapeTypeList, Ext: &ext[271]})
-var s_SparseStructMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[273]})
-var s_SparseStructMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iGreetingStruct, Members: &mGreetingStruct, Type: smithy.ShapeTypeStructure, Ext: &ext[274]})
-var sStringEnum_V = smithy.NewStaticSchema(smithy.StaticSchema{Member: "V", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[278]})
-var sStringPayloadEvent_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &pString, Traits: &t113, Type: smithy.ShapeTypeString, Ext: &ext[280]})
-var s_StructureList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStructureListMember, Members: &mStructureListMember, Type: smithy.ShapeTypeStructure, Ext: &ext[282]})
-var sStructureListMember_a = smithy.NewStaticSchema(smithy.StaticSchema{Member: "a", ID: &pString, Traits: &t125, Type: smithy.ShapeTypeString, Ext: &ext[284]})
-var sStructureListMember_b = smithy.NewStaticSchema(smithy.StaticSchema{Member: "b", ID: &pString, Traits: &t126, Type: smithy.ShapeTypeString, Ext: &ext[285]})
-var sStructurePayloadEvent_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &iPayloadStructure, Members: &mPayloadStructure, Traits: &t113, Type: smithy.ShapeTypeStructure, Ext: &ext[287]})
-var sTestConfig_timeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeout", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[289]})
-var sTestEnum_FOO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FOO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[291]})
-var sTestEnum_BAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[292]})
-var sTestEnum_BAZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BAZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[293]})
-var s_TestIntEnum_ONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[295]})
-var s_TestIntEnum_TWO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TWO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[296]})
-var s_TestStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[298]})
-var s_TestStringMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[300]})
-var s_TestStringMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[301]})
-var sTopLevel_dialog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialog", ID: &iDialog, Members: &mDialog, Type: smithy.ShapeTypeStructure, Ext: &ext[303]})
-var sTopLevel_dialogList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialogList", ID: &i_DialogList, Members: &m_DialogList, Type: smithy.ShapeTypeList, Ext: &ext[304]})
-var sTopLevel_dialogMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialogMap", ID: &i_DialogMap, Members: &m_DialogMap, Type: smithy.ShapeTypeMap, Ext: &ext[305]})
-var sUnionPayload_greeting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "greeting", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[307]})
-var sUnionPayloadEvent_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &iPayloadUnion, Members: &mPayloadUnion, Traits: &t113, Type: smithy.ShapeTypeUnion, Ext: &ext[309]})
-var sUnionWithJsonName_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Traits: &t127, Type: smithy.ShapeTypeString, Ext: &ext[311]})
-var sUnionWithJsonName_bar = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bar", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[312]})
-var sUnionWithJsonName_baz = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baz", ID: &pString, Traits: &t128, Type: smithy.ShapeTypeString, Ext: &ext[313]})
-var sRenamedGreeting_salutation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "salutation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[315]})
-var s_BooleanList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[317]})
-var s_DoubleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[320]})
-var sFooEnum_FOO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FOO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[323]})
-var sFooEnum_BAZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BAZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[324]})
-var sFooEnum_BAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[325]})
-var sFooEnum_ONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[326]})
-var sFooEnum_ZERO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZERO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[327]})
-var s_FooEnumList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFooEnum, Members: &mFooEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[329]})
-var s_FooEnumMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[331]})
-var s_FooEnumMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iFooEnum, Members: &mFooEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[332]})
-var s_FooEnumSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFooEnum, Members: &mFooEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[334]})
-var sGreetingStruct_hi = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hi", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[336]})
-var s_IntegerEnum_A = smithy.NewStaticSchema(smithy.StaticSchema{Member: "A", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[339]})
-var s_IntegerEnum_B = smithy.NewStaticSchema(smithy.StaticSchema{Member: "B", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[340]})
-var s_IntegerEnum_C = smithy.NewStaticSchema(smithy.StaticSchema{Member: "C", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[341]})
-var s_IntegerEnumList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_IntegerEnum, Members: &m_IntegerEnum, Type: smithy.ShapeTypeIntEnum, Ext: &ext[343]})
-var s_IntegerEnumMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[345]})
-var s_IntegerEnumMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_IntegerEnum, Members: &m_IntegerEnum, Type: smithy.ShapeTypeIntEnum, Ext: &ext[346]})
-var s_IntegerEnumSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_IntegerEnum, Members: &m_IntegerEnum, Type: smithy.ShapeTypeIntEnum, Ext: &ext[348]})
-var s_IntegerList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[350]})
-var s_IntegerSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[352]})
-var s_NestedStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[355]})
-var s_SparseShortList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pShort, Type: smithy.ShapeTypeShort, Ext: &ext[357]})
-var s_SparseStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[359]})
-var s_SparseStringMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[361]})
-var s_SparseStringMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[362]})
-var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[364]})
-var s_StringListMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[366]})
-var s_StringListMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[367]})
-var s_StringMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[369]})
-var s_StringMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[370]})
-var s_StringSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[372]})
-var s_TimestampList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[375]})
-var sAllQueryStringTypesInput_queryString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryString", ID: &pString, Traits: &t134, Type: smithy.ShapeTypeString, Ext: &ext[377]})
-var sAllQueryStringTypesInput_queryStringList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryStringList", ID: &i_StringList, Members: &m_StringList, Traits: &t135, Type: smithy.ShapeTypeList, Ext: &ext[378]})
-var sAllQueryStringTypesInput_queryStringSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryStringSet", ID: &i_StringSet, Members: &m_StringSet, Traits: &t136, Type: smithy.ShapeTypeList, Ext: &ext[379]})
-var sAllQueryStringTypesInput_queryByte = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryByte", ID: &pByte, Traits: &t137, Type: smithy.ShapeTypeByte, Ext: &ext[380]})
-var sAllQueryStringTypesInput_queryShort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryShort", ID: &pShort, Traits: &t138, Type: smithy.ShapeTypeShort, Ext: &ext[381]})
-var sAllQueryStringTypesInput_queryInteger = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryInteger", ID: &pInteger, Traits: &t139, Type: smithy.ShapeTypeInteger, Ext: &ext[382]})
-var sAllQueryStringTypesInput_queryIntegerList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryIntegerList", ID: &i_IntegerList, Members: &m_IntegerList, Traits: &t140, Type: smithy.ShapeTypeList, Ext: &ext[383]})
-var sAllQueryStringTypesInput_queryIntegerSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryIntegerSet", ID: &i_IntegerSet, Members: &m_IntegerSet, Traits: &t141, Type: smithy.ShapeTypeList, Ext: &ext[384]})
-var sAllQueryStringTypesInput_queryLong = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryLong", ID: &pLong, Traits: &t142, Type: smithy.ShapeTypeLong, Ext: &ext[385]})
-var sAllQueryStringTypesInput_queryFloat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryFloat", ID: &pFloat, Traits: &t143, Type: smithy.ShapeTypeFloat, Ext: &ext[386]})
-var sAllQueryStringTypesInput_queryDouble = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryDouble", ID: &pDouble, Traits: &t144, Type: smithy.ShapeTypeDouble, Ext: &ext[387]})
-var sAllQueryStringTypesInput_queryDoubleList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryDoubleList", ID: &i_DoubleList, Members: &m_DoubleList, Traits: &t145, Type: smithy.ShapeTypeList, Ext: &ext[388]})
-var sAllQueryStringTypesInput_queryBoolean = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryBoolean", ID: &pBoolean, Traits: &t146, Type: smithy.ShapeTypeBoolean, Ext: &ext[389]})
-var sAllQueryStringTypesInput_queryBooleanList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryBooleanList", ID: &i_BooleanList, Members: &m_BooleanList, Traits: &t147, Type: smithy.ShapeTypeList, Ext: &ext[390]})
-var sAllQueryStringTypesInput_queryTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryTimestamp", ID: &pTimestamp, Traits: &t148, Type: smithy.ShapeTypeTimestamp, Ext: &ext[391]})
-var sAllQueryStringTypesInput_queryTimestampList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryTimestampList", ID: &i_TimestampList, Members: &m_TimestampList, Traits: &t149, Type: smithy.ShapeTypeList, Ext: &ext[392]})
-var sAllQueryStringTypesInput_queryEnum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryEnum", ID: &iFooEnum, Members: &mFooEnum, Traits: &t150, Type: smithy.ShapeTypeEnum, Ext: &ext[393]})
-var sAllQueryStringTypesInput_queryEnumList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryEnumList", ID: &i_FooEnumList, Members: &m_FooEnumList, Traits: &t151, Type: smithy.ShapeTypeList, Ext: &ext[394]})
-var sAllQueryStringTypesInput_queryIntegerEnum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryIntegerEnum", ID: &i_IntegerEnum, Members: &m_IntegerEnum, Traits: &t152, Type: smithy.ShapeTypeIntEnum, Ext: &ext[395]})
-var sAllQueryStringTypesInput_queryIntegerEnumList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryIntegerEnumList", ID: &i_IntegerEnumList, Members: &m_IntegerEnumList, Traits: &t153, Type: smithy.ShapeTypeList, Ext: &ext[396]})
-var sAllQueryStringTypesInput_queryParamsMapOfStringList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryParamsMapOfStringList", ID: &i_StringListMap, Members: &m_StringListMap, Traits: &t154, Type: smithy.ShapeTypeMap, Ext: &ext[397]})
-var sConstantAndVariableQueryStringInput_baz = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baz", ID: &pString, Traits: &t155, Type: smithy.ShapeTypeString, Ext: &ext[399]})
-var sConstantAndVariableQueryStringInput_maybeSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maybeSet", ID: &pString, Traits: &t156, Type: smithy.ShapeTypeString, Ext: &ext[400]})
-var sConstantQueryStringInput_hello = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hello", ID: &pString, Traits: &t157, Type: smithy.ShapeTypeString, Ext: &ext[402]})
-var sContentTypeParametersInput_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[404]})
-var sDatetimeOffsetsOutput_datetime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datetime", ID: &i_DateTime, Traits: &t158, Type: smithy.ShapeTypeTimestamp, Ext: &ext[407]})
-var sDocumentTypeAsMapValueInputOutput_docValuedMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "docValuedMap", ID: &i_DocumentValuedMap, Members: &m_DocumentValuedMap, Type: smithy.ShapeTypeMap, Ext: &ext[409]})
-var sDocumentTypeAsPayloadInputOutput_documentValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "documentValue", ID: &i_Document, Traits: &t159, Type: smithy.ShapeTypeDocument, Ext: &ext[411]})
-var sDocumentTypeInputOutput_stringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[413]})
-var sDocumentTypeInputOutput_documentValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "documentValue", ID: &i_Document, Type: smithy.ShapeTypeDocument, Ext: &ext[414]})
-var sDuplexStreamInput_stream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stream", ID: &iEventStream, Members: &mEventStream, Traits: &t160, Type: smithy.ShapeTypeUnion, Ext: &ext[416]})
-var sDuplexStreamOutput_stream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stream", ID: &iEventStream, Members: &mEventStream, Traits: &t160, Type: smithy.ShapeTypeUnion, Ext: &ext[418]})
-var sDuplexStreamWithDistinctStreamsInput_stream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stream", ID: &iEventStream, Members: &mEventStream, Traits: &t160, Type: smithy.ShapeTypeUnion, Ext: &ext[420]})
-var sDuplexStreamWithDistinctStreamsOutput_stream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stream", ID: &iSingletonEventStream, Members: &mSingletonEventStream, Traits: &t159, Type: smithy.ShapeTypeUnion, Ext: &ext[422]})
-var sDuplexStreamWithInitialMessagesInput_initialRequestMember = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initialRequestMember", ID: &pString, Traits: &t161, Type: smithy.ShapeTypeString, Ext: &ext[424]})
-var sDuplexStreamWithInitialMessagesInput_stream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stream", ID: &iEventStream, Members: &mEventStream, Traits: &t160, Type: smithy.ShapeTypeUnion, Ext: &ext[425]})
-var sDuplexStreamWithInitialMessagesOutput_initialResponseMember = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initialResponseMember", ID: &pString, Traits: &t162, Type: smithy.ShapeTypeString, Ext: &ext[427]})
-var sDuplexStreamWithInitialMessagesOutput_stream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stream", ID: &iEventStream, Members: &mEventStream, Traits: &t160, Type: smithy.ShapeTypeUnion, Ext: &ext[428]})
-var sHostLabelInput_label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "label", ID: &pString, Traits: &t163, Type: smithy.ShapeTypeString, Ext: &ext[432]})
-var sFractionalSecondsOutput_datetime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datetime", ID: &i_DateTime, Traits: &t158, Type: smithy.ShapeTypeTimestamp, Ext: &ext[434]})
-var sGreetingWithErrorsOutput_greeting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "greeting", ID: &pString, Traits: &t164, Type: smithy.ShapeTypeString, Ext: &ext[436]})
-var sHttpChecksumRequiredInputOutput_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[438]})
-var sHttpEmptyPrefixHeadersInput_prefixHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixHeaders", ID: &i_StringMap, Members: &m_StringMap, Traits: &t165, Type: smithy.ShapeTypeMap, Ext: &ext[440]})
-var sHttpEmptyPrefixHeadersInput_specificHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "specificHeader", ID: &pString, Traits: &t166, Type: smithy.ShapeTypeString, Ext: &ext[441]})
-var sHttpEmptyPrefixHeadersOutput_prefixHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixHeaders", ID: &i_StringMap, Members: &m_StringMap, Traits: &t165, Type: smithy.ShapeTypeMap, Ext: &ext[443]})
-var sHttpEmptyPrefixHeadersOutput_specificHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "specificHeader", ID: &pString, Traits: &t166, Type: smithy.ShapeTypeString, Ext: &ext[444]})
-var sEnumPayloadInput_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &iStringEnum, Members: &mStringEnum, Traits: &t159, Type: smithy.ShapeTypeEnum, Ext: &ext[446]})
-var sHttpPayloadTraitsInputOutput_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Traits: &t167, Type: smithy.ShapeTypeString, Ext: &ext[448]})
-var sHttpPayloadTraitsInputOutput_blob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blob", ID: &pBlob, Traits: &t159, Type: smithy.ShapeTypeBlob, Ext: &ext[449]})
-var sHttpPayloadTraitsWithMediaTypeInputOutput_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Traits: &t167, Type: smithy.ShapeTypeString, Ext: &ext[451]})
-var sHttpPayloadTraitsWithMediaTypeInputOutput_blob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blob", ID: &i_TextPlainBlob, Traits: &t168, Type: smithy.ShapeTypeBlob, Ext: &ext[452]})
-var sHttpPayloadWithStructureInputOutput_nested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nested", ID: &iNestedPayload, Members: &mNestedPayload, Traits: &t159, Type: smithy.ShapeTypeStructure, Ext: &ext[454]})
-var sHttpPayloadWithUnionInputOutput_nested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nested", ID: &iUnionPayload, Members: &mUnionPayload, Traits: &t159, Type: smithy.ShapeTypeUnion, Ext: &ext[456]})
-var sHttpPrefixHeadersInput_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Traits: &t169, Type: smithy.ShapeTypeString, Ext: &ext[458]})
-var sHttpPrefixHeadersInput_fooMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fooMap", ID: &i_StringMap, Members: &m_StringMap, Traits: &t170, Type: smithy.ShapeTypeMap, Ext: &ext[459]})
-var sHttpPrefixHeadersInResponseOutput_prefixHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixHeaders", ID: &i_StringMap, Members: &m_StringMap, Traits: &t165, Type: smithy.ShapeTypeMap, Ext: &ext[462]})
-var sHttpPrefixHeadersOutput_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Traits: &t169, Type: smithy.ShapeTypeString, Ext: &ext[464]})
-var sHttpPrefixHeadersOutput_fooMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fooMap", ID: &i_StringMap, Members: &m_StringMap, Traits: &t170, Type: smithy.ShapeTypeMap, Ext: &ext[465]})
-var sHttpQueryParamsOnlyInput_queryMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryMap", ID: &i_QueryMap, Members: &m_QueryMap, Traits: &t154, Type: smithy.ShapeTypeMap, Ext: &ext[467]})
-var sHttpRequestWithFloatLabelsInput_float = smithy.NewStaticSchema(smithy.StaticSchema{Member: "float", ID: &pFloat, Traits: &t157, Type: smithy.ShapeTypeFloat, Ext: &ext[469]})
-var sHttpRequestWithFloatLabelsInput_double = smithy.NewStaticSchema(smithy.StaticSchema{Member: "double", ID: &pDouble, Traits: &t157, Type: smithy.ShapeTypeDouble, Ext: &ext[470]})
-var sHttpRequestWithGreedyLabelInPathInput_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Traits: &t157, Type: smithy.ShapeTypeString, Ext: &ext[472]})
-var sHttpRequestWithGreedyLabelInPathInput_baz = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baz", ID: &pString, Traits: &t157, Type: smithy.ShapeTypeString, Ext: &ext[473]})
-var sHttpRequestWithLabelsAndTimestampFormatInput_memberEpochSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "memberEpochSeconds", ID: &pTimestamp, Traits: &t171, Type: smithy.ShapeTypeTimestamp, Ext: &ext[475]})
-var sHttpRequestWithLabelsAndTimestampFormatInput_memberHttpDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "memberHttpDate", ID: &pTimestamp, Traits: &t172, Type: smithy.ShapeTypeTimestamp, Ext: &ext[476]})
-var sHttpRequestWithLabelsAndTimestampFormatInput_memberDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "memberDateTime", ID: &pTimestamp, Traits: &t173, Type: smithy.ShapeTypeTimestamp, Ext: &ext[477]})
-var sHttpRequestWithLabelsAndTimestampFormatInput_defaultFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultFormat", ID: &pTimestamp, Traits: &t157, Type: smithy.ShapeTypeTimestamp, Ext: &ext[478]})
-var sHttpRequestWithLabelsAndTimestampFormatInput_targetEpochSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetEpochSeconds", ID: &i_EpochSeconds, Traits: &t174, Type: smithy.ShapeTypeTimestamp, Ext: &ext[479]})
-var sHttpRequestWithLabelsAndTimestampFormatInput_targetHttpDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetHttpDate", ID: &i_HttpDate, Traits: &t175, Type: smithy.ShapeTypeTimestamp, Ext: &ext[480]})
-var sHttpRequestWithLabelsAndTimestampFormatInput_targetDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetDateTime", ID: &i_DateTime, Traits: &t176, Type: smithy.ShapeTypeTimestamp, Ext: &ext[481]})
-var sHttpRequestWithLabelsInput_string = smithy.NewStaticSchema(smithy.StaticSchema{Member: "string", ID: &pString, Traits: &t157, Type: smithy.ShapeTypeString, Ext: &ext[483]})
-var sHttpRequestWithLabelsInput_short = smithy.NewStaticSchema(smithy.StaticSchema{Member: "short", ID: &pShort, Traits: &t157, Type: smithy.ShapeTypeShort, Ext: &ext[484]})
-var sHttpRequestWithLabelsInput_integer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integer", ID: &pInteger, Traits: &t157, Type: smithy.ShapeTypeInteger, Ext: &ext[485]})
-var sHttpRequestWithLabelsInput_long = smithy.NewStaticSchema(smithy.StaticSchema{Member: "long", ID: &pLong, Traits: &t157, Type: smithy.ShapeTypeLong, Ext: &ext[486]})
-var sHttpRequestWithLabelsInput_float = smithy.NewStaticSchema(smithy.StaticSchema{Member: "float", ID: &pFloat, Traits: &t157, Type: smithy.ShapeTypeFloat, Ext: &ext[487]})
-var sHttpRequestWithLabelsInput_double = smithy.NewStaticSchema(smithy.StaticSchema{Member: "double", ID: &pDouble, Traits: &t157, Type: smithy.ShapeTypeDouble, Ext: &ext[488]})
-var sHttpRequestWithLabelsInput_boolean = smithy.NewStaticSchema(smithy.StaticSchema{Member: "boolean", ID: &pBoolean, Traits: &t157, Type: smithy.ShapeTypeBoolean, Ext: &ext[489]})
-var sHttpRequestWithLabelsInput_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Traits: &t157, Type: smithy.ShapeTypeTimestamp, Ext: &ext[490]})
-var sHttpRequestWithRegexLiteralInput_str = smithy.NewStaticSchema(smithy.StaticSchema{Member: "str", ID: &pString, Traits: &t157, Type: smithy.ShapeTypeString, Ext: &ext[492]})
-var sHttpResponseCodeOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &pInteger, Traits: &t177, Type: smithy.ShapeTypeInteger, Ext: &ext[494]})
-var sStringPayloadInput_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &pString, Traits: &t159, Type: smithy.ShapeTypeString, Ext: &ext[496]})
-var sIgnoreQueryParamsInResponseOutput_baz = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baz", ID: &pString, Traits: &t155, Type: smithy.ShapeTypeString, Ext: &ext[498]})
-var sInputAndOutputWithHeadersIO_headerString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerString", ID: &pString, Traits: &t178, Type: smithy.ShapeTypeString, Ext: &ext[500]})
-var sInputAndOutputWithHeadersIO_headerByte = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerByte", ID: &pByte, Traits: &t179, Type: smithy.ShapeTypeByte, Ext: &ext[501]})
-var sInputAndOutputWithHeadersIO_headerShort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerShort", ID: &pShort, Traits: &t180, Type: smithy.ShapeTypeShort, Ext: &ext[502]})
-var sInputAndOutputWithHeadersIO_headerInteger = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerInteger", ID: &pInteger, Traits: &t181, Type: smithy.ShapeTypeInteger, Ext: &ext[503]})
-var sInputAndOutputWithHeadersIO_headerLong = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerLong", ID: &pLong, Traits: &t182, Type: smithy.ShapeTypeLong, Ext: &ext[504]})
-var sInputAndOutputWithHeadersIO_headerFloat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerFloat", ID: &pFloat, Traits: &t183, Type: smithy.ShapeTypeFloat, Ext: &ext[505]})
-var sInputAndOutputWithHeadersIO_headerDouble = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerDouble", ID: &pDouble, Traits: &t184, Type: smithy.ShapeTypeDouble, Ext: &ext[506]})
-var sInputAndOutputWithHeadersIO_headerTrueBool = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerTrueBool", ID: &pBoolean, Traits: &t185, Type: smithy.ShapeTypeBoolean, Ext: &ext[507]})
-var sInputAndOutputWithHeadersIO_headerFalseBool = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerFalseBool", ID: &pBoolean, Traits: &t186, Type: smithy.ShapeTypeBoolean, Ext: &ext[508]})
-var sInputAndOutputWithHeadersIO_headerStringList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerStringList", ID: &i_StringList, Members: &m_StringList, Traits: &t187, Type: smithy.ShapeTypeList, Ext: &ext[509]})
-var sInputAndOutputWithHeadersIO_headerStringSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerStringSet", ID: &i_StringSet, Members: &m_StringSet, Traits: &t188, Type: smithy.ShapeTypeList, Ext: &ext[510]})
-var sInputAndOutputWithHeadersIO_headerIntegerList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerIntegerList", ID: &i_IntegerList, Members: &m_IntegerList, Traits: &t189, Type: smithy.ShapeTypeList, Ext: &ext[511]})
-var sInputAndOutputWithHeadersIO_headerBooleanList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerBooleanList", ID: &i_BooleanList, Members: &m_BooleanList, Traits: &t190, Type: smithy.ShapeTypeList, Ext: &ext[512]})
-var sInputAndOutputWithHeadersIO_headerTimestampList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerTimestampList", ID: &i_TimestampList, Members: &m_TimestampList, Traits: &t191, Type: smithy.ShapeTypeList, Ext: &ext[513]})
-var sInputAndOutputWithHeadersIO_headerEnum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerEnum", ID: &iFooEnum, Members: &mFooEnum, Traits: &t192, Type: smithy.ShapeTypeEnum, Ext: &ext[514]})
-var sInputAndOutputWithHeadersIO_headerEnumList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerEnumList", ID: &i_FooEnumList, Members: &m_FooEnumList, Traits: &t193, Type: smithy.ShapeTypeList, Ext: &ext[515]})
-var sInputAndOutputWithHeadersIO_headerIntegerEnum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerIntegerEnum", ID: &i_IntegerEnum, Members: &m_IntegerEnum, Traits: &t194, Type: smithy.ShapeTypeIntEnum, Ext: &ext[516]})
-var sInputAndOutputWithHeadersIO_headerIntegerEnumList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerIntegerEnumList", ID: &i_IntegerEnumList, Members: &m_IntegerEnumList, Traits: &t195, Type: smithy.ShapeTypeList, Ext: &ext[517]})
-var sInputStreamInput_stream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stream", ID: &iEventStream, Members: &mEventStream, Traits: &t160, Type: smithy.ShapeTypeUnion, Ext: &ext[519]})
-var sInputStreamWithInitialRequestInput_initialRequestMember = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initialRequestMember", ID: &pString, Traits: &t161, Type: smithy.ShapeTypeString, Ext: &ext[521]})
-var sInputStreamWithInitialRequestInput_stream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stream", ID: &iEventStream, Members: &mEventStream, Traits: &t160, Type: smithy.ShapeTypeUnion, Ext: &ext[522]})
-var sJsonBlobsInputOutput_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &ext[524]})
-var sJsonEnumsInputOutput_fooEnum1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fooEnum1", ID: &iFooEnum, Members: &mFooEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[526]})
-var sJsonEnumsInputOutput_fooEnum2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fooEnum2", ID: &iFooEnum, Members: &mFooEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[527]})
-var sJsonEnumsInputOutput_fooEnum3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fooEnum3", ID: &iFooEnum, Members: &mFooEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[528]})
-var sJsonEnumsInputOutput_fooEnumList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fooEnumList", ID: &i_FooEnumList, Members: &m_FooEnumList, Type: smithy.ShapeTypeList, Ext: &ext[529]})
-var sJsonEnumsInputOutput_fooEnumSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fooEnumSet", ID: &i_FooEnumSet, Members: &m_FooEnumSet, Type: smithy.ShapeTypeList, Ext: &ext[530]})
-var sJsonEnumsInputOutput_fooEnumMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fooEnumMap", ID: &i_FooEnumMap, Members: &m_FooEnumMap, Type: smithy.ShapeTypeMap, Ext: &ext[531]})
-var sJsonIntEnumsInputOutput_integerEnum1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerEnum1", ID: &i_IntegerEnum, Members: &m_IntegerEnum, Type: smithy.ShapeTypeIntEnum, Ext: &ext[533]})
-var sJsonIntEnumsInputOutput_integerEnum2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerEnum2", ID: &i_IntegerEnum, Members: &m_IntegerEnum, Type: smithy.ShapeTypeIntEnum, Ext: &ext[534]})
-var sJsonIntEnumsInputOutput_integerEnum3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerEnum3", ID: &i_IntegerEnum, Members: &m_IntegerEnum, Type: smithy.ShapeTypeIntEnum, Ext: &ext[535]})
-var sJsonIntEnumsInputOutput_integerEnumList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerEnumList", ID: &i_IntegerEnumList, Members: &m_IntegerEnumList, Type: smithy.ShapeTypeList, Ext: &ext[536]})
-var sJsonIntEnumsInputOutput_integerEnumSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerEnumSet", ID: &i_IntegerEnumSet, Members: &m_IntegerEnumSet, Type: smithy.ShapeTypeList, Ext: &ext[537]})
-var sJsonIntEnumsInputOutput_integerEnumMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerEnumMap", ID: &i_IntegerEnumMap, Members: &m_IntegerEnumMap, Type: smithy.ShapeTypeMap, Ext: &ext[538]})
-var sJsonListsInputOutput_stringList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringList", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[540]})
-var sJsonListsInputOutput_stringSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringSet", ID: &i_StringSet, Members: &m_StringSet, Type: smithy.ShapeTypeList, Ext: &ext[541]})
-var sJsonListsInputOutput_integerList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerList", ID: &i_IntegerList, Members: &m_IntegerList, Type: smithy.ShapeTypeList, Ext: &ext[542]})
-var sJsonListsInputOutput_booleanList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "booleanList", ID: &i_BooleanList, Members: &m_BooleanList, Type: smithy.ShapeTypeList, Ext: &ext[543]})
-var sJsonListsInputOutput_timestampList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestampList", ID: &i_TimestampList, Members: &m_TimestampList, Type: smithy.ShapeTypeList, Ext: &ext[544]})
-var sJsonListsInputOutput_enumList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enumList", ID: &i_FooEnumList, Members: &m_FooEnumList, Type: smithy.ShapeTypeList, Ext: &ext[545]})
-var sJsonListsInputOutput_intEnumList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intEnumList", ID: &i_IntegerEnumList, Members: &m_IntegerEnumList, Type: smithy.ShapeTypeList, Ext: &ext[546]})
-var sJsonListsInputOutput_nestedStringList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nestedStringList", ID: &i_NestedStringList, Members: &m_NestedStringList, Type: smithy.ShapeTypeList, Ext: &ext[547]})
-var sJsonListsInputOutput_structureList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "structureList", ID: &i_StructureList, Members: &m_StructureList, Traits: &t196, Type: smithy.ShapeTypeList, Ext: &ext[548]})
-var sJsonMapsInputOutput_denseStructMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "denseStructMap", ID: &i_DenseStructMap, Members: &m_DenseStructMap, Type: smithy.ShapeTypeMap, Ext: &ext[550]})
-var sJsonMapsInputOutput_denseNumberMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "denseNumberMap", ID: &i_DenseNumberMap, Members: &m_DenseNumberMap, Type: smithy.ShapeTypeMap, Ext: &ext[551]})
-var sJsonMapsInputOutput_denseBooleanMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "denseBooleanMap", ID: &i_DenseBooleanMap, Members: &m_DenseBooleanMap, Type: smithy.ShapeTypeMap, Ext: &ext[552]})
-var sJsonMapsInputOutput_denseStringMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "denseStringMap", ID: &i_DenseStringMap, Members: &m_DenseStringMap, Type: smithy.ShapeTypeMap, Ext: &ext[553]})
-var sJsonMapsInputOutput_denseSetMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "denseSetMap", ID: &i_DenseSetMap, Members: &m_DenseSetMap, Type: smithy.ShapeTypeMap, Ext: &ext[554]})
-var sJsonTimestampsInputOutput_normal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "normal", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[556]})
-var sJsonTimestampsInputOutput_dateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dateTime", ID: &pTimestamp, Traits: &t129, Type: smithy.ShapeTypeTimestamp, Ext: &ext[557]})
-var sJsonTimestampsInputOutput_dateTimeOnTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dateTimeOnTarget", ID: &i_DateTime, Traits: &t158, Type: smithy.ShapeTypeTimestamp, Ext: &ext[558]})
-var sJsonTimestampsInputOutput_epochSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "epochSeconds", ID: &pTimestamp, Traits: &t130, Type: smithy.ShapeTypeTimestamp, Ext: &ext[559]})
-var sJsonTimestampsInputOutput_epochSecondsOnTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "epochSecondsOnTarget", ID: &i_EpochSeconds, Traits: &t197, Type: smithy.ShapeTypeTimestamp, Ext: &ext[560]})
-var sJsonTimestampsInputOutput_httpDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "httpDate", ID: &pTimestamp, Traits: &t131, Type: smithy.ShapeTypeTimestamp, Ext: &ext[561]})
-var sJsonTimestampsInputOutput_httpDateOnTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "httpDateOnTarget", ID: &i_HttpDate, Traits: &t198, Type: smithy.ShapeTypeTimestamp, Ext: &ext[562]})
-var sUnionInputOutput_contents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contents", ID: &iMyUnion, Members: &mMyUnion, Type: smithy.ShapeTypeUnion, Ext: &ext[564]})
-var sMalformedAcceptWithGenericStringOutput_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &pString, Traits: &t159, Type: smithy.ShapeTypeString, Ext: &ext[566]})
-var sMalformedAcceptWithPayloadOutput_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &i_JpegBlob, Traits: &t199, Type: smithy.ShapeTypeBlob, Ext: &ext[568]})
-var sMalformedBlobInput_blob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blob", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &ext[570]})
-var sMalformedBooleanInput_booleanInBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "booleanInBody", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[572]})
-var sMalformedBooleanInput_booleanInPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "booleanInPath", ID: &pBoolean, Traits: &t157, Type: smithy.ShapeTypeBoolean, Ext: &ext[573]})
-var sMalformedBooleanInput_booleanInQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "booleanInQuery", ID: &pBoolean, Traits: &t200, Type: smithy.ShapeTypeBoolean, Ext: &ext[574]})
-var sMalformedBooleanInput_booleanInHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "booleanInHeader", ID: &pBoolean, Traits: &t201, Type: smithy.ShapeTypeBoolean, Ext: &ext[575]})
-var sMalformedByteInput_byteInBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "byteInBody", ID: &pByte, Type: smithy.ShapeTypeByte, Ext: &ext[577]})
-var sMalformedByteInput_byteInPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "byteInPath", ID: &pByte, Traits: &t157, Type: smithy.ShapeTypeByte, Ext: &ext[578]})
-var sMalformedByteInput_byteInQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "byteInQuery", ID: &pByte, Traits: &t202, Type: smithy.ShapeTypeByte, Ext: &ext[579]})
-var sMalformedByteInput_byteInHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "byteInHeader", ID: &pByte, Traits: &t203, Type: smithy.ShapeTypeByte, Ext: &ext[580]})
-var sMalformedContentTypeWithGenericStringInput_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &pString, Traits: &t159, Type: smithy.ShapeTypeString, Ext: &ext[582]})
-var sMalformedContentTypeWithoutBodyEmptyInputInput_header = smithy.NewStaticSchema(smithy.StaticSchema{Member: "header", ID: &pString, Traits: &t204, Type: smithy.ShapeTypeString, Ext: &ext[584]})
-var sMalformedContentTypeWithPayloadInput_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &i_JpegBlob, Traits: &t199, Type: smithy.ShapeTypeBlob, Ext: &ext[586]})
-var sMalformedDoubleInput_doubleInBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "doubleInBody", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[588]})
-var sMalformedDoubleInput_doubleInPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "doubleInPath", ID: &pDouble, Traits: &t157, Type: smithy.ShapeTypeDouble, Ext: &ext[589]})
-var sMalformedDoubleInput_doubleInQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "doubleInQuery", ID: &pDouble, Traits: &t205, Type: smithy.ShapeTypeDouble, Ext: &ext[590]})
-var sMalformedDoubleInput_doubleInHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "doubleInHeader", ID: &pDouble, Traits: &t206, Type: smithy.ShapeTypeDouble, Ext: &ext[591]})
-var sMalformedFloatInput_floatInBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "floatInBody", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[593]})
-var sMalformedFloatInput_floatInPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "floatInPath", ID: &pFloat, Traits: &t157, Type: smithy.ShapeTypeFloat, Ext: &ext[594]})
-var sMalformedFloatInput_floatInQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "floatInQuery", ID: &pFloat, Traits: &t207, Type: smithy.ShapeTypeFloat, Ext: &ext[595]})
-var sMalformedFloatInput_floatInHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "floatInHeader", ID: &pFloat, Traits: &t208, Type: smithy.ShapeTypeFloat, Ext: &ext[596]})
-var sMalformedIntegerInput_integerInBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerInBody", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[598]})
-var sMalformedIntegerInput_integerInPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerInPath", ID: &pInteger, Traits: &t157, Type: smithy.ShapeTypeInteger, Ext: &ext[599]})
-var sMalformedIntegerInput_integerInQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerInQuery", ID: &pInteger, Traits: &t209, Type: smithy.ShapeTypeInteger, Ext: &ext[600]})
-var sMalformedIntegerInput_integerInHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerInHeader", ID: &pInteger, Traits: &t210, Type: smithy.ShapeTypeInteger, Ext: &ext[601]})
-var sMalformedListInput_bodyList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bodyList", ID: &i_SimpleList, Members: &m_SimpleList, Type: smithy.ShapeTypeList, Ext: &ext[603]})
-var sMalformedLongInput_longInBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "longInBody", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[605]})
-var sMalformedLongInput_longInPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "longInPath", ID: &pLong, Traits: &t157, Type: smithy.ShapeTypeLong, Ext: &ext[606]})
-var sMalformedLongInput_longInQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "longInQuery", ID: &pLong, Traits: &t211, Type: smithy.ShapeTypeLong, Ext: &ext[607]})
-var sMalformedLongInput_longInHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "longInHeader", ID: &pLong, Traits: &t212, Type: smithy.ShapeTypeLong, Ext: &ext[608]})
-var sMalformedMapInput_bodyMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bodyMap", ID: &i_SimpleMap, Members: &m_SimpleMap, Type: smithy.ShapeTypeMap, Ext: &ext[610]})
-var sMalformedRequestBodyInput_int = smithy.NewStaticSchema(smithy.StaticSchema{Member: "int", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[612]})
-var sMalformedRequestBodyInput_float = smithy.NewStaticSchema(smithy.StaticSchema{Member: "float", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[613]})
-var sMalformedShortInput_shortInBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shortInBody", ID: &pShort, Type: smithy.ShapeTypeShort, Ext: &ext[615]})
-var sMalformedShortInput_shortInPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shortInPath", ID: &pShort, Traits: &t157, Type: smithy.ShapeTypeShort, Ext: &ext[616]})
-var sMalformedShortInput_shortInQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shortInQuery", ID: &pShort, Traits: &t213, Type: smithy.ShapeTypeShort, Ext: &ext[617]})
-var sMalformedShortInput_shortInHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shortInHeader", ID: &pShort, Traits: &t214, Type: smithy.ShapeTypeShort, Ext: &ext[618]})
-var sMalformedStringInput_blob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blob", ID: &i_JsonHeaderString, Traits: &t215, Type: smithy.ShapeTypeString, Ext: &ext[620]})
-var sMalformedTimestampBodyDateTimeInput_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Traits: &t129, Type: smithy.ShapeTypeTimestamp, Ext: &ext[622]})
-var sMalformedTimestampBodyDefaultInput_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[624]})
-var sMalformedTimestampBodyHttpDateInput_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Traits: &t131, Type: smithy.ShapeTypeTimestamp, Ext: &ext[626]})
-var sMalformedTimestampHeaderDateTimeInput_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Traits: &t216, Type: smithy.ShapeTypeTimestamp, Ext: &ext[628]})
-var sMalformedTimestampHeaderDefaultInput_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Traits: &t217, Type: smithy.ShapeTypeTimestamp, Ext: &ext[630]})
-var sMalformedTimestampHeaderEpochInput_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Traits: &t218, Type: smithy.ShapeTypeTimestamp, Ext: &ext[632]})
-var sMalformedTimestampPathDefaultInput_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Traits: &t157, Type: smithy.ShapeTypeTimestamp, Ext: &ext[634]})
-var sMalformedTimestampPathEpochInput_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Traits: &t171, Type: smithy.ShapeTypeTimestamp, Ext: &ext[636]})
-var sMalformedTimestampPathHttpDateInput_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Traits: &t172, Type: smithy.ShapeTypeTimestamp, Ext: &ext[638]})
-var sMalformedTimestampQueryDefaultInput_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Traits: &t219, Type: smithy.ShapeTypeTimestamp, Ext: &ext[640]})
-var sMalformedTimestampQueryEpochInput_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Traits: &t220, Type: smithy.ShapeTypeTimestamp, Ext: &ext[642]})
-var sMalformedTimestampQueryHttpDateInput_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Traits: &t221, Type: smithy.ShapeTypeTimestamp, Ext: &ext[644]})
-var sMalformedUnionInput_union = smithy.NewStaticSchema(smithy.StaticSchema{Member: "union", ID: &iSimpleUnion, Members: &mSimpleUnion, Type: smithy.ShapeTypeUnion, Ext: &ext[646]})
-var sMediaTypeHeaderInput_json = smithy.NewStaticSchema(smithy.StaticSchema{Member: "json", ID: &i_JsonValue, Traits: &t222, Type: smithy.ShapeTypeString, Ext: &ext[648]})
-var sMediaTypeHeaderOutput_json = smithy.NewStaticSchema(smithy.StaticSchema{Member: "json", ID: &i_JsonValue, Traits: &t222, Type: smithy.ShapeTypeString, Ext: &ext[650]})
-var sNullAndEmptyHeadersIO_a = smithy.NewStaticSchema(smithy.StaticSchema{Member: "a", ID: &pString, Traits: &t223, Type: smithy.ShapeTypeString, Ext: &ext[653]})
-var sNullAndEmptyHeadersIO_b = smithy.NewStaticSchema(smithy.StaticSchema{Member: "b", ID: &pString, Traits: &t224, Type: smithy.ShapeTypeString, Ext: &ext[654]})
-var sNullAndEmptyHeadersIO_c = smithy.NewStaticSchema(smithy.StaticSchema{Member: "c", ID: &i_StringList, Members: &m_StringList, Traits: &t225, Type: smithy.ShapeTypeList, Ext: &ext[655]})
-var sOmitsNullSerializesEmptyStringInput_nullValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nullValue", ID: &pString, Traits: &t226, Type: smithy.ShapeTypeString, Ext: &ext[657]})
-var sOmitsNullSerializesEmptyStringInput_emptyString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emptyString", ID: &pString, Traits: &t227, Type: smithy.ShapeTypeString, Ext: &ext[658]})
-var sOmitsSerializingEmptyListsInput_queryStringList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryStringList", ID: &i_StringList, Members: &m_StringList, Traits: &t135, Type: smithy.ShapeTypeList, Ext: &ext[660]})
-var sOmitsSerializingEmptyListsInput_queryIntegerList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryIntegerList", ID: &i_IntegerList, Members: &m_IntegerList, Traits: &t140, Type: smithy.ShapeTypeList, Ext: &ext[661]})
-var sOmitsSerializingEmptyListsInput_queryDoubleList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryDoubleList", ID: &i_DoubleList, Members: &m_DoubleList, Traits: &t145, Type: smithy.ShapeTypeList, Ext: &ext[662]})
-var sOmitsSerializingEmptyListsInput_queryBooleanList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryBooleanList", ID: &i_BooleanList, Members: &m_BooleanList, Traits: &t147, Type: smithy.ShapeTypeList, Ext: &ext[663]})
-var sOmitsSerializingEmptyListsInput_queryTimestampList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryTimestampList", ID: &i_TimestampList, Members: &m_TimestampList, Traits: &t149, Type: smithy.ShapeTypeList, Ext: &ext[664]})
-var sOmitsSerializingEmptyListsInput_queryEnumList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryEnumList", ID: &i_FooEnumList, Members: &m_FooEnumList, Traits: &t151, Type: smithy.ShapeTypeList, Ext: &ext[665]})
-var sOmitsSerializingEmptyListsInput_queryIntegerEnumList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryIntegerEnumList", ID: &i_IntegerEnumList, Members: &m_IntegerEnumList, Traits: &t153, Type: smithy.ShapeTypeList, Ext: &ext[666]})
-var sOperationWithDefaultsInput_defaults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaults", ID: &iDefaults, Members: &mDefaults, Type: smithy.ShapeTypeStructure, Ext: &ext[668]})
-var sOperationWithDefaultsInput_clientOptionalDefaults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientOptionalDefaults", ID: &iClientOptionalDefaults, Members: &mClientOptionalDefaults, Type: smithy.ShapeTypeStructure, Ext: &ext[669]})
-var sOperationWithDefaultsInput_topLevelDefault = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topLevelDefault", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[670]})
-var sOperationWithDefaultsInput_otherTopLevelDefault = smithy.NewStaticSchema(smithy.StaticSchema{Member: "otherTopLevelDefault", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[671]})
-var sOperationWithDefaultsOutput_defaultString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultString", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[673]})
-var sOperationWithDefaultsOutput_defaultBoolean = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultBoolean", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[674]})
-var sOperationWithDefaultsOutput_defaultList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultList", ID: &i_TestStringList, Members: &m_TestStringList, Type: smithy.ShapeTypeList, Ext: &ext[675]})
-var sOperationWithDefaultsOutput_defaultDocumentMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultDocumentMap", ID: &i_Document, Type: smithy.ShapeTypeDocument, Ext: &ext[676]})
-var sOperationWithDefaultsOutput_defaultDocumentString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultDocumentString", ID: &i_Document, Type: smithy.ShapeTypeDocument, Ext: &ext[677]})
-var sOperationWithDefaultsOutput_defaultDocumentBoolean = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultDocumentBoolean", ID: &i_Document, Type: smithy.ShapeTypeDocument, Ext: &ext[678]})
-var sOperationWithDefaultsOutput_defaultDocumentList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultDocumentList", ID: &i_Document, Type: smithy.ShapeTypeDocument, Ext: &ext[679]})
-var sOperationWithDefaultsOutput_defaultNullDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultNullDocument", ID: &i_Document, Type: smithy.ShapeTypeDocument, Ext: &ext[680]})
-var sOperationWithDefaultsOutput_defaultTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[681]})
-var sOperationWithDefaultsOutput_defaultBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultBlob", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &ext[682]})
-var sOperationWithDefaultsOutput_defaultByte = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultByte", ID: &pByte, Type: smithy.ShapeTypeByte, Ext: &ext[683]})
-var sOperationWithDefaultsOutput_defaultShort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultShort", ID: &pShort, Type: smithy.ShapeTypeShort, Ext: &ext[684]})
-var sOperationWithDefaultsOutput_defaultInteger = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultInteger", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[685]})
-var sOperationWithDefaultsOutput_defaultLong = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultLong", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[686]})
-var sOperationWithDefaultsOutput_defaultFloat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultFloat", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[687]})
-var sOperationWithDefaultsOutput_defaultDouble = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultDouble", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[688]})
-var sOperationWithDefaultsOutput_defaultMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultMap", ID: &i_TestStringMap, Members: &m_TestStringMap, Type: smithy.ShapeTypeMap, Ext: &ext[689]})
-var sOperationWithDefaultsOutput_defaultEnum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultEnum", ID: &iTestEnum, Members: &mTestEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[690]})
-var sOperationWithDefaultsOutput_defaultIntEnum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultIntEnum", ID: &i_TestIntEnum, Members: &m_TestIntEnum, Type: smithy.ShapeTypeIntEnum, Ext: &ext[691]})
-var sOperationWithDefaultsOutput_emptyString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emptyString", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[692]})
-var sOperationWithDefaultsOutput_falseBoolean = smithy.NewStaticSchema(smithy.StaticSchema{Member: "falseBoolean", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[693]})
-var sOperationWithDefaultsOutput_emptyBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emptyBlob", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &ext[694]})
-var sOperationWithDefaultsOutput_zeroByte = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zeroByte", ID: &pByte, Type: smithy.ShapeTypeByte, Ext: &ext[695]})
-var sOperationWithDefaultsOutput_zeroShort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zeroShort", ID: &pShort, Type: smithy.ShapeTypeShort, Ext: &ext[696]})
-var sOperationWithDefaultsOutput_zeroInteger = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zeroInteger", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[697]})
-var sOperationWithDefaultsOutput_zeroLong = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zeroLong", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[698]})
-var sOperationWithDefaultsOutput_zeroFloat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zeroFloat", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[699]})
-var sOperationWithDefaultsOutput_zeroDouble = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zeroDouble", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[700]})
-var sOperationWithNestedStructureInput_topLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topLevel", ID: &iTopLevel, Members: &mTopLevel, Type: smithy.ShapeTypeStructure, Ext: &ext[702]})
-var sOperationWithNestedStructureOutput_dialog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialog", ID: &iDialog, Members: &mDialog, Type: smithy.ShapeTypeStructure, Ext: &ext[704]})
-var sOperationWithNestedStructureOutput_dialogList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialogList", ID: &i_DialogList, Members: &m_DialogList, Type: smithy.ShapeTypeList, Ext: &ext[705]})
-var sOperationWithNestedStructureOutput_dialogMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialogMap", ID: &i_DialogMap, Members: &m_DialogMap, Type: smithy.ShapeTypeMap, Ext: &ext[706]})
-var sOutputStreamOutput_stream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stream", ID: &iEventStream, Members: &mEventStream, Traits: &t160, Type: smithy.ShapeTypeUnion, Ext: &ext[708]})
-var sOutputStreamWithInitialResponseOutput_initialResponseMember = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initialResponseMember", ID: &pString, Traits: &t162, Type: smithy.ShapeTypeString, Ext: &ext[710]})
-var sOutputStreamWithInitialResponseOutput_stream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stream", ID: &iEventStream, Members: &mEventStream, Traits: &t160, Type: smithy.ShapeTypeUnion, Ext: &ext[711]})
-var sPostPlayerActionInput_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iPlayerAction, Members: &mPlayerAction, Type: smithy.ShapeTypeUnion, Ext: &ext[713]})
-var sPostPlayerActionOutput_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iPlayerAction, Members: &mPlayerAction, Type: smithy.ShapeTypeUnion, Ext: &ext[715]})
-var sPostUnionWithJsonNameInput_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iUnionWithJsonName, Members: &mUnionWithJsonName, Type: smithy.ShapeTypeUnion, Ext: &ext[717]})
-var sPostUnionWithJsonNameOutput_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iUnionWithJsonName, Members: &mUnionWithJsonName, Type: smithy.ShapeTypeUnion, Ext: &ext[719]})
-var sPutWithContentEncodingInput_encoding = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encoding", ID: &pString, Traits: &t228, Type: smithy.ShapeTypeString, Ext: &ext[721]})
-var sPutWithContentEncodingInput_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[722]})
-var sQueryIdempotencyTokenAutoFillInput_token = smithy.NewStaticSchema(smithy.StaticSchema{Member: "token", ID: &pString, Traits: &t229, Type: smithy.ShapeTypeString, Ext: &ext[724]})
-var sQueryParamsAsStringListMapInput_qux = smithy.NewStaticSchema(smithy.StaticSchema{Member: "qux", ID: &pString, Traits: &t230, Type: smithy.ShapeTypeString, Ext: &ext[726]})
-var sQueryParamsAsStringListMapInput_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &i_StringListMap, Members: &m_StringListMap, Traits: &t154, Type: smithy.ShapeTypeMap, Ext: &ext[727]})
-var sQueryPrecedenceInput_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Traits: &t231, Type: smithy.ShapeTypeString, Ext: &ext[729]})
-var sQueryPrecedenceInput_baz = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baz", ID: &i_StringMap, Members: &m_StringMap, Traits: &t154, Type: smithy.ShapeTypeMap, Ext: &ext[730]})
-var sRecursiveShapesInputOutput_nested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nested", ID: &iRecursiveShapesInputOutputNested1, Members: &mRecursiveShapesInputOutputNested1, Type: smithy.ShapeTypeStructure, Ext: &ext[732]})
-var sResponseCodeRequiredOutput_responseCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responseCode", ID: &pInteger, Traits: &t177, Type: smithy.ShapeTypeInteger, Ext: &ext[735]})
-var sSimpleScalarPropertiesInputOutput_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Traits: &t167, Type: smithy.ShapeTypeString, Ext: &ext[737]})
-var sSimpleScalarPropertiesInputOutput_stringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[738]})
-var sSimpleScalarPropertiesInputOutput_trueBooleanValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trueBooleanValue", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[739]})
-var sSimpleScalarPropertiesInputOutput_falseBooleanValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "falseBooleanValue", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[740]})
-var sSimpleScalarPropertiesInputOutput_byteValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "byteValue", ID: &pByte, Type: smithy.ShapeTypeByte, Ext: &ext[741]})
-var sSimpleScalarPropertiesInputOutput_shortValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shortValue", ID: &pShort, Type: smithy.ShapeTypeShort, Ext: &ext[742]})
-var sSimpleScalarPropertiesInputOutput_integerValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerValue", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[743]})
-var sSimpleScalarPropertiesInputOutput_longValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "longValue", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[744]})
-var sSimpleScalarPropertiesInputOutput_floatValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "floatValue", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[745]})
-var sSimpleScalarPropertiesInputOutput_doubleValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "doubleValue", ID: &pDouble, Traits: &t232, Type: smithy.ShapeTypeDouble, Ext: &ext[746]})
-var sSparseJsonListsInputOutput_sparseStringList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sparseStringList", ID: &i_SparseStringList, Members: &m_SparseStringList, Type: smithy.ShapeTypeList, Ext: &ext[748]})
-var sSparseJsonListsInputOutput_sparseShortList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sparseShortList", ID: &i_SparseShortList, Members: &m_SparseShortList, Type: smithy.ShapeTypeList, Ext: &ext[749]})
-var sSparseJsonMapsInputOutput_sparseStructMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sparseStructMap", ID: &i_SparseStructMap, Members: &m_SparseStructMap, Type: smithy.ShapeTypeMap, Ext: &ext[751]})
-var sSparseJsonMapsInputOutput_sparseNumberMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sparseNumberMap", ID: &i_SparseNumberMap, Members: &m_SparseNumberMap, Type: smithy.ShapeTypeMap, Ext: &ext[752]})
-var sSparseJsonMapsInputOutput_sparseBooleanMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sparseBooleanMap", ID: &i_SparseBooleanMap, Members: &m_SparseBooleanMap, Type: smithy.ShapeTypeMap, Ext: &ext[753]})
-var sSparseJsonMapsInputOutput_sparseStringMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sparseStringMap", ID: &i_SparseStringMap, Members: &m_SparseStringMap, Type: smithy.ShapeTypeMap, Ext: &ext[754]})
-var sSparseJsonMapsInputOutput_sparseSetMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sparseSetMap", ID: &i_SparseSetMap, Members: &m_SparseSetMap, Type: smithy.ShapeTypeMap, Ext: &ext[755]})
-var sStreamingTraitsInputOutput_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Traits: &t167, Type: smithy.ShapeTypeString, Ext: &ext[757]})
-var sStreamingTraitsInputOutput_blob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blob", ID: &i_StreamingBlob, Traits: &t160, Type: smithy.ShapeTypeBlob, Ext: &ext[758]})
-var sStreamingTraitsRequireLengthInput_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Traits: &t167, Type: smithy.ShapeTypeString, Ext: &ext[760]})
-var sStreamingTraitsRequireLengthInput_blob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blob", ID: &i_FiniteStreamingBlob, Traits: &t160, Type: smithy.ShapeTypeBlob, Ext: &ext[761]})
-var sStreamingTraitsWithMediaTypeInputOutput_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Traits: &t167, Type: smithy.ShapeTypeString, Ext: &ext[763]})
-var sStreamingTraitsWithMediaTypeInputOutput_blob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blob", ID: &i_StreamingTextPlainBlob, Traits: &t233, Type: smithy.ShapeTypeBlob, Ext: &ext[764]})
-var sTestBodyStructureInputOutput_testId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "testId", ID: &pString, Traits: &t234, Type: smithy.ShapeTypeString, Ext: &ext[766]})
-var sTestBodyStructureInputOutput_testConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "testConfig", ID: &iTestConfig, Members: &mTestConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[767]})
-var sTestNoPayloadInputOutput_testId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "testId", ID: &pString, Traits: &t235, Type: smithy.ShapeTypeString, Ext: &ext[769]})
-var sTestPayloadBlobInputOutput_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &pString, Traits: &t236, Type: smithy.ShapeTypeString, Ext: &ext[771]})
-var sTestPayloadBlobInputOutput_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &pBlob, Traits: &t159, Type: smithy.ShapeTypeBlob, Ext: &ext[772]})
-var sTestPayloadStructureInputOutput_testId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "testId", ID: &pString, Traits: &t234, Type: smithy.ShapeTypeString, Ext: &ext[774]})
-var sTestPayloadStructureInputOutput_payloadConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payloadConfig", ID: &iPayloadConfig, Members: &mPayloadConfig, Traits: &t159, Type: smithy.ShapeTypeStructure, Ext: &ext[775]})
-var sTimestampFormatHeadersIO_memberEpochSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "memberEpochSeconds", ID: &pTimestamp, Traits: &t237, Type: smithy.ShapeTypeTimestamp, Ext: &ext[777]})
-var sTimestampFormatHeadersIO_memberHttpDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "memberHttpDate", ID: &pTimestamp, Traits: &t238, Type: smithy.ShapeTypeTimestamp, Ext: &ext[778]})
-var sTimestampFormatHeadersIO_memberDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "memberDateTime", ID: &pTimestamp, Traits: &t239, Type: smithy.ShapeTypeTimestamp, Ext: &ext[779]})
-var sTimestampFormatHeadersIO_defaultFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultFormat", ID: &pTimestamp, Traits: &t240, Type: smithy.ShapeTypeTimestamp, Ext: &ext[780]})
-var sTimestampFormatHeadersIO_targetEpochSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetEpochSeconds", ID: &i_EpochSeconds, Traits: &t241, Type: smithy.ShapeTypeTimestamp, Ext: &ext[781]})
-var sTimestampFormatHeadersIO_targetHttpDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetHttpDate", ID: &i_HttpDate, Traits: &t242, Type: smithy.ShapeTypeTimestamp, Ext: &ext[782]})
-var sTimestampFormatHeadersIO_targetDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetDateTime", ID: &i_DateTime, Traits: &t243, Type: smithy.ShapeTypeTimestamp, Ext: &ext[783]})
+var sBlobPayloadEvent_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &pBlob, Traits: &t113, Type: smithy.ShapeTypeBlob, Ext: &eBlobPayloadEvent_payload})
+var sClientOptionalDefaults_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eClientOptionalDefaults_member})
+var sComplexError_Header = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Header", ID: &pString, Traits: &t115, Type: smithy.ShapeTypeString, Ext: &eComplexError_Header})
+var sComplexError_TopLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopLevel", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComplexError_TopLevel})
+var sComplexError_Nested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Nested", ID: &iComplexNestedErrorData, Members: &mComplexNestedErrorData, Type: smithy.ShapeTypeStructure, Ext: &eComplexError_Nested})
+var sComplexNestedErrorData_Foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Foo", ID: &pString, Traits: &t116, Type: smithy.ShapeTypeString, Ext: &eComplexNestedErrorData_Foo})
+var sDefaults_defaultString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultString", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDefaults_defaultString})
+var sDefaults_defaultBoolean = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultBoolean", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eDefaults_defaultBoolean})
+var sDefaults_defaultList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultList", ID: &i_TestStringList, Members: &m_TestStringList, Type: smithy.ShapeTypeList, Ext: &eDefaults_defaultList})
+var sDefaults_defaultDocumentMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultDocumentMap", ID: &i_Document, Type: smithy.ShapeTypeDocument, Ext: &eDefaults_defaultDocumentMap})
+var sDefaults_defaultDocumentString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultDocumentString", ID: &i_Document, Type: smithy.ShapeTypeDocument, Ext: &eDefaults_defaultDocumentString})
+var sDefaults_defaultDocumentBoolean = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultDocumentBoolean", ID: &i_Document, Type: smithy.ShapeTypeDocument, Ext: &eDefaults_defaultDocumentBoolean})
+var sDefaults_defaultDocumentList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultDocumentList", ID: &i_Document, Type: smithy.ShapeTypeDocument, Ext: &eDefaults_defaultDocumentList})
+var sDefaults_defaultNullDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultNullDocument", ID: &i_Document, Type: smithy.ShapeTypeDocument, Ext: &eDefaults_defaultNullDocument})
+var sDefaults_defaultTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDefaults_defaultTimestamp})
+var sDefaults_defaultBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultBlob", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &eDefaults_defaultBlob})
+var sDefaults_defaultByte = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultByte", ID: &pByte, Type: smithy.ShapeTypeByte, Ext: &eDefaults_defaultByte})
+var sDefaults_defaultShort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultShort", ID: &pShort, Type: smithy.ShapeTypeShort, Ext: &eDefaults_defaultShort})
+var sDefaults_defaultInteger = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultInteger", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eDefaults_defaultInteger})
+var sDefaults_defaultLong = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultLong", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eDefaults_defaultLong})
+var sDefaults_defaultFloat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultFloat", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eDefaults_defaultFloat})
+var sDefaults_defaultDouble = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultDouble", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eDefaults_defaultDouble})
+var sDefaults_defaultMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultMap", ID: &i_TestStringMap, Members: &m_TestStringMap, Type: smithy.ShapeTypeMap, Ext: &eDefaults_defaultMap})
+var sDefaults_defaultEnum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultEnum", ID: &iTestEnum, Members: &mTestEnum, Type: smithy.ShapeTypeEnum, Ext: &eDefaults_defaultEnum})
+var sDefaults_defaultIntEnum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultIntEnum", ID: &i_TestIntEnum, Members: &m_TestIntEnum, Type: smithy.ShapeTypeIntEnum, Ext: &eDefaults_defaultIntEnum})
+var sDefaults_emptyString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emptyString", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDefaults_emptyString})
+var sDefaults_falseBoolean = smithy.NewStaticSchema(smithy.StaticSchema{Member: "falseBoolean", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eDefaults_falseBoolean})
+var sDefaults_emptyBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emptyBlob", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &eDefaults_emptyBlob})
+var sDefaults_zeroByte = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zeroByte", ID: &pByte, Type: smithy.ShapeTypeByte, Ext: &eDefaults_zeroByte})
+var sDefaults_zeroShort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zeroShort", ID: &pShort, Type: smithy.ShapeTypeShort, Ext: &eDefaults_zeroShort})
+var sDefaults_zeroInteger = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zeroInteger", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eDefaults_zeroInteger})
+var sDefaults_zeroLong = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zeroLong", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eDefaults_zeroLong})
+var sDefaults_zeroFloat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zeroFloat", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eDefaults_zeroFloat})
+var sDefaults_zeroDouble = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zeroDouble", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eDefaults_zeroDouble})
+var s_DenseBooleanMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_DenseBooleanMap_key})
+var s_DenseBooleanMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &e_DenseBooleanMap_value})
+var s_DenseNumberMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_DenseNumberMap_key})
+var s_DenseNumberMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &e_DenseNumberMap_value})
+var s_DenseSetMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_DenseSetMap_key})
+var s_DenseSetMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StringSet, Members: &m_StringSet, Type: smithy.ShapeTypeList, Ext: &e_DenseSetMap_value})
+var s_DenseStringMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_DenseStringMap_key})
+var s_DenseStringMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_DenseStringMap_value})
+var s_DenseStructMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_DenseStructMap_key})
+var s_DenseStructMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iGreetingStruct, Members: &mGreetingStruct, Type: smithy.ShapeTypeStructure, Ext: &e_DenseStructMap_value})
+var sDialog_language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "language", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDialog_language})
+var sDialog_greeting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "greeting", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDialog_greeting})
+var sDialog_farewell = smithy.NewStaticSchema(smithy.StaticSchema{Member: "farewell", ID: &iFarewell, Members: &mFarewell, Type: smithy.ShapeTypeStructure, Ext: &eDialog_farewell})
+var s_DialogList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDialog, Members: &mDialog, Type: smithy.ShapeTypeStructure, Ext: &e_DialogList_member})
+var s_DialogMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_DialogMap_key})
+var s_DialogMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iDialog, Members: &mDialog, Type: smithy.ShapeTypeStructure, Ext: &e_DialogMap_value})
+var s_DocumentValuedMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_DocumentValuedMap_key})
+var s_DocumentValuedMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_Document, Type: smithy.ShapeTypeDocument, Ext: &e_DocumentValuedMap_value})
+var sErrorEvent_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eErrorEvent_message})
+var sEventStream_headers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headers", ID: &iHeadersEvent, Members: &mHeadersEvent, Type: smithy.ShapeTypeStructure, Ext: &eEventStream_headers})
+var sEventStream_blobPayload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobPayload", ID: &iBlobPayloadEvent, Members: &mBlobPayloadEvent, Type: smithy.ShapeTypeStructure, Ext: &eEventStream_blobPayload})
+var sEventStream_stringPayload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringPayload", ID: &iStringPayloadEvent, Members: &mStringPayloadEvent, Type: smithy.ShapeTypeStructure, Ext: &eEventStream_stringPayload})
+var sEventStream_structurePayload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "structurePayload", ID: &iStructurePayloadEvent, Members: &mStructurePayloadEvent, Type: smithy.ShapeTypeStructure, Ext: &eEventStream_structurePayload})
+var sEventStream_unionPayload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unionPayload", ID: &iUnionPayloadEvent, Members: &mUnionPayloadEvent, Type: smithy.ShapeTypeStructure, Ext: &eEventStream_unionPayload})
+var sEventStream_headersAndExplicitPayload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headersAndExplicitPayload", ID: &iHeadersAndExplicitPayloadEvent, Members: &mHeadersAndExplicitPayloadEvent, Type: smithy.ShapeTypeStructure, Ext: &eEventStream_headersAndExplicitPayload})
+var sEventStream_headersAndImplicitPayload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headersAndImplicitPayload", ID: &iHeadersAndImplicitPayloadEvent, Members: &mHeadersAndImplicitPayloadEvent, Type: smithy.ShapeTypeStructure, Ext: &eEventStream_headersAndImplicitPayload})
+var sEventStream_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iErrorEvent, Members: &mErrorEvent, Traits: &t117, Type: smithy.ShapeTypeStructure, Ext: &eEventStream_error})
+var sFarewell_phrase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phrase", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFarewell_phrase})
+var sHeadersAndExplicitPayloadEvent_header = smithy.NewStaticSchema(smithy.StaticSchema{Member: "header", ID: &pString, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eHeadersAndExplicitPayloadEvent_header})
+var sHeadersAndExplicitPayloadEvent_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &iPayloadStructure, Members: &mPayloadStructure, Traits: &t113, Type: smithy.ShapeTypeStructure, Ext: &eHeadersAndExplicitPayloadEvent_payload})
+var sHeadersAndImplicitPayloadEvent_header = smithy.NewStaticSchema(smithy.StaticSchema{Member: "header", ID: &pString, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eHeadersAndImplicitPayloadEvent_header})
+var sHeadersAndImplicitPayloadEvent_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eHeadersAndImplicitPayloadEvent_payload})
+var sHeadersEvent_booleanHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "booleanHeader", ID: &pBoolean, Traits: &t120, Type: smithy.ShapeTypeBoolean, Ext: &eHeadersEvent_booleanHeader})
+var sHeadersEvent_byteHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "byteHeader", ID: &pByte, Traits: &t120, Type: smithy.ShapeTypeByte, Ext: &eHeadersEvent_byteHeader})
+var sHeadersEvent_shortHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shortHeader", ID: &pShort, Traits: &t120, Type: smithy.ShapeTypeShort, Ext: &eHeadersEvent_shortHeader})
+var sHeadersEvent_intHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intHeader", ID: &pInteger, Traits: &t120, Type: smithy.ShapeTypeInteger, Ext: &eHeadersEvent_intHeader})
+var sHeadersEvent_longHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "longHeader", ID: &pLong, Traits: &t120, Type: smithy.ShapeTypeLong, Ext: &eHeadersEvent_longHeader})
+var sHeadersEvent_blobHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobHeader", ID: &pBlob, Traits: &t120, Type: smithy.ShapeTypeBlob, Ext: &eHeadersEvent_blobHeader})
+var sHeadersEvent_stringHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringHeader", ID: &pString, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eHeadersEvent_stringHeader})
+var sHeadersEvent_timestampHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestampHeader", ID: &i_DateTime, Traits: &t121, Type: smithy.ShapeTypeTimestamp, Ext: &eHeadersEvent_timestampHeader})
+var sInvalidGreeting_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInvalidGreeting_Message})
+var sMyUnion_stringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMyUnion_stringValue})
+var sMyUnion_booleanValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "booleanValue", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eMyUnion_booleanValue})
+var sMyUnion_numberValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numberValue", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eMyUnion_numberValue})
+var sMyUnion_blobValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobValue", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &eMyUnion_blobValue})
+var sMyUnion_timestampValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestampValue", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMyUnion_timestampValue})
+var sMyUnion_enumValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enumValue", ID: &iFooEnum, Members: &mFooEnum, Type: smithy.ShapeTypeEnum, Ext: &eMyUnion_enumValue})
+var sMyUnion_listValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listValue", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eMyUnion_listValue})
+var sMyUnion_mapValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mapValue", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap, Ext: &eMyUnion_mapValue})
+var sMyUnion_structureValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "structureValue", ID: &iGreetingStruct, Members: &mGreetingStruct, Type: smithy.ShapeTypeStructure, Ext: &eMyUnion_structureValue})
+var sMyUnion_renamedStructureValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "renamedStructureValue", ID: &iRenamedGreeting, Members: &mRenamedGreeting, Type: smithy.ShapeTypeStructure, Ext: &eMyUnion_renamedStructureValue})
+var sMyUnion_unionValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unionValue", ID: &iNestedUnion, Members: &mNestedUnion, Type: smithy.ShapeTypeUnion, Ext: &eMyUnion_unionValue})
+var sNestedPayload_greeting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "greeting", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eNestedPayload_greeting})
+var sNestedPayload_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eNestedPayload_name})
+var sNestedUnion_stringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eNestedUnion_stringValue})
+var sPayloadConfig_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ePayloadConfig_data})
+var sPayloadStructure_structureMember = smithy.NewStaticSchema(smithy.StaticSchema{Member: "structureMember", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePayloadStructure_structureMember})
+var sPayloadUnion_unionMember = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unionMember", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePayloadUnion_unionMember})
+var sPlayerAction_quit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quit", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlayerAction_quit})
+var s_QueryMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_QueryMap_key})
+var s_QueryMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_QueryMap_value})
+var sRecursiveShapesInputOutputNested1_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRecursiveShapesInputOutputNested1_foo})
+var sRecursiveShapesInputOutputNested1_nested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nested", ID: &iRecursiveShapesInputOutputNested2, Members: &mRecursiveShapesInputOutputNested2, Type: smithy.ShapeTypeStructure, Ext: &eRecursiveShapesInputOutputNested1_nested})
+var sRecursiveShapesInputOutputNested2_bar = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bar", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRecursiveShapesInputOutputNested2_bar})
+var sRecursiveShapesInputOutputNested2_recursiveMember = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recursiveMember", ID: &iRecursiveShapesInputOutputNested1, Type: smithy.ShapeTypeStructure, Ext: &eRecursiveShapesInputOutputNested2_recursiveMember})
+var sServiceUnavailableError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailableError_message})
+var s_SimpleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_SimpleList_member})
+var s_SimpleMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_SimpleMap_key})
+var s_SimpleMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_SimpleMap_value})
+var sSimpleUnion_int = smithy.NewStaticSchema(smithy.StaticSchema{Member: "int", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSimpleUnion_int})
+var sSimpleUnion_string = smithy.NewStaticSchema(smithy.StaticSchema{Member: "string", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSimpleUnion_string})
+var sSingletonEvent_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSingletonEvent_value})
+var sSingletonEventStream_singleton = smithy.NewStaticSchema(smithy.StaticSchema{Member: "singleton", ID: &iSingletonEvent, Members: &mSingletonEvent, Type: smithy.ShapeTypeStructure, Ext: &eSingletonEventStream_singleton})
+var s_SparseBooleanMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_SparseBooleanMap_key})
+var s_SparseBooleanMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &e_SparseBooleanMap_value})
+var s_SparseNumberMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_SparseNumberMap_key})
+var s_SparseNumberMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &e_SparseNumberMap_value})
+var s_SparseSetMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_SparseSetMap_key})
+var s_SparseSetMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StringSet, Members: &m_StringSet, Type: smithy.ShapeTypeList, Ext: &e_SparseSetMap_value})
+var s_SparseStructMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_SparseStructMap_key})
+var s_SparseStructMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iGreetingStruct, Members: &mGreetingStruct, Type: smithy.ShapeTypeStructure, Ext: &e_SparseStructMap_value})
+var sStringEnum_V = smithy.NewStaticSchema(smithy.StaticSchema{Member: "V", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStringEnum_V})
+var sStringPayloadEvent_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &pString, Traits: &t113, Type: smithy.ShapeTypeString, Ext: &eStringPayloadEvent_payload})
+var s_StructureList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStructureListMember, Members: &mStructureListMember, Type: smithy.ShapeTypeStructure, Ext: &e_StructureList_member})
+var sStructureListMember_a = smithy.NewStaticSchema(smithy.StaticSchema{Member: "a", ID: &pString, Traits: &t125, Type: smithy.ShapeTypeString, Ext: &eStructureListMember_a})
+var sStructureListMember_b = smithy.NewStaticSchema(smithy.StaticSchema{Member: "b", ID: &pString, Traits: &t126, Type: smithy.ShapeTypeString, Ext: &eStructureListMember_b})
+var sStructurePayloadEvent_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &iPayloadStructure, Members: &mPayloadStructure, Traits: &t113, Type: smithy.ShapeTypeStructure, Ext: &eStructurePayloadEvent_payload})
+var sTestConfig_timeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeout", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eTestConfig_timeout})
+var sTestEnum_FOO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FOO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTestEnum_FOO})
+var sTestEnum_BAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTestEnum_BAR})
+var sTestEnum_BAZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BAZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTestEnum_BAZ})
+var s_TestIntEnum_ONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &e_TestIntEnum_ONE})
+var s_TestIntEnum_TWO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TWO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &e_TestIntEnum_TWO})
+var s_TestStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_TestStringList_member})
+var s_TestStringMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_TestStringMap_key})
+var s_TestStringMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_TestStringMap_value})
+var sTopLevel_dialog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialog", ID: &iDialog, Members: &mDialog, Type: smithy.ShapeTypeStructure, Ext: &eTopLevel_dialog})
+var sTopLevel_dialogList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialogList", ID: &i_DialogList, Members: &m_DialogList, Type: smithy.ShapeTypeList, Ext: &eTopLevel_dialogList})
+var sTopLevel_dialogMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialogMap", ID: &i_DialogMap, Members: &m_DialogMap, Type: smithy.ShapeTypeMap, Ext: &eTopLevel_dialogMap})
+var sUnionPayload_greeting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "greeting", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUnionPayload_greeting})
+var sUnionPayloadEvent_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &iPayloadUnion, Members: &mPayloadUnion, Traits: &t113, Type: smithy.ShapeTypeUnion, Ext: &eUnionPayloadEvent_payload})
+var sUnionWithJsonName_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Traits: &t127, Type: smithy.ShapeTypeString, Ext: &eUnionWithJsonName_foo})
+var sUnionWithJsonName_bar = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bar", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUnionWithJsonName_bar})
+var sUnionWithJsonName_baz = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baz", ID: &pString, Traits: &t128, Type: smithy.ShapeTypeString, Ext: &eUnionWithJsonName_baz})
+var sRenamedGreeting_salutation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "salutation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRenamedGreeting_salutation})
+var s_BooleanList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &e_BooleanList_member})
+var s_DoubleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &e_DoubleList_member})
+var sFooEnum_FOO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FOO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFooEnum_FOO})
+var sFooEnum_BAZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BAZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFooEnum_BAZ})
+var sFooEnum_BAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFooEnum_BAR})
+var sFooEnum_ONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFooEnum_ONE})
+var sFooEnum_ZERO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZERO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFooEnum_ZERO})
+var s_FooEnumList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFooEnum, Members: &mFooEnum, Type: smithy.ShapeTypeEnum, Ext: &e_FooEnumList_member})
+var s_FooEnumMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_FooEnumMap_key})
+var s_FooEnumMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iFooEnum, Members: &mFooEnum, Type: smithy.ShapeTypeEnum, Ext: &e_FooEnumMap_value})
+var s_FooEnumSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFooEnum, Members: &mFooEnum, Type: smithy.ShapeTypeEnum, Ext: &e_FooEnumSet_member})
+var sGreetingStruct_hi = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hi", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGreetingStruct_hi})
+var s_IntegerEnum_A = smithy.NewStaticSchema(smithy.StaticSchema{Member: "A", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &e_IntegerEnum_A})
+var s_IntegerEnum_B = smithy.NewStaticSchema(smithy.StaticSchema{Member: "B", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &e_IntegerEnum_B})
+var s_IntegerEnum_C = smithy.NewStaticSchema(smithy.StaticSchema{Member: "C", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &e_IntegerEnum_C})
+var s_IntegerEnumList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_IntegerEnum, Members: &m_IntegerEnum, Type: smithy.ShapeTypeIntEnum, Ext: &e_IntegerEnumList_member})
+var s_IntegerEnumMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_IntegerEnumMap_key})
+var s_IntegerEnumMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_IntegerEnum, Members: &m_IntegerEnum, Type: smithy.ShapeTypeIntEnum, Ext: &e_IntegerEnumMap_value})
+var s_IntegerEnumSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_IntegerEnum, Members: &m_IntegerEnum, Type: smithy.ShapeTypeIntEnum, Ext: &e_IntegerEnumSet_member})
+var s_IntegerList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &e_IntegerList_member})
+var s_IntegerSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &e_IntegerSet_member})
+var s_NestedStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &e_NestedStringList_member})
+var s_SparseShortList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pShort, Type: smithy.ShapeTypeShort, Ext: &e_SparseShortList_member})
+var s_SparseStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_SparseStringList_member})
+var s_SparseStringMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_SparseStringMap_key})
+var s_SparseStringMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_SparseStringMap_value})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_StringList_member})
+var s_StringListMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_StringListMap_key})
+var s_StringListMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &e_StringListMap_value})
+var s_StringMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_StringMap_key})
+var s_StringMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_StringMap_value})
+var s_StringSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_StringSet_member})
+var s_TimestampList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_TimestampList_member})
+var sAllQueryStringTypesInput_queryString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryString", ID: &pString, Traits: &t134, Type: smithy.ShapeTypeString, Ext: &eAllQueryStringTypesInput_queryString})
+var sAllQueryStringTypesInput_queryStringList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryStringList", ID: &i_StringList, Members: &m_StringList, Traits: &t135, Type: smithy.ShapeTypeList, Ext: &eAllQueryStringTypesInput_queryStringList})
+var sAllQueryStringTypesInput_queryStringSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryStringSet", ID: &i_StringSet, Members: &m_StringSet, Traits: &t136, Type: smithy.ShapeTypeList, Ext: &eAllQueryStringTypesInput_queryStringSet})
+var sAllQueryStringTypesInput_queryByte = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryByte", ID: &pByte, Traits: &t137, Type: smithy.ShapeTypeByte, Ext: &eAllQueryStringTypesInput_queryByte})
+var sAllQueryStringTypesInput_queryShort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryShort", ID: &pShort, Traits: &t138, Type: smithy.ShapeTypeShort, Ext: &eAllQueryStringTypesInput_queryShort})
+var sAllQueryStringTypesInput_queryInteger = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryInteger", ID: &pInteger, Traits: &t139, Type: smithy.ShapeTypeInteger, Ext: &eAllQueryStringTypesInput_queryInteger})
+var sAllQueryStringTypesInput_queryIntegerList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryIntegerList", ID: &i_IntegerList, Members: &m_IntegerList, Traits: &t140, Type: smithy.ShapeTypeList, Ext: &eAllQueryStringTypesInput_queryIntegerList})
+var sAllQueryStringTypesInput_queryIntegerSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryIntegerSet", ID: &i_IntegerSet, Members: &m_IntegerSet, Traits: &t141, Type: smithy.ShapeTypeList, Ext: &eAllQueryStringTypesInput_queryIntegerSet})
+var sAllQueryStringTypesInput_queryLong = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryLong", ID: &pLong, Traits: &t142, Type: smithy.ShapeTypeLong, Ext: &eAllQueryStringTypesInput_queryLong})
+var sAllQueryStringTypesInput_queryFloat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryFloat", ID: &pFloat, Traits: &t143, Type: smithy.ShapeTypeFloat, Ext: &eAllQueryStringTypesInput_queryFloat})
+var sAllQueryStringTypesInput_queryDouble = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryDouble", ID: &pDouble, Traits: &t144, Type: smithy.ShapeTypeDouble, Ext: &eAllQueryStringTypesInput_queryDouble})
+var sAllQueryStringTypesInput_queryDoubleList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryDoubleList", ID: &i_DoubleList, Members: &m_DoubleList, Traits: &t145, Type: smithy.ShapeTypeList, Ext: &eAllQueryStringTypesInput_queryDoubleList})
+var sAllQueryStringTypesInput_queryBoolean = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryBoolean", ID: &pBoolean, Traits: &t146, Type: smithy.ShapeTypeBoolean, Ext: &eAllQueryStringTypesInput_queryBoolean})
+var sAllQueryStringTypesInput_queryBooleanList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryBooleanList", ID: &i_BooleanList, Members: &m_BooleanList, Traits: &t147, Type: smithy.ShapeTypeList, Ext: &eAllQueryStringTypesInput_queryBooleanList})
+var sAllQueryStringTypesInput_queryTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryTimestamp", ID: &pTimestamp, Traits: &t148, Type: smithy.ShapeTypeTimestamp, Ext: &eAllQueryStringTypesInput_queryTimestamp})
+var sAllQueryStringTypesInput_queryTimestampList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryTimestampList", ID: &i_TimestampList, Members: &m_TimestampList, Traits: &t149, Type: smithy.ShapeTypeList, Ext: &eAllQueryStringTypesInput_queryTimestampList})
+var sAllQueryStringTypesInput_queryEnum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryEnum", ID: &iFooEnum, Members: &mFooEnum, Traits: &t150, Type: smithy.ShapeTypeEnum, Ext: &eAllQueryStringTypesInput_queryEnum})
+var sAllQueryStringTypesInput_queryEnumList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryEnumList", ID: &i_FooEnumList, Members: &m_FooEnumList, Traits: &t151, Type: smithy.ShapeTypeList, Ext: &eAllQueryStringTypesInput_queryEnumList})
+var sAllQueryStringTypesInput_queryIntegerEnum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryIntegerEnum", ID: &i_IntegerEnum, Members: &m_IntegerEnum, Traits: &t152, Type: smithy.ShapeTypeIntEnum, Ext: &eAllQueryStringTypesInput_queryIntegerEnum})
+var sAllQueryStringTypesInput_queryIntegerEnumList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryIntegerEnumList", ID: &i_IntegerEnumList, Members: &m_IntegerEnumList, Traits: &t153, Type: smithy.ShapeTypeList, Ext: &eAllQueryStringTypesInput_queryIntegerEnumList})
+var sAllQueryStringTypesInput_queryParamsMapOfStringList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryParamsMapOfStringList", ID: &i_StringListMap, Members: &m_StringListMap, Traits: &t154, Type: smithy.ShapeTypeMap, Ext: &eAllQueryStringTypesInput_queryParamsMapOfStringList})
+var sConstantAndVariableQueryStringInput_baz = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baz", ID: &pString, Traits: &t155, Type: smithy.ShapeTypeString, Ext: &eConstantAndVariableQueryStringInput_baz})
+var sConstantAndVariableQueryStringInput_maybeSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maybeSet", ID: &pString, Traits: &t156, Type: smithy.ShapeTypeString, Ext: &eConstantAndVariableQueryStringInput_maybeSet})
+var sConstantQueryStringInput_hello = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hello", ID: &pString, Traits: &t157, Type: smithy.ShapeTypeString, Ext: &eConstantQueryStringInput_hello})
+var sContentTypeParametersInput_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eContentTypeParametersInput_value})
+var sDatetimeOffsetsOutput_datetime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datetime", ID: &i_DateTime, Traits: &t158, Type: smithy.ShapeTypeTimestamp, Ext: &eDatetimeOffsetsOutput_datetime})
+var sDocumentTypeAsMapValueInputOutput_docValuedMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "docValuedMap", ID: &i_DocumentValuedMap, Members: &m_DocumentValuedMap, Type: smithy.ShapeTypeMap, Ext: &eDocumentTypeAsMapValueInputOutput_docValuedMap})
+var sDocumentTypeAsPayloadInputOutput_documentValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "documentValue", ID: &i_Document, Traits: &t159, Type: smithy.ShapeTypeDocument, Ext: &eDocumentTypeAsPayloadInputOutput_documentValue})
+var sDocumentTypeInputOutput_stringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDocumentTypeInputOutput_stringValue})
+var sDocumentTypeInputOutput_documentValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "documentValue", ID: &i_Document, Type: smithy.ShapeTypeDocument, Ext: &eDocumentTypeInputOutput_documentValue})
+var sDuplexStreamInput_stream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stream", ID: &iEventStream, Members: &mEventStream, Traits: &t160, Type: smithy.ShapeTypeUnion, Ext: &eDuplexStreamInput_stream})
+var sDuplexStreamOutput_stream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stream", ID: &iEventStream, Members: &mEventStream, Traits: &t160, Type: smithy.ShapeTypeUnion, Ext: &eDuplexStreamOutput_stream})
+var sDuplexStreamWithDistinctStreamsInput_stream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stream", ID: &iEventStream, Members: &mEventStream, Traits: &t160, Type: smithy.ShapeTypeUnion, Ext: &eDuplexStreamWithDistinctStreamsInput_stream})
+var sDuplexStreamWithDistinctStreamsOutput_stream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stream", ID: &iSingletonEventStream, Members: &mSingletonEventStream, Traits: &t159, Type: smithy.ShapeTypeUnion, Ext: &eDuplexStreamWithDistinctStreamsOutput_stream})
+var sDuplexStreamWithInitialMessagesInput_initialRequestMember = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initialRequestMember", ID: &pString, Traits: &t161, Type: smithy.ShapeTypeString, Ext: &eDuplexStreamWithInitialMessagesInput_initialRequestMember})
+var sDuplexStreamWithInitialMessagesInput_stream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stream", ID: &iEventStream, Members: &mEventStream, Traits: &t160, Type: smithy.ShapeTypeUnion, Ext: &eDuplexStreamWithInitialMessagesInput_stream})
+var sDuplexStreamWithInitialMessagesOutput_initialResponseMember = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initialResponseMember", ID: &pString, Traits: &t162, Type: smithy.ShapeTypeString, Ext: &eDuplexStreamWithInitialMessagesOutput_initialResponseMember})
+var sDuplexStreamWithInitialMessagesOutput_stream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stream", ID: &iEventStream, Members: &mEventStream, Traits: &t160, Type: smithy.ShapeTypeUnion, Ext: &eDuplexStreamWithInitialMessagesOutput_stream})
+var sHostLabelInput_label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "label", ID: &pString, Traits: &t163, Type: smithy.ShapeTypeString, Ext: &eHostLabelInput_label})
+var sFractionalSecondsOutput_datetime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datetime", ID: &i_DateTime, Traits: &t158, Type: smithy.ShapeTypeTimestamp, Ext: &eFractionalSecondsOutput_datetime})
+var sGreetingWithErrorsOutput_greeting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "greeting", ID: &pString, Traits: &t164, Type: smithy.ShapeTypeString, Ext: &eGreetingWithErrorsOutput_greeting})
+var sHttpChecksumRequiredInputOutput_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eHttpChecksumRequiredInputOutput_foo})
+var sHttpEmptyPrefixHeadersInput_prefixHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixHeaders", ID: &i_StringMap, Members: &m_StringMap, Traits: &t165, Type: smithy.ShapeTypeMap, Ext: &eHttpEmptyPrefixHeadersInput_prefixHeaders})
+var sHttpEmptyPrefixHeadersInput_specificHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "specificHeader", ID: &pString, Traits: &t166, Type: smithy.ShapeTypeString, Ext: &eHttpEmptyPrefixHeadersInput_specificHeader})
+var sHttpEmptyPrefixHeadersOutput_prefixHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixHeaders", ID: &i_StringMap, Members: &m_StringMap, Traits: &t165, Type: smithy.ShapeTypeMap, Ext: &eHttpEmptyPrefixHeadersOutput_prefixHeaders})
+var sHttpEmptyPrefixHeadersOutput_specificHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "specificHeader", ID: &pString, Traits: &t166, Type: smithy.ShapeTypeString, Ext: &eHttpEmptyPrefixHeadersOutput_specificHeader})
+var sEnumPayloadInput_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &iStringEnum, Members: &mStringEnum, Traits: &t159, Type: smithy.ShapeTypeEnum, Ext: &eEnumPayloadInput_payload})
+var sHttpPayloadTraitsInputOutput_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Traits: &t167, Type: smithy.ShapeTypeString, Ext: &eHttpPayloadTraitsInputOutput_foo})
+var sHttpPayloadTraitsInputOutput_blob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blob", ID: &pBlob, Traits: &t159, Type: smithy.ShapeTypeBlob, Ext: &eHttpPayloadTraitsInputOutput_blob})
+var sHttpPayloadTraitsWithMediaTypeInputOutput_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Traits: &t167, Type: smithy.ShapeTypeString, Ext: &eHttpPayloadTraitsWithMediaTypeInputOutput_foo})
+var sHttpPayloadTraitsWithMediaTypeInputOutput_blob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blob", ID: &i_TextPlainBlob, Traits: &t168, Type: smithy.ShapeTypeBlob, Ext: &eHttpPayloadTraitsWithMediaTypeInputOutput_blob})
+var sHttpPayloadWithStructureInputOutput_nested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nested", ID: &iNestedPayload, Members: &mNestedPayload, Traits: &t159, Type: smithy.ShapeTypeStructure, Ext: &eHttpPayloadWithStructureInputOutput_nested})
+var sHttpPayloadWithUnionInputOutput_nested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nested", ID: &iUnionPayload, Members: &mUnionPayload, Traits: &t159, Type: smithy.ShapeTypeUnion, Ext: &eHttpPayloadWithUnionInputOutput_nested})
+var sHttpPrefixHeadersInput_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Traits: &t169, Type: smithy.ShapeTypeString, Ext: &eHttpPrefixHeadersInput_foo})
+var sHttpPrefixHeadersInput_fooMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fooMap", ID: &i_StringMap, Members: &m_StringMap, Traits: &t170, Type: smithy.ShapeTypeMap, Ext: &eHttpPrefixHeadersInput_fooMap})
+var sHttpPrefixHeadersInResponseOutput_prefixHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixHeaders", ID: &i_StringMap, Members: &m_StringMap, Traits: &t165, Type: smithy.ShapeTypeMap, Ext: &eHttpPrefixHeadersInResponseOutput_prefixHeaders})
+var sHttpPrefixHeadersOutput_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Traits: &t169, Type: smithy.ShapeTypeString, Ext: &eHttpPrefixHeadersOutput_foo})
+var sHttpPrefixHeadersOutput_fooMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fooMap", ID: &i_StringMap, Members: &m_StringMap, Traits: &t170, Type: smithy.ShapeTypeMap, Ext: &eHttpPrefixHeadersOutput_fooMap})
+var sHttpQueryParamsOnlyInput_queryMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryMap", ID: &i_QueryMap, Members: &m_QueryMap, Traits: &t154, Type: smithy.ShapeTypeMap, Ext: &eHttpQueryParamsOnlyInput_queryMap})
+var sHttpRequestWithFloatLabelsInput_float = smithy.NewStaticSchema(smithy.StaticSchema{Member: "float", ID: &pFloat, Traits: &t157, Type: smithy.ShapeTypeFloat, Ext: &eHttpRequestWithFloatLabelsInput_float})
+var sHttpRequestWithFloatLabelsInput_double = smithy.NewStaticSchema(smithy.StaticSchema{Member: "double", ID: &pDouble, Traits: &t157, Type: smithy.ShapeTypeDouble, Ext: &eHttpRequestWithFloatLabelsInput_double})
+var sHttpRequestWithGreedyLabelInPathInput_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Traits: &t157, Type: smithy.ShapeTypeString, Ext: &eHttpRequestWithGreedyLabelInPathInput_foo})
+var sHttpRequestWithGreedyLabelInPathInput_baz = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baz", ID: &pString, Traits: &t157, Type: smithy.ShapeTypeString, Ext: &eHttpRequestWithGreedyLabelInPathInput_baz})
+var sHttpRequestWithLabelsAndTimestampFormatInput_memberEpochSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "memberEpochSeconds", ID: &pTimestamp, Traits: &t171, Type: smithy.ShapeTypeTimestamp, Ext: &eHttpRequestWithLabelsAndTimestampFormatInput_memberEpochSeconds})
+var sHttpRequestWithLabelsAndTimestampFormatInput_memberHttpDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "memberHttpDate", ID: &pTimestamp, Traits: &t172, Type: smithy.ShapeTypeTimestamp, Ext: &eHttpRequestWithLabelsAndTimestampFormatInput_memberHttpDate})
+var sHttpRequestWithLabelsAndTimestampFormatInput_memberDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "memberDateTime", ID: &pTimestamp, Traits: &t173, Type: smithy.ShapeTypeTimestamp, Ext: &eHttpRequestWithLabelsAndTimestampFormatInput_memberDateTime})
+var sHttpRequestWithLabelsAndTimestampFormatInput_defaultFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultFormat", ID: &pTimestamp, Traits: &t157, Type: smithy.ShapeTypeTimestamp, Ext: &eHttpRequestWithLabelsAndTimestampFormatInput_defaultFormat})
+var sHttpRequestWithLabelsAndTimestampFormatInput_targetEpochSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetEpochSeconds", ID: &i_EpochSeconds, Traits: &t174, Type: smithy.ShapeTypeTimestamp, Ext: &eHttpRequestWithLabelsAndTimestampFormatInput_targetEpochSeconds})
+var sHttpRequestWithLabelsAndTimestampFormatInput_targetHttpDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetHttpDate", ID: &i_HttpDate, Traits: &t175, Type: smithy.ShapeTypeTimestamp, Ext: &eHttpRequestWithLabelsAndTimestampFormatInput_targetHttpDate})
+var sHttpRequestWithLabelsAndTimestampFormatInput_targetDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetDateTime", ID: &i_DateTime, Traits: &t176, Type: smithy.ShapeTypeTimestamp, Ext: &eHttpRequestWithLabelsAndTimestampFormatInput_targetDateTime})
+var sHttpRequestWithLabelsInput_string = smithy.NewStaticSchema(smithy.StaticSchema{Member: "string", ID: &pString, Traits: &t157, Type: smithy.ShapeTypeString, Ext: &eHttpRequestWithLabelsInput_string})
+var sHttpRequestWithLabelsInput_short = smithy.NewStaticSchema(smithy.StaticSchema{Member: "short", ID: &pShort, Traits: &t157, Type: smithy.ShapeTypeShort, Ext: &eHttpRequestWithLabelsInput_short})
+var sHttpRequestWithLabelsInput_integer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integer", ID: &pInteger, Traits: &t157, Type: smithy.ShapeTypeInteger, Ext: &eHttpRequestWithLabelsInput_integer})
+var sHttpRequestWithLabelsInput_long = smithy.NewStaticSchema(smithy.StaticSchema{Member: "long", ID: &pLong, Traits: &t157, Type: smithy.ShapeTypeLong, Ext: &eHttpRequestWithLabelsInput_long})
+var sHttpRequestWithLabelsInput_float = smithy.NewStaticSchema(smithy.StaticSchema{Member: "float", ID: &pFloat, Traits: &t157, Type: smithy.ShapeTypeFloat, Ext: &eHttpRequestWithLabelsInput_float})
+var sHttpRequestWithLabelsInput_double = smithy.NewStaticSchema(smithy.StaticSchema{Member: "double", ID: &pDouble, Traits: &t157, Type: smithy.ShapeTypeDouble, Ext: &eHttpRequestWithLabelsInput_double})
+var sHttpRequestWithLabelsInput_boolean = smithy.NewStaticSchema(smithy.StaticSchema{Member: "boolean", ID: &pBoolean, Traits: &t157, Type: smithy.ShapeTypeBoolean, Ext: &eHttpRequestWithLabelsInput_boolean})
+var sHttpRequestWithLabelsInput_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Traits: &t157, Type: smithy.ShapeTypeTimestamp, Ext: &eHttpRequestWithLabelsInput_timestamp})
+var sHttpRequestWithRegexLiteralInput_str = smithy.NewStaticSchema(smithy.StaticSchema{Member: "str", ID: &pString, Traits: &t157, Type: smithy.ShapeTypeString, Ext: &eHttpRequestWithRegexLiteralInput_str})
+var sHttpResponseCodeOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &pInteger, Traits: &t177, Type: smithy.ShapeTypeInteger, Ext: &eHttpResponseCodeOutput_Status})
+var sStringPayloadInput_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &pString, Traits: &t159, Type: smithy.ShapeTypeString, Ext: &eStringPayloadInput_payload})
+var sIgnoreQueryParamsInResponseOutput_baz = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baz", ID: &pString, Traits: &t155, Type: smithy.ShapeTypeString, Ext: &eIgnoreQueryParamsInResponseOutput_baz})
+var sInputAndOutputWithHeadersIO_headerString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerString", ID: &pString, Traits: &t178, Type: smithy.ShapeTypeString, Ext: &eInputAndOutputWithHeadersIO_headerString})
+var sInputAndOutputWithHeadersIO_headerByte = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerByte", ID: &pByte, Traits: &t179, Type: smithy.ShapeTypeByte, Ext: &eInputAndOutputWithHeadersIO_headerByte})
+var sInputAndOutputWithHeadersIO_headerShort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerShort", ID: &pShort, Traits: &t180, Type: smithy.ShapeTypeShort, Ext: &eInputAndOutputWithHeadersIO_headerShort})
+var sInputAndOutputWithHeadersIO_headerInteger = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerInteger", ID: &pInteger, Traits: &t181, Type: smithy.ShapeTypeInteger, Ext: &eInputAndOutputWithHeadersIO_headerInteger})
+var sInputAndOutputWithHeadersIO_headerLong = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerLong", ID: &pLong, Traits: &t182, Type: smithy.ShapeTypeLong, Ext: &eInputAndOutputWithHeadersIO_headerLong})
+var sInputAndOutputWithHeadersIO_headerFloat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerFloat", ID: &pFloat, Traits: &t183, Type: smithy.ShapeTypeFloat, Ext: &eInputAndOutputWithHeadersIO_headerFloat})
+var sInputAndOutputWithHeadersIO_headerDouble = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerDouble", ID: &pDouble, Traits: &t184, Type: smithy.ShapeTypeDouble, Ext: &eInputAndOutputWithHeadersIO_headerDouble})
+var sInputAndOutputWithHeadersIO_headerTrueBool = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerTrueBool", ID: &pBoolean, Traits: &t185, Type: smithy.ShapeTypeBoolean, Ext: &eInputAndOutputWithHeadersIO_headerTrueBool})
+var sInputAndOutputWithHeadersIO_headerFalseBool = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerFalseBool", ID: &pBoolean, Traits: &t186, Type: smithy.ShapeTypeBoolean, Ext: &eInputAndOutputWithHeadersIO_headerFalseBool})
+var sInputAndOutputWithHeadersIO_headerStringList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerStringList", ID: &i_StringList, Members: &m_StringList, Traits: &t187, Type: smithy.ShapeTypeList, Ext: &eInputAndOutputWithHeadersIO_headerStringList})
+var sInputAndOutputWithHeadersIO_headerStringSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerStringSet", ID: &i_StringSet, Members: &m_StringSet, Traits: &t188, Type: smithy.ShapeTypeList, Ext: &eInputAndOutputWithHeadersIO_headerStringSet})
+var sInputAndOutputWithHeadersIO_headerIntegerList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerIntegerList", ID: &i_IntegerList, Members: &m_IntegerList, Traits: &t189, Type: smithy.ShapeTypeList, Ext: &eInputAndOutputWithHeadersIO_headerIntegerList})
+var sInputAndOutputWithHeadersIO_headerBooleanList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerBooleanList", ID: &i_BooleanList, Members: &m_BooleanList, Traits: &t190, Type: smithy.ShapeTypeList, Ext: &eInputAndOutputWithHeadersIO_headerBooleanList})
+var sInputAndOutputWithHeadersIO_headerTimestampList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerTimestampList", ID: &i_TimestampList, Members: &m_TimestampList, Traits: &t191, Type: smithy.ShapeTypeList, Ext: &eInputAndOutputWithHeadersIO_headerTimestampList})
+var sInputAndOutputWithHeadersIO_headerEnum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerEnum", ID: &iFooEnum, Members: &mFooEnum, Traits: &t192, Type: smithy.ShapeTypeEnum, Ext: &eInputAndOutputWithHeadersIO_headerEnum})
+var sInputAndOutputWithHeadersIO_headerEnumList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerEnumList", ID: &i_FooEnumList, Members: &m_FooEnumList, Traits: &t193, Type: smithy.ShapeTypeList, Ext: &eInputAndOutputWithHeadersIO_headerEnumList})
+var sInputAndOutputWithHeadersIO_headerIntegerEnum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerIntegerEnum", ID: &i_IntegerEnum, Members: &m_IntegerEnum, Traits: &t194, Type: smithy.ShapeTypeIntEnum, Ext: &eInputAndOutputWithHeadersIO_headerIntegerEnum})
+var sInputAndOutputWithHeadersIO_headerIntegerEnumList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headerIntegerEnumList", ID: &i_IntegerEnumList, Members: &m_IntegerEnumList, Traits: &t195, Type: smithy.ShapeTypeList, Ext: &eInputAndOutputWithHeadersIO_headerIntegerEnumList})
+var sInputStreamInput_stream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stream", ID: &iEventStream, Members: &mEventStream, Traits: &t160, Type: smithy.ShapeTypeUnion, Ext: &eInputStreamInput_stream})
+var sInputStreamWithInitialRequestInput_initialRequestMember = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initialRequestMember", ID: &pString, Traits: &t161, Type: smithy.ShapeTypeString, Ext: &eInputStreamWithInitialRequestInput_initialRequestMember})
+var sInputStreamWithInitialRequestInput_stream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stream", ID: &iEventStream, Members: &mEventStream, Traits: &t160, Type: smithy.ShapeTypeUnion, Ext: &eInputStreamWithInitialRequestInput_stream})
+var sJsonBlobsInputOutput_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &eJsonBlobsInputOutput_data})
+var sJsonEnumsInputOutput_fooEnum1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fooEnum1", ID: &iFooEnum, Members: &mFooEnum, Type: smithy.ShapeTypeEnum, Ext: &eJsonEnumsInputOutput_fooEnum1})
+var sJsonEnumsInputOutput_fooEnum2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fooEnum2", ID: &iFooEnum, Members: &mFooEnum, Type: smithy.ShapeTypeEnum, Ext: &eJsonEnumsInputOutput_fooEnum2})
+var sJsonEnumsInputOutput_fooEnum3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fooEnum3", ID: &iFooEnum, Members: &mFooEnum, Type: smithy.ShapeTypeEnum, Ext: &eJsonEnumsInputOutput_fooEnum3})
+var sJsonEnumsInputOutput_fooEnumList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fooEnumList", ID: &i_FooEnumList, Members: &m_FooEnumList, Type: smithy.ShapeTypeList, Ext: &eJsonEnumsInputOutput_fooEnumList})
+var sJsonEnumsInputOutput_fooEnumSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fooEnumSet", ID: &i_FooEnumSet, Members: &m_FooEnumSet, Type: smithy.ShapeTypeList, Ext: &eJsonEnumsInputOutput_fooEnumSet})
+var sJsonEnumsInputOutput_fooEnumMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fooEnumMap", ID: &i_FooEnumMap, Members: &m_FooEnumMap, Type: smithy.ShapeTypeMap, Ext: &eJsonEnumsInputOutput_fooEnumMap})
+var sJsonIntEnumsInputOutput_integerEnum1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerEnum1", ID: &i_IntegerEnum, Members: &m_IntegerEnum, Type: smithy.ShapeTypeIntEnum, Ext: &eJsonIntEnumsInputOutput_integerEnum1})
+var sJsonIntEnumsInputOutput_integerEnum2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerEnum2", ID: &i_IntegerEnum, Members: &m_IntegerEnum, Type: smithy.ShapeTypeIntEnum, Ext: &eJsonIntEnumsInputOutput_integerEnum2})
+var sJsonIntEnumsInputOutput_integerEnum3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerEnum3", ID: &i_IntegerEnum, Members: &m_IntegerEnum, Type: smithy.ShapeTypeIntEnum, Ext: &eJsonIntEnumsInputOutput_integerEnum3})
+var sJsonIntEnumsInputOutput_integerEnumList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerEnumList", ID: &i_IntegerEnumList, Members: &m_IntegerEnumList, Type: smithy.ShapeTypeList, Ext: &eJsonIntEnumsInputOutput_integerEnumList})
+var sJsonIntEnumsInputOutput_integerEnumSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerEnumSet", ID: &i_IntegerEnumSet, Members: &m_IntegerEnumSet, Type: smithy.ShapeTypeList, Ext: &eJsonIntEnumsInputOutput_integerEnumSet})
+var sJsonIntEnumsInputOutput_integerEnumMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerEnumMap", ID: &i_IntegerEnumMap, Members: &m_IntegerEnumMap, Type: smithy.ShapeTypeMap, Ext: &eJsonIntEnumsInputOutput_integerEnumMap})
+var sJsonListsInputOutput_stringList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringList", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eJsonListsInputOutput_stringList})
+var sJsonListsInputOutput_stringSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringSet", ID: &i_StringSet, Members: &m_StringSet, Type: smithy.ShapeTypeList, Ext: &eJsonListsInputOutput_stringSet})
+var sJsonListsInputOutput_integerList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerList", ID: &i_IntegerList, Members: &m_IntegerList, Type: smithy.ShapeTypeList, Ext: &eJsonListsInputOutput_integerList})
+var sJsonListsInputOutput_booleanList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "booleanList", ID: &i_BooleanList, Members: &m_BooleanList, Type: smithy.ShapeTypeList, Ext: &eJsonListsInputOutput_booleanList})
+var sJsonListsInputOutput_timestampList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestampList", ID: &i_TimestampList, Members: &m_TimestampList, Type: smithy.ShapeTypeList, Ext: &eJsonListsInputOutput_timestampList})
+var sJsonListsInputOutput_enumList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enumList", ID: &i_FooEnumList, Members: &m_FooEnumList, Type: smithy.ShapeTypeList, Ext: &eJsonListsInputOutput_enumList})
+var sJsonListsInputOutput_intEnumList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intEnumList", ID: &i_IntegerEnumList, Members: &m_IntegerEnumList, Type: smithy.ShapeTypeList, Ext: &eJsonListsInputOutput_intEnumList})
+var sJsonListsInputOutput_nestedStringList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nestedStringList", ID: &i_NestedStringList, Members: &m_NestedStringList, Type: smithy.ShapeTypeList, Ext: &eJsonListsInputOutput_nestedStringList})
+var sJsonListsInputOutput_structureList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "structureList", ID: &i_StructureList, Members: &m_StructureList, Traits: &t196, Type: smithy.ShapeTypeList, Ext: &eJsonListsInputOutput_structureList})
+var sJsonMapsInputOutput_denseStructMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "denseStructMap", ID: &i_DenseStructMap, Members: &m_DenseStructMap, Type: smithy.ShapeTypeMap, Ext: &eJsonMapsInputOutput_denseStructMap})
+var sJsonMapsInputOutput_denseNumberMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "denseNumberMap", ID: &i_DenseNumberMap, Members: &m_DenseNumberMap, Type: smithy.ShapeTypeMap, Ext: &eJsonMapsInputOutput_denseNumberMap})
+var sJsonMapsInputOutput_denseBooleanMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "denseBooleanMap", ID: &i_DenseBooleanMap, Members: &m_DenseBooleanMap, Type: smithy.ShapeTypeMap, Ext: &eJsonMapsInputOutput_denseBooleanMap})
+var sJsonMapsInputOutput_denseStringMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "denseStringMap", ID: &i_DenseStringMap, Members: &m_DenseStringMap, Type: smithy.ShapeTypeMap, Ext: &eJsonMapsInputOutput_denseStringMap})
+var sJsonMapsInputOutput_denseSetMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "denseSetMap", ID: &i_DenseSetMap, Members: &m_DenseSetMap, Type: smithy.ShapeTypeMap, Ext: &eJsonMapsInputOutput_denseSetMap})
+var sJsonTimestampsInputOutput_normal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "normal", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eJsonTimestampsInputOutput_normal})
+var sJsonTimestampsInputOutput_dateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dateTime", ID: &pTimestamp, Traits: &t129, Type: smithy.ShapeTypeTimestamp, Ext: &eJsonTimestampsInputOutput_dateTime})
+var sJsonTimestampsInputOutput_dateTimeOnTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dateTimeOnTarget", ID: &i_DateTime, Traits: &t158, Type: smithy.ShapeTypeTimestamp, Ext: &eJsonTimestampsInputOutput_dateTimeOnTarget})
+var sJsonTimestampsInputOutput_epochSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "epochSeconds", ID: &pTimestamp, Traits: &t130, Type: smithy.ShapeTypeTimestamp, Ext: &eJsonTimestampsInputOutput_epochSeconds})
+var sJsonTimestampsInputOutput_epochSecondsOnTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "epochSecondsOnTarget", ID: &i_EpochSeconds, Traits: &t197, Type: smithy.ShapeTypeTimestamp, Ext: &eJsonTimestampsInputOutput_epochSecondsOnTarget})
+var sJsonTimestampsInputOutput_httpDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "httpDate", ID: &pTimestamp, Traits: &t131, Type: smithy.ShapeTypeTimestamp, Ext: &eJsonTimestampsInputOutput_httpDate})
+var sJsonTimestampsInputOutput_httpDateOnTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "httpDateOnTarget", ID: &i_HttpDate, Traits: &t198, Type: smithy.ShapeTypeTimestamp, Ext: &eJsonTimestampsInputOutput_httpDateOnTarget})
+var sUnionInputOutput_contents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contents", ID: &iMyUnion, Members: &mMyUnion, Type: smithy.ShapeTypeUnion, Ext: &eUnionInputOutput_contents})
+var sMalformedAcceptWithGenericStringOutput_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &pString, Traits: &t159, Type: smithy.ShapeTypeString, Ext: &eMalformedAcceptWithGenericStringOutput_payload})
+var sMalformedAcceptWithPayloadOutput_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &i_JpegBlob, Traits: &t199, Type: smithy.ShapeTypeBlob, Ext: &eMalformedAcceptWithPayloadOutput_payload})
+var sMalformedBlobInput_blob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blob", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &eMalformedBlobInput_blob})
+var sMalformedBooleanInput_booleanInBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "booleanInBody", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eMalformedBooleanInput_booleanInBody})
+var sMalformedBooleanInput_booleanInPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "booleanInPath", ID: &pBoolean, Traits: &t157, Type: smithy.ShapeTypeBoolean, Ext: &eMalformedBooleanInput_booleanInPath})
+var sMalformedBooleanInput_booleanInQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "booleanInQuery", ID: &pBoolean, Traits: &t200, Type: smithy.ShapeTypeBoolean, Ext: &eMalformedBooleanInput_booleanInQuery})
+var sMalformedBooleanInput_booleanInHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "booleanInHeader", ID: &pBoolean, Traits: &t201, Type: smithy.ShapeTypeBoolean, Ext: &eMalformedBooleanInput_booleanInHeader})
+var sMalformedByteInput_byteInBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "byteInBody", ID: &pByte, Type: smithy.ShapeTypeByte, Ext: &eMalformedByteInput_byteInBody})
+var sMalformedByteInput_byteInPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "byteInPath", ID: &pByte, Traits: &t157, Type: smithy.ShapeTypeByte, Ext: &eMalformedByteInput_byteInPath})
+var sMalformedByteInput_byteInQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "byteInQuery", ID: &pByte, Traits: &t202, Type: smithy.ShapeTypeByte, Ext: &eMalformedByteInput_byteInQuery})
+var sMalformedByteInput_byteInHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "byteInHeader", ID: &pByte, Traits: &t203, Type: smithy.ShapeTypeByte, Ext: &eMalformedByteInput_byteInHeader})
+var sMalformedContentTypeWithGenericStringInput_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &pString, Traits: &t159, Type: smithy.ShapeTypeString, Ext: &eMalformedContentTypeWithGenericStringInput_payload})
+var sMalformedContentTypeWithoutBodyEmptyInputInput_header = smithy.NewStaticSchema(smithy.StaticSchema{Member: "header", ID: &pString, Traits: &t204, Type: smithy.ShapeTypeString, Ext: &eMalformedContentTypeWithoutBodyEmptyInputInput_header})
+var sMalformedContentTypeWithPayloadInput_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &i_JpegBlob, Traits: &t199, Type: smithy.ShapeTypeBlob, Ext: &eMalformedContentTypeWithPayloadInput_payload})
+var sMalformedDoubleInput_doubleInBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "doubleInBody", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eMalformedDoubleInput_doubleInBody})
+var sMalformedDoubleInput_doubleInPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "doubleInPath", ID: &pDouble, Traits: &t157, Type: smithy.ShapeTypeDouble, Ext: &eMalformedDoubleInput_doubleInPath})
+var sMalformedDoubleInput_doubleInQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "doubleInQuery", ID: &pDouble, Traits: &t205, Type: smithy.ShapeTypeDouble, Ext: &eMalformedDoubleInput_doubleInQuery})
+var sMalformedDoubleInput_doubleInHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "doubleInHeader", ID: &pDouble, Traits: &t206, Type: smithy.ShapeTypeDouble, Ext: &eMalformedDoubleInput_doubleInHeader})
+var sMalformedFloatInput_floatInBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "floatInBody", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eMalformedFloatInput_floatInBody})
+var sMalformedFloatInput_floatInPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "floatInPath", ID: &pFloat, Traits: &t157, Type: smithy.ShapeTypeFloat, Ext: &eMalformedFloatInput_floatInPath})
+var sMalformedFloatInput_floatInQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "floatInQuery", ID: &pFloat, Traits: &t207, Type: smithy.ShapeTypeFloat, Ext: &eMalformedFloatInput_floatInQuery})
+var sMalformedFloatInput_floatInHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "floatInHeader", ID: &pFloat, Traits: &t208, Type: smithy.ShapeTypeFloat, Ext: &eMalformedFloatInput_floatInHeader})
+var sMalformedIntegerInput_integerInBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerInBody", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eMalformedIntegerInput_integerInBody})
+var sMalformedIntegerInput_integerInPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerInPath", ID: &pInteger, Traits: &t157, Type: smithy.ShapeTypeInteger, Ext: &eMalformedIntegerInput_integerInPath})
+var sMalformedIntegerInput_integerInQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerInQuery", ID: &pInteger, Traits: &t209, Type: smithy.ShapeTypeInteger, Ext: &eMalformedIntegerInput_integerInQuery})
+var sMalformedIntegerInput_integerInHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerInHeader", ID: &pInteger, Traits: &t210, Type: smithy.ShapeTypeInteger, Ext: &eMalformedIntegerInput_integerInHeader})
+var sMalformedListInput_bodyList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bodyList", ID: &i_SimpleList, Members: &m_SimpleList, Type: smithy.ShapeTypeList, Ext: &eMalformedListInput_bodyList})
+var sMalformedLongInput_longInBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "longInBody", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eMalformedLongInput_longInBody})
+var sMalformedLongInput_longInPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "longInPath", ID: &pLong, Traits: &t157, Type: smithy.ShapeTypeLong, Ext: &eMalformedLongInput_longInPath})
+var sMalformedLongInput_longInQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "longInQuery", ID: &pLong, Traits: &t211, Type: smithy.ShapeTypeLong, Ext: &eMalformedLongInput_longInQuery})
+var sMalformedLongInput_longInHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "longInHeader", ID: &pLong, Traits: &t212, Type: smithy.ShapeTypeLong, Ext: &eMalformedLongInput_longInHeader})
+var sMalformedMapInput_bodyMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bodyMap", ID: &i_SimpleMap, Members: &m_SimpleMap, Type: smithy.ShapeTypeMap, Ext: &eMalformedMapInput_bodyMap})
+var sMalformedRequestBodyInput_int = smithy.NewStaticSchema(smithy.StaticSchema{Member: "int", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eMalformedRequestBodyInput_int})
+var sMalformedRequestBodyInput_float = smithy.NewStaticSchema(smithy.StaticSchema{Member: "float", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eMalformedRequestBodyInput_float})
+var sMalformedShortInput_shortInBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shortInBody", ID: &pShort, Type: smithy.ShapeTypeShort, Ext: &eMalformedShortInput_shortInBody})
+var sMalformedShortInput_shortInPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shortInPath", ID: &pShort, Traits: &t157, Type: smithy.ShapeTypeShort, Ext: &eMalformedShortInput_shortInPath})
+var sMalformedShortInput_shortInQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shortInQuery", ID: &pShort, Traits: &t213, Type: smithy.ShapeTypeShort, Ext: &eMalformedShortInput_shortInQuery})
+var sMalformedShortInput_shortInHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shortInHeader", ID: &pShort, Traits: &t214, Type: smithy.ShapeTypeShort, Ext: &eMalformedShortInput_shortInHeader})
+var sMalformedStringInput_blob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blob", ID: &i_JsonHeaderString, Traits: &t215, Type: smithy.ShapeTypeString, Ext: &eMalformedStringInput_blob})
+var sMalformedTimestampBodyDateTimeInput_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Traits: &t129, Type: smithy.ShapeTypeTimestamp, Ext: &eMalformedTimestampBodyDateTimeInput_timestamp})
+var sMalformedTimestampBodyDefaultInput_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMalformedTimestampBodyDefaultInput_timestamp})
+var sMalformedTimestampBodyHttpDateInput_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Traits: &t131, Type: smithy.ShapeTypeTimestamp, Ext: &eMalformedTimestampBodyHttpDateInput_timestamp})
+var sMalformedTimestampHeaderDateTimeInput_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Traits: &t216, Type: smithy.ShapeTypeTimestamp, Ext: &eMalformedTimestampHeaderDateTimeInput_timestamp})
+var sMalformedTimestampHeaderDefaultInput_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Traits: &t217, Type: smithy.ShapeTypeTimestamp, Ext: &eMalformedTimestampHeaderDefaultInput_timestamp})
+var sMalformedTimestampHeaderEpochInput_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Traits: &t218, Type: smithy.ShapeTypeTimestamp, Ext: &eMalformedTimestampHeaderEpochInput_timestamp})
+var sMalformedTimestampPathDefaultInput_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Traits: &t157, Type: smithy.ShapeTypeTimestamp, Ext: &eMalformedTimestampPathDefaultInput_timestamp})
+var sMalformedTimestampPathEpochInput_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Traits: &t171, Type: smithy.ShapeTypeTimestamp, Ext: &eMalformedTimestampPathEpochInput_timestamp})
+var sMalformedTimestampPathHttpDateInput_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Traits: &t172, Type: smithy.ShapeTypeTimestamp, Ext: &eMalformedTimestampPathHttpDateInput_timestamp})
+var sMalformedTimestampQueryDefaultInput_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Traits: &t219, Type: smithy.ShapeTypeTimestamp, Ext: &eMalformedTimestampQueryDefaultInput_timestamp})
+var sMalformedTimestampQueryEpochInput_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Traits: &t220, Type: smithy.ShapeTypeTimestamp, Ext: &eMalformedTimestampQueryEpochInput_timestamp})
+var sMalformedTimestampQueryHttpDateInput_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Traits: &t221, Type: smithy.ShapeTypeTimestamp, Ext: &eMalformedTimestampQueryHttpDateInput_timestamp})
+var sMalformedUnionInput_union = smithy.NewStaticSchema(smithy.StaticSchema{Member: "union", ID: &iSimpleUnion, Members: &mSimpleUnion, Type: smithy.ShapeTypeUnion, Ext: &eMalformedUnionInput_union})
+var sMediaTypeHeaderInput_json = smithy.NewStaticSchema(smithy.StaticSchema{Member: "json", ID: &i_JsonValue, Traits: &t222, Type: smithy.ShapeTypeString, Ext: &eMediaTypeHeaderInput_json})
+var sMediaTypeHeaderOutput_json = smithy.NewStaticSchema(smithy.StaticSchema{Member: "json", ID: &i_JsonValue, Traits: &t222, Type: smithy.ShapeTypeString, Ext: &eMediaTypeHeaderOutput_json})
+var sNullAndEmptyHeadersIO_a = smithy.NewStaticSchema(smithy.StaticSchema{Member: "a", ID: &pString, Traits: &t223, Type: smithy.ShapeTypeString, Ext: &eNullAndEmptyHeadersIO_a})
+var sNullAndEmptyHeadersIO_b = smithy.NewStaticSchema(smithy.StaticSchema{Member: "b", ID: &pString, Traits: &t224, Type: smithy.ShapeTypeString, Ext: &eNullAndEmptyHeadersIO_b})
+var sNullAndEmptyHeadersIO_c = smithy.NewStaticSchema(smithy.StaticSchema{Member: "c", ID: &i_StringList, Members: &m_StringList, Traits: &t225, Type: smithy.ShapeTypeList, Ext: &eNullAndEmptyHeadersIO_c})
+var sOmitsNullSerializesEmptyStringInput_nullValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nullValue", ID: &pString, Traits: &t226, Type: smithy.ShapeTypeString, Ext: &eOmitsNullSerializesEmptyStringInput_nullValue})
+var sOmitsNullSerializesEmptyStringInput_emptyString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emptyString", ID: &pString, Traits: &t227, Type: smithy.ShapeTypeString, Ext: &eOmitsNullSerializesEmptyStringInput_emptyString})
+var sOmitsSerializingEmptyListsInput_queryStringList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryStringList", ID: &i_StringList, Members: &m_StringList, Traits: &t135, Type: smithy.ShapeTypeList, Ext: &eOmitsSerializingEmptyListsInput_queryStringList})
+var sOmitsSerializingEmptyListsInput_queryIntegerList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryIntegerList", ID: &i_IntegerList, Members: &m_IntegerList, Traits: &t140, Type: smithy.ShapeTypeList, Ext: &eOmitsSerializingEmptyListsInput_queryIntegerList})
+var sOmitsSerializingEmptyListsInput_queryDoubleList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryDoubleList", ID: &i_DoubleList, Members: &m_DoubleList, Traits: &t145, Type: smithy.ShapeTypeList, Ext: &eOmitsSerializingEmptyListsInput_queryDoubleList})
+var sOmitsSerializingEmptyListsInput_queryBooleanList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryBooleanList", ID: &i_BooleanList, Members: &m_BooleanList, Traits: &t147, Type: smithy.ShapeTypeList, Ext: &eOmitsSerializingEmptyListsInput_queryBooleanList})
+var sOmitsSerializingEmptyListsInput_queryTimestampList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryTimestampList", ID: &i_TimestampList, Members: &m_TimestampList, Traits: &t149, Type: smithy.ShapeTypeList, Ext: &eOmitsSerializingEmptyListsInput_queryTimestampList})
+var sOmitsSerializingEmptyListsInput_queryEnumList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryEnumList", ID: &i_FooEnumList, Members: &m_FooEnumList, Traits: &t151, Type: smithy.ShapeTypeList, Ext: &eOmitsSerializingEmptyListsInput_queryEnumList})
+var sOmitsSerializingEmptyListsInput_queryIntegerEnumList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryIntegerEnumList", ID: &i_IntegerEnumList, Members: &m_IntegerEnumList, Traits: &t153, Type: smithy.ShapeTypeList, Ext: &eOmitsSerializingEmptyListsInput_queryIntegerEnumList})
+var sOperationWithDefaultsInput_defaults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaults", ID: &iDefaults, Members: &mDefaults, Type: smithy.ShapeTypeStructure, Ext: &eOperationWithDefaultsInput_defaults})
+var sOperationWithDefaultsInput_clientOptionalDefaults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientOptionalDefaults", ID: &iClientOptionalDefaults, Members: &mClientOptionalDefaults, Type: smithy.ShapeTypeStructure, Ext: &eOperationWithDefaultsInput_clientOptionalDefaults})
+var sOperationWithDefaultsInput_topLevelDefault = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topLevelDefault", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eOperationWithDefaultsInput_topLevelDefault})
+var sOperationWithDefaultsInput_otherTopLevelDefault = smithy.NewStaticSchema(smithy.StaticSchema{Member: "otherTopLevelDefault", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eOperationWithDefaultsInput_otherTopLevelDefault})
+var sOperationWithDefaultsOutput_defaultString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultString", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eOperationWithDefaultsOutput_defaultString})
+var sOperationWithDefaultsOutput_defaultBoolean = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultBoolean", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eOperationWithDefaultsOutput_defaultBoolean})
+var sOperationWithDefaultsOutput_defaultList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultList", ID: &i_TestStringList, Members: &m_TestStringList, Type: smithy.ShapeTypeList, Ext: &eOperationWithDefaultsOutput_defaultList})
+var sOperationWithDefaultsOutput_defaultDocumentMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultDocumentMap", ID: &i_Document, Type: smithy.ShapeTypeDocument, Ext: &eOperationWithDefaultsOutput_defaultDocumentMap})
+var sOperationWithDefaultsOutput_defaultDocumentString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultDocumentString", ID: &i_Document, Type: smithy.ShapeTypeDocument, Ext: &eOperationWithDefaultsOutput_defaultDocumentString})
+var sOperationWithDefaultsOutput_defaultDocumentBoolean = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultDocumentBoolean", ID: &i_Document, Type: smithy.ShapeTypeDocument, Ext: &eOperationWithDefaultsOutput_defaultDocumentBoolean})
+var sOperationWithDefaultsOutput_defaultDocumentList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultDocumentList", ID: &i_Document, Type: smithy.ShapeTypeDocument, Ext: &eOperationWithDefaultsOutput_defaultDocumentList})
+var sOperationWithDefaultsOutput_defaultNullDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultNullDocument", ID: &i_Document, Type: smithy.ShapeTypeDocument, Ext: &eOperationWithDefaultsOutput_defaultNullDocument})
+var sOperationWithDefaultsOutput_defaultTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eOperationWithDefaultsOutput_defaultTimestamp})
+var sOperationWithDefaultsOutput_defaultBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultBlob", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &eOperationWithDefaultsOutput_defaultBlob})
+var sOperationWithDefaultsOutput_defaultByte = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultByte", ID: &pByte, Type: smithy.ShapeTypeByte, Ext: &eOperationWithDefaultsOutput_defaultByte})
+var sOperationWithDefaultsOutput_defaultShort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultShort", ID: &pShort, Type: smithy.ShapeTypeShort, Ext: &eOperationWithDefaultsOutput_defaultShort})
+var sOperationWithDefaultsOutput_defaultInteger = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultInteger", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eOperationWithDefaultsOutput_defaultInteger})
+var sOperationWithDefaultsOutput_defaultLong = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultLong", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eOperationWithDefaultsOutput_defaultLong})
+var sOperationWithDefaultsOutput_defaultFloat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultFloat", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eOperationWithDefaultsOutput_defaultFloat})
+var sOperationWithDefaultsOutput_defaultDouble = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultDouble", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eOperationWithDefaultsOutput_defaultDouble})
+var sOperationWithDefaultsOutput_defaultMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultMap", ID: &i_TestStringMap, Members: &m_TestStringMap, Type: smithy.ShapeTypeMap, Ext: &eOperationWithDefaultsOutput_defaultMap})
+var sOperationWithDefaultsOutput_defaultEnum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultEnum", ID: &iTestEnum, Members: &mTestEnum, Type: smithy.ShapeTypeEnum, Ext: &eOperationWithDefaultsOutput_defaultEnum})
+var sOperationWithDefaultsOutput_defaultIntEnum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultIntEnum", ID: &i_TestIntEnum, Members: &m_TestIntEnum, Type: smithy.ShapeTypeIntEnum, Ext: &eOperationWithDefaultsOutput_defaultIntEnum})
+var sOperationWithDefaultsOutput_emptyString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emptyString", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eOperationWithDefaultsOutput_emptyString})
+var sOperationWithDefaultsOutput_falseBoolean = smithy.NewStaticSchema(smithy.StaticSchema{Member: "falseBoolean", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eOperationWithDefaultsOutput_falseBoolean})
+var sOperationWithDefaultsOutput_emptyBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emptyBlob", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &eOperationWithDefaultsOutput_emptyBlob})
+var sOperationWithDefaultsOutput_zeroByte = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zeroByte", ID: &pByte, Type: smithy.ShapeTypeByte, Ext: &eOperationWithDefaultsOutput_zeroByte})
+var sOperationWithDefaultsOutput_zeroShort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zeroShort", ID: &pShort, Type: smithy.ShapeTypeShort, Ext: &eOperationWithDefaultsOutput_zeroShort})
+var sOperationWithDefaultsOutput_zeroInteger = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zeroInteger", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eOperationWithDefaultsOutput_zeroInteger})
+var sOperationWithDefaultsOutput_zeroLong = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zeroLong", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eOperationWithDefaultsOutput_zeroLong})
+var sOperationWithDefaultsOutput_zeroFloat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zeroFloat", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eOperationWithDefaultsOutput_zeroFloat})
+var sOperationWithDefaultsOutput_zeroDouble = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zeroDouble", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eOperationWithDefaultsOutput_zeroDouble})
+var sOperationWithNestedStructureInput_topLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topLevel", ID: &iTopLevel, Members: &mTopLevel, Type: smithy.ShapeTypeStructure, Ext: &eOperationWithNestedStructureInput_topLevel})
+var sOperationWithNestedStructureOutput_dialog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialog", ID: &iDialog, Members: &mDialog, Type: smithy.ShapeTypeStructure, Ext: &eOperationWithNestedStructureOutput_dialog})
+var sOperationWithNestedStructureOutput_dialogList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialogList", ID: &i_DialogList, Members: &m_DialogList, Type: smithy.ShapeTypeList, Ext: &eOperationWithNestedStructureOutput_dialogList})
+var sOperationWithNestedStructureOutput_dialogMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialogMap", ID: &i_DialogMap, Members: &m_DialogMap, Type: smithy.ShapeTypeMap, Ext: &eOperationWithNestedStructureOutput_dialogMap})
+var sOutputStreamOutput_stream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stream", ID: &iEventStream, Members: &mEventStream, Traits: &t160, Type: smithy.ShapeTypeUnion, Ext: &eOutputStreamOutput_stream})
+var sOutputStreamWithInitialResponseOutput_initialResponseMember = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initialResponseMember", ID: &pString, Traits: &t162, Type: smithy.ShapeTypeString, Ext: &eOutputStreamWithInitialResponseOutput_initialResponseMember})
+var sOutputStreamWithInitialResponseOutput_stream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stream", ID: &iEventStream, Members: &mEventStream, Traits: &t160, Type: smithy.ShapeTypeUnion, Ext: &eOutputStreamWithInitialResponseOutput_stream})
+var sPostPlayerActionInput_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iPlayerAction, Members: &mPlayerAction, Type: smithy.ShapeTypeUnion, Ext: &ePostPlayerActionInput_action})
+var sPostPlayerActionOutput_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iPlayerAction, Members: &mPlayerAction, Type: smithy.ShapeTypeUnion, Ext: &ePostPlayerActionOutput_action})
+var sPostUnionWithJsonNameInput_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iUnionWithJsonName, Members: &mUnionWithJsonName, Type: smithy.ShapeTypeUnion, Ext: &ePostUnionWithJsonNameInput_value})
+var sPostUnionWithJsonNameOutput_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iUnionWithJsonName, Members: &mUnionWithJsonName, Type: smithy.ShapeTypeUnion, Ext: &ePostUnionWithJsonNameOutput_value})
+var sPutWithContentEncodingInput_encoding = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encoding", ID: &pString, Traits: &t228, Type: smithy.ShapeTypeString, Ext: &ePutWithContentEncodingInput_encoding})
+var sPutWithContentEncodingInput_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePutWithContentEncodingInput_data})
+var sQueryIdempotencyTokenAutoFillInput_token = smithy.NewStaticSchema(smithy.StaticSchema{Member: "token", ID: &pString, Traits: &t229, Type: smithy.ShapeTypeString, Ext: &eQueryIdempotencyTokenAutoFillInput_token})
+var sQueryParamsAsStringListMapInput_qux = smithy.NewStaticSchema(smithy.StaticSchema{Member: "qux", ID: &pString, Traits: &t230, Type: smithy.ShapeTypeString, Ext: &eQueryParamsAsStringListMapInput_qux})
+var sQueryParamsAsStringListMapInput_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &i_StringListMap, Members: &m_StringListMap, Traits: &t154, Type: smithy.ShapeTypeMap, Ext: &eQueryParamsAsStringListMapInput_foo})
+var sQueryPrecedenceInput_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Traits: &t231, Type: smithy.ShapeTypeString, Ext: &eQueryPrecedenceInput_foo})
+var sQueryPrecedenceInput_baz = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baz", ID: &i_StringMap, Members: &m_StringMap, Traits: &t154, Type: smithy.ShapeTypeMap, Ext: &eQueryPrecedenceInput_baz})
+var sRecursiveShapesInputOutput_nested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nested", ID: &iRecursiveShapesInputOutputNested1, Members: &mRecursiveShapesInputOutputNested1, Type: smithy.ShapeTypeStructure, Ext: &eRecursiveShapesInputOutput_nested})
+var sResponseCodeRequiredOutput_responseCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responseCode", ID: &pInteger, Traits: &t177, Type: smithy.ShapeTypeInteger, Ext: &eResponseCodeRequiredOutput_responseCode})
+var sSimpleScalarPropertiesInputOutput_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Traits: &t167, Type: smithy.ShapeTypeString, Ext: &eSimpleScalarPropertiesInputOutput_foo})
+var sSimpleScalarPropertiesInputOutput_stringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSimpleScalarPropertiesInputOutput_stringValue})
+var sSimpleScalarPropertiesInputOutput_trueBooleanValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trueBooleanValue", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eSimpleScalarPropertiesInputOutput_trueBooleanValue})
+var sSimpleScalarPropertiesInputOutput_falseBooleanValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "falseBooleanValue", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eSimpleScalarPropertiesInputOutput_falseBooleanValue})
+var sSimpleScalarPropertiesInputOutput_byteValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "byteValue", ID: &pByte, Type: smithy.ShapeTypeByte, Ext: &eSimpleScalarPropertiesInputOutput_byteValue})
+var sSimpleScalarPropertiesInputOutput_shortValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shortValue", ID: &pShort, Type: smithy.ShapeTypeShort, Ext: &eSimpleScalarPropertiesInputOutput_shortValue})
+var sSimpleScalarPropertiesInputOutput_integerValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerValue", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSimpleScalarPropertiesInputOutput_integerValue})
+var sSimpleScalarPropertiesInputOutput_longValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "longValue", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eSimpleScalarPropertiesInputOutput_longValue})
+var sSimpleScalarPropertiesInputOutput_floatValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "floatValue", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eSimpleScalarPropertiesInputOutput_floatValue})
+var sSimpleScalarPropertiesInputOutput_doubleValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "doubleValue", ID: &pDouble, Traits: &t232, Type: smithy.ShapeTypeDouble, Ext: &eSimpleScalarPropertiesInputOutput_doubleValue})
+var sSparseJsonListsInputOutput_sparseStringList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sparseStringList", ID: &i_SparseStringList, Members: &m_SparseStringList, Type: smithy.ShapeTypeList, Ext: &eSparseJsonListsInputOutput_sparseStringList})
+var sSparseJsonListsInputOutput_sparseShortList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sparseShortList", ID: &i_SparseShortList, Members: &m_SparseShortList, Type: smithy.ShapeTypeList, Ext: &eSparseJsonListsInputOutput_sparseShortList})
+var sSparseJsonMapsInputOutput_sparseStructMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sparseStructMap", ID: &i_SparseStructMap, Members: &m_SparseStructMap, Type: smithy.ShapeTypeMap, Ext: &eSparseJsonMapsInputOutput_sparseStructMap})
+var sSparseJsonMapsInputOutput_sparseNumberMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sparseNumberMap", ID: &i_SparseNumberMap, Members: &m_SparseNumberMap, Type: smithy.ShapeTypeMap, Ext: &eSparseJsonMapsInputOutput_sparseNumberMap})
+var sSparseJsonMapsInputOutput_sparseBooleanMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sparseBooleanMap", ID: &i_SparseBooleanMap, Members: &m_SparseBooleanMap, Type: smithy.ShapeTypeMap, Ext: &eSparseJsonMapsInputOutput_sparseBooleanMap})
+var sSparseJsonMapsInputOutput_sparseStringMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sparseStringMap", ID: &i_SparseStringMap, Members: &m_SparseStringMap, Type: smithy.ShapeTypeMap, Ext: &eSparseJsonMapsInputOutput_sparseStringMap})
+var sSparseJsonMapsInputOutput_sparseSetMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sparseSetMap", ID: &i_SparseSetMap, Members: &m_SparseSetMap, Type: smithy.ShapeTypeMap, Ext: &eSparseJsonMapsInputOutput_sparseSetMap})
+var sStreamingTraitsInputOutput_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Traits: &t167, Type: smithy.ShapeTypeString, Ext: &eStreamingTraitsInputOutput_foo})
+var sStreamingTraitsInputOutput_blob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blob", ID: &i_StreamingBlob, Traits: &t160, Type: smithy.ShapeTypeBlob, Ext: &eStreamingTraitsInputOutput_blob})
+var sStreamingTraitsRequireLengthInput_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Traits: &t167, Type: smithy.ShapeTypeString, Ext: &eStreamingTraitsRequireLengthInput_foo})
+var sStreamingTraitsRequireLengthInput_blob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blob", ID: &i_FiniteStreamingBlob, Traits: &t160, Type: smithy.ShapeTypeBlob, Ext: &eStreamingTraitsRequireLengthInput_blob})
+var sStreamingTraitsWithMediaTypeInputOutput_foo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "foo", ID: &pString, Traits: &t167, Type: smithy.ShapeTypeString, Ext: &eStreamingTraitsWithMediaTypeInputOutput_foo})
+var sStreamingTraitsWithMediaTypeInputOutput_blob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blob", ID: &i_StreamingTextPlainBlob, Traits: &t233, Type: smithy.ShapeTypeBlob, Ext: &eStreamingTraitsWithMediaTypeInputOutput_blob})
+var sTestBodyStructureInputOutput_testId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "testId", ID: &pString, Traits: &t234, Type: smithy.ShapeTypeString, Ext: &eTestBodyStructureInputOutput_testId})
+var sTestBodyStructureInputOutput_testConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "testConfig", ID: &iTestConfig, Members: &mTestConfig, Type: smithy.ShapeTypeStructure, Ext: &eTestBodyStructureInputOutput_testConfig})
+var sTestNoPayloadInputOutput_testId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "testId", ID: &pString, Traits: &t235, Type: smithy.ShapeTypeString, Ext: &eTestNoPayloadInputOutput_testId})
+var sTestPayloadBlobInputOutput_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &pString, Traits: &t236, Type: smithy.ShapeTypeString, Ext: &eTestPayloadBlobInputOutput_contentType})
+var sTestPayloadBlobInputOutput_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &pBlob, Traits: &t159, Type: smithy.ShapeTypeBlob, Ext: &eTestPayloadBlobInputOutput_data})
+var sTestPayloadStructureInputOutput_testId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "testId", ID: &pString, Traits: &t234, Type: smithy.ShapeTypeString, Ext: &eTestPayloadStructureInputOutput_testId})
+var sTestPayloadStructureInputOutput_payloadConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payloadConfig", ID: &iPayloadConfig, Members: &mPayloadConfig, Traits: &t159, Type: smithy.ShapeTypeStructure, Ext: &eTestPayloadStructureInputOutput_payloadConfig})
+var sTimestampFormatHeadersIO_memberEpochSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "memberEpochSeconds", ID: &pTimestamp, Traits: &t237, Type: smithy.ShapeTypeTimestamp, Ext: &eTimestampFormatHeadersIO_memberEpochSeconds})
+var sTimestampFormatHeadersIO_memberHttpDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "memberHttpDate", ID: &pTimestamp, Traits: &t238, Type: smithy.ShapeTypeTimestamp, Ext: &eTimestampFormatHeadersIO_memberHttpDate})
+var sTimestampFormatHeadersIO_memberDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "memberDateTime", ID: &pTimestamp, Traits: &t239, Type: smithy.ShapeTypeTimestamp, Ext: &eTimestampFormatHeadersIO_memberDateTime})
+var sTimestampFormatHeadersIO_defaultFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultFormat", ID: &pTimestamp, Traits: &t240, Type: smithy.ShapeTypeTimestamp, Ext: &eTimestampFormatHeadersIO_defaultFormat})
+var sTimestampFormatHeadersIO_targetEpochSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetEpochSeconds", ID: &i_EpochSeconds, Traits: &t241, Type: smithy.ShapeTypeTimestamp, Ext: &eTimestampFormatHeadersIO_targetEpochSeconds})
+var sTimestampFormatHeadersIO_targetHttpDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetHttpDate", ID: &i_HttpDate, Traits: &t242, Type: smithy.ShapeTypeTimestamp, Ext: &eTimestampFormatHeadersIO_targetHttpDate})
+var sTimestampFormatHeadersIO_targetDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetDateTime", ID: &i_DateTime, Traits: &t243, Type: smithy.ShapeTypeTimestamp, Ext: &eTimestampFormatHeadersIO_targetDateTime})
 
 // Members of recursive shapes would make the variables' initializers refer to
 // each other in a cycle, which Go rejects, so they are completed here.
 func init() {
-	sRecursiveShapesInputOutputNested2_recursiveMember = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recursiveMember", ID: &iRecursiveShapesInputOutputNested1, Members: &mRecursiveShapesInputOutputNested1, Type: smithy.ShapeTypeStructure, Ext: &ext[248]})
+	sRecursiveShapesInputOutputNested2_recursiveMember = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recursiveMember", ID: &iRecursiveShapesInputOutputNested1, Members: &mRecursiveShapesInputOutputNested1, Type: smithy.ShapeTypeStructure, Ext: &eRecursiveShapesInputOutputNested2_recursiveMember})
 }
 
 var AllQueryStringTypes = &sAllQueryStringTypes

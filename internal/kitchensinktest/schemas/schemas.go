@@ -7,9 +7,67 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [59]smithy.SchemaExtensions
+var (
+	eGetItem                      smithy.SchemaExtensions
+	eGetLists                     smithy.SchemaExtensions
+	eGetMaps                      smithy.SchemaExtensions
+	ePutCompressedData            smithy.SchemaExtensions
+	eSubscribeEvents              smithy.SchemaExtensions
+	e_AwsJson1KitchenSink         smithy.SchemaExtensions
+	e_DenseIntegerList            smithy.SchemaExtensions
+	e_DenseIntegerList_member     smithy.SchemaExtensions
+	e_DenseIntegerMap             smithy.SchemaExtensions
+	e_DenseIntegerMap_key         smithy.SchemaExtensions
+	e_DenseIntegerMap_value       smithy.SchemaExtensions
+	e_DenseStringList             smithy.SchemaExtensions
+	e_DenseStringList_member      smithy.SchemaExtensions
+	e_DenseStringMap              smithy.SchemaExtensions
+	e_DenseStringMap_key          smithy.SchemaExtensions
+	e_DenseStringMap_value        smithy.SchemaExtensions
+	e_DenseStructList             smithy.SchemaExtensions
+	e_DenseStructList_member      smithy.SchemaExtensions
+	e_DenseStructMap              smithy.SchemaExtensions
+	e_DenseStructMap_key          smithy.SchemaExtensions
+	e_DenseStructMap_value        smithy.SchemaExtensions
+	eEvents                       smithy.SchemaExtensions
+	eEvents_message               smithy.SchemaExtensions
+	eItem                         smithy.SchemaExtensions
+	eItemNotFound                 smithy.SchemaExtensions
+	eItemNotFound_message         smithy.SchemaExtensions
+	eListValueStruct              smithy.SchemaExtensions
+	eListValueStruct_name         smithy.SchemaExtensions
+	eMapValueStruct               smithy.SchemaExtensions
+	eMapValueStruct_name          smithy.SchemaExtensions
+	eMessageEvent                 smithy.SchemaExtensions
+	eMessageEvent_body            smithy.SchemaExtensions
+	e_SparseStringList            smithy.SchemaExtensions
+	e_SparseStringList_member     smithy.SchemaExtensions
+	e_SparseStringMap             smithy.SchemaExtensions
+	e_SparseStringMap_key         smithy.SchemaExtensions
+	e_SparseStringMap_value       smithy.SchemaExtensions
+	eGetItemInput                 smithy.SchemaExtensions
+	eGetItemInput_item            smithy.SchemaExtensions
+	eGetItemInput_id              smithy.SchemaExtensions
+	eGetItemOutput                smithy.SchemaExtensions
+	eGetListsInput                smithy.SchemaExtensions
+	eGetListsOutput               smithy.SchemaExtensions
+	eGetListsOutput_strings       smithy.SchemaExtensions
+	eGetListsOutput_integers      smithy.SchemaExtensions
+	eGetListsOutput_structs       smithy.SchemaExtensions
+	eGetListsOutput_sparseStrings smithy.SchemaExtensions
+	eGetMapsInput                 smithy.SchemaExtensions
+	eGetMapsOutput                smithy.SchemaExtensions
+	eGetMapsOutput_strings        smithy.SchemaExtensions
+	eGetMapsOutput_integers       smithy.SchemaExtensions
+	eGetMapsOutput_structs        smithy.SchemaExtensions
+	eGetMapsOutput_sparseStrings  smithy.SchemaExtensions
+	ePutCompressedDataInput       smithy.SchemaExtensions
+	ePutCompressedDataInput_data  smithy.SchemaExtensions
+	ePutCompressedDataOutput      smithy.SchemaExtensions
+	eSubscribeEventsInput         smithy.SchemaExtensions
+	eSubscribeEventsOutput        smithy.SchemaExtensions
+	eSubscribeEventsOutput_events smithy.SchemaExtensions
+)
 
 var (
 	iGetItem                 = smithy.ShapeID{Namespace: "aws.kitchensinktest", Name: "GetItem"}
@@ -70,66 +128,66 @@ var mGetMapsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMapsOutput
 var mPutCompressedDataInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutCompressedDataInput_data}}
 var mSubscribeEventsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscribeEventsOutput_events}}
 
-var sGetItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetItem, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sGetLists = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLists, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sGetMaps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMaps, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sPutCompressedData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCompressedData, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sSubscribeEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribeEvents, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var s_AwsJson1KitchenSink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsJson1KitchenSink, Type: smithy.ShapeTypeService, Ext: &ext[5]})
-var s_DenseIntegerList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DenseIntegerList, Members: &m_DenseIntegerList, Type: smithy.ShapeTypeList, Ext: &ext[6]})
-var s_DenseIntegerMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DenseIntegerMap, Members: &m_DenseIntegerMap, Type: smithy.ShapeTypeMap, Ext: &ext[8]})
-var s_DenseStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DenseStringList, Members: &m_DenseStringList, Type: smithy.ShapeTypeList, Ext: &ext[11]})
-var s_DenseStringMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DenseStringMap, Members: &m_DenseStringMap, Type: smithy.ShapeTypeMap, Ext: &ext[13]})
-var s_DenseStructList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DenseStructList, Members: &m_DenseStructList, Type: smithy.ShapeTypeList, Ext: &ext[16]})
-var s_DenseStructMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DenseStructMap, Members: &m_DenseStructMap, Type: smithy.ShapeTypeMap, Ext: &ext[18]})
-var sEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvents, Members: &mEvents, Traits: &t0, Type: smithy.ShapeTypeUnion, Ext: &ext[21]})
-var sItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iItem, Type: smithy.ShapeTypeStructure, Ext: &ext[23]})
-var sItemNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iItemNotFound, Members: &mItemNotFound, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[24]})
-var sListValueStruct = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListValueStruct, Members: &mListValueStruct, Type: smithy.ShapeTypeStructure, Ext: &ext[26]})
-var sMapValueStruct = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMapValueStruct, Members: &mMapValueStruct, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
-var sMessageEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageEvent, Members: &mMessageEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[30]})
-var s_SparseStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SparseStringList, Members: &m_SparseStringList, Type: smithy.ShapeTypeList, Ext: &ext[32]})
-var s_SparseStringMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SparseStringMap, Members: &m_SparseStringMap, Type: smithy.ShapeTypeMap, Ext: &ext[34]})
-var sGetItemInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetItemInput, Members: &mGetItemInput, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var sGetItemOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetItemOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[40]})
-var sGetListsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetListsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[41]})
-var sGetListsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetListsOutput, Members: &mGetListsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[42]})
-var sGetMapsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMapsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[47]})
-var sGetMapsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMapsOutput, Members: &mGetMapsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[48]})
-var sPutCompressedDataInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCompressedDataInput, Members: &mPutCompressedDataInput, Type: smithy.ShapeTypeStructure, Ext: &ext[53]})
-var sPutCompressedDataOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCompressedDataOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[55]})
-var sSubscribeEventsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribeEventsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[56]})
-var sSubscribeEventsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribeEventsOutput, Members: &mSubscribeEventsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[57]})
+var sGetItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetItem, Type: smithy.ShapeTypeOperation, Ext: &eGetItem})
+var sGetLists = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLists, Type: smithy.ShapeTypeOperation, Ext: &eGetLists})
+var sGetMaps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMaps, Type: smithy.ShapeTypeOperation, Ext: &eGetMaps})
+var sPutCompressedData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCompressedData, Type: smithy.ShapeTypeOperation, Ext: &ePutCompressedData})
+var sSubscribeEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribeEvents, Type: smithy.ShapeTypeOperation, Ext: &eSubscribeEvents})
+var s_AwsJson1KitchenSink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsJson1KitchenSink, Type: smithy.ShapeTypeService, Ext: &e_AwsJson1KitchenSink})
+var s_DenseIntegerList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DenseIntegerList, Members: &m_DenseIntegerList, Type: smithy.ShapeTypeList, Ext: &e_DenseIntegerList})
+var s_DenseIntegerMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DenseIntegerMap, Members: &m_DenseIntegerMap, Type: smithy.ShapeTypeMap, Ext: &e_DenseIntegerMap})
+var s_DenseStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DenseStringList, Members: &m_DenseStringList, Type: smithy.ShapeTypeList, Ext: &e_DenseStringList})
+var s_DenseStringMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DenseStringMap, Members: &m_DenseStringMap, Type: smithy.ShapeTypeMap, Ext: &e_DenseStringMap})
+var s_DenseStructList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DenseStructList, Members: &m_DenseStructList, Type: smithy.ShapeTypeList, Ext: &e_DenseStructList})
+var s_DenseStructMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DenseStructMap, Members: &m_DenseStructMap, Type: smithy.ShapeTypeMap, Ext: &e_DenseStructMap})
+var sEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvents, Members: &mEvents, Traits: &t0, Type: smithy.ShapeTypeUnion, Ext: &eEvents})
+var sItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iItem, Type: smithy.ShapeTypeStructure, Ext: &eItem})
+var sItemNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iItemNotFound, Members: &mItemNotFound, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eItemNotFound})
+var sListValueStruct = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListValueStruct, Members: &mListValueStruct, Type: smithy.ShapeTypeStructure, Ext: &eListValueStruct})
+var sMapValueStruct = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMapValueStruct, Members: &mMapValueStruct, Type: smithy.ShapeTypeStructure, Ext: &eMapValueStruct})
+var sMessageEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageEvent, Members: &mMessageEvent, Type: smithy.ShapeTypeStructure, Ext: &eMessageEvent})
+var s_SparseStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SparseStringList, Members: &m_SparseStringList, Type: smithy.ShapeTypeList, Ext: &e_SparseStringList})
+var s_SparseStringMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SparseStringMap, Members: &m_SparseStringMap, Type: smithy.ShapeTypeMap, Ext: &e_SparseStringMap})
+var sGetItemInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetItemInput, Members: &mGetItemInput, Type: smithy.ShapeTypeStructure, Ext: &eGetItemInput})
+var sGetItemOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetItemOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetItemOutput})
+var sGetListsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetListsInput, Type: smithy.ShapeTypeStructure, Ext: &eGetListsInput})
+var sGetListsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetListsOutput, Members: &mGetListsOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetListsOutput})
+var sGetMapsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMapsInput, Type: smithy.ShapeTypeStructure, Ext: &eGetMapsInput})
+var sGetMapsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMapsOutput, Members: &mGetMapsOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetMapsOutput})
+var sPutCompressedDataInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCompressedDataInput, Members: &mPutCompressedDataInput, Type: smithy.ShapeTypeStructure, Ext: &ePutCompressedDataInput})
+var sPutCompressedDataOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCompressedDataOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutCompressedDataOutput})
+var sSubscribeEventsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribeEventsInput, Type: smithy.ShapeTypeStructure, Ext: &eSubscribeEventsInput})
+var sSubscribeEventsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribeEventsOutput, Members: &mSubscribeEventsOutput, Type: smithy.ShapeTypeStructure, Ext: &eSubscribeEventsOutput})
 
-var s_DenseIntegerList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[7]})
-var s_DenseIntegerMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[9]})
-var s_DenseIntegerMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[10]})
-var s_DenseStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[12]})
-var s_DenseStringMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[14]})
-var s_DenseStringMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[15]})
-var s_DenseStructList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListValueStruct, Members: &mListValueStruct, Type: smithy.ShapeTypeStructure, Ext: &ext[17]})
-var s_DenseStructMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[19]})
-var s_DenseStructMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iMapValueStruct, Members: &mMapValueStruct, Type: smithy.ShapeTypeStructure, Ext: &ext[20]})
-var sEvents_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &iMessageEvent, Members: &mMessageEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[22]})
-var sItemNotFound_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[25]})
-var sListValueStruct_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[27]})
-var sMapValueStruct_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[29]})
-var sMessageEvent_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var s_SparseStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var s_SparseStringMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var s_SparseStringMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var sGetItemInput_item = smithy.NewStaticSchema(smithy.StaticSchema{Member: "item", ID: &iItem, Type: smithy.ShapeTypeStructure, Ext: &ext[38]})
-var sGetItemInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[39]})
-var sGetListsOutput_strings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strings", ID: &i_DenseStringList, Members: &m_DenseStringList, Type: smithy.ShapeTypeList, Ext: &ext[43]})
-var sGetListsOutput_integers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integers", ID: &i_DenseIntegerList, Members: &m_DenseIntegerList, Type: smithy.ShapeTypeList, Ext: &ext[44]})
-var sGetListsOutput_structs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "structs", ID: &i_DenseStructList, Members: &m_DenseStructList, Type: smithy.ShapeTypeList, Ext: &ext[45]})
-var sGetListsOutput_sparseStrings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sparseStrings", ID: &i_SparseStringList, Members: &m_SparseStringList, Type: smithy.ShapeTypeList, Ext: &ext[46]})
-var sGetMapsOutput_strings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strings", ID: &i_DenseStringMap, Members: &m_DenseStringMap, Type: smithy.ShapeTypeMap, Ext: &ext[49]})
-var sGetMapsOutput_integers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integers", ID: &i_DenseIntegerMap, Members: &m_DenseIntegerMap, Type: smithy.ShapeTypeMap, Ext: &ext[50]})
-var sGetMapsOutput_structs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "structs", ID: &i_DenseStructMap, Members: &m_DenseStructMap, Type: smithy.ShapeTypeMap, Ext: &ext[51]})
-var sGetMapsOutput_sparseStrings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sparseStrings", ID: &i_SparseStringMap, Members: &m_SparseStringMap, Type: smithy.ShapeTypeMap, Ext: &ext[52]})
-var sPutCompressedDataInput_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var sSubscribeEventsOutput_events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "events", ID: &iEvents, Members: &mEvents, Traits: &t3, Type: smithy.ShapeTypeUnion, Ext: &ext[58]})
+var s_DenseIntegerList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &e_DenseIntegerList_member})
+var s_DenseIntegerMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_DenseIntegerMap_key})
+var s_DenseIntegerMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &e_DenseIntegerMap_value})
+var s_DenseStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_DenseStringList_member})
+var s_DenseStringMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_DenseStringMap_key})
+var s_DenseStringMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_DenseStringMap_value})
+var s_DenseStructList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListValueStruct, Members: &mListValueStruct, Type: smithy.ShapeTypeStructure, Ext: &e_DenseStructList_member})
+var s_DenseStructMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_DenseStructMap_key})
+var s_DenseStructMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iMapValueStruct, Members: &mMapValueStruct, Type: smithy.ShapeTypeStructure, Ext: &e_DenseStructMap_value})
+var sEvents_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &iMessageEvent, Members: &mMessageEvent, Type: smithy.ShapeTypeStructure, Ext: &eEvents_message})
+var sItemNotFound_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eItemNotFound_message})
+var sListValueStruct_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListValueStruct_name})
+var sMapValueStruct_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMapValueStruct_name})
+var sMessageEvent_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMessageEvent_body})
+var s_SparseStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_SparseStringList_member})
+var s_SparseStringMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_SparseStringMap_key})
+var s_SparseStringMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_SparseStringMap_value})
+var sGetItemInput_item = smithy.NewStaticSchema(smithy.StaticSchema{Member: "item", ID: &iItem, Type: smithy.ShapeTypeStructure, Ext: &eGetItemInput_item})
+var sGetItemInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eGetItemInput_id})
+var sGetListsOutput_strings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strings", ID: &i_DenseStringList, Members: &m_DenseStringList, Type: smithy.ShapeTypeList, Ext: &eGetListsOutput_strings})
+var sGetListsOutput_integers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integers", ID: &i_DenseIntegerList, Members: &m_DenseIntegerList, Type: smithy.ShapeTypeList, Ext: &eGetListsOutput_integers})
+var sGetListsOutput_structs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "structs", ID: &i_DenseStructList, Members: &m_DenseStructList, Type: smithy.ShapeTypeList, Ext: &eGetListsOutput_structs})
+var sGetListsOutput_sparseStrings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sparseStrings", ID: &i_SparseStringList, Members: &m_SparseStringList, Type: smithy.ShapeTypeList, Ext: &eGetListsOutput_sparseStrings})
+var sGetMapsOutput_strings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strings", ID: &i_DenseStringMap, Members: &m_DenseStringMap, Type: smithy.ShapeTypeMap, Ext: &eGetMapsOutput_strings})
+var sGetMapsOutput_integers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integers", ID: &i_DenseIntegerMap, Members: &m_DenseIntegerMap, Type: smithy.ShapeTypeMap, Ext: &eGetMapsOutput_integers})
+var sGetMapsOutput_structs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "structs", ID: &i_DenseStructMap, Members: &m_DenseStructMap, Type: smithy.ShapeTypeMap, Ext: &eGetMapsOutput_structs})
+var sGetMapsOutput_sparseStrings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sparseStrings", ID: &i_SparseStringMap, Members: &m_SparseStringMap, Type: smithy.ShapeTypeMap, Ext: &eGetMapsOutput_sparseStrings})
+var sPutCompressedDataInput_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePutCompressedDataInput_data})
+var sSubscribeEventsOutput_events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "events", ID: &iEvents, Members: &mEvents, Traits: &t3, Type: smithy.ShapeTypeUnion, Ext: &eSubscribeEventsOutput_events})
 
 var GetItem = &sGetItem
 

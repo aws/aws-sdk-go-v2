@@ -7,9 +7,459 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [451]smithy.SchemaExtensions
+var (
+	eAcceptChannelHandshake                                                smithy.SchemaExtensions
+	eCancelChannelHandshake                                                smithy.SchemaExtensions
+	eCreateChannelHandshake                                                smithy.SchemaExtensions
+	eCreateProgramManagementAccount                                        smithy.SchemaExtensions
+	eCreateRelationship                                                    smithy.SchemaExtensions
+	eDeleteProgramManagementAccount                                        smithy.SchemaExtensions
+	eDeleteRelationship                                                    smithy.SchemaExtensions
+	eGetRelationship                                                       smithy.SchemaExtensions
+	eListChannelHandshakes                                                 smithy.SchemaExtensions
+	eListProgramManagementAccounts                                         smithy.SchemaExtensions
+	eListRelationships                                                     smithy.SchemaExtensions
+	eListTagsForResource                                                   smithy.SchemaExtensions
+	eRejectChannelHandshake                                                smithy.SchemaExtensions
+	eTagResource                                                           smithy.SchemaExtensions
+	eUntagResource                                                         smithy.SchemaExtensions
+	eUpdateProgramManagementAccount                                        smithy.SchemaExtensions
+	eUpdateRelationship                                                    smithy.SchemaExtensions
+	e_PartnerCentralChannel                                                smithy.SchemaExtensions
+	eAcceptChannelHandshakeDetail                                          smithy.SchemaExtensions
+	eAcceptChannelHandshakeDetail_id                                       smithy.SchemaExtensions
+	eAcceptChannelHandshakeDetail_arn                                      smithy.SchemaExtensions
+	eAcceptChannelHandshakeDetail_status                                   smithy.SchemaExtensions
+	eAccessDeniedException                                                 smithy.SchemaExtensions
+	eAccessDeniedException_message                                         smithy.SchemaExtensions
+	eAccessDeniedException_reason                                          smithy.SchemaExtensions
+	e_AccountId                                                            smithy.SchemaExtensions
+	e_AccountIdList                                                        smithy.SchemaExtensions
+	e_AccountIdList_member                                                 smithy.SchemaExtensions
+	e_Arn                                                                  smithy.SchemaExtensions
+	e_AssociatedResourceId                                                 smithy.SchemaExtensions
+	e_AssociatedResourceIdentifier                                         smithy.SchemaExtensions
+	e_AssociatedResourceIdentifierList                                     smithy.SchemaExtensions
+	e_AssociatedResourceIdentifierList_member                              smithy.SchemaExtensions
+	eAssociationType                                                       smithy.SchemaExtensions
+	eAssociationType_DOWNSTREAM_SELLER                                     smithy.SchemaExtensions
+	eAssociationType_END_CUSTOMER                                          smithy.SchemaExtensions
+	eAssociationType_INTERNAL                                              smithy.SchemaExtensions
+	e_AssociationTypeList                                                  smithy.SchemaExtensions
+	e_AssociationTypeList_member                                           smithy.SchemaExtensions
+	eCancelChannelHandshakeDetail                                          smithy.SchemaExtensions
+	eCancelChannelHandshakeDetail_id                                       smithy.SchemaExtensions
+	eCancelChannelHandshakeDetail_arn                                      smithy.SchemaExtensions
+	eCancelChannelHandshakeDetail_status                                   smithy.SchemaExtensions
+	e_Catalog                                                              smithy.SchemaExtensions
+	e_ChannelHandshakeId                                                   smithy.SchemaExtensions
+	e_ChannelHandshakeIdentifier                                           smithy.SchemaExtensions
+	eChannelHandshakePayload                                               smithy.SchemaExtensions
+	eChannelHandshakePayload_startServicePeriodPayload                     smithy.SchemaExtensions
+	eChannelHandshakePayload_revokeServicePeriodPayload                    smithy.SchemaExtensions
+	e_ChannelHandshakeSummaries                                            smithy.SchemaExtensions
+	e_ChannelHandshakeSummaries_member                                     smithy.SchemaExtensions
+	eChannelHandshakeSummary                                               smithy.SchemaExtensions
+	eChannelHandshakeSummary_id                                            smithy.SchemaExtensions
+	eChannelHandshakeSummary_arn                                           smithy.SchemaExtensions
+	eChannelHandshakeSummary_catalog                                       smithy.SchemaExtensions
+	eChannelHandshakeSummary_handshakeType                                 smithy.SchemaExtensions
+	eChannelHandshakeSummary_ownerAccountId                                smithy.SchemaExtensions
+	eChannelHandshakeSummary_senderAccountId                               smithy.SchemaExtensions
+	eChannelHandshakeSummary_senderDisplayName                             smithy.SchemaExtensions
+	eChannelHandshakeSummary_receiverAccountId                             smithy.SchemaExtensions
+	eChannelHandshakeSummary_associatedResourceId                          smithy.SchemaExtensions
+	eChannelHandshakeSummary_detail                                        smithy.SchemaExtensions
+	eChannelHandshakeSummary_createdAt                                     smithy.SchemaExtensions
+	eChannelHandshakeSummary_updatedAt                                     smithy.SchemaExtensions
+	eChannelHandshakeSummary_status                                        smithy.SchemaExtensions
+	e_ClientToken                                                          smithy.SchemaExtensions
+	eConflictException                                                     smithy.SchemaExtensions
+	eConflictException_message                                             smithy.SchemaExtensions
+	eConflictException_resourceId                                          smithy.SchemaExtensions
+	eConflictException_resourceType                                        smithy.SchemaExtensions
+	eCoverage                                                              smithy.SchemaExtensions
+	eCoverage_ENTIRE_ORGANIZATION                                          smithy.SchemaExtensions
+	eCoverage_MANAGEMENT_ACCOUNT_ONLY                                      smithy.SchemaExtensions
+	eCreateChannelHandshakeDetail                                          smithy.SchemaExtensions
+	eCreateChannelHandshakeDetail_id                                       smithy.SchemaExtensions
+	eCreateChannelHandshakeDetail_arn                                      smithy.SchemaExtensions
+	eCreateProgramManagementAccountDetail                                  smithy.SchemaExtensions
+	eCreateProgramManagementAccountDetail_id                               smithy.SchemaExtensions
+	eCreateProgramManagementAccountDetail_arn                              smithy.SchemaExtensions
+	eCreateRelationshipDetail                                              smithy.SchemaExtensions
+	eCreateRelationshipDetail_arn                                          smithy.SchemaExtensions
+	eCreateRelationshipDetail_id                                           smithy.SchemaExtensions
+	e_DateTime                                                             smithy.SchemaExtensions
+	eHandshakeDetail                                                       smithy.SchemaExtensions
+	eHandshakeDetail_startServicePeriodHandshakeDetail                     smithy.SchemaExtensions
+	eHandshakeDetail_revokeServicePeriodHandshakeDetail                    smithy.SchemaExtensions
+	eHandshakeDetail_programManagementAccountHandshakeDetail               smithy.SchemaExtensions
+	eHandshakeStatus                                                       smithy.SchemaExtensions
+	eHandshakeStatus_PENDING                                               smithy.SchemaExtensions
+	eHandshakeStatus_ACCEPTED                                              smithy.SchemaExtensions
+	eHandshakeStatus_REJECTED                                              smithy.SchemaExtensions
+	eHandshakeStatus_CANCELED                                              smithy.SchemaExtensions
+	eHandshakeStatus_EXPIRED                                               smithy.SchemaExtensions
+	e_HandshakeStatusList                                                  smithy.SchemaExtensions
+	e_HandshakeStatusList_member                                           smithy.SchemaExtensions
+	eHandshakeType                                                         smithy.SchemaExtensions
+	eHandshakeType_START_SERVICE_PERIOD                                    smithy.SchemaExtensions
+	eHandshakeType_REVOKE_SERVICE_PERIOD                                   smithy.SchemaExtensions
+	eHandshakeType_PROGRAM_MANAGEMENT_ACCOUNT                              smithy.SchemaExtensions
+	eInternalServerException                                               smithy.SchemaExtensions
+	eInternalServerException_message                                       smithy.SchemaExtensions
+	eListChannelHandshakesTypeFilters                                      smithy.SchemaExtensions
+	eListChannelHandshakesTypeFilters_startServicePeriodTypeFilters        smithy.SchemaExtensions
+	eListChannelHandshakesTypeFilters_revokeServicePeriodTypeFilters       smithy.SchemaExtensions
+	eListChannelHandshakesTypeFilters_programManagementAccountTypeFilters  smithy.SchemaExtensions
+	eListChannelHandshakesTypeSort                                         smithy.SchemaExtensions
+	eListChannelHandshakesTypeSort_startServicePeriodTypeSort              smithy.SchemaExtensions
+	eListChannelHandshakesTypeSort_revokeServicePeriodTypeSort             smithy.SchemaExtensions
+	eListChannelHandshakesTypeSort_programManagementAccountTypeSort        smithy.SchemaExtensions
+	eListProgramManagementAccountsSortBase                                 smithy.SchemaExtensions
+	eListProgramManagementAccountsSortBase_sortOrder                       smithy.SchemaExtensions
+	eListProgramManagementAccountsSortBase_sortBy                          smithy.SchemaExtensions
+	eListProgramManagementAccountsSortName                                 smithy.SchemaExtensions
+	eListProgramManagementAccountsSortName_UPDATED_AT                      smithy.SchemaExtensions
+	eListRelationshipsSortBase                                             smithy.SchemaExtensions
+	eListRelationshipsSortBase_sortOrder                                   smithy.SchemaExtensions
+	eListRelationshipsSortBase_sortBy                                      smithy.SchemaExtensions
+	eListRelationshipsSortName                                             smithy.SchemaExtensions
+	eListRelationshipsSortName_UPDATED_AT                                  smithy.SchemaExtensions
+	e_MinimumNoticeDays                                                    smithy.SchemaExtensions
+	e_NextToken                                                            smithy.SchemaExtensions
+	e_Note                                                                 smithy.SchemaExtensions
+	eParticipantType                                                       smithy.SchemaExtensions
+	eParticipantType_SENDER                                                smithy.SchemaExtensions
+	eParticipantType_RECEIVER                                              smithy.SchemaExtensions
+	ePartnerLedSupport                                                     smithy.SchemaExtensions
+	ePartnerLedSupport_coverage                                            smithy.SchemaExtensions
+	ePartnerLedSupport_provider                                            smithy.SchemaExtensions
+	ePartnerLedSupport_tamLocation                                         smithy.SchemaExtensions
+	e_PartnerProfileDisplayName                                            smithy.SchemaExtensions
+	eProgram                                                               smithy.SchemaExtensions
+	eProgram_SOLUTION_PROVIDER                                             smithy.SchemaExtensions
+	eProgram_DISTRIBUTION                                                  smithy.SchemaExtensions
+	eProgram_DISTRIBUTION_SELLER                                           smithy.SchemaExtensions
+	e_ProgramList                                                          smithy.SchemaExtensions
+	e_ProgramList_member                                                   smithy.SchemaExtensions
+	e_ProgramManagementAccountDisplayName                                  smithy.SchemaExtensions
+	e_ProgramManagementAccountDisplayNameList                              smithy.SchemaExtensions
+	e_ProgramManagementAccountDisplayNameList_member                       smithy.SchemaExtensions
+	eProgramManagementAccountHandshakeDetail                               smithy.SchemaExtensions
+	eProgramManagementAccountHandshakeDetail_program                       smithy.SchemaExtensions
+	e_ProgramManagementAccountId                                           smithy.SchemaExtensions
+	e_ProgramManagementAccountIdentifier                                   smithy.SchemaExtensions
+	e_ProgramManagementAccountIdentifierList                               smithy.SchemaExtensions
+	e_ProgramManagementAccountIdentifierList_member                        smithy.SchemaExtensions
+	eProgramManagementAccountStatus                                        smithy.SchemaExtensions
+	eProgramManagementAccountStatus_PENDING                                smithy.SchemaExtensions
+	eProgramManagementAccountStatus_ACTIVE                                 smithy.SchemaExtensions
+	eProgramManagementAccountStatus_INACTIVE                               smithy.SchemaExtensions
+	e_ProgramManagementAccountStatusList                                   smithy.SchemaExtensions
+	e_ProgramManagementAccountStatusList_member                            smithy.SchemaExtensions
+	e_ProgramManagementAccountSummaries                                    smithy.SchemaExtensions
+	e_ProgramManagementAccountSummaries_member                             smithy.SchemaExtensions
+	eProgramManagementAccountSummary                                       smithy.SchemaExtensions
+	eProgramManagementAccountSummary_id                                    smithy.SchemaExtensions
+	eProgramManagementAccountSummary_revision                              smithy.SchemaExtensions
+	eProgramManagementAccountSummary_catalog                               smithy.SchemaExtensions
+	eProgramManagementAccountSummary_program                               smithy.SchemaExtensions
+	eProgramManagementAccountSummary_displayName                           smithy.SchemaExtensions
+	eProgramManagementAccountSummary_accountId                             smithy.SchemaExtensions
+	eProgramManagementAccountSummary_arn                                   smithy.SchemaExtensions
+	eProgramManagementAccountSummary_createdAt                             smithy.SchemaExtensions
+	eProgramManagementAccountSummary_updatedAt                             smithy.SchemaExtensions
+	eProgramManagementAccountSummary_startDate                             smithy.SchemaExtensions
+	eProgramManagementAccountSummary_status                                smithy.SchemaExtensions
+	eProgramManagementAccountTypeFilters                                   smithy.SchemaExtensions
+	eProgramManagementAccountTypeFilters_programs                          smithy.SchemaExtensions
+	eProgramManagementAccountTypeSort                                      smithy.SchemaExtensions
+	eProgramManagementAccountTypeSort_sortOrder                            smithy.SchemaExtensions
+	eProgramManagementAccountTypeSort_sortBy                               smithy.SchemaExtensions
+	eProgramManagementAccountTypeSortName                                  smithy.SchemaExtensions
+	eProgramManagementAccountTypeSortName_UPDATED_AT                       smithy.SchemaExtensions
+	eProvider                                                              smithy.SchemaExtensions
+	eProvider_DISTRIBUTOR                                                  smithy.SchemaExtensions
+	eProvider_DISTRIBUTION_SELLER                                          smithy.SchemaExtensions
+	eRejectChannelHandshakeDetail                                          smithy.SchemaExtensions
+	eRejectChannelHandshakeDetail_id                                       smithy.SchemaExtensions
+	eRejectChannelHandshakeDetail_arn                                      smithy.SchemaExtensions
+	eRejectChannelHandshakeDetail_status                                   smithy.SchemaExtensions
+	eRelationshipDetail                                                    smithy.SchemaExtensions
+	eRelationshipDetail_arn                                                smithy.SchemaExtensions
+	eRelationshipDetail_id                                                 smithy.SchemaExtensions
+	eRelationshipDetail_revision                                           smithy.SchemaExtensions
+	eRelationshipDetail_catalog                                            smithy.SchemaExtensions
+	eRelationshipDetail_associationType                                    smithy.SchemaExtensions
+	eRelationshipDetail_programManagementAccountId                         smithy.SchemaExtensions
+	eRelationshipDetail_associatedAccountId                                smithy.SchemaExtensions
+	eRelationshipDetail_displayName                                        smithy.SchemaExtensions
+	eRelationshipDetail_resaleAccountModel                                 smithy.SchemaExtensions
+	eRelationshipDetail_sector                                             smithy.SchemaExtensions
+	eRelationshipDetail_createdAt                                          smithy.SchemaExtensions
+	eRelationshipDetail_updatedAt                                          smithy.SchemaExtensions
+	eRelationshipDetail_startDate                                          smithy.SchemaExtensions
+	e_RelationshipDisplayName                                              smithy.SchemaExtensions
+	e_RelationshipDisplayNameList                                          smithy.SchemaExtensions
+	e_RelationshipDisplayNameList_member                                   smithy.SchemaExtensions
+	e_RelationshipId                                                       smithy.SchemaExtensions
+	e_RelationshipIdentifier                                               smithy.SchemaExtensions
+	e_RelationshipSummaries                                                smithy.SchemaExtensions
+	e_RelationshipSummaries_member                                         smithy.SchemaExtensions
+	eRelationshipSummary                                                   smithy.SchemaExtensions
+	eRelationshipSummary_arn                                               smithy.SchemaExtensions
+	eRelationshipSummary_id                                                smithy.SchemaExtensions
+	eRelationshipSummary_revision                                          smithy.SchemaExtensions
+	eRelationshipSummary_catalog                                           smithy.SchemaExtensions
+	eRelationshipSummary_associationType                                   smithy.SchemaExtensions
+	eRelationshipSummary_programManagementAccountId                        smithy.SchemaExtensions
+	eRelationshipSummary_associatedAccountId                               smithy.SchemaExtensions
+	eRelationshipSummary_displayName                                       smithy.SchemaExtensions
+	eRelationshipSummary_sector                                            smithy.SchemaExtensions
+	eRelationshipSummary_createdAt                                         smithy.SchemaExtensions
+	eRelationshipSummary_updatedAt                                         smithy.SchemaExtensions
+	eRelationshipSummary_startDate                                         smithy.SchemaExtensions
+	eResaleAccountModel                                                    smithy.SchemaExtensions
+	eResaleAccountModel_DISTRIBUTOR                                        smithy.SchemaExtensions
+	eResaleAccountModel_END_CUSTOMER                                       smithy.SchemaExtensions
+	eResaleAccountModel_SOLUTION_PROVIDER                                  smithy.SchemaExtensions
+	eResoldEnterprise                                                      smithy.SchemaExtensions
+	eResoldEnterprise_coverage                                             smithy.SchemaExtensions
+	eResoldEnterprise_tamLocation                                          smithy.SchemaExtensions
+	eResoldEnterprise_chargeAccountId                                      smithy.SchemaExtensions
+	eResoldUnifiedOperations                                               smithy.SchemaExtensions
+	eResoldUnifiedOperations_coverage                                      smithy.SchemaExtensions
+	eResoldUnifiedOperations_tamLocation                                   smithy.SchemaExtensions
+	eResoldUnifiedOperations_chargeAccountId                               smithy.SchemaExtensions
+	eResourceNotFoundException                                             smithy.SchemaExtensions
+	eResourceNotFoundException_message                                     smithy.SchemaExtensions
+	eResourceNotFoundException_resourceId                                  smithy.SchemaExtensions
+	eResourceNotFoundException_resourceType                                smithy.SchemaExtensions
+	e_Revision                                                             smithy.SchemaExtensions
+	eRevokeServicePeriodHandshakeDetail                                    smithy.SchemaExtensions
+	eRevokeServicePeriodHandshakeDetail_note                               smithy.SchemaExtensions
+	eRevokeServicePeriodHandshakeDetail_servicePeriodType                  smithy.SchemaExtensions
+	eRevokeServicePeriodHandshakeDetail_minimumNoticeDays                  smithy.SchemaExtensions
+	eRevokeServicePeriodHandshakeDetail_startDate                          smithy.SchemaExtensions
+	eRevokeServicePeriodHandshakeDetail_endDate                            smithy.SchemaExtensions
+	eRevokeServicePeriodPayload                                            smithy.SchemaExtensions
+	eRevokeServicePeriodPayload_programManagementAccountIdentifier         smithy.SchemaExtensions
+	eRevokeServicePeriodPayload_note                                       smithy.SchemaExtensions
+	eRevokeServicePeriodTypeFilters                                        smithy.SchemaExtensions
+	eRevokeServicePeriodTypeFilters_servicePeriodTypes                     smithy.SchemaExtensions
+	eRevokeServicePeriodTypeSort                                           smithy.SchemaExtensions
+	eRevokeServicePeriodTypeSort_sortOrder                                 smithy.SchemaExtensions
+	eRevokeServicePeriodTypeSort_sortBy                                    smithy.SchemaExtensions
+	eRevokeServicePeriodTypeSortName                                       smithy.SchemaExtensions
+	eRevokeServicePeriodTypeSortName_UPDATED_AT                            smithy.SchemaExtensions
+	eSector                                                                smithy.SchemaExtensions
+	eSector_COMMERCIAL                                                     smithy.SchemaExtensions
+	eSector_GOVERNMENT                                                     smithy.SchemaExtensions
+	eSector_GOVERNMENT_EXCEPTION                                           smithy.SchemaExtensions
+	eServicePeriodType                                                     smithy.SchemaExtensions
+	eServicePeriodType_MINIMUM_NOTICE_PERIOD                               smithy.SchemaExtensions
+	eServicePeriodType_FIXED_COMMITMENT_PERIOD                             smithy.SchemaExtensions
+	e_ServicePeriodTypeList                                                smithy.SchemaExtensions
+	e_ServicePeriodTypeList_member                                         smithy.SchemaExtensions
+	eServiceQuotaExceededException                                         smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                                 smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceId                              smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceType                            smithy.SchemaExtensions
+	eServiceQuotaExceededException_quotaCode                               smithy.SchemaExtensions
+	eSortOrder                                                             smithy.SchemaExtensions
+	eSortOrder_ASCENDING                                                   smithy.SchemaExtensions
+	eSortOrder_DESCENDING                                                  smithy.SchemaExtensions
+	eStartServicePeriodHandshakeDetail                                     smithy.SchemaExtensions
+	eStartServicePeriodHandshakeDetail_note                                smithy.SchemaExtensions
+	eStartServicePeriodHandshakeDetail_servicePeriodType                   smithy.SchemaExtensions
+	eStartServicePeriodHandshakeDetail_minimumNoticeDays                   smithy.SchemaExtensions
+	eStartServicePeriodHandshakeDetail_startDate                           smithy.SchemaExtensions
+	eStartServicePeriodHandshakeDetail_endDate                             smithy.SchemaExtensions
+	eStartServicePeriodPayload                                             smithy.SchemaExtensions
+	eStartServicePeriodPayload_programManagementAccountIdentifier          smithy.SchemaExtensions
+	eStartServicePeriodPayload_note                                        smithy.SchemaExtensions
+	eStartServicePeriodPayload_servicePeriodType                           smithy.SchemaExtensions
+	eStartServicePeriodPayload_minimumNoticeDays                           smithy.SchemaExtensions
+	eStartServicePeriodPayload_endDate                                     smithy.SchemaExtensions
+	eStartServicePeriodTypeFilters                                         smithy.SchemaExtensions
+	eStartServicePeriodTypeFilters_servicePeriodTypes                      smithy.SchemaExtensions
+	eStartServicePeriodTypeSort                                            smithy.SchemaExtensions
+	eStartServicePeriodTypeSort_sortOrder                                  smithy.SchemaExtensions
+	eStartServicePeriodTypeSort_sortBy                                     smithy.SchemaExtensions
+	eStartServicePeriodTypeSortName                                        smithy.SchemaExtensions
+	eStartServicePeriodTypeSortName_UPDATED_AT                             smithy.SchemaExtensions
+	eSupportPlan                                                           smithy.SchemaExtensions
+	eSupportPlan_resoldEnterprise                                          smithy.SchemaExtensions
+	eSupportPlan_partnerLedSupport                                         smithy.SchemaExtensions
+	eSupportPlan_resoldUnifiedOperations                                   smithy.SchemaExtensions
+	eTag                                                                   smithy.SchemaExtensions
+	eTag_key                                                               smithy.SchemaExtensions
+	eTag_value                                                             smithy.SchemaExtensions
+	e_TaggableArn                                                          smithy.SchemaExtensions
+	e_TagKey                                                               smithy.SchemaExtensions
+	e_TagKeyList                                                           smithy.SchemaExtensions
+	e_TagKeyList_member                                                    smithy.SchemaExtensions
+	e_TagList                                                              smithy.SchemaExtensions
+	e_TagList_member                                                       smithy.SchemaExtensions
+	e_TagValue                                                             smithy.SchemaExtensions
+	eThrottlingException                                                   smithy.SchemaExtensions
+	eThrottlingException_message                                           smithy.SchemaExtensions
+	eThrottlingException_serviceCode                                       smithy.SchemaExtensions
+	eThrottlingException_quotaCode                                         smithy.SchemaExtensions
+	eUpdateProgramManagementAccountDetail                                  smithy.SchemaExtensions
+	eUpdateProgramManagementAccountDetail_id                               smithy.SchemaExtensions
+	eUpdateProgramManagementAccountDetail_arn                              smithy.SchemaExtensions
+	eUpdateProgramManagementAccountDetail_revision                         smithy.SchemaExtensions
+	eUpdateProgramManagementAccountDetail_displayName                      smithy.SchemaExtensions
+	eUpdateRelationshipDetail                                              smithy.SchemaExtensions
+	eUpdateRelationshipDetail_arn                                          smithy.SchemaExtensions
+	eUpdateRelationshipDetail_id                                           smithy.SchemaExtensions
+	eUpdateRelationshipDetail_revision                                     smithy.SchemaExtensions
+	eUpdateRelationshipDetail_displayName                                  smithy.SchemaExtensions
+	eValidationException                                                   smithy.SchemaExtensions
+	eValidationException_message                                           smithy.SchemaExtensions
+	eValidationException_reason                                            smithy.SchemaExtensions
+	eValidationException_fieldList                                         smithy.SchemaExtensions
+	eValidationExceptionField                                              smithy.SchemaExtensions
+	eValidationExceptionField_name                                         smithy.SchemaExtensions
+	eValidationExceptionField_code                                         smithy.SchemaExtensions
+	eValidationExceptionField_message                                      smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                                         smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member                                  smithy.SchemaExtensions
+	eValidationExceptionReason                                             smithy.SchemaExtensions
+	eValidationExceptionReason_REQUEST_VALIDATION_FAILED                   smithy.SchemaExtensions
+	eValidationExceptionReason_BUSINESS_VALIDATION_FAILED                  smithy.SchemaExtensions
+	eAcceptChannelHandshakeRequest                                         smithy.SchemaExtensions
+	eAcceptChannelHandshakeRequest_catalog                                 smithy.SchemaExtensions
+	eAcceptChannelHandshakeRequest_identifier                              smithy.SchemaExtensions
+	eAcceptChannelHandshakeResponse                                        smithy.SchemaExtensions
+	eAcceptChannelHandshakeResponse_channelHandshakeDetail                 smithy.SchemaExtensions
+	eCancelChannelHandshakeRequest                                         smithy.SchemaExtensions
+	eCancelChannelHandshakeRequest_catalog                                 smithy.SchemaExtensions
+	eCancelChannelHandshakeRequest_identifier                              smithy.SchemaExtensions
+	eCancelChannelHandshakeResponse                                        smithy.SchemaExtensions
+	eCancelChannelHandshakeResponse_channelHandshakeDetail                 smithy.SchemaExtensions
+	eCreateChannelHandshakeRequest                                         smithy.SchemaExtensions
+	eCreateChannelHandshakeRequest_handshakeType                           smithy.SchemaExtensions
+	eCreateChannelHandshakeRequest_catalog                                 smithy.SchemaExtensions
+	eCreateChannelHandshakeRequest_associatedResourceIdentifier            smithy.SchemaExtensions
+	eCreateChannelHandshakeRequest_payload                                 smithy.SchemaExtensions
+	eCreateChannelHandshakeRequest_clientToken                             smithy.SchemaExtensions
+	eCreateChannelHandshakeRequest_tags                                    smithy.SchemaExtensions
+	eCreateChannelHandshakeResponse                                        smithy.SchemaExtensions
+	eCreateChannelHandshakeResponse_channelHandshakeDetail                 smithy.SchemaExtensions
+	eCreateProgramManagementAccountRequest                                 smithy.SchemaExtensions
+	eCreateProgramManagementAccountRequest_catalog                         smithy.SchemaExtensions
+	eCreateProgramManagementAccountRequest_program                         smithy.SchemaExtensions
+	eCreateProgramManagementAccountRequest_displayName                     smithy.SchemaExtensions
+	eCreateProgramManagementAccountRequest_accountId                       smithy.SchemaExtensions
+	eCreateProgramManagementAccountRequest_clientToken                     smithy.SchemaExtensions
+	eCreateProgramManagementAccountRequest_tags                            smithy.SchemaExtensions
+	eCreateProgramManagementAccountResponse                                smithy.SchemaExtensions
+	eCreateProgramManagementAccountResponse_programManagementAccountDetail smithy.SchemaExtensions
+	eCreateRelationshipRequest                                             smithy.SchemaExtensions
+	eCreateRelationshipRequest_catalog                                     smithy.SchemaExtensions
+	eCreateRelationshipRequest_associationType                             smithy.SchemaExtensions
+	eCreateRelationshipRequest_programManagementAccountIdentifier          smithy.SchemaExtensions
+	eCreateRelationshipRequest_associatedAccountId                         smithy.SchemaExtensions
+	eCreateRelationshipRequest_displayName                                 smithy.SchemaExtensions
+	eCreateRelationshipRequest_resaleAccountModel                          smithy.SchemaExtensions
+	eCreateRelationshipRequest_sector                                      smithy.SchemaExtensions
+	eCreateRelationshipRequest_clientToken                                 smithy.SchemaExtensions
+	eCreateRelationshipRequest_tags                                        smithy.SchemaExtensions
+	eCreateRelationshipRequest_requestedSupportPlan                        smithy.SchemaExtensions
+	eCreateRelationshipResponse                                            smithy.SchemaExtensions
+	eCreateRelationshipResponse_relationshipDetail                         smithy.SchemaExtensions
+	eDeleteProgramManagementAccountRequest                                 smithy.SchemaExtensions
+	eDeleteProgramManagementAccountRequest_catalog                         smithy.SchemaExtensions
+	eDeleteProgramManagementAccountRequest_identifier                      smithy.SchemaExtensions
+	eDeleteProgramManagementAccountRequest_clientToken                     smithy.SchemaExtensions
+	eDeleteProgramManagementAccountResponse                                smithy.SchemaExtensions
+	eDeleteRelationshipRequest                                             smithy.SchemaExtensions
+	eDeleteRelationshipRequest_catalog                                     smithy.SchemaExtensions
+	eDeleteRelationshipRequest_identifier                                  smithy.SchemaExtensions
+	eDeleteRelationshipRequest_programManagementAccountIdentifier          smithy.SchemaExtensions
+	eDeleteRelationshipRequest_clientToken                                 smithy.SchemaExtensions
+	eDeleteRelationshipResponse                                            smithy.SchemaExtensions
+	eGetRelationshipRequest                                                smithy.SchemaExtensions
+	eGetRelationshipRequest_catalog                                        smithy.SchemaExtensions
+	eGetRelationshipRequest_programManagementAccountIdentifier             smithy.SchemaExtensions
+	eGetRelationshipRequest_identifier                                     smithy.SchemaExtensions
+	eGetRelationshipResponse                                               smithy.SchemaExtensions
+	eGetRelationshipResponse_relationshipDetail                            smithy.SchemaExtensions
+	eListChannelHandshakesRequest                                          smithy.SchemaExtensions
+	eListChannelHandshakesRequest_handshakeType                            smithy.SchemaExtensions
+	eListChannelHandshakesRequest_catalog                                  smithy.SchemaExtensions
+	eListChannelHandshakesRequest_participantType                          smithy.SchemaExtensions
+	eListChannelHandshakesRequest_maxResults                               smithy.SchemaExtensions
+	eListChannelHandshakesRequest_statuses                                 smithy.SchemaExtensions
+	eListChannelHandshakesRequest_associatedResourceIdentifiers            smithy.SchemaExtensions
+	eListChannelHandshakesRequest_handshakeTypeFilters                     smithy.SchemaExtensions
+	eListChannelHandshakesRequest_handshakeTypeSort                        smithy.SchemaExtensions
+	eListChannelHandshakesRequest_nextToken                                smithy.SchemaExtensions
+	eListChannelHandshakesResponse                                         smithy.SchemaExtensions
+	eListChannelHandshakesResponse_items                                   smithy.SchemaExtensions
+	eListChannelHandshakesResponse_nextToken                               smithy.SchemaExtensions
+	eListProgramManagementAccountsRequest                                  smithy.SchemaExtensions
+	eListProgramManagementAccountsRequest_catalog                          smithy.SchemaExtensions
+	eListProgramManagementAccountsRequest_maxResults                       smithy.SchemaExtensions
+	eListProgramManagementAccountsRequest_displayNames                     smithy.SchemaExtensions
+	eListProgramManagementAccountsRequest_programs                         smithy.SchemaExtensions
+	eListProgramManagementAccountsRequest_accountIds                       smithy.SchemaExtensions
+	eListProgramManagementAccountsRequest_statuses                         smithy.SchemaExtensions
+	eListProgramManagementAccountsRequest_sort                             smithy.SchemaExtensions
+	eListProgramManagementAccountsRequest_nextToken                        smithy.SchemaExtensions
+	eListProgramManagementAccountsResponse                                 smithy.SchemaExtensions
+	eListProgramManagementAccountsResponse_items                           smithy.SchemaExtensions
+	eListProgramManagementAccountsResponse_nextToken                       smithy.SchemaExtensions
+	eListRelationshipsRequest                                              smithy.SchemaExtensions
+	eListRelationshipsRequest_catalog                                      smithy.SchemaExtensions
+	eListRelationshipsRequest_maxResults                                   smithy.SchemaExtensions
+	eListRelationshipsRequest_associatedAccountIds                         smithy.SchemaExtensions
+	eListRelationshipsRequest_associationTypes                             smithy.SchemaExtensions
+	eListRelationshipsRequest_displayNames                                 smithy.SchemaExtensions
+	eListRelationshipsRequest_programManagementAccountIdentifiers          smithy.SchemaExtensions
+	eListRelationshipsRequest_sort                                         smithy.SchemaExtensions
+	eListRelationshipsRequest_nextToken                                    smithy.SchemaExtensions
+	eListRelationshipsResponse                                             smithy.SchemaExtensions
+	eListRelationshipsResponse_items                                       smithy.SchemaExtensions
+	eListRelationshipsResponse_nextToken                                   smithy.SchemaExtensions
+	eListTagsForResourceRequest                                            smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceArn                                smithy.SchemaExtensions
+	eListTagsForResourceResponse                                           smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                                      smithy.SchemaExtensions
+	eRejectChannelHandshakeRequest                                         smithy.SchemaExtensions
+	eRejectChannelHandshakeRequest_catalog                                 smithy.SchemaExtensions
+	eRejectChannelHandshakeRequest_identifier                              smithy.SchemaExtensions
+	eRejectChannelHandshakeResponse                                        smithy.SchemaExtensions
+	eRejectChannelHandshakeResponse_channelHandshakeDetail                 smithy.SchemaExtensions
+	eTagResourceRequest                                                    smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                                        smithy.SchemaExtensions
+	eTagResourceRequest_tags                                               smithy.SchemaExtensions
+	eTagResourceResponse                                                   smithy.SchemaExtensions
+	eUntagResourceRequest                                                  smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                                      smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                                          smithy.SchemaExtensions
+	eUntagResourceResponse                                                 smithy.SchemaExtensions
+	eUpdateProgramManagementAccountRequest                                 smithy.SchemaExtensions
+	eUpdateProgramManagementAccountRequest_catalog                         smithy.SchemaExtensions
+	eUpdateProgramManagementAccountRequest_identifier                      smithy.SchemaExtensions
+	eUpdateProgramManagementAccountRequest_revision                        smithy.SchemaExtensions
+	eUpdateProgramManagementAccountRequest_displayName                     smithy.SchemaExtensions
+	eUpdateProgramManagementAccountResponse                                smithy.SchemaExtensions
+	eUpdateProgramManagementAccountResponse_programManagementAccountDetail smithy.SchemaExtensions
+	eUpdateRelationshipRequest                                             smithy.SchemaExtensions
+	eUpdateRelationshipRequest_catalog                                     smithy.SchemaExtensions
+	eUpdateRelationshipRequest_identifier                                  smithy.SchemaExtensions
+	eUpdateRelationshipRequest_programManagementAccountIdentifier          smithy.SchemaExtensions
+	eUpdateRelationshipRequest_revision                                    smithy.SchemaExtensions
+	eUpdateRelationshipRequest_displayName                                 smithy.SchemaExtensions
+	eUpdateRelationshipRequest_requestedSupportPlan                        smithy.SchemaExtensions
+	eUpdateRelationshipResponse                                            smithy.SchemaExtensions
+	eUpdateRelationshipResponse_relationshipDetail                         smithy.SchemaExtensions
+)
 
 var (
 	iAcceptChannelHandshake                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralchannel", Name: "AcceptChannelHandshake"}
@@ -354,458 +804,458 @@ var mUpdateProgramManagementAccountResponse = smithy.SchemaMembers{List: []*smit
 var mUpdateRelationshipRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRelationshipRequest_catalog, &sUpdateRelationshipRequest_identifier, &sUpdateRelationshipRequest_programManagementAccountIdentifier, &sUpdateRelationshipRequest_revision, &sUpdateRelationshipRequest_displayName, &sUpdateRelationshipRequest_requestedSupportPlan}}
 var mUpdateRelationshipResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRelationshipResponse_relationshipDetail}}
 
-var sAcceptChannelHandshake = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptChannelHandshake, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCancelChannelHandshake = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelChannelHandshake, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sCreateChannelHandshake = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelHandshake, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sCreateProgramManagementAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProgramManagementAccount, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sCreateRelationship = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRelationship, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sDeleteProgramManagementAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProgramManagementAccount, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sDeleteRelationship = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRelationship, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sGetRelationship = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRelationship, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sListChannelHandshakes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelHandshakes, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sListProgramManagementAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProgramManagementAccounts, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sListRelationships = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRelationships, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sRejectChannelHandshake = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectChannelHandshake, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sUpdateProgramManagementAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProgramManagementAccount, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sUpdateRelationship = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRelationship, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var s_PartnerCentralChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartnerCentralChannel, Type: smithy.ShapeTypeService, Ext: &ext[17]})
-var sAcceptChannelHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptChannelHandshakeDetail, Members: &mAcceptChannelHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[18]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &ext[22]})
-var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[25]})
-var s_AccountIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList, Ext: &ext[26]})
-var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[28]})
-var s_AssociatedResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociatedResourceId, Type: smithy.ShapeTypeString, Ext: &ext[29]})
-var s_AssociatedResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociatedResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[30]})
-var s_AssociatedResourceIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociatedResourceIdentifierList, Members: &m_AssociatedResourceIdentifierList, Type: smithy.ShapeTypeList, Ext: &ext[31]})
-var sAssociationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociationType, Members: &mAssociationType, Type: smithy.ShapeTypeEnum, Ext: &ext[33]})
-var s_AssociationTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociationTypeList, Members: &m_AssociationTypeList, Type: smithy.ShapeTypeList, Ext: &ext[37]})
-var sCancelChannelHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelChannelHandshakeDetail, Members: &mCancelChannelHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[39]})
-var s_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &ext[43]})
-var s_ChannelHandshakeId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelHandshakeId, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var s_ChannelHandshakeIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelHandshakeIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var sChannelHandshakePayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelHandshakePayload, Members: &mChannelHandshakePayload, Type: smithy.ShapeTypeUnion, Ext: &ext[46]})
-var s_ChannelHandshakeSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelHandshakeSummaries, Members: &m_ChannelHandshakeSummaries, Type: smithy.ShapeTypeList, Ext: &ext[49]})
-var sChannelHandshakeSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelHandshakeSummary, Members: &mChannelHandshakeSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[51]})
-var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[65]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &ext[66]})
-var sCoverage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCoverage, Members: &mCoverage, Type: smithy.ShapeTypeEnum, Ext: &ext[70]})
-var sCreateChannelHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelHandshakeDetail, Members: &mCreateChannelHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[73]})
-var sCreateProgramManagementAccountDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProgramManagementAccountDetail, Members: &mCreateProgramManagementAccountDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[76]})
-var sCreateRelationshipDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRelationshipDetail, Members: &mCreateRelationshipDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[79]})
-var s_DateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateTime, Traits: &t20, Type: smithy.ShapeTypeTimestamp, Ext: &ext[82]})
-var sHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHandshakeDetail, Members: &mHandshakeDetail, Type: smithy.ShapeTypeUnion, Ext: &ext[83]})
-var sHandshakeStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHandshakeStatus, Members: &mHandshakeStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[87]})
-var s_HandshakeStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HandshakeStatusList, Members: &m_HandshakeStatusList, Type: smithy.ShapeTypeList, Ext: &ext[93]})
-var sHandshakeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHandshakeType, Members: &mHandshakeType, Type: smithy.ShapeTypeEnum, Ext: &ext[95]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &ext[99]})
-var sListChannelHandshakesTypeFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelHandshakesTypeFilters, Members: &mListChannelHandshakesTypeFilters, Type: smithy.ShapeTypeUnion, Ext: &ext[101]})
-var sListChannelHandshakesTypeSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelHandshakesTypeSort, Members: &mListChannelHandshakesTypeSort, Type: smithy.ShapeTypeUnion, Ext: &ext[105]})
-var sListProgramManagementAccountsSortBase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProgramManagementAccountsSortBase, Members: &mListProgramManagementAccountsSortBase, Type: smithy.ShapeTypeStructure, Ext: &ext[109]})
-var sListProgramManagementAccountsSortName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProgramManagementAccountsSortName, Members: &mListProgramManagementAccountsSortName, Type: smithy.ShapeTypeEnum, Ext: &ext[112]})
-var sListRelationshipsSortBase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRelationshipsSortBase, Members: &mListRelationshipsSortBase, Type: smithy.ShapeTypeStructure, Ext: &ext[114]})
-var sListRelationshipsSortName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRelationshipsSortName, Members: &mListRelationshipsSortName, Type: smithy.ShapeTypeEnum, Ext: &ext[117]})
-var s_MinimumNoticeDays = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MinimumNoticeDays, Type: smithy.ShapeTypeString, Ext: &ext[119]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[120]})
-var s_Note = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Note, Type: smithy.ShapeTypeString, Ext: &ext[121]})
-var sParticipantType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParticipantType, Members: &mParticipantType, Type: smithy.ShapeTypeEnum, Ext: &ext[122]})
-var sPartnerLedSupport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPartnerLedSupport, Members: &mPartnerLedSupport, Type: smithy.ShapeTypeStructure, Ext: &ext[125]})
-var s_PartnerProfileDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartnerProfileDisplayName, Type: smithy.ShapeTypeString, Ext: &ext[129]})
-var sProgram = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProgram, Members: &mProgram, Type: smithy.ShapeTypeEnum, Ext: &ext[130]})
-var s_ProgramList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProgramList, Members: &m_ProgramList, Type: smithy.ShapeTypeList, Ext: &ext[134]})
-var s_ProgramManagementAccountDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProgramManagementAccountDisplayName, Type: smithy.ShapeTypeString, Ext: &ext[136]})
-var s_ProgramManagementAccountDisplayNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProgramManagementAccountDisplayNameList, Members: &m_ProgramManagementAccountDisplayNameList, Type: smithy.ShapeTypeList, Ext: &ext[137]})
-var sProgramManagementAccountHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProgramManagementAccountHandshakeDetail, Members: &mProgramManagementAccountHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[139]})
-var s_ProgramManagementAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProgramManagementAccountId, Type: smithy.ShapeTypeString, Ext: &ext[141]})
-var s_ProgramManagementAccountIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProgramManagementAccountIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[142]})
-var s_ProgramManagementAccountIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProgramManagementAccountIdentifierList, Members: &m_ProgramManagementAccountIdentifierList, Type: smithy.ShapeTypeList, Ext: &ext[143]})
-var sProgramManagementAccountStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProgramManagementAccountStatus, Members: &mProgramManagementAccountStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[145]})
-var s_ProgramManagementAccountStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProgramManagementAccountStatusList, Members: &m_ProgramManagementAccountStatusList, Type: smithy.ShapeTypeList, Ext: &ext[149]})
-var s_ProgramManagementAccountSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProgramManagementAccountSummaries, Members: &m_ProgramManagementAccountSummaries, Type: smithy.ShapeTypeList, Ext: &ext[151]})
-var sProgramManagementAccountSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProgramManagementAccountSummary, Members: &mProgramManagementAccountSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[153]})
-var sProgramManagementAccountTypeFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProgramManagementAccountTypeFilters, Members: &mProgramManagementAccountTypeFilters, Type: smithy.ShapeTypeStructure, Ext: &ext[165]})
-var sProgramManagementAccountTypeSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProgramManagementAccountTypeSort, Members: &mProgramManagementAccountTypeSort, Type: smithy.ShapeTypeStructure, Ext: &ext[167]})
-var sProgramManagementAccountTypeSortName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProgramManagementAccountTypeSortName, Members: &mProgramManagementAccountTypeSortName, Type: smithy.ShapeTypeEnum, Ext: &ext[170]})
-var sProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProvider, Members: &mProvider, Type: smithy.ShapeTypeEnum, Ext: &ext[172]})
-var sRejectChannelHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectChannelHandshakeDetail, Members: &mRejectChannelHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[175]})
-var sRelationshipDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelationshipDetail, Members: &mRelationshipDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[179]})
-var s_RelationshipDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelationshipDisplayName, Type: smithy.ShapeTypeString, Ext: &ext[193]})
-var s_RelationshipDisplayNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelationshipDisplayNameList, Members: &m_RelationshipDisplayNameList, Type: smithy.ShapeTypeList, Ext: &ext[194]})
-var s_RelationshipId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelationshipId, Type: smithy.ShapeTypeString, Ext: &ext[196]})
-var s_RelationshipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelationshipIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[197]})
-var s_RelationshipSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelationshipSummaries, Members: &m_RelationshipSummaries, Type: smithy.ShapeTypeList, Ext: &ext[198]})
-var sRelationshipSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelationshipSummary, Members: &mRelationshipSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[200]})
-var sResaleAccountModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAccountModel, Members: &mResaleAccountModel, Type: smithy.ShapeTypeEnum, Ext: &ext[213]})
-var sResoldEnterprise = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResoldEnterprise, Members: &mResoldEnterprise, Type: smithy.ShapeTypeStructure, Ext: &ext[217]})
-var sResoldUnifiedOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResoldUnifiedOperations, Members: &mResoldUnifiedOperations, Type: smithy.ShapeTypeStructure, Ext: &ext[221]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &ext[225]})
-var s_Revision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &ext[229]})
-var sRevokeServicePeriodHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeServicePeriodHandshakeDetail, Members: &mRevokeServicePeriodHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[230]})
-var sRevokeServicePeriodPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeServicePeriodPayload, Members: &mRevokeServicePeriodPayload, Type: smithy.ShapeTypeStructure, Ext: &ext[236]})
-var sRevokeServicePeriodTypeFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeServicePeriodTypeFilters, Members: &mRevokeServicePeriodTypeFilters, Type: smithy.ShapeTypeStructure, Ext: &ext[239]})
-var sRevokeServicePeriodTypeSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeServicePeriodTypeSort, Members: &mRevokeServicePeriodTypeSort, Type: smithy.ShapeTypeStructure, Ext: &ext[241]})
-var sRevokeServicePeriodTypeSortName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeServicePeriodTypeSortName, Members: &mRevokeServicePeriodTypeSortName, Type: smithy.ShapeTypeEnum, Ext: &ext[244]})
-var sSector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSector, Members: &mSector, Type: smithy.ShapeTypeEnum, Ext: &ext[246]})
-var sServicePeriodType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServicePeriodType, Members: &mServicePeriodType, Type: smithy.ShapeTypeEnum, Ext: &ext[250]})
-var s_ServicePeriodTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServicePeriodTypeList, Members: &m_ServicePeriodTypeList, Type: smithy.ShapeTypeList, Ext: &ext[253]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &ext[255]})
-var sSortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &ext[260]})
-var sStartServicePeriodHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartServicePeriodHandshakeDetail, Members: &mStartServicePeriodHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[263]})
-var sStartServicePeriodPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartServicePeriodPayload, Members: &mStartServicePeriodPayload, Type: smithy.ShapeTypeStructure, Ext: &ext[269]})
-var sStartServicePeriodTypeFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartServicePeriodTypeFilters, Members: &mStartServicePeriodTypeFilters, Type: smithy.ShapeTypeStructure, Ext: &ext[275]})
-var sStartServicePeriodTypeSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartServicePeriodTypeSort, Members: &mStartServicePeriodTypeSort, Type: smithy.ShapeTypeStructure, Ext: &ext[277]})
-var sStartServicePeriodTypeSortName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartServicePeriodTypeSortName, Members: &mStartServicePeriodTypeSortName, Type: smithy.ShapeTypeEnum, Ext: &ext[280]})
-var sSupportPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupportPlan, Members: &mSupportPlan, Type: smithy.ShapeTypeUnion, Ext: &ext[282]})
-var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[286]})
-var s_TaggableArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaggableArn, Type: smithy.ShapeTypeString, Ext: &ext[289]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[290]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[291]})
-var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[293]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[295]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &ext[296]})
-var sUpdateProgramManagementAccountDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProgramManagementAccountDetail, Members: &mUpdateProgramManagementAccountDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[300]})
-var sUpdateRelationshipDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRelationshipDetail, Members: &mUpdateRelationshipDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[305]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &ext[310]})
-var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[314]})
-var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[318]})
-var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[320]})
-var sAcceptChannelHandshakeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptChannelHandshakeRequest, Members: &mAcceptChannelHandshakeRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[323]})
-var sAcceptChannelHandshakeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptChannelHandshakeResponse, Members: &mAcceptChannelHandshakeResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[326]})
-var sCancelChannelHandshakeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelChannelHandshakeRequest, Members: &mCancelChannelHandshakeRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[328]})
-var sCancelChannelHandshakeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelChannelHandshakeResponse, Members: &mCancelChannelHandshakeResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[331]})
-var sCreateChannelHandshakeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelHandshakeRequest, Members: &mCreateChannelHandshakeRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[333]})
-var sCreateChannelHandshakeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelHandshakeResponse, Members: &mCreateChannelHandshakeResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[340]})
-var sCreateProgramManagementAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProgramManagementAccountRequest, Members: &mCreateProgramManagementAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[342]})
-var sCreateProgramManagementAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProgramManagementAccountResponse, Members: &mCreateProgramManagementAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[349]})
-var sCreateRelationshipRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRelationshipRequest, Members: &mCreateRelationshipRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[351]})
-var sCreateRelationshipResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRelationshipResponse, Members: &mCreateRelationshipResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[362]})
-var sDeleteProgramManagementAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProgramManagementAccountRequest, Members: &mDeleteProgramManagementAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[364]})
-var sDeleteProgramManagementAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProgramManagementAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[368]})
-var sDeleteRelationshipRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRelationshipRequest, Members: &mDeleteRelationshipRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[369]})
-var sDeleteRelationshipResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRelationshipResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[374]})
-var sGetRelationshipRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRelationshipRequest, Members: &mGetRelationshipRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[375]})
-var sGetRelationshipResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRelationshipResponse, Members: &mGetRelationshipResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[379]})
-var sListChannelHandshakesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelHandshakesRequest, Members: &mListChannelHandshakesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[381]})
-var sListChannelHandshakesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelHandshakesResponse, Members: &mListChannelHandshakesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[391]})
-var sListProgramManagementAccountsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProgramManagementAccountsRequest, Members: &mListProgramManagementAccountsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[394]})
-var sListProgramManagementAccountsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProgramManagementAccountsResponse, Members: &mListProgramManagementAccountsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[403]})
-var sListRelationshipsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRelationshipsRequest, Members: &mListRelationshipsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[406]})
-var sListRelationshipsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRelationshipsResponse, Members: &mListRelationshipsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[415]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[418]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[420]})
-var sRejectChannelHandshakeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectChannelHandshakeRequest, Members: &mRejectChannelHandshakeRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[422]})
-var sRejectChannelHandshakeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectChannelHandshakeResponse, Members: &mRejectChannelHandshakeResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[425]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[427]})
-var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[430]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[431]})
-var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[434]})
-var sUpdateProgramManagementAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProgramManagementAccountRequest, Members: &mUpdateProgramManagementAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[435]})
-var sUpdateProgramManagementAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProgramManagementAccountResponse, Members: &mUpdateProgramManagementAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[440]})
-var sUpdateRelationshipRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRelationshipRequest, Members: &mUpdateRelationshipRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[442]})
-var sUpdateRelationshipResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRelationshipResponse, Members: &mUpdateRelationshipResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[449]})
+var sAcceptChannelHandshake = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptChannelHandshake, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eAcceptChannelHandshake})
+var sCancelChannelHandshake = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelChannelHandshake, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCancelChannelHandshake})
+var sCreateChannelHandshake = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelHandshake, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateChannelHandshake})
+var sCreateProgramManagementAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProgramManagementAccount, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateProgramManagementAccount})
+var sCreateRelationship = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRelationship, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreateRelationship})
+var sDeleteProgramManagementAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProgramManagementAccount, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDeleteProgramManagementAccount})
+var sDeleteRelationship = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRelationship, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRelationship})
+var sGetRelationship = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRelationship, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eGetRelationship})
+var sListChannelHandshakes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelHandshakes, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eListChannelHandshakes})
+var sListProgramManagementAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProgramManagementAccounts, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eListProgramManagementAccounts})
+var sListRelationships = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRelationships, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eListRelationships})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sRejectChannelHandshake = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectChannelHandshake, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eRejectChannelHandshake})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateProgramManagementAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProgramManagementAccount, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eUpdateProgramManagementAccount})
+var sUpdateRelationship = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRelationship, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRelationship})
+var s_PartnerCentralChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartnerCentralChannel, Type: smithy.ShapeTypeService, Ext: &e_PartnerCentralChannel})
+var sAcceptChannelHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptChannelHandshakeDetail, Members: &mAcceptChannelHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &eAcceptChannelHandshakeDetail})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountId})
+var s_AccountIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList, Ext: &e_AccountIdList})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var s_AssociatedResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociatedResourceId, Type: smithy.ShapeTypeString, Ext: &e_AssociatedResourceId})
+var s_AssociatedResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociatedResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &e_AssociatedResourceIdentifier})
+var s_AssociatedResourceIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociatedResourceIdentifierList, Members: &m_AssociatedResourceIdentifierList, Type: smithy.ShapeTypeList, Ext: &e_AssociatedResourceIdentifierList})
+var sAssociationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociationType, Members: &mAssociationType, Type: smithy.ShapeTypeEnum, Ext: &eAssociationType})
+var s_AssociationTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociationTypeList, Members: &m_AssociationTypeList, Type: smithy.ShapeTypeList, Ext: &e_AssociationTypeList})
+var sCancelChannelHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelChannelHandshakeDetail, Members: &mCancelChannelHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &eCancelChannelHandshakeDetail})
+var s_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &e_Catalog})
+var s_ChannelHandshakeId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelHandshakeId, Type: smithy.ShapeTypeString, Ext: &e_ChannelHandshakeId})
+var s_ChannelHandshakeIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelHandshakeIdentifier, Type: smithy.ShapeTypeString, Ext: &e_ChannelHandshakeIdentifier})
+var sChannelHandshakePayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelHandshakePayload, Members: &mChannelHandshakePayload, Type: smithy.ShapeTypeUnion, Ext: &eChannelHandshakePayload})
+var s_ChannelHandshakeSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelHandshakeSummaries, Members: &m_ChannelHandshakeSummaries, Type: smithy.ShapeTypeList, Ext: &e_ChannelHandshakeSummaries})
+var sChannelHandshakeSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelHandshakeSummary, Members: &mChannelHandshakeSummary, Type: smithy.ShapeTypeStructure, Ext: &eChannelHandshakeSummary})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sCoverage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCoverage, Members: &mCoverage, Type: smithy.ShapeTypeEnum, Ext: &eCoverage})
+var sCreateChannelHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelHandshakeDetail, Members: &mCreateChannelHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelHandshakeDetail})
+var sCreateProgramManagementAccountDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProgramManagementAccountDetail, Members: &mCreateProgramManagementAccountDetail, Type: smithy.ShapeTypeStructure, Ext: &eCreateProgramManagementAccountDetail})
+var sCreateRelationshipDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRelationshipDetail, Members: &mCreateRelationshipDetail, Type: smithy.ShapeTypeStructure, Ext: &eCreateRelationshipDetail})
+var s_DateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateTime, Traits: &t20, Type: smithy.ShapeTypeTimestamp, Ext: &e_DateTime})
+var sHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHandshakeDetail, Members: &mHandshakeDetail, Type: smithy.ShapeTypeUnion, Ext: &eHandshakeDetail})
+var sHandshakeStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHandshakeStatus, Members: &mHandshakeStatus, Type: smithy.ShapeTypeEnum, Ext: &eHandshakeStatus})
+var s_HandshakeStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HandshakeStatusList, Members: &m_HandshakeStatusList, Type: smithy.ShapeTypeList, Ext: &e_HandshakeStatusList})
+var sHandshakeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHandshakeType, Members: &mHandshakeType, Type: smithy.ShapeTypeEnum, Ext: &eHandshakeType})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sListChannelHandshakesTypeFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelHandshakesTypeFilters, Members: &mListChannelHandshakesTypeFilters, Type: smithy.ShapeTypeUnion, Ext: &eListChannelHandshakesTypeFilters})
+var sListChannelHandshakesTypeSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelHandshakesTypeSort, Members: &mListChannelHandshakesTypeSort, Type: smithy.ShapeTypeUnion, Ext: &eListChannelHandshakesTypeSort})
+var sListProgramManagementAccountsSortBase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProgramManagementAccountsSortBase, Members: &mListProgramManagementAccountsSortBase, Type: smithy.ShapeTypeStructure, Ext: &eListProgramManagementAccountsSortBase})
+var sListProgramManagementAccountsSortName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProgramManagementAccountsSortName, Members: &mListProgramManagementAccountsSortName, Type: smithy.ShapeTypeEnum, Ext: &eListProgramManagementAccountsSortName})
+var sListRelationshipsSortBase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRelationshipsSortBase, Members: &mListRelationshipsSortBase, Type: smithy.ShapeTypeStructure, Ext: &eListRelationshipsSortBase})
+var sListRelationshipsSortName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRelationshipsSortName, Members: &mListRelationshipsSortName, Type: smithy.ShapeTypeEnum, Ext: &eListRelationshipsSortName})
+var s_MinimumNoticeDays = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MinimumNoticeDays, Type: smithy.ShapeTypeString, Ext: &e_MinimumNoticeDays})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var s_Note = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Note, Type: smithy.ShapeTypeString, Ext: &e_Note})
+var sParticipantType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParticipantType, Members: &mParticipantType, Type: smithy.ShapeTypeEnum, Ext: &eParticipantType})
+var sPartnerLedSupport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPartnerLedSupport, Members: &mPartnerLedSupport, Type: smithy.ShapeTypeStructure, Ext: &ePartnerLedSupport})
+var s_PartnerProfileDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartnerProfileDisplayName, Type: smithy.ShapeTypeString, Ext: &e_PartnerProfileDisplayName})
+var sProgram = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProgram, Members: &mProgram, Type: smithy.ShapeTypeEnum, Ext: &eProgram})
+var s_ProgramList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProgramList, Members: &m_ProgramList, Type: smithy.ShapeTypeList, Ext: &e_ProgramList})
+var s_ProgramManagementAccountDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProgramManagementAccountDisplayName, Type: smithy.ShapeTypeString, Ext: &e_ProgramManagementAccountDisplayName})
+var s_ProgramManagementAccountDisplayNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProgramManagementAccountDisplayNameList, Members: &m_ProgramManagementAccountDisplayNameList, Type: smithy.ShapeTypeList, Ext: &e_ProgramManagementAccountDisplayNameList})
+var sProgramManagementAccountHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProgramManagementAccountHandshakeDetail, Members: &mProgramManagementAccountHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &eProgramManagementAccountHandshakeDetail})
+var s_ProgramManagementAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProgramManagementAccountId, Type: smithy.ShapeTypeString, Ext: &e_ProgramManagementAccountId})
+var s_ProgramManagementAccountIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProgramManagementAccountIdentifier, Type: smithy.ShapeTypeString, Ext: &e_ProgramManagementAccountIdentifier})
+var s_ProgramManagementAccountIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProgramManagementAccountIdentifierList, Members: &m_ProgramManagementAccountIdentifierList, Type: smithy.ShapeTypeList, Ext: &e_ProgramManagementAccountIdentifierList})
+var sProgramManagementAccountStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProgramManagementAccountStatus, Members: &mProgramManagementAccountStatus, Type: smithy.ShapeTypeEnum, Ext: &eProgramManagementAccountStatus})
+var s_ProgramManagementAccountStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProgramManagementAccountStatusList, Members: &m_ProgramManagementAccountStatusList, Type: smithy.ShapeTypeList, Ext: &e_ProgramManagementAccountStatusList})
+var s_ProgramManagementAccountSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProgramManagementAccountSummaries, Members: &m_ProgramManagementAccountSummaries, Type: smithy.ShapeTypeList, Ext: &e_ProgramManagementAccountSummaries})
+var sProgramManagementAccountSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProgramManagementAccountSummary, Members: &mProgramManagementAccountSummary, Type: smithy.ShapeTypeStructure, Ext: &eProgramManagementAccountSummary})
+var sProgramManagementAccountTypeFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProgramManagementAccountTypeFilters, Members: &mProgramManagementAccountTypeFilters, Type: smithy.ShapeTypeStructure, Ext: &eProgramManagementAccountTypeFilters})
+var sProgramManagementAccountTypeSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProgramManagementAccountTypeSort, Members: &mProgramManagementAccountTypeSort, Type: smithy.ShapeTypeStructure, Ext: &eProgramManagementAccountTypeSort})
+var sProgramManagementAccountTypeSortName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProgramManagementAccountTypeSortName, Members: &mProgramManagementAccountTypeSortName, Type: smithy.ShapeTypeEnum, Ext: &eProgramManagementAccountTypeSortName})
+var sProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProvider, Members: &mProvider, Type: smithy.ShapeTypeEnum, Ext: &eProvider})
+var sRejectChannelHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectChannelHandshakeDetail, Members: &mRejectChannelHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &eRejectChannelHandshakeDetail})
+var sRelationshipDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelationshipDetail, Members: &mRelationshipDetail, Type: smithy.ShapeTypeStructure, Ext: &eRelationshipDetail})
+var s_RelationshipDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelationshipDisplayName, Type: smithy.ShapeTypeString, Ext: &e_RelationshipDisplayName})
+var s_RelationshipDisplayNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelationshipDisplayNameList, Members: &m_RelationshipDisplayNameList, Type: smithy.ShapeTypeList, Ext: &e_RelationshipDisplayNameList})
+var s_RelationshipId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelationshipId, Type: smithy.ShapeTypeString, Ext: &e_RelationshipId})
+var s_RelationshipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelationshipIdentifier, Type: smithy.ShapeTypeString, Ext: &e_RelationshipIdentifier})
+var s_RelationshipSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelationshipSummaries, Members: &m_RelationshipSummaries, Type: smithy.ShapeTypeList, Ext: &e_RelationshipSummaries})
+var sRelationshipSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelationshipSummary, Members: &mRelationshipSummary, Type: smithy.ShapeTypeStructure, Ext: &eRelationshipSummary})
+var sResaleAccountModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAccountModel, Members: &mResaleAccountModel, Type: smithy.ShapeTypeEnum, Ext: &eResaleAccountModel})
+var sResoldEnterprise = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResoldEnterprise, Members: &mResoldEnterprise, Type: smithy.ShapeTypeStructure, Ext: &eResoldEnterprise})
+var sResoldUnifiedOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResoldUnifiedOperations, Members: &mResoldUnifiedOperations, Type: smithy.ShapeTypeStructure, Ext: &eResoldUnifiedOperations})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var s_Revision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &e_Revision})
+var sRevokeServicePeriodHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeServicePeriodHandshakeDetail, Members: &mRevokeServicePeriodHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &eRevokeServicePeriodHandshakeDetail})
+var sRevokeServicePeriodPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeServicePeriodPayload, Members: &mRevokeServicePeriodPayload, Type: smithy.ShapeTypeStructure, Ext: &eRevokeServicePeriodPayload})
+var sRevokeServicePeriodTypeFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeServicePeriodTypeFilters, Members: &mRevokeServicePeriodTypeFilters, Type: smithy.ShapeTypeStructure, Ext: &eRevokeServicePeriodTypeFilters})
+var sRevokeServicePeriodTypeSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeServicePeriodTypeSort, Members: &mRevokeServicePeriodTypeSort, Type: smithy.ShapeTypeStructure, Ext: &eRevokeServicePeriodTypeSort})
+var sRevokeServicePeriodTypeSortName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeServicePeriodTypeSortName, Members: &mRevokeServicePeriodTypeSortName, Type: smithy.ShapeTypeEnum, Ext: &eRevokeServicePeriodTypeSortName})
+var sSector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSector, Members: &mSector, Type: smithy.ShapeTypeEnum, Ext: &eSector})
+var sServicePeriodType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServicePeriodType, Members: &mServicePeriodType, Type: smithy.ShapeTypeEnum, Ext: &eServicePeriodType})
+var s_ServicePeriodTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServicePeriodTypeList, Members: &m_ServicePeriodTypeList, Type: smithy.ShapeTypeList, Ext: &e_ServicePeriodTypeList})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sSortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &eSortOrder})
+var sStartServicePeriodHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartServicePeriodHandshakeDetail, Members: &mStartServicePeriodHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &eStartServicePeriodHandshakeDetail})
+var sStartServicePeriodPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartServicePeriodPayload, Members: &mStartServicePeriodPayload, Type: smithy.ShapeTypeStructure, Ext: &eStartServicePeriodPayload})
+var sStartServicePeriodTypeFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartServicePeriodTypeFilters, Members: &mStartServicePeriodTypeFilters, Type: smithy.ShapeTypeStructure, Ext: &eStartServicePeriodTypeFilters})
+var sStartServicePeriodTypeSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartServicePeriodTypeSort, Members: &mStartServicePeriodTypeSort, Type: smithy.ShapeTypeStructure, Ext: &eStartServicePeriodTypeSort})
+var sStartServicePeriodTypeSortName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartServicePeriodTypeSortName, Members: &mStartServicePeriodTypeSortName, Type: smithy.ShapeTypeEnum, Ext: &eStartServicePeriodTypeSortName})
+var sSupportPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupportPlan, Members: &mSupportPlan, Type: smithy.ShapeTypeUnion, Ext: &eSupportPlan})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var s_TaggableArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaggableArn, Type: smithy.ShapeTypeString, Ext: &e_TaggableArn})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sUpdateProgramManagementAccountDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProgramManagementAccountDetail, Members: &mUpdateProgramManagementAccountDetail, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProgramManagementAccountDetail})
+var sUpdateRelationshipDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRelationshipDetail, Members: &mUpdateRelationshipDetail, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRelationshipDetail})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
+var sAcceptChannelHandshakeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptChannelHandshakeRequest, Members: &mAcceptChannelHandshakeRequest, Type: smithy.ShapeTypeStructure, Ext: &eAcceptChannelHandshakeRequest})
+var sAcceptChannelHandshakeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptChannelHandshakeResponse, Members: &mAcceptChannelHandshakeResponse, Type: smithy.ShapeTypeStructure, Ext: &eAcceptChannelHandshakeResponse})
+var sCancelChannelHandshakeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelChannelHandshakeRequest, Members: &mCancelChannelHandshakeRequest, Type: smithy.ShapeTypeStructure, Ext: &eCancelChannelHandshakeRequest})
+var sCancelChannelHandshakeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelChannelHandshakeResponse, Members: &mCancelChannelHandshakeResponse, Type: smithy.ShapeTypeStructure, Ext: &eCancelChannelHandshakeResponse})
+var sCreateChannelHandshakeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelHandshakeRequest, Members: &mCreateChannelHandshakeRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelHandshakeRequest})
+var sCreateChannelHandshakeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelHandshakeResponse, Members: &mCreateChannelHandshakeResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelHandshakeResponse})
+var sCreateProgramManagementAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProgramManagementAccountRequest, Members: &mCreateProgramManagementAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateProgramManagementAccountRequest})
+var sCreateProgramManagementAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProgramManagementAccountResponse, Members: &mCreateProgramManagementAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateProgramManagementAccountResponse})
+var sCreateRelationshipRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRelationshipRequest, Members: &mCreateRelationshipRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateRelationshipRequest})
+var sCreateRelationshipResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRelationshipResponse, Members: &mCreateRelationshipResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateRelationshipResponse})
+var sDeleteProgramManagementAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProgramManagementAccountRequest, Members: &mDeleteProgramManagementAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteProgramManagementAccountRequest})
+var sDeleteProgramManagementAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProgramManagementAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteProgramManagementAccountResponse})
+var sDeleteRelationshipRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRelationshipRequest, Members: &mDeleteRelationshipRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRelationshipRequest})
+var sDeleteRelationshipResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRelationshipResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRelationshipResponse})
+var sGetRelationshipRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRelationshipRequest, Members: &mGetRelationshipRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRelationshipRequest})
+var sGetRelationshipResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRelationshipResponse, Members: &mGetRelationshipResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRelationshipResponse})
+var sListChannelHandshakesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelHandshakesRequest, Members: &mListChannelHandshakesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListChannelHandshakesRequest})
+var sListChannelHandshakesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelHandshakesResponse, Members: &mListChannelHandshakesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListChannelHandshakesResponse})
+var sListProgramManagementAccountsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProgramManagementAccountsRequest, Members: &mListProgramManagementAccountsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListProgramManagementAccountsRequest})
+var sListProgramManagementAccountsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProgramManagementAccountsResponse, Members: &mListProgramManagementAccountsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListProgramManagementAccountsResponse})
+var sListRelationshipsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRelationshipsRequest, Members: &mListRelationshipsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRelationshipsRequest})
+var sListRelationshipsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRelationshipsResponse, Members: &mListRelationshipsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRelationshipsResponse})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sRejectChannelHandshakeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectChannelHandshakeRequest, Members: &mRejectChannelHandshakeRequest, Type: smithy.ShapeTypeStructure, Ext: &eRejectChannelHandshakeRequest})
+var sRejectChannelHandshakeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectChannelHandshakeResponse, Members: &mRejectChannelHandshakeResponse, Type: smithy.ShapeTypeStructure, Ext: &eRejectChannelHandshakeResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateProgramManagementAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProgramManagementAccountRequest, Members: &mUpdateProgramManagementAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProgramManagementAccountRequest})
+var sUpdateProgramManagementAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProgramManagementAccountResponse, Members: &mUpdateProgramManagementAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProgramManagementAccountResponse})
+var sUpdateRelationshipRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRelationshipRequest, Members: &mUpdateRelationshipRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRelationshipRequest})
+var sUpdateRelationshipResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRelationshipResponse, Members: &mUpdateRelationshipResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRelationshipResponse})
 
-var sAcceptChannelHandshakeDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ChannelHandshakeId, Type: smithy.ShapeTypeString, Ext: &ext[19]})
-var sAcceptChannelHandshakeDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[20]})
-var sAcceptChannelHandshakeDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iHandshakeStatus, Members: &mHandshakeStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[21]})
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[23]})
-var sAccessDeniedException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[24]})
-var s_AccountIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[27]})
-var s_AssociatedResourceIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AssociatedResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var sAssociationType_DOWNSTREAM_SELLER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOWNSTREAM_SELLER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[34]})
-var sAssociationType_END_CUSTOMER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "END_CUSTOMER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[35]})
-var sAssociationType_INTERNAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[36]})
-var s_AssociationTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssociationType, Members: &mAssociationType, Type: smithy.ShapeTypeEnum, Ext: &ext[38]})
-var sCancelChannelHandshakeDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ChannelHandshakeId, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var sCancelChannelHandshakeDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[41]})
-var sCancelChannelHandshakeDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iHandshakeStatus, Members: &mHandshakeStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[42]})
-var sChannelHandshakePayload_startServicePeriodPayload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startServicePeriodPayload", ID: &iStartServicePeriodPayload, Members: &mStartServicePeriodPayload, Type: smithy.ShapeTypeStructure, Ext: &ext[47]})
-var sChannelHandshakePayload_revokeServicePeriodPayload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revokeServicePeriodPayload", ID: &iRevokeServicePeriodPayload, Members: &mRevokeServicePeriodPayload, Type: smithy.ShapeTypeStructure, Ext: &ext[48]})
-var s_ChannelHandshakeSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannelHandshakeSummary, Members: &mChannelHandshakeSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[50]})
-var sChannelHandshakeSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ChannelHandshakeId, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var sChannelHandshakeSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[53]})
-var sChannelHandshakeSummary_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var sChannelHandshakeSummary_handshakeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "handshakeType", ID: &iHandshakeType, Members: &mHandshakeType, Type: smithy.ShapeTypeEnum, Ext: &ext[55]})
-var sChannelHandshakeSummary_ownerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[56]})
-var sChannelHandshakeSummary_senderAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "senderAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var sChannelHandshakeSummary_senderDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "senderDisplayName", ID: &i_PartnerProfileDisplayName, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var sChannelHandshakeSummary_receiverAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "receiverAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[59]})
-var sChannelHandshakeSummary_associatedResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedResourceId", ID: &i_AssociatedResourceId, Type: smithy.ShapeTypeString, Ext: &ext[60]})
-var sChannelHandshakeSummary_detail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detail", ID: &iHandshakeDetail, Members: &mHandshakeDetail, Type: smithy.ShapeTypeUnion, Ext: &ext[61]})
-var sChannelHandshakeSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[62]})
-var sChannelHandshakeSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[63]})
-var sChannelHandshakeSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iHandshakeStatus, Members: &mHandshakeStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[64]})
-var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[67]})
-var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[68]})
-var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var sCoverage_ENTIRE_ORGANIZATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENTIRE_ORGANIZATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[71]})
-var sCoverage_MANAGEMENT_ACCOUNT_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANAGEMENT_ACCOUNT_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sCreateChannelHandshakeDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ChannelHandshakeId, Type: smithy.ShapeTypeString, Ext: &ext[74]})
-var sCreateChannelHandshakeDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[75]})
-var sCreateProgramManagementAccountDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ProgramManagementAccountId, Type: smithy.ShapeTypeString, Ext: &ext[77]})
-var sCreateProgramManagementAccountDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[78]})
-var sCreateRelationshipDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[80]})
-var sCreateRelationshipDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_RelationshipId, Type: smithy.ShapeTypeString, Ext: &ext[81]})
-var sHandshakeDetail_startServicePeriodHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startServicePeriodHandshakeDetail", ID: &iStartServicePeriodHandshakeDetail, Members: &mStartServicePeriodHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[84]})
-var sHandshakeDetail_revokeServicePeriodHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revokeServicePeriodHandshakeDetail", ID: &iRevokeServicePeriodHandshakeDetail, Members: &mRevokeServicePeriodHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[85]})
-var sHandshakeDetail_programManagementAccountHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountHandshakeDetail", ID: &iProgramManagementAccountHandshakeDetail, Members: &mProgramManagementAccountHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[86]})
-var sHandshakeStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[88]})
-var sHandshakeStatus_ACCEPTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCEPTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[89]})
-var sHandshakeStatus_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[90]})
-var sHandshakeStatus_CANCELED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[91]})
-var sHandshakeStatus_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[92]})
-var s_HandshakeStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHandshakeStatus, Members: &mHandshakeStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[94]})
-var sHandshakeType_START_SERVICE_PERIOD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "START_SERVICE_PERIOD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[96]})
-var sHandshakeType_REVOKE_SERVICE_PERIOD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVOKE_SERVICE_PERIOD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[97]})
-var sHandshakeType_PROGRAM_MANAGEMENT_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROGRAM_MANAGEMENT_ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[98]})
-var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[100]})
-var sListChannelHandshakesTypeFilters_startServicePeriodTypeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startServicePeriodTypeFilters", ID: &iStartServicePeriodTypeFilters, Members: &mStartServicePeriodTypeFilters, Type: smithy.ShapeTypeStructure, Ext: &ext[102]})
-var sListChannelHandshakesTypeFilters_revokeServicePeriodTypeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revokeServicePeriodTypeFilters", ID: &iRevokeServicePeriodTypeFilters, Members: &mRevokeServicePeriodTypeFilters, Type: smithy.ShapeTypeStructure, Ext: &ext[103]})
-var sListChannelHandshakesTypeFilters_programManagementAccountTypeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountTypeFilters", ID: &iProgramManagementAccountTypeFilters, Members: &mProgramManagementAccountTypeFilters, Type: smithy.ShapeTypeStructure, Ext: &ext[104]})
-var sListChannelHandshakesTypeSort_startServicePeriodTypeSort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startServicePeriodTypeSort", ID: &iStartServicePeriodTypeSort, Members: &mStartServicePeriodTypeSort, Type: smithy.ShapeTypeStructure, Ext: &ext[106]})
-var sListChannelHandshakesTypeSort_revokeServicePeriodTypeSort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revokeServicePeriodTypeSort", ID: &iRevokeServicePeriodTypeSort, Members: &mRevokeServicePeriodTypeSort, Type: smithy.ShapeTypeStructure, Ext: &ext[107]})
-var sListChannelHandshakesTypeSort_programManagementAccountTypeSort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountTypeSort", ID: &iProgramManagementAccountTypeSort, Members: &mProgramManagementAccountTypeSort, Type: smithy.ShapeTypeStructure, Ext: &ext[108]})
-var sListProgramManagementAccountsSortBase_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &ext[110]})
-var sListProgramManagementAccountsSortBase_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &iListProgramManagementAccountsSortName, Members: &mListProgramManagementAccountsSortName, Type: smithy.ShapeTypeEnum, Ext: &ext[111]})
-var sListProgramManagementAccountsSortName_UPDATED_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATED_AT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[113]})
-var sListRelationshipsSortBase_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &ext[115]})
-var sListRelationshipsSortBase_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &iListRelationshipsSortName, Members: &mListRelationshipsSortName, Type: smithy.ShapeTypeEnum, Ext: &ext[116]})
-var sListRelationshipsSortName_UPDATED_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATED_AT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[118]})
-var sParticipantType_SENDER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SENDER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[123]})
-var sParticipantType_RECEIVER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECEIVER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[124]})
-var sPartnerLedSupport_coverage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "coverage", ID: &iCoverage, Members: &mCoverage, Type: smithy.ShapeTypeEnum, Ext: &ext[126]})
-var sPartnerLedSupport_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &iProvider, Members: &mProvider, Type: smithy.ShapeTypeEnum, Ext: &ext[127]})
-var sPartnerLedSupport_tamLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tamLocation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[128]})
-var sProgram_SOLUTION_PROVIDER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOLUTION_PROVIDER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[131]})
-var sProgram_DISTRIBUTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRIBUTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[132]})
-var sProgram_DISTRIBUTION_SELLER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRIBUTION_SELLER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[133]})
-var s_ProgramList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProgram, Members: &mProgram, Type: smithy.ShapeTypeEnum, Ext: &ext[135]})
-var s_ProgramManagementAccountDisplayNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ProgramManagementAccountDisplayName, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var sProgramManagementAccountHandshakeDetail_program = smithy.NewStaticSchema(smithy.StaticSchema{Member: "program", ID: &iProgram, Members: &mProgram, Type: smithy.ShapeTypeEnum, Ext: &ext[140]})
-var s_ProgramManagementAccountIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ProgramManagementAccountIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[144]})
-var sProgramManagementAccountStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[146]})
-var sProgramManagementAccountStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[147]})
-var sProgramManagementAccountStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[148]})
-var s_ProgramManagementAccountStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProgramManagementAccountStatus, Members: &mProgramManagementAccountStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[150]})
-var s_ProgramManagementAccountSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProgramManagementAccountSummary, Members: &mProgramManagementAccountSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[152]})
-var sProgramManagementAccountSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ProgramManagementAccountId, Type: smithy.ShapeTypeString, Ext: &ext[154]})
-var sProgramManagementAccountSummary_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &ext[155]})
-var sProgramManagementAccountSummary_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &ext[156]})
-var sProgramManagementAccountSummary_program = smithy.NewStaticSchema(smithy.StaticSchema{Member: "program", ID: &iProgram, Members: &mProgram, Type: smithy.ShapeTypeEnum, Ext: &ext[157]})
-var sProgramManagementAccountSummary_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_ProgramManagementAccountDisplayName, Type: smithy.ShapeTypeString, Ext: &ext[158]})
-var sProgramManagementAccountSummary_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[159]})
-var sProgramManagementAccountSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[160]})
-var sProgramManagementAccountSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[161]})
-var sProgramManagementAccountSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[162]})
-var sProgramManagementAccountSummary_startDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startDate", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[163]})
-var sProgramManagementAccountSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iProgramManagementAccountStatus, Members: &mProgramManagementAccountStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[164]})
-var sProgramManagementAccountTypeFilters_programs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programs", ID: &i_ProgramList, Members: &m_ProgramList, Type: smithy.ShapeTypeList, Ext: &ext[166]})
-var sProgramManagementAccountTypeSort_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &ext[168]})
-var sProgramManagementAccountTypeSort_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &iProgramManagementAccountTypeSortName, Members: &mProgramManagementAccountTypeSortName, Type: smithy.ShapeTypeEnum, Ext: &ext[169]})
-var sProgramManagementAccountTypeSortName_UPDATED_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATED_AT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[171]})
-var sProvider_DISTRIBUTOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRIBUTOR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[173]})
-var sProvider_DISTRIBUTION_SELLER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRIBUTION_SELLER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[174]})
-var sRejectChannelHandshakeDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ChannelHandshakeId, Type: smithy.ShapeTypeString, Ext: &ext[176]})
-var sRejectChannelHandshakeDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[177]})
-var sRejectChannelHandshakeDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iHandshakeStatus, Members: &mHandshakeStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[178]})
-var sRelationshipDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[180]})
-var sRelationshipDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_RelationshipId, Type: smithy.ShapeTypeString, Ext: &ext[181]})
-var sRelationshipDetail_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &ext[182]})
-var sRelationshipDetail_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &ext[183]})
-var sRelationshipDetail_associationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationType", ID: &iAssociationType, Members: &mAssociationType, Type: smithy.ShapeTypeEnum, Ext: &ext[184]})
-var sRelationshipDetail_programManagementAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountId", ID: &i_ProgramManagementAccountId, Type: smithy.ShapeTypeString, Ext: &ext[185]})
-var sRelationshipDetail_associatedAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[186]})
-var sRelationshipDetail_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_RelationshipDisplayName, Type: smithy.ShapeTypeString, Ext: &ext[187]})
-var sRelationshipDetail_resaleAccountModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resaleAccountModel", ID: &iResaleAccountModel, Members: &mResaleAccountModel, Type: smithy.ShapeTypeEnum, Ext: &ext[188]})
-var sRelationshipDetail_sector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sector", ID: &iSector, Members: &mSector, Type: smithy.ShapeTypeEnum, Ext: &ext[189]})
-var sRelationshipDetail_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[190]})
-var sRelationshipDetail_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[191]})
-var sRelationshipDetail_startDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startDate", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[192]})
-var s_RelationshipDisplayNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RelationshipDisplayName, Type: smithy.ShapeTypeString, Ext: &ext[195]})
-var s_RelationshipSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRelationshipSummary, Members: &mRelationshipSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[199]})
-var sRelationshipSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[201]})
-var sRelationshipSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_RelationshipId, Type: smithy.ShapeTypeString, Ext: &ext[202]})
-var sRelationshipSummary_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &ext[203]})
-var sRelationshipSummary_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &ext[204]})
-var sRelationshipSummary_associationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationType", ID: &iAssociationType, Members: &mAssociationType, Type: smithy.ShapeTypeEnum, Ext: &ext[205]})
-var sRelationshipSummary_programManagementAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountId", ID: &i_ProgramManagementAccountId, Type: smithy.ShapeTypeString, Ext: &ext[206]})
-var sRelationshipSummary_associatedAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[207]})
-var sRelationshipSummary_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_RelationshipDisplayName, Type: smithy.ShapeTypeString, Ext: &ext[208]})
-var sRelationshipSummary_sector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sector", ID: &iSector, Members: &mSector, Type: smithy.ShapeTypeEnum, Ext: &ext[209]})
-var sRelationshipSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[210]})
-var sRelationshipSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[211]})
-var sRelationshipSummary_startDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startDate", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[212]})
-var sResaleAccountModel_DISTRIBUTOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRIBUTOR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[214]})
-var sResaleAccountModel_END_CUSTOMER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "END_CUSTOMER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[215]})
-var sResaleAccountModel_SOLUTION_PROVIDER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOLUTION_PROVIDER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[216]})
-var sResoldEnterprise_coverage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "coverage", ID: &iCoverage, Members: &mCoverage, Type: smithy.ShapeTypeEnum, Ext: &ext[218]})
-var sResoldEnterprise_tamLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tamLocation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[219]})
-var sResoldEnterprise_chargeAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chargeAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[220]})
-var sResoldUnifiedOperations_coverage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "coverage", ID: &iCoverage, Members: &mCoverage, Type: smithy.ShapeTypeEnum, Ext: &ext[222]})
-var sResoldUnifiedOperations_tamLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tamLocation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[223]})
-var sResoldUnifiedOperations_chargeAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chargeAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[224]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[226]})
-var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[227]})
-var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[228]})
-var sRevokeServicePeriodHandshakeDetail_note = smithy.NewStaticSchema(smithy.StaticSchema{Member: "note", ID: &i_Note, Type: smithy.ShapeTypeString, Ext: &ext[231]})
-var sRevokeServicePeriodHandshakeDetail_servicePeriodType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "servicePeriodType", ID: &iServicePeriodType, Members: &mServicePeriodType, Type: smithy.ShapeTypeEnum, Ext: &ext[232]})
-var sRevokeServicePeriodHandshakeDetail_minimumNoticeDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minimumNoticeDays", ID: &i_MinimumNoticeDays, Type: smithy.ShapeTypeString, Ext: &ext[233]})
-var sRevokeServicePeriodHandshakeDetail_startDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startDate", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[234]})
-var sRevokeServicePeriodHandshakeDetail_endDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endDate", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[235]})
-var sRevokeServicePeriodPayload_programManagementAccountIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountIdentifier", ID: &i_ProgramManagementAccountIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[237]})
-var sRevokeServicePeriodPayload_note = smithy.NewStaticSchema(smithy.StaticSchema{Member: "note", ID: &i_Note, Type: smithy.ShapeTypeString, Ext: &ext[238]})
-var sRevokeServicePeriodTypeFilters_servicePeriodTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "servicePeriodTypes", ID: &i_ServicePeriodTypeList, Members: &m_ServicePeriodTypeList, Type: smithy.ShapeTypeList, Ext: &ext[240]})
-var sRevokeServicePeriodTypeSort_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &ext[242]})
-var sRevokeServicePeriodTypeSort_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &iRevokeServicePeriodTypeSortName, Members: &mRevokeServicePeriodTypeSortName, Type: smithy.ShapeTypeEnum, Ext: &ext[243]})
-var sRevokeServicePeriodTypeSortName_UPDATED_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATED_AT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[245]})
-var sSector_COMMERCIAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMMERCIAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[247]})
-var sSector_GOVERNMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GOVERNMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[248]})
-var sSector_GOVERNMENT_EXCEPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GOVERNMENT_EXCEPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[249]})
-var sServicePeriodType_MINIMUM_NOTICE_PERIOD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MINIMUM_NOTICE_PERIOD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[251]})
-var sServicePeriodType_FIXED_COMMITMENT_PERIOD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIXED_COMMITMENT_PERIOD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[252]})
-var s_ServicePeriodTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServicePeriodType, Members: &mServicePeriodType, Type: smithy.ShapeTypeEnum, Ext: &ext[254]})
-var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[256]})
-var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[257]})
-var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[258]})
-var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[259]})
-var sSortOrder_ASCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[261]})
-var sSortOrder_DESCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[262]})
-var sStartServicePeriodHandshakeDetail_note = smithy.NewStaticSchema(smithy.StaticSchema{Member: "note", ID: &i_Note, Type: smithy.ShapeTypeString, Ext: &ext[264]})
-var sStartServicePeriodHandshakeDetail_servicePeriodType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "servicePeriodType", ID: &iServicePeriodType, Members: &mServicePeriodType, Type: smithy.ShapeTypeEnum, Ext: &ext[265]})
-var sStartServicePeriodHandshakeDetail_minimumNoticeDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minimumNoticeDays", ID: &i_MinimumNoticeDays, Type: smithy.ShapeTypeString, Ext: &ext[266]})
-var sStartServicePeriodHandshakeDetail_startDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startDate", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[267]})
-var sStartServicePeriodHandshakeDetail_endDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endDate", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[268]})
-var sStartServicePeriodPayload_programManagementAccountIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountIdentifier", ID: &i_ProgramManagementAccountIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[270]})
-var sStartServicePeriodPayload_note = smithy.NewStaticSchema(smithy.StaticSchema{Member: "note", ID: &i_Note, Type: smithy.ShapeTypeString, Ext: &ext[271]})
-var sStartServicePeriodPayload_servicePeriodType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "servicePeriodType", ID: &iServicePeriodType, Members: &mServicePeriodType, Type: smithy.ShapeTypeEnum, Ext: &ext[272]})
-var sStartServicePeriodPayload_minimumNoticeDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minimumNoticeDays", ID: &i_MinimumNoticeDays, Type: smithy.ShapeTypeString, Ext: &ext[273]})
-var sStartServicePeriodPayload_endDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endDate", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[274]})
-var sStartServicePeriodTypeFilters_servicePeriodTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "servicePeriodTypes", ID: &i_ServicePeriodTypeList, Members: &m_ServicePeriodTypeList, Type: smithy.ShapeTypeList, Ext: &ext[276]})
-var sStartServicePeriodTypeSort_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &ext[278]})
-var sStartServicePeriodTypeSort_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &iStartServicePeriodTypeSortName, Members: &mStartServicePeriodTypeSortName, Type: smithy.ShapeTypeEnum, Ext: &ext[279]})
-var sStartServicePeriodTypeSortName_UPDATED_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATED_AT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[281]})
-var sSupportPlan_resoldEnterprise = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resoldEnterprise", ID: &iResoldEnterprise, Members: &mResoldEnterprise, Type: smithy.ShapeTypeStructure, Ext: &ext[283]})
-var sSupportPlan_partnerLedSupport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "partnerLedSupport", ID: &iPartnerLedSupport, Members: &mPartnerLedSupport, Type: smithy.ShapeTypeStructure, Ext: &ext[284]})
-var sSupportPlan_resoldUnifiedOperations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resoldUnifiedOperations", ID: &iResoldUnifiedOperations, Members: &mResoldUnifiedOperations, Type: smithy.ShapeTypeStructure, Ext: &ext[285]})
-var sTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[287]})
-var sTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[288]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[292]})
-var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[294]})
-var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[297]})
-var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[298]})
-var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[299]})
-var sUpdateProgramManagementAccountDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ProgramManagementAccountId, Type: smithy.ShapeTypeString, Ext: &ext[301]})
-var sUpdateProgramManagementAccountDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[302]})
-var sUpdateProgramManagementAccountDetail_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &ext[303]})
-var sUpdateProgramManagementAccountDetail_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_ProgramManagementAccountDisplayName, Type: smithy.ShapeTypeString, Ext: &ext[304]})
-var sUpdateRelationshipDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[306]})
-var sUpdateRelationshipDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_RelationshipId, Type: smithy.ShapeTypeString, Ext: &ext[307]})
-var sUpdateRelationshipDetail_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &ext[308]})
-var sUpdateRelationshipDetail_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_RelationshipDisplayName, Type: smithy.ShapeTypeString, Ext: &ext[309]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[311]})
-var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[312]})
-var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[313]})
-var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[315]})
-var sValidationExceptionField_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[316]})
-var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[317]})
-var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[319]})
-var sValidationExceptionReason_REQUEST_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUEST_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[321]})
-var sValidationExceptionReason_BUSINESS_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUSINESS_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[322]})
-var sAcceptChannelHandshakeRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &ext[324]})
-var sAcceptChannelHandshakeRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_ChannelHandshakeIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[325]})
-var sAcceptChannelHandshakeResponse_channelHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelHandshakeDetail", ID: &iAcceptChannelHandshakeDetail, Members: &mAcceptChannelHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[327]})
-var sCancelChannelHandshakeRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &ext[329]})
-var sCancelChannelHandshakeRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_ChannelHandshakeIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[330]})
-var sCancelChannelHandshakeResponse_channelHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelHandshakeDetail", ID: &iCancelChannelHandshakeDetail, Members: &mCancelChannelHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[332]})
-var sCreateChannelHandshakeRequest_handshakeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "handshakeType", ID: &iHandshakeType, Members: &mHandshakeType, Type: smithy.ShapeTypeEnum, Ext: &ext[334]})
-var sCreateChannelHandshakeRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &ext[335]})
-var sCreateChannelHandshakeRequest_associatedResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedResourceIdentifier", ID: &i_AssociatedResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[336]})
-var sCreateChannelHandshakeRequest_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &iChannelHandshakePayload, Members: &mChannelHandshakePayload, Type: smithy.ShapeTypeUnion, Ext: &ext[337]})
-var sCreateChannelHandshakeRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[338]})
-var sCreateChannelHandshakeRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[339]})
-var sCreateChannelHandshakeResponse_channelHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelHandshakeDetail", ID: &iCreateChannelHandshakeDetail, Members: &mCreateChannelHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[341]})
-var sCreateProgramManagementAccountRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &ext[343]})
-var sCreateProgramManagementAccountRequest_program = smithy.NewStaticSchema(smithy.StaticSchema{Member: "program", ID: &iProgram, Members: &mProgram, Type: smithy.ShapeTypeEnum, Ext: &ext[344]})
-var sCreateProgramManagementAccountRequest_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_ProgramManagementAccountDisplayName, Type: smithy.ShapeTypeString, Ext: &ext[345]})
-var sCreateProgramManagementAccountRequest_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[346]})
-var sCreateProgramManagementAccountRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[347]})
-var sCreateProgramManagementAccountRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[348]})
-var sCreateProgramManagementAccountResponse_programManagementAccountDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountDetail", ID: &iCreateProgramManagementAccountDetail, Members: &mCreateProgramManagementAccountDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[350]})
-var sCreateRelationshipRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &ext[352]})
-var sCreateRelationshipRequest_associationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationType", ID: &iAssociationType, Members: &mAssociationType, Type: smithy.ShapeTypeEnum, Ext: &ext[353]})
-var sCreateRelationshipRequest_programManagementAccountIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountIdentifier", ID: &i_ProgramManagementAccountIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[354]})
-var sCreateRelationshipRequest_associatedAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[355]})
-var sCreateRelationshipRequest_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_RelationshipDisplayName, Type: smithy.ShapeTypeString, Ext: &ext[356]})
-var sCreateRelationshipRequest_resaleAccountModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resaleAccountModel", ID: &iResaleAccountModel, Members: &mResaleAccountModel, Type: smithy.ShapeTypeEnum, Ext: &ext[357]})
-var sCreateRelationshipRequest_sector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sector", ID: &iSector, Members: &mSector, Type: smithy.ShapeTypeEnum, Ext: &ext[358]})
-var sCreateRelationshipRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[359]})
-var sCreateRelationshipRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[360]})
-var sCreateRelationshipRequest_requestedSupportPlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestedSupportPlan", ID: &iSupportPlan, Members: &mSupportPlan, Type: smithy.ShapeTypeUnion, Ext: &ext[361]})
-var sCreateRelationshipResponse_relationshipDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relationshipDetail", ID: &iCreateRelationshipDetail, Members: &mCreateRelationshipDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[363]})
-var sDeleteProgramManagementAccountRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &ext[365]})
-var sDeleteProgramManagementAccountRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_ProgramManagementAccountIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[366]})
-var sDeleteProgramManagementAccountRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[367]})
-var sDeleteRelationshipRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &ext[370]})
-var sDeleteRelationshipRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_RelationshipIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[371]})
-var sDeleteRelationshipRequest_programManagementAccountIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountIdentifier", ID: &i_ProgramManagementAccountIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[372]})
-var sDeleteRelationshipRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[373]})
-var sGetRelationshipRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &ext[376]})
-var sGetRelationshipRequest_programManagementAccountIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountIdentifier", ID: &i_ProgramManagementAccountIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[377]})
-var sGetRelationshipRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_RelationshipIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[378]})
-var sGetRelationshipResponse_relationshipDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relationshipDetail", ID: &iRelationshipDetail, Members: &mRelationshipDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[380]})
-var sListChannelHandshakesRequest_handshakeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "handshakeType", ID: &iHandshakeType, Members: &mHandshakeType, Type: smithy.ShapeTypeEnum, Ext: &ext[382]})
-var sListChannelHandshakesRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &ext[383]})
-var sListChannelHandshakesRequest_participantType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "participantType", ID: &iParticipantType, Members: &mParticipantType, Type: smithy.ShapeTypeEnum, Ext: &ext[384]})
-var sListChannelHandshakesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[385]})
-var sListChannelHandshakesRequest_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_HandshakeStatusList, Members: &m_HandshakeStatusList, Type: smithy.ShapeTypeList, Ext: &ext[386]})
-var sListChannelHandshakesRequest_associatedResourceIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedResourceIdentifiers", ID: &i_AssociatedResourceIdentifierList, Members: &m_AssociatedResourceIdentifierList, Type: smithy.ShapeTypeList, Ext: &ext[387]})
-var sListChannelHandshakesRequest_handshakeTypeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "handshakeTypeFilters", ID: &iListChannelHandshakesTypeFilters, Members: &mListChannelHandshakesTypeFilters, Type: smithy.ShapeTypeUnion, Ext: &ext[388]})
-var sListChannelHandshakesRequest_handshakeTypeSort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "handshakeTypeSort", ID: &iListChannelHandshakesTypeSort, Members: &mListChannelHandshakesTypeSort, Type: smithy.ShapeTypeUnion, Ext: &ext[389]})
-var sListChannelHandshakesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[390]})
-var sListChannelHandshakesResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_ChannelHandshakeSummaries, Members: &m_ChannelHandshakeSummaries, Type: smithy.ShapeTypeList, Ext: &ext[392]})
-var sListChannelHandshakesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[393]})
-var sListProgramManagementAccountsRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &ext[395]})
-var sListProgramManagementAccountsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[396]})
-var sListProgramManagementAccountsRequest_displayNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayNames", ID: &i_ProgramManagementAccountDisplayNameList, Members: &m_ProgramManagementAccountDisplayNameList, Type: smithy.ShapeTypeList, Ext: &ext[397]})
-var sListProgramManagementAccountsRequest_programs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programs", ID: &i_ProgramList, Members: &m_ProgramList, Type: smithy.ShapeTypeList, Ext: &ext[398]})
-var sListProgramManagementAccountsRequest_accountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountIds", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList, Ext: &ext[399]})
-var sListProgramManagementAccountsRequest_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_ProgramManagementAccountStatusList, Members: &m_ProgramManagementAccountStatusList, Type: smithy.ShapeTypeList, Ext: &ext[400]})
-var sListProgramManagementAccountsRequest_sort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sort", ID: &iListProgramManagementAccountsSortBase, Members: &mListProgramManagementAccountsSortBase, Type: smithy.ShapeTypeStructure, Ext: &ext[401]})
-var sListProgramManagementAccountsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[402]})
-var sListProgramManagementAccountsResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_ProgramManagementAccountSummaries, Members: &m_ProgramManagementAccountSummaries, Type: smithy.ShapeTypeList, Ext: &ext[404]})
-var sListProgramManagementAccountsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[405]})
-var sListRelationshipsRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &ext[407]})
-var sListRelationshipsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[408]})
-var sListRelationshipsRequest_associatedAccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedAccountIds", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList, Ext: &ext[409]})
-var sListRelationshipsRequest_associationTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationTypes", ID: &i_AssociationTypeList, Members: &m_AssociationTypeList, Type: smithy.ShapeTypeList, Ext: &ext[410]})
-var sListRelationshipsRequest_displayNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayNames", ID: &i_RelationshipDisplayNameList, Members: &m_RelationshipDisplayNameList, Type: smithy.ShapeTypeList, Ext: &ext[411]})
-var sListRelationshipsRequest_programManagementAccountIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountIdentifiers", ID: &i_ProgramManagementAccountIdentifierList, Members: &m_ProgramManagementAccountIdentifierList, Type: smithy.ShapeTypeList, Ext: &ext[412]})
-var sListRelationshipsRequest_sort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sort", ID: &iListRelationshipsSortBase, Members: &mListRelationshipsSortBase, Type: smithy.ShapeTypeStructure, Ext: &ext[413]})
-var sListRelationshipsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[414]})
-var sListRelationshipsResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_RelationshipSummaries, Members: &m_RelationshipSummaries, Type: smithy.ShapeTypeList, Ext: &ext[416]})
-var sListRelationshipsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[417]})
-var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_TaggableArn, Type: smithy.ShapeTypeString, Ext: &ext[419]})
-var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[421]})
-var sRejectChannelHandshakeRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &ext[423]})
-var sRejectChannelHandshakeRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_ChannelHandshakeIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[424]})
-var sRejectChannelHandshakeResponse_channelHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelHandshakeDetail", ID: &iRejectChannelHandshakeDetail, Members: &mRejectChannelHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[426]})
-var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_TaggableArn, Type: smithy.ShapeTypeString, Ext: &ext[428]})
-var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[429]})
-var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_TaggableArn, Type: smithy.ShapeTypeString, Ext: &ext[432]})
-var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[433]})
-var sUpdateProgramManagementAccountRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &ext[436]})
-var sUpdateProgramManagementAccountRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_ProgramManagementAccountIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[437]})
-var sUpdateProgramManagementAccountRequest_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &ext[438]})
-var sUpdateProgramManagementAccountRequest_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_ProgramManagementAccountDisplayName, Type: smithy.ShapeTypeString, Ext: &ext[439]})
-var sUpdateProgramManagementAccountResponse_programManagementAccountDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountDetail", ID: &iUpdateProgramManagementAccountDetail, Members: &mUpdateProgramManagementAccountDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[441]})
-var sUpdateRelationshipRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &ext[443]})
-var sUpdateRelationshipRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_RelationshipIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[444]})
-var sUpdateRelationshipRequest_programManagementAccountIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountIdentifier", ID: &i_ProgramManagementAccountIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[445]})
-var sUpdateRelationshipRequest_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &ext[446]})
-var sUpdateRelationshipRequest_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_RelationshipDisplayName, Type: smithy.ShapeTypeString, Ext: &ext[447]})
-var sUpdateRelationshipRequest_requestedSupportPlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestedSupportPlan", ID: &iSupportPlan, Members: &mSupportPlan, Type: smithy.ShapeTypeUnion, Ext: &ext[448]})
-var sUpdateRelationshipResponse_relationshipDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relationshipDetail", ID: &iUpdateRelationshipDetail, Members: &mUpdateRelationshipDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[450]})
+var sAcceptChannelHandshakeDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ChannelHandshakeId, Type: smithy.ShapeTypeString, Ext: &eAcceptChannelHandshakeDetail_id})
+var sAcceptChannelHandshakeDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eAcceptChannelHandshakeDetail_arn})
+var sAcceptChannelHandshakeDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iHandshakeStatus, Members: &mHandshakeStatus, Type: smithy.ShapeTypeEnum, Ext: &eAcceptChannelHandshakeDetail_status})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAccessDeniedException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_reason})
+var s_AccountIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountIdList_member})
+var s_AssociatedResourceIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AssociatedResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &e_AssociatedResourceIdentifierList_member})
+var sAssociationType_DOWNSTREAM_SELLER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOWNSTREAM_SELLER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAssociationType_DOWNSTREAM_SELLER})
+var sAssociationType_END_CUSTOMER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "END_CUSTOMER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAssociationType_END_CUSTOMER})
+var sAssociationType_INTERNAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAssociationType_INTERNAL})
+var s_AssociationTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssociationType, Members: &mAssociationType, Type: smithy.ShapeTypeEnum, Ext: &e_AssociationTypeList_member})
+var sCancelChannelHandshakeDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ChannelHandshakeId, Type: smithy.ShapeTypeString, Ext: &eCancelChannelHandshakeDetail_id})
+var sCancelChannelHandshakeDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCancelChannelHandshakeDetail_arn})
+var sCancelChannelHandshakeDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iHandshakeStatus, Members: &mHandshakeStatus, Type: smithy.ShapeTypeEnum, Ext: &eCancelChannelHandshakeDetail_status})
+var sChannelHandshakePayload_startServicePeriodPayload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startServicePeriodPayload", ID: &iStartServicePeriodPayload, Members: &mStartServicePeriodPayload, Type: smithy.ShapeTypeStructure, Ext: &eChannelHandshakePayload_startServicePeriodPayload})
+var sChannelHandshakePayload_revokeServicePeriodPayload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revokeServicePeriodPayload", ID: &iRevokeServicePeriodPayload, Members: &mRevokeServicePeriodPayload, Type: smithy.ShapeTypeStructure, Ext: &eChannelHandshakePayload_revokeServicePeriodPayload})
+var s_ChannelHandshakeSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannelHandshakeSummary, Members: &mChannelHandshakeSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ChannelHandshakeSummaries_member})
+var sChannelHandshakeSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ChannelHandshakeId, Type: smithy.ShapeTypeString, Ext: &eChannelHandshakeSummary_id})
+var sChannelHandshakeSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eChannelHandshakeSummary_arn})
+var sChannelHandshakeSummary_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &eChannelHandshakeSummary_catalog})
+var sChannelHandshakeSummary_handshakeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "handshakeType", ID: &iHandshakeType, Members: &mHandshakeType, Type: smithy.ShapeTypeEnum, Ext: &eChannelHandshakeSummary_handshakeType})
+var sChannelHandshakeSummary_ownerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eChannelHandshakeSummary_ownerAccountId})
+var sChannelHandshakeSummary_senderAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "senderAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eChannelHandshakeSummary_senderAccountId})
+var sChannelHandshakeSummary_senderDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "senderDisplayName", ID: &i_PartnerProfileDisplayName, Type: smithy.ShapeTypeString, Ext: &eChannelHandshakeSummary_senderDisplayName})
+var sChannelHandshakeSummary_receiverAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "receiverAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eChannelHandshakeSummary_receiverAccountId})
+var sChannelHandshakeSummary_associatedResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedResourceId", ID: &i_AssociatedResourceId, Type: smithy.ShapeTypeString, Ext: &eChannelHandshakeSummary_associatedResourceId})
+var sChannelHandshakeSummary_detail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detail", ID: &iHandshakeDetail, Members: &mHandshakeDetail, Type: smithy.ShapeTypeUnion, Ext: &eChannelHandshakeSummary_detail})
+var sChannelHandshakeSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eChannelHandshakeSummary_createdAt})
+var sChannelHandshakeSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eChannelHandshakeSummary_updatedAt})
+var sChannelHandshakeSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iHandshakeStatus, Members: &mHandshakeStatus, Type: smithy.ShapeTypeEnum, Ext: &eChannelHandshakeSummary_status})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceId})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceType})
+var sCoverage_ENTIRE_ORGANIZATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENTIRE_ORGANIZATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCoverage_ENTIRE_ORGANIZATION})
+var sCoverage_MANAGEMENT_ACCOUNT_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANAGEMENT_ACCOUNT_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCoverage_MANAGEMENT_ACCOUNT_ONLY})
+var sCreateChannelHandshakeDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ChannelHandshakeId, Type: smithy.ShapeTypeString, Ext: &eCreateChannelHandshakeDetail_id})
+var sCreateChannelHandshakeDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateChannelHandshakeDetail_arn})
+var sCreateProgramManagementAccountDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ProgramManagementAccountId, Type: smithy.ShapeTypeString, Ext: &eCreateProgramManagementAccountDetail_id})
+var sCreateProgramManagementAccountDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateProgramManagementAccountDetail_arn})
+var sCreateRelationshipDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateRelationshipDetail_arn})
+var sCreateRelationshipDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_RelationshipId, Type: smithy.ShapeTypeString, Ext: &eCreateRelationshipDetail_id})
+var sHandshakeDetail_startServicePeriodHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startServicePeriodHandshakeDetail", ID: &iStartServicePeriodHandshakeDetail, Members: &mStartServicePeriodHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &eHandshakeDetail_startServicePeriodHandshakeDetail})
+var sHandshakeDetail_revokeServicePeriodHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revokeServicePeriodHandshakeDetail", ID: &iRevokeServicePeriodHandshakeDetail, Members: &mRevokeServicePeriodHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &eHandshakeDetail_revokeServicePeriodHandshakeDetail})
+var sHandshakeDetail_programManagementAccountHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountHandshakeDetail", ID: &iProgramManagementAccountHandshakeDetail, Members: &mProgramManagementAccountHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &eHandshakeDetail_programManagementAccountHandshakeDetail})
+var sHandshakeStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHandshakeStatus_PENDING})
+var sHandshakeStatus_ACCEPTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCEPTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHandshakeStatus_ACCEPTED})
+var sHandshakeStatus_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHandshakeStatus_REJECTED})
+var sHandshakeStatus_CANCELED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHandshakeStatus_CANCELED})
+var sHandshakeStatus_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHandshakeStatus_EXPIRED})
+var s_HandshakeStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHandshakeStatus, Members: &mHandshakeStatus, Type: smithy.ShapeTypeEnum, Ext: &e_HandshakeStatusList_member})
+var sHandshakeType_START_SERVICE_PERIOD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "START_SERVICE_PERIOD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHandshakeType_START_SERVICE_PERIOD})
+var sHandshakeType_REVOKE_SERVICE_PERIOD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVOKE_SERVICE_PERIOD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHandshakeType_REVOKE_SERVICE_PERIOD})
+var sHandshakeType_PROGRAM_MANAGEMENT_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROGRAM_MANAGEMENT_ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHandshakeType_PROGRAM_MANAGEMENT_ACCOUNT})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sListChannelHandshakesTypeFilters_startServicePeriodTypeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startServicePeriodTypeFilters", ID: &iStartServicePeriodTypeFilters, Members: &mStartServicePeriodTypeFilters, Type: smithy.ShapeTypeStructure, Ext: &eListChannelHandshakesTypeFilters_startServicePeriodTypeFilters})
+var sListChannelHandshakesTypeFilters_revokeServicePeriodTypeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revokeServicePeriodTypeFilters", ID: &iRevokeServicePeriodTypeFilters, Members: &mRevokeServicePeriodTypeFilters, Type: smithy.ShapeTypeStructure, Ext: &eListChannelHandshakesTypeFilters_revokeServicePeriodTypeFilters})
+var sListChannelHandshakesTypeFilters_programManagementAccountTypeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountTypeFilters", ID: &iProgramManagementAccountTypeFilters, Members: &mProgramManagementAccountTypeFilters, Type: smithy.ShapeTypeStructure, Ext: &eListChannelHandshakesTypeFilters_programManagementAccountTypeFilters})
+var sListChannelHandshakesTypeSort_startServicePeriodTypeSort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startServicePeriodTypeSort", ID: &iStartServicePeriodTypeSort, Members: &mStartServicePeriodTypeSort, Type: smithy.ShapeTypeStructure, Ext: &eListChannelHandshakesTypeSort_startServicePeriodTypeSort})
+var sListChannelHandshakesTypeSort_revokeServicePeriodTypeSort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revokeServicePeriodTypeSort", ID: &iRevokeServicePeriodTypeSort, Members: &mRevokeServicePeriodTypeSort, Type: smithy.ShapeTypeStructure, Ext: &eListChannelHandshakesTypeSort_revokeServicePeriodTypeSort})
+var sListChannelHandshakesTypeSort_programManagementAccountTypeSort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountTypeSort", ID: &iProgramManagementAccountTypeSort, Members: &mProgramManagementAccountTypeSort, Type: smithy.ShapeTypeStructure, Ext: &eListChannelHandshakesTypeSort_programManagementAccountTypeSort})
+var sListProgramManagementAccountsSortBase_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &eListProgramManagementAccountsSortBase_sortOrder})
+var sListProgramManagementAccountsSortBase_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &iListProgramManagementAccountsSortName, Members: &mListProgramManagementAccountsSortName, Type: smithy.ShapeTypeEnum, Ext: &eListProgramManagementAccountsSortBase_sortBy})
+var sListProgramManagementAccountsSortName_UPDATED_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATED_AT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListProgramManagementAccountsSortName_UPDATED_AT})
+var sListRelationshipsSortBase_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &eListRelationshipsSortBase_sortOrder})
+var sListRelationshipsSortBase_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &iListRelationshipsSortName, Members: &mListRelationshipsSortName, Type: smithy.ShapeTypeEnum, Ext: &eListRelationshipsSortBase_sortBy})
+var sListRelationshipsSortName_UPDATED_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATED_AT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListRelationshipsSortName_UPDATED_AT})
+var sParticipantType_SENDER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SENDER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParticipantType_SENDER})
+var sParticipantType_RECEIVER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECEIVER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eParticipantType_RECEIVER})
+var sPartnerLedSupport_coverage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "coverage", ID: &iCoverage, Members: &mCoverage, Type: smithy.ShapeTypeEnum, Ext: &ePartnerLedSupport_coverage})
+var sPartnerLedSupport_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &iProvider, Members: &mProvider, Type: smithy.ShapeTypeEnum, Ext: &ePartnerLedSupport_provider})
+var sPartnerLedSupport_tamLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tamLocation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePartnerLedSupport_tamLocation})
+var sProgram_SOLUTION_PROVIDER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOLUTION_PROVIDER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProgram_SOLUTION_PROVIDER})
+var sProgram_DISTRIBUTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRIBUTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProgram_DISTRIBUTION})
+var sProgram_DISTRIBUTION_SELLER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRIBUTION_SELLER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProgram_DISTRIBUTION_SELLER})
+var s_ProgramList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProgram, Members: &mProgram, Type: smithy.ShapeTypeEnum, Ext: &e_ProgramList_member})
+var s_ProgramManagementAccountDisplayNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ProgramManagementAccountDisplayName, Type: smithy.ShapeTypeString, Ext: &e_ProgramManagementAccountDisplayNameList_member})
+var sProgramManagementAccountHandshakeDetail_program = smithy.NewStaticSchema(smithy.StaticSchema{Member: "program", ID: &iProgram, Members: &mProgram, Type: smithy.ShapeTypeEnum, Ext: &eProgramManagementAccountHandshakeDetail_program})
+var s_ProgramManagementAccountIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ProgramManagementAccountIdentifier, Type: smithy.ShapeTypeString, Ext: &e_ProgramManagementAccountIdentifierList_member})
+var sProgramManagementAccountStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProgramManagementAccountStatus_PENDING})
+var sProgramManagementAccountStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProgramManagementAccountStatus_ACTIVE})
+var sProgramManagementAccountStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProgramManagementAccountStatus_INACTIVE})
+var s_ProgramManagementAccountStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProgramManagementAccountStatus, Members: &mProgramManagementAccountStatus, Type: smithy.ShapeTypeEnum, Ext: &e_ProgramManagementAccountStatusList_member})
+var s_ProgramManagementAccountSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProgramManagementAccountSummary, Members: &mProgramManagementAccountSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ProgramManagementAccountSummaries_member})
+var sProgramManagementAccountSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ProgramManagementAccountId, Type: smithy.ShapeTypeString, Ext: &eProgramManagementAccountSummary_id})
+var sProgramManagementAccountSummary_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &eProgramManagementAccountSummary_revision})
+var sProgramManagementAccountSummary_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &eProgramManagementAccountSummary_catalog})
+var sProgramManagementAccountSummary_program = smithy.NewStaticSchema(smithy.StaticSchema{Member: "program", ID: &iProgram, Members: &mProgram, Type: smithy.ShapeTypeEnum, Ext: &eProgramManagementAccountSummary_program})
+var sProgramManagementAccountSummary_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_ProgramManagementAccountDisplayName, Type: smithy.ShapeTypeString, Ext: &eProgramManagementAccountSummary_displayName})
+var sProgramManagementAccountSummary_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eProgramManagementAccountSummary_accountId})
+var sProgramManagementAccountSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eProgramManagementAccountSummary_arn})
+var sProgramManagementAccountSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eProgramManagementAccountSummary_createdAt})
+var sProgramManagementAccountSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eProgramManagementAccountSummary_updatedAt})
+var sProgramManagementAccountSummary_startDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startDate", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eProgramManagementAccountSummary_startDate})
+var sProgramManagementAccountSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iProgramManagementAccountStatus, Members: &mProgramManagementAccountStatus, Type: smithy.ShapeTypeEnum, Ext: &eProgramManagementAccountSummary_status})
+var sProgramManagementAccountTypeFilters_programs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programs", ID: &i_ProgramList, Members: &m_ProgramList, Type: smithy.ShapeTypeList, Ext: &eProgramManagementAccountTypeFilters_programs})
+var sProgramManagementAccountTypeSort_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &eProgramManagementAccountTypeSort_sortOrder})
+var sProgramManagementAccountTypeSort_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &iProgramManagementAccountTypeSortName, Members: &mProgramManagementAccountTypeSortName, Type: smithy.ShapeTypeEnum, Ext: &eProgramManagementAccountTypeSort_sortBy})
+var sProgramManagementAccountTypeSortName_UPDATED_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATED_AT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProgramManagementAccountTypeSortName_UPDATED_AT})
+var sProvider_DISTRIBUTOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRIBUTOR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProvider_DISTRIBUTOR})
+var sProvider_DISTRIBUTION_SELLER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRIBUTION_SELLER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProvider_DISTRIBUTION_SELLER})
+var sRejectChannelHandshakeDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ChannelHandshakeId, Type: smithy.ShapeTypeString, Ext: &eRejectChannelHandshakeDetail_id})
+var sRejectChannelHandshakeDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eRejectChannelHandshakeDetail_arn})
+var sRejectChannelHandshakeDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iHandshakeStatus, Members: &mHandshakeStatus, Type: smithy.ShapeTypeEnum, Ext: &eRejectChannelHandshakeDetail_status})
+var sRelationshipDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eRelationshipDetail_arn})
+var sRelationshipDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_RelationshipId, Type: smithy.ShapeTypeString, Ext: &eRelationshipDetail_id})
+var sRelationshipDetail_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &eRelationshipDetail_revision})
+var sRelationshipDetail_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &eRelationshipDetail_catalog})
+var sRelationshipDetail_associationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationType", ID: &iAssociationType, Members: &mAssociationType, Type: smithy.ShapeTypeEnum, Ext: &eRelationshipDetail_associationType})
+var sRelationshipDetail_programManagementAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountId", ID: &i_ProgramManagementAccountId, Type: smithy.ShapeTypeString, Ext: &eRelationshipDetail_programManagementAccountId})
+var sRelationshipDetail_associatedAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eRelationshipDetail_associatedAccountId})
+var sRelationshipDetail_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_RelationshipDisplayName, Type: smithy.ShapeTypeString, Ext: &eRelationshipDetail_displayName})
+var sRelationshipDetail_resaleAccountModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resaleAccountModel", ID: &iResaleAccountModel, Members: &mResaleAccountModel, Type: smithy.ShapeTypeEnum, Ext: &eRelationshipDetail_resaleAccountModel})
+var sRelationshipDetail_sector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sector", ID: &iSector, Members: &mSector, Type: smithy.ShapeTypeEnum, Ext: &eRelationshipDetail_sector})
+var sRelationshipDetail_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eRelationshipDetail_createdAt})
+var sRelationshipDetail_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eRelationshipDetail_updatedAt})
+var sRelationshipDetail_startDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startDate", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eRelationshipDetail_startDate})
+var s_RelationshipDisplayNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RelationshipDisplayName, Type: smithy.ShapeTypeString, Ext: &e_RelationshipDisplayNameList_member})
+var s_RelationshipSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRelationshipSummary, Members: &mRelationshipSummary, Type: smithy.ShapeTypeStructure, Ext: &e_RelationshipSummaries_member})
+var sRelationshipSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eRelationshipSummary_arn})
+var sRelationshipSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_RelationshipId, Type: smithy.ShapeTypeString, Ext: &eRelationshipSummary_id})
+var sRelationshipSummary_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &eRelationshipSummary_revision})
+var sRelationshipSummary_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &eRelationshipSummary_catalog})
+var sRelationshipSummary_associationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationType", ID: &iAssociationType, Members: &mAssociationType, Type: smithy.ShapeTypeEnum, Ext: &eRelationshipSummary_associationType})
+var sRelationshipSummary_programManagementAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountId", ID: &i_ProgramManagementAccountId, Type: smithy.ShapeTypeString, Ext: &eRelationshipSummary_programManagementAccountId})
+var sRelationshipSummary_associatedAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eRelationshipSummary_associatedAccountId})
+var sRelationshipSummary_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_RelationshipDisplayName, Type: smithy.ShapeTypeString, Ext: &eRelationshipSummary_displayName})
+var sRelationshipSummary_sector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sector", ID: &iSector, Members: &mSector, Type: smithy.ShapeTypeEnum, Ext: &eRelationshipSummary_sector})
+var sRelationshipSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eRelationshipSummary_createdAt})
+var sRelationshipSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eRelationshipSummary_updatedAt})
+var sRelationshipSummary_startDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startDate", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eRelationshipSummary_startDate})
+var sResaleAccountModel_DISTRIBUTOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRIBUTOR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResaleAccountModel_DISTRIBUTOR})
+var sResaleAccountModel_END_CUSTOMER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "END_CUSTOMER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResaleAccountModel_END_CUSTOMER})
+var sResaleAccountModel_SOLUTION_PROVIDER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOLUTION_PROVIDER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResaleAccountModel_SOLUTION_PROVIDER})
+var sResoldEnterprise_coverage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "coverage", ID: &iCoverage, Members: &mCoverage, Type: smithy.ShapeTypeEnum, Ext: &eResoldEnterprise_coverage})
+var sResoldEnterprise_tamLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tamLocation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResoldEnterprise_tamLocation})
+var sResoldEnterprise_chargeAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chargeAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eResoldEnterprise_chargeAccountId})
+var sResoldUnifiedOperations_coverage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "coverage", ID: &iCoverage, Members: &mCoverage, Type: smithy.ShapeTypeEnum, Ext: &eResoldUnifiedOperations_coverage})
+var sResoldUnifiedOperations_tamLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tamLocation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResoldUnifiedOperations_tamLocation})
+var sResoldUnifiedOperations_chargeAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chargeAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eResoldUnifiedOperations_chargeAccountId})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceId})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceType})
+var sRevokeServicePeriodHandshakeDetail_note = smithy.NewStaticSchema(smithy.StaticSchema{Member: "note", ID: &i_Note, Type: smithy.ShapeTypeString, Ext: &eRevokeServicePeriodHandshakeDetail_note})
+var sRevokeServicePeriodHandshakeDetail_servicePeriodType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "servicePeriodType", ID: &iServicePeriodType, Members: &mServicePeriodType, Type: smithy.ShapeTypeEnum, Ext: &eRevokeServicePeriodHandshakeDetail_servicePeriodType})
+var sRevokeServicePeriodHandshakeDetail_minimumNoticeDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minimumNoticeDays", ID: &i_MinimumNoticeDays, Type: smithy.ShapeTypeString, Ext: &eRevokeServicePeriodHandshakeDetail_minimumNoticeDays})
+var sRevokeServicePeriodHandshakeDetail_startDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startDate", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eRevokeServicePeriodHandshakeDetail_startDate})
+var sRevokeServicePeriodHandshakeDetail_endDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endDate", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eRevokeServicePeriodHandshakeDetail_endDate})
+var sRevokeServicePeriodPayload_programManagementAccountIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountIdentifier", ID: &i_ProgramManagementAccountIdentifier, Type: smithy.ShapeTypeString, Ext: &eRevokeServicePeriodPayload_programManagementAccountIdentifier})
+var sRevokeServicePeriodPayload_note = smithy.NewStaticSchema(smithy.StaticSchema{Member: "note", ID: &i_Note, Type: smithy.ShapeTypeString, Ext: &eRevokeServicePeriodPayload_note})
+var sRevokeServicePeriodTypeFilters_servicePeriodTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "servicePeriodTypes", ID: &i_ServicePeriodTypeList, Members: &m_ServicePeriodTypeList, Type: smithy.ShapeTypeList, Ext: &eRevokeServicePeriodTypeFilters_servicePeriodTypes})
+var sRevokeServicePeriodTypeSort_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &eRevokeServicePeriodTypeSort_sortOrder})
+var sRevokeServicePeriodTypeSort_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &iRevokeServicePeriodTypeSortName, Members: &mRevokeServicePeriodTypeSortName, Type: smithy.ShapeTypeEnum, Ext: &eRevokeServicePeriodTypeSort_sortBy})
+var sRevokeServicePeriodTypeSortName_UPDATED_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATED_AT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevokeServicePeriodTypeSortName_UPDATED_AT})
+var sSector_COMMERCIAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMMERCIAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSector_COMMERCIAL})
+var sSector_GOVERNMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GOVERNMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSector_GOVERNMENT})
+var sSector_GOVERNMENT_EXCEPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GOVERNMENT_EXCEPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSector_GOVERNMENT_EXCEPTION})
+var sServicePeriodType_MINIMUM_NOTICE_PERIOD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MINIMUM_NOTICE_PERIOD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServicePeriodType_MINIMUM_NOTICE_PERIOD})
+var sServicePeriodType_FIXED_COMMITMENT_PERIOD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIXED_COMMITMENT_PERIOD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServicePeriodType_FIXED_COMMITMENT_PERIOD})
+var s_ServicePeriodTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServicePeriodType, Members: &mServicePeriodType, Type: smithy.ShapeTypeEnum, Ext: &e_ServicePeriodTypeList_member})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceId})
+var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceType})
+var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_quotaCode})
+var sSortOrder_ASCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortOrder_ASCENDING})
+var sSortOrder_DESCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortOrder_DESCENDING})
+var sStartServicePeriodHandshakeDetail_note = smithy.NewStaticSchema(smithy.StaticSchema{Member: "note", ID: &i_Note, Type: smithy.ShapeTypeString, Ext: &eStartServicePeriodHandshakeDetail_note})
+var sStartServicePeriodHandshakeDetail_servicePeriodType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "servicePeriodType", ID: &iServicePeriodType, Members: &mServicePeriodType, Type: smithy.ShapeTypeEnum, Ext: &eStartServicePeriodHandshakeDetail_servicePeriodType})
+var sStartServicePeriodHandshakeDetail_minimumNoticeDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minimumNoticeDays", ID: &i_MinimumNoticeDays, Type: smithy.ShapeTypeString, Ext: &eStartServicePeriodHandshakeDetail_minimumNoticeDays})
+var sStartServicePeriodHandshakeDetail_startDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startDate", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eStartServicePeriodHandshakeDetail_startDate})
+var sStartServicePeriodHandshakeDetail_endDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endDate", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eStartServicePeriodHandshakeDetail_endDate})
+var sStartServicePeriodPayload_programManagementAccountIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountIdentifier", ID: &i_ProgramManagementAccountIdentifier, Type: smithy.ShapeTypeString, Ext: &eStartServicePeriodPayload_programManagementAccountIdentifier})
+var sStartServicePeriodPayload_note = smithy.NewStaticSchema(smithy.StaticSchema{Member: "note", ID: &i_Note, Type: smithy.ShapeTypeString, Ext: &eStartServicePeriodPayload_note})
+var sStartServicePeriodPayload_servicePeriodType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "servicePeriodType", ID: &iServicePeriodType, Members: &mServicePeriodType, Type: smithy.ShapeTypeEnum, Ext: &eStartServicePeriodPayload_servicePeriodType})
+var sStartServicePeriodPayload_minimumNoticeDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minimumNoticeDays", ID: &i_MinimumNoticeDays, Type: smithy.ShapeTypeString, Ext: &eStartServicePeriodPayload_minimumNoticeDays})
+var sStartServicePeriodPayload_endDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endDate", ID: &i_DateTime, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eStartServicePeriodPayload_endDate})
+var sStartServicePeriodTypeFilters_servicePeriodTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "servicePeriodTypes", ID: &i_ServicePeriodTypeList, Members: &m_ServicePeriodTypeList, Type: smithy.ShapeTypeList, Ext: &eStartServicePeriodTypeFilters_servicePeriodTypes})
+var sStartServicePeriodTypeSort_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &eStartServicePeriodTypeSort_sortOrder})
+var sStartServicePeriodTypeSort_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &iStartServicePeriodTypeSortName, Members: &mStartServicePeriodTypeSortName, Type: smithy.ShapeTypeEnum, Ext: &eStartServicePeriodTypeSort_sortBy})
+var sStartServicePeriodTypeSortName_UPDATED_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATED_AT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStartServicePeriodTypeSortName_UPDATED_AT})
+var sSupportPlan_resoldEnterprise = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resoldEnterprise", ID: &iResoldEnterprise, Members: &mResoldEnterprise, Type: smithy.ShapeTypeStructure, Ext: &eSupportPlan_resoldEnterprise})
+var sSupportPlan_partnerLedSupport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "partnerLedSupport", ID: &iPartnerLedSupport, Members: &mPartnerLedSupport, Type: smithy.ShapeTypeStructure, Ext: &eSupportPlan_partnerLedSupport})
+var sSupportPlan_resoldUnifiedOperations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resoldUnifiedOperations", ID: &iResoldUnifiedOperations, Members: &mResoldUnifiedOperations, Type: smithy.ShapeTypeStructure, Ext: &eSupportPlan_resoldUnifiedOperations})
+var sTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_key})
+var sTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_value})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_serviceCode})
+var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_quotaCode})
+var sUpdateProgramManagementAccountDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ProgramManagementAccountId, Type: smithy.ShapeTypeString, Ext: &eUpdateProgramManagementAccountDetail_id})
+var sUpdateProgramManagementAccountDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateProgramManagementAccountDetail_arn})
+var sUpdateProgramManagementAccountDetail_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &eUpdateProgramManagementAccountDetail_revision})
+var sUpdateProgramManagementAccountDetail_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_ProgramManagementAccountDisplayName, Type: smithy.ShapeTypeString, Ext: &eUpdateProgramManagementAccountDetail_displayName})
+var sUpdateRelationshipDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateRelationshipDetail_arn})
+var sUpdateRelationshipDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_RelationshipId, Type: smithy.ShapeTypeString, Ext: &eUpdateRelationshipDetail_id})
+var sUpdateRelationshipDetail_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &eUpdateRelationshipDetail_revision})
+var sUpdateRelationshipDetail_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_RelationshipDisplayName, Type: smithy.ShapeTypeString, Ext: &eUpdateRelationshipDetail_displayName})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_reason})
+var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_fieldList})
+var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_name})
+var sValidationExceptionField_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_code})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_message})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var sValidationExceptionReason_REQUEST_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUEST_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_REQUEST_VALIDATION_FAILED})
+var sValidationExceptionReason_BUSINESS_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUSINESS_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_BUSINESS_VALIDATION_FAILED})
+var sAcceptChannelHandshakeRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &eAcceptChannelHandshakeRequest_catalog})
+var sAcceptChannelHandshakeRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_ChannelHandshakeIdentifier, Type: smithy.ShapeTypeString, Ext: &eAcceptChannelHandshakeRequest_identifier})
+var sAcceptChannelHandshakeResponse_channelHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelHandshakeDetail", ID: &iAcceptChannelHandshakeDetail, Members: &mAcceptChannelHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &eAcceptChannelHandshakeResponse_channelHandshakeDetail})
+var sCancelChannelHandshakeRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &eCancelChannelHandshakeRequest_catalog})
+var sCancelChannelHandshakeRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_ChannelHandshakeIdentifier, Type: smithy.ShapeTypeString, Ext: &eCancelChannelHandshakeRequest_identifier})
+var sCancelChannelHandshakeResponse_channelHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelHandshakeDetail", ID: &iCancelChannelHandshakeDetail, Members: &mCancelChannelHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &eCancelChannelHandshakeResponse_channelHandshakeDetail})
+var sCreateChannelHandshakeRequest_handshakeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "handshakeType", ID: &iHandshakeType, Members: &mHandshakeType, Type: smithy.ShapeTypeEnum, Ext: &eCreateChannelHandshakeRequest_handshakeType})
+var sCreateChannelHandshakeRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &eCreateChannelHandshakeRequest_catalog})
+var sCreateChannelHandshakeRequest_associatedResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedResourceIdentifier", ID: &i_AssociatedResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &eCreateChannelHandshakeRequest_associatedResourceIdentifier})
+var sCreateChannelHandshakeRequest_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &iChannelHandshakePayload, Members: &mChannelHandshakePayload, Type: smithy.ShapeTypeUnion, Ext: &eCreateChannelHandshakeRequest_payload})
+var sCreateChannelHandshakeRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateChannelHandshakeRequest_clientToken})
+var sCreateChannelHandshakeRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateChannelHandshakeRequest_tags})
+var sCreateChannelHandshakeResponse_channelHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelHandshakeDetail", ID: &iCreateChannelHandshakeDetail, Members: &mCreateChannelHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelHandshakeResponse_channelHandshakeDetail})
+var sCreateProgramManagementAccountRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &eCreateProgramManagementAccountRequest_catalog})
+var sCreateProgramManagementAccountRequest_program = smithy.NewStaticSchema(smithy.StaticSchema{Member: "program", ID: &iProgram, Members: &mProgram, Type: smithy.ShapeTypeEnum, Ext: &eCreateProgramManagementAccountRequest_program})
+var sCreateProgramManagementAccountRequest_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_ProgramManagementAccountDisplayName, Type: smithy.ShapeTypeString, Ext: &eCreateProgramManagementAccountRequest_displayName})
+var sCreateProgramManagementAccountRequest_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eCreateProgramManagementAccountRequest_accountId})
+var sCreateProgramManagementAccountRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateProgramManagementAccountRequest_clientToken})
+var sCreateProgramManagementAccountRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateProgramManagementAccountRequest_tags})
+var sCreateProgramManagementAccountResponse_programManagementAccountDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountDetail", ID: &iCreateProgramManagementAccountDetail, Members: &mCreateProgramManagementAccountDetail, Type: smithy.ShapeTypeStructure, Ext: &eCreateProgramManagementAccountResponse_programManagementAccountDetail})
+var sCreateRelationshipRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &eCreateRelationshipRequest_catalog})
+var sCreateRelationshipRequest_associationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationType", ID: &iAssociationType, Members: &mAssociationType, Type: smithy.ShapeTypeEnum, Ext: &eCreateRelationshipRequest_associationType})
+var sCreateRelationshipRequest_programManagementAccountIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountIdentifier", ID: &i_ProgramManagementAccountIdentifier, Type: smithy.ShapeTypeString, Ext: &eCreateRelationshipRequest_programManagementAccountIdentifier})
+var sCreateRelationshipRequest_associatedAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eCreateRelationshipRequest_associatedAccountId})
+var sCreateRelationshipRequest_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_RelationshipDisplayName, Type: smithy.ShapeTypeString, Ext: &eCreateRelationshipRequest_displayName})
+var sCreateRelationshipRequest_resaleAccountModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resaleAccountModel", ID: &iResaleAccountModel, Members: &mResaleAccountModel, Type: smithy.ShapeTypeEnum, Ext: &eCreateRelationshipRequest_resaleAccountModel})
+var sCreateRelationshipRequest_sector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sector", ID: &iSector, Members: &mSector, Type: smithy.ShapeTypeEnum, Ext: &eCreateRelationshipRequest_sector})
+var sCreateRelationshipRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateRelationshipRequest_clientToken})
+var sCreateRelationshipRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateRelationshipRequest_tags})
+var sCreateRelationshipRequest_requestedSupportPlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestedSupportPlan", ID: &iSupportPlan, Members: &mSupportPlan, Type: smithy.ShapeTypeUnion, Ext: &eCreateRelationshipRequest_requestedSupportPlan})
+var sCreateRelationshipResponse_relationshipDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relationshipDetail", ID: &iCreateRelationshipDetail, Members: &mCreateRelationshipDetail, Type: smithy.ShapeTypeStructure, Ext: &eCreateRelationshipResponse_relationshipDetail})
+var sDeleteProgramManagementAccountRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &eDeleteProgramManagementAccountRequest_catalog})
+var sDeleteProgramManagementAccountRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_ProgramManagementAccountIdentifier, Type: smithy.ShapeTypeString, Ext: &eDeleteProgramManagementAccountRequest_identifier})
+var sDeleteProgramManagementAccountRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eDeleteProgramManagementAccountRequest_clientToken})
+var sDeleteRelationshipRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &eDeleteRelationshipRequest_catalog})
+var sDeleteRelationshipRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_RelationshipIdentifier, Type: smithy.ShapeTypeString, Ext: &eDeleteRelationshipRequest_identifier})
+var sDeleteRelationshipRequest_programManagementAccountIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountIdentifier", ID: &i_ProgramManagementAccountIdentifier, Type: smithy.ShapeTypeString, Ext: &eDeleteRelationshipRequest_programManagementAccountIdentifier})
+var sDeleteRelationshipRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eDeleteRelationshipRequest_clientToken})
+var sGetRelationshipRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &eGetRelationshipRequest_catalog})
+var sGetRelationshipRequest_programManagementAccountIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountIdentifier", ID: &i_ProgramManagementAccountIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetRelationshipRequest_programManagementAccountIdentifier})
+var sGetRelationshipRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_RelationshipIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetRelationshipRequest_identifier})
+var sGetRelationshipResponse_relationshipDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relationshipDetail", ID: &iRelationshipDetail, Members: &mRelationshipDetail, Type: smithy.ShapeTypeStructure, Ext: &eGetRelationshipResponse_relationshipDetail})
+var sListChannelHandshakesRequest_handshakeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "handshakeType", ID: &iHandshakeType, Members: &mHandshakeType, Type: smithy.ShapeTypeEnum, Ext: &eListChannelHandshakesRequest_handshakeType})
+var sListChannelHandshakesRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &eListChannelHandshakesRequest_catalog})
+var sListChannelHandshakesRequest_participantType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "participantType", ID: &iParticipantType, Members: &mParticipantType, Type: smithy.ShapeTypeEnum, Ext: &eListChannelHandshakesRequest_participantType})
+var sListChannelHandshakesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListChannelHandshakesRequest_maxResults})
+var sListChannelHandshakesRequest_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_HandshakeStatusList, Members: &m_HandshakeStatusList, Type: smithy.ShapeTypeList, Ext: &eListChannelHandshakesRequest_statuses})
+var sListChannelHandshakesRequest_associatedResourceIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedResourceIdentifiers", ID: &i_AssociatedResourceIdentifierList, Members: &m_AssociatedResourceIdentifierList, Type: smithy.ShapeTypeList, Ext: &eListChannelHandshakesRequest_associatedResourceIdentifiers})
+var sListChannelHandshakesRequest_handshakeTypeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "handshakeTypeFilters", ID: &iListChannelHandshakesTypeFilters, Members: &mListChannelHandshakesTypeFilters, Type: smithy.ShapeTypeUnion, Ext: &eListChannelHandshakesRequest_handshakeTypeFilters})
+var sListChannelHandshakesRequest_handshakeTypeSort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "handshakeTypeSort", ID: &iListChannelHandshakesTypeSort, Members: &mListChannelHandshakesTypeSort, Type: smithy.ShapeTypeUnion, Ext: &eListChannelHandshakesRequest_handshakeTypeSort})
+var sListChannelHandshakesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListChannelHandshakesRequest_nextToken})
+var sListChannelHandshakesResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_ChannelHandshakeSummaries, Members: &m_ChannelHandshakeSummaries, Type: smithy.ShapeTypeList, Ext: &eListChannelHandshakesResponse_items})
+var sListChannelHandshakesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListChannelHandshakesResponse_nextToken})
+var sListProgramManagementAccountsRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &eListProgramManagementAccountsRequest_catalog})
+var sListProgramManagementAccountsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListProgramManagementAccountsRequest_maxResults})
+var sListProgramManagementAccountsRequest_displayNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayNames", ID: &i_ProgramManagementAccountDisplayNameList, Members: &m_ProgramManagementAccountDisplayNameList, Type: smithy.ShapeTypeList, Ext: &eListProgramManagementAccountsRequest_displayNames})
+var sListProgramManagementAccountsRequest_programs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programs", ID: &i_ProgramList, Members: &m_ProgramList, Type: smithy.ShapeTypeList, Ext: &eListProgramManagementAccountsRequest_programs})
+var sListProgramManagementAccountsRequest_accountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountIds", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList, Ext: &eListProgramManagementAccountsRequest_accountIds})
+var sListProgramManagementAccountsRequest_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_ProgramManagementAccountStatusList, Members: &m_ProgramManagementAccountStatusList, Type: smithy.ShapeTypeList, Ext: &eListProgramManagementAccountsRequest_statuses})
+var sListProgramManagementAccountsRequest_sort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sort", ID: &iListProgramManagementAccountsSortBase, Members: &mListProgramManagementAccountsSortBase, Type: smithy.ShapeTypeStructure, Ext: &eListProgramManagementAccountsRequest_sort})
+var sListProgramManagementAccountsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListProgramManagementAccountsRequest_nextToken})
+var sListProgramManagementAccountsResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_ProgramManagementAccountSummaries, Members: &m_ProgramManagementAccountSummaries, Type: smithy.ShapeTypeList, Ext: &eListProgramManagementAccountsResponse_items})
+var sListProgramManagementAccountsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListProgramManagementAccountsResponse_nextToken})
+var sListRelationshipsRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &eListRelationshipsRequest_catalog})
+var sListRelationshipsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListRelationshipsRequest_maxResults})
+var sListRelationshipsRequest_associatedAccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedAccountIds", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList, Ext: &eListRelationshipsRequest_associatedAccountIds})
+var sListRelationshipsRequest_associationTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationTypes", ID: &i_AssociationTypeList, Members: &m_AssociationTypeList, Type: smithy.ShapeTypeList, Ext: &eListRelationshipsRequest_associationTypes})
+var sListRelationshipsRequest_displayNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayNames", ID: &i_RelationshipDisplayNameList, Members: &m_RelationshipDisplayNameList, Type: smithy.ShapeTypeList, Ext: &eListRelationshipsRequest_displayNames})
+var sListRelationshipsRequest_programManagementAccountIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountIdentifiers", ID: &i_ProgramManagementAccountIdentifierList, Members: &m_ProgramManagementAccountIdentifierList, Type: smithy.ShapeTypeList, Ext: &eListRelationshipsRequest_programManagementAccountIdentifiers})
+var sListRelationshipsRequest_sort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sort", ID: &iListRelationshipsSortBase, Members: &mListRelationshipsSortBase, Type: smithy.ShapeTypeStructure, Ext: &eListRelationshipsRequest_sort})
+var sListRelationshipsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRelationshipsRequest_nextToken})
+var sListRelationshipsResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_RelationshipSummaries, Members: &m_RelationshipSummaries, Type: smithy.ShapeTypeList, Ext: &eListRelationshipsResponse_items})
+var sListRelationshipsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRelationshipsResponse_nextToken})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_TaggableArn, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_tags})
+var sRejectChannelHandshakeRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &eRejectChannelHandshakeRequest_catalog})
+var sRejectChannelHandshakeRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_ChannelHandshakeIdentifier, Type: smithy.ShapeTypeString, Ext: &eRejectChannelHandshakeRequest_identifier})
+var sRejectChannelHandshakeResponse_channelHandshakeDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelHandshakeDetail", ID: &iRejectChannelHandshakeDetail, Members: &mRejectChannelHandshakeDetail, Type: smithy.ShapeTypeStructure, Ext: &eRejectChannelHandshakeResponse_channelHandshakeDetail})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_TaggableArn, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_tags})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_TaggableArn, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUpdateProgramManagementAccountRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &eUpdateProgramManagementAccountRequest_catalog})
+var sUpdateProgramManagementAccountRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_ProgramManagementAccountIdentifier, Type: smithy.ShapeTypeString, Ext: &eUpdateProgramManagementAccountRequest_identifier})
+var sUpdateProgramManagementAccountRequest_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &eUpdateProgramManagementAccountRequest_revision})
+var sUpdateProgramManagementAccountRequest_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_ProgramManagementAccountDisplayName, Type: smithy.ShapeTypeString, Ext: &eUpdateProgramManagementAccountRequest_displayName})
+var sUpdateProgramManagementAccountResponse_programManagementAccountDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountDetail", ID: &iUpdateProgramManagementAccountDetail, Members: &mUpdateProgramManagementAccountDetail, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProgramManagementAccountResponse_programManagementAccountDetail})
+var sUpdateRelationshipRequest_catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString, Ext: &eUpdateRelationshipRequest_catalog})
+var sUpdateRelationshipRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_RelationshipIdentifier, Type: smithy.ShapeTypeString, Ext: &eUpdateRelationshipRequest_identifier})
+var sUpdateRelationshipRequest_programManagementAccountIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "programManagementAccountIdentifier", ID: &i_ProgramManagementAccountIdentifier, Type: smithy.ShapeTypeString, Ext: &eUpdateRelationshipRequest_programManagementAccountIdentifier})
+var sUpdateRelationshipRequest_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &eUpdateRelationshipRequest_revision})
+var sUpdateRelationshipRequest_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_RelationshipDisplayName, Type: smithy.ShapeTypeString, Ext: &eUpdateRelationshipRequest_displayName})
+var sUpdateRelationshipRequest_requestedSupportPlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestedSupportPlan", ID: &iSupportPlan, Members: &mSupportPlan, Type: smithy.ShapeTypeUnion, Ext: &eUpdateRelationshipRequest_requestedSupportPlan})
+var sUpdateRelationshipResponse_relationshipDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relationshipDetail", ID: &iUpdateRelationshipDetail, Members: &mUpdateRelationshipDetail, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRelationshipResponse_relationshipDetail})
 
 var AcceptChannelHandshake = &sAcceptChannelHandshake
 

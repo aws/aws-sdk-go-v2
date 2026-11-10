@@ -7,9 +7,195 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [187]smithy.SchemaExtensions
+var (
+	eBatchGetDiscoverableRegistryRecord                                smithy.SchemaExtensions
+	eListDiscoverableRegistryRecords                                   smithy.SchemaExtensions
+	eSearchDiscoverableRegistryRecords                                 smithy.SchemaExtensions
+	e_AgentRegistry                                                    smithy.SchemaExtensions
+	eA2aAgentCardDescriptor                                            smithy.SchemaExtensions
+	eA2aAgentCardDescriptor_data                                       smithy.SchemaExtensions
+	eA2aAgentCardDescriptor_dataSchemaVersion                          smithy.SchemaExtensions
+	eA2aAgentCardDescriptor_source                                     smithy.SchemaExtensions
+	eAccessDeniedException                                             smithy.SchemaExtensions
+	eAccessDeniedException_message                                     smithy.SchemaExtensions
+	eAgentSkillsAdditionalData                                         smithy.SchemaExtensions
+	eAgentSkillsAdditionalData_skillMd                                 smithy.SchemaExtensions
+	eAgentSkillsDefinitionDescriptor                                   smithy.SchemaExtensions
+	eAgentSkillsDefinitionDescriptor_data                              smithy.SchemaExtensions
+	eAgentSkillsDefinitionDescriptor_dataSchemaVersion                 smithy.SchemaExtensions
+	eAgentSkillsDefinitionDescriptor_additionalData                    smithy.SchemaExtensions
+	eAgentSkillsMdDescriptor                                           smithy.SchemaExtensions
+	eAgentSkillsMdDescriptor_data                                      smithy.SchemaExtensions
+	eAgentSkillsMdDescriptor_dataSchemaVersion                         smithy.SchemaExtensions
+	eAgentSkillsMdDescriptor_source                                    smithy.SchemaExtensions
+	eAgUiDescriptor                                                    smithy.SchemaExtensions
+	eAgUiDescriptor_source                                             smithy.SchemaExtensions
+	eBatchGetDiscoverableRegistryRecordError                           smithy.SchemaExtensions
+	eBatchGetDiscoverableRegistryRecordError_registryId                smithy.SchemaExtensions
+	eBatchGetDiscoverableRegistryRecordError_recordId                  smithy.SchemaExtensions
+	eBatchGetDiscoverableRegistryRecordError_errorCode                 smithy.SchemaExtensions
+	eBatchGetDiscoverableRegistryRecordError_message                   smithy.SchemaExtensions
+	eBatchGetDiscoverableRegistryRecordErrorCode                       smithy.SchemaExtensions
+	eBatchGetDiscoverableRegistryRecordErrorCode_RESOURCE_NOT_FOUND    smithy.SchemaExtensions
+	eBatchGetDiscoverableRegistryRecordErrorCode_ACCESS_DENIED         smithy.SchemaExtensions
+	eBatchGetDiscoverableRegistryRecordErrorCode_INTERNAL_ERROR        smithy.SchemaExtensions
+	e_BatchGetDiscoverableRegistryRecordErrorList                      smithy.SchemaExtensions
+	e_BatchGetDiscoverableRegistryRecordErrorList_member               smithy.SchemaExtensions
+	eCustomDescriptor                                                  smithy.SchemaExtensions
+	eCustomDescriptor_data                                             smithy.SchemaExtensions
+	e_CustomMetadataDocument                                           smithy.SchemaExtensions
+	e_DataSchemaVersion                                                smithy.SchemaExtensions
+	e_DateTimestamp                                                    smithy.SchemaExtensions
+	e_Description                                                      smithy.SchemaExtensions
+	e_DescriptorData                                                   smithy.SchemaExtensions
+	eDescriptors                                                       smithy.SchemaExtensions
+	eDescriptors_mcpServer                                             smithy.SchemaExtensions
+	eDescriptors_a2aAgentCard                                          smithy.SchemaExtensions
+	eDescriptors_agentSkillsDefinition                                 smithy.SchemaExtensions
+	eDescriptors_custom                                                smithy.SchemaExtensions
+	eDescriptors_http                                                  smithy.SchemaExtensions
+	eDescriptors_agui                                                  smithy.SchemaExtensions
+	eDescriptorSource                                                  smithy.SchemaExtensions
+	eDescriptorSource_fromUrl                                          smithy.SchemaExtensions
+	eDescriptorSourceFromUrl                                           smithy.SchemaExtensions
+	eDescriptorSourceFromUrl_url                                       smithy.SchemaExtensions
+	e_DescriptorSourceUrl                                              smithy.SchemaExtensions
+	e_DescriptorTypeList                                               smithy.SchemaExtensions
+	e_DescriptorTypeList_member                                        smithy.SchemaExtensions
+	e_DiscoverableFilterValues                                         smithy.SchemaExtensions
+	e_DiscoverableFilterValues_member                                  smithy.SchemaExtensions
+	eDiscoverableRegistryRecordSummary                                 smithy.SchemaExtensions
+	eDiscoverableRegistryRecordSummary_registryArn                     smithy.SchemaExtensions
+	eDiscoverableRegistryRecordSummary_recordArn                       smithy.SchemaExtensions
+	eDiscoverableRegistryRecordSummary_recordId                        smithy.SchemaExtensions
+	eDiscoverableRegistryRecordSummary_name                            smithy.SchemaExtensions
+	eDiscoverableRegistryRecordSummary_description                     smithy.SchemaExtensions
+	eDiscoverableRegistryRecordSummary_displayName                     smithy.SchemaExtensions
+	eDiscoverableRegistryRecordSummary_recordType                      smithy.SchemaExtensions
+	eDiscoverableRegistryRecordSummary_recordVersion                   smithy.SchemaExtensions
+	eDiscoverableRegistryRecordSummary_status                          smithy.SchemaExtensions
+	eDiscoverableRegistryRecordSummary_createdAt                       smithy.SchemaExtensions
+	eDiscoverableRegistryRecordSummary_updatedAt                       smithy.SchemaExtensions
+	eDiscoverableRegistryRecordSummary_descriptorTypes                 smithy.SchemaExtensions
+	e_DiscoverableRegistryRecordSummaryList                            smithy.SchemaExtensions
+	e_DiscoverableRegistryRecordSummaryList_member                     smithy.SchemaExtensions
+	e_FilterValue                                                      smithy.SchemaExtensions
+	eHttpDescriptor                                                    smithy.SchemaExtensions
+	eHttpDescriptor_source                                             smithy.SchemaExtensions
+	eInternalServerException                                           smithy.SchemaExtensions
+	eInternalServerException_message                                   smithy.SchemaExtensions
+	eMcpServerAdditionalData                                           smithy.SchemaExtensions
+	eMcpServerAdditionalData_tools                                     smithy.SchemaExtensions
+	eMcpServerDescriptor                                               smithy.SchemaExtensions
+	eMcpServerDescriptor_data                                          smithy.SchemaExtensions
+	eMcpServerDescriptor_dataSchemaVersion                             smithy.SchemaExtensions
+	eMcpServerDescriptor_additionalData                                smithy.SchemaExtensions
+	eMcpServerDescriptor_source                                        smithy.SchemaExtensions
+	eMcpToolsDescriptor                                                smithy.SchemaExtensions
+	eMcpToolsDescriptor_data                                           smithy.SchemaExtensions
+	eMcpToolsDescriptor_dataSchemaVersion                              smithy.SchemaExtensions
+	e_MetadataFilterExpression                                         smithy.SchemaExtensions
+	e_NonBlankString                                                   smithy.SchemaExtensions
+	e_RecordIdentifier                                                 smithy.SchemaExtensions
+	eRecordType                                                        smithy.SchemaExtensions
+	eRecordType_MCP                                                    smithy.SchemaExtensions
+	eRecordType_AGENT                                                  smithy.SchemaExtensions
+	eRecordType_CUSTOM                                                 smithy.SchemaExtensions
+	eRecordType_SKILL                                                  smithy.SchemaExtensions
+	eRecordType_GATEWAY                                                smithy.SchemaExtensions
+	e_RegistryArn                                                      smithy.SchemaExtensions
+	e_RegistryIdentifier                                               smithy.SchemaExtensions
+	e_RegistryIdList                                                   smithy.SchemaExtensions
+	e_RegistryIdList_member                                            smithy.SchemaExtensions
+	e_RegistryRecordArn                                                smithy.SchemaExtensions
+	e_RegistryRecordDisplayName                                        smithy.SchemaExtensions
+	eRegistryRecordFilter                                              smithy.SchemaExtensions
+	eRegistryRecordFilter_name                                         smithy.SchemaExtensions
+	eRegistryRecordFilter_values                                       smithy.SchemaExtensions
+	e_RegistryRecordFilterList                                         smithy.SchemaExtensions
+	e_RegistryRecordFilterList_member                                  smithy.SchemaExtensions
+	eRegistryRecordFilterName                                          smithy.SchemaExtensions
+	eRegistryRecordFilterName_RECORD_TYPE                              smithy.SchemaExtensions
+	eRegistryRecordFilterName_DESCRIPTOR_TYPE                          smithy.SchemaExtensions
+	e_RegistryRecordId                                                 smithy.SchemaExtensions
+	e_RegistryRecordIdList                                             smithy.SchemaExtensions
+	e_RegistryRecordIdList_member                                      smithy.SchemaExtensions
+	e_RegistryRecordName                                               smithy.SchemaExtensions
+	eRegistryRecordsEntry                                              smithy.SchemaExtensions
+	eRegistryRecordsEntry_registryId                                   smithy.SchemaExtensions
+	eRegistryRecordsEntry_recordIds                                    smithy.SchemaExtensions
+	e_RegistryRecordsEntryList                                         smithy.SchemaExtensions
+	e_RegistryRecordsEntryList_member                                  smithy.SchemaExtensions
+	eRegistryRecordStatus                                              smithy.SchemaExtensions
+	eRegistryRecordStatus_DRAFT                                        smithy.SchemaExtensions
+	eRegistryRecordStatus_PENDING_APPROVAL                             smithy.SchemaExtensions
+	eRegistryRecordStatus_APPROVED                                     smithy.SchemaExtensions
+	eRegistryRecordStatus_REJECTED                                     smithy.SchemaExtensions
+	eRegistryRecordStatus_DEPRECATED                                   smithy.SchemaExtensions
+	eRegistryRecordStatus_CREATING                                     smithy.SchemaExtensions
+	eRegistryRecordStatus_UPDATING                                     smithy.SchemaExtensions
+	eRegistryRecordStatus_CREATE_FAILED                                smithy.SchemaExtensions
+	eRegistryRecordStatus_UPDATE_FAILED                                smithy.SchemaExtensions
+	eRegistryRecordSummary                                             smithy.SchemaExtensions
+	eRegistryRecordSummary_registryArn                                 smithy.SchemaExtensions
+	eRegistryRecordSummary_recordArn                                   smithy.SchemaExtensions
+	eRegistryRecordSummary_recordId                                    smithy.SchemaExtensions
+	eRegistryRecordSummary_name                                        smithy.SchemaExtensions
+	eRegistryRecordSummary_description                                 smithy.SchemaExtensions
+	eRegistryRecordSummary_displayName                                 smithy.SchemaExtensions
+	eRegistryRecordSummary_recordType                                  smithy.SchemaExtensions
+	eRegistryRecordSummary_descriptors                                 smithy.SchemaExtensions
+	eRegistryRecordSummary_recordVersion                               smithy.SchemaExtensions
+	eRegistryRecordSummary_status                                      smithy.SchemaExtensions
+	eRegistryRecordSummary_createdAt                                   smithy.SchemaExtensions
+	eRegistryRecordSummary_updatedAt                                   smithy.SchemaExtensions
+	eRegistryRecordSummary_customMetadata                              smithy.SchemaExtensions
+	e_RegistryRecordSummaryList                                        smithy.SchemaExtensions
+	e_RegistryRecordSummaryList_member                                 smithy.SchemaExtensions
+	e_RegistryRecordVersion                                            smithy.SchemaExtensions
+	eResourceNotFoundException                                         smithy.SchemaExtensions
+	eResourceNotFoundException_message                                 smithy.SchemaExtensions
+	e_SearchQuery                                                      smithy.SchemaExtensions
+	eThrottlingException                                               smithy.SchemaExtensions
+	eThrottlingException_message                                       smithy.SchemaExtensions
+	eUnauthorizedException                                             smithy.SchemaExtensions
+	eUnauthorizedException_message                                     smithy.SchemaExtensions
+	eValidationException                                               smithy.SchemaExtensions
+	eValidationException_message                                       smithy.SchemaExtensions
+	eValidationException_reason                                        smithy.SchemaExtensions
+	eValidationException_fieldList                                     smithy.SchemaExtensions
+	eValidationExceptionField                                          smithy.SchemaExtensions
+	eValidationExceptionField_name                                     smithy.SchemaExtensions
+	eValidationExceptionField_message                                  smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                                     smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member                              smithy.SchemaExtensions
+	eValidationExceptionReason                                         smithy.SchemaExtensions
+	eValidationExceptionReason_CANNOT_PARSE                            smithy.SchemaExtensions
+	eValidationExceptionReason_FIELD_VALIDATION_FAILED                 smithy.SchemaExtensions
+	eValidationExceptionReason_IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION smithy.SchemaExtensions
+	eValidationExceptionReason_ROOT_EVENT_IN_OTHER_SESSION             smithy.SchemaExtensions
+	eValidationExceptionReason_RESOURCE_CONFLICT                       smithy.SchemaExtensions
+	eBatchGetDiscoverableRegistryRecordRequest                         smithy.SchemaExtensions
+	eBatchGetDiscoverableRegistryRecordRequest_entries                 smithy.SchemaExtensions
+	eBatchGetDiscoverableRegistryRecordResponse                        smithy.SchemaExtensions
+	eBatchGetDiscoverableRegistryRecordResponse_registryRecords        smithy.SchemaExtensions
+	eBatchGetDiscoverableRegistryRecordResponse_errors                 smithy.SchemaExtensions
+	eListDiscoverableRegistryRecordsRequest                            smithy.SchemaExtensions
+	eListDiscoverableRegistryRecordsRequest_registryId                 smithy.SchemaExtensions
+	eListDiscoverableRegistryRecordsRequest_maxResults                 smithy.SchemaExtensions
+	eListDiscoverableRegistryRecordsRequest_nextToken                  smithy.SchemaExtensions
+	eListDiscoverableRegistryRecordsRequest_filters                    smithy.SchemaExtensions
+	eListDiscoverableRegistryRecordsResponse                           smithy.SchemaExtensions
+	eListDiscoverableRegistryRecordsResponse_registryRecords           smithy.SchemaExtensions
+	eListDiscoverableRegistryRecordsResponse_nextToken                 smithy.SchemaExtensions
+	eSearchDiscoverableRegistryRecordsRequest                          smithy.SchemaExtensions
+	eSearchDiscoverableRegistryRecordsRequest_searchQuery              smithy.SchemaExtensions
+	eSearchDiscoverableRegistryRecordsRequest_registryIds              smithy.SchemaExtensions
+	eSearchDiscoverableRegistryRecordsRequest_maxResults               smithy.SchemaExtensions
+	eSearchDiscoverableRegistryRecordsRequest_filters                  smithy.SchemaExtensions
+	eSearchDiscoverableRegistryRecordsResponse                         smithy.SchemaExtensions
+	eSearchDiscoverableRegistryRecordsResponse_registryRecords         smithy.SchemaExtensions
+)
 
 var (
 	iBatchGetDiscoverableRegistryRecord           = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "BatchGetDiscoverableRegistryRecord"}
@@ -162,194 +348,194 @@ var mListDiscoverableRegistryRecordsResponse = smithy.SchemaMembers{List: []*smi
 var mSearchDiscoverableRegistryRecordsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchDiscoverableRegistryRecordsRequest_searchQuery, &sSearchDiscoverableRegistryRecordsRequest_registryIds, &sSearchDiscoverableRegistryRecordsRequest_maxResults, &sSearchDiscoverableRegistryRecordsRequest_filters}}
 var mSearchDiscoverableRegistryRecordsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchDiscoverableRegistryRecordsResponse_registryRecords}}
 
-var sBatchGetDiscoverableRegistryRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetDiscoverableRegistryRecord, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sListDiscoverableRegistryRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDiscoverableRegistryRecords, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sSearchDiscoverableRegistryRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchDiscoverableRegistryRecords, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var s_AgentRegistry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AgentRegistry, Type: smithy.ShapeTypeService, Ext: &ext[3]})
-var sA2aAgentCardDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iA2aAgentCardDescriptor, Members: &mA2aAgentCardDescriptor, Type: smithy.ShapeTypeStructure, Ext: &ext[4]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &ext[8]})
-var sAgentSkillsAdditionalData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAgentSkillsAdditionalData, Members: &mAgentSkillsAdditionalData, Type: smithy.ShapeTypeStructure, Ext: &ext[10]})
-var sAgentSkillsDefinitionDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAgentSkillsDefinitionDescriptor, Members: &mAgentSkillsDefinitionDescriptor, Type: smithy.ShapeTypeStructure, Ext: &ext[12]})
-var sAgentSkillsMdDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAgentSkillsMdDescriptor, Members: &mAgentSkillsMdDescriptor, Type: smithy.ShapeTypeStructure, Ext: &ext[16]})
-var sAgUiDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAgUiDescriptor, Members: &mAgUiDescriptor, Type: smithy.ShapeTypeStructure, Ext: &ext[20]})
-var sBatchGetDiscoverableRegistryRecordError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetDiscoverableRegistryRecordError, Members: &mBatchGetDiscoverableRegistryRecordError, Type: smithy.ShapeTypeStructure, Ext: &ext[22]})
-var sBatchGetDiscoverableRegistryRecordErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetDiscoverableRegistryRecordErrorCode, Members: &mBatchGetDiscoverableRegistryRecordErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[27]})
-var s_BatchGetDiscoverableRegistryRecordErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetDiscoverableRegistryRecordErrorList, Members: &m_BatchGetDiscoverableRegistryRecordErrorList, Type: smithy.ShapeTypeList, Ext: &ext[31]})
-var sCustomDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomDescriptor, Members: &mCustomDescriptor, Type: smithy.ShapeTypeStructure, Ext: &ext[33]})
-var s_CustomMetadataDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomMetadataDocument, Traits: &t5, Type: smithy.ShapeTypeDocument, Ext: &ext[35]})
-var s_DataSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataSchemaVersion, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var s_DateTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateTimestamp, Traits: &t6, Type: smithy.ShapeTypeTimestamp, Ext: &ext[37]})
-var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &ext[38]})
-var s_DescriptorData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescriptorData, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &ext[39]})
-var sDescriptors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescriptors, Members: &mDescriptors, Type: smithy.ShapeTypeStructure, Ext: &ext[40]})
-var sDescriptorSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescriptorSource, Members: &mDescriptorSource, Type: smithy.ShapeTypeStructure, Ext: &ext[47]})
-var sDescriptorSourceFromUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescriptorSourceFromUrl, Members: &mDescriptorSourceFromUrl, Type: smithy.ShapeTypeStructure, Ext: &ext[49]})
-var s_DescriptorSourceUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescriptorSourceUrl, Type: smithy.ShapeTypeString, Ext: &ext[51]})
-var s_DescriptorTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescriptorTypeList, Members: &m_DescriptorTypeList, Type: smithy.ShapeTypeList, Ext: &ext[52]})
-var s_DiscoverableFilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DiscoverableFilterValues, Members: &m_DiscoverableFilterValues, Type: smithy.ShapeTypeList, Ext: &ext[54]})
-var sDiscoverableRegistryRecordSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiscoverableRegistryRecordSummary, Members: &mDiscoverableRegistryRecordSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[56]})
-var s_DiscoverableRegistryRecordSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DiscoverableRegistryRecordSummaryList, Members: &m_DiscoverableRegistryRecordSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[69]})
-var s_FilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValue, Type: smithy.ShapeTypeString, Ext: &ext[71]})
-var sHttpDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpDescriptor, Members: &mHttpDescriptor, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var sMcpServerAdditionalData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMcpServerAdditionalData, Members: &mMcpServerAdditionalData, Type: smithy.ShapeTypeStructure, Ext: &ext[76]})
-var sMcpServerDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMcpServerDescriptor, Members: &mMcpServerDescriptor, Type: smithy.ShapeTypeStructure, Ext: &ext[78]})
-var sMcpToolsDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMcpToolsDescriptor, Members: &mMcpToolsDescriptor, Type: smithy.ShapeTypeStructure, Ext: &ext[83]})
-var s_MetadataFilterExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetadataFilterExpression, Traits: &t5, Type: smithy.ShapeTypeDocument, Ext: &ext[86]})
-var s_NonBlankString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[87]})
-var s_RecordIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[88]})
-var sRecordType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordType, Members: &mRecordType, Type: smithy.ShapeTypeEnum, Ext: &ext[89]})
-var s_RegistryArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryArn, Type: smithy.ShapeTypeString, Ext: &ext[95]})
-var s_RegistryIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[96]})
-var s_RegistryIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryIdList, Members: &m_RegistryIdList, Type: smithy.ShapeTypeList, Ext: &ext[97]})
-var s_RegistryRecordArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordArn, Type: smithy.ShapeTypeString, Ext: &ext[99]})
-var s_RegistryRecordDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordDisplayName, Type: smithy.ShapeTypeString, Ext: &ext[100]})
-var sRegistryRecordFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegistryRecordFilter, Members: &mRegistryRecordFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[101]})
-var s_RegistryRecordFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordFilterList, Members: &m_RegistryRecordFilterList, Type: smithy.ShapeTypeList, Ext: &ext[104]})
-var sRegistryRecordFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegistryRecordFilterName, Members: &mRegistryRecordFilterName, Type: smithy.ShapeTypeEnum, Ext: &ext[106]})
-var s_RegistryRecordId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordId, Type: smithy.ShapeTypeString, Ext: &ext[109]})
-var s_RegistryRecordIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordIdList, Members: &m_RegistryRecordIdList, Type: smithy.ShapeTypeList, Ext: &ext[110]})
-var s_RegistryRecordName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordName, Type: smithy.ShapeTypeString, Ext: &ext[112]})
-var sRegistryRecordsEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegistryRecordsEntry, Members: &mRegistryRecordsEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[113]})
-var s_RegistryRecordsEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordsEntryList, Members: &m_RegistryRecordsEntryList, Type: smithy.ShapeTypeList, Ext: &ext[116]})
-var sRegistryRecordStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegistryRecordStatus, Members: &mRegistryRecordStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[118]})
-var sRegistryRecordSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegistryRecordSummary, Members: &mRegistryRecordSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[128]})
-var s_RegistryRecordSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordSummaryList, Members: &m_RegistryRecordSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[142]})
-var s_RegistryRecordVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordVersion, Type: smithy.ShapeTypeString, Ext: &ext[144]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &ext[145]})
-var s_SearchQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchQuery, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &ext[147]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &ext[148]})
-var sUnauthorizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthorizedException, Members: &mUnauthorizedException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &ext[150]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &ext[152]})
-var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[156]})
-var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[159]})
-var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[161]})
-var sBatchGetDiscoverableRegistryRecordRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetDiscoverableRegistryRecordRequest, Members: &mBatchGetDiscoverableRegistryRecordRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[167]})
-var sBatchGetDiscoverableRegistryRecordResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetDiscoverableRegistryRecordResponse, Members: &mBatchGetDiscoverableRegistryRecordResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[169]})
-var sListDiscoverableRegistryRecordsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDiscoverableRegistryRecordsRequest, Members: &mListDiscoverableRegistryRecordsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[172]})
-var sListDiscoverableRegistryRecordsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDiscoverableRegistryRecordsResponse, Members: &mListDiscoverableRegistryRecordsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[177]})
-var sSearchDiscoverableRegistryRecordsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchDiscoverableRegistryRecordsRequest, Members: &mSearchDiscoverableRegistryRecordsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[180]})
-var sSearchDiscoverableRegistryRecordsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchDiscoverableRegistryRecordsResponse, Members: &mSearchDiscoverableRegistryRecordsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[185]})
+var sBatchGetDiscoverableRegistryRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetDiscoverableRegistryRecord, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eBatchGetDiscoverableRegistryRecord})
+var sListDiscoverableRegistryRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDiscoverableRegistryRecords, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eListDiscoverableRegistryRecords})
+var sSearchDiscoverableRegistryRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchDiscoverableRegistryRecords, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eSearchDiscoverableRegistryRecords})
+var s_AgentRegistry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AgentRegistry, Type: smithy.ShapeTypeService, Ext: &e_AgentRegistry})
+var sA2aAgentCardDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iA2aAgentCardDescriptor, Members: &mA2aAgentCardDescriptor, Type: smithy.ShapeTypeStructure, Ext: &eA2aAgentCardDescriptor})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAgentSkillsAdditionalData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAgentSkillsAdditionalData, Members: &mAgentSkillsAdditionalData, Type: smithy.ShapeTypeStructure, Ext: &eAgentSkillsAdditionalData})
+var sAgentSkillsDefinitionDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAgentSkillsDefinitionDescriptor, Members: &mAgentSkillsDefinitionDescriptor, Type: smithy.ShapeTypeStructure, Ext: &eAgentSkillsDefinitionDescriptor})
+var sAgentSkillsMdDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAgentSkillsMdDescriptor, Members: &mAgentSkillsMdDescriptor, Type: smithy.ShapeTypeStructure, Ext: &eAgentSkillsMdDescriptor})
+var sAgUiDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAgUiDescriptor, Members: &mAgUiDescriptor, Type: smithy.ShapeTypeStructure, Ext: &eAgUiDescriptor})
+var sBatchGetDiscoverableRegistryRecordError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetDiscoverableRegistryRecordError, Members: &mBatchGetDiscoverableRegistryRecordError, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetDiscoverableRegistryRecordError})
+var sBatchGetDiscoverableRegistryRecordErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetDiscoverableRegistryRecordErrorCode, Members: &mBatchGetDiscoverableRegistryRecordErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eBatchGetDiscoverableRegistryRecordErrorCode})
+var s_BatchGetDiscoverableRegistryRecordErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetDiscoverableRegistryRecordErrorList, Members: &m_BatchGetDiscoverableRegistryRecordErrorList, Type: smithy.ShapeTypeList, Ext: &e_BatchGetDiscoverableRegistryRecordErrorList})
+var sCustomDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomDescriptor, Members: &mCustomDescriptor, Type: smithy.ShapeTypeStructure, Ext: &eCustomDescriptor})
+var s_CustomMetadataDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomMetadataDocument, Traits: &t5, Type: smithy.ShapeTypeDocument, Ext: &e_CustomMetadataDocument})
+var s_DataSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataSchemaVersion, Type: smithy.ShapeTypeString, Ext: &e_DataSchemaVersion})
+var s_DateTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateTimestamp, Traits: &t6, Type: smithy.ShapeTypeTimestamp, Ext: &e_DateTimestamp})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &e_Description})
+var s_DescriptorData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescriptorData, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &e_DescriptorData})
+var sDescriptors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescriptors, Members: &mDescriptors, Type: smithy.ShapeTypeStructure, Ext: &eDescriptors})
+var sDescriptorSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescriptorSource, Members: &mDescriptorSource, Type: smithy.ShapeTypeStructure, Ext: &eDescriptorSource})
+var sDescriptorSourceFromUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescriptorSourceFromUrl, Members: &mDescriptorSourceFromUrl, Type: smithy.ShapeTypeStructure, Ext: &eDescriptorSourceFromUrl})
+var s_DescriptorSourceUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescriptorSourceUrl, Type: smithy.ShapeTypeString, Ext: &e_DescriptorSourceUrl})
+var s_DescriptorTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescriptorTypeList, Members: &m_DescriptorTypeList, Type: smithy.ShapeTypeList, Ext: &e_DescriptorTypeList})
+var s_DiscoverableFilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DiscoverableFilterValues, Members: &m_DiscoverableFilterValues, Type: smithy.ShapeTypeList, Ext: &e_DiscoverableFilterValues})
+var sDiscoverableRegistryRecordSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiscoverableRegistryRecordSummary, Members: &mDiscoverableRegistryRecordSummary, Type: smithy.ShapeTypeStructure, Ext: &eDiscoverableRegistryRecordSummary})
+var s_DiscoverableRegistryRecordSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DiscoverableRegistryRecordSummaryList, Members: &m_DiscoverableRegistryRecordSummaryList, Type: smithy.ShapeTypeList, Ext: &e_DiscoverableRegistryRecordSummaryList})
+var s_FilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValue, Type: smithy.ShapeTypeString, Ext: &e_FilterValue})
+var sHttpDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpDescriptor, Members: &mHttpDescriptor, Type: smithy.ShapeTypeStructure, Ext: &eHttpDescriptor})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sMcpServerAdditionalData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMcpServerAdditionalData, Members: &mMcpServerAdditionalData, Type: smithy.ShapeTypeStructure, Ext: &eMcpServerAdditionalData})
+var sMcpServerDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMcpServerDescriptor, Members: &mMcpServerDescriptor, Type: smithy.ShapeTypeStructure, Ext: &eMcpServerDescriptor})
+var sMcpToolsDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMcpToolsDescriptor, Members: &mMcpToolsDescriptor, Type: smithy.ShapeTypeStructure, Ext: &eMcpToolsDescriptor})
+var s_MetadataFilterExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetadataFilterExpression, Traits: &t5, Type: smithy.ShapeTypeDocument, Ext: &e_MetadataFilterExpression})
+var s_NonBlankString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &e_NonBlankString})
+var s_RecordIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordIdentifier, Type: smithy.ShapeTypeString, Ext: &e_RecordIdentifier})
+var sRecordType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordType, Members: &mRecordType, Type: smithy.ShapeTypeEnum, Ext: &eRecordType})
+var s_RegistryArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryArn, Type: smithy.ShapeTypeString, Ext: &e_RegistryArn})
+var s_RegistryIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryIdentifier, Type: smithy.ShapeTypeString, Ext: &e_RegistryIdentifier})
+var s_RegistryIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryIdList, Members: &m_RegistryIdList, Type: smithy.ShapeTypeList, Ext: &e_RegistryIdList})
+var s_RegistryRecordArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordArn, Type: smithy.ShapeTypeString, Ext: &e_RegistryRecordArn})
+var s_RegistryRecordDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordDisplayName, Type: smithy.ShapeTypeString, Ext: &e_RegistryRecordDisplayName})
+var sRegistryRecordFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegistryRecordFilter, Members: &mRegistryRecordFilter, Type: smithy.ShapeTypeStructure, Ext: &eRegistryRecordFilter})
+var s_RegistryRecordFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordFilterList, Members: &m_RegistryRecordFilterList, Type: smithy.ShapeTypeList, Ext: &e_RegistryRecordFilterList})
+var sRegistryRecordFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegistryRecordFilterName, Members: &mRegistryRecordFilterName, Type: smithy.ShapeTypeEnum, Ext: &eRegistryRecordFilterName})
+var s_RegistryRecordId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordId, Type: smithy.ShapeTypeString, Ext: &e_RegistryRecordId})
+var s_RegistryRecordIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordIdList, Members: &m_RegistryRecordIdList, Type: smithy.ShapeTypeList, Ext: &e_RegistryRecordIdList})
+var s_RegistryRecordName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordName, Type: smithy.ShapeTypeString, Ext: &e_RegistryRecordName})
+var sRegistryRecordsEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegistryRecordsEntry, Members: &mRegistryRecordsEntry, Type: smithy.ShapeTypeStructure, Ext: &eRegistryRecordsEntry})
+var s_RegistryRecordsEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordsEntryList, Members: &m_RegistryRecordsEntryList, Type: smithy.ShapeTypeList, Ext: &e_RegistryRecordsEntryList})
+var sRegistryRecordStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegistryRecordStatus, Members: &mRegistryRecordStatus, Type: smithy.ShapeTypeEnum, Ext: &eRegistryRecordStatus})
+var sRegistryRecordSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegistryRecordSummary, Members: &mRegistryRecordSummary, Type: smithy.ShapeTypeStructure, Ext: &eRegistryRecordSummary})
+var s_RegistryRecordSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordSummaryList, Members: &m_RegistryRecordSummaryList, Type: smithy.ShapeTypeList, Ext: &e_RegistryRecordSummaryList})
+var s_RegistryRecordVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordVersion, Type: smithy.ShapeTypeString, Ext: &e_RegistryRecordVersion})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var s_SearchQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchQuery, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &e_SearchQuery})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sUnauthorizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthorizedException, Members: &mUnauthorizedException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eUnauthorizedException})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
+var sBatchGetDiscoverableRegistryRecordRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetDiscoverableRegistryRecordRequest, Members: &mBatchGetDiscoverableRegistryRecordRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetDiscoverableRegistryRecordRequest})
+var sBatchGetDiscoverableRegistryRecordResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetDiscoverableRegistryRecordResponse, Members: &mBatchGetDiscoverableRegistryRecordResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetDiscoverableRegistryRecordResponse})
+var sListDiscoverableRegistryRecordsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDiscoverableRegistryRecordsRequest, Members: &mListDiscoverableRegistryRecordsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDiscoverableRegistryRecordsRequest})
+var sListDiscoverableRegistryRecordsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDiscoverableRegistryRecordsResponse, Members: &mListDiscoverableRegistryRecordsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDiscoverableRegistryRecordsResponse})
+var sSearchDiscoverableRegistryRecordsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchDiscoverableRegistryRecordsRequest, Members: &mSearchDiscoverableRegistryRecordsRequest, Type: smithy.ShapeTypeStructure, Ext: &eSearchDiscoverableRegistryRecordsRequest})
+var sSearchDiscoverableRegistryRecordsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchDiscoverableRegistryRecordsResponse, Members: &mSearchDiscoverableRegistryRecordsResponse, Type: smithy.ShapeTypeStructure, Ext: &eSearchDiscoverableRegistryRecordsResponse})
 
-var sA2aAgentCardDescriptor_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_DescriptorData, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[5]})
-var sA2aAgentCardDescriptor_dataSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSchemaVersion", ID: &i_DataSchemaVersion, Type: smithy.ShapeTypeString, Ext: &ext[6]})
-var sA2aAgentCardDescriptor_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iDescriptorSource, Members: &mDescriptorSource, Type: smithy.ShapeTypeStructure, Ext: &ext[7]})
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[9]})
-var sAgentSkillsAdditionalData_skillMd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "skillMd", ID: &iAgentSkillsMdDescriptor, Members: &mAgentSkillsMdDescriptor, Type: smithy.ShapeTypeStructure, Ext: &ext[11]})
-var sAgentSkillsDefinitionDescriptor_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_DescriptorData, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[13]})
-var sAgentSkillsDefinitionDescriptor_dataSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSchemaVersion", ID: &i_DataSchemaVersion, Type: smithy.ShapeTypeString, Ext: &ext[14]})
-var sAgentSkillsDefinitionDescriptor_additionalData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalData", ID: &iAgentSkillsAdditionalData, Members: &mAgentSkillsAdditionalData, Type: smithy.ShapeTypeStructure, Ext: &ext[15]})
-var sAgentSkillsMdDescriptor_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_DescriptorData, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[17]})
-var sAgentSkillsMdDescriptor_dataSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSchemaVersion", ID: &i_DataSchemaVersion, Type: smithy.ShapeTypeString, Ext: &ext[18]})
-var sAgentSkillsMdDescriptor_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iDescriptorSource, Members: &mDescriptorSource, Type: smithy.ShapeTypeStructure, Ext: &ext[19]})
-var sAgUiDescriptor_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iDescriptorSource, Members: &mDescriptorSource, Type: smithy.ShapeTypeStructure, Ext: &ext[21]})
-var sBatchGetDiscoverableRegistryRecordError_registryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryId", ID: &i_RegistryIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[23]})
-var sBatchGetDiscoverableRegistryRecordError_recordId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordId", ID: &i_RecordIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[24]})
-var sBatchGetDiscoverableRegistryRecordError_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &iBatchGetDiscoverableRegistryRecordErrorCode, Members: &mBatchGetDiscoverableRegistryRecordErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[25]})
-var sBatchGetDiscoverableRegistryRecordError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var sBatchGetDiscoverableRegistryRecordErrorCode_RESOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
-var sBatchGetDiscoverableRegistryRecordErrorCode_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[29]})
-var sBatchGetDiscoverableRegistryRecordErrorCode_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[30]})
-var s_BatchGetDiscoverableRegistryRecordErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchGetDiscoverableRegistryRecordError, Members: &mBatchGetDiscoverableRegistryRecordError, Type: smithy.ShapeTypeStructure, Ext: &ext[32]})
-var sCustomDescriptor_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_DescriptorData, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[34]})
-var sDescriptors_mcpServer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mcpServer", ID: &iMcpServerDescriptor, Members: &mMcpServerDescriptor, Type: smithy.ShapeTypeStructure, Ext: &ext[41]})
-var sDescriptors_a2aAgentCard = smithy.NewStaticSchema(smithy.StaticSchema{Member: "a2aAgentCard", ID: &iA2aAgentCardDescriptor, Members: &mA2aAgentCardDescriptor, Type: smithy.ShapeTypeStructure, Ext: &ext[42]})
-var sDescriptors_agentSkillsDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agentSkillsDefinition", ID: &iAgentSkillsDefinitionDescriptor, Members: &mAgentSkillsDefinitionDescriptor, Type: smithy.ShapeTypeStructure, Ext: &ext[43]})
-var sDescriptors_custom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "custom", ID: &iCustomDescriptor, Members: &mCustomDescriptor, Type: smithy.ShapeTypeStructure, Ext: &ext[44]})
-var sDescriptors_http = smithy.NewStaticSchema(smithy.StaticSchema{Member: "http", ID: &iHttpDescriptor, Members: &mHttpDescriptor, Type: smithy.ShapeTypeStructure, Ext: &ext[45]})
-var sDescriptors_agui = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agui", ID: &iAgUiDescriptor, Members: &mAgUiDescriptor, Type: smithy.ShapeTypeStructure, Ext: &ext[46]})
-var sDescriptorSource_fromUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fromUrl", ID: &iDescriptorSourceFromUrl, Members: &mDescriptorSourceFromUrl, Type: smithy.ShapeTypeStructure, Ext: &ext[48]})
-var sDescriptorSourceFromUrl_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &i_DescriptorSourceUrl, Type: smithy.ShapeTypeString, Ext: &ext[50]})
-var s_DescriptorTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[53]})
-var s_DiscoverableFilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FilterValue, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var sDiscoverableRegistryRecordSummary_registryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryArn", ID: &i_RegistryArn, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var sDiscoverableRegistryRecordSummary_recordArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordArn", ID: &i_RegistryRecordArn, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var sDiscoverableRegistryRecordSummary_recordId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordId", ID: &i_RegistryRecordId, Type: smithy.ShapeTypeString, Ext: &ext[59]})
-var sDiscoverableRegistryRecordSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RegistryRecordName, Type: smithy.ShapeTypeString, Ext: &ext[60]})
-var sDiscoverableRegistryRecordSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[61]})
-var sDiscoverableRegistryRecordSummary_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_RegistryRecordDisplayName, Type: smithy.ShapeTypeString, Ext: &ext[62]})
-var sDiscoverableRegistryRecordSummary_recordType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordType", ID: &iRecordType, Members: &mRecordType, Type: smithy.ShapeTypeEnum, Ext: &ext[63]})
-var sDiscoverableRegistryRecordSummary_recordVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordVersion", ID: &i_RegistryRecordVersion, Type: smithy.ShapeTypeString, Ext: &ext[64]})
-var sDiscoverableRegistryRecordSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRegistryRecordStatus, Members: &mRegistryRecordStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[65]})
-var sDiscoverableRegistryRecordSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTimestamp, Traits: &t7, Type: smithy.ShapeTypeTimestamp, Ext: &ext[66]})
-var sDiscoverableRegistryRecordSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_DateTimestamp, Traits: &t7, Type: smithy.ShapeTypeTimestamp, Ext: &ext[67]})
-var sDiscoverableRegistryRecordSummary_descriptorTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "descriptorTypes", ID: &i_DescriptorTypeList, Members: &m_DescriptorTypeList, Type: smithy.ShapeTypeList, Ext: &ext[68]})
-var s_DiscoverableRegistryRecordSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDiscoverableRegistryRecordSummary, Members: &mDiscoverableRegistryRecordSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[70]})
-var sHttpDescriptor_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iDescriptorSource, Members: &mDescriptorSource, Type: smithy.ShapeTypeStructure, Ext: &ext[73]})
-var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[75]})
-var sMcpServerAdditionalData_tools = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tools", ID: &iMcpToolsDescriptor, Members: &mMcpToolsDescriptor, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
-var sMcpServerDescriptor_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_DescriptorData, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[79]})
-var sMcpServerDescriptor_dataSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSchemaVersion", ID: &i_DataSchemaVersion, Type: smithy.ShapeTypeString, Ext: &ext[80]})
-var sMcpServerDescriptor_additionalData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalData", ID: &iMcpServerAdditionalData, Members: &mMcpServerAdditionalData, Type: smithy.ShapeTypeStructure, Ext: &ext[81]})
-var sMcpServerDescriptor_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iDescriptorSource, Members: &mDescriptorSource, Type: smithy.ShapeTypeStructure, Ext: &ext[82]})
-var sMcpToolsDescriptor_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_DescriptorData, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[84]})
-var sMcpToolsDescriptor_dataSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSchemaVersion", ID: &i_DataSchemaVersion, Type: smithy.ShapeTypeString, Ext: &ext[85]})
-var sRecordType_MCP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MCP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[90]})
-var sRecordType_AGENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AGENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[91]})
-var sRecordType_CUSTOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[92]})
-var sRecordType_SKILL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SKILL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[93]})
-var sRecordType_GATEWAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GATEWAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[94]})
-var s_RegistryIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RegistryIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[98]})
-var sRegistryRecordFilter_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &iRegistryRecordFilterName, Members: &mRegistryRecordFilterName, Type: smithy.ShapeTypeEnum, Ext: &ext[102]})
-var sRegistryRecordFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_DiscoverableFilterValues, Members: &m_DiscoverableFilterValues, Type: smithy.ShapeTypeList, Ext: &ext[103]})
-var s_RegistryRecordFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRegistryRecordFilter, Members: &mRegistryRecordFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[105]})
-var sRegistryRecordFilterName_RECORD_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECORD_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[107]})
-var sRegistryRecordFilterName_DESCRIPTOR_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESCRIPTOR_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[108]})
-var s_RegistryRecordIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RecordIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[111]})
-var sRegistryRecordsEntry_registryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryId", ID: &i_RegistryIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[114]})
-var sRegistryRecordsEntry_recordIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordIds", ID: &i_RegistryRecordIdList, Members: &m_RegistryRecordIdList, Type: smithy.ShapeTypeList, Ext: &ext[115]})
-var s_RegistryRecordsEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRegistryRecordsEntry, Members: &mRegistryRecordsEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[117]})
-var sRegistryRecordStatus_DRAFT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRAFT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[119]})
-var sRegistryRecordStatus_PENDING_APPROVAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_APPROVAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var sRegistryRecordStatus_APPROVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPROVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[121]})
-var sRegistryRecordStatus_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[122]})
-var sRegistryRecordStatus_DEPRECATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPRECATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[123]})
-var sRegistryRecordStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[124]})
-var sRegistryRecordStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[125]})
-var sRegistryRecordStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var sRegistryRecordStatus_UPDATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[127]})
-var sRegistryRecordSummary_registryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryArn", ID: &i_RegistryArn, Type: smithy.ShapeTypeString, Ext: &ext[129]})
-var sRegistryRecordSummary_recordArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordArn", ID: &i_RegistryRecordArn, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var sRegistryRecordSummary_recordId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordId", ID: &i_RegistryRecordId, Type: smithy.ShapeTypeString, Ext: &ext[131]})
-var sRegistryRecordSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RegistryRecordName, Type: smithy.ShapeTypeString, Ext: &ext[132]})
-var sRegistryRecordSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[133]})
-var sRegistryRecordSummary_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_RegistryRecordDisplayName, Type: smithy.ShapeTypeString, Ext: &ext[134]})
-var sRegistryRecordSummary_recordType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordType", ID: &iRecordType, Members: &mRecordType, Type: smithy.ShapeTypeEnum, Ext: &ext[135]})
-var sRegistryRecordSummary_descriptors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "descriptors", ID: &iDescriptors, Members: &mDescriptors, Type: smithy.ShapeTypeStructure, Ext: &ext[136]})
-var sRegistryRecordSummary_recordVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordVersion", ID: &i_RegistryRecordVersion, Type: smithy.ShapeTypeString, Ext: &ext[137]})
-var sRegistryRecordSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRegistryRecordStatus, Members: &mRegistryRecordStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[138]})
-var sRegistryRecordSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTimestamp, Traits: &t7, Type: smithy.ShapeTypeTimestamp, Ext: &ext[139]})
-var sRegistryRecordSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_DateTimestamp, Traits: &t7, Type: smithy.ShapeTypeTimestamp, Ext: &ext[140]})
-var sRegistryRecordSummary_customMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customMetadata", ID: &i_CustomMetadataDocument, Traits: &t3, Type: smithy.ShapeTypeDocument, Ext: &ext[141]})
-var s_RegistryRecordSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRegistryRecordSummary, Members: &mRegistryRecordSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[143]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[146]})
-var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[149]})
-var sUnauthorizedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[151]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[153]})
-var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[154]})
-var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[155]})
-var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[157]})
-var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[158]})
-var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[160]})
-var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[162]})
-var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[163]})
-var sValidationExceptionReason_IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[164]})
-var sValidationExceptionReason_ROOT_EVENT_IN_OTHER_SESSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROOT_EVENT_IN_OTHER_SESSION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[165]})
-var sValidationExceptionReason_RESOURCE_CONFLICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_CONFLICT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[166]})
-var sBatchGetDiscoverableRegistryRecordRequest_entries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entries", ID: &i_RegistryRecordsEntryList, Members: &m_RegistryRecordsEntryList, Type: smithy.ShapeTypeList, Ext: &ext[168]})
-var sBatchGetDiscoverableRegistryRecordResponse_registryRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryRecords", ID: &i_RegistryRecordSummaryList, Members: &m_RegistryRecordSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[170]})
-var sBatchGetDiscoverableRegistryRecordResponse_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchGetDiscoverableRegistryRecordErrorList, Members: &m_BatchGetDiscoverableRegistryRecordErrorList, Type: smithy.ShapeTypeList, Ext: &ext[171]})
-var sListDiscoverableRegistryRecordsRequest_registryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryId", ID: &i_RegistryIdentifier, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &ext[173]})
-var sListDiscoverableRegistryRecordsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[174]})
-var sListDiscoverableRegistryRecordsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[175]})
-var sListDiscoverableRegistryRecordsRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_RegistryRecordFilterList, Members: &m_RegistryRecordFilterList, Type: smithy.ShapeTypeList, Ext: &ext[176]})
-var sListDiscoverableRegistryRecordsResponse_registryRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryRecords", ID: &i_DiscoverableRegistryRecordSummaryList, Members: &m_DiscoverableRegistryRecordSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[178]})
-var sListDiscoverableRegistryRecordsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[179]})
-var sSearchDiscoverableRegistryRecordsRequest_searchQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "searchQuery", ID: &i_SearchQuery, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[181]})
-var sSearchDiscoverableRegistryRecordsRequest_registryIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryIds", ID: &i_RegistryIdList, Members: &m_RegistryIdList, Type: smithy.ShapeTypeList, Ext: &ext[182]})
-var sSearchDiscoverableRegistryRecordsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[183]})
-var sSearchDiscoverableRegistryRecordsRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_MetadataFilterExpression, Traits: &t3, Type: smithy.ShapeTypeDocument, Ext: &ext[184]})
-var sSearchDiscoverableRegistryRecordsResponse_registryRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryRecords", ID: &i_RegistryRecordSummaryList, Members: &m_RegistryRecordSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[186]})
+var sA2aAgentCardDescriptor_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_DescriptorData, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eA2aAgentCardDescriptor_data})
+var sA2aAgentCardDescriptor_dataSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSchemaVersion", ID: &i_DataSchemaVersion, Type: smithy.ShapeTypeString, Ext: &eA2aAgentCardDescriptor_dataSchemaVersion})
+var sA2aAgentCardDescriptor_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iDescriptorSource, Members: &mDescriptorSource, Type: smithy.ShapeTypeStructure, Ext: &eA2aAgentCardDescriptor_source})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAgentSkillsAdditionalData_skillMd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "skillMd", ID: &iAgentSkillsMdDescriptor, Members: &mAgentSkillsMdDescriptor, Type: smithy.ShapeTypeStructure, Ext: &eAgentSkillsAdditionalData_skillMd})
+var sAgentSkillsDefinitionDescriptor_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_DescriptorData, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eAgentSkillsDefinitionDescriptor_data})
+var sAgentSkillsDefinitionDescriptor_dataSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSchemaVersion", ID: &i_DataSchemaVersion, Type: smithy.ShapeTypeString, Ext: &eAgentSkillsDefinitionDescriptor_dataSchemaVersion})
+var sAgentSkillsDefinitionDescriptor_additionalData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalData", ID: &iAgentSkillsAdditionalData, Members: &mAgentSkillsAdditionalData, Type: smithy.ShapeTypeStructure, Ext: &eAgentSkillsDefinitionDescriptor_additionalData})
+var sAgentSkillsMdDescriptor_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_DescriptorData, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eAgentSkillsMdDescriptor_data})
+var sAgentSkillsMdDescriptor_dataSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSchemaVersion", ID: &i_DataSchemaVersion, Type: smithy.ShapeTypeString, Ext: &eAgentSkillsMdDescriptor_dataSchemaVersion})
+var sAgentSkillsMdDescriptor_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iDescriptorSource, Members: &mDescriptorSource, Type: smithy.ShapeTypeStructure, Ext: &eAgentSkillsMdDescriptor_source})
+var sAgUiDescriptor_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iDescriptorSource, Members: &mDescriptorSource, Type: smithy.ShapeTypeStructure, Ext: &eAgUiDescriptor_source})
+var sBatchGetDiscoverableRegistryRecordError_registryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryId", ID: &i_RegistryIdentifier, Type: smithy.ShapeTypeString, Ext: &eBatchGetDiscoverableRegistryRecordError_registryId})
+var sBatchGetDiscoverableRegistryRecordError_recordId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordId", ID: &i_RecordIdentifier, Type: smithy.ShapeTypeString, Ext: &eBatchGetDiscoverableRegistryRecordError_recordId})
+var sBatchGetDiscoverableRegistryRecordError_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &iBatchGetDiscoverableRegistryRecordErrorCode, Members: &mBatchGetDiscoverableRegistryRecordErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eBatchGetDiscoverableRegistryRecordError_errorCode})
+var sBatchGetDiscoverableRegistryRecordError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBatchGetDiscoverableRegistryRecordError_message})
+var sBatchGetDiscoverableRegistryRecordErrorCode_RESOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetDiscoverableRegistryRecordErrorCode_RESOURCE_NOT_FOUND})
+var sBatchGetDiscoverableRegistryRecordErrorCode_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetDiscoverableRegistryRecordErrorCode_ACCESS_DENIED})
+var sBatchGetDiscoverableRegistryRecordErrorCode_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetDiscoverableRegistryRecordErrorCode_INTERNAL_ERROR})
+var s_BatchGetDiscoverableRegistryRecordErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchGetDiscoverableRegistryRecordError, Members: &mBatchGetDiscoverableRegistryRecordError, Type: smithy.ShapeTypeStructure, Ext: &e_BatchGetDiscoverableRegistryRecordErrorList_member})
+var sCustomDescriptor_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_DescriptorData, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eCustomDescriptor_data})
+var sDescriptors_mcpServer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mcpServer", ID: &iMcpServerDescriptor, Members: &mMcpServerDescriptor, Type: smithy.ShapeTypeStructure, Ext: &eDescriptors_mcpServer})
+var sDescriptors_a2aAgentCard = smithy.NewStaticSchema(smithy.StaticSchema{Member: "a2aAgentCard", ID: &iA2aAgentCardDescriptor, Members: &mA2aAgentCardDescriptor, Type: smithy.ShapeTypeStructure, Ext: &eDescriptors_a2aAgentCard})
+var sDescriptors_agentSkillsDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agentSkillsDefinition", ID: &iAgentSkillsDefinitionDescriptor, Members: &mAgentSkillsDefinitionDescriptor, Type: smithy.ShapeTypeStructure, Ext: &eDescriptors_agentSkillsDefinition})
+var sDescriptors_custom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "custom", ID: &iCustomDescriptor, Members: &mCustomDescriptor, Type: smithy.ShapeTypeStructure, Ext: &eDescriptors_custom})
+var sDescriptors_http = smithy.NewStaticSchema(smithy.StaticSchema{Member: "http", ID: &iHttpDescriptor, Members: &mHttpDescriptor, Type: smithy.ShapeTypeStructure, Ext: &eDescriptors_http})
+var sDescriptors_agui = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agui", ID: &iAgUiDescriptor, Members: &mAgUiDescriptor, Type: smithy.ShapeTypeStructure, Ext: &eDescriptors_agui})
+var sDescriptorSource_fromUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fromUrl", ID: &iDescriptorSourceFromUrl, Members: &mDescriptorSourceFromUrl, Type: smithy.ShapeTypeStructure, Ext: &eDescriptorSource_fromUrl})
+var sDescriptorSourceFromUrl_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &i_DescriptorSourceUrl, Type: smithy.ShapeTypeString, Ext: &eDescriptorSourceFromUrl_url})
+var s_DescriptorTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_DescriptorTypeList_member})
+var s_DiscoverableFilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FilterValue, Type: smithy.ShapeTypeString, Ext: &e_DiscoverableFilterValues_member})
+var sDiscoverableRegistryRecordSummary_registryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryArn", ID: &i_RegistryArn, Type: smithy.ShapeTypeString, Ext: &eDiscoverableRegistryRecordSummary_registryArn})
+var sDiscoverableRegistryRecordSummary_recordArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordArn", ID: &i_RegistryRecordArn, Type: smithy.ShapeTypeString, Ext: &eDiscoverableRegistryRecordSummary_recordArn})
+var sDiscoverableRegistryRecordSummary_recordId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordId", ID: &i_RegistryRecordId, Type: smithy.ShapeTypeString, Ext: &eDiscoverableRegistryRecordSummary_recordId})
+var sDiscoverableRegistryRecordSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RegistryRecordName, Type: smithy.ShapeTypeString, Ext: &eDiscoverableRegistryRecordSummary_name})
+var sDiscoverableRegistryRecordSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eDiscoverableRegistryRecordSummary_description})
+var sDiscoverableRegistryRecordSummary_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_RegistryRecordDisplayName, Type: smithy.ShapeTypeString, Ext: &eDiscoverableRegistryRecordSummary_displayName})
+var sDiscoverableRegistryRecordSummary_recordType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordType", ID: &iRecordType, Members: &mRecordType, Type: smithy.ShapeTypeEnum, Ext: &eDiscoverableRegistryRecordSummary_recordType})
+var sDiscoverableRegistryRecordSummary_recordVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordVersion", ID: &i_RegistryRecordVersion, Type: smithy.ShapeTypeString, Ext: &eDiscoverableRegistryRecordSummary_recordVersion})
+var sDiscoverableRegistryRecordSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRegistryRecordStatus, Members: &mRegistryRecordStatus, Type: smithy.ShapeTypeEnum, Ext: &eDiscoverableRegistryRecordSummary_status})
+var sDiscoverableRegistryRecordSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTimestamp, Traits: &t7, Type: smithy.ShapeTypeTimestamp, Ext: &eDiscoverableRegistryRecordSummary_createdAt})
+var sDiscoverableRegistryRecordSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_DateTimestamp, Traits: &t7, Type: smithy.ShapeTypeTimestamp, Ext: &eDiscoverableRegistryRecordSummary_updatedAt})
+var sDiscoverableRegistryRecordSummary_descriptorTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "descriptorTypes", ID: &i_DescriptorTypeList, Members: &m_DescriptorTypeList, Type: smithy.ShapeTypeList, Ext: &eDiscoverableRegistryRecordSummary_descriptorTypes})
+var s_DiscoverableRegistryRecordSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDiscoverableRegistryRecordSummary, Members: &mDiscoverableRegistryRecordSummary, Type: smithy.ShapeTypeStructure, Ext: &e_DiscoverableRegistryRecordSummaryList_member})
+var sHttpDescriptor_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iDescriptorSource, Members: &mDescriptorSource, Type: smithy.ShapeTypeStructure, Ext: &eHttpDescriptor_source})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sMcpServerAdditionalData_tools = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tools", ID: &iMcpToolsDescriptor, Members: &mMcpToolsDescriptor, Type: smithy.ShapeTypeStructure, Ext: &eMcpServerAdditionalData_tools})
+var sMcpServerDescriptor_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_DescriptorData, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eMcpServerDescriptor_data})
+var sMcpServerDescriptor_dataSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSchemaVersion", ID: &i_DataSchemaVersion, Type: smithy.ShapeTypeString, Ext: &eMcpServerDescriptor_dataSchemaVersion})
+var sMcpServerDescriptor_additionalData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalData", ID: &iMcpServerAdditionalData, Members: &mMcpServerAdditionalData, Type: smithy.ShapeTypeStructure, Ext: &eMcpServerDescriptor_additionalData})
+var sMcpServerDescriptor_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iDescriptorSource, Members: &mDescriptorSource, Type: smithy.ShapeTypeStructure, Ext: &eMcpServerDescriptor_source})
+var sMcpToolsDescriptor_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_DescriptorData, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eMcpToolsDescriptor_data})
+var sMcpToolsDescriptor_dataSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSchemaVersion", ID: &i_DataSchemaVersion, Type: smithy.ShapeTypeString, Ext: &eMcpToolsDescriptor_dataSchemaVersion})
+var sRecordType_MCP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MCP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecordType_MCP})
+var sRecordType_AGENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AGENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecordType_AGENT})
+var sRecordType_CUSTOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecordType_CUSTOM})
+var sRecordType_SKILL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SKILL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecordType_SKILL})
+var sRecordType_GATEWAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GATEWAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRecordType_GATEWAY})
+var s_RegistryIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RegistryIdentifier, Type: smithy.ShapeTypeString, Ext: &e_RegistryIdList_member})
+var sRegistryRecordFilter_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &iRegistryRecordFilterName, Members: &mRegistryRecordFilterName, Type: smithy.ShapeTypeEnum, Ext: &eRegistryRecordFilter_name})
+var sRegistryRecordFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_DiscoverableFilterValues, Members: &m_DiscoverableFilterValues, Type: smithy.ShapeTypeList, Ext: &eRegistryRecordFilter_values})
+var s_RegistryRecordFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRegistryRecordFilter, Members: &mRegistryRecordFilter, Type: smithy.ShapeTypeStructure, Ext: &e_RegistryRecordFilterList_member})
+var sRegistryRecordFilterName_RECORD_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECORD_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRegistryRecordFilterName_RECORD_TYPE})
+var sRegistryRecordFilterName_DESCRIPTOR_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESCRIPTOR_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRegistryRecordFilterName_DESCRIPTOR_TYPE})
+var s_RegistryRecordIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RecordIdentifier, Type: smithy.ShapeTypeString, Ext: &e_RegistryRecordIdList_member})
+var sRegistryRecordsEntry_registryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryId", ID: &i_RegistryIdentifier, Type: smithy.ShapeTypeString, Ext: &eRegistryRecordsEntry_registryId})
+var sRegistryRecordsEntry_recordIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordIds", ID: &i_RegistryRecordIdList, Members: &m_RegistryRecordIdList, Type: smithy.ShapeTypeList, Ext: &eRegistryRecordsEntry_recordIds})
+var s_RegistryRecordsEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRegistryRecordsEntry, Members: &mRegistryRecordsEntry, Type: smithy.ShapeTypeStructure, Ext: &e_RegistryRecordsEntryList_member})
+var sRegistryRecordStatus_DRAFT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRAFT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRegistryRecordStatus_DRAFT})
+var sRegistryRecordStatus_PENDING_APPROVAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_APPROVAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRegistryRecordStatus_PENDING_APPROVAL})
+var sRegistryRecordStatus_APPROVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPROVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRegistryRecordStatus_APPROVED})
+var sRegistryRecordStatus_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRegistryRecordStatus_REJECTED})
+var sRegistryRecordStatus_DEPRECATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPRECATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRegistryRecordStatus_DEPRECATED})
+var sRegistryRecordStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRegistryRecordStatus_CREATING})
+var sRegistryRecordStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRegistryRecordStatus_UPDATING})
+var sRegistryRecordStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRegistryRecordStatus_CREATE_FAILED})
+var sRegistryRecordStatus_UPDATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRegistryRecordStatus_UPDATE_FAILED})
+var sRegistryRecordSummary_registryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryArn", ID: &i_RegistryArn, Type: smithy.ShapeTypeString, Ext: &eRegistryRecordSummary_registryArn})
+var sRegistryRecordSummary_recordArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordArn", ID: &i_RegistryRecordArn, Type: smithy.ShapeTypeString, Ext: &eRegistryRecordSummary_recordArn})
+var sRegistryRecordSummary_recordId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordId", ID: &i_RegistryRecordId, Type: smithy.ShapeTypeString, Ext: &eRegistryRecordSummary_recordId})
+var sRegistryRecordSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RegistryRecordName, Type: smithy.ShapeTypeString, Ext: &eRegistryRecordSummary_name})
+var sRegistryRecordSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eRegistryRecordSummary_description})
+var sRegistryRecordSummary_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_RegistryRecordDisplayName, Type: smithy.ShapeTypeString, Ext: &eRegistryRecordSummary_displayName})
+var sRegistryRecordSummary_recordType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordType", ID: &iRecordType, Members: &mRecordType, Type: smithy.ShapeTypeEnum, Ext: &eRegistryRecordSummary_recordType})
+var sRegistryRecordSummary_descriptors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "descriptors", ID: &iDescriptors, Members: &mDescriptors, Type: smithy.ShapeTypeStructure, Ext: &eRegistryRecordSummary_descriptors})
+var sRegistryRecordSummary_recordVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordVersion", ID: &i_RegistryRecordVersion, Type: smithy.ShapeTypeString, Ext: &eRegistryRecordSummary_recordVersion})
+var sRegistryRecordSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRegistryRecordStatus, Members: &mRegistryRecordStatus, Type: smithy.ShapeTypeEnum, Ext: &eRegistryRecordSummary_status})
+var sRegistryRecordSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTimestamp, Traits: &t7, Type: smithy.ShapeTypeTimestamp, Ext: &eRegistryRecordSummary_createdAt})
+var sRegistryRecordSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_DateTimestamp, Traits: &t7, Type: smithy.ShapeTypeTimestamp, Ext: &eRegistryRecordSummary_updatedAt})
+var sRegistryRecordSummary_customMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customMetadata", ID: &i_CustomMetadataDocument, Traits: &t3, Type: smithy.ShapeTypeDocument, Ext: &eRegistryRecordSummary_customMetadata})
+var s_RegistryRecordSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRegistryRecordSummary, Members: &mRegistryRecordSummary, Type: smithy.ShapeTypeStructure, Ext: &e_RegistryRecordSummaryList_member})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sUnauthorizedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eUnauthorizedException_message})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_reason})
+var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_fieldList})
+var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_name})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_message})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_CANNOT_PARSE})
+var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_FIELD_VALIDATION_FAILED})
+var sValidationExceptionReason_IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION})
+var sValidationExceptionReason_ROOT_EVENT_IN_OTHER_SESSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROOT_EVENT_IN_OTHER_SESSION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ROOT_EVENT_IN_OTHER_SESSION})
+var sValidationExceptionReason_RESOURCE_CONFLICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_CONFLICT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_RESOURCE_CONFLICT})
+var sBatchGetDiscoverableRegistryRecordRequest_entries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entries", ID: &i_RegistryRecordsEntryList, Members: &m_RegistryRecordsEntryList, Type: smithy.ShapeTypeList, Ext: &eBatchGetDiscoverableRegistryRecordRequest_entries})
+var sBatchGetDiscoverableRegistryRecordResponse_registryRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryRecords", ID: &i_RegistryRecordSummaryList, Members: &m_RegistryRecordSummaryList, Type: smithy.ShapeTypeList, Ext: &eBatchGetDiscoverableRegistryRecordResponse_registryRecords})
+var sBatchGetDiscoverableRegistryRecordResponse_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchGetDiscoverableRegistryRecordErrorList, Members: &m_BatchGetDiscoverableRegistryRecordErrorList, Type: smithy.ShapeTypeList, Ext: &eBatchGetDiscoverableRegistryRecordResponse_errors})
+var sListDiscoverableRegistryRecordsRequest_registryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryId", ID: &i_RegistryIdentifier, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eListDiscoverableRegistryRecordsRequest_registryId})
+var sListDiscoverableRegistryRecordsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListDiscoverableRegistryRecordsRequest_maxResults})
+var sListDiscoverableRegistryRecordsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListDiscoverableRegistryRecordsRequest_nextToken})
+var sListDiscoverableRegistryRecordsRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_RegistryRecordFilterList, Members: &m_RegistryRecordFilterList, Type: smithy.ShapeTypeList, Ext: &eListDiscoverableRegistryRecordsRequest_filters})
+var sListDiscoverableRegistryRecordsResponse_registryRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryRecords", ID: &i_DiscoverableRegistryRecordSummaryList, Members: &m_DiscoverableRegistryRecordSummaryList, Type: smithy.ShapeTypeList, Ext: &eListDiscoverableRegistryRecordsResponse_registryRecords})
+var sListDiscoverableRegistryRecordsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListDiscoverableRegistryRecordsResponse_nextToken})
+var sSearchDiscoverableRegistryRecordsRequest_searchQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "searchQuery", ID: &i_SearchQuery, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eSearchDiscoverableRegistryRecordsRequest_searchQuery})
+var sSearchDiscoverableRegistryRecordsRequest_registryIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryIds", ID: &i_RegistryIdList, Members: &m_RegistryIdList, Type: smithy.ShapeTypeList, Ext: &eSearchDiscoverableRegistryRecordsRequest_registryIds})
+var sSearchDiscoverableRegistryRecordsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSearchDiscoverableRegistryRecordsRequest_maxResults})
+var sSearchDiscoverableRegistryRecordsRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_MetadataFilterExpression, Traits: &t3, Type: smithy.ShapeTypeDocument, Ext: &eSearchDiscoverableRegistryRecordsRequest_filters})
+var sSearchDiscoverableRegistryRecordsResponse_registryRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryRecords", ID: &i_RegistryRecordSummaryList, Members: &m_RegistryRecordSummaryList, Type: smithy.ShapeTypeList, Ext: &eSearchDiscoverableRegistryRecordsResponse_registryRecords})
 
 var BatchGetDiscoverableRegistryRecord = &sBatchGetDiscoverableRegistryRecord
 

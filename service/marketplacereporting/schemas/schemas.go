@@ -7,9 +7,29 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [21]smithy.SchemaExtensions
+var (
+	eGetBuyerDashboard                           smithy.SchemaExtensions
+	e_AWSMarketplaceReporting                    smithy.SchemaExtensions
+	eAccessDeniedException                       smithy.SchemaExtensions
+	eAccessDeniedException_message               smithy.SchemaExtensions
+	eBadRequestException                         smithy.SchemaExtensions
+	eBadRequestException_message                 smithy.SchemaExtensions
+	e_DashboardIdentifier                        smithy.SchemaExtensions
+	e_EmbeddingDomain                            smithy.SchemaExtensions
+	e_EmbeddingDomains                           smithy.SchemaExtensions
+	e_EmbeddingDomains_member                    smithy.SchemaExtensions
+	eInternalServerException                     smithy.SchemaExtensions
+	eInternalServerException_message             smithy.SchemaExtensions
+	eUnauthorizedException                       smithy.SchemaExtensions
+	eUnauthorizedException_message               smithy.SchemaExtensions
+	eGetBuyerDashboardInput                      smithy.SchemaExtensions
+	eGetBuyerDashboardInput_dashboardIdentifier  smithy.SchemaExtensions
+	eGetBuyerDashboardInput_embeddingDomains     smithy.SchemaExtensions
+	eGetBuyerDashboardOutput                     smithy.SchemaExtensions
+	eGetBuyerDashboardOutput_embedUrl            smithy.SchemaExtensions
+	eGetBuyerDashboardOutput_dashboardIdentifier smithy.SchemaExtensions
+	eGetBuyerDashboardOutput_embeddingDomains    smithy.SchemaExtensions
+)
 
 var (
 	iGetBuyerDashboard        = smithy.ShapeID{Namespace: "com.amazonaws.marketplacereporting", Name: "GetBuyerDashboard"}
@@ -42,28 +62,28 @@ var mUnauthorizedException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnaut
 var mGetBuyerDashboardInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBuyerDashboardInput_dashboardIdentifier, &sGetBuyerDashboardInput_embeddingDomains}}
 var mGetBuyerDashboardOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBuyerDashboardOutput_embedUrl, &sGetBuyerDashboardOutput_dashboardIdentifier, &sGetBuyerDashboardOutput_embeddingDomains}}
 
-var sGetBuyerDashboard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBuyerDashboard, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var s_AWSMarketplaceReporting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSMarketplaceReporting, Type: smithy.ShapeTypeService, Ext: &ext[1]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[2]})
-var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[4]})
-var s_DashboardIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DashboardIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[6]})
-var s_EmbeddingDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmbeddingDomain, Type: smithy.ShapeTypeString, Ext: &ext[7]})
-var s_EmbeddingDomains = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmbeddingDomains, Members: &m_EmbeddingDomains, Type: smithy.ShapeTypeList, Ext: &ext[8]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[10]})
-var sUnauthorizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthorizedException, Members: &mUnauthorizedException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &ext[12]})
-var sGetBuyerDashboardInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBuyerDashboardInput, Members: &mGetBuyerDashboardInput, Type: smithy.ShapeTypeStructure, Ext: &ext[14]})
-var sGetBuyerDashboardOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBuyerDashboardOutput, Members: &mGetBuyerDashboardOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[17]})
+var sGetBuyerDashboard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBuyerDashboard, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eGetBuyerDashboard})
+var s_AWSMarketplaceReporting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSMarketplaceReporting, Type: smithy.ShapeTypeService, Ext: &e_AWSMarketplaceReporting})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eBadRequestException})
+var s_DashboardIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DashboardIdentifier, Type: smithy.ShapeTypeString, Ext: &e_DashboardIdentifier})
+var s_EmbeddingDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmbeddingDomain, Type: smithy.ShapeTypeString, Ext: &e_EmbeddingDomain})
+var s_EmbeddingDomains = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmbeddingDomains, Members: &m_EmbeddingDomains, Type: smithy.ShapeTypeList, Ext: &e_EmbeddingDomains})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sUnauthorizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthorizedException, Members: &mUnauthorizedException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eUnauthorizedException})
+var sGetBuyerDashboardInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBuyerDashboardInput, Members: &mGetBuyerDashboardInput, Type: smithy.ShapeTypeStructure, Ext: &eGetBuyerDashboardInput})
+var sGetBuyerDashboardOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBuyerDashboardOutput, Members: &mGetBuyerDashboardOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetBuyerDashboardOutput})
 
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[3]})
-var sBadRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[5]})
-var s_EmbeddingDomains_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EmbeddingDomain, Type: smithy.ShapeTypeString, Ext: &ext[9]})
-var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[11]})
-var sUnauthorizedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[13]})
-var sGetBuyerDashboardInput_dashboardIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dashboardIdentifier", ID: &i_DashboardIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[15]})
-var sGetBuyerDashboardInput_embeddingDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "embeddingDomains", ID: &i_EmbeddingDomains, Members: &m_EmbeddingDomains, Type: smithy.ShapeTypeList, Ext: &ext[16]})
-var sGetBuyerDashboardOutput_embedUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "embedUrl", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[18]})
-var sGetBuyerDashboardOutput_dashboardIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dashboardIdentifier", ID: &i_DashboardIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[19]})
-var sGetBuyerDashboardOutput_embeddingDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "embeddingDomains", ID: &i_EmbeddingDomains, Members: &m_EmbeddingDomains, Type: smithy.ShapeTypeList, Ext: &ext[20]})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sBadRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBadRequestException_message})
+var s_EmbeddingDomains_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EmbeddingDomain, Type: smithy.ShapeTypeString, Ext: &e_EmbeddingDomains_member})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sUnauthorizedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUnauthorizedException_message})
+var sGetBuyerDashboardInput_dashboardIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dashboardIdentifier", ID: &i_DashboardIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetBuyerDashboardInput_dashboardIdentifier})
+var sGetBuyerDashboardInput_embeddingDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "embeddingDomains", ID: &i_EmbeddingDomains, Members: &m_EmbeddingDomains, Type: smithy.ShapeTypeList, Ext: &eGetBuyerDashboardInput_embeddingDomains})
+var sGetBuyerDashboardOutput_embedUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "embedUrl", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetBuyerDashboardOutput_embedUrl})
+var sGetBuyerDashboardOutput_dashboardIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dashboardIdentifier", ID: &i_DashboardIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetBuyerDashboardOutput_dashboardIdentifier})
+var sGetBuyerDashboardOutput_embeddingDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "embeddingDomains", ID: &i_EmbeddingDomains, Members: &m_EmbeddingDomains, Type: smithy.ShapeTypeList, Ext: &eGetBuyerDashboardOutput_embeddingDomains})
 
 var GetBuyerDashboard = &sGetBuyerDashboard
 

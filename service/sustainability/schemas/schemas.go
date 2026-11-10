@@ -7,9 +7,142 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [134]smithy.SchemaExtensions
+var (
+	eGetEstimatedCarbonEmissions                                  smithy.SchemaExtensions
+	eGetEstimatedCarbonEmissionsDimensionValues                   smithy.SchemaExtensions
+	eGetEstimatedWaterAllocation                                  smithy.SchemaExtensions
+	eGetEstimatedWaterAllocationDimensionValues                   smithy.SchemaExtensions
+	e_AwsSustainabilityApiService                                 smithy.SchemaExtensions
+	eAccessDeniedException                                        smithy.SchemaExtensions
+	eAccessDeniedException_Message                                smithy.SchemaExtensions
+	eDimension                                                    smithy.SchemaExtensions
+	eDimension_USAGE_ACCOUNT_ID                                   smithy.SchemaExtensions
+	eDimension_REGION                                             smithy.SchemaExtensions
+	eDimension_SERVICE                                            smithy.SchemaExtensions
+	eDimensionEntry                                               smithy.SchemaExtensions
+	eDimensionEntry_Dimension                                     smithy.SchemaExtensions
+	eDimensionEntry_Value                                         smithy.SchemaExtensions
+	e_DimensionEntryList                                          smithy.SchemaExtensions
+	e_DimensionEntryList_member                                   smithy.SchemaExtensions
+	e_DimensionList                                               smithy.SchemaExtensions
+	e_DimensionList_member                                        smithy.SchemaExtensions
+	e_DimensionListMap                                            smithy.SchemaExtensions
+	e_DimensionListMap_key                                        smithy.SchemaExtensions
+	e_DimensionListMap_value                                      smithy.SchemaExtensions
+	e_DimensionsMap                                               smithy.SchemaExtensions
+	e_DimensionsMap_key                                           smithy.SchemaExtensions
+	e_DimensionsMap_value                                         smithy.SchemaExtensions
+	e_DimensionValue                                              smithy.SchemaExtensions
+	e_DimensionValueList                                          smithy.SchemaExtensions
+	e_DimensionValueList_member                                   smithy.SchemaExtensions
+	eEmissions                                                    smithy.SchemaExtensions
+	eEmissions_Value                                              smithy.SchemaExtensions
+	eEmissions_Unit                                               smithy.SchemaExtensions
+	e_EmissionsMap                                                smithy.SchemaExtensions
+	e_EmissionsMap_key                                            smithy.SchemaExtensions
+	e_EmissionsMap_value                                          smithy.SchemaExtensions
+	eEmissionsType                                                smithy.SchemaExtensions
+	eEmissionsType_TOTAL_LBM_CARBON_EMISSIONS                     smithy.SchemaExtensions
+	eEmissionsType_TOTAL_MBM_CARBON_EMISSIONS                     smithy.SchemaExtensions
+	eEmissionsType_TOTAL_SCOPE_1_CARBON_EMISSIONS                 smithy.SchemaExtensions
+	eEmissionsType_TOTAL_SCOPE_2_LBM_CARBON_EMISSIONS             smithy.SchemaExtensions
+	eEmissionsType_TOTAL_SCOPE_2_MBM_CARBON_EMISSIONS             smithy.SchemaExtensions
+	eEmissionsType_TOTAL_SCOPE_3_LBM_CARBON_EMISSIONS             smithy.SchemaExtensions
+	eEmissionsType_TOTAL_SCOPE_3_MBM_CARBON_EMISSIONS             smithy.SchemaExtensions
+	e_EmissionsTypeList                                           smithy.SchemaExtensions
+	e_EmissionsTypeList_member                                    smithy.SchemaExtensions
+	eEmissionsUnit                                                smithy.SchemaExtensions
+	eEmissionsUnit_MT_CO2E                                        smithy.SchemaExtensions
+	eEstimatedCarbonEmissions                                     smithy.SchemaExtensions
+	eEstimatedCarbonEmissions_TimePeriod                          smithy.SchemaExtensions
+	eEstimatedCarbonEmissions_DimensionsValues                    smithy.SchemaExtensions
+	eEstimatedCarbonEmissions_ModelVersion                        smithy.SchemaExtensions
+	eEstimatedCarbonEmissions_EmissionsValues                     smithy.SchemaExtensions
+	e_EstimatedCarbonEmissionsList                                smithy.SchemaExtensions
+	e_EstimatedCarbonEmissionsList_member                         smithy.SchemaExtensions
+	eEstimatedWaterAllocation                                     smithy.SchemaExtensions
+	eEstimatedWaterAllocation_TimePeriod                          smithy.SchemaExtensions
+	eEstimatedWaterAllocation_DimensionsValues                    smithy.SchemaExtensions
+	eEstimatedWaterAllocation_ModelVersion                        smithy.SchemaExtensions
+	eEstimatedWaterAllocation_AllocationValues                    smithy.SchemaExtensions
+	e_EstimatedWaterAllocationList                                smithy.SchemaExtensions
+	e_EstimatedWaterAllocationList_member                         smithy.SchemaExtensions
+	eFilterExpression                                             smithy.SchemaExtensions
+	eFilterExpression_Dimensions                                  smithy.SchemaExtensions
+	eGranularityConfiguration                                     smithy.SchemaExtensions
+	eGranularityConfiguration_FiscalYearStartMonth                smithy.SchemaExtensions
+	eInternalServerException                                      smithy.SchemaExtensions
+	eInternalServerException_Message                              smithy.SchemaExtensions
+	e_MaxResults                                                  smithy.SchemaExtensions
+	e_ModelVersion                                                smithy.SchemaExtensions
+	e_Month                                                       smithy.SchemaExtensions
+	e_NextToken                                                   smithy.SchemaExtensions
+	eThrottlingException                                          smithy.SchemaExtensions
+	eThrottlingException_Message                                  smithy.SchemaExtensions
+	eTimeGranularity                                              smithy.SchemaExtensions
+	eTimeGranularity_YEARLY_CALENDAR                              smithy.SchemaExtensions
+	eTimeGranularity_YEARLY_FISCAL                                smithy.SchemaExtensions
+	eTimeGranularity_QUARTERLY_CALENDAR                           smithy.SchemaExtensions
+	eTimeGranularity_QUARTERLY_FISCAL                             smithy.SchemaExtensions
+	eTimeGranularity_MONTHLY                                      smithy.SchemaExtensions
+	eTimePeriod                                                   smithy.SchemaExtensions
+	eTimePeriod_Start                                             smithy.SchemaExtensions
+	eTimePeriod_End                                               smithy.SchemaExtensions
+	e_Timestamp                                                   smithy.SchemaExtensions
+	eValidationException                                          smithy.SchemaExtensions
+	eValidationException_Message                                  smithy.SchemaExtensions
+	eWaterAllocation                                              smithy.SchemaExtensions
+	eWaterAllocation_Value                                        smithy.SchemaExtensions
+	eWaterAllocation_Unit                                         smithy.SchemaExtensions
+	e_WaterAllocationMap                                          smithy.SchemaExtensions
+	e_WaterAllocationMap_key                                      smithy.SchemaExtensions
+	e_WaterAllocationMap_value                                    smithy.SchemaExtensions
+	eWaterAllocationType                                          smithy.SchemaExtensions
+	eWaterAllocationType_TOTAL_WATER_WITHDRAWALS                  smithy.SchemaExtensions
+	e_WaterAllocationTypeList                                     smithy.SchemaExtensions
+	e_WaterAllocationTypeList_member                              smithy.SchemaExtensions
+	eWaterAllocationUnit                                          smithy.SchemaExtensions
+	eWaterAllocationUnit_CUBIC_METERS                             smithy.SchemaExtensions
+	eGetEstimatedCarbonEmissionsDimensionValuesRequest            smithy.SchemaExtensions
+	eGetEstimatedCarbonEmissionsDimensionValuesRequest_TimePeriod smithy.SchemaExtensions
+	eGetEstimatedCarbonEmissionsDimensionValuesRequest_Dimensions smithy.SchemaExtensions
+	eGetEstimatedCarbonEmissionsDimensionValuesRequest_MaxResults smithy.SchemaExtensions
+	eGetEstimatedCarbonEmissionsDimensionValuesRequest_NextToken  smithy.SchemaExtensions
+	eGetEstimatedCarbonEmissionsDimensionValuesResponse           smithy.SchemaExtensions
+	eGetEstimatedCarbonEmissionsDimensionValuesResponse_Results   smithy.SchemaExtensions
+	eGetEstimatedCarbonEmissionsDimensionValuesResponse_NextToken smithy.SchemaExtensions
+	eGetEstimatedCarbonEmissionsRequest                           smithy.SchemaExtensions
+	eGetEstimatedCarbonEmissionsRequest_TimePeriod                smithy.SchemaExtensions
+	eGetEstimatedCarbonEmissionsRequest_GroupBy                   smithy.SchemaExtensions
+	eGetEstimatedCarbonEmissionsRequest_FilterBy                  smithy.SchemaExtensions
+	eGetEstimatedCarbonEmissionsRequest_EmissionsTypes            smithy.SchemaExtensions
+	eGetEstimatedCarbonEmissionsRequest_Granularity               smithy.SchemaExtensions
+	eGetEstimatedCarbonEmissionsRequest_GranularityConfiguration  smithy.SchemaExtensions
+	eGetEstimatedCarbonEmissionsRequest_MaxResults                smithy.SchemaExtensions
+	eGetEstimatedCarbonEmissionsRequest_NextToken                 smithy.SchemaExtensions
+	eGetEstimatedCarbonEmissionsResponse                          smithy.SchemaExtensions
+	eGetEstimatedCarbonEmissionsResponse_Results                  smithy.SchemaExtensions
+	eGetEstimatedCarbonEmissionsResponse_NextToken                smithy.SchemaExtensions
+	eGetEstimatedWaterAllocationDimensionValuesRequest            smithy.SchemaExtensions
+	eGetEstimatedWaterAllocationDimensionValuesRequest_TimePeriod smithy.SchemaExtensions
+	eGetEstimatedWaterAllocationDimensionValuesRequest_Dimensions smithy.SchemaExtensions
+	eGetEstimatedWaterAllocationDimensionValuesRequest_MaxResults smithy.SchemaExtensions
+	eGetEstimatedWaterAllocationDimensionValuesRequest_NextToken  smithy.SchemaExtensions
+	eGetEstimatedWaterAllocationDimensionValuesResponse           smithy.SchemaExtensions
+	eGetEstimatedWaterAllocationDimensionValuesResponse_Results   smithy.SchemaExtensions
+	eGetEstimatedWaterAllocationDimensionValuesResponse_NextToken smithy.SchemaExtensions
+	eGetEstimatedWaterAllocationRequest                           smithy.SchemaExtensions
+	eGetEstimatedWaterAllocationRequest_TimePeriod                smithy.SchemaExtensions
+	eGetEstimatedWaterAllocationRequest_GroupBy                   smithy.SchemaExtensions
+	eGetEstimatedWaterAllocationRequest_FilterBy                  smithy.SchemaExtensions
+	eGetEstimatedWaterAllocationRequest_AllocationTypes           smithy.SchemaExtensions
+	eGetEstimatedWaterAllocationRequest_Granularity               smithy.SchemaExtensions
+	eGetEstimatedWaterAllocationRequest_MaxResults                smithy.SchemaExtensions
+	eGetEstimatedWaterAllocationRequest_NextToken                 smithy.SchemaExtensions
+	eGetEstimatedWaterAllocationResponse                          smithy.SchemaExtensions
+	eGetEstimatedWaterAllocationResponse_Results                  smithy.SchemaExtensions
+	eGetEstimatedWaterAllocationResponse_NextToken                smithy.SchemaExtensions
+)
 
 var (
 	iGetEstimatedCarbonEmissions                        = smithy.ShapeID{Namespace: "com.amazonaws.sustainability", Name: "GetEstimatedCarbonEmissions"}
@@ -123,141 +256,141 @@ var mGetEstimatedWaterAllocationDimensionValuesResponse = smithy.SchemaMembers{L
 var mGetEstimatedWaterAllocationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEstimatedWaterAllocationRequest_TimePeriod, &sGetEstimatedWaterAllocationRequest_GroupBy, &sGetEstimatedWaterAllocationRequest_FilterBy, &sGetEstimatedWaterAllocationRequest_AllocationTypes, &sGetEstimatedWaterAllocationRequest_Granularity, &sGetEstimatedWaterAllocationRequest_MaxResults, &sGetEstimatedWaterAllocationRequest_NextToken}}
 var mGetEstimatedWaterAllocationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEstimatedWaterAllocationResponse_Results, &sGetEstimatedWaterAllocationResponse_NextToken}}
 
-var sGetEstimatedCarbonEmissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEstimatedCarbonEmissions, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sGetEstimatedCarbonEmissionsDimensionValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEstimatedCarbonEmissionsDimensionValues, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sGetEstimatedWaterAllocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEstimatedWaterAllocation, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sGetEstimatedWaterAllocationDimensionValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEstimatedWaterAllocationDimensionValues, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var s_AwsSustainabilityApiService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsSustainabilityApiService, Type: smithy.ShapeTypeService, Ext: &ext[4]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &ext[5]})
-var sDimension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeEnum, Ext: &ext[7]})
-var sDimensionEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimensionEntry, Members: &mDimensionEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[11]})
-var s_DimensionEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionEntryList, Members: &m_DimensionEntryList, Type: smithy.ShapeTypeList, Ext: &ext[14]})
-var s_DimensionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionList, Members: &m_DimensionList, Type: smithy.ShapeTypeList, Ext: &ext[16]})
-var s_DimensionListMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionListMap, Members: &m_DimensionListMap, Type: smithy.ShapeTypeMap, Ext: &ext[18]})
-var s_DimensionsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionsMap, Members: &m_DimensionsMap, Type: smithy.ShapeTypeMap, Ext: &ext[21]})
-var s_DimensionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionValue, Type: smithy.ShapeTypeString, Ext: &ext[24]})
-var s_DimensionValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionValueList, Members: &m_DimensionValueList, Type: smithy.ShapeTypeList, Ext: &ext[25]})
-var sEmissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmissions, Members: &mEmissions, Type: smithy.ShapeTypeStructure, Ext: &ext[27]})
-var s_EmissionsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmissionsMap, Members: &m_EmissionsMap, Type: smithy.ShapeTypeMap, Ext: &ext[30]})
-var sEmissionsType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmissionsType, Members: &mEmissionsType, Type: smithy.ShapeTypeEnum, Ext: &ext[33]})
-var s_EmissionsTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmissionsTypeList, Members: &m_EmissionsTypeList, Type: smithy.ShapeTypeList, Ext: &ext[41]})
-var sEmissionsUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmissionsUnit, Members: &mEmissionsUnit, Type: smithy.ShapeTypeEnum, Ext: &ext[43]})
-var sEstimatedCarbonEmissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEstimatedCarbonEmissions, Members: &mEstimatedCarbonEmissions, Type: smithy.ShapeTypeStructure, Ext: &ext[45]})
-var s_EstimatedCarbonEmissionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EstimatedCarbonEmissionsList, Members: &m_EstimatedCarbonEmissionsList, Type: smithy.ShapeTypeList, Ext: &ext[50]})
-var sEstimatedWaterAllocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEstimatedWaterAllocation, Members: &mEstimatedWaterAllocation, Type: smithy.ShapeTypeStructure, Ext: &ext[52]})
-var s_EstimatedWaterAllocationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EstimatedWaterAllocationList, Members: &m_EstimatedWaterAllocationList, Type: smithy.ShapeTypeList, Ext: &ext[57]})
-var sFilterExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterExpression, Members: &mFilterExpression, Type: smithy.ShapeTypeStructure, Ext: &ext[59]})
-var sGranularityConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGranularityConfiguration, Members: &mGranularityConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[61]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &ext[63]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[65]})
-var s_ModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ModelVersion, Type: smithy.ShapeTypeString, Ext: &ext[66]})
-var s_Month = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Month, Type: smithy.ShapeTypeInteger, Ext: &ext[67]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[68]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &ext[69]})
-var sTimeGranularity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeGranularity, Members: &mTimeGranularity, Type: smithy.ShapeTypeEnum, Ext: &ext[71]})
-var sTimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
-var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Traits: &t9, Type: smithy.ShapeTypeTimestamp, Ext: &ext[80]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &ext[81]})
-var sWaterAllocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWaterAllocation, Members: &mWaterAllocation, Type: smithy.ShapeTypeStructure, Ext: &ext[83]})
-var s_WaterAllocationMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WaterAllocationMap, Members: &m_WaterAllocationMap, Type: smithy.ShapeTypeMap, Ext: &ext[86]})
-var sWaterAllocationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWaterAllocationType, Members: &mWaterAllocationType, Type: smithy.ShapeTypeEnum, Ext: &ext[89]})
-var s_WaterAllocationTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WaterAllocationTypeList, Members: &m_WaterAllocationTypeList, Type: smithy.ShapeTypeList, Ext: &ext[91]})
-var sWaterAllocationUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWaterAllocationUnit, Members: &mWaterAllocationUnit, Type: smithy.ShapeTypeEnum, Ext: &ext[93]})
-var sGetEstimatedCarbonEmissionsDimensionValuesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEstimatedCarbonEmissionsDimensionValuesRequest, Members: &mGetEstimatedCarbonEmissionsDimensionValuesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[95]})
-var sGetEstimatedCarbonEmissionsDimensionValuesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEstimatedCarbonEmissionsDimensionValuesResponse, Members: &mGetEstimatedCarbonEmissionsDimensionValuesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[100]})
-var sGetEstimatedCarbonEmissionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEstimatedCarbonEmissionsRequest, Members: &mGetEstimatedCarbonEmissionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[103]})
-var sGetEstimatedCarbonEmissionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEstimatedCarbonEmissionsResponse, Members: &mGetEstimatedCarbonEmissionsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[112]})
-var sGetEstimatedWaterAllocationDimensionValuesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEstimatedWaterAllocationDimensionValuesRequest, Members: &mGetEstimatedWaterAllocationDimensionValuesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[115]})
-var sGetEstimatedWaterAllocationDimensionValuesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEstimatedWaterAllocationDimensionValuesResponse, Members: &mGetEstimatedWaterAllocationDimensionValuesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var sGetEstimatedWaterAllocationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEstimatedWaterAllocationRequest, Members: &mGetEstimatedWaterAllocationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[123]})
-var sGetEstimatedWaterAllocationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEstimatedWaterAllocationResponse, Members: &mGetEstimatedWaterAllocationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[131]})
+var sGetEstimatedCarbonEmissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEstimatedCarbonEmissions, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eGetEstimatedCarbonEmissions})
+var sGetEstimatedCarbonEmissionsDimensionValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEstimatedCarbonEmissionsDimensionValues, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eGetEstimatedCarbonEmissionsDimensionValues})
+var sGetEstimatedWaterAllocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEstimatedWaterAllocation, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eGetEstimatedWaterAllocation})
+var sGetEstimatedWaterAllocationDimensionValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEstimatedWaterAllocationDimensionValues, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eGetEstimatedWaterAllocationDimensionValues})
+var s_AwsSustainabilityApiService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsSustainabilityApiService, Type: smithy.ShapeTypeService, Ext: &e_AwsSustainabilityApiService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sDimension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeEnum, Ext: &eDimension})
+var sDimensionEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimensionEntry, Members: &mDimensionEntry, Type: smithy.ShapeTypeStructure, Ext: &eDimensionEntry})
+var s_DimensionEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionEntryList, Members: &m_DimensionEntryList, Type: smithy.ShapeTypeList, Ext: &e_DimensionEntryList})
+var s_DimensionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionList, Members: &m_DimensionList, Type: smithy.ShapeTypeList, Ext: &e_DimensionList})
+var s_DimensionListMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionListMap, Members: &m_DimensionListMap, Type: smithy.ShapeTypeMap, Ext: &e_DimensionListMap})
+var s_DimensionsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionsMap, Members: &m_DimensionsMap, Type: smithy.ShapeTypeMap, Ext: &e_DimensionsMap})
+var s_DimensionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionValue, Type: smithy.ShapeTypeString, Ext: &e_DimensionValue})
+var s_DimensionValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionValueList, Members: &m_DimensionValueList, Type: smithy.ShapeTypeList, Ext: &e_DimensionValueList})
+var sEmissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmissions, Members: &mEmissions, Type: smithy.ShapeTypeStructure, Ext: &eEmissions})
+var s_EmissionsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmissionsMap, Members: &m_EmissionsMap, Type: smithy.ShapeTypeMap, Ext: &e_EmissionsMap})
+var sEmissionsType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmissionsType, Members: &mEmissionsType, Type: smithy.ShapeTypeEnum, Ext: &eEmissionsType})
+var s_EmissionsTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmissionsTypeList, Members: &m_EmissionsTypeList, Type: smithy.ShapeTypeList, Ext: &e_EmissionsTypeList})
+var sEmissionsUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmissionsUnit, Members: &mEmissionsUnit, Type: smithy.ShapeTypeEnum, Ext: &eEmissionsUnit})
+var sEstimatedCarbonEmissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEstimatedCarbonEmissions, Members: &mEstimatedCarbonEmissions, Type: smithy.ShapeTypeStructure, Ext: &eEstimatedCarbonEmissions})
+var s_EstimatedCarbonEmissionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EstimatedCarbonEmissionsList, Members: &m_EstimatedCarbonEmissionsList, Type: smithy.ShapeTypeList, Ext: &e_EstimatedCarbonEmissionsList})
+var sEstimatedWaterAllocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEstimatedWaterAllocation, Members: &mEstimatedWaterAllocation, Type: smithy.ShapeTypeStructure, Ext: &eEstimatedWaterAllocation})
+var s_EstimatedWaterAllocationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EstimatedWaterAllocationList, Members: &m_EstimatedWaterAllocationList, Type: smithy.ShapeTypeList, Ext: &e_EstimatedWaterAllocationList})
+var sFilterExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterExpression, Members: &mFilterExpression, Type: smithy.ShapeTypeStructure, Ext: &eFilterExpression})
+var sGranularityConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGranularityConfiguration, Members: &mGranularityConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGranularityConfiguration})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_ModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ModelVersion, Type: smithy.ShapeTypeString, Ext: &e_ModelVersion})
+var s_Month = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Month, Type: smithy.ShapeTypeInteger, Ext: &e_Month})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sTimeGranularity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeGranularity, Members: &mTimeGranularity, Type: smithy.ShapeTypeEnum, Ext: &eTimeGranularity})
+var sTimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &eTimePeriod})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Traits: &t9, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sWaterAllocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWaterAllocation, Members: &mWaterAllocation, Type: smithy.ShapeTypeStructure, Ext: &eWaterAllocation})
+var s_WaterAllocationMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WaterAllocationMap, Members: &m_WaterAllocationMap, Type: smithy.ShapeTypeMap, Ext: &e_WaterAllocationMap})
+var sWaterAllocationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWaterAllocationType, Members: &mWaterAllocationType, Type: smithy.ShapeTypeEnum, Ext: &eWaterAllocationType})
+var s_WaterAllocationTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WaterAllocationTypeList, Members: &m_WaterAllocationTypeList, Type: smithy.ShapeTypeList, Ext: &e_WaterAllocationTypeList})
+var sWaterAllocationUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWaterAllocationUnit, Members: &mWaterAllocationUnit, Type: smithy.ShapeTypeEnum, Ext: &eWaterAllocationUnit})
+var sGetEstimatedCarbonEmissionsDimensionValuesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEstimatedCarbonEmissionsDimensionValuesRequest, Members: &mGetEstimatedCarbonEmissionsDimensionValuesRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetEstimatedCarbonEmissionsDimensionValuesRequest})
+var sGetEstimatedCarbonEmissionsDimensionValuesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEstimatedCarbonEmissionsDimensionValuesResponse, Members: &mGetEstimatedCarbonEmissionsDimensionValuesResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetEstimatedCarbonEmissionsDimensionValuesResponse})
+var sGetEstimatedCarbonEmissionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEstimatedCarbonEmissionsRequest, Members: &mGetEstimatedCarbonEmissionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetEstimatedCarbonEmissionsRequest})
+var sGetEstimatedCarbonEmissionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEstimatedCarbonEmissionsResponse, Members: &mGetEstimatedCarbonEmissionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetEstimatedCarbonEmissionsResponse})
+var sGetEstimatedWaterAllocationDimensionValuesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEstimatedWaterAllocationDimensionValuesRequest, Members: &mGetEstimatedWaterAllocationDimensionValuesRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetEstimatedWaterAllocationDimensionValuesRequest})
+var sGetEstimatedWaterAllocationDimensionValuesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEstimatedWaterAllocationDimensionValuesResponse, Members: &mGetEstimatedWaterAllocationDimensionValuesResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetEstimatedWaterAllocationDimensionValuesResponse})
+var sGetEstimatedWaterAllocationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEstimatedWaterAllocationRequest, Members: &mGetEstimatedWaterAllocationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetEstimatedWaterAllocationRequest})
+var sGetEstimatedWaterAllocationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEstimatedWaterAllocationResponse, Members: &mGetEstimatedWaterAllocationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetEstimatedWaterAllocationResponse})
 
-var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &ext[6]})
-var sDimension_USAGE_ACCOUNT_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USAGE_ACCOUNT_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[8]})
-var sDimension_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[9]})
-var sDimension_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[10]})
-var sDimensionEntry_Dimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimension", ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeEnum, Ext: &ext[12]})
-var sDimensionEntry_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_DimensionValue, Type: smithy.ShapeTypeString, Ext: &ext[13]})
-var s_DimensionEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDimensionEntry, Members: &mDimensionEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[15]})
-var s_DimensionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeEnum, Ext: &ext[17]})
-var s_DimensionListMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeEnum, Ext: &ext[19]})
-var s_DimensionListMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_DimensionValueList, Members: &m_DimensionValueList, Type: smithy.ShapeTypeList, Ext: &ext[20]})
-var s_DimensionsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeEnum, Ext: &ext[22]})
-var s_DimensionsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_DimensionValue, Type: smithy.ShapeTypeString, Ext: &ext[23]})
-var s_DimensionValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DimensionValue, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var sEmissions_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[28]})
-var sEmissions_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &iEmissionsUnit, Members: &mEmissionsUnit, Type: smithy.ShapeTypeEnum, Ext: &ext[29]})
-var s_EmissionsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iEmissionsType, Members: &mEmissionsType, Type: smithy.ShapeTypeEnum, Ext: &ext[31]})
-var s_EmissionsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iEmissions, Members: &mEmissions, Type: smithy.ShapeTypeStructure, Ext: &ext[32]})
-var sEmissionsType_TOTAL_LBM_CARBON_EMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOTAL_LBM_CARBON_EMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[34]})
-var sEmissionsType_TOTAL_MBM_CARBON_EMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOTAL_MBM_CARBON_EMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[35]})
-var sEmissionsType_TOTAL_SCOPE_1_CARBON_EMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOTAL_SCOPE_1_CARBON_EMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[36]})
-var sEmissionsType_TOTAL_SCOPE_2_LBM_CARBON_EMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOTAL_SCOPE_2_LBM_CARBON_EMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var sEmissionsType_TOTAL_SCOPE_2_MBM_CARBON_EMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOTAL_SCOPE_2_MBM_CARBON_EMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[38]})
-var sEmissionsType_TOTAL_SCOPE_3_LBM_CARBON_EMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOTAL_SCOPE_3_LBM_CARBON_EMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[39]})
-var sEmissionsType_TOTAL_SCOPE_3_MBM_CARBON_EMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOTAL_SCOPE_3_MBM_CARBON_EMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[40]})
-var s_EmissionsTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEmissionsType, Members: &mEmissionsType, Type: smithy.ShapeTypeEnum, Ext: &ext[42]})
-var sEmissionsUnit_MT_CO2E = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MT_CO2E", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[44]})
-var sEstimatedCarbonEmissions_TimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimePeriod", ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &ext[46]})
-var sEstimatedCarbonEmissions_DimensionsValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DimensionsValues", ID: &i_DimensionsMap, Members: &m_DimensionsMap, Type: smithy.ShapeTypeMap, Ext: &ext[47]})
-var sEstimatedCarbonEmissions_ModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelVersion", ID: &i_ModelVersion, Type: smithy.ShapeTypeString, Ext: &ext[48]})
-var sEstimatedCarbonEmissions_EmissionsValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmissionsValues", ID: &i_EmissionsMap, Members: &m_EmissionsMap, Type: smithy.ShapeTypeMap, Ext: &ext[49]})
-var s_EstimatedCarbonEmissionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEstimatedCarbonEmissions, Members: &mEstimatedCarbonEmissions, Type: smithy.ShapeTypeStructure, Ext: &ext[51]})
-var sEstimatedWaterAllocation_TimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimePeriod", ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &ext[53]})
-var sEstimatedWaterAllocation_DimensionsValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DimensionsValues", ID: &i_DimensionsMap, Members: &m_DimensionsMap, Type: smithy.ShapeTypeMap, Ext: &ext[54]})
-var sEstimatedWaterAllocation_ModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelVersion", ID: &i_ModelVersion, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var sEstimatedWaterAllocation_AllocationValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllocationValues", ID: &i_WaterAllocationMap, Members: &m_WaterAllocationMap, Type: smithy.ShapeTypeMap, Ext: &ext[56]})
-var s_EstimatedWaterAllocationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEstimatedWaterAllocation, Members: &mEstimatedWaterAllocation, Type: smithy.ShapeTypeStructure, Ext: &ext[58]})
-var sFilterExpression_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_DimensionListMap, Members: &m_DimensionListMap, Type: smithy.ShapeTypeMap, Ext: &ext[60]})
-var sGranularityConfiguration_FiscalYearStartMonth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FiscalYearStartMonth", ID: &i_Month, Type: smithy.ShapeTypeInteger, Ext: &ext[62]})
-var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &ext[64]})
-var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &ext[70]})
-var sTimeGranularity_YEARLY_CALENDAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YEARLY_CALENDAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sTimeGranularity_YEARLY_FISCAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YEARLY_FISCAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[73]})
-var sTimeGranularity_QUARTERLY_CALENDAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUARTERLY_CALENDAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var sTimeGranularity_QUARTERLY_FISCAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUARTERLY_FISCAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[75]})
-var sTimeGranularity_MONTHLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONTHLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[76]})
-var sTimePeriod_Start = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Start", ID: &i_Timestamp, Traits: &t8, Type: smithy.ShapeTypeTimestamp, Ext: &ext[78]})
-var sTimePeriod_End = smithy.NewStaticSchema(smithy.StaticSchema{Member: "End", ID: &i_Timestamp, Traits: &t8, Type: smithy.ShapeTypeTimestamp, Ext: &ext[79]})
-var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &ext[82]})
-var sWaterAllocation_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[84]})
-var sWaterAllocation_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &iWaterAllocationUnit, Members: &mWaterAllocationUnit, Type: smithy.ShapeTypeEnum, Ext: &ext[85]})
-var s_WaterAllocationMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iWaterAllocationType, Members: &mWaterAllocationType, Type: smithy.ShapeTypeEnum, Ext: &ext[87]})
-var s_WaterAllocationMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iWaterAllocation, Members: &mWaterAllocation, Type: smithy.ShapeTypeStructure, Ext: &ext[88]})
-var sWaterAllocationType_TOTAL_WATER_WITHDRAWALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOTAL_WATER_WITHDRAWALS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[90]})
-var s_WaterAllocationTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWaterAllocationType, Members: &mWaterAllocationType, Type: smithy.ShapeTypeEnum, Ext: &ext[92]})
-var sWaterAllocationUnit_CUBIC_METERS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUBIC_METERS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[94]})
-var sGetEstimatedCarbonEmissionsDimensionValuesRequest_TimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimePeriod", ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &ext[96]})
-var sGetEstimatedCarbonEmissionsDimensionValuesRequest_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_DimensionList, Members: &m_DimensionList, Type: smithy.ShapeTypeList, Ext: &ext[97]})
-var sGetEstimatedCarbonEmissionsDimensionValuesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[98]})
-var sGetEstimatedCarbonEmissionsDimensionValuesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[99]})
-var sGetEstimatedCarbonEmissionsDimensionValuesResponse_Results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Results", ID: &i_DimensionEntryList, Members: &m_DimensionEntryList, Type: smithy.ShapeTypeList, Ext: &ext[101]})
-var sGetEstimatedCarbonEmissionsDimensionValuesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var sGetEstimatedCarbonEmissionsRequest_TimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimePeriod", ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &ext[104]})
-var sGetEstimatedCarbonEmissionsRequest_GroupBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupBy", ID: &i_DimensionList, Members: &m_DimensionList, Type: smithy.ShapeTypeList, Ext: &ext[105]})
-var sGetEstimatedCarbonEmissionsRequest_FilterBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterBy", ID: &iFilterExpression, Members: &mFilterExpression, Type: smithy.ShapeTypeStructure, Ext: &ext[106]})
-var sGetEstimatedCarbonEmissionsRequest_EmissionsTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmissionsTypes", ID: &i_EmissionsTypeList, Members: &m_EmissionsTypeList, Type: smithy.ShapeTypeList, Ext: &ext[107]})
-var sGetEstimatedCarbonEmissionsRequest_Granularity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Granularity", ID: &iTimeGranularity, Members: &mTimeGranularity, Type: smithy.ShapeTypeEnum, Ext: &ext[108]})
-var sGetEstimatedCarbonEmissionsRequest_GranularityConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GranularityConfiguration", ID: &iGranularityConfiguration, Members: &mGranularityConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[109]})
-var sGetEstimatedCarbonEmissionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[110]})
-var sGetEstimatedCarbonEmissionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[111]})
-var sGetEstimatedCarbonEmissionsResponse_Results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Results", ID: &i_EstimatedCarbonEmissionsList, Members: &m_EstimatedCarbonEmissionsList, Type: smithy.ShapeTypeList, Ext: &ext[113]})
-var sGetEstimatedCarbonEmissionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[114]})
-var sGetEstimatedWaterAllocationDimensionValuesRequest_TimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimePeriod", ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &ext[116]})
-var sGetEstimatedWaterAllocationDimensionValuesRequest_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_DimensionList, Members: &m_DimensionList, Type: smithy.ShapeTypeList, Ext: &ext[117]})
-var sGetEstimatedWaterAllocationDimensionValuesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[118]})
-var sGetEstimatedWaterAllocationDimensionValuesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[119]})
-var sGetEstimatedWaterAllocationDimensionValuesResponse_Results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Results", ID: &i_DimensionEntryList, Members: &m_DimensionEntryList, Type: smithy.ShapeTypeList, Ext: &ext[121]})
-var sGetEstimatedWaterAllocationDimensionValuesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[122]})
-var sGetEstimatedWaterAllocationRequest_TimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimePeriod", ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &ext[124]})
-var sGetEstimatedWaterAllocationRequest_GroupBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupBy", ID: &i_DimensionList, Members: &m_DimensionList, Type: smithy.ShapeTypeList, Ext: &ext[125]})
-var sGetEstimatedWaterAllocationRequest_FilterBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterBy", ID: &iFilterExpression, Members: &mFilterExpression, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var sGetEstimatedWaterAllocationRequest_AllocationTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllocationTypes", ID: &i_WaterAllocationTypeList, Members: &m_WaterAllocationTypeList, Type: smithy.ShapeTypeList, Ext: &ext[127]})
-var sGetEstimatedWaterAllocationRequest_Granularity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Granularity", ID: &iTimeGranularity, Members: &mTimeGranularity, Type: smithy.ShapeTypeEnum, Ext: &ext[128]})
-var sGetEstimatedWaterAllocationRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[129]})
-var sGetEstimatedWaterAllocationRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var sGetEstimatedWaterAllocationResponse_Results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Results", ID: &i_EstimatedWaterAllocationList, Members: &m_EstimatedWaterAllocationList, Type: smithy.ShapeTypeList, Ext: &ext[132]})
-var sGetEstimatedWaterAllocationResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[133]})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var sDimension_USAGE_ACCOUNT_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USAGE_ACCOUNT_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_USAGE_ACCOUNT_ID})
+var sDimension_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_REGION})
+var sDimension_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimension_SERVICE})
+var sDimensionEntry_Dimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimension", ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeEnum, Ext: &eDimensionEntry_Dimension})
+var sDimensionEntry_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_DimensionValue, Type: smithy.ShapeTypeString, Ext: &eDimensionEntry_Value})
+var s_DimensionEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDimensionEntry, Members: &mDimensionEntry, Type: smithy.ShapeTypeStructure, Ext: &e_DimensionEntryList_member})
+var s_DimensionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeEnum, Ext: &e_DimensionList_member})
+var s_DimensionListMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeEnum, Ext: &e_DimensionListMap_key})
+var s_DimensionListMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_DimensionValueList, Members: &m_DimensionValueList, Type: smithy.ShapeTypeList, Ext: &e_DimensionListMap_value})
+var s_DimensionsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeEnum, Ext: &e_DimensionsMap_key})
+var s_DimensionsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_DimensionValue, Type: smithy.ShapeTypeString, Ext: &e_DimensionsMap_value})
+var s_DimensionValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DimensionValue, Type: smithy.ShapeTypeString, Ext: &e_DimensionValueList_member})
+var sEmissions_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eEmissions_Value})
+var sEmissions_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &iEmissionsUnit, Members: &mEmissionsUnit, Type: smithy.ShapeTypeEnum, Ext: &eEmissions_Unit})
+var s_EmissionsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iEmissionsType, Members: &mEmissionsType, Type: smithy.ShapeTypeEnum, Ext: &e_EmissionsMap_key})
+var s_EmissionsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iEmissions, Members: &mEmissions, Type: smithy.ShapeTypeStructure, Ext: &e_EmissionsMap_value})
+var sEmissionsType_TOTAL_LBM_CARBON_EMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOTAL_LBM_CARBON_EMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEmissionsType_TOTAL_LBM_CARBON_EMISSIONS})
+var sEmissionsType_TOTAL_MBM_CARBON_EMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOTAL_MBM_CARBON_EMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEmissionsType_TOTAL_MBM_CARBON_EMISSIONS})
+var sEmissionsType_TOTAL_SCOPE_1_CARBON_EMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOTAL_SCOPE_1_CARBON_EMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEmissionsType_TOTAL_SCOPE_1_CARBON_EMISSIONS})
+var sEmissionsType_TOTAL_SCOPE_2_LBM_CARBON_EMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOTAL_SCOPE_2_LBM_CARBON_EMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEmissionsType_TOTAL_SCOPE_2_LBM_CARBON_EMISSIONS})
+var sEmissionsType_TOTAL_SCOPE_2_MBM_CARBON_EMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOTAL_SCOPE_2_MBM_CARBON_EMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEmissionsType_TOTAL_SCOPE_2_MBM_CARBON_EMISSIONS})
+var sEmissionsType_TOTAL_SCOPE_3_LBM_CARBON_EMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOTAL_SCOPE_3_LBM_CARBON_EMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEmissionsType_TOTAL_SCOPE_3_LBM_CARBON_EMISSIONS})
+var sEmissionsType_TOTAL_SCOPE_3_MBM_CARBON_EMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOTAL_SCOPE_3_MBM_CARBON_EMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEmissionsType_TOTAL_SCOPE_3_MBM_CARBON_EMISSIONS})
+var s_EmissionsTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEmissionsType, Members: &mEmissionsType, Type: smithy.ShapeTypeEnum, Ext: &e_EmissionsTypeList_member})
+var sEmissionsUnit_MT_CO2E = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MT_CO2E", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEmissionsUnit_MT_CO2E})
+var sEstimatedCarbonEmissions_TimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimePeriod", ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &eEstimatedCarbonEmissions_TimePeriod})
+var sEstimatedCarbonEmissions_DimensionsValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DimensionsValues", ID: &i_DimensionsMap, Members: &m_DimensionsMap, Type: smithy.ShapeTypeMap, Ext: &eEstimatedCarbonEmissions_DimensionsValues})
+var sEstimatedCarbonEmissions_ModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelVersion", ID: &i_ModelVersion, Type: smithy.ShapeTypeString, Ext: &eEstimatedCarbonEmissions_ModelVersion})
+var sEstimatedCarbonEmissions_EmissionsValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmissionsValues", ID: &i_EmissionsMap, Members: &m_EmissionsMap, Type: smithy.ShapeTypeMap, Ext: &eEstimatedCarbonEmissions_EmissionsValues})
+var s_EstimatedCarbonEmissionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEstimatedCarbonEmissions, Members: &mEstimatedCarbonEmissions, Type: smithy.ShapeTypeStructure, Ext: &e_EstimatedCarbonEmissionsList_member})
+var sEstimatedWaterAllocation_TimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimePeriod", ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &eEstimatedWaterAllocation_TimePeriod})
+var sEstimatedWaterAllocation_DimensionsValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DimensionsValues", ID: &i_DimensionsMap, Members: &m_DimensionsMap, Type: smithy.ShapeTypeMap, Ext: &eEstimatedWaterAllocation_DimensionsValues})
+var sEstimatedWaterAllocation_ModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelVersion", ID: &i_ModelVersion, Type: smithy.ShapeTypeString, Ext: &eEstimatedWaterAllocation_ModelVersion})
+var sEstimatedWaterAllocation_AllocationValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllocationValues", ID: &i_WaterAllocationMap, Members: &m_WaterAllocationMap, Type: smithy.ShapeTypeMap, Ext: &eEstimatedWaterAllocation_AllocationValues})
+var s_EstimatedWaterAllocationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEstimatedWaterAllocation, Members: &mEstimatedWaterAllocation, Type: smithy.ShapeTypeStructure, Ext: &e_EstimatedWaterAllocationList_member})
+var sFilterExpression_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_DimensionListMap, Members: &m_DimensionListMap, Type: smithy.ShapeTypeMap, Ext: &eFilterExpression_Dimensions})
+var sGranularityConfiguration_FiscalYearStartMonth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FiscalYearStartMonth", ID: &i_Month, Type: smithy.ShapeTypeInteger, Ext: &eGranularityConfiguration_FiscalYearStartMonth})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var sTimeGranularity_YEARLY_CALENDAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YEARLY_CALENDAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeGranularity_YEARLY_CALENDAR})
+var sTimeGranularity_YEARLY_FISCAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YEARLY_FISCAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeGranularity_YEARLY_FISCAL})
+var sTimeGranularity_QUARTERLY_CALENDAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUARTERLY_CALENDAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeGranularity_QUARTERLY_CALENDAR})
+var sTimeGranularity_QUARTERLY_FISCAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUARTERLY_FISCAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeGranularity_QUARTERLY_FISCAL})
+var sTimeGranularity_MONTHLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONTHLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTimeGranularity_MONTHLY})
+var sTimePeriod_Start = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Start", ID: &i_Timestamp, Traits: &t8, Type: smithy.ShapeTypeTimestamp, Ext: &eTimePeriod_Start})
+var sTimePeriod_End = smithy.NewStaticSchema(smithy.StaticSchema{Member: "End", ID: &i_Timestamp, Traits: &t8, Type: smithy.ShapeTypeTimestamp, Ext: &eTimePeriod_End})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Traits: &t5, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sWaterAllocation_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eWaterAllocation_Value})
+var sWaterAllocation_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &iWaterAllocationUnit, Members: &mWaterAllocationUnit, Type: smithy.ShapeTypeEnum, Ext: &eWaterAllocation_Unit})
+var s_WaterAllocationMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iWaterAllocationType, Members: &mWaterAllocationType, Type: smithy.ShapeTypeEnum, Ext: &e_WaterAllocationMap_key})
+var s_WaterAllocationMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iWaterAllocation, Members: &mWaterAllocation, Type: smithy.ShapeTypeStructure, Ext: &e_WaterAllocationMap_value})
+var sWaterAllocationType_TOTAL_WATER_WITHDRAWALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOTAL_WATER_WITHDRAWALS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWaterAllocationType_TOTAL_WATER_WITHDRAWALS})
+var s_WaterAllocationTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWaterAllocationType, Members: &mWaterAllocationType, Type: smithy.ShapeTypeEnum, Ext: &e_WaterAllocationTypeList_member})
+var sWaterAllocationUnit_CUBIC_METERS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUBIC_METERS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWaterAllocationUnit_CUBIC_METERS})
+var sGetEstimatedCarbonEmissionsDimensionValuesRequest_TimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimePeriod", ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &eGetEstimatedCarbonEmissionsDimensionValuesRequest_TimePeriod})
+var sGetEstimatedCarbonEmissionsDimensionValuesRequest_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_DimensionList, Members: &m_DimensionList, Type: smithy.ShapeTypeList, Ext: &eGetEstimatedCarbonEmissionsDimensionValuesRequest_Dimensions})
+var sGetEstimatedCarbonEmissionsDimensionValuesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetEstimatedCarbonEmissionsDimensionValuesRequest_MaxResults})
+var sGetEstimatedCarbonEmissionsDimensionValuesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetEstimatedCarbonEmissionsDimensionValuesRequest_NextToken})
+var sGetEstimatedCarbonEmissionsDimensionValuesResponse_Results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Results", ID: &i_DimensionEntryList, Members: &m_DimensionEntryList, Type: smithy.ShapeTypeList, Ext: &eGetEstimatedCarbonEmissionsDimensionValuesResponse_Results})
+var sGetEstimatedCarbonEmissionsDimensionValuesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetEstimatedCarbonEmissionsDimensionValuesResponse_NextToken})
+var sGetEstimatedCarbonEmissionsRequest_TimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimePeriod", ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &eGetEstimatedCarbonEmissionsRequest_TimePeriod})
+var sGetEstimatedCarbonEmissionsRequest_GroupBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupBy", ID: &i_DimensionList, Members: &m_DimensionList, Type: smithy.ShapeTypeList, Ext: &eGetEstimatedCarbonEmissionsRequest_GroupBy})
+var sGetEstimatedCarbonEmissionsRequest_FilterBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterBy", ID: &iFilterExpression, Members: &mFilterExpression, Type: smithy.ShapeTypeStructure, Ext: &eGetEstimatedCarbonEmissionsRequest_FilterBy})
+var sGetEstimatedCarbonEmissionsRequest_EmissionsTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmissionsTypes", ID: &i_EmissionsTypeList, Members: &m_EmissionsTypeList, Type: smithy.ShapeTypeList, Ext: &eGetEstimatedCarbonEmissionsRequest_EmissionsTypes})
+var sGetEstimatedCarbonEmissionsRequest_Granularity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Granularity", ID: &iTimeGranularity, Members: &mTimeGranularity, Type: smithy.ShapeTypeEnum, Ext: &eGetEstimatedCarbonEmissionsRequest_Granularity})
+var sGetEstimatedCarbonEmissionsRequest_GranularityConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GranularityConfiguration", ID: &iGranularityConfiguration, Members: &mGranularityConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetEstimatedCarbonEmissionsRequest_GranularityConfiguration})
+var sGetEstimatedCarbonEmissionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetEstimatedCarbonEmissionsRequest_MaxResults})
+var sGetEstimatedCarbonEmissionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetEstimatedCarbonEmissionsRequest_NextToken})
+var sGetEstimatedCarbonEmissionsResponse_Results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Results", ID: &i_EstimatedCarbonEmissionsList, Members: &m_EstimatedCarbonEmissionsList, Type: smithy.ShapeTypeList, Ext: &eGetEstimatedCarbonEmissionsResponse_Results})
+var sGetEstimatedCarbonEmissionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetEstimatedCarbonEmissionsResponse_NextToken})
+var sGetEstimatedWaterAllocationDimensionValuesRequest_TimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimePeriod", ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &eGetEstimatedWaterAllocationDimensionValuesRequest_TimePeriod})
+var sGetEstimatedWaterAllocationDimensionValuesRequest_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_DimensionList, Members: &m_DimensionList, Type: smithy.ShapeTypeList, Ext: &eGetEstimatedWaterAllocationDimensionValuesRequest_Dimensions})
+var sGetEstimatedWaterAllocationDimensionValuesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetEstimatedWaterAllocationDimensionValuesRequest_MaxResults})
+var sGetEstimatedWaterAllocationDimensionValuesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetEstimatedWaterAllocationDimensionValuesRequest_NextToken})
+var sGetEstimatedWaterAllocationDimensionValuesResponse_Results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Results", ID: &i_DimensionEntryList, Members: &m_DimensionEntryList, Type: smithy.ShapeTypeList, Ext: &eGetEstimatedWaterAllocationDimensionValuesResponse_Results})
+var sGetEstimatedWaterAllocationDimensionValuesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetEstimatedWaterAllocationDimensionValuesResponse_NextToken})
+var sGetEstimatedWaterAllocationRequest_TimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimePeriod", ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure, Ext: &eGetEstimatedWaterAllocationRequest_TimePeriod})
+var sGetEstimatedWaterAllocationRequest_GroupBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupBy", ID: &i_DimensionList, Members: &m_DimensionList, Type: smithy.ShapeTypeList, Ext: &eGetEstimatedWaterAllocationRequest_GroupBy})
+var sGetEstimatedWaterAllocationRequest_FilterBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterBy", ID: &iFilterExpression, Members: &mFilterExpression, Type: smithy.ShapeTypeStructure, Ext: &eGetEstimatedWaterAllocationRequest_FilterBy})
+var sGetEstimatedWaterAllocationRequest_AllocationTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllocationTypes", ID: &i_WaterAllocationTypeList, Members: &m_WaterAllocationTypeList, Type: smithy.ShapeTypeList, Ext: &eGetEstimatedWaterAllocationRequest_AllocationTypes})
+var sGetEstimatedWaterAllocationRequest_Granularity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Granularity", ID: &iTimeGranularity, Members: &mTimeGranularity, Type: smithy.ShapeTypeEnum, Ext: &eGetEstimatedWaterAllocationRequest_Granularity})
+var sGetEstimatedWaterAllocationRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetEstimatedWaterAllocationRequest_MaxResults})
+var sGetEstimatedWaterAllocationRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetEstimatedWaterAllocationRequest_NextToken})
+var sGetEstimatedWaterAllocationResponse_Results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Results", ID: &i_EstimatedWaterAllocationList, Members: &m_EstimatedWaterAllocationList, Type: smithy.ShapeTypeList, Ext: &eGetEstimatedWaterAllocationResponse_Results})
+var sGetEstimatedWaterAllocationResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetEstimatedWaterAllocationResponse_NextToken})
 
 var GetEstimatedCarbonEmissions = &sGetEstimatedCarbonEmissions
 

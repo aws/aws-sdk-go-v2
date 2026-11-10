@@ -7,9 +7,173 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [165]smithy.SchemaExtensions
+var (
+	eDescribeStream                             smithy.SchemaExtensions
+	eGetRecords                                 smithy.SchemaExtensions
+	eGetShardIterator                           smithy.SchemaExtensions
+	eListStreams                                smithy.SchemaExtensions
+	e_DynamoDBStreams_20120810                  smithy.SchemaExtensions
+	e_AttributeMap                              smithy.SchemaExtensions
+	e_AttributeMap_key                          smithy.SchemaExtensions
+	e_AttributeMap_value                        smithy.SchemaExtensions
+	e_AttributeName                             smithy.SchemaExtensions
+	eAttributeValue                             smithy.SchemaExtensions
+	eAttributeValue_S                           smithy.SchemaExtensions
+	eAttributeValue_N                           smithy.SchemaExtensions
+	eAttributeValue_B                           smithy.SchemaExtensions
+	eAttributeValue_SS                          smithy.SchemaExtensions
+	eAttributeValue_NS                          smithy.SchemaExtensions
+	eAttributeValue_BS                          smithy.SchemaExtensions
+	eAttributeValue_M                           smithy.SchemaExtensions
+	eAttributeValue_L                           smithy.SchemaExtensions
+	eAttributeValue_NULL                        smithy.SchemaExtensions
+	eAttributeValue_BOOL                        smithy.SchemaExtensions
+	e_BinaryAttributeValue                      smithy.SchemaExtensions
+	e_BinarySetAttributeValue                   smithy.SchemaExtensions
+	e_BinarySetAttributeValue_member            smithy.SchemaExtensions
+	e_BooleanAttributeValue                     smithy.SchemaExtensions
+	e_Date                                      smithy.SchemaExtensions
+	e_ErrorMessage                              smithy.SchemaExtensions
+	eExpiredIteratorException                   smithy.SchemaExtensions
+	eExpiredIteratorException_message           smithy.SchemaExtensions
+	eIdentity                                   smithy.SchemaExtensions
+	eIdentity_PrincipalId                       smithy.SchemaExtensions
+	eIdentity_Type                              smithy.SchemaExtensions
+	eInternalServerError                        smithy.SchemaExtensions
+	eInternalServerError_message                smithy.SchemaExtensions
+	e_KeySchema                                 smithy.SchemaExtensions
+	e_KeySchema_member                          smithy.SchemaExtensions
+	e_KeySchemaAttributeName                    smithy.SchemaExtensions
+	eKeySchemaElement                           smithy.SchemaExtensions
+	eKeySchemaElement_AttributeName             smithy.SchemaExtensions
+	eKeySchemaElement_KeyType                   smithy.SchemaExtensions
+	eKeyType                                    smithy.SchemaExtensions
+	eKeyType_HASH                               smithy.SchemaExtensions
+	eKeyType_RANGE                              smithy.SchemaExtensions
+	eLimitExceededException                     smithy.SchemaExtensions
+	eLimitExceededException_message             smithy.SchemaExtensions
+	e_ListAttributeValue                        smithy.SchemaExtensions
+	e_ListAttributeValue_member                 smithy.SchemaExtensions
+	e_MapAttributeValue                         smithy.SchemaExtensions
+	e_MapAttributeValue_key                     smithy.SchemaExtensions
+	e_MapAttributeValue_value                   smithy.SchemaExtensions
+	e_NullAttributeValue                        smithy.SchemaExtensions
+	e_NumberAttributeValue                      smithy.SchemaExtensions
+	e_NumberSetAttributeValue                   smithy.SchemaExtensions
+	e_NumberSetAttributeValue_member            smithy.SchemaExtensions
+	eOperationType                              smithy.SchemaExtensions
+	eOperationType_INSERT                       smithy.SchemaExtensions
+	eOperationType_MODIFY                       smithy.SchemaExtensions
+	eOperationType_REMOVE                       smithy.SchemaExtensions
+	e_PositiveIntegerObject                     smithy.SchemaExtensions
+	e_PositiveLongObject                        smithy.SchemaExtensions
+	eRecord                                     smithy.SchemaExtensions
+	eRecord_eventID                             smithy.SchemaExtensions
+	eRecord_eventName                           smithy.SchemaExtensions
+	eRecord_eventVersion                        smithy.SchemaExtensions
+	eRecord_eventSource                         smithy.SchemaExtensions
+	eRecord_awsRegion                           smithy.SchemaExtensions
+	eRecord_dynamodb                            smithy.SchemaExtensions
+	eRecord_userIdentity                        smithy.SchemaExtensions
+	e_RecordList                                smithy.SchemaExtensions
+	e_RecordList_member                         smithy.SchemaExtensions
+	eResourceNotFoundException                  smithy.SchemaExtensions
+	eResourceNotFoundException_message          smithy.SchemaExtensions
+	e_SequenceNumber                            smithy.SchemaExtensions
+	eSequenceNumberRange                        smithy.SchemaExtensions
+	eSequenceNumberRange_StartingSequenceNumber smithy.SchemaExtensions
+	eSequenceNumberRange_EndingSequenceNumber   smithy.SchemaExtensions
+	eShard                                      smithy.SchemaExtensions
+	eShard_ShardId                              smithy.SchemaExtensions
+	eShard_SequenceNumberRange                  smithy.SchemaExtensions
+	eShard_ParentShardId                        smithy.SchemaExtensions
+	e_ShardDescriptionList                      smithy.SchemaExtensions
+	e_ShardDescriptionList_member               smithy.SchemaExtensions
+	eShardFilter                                smithy.SchemaExtensions
+	eShardFilter_Type                           smithy.SchemaExtensions
+	eShardFilter_ShardId                        smithy.SchemaExtensions
+	eShardFilterType                            smithy.SchemaExtensions
+	eShardFilterType_CHILD_SHARDS               smithy.SchemaExtensions
+	e_ShardId                                   smithy.SchemaExtensions
+	e_ShardIterator                             smithy.SchemaExtensions
+	eShardIteratorType                          smithy.SchemaExtensions
+	eShardIteratorType_TRIM_HORIZON             smithy.SchemaExtensions
+	eShardIteratorType_LATEST                   smithy.SchemaExtensions
+	eShardIteratorType_AT_SEQUENCE_NUMBER       smithy.SchemaExtensions
+	eShardIteratorType_AFTER_SEQUENCE_NUMBER    smithy.SchemaExtensions
+	eShardIteratorType_AT_TIMESTAMP             smithy.SchemaExtensions
+	eStream                                     smithy.SchemaExtensions
+	eStream_StreamArn                           smithy.SchemaExtensions
+	eStream_TableName                           smithy.SchemaExtensions
+	eStream_StreamLabel                         smithy.SchemaExtensions
+	e_StreamArn                                 smithy.SchemaExtensions
+	eStreamDescription                          smithy.SchemaExtensions
+	eStreamDescription_StreamArn                smithy.SchemaExtensions
+	eStreamDescription_StreamLabel              smithy.SchemaExtensions
+	eStreamDescription_StreamStatus             smithy.SchemaExtensions
+	eStreamDescription_StreamViewType           smithy.SchemaExtensions
+	eStreamDescription_CreationRequestDateTime  smithy.SchemaExtensions
+	eStreamDescription_TableName                smithy.SchemaExtensions
+	eStreamDescription_KeySchema                smithy.SchemaExtensions
+	eStreamDescription_Shards                   smithy.SchemaExtensions
+	eStreamDescription_LastEvaluatedShardId     smithy.SchemaExtensions
+	e_StreamList                                smithy.SchemaExtensions
+	e_StreamList_member                         smithy.SchemaExtensions
+	eStreamRecord                               smithy.SchemaExtensions
+	eStreamRecord_ApproximateCreationDateTime   smithy.SchemaExtensions
+	eStreamRecord_Keys                          smithy.SchemaExtensions
+	eStreamRecord_NewImage                      smithy.SchemaExtensions
+	eStreamRecord_OldImage                      smithy.SchemaExtensions
+	eStreamRecord_SequenceNumber                smithy.SchemaExtensions
+	eStreamRecord_SizeBytes                     smithy.SchemaExtensions
+	eStreamRecord_StreamViewType                smithy.SchemaExtensions
+	eStreamStatus                               smithy.SchemaExtensions
+	eStreamStatus_ENABLING                      smithy.SchemaExtensions
+	eStreamStatus_ENABLED                       smithy.SchemaExtensions
+	eStreamStatus_DISABLING                     smithy.SchemaExtensions
+	eStreamStatus_DISABLED                      smithy.SchemaExtensions
+	eStreamViewType                             smithy.SchemaExtensions
+	eStreamViewType_NEW_IMAGE                   smithy.SchemaExtensions
+	eStreamViewType_OLD_IMAGE                   smithy.SchemaExtensions
+	eStreamViewType_NEW_AND_OLD_IMAGES          smithy.SchemaExtensions
+	eStreamViewType_KEYS_ONLY                   smithy.SchemaExtensions
+	e_String                                    smithy.SchemaExtensions
+	e_StringAttributeValue                      smithy.SchemaExtensions
+	e_StringSetAttributeValue                   smithy.SchemaExtensions
+	e_StringSetAttributeValue_member            smithy.SchemaExtensions
+	e_TableName                                 smithy.SchemaExtensions
+	e_Timestamp                                 smithy.SchemaExtensions
+	eTrimmedDataAccessException                 smithy.SchemaExtensions
+	eTrimmedDataAccessException_message         smithy.SchemaExtensions
+	eDescribeStreamInput                        smithy.SchemaExtensions
+	eDescribeStreamInput_StreamArn              smithy.SchemaExtensions
+	eDescribeStreamInput_Limit                  smithy.SchemaExtensions
+	eDescribeStreamInput_ExclusiveStartShardId  smithy.SchemaExtensions
+	eDescribeStreamInput_ShardFilter            smithy.SchemaExtensions
+	eDescribeStreamOutput                       smithy.SchemaExtensions
+	eDescribeStreamOutput_StreamDescription     smithy.SchemaExtensions
+	eGetRecordsInput                            smithy.SchemaExtensions
+	eGetRecordsInput_ShardIterator              smithy.SchemaExtensions
+	eGetRecordsInput_Limit                      smithy.SchemaExtensions
+	eGetRecordsOutput                           smithy.SchemaExtensions
+	eGetRecordsOutput_Records                   smithy.SchemaExtensions
+	eGetRecordsOutput_NextShardIterator         smithy.SchemaExtensions
+	eGetShardIteratorInput                      smithy.SchemaExtensions
+	eGetShardIteratorInput_StreamArn            smithy.SchemaExtensions
+	eGetShardIteratorInput_ShardId              smithy.SchemaExtensions
+	eGetShardIteratorInput_ShardIteratorType    smithy.SchemaExtensions
+	eGetShardIteratorInput_SequenceNumber       smithy.SchemaExtensions
+	eGetShardIteratorInput_Timestamp            smithy.SchemaExtensions
+	eGetShardIteratorOutput                     smithy.SchemaExtensions
+	eGetShardIteratorOutput_ShardIterator       smithy.SchemaExtensions
+	eListStreamsInput                           smithy.SchemaExtensions
+	eListStreamsInput_TableName                 smithy.SchemaExtensions
+	eListStreamsInput_Limit                     smithy.SchemaExtensions
+	eListStreamsInput_ExclusiveStartStreamArn   smithy.SchemaExtensions
+	eListStreamsOutput                          smithy.SchemaExtensions
+	eListStreamsOutput_Streams                  smithy.SchemaExtensions
+	eListStreamsOutput_LastEvaluatedStreamArn   smithy.SchemaExtensions
+)
 
 var (
 	iDescribeStream             = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "DescribeStream"}
@@ -127,178 +291,178 @@ var mGetShardIteratorOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetS
 var mListStreamsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListStreamsInput_TableName, &sListStreamsInput_Limit, &sListStreamsInput_ExclusiveStartStreamArn}}
 var mListStreamsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListStreamsOutput_Streams, &sListStreamsOutput_LastEvaluatedStreamArn}}
 
-var sDescribeStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStream, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sGetRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecords, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sGetShardIterator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetShardIterator, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sListStreams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreams, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var s_DynamoDBStreams_20120810 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DynamoDBStreams_20120810, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &ext[4]})
-var s_AttributeMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeMap, Members: &m_AttributeMap, Type: smithy.ShapeTypeMap, Ext: &ext[5]})
-var s_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &ext[8]})
-var sAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttributeValue, Members: &mAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &ext[9]})
-var s_BinaryAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BinaryAttributeValue, Type: smithy.ShapeTypeBlob, Ext: &ext[20]})
-var s_BinarySetAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BinarySetAttributeValue, Members: &m_BinarySetAttributeValue, Type: smithy.ShapeTypeList, Ext: &ext[21]})
-var s_BooleanAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanAttributeValue, Type: smithy.ShapeTypeBoolean, Ext: &ext[23]})
-var s_Date = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &ext[24]})
-var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[25]})
-var sExpiredIteratorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpiredIteratorException, Members: &mExpiredIteratorException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[26]})
-var sIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
-var sInternalServerError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerError, Members: &mInternalServerError, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[31]})
-var s_KeySchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeySchema, Members: &m_KeySchema, Type: smithy.ShapeTypeList, Ext: &ext[33]})
-var s_KeySchemaAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeySchemaAttributeName, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var sKeySchemaElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeySchemaElement, Members: &mKeySchemaElement, Type: smithy.ShapeTypeStructure, Ext: &ext[36]})
-var sKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyType, Members: &mKeyType, Type: smithy.ShapeTypeEnum, Ext: &ext[39]})
-var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[42]})
-var s_ListAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListAttributeValue, Members: &m_ListAttributeValue, Type: smithy.ShapeTypeList, Ext: &ext[44]})
-var s_MapAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MapAttributeValue, Members: &m_MapAttributeValue, Type: smithy.ShapeTypeMap, Ext: &ext[46]})
-var s_NullAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NullAttributeValue, Type: smithy.ShapeTypeBoolean, Ext: &ext[49]})
-var s_NumberAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberAttributeValue, Type: smithy.ShapeTypeString, Ext: &ext[50]})
-var s_NumberSetAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberSetAttributeValue, Members: &m_NumberSetAttributeValue, Type: smithy.ShapeTypeList, Ext: &ext[51]})
-var sOperationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationType, Members: &mOperationType, Type: smithy.ShapeTypeEnum, Ext: &ext[53]})
-var s_PositiveIntegerObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PositiveIntegerObject, Type: smithy.ShapeTypeInteger, Ext: &ext[57]})
-var s_PositiveLongObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PositiveLongObject, Type: smithy.ShapeTypeLong, Ext: &ext[58]})
-var sRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecord, Members: &mRecord, Type: smithy.ShapeTypeStructure, Ext: &ext[59]})
-var s_RecordList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordList, Members: &m_RecordList, Type: smithy.ShapeTypeList, Ext: &ext[67]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[69]})
-var s_SequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SequenceNumber, Type: smithy.ShapeTypeString, Ext: &ext[71]})
-var sSequenceNumberRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSequenceNumberRange, Members: &mSequenceNumberRange, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sShard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShard, Members: &mShard, Type: smithy.ShapeTypeStructure, Ext: &ext[75]})
-var s_ShardDescriptionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShardDescriptionList, Members: &m_ShardDescriptionList, Type: smithy.ShapeTypeList, Ext: &ext[79]})
-var sShardFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShardFilter, Members: &mShardFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[81]})
-var sShardFilterType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShardFilterType, Members: &mShardFilterType, Type: smithy.ShapeTypeEnum, Ext: &ext[84]})
-var s_ShardId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShardId, Type: smithy.ShapeTypeString, Ext: &ext[86]})
-var s_ShardIterator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShardIterator, Type: smithy.ShapeTypeString, Ext: &ext[87]})
-var sShardIteratorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShardIteratorType, Members: &mShardIteratorType, Type: smithy.ShapeTypeEnum, Ext: &ext[88]})
-var sStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStream, Members: &mStream, Type: smithy.ShapeTypeStructure, Ext: &ext[94]})
-var s_StreamArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamArn, Type: smithy.ShapeTypeString, Ext: &ext[98]})
-var sStreamDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamDescription, Members: &mStreamDescription, Type: smithy.ShapeTypeStructure, Ext: &ext[99]})
-var s_StreamList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamList, Members: &m_StreamList, Type: smithy.ShapeTypeList, Ext: &ext[109]})
-var sStreamRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamRecord, Members: &mStreamRecord, Type: smithy.ShapeTypeStructure, Ext: &ext[111]})
-var sStreamStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamStatus, Members: &mStreamStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[119]})
-var sStreamViewType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamViewType, Members: &mStreamViewType, Type: smithy.ShapeTypeEnum, Ext: &ext[124]})
-var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[129]})
-var s_StringAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringAttributeValue, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var s_StringSetAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringSetAttributeValue, Members: &m_StringSetAttributeValue, Type: smithy.ShapeTypeList, Ext: &ext[131]})
-var s_TableName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableName, Type: smithy.ShapeTypeString, Ext: &ext[133]})
-var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[134]})
-var sTrimmedDataAccessException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrimmedDataAccessException, Members: &mTrimmedDataAccessException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[135]})
-var sDescribeStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStreamInput, Members: &mDescribeStreamInput, Type: smithy.ShapeTypeStructure, Ext: &ext[137]})
-var sDescribeStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStreamOutput, Members: &mDescribeStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[142]})
-var sGetRecordsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecordsInput, Members: &mGetRecordsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[144]})
-var sGetRecordsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecordsOutput, Members: &mGetRecordsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[147]})
-var sGetShardIteratorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetShardIteratorInput, Members: &mGetShardIteratorInput, Type: smithy.ShapeTypeStructure, Ext: &ext[150]})
-var sGetShardIteratorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetShardIteratorOutput, Members: &mGetShardIteratorOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[156]})
-var sListStreamsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamsInput, Members: &mListStreamsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[158]})
-var sListStreamsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamsOutput, Members: &mListStreamsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[162]})
+var sDescribeStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStream, Type: smithy.ShapeTypeOperation, Ext: &eDescribeStream})
+var sGetRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecords, Type: smithy.ShapeTypeOperation, Ext: &eGetRecords})
+var sGetShardIterator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetShardIterator, Type: smithy.ShapeTypeOperation, Ext: &eGetShardIterator})
+var sListStreams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreams, Type: smithy.ShapeTypeOperation, Ext: &eListStreams})
+var s_DynamoDBStreams_20120810 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DynamoDBStreams_20120810, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &e_DynamoDBStreams_20120810})
+var s_AttributeMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeMap, Members: &m_AttributeMap, Type: smithy.ShapeTypeMap, Ext: &e_AttributeMap})
+var s_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &e_AttributeName})
+var sAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttributeValue, Members: &mAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &eAttributeValue})
+var s_BinaryAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BinaryAttributeValue, Type: smithy.ShapeTypeBlob, Ext: &e_BinaryAttributeValue})
+var s_BinarySetAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BinarySetAttributeValue, Members: &m_BinarySetAttributeValue, Type: smithy.ShapeTypeList, Ext: &e_BinarySetAttributeValue})
+var s_BooleanAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanAttributeValue, Type: smithy.ShapeTypeBoolean, Ext: &e_BooleanAttributeValue})
+var s_Date = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &e_Date})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var sExpiredIteratorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpiredIteratorException, Members: &mExpiredIteratorException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eExpiredIteratorException})
+var sIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure, Ext: &eIdentity})
+var sInternalServerError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerError, Members: &mInternalServerError, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerError})
+var s_KeySchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeySchema, Members: &m_KeySchema, Type: smithy.ShapeTypeList, Ext: &e_KeySchema})
+var s_KeySchemaAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeySchemaAttributeName, Type: smithy.ShapeTypeString, Ext: &e_KeySchemaAttributeName})
+var sKeySchemaElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeySchemaElement, Members: &mKeySchemaElement, Type: smithy.ShapeTypeStructure, Ext: &eKeySchemaElement})
+var sKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyType, Members: &mKeyType, Type: smithy.ShapeTypeEnum, Ext: &eKeyType})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var s_ListAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListAttributeValue, Members: &m_ListAttributeValue, Type: smithy.ShapeTypeList, Ext: &e_ListAttributeValue})
+var s_MapAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MapAttributeValue, Members: &m_MapAttributeValue, Type: smithy.ShapeTypeMap, Ext: &e_MapAttributeValue})
+var s_NullAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NullAttributeValue, Type: smithy.ShapeTypeBoolean, Ext: &e_NullAttributeValue})
+var s_NumberAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberAttributeValue, Type: smithy.ShapeTypeString, Ext: &e_NumberAttributeValue})
+var s_NumberSetAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberSetAttributeValue, Members: &m_NumberSetAttributeValue, Type: smithy.ShapeTypeList, Ext: &e_NumberSetAttributeValue})
+var sOperationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationType, Members: &mOperationType, Type: smithy.ShapeTypeEnum, Ext: &eOperationType})
+var s_PositiveIntegerObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PositiveIntegerObject, Type: smithy.ShapeTypeInteger, Ext: &e_PositiveIntegerObject})
+var s_PositiveLongObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PositiveLongObject, Type: smithy.ShapeTypeLong, Ext: &e_PositiveLongObject})
+var sRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecord, Members: &mRecord, Type: smithy.ShapeTypeStructure, Ext: &eRecord})
+var s_RecordList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordList, Members: &m_RecordList, Type: smithy.ShapeTypeList, Ext: &e_RecordList})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var s_SequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SequenceNumber, Type: smithy.ShapeTypeString, Ext: &e_SequenceNumber})
+var sSequenceNumberRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSequenceNumberRange, Members: &mSequenceNumberRange, Type: smithy.ShapeTypeStructure, Ext: &eSequenceNumberRange})
+var sShard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShard, Members: &mShard, Type: smithy.ShapeTypeStructure, Ext: &eShard})
+var s_ShardDescriptionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShardDescriptionList, Members: &m_ShardDescriptionList, Type: smithy.ShapeTypeList, Ext: &e_ShardDescriptionList})
+var sShardFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShardFilter, Members: &mShardFilter, Type: smithy.ShapeTypeStructure, Ext: &eShardFilter})
+var sShardFilterType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShardFilterType, Members: &mShardFilterType, Type: smithy.ShapeTypeEnum, Ext: &eShardFilterType})
+var s_ShardId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShardId, Type: smithy.ShapeTypeString, Ext: &e_ShardId})
+var s_ShardIterator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShardIterator, Type: smithy.ShapeTypeString, Ext: &e_ShardIterator})
+var sShardIteratorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShardIteratorType, Members: &mShardIteratorType, Type: smithy.ShapeTypeEnum, Ext: &eShardIteratorType})
+var sStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStream, Members: &mStream, Type: smithy.ShapeTypeStructure, Ext: &eStream})
+var s_StreamArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamArn, Type: smithy.ShapeTypeString, Ext: &e_StreamArn})
+var sStreamDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamDescription, Members: &mStreamDescription, Type: smithy.ShapeTypeStructure, Ext: &eStreamDescription})
+var s_StreamList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamList, Members: &m_StreamList, Type: smithy.ShapeTypeList, Ext: &e_StreamList})
+var sStreamRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamRecord, Members: &mStreamRecord, Type: smithy.ShapeTypeStructure, Ext: &eStreamRecord})
+var sStreamStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamStatus, Members: &mStreamStatus, Type: smithy.ShapeTypeEnum, Ext: &eStreamStatus})
+var sStreamViewType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamViewType, Members: &mStreamViewType, Type: smithy.ShapeTypeEnum, Ext: &eStreamViewType})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_StringAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringAttributeValue, Type: smithy.ShapeTypeString, Ext: &e_StringAttributeValue})
+var s_StringSetAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringSetAttributeValue, Members: &m_StringSetAttributeValue, Type: smithy.ShapeTypeList, Ext: &e_StringSetAttributeValue})
+var s_TableName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableName, Type: smithy.ShapeTypeString, Ext: &e_TableName})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var sTrimmedDataAccessException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrimmedDataAccessException, Members: &mTrimmedDataAccessException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eTrimmedDataAccessException})
+var sDescribeStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStreamInput, Members: &mDescribeStreamInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeStreamInput})
+var sDescribeStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStreamOutput, Members: &mDescribeStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeStreamOutput})
+var sGetRecordsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecordsInput, Members: &mGetRecordsInput, Type: smithy.ShapeTypeStructure, Ext: &eGetRecordsInput})
+var sGetRecordsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecordsOutput, Members: &mGetRecordsOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetRecordsOutput})
+var sGetShardIteratorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetShardIteratorInput, Members: &mGetShardIteratorInput, Type: smithy.ShapeTypeStructure, Ext: &eGetShardIteratorInput})
+var sGetShardIteratorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetShardIteratorOutput, Members: &mGetShardIteratorOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetShardIteratorOutput})
+var sListStreamsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamsInput, Members: &mListStreamsInput, Type: smithy.ShapeTypeStructure, Ext: &eListStreamsInput})
+var sListStreamsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamsOutput, Members: &mListStreamsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListStreamsOutput})
 
-var s_AttributeMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &ext[6]})
-var s_AttributeMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iAttributeValue, Members: &mAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &ext[7]})
-var sAttributeValue_S = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S", ID: &i_StringAttributeValue, Type: smithy.ShapeTypeString, Ext: &ext[10]})
-var sAttributeValue_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "N", ID: &i_NumberAttributeValue, Type: smithy.ShapeTypeString, Ext: &ext[11]})
-var sAttributeValue_B = smithy.NewStaticSchema(smithy.StaticSchema{Member: "B", ID: &i_BinaryAttributeValue, Type: smithy.ShapeTypeBlob, Ext: &ext[12]})
-var sAttributeValue_SS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SS", ID: &i_StringSetAttributeValue, Members: &m_StringSetAttributeValue, Type: smithy.ShapeTypeList, Ext: &ext[13]})
-var sAttributeValue_NS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NS", ID: &i_NumberSetAttributeValue, Members: &m_NumberSetAttributeValue, Type: smithy.ShapeTypeList, Ext: &ext[14]})
-var sAttributeValue_BS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BS", ID: &i_BinarySetAttributeValue, Members: &m_BinarySetAttributeValue, Type: smithy.ShapeTypeList, Ext: &ext[15]})
-var sAttributeValue_M = smithy.NewStaticSchema(smithy.StaticSchema{Member: "M", ID: &i_MapAttributeValue, Members: &m_MapAttributeValue, Type: smithy.ShapeTypeMap, Ext: &ext[16]})
-var sAttributeValue_L = smithy.NewStaticSchema(smithy.StaticSchema{Member: "L", ID: &i_ListAttributeValue, Members: &m_ListAttributeValue, Type: smithy.ShapeTypeList, Ext: &ext[17]})
-var sAttributeValue_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NULL", ID: &i_NullAttributeValue, Type: smithy.ShapeTypeBoolean, Ext: &ext[18]})
-var sAttributeValue_BOOL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOOL", ID: &i_BooleanAttributeValue, Type: smithy.ShapeTypeBoolean, Ext: &ext[19]})
-var s_BinarySetAttributeValue_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BinaryAttributeValue, Type: smithy.ShapeTypeBlob, Ext: &ext[22]})
-var sExpiredIteratorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[27]})
-var sIdentity_PrincipalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrincipalId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[29]})
-var sIdentity_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[30]})
-var sInternalServerError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var s_KeySchema_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iKeySchemaElement, Members: &mKeySchemaElement, Type: smithy.ShapeTypeStructure, Ext: &ext[34]})
-var sKeySchemaElement_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeName", ID: &i_KeySchemaAttributeName, Type: smithy.ShapeTypeString, Ext: &ext[37]})
-var sKeySchemaElement_KeyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyType", ID: &iKeyType, Members: &mKeyType, Type: smithy.ShapeTypeEnum, Ext: &ext[38]})
-var sKeyType_HASH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HASH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[40]})
-var sKeyType_RANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[41]})
-var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[43]})
-var s_ListAttributeValue_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &ext[45]})
-var s_MapAttributeValue_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &ext[47]})
-var s_MapAttributeValue_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &ext[48]})
-var s_NumberSetAttributeValue_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NumberAttributeValue, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var sOperationType_INSERT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSERT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[54]})
-var sOperationType_MODIFY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODIFY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[55]})
-var sOperationType_REMOVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REMOVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[56]})
-var sRecord_eventID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventID", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[60]})
-var sRecord_eventName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventName", ID: &iOperationType, Members: &mOperationType, Type: smithy.ShapeTypeEnum, Ext: &ext[61]})
-var sRecord_eventVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[62]})
-var sRecord_eventSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventSource", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[63]})
-var sRecord_awsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsRegion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[64]})
-var sRecord_dynamodb = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dynamodb", ID: &iStreamRecord, Members: &mStreamRecord, Type: smithy.ShapeTypeStructure, Ext: &ext[65]})
-var sRecord_userIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userIdentity", ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure, Ext: &ext[66]})
-var s_RecordList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecord, Members: &mRecord, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[70]})
-var sSequenceNumberRange_StartingSequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartingSequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString, Ext: &ext[73]})
-var sSequenceNumberRange_EndingSequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndingSequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString, Ext: &ext[74]})
-var sShard_ShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString, Ext: &ext[76]})
-var sShard_SequenceNumberRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SequenceNumberRange", ID: &iSequenceNumberRange, Members: &mSequenceNumberRange, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
-var sShard_ParentShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString, Ext: &ext[78]})
-var s_ShardDescriptionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iShard, Members: &mShard, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var sShardFilter_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iShardFilterType, Members: &mShardFilterType, Type: smithy.ShapeTypeEnum, Ext: &ext[82]})
-var sShardFilter_ShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var sShardFilterType_CHILD_SHARDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHILD_SHARDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[85]})
-var sShardIteratorType_TRIM_HORIZON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRIM_HORIZON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[89]})
-var sShardIteratorType_LATEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LATEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[90]})
-var sShardIteratorType_AT_SEQUENCE_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AT_SEQUENCE_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[91]})
-var sShardIteratorType_AFTER_SEQUENCE_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AFTER_SEQUENCE_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[92]})
-var sShardIteratorType_AT_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AT_TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[93]})
-var sStream_StreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamArn", ID: &i_StreamArn, Type: smithy.ShapeTypeString, Ext: &ext[95]})
-var sStream_TableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableName", ID: &i_TableName, Type: smithy.ShapeTypeString, Ext: &ext[96]})
-var sStream_StreamLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamLabel", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[97]})
-var sStreamDescription_StreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamArn", ID: &i_StreamArn, Type: smithy.ShapeTypeString, Ext: &ext[100]})
-var sStreamDescription_StreamLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamLabel", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[101]})
-var sStreamDescription_StreamStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamStatus", ID: &iStreamStatus, Members: &mStreamStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[102]})
-var sStreamDescription_StreamViewType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamViewType", ID: &iStreamViewType, Members: &mStreamViewType, Type: smithy.ShapeTypeEnum, Ext: &ext[103]})
-var sStreamDescription_CreationRequestDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationRequestDateTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &ext[104]})
-var sStreamDescription_TableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableName", ID: &i_TableName, Type: smithy.ShapeTypeString, Ext: &ext[105]})
-var sStreamDescription_KeySchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeySchema", ID: &i_KeySchema, Members: &m_KeySchema, Type: smithy.ShapeTypeList, Ext: &ext[106]})
-var sStreamDescription_Shards = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Shards", ID: &i_ShardDescriptionList, Members: &m_ShardDescriptionList, Type: smithy.ShapeTypeList, Ext: &ext[107]})
-var sStreamDescription_LastEvaluatedShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastEvaluatedShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString, Ext: &ext[108]})
-var s_StreamList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStream, Members: &mStream, Type: smithy.ShapeTypeStructure, Ext: &ext[110]})
-var sStreamRecord_ApproximateCreationDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApproximateCreationDateTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &ext[112]})
-var sStreamRecord_Keys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Keys", ID: &i_AttributeMap, Members: &m_AttributeMap, Type: smithy.ShapeTypeMap, Ext: &ext[113]})
-var sStreamRecord_NewImage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewImage", ID: &i_AttributeMap, Members: &m_AttributeMap, Type: smithy.ShapeTypeMap, Ext: &ext[114]})
-var sStreamRecord_OldImage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OldImage", ID: &i_AttributeMap, Members: &m_AttributeMap, Type: smithy.ShapeTypeMap, Ext: &ext[115]})
-var sStreamRecord_SequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString, Ext: &ext[116]})
-var sStreamRecord_SizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeBytes", ID: &i_PositiveLongObject, Type: smithy.ShapeTypeLong, Ext: &ext[117]})
-var sStreamRecord_StreamViewType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamViewType", ID: &iStreamViewType, Members: &mStreamViewType, Type: smithy.ShapeTypeEnum, Ext: &ext[118]})
-var sStreamStatus_ENABLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var sStreamStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[121]})
-var sStreamStatus_DISABLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[122]})
-var sStreamStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[123]})
-var sStreamViewType_NEW_IMAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEW_IMAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[125]})
-var sStreamViewType_OLD_IMAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OLD_IMAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var sStreamViewType_NEW_AND_OLD_IMAGES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEW_AND_OLD_IMAGES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[127]})
-var sStreamViewType_KEYS_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEYS_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[128]})
-var s_StringSetAttributeValue_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_StringAttributeValue, Type: smithy.ShapeTypeString, Ext: &ext[132]})
-var sTrimmedDataAccessException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[136]})
-var sDescribeStreamInput_StreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamArn", ID: &i_StreamArn, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var sDescribeStreamInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PositiveIntegerObject, Type: smithy.ShapeTypeInteger, Ext: &ext[139]})
-var sDescribeStreamInput_ExclusiveStartShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExclusiveStartShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString, Ext: &ext[140]})
-var sDescribeStreamInput_ShardFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardFilter", ID: &iShardFilter, Members: &mShardFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[141]})
-var sDescribeStreamOutput_StreamDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamDescription", ID: &iStreamDescription, Members: &mStreamDescription, Type: smithy.ShapeTypeStructure, Ext: &ext[143]})
-var sGetRecordsInput_ShardIterator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardIterator", ID: &i_ShardIterator, Type: smithy.ShapeTypeString, Ext: &ext[145]})
-var sGetRecordsInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PositiveIntegerObject, Type: smithy.ShapeTypeInteger, Ext: &ext[146]})
-var sGetRecordsOutput_Records = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Records", ID: &i_RecordList, Members: &m_RecordList, Type: smithy.ShapeTypeList, Ext: &ext[148]})
-var sGetRecordsOutput_NextShardIterator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextShardIterator", ID: &i_ShardIterator, Type: smithy.ShapeTypeString, Ext: &ext[149]})
-var sGetShardIteratorInput_StreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamArn", ID: &i_StreamArn, Type: smithy.ShapeTypeString, Ext: &ext[151]})
-var sGetShardIteratorInput_ShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString, Ext: &ext[152]})
-var sGetShardIteratorInput_ShardIteratorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardIteratorType", ID: &iShardIteratorType, Members: &mShardIteratorType, Type: smithy.ShapeTypeEnum, Ext: &ext[153]})
-var sGetShardIteratorInput_SequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString, Ext: &ext[154]})
-var sGetShardIteratorInput_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[155]})
-var sGetShardIteratorOutput_ShardIterator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardIterator", ID: &i_ShardIterator, Type: smithy.ShapeTypeString, Ext: &ext[157]})
-var sListStreamsInput_TableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableName", ID: &i_TableName, Type: smithy.ShapeTypeString, Ext: &ext[159]})
-var sListStreamsInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PositiveIntegerObject, Type: smithy.ShapeTypeInteger, Ext: &ext[160]})
-var sListStreamsInput_ExclusiveStartStreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExclusiveStartStreamArn", ID: &i_StreamArn, Type: smithy.ShapeTypeString, Ext: &ext[161]})
-var sListStreamsOutput_Streams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Streams", ID: &i_StreamList, Members: &m_StreamList, Type: smithy.ShapeTypeList, Ext: &ext[163]})
-var sListStreamsOutput_LastEvaluatedStreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastEvaluatedStreamArn", ID: &i_StreamArn, Type: smithy.ShapeTypeString, Ext: &ext[164]})
+var s_AttributeMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &e_AttributeMap_key})
+var s_AttributeMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iAttributeValue, Members: &mAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &e_AttributeMap_value})
+var sAttributeValue_S = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S", ID: &i_StringAttributeValue, Type: smithy.ShapeTypeString, Ext: &eAttributeValue_S})
+var sAttributeValue_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "N", ID: &i_NumberAttributeValue, Type: smithy.ShapeTypeString, Ext: &eAttributeValue_N})
+var sAttributeValue_B = smithy.NewStaticSchema(smithy.StaticSchema{Member: "B", ID: &i_BinaryAttributeValue, Type: smithy.ShapeTypeBlob, Ext: &eAttributeValue_B})
+var sAttributeValue_SS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SS", ID: &i_StringSetAttributeValue, Members: &m_StringSetAttributeValue, Type: smithy.ShapeTypeList, Ext: &eAttributeValue_SS})
+var sAttributeValue_NS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NS", ID: &i_NumberSetAttributeValue, Members: &m_NumberSetAttributeValue, Type: smithy.ShapeTypeList, Ext: &eAttributeValue_NS})
+var sAttributeValue_BS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BS", ID: &i_BinarySetAttributeValue, Members: &m_BinarySetAttributeValue, Type: smithy.ShapeTypeList, Ext: &eAttributeValue_BS})
+var sAttributeValue_M = smithy.NewStaticSchema(smithy.StaticSchema{Member: "M", ID: &i_MapAttributeValue, Members: &m_MapAttributeValue, Type: smithy.ShapeTypeMap, Ext: &eAttributeValue_M})
+var sAttributeValue_L = smithy.NewStaticSchema(smithy.StaticSchema{Member: "L", ID: &i_ListAttributeValue, Members: &m_ListAttributeValue, Type: smithy.ShapeTypeList, Ext: &eAttributeValue_L})
+var sAttributeValue_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NULL", ID: &i_NullAttributeValue, Type: smithy.ShapeTypeBoolean, Ext: &eAttributeValue_NULL})
+var sAttributeValue_BOOL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOOL", ID: &i_BooleanAttributeValue, Type: smithy.ShapeTypeBoolean, Ext: &eAttributeValue_BOOL})
+var s_BinarySetAttributeValue_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BinaryAttributeValue, Type: smithy.ShapeTypeBlob, Ext: &e_BinarySetAttributeValue_member})
+var sExpiredIteratorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eExpiredIteratorException_message})
+var sIdentity_PrincipalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrincipalId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eIdentity_PrincipalId})
+var sIdentity_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eIdentity_Type})
+var sInternalServerError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerError_message})
+var s_KeySchema_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iKeySchemaElement, Members: &mKeySchemaElement, Type: smithy.ShapeTypeStructure, Ext: &e_KeySchema_member})
+var sKeySchemaElement_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeName", ID: &i_KeySchemaAttributeName, Type: smithy.ShapeTypeString, Ext: &eKeySchemaElement_AttributeName})
+var sKeySchemaElement_KeyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyType", ID: &iKeyType, Members: &mKeyType, Type: smithy.ShapeTypeEnum, Ext: &eKeySchemaElement_KeyType})
+var sKeyType_HASH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HASH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyType_HASH})
+var sKeyType_RANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyType_RANGE})
+var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_message})
+var s_ListAttributeValue_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &e_ListAttributeValue_member})
+var s_MapAttributeValue_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &e_MapAttributeValue_key})
+var s_MapAttributeValue_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &e_MapAttributeValue_value})
+var s_NumberSetAttributeValue_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NumberAttributeValue, Type: smithy.ShapeTypeString, Ext: &e_NumberSetAttributeValue_member})
+var sOperationType_INSERT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSERT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_INSERT})
+var sOperationType_MODIFY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODIFY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_MODIFY})
+var sOperationType_REMOVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REMOVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_REMOVE})
+var sRecord_eventID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventID", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRecord_eventID})
+var sRecord_eventName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventName", ID: &iOperationType, Members: &mOperationType, Type: smithy.ShapeTypeEnum, Ext: &eRecord_eventName})
+var sRecord_eventVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventVersion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRecord_eventVersion})
+var sRecord_eventSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventSource", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRecord_eventSource})
+var sRecord_awsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsRegion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRecord_awsRegion})
+var sRecord_dynamodb = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dynamodb", ID: &iStreamRecord, Members: &mStreamRecord, Type: smithy.ShapeTypeStructure, Ext: &eRecord_dynamodb})
+var sRecord_userIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userIdentity", ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure, Ext: &eRecord_userIdentity})
+var s_RecordList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecord, Members: &mRecord, Type: smithy.ShapeTypeStructure, Ext: &e_RecordList_member})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sSequenceNumberRange_StartingSequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartingSequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString, Ext: &eSequenceNumberRange_StartingSequenceNumber})
+var sSequenceNumberRange_EndingSequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndingSequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString, Ext: &eSequenceNumberRange_EndingSequenceNumber})
+var sShard_ShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString, Ext: &eShard_ShardId})
+var sShard_SequenceNumberRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SequenceNumberRange", ID: &iSequenceNumberRange, Members: &mSequenceNumberRange, Type: smithy.ShapeTypeStructure, Ext: &eShard_SequenceNumberRange})
+var sShard_ParentShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString, Ext: &eShard_ParentShardId})
+var s_ShardDescriptionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iShard, Members: &mShard, Type: smithy.ShapeTypeStructure, Ext: &e_ShardDescriptionList_member})
+var sShardFilter_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iShardFilterType, Members: &mShardFilterType, Type: smithy.ShapeTypeEnum, Ext: &eShardFilter_Type})
+var sShardFilter_ShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString, Ext: &eShardFilter_ShardId})
+var sShardFilterType_CHILD_SHARDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHILD_SHARDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShardFilterType_CHILD_SHARDS})
+var sShardIteratorType_TRIM_HORIZON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRIM_HORIZON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShardIteratorType_TRIM_HORIZON})
+var sShardIteratorType_LATEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LATEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShardIteratorType_LATEST})
+var sShardIteratorType_AT_SEQUENCE_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AT_SEQUENCE_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShardIteratorType_AT_SEQUENCE_NUMBER})
+var sShardIteratorType_AFTER_SEQUENCE_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AFTER_SEQUENCE_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShardIteratorType_AFTER_SEQUENCE_NUMBER})
+var sShardIteratorType_AT_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AT_TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShardIteratorType_AT_TIMESTAMP})
+var sStream_StreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamArn", ID: &i_StreamArn, Type: smithy.ShapeTypeString, Ext: &eStream_StreamArn})
+var sStream_TableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableName", ID: &i_TableName, Type: smithy.ShapeTypeString, Ext: &eStream_TableName})
+var sStream_StreamLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamLabel", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStream_StreamLabel})
+var sStreamDescription_StreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamArn", ID: &i_StreamArn, Type: smithy.ShapeTypeString, Ext: &eStreamDescription_StreamArn})
+var sStreamDescription_StreamLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamLabel", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eStreamDescription_StreamLabel})
+var sStreamDescription_StreamStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamStatus", ID: &iStreamStatus, Members: &mStreamStatus, Type: smithy.ShapeTypeEnum, Ext: &eStreamDescription_StreamStatus})
+var sStreamDescription_StreamViewType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamViewType", ID: &iStreamViewType, Members: &mStreamViewType, Type: smithy.ShapeTypeEnum, Ext: &eStreamDescription_StreamViewType})
+var sStreamDescription_CreationRequestDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationRequestDateTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eStreamDescription_CreationRequestDateTime})
+var sStreamDescription_TableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableName", ID: &i_TableName, Type: smithy.ShapeTypeString, Ext: &eStreamDescription_TableName})
+var sStreamDescription_KeySchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeySchema", ID: &i_KeySchema, Members: &m_KeySchema, Type: smithy.ShapeTypeList, Ext: &eStreamDescription_KeySchema})
+var sStreamDescription_Shards = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Shards", ID: &i_ShardDescriptionList, Members: &m_ShardDescriptionList, Type: smithy.ShapeTypeList, Ext: &eStreamDescription_Shards})
+var sStreamDescription_LastEvaluatedShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastEvaluatedShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString, Ext: &eStreamDescription_LastEvaluatedShardId})
+var s_StreamList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStream, Members: &mStream, Type: smithy.ShapeTypeStructure, Ext: &e_StreamList_member})
+var sStreamRecord_ApproximateCreationDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApproximateCreationDateTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp, Ext: &eStreamRecord_ApproximateCreationDateTime})
+var sStreamRecord_Keys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Keys", ID: &i_AttributeMap, Members: &m_AttributeMap, Type: smithy.ShapeTypeMap, Ext: &eStreamRecord_Keys})
+var sStreamRecord_NewImage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewImage", ID: &i_AttributeMap, Members: &m_AttributeMap, Type: smithy.ShapeTypeMap, Ext: &eStreamRecord_NewImage})
+var sStreamRecord_OldImage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OldImage", ID: &i_AttributeMap, Members: &m_AttributeMap, Type: smithy.ShapeTypeMap, Ext: &eStreamRecord_OldImage})
+var sStreamRecord_SequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString, Ext: &eStreamRecord_SequenceNumber})
+var sStreamRecord_SizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeBytes", ID: &i_PositiveLongObject, Type: smithy.ShapeTypeLong, Ext: &eStreamRecord_SizeBytes})
+var sStreamRecord_StreamViewType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamViewType", ID: &iStreamViewType, Members: &mStreamViewType, Type: smithy.ShapeTypeEnum, Ext: &eStreamRecord_StreamViewType})
+var sStreamStatus_ENABLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamStatus_ENABLING})
+var sStreamStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamStatus_ENABLED})
+var sStreamStatus_DISABLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamStatus_DISABLING})
+var sStreamStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamStatus_DISABLED})
+var sStreamViewType_NEW_IMAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEW_IMAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamViewType_NEW_IMAGE})
+var sStreamViewType_OLD_IMAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OLD_IMAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamViewType_OLD_IMAGE})
+var sStreamViewType_NEW_AND_OLD_IMAGES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEW_AND_OLD_IMAGES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamViewType_NEW_AND_OLD_IMAGES})
+var sStreamViewType_KEYS_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEYS_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamViewType_KEYS_ONLY})
+var s_StringSetAttributeValue_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_StringAttributeValue, Type: smithy.ShapeTypeString, Ext: &e_StringSetAttributeValue_member})
+var sTrimmedDataAccessException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eTrimmedDataAccessException_message})
+var sDescribeStreamInput_StreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamArn", ID: &i_StreamArn, Type: smithy.ShapeTypeString, Ext: &eDescribeStreamInput_StreamArn})
+var sDescribeStreamInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PositiveIntegerObject, Type: smithy.ShapeTypeInteger, Ext: &eDescribeStreamInput_Limit})
+var sDescribeStreamInput_ExclusiveStartShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExclusiveStartShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString, Ext: &eDescribeStreamInput_ExclusiveStartShardId})
+var sDescribeStreamInput_ShardFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardFilter", ID: &iShardFilter, Members: &mShardFilter, Type: smithy.ShapeTypeStructure, Ext: &eDescribeStreamInput_ShardFilter})
+var sDescribeStreamOutput_StreamDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamDescription", ID: &iStreamDescription, Members: &mStreamDescription, Type: smithy.ShapeTypeStructure, Ext: &eDescribeStreamOutput_StreamDescription})
+var sGetRecordsInput_ShardIterator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardIterator", ID: &i_ShardIterator, Type: smithy.ShapeTypeString, Ext: &eGetRecordsInput_ShardIterator})
+var sGetRecordsInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PositiveIntegerObject, Type: smithy.ShapeTypeInteger, Ext: &eGetRecordsInput_Limit})
+var sGetRecordsOutput_Records = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Records", ID: &i_RecordList, Members: &m_RecordList, Type: smithy.ShapeTypeList, Ext: &eGetRecordsOutput_Records})
+var sGetRecordsOutput_NextShardIterator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextShardIterator", ID: &i_ShardIterator, Type: smithy.ShapeTypeString, Ext: &eGetRecordsOutput_NextShardIterator})
+var sGetShardIteratorInput_StreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamArn", ID: &i_StreamArn, Type: smithy.ShapeTypeString, Ext: &eGetShardIteratorInput_StreamArn})
+var sGetShardIteratorInput_ShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString, Ext: &eGetShardIteratorInput_ShardId})
+var sGetShardIteratorInput_ShardIteratorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardIteratorType", ID: &iShardIteratorType, Members: &mShardIteratorType, Type: smithy.ShapeTypeEnum, Ext: &eGetShardIteratorInput_ShardIteratorType})
+var sGetShardIteratorInput_SequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString, Ext: &eGetShardIteratorInput_SequenceNumber})
+var sGetShardIteratorInput_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetShardIteratorInput_Timestamp})
+var sGetShardIteratorOutput_ShardIterator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardIterator", ID: &i_ShardIterator, Type: smithy.ShapeTypeString, Ext: &eGetShardIteratorOutput_ShardIterator})
+var sListStreamsInput_TableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableName", ID: &i_TableName, Type: smithy.ShapeTypeString, Ext: &eListStreamsInput_TableName})
+var sListStreamsInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PositiveIntegerObject, Type: smithy.ShapeTypeInteger, Ext: &eListStreamsInput_Limit})
+var sListStreamsInput_ExclusiveStartStreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExclusiveStartStreamArn", ID: &i_StreamArn, Type: smithy.ShapeTypeString, Ext: &eListStreamsInput_ExclusiveStartStreamArn})
+var sListStreamsOutput_Streams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Streams", ID: &i_StreamList, Members: &m_StreamList, Type: smithy.ShapeTypeList, Ext: &eListStreamsOutput_Streams})
+var sListStreamsOutput_LastEvaluatedStreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastEvaluatedStreamArn", ID: &i_StreamArn, Type: smithy.ShapeTypeString, Ext: &eListStreamsOutput_LastEvaluatedStreamArn})
 
 // Members of recursive shapes would make the variables' initializers refer to
 // each other in a cycle, which Go rejects, so they are completed here.
 func init() {
-	s_ListAttributeValue_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttributeValue, Members: &mAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &ext[45]})
-	s_MapAttributeValue_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iAttributeValue, Members: &mAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &ext[48]})
+	s_ListAttributeValue_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttributeValue, Members: &mAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &e_ListAttributeValue_member})
+	s_MapAttributeValue_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iAttributeValue, Members: &mAttributeValue, Type: smithy.ShapeTypeUnion, Ext: &e_MapAttributeValue_value})
 }
 
 var DescribeStream = &sDescribeStream

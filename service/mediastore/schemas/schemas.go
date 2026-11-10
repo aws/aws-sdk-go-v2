@@ -7,9 +7,191 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [183]smithy.SchemaExtensions
+var (
+	eCreateContainer                          smithy.SchemaExtensions
+	eDeleteContainer                          smithy.SchemaExtensions
+	eDeleteContainerPolicy                    smithy.SchemaExtensions
+	eDeleteCorsPolicy                         smithy.SchemaExtensions
+	eDeleteLifecyclePolicy                    smithy.SchemaExtensions
+	eDeleteMetricPolicy                       smithy.SchemaExtensions
+	eDescribeContainer                        smithy.SchemaExtensions
+	eGetContainerPolicy                       smithy.SchemaExtensions
+	eGetCorsPolicy                            smithy.SchemaExtensions
+	eGetLifecyclePolicy                       smithy.SchemaExtensions
+	eGetMetricPolicy                          smithy.SchemaExtensions
+	eListContainers                           smithy.SchemaExtensions
+	eListTagsForResource                      smithy.SchemaExtensions
+	ePutContainerPolicy                       smithy.SchemaExtensions
+	ePutCorsPolicy                            smithy.SchemaExtensions
+	ePutLifecyclePolicy                       smithy.SchemaExtensions
+	ePutMetricPolicy                          smithy.SchemaExtensions
+	eStartAccessLogging                       smithy.SchemaExtensions
+	eStopAccessLogging                        smithy.SchemaExtensions
+	eTagResource                              smithy.SchemaExtensions
+	eUntagResource                            smithy.SchemaExtensions
+	e_MediaStore_20170901                     smithy.SchemaExtensions
+	e_AllowedHeaders                          smithy.SchemaExtensions
+	e_AllowedHeaders_member                   smithy.SchemaExtensions
+	e_AllowedMethods                          smithy.SchemaExtensions
+	e_AllowedMethods_member                   smithy.SchemaExtensions
+	e_AllowedOrigins                          smithy.SchemaExtensions
+	e_AllowedOrigins_member                   smithy.SchemaExtensions
+	eContainer                                smithy.SchemaExtensions
+	eContainer_Endpoint                       smithy.SchemaExtensions
+	eContainer_CreationTime                   smithy.SchemaExtensions
+	eContainer_ARN                            smithy.SchemaExtensions
+	eContainer_Name                           smithy.SchemaExtensions
+	eContainer_Status                         smithy.SchemaExtensions
+	eContainer_AccessLoggingEnabled           smithy.SchemaExtensions
+	e_ContainerAccessLoggingEnabled           smithy.SchemaExtensions
+	e_ContainerARN                            smithy.SchemaExtensions
+	eContainerInUseException                  smithy.SchemaExtensions
+	eContainerInUseException_Message          smithy.SchemaExtensions
+	eContainerLevelMetrics                    smithy.SchemaExtensions
+	eContainerLevelMetrics_ENABLED            smithy.SchemaExtensions
+	eContainerLevelMetrics_DISABLED           smithy.SchemaExtensions
+	e_ContainerList                           smithy.SchemaExtensions
+	e_ContainerList_member                    smithy.SchemaExtensions
+	e_ContainerListLimit                      smithy.SchemaExtensions
+	e_ContainerName                           smithy.SchemaExtensions
+	eContainerNotFoundException               smithy.SchemaExtensions
+	eContainerNotFoundException_Message       smithy.SchemaExtensions
+	e_ContainerPolicy                         smithy.SchemaExtensions
+	eContainerStatus                          smithy.SchemaExtensions
+	eContainerStatus_ACTIVE                   smithy.SchemaExtensions
+	eContainerStatus_CREATING                 smithy.SchemaExtensions
+	eContainerStatus_DELETING                 smithy.SchemaExtensions
+	e_CorsPolicy                              smithy.SchemaExtensions
+	e_CorsPolicy_member                       smithy.SchemaExtensions
+	eCorsPolicyNotFoundException              smithy.SchemaExtensions
+	eCorsPolicyNotFoundException_Message      smithy.SchemaExtensions
+	eCorsRule                                 smithy.SchemaExtensions
+	eCorsRule_AllowedOrigins                  smithy.SchemaExtensions
+	eCorsRule_AllowedMethods                  smithy.SchemaExtensions
+	eCorsRule_AllowedHeaders                  smithy.SchemaExtensions
+	eCorsRule_MaxAgeSeconds                   smithy.SchemaExtensions
+	eCorsRule_ExposeHeaders                   smithy.SchemaExtensions
+	e_Endpoint                                smithy.SchemaExtensions
+	e_ErrorMessage                            smithy.SchemaExtensions
+	e_ExposeHeaders                           smithy.SchemaExtensions
+	e_ExposeHeaders_member                    smithy.SchemaExtensions
+	e_Header                                  smithy.SchemaExtensions
+	eInternalServerError                      smithy.SchemaExtensions
+	eInternalServerError_Message              smithy.SchemaExtensions
+	e_LifecyclePolicy                         smithy.SchemaExtensions
+	eLimitExceededException                   smithy.SchemaExtensions
+	eLimitExceededException_Message           smithy.SchemaExtensions
+	e_MaxAgeSeconds                           smithy.SchemaExtensions
+	eMethodName                               smithy.SchemaExtensions
+	eMethodName_PUT                           smithy.SchemaExtensions
+	eMethodName_GET                           smithy.SchemaExtensions
+	eMethodName_DELETE                        smithy.SchemaExtensions
+	eMethodName_HEAD                          smithy.SchemaExtensions
+	eMetricPolicy                             smithy.SchemaExtensions
+	eMetricPolicy_ContainerLevelMetrics       smithy.SchemaExtensions
+	eMetricPolicy_MetricPolicyRules           smithy.SchemaExtensions
+	eMetricPolicyRule                         smithy.SchemaExtensions
+	eMetricPolicyRule_ObjectGroup             smithy.SchemaExtensions
+	eMetricPolicyRule_ObjectGroupName         smithy.SchemaExtensions
+	e_MetricPolicyRules                       smithy.SchemaExtensions
+	e_MetricPolicyRules_member                smithy.SchemaExtensions
+	e_ObjectGroup                             smithy.SchemaExtensions
+	e_ObjectGroupName                         smithy.SchemaExtensions
+	e_Origin                                  smithy.SchemaExtensions
+	e_PaginationToken                         smithy.SchemaExtensions
+	ePolicyNotFoundException                  smithy.SchemaExtensions
+	ePolicyNotFoundException_Message          smithy.SchemaExtensions
+	eTag                                      smithy.SchemaExtensions
+	eTag_Key                                  smithy.SchemaExtensions
+	eTag_Value                                smithy.SchemaExtensions
+	e_TagKey                                  smithy.SchemaExtensions
+	e_TagKeyList                              smithy.SchemaExtensions
+	e_TagKeyList_member                       smithy.SchemaExtensions
+	e_TagList                                 smithy.SchemaExtensions
+	e_TagList_member                          smithy.SchemaExtensions
+	e_TagValue                                smithy.SchemaExtensions
+	e_TimeStamp                               smithy.SchemaExtensions
+	eCreateContainerInput                     smithy.SchemaExtensions
+	eCreateContainerInput_ContainerName       smithy.SchemaExtensions
+	eCreateContainerInput_Tags                smithy.SchemaExtensions
+	eCreateContainerOutput                    smithy.SchemaExtensions
+	eCreateContainerOutput_Container          smithy.SchemaExtensions
+	eDeleteContainerInput                     smithy.SchemaExtensions
+	eDeleteContainerInput_ContainerName       smithy.SchemaExtensions
+	eDeleteContainerOutput                    smithy.SchemaExtensions
+	eDeleteContainerPolicyInput               smithy.SchemaExtensions
+	eDeleteContainerPolicyInput_ContainerName smithy.SchemaExtensions
+	eDeleteContainerPolicyOutput              smithy.SchemaExtensions
+	eDeleteCorsPolicyInput                    smithy.SchemaExtensions
+	eDeleteCorsPolicyInput_ContainerName      smithy.SchemaExtensions
+	eDeleteCorsPolicyOutput                   smithy.SchemaExtensions
+	eDeleteLifecyclePolicyInput               smithy.SchemaExtensions
+	eDeleteLifecyclePolicyInput_ContainerName smithy.SchemaExtensions
+	eDeleteLifecyclePolicyOutput              smithy.SchemaExtensions
+	eDeleteMetricPolicyInput                  smithy.SchemaExtensions
+	eDeleteMetricPolicyInput_ContainerName    smithy.SchemaExtensions
+	eDeleteMetricPolicyOutput                 smithy.SchemaExtensions
+	eDescribeContainerInput                   smithy.SchemaExtensions
+	eDescribeContainerInput_ContainerName     smithy.SchemaExtensions
+	eDescribeContainerOutput                  smithy.SchemaExtensions
+	eDescribeContainerOutput_Container        smithy.SchemaExtensions
+	eGetContainerPolicyInput                  smithy.SchemaExtensions
+	eGetContainerPolicyInput_ContainerName    smithy.SchemaExtensions
+	eGetContainerPolicyOutput                 smithy.SchemaExtensions
+	eGetContainerPolicyOutput_Policy          smithy.SchemaExtensions
+	eGetCorsPolicyInput                       smithy.SchemaExtensions
+	eGetCorsPolicyInput_ContainerName         smithy.SchemaExtensions
+	eGetCorsPolicyOutput                      smithy.SchemaExtensions
+	eGetCorsPolicyOutput_CorsPolicy           smithy.SchemaExtensions
+	eGetLifecyclePolicyInput                  smithy.SchemaExtensions
+	eGetLifecyclePolicyInput_ContainerName    smithy.SchemaExtensions
+	eGetLifecyclePolicyOutput                 smithy.SchemaExtensions
+	eGetLifecyclePolicyOutput_LifecyclePolicy smithy.SchemaExtensions
+	eGetMetricPolicyInput                     smithy.SchemaExtensions
+	eGetMetricPolicyInput_ContainerName       smithy.SchemaExtensions
+	eGetMetricPolicyOutput                    smithy.SchemaExtensions
+	eGetMetricPolicyOutput_MetricPolicy       smithy.SchemaExtensions
+	eListContainersInput                      smithy.SchemaExtensions
+	eListContainersInput_NextToken            smithy.SchemaExtensions
+	eListContainersInput_MaxResults           smithy.SchemaExtensions
+	eListContainersOutput                     smithy.SchemaExtensions
+	eListContainersOutput_Containers          smithy.SchemaExtensions
+	eListContainersOutput_NextToken           smithy.SchemaExtensions
+	eListTagsForResourceInput                 smithy.SchemaExtensions
+	eListTagsForResourceInput_Resource        smithy.SchemaExtensions
+	eListTagsForResourceOutput                smithy.SchemaExtensions
+	eListTagsForResourceOutput_Tags           smithy.SchemaExtensions
+	ePutContainerPolicyInput                  smithy.SchemaExtensions
+	ePutContainerPolicyInput_ContainerName    smithy.SchemaExtensions
+	ePutContainerPolicyInput_Policy           smithy.SchemaExtensions
+	ePutContainerPolicyOutput                 smithy.SchemaExtensions
+	ePutCorsPolicyInput                       smithy.SchemaExtensions
+	ePutCorsPolicyInput_ContainerName         smithy.SchemaExtensions
+	ePutCorsPolicyInput_CorsPolicy            smithy.SchemaExtensions
+	ePutCorsPolicyOutput                      smithy.SchemaExtensions
+	ePutLifecyclePolicyInput                  smithy.SchemaExtensions
+	ePutLifecyclePolicyInput_ContainerName    smithy.SchemaExtensions
+	ePutLifecyclePolicyInput_LifecyclePolicy  smithy.SchemaExtensions
+	ePutLifecyclePolicyOutput                 smithy.SchemaExtensions
+	ePutMetricPolicyInput                     smithy.SchemaExtensions
+	ePutMetricPolicyInput_ContainerName       smithy.SchemaExtensions
+	ePutMetricPolicyInput_MetricPolicy        smithy.SchemaExtensions
+	ePutMetricPolicyOutput                    smithy.SchemaExtensions
+	eStartAccessLoggingInput                  smithy.SchemaExtensions
+	eStartAccessLoggingInput_ContainerName    smithy.SchemaExtensions
+	eStartAccessLoggingOutput                 smithy.SchemaExtensions
+	eStopAccessLoggingInput                   smithy.SchemaExtensions
+	eStopAccessLoggingInput_ContainerName     smithy.SchemaExtensions
+	eStopAccessLoggingOutput                  smithy.SchemaExtensions
+	eTagResourceInput                         smithy.SchemaExtensions
+	eTagResourceInput_Resource                smithy.SchemaExtensions
+	eTagResourceInput_Tags                    smithy.SchemaExtensions
+	eTagResourceOutput                        smithy.SchemaExtensions
+	eUntagResourceInput                       smithy.SchemaExtensions
+	eUntagResourceInput_Resource              smithy.SchemaExtensions
+	eUntagResourceInput_TagKeys               smithy.SchemaExtensions
+	eUntagResourceOutput                      smithy.SchemaExtensions
+)
 
 var (
 	iCreateContainer                = smithy.ShapeID{Namespace: "com.amazonaws.mediastore", Name: "CreateContainer"}
@@ -176,190 +358,190 @@ var mStopAccessLoggingInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStop
 var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_Resource, &sTagResourceInput_Tags}}
 var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_Resource, &sUntagResourceInput_TagKeys}}
 
-var sCreateContainer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateContainer, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sDeleteContainer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteContainer, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sDeleteContainerPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteContainerPolicy, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sDeleteCorsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCorsPolicy, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sDeleteLifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLifecyclePolicy, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sDeleteMetricPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMetricPolicy, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sDescribeContainer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeContainer, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sGetContainerPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContainerPolicy, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sGetCorsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCorsPolicy, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sGetLifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLifecyclePolicy, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sGetMetricPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricPolicy, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sListContainers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListContainers, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sPutContainerPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutContainerPolicy, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sPutCorsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCorsPolicy, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sPutLifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutLifecyclePolicy, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sPutMetricPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMetricPolicy, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sStartAccessLogging = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAccessLogging, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sStopAccessLogging = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopAccessLogging, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[20]})
-var s_MediaStore_20170901 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MediaStore_20170901, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &ext[21]})
-var s_AllowedHeaders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AllowedHeaders, Members: &m_AllowedHeaders, Type: smithy.ShapeTypeList, Ext: &ext[22]})
-var s_AllowedMethods = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AllowedMethods, Members: &m_AllowedMethods, Type: smithy.ShapeTypeList, Ext: &ext[24]})
-var s_AllowedOrigins = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AllowedOrigins, Members: &m_AllowedOrigins, Type: smithy.ShapeTypeList, Ext: &ext[26]})
-var sContainer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainer, Members: &mContainer, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
-var s_ContainerAccessLoggingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerAccessLoggingEnabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[35]})
-var s_ContainerARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerARN, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var sContainerInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerInUseException, Members: &mContainerInUseException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var sContainerLevelMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerLevelMetrics, Members: &mContainerLevelMetrics, Type: smithy.ShapeTypeEnum, Ext: &ext[39]})
-var s_ContainerList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerList, Members: &m_ContainerList, Type: smithy.ShapeTypeList, Ext: &ext[42]})
-var s_ContainerListLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerListLimit, Type: smithy.ShapeTypeInteger, Ext: &ext[44]})
-var s_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var sContainerNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerNotFoundException, Members: &mContainerNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[46]})
-var s_ContainerPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerPolicy, Type: smithy.ShapeTypeString, Ext: &ext[48]})
-var sContainerStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerStatus, Members: &mContainerStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[49]})
-var s_CorsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CorsPolicy, Members: &m_CorsPolicy, Type: smithy.ShapeTypeList, Ext: &ext[53]})
-var sCorsPolicyNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCorsPolicyNotFoundException, Members: &mCorsPolicyNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[55]})
-var sCorsRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCorsRule, Members: &mCorsRule, Type: smithy.ShapeTypeStructure, Ext: &ext[57]})
-var s_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Endpoint, Type: smithy.ShapeTypeString, Ext: &ext[63]})
-var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[64]})
-var s_ExposeHeaders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExposeHeaders, Members: &m_ExposeHeaders, Type: smithy.ShapeTypeList, Ext: &ext[65]})
-var s_Header = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Header, Type: smithy.ShapeTypeString, Ext: &ext[67]})
-var sInternalServerError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerError, Members: &mInternalServerError, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var s_LifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LifecyclePolicy, Type: smithy.ShapeTypeString, Ext: &ext[70]})
-var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[71]})
-var s_MaxAgeSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxAgeSeconds, Type: smithy.ShapeTypeInteger, Ext: &ext[73]})
-var sMethodName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMethodName, Members: &mMethodName, Type: smithy.ShapeTypeEnum, Ext: &ext[74]})
-var sMetricPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricPolicy, Members: &mMetricPolicy, Type: smithy.ShapeTypeStructure, Ext: &ext[79]})
-var sMetricPolicyRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricPolicyRule, Members: &mMetricPolicyRule, Type: smithy.ShapeTypeStructure, Ext: &ext[82]})
-var s_MetricPolicyRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricPolicyRules, Members: &m_MetricPolicyRules, Type: smithy.ShapeTypeList, Ext: &ext[85]})
-var s_ObjectGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObjectGroup, Type: smithy.ShapeTypeString, Ext: &ext[87]})
-var s_ObjectGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObjectGroupName, Type: smithy.ShapeTypeString, Ext: &ext[88]})
-var s_Origin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Origin, Type: smithy.ShapeTypeString, Ext: &ext[89]})
-var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[90]})
-var sPolicyNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyNotFoundException, Members: &mPolicyNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[91]})
-var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[93]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[96]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[97]})
-var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[99]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[101]})
-var s_TimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[102]})
-var sCreateContainerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateContainerInput, Members: &mCreateContainerInput, Type: smithy.ShapeTypeStructure, Ext: &ext[103]})
-var sCreateContainerOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateContainerOutput, Members: &mCreateContainerOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[106]})
-var sDeleteContainerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteContainerInput, Members: &mDeleteContainerInput, Type: smithy.ShapeTypeStructure, Ext: &ext[108]})
-var sDeleteContainerOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteContainerOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[110]})
-var sDeleteContainerPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteContainerPolicyInput, Members: &mDeleteContainerPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &ext[111]})
-var sDeleteContainerPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteContainerPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[113]})
-var sDeleteCorsPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCorsPolicyInput, Members: &mDeleteCorsPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &ext[114]})
-var sDeleteCorsPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCorsPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[116]})
-var sDeleteLifecyclePolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLifecyclePolicyInput, Members: &mDeleteLifecyclePolicyInput, Type: smithy.ShapeTypeStructure, Ext: &ext[117]})
-var sDeleteLifecyclePolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLifecyclePolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[119]})
-var sDeleteMetricPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMetricPolicyInput, Members: &mDeleteMetricPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var sDeleteMetricPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMetricPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[122]})
-var sDescribeContainerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeContainerInput, Members: &mDescribeContainerInput, Type: smithy.ShapeTypeStructure, Ext: &ext[123]})
-var sDescribeContainerOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeContainerOutput, Members: &mDescribeContainerOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[125]})
-var sGetContainerPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContainerPolicyInput, Members: &mGetContainerPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &ext[127]})
-var sGetContainerPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContainerPolicyOutput, Members: &mGetContainerPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[129]})
-var sGetCorsPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCorsPolicyInput, Members: &mGetCorsPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &ext[131]})
-var sGetCorsPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCorsPolicyOutput, Members: &mGetCorsPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[133]})
-var sGetLifecyclePolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLifecyclePolicyInput, Members: &mGetLifecyclePolicyInput, Type: smithy.ShapeTypeStructure, Ext: &ext[135]})
-var sGetLifecyclePolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLifecyclePolicyOutput, Members: &mGetLifecyclePolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[137]})
-var sGetMetricPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricPolicyInput, Members: &mGetMetricPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &ext[139]})
-var sGetMetricPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricPolicyOutput, Members: &mGetMetricPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[141]})
-var sListContainersInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListContainersInput, Members: &mListContainersInput, Type: smithy.ShapeTypeStructure, Ext: &ext[143]})
-var sListContainersOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListContainersOutput, Members: &mListContainersOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[146]})
-var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[149]})
-var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[151]})
-var sPutContainerPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutContainerPolicyInput, Members: &mPutContainerPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &ext[153]})
-var sPutContainerPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutContainerPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[156]})
-var sPutCorsPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCorsPolicyInput, Members: &mPutCorsPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &ext[157]})
-var sPutCorsPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCorsPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[160]})
-var sPutLifecyclePolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutLifecyclePolicyInput, Members: &mPutLifecyclePolicyInput, Type: smithy.ShapeTypeStructure, Ext: &ext[161]})
-var sPutLifecyclePolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutLifecyclePolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[164]})
-var sPutMetricPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMetricPolicyInput, Members: &mPutMetricPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &ext[165]})
-var sPutMetricPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMetricPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[168]})
-var sStartAccessLoggingInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAccessLoggingInput, Members: &mStartAccessLoggingInput, Type: smithy.ShapeTypeStructure, Ext: &ext[169]})
-var sStartAccessLoggingOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAccessLoggingOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[171]})
-var sStopAccessLoggingInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopAccessLoggingInput, Members: &mStopAccessLoggingInput, Type: smithy.ShapeTypeStructure, Ext: &ext[172]})
-var sStopAccessLoggingOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopAccessLoggingOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[174]})
-var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[175]})
-var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[178]})
-var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[179]})
-var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[182]})
+var sCreateContainer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateContainer, Type: smithy.ShapeTypeOperation, Ext: &eCreateContainer})
+var sDeleteContainer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteContainer, Type: smithy.ShapeTypeOperation, Ext: &eDeleteContainer})
+var sDeleteContainerPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteContainerPolicy, Type: smithy.ShapeTypeOperation, Ext: &eDeleteContainerPolicy})
+var sDeleteCorsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCorsPolicy, Type: smithy.ShapeTypeOperation, Ext: &eDeleteCorsPolicy})
+var sDeleteLifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLifecyclePolicy, Type: smithy.ShapeTypeOperation, Ext: &eDeleteLifecyclePolicy})
+var sDeleteMetricPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMetricPolicy, Type: smithy.ShapeTypeOperation, Ext: &eDeleteMetricPolicy})
+var sDescribeContainer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeContainer, Type: smithy.ShapeTypeOperation, Ext: &eDescribeContainer})
+var sGetContainerPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContainerPolicy, Type: smithy.ShapeTypeOperation, Ext: &eGetContainerPolicy})
+var sGetCorsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCorsPolicy, Type: smithy.ShapeTypeOperation, Ext: &eGetCorsPolicy})
+var sGetLifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLifecyclePolicy, Type: smithy.ShapeTypeOperation, Ext: &eGetLifecyclePolicy})
+var sGetMetricPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricPolicy, Type: smithy.ShapeTypeOperation, Ext: &eGetMetricPolicy})
+var sListContainers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListContainers, Type: smithy.ShapeTypeOperation, Ext: &eListContainers})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sPutContainerPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutContainerPolicy, Type: smithy.ShapeTypeOperation, Ext: &ePutContainerPolicy})
+var sPutCorsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCorsPolicy, Type: smithy.ShapeTypeOperation, Ext: &ePutCorsPolicy})
+var sPutLifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutLifecyclePolicy, Type: smithy.ShapeTypeOperation, Ext: &ePutLifecyclePolicy})
+var sPutMetricPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMetricPolicy, Type: smithy.ShapeTypeOperation, Ext: &ePutMetricPolicy})
+var sStartAccessLogging = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAccessLogging, Type: smithy.ShapeTypeOperation, Ext: &eStartAccessLogging})
+var sStopAccessLogging = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopAccessLogging, Type: smithy.ShapeTypeOperation, Ext: &eStopAccessLogging})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var s_MediaStore_20170901 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MediaStore_20170901, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &e_MediaStore_20170901})
+var s_AllowedHeaders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AllowedHeaders, Members: &m_AllowedHeaders, Type: smithy.ShapeTypeList, Ext: &e_AllowedHeaders})
+var s_AllowedMethods = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AllowedMethods, Members: &m_AllowedMethods, Type: smithy.ShapeTypeList, Ext: &e_AllowedMethods})
+var s_AllowedOrigins = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AllowedOrigins, Members: &m_AllowedOrigins, Type: smithy.ShapeTypeList, Ext: &e_AllowedOrigins})
+var sContainer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainer, Members: &mContainer, Type: smithy.ShapeTypeStructure, Ext: &eContainer})
+var s_ContainerAccessLoggingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerAccessLoggingEnabled, Type: smithy.ShapeTypeBoolean, Ext: &e_ContainerAccessLoggingEnabled})
+var s_ContainerARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerARN, Type: smithy.ShapeTypeString, Ext: &e_ContainerARN})
+var sContainerInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerInUseException, Members: &mContainerInUseException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eContainerInUseException})
+var sContainerLevelMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerLevelMetrics, Members: &mContainerLevelMetrics, Type: smithy.ShapeTypeEnum, Ext: &eContainerLevelMetrics})
+var s_ContainerList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerList, Members: &m_ContainerList, Type: smithy.ShapeTypeList, Ext: &e_ContainerList})
+var s_ContainerListLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerListLimit, Type: smithy.ShapeTypeInteger, Ext: &e_ContainerListLimit})
+var s_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &e_ContainerName})
+var sContainerNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerNotFoundException, Members: &mContainerNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eContainerNotFoundException})
+var s_ContainerPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerPolicy, Type: smithy.ShapeTypeString, Ext: &e_ContainerPolicy})
+var sContainerStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerStatus, Members: &mContainerStatus, Type: smithy.ShapeTypeEnum, Ext: &eContainerStatus})
+var s_CorsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CorsPolicy, Members: &m_CorsPolicy, Type: smithy.ShapeTypeList, Ext: &e_CorsPolicy})
+var sCorsPolicyNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCorsPolicyNotFoundException, Members: &mCorsPolicyNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eCorsPolicyNotFoundException})
+var sCorsRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCorsRule, Members: &mCorsRule, Type: smithy.ShapeTypeStructure, Ext: &eCorsRule})
+var s_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Endpoint, Type: smithy.ShapeTypeString, Ext: &e_Endpoint})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var s_ExposeHeaders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExposeHeaders, Members: &m_ExposeHeaders, Type: smithy.ShapeTypeList, Ext: &e_ExposeHeaders})
+var s_Header = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Header, Type: smithy.ShapeTypeString, Ext: &e_Header})
+var sInternalServerError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerError, Members: &mInternalServerError, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerError})
+var s_LifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LifecyclePolicy, Type: smithy.ShapeTypeString, Ext: &e_LifecyclePolicy})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var s_MaxAgeSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxAgeSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_MaxAgeSeconds})
+var sMethodName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMethodName, Members: &mMethodName, Type: smithy.ShapeTypeEnum, Ext: &eMethodName})
+var sMetricPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricPolicy, Members: &mMetricPolicy, Type: smithy.ShapeTypeStructure, Ext: &eMetricPolicy})
+var sMetricPolicyRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricPolicyRule, Members: &mMetricPolicyRule, Type: smithy.ShapeTypeStructure, Ext: &eMetricPolicyRule})
+var s_MetricPolicyRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricPolicyRules, Members: &m_MetricPolicyRules, Type: smithy.ShapeTypeList, Ext: &e_MetricPolicyRules})
+var s_ObjectGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObjectGroup, Type: smithy.ShapeTypeString, Ext: &e_ObjectGroup})
+var s_ObjectGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObjectGroupName, Type: smithy.ShapeTypeString, Ext: &e_ObjectGroupName})
+var s_Origin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Origin, Type: smithy.ShapeTypeString, Ext: &e_Origin})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &e_PaginationToken})
+var sPolicyNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyNotFoundException, Members: &mPolicyNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ePolicyNotFoundException})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_TimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_TimeStamp})
+var sCreateContainerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateContainerInput, Members: &mCreateContainerInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateContainerInput})
+var sCreateContainerOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateContainerOutput, Members: &mCreateContainerOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateContainerOutput})
+var sDeleteContainerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteContainerInput, Members: &mDeleteContainerInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteContainerInput})
+var sDeleteContainerOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteContainerOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteContainerOutput})
+var sDeleteContainerPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteContainerPolicyInput, Members: &mDeleteContainerPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteContainerPolicyInput})
+var sDeleteContainerPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteContainerPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteContainerPolicyOutput})
+var sDeleteCorsPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCorsPolicyInput, Members: &mDeleteCorsPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteCorsPolicyInput})
+var sDeleteCorsPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCorsPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteCorsPolicyOutput})
+var sDeleteLifecyclePolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLifecyclePolicyInput, Members: &mDeleteLifecyclePolicyInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLifecyclePolicyInput})
+var sDeleteLifecyclePolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLifecyclePolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLifecyclePolicyOutput})
+var sDeleteMetricPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMetricPolicyInput, Members: &mDeleteMetricPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMetricPolicyInput})
+var sDeleteMetricPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMetricPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMetricPolicyOutput})
+var sDescribeContainerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeContainerInput, Members: &mDescribeContainerInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeContainerInput})
+var sDescribeContainerOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeContainerOutput, Members: &mDescribeContainerOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeContainerOutput})
+var sGetContainerPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContainerPolicyInput, Members: &mGetContainerPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &eGetContainerPolicyInput})
+var sGetContainerPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContainerPolicyOutput, Members: &mGetContainerPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetContainerPolicyOutput})
+var sGetCorsPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCorsPolicyInput, Members: &mGetCorsPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &eGetCorsPolicyInput})
+var sGetCorsPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCorsPolicyOutput, Members: &mGetCorsPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetCorsPolicyOutput})
+var sGetLifecyclePolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLifecyclePolicyInput, Members: &mGetLifecyclePolicyInput, Type: smithy.ShapeTypeStructure, Ext: &eGetLifecyclePolicyInput})
+var sGetLifecyclePolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLifecyclePolicyOutput, Members: &mGetLifecyclePolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetLifecyclePolicyOutput})
+var sGetMetricPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricPolicyInput, Members: &mGetMetricPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &eGetMetricPolicyInput})
+var sGetMetricPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricPolicyOutput, Members: &mGetMetricPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetMetricPolicyOutput})
+var sListContainersInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListContainersInput, Members: &mListContainersInput, Type: smithy.ShapeTypeStructure, Ext: &eListContainersInput})
+var sListContainersOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListContainersOutput, Members: &mListContainersOutput, Type: smithy.ShapeTypeStructure, Ext: &eListContainersOutput})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceInput})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceOutput})
+var sPutContainerPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutContainerPolicyInput, Members: &mPutContainerPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &ePutContainerPolicyInput})
+var sPutContainerPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutContainerPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutContainerPolicyOutput})
+var sPutCorsPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCorsPolicyInput, Members: &mPutCorsPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &ePutCorsPolicyInput})
+var sPutCorsPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCorsPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutCorsPolicyOutput})
+var sPutLifecyclePolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutLifecyclePolicyInput, Members: &mPutLifecyclePolicyInput, Type: smithy.ShapeTypeStructure, Ext: &ePutLifecyclePolicyInput})
+var sPutLifecyclePolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutLifecyclePolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutLifecyclePolicyOutput})
+var sPutMetricPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMetricPolicyInput, Members: &mPutMetricPolicyInput, Type: smithy.ShapeTypeStructure, Ext: &ePutMetricPolicyInput})
+var sPutMetricPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMetricPolicyOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutMetricPolicyOutput})
+var sStartAccessLoggingInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAccessLoggingInput, Members: &mStartAccessLoggingInput, Type: smithy.ShapeTypeStructure, Ext: &eStartAccessLoggingInput})
+var sStartAccessLoggingOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAccessLoggingOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartAccessLoggingOutput})
+var sStopAccessLoggingInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopAccessLoggingInput, Members: &mStopAccessLoggingInput, Type: smithy.ShapeTypeStructure, Ext: &eStopAccessLoggingInput})
+var sStopAccessLoggingOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopAccessLoggingOutput, Type: smithy.ShapeTypeStructure, Ext: &eStopAccessLoggingOutput})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceInput})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceOutput})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceInput})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceOutput})
 
-var s_AllowedHeaders_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Header, Type: smithy.ShapeTypeString, Ext: &ext[23]})
-var s_AllowedMethods_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMethodName, Members: &mMethodName, Type: smithy.ShapeTypeEnum, Ext: &ext[25]})
-var s_AllowedOrigins_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Origin, Type: smithy.ShapeTypeString, Ext: &ext[27]})
-var sContainer_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &i_Endpoint, Type: smithy.ShapeTypeString, Ext: &ext[29]})
-var sContainer_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[30]})
-var sContainer_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_ContainerARN, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var sContainer_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var sContainer_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iContainerStatus, Members: &mContainerStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[33]})
-var sContainer_AccessLoggingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessLoggingEnabled", ID: &i_ContainerAccessLoggingEnabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[34]})
-var sContainerInUseException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[38]})
-var sContainerLevelMetrics_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[40]})
-var sContainerLevelMetrics_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[41]})
-var s_ContainerList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContainer, Members: &mContainer, Type: smithy.ShapeTypeStructure, Ext: &ext[43]})
-var sContainerNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[47]})
-var sContainerStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[50]})
-var sContainerStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[51]})
-var sContainerStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[52]})
-var s_CorsPolicy_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCorsRule, Members: &mCorsRule, Type: smithy.ShapeTypeStructure, Ext: &ext[54]})
-var sCorsPolicyNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[56]})
-var sCorsRule_AllowedOrigins = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowedOrigins", ID: &i_AllowedOrigins, Members: &m_AllowedOrigins, Type: smithy.ShapeTypeList, Ext: &ext[58]})
-var sCorsRule_AllowedMethods = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowedMethods", ID: &i_AllowedMethods, Members: &m_AllowedMethods, Type: smithy.ShapeTypeList, Ext: &ext[59]})
-var sCorsRule_AllowedHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowedHeaders", ID: &i_AllowedHeaders, Members: &m_AllowedHeaders, Type: smithy.ShapeTypeList, Ext: &ext[60]})
-var sCorsRule_MaxAgeSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxAgeSeconds", ID: &i_MaxAgeSeconds, Type: smithy.ShapeTypeInteger, Ext: &ext[61]})
-var sCorsRule_ExposeHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExposeHeaders", ID: &i_ExposeHeaders, Members: &m_ExposeHeaders, Type: smithy.ShapeTypeList, Ext: &ext[62]})
-var s_ExposeHeaders_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Header, Type: smithy.ShapeTypeString, Ext: &ext[66]})
-var sInternalServerError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var sLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[72]})
-var sMethodName_PUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[75]})
-var sMethodName_GET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[76]})
-var sMethodName_DELETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
-var sMethodName_HEAD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEAD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[78]})
-var sMetricPolicy_ContainerLevelMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerLevelMetrics", ID: &iContainerLevelMetrics, Members: &mContainerLevelMetrics, Type: smithy.ShapeTypeEnum, Ext: &ext[80]})
-var sMetricPolicy_MetricPolicyRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricPolicyRules", ID: &i_MetricPolicyRules, Members: &m_MetricPolicyRules, Type: smithy.ShapeTypeList, Ext: &ext[81]})
-var sMetricPolicyRule_ObjectGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectGroup", ID: &i_ObjectGroup, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var sMetricPolicyRule_ObjectGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectGroupName", ID: &i_ObjectGroupName, Type: smithy.ShapeTypeString, Ext: &ext[84]})
-var s_MetricPolicyRules_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricPolicyRule, Members: &mMetricPolicyRule, Type: smithy.ShapeTypeStructure, Ext: &ext[86]})
-var sPolicyNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[92]})
-var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[94]})
-var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[95]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[98]})
-var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[100]})
-var sCreateContainerInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &ext[104]})
-var sCreateContainerInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[105]})
-var sCreateContainerOutput_Container = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Container", ID: &iContainer, Members: &mContainer, Type: smithy.ShapeTypeStructure, Ext: &ext[107]})
-var sDeleteContainerInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &ext[109]})
-var sDeleteContainerPolicyInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &ext[112]})
-var sDeleteCorsPolicyInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &ext[115]})
-var sDeleteLifecyclePolicyInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &ext[118]})
-var sDeleteMetricPolicyInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &ext[121]})
-var sDescribeContainerInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &ext[124]})
-var sDescribeContainerOutput_Container = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Container", ID: &iContainer, Members: &mContainer, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var sGetContainerPolicyInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &ext[128]})
-var sGetContainerPolicyOutput_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_ContainerPolicy, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var sGetCorsPolicyInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &ext[132]})
-var sGetCorsPolicyOutput_CorsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CorsPolicy", ID: &i_CorsPolicy, Members: &m_CorsPolicy, Type: smithy.ShapeTypeList, Ext: &ext[134]})
-var sGetLifecyclePolicyInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &ext[136]})
-var sGetLifecyclePolicyOutput_LifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LifecyclePolicy", ID: &i_LifecyclePolicy, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var sGetMetricPolicyInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &ext[140]})
-var sGetMetricPolicyOutput_MetricPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricPolicy", ID: &iMetricPolicy, Members: &mMetricPolicy, Type: smithy.ShapeTypeStructure, Ext: &ext[142]})
-var sListContainersInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[144]})
-var sListContainersInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ContainerListLimit, Type: smithy.ShapeTypeInteger, Ext: &ext[145]})
-var sListContainersOutput_Containers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Containers", ID: &i_ContainerList, Members: &m_ContainerList, Type: smithy.ShapeTypeList, Ext: &ext[147]})
-var sListContainersOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[148]})
-var sListTagsForResourceInput_Resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resource", ID: &i_ContainerARN, Type: smithy.ShapeTypeString, Ext: &ext[150]})
-var sListTagsForResourceOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[152]})
-var sPutContainerPolicyInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &ext[154]})
-var sPutContainerPolicyInput_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_ContainerPolicy, Type: smithy.ShapeTypeString, Ext: &ext[155]})
-var sPutCorsPolicyInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &ext[158]})
-var sPutCorsPolicyInput_CorsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CorsPolicy", ID: &i_CorsPolicy, Members: &m_CorsPolicy, Type: smithy.ShapeTypeList, Ext: &ext[159]})
-var sPutLifecyclePolicyInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &ext[162]})
-var sPutLifecyclePolicyInput_LifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LifecyclePolicy", ID: &i_LifecyclePolicy, Type: smithy.ShapeTypeString, Ext: &ext[163]})
-var sPutMetricPolicyInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &ext[166]})
-var sPutMetricPolicyInput_MetricPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricPolicy", ID: &iMetricPolicy, Members: &mMetricPolicy, Type: smithy.ShapeTypeStructure, Ext: &ext[167]})
-var sStartAccessLoggingInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &ext[170]})
-var sStopAccessLoggingInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &ext[173]})
-var sTagResourceInput_Resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resource", ID: &i_ContainerARN, Type: smithy.ShapeTypeString, Ext: &ext[176]})
-var sTagResourceInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[177]})
-var sUntagResourceInput_Resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resource", ID: &i_ContainerARN, Type: smithy.ShapeTypeString, Ext: &ext[180]})
-var sUntagResourceInput_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[181]})
+var s_AllowedHeaders_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Header, Type: smithy.ShapeTypeString, Ext: &e_AllowedHeaders_member})
+var s_AllowedMethods_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMethodName, Members: &mMethodName, Type: smithy.ShapeTypeEnum, Ext: &e_AllowedMethods_member})
+var s_AllowedOrigins_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Origin, Type: smithy.ShapeTypeString, Ext: &e_AllowedOrigins_member})
+var sContainer_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &i_Endpoint, Type: smithy.ShapeTypeString, Ext: &eContainer_Endpoint})
+var sContainer_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eContainer_CreationTime})
+var sContainer_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_ContainerARN, Type: smithy.ShapeTypeString, Ext: &eContainer_ARN})
+var sContainer_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &eContainer_Name})
+var sContainer_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iContainerStatus, Members: &mContainerStatus, Type: smithy.ShapeTypeEnum, Ext: &eContainer_Status})
+var sContainer_AccessLoggingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessLoggingEnabled", ID: &i_ContainerAccessLoggingEnabled, Type: smithy.ShapeTypeBoolean, Ext: &eContainer_AccessLoggingEnabled})
+var sContainerInUseException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eContainerInUseException_Message})
+var sContainerLevelMetrics_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContainerLevelMetrics_ENABLED})
+var sContainerLevelMetrics_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContainerLevelMetrics_DISABLED})
+var s_ContainerList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContainer, Members: &mContainer, Type: smithy.ShapeTypeStructure, Ext: &e_ContainerList_member})
+var sContainerNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eContainerNotFoundException_Message})
+var sContainerStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContainerStatus_ACTIVE})
+var sContainerStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContainerStatus_CREATING})
+var sContainerStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContainerStatus_DELETING})
+var s_CorsPolicy_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCorsRule, Members: &mCorsRule, Type: smithy.ShapeTypeStructure, Ext: &e_CorsPolicy_member})
+var sCorsPolicyNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eCorsPolicyNotFoundException_Message})
+var sCorsRule_AllowedOrigins = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowedOrigins", ID: &i_AllowedOrigins, Members: &m_AllowedOrigins, Type: smithy.ShapeTypeList, Ext: &eCorsRule_AllowedOrigins})
+var sCorsRule_AllowedMethods = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowedMethods", ID: &i_AllowedMethods, Members: &m_AllowedMethods, Type: smithy.ShapeTypeList, Ext: &eCorsRule_AllowedMethods})
+var sCorsRule_AllowedHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowedHeaders", ID: &i_AllowedHeaders, Members: &m_AllowedHeaders, Type: smithy.ShapeTypeList, Ext: &eCorsRule_AllowedHeaders})
+var sCorsRule_MaxAgeSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxAgeSeconds", ID: &i_MaxAgeSeconds, Type: smithy.ShapeTypeInteger, Ext: &eCorsRule_MaxAgeSeconds})
+var sCorsRule_ExposeHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExposeHeaders", ID: &i_ExposeHeaders, Members: &m_ExposeHeaders, Type: smithy.ShapeTypeList, Ext: &eCorsRule_ExposeHeaders})
+var s_ExposeHeaders_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Header, Type: smithy.ShapeTypeString, Ext: &e_ExposeHeaders_member})
+var sInternalServerError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerError_Message})
+var sLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_Message})
+var sMethodName_PUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMethodName_PUT})
+var sMethodName_GET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMethodName_GET})
+var sMethodName_DELETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMethodName_DELETE})
+var sMethodName_HEAD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEAD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMethodName_HEAD})
+var sMetricPolicy_ContainerLevelMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerLevelMetrics", ID: &iContainerLevelMetrics, Members: &mContainerLevelMetrics, Type: smithy.ShapeTypeEnum, Ext: &eMetricPolicy_ContainerLevelMetrics})
+var sMetricPolicy_MetricPolicyRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricPolicyRules", ID: &i_MetricPolicyRules, Members: &m_MetricPolicyRules, Type: smithy.ShapeTypeList, Ext: &eMetricPolicy_MetricPolicyRules})
+var sMetricPolicyRule_ObjectGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectGroup", ID: &i_ObjectGroup, Type: smithy.ShapeTypeString, Ext: &eMetricPolicyRule_ObjectGroup})
+var sMetricPolicyRule_ObjectGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectGroupName", ID: &i_ObjectGroupName, Type: smithy.ShapeTypeString, Ext: &eMetricPolicyRule_ObjectGroupName})
+var s_MetricPolicyRules_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricPolicyRule, Members: &mMetricPolicyRule, Type: smithy.ShapeTypeStructure, Ext: &e_MetricPolicyRules_member})
+var sPolicyNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ePolicyNotFoundException_Message})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var sCreateContainerInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &eCreateContainerInput_ContainerName})
+var sCreateContainerInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateContainerInput_Tags})
+var sCreateContainerOutput_Container = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Container", ID: &iContainer, Members: &mContainer, Type: smithy.ShapeTypeStructure, Ext: &eCreateContainerOutput_Container})
+var sDeleteContainerInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &eDeleteContainerInput_ContainerName})
+var sDeleteContainerPolicyInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &eDeleteContainerPolicyInput_ContainerName})
+var sDeleteCorsPolicyInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &eDeleteCorsPolicyInput_ContainerName})
+var sDeleteLifecyclePolicyInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &eDeleteLifecyclePolicyInput_ContainerName})
+var sDeleteMetricPolicyInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &eDeleteMetricPolicyInput_ContainerName})
+var sDescribeContainerInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &eDescribeContainerInput_ContainerName})
+var sDescribeContainerOutput_Container = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Container", ID: &iContainer, Members: &mContainer, Type: smithy.ShapeTypeStructure, Ext: &eDescribeContainerOutput_Container})
+var sGetContainerPolicyInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &eGetContainerPolicyInput_ContainerName})
+var sGetContainerPolicyOutput_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_ContainerPolicy, Type: smithy.ShapeTypeString, Ext: &eGetContainerPolicyOutput_Policy})
+var sGetCorsPolicyInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &eGetCorsPolicyInput_ContainerName})
+var sGetCorsPolicyOutput_CorsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CorsPolicy", ID: &i_CorsPolicy, Members: &m_CorsPolicy, Type: smithy.ShapeTypeList, Ext: &eGetCorsPolicyOutput_CorsPolicy})
+var sGetLifecyclePolicyInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &eGetLifecyclePolicyInput_ContainerName})
+var sGetLifecyclePolicyOutput_LifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LifecyclePolicy", ID: &i_LifecyclePolicy, Type: smithy.ShapeTypeString, Ext: &eGetLifecyclePolicyOutput_LifecyclePolicy})
+var sGetMetricPolicyInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &eGetMetricPolicyInput_ContainerName})
+var sGetMetricPolicyOutput_MetricPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricPolicy", ID: &iMetricPolicy, Members: &mMetricPolicy, Type: smithy.ShapeTypeStructure, Ext: &eGetMetricPolicyOutput_MetricPolicy})
+var sListContainersInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListContainersInput_NextToken})
+var sListContainersInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ContainerListLimit, Type: smithy.ShapeTypeInteger, Ext: &eListContainersInput_MaxResults})
+var sListContainersOutput_Containers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Containers", ID: &i_ContainerList, Members: &m_ContainerList, Type: smithy.ShapeTypeList, Ext: &eListContainersOutput_Containers})
+var sListContainersOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListContainersOutput_NextToken})
+var sListTagsForResourceInput_Resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resource", ID: &i_ContainerARN, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceInput_Resource})
+var sListTagsForResourceOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceOutput_Tags})
+var sPutContainerPolicyInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &ePutContainerPolicyInput_ContainerName})
+var sPutContainerPolicyInput_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_ContainerPolicy, Type: smithy.ShapeTypeString, Ext: &ePutContainerPolicyInput_Policy})
+var sPutCorsPolicyInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &ePutCorsPolicyInput_ContainerName})
+var sPutCorsPolicyInput_CorsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CorsPolicy", ID: &i_CorsPolicy, Members: &m_CorsPolicy, Type: smithy.ShapeTypeList, Ext: &ePutCorsPolicyInput_CorsPolicy})
+var sPutLifecyclePolicyInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &ePutLifecyclePolicyInput_ContainerName})
+var sPutLifecyclePolicyInput_LifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LifecyclePolicy", ID: &i_LifecyclePolicy, Type: smithy.ShapeTypeString, Ext: &ePutLifecyclePolicyInput_LifecyclePolicy})
+var sPutMetricPolicyInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &ePutMetricPolicyInput_ContainerName})
+var sPutMetricPolicyInput_MetricPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricPolicy", ID: &iMetricPolicy, Members: &mMetricPolicy, Type: smithy.ShapeTypeStructure, Ext: &ePutMetricPolicyInput_MetricPolicy})
+var sStartAccessLoggingInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &eStartAccessLoggingInput_ContainerName})
+var sStopAccessLoggingInput_ContainerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerName", ID: &i_ContainerName, Type: smithy.ShapeTypeString, Ext: &eStopAccessLoggingInput_ContainerName})
+var sTagResourceInput_Resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resource", ID: &i_ContainerARN, Type: smithy.ShapeTypeString, Ext: &eTagResourceInput_Resource})
+var sTagResourceInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceInput_Tags})
+var sUntagResourceInput_Resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resource", ID: &i_ContainerARN, Type: smithy.ShapeTypeString, Ext: &eUntagResourceInput_Resource})
+var sUntagResourceInput_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceInput_TagKeys})
 
 var CreateContainer = &sCreateContainer
 

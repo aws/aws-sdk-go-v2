@@ -7,9 +7,479 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [471]smithy.SchemaExtensions
+var (
+	eCreateLandingZone                                     smithy.SchemaExtensions
+	eDeleteLandingZone                                     smithy.SchemaExtensions
+	eDisableBaseline                                       smithy.SchemaExtensions
+	eDisableControl                                        smithy.SchemaExtensions
+	eEnableBaseline                                        smithy.SchemaExtensions
+	eEnableControl                                         smithy.SchemaExtensions
+	eGetBaseline                                           smithy.SchemaExtensions
+	eGetBaselineOperation                                  smithy.SchemaExtensions
+	eGetControlOperation                                   smithy.SchemaExtensions
+	eGetEnabledBaseline                                    smithy.SchemaExtensions
+	eGetEnabledControl                                     smithy.SchemaExtensions
+	eGetLandingZone                                        smithy.SchemaExtensions
+	eGetLandingZoneOperation                               smithy.SchemaExtensions
+	eListBaselines                                         smithy.SchemaExtensions
+	eListControlOperations                                 smithy.SchemaExtensions
+	eListEnabledBaselines                                  smithy.SchemaExtensions
+	eListEnabledControls                                   smithy.SchemaExtensions
+	eListLandingZoneOperations                             smithy.SchemaExtensions
+	eListLandingZones                                      smithy.SchemaExtensions
+	eListTagsForResource                                   smithy.SchemaExtensions
+	eResetEnabledBaseline                                  smithy.SchemaExtensions
+	eResetEnabledControl                                   smithy.SchemaExtensions
+	eResetLandingZone                                      smithy.SchemaExtensions
+	eTagResource                                           smithy.SchemaExtensions
+	eUntagResource                                         smithy.SchemaExtensions
+	eUpdateEnabledBaseline                                 smithy.SchemaExtensions
+	eUpdateEnabledControl                                  smithy.SchemaExtensions
+	eUpdateLandingZone                                     smithy.SchemaExtensions
+	e_AWSControlTowerApis                                  smithy.SchemaExtensions
+	eAccessDeniedException                                 smithy.SchemaExtensions
+	eAccessDeniedException_message                         smithy.SchemaExtensions
+	e_Arn                                                  smithy.SchemaExtensions
+	e_BaselineArn                                          smithy.SchemaExtensions
+	eBaselineOperation                                     smithy.SchemaExtensions
+	eBaselineOperation_operationIdentifier                 smithy.SchemaExtensions
+	eBaselineOperation_operationType                       smithy.SchemaExtensions
+	eBaselineOperation_status                              smithy.SchemaExtensions
+	eBaselineOperation_startTime                           smithy.SchemaExtensions
+	eBaselineOperation_endTime                             smithy.SchemaExtensions
+	eBaselineOperation_statusMessage                       smithy.SchemaExtensions
+	eBaselineOperationStatus                               smithy.SchemaExtensions
+	eBaselineOperationStatus_SUCCEEDED                     smithy.SchemaExtensions
+	eBaselineOperationStatus_FAILED                        smithy.SchemaExtensions
+	eBaselineOperationStatus_IN_PROGRESS                   smithy.SchemaExtensions
+	eBaselineOperationType                                 smithy.SchemaExtensions
+	eBaselineOperationType_ENABLE_BASELINE                 smithy.SchemaExtensions
+	eBaselineOperationType_DISABLE_BASELINE                smithy.SchemaExtensions
+	eBaselineOperationType_UPDATE_ENABLED_BASELINE         smithy.SchemaExtensions
+	eBaselineOperationType_RESET_ENABLED_BASELINE          smithy.SchemaExtensions
+	e_Baselines                                            smithy.SchemaExtensions
+	e_Baselines_member                                     smithy.SchemaExtensions
+	eBaselineSummary                                       smithy.SchemaExtensions
+	eBaselineSummary_arn                                   smithy.SchemaExtensions
+	eBaselineSummary_name                                  smithy.SchemaExtensions
+	eBaselineSummary_description                           smithy.SchemaExtensions
+	e_BaselineVersion                                      smithy.SchemaExtensions
+	eConflictException                                     smithy.SchemaExtensions
+	eConflictException_message                             smithy.SchemaExtensions
+	e_ControlIdentifier                                    smithy.SchemaExtensions
+	e_ControlIdentifiers                                   smithy.SchemaExtensions
+	e_ControlIdentifiers_member                            smithy.SchemaExtensions
+	eControlOperation                                      smithy.SchemaExtensions
+	eControlOperation_operationType                        smithy.SchemaExtensions
+	eControlOperation_startTime                            smithy.SchemaExtensions
+	eControlOperation_endTime                              smithy.SchemaExtensions
+	eControlOperation_status                               smithy.SchemaExtensions
+	eControlOperation_statusMessage                        smithy.SchemaExtensions
+	eControlOperation_operationIdentifier                  smithy.SchemaExtensions
+	eControlOperation_controlIdentifier                    smithy.SchemaExtensions
+	eControlOperation_targetIdentifier                     smithy.SchemaExtensions
+	eControlOperation_enabledControlIdentifier             smithy.SchemaExtensions
+	eControlOperationFilter                                smithy.SchemaExtensions
+	eControlOperationFilter_controlIdentifiers             smithy.SchemaExtensions
+	eControlOperationFilter_targetIdentifiers              smithy.SchemaExtensions
+	eControlOperationFilter_enabledControlIdentifiers      smithy.SchemaExtensions
+	eControlOperationFilter_statuses                       smithy.SchemaExtensions
+	eControlOperationFilter_controlOperationTypes          smithy.SchemaExtensions
+	e_ControlOperations                                    smithy.SchemaExtensions
+	e_ControlOperations_member                             smithy.SchemaExtensions
+	eControlOperationStatus                                smithy.SchemaExtensions
+	eControlOperationStatus_SUCCEEDED                      smithy.SchemaExtensions
+	eControlOperationStatus_FAILED                         smithy.SchemaExtensions
+	eControlOperationStatus_IN_PROGRESS                    smithy.SchemaExtensions
+	e_ControlOperationStatuses                             smithy.SchemaExtensions
+	e_ControlOperationStatuses_member                      smithy.SchemaExtensions
+	eControlOperationSummary                               smithy.SchemaExtensions
+	eControlOperationSummary_operationType                 smithy.SchemaExtensions
+	eControlOperationSummary_startTime                     smithy.SchemaExtensions
+	eControlOperationSummary_endTime                       smithy.SchemaExtensions
+	eControlOperationSummary_status                        smithy.SchemaExtensions
+	eControlOperationSummary_statusMessage                 smithy.SchemaExtensions
+	eControlOperationSummary_operationIdentifier           smithy.SchemaExtensions
+	eControlOperationSummary_controlIdentifier             smithy.SchemaExtensions
+	eControlOperationSummary_targetIdentifier              smithy.SchemaExtensions
+	eControlOperationSummary_enabledControlIdentifier      smithy.SchemaExtensions
+	eControlOperationType                                  smithy.SchemaExtensions
+	eControlOperationType_ENABLE_CONTROL                   smithy.SchemaExtensions
+	eControlOperationType_DISABLE_CONTROL                  smithy.SchemaExtensions
+	eControlOperationType_UPDATE_ENABLED_CONTROL           smithy.SchemaExtensions
+	eControlOperationType_RESET_ENABLED_CONTROL            smithy.SchemaExtensions
+	e_ControlOperationTypes                                smithy.SchemaExtensions
+	e_ControlOperationTypes_member                         smithy.SchemaExtensions
+	eDriftStatus                                           smithy.SchemaExtensions
+	eDriftStatus_DRIFTED                                   smithy.SchemaExtensions
+	eDriftStatus_IN_SYNC                                   smithy.SchemaExtensions
+	eDriftStatus_NOT_CHECKING                              smithy.SchemaExtensions
+	eDriftStatus_UNKNOWN                                   smithy.SchemaExtensions
+	e_DriftStatuses                                        smithy.SchemaExtensions
+	e_DriftStatuses_member                                 smithy.SchemaExtensions
+	eDriftStatusSummary                                    smithy.SchemaExtensions
+	eDriftStatusSummary_driftStatus                        smithy.SchemaExtensions
+	eDriftStatusSummary_types                              smithy.SchemaExtensions
+	e_EnabledBaselineBaselineIdentifiers                   smithy.SchemaExtensions
+	e_EnabledBaselineBaselineIdentifiers_member            smithy.SchemaExtensions
+	eEnabledBaselineDetails                                smithy.SchemaExtensions
+	eEnabledBaselineDetails_arn                            smithy.SchemaExtensions
+	eEnabledBaselineDetails_baselineIdentifier             smithy.SchemaExtensions
+	eEnabledBaselineDetails_baselineVersion                smithy.SchemaExtensions
+	eEnabledBaselineDetails_driftStatusSummary             smithy.SchemaExtensions
+	eEnabledBaselineDetails_targetIdentifier               smithy.SchemaExtensions
+	eEnabledBaselineDetails_parentIdentifier               smithy.SchemaExtensions
+	eEnabledBaselineDetails_statusSummary                  smithy.SchemaExtensions
+	eEnabledBaselineDetails_parameters                     smithy.SchemaExtensions
+	eEnabledBaselineDriftStatus                            smithy.SchemaExtensions
+	eEnabledBaselineDriftStatus_IN_SYNC                    smithy.SchemaExtensions
+	eEnabledBaselineDriftStatus_DRIFTED                    smithy.SchemaExtensions
+	e_EnabledBaselineDriftStatuses                         smithy.SchemaExtensions
+	e_EnabledBaselineDriftStatuses_member                  smithy.SchemaExtensions
+	eEnabledBaselineDriftStatusSummary                     smithy.SchemaExtensions
+	eEnabledBaselineDriftStatusSummary_types               smithy.SchemaExtensions
+	eEnabledBaselineDriftTypes                             smithy.SchemaExtensions
+	eEnabledBaselineDriftTypes_inheritance                 smithy.SchemaExtensions
+	e_EnabledBaselineEnablementStatuses                    smithy.SchemaExtensions
+	e_EnabledBaselineEnablementStatuses_member             smithy.SchemaExtensions
+	eEnabledBaselineFilter                                 smithy.SchemaExtensions
+	eEnabledBaselineFilter_targetIdentifiers               smithy.SchemaExtensions
+	eEnabledBaselineFilter_baselineIdentifiers             smithy.SchemaExtensions
+	eEnabledBaselineFilter_parentIdentifiers               smithy.SchemaExtensions
+	eEnabledBaselineFilter_statuses                        smithy.SchemaExtensions
+	eEnabledBaselineFilter_inheritanceDriftStatuses        smithy.SchemaExtensions
+	eEnabledBaselineInheritanceDrift                       smithy.SchemaExtensions
+	eEnabledBaselineInheritanceDrift_status                smithy.SchemaExtensions
+	eEnabledBaselineParameter                              smithy.SchemaExtensions
+	eEnabledBaselineParameter_key                          smithy.SchemaExtensions
+	eEnabledBaselineParameter_value                        smithy.SchemaExtensions
+	e_EnabledBaselineParameterDocument                     smithy.SchemaExtensions
+	e_EnabledBaselineParameters                            smithy.SchemaExtensions
+	e_EnabledBaselineParameters_member                     smithy.SchemaExtensions
+	e_EnabledBaselineParameterSummaries                    smithy.SchemaExtensions
+	e_EnabledBaselineParameterSummaries_member             smithy.SchemaExtensions
+	eEnabledBaselineParameterSummary                       smithy.SchemaExtensions
+	eEnabledBaselineParameterSummary_key                   smithy.SchemaExtensions
+	eEnabledBaselineParameterSummary_value                 smithy.SchemaExtensions
+	e_EnabledBaselineParentIdentifiers                     smithy.SchemaExtensions
+	e_EnabledBaselineParentIdentifiers_member              smithy.SchemaExtensions
+	e_EnabledBaselines                                     smithy.SchemaExtensions
+	e_EnabledBaselines_member                              smithy.SchemaExtensions
+	eEnabledBaselineSummary                                smithy.SchemaExtensions
+	eEnabledBaselineSummary_arn                            smithy.SchemaExtensions
+	eEnabledBaselineSummary_baselineIdentifier             smithy.SchemaExtensions
+	eEnabledBaselineSummary_baselineVersion                smithy.SchemaExtensions
+	eEnabledBaselineSummary_driftStatusSummary             smithy.SchemaExtensions
+	eEnabledBaselineSummary_targetIdentifier               smithy.SchemaExtensions
+	eEnabledBaselineSummary_parentIdentifier               smithy.SchemaExtensions
+	eEnabledBaselineSummary_statusSummary                  smithy.SchemaExtensions
+	e_EnabledBaselineTargetIdentifiers                     smithy.SchemaExtensions
+	e_EnabledBaselineTargetIdentifiers_member              smithy.SchemaExtensions
+	eEnabledControlDetails                                 smithy.SchemaExtensions
+	eEnabledControlDetails_arn                             smithy.SchemaExtensions
+	eEnabledControlDetails_controlIdentifier               smithy.SchemaExtensions
+	eEnabledControlDetails_targetIdentifier                smithy.SchemaExtensions
+	eEnabledControlDetails_statusSummary                   smithy.SchemaExtensions
+	eEnabledControlDetails_driftStatusSummary              smithy.SchemaExtensions
+	eEnabledControlDetails_parentIdentifier                smithy.SchemaExtensions
+	eEnabledControlDetails_targetRegions                   smithy.SchemaExtensions
+	eEnabledControlDetails_parameters                      smithy.SchemaExtensions
+	eEnabledControlDriftTypes                              smithy.SchemaExtensions
+	eEnabledControlDriftTypes_inheritance                  smithy.SchemaExtensions
+	eEnabledControlDriftTypes_resource                     smithy.SchemaExtensions
+	eEnabledControlFilter                                  smithy.SchemaExtensions
+	eEnabledControlFilter_controlIdentifiers               smithy.SchemaExtensions
+	eEnabledControlFilter_statuses                         smithy.SchemaExtensions
+	eEnabledControlFilter_driftStatuses                    smithy.SchemaExtensions
+	eEnabledControlFilter_parentIdentifiers                smithy.SchemaExtensions
+	eEnabledControlFilter_inheritanceDriftStatuses         smithy.SchemaExtensions
+	eEnabledControlFilter_resourceDriftStatuses            smithy.SchemaExtensions
+	e_EnabledControlIdentifiers                            smithy.SchemaExtensions
+	e_EnabledControlIdentifiers_member                     smithy.SchemaExtensions
+	eEnabledControlInheritanceDrift                        smithy.SchemaExtensions
+	eEnabledControlInheritanceDrift_status                 smithy.SchemaExtensions
+	eEnabledControlParameter                               smithy.SchemaExtensions
+	eEnabledControlParameter_key                           smithy.SchemaExtensions
+	eEnabledControlParameter_value                         smithy.SchemaExtensions
+	e_EnabledControlParameters                             smithy.SchemaExtensions
+	e_EnabledControlParameters_member                      smithy.SchemaExtensions
+	e_EnabledControlParameterSummaries                     smithy.SchemaExtensions
+	e_EnabledControlParameterSummaries_member              smithy.SchemaExtensions
+	eEnabledControlParameterSummary                        smithy.SchemaExtensions
+	eEnabledControlParameterSummary_key                    smithy.SchemaExtensions
+	eEnabledControlParameterSummary_value                  smithy.SchemaExtensions
+	eEnabledControlResourceDrift                           smithy.SchemaExtensions
+	eEnabledControlResourceDrift_status                    smithy.SchemaExtensions
+	e_EnabledControls                                      smithy.SchemaExtensions
+	e_EnabledControls_member                               smithy.SchemaExtensions
+	eEnabledControlSummary                                 smithy.SchemaExtensions
+	eEnabledControlSummary_arn                             smithy.SchemaExtensions
+	eEnabledControlSummary_controlIdentifier               smithy.SchemaExtensions
+	eEnabledControlSummary_targetIdentifier                smithy.SchemaExtensions
+	eEnabledControlSummary_statusSummary                   smithy.SchemaExtensions
+	eEnabledControlSummary_driftStatusSummary              smithy.SchemaExtensions
+	eEnabledControlSummary_parentIdentifier                smithy.SchemaExtensions
+	eEnablementStatus                                      smithy.SchemaExtensions
+	eEnablementStatus_SUCCEEDED                            smithy.SchemaExtensions
+	eEnablementStatus_FAILED                               smithy.SchemaExtensions
+	eEnablementStatus_UNDER_CHANGE                         smithy.SchemaExtensions
+	e_EnablementStatuses                                   smithy.SchemaExtensions
+	e_EnablementStatuses_member                            smithy.SchemaExtensions
+	eEnablementStatusSummary                               smithy.SchemaExtensions
+	eEnablementStatusSummary_status                        smithy.SchemaExtensions
+	eEnablementStatusSummary_lastOperationIdentifier       smithy.SchemaExtensions
+	eInternalServerException                               smithy.SchemaExtensions
+	eInternalServerException_message                       smithy.SchemaExtensions
+	eLandingZoneDetail                                     smithy.SchemaExtensions
+	eLandingZoneDetail_version                             smithy.SchemaExtensions
+	eLandingZoneDetail_remediationTypes                    smithy.SchemaExtensions
+	eLandingZoneDetail_arn                                 smithy.SchemaExtensions
+	eLandingZoneDetail_status                              smithy.SchemaExtensions
+	eLandingZoneDetail_latestAvailableVersion              smithy.SchemaExtensions
+	eLandingZoneDetail_driftStatus                         smithy.SchemaExtensions
+	eLandingZoneDetail_manifest                            smithy.SchemaExtensions
+	eLandingZoneDriftStatus                                smithy.SchemaExtensions
+	eLandingZoneDriftStatus_DRIFTED                        smithy.SchemaExtensions
+	eLandingZoneDriftStatus_IN_SYNC                        smithy.SchemaExtensions
+	eLandingZoneDriftStatusSummary                         smithy.SchemaExtensions
+	eLandingZoneDriftStatusSummary_status                  smithy.SchemaExtensions
+	eLandingZoneOperationDetail                            smithy.SchemaExtensions
+	eLandingZoneOperationDetail_operationType              smithy.SchemaExtensions
+	eLandingZoneOperationDetail_operationIdentifier        smithy.SchemaExtensions
+	eLandingZoneOperationDetail_status                     smithy.SchemaExtensions
+	eLandingZoneOperationDetail_startTime                  smithy.SchemaExtensions
+	eLandingZoneOperationDetail_endTime                    smithy.SchemaExtensions
+	eLandingZoneOperationDetail_statusMessage              smithy.SchemaExtensions
+	eLandingZoneOperationFilter                            smithy.SchemaExtensions
+	eLandingZoneOperationFilter_types                      smithy.SchemaExtensions
+	eLandingZoneOperationFilter_statuses                   smithy.SchemaExtensions
+	e_LandingZoneOperations                                smithy.SchemaExtensions
+	e_LandingZoneOperations_member                         smithy.SchemaExtensions
+	eLandingZoneOperationStatus                            smithy.SchemaExtensions
+	eLandingZoneOperationStatus_SUCCEEDED                  smithy.SchemaExtensions
+	eLandingZoneOperationStatus_FAILED                     smithy.SchemaExtensions
+	eLandingZoneOperationStatus_IN_PROGRESS                smithy.SchemaExtensions
+	e_LandingZoneOperationStatuses                         smithy.SchemaExtensions
+	e_LandingZoneOperationStatuses_member                  smithy.SchemaExtensions
+	eLandingZoneOperationSummary                           smithy.SchemaExtensions
+	eLandingZoneOperationSummary_operationType             smithy.SchemaExtensions
+	eLandingZoneOperationSummary_operationIdentifier       smithy.SchemaExtensions
+	eLandingZoneOperationSummary_status                    smithy.SchemaExtensions
+	eLandingZoneOperationType                              smithy.SchemaExtensions
+	eLandingZoneOperationType_DELETE                       smithy.SchemaExtensions
+	eLandingZoneOperationType_CREATE                       smithy.SchemaExtensions
+	eLandingZoneOperationType_UPDATE                       smithy.SchemaExtensions
+	eLandingZoneOperationType_RESET                        smithy.SchemaExtensions
+	e_LandingZoneOperationTypes                            smithy.SchemaExtensions
+	e_LandingZoneOperationTypes_member                     smithy.SchemaExtensions
+	eLandingZoneStatus                                     smithy.SchemaExtensions
+	eLandingZoneStatus_ACTIVE                              smithy.SchemaExtensions
+	eLandingZoneStatus_PROCESSING                          smithy.SchemaExtensions
+	eLandingZoneStatus_FAILED                              smithy.SchemaExtensions
+	e_LandingZoneSummaries                                 smithy.SchemaExtensions
+	e_LandingZoneSummaries_member                          smithy.SchemaExtensions
+	eLandingZoneSummary                                    smithy.SchemaExtensions
+	eLandingZoneSummary_arn                                smithy.SchemaExtensions
+	e_LandingZoneVersion                                   smithy.SchemaExtensions
+	e_ListBaselinesMaxResults                              smithy.SchemaExtensions
+	e_ListControlOperationsMaxResults                      smithy.SchemaExtensions
+	e_ListControlOperationsNextToken                       smithy.SchemaExtensions
+	e_ListEnabledBaselinesMaxResults                       smithy.SchemaExtensions
+	e_ListEnabledBaselinesNextToken                        smithy.SchemaExtensions
+	e_ListLandingZoneOperationsMaxResults                  smithy.SchemaExtensions
+	e_ListLandingZonesMaxResults                           smithy.SchemaExtensions
+	e_Manifest                                             smithy.SchemaExtensions
+	e_MaxResults                                           smithy.SchemaExtensions
+	e_OperationIdentifier                                  smithy.SchemaExtensions
+	e_ParentIdentifier                                     smithy.SchemaExtensions
+	e_ParentIdentifiers                                    smithy.SchemaExtensions
+	e_ParentIdentifiers_member                             smithy.SchemaExtensions
+	eRegion                                                smithy.SchemaExtensions
+	eRegion_name                                           smithy.SchemaExtensions
+	e_RegionName                                           smithy.SchemaExtensions
+	eRemediationType                                       smithy.SchemaExtensions
+	eRemediationType_INHERITANCE_DRIFT                     smithy.SchemaExtensions
+	e_RemediationTypes                                     smithy.SchemaExtensions
+	e_RemediationTypes_member                              smithy.SchemaExtensions
+	eResourceNotFoundException                             smithy.SchemaExtensions
+	eResourceNotFoundException_message                     smithy.SchemaExtensions
+	eServiceQuotaExceededException                         smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                 smithy.SchemaExtensions
+	e_TagKey                                               smithy.SchemaExtensions
+	e_TagKeys                                              smithy.SchemaExtensions
+	e_TagKeys_member                                       smithy.SchemaExtensions
+	e_TagMap                                               smithy.SchemaExtensions
+	e_TagMap_key                                           smithy.SchemaExtensions
+	e_TagMap_value                                         smithy.SchemaExtensions
+	e_TagValue                                             smithy.SchemaExtensions
+	e_TargetIdentifier                                     smithy.SchemaExtensions
+	e_TargetIdentifiers                                    smithy.SchemaExtensions
+	e_TargetIdentifiers_member                             smithy.SchemaExtensions
+	e_TargetRegions                                        smithy.SchemaExtensions
+	e_TargetRegions_member                                 smithy.SchemaExtensions
+	eThrottlingException                                   smithy.SchemaExtensions
+	eThrottlingException_message                           smithy.SchemaExtensions
+	eThrottlingException_serviceCode                       smithy.SchemaExtensions
+	eThrottlingException_quotaCode                         smithy.SchemaExtensions
+	eThrottlingException_retryAfterSeconds                 smithy.SchemaExtensions
+	e_Timestamp                                            smithy.SchemaExtensions
+	eValidationException                                   smithy.SchemaExtensions
+	eValidationException_message                           smithy.SchemaExtensions
+	eCreateLandingZoneInput                                smithy.SchemaExtensions
+	eCreateLandingZoneInput_version                        smithy.SchemaExtensions
+	eCreateLandingZoneInput_remediationTypes               smithy.SchemaExtensions
+	eCreateLandingZoneInput_tags                           smithy.SchemaExtensions
+	eCreateLandingZoneInput_manifest                       smithy.SchemaExtensions
+	eCreateLandingZoneOutput                               smithy.SchemaExtensions
+	eCreateLandingZoneOutput_arn                           smithy.SchemaExtensions
+	eCreateLandingZoneOutput_operationIdentifier           smithy.SchemaExtensions
+	eDeleteLandingZoneInput                                smithy.SchemaExtensions
+	eDeleteLandingZoneInput_landingZoneIdentifier          smithy.SchemaExtensions
+	eDeleteLandingZoneOutput                               smithy.SchemaExtensions
+	eDeleteLandingZoneOutput_operationIdentifier           smithy.SchemaExtensions
+	eDisableBaselineInput                                  smithy.SchemaExtensions
+	eDisableBaselineInput_enabledBaselineIdentifier        smithy.SchemaExtensions
+	eDisableBaselineOutput                                 smithy.SchemaExtensions
+	eDisableBaselineOutput_operationIdentifier             smithy.SchemaExtensions
+	eDisableControlInput                                   smithy.SchemaExtensions
+	eDisableControlInput_controlIdentifier                 smithy.SchemaExtensions
+	eDisableControlInput_targetIdentifier                  smithy.SchemaExtensions
+	eDisableControlInput_enabledControlIdentifier          smithy.SchemaExtensions
+	eDisableControlOutput                                  smithy.SchemaExtensions
+	eDisableControlOutput_operationIdentifier              smithy.SchemaExtensions
+	eEnableBaselineInput                                   smithy.SchemaExtensions
+	eEnableBaselineInput_baselineVersion                   smithy.SchemaExtensions
+	eEnableBaselineInput_parameters                        smithy.SchemaExtensions
+	eEnableBaselineInput_baselineIdentifier                smithy.SchemaExtensions
+	eEnableBaselineInput_targetIdentifier                  smithy.SchemaExtensions
+	eEnableBaselineInput_tags                              smithy.SchemaExtensions
+	eEnableBaselineOutput                                  smithy.SchemaExtensions
+	eEnableBaselineOutput_operationIdentifier              smithy.SchemaExtensions
+	eEnableBaselineOutput_arn                              smithy.SchemaExtensions
+	eEnableControlInput                                    smithy.SchemaExtensions
+	eEnableControlInput_controlIdentifier                  smithy.SchemaExtensions
+	eEnableControlInput_targetIdentifier                   smithy.SchemaExtensions
+	eEnableControlInput_tags                               smithy.SchemaExtensions
+	eEnableControlInput_parameters                         smithy.SchemaExtensions
+	eEnableControlOutput                                   smithy.SchemaExtensions
+	eEnableControlOutput_operationIdentifier               smithy.SchemaExtensions
+	eEnableControlOutput_arn                               smithy.SchemaExtensions
+	eGetBaselineInput                                      smithy.SchemaExtensions
+	eGetBaselineInput_baselineIdentifier                   smithy.SchemaExtensions
+	eGetBaselineOperationInput                             smithy.SchemaExtensions
+	eGetBaselineOperationInput_operationIdentifier         smithy.SchemaExtensions
+	eGetBaselineOperationOutput                            smithy.SchemaExtensions
+	eGetBaselineOperationOutput_baselineOperation          smithy.SchemaExtensions
+	eGetBaselineOutput                                     smithy.SchemaExtensions
+	eGetBaselineOutput_arn                                 smithy.SchemaExtensions
+	eGetBaselineOutput_name                                smithy.SchemaExtensions
+	eGetBaselineOutput_description                         smithy.SchemaExtensions
+	eGetControlOperationInput                              smithy.SchemaExtensions
+	eGetControlOperationInput_operationIdentifier          smithy.SchemaExtensions
+	eGetControlOperationOutput                             smithy.SchemaExtensions
+	eGetControlOperationOutput_controlOperation            smithy.SchemaExtensions
+	eGetEnabledBaselineInput                               smithy.SchemaExtensions
+	eGetEnabledBaselineInput_enabledBaselineIdentifier     smithy.SchemaExtensions
+	eGetEnabledBaselineOutput                              smithy.SchemaExtensions
+	eGetEnabledBaselineOutput_enabledBaselineDetails       smithy.SchemaExtensions
+	eGetEnabledControlInput                                smithy.SchemaExtensions
+	eGetEnabledControlInput_enabledControlIdentifier       smithy.SchemaExtensions
+	eGetEnabledControlOutput                               smithy.SchemaExtensions
+	eGetEnabledControlOutput_enabledControlDetails         smithy.SchemaExtensions
+	eGetLandingZoneInput                                   smithy.SchemaExtensions
+	eGetLandingZoneInput_landingZoneIdentifier             smithy.SchemaExtensions
+	eGetLandingZoneOperationInput                          smithy.SchemaExtensions
+	eGetLandingZoneOperationInput_operationIdentifier      smithy.SchemaExtensions
+	eGetLandingZoneOperationOutput                         smithy.SchemaExtensions
+	eGetLandingZoneOperationOutput_operationDetails        smithy.SchemaExtensions
+	eGetLandingZoneOutput                                  smithy.SchemaExtensions
+	eGetLandingZoneOutput_landingZone                      smithy.SchemaExtensions
+	eListBaselinesInput                                    smithy.SchemaExtensions
+	eListBaselinesInput_nextToken                          smithy.SchemaExtensions
+	eListBaselinesInput_maxResults                         smithy.SchemaExtensions
+	eListBaselinesOutput                                   smithy.SchemaExtensions
+	eListBaselinesOutput_baselines                         smithy.SchemaExtensions
+	eListBaselinesOutput_nextToken                         smithy.SchemaExtensions
+	eListControlOperationsInput                            smithy.SchemaExtensions
+	eListControlOperationsInput_filter                     smithy.SchemaExtensions
+	eListControlOperationsInput_nextToken                  smithy.SchemaExtensions
+	eListControlOperationsInput_maxResults                 smithy.SchemaExtensions
+	eListControlOperationsOutput                           smithy.SchemaExtensions
+	eListControlOperationsOutput_controlOperations         smithy.SchemaExtensions
+	eListControlOperationsOutput_nextToken                 smithy.SchemaExtensions
+	eListEnabledBaselinesInput                             smithy.SchemaExtensions
+	eListEnabledBaselinesInput_filter                      smithy.SchemaExtensions
+	eListEnabledBaselinesInput_nextToken                   smithy.SchemaExtensions
+	eListEnabledBaselinesInput_maxResults                  smithy.SchemaExtensions
+	eListEnabledBaselinesInput_includeChildren             smithy.SchemaExtensions
+	eListEnabledBaselinesOutput                            smithy.SchemaExtensions
+	eListEnabledBaselinesOutput_enabledBaselines           smithy.SchemaExtensions
+	eListEnabledBaselinesOutput_nextToken                  smithy.SchemaExtensions
+	eListEnabledControlsInput                              smithy.SchemaExtensions
+	eListEnabledControlsInput_targetIdentifier             smithy.SchemaExtensions
+	eListEnabledControlsInput_nextToken                    smithy.SchemaExtensions
+	eListEnabledControlsInput_maxResults                   smithy.SchemaExtensions
+	eListEnabledControlsInput_filter                       smithy.SchemaExtensions
+	eListEnabledControlsInput_includeChildren              smithy.SchemaExtensions
+	eListEnabledControlsOutput                             smithy.SchemaExtensions
+	eListEnabledControlsOutput_enabledControls             smithy.SchemaExtensions
+	eListEnabledControlsOutput_nextToken                   smithy.SchemaExtensions
+	eListLandingZoneOperationsInput                        smithy.SchemaExtensions
+	eListLandingZoneOperationsInput_filter                 smithy.SchemaExtensions
+	eListLandingZoneOperationsInput_nextToken              smithy.SchemaExtensions
+	eListLandingZoneOperationsInput_maxResults             smithy.SchemaExtensions
+	eListLandingZoneOperationsOutput                       smithy.SchemaExtensions
+	eListLandingZoneOperationsOutput_landingZoneOperations smithy.SchemaExtensions
+	eListLandingZoneOperationsOutput_nextToken             smithy.SchemaExtensions
+	eListLandingZonesInput                                 smithy.SchemaExtensions
+	eListLandingZonesInput_nextToken                       smithy.SchemaExtensions
+	eListLandingZonesInput_maxResults                      smithy.SchemaExtensions
+	eListLandingZonesOutput                                smithy.SchemaExtensions
+	eListLandingZonesOutput_landingZones                   smithy.SchemaExtensions
+	eListLandingZonesOutput_nextToken                      smithy.SchemaExtensions
+	eListTagsForResourceInput                              smithy.SchemaExtensions
+	eListTagsForResourceInput_resourceArn                  smithy.SchemaExtensions
+	eListTagsForResourceOutput                             smithy.SchemaExtensions
+	eListTagsForResourceOutput_tags                        smithy.SchemaExtensions
+	eResetEnabledBaselineInput                             smithy.SchemaExtensions
+	eResetEnabledBaselineInput_enabledBaselineIdentifier   smithy.SchemaExtensions
+	eResetEnabledBaselineOutput                            smithy.SchemaExtensions
+	eResetEnabledBaselineOutput_operationIdentifier        smithy.SchemaExtensions
+	eResetEnabledControlInput                              smithy.SchemaExtensions
+	eResetEnabledControlInput_enabledControlIdentifier     smithy.SchemaExtensions
+	eResetEnabledControlOutput                             smithy.SchemaExtensions
+	eResetEnabledControlOutput_operationIdentifier         smithy.SchemaExtensions
+	eResetLandingZoneInput                                 smithy.SchemaExtensions
+	eResetLandingZoneInput_landingZoneIdentifier           smithy.SchemaExtensions
+	eResetLandingZoneOutput                                smithy.SchemaExtensions
+	eResetLandingZoneOutput_operationIdentifier            smithy.SchemaExtensions
+	eTagResourceInput                                      smithy.SchemaExtensions
+	eTagResourceInput_resourceArn                          smithy.SchemaExtensions
+	eTagResourceInput_tags                                 smithy.SchemaExtensions
+	eTagResourceOutput                                     smithy.SchemaExtensions
+	eUntagResourceInput                                    smithy.SchemaExtensions
+	eUntagResourceInput_resourceArn                        smithy.SchemaExtensions
+	eUntagResourceInput_tagKeys                            smithy.SchemaExtensions
+	eUntagResourceOutput                                   smithy.SchemaExtensions
+	eUpdateEnabledBaselineInput                            smithy.SchemaExtensions
+	eUpdateEnabledBaselineInput_baselineVersion            smithy.SchemaExtensions
+	eUpdateEnabledBaselineInput_parameters                 smithy.SchemaExtensions
+	eUpdateEnabledBaselineInput_enabledBaselineIdentifier  smithy.SchemaExtensions
+	eUpdateEnabledBaselineOutput                           smithy.SchemaExtensions
+	eUpdateEnabledBaselineOutput_operationIdentifier       smithy.SchemaExtensions
+	eUpdateEnabledControlInput                             smithy.SchemaExtensions
+	eUpdateEnabledControlInput_parameters                  smithy.SchemaExtensions
+	eUpdateEnabledControlInput_enabledControlIdentifier    smithy.SchemaExtensions
+	eUpdateEnabledControlOutput                            smithy.SchemaExtensions
+	eUpdateEnabledControlOutput_operationIdentifier        smithy.SchemaExtensions
+	eUpdateLandingZoneInput                                smithy.SchemaExtensions
+	eUpdateLandingZoneInput_version                        smithy.SchemaExtensions
+	eUpdateLandingZoneInput_remediationTypes               smithy.SchemaExtensions
+	eUpdateLandingZoneInput_landingZoneIdentifier          smithy.SchemaExtensions
+	eUpdateLandingZoneInput_manifest                       smithy.SchemaExtensions
+	eUpdateLandingZoneOutput                               smithy.SchemaExtensions
+	eUpdateLandingZoneOutput_operationIdentifier           smithy.SchemaExtensions
+)
 
 var (
 	iCreateLandingZone                    = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "CreateLandingZone"}
@@ -440,478 +910,478 @@ var mUpdateEnabledControlOutput = smithy.SchemaMembers{List: []*smithy.Schema{&s
 var mUpdateLandingZoneInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLandingZoneInput_version, &sUpdateLandingZoneInput_remediationTypes, &sUpdateLandingZoneInput_landingZoneIdentifier, &sUpdateLandingZoneInput_manifest}}
 var mUpdateLandingZoneOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLandingZoneOutput_operationIdentifier}}
 
-var sCreateLandingZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLandingZone, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sDeleteLandingZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLandingZone, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sDisableBaseline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableBaseline, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sDisableControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableControl, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sEnableBaseline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableBaseline, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sEnableControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableControl, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sGetBaseline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBaseline, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sGetBaselineOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBaselineOperation, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sGetControlOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetControlOperation, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sGetEnabledBaseline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnabledBaseline, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sGetEnabledControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnabledControl, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sGetLandingZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLandingZone, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sGetLandingZoneOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLandingZoneOperation, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sListBaselines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBaselines, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sListControlOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControlOperations, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sListEnabledBaselines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnabledBaselines, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sListEnabledControls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnabledControls, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sListLandingZoneOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLandingZoneOperations, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sListLandingZones = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLandingZones, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var sResetEnabledBaseline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetEnabledBaseline, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &ext[20]})
-var sResetEnabledControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetEnabledControl, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &ext[21]})
-var sResetLandingZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetLandingZone, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &ext[22]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &ext[23]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &ext[24]})
-var sUpdateEnabledBaseline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnabledBaseline, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &ext[25]})
-var sUpdateEnabledControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnabledControl, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &ext[26]})
-var sUpdateLandingZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLandingZone, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &ext[27]})
-var s_AWSControlTowerApis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSControlTowerApis, Type: smithy.ShapeTypeService, Ext: &ext[28]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &ext[29]})
-var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var s_BaselineArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BaselineArn, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var sBaselineOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBaselineOperation, Members: &mBaselineOperation, Type: smithy.ShapeTypeStructure, Ext: &ext[33]})
-var sBaselineOperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBaselineOperationStatus, Members: &mBaselineOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[40]})
-var sBaselineOperationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBaselineOperationType, Members: &mBaselineOperationType, Type: smithy.ShapeTypeEnum, Ext: &ext[44]})
-var s_Baselines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Baselines, Members: &m_Baselines, Type: smithy.ShapeTypeList, Ext: &ext[49]})
-var sBaselineSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBaselineSummary, Members: &mBaselineSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[51]})
-var s_BaselineVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BaselineVersion, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &ext[56]})
-var s_ControlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var s_ControlIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlIdentifiers, Members: &m_ControlIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[59]})
-var sControlOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlOperation, Members: &mControlOperation, Type: smithy.ShapeTypeStructure, Ext: &ext[61]})
-var sControlOperationFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlOperationFilter, Members: &mControlOperationFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[71]})
-var s_ControlOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlOperations, Members: &m_ControlOperations, Type: smithy.ShapeTypeList, Ext: &ext[77]})
-var sControlOperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlOperationStatus, Members: &mControlOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[79]})
-var s_ControlOperationStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlOperationStatuses, Members: &m_ControlOperationStatuses, Type: smithy.ShapeTypeList, Ext: &ext[83]})
-var sControlOperationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlOperationSummary, Members: &mControlOperationSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[85]})
-var sControlOperationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlOperationType, Members: &mControlOperationType, Type: smithy.ShapeTypeEnum, Ext: &ext[95]})
-var s_ControlOperationTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlOperationTypes, Members: &m_ControlOperationTypes, Type: smithy.ShapeTypeList, Ext: &ext[100]})
-var sDriftStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDriftStatus, Members: &mDriftStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[102]})
-var s_DriftStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DriftStatuses, Members: &m_DriftStatuses, Type: smithy.ShapeTypeList, Ext: &ext[107]})
-var sDriftStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDriftStatusSummary, Members: &mDriftStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[109]})
-var s_EnabledBaselineBaselineIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselineBaselineIdentifiers, Members: &m_EnabledBaselineBaselineIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[112]})
-var sEnabledBaselineDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineDetails, Members: &mEnabledBaselineDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[114]})
-var sEnabledBaselineDriftStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineDriftStatus, Members: &mEnabledBaselineDriftStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[123]})
-var s_EnabledBaselineDriftStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselineDriftStatuses, Members: &m_EnabledBaselineDriftStatuses, Type: smithy.ShapeTypeList, Ext: &ext[126]})
-var sEnabledBaselineDriftStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineDriftStatusSummary, Members: &mEnabledBaselineDriftStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[128]})
-var sEnabledBaselineDriftTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineDriftTypes, Members: &mEnabledBaselineDriftTypes, Type: smithy.ShapeTypeStructure, Ext: &ext[130]})
-var s_EnabledBaselineEnablementStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselineEnablementStatuses, Members: &m_EnabledBaselineEnablementStatuses, Type: smithy.ShapeTypeList, Ext: &ext[132]})
-var sEnabledBaselineFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineFilter, Members: &mEnabledBaselineFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[134]})
-var sEnabledBaselineInheritanceDrift = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineInheritanceDrift, Members: &mEnabledBaselineInheritanceDrift, Type: smithy.ShapeTypeStructure, Ext: &ext[140]})
-var sEnabledBaselineParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineParameter, Members: &mEnabledBaselineParameter, Type: smithy.ShapeTypeStructure, Ext: &ext[142]})
-var s_EnabledBaselineParameterDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselineParameterDocument, Type: smithy.ShapeTypeDocument, Ext: &ext[145]})
-var s_EnabledBaselineParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselineParameters, Members: &m_EnabledBaselineParameters, Type: smithy.ShapeTypeList, Ext: &ext[146]})
-var s_EnabledBaselineParameterSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselineParameterSummaries, Members: &m_EnabledBaselineParameterSummaries, Type: smithy.ShapeTypeList, Ext: &ext[148]})
-var sEnabledBaselineParameterSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineParameterSummary, Members: &mEnabledBaselineParameterSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[150]})
-var s_EnabledBaselineParentIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselineParentIdentifiers, Members: &m_EnabledBaselineParentIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[153]})
-var s_EnabledBaselines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselines, Members: &m_EnabledBaselines, Type: smithy.ShapeTypeList, Ext: &ext[155]})
-var sEnabledBaselineSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineSummary, Members: &mEnabledBaselineSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[157]})
-var s_EnabledBaselineTargetIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselineTargetIdentifiers, Members: &m_EnabledBaselineTargetIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[165]})
-var sEnabledControlDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledControlDetails, Members: &mEnabledControlDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[167]})
-var sEnabledControlDriftTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledControlDriftTypes, Members: &mEnabledControlDriftTypes, Type: smithy.ShapeTypeStructure, Ext: &ext[176]})
-var sEnabledControlFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledControlFilter, Members: &mEnabledControlFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[179]})
-var s_EnabledControlIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledControlIdentifiers, Members: &m_EnabledControlIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[186]})
-var sEnabledControlInheritanceDrift = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledControlInheritanceDrift, Members: &mEnabledControlInheritanceDrift, Type: smithy.ShapeTypeStructure, Ext: &ext[188]})
-var sEnabledControlParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledControlParameter, Members: &mEnabledControlParameter, Type: smithy.ShapeTypeStructure, Ext: &ext[190]})
-var s_EnabledControlParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledControlParameters, Members: &m_EnabledControlParameters, Type: smithy.ShapeTypeList, Ext: &ext[193]})
-var s_EnabledControlParameterSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledControlParameterSummaries, Members: &m_EnabledControlParameterSummaries, Type: smithy.ShapeTypeList, Ext: &ext[195]})
-var sEnabledControlParameterSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledControlParameterSummary, Members: &mEnabledControlParameterSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[197]})
-var sEnabledControlResourceDrift = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledControlResourceDrift, Members: &mEnabledControlResourceDrift, Type: smithy.ShapeTypeStructure, Ext: &ext[200]})
-var s_EnabledControls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledControls, Members: &m_EnabledControls, Type: smithy.ShapeTypeList, Ext: &ext[202]})
-var sEnabledControlSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledControlSummary, Members: &mEnabledControlSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[204]})
-var sEnablementStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnablementStatus, Members: &mEnablementStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[211]})
-var s_EnablementStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnablementStatuses, Members: &m_EnablementStatuses, Type: smithy.ShapeTypeList, Ext: &ext[215]})
-var sEnablementStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnablementStatusSummary, Members: &mEnablementStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[217]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &ext[220]})
-var sLandingZoneDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneDetail, Members: &mLandingZoneDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[222]})
-var sLandingZoneDriftStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneDriftStatus, Members: &mLandingZoneDriftStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[230]})
-var sLandingZoneDriftStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneDriftStatusSummary, Members: &mLandingZoneDriftStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[233]})
-var sLandingZoneOperationDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneOperationDetail, Members: &mLandingZoneOperationDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[235]})
-var sLandingZoneOperationFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneOperationFilter, Members: &mLandingZoneOperationFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[242]})
-var s_LandingZoneOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LandingZoneOperations, Members: &m_LandingZoneOperations, Type: smithy.ShapeTypeList, Ext: &ext[245]})
-var sLandingZoneOperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneOperationStatus, Members: &mLandingZoneOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[247]})
-var s_LandingZoneOperationStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LandingZoneOperationStatuses, Members: &m_LandingZoneOperationStatuses, Type: smithy.ShapeTypeList, Ext: &ext[251]})
-var sLandingZoneOperationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneOperationSummary, Members: &mLandingZoneOperationSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[253]})
-var sLandingZoneOperationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneOperationType, Members: &mLandingZoneOperationType, Type: smithy.ShapeTypeEnum, Ext: &ext[257]})
-var s_LandingZoneOperationTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LandingZoneOperationTypes, Members: &m_LandingZoneOperationTypes, Type: smithy.ShapeTypeList, Ext: &ext[262]})
-var sLandingZoneStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneStatus, Members: &mLandingZoneStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[264]})
-var s_LandingZoneSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LandingZoneSummaries, Members: &m_LandingZoneSummaries, Type: smithy.ShapeTypeList, Ext: &ext[268]})
-var sLandingZoneSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneSummary, Members: &mLandingZoneSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[270]})
-var s_LandingZoneVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LandingZoneVersion, Type: smithy.ShapeTypeString, Ext: &ext[272]})
-var s_ListBaselinesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListBaselinesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[273]})
-var s_ListControlOperationsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListControlOperationsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[274]})
-var s_ListControlOperationsNextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListControlOperationsNextToken, Type: smithy.ShapeTypeString, Ext: &ext[275]})
-var s_ListEnabledBaselinesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListEnabledBaselinesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[276]})
-var s_ListEnabledBaselinesNextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListEnabledBaselinesNextToken, Type: smithy.ShapeTypeString, Ext: &ext[277]})
-var s_ListLandingZoneOperationsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListLandingZoneOperationsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[278]})
-var s_ListLandingZonesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListLandingZonesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[279]})
-var s_Manifest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Manifest, Type: smithy.ShapeTypeDocument, Ext: &ext[280]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[281]})
-var s_OperationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[282]})
-var s_ParentIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParentIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[283]})
-var s_ParentIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParentIdentifiers, Members: &m_ParentIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[284]})
-var sRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegion, Members: &mRegion, Type: smithy.ShapeTypeStructure, Ext: &ext[286]})
-var s_RegionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionName, Type: smithy.ShapeTypeString, Ext: &ext[288]})
-var sRemediationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemediationType, Members: &mRemediationType, Type: smithy.ShapeTypeEnum, Ext: &ext[289]})
-var s_RemediationTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RemediationTypes, Members: &m_RemediationTypes, Type: smithy.ShapeTypeList, Ext: &ext[291]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &ext[293]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t34, Type: smithy.ShapeTypeStructure, Ext: &ext[295]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[297]})
-var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &ext[298]})
-var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[300]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[303]})
-var s_TargetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[304]})
-var s_TargetIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetIdentifiers, Members: &m_TargetIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[305]})
-var s_TargetRegions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetRegions, Members: &m_TargetRegions, Type: smithy.ShapeTypeList, Ext: &ext[307]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t35, Type: smithy.ShapeTypeStructure, Ext: &ext[309]})
-var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp, Ext: &ext[314]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &ext[315]})
-var sCreateLandingZoneInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLandingZoneInput, Members: &mCreateLandingZoneInput, Type: smithy.ShapeTypeStructure, Ext: &ext[317]})
-var sCreateLandingZoneOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLandingZoneOutput, Members: &mCreateLandingZoneOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[322]})
-var sDeleteLandingZoneInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLandingZoneInput, Members: &mDeleteLandingZoneInput, Type: smithy.ShapeTypeStructure, Ext: &ext[325]})
-var sDeleteLandingZoneOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLandingZoneOutput, Members: &mDeleteLandingZoneOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[327]})
-var sDisableBaselineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableBaselineInput, Members: &mDisableBaselineInput, Type: smithy.ShapeTypeStructure, Ext: &ext[329]})
-var sDisableBaselineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableBaselineOutput, Members: &mDisableBaselineOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[331]})
-var sDisableControlInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableControlInput, Members: &mDisableControlInput, Type: smithy.ShapeTypeStructure, Ext: &ext[333]})
-var sDisableControlOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableControlOutput, Members: &mDisableControlOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[337]})
-var sEnableBaselineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableBaselineInput, Members: &mEnableBaselineInput, Type: smithy.ShapeTypeStructure, Ext: &ext[339]})
-var sEnableBaselineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableBaselineOutput, Members: &mEnableBaselineOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[345]})
-var sEnableControlInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableControlInput, Members: &mEnableControlInput, Type: smithy.ShapeTypeStructure, Ext: &ext[348]})
-var sEnableControlOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableControlOutput, Members: &mEnableControlOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[353]})
-var sGetBaselineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBaselineInput, Members: &mGetBaselineInput, Type: smithy.ShapeTypeStructure, Ext: &ext[356]})
-var sGetBaselineOperationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBaselineOperationInput, Members: &mGetBaselineOperationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[358]})
-var sGetBaselineOperationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBaselineOperationOutput, Members: &mGetBaselineOperationOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[360]})
-var sGetBaselineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBaselineOutput, Members: &mGetBaselineOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[362]})
-var sGetControlOperationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetControlOperationInput, Members: &mGetControlOperationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[366]})
-var sGetControlOperationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetControlOperationOutput, Members: &mGetControlOperationOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[368]})
-var sGetEnabledBaselineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnabledBaselineInput, Members: &mGetEnabledBaselineInput, Type: smithy.ShapeTypeStructure, Ext: &ext[370]})
-var sGetEnabledBaselineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnabledBaselineOutput, Members: &mGetEnabledBaselineOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[372]})
-var sGetEnabledControlInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnabledControlInput, Members: &mGetEnabledControlInput, Type: smithy.ShapeTypeStructure, Ext: &ext[374]})
-var sGetEnabledControlOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnabledControlOutput, Members: &mGetEnabledControlOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[376]})
-var sGetLandingZoneInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLandingZoneInput, Members: &mGetLandingZoneInput, Type: smithy.ShapeTypeStructure, Ext: &ext[378]})
-var sGetLandingZoneOperationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLandingZoneOperationInput, Members: &mGetLandingZoneOperationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[380]})
-var sGetLandingZoneOperationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLandingZoneOperationOutput, Members: &mGetLandingZoneOperationOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[382]})
-var sGetLandingZoneOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLandingZoneOutput, Members: &mGetLandingZoneOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[384]})
-var sListBaselinesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBaselinesInput, Members: &mListBaselinesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[386]})
-var sListBaselinesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBaselinesOutput, Members: &mListBaselinesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[389]})
-var sListControlOperationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControlOperationsInput, Members: &mListControlOperationsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[392]})
-var sListControlOperationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControlOperationsOutput, Members: &mListControlOperationsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[396]})
-var sListEnabledBaselinesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnabledBaselinesInput, Members: &mListEnabledBaselinesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[399]})
-var sListEnabledBaselinesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnabledBaselinesOutput, Members: &mListEnabledBaselinesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[404]})
-var sListEnabledControlsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnabledControlsInput, Members: &mListEnabledControlsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[407]})
-var sListEnabledControlsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnabledControlsOutput, Members: &mListEnabledControlsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[413]})
-var sListLandingZoneOperationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLandingZoneOperationsInput, Members: &mListLandingZoneOperationsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[416]})
-var sListLandingZoneOperationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLandingZoneOperationsOutput, Members: &mListLandingZoneOperationsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[420]})
-var sListLandingZonesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLandingZonesInput, Members: &mListLandingZonesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[423]})
-var sListLandingZonesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLandingZonesOutput, Members: &mListLandingZonesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[426]})
-var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[429]})
-var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[431]})
-var sResetEnabledBaselineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetEnabledBaselineInput, Members: &mResetEnabledBaselineInput, Type: smithy.ShapeTypeStructure, Ext: &ext[433]})
-var sResetEnabledBaselineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetEnabledBaselineOutput, Members: &mResetEnabledBaselineOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[435]})
-var sResetEnabledControlInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetEnabledControlInput, Members: &mResetEnabledControlInput, Type: smithy.ShapeTypeStructure, Ext: &ext[437]})
-var sResetEnabledControlOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetEnabledControlOutput, Members: &mResetEnabledControlOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[439]})
-var sResetLandingZoneInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetLandingZoneInput, Members: &mResetLandingZoneInput, Type: smithy.ShapeTypeStructure, Ext: &ext[441]})
-var sResetLandingZoneOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetLandingZoneOutput, Members: &mResetLandingZoneOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[443]})
-var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[445]})
-var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[448]})
-var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[449]})
-var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[452]})
-var sUpdateEnabledBaselineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnabledBaselineInput, Members: &mUpdateEnabledBaselineInput, Type: smithy.ShapeTypeStructure, Ext: &ext[453]})
-var sUpdateEnabledBaselineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnabledBaselineOutput, Members: &mUpdateEnabledBaselineOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[457]})
-var sUpdateEnabledControlInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnabledControlInput, Members: &mUpdateEnabledControlInput, Type: smithy.ShapeTypeStructure, Ext: &ext[459]})
-var sUpdateEnabledControlOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnabledControlOutput, Members: &mUpdateEnabledControlOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[462]})
-var sUpdateLandingZoneInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLandingZoneInput, Members: &mUpdateLandingZoneInput, Type: smithy.ShapeTypeStructure, Ext: &ext[464]})
-var sUpdateLandingZoneOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLandingZoneOutput, Members: &mUpdateLandingZoneOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[469]})
+var sCreateLandingZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLandingZone, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateLandingZone})
+var sDeleteLandingZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLandingZone, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eDeleteLandingZone})
+var sDisableBaseline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableBaseline, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eDisableBaseline})
+var sDisableControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableControl, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDisableControl})
+var sEnableBaseline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableBaseline, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eEnableBaseline})
+var sEnableControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableControl, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eEnableControl})
+var sGetBaseline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBaseline, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eGetBaseline})
+var sGetBaselineOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBaselineOperation, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eGetBaselineOperation})
+var sGetControlOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetControlOperation, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eGetControlOperation})
+var sGetEnabledBaseline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnabledBaseline, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eGetEnabledBaseline})
+var sGetEnabledControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnabledControl, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eGetEnabledControl})
+var sGetLandingZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLandingZone, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eGetLandingZone})
+var sGetLandingZoneOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLandingZoneOperation, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eGetLandingZoneOperation})
+var sListBaselines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBaselines, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eListBaselines})
+var sListControlOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControlOperations, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eListControlOperations})
+var sListEnabledBaselines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnabledBaselines, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eListEnabledBaselines})
+var sListEnabledControls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnabledControls, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eListEnabledControls})
+var sListLandingZoneOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLandingZoneOperations, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eListLandingZoneOperations})
+var sListLandingZones = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLandingZones, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eListLandingZones})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sResetEnabledBaseline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetEnabledBaseline, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eResetEnabledBaseline})
+var sResetEnabledControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetEnabledControl, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eResetEnabledControl})
+var sResetLandingZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetLandingZone, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eResetLandingZone})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateEnabledBaseline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnabledBaseline, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eUpdateEnabledBaseline})
+var sUpdateEnabledControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnabledControl, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eUpdateEnabledControl})
+var sUpdateLandingZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLandingZone, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eUpdateLandingZone})
+var s_AWSControlTowerApis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSControlTowerApis, Type: smithy.ShapeTypeService, Ext: &e_AWSControlTowerApis})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var s_BaselineArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BaselineArn, Type: smithy.ShapeTypeString, Ext: &e_BaselineArn})
+var sBaselineOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBaselineOperation, Members: &mBaselineOperation, Type: smithy.ShapeTypeStructure, Ext: &eBaselineOperation})
+var sBaselineOperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBaselineOperationStatus, Members: &mBaselineOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &eBaselineOperationStatus})
+var sBaselineOperationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBaselineOperationType, Members: &mBaselineOperationType, Type: smithy.ShapeTypeEnum, Ext: &eBaselineOperationType})
+var s_Baselines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Baselines, Members: &m_Baselines, Type: smithy.ShapeTypeList, Ext: &e_Baselines})
+var sBaselineSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBaselineSummary, Members: &mBaselineSummary, Type: smithy.ShapeTypeStructure, Ext: &eBaselineSummary})
+var s_BaselineVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BaselineVersion, Type: smithy.ShapeTypeString, Ext: &e_BaselineVersion})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var s_ControlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlIdentifier, Type: smithy.ShapeTypeString, Ext: &e_ControlIdentifier})
+var s_ControlIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlIdentifiers, Members: &m_ControlIdentifiers, Type: smithy.ShapeTypeList, Ext: &e_ControlIdentifiers})
+var sControlOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlOperation, Members: &mControlOperation, Type: smithy.ShapeTypeStructure, Ext: &eControlOperation})
+var sControlOperationFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlOperationFilter, Members: &mControlOperationFilter, Type: smithy.ShapeTypeStructure, Ext: &eControlOperationFilter})
+var s_ControlOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlOperations, Members: &m_ControlOperations, Type: smithy.ShapeTypeList, Ext: &e_ControlOperations})
+var sControlOperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlOperationStatus, Members: &mControlOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &eControlOperationStatus})
+var s_ControlOperationStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlOperationStatuses, Members: &m_ControlOperationStatuses, Type: smithy.ShapeTypeList, Ext: &e_ControlOperationStatuses})
+var sControlOperationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlOperationSummary, Members: &mControlOperationSummary, Type: smithy.ShapeTypeStructure, Ext: &eControlOperationSummary})
+var sControlOperationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlOperationType, Members: &mControlOperationType, Type: smithy.ShapeTypeEnum, Ext: &eControlOperationType})
+var s_ControlOperationTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlOperationTypes, Members: &m_ControlOperationTypes, Type: smithy.ShapeTypeList, Ext: &e_ControlOperationTypes})
+var sDriftStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDriftStatus, Members: &mDriftStatus, Type: smithy.ShapeTypeEnum, Ext: &eDriftStatus})
+var s_DriftStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DriftStatuses, Members: &m_DriftStatuses, Type: smithy.ShapeTypeList, Ext: &e_DriftStatuses})
+var sDriftStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDriftStatusSummary, Members: &mDriftStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &eDriftStatusSummary})
+var s_EnabledBaselineBaselineIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselineBaselineIdentifiers, Members: &m_EnabledBaselineBaselineIdentifiers, Type: smithy.ShapeTypeList, Ext: &e_EnabledBaselineBaselineIdentifiers})
+var sEnabledBaselineDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineDetails, Members: &mEnabledBaselineDetails, Type: smithy.ShapeTypeStructure, Ext: &eEnabledBaselineDetails})
+var sEnabledBaselineDriftStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineDriftStatus, Members: &mEnabledBaselineDriftStatus, Type: smithy.ShapeTypeEnum, Ext: &eEnabledBaselineDriftStatus})
+var s_EnabledBaselineDriftStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselineDriftStatuses, Members: &m_EnabledBaselineDriftStatuses, Type: smithy.ShapeTypeList, Ext: &e_EnabledBaselineDriftStatuses})
+var sEnabledBaselineDriftStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineDriftStatusSummary, Members: &mEnabledBaselineDriftStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &eEnabledBaselineDriftStatusSummary})
+var sEnabledBaselineDriftTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineDriftTypes, Members: &mEnabledBaselineDriftTypes, Type: smithy.ShapeTypeStructure, Ext: &eEnabledBaselineDriftTypes})
+var s_EnabledBaselineEnablementStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselineEnablementStatuses, Members: &m_EnabledBaselineEnablementStatuses, Type: smithy.ShapeTypeList, Ext: &e_EnabledBaselineEnablementStatuses})
+var sEnabledBaselineFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineFilter, Members: &mEnabledBaselineFilter, Type: smithy.ShapeTypeStructure, Ext: &eEnabledBaselineFilter})
+var sEnabledBaselineInheritanceDrift = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineInheritanceDrift, Members: &mEnabledBaselineInheritanceDrift, Type: smithy.ShapeTypeStructure, Ext: &eEnabledBaselineInheritanceDrift})
+var sEnabledBaselineParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineParameter, Members: &mEnabledBaselineParameter, Type: smithy.ShapeTypeStructure, Ext: &eEnabledBaselineParameter})
+var s_EnabledBaselineParameterDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselineParameterDocument, Type: smithy.ShapeTypeDocument, Ext: &e_EnabledBaselineParameterDocument})
+var s_EnabledBaselineParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselineParameters, Members: &m_EnabledBaselineParameters, Type: smithy.ShapeTypeList, Ext: &e_EnabledBaselineParameters})
+var s_EnabledBaselineParameterSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselineParameterSummaries, Members: &m_EnabledBaselineParameterSummaries, Type: smithy.ShapeTypeList, Ext: &e_EnabledBaselineParameterSummaries})
+var sEnabledBaselineParameterSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineParameterSummary, Members: &mEnabledBaselineParameterSummary, Type: smithy.ShapeTypeStructure, Ext: &eEnabledBaselineParameterSummary})
+var s_EnabledBaselineParentIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselineParentIdentifiers, Members: &m_EnabledBaselineParentIdentifiers, Type: smithy.ShapeTypeList, Ext: &e_EnabledBaselineParentIdentifiers})
+var s_EnabledBaselines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselines, Members: &m_EnabledBaselines, Type: smithy.ShapeTypeList, Ext: &e_EnabledBaselines})
+var sEnabledBaselineSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineSummary, Members: &mEnabledBaselineSummary, Type: smithy.ShapeTypeStructure, Ext: &eEnabledBaselineSummary})
+var s_EnabledBaselineTargetIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselineTargetIdentifiers, Members: &m_EnabledBaselineTargetIdentifiers, Type: smithy.ShapeTypeList, Ext: &e_EnabledBaselineTargetIdentifiers})
+var sEnabledControlDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledControlDetails, Members: &mEnabledControlDetails, Type: smithy.ShapeTypeStructure, Ext: &eEnabledControlDetails})
+var sEnabledControlDriftTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledControlDriftTypes, Members: &mEnabledControlDriftTypes, Type: smithy.ShapeTypeStructure, Ext: &eEnabledControlDriftTypes})
+var sEnabledControlFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledControlFilter, Members: &mEnabledControlFilter, Type: smithy.ShapeTypeStructure, Ext: &eEnabledControlFilter})
+var s_EnabledControlIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledControlIdentifiers, Members: &m_EnabledControlIdentifiers, Type: smithy.ShapeTypeList, Ext: &e_EnabledControlIdentifiers})
+var sEnabledControlInheritanceDrift = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledControlInheritanceDrift, Members: &mEnabledControlInheritanceDrift, Type: smithy.ShapeTypeStructure, Ext: &eEnabledControlInheritanceDrift})
+var sEnabledControlParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledControlParameter, Members: &mEnabledControlParameter, Type: smithy.ShapeTypeStructure, Ext: &eEnabledControlParameter})
+var s_EnabledControlParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledControlParameters, Members: &m_EnabledControlParameters, Type: smithy.ShapeTypeList, Ext: &e_EnabledControlParameters})
+var s_EnabledControlParameterSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledControlParameterSummaries, Members: &m_EnabledControlParameterSummaries, Type: smithy.ShapeTypeList, Ext: &e_EnabledControlParameterSummaries})
+var sEnabledControlParameterSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledControlParameterSummary, Members: &mEnabledControlParameterSummary, Type: smithy.ShapeTypeStructure, Ext: &eEnabledControlParameterSummary})
+var sEnabledControlResourceDrift = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledControlResourceDrift, Members: &mEnabledControlResourceDrift, Type: smithy.ShapeTypeStructure, Ext: &eEnabledControlResourceDrift})
+var s_EnabledControls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledControls, Members: &m_EnabledControls, Type: smithy.ShapeTypeList, Ext: &e_EnabledControls})
+var sEnabledControlSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledControlSummary, Members: &mEnabledControlSummary, Type: smithy.ShapeTypeStructure, Ext: &eEnabledControlSummary})
+var sEnablementStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnablementStatus, Members: &mEnablementStatus, Type: smithy.ShapeTypeEnum, Ext: &eEnablementStatus})
+var s_EnablementStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnablementStatuses, Members: &m_EnablementStatuses, Type: smithy.ShapeTypeList, Ext: &e_EnablementStatuses})
+var sEnablementStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnablementStatusSummary, Members: &mEnablementStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &eEnablementStatusSummary})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sLandingZoneDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneDetail, Members: &mLandingZoneDetail, Type: smithy.ShapeTypeStructure, Ext: &eLandingZoneDetail})
+var sLandingZoneDriftStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneDriftStatus, Members: &mLandingZoneDriftStatus, Type: smithy.ShapeTypeEnum, Ext: &eLandingZoneDriftStatus})
+var sLandingZoneDriftStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneDriftStatusSummary, Members: &mLandingZoneDriftStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &eLandingZoneDriftStatusSummary})
+var sLandingZoneOperationDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneOperationDetail, Members: &mLandingZoneOperationDetail, Type: smithy.ShapeTypeStructure, Ext: &eLandingZoneOperationDetail})
+var sLandingZoneOperationFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneOperationFilter, Members: &mLandingZoneOperationFilter, Type: smithy.ShapeTypeStructure, Ext: &eLandingZoneOperationFilter})
+var s_LandingZoneOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LandingZoneOperations, Members: &m_LandingZoneOperations, Type: smithy.ShapeTypeList, Ext: &e_LandingZoneOperations})
+var sLandingZoneOperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneOperationStatus, Members: &mLandingZoneOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &eLandingZoneOperationStatus})
+var s_LandingZoneOperationStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LandingZoneOperationStatuses, Members: &m_LandingZoneOperationStatuses, Type: smithy.ShapeTypeList, Ext: &e_LandingZoneOperationStatuses})
+var sLandingZoneOperationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneOperationSummary, Members: &mLandingZoneOperationSummary, Type: smithy.ShapeTypeStructure, Ext: &eLandingZoneOperationSummary})
+var sLandingZoneOperationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneOperationType, Members: &mLandingZoneOperationType, Type: smithy.ShapeTypeEnum, Ext: &eLandingZoneOperationType})
+var s_LandingZoneOperationTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LandingZoneOperationTypes, Members: &m_LandingZoneOperationTypes, Type: smithy.ShapeTypeList, Ext: &e_LandingZoneOperationTypes})
+var sLandingZoneStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneStatus, Members: &mLandingZoneStatus, Type: smithy.ShapeTypeEnum, Ext: &eLandingZoneStatus})
+var s_LandingZoneSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LandingZoneSummaries, Members: &m_LandingZoneSummaries, Type: smithy.ShapeTypeList, Ext: &e_LandingZoneSummaries})
+var sLandingZoneSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneSummary, Members: &mLandingZoneSummary, Type: smithy.ShapeTypeStructure, Ext: &eLandingZoneSummary})
+var s_LandingZoneVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LandingZoneVersion, Type: smithy.ShapeTypeString, Ext: &e_LandingZoneVersion})
+var s_ListBaselinesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListBaselinesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListBaselinesMaxResults})
+var s_ListControlOperationsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListControlOperationsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListControlOperationsMaxResults})
+var s_ListControlOperationsNextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListControlOperationsNextToken, Type: smithy.ShapeTypeString, Ext: &e_ListControlOperationsNextToken})
+var s_ListEnabledBaselinesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListEnabledBaselinesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListEnabledBaselinesMaxResults})
+var s_ListEnabledBaselinesNextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListEnabledBaselinesNextToken, Type: smithy.ShapeTypeString, Ext: &e_ListEnabledBaselinesNextToken})
+var s_ListLandingZoneOperationsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListLandingZoneOperationsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListLandingZoneOperationsMaxResults})
+var s_ListLandingZonesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListLandingZonesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListLandingZonesMaxResults})
+var s_Manifest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Manifest, Type: smithy.ShapeTypeDocument, Ext: &e_Manifest})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_OperationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &e_OperationIdentifier})
+var s_ParentIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParentIdentifier, Type: smithy.ShapeTypeString, Ext: &e_ParentIdentifier})
+var s_ParentIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParentIdentifiers, Members: &m_ParentIdentifiers, Type: smithy.ShapeTypeList, Ext: &e_ParentIdentifiers})
+var sRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegion, Members: &mRegion, Type: smithy.ShapeTypeStructure, Ext: &eRegion})
+var s_RegionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionName, Type: smithy.ShapeTypeString, Ext: &e_RegionName})
+var sRemediationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemediationType, Members: &mRemediationType, Type: smithy.ShapeTypeEnum, Ext: &eRemediationType})
+var s_RemediationTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RemediationTypes, Members: &m_RemediationTypes, Type: smithy.ShapeTypeList, Ext: &e_RemediationTypes})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t34, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &e_TagKeys})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_TargetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString, Ext: &e_TargetIdentifier})
+var s_TargetIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetIdentifiers, Members: &m_TargetIdentifiers, Type: smithy.ShapeTypeList, Ext: &e_TargetIdentifiers})
+var s_TargetRegions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetRegions, Members: &m_TargetRegions, Type: smithy.ShapeTypeList, Ext: &e_TargetRegions})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t35, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sCreateLandingZoneInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLandingZoneInput, Members: &mCreateLandingZoneInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateLandingZoneInput})
+var sCreateLandingZoneOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLandingZoneOutput, Members: &mCreateLandingZoneOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateLandingZoneOutput})
+var sDeleteLandingZoneInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLandingZoneInput, Members: &mDeleteLandingZoneInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLandingZoneInput})
+var sDeleteLandingZoneOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLandingZoneOutput, Members: &mDeleteLandingZoneOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLandingZoneOutput})
+var sDisableBaselineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableBaselineInput, Members: &mDisableBaselineInput, Type: smithy.ShapeTypeStructure, Ext: &eDisableBaselineInput})
+var sDisableBaselineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableBaselineOutput, Members: &mDisableBaselineOutput, Type: smithy.ShapeTypeStructure, Ext: &eDisableBaselineOutput})
+var sDisableControlInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableControlInput, Members: &mDisableControlInput, Type: smithy.ShapeTypeStructure, Ext: &eDisableControlInput})
+var sDisableControlOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableControlOutput, Members: &mDisableControlOutput, Type: smithy.ShapeTypeStructure, Ext: &eDisableControlOutput})
+var sEnableBaselineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableBaselineInput, Members: &mEnableBaselineInput, Type: smithy.ShapeTypeStructure, Ext: &eEnableBaselineInput})
+var sEnableBaselineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableBaselineOutput, Members: &mEnableBaselineOutput, Type: smithy.ShapeTypeStructure, Ext: &eEnableBaselineOutput})
+var sEnableControlInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableControlInput, Members: &mEnableControlInput, Type: smithy.ShapeTypeStructure, Ext: &eEnableControlInput})
+var sEnableControlOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableControlOutput, Members: &mEnableControlOutput, Type: smithy.ShapeTypeStructure, Ext: &eEnableControlOutput})
+var sGetBaselineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBaselineInput, Members: &mGetBaselineInput, Type: smithy.ShapeTypeStructure, Ext: &eGetBaselineInput})
+var sGetBaselineOperationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBaselineOperationInput, Members: &mGetBaselineOperationInput, Type: smithy.ShapeTypeStructure, Ext: &eGetBaselineOperationInput})
+var sGetBaselineOperationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBaselineOperationOutput, Members: &mGetBaselineOperationOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetBaselineOperationOutput})
+var sGetBaselineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBaselineOutput, Members: &mGetBaselineOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetBaselineOutput})
+var sGetControlOperationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetControlOperationInput, Members: &mGetControlOperationInput, Type: smithy.ShapeTypeStructure, Ext: &eGetControlOperationInput})
+var sGetControlOperationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetControlOperationOutput, Members: &mGetControlOperationOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetControlOperationOutput})
+var sGetEnabledBaselineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnabledBaselineInput, Members: &mGetEnabledBaselineInput, Type: smithy.ShapeTypeStructure, Ext: &eGetEnabledBaselineInput})
+var sGetEnabledBaselineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnabledBaselineOutput, Members: &mGetEnabledBaselineOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetEnabledBaselineOutput})
+var sGetEnabledControlInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnabledControlInput, Members: &mGetEnabledControlInput, Type: smithy.ShapeTypeStructure, Ext: &eGetEnabledControlInput})
+var sGetEnabledControlOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnabledControlOutput, Members: &mGetEnabledControlOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetEnabledControlOutput})
+var sGetLandingZoneInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLandingZoneInput, Members: &mGetLandingZoneInput, Type: smithy.ShapeTypeStructure, Ext: &eGetLandingZoneInput})
+var sGetLandingZoneOperationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLandingZoneOperationInput, Members: &mGetLandingZoneOperationInput, Type: smithy.ShapeTypeStructure, Ext: &eGetLandingZoneOperationInput})
+var sGetLandingZoneOperationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLandingZoneOperationOutput, Members: &mGetLandingZoneOperationOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetLandingZoneOperationOutput})
+var sGetLandingZoneOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLandingZoneOutput, Members: &mGetLandingZoneOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetLandingZoneOutput})
+var sListBaselinesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBaselinesInput, Members: &mListBaselinesInput, Type: smithy.ShapeTypeStructure, Ext: &eListBaselinesInput})
+var sListBaselinesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBaselinesOutput, Members: &mListBaselinesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListBaselinesOutput})
+var sListControlOperationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControlOperationsInput, Members: &mListControlOperationsInput, Type: smithy.ShapeTypeStructure, Ext: &eListControlOperationsInput})
+var sListControlOperationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControlOperationsOutput, Members: &mListControlOperationsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListControlOperationsOutput})
+var sListEnabledBaselinesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnabledBaselinesInput, Members: &mListEnabledBaselinesInput, Type: smithy.ShapeTypeStructure, Ext: &eListEnabledBaselinesInput})
+var sListEnabledBaselinesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnabledBaselinesOutput, Members: &mListEnabledBaselinesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListEnabledBaselinesOutput})
+var sListEnabledControlsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnabledControlsInput, Members: &mListEnabledControlsInput, Type: smithy.ShapeTypeStructure, Ext: &eListEnabledControlsInput})
+var sListEnabledControlsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnabledControlsOutput, Members: &mListEnabledControlsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListEnabledControlsOutput})
+var sListLandingZoneOperationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLandingZoneOperationsInput, Members: &mListLandingZoneOperationsInput, Type: smithy.ShapeTypeStructure, Ext: &eListLandingZoneOperationsInput})
+var sListLandingZoneOperationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLandingZoneOperationsOutput, Members: &mListLandingZoneOperationsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListLandingZoneOperationsOutput})
+var sListLandingZonesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLandingZonesInput, Members: &mListLandingZonesInput, Type: smithy.ShapeTypeStructure, Ext: &eListLandingZonesInput})
+var sListLandingZonesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLandingZonesOutput, Members: &mListLandingZonesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListLandingZonesOutput})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceInput})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceOutput})
+var sResetEnabledBaselineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetEnabledBaselineInput, Members: &mResetEnabledBaselineInput, Type: smithy.ShapeTypeStructure, Ext: &eResetEnabledBaselineInput})
+var sResetEnabledBaselineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetEnabledBaselineOutput, Members: &mResetEnabledBaselineOutput, Type: smithy.ShapeTypeStructure, Ext: &eResetEnabledBaselineOutput})
+var sResetEnabledControlInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetEnabledControlInput, Members: &mResetEnabledControlInput, Type: smithy.ShapeTypeStructure, Ext: &eResetEnabledControlInput})
+var sResetEnabledControlOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetEnabledControlOutput, Members: &mResetEnabledControlOutput, Type: smithy.ShapeTypeStructure, Ext: &eResetEnabledControlOutput})
+var sResetLandingZoneInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetLandingZoneInput, Members: &mResetLandingZoneInput, Type: smithy.ShapeTypeStructure, Ext: &eResetLandingZoneInput})
+var sResetLandingZoneOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetLandingZoneOutput, Members: &mResetLandingZoneOutput, Type: smithy.ShapeTypeStructure, Ext: &eResetLandingZoneOutput})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceInput})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceOutput})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceInput})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceOutput})
+var sUpdateEnabledBaselineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnabledBaselineInput, Members: &mUpdateEnabledBaselineInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateEnabledBaselineInput})
+var sUpdateEnabledBaselineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnabledBaselineOutput, Members: &mUpdateEnabledBaselineOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateEnabledBaselineOutput})
+var sUpdateEnabledControlInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnabledControlInput, Members: &mUpdateEnabledControlInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateEnabledControlInput})
+var sUpdateEnabledControlOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnabledControlOutput, Members: &mUpdateEnabledControlOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateEnabledControlOutput})
+var sUpdateLandingZoneInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLandingZoneInput, Members: &mUpdateLandingZoneInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLandingZoneInput})
+var sUpdateLandingZoneOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLandingZoneOutput, Members: &mUpdateLandingZoneOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLandingZoneOutput})
 
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[30]})
-var sBaselineOperation_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[34]})
-var sBaselineOperation_operationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationType", ID: &iBaselineOperationType, Members: &mBaselineOperationType, Type: smithy.ShapeTypeEnum, Ext: &ext[35]})
-var sBaselineOperation_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iBaselineOperationStatus, Members: &mBaselineOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[36]})
-var sBaselineOperation_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Traits: &t29, Type: smithy.ShapeTypeTimestamp, Ext: &ext[37]})
-var sBaselineOperation_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Traits: &t29, Type: smithy.ShapeTypeTimestamp, Ext: &ext[38]})
-var sBaselineOperation_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[39]})
-var sBaselineOperationStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[41]})
-var sBaselineOperationStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[42]})
-var sBaselineOperationStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[43]})
-var sBaselineOperationType_ENABLE_BASELINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLE_BASELINE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[45]})
-var sBaselineOperationType_DISABLE_BASELINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLE_BASELINE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[46]})
-var sBaselineOperationType_UPDATE_ENABLED_BASELINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_ENABLED_BASELINE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[47]})
-var sBaselineOperationType_RESET_ENABLED_BASELINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESET_ENABLED_BASELINE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[48]})
-var s_Baselines_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBaselineSummary, Members: &mBaselineSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[50]})
-var sBaselineSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var sBaselineSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[53]})
-var sBaselineSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var s_ControlIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ControlIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[60]})
-var sControlOperation_operationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationType", ID: &iControlOperationType, Members: &mControlOperationType, Type: smithy.ShapeTypeEnum, Ext: &ext[62]})
-var sControlOperation_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp, Ext: &ext[63]})
-var sControlOperation_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp, Ext: &ext[64]})
-var sControlOperation_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iControlOperationStatus, Members: &mControlOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[65]})
-var sControlOperation_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[66]})
-var sControlOperation_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[67]})
-var sControlOperation_controlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlIdentifier", ID: &i_ControlIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[68]})
-var sControlOperation_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var sControlOperation_enabledControlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControlIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[70]})
-var sControlOperationFilter_controlIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlIdentifiers", ID: &i_ControlIdentifiers, Members: &m_ControlIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[72]})
-var sControlOperationFilter_targetIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifiers", ID: &i_TargetIdentifiers, Members: &m_TargetIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[73]})
-var sControlOperationFilter_enabledControlIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControlIdentifiers", ID: &i_EnabledControlIdentifiers, Members: &m_EnabledControlIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[74]})
-var sControlOperationFilter_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_ControlOperationStatuses, Members: &m_ControlOperationStatuses, Type: smithy.ShapeTypeList, Ext: &ext[75]})
-var sControlOperationFilter_controlOperationTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlOperationTypes", ID: &i_ControlOperationTypes, Members: &m_ControlOperationTypes, Type: smithy.ShapeTypeList, Ext: &ext[76]})
-var s_ControlOperations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iControlOperationSummary, Members: &mControlOperationSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[78]})
-var sControlOperationStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var sControlOperationStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[81]})
-var sControlOperationStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[82]})
-var s_ControlOperationStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iControlOperationStatus, Members: &mControlOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[84]})
-var sControlOperationSummary_operationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationType", ID: &iControlOperationType, Members: &mControlOperationType, Type: smithy.ShapeTypeEnum, Ext: &ext[86]})
-var sControlOperationSummary_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp, Ext: &ext[87]})
-var sControlOperationSummary_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp, Ext: &ext[88]})
-var sControlOperationSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iControlOperationStatus, Members: &mControlOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[89]})
-var sControlOperationSummary_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[90]})
-var sControlOperationSummary_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[91]})
-var sControlOperationSummary_controlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlIdentifier", ID: &i_ControlIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[92]})
-var sControlOperationSummary_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[93]})
-var sControlOperationSummary_enabledControlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControlIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[94]})
-var sControlOperationType_ENABLE_CONTROL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLE_CONTROL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[96]})
-var sControlOperationType_DISABLE_CONTROL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLE_CONTROL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[97]})
-var sControlOperationType_UPDATE_ENABLED_CONTROL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_ENABLED_CONTROL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[98]})
-var sControlOperationType_RESET_ENABLED_CONTROL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESET_ENABLED_CONTROL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[99]})
-var s_ControlOperationTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iControlOperationType, Members: &mControlOperationType, Type: smithy.ShapeTypeEnum, Ext: &ext[101]})
-var sDriftStatus_DRIFTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRIFTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[103]})
-var sDriftStatus_IN_SYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_SYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[104]})
-var sDriftStatus_NOT_CHECKING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_CHECKING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[105]})
-var sDriftStatus_UNKNOWN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[106]})
-var s_DriftStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDriftStatus, Members: &mDriftStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[108]})
-var sDriftStatusSummary_driftStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "driftStatus", ID: &iDriftStatus, Members: &mDriftStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[110]})
-var sDriftStatusSummary_types = smithy.NewStaticSchema(smithy.StaticSchema{Member: "types", ID: &iEnabledControlDriftTypes, Members: &mEnabledControlDriftTypes, Type: smithy.ShapeTypeStructure, Ext: &ext[111]})
-var s_EnabledBaselineBaselineIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[113]})
-var sEnabledBaselineDetails_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[115]})
-var sEnabledBaselineDetails_baselineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[116]})
-var sEnabledBaselineDetails_baselineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[117]})
-var sEnabledBaselineDetails_driftStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "driftStatusSummary", ID: &iEnabledBaselineDriftStatusSummary, Members: &mEnabledBaselineDriftStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[118]})
-var sEnabledBaselineDetails_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[119]})
-var sEnabledBaselineDetails_parentIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[120]})
-var sEnabledBaselineDetails_statusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummary", ID: &iEnablementStatusSummary, Members: &mEnablementStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[121]})
-var sEnabledBaselineDetails_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_EnabledBaselineParameterSummaries, Members: &m_EnabledBaselineParameterSummaries, Type: smithy.ShapeTypeList, Ext: &ext[122]})
-var sEnabledBaselineDriftStatus_IN_SYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_SYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[124]})
-var sEnabledBaselineDriftStatus_DRIFTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRIFTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[125]})
-var s_EnabledBaselineDriftStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnabledBaselineDriftStatus, Members: &mEnabledBaselineDriftStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[127]})
-var sEnabledBaselineDriftStatusSummary_types = smithy.NewStaticSchema(smithy.StaticSchema{Member: "types", ID: &iEnabledBaselineDriftTypes, Members: &mEnabledBaselineDriftTypes, Type: smithy.ShapeTypeStructure, Ext: &ext[129]})
-var sEnabledBaselineDriftTypes_inheritance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inheritance", ID: &iEnabledBaselineInheritanceDrift, Members: &mEnabledBaselineInheritanceDrift, Type: smithy.ShapeTypeStructure, Ext: &ext[131]})
-var s_EnabledBaselineEnablementStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnablementStatus, Members: &mEnablementStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[133]})
-var sEnabledBaselineFilter_targetIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifiers", ID: &i_EnabledBaselineTargetIdentifiers, Members: &m_EnabledBaselineTargetIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[135]})
-var sEnabledBaselineFilter_baselineIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineIdentifiers", ID: &i_EnabledBaselineBaselineIdentifiers, Members: &m_EnabledBaselineBaselineIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[136]})
-var sEnabledBaselineFilter_parentIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentIdentifiers", ID: &i_EnabledBaselineParentIdentifiers, Members: &m_EnabledBaselineParentIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[137]})
-var sEnabledBaselineFilter_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_EnabledBaselineEnablementStatuses, Members: &m_EnabledBaselineEnablementStatuses, Type: smithy.ShapeTypeList, Ext: &ext[138]})
-var sEnabledBaselineFilter_inheritanceDriftStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inheritanceDriftStatuses", ID: &i_EnabledBaselineDriftStatuses, Members: &m_EnabledBaselineDriftStatuses, Type: smithy.ShapeTypeList, Ext: &ext[139]})
-var sEnabledBaselineInheritanceDrift_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iEnabledBaselineDriftStatus, Members: &mEnabledBaselineDriftStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[141]})
-var sEnabledBaselineParameter_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[143]})
-var sEnabledBaselineParameter_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_EnabledBaselineParameterDocument, Type: smithy.ShapeTypeDocument, Ext: &ext[144]})
-var s_EnabledBaselineParameters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnabledBaselineParameter, Members: &mEnabledBaselineParameter, Type: smithy.ShapeTypeStructure, Ext: &ext[147]})
-var s_EnabledBaselineParameterSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnabledBaselineParameterSummary, Members: &mEnabledBaselineParameterSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[149]})
-var sEnabledBaselineParameterSummary_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[151]})
-var sEnabledBaselineParameterSummary_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_EnabledBaselineParameterDocument, Type: smithy.ShapeTypeDocument, Ext: &ext[152]})
-var s_EnabledBaselineParentIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[154]})
-var s_EnabledBaselines_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnabledBaselineSummary, Members: &mEnabledBaselineSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[156]})
-var sEnabledBaselineSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[158]})
-var sEnabledBaselineSummary_baselineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[159]})
-var sEnabledBaselineSummary_baselineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[160]})
-var sEnabledBaselineSummary_driftStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "driftStatusSummary", ID: &iEnabledBaselineDriftStatusSummary, Members: &mEnabledBaselineDriftStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[161]})
-var sEnabledBaselineSummary_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[162]})
-var sEnabledBaselineSummary_parentIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[163]})
-var sEnabledBaselineSummary_statusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummary", ID: &iEnablementStatusSummary, Members: &mEnablementStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[164]})
-var s_EnabledBaselineTargetIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[166]})
-var sEnabledControlDetails_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[168]})
-var sEnabledControlDetails_controlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlIdentifier", ID: &i_ControlIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[169]})
-var sEnabledControlDetails_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[170]})
-var sEnabledControlDetails_statusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummary", ID: &iEnablementStatusSummary, Members: &mEnablementStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[171]})
-var sEnabledControlDetails_driftStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "driftStatusSummary", ID: &iDriftStatusSummary, Members: &mDriftStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[172]})
-var sEnabledControlDetails_parentIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentIdentifier", ID: &i_ParentIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[173]})
-var sEnabledControlDetails_targetRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetRegions", ID: &i_TargetRegions, Members: &m_TargetRegions, Type: smithy.ShapeTypeList, Ext: &ext[174]})
-var sEnabledControlDetails_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_EnabledControlParameterSummaries, Members: &m_EnabledControlParameterSummaries, Type: smithy.ShapeTypeList, Ext: &ext[175]})
-var sEnabledControlDriftTypes_inheritance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inheritance", ID: &iEnabledControlInheritanceDrift, Members: &mEnabledControlInheritanceDrift, Type: smithy.ShapeTypeStructure, Ext: &ext[177]})
-var sEnabledControlDriftTypes_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &iEnabledControlResourceDrift, Members: &mEnabledControlResourceDrift, Type: smithy.ShapeTypeStructure, Ext: &ext[178]})
-var sEnabledControlFilter_controlIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlIdentifiers", ID: &i_ControlIdentifiers, Members: &m_ControlIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[180]})
-var sEnabledControlFilter_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_EnablementStatuses, Members: &m_EnablementStatuses, Type: smithy.ShapeTypeList, Ext: &ext[181]})
-var sEnabledControlFilter_driftStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "driftStatuses", ID: &i_DriftStatuses, Members: &m_DriftStatuses, Type: smithy.ShapeTypeList, Ext: &ext[182]})
-var sEnabledControlFilter_parentIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentIdentifiers", ID: &i_ParentIdentifiers, Members: &m_ParentIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[183]})
-var sEnabledControlFilter_inheritanceDriftStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inheritanceDriftStatuses", ID: &i_DriftStatuses, Members: &m_DriftStatuses, Type: smithy.ShapeTypeList, Ext: &ext[184]})
-var sEnabledControlFilter_resourceDriftStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceDriftStatuses", ID: &i_DriftStatuses, Members: &m_DriftStatuses, Type: smithy.ShapeTypeList, Ext: &ext[185]})
-var s_EnabledControlIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[187]})
-var sEnabledControlInheritanceDrift_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iDriftStatus, Members: &mDriftStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[189]})
-var sEnabledControlParameter_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[191]})
-var sEnabledControlParameter_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &ext[192]})
-var s_EnabledControlParameters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnabledControlParameter, Members: &mEnabledControlParameter, Type: smithy.ShapeTypeStructure, Ext: &ext[194]})
-var s_EnabledControlParameterSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnabledControlParameterSummary, Members: &mEnabledControlParameterSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[196]})
-var sEnabledControlParameterSummary_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[198]})
-var sEnabledControlParameterSummary_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &ext[199]})
-var sEnabledControlResourceDrift_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iDriftStatus, Members: &mDriftStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[201]})
-var s_EnabledControls_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnabledControlSummary, Members: &mEnabledControlSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[203]})
-var sEnabledControlSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[205]})
-var sEnabledControlSummary_controlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlIdentifier", ID: &i_ControlIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[206]})
-var sEnabledControlSummary_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[207]})
-var sEnabledControlSummary_statusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummary", ID: &iEnablementStatusSummary, Members: &mEnablementStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[208]})
-var sEnabledControlSummary_driftStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "driftStatusSummary", ID: &iDriftStatusSummary, Members: &mDriftStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[209]})
-var sEnabledControlSummary_parentIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentIdentifier", ID: &i_ParentIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[210]})
-var sEnablementStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[212]})
-var sEnablementStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[213]})
-var sEnablementStatus_UNDER_CHANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNDER_CHANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[214]})
-var s_EnablementStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnablementStatus, Members: &mEnablementStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[216]})
-var sEnablementStatusSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iEnablementStatus, Members: &mEnablementStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[218]})
-var sEnablementStatusSummary_lastOperationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastOperationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[219]})
-var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[221]})
-var sLandingZoneDetail_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_LandingZoneVersion, Type: smithy.ShapeTypeString, Ext: &ext[223]})
-var sLandingZoneDetail_remediationTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remediationTypes", ID: &i_RemediationTypes, Members: &m_RemediationTypes, Type: smithy.ShapeTypeList, Ext: &ext[224]})
-var sLandingZoneDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[225]})
-var sLandingZoneDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLandingZoneStatus, Members: &mLandingZoneStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[226]})
-var sLandingZoneDetail_latestAvailableVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestAvailableVersion", ID: &i_LandingZoneVersion, Type: smithy.ShapeTypeString, Ext: &ext[227]})
-var sLandingZoneDetail_driftStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "driftStatus", ID: &iLandingZoneDriftStatusSummary, Members: &mLandingZoneDriftStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[228]})
-var sLandingZoneDetail_manifest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "manifest", ID: &i_Manifest, Type: smithy.ShapeTypeDocument, Ext: &ext[229]})
-var sLandingZoneDriftStatus_DRIFTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRIFTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[231]})
-var sLandingZoneDriftStatus_IN_SYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_SYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[232]})
-var sLandingZoneDriftStatusSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLandingZoneDriftStatus, Members: &mLandingZoneDriftStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[234]})
-var sLandingZoneOperationDetail_operationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationType", ID: &iLandingZoneOperationType, Members: &mLandingZoneOperationType, Type: smithy.ShapeTypeEnum, Ext: &ext[236]})
-var sLandingZoneOperationDetail_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[237]})
-var sLandingZoneOperationDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLandingZoneOperationStatus, Members: &mLandingZoneOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[238]})
-var sLandingZoneOperationDetail_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Traits: &t29, Type: smithy.ShapeTypeTimestamp, Ext: &ext[239]})
-var sLandingZoneOperationDetail_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Traits: &t29, Type: smithy.ShapeTypeTimestamp, Ext: &ext[240]})
-var sLandingZoneOperationDetail_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[241]})
-var sLandingZoneOperationFilter_types = smithy.NewStaticSchema(smithy.StaticSchema{Member: "types", ID: &i_LandingZoneOperationTypes, Members: &m_LandingZoneOperationTypes, Type: smithy.ShapeTypeList, Ext: &ext[243]})
-var sLandingZoneOperationFilter_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_LandingZoneOperationStatuses, Members: &m_LandingZoneOperationStatuses, Type: smithy.ShapeTypeList, Ext: &ext[244]})
-var s_LandingZoneOperations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLandingZoneOperationSummary, Members: &mLandingZoneOperationSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[246]})
-var sLandingZoneOperationStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[248]})
-var sLandingZoneOperationStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[249]})
-var sLandingZoneOperationStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[250]})
-var s_LandingZoneOperationStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLandingZoneOperationStatus, Members: &mLandingZoneOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[252]})
-var sLandingZoneOperationSummary_operationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationType", ID: &iLandingZoneOperationType, Members: &mLandingZoneOperationType, Type: smithy.ShapeTypeEnum, Ext: &ext[254]})
-var sLandingZoneOperationSummary_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[255]})
-var sLandingZoneOperationSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLandingZoneOperationStatus, Members: &mLandingZoneOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[256]})
-var sLandingZoneOperationType_DELETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[258]})
-var sLandingZoneOperationType_CREATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[259]})
-var sLandingZoneOperationType_UPDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[260]})
-var sLandingZoneOperationType_RESET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[261]})
-var s_LandingZoneOperationTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLandingZoneOperationType, Members: &mLandingZoneOperationType, Type: smithy.ShapeTypeEnum, Ext: &ext[263]})
-var sLandingZoneStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[265]})
-var sLandingZoneStatus_PROCESSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROCESSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[266]})
-var sLandingZoneStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[267]})
-var s_LandingZoneSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLandingZoneSummary, Members: &mLandingZoneSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[269]})
-var sLandingZoneSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[271]})
-var s_ParentIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ParentIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[285]})
-var sRegion_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RegionName, Type: smithy.ShapeTypeString, Ext: &ext[287]})
-var sRemediationType_INHERITANCE_DRIFT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INHERITANCE_DRIFT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[290]})
-var s_RemediationTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRemediationType, Members: &mRemediationType, Type: smithy.ShapeTypeEnum, Ext: &ext[292]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[294]})
-var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[296]})
-var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[299]})
-var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[301]})
-var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[302]})
-var s_TargetIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[306]})
-var s_TargetRegions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRegion, Members: &mRegion, Type: smithy.ShapeTypeStructure, Ext: &ext[308]})
-var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[310]})
-var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[311]})
-var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[312]})
-var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t36, Type: smithy.ShapeTypeInteger, Ext: &ext[313]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[316]})
-var sCreateLandingZoneInput_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_LandingZoneVersion, Type: smithy.ShapeTypeString, Ext: &ext[318]})
-var sCreateLandingZoneInput_remediationTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remediationTypes", ID: &i_RemediationTypes, Members: &m_RemediationTypes, Type: smithy.ShapeTypeList, Ext: &ext[319]})
-var sCreateLandingZoneInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[320]})
-var sCreateLandingZoneInput_manifest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "manifest", ID: &i_Manifest, Type: smithy.ShapeTypeDocument, Ext: &ext[321]})
-var sCreateLandingZoneOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[323]})
-var sCreateLandingZoneOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[324]})
-var sDeleteLandingZoneInput_landingZoneIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "landingZoneIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[326]})
-var sDeleteLandingZoneOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[328]})
-var sDisableBaselineInput_enabledBaselineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledBaselineIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[330]})
-var sDisableBaselineOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[332]})
-var sDisableControlInput_controlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlIdentifier", ID: &i_ControlIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[334]})
-var sDisableControlInput_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[335]})
-var sDisableControlInput_enabledControlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControlIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[336]})
-var sDisableControlOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[338]})
-var sEnableBaselineInput_baselineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineVersion", ID: &i_BaselineVersion, Type: smithy.ShapeTypeString, Ext: &ext[340]})
-var sEnableBaselineInput_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_EnabledBaselineParameters, Members: &m_EnabledBaselineParameters, Type: smithy.ShapeTypeList, Ext: &ext[341]})
-var sEnableBaselineInput_baselineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[342]})
-var sEnableBaselineInput_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[343]})
-var sEnableBaselineInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[344]})
-var sEnableBaselineOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[346]})
-var sEnableBaselineOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[347]})
-var sEnableControlInput_controlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlIdentifier", ID: &i_ControlIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[349]})
-var sEnableControlInput_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[350]})
-var sEnableControlInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[351]})
-var sEnableControlInput_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_EnabledControlParameters, Members: &m_EnabledControlParameters, Type: smithy.ShapeTypeList, Ext: &ext[352]})
-var sEnableControlOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[354]})
-var sEnableControlOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[355]})
-var sGetBaselineInput_baselineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineIdentifier", ID: &i_BaselineArn, Type: smithy.ShapeTypeString, Ext: &ext[357]})
-var sGetBaselineOperationInput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[359]})
-var sGetBaselineOperationOutput_baselineOperation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineOperation", ID: &iBaselineOperation, Members: &mBaselineOperation, Type: smithy.ShapeTypeStructure, Ext: &ext[361]})
-var sGetBaselineOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_BaselineArn, Type: smithy.ShapeTypeString, Ext: &ext[363]})
-var sGetBaselineOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[364]})
-var sGetBaselineOutput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[365]})
-var sGetControlOperationInput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[367]})
-var sGetControlOperationOutput_controlOperation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlOperation", ID: &iControlOperation, Members: &mControlOperation, Type: smithy.ShapeTypeStructure, Ext: &ext[369]})
-var sGetEnabledBaselineInput_enabledBaselineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledBaselineIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[371]})
-var sGetEnabledBaselineOutput_enabledBaselineDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledBaselineDetails", ID: &iEnabledBaselineDetails, Members: &mEnabledBaselineDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[373]})
-var sGetEnabledControlInput_enabledControlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControlIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[375]})
-var sGetEnabledControlOutput_enabledControlDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControlDetails", ID: &iEnabledControlDetails, Members: &mEnabledControlDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[377]})
-var sGetLandingZoneInput_landingZoneIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "landingZoneIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[379]})
-var sGetLandingZoneOperationInput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[381]})
-var sGetLandingZoneOperationOutput_operationDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationDetails", ID: &iLandingZoneOperationDetail, Members: &mLandingZoneOperationDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[383]})
-var sGetLandingZoneOutput_landingZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "landingZone", ID: &iLandingZoneDetail, Members: &mLandingZoneDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[385]})
-var sListBaselinesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[387]})
-var sListBaselinesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListBaselinesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[388]})
-var sListBaselinesOutput_baselines = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselines", ID: &i_Baselines, Members: &m_Baselines, Type: smithy.ShapeTypeList, Ext: &ext[390]})
-var sListBaselinesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[391]})
-var sListControlOperationsInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iControlOperationFilter, Members: &mControlOperationFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[393]})
-var sListControlOperationsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_ListControlOperationsNextToken, Type: smithy.ShapeTypeString, Ext: &ext[394]})
-var sListControlOperationsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListControlOperationsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[395]})
-var sListControlOperationsOutput_controlOperations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlOperations", ID: &i_ControlOperations, Members: &m_ControlOperations, Type: smithy.ShapeTypeList, Ext: &ext[397]})
-var sListControlOperationsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_ListControlOperationsNextToken, Type: smithy.ShapeTypeString, Ext: &ext[398]})
-var sListEnabledBaselinesInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iEnabledBaselineFilter, Members: &mEnabledBaselineFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[400]})
-var sListEnabledBaselinesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_ListEnabledBaselinesNextToken, Type: smithy.ShapeTypeString, Ext: &ext[401]})
-var sListEnabledBaselinesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListEnabledBaselinesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[402]})
-var sListEnabledBaselinesInput_includeChildren = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeChildren", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[403]})
-var sListEnabledBaselinesOutput_enabledBaselines = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledBaselines", ID: &i_EnabledBaselines, Members: &m_EnabledBaselines, Type: smithy.ShapeTypeList, Ext: &ext[405]})
-var sListEnabledBaselinesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_ListEnabledBaselinesNextToken, Type: smithy.ShapeTypeString, Ext: &ext[406]})
-var sListEnabledControlsInput_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[408]})
-var sListEnabledControlsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[409]})
-var sListEnabledControlsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[410]})
-var sListEnabledControlsInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iEnabledControlFilter, Members: &mEnabledControlFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[411]})
-var sListEnabledControlsInput_includeChildren = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeChildren", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[412]})
-var sListEnabledControlsOutput_enabledControls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControls", ID: &i_EnabledControls, Members: &m_EnabledControls, Type: smithy.ShapeTypeList, Ext: &ext[414]})
-var sListEnabledControlsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[415]})
-var sListLandingZoneOperationsInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iLandingZoneOperationFilter, Members: &mLandingZoneOperationFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[417]})
-var sListLandingZoneOperationsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[418]})
-var sListLandingZoneOperationsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListLandingZoneOperationsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[419]})
-var sListLandingZoneOperationsOutput_landingZoneOperations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "landingZoneOperations", ID: &i_LandingZoneOperations, Members: &m_LandingZoneOperations, Type: smithy.ShapeTypeList, Ext: &ext[421]})
-var sListLandingZoneOperationsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[422]})
-var sListLandingZonesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[424]})
-var sListLandingZonesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListLandingZonesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[425]})
-var sListLandingZonesOutput_landingZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "landingZones", ID: &i_LandingZoneSummaries, Members: &m_LandingZoneSummaries, Type: smithy.ShapeTypeList, Ext: &ext[427]})
-var sListLandingZonesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[428]})
-var sListTagsForResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &ext[430]})
-var sListTagsForResourceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[432]})
-var sResetEnabledBaselineInput_enabledBaselineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledBaselineIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[434]})
-var sResetEnabledBaselineOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[436]})
-var sResetEnabledControlInput_enabledControlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControlIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[438]})
-var sResetEnabledControlOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[440]})
-var sResetLandingZoneInput_landingZoneIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "landingZoneIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[442]})
-var sResetLandingZoneOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[444]})
-var sTagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &ext[446]})
-var sTagResourceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[447]})
-var sUntagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &ext[450]})
-var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Traits: &t39, Type: smithy.ShapeTypeList, Ext: &ext[451]})
-var sUpdateEnabledBaselineInput_baselineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineVersion", ID: &i_BaselineVersion, Type: smithy.ShapeTypeString, Ext: &ext[454]})
-var sUpdateEnabledBaselineInput_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_EnabledBaselineParameters, Members: &m_EnabledBaselineParameters, Type: smithy.ShapeTypeList, Ext: &ext[455]})
-var sUpdateEnabledBaselineInput_enabledBaselineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledBaselineIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[456]})
-var sUpdateEnabledBaselineOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[458]})
-var sUpdateEnabledControlInput_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_EnabledControlParameters, Members: &m_EnabledControlParameters, Type: smithy.ShapeTypeList, Ext: &ext[460]})
-var sUpdateEnabledControlInput_enabledControlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControlIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[461]})
-var sUpdateEnabledControlOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[463]})
-var sUpdateLandingZoneInput_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_LandingZoneVersion, Type: smithy.ShapeTypeString, Ext: &ext[465]})
-var sUpdateLandingZoneInput_remediationTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remediationTypes", ID: &i_RemediationTypes, Members: &m_RemediationTypes, Type: smithy.ShapeTypeList, Ext: &ext[466]})
-var sUpdateLandingZoneInput_landingZoneIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "landingZoneIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[467]})
-var sUpdateLandingZoneInput_manifest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "manifest", ID: &i_Manifest, Type: smithy.ShapeTypeDocument, Ext: &ext[468]})
-var sUpdateLandingZoneOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[470]})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sBaselineOperation_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &eBaselineOperation_operationIdentifier})
+var sBaselineOperation_operationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationType", ID: &iBaselineOperationType, Members: &mBaselineOperationType, Type: smithy.ShapeTypeEnum, Ext: &eBaselineOperation_operationType})
+var sBaselineOperation_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iBaselineOperationStatus, Members: &mBaselineOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &eBaselineOperation_status})
+var sBaselineOperation_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Traits: &t29, Type: smithy.ShapeTypeTimestamp, Ext: &eBaselineOperation_startTime})
+var sBaselineOperation_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Traits: &t29, Type: smithy.ShapeTypeTimestamp, Ext: &eBaselineOperation_endTime})
+var sBaselineOperation_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBaselineOperation_statusMessage})
+var sBaselineOperationStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBaselineOperationStatus_SUCCEEDED})
+var sBaselineOperationStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBaselineOperationStatus_FAILED})
+var sBaselineOperationStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBaselineOperationStatus_IN_PROGRESS})
+var sBaselineOperationType_ENABLE_BASELINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLE_BASELINE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBaselineOperationType_ENABLE_BASELINE})
+var sBaselineOperationType_DISABLE_BASELINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLE_BASELINE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBaselineOperationType_DISABLE_BASELINE})
+var sBaselineOperationType_UPDATE_ENABLED_BASELINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_ENABLED_BASELINE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBaselineOperationType_UPDATE_ENABLED_BASELINE})
+var sBaselineOperationType_RESET_ENABLED_BASELINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESET_ENABLED_BASELINE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBaselineOperationType_RESET_ENABLED_BASELINE})
+var s_Baselines_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBaselineSummary, Members: &mBaselineSummary, Type: smithy.ShapeTypeStructure, Ext: &e_Baselines_member})
+var sBaselineSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBaselineSummary_arn})
+var sBaselineSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBaselineSummary_name})
+var sBaselineSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBaselineSummary_description})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var s_ControlIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ControlIdentifier, Type: smithy.ShapeTypeString, Ext: &e_ControlIdentifiers_member})
+var sControlOperation_operationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationType", ID: &iControlOperationType, Members: &mControlOperationType, Type: smithy.ShapeTypeEnum, Ext: &eControlOperation_operationType})
+var sControlOperation_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp, Ext: &eControlOperation_startTime})
+var sControlOperation_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp, Ext: &eControlOperation_endTime})
+var sControlOperation_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iControlOperationStatus, Members: &mControlOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &eControlOperation_status})
+var sControlOperation_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eControlOperation_statusMessage})
+var sControlOperation_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &eControlOperation_operationIdentifier})
+var sControlOperation_controlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlIdentifier", ID: &i_ControlIdentifier, Type: smithy.ShapeTypeString, Ext: &eControlOperation_controlIdentifier})
+var sControlOperation_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString, Ext: &eControlOperation_targetIdentifier})
+var sControlOperation_enabledControlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControlIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eControlOperation_enabledControlIdentifier})
+var sControlOperationFilter_controlIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlIdentifiers", ID: &i_ControlIdentifiers, Members: &m_ControlIdentifiers, Type: smithy.ShapeTypeList, Ext: &eControlOperationFilter_controlIdentifiers})
+var sControlOperationFilter_targetIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifiers", ID: &i_TargetIdentifiers, Members: &m_TargetIdentifiers, Type: smithy.ShapeTypeList, Ext: &eControlOperationFilter_targetIdentifiers})
+var sControlOperationFilter_enabledControlIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControlIdentifiers", ID: &i_EnabledControlIdentifiers, Members: &m_EnabledControlIdentifiers, Type: smithy.ShapeTypeList, Ext: &eControlOperationFilter_enabledControlIdentifiers})
+var sControlOperationFilter_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_ControlOperationStatuses, Members: &m_ControlOperationStatuses, Type: smithy.ShapeTypeList, Ext: &eControlOperationFilter_statuses})
+var sControlOperationFilter_controlOperationTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlOperationTypes", ID: &i_ControlOperationTypes, Members: &m_ControlOperationTypes, Type: smithy.ShapeTypeList, Ext: &eControlOperationFilter_controlOperationTypes})
+var s_ControlOperations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iControlOperationSummary, Members: &mControlOperationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ControlOperations_member})
+var sControlOperationStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eControlOperationStatus_SUCCEEDED})
+var sControlOperationStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eControlOperationStatus_FAILED})
+var sControlOperationStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eControlOperationStatus_IN_PROGRESS})
+var s_ControlOperationStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iControlOperationStatus, Members: &mControlOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &e_ControlOperationStatuses_member})
+var sControlOperationSummary_operationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationType", ID: &iControlOperationType, Members: &mControlOperationType, Type: smithy.ShapeTypeEnum, Ext: &eControlOperationSummary_operationType})
+var sControlOperationSummary_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp, Ext: &eControlOperationSummary_startTime})
+var sControlOperationSummary_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp, Ext: &eControlOperationSummary_endTime})
+var sControlOperationSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iControlOperationStatus, Members: &mControlOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &eControlOperationSummary_status})
+var sControlOperationSummary_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eControlOperationSummary_statusMessage})
+var sControlOperationSummary_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &eControlOperationSummary_operationIdentifier})
+var sControlOperationSummary_controlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlIdentifier", ID: &i_ControlIdentifier, Type: smithy.ShapeTypeString, Ext: &eControlOperationSummary_controlIdentifier})
+var sControlOperationSummary_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString, Ext: &eControlOperationSummary_targetIdentifier})
+var sControlOperationSummary_enabledControlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControlIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eControlOperationSummary_enabledControlIdentifier})
+var sControlOperationType_ENABLE_CONTROL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLE_CONTROL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eControlOperationType_ENABLE_CONTROL})
+var sControlOperationType_DISABLE_CONTROL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLE_CONTROL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eControlOperationType_DISABLE_CONTROL})
+var sControlOperationType_UPDATE_ENABLED_CONTROL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_ENABLED_CONTROL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eControlOperationType_UPDATE_ENABLED_CONTROL})
+var sControlOperationType_RESET_ENABLED_CONTROL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESET_ENABLED_CONTROL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eControlOperationType_RESET_ENABLED_CONTROL})
+var s_ControlOperationTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iControlOperationType, Members: &mControlOperationType, Type: smithy.ShapeTypeEnum, Ext: &e_ControlOperationTypes_member})
+var sDriftStatus_DRIFTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRIFTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDriftStatus_DRIFTED})
+var sDriftStatus_IN_SYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_SYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDriftStatus_IN_SYNC})
+var sDriftStatus_NOT_CHECKING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_CHECKING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDriftStatus_NOT_CHECKING})
+var sDriftStatus_UNKNOWN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDriftStatus_UNKNOWN})
+var s_DriftStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDriftStatus, Members: &mDriftStatus, Type: smithy.ShapeTypeEnum, Ext: &e_DriftStatuses_member})
+var sDriftStatusSummary_driftStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "driftStatus", ID: &iDriftStatus, Members: &mDriftStatus, Type: smithy.ShapeTypeEnum, Ext: &eDriftStatusSummary_driftStatus})
+var sDriftStatusSummary_types = smithy.NewStaticSchema(smithy.StaticSchema{Member: "types", ID: &iEnabledControlDriftTypes, Members: &mEnabledControlDriftTypes, Type: smithy.ShapeTypeStructure, Ext: &eDriftStatusSummary_types})
+var s_EnabledBaselineBaselineIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_EnabledBaselineBaselineIdentifiers_member})
+var sEnabledBaselineDetails_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eEnabledBaselineDetails_arn})
+var sEnabledBaselineDetails_baselineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEnabledBaselineDetails_baselineIdentifier})
+var sEnabledBaselineDetails_baselineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEnabledBaselineDetails_baselineVersion})
+var sEnabledBaselineDetails_driftStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "driftStatusSummary", ID: &iEnabledBaselineDriftStatusSummary, Members: &mEnabledBaselineDriftStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &eEnabledBaselineDetails_driftStatusSummary})
+var sEnabledBaselineDetails_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEnabledBaselineDetails_targetIdentifier})
+var sEnabledBaselineDetails_parentIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eEnabledBaselineDetails_parentIdentifier})
+var sEnabledBaselineDetails_statusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummary", ID: &iEnablementStatusSummary, Members: &mEnablementStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &eEnabledBaselineDetails_statusSummary})
+var sEnabledBaselineDetails_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_EnabledBaselineParameterSummaries, Members: &m_EnabledBaselineParameterSummaries, Type: smithy.ShapeTypeList, Ext: &eEnabledBaselineDetails_parameters})
+var sEnabledBaselineDriftStatus_IN_SYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_SYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnabledBaselineDriftStatus_IN_SYNC})
+var sEnabledBaselineDriftStatus_DRIFTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRIFTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnabledBaselineDriftStatus_DRIFTED})
+var s_EnabledBaselineDriftStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnabledBaselineDriftStatus, Members: &mEnabledBaselineDriftStatus, Type: smithy.ShapeTypeEnum, Ext: &e_EnabledBaselineDriftStatuses_member})
+var sEnabledBaselineDriftStatusSummary_types = smithy.NewStaticSchema(smithy.StaticSchema{Member: "types", ID: &iEnabledBaselineDriftTypes, Members: &mEnabledBaselineDriftTypes, Type: smithy.ShapeTypeStructure, Ext: &eEnabledBaselineDriftStatusSummary_types})
+var sEnabledBaselineDriftTypes_inheritance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inheritance", ID: &iEnabledBaselineInheritanceDrift, Members: &mEnabledBaselineInheritanceDrift, Type: smithy.ShapeTypeStructure, Ext: &eEnabledBaselineDriftTypes_inheritance})
+var s_EnabledBaselineEnablementStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnablementStatus, Members: &mEnablementStatus, Type: smithy.ShapeTypeEnum, Ext: &e_EnabledBaselineEnablementStatuses_member})
+var sEnabledBaselineFilter_targetIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifiers", ID: &i_EnabledBaselineTargetIdentifiers, Members: &m_EnabledBaselineTargetIdentifiers, Type: smithy.ShapeTypeList, Ext: &eEnabledBaselineFilter_targetIdentifiers})
+var sEnabledBaselineFilter_baselineIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineIdentifiers", ID: &i_EnabledBaselineBaselineIdentifiers, Members: &m_EnabledBaselineBaselineIdentifiers, Type: smithy.ShapeTypeList, Ext: &eEnabledBaselineFilter_baselineIdentifiers})
+var sEnabledBaselineFilter_parentIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentIdentifiers", ID: &i_EnabledBaselineParentIdentifiers, Members: &m_EnabledBaselineParentIdentifiers, Type: smithy.ShapeTypeList, Ext: &eEnabledBaselineFilter_parentIdentifiers})
+var sEnabledBaselineFilter_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_EnabledBaselineEnablementStatuses, Members: &m_EnabledBaselineEnablementStatuses, Type: smithy.ShapeTypeList, Ext: &eEnabledBaselineFilter_statuses})
+var sEnabledBaselineFilter_inheritanceDriftStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inheritanceDriftStatuses", ID: &i_EnabledBaselineDriftStatuses, Members: &m_EnabledBaselineDriftStatuses, Type: smithy.ShapeTypeList, Ext: &eEnabledBaselineFilter_inheritanceDriftStatuses})
+var sEnabledBaselineInheritanceDrift_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iEnabledBaselineDriftStatus, Members: &mEnabledBaselineDriftStatus, Type: smithy.ShapeTypeEnum, Ext: &eEnabledBaselineInheritanceDrift_status})
+var sEnabledBaselineParameter_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEnabledBaselineParameter_key})
+var sEnabledBaselineParameter_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_EnabledBaselineParameterDocument, Type: smithy.ShapeTypeDocument, Ext: &eEnabledBaselineParameter_value})
+var s_EnabledBaselineParameters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnabledBaselineParameter, Members: &mEnabledBaselineParameter, Type: smithy.ShapeTypeStructure, Ext: &e_EnabledBaselineParameters_member})
+var s_EnabledBaselineParameterSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnabledBaselineParameterSummary, Members: &mEnabledBaselineParameterSummary, Type: smithy.ShapeTypeStructure, Ext: &e_EnabledBaselineParameterSummaries_member})
+var sEnabledBaselineParameterSummary_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEnabledBaselineParameterSummary_key})
+var sEnabledBaselineParameterSummary_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_EnabledBaselineParameterDocument, Type: smithy.ShapeTypeDocument, Ext: &eEnabledBaselineParameterSummary_value})
+var s_EnabledBaselineParentIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_EnabledBaselineParentIdentifiers_member})
+var s_EnabledBaselines_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnabledBaselineSummary, Members: &mEnabledBaselineSummary, Type: smithy.ShapeTypeStructure, Ext: &e_EnabledBaselines_member})
+var sEnabledBaselineSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eEnabledBaselineSummary_arn})
+var sEnabledBaselineSummary_baselineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEnabledBaselineSummary_baselineIdentifier})
+var sEnabledBaselineSummary_baselineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEnabledBaselineSummary_baselineVersion})
+var sEnabledBaselineSummary_driftStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "driftStatusSummary", ID: &iEnabledBaselineDriftStatusSummary, Members: &mEnabledBaselineDriftStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &eEnabledBaselineSummary_driftStatusSummary})
+var sEnabledBaselineSummary_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEnabledBaselineSummary_targetIdentifier})
+var sEnabledBaselineSummary_parentIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eEnabledBaselineSummary_parentIdentifier})
+var sEnabledBaselineSummary_statusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummary", ID: &iEnablementStatusSummary, Members: &mEnablementStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &eEnabledBaselineSummary_statusSummary})
+var s_EnabledBaselineTargetIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_EnabledBaselineTargetIdentifiers_member})
+var sEnabledControlDetails_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eEnabledControlDetails_arn})
+var sEnabledControlDetails_controlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlIdentifier", ID: &i_ControlIdentifier, Type: smithy.ShapeTypeString, Ext: &eEnabledControlDetails_controlIdentifier})
+var sEnabledControlDetails_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString, Ext: &eEnabledControlDetails_targetIdentifier})
+var sEnabledControlDetails_statusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummary", ID: &iEnablementStatusSummary, Members: &mEnablementStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &eEnabledControlDetails_statusSummary})
+var sEnabledControlDetails_driftStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "driftStatusSummary", ID: &iDriftStatusSummary, Members: &mDriftStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &eEnabledControlDetails_driftStatusSummary})
+var sEnabledControlDetails_parentIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentIdentifier", ID: &i_ParentIdentifier, Type: smithy.ShapeTypeString, Ext: &eEnabledControlDetails_parentIdentifier})
+var sEnabledControlDetails_targetRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetRegions", ID: &i_TargetRegions, Members: &m_TargetRegions, Type: smithy.ShapeTypeList, Ext: &eEnabledControlDetails_targetRegions})
+var sEnabledControlDetails_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_EnabledControlParameterSummaries, Members: &m_EnabledControlParameterSummaries, Type: smithy.ShapeTypeList, Ext: &eEnabledControlDetails_parameters})
+var sEnabledControlDriftTypes_inheritance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inheritance", ID: &iEnabledControlInheritanceDrift, Members: &mEnabledControlInheritanceDrift, Type: smithy.ShapeTypeStructure, Ext: &eEnabledControlDriftTypes_inheritance})
+var sEnabledControlDriftTypes_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &iEnabledControlResourceDrift, Members: &mEnabledControlResourceDrift, Type: smithy.ShapeTypeStructure, Ext: &eEnabledControlDriftTypes_resource})
+var sEnabledControlFilter_controlIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlIdentifiers", ID: &i_ControlIdentifiers, Members: &m_ControlIdentifiers, Type: smithy.ShapeTypeList, Ext: &eEnabledControlFilter_controlIdentifiers})
+var sEnabledControlFilter_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_EnablementStatuses, Members: &m_EnablementStatuses, Type: smithy.ShapeTypeList, Ext: &eEnabledControlFilter_statuses})
+var sEnabledControlFilter_driftStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "driftStatuses", ID: &i_DriftStatuses, Members: &m_DriftStatuses, Type: smithy.ShapeTypeList, Ext: &eEnabledControlFilter_driftStatuses})
+var sEnabledControlFilter_parentIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentIdentifiers", ID: &i_ParentIdentifiers, Members: &m_ParentIdentifiers, Type: smithy.ShapeTypeList, Ext: &eEnabledControlFilter_parentIdentifiers})
+var sEnabledControlFilter_inheritanceDriftStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inheritanceDriftStatuses", ID: &i_DriftStatuses, Members: &m_DriftStatuses, Type: smithy.ShapeTypeList, Ext: &eEnabledControlFilter_inheritanceDriftStatuses})
+var sEnabledControlFilter_resourceDriftStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceDriftStatuses", ID: &i_DriftStatuses, Members: &m_DriftStatuses, Type: smithy.ShapeTypeList, Ext: &eEnabledControlFilter_resourceDriftStatuses})
+var s_EnabledControlIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_EnabledControlIdentifiers_member})
+var sEnabledControlInheritanceDrift_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iDriftStatus, Members: &mDriftStatus, Type: smithy.ShapeTypeEnum, Ext: &eEnabledControlInheritanceDrift_status})
+var sEnabledControlParameter_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEnabledControlParameter_key})
+var sEnabledControlParameter_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &eEnabledControlParameter_value})
+var s_EnabledControlParameters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnabledControlParameter, Members: &mEnabledControlParameter, Type: smithy.ShapeTypeStructure, Ext: &e_EnabledControlParameters_member})
+var s_EnabledControlParameterSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnabledControlParameterSummary, Members: &mEnabledControlParameterSummary, Type: smithy.ShapeTypeStructure, Ext: &e_EnabledControlParameterSummaries_member})
+var sEnabledControlParameterSummary_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEnabledControlParameterSummary_key})
+var sEnabledControlParameterSummary_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &eEnabledControlParameterSummary_value})
+var sEnabledControlResourceDrift_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iDriftStatus, Members: &mDriftStatus, Type: smithy.ShapeTypeEnum, Ext: &eEnabledControlResourceDrift_status})
+var s_EnabledControls_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnabledControlSummary, Members: &mEnabledControlSummary, Type: smithy.ShapeTypeStructure, Ext: &e_EnabledControls_member})
+var sEnabledControlSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eEnabledControlSummary_arn})
+var sEnabledControlSummary_controlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlIdentifier", ID: &i_ControlIdentifier, Type: smithy.ShapeTypeString, Ext: &eEnabledControlSummary_controlIdentifier})
+var sEnabledControlSummary_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString, Ext: &eEnabledControlSummary_targetIdentifier})
+var sEnabledControlSummary_statusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummary", ID: &iEnablementStatusSummary, Members: &mEnablementStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &eEnabledControlSummary_statusSummary})
+var sEnabledControlSummary_driftStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "driftStatusSummary", ID: &iDriftStatusSummary, Members: &mDriftStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &eEnabledControlSummary_driftStatusSummary})
+var sEnabledControlSummary_parentIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentIdentifier", ID: &i_ParentIdentifier, Type: smithy.ShapeTypeString, Ext: &eEnabledControlSummary_parentIdentifier})
+var sEnablementStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnablementStatus_SUCCEEDED})
+var sEnablementStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnablementStatus_FAILED})
+var sEnablementStatus_UNDER_CHANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNDER_CHANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnablementStatus_UNDER_CHANGE})
+var s_EnablementStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnablementStatus, Members: &mEnablementStatus, Type: smithy.ShapeTypeEnum, Ext: &e_EnablementStatuses_member})
+var sEnablementStatusSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iEnablementStatus, Members: &mEnablementStatus, Type: smithy.ShapeTypeEnum, Ext: &eEnablementStatusSummary_status})
+var sEnablementStatusSummary_lastOperationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastOperationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &eEnablementStatusSummary_lastOperationIdentifier})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sLandingZoneDetail_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_LandingZoneVersion, Type: smithy.ShapeTypeString, Ext: &eLandingZoneDetail_version})
+var sLandingZoneDetail_remediationTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remediationTypes", ID: &i_RemediationTypes, Members: &m_RemediationTypes, Type: smithy.ShapeTypeList, Ext: &eLandingZoneDetail_remediationTypes})
+var sLandingZoneDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eLandingZoneDetail_arn})
+var sLandingZoneDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLandingZoneStatus, Members: &mLandingZoneStatus, Type: smithy.ShapeTypeEnum, Ext: &eLandingZoneDetail_status})
+var sLandingZoneDetail_latestAvailableVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestAvailableVersion", ID: &i_LandingZoneVersion, Type: smithy.ShapeTypeString, Ext: &eLandingZoneDetail_latestAvailableVersion})
+var sLandingZoneDetail_driftStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "driftStatus", ID: &iLandingZoneDriftStatusSummary, Members: &mLandingZoneDriftStatusSummary, Type: smithy.ShapeTypeStructure, Ext: &eLandingZoneDetail_driftStatus})
+var sLandingZoneDetail_manifest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "manifest", ID: &i_Manifest, Type: smithy.ShapeTypeDocument, Ext: &eLandingZoneDetail_manifest})
+var sLandingZoneDriftStatus_DRIFTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRIFTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLandingZoneDriftStatus_DRIFTED})
+var sLandingZoneDriftStatus_IN_SYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_SYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLandingZoneDriftStatus_IN_SYNC})
+var sLandingZoneDriftStatusSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLandingZoneDriftStatus, Members: &mLandingZoneDriftStatus, Type: smithy.ShapeTypeEnum, Ext: &eLandingZoneDriftStatusSummary_status})
+var sLandingZoneOperationDetail_operationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationType", ID: &iLandingZoneOperationType, Members: &mLandingZoneOperationType, Type: smithy.ShapeTypeEnum, Ext: &eLandingZoneOperationDetail_operationType})
+var sLandingZoneOperationDetail_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &eLandingZoneOperationDetail_operationIdentifier})
+var sLandingZoneOperationDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLandingZoneOperationStatus, Members: &mLandingZoneOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &eLandingZoneOperationDetail_status})
+var sLandingZoneOperationDetail_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Traits: &t29, Type: smithy.ShapeTypeTimestamp, Ext: &eLandingZoneOperationDetail_startTime})
+var sLandingZoneOperationDetail_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Traits: &t29, Type: smithy.ShapeTypeTimestamp, Ext: &eLandingZoneOperationDetail_endTime})
+var sLandingZoneOperationDetail_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eLandingZoneOperationDetail_statusMessage})
+var sLandingZoneOperationFilter_types = smithy.NewStaticSchema(smithy.StaticSchema{Member: "types", ID: &i_LandingZoneOperationTypes, Members: &m_LandingZoneOperationTypes, Type: smithy.ShapeTypeList, Ext: &eLandingZoneOperationFilter_types})
+var sLandingZoneOperationFilter_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_LandingZoneOperationStatuses, Members: &m_LandingZoneOperationStatuses, Type: smithy.ShapeTypeList, Ext: &eLandingZoneOperationFilter_statuses})
+var s_LandingZoneOperations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLandingZoneOperationSummary, Members: &mLandingZoneOperationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_LandingZoneOperations_member})
+var sLandingZoneOperationStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLandingZoneOperationStatus_SUCCEEDED})
+var sLandingZoneOperationStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLandingZoneOperationStatus_FAILED})
+var sLandingZoneOperationStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLandingZoneOperationStatus_IN_PROGRESS})
+var s_LandingZoneOperationStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLandingZoneOperationStatus, Members: &mLandingZoneOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &e_LandingZoneOperationStatuses_member})
+var sLandingZoneOperationSummary_operationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationType", ID: &iLandingZoneOperationType, Members: &mLandingZoneOperationType, Type: smithy.ShapeTypeEnum, Ext: &eLandingZoneOperationSummary_operationType})
+var sLandingZoneOperationSummary_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &eLandingZoneOperationSummary_operationIdentifier})
+var sLandingZoneOperationSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLandingZoneOperationStatus, Members: &mLandingZoneOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &eLandingZoneOperationSummary_status})
+var sLandingZoneOperationType_DELETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLandingZoneOperationType_DELETE})
+var sLandingZoneOperationType_CREATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLandingZoneOperationType_CREATE})
+var sLandingZoneOperationType_UPDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLandingZoneOperationType_UPDATE})
+var sLandingZoneOperationType_RESET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLandingZoneOperationType_RESET})
+var s_LandingZoneOperationTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLandingZoneOperationType, Members: &mLandingZoneOperationType, Type: smithy.ShapeTypeEnum, Ext: &e_LandingZoneOperationTypes_member})
+var sLandingZoneStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLandingZoneStatus_ACTIVE})
+var sLandingZoneStatus_PROCESSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROCESSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLandingZoneStatus_PROCESSING})
+var sLandingZoneStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLandingZoneStatus_FAILED})
+var s_LandingZoneSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLandingZoneSummary, Members: &mLandingZoneSummary, Type: smithy.ShapeTypeStructure, Ext: &e_LandingZoneSummaries_member})
+var sLandingZoneSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eLandingZoneSummary_arn})
+var s_ParentIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ParentIdentifier, Type: smithy.ShapeTypeString, Ext: &e_ParentIdentifiers_member})
+var sRegion_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RegionName, Type: smithy.ShapeTypeString, Ext: &eRegion_name})
+var sRemediationType_INHERITANCE_DRIFT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INHERITANCE_DRIFT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRemediationType_INHERITANCE_DRIFT})
+var s_RemediationTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRemediationType, Members: &mRemediationType, Type: smithy.ShapeTypeEnum, Ext: &e_RemediationTypes_member})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeys_member})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var s_TargetIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString, Ext: &e_TargetIdentifiers_member})
+var s_TargetRegions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRegion, Members: &mRegion, Type: smithy.ShapeTypeStructure, Ext: &e_TargetRegions_member})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_serviceCode})
+var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_quotaCode})
+var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t36, Type: smithy.ShapeTypeInteger, Ext: &eThrottlingException_retryAfterSeconds})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sCreateLandingZoneInput_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_LandingZoneVersion, Type: smithy.ShapeTypeString, Ext: &eCreateLandingZoneInput_version})
+var sCreateLandingZoneInput_remediationTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remediationTypes", ID: &i_RemediationTypes, Members: &m_RemediationTypes, Type: smithy.ShapeTypeList, Ext: &eCreateLandingZoneInput_remediationTypes})
+var sCreateLandingZoneInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateLandingZoneInput_tags})
+var sCreateLandingZoneInput_manifest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "manifest", ID: &i_Manifest, Type: smithy.ShapeTypeDocument, Ext: &eCreateLandingZoneInput_manifest})
+var sCreateLandingZoneOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateLandingZoneOutput_arn})
+var sCreateLandingZoneOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &eCreateLandingZoneOutput_operationIdentifier})
+var sDeleteLandingZoneInput_landingZoneIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "landingZoneIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDeleteLandingZoneInput_landingZoneIdentifier})
+var sDeleteLandingZoneOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &eDeleteLandingZoneOutput_operationIdentifier})
+var sDisableBaselineInput_enabledBaselineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledBaselineIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDisableBaselineInput_enabledBaselineIdentifier})
+var sDisableBaselineOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &eDisableBaselineOutput_operationIdentifier})
+var sDisableControlInput_controlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlIdentifier", ID: &i_ControlIdentifier, Type: smithy.ShapeTypeString, Ext: &eDisableControlInput_controlIdentifier})
+var sDisableControlInput_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString, Ext: &eDisableControlInput_targetIdentifier})
+var sDisableControlInput_enabledControlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControlIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDisableControlInput_enabledControlIdentifier})
+var sDisableControlOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &eDisableControlOutput_operationIdentifier})
+var sEnableBaselineInput_baselineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineVersion", ID: &i_BaselineVersion, Type: smithy.ShapeTypeString, Ext: &eEnableBaselineInput_baselineVersion})
+var sEnableBaselineInput_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_EnabledBaselineParameters, Members: &m_EnabledBaselineParameters, Type: smithy.ShapeTypeList, Ext: &eEnableBaselineInput_parameters})
+var sEnableBaselineInput_baselineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eEnableBaselineInput_baselineIdentifier})
+var sEnableBaselineInput_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eEnableBaselineInput_targetIdentifier})
+var sEnableBaselineInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eEnableBaselineInput_tags})
+var sEnableBaselineOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &eEnableBaselineOutput_operationIdentifier})
+var sEnableBaselineOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eEnableBaselineOutput_arn})
+var sEnableControlInput_controlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlIdentifier", ID: &i_ControlIdentifier, Type: smithy.ShapeTypeString, Ext: &eEnableControlInput_controlIdentifier})
+var sEnableControlInput_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString, Ext: &eEnableControlInput_targetIdentifier})
+var sEnableControlInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eEnableControlInput_tags})
+var sEnableControlInput_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_EnabledControlParameters, Members: &m_EnabledControlParameters, Type: smithy.ShapeTypeList, Ext: &eEnableControlInput_parameters})
+var sEnableControlOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &eEnableControlOutput_operationIdentifier})
+var sEnableControlOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eEnableControlOutput_arn})
+var sGetBaselineInput_baselineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineIdentifier", ID: &i_BaselineArn, Type: smithy.ShapeTypeString, Ext: &eGetBaselineInput_baselineIdentifier})
+var sGetBaselineOperationInput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetBaselineOperationInput_operationIdentifier})
+var sGetBaselineOperationOutput_baselineOperation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineOperation", ID: &iBaselineOperation, Members: &mBaselineOperation, Type: smithy.ShapeTypeStructure, Ext: &eGetBaselineOperationOutput_baselineOperation})
+var sGetBaselineOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_BaselineArn, Type: smithy.ShapeTypeString, Ext: &eGetBaselineOutput_arn})
+var sGetBaselineOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetBaselineOutput_name})
+var sGetBaselineOutput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetBaselineOutput_description})
+var sGetControlOperationInput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetControlOperationInput_operationIdentifier})
+var sGetControlOperationOutput_controlOperation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlOperation", ID: &iControlOperation, Members: &mControlOperation, Type: smithy.ShapeTypeStructure, Ext: &eGetControlOperationOutput_controlOperation})
+var sGetEnabledBaselineInput_enabledBaselineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledBaselineIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetEnabledBaselineInput_enabledBaselineIdentifier})
+var sGetEnabledBaselineOutput_enabledBaselineDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledBaselineDetails", ID: &iEnabledBaselineDetails, Members: &mEnabledBaselineDetails, Type: smithy.ShapeTypeStructure, Ext: &eGetEnabledBaselineOutput_enabledBaselineDetails})
+var sGetEnabledControlInput_enabledControlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControlIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetEnabledControlInput_enabledControlIdentifier})
+var sGetEnabledControlOutput_enabledControlDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControlDetails", ID: &iEnabledControlDetails, Members: &mEnabledControlDetails, Type: smithy.ShapeTypeStructure, Ext: &eGetEnabledControlOutput_enabledControlDetails})
+var sGetLandingZoneInput_landingZoneIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "landingZoneIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetLandingZoneInput_landingZoneIdentifier})
+var sGetLandingZoneOperationInput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetLandingZoneOperationInput_operationIdentifier})
+var sGetLandingZoneOperationOutput_operationDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationDetails", ID: &iLandingZoneOperationDetail, Members: &mLandingZoneOperationDetail, Type: smithy.ShapeTypeStructure, Ext: &eGetLandingZoneOperationOutput_operationDetails})
+var sGetLandingZoneOutput_landingZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "landingZone", ID: &iLandingZoneDetail, Members: &mLandingZoneDetail, Type: smithy.ShapeTypeStructure, Ext: &eGetLandingZoneOutput_landingZone})
+var sListBaselinesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListBaselinesInput_nextToken})
+var sListBaselinesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListBaselinesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListBaselinesInput_maxResults})
+var sListBaselinesOutput_baselines = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselines", ID: &i_Baselines, Members: &m_Baselines, Type: smithy.ShapeTypeList, Ext: &eListBaselinesOutput_baselines})
+var sListBaselinesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListBaselinesOutput_nextToken})
+var sListControlOperationsInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iControlOperationFilter, Members: &mControlOperationFilter, Type: smithy.ShapeTypeStructure, Ext: &eListControlOperationsInput_filter})
+var sListControlOperationsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_ListControlOperationsNextToken, Type: smithy.ShapeTypeString, Ext: &eListControlOperationsInput_nextToken})
+var sListControlOperationsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListControlOperationsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListControlOperationsInput_maxResults})
+var sListControlOperationsOutput_controlOperations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlOperations", ID: &i_ControlOperations, Members: &m_ControlOperations, Type: smithy.ShapeTypeList, Ext: &eListControlOperationsOutput_controlOperations})
+var sListControlOperationsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_ListControlOperationsNextToken, Type: smithy.ShapeTypeString, Ext: &eListControlOperationsOutput_nextToken})
+var sListEnabledBaselinesInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iEnabledBaselineFilter, Members: &mEnabledBaselineFilter, Type: smithy.ShapeTypeStructure, Ext: &eListEnabledBaselinesInput_filter})
+var sListEnabledBaselinesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_ListEnabledBaselinesNextToken, Type: smithy.ShapeTypeString, Ext: &eListEnabledBaselinesInput_nextToken})
+var sListEnabledBaselinesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListEnabledBaselinesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListEnabledBaselinesInput_maxResults})
+var sListEnabledBaselinesInput_includeChildren = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeChildren", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eListEnabledBaselinesInput_includeChildren})
+var sListEnabledBaselinesOutput_enabledBaselines = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledBaselines", ID: &i_EnabledBaselines, Members: &m_EnabledBaselines, Type: smithy.ShapeTypeList, Ext: &eListEnabledBaselinesOutput_enabledBaselines})
+var sListEnabledBaselinesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_ListEnabledBaselinesNextToken, Type: smithy.ShapeTypeString, Ext: &eListEnabledBaselinesOutput_nextToken})
+var sListEnabledControlsInput_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString, Ext: &eListEnabledControlsInput_targetIdentifier})
+var sListEnabledControlsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListEnabledControlsInput_nextToken})
+var sListEnabledControlsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListEnabledControlsInput_maxResults})
+var sListEnabledControlsInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iEnabledControlFilter, Members: &mEnabledControlFilter, Type: smithy.ShapeTypeStructure, Ext: &eListEnabledControlsInput_filter})
+var sListEnabledControlsInput_includeChildren = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeChildren", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eListEnabledControlsInput_includeChildren})
+var sListEnabledControlsOutput_enabledControls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControls", ID: &i_EnabledControls, Members: &m_EnabledControls, Type: smithy.ShapeTypeList, Ext: &eListEnabledControlsOutput_enabledControls})
+var sListEnabledControlsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListEnabledControlsOutput_nextToken})
+var sListLandingZoneOperationsInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iLandingZoneOperationFilter, Members: &mLandingZoneOperationFilter, Type: smithy.ShapeTypeStructure, Ext: &eListLandingZoneOperationsInput_filter})
+var sListLandingZoneOperationsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListLandingZoneOperationsInput_nextToken})
+var sListLandingZoneOperationsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListLandingZoneOperationsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListLandingZoneOperationsInput_maxResults})
+var sListLandingZoneOperationsOutput_landingZoneOperations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "landingZoneOperations", ID: &i_LandingZoneOperations, Members: &m_LandingZoneOperations, Type: smithy.ShapeTypeList, Ext: &eListLandingZoneOperationsOutput_landingZoneOperations})
+var sListLandingZoneOperationsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListLandingZoneOperationsOutput_nextToken})
+var sListLandingZonesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListLandingZonesInput_nextToken})
+var sListLandingZonesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListLandingZonesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListLandingZonesInput_maxResults})
+var sListLandingZonesOutput_landingZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "landingZones", ID: &i_LandingZoneSummaries, Members: &m_LandingZoneSummaries, Type: smithy.ShapeTypeList, Ext: &eListLandingZonesOutput_landingZones})
+var sListLandingZonesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListLandingZonesOutput_nextToken})
+var sListTagsForResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceInput_resourceArn})
+var sListTagsForResourceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceOutput_tags})
+var sResetEnabledBaselineInput_enabledBaselineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledBaselineIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eResetEnabledBaselineInput_enabledBaselineIdentifier})
+var sResetEnabledBaselineOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &eResetEnabledBaselineOutput_operationIdentifier})
+var sResetEnabledControlInput_enabledControlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControlIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eResetEnabledControlInput_enabledControlIdentifier})
+var sResetEnabledControlOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &eResetEnabledControlOutput_operationIdentifier})
+var sResetLandingZoneInput_landingZoneIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "landingZoneIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResetLandingZoneInput_landingZoneIdentifier})
+var sResetLandingZoneOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &eResetLandingZoneOutput_operationIdentifier})
+var sTagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eTagResourceInput_resourceArn})
+var sTagResourceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceInput_tags})
+var sUntagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eUntagResourceInput_resourceArn})
+var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Traits: &t39, Type: smithy.ShapeTypeList, Ext: &eUntagResourceInput_tagKeys})
+var sUpdateEnabledBaselineInput_baselineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineVersion", ID: &i_BaselineVersion, Type: smithy.ShapeTypeString, Ext: &eUpdateEnabledBaselineInput_baselineVersion})
+var sUpdateEnabledBaselineInput_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_EnabledBaselineParameters, Members: &m_EnabledBaselineParameters, Type: smithy.ShapeTypeList, Ext: &eUpdateEnabledBaselineInput_parameters})
+var sUpdateEnabledBaselineInput_enabledBaselineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledBaselineIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateEnabledBaselineInput_enabledBaselineIdentifier})
+var sUpdateEnabledBaselineOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &eUpdateEnabledBaselineOutput_operationIdentifier})
+var sUpdateEnabledControlInput_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_EnabledControlParameters, Members: &m_EnabledControlParameters, Type: smithy.ShapeTypeList, Ext: &eUpdateEnabledControlInput_parameters})
+var sUpdateEnabledControlInput_enabledControlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControlIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateEnabledControlInput_enabledControlIdentifier})
+var sUpdateEnabledControlOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &eUpdateEnabledControlOutput_operationIdentifier})
+var sUpdateLandingZoneInput_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_LandingZoneVersion, Type: smithy.ShapeTypeString, Ext: &eUpdateLandingZoneInput_version})
+var sUpdateLandingZoneInput_remediationTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remediationTypes", ID: &i_RemediationTypes, Members: &m_RemediationTypes, Type: smithy.ShapeTypeList, Ext: &eUpdateLandingZoneInput_remediationTypes})
+var sUpdateLandingZoneInput_landingZoneIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "landingZoneIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateLandingZoneInput_landingZoneIdentifier})
+var sUpdateLandingZoneInput_manifest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "manifest", ID: &i_Manifest, Type: smithy.ShapeTypeDocument, Ext: &eUpdateLandingZoneInput_manifest})
+var sUpdateLandingZoneOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString, Ext: &eUpdateLandingZoneOutput_operationIdentifier})
 
 var CreateLandingZone = &sCreateLandingZone
 

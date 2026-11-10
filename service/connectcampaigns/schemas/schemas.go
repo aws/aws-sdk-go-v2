@@ -7,9 +7,264 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [256]smithy.SchemaExtensions
+var (
+	eCreateCampaign                                                            smithy.SchemaExtensions
+	eDeleteCampaign                                                            smithy.SchemaExtensions
+	eDeleteConnectInstanceConfig                                               smithy.SchemaExtensions
+	eDeleteInstanceOnboardingJob                                               smithy.SchemaExtensions
+	eDescribeCampaign                                                          smithy.SchemaExtensions
+	eGetCampaignState                                                          smithy.SchemaExtensions
+	eGetCampaignStateBatch                                                     smithy.SchemaExtensions
+	eGetConnectInstanceConfig                                                  smithy.SchemaExtensions
+	eGetInstanceOnboardingJobStatus                                            smithy.SchemaExtensions
+	eListCampaigns                                                             smithy.SchemaExtensions
+	eListTagsForResource                                                       smithy.SchemaExtensions
+	ePauseCampaign                                                             smithy.SchemaExtensions
+	ePutDialRequestBatch                                                       smithy.SchemaExtensions
+	eResumeCampaign                                                            smithy.SchemaExtensions
+	eStartCampaign                                                             smithy.SchemaExtensions
+	eStartInstanceOnboardingJob                                                smithy.SchemaExtensions
+	eStopCampaign                                                              smithy.SchemaExtensions
+	eTagResource                                                               smithy.SchemaExtensions
+	eUntagResource                                                             smithy.SchemaExtensions
+	eUpdateCampaignDialerConfig                                                smithy.SchemaExtensions
+	eUpdateCampaignName                                                        smithy.SchemaExtensions
+	eUpdateCampaignOutboundCallConfig                                          smithy.SchemaExtensions
+	e_AmazonConnectCampaignService                                             smithy.SchemaExtensions
+	eAccessDeniedException                                                     smithy.SchemaExtensions
+	eAccessDeniedException_message                                             smithy.SchemaExtensions
+	eAccessDeniedException_xAmzErrorType                                       smithy.SchemaExtensions
+	eAgentlessDialerConfig                                                     smithy.SchemaExtensions
+	eAgentlessDialerConfig_dialingCapacity                                     smithy.SchemaExtensions
+	eAnswerMachineDetectionConfig                                              smithy.SchemaExtensions
+	eAnswerMachineDetectionConfig_enableAnswerMachineDetection                 smithy.SchemaExtensions
+	eAnswerMachineDetectionConfig_awaitAnswerMachinePrompt                     smithy.SchemaExtensions
+	e_Arn                                                                      smithy.SchemaExtensions
+	e_AttributeName                                                            smithy.SchemaExtensions
+	e_Attributes                                                               smithy.SchemaExtensions
+	e_Attributes_key                                                           smithy.SchemaExtensions
+	e_Attributes_value                                                         smithy.SchemaExtensions
+	e_AttributeValue                                                           smithy.SchemaExtensions
+	e_BandwidthAllocation                                                      smithy.SchemaExtensions
+	eCampaign                                                                  smithy.SchemaExtensions
+	eCampaign_id                                                               smithy.SchemaExtensions
+	eCampaign_arn                                                              smithy.SchemaExtensions
+	eCampaign_name                                                             smithy.SchemaExtensions
+	eCampaign_connectInstanceId                                                smithy.SchemaExtensions
+	eCampaign_dialerConfig                                                     smithy.SchemaExtensions
+	eCampaign_outboundCallConfig                                               smithy.SchemaExtensions
+	eCampaign_tags                                                             smithy.SchemaExtensions
+	e_CampaignArn                                                              smithy.SchemaExtensions
+	eCampaignFilters                                                           smithy.SchemaExtensions
+	eCampaignFilters_instanceIdFilter                                          smithy.SchemaExtensions
+	e_CampaignId                                                               smithy.SchemaExtensions
+	e_CampaignIdList                                                           smithy.SchemaExtensions
+	e_CampaignIdList_member                                                    smithy.SchemaExtensions
+	e_CampaignName                                                             smithy.SchemaExtensions
+	e_CampaignState                                                            smithy.SchemaExtensions
+	eCampaignSummary                                                           smithy.SchemaExtensions
+	eCampaignSummary_id                                                        smithy.SchemaExtensions
+	eCampaignSummary_arn                                                       smithy.SchemaExtensions
+	eCampaignSummary_name                                                      smithy.SchemaExtensions
+	eCampaignSummary_connectInstanceId                                         smithy.SchemaExtensions
+	e_CampaignSummaryList                                                      smithy.SchemaExtensions
+	e_CampaignSummaryList_member                                               smithy.SchemaExtensions
+	e_ClientToken                                                              smithy.SchemaExtensions
+	eConflictException                                                         smithy.SchemaExtensions
+	eConflictException_message                                                 smithy.SchemaExtensions
+	eConflictException_xAmzErrorType                                           smithy.SchemaExtensions
+	e_ContactFlowId                                                            smithy.SchemaExtensions
+	e_DestinationPhoneNumber                                                   smithy.SchemaExtensions
+	eDialerConfig                                                              smithy.SchemaExtensions
+	eDialerConfig_progressiveDialerConfig                                      smithy.SchemaExtensions
+	eDialerConfig_predictiveDialerConfig                                       smithy.SchemaExtensions
+	eDialerConfig_agentlessDialerConfig                                        smithy.SchemaExtensions
+	e_DialingCapacity                                                          smithy.SchemaExtensions
+	eDialRequest                                                               smithy.SchemaExtensions
+	eDialRequest_clientToken                                                   smithy.SchemaExtensions
+	eDialRequest_phoneNumber                                                   smithy.SchemaExtensions
+	eDialRequest_expirationTime                                                smithy.SchemaExtensions
+	eDialRequest_attributes                                                    smithy.SchemaExtensions
+	e_DialRequestId                                                            smithy.SchemaExtensions
+	e_DialRequestList                                                          smithy.SchemaExtensions
+	e_DialRequestList_member                                                   smithy.SchemaExtensions
+	e_Enabled                                                                  smithy.SchemaExtensions
+	eEncryptionConfig                                                          smithy.SchemaExtensions
+	eEncryptionConfig_enabled                                                  smithy.SchemaExtensions
+	eEncryptionConfig_encryptionType                                           smithy.SchemaExtensions
+	eEncryptionConfig_keyArn                                                   smithy.SchemaExtensions
+	e_EncryptionKey                                                            smithy.SchemaExtensions
+	e_EncryptionType                                                           smithy.SchemaExtensions
+	eFailedCampaignStateResponse                                               smithy.SchemaExtensions
+	eFailedCampaignStateResponse_campaignId                                    smithy.SchemaExtensions
+	eFailedCampaignStateResponse_failureCode                                   smithy.SchemaExtensions
+	e_FailedCampaignStateResponseList                                          smithy.SchemaExtensions
+	e_FailedCampaignStateResponseList_member                                   smithy.SchemaExtensions
+	eFailedRequest                                                             smithy.SchemaExtensions
+	eFailedRequest_clientToken                                                 smithy.SchemaExtensions
+	eFailedRequest_id                                                          smithy.SchemaExtensions
+	eFailedRequest_failureCode                                                 smithy.SchemaExtensions
+	e_FailedRequestList                                                        smithy.SchemaExtensions
+	e_FailedRequestList_member                                                 smithy.SchemaExtensions
+	e_FailureCode                                                              smithy.SchemaExtensions
+	e_GetCampaignStateBatchFailureCode                                         smithy.SchemaExtensions
+	eInstanceConfig                                                            smithy.SchemaExtensions
+	eInstanceConfig_connectInstanceId                                          smithy.SchemaExtensions
+	eInstanceConfig_serviceLinkedRoleArn                                       smithy.SchemaExtensions
+	eInstanceConfig_encryptionConfig                                           smithy.SchemaExtensions
+	e_InstanceId                                                               smithy.SchemaExtensions
+	eInstanceIdFilter                                                          smithy.SchemaExtensions
+	eInstanceIdFilter_value                                                    smithy.SchemaExtensions
+	eInstanceIdFilter_operator                                                 smithy.SchemaExtensions
+	e_InstanceIdFilterOperator                                                 smithy.SchemaExtensions
+	e_InstanceOnboardingJobFailureCode                                         smithy.SchemaExtensions
+	eInstanceOnboardingJobStatus                                               smithy.SchemaExtensions
+	eInstanceOnboardingJobStatus_connectInstanceId                             smithy.SchemaExtensions
+	eInstanceOnboardingJobStatus_status                                        smithy.SchemaExtensions
+	eInstanceOnboardingJobStatus_failureCode                                   smithy.SchemaExtensions
+	e_InstanceOnboardingJobStatusCode                                          smithy.SchemaExtensions
+	eInternalServerException                                                   smithy.SchemaExtensions
+	eInternalServerException_message                                           smithy.SchemaExtensions
+	eInternalServerException_xAmzErrorType                                     smithy.SchemaExtensions
+	eInvalidCampaignStateException                                             smithy.SchemaExtensions
+	eInvalidCampaignStateException_state                                       smithy.SchemaExtensions
+	eInvalidCampaignStateException_message                                     smithy.SchemaExtensions
+	eInvalidCampaignStateException_xAmzErrorType                               smithy.SchemaExtensions
+	eInvalidStateException                                                     smithy.SchemaExtensions
+	eInvalidStateException_message                                             smithy.SchemaExtensions
+	eInvalidStateException_xAmzErrorType                                       smithy.SchemaExtensions
+	e_MaxResults                                                               smithy.SchemaExtensions
+	e_NextToken                                                                smithy.SchemaExtensions
+	eOutboundCallConfig                                                        smithy.SchemaExtensions
+	eOutboundCallConfig_connectContactFlowId                                   smithy.SchemaExtensions
+	eOutboundCallConfig_connectSourcePhoneNumber                               smithy.SchemaExtensions
+	eOutboundCallConfig_connectQueueId                                         smithy.SchemaExtensions
+	eOutboundCallConfig_answerMachineDetectionConfig                           smithy.SchemaExtensions
+	ePredictiveDialerConfig                                                    smithy.SchemaExtensions
+	ePredictiveDialerConfig_bandwidthAllocation                                smithy.SchemaExtensions
+	ePredictiveDialerConfig_dialingCapacity                                    smithy.SchemaExtensions
+	eProgressiveDialerConfig                                                   smithy.SchemaExtensions
+	eProgressiveDialerConfig_bandwidthAllocation                               smithy.SchemaExtensions
+	eProgressiveDialerConfig_dialingCapacity                                   smithy.SchemaExtensions
+	e_QueueId                                                                  smithy.SchemaExtensions
+	eResourceNotFoundException                                                 smithy.SchemaExtensions
+	eResourceNotFoundException_message                                         smithy.SchemaExtensions
+	eResourceNotFoundException_xAmzErrorType                                   smithy.SchemaExtensions
+	e_ServiceLinkedRoleArn                                                     smithy.SchemaExtensions
+	eServiceQuotaExceededException                                             smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                                     smithy.SchemaExtensions
+	eServiceQuotaExceededException_xAmzErrorType                               smithy.SchemaExtensions
+	e_SourcePhoneNumber                                                        smithy.SchemaExtensions
+	eSuccessfulCampaignStateResponse                                           smithy.SchemaExtensions
+	eSuccessfulCampaignStateResponse_campaignId                                smithy.SchemaExtensions
+	eSuccessfulCampaignStateResponse_state                                     smithy.SchemaExtensions
+	e_SuccessfulCampaignStateResponseList                                      smithy.SchemaExtensions
+	e_SuccessfulCampaignStateResponseList_member                               smithy.SchemaExtensions
+	eSuccessfulRequest                                                         smithy.SchemaExtensions
+	eSuccessfulRequest_clientToken                                             smithy.SchemaExtensions
+	eSuccessfulRequest_id                                                      smithy.SchemaExtensions
+	e_SuccessfulRequestList                                                    smithy.SchemaExtensions
+	e_SuccessfulRequestList_member                                             smithy.SchemaExtensions
+	e_TagKey                                                                   smithy.SchemaExtensions
+	e_TagKeyList                                                               smithy.SchemaExtensions
+	e_TagKeyList_member                                                        smithy.SchemaExtensions
+	e_TagMap                                                                   smithy.SchemaExtensions
+	e_TagMap_key                                                               smithy.SchemaExtensions
+	e_TagMap_value                                                             smithy.SchemaExtensions
+	e_TagValue                                                                 smithy.SchemaExtensions
+	eThrottlingException                                                       smithy.SchemaExtensions
+	eThrottlingException_message                                               smithy.SchemaExtensions
+	eThrottlingException_xAmzErrorType                                         smithy.SchemaExtensions
+	e_TimeStamp                                                                smithy.SchemaExtensions
+	eValidationException                                                       smithy.SchemaExtensions
+	eValidationException_message                                               smithy.SchemaExtensions
+	eValidationException_xAmzErrorType                                         smithy.SchemaExtensions
+	e_XAmazonErrorType                                                         smithy.SchemaExtensions
+	eCreateCampaignRequest                                                     smithy.SchemaExtensions
+	eCreateCampaignRequest_name                                                smithy.SchemaExtensions
+	eCreateCampaignRequest_connectInstanceId                                   smithy.SchemaExtensions
+	eCreateCampaignRequest_dialerConfig                                        smithy.SchemaExtensions
+	eCreateCampaignRequest_outboundCallConfig                                  smithy.SchemaExtensions
+	eCreateCampaignRequest_tags                                                smithy.SchemaExtensions
+	eCreateCampaignResponse                                                    smithy.SchemaExtensions
+	eCreateCampaignResponse_id                                                 smithy.SchemaExtensions
+	eCreateCampaignResponse_arn                                                smithy.SchemaExtensions
+	eCreateCampaignResponse_tags                                               smithy.SchemaExtensions
+	eDeleteCampaignRequest                                                     smithy.SchemaExtensions
+	eDeleteCampaignRequest_id                                                  smithy.SchemaExtensions
+	eDeleteConnectInstanceConfigRequest                                        smithy.SchemaExtensions
+	eDeleteConnectInstanceConfigRequest_connectInstanceId                      smithy.SchemaExtensions
+	eDeleteInstanceOnboardingJobRequest                                        smithy.SchemaExtensions
+	eDeleteInstanceOnboardingJobRequest_connectInstanceId                      smithy.SchemaExtensions
+	eDescribeCampaignRequest                                                   smithy.SchemaExtensions
+	eDescribeCampaignRequest_id                                                smithy.SchemaExtensions
+	eDescribeCampaignResponse                                                  smithy.SchemaExtensions
+	eDescribeCampaignResponse_campaign                                         smithy.SchemaExtensions
+	eGetCampaignStateBatchRequest                                              smithy.SchemaExtensions
+	eGetCampaignStateBatchRequest_campaignIds                                  smithy.SchemaExtensions
+	eGetCampaignStateBatchResponse                                             smithy.SchemaExtensions
+	eGetCampaignStateBatchResponse_successfulRequests                          smithy.SchemaExtensions
+	eGetCampaignStateBatchResponse_failedRequests                              smithy.SchemaExtensions
+	eGetCampaignStateRequest                                                   smithy.SchemaExtensions
+	eGetCampaignStateRequest_id                                                smithy.SchemaExtensions
+	eGetCampaignStateResponse                                                  smithy.SchemaExtensions
+	eGetCampaignStateResponse_state                                            smithy.SchemaExtensions
+	eGetConnectInstanceConfigRequest                                           smithy.SchemaExtensions
+	eGetConnectInstanceConfigRequest_connectInstanceId                         smithy.SchemaExtensions
+	eGetConnectInstanceConfigResponse                                          smithy.SchemaExtensions
+	eGetConnectInstanceConfigResponse_connectInstanceConfig                    smithy.SchemaExtensions
+	eGetInstanceOnboardingJobStatusRequest                                     smithy.SchemaExtensions
+	eGetInstanceOnboardingJobStatusRequest_connectInstanceId                   smithy.SchemaExtensions
+	eGetInstanceOnboardingJobStatusResponse                                    smithy.SchemaExtensions
+	eGetInstanceOnboardingJobStatusResponse_connectInstanceOnboardingJobStatus smithy.SchemaExtensions
+	eListCampaignsRequest                                                      smithy.SchemaExtensions
+	eListCampaignsRequest_maxResults                                           smithy.SchemaExtensions
+	eListCampaignsRequest_nextToken                                            smithy.SchemaExtensions
+	eListCampaignsRequest_filters                                              smithy.SchemaExtensions
+	eListCampaignsResponse                                                     smithy.SchemaExtensions
+	eListCampaignsResponse_nextToken                                           smithy.SchemaExtensions
+	eListCampaignsResponse_campaignSummaryList                                 smithy.SchemaExtensions
+	eListTagsForResourceRequest                                                smithy.SchemaExtensions
+	eListTagsForResourceRequest_arn                                            smithy.SchemaExtensions
+	eListTagsForResourceResponse                                               smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                                          smithy.SchemaExtensions
+	ePauseCampaignRequest                                                      smithy.SchemaExtensions
+	ePauseCampaignRequest_id                                                   smithy.SchemaExtensions
+	ePutDialRequestBatchRequest                                                smithy.SchemaExtensions
+	ePutDialRequestBatchRequest_id                                             smithy.SchemaExtensions
+	ePutDialRequestBatchRequest_dialRequests                                   smithy.SchemaExtensions
+	ePutDialRequestBatchResponse                                               smithy.SchemaExtensions
+	ePutDialRequestBatchResponse_successfulRequests                            smithy.SchemaExtensions
+	ePutDialRequestBatchResponse_failedRequests                                smithy.SchemaExtensions
+	eResumeCampaignRequest                                                     smithy.SchemaExtensions
+	eResumeCampaignRequest_id                                                  smithy.SchemaExtensions
+	eStartCampaignRequest                                                      smithy.SchemaExtensions
+	eStartCampaignRequest_id                                                   smithy.SchemaExtensions
+	eStartInstanceOnboardingJobRequest                                         smithy.SchemaExtensions
+	eStartInstanceOnboardingJobRequest_connectInstanceId                       smithy.SchemaExtensions
+	eStartInstanceOnboardingJobRequest_encryptionConfig                        smithy.SchemaExtensions
+	eStartInstanceOnboardingJobResponse                                        smithy.SchemaExtensions
+	eStartInstanceOnboardingJobResponse_connectInstanceOnboardingJobStatus     smithy.SchemaExtensions
+	eStopCampaignRequest                                                       smithy.SchemaExtensions
+	eStopCampaignRequest_id                                                    smithy.SchemaExtensions
+	eTagResourceRequest                                                        smithy.SchemaExtensions
+	eTagResourceRequest_arn                                                    smithy.SchemaExtensions
+	eTagResourceRequest_tags                                                   smithy.SchemaExtensions
+	eUntagResourceRequest                                                      smithy.SchemaExtensions
+	eUntagResourceRequest_arn                                                  smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                                              smithy.SchemaExtensions
+	eUpdateCampaignDialerConfigRequest                                         smithy.SchemaExtensions
+	eUpdateCampaignDialerConfigRequest_id                                      smithy.SchemaExtensions
+	eUpdateCampaignDialerConfigRequest_dialerConfig                            smithy.SchemaExtensions
+	eUpdateCampaignNameRequest                                                 smithy.SchemaExtensions
+	eUpdateCampaignNameRequest_id                                              smithy.SchemaExtensions
+	eUpdateCampaignNameRequest_name                                            smithy.SchemaExtensions
+	eUpdateCampaignOutboundCallConfigRequest                                   smithy.SchemaExtensions
+	eUpdateCampaignOutboundCallConfigRequest_id                                smithy.SchemaExtensions
+	eUpdateCampaignOutboundCallConfigRequest_connectContactFlowId              smithy.SchemaExtensions
+	eUpdateCampaignOutboundCallConfigRequest_connectSourcePhoneNumber          smithy.SchemaExtensions
+	eUpdateCampaignOutboundCallConfigRequest_answerMachineDetectionConfig      smithy.SchemaExtensions
+)
 
 var (
 	iCreateCampaign                          = smithy.ShapeID{Namespace: "com.amazonaws.connectcampaigns", Name: "CreateCampaign"}
@@ -290,263 +545,263 @@ var mUpdateCampaignDialerConfigRequest = smithy.SchemaMembers{List: []*smithy.Sc
 var mUpdateCampaignNameRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCampaignNameRequest_id, &sUpdateCampaignNameRequest_name}}
 var mUpdateCampaignOutboundCallConfigRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCampaignOutboundCallConfigRequest_id, &sUpdateCampaignOutboundCallConfigRequest_connectContactFlowId, &sUpdateCampaignOutboundCallConfigRequest_connectSourcePhoneNumber, &sUpdateCampaignOutboundCallConfigRequest_answerMachineDetectionConfig}}
 
-var sCreateCampaign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCampaign, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sDeleteCampaign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCampaign, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sDeleteConnectInstanceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectInstanceConfig, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sDeleteInstanceOnboardingJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInstanceOnboardingJob, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sDescribeCampaign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCampaign, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sGetCampaignState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCampaignState, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sGetCampaignStateBatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCampaignStateBatch, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sGetConnectInstanceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectInstanceConfig, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sGetInstanceOnboardingJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInstanceOnboardingJobStatus, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sListCampaigns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCampaigns, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sPauseCampaign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPauseCampaign, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sPutDialRequestBatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDialRequestBatch, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sResumeCampaign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResumeCampaign, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sStartCampaign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCampaign, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sStartInstanceOnboardingJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartInstanceOnboardingJob, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sStopCampaign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopCampaign, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sUpdateCampaignDialerConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCampaignDialerConfig, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var sUpdateCampaignName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCampaignName, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &ext[20]})
-var sUpdateCampaignOutboundCallConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCampaignOutboundCallConfig, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &ext[21]})
-var s_AmazonConnectCampaignService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonConnectCampaignService, Type: smithy.ShapeTypeService, Ext: &ext[22]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &ext[23]})
-var sAgentlessDialerConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAgentlessDialerConfig, Members: &mAgentlessDialerConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[26]})
-var sAnswerMachineDetectionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnswerMachineDetectionConfig, Members: &mAnswerMachineDetectionConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
-var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var s_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var s_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Attributes, Members: &m_Attributes, Traits: &t24, Type: smithy.ShapeTypeMap, Ext: &ext[33]})
-var s_AttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeValue, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var s_BandwidthAllocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BandwidthAllocation, Type: smithy.ShapeTypeDouble, Ext: &ext[37]})
-var sCampaign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCampaign, Members: &mCampaign, Type: smithy.ShapeTypeStructure, Ext: &ext[38]})
-var s_CampaignArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CampaignArn, Type: smithy.ShapeTypeString, Ext: &ext[46]})
-var sCampaignFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCampaignFilters, Members: &mCampaignFilters, Type: smithy.ShapeTypeStructure, Ext: &ext[47]})
-var s_CampaignId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CampaignId, Type: smithy.ShapeTypeString, Ext: &ext[49]})
-var s_CampaignIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CampaignIdList, Members: &m_CampaignIdList, Type: smithy.ShapeTypeList, Ext: &ext[50]})
-var s_CampaignName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CampaignName, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var s_CampaignState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CampaignState, Type: smithy.ShapeTypeString, Ext: &ext[53]})
-var sCampaignSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCampaignSummary, Members: &mCampaignSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[54]})
-var s_CampaignSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CampaignSummaryList, Members: &m_CampaignSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[59]})
-var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[61]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &ext[62]})
-var s_ContactFlowId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactFlowId, Type: smithy.ShapeTypeString, Ext: &ext[65]})
-var s_DestinationPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DestinationPhoneNumber, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &ext[66]})
-var sDialerConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDialerConfig, Members: &mDialerConfig, Type: smithy.ShapeTypeUnion, Ext: &ext[67]})
-var s_DialingCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DialingCapacity, Type: smithy.ShapeTypeDouble, Ext: &ext[71]})
-var sDialRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDialRequest, Members: &mDialRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var s_DialRequestId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DialRequestId, Type: smithy.ShapeTypeString, Ext: &ext[77]})
-var s_DialRequestList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DialRequestList, Members: &m_DialRequestList, Type: smithy.ShapeTypeList, Ext: &ext[78]})
-var s_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[80]})
-var sEncryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionConfig, Members: &mEncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[81]})
-var s_EncryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionKey, Type: smithy.ShapeTypeString, Ext: &ext[85]})
-var s_EncryptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionType, Type: smithy.ShapeTypeString, Ext: &ext[86]})
-var sFailedCampaignStateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailedCampaignStateResponse, Members: &mFailedCampaignStateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[87]})
-var s_FailedCampaignStateResponseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailedCampaignStateResponseList, Members: &m_FailedCampaignStateResponseList, Type: smithy.ShapeTypeList, Ext: &ext[90]})
-var sFailedRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailedRequest, Members: &mFailedRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[92]})
-var s_FailedRequestList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailedRequestList, Members: &m_FailedRequestList, Type: smithy.ShapeTypeList, Ext: &ext[96]})
-var s_FailureCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailureCode, Type: smithy.ShapeTypeString, Ext: &ext[98]})
-var s_GetCampaignStateBatchFailureCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GetCampaignStateBatchFailureCode, Type: smithy.ShapeTypeString, Ext: &ext[99]})
-var sInstanceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceConfig, Members: &mInstanceConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[100]})
-var s_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &ext[104]})
-var sInstanceIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceIdFilter, Members: &mInstanceIdFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[105]})
-var s_InstanceIdFilterOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceIdFilterOperator, Type: smithy.ShapeTypeString, Ext: &ext[108]})
-var s_InstanceOnboardingJobFailureCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceOnboardingJobFailureCode, Type: smithy.ShapeTypeString, Ext: &ext[109]})
-var sInstanceOnboardingJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceOnboardingJobStatus, Members: &mInstanceOnboardingJobStatus, Type: smithy.ShapeTypeStructure, Ext: &ext[110]})
-var s_InstanceOnboardingJobStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceOnboardingJobStatusCode, Type: smithy.ShapeTypeString, Ext: &ext[114]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &ext[115]})
-var sInvalidCampaignStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidCampaignStateException, Members: &mInvalidCampaignStateException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &ext[118]})
-var sInvalidStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidStateException, Members: &mInvalidStateException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &ext[122]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[125]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[126]})
-var sOutboundCallConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutboundCallConfig, Members: &mOutboundCallConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[127]})
-var sPredictiveDialerConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictiveDialerConfig, Members: &mPredictiveDialerConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[132]})
-var sProgressiveDialerConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProgressiveDialerConfig, Members: &mProgressiveDialerConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[135]})
-var s_QueueId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueueId, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &ext[139]})
-var s_ServiceLinkedRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceLinkedRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[142]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &ext[143]})
-var s_SourcePhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourcePhoneNumber, Type: smithy.ShapeTypeString, Ext: &ext[146]})
-var sSuccessfulCampaignStateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuccessfulCampaignStateResponse, Members: &mSuccessfulCampaignStateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[147]})
-var s_SuccessfulCampaignStateResponseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SuccessfulCampaignStateResponseList, Members: &m_SuccessfulCampaignStateResponseList, Type: smithy.ShapeTypeList, Ext: &ext[150]})
-var sSuccessfulRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuccessfulRequest, Members: &mSuccessfulRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[152]})
-var s_SuccessfulRequestList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SuccessfulRequestList, Members: &m_SuccessfulRequestList, Type: smithy.ShapeTypeList, Ext: &ext[155]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[157]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[158]})
-var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[160]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[163]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &ext[164]})
-var s_TimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeStamp, Traits: &t32, Type: smithy.ShapeTypeTimestamp, Ext: &ext[167]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &ext[168]})
-var s_XAmazonErrorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XAmazonErrorType, Type: smithy.ShapeTypeString, Ext: &ext[171]})
-var sCreateCampaignRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCampaignRequest, Members: &mCreateCampaignRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[172]})
-var sCreateCampaignResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCampaignResponse, Members: &mCreateCampaignResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[178]})
-var sDeleteCampaignRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCampaignRequest, Members: &mDeleteCampaignRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[182]})
-var sDeleteConnectInstanceConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectInstanceConfigRequest, Members: &mDeleteConnectInstanceConfigRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[184]})
-var sDeleteInstanceOnboardingJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInstanceOnboardingJobRequest, Members: &mDeleteInstanceOnboardingJobRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[186]})
-var sDescribeCampaignRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCampaignRequest, Members: &mDescribeCampaignRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[188]})
-var sDescribeCampaignResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCampaignResponse, Members: &mDescribeCampaignResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[190]})
-var sGetCampaignStateBatchRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCampaignStateBatchRequest, Members: &mGetCampaignStateBatchRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[192]})
-var sGetCampaignStateBatchResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCampaignStateBatchResponse, Members: &mGetCampaignStateBatchResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[194]})
-var sGetCampaignStateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCampaignStateRequest, Members: &mGetCampaignStateRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[197]})
-var sGetCampaignStateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCampaignStateResponse, Members: &mGetCampaignStateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[199]})
-var sGetConnectInstanceConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectInstanceConfigRequest, Members: &mGetConnectInstanceConfigRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[201]})
-var sGetConnectInstanceConfigResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectInstanceConfigResponse, Members: &mGetConnectInstanceConfigResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[203]})
-var sGetInstanceOnboardingJobStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInstanceOnboardingJobStatusRequest, Members: &mGetInstanceOnboardingJobStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[205]})
-var sGetInstanceOnboardingJobStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInstanceOnboardingJobStatusResponse, Members: &mGetInstanceOnboardingJobStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[207]})
-var sListCampaignsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCampaignsRequest, Members: &mListCampaignsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[209]})
-var sListCampaignsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCampaignsResponse, Members: &mListCampaignsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[213]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[216]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[218]})
-var sPauseCampaignRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPauseCampaignRequest, Members: &mPauseCampaignRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[220]})
-var sPutDialRequestBatchRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDialRequestBatchRequest, Members: &mPutDialRequestBatchRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[222]})
-var sPutDialRequestBatchResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDialRequestBatchResponse, Members: &mPutDialRequestBatchResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[225]})
-var sResumeCampaignRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResumeCampaignRequest, Members: &mResumeCampaignRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[228]})
-var sStartCampaignRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCampaignRequest, Members: &mStartCampaignRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[230]})
-var sStartInstanceOnboardingJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartInstanceOnboardingJobRequest, Members: &mStartInstanceOnboardingJobRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[232]})
-var sStartInstanceOnboardingJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartInstanceOnboardingJobResponse, Members: &mStartInstanceOnboardingJobResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[235]})
-var sStopCampaignRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopCampaignRequest, Members: &mStopCampaignRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[237]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[239]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[242]})
-var sUpdateCampaignDialerConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCampaignDialerConfigRequest, Members: &mUpdateCampaignDialerConfigRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[245]})
-var sUpdateCampaignNameRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCampaignNameRequest, Members: &mUpdateCampaignNameRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[248]})
-var sUpdateCampaignOutboundCallConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCampaignOutboundCallConfigRequest, Members: &mUpdateCampaignOutboundCallConfigRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[251]})
+var sCreateCampaign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCampaign, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateCampaign})
+var sDeleteCampaign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCampaign, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eDeleteCampaign})
+var sDeleteConnectInstanceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectInstanceConfig, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eDeleteConnectInstanceConfig})
+var sDeleteInstanceOnboardingJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInstanceOnboardingJob, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDeleteInstanceOnboardingJob})
+var sDescribeCampaign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCampaign, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDescribeCampaign})
+var sGetCampaignState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCampaignState, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eGetCampaignState})
+var sGetCampaignStateBatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCampaignStateBatch, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eGetCampaignStateBatch})
+var sGetConnectInstanceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectInstanceConfig, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eGetConnectInstanceConfig})
+var sGetInstanceOnboardingJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInstanceOnboardingJobStatus, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eGetInstanceOnboardingJobStatus})
+var sListCampaigns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCampaigns, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eListCampaigns})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sPauseCampaign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPauseCampaign, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ePauseCampaign})
+var sPutDialRequestBatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDialRequestBatch, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ePutDialRequestBatch})
+var sResumeCampaign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResumeCampaign, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eResumeCampaign})
+var sStartCampaign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCampaign, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eStartCampaign})
+var sStartInstanceOnboardingJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartInstanceOnboardingJob, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eStartInstanceOnboardingJob})
+var sStopCampaign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopCampaign, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eStopCampaign})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateCampaignDialerConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCampaignDialerConfig, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eUpdateCampaignDialerConfig})
+var sUpdateCampaignName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCampaignName, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eUpdateCampaignName})
+var sUpdateCampaignOutboundCallConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCampaignOutboundCallConfig, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eUpdateCampaignOutboundCallConfig})
+var s_AmazonConnectCampaignService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonConnectCampaignService, Type: smithy.ShapeTypeService, Ext: &e_AmazonConnectCampaignService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAgentlessDialerConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAgentlessDialerConfig, Members: &mAgentlessDialerConfig, Type: smithy.ShapeTypeStructure, Ext: &eAgentlessDialerConfig})
+var sAnswerMachineDetectionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnswerMachineDetectionConfig, Members: &mAnswerMachineDetectionConfig, Type: smithy.ShapeTypeStructure, Ext: &eAnswerMachineDetectionConfig})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var s_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &e_AttributeName})
+var s_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Attributes, Members: &m_Attributes, Traits: &t24, Type: smithy.ShapeTypeMap, Ext: &e_Attributes})
+var s_AttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeValue, Type: smithy.ShapeTypeString, Ext: &e_AttributeValue})
+var s_BandwidthAllocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BandwidthAllocation, Type: smithy.ShapeTypeDouble, Ext: &e_BandwidthAllocation})
+var sCampaign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCampaign, Members: &mCampaign, Type: smithy.ShapeTypeStructure, Ext: &eCampaign})
+var s_CampaignArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CampaignArn, Type: smithy.ShapeTypeString, Ext: &e_CampaignArn})
+var sCampaignFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCampaignFilters, Members: &mCampaignFilters, Type: smithy.ShapeTypeStructure, Ext: &eCampaignFilters})
+var s_CampaignId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CampaignId, Type: smithy.ShapeTypeString, Ext: &e_CampaignId})
+var s_CampaignIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CampaignIdList, Members: &m_CampaignIdList, Type: smithy.ShapeTypeList, Ext: &e_CampaignIdList})
+var s_CampaignName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CampaignName, Type: smithy.ShapeTypeString, Ext: &e_CampaignName})
+var s_CampaignState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CampaignState, Type: smithy.ShapeTypeString, Ext: &e_CampaignState})
+var sCampaignSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCampaignSummary, Members: &mCampaignSummary, Type: smithy.ShapeTypeStructure, Ext: &eCampaignSummary})
+var s_CampaignSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CampaignSummaryList, Members: &m_CampaignSummaryList, Type: smithy.ShapeTypeList, Ext: &e_CampaignSummaryList})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var s_ContactFlowId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactFlowId, Type: smithy.ShapeTypeString, Ext: &e_ContactFlowId})
+var s_DestinationPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DestinationPhoneNumber, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &e_DestinationPhoneNumber})
+var sDialerConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDialerConfig, Members: &mDialerConfig, Type: smithy.ShapeTypeUnion, Ext: &eDialerConfig})
+var s_DialingCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DialingCapacity, Type: smithy.ShapeTypeDouble, Ext: &e_DialingCapacity})
+var sDialRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDialRequest, Members: &mDialRequest, Type: smithy.ShapeTypeStructure, Ext: &eDialRequest})
+var s_DialRequestId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DialRequestId, Type: smithy.ShapeTypeString, Ext: &e_DialRequestId})
+var s_DialRequestList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DialRequestList, Members: &m_DialRequestList, Type: smithy.ShapeTypeList, Ext: &e_DialRequestList})
+var s_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &e_Enabled})
+var sEncryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionConfig, Members: &mEncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionConfig})
+var s_EncryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionKey, Type: smithy.ShapeTypeString, Ext: &e_EncryptionKey})
+var s_EncryptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionType, Type: smithy.ShapeTypeString, Ext: &e_EncryptionType})
+var sFailedCampaignStateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailedCampaignStateResponse, Members: &mFailedCampaignStateResponse, Type: smithy.ShapeTypeStructure, Ext: &eFailedCampaignStateResponse})
+var s_FailedCampaignStateResponseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailedCampaignStateResponseList, Members: &m_FailedCampaignStateResponseList, Type: smithy.ShapeTypeList, Ext: &e_FailedCampaignStateResponseList})
+var sFailedRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailedRequest, Members: &mFailedRequest, Type: smithy.ShapeTypeStructure, Ext: &eFailedRequest})
+var s_FailedRequestList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailedRequestList, Members: &m_FailedRequestList, Type: smithy.ShapeTypeList, Ext: &e_FailedRequestList})
+var s_FailureCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailureCode, Type: smithy.ShapeTypeString, Ext: &e_FailureCode})
+var s_GetCampaignStateBatchFailureCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GetCampaignStateBatchFailureCode, Type: smithy.ShapeTypeString, Ext: &e_GetCampaignStateBatchFailureCode})
+var sInstanceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceConfig, Members: &mInstanceConfig, Type: smithy.ShapeTypeStructure, Ext: &eInstanceConfig})
+var s_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &e_InstanceId})
+var sInstanceIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceIdFilter, Members: &mInstanceIdFilter, Type: smithy.ShapeTypeStructure, Ext: &eInstanceIdFilter})
+var s_InstanceIdFilterOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceIdFilterOperator, Type: smithy.ShapeTypeString, Ext: &e_InstanceIdFilterOperator})
+var s_InstanceOnboardingJobFailureCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceOnboardingJobFailureCode, Type: smithy.ShapeTypeString, Ext: &e_InstanceOnboardingJobFailureCode})
+var sInstanceOnboardingJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceOnboardingJobStatus, Members: &mInstanceOnboardingJobStatus, Type: smithy.ShapeTypeStructure, Ext: &eInstanceOnboardingJobStatus})
+var s_InstanceOnboardingJobStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceOnboardingJobStatusCode, Type: smithy.ShapeTypeString, Ext: &e_InstanceOnboardingJobStatusCode})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInvalidCampaignStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidCampaignStateException, Members: &mInvalidCampaignStateException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eInvalidCampaignStateException})
+var sInvalidStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidStateException, Members: &mInvalidStateException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eInvalidStateException})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sOutboundCallConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutboundCallConfig, Members: &mOutboundCallConfig, Type: smithy.ShapeTypeStructure, Ext: &eOutboundCallConfig})
+var sPredictiveDialerConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictiveDialerConfig, Members: &mPredictiveDialerConfig, Type: smithy.ShapeTypeStructure, Ext: &ePredictiveDialerConfig})
+var sProgressiveDialerConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProgressiveDialerConfig, Members: &mProgressiveDialerConfig, Type: smithy.ShapeTypeStructure, Ext: &eProgressiveDialerConfig})
+var s_QueueId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueueId, Type: smithy.ShapeTypeString, Ext: &e_QueueId})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var s_ServiceLinkedRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceLinkedRoleArn, Type: smithy.ShapeTypeString, Ext: &e_ServiceLinkedRoleArn})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var s_SourcePhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourcePhoneNumber, Type: smithy.ShapeTypeString, Ext: &e_SourcePhoneNumber})
+var sSuccessfulCampaignStateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuccessfulCampaignStateResponse, Members: &mSuccessfulCampaignStateResponse, Type: smithy.ShapeTypeStructure, Ext: &eSuccessfulCampaignStateResponse})
+var s_SuccessfulCampaignStateResponseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SuccessfulCampaignStateResponseList, Members: &m_SuccessfulCampaignStateResponseList, Type: smithy.ShapeTypeList, Ext: &e_SuccessfulCampaignStateResponseList})
+var sSuccessfulRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuccessfulRequest, Members: &mSuccessfulRequest, Type: smithy.ShapeTypeStructure, Ext: &eSuccessfulRequest})
+var s_SuccessfulRequestList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SuccessfulRequestList, Members: &m_SuccessfulRequestList, Type: smithy.ShapeTypeList, Ext: &e_SuccessfulRequestList})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var s_TimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeStamp, Traits: &t32, Type: smithy.ShapeTypeTimestamp, Ext: &e_TimeStamp})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var s_XAmazonErrorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XAmazonErrorType, Type: smithy.ShapeTypeString, Ext: &e_XAmazonErrorType})
+var sCreateCampaignRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCampaignRequest, Members: &mCreateCampaignRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateCampaignRequest})
+var sCreateCampaignResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCampaignResponse, Members: &mCreateCampaignResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateCampaignResponse})
+var sDeleteCampaignRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCampaignRequest, Members: &mDeleteCampaignRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteCampaignRequest})
+var sDeleteConnectInstanceConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectInstanceConfigRequest, Members: &mDeleteConnectInstanceConfigRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteConnectInstanceConfigRequest})
+var sDeleteInstanceOnboardingJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInstanceOnboardingJobRequest, Members: &mDeleteInstanceOnboardingJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteInstanceOnboardingJobRequest})
+var sDescribeCampaignRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCampaignRequest, Members: &mDescribeCampaignRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCampaignRequest})
+var sDescribeCampaignResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCampaignResponse, Members: &mDescribeCampaignResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCampaignResponse})
+var sGetCampaignStateBatchRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCampaignStateBatchRequest, Members: &mGetCampaignStateBatchRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetCampaignStateBatchRequest})
+var sGetCampaignStateBatchResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCampaignStateBatchResponse, Members: &mGetCampaignStateBatchResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetCampaignStateBatchResponse})
+var sGetCampaignStateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCampaignStateRequest, Members: &mGetCampaignStateRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetCampaignStateRequest})
+var sGetCampaignStateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCampaignStateResponse, Members: &mGetCampaignStateResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetCampaignStateResponse})
+var sGetConnectInstanceConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectInstanceConfigRequest, Members: &mGetConnectInstanceConfigRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetConnectInstanceConfigRequest})
+var sGetConnectInstanceConfigResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectInstanceConfigResponse, Members: &mGetConnectInstanceConfigResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetConnectInstanceConfigResponse})
+var sGetInstanceOnboardingJobStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInstanceOnboardingJobStatusRequest, Members: &mGetInstanceOnboardingJobStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetInstanceOnboardingJobStatusRequest})
+var sGetInstanceOnboardingJobStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInstanceOnboardingJobStatusResponse, Members: &mGetInstanceOnboardingJobStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetInstanceOnboardingJobStatusResponse})
+var sListCampaignsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCampaignsRequest, Members: &mListCampaignsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListCampaignsRequest})
+var sListCampaignsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCampaignsResponse, Members: &mListCampaignsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListCampaignsResponse})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sPauseCampaignRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPauseCampaignRequest, Members: &mPauseCampaignRequest, Type: smithy.ShapeTypeStructure, Ext: &ePauseCampaignRequest})
+var sPutDialRequestBatchRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDialRequestBatchRequest, Members: &mPutDialRequestBatchRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutDialRequestBatchRequest})
+var sPutDialRequestBatchResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDialRequestBatchResponse, Members: &mPutDialRequestBatchResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutDialRequestBatchResponse})
+var sResumeCampaignRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResumeCampaignRequest, Members: &mResumeCampaignRequest, Type: smithy.ShapeTypeStructure, Ext: &eResumeCampaignRequest})
+var sStartCampaignRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCampaignRequest, Members: &mStartCampaignRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartCampaignRequest})
+var sStartInstanceOnboardingJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartInstanceOnboardingJobRequest, Members: &mStartInstanceOnboardingJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartInstanceOnboardingJobRequest})
+var sStartInstanceOnboardingJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartInstanceOnboardingJobResponse, Members: &mStartInstanceOnboardingJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartInstanceOnboardingJobResponse})
+var sStopCampaignRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopCampaignRequest, Members: &mStopCampaignRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopCampaignRequest})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUpdateCampaignDialerConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCampaignDialerConfigRequest, Members: &mUpdateCampaignDialerConfigRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCampaignDialerConfigRequest})
+var sUpdateCampaignNameRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCampaignNameRequest, Members: &mUpdateCampaignNameRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCampaignNameRequest})
+var sUpdateCampaignOutboundCallConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCampaignOutboundCallConfigRequest, Members: &mUpdateCampaignOutboundCallConfigRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCampaignOutboundCallConfigRequest})
 
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[24]})
-var sAccessDeniedException_xAmzErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmzErrorType", ID: &i_XAmazonErrorType, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[25]})
-var sAgentlessDialerConfig_dialingCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialingCapacity", ID: &i_DialingCapacity, Type: smithy.ShapeTypeDouble, Ext: &ext[27]})
-var sAnswerMachineDetectionConfig_enableAnswerMachineDetection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableAnswerMachineDetection", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[29]})
-var sAnswerMachineDetectionConfig_awaitAnswerMachinePrompt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awaitAnswerMachinePrompt", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[30]})
-var s_Attributes_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &ext[34]})
-var s_Attributes_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_AttributeValue, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var sCampaign_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Type: smithy.ShapeTypeString, Ext: &ext[39]})
-var sCampaign_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_CampaignArn, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var sCampaign_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CampaignName, Type: smithy.ShapeTypeString, Ext: &ext[41]})
-var sCampaign_connectInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectInstanceId", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var sCampaign_dialerConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialerConfig", ID: &iDialerConfig, Members: &mDialerConfig, Type: smithy.ShapeTypeUnion, Ext: &ext[43]})
-var sCampaign_outboundCallConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outboundCallConfig", ID: &iOutboundCallConfig, Members: &mOutboundCallConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[44]})
-var sCampaign_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[45]})
-var sCampaignFilters_instanceIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceIdFilter", ID: &iInstanceIdFilter, Members: &mInstanceIdFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[48]})
-var s_CampaignIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CampaignId, Type: smithy.ShapeTypeString, Ext: &ext[51]})
-var sCampaignSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var sCampaignSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_CampaignArn, Type: smithy.ShapeTypeString, Ext: &ext[56]})
-var sCampaignSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CampaignName, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var sCampaignSummary_connectInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectInstanceId", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var s_CampaignSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCampaignSummary, Members: &mCampaignSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[60]})
-var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[63]})
-var sConflictException_xAmzErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmzErrorType", ID: &i_XAmazonErrorType, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[64]})
-var sDialerConfig_progressiveDialerConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "progressiveDialerConfig", ID: &iProgressiveDialerConfig, Members: &mProgressiveDialerConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var sDialerConfig_predictiveDialerConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "predictiveDialerConfig", ID: &iPredictiveDialerConfig, Members: &mPredictiveDialerConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[69]})
-var sDialerConfig_agentlessDialerConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agentlessDialerConfig", ID: &iAgentlessDialerConfig, Members: &mAgentlessDialerConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[70]})
-var sDialRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[73]})
-var sDialRequest_phoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phoneNumber", ID: &i_DestinationPhoneNumber, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[74]})
-var sDialRequest_expirationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expirationTime", ID: &i_TimeStamp, Traits: &t27, Type: smithy.ShapeTypeTimestamp, Ext: &ext[75]})
-var sDialRequest_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_Attributes, Members: &m_Attributes, Traits: &t26, Type: smithy.ShapeTypeMap, Ext: &ext[76]})
-var s_DialRequestList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDialRequest, Members: &mDialRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[79]})
-var sEncryptionConfig_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[82]})
-var sEncryptionConfig_encryptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionType", ID: &i_EncryptionType, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var sEncryptionConfig_keyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyArn", ID: &i_EncryptionKey, Type: smithy.ShapeTypeString, Ext: &ext[84]})
-var sFailedCampaignStateResponse_campaignId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "campaignId", ID: &i_CampaignId, Type: smithy.ShapeTypeString, Ext: &ext[88]})
-var sFailedCampaignStateResponse_failureCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureCode", ID: &i_GetCampaignStateBatchFailureCode, Type: smithy.ShapeTypeString, Ext: &ext[89]})
-var s_FailedCampaignStateResponseList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFailedCampaignStateResponse, Members: &mFailedCampaignStateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[91]})
-var sFailedRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[93]})
-var sFailedRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_DialRequestId, Type: smithy.ShapeTypeString, Ext: &ext[94]})
-var sFailedRequest_failureCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureCode", ID: &i_FailureCode, Type: smithy.ShapeTypeString, Ext: &ext[95]})
-var s_FailedRequestList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFailedRequest, Members: &mFailedRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[97]})
-var sInstanceConfig_connectInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectInstanceId", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &ext[101]})
-var sInstanceConfig_serviceLinkedRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceLinkedRoleArn", ID: &i_ServiceLinkedRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var sInstanceConfig_encryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfig", ID: &iEncryptionConfig, Members: &mEncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[103]})
-var sInstanceIdFilter_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &ext[106]})
-var sInstanceIdFilter_operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operator", ID: &i_InstanceIdFilterOperator, Type: smithy.ShapeTypeString, Ext: &ext[107]})
-var sInstanceOnboardingJobStatus_connectInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectInstanceId", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &ext[111]})
-var sInstanceOnboardingJobStatus_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_InstanceOnboardingJobStatusCode, Type: smithy.ShapeTypeString, Ext: &ext[112]})
-var sInstanceOnboardingJobStatus_failureCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureCode", ID: &i_InstanceOnboardingJobFailureCode, Type: smithy.ShapeTypeString, Ext: &ext[113]})
-var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[116]})
-var sInternalServerException_xAmzErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmzErrorType", ID: &i_XAmazonErrorType, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[117]})
-var sInvalidCampaignStateException_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_CampaignState, Type: smithy.ShapeTypeString, Ext: &ext[119]})
-var sInvalidCampaignStateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[120]})
-var sInvalidCampaignStateException_xAmzErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmzErrorType", ID: &i_XAmazonErrorType, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[121]})
-var sInvalidStateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[123]})
-var sInvalidStateException_xAmzErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmzErrorType", ID: &i_XAmazonErrorType, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[124]})
-var sOutboundCallConfig_connectContactFlowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectContactFlowId", ID: &i_ContactFlowId, Type: smithy.ShapeTypeString, Ext: &ext[128]})
-var sOutboundCallConfig_connectSourcePhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectSourcePhoneNumber", ID: &i_SourcePhoneNumber, Type: smithy.ShapeTypeString, Ext: &ext[129]})
-var sOutboundCallConfig_connectQueueId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectQueueId", ID: &i_QueueId, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var sOutboundCallConfig_answerMachineDetectionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "answerMachineDetectionConfig", ID: &iAnswerMachineDetectionConfig, Members: &mAnswerMachineDetectionConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[131]})
-var sPredictiveDialerConfig_bandwidthAllocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidthAllocation", ID: &i_BandwidthAllocation, Type: smithy.ShapeTypeDouble, Ext: &ext[133]})
-var sPredictiveDialerConfig_dialingCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialingCapacity", ID: &i_DialingCapacity, Type: smithy.ShapeTypeDouble, Ext: &ext[134]})
-var sProgressiveDialerConfig_bandwidthAllocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidthAllocation", ID: &i_BandwidthAllocation, Type: smithy.ShapeTypeDouble, Ext: &ext[136]})
-var sProgressiveDialerConfig_dialingCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialingCapacity", ID: &i_DialingCapacity, Type: smithy.ShapeTypeDouble, Ext: &ext[137]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[140]})
-var sResourceNotFoundException_xAmzErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmzErrorType", ID: &i_XAmazonErrorType, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[141]})
-var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[144]})
-var sServiceQuotaExceededException_xAmzErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmzErrorType", ID: &i_XAmazonErrorType, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[145]})
-var sSuccessfulCampaignStateResponse_campaignId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "campaignId", ID: &i_CampaignId, Type: smithy.ShapeTypeString, Ext: &ext[148]})
-var sSuccessfulCampaignStateResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_CampaignState, Type: smithy.ShapeTypeString, Ext: &ext[149]})
-var s_SuccessfulCampaignStateResponseList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSuccessfulCampaignStateResponse, Members: &mSuccessfulCampaignStateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[151]})
-var sSuccessfulRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[153]})
-var sSuccessfulRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_DialRequestId, Type: smithy.ShapeTypeString, Ext: &ext[154]})
-var s_SuccessfulRequestList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSuccessfulRequest, Members: &mSuccessfulRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[156]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[159]})
-var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[161]})
-var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[162]})
-var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[165]})
-var sThrottlingException_xAmzErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmzErrorType", ID: &i_XAmazonErrorType, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[166]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[169]})
-var sValidationException_xAmzErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmzErrorType", ID: &i_XAmazonErrorType, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[170]})
-var sCreateCampaignRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CampaignName, Type: smithy.ShapeTypeString, Ext: &ext[173]})
-var sCreateCampaignRequest_connectInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectInstanceId", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &ext[174]})
-var sCreateCampaignRequest_dialerConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialerConfig", ID: &iDialerConfig, Members: &mDialerConfig, Type: smithy.ShapeTypeUnion, Ext: &ext[175]})
-var sCreateCampaignRequest_outboundCallConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outboundCallConfig", ID: &iOutboundCallConfig, Members: &mOutboundCallConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[176]})
-var sCreateCampaignRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[177]})
-var sCreateCampaignResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Type: smithy.ShapeTypeString, Ext: &ext[179]})
-var sCreateCampaignResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_CampaignArn, Type: smithy.ShapeTypeString, Ext: &ext[180]})
-var sCreateCampaignResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[181]})
-var sDeleteCampaignRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[183]})
-var sDeleteConnectInstanceConfigRequest_connectInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectInstanceId", ID: &i_InstanceId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[185]})
-var sDeleteInstanceOnboardingJobRequest_connectInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectInstanceId", ID: &i_InstanceId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[187]})
-var sDescribeCampaignRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[189]})
-var sDescribeCampaignResponse_campaign = smithy.NewStaticSchema(smithy.StaticSchema{Member: "campaign", ID: &iCampaign, Members: &mCampaign, Type: smithy.ShapeTypeStructure, Ext: &ext[191]})
-var sGetCampaignStateBatchRequest_campaignIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "campaignIds", ID: &i_CampaignIdList, Members: &m_CampaignIdList, Type: smithy.ShapeTypeList, Ext: &ext[193]})
-var sGetCampaignStateBatchResponse_successfulRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successfulRequests", ID: &i_SuccessfulCampaignStateResponseList, Members: &m_SuccessfulCampaignStateResponseList, Type: smithy.ShapeTypeList, Ext: &ext[195]})
-var sGetCampaignStateBatchResponse_failedRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failedRequests", ID: &i_FailedCampaignStateResponseList, Members: &m_FailedCampaignStateResponseList, Type: smithy.ShapeTypeList, Ext: &ext[196]})
-var sGetCampaignStateRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[198]})
-var sGetCampaignStateResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_CampaignState, Type: smithy.ShapeTypeString, Ext: &ext[200]})
-var sGetConnectInstanceConfigRequest_connectInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectInstanceId", ID: &i_InstanceId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[202]})
-var sGetConnectInstanceConfigResponse_connectInstanceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectInstanceConfig", ID: &iInstanceConfig, Members: &mInstanceConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[204]})
-var sGetInstanceOnboardingJobStatusRequest_connectInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectInstanceId", ID: &i_InstanceId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[206]})
-var sGetInstanceOnboardingJobStatusResponse_connectInstanceOnboardingJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectInstanceOnboardingJobStatus", ID: &iInstanceOnboardingJobStatus, Members: &mInstanceOnboardingJobStatus, Type: smithy.ShapeTypeStructure, Ext: &ext[208]})
-var sListCampaignsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[210]})
-var sListCampaignsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[211]})
-var sListCampaignsRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &iCampaignFilters, Members: &mCampaignFilters, Type: smithy.ShapeTypeStructure, Ext: &ext[212]})
-var sListCampaignsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[214]})
-var sListCampaignsResponse_campaignSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "campaignSummaryList", ID: &i_CampaignSummaryList, Members: &m_CampaignSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[215]})
-var sListTagsForResourceRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[217]})
-var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[219]})
-var sPauseCampaignRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[221]})
-var sPutDialRequestBatchRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[223]})
-var sPutDialRequestBatchRequest_dialRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialRequests", ID: &i_DialRequestList, Members: &m_DialRequestList, Type: smithy.ShapeTypeList, Ext: &ext[224]})
-var sPutDialRequestBatchResponse_successfulRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successfulRequests", ID: &i_SuccessfulRequestList, Members: &m_SuccessfulRequestList, Type: smithy.ShapeTypeList, Ext: &ext[226]})
-var sPutDialRequestBatchResponse_failedRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failedRequests", ID: &i_FailedRequestList, Members: &m_FailedRequestList, Type: smithy.ShapeTypeList, Ext: &ext[227]})
-var sResumeCampaignRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[229]})
-var sStartCampaignRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[231]})
-var sStartInstanceOnboardingJobRequest_connectInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectInstanceId", ID: &i_InstanceId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[233]})
-var sStartInstanceOnboardingJobRequest_encryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfig", ID: &iEncryptionConfig, Members: &mEncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[234]})
-var sStartInstanceOnboardingJobResponse_connectInstanceOnboardingJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectInstanceOnboardingJobStatus", ID: &iInstanceOnboardingJobStatus, Members: &mInstanceOnboardingJobStatus, Type: smithy.ShapeTypeStructure, Ext: &ext[236]})
-var sStopCampaignRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[238]})
-var sTagResourceRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[240]})
-var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[241]})
-var sUntagResourceRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[243]})
-var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t35, Type: smithy.ShapeTypeList, Ext: &ext[244]})
-var sUpdateCampaignDialerConfigRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[246]})
-var sUpdateCampaignDialerConfigRequest_dialerConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialerConfig", ID: &iDialerConfig, Members: &mDialerConfig, Type: smithy.ShapeTypeUnion, Ext: &ext[247]})
-var sUpdateCampaignNameRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[249]})
-var sUpdateCampaignNameRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CampaignName, Type: smithy.ShapeTypeString, Ext: &ext[250]})
-var sUpdateCampaignOutboundCallConfigRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[252]})
-var sUpdateCampaignOutboundCallConfigRequest_connectContactFlowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectContactFlowId", ID: &i_ContactFlowId, Type: smithy.ShapeTypeString, Ext: &ext[253]})
-var sUpdateCampaignOutboundCallConfigRequest_connectSourcePhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectSourcePhoneNumber", ID: &i_SourcePhoneNumber, Type: smithy.ShapeTypeString, Ext: &ext[254]})
-var sUpdateCampaignOutboundCallConfigRequest_answerMachineDetectionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "answerMachineDetectionConfig", ID: &iAnswerMachineDetectionConfig, Members: &mAnswerMachineDetectionConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[255]})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAccessDeniedException_xAmzErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmzErrorType", ID: &i_XAmazonErrorType, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_xAmzErrorType})
+var sAgentlessDialerConfig_dialingCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialingCapacity", ID: &i_DialingCapacity, Type: smithy.ShapeTypeDouble, Ext: &eAgentlessDialerConfig_dialingCapacity})
+var sAnswerMachineDetectionConfig_enableAnswerMachineDetection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableAnswerMachineDetection", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eAnswerMachineDetectionConfig_enableAnswerMachineDetection})
+var sAnswerMachineDetectionConfig_awaitAnswerMachinePrompt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awaitAnswerMachinePrompt", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eAnswerMachineDetectionConfig_awaitAnswerMachinePrompt})
+var s_Attributes_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AttributeName, Type: smithy.ShapeTypeString, Ext: &e_Attributes_key})
+var s_Attributes_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_AttributeValue, Type: smithy.ShapeTypeString, Ext: &e_Attributes_value})
+var sCampaign_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Type: smithy.ShapeTypeString, Ext: &eCampaign_id})
+var sCampaign_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_CampaignArn, Type: smithy.ShapeTypeString, Ext: &eCampaign_arn})
+var sCampaign_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CampaignName, Type: smithy.ShapeTypeString, Ext: &eCampaign_name})
+var sCampaign_connectInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectInstanceId", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &eCampaign_connectInstanceId})
+var sCampaign_dialerConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialerConfig", ID: &iDialerConfig, Members: &mDialerConfig, Type: smithy.ShapeTypeUnion, Ext: &eCampaign_dialerConfig})
+var sCampaign_outboundCallConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outboundCallConfig", ID: &iOutboundCallConfig, Members: &mOutboundCallConfig, Type: smithy.ShapeTypeStructure, Ext: &eCampaign_outboundCallConfig})
+var sCampaign_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCampaign_tags})
+var sCampaignFilters_instanceIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceIdFilter", ID: &iInstanceIdFilter, Members: &mInstanceIdFilter, Type: smithy.ShapeTypeStructure, Ext: &eCampaignFilters_instanceIdFilter})
+var s_CampaignIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CampaignId, Type: smithy.ShapeTypeString, Ext: &e_CampaignIdList_member})
+var sCampaignSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Type: smithy.ShapeTypeString, Ext: &eCampaignSummary_id})
+var sCampaignSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_CampaignArn, Type: smithy.ShapeTypeString, Ext: &eCampaignSummary_arn})
+var sCampaignSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CampaignName, Type: smithy.ShapeTypeString, Ext: &eCampaignSummary_name})
+var sCampaignSummary_connectInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectInstanceId", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &eCampaignSummary_connectInstanceId})
+var s_CampaignSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCampaignSummary, Members: &mCampaignSummary, Type: smithy.ShapeTypeStructure, Ext: &e_CampaignSummaryList_member})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictException_xAmzErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmzErrorType", ID: &i_XAmazonErrorType, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eConflictException_xAmzErrorType})
+var sDialerConfig_progressiveDialerConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "progressiveDialerConfig", ID: &iProgressiveDialerConfig, Members: &mProgressiveDialerConfig, Type: smithy.ShapeTypeStructure, Ext: &eDialerConfig_progressiveDialerConfig})
+var sDialerConfig_predictiveDialerConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "predictiveDialerConfig", ID: &iPredictiveDialerConfig, Members: &mPredictiveDialerConfig, Type: smithy.ShapeTypeStructure, Ext: &eDialerConfig_predictiveDialerConfig})
+var sDialerConfig_agentlessDialerConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agentlessDialerConfig", ID: &iAgentlessDialerConfig, Members: &mAgentlessDialerConfig, Type: smithy.ShapeTypeStructure, Ext: &eDialerConfig_agentlessDialerConfig})
+var sDialRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eDialRequest_clientToken})
+var sDialRequest_phoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phoneNumber", ID: &i_DestinationPhoneNumber, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eDialRequest_phoneNumber})
+var sDialRequest_expirationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expirationTime", ID: &i_TimeStamp, Traits: &t27, Type: smithy.ShapeTypeTimestamp, Ext: &eDialRequest_expirationTime})
+var sDialRequest_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_Attributes, Members: &m_Attributes, Traits: &t26, Type: smithy.ShapeTypeMap, Ext: &eDialRequest_attributes})
+var s_DialRequestList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDialRequest, Members: &mDialRequest, Type: smithy.ShapeTypeStructure, Ext: &e_DialRequestList_member})
+var sEncryptionConfig_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &eEncryptionConfig_enabled})
+var sEncryptionConfig_encryptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionType", ID: &i_EncryptionType, Type: smithy.ShapeTypeString, Ext: &eEncryptionConfig_encryptionType})
+var sEncryptionConfig_keyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyArn", ID: &i_EncryptionKey, Type: smithy.ShapeTypeString, Ext: &eEncryptionConfig_keyArn})
+var sFailedCampaignStateResponse_campaignId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "campaignId", ID: &i_CampaignId, Type: smithy.ShapeTypeString, Ext: &eFailedCampaignStateResponse_campaignId})
+var sFailedCampaignStateResponse_failureCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureCode", ID: &i_GetCampaignStateBatchFailureCode, Type: smithy.ShapeTypeString, Ext: &eFailedCampaignStateResponse_failureCode})
+var s_FailedCampaignStateResponseList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFailedCampaignStateResponse, Members: &mFailedCampaignStateResponse, Type: smithy.ShapeTypeStructure, Ext: &e_FailedCampaignStateResponseList_member})
+var sFailedRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eFailedRequest_clientToken})
+var sFailedRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_DialRequestId, Type: smithy.ShapeTypeString, Ext: &eFailedRequest_id})
+var sFailedRequest_failureCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureCode", ID: &i_FailureCode, Type: smithy.ShapeTypeString, Ext: &eFailedRequest_failureCode})
+var s_FailedRequestList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFailedRequest, Members: &mFailedRequest, Type: smithy.ShapeTypeStructure, Ext: &e_FailedRequestList_member})
+var sInstanceConfig_connectInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectInstanceId", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &eInstanceConfig_connectInstanceId})
+var sInstanceConfig_serviceLinkedRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceLinkedRoleArn", ID: &i_ServiceLinkedRoleArn, Type: smithy.ShapeTypeString, Ext: &eInstanceConfig_serviceLinkedRoleArn})
+var sInstanceConfig_encryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfig", ID: &iEncryptionConfig, Members: &mEncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &eInstanceConfig_encryptionConfig})
+var sInstanceIdFilter_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &eInstanceIdFilter_value})
+var sInstanceIdFilter_operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operator", ID: &i_InstanceIdFilterOperator, Type: smithy.ShapeTypeString, Ext: &eInstanceIdFilter_operator})
+var sInstanceOnboardingJobStatus_connectInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectInstanceId", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &eInstanceOnboardingJobStatus_connectInstanceId})
+var sInstanceOnboardingJobStatus_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_InstanceOnboardingJobStatusCode, Type: smithy.ShapeTypeString, Ext: &eInstanceOnboardingJobStatus_status})
+var sInstanceOnboardingJobStatus_failureCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureCode", ID: &i_InstanceOnboardingJobFailureCode, Type: smithy.ShapeTypeString, Ext: &eInstanceOnboardingJobStatus_failureCode})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sInternalServerException_xAmzErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmzErrorType", ID: &i_XAmazonErrorType, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_xAmzErrorType})
+var sInvalidCampaignStateException_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_CampaignState, Type: smithy.ShapeTypeString, Ext: &eInvalidCampaignStateException_state})
+var sInvalidCampaignStateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInvalidCampaignStateException_message})
+var sInvalidCampaignStateException_xAmzErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmzErrorType", ID: &i_XAmazonErrorType, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eInvalidCampaignStateException_xAmzErrorType})
+var sInvalidStateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInvalidStateException_message})
+var sInvalidStateException_xAmzErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmzErrorType", ID: &i_XAmazonErrorType, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eInvalidStateException_xAmzErrorType})
+var sOutboundCallConfig_connectContactFlowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectContactFlowId", ID: &i_ContactFlowId, Type: smithy.ShapeTypeString, Ext: &eOutboundCallConfig_connectContactFlowId})
+var sOutboundCallConfig_connectSourcePhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectSourcePhoneNumber", ID: &i_SourcePhoneNumber, Type: smithy.ShapeTypeString, Ext: &eOutboundCallConfig_connectSourcePhoneNumber})
+var sOutboundCallConfig_connectQueueId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectQueueId", ID: &i_QueueId, Type: smithy.ShapeTypeString, Ext: &eOutboundCallConfig_connectQueueId})
+var sOutboundCallConfig_answerMachineDetectionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "answerMachineDetectionConfig", ID: &iAnswerMachineDetectionConfig, Members: &mAnswerMachineDetectionConfig, Type: smithy.ShapeTypeStructure, Ext: &eOutboundCallConfig_answerMachineDetectionConfig})
+var sPredictiveDialerConfig_bandwidthAllocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidthAllocation", ID: &i_BandwidthAllocation, Type: smithy.ShapeTypeDouble, Ext: &ePredictiveDialerConfig_bandwidthAllocation})
+var sPredictiveDialerConfig_dialingCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialingCapacity", ID: &i_DialingCapacity, Type: smithy.ShapeTypeDouble, Ext: &ePredictiveDialerConfig_dialingCapacity})
+var sProgressiveDialerConfig_bandwidthAllocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidthAllocation", ID: &i_BandwidthAllocation, Type: smithy.ShapeTypeDouble, Ext: &eProgressiveDialerConfig_bandwidthAllocation})
+var sProgressiveDialerConfig_dialingCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialingCapacity", ID: &i_DialingCapacity, Type: smithy.ShapeTypeDouble, Ext: &eProgressiveDialerConfig_dialingCapacity})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceNotFoundException_xAmzErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmzErrorType", ID: &i_XAmazonErrorType, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_xAmzErrorType})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sServiceQuotaExceededException_xAmzErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmzErrorType", ID: &i_XAmazonErrorType, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_xAmzErrorType})
+var sSuccessfulCampaignStateResponse_campaignId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "campaignId", ID: &i_CampaignId, Type: smithy.ShapeTypeString, Ext: &eSuccessfulCampaignStateResponse_campaignId})
+var sSuccessfulCampaignStateResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_CampaignState, Type: smithy.ShapeTypeString, Ext: &eSuccessfulCampaignStateResponse_state})
+var s_SuccessfulCampaignStateResponseList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSuccessfulCampaignStateResponse, Members: &mSuccessfulCampaignStateResponse, Type: smithy.ShapeTypeStructure, Ext: &e_SuccessfulCampaignStateResponseList_member})
+var sSuccessfulRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eSuccessfulRequest_clientToken})
+var sSuccessfulRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_DialRequestId, Type: smithy.ShapeTypeString, Ext: &eSuccessfulRequest_id})
+var s_SuccessfulRequestList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSuccessfulRequest, Members: &mSuccessfulRequest, Type: smithy.ShapeTypeStructure, Ext: &e_SuccessfulRequestList_member})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sThrottlingException_xAmzErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmzErrorType", ID: &i_XAmazonErrorType, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_xAmzErrorType})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_xAmzErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xAmzErrorType", ID: &i_XAmazonErrorType, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eValidationException_xAmzErrorType})
+var sCreateCampaignRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CampaignName, Type: smithy.ShapeTypeString, Ext: &eCreateCampaignRequest_name})
+var sCreateCampaignRequest_connectInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectInstanceId", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &eCreateCampaignRequest_connectInstanceId})
+var sCreateCampaignRequest_dialerConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialerConfig", ID: &iDialerConfig, Members: &mDialerConfig, Type: smithy.ShapeTypeUnion, Ext: &eCreateCampaignRequest_dialerConfig})
+var sCreateCampaignRequest_outboundCallConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outboundCallConfig", ID: &iOutboundCallConfig, Members: &mOutboundCallConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateCampaignRequest_outboundCallConfig})
+var sCreateCampaignRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateCampaignRequest_tags})
+var sCreateCampaignResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Type: smithy.ShapeTypeString, Ext: &eCreateCampaignResponse_id})
+var sCreateCampaignResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_CampaignArn, Type: smithy.ShapeTypeString, Ext: &eCreateCampaignResponse_arn})
+var sCreateCampaignResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateCampaignResponse_tags})
+var sDeleteCampaignRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eDeleteCampaignRequest_id})
+var sDeleteConnectInstanceConfigRequest_connectInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectInstanceId", ID: &i_InstanceId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eDeleteConnectInstanceConfigRequest_connectInstanceId})
+var sDeleteInstanceOnboardingJobRequest_connectInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectInstanceId", ID: &i_InstanceId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eDeleteInstanceOnboardingJobRequest_connectInstanceId})
+var sDescribeCampaignRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eDescribeCampaignRequest_id})
+var sDescribeCampaignResponse_campaign = smithy.NewStaticSchema(smithy.StaticSchema{Member: "campaign", ID: &iCampaign, Members: &mCampaign, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCampaignResponse_campaign})
+var sGetCampaignStateBatchRequest_campaignIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "campaignIds", ID: &i_CampaignIdList, Members: &m_CampaignIdList, Type: smithy.ShapeTypeList, Ext: &eGetCampaignStateBatchRequest_campaignIds})
+var sGetCampaignStateBatchResponse_successfulRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successfulRequests", ID: &i_SuccessfulCampaignStateResponseList, Members: &m_SuccessfulCampaignStateResponseList, Type: smithy.ShapeTypeList, Ext: &eGetCampaignStateBatchResponse_successfulRequests})
+var sGetCampaignStateBatchResponse_failedRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failedRequests", ID: &i_FailedCampaignStateResponseList, Members: &m_FailedCampaignStateResponseList, Type: smithy.ShapeTypeList, Ext: &eGetCampaignStateBatchResponse_failedRequests})
+var sGetCampaignStateRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eGetCampaignStateRequest_id})
+var sGetCampaignStateResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_CampaignState, Type: smithy.ShapeTypeString, Ext: &eGetCampaignStateResponse_state})
+var sGetConnectInstanceConfigRequest_connectInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectInstanceId", ID: &i_InstanceId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eGetConnectInstanceConfigRequest_connectInstanceId})
+var sGetConnectInstanceConfigResponse_connectInstanceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectInstanceConfig", ID: &iInstanceConfig, Members: &mInstanceConfig, Type: smithy.ShapeTypeStructure, Ext: &eGetConnectInstanceConfigResponse_connectInstanceConfig})
+var sGetInstanceOnboardingJobStatusRequest_connectInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectInstanceId", ID: &i_InstanceId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eGetInstanceOnboardingJobStatusRequest_connectInstanceId})
+var sGetInstanceOnboardingJobStatusResponse_connectInstanceOnboardingJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectInstanceOnboardingJobStatus", ID: &iInstanceOnboardingJobStatus, Members: &mInstanceOnboardingJobStatus, Type: smithy.ShapeTypeStructure, Ext: &eGetInstanceOnboardingJobStatusResponse_connectInstanceOnboardingJobStatus})
+var sListCampaignsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListCampaignsRequest_maxResults})
+var sListCampaignsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListCampaignsRequest_nextToken})
+var sListCampaignsRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &iCampaignFilters, Members: &mCampaignFilters, Type: smithy.ShapeTypeStructure, Ext: &eListCampaignsRequest_filters})
+var sListCampaignsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListCampaignsResponse_nextToken})
+var sListCampaignsResponse_campaignSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "campaignSummaryList", ID: &i_CampaignSummaryList, Members: &m_CampaignSummaryList, Type: smithy.ShapeTypeList, Ext: &eListCampaignsResponse_campaignSummaryList})
+var sListTagsForResourceRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_arn})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_tags})
+var sPauseCampaignRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ePauseCampaignRequest_id})
+var sPutDialRequestBatchRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ePutDialRequestBatchRequest_id})
+var sPutDialRequestBatchRequest_dialRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialRequests", ID: &i_DialRequestList, Members: &m_DialRequestList, Type: smithy.ShapeTypeList, Ext: &ePutDialRequestBatchRequest_dialRequests})
+var sPutDialRequestBatchResponse_successfulRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successfulRequests", ID: &i_SuccessfulRequestList, Members: &m_SuccessfulRequestList, Type: smithy.ShapeTypeList, Ext: &ePutDialRequestBatchResponse_successfulRequests})
+var sPutDialRequestBatchResponse_failedRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failedRequests", ID: &i_FailedRequestList, Members: &m_FailedRequestList, Type: smithy.ShapeTypeList, Ext: &ePutDialRequestBatchResponse_failedRequests})
+var sResumeCampaignRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eResumeCampaignRequest_id})
+var sStartCampaignRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eStartCampaignRequest_id})
+var sStartInstanceOnboardingJobRequest_connectInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectInstanceId", ID: &i_InstanceId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eStartInstanceOnboardingJobRequest_connectInstanceId})
+var sStartInstanceOnboardingJobRequest_encryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfig", ID: &iEncryptionConfig, Members: &mEncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &eStartInstanceOnboardingJobRequest_encryptionConfig})
+var sStartInstanceOnboardingJobResponse_connectInstanceOnboardingJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectInstanceOnboardingJobStatus", ID: &iInstanceOnboardingJobStatus, Members: &mInstanceOnboardingJobStatus, Type: smithy.ShapeTypeStructure, Ext: &eStartInstanceOnboardingJobResponse_connectInstanceOnboardingJobStatus})
+var sStopCampaignRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eStopCampaignRequest_id})
+var sTagResourceRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_arn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_tags})
+var sUntagResourceRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_arn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t35, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUpdateCampaignDialerConfigRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eUpdateCampaignDialerConfigRequest_id})
+var sUpdateCampaignDialerConfigRequest_dialerConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialerConfig", ID: &iDialerConfig, Members: &mDialerConfig, Type: smithy.ShapeTypeUnion, Ext: &eUpdateCampaignDialerConfigRequest_dialerConfig})
+var sUpdateCampaignNameRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eUpdateCampaignNameRequest_id})
+var sUpdateCampaignNameRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CampaignName, Type: smithy.ShapeTypeString, Ext: &eUpdateCampaignNameRequest_name})
+var sUpdateCampaignOutboundCallConfigRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CampaignId, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eUpdateCampaignOutboundCallConfigRequest_id})
+var sUpdateCampaignOutboundCallConfigRequest_connectContactFlowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectContactFlowId", ID: &i_ContactFlowId, Type: smithy.ShapeTypeString, Ext: &eUpdateCampaignOutboundCallConfigRequest_connectContactFlowId})
+var sUpdateCampaignOutboundCallConfigRequest_connectSourcePhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectSourcePhoneNumber", ID: &i_SourcePhoneNumber, Type: smithy.ShapeTypeString, Ext: &eUpdateCampaignOutboundCallConfigRequest_connectSourcePhoneNumber})
+var sUpdateCampaignOutboundCallConfigRequest_answerMachineDetectionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "answerMachineDetectionConfig", ID: &iAnswerMachineDetectionConfig, Members: &mAnswerMachineDetectionConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCampaignOutboundCallConfigRequest_answerMachineDetectionConfig})
 
 var CreateCampaign = &sCreateCampaign
 

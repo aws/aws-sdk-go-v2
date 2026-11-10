@@ -7,9 +7,1123 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [1115]smithy.SchemaExtensions
+var (
+	eAssociatePhoneNumbersWithVoiceConnector                                                          smithy.SchemaExtensions
+	eAssociatePhoneNumbersWithVoiceConnectorGroup                                                     smithy.SchemaExtensions
+	eBatchDeletePhoneNumber                                                                           smithy.SchemaExtensions
+	eBatchUpdatePhoneNumber                                                                           smithy.SchemaExtensions
+	eCreatePhoneNumberOrder                                                                           smithy.SchemaExtensions
+	eCreateProxySession                                                                               smithy.SchemaExtensions
+	eCreateSipMediaApplication                                                                        smithy.SchemaExtensions
+	eCreateSipMediaApplicationCall                                                                    smithy.SchemaExtensions
+	eCreateSipRule                                                                                    smithy.SchemaExtensions
+	eCreateVoiceConnector                                                                             smithy.SchemaExtensions
+	eCreateVoiceConnectorGroup                                                                        smithy.SchemaExtensions
+	eCreateVoiceProfile                                                                               smithy.SchemaExtensions
+	eCreateVoiceProfileDomain                                                                         smithy.SchemaExtensions
+	eDeletePhoneNumber                                                                                smithy.SchemaExtensions
+	eDeleteProxySession                                                                               smithy.SchemaExtensions
+	eDeleteSipMediaApplication                                                                        smithy.SchemaExtensions
+	eDeleteSipRule                                                                                    smithy.SchemaExtensions
+	eDeleteVoiceConnector                                                                             smithy.SchemaExtensions
+	eDeleteVoiceConnectorEmergencyCallingConfiguration                                                smithy.SchemaExtensions
+	eDeleteVoiceConnectorExternalSystemsConfiguration                                                 smithy.SchemaExtensions
+	eDeleteVoiceConnectorGroup                                                                        smithy.SchemaExtensions
+	eDeleteVoiceConnectorOrigination                                                                  smithy.SchemaExtensions
+	eDeleteVoiceConnectorProxy                                                                        smithy.SchemaExtensions
+	eDeleteVoiceConnectorStreamingConfiguration                                                       smithy.SchemaExtensions
+	eDeleteVoiceConnectorTermination                                                                  smithy.SchemaExtensions
+	eDeleteVoiceConnectorTerminationCredentials                                                       smithy.SchemaExtensions
+	eDeleteVoiceProfile                                                                               smithy.SchemaExtensions
+	eDeleteVoiceProfileDomain                                                                         smithy.SchemaExtensions
+	eDisassociatePhoneNumbersFromVoiceConnector                                                       smithy.SchemaExtensions
+	eDisassociatePhoneNumbersFromVoiceConnectorGroup                                                  smithy.SchemaExtensions
+	eGetGlobalSettings                                                                                smithy.SchemaExtensions
+	eGetPhoneNumber                                                                                   smithy.SchemaExtensions
+	eGetPhoneNumberOrder                                                                              smithy.SchemaExtensions
+	eGetPhoneNumberSettings                                                                           smithy.SchemaExtensions
+	eGetProxySession                                                                                  smithy.SchemaExtensions
+	eGetSipMediaApplication                                                                           smithy.SchemaExtensions
+	eGetSipMediaApplicationAlexaSkillConfiguration                                                    smithy.SchemaExtensions
+	eGetSipMediaApplicationLoggingConfiguration                                                       smithy.SchemaExtensions
+	eGetSipRule                                                                                       smithy.SchemaExtensions
+	eGetSpeakerSearchTask                                                                             smithy.SchemaExtensions
+	eGetVoiceConnector                                                                                smithy.SchemaExtensions
+	eGetVoiceConnectorEmergencyCallingConfiguration                                                   smithy.SchemaExtensions
+	eGetVoiceConnectorExternalSystemsConfiguration                                                    smithy.SchemaExtensions
+	eGetVoiceConnectorGroup                                                                           smithy.SchemaExtensions
+	eGetVoiceConnectorLoggingConfiguration                                                            smithy.SchemaExtensions
+	eGetVoiceConnectorOrigination                                                                     smithy.SchemaExtensions
+	eGetVoiceConnectorProxy                                                                           smithy.SchemaExtensions
+	eGetVoiceConnectorStreamingConfiguration                                                          smithy.SchemaExtensions
+	eGetVoiceConnectorTermination                                                                     smithy.SchemaExtensions
+	eGetVoiceConnectorTerminationHealth                                                               smithy.SchemaExtensions
+	eGetVoiceProfile                                                                                  smithy.SchemaExtensions
+	eGetVoiceProfileDomain                                                                            smithy.SchemaExtensions
+	eGetVoiceToneAnalysisTask                                                                         smithy.SchemaExtensions
+	eListAvailableVoiceConnectorRegions                                                               smithy.SchemaExtensions
+	eListPhoneNumberOrders                                                                            smithy.SchemaExtensions
+	eListPhoneNumbers                                                                                 smithy.SchemaExtensions
+	eListProxySessions                                                                                smithy.SchemaExtensions
+	eListSipMediaApplications                                                                         smithy.SchemaExtensions
+	eListSipRules                                                                                     smithy.SchemaExtensions
+	eListSupportedPhoneNumberCountries                                                                smithy.SchemaExtensions
+	eListTagsForResource                                                                              smithy.SchemaExtensions
+	eListVoiceConnectorGroups                                                                         smithy.SchemaExtensions
+	eListVoiceConnectors                                                                              smithy.SchemaExtensions
+	eListVoiceConnectorTerminationCredentials                                                         smithy.SchemaExtensions
+	eListVoiceProfileDomains                                                                          smithy.SchemaExtensions
+	eListVoiceProfiles                                                                                smithy.SchemaExtensions
+	ePutSipMediaApplicationAlexaSkillConfiguration                                                    smithy.SchemaExtensions
+	ePutSipMediaApplicationLoggingConfiguration                                                       smithy.SchemaExtensions
+	ePutVoiceConnectorEmergencyCallingConfiguration                                                   smithy.SchemaExtensions
+	ePutVoiceConnectorExternalSystemsConfiguration                                                    smithy.SchemaExtensions
+	ePutVoiceConnectorLoggingConfiguration                                                            smithy.SchemaExtensions
+	ePutVoiceConnectorOrigination                                                                     smithy.SchemaExtensions
+	ePutVoiceConnectorProxy                                                                           smithy.SchemaExtensions
+	ePutVoiceConnectorStreamingConfiguration                                                          smithy.SchemaExtensions
+	ePutVoiceConnectorTermination                                                                     smithy.SchemaExtensions
+	ePutVoiceConnectorTerminationCredentials                                                          smithy.SchemaExtensions
+	eRestorePhoneNumber                                                                               smithy.SchemaExtensions
+	eSearchAvailablePhoneNumbers                                                                      smithy.SchemaExtensions
+	eStartSpeakerSearchTask                                                                           smithy.SchemaExtensions
+	eStartVoiceToneAnalysisTask                                                                       smithy.SchemaExtensions
+	eStopSpeakerSearchTask                                                                            smithy.SchemaExtensions
+	eStopVoiceToneAnalysisTask                                                                        smithy.SchemaExtensions
+	eTagResource                                                                                      smithy.SchemaExtensions
+	eUntagResource                                                                                    smithy.SchemaExtensions
+	eUpdateGlobalSettings                                                                             smithy.SchemaExtensions
+	eUpdatePhoneNumber                                                                                smithy.SchemaExtensions
+	eUpdatePhoneNumberSettings                                                                        smithy.SchemaExtensions
+	eUpdateProxySession                                                                               smithy.SchemaExtensions
+	eUpdateSipMediaApplication                                                                        smithy.SchemaExtensions
+	eUpdateSipMediaApplicationCall                                                                    smithy.SchemaExtensions
+	eUpdateSipRule                                                                                    smithy.SchemaExtensions
+	eUpdateVoiceConnector                                                                             smithy.SchemaExtensions
+	eUpdateVoiceConnectorGroup                                                                        smithy.SchemaExtensions
+	eUpdateVoiceProfile                                                                               smithy.SchemaExtensions
+	eUpdateVoiceProfileDomain                                                                         smithy.SchemaExtensions
+	eValidateE911Address                                                                              smithy.SchemaExtensions
+	e_ChimeSDKTelephonyService                                                                        smithy.SchemaExtensions
+	eAccessDeniedException                                                                            smithy.SchemaExtensions
+	eAccessDeniedException_Code                                                                       smithy.SchemaExtensions
+	eAccessDeniedException_Message                                                                    smithy.SchemaExtensions
+	eAddress                                                                                          smithy.SchemaExtensions
+	eAddress_streetName                                                                               smithy.SchemaExtensions
+	eAddress_streetSuffix                                                                             smithy.SchemaExtensions
+	eAddress_postDirectional                                                                          smithy.SchemaExtensions
+	eAddress_preDirectional                                                                           smithy.SchemaExtensions
+	eAddress_streetNumber                                                                             smithy.SchemaExtensions
+	eAddress_city                                                                                     smithy.SchemaExtensions
+	eAddress_state                                                                                    smithy.SchemaExtensions
+	eAddress_postalCode                                                                               smithy.SchemaExtensions
+	eAddress_postalCodePlus4                                                                          smithy.SchemaExtensions
+	eAddress_country                                                                                  smithy.SchemaExtensions
+	e_AlexaSkillId                                                                                    smithy.SchemaExtensions
+	e_AlexaSkillIdList                                                                                smithy.SchemaExtensions
+	e_AlexaSkillIdList_member                                                                         smithy.SchemaExtensions
+	eAlexaSkillStatus                                                                                 smithy.SchemaExtensions
+	eAlexaSkillStatus_ACTIVE                                                                          smithy.SchemaExtensions
+	eAlexaSkillStatus_INACTIVE                                                                        smithy.SchemaExtensions
+	e_Alpha2CountryCode                                                                               smithy.SchemaExtensions
+	e_AreaCode                                                                                        smithy.SchemaExtensions
+	e_Arn                                                                                             smithy.SchemaExtensions
+	eBadRequestException                                                                              smithy.SchemaExtensions
+	eBadRequestException_Code                                                                         smithy.SchemaExtensions
+	eBadRequestException_Message                                                                      smithy.SchemaExtensions
+	e_Boolean                                                                                         smithy.SchemaExtensions
+	eCallDetails                                                                                      smithy.SchemaExtensions
+	eCallDetails_VoiceConnectorId                                                                     smithy.SchemaExtensions
+	eCallDetails_TransactionId                                                                        smithy.SchemaExtensions
+	eCallDetails_IsCaller                                                                             smithy.SchemaExtensions
+	eCallDistributionType                                                                             smithy.SchemaExtensions
+	eCallDistributionType_PriorityWeightedDistribution                                                smithy.SchemaExtensions
+	eCallDistributionType_LoadBalancedDistribution                                                    smithy.SchemaExtensions
+	e_CallingName                                                                                     smithy.SchemaExtensions
+	eCallingNameStatus                                                                                smithy.SchemaExtensions
+	eCallingNameStatus_Unassigned                                                                     smithy.SchemaExtensions
+	eCallingNameStatus_UpdateInProgress                                                               smithy.SchemaExtensions
+	eCallingNameStatus_UpdateSucceeded                                                                smithy.SchemaExtensions
+	eCallingNameStatus_UpdateFailed                                                                   smithy.SchemaExtensions
+	e_CallingRegion                                                                                   smithy.SchemaExtensions
+	e_CallingRegionList                                                                               smithy.SchemaExtensions
+	e_CallingRegionList_member                                                                        smithy.SchemaExtensions
+	eCallLegType                                                                                      smithy.SchemaExtensions
+	eCallLegType_CALLER                                                                               smithy.SchemaExtensions
+	eCallLegType_CALLEE                                                                               smithy.SchemaExtensions
+	eCandidateAddress                                                                                 smithy.SchemaExtensions
+	eCandidateAddress_streetInfo                                                                      smithy.SchemaExtensions
+	eCandidateAddress_streetNumber                                                                    smithy.SchemaExtensions
+	eCandidateAddress_city                                                                            smithy.SchemaExtensions
+	eCandidateAddress_state                                                                           smithy.SchemaExtensions
+	eCandidateAddress_postalCode                                                                      smithy.SchemaExtensions
+	eCandidateAddress_postalCodePlus4                                                                 smithy.SchemaExtensions
+	eCandidateAddress_country                                                                         smithy.SchemaExtensions
+	e_CandidateAddressList                                                                            smithy.SchemaExtensions
+	e_CandidateAddressList_member                                                                     smithy.SchemaExtensions
+	eCapability                                                                                       smithy.SchemaExtensions
+	eCapability_Voice                                                                                 smithy.SchemaExtensions
+	eCapability_SMS                                                                                   smithy.SchemaExtensions
+	e_CapabilityList                                                                                  smithy.SchemaExtensions
+	e_CapabilityList_member                                                                           smithy.SchemaExtensions
+	e_ClientRequestId                                                                                 smithy.SchemaExtensions
+	e_ConfidenceScore                                                                                 smithy.SchemaExtensions
+	eConflictException                                                                                smithy.SchemaExtensions
+	eConflictException_Code                                                                           smithy.SchemaExtensions
+	eConflictException_Message                                                                        smithy.SchemaExtensions
+	eContactCenterSystemType                                                                          smithy.SchemaExtensions
+	eContactCenterSystemType_GENESYS_ENGAGE_ON_PREMISES                                               smithy.SchemaExtensions
+	eContactCenterSystemType_AVAYA_AURA_CALL_CENTER_ELITE                                             smithy.SchemaExtensions
+	eContactCenterSystemType_AVAYA_AURA_CONTACT_CENTER                                                smithy.SchemaExtensions
+	eContactCenterSystemType_CISCO_UNIFIED_CONTACT_CENTER_ENTERPRISE                                  smithy.SchemaExtensions
+	e_ContactCenterSystemTypeList                                                                     smithy.SchemaExtensions
+	e_ContactCenterSystemTypeList_member                                                              smithy.SchemaExtensions
+	e_Country                                                                                         smithy.SchemaExtensions
+	e_CountryList                                                                                     smithy.SchemaExtensions
+	e_CountryList_member                                                                              smithy.SchemaExtensions
+	e_CpsLimit                                                                                        smithy.SchemaExtensions
+	eCredential                                                                                       smithy.SchemaExtensions
+	eCredential_Username                                                                              smithy.SchemaExtensions
+	eCredential_Password                                                                              smithy.SchemaExtensions
+	e_CredentialList                                                                                  smithy.SchemaExtensions
+	e_CredentialList_member                                                                           smithy.SchemaExtensions
+	e_DataRetentionInHours                                                                            smithy.SchemaExtensions
+	eDNISEmergencyCallingConfiguration                                                                smithy.SchemaExtensions
+	eDNISEmergencyCallingConfiguration_EmergencyPhoneNumber                                           smithy.SchemaExtensions
+	eDNISEmergencyCallingConfiguration_TestPhoneNumber                                                smithy.SchemaExtensions
+	eDNISEmergencyCallingConfiguration_CallingCountry                                                 smithy.SchemaExtensions
+	e_DNISEmergencyCallingConfigurationList                                                           smithy.SchemaExtensions
+	e_DNISEmergencyCallingConfigurationList_member                                                    smithy.SchemaExtensions
+	e_E164PhoneNumber                                                                                 smithy.SchemaExtensions
+	e_E164PhoneNumberList                                                                             smithy.SchemaExtensions
+	e_E164PhoneNumberList_member                                                                      smithy.SchemaExtensions
+	eEmergencyCallingConfiguration                                                                    smithy.SchemaExtensions
+	eEmergencyCallingConfiguration_DNIS                                                               smithy.SchemaExtensions
+	eErrorCode                                                                                        smithy.SchemaExtensions
+	eErrorCode_BadRequest                                                                             smithy.SchemaExtensions
+	eErrorCode_Conflict                                                                               smithy.SchemaExtensions
+	eErrorCode_Forbidden                                                                              smithy.SchemaExtensions
+	eErrorCode_NotFound                                                                               smithy.SchemaExtensions
+	eErrorCode_PreconditionFailed                                                                     smithy.SchemaExtensions
+	eErrorCode_ResourceLimitExceeded                                                                  smithy.SchemaExtensions
+	eErrorCode_ServiceFailure                                                                         smithy.SchemaExtensions
+	eErrorCode_AccessDenied                                                                           smithy.SchemaExtensions
+	eErrorCode_ServiceUnavailable                                                                     smithy.SchemaExtensions
+	eErrorCode_Throttled                                                                              smithy.SchemaExtensions
+	eErrorCode_Throttling                                                                             smithy.SchemaExtensions
+	eErrorCode_Unauthorized                                                                           smithy.SchemaExtensions
+	eErrorCode_Unprocessable                                                                          smithy.SchemaExtensions
+	eErrorCode_VoiceConnectorGroupAssociationsExist                                                   smithy.SchemaExtensions
+	eErrorCode_PhoneNumberAssociationsExist                                                           smithy.SchemaExtensions
+	eErrorCode_Gone                                                                                   smithy.SchemaExtensions
+	eErrorCode_Validation                                                                             smithy.SchemaExtensions
+	eExternalSystemsConfiguration                                                                     smithy.SchemaExtensions
+	eExternalSystemsConfiguration_SessionBorderControllerTypes                                        smithy.SchemaExtensions
+	eExternalSystemsConfiguration_ContactCenterSystemTypes                                            smithy.SchemaExtensions
+	eForbiddenException                                                                               smithy.SchemaExtensions
+	eForbiddenException_Code                                                                          smithy.SchemaExtensions
+	eForbiddenException_Message                                                                       smithy.SchemaExtensions
+	e_FunctionArn                                                                                     smithy.SchemaExtensions
+	eGeoMatchLevel                                                                                    smithy.SchemaExtensions
+	eGeoMatchLevel_Country                                                                            smithy.SchemaExtensions
+	eGeoMatchLevel_AreaCode                                                                           smithy.SchemaExtensions
+	eGeoMatchParams                                                                                   smithy.SchemaExtensions
+	eGeoMatchParams_Country                                                                           smithy.SchemaExtensions
+	eGeoMatchParams_AreaCode                                                                          smithy.SchemaExtensions
+	eGoneException                                                                                    smithy.SchemaExtensions
+	eGoneException_Code                                                                               smithy.SchemaExtensions
+	eGoneException_Message                                                                            smithy.SchemaExtensions
+	e_GuidString                                                                                      smithy.SchemaExtensions
+	e_Integer                                                                                         smithy.SchemaExtensions
+	e_Iso8601Timestamp                                                                                smithy.SchemaExtensions
+	eLanguageCode                                                                                     smithy.SchemaExtensions
+	eLanguageCode_EN_US                                                                               smithy.SchemaExtensions
+	eLoggingConfiguration                                                                             smithy.SchemaExtensions
+	eLoggingConfiguration_EnableSIPLogs                                                               smithy.SchemaExtensions
+	eLoggingConfiguration_EnableMediaMetricLogs                                                       smithy.SchemaExtensions
+	eMediaInsightsConfiguration                                                                       smithy.SchemaExtensions
+	eMediaInsightsConfiguration_Disabled                                                              smithy.SchemaExtensions
+	eMediaInsightsConfiguration_ConfigurationArn                                                      smithy.SchemaExtensions
+	eNetworkType                                                                                      smithy.SchemaExtensions
+	eNetworkType_IPV4_ONLY                                                                            smithy.SchemaExtensions
+	eNetworkType_DUAL_STACK                                                                           smithy.SchemaExtensions
+	e_NextTokenString                                                                                 smithy.SchemaExtensions
+	e_NonEmptyString                                                                                  smithy.SchemaExtensions
+	e_NonEmptyString128                                                                               smithy.SchemaExtensions
+	e_NonEmptyString256                                                                               smithy.SchemaExtensions
+	e_NonEmptyStringList                                                                              smithy.SchemaExtensions
+	e_NonEmptyStringList_member                                                                       smithy.SchemaExtensions
+	eNotFoundException                                                                                smithy.SchemaExtensions
+	eNotFoundException_Code                                                                           smithy.SchemaExtensions
+	eNotFoundException_Message                                                                        smithy.SchemaExtensions
+	eNotificationTarget                                                                               smithy.SchemaExtensions
+	eNotificationTarget_EventBridge                                                                   smithy.SchemaExtensions
+	eNotificationTarget_SNS                                                                           smithy.SchemaExtensions
+	eNotificationTarget_SQS                                                                           smithy.SchemaExtensions
+	e_NullableBoolean                                                                                 smithy.SchemaExtensions
+	eNumberSelectionBehavior                                                                          smithy.SchemaExtensions
+	eNumberSelectionBehavior_PreferSticky                                                             smithy.SchemaExtensions
+	eNumberSelectionBehavior_AvoidSticky                                                              smithy.SchemaExtensions
+	eOrderedPhoneNumber                                                                               smithy.SchemaExtensions
+	eOrderedPhoneNumber_E164PhoneNumber                                                               smithy.SchemaExtensions
+	eOrderedPhoneNumber_Status                                                                        smithy.SchemaExtensions
+	e_OrderedPhoneNumberList                                                                          smithy.SchemaExtensions
+	e_OrderedPhoneNumberList_member                                                                   smithy.SchemaExtensions
+	eOrderedPhoneNumberStatus                                                                         smithy.SchemaExtensions
+	eOrderedPhoneNumberStatus_Processing                                                              smithy.SchemaExtensions
+	eOrderedPhoneNumberStatus_Acquired                                                                smithy.SchemaExtensions
+	eOrderedPhoneNumberStatus_Failed                                                                  smithy.SchemaExtensions
+	eOrigination                                                                                      smithy.SchemaExtensions
+	eOrigination_Routes                                                                               smithy.SchemaExtensions
+	eOrigination_Disabled                                                                             smithy.SchemaExtensions
+	eOriginationRoute                                                                                 smithy.SchemaExtensions
+	eOriginationRoute_Host                                                                            smithy.SchemaExtensions
+	eOriginationRoute_Port                                                                            smithy.SchemaExtensions
+	eOriginationRoute_Protocol                                                                        smithy.SchemaExtensions
+	eOriginationRoute_Priority                                                                        smithy.SchemaExtensions
+	eOriginationRoute_Weight                                                                          smithy.SchemaExtensions
+	e_OriginationRouteList                                                                            smithy.SchemaExtensions
+	e_OriginationRouteList_member                                                                     smithy.SchemaExtensions
+	e_OriginationRoutePriority                                                                        smithy.SchemaExtensions
+	eOriginationRouteProtocol                                                                         smithy.SchemaExtensions
+	eOriginationRouteProtocol_TCP                                                                     smithy.SchemaExtensions
+	eOriginationRouteProtocol_UDP                                                                     smithy.SchemaExtensions
+	e_OriginationRouteWeight                                                                          smithy.SchemaExtensions
+	eParticipant                                                                                      smithy.SchemaExtensions
+	eParticipant_PhoneNumber                                                                          smithy.SchemaExtensions
+	eParticipant_ProxyPhoneNumber                                                                     smithy.SchemaExtensions
+	e_ParticipantPhoneNumberList                                                                      smithy.SchemaExtensions
+	e_ParticipantPhoneNumberList_member                                                               smithy.SchemaExtensions
+	e_Participants                                                                                    smithy.SchemaExtensions
+	e_Participants_member                                                                             smithy.SchemaExtensions
+	ePhoneNumber                                                                                      smithy.SchemaExtensions
+	ePhoneNumber_PhoneNumberId                                                                        smithy.SchemaExtensions
+	ePhoneNumber_E164PhoneNumber                                                                      smithy.SchemaExtensions
+	ePhoneNumber_PhoneNumberArn                                                                       smithy.SchemaExtensions
+	ePhoneNumber_Country                                                                              smithy.SchemaExtensions
+	ePhoneNumber_Type                                                                                 smithy.SchemaExtensions
+	ePhoneNumber_ProductType                                                                          smithy.SchemaExtensions
+	ePhoneNumber_Status                                                                               smithy.SchemaExtensions
+	ePhoneNumber_Capabilities                                                                         smithy.SchemaExtensions
+	ePhoneNumber_Associations                                                                         smithy.SchemaExtensions
+	ePhoneNumber_CallingName                                                                          smithy.SchemaExtensions
+	ePhoneNumber_CallingNameStatus                                                                    smithy.SchemaExtensions
+	ePhoneNumber_CreatedTimestamp                                                                     smithy.SchemaExtensions
+	ePhoneNumber_UpdatedTimestamp                                                                     smithy.SchemaExtensions
+	ePhoneNumber_DeletionTimestamp                                                                    smithy.SchemaExtensions
+	ePhoneNumber_OrderId                                                                              smithy.SchemaExtensions
+	ePhoneNumber_Name                                                                                 smithy.SchemaExtensions
+	ePhoneNumberAssociation                                                                           smithy.SchemaExtensions
+	ePhoneNumberAssociation_Value                                                                     smithy.SchemaExtensions
+	ePhoneNumberAssociation_Name                                                                      smithy.SchemaExtensions
+	ePhoneNumberAssociation_AssociatedTimestamp                                                       smithy.SchemaExtensions
+	e_PhoneNumberAssociationList                                                                      smithy.SchemaExtensions
+	e_PhoneNumberAssociationList_member                                                               smithy.SchemaExtensions
+	ePhoneNumberAssociationName                                                                       smithy.SchemaExtensions
+	ePhoneNumberAssociationName_VoiceConnectorId                                                      smithy.SchemaExtensions
+	ePhoneNumberAssociationName_VoiceConnectorGroupId                                                 smithy.SchemaExtensions
+	ePhoneNumberAssociationName_SipRuleId                                                             smithy.SchemaExtensions
+	ePhoneNumberCapabilities                                                                          smithy.SchemaExtensions
+	ePhoneNumberCapabilities_InboundCall                                                              smithy.SchemaExtensions
+	ePhoneNumberCapabilities_OutboundCall                                                             smithy.SchemaExtensions
+	ePhoneNumberCapabilities_InboundSMS                                                               smithy.SchemaExtensions
+	ePhoneNumberCapabilities_OutboundSMS                                                              smithy.SchemaExtensions
+	ePhoneNumberCapabilities_InboundMMS                                                               smithy.SchemaExtensions
+	ePhoneNumberCapabilities_OutboundMMS                                                              smithy.SchemaExtensions
+	e_PhoneNumberCountriesList                                                                        smithy.SchemaExtensions
+	e_PhoneNumberCountriesList_member                                                                 smithy.SchemaExtensions
+	ePhoneNumberCountry                                                                               smithy.SchemaExtensions
+	ePhoneNumberCountry_CountryCode                                                                   smithy.SchemaExtensions
+	ePhoneNumberCountry_SupportedPhoneNumberTypes                                                     smithy.SchemaExtensions
+	ePhoneNumberError                                                                                 smithy.SchemaExtensions
+	ePhoneNumberError_PhoneNumberId                                                                   smithy.SchemaExtensions
+	ePhoneNumberError_ErrorCode                                                                       smithy.SchemaExtensions
+	ePhoneNumberError_ErrorMessage                                                                    smithy.SchemaExtensions
+	e_PhoneNumberErrorList                                                                            smithy.SchemaExtensions
+	e_PhoneNumberErrorList_member                                                                     smithy.SchemaExtensions
+	e_PhoneNumberList                                                                                 smithy.SchemaExtensions
+	e_PhoneNumberList_member                                                                          smithy.SchemaExtensions
+	e_PhoneNumberMaxResults                                                                           smithy.SchemaExtensions
+	e_PhoneNumberName                                                                                 smithy.SchemaExtensions
+	ePhoneNumberOrder                                                                                 smithy.SchemaExtensions
+	ePhoneNumberOrder_PhoneNumberOrderId                                                              smithy.SchemaExtensions
+	ePhoneNumberOrder_ProductType                                                                     smithy.SchemaExtensions
+	ePhoneNumberOrder_Status                                                                          smithy.SchemaExtensions
+	ePhoneNumberOrder_OrderType                                                                       smithy.SchemaExtensions
+	ePhoneNumberOrder_OrderedPhoneNumbers                                                             smithy.SchemaExtensions
+	ePhoneNumberOrder_CreatedTimestamp                                                                smithy.SchemaExtensions
+	ePhoneNumberOrder_UpdatedTimestamp                                                                smithy.SchemaExtensions
+	ePhoneNumberOrder_FocDate                                                                         smithy.SchemaExtensions
+	e_PhoneNumberOrderList                                                                            smithy.SchemaExtensions
+	e_PhoneNumberOrderList_member                                                                     smithy.SchemaExtensions
+	ePhoneNumberOrderStatus                                                                           smithy.SchemaExtensions
+	ePhoneNumberOrderStatus_Processing                                                                smithy.SchemaExtensions
+	ePhoneNumberOrderStatus_Successful                                                                smithy.SchemaExtensions
+	ePhoneNumberOrderStatus_Failed                                                                    smithy.SchemaExtensions
+	ePhoneNumberOrderStatus_Partial                                                                   smithy.SchemaExtensions
+	ePhoneNumberOrderStatus_PendingDocuments                                                          smithy.SchemaExtensions
+	ePhoneNumberOrderStatus_Submitted                                                                 smithy.SchemaExtensions
+	ePhoneNumberOrderStatus_FOC                                                                       smithy.SchemaExtensions
+	ePhoneNumberOrderStatus_ChangeRequested                                                           smithy.SchemaExtensions
+	ePhoneNumberOrderStatus_Exception                                                                 smithy.SchemaExtensions
+	ePhoneNumberOrderStatus_CancelRequested                                                           smithy.SchemaExtensions
+	ePhoneNumberOrderStatus_Cancelled                                                                 smithy.SchemaExtensions
+	ePhoneNumberOrderType                                                                             smithy.SchemaExtensions
+	ePhoneNumberOrderType_New                                                                         smithy.SchemaExtensions
+	ePhoneNumberOrderType_Porting                                                                     smithy.SchemaExtensions
+	ePhoneNumberProductType                                                                           smithy.SchemaExtensions
+	ePhoneNumberProductType_VoiceConnector                                                            smithy.SchemaExtensions
+	ePhoneNumberProductType_SipMediaApplicationDialIn                                                 smithy.SchemaExtensions
+	ePhoneNumberStatus                                                                                smithy.SchemaExtensions
+	ePhoneNumberStatus_Cancelled                                                                      smithy.SchemaExtensions
+	ePhoneNumberStatus_PortinCancelRequested                                                          smithy.SchemaExtensions
+	ePhoneNumberStatus_PortinInProgress                                                               smithy.SchemaExtensions
+	ePhoneNumberStatus_AcquireInProgress                                                              smithy.SchemaExtensions
+	ePhoneNumberStatus_AcquireFailed                                                                  smithy.SchemaExtensions
+	ePhoneNumberStatus_Unassigned                                                                     smithy.SchemaExtensions
+	ePhoneNumberStatus_Assigned                                                                       smithy.SchemaExtensions
+	ePhoneNumberStatus_ReleaseInProgress                                                              smithy.SchemaExtensions
+	ePhoneNumberStatus_DeleteInProgress                                                               smithy.SchemaExtensions
+	ePhoneNumberStatus_ReleaseFailed                                                                  smithy.SchemaExtensions
+	ePhoneNumberStatus_DeleteFailed                                                                   smithy.SchemaExtensions
+	ePhoneNumberType                                                                                  smithy.SchemaExtensions
+	ePhoneNumberType_Local                                                                            smithy.SchemaExtensions
+	ePhoneNumberType_TollFree                                                                         smithy.SchemaExtensions
+	e_PhoneNumberTypeList                                                                             smithy.SchemaExtensions
+	e_PhoneNumberTypeList_member                                                                      smithy.SchemaExtensions
+	e_Port                                                                                            smithy.SchemaExtensions
+	e_PositiveInteger                                                                                 smithy.SchemaExtensions
+	eProxy                                                                                            smithy.SchemaExtensions
+	eProxy_DefaultSessionExpiryMinutes                                                                smithy.SchemaExtensions
+	eProxy_Disabled                                                                                   smithy.SchemaExtensions
+	eProxy_FallBackPhoneNumber                                                                        smithy.SchemaExtensions
+	eProxy_PhoneNumberCountries                                                                       smithy.SchemaExtensions
+	eProxySession                                                                                     smithy.SchemaExtensions
+	eProxySession_VoiceConnectorId                                                                    smithy.SchemaExtensions
+	eProxySession_ProxySessionId                                                                      smithy.SchemaExtensions
+	eProxySession_Name                                                                                smithy.SchemaExtensions
+	eProxySession_Status                                                                              smithy.SchemaExtensions
+	eProxySession_ExpiryMinutes                                                                       smithy.SchemaExtensions
+	eProxySession_Capabilities                                                                        smithy.SchemaExtensions
+	eProxySession_CreatedTimestamp                                                                    smithy.SchemaExtensions
+	eProxySession_UpdatedTimestamp                                                                    smithy.SchemaExtensions
+	eProxySession_EndedTimestamp                                                                      smithy.SchemaExtensions
+	eProxySession_Participants                                                                        smithy.SchemaExtensions
+	eProxySession_NumberSelectionBehavior                                                             smithy.SchemaExtensions
+	eProxySession_GeoMatchLevel                                                                       smithy.SchemaExtensions
+	eProxySession_GeoMatchParams                                                                      smithy.SchemaExtensions
+	e_ProxySessionNameString                                                                          smithy.SchemaExtensions
+	e_ProxySessions                                                                                   smithy.SchemaExtensions
+	e_ProxySessions_member                                                                            smithy.SchemaExtensions
+	eProxySessionStatus                                                                               smithy.SchemaExtensions
+	eProxySessionStatus_Open                                                                          smithy.SchemaExtensions
+	eProxySessionStatus_InProgress                                                                    smithy.SchemaExtensions
+	eProxySessionStatus_Closed                                                                        smithy.SchemaExtensions
+	eResourceLimitExceededException                                                                   smithy.SchemaExtensions
+	eResourceLimitExceededException_Code                                                              smithy.SchemaExtensions
+	eResourceLimitExceededException_Message                                                           smithy.SchemaExtensions
+	e_ResultMax                                                                                       smithy.SchemaExtensions
+	e_S3BucketName                                                                                    smithy.SchemaExtensions
+	e_SensitiveNonEmptyString                                                                         smithy.SchemaExtensions
+	e_SensitiveString                                                                                 smithy.SchemaExtensions
+	e_SensitiveStringList                                                                             smithy.SchemaExtensions
+	e_SensitiveStringList_member                                                                      smithy.SchemaExtensions
+	eServerSideEncryptionConfiguration                                                                smithy.SchemaExtensions
+	eServerSideEncryptionConfiguration_KmsKeyArn                                                      smithy.SchemaExtensions
+	eServiceFailureException                                                                          smithy.SchemaExtensions
+	eServiceFailureException_Code                                                                     smithy.SchemaExtensions
+	eServiceFailureException_Message                                                                  smithy.SchemaExtensions
+	eServiceUnavailableException                                                                      smithy.SchemaExtensions
+	eServiceUnavailableException_Code                                                                 smithy.SchemaExtensions
+	eServiceUnavailableException_Message                                                              smithy.SchemaExtensions
+	eSessionBorderControllerType                                                                      smithy.SchemaExtensions
+	eSessionBorderControllerType_RIBBON_SBC                                                           smithy.SchemaExtensions
+	eSessionBorderControllerType_ORACLE_ACME_PACKET_SBC                                               smithy.SchemaExtensions
+	eSessionBorderControllerType_AVAYA_SBCE                                                           smithy.SchemaExtensions
+	eSessionBorderControllerType_CISCO_UNIFIED_BORDER_ELEMENT                                         smithy.SchemaExtensions
+	eSessionBorderControllerType_AUDIOCODES_MEDIANT_SBC                                               smithy.SchemaExtensions
+	e_SessionBorderControllerTypeList                                                                 smithy.SchemaExtensions
+	e_SessionBorderControllerTypeList_member                                                          smithy.SchemaExtensions
+	e_SipApplicationPriority                                                                          smithy.SchemaExtensions
+	e_SipHeadersMap                                                                                   smithy.SchemaExtensions
+	e_SipHeadersMap_key                                                                               smithy.SchemaExtensions
+	e_SipHeadersMap_value                                                                             smithy.SchemaExtensions
+	eSipMediaApplication                                                                              smithy.SchemaExtensions
+	eSipMediaApplication_SipMediaApplicationId                                                        smithy.SchemaExtensions
+	eSipMediaApplication_AwsRegion                                                                    smithy.SchemaExtensions
+	eSipMediaApplication_Name                                                                         smithy.SchemaExtensions
+	eSipMediaApplication_Endpoints                                                                    smithy.SchemaExtensions
+	eSipMediaApplication_CreatedTimestamp                                                             smithy.SchemaExtensions
+	eSipMediaApplication_UpdatedTimestamp                                                             smithy.SchemaExtensions
+	eSipMediaApplication_SipMediaApplicationArn                                                       smithy.SchemaExtensions
+	eSipMediaApplicationAlexaSkillConfiguration                                                       smithy.SchemaExtensions
+	eSipMediaApplicationAlexaSkillConfiguration_AlexaSkillStatus                                      smithy.SchemaExtensions
+	eSipMediaApplicationAlexaSkillConfiguration_AlexaSkillIds                                         smithy.SchemaExtensions
+	eSipMediaApplicationCall                                                                          smithy.SchemaExtensions
+	eSipMediaApplicationCall_TransactionId                                                            smithy.SchemaExtensions
+	eSipMediaApplicationEndpoint                                                                      smithy.SchemaExtensions
+	eSipMediaApplicationEndpoint_LambdaArn                                                            smithy.SchemaExtensions
+	e_SipMediaApplicationEndpointList                                                                 smithy.SchemaExtensions
+	e_SipMediaApplicationEndpointList_member                                                          smithy.SchemaExtensions
+	e_SipMediaApplicationList                                                                         smithy.SchemaExtensions
+	e_SipMediaApplicationList_member                                                                  smithy.SchemaExtensions
+	eSipMediaApplicationLoggingConfiguration                                                          smithy.SchemaExtensions
+	eSipMediaApplicationLoggingConfiguration_EnableSipMediaApplicationMessageLogs                     smithy.SchemaExtensions
+	e_SipMediaApplicationName                                                                         smithy.SchemaExtensions
+	eSipRule                                                                                          smithy.SchemaExtensions
+	eSipRule_SipRuleId                                                                                smithy.SchemaExtensions
+	eSipRule_Name                                                                                     smithy.SchemaExtensions
+	eSipRule_Disabled                                                                                 smithy.SchemaExtensions
+	eSipRule_TriggerType                                                                              smithy.SchemaExtensions
+	eSipRule_TriggerValue                                                                             smithy.SchemaExtensions
+	eSipRule_TargetApplications                                                                       smithy.SchemaExtensions
+	eSipRule_CreatedTimestamp                                                                         smithy.SchemaExtensions
+	eSipRule_UpdatedTimestamp                                                                         smithy.SchemaExtensions
+	e_SipRuleList                                                                                     smithy.SchemaExtensions
+	e_SipRuleList_member                                                                              smithy.SchemaExtensions
+	e_SipRuleName                                                                                     smithy.SchemaExtensions
+	eSipRuleTargetApplication                                                                         smithy.SchemaExtensions
+	eSipRuleTargetApplication_SipMediaApplicationId                                                   smithy.SchemaExtensions
+	eSipRuleTargetApplication_Priority                                                                smithy.SchemaExtensions
+	eSipRuleTargetApplication_AwsRegion                                                               smithy.SchemaExtensions
+	e_SipRuleTargetApplicationList                                                                    smithy.SchemaExtensions
+	e_SipRuleTargetApplicationList_member                                                             smithy.SchemaExtensions
+	eSipRuleTriggerType                                                                               smithy.SchemaExtensions
+	eSipRuleTriggerType_ToPhoneNumber                                                                 smithy.SchemaExtensions
+	eSipRuleTriggerType_RequestUriHostname                                                            smithy.SchemaExtensions
+	e_SMACreateCallArgumentsMap                                                                       smithy.SchemaExtensions
+	e_SMACreateCallArgumentsMap_key                                                                   smithy.SchemaExtensions
+	e_SMACreateCallArgumentsMap_value                                                                 smithy.SchemaExtensions
+	e_SMAUpdateCallArgumentsMap                                                                       smithy.SchemaExtensions
+	e_SMAUpdateCallArgumentsMap_key                                                                   smithy.SchemaExtensions
+	e_SMAUpdateCallArgumentsMap_value                                                                 smithy.SchemaExtensions
+	eSpeakerSearchDetails                                                                             smithy.SchemaExtensions
+	eSpeakerSearchDetails_Results                                                                     smithy.SchemaExtensions
+	eSpeakerSearchDetails_VoiceprintGenerationStatus                                                  smithy.SchemaExtensions
+	eSpeakerSearchResult                                                                              smithy.SchemaExtensions
+	eSpeakerSearchResult_ConfidenceScore                                                              smithy.SchemaExtensions
+	eSpeakerSearchResult_VoiceProfileId                                                               smithy.SchemaExtensions
+	e_SpeakerSearchResultList                                                                         smithy.SchemaExtensions
+	e_SpeakerSearchResultList_member                                                                  smithy.SchemaExtensions
+	eSpeakerSearchTask                                                                                smithy.SchemaExtensions
+	eSpeakerSearchTask_SpeakerSearchTaskId                                                            smithy.SchemaExtensions
+	eSpeakerSearchTask_SpeakerSearchTaskStatus                                                        smithy.SchemaExtensions
+	eSpeakerSearchTask_CallDetails                                                                    smithy.SchemaExtensions
+	eSpeakerSearchTask_SpeakerSearchDetails                                                           smithy.SchemaExtensions
+	eSpeakerSearchTask_CreatedTimestamp                                                               smithy.SchemaExtensions
+	eSpeakerSearchTask_UpdatedTimestamp                                                               smithy.SchemaExtensions
+	eSpeakerSearchTask_StartedTimestamp                                                               smithy.SchemaExtensions
+	eSpeakerSearchTask_StatusMessage                                                                  smithy.SchemaExtensions
+	eStreamingConfiguration                                                                           smithy.SchemaExtensions
+	eStreamingConfiguration_DataRetentionInHours                                                      smithy.SchemaExtensions
+	eStreamingConfiguration_Disabled                                                                  smithy.SchemaExtensions
+	eStreamingConfiguration_StreamingNotificationTargets                                              smithy.SchemaExtensions
+	eStreamingConfiguration_MediaInsightsConfiguration                                                smithy.SchemaExtensions
+	eStreamingNotificationTarget                                                                      smithy.SchemaExtensions
+	eStreamingNotificationTarget_NotificationTarget                                                   smithy.SchemaExtensions
+	e_StreamingNotificationTargetList                                                                 smithy.SchemaExtensions
+	e_StreamingNotificationTargetList_member                                                          smithy.SchemaExtensions
+	e_String                                                                                          smithy.SchemaExtensions
+	e_String128                                                                                       smithy.SchemaExtensions
+	e_StringList                                                                                      smithy.SchemaExtensions
+	e_StringList_member                                                                               smithy.SchemaExtensions
+	eTag                                                                                              smithy.SchemaExtensions
+	eTag_Key                                                                                          smithy.SchemaExtensions
+	eTag_Value                                                                                        smithy.SchemaExtensions
+	e_TagKey                                                                                          smithy.SchemaExtensions
+	e_TagKeyList                                                                                      smithy.SchemaExtensions
+	e_TagKeyList_member                                                                               smithy.SchemaExtensions
+	e_TagList                                                                                         smithy.SchemaExtensions
+	e_TagList_member                                                                                  smithy.SchemaExtensions
+	e_TagValue                                                                                        smithy.SchemaExtensions
+	eTermination                                                                                      smithy.SchemaExtensions
+	eTermination_CpsLimit                                                                             smithy.SchemaExtensions
+	eTermination_DefaultPhoneNumber                                                                   smithy.SchemaExtensions
+	eTermination_CallingRegions                                                                       smithy.SchemaExtensions
+	eTermination_CidrAllowedList                                                                      smithy.SchemaExtensions
+	eTermination_Disabled                                                                             smithy.SchemaExtensions
+	eTerminationHealth                                                                                smithy.SchemaExtensions
+	eTerminationHealth_Timestamp                                                                      smithy.SchemaExtensions
+	eTerminationHealth_Source                                                                         smithy.SchemaExtensions
+	eThrottledClientException                                                                         smithy.SchemaExtensions
+	eThrottledClientException_Code                                                                    smithy.SchemaExtensions
+	eThrottledClientException_Message                                                                 smithy.SchemaExtensions
+	e_TollFreePrefix                                                                                  smithy.SchemaExtensions
+	eUnauthorizedClientException                                                                      smithy.SchemaExtensions
+	eUnauthorizedClientException_Code                                                                 smithy.SchemaExtensions
+	eUnauthorizedClientException_Message                                                              smithy.SchemaExtensions
+	eUnprocessableEntityException                                                                     smithy.SchemaExtensions
+	eUnprocessableEntityException_Code                                                                smithy.SchemaExtensions
+	eUnprocessableEntityException_Message                                                             smithy.SchemaExtensions
+	eUpdatePhoneNumberRequestItem                                                                     smithy.SchemaExtensions
+	eUpdatePhoneNumberRequestItem_PhoneNumberId                                                       smithy.SchemaExtensions
+	eUpdatePhoneNumberRequestItem_ProductType                                                         smithy.SchemaExtensions
+	eUpdatePhoneNumberRequestItem_CallingName                                                         smithy.SchemaExtensions
+	eUpdatePhoneNumberRequestItem_Name                                                                smithy.SchemaExtensions
+	e_UpdatePhoneNumberRequestItemList                                                                smithy.SchemaExtensions
+	e_UpdatePhoneNumberRequestItemList_member                                                         smithy.SchemaExtensions
+	e_ValidationResult                                                                                smithy.SchemaExtensions
+	eVoiceConnector                                                                                   smithy.SchemaExtensions
+	eVoiceConnector_VoiceConnectorId                                                                  smithy.SchemaExtensions
+	eVoiceConnector_AwsRegion                                                                         smithy.SchemaExtensions
+	eVoiceConnector_Name                                                                              smithy.SchemaExtensions
+	eVoiceConnector_OutboundHostName                                                                  smithy.SchemaExtensions
+	eVoiceConnector_RequireEncryption                                                                 smithy.SchemaExtensions
+	eVoiceConnector_CreatedTimestamp                                                                  smithy.SchemaExtensions
+	eVoiceConnector_UpdatedTimestamp                                                                  smithy.SchemaExtensions
+	eVoiceConnector_VoiceConnectorArn                                                                 smithy.SchemaExtensions
+	eVoiceConnector_IntegrationType                                                                   smithy.SchemaExtensions
+	eVoiceConnector_NetworkType                                                                       smithy.SchemaExtensions
+	eVoiceConnectorAwsRegion                                                                          smithy.SchemaExtensions
+	eVoiceConnectorAwsRegion_US_EAST_1                                                                smithy.SchemaExtensions
+	eVoiceConnectorAwsRegion_US_WEST_2                                                                smithy.SchemaExtensions
+	eVoiceConnectorAwsRegion_CA_CENTRAL_1                                                             smithy.SchemaExtensions
+	eVoiceConnectorAwsRegion_EU_CENTRAL_1                                                             smithy.SchemaExtensions
+	eVoiceConnectorAwsRegion_EU_WEST_1                                                                smithy.SchemaExtensions
+	eVoiceConnectorAwsRegion_EU_WEST_2                                                                smithy.SchemaExtensions
+	eVoiceConnectorAwsRegion_AP_NORTHEAST_2                                                           smithy.SchemaExtensions
+	eVoiceConnectorAwsRegion_AP_NORTHEAST_1                                                           smithy.SchemaExtensions
+	eVoiceConnectorAwsRegion_AP_SOUTHEAST_1                                                           smithy.SchemaExtensions
+	eVoiceConnectorAwsRegion_AP_SOUTHEAST_2                                                           smithy.SchemaExtensions
+	e_VoiceConnectorAwsRegionList                                                                     smithy.SchemaExtensions
+	e_VoiceConnectorAwsRegionList_member                                                              smithy.SchemaExtensions
+	eVoiceConnectorGroup                                                                              smithy.SchemaExtensions
+	eVoiceConnectorGroup_VoiceConnectorGroupId                                                        smithy.SchemaExtensions
+	eVoiceConnectorGroup_Name                                                                         smithy.SchemaExtensions
+	eVoiceConnectorGroup_VoiceConnectorItems                                                          smithy.SchemaExtensions
+	eVoiceConnectorGroup_CreatedTimestamp                                                             smithy.SchemaExtensions
+	eVoiceConnectorGroup_UpdatedTimestamp                                                             smithy.SchemaExtensions
+	eVoiceConnectorGroup_VoiceConnectorGroupArn                                                       smithy.SchemaExtensions
+	eVoiceConnectorGroup_CallDistributionType                                                         smithy.SchemaExtensions
+	e_VoiceConnectorGroupList                                                                         smithy.SchemaExtensions
+	e_VoiceConnectorGroupList_member                                                                  smithy.SchemaExtensions
+	e_VoiceConnectorGroupName                                                                         smithy.SchemaExtensions
+	e_VoiceConnectorId                                                                                smithy.SchemaExtensions
+	eVoiceConnectorIntegrationType                                                                    smithy.SchemaExtensions
+	eVoiceConnectorIntegrationType_CONNECT_CALL_TRANSFER_CONNECTOR                                    smithy.SchemaExtensions
+	eVoiceConnectorIntegrationType_CONNECT_ANALYTICS_CONNECTOR                                        smithy.SchemaExtensions
+	eVoiceConnectorItem                                                                               smithy.SchemaExtensions
+	eVoiceConnectorItem_VoiceConnectorId                                                              smithy.SchemaExtensions
+	eVoiceConnectorItem_Priority                                                                      smithy.SchemaExtensions
+	e_VoiceConnectorItemList                                                                          smithy.SchemaExtensions
+	e_VoiceConnectorItemList_member                                                                   smithy.SchemaExtensions
+	e_VoiceConnectorItemPriority                                                                      smithy.SchemaExtensions
+	e_VoiceConnectorList                                                                              smithy.SchemaExtensions
+	e_VoiceConnectorList_member                                                                       smithy.SchemaExtensions
+	e_VoiceConnectorName                                                                              smithy.SchemaExtensions
+	eVoiceConnectorSettings                                                                           smithy.SchemaExtensions
+	eVoiceConnectorSettings_CdrBucket                                                                 smithy.SchemaExtensions
+	eVoiceProfile                                                                                     smithy.SchemaExtensions
+	eVoiceProfile_VoiceProfileId                                                                      smithy.SchemaExtensions
+	eVoiceProfile_VoiceProfileArn                                                                     smithy.SchemaExtensions
+	eVoiceProfile_VoiceProfileDomainId                                                                smithy.SchemaExtensions
+	eVoiceProfile_CreatedTimestamp                                                                    smithy.SchemaExtensions
+	eVoiceProfile_UpdatedTimestamp                                                                    smithy.SchemaExtensions
+	eVoiceProfile_ExpirationTimestamp                                                                 smithy.SchemaExtensions
+	eVoiceProfileDomain                                                                               smithy.SchemaExtensions
+	eVoiceProfileDomain_VoiceProfileDomainId                                                          smithy.SchemaExtensions
+	eVoiceProfileDomain_VoiceProfileDomainArn                                                         smithy.SchemaExtensions
+	eVoiceProfileDomain_Name                                                                          smithy.SchemaExtensions
+	eVoiceProfileDomain_Description                                                                   smithy.SchemaExtensions
+	eVoiceProfileDomain_ServerSideEncryptionConfiguration                                             smithy.SchemaExtensions
+	eVoiceProfileDomain_CreatedTimestamp                                                              smithy.SchemaExtensions
+	eVoiceProfileDomain_UpdatedTimestamp                                                              smithy.SchemaExtensions
+	e_VoiceProfileDomainDescription                                                                   smithy.SchemaExtensions
+	e_VoiceProfileDomainName                                                                          smithy.SchemaExtensions
+	eVoiceProfileDomainSummary                                                                        smithy.SchemaExtensions
+	eVoiceProfileDomainSummary_VoiceProfileDomainId                                                   smithy.SchemaExtensions
+	eVoiceProfileDomainSummary_VoiceProfileDomainArn                                                  smithy.SchemaExtensions
+	eVoiceProfileDomainSummary_Name                                                                   smithy.SchemaExtensions
+	eVoiceProfileDomainSummary_Description                                                            smithy.SchemaExtensions
+	eVoiceProfileDomainSummary_CreatedTimestamp                                                       smithy.SchemaExtensions
+	eVoiceProfileDomainSummary_UpdatedTimestamp                                                       smithy.SchemaExtensions
+	e_VoiceProfileDomainSummaryList                                                                   smithy.SchemaExtensions
+	e_VoiceProfileDomainSummaryList_member                                                            smithy.SchemaExtensions
+	eVoiceProfileSummary                                                                              smithy.SchemaExtensions
+	eVoiceProfileSummary_VoiceProfileId                                                               smithy.SchemaExtensions
+	eVoiceProfileSummary_VoiceProfileArn                                                              smithy.SchemaExtensions
+	eVoiceProfileSummary_VoiceProfileDomainId                                                         smithy.SchemaExtensions
+	eVoiceProfileSummary_CreatedTimestamp                                                             smithy.SchemaExtensions
+	eVoiceProfileSummary_UpdatedTimestamp                                                             smithy.SchemaExtensions
+	eVoiceProfileSummary_ExpirationTimestamp                                                          smithy.SchemaExtensions
+	e_VoiceProfileSummaryList                                                                         smithy.SchemaExtensions
+	e_VoiceProfileSummaryList_member                                                                  smithy.SchemaExtensions
+	eVoiceToneAnalysisTask                                                                            smithy.SchemaExtensions
+	eVoiceToneAnalysisTask_VoiceToneAnalysisTaskId                                                    smithy.SchemaExtensions
+	eVoiceToneAnalysisTask_VoiceToneAnalysisTaskStatus                                                smithy.SchemaExtensions
+	eVoiceToneAnalysisTask_CallDetails                                                                smithy.SchemaExtensions
+	eVoiceToneAnalysisTask_CreatedTimestamp                                                           smithy.SchemaExtensions
+	eVoiceToneAnalysisTask_UpdatedTimestamp                                                           smithy.SchemaExtensions
+	eVoiceToneAnalysisTask_StartedTimestamp                                                           smithy.SchemaExtensions
+	eVoiceToneAnalysisTask_StatusMessage                                                              smithy.SchemaExtensions
+	eAssociatePhoneNumbersWithVoiceConnectorGroupRequest                                              smithy.SchemaExtensions
+	eAssociatePhoneNumbersWithVoiceConnectorGroupRequest_VoiceConnectorGroupId                        smithy.SchemaExtensions
+	eAssociatePhoneNumbersWithVoiceConnectorGroupRequest_E164PhoneNumbers                             smithy.SchemaExtensions
+	eAssociatePhoneNumbersWithVoiceConnectorGroupRequest_ForceAssociate                               smithy.SchemaExtensions
+	eAssociatePhoneNumbersWithVoiceConnectorGroupResponse                                             smithy.SchemaExtensions
+	eAssociatePhoneNumbersWithVoiceConnectorGroupResponse_PhoneNumberErrors                           smithy.SchemaExtensions
+	eAssociatePhoneNumbersWithVoiceConnectorRequest                                                   smithy.SchemaExtensions
+	eAssociatePhoneNumbersWithVoiceConnectorRequest_VoiceConnectorId                                  smithy.SchemaExtensions
+	eAssociatePhoneNumbersWithVoiceConnectorRequest_E164PhoneNumbers                                  smithy.SchemaExtensions
+	eAssociatePhoneNumbersWithVoiceConnectorRequest_ForceAssociate                                    smithy.SchemaExtensions
+	eAssociatePhoneNumbersWithVoiceConnectorResponse                                                  smithy.SchemaExtensions
+	eAssociatePhoneNumbersWithVoiceConnectorResponse_PhoneNumberErrors                                smithy.SchemaExtensions
+	eBatchDeletePhoneNumberRequest                                                                    smithy.SchemaExtensions
+	eBatchDeletePhoneNumberRequest_PhoneNumberIds                                                     smithy.SchemaExtensions
+	eBatchDeletePhoneNumberResponse                                                                   smithy.SchemaExtensions
+	eBatchDeletePhoneNumberResponse_PhoneNumberErrors                                                 smithy.SchemaExtensions
+	eBatchUpdatePhoneNumberRequest                                                                    smithy.SchemaExtensions
+	eBatchUpdatePhoneNumberRequest_UpdatePhoneNumberRequestItems                                      smithy.SchemaExtensions
+	eBatchUpdatePhoneNumberResponse                                                                   smithy.SchemaExtensions
+	eBatchUpdatePhoneNumberResponse_PhoneNumberErrors                                                 smithy.SchemaExtensions
+	eCreatePhoneNumberOrderRequest                                                                    smithy.SchemaExtensions
+	eCreatePhoneNumberOrderRequest_ProductType                                                        smithy.SchemaExtensions
+	eCreatePhoneNumberOrderRequest_E164PhoneNumbers                                                   smithy.SchemaExtensions
+	eCreatePhoneNumberOrderRequest_Name                                                               smithy.SchemaExtensions
+	eCreatePhoneNumberOrderResponse                                                                   smithy.SchemaExtensions
+	eCreatePhoneNumberOrderResponse_PhoneNumberOrder                                                  smithy.SchemaExtensions
+	eCreateProxySessionRequest                                                                        smithy.SchemaExtensions
+	eCreateProxySessionRequest_VoiceConnectorId                                                       smithy.SchemaExtensions
+	eCreateProxySessionRequest_ParticipantPhoneNumbers                                                smithy.SchemaExtensions
+	eCreateProxySessionRequest_Name                                                                   smithy.SchemaExtensions
+	eCreateProxySessionRequest_ExpiryMinutes                                                          smithy.SchemaExtensions
+	eCreateProxySessionRequest_Capabilities                                                           smithy.SchemaExtensions
+	eCreateProxySessionRequest_NumberSelectionBehavior                                                smithy.SchemaExtensions
+	eCreateProxySessionRequest_GeoMatchLevel                                                          smithy.SchemaExtensions
+	eCreateProxySessionRequest_GeoMatchParams                                                         smithy.SchemaExtensions
+	eCreateProxySessionResponse                                                                       smithy.SchemaExtensions
+	eCreateProxySessionResponse_ProxySession                                                          smithy.SchemaExtensions
+	eCreateSipMediaApplicationCallRequest                                                             smithy.SchemaExtensions
+	eCreateSipMediaApplicationCallRequest_FromPhoneNumber                                             smithy.SchemaExtensions
+	eCreateSipMediaApplicationCallRequest_ToPhoneNumber                                               smithy.SchemaExtensions
+	eCreateSipMediaApplicationCallRequest_SipMediaApplicationId                                       smithy.SchemaExtensions
+	eCreateSipMediaApplicationCallRequest_SipHeaders                                                  smithy.SchemaExtensions
+	eCreateSipMediaApplicationCallRequest_ArgumentsMap                                                smithy.SchemaExtensions
+	eCreateSipMediaApplicationCallResponse                                                            smithy.SchemaExtensions
+	eCreateSipMediaApplicationCallResponse_SipMediaApplicationCall                                    smithy.SchemaExtensions
+	eCreateSipMediaApplicationRequest                                                                 smithy.SchemaExtensions
+	eCreateSipMediaApplicationRequest_AwsRegion                                                       smithy.SchemaExtensions
+	eCreateSipMediaApplicationRequest_Name                                                            smithy.SchemaExtensions
+	eCreateSipMediaApplicationRequest_Endpoints                                                       smithy.SchemaExtensions
+	eCreateSipMediaApplicationRequest_Tags                                                            smithy.SchemaExtensions
+	eCreateSipMediaApplicationResponse                                                                smithy.SchemaExtensions
+	eCreateSipMediaApplicationResponse_SipMediaApplication                                            smithy.SchemaExtensions
+	eCreateSipRuleRequest                                                                             smithy.SchemaExtensions
+	eCreateSipRuleRequest_Name                                                                        smithy.SchemaExtensions
+	eCreateSipRuleRequest_TriggerType                                                                 smithy.SchemaExtensions
+	eCreateSipRuleRequest_TriggerValue                                                                smithy.SchemaExtensions
+	eCreateSipRuleRequest_Disabled                                                                    smithy.SchemaExtensions
+	eCreateSipRuleRequest_TargetApplications                                                          smithy.SchemaExtensions
+	eCreateSipRuleResponse                                                                            smithy.SchemaExtensions
+	eCreateSipRuleResponse_SipRule                                                                    smithy.SchemaExtensions
+	eCreateVoiceConnectorGroupRequest                                                                 smithy.SchemaExtensions
+	eCreateVoiceConnectorGroupRequest_Name                                                            smithy.SchemaExtensions
+	eCreateVoiceConnectorGroupRequest_VoiceConnectorItems                                             smithy.SchemaExtensions
+	eCreateVoiceConnectorGroupRequest_CallDistributionType                                            smithy.SchemaExtensions
+	eCreateVoiceConnectorGroupResponse                                                                smithy.SchemaExtensions
+	eCreateVoiceConnectorGroupResponse_VoiceConnectorGroup                                            smithy.SchemaExtensions
+	eCreateVoiceConnectorRequest                                                                      smithy.SchemaExtensions
+	eCreateVoiceConnectorRequest_Name                                                                 smithy.SchemaExtensions
+	eCreateVoiceConnectorRequest_AwsRegion                                                            smithy.SchemaExtensions
+	eCreateVoiceConnectorRequest_RequireEncryption                                                    smithy.SchemaExtensions
+	eCreateVoiceConnectorRequest_Tags                                                                 smithy.SchemaExtensions
+	eCreateVoiceConnectorRequest_IntegrationType                                                      smithy.SchemaExtensions
+	eCreateVoiceConnectorRequest_NetworkType                                                          smithy.SchemaExtensions
+	eCreateVoiceConnectorResponse                                                                     smithy.SchemaExtensions
+	eCreateVoiceConnectorResponse_VoiceConnector                                                      smithy.SchemaExtensions
+	eCreateVoiceProfileDomainRequest                                                                  smithy.SchemaExtensions
+	eCreateVoiceProfileDomainRequest_Name                                                             smithy.SchemaExtensions
+	eCreateVoiceProfileDomainRequest_Description                                                      smithy.SchemaExtensions
+	eCreateVoiceProfileDomainRequest_ServerSideEncryptionConfiguration                                smithy.SchemaExtensions
+	eCreateVoiceProfileDomainRequest_ClientRequestToken                                               smithy.SchemaExtensions
+	eCreateVoiceProfileDomainRequest_Tags                                                             smithy.SchemaExtensions
+	eCreateVoiceProfileDomainResponse                                                                 smithy.SchemaExtensions
+	eCreateVoiceProfileDomainResponse_VoiceProfileDomain                                              smithy.SchemaExtensions
+	eCreateVoiceProfileRequest                                                                        smithy.SchemaExtensions
+	eCreateVoiceProfileRequest_SpeakerSearchTaskId                                                    smithy.SchemaExtensions
+	eCreateVoiceProfileResponse                                                                       smithy.SchemaExtensions
+	eCreateVoiceProfileResponse_VoiceProfile                                                          smithy.SchemaExtensions
+	eDeletePhoneNumberRequest                                                                         smithy.SchemaExtensions
+	eDeletePhoneNumberRequest_PhoneNumberId                                                           smithy.SchemaExtensions
+	eDeleteProxySessionRequest                                                                        smithy.SchemaExtensions
+	eDeleteProxySessionRequest_VoiceConnectorId                                                       smithy.SchemaExtensions
+	eDeleteProxySessionRequest_ProxySessionId                                                         smithy.SchemaExtensions
+	eDeleteSipMediaApplicationRequest                                                                 smithy.SchemaExtensions
+	eDeleteSipMediaApplicationRequest_SipMediaApplicationId                                           smithy.SchemaExtensions
+	eDeleteSipRuleRequest                                                                             smithy.SchemaExtensions
+	eDeleteSipRuleRequest_SipRuleId                                                                   smithy.SchemaExtensions
+	eDeleteVoiceConnectorEmergencyCallingConfigurationRequest                                         smithy.SchemaExtensions
+	eDeleteVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId                        smithy.SchemaExtensions
+	eDeleteVoiceConnectorExternalSystemsConfigurationRequest                                          smithy.SchemaExtensions
+	eDeleteVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId                         smithy.SchemaExtensions
+	eDeleteVoiceConnectorGroupRequest                                                                 smithy.SchemaExtensions
+	eDeleteVoiceConnectorGroupRequest_VoiceConnectorGroupId                                           smithy.SchemaExtensions
+	eDeleteVoiceConnectorRequest                                                                      smithy.SchemaExtensions
+	eDeleteVoiceConnectorRequest_VoiceConnectorId                                                     smithy.SchemaExtensions
+	eDeleteVoiceConnectorOriginationRequest                                                           smithy.SchemaExtensions
+	eDeleteVoiceConnectorOriginationRequest_VoiceConnectorId                                          smithy.SchemaExtensions
+	eDeleteVoiceConnectorProxyRequest                                                                 smithy.SchemaExtensions
+	eDeleteVoiceConnectorProxyRequest_VoiceConnectorId                                                smithy.SchemaExtensions
+	eDeleteVoiceConnectorStreamingConfigurationRequest                                                smithy.SchemaExtensions
+	eDeleteVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId                               smithy.SchemaExtensions
+	eDeleteVoiceConnectorTerminationCredentialsRequest                                                smithy.SchemaExtensions
+	eDeleteVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId                               smithy.SchemaExtensions
+	eDeleteVoiceConnectorTerminationCredentialsRequest_Usernames                                      smithy.SchemaExtensions
+	eDeleteVoiceConnectorTerminationRequest                                                           smithy.SchemaExtensions
+	eDeleteVoiceConnectorTerminationRequest_VoiceConnectorId                                          smithy.SchemaExtensions
+	eDeleteVoiceProfileDomainRequest                                                                  smithy.SchemaExtensions
+	eDeleteVoiceProfileDomainRequest_VoiceProfileDomainId                                             smithy.SchemaExtensions
+	eDeleteVoiceProfileRequest                                                                        smithy.SchemaExtensions
+	eDeleteVoiceProfileRequest_VoiceProfileId                                                         smithy.SchemaExtensions
+	eDisassociatePhoneNumbersFromVoiceConnectorGroupRequest                                           smithy.SchemaExtensions
+	eDisassociatePhoneNumbersFromVoiceConnectorGroupRequest_VoiceConnectorGroupId                     smithy.SchemaExtensions
+	eDisassociatePhoneNumbersFromVoiceConnectorGroupRequest_E164PhoneNumbers                          smithy.SchemaExtensions
+	eDisassociatePhoneNumbersFromVoiceConnectorGroupResponse                                          smithy.SchemaExtensions
+	eDisassociatePhoneNumbersFromVoiceConnectorGroupResponse_PhoneNumberErrors                        smithy.SchemaExtensions
+	eDisassociatePhoneNumbersFromVoiceConnectorRequest                                                smithy.SchemaExtensions
+	eDisassociatePhoneNumbersFromVoiceConnectorRequest_VoiceConnectorId                               smithy.SchemaExtensions
+	eDisassociatePhoneNumbersFromVoiceConnectorRequest_E164PhoneNumbers                               smithy.SchemaExtensions
+	eDisassociatePhoneNumbersFromVoiceConnectorResponse                                               smithy.SchemaExtensions
+	eDisassociatePhoneNumbersFromVoiceConnectorResponse_PhoneNumberErrors                             smithy.SchemaExtensions
+	eGetGlobalSettingsResponse                                                                        smithy.SchemaExtensions
+	eGetGlobalSettingsResponse_VoiceConnector                                                         smithy.SchemaExtensions
+	eGetPhoneNumberRequest                                                                            smithy.SchemaExtensions
+	eGetPhoneNumberRequest_PhoneNumberId                                                              smithy.SchemaExtensions
+	eGetPhoneNumberOrderRequest                                                                       smithy.SchemaExtensions
+	eGetPhoneNumberOrderRequest_PhoneNumberOrderId                                                    smithy.SchemaExtensions
+	eGetPhoneNumberOrderResponse                                                                      smithy.SchemaExtensions
+	eGetPhoneNumberOrderResponse_PhoneNumberOrder                                                     smithy.SchemaExtensions
+	eGetPhoneNumberResponse                                                                           smithy.SchemaExtensions
+	eGetPhoneNumberResponse_PhoneNumber                                                               smithy.SchemaExtensions
+	eGetPhoneNumberSettingsResponse                                                                   smithy.SchemaExtensions
+	eGetPhoneNumberSettingsResponse_CallingName                                                       smithy.SchemaExtensions
+	eGetPhoneNumberSettingsResponse_CallingNameUpdatedTimestamp                                       smithy.SchemaExtensions
+	eGetProxySessionRequest                                                                           smithy.SchemaExtensions
+	eGetProxySessionRequest_VoiceConnectorId                                                          smithy.SchemaExtensions
+	eGetProxySessionRequest_ProxySessionId                                                            smithy.SchemaExtensions
+	eGetProxySessionResponse                                                                          smithy.SchemaExtensions
+	eGetProxySessionResponse_ProxySession                                                             smithy.SchemaExtensions
+	eGetSipMediaApplicationAlexaSkillConfigurationRequest                                             smithy.SchemaExtensions
+	eGetSipMediaApplicationAlexaSkillConfigurationRequest_SipMediaApplicationId                       smithy.SchemaExtensions
+	eGetSipMediaApplicationAlexaSkillConfigurationResponse                                            smithy.SchemaExtensions
+	eGetSipMediaApplicationAlexaSkillConfigurationResponse_SipMediaApplicationAlexaSkillConfiguration smithy.SchemaExtensions
+	eGetSipMediaApplicationRequest                                                                    smithy.SchemaExtensions
+	eGetSipMediaApplicationRequest_SipMediaApplicationId                                              smithy.SchemaExtensions
+	eGetSipMediaApplicationLoggingConfigurationRequest                                                smithy.SchemaExtensions
+	eGetSipMediaApplicationLoggingConfigurationRequest_SipMediaApplicationId                          smithy.SchemaExtensions
+	eGetSipMediaApplicationLoggingConfigurationResponse                                               smithy.SchemaExtensions
+	eGetSipMediaApplicationLoggingConfigurationResponse_SipMediaApplicationLoggingConfiguration       smithy.SchemaExtensions
+	eGetSipMediaApplicationResponse                                                                   smithy.SchemaExtensions
+	eGetSipMediaApplicationResponse_SipMediaApplication                                               smithy.SchemaExtensions
+	eGetSipRuleRequest                                                                                smithy.SchemaExtensions
+	eGetSipRuleRequest_SipRuleId                                                                      smithy.SchemaExtensions
+	eGetSipRuleResponse                                                                               smithy.SchemaExtensions
+	eGetSipRuleResponse_SipRule                                                                       smithy.SchemaExtensions
+	eGetSpeakerSearchTaskRequest                                                                      smithy.SchemaExtensions
+	eGetSpeakerSearchTaskRequest_VoiceConnectorId                                                     smithy.SchemaExtensions
+	eGetSpeakerSearchTaskRequest_SpeakerSearchTaskId                                                  smithy.SchemaExtensions
+	eGetSpeakerSearchTaskResponse                                                                     smithy.SchemaExtensions
+	eGetSpeakerSearchTaskResponse_SpeakerSearchTask                                                   smithy.SchemaExtensions
+	eGetVoiceConnectorEmergencyCallingConfigurationRequest                                            smithy.SchemaExtensions
+	eGetVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId                           smithy.SchemaExtensions
+	eGetVoiceConnectorEmergencyCallingConfigurationResponse                                           smithy.SchemaExtensions
+	eGetVoiceConnectorEmergencyCallingConfigurationResponse_EmergencyCallingConfiguration             smithy.SchemaExtensions
+	eGetVoiceConnectorExternalSystemsConfigurationRequest                                             smithy.SchemaExtensions
+	eGetVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId                            smithy.SchemaExtensions
+	eGetVoiceConnectorExternalSystemsConfigurationResponse                                            smithy.SchemaExtensions
+	eGetVoiceConnectorExternalSystemsConfigurationResponse_ExternalSystemsConfiguration               smithy.SchemaExtensions
+	eGetVoiceConnectorGroupRequest                                                                    smithy.SchemaExtensions
+	eGetVoiceConnectorGroupRequest_VoiceConnectorGroupId                                              smithy.SchemaExtensions
+	eGetVoiceConnectorGroupResponse                                                                   smithy.SchemaExtensions
+	eGetVoiceConnectorGroupResponse_VoiceConnectorGroup                                               smithy.SchemaExtensions
+	eGetVoiceConnectorRequest                                                                         smithy.SchemaExtensions
+	eGetVoiceConnectorRequest_VoiceConnectorId                                                        smithy.SchemaExtensions
+	eGetVoiceConnectorLoggingConfigurationRequest                                                     smithy.SchemaExtensions
+	eGetVoiceConnectorLoggingConfigurationRequest_VoiceConnectorId                                    smithy.SchemaExtensions
+	eGetVoiceConnectorLoggingConfigurationResponse                                                    smithy.SchemaExtensions
+	eGetVoiceConnectorLoggingConfigurationResponse_LoggingConfiguration                               smithy.SchemaExtensions
+	eGetVoiceConnectorOriginationRequest                                                              smithy.SchemaExtensions
+	eGetVoiceConnectorOriginationRequest_VoiceConnectorId                                             smithy.SchemaExtensions
+	eGetVoiceConnectorOriginationResponse                                                             smithy.SchemaExtensions
+	eGetVoiceConnectorOriginationResponse_Origination                                                 smithy.SchemaExtensions
+	eGetVoiceConnectorResponse                                                                        smithy.SchemaExtensions
+	eGetVoiceConnectorResponse_VoiceConnector                                                         smithy.SchemaExtensions
+	eGetVoiceConnectorProxyRequest                                                                    smithy.SchemaExtensions
+	eGetVoiceConnectorProxyRequest_VoiceConnectorId                                                   smithy.SchemaExtensions
+	eGetVoiceConnectorProxyResponse                                                                   smithy.SchemaExtensions
+	eGetVoiceConnectorProxyResponse_Proxy                                                             smithy.SchemaExtensions
+	eGetVoiceConnectorStreamingConfigurationRequest                                                   smithy.SchemaExtensions
+	eGetVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId                                  smithy.SchemaExtensions
+	eGetVoiceConnectorStreamingConfigurationResponse                                                  smithy.SchemaExtensions
+	eGetVoiceConnectorStreamingConfigurationResponse_StreamingConfiguration                           smithy.SchemaExtensions
+	eGetVoiceConnectorTerminationHealthRequest                                                        smithy.SchemaExtensions
+	eGetVoiceConnectorTerminationHealthRequest_VoiceConnectorId                                       smithy.SchemaExtensions
+	eGetVoiceConnectorTerminationHealthResponse                                                       smithy.SchemaExtensions
+	eGetVoiceConnectorTerminationHealthResponse_TerminationHealth                                     smithy.SchemaExtensions
+	eGetVoiceConnectorTerminationRequest                                                              smithy.SchemaExtensions
+	eGetVoiceConnectorTerminationRequest_VoiceConnectorId                                             smithy.SchemaExtensions
+	eGetVoiceConnectorTerminationResponse                                                             smithy.SchemaExtensions
+	eGetVoiceConnectorTerminationResponse_Termination                                                 smithy.SchemaExtensions
+	eGetVoiceProfileDomainRequest                                                                     smithy.SchemaExtensions
+	eGetVoiceProfileDomainRequest_VoiceProfileDomainId                                                smithy.SchemaExtensions
+	eGetVoiceProfileDomainResponse                                                                    smithy.SchemaExtensions
+	eGetVoiceProfileDomainResponse_VoiceProfileDomain                                                 smithy.SchemaExtensions
+	eGetVoiceProfileRequest                                                                           smithy.SchemaExtensions
+	eGetVoiceProfileRequest_VoiceProfileId                                                            smithy.SchemaExtensions
+	eGetVoiceProfileResponse                                                                          smithy.SchemaExtensions
+	eGetVoiceProfileResponse_VoiceProfile                                                             smithy.SchemaExtensions
+	eGetVoiceToneAnalysisTaskRequest                                                                  smithy.SchemaExtensions
+	eGetVoiceToneAnalysisTaskRequest_VoiceConnectorId                                                 smithy.SchemaExtensions
+	eGetVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId                                          smithy.SchemaExtensions
+	eGetVoiceToneAnalysisTaskRequest_IsCaller                                                         smithy.SchemaExtensions
+	eGetVoiceToneAnalysisTaskResponse                                                                 smithy.SchemaExtensions
+	eGetVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask                                           smithy.SchemaExtensions
+	eListAvailableVoiceConnectorRegionsResponse                                                       smithy.SchemaExtensions
+	eListAvailableVoiceConnectorRegionsResponse_VoiceConnectorRegions                                 smithy.SchemaExtensions
+	eListPhoneNumberOrdersRequest                                                                     smithy.SchemaExtensions
+	eListPhoneNumberOrdersRequest_NextToken                                                           smithy.SchemaExtensions
+	eListPhoneNumberOrdersRequest_MaxResults                                                          smithy.SchemaExtensions
+	eListPhoneNumberOrdersResponse                                                                    smithy.SchemaExtensions
+	eListPhoneNumberOrdersResponse_PhoneNumberOrders                                                  smithy.SchemaExtensions
+	eListPhoneNumberOrdersResponse_NextToken                                                          smithy.SchemaExtensions
+	eListPhoneNumbersRequest                                                                          smithy.SchemaExtensions
+	eListPhoneNumbersRequest_Status                                                                   smithy.SchemaExtensions
+	eListPhoneNumbersRequest_ProductType                                                              smithy.SchemaExtensions
+	eListPhoneNumbersRequest_FilterName                                                               smithy.SchemaExtensions
+	eListPhoneNumbersRequest_FilterValue                                                              smithy.SchemaExtensions
+	eListPhoneNumbersRequest_MaxResults                                                               smithy.SchemaExtensions
+	eListPhoneNumbersRequest_NextToken                                                                smithy.SchemaExtensions
+	eListPhoneNumbersResponse                                                                         smithy.SchemaExtensions
+	eListPhoneNumbersResponse_PhoneNumbers                                                            smithy.SchemaExtensions
+	eListPhoneNumbersResponse_NextToken                                                               smithy.SchemaExtensions
+	eListProxySessionsRequest                                                                         smithy.SchemaExtensions
+	eListProxySessionsRequest_VoiceConnectorId                                                        smithy.SchemaExtensions
+	eListProxySessionsRequest_Status                                                                  smithy.SchemaExtensions
+	eListProxySessionsRequest_NextToken                                                               smithy.SchemaExtensions
+	eListProxySessionsRequest_MaxResults                                                              smithy.SchemaExtensions
+	eListProxySessionsResponse                                                                        smithy.SchemaExtensions
+	eListProxySessionsResponse_ProxySessions                                                          smithy.SchemaExtensions
+	eListProxySessionsResponse_NextToken                                                              smithy.SchemaExtensions
+	eListSipMediaApplicationsRequest                                                                  smithy.SchemaExtensions
+	eListSipMediaApplicationsRequest_MaxResults                                                       smithy.SchemaExtensions
+	eListSipMediaApplicationsRequest_NextToken                                                        smithy.SchemaExtensions
+	eListSipMediaApplicationsResponse                                                                 smithy.SchemaExtensions
+	eListSipMediaApplicationsResponse_SipMediaApplications                                            smithy.SchemaExtensions
+	eListSipMediaApplicationsResponse_NextToken                                                       smithy.SchemaExtensions
+	eListSipRulesRequest                                                                              smithy.SchemaExtensions
+	eListSipRulesRequest_SipMediaApplicationId                                                        smithy.SchemaExtensions
+	eListSipRulesRequest_MaxResults                                                                   smithy.SchemaExtensions
+	eListSipRulesRequest_NextToken                                                                    smithy.SchemaExtensions
+	eListSipRulesResponse                                                                             smithy.SchemaExtensions
+	eListSipRulesResponse_SipRules                                                                    smithy.SchemaExtensions
+	eListSipRulesResponse_NextToken                                                                   smithy.SchemaExtensions
+	eListSupportedPhoneNumberCountriesRequest                                                         smithy.SchemaExtensions
+	eListSupportedPhoneNumberCountriesRequest_ProductType                                             smithy.SchemaExtensions
+	eListSupportedPhoneNumberCountriesResponse                                                        smithy.SchemaExtensions
+	eListSupportedPhoneNumberCountriesResponse_PhoneNumberCountries                                   smithy.SchemaExtensions
+	eListTagsForResourceRequest                                                                       smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceARN                                                           smithy.SchemaExtensions
+	eListTagsForResourceResponse                                                                      smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                                                                 smithy.SchemaExtensions
+	eListVoiceConnectorGroupsRequest                                                                  smithy.SchemaExtensions
+	eListVoiceConnectorGroupsRequest_NextToken                                                        smithy.SchemaExtensions
+	eListVoiceConnectorGroupsRequest_MaxResults                                                       smithy.SchemaExtensions
+	eListVoiceConnectorGroupsResponse                                                                 smithy.SchemaExtensions
+	eListVoiceConnectorGroupsResponse_VoiceConnectorGroups                                            smithy.SchemaExtensions
+	eListVoiceConnectorGroupsResponse_NextToken                                                       smithy.SchemaExtensions
+	eListVoiceConnectorsRequest                                                                       smithy.SchemaExtensions
+	eListVoiceConnectorsRequest_NextToken                                                             smithy.SchemaExtensions
+	eListVoiceConnectorsRequest_MaxResults                                                            smithy.SchemaExtensions
+	eListVoiceConnectorsResponse                                                                      smithy.SchemaExtensions
+	eListVoiceConnectorsResponse_VoiceConnectors                                                      smithy.SchemaExtensions
+	eListVoiceConnectorsResponse_NextToken                                                            smithy.SchemaExtensions
+	eListVoiceConnectorTerminationCredentialsRequest                                                  smithy.SchemaExtensions
+	eListVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId                                 smithy.SchemaExtensions
+	eListVoiceConnectorTerminationCredentialsResponse                                                 smithy.SchemaExtensions
+	eListVoiceConnectorTerminationCredentialsResponse_Usernames                                       smithy.SchemaExtensions
+	eListVoiceProfileDomainsRequest                                                                   smithy.SchemaExtensions
+	eListVoiceProfileDomainsRequest_NextToken                                                         smithy.SchemaExtensions
+	eListVoiceProfileDomainsRequest_MaxResults                                                        smithy.SchemaExtensions
+	eListVoiceProfileDomainsResponse                                                                  smithy.SchemaExtensions
+	eListVoiceProfileDomainsResponse_VoiceProfileDomains                                              smithy.SchemaExtensions
+	eListVoiceProfileDomainsResponse_NextToken                                                        smithy.SchemaExtensions
+	eListVoiceProfilesRequest                                                                         smithy.SchemaExtensions
+	eListVoiceProfilesRequest_VoiceProfileDomainId                                                    smithy.SchemaExtensions
+	eListVoiceProfilesRequest_NextToken                                                               smithy.SchemaExtensions
+	eListVoiceProfilesRequest_MaxResults                                                              smithy.SchemaExtensions
+	eListVoiceProfilesResponse                                                                        smithy.SchemaExtensions
+	eListVoiceProfilesResponse_VoiceProfiles                                                          smithy.SchemaExtensions
+	eListVoiceProfilesResponse_NextToken                                                              smithy.SchemaExtensions
+	ePutSipMediaApplicationAlexaSkillConfigurationRequest                                             smithy.SchemaExtensions
+	ePutSipMediaApplicationAlexaSkillConfigurationRequest_SipMediaApplicationId                       smithy.SchemaExtensions
+	ePutSipMediaApplicationAlexaSkillConfigurationRequest_SipMediaApplicationAlexaSkillConfiguration  smithy.SchemaExtensions
+	ePutSipMediaApplicationAlexaSkillConfigurationResponse                                            smithy.SchemaExtensions
+	ePutSipMediaApplicationAlexaSkillConfigurationResponse_SipMediaApplicationAlexaSkillConfiguration smithy.SchemaExtensions
+	ePutSipMediaApplicationLoggingConfigurationRequest                                                smithy.SchemaExtensions
+	ePutSipMediaApplicationLoggingConfigurationRequest_SipMediaApplicationId                          smithy.SchemaExtensions
+	ePutSipMediaApplicationLoggingConfigurationRequest_SipMediaApplicationLoggingConfiguration        smithy.SchemaExtensions
+	ePutSipMediaApplicationLoggingConfigurationResponse                                               smithy.SchemaExtensions
+	ePutSipMediaApplicationLoggingConfigurationResponse_SipMediaApplicationLoggingConfiguration       smithy.SchemaExtensions
+	ePutVoiceConnectorEmergencyCallingConfigurationRequest                                            smithy.SchemaExtensions
+	ePutVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId                           smithy.SchemaExtensions
+	ePutVoiceConnectorEmergencyCallingConfigurationRequest_EmergencyCallingConfiguration              smithy.SchemaExtensions
+	ePutVoiceConnectorEmergencyCallingConfigurationResponse                                           smithy.SchemaExtensions
+	ePutVoiceConnectorEmergencyCallingConfigurationResponse_EmergencyCallingConfiguration             smithy.SchemaExtensions
+	ePutVoiceConnectorExternalSystemsConfigurationRequest                                             smithy.SchemaExtensions
+	ePutVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId                            smithy.SchemaExtensions
+	ePutVoiceConnectorExternalSystemsConfigurationRequest_SessionBorderControllerTypes                smithy.SchemaExtensions
+	ePutVoiceConnectorExternalSystemsConfigurationRequest_ContactCenterSystemTypes                    smithy.SchemaExtensions
+	ePutVoiceConnectorExternalSystemsConfigurationResponse                                            smithy.SchemaExtensions
+	ePutVoiceConnectorExternalSystemsConfigurationResponse_ExternalSystemsConfiguration               smithy.SchemaExtensions
+	ePutVoiceConnectorLoggingConfigurationRequest                                                     smithy.SchemaExtensions
+	ePutVoiceConnectorLoggingConfigurationRequest_VoiceConnectorId                                    smithy.SchemaExtensions
+	ePutVoiceConnectorLoggingConfigurationRequest_LoggingConfiguration                                smithy.SchemaExtensions
+	ePutVoiceConnectorLoggingConfigurationResponse                                                    smithy.SchemaExtensions
+	ePutVoiceConnectorLoggingConfigurationResponse_LoggingConfiguration                               smithy.SchemaExtensions
+	ePutVoiceConnectorOriginationRequest                                                              smithy.SchemaExtensions
+	ePutVoiceConnectorOriginationRequest_VoiceConnectorId                                             smithy.SchemaExtensions
+	ePutVoiceConnectorOriginationRequest_Origination                                                  smithy.SchemaExtensions
+	ePutVoiceConnectorOriginationResponse                                                             smithy.SchemaExtensions
+	ePutVoiceConnectorOriginationResponse_Origination                                                 smithy.SchemaExtensions
+	ePutVoiceConnectorProxyRequest                                                                    smithy.SchemaExtensions
+	ePutVoiceConnectorProxyRequest_VoiceConnectorId                                                   smithy.SchemaExtensions
+	ePutVoiceConnectorProxyRequest_DefaultSessionExpiryMinutes                                        smithy.SchemaExtensions
+	ePutVoiceConnectorProxyRequest_PhoneNumberPoolCountries                                           smithy.SchemaExtensions
+	ePutVoiceConnectorProxyRequest_FallBackPhoneNumber                                                smithy.SchemaExtensions
+	ePutVoiceConnectorProxyRequest_Disabled                                                           smithy.SchemaExtensions
+	ePutVoiceConnectorProxyResponse                                                                   smithy.SchemaExtensions
+	ePutVoiceConnectorProxyResponse_Proxy                                                             smithy.SchemaExtensions
+	ePutVoiceConnectorStreamingConfigurationRequest                                                   smithy.SchemaExtensions
+	ePutVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId                                  smithy.SchemaExtensions
+	ePutVoiceConnectorStreamingConfigurationRequest_StreamingConfiguration                            smithy.SchemaExtensions
+	ePutVoiceConnectorStreamingConfigurationResponse                                                  smithy.SchemaExtensions
+	ePutVoiceConnectorStreamingConfigurationResponse_StreamingConfiguration                           smithy.SchemaExtensions
+	ePutVoiceConnectorTerminationCredentialsRequest                                                   smithy.SchemaExtensions
+	ePutVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId                                  smithy.SchemaExtensions
+	ePutVoiceConnectorTerminationCredentialsRequest_Credentials                                       smithy.SchemaExtensions
+	ePutVoiceConnectorTerminationRequest                                                              smithy.SchemaExtensions
+	ePutVoiceConnectorTerminationRequest_VoiceConnectorId                                             smithy.SchemaExtensions
+	ePutVoiceConnectorTerminationRequest_Termination                                                  smithy.SchemaExtensions
+	ePutVoiceConnectorTerminationResponse                                                             smithy.SchemaExtensions
+	ePutVoiceConnectorTerminationResponse_Termination                                                 smithy.SchemaExtensions
+	eRestorePhoneNumberRequest                                                                        smithy.SchemaExtensions
+	eRestorePhoneNumberRequest_PhoneNumberId                                                          smithy.SchemaExtensions
+	eRestorePhoneNumberResponse                                                                       smithy.SchemaExtensions
+	eRestorePhoneNumberResponse_PhoneNumber                                                           smithy.SchemaExtensions
+	eSearchAvailablePhoneNumbersRequest                                                               smithy.SchemaExtensions
+	eSearchAvailablePhoneNumbersRequest_AreaCode                                                      smithy.SchemaExtensions
+	eSearchAvailablePhoneNumbersRequest_City                                                          smithy.SchemaExtensions
+	eSearchAvailablePhoneNumbersRequest_Country                                                       smithy.SchemaExtensions
+	eSearchAvailablePhoneNumbersRequest_State                                                         smithy.SchemaExtensions
+	eSearchAvailablePhoneNumbersRequest_TollFreePrefix                                                smithy.SchemaExtensions
+	eSearchAvailablePhoneNumbersRequest_PhoneNumberType                                               smithy.SchemaExtensions
+	eSearchAvailablePhoneNumbersRequest_MaxResults                                                    smithy.SchemaExtensions
+	eSearchAvailablePhoneNumbersRequest_NextToken                                                     smithy.SchemaExtensions
+	eSearchAvailablePhoneNumbersResponse                                                              smithy.SchemaExtensions
+	eSearchAvailablePhoneNumbersResponse_E164PhoneNumbers                                             smithy.SchemaExtensions
+	eSearchAvailablePhoneNumbersResponse_NextToken                                                    smithy.SchemaExtensions
+	eStartSpeakerSearchTaskRequest                                                                    smithy.SchemaExtensions
+	eStartSpeakerSearchTaskRequest_VoiceConnectorId                                                   smithy.SchemaExtensions
+	eStartSpeakerSearchTaskRequest_TransactionId                                                      smithy.SchemaExtensions
+	eStartSpeakerSearchTaskRequest_VoiceProfileDomainId                                               smithy.SchemaExtensions
+	eStartSpeakerSearchTaskRequest_ClientRequestToken                                                 smithy.SchemaExtensions
+	eStartSpeakerSearchTaskRequest_CallLeg                                                            smithy.SchemaExtensions
+	eStartSpeakerSearchTaskResponse                                                                   smithy.SchemaExtensions
+	eStartSpeakerSearchTaskResponse_SpeakerSearchTask                                                 smithy.SchemaExtensions
+	eStartVoiceToneAnalysisTaskRequest                                                                smithy.SchemaExtensions
+	eStartVoiceToneAnalysisTaskRequest_VoiceConnectorId                                               smithy.SchemaExtensions
+	eStartVoiceToneAnalysisTaskRequest_TransactionId                                                  smithy.SchemaExtensions
+	eStartVoiceToneAnalysisTaskRequest_LanguageCode                                                   smithy.SchemaExtensions
+	eStartVoiceToneAnalysisTaskRequest_ClientRequestToken                                             smithy.SchemaExtensions
+	eStartVoiceToneAnalysisTaskResponse                                                               smithy.SchemaExtensions
+	eStartVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask                                         smithy.SchemaExtensions
+	eStopSpeakerSearchTaskRequest                                                                     smithy.SchemaExtensions
+	eStopSpeakerSearchTaskRequest_VoiceConnectorId                                                    smithy.SchemaExtensions
+	eStopSpeakerSearchTaskRequest_SpeakerSearchTaskId                                                 smithy.SchemaExtensions
+	eStopVoiceToneAnalysisTaskRequest                                                                 smithy.SchemaExtensions
+	eStopVoiceToneAnalysisTaskRequest_VoiceConnectorId                                                smithy.SchemaExtensions
+	eStopVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId                                         smithy.SchemaExtensions
+	eTagResourceRequest                                                                               smithy.SchemaExtensions
+	eTagResourceRequest_ResourceARN                                                                   smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                                                          smithy.SchemaExtensions
+	eUntagResourceRequest                                                                             smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceARN                                                                 smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                                                     smithy.SchemaExtensions
+	eUpdateGlobalSettingsRequest                                                                      smithy.SchemaExtensions
+	eUpdateGlobalSettingsRequest_VoiceConnector                                                       smithy.SchemaExtensions
+	eUpdatePhoneNumberRequest                                                                         smithy.SchemaExtensions
+	eUpdatePhoneNumberRequest_PhoneNumberId                                                           smithy.SchemaExtensions
+	eUpdatePhoneNumberRequest_ProductType                                                             smithy.SchemaExtensions
+	eUpdatePhoneNumberRequest_CallingName                                                             smithy.SchemaExtensions
+	eUpdatePhoneNumberRequest_Name                                                                    smithy.SchemaExtensions
+	eUpdatePhoneNumberResponse                                                                        smithy.SchemaExtensions
+	eUpdatePhoneNumberResponse_PhoneNumber                                                            smithy.SchemaExtensions
+	eUpdatePhoneNumberSettingsRequest                                                                 smithy.SchemaExtensions
+	eUpdatePhoneNumberSettingsRequest_CallingName                                                     smithy.SchemaExtensions
+	eUpdateProxySessionRequest                                                                        smithy.SchemaExtensions
+	eUpdateProxySessionRequest_VoiceConnectorId                                                       smithy.SchemaExtensions
+	eUpdateProxySessionRequest_ProxySessionId                                                         smithy.SchemaExtensions
+	eUpdateProxySessionRequest_Capabilities                                                           smithy.SchemaExtensions
+	eUpdateProxySessionRequest_ExpiryMinutes                                                          smithy.SchemaExtensions
+	eUpdateProxySessionResponse                                                                       smithy.SchemaExtensions
+	eUpdateProxySessionResponse_ProxySession                                                          smithy.SchemaExtensions
+	eUpdateSipMediaApplicationCallRequest                                                             smithy.SchemaExtensions
+	eUpdateSipMediaApplicationCallRequest_SipMediaApplicationId                                       smithy.SchemaExtensions
+	eUpdateSipMediaApplicationCallRequest_TransactionId                                               smithy.SchemaExtensions
+	eUpdateSipMediaApplicationCallRequest_Arguments                                                   smithy.SchemaExtensions
+	eUpdateSipMediaApplicationCallResponse                                                            smithy.SchemaExtensions
+	eUpdateSipMediaApplicationCallResponse_SipMediaApplicationCall                                    smithy.SchemaExtensions
+	eUpdateSipMediaApplicationRequest                                                                 smithy.SchemaExtensions
+	eUpdateSipMediaApplicationRequest_SipMediaApplicationId                                           smithy.SchemaExtensions
+	eUpdateSipMediaApplicationRequest_Name                                                            smithy.SchemaExtensions
+	eUpdateSipMediaApplicationRequest_Endpoints                                                       smithy.SchemaExtensions
+	eUpdateSipMediaApplicationResponse                                                                smithy.SchemaExtensions
+	eUpdateSipMediaApplicationResponse_SipMediaApplication                                            smithy.SchemaExtensions
+	eUpdateSipRuleRequest                                                                             smithy.SchemaExtensions
+	eUpdateSipRuleRequest_SipRuleId                                                                   smithy.SchemaExtensions
+	eUpdateSipRuleRequest_Name                                                                        smithy.SchemaExtensions
+	eUpdateSipRuleRequest_Disabled                                                                    smithy.SchemaExtensions
+	eUpdateSipRuleRequest_TargetApplications                                                          smithy.SchemaExtensions
+	eUpdateSipRuleResponse                                                                            smithy.SchemaExtensions
+	eUpdateSipRuleResponse_SipRule                                                                    smithy.SchemaExtensions
+	eUpdateVoiceConnectorGroupRequest                                                                 smithy.SchemaExtensions
+	eUpdateVoiceConnectorGroupRequest_VoiceConnectorGroupId                                           smithy.SchemaExtensions
+	eUpdateVoiceConnectorGroupRequest_Name                                                            smithy.SchemaExtensions
+	eUpdateVoiceConnectorGroupRequest_VoiceConnectorItems                                             smithy.SchemaExtensions
+	eUpdateVoiceConnectorGroupRequest_CallDistributionType                                            smithy.SchemaExtensions
+	eUpdateVoiceConnectorGroupResponse                                                                smithy.SchemaExtensions
+	eUpdateVoiceConnectorGroupResponse_VoiceConnectorGroup                                            smithy.SchemaExtensions
+	eUpdateVoiceConnectorRequest                                                                      smithy.SchemaExtensions
+	eUpdateVoiceConnectorRequest_VoiceConnectorId                                                     smithy.SchemaExtensions
+	eUpdateVoiceConnectorRequest_Name                                                                 smithy.SchemaExtensions
+	eUpdateVoiceConnectorRequest_RequireEncryption                                                    smithy.SchemaExtensions
+	eUpdateVoiceConnectorResponse                                                                     smithy.SchemaExtensions
+	eUpdateVoiceConnectorResponse_VoiceConnector                                                      smithy.SchemaExtensions
+	eUpdateVoiceProfileDomainRequest                                                                  smithy.SchemaExtensions
+	eUpdateVoiceProfileDomainRequest_VoiceProfileDomainId                                             smithy.SchemaExtensions
+	eUpdateVoiceProfileDomainRequest_Name                                                             smithy.SchemaExtensions
+	eUpdateVoiceProfileDomainRequest_Description                                                      smithy.SchemaExtensions
+	eUpdateVoiceProfileDomainResponse                                                                 smithy.SchemaExtensions
+	eUpdateVoiceProfileDomainResponse_VoiceProfileDomain                                              smithy.SchemaExtensions
+	eUpdateVoiceProfileRequest                                                                        smithy.SchemaExtensions
+	eUpdateVoiceProfileRequest_VoiceProfileId                                                         smithy.SchemaExtensions
+	eUpdateVoiceProfileRequest_SpeakerSearchTaskId                                                    smithy.SchemaExtensions
+	eUpdateVoiceProfileResponse                                                                       smithy.SchemaExtensions
+	eUpdateVoiceProfileResponse_VoiceProfile                                                          smithy.SchemaExtensions
+	eValidateE911AddressRequest                                                                       smithy.SchemaExtensions
+	eValidateE911AddressRequest_AwsAccountId                                                          smithy.SchemaExtensions
+	eValidateE911AddressRequest_StreetNumber                                                          smithy.SchemaExtensions
+	eValidateE911AddressRequest_StreetInfo                                                            smithy.SchemaExtensions
+	eValidateE911AddressRequest_City                                                                  smithy.SchemaExtensions
+	eValidateE911AddressRequest_State                                                                 smithy.SchemaExtensions
+	eValidateE911AddressRequest_Country                                                               smithy.SchemaExtensions
+	eValidateE911AddressRequest_PostalCode                                                            smithy.SchemaExtensions
+	eValidateE911AddressResponse                                                                      smithy.SchemaExtensions
+	eValidateE911AddressResponse_ValidationResult                                                     smithy.SchemaExtensions
+	eValidateE911AddressResponse_AddressExternalId                                                    smithy.SchemaExtensions
+	eValidateE911AddressResponse_Address                                                              smithy.SchemaExtensions
+	eValidateE911AddressResponse_CandidateAddressList                                                 smithy.SchemaExtensions
+)
 
 var (
 	iAssociatePhoneNumbersWithVoiceConnector                  = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkvoice", Name: "AssociatePhoneNumbersWithVoiceConnector"}
@@ -1096,1122 +2210,1122 @@ var mUpdateVoiceProfileResponse = smithy.SchemaMembers{List: []*smithy.Schema{&s
 var mValidateE911AddressRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sValidateE911AddressRequest_AwsAccountId, &sValidateE911AddressRequest_StreetNumber, &sValidateE911AddressRequest_StreetInfo, &sValidateE911AddressRequest_City, &sValidateE911AddressRequest_State, &sValidateE911AddressRequest_Country, &sValidateE911AddressRequest_PostalCode}}
 var mValidateE911AddressResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sValidateE911AddressResponse_ValidationResult, &sValidateE911AddressResponse_AddressExternalId, &sValidateE911AddressResponse_Address, &sValidateE911AddressResponse_CandidateAddressList}}
 
-var sAssociatePhoneNumbersWithVoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatePhoneNumbersWithVoiceConnector, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sAssociatePhoneNumbersWithVoiceConnectorGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatePhoneNumbersWithVoiceConnectorGroup, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sBatchDeletePhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeletePhoneNumber, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sBatchUpdatePhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdatePhoneNumber, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sCreatePhoneNumberOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePhoneNumberOrder, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sCreateProxySession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxySession, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sCreateSipMediaApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSipMediaApplication, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sCreateSipMediaApplicationCall = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSipMediaApplicationCall, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sCreateSipRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSipRule, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sCreateVoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVoiceConnector, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sCreateVoiceConnectorGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVoiceConnectorGroup, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sCreateVoiceProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVoiceProfile, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sCreateVoiceProfileDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVoiceProfileDomain, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sDeletePhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePhoneNumber, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sDeleteProxySession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxySession, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sDeleteSipMediaApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSipMediaApplication, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sDeleteSipRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSipRule, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sDeleteVoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnector, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sDeleteVoiceConnectorEmergencyCallingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorEmergencyCallingConfiguration, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sDeleteVoiceConnectorExternalSystemsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorExternalSystemsConfiguration, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var sDeleteVoiceConnectorGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorGroup, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &ext[20]})
-var sDeleteVoiceConnectorOrigination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorOrigination, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &ext[21]})
-var sDeleteVoiceConnectorProxy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorProxy, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &ext[22]})
-var sDeleteVoiceConnectorStreamingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorStreamingConfiguration, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &ext[23]})
-var sDeleteVoiceConnectorTermination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorTermination, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &ext[24]})
-var sDeleteVoiceConnectorTerminationCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorTerminationCredentials, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &ext[25]})
-var sDeleteVoiceProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceProfile, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &ext[26]})
-var sDeleteVoiceProfileDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceProfileDomain, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &ext[27]})
-var sDisassociatePhoneNumbersFromVoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociatePhoneNumbersFromVoiceConnector, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &ext[28]})
-var sDisassociatePhoneNumbersFromVoiceConnectorGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociatePhoneNumbersFromVoiceConnectorGroup, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &ext[29]})
-var sGetGlobalSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGlobalSettings, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &ext[30]})
-var sGetPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPhoneNumber, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &ext[31]})
-var sGetPhoneNumberOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPhoneNumberOrder, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &ext[32]})
-var sGetPhoneNumberSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPhoneNumberSettings, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &ext[33]})
-var sGetProxySession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProxySession, Traits: &t34, Type: smithy.ShapeTypeOperation, Ext: &ext[34]})
-var sGetSipMediaApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSipMediaApplication, Traits: &t35, Type: smithy.ShapeTypeOperation, Ext: &ext[35]})
-var sGetSipMediaApplicationAlexaSkillConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSipMediaApplicationAlexaSkillConfiguration, Traits: &t36, Type: smithy.ShapeTypeOperation, Ext: &ext[36]})
-var sGetSipMediaApplicationLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSipMediaApplicationLoggingConfiguration, Traits: &t37, Type: smithy.ShapeTypeOperation, Ext: &ext[37]})
-var sGetSipRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSipRule, Traits: &t38, Type: smithy.ShapeTypeOperation, Ext: &ext[38]})
-var sGetSpeakerSearchTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSpeakerSearchTask, Traits: &t39, Type: smithy.ShapeTypeOperation, Ext: &ext[39]})
-var sGetVoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnector, Traits: &t40, Type: smithy.ShapeTypeOperation, Ext: &ext[40]})
-var sGetVoiceConnectorEmergencyCallingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorEmergencyCallingConfiguration, Traits: &t41, Type: smithy.ShapeTypeOperation, Ext: &ext[41]})
-var sGetVoiceConnectorExternalSystemsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorExternalSystemsConfiguration, Traits: &t42, Type: smithy.ShapeTypeOperation, Ext: &ext[42]})
-var sGetVoiceConnectorGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorGroup, Traits: &t43, Type: smithy.ShapeTypeOperation, Ext: &ext[43]})
-var sGetVoiceConnectorLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorLoggingConfiguration, Traits: &t44, Type: smithy.ShapeTypeOperation, Ext: &ext[44]})
-var sGetVoiceConnectorOrigination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorOrigination, Traits: &t45, Type: smithy.ShapeTypeOperation, Ext: &ext[45]})
-var sGetVoiceConnectorProxy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorProxy, Traits: &t46, Type: smithy.ShapeTypeOperation, Ext: &ext[46]})
-var sGetVoiceConnectorStreamingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorStreamingConfiguration, Traits: &t47, Type: smithy.ShapeTypeOperation, Ext: &ext[47]})
-var sGetVoiceConnectorTermination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorTermination, Traits: &t48, Type: smithy.ShapeTypeOperation, Ext: &ext[48]})
-var sGetVoiceConnectorTerminationHealth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorTerminationHealth, Traits: &t49, Type: smithy.ShapeTypeOperation, Ext: &ext[49]})
-var sGetVoiceProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceProfile, Traits: &t50, Type: smithy.ShapeTypeOperation, Ext: &ext[50]})
-var sGetVoiceProfileDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceProfileDomain, Traits: &t51, Type: smithy.ShapeTypeOperation, Ext: &ext[51]})
-var sGetVoiceToneAnalysisTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceToneAnalysisTask, Traits: &t52, Type: smithy.ShapeTypeOperation, Ext: &ext[52]})
-var sListAvailableVoiceConnectorRegions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAvailableVoiceConnectorRegions, Traits: &t53, Type: smithy.ShapeTypeOperation, Ext: &ext[53]})
-var sListPhoneNumberOrders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPhoneNumberOrders, Traits: &t54, Type: smithy.ShapeTypeOperation, Ext: &ext[54]})
-var sListPhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPhoneNumbers, Traits: &t55, Type: smithy.ShapeTypeOperation, Ext: &ext[55]})
-var sListProxySessions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProxySessions, Traits: &t56, Type: smithy.ShapeTypeOperation, Ext: &ext[56]})
-var sListSipMediaApplications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSipMediaApplications, Traits: &t57, Type: smithy.ShapeTypeOperation, Ext: &ext[57]})
-var sListSipRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSipRules, Traits: &t58, Type: smithy.ShapeTypeOperation, Ext: &ext[58]})
-var sListSupportedPhoneNumberCountries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupportedPhoneNumberCountries, Traits: &t59, Type: smithy.ShapeTypeOperation, Ext: &ext[59]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t60, Type: smithy.ShapeTypeOperation, Ext: &ext[60]})
-var sListVoiceConnectorGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceConnectorGroups, Traits: &t61, Type: smithy.ShapeTypeOperation, Ext: &ext[61]})
-var sListVoiceConnectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceConnectors, Traits: &t62, Type: smithy.ShapeTypeOperation, Ext: &ext[62]})
-var sListVoiceConnectorTerminationCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceConnectorTerminationCredentials, Traits: &t63, Type: smithy.ShapeTypeOperation, Ext: &ext[63]})
-var sListVoiceProfileDomains = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceProfileDomains, Traits: &t64, Type: smithy.ShapeTypeOperation, Ext: &ext[64]})
-var sListVoiceProfiles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceProfiles, Traits: &t65, Type: smithy.ShapeTypeOperation, Ext: &ext[65]})
-var sPutSipMediaApplicationAlexaSkillConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSipMediaApplicationAlexaSkillConfiguration, Traits: &t66, Type: smithy.ShapeTypeOperation, Ext: &ext[66]})
-var sPutSipMediaApplicationLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSipMediaApplicationLoggingConfiguration, Traits: &t67, Type: smithy.ShapeTypeOperation, Ext: &ext[67]})
-var sPutVoiceConnectorEmergencyCallingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorEmergencyCallingConfiguration, Traits: &t68, Type: smithy.ShapeTypeOperation, Ext: &ext[68]})
-var sPutVoiceConnectorExternalSystemsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorExternalSystemsConfiguration, Traits: &t69, Type: smithy.ShapeTypeOperation, Ext: &ext[69]})
-var sPutVoiceConnectorLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorLoggingConfiguration, Traits: &t70, Type: smithy.ShapeTypeOperation, Ext: &ext[70]})
-var sPutVoiceConnectorOrigination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorOrigination, Traits: &t71, Type: smithy.ShapeTypeOperation, Ext: &ext[71]})
-var sPutVoiceConnectorProxy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorProxy, Traits: &t72, Type: smithy.ShapeTypeOperation, Ext: &ext[72]})
-var sPutVoiceConnectorStreamingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorStreamingConfiguration, Traits: &t73, Type: smithy.ShapeTypeOperation, Ext: &ext[73]})
-var sPutVoiceConnectorTermination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorTermination, Traits: &t74, Type: smithy.ShapeTypeOperation, Ext: &ext[74]})
-var sPutVoiceConnectorTerminationCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorTerminationCredentials, Traits: &t75, Type: smithy.ShapeTypeOperation, Ext: &ext[75]})
-var sRestorePhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestorePhoneNumber, Traits: &t76, Type: smithy.ShapeTypeOperation, Ext: &ext[76]})
-var sSearchAvailablePhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchAvailablePhoneNumbers, Traits: &t77, Type: smithy.ShapeTypeOperation, Ext: &ext[77]})
-var sStartSpeakerSearchTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSpeakerSearchTask, Traits: &t78, Type: smithy.ShapeTypeOperation, Ext: &ext[78]})
-var sStartVoiceToneAnalysisTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartVoiceToneAnalysisTask, Traits: &t79, Type: smithy.ShapeTypeOperation, Ext: &ext[79]})
-var sStopSpeakerSearchTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopSpeakerSearchTask, Traits: &t80, Type: smithy.ShapeTypeOperation, Ext: &ext[80]})
-var sStopVoiceToneAnalysisTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopVoiceToneAnalysisTask, Traits: &t81, Type: smithy.ShapeTypeOperation, Ext: &ext[81]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t82, Type: smithy.ShapeTypeOperation, Ext: &ext[82]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t83, Type: smithy.ShapeTypeOperation, Ext: &ext[83]})
-var sUpdateGlobalSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGlobalSettings, Traits: &t84, Type: smithy.ShapeTypeOperation, Ext: &ext[84]})
-var sUpdatePhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePhoneNumber, Traits: &t85, Type: smithy.ShapeTypeOperation, Ext: &ext[85]})
-var sUpdatePhoneNumberSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePhoneNumberSettings, Traits: &t86, Type: smithy.ShapeTypeOperation, Ext: &ext[86]})
-var sUpdateProxySession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxySession, Traits: &t87, Type: smithy.ShapeTypeOperation, Ext: &ext[87]})
-var sUpdateSipMediaApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSipMediaApplication, Traits: &t88, Type: smithy.ShapeTypeOperation, Ext: &ext[88]})
-var sUpdateSipMediaApplicationCall = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSipMediaApplicationCall, Traits: &t89, Type: smithy.ShapeTypeOperation, Ext: &ext[89]})
-var sUpdateSipRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSipRule, Traits: &t90, Type: smithy.ShapeTypeOperation, Ext: &ext[90]})
-var sUpdateVoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVoiceConnector, Traits: &t91, Type: smithy.ShapeTypeOperation, Ext: &ext[91]})
-var sUpdateVoiceConnectorGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVoiceConnectorGroup, Traits: &t92, Type: smithy.ShapeTypeOperation, Ext: &ext[92]})
-var sUpdateVoiceProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVoiceProfile, Traits: &t93, Type: smithy.ShapeTypeOperation, Ext: &ext[93]})
-var sUpdateVoiceProfileDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVoiceProfileDomain, Traits: &t94, Type: smithy.ShapeTypeOperation, Ext: &ext[94]})
-var sValidateE911Address = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidateE911Address, Traits: &t95, Type: smithy.ShapeTypeOperation, Ext: &ext[95]})
-var s_ChimeSDKTelephonyService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChimeSDKTelephonyService, Type: smithy.ShapeTypeService, Ext: &ext[96]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t96, Type: smithy.ShapeTypeStructure, Ext: &ext[97]})
-var sAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &ext[100]})
-var s_AlexaSkillId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlexaSkillId, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &ext[111]})
-var s_AlexaSkillIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlexaSkillIdList, Members: &m_AlexaSkillIdList, Type: smithy.ShapeTypeList, Ext: &ext[112]})
-var sAlexaSkillStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlexaSkillStatus, Members: &mAlexaSkillStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[114]})
-var s_Alpha2CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Alpha2CountryCode, Type: smithy.ShapeTypeString, Ext: &ext[117]})
-var s_AreaCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AreaCode, Type: smithy.ShapeTypeString, Ext: &ext[118]})
-var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &ext[119]})
-var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t99, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[123]})
-var sCallDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCallDetails, Members: &mCallDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[124]})
-var sCallDistributionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCallDistributionType, Members: &mCallDistributionType, Type: smithy.ShapeTypeEnum, Ext: &ext[128]})
-var s_CallingName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CallingName, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &ext[131]})
-var sCallingNameStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCallingNameStatus, Members: &mCallingNameStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[132]})
-var s_CallingRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CallingRegion, Type: smithy.ShapeTypeString, Ext: &ext[137]})
-var s_CallingRegionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CallingRegionList, Members: &m_CallingRegionList, Type: smithy.ShapeTypeList, Ext: &ext[138]})
-var sCallLegType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCallLegType, Members: &mCallLegType, Type: smithy.ShapeTypeEnum, Ext: &ext[140]})
-var sCandidateAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCandidateAddress, Members: &mCandidateAddress, Type: smithy.ShapeTypeStructure, Ext: &ext[143]})
-var s_CandidateAddressList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CandidateAddressList, Members: &m_CandidateAddressList, Type: smithy.ShapeTypeList, Ext: &ext[151]})
-var sCapability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapability, Members: &mCapability, Type: smithy.ShapeTypeEnum, Ext: &ext[153]})
-var s_CapabilityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapabilityList, Members: &m_CapabilityList, Type: smithy.ShapeTypeList, Ext: &ext[156]})
-var s_ClientRequestId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientRequestId, Type: smithy.ShapeTypeString, Ext: &ext[158]})
-var s_ConfidenceScore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfidenceScore, Type: smithy.ShapeTypeFloat, Ext: &ext[159]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t101, Type: smithy.ShapeTypeStructure, Ext: &ext[160]})
-var sContactCenterSystemType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContactCenterSystemType, Members: &mContactCenterSystemType, Type: smithy.ShapeTypeEnum, Ext: &ext[163]})
-var s_ContactCenterSystemTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactCenterSystemTypeList, Members: &m_ContactCenterSystemTypeList, Type: smithy.ShapeTypeList, Ext: &ext[168]})
-var s_Country = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Country, Type: smithy.ShapeTypeString, Ext: &ext[170]})
-var s_CountryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CountryList, Members: &m_CountryList, Type: smithy.ShapeTypeList, Ext: &ext[171]})
-var s_CpsLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CpsLimit, Type: smithy.ShapeTypeInteger, Ext: &ext[173]})
-var sCredential = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCredential, Members: &mCredential, Type: smithy.ShapeTypeStructure, Ext: &ext[174]})
-var s_CredentialList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CredentialList, Members: &m_CredentialList, Type: smithy.ShapeTypeList, Ext: &ext[177]})
-var s_DataRetentionInHours = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataRetentionInHours, Type: smithy.ShapeTypeInteger, Ext: &ext[179]})
-var sDNISEmergencyCallingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDNISEmergencyCallingConfiguration, Members: &mDNISEmergencyCallingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[180]})
-var s_DNISEmergencyCallingConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DNISEmergencyCallingConfigurationList, Members: &m_DNISEmergencyCallingConfigurationList, Type: smithy.ShapeTypeList, Ext: &ext[184]})
-var s_E164PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_E164PhoneNumber, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &ext[186]})
-var s_E164PhoneNumberList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_E164PhoneNumberList, Members: &m_E164PhoneNumberList, Type: smithy.ShapeTypeList, Ext: &ext[187]})
-var sEmergencyCallingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmergencyCallingConfiguration, Members: &mEmergencyCallingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[189]})
-var sErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[191]})
-var sExternalSystemsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExternalSystemsConfiguration, Members: &mExternalSystemsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[209]})
-var sForbiddenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForbiddenException, Members: &mForbiddenException, Traits: &t96, Type: smithy.ShapeTypeStructure, Ext: &ext[212]})
-var s_FunctionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FunctionArn, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &ext[215]})
-var sGeoMatchLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeoMatchLevel, Members: &mGeoMatchLevel, Type: smithy.ShapeTypeEnum, Ext: &ext[216]})
-var sGeoMatchParams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeoMatchParams, Members: &mGeoMatchParams, Type: smithy.ShapeTypeStructure, Ext: &ext[219]})
-var sGoneException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGoneException, Members: &mGoneException, Traits: &t102, Type: smithy.ShapeTypeStructure, Ext: &ext[222]})
-var s_GuidString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuidString, Type: smithy.ShapeTypeString, Ext: &ext[225]})
-var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[226]})
-var s_Iso8601Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Iso8601Timestamp, Traits: &t103, Type: smithy.ShapeTypeTimestamp, Ext: &ext[227]})
-var sLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLanguageCode, Members: &mLanguageCode, Type: smithy.ShapeTypeEnum, Ext: &ext[228]})
-var sLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoggingConfiguration, Members: &mLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[230]})
-var sMediaInsightsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaInsightsConfiguration, Members: &mMediaInsightsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[233]})
-var sNetworkType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum, Ext: &ext[236]})
-var s_NextTokenString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextTokenString, Type: smithy.ShapeTypeString, Ext: &ext[239]})
-var s_NonEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ext[240]})
-var s_NonEmptyString128 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyString128, Type: smithy.ShapeTypeString, Ext: &ext[241]})
-var s_NonEmptyString256 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &ext[242]})
-var s_NonEmptyStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyStringList, Members: &m_NonEmptyStringList, Type: smithy.ShapeTypeList, Ext: &ext[243]})
-var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t104, Type: smithy.ShapeTypeStructure, Ext: &ext[245]})
-var sNotificationTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationTarget, Members: &mNotificationTarget, Type: smithy.ShapeTypeEnum, Ext: &ext[248]})
-var s_NullableBoolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[252]})
-var sNumberSelectionBehavior = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNumberSelectionBehavior, Members: &mNumberSelectionBehavior, Type: smithy.ShapeTypeEnum, Ext: &ext[253]})
-var sOrderedPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrderedPhoneNumber, Members: &mOrderedPhoneNumber, Type: smithy.ShapeTypeStructure, Ext: &ext[256]})
-var s_OrderedPhoneNumberList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrderedPhoneNumberList, Members: &m_OrderedPhoneNumberList, Type: smithy.ShapeTypeList, Ext: &ext[259]})
-var sOrderedPhoneNumberStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrderedPhoneNumberStatus, Members: &mOrderedPhoneNumberStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[261]})
-var sOrigination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrigination, Members: &mOrigination, Type: smithy.ShapeTypeStructure, Ext: &ext[265]})
-var sOriginationRoute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOriginationRoute, Members: &mOriginationRoute, Type: smithy.ShapeTypeStructure, Ext: &ext[268]})
-var s_OriginationRouteList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OriginationRouteList, Members: &m_OriginationRouteList, Type: smithy.ShapeTypeList, Ext: &ext[274]})
-var s_OriginationRoutePriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OriginationRoutePriority, Type: smithy.ShapeTypeInteger, Ext: &ext[276]})
-var sOriginationRouteProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOriginationRouteProtocol, Members: &mOriginationRouteProtocol, Type: smithy.ShapeTypeEnum, Ext: &ext[277]})
-var s_OriginationRouteWeight = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OriginationRouteWeight, Type: smithy.ShapeTypeInteger, Ext: &ext[280]})
-var sParticipant = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParticipant, Members: &mParticipant, Type: smithy.ShapeTypeStructure, Ext: &ext[281]})
-var s_ParticipantPhoneNumberList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParticipantPhoneNumberList, Members: &m_ParticipantPhoneNumberList, Type: smithy.ShapeTypeList, Ext: &ext[284]})
-var s_Participants = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Participants, Members: &m_Participants, Type: smithy.ShapeTypeList, Ext: &ext[286]})
-var sPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumber, Members: &mPhoneNumber, Type: smithy.ShapeTypeStructure, Ext: &ext[288]})
-var sPhoneNumberAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberAssociation, Members: &mPhoneNumberAssociation, Type: smithy.ShapeTypeStructure, Ext: &ext[305]})
-var s_PhoneNumberAssociationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberAssociationList, Members: &m_PhoneNumberAssociationList, Type: smithy.ShapeTypeList, Ext: &ext[309]})
-var sPhoneNumberAssociationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberAssociationName, Members: &mPhoneNumberAssociationName, Type: smithy.ShapeTypeEnum, Ext: &ext[311]})
-var sPhoneNumberCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberCapabilities, Members: &mPhoneNumberCapabilities, Type: smithy.ShapeTypeStructure, Ext: &ext[315]})
-var s_PhoneNumberCountriesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberCountriesList, Members: &m_PhoneNumberCountriesList, Type: smithy.ShapeTypeList, Ext: &ext[322]})
-var sPhoneNumberCountry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberCountry, Members: &mPhoneNumberCountry, Type: smithy.ShapeTypeStructure, Ext: &ext[324]})
-var sPhoneNumberError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberError, Members: &mPhoneNumberError, Type: smithy.ShapeTypeStructure, Ext: &ext[327]})
-var s_PhoneNumberErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberErrorList, Members: &m_PhoneNumberErrorList, Type: smithy.ShapeTypeList, Ext: &ext[331]})
-var s_PhoneNumberList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberList, Members: &m_PhoneNumberList, Type: smithy.ShapeTypeList, Ext: &ext[333]})
-var s_PhoneNumberMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[335]})
-var s_PhoneNumberName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberName, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &ext[336]})
-var sPhoneNumberOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberOrder, Members: &mPhoneNumberOrder, Type: smithy.ShapeTypeStructure, Ext: &ext[337]})
-var s_PhoneNumberOrderList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberOrderList, Members: &m_PhoneNumberOrderList, Type: smithy.ShapeTypeList, Ext: &ext[346]})
-var sPhoneNumberOrderStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberOrderStatus, Members: &mPhoneNumberOrderStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[348]})
-var sPhoneNumberOrderType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberOrderType, Members: &mPhoneNumberOrderType, Type: smithy.ShapeTypeEnum, Ext: &ext[360]})
-var sPhoneNumberProductType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberProductType, Members: &mPhoneNumberProductType, Type: smithy.ShapeTypeEnum, Ext: &ext[363]})
-var sPhoneNumberStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberStatus, Members: &mPhoneNumberStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[366]})
-var sPhoneNumberType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberType, Members: &mPhoneNumberType, Type: smithy.ShapeTypeEnum, Ext: &ext[378]})
-var s_PhoneNumberTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberTypeList, Members: &m_PhoneNumberTypeList, Type: smithy.ShapeTypeList, Ext: &ext[381]})
-var s_Port = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Port, Type: smithy.ShapeTypeInteger, Ext: &ext[383]})
-var s_PositiveInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[384]})
-var sProxy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxy, Members: &mProxy, Type: smithy.ShapeTypeStructure, Ext: &ext[385]})
-var sProxySession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxySession, Members: &mProxySession, Type: smithy.ShapeTypeStructure, Ext: &ext[390]})
-var s_ProxySessionNameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxySessionNameString, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &ext[404]})
-var s_ProxySessions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxySessions, Members: &m_ProxySessions, Type: smithy.ShapeTypeList, Ext: &ext[405]})
-var sProxySessionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxySessionStatus, Members: &mProxySessionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[407]})
-var sResourceLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceLimitExceededException, Members: &mResourceLimitExceededException, Traits: &t99, Type: smithy.ShapeTypeStructure, Ext: &ext[411]})
-var s_ResultMax = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResultMax, Type: smithy.ShapeTypeInteger, Ext: &ext[414]})
-var s_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &ext[415]})
-var s_SensitiveNonEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveNonEmptyString, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &ext[416]})
-var s_SensitiveString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveString, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &ext[417]})
-var s_SensitiveStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveStringList, Members: &m_SensitiveStringList, Type: smithy.ShapeTypeList, Ext: &ext[418]})
-var sServerSideEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerSideEncryptionConfiguration, Members: &mServerSideEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[420]})
-var sServiceFailureException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceFailureException, Members: &mServiceFailureException, Traits: &t106, Type: smithy.ShapeTypeStructure, Ext: &ext[422]})
-var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t107, Type: smithy.ShapeTypeStructure, Ext: &ext[425]})
-var sSessionBorderControllerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSessionBorderControllerType, Members: &mSessionBorderControllerType, Type: smithy.ShapeTypeEnum, Ext: &ext[428]})
-var s_SessionBorderControllerTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionBorderControllerTypeList, Members: &m_SessionBorderControllerTypeList, Type: smithy.ShapeTypeList, Ext: &ext[434]})
-var s_SipApplicationPriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SipApplicationPriority, Type: smithy.ShapeTypeInteger, Ext: &ext[436]})
-var s_SipHeadersMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SipHeadersMap, Members: &m_SipHeadersMap, Type: smithy.ShapeTypeMap, Ext: &ext[437]})
-var sSipMediaApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSipMediaApplication, Members: &mSipMediaApplication, Type: smithy.ShapeTypeStructure, Ext: &ext[440]})
-var sSipMediaApplicationAlexaSkillConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSipMediaApplicationAlexaSkillConfiguration, Members: &mSipMediaApplicationAlexaSkillConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[448]})
-var sSipMediaApplicationCall = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSipMediaApplicationCall, Members: &mSipMediaApplicationCall, Type: smithy.ShapeTypeStructure, Ext: &ext[451]})
-var sSipMediaApplicationEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSipMediaApplicationEndpoint, Members: &mSipMediaApplicationEndpoint, Type: smithy.ShapeTypeStructure, Ext: &ext[453]})
-var s_SipMediaApplicationEndpointList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SipMediaApplicationEndpointList, Members: &m_SipMediaApplicationEndpointList, Type: smithy.ShapeTypeList, Ext: &ext[455]})
-var s_SipMediaApplicationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SipMediaApplicationList, Members: &m_SipMediaApplicationList, Type: smithy.ShapeTypeList, Ext: &ext[457]})
-var sSipMediaApplicationLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSipMediaApplicationLoggingConfiguration, Members: &mSipMediaApplicationLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[459]})
-var s_SipMediaApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SipMediaApplicationName, Type: smithy.ShapeTypeString, Ext: &ext[461]})
-var sSipRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSipRule, Members: &mSipRule, Type: smithy.ShapeTypeStructure, Ext: &ext[462]})
-var s_SipRuleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SipRuleList, Members: &m_SipRuleList, Type: smithy.ShapeTypeList, Ext: &ext[471]})
-var s_SipRuleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SipRuleName, Type: smithy.ShapeTypeString, Ext: &ext[473]})
-var sSipRuleTargetApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSipRuleTargetApplication, Members: &mSipRuleTargetApplication, Type: smithy.ShapeTypeStructure, Ext: &ext[474]})
-var s_SipRuleTargetApplicationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SipRuleTargetApplicationList, Members: &m_SipRuleTargetApplicationList, Type: smithy.ShapeTypeList, Ext: &ext[478]})
-var sSipRuleTriggerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSipRuleTriggerType, Members: &mSipRuleTriggerType, Type: smithy.ShapeTypeEnum, Ext: &ext[480]})
-var s_SMACreateCallArgumentsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SMACreateCallArgumentsMap, Members: &m_SMACreateCallArgumentsMap, Type: smithy.ShapeTypeMap, Ext: &ext[483]})
-var s_SMAUpdateCallArgumentsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SMAUpdateCallArgumentsMap, Members: &m_SMAUpdateCallArgumentsMap, Type: smithy.ShapeTypeMap, Ext: &ext[486]})
-var sSpeakerSearchDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpeakerSearchDetails, Members: &mSpeakerSearchDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[489]})
-var sSpeakerSearchResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpeakerSearchResult, Members: &mSpeakerSearchResult, Type: smithy.ShapeTypeStructure, Ext: &ext[492]})
-var s_SpeakerSearchResultList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SpeakerSearchResultList, Members: &m_SpeakerSearchResultList, Type: smithy.ShapeTypeList, Ext: &ext[495]})
-var sSpeakerSearchTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpeakerSearchTask, Members: &mSpeakerSearchTask, Type: smithy.ShapeTypeStructure, Ext: &ext[497]})
-var sStreamingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamingConfiguration, Members: &mStreamingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[506]})
-var sStreamingNotificationTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamingNotificationTarget, Members: &mStreamingNotificationTarget, Type: smithy.ShapeTypeStructure, Ext: &ext[511]})
-var s_StreamingNotificationTargetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamingNotificationTargetList, Members: &m_StreamingNotificationTargetList, Type: smithy.ShapeTypeList, Ext: &ext[513]})
-var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[515]})
-var s_String128 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String128, Type: smithy.ShapeTypeString, Ext: &ext[516]})
-var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[517]})
-var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[519]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &ext[522]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[523]})
-var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[525]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &ext[527]})
-var sTermination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTermination, Members: &mTermination, Type: smithy.ShapeTypeStructure, Ext: &ext[528]})
-var sTerminationHealth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminationHealth, Members: &mTerminationHealth, Type: smithy.ShapeTypeStructure, Ext: &ext[534]})
-var sThrottledClientException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottledClientException, Members: &mThrottledClientException, Traits: &t108, Type: smithy.ShapeTypeStructure, Ext: &ext[537]})
-var s_TollFreePrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TollFreePrefix, Type: smithy.ShapeTypeString, Ext: &ext[540]})
-var sUnauthorizedClientException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthorizedClientException, Members: &mUnauthorizedClientException, Traits: &t109, Type: smithy.ShapeTypeStructure, Ext: &ext[541]})
-var sUnprocessableEntityException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnprocessableEntityException, Members: &mUnprocessableEntityException, Traits: &t110, Type: smithy.ShapeTypeStructure, Ext: &ext[544]})
-var sUpdatePhoneNumberRequestItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePhoneNumberRequestItem, Members: &mUpdatePhoneNumberRequestItem, Type: smithy.ShapeTypeStructure, Ext: &ext[547]})
-var s_UpdatePhoneNumberRequestItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdatePhoneNumberRequestItemList, Members: &m_UpdatePhoneNumberRequestItemList, Type: smithy.ShapeTypeList, Ext: &ext[552]})
-var s_ValidationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationResult, Type: smithy.ShapeTypeInteger, Ext: &ext[554]})
-var sVoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceConnector, Members: &mVoiceConnector, Type: smithy.ShapeTypeStructure, Ext: &ext[555]})
-var sVoiceConnectorAwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceConnectorAwsRegion, Members: &mVoiceConnectorAwsRegion, Type: smithy.ShapeTypeEnum, Ext: &ext[566]})
-var s_VoiceConnectorAwsRegionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceConnectorAwsRegionList, Members: &m_VoiceConnectorAwsRegionList, Type: smithy.ShapeTypeList, Ext: &ext[577]})
-var sVoiceConnectorGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceConnectorGroup, Members: &mVoiceConnectorGroup, Type: smithy.ShapeTypeStructure, Ext: &ext[579]})
-var s_VoiceConnectorGroupList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceConnectorGroupList, Members: &m_VoiceConnectorGroupList, Type: smithy.ShapeTypeList, Ext: &ext[587]})
-var s_VoiceConnectorGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceConnectorGroupName, Type: smithy.ShapeTypeString, Ext: &ext[589]})
-var s_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceConnectorId, Type: smithy.ShapeTypeString, Ext: &ext[590]})
-var sVoiceConnectorIntegrationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceConnectorIntegrationType, Members: &mVoiceConnectorIntegrationType, Type: smithy.ShapeTypeEnum, Ext: &ext[591]})
-var sVoiceConnectorItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceConnectorItem, Members: &mVoiceConnectorItem, Type: smithy.ShapeTypeStructure, Ext: &ext[594]})
-var s_VoiceConnectorItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceConnectorItemList, Members: &m_VoiceConnectorItemList, Type: smithy.ShapeTypeList, Ext: &ext[597]})
-var s_VoiceConnectorItemPriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceConnectorItemPriority, Type: smithy.ShapeTypeInteger, Ext: &ext[599]})
-var s_VoiceConnectorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceConnectorList, Members: &m_VoiceConnectorList, Type: smithy.ShapeTypeList, Ext: &ext[600]})
-var s_VoiceConnectorName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceConnectorName, Type: smithy.ShapeTypeString, Ext: &ext[602]})
-var sVoiceConnectorSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceConnectorSettings, Members: &mVoiceConnectorSettings, Type: smithy.ShapeTypeStructure, Ext: &ext[603]})
-var sVoiceProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceProfile, Members: &mVoiceProfile, Type: smithy.ShapeTypeStructure, Ext: &ext[605]})
-var sVoiceProfileDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceProfileDomain, Members: &mVoiceProfileDomain, Type: smithy.ShapeTypeStructure, Ext: &ext[612]})
-var s_VoiceProfileDomainDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceProfileDomainDescription, Type: smithy.ShapeTypeString, Ext: &ext[620]})
-var s_VoiceProfileDomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceProfileDomainName, Type: smithy.ShapeTypeString, Ext: &ext[621]})
-var sVoiceProfileDomainSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceProfileDomainSummary, Members: &mVoiceProfileDomainSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[622]})
-var s_VoiceProfileDomainSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceProfileDomainSummaryList, Members: &m_VoiceProfileDomainSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[629]})
-var sVoiceProfileSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceProfileSummary, Members: &mVoiceProfileSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[631]})
-var s_VoiceProfileSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceProfileSummaryList, Members: &m_VoiceProfileSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[638]})
-var sVoiceToneAnalysisTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceToneAnalysisTask, Members: &mVoiceToneAnalysisTask, Type: smithy.ShapeTypeStructure, Ext: &ext[640]})
-var sAssociatePhoneNumbersWithVoiceConnectorGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatePhoneNumbersWithVoiceConnectorGroupRequest, Members: &mAssociatePhoneNumbersWithVoiceConnectorGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[648]})
-var sAssociatePhoneNumbersWithVoiceConnectorGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatePhoneNumbersWithVoiceConnectorGroupResponse, Members: &mAssociatePhoneNumbersWithVoiceConnectorGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[652]})
-var sAssociatePhoneNumbersWithVoiceConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatePhoneNumbersWithVoiceConnectorRequest, Members: &mAssociatePhoneNumbersWithVoiceConnectorRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[654]})
-var sAssociatePhoneNumbersWithVoiceConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatePhoneNumbersWithVoiceConnectorResponse, Members: &mAssociatePhoneNumbersWithVoiceConnectorResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[658]})
-var sBatchDeletePhoneNumberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeletePhoneNumberRequest, Members: &mBatchDeletePhoneNumberRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[660]})
-var sBatchDeletePhoneNumberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeletePhoneNumberResponse, Members: &mBatchDeletePhoneNumberResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[662]})
-var sBatchUpdatePhoneNumberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdatePhoneNumberRequest, Members: &mBatchUpdatePhoneNumberRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[664]})
-var sBatchUpdatePhoneNumberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdatePhoneNumberResponse, Members: &mBatchUpdatePhoneNumberResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[666]})
-var sCreatePhoneNumberOrderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePhoneNumberOrderRequest, Members: &mCreatePhoneNumberOrderRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[668]})
-var sCreatePhoneNumberOrderResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePhoneNumberOrderResponse, Members: &mCreatePhoneNumberOrderResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[672]})
-var sCreateProxySessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxySessionRequest, Members: &mCreateProxySessionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[674]})
-var sCreateProxySessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxySessionResponse, Members: &mCreateProxySessionResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[683]})
-var sCreateSipMediaApplicationCallRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSipMediaApplicationCallRequest, Members: &mCreateSipMediaApplicationCallRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[685]})
-var sCreateSipMediaApplicationCallResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSipMediaApplicationCallResponse, Members: &mCreateSipMediaApplicationCallResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[691]})
-var sCreateSipMediaApplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSipMediaApplicationRequest, Members: &mCreateSipMediaApplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[693]})
-var sCreateSipMediaApplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSipMediaApplicationResponse, Members: &mCreateSipMediaApplicationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[698]})
-var sCreateSipRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSipRuleRequest, Members: &mCreateSipRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[700]})
-var sCreateSipRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSipRuleResponse, Members: &mCreateSipRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[706]})
-var sCreateVoiceConnectorGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVoiceConnectorGroupRequest, Members: &mCreateVoiceConnectorGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[708]})
-var sCreateVoiceConnectorGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVoiceConnectorGroupResponse, Members: &mCreateVoiceConnectorGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[712]})
-var sCreateVoiceConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVoiceConnectorRequest, Members: &mCreateVoiceConnectorRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[714]})
-var sCreateVoiceConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVoiceConnectorResponse, Members: &mCreateVoiceConnectorResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[721]})
-var sCreateVoiceProfileDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVoiceProfileDomainRequest, Members: &mCreateVoiceProfileDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[723]})
-var sCreateVoiceProfileDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVoiceProfileDomainResponse, Members: &mCreateVoiceProfileDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[729]})
-var sCreateVoiceProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVoiceProfileRequest, Members: &mCreateVoiceProfileRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[731]})
-var sCreateVoiceProfileResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVoiceProfileResponse, Members: &mCreateVoiceProfileResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[733]})
-var sDeletePhoneNumberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePhoneNumberRequest, Members: &mDeletePhoneNumberRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[735]})
-var sDeleteProxySessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxySessionRequest, Members: &mDeleteProxySessionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[737]})
-var sDeleteSipMediaApplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSipMediaApplicationRequest, Members: &mDeleteSipMediaApplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[740]})
-var sDeleteSipRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSipRuleRequest, Members: &mDeleteSipRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[742]})
-var sDeleteVoiceConnectorEmergencyCallingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorEmergencyCallingConfigurationRequest, Members: &mDeleteVoiceConnectorEmergencyCallingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[744]})
-var sDeleteVoiceConnectorExternalSystemsConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorExternalSystemsConfigurationRequest, Members: &mDeleteVoiceConnectorExternalSystemsConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[746]})
-var sDeleteVoiceConnectorGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorGroupRequest, Members: &mDeleteVoiceConnectorGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[748]})
-var sDeleteVoiceConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorRequest, Members: &mDeleteVoiceConnectorRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[750]})
-var sDeleteVoiceConnectorOriginationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorOriginationRequest, Members: &mDeleteVoiceConnectorOriginationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[752]})
-var sDeleteVoiceConnectorProxyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorProxyRequest, Members: &mDeleteVoiceConnectorProxyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[754]})
-var sDeleteVoiceConnectorStreamingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorStreamingConfigurationRequest, Members: &mDeleteVoiceConnectorStreamingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[756]})
-var sDeleteVoiceConnectorTerminationCredentialsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorTerminationCredentialsRequest, Members: &mDeleteVoiceConnectorTerminationCredentialsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[758]})
-var sDeleteVoiceConnectorTerminationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorTerminationRequest, Members: &mDeleteVoiceConnectorTerminationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[761]})
-var sDeleteVoiceProfileDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceProfileDomainRequest, Members: &mDeleteVoiceProfileDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[763]})
-var sDeleteVoiceProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceProfileRequest, Members: &mDeleteVoiceProfileRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[765]})
-var sDisassociatePhoneNumbersFromVoiceConnectorGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociatePhoneNumbersFromVoiceConnectorGroupRequest, Members: &mDisassociatePhoneNumbersFromVoiceConnectorGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[767]})
-var sDisassociatePhoneNumbersFromVoiceConnectorGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociatePhoneNumbersFromVoiceConnectorGroupResponse, Members: &mDisassociatePhoneNumbersFromVoiceConnectorGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[770]})
-var sDisassociatePhoneNumbersFromVoiceConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociatePhoneNumbersFromVoiceConnectorRequest, Members: &mDisassociatePhoneNumbersFromVoiceConnectorRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[772]})
-var sDisassociatePhoneNumbersFromVoiceConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociatePhoneNumbersFromVoiceConnectorResponse, Members: &mDisassociatePhoneNumbersFromVoiceConnectorResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[775]})
-var sGetGlobalSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGlobalSettingsResponse, Members: &mGetGlobalSettingsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[777]})
-var sGetPhoneNumberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPhoneNumberRequest, Members: &mGetPhoneNumberRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[779]})
-var sGetPhoneNumberOrderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPhoneNumberOrderRequest, Members: &mGetPhoneNumberOrderRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[781]})
-var sGetPhoneNumberOrderResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPhoneNumberOrderResponse, Members: &mGetPhoneNumberOrderResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[783]})
-var sGetPhoneNumberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPhoneNumberResponse, Members: &mGetPhoneNumberResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[785]})
-var sGetPhoneNumberSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPhoneNumberSettingsResponse, Members: &mGetPhoneNumberSettingsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[787]})
-var sGetProxySessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProxySessionRequest, Members: &mGetProxySessionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[790]})
-var sGetProxySessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProxySessionResponse, Members: &mGetProxySessionResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[793]})
-var sGetSipMediaApplicationAlexaSkillConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSipMediaApplicationAlexaSkillConfigurationRequest, Members: &mGetSipMediaApplicationAlexaSkillConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[795]})
-var sGetSipMediaApplicationAlexaSkillConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSipMediaApplicationAlexaSkillConfigurationResponse, Members: &mGetSipMediaApplicationAlexaSkillConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[797]})
-var sGetSipMediaApplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSipMediaApplicationRequest, Members: &mGetSipMediaApplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[799]})
-var sGetSipMediaApplicationLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSipMediaApplicationLoggingConfigurationRequest, Members: &mGetSipMediaApplicationLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[801]})
-var sGetSipMediaApplicationLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSipMediaApplicationLoggingConfigurationResponse, Members: &mGetSipMediaApplicationLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[803]})
-var sGetSipMediaApplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSipMediaApplicationResponse, Members: &mGetSipMediaApplicationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[805]})
-var sGetSipRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSipRuleRequest, Members: &mGetSipRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[807]})
-var sGetSipRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSipRuleResponse, Members: &mGetSipRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[809]})
-var sGetSpeakerSearchTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSpeakerSearchTaskRequest, Members: &mGetSpeakerSearchTaskRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[811]})
-var sGetSpeakerSearchTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSpeakerSearchTaskResponse, Members: &mGetSpeakerSearchTaskResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[814]})
-var sGetVoiceConnectorEmergencyCallingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorEmergencyCallingConfigurationRequest, Members: &mGetVoiceConnectorEmergencyCallingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[816]})
-var sGetVoiceConnectorEmergencyCallingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorEmergencyCallingConfigurationResponse, Members: &mGetVoiceConnectorEmergencyCallingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[818]})
-var sGetVoiceConnectorExternalSystemsConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorExternalSystemsConfigurationRequest, Members: &mGetVoiceConnectorExternalSystemsConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[820]})
-var sGetVoiceConnectorExternalSystemsConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorExternalSystemsConfigurationResponse, Members: &mGetVoiceConnectorExternalSystemsConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[822]})
-var sGetVoiceConnectorGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorGroupRequest, Members: &mGetVoiceConnectorGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[824]})
-var sGetVoiceConnectorGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorGroupResponse, Members: &mGetVoiceConnectorGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[826]})
-var sGetVoiceConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorRequest, Members: &mGetVoiceConnectorRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[828]})
-var sGetVoiceConnectorLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorLoggingConfigurationRequest, Members: &mGetVoiceConnectorLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[830]})
-var sGetVoiceConnectorLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorLoggingConfigurationResponse, Members: &mGetVoiceConnectorLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[832]})
-var sGetVoiceConnectorOriginationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorOriginationRequest, Members: &mGetVoiceConnectorOriginationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[834]})
-var sGetVoiceConnectorOriginationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorOriginationResponse, Members: &mGetVoiceConnectorOriginationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[836]})
-var sGetVoiceConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorResponse, Members: &mGetVoiceConnectorResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[838]})
-var sGetVoiceConnectorProxyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorProxyRequest, Members: &mGetVoiceConnectorProxyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[840]})
-var sGetVoiceConnectorProxyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorProxyResponse, Members: &mGetVoiceConnectorProxyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[842]})
-var sGetVoiceConnectorStreamingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorStreamingConfigurationRequest, Members: &mGetVoiceConnectorStreamingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[844]})
-var sGetVoiceConnectorStreamingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorStreamingConfigurationResponse, Members: &mGetVoiceConnectorStreamingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[846]})
-var sGetVoiceConnectorTerminationHealthRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorTerminationHealthRequest, Members: &mGetVoiceConnectorTerminationHealthRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[848]})
-var sGetVoiceConnectorTerminationHealthResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorTerminationHealthResponse, Members: &mGetVoiceConnectorTerminationHealthResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[850]})
-var sGetVoiceConnectorTerminationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorTerminationRequest, Members: &mGetVoiceConnectorTerminationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[852]})
-var sGetVoiceConnectorTerminationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorTerminationResponse, Members: &mGetVoiceConnectorTerminationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[854]})
-var sGetVoiceProfileDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceProfileDomainRequest, Members: &mGetVoiceProfileDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[856]})
-var sGetVoiceProfileDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceProfileDomainResponse, Members: &mGetVoiceProfileDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[858]})
-var sGetVoiceProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceProfileRequest, Members: &mGetVoiceProfileRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[860]})
-var sGetVoiceProfileResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceProfileResponse, Members: &mGetVoiceProfileResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[862]})
-var sGetVoiceToneAnalysisTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceToneAnalysisTaskRequest, Members: &mGetVoiceToneAnalysisTaskRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[864]})
-var sGetVoiceToneAnalysisTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceToneAnalysisTaskResponse, Members: &mGetVoiceToneAnalysisTaskResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[868]})
-var sListAvailableVoiceConnectorRegionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAvailableVoiceConnectorRegionsResponse, Members: &mListAvailableVoiceConnectorRegionsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[870]})
-var sListPhoneNumberOrdersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPhoneNumberOrdersRequest, Members: &mListPhoneNumberOrdersRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[872]})
-var sListPhoneNumberOrdersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPhoneNumberOrdersResponse, Members: &mListPhoneNumberOrdersResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[875]})
-var sListPhoneNumbersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPhoneNumbersRequest, Members: &mListPhoneNumbersRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[878]})
-var sListPhoneNumbersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPhoneNumbersResponse, Members: &mListPhoneNumbersResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[885]})
-var sListProxySessionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProxySessionsRequest, Members: &mListProxySessionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[888]})
-var sListProxySessionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProxySessionsResponse, Members: &mListProxySessionsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[893]})
-var sListSipMediaApplicationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSipMediaApplicationsRequest, Members: &mListSipMediaApplicationsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[896]})
-var sListSipMediaApplicationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSipMediaApplicationsResponse, Members: &mListSipMediaApplicationsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[899]})
-var sListSipRulesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSipRulesRequest, Members: &mListSipRulesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[902]})
-var sListSipRulesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSipRulesResponse, Members: &mListSipRulesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[906]})
-var sListSupportedPhoneNumberCountriesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupportedPhoneNumberCountriesRequest, Members: &mListSupportedPhoneNumberCountriesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[909]})
-var sListSupportedPhoneNumberCountriesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupportedPhoneNumberCountriesResponse, Members: &mListSupportedPhoneNumberCountriesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[911]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[913]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[915]})
-var sListVoiceConnectorGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceConnectorGroupsRequest, Members: &mListVoiceConnectorGroupsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[917]})
-var sListVoiceConnectorGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceConnectorGroupsResponse, Members: &mListVoiceConnectorGroupsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[920]})
-var sListVoiceConnectorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceConnectorsRequest, Members: &mListVoiceConnectorsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[923]})
-var sListVoiceConnectorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceConnectorsResponse, Members: &mListVoiceConnectorsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[926]})
-var sListVoiceConnectorTerminationCredentialsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceConnectorTerminationCredentialsRequest, Members: &mListVoiceConnectorTerminationCredentialsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[929]})
-var sListVoiceConnectorTerminationCredentialsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceConnectorTerminationCredentialsResponse, Members: &mListVoiceConnectorTerminationCredentialsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[931]})
-var sListVoiceProfileDomainsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceProfileDomainsRequest, Members: &mListVoiceProfileDomainsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[933]})
-var sListVoiceProfileDomainsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceProfileDomainsResponse, Members: &mListVoiceProfileDomainsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[936]})
-var sListVoiceProfilesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceProfilesRequest, Members: &mListVoiceProfilesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[939]})
-var sListVoiceProfilesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceProfilesResponse, Members: &mListVoiceProfilesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[943]})
-var sPutSipMediaApplicationAlexaSkillConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSipMediaApplicationAlexaSkillConfigurationRequest, Members: &mPutSipMediaApplicationAlexaSkillConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[946]})
-var sPutSipMediaApplicationAlexaSkillConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSipMediaApplicationAlexaSkillConfigurationResponse, Members: &mPutSipMediaApplicationAlexaSkillConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[949]})
-var sPutSipMediaApplicationLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSipMediaApplicationLoggingConfigurationRequest, Members: &mPutSipMediaApplicationLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[951]})
-var sPutSipMediaApplicationLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSipMediaApplicationLoggingConfigurationResponse, Members: &mPutSipMediaApplicationLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[954]})
-var sPutVoiceConnectorEmergencyCallingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorEmergencyCallingConfigurationRequest, Members: &mPutVoiceConnectorEmergencyCallingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[956]})
-var sPutVoiceConnectorEmergencyCallingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorEmergencyCallingConfigurationResponse, Members: &mPutVoiceConnectorEmergencyCallingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[959]})
-var sPutVoiceConnectorExternalSystemsConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorExternalSystemsConfigurationRequest, Members: &mPutVoiceConnectorExternalSystemsConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[961]})
-var sPutVoiceConnectorExternalSystemsConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorExternalSystemsConfigurationResponse, Members: &mPutVoiceConnectorExternalSystemsConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[965]})
-var sPutVoiceConnectorLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorLoggingConfigurationRequest, Members: &mPutVoiceConnectorLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[967]})
-var sPutVoiceConnectorLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorLoggingConfigurationResponse, Members: &mPutVoiceConnectorLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[970]})
-var sPutVoiceConnectorOriginationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorOriginationRequest, Members: &mPutVoiceConnectorOriginationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[972]})
-var sPutVoiceConnectorOriginationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorOriginationResponse, Members: &mPutVoiceConnectorOriginationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[975]})
-var sPutVoiceConnectorProxyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorProxyRequest, Members: &mPutVoiceConnectorProxyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[977]})
-var sPutVoiceConnectorProxyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorProxyResponse, Members: &mPutVoiceConnectorProxyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[983]})
-var sPutVoiceConnectorStreamingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorStreamingConfigurationRequest, Members: &mPutVoiceConnectorStreamingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[985]})
-var sPutVoiceConnectorStreamingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorStreamingConfigurationResponse, Members: &mPutVoiceConnectorStreamingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[988]})
-var sPutVoiceConnectorTerminationCredentialsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorTerminationCredentialsRequest, Members: &mPutVoiceConnectorTerminationCredentialsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[990]})
-var sPutVoiceConnectorTerminationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorTerminationRequest, Members: &mPutVoiceConnectorTerminationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[993]})
-var sPutVoiceConnectorTerminationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorTerminationResponse, Members: &mPutVoiceConnectorTerminationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[996]})
-var sRestorePhoneNumberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestorePhoneNumberRequest, Members: &mRestorePhoneNumberRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[998]})
-var sRestorePhoneNumberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestorePhoneNumberResponse, Members: &mRestorePhoneNumberResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1000]})
-var sSearchAvailablePhoneNumbersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchAvailablePhoneNumbersRequest, Members: &mSearchAvailablePhoneNumbersRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1002]})
-var sSearchAvailablePhoneNumbersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchAvailablePhoneNumbersResponse, Members: &mSearchAvailablePhoneNumbersResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1011]})
-var sStartSpeakerSearchTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSpeakerSearchTaskRequest, Members: &mStartSpeakerSearchTaskRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1014]})
-var sStartSpeakerSearchTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSpeakerSearchTaskResponse, Members: &mStartSpeakerSearchTaskResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1020]})
-var sStartVoiceToneAnalysisTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartVoiceToneAnalysisTaskRequest, Members: &mStartVoiceToneAnalysisTaskRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1022]})
-var sStartVoiceToneAnalysisTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartVoiceToneAnalysisTaskResponse, Members: &mStartVoiceToneAnalysisTaskResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1027]})
-var sStopSpeakerSearchTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopSpeakerSearchTaskRequest, Members: &mStopSpeakerSearchTaskRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1029]})
-var sStopVoiceToneAnalysisTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopVoiceToneAnalysisTaskRequest, Members: &mStopVoiceToneAnalysisTaskRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1032]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1035]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1038]})
-var sUpdateGlobalSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGlobalSettingsRequest, Members: &mUpdateGlobalSettingsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1041]})
-var sUpdatePhoneNumberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePhoneNumberRequest, Members: &mUpdatePhoneNumberRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1043]})
-var sUpdatePhoneNumberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePhoneNumberResponse, Members: &mUpdatePhoneNumberResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1048]})
-var sUpdatePhoneNumberSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePhoneNumberSettingsRequest, Members: &mUpdatePhoneNumberSettingsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1050]})
-var sUpdateProxySessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxySessionRequest, Members: &mUpdateProxySessionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1052]})
-var sUpdateProxySessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxySessionResponse, Members: &mUpdateProxySessionResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1057]})
-var sUpdateSipMediaApplicationCallRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSipMediaApplicationCallRequest, Members: &mUpdateSipMediaApplicationCallRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1059]})
-var sUpdateSipMediaApplicationCallResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSipMediaApplicationCallResponse, Members: &mUpdateSipMediaApplicationCallResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1063]})
-var sUpdateSipMediaApplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSipMediaApplicationRequest, Members: &mUpdateSipMediaApplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1065]})
-var sUpdateSipMediaApplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSipMediaApplicationResponse, Members: &mUpdateSipMediaApplicationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1069]})
-var sUpdateSipRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSipRuleRequest, Members: &mUpdateSipRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1071]})
-var sUpdateSipRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSipRuleResponse, Members: &mUpdateSipRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1076]})
-var sUpdateVoiceConnectorGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVoiceConnectorGroupRequest, Members: &mUpdateVoiceConnectorGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1078]})
-var sUpdateVoiceConnectorGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVoiceConnectorGroupResponse, Members: &mUpdateVoiceConnectorGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1083]})
-var sUpdateVoiceConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVoiceConnectorRequest, Members: &mUpdateVoiceConnectorRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1085]})
-var sUpdateVoiceConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVoiceConnectorResponse, Members: &mUpdateVoiceConnectorResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1089]})
-var sUpdateVoiceProfileDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVoiceProfileDomainRequest, Members: &mUpdateVoiceProfileDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1091]})
-var sUpdateVoiceProfileDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVoiceProfileDomainResponse, Members: &mUpdateVoiceProfileDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1095]})
-var sUpdateVoiceProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVoiceProfileRequest, Members: &mUpdateVoiceProfileRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1097]})
-var sUpdateVoiceProfileResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVoiceProfileResponse, Members: &mUpdateVoiceProfileResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1100]})
-var sValidateE911AddressRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidateE911AddressRequest, Members: &mValidateE911AddressRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1102]})
-var sValidateE911AddressResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidateE911AddressResponse, Members: &mValidateE911AddressResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1110]})
+var sAssociatePhoneNumbersWithVoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatePhoneNumbersWithVoiceConnector, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eAssociatePhoneNumbersWithVoiceConnector})
+var sAssociatePhoneNumbersWithVoiceConnectorGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatePhoneNumbersWithVoiceConnectorGroup, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eAssociatePhoneNumbersWithVoiceConnectorGroup})
+var sBatchDeletePhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeletePhoneNumber, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eBatchDeletePhoneNumber})
+var sBatchUpdatePhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdatePhoneNumber, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eBatchUpdatePhoneNumber})
+var sCreatePhoneNumberOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePhoneNumberOrder, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreatePhoneNumberOrder})
+var sCreateProxySession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxySession, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eCreateProxySession})
+var sCreateSipMediaApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSipMediaApplication, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eCreateSipMediaApplication})
+var sCreateSipMediaApplicationCall = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSipMediaApplicationCall, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eCreateSipMediaApplicationCall})
+var sCreateSipRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSipRule, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eCreateSipRule})
+var sCreateVoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVoiceConnector, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eCreateVoiceConnector})
+var sCreateVoiceConnectorGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVoiceConnectorGroup, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eCreateVoiceConnectorGroup})
+var sCreateVoiceProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVoiceProfile, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eCreateVoiceProfile})
+var sCreateVoiceProfileDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVoiceProfileDomain, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eCreateVoiceProfileDomain})
+var sDeletePhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePhoneNumber, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eDeletePhoneNumber})
+var sDeleteProxySession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxySession, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eDeleteProxySession})
+var sDeleteSipMediaApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSipMediaApplication, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eDeleteSipMediaApplication})
+var sDeleteSipRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSipRule, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eDeleteSipRule})
+var sDeleteVoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnector, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eDeleteVoiceConnector})
+var sDeleteVoiceConnectorEmergencyCallingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorEmergencyCallingConfiguration, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eDeleteVoiceConnectorEmergencyCallingConfiguration})
+var sDeleteVoiceConnectorExternalSystemsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorExternalSystemsConfiguration, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eDeleteVoiceConnectorExternalSystemsConfiguration})
+var sDeleteVoiceConnectorGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorGroup, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eDeleteVoiceConnectorGroup})
+var sDeleteVoiceConnectorOrigination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorOrigination, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eDeleteVoiceConnectorOrigination})
+var sDeleteVoiceConnectorProxy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorProxy, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eDeleteVoiceConnectorProxy})
+var sDeleteVoiceConnectorStreamingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorStreamingConfiguration, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eDeleteVoiceConnectorStreamingConfiguration})
+var sDeleteVoiceConnectorTermination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorTermination, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eDeleteVoiceConnectorTermination})
+var sDeleteVoiceConnectorTerminationCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorTerminationCredentials, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eDeleteVoiceConnectorTerminationCredentials})
+var sDeleteVoiceProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceProfile, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eDeleteVoiceProfile})
+var sDeleteVoiceProfileDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceProfileDomain, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eDeleteVoiceProfileDomain})
+var sDisassociatePhoneNumbersFromVoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociatePhoneNumbersFromVoiceConnector, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eDisassociatePhoneNumbersFromVoiceConnector})
+var sDisassociatePhoneNumbersFromVoiceConnectorGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociatePhoneNumbersFromVoiceConnectorGroup, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eDisassociatePhoneNumbersFromVoiceConnectorGroup})
+var sGetGlobalSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGlobalSettings, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &eGetGlobalSettings})
+var sGetPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPhoneNumber, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &eGetPhoneNumber})
+var sGetPhoneNumberOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPhoneNumberOrder, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &eGetPhoneNumberOrder})
+var sGetPhoneNumberSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPhoneNumberSettings, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &eGetPhoneNumberSettings})
+var sGetProxySession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProxySession, Traits: &t34, Type: smithy.ShapeTypeOperation, Ext: &eGetProxySession})
+var sGetSipMediaApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSipMediaApplication, Traits: &t35, Type: smithy.ShapeTypeOperation, Ext: &eGetSipMediaApplication})
+var sGetSipMediaApplicationAlexaSkillConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSipMediaApplicationAlexaSkillConfiguration, Traits: &t36, Type: smithy.ShapeTypeOperation, Ext: &eGetSipMediaApplicationAlexaSkillConfiguration})
+var sGetSipMediaApplicationLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSipMediaApplicationLoggingConfiguration, Traits: &t37, Type: smithy.ShapeTypeOperation, Ext: &eGetSipMediaApplicationLoggingConfiguration})
+var sGetSipRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSipRule, Traits: &t38, Type: smithy.ShapeTypeOperation, Ext: &eGetSipRule})
+var sGetSpeakerSearchTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSpeakerSearchTask, Traits: &t39, Type: smithy.ShapeTypeOperation, Ext: &eGetSpeakerSearchTask})
+var sGetVoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnector, Traits: &t40, Type: smithy.ShapeTypeOperation, Ext: &eGetVoiceConnector})
+var sGetVoiceConnectorEmergencyCallingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorEmergencyCallingConfiguration, Traits: &t41, Type: smithy.ShapeTypeOperation, Ext: &eGetVoiceConnectorEmergencyCallingConfiguration})
+var sGetVoiceConnectorExternalSystemsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorExternalSystemsConfiguration, Traits: &t42, Type: smithy.ShapeTypeOperation, Ext: &eGetVoiceConnectorExternalSystemsConfiguration})
+var sGetVoiceConnectorGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorGroup, Traits: &t43, Type: smithy.ShapeTypeOperation, Ext: &eGetVoiceConnectorGroup})
+var sGetVoiceConnectorLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorLoggingConfiguration, Traits: &t44, Type: smithy.ShapeTypeOperation, Ext: &eGetVoiceConnectorLoggingConfiguration})
+var sGetVoiceConnectorOrigination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorOrigination, Traits: &t45, Type: smithy.ShapeTypeOperation, Ext: &eGetVoiceConnectorOrigination})
+var sGetVoiceConnectorProxy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorProxy, Traits: &t46, Type: smithy.ShapeTypeOperation, Ext: &eGetVoiceConnectorProxy})
+var sGetVoiceConnectorStreamingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorStreamingConfiguration, Traits: &t47, Type: smithy.ShapeTypeOperation, Ext: &eGetVoiceConnectorStreamingConfiguration})
+var sGetVoiceConnectorTermination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorTermination, Traits: &t48, Type: smithy.ShapeTypeOperation, Ext: &eGetVoiceConnectorTermination})
+var sGetVoiceConnectorTerminationHealth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorTerminationHealth, Traits: &t49, Type: smithy.ShapeTypeOperation, Ext: &eGetVoiceConnectorTerminationHealth})
+var sGetVoiceProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceProfile, Traits: &t50, Type: smithy.ShapeTypeOperation, Ext: &eGetVoiceProfile})
+var sGetVoiceProfileDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceProfileDomain, Traits: &t51, Type: smithy.ShapeTypeOperation, Ext: &eGetVoiceProfileDomain})
+var sGetVoiceToneAnalysisTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceToneAnalysisTask, Traits: &t52, Type: smithy.ShapeTypeOperation, Ext: &eGetVoiceToneAnalysisTask})
+var sListAvailableVoiceConnectorRegions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAvailableVoiceConnectorRegions, Traits: &t53, Type: smithy.ShapeTypeOperation, Ext: &eListAvailableVoiceConnectorRegions})
+var sListPhoneNumberOrders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPhoneNumberOrders, Traits: &t54, Type: smithy.ShapeTypeOperation, Ext: &eListPhoneNumberOrders})
+var sListPhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPhoneNumbers, Traits: &t55, Type: smithy.ShapeTypeOperation, Ext: &eListPhoneNumbers})
+var sListProxySessions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProxySessions, Traits: &t56, Type: smithy.ShapeTypeOperation, Ext: &eListProxySessions})
+var sListSipMediaApplications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSipMediaApplications, Traits: &t57, Type: smithy.ShapeTypeOperation, Ext: &eListSipMediaApplications})
+var sListSipRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSipRules, Traits: &t58, Type: smithy.ShapeTypeOperation, Ext: &eListSipRules})
+var sListSupportedPhoneNumberCountries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupportedPhoneNumberCountries, Traits: &t59, Type: smithy.ShapeTypeOperation, Ext: &eListSupportedPhoneNumberCountries})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t60, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListVoiceConnectorGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceConnectorGroups, Traits: &t61, Type: smithy.ShapeTypeOperation, Ext: &eListVoiceConnectorGroups})
+var sListVoiceConnectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceConnectors, Traits: &t62, Type: smithy.ShapeTypeOperation, Ext: &eListVoiceConnectors})
+var sListVoiceConnectorTerminationCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceConnectorTerminationCredentials, Traits: &t63, Type: smithy.ShapeTypeOperation, Ext: &eListVoiceConnectorTerminationCredentials})
+var sListVoiceProfileDomains = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceProfileDomains, Traits: &t64, Type: smithy.ShapeTypeOperation, Ext: &eListVoiceProfileDomains})
+var sListVoiceProfiles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceProfiles, Traits: &t65, Type: smithy.ShapeTypeOperation, Ext: &eListVoiceProfiles})
+var sPutSipMediaApplicationAlexaSkillConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSipMediaApplicationAlexaSkillConfiguration, Traits: &t66, Type: smithy.ShapeTypeOperation, Ext: &ePutSipMediaApplicationAlexaSkillConfiguration})
+var sPutSipMediaApplicationLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSipMediaApplicationLoggingConfiguration, Traits: &t67, Type: smithy.ShapeTypeOperation, Ext: &ePutSipMediaApplicationLoggingConfiguration})
+var sPutVoiceConnectorEmergencyCallingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorEmergencyCallingConfiguration, Traits: &t68, Type: smithy.ShapeTypeOperation, Ext: &ePutVoiceConnectorEmergencyCallingConfiguration})
+var sPutVoiceConnectorExternalSystemsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorExternalSystemsConfiguration, Traits: &t69, Type: smithy.ShapeTypeOperation, Ext: &ePutVoiceConnectorExternalSystemsConfiguration})
+var sPutVoiceConnectorLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorLoggingConfiguration, Traits: &t70, Type: smithy.ShapeTypeOperation, Ext: &ePutVoiceConnectorLoggingConfiguration})
+var sPutVoiceConnectorOrigination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorOrigination, Traits: &t71, Type: smithy.ShapeTypeOperation, Ext: &ePutVoiceConnectorOrigination})
+var sPutVoiceConnectorProxy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorProxy, Traits: &t72, Type: smithy.ShapeTypeOperation, Ext: &ePutVoiceConnectorProxy})
+var sPutVoiceConnectorStreamingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorStreamingConfiguration, Traits: &t73, Type: smithy.ShapeTypeOperation, Ext: &ePutVoiceConnectorStreamingConfiguration})
+var sPutVoiceConnectorTermination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorTermination, Traits: &t74, Type: smithy.ShapeTypeOperation, Ext: &ePutVoiceConnectorTermination})
+var sPutVoiceConnectorTerminationCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorTerminationCredentials, Traits: &t75, Type: smithy.ShapeTypeOperation, Ext: &ePutVoiceConnectorTerminationCredentials})
+var sRestorePhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestorePhoneNumber, Traits: &t76, Type: smithy.ShapeTypeOperation, Ext: &eRestorePhoneNumber})
+var sSearchAvailablePhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchAvailablePhoneNumbers, Traits: &t77, Type: smithy.ShapeTypeOperation, Ext: &eSearchAvailablePhoneNumbers})
+var sStartSpeakerSearchTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSpeakerSearchTask, Traits: &t78, Type: smithy.ShapeTypeOperation, Ext: &eStartSpeakerSearchTask})
+var sStartVoiceToneAnalysisTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartVoiceToneAnalysisTask, Traits: &t79, Type: smithy.ShapeTypeOperation, Ext: &eStartVoiceToneAnalysisTask})
+var sStopSpeakerSearchTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopSpeakerSearchTask, Traits: &t80, Type: smithy.ShapeTypeOperation, Ext: &eStopSpeakerSearchTask})
+var sStopVoiceToneAnalysisTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopVoiceToneAnalysisTask, Traits: &t81, Type: smithy.ShapeTypeOperation, Ext: &eStopVoiceToneAnalysisTask})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t82, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t83, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateGlobalSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGlobalSettings, Traits: &t84, Type: smithy.ShapeTypeOperation, Ext: &eUpdateGlobalSettings})
+var sUpdatePhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePhoneNumber, Traits: &t85, Type: smithy.ShapeTypeOperation, Ext: &eUpdatePhoneNumber})
+var sUpdatePhoneNumberSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePhoneNumberSettings, Traits: &t86, Type: smithy.ShapeTypeOperation, Ext: &eUpdatePhoneNumberSettings})
+var sUpdateProxySession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxySession, Traits: &t87, Type: smithy.ShapeTypeOperation, Ext: &eUpdateProxySession})
+var sUpdateSipMediaApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSipMediaApplication, Traits: &t88, Type: smithy.ShapeTypeOperation, Ext: &eUpdateSipMediaApplication})
+var sUpdateSipMediaApplicationCall = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSipMediaApplicationCall, Traits: &t89, Type: smithy.ShapeTypeOperation, Ext: &eUpdateSipMediaApplicationCall})
+var sUpdateSipRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSipRule, Traits: &t90, Type: smithy.ShapeTypeOperation, Ext: &eUpdateSipRule})
+var sUpdateVoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVoiceConnector, Traits: &t91, Type: smithy.ShapeTypeOperation, Ext: &eUpdateVoiceConnector})
+var sUpdateVoiceConnectorGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVoiceConnectorGroup, Traits: &t92, Type: smithy.ShapeTypeOperation, Ext: &eUpdateVoiceConnectorGroup})
+var sUpdateVoiceProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVoiceProfile, Traits: &t93, Type: smithy.ShapeTypeOperation, Ext: &eUpdateVoiceProfile})
+var sUpdateVoiceProfileDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVoiceProfileDomain, Traits: &t94, Type: smithy.ShapeTypeOperation, Ext: &eUpdateVoiceProfileDomain})
+var sValidateE911Address = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidateE911Address, Traits: &t95, Type: smithy.ShapeTypeOperation, Ext: &eValidateE911Address})
+var s_ChimeSDKTelephonyService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChimeSDKTelephonyService, Type: smithy.ShapeTypeService, Ext: &e_ChimeSDKTelephonyService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t96, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eAddress})
+var s_AlexaSkillId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlexaSkillId, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &e_AlexaSkillId})
+var s_AlexaSkillIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlexaSkillIdList, Members: &m_AlexaSkillIdList, Type: smithy.ShapeTypeList, Ext: &e_AlexaSkillIdList})
+var sAlexaSkillStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlexaSkillStatus, Members: &mAlexaSkillStatus, Type: smithy.ShapeTypeEnum, Ext: &eAlexaSkillStatus})
+var s_Alpha2CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Alpha2CountryCode, Type: smithy.ShapeTypeString, Ext: &e_Alpha2CountryCode})
+var s_AreaCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AreaCode, Type: smithy.ShapeTypeString, Ext: &e_AreaCode})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t99, Type: smithy.ShapeTypeStructure, Ext: &eBadRequestException})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var sCallDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCallDetails, Members: &mCallDetails, Type: smithy.ShapeTypeStructure, Ext: &eCallDetails})
+var sCallDistributionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCallDistributionType, Members: &mCallDistributionType, Type: smithy.ShapeTypeEnum, Ext: &eCallDistributionType})
+var s_CallingName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CallingName, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &e_CallingName})
+var sCallingNameStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCallingNameStatus, Members: &mCallingNameStatus, Type: smithy.ShapeTypeEnum, Ext: &eCallingNameStatus})
+var s_CallingRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CallingRegion, Type: smithy.ShapeTypeString, Ext: &e_CallingRegion})
+var s_CallingRegionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CallingRegionList, Members: &m_CallingRegionList, Type: smithy.ShapeTypeList, Ext: &e_CallingRegionList})
+var sCallLegType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCallLegType, Members: &mCallLegType, Type: smithy.ShapeTypeEnum, Ext: &eCallLegType})
+var sCandidateAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCandidateAddress, Members: &mCandidateAddress, Type: smithy.ShapeTypeStructure, Ext: &eCandidateAddress})
+var s_CandidateAddressList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CandidateAddressList, Members: &m_CandidateAddressList, Type: smithy.ShapeTypeList, Ext: &e_CandidateAddressList})
+var sCapability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapability, Members: &mCapability, Type: smithy.ShapeTypeEnum, Ext: &eCapability})
+var s_CapabilityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapabilityList, Members: &m_CapabilityList, Type: smithy.ShapeTypeList, Ext: &e_CapabilityList})
+var s_ClientRequestId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientRequestId, Type: smithy.ShapeTypeString, Ext: &e_ClientRequestId})
+var s_ConfidenceScore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfidenceScore, Type: smithy.ShapeTypeFloat, Ext: &e_ConfidenceScore})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t101, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sContactCenterSystemType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContactCenterSystemType, Members: &mContactCenterSystemType, Type: smithy.ShapeTypeEnum, Ext: &eContactCenterSystemType})
+var s_ContactCenterSystemTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactCenterSystemTypeList, Members: &m_ContactCenterSystemTypeList, Type: smithy.ShapeTypeList, Ext: &e_ContactCenterSystemTypeList})
+var s_Country = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Country, Type: smithy.ShapeTypeString, Ext: &e_Country})
+var s_CountryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CountryList, Members: &m_CountryList, Type: smithy.ShapeTypeList, Ext: &e_CountryList})
+var s_CpsLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CpsLimit, Type: smithy.ShapeTypeInteger, Ext: &e_CpsLimit})
+var sCredential = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCredential, Members: &mCredential, Type: smithy.ShapeTypeStructure, Ext: &eCredential})
+var s_CredentialList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CredentialList, Members: &m_CredentialList, Type: smithy.ShapeTypeList, Ext: &e_CredentialList})
+var s_DataRetentionInHours = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataRetentionInHours, Type: smithy.ShapeTypeInteger, Ext: &e_DataRetentionInHours})
+var sDNISEmergencyCallingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDNISEmergencyCallingConfiguration, Members: &mDNISEmergencyCallingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDNISEmergencyCallingConfiguration})
+var s_DNISEmergencyCallingConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DNISEmergencyCallingConfigurationList, Members: &m_DNISEmergencyCallingConfigurationList, Type: smithy.ShapeTypeList, Ext: &e_DNISEmergencyCallingConfigurationList})
+var s_E164PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_E164PhoneNumber, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &e_E164PhoneNumber})
+var s_E164PhoneNumberList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_E164PhoneNumberList, Members: &m_E164PhoneNumberList, Type: smithy.ShapeTypeList, Ext: &e_E164PhoneNumberList})
+var sEmergencyCallingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmergencyCallingConfiguration, Members: &mEmergencyCallingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eEmergencyCallingConfiguration})
+var sErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eErrorCode})
+var sExternalSystemsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExternalSystemsConfiguration, Members: &mExternalSystemsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExternalSystemsConfiguration})
+var sForbiddenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForbiddenException, Members: &mForbiddenException, Traits: &t96, Type: smithy.ShapeTypeStructure, Ext: &eForbiddenException})
+var s_FunctionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FunctionArn, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &e_FunctionArn})
+var sGeoMatchLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeoMatchLevel, Members: &mGeoMatchLevel, Type: smithy.ShapeTypeEnum, Ext: &eGeoMatchLevel})
+var sGeoMatchParams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeoMatchParams, Members: &mGeoMatchParams, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchParams})
+var sGoneException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGoneException, Members: &mGoneException, Traits: &t102, Type: smithy.ShapeTypeStructure, Ext: &eGoneException})
+var s_GuidString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuidString, Type: smithy.ShapeTypeString, Ext: &e_GuidString})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &e_Integer})
+var s_Iso8601Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Iso8601Timestamp, Traits: &t103, Type: smithy.ShapeTypeTimestamp, Ext: &e_Iso8601Timestamp})
+var sLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLanguageCode, Members: &mLanguageCode, Type: smithy.ShapeTypeEnum, Ext: &eLanguageCode})
+var sLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoggingConfiguration, Members: &mLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eLoggingConfiguration})
+var sMediaInsightsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaInsightsConfiguration, Members: &mMediaInsightsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eMediaInsightsConfiguration})
+var sNetworkType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum, Ext: &eNetworkType})
+var s_NextTokenString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextTokenString, Type: smithy.ShapeTypeString, Ext: &e_NextTokenString})
+var s_NonEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &e_NonEmptyString})
+var s_NonEmptyString128 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyString128, Type: smithy.ShapeTypeString, Ext: &e_NonEmptyString128})
+var s_NonEmptyString256 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &e_NonEmptyString256})
+var s_NonEmptyStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyStringList, Members: &m_NonEmptyStringList, Type: smithy.ShapeTypeList, Ext: &e_NonEmptyStringList})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t104, Type: smithy.ShapeTypeStructure, Ext: &eNotFoundException})
+var sNotificationTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationTarget, Members: &mNotificationTarget, Type: smithy.ShapeTypeEnum, Ext: &eNotificationTarget})
+var s_NullableBoolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &e_NullableBoolean})
+var sNumberSelectionBehavior = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNumberSelectionBehavior, Members: &mNumberSelectionBehavior, Type: smithy.ShapeTypeEnum, Ext: &eNumberSelectionBehavior})
+var sOrderedPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrderedPhoneNumber, Members: &mOrderedPhoneNumber, Type: smithy.ShapeTypeStructure, Ext: &eOrderedPhoneNumber})
+var s_OrderedPhoneNumberList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrderedPhoneNumberList, Members: &m_OrderedPhoneNumberList, Type: smithy.ShapeTypeList, Ext: &e_OrderedPhoneNumberList})
+var sOrderedPhoneNumberStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrderedPhoneNumberStatus, Members: &mOrderedPhoneNumberStatus, Type: smithy.ShapeTypeEnum, Ext: &eOrderedPhoneNumberStatus})
+var sOrigination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrigination, Members: &mOrigination, Type: smithy.ShapeTypeStructure, Ext: &eOrigination})
+var sOriginationRoute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOriginationRoute, Members: &mOriginationRoute, Type: smithy.ShapeTypeStructure, Ext: &eOriginationRoute})
+var s_OriginationRouteList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OriginationRouteList, Members: &m_OriginationRouteList, Type: smithy.ShapeTypeList, Ext: &e_OriginationRouteList})
+var s_OriginationRoutePriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OriginationRoutePriority, Type: smithy.ShapeTypeInteger, Ext: &e_OriginationRoutePriority})
+var sOriginationRouteProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOriginationRouteProtocol, Members: &mOriginationRouteProtocol, Type: smithy.ShapeTypeEnum, Ext: &eOriginationRouteProtocol})
+var s_OriginationRouteWeight = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OriginationRouteWeight, Type: smithy.ShapeTypeInteger, Ext: &e_OriginationRouteWeight})
+var sParticipant = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParticipant, Members: &mParticipant, Type: smithy.ShapeTypeStructure, Ext: &eParticipant})
+var s_ParticipantPhoneNumberList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParticipantPhoneNumberList, Members: &m_ParticipantPhoneNumberList, Type: smithy.ShapeTypeList, Ext: &e_ParticipantPhoneNumberList})
+var s_Participants = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Participants, Members: &m_Participants, Type: smithy.ShapeTypeList, Ext: &e_Participants})
+var sPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumber, Members: &mPhoneNumber, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumber})
+var sPhoneNumberAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberAssociation, Members: &mPhoneNumberAssociation, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberAssociation})
+var s_PhoneNumberAssociationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberAssociationList, Members: &m_PhoneNumberAssociationList, Type: smithy.ShapeTypeList, Ext: &e_PhoneNumberAssociationList})
+var sPhoneNumberAssociationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberAssociationName, Members: &mPhoneNumberAssociationName, Type: smithy.ShapeTypeEnum, Ext: &ePhoneNumberAssociationName})
+var sPhoneNumberCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberCapabilities, Members: &mPhoneNumberCapabilities, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberCapabilities})
+var s_PhoneNumberCountriesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberCountriesList, Members: &m_PhoneNumberCountriesList, Type: smithy.ShapeTypeList, Ext: &e_PhoneNumberCountriesList})
+var sPhoneNumberCountry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberCountry, Members: &mPhoneNumberCountry, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberCountry})
+var sPhoneNumberError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberError, Members: &mPhoneNumberError, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberError})
+var s_PhoneNumberErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberErrorList, Members: &m_PhoneNumberErrorList, Type: smithy.ShapeTypeList, Ext: &e_PhoneNumberErrorList})
+var s_PhoneNumberList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberList, Members: &m_PhoneNumberList, Type: smithy.ShapeTypeList, Ext: &e_PhoneNumberList})
+var s_PhoneNumberMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_PhoneNumberMaxResults})
+var s_PhoneNumberName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberName, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &e_PhoneNumberName})
+var sPhoneNumberOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberOrder, Members: &mPhoneNumberOrder, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberOrder})
+var s_PhoneNumberOrderList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberOrderList, Members: &m_PhoneNumberOrderList, Type: smithy.ShapeTypeList, Ext: &e_PhoneNumberOrderList})
+var sPhoneNumberOrderStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberOrderStatus, Members: &mPhoneNumberOrderStatus, Type: smithy.ShapeTypeEnum, Ext: &ePhoneNumberOrderStatus})
+var sPhoneNumberOrderType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberOrderType, Members: &mPhoneNumberOrderType, Type: smithy.ShapeTypeEnum, Ext: &ePhoneNumberOrderType})
+var sPhoneNumberProductType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberProductType, Members: &mPhoneNumberProductType, Type: smithy.ShapeTypeEnum, Ext: &ePhoneNumberProductType})
+var sPhoneNumberStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberStatus, Members: &mPhoneNumberStatus, Type: smithy.ShapeTypeEnum, Ext: &ePhoneNumberStatus})
+var sPhoneNumberType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberType, Members: &mPhoneNumberType, Type: smithy.ShapeTypeEnum, Ext: &ePhoneNumberType})
+var s_PhoneNumberTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberTypeList, Members: &m_PhoneNumberTypeList, Type: smithy.ShapeTypeList, Ext: &e_PhoneNumberTypeList})
+var s_Port = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Port, Type: smithy.ShapeTypeInteger, Ext: &e_Port})
+var s_PositiveInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &e_PositiveInteger})
+var sProxy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxy, Members: &mProxy, Type: smithy.ShapeTypeStructure, Ext: &eProxy})
+var sProxySession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxySession, Members: &mProxySession, Type: smithy.ShapeTypeStructure, Ext: &eProxySession})
+var s_ProxySessionNameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxySessionNameString, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &e_ProxySessionNameString})
+var s_ProxySessions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProxySessions, Members: &m_ProxySessions, Type: smithy.ShapeTypeList, Ext: &e_ProxySessions})
+var sProxySessionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxySessionStatus, Members: &mProxySessionStatus, Type: smithy.ShapeTypeEnum, Ext: &eProxySessionStatus})
+var sResourceLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceLimitExceededException, Members: &mResourceLimitExceededException, Traits: &t99, Type: smithy.ShapeTypeStructure, Ext: &eResourceLimitExceededException})
+var s_ResultMax = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResultMax, Type: smithy.ShapeTypeInteger, Ext: &e_ResultMax})
+var s_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &e_S3BucketName})
+var s_SensitiveNonEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveNonEmptyString, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &e_SensitiveNonEmptyString})
+var s_SensitiveString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveString, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &e_SensitiveString})
+var s_SensitiveStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveStringList, Members: &m_SensitiveStringList, Type: smithy.ShapeTypeList, Ext: &e_SensitiveStringList})
+var sServerSideEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerSideEncryptionConfiguration, Members: &mServerSideEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eServerSideEncryptionConfiguration})
+var sServiceFailureException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceFailureException, Members: &mServiceFailureException, Traits: &t106, Type: smithy.ShapeTypeStructure, Ext: &eServiceFailureException})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t107, Type: smithy.ShapeTypeStructure, Ext: &eServiceUnavailableException})
+var sSessionBorderControllerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSessionBorderControllerType, Members: &mSessionBorderControllerType, Type: smithy.ShapeTypeEnum, Ext: &eSessionBorderControllerType})
+var s_SessionBorderControllerTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionBorderControllerTypeList, Members: &m_SessionBorderControllerTypeList, Type: smithy.ShapeTypeList, Ext: &e_SessionBorderControllerTypeList})
+var s_SipApplicationPriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SipApplicationPriority, Type: smithy.ShapeTypeInteger, Ext: &e_SipApplicationPriority})
+var s_SipHeadersMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SipHeadersMap, Members: &m_SipHeadersMap, Type: smithy.ShapeTypeMap, Ext: &e_SipHeadersMap})
+var sSipMediaApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSipMediaApplication, Members: &mSipMediaApplication, Type: smithy.ShapeTypeStructure, Ext: &eSipMediaApplication})
+var sSipMediaApplicationAlexaSkillConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSipMediaApplicationAlexaSkillConfiguration, Members: &mSipMediaApplicationAlexaSkillConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSipMediaApplicationAlexaSkillConfiguration})
+var sSipMediaApplicationCall = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSipMediaApplicationCall, Members: &mSipMediaApplicationCall, Type: smithy.ShapeTypeStructure, Ext: &eSipMediaApplicationCall})
+var sSipMediaApplicationEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSipMediaApplicationEndpoint, Members: &mSipMediaApplicationEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eSipMediaApplicationEndpoint})
+var s_SipMediaApplicationEndpointList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SipMediaApplicationEndpointList, Members: &m_SipMediaApplicationEndpointList, Type: smithy.ShapeTypeList, Ext: &e_SipMediaApplicationEndpointList})
+var s_SipMediaApplicationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SipMediaApplicationList, Members: &m_SipMediaApplicationList, Type: smithy.ShapeTypeList, Ext: &e_SipMediaApplicationList})
+var sSipMediaApplicationLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSipMediaApplicationLoggingConfiguration, Members: &mSipMediaApplicationLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSipMediaApplicationLoggingConfiguration})
+var s_SipMediaApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SipMediaApplicationName, Type: smithy.ShapeTypeString, Ext: &e_SipMediaApplicationName})
+var sSipRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSipRule, Members: &mSipRule, Type: smithy.ShapeTypeStructure, Ext: &eSipRule})
+var s_SipRuleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SipRuleList, Members: &m_SipRuleList, Type: smithy.ShapeTypeList, Ext: &e_SipRuleList})
+var s_SipRuleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SipRuleName, Type: smithy.ShapeTypeString, Ext: &e_SipRuleName})
+var sSipRuleTargetApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSipRuleTargetApplication, Members: &mSipRuleTargetApplication, Type: smithy.ShapeTypeStructure, Ext: &eSipRuleTargetApplication})
+var s_SipRuleTargetApplicationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SipRuleTargetApplicationList, Members: &m_SipRuleTargetApplicationList, Type: smithy.ShapeTypeList, Ext: &e_SipRuleTargetApplicationList})
+var sSipRuleTriggerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSipRuleTriggerType, Members: &mSipRuleTriggerType, Type: smithy.ShapeTypeEnum, Ext: &eSipRuleTriggerType})
+var s_SMACreateCallArgumentsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SMACreateCallArgumentsMap, Members: &m_SMACreateCallArgumentsMap, Type: smithy.ShapeTypeMap, Ext: &e_SMACreateCallArgumentsMap})
+var s_SMAUpdateCallArgumentsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SMAUpdateCallArgumentsMap, Members: &m_SMAUpdateCallArgumentsMap, Type: smithy.ShapeTypeMap, Ext: &e_SMAUpdateCallArgumentsMap})
+var sSpeakerSearchDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpeakerSearchDetails, Members: &mSpeakerSearchDetails, Type: smithy.ShapeTypeStructure, Ext: &eSpeakerSearchDetails})
+var sSpeakerSearchResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpeakerSearchResult, Members: &mSpeakerSearchResult, Type: smithy.ShapeTypeStructure, Ext: &eSpeakerSearchResult})
+var s_SpeakerSearchResultList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SpeakerSearchResultList, Members: &m_SpeakerSearchResultList, Type: smithy.ShapeTypeList, Ext: &e_SpeakerSearchResultList})
+var sSpeakerSearchTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpeakerSearchTask, Members: &mSpeakerSearchTask, Type: smithy.ShapeTypeStructure, Ext: &eSpeakerSearchTask})
+var sStreamingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamingConfiguration, Members: &mStreamingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eStreamingConfiguration})
+var sStreamingNotificationTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamingNotificationTarget, Members: &mStreamingNotificationTarget, Type: smithy.ShapeTypeStructure, Ext: &eStreamingNotificationTarget})
+var s_StreamingNotificationTargetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamingNotificationTargetList, Members: &m_StreamingNotificationTargetList, Type: smithy.ShapeTypeList, Ext: &e_StreamingNotificationTargetList})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_String128 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String128, Type: smithy.ShapeTypeString, Ext: &e_String128})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &e_StringList})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Traits: &t98, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTermination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTermination, Members: &mTermination, Type: smithy.ShapeTypeStructure, Ext: &eTermination})
+var sTerminationHealth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminationHealth, Members: &mTerminationHealth, Type: smithy.ShapeTypeStructure, Ext: &eTerminationHealth})
+var sThrottledClientException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottledClientException, Members: &mThrottledClientException, Traits: &t108, Type: smithy.ShapeTypeStructure, Ext: &eThrottledClientException})
+var s_TollFreePrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TollFreePrefix, Type: smithy.ShapeTypeString, Ext: &e_TollFreePrefix})
+var sUnauthorizedClientException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthorizedClientException, Members: &mUnauthorizedClientException, Traits: &t109, Type: smithy.ShapeTypeStructure, Ext: &eUnauthorizedClientException})
+var sUnprocessableEntityException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnprocessableEntityException, Members: &mUnprocessableEntityException, Traits: &t110, Type: smithy.ShapeTypeStructure, Ext: &eUnprocessableEntityException})
+var sUpdatePhoneNumberRequestItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePhoneNumberRequestItem, Members: &mUpdatePhoneNumberRequestItem, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePhoneNumberRequestItem})
+var s_UpdatePhoneNumberRequestItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdatePhoneNumberRequestItemList, Members: &m_UpdatePhoneNumberRequestItemList, Type: smithy.ShapeTypeList, Ext: &e_UpdatePhoneNumberRequestItemList})
+var s_ValidationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationResult, Type: smithy.ShapeTypeInteger, Ext: &e_ValidationResult})
+var sVoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceConnector, Members: &mVoiceConnector, Type: smithy.ShapeTypeStructure, Ext: &eVoiceConnector})
+var sVoiceConnectorAwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceConnectorAwsRegion, Members: &mVoiceConnectorAwsRegion, Type: smithy.ShapeTypeEnum, Ext: &eVoiceConnectorAwsRegion})
+var s_VoiceConnectorAwsRegionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceConnectorAwsRegionList, Members: &m_VoiceConnectorAwsRegionList, Type: smithy.ShapeTypeList, Ext: &e_VoiceConnectorAwsRegionList})
+var sVoiceConnectorGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceConnectorGroup, Members: &mVoiceConnectorGroup, Type: smithy.ShapeTypeStructure, Ext: &eVoiceConnectorGroup})
+var s_VoiceConnectorGroupList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceConnectorGroupList, Members: &m_VoiceConnectorGroupList, Type: smithy.ShapeTypeList, Ext: &e_VoiceConnectorGroupList})
+var s_VoiceConnectorGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceConnectorGroupName, Type: smithy.ShapeTypeString, Ext: &e_VoiceConnectorGroupName})
+var s_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceConnectorId, Type: smithy.ShapeTypeString, Ext: &e_VoiceConnectorId})
+var sVoiceConnectorIntegrationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceConnectorIntegrationType, Members: &mVoiceConnectorIntegrationType, Type: smithy.ShapeTypeEnum, Ext: &eVoiceConnectorIntegrationType})
+var sVoiceConnectorItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceConnectorItem, Members: &mVoiceConnectorItem, Type: smithy.ShapeTypeStructure, Ext: &eVoiceConnectorItem})
+var s_VoiceConnectorItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceConnectorItemList, Members: &m_VoiceConnectorItemList, Type: smithy.ShapeTypeList, Ext: &e_VoiceConnectorItemList})
+var s_VoiceConnectorItemPriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceConnectorItemPriority, Type: smithy.ShapeTypeInteger, Ext: &e_VoiceConnectorItemPriority})
+var s_VoiceConnectorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceConnectorList, Members: &m_VoiceConnectorList, Type: smithy.ShapeTypeList, Ext: &e_VoiceConnectorList})
+var s_VoiceConnectorName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceConnectorName, Type: smithy.ShapeTypeString, Ext: &e_VoiceConnectorName})
+var sVoiceConnectorSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceConnectorSettings, Members: &mVoiceConnectorSettings, Type: smithy.ShapeTypeStructure, Ext: &eVoiceConnectorSettings})
+var sVoiceProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceProfile, Members: &mVoiceProfile, Type: smithy.ShapeTypeStructure, Ext: &eVoiceProfile})
+var sVoiceProfileDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceProfileDomain, Members: &mVoiceProfileDomain, Type: smithy.ShapeTypeStructure, Ext: &eVoiceProfileDomain})
+var s_VoiceProfileDomainDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceProfileDomainDescription, Type: smithy.ShapeTypeString, Ext: &e_VoiceProfileDomainDescription})
+var s_VoiceProfileDomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceProfileDomainName, Type: smithy.ShapeTypeString, Ext: &e_VoiceProfileDomainName})
+var sVoiceProfileDomainSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceProfileDomainSummary, Members: &mVoiceProfileDomainSummary, Type: smithy.ShapeTypeStructure, Ext: &eVoiceProfileDomainSummary})
+var s_VoiceProfileDomainSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceProfileDomainSummaryList, Members: &m_VoiceProfileDomainSummaryList, Type: smithy.ShapeTypeList, Ext: &e_VoiceProfileDomainSummaryList})
+var sVoiceProfileSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceProfileSummary, Members: &mVoiceProfileSummary, Type: smithy.ShapeTypeStructure, Ext: &eVoiceProfileSummary})
+var s_VoiceProfileSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceProfileSummaryList, Members: &m_VoiceProfileSummaryList, Type: smithy.ShapeTypeList, Ext: &e_VoiceProfileSummaryList})
+var sVoiceToneAnalysisTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceToneAnalysisTask, Members: &mVoiceToneAnalysisTask, Type: smithy.ShapeTypeStructure, Ext: &eVoiceToneAnalysisTask})
+var sAssociatePhoneNumbersWithVoiceConnectorGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatePhoneNumbersWithVoiceConnectorGroupRequest, Members: &mAssociatePhoneNumbersWithVoiceConnectorGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociatePhoneNumbersWithVoiceConnectorGroupRequest})
+var sAssociatePhoneNumbersWithVoiceConnectorGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatePhoneNumbersWithVoiceConnectorGroupResponse, Members: &mAssociatePhoneNumbersWithVoiceConnectorGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssociatePhoneNumbersWithVoiceConnectorGroupResponse})
+var sAssociatePhoneNumbersWithVoiceConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatePhoneNumbersWithVoiceConnectorRequest, Members: &mAssociatePhoneNumbersWithVoiceConnectorRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociatePhoneNumbersWithVoiceConnectorRequest})
+var sAssociatePhoneNumbersWithVoiceConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatePhoneNumbersWithVoiceConnectorResponse, Members: &mAssociatePhoneNumbersWithVoiceConnectorResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssociatePhoneNumbersWithVoiceConnectorResponse})
+var sBatchDeletePhoneNumberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeletePhoneNumberRequest, Members: &mBatchDeletePhoneNumberRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeletePhoneNumberRequest})
+var sBatchDeletePhoneNumberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeletePhoneNumberResponse, Members: &mBatchDeletePhoneNumberResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchDeletePhoneNumberResponse})
+var sBatchUpdatePhoneNumberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdatePhoneNumberRequest, Members: &mBatchUpdatePhoneNumberRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchUpdatePhoneNumberRequest})
+var sBatchUpdatePhoneNumberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdatePhoneNumberResponse, Members: &mBatchUpdatePhoneNumberResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchUpdatePhoneNumberResponse})
+var sCreatePhoneNumberOrderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePhoneNumberOrderRequest, Members: &mCreatePhoneNumberOrderRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreatePhoneNumberOrderRequest})
+var sCreatePhoneNumberOrderResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePhoneNumberOrderResponse, Members: &mCreatePhoneNumberOrderResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreatePhoneNumberOrderResponse})
+var sCreateProxySessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxySessionRequest, Members: &mCreateProxySessionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateProxySessionRequest})
+var sCreateProxySessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProxySessionResponse, Members: &mCreateProxySessionResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateProxySessionResponse})
+var sCreateSipMediaApplicationCallRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSipMediaApplicationCallRequest, Members: &mCreateSipMediaApplicationCallRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateSipMediaApplicationCallRequest})
+var sCreateSipMediaApplicationCallResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSipMediaApplicationCallResponse, Members: &mCreateSipMediaApplicationCallResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateSipMediaApplicationCallResponse})
+var sCreateSipMediaApplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSipMediaApplicationRequest, Members: &mCreateSipMediaApplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateSipMediaApplicationRequest})
+var sCreateSipMediaApplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSipMediaApplicationResponse, Members: &mCreateSipMediaApplicationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateSipMediaApplicationResponse})
+var sCreateSipRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSipRuleRequest, Members: &mCreateSipRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateSipRuleRequest})
+var sCreateSipRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSipRuleResponse, Members: &mCreateSipRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateSipRuleResponse})
+var sCreateVoiceConnectorGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVoiceConnectorGroupRequest, Members: &mCreateVoiceConnectorGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateVoiceConnectorGroupRequest})
+var sCreateVoiceConnectorGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVoiceConnectorGroupResponse, Members: &mCreateVoiceConnectorGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateVoiceConnectorGroupResponse})
+var sCreateVoiceConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVoiceConnectorRequest, Members: &mCreateVoiceConnectorRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateVoiceConnectorRequest})
+var sCreateVoiceConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVoiceConnectorResponse, Members: &mCreateVoiceConnectorResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateVoiceConnectorResponse})
+var sCreateVoiceProfileDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVoiceProfileDomainRequest, Members: &mCreateVoiceProfileDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateVoiceProfileDomainRequest})
+var sCreateVoiceProfileDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVoiceProfileDomainResponse, Members: &mCreateVoiceProfileDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateVoiceProfileDomainResponse})
+var sCreateVoiceProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVoiceProfileRequest, Members: &mCreateVoiceProfileRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateVoiceProfileRequest})
+var sCreateVoiceProfileResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVoiceProfileResponse, Members: &mCreateVoiceProfileResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateVoiceProfileResponse})
+var sDeletePhoneNumberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePhoneNumberRequest, Members: &mDeletePhoneNumberRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeletePhoneNumberRequest})
+var sDeleteProxySessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProxySessionRequest, Members: &mDeleteProxySessionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteProxySessionRequest})
+var sDeleteSipMediaApplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSipMediaApplicationRequest, Members: &mDeleteSipMediaApplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSipMediaApplicationRequest})
+var sDeleteSipRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSipRuleRequest, Members: &mDeleteSipRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSipRuleRequest})
+var sDeleteVoiceConnectorEmergencyCallingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorEmergencyCallingConfigurationRequest, Members: &mDeleteVoiceConnectorEmergencyCallingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVoiceConnectorEmergencyCallingConfigurationRequest})
+var sDeleteVoiceConnectorExternalSystemsConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorExternalSystemsConfigurationRequest, Members: &mDeleteVoiceConnectorExternalSystemsConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVoiceConnectorExternalSystemsConfigurationRequest})
+var sDeleteVoiceConnectorGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorGroupRequest, Members: &mDeleteVoiceConnectorGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVoiceConnectorGroupRequest})
+var sDeleteVoiceConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorRequest, Members: &mDeleteVoiceConnectorRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVoiceConnectorRequest})
+var sDeleteVoiceConnectorOriginationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorOriginationRequest, Members: &mDeleteVoiceConnectorOriginationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVoiceConnectorOriginationRequest})
+var sDeleteVoiceConnectorProxyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorProxyRequest, Members: &mDeleteVoiceConnectorProxyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVoiceConnectorProxyRequest})
+var sDeleteVoiceConnectorStreamingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorStreamingConfigurationRequest, Members: &mDeleteVoiceConnectorStreamingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVoiceConnectorStreamingConfigurationRequest})
+var sDeleteVoiceConnectorTerminationCredentialsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorTerminationCredentialsRequest, Members: &mDeleteVoiceConnectorTerminationCredentialsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVoiceConnectorTerminationCredentialsRequest})
+var sDeleteVoiceConnectorTerminationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceConnectorTerminationRequest, Members: &mDeleteVoiceConnectorTerminationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVoiceConnectorTerminationRequest})
+var sDeleteVoiceProfileDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceProfileDomainRequest, Members: &mDeleteVoiceProfileDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVoiceProfileDomainRequest})
+var sDeleteVoiceProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVoiceProfileRequest, Members: &mDeleteVoiceProfileRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVoiceProfileRequest})
+var sDisassociatePhoneNumbersFromVoiceConnectorGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociatePhoneNumbersFromVoiceConnectorGroupRequest, Members: &mDisassociatePhoneNumbersFromVoiceConnectorGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociatePhoneNumbersFromVoiceConnectorGroupRequest})
+var sDisassociatePhoneNumbersFromVoiceConnectorGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociatePhoneNumbersFromVoiceConnectorGroupResponse, Members: &mDisassociatePhoneNumbersFromVoiceConnectorGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisassociatePhoneNumbersFromVoiceConnectorGroupResponse})
+var sDisassociatePhoneNumbersFromVoiceConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociatePhoneNumbersFromVoiceConnectorRequest, Members: &mDisassociatePhoneNumbersFromVoiceConnectorRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociatePhoneNumbersFromVoiceConnectorRequest})
+var sDisassociatePhoneNumbersFromVoiceConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociatePhoneNumbersFromVoiceConnectorResponse, Members: &mDisassociatePhoneNumbersFromVoiceConnectorResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisassociatePhoneNumbersFromVoiceConnectorResponse})
+var sGetGlobalSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGlobalSettingsResponse, Members: &mGetGlobalSettingsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetGlobalSettingsResponse})
+var sGetPhoneNumberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPhoneNumberRequest, Members: &mGetPhoneNumberRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetPhoneNumberRequest})
+var sGetPhoneNumberOrderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPhoneNumberOrderRequest, Members: &mGetPhoneNumberOrderRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetPhoneNumberOrderRequest})
+var sGetPhoneNumberOrderResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPhoneNumberOrderResponse, Members: &mGetPhoneNumberOrderResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetPhoneNumberOrderResponse})
+var sGetPhoneNumberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPhoneNumberResponse, Members: &mGetPhoneNumberResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetPhoneNumberResponse})
+var sGetPhoneNumberSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPhoneNumberSettingsResponse, Members: &mGetPhoneNumberSettingsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetPhoneNumberSettingsResponse})
+var sGetProxySessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProxySessionRequest, Members: &mGetProxySessionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetProxySessionRequest})
+var sGetProxySessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProxySessionResponse, Members: &mGetProxySessionResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetProxySessionResponse})
+var sGetSipMediaApplicationAlexaSkillConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSipMediaApplicationAlexaSkillConfigurationRequest, Members: &mGetSipMediaApplicationAlexaSkillConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSipMediaApplicationAlexaSkillConfigurationRequest})
+var sGetSipMediaApplicationAlexaSkillConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSipMediaApplicationAlexaSkillConfigurationResponse, Members: &mGetSipMediaApplicationAlexaSkillConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSipMediaApplicationAlexaSkillConfigurationResponse})
+var sGetSipMediaApplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSipMediaApplicationRequest, Members: &mGetSipMediaApplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSipMediaApplicationRequest})
+var sGetSipMediaApplicationLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSipMediaApplicationLoggingConfigurationRequest, Members: &mGetSipMediaApplicationLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSipMediaApplicationLoggingConfigurationRequest})
+var sGetSipMediaApplicationLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSipMediaApplicationLoggingConfigurationResponse, Members: &mGetSipMediaApplicationLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSipMediaApplicationLoggingConfigurationResponse})
+var sGetSipMediaApplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSipMediaApplicationResponse, Members: &mGetSipMediaApplicationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSipMediaApplicationResponse})
+var sGetSipRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSipRuleRequest, Members: &mGetSipRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSipRuleRequest})
+var sGetSipRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSipRuleResponse, Members: &mGetSipRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSipRuleResponse})
+var sGetSpeakerSearchTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSpeakerSearchTaskRequest, Members: &mGetSpeakerSearchTaskRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSpeakerSearchTaskRequest})
+var sGetSpeakerSearchTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSpeakerSearchTaskResponse, Members: &mGetSpeakerSearchTaskResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSpeakerSearchTaskResponse})
+var sGetVoiceConnectorEmergencyCallingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorEmergencyCallingConfigurationRequest, Members: &mGetVoiceConnectorEmergencyCallingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorEmergencyCallingConfigurationRequest})
+var sGetVoiceConnectorEmergencyCallingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorEmergencyCallingConfigurationResponse, Members: &mGetVoiceConnectorEmergencyCallingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorEmergencyCallingConfigurationResponse})
+var sGetVoiceConnectorExternalSystemsConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorExternalSystemsConfigurationRequest, Members: &mGetVoiceConnectorExternalSystemsConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorExternalSystemsConfigurationRequest})
+var sGetVoiceConnectorExternalSystemsConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorExternalSystemsConfigurationResponse, Members: &mGetVoiceConnectorExternalSystemsConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorExternalSystemsConfigurationResponse})
+var sGetVoiceConnectorGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorGroupRequest, Members: &mGetVoiceConnectorGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorGroupRequest})
+var sGetVoiceConnectorGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorGroupResponse, Members: &mGetVoiceConnectorGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorGroupResponse})
+var sGetVoiceConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorRequest, Members: &mGetVoiceConnectorRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorRequest})
+var sGetVoiceConnectorLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorLoggingConfigurationRequest, Members: &mGetVoiceConnectorLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorLoggingConfigurationRequest})
+var sGetVoiceConnectorLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorLoggingConfigurationResponse, Members: &mGetVoiceConnectorLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorLoggingConfigurationResponse})
+var sGetVoiceConnectorOriginationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorOriginationRequest, Members: &mGetVoiceConnectorOriginationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorOriginationRequest})
+var sGetVoiceConnectorOriginationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorOriginationResponse, Members: &mGetVoiceConnectorOriginationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorOriginationResponse})
+var sGetVoiceConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorResponse, Members: &mGetVoiceConnectorResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorResponse})
+var sGetVoiceConnectorProxyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorProxyRequest, Members: &mGetVoiceConnectorProxyRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorProxyRequest})
+var sGetVoiceConnectorProxyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorProxyResponse, Members: &mGetVoiceConnectorProxyResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorProxyResponse})
+var sGetVoiceConnectorStreamingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorStreamingConfigurationRequest, Members: &mGetVoiceConnectorStreamingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorStreamingConfigurationRequest})
+var sGetVoiceConnectorStreamingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorStreamingConfigurationResponse, Members: &mGetVoiceConnectorStreamingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorStreamingConfigurationResponse})
+var sGetVoiceConnectorTerminationHealthRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorTerminationHealthRequest, Members: &mGetVoiceConnectorTerminationHealthRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorTerminationHealthRequest})
+var sGetVoiceConnectorTerminationHealthResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorTerminationHealthResponse, Members: &mGetVoiceConnectorTerminationHealthResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorTerminationHealthResponse})
+var sGetVoiceConnectorTerminationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorTerminationRequest, Members: &mGetVoiceConnectorTerminationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorTerminationRequest})
+var sGetVoiceConnectorTerminationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceConnectorTerminationResponse, Members: &mGetVoiceConnectorTerminationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorTerminationResponse})
+var sGetVoiceProfileDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceProfileDomainRequest, Members: &mGetVoiceProfileDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceProfileDomainRequest})
+var sGetVoiceProfileDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceProfileDomainResponse, Members: &mGetVoiceProfileDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceProfileDomainResponse})
+var sGetVoiceProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceProfileRequest, Members: &mGetVoiceProfileRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceProfileRequest})
+var sGetVoiceProfileResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceProfileResponse, Members: &mGetVoiceProfileResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceProfileResponse})
+var sGetVoiceToneAnalysisTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceToneAnalysisTaskRequest, Members: &mGetVoiceToneAnalysisTaskRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceToneAnalysisTaskRequest})
+var sGetVoiceToneAnalysisTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceToneAnalysisTaskResponse, Members: &mGetVoiceToneAnalysisTaskResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceToneAnalysisTaskResponse})
+var sListAvailableVoiceConnectorRegionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAvailableVoiceConnectorRegionsResponse, Members: &mListAvailableVoiceConnectorRegionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAvailableVoiceConnectorRegionsResponse})
+var sListPhoneNumberOrdersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPhoneNumberOrdersRequest, Members: &mListPhoneNumberOrdersRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPhoneNumberOrdersRequest})
+var sListPhoneNumberOrdersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPhoneNumberOrdersResponse, Members: &mListPhoneNumberOrdersResponse, Type: smithy.ShapeTypeStructure, Ext: &eListPhoneNumberOrdersResponse})
+var sListPhoneNumbersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPhoneNumbersRequest, Members: &mListPhoneNumbersRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPhoneNumbersRequest})
+var sListPhoneNumbersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPhoneNumbersResponse, Members: &mListPhoneNumbersResponse, Type: smithy.ShapeTypeStructure, Ext: &eListPhoneNumbersResponse})
+var sListProxySessionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProxySessionsRequest, Members: &mListProxySessionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListProxySessionsRequest})
+var sListProxySessionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProxySessionsResponse, Members: &mListProxySessionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListProxySessionsResponse})
+var sListSipMediaApplicationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSipMediaApplicationsRequest, Members: &mListSipMediaApplicationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListSipMediaApplicationsRequest})
+var sListSipMediaApplicationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSipMediaApplicationsResponse, Members: &mListSipMediaApplicationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSipMediaApplicationsResponse})
+var sListSipRulesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSipRulesRequest, Members: &mListSipRulesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListSipRulesRequest})
+var sListSipRulesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSipRulesResponse, Members: &mListSipRulesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSipRulesResponse})
+var sListSupportedPhoneNumberCountriesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupportedPhoneNumberCountriesRequest, Members: &mListSupportedPhoneNumberCountriesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListSupportedPhoneNumberCountriesRequest})
+var sListSupportedPhoneNumberCountriesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupportedPhoneNumberCountriesResponse, Members: &mListSupportedPhoneNumberCountriesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSupportedPhoneNumberCountriesResponse})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListVoiceConnectorGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceConnectorGroupsRequest, Members: &mListVoiceConnectorGroupsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListVoiceConnectorGroupsRequest})
+var sListVoiceConnectorGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceConnectorGroupsResponse, Members: &mListVoiceConnectorGroupsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListVoiceConnectorGroupsResponse})
+var sListVoiceConnectorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceConnectorsRequest, Members: &mListVoiceConnectorsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListVoiceConnectorsRequest})
+var sListVoiceConnectorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceConnectorsResponse, Members: &mListVoiceConnectorsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListVoiceConnectorsResponse})
+var sListVoiceConnectorTerminationCredentialsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceConnectorTerminationCredentialsRequest, Members: &mListVoiceConnectorTerminationCredentialsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListVoiceConnectorTerminationCredentialsRequest})
+var sListVoiceConnectorTerminationCredentialsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceConnectorTerminationCredentialsResponse, Members: &mListVoiceConnectorTerminationCredentialsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListVoiceConnectorTerminationCredentialsResponse})
+var sListVoiceProfileDomainsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceProfileDomainsRequest, Members: &mListVoiceProfileDomainsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListVoiceProfileDomainsRequest})
+var sListVoiceProfileDomainsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceProfileDomainsResponse, Members: &mListVoiceProfileDomainsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListVoiceProfileDomainsResponse})
+var sListVoiceProfilesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceProfilesRequest, Members: &mListVoiceProfilesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListVoiceProfilesRequest})
+var sListVoiceProfilesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVoiceProfilesResponse, Members: &mListVoiceProfilesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListVoiceProfilesResponse})
+var sPutSipMediaApplicationAlexaSkillConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSipMediaApplicationAlexaSkillConfigurationRequest, Members: &mPutSipMediaApplicationAlexaSkillConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutSipMediaApplicationAlexaSkillConfigurationRequest})
+var sPutSipMediaApplicationAlexaSkillConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSipMediaApplicationAlexaSkillConfigurationResponse, Members: &mPutSipMediaApplicationAlexaSkillConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutSipMediaApplicationAlexaSkillConfigurationResponse})
+var sPutSipMediaApplicationLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSipMediaApplicationLoggingConfigurationRequest, Members: &mPutSipMediaApplicationLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutSipMediaApplicationLoggingConfigurationRequest})
+var sPutSipMediaApplicationLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSipMediaApplicationLoggingConfigurationResponse, Members: &mPutSipMediaApplicationLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutSipMediaApplicationLoggingConfigurationResponse})
+var sPutVoiceConnectorEmergencyCallingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorEmergencyCallingConfigurationRequest, Members: &mPutVoiceConnectorEmergencyCallingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorEmergencyCallingConfigurationRequest})
+var sPutVoiceConnectorEmergencyCallingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorEmergencyCallingConfigurationResponse, Members: &mPutVoiceConnectorEmergencyCallingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorEmergencyCallingConfigurationResponse})
+var sPutVoiceConnectorExternalSystemsConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorExternalSystemsConfigurationRequest, Members: &mPutVoiceConnectorExternalSystemsConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorExternalSystemsConfigurationRequest})
+var sPutVoiceConnectorExternalSystemsConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorExternalSystemsConfigurationResponse, Members: &mPutVoiceConnectorExternalSystemsConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorExternalSystemsConfigurationResponse})
+var sPutVoiceConnectorLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorLoggingConfigurationRequest, Members: &mPutVoiceConnectorLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorLoggingConfigurationRequest})
+var sPutVoiceConnectorLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorLoggingConfigurationResponse, Members: &mPutVoiceConnectorLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorLoggingConfigurationResponse})
+var sPutVoiceConnectorOriginationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorOriginationRequest, Members: &mPutVoiceConnectorOriginationRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorOriginationRequest})
+var sPutVoiceConnectorOriginationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorOriginationResponse, Members: &mPutVoiceConnectorOriginationResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorOriginationResponse})
+var sPutVoiceConnectorProxyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorProxyRequest, Members: &mPutVoiceConnectorProxyRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorProxyRequest})
+var sPutVoiceConnectorProxyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorProxyResponse, Members: &mPutVoiceConnectorProxyResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorProxyResponse})
+var sPutVoiceConnectorStreamingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorStreamingConfigurationRequest, Members: &mPutVoiceConnectorStreamingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorStreamingConfigurationRequest})
+var sPutVoiceConnectorStreamingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorStreamingConfigurationResponse, Members: &mPutVoiceConnectorStreamingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorStreamingConfigurationResponse})
+var sPutVoiceConnectorTerminationCredentialsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorTerminationCredentialsRequest, Members: &mPutVoiceConnectorTerminationCredentialsRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorTerminationCredentialsRequest})
+var sPutVoiceConnectorTerminationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorTerminationRequest, Members: &mPutVoiceConnectorTerminationRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorTerminationRequest})
+var sPutVoiceConnectorTerminationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutVoiceConnectorTerminationResponse, Members: &mPutVoiceConnectorTerminationResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorTerminationResponse})
+var sRestorePhoneNumberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestorePhoneNumberRequest, Members: &mRestorePhoneNumberRequest, Type: smithy.ShapeTypeStructure, Ext: &eRestorePhoneNumberRequest})
+var sRestorePhoneNumberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestorePhoneNumberResponse, Members: &mRestorePhoneNumberResponse, Type: smithy.ShapeTypeStructure, Ext: &eRestorePhoneNumberResponse})
+var sSearchAvailablePhoneNumbersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchAvailablePhoneNumbersRequest, Members: &mSearchAvailablePhoneNumbersRequest, Type: smithy.ShapeTypeStructure, Ext: &eSearchAvailablePhoneNumbersRequest})
+var sSearchAvailablePhoneNumbersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchAvailablePhoneNumbersResponse, Members: &mSearchAvailablePhoneNumbersResponse, Type: smithy.ShapeTypeStructure, Ext: &eSearchAvailablePhoneNumbersResponse})
+var sStartSpeakerSearchTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSpeakerSearchTaskRequest, Members: &mStartSpeakerSearchTaskRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartSpeakerSearchTaskRequest})
+var sStartSpeakerSearchTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSpeakerSearchTaskResponse, Members: &mStartSpeakerSearchTaskResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartSpeakerSearchTaskResponse})
+var sStartVoiceToneAnalysisTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartVoiceToneAnalysisTaskRequest, Members: &mStartVoiceToneAnalysisTaskRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartVoiceToneAnalysisTaskRequest})
+var sStartVoiceToneAnalysisTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartVoiceToneAnalysisTaskResponse, Members: &mStartVoiceToneAnalysisTaskResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartVoiceToneAnalysisTaskResponse})
+var sStopSpeakerSearchTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopSpeakerSearchTaskRequest, Members: &mStopSpeakerSearchTaskRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopSpeakerSearchTaskRequest})
+var sStopVoiceToneAnalysisTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopVoiceToneAnalysisTaskRequest, Members: &mStopVoiceToneAnalysisTaskRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopVoiceToneAnalysisTaskRequest})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUpdateGlobalSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGlobalSettingsRequest, Members: &mUpdateGlobalSettingsRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGlobalSettingsRequest})
+var sUpdatePhoneNumberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePhoneNumberRequest, Members: &mUpdatePhoneNumberRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePhoneNumberRequest})
+var sUpdatePhoneNumberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePhoneNumberResponse, Members: &mUpdatePhoneNumberResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePhoneNumberResponse})
+var sUpdatePhoneNumberSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePhoneNumberSettingsRequest, Members: &mUpdatePhoneNumberSettingsRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePhoneNumberSettingsRequest})
+var sUpdateProxySessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxySessionRequest, Members: &mUpdateProxySessionRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProxySessionRequest})
+var sUpdateProxySessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProxySessionResponse, Members: &mUpdateProxySessionResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProxySessionResponse})
+var sUpdateSipMediaApplicationCallRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSipMediaApplicationCallRequest, Members: &mUpdateSipMediaApplicationCallRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSipMediaApplicationCallRequest})
+var sUpdateSipMediaApplicationCallResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSipMediaApplicationCallResponse, Members: &mUpdateSipMediaApplicationCallResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSipMediaApplicationCallResponse})
+var sUpdateSipMediaApplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSipMediaApplicationRequest, Members: &mUpdateSipMediaApplicationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSipMediaApplicationRequest})
+var sUpdateSipMediaApplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSipMediaApplicationResponse, Members: &mUpdateSipMediaApplicationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSipMediaApplicationResponse})
+var sUpdateSipRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSipRuleRequest, Members: &mUpdateSipRuleRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSipRuleRequest})
+var sUpdateSipRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSipRuleResponse, Members: &mUpdateSipRuleResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSipRuleResponse})
+var sUpdateVoiceConnectorGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVoiceConnectorGroupRequest, Members: &mUpdateVoiceConnectorGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVoiceConnectorGroupRequest})
+var sUpdateVoiceConnectorGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVoiceConnectorGroupResponse, Members: &mUpdateVoiceConnectorGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVoiceConnectorGroupResponse})
+var sUpdateVoiceConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVoiceConnectorRequest, Members: &mUpdateVoiceConnectorRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVoiceConnectorRequest})
+var sUpdateVoiceConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVoiceConnectorResponse, Members: &mUpdateVoiceConnectorResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVoiceConnectorResponse})
+var sUpdateVoiceProfileDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVoiceProfileDomainRequest, Members: &mUpdateVoiceProfileDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVoiceProfileDomainRequest})
+var sUpdateVoiceProfileDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVoiceProfileDomainResponse, Members: &mUpdateVoiceProfileDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVoiceProfileDomainResponse})
+var sUpdateVoiceProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVoiceProfileRequest, Members: &mUpdateVoiceProfileRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVoiceProfileRequest})
+var sUpdateVoiceProfileResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVoiceProfileResponse, Members: &mUpdateVoiceProfileResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVoiceProfileResponse})
+var sValidateE911AddressRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidateE911AddressRequest, Members: &mValidateE911AddressRequest, Type: smithy.ShapeTypeStructure, Ext: &eValidateE911AddressRequest})
+var sValidateE911AddressResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidateE911AddressResponse, Members: &mValidateE911AddressResponse, Type: smithy.ShapeTypeStructure, Ext: &eValidateE911AddressResponse})
 
-var sAccessDeniedException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[98]})
-var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[99]})
-var sAddress_streetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streetName", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[101]})
-var sAddress_streetSuffix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streetSuffix", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var sAddress_postDirectional = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postDirectional", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[103]})
-var sAddress_preDirectional = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preDirectional", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[104]})
-var sAddress_streetNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streetNumber", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[105]})
-var sAddress_city = smithy.NewStaticSchema(smithy.StaticSchema{Member: "city", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[106]})
-var sAddress_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[107]})
-var sAddress_postalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postalCode", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[108]})
-var sAddress_postalCodePlus4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postalCodePlus4", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[109]})
-var sAddress_country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "country", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[110]})
-var s_AlexaSkillIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AlexaSkillId, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[113]})
-var sAlexaSkillStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[115]})
-var sAlexaSkillStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[116]})
-var sBadRequestException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[121]})
-var sBadRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[122]})
-var sCallDetails_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Type: smithy.ShapeTypeString, Ext: &ext[125]})
-var sCallDetails_TransactionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransactionId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &ext[126]})
-var sCallDetails_IsCaller = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsCaller", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[127]})
-var sCallDistributionType_PriorityWeightedDistribution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PriorityWeightedDistribution", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[129]})
-var sCallDistributionType_LoadBalancedDistribution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancedDistribution", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[130]})
-var sCallingNameStatus_Unassigned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unassigned", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[133]})
-var sCallingNameStatus_UpdateInProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateInProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[134]})
-var sCallingNameStatus_UpdateSucceeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateSucceeded", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[135]})
-var sCallingNameStatus_UpdateFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[136]})
-var s_CallingRegionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CallingRegion, Type: smithy.ShapeTypeString, Ext: &ext[139]})
-var sCallLegType_CALLER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CALLER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[141]})
-var sCallLegType_CALLEE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CALLEE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[142]})
-var sCandidateAddress_streetInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streetInfo", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[144]})
-var sCandidateAddress_streetNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streetNumber", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[145]})
-var sCandidateAddress_city = smithy.NewStaticSchema(smithy.StaticSchema{Member: "city", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[146]})
-var sCandidateAddress_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[147]})
-var sCandidateAddress_postalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postalCode", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[148]})
-var sCandidateAddress_postalCodePlus4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postalCodePlus4", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[149]})
-var sCandidateAddress_country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "country", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[150]})
-var s_CandidateAddressList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCandidateAddress, Members: &mCandidateAddress, Traits: &t100, Type: smithy.ShapeTypeStructure, Ext: &ext[152]})
-var sCapability_Voice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Voice", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[154]})
-var sCapability_SMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[155]})
-var s_CapabilityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCapability, Members: &mCapability, Type: smithy.ShapeTypeEnum, Ext: &ext[157]})
-var sConflictException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[161]})
-var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[162]})
-var sContactCenterSystemType_GENESYS_ENGAGE_ON_PREMISES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GENESYS_ENGAGE_ON_PREMISES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[164]})
-var sContactCenterSystemType_AVAYA_AURA_CALL_CENTER_ELITE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAYA_AURA_CALL_CENTER_ELITE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[165]})
-var sContactCenterSystemType_AVAYA_AURA_CONTACT_CENTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAYA_AURA_CONTACT_CENTER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[166]})
-var sContactCenterSystemType_CISCO_UNIFIED_CONTACT_CENTER_ENTERPRISE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CISCO_UNIFIED_CONTACT_CENTER_ENTERPRISE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[167]})
-var s_ContactCenterSystemTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContactCenterSystemType, Members: &mContactCenterSystemType, Type: smithy.ShapeTypeEnum, Ext: &ext[169]})
-var s_CountryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Country, Type: smithy.ShapeTypeString, Ext: &ext[172]})
-var sCredential_Username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Username", ID: &i_SensitiveString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[175]})
-var sCredential_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_SensitiveString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[176]})
-var s_CredentialList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCredential, Members: &mCredential, Type: smithy.ShapeTypeStructure, Ext: &ext[178]})
-var sDNISEmergencyCallingConfiguration_EmergencyPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmergencyPhoneNumber", ID: &i_E164PhoneNumber, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[181]})
-var sDNISEmergencyCallingConfiguration_TestPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TestPhoneNumber", ID: &i_E164PhoneNumber, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[182]})
-var sDNISEmergencyCallingConfiguration_CallingCountry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallingCountry", ID: &i_Alpha2CountryCode, Type: smithy.ShapeTypeString, Ext: &ext[183]})
-var s_DNISEmergencyCallingConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDNISEmergencyCallingConfiguration, Members: &mDNISEmergencyCallingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[185]})
-var s_E164PhoneNumberList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_E164PhoneNumber, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[188]})
-var sEmergencyCallingConfiguration_DNIS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNIS", ID: &i_DNISEmergencyCallingConfigurationList, Members: &m_DNISEmergencyCallingConfigurationList, Type: smithy.ShapeTypeList, Ext: &ext[190]})
-var sErrorCode_BadRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BadRequest", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[192]})
-var sErrorCode_Conflict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Conflict", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[193]})
-var sErrorCode_Forbidden = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Forbidden", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[194]})
-var sErrorCode_NotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotFound", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[195]})
-var sErrorCode_PreconditionFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreconditionFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[196]})
-var sErrorCode_ResourceLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceLimitExceeded", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[197]})
-var sErrorCode_ServiceFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceFailure", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[198]})
-var sErrorCode_AccessDenied = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessDenied", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[199]})
-var sErrorCode_ServiceUnavailable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceUnavailable", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[200]})
-var sErrorCode_Throttled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Throttled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[201]})
-var sErrorCode_Throttling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Throttling", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[202]})
-var sErrorCode_Unauthorized = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unauthorized", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[203]})
-var sErrorCode_Unprocessable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unprocessable", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[204]})
-var sErrorCode_VoiceConnectorGroupAssociationsExist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroupAssociationsExist", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[205]})
-var sErrorCode_PhoneNumberAssociationsExist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberAssociationsExist", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[206]})
-var sErrorCode_Gone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Gone", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[207]})
-var sErrorCode_Validation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Validation", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[208]})
-var sExternalSystemsConfiguration_SessionBorderControllerTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionBorderControllerTypes", ID: &i_SessionBorderControllerTypeList, Members: &m_SessionBorderControllerTypeList, Type: smithy.ShapeTypeList, Ext: &ext[210]})
-var sExternalSystemsConfiguration_ContactCenterSystemTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactCenterSystemTypes", ID: &i_ContactCenterSystemTypeList, Members: &m_ContactCenterSystemTypeList, Type: smithy.ShapeTypeList, Ext: &ext[211]})
-var sForbiddenException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[213]})
-var sForbiddenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[214]})
-var sGeoMatchLevel_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[217]})
-var sGeoMatchLevel_AreaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AreaCode", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[218]})
-var sGeoMatchParams_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &i_Country, Type: smithy.ShapeTypeString, Ext: &ext[220]})
-var sGeoMatchParams_AreaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AreaCode", ID: &i_AreaCode, Type: smithy.ShapeTypeString, Ext: &ext[221]})
-var sGoneException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[223]})
-var sGoneException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[224]})
-var sLanguageCode_EN_US = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EN_US", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[229]})
-var sLoggingConfiguration_EnableSIPLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableSIPLogs", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[231]})
-var sLoggingConfiguration_EnableMediaMetricLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableMediaMetricLogs", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[232]})
-var sMediaInsightsConfiguration_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[234]})
-var sMediaInsightsConfiguration_ConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationArn", ID: &i_Arn, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[235]})
-var sNetworkType_IPV4_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[237]})
-var sNetworkType_DUAL_STACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUAL_STACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[238]})
-var s_NonEmptyStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[244]})
-var sNotFoundException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[246]})
-var sNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[247]})
-var sNotificationTarget_EventBridge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBridge", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[249]})
-var sNotificationTarget_SNS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[250]})
-var sNotificationTarget_SQS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SQS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[251]})
-var sNumberSelectionBehavior_PreferSticky = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferSticky", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[254]})
-var sNumberSelectionBehavior_AvoidSticky = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvoidSticky", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[255]})
-var sOrderedPhoneNumber_E164PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "E164PhoneNumber", ID: &i_E164PhoneNumber, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[257]})
-var sOrderedPhoneNumber_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOrderedPhoneNumberStatus, Members: &mOrderedPhoneNumberStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[258]})
-var s_OrderedPhoneNumberList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOrderedPhoneNumber, Members: &mOrderedPhoneNumber, Type: smithy.ShapeTypeStructure, Ext: &ext[260]})
-var sOrderedPhoneNumberStatus_Processing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Processing", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[262]})
-var sOrderedPhoneNumberStatus_Acquired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Acquired", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[263]})
-var sOrderedPhoneNumberStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[264]})
-var sOrigination_Routes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Routes", ID: &i_OriginationRouteList, Members: &m_OriginationRouteList, Type: smithy.ShapeTypeList, Ext: &ext[266]})
-var sOrigination_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[267]})
-var sOriginationRoute_Host = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Host", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[269]})
-var sOriginationRoute_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_Port, Type: smithy.ShapeTypeInteger, Ext: &ext[270]})
-var sOriginationRoute_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iOriginationRouteProtocol, Members: &mOriginationRouteProtocol, Type: smithy.ShapeTypeEnum, Ext: &ext[271]})
-var sOriginationRoute_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_OriginationRoutePriority, Type: smithy.ShapeTypeInteger, Ext: &ext[272]})
-var sOriginationRoute_Weight = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Weight", ID: &i_OriginationRouteWeight, Type: smithy.ShapeTypeInteger, Ext: &ext[273]})
-var s_OriginationRouteList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOriginationRoute, Members: &mOriginationRoute, Type: smithy.ShapeTypeStructure, Ext: &ext[275]})
-var sOriginationRouteProtocol_TCP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TCP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[278]})
-var sOriginationRouteProtocol_UDP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UDP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[279]})
-var sParticipant_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &i_E164PhoneNumber, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[282]})
-var sParticipant_ProxyPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyPhoneNumber", ID: &i_E164PhoneNumber, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[283]})
-var s_ParticipantPhoneNumberList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_E164PhoneNumber, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[285]})
-var s_Participants_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iParticipant, Members: &mParticipant, Type: smithy.ShapeTypeStructure, Ext: &ext[287]})
-var sPhoneNumber_PhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberId", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[289]})
-var sPhoneNumber_E164PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "E164PhoneNumber", ID: &i_E164PhoneNumber, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[290]})
-var sPhoneNumber_PhoneNumberArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberArn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ext[291]})
-var sPhoneNumber_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &i_Alpha2CountryCode, Type: smithy.ShapeTypeString, Ext: &ext[292]})
-var sPhoneNumber_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iPhoneNumberType, Members: &mPhoneNumberType, Type: smithy.ShapeTypeEnum, Ext: &ext[293]})
-var sPhoneNumber_ProductType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductType", ID: &iPhoneNumberProductType, Members: &mPhoneNumberProductType, Type: smithy.ShapeTypeEnum, Ext: &ext[294]})
-var sPhoneNumber_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iPhoneNumberStatus, Members: &mPhoneNumberStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[295]})
-var sPhoneNumber_Capabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Capabilities", ID: &iPhoneNumberCapabilities, Members: &mPhoneNumberCapabilities, Type: smithy.ShapeTypeStructure, Ext: &ext[296]})
-var sPhoneNumber_Associations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Associations", ID: &i_PhoneNumberAssociationList, Members: &m_PhoneNumberAssociationList, Type: smithy.ShapeTypeList, Ext: &ext[297]})
-var sPhoneNumber_CallingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallingName", ID: &i_CallingName, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[298]})
-var sPhoneNumber_CallingNameStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallingNameStatus", ID: &iCallingNameStatus, Members: &mCallingNameStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[299]})
-var sPhoneNumber_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[300]})
-var sPhoneNumber_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[301]})
-var sPhoneNumber_DeletionTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[302]})
-var sPhoneNumber_OrderId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrderId", ID: &i_GuidString, Type: smithy.ShapeTypeString, Ext: &ext[303]})
-var sPhoneNumber_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PhoneNumberName, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[304]})
-var sPhoneNumberAssociation_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[306]})
-var sPhoneNumberAssociation_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iPhoneNumberAssociationName, Members: &mPhoneNumberAssociationName, Type: smithy.ShapeTypeEnum, Ext: &ext[307]})
-var sPhoneNumberAssociation_AssociatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[308]})
-var s_PhoneNumberAssociationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPhoneNumberAssociation, Members: &mPhoneNumberAssociation, Type: smithy.ShapeTypeStructure, Ext: &ext[310]})
-var sPhoneNumberAssociationName_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[312]})
-var sPhoneNumberAssociationName_VoiceConnectorGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroupId", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[313]})
-var sPhoneNumberAssociationName_SipRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipRuleId", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[314]})
-var sPhoneNumberCapabilities_InboundCall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboundCall", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[316]})
-var sPhoneNumberCapabilities_OutboundCall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutboundCall", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[317]})
-var sPhoneNumberCapabilities_InboundSMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboundSMS", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[318]})
-var sPhoneNumberCapabilities_OutboundSMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutboundSMS", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[319]})
-var sPhoneNumberCapabilities_InboundMMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboundMMS", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[320]})
-var sPhoneNumberCapabilities_OutboundMMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutboundMMS", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[321]})
-var s_PhoneNumberCountriesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPhoneNumberCountry, Members: &mPhoneNumberCountry, Type: smithy.ShapeTypeStructure, Ext: &ext[323]})
-var sPhoneNumberCountry_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountryCode", ID: &i_Alpha2CountryCode, Type: smithy.ShapeTypeString, Ext: &ext[325]})
-var sPhoneNumberCountry_SupportedPhoneNumberTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportedPhoneNumberTypes", ID: &i_PhoneNumberTypeList, Members: &m_PhoneNumberTypeList, Type: smithy.ShapeTypeList, Ext: &ext[326]})
-var sPhoneNumberError_PhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberId", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[328]})
-var sPhoneNumberError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[329]})
-var sPhoneNumberError_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[330]})
-var s_PhoneNumberErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPhoneNumberError, Members: &mPhoneNumberError, Type: smithy.ShapeTypeStructure, Ext: &ext[332]})
-var s_PhoneNumberList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPhoneNumber, Members: &mPhoneNumber, Type: smithy.ShapeTypeStructure, Ext: &ext[334]})
-var sPhoneNumberOrder_PhoneNumberOrderId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberOrderId", ID: &i_GuidString, Type: smithy.ShapeTypeString, Ext: &ext[338]})
-var sPhoneNumberOrder_ProductType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductType", ID: &iPhoneNumberProductType, Members: &mPhoneNumberProductType, Type: smithy.ShapeTypeEnum, Ext: &ext[339]})
-var sPhoneNumberOrder_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iPhoneNumberOrderStatus, Members: &mPhoneNumberOrderStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[340]})
-var sPhoneNumberOrder_OrderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrderType", ID: &iPhoneNumberOrderType, Members: &mPhoneNumberOrderType, Type: smithy.ShapeTypeEnum, Ext: &ext[341]})
-var sPhoneNumberOrder_OrderedPhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrderedPhoneNumbers", ID: &i_OrderedPhoneNumberList, Members: &m_OrderedPhoneNumberList, Type: smithy.ShapeTypeList, Ext: &ext[342]})
-var sPhoneNumberOrder_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[343]})
-var sPhoneNumberOrder_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[344]})
-var sPhoneNumberOrder_FocDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FocDate", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[345]})
-var s_PhoneNumberOrderList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPhoneNumberOrder, Members: &mPhoneNumberOrder, Type: smithy.ShapeTypeStructure, Ext: &ext[347]})
-var sPhoneNumberOrderStatus_Processing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Processing", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[349]})
-var sPhoneNumberOrderStatus_Successful = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Successful", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[350]})
-var sPhoneNumberOrderStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[351]})
-var sPhoneNumberOrderStatus_Partial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Partial", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[352]})
-var sPhoneNumberOrderStatus_PendingDocuments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingDocuments", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[353]})
-var sPhoneNumberOrderStatus_Submitted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Submitted", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[354]})
-var sPhoneNumberOrderStatus_FOC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FOC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[355]})
-var sPhoneNumberOrderStatus_ChangeRequested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeRequested", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[356]})
-var sPhoneNumberOrderStatus_Exception = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Exception", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[357]})
-var sPhoneNumberOrderStatus_CancelRequested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CancelRequested", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[358]})
-var sPhoneNumberOrderStatus_Cancelled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cancelled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[359]})
-var sPhoneNumberOrderType_New = smithy.NewStaticSchema(smithy.StaticSchema{Member: "New", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[361]})
-var sPhoneNumberOrderType_Porting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Porting", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[362]})
-var sPhoneNumberProductType_VoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnector", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[364]})
-var sPhoneNumberProductType_SipMediaApplicationDialIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationDialIn", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[365]})
-var sPhoneNumberStatus_Cancelled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cancelled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[367]})
-var sPhoneNumberStatus_PortinCancelRequested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortinCancelRequested", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[368]})
-var sPhoneNumberStatus_PortinInProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortinInProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[369]})
-var sPhoneNumberStatus_AcquireInProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcquireInProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[370]})
-var sPhoneNumberStatus_AcquireFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcquireFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[371]})
-var sPhoneNumberStatus_Unassigned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unassigned", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[372]})
-var sPhoneNumberStatus_Assigned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Assigned", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[373]})
-var sPhoneNumberStatus_ReleaseInProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReleaseInProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[374]})
-var sPhoneNumberStatus_DeleteInProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteInProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[375]})
-var sPhoneNumberStatus_ReleaseFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReleaseFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[376]})
-var sPhoneNumberStatus_DeleteFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[377]})
-var sPhoneNumberType_Local = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Local", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[379]})
-var sPhoneNumberType_TollFree = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TollFree", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[380]})
-var s_PhoneNumberTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPhoneNumberType, Members: &mPhoneNumberType, Type: smithy.ShapeTypeEnum, Ext: &ext[382]})
-var sProxy_DefaultSessionExpiryMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultSessionExpiryMinutes", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[386]})
-var sProxy_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[387]})
-var sProxy_FallBackPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FallBackPhoneNumber", ID: &i_E164PhoneNumber, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[388]})
-var sProxy_PhoneNumberCountries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberCountries", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[389]})
-var sProxySession_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Type: smithy.ShapeTypeString, Ext: &ext[391]})
-var sProxySession_ProxySessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxySessionId", ID: &i_NonEmptyString128, Type: smithy.ShapeTypeString, Ext: &ext[392]})
-var sProxySession_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String128, Type: smithy.ShapeTypeString, Ext: &ext[393]})
-var sProxySession_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iProxySessionStatus, Members: &mProxySessionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[394]})
-var sProxySession_ExpiryMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiryMinutes", ID: &i_PositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[395]})
-var sProxySession_Capabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Capabilities", ID: &i_CapabilityList, Members: &m_CapabilityList, Type: smithy.ShapeTypeList, Ext: &ext[396]})
-var sProxySession_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[397]})
-var sProxySession_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[398]})
-var sProxySession_EndedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[399]})
-var sProxySession_Participants = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Participants", ID: &i_Participants, Members: &m_Participants, Type: smithy.ShapeTypeList, Ext: &ext[400]})
-var sProxySession_NumberSelectionBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberSelectionBehavior", ID: &iNumberSelectionBehavior, Members: &mNumberSelectionBehavior, Type: smithy.ShapeTypeEnum, Ext: &ext[401]})
-var sProxySession_GeoMatchLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeoMatchLevel", ID: &iGeoMatchLevel, Members: &mGeoMatchLevel, Type: smithy.ShapeTypeEnum, Ext: &ext[402]})
-var sProxySession_GeoMatchParams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeoMatchParams", ID: &iGeoMatchParams, Members: &mGeoMatchParams, Type: smithy.ShapeTypeStructure, Ext: &ext[403]})
-var s_ProxySessions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProxySession, Members: &mProxySession, Type: smithy.ShapeTypeStructure, Ext: &ext[406]})
-var sProxySessionStatus_Open = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Open", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[408]})
-var sProxySessionStatus_InProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[409]})
-var sProxySessionStatus_Closed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Closed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[410]})
-var sResourceLimitExceededException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[412]})
-var sResourceLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[413]})
-var s_SensitiveStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SensitiveString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[419]})
-var sServerSideEncryptionConfiguration_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_Arn, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[421]})
-var sServiceFailureException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[423]})
-var sServiceFailureException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[424]})
-var sServiceUnavailableException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[426]})
-var sServiceUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[427]})
-var sSessionBorderControllerType_RIBBON_SBC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RIBBON_SBC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[429]})
-var sSessionBorderControllerType_ORACLE_ACME_PACKET_SBC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ORACLE_ACME_PACKET_SBC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[430]})
-var sSessionBorderControllerType_AVAYA_SBCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAYA_SBCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[431]})
-var sSessionBorderControllerType_CISCO_UNIFIED_BORDER_ELEMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CISCO_UNIFIED_BORDER_ELEMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[432]})
-var sSessionBorderControllerType_AUDIOCODES_MEDIANT_SBC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUDIOCODES_MEDIANT_SBC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[433]})
-var s_SessionBorderControllerTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSessionBorderControllerType, Members: &mSessionBorderControllerType, Type: smithy.ShapeTypeEnum, Ext: &ext[435]})
-var s_SipHeadersMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_SensitiveString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[438]})
-var s_SipHeadersMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_SensitiveString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[439]})
-var sSipMediaApplication_SipMediaApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ext[441]})
-var sSipMediaApplication_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsRegion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[442]})
-var sSipMediaApplication_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SipMediaApplicationName, Type: smithy.ShapeTypeString, Ext: &ext[443]})
-var sSipMediaApplication_Endpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoints", ID: &i_SipMediaApplicationEndpointList, Members: &m_SipMediaApplicationEndpointList, Type: smithy.ShapeTypeList, Ext: &ext[444]})
-var sSipMediaApplication_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[445]})
-var sSipMediaApplication_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[446]})
-var sSipMediaApplication_SipMediaApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationArn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ext[447]})
-var sSipMediaApplicationAlexaSkillConfiguration_AlexaSkillStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlexaSkillStatus", ID: &iAlexaSkillStatus, Members: &mAlexaSkillStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[449]})
-var sSipMediaApplicationAlexaSkillConfiguration_AlexaSkillIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlexaSkillIds", ID: &i_AlexaSkillIdList, Members: &m_AlexaSkillIdList, Type: smithy.ShapeTypeList, Ext: &ext[450]})
-var sSipMediaApplicationCall_TransactionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransactionId", ID: &i_GuidString, Type: smithy.ShapeTypeString, Ext: &ext[452]})
-var sSipMediaApplicationEndpoint_LambdaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LambdaArn", ID: &i_FunctionArn, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[454]})
-var s_SipMediaApplicationEndpointList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSipMediaApplicationEndpoint, Members: &mSipMediaApplicationEndpoint, Type: smithy.ShapeTypeStructure, Ext: &ext[456]})
-var s_SipMediaApplicationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSipMediaApplication, Members: &mSipMediaApplication, Type: smithy.ShapeTypeStructure, Ext: &ext[458]})
-var sSipMediaApplicationLoggingConfiguration_EnableSipMediaApplicationMessageLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableSipMediaApplicationMessageLogs", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[460]})
-var sSipRule_SipRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipRuleId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ext[463]})
-var sSipRule_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SipRuleName, Type: smithy.ShapeTypeString, Ext: &ext[464]})
-var sSipRule_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[465]})
-var sSipRule_TriggerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TriggerType", ID: &iSipRuleTriggerType, Members: &mSipRuleTriggerType, Type: smithy.ShapeTypeEnum, Ext: &ext[466]})
-var sSipRule_TriggerValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TriggerValue", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ext[467]})
-var sSipRule_TargetApplications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetApplications", ID: &i_SipRuleTargetApplicationList, Members: &m_SipRuleTargetApplicationList, Type: smithy.ShapeTypeList, Ext: &ext[468]})
-var sSipRule_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[469]})
-var sSipRule_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[470]})
-var s_SipRuleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSipRule, Members: &mSipRule, Type: smithy.ShapeTypeStructure, Ext: &ext[472]})
-var sSipRuleTargetApplication_SipMediaApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ext[475]})
-var sSipRuleTargetApplication_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_SipApplicationPriority, Type: smithy.ShapeTypeInteger, Ext: &ext[476]})
-var sSipRuleTargetApplication_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsRegion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[477]})
-var s_SipRuleTargetApplicationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSipRuleTargetApplication, Members: &mSipRuleTargetApplication, Type: smithy.ShapeTypeStructure, Ext: &ext[479]})
-var sSipRuleTriggerType_ToPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ToPhoneNumber", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[481]})
-var sSipRuleTriggerType_RequestUriHostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestUriHostname", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[482]})
-var s_SMACreateCallArgumentsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_SensitiveString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[484]})
-var s_SMACreateCallArgumentsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_SensitiveString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[485]})
-var s_SMAUpdateCallArgumentsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_SensitiveString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[487]})
-var s_SMAUpdateCallArgumentsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_SensitiveString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[488]})
-var sSpeakerSearchDetails_Results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Results", ID: &i_SpeakerSearchResultList, Members: &m_SpeakerSearchResultList, Type: smithy.ShapeTypeList, Ext: &ext[490]})
-var sSpeakerSearchDetails_VoiceprintGenerationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceprintGenerationStatus", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &ext[491]})
-var sSpeakerSearchResult_ConfidenceScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfidenceScore", ID: &i_ConfidenceScore, Type: smithy.ShapeTypeFloat, Ext: &ext[493]})
-var sSpeakerSearchResult_VoiceProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &ext[494]})
-var s_SpeakerSearchResultList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSpeakerSearchResult, Members: &mSpeakerSearchResult, Type: smithy.ShapeTypeStructure, Ext: &ext[496]})
-var sSpeakerSearchTask_SpeakerSearchTaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSearchTaskId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &ext[498]})
-var sSpeakerSearchTask_SpeakerSearchTaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSearchTaskStatus", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ext[499]})
-var sSpeakerSearchTask_CallDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallDetails", ID: &iCallDetails, Members: &mCallDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[500]})
-var sSpeakerSearchTask_SpeakerSearchDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSearchDetails", ID: &iSpeakerSearchDetails, Members: &mSpeakerSearchDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[501]})
-var sSpeakerSearchTask_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[502]})
-var sSpeakerSearchTask_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[503]})
-var sSpeakerSearchTask_StartedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[504]})
-var sSpeakerSearchTask_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[505]})
-var sStreamingConfiguration_DataRetentionInHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataRetentionInHours", ID: &i_DataRetentionInHours, Type: smithy.ShapeTypeInteger, Ext: &ext[507]})
-var sStreamingConfiguration_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[508]})
-var sStreamingConfiguration_StreamingNotificationTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamingNotificationTargets", ID: &i_StreamingNotificationTargetList, Members: &m_StreamingNotificationTargetList, Type: smithy.ShapeTypeList, Ext: &ext[509]})
-var sStreamingConfiguration_MediaInsightsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaInsightsConfiguration", ID: &iMediaInsightsConfiguration, Members: &mMediaInsightsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[510]})
-var sStreamingNotificationTarget_NotificationTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationTarget", ID: &iNotificationTarget, Members: &mNotificationTarget, Type: smithy.ShapeTypeEnum, Ext: &ext[512]})
-var s_StreamingNotificationTargetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStreamingNotificationTarget, Members: &mStreamingNotificationTarget, Type: smithy.ShapeTypeStructure, Ext: &ext[514]})
-var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[518]})
-var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[520]})
-var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[521]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[524]})
-var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[526]})
-var sTermination_CpsLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CpsLimit", ID: &i_CpsLimit, Type: smithy.ShapeTypeInteger, Ext: &ext[529]})
-var sTermination_DefaultPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultPhoneNumber", ID: &i_E164PhoneNumber, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[530]})
-var sTermination_CallingRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallingRegions", ID: &i_CallingRegionList, Members: &m_CallingRegionList, Type: smithy.ShapeTypeList, Ext: &ext[531]})
-var sTermination_CidrAllowedList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CidrAllowedList", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[532]})
-var sTermination_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[533]})
-var sTerminationHealth_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[535]})
-var sTerminationHealth_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[536]})
-var sThrottledClientException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[538]})
-var sThrottledClientException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[539]})
-var sUnauthorizedClientException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[542]})
-var sUnauthorizedClientException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[543]})
-var sUnprocessableEntityException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[545]})
-var sUnprocessableEntityException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[546]})
-var sUpdatePhoneNumberRequestItem_PhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberId", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[548]})
-var sUpdatePhoneNumberRequestItem_ProductType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductType", ID: &iPhoneNumberProductType, Members: &mPhoneNumberProductType, Type: smithy.ShapeTypeEnum, Ext: &ext[549]})
-var sUpdatePhoneNumberRequestItem_CallingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallingName", ID: &i_CallingName, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[550]})
-var sUpdatePhoneNumberRequestItem_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PhoneNumberName, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[551]})
-var s_UpdatePhoneNumberRequestItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUpdatePhoneNumberRequestItem, Members: &mUpdatePhoneNumberRequestItem, Type: smithy.ShapeTypeStructure, Ext: &ext[553]})
-var sVoiceConnector_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Type: smithy.ShapeTypeString, Ext: &ext[556]})
-var sVoiceConnector_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsRegion", ID: &iVoiceConnectorAwsRegion, Members: &mVoiceConnectorAwsRegion, Type: smithy.ShapeTypeEnum, Ext: &ext[557]})
-var sVoiceConnector_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_VoiceConnectorName, Type: smithy.ShapeTypeString, Ext: &ext[558]})
-var sVoiceConnector_OutboundHostName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutboundHostName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[559]})
-var sVoiceConnector_RequireEncryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequireEncryption", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[560]})
-var sVoiceConnector_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[561]})
-var sVoiceConnector_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[562]})
-var sVoiceConnector_VoiceConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorArn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ext[563]})
-var sVoiceConnector_IntegrationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationType", ID: &iVoiceConnectorIntegrationType, Members: &mVoiceConnectorIntegrationType, Type: smithy.ShapeTypeEnum, Ext: &ext[564]})
-var sVoiceConnector_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum, Ext: &ext[565]})
-var sVoiceConnectorAwsRegion_US_EAST_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "US_EAST_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[567]})
-var sVoiceConnectorAwsRegion_US_WEST_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "US_WEST_2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[568]})
-var sVoiceConnectorAwsRegion_CA_CENTRAL_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CA_CENTRAL_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[569]})
-var sVoiceConnectorAwsRegion_EU_CENTRAL_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EU_CENTRAL_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[570]})
-var sVoiceConnectorAwsRegion_EU_WEST_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EU_WEST_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[571]})
-var sVoiceConnectorAwsRegion_EU_WEST_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EU_WEST_2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[572]})
-var sVoiceConnectorAwsRegion_AP_NORTHEAST_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AP_NORTHEAST_2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[573]})
-var sVoiceConnectorAwsRegion_AP_NORTHEAST_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AP_NORTHEAST_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[574]})
-var sVoiceConnectorAwsRegion_AP_SOUTHEAST_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AP_SOUTHEAST_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[575]})
-var sVoiceConnectorAwsRegion_AP_SOUTHEAST_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AP_SOUTHEAST_2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[576]})
-var s_VoiceConnectorAwsRegionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVoiceConnectorAwsRegion, Members: &mVoiceConnectorAwsRegion, Type: smithy.ShapeTypeEnum, Ext: &ext[578]})
-var sVoiceConnectorGroup_VoiceConnectorGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroupId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ext[580]})
-var sVoiceConnectorGroup_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_VoiceConnectorGroupName, Type: smithy.ShapeTypeString, Ext: &ext[581]})
-var sVoiceConnectorGroup_VoiceConnectorItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorItems", ID: &i_VoiceConnectorItemList, Members: &m_VoiceConnectorItemList, Type: smithy.ShapeTypeList, Ext: &ext[582]})
-var sVoiceConnectorGroup_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[583]})
-var sVoiceConnectorGroup_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[584]})
-var sVoiceConnectorGroup_VoiceConnectorGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroupArn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ext[585]})
-var sVoiceConnectorGroup_CallDistributionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallDistributionType", ID: &iCallDistributionType, Members: &mCallDistributionType, Type: smithy.ShapeTypeEnum, Ext: &ext[586]})
-var s_VoiceConnectorGroupList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVoiceConnectorGroup, Members: &mVoiceConnectorGroup, Type: smithy.ShapeTypeStructure, Ext: &ext[588]})
-var sVoiceConnectorIntegrationType_CONNECT_CALL_TRANSFER_CONNECTOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONNECT_CALL_TRANSFER_CONNECTOR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[592]})
-var sVoiceConnectorIntegrationType_CONNECT_ANALYTICS_CONNECTOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONNECT_ANALYTICS_CONNECTOR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[593]})
-var sVoiceConnectorItem_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Type: smithy.ShapeTypeString, Ext: &ext[595]})
-var sVoiceConnectorItem_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_VoiceConnectorItemPriority, Type: smithy.ShapeTypeInteger, Ext: &ext[596]})
-var s_VoiceConnectorItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVoiceConnectorItem, Members: &mVoiceConnectorItem, Type: smithy.ShapeTypeStructure, Ext: &ext[598]})
-var s_VoiceConnectorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVoiceConnector, Members: &mVoiceConnector, Type: smithy.ShapeTypeStructure, Ext: &ext[601]})
-var sVoiceConnectorSettings_CdrBucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CdrBucket", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &ext[604]})
-var sVoiceProfile_VoiceProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &ext[606]})
-var sVoiceProfile_VoiceProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileArn", ID: &i_Arn, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[607]})
-var sVoiceProfile_VoiceProfileDomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomainId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &ext[608]})
-var sVoiceProfile_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[609]})
-var sVoiceProfile_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[610]})
-var sVoiceProfile_ExpirationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[611]})
-var sVoiceProfileDomain_VoiceProfileDomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomainId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &ext[613]})
-var sVoiceProfileDomain_VoiceProfileDomainArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomainArn", ID: &i_Arn, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[614]})
-var sVoiceProfileDomain_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_VoiceProfileDomainName, Type: smithy.ShapeTypeString, Ext: &ext[615]})
-var sVoiceProfileDomain_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_VoiceProfileDomainDescription, Type: smithy.ShapeTypeString, Ext: &ext[616]})
-var sVoiceProfileDomain_ServerSideEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideEncryptionConfiguration", ID: &iServerSideEncryptionConfiguration, Members: &mServerSideEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[617]})
-var sVoiceProfileDomain_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[618]})
-var sVoiceProfileDomain_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[619]})
-var sVoiceProfileDomainSummary_VoiceProfileDomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomainId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &ext[623]})
-var sVoiceProfileDomainSummary_VoiceProfileDomainArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomainArn", ID: &i_Arn, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[624]})
-var sVoiceProfileDomainSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_VoiceProfileDomainName, Type: smithy.ShapeTypeString, Ext: &ext[625]})
-var sVoiceProfileDomainSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_VoiceProfileDomainDescription, Type: smithy.ShapeTypeString, Ext: &ext[626]})
-var sVoiceProfileDomainSummary_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[627]})
-var sVoiceProfileDomainSummary_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[628]})
-var s_VoiceProfileDomainSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVoiceProfileDomainSummary, Members: &mVoiceProfileDomainSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[630]})
-var sVoiceProfileSummary_VoiceProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &ext[632]})
-var sVoiceProfileSummary_VoiceProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileArn", ID: &i_Arn, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[633]})
-var sVoiceProfileSummary_VoiceProfileDomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomainId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &ext[634]})
-var sVoiceProfileSummary_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[635]})
-var sVoiceProfileSummary_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[636]})
-var sVoiceProfileSummary_ExpirationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[637]})
-var s_VoiceProfileSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVoiceProfileSummary, Members: &mVoiceProfileSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[639]})
-var sVoiceToneAnalysisTask_VoiceToneAnalysisTaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceToneAnalysisTaskId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &ext[641]})
-var sVoiceToneAnalysisTask_VoiceToneAnalysisTaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceToneAnalysisTaskStatus", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ext[642]})
-var sVoiceToneAnalysisTask_CallDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallDetails", ID: &iCallDetails, Members: &mCallDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[643]})
-var sVoiceToneAnalysisTask_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[644]})
-var sVoiceToneAnalysisTask_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[645]})
-var sVoiceToneAnalysisTask_StartedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[646]})
-var sVoiceToneAnalysisTask_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[647]})
-var sAssociatePhoneNumbersWithVoiceConnectorGroupRequest_VoiceConnectorGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroupId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[649]})
-var sAssociatePhoneNumbersWithVoiceConnectorGroupRequest_E164PhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "E164PhoneNumbers", ID: &i_E164PhoneNumberList, Members: &m_E164PhoneNumberList, Type: smithy.ShapeTypeList, Ext: &ext[650]})
-var sAssociatePhoneNumbersWithVoiceConnectorGroupRequest_ForceAssociate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceAssociate", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[651]})
-var sAssociatePhoneNumbersWithVoiceConnectorGroupResponse_PhoneNumberErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberErrors", ID: &i_PhoneNumberErrorList, Members: &m_PhoneNumberErrorList, Type: smithy.ShapeTypeList, Ext: &ext[653]})
-var sAssociatePhoneNumbersWithVoiceConnectorRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[655]})
-var sAssociatePhoneNumbersWithVoiceConnectorRequest_E164PhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "E164PhoneNumbers", ID: &i_E164PhoneNumberList, Members: &m_E164PhoneNumberList, Type: smithy.ShapeTypeList, Ext: &ext[656]})
-var sAssociatePhoneNumbersWithVoiceConnectorRequest_ForceAssociate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceAssociate", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[657]})
-var sAssociatePhoneNumbersWithVoiceConnectorResponse_PhoneNumberErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberErrors", ID: &i_PhoneNumberErrorList, Members: &m_PhoneNumberErrorList, Type: smithy.ShapeTypeList, Ext: &ext[659]})
-var sBatchDeletePhoneNumberRequest_PhoneNumberIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberIds", ID: &i_NonEmptyStringList, Members: &m_NonEmptyStringList, Type: smithy.ShapeTypeList, Ext: &ext[661]})
-var sBatchDeletePhoneNumberResponse_PhoneNumberErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberErrors", ID: &i_PhoneNumberErrorList, Members: &m_PhoneNumberErrorList, Type: smithy.ShapeTypeList, Ext: &ext[663]})
-var sBatchUpdatePhoneNumberRequest_UpdatePhoneNumberRequestItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatePhoneNumberRequestItems", ID: &i_UpdatePhoneNumberRequestItemList, Members: &m_UpdatePhoneNumberRequestItemList, Type: smithy.ShapeTypeList, Ext: &ext[665]})
-var sBatchUpdatePhoneNumberResponse_PhoneNumberErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberErrors", ID: &i_PhoneNumberErrorList, Members: &m_PhoneNumberErrorList, Type: smithy.ShapeTypeList, Ext: &ext[667]})
-var sCreatePhoneNumberOrderRequest_ProductType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductType", ID: &iPhoneNumberProductType, Members: &mPhoneNumberProductType, Type: smithy.ShapeTypeEnum, Ext: &ext[669]})
-var sCreatePhoneNumberOrderRequest_E164PhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "E164PhoneNumbers", ID: &i_E164PhoneNumberList, Members: &m_E164PhoneNumberList, Type: smithy.ShapeTypeList, Ext: &ext[670]})
-var sCreatePhoneNumberOrderRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PhoneNumberName, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[671]})
-var sCreatePhoneNumberOrderResponse_PhoneNumberOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberOrder", ID: &iPhoneNumberOrder, Members: &mPhoneNumberOrder, Type: smithy.ShapeTypeStructure, Ext: &ext[673]})
-var sCreateProxySessionRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[675]})
-var sCreateProxySessionRequest_ParticipantPhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParticipantPhoneNumbers", ID: &i_ParticipantPhoneNumberList, Members: &m_ParticipantPhoneNumberList, Type: smithy.ShapeTypeList, Ext: &ext[676]})
-var sCreateProxySessionRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ProxySessionNameString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[677]})
-var sCreateProxySessionRequest_ExpiryMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiryMinutes", ID: &i_PositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[678]})
-var sCreateProxySessionRequest_Capabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Capabilities", ID: &i_CapabilityList, Members: &m_CapabilityList, Type: smithy.ShapeTypeList, Ext: &ext[679]})
-var sCreateProxySessionRequest_NumberSelectionBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberSelectionBehavior", ID: &iNumberSelectionBehavior, Members: &mNumberSelectionBehavior, Type: smithy.ShapeTypeEnum, Ext: &ext[680]})
-var sCreateProxySessionRequest_GeoMatchLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeoMatchLevel", ID: &iGeoMatchLevel, Members: &mGeoMatchLevel, Type: smithy.ShapeTypeEnum, Ext: &ext[681]})
-var sCreateProxySessionRequest_GeoMatchParams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeoMatchParams", ID: &iGeoMatchParams, Members: &mGeoMatchParams, Type: smithy.ShapeTypeStructure, Ext: &ext[682]})
-var sCreateProxySessionResponse_ProxySession = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxySession", ID: &iProxySession, Members: &mProxySession, Type: smithy.ShapeTypeStructure, Ext: &ext[684]})
-var sCreateSipMediaApplicationCallRequest_FromPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FromPhoneNumber", ID: &i_E164PhoneNumber, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[686]})
-var sCreateSipMediaApplicationCallRequest_ToPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ToPhoneNumber", ID: &i_E164PhoneNumber, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[687]})
-var sCreateSipMediaApplicationCallRequest_SipMediaApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[688]})
-var sCreateSipMediaApplicationCallRequest_SipHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipHeaders", ID: &i_SipHeadersMap, Members: &m_SipHeadersMap, Type: smithy.ShapeTypeMap, Ext: &ext[689]})
-var sCreateSipMediaApplicationCallRequest_ArgumentsMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArgumentsMap", ID: &i_SMACreateCallArgumentsMap, Members: &m_SMACreateCallArgumentsMap, Type: smithy.ShapeTypeMap, Ext: &ext[690]})
-var sCreateSipMediaApplicationCallResponse_SipMediaApplicationCall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationCall", ID: &iSipMediaApplicationCall, Members: &mSipMediaApplicationCall, Type: smithy.ShapeTypeStructure, Ext: &ext[692]})
-var sCreateSipMediaApplicationRequest_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsRegion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[694]})
-var sCreateSipMediaApplicationRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SipMediaApplicationName, Type: smithy.ShapeTypeString, Ext: &ext[695]})
-var sCreateSipMediaApplicationRequest_Endpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoints", ID: &i_SipMediaApplicationEndpointList, Members: &m_SipMediaApplicationEndpointList, Type: smithy.ShapeTypeList, Ext: &ext[696]})
-var sCreateSipMediaApplicationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[697]})
-var sCreateSipMediaApplicationResponse_SipMediaApplication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplication", ID: &iSipMediaApplication, Members: &mSipMediaApplication, Type: smithy.ShapeTypeStructure, Ext: &ext[699]})
-var sCreateSipRuleRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SipRuleName, Type: smithy.ShapeTypeString, Ext: &ext[701]})
-var sCreateSipRuleRequest_TriggerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TriggerType", ID: &iSipRuleTriggerType, Members: &mSipRuleTriggerType, Type: smithy.ShapeTypeEnum, Ext: &ext[702]})
-var sCreateSipRuleRequest_TriggerValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TriggerValue", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ext[703]})
-var sCreateSipRuleRequest_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[704]})
-var sCreateSipRuleRequest_TargetApplications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetApplications", ID: &i_SipRuleTargetApplicationList, Members: &m_SipRuleTargetApplicationList, Type: smithy.ShapeTypeList, Ext: &ext[705]})
-var sCreateSipRuleResponse_SipRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipRule", ID: &iSipRule, Members: &mSipRule, Type: smithy.ShapeTypeStructure, Ext: &ext[707]})
-var sCreateVoiceConnectorGroupRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_VoiceConnectorGroupName, Type: smithy.ShapeTypeString, Ext: &ext[709]})
-var sCreateVoiceConnectorGroupRequest_VoiceConnectorItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorItems", ID: &i_VoiceConnectorItemList, Members: &m_VoiceConnectorItemList, Type: smithy.ShapeTypeList, Ext: &ext[710]})
-var sCreateVoiceConnectorGroupRequest_CallDistributionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallDistributionType", ID: &iCallDistributionType, Members: &mCallDistributionType, Type: smithy.ShapeTypeEnum, Ext: &ext[711]})
-var sCreateVoiceConnectorGroupResponse_VoiceConnectorGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroup", ID: &iVoiceConnectorGroup, Members: &mVoiceConnectorGroup, Type: smithy.ShapeTypeStructure, Ext: &ext[713]})
-var sCreateVoiceConnectorRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_VoiceConnectorName, Type: smithy.ShapeTypeString, Ext: &ext[715]})
-var sCreateVoiceConnectorRequest_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsRegion", ID: &iVoiceConnectorAwsRegion, Members: &mVoiceConnectorAwsRegion, Type: smithy.ShapeTypeEnum, Ext: &ext[716]})
-var sCreateVoiceConnectorRequest_RequireEncryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequireEncryption", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[717]})
-var sCreateVoiceConnectorRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[718]})
-var sCreateVoiceConnectorRequest_IntegrationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationType", ID: &iVoiceConnectorIntegrationType, Members: &mVoiceConnectorIntegrationType, Type: smithy.ShapeTypeEnum, Ext: &ext[719]})
-var sCreateVoiceConnectorRequest_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum, Ext: &ext[720]})
-var sCreateVoiceConnectorResponse_VoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnector", ID: &iVoiceConnector, Members: &mVoiceConnector, Type: smithy.ShapeTypeStructure, Ext: &ext[722]})
-var sCreateVoiceProfileDomainRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_VoiceProfileDomainName, Type: smithy.ShapeTypeString, Ext: &ext[724]})
-var sCreateVoiceProfileDomainRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_VoiceProfileDomainDescription, Type: smithy.ShapeTypeString, Ext: &ext[725]})
-var sCreateVoiceProfileDomainRequest_ServerSideEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideEncryptionConfiguration", ID: &iServerSideEncryptionConfiguration, Members: &mServerSideEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[726]})
-var sCreateVoiceProfileDomainRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestId, Type: smithy.ShapeTypeString, Ext: &ext[727]})
-var sCreateVoiceProfileDomainRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[728]})
-var sCreateVoiceProfileDomainResponse_VoiceProfileDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomain", ID: &iVoiceProfileDomain, Members: &mVoiceProfileDomain, Type: smithy.ShapeTypeStructure, Ext: &ext[730]})
-var sCreateVoiceProfileRequest_SpeakerSearchTaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSearchTaskId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &ext[732]})
-var sCreateVoiceProfileResponse_VoiceProfile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfile", ID: &iVoiceProfile, Members: &mVoiceProfile, Type: smithy.ShapeTypeStructure, Ext: &ext[734]})
-var sDeletePhoneNumberRequest_PhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberId", ID: &i_SensitiveNonEmptyString, Traits: &t112, Type: smithy.ShapeTypeString, Ext: &ext[736]})
-var sDeleteProxySessionRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[738]})
-var sDeleteProxySessionRequest_ProxySessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxySessionId", ID: &i_NonEmptyString128, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[739]})
-var sDeleteSipMediaApplicationRequest_SipMediaApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[741]})
-var sDeleteSipRuleRequest_SipRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipRuleId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[743]})
-var sDeleteVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[745]})
-var sDeleteVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[747]})
-var sDeleteVoiceConnectorGroupRequest_VoiceConnectorGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroupId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[749]})
-var sDeleteVoiceConnectorRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[751]})
-var sDeleteVoiceConnectorOriginationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[753]})
-var sDeleteVoiceConnectorProxyRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[755]})
-var sDeleteVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[757]})
-var sDeleteVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[759]})
-var sDeleteVoiceConnectorTerminationCredentialsRequest_Usernames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Usernames", ID: &i_SensitiveStringList, Members: &m_SensitiveStringList, Type: smithy.ShapeTypeList, Ext: &ext[760]})
-var sDeleteVoiceConnectorTerminationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[762]})
-var sDeleteVoiceProfileDomainRequest_VoiceProfileDomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomainId", ID: &i_NonEmptyString256, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[764]})
-var sDeleteVoiceProfileRequest_VoiceProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileId", ID: &i_NonEmptyString256, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[766]})
-var sDisassociatePhoneNumbersFromVoiceConnectorGroupRequest_VoiceConnectorGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroupId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[768]})
-var sDisassociatePhoneNumbersFromVoiceConnectorGroupRequest_E164PhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "E164PhoneNumbers", ID: &i_E164PhoneNumberList, Members: &m_E164PhoneNumberList, Type: smithy.ShapeTypeList, Ext: &ext[769]})
-var sDisassociatePhoneNumbersFromVoiceConnectorGroupResponse_PhoneNumberErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberErrors", ID: &i_PhoneNumberErrorList, Members: &m_PhoneNumberErrorList, Type: smithy.ShapeTypeList, Ext: &ext[771]})
-var sDisassociatePhoneNumbersFromVoiceConnectorRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[773]})
-var sDisassociatePhoneNumbersFromVoiceConnectorRequest_E164PhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "E164PhoneNumbers", ID: &i_E164PhoneNumberList, Members: &m_E164PhoneNumberList, Type: smithy.ShapeTypeList, Ext: &ext[774]})
-var sDisassociatePhoneNumbersFromVoiceConnectorResponse_PhoneNumberErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberErrors", ID: &i_PhoneNumberErrorList, Members: &m_PhoneNumberErrorList, Type: smithy.ShapeTypeList, Ext: &ext[776]})
-var sGetGlobalSettingsResponse_VoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnector", ID: &iVoiceConnectorSettings, Members: &mVoiceConnectorSettings, Type: smithy.ShapeTypeStructure, Ext: &ext[778]})
-var sGetPhoneNumberRequest_PhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberId", ID: &i_SensitiveNonEmptyString, Traits: &t112, Type: smithy.ShapeTypeString, Ext: &ext[780]})
-var sGetPhoneNumberOrderRequest_PhoneNumberOrderId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberOrderId", ID: &i_GuidString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[782]})
-var sGetPhoneNumberOrderResponse_PhoneNumberOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberOrder", ID: &iPhoneNumberOrder, Members: &mPhoneNumberOrder, Type: smithy.ShapeTypeStructure, Ext: &ext[784]})
-var sGetPhoneNumberResponse_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &iPhoneNumber, Members: &mPhoneNumber, Type: smithy.ShapeTypeStructure, Ext: &ext[786]})
-var sGetPhoneNumberSettingsResponse_CallingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallingName", ID: &i_CallingName, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[788]})
-var sGetPhoneNumberSettingsResponse_CallingNameUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallingNameUpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ext[789]})
-var sGetProxySessionRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[791]})
-var sGetProxySessionRequest_ProxySessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxySessionId", ID: &i_NonEmptyString128, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[792]})
-var sGetProxySessionResponse_ProxySession = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxySession", ID: &iProxySession, Members: &mProxySession, Type: smithy.ShapeTypeStructure, Ext: &ext[794]})
-var sGetSipMediaApplicationAlexaSkillConfigurationRequest_SipMediaApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[796]})
-var sGetSipMediaApplicationAlexaSkillConfigurationResponse_SipMediaApplicationAlexaSkillConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationAlexaSkillConfiguration", ID: &iSipMediaApplicationAlexaSkillConfiguration, Members: &mSipMediaApplicationAlexaSkillConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[798]})
-var sGetSipMediaApplicationRequest_SipMediaApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[800]})
-var sGetSipMediaApplicationLoggingConfigurationRequest_SipMediaApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[802]})
-var sGetSipMediaApplicationLoggingConfigurationResponse_SipMediaApplicationLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationLoggingConfiguration", ID: &iSipMediaApplicationLoggingConfiguration, Members: &mSipMediaApplicationLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[804]})
-var sGetSipMediaApplicationResponse_SipMediaApplication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplication", ID: &iSipMediaApplication, Members: &mSipMediaApplication, Type: smithy.ShapeTypeStructure, Ext: &ext[806]})
-var sGetSipRuleRequest_SipRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipRuleId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[808]})
-var sGetSipRuleResponse_SipRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipRule", ID: &iSipRule, Members: &mSipRule, Type: smithy.ShapeTypeStructure, Ext: &ext[810]})
-var sGetSpeakerSearchTaskRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[812]})
-var sGetSpeakerSearchTaskRequest_SpeakerSearchTaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSearchTaskId", ID: &i_NonEmptyString256, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[813]})
-var sGetSpeakerSearchTaskResponse_SpeakerSearchTask = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSearchTask", ID: &iSpeakerSearchTask, Members: &mSpeakerSearchTask, Type: smithy.ShapeTypeStructure, Ext: &ext[815]})
-var sGetVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[817]})
-var sGetVoiceConnectorEmergencyCallingConfigurationResponse_EmergencyCallingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmergencyCallingConfiguration", ID: &iEmergencyCallingConfiguration, Members: &mEmergencyCallingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[819]})
-var sGetVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[821]})
-var sGetVoiceConnectorExternalSystemsConfigurationResponse_ExternalSystemsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalSystemsConfiguration", ID: &iExternalSystemsConfiguration, Members: &mExternalSystemsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[823]})
-var sGetVoiceConnectorGroupRequest_VoiceConnectorGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroupId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[825]})
-var sGetVoiceConnectorGroupResponse_VoiceConnectorGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroup", ID: &iVoiceConnectorGroup, Members: &mVoiceConnectorGroup, Type: smithy.ShapeTypeStructure, Ext: &ext[827]})
-var sGetVoiceConnectorRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[829]})
-var sGetVoiceConnectorLoggingConfigurationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[831]})
-var sGetVoiceConnectorLoggingConfigurationResponse_LoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingConfiguration", ID: &iLoggingConfiguration, Members: &mLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[833]})
-var sGetVoiceConnectorOriginationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[835]})
-var sGetVoiceConnectorOriginationResponse_Origination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Origination", ID: &iOrigination, Members: &mOrigination, Type: smithy.ShapeTypeStructure, Ext: &ext[837]})
-var sGetVoiceConnectorResponse_VoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnector", ID: &iVoiceConnector, Members: &mVoiceConnector, Type: smithy.ShapeTypeStructure, Ext: &ext[839]})
-var sGetVoiceConnectorProxyRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[841]})
-var sGetVoiceConnectorProxyResponse_Proxy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Proxy", ID: &iProxy, Members: &mProxy, Type: smithy.ShapeTypeStructure, Ext: &ext[843]})
-var sGetVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[845]})
-var sGetVoiceConnectorStreamingConfigurationResponse_StreamingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamingConfiguration", ID: &iStreamingConfiguration, Members: &mStreamingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[847]})
-var sGetVoiceConnectorTerminationHealthRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[849]})
-var sGetVoiceConnectorTerminationHealthResponse_TerminationHealth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminationHealth", ID: &iTerminationHealth, Members: &mTerminationHealth, Type: smithy.ShapeTypeStructure, Ext: &ext[851]})
-var sGetVoiceConnectorTerminationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[853]})
-var sGetVoiceConnectorTerminationResponse_Termination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Termination", ID: &iTermination, Members: &mTermination, Type: smithy.ShapeTypeStructure, Ext: &ext[855]})
-var sGetVoiceProfileDomainRequest_VoiceProfileDomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomainId", ID: &i_NonEmptyString256, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[857]})
-var sGetVoiceProfileDomainResponse_VoiceProfileDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomain", ID: &iVoiceProfileDomain, Members: &mVoiceProfileDomain, Type: smithy.ShapeTypeStructure, Ext: &ext[859]})
-var sGetVoiceProfileRequest_VoiceProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileId", ID: &i_NonEmptyString256, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[861]})
-var sGetVoiceProfileResponse_VoiceProfile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfile", ID: &iVoiceProfile, Members: &mVoiceProfile, Type: smithy.ShapeTypeStructure, Ext: &ext[863]})
-var sGetVoiceToneAnalysisTaskRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[865]})
-var sGetVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceToneAnalysisTaskId", ID: &i_NonEmptyString256, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[866]})
-var sGetVoiceToneAnalysisTaskRequest_IsCaller = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsCaller", ID: &i_Boolean, Traits: &t113, Type: smithy.ShapeTypeBoolean, Ext: &ext[867]})
-var sGetVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceToneAnalysisTask", ID: &iVoiceToneAnalysisTask, Members: &mVoiceToneAnalysisTask, Type: smithy.ShapeTypeStructure, Ext: &ext[869]})
-var sListAvailableVoiceConnectorRegionsResponse_VoiceConnectorRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorRegions", ID: &i_VoiceConnectorAwsRegionList, Members: &m_VoiceConnectorAwsRegionList, Type: smithy.ShapeTypeList, Ext: &ext[871]})
-var sListPhoneNumberOrdersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenString, Traits: &t114, Type: smithy.ShapeTypeString, Ext: &ext[873]})
-var sListPhoneNumberOrdersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t115, Type: smithy.ShapeTypeInteger, Ext: &ext[874]})
-var sListPhoneNumberOrdersResponse_PhoneNumberOrders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberOrders", ID: &i_PhoneNumberOrderList, Members: &m_PhoneNumberOrderList, Type: smithy.ShapeTypeList, Ext: &ext[876]})
-var sListPhoneNumberOrdersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[877]})
-var sListPhoneNumbersRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Traits: &t116, Type: smithy.ShapeTypeString, Ext: &ext[879]})
-var sListPhoneNumbersRequest_ProductType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductType", ID: &iPhoneNumberProductType, Members: &mPhoneNumberProductType, Traits: &t117, Type: smithy.ShapeTypeEnum, Ext: &ext[880]})
-var sListPhoneNumbersRequest_FilterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterName", ID: &iPhoneNumberAssociationName, Members: &mPhoneNumberAssociationName, Traits: &t118, Type: smithy.ShapeTypeEnum, Ext: &ext[881]})
-var sListPhoneNumbersRequest_FilterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterValue", ID: &i_String, Traits: &t119, Type: smithy.ShapeTypeString, Ext: &ext[882]})
-var sListPhoneNumbersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t115, Type: smithy.ShapeTypeInteger, Ext: &ext[883]})
-var sListPhoneNumbersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t114, Type: smithy.ShapeTypeString, Ext: &ext[884]})
-var sListPhoneNumbersResponse_PhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumbers", ID: &i_PhoneNumberList, Members: &m_PhoneNumberList, Type: smithy.ShapeTypeList, Ext: &ext[886]})
-var sListPhoneNumbersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[887]})
-var sListProxySessionsRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[889]})
-var sListProxySessionsRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iProxySessionStatus, Members: &mProxySessionStatus, Traits: &t116, Type: smithy.ShapeTypeEnum, Ext: &ext[890]})
-var sListProxySessionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenString, Traits: &t114, Type: smithy.ShapeTypeString, Ext: &ext[891]})
-var sListProxySessionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t115, Type: smithy.ShapeTypeInteger, Ext: &ext[892]})
-var sListProxySessionsResponse_ProxySessions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxySessions", ID: &i_ProxySessions, Members: &m_ProxySessions, Type: smithy.ShapeTypeList, Ext: &ext[894]})
-var sListProxySessionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenString, Type: smithy.ShapeTypeString, Ext: &ext[895]})
-var sListSipMediaApplicationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t115, Type: smithy.ShapeTypeInteger, Ext: &ext[897]})
-var sListSipMediaApplicationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenString, Traits: &t114, Type: smithy.ShapeTypeString, Ext: &ext[898]})
-var sListSipMediaApplicationsResponse_SipMediaApplications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplications", ID: &i_SipMediaApplicationList, Members: &m_SipMediaApplicationList, Type: smithy.ShapeTypeList, Ext: &ext[900]})
-var sListSipMediaApplicationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenString, Type: smithy.ShapeTypeString, Ext: &ext[901]})
-var sListSipRulesRequest_SipMediaApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationId", ID: &i_NonEmptyString, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &ext[903]})
-var sListSipRulesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t115, Type: smithy.ShapeTypeInteger, Ext: &ext[904]})
-var sListSipRulesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenString, Traits: &t114, Type: smithy.ShapeTypeString, Ext: &ext[905]})
-var sListSipRulesResponse_SipRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipRules", ID: &i_SipRuleList, Members: &m_SipRuleList, Type: smithy.ShapeTypeList, Ext: &ext[907]})
-var sListSipRulesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenString, Type: smithy.ShapeTypeString, Ext: &ext[908]})
-var sListSupportedPhoneNumberCountriesRequest_ProductType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductType", ID: &iPhoneNumberProductType, Members: &mPhoneNumberProductType, Traits: &t117, Type: smithy.ShapeTypeEnum, Ext: &ext[910]})
-var sListSupportedPhoneNumberCountriesResponse_PhoneNumberCountries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberCountries", ID: &i_PhoneNumberCountriesList, Members: &m_PhoneNumberCountriesList, Type: smithy.ShapeTypeList, Ext: &ext[912]})
-var sListTagsForResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_Arn, Traits: &t121, Type: smithy.ShapeTypeString, Ext: &ext[914]})
-var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[916]})
-var sListVoiceConnectorGroupsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t114, Type: smithy.ShapeTypeString, Ext: &ext[918]})
-var sListVoiceConnectorGroupsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t115, Type: smithy.ShapeTypeInteger, Ext: &ext[919]})
-var sListVoiceConnectorGroupsResponse_VoiceConnectorGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroups", ID: &i_VoiceConnectorGroupList, Members: &m_VoiceConnectorGroupList, Type: smithy.ShapeTypeList, Ext: &ext[921]})
-var sListVoiceConnectorGroupsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[922]})
-var sListVoiceConnectorsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t114, Type: smithy.ShapeTypeString, Ext: &ext[924]})
-var sListVoiceConnectorsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t115, Type: smithy.ShapeTypeInteger, Ext: &ext[925]})
-var sListVoiceConnectorsResponse_VoiceConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectors", ID: &i_VoiceConnectorList, Members: &m_VoiceConnectorList, Type: smithy.ShapeTypeList, Ext: &ext[927]})
-var sListVoiceConnectorsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[928]})
-var sListVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[930]})
-var sListVoiceConnectorTerminationCredentialsResponse_Usernames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Usernames", ID: &i_SensitiveStringList, Members: &m_SensitiveStringList, Type: smithy.ShapeTypeList, Ext: &ext[932]})
-var sListVoiceProfileDomainsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t114, Type: smithy.ShapeTypeString, Ext: &ext[934]})
-var sListVoiceProfileDomainsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t115, Type: smithy.ShapeTypeInteger, Ext: &ext[935]})
-var sListVoiceProfileDomainsResponse_VoiceProfileDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomains", ID: &i_VoiceProfileDomainSummaryList, Members: &m_VoiceProfileDomainSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[937]})
-var sListVoiceProfileDomainsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[938]})
-var sListVoiceProfilesRequest_VoiceProfileDomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomainId", ID: &i_NonEmptyString256, Traits: &t122, Type: smithy.ShapeTypeString, Ext: &ext[940]})
-var sListVoiceProfilesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t114, Type: smithy.ShapeTypeString, Ext: &ext[941]})
-var sListVoiceProfilesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t115, Type: smithy.ShapeTypeInteger, Ext: &ext[942]})
-var sListVoiceProfilesResponse_VoiceProfiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfiles", ID: &i_VoiceProfileSummaryList, Members: &m_VoiceProfileSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[944]})
-var sListVoiceProfilesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[945]})
-var sPutSipMediaApplicationAlexaSkillConfigurationRequest_SipMediaApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[947]})
-var sPutSipMediaApplicationAlexaSkillConfigurationRequest_SipMediaApplicationAlexaSkillConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationAlexaSkillConfiguration", ID: &iSipMediaApplicationAlexaSkillConfiguration, Members: &mSipMediaApplicationAlexaSkillConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[948]})
-var sPutSipMediaApplicationAlexaSkillConfigurationResponse_SipMediaApplicationAlexaSkillConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationAlexaSkillConfiguration", ID: &iSipMediaApplicationAlexaSkillConfiguration, Members: &mSipMediaApplicationAlexaSkillConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[950]})
-var sPutSipMediaApplicationLoggingConfigurationRequest_SipMediaApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[952]})
-var sPutSipMediaApplicationLoggingConfigurationRequest_SipMediaApplicationLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationLoggingConfiguration", ID: &iSipMediaApplicationLoggingConfiguration, Members: &mSipMediaApplicationLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[953]})
-var sPutSipMediaApplicationLoggingConfigurationResponse_SipMediaApplicationLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationLoggingConfiguration", ID: &iSipMediaApplicationLoggingConfiguration, Members: &mSipMediaApplicationLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[955]})
-var sPutVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[957]})
-var sPutVoiceConnectorEmergencyCallingConfigurationRequest_EmergencyCallingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmergencyCallingConfiguration", ID: &iEmergencyCallingConfiguration, Members: &mEmergencyCallingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[958]})
-var sPutVoiceConnectorEmergencyCallingConfigurationResponse_EmergencyCallingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmergencyCallingConfiguration", ID: &iEmergencyCallingConfiguration, Members: &mEmergencyCallingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[960]})
-var sPutVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[962]})
-var sPutVoiceConnectorExternalSystemsConfigurationRequest_SessionBorderControllerTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionBorderControllerTypes", ID: &i_SessionBorderControllerTypeList, Members: &m_SessionBorderControllerTypeList, Type: smithy.ShapeTypeList, Ext: &ext[963]})
-var sPutVoiceConnectorExternalSystemsConfigurationRequest_ContactCenterSystemTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactCenterSystemTypes", ID: &i_ContactCenterSystemTypeList, Members: &m_ContactCenterSystemTypeList, Type: smithy.ShapeTypeList, Ext: &ext[964]})
-var sPutVoiceConnectorExternalSystemsConfigurationResponse_ExternalSystemsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalSystemsConfiguration", ID: &iExternalSystemsConfiguration, Members: &mExternalSystemsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[966]})
-var sPutVoiceConnectorLoggingConfigurationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[968]})
-var sPutVoiceConnectorLoggingConfigurationRequest_LoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingConfiguration", ID: &iLoggingConfiguration, Members: &mLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[969]})
-var sPutVoiceConnectorLoggingConfigurationResponse_LoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingConfiguration", ID: &iLoggingConfiguration, Members: &mLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[971]})
-var sPutVoiceConnectorOriginationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[973]})
-var sPutVoiceConnectorOriginationRequest_Origination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Origination", ID: &iOrigination, Members: &mOrigination, Type: smithy.ShapeTypeStructure, Ext: &ext[974]})
-var sPutVoiceConnectorOriginationResponse_Origination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Origination", ID: &iOrigination, Members: &mOrigination, Type: smithy.ShapeTypeStructure, Ext: &ext[976]})
-var sPutVoiceConnectorProxyRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[978]})
-var sPutVoiceConnectorProxyRequest_DefaultSessionExpiryMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultSessionExpiryMinutes", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[979]})
-var sPutVoiceConnectorProxyRequest_PhoneNumberPoolCountries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberPoolCountries", ID: &i_CountryList, Members: &m_CountryList, Type: smithy.ShapeTypeList, Ext: &ext[980]})
-var sPutVoiceConnectorProxyRequest_FallBackPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FallBackPhoneNumber", ID: &i_E164PhoneNumber, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[981]})
-var sPutVoiceConnectorProxyRequest_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[982]})
-var sPutVoiceConnectorProxyResponse_Proxy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Proxy", ID: &iProxy, Members: &mProxy, Type: smithy.ShapeTypeStructure, Ext: &ext[984]})
-var sPutVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[986]})
-var sPutVoiceConnectorStreamingConfigurationRequest_StreamingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamingConfiguration", ID: &iStreamingConfiguration, Members: &mStreamingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[987]})
-var sPutVoiceConnectorStreamingConfigurationResponse_StreamingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamingConfiguration", ID: &iStreamingConfiguration, Members: &mStreamingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[989]})
-var sPutVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[991]})
-var sPutVoiceConnectorTerminationCredentialsRequest_Credentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Credentials", ID: &i_CredentialList, Members: &m_CredentialList, Type: smithy.ShapeTypeList, Ext: &ext[992]})
-var sPutVoiceConnectorTerminationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[994]})
-var sPutVoiceConnectorTerminationRequest_Termination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Termination", ID: &iTermination, Members: &mTermination, Type: smithy.ShapeTypeStructure, Ext: &ext[995]})
-var sPutVoiceConnectorTerminationResponse_Termination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Termination", ID: &iTermination, Members: &mTermination, Type: smithy.ShapeTypeStructure, Ext: &ext[997]})
-var sRestorePhoneNumberRequest_PhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberId", ID: &i_SensitiveNonEmptyString, Traits: &t112, Type: smithy.ShapeTypeString, Ext: &ext[999]})
-var sRestorePhoneNumberResponse_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &iPhoneNumber, Members: &mPhoneNumber, Type: smithy.ShapeTypeStructure, Ext: &ext[1001]})
-var sSearchAvailablePhoneNumbersRequest_AreaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AreaCode", ID: &i_String, Traits: &t123, Type: smithy.ShapeTypeString, Ext: &ext[1003]})
-var sSearchAvailablePhoneNumbersRequest_City = smithy.NewStaticSchema(smithy.StaticSchema{Member: "City", ID: &i_String, Traits: &t124, Type: smithy.ShapeTypeString, Ext: &ext[1004]})
-var sSearchAvailablePhoneNumbersRequest_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &i_Alpha2CountryCode, Traits: &t125, Type: smithy.ShapeTypeString, Ext: &ext[1005]})
-var sSearchAvailablePhoneNumbersRequest_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_String, Traits: &t126, Type: smithy.ShapeTypeString, Ext: &ext[1006]})
-var sSearchAvailablePhoneNumbersRequest_TollFreePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TollFreePrefix", ID: &i_TollFreePrefix, Traits: &t127, Type: smithy.ShapeTypeString, Ext: &ext[1007]})
-var sSearchAvailablePhoneNumbersRequest_PhoneNumberType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberType", ID: &iPhoneNumberType, Members: &mPhoneNumberType, Traits: &t128, Type: smithy.ShapeTypeEnum, Ext: &ext[1008]})
-var sSearchAvailablePhoneNumbersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PhoneNumberMaxResults, Traits: &t115, Type: smithy.ShapeTypeInteger, Ext: &ext[1009]})
-var sSearchAvailablePhoneNumbersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t114, Type: smithy.ShapeTypeString, Ext: &ext[1010]})
-var sSearchAvailablePhoneNumbersResponse_E164PhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "E164PhoneNumbers", ID: &i_E164PhoneNumberList, Members: &m_E164PhoneNumberList, Type: smithy.ShapeTypeList, Ext: &ext[1012]})
-var sSearchAvailablePhoneNumbersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[1013]})
-var sStartSpeakerSearchTaskRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[1015]})
-var sStartSpeakerSearchTaskRequest_TransactionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransactionId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &ext[1016]})
-var sStartSpeakerSearchTaskRequest_VoiceProfileDomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomainId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &ext[1017]})
-var sStartSpeakerSearchTaskRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestId, Type: smithy.ShapeTypeString, Ext: &ext[1018]})
-var sStartSpeakerSearchTaskRequest_CallLeg = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallLeg", ID: &iCallLegType, Members: &mCallLegType, Type: smithy.ShapeTypeEnum, Ext: &ext[1019]})
-var sStartSpeakerSearchTaskResponse_SpeakerSearchTask = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSearchTask", ID: &iSpeakerSearchTask, Members: &mSpeakerSearchTask, Type: smithy.ShapeTypeStructure, Ext: &ext[1021]})
-var sStartVoiceToneAnalysisTaskRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[1023]})
-var sStartVoiceToneAnalysisTaskRequest_TransactionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransactionId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &ext[1024]})
-var sStartVoiceToneAnalysisTaskRequest_LanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LanguageCode", ID: &iLanguageCode, Members: &mLanguageCode, Type: smithy.ShapeTypeEnum, Ext: &ext[1025]})
-var sStartVoiceToneAnalysisTaskRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestId, Type: smithy.ShapeTypeString, Ext: &ext[1026]})
-var sStartVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceToneAnalysisTask", ID: &iVoiceToneAnalysisTask, Members: &mVoiceToneAnalysisTask, Type: smithy.ShapeTypeStructure, Ext: &ext[1028]})
-var sStopSpeakerSearchTaskRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[1030]})
-var sStopSpeakerSearchTaskRequest_SpeakerSearchTaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSearchTaskId", ID: &i_NonEmptyString256, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[1031]})
-var sStopVoiceToneAnalysisTaskRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[1033]})
-var sStopVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceToneAnalysisTaskId", ID: &i_NonEmptyString256, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[1034]})
-var sTagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_Arn, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[1036]})
-var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[1037]})
-var sUntagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_Arn, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[1039]})
-var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[1040]})
-var sUpdateGlobalSettingsRequest_VoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnector", ID: &iVoiceConnectorSettings, Members: &mVoiceConnectorSettings, Type: smithy.ShapeTypeStructure, Ext: &ext[1042]})
-var sUpdatePhoneNumberRequest_PhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberId", ID: &i_SensitiveNonEmptyString, Traits: &t112, Type: smithy.ShapeTypeString, Ext: &ext[1044]})
-var sUpdatePhoneNumberRequest_ProductType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductType", ID: &iPhoneNumberProductType, Members: &mPhoneNumberProductType, Type: smithy.ShapeTypeEnum, Ext: &ext[1045]})
-var sUpdatePhoneNumberRequest_CallingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallingName", ID: &i_CallingName, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[1046]})
-var sUpdatePhoneNumberRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PhoneNumberName, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[1047]})
-var sUpdatePhoneNumberResponse_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &iPhoneNumber, Members: &mPhoneNumber, Type: smithy.ShapeTypeStructure, Ext: &ext[1049]})
-var sUpdatePhoneNumberSettingsRequest_CallingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallingName", ID: &i_CallingName, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[1051]})
-var sUpdateProxySessionRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[1053]})
-var sUpdateProxySessionRequest_ProxySessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxySessionId", ID: &i_NonEmptyString128, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[1054]})
-var sUpdateProxySessionRequest_Capabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Capabilities", ID: &i_CapabilityList, Members: &m_CapabilityList, Type: smithy.ShapeTypeList, Ext: &ext[1055]})
-var sUpdateProxySessionRequest_ExpiryMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiryMinutes", ID: &i_PositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[1056]})
-var sUpdateProxySessionResponse_ProxySession = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxySession", ID: &iProxySession, Members: &mProxySession, Type: smithy.ShapeTypeStructure, Ext: &ext[1058]})
-var sUpdateSipMediaApplicationCallRequest_SipMediaApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[1060]})
-var sUpdateSipMediaApplicationCallRequest_TransactionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransactionId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[1061]})
-var sUpdateSipMediaApplicationCallRequest_Arguments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arguments", ID: &i_SMAUpdateCallArgumentsMap, Members: &m_SMAUpdateCallArgumentsMap, Type: smithy.ShapeTypeMap, Ext: &ext[1062]})
-var sUpdateSipMediaApplicationCallResponse_SipMediaApplicationCall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationCall", ID: &iSipMediaApplicationCall, Members: &mSipMediaApplicationCall, Type: smithy.ShapeTypeStructure, Ext: &ext[1064]})
-var sUpdateSipMediaApplicationRequest_SipMediaApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[1066]})
-var sUpdateSipMediaApplicationRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SipMediaApplicationName, Type: smithy.ShapeTypeString, Ext: &ext[1067]})
-var sUpdateSipMediaApplicationRequest_Endpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoints", ID: &i_SipMediaApplicationEndpointList, Members: &m_SipMediaApplicationEndpointList, Type: smithy.ShapeTypeList, Ext: &ext[1068]})
-var sUpdateSipMediaApplicationResponse_SipMediaApplication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplication", ID: &iSipMediaApplication, Members: &mSipMediaApplication, Type: smithy.ShapeTypeStructure, Ext: &ext[1070]})
-var sUpdateSipRuleRequest_SipRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipRuleId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[1072]})
-var sUpdateSipRuleRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SipRuleName, Type: smithy.ShapeTypeString, Ext: &ext[1073]})
-var sUpdateSipRuleRequest_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[1074]})
-var sUpdateSipRuleRequest_TargetApplications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetApplications", ID: &i_SipRuleTargetApplicationList, Members: &m_SipRuleTargetApplicationList, Type: smithy.ShapeTypeList, Ext: &ext[1075]})
-var sUpdateSipRuleResponse_SipRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipRule", ID: &iSipRule, Members: &mSipRule, Type: smithy.ShapeTypeStructure, Ext: &ext[1077]})
-var sUpdateVoiceConnectorGroupRequest_VoiceConnectorGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroupId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[1079]})
-var sUpdateVoiceConnectorGroupRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_VoiceConnectorGroupName, Type: smithy.ShapeTypeString, Ext: &ext[1080]})
-var sUpdateVoiceConnectorGroupRequest_VoiceConnectorItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorItems", ID: &i_VoiceConnectorItemList, Members: &m_VoiceConnectorItemList, Type: smithy.ShapeTypeList, Ext: &ext[1081]})
-var sUpdateVoiceConnectorGroupRequest_CallDistributionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallDistributionType", ID: &iCallDistributionType, Members: &mCallDistributionType, Type: smithy.ShapeTypeEnum, Ext: &ext[1082]})
-var sUpdateVoiceConnectorGroupResponse_VoiceConnectorGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroup", ID: &iVoiceConnectorGroup, Members: &mVoiceConnectorGroup, Type: smithy.ShapeTypeStructure, Ext: &ext[1084]})
-var sUpdateVoiceConnectorRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[1086]})
-var sUpdateVoiceConnectorRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_VoiceConnectorName, Type: smithy.ShapeTypeString, Ext: &ext[1087]})
-var sUpdateVoiceConnectorRequest_RequireEncryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequireEncryption", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[1088]})
-var sUpdateVoiceConnectorResponse_VoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnector", ID: &iVoiceConnector, Members: &mVoiceConnector, Type: smithy.ShapeTypeStructure, Ext: &ext[1090]})
-var sUpdateVoiceProfileDomainRequest_VoiceProfileDomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomainId", ID: &i_NonEmptyString256, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[1092]})
-var sUpdateVoiceProfileDomainRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_VoiceProfileDomainName, Type: smithy.ShapeTypeString, Ext: &ext[1093]})
-var sUpdateVoiceProfileDomainRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_VoiceProfileDomainDescription, Type: smithy.ShapeTypeString, Ext: &ext[1094]})
-var sUpdateVoiceProfileDomainResponse_VoiceProfileDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomain", ID: &iVoiceProfileDomain, Members: &mVoiceProfileDomain, Type: smithy.ShapeTypeStructure, Ext: &ext[1096]})
-var sUpdateVoiceProfileRequest_VoiceProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileId", ID: &i_NonEmptyString256, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ext[1098]})
-var sUpdateVoiceProfileRequest_SpeakerSearchTaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSearchTaskId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &ext[1099]})
-var sUpdateVoiceProfileResponse_VoiceProfile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfile", ID: &iVoiceProfile, Members: &mVoiceProfile, Type: smithy.ShapeTypeStructure, Ext: &ext[1101]})
-var sValidateE911AddressRequest_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsAccountId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ext[1103]})
-var sValidateE911AddressRequest_StreetNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreetNumber", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[1104]})
-var sValidateE911AddressRequest_StreetInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreetInfo", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[1105]})
-var sValidateE911AddressRequest_City = smithy.NewStaticSchema(smithy.StaticSchema{Member: "City", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[1106]})
-var sValidateE911AddressRequest_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[1107]})
-var sValidateE911AddressRequest_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[1108]})
-var sValidateE911AddressRequest_PostalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCode", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ext[1109]})
-var sValidateE911AddressResponse_ValidationResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationResult", ID: &i_ValidationResult, Type: smithy.ShapeTypeInteger, Ext: &ext[1111]})
-var sValidateE911AddressResponse_AddressExternalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressExternalId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[1112]})
-var sValidateE911AddressResponse_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &ext[1113]})
-var sValidateE911AddressResponse_CandidateAddressList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CandidateAddressList", ID: &i_CandidateAddressList, Members: &m_CandidateAddressList, Type: smithy.ShapeTypeList, Ext: &ext[1114]})
+var sAccessDeniedException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eAccessDeniedException_Code})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var sAddress_streetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streetName", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eAddress_streetName})
+var sAddress_streetSuffix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streetSuffix", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eAddress_streetSuffix})
+var sAddress_postDirectional = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postDirectional", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eAddress_postDirectional})
+var sAddress_preDirectional = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preDirectional", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eAddress_preDirectional})
+var sAddress_streetNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streetNumber", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eAddress_streetNumber})
+var sAddress_city = smithy.NewStaticSchema(smithy.StaticSchema{Member: "city", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eAddress_city})
+var sAddress_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eAddress_state})
+var sAddress_postalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postalCode", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eAddress_postalCode})
+var sAddress_postalCodePlus4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postalCodePlus4", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eAddress_postalCodePlus4})
+var sAddress_country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "country", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eAddress_country})
+var s_AlexaSkillIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AlexaSkillId, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &e_AlexaSkillIdList_member})
+var sAlexaSkillStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAlexaSkillStatus_ACTIVE})
+var sAlexaSkillStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAlexaSkillStatus_INACTIVE})
+var sBadRequestException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eBadRequestException_Code})
+var sBadRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBadRequestException_Message})
+var sCallDetails_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Type: smithy.ShapeTypeString, Ext: &eCallDetails_VoiceConnectorId})
+var sCallDetails_TransactionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransactionId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &eCallDetails_TransactionId})
+var sCallDetails_IsCaller = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsCaller", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCallDetails_IsCaller})
+var sCallDistributionType_PriorityWeightedDistribution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PriorityWeightedDistribution", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCallDistributionType_PriorityWeightedDistribution})
+var sCallDistributionType_LoadBalancedDistribution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadBalancedDistribution", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCallDistributionType_LoadBalancedDistribution})
+var sCallingNameStatus_Unassigned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unassigned", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCallingNameStatus_Unassigned})
+var sCallingNameStatus_UpdateInProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateInProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCallingNameStatus_UpdateInProgress})
+var sCallingNameStatus_UpdateSucceeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateSucceeded", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCallingNameStatus_UpdateSucceeded})
+var sCallingNameStatus_UpdateFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCallingNameStatus_UpdateFailed})
+var s_CallingRegionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CallingRegion, Type: smithy.ShapeTypeString, Ext: &e_CallingRegionList_member})
+var sCallLegType_CALLER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CALLER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCallLegType_CALLER})
+var sCallLegType_CALLEE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CALLEE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCallLegType_CALLEE})
+var sCandidateAddress_streetInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streetInfo", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eCandidateAddress_streetInfo})
+var sCandidateAddress_streetNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "streetNumber", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eCandidateAddress_streetNumber})
+var sCandidateAddress_city = smithy.NewStaticSchema(smithy.StaticSchema{Member: "city", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eCandidateAddress_city})
+var sCandidateAddress_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eCandidateAddress_state})
+var sCandidateAddress_postalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postalCode", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eCandidateAddress_postalCode})
+var sCandidateAddress_postalCodePlus4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "postalCodePlus4", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eCandidateAddress_postalCodePlus4})
+var sCandidateAddress_country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "country", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eCandidateAddress_country})
+var s_CandidateAddressList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCandidateAddress, Members: &mCandidateAddress, Traits: &t100, Type: smithy.ShapeTypeStructure, Ext: &e_CandidateAddressList_member})
+var sCapability_Voice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Voice", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCapability_Voice})
+var sCapability_SMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCapability_SMS})
+var s_CapabilityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCapability, Members: &mCapability, Type: smithy.ShapeTypeEnum, Ext: &e_CapabilityList_member})
+var sConflictException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eConflictException_Code})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var sContactCenterSystemType_GENESYS_ENGAGE_ON_PREMISES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GENESYS_ENGAGE_ON_PREMISES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContactCenterSystemType_GENESYS_ENGAGE_ON_PREMISES})
+var sContactCenterSystemType_AVAYA_AURA_CALL_CENTER_ELITE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAYA_AURA_CALL_CENTER_ELITE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContactCenterSystemType_AVAYA_AURA_CALL_CENTER_ELITE})
+var sContactCenterSystemType_AVAYA_AURA_CONTACT_CENTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAYA_AURA_CONTACT_CENTER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContactCenterSystemType_AVAYA_AURA_CONTACT_CENTER})
+var sContactCenterSystemType_CISCO_UNIFIED_CONTACT_CENTER_ENTERPRISE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CISCO_UNIFIED_CONTACT_CENTER_ENTERPRISE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContactCenterSystemType_CISCO_UNIFIED_CONTACT_CENTER_ENTERPRISE})
+var s_ContactCenterSystemTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContactCenterSystemType, Members: &mContactCenterSystemType, Type: smithy.ShapeTypeEnum, Ext: &e_ContactCenterSystemTypeList_member})
+var s_CountryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Country, Type: smithy.ShapeTypeString, Ext: &e_CountryList_member})
+var sCredential_Username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Username", ID: &i_SensitiveString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eCredential_Username})
+var sCredential_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_SensitiveString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eCredential_Password})
+var s_CredentialList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCredential, Members: &mCredential, Type: smithy.ShapeTypeStructure, Ext: &e_CredentialList_member})
+var sDNISEmergencyCallingConfiguration_EmergencyPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmergencyPhoneNumber", ID: &i_E164PhoneNumber, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eDNISEmergencyCallingConfiguration_EmergencyPhoneNumber})
+var sDNISEmergencyCallingConfiguration_TestPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TestPhoneNumber", ID: &i_E164PhoneNumber, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eDNISEmergencyCallingConfiguration_TestPhoneNumber})
+var sDNISEmergencyCallingConfiguration_CallingCountry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallingCountry", ID: &i_Alpha2CountryCode, Type: smithy.ShapeTypeString, Ext: &eDNISEmergencyCallingConfiguration_CallingCountry})
+var s_DNISEmergencyCallingConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDNISEmergencyCallingConfiguration, Members: &mDNISEmergencyCallingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_DNISEmergencyCallingConfigurationList_member})
+var s_E164PhoneNumberList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_E164PhoneNumber, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &e_E164PhoneNumberList_member})
+var sEmergencyCallingConfiguration_DNIS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNIS", ID: &i_DNISEmergencyCallingConfigurationList, Members: &m_DNISEmergencyCallingConfigurationList, Type: smithy.ShapeTypeList, Ext: &eEmergencyCallingConfiguration_DNIS})
+var sErrorCode_BadRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BadRequest", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_BadRequest})
+var sErrorCode_Conflict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Conflict", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_Conflict})
+var sErrorCode_Forbidden = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Forbidden", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_Forbidden})
+var sErrorCode_NotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotFound", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_NotFound})
+var sErrorCode_PreconditionFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreconditionFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_PreconditionFailed})
+var sErrorCode_ResourceLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceLimitExceeded", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_ResourceLimitExceeded})
+var sErrorCode_ServiceFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceFailure", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_ServiceFailure})
+var sErrorCode_AccessDenied = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessDenied", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_AccessDenied})
+var sErrorCode_ServiceUnavailable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceUnavailable", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_ServiceUnavailable})
+var sErrorCode_Throttled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Throttled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_Throttled})
+var sErrorCode_Throttling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Throttling", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_Throttling})
+var sErrorCode_Unauthorized = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unauthorized", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_Unauthorized})
+var sErrorCode_Unprocessable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unprocessable", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_Unprocessable})
+var sErrorCode_VoiceConnectorGroupAssociationsExist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroupAssociationsExist", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_VoiceConnectorGroupAssociationsExist})
+var sErrorCode_PhoneNumberAssociationsExist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberAssociationsExist", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_PhoneNumberAssociationsExist})
+var sErrorCode_Gone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Gone", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_Gone})
+var sErrorCode_Validation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Validation", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_Validation})
+var sExternalSystemsConfiguration_SessionBorderControllerTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionBorderControllerTypes", ID: &i_SessionBorderControllerTypeList, Members: &m_SessionBorderControllerTypeList, Type: smithy.ShapeTypeList, Ext: &eExternalSystemsConfiguration_SessionBorderControllerTypes})
+var sExternalSystemsConfiguration_ContactCenterSystemTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactCenterSystemTypes", ID: &i_ContactCenterSystemTypeList, Members: &m_ContactCenterSystemTypeList, Type: smithy.ShapeTypeList, Ext: &eExternalSystemsConfiguration_ContactCenterSystemTypes})
+var sForbiddenException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eForbiddenException_Code})
+var sForbiddenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eForbiddenException_Message})
+var sGeoMatchLevel_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchLevel_Country})
+var sGeoMatchLevel_AreaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AreaCode", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGeoMatchLevel_AreaCode})
+var sGeoMatchParams_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &i_Country, Type: smithy.ShapeTypeString, Ext: &eGeoMatchParams_Country})
+var sGeoMatchParams_AreaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AreaCode", ID: &i_AreaCode, Type: smithy.ShapeTypeString, Ext: &eGeoMatchParams_AreaCode})
+var sGoneException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eGoneException_Code})
+var sGoneException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGoneException_Message})
+var sLanguageCode_EN_US = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EN_US", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLanguageCode_EN_US})
+var sLoggingConfiguration_EnableSIPLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableSIPLogs", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eLoggingConfiguration_EnableSIPLogs})
+var sLoggingConfiguration_EnableMediaMetricLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableMediaMetricLogs", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eLoggingConfiguration_EnableMediaMetricLogs})
+var sMediaInsightsConfiguration_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eMediaInsightsConfiguration_Disabled})
+var sMediaInsightsConfiguration_ConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationArn", ID: &i_Arn, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eMediaInsightsConfiguration_ConfigurationArn})
+var sNetworkType_IPV4_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkType_IPV4_ONLY})
+var sNetworkType_DUAL_STACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUAL_STACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkType_DUAL_STACK})
+var s_NonEmptyStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_NonEmptyStringList_member})
+var sNotFoundException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eNotFoundException_Code})
+var sNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eNotFoundException_Message})
+var sNotificationTarget_EventBridge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBridge", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNotificationTarget_EventBridge})
+var sNotificationTarget_SNS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNotificationTarget_SNS})
+var sNotificationTarget_SQS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SQS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNotificationTarget_SQS})
+var sNumberSelectionBehavior_PreferSticky = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferSticky", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNumberSelectionBehavior_PreferSticky})
+var sNumberSelectionBehavior_AvoidSticky = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvoidSticky", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNumberSelectionBehavior_AvoidSticky})
+var sOrderedPhoneNumber_E164PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "E164PhoneNumber", ID: &i_E164PhoneNumber, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eOrderedPhoneNumber_E164PhoneNumber})
+var sOrderedPhoneNumber_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOrderedPhoneNumberStatus, Members: &mOrderedPhoneNumberStatus, Type: smithy.ShapeTypeEnum, Ext: &eOrderedPhoneNumber_Status})
+var s_OrderedPhoneNumberList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOrderedPhoneNumber, Members: &mOrderedPhoneNumber, Type: smithy.ShapeTypeStructure, Ext: &e_OrderedPhoneNumberList_member})
+var sOrderedPhoneNumberStatus_Processing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Processing", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOrderedPhoneNumberStatus_Processing})
+var sOrderedPhoneNumberStatus_Acquired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Acquired", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOrderedPhoneNumberStatus_Acquired})
+var sOrderedPhoneNumberStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOrderedPhoneNumberStatus_Failed})
+var sOrigination_Routes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Routes", ID: &i_OriginationRouteList, Members: &m_OriginationRouteList, Type: smithy.ShapeTypeList, Ext: &eOrigination_Routes})
+var sOrigination_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eOrigination_Disabled})
+var sOriginationRoute_Host = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Host", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eOriginationRoute_Host})
+var sOriginationRoute_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_Port, Type: smithy.ShapeTypeInteger, Ext: &eOriginationRoute_Port})
+var sOriginationRoute_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iOriginationRouteProtocol, Members: &mOriginationRouteProtocol, Type: smithy.ShapeTypeEnum, Ext: &eOriginationRoute_Protocol})
+var sOriginationRoute_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_OriginationRoutePriority, Type: smithy.ShapeTypeInteger, Ext: &eOriginationRoute_Priority})
+var sOriginationRoute_Weight = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Weight", ID: &i_OriginationRouteWeight, Type: smithy.ShapeTypeInteger, Ext: &eOriginationRoute_Weight})
+var s_OriginationRouteList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOriginationRoute, Members: &mOriginationRoute, Type: smithy.ShapeTypeStructure, Ext: &e_OriginationRouteList_member})
+var sOriginationRouteProtocol_TCP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TCP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOriginationRouteProtocol_TCP})
+var sOriginationRouteProtocol_UDP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UDP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOriginationRouteProtocol_UDP})
+var sParticipant_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &i_E164PhoneNumber, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eParticipant_PhoneNumber})
+var sParticipant_ProxyPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyPhoneNumber", ID: &i_E164PhoneNumber, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eParticipant_ProxyPhoneNumber})
+var s_ParticipantPhoneNumberList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_E164PhoneNumber, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &e_ParticipantPhoneNumberList_member})
+var s_Participants_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iParticipant, Members: &mParticipant, Type: smithy.ShapeTypeStructure, Ext: &e_Participants_member})
+var sPhoneNumber_PhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberId", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ePhoneNumber_PhoneNumberId})
+var sPhoneNumber_E164PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "E164PhoneNumber", ID: &i_E164PhoneNumber, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ePhoneNumber_E164PhoneNumber})
+var sPhoneNumber_PhoneNumberArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberArn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &ePhoneNumber_PhoneNumberArn})
+var sPhoneNumber_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &i_Alpha2CountryCode, Type: smithy.ShapeTypeString, Ext: &ePhoneNumber_Country})
+var sPhoneNumber_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iPhoneNumberType, Members: &mPhoneNumberType, Type: smithy.ShapeTypeEnum, Ext: &ePhoneNumber_Type})
+var sPhoneNumber_ProductType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductType", ID: &iPhoneNumberProductType, Members: &mPhoneNumberProductType, Type: smithy.ShapeTypeEnum, Ext: &ePhoneNumber_ProductType})
+var sPhoneNumber_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iPhoneNumberStatus, Members: &mPhoneNumberStatus, Type: smithy.ShapeTypeEnum, Ext: &ePhoneNumber_Status})
+var sPhoneNumber_Capabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Capabilities", ID: &iPhoneNumberCapabilities, Members: &mPhoneNumberCapabilities, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumber_Capabilities})
+var sPhoneNumber_Associations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Associations", ID: &i_PhoneNumberAssociationList, Members: &m_PhoneNumberAssociationList, Type: smithy.ShapeTypeList, Ext: &ePhoneNumber_Associations})
+var sPhoneNumber_CallingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallingName", ID: &i_CallingName, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ePhoneNumber_CallingName})
+var sPhoneNumber_CallingNameStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallingNameStatus", ID: &iCallingNameStatus, Members: &mCallingNameStatus, Type: smithy.ShapeTypeEnum, Ext: &ePhoneNumber_CallingNameStatus})
+var sPhoneNumber_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ePhoneNumber_CreatedTimestamp})
+var sPhoneNumber_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ePhoneNumber_UpdatedTimestamp})
+var sPhoneNumber_DeletionTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ePhoneNumber_DeletionTimestamp})
+var sPhoneNumber_OrderId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrderId", ID: &i_GuidString, Type: smithy.ShapeTypeString, Ext: &ePhoneNumber_OrderId})
+var sPhoneNumber_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PhoneNumberName, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ePhoneNumber_Name})
+var sPhoneNumberAssociation_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePhoneNumberAssociation_Value})
+var sPhoneNumberAssociation_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iPhoneNumberAssociationName, Members: &mPhoneNumberAssociationName, Type: smithy.ShapeTypeEnum, Ext: &ePhoneNumberAssociation_Name})
+var sPhoneNumberAssociation_AssociatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ePhoneNumberAssociation_AssociatedTimestamp})
+var s_PhoneNumberAssociationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPhoneNumberAssociation, Members: &mPhoneNumberAssociation, Type: smithy.ShapeTypeStructure, Ext: &e_PhoneNumberAssociationList_member})
+var sPhoneNumberAssociationName_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberAssociationName_VoiceConnectorId})
+var sPhoneNumberAssociationName_VoiceConnectorGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroupId", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberAssociationName_VoiceConnectorGroupId})
+var sPhoneNumberAssociationName_SipRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipRuleId", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberAssociationName_SipRuleId})
+var sPhoneNumberCapabilities_InboundCall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboundCall", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ePhoneNumberCapabilities_InboundCall})
+var sPhoneNumberCapabilities_OutboundCall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutboundCall", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ePhoneNumberCapabilities_OutboundCall})
+var sPhoneNumberCapabilities_InboundSMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboundSMS", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ePhoneNumberCapabilities_InboundSMS})
+var sPhoneNumberCapabilities_OutboundSMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutboundSMS", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ePhoneNumberCapabilities_OutboundSMS})
+var sPhoneNumberCapabilities_InboundMMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboundMMS", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ePhoneNumberCapabilities_InboundMMS})
+var sPhoneNumberCapabilities_OutboundMMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutboundMMS", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ePhoneNumberCapabilities_OutboundMMS})
+var s_PhoneNumberCountriesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPhoneNumberCountry, Members: &mPhoneNumberCountry, Type: smithy.ShapeTypeStructure, Ext: &e_PhoneNumberCountriesList_member})
+var sPhoneNumberCountry_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountryCode", ID: &i_Alpha2CountryCode, Type: smithy.ShapeTypeString, Ext: &ePhoneNumberCountry_CountryCode})
+var sPhoneNumberCountry_SupportedPhoneNumberTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportedPhoneNumberTypes", ID: &i_PhoneNumberTypeList, Members: &m_PhoneNumberTypeList, Type: smithy.ShapeTypeList, Ext: &ePhoneNumberCountry_SupportedPhoneNumberTypes})
+var sPhoneNumberError_PhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberId", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ePhoneNumberError_PhoneNumberId})
+var sPhoneNumberError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ePhoneNumberError_ErrorCode})
+var sPhoneNumberError_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePhoneNumberError_ErrorMessage})
+var s_PhoneNumberErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPhoneNumberError, Members: &mPhoneNumberError, Type: smithy.ShapeTypeStructure, Ext: &e_PhoneNumberErrorList_member})
+var s_PhoneNumberList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPhoneNumber, Members: &mPhoneNumber, Type: smithy.ShapeTypeStructure, Ext: &e_PhoneNumberList_member})
+var sPhoneNumberOrder_PhoneNumberOrderId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberOrderId", ID: &i_GuidString, Type: smithy.ShapeTypeString, Ext: &ePhoneNumberOrder_PhoneNumberOrderId})
+var sPhoneNumberOrder_ProductType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductType", ID: &iPhoneNumberProductType, Members: &mPhoneNumberProductType, Type: smithy.ShapeTypeEnum, Ext: &ePhoneNumberOrder_ProductType})
+var sPhoneNumberOrder_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iPhoneNumberOrderStatus, Members: &mPhoneNumberOrderStatus, Type: smithy.ShapeTypeEnum, Ext: &ePhoneNumberOrder_Status})
+var sPhoneNumberOrder_OrderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrderType", ID: &iPhoneNumberOrderType, Members: &mPhoneNumberOrderType, Type: smithy.ShapeTypeEnum, Ext: &ePhoneNumberOrder_OrderType})
+var sPhoneNumberOrder_OrderedPhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrderedPhoneNumbers", ID: &i_OrderedPhoneNumberList, Members: &m_OrderedPhoneNumberList, Type: smithy.ShapeTypeList, Ext: &ePhoneNumberOrder_OrderedPhoneNumbers})
+var sPhoneNumberOrder_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ePhoneNumberOrder_CreatedTimestamp})
+var sPhoneNumberOrder_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &ePhoneNumberOrder_UpdatedTimestamp})
+var sPhoneNumberOrder_FocDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FocDate", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePhoneNumberOrder_FocDate})
+var s_PhoneNumberOrderList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPhoneNumberOrder, Members: &mPhoneNumberOrder, Type: smithy.ShapeTypeStructure, Ext: &e_PhoneNumberOrderList_member})
+var sPhoneNumberOrderStatus_Processing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Processing", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberOrderStatus_Processing})
+var sPhoneNumberOrderStatus_Successful = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Successful", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberOrderStatus_Successful})
+var sPhoneNumberOrderStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberOrderStatus_Failed})
+var sPhoneNumberOrderStatus_Partial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Partial", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberOrderStatus_Partial})
+var sPhoneNumberOrderStatus_PendingDocuments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingDocuments", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberOrderStatus_PendingDocuments})
+var sPhoneNumberOrderStatus_Submitted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Submitted", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberOrderStatus_Submitted})
+var sPhoneNumberOrderStatus_FOC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FOC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberOrderStatus_FOC})
+var sPhoneNumberOrderStatus_ChangeRequested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeRequested", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberOrderStatus_ChangeRequested})
+var sPhoneNumberOrderStatus_Exception = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Exception", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberOrderStatus_Exception})
+var sPhoneNumberOrderStatus_CancelRequested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CancelRequested", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberOrderStatus_CancelRequested})
+var sPhoneNumberOrderStatus_Cancelled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cancelled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberOrderStatus_Cancelled})
+var sPhoneNumberOrderType_New = smithy.NewStaticSchema(smithy.StaticSchema{Member: "New", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberOrderType_New})
+var sPhoneNumberOrderType_Porting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Porting", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberOrderType_Porting})
+var sPhoneNumberProductType_VoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnector", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberProductType_VoiceConnector})
+var sPhoneNumberProductType_SipMediaApplicationDialIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationDialIn", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberProductType_SipMediaApplicationDialIn})
+var sPhoneNumberStatus_Cancelled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cancelled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberStatus_Cancelled})
+var sPhoneNumberStatus_PortinCancelRequested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortinCancelRequested", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberStatus_PortinCancelRequested})
+var sPhoneNumberStatus_PortinInProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortinInProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberStatus_PortinInProgress})
+var sPhoneNumberStatus_AcquireInProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcquireInProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberStatus_AcquireInProgress})
+var sPhoneNumberStatus_AcquireFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcquireFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberStatus_AcquireFailed})
+var sPhoneNumberStatus_Unassigned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unassigned", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberStatus_Unassigned})
+var sPhoneNumberStatus_Assigned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Assigned", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberStatus_Assigned})
+var sPhoneNumberStatus_ReleaseInProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReleaseInProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberStatus_ReleaseInProgress})
+var sPhoneNumberStatus_DeleteInProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteInProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberStatus_DeleteInProgress})
+var sPhoneNumberStatus_ReleaseFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReleaseFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberStatus_ReleaseFailed})
+var sPhoneNumberStatus_DeleteFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberStatus_DeleteFailed})
+var sPhoneNumberType_Local = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Local", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberType_Local})
+var sPhoneNumberType_TollFree = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TollFree", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePhoneNumberType_TollFree})
+var s_PhoneNumberTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPhoneNumberType, Members: &mPhoneNumberType, Type: smithy.ShapeTypeEnum, Ext: &e_PhoneNumberTypeList_member})
+var sProxy_DefaultSessionExpiryMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultSessionExpiryMinutes", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eProxy_DefaultSessionExpiryMinutes})
+var sProxy_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eProxy_Disabled})
+var sProxy_FallBackPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FallBackPhoneNumber", ID: &i_E164PhoneNumber, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eProxy_FallBackPhoneNumber})
+var sProxy_PhoneNumberCountries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberCountries", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eProxy_PhoneNumberCountries})
+var sProxySession_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Type: smithy.ShapeTypeString, Ext: &eProxySession_VoiceConnectorId})
+var sProxySession_ProxySessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxySessionId", ID: &i_NonEmptyString128, Type: smithy.ShapeTypeString, Ext: &eProxySession_ProxySessionId})
+var sProxySession_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String128, Type: smithy.ShapeTypeString, Ext: &eProxySession_Name})
+var sProxySession_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iProxySessionStatus, Members: &mProxySessionStatus, Type: smithy.ShapeTypeEnum, Ext: &eProxySession_Status})
+var sProxySession_ExpiryMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiryMinutes", ID: &i_PositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &eProxySession_ExpiryMinutes})
+var sProxySession_Capabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Capabilities", ID: &i_CapabilityList, Members: &m_CapabilityList, Type: smithy.ShapeTypeList, Ext: &eProxySession_Capabilities})
+var sProxySession_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eProxySession_CreatedTimestamp})
+var sProxySession_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eProxySession_UpdatedTimestamp})
+var sProxySession_EndedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eProxySession_EndedTimestamp})
+var sProxySession_Participants = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Participants", ID: &i_Participants, Members: &m_Participants, Type: smithy.ShapeTypeList, Ext: &eProxySession_Participants})
+var sProxySession_NumberSelectionBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberSelectionBehavior", ID: &iNumberSelectionBehavior, Members: &mNumberSelectionBehavior, Type: smithy.ShapeTypeEnum, Ext: &eProxySession_NumberSelectionBehavior})
+var sProxySession_GeoMatchLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeoMatchLevel", ID: &iGeoMatchLevel, Members: &mGeoMatchLevel, Type: smithy.ShapeTypeEnum, Ext: &eProxySession_GeoMatchLevel})
+var sProxySession_GeoMatchParams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeoMatchParams", ID: &iGeoMatchParams, Members: &mGeoMatchParams, Type: smithy.ShapeTypeStructure, Ext: &eProxySession_GeoMatchParams})
+var s_ProxySessions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProxySession, Members: &mProxySession, Type: smithy.ShapeTypeStructure, Ext: &e_ProxySessions_member})
+var sProxySessionStatus_Open = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Open", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProxySessionStatus_Open})
+var sProxySessionStatus_InProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProxySessionStatus_InProgress})
+var sProxySessionStatus_Closed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Closed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProxySessionStatus_Closed})
+var sResourceLimitExceededException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eResourceLimitExceededException_Code})
+var sResourceLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceLimitExceededException_Message})
+var s_SensitiveStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SensitiveString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &e_SensitiveStringList_member})
+var sServerSideEncryptionConfiguration_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_Arn, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eServerSideEncryptionConfiguration_KmsKeyArn})
+var sServiceFailureException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eServiceFailureException_Code})
+var sServiceFailureException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceFailureException_Message})
+var sServiceUnavailableException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eServiceUnavailableException_Code})
+var sServiceUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailableException_Message})
+var sSessionBorderControllerType_RIBBON_SBC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RIBBON_SBC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSessionBorderControllerType_RIBBON_SBC})
+var sSessionBorderControllerType_ORACLE_ACME_PACKET_SBC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ORACLE_ACME_PACKET_SBC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSessionBorderControllerType_ORACLE_ACME_PACKET_SBC})
+var sSessionBorderControllerType_AVAYA_SBCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAYA_SBCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSessionBorderControllerType_AVAYA_SBCE})
+var sSessionBorderControllerType_CISCO_UNIFIED_BORDER_ELEMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CISCO_UNIFIED_BORDER_ELEMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSessionBorderControllerType_CISCO_UNIFIED_BORDER_ELEMENT})
+var sSessionBorderControllerType_AUDIOCODES_MEDIANT_SBC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUDIOCODES_MEDIANT_SBC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSessionBorderControllerType_AUDIOCODES_MEDIANT_SBC})
+var s_SessionBorderControllerTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSessionBorderControllerType, Members: &mSessionBorderControllerType, Type: smithy.ShapeTypeEnum, Ext: &e_SessionBorderControllerTypeList_member})
+var s_SipHeadersMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_SensitiveString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &e_SipHeadersMap_key})
+var s_SipHeadersMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_SensitiveString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &e_SipHeadersMap_value})
+var sSipMediaApplication_SipMediaApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eSipMediaApplication_SipMediaApplicationId})
+var sSipMediaApplication_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsRegion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSipMediaApplication_AwsRegion})
+var sSipMediaApplication_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SipMediaApplicationName, Type: smithy.ShapeTypeString, Ext: &eSipMediaApplication_Name})
+var sSipMediaApplication_Endpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoints", ID: &i_SipMediaApplicationEndpointList, Members: &m_SipMediaApplicationEndpointList, Type: smithy.ShapeTypeList, Ext: &eSipMediaApplication_Endpoints})
+var sSipMediaApplication_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eSipMediaApplication_CreatedTimestamp})
+var sSipMediaApplication_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eSipMediaApplication_UpdatedTimestamp})
+var sSipMediaApplication_SipMediaApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationArn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eSipMediaApplication_SipMediaApplicationArn})
+var sSipMediaApplicationAlexaSkillConfiguration_AlexaSkillStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlexaSkillStatus", ID: &iAlexaSkillStatus, Members: &mAlexaSkillStatus, Type: smithy.ShapeTypeEnum, Ext: &eSipMediaApplicationAlexaSkillConfiguration_AlexaSkillStatus})
+var sSipMediaApplicationAlexaSkillConfiguration_AlexaSkillIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlexaSkillIds", ID: &i_AlexaSkillIdList, Members: &m_AlexaSkillIdList, Type: smithy.ShapeTypeList, Ext: &eSipMediaApplicationAlexaSkillConfiguration_AlexaSkillIds})
+var sSipMediaApplicationCall_TransactionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransactionId", ID: &i_GuidString, Type: smithy.ShapeTypeString, Ext: &eSipMediaApplicationCall_TransactionId})
+var sSipMediaApplicationEndpoint_LambdaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LambdaArn", ID: &i_FunctionArn, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eSipMediaApplicationEndpoint_LambdaArn})
+var s_SipMediaApplicationEndpointList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSipMediaApplicationEndpoint, Members: &mSipMediaApplicationEndpoint, Type: smithy.ShapeTypeStructure, Ext: &e_SipMediaApplicationEndpointList_member})
+var s_SipMediaApplicationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSipMediaApplication, Members: &mSipMediaApplication, Type: smithy.ShapeTypeStructure, Ext: &e_SipMediaApplicationList_member})
+var sSipMediaApplicationLoggingConfiguration_EnableSipMediaApplicationMessageLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableSipMediaApplicationMessageLogs", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eSipMediaApplicationLoggingConfiguration_EnableSipMediaApplicationMessageLogs})
+var sSipRule_SipRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipRuleId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eSipRule_SipRuleId})
+var sSipRule_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SipRuleName, Type: smithy.ShapeTypeString, Ext: &eSipRule_Name})
+var sSipRule_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eSipRule_Disabled})
+var sSipRule_TriggerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TriggerType", ID: &iSipRuleTriggerType, Members: &mSipRuleTriggerType, Type: smithy.ShapeTypeEnum, Ext: &eSipRule_TriggerType})
+var sSipRule_TriggerValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TriggerValue", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eSipRule_TriggerValue})
+var sSipRule_TargetApplications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetApplications", ID: &i_SipRuleTargetApplicationList, Members: &m_SipRuleTargetApplicationList, Type: smithy.ShapeTypeList, Ext: &eSipRule_TargetApplications})
+var sSipRule_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eSipRule_CreatedTimestamp})
+var sSipRule_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eSipRule_UpdatedTimestamp})
+var s_SipRuleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSipRule, Members: &mSipRule, Type: smithy.ShapeTypeStructure, Ext: &e_SipRuleList_member})
+var sSipRuleTargetApplication_SipMediaApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eSipRuleTargetApplication_SipMediaApplicationId})
+var sSipRuleTargetApplication_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_SipApplicationPriority, Type: smithy.ShapeTypeInteger, Ext: &eSipRuleTargetApplication_Priority})
+var sSipRuleTargetApplication_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsRegion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSipRuleTargetApplication_AwsRegion})
+var s_SipRuleTargetApplicationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSipRuleTargetApplication, Members: &mSipRuleTargetApplication, Type: smithy.ShapeTypeStructure, Ext: &e_SipRuleTargetApplicationList_member})
+var sSipRuleTriggerType_ToPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ToPhoneNumber", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSipRuleTriggerType_ToPhoneNumber})
+var sSipRuleTriggerType_RequestUriHostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestUriHostname", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSipRuleTriggerType_RequestUriHostname})
+var s_SMACreateCallArgumentsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_SensitiveString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &e_SMACreateCallArgumentsMap_key})
+var s_SMACreateCallArgumentsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_SensitiveString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &e_SMACreateCallArgumentsMap_value})
+var s_SMAUpdateCallArgumentsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_SensitiveString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &e_SMAUpdateCallArgumentsMap_key})
+var s_SMAUpdateCallArgumentsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_SensitiveString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &e_SMAUpdateCallArgumentsMap_value})
+var sSpeakerSearchDetails_Results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Results", ID: &i_SpeakerSearchResultList, Members: &m_SpeakerSearchResultList, Type: smithy.ShapeTypeList, Ext: &eSpeakerSearchDetails_Results})
+var sSpeakerSearchDetails_VoiceprintGenerationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceprintGenerationStatus", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &eSpeakerSearchDetails_VoiceprintGenerationStatus})
+var sSpeakerSearchResult_ConfidenceScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfidenceScore", ID: &i_ConfidenceScore, Type: smithy.ShapeTypeFloat, Ext: &eSpeakerSearchResult_ConfidenceScore})
+var sSpeakerSearchResult_VoiceProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &eSpeakerSearchResult_VoiceProfileId})
+var s_SpeakerSearchResultList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSpeakerSearchResult, Members: &mSpeakerSearchResult, Type: smithy.ShapeTypeStructure, Ext: &e_SpeakerSearchResultList_member})
+var sSpeakerSearchTask_SpeakerSearchTaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSearchTaskId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &eSpeakerSearchTask_SpeakerSearchTaskId})
+var sSpeakerSearchTask_SpeakerSearchTaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSearchTaskStatus", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eSpeakerSearchTask_SpeakerSearchTaskStatus})
+var sSpeakerSearchTask_CallDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallDetails", ID: &iCallDetails, Members: &mCallDetails, Type: smithy.ShapeTypeStructure, Ext: &eSpeakerSearchTask_CallDetails})
+var sSpeakerSearchTask_SpeakerSearchDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSearchDetails", ID: &iSpeakerSearchDetails, Members: &mSpeakerSearchDetails, Type: smithy.ShapeTypeStructure, Ext: &eSpeakerSearchTask_SpeakerSearchDetails})
+var sSpeakerSearchTask_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eSpeakerSearchTask_CreatedTimestamp})
+var sSpeakerSearchTask_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eSpeakerSearchTask_UpdatedTimestamp})
+var sSpeakerSearchTask_StartedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eSpeakerSearchTask_StartedTimestamp})
+var sSpeakerSearchTask_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSpeakerSearchTask_StatusMessage})
+var sStreamingConfiguration_DataRetentionInHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataRetentionInHours", ID: &i_DataRetentionInHours, Type: smithy.ShapeTypeInteger, Ext: &eStreamingConfiguration_DataRetentionInHours})
+var sStreamingConfiguration_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eStreamingConfiguration_Disabled})
+var sStreamingConfiguration_StreamingNotificationTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamingNotificationTargets", ID: &i_StreamingNotificationTargetList, Members: &m_StreamingNotificationTargetList, Type: smithy.ShapeTypeList, Ext: &eStreamingConfiguration_StreamingNotificationTargets})
+var sStreamingConfiguration_MediaInsightsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaInsightsConfiguration", ID: &iMediaInsightsConfiguration, Members: &mMediaInsightsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eStreamingConfiguration_MediaInsightsConfiguration})
+var sStreamingNotificationTarget_NotificationTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationTarget", ID: &iNotificationTarget, Members: &mNotificationTarget, Type: smithy.ShapeTypeEnum, Ext: &eStreamingNotificationTarget_NotificationTarget})
+var s_StreamingNotificationTargetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStreamingNotificationTarget, Members: &mStreamingNotificationTarget, Type: smithy.ShapeTypeStructure, Ext: &e_StreamingNotificationTargetList_member})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_StringList_member})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var sTermination_CpsLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CpsLimit", ID: &i_CpsLimit, Type: smithy.ShapeTypeInteger, Ext: &eTermination_CpsLimit})
+var sTermination_DefaultPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultPhoneNumber", ID: &i_E164PhoneNumber, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eTermination_DefaultPhoneNumber})
+var sTermination_CallingRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallingRegions", ID: &i_CallingRegionList, Members: &m_CallingRegionList, Type: smithy.ShapeTypeList, Ext: &eTermination_CallingRegions})
+var sTermination_CidrAllowedList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CidrAllowedList", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eTermination_CidrAllowedList})
+var sTermination_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eTermination_Disabled})
+var sTerminationHealth_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eTerminationHealth_Timestamp})
+var sTerminationHealth_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTerminationHealth_Source})
+var sThrottledClientException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eThrottledClientException_Code})
+var sThrottledClientException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eThrottledClientException_Message})
+var sUnauthorizedClientException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eUnauthorizedClientException_Code})
+var sUnauthorizedClientException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUnauthorizedClientException_Message})
+var sUnprocessableEntityException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eUnprocessableEntityException_Code})
+var sUnprocessableEntityException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUnprocessableEntityException_Message})
+var sUpdatePhoneNumberRequestItem_PhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberId", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eUpdatePhoneNumberRequestItem_PhoneNumberId})
+var sUpdatePhoneNumberRequestItem_ProductType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductType", ID: &iPhoneNumberProductType, Members: &mPhoneNumberProductType, Type: smithy.ShapeTypeEnum, Ext: &eUpdatePhoneNumberRequestItem_ProductType})
+var sUpdatePhoneNumberRequestItem_CallingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallingName", ID: &i_CallingName, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eUpdatePhoneNumberRequestItem_CallingName})
+var sUpdatePhoneNumberRequestItem_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PhoneNumberName, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eUpdatePhoneNumberRequestItem_Name})
+var s_UpdatePhoneNumberRequestItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUpdatePhoneNumberRequestItem, Members: &mUpdatePhoneNumberRequestItem, Type: smithy.ShapeTypeStructure, Ext: &e_UpdatePhoneNumberRequestItemList_member})
+var sVoiceConnector_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Type: smithy.ShapeTypeString, Ext: &eVoiceConnector_VoiceConnectorId})
+var sVoiceConnector_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsRegion", ID: &iVoiceConnectorAwsRegion, Members: &mVoiceConnectorAwsRegion, Type: smithy.ShapeTypeEnum, Ext: &eVoiceConnector_AwsRegion})
+var sVoiceConnector_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_VoiceConnectorName, Type: smithy.ShapeTypeString, Ext: &eVoiceConnector_Name})
+var sVoiceConnector_OutboundHostName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutboundHostName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eVoiceConnector_OutboundHostName})
+var sVoiceConnector_RequireEncryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequireEncryption", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eVoiceConnector_RequireEncryption})
+var sVoiceConnector_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eVoiceConnector_CreatedTimestamp})
+var sVoiceConnector_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eVoiceConnector_UpdatedTimestamp})
+var sVoiceConnector_VoiceConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorArn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eVoiceConnector_VoiceConnectorArn})
+var sVoiceConnector_IntegrationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationType", ID: &iVoiceConnectorIntegrationType, Members: &mVoiceConnectorIntegrationType, Type: smithy.ShapeTypeEnum, Ext: &eVoiceConnector_IntegrationType})
+var sVoiceConnector_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum, Ext: &eVoiceConnector_NetworkType})
+var sVoiceConnectorAwsRegion_US_EAST_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "US_EAST_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceConnectorAwsRegion_US_EAST_1})
+var sVoiceConnectorAwsRegion_US_WEST_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "US_WEST_2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceConnectorAwsRegion_US_WEST_2})
+var sVoiceConnectorAwsRegion_CA_CENTRAL_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CA_CENTRAL_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceConnectorAwsRegion_CA_CENTRAL_1})
+var sVoiceConnectorAwsRegion_EU_CENTRAL_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EU_CENTRAL_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceConnectorAwsRegion_EU_CENTRAL_1})
+var sVoiceConnectorAwsRegion_EU_WEST_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EU_WEST_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceConnectorAwsRegion_EU_WEST_1})
+var sVoiceConnectorAwsRegion_EU_WEST_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EU_WEST_2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceConnectorAwsRegion_EU_WEST_2})
+var sVoiceConnectorAwsRegion_AP_NORTHEAST_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AP_NORTHEAST_2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceConnectorAwsRegion_AP_NORTHEAST_2})
+var sVoiceConnectorAwsRegion_AP_NORTHEAST_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AP_NORTHEAST_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceConnectorAwsRegion_AP_NORTHEAST_1})
+var sVoiceConnectorAwsRegion_AP_SOUTHEAST_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AP_SOUTHEAST_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceConnectorAwsRegion_AP_SOUTHEAST_1})
+var sVoiceConnectorAwsRegion_AP_SOUTHEAST_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AP_SOUTHEAST_2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceConnectorAwsRegion_AP_SOUTHEAST_2})
+var s_VoiceConnectorAwsRegionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVoiceConnectorAwsRegion, Members: &mVoiceConnectorAwsRegion, Type: smithy.ShapeTypeEnum, Ext: &e_VoiceConnectorAwsRegionList_member})
+var sVoiceConnectorGroup_VoiceConnectorGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroupId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eVoiceConnectorGroup_VoiceConnectorGroupId})
+var sVoiceConnectorGroup_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_VoiceConnectorGroupName, Type: smithy.ShapeTypeString, Ext: &eVoiceConnectorGroup_Name})
+var sVoiceConnectorGroup_VoiceConnectorItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorItems", ID: &i_VoiceConnectorItemList, Members: &m_VoiceConnectorItemList, Type: smithy.ShapeTypeList, Ext: &eVoiceConnectorGroup_VoiceConnectorItems})
+var sVoiceConnectorGroup_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eVoiceConnectorGroup_CreatedTimestamp})
+var sVoiceConnectorGroup_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eVoiceConnectorGroup_UpdatedTimestamp})
+var sVoiceConnectorGroup_VoiceConnectorGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroupArn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eVoiceConnectorGroup_VoiceConnectorGroupArn})
+var sVoiceConnectorGroup_CallDistributionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallDistributionType", ID: &iCallDistributionType, Members: &mCallDistributionType, Type: smithy.ShapeTypeEnum, Ext: &eVoiceConnectorGroup_CallDistributionType})
+var s_VoiceConnectorGroupList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVoiceConnectorGroup, Members: &mVoiceConnectorGroup, Type: smithy.ShapeTypeStructure, Ext: &e_VoiceConnectorGroupList_member})
+var sVoiceConnectorIntegrationType_CONNECT_CALL_TRANSFER_CONNECTOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONNECT_CALL_TRANSFER_CONNECTOR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceConnectorIntegrationType_CONNECT_CALL_TRANSFER_CONNECTOR})
+var sVoiceConnectorIntegrationType_CONNECT_ANALYTICS_CONNECTOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONNECT_ANALYTICS_CONNECTOR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVoiceConnectorIntegrationType_CONNECT_ANALYTICS_CONNECTOR})
+var sVoiceConnectorItem_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Type: smithy.ShapeTypeString, Ext: &eVoiceConnectorItem_VoiceConnectorId})
+var sVoiceConnectorItem_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_VoiceConnectorItemPriority, Type: smithy.ShapeTypeInteger, Ext: &eVoiceConnectorItem_Priority})
+var s_VoiceConnectorItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVoiceConnectorItem, Members: &mVoiceConnectorItem, Type: smithy.ShapeTypeStructure, Ext: &e_VoiceConnectorItemList_member})
+var s_VoiceConnectorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVoiceConnector, Members: &mVoiceConnector, Type: smithy.ShapeTypeStructure, Ext: &e_VoiceConnectorList_member})
+var sVoiceConnectorSettings_CdrBucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CdrBucket", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &eVoiceConnectorSettings_CdrBucket})
+var sVoiceProfile_VoiceProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &eVoiceProfile_VoiceProfileId})
+var sVoiceProfile_VoiceProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileArn", ID: &i_Arn, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eVoiceProfile_VoiceProfileArn})
+var sVoiceProfile_VoiceProfileDomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomainId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &eVoiceProfile_VoiceProfileDomainId})
+var sVoiceProfile_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eVoiceProfile_CreatedTimestamp})
+var sVoiceProfile_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eVoiceProfile_UpdatedTimestamp})
+var sVoiceProfile_ExpirationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eVoiceProfile_ExpirationTimestamp})
+var sVoiceProfileDomain_VoiceProfileDomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomainId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &eVoiceProfileDomain_VoiceProfileDomainId})
+var sVoiceProfileDomain_VoiceProfileDomainArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomainArn", ID: &i_Arn, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eVoiceProfileDomain_VoiceProfileDomainArn})
+var sVoiceProfileDomain_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_VoiceProfileDomainName, Type: smithy.ShapeTypeString, Ext: &eVoiceProfileDomain_Name})
+var sVoiceProfileDomain_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_VoiceProfileDomainDescription, Type: smithy.ShapeTypeString, Ext: &eVoiceProfileDomain_Description})
+var sVoiceProfileDomain_ServerSideEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideEncryptionConfiguration", ID: &iServerSideEncryptionConfiguration, Members: &mServerSideEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eVoiceProfileDomain_ServerSideEncryptionConfiguration})
+var sVoiceProfileDomain_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eVoiceProfileDomain_CreatedTimestamp})
+var sVoiceProfileDomain_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eVoiceProfileDomain_UpdatedTimestamp})
+var sVoiceProfileDomainSummary_VoiceProfileDomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomainId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &eVoiceProfileDomainSummary_VoiceProfileDomainId})
+var sVoiceProfileDomainSummary_VoiceProfileDomainArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomainArn", ID: &i_Arn, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eVoiceProfileDomainSummary_VoiceProfileDomainArn})
+var sVoiceProfileDomainSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_VoiceProfileDomainName, Type: smithy.ShapeTypeString, Ext: &eVoiceProfileDomainSummary_Name})
+var sVoiceProfileDomainSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_VoiceProfileDomainDescription, Type: smithy.ShapeTypeString, Ext: &eVoiceProfileDomainSummary_Description})
+var sVoiceProfileDomainSummary_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eVoiceProfileDomainSummary_CreatedTimestamp})
+var sVoiceProfileDomainSummary_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eVoiceProfileDomainSummary_UpdatedTimestamp})
+var s_VoiceProfileDomainSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVoiceProfileDomainSummary, Members: &mVoiceProfileDomainSummary, Type: smithy.ShapeTypeStructure, Ext: &e_VoiceProfileDomainSummaryList_member})
+var sVoiceProfileSummary_VoiceProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &eVoiceProfileSummary_VoiceProfileId})
+var sVoiceProfileSummary_VoiceProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileArn", ID: &i_Arn, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eVoiceProfileSummary_VoiceProfileArn})
+var sVoiceProfileSummary_VoiceProfileDomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomainId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &eVoiceProfileSummary_VoiceProfileDomainId})
+var sVoiceProfileSummary_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eVoiceProfileSummary_CreatedTimestamp})
+var sVoiceProfileSummary_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eVoiceProfileSummary_UpdatedTimestamp})
+var sVoiceProfileSummary_ExpirationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eVoiceProfileSummary_ExpirationTimestamp})
+var s_VoiceProfileSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVoiceProfileSummary, Members: &mVoiceProfileSummary, Type: smithy.ShapeTypeStructure, Ext: &e_VoiceProfileSummaryList_member})
+var sVoiceToneAnalysisTask_VoiceToneAnalysisTaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceToneAnalysisTaskId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &eVoiceToneAnalysisTask_VoiceToneAnalysisTaskId})
+var sVoiceToneAnalysisTask_VoiceToneAnalysisTaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceToneAnalysisTaskStatus", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eVoiceToneAnalysisTask_VoiceToneAnalysisTaskStatus})
+var sVoiceToneAnalysisTask_CallDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallDetails", ID: &iCallDetails, Members: &mCallDetails, Type: smithy.ShapeTypeStructure, Ext: &eVoiceToneAnalysisTask_CallDetails})
+var sVoiceToneAnalysisTask_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eVoiceToneAnalysisTask_CreatedTimestamp})
+var sVoiceToneAnalysisTask_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eVoiceToneAnalysisTask_UpdatedTimestamp})
+var sVoiceToneAnalysisTask_StartedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eVoiceToneAnalysisTask_StartedTimestamp})
+var sVoiceToneAnalysisTask_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eVoiceToneAnalysisTask_StatusMessage})
+var sAssociatePhoneNumbersWithVoiceConnectorGroupRequest_VoiceConnectorGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroupId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eAssociatePhoneNumbersWithVoiceConnectorGroupRequest_VoiceConnectorGroupId})
+var sAssociatePhoneNumbersWithVoiceConnectorGroupRequest_E164PhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "E164PhoneNumbers", ID: &i_E164PhoneNumberList, Members: &m_E164PhoneNumberList, Type: smithy.ShapeTypeList, Ext: &eAssociatePhoneNumbersWithVoiceConnectorGroupRequest_E164PhoneNumbers})
+var sAssociatePhoneNumbersWithVoiceConnectorGroupRequest_ForceAssociate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceAssociate", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eAssociatePhoneNumbersWithVoiceConnectorGroupRequest_ForceAssociate})
+var sAssociatePhoneNumbersWithVoiceConnectorGroupResponse_PhoneNumberErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberErrors", ID: &i_PhoneNumberErrorList, Members: &m_PhoneNumberErrorList, Type: smithy.ShapeTypeList, Ext: &eAssociatePhoneNumbersWithVoiceConnectorGroupResponse_PhoneNumberErrors})
+var sAssociatePhoneNumbersWithVoiceConnectorRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eAssociatePhoneNumbersWithVoiceConnectorRequest_VoiceConnectorId})
+var sAssociatePhoneNumbersWithVoiceConnectorRequest_E164PhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "E164PhoneNumbers", ID: &i_E164PhoneNumberList, Members: &m_E164PhoneNumberList, Type: smithy.ShapeTypeList, Ext: &eAssociatePhoneNumbersWithVoiceConnectorRequest_E164PhoneNumbers})
+var sAssociatePhoneNumbersWithVoiceConnectorRequest_ForceAssociate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceAssociate", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eAssociatePhoneNumbersWithVoiceConnectorRequest_ForceAssociate})
+var sAssociatePhoneNumbersWithVoiceConnectorResponse_PhoneNumberErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberErrors", ID: &i_PhoneNumberErrorList, Members: &m_PhoneNumberErrorList, Type: smithy.ShapeTypeList, Ext: &eAssociatePhoneNumbersWithVoiceConnectorResponse_PhoneNumberErrors})
+var sBatchDeletePhoneNumberRequest_PhoneNumberIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberIds", ID: &i_NonEmptyStringList, Members: &m_NonEmptyStringList, Type: smithy.ShapeTypeList, Ext: &eBatchDeletePhoneNumberRequest_PhoneNumberIds})
+var sBatchDeletePhoneNumberResponse_PhoneNumberErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberErrors", ID: &i_PhoneNumberErrorList, Members: &m_PhoneNumberErrorList, Type: smithy.ShapeTypeList, Ext: &eBatchDeletePhoneNumberResponse_PhoneNumberErrors})
+var sBatchUpdatePhoneNumberRequest_UpdatePhoneNumberRequestItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatePhoneNumberRequestItems", ID: &i_UpdatePhoneNumberRequestItemList, Members: &m_UpdatePhoneNumberRequestItemList, Type: smithy.ShapeTypeList, Ext: &eBatchUpdatePhoneNumberRequest_UpdatePhoneNumberRequestItems})
+var sBatchUpdatePhoneNumberResponse_PhoneNumberErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberErrors", ID: &i_PhoneNumberErrorList, Members: &m_PhoneNumberErrorList, Type: smithy.ShapeTypeList, Ext: &eBatchUpdatePhoneNumberResponse_PhoneNumberErrors})
+var sCreatePhoneNumberOrderRequest_ProductType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductType", ID: &iPhoneNumberProductType, Members: &mPhoneNumberProductType, Type: smithy.ShapeTypeEnum, Ext: &eCreatePhoneNumberOrderRequest_ProductType})
+var sCreatePhoneNumberOrderRequest_E164PhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "E164PhoneNumbers", ID: &i_E164PhoneNumberList, Members: &m_E164PhoneNumberList, Type: smithy.ShapeTypeList, Ext: &eCreatePhoneNumberOrderRequest_E164PhoneNumbers})
+var sCreatePhoneNumberOrderRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PhoneNumberName, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eCreatePhoneNumberOrderRequest_Name})
+var sCreatePhoneNumberOrderResponse_PhoneNumberOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberOrder", ID: &iPhoneNumberOrder, Members: &mPhoneNumberOrder, Type: smithy.ShapeTypeStructure, Ext: &eCreatePhoneNumberOrderResponse_PhoneNumberOrder})
+var sCreateProxySessionRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eCreateProxySessionRequest_VoiceConnectorId})
+var sCreateProxySessionRequest_ParticipantPhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParticipantPhoneNumbers", ID: &i_ParticipantPhoneNumberList, Members: &m_ParticipantPhoneNumberList, Type: smithy.ShapeTypeList, Ext: &eCreateProxySessionRequest_ParticipantPhoneNumbers})
+var sCreateProxySessionRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ProxySessionNameString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eCreateProxySessionRequest_Name})
+var sCreateProxySessionRequest_ExpiryMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiryMinutes", ID: &i_PositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &eCreateProxySessionRequest_ExpiryMinutes})
+var sCreateProxySessionRequest_Capabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Capabilities", ID: &i_CapabilityList, Members: &m_CapabilityList, Type: smithy.ShapeTypeList, Ext: &eCreateProxySessionRequest_Capabilities})
+var sCreateProxySessionRequest_NumberSelectionBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberSelectionBehavior", ID: &iNumberSelectionBehavior, Members: &mNumberSelectionBehavior, Type: smithy.ShapeTypeEnum, Ext: &eCreateProxySessionRequest_NumberSelectionBehavior})
+var sCreateProxySessionRequest_GeoMatchLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeoMatchLevel", ID: &iGeoMatchLevel, Members: &mGeoMatchLevel, Type: smithy.ShapeTypeEnum, Ext: &eCreateProxySessionRequest_GeoMatchLevel})
+var sCreateProxySessionRequest_GeoMatchParams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeoMatchParams", ID: &iGeoMatchParams, Members: &mGeoMatchParams, Type: smithy.ShapeTypeStructure, Ext: &eCreateProxySessionRequest_GeoMatchParams})
+var sCreateProxySessionResponse_ProxySession = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxySession", ID: &iProxySession, Members: &mProxySession, Type: smithy.ShapeTypeStructure, Ext: &eCreateProxySessionResponse_ProxySession})
+var sCreateSipMediaApplicationCallRequest_FromPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FromPhoneNumber", ID: &i_E164PhoneNumber, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eCreateSipMediaApplicationCallRequest_FromPhoneNumber})
+var sCreateSipMediaApplicationCallRequest_ToPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ToPhoneNumber", ID: &i_E164PhoneNumber, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eCreateSipMediaApplicationCallRequest_ToPhoneNumber})
+var sCreateSipMediaApplicationCallRequest_SipMediaApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eCreateSipMediaApplicationCallRequest_SipMediaApplicationId})
+var sCreateSipMediaApplicationCallRequest_SipHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipHeaders", ID: &i_SipHeadersMap, Members: &m_SipHeadersMap, Type: smithy.ShapeTypeMap, Ext: &eCreateSipMediaApplicationCallRequest_SipHeaders})
+var sCreateSipMediaApplicationCallRequest_ArgumentsMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArgumentsMap", ID: &i_SMACreateCallArgumentsMap, Members: &m_SMACreateCallArgumentsMap, Type: smithy.ShapeTypeMap, Ext: &eCreateSipMediaApplicationCallRequest_ArgumentsMap})
+var sCreateSipMediaApplicationCallResponse_SipMediaApplicationCall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationCall", ID: &iSipMediaApplicationCall, Members: &mSipMediaApplicationCall, Type: smithy.ShapeTypeStructure, Ext: &eCreateSipMediaApplicationCallResponse_SipMediaApplicationCall})
+var sCreateSipMediaApplicationRequest_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsRegion", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateSipMediaApplicationRequest_AwsRegion})
+var sCreateSipMediaApplicationRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SipMediaApplicationName, Type: smithy.ShapeTypeString, Ext: &eCreateSipMediaApplicationRequest_Name})
+var sCreateSipMediaApplicationRequest_Endpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoints", ID: &i_SipMediaApplicationEndpointList, Members: &m_SipMediaApplicationEndpointList, Type: smithy.ShapeTypeList, Ext: &eCreateSipMediaApplicationRequest_Endpoints})
+var sCreateSipMediaApplicationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateSipMediaApplicationRequest_Tags})
+var sCreateSipMediaApplicationResponse_SipMediaApplication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplication", ID: &iSipMediaApplication, Members: &mSipMediaApplication, Type: smithy.ShapeTypeStructure, Ext: &eCreateSipMediaApplicationResponse_SipMediaApplication})
+var sCreateSipRuleRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SipRuleName, Type: smithy.ShapeTypeString, Ext: &eCreateSipRuleRequest_Name})
+var sCreateSipRuleRequest_TriggerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TriggerType", ID: &iSipRuleTriggerType, Members: &mSipRuleTriggerType, Type: smithy.ShapeTypeEnum, Ext: &eCreateSipRuleRequest_TriggerType})
+var sCreateSipRuleRequest_TriggerValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TriggerValue", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eCreateSipRuleRequest_TriggerValue})
+var sCreateSipRuleRequest_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateSipRuleRequest_Disabled})
+var sCreateSipRuleRequest_TargetApplications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetApplications", ID: &i_SipRuleTargetApplicationList, Members: &m_SipRuleTargetApplicationList, Type: smithy.ShapeTypeList, Ext: &eCreateSipRuleRequest_TargetApplications})
+var sCreateSipRuleResponse_SipRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipRule", ID: &iSipRule, Members: &mSipRule, Type: smithy.ShapeTypeStructure, Ext: &eCreateSipRuleResponse_SipRule})
+var sCreateVoiceConnectorGroupRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_VoiceConnectorGroupName, Type: smithy.ShapeTypeString, Ext: &eCreateVoiceConnectorGroupRequest_Name})
+var sCreateVoiceConnectorGroupRequest_VoiceConnectorItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorItems", ID: &i_VoiceConnectorItemList, Members: &m_VoiceConnectorItemList, Type: smithy.ShapeTypeList, Ext: &eCreateVoiceConnectorGroupRequest_VoiceConnectorItems})
+var sCreateVoiceConnectorGroupRequest_CallDistributionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallDistributionType", ID: &iCallDistributionType, Members: &mCallDistributionType, Type: smithy.ShapeTypeEnum, Ext: &eCreateVoiceConnectorGroupRequest_CallDistributionType})
+var sCreateVoiceConnectorGroupResponse_VoiceConnectorGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroup", ID: &iVoiceConnectorGroup, Members: &mVoiceConnectorGroup, Type: smithy.ShapeTypeStructure, Ext: &eCreateVoiceConnectorGroupResponse_VoiceConnectorGroup})
+var sCreateVoiceConnectorRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_VoiceConnectorName, Type: smithy.ShapeTypeString, Ext: &eCreateVoiceConnectorRequest_Name})
+var sCreateVoiceConnectorRequest_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsRegion", ID: &iVoiceConnectorAwsRegion, Members: &mVoiceConnectorAwsRegion, Type: smithy.ShapeTypeEnum, Ext: &eCreateVoiceConnectorRequest_AwsRegion})
+var sCreateVoiceConnectorRequest_RequireEncryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequireEncryption", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateVoiceConnectorRequest_RequireEncryption})
+var sCreateVoiceConnectorRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateVoiceConnectorRequest_Tags})
+var sCreateVoiceConnectorRequest_IntegrationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationType", ID: &iVoiceConnectorIntegrationType, Members: &mVoiceConnectorIntegrationType, Type: smithy.ShapeTypeEnum, Ext: &eCreateVoiceConnectorRequest_IntegrationType})
+var sCreateVoiceConnectorRequest_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum, Ext: &eCreateVoiceConnectorRequest_NetworkType})
+var sCreateVoiceConnectorResponse_VoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnector", ID: &iVoiceConnector, Members: &mVoiceConnector, Type: smithy.ShapeTypeStructure, Ext: &eCreateVoiceConnectorResponse_VoiceConnector})
+var sCreateVoiceProfileDomainRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_VoiceProfileDomainName, Type: smithy.ShapeTypeString, Ext: &eCreateVoiceProfileDomainRequest_Name})
+var sCreateVoiceProfileDomainRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_VoiceProfileDomainDescription, Type: smithy.ShapeTypeString, Ext: &eCreateVoiceProfileDomainRequest_Description})
+var sCreateVoiceProfileDomainRequest_ServerSideEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideEncryptionConfiguration", ID: &iServerSideEncryptionConfiguration, Members: &mServerSideEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateVoiceProfileDomainRequest_ServerSideEncryptionConfiguration})
+var sCreateVoiceProfileDomainRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestId, Type: smithy.ShapeTypeString, Ext: &eCreateVoiceProfileDomainRequest_ClientRequestToken})
+var sCreateVoiceProfileDomainRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateVoiceProfileDomainRequest_Tags})
+var sCreateVoiceProfileDomainResponse_VoiceProfileDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomain", ID: &iVoiceProfileDomain, Members: &mVoiceProfileDomain, Type: smithy.ShapeTypeStructure, Ext: &eCreateVoiceProfileDomainResponse_VoiceProfileDomain})
+var sCreateVoiceProfileRequest_SpeakerSearchTaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSearchTaskId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &eCreateVoiceProfileRequest_SpeakerSearchTaskId})
+var sCreateVoiceProfileResponse_VoiceProfile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfile", ID: &iVoiceProfile, Members: &mVoiceProfile, Type: smithy.ShapeTypeStructure, Ext: &eCreateVoiceProfileResponse_VoiceProfile})
+var sDeletePhoneNumberRequest_PhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberId", ID: &i_SensitiveNonEmptyString, Traits: &t112, Type: smithy.ShapeTypeString, Ext: &eDeletePhoneNumberRequest_PhoneNumberId})
+var sDeleteProxySessionRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eDeleteProxySessionRequest_VoiceConnectorId})
+var sDeleteProxySessionRequest_ProxySessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxySessionId", ID: &i_NonEmptyString128, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eDeleteProxySessionRequest_ProxySessionId})
+var sDeleteSipMediaApplicationRequest_SipMediaApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eDeleteSipMediaApplicationRequest_SipMediaApplicationId})
+var sDeleteSipRuleRequest_SipRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipRuleId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eDeleteSipRuleRequest_SipRuleId})
+var sDeleteVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eDeleteVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId})
+var sDeleteVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eDeleteVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId})
+var sDeleteVoiceConnectorGroupRequest_VoiceConnectorGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroupId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eDeleteVoiceConnectorGroupRequest_VoiceConnectorGroupId})
+var sDeleteVoiceConnectorRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eDeleteVoiceConnectorRequest_VoiceConnectorId})
+var sDeleteVoiceConnectorOriginationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eDeleteVoiceConnectorOriginationRequest_VoiceConnectorId})
+var sDeleteVoiceConnectorProxyRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eDeleteVoiceConnectorProxyRequest_VoiceConnectorId})
+var sDeleteVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eDeleteVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId})
+var sDeleteVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eDeleteVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId})
+var sDeleteVoiceConnectorTerminationCredentialsRequest_Usernames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Usernames", ID: &i_SensitiveStringList, Members: &m_SensitiveStringList, Type: smithy.ShapeTypeList, Ext: &eDeleteVoiceConnectorTerminationCredentialsRequest_Usernames})
+var sDeleteVoiceConnectorTerminationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eDeleteVoiceConnectorTerminationRequest_VoiceConnectorId})
+var sDeleteVoiceProfileDomainRequest_VoiceProfileDomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomainId", ID: &i_NonEmptyString256, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eDeleteVoiceProfileDomainRequest_VoiceProfileDomainId})
+var sDeleteVoiceProfileRequest_VoiceProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileId", ID: &i_NonEmptyString256, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eDeleteVoiceProfileRequest_VoiceProfileId})
+var sDisassociatePhoneNumbersFromVoiceConnectorGroupRequest_VoiceConnectorGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroupId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eDisassociatePhoneNumbersFromVoiceConnectorGroupRequest_VoiceConnectorGroupId})
+var sDisassociatePhoneNumbersFromVoiceConnectorGroupRequest_E164PhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "E164PhoneNumbers", ID: &i_E164PhoneNumberList, Members: &m_E164PhoneNumberList, Type: smithy.ShapeTypeList, Ext: &eDisassociatePhoneNumbersFromVoiceConnectorGroupRequest_E164PhoneNumbers})
+var sDisassociatePhoneNumbersFromVoiceConnectorGroupResponse_PhoneNumberErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberErrors", ID: &i_PhoneNumberErrorList, Members: &m_PhoneNumberErrorList, Type: smithy.ShapeTypeList, Ext: &eDisassociatePhoneNumbersFromVoiceConnectorGroupResponse_PhoneNumberErrors})
+var sDisassociatePhoneNumbersFromVoiceConnectorRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eDisassociatePhoneNumbersFromVoiceConnectorRequest_VoiceConnectorId})
+var sDisassociatePhoneNumbersFromVoiceConnectorRequest_E164PhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "E164PhoneNumbers", ID: &i_E164PhoneNumberList, Members: &m_E164PhoneNumberList, Type: smithy.ShapeTypeList, Ext: &eDisassociatePhoneNumbersFromVoiceConnectorRequest_E164PhoneNumbers})
+var sDisassociatePhoneNumbersFromVoiceConnectorResponse_PhoneNumberErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberErrors", ID: &i_PhoneNumberErrorList, Members: &m_PhoneNumberErrorList, Type: smithy.ShapeTypeList, Ext: &eDisassociatePhoneNumbersFromVoiceConnectorResponse_PhoneNumberErrors})
+var sGetGlobalSettingsResponse_VoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnector", ID: &iVoiceConnectorSettings, Members: &mVoiceConnectorSettings, Type: smithy.ShapeTypeStructure, Ext: &eGetGlobalSettingsResponse_VoiceConnector})
+var sGetPhoneNumberRequest_PhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberId", ID: &i_SensitiveNonEmptyString, Traits: &t112, Type: smithy.ShapeTypeString, Ext: &eGetPhoneNumberRequest_PhoneNumberId})
+var sGetPhoneNumberOrderRequest_PhoneNumberOrderId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberOrderId", ID: &i_GuidString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eGetPhoneNumberOrderRequest_PhoneNumberOrderId})
+var sGetPhoneNumberOrderResponse_PhoneNumberOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberOrder", ID: &iPhoneNumberOrder, Members: &mPhoneNumberOrder, Type: smithy.ShapeTypeStructure, Ext: &eGetPhoneNumberOrderResponse_PhoneNumberOrder})
+var sGetPhoneNumberResponse_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &iPhoneNumber, Members: &mPhoneNumber, Type: smithy.ShapeTypeStructure, Ext: &eGetPhoneNumberResponse_PhoneNumber})
+var sGetPhoneNumberSettingsResponse_CallingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallingName", ID: &i_CallingName, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eGetPhoneNumberSettingsResponse_CallingName})
+var sGetPhoneNumberSettingsResponse_CallingNameUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallingNameUpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t105, Type: smithy.ShapeTypeTimestamp, Ext: &eGetPhoneNumberSettingsResponse_CallingNameUpdatedTimestamp})
+var sGetProxySessionRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eGetProxySessionRequest_VoiceConnectorId})
+var sGetProxySessionRequest_ProxySessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxySessionId", ID: &i_NonEmptyString128, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eGetProxySessionRequest_ProxySessionId})
+var sGetProxySessionResponse_ProxySession = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxySession", ID: &iProxySession, Members: &mProxySession, Type: smithy.ShapeTypeStructure, Ext: &eGetProxySessionResponse_ProxySession})
+var sGetSipMediaApplicationAlexaSkillConfigurationRequest_SipMediaApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eGetSipMediaApplicationAlexaSkillConfigurationRequest_SipMediaApplicationId})
+var sGetSipMediaApplicationAlexaSkillConfigurationResponse_SipMediaApplicationAlexaSkillConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationAlexaSkillConfiguration", ID: &iSipMediaApplicationAlexaSkillConfiguration, Members: &mSipMediaApplicationAlexaSkillConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetSipMediaApplicationAlexaSkillConfigurationResponse_SipMediaApplicationAlexaSkillConfiguration})
+var sGetSipMediaApplicationRequest_SipMediaApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eGetSipMediaApplicationRequest_SipMediaApplicationId})
+var sGetSipMediaApplicationLoggingConfigurationRequest_SipMediaApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eGetSipMediaApplicationLoggingConfigurationRequest_SipMediaApplicationId})
+var sGetSipMediaApplicationLoggingConfigurationResponse_SipMediaApplicationLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationLoggingConfiguration", ID: &iSipMediaApplicationLoggingConfiguration, Members: &mSipMediaApplicationLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetSipMediaApplicationLoggingConfigurationResponse_SipMediaApplicationLoggingConfiguration})
+var sGetSipMediaApplicationResponse_SipMediaApplication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplication", ID: &iSipMediaApplication, Members: &mSipMediaApplication, Type: smithy.ShapeTypeStructure, Ext: &eGetSipMediaApplicationResponse_SipMediaApplication})
+var sGetSipRuleRequest_SipRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipRuleId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eGetSipRuleRequest_SipRuleId})
+var sGetSipRuleResponse_SipRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipRule", ID: &iSipRule, Members: &mSipRule, Type: smithy.ShapeTypeStructure, Ext: &eGetSipRuleResponse_SipRule})
+var sGetSpeakerSearchTaskRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eGetSpeakerSearchTaskRequest_VoiceConnectorId})
+var sGetSpeakerSearchTaskRequest_SpeakerSearchTaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSearchTaskId", ID: &i_NonEmptyString256, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eGetSpeakerSearchTaskRequest_SpeakerSearchTaskId})
+var sGetSpeakerSearchTaskResponse_SpeakerSearchTask = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSearchTask", ID: &iSpeakerSearchTask, Members: &mSpeakerSearchTask, Type: smithy.ShapeTypeStructure, Ext: &eGetSpeakerSearchTaskResponse_SpeakerSearchTask})
+var sGetVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eGetVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId})
+var sGetVoiceConnectorEmergencyCallingConfigurationResponse_EmergencyCallingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmergencyCallingConfiguration", ID: &iEmergencyCallingConfiguration, Members: &mEmergencyCallingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorEmergencyCallingConfigurationResponse_EmergencyCallingConfiguration})
+var sGetVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eGetVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId})
+var sGetVoiceConnectorExternalSystemsConfigurationResponse_ExternalSystemsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalSystemsConfiguration", ID: &iExternalSystemsConfiguration, Members: &mExternalSystemsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorExternalSystemsConfigurationResponse_ExternalSystemsConfiguration})
+var sGetVoiceConnectorGroupRequest_VoiceConnectorGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroupId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eGetVoiceConnectorGroupRequest_VoiceConnectorGroupId})
+var sGetVoiceConnectorGroupResponse_VoiceConnectorGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroup", ID: &iVoiceConnectorGroup, Members: &mVoiceConnectorGroup, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorGroupResponse_VoiceConnectorGroup})
+var sGetVoiceConnectorRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eGetVoiceConnectorRequest_VoiceConnectorId})
+var sGetVoiceConnectorLoggingConfigurationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eGetVoiceConnectorLoggingConfigurationRequest_VoiceConnectorId})
+var sGetVoiceConnectorLoggingConfigurationResponse_LoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingConfiguration", ID: &iLoggingConfiguration, Members: &mLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorLoggingConfigurationResponse_LoggingConfiguration})
+var sGetVoiceConnectorOriginationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eGetVoiceConnectorOriginationRequest_VoiceConnectorId})
+var sGetVoiceConnectorOriginationResponse_Origination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Origination", ID: &iOrigination, Members: &mOrigination, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorOriginationResponse_Origination})
+var sGetVoiceConnectorResponse_VoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnector", ID: &iVoiceConnector, Members: &mVoiceConnector, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorResponse_VoiceConnector})
+var sGetVoiceConnectorProxyRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eGetVoiceConnectorProxyRequest_VoiceConnectorId})
+var sGetVoiceConnectorProxyResponse_Proxy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Proxy", ID: &iProxy, Members: &mProxy, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorProxyResponse_Proxy})
+var sGetVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eGetVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId})
+var sGetVoiceConnectorStreamingConfigurationResponse_StreamingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamingConfiguration", ID: &iStreamingConfiguration, Members: &mStreamingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorStreamingConfigurationResponse_StreamingConfiguration})
+var sGetVoiceConnectorTerminationHealthRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eGetVoiceConnectorTerminationHealthRequest_VoiceConnectorId})
+var sGetVoiceConnectorTerminationHealthResponse_TerminationHealth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminationHealth", ID: &iTerminationHealth, Members: &mTerminationHealth, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorTerminationHealthResponse_TerminationHealth})
+var sGetVoiceConnectorTerminationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eGetVoiceConnectorTerminationRequest_VoiceConnectorId})
+var sGetVoiceConnectorTerminationResponse_Termination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Termination", ID: &iTermination, Members: &mTermination, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceConnectorTerminationResponse_Termination})
+var sGetVoiceProfileDomainRequest_VoiceProfileDomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomainId", ID: &i_NonEmptyString256, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eGetVoiceProfileDomainRequest_VoiceProfileDomainId})
+var sGetVoiceProfileDomainResponse_VoiceProfileDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomain", ID: &iVoiceProfileDomain, Members: &mVoiceProfileDomain, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceProfileDomainResponse_VoiceProfileDomain})
+var sGetVoiceProfileRequest_VoiceProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileId", ID: &i_NonEmptyString256, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eGetVoiceProfileRequest_VoiceProfileId})
+var sGetVoiceProfileResponse_VoiceProfile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfile", ID: &iVoiceProfile, Members: &mVoiceProfile, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceProfileResponse_VoiceProfile})
+var sGetVoiceToneAnalysisTaskRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eGetVoiceToneAnalysisTaskRequest_VoiceConnectorId})
+var sGetVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceToneAnalysisTaskId", ID: &i_NonEmptyString256, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eGetVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId})
+var sGetVoiceToneAnalysisTaskRequest_IsCaller = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsCaller", ID: &i_Boolean, Traits: &t113, Type: smithy.ShapeTypeBoolean, Ext: &eGetVoiceToneAnalysisTaskRequest_IsCaller})
+var sGetVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceToneAnalysisTask", ID: &iVoiceToneAnalysisTask, Members: &mVoiceToneAnalysisTask, Type: smithy.ShapeTypeStructure, Ext: &eGetVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask})
+var sListAvailableVoiceConnectorRegionsResponse_VoiceConnectorRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorRegions", ID: &i_VoiceConnectorAwsRegionList, Members: &m_VoiceConnectorAwsRegionList, Type: smithy.ShapeTypeList, Ext: &eListAvailableVoiceConnectorRegionsResponse_VoiceConnectorRegions})
+var sListPhoneNumberOrdersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenString, Traits: &t114, Type: smithy.ShapeTypeString, Ext: &eListPhoneNumberOrdersRequest_NextToken})
+var sListPhoneNumberOrdersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t115, Type: smithy.ShapeTypeInteger, Ext: &eListPhoneNumberOrdersRequest_MaxResults})
+var sListPhoneNumberOrdersResponse_PhoneNumberOrders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberOrders", ID: &i_PhoneNumberOrderList, Members: &m_PhoneNumberOrderList, Type: smithy.ShapeTypeList, Ext: &eListPhoneNumberOrdersResponse_PhoneNumberOrders})
+var sListPhoneNumberOrdersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPhoneNumberOrdersResponse_NextToken})
+var sListPhoneNumbersRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Traits: &t116, Type: smithy.ShapeTypeString, Ext: &eListPhoneNumbersRequest_Status})
+var sListPhoneNumbersRequest_ProductType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductType", ID: &iPhoneNumberProductType, Members: &mPhoneNumberProductType, Traits: &t117, Type: smithy.ShapeTypeEnum, Ext: &eListPhoneNumbersRequest_ProductType})
+var sListPhoneNumbersRequest_FilterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterName", ID: &iPhoneNumberAssociationName, Members: &mPhoneNumberAssociationName, Traits: &t118, Type: smithy.ShapeTypeEnum, Ext: &eListPhoneNumbersRequest_FilterName})
+var sListPhoneNumbersRequest_FilterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterValue", ID: &i_String, Traits: &t119, Type: smithy.ShapeTypeString, Ext: &eListPhoneNumbersRequest_FilterValue})
+var sListPhoneNumbersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t115, Type: smithy.ShapeTypeInteger, Ext: &eListPhoneNumbersRequest_MaxResults})
+var sListPhoneNumbersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t114, Type: smithy.ShapeTypeString, Ext: &eListPhoneNumbersRequest_NextToken})
+var sListPhoneNumbersResponse_PhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumbers", ID: &i_PhoneNumberList, Members: &m_PhoneNumberList, Type: smithy.ShapeTypeList, Ext: &eListPhoneNumbersResponse_PhoneNumbers})
+var sListPhoneNumbersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListPhoneNumbersResponse_NextToken})
+var sListProxySessionsRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eListProxySessionsRequest_VoiceConnectorId})
+var sListProxySessionsRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iProxySessionStatus, Members: &mProxySessionStatus, Traits: &t116, Type: smithy.ShapeTypeEnum, Ext: &eListProxySessionsRequest_Status})
+var sListProxySessionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenString, Traits: &t114, Type: smithy.ShapeTypeString, Ext: &eListProxySessionsRequest_NextToken})
+var sListProxySessionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t115, Type: smithy.ShapeTypeInteger, Ext: &eListProxySessionsRequest_MaxResults})
+var sListProxySessionsResponse_ProxySessions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxySessions", ID: &i_ProxySessions, Members: &m_ProxySessions, Type: smithy.ShapeTypeList, Ext: &eListProxySessionsResponse_ProxySessions})
+var sListProxySessionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenString, Type: smithy.ShapeTypeString, Ext: &eListProxySessionsResponse_NextToken})
+var sListSipMediaApplicationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t115, Type: smithy.ShapeTypeInteger, Ext: &eListSipMediaApplicationsRequest_MaxResults})
+var sListSipMediaApplicationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenString, Traits: &t114, Type: smithy.ShapeTypeString, Ext: &eListSipMediaApplicationsRequest_NextToken})
+var sListSipMediaApplicationsResponse_SipMediaApplications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplications", ID: &i_SipMediaApplicationList, Members: &m_SipMediaApplicationList, Type: smithy.ShapeTypeList, Ext: &eListSipMediaApplicationsResponse_SipMediaApplications})
+var sListSipMediaApplicationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenString, Type: smithy.ShapeTypeString, Ext: &eListSipMediaApplicationsResponse_NextToken})
+var sListSipRulesRequest_SipMediaApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationId", ID: &i_NonEmptyString, Traits: &t120, Type: smithy.ShapeTypeString, Ext: &eListSipRulesRequest_SipMediaApplicationId})
+var sListSipRulesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t115, Type: smithy.ShapeTypeInteger, Ext: &eListSipRulesRequest_MaxResults})
+var sListSipRulesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenString, Traits: &t114, Type: smithy.ShapeTypeString, Ext: &eListSipRulesRequest_NextToken})
+var sListSipRulesResponse_SipRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipRules", ID: &i_SipRuleList, Members: &m_SipRuleList, Type: smithy.ShapeTypeList, Ext: &eListSipRulesResponse_SipRules})
+var sListSipRulesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenString, Type: smithy.ShapeTypeString, Ext: &eListSipRulesResponse_NextToken})
+var sListSupportedPhoneNumberCountriesRequest_ProductType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductType", ID: &iPhoneNumberProductType, Members: &mPhoneNumberProductType, Traits: &t117, Type: smithy.ShapeTypeEnum, Ext: &eListSupportedPhoneNumberCountriesRequest_ProductType})
+var sListSupportedPhoneNumberCountriesResponse_PhoneNumberCountries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberCountries", ID: &i_PhoneNumberCountriesList, Members: &m_PhoneNumberCountriesList, Type: smithy.ShapeTypeList, Ext: &eListSupportedPhoneNumberCountriesResponse_PhoneNumberCountries})
+var sListTagsForResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_Arn, Traits: &t121, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceARN})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_Tags})
+var sListVoiceConnectorGroupsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t114, Type: smithy.ShapeTypeString, Ext: &eListVoiceConnectorGroupsRequest_NextToken})
+var sListVoiceConnectorGroupsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t115, Type: smithy.ShapeTypeInteger, Ext: &eListVoiceConnectorGroupsRequest_MaxResults})
+var sListVoiceConnectorGroupsResponse_VoiceConnectorGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroups", ID: &i_VoiceConnectorGroupList, Members: &m_VoiceConnectorGroupList, Type: smithy.ShapeTypeList, Ext: &eListVoiceConnectorGroupsResponse_VoiceConnectorGroups})
+var sListVoiceConnectorGroupsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListVoiceConnectorGroupsResponse_NextToken})
+var sListVoiceConnectorsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t114, Type: smithy.ShapeTypeString, Ext: &eListVoiceConnectorsRequest_NextToken})
+var sListVoiceConnectorsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t115, Type: smithy.ShapeTypeInteger, Ext: &eListVoiceConnectorsRequest_MaxResults})
+var sListVoiceConnectorsResponse_VoiceConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectors", ID: &i_VoiceConnectorList, Members: &m_VoiceConnectorList, Type: smithy.ShapeTypeList, Ext: &eListVoiceConnectorsResponse_VoiceConnectors})
+var sListVoiceConnectorsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListVoiceConnectorsResponse_NextToken})
+var sListVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eListVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId})
+var sListVoiceConnectorTerminationCredentialsResponse_Usernames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Usernames", ID: &i_SensitiveStringList, Members: &m_SensitiveStringList, Type: smithy.ShapeTypeList, Ext: &eListVoiceConnectorTerminationCredentialsResponse_Usernames})
+var sListVoiceProfileDomainsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t114, Type: smithy.ShapeTypeString, Ext: &eListVoiceProfileDomainsRequest_NextToken})
+var sListVoiceProfileDomainsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t115, Type: smithy.ShapeTypeInteger, Ext: &eListVoiceProfileDomainsRequest_MaxResults})
+var sListVoiceProfileDomainsResponse_VoiceProfileDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomains", ID: &i_VoiceProfileDomainSummaryList, Members: &m_VoiceProfileDomainSummaryList, Type: smithy.ShapeTypeList, Ext: &eListVoiceProfileDomainsResponse_VoiceProfileDomains})
+var sListVoiceProfileDomainsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListVoiceProfileDomainsResponse_NextToken})
+var sListVoiceProfilesRequest_VoiceProfileDomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomainId", ID: &i_NonEmptyString256, Traits: &t122, Type: smithy.ShapeTypeString, Ext: &eListVoiceProfilesRequest_VoiceProfileDomainId})
+var sListVoiceProfilesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t114, Type: smithy.ShapeTypeString, Ext: &eListVoiceProfilesRequest_NextToken})
+var sListVoiceProfilesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t115, Type: smithy.ShapeTypeInteger, Ext: &eListVoiceProfilesRequest_MaxResults})
+var sListVoiceProfilesResponse_VoiceProfiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfiles", ID: &i_VoiceProfileSummaryList, Members: &m_VoiceProfileSummaryList, Type: smithy.ShapeTypeList, Ext: &eListVoiceProfilesResponse_VoiceProfiles})
+var sListVoiceProfilesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListVoiceProfilesResponse_NextToken})
+var sPutSipMediaApplicationAlexaSkillConfigurationRequest_SipMediaApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ePutSipMediaApplicationAlexaSkillConfigurationRequest_SipMediaApplicationId})
+var sPutSipMediaApplicationAlexaSkillConfigurationRequest_SipMediaApplicationAlexaSkillConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationAlexaSkillConfiguration", ID: &iSipMediaApplicationAlexaSkillConfiguration, Members: &mSipMediaApplicationAlexaSkillConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutSipMediaApplicationAlexaSkillConfigurationRequest_SipMediaApplicationAlexaSkillConfiguration})
+var sPutSipMediaApplicationAlexaSkillConfigurationResponse_SipMediaApplicationAlexaSkillConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationAlexaSkillConfiguration", ID: &iSipMediaApplicationAlexaSkillConfiguration, Members: &mSipMediaApplicationAlexaSkillConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutSipMediaApplicationAlexaSkillConfigurationResponse_SipMediaApplicationAlexaSkillConfiguration})
+var sPutSipMediaApplicationLoggingConfigurationRequest_SipMediaApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ePutSipMediaApplicationLoggingConfigurationRequest_SipMediaApplicationId})
+var sPutSipMediaApplicationLoggingConfigurationRequest_SipMediaApplicationLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationLoggingConfiguration", ID: &iSipMediaApplicationLoggingConfiguration, Members: &mSipMediaApplicationLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutSipMediaApplicationLoggingConfigurationRequest_SipMediaApplicationLoggingConfiguration})
+var sPutSipMediaApplicationLoggingConfigurationResponse_SipMediaApplicationLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationLoggingConfiguration", ID: &iSipMediaApplicationLoggingConfiguration, Members: &mSipMediaApplicationLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutSipMediaApplicationLoggingConfigurationResponse_SipMediaApplicationLoggingConfiguration})
+var sPutVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ePutVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId})
+var sPutVoiceConnectorEmergencyCallingConfigurationRequest_EmergencyCallingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmergencyCallingConfiguration", ID: &iEmergencyCallingConfiguration, Members: &mEmergencyCallingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorEmergencyCallingConfigurationRequest_EmergencyCallingConfiguration})
+var sPutVoiceConnectorEmergencyCallingConfigurationResponse_EmergencyCallingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmergencyCallingConfiguration", ID: &iEmergencyCallingConfiguration, Members: &mEmergencyCallingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorEmergencyCallingConfigurationResponse_EmergencyCallingConfiguration})
+var sPutVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ePutVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId})
+var sPutVoiceConnectorExternalSystemsConfigurationRequest_SessionBorderControllerTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionBorderControllerTypes", ID: &i_SessionBorderControllerTypeList, Members: &m_SessionBorderControllerTypeList, Type: smithy.ShapeTypeList, Ext: &ePutVoiceConnectorExternalSystemsConfigurationRequest_SessionBorderControllerTypes})
+var sPutVoiceConnectorExternalSystemsConfigurationRequest_ContactCenterSystemTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactCenterSystemTypes", ID: &i_ContactCenterSystemTypeList, Members: &m_ContactCenterSystemTypeList, Type: smithy.ShapeTypeList, Ext: &ePutVoiceConnectorExternalSystemsConfigurationRequest_ContactCenterSystemTypes})
+var sPutVoiceConnectorExternalSystemsConfigurationResponse_ExternalSystemsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalSystemsConfiguration", ID: &iExternalSystemsConfiguration, Members: &mExternalSystemsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorExternalSystemsConfigurationResponse_ExternalSystemsConfiguration})
+var sPutVoiceConnectorLoggingConfigurationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ePutVoiceConnectorLoggingConfigurationRequest_VoiceConnectorId})
+var sPutVoiceConnectorLoggingConfigurationRequest_LoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingConfiguration", ID: &iLoggingConfiguration, Members: &mLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorLoggingConfigurationRequest_LoggingConfiguration})
+var sPutVoiceConnectorLoggingConfigurationResponse_LoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingConfiguration", ID: &iLoggingConfiguration, Members: &mLoggingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorLoggingConfigurationResponse_LoggingConfiguration})
+var sPutVoiceConnectorOriginationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ePutVoiceConnectorOriginationRequest_VoiceConnectorId})
+var sPutVoiceConnectorOriginationRequest_Origination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Origination", ID: &iOrigination, Members: &mOrigination, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorOriginationRequest_Origination})
+var sPutVoiceConnectorOriginationResponse_Origination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Origination", ID: &iOrigination, Members: &mOrigination, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorOriginationResponse_Origination})
+var sPutVoiceConnectorProxyRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ePutVoiceConnectorProxyRequest_VoiceConnectorId})
+var sPutVoiceConnectorProxyRequest_DefaultSessionExpiryMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultSessionExpiryMinutes", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ePutVoiceConnectorProxyRequest_DefaultSessionExpiryMinutes})
+var sPutVoiceConnectorProxyRequest_PhoneNumberPoolCountries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberPoolCountries", ID: &i_CountryList, Members: &m_CountryList, Type: smithy.ShapeTypeList, Ext: &ePutVoiceConnectorProxyRequest_PhoneNumberPoolCountries})
+var sPutVoiceConnectorProxyRequest_FallBackPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FallBackPhoneNumber", ID: &i_E164PhoneNumber, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &ePutVoiceConnectorProxyRequest_FallBackPhoneNumber})
+var sPutVoiceConnectorProxyRequest_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ePutVoiceConnectorProxyRequest_Disabled})
+var sPutVoiceConnectorProxyResponse_Proxy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Proxy", ID: &iProxy, Members: &mProxy, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorProxyResponse_Proxy})
+var sPutVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ePutVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId})
+var sPutVoiceConnectorStreamingConfigurationRequest_StreamingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamingConfiguration", ID: &iStreamingConfiguration, Members: &mStreamingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorStreamingConfigurationRequest_StreamingConfiguration})
+var sPutVoiceConnectorStreamingConfigurationResponse_StreamingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamingConfiguration", ID: &iStreamingConfiguration, Members: &mStreamingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorStreamingConfigurationResponse_StreamingConfiguration})
+var sPutVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ePutVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId})
+var sPutVoiceConnectorTerminationCredentialsRequest_Credentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Credentials", ID: &i_CredentialList, Members: &m_CredentialList, Type: smithy.ShapeTypeList, Ext: &ePutVoiceConnectorTerminationCredentialsRequest_Credentials})
+var sPutVoiceConnectorTerminationRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &ePutVoiceConnectorTerminationRequest_VoiceConnectorId})
+var sPutVoiceConnectorTerminationRequest_Termination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Termination", ID: &iTermination, Members: &mTermination, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorTerminationRequest_Termination})
+var sPutVoiceConnectorTerminationResponse_Termination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Termination", ID: &iTermination, Members: &mTermination, Type: smithy.ShapeTypeStructure, Ext: &ePutVoiceConnectorTerminationResponse_Termination})
+var sRestorePhoneNumberRequest_PhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberId", ID: &i_SensitiveNonEmptyString, Traits: &t112, Type: smithy.ShapeTypeString, Ext: &eRestorePhoneNumberRequest_PhoneNumberId})
+var sRestorePhoneNumberResponse_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &iPhoneNumber, Members: &mPhoneNumber, Type: smithy.ShapeTypeStructure, Ext: &eRestorePhoneNumberResponse_PhoneNumber})
+var sSearchAvailablePhoneNumbersRequest_AreaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AreaCode", ID: &i_String, Traits: &t123, Type: smithy.ShapeTypeString, Ext: &eSearchAvailablePhoneNumbersRequest_AreaCode})
+var sSearchAvailablePhoneNumbersRequest_City = smithy.NewStaticSchema(smithy.StaticSchema{Member: "City", ID: &i_String, Traits: &t124, Type: smithy.ShapeTypeString, Ext: &eSearchAvailablePhoneNumbersRequest_City})
+var sSearchAvailablePhoneNumbersRequest_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &i_Alpha2CountryCode, Traits: &t125, Type: smithy.ShapeTypeString, Ext: &eSearchAvailablePhoneNumbersRequest_Country})
+var sSearchAvailablePhoneNumbersRequest_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_String, Traits: &t126, Type: smithy.ShapeTypeString, Ext: &eSearchAvailablePhoneNumbersRequest_State})
+var sSearchAvailablePhoneNumbersRequest_TollFreePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TollFreePrefix", ID: &i_TollFreePrefix, Traits: &t127, Type: smithy.ShapeTypeString, Ext: &eSearchAvailablePhoneNumbersRequest_TollFreePrefix})
+var sSearchAvailablePhoneNumbersRequest_PhoneNumberType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberType", ID: &iPhoneNumberType, Members: &mPhoneNumberType, Traits: &t128, Type: smithy.ShapeTypeEnum, Ext: &eSearchAvailablePhoneNumbersRequest_PhoneNumberType})
+var sSearchAvailablePhoneNumbersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PhoneNumberMaxResults, Traits: &t115, Type: smithy.ShapeTypeInteger, Ext: &eSearchAvailablePhoneNumbersRequest_MaxResults})
+var sSearchAvailablePhoneNumbersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t114, Type: smithy.ShapeTypeString, Ext: &eSearchAvailablePhoneNumbersRequest_NextToken})
+var sSearchAvailablePhoneNumbersResponse_E164PhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "E164PhoneNumbers", ID: &i_E164PhoneNumberList, Members: &m_E164PhoneNumberList, Type: smithy.ShapeTypeList, Ext: &eSearchAvailablePhoneNumbersResponse_E164PhoneNumbers})
+var sSearchAvailablePhoneNumbersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSearchAvailablePhoneNumbersResponse_NextToken})
+var sStartSpeakerSearchTaskRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eStartSpeakerSearchTaskRequest_VoiceConnectorId})
+var sStartSpeakerSearchTaskRequest_TransactionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransactionId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &eStartSpeakerSearchTaskRequest_TransactionId})
+var sStartSpeakerSearchTaskRequest_VoiceProfileDomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomainId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &eStartSpeakerSearchTaskRequest_VoiceProfileDomainId})
+var sStartSpeakerSearchTaskRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestId, Type: smithy.ShapeTypeString, Ext: &eStartSpeakerSearchTaskRequest_ClientRequestToken})
+var sStartSpeakerSearchTaskRequest_CallLeg = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallLeg", ID: &iCallLegType, Members: &mCallLegType, Type: smithy.ShapeTypeEnum, Ext: &eStartSpeakerSearchTaskRequest_CallLeg})
+var sStartSpeakerSearchTaskResponse_SpeakerSearchTask = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSearchTask", ID: &iSpeakerSearchTask, Members: &mSpeakerSearchTask, Type: smithy.ShapeTypeStructure, Ext: &eStartSpeakerSearchTaskResponse_SpeakerSearchTask})
+var sStartVoiceToneAnalysisTaskRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eStartVoiceToneAnalysisTaskRequest_VoiceConnectorId})
+var sStartVoiceToneAnalysisTaskRequest_TransactionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransactionId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &eStartVoiceToneAnalysisTaskRequest_TransactionId})
+var sStartVoiceToneAnalysisTaskRequest_LanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LanguageCode", ID: &iLanguageCode, Members: &mLanguageCode, Type: smithy.ShapeTypeEnum, Ext: &eStartVoiceToneAnalysisTaskRequest_LanguageCode})
+var sStartVoiceToneAnalysisTaskRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestId, Type: smithy.ShapeTypeString, Ext: &eStartVoiceToneAnalysisTaskRequest_ClientRequestToken})
+var sStartVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceToneAnalysisTask", ID: &iVoiceToneAnalysisTask, Members: &mVoiceToneAnalysisTask, Type: smithy.ShapeTypeStructure, Ext: &eStartVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask})
+var sStopSpeakerSearchTaskRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eStopSpeakerSearchTaskRequest_VoiceConnectorId})
+var sStopSpeakerSearchTaskRequest_SpeakerSearchTaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSearchTaskId", ID: &i_NonEmptyString256, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eStopSpeakerSearchTaskRequest_SpeakerSearchTaskId})
+var sStopVoiceToneAnalysisTaskRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eStopVoiceToneAnalysisTaskRequest_VoiceConnectorId})
+var sStopVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceToneAnalysisTaskId", ID: &i_NonEmptyString256, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eStopVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId})
+var sTagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_Arn, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceARN})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_Tags})
+var sUntagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_Arn, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceARN})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUpdateGlobalSettingsRequest_VoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnector", ID: &iVoiceConnectorSettings, Members: &mVoiceConnectorSettings, Type: smithy.ShapeTypeStructure, Ext: &eUpdateGlobalSettingsRequest_VoiceConnector})
+var sUpdatePhoneNumberRequest_PhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberId", ID: &i_SensitiveNonEmptyString, Traits: &t112, Type: smithy.ShapeTypeString, Ext: &eUpdatePhoneNumberRequest_PhoneNumberId})
+var sUpdatePhoneNumberRequest_ProductType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductType", ID: &iPhoneNumberProductType, Members: &mPhoneNumberProductType, Type: smithy.ShapeTypeEnum, Ext: &eUpdatePhoneNumberRequest_ProductType})
+var sUpdatePhoneNumberRequest_CallingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallingName", ID: &i_CallingName, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eUpdatePhoneNumberRequest_CallingName})
+var sUpdatePhoneNumberRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PhoneNumberName, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eUpdatePhoneNumberRequest_Name})
+var sUpdatePhoneNumberResponse_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &iPhoneNumber, Members: &mPhoneNumber, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePhoneNumberResponse_PhoneNumber})
+var sUpdatePhoneNumberSettingsRequest_CallingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallingName", ID: &i_CallingName, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eUpdatePhoneNumberSettingsRequest_CallingName})
+var sUpdateProxySessionRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eUpdateProxySessionRequest_VoiceConnectorId})
+var sUpdateProxySessionRequest_ProxySessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxySessionId", ID: &i_NonEmptyString128, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eUpdateProxySessionRequest_ProxySessionId})
+var sUpdateProxySessionRequest_Capabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Capabilities", ID: &i_CapabilityList, Members: &m_CapabilityList, Type: smithy.ShapeTypeList, Ext: &eUpdateProxySessionRequest_Capabilities})
+var sUpdateProxySessionRequest_ExpiryMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiryMinutes", ID: &i_PositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &eUpdateProxySessionRequest_ExpiryMinutes})
+var sUpdateProxySessionResponse_ProxySession = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxySession", ID: &iProxySession, Members: &mProxySession, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProxySessionResponse_ProxySession})
+var sUpdateSipMediaApplicationCallRequest_SipMediaApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eUpdateSipMediaApplicationCallRequest_SipMediaApplicationId})
+var sUpdateSipMediaApplicationCallRequest_TransactionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransactionId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eUpdateSipMediaApplicationCallRequest_TransactionId})
+var sUpdateSipMediaApplicationCallRequest_Arguments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arguments", ID: &i_SMAUpdateCallArgumentsMap, Members: &m_SMAUpdateCallArgumentsMap, Type: smithy.ShapeTypeMap, Ext: &eUpdateSipMediaApplicationCallRequest_Arguments})
+var sUpdateSipMediaApplicationCallResponse_SipMediaApplicationCall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationCall", ID: &iSipMediaApplicationCall, Members: &mSipMediaApplicationCall, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSipMediaApplicationCallResponse_SipMediaApplicationCall})
+var sUpdateSipMediaApplicationRequest_SipMediaApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eUpdateSipMediaApplicationRequest_SipMediaApplicationId})
+var sUpdateSipMediaApplicationRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SipMediaApplicationName, Type: smithy.ShapeTypeString, Ext: &eUpdateSipMediaApplicationRequest_Name})
+var sUpdateSipMediaApplicationRequest_Endpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoints", ID: &i_SipMediaApplicationEndpointList, Members: &m_SipMediaApplicationEndpointList, Type: smithy.ShapeTypeList, Ext: &eUpdateSipMediaApplicationRequest_Endpoints})
+var sUpdateSipMediaApplicationResponse_SipMediaApplication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplication", ID: &iSipMediaApplication, Members: &mSipMediaApplication, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSipMediaApplicationResponse_SipMediaApplication})
+var sUpdateSipRuleRequest_SipRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipRuleId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eUpdateSipRuleRequest_SipRuleId})
+var sUpdateSipRuleRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SipRuleName, Type: smithy.ShapeTypeString, Ext: &eUpdateSipRuleRequest_Name})
+var sUpdateSipRuleRequest_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateSipRuleRequest_Disabled})
+var sUpdateSipRuleRequest_TargetApplications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetApplications", ID: &i_SipRuleTargetApplicationList, Members: &m_SipRuleTargetApplicationList, Type: smithy.ShapeTypeList, Ext: &eUpdateSipRuleRequest_TargetApplications})
+var sUpdateSipRuleResponse_SipRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipRule", ID: &iSipRule, Members: &mSipRule, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSipRuleResponse_SipRule})
+var sUpdateVoiceConnectorGroupRequest_VoiceConnectorGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroupId", ID: &i_NonEmptyString, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eUpdateVoiceConnectorGroupRequest_VoiceConnectorGroupId})
+var sUpdateVoiceConnectorGroupRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_VoiceConnectorGroupName, Type: smithy.ShapeTypeString, Ext: &eUpdateVoiceConnectorGroupRequest_Name})
+var sUpdateVoiceConnectorGroupRequest_VoiceConnectorItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorItems", ID: &i_VoiceConnectorItemList, Members: &m_VoiceConnectorItemList, Type: smithy.ShapeTypeList, Ext: &eUpdateVoiceConnectorGroupRequest_VoiceConnectorItems})
+var sUpdateVoiceConnectorGroupRequest_CallDistributionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallDistributionType", ID: &iCallDistributionType, Members: &mCallDistributionType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateVoiceConnectorGroupRequest_CallDistributionType})
+var sUpdateVoiceConnectorGroupResponse_VoiceConnectorGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroup", ID: &iVoiceConnectorGroup, Members: &mVoiceConnectorGroup, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVoiceConnectorGroupResponse_VoiceConnectorGroup})
+var sUpdateVoiceConnectorRequest_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &i_VoiceConnectorId, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eUpdateVoiceConnectorRequest_VoiceConnectorId})
+var sUpdateVoiceConnectorRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_VoiceConnectorName, Type: smithy.ShapeTypeString, Ext: &eUpdateVoiceConnectorRequest_Name})
+var sUpdateVoiceConnectorRequest_RequireEncryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequireEncryption", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateVoiceConnectorRequest_RequireEncryption})
+var sUpdateVoiceConnectorResponse_VoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnector", ID: &iVoiceConnector, Members: &mVoiceConnector, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVoiceConnectorResponse_VoiceConnector})
+var sUpdateVoiceProfileDomainRequest_VoiceProfileDomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomainId", ID: &i_NonEmptyString256, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eUpdateVoiceProfileDomainRequest_VoiceProfileDomainId})
+var sUpdateVoiceProfileDomainRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_VoiceProfileDomainName, Type: smithy.ShapeTypeString, Ext: &eUpdateVoiceProfileDomainRequest_Name})
+var sUpdateVoiceProfileDomainRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_VoiceProfileDomainDescription, Type: smithy.ShapeTypeString, Ext: &eUpdateVoiceProfileDomainRequest_Description})
+var sUpdateVoiceProfileDomainResponse_VoiceProfileDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomain", ID: &iVoiceProfileDomain, Members: &mVoiceProfileDomain, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVoiceProfileDomainResponse_VoiceProfileDomain})
+var sUpdateVoiceProfileRequest_VoiceProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileId", ID: &i_NonEmptyString256, Traits: &t111, Type: smithy.ShapeTypeString, Ext: &eUpdateVoiceProfileRequest_VoiceProfileId})
+var sUpdateVoiceProfileRequest_SpeakerSearchTaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSearchTaskId", ID: &i_NonEmptyString256, Type: smithy.ShapeTypeString, Ext: &eUpdateVoiceProfileRequest_SpeakerSearchTaskId})
+var sUpdateVoiceProfileResponse_VoiceProfile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfile", ID: &iVoiceProfile, Members: &mVoiceProfile, Type: smithy.ShapeTypeStructure, Ext: &eUpdateVoiceProfileResponse_VoiceProfile})
+var sValidateE911AddressRequest_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsAccountId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString, Ext: &eValidateE911AddressRequest_AwsAccountId})
+var sValidateE911AddressRequest_StreetNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreetNumber", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eValidateE911AddressRequest_StreetNumber})
+var sValidateE911AddressRequest_StreetInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreetInfo", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eValidateE911AddressRequest_StreetInfo})
+var sValidateE911AddressRequest_City = smithy.NewStaticSchema(smithy.StaticSchema{Member: "City", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eValidateE911AddressRequest_City})
+var sValidateE911AddressRequest_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eValidateE911AddressRequest_State})
+var sValidateE911AddressRequest_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eValidateE911AddressRequest_Country})
+var sValidateE911AddressRequest_PostalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCode", ID: &i_SensitiveNonEmptyString, Traits: &t97, Type: smithy.ShapeTypeString, Ext: &eValidateE911AddressRequest_PostalCode})
+var sValidateE911AddressResponse_ValidationResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationResult", ID: &i_ValidationResult, Type: smithy.ShapeTypeInteger, Ext: &eValidateE911AddressResponse_ValidationResult})
+var sValidateE911AddressResponse_AddressExternalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressExternalId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eValidateE911AddressResponse_AddressExternalId})
+var sValidateE911AddressResponse_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure, Ext: &eValidateE911AddressResponse_Address})
+var sValidateE911AddressResponse_CandidateAddressList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CandidateAddressList", ID: &i_CandidateAddressList, Members: &m_CandidateAddressList, Type: smithy.ShapeTypeList, Ext: &eValidateE911AddressResponse_CandidateAddressList})
 
 var AssociatePhoneNumbersWithVoiceConnector = &sAssociatePhoneNumbersWithVoiceConnector
 

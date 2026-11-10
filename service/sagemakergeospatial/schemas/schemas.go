@@ -7,9 +7,510 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [502]smithy.SchemaExtensions
+var (
+	eDeleteEarthObservationJob                                     smithy.SchemaExtensions
+	eDeleteVectorEnrichmentJob                                     smithy.SchemaExtensions
+	eExportEarthObservationJob                                     smithy.SchemaExtensions
+	eExportVectorEnrichmentJob                                     smithy.SchemaExtensions
+	eGetEarthObservationJob                                        smithy.SchemaExtensions
+	eGetRasterDataCollection                                       smithy.SchemaExtensions
+	eGetTile                                                       smithy.SchemaExtensions
+	eGetVectorEnrichmentJob                                        smithy.SchemaExtensions
+	eListEarthObservationJobs                                      smithy.SchemaExtensions
+	eListRasterDataCollections                                     smithy.SchemaExtensions
+	eListTagsForResource                                           smithy.SchemaExtensions
+	eListVectorEnrichmentJobs                                      smithy.SchemaExtensions
+	eSearchRasterDataCollection                                    smithy.SchemaExtensions
+	eStartEarthObservationJob                                      smithy.SchemaExtensions
+	eStartVectorEnrichmentJob                                      smithy.SchemaExtensions
+	eStopEarthObservationJob                                       smithy.SchemaExtensions
+	eStopVectorEnrichmentJob                                       smithy.SchemaExtensions
+	eTagResource                                                   smithy.SchemaExtensions
+	eUntagResource                                                 smithy.SchemaExtensions
+	e_SageMakerGeospatial                                          smithy.SchemaExtensions
+	eAccessDeniedException                                         smithy.SchemaExtensions
+	eAccessDeniedException_Message                                 smithy.SchemaExtensions
+	e_AlgorithmNameCloudRemoval                                    smithy.SchemaExtensions
+	e_AlgorithmNameGeoMosaic                                       smithy.SchemaExtensions
+	e_AlgorithmNameResampling                                      smithy.SchemaExtensions
+	eAreaOfInterest                                                smithy.SchemaExtensions
+	eAreaOfInterest_AreaOfInterestGeometry                         smithy.SchemaExtensions
+	eAreaOfInterestGeometry                                        smithy.SchemaExtensions
+	eAreaOfInterestGeometry_PolygonGeometry                        smithy.SchemaExtensions
+	eAreaOfInterestGeometry_MultiPolygonGeometry                   smithy.SchemaExtensions
+	e_Arn                                                          smithy.SchemaExtensions
+	e_AssetsMap                                                    smithy.SchemaExtensions
+	e_AssetsMap_key                                                smithy.SchemaExtensions
+	e_AssetsMap_value                                              smithy.SchemaExtensions
+	eAssetValue                                                    smithy.SchemaExtensions
+	eAssetValue_Href                                               smithy.SchemaExtensions
+	eBandMathConfigInput                                           smithy.SchemaExtensions
+	eBandMathConfigInput_PredefinedIndices                         smithy.SchemaExtensions
+	eBandMathConfigInput_CustomIndices                             smithy.SchemaExtensions
+	e_BinaryFile                                                   smithy.SchemaExtensions
+	eCloudMaskingConfigInput                                       smithy.SchemaExtensions
+	eCloudRemovalConfigInput                                       smithy.SchemaExtensions
+	eCloudRemovalConfigInput_AlgorithmName                         smithy.SchemaExtensions
+	eCloudRemovalConfigInput_InterpolationValue                    smithy.SchemaExtensions
+	eCloudRemovalConfigInput_TargetBands                           smithy.SchemaExtensions
+	e_ComparisonOperator                                           smithy.SchemaExtensions
+	eConflictException                                             smithy.SchemaExtensions
+	eConflictException_Message                                     smithy.SchemaExtensions
+	eConflictException_ResourceId                                  smithy.SchemaExtensions
+	eCustomIndicesInput                                            smithy.SchemaExtensions
+	eCustomIndicesInput_Operations                                 smithy.SchemaExtensions
+	e_DataCollectionArn                                            smithy.SchemaExtensions
+	e_DataCollectionsList                                          smithy.SchemaExtensions
+	e_DataCollectionsList_member                                   smithy.SchemaExtensions
+	e_DataCollectionType                                           smithy.SchemaExtensions
+	e_EarthObservationJobArn                                       smithy.SchemaExtensions
+	eEarthObservationJobErrorDetails                               smithy.SchemaExtensions
+	eEarthObservationJobErrorDetails_Type                          smithy.SchemaExtensions
+	eEarthObservationJobErrorDetails_Message                       smithy.SchemaExtensions
+	e_EarthObservationJobErrorType                                 smithy.SchemaExtensions
+	e_EarthObservationJobExportStatus                              smithy.SchemaExtensions
+	e_EarthObservationJobList                                      smithy.SchemaExtensions
+	e_EarthObservationJobList_member                               smithy.SchemaExtensions
+	e_EarthObservationJobOutputBands                               smithy.SchemaExtensions
+	e_EarthObservationJobOutputBands_member                        smithy.SchemaExtensions
+	e_EarthObservationJobStatus                                    smithy.SchemaExtensions
+	eEoCloudCoverInput                                             smithy.SchemaExtensions
+	eEoCloudCoverInput_LowerBound                                  smithy.SchemaExtensions
+	eEoCloudCoverInput_UpperBound                                  smithy.SchemaExtensions
+	e_ExecutionRoleArn                                             smithy.SchemaExtensions
+	eExportErrorDetails                                            smithy.SchemaExtensions
+	eExportErrorDetails_ExportResults                              smithy.SchemaExtensions
+	eExportErrorDetails_ExportSourceImages                         smithy.SchemaExtensions
+	eExportErrorDetailsOutput                                      smithy.SchemaExtensions
+	eExportErrorDetailsOutput_Type                                 smithy.SchemaExtensions
+	eExportErrorDetailsOutput_Message                              smithy.SchemaExtensions
+	e_ExportErrorType                                              smithy.SchemaExtensions
+	eExportS3DataInput                                             smithy.SchemaExtensions
+	eExportS3DataInput_S3Uri                                       smithy.SchemaExtensions
+	eExportS3DataInput_KmsKeyId                                    smithy.SchemaExtensions
+	eExportVectorEnrichmentJobOutputConfig                         smithy.SchemaExtensions
+	eExportVectorEnrichmentJobOutputConfig_S3Data                  smithy.SchemaExtensions
+	eFilter                                                        smithy.SchemaExtensions
+	eFilter_Name                                                   smithy.SchemaExtensions
+	eFilter_Type                                                   smithy.SchemaExtensions
+	eFilter_Minimum                                                smithy.SchemaExtensions
+	eFilter_Maximum                                                smithy.SchemaExtensions
+	e_FilterList                                                   smithy.SchemaExtensions
+	e_FilterList_member                                            smithy.SchemaExtensions
+	eGeometry                                                      smithy.SchemaExtensions
+	eGeometry_Type                                                 smithy.SchemaExtensions
+	eGeometry_Coordinates                                          smithy.SchemaExtensions
+	eGeoMosaicConfigInput                                          smithy.SchemaExtensions
+	eGeoMosaicConfigInput_AlgorithmName                            smithy.SchemaExtensions
+	eGeoMosaicConfigInput_TargetBands                              smithy.SchemaExtensions
+	e_GroupBy                                                      smithy.SchemaExtensions
+	e_ImageSourceBandList                                          smithy.SchemaExtensions
+	e_ImageSourceBandList_member                                   smithy.SchemaExtensions
+	eInputConfigInput                                              smithy.SchemaExtensions
+	eInputConfigInput_PreviousEarthObservationJobArn               smithy.SchemaExtensions
+	eInputConfigInput_RasterDataCollectionQuery                    smithy.SchemaExtensions
+	eInputConfigOutput                                             smithy.SchemaExtensions
+	eInputConfigOutput_PreviousEarthObservationJobArn              smithy.SchemaExtensions
+	eInputConfigOutput_RasterDataCollectionQuery                   smithy.SchemaExtensions
+	eInternalServerException                                       smithy.SchemaExtensions
+	eInternalServerException_Message                               smithy.SchemaExtensions
+	eInternalServerException_ResourceId                            smithy.SchemaExtensions
+	eItemSource                                                    smithy.SchemaExtensions
+	eItemSource_Id                                                 smithy.SchemaExtensions
+	eItemSource_Geometry                                           smithy.SchemaExtensions
+	eItemSource_Assets                                             smithy.SchemaExtensions
+	eItemSource_DateTime                                           smithy.SchemaExtensions
+	eItemSource_Properties                                         smithy.SchemaExtensions
+	e_ItemSourceList                                               smithy.SchemaExtensions
+	e_ItemSourceList_member                                        smithy.SchemaExtensions
+	eJobConfigInput                                                smithy.SchemaExtensions
+	eJobConfigInput_BandMathConfig                                 smithy.SchemaExtensions
+	eJobConfigInput_ResamplingConfig                               smithy.SchemaExtensions
+	eJobConfigInput_TemporalStatisticsConfig                       smithy.SchemaExtensions
+	eJobConfigInput_CloudRemovalConfig                             smithy.SchemaExtensions
+	eJobConfigInput_ZonalStatisticsConfig                          smithy.SchemaExtensions
+	eJobConfigInput_GeoMosaicConfig                                smithy.SchemaExtensions
+	eJobConfigInput_StackConfig                                    smithy.SchemaExtensions
+	eJobConfigInput_CloudMaskingConfig                             smithy.SchemaExtensions
+	eJobConfigInput_LandCoverSegmentationConfig                    smithy.SchemaExtensions
+	e_KmsKey                                                       smithy.SchemaExtensions
+	eLandCoverSegmentationConfigInput                              smithy.SchemaExtensions
+	eLandsatCloudCoverLandInput                                    smithy.SchemaExtensions
+	eLandsatCloudCoverLandInput_LowerBound                         smithy.SchemaExtensions
+	eLandsatCloudCoverLandInput_UpperBound                         smithy.SchemaExtensions
+	e_LinearRing                                                   smithy.SchemaExtensions
+	e_LinearRing_member                                            smithy.SchemaExtensions
+	e_LinearRings                                                  smithy.SchemaExtensions
+	e_LinearRings_member                                           smithy.SchemaExtensions
+	e_LinearRingsList                                              smithy.SchemaExtensions
+	e_LinearRingsList_member                                       smithy.SchemaExtensions
+	eListEarthObservationJobOutputConfig                           smithy.SchemaExtensions
+	eListEarthObservationJobOutputConfig_Arn                       smithy.SchemaExtensions
+	eListEarthObservationJobOutputConfig_Name                      smithy.SchemaExtensions
+	eListEarthObservationJobOutputConfig_CreationTime              smithy.SchemaExtensions
+	eListEarthObservationJobOutputConfig_DurationInSeconds         smithy.SchemaExtensions
+	eListEarthObservationJobOutputConfig_Status                    smithy.SchemaExtensions
+	eListEarthObservationJobOutputConfig_OperationType             smithy.SchemaExtensions
+	eListEarthObservationJobOutputConfig_Tags                      smithy.SchemaExtensions
+	eListVectorEnrichmentJobOutputConfig                           smithy.SchemaExtensions
+	eListVectorEnrichmentJobOutputConfig_Arn                       smithy.SchemaExtensions
+	eListVectorEnrichmentJobOutputConfig_Name                      smithy.SchemaExtensions
+	eListVectorEnrichmentJobOutputConfig_Type                      smithy.SchemaExtensions
+	eListVectorEnrichmentJobOutputConfig_CreationTime              smithy.SchemaExtensions
+	eListVectorEnrichmentJobOutputConfig_DurationInSeconds         smithy.SchemaExtensions
+	eListVectorEnrichmentJobOutputConfig_Status                    smithy.SchemaExtensions
+	eListVectorEnrichmentJobOutputConfig_Tags                      smithy.SchemaExtensions
+	e_LogicalOperator                                              smithy.SchemaExtensions
+	eMapMatchingConfig                                             smithy.SchemaExtensions
+	eMapMatchingConfig_IdAttributeName                             smithy.SchemaExtensions
+	eMapMatchingConfig_YAttributeName                              smithy.SchemaExtensions
+	eMapMatchingConfig_XAttributeName                              smithy.SchemaExtensions
+	eMapMatchingConfig_TimestampAttributeName                      smithy.SchemaExtensions
+	eMultiPolygonGeometryInput                                     smithy.SchemaExtensions
+	eMultiPolygonGeometryInput_Coordinates                         smithy.SchemaExtensions
+	e_NextToken                                                    smithy.SchemaExtensions
+	eOperation                                                     smithy.SchemaExtensions
+	eOperation_Name                                                smithy.SchemaExtensions
+	eOperation_Equation                                            smithy.SchemaExtensions
+	eOperation_OutputType                                          smithy.SchemaExtensions
+	e_OperationsListInput                                          smithy.SchemaExtensions
+	e_OperationsListInput_member                                   smithy.SchemaExtensions
+	eOutputBand                                                    smithy.SchemaExtensions
+	eOutputBand_BandName                                           smithy.SchemaExtensions
+	eOutputBand_OutputDataType                                     smithy.SchemaExtensions
+	eOutputConfigInput                                             smithy.SchemaExtensions
+	eOutputConfigInput_S3Data                                      smithy.SchemaExtensions
+	eOutputResolutionResamplingInput                               smithy.SchemaExtensions
+	eOutputResolutionResamplingInput_UserDefined                   smithy.SchemaExtensions
+	eOutputResolutionStackInput                                    smithy.SchemaExtensions
+	eOutputResolutionStackInput_Predefined                         smithy.SchemaExtensions
+	eOutputResolutionStackInput_UserDefined                        smithy.SchemaExtensions
+	e_OutputType                                                   smithy.SchemaExtensions
+	ePlatformInput                                                 smithy.SchemaExtensions
+	ePlatformInput_Value                                           smithy.SchemaExtensions
+	ePlatformInput_ComparisonOperator                              smithy.SchemaExtensions
+	ePolygonGeometryInput                                          smithy.SchemaExtensions
+	ePolygonGeometryInput_Coordinates                              smithy.SchemaExtensions
+	e_Position                                                     smithy.SchemaExtensions
+	e_Position_member                                              smithy.SchemaExtensions
+	e_PredefinedResolution                                         smithy.SchemaExtensions
+	eProperties                                                    smithy.SchemaExtensions
+	eProperties_EoCloudCover                                       smithy.SchemaExtensions
+	eProperties_ViewOffNadir                                       smithy.SchemaExtensions
+	eProperties_ViewSunAzimuth                                     smithy.SchemaExtensions
+	eProperties_ViewSunElevation                                   smithy.SchemaExtensions
+	eProperties_Platform                                           smithy.SchemaExtensions
+	eProperties_LandsatCloudCoverLand                              smithy.SchemaExtensions
+	eProperty                                                      smithy.SchemaExtensions
+	eProperty_EoCloudCover                                         smithy.SchemaExtensions
+	eProperty_ViewOffNadir                                         smithy.SchemaExtensions
+	eProperty_ViewSunAzimuth                                       smithy.SchemaExtensions
+	eProperty_ViewSunElevation                                     smithy.SchemaExtensions
+	eProperty_Platform                                             smithy.SchemaExtensions
+	eProperty_LandsatCloudCoverLand                                smithy.SchemaExtensions
+	ePropertyFilter                                                smithy.SchemaExtensions
+	ePropertyFilter_Property                                       smithy.SchemaExtensions
+	ePropertyFilters                                               smithy.SchemaExtensions
+	ePropertyFilters_Properties                                    smithy.SchemaExtensions
+	ePropertyFilters_LogicalOperator                               smithy.SchemaExtensions
+	e_PropertyFiltersList                                          smithy.SchemaExtensions
+	e_PropertyFiltersList_member                                   smithy.SchemaExtensions
+	eRasterDataCollectionMetadata                                  smithy.SchemaExtensions
+	eRasterDataCollectionMetadata_Name                             smithy.SchemaExtensions
+	eRasterDataCollectionMetadata_Arn                              smithy.SchemaExtensions
+	eRasterDataCollectionMetadata_Type                             smithy.SchemaExtensions
+	eRasterDataCollectionMetadata_Description                      smithy.SchemaExtensions
+	eRasterDataCollectionMetadata_DescriptionPageUrl               smithy.SchemaExtensions
+	eRasterDataCollectionMetadata_SupportedFilters                 smithy.SchemaExtensions
+	eRasterDataCollectionMetadata_Tags                             smithy.SchemaExtensions
+	eRasterDataCollectionQueryInput                                smithy.SchemaExtensions
+	eRasterDataCollectionQueryInput_RasterDataCollectionArn        smithy.SchemaExtensions
+	eRasterDataCollectionQueryInput_TimeRangeFilter                smithy.SchemaExtensions
+	eRasterDataCollectionQueryInput_AreaOfInterest                 smithy.SchemaExtensions
+	eRasterDataCollectionQueryInput_PropertyFilters                smithy.SchemaExtensions
+	eRasterDataCollectionQueryOutput                               smithy.SchemaExtensions
+	eRasterDataCollectionQueryOutput_RasterDataCollectionArn       smithy.SchemaExtensions
+	eRasterDataCollectionQueryOutput_RasterDataCollectionName      smithy.SchemaExtensions
+	eRasterDataCollectionQueryOutput_TimeRangeFilter               smithy.SchemaExtensions
+	eRasterDataCollectionQueryOutput_AreaOfInterest                smithy.SchemaExtensions
+	eRasterDataCollectionQueryOutput_PropertyFilters               smithy.SchemaExtensions
+	eRasterDataCollectionQueryWithBandFilterInput                  smithy.SchemaExtensions
+	eRasterDataCollectionQueryWithBandFilterInput_TimeRangeFilter  smithy.SchemaExtensions
+	eRasterDataCollectionQueryWithBandFilterInput_AreaOfInterest   smithy.SchemaExtensions
+	eRasterDataCollectionQueryWithBandFilterInput_PropertyFilters  smithy.SchemaExtensions
+	eRasterDataCollectionQueryWithBandFilterInput_BandFilter       smithy.SchemaExtensions
+	eResamplingConfigInput                                         smithy.SchemaExtensions
+	eResamplingConfigInput_OutputResolution                        smithy.SchemaExtensions
+	eResamplingConfigInput_AlgorithmName                           smithy.SchemaExtensions
+	eResamplingConfigInput_TargetBands                             smithy.SchemaExtensions
+	eResourceNotFoundException                                     smithy.SchemaExtensions
+	eResourceNotFoundException_Message                             smithy.SchemaExtensions
+	eResourceNotFoundException_ResourceId                          smithy.SchemaExtensions
+	eReverseGeocodingConfig                                        smithy.SchemaExtensions
+	eReverseGeocodingConfig_YAttributeName                         smithy.SchemaExtensions
+	eReverseGeocodingConfig_XAttributeName                         smithy.SchemaExtensions
+	e_S3Uri                                                        smithy.SchemaExtensions
+	eServiceQuotaExceededException                                 smithy.SchemaExtensions
+	eServiceQuotaExceededException_Message                         smithy.SchemaExtensions
+	eServiceQuotaExceededException_ResourceId                      smithy.SchemaExtensions
+	e_SortOrder                                                    smithy.SchemaExtensions
+	eStackConfigInput                                              smithy.SchemaExtensions
+	eStackConfigInput_OutputResolution                             smithy.SchemaExtensions
+	eStackConfigInput_TargetBands                                  smithy.SchemaExtensions
+	e_StringListInput                                              smithy.SchemaExtensions
+	e_StringListInput_member                                       smithy.SchemaExtensions
+	e_TagKeyList                                                   smithy.SchemaExtensions
+	e_TagKeyList_member                                            smithy.SchemaExtensions
+	e_Tags                                                         smithy.SchemaExtensions
+	e_Tags_key                                                     smithy.SchemaExtensions
+	e_Tags_value                                                   smithy.SchemaExtensions
+	e_TargetOptions                                                smithy.SchemaExtensions
+	e_TemporalStatistics                                           smithy.SchemaExtensions
+	eTemporalStatisticsConfigInput                                 smithy.SchemaExtensions
+	eTemporalStatisticsConfigInput_GroupBy                         smithy.SchemaExtensions
+	eTemporalStatisticsConfigInput_Statistics                      smithy.SchemaExtensions
+	eTemporalStatisticsConfigInput_TargetBands                     smithy.SchemaExtensions
+	e_TemporalStatisticsListInput                                  smithy.SchemaExtensions
+	e_TemporalStatisticsListInput_member                           smithy.SchemaExtensions
+	eThrottlingException                                           smithy.SchemaExtensions
+	eThrottlingException_Message                                   smithy.SchemaExtensions
+	eThrottlingException_ResourceId                                smithy.SchemaExtensions
+	eTimeRangeFilterInput                                          smithy.SchemaExtensions
+	eTimeRangeFilterInput_StartTime                                smithy.SchemaExtensions
+	eTimeRangeFilterInput_EndTime                                  smithy.SchemaExtensions
+	eTimeRangeFilterOutput                                         smithy.SchemaExtensions
+	eTimeRangeFilterOutput_StartTime                               smithy.SchemaExtensions
+	eTimeRangeFilterOutput_EndTime                                 smithy.SchemaExtensions
+	e_Unit                                                         smithy.SchemaExtensions
+	eUserDefined                                                   smithy.SchemaExtensions
+	eUserDefined_Value                                             smithy.SchemaExtensions
+	eUserDefined_Unit                                              smithy.SchemaExtensions
+	eValidationException                                           smithy.SchemaExtensions
+	eValidationException_Message                                   smithy.SchemaExtensions
+	eValidationException_ResourceId                                smithy.SchemaExtensions
+	e_VectorEnrichmentJobArn                                       smithy.SchemaExtensions
+	eVectorEnrichmentJobConfig                                     smithy.SchemaExtensions
+	eVectorEnrichmentJobConfig_ReverseGeocodingConfig              smithy.SchemaExtensions
+	eVectorEnrichmentJobConfig_MapMatchingConfig                   smithy.SchemaExtensions
+	eVectorEnrichmentJobDataSourceConfigInput                      smithy.SchemaExtensions
+	eVectorEnrichmentJobDataSourceConfigInput_S3Data               smithy.SchemaExtensions
+	e_VectorEnrichmentJobDocumentType                              smithy.SchemaExtensions
+	eVectorEnrichmentJobErrorDetails                               smithy.SchemaExtensions
+	eVectorEnrichmentJobErrorDetails_ErrorType                     smithy.SchemaExtensions
+	eVectorEnrichmentJobErrorDetails_ErrorMessage                  smithy.SchemaExtensions
+	e_VectorEnrichmentJobErrorType                                 smithy.SchemaExtensions
+	eVectorEnrichmentJobExportErrorDetails                         smithy.SchemaExtensions
+	eVectorEnrichmentJobExportErrorDetails_Type                    smithy.SchemaExtensions
+	eVectorEnrichmentJobExportErrorDetails_Message                 smithy.SchemaExtensions
+	e_VectorEnrichmentJobExportErrorType                           smithy.SchemaExtensions
+	e_VectorEnrichmentJobExportStatus                              smithy.SchemaExtensions
+	eVectorEnrichmentJobInputConfig                                smithy.SchemaExtensions
+	eVectorEnrichmentJobInputConfig_DocumentType                   smithy.SchemaExtensions
+	eVectorEnrichmentJobInputConfig_DataSourceConfig               smithy.SchemaExtensions
+	e_VectorEnrichmentJobList                                      smithy.SchemaExtensions
+	e_VectorEnrichmentJobList_member                               smithy.SchemaExtensions
+	eVectorEnrichmentJobS3Data                                     smithy.SchemaExtensions
+	eVectorEnrichmentJobS3Data_S3Uri                               smithy.SchemaExtensions
+	eVectorEnrichmentJobS3Data_KmsKeyId                            smithy.SchemaExtensions
+	e_VectorEnrichmentJobStatus                                    smithy.SchemaExtensions
+	e_VectorEnrichmentJobType                                      smithy.SchemaExtensions
+	eViewOffNadirInput                                             smithy.SchemaExtensions
+	eViewOffNadirInput_LowerBound                                  smithy.SchemaExtensions
+	eViewOffNadirInput_UpperBound                                  smithy.SchemaExtensions
+	eViewSunAzimuthInput                                           smithy.SchemaExtensions
+	eViewSunAzimuthInput_LowerBound                                smithy.SchemaExtensions
+	eViewSunAzimuthInput_UpperBound                                smithy.SchemaExtensions
+	eViewSunElevationInput                                         smithy.SchemaExtensions
+	eViewSunElevationInput_LowerBound                              smithy.SchemaExtensions
+	eViewSunElevationInput_UpperBound                              smithy.SchemaExtensions
+	e_ZonalStatistics                                              smithy.SchemaExtensions
+	eZonalStatisticsConfigInput                                    smithy.SchemaExtensions
+	eZonalStatisticsConfigInput_ZoneS3Path                         smithy.SchemaExtensions
+	eZonalStatisticsConfigInput_Statistics                         smithy.SchemaExtensions
+	eZonalStatisticsConfigInput_TargetBands                        smithy.SchemaExtensions
+	eZonalStatisticsConfigInput_ZoneS3PathKmsKeyId                 smithy.SchemaExtensions
+	e_ZonalStatisticsListInput                                     smithy.SchemaExtensions
+	e_ZonalStatisticsListInput_member                              smithy.SchemaExtensions
+	eDeleteEarthObservationJobInput                                smithy.SchemaExtensions
+	eDeleteEarthObservationJobInput_Arn                            smithy.SchemaExtensions
+	eDeleteEarthObservationJobOutput                               smithy.SchemaExtensions
+	eDeleteVectorEnrichmentJobInput                                smithy.SchemaExtensions
+	eDeleteVectorEnrichmentJobInput_Arn                            smithy.SchemaExtensions
+	eDeleteVectorEnrichmentJobOutput                               smithy.SchemaExtensions
+	eExportEarthObservationJobInput                                smithy.SchemaExtensions
+	eExportEarthObservationJobInput_Arn                            smithy.SchemaExtensions
+	eExportEarthObservationJobInput_ClientToken                    smithy.SchemaExtensions
+	eExportEarthObservationJobInput_ExecutionRoleArn               smithy.SchemaExtensions
+	eExportEarthObservationJobInput_OutputConfig                   smithy.SchemaExtensions
+	eExportEarthObservationJobInput_ExportSourceImages             smithy.SchemaExtensions
+	eExportEarthObservationJobOutput                               smithy.SchemaExtensions
+	eExportEarthObservationJobOutput_Arn                           smithy.SchemaExtensions
+	eExportEarthObservationJobOutput_CreationTime                  smithy.SchemaExtensions
+	eExportEarthObservationJobOutput_ExportStatus                  smithy.SchemaExtensions
+	eExportEarthObservationJobOutput_ExecutionRoleArn              smithy.SchemaExtensions
+	eExportEarthObservationJobOutput_OutputConfig                  smithy.SchemaExtensions
+	eExportEarthObservationJobOutput_ExportSourceImages            smithy.SchemaExtensions
+	eExportVectorEnrichmentJobInput                                smithy.SchemaExtensions
+	eExportVectorEnrichmentJobInput_Arn                            smithy.SchemaExtensions
+	eExportVectorEnrichmentJobInput_ClientToken                    smithy.SchemaExtensions
+	eExportVectorEnrichmentJobInput_ExecutionRoleArn               smithy.SchemaExtensions
+	eExportVectorEnrichmentJobInput_OutputConfig                   smithy.SchemaExtensions
+	eExportVectorEnrichmentJobOutput                               smithy.SchemaExtensions
+	eExportVectorEnrichmentJobOutput_Arn                           smithy.SchemaExtensions
+	eExportVectorEnrichmentJobOutput_CreationTime                  smithy.SchemaExtensions
+	eExportVectorEnrichmentJobOutput_ExecutionRoleArn              smithy.SchemaExtensions
+	eExportVectorEnrichmentJobOutput_ExportStatus                  smithy.SchemaExtensions
+	eExportVectorEnrichmentJobOutput_OutputConfig                  smithy.SchemaExtensions
+	eGetEarthObservationJobInput                                   smithy.SchemaExtensions
+	eGetEarthObservationJobInput_Arn                               smithy.SchemaExtensions
+	eGetEarthObservationJobOutput                                  smithy.SchemaExtensions
+	eGetEarthObservationJobOutput_Arn                              smithy.SchemaExtensions
+	eGetEarthObservationJobOutput_Name                             smithy.SchemaExtensions
+	eGetEarthObservationJobOutput_CreationTime                     smithy.SchemaExtensions
+	eGetEarthObservationJobOutput_DurationInSeconds                smithy.SchemaExtensions
+	eGetEarthObservationJobOutput_Status                           smithy.SchemaExtensions
+	eGetEarthObservationJobOutput_KmsKeyId                         smithy.SchemaExtensions
+	eGetEarthObservationJobOutput_InputConfig                      smithy.SchemaExtensions
+	eGetEarthObservationJobOutput_JobConfig                        smithy.SchemaExtensions
+	eGetEarthObservationJobOutput_OutputBands                      smithy.SchemaExtensions
+	eGetEarthObservationJobOutput_ExecutionRoleArn                 smithy.SchemaExtensions
+	eGetEarthObservationJobOutput_ErrorDetails                     smithy.SchemaExtensions
+	eGetEarthObservationJobOutput_ExportStatus                     smithy.SchemaExtensions
+	eGetEarthObservationJobOutput_ExportErrorDetails               smithy.SchemaExtensions
+	eGetEarthObservationJobOutput_Tags                             smithy.SchemaExtensions
+	eGetRasterDataCollectionInput                                  smithy.SchemaExtensions
+	eGetRasterDataCollectionInput_Arn                              smithy.SchemaExtensions
+	eGetRasterDataCollectionOutput                                 smithy.SchemaExtensions
+	eGetRasterDataCollectionOutput_Name                            smithy.SchemaExtensions
+	eGetRasterDataCollectionOutput_Arn                             smithy.SchemaExtensions
+	eGetRasterDataCollectionOutput_Type                            smithy.SchemaExtensions
+	eGetRasterDataCollectionOutput_Description                     smithy.SchemaExtensions
+	eGetRasterDataCollectionOutput_DescriptionPageUrl              smithy.SchemaExtensions
+	eGetRasterDataCollectionOutput_SupportedFilters                smithy.SchemaExtensions
+	eGetRasterDataCollectionOutput_ImageSourceBands                smithy.SchemaExtensions
+	eGetRasterDataCollectionOutput_Tags                            smithy.SchemaExtensions
+	eGetTileInput                                                  smithy.SchemaExtensions
+	eGetTileInput_x                                                smithy.SchemaExtensions
+	eGetTileInput_y                                                smithy.SchemaExtensions
+	eGetTileInput_z                                                smithy.SchemaExtensions
+	eGetTileInput_ImageAssets                                      smithy.SchemaExtensions
+	eGetTileInput_Target                                           smithy.SchemaExtensions
+	eGetTileInput_Arn                                              smithy.SchemaExtensions
+	eGetTileInput_ImageMask                                        smithy.SchemaExtensions
+	eGetTileInput_OutputFormat                                     smithy.SchemaExtensions
+	eGetTileInput_TimeRangeFilter                                  smithy.SchemaExtensions
+	eGetTileInput_PropertyFilters                                  smithy.SchemaExtensions
+	eGetTileInput_OutputDataType                                   smithy.SchemaExtensions
+	eGetTileInput_ExecutionRoleArn                                 smithy.SchemaExtensions
+	eGetTileOutput                                                 smithy.SchemaExtensions
+	eGetTileOutput_BinaryFile                                      smithy.SchemaExtensions
+	eGetVectorEnrichmentJobInput                                   smithy.SchemaExtensions
+	eGetVectorEnrichmentJobInput_Arn                               smithy.SchemaExtensions
+	eGetVectorEnrichmentJobOutput                                  smithy.SchemaExtensions
+	eGetVectorEnrichmentJobOutput_Arn                              smithy.SchemaExtensions
+	eGetVectorEnrichmentJobOutput_Type                             smithy.SchemaExtensions
+	eGetVectorEnrichmentJobOutput_Name                             smithy.SchemaExtensions
+	eGetVectorEnrichmentJobOutput_CreationTime                     smithy.SchemaExtensions
+	eGetVectorEnrichmentJobOutput_DurationInSeconds                smithy.SchemaExtensions
+	eGetVectorEnrichmentJobOutput_Status                           smithy.SchemaExtensions
+	eGetVectorEnrichmentJobOutput_KmsKeyId                         smithy.SchemaExtensions
+	eGetVectorEnrichmentJobOutput_InputConfig                      smithy.SchemaExtensions
+	eGetVectorEnrichmentJobOutput_JobConfig                        smithy.SchemaExtensions
+	eGetVectorEnrichmentJobOutput_ExecutionRoleArn                 smithy.SchemaExtensions
+	eGetVectorEnrichmentJobOutput_ErrorDetails                     smithy.SchemaExtensions
+	eGetVectorEnrichmentJobOutput_ExportStatus                     smithy.SchemaExtensions
+	eGetVectorEnrichmentJobOutput_ExportErrorDetails               smithy.SchemaExtensions
+	eGetVectorEnrichmentJobOutput_Tags                             smithy.SchemaExtensions
+	eListEarthObservationJobInput                                  smithy.SchemaExtensions
+	eListEarthObservationJobInput_StatusEquals                     smithy.SchemaExtensions
+	eListEarthObservationJobInput_SortOrder                        smithy.SchemaExtensions
+	eListEarthObservationJobInput_SortBy                           smithy.SchemaExtensions
+	eListEarthObservationJobInput_NextToken                        smithy.SchemaExtensions
+	eListEarthObservationJobInput_MaxResults                       smithy.SchemaExtensions
+	eListEarthObservationJobOutput                                 smithy.SchemaExtensions
+	eListEarthObservationJobOutput_EarthObservationJobSummaries    smithy.SchemaExtensions
+	eListEarthObservationJobOutput_NextToken                       smithy.SchemaExtensions
+	eListRasterDataCollectionsInput                                smithy.SchemaExtensions
+	eListRasterDataCollectionsInput_NextToken                      smithy.SchemaExtensions
+	eListRasterDataCollectionsInput_MaxResults                     smithy.SchemaExtensions
+	eListRasterDataCollectionsOutput                               smithy.SchemaExtensions
+	eListRasterDataCollectionsOutput_RasterDataCollectionSummaries smithy.SchemaExtensions
+	eListRasterDataCollectionsOutput_NextToken                     smithy.SchemaExtensions
+	eListTagsForResourceRequest                                    smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn                        smithy.SchemaExtensions
+	eListTagsForResourceResponse                                   smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                              smithy.SchemaExtensions
+	eListVectorEnrichmentJobInput                                  smithy.SchemaExtensions
+	eListVectorEnrichmentJobInput_StatusEquals                     smithy.SchemaExtensions
+	eListVectorEnrichmentJobInput_SortOrder                        smithy.SchemaExtensions
+	eListVectorEnrichmentJobInput_SortBy                           smithy.SchemaExtensions
+	eListVectorEnrichmentJobInput_NextToken                        smithy.SchemaExtensions
+	eListVectorEnrichmentJobInput_MaxResults                       smithy.SchemaExtensions
+	eListVectorEnrichmentJobOutput                                 smithy.SchemaExtensions
+	eListVectorEnrichmentJobOutput_VectorEnrichmentJobSummaries    smithy.SchemaExtensions
+	eListVectorEnrichmentJobOutput_NextToken                       smithy.SchemaExtensions
+	eSearchRasterDataCollectionInput                               smithy.SchemaExtensions
+	eSearchRasterDataCollectionInput_Arn                           smithy.SchemaExtensions
+	eSearchRasterDataCollectionInput_RasterDataCollectionQuery     smithy.SchemaExtensions
+	eSearchRasterDataCollectionInput_NextToken                     smithy.SchemaExtensions
+	eSearchRasterDataCollectionOutput                              smithy.SchemaExtensions
+	eSearchRasterDataCollectionOutput_ApproximateResultCount       smithy.SchemaExtensions
+	eSearchRasterDataCollectionOutput_NextToken                    smithy.SchemaExtensions
+	eSearchRasterDataCollectionOutput_Items                        smithy.SchemaExtensions
+	eStartEarthObservationJobInput                                 smithy.SchemaExtensions
+	eStartEarthObservationJobInput_Name                            smithy.SchemaExtensions
+	eStartEarthObservationJobInput_ClientToken                     smithy.SchemaExtensions
+	eStartEarthObservationJobInput_KmsKeyId                        smithy.SchemaExtensions
+	eStartEarthObservationJobInput_InputConfig                     smithy.SchemaExtensions
+	eStartEarthObservationJobInput_JobConfig                       smithy.SchemaExtensions
+	eStartEarthObservationJobInput_ExecutionRoleArn                smithy.SchemaExtensions
+	eStartEarthObservationJobInput_Tags                            smithy.SchemaExtensions
+	eStartEarthObservationJobOutput                                smithy.SchemaExtensions
+	eStartEarthObservationJobOutput_Name                           smithy.SchemaExtensions
+	eStartEarthObservationJobOutput_Arn                            smithy.SchemaExtensions
+	eStartEarthObservationJobOutput_CreationTime                   smithy.SchemaExtensions
+	eStartEarthObservationJobOutput_DurationInSeconds              smithy.SchemaExtensions
+	eStartEarthObservationJobOutput_Status                         smithy.SchemaExtensions
+	eStartEarthObservationJobOutput_KmsKeyId                       smithy.SchemaExtensions
+	eStartEarthObservationJobOutput_InputConfig                    smithy.SchemaExtensions
+	eStartEarthObservationJobOutput_JobConfig                      smithy.SchemaExtensions
+	eStartEarthObservationJobOutput_ExecutionRoleArn               smithy.SchemaExtensions
+	eStartEarthObservationJobOutput_Tags                           smithy.SchemaExtensions
+	eStartVectorEnrichmentJobInput                                 smithy.SchemaExtensions
+	eStartVectorEnrichmentJobInput_Name                            smithy.SchemaExtensions
+	eStartVectorEnrichmentJobInput_ClientToken                     smithy.SchemaExtensions
+	eStartVectorEnrichmentJobInput_KmsKeyId                        smithy.SchemaExtensions
+	eStartVectorEnrichmentJobInput_InputConfig                     smithy.SchemaExtensions
+	eStartVectorEnrichmentJobInput_JobConfig                       smithy.SchemaExtensions
+	eStartVectorEnrichmentJobInput_ExecutionRoleArn                smithy.SchemaExtensions
+	eStartVectorEnrichmentJobInput_Tags                            smithy.SchemaExtensions
+	eStartVectorEnrichmentJobOutput                                smithy.SchemaExtensions
+	eStartVectorEnrichmentJobOutput_Name                           smithy.SchemaExtensions
+	eStartVectorEnrichmentJobOutput_Arn                            smithy.SchemaExtensions
+	eStartVectorEnrichmentJobOutput_Type                           smithy.SchemaExtensions
+	eStartVectorEnrichmentJobOutput_CreationTime                   smithy.SchemaExtensions
+	eStartVectorEnrichmentJobOutput_DurationInSeconds              smithy.SchemaExtensions
+	eStartVectorEnrichmentJobOutput_Status                         smithy.SchemaExtensions
+	eStartVectorEnrichmentJobOutput_KmsKeyId                       smithy.SchemaExtensions
+	eStartVectorEnrichmentJobOutput_InputConfig                    smithy.SchemaExtensions
+	eStartVectorEnrichmentJobOutput_JobConfig                      smithy.SchemaExtensions
+	eStartVectorEnrichmentJobOutput_ExecutionRoleArn               smithy.SchemaExtensions
+	eStartVectorEnrichmentJobOutput_Tags                           smithy.SchemaExtensions
+	eStopEarthObservationJobInput                                  smithy.SchemaExtensions
+	eStopEarthObservationJobInput_Arn                              smithy.SchemaExtensions
+	eStopEarthObservationJobOutput                                 smithy.SchemaExtensions
+	eStopVectorEnrichmentJobInput                                  smithy.SchemaExtensions
+	eStopVectorEnrichmentJobInput_Arn                              smithy.SchemaExtensions
+	eStopVectorEnrichmentJobOutput                                 smithy.SchemaExtensions
+	eTagResourceRequest                                            smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                                smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                       smithy.SchemaExtensions
+	eTagResourceResponse                                           smithy.SchemaExtensions
+	eUntagResourceRequest                                          smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                              smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                  smithy.SchemaExtensions
+	eUntagResourceResponse                                         smithy.SchemaExtensions
+)
 
 var (
 	iDeleteEarthObservationJob                    = smithy.ShapeID{Namespace: "com.amazonaws.sagemakergeospatial", Name: "DeleteEarthObservationJob"}
@@ -411,509 +912,509 @@ var mStopVectorEnrichmentJobInput = smithy.SchemaMembers{List: []*smithy.Schema{
 var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
 var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
 
-var sDeleteEarthObservationJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEarthObservationJob, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sDeleteVectorEnrichmentJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVectorEnrichmentJob, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sExportEarthObservationJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportEarthObservationJob, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sExportVectorEnrichmentJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportVectorEnrichmentJob, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sGetEarthObservationJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEarthObservationJob, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sGetRasterDataCollection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRasterDataCollection, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sGetTile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTile, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sGetVectorEnrichmentJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVectorEnrichmentJob, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sListEarthObservationJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEarthObservationJobs, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sListRasterDataCollections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRasterDataCollections, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sListVectorEnrichmentJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVectorEnrichmentJobs, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sSearchRasterDataCollection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchRasterDataCollection, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sStartEarthObservationJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartEarthObservationJob, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sStartVectorEnrichmentJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartVectorEnrichmentJob, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sStopEarthObservationJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopEarthObservationJob, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sStopVectorEnrichmentJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopVectorEnrichmentJob, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var s_SageMakerGeospatial = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SageMakerGeospatial, Type: smithy.ShapeTypeService, Ext: &ext[19]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &ext[20]})
-var s_AlgorithmNameCloudRemoval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlgorithmNameCloudRemoval, Type: smithy.ShapeTypeString, Ext: &ext[22]})
-var s_AlgorithmNameGeoMosaic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlgorithmNameGeoMosaic, Type: smithy.ShapeTypeString, Ext: &ext[23]})
-var s_AlgorithmNameResampling = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlgorithmNameResampling, Type: smithy.ShapeTypeString, Ext: &ext[24]})
-var sAreaOfInterest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAreaOfInterest, Members: &mAreaOfInterest, Type: smithy.ShapeTypeUnion, Ext: &ext[25]})
-var sAreaOfInterestGeometry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAreaOfInterestGeometry, Members: &mAreaOfInterestGeometry, Type: smithy.ShapeTypeUnion, Ext: &ext[27]})
-var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[30]})
-var s_AssetsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssetsMap, Members: &m_AssetsMap, Type: smithy.ShapeTypeMap, Ext: &ext[31]})
-var sAssetValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssetValue, Members: &mAssetValue, Type: smithy.ShapeTypeStructure, Ext: &ext[34]})
-var sBandMathConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBandMathConfigInput, Members: &mBandMathConfigInput, Type: smithy.ShapeTypeStructure, Ext: &ext[36]})
-var s_BinaryFile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BinaryFile, Traits: &t20, Type: smithy.ShapeTypeBlob, Ext: &ext[39]})
-var sCloudMaskingConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudMaskingConfigInput, Type: smithy.ShapeTypeStructure, Ext: &ext[40]})
-var sCloudRemovalConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudRemovalConfigInput, Members: &mCloudRemovalConfigInput, Type: smithy.ShapeTypeStructure, Ext: &ext[41]})
-var s_ComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComparisonOperator, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &ext[46]})
-var sCustomIndicesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomIndicesInput, Members: &mCustomIndicesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[49]})
-var s_DataCollectionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataCollectionArn, Type: smithy.ShapeTypeString, Ext: &ext[51]})
-var s_DataCollectionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataCollectionsList, Members: &m_DataCollectionsList, Type: smithy.ShapeTypeList, Ext: &ext[52]})
-var s_DataCollectionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataCollectionType, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var s_EarthObservationJobArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EarthObservationJobArn, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var sEarthObservationJobErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEarthObservationJobErrorDetails, Members: &mEarthObservationJobErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[56]})
-var s_EarthObservationJobErrorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EarthObservationJobErrorType, Type: smithy.ShapeTypeString, Ext: &ext[59]})
-var s_EarthObservationJobExportStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EarthObservationJobExportStatus, Type: smithy.ShapeTypeString, Ext: &ext[60]})
-var s_EarthObservationJobList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EarthObservationJobList, Members: &m_EarthObservationJobList, Type: smithy.ShapeTypeList, Ext: &ext[61]})
-var s_EarthObservationJobOutputBands = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EarthObservationJobOutputBands, Members: &m_EarthObservationJobOutputBands, Type: smithy.ShapeTypeList, Ext: &ext[63]})
-var s_EarthObservationJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EarthObservationJobStatus, Type: smithy.ShapeTypeString, Ext: &ext[65]})
-var sEoCloudCoverInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEoCloudCoverInput, Members: &mEoCloudCoverInput, Type: smithy.ShapeTypeStructure, Ext: &ext[66]})
-var s_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var sExportErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportErrorDetails, Members: &mExportErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[70]})
-var sExportErrorDetailsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportErrorDetailsOutput, Members: &mExportErrorDetailsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[73]})
-var s_ExportErrorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExportErrorType, Type: smithy.ShapeTypeString, Ext: &ext[76]})
-var sExportS3DataInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportS3DataInput, Members: &mExportS3DataInput, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
-var sExportVectorEnrichmentJobOutputConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportVectorEnrichmentJobOutputConfig, Members: &mExportVectorEnrichmentJobOutputConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var sFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[82]})
-var s_FilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &ext[87]})
-var sGeometry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeometry, Members: &mGeometry, Type: smithy.ShapeTypeStructure, Ext: &ext[89]})
-var sGeoMosaicConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeoMosaicConfigInput, Members: &mGeoMosaicConfigInput, Type: smithy.ShapeTypeStructure, Ext: &ext[92]})
-var s_GroupBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupBy, Type: smithy.ShapeTypeString, Ext: &ext[95]})
-var s_ImageSourceBandList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImageSourceBandList, Members: &m_ImageSourceBandList, Type: smithy.ShapeTypeList, Ext: &ext[96]})
-var sInputConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputConfigInput, Members: &mInputConfigInput, Type: smithy.ShapeTypeStructure, Ext: &ext[98]})
-var sInputConfigOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputConfigOutput, Members: &mInputConfigOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[101]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &ext[104]})
-var sItemSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iItemSource, Members: &mItemSource, Type: smithy.ShapeTypeStructure, Ext: &ext[107]})
-var s_ItemSourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ItemSourceList, Members: &m_ItemSourceList, Type: smithy.ShapeTypeList, Ext: &ext[113]})
-var sJobConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobConfigInput, Members: &mJobConfigInput, Type: smithy.ShapeTypeUnion, Ext: &ext[115]})
-var s_KmsKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &ext[125]})
-var sLandCoverSegmentationConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandCoverSegmentationConfigInput, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var sLandsatCloudCoverLandInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandsatCloudCoverLandInput, Members: &mLandsatCloudCoverLandInput, Type: smithy.ShapeTypeStructure, Ext: &ext[127]})
-var s_LinearRing = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LinearRing, Members: &m_LinearRing, Type: smithy.ShapeTypeList, Ext: &ext[130]})
-var s_LinearRings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LinearRings, Members: &m_LinearRings, Type: smithy.ShapeTypeList, Ext: &ext[132]})
-var s_LinearRingsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LinearRingsList, Members: &m_LinearRingsList, Type: smithy.ShapeTypeList, Ext: &ext[134]})
-var sListEarthObservationJobOutputConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEarthObservationJobOutputConfig, Members: &mListEarthObservationJobOutputConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[136]})
-var sListVectorEnrichmentJobOutputConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVectorEnrichmentJobOutputConfig, Members: &mListVectorEnrichmentJobOutputConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[144]})
-var s_LogicalOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogicalOperator, Type: smithy.ShapeTypeString, Ext: &ext[152]})
-var sMapMatchingConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMapMatchingConfig, Members: &mMapMatchingConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[153]})
-var sMultiPolygonGeometryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMultiPolygonGeometryInput, Members: &mMultiPolygonGeometryInput, Type: smithy.ShapeTypeStructure, Ext: &ext[158]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &ext[160]})
-var sOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperation, Members: &mOperation, Type: smithy.ShapeTypeStructure, Ext: &ext[161]})
-var s_OperationsListInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationsListInput, Members: &m_OperationsListInput, Type: smithy.ShapeTypeList, Ext: &ext[165]})
-var sOutputBand = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputBand, Members: &mOutputBand, Type: smithy.ShapeTypeStructure, Ext: &ext[167]})
-var sOutputConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputConfigInput, Members: &mOutputConfigInput, Type: smithy.ShapeTypeStructure, Ext: &ext[170]})
-var sOutputResolutionResamplingInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputResolutionResamplingInput, Members: &mOutputResolutionResamplingInput, Type: smithy.ShapeTypeStructure, Ext: &ext[172]})
-var sOutputResolutionStackInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputResolutionStackInput, Members: &mOutputResolutionStackInput, Type: smithy.ShapeTypeStructure, Ext: &ext[174]})
-var s_OutputType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputType, Type: smithy.ShapeTypeString, Ext: &ext[177]})
-var sPlatformInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlatformInput, Members: &mPlatformInput, Type: smithy.ShapeTypeStructure, Ext: &ext[178]})
-var sPolygonGeometryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolygonGeometryInput, Members: &mPolygonGeometryInput, Type: smithy.ShapeTypeStructure, Ext: &ext[181]})
-var s_Position = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Position, Members: &m_Position, Traits: &t25, Type: smithy.ShapeTypeList, Ext: &ext[183]})
-var s_PredefinedResolution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PredefinedResolution, Type: smithy.ShapeTypeString, Ext: &ext[185]})
-var sProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProperties, Members: &mProperties, Type: smithy.ShapeTypeStructure, Ext: &ext[186]})
-var sProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProperty, Members: &mProperty, Type: smithy.ShapeTypeUnion, Ext: &ext[193]})
-var sPropertyFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPropertyFilter, Members: &mPropertyFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[200]})
-var sPropertyFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPropertyFilters, Members: &mPropertyFilters, Type: smithy.ShapeTypeStructure, Ext: &ext[202]})
-var s_PropertyFiltersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PropertyFiltersList, Members: &m_PropertyFiltersList, Type: smithy.ShapeTypeList, Ext: &ext[205]})
-var sRasterDataCollectionMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRasterDataCollectionMetadata, Members: &mRasterDataCollectionMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[207]})
-var sRasterDataCollectionQueryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRasterDataCollectionQueryInput, Members: &mRasterDataCollectionQueryInput, Type: smithy.ShapeTypeStructure, Ext: &ext[215]})
-var sRasterDataCollectionQueryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRasterDataCollectionQueryOutput, Members: &mRasterDataCollectionQueryOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[220]})
-var sRasterDataCollectionQueryWithBandFilterInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRasterDataCollectionQueryWithBandFilterInput, Members: &mRasterDataCollectionQueryWithBandFilterInput, Type: smithy.ShapeTypeStructure, Ext: &ext[226]})
-var sResamplingConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResamplingConfigInput, Members: &mResamplingConfigInput, Type: smithy.ShapeTypeStructure, Ext: &ext[231]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &ext[235]})
-var sReverseGeocodingConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReverseGeocodingConfig, Members: &mReverseGeocodingConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[238]})
-var s_S3Uri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &ext[241]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &ext[242]})
-var s_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SortOrder, Type: smithy.ShapeTypeString, Ext: &ext[245]})
-var sStackConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStackConfigInput, Members: &mStackConfigInput, Type: smithy.ShapeTypeStructure, Ext: &ext[246]})
-var s_StringListInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringListInput, Members: &m_StringListInput, Type: smithy.ShapeTypeList, Ext: &ext[249]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[251]})
-var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[253]})
-var s_TargetOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetOptions, Type: smithy.ShapeTypeString, Ext: &ext[256]})
-var s_TemporalStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemporalStatistics, Type: smithy.ShapeTypeString, Ext: &ext[257]})
-var sTemporalStatisticsConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemporalStatisticsConfigInput, Members: &mTemporalStatisticsConfigInput, Type: smithy.ShapeTypeStructure, Ext: &ext[258]})
-var s_TemporalStatisticsListInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemporalStatisticsListInput, Members: &m_TemporalStatisticsListInput, Type: smithy.ShapeTypeList, Ext: &ext[262]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &ext[264]})
-var sTimeRangeFilterInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeRangeFilterInput, Members: &mTimeRangeFilterInput, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &ext[267]})
-var sTimeRangeFilterOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeRangeFilterOutput, Members: &mTimeRangeFilterOutput, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &ext[270]})
-var s_Unit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Unit, Type: smithy.ShapeTypeString, Ext: &ext[273]})
-var sUserDefined = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserDefined, Members: &mUserDefined, Type: smithy.ShapeTypeStructure, Ext: &ext[274]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &ext[277]})
-var s_VectorEnrichmentJobArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VectorEnrichmentJobArn, Type: smithy.ShapeTypeString, Ext: &ext[280]})
-var sVectorEnrichmentJobConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVectorEnrichmentJobConfig, Members: &mVectorEnrichmentJobConfig, Type: smithy.ShapeTypeUnion, Ext: &ext[281]})
-var sVectorEnrichmentJobDataSourceConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVectorEnrichmentJobDataSourceConfigInput, Members: &mVectorEnrichmentJobDataSourceConfigInput, Type: smithy.ShapeTypeUnion, Ext: &ext[284]})
-var s_VectorEnrichmentJobDocumentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VectorEnrichmentJobDocumentType, Type: smithy.ShapeTypeString, Ext: &ext[286]})
-var sVectorEnrichmentJobErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVectorEnrichmentJobErrorDetails, Members: &mVectorEnrichmentJobErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[287]})
-var s_VectorEnrichmentJobErrorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VectorEnrichmentJobErrorType, Type: smithy.ShapeTypeString, Ext: &ext[290]})
-var sVectorEnrichmentJobExportErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVectorEnrichmentJobExportErrorDetails, Members: &mVectorEnrichmentJobExportErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[291]})
-var s_VectorEnrichmentJobExportErrorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VectorEnrichmentJobExportErrorType, Type: smithy.ShapeTypeString, Ext: &ext[294]})
-var s_VectorEnrichmentJobExportStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VectorEnrichmentJobExportStatus, Type: smithy.ShapeTypeString, Ext: &ext[295]})
-var sVectorEnrichmentJobInputConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVectorEnrichmentJobInputConfig, Members: &mVectorEnrichmentJobInputConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[296]})
-var s_VectorEnrichmentJobList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VectorEnrichmentJobList, Members: &m_VectorEnrichmentJobList, Type: smithy.ShapeTypeList, Ext: &ext[299]})
-var sVectorEnrichmentJobS3Data = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVectorEnrichmentJobS3Data, Members: &mVectorEnrichmentJobS3Data, Type: smithy.ShapeTypeStructure, Ext: &ext[301]})
-var s_VectorEnrichmentJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VectorEnrichmentJobStatus, Type: smithy.ShapeTypeString, Ext: &ext[304]})
-var s_VectorEnrichmentJobType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VectorEnrichmentJobType, Type: smithy.ShapeTypeString, Ext: &ext[305]})
-var sViewOffNadirInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iViewOffNadirInput, Members: &mViewOffNadirInput, Type: smithy.ShapeTypeStructure, Ext: &ext[306]})
-var sViewSunAzimuthInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iViewSunAzimuthInput, Members: &mViewSunAzimuthInput, Type: smithy.ShapeTypeStructure, Ext: &ext[309]})
-var sViewSunElevationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iViewSunElevationInput, Members: &mViewSunElevationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[312]})
-var s_ZonalStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ZonalStatistics, Type: smithy.ShapeTypeString, Ext: &ext[315]})
-var sZonalStatisticsConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iZonalStatisticsConfigInput, Members: &mZonalStatisticsConfigInput, Type: smithy.ShapeTypeStructure, Ext: &ext[316]})
-var s_ZonalStatisticsListInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ZonalStatisticsListInput, Members: &m_ZonalStatisticsListInput, Type: smithy.ShapeTypeList, Ext: &ext[321]})
-var sDeleteEarthObservationJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEarthObservationJobInput, Members: &mDeleteEarthObservationJobInput, Type: smithy.ShapeTypeStructure, Ext: &ext[323]})
-var sDeleteEarthObservationJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEarthObservationJobOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[325]})
-var sDeleteVectorEnrichmentJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVectorEnrichmentJobInput, Members: &mDeleteVectorEnrichmentJobInput, Type: smithy.ShapeTypeStructure, Ext: &ext[326]})
-var sDeleteVectorEnrichmentJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVectorEnrichmentJobOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[328]})
-var sExportEarthObservationJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportEarthObservationJobInput, Members: &mExportEarthObservationJobInput, Type: smithy.ShapeTypeStructure, Ext: &ext[329]})
-var sExportEarthObservationJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportEarthObservationJobOutput, Members: &mExportEarthObservationJobOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[335]})
-var sExportVectorEnrichmentJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportVectorEnrichmentJobInput, Members: &mExportVectorEnrichmentJobInput, Type: smithy.ShapeTypeStructure, Ext: &ext[342]})
-var sExportVectorEnrichmentJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportVectorEnrichmentJobOutput, Members: &mExportVectorEnrichmentJobOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[347]})
-var sGetEarthObservationJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEarthObservationJobInput, Members: &mGetEarthObservationJobInput, Type: smithy.ShapeTypeStructure, Ext: &ext[353]})
-var sGetEarthObservationJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEarthObservationJobOutput, Members: &mGetEarthObservationJobOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[355]})
-var sGetRasterDataCollectionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRasterDataCollectionInput, Members: &mGetRasterDataCollectionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[370]})
-var sGetRasterDataCollectionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRasterDataCollectionOutput, Members: &mGetRasterDataCollectionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[372]})
-var sGetTileInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTileInput, Members: &mGetTileInput, Type: smithy.ShapeTypeStructure, Ext: &ext[381]})
-var sGetTileOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTileOutput, Members: &mGetTileOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[394]})
-var sGetVectorEnrichmentJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVectorEnrichmentJobInput, Members: &mGetVectorEnrichmentJobInput, Type: smithy.ShapeTypeStructure, Ext: &ext[396]})
-var sGetVectorEnrichmentJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVectorEnrichmentJobOutput, Members: &mGetVectorEnrichmentJobOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[398]})
-var sListEarthObservationJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEarthObservationJobInput, Members: &mListEarthObservationJobInput, Type: smithy.ShapeTypeStructure, Ext: &ext[413]})
-var sListEarthObservationJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEarthObservationJobOutput, Members: &mListEarthObservationJobOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[419]})
-var sListRasterDataCollectionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRasterDataCollectionsInput, Members: &mListRasterDataCollectionsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[422]})
-var sListRasterDataCollectionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRasterDataCollectionsOutput, Members: &mListRasterDataCollectionsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[425]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[428]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[430]})
-var sListVectorEnrichmentJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVectorEnrichmentJobInput, Members: &mListVectorEnrichmentJobInput, Type: smithy.ShapeTypeStructure, Ext: &ext[432]})
-var sListVectorEnrichmentJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVectorEnrichmentJobOutput, Members: &mListVectorEnrichmentJobOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[438]})
-var sSearchRasterDataCollectionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchRasterDataCollectionInput, Members: &mSearchRasterDataCollectionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[441]})
-var sSearchRasterDataCollectionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchRasterDataCollectionOutput, Members: &mSearchRasterDataCollectionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[445]})
-var sStartEarthObservationJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartEarthObservationJobInput, Members: &mStartEarthObservationJobInput, Type: smithy.ShapeTypeStructure, Ext: &ext[449]})
-var sStartEarthObservationJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartEarthObservationJobOutput, Members: &mStartEarthObservationJobOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[457]})
-var sStartVectorEnrichmentJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartVectorEnrichmentJobInput, Members: &mStartVectorEnrichmentJobInput, Type: smithy.ShapeTypeStructure, Ext: &ext[468]})
-var sStartVectorEnrichmentJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartVectorEnrichmentJobOutput, Members: &mStartVectorEnrichmentJobOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[476]})
-var sStopEarthObservationJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopEarthObservationJobInput, Members: &mStopEarthObservationJobInput, Type: smithy.ShapeTypeStructure, Ext: &ext[488]})
-var sStopEarthObservationJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopEarthObservationJobOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[490]})
-var sStopVectorEnrichmentJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopVectorEnrichmentJobInput, Members: &mStopVectorEnrichmentJobInput, Type: smithy.ShapeTypeStructure, Ext: &ext[491]})
-var sStopVectorEnrichmentJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopVectorEnrichmentJobOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[493]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[494]})
-var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[497]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[498]})
-var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[501]})
+var sDeleteEarthObservationJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEarthObservationJob, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eDeleteEarthObservationJob})
+var sDeleteVectorEnrichmentJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVectorEnrichmentJob, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eDeleteVectorEnrichmentJob})
+var sExportEarthObservationJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportEarthObservationJob, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eExportEarthObservationJob})
+var sExportVectorEnrichmentJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportVectorEnrichmentJob, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eExportVectorEnrichmentJob})
+var sGetEarthObservationJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEarthObservationJob, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eGetEarthObservationJob})
+var sGetRasterDataCollection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRasterDataCollection, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eGetRasterDataCollection})
+var sGetTile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTile, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eGetTile})
+var sGetVectorEnrichmentJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVectorEnrichmentJob, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eGetVectorEnrichmentJob})
+var sListEarthObservationJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEarthObservationJobs, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eListEarthObservationJobs})
+var sListRasterDataCollections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRasterDataCollections, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eListRasterDataCollections})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListVectorEnrichmentJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVectorEnrichmentJobs, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eListVectorEnrichmentJobs})
+var sSearchRasterDataCollection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchRasterDataCollection, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eSearchRasterDataCollection})
+var sStartEarthObservationJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartEarthObservationJob, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eStartEarthObservationJob})
+var sStartVectorEnrichmentJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartVectorEnrichmentJob, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eStartVectorEnrichmentJob})
+var sStopEarthObservationJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopEarthObservationJob, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eStopEarthObservationJob})
+var sStopVectorEnrichmentJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopVectorEnrichmentJob, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eStopVectorEnrichmentJob})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var s_SageMakerGeospatial = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SageMakerGeospatial, Type: smithy.ShapeTypeService, Ext: &e_SageMakerGeospatial})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var s_AlgorithmNameCloudRemoval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlgorithmNameCloudRemoval, Type: smithy.ShapeTypeString, Ext: &e_AlgorithmNameCloudRemoval})
+var s_AlgorithmNameGeoMosaic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlgorithmNameGeoMosaic, Type: smithy.ShapeTypeString, Ext: &e_AlgorithmNameGeoMosaic})
+var s_AlgorithmNameResampling = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlgorithmNameResampling, Type: smithy.ShapeTypeString, Ext: &e_AlgorithmNameResampling})
+var sAreaOfInterest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAreaOfInterest, Members: &mAreaOfInterest, Type: smithy.ShapeTypeUnion, Ext: &eAreaOfInterest})
+var sAreaOfInterestGeometry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAreaOfInterestGeometry, Members: &mAreaOfInterestGeometry, Type: smithy.ShapeTypeUnion, Ext: &eAreaOfInterestGeometry})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var s_AssetsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssetsMap, Members: &m_AssetsMap, Type: smithy.ShapeTypeMap, Ext: &e_AssetsMap})
+var sAssetValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssetValue, Members: &mAssetValue, Type: smithy.ShapeTypeStructure, Ext: &eAssetValue})
+var sBandMathConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBandMathConfigInput, Members: &mBandMathConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eBandMathConfigInput})
+var s_BinaryFile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BinaryFile, Traits: &t20, Type: smithy.ShapeTypeBlob, Ext: &e_BinaryFile})
+var sCloudMaskingConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudMaskingConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eCloudMaskingConfigInput})
+var sCloudRemovalConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudRemovalConfigInput, Members: &mCloudRemovalConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eCloudRemovalConfigInput})
+var s_ComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComparisonOperator, Type: smithy.ShapeTypeString, Ext: &e_ComparisonOperator})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sCustomIndicesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomIndicesInput, Members: &mCustomIndicesInput, Type: smithy.ShapeTypeStructure, Ext: &eCustomIndicesInput})
+var s_DataCollectionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataCollectionArn, Type: smithy.ShapeTypeString, Ext: &e_DataCollectionArn})
+var s_DataCollectionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataCollectionsList, Members: &m_DataCollectionsList, Type: smithy.ShapeTypeList, Ext: &e_DataCollectionsList})
+var s_DataCollectionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataCollectionType, Type: smithy.ShapeTypeString, Ext: &e_DataCollectionType})
+var s_EarthObservationJobArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EarthObservationJobArn, Type: smithy.ShapeTypeString, Ext: &e_EarthObservationJobArn})
+var sEarthObservationJobErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEarthObservationJobErrorDetails, Members: &mEarthObservationJobErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &eEarthObservationJobErrorDetails})
+var s_EarthObservationJobErrorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EarthObservationJobErrorType, Type: smithy.ShapeTypeString, Ext: &e_EarthObservationJobErrorType})
+var s_EarthObservationJobExportStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EarthObservationJobExportStatus, Type: smithy.ShapeTypeString, Ext: &e_EarthObservationJobExportStatus})
+var s_EarthObservationJobList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EarthObservationJobList, Members: &m_EarthObservationJobList, Type: smithy.ShapeTypeList, Ext: &e_EarthObservationJobList})
+var s_EarthObservationJobOutputBands = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EarthObservationJobOutputBands, Members: &m_EarthObservationJobOutputBands, Type: smithy.ShapeTypeList, Ext: &e_EarthObservationJobOutputBands})
+var s_EarthObservationJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EarthObservationJobStatus, Type: smithy.ShapeTypeString, Ext: &e_EarthObservationJobStatus})
+var sEoCloudCoverInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEoCloudCoverInput, Members: &mEoCloudCoverInput, Type: smithy.ShapeTypeStructure, Ext: &eEoCloudCoverInput})
+var s_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &e_ExecutionRoleArn})
+var sExportErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportErrorDetails, Members: &mExportErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &eExportErrorDetails})
+var sExportErrorDetailsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportErrorDetailsOutput, Members: &mExportErrorDetailsOutput, Type: smithy.ShapeTypeStructure, Ext: &eExportErrorDetailsOutput})
+var s_ExportErrorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExportErrorType, Type: smithy.ShapeTypeString, Ext: &e_ExportErrorType})
+var sExportS3DataInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportS3DataInput, Members: &mExportS3DataInput, Type: smithy.ShapeTypeStructure, Ext: &eExportS3DataInput})
+var sExportVectorEnrichmentJobOutputConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportVectorEnrichmentJobOutputConfig, Members: &mExportVectorEnrichmentJobOutputConfig, Type: smithy.ShapeTypeStructure, Ext: &eExportVectorEnrichmentJobOutputConfig})
+var sFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure, Ext: &eFilter})
+var s_FilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &e_FilterList})
+var sGeometry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeometry, Members: &mGeometry, Type: smithy.ShapeTypeStructure, Ext: &eGeometry})
+var sGeoMosaicConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeoMosaicConfigInput, Members: &mGeoMosaicConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eGeoMosaicConfigInput})
+var s_GroupBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupBy, Type: smithy.ShapeTypeString, Ext: &e_GroupBy})
+var s_ImageSourceBandList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImageSourceBandList, Members: &m_ImageSourceBandList, Type: smithy.ShapeTypeList, Ext: &e_ImageSourceBandList})
+var sInputConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputConfigInput, Members: &mInputConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eInputConfigInput})
+var sInputConfigOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputConfigOutput, Members: &mInputConfigOutput, Type: smithy.ShapeTypeStructure, Ext: &eInputConfigOutput})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sItemSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iItemSource, Members: &mItemSource, Type: smithy.ShapeTypeStructure, Ext: &eItemSource})
+var s_ItemSourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ItemSourceList, Members: &m_ItemSourceList, Type: smithy.ShapeTypeList, Ext: &e_ItemSourceList})
+var sJobConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobConfigInput, Members: &mJobConfigInput, Type: smithy.ShapeTypeUnion, Ext: &eJobConfigInput})
+var s_KmsKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &e_KmsKey})
+var sLandCoverSegmentationConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandCoverSegmentationConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eLandCoverSegmentationConfigInput})
+var sLandsatCloudCoverLandInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandsatCloudCoverLandInput, Members: &mLandsatCloudCoverLandInput, Type: smithy.ShapeTypeStructure, Ext: &eLandsatCloudCoverLandInput})
+var s_LinearRing = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LinearRing, Members: &m_LinearRing, Type: smithy.ShapeTypeList, Ext: &e_LinearRing})
+var s_LinearRings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LinearRings, Members: &m_LinearRings, Type: smithy.ShapeTypeList, Ext: &e_LinearRings})
+var s_LinearRingsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LinearRingsList, Members: &m_LinearRingsList, Type: smithy.ShapeTypeList, Ext: &e_LinearRingsList})
+var sListEarthObservationJobOutputConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEarthObservationJobOutputConfig, Members: &mListEarthObservationJobOutputConfig, Type: smithy.ShapeTypeStructure, Ext: &eListEarthObservationJobOutputConfig})
+var sListVectorEnrichmentJobOutputConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVectorEnrichmentJobOutputConfig, Members: &mListVectorEnrichmentJobOutputConfig, Type: smithy.ShapeTypeStructure, Ext: &eListVectorEnrichmentJobOutputConfig})
+var s_LogicalOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogicalOperator, Type: smithy.ShapeTypeString, Ext: &e_LogicalOperator})
+var sMapMatchingConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMapMatchingConfig, Members: &mMapMatchingConfig, Type: smithy.ShapeTypeStructure, Ext: &eMapMatchingConfig})
+var sMultiPolygonGeometryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMultiPolygonGeometryInput, Members: &mMultiPolygonGeometryInput, Type: smithy.ShapeTypeStructure, Ext: &eMultiPolygonGeometryInput})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperation, Members: &mOperation, Type: smithy.ShapeTypeStructure, Ext: &eOperation})
+var s_OperationsListInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationsListInput, Members: &m_OperationsListInput, Type: smithy.ShapeTypeList, Ext: &e_OperationsListInput})
+var sOutputBand = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputBand, Members: &mOutputBand, Type: smithy.ShapeTypeStructure, Ext: &eOutputBand})
+var sOutputConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputConfigInput, Members: &mOutputConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eOutputConfigInput})
+var sOutputResolutionResamplingInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputResolutionResamplingInput, Members: &mOutputResolutionResamplingInput, Type: smithy.ShapeTypeStructure, Ext: &eOutputResolutionResamplingInput})
+var sOutputResolutionStackInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputResolutionStackInput, Members: &mOutputResolutionStackInput, Type: smithy.ShapeTypeStructure, Ext: &eOutputResolutionStackInput})
+var s_OutputType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputType, Type: smithy.ShapeTypeString, Ext: &e_OutputType})
+var sPlatformInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlatformInput, Members: &mPlatformInput, Type: smithy.ShapeTypeStructure, Ext: &ePlatformInput})
+var sPolygonGeometryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolygonGeometryInput, Members: &mPolygonGeometryInput, Type: smithy.ShapeTypeStructure, Ext: &ePolygonGeometryInput})
+var s_Position = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Position, Members: &m_Position, Traits: &t25, Type: smithy.ShapeTypeList, Ext: &e_Position})
+var s_PredefinedResolution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PredefinedResolution, Type: smithy.ShapeTypeString, Ext: &e_PredefinedResolution})
+var sProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProperties, Members: &mProperties, Type: smithy.ShapeTypeStructure, Ext: &eProperties})
+var sProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProperty, Members: &mProperty, Type: smithy.ShapeTypeUnion, Ext: &eProperty})
+var sPropertyFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPropertyFilter, Members: &mPropertyFilter, Type: smithy.ShapeTypeStructure, Ext: &ePropertyFilter})
+var sPropertyFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPropertyFilters, Members: &mPropertyFilters, Type: smithy.ShapeTypeStructure, Ext: &ePropertyFilters})
+var s_PropertyFiltersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PropertyFiltersList, Members: &m_PropertyFiltersList, Type: smithy.ShapeTypeList, Ext: &e_PropertyFiltersList})
+var sRasterDataCollectionMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRasterDataCollectionMetadata, Members: &mRasterDataCollectionMetadata, Type: smithy.ShapeTypeStructure, Ext: &eRasterDataCollectionMetadata})
+var sRasterDataCollectionQueryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRasterDataCollectionQueryInput, Members: &mRasterDataCollectionQueryInput, Type: smithy.ShapeTypeStructure, Ext: &eRasterDataCollectionQueryInput})
+var sRasterDataCollectionQueryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRasterDataCollectionQueryOutput, Members: &mRasterDataCollectionQueryOutput, Type: smithy.ShapeTypeStructure, Ext: &eRasterDataCollectionQueryOutput})
+var sRasterDataCollectionQueryWithBandFilterInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRasterDataCollectionQueryWithBandFilterInput, Members: &mRasterDataCollectionQueryWithBandFilterInput, Type: smithy.ShapeTypeStructure, Ext: &eRasterDataCollectionQueryWithBandFilterInput})
+var sResamplingConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResamplingConfigInput, Members: &mResamplingConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eResamplingConfigInput})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sReverseGeocodingConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReverseGeocodingConfig, Members: &mReverseGeocodingConfig, Type: smithy.ShapeTypeStructure, Ext: &eReverseGeocodingConfig})
+var s_S3Uri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &e_S3Uri})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var s_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SortOrder, Type: smithy.ShapeTypeString, Ext: &e_SortOrder})
+var sStackConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStackConfigInput, Members: &mStackConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eStackConfigInput})
+var s_StringListInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringListInput, Members: &m_StringListInput, Type: smithy.ShapeTypeList, Ext: &e_StringListInput})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &e_Tags})
+var s_TargetOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetOptions, Type: smithy.ShapeTypeString, Ext: &e_TargetOptions})
+var s_TemporalStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemporalStatistics, Type: smithy.ShapeTypeString, Ext: &e_TemporalStatistics})
+var sTemporalStatisticsConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemporalStatisticsConfigInput, Members: &mTemporalStatisticsConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eTemporalStatisticsConfigInput})
+var s_TemporalStatisticsListInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemporalStatisticsListInput, Members: &m_TemporalStatisticsListInput, Type: smithy.ShapeTypeList, Ext: &e_TemporalStatisticsListInput})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sTimeRangeFilterInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeRangeFilterInput, Members: &mTimeRangeFilterInput, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eTimeRangeFilterInput})
+var sTimeRangeFilterOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeRangeFilterOutput, Members: &mTimeRangeFilterOutput, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eTimeRangeFilterOutput})
+var s_Unit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Unit, Type: smithy.ShapeTypeString, Ext: &e_Unit})
+var sUserDefined = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserDefined, Members: &mUserDefined, Type: smithy.ShapeTypeStructure, Ext: &eUserDefined})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var s_VectorEnrichmentJobArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VectorEnrichmentJobArn, Type: smithy.ShapeTypeString, Ext: &e_VectorEnrichmentJobArn})
+var sVectorEnrichmentJobConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVectorEnrichmentJobConfig, Members: &mVectorEnrichmentJobConfig, Type: smithy.ShapeTypeUnion, Ext: &eVectorEnrichmentJobConfig})
+var sVectorEnrichmentJobDataSourceConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVectorEnrichmentJobDataSourceConfigInput, Members: &mVectorEnrichmentJobDataSourceConfigInput, Type: smithy.ShapeTypeUnion, Ext: &eVectorEnrichmentJobDataSourceConfigInput})
+var s_VectorEnrichmentJobDocumentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VectorEnrichmentJobDocumentType, Type: smithy.ShapeTypeString, Ext: &e_VectorEnrichmentJobDocumentType})
+var sVectorEnrichmentJobErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVectorEnrichmentJobErrorDetails, Members: &mVectorEnrichmentJobErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &eVectorEnrichmentJobErrorDetails})
+var s_VectorEnrichmentJobErrorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VectorEnrichmentJobErrorType, Type: smithy.ShapeTypeString, Ext: &e_VectorEnrichmentJobErrorType})
+var sVectorEnrichmentJobExportErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVectorEnrichmentJobExportErrorDetails, Members: &mVectorEnrichmentJobExportErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &eVectorEnrichmentJobExportErrorDetails})
+var s_VectorEnrichmentJobExportErrorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VectorEnrichmentJobExportErrorType, Type: smithy.ShapeTypeString, Ext: &e_VectorEnrichmentJobExportErrorType})
+var s_VectorEnrichmentJobExportStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VectorEnrichmentJobExportStatus, Type: smithy.ShapeTypeString, Ext: &e_VectorEnrichmentJobExportStatus})
+var sVectorEnrichmentJobInputConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVectorEnrichmentJobInputConfig, Members: &mVectorEnrichmentJobInputConfig, Type: smithy.ShapeTypeStructure, Ext: &eVectorEnrichmentJobInputConfig})
+var s_VectorEnrichmentJobList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VectorEnrichmentJobList, Members: &m_VectorEnrichmentJobList, Type: smithy.ShapeTypeList, Ext: &e_VectorEnrichmentJobList})
+var sVectorEnrichmentJobS3Data = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVectorEnrichmentJobS3Data, Members: &mVectorEnrichmentJobS3Data, Type: smithy.ShapeTypeStructure, Ext: &eVectorEnrichmentJobS3Data})
+var s_VectorEnrichmentJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VectorEnrichmentJobStatus, Type: smithy.ShapeTypeString, Ext: &e_VectorEnrichmentJobStatus})
+var s_VectorEnrichmentJobType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VectorEnrichmentJobType, Type: smithy.ShapeTypeString, Ext: &e_VectorEnrichmentJobType})
+var sViewOffNadirInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iViewOffNadirInput, Members: &mViewOffNadirInput, Type: smithy.ShapeTypeStructure, Ext: &eViewOffNadirInput})
+var sViewSunAzimuthInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iViewSunAzimuthInput, Members: &mViewSunAzimuthInput, Type: smithy.ShapeTypeStructure, Ext: &eViewSunAzimuthInput})
+var sViewSunElevationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iViewSunElevationInput, Members: &mViewSunElevationInput, Type: smithy.ShapeTypeStructure, Ext: &eViewSunElevationInput})
+var s_ZonalStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ZonalStatistics, Type: smithy.ShapeTypeString, Ext: &e_ZonalStatistics})
+var sZonalStatisticsConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iZonalStatisticsConfigInput, Members: &mZonalStatisticsConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eZonalStatisticsConfigInput})
+var s_ZonalStatisticsListInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ZonalStatisticsListInput, Members: &m_ZonalStatisticsListInput, Type: smithy.ShapeTypeList, Ext: &e_ZonalStatisticsListInput})
+var sDeleteEarthObservationJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEarthObservationJobInput, Members: &mDeleteEarthObservationJobInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteEarthObservationJobInput})
+var sDeleteEarthObservationJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEarthObservationJobOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteEarthObservationJobOutput})
+var sDeleteVectorEnrichmentJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVectorEnrichmentJobInput, Members: &mDeleteVectorEnrichmentJobInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVectorEnrichmentJobInput})
+var sDeleteVectorEnrichmentJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVectorEnrichmentJobOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteVectorEnrichmentJobOutput})
+var sExportEarthObservationJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportEarthObservationJobInput, Members: &mExportEarthObservationJobInput, Type: smithy.ShapeTypeStructure, Ext: &eExportEarthObservationJobInput})
+var sExportEarthObservationJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportEarthObservationJobOutput, Members: &mExportEarthObservationJobOutput, Type: smithy.ShapeTypeStructure, Ext: &eExportEarthObservationJobOutput})
+var sExportVectorEnrichmentJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportVectorEnrichmentJobInput, Members: &mExportVectorEnrichmentJobInput, Type: smithy.ShapeTypeStructure, Ext: &eExportVectorEnrichmentJobInput})
+var sExportVectorEnrichmentJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportVectorEnrichmentJobOutput, Members: &mExportVectorEnrichmentJobOutput, Type: smithy.ShapeTypeStructure, Ext: &eExportVectorEnrichmentJobOutput})
+var sGetEarthObservationJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEarthObservationJobInput, Members: &mGetEarthObservationJobInput, Type: smithy.ShapeTypeStructure, Ext: &eGetEarthObservationJobInput})
+var sGetEarthObservationJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEarthObservationJobOutput, Members: &mGetEarthObservationJobOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetEarthObservationJobOutput})
+var sGetRasterDataCollectionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRasterDataCollectionInput, Members: &mGetRasterDataCollectionInput, Type: smithy.ShapeTypeStructure, Ext: &eGetRasterDataCollectionInput})
+var sGetRasterDataCollectionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRasterDataCollectionOutput, Members: &mGetRasterDataCollectionOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetRasterDataCollectionOutput})
+var sGetTileInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTileInput, Members: &mGetTileInput, Type: smithy.ShapeTypeStructure, Ext: &eGetTileInput})
+var sGetTileOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTileOutput, Members: &mGetTileOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetTileOutput})
+var sGetVectorEnrichmentJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVectorEnrichmentJobInput, Members: &mGetVectorEnrichmentJobInput, Type: smithy.ShapeTypeStructure, Ext: &eGetVectorEnrichmentJobInput})
+var sGetVectorEnrichmentJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVectorEnrichmentJobOutput, Members: &mGetVectorEnrichmentJobOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetVectorEnrichmentJobOutput})
+var sListEarthObservationJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEarthObservationJobInput, Members: &mListEarthObservationJobInput, Type: smithy.ShapeTypeStructure, Ext: &eListEarthObservationJobInput})
+var sListEarthObservationJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEarthObservationJobOutput, Members: &mListEarthObservationJobOutput, Type: smithy.ShapeTypeStructure, Ext: &eListEarthObservationJobOutput})
+var sListRasterDataCollectionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRasterDataCollectionsInput, Members: &mListRasterDataCollectionsInput, Type: smithy.ShapeTypeStructure, Ext: &eListRasterDataCollectionsInput})
+var sListRasterDataCollectionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRasterDataCollectionsOutput, Members: &mListRasterDataCollectionsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListRasterDataCollectionsOutput})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListVectorEnrichmentJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVectorEnrichmentJobInput, Members: &mListVectorEnrichmentJobInput, Type: smithy.ShapeTypeStructure, Ext: &eListVectorEnrichmentJobInput})
+var sListVectorEnrichmentJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVectorEnrichmentJobOutput, Members: &mListVectorEnrichmentJobOutput, Type: smithy.ShapeTypeStructure, Ext: &eListVectorEnrichmentJobOutput})
+var sSearchRasterDataCollectionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchRasterDataCollectionInput, Members: &mSearchRasterDataCollectionInput, Type: smithy.ShapeTypeStructure, Ext: &eSearchRasterDataCollectionInput})
+var sSearchRasterDataCollectionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchRasterDataCollectionOutput, Members: &mSearchRasterDataCollectionOutput, Type: smithy.ShapeTypeStructure, Ext: &eSearchRasterDataCollectionOutput})
+var sStartEarthObservationJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartEarthObservationJobInput, Members: &mStartEarthObservationJobInput, Type: smithy.ShapeTypeStructure, Ext: &eStartEarthObservationJobInput})
+var sStartEarthObservationJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartEarthObservationJobOutput, Members: &mStartEarthObservationJobOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartEarthObservationJobOutput})
+var sStartVectorEnrichmentJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartVectorEnrichmentJobInput, Members: &mStartVectorEnrichmentJobInput, Type: smithy.ShapeTypeStructure, Ext: &eStartVectorEnrichmentJobInput})
+var sStartVectorEnrichmentJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartVectorEnrichmentJobOutput, Members: &mStartVectorEnrichmentJobOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartVectorEnrichmentJobOutput})
+var sStopEarthObservationJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopEarthObservationJobInput, Members: &mStopEarthObservationJobInput, Type: smithy.ShapeTypeStructure, Ext: &eStopEarthObservationJobInput})
+var sStopEarthObservationJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopEarthObservationJobOutput, Type: smithy.ShapeTypeStructure, Ext: &eStopEarthObservationJobOutput})
+var sStopVectorEnrichmentJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopVectorEnrichmentJobInput, Members: &mStopVectorEnrichmentJobInput, Type: smithy.ShapeTypeStructure, Ext: &eStopVectorEnrichmentJobInput})
+var sStopVectorEnrichmentJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopVectorEnrichmentJobOutput, Type: smithy.ShapeTypeStructure, Ext: &eStopVectorEnrichmentJobOutput})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
 
-var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[21]})
-var sAreaOfInterest_AreaOfInterestGeometry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AreaOfInterestGeometry", ID: &iAreaOfInterestGeometry, Members: &mAreaOfInterestGeometry, Type: smithy.ShapeTypeUnion, Ext: &ext[26]})
-var sAreaOfInterestGeometry_PolygonGeometry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolygonGeometry", ID: &iPolygonGeometryInput, Members: &mPolygonGeometryInput, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
-var sAreaOfInterestGeometry_MultiPolygonGeometry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiPolygonGeometry", ID: &iMultiPolygonGeometryInput, Members: &mMultiPolygonGeometryInput, Type: smithy.ShapeTypeStructure, Ext: &ext[29]})
-var s_AssetsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var s_AssetsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iAssetValue, Members: &mAssetValue, Type: smithy.ShapeTypeStructure, Ext: &ext[33]})
-var sAssetValue_Href = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Href", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var sBandMathConfigInput_PredefinedIndices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredefinedIndices", ID: &i_StringListInput, Members: &m_StringListInput, Type: smithy.ShapeTypeList, Ext: &ext[37]})
-var sBandMathConfigInput_CustomIndices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomIndices", ID: &iCustomIndicesInput, Members: &mCustomIndicesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[38]})
-var sCloudRemovalConfigInput_AlgorithmName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlgorithmName", ID: &i_AlgorithmNameCloudRemoval, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var sCloudRemovalConfigInput_InterpolationValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InterpolationValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[43]})
-var sCloudRemovalConfigInput_TargetBands = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetBands", ID: &i_StringListInput, Members: &m_StringListInput, Type: smithy.ShapeTypeList, Ext: &ext[44]})
-var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[47]})
-var sConflictException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[48]})
-var sCustomIndicesInput_Operations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operations", ID: &i_OperationsListInput, Members: &m_OperationsListInput, Type: smithy.ShapeTypeList, Ext: &ext[50]})
-var s_DataCollectionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRasterDataCollectionMetadata, Members: &mRasterDataCollectionMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[53]})
-var sEarthObservationJobErrorDetails_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_EarthObservationJobErrorType, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var sEarthObservationJobErrorDetails_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var s_EarthObservationJobList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListEarthObservationJobOutputConfig, Members: &mListEarthObservationJobOutputConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[62]})
-var s_EarthObservationJobOutputBands_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOutputBand, Members: &mOutputBand, Type: smithy.ShapeTypeStructure, Ext: &ext[64]})
-var sEoCloudCoverInput_LowerBound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LowerBound", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[67]})
-var sEoCloudCoverInput_UpperBound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpperBound", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[68]})
-var sExportErrorDetails_ExportResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportResults", ID: &iExportErrorDetailsOutput, Members: &mExportErrorDetailsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[71]})
-var sExportErrorDetails_ExportSourceImages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportSourceImages", ID: &iExportErrorDetailsOutput, Members: &mExportErrorDetailsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sExportErrorDetailsOutput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_ExportErrorType, Type: smithy.ShapeTypeString, Ext: &ext[74]})
-var sExportErrorDetailsOutput_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[75]})
-var sExportS3DataInput_S3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &ext[78]})
-var sExportS3DataInput_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &ext[79]})
-var sExportVectorEnrichmentJobOutputConfig_S3Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Data", ID: &iVectorEnrichmentJobS3Data, Members: &mVectorEnrichmentJobS3Data, Type: smithy.ShapeTypeStructure, Ext: &ext[81]})
-var sFilter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var sFilter_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[84]})
-var sFilter_Minimum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Minimum", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[85]})
-var sFilter_Maximum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Maximum", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[86]})
-var s_FilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[88]})
-var sGeometry_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[90]})
-var sGeometry_Coordinates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Coordinates", ID: &i_LinearRings, Members: &m_LinearRings, Type: smithy.ShapeTypeList, Ext: &ext[91]})
-var sGeoMosaicConfigInput_AlgorithmName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlgorithmName", ID: &i_AlgorithmNameGeoMosaic, Type: smithy.ShapeTypeString, Ext: &ext[93]})
-var sGeoMosaicConfigInput_TargetBands = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetBands", ID: &i_StringListInput, Members: &m_StringListInput, Type: smithy.ShapeTypeList, Ext: &ext[94]})
-var s_ImageSourceBandList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[97]})
-var sInputConfigInput_PreviousEarthObservationJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreviousEarthObservationJobArn", ID: &i_EarthObservationJobArn, Type: smithy.ShapeTypeString, Ext: &ext[99]})
-var sInputConfigInput_RasterDataCollectionQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RasterDataCollectionQuery", ID: &iRasterDataCollectionQueryInput, Members: &mRasterDataCollectionQueryInput, Type: smithy.ShapeTypeStructure, Ext: &ext[100]})
-var sInputConfigOutput_PreviousEarthObservationJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreviousEarthObservationJobArn", ID: &i_EarthObservationJobArn, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var sInputConfigOutput_RasterDataCollectionQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RasterDataCollectionQuery", ID: &iRasterDataCollectionQueryOutput, Members: &mRasterDataCollectionQueryOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[103]})
-var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[105]})
-var sInternalServerException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[106]})
-var sItemSource_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[108]})
-var sItemSource_Geometry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Geometry", ID: &iGeometry, Members: &mGeometry, Type: smithy.ShapeTypeStructure, Ext: &ext[109]})
-var sItemSource_Assets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Assets", ID: &i_AssetsMap, Members: &m_AssetsMap, Type: smithy.ShapeTypeMap, Ext: &ext[110]})
-var sItemSource_DateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[111]})
-var sItemSource_Properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Properties", ID: &iProperties, Members: &mProperties, Type: smithy.ShapeTypeStructure, Ext: &ext[112]})
-var s_ItemSourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iItemSource, Members: &mItemSource, Type: smithy.ShapeTypeStructure, Ext: &ext[114]})
-var sJobConfigInput_BandMathConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BandMathConfig", ID: &iBandMathConfigInput, Members: &mBandMathConfigInput, Type: smithy.ShapeTypeStructure, Ext: &ext[116]})
-var sJobConfigInput_ResamplingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResamplingConfig", ID: &iResamplingConfigInput, Members: &mResamplingConfigInput, Type: smithy.ShapeTypeStructure, Ext: &ext[117]})
-var sJobConfigInput_TemporalStatisticsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemporalStatisticsConfig", ID: &iTemporalStatisticsConfigInput, Members: &mTemporalStatisticsConfigInput, Type: smithy.ShapeTypeStructure, Ext: &ext[118]})
-var sJobConfigInput_CloudRemovalConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudRemovalConfig", ID: &iCloudRemovalConfigInput, Members: &mCloudRemovalConfigInput, Type: smithy.ShapeTypeStructure, Ext: &ext[119]})
-var sJobConfigInput_ZonalStatisticsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZonalStatisticsConfig", ID: &iZonalStatisticsConfigInput, Members: &mZonalStatisticsConfigInput, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var sJobConfigInput_GeoMosaicConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeoMosaicConfig", ID: &iGeoMosaicConfigInput, Members: &mGeoMosaicConfigInput, Type: smithy.ShapeTypeStructure, Ext: &ext[121]})
-var sJobConfigInput_StackConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StackConfig", ID: &iStackConfigInput, Members: &mStackConfigInput, Type: smithy.ShapeTypeStructure, Ext: &ext[122]})
-var sJobConfigInput_CloudMaskingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudMaskingConfig", ID: &iCloudMaskingConfigInput, Type: smithy.ShapeTypeStructure, Ext: &ext[123]})
-var sJobConfigInput_LandCoverSegmentationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LandCoverSegmentationConfig", ID: &iLandCoverSegmentationConfigInput, Type: smithy.ShapeTypeStructure, Ext: &ext[124]})
-var sLandsatCloudCoverLandInput_LowerBound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LowerBound", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[128]})
-var sLandsatCloudCoverLandInput_UpperBound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpperBound", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[129]})
-var s_LinearRing_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Position, Members: &m_Position, Traits: &t23, Type: smithy.ShapeTypeList, Ext: &ext[131]})
-var s_LinearRings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LinearRing, Members: &m_LinearRing, Type: smithy.ShapeTypeList, Ext: &ext[133]})
-var s_LinearRingsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LinearRings, Members: &m_LinearRings, Type: smithy.ShapeTypeList, Ext: &ext[135]})
-var sListEarthObservationJobOutputConfig_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[137]})
-var sListEarthObservationJobOutputConfig_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var sListEarthObservationJobOutputConfig_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &pTimestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &ext[139]})
-var sListEarthObservationJobOutputConfig_DurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[140]})
-var sListEarthObservationJobOutputConfig_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_EarthObservationJobStatus, Type: smithy.ShapeTypeString, Ext: &ext[141]})
-var sListEarthObservationJobOutputConfig_OperationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[142]})
-var sListEarthObservationJobOutputConfig_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[143]})
-var sListVectorEnrichmentJobOutputConfig_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_VectorEnrichmentJobArn, Type: smithy.ShapeTypeString, Ext: &ext[145]})
-var sListVectorEnrichmentJobOutputConfig_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[146]})
-var sListVectorEnrichmentJobOutputConfig_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_VectorEnrichmentJobType, Type: smithy.ShapeTypeString, Ext: &ext[147]})
-var sListVectorEnrichmentJobOutputConfig_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &pTimestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &ext[148]})
-var sListVectorEnrichmentJobOutputConfig_DurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[149]})
-var sListVectorEnrichmentJobOutputConfig_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_VectorEnrichmentJobStatus, Type: smithy.ShapeTypeString, Ext: &ext[150]})
-var sListVectorEnrichmentJobOutputConfig_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[151]})
-var sMapMatchingConfig_IdAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdAttributeName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[154]})
-var sMapMatchingConfig_YAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YAttributeName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[155]})
-var sMapMatchingConfig_XAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XAttributeName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[156]})
-var sMapMatchingConfig_TimestampAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimestampAttributeName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[157]})
-var sMultiPolygonGeometryInput_Coordinates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Coordinates", ID: &i_LinearRingsList, Members: &m_LinearRingsList, Type: smithy.ShapeTypeList, Ext: &ext[159]})
-var sOperation_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[162]})
-var sOperation_Equation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Equation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[163]})
-var sOperation_OutputType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputType", ID: &i_OutputType, Type: smithy.ShapeTypeString, Ext: &ext[164]})
-var s_OperationsListInput_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOperation, Members: &mOperation, Type: smithy.ShapeTypeStructure, Ext: &ext[166]})
-var sOutputBand_BandName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BandName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[168]})
-var sOutputBand_OutputDataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputDataType", ID: &i_OutputType, Type: smithy.ShapeTypeString, Ext: &ext[169]})
-var sOutputConfigInput_S3Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Data", ID: &iExportS3DataInput, Members: &mExportS3DataInput, Type: smithy.ShapeTypeStructure, Ext: &ext[171]})
-var sOutputResolutionResamplingInput_UserDefined = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserDefined", ID: &iUserDefined, Members: &mUserDefined, Type: smithy.ShapeTypeStructure, Ext: &ext[173]})
-var sOutputResolutionStackInput_Predefined = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Predefined", ID: &i_PredefinedResolution, Type: smithy.ShapeTypeString, Ext: &ext[175]})
-var sOutputResolutionStackInput_UserDefined = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserDefined", ID: &iUserDefined, Members: &mUserDefined, Type: smithy.ShapeTypeStructure, Ext: &ext[176]})
-var sPlatformInput_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[179]})
-var sPlatformInput_ComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComparisonOperator", ID: &i_ComparisonOperator, Type: smithy.ShapeTypeString, Ext: &ext[180]})
-var sPolygonGeometryInput_Coordinates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Coordinates", ID: &i_LinearRings, Members: &m_LinearRings, Type: smithy.ShapeTypeList, Ext: &ext[182]})
-var s_Position_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[184]})
-var sProperties_EoCloudCover = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EoCloudCover", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[187]})
-var sProperties_ViewOffNadir = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewOffNadir", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[188]})
-var sProperties_ViewSunAzimuth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewSunAzimuth", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[189]})
-var sProperties_ViewSunElevation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewSunElevation", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[190]})
-var sProperties_Platform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Platform", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[191]})
-var sProperties_LandsatCloudCoverLand = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LandsatCloudCoverLand", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[192]})
-var sProperty_EoCloudCover = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EoCloudCover", ID: &iEoCloudCoverInput, Members: &mEoCloudCoverInput, Type: smithy.ShapeTypeStructure, Ext: &ext[194]})
-var sProperty_ViewOffNadir = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewOffNadir", ID: &iViewOffNadirInput, Members: &mViewOffNadirInput, Type: smithy.ShapeTypeStructure, Ext: &ext[195]})
-var sProperty_ViewSunAzimuth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewSunAzimuth", ID: &iViewSunAzimuthInput, Members: &mViewSunAzimuthInput, Type: smithy.ShapeTypeStructure, Ext: &ext[196]})
-var sProperty_ViewSunElevation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewSunElevation", ID: &iViewSunElevationInput, Members: &mViewSunElevationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[197]})
-var sProperty_Platform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Platform", ID: &iPlatformInput, Members: &mPlatformInput, Type: smithy.ShapeTypeStructure, Ext: &ext[198]})
-var sProperty_LandsatCloudCoverLand = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LandsatCloudCoverLand", ID: &iLandsatCloudCoverLandInput, Members: &mLandsatCloudCoverLandInput, Type: smithy.ShapeTypeStructure, Ext: &ext[199]})
-var sPropertyFilter_Property = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Property", ID: &iProperty, Members: &mProperty, Type: smithy.ShapeTypeUnion, Ext: &ext[201]})
-var sPropertyFilters_Properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Properties", ID: &i_PropertyFiltersList, Members: &m_PropertyFiltersList, Type: smithy.ShapeTypeList, Ext: &ext[203]})
-var sPropertyFilters_LogicalOperator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogicalOperator", ID: &i_LogicalOperator, Type: smithy.ShapeTypeString, Ext: &ext[204]})
-var s_PropertyFiltersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPropertyFilter, Members: &mPropertyFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[206]})
-var sRasterDataCollectionMetadata_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[208]})
-var sRasterDataCollectionMetadata_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_DataCollectionArn, Type: smithy.ShapeTypeString, Ext: &ext[209]})
-var sRasterDataCollectionMetadata_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_DataCollectionType, Type: smithy.ShapeTypeString, Ext: &ext[210]})
-var sRasterDataCollectionMetadata_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[211]})
-var sRasterDataCollectionMetadata_DescriptionPageUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DescriptionPageUrl", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[212]})
-var sRasterDataCollectionMetadata_SupportedFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportedFilters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &ext[213]})
-var sRasterDataCollectionMetadata_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[214]})
-var sRasterDataCollectionQueryInput_RasterDataCollectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RasterDataCollectionArn", ID: &i_DataCollectionArn, Type: smithy.ShapeTypeString, Ext: &ext[216]})
-var sRasterDataCollectionQueryInput_TimeRangeFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeRangeFilter", ID: &iTimeRangeFilterInput, Members: &mTimeRangeFilterInput, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &ext[217]})
-var sRasterDataCollectionQueryInput_AreaOfInterest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AreaOfInterest", ID: &iAreaOfInterest, Members: &mAreaOfInterest, Type: smithy.ShapeTypeUnion, Ext: &ext[218]})
-var sRasterDataCollectionQueryInput_PropertyFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PropertyFilters", ID: &iPropertyFilters, Members: &mPropertyFilters, Type: smithy.ShapeTypeStructure, Ext: &ext[219]})
-var sRasterDataCollectionQueryOutput_RasterDataCollectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RasterDataCollectionArn", ID: &i_DataCollectionArn, Type: smithy.ShapeTypeString, Ext: &ext[221]})
-var sRasterDataCollectionQueryOutput_RasterDataCollectionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RasterDataCollectionName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[222]})
-var sRasterDataCollectionQueryOutput_TimeRangeFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeRangeFilter", ID: &iTimeRangeFilterOutput, Members: &mTimeRangeFilterOutput, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &ext[223]})
-var sRasterDataCollectionQueryOutput_AreaOfInterest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AreaOfInterest", ID: &iAreaOfInterest, Members: &mAreaOfInterest, Type: smithy.ShapeTypeUnion, Ext: &ext[224]})
-var sRasterDataCollectionQueryOutput_PropertyFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PropertyFilters", ID: &iPropertyFilters, Members: &mPropertyFilters, Type: smithy.ShapeTypeStructure, Ext: &ext[225]})
-var sRasterDataCollectionQueryWithBandFilterInput_TimeRangeFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeRangeFilter", ID: &iTimeRangeFilterInput, Members: &mTimeRangeFilterInput, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &ext[227]})
-var sRasterDataCollectionQueryWithBandFilterInput_AreaOfInterest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AreaOfInterest", ID: &iAreaOfInterest, Members: &mAreaOfInterest, Type: smithy.ShapeTypeUnion, Ext: &ext[228]})
-var sRasterDataCollectionQueryWithBandFilterInput_PropertyFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PropertyFilters", ID: &iPropertyFilters, Members: &mPropertyFilters, Type: smithy.ShapeTypeStructure, Ext: &ext[229]})
-var sRasterDataCollectionQueryWithBandFilterInput_BandFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BandFilter", ID: &i_StringListInput, Members: &m_StringListInput, Type: smithy.ShapeTypeList, Ext: &ext[230]})
-var sResamplingConfigInput_OutputResolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputResolution", ID: &iOutputResolutionResamplingInput, Members: &mOutputResolutionResamplingInput, Type: smithy.ShapeTypeStructure, Ext: &ext[232]})
-var sResamplingConfigInput_AlgorithmName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlgorithmName", ID: &i_AlgorithmNameResampling, Type: smithy.ShapeTypeString, Ext: &ext[233]})
-var sResamplingConfigInput_TargetBands = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetBands", ID: &i_StringListInput, Members: &m_StringListInput, Type: smithy.ShapeTypeList, Ext: &ext[234]})
-var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[236]})
-var sResourceNotFoundException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[237]})
-var sReverseGeocodingConfig_YAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YAttributeName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[239]})
-var sReverseGeocodingConfig_XAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XAttributeName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[240]})
-var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[243]})
-var sServiceQuotaExceededException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[244]})
-var sStackConfigInput_OutputResolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputResolution", ID: &iOutputResolutionStackInput, Members: &mOutputResolutionStackInput, Type: smithy.ShapeTypeStructure, Ext: &ext[247]})
-var sStackConfigInput_TargetBands = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetBands", ID: &i_StringListInput, Members: &m_StringListInput, Type: smithy.ShapeTypeList, Ext: &ext[248]})
-var s_StringListInput_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[250]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[252]})
-var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[254]})
-var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[255]})
-var sTemporalStatisticsConfigInput_GroupBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupBy", ID: &i_GroupBy, Type: smithy.ShapeTypeString, Ext: &ext[259]})
-var sTemporalStatisticsConfigInput_Statistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Statistics", ID: &i_TemporalStatisticsListInput, Members: &m_TemporalStatisticsListInput, Type: smithy.ShapeTypeList, Ext: &ext[260]})
-var sTemporalStatisticsConfigInput_TargetBands = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetBands", ID: &i_StringListInput, Members: &m_StringListInput, Type: smithy.ShapeTypeList, Ext: &ext[261]})
-var s_TemporalStatisticsListInput_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TemporalStatistics, Type: smithy.ShapeTypeString, Ext: &ext[263]})
-var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[265]})
-var sThrottlingException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[266]})
-var sTimeRangeFilterInput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[268]})
-var sTimeRangeFilterInput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[269]})
-var sTimeRangeFilterOutput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &ext[271]})
-var sTimeRangeFilterOutput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &ext[272]})
-var sUserDefined_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[275]})
-var sUserDefined_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &i_Unit, Type: smithy.ShapeTypeString, Ext: &ext[276]})
-var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[278]})
-var sValidationException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[279]})
-var sVectorEnrichmentJobConfig_ReverseGeocodingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReverseGeocodingConfig", ID: &iReverseGeocodingConfig, Members: &mReverseGeocodingConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[282]})
-var sVectorEnrichmentJobConfig_MapMatchingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MapMatchingConfig", ID: &iMapMatchingConfig, Members: &mMapMatchingConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[283]})
-var sVectorEnrichmentJobDataSourceConfigInput_S3Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Data", ID: &iVectorEnrichmentJobS3Data, Members: &mVectorEnrichmentJobS3Data, Type: smithy.ShapeTypeStructure, Ext: &ext[285]})
-var sVectorEnrichmentJobErrorDetails_ErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorType", ID: &i_VectorEnrichmentJobErrorType, Type: smithy.ShapeTypeString, Ext: &ext[288]})
-var sVectorEnrichmentJobErrorDetails_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[289]})
-var sVectorEnrichmentJobExportErrorDetails_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_VectorEnrichmentJobExportErrorType, Type: smithy.ShapeTypeString, Ext: &ext[292]})
-var sVectorEnrichmentJobExportErrorDetails_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[293]})
-var sVectorEnrichmentJobInputConfig_DocumentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentType", ID: &i_VectorEnrichmentJobDocumentType, Type: smithy.ShapeTypeString, Ext: &ext[297]})
-var sVectorEnrichmentJobInputConfig_DataSourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSourceConfig", ID: &iVectorEnrichmentJobDataSourceConfigInput, Members: &mVectorEnrichmentJobDataSourceConfigInput, Type: smithy.ShapeTypeUnion, Ext: &ext[298]})
-var s_VectorEnrichmentJobList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListVectorEnrichmentJobOutputConfig, Members: &mListVectorEnrichmentJobOutputConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[300]})
-var sVectorEnrichmentJobS3Data_S3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &ext[302]})
-var sVectorEnrichmentJobS3Data_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &ext[303]})
-var sViewOffNadirInput_LowerBound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LowerBound", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[307]})
-var sViewOffNadirInput_UpperBound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpperBound", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[308]})
-var sViewSunAzimuthInput_LowerBound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LowerBound", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[310]})
-var sViewSunAzimuthInput_UpperBound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpperBound", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[311]})
-var sViewSunElevationInput_LowerBound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LowerBound", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[313]})
-var sViewSunElevationInput_UpperBound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpperBound", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &ext[314]})
-var sZonalStatisticsConfigInput_ZoneS3Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZoneS3Path", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &ext[317]})
-var sZonalStatisticsConfigInput_Statistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Statistics", ID: &i_ZonalStatisticsListInput, Members: &m_ZonalStatisticsListInput, Type: smithy.ShapeTypeList, Ext: &ext[318]})
-var sZonalStatisticsConfigInput_TargetBands = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetBands", ID: &i_StringListInput, Members: &m_StringListInput, Type: smithy.ShapeTypeList, Ext: &ext[319]})
-var sZonalStatisticsConfigInput_ZoneS3PathKmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZoneS3PathKmsKeyId", ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &ext[320]})
-var s_ZonalStatisticsListInput_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ZonalStatistics, Type: smithy.ShapeTypeString, Ext: &ext[322]})
-var sDeleteEarthObservationJobInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_EarthObservationJobArn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[324]})
-var sDeleteVectorEnrichmentJobInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_VectorEnrichmentJobArn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[327]})
-var sExportEarthObservationJobInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_EarthObservationJobArn, Type: smithy.ShapeTypeString, Ext: &ext[330]})
-var sExportEarthObservationJobInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[331]})
-var sExportEarthObservationJobInput_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[332]})
-var sExportEarthObservationJobInput_OutputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputConfig", ID: &iOutputConfigInput, Members: &mOutputConfigInput, Type: smithy.ShapeTypeStructure, Ext: &ext[333]})
-var sExportEarthObservationJobInput_ExportSourceImages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportSourceImages", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[334]})
-var sExportEarthObservationJobOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_EarthObservationJobArn, Type: smithy.ShapeTypeString, Ext: &ext[336]})
-var sExportEarthObservationJobOutput_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &pTimestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &ext[337]})
-var sExportEarthObservationJobOutput_ExportStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportStatus", ID: &i_EarthObservationJobExportStatus, Type: smithy.ShapeTypeString, Ext: &ext[338]})
-var sExportEarthObservationJobOutput_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[339]})
-var sExportEarthObservationJobOutput_OutputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputConfig", ID: &iOutputConfigInput, Members: &mOutputConfigInput, Type: smithy.ShapeTypeStructure, Ext: &ext[340]})
-var sExportEarthObservationJobOutput_ExportSourceImages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportSourceImages", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[341]})
-var sExportVectorEnrichmentJobInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_VectorEnrichmentJobArn, Type: smithy.ShapeTypeString, Ext: &ext[343]})
-var sExportVectorEnrichmentJobInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[344]})
-var sExportVectorEnrichmentJobInput_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[345]})
-var sExportVectorEnrichmentJobInput_OutputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputConfig", ID: &iExportVectorEnrichmentJobOutputConfig, Members: &mExportVectorEnrichmentJobOutputConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[346]})
-var sExportVectorEnrichmentJobOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_VectorEnrichmentJobArn, Type: smithy.ShapeTypeString, Ext: &ext[348]})
-var sExportVectorEnrichmentJobOutput_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &pTimestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &ext[349]})
-var sExportVectorEnrichmentJobOutput_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[350]})
-var sExportVectorEnrichmentJobOutput_ExportStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportStatus", ID: &i_VectorEnrichmentJobExportStatus, Type: smithy.ShapeTypeString, Ext: &ext[351]})
-var sExportVectorEnrichmentJobOutput_OutputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputConfig", ID: &iExportVectorEnrichmentJobOutputConfig, Members: &mExportVectorEnrichmentJobOutputConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[352]})
-var sGetEarthObservationJobInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_EarthObservationJobArn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[354]})
-var sGetEarthObservationJobOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[356]})
-var sGetEarthObservationJobOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[357]})
-var sGetEarthObservationJobOutput_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &pTimestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &ext[358]})
-var sGetEarthObservationJobOutput_DurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[359]})
-var sGetEarthObservationJobOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_EarthObservationJobStatus, Type: smithy.ShapeTypeString, Ext: &ext[360]})
-var sGetEarthObservationJobOutput_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &ext[361]})
-var sGetEarthObservationJobOutput_InputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputConfig", ID: &iInputConfigOutput, Members: &mInputConfigOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[362]})
-var sGetEarthObservationJobOutput_JobConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobConfig", ID: &iJobConfigInput, Members: &mJobConfigInput, Type: smithy.ShapeTypeUnion, Ext: &ext[363]})
-var sGetEarthObservationJobOutput_OutputBands = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputBands", ID: &i_EarthObservationJobOutputBands, Members: &m_EarthObservationJobOutputBands, Type: smithy.ShapeTypeList, Ext: &ext[364]})
-var sGetEarthObservationJobOutput_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[365]})
-var sGetEarthObservationJobOutput_ErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorDetails", ID: &iEarthObservationJobErrorDetails, Members: &mEarthObservationJobErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[366]})
-var sGetEarthObservationJobOutput_ExportStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportStatus", ID: &i_EarthObservationJobExportStatus, Type: smithy.ShapeTypeString, Ext: &ext[367]})
-var sGetEarthObservationJobOutput_ExportErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportErrorDetails", ID: &iExportErrorDetails, Members: &mExportErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[368]})
-var sGetEarthObservationJobOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[369]})
-var sGetRasterDataCollectionInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_DataCollectionArn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[371]})
-var sGetRasterDataCollectionOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[373]})
-var sGetRasterDataCollectionOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_DataCollectionArn, Type: smithy.ShapeTypeString, Ext: &ext[374]})
-var sGetRasterDataCollectionOutput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_DataCollectionType, Type: smithy.ShapeTypeString, Ext: &ext[375]})
-var sGetRasterDataCollectionOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[376]})
-var sGetRasterDataCollectionOutput_DescriptionPageUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DescriptionPageUrl", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[377]})
-var sGetRasterDataCollectionOutput_SupportedFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportedFilters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &ext[378]})
-var sGetRasterDataCollectionOutput_ImageSourceBands = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageSourceBands", ID: &i_ImageSourceBandList, Members: &m_ImageSourceBandList, Type: smithy.ShapeTypeList, Ext: &ext[379]})
-var sGetRasterDataCollectionOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[380]})
-var sGetTileInput_x = smithy.NewStaticSchema(smithy.StaticSchema{Member: "x", ID: &pInteger, Traits: &t30, Type: smithy.ShapeTypeInteger, Ext: &ext[382]})
-var sGetTileInput_y = smithy.NewStaticSchema(smithy.StaticSchema{Member: "y", ID: &pInteger, Traits: &t30, Type: smithy.ShapeTypeInteger, Ext: &ext[383]})
-var sGetTileInput_z = smithy.NewStaticSchema(smithy.StaticSchema{Member: "z", ID: &pInteger, Traits: &t30, Type: smithy.ShapeTypeInteger, Ext: &ext[384]})
-var sGetTileInput_ImageAssets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageAssets", ID: &i_StringListInput, Members: &m_StringListInput, Traits: &t31, Type: smithy.ShapeTypeList, Ext: &ext[385]})
-var sGetTileInput_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_TargetOptions, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ext[386]})
-var sGetTileInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_EarthObservationJobArn, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[387]})
-var sGetTileInput_ImageMask = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageMask", ID: &pBoolean, Traits: &t34, Type: smithy.ShapeTypeBoolean, Ext: &ext[388]})
-var sGetTileInput_OutputFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputFormat", ID: &pString, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[389]})
-var sGetTileInput_TimeRangeFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeRangeFilter", ID: &pString, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[390]})
-var sGetTileInput_PropertyFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PropertyFilters", ID: &pString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &ext[391]})
-var sGetTileInput_OutputDataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputDataType", ID: &i_OutputType, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &ext[392]})
-var sGetTileInput_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[393]})
-var sGetTileOutput_BinaryFile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BinaryFile", ID: &i_BinaryFile, Traits: &t40, Type: smithy.ShapeTypeBlob, Ext: &ext[395]})
-var sGetVectorEnrichmentJobInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_VectorEnrichmentJobArn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[397]})
-var sGetVectorEnrichmentJobOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[399]})
-var sGetVectorEnrichmentJobOutput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_VectorEnrichmentJobType, Type: smithy.ShapeTypeString, Ext: &ext[400]})
-var sGetVectorEnrichmentJobOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[401]})
-var sGetVectorEnrichmentJobOutput_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &pTimestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &ext[402]})
-var sGetVectorEnrichmentJobOutput_DurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[403]})
-var sGetVectorEnrichmentJobOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_VectorEnrichmentJobStatus, Type: smithy.ShapeTypeString, Ext: &ext[404]})
-var sGetVectorEnrichmentJobOutput_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &ext[405]})
-var sGetVectorEnrichmentJobOutput_InputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputConfig", ID: &iVectorEnrichmentJobInputConfig, Members: &mVectorEnrichmentJobInputConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[406]})
-var sGetVectorEnrichmentJobOutput_JobConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobConfig", ID: &iVectorEnrichmentJobConfig, Members: &mVectorEnrichmentJobConfig, Type: smithy.ShapeTypeUnion, Ext: &ext[407]})
-var sGetVectorEnrichmentJobOutput_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[408]})
-var sGetVectorEnrichmentJobOutput_ErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorDetails", ID: &iVectorEnrichmentJobErrorDetails, Members: &mVectorEnrichmentJobErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[409]})
-var sGetVectorEnrichmentJobOutput_ExportStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportStatus", ID: &i_VectorEnrichmentJobExportStatus, Type: smithy.ShapeTypeString, Ext: &ext[410]})
-var sGetVectorEnrichmentJobOutput_ExportErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportErrorDetails", ID: &iVectorEnrichmentJobExportErrorDetails, Members: &mVectorEnrichmentJobExportErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[411]})
-var sGetVectorEnrichmentJobOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[412]})
-var sListEarthObservationJobInput_StatusEquals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusEquals", ID: &i_EarthObservationJobStatus, Type: smithy.ShapeTypeString, Ext: &ext[414]})
-var sListEarthObservationJobInput_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &i_SortOrder, Type: smithy.ShapeTypeString, Ext: &ext[415]})
-var sListEarthObservationJobInput_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[416]})
-var sListEarthObservationJobInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[417]})
-var sListEarthObservationJobInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[418]})
-var sListEarthObservationJobOutput_EarthObservationJobSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EarthObservationJobSummaries", ID: &i_EarthObservationJobList, Members: &m_EarthObservationJobList, Type: smithy.ShapeTypeList, Ext: &ext[420]})
-var sListEarthObservationJobOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[421]})
-var sListRasterDataCollectionsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &ext[423]})
-var sListRasterDataCollectionsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Traits: &t42, Type: smithy.ShapeTypeInteger, Ext: &ext[424]})
-var sListRasterDataCollectionsOutput_RasterDataCollectionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RasterDataCollectionSummaries", ID: &i_DataCollectionsList, Members: &m_DataCollectionsList, Type: smithy.ShapeTypeList, Ext: &ext[426]})
-var sListRasterDataCollectionsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[427]})
-var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[429]})
-var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[431]})
-var sListVectorEnrichmentJobInput_StatusEquals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusEquals", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[433]})
-var sListVectorEnrichmentJobInput_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &i_SortOrder, Type: smithy.ShapeTypeString, Ext: &ext[434]})
-var sListVectorEnrichmentJobInput_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[435]})
-var sListVectorEnrichmentJobInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[436]})
-var sListVectorEnrichmentJobInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[437]})
-var sListVectorEnrichmentJobOutput_VectorEnrichmentJobSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VectorEnrichmentJobSummaries", ID: &i_VectorEnrichmentJobList, Members: &m_VectorEnrichmentJobList, Type: smithy.ShapeTypeList, Ext: &ext[439]})
-var sListVectorEnrichmentJobOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[440]})
-var sSearchRasterDataCollectionInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_DataCollectionArn, Type: smithy.ShapeTypeString, Ext: &ext[442]})
-var sSearchRasterDataCollectionInput_RasterDataCollectionQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RasterDataCollectionQuery", ID: &iRasterDataCollectionQueryWithBandFilterInput, Members: &mRasterDataCollectionQueryWithBandFilterInput, Type: smithy.ShapeTypeStructure, Ext: &ext[443]})
-var sSearchRasterDataCollectionInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[444]})
-var sSearchRasterDataCollectionOutput_ApproximateResultCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApproximateResultCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[446]})
-var sSearchRasterDataCollectionOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[447]})
-var sSearchRasterDataCollectionOutput_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_ItemSourceList, Members: &m_ItemSourceList, Type: smithy.ShapeTypeList, Ext: &ext[448]})
-var sStartEarthObservationJobInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[450]})
-var sStartEarthObservationJobInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[451]})
-var sStartEarthObservationJobInput_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &ext[452]})
-var sStartEarthObservationJobInput_InputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputConfig", ID: &iInputConfigInput, Members: &mInputConfigInput, Type: smithy.ShapeTypeStructure, Ext: &ext[453]})
-var sStartEarthObservationJobInput_JobConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobConfig", ID: &iJobConfigInput, Members: &mJobConfigInput, Type: smithy.ShapeTypeUnion, Ext: &ext[454]})
-var sStartEarthObservationJobInput_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[455]})
-var sStartEarthObservationJobInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[456]})
-var sStartEarthObservationJobOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[458]})
-var sStartEarthObservationJobOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[459]})
-var sStartEarthObservationJobOutput_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &pTimestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &ext[460]})
-var sStartEarthObservationJobOutput_DurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[461]})
-var sStartEarthObservationJobOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_EarthObservationJobStatus, Type: smithy.ShapeTypeString, Ext: &ext[462]})
-var sStartEarthObservationJobOutput_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &ext[463]})
-var sStartEarthObservationJobOutput_InputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputConfig", ID: &iInputConfigOutput, Members: &mInputConfigOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[464]})
-var sStartEarthObservationJobOutput_JobConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobConfig", ID: &iJobConfigInput, Members: &mJobConfigInput, Type: smithy.ShapeTypeUnion, Ext: &ext[465]})
-var sStartEarthObservationJobOutput_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[466]})
-var sStartEarthObservationJobOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[467]})
-var sStartVectorEnrichmentJobInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[469]})
-var sStartVectorEnrichmentJobInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[470]})
-var sStartVectorEnrichmentJobInput_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &ext[471]})
-var sStartVectorEnrichmentJobInput_InputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputConfig", ID: &iVectorEnrichmentJobInputConfig, Members: &mVectorEnrichmentJobInputConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[472]})
-var sStartVectorEnrichmentJobInput_JobConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobConfig", ID: &iVectorEnrichmentJobConfig, Members: &mVectorEnrichmentJobConfig, Type: smithy.ShapeTypeUnion, Ext: &ext[473]})
-var sStartVectorEnrichmentJobInput_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[474]})
-var sStartVectorEnrichmentJobInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[475]})
-var sStartVectorEnrichmentJobOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[477]})
-var sStartVectorEnrichmentJobOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_VectorEnrichmentJobArn, Type: smithy.ShapeTypeString, Ext: &ext[478]})
-var sStartVectorEnrichmentJobOutput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_VectorEnrichmentJobType, Type: smithy.ShapeTypeString, Ext: &ext[479]})
-var sStartVectorEnrichmentJobOutput_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &pTimestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &ext[480]})
-var sStartVectorEnrichmentJobOutput_DurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[481]})
-var sStartVectorEnrichmentJobOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_VectorEnrichmentJobStatus, Type: smithy.ShapeTypeString, Ext: &ext[482]})
-var sStartVectorEnrichmentJobOutput_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &ext[483]})
-var sStartVectorEnrichmentJobOutput_InputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputConfig", ID: &iVectorEnrichmentJobInputConfig, Members: &mVectorEnrichmentJobInputConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[484]})
-var sStartVectorEnrichmentJobOutput_JobConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobConfig", ID: &iVectorEnrichmentJobConfig, Members: &mVectorEnrichmentJobConfig, Type: smithy.ShapeTypeUnion, Ext: &ext[485]})
-var sStartVectorEnrichmentJobOutput_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[486]})
-var sStartVectorEnrichmentJobOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[487]})
-var sStopEarthObservationJobInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_EarthObservationJobArn, Type: smithy.ShapeTypeString, Ext: &ext[489]})
-var sStopVectorEnrichmentJobInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_VectorEnrichmentJobArn, Type: smithy.ShapeTypeString, Ext: &ext[492]})
-var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[495]})
-var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[496]})
-var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[499]})
-var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t43, Type: smithy.ShapeTypeList, Ext: &ext[500]})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var sAreaOfInterest_AreaOfInterestGeometry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AreaOfInterestGeometry", ID: &iAreaOfInterestGeometry, Members: &mAreaOfInterestGeometry, Type: smithy.ShapeTypeUnion, Ext: &eAreaOfInterest_AreaOfInterestGeometry})
+var sAreaOfInterestGeometry_PolygonGeometry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolygonGeometry", ID: &iPolygonGeometryInput, Members: &mPolygonGeometryInput, Type: smithy.ShapeTypeStructure, Ext: &eAreaOfInterestGeometry_PolygonGeometry})
+var sAreaOfInterestGeometry_MultiPolygonGeometry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiPolygonGeometry", ID: &iMultiPolygonGeometryInput, Members: &mMultiPolygonGeometryInput, Type: smithy.ShapeTypeStructure, Ext: &eAreaOfInterestGeometry_MultiPolygonGeometry})
+var s_AssetsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_AssetsMap_key})
+var s_AssetsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iAssetValue, Members: &mAssetValue, Type: smithy.ShapeTypeStructure, Ext: &e_AssetsMap_value})
+var sAssetValue_Href = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Href", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAssetValue_Href})
+var sBandMathConfigInput_PredefinedIndices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredefinedIndices", ID: &i_StringListInput, Members: &m_StringListInput, Type: smithy.ShapeTypeList, Ext: &eBandMathConfigInput_PredefinedIndices})
+var sBandMathConfigInput_CustomIndices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomIndices", ID: &iCustomIndicesInput, Members: &mCustomIndicesInput, Type: smithy.ShapeTypeStructure, Ext: &eBandMathConfigInput_CustomIndices})
+var sCloudRemovalConfigInput_AlgorithmName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlgorithmName", ID: &i_AlgorithmNameCloudRemoval, Type: smithy.ShapeTypeString, Ext: &eCloudRemovalConfigInput_AlgorithmName})
+var sCloudRemovalConfigInput_InterpolationValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InterpolationValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCloudRemovalConfigInput_InterpolationValue})
+var sCloudRemovalConfigInput_TargetBands = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetBands", ID: &i_StringListInput, Members: &m_StringListInput, Type: smithy.ShapeTypeList, Ext: &eCloudRemovalConfigInput_TargetBands})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var sConflictException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_ResourceId})
+var sCustomIndicesInput_Operations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operations", ID: &i_OperationsListInput, Members: &m_OperationsListInput, Type: smithy.ShapeTypeList, Ext: &eCustomIndicesInput_Operations})
+var s_DataCollectionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRasterDataCollectionMetadata, Members: &mRasterDataCollectionMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_DataCollectionsList_member})
+var sEarthObservationJobErrorDetails_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_EarthObservationJobErrorType, Type: smithy.ShapeTypeString, Ext: &eEarthObservationJobErrorDetails_Type})
+var sEarthObservationJobErrorDetails_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEarthObservationJobErrorDetails_Message})
+var s_EarthObservationJobList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListEarthObservationJobOutputConfig, Members: &mListEarthObservationJobOutputConfig, Type: smithy.ShapeTypeStructure, Ext: &e_EarthObservationJobList_member})
+var s_EarthObservationJobOutputBands_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOutputBand, Members: &mOutputBand, Type: smithy.ShapeTypeStructure, Ext: &e_EarthObservationJobOutputBands_member})
+var sEoCloudCoverInput_LowerBound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LowerBound", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eEoCloudCoverInput_LowerBound})
+var sEoCloudCoverInput_UpperBound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpperBound", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eEoCloudCoverInput_UpperBound})
+var sExportErrorDetails_ExportResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportResults", ID: &iExportErrorDetailsOutput, Members: &mExportErrorDetailsOutput, Type: smithy.ShapeTypeStructure, Ext: &eExportErrorDetails_ExportResults})
+var sExportErrorDetails_ExportSourceImages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportSourceImages", ID: &iExportErrorDetailsOutput, Members: &mExportErrorDetailsOutput, Type: smithy.ShapeTypeStructure, Ext: &eExportErrorDetails_ExportSourceImages})
+var sExportErrorDetailsOutput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_ExportErrorType, Type: smithy.ShapeTypeString, Ext: &eExportErrorDetailsOutput_Type})
+var sExportErrorDetailsOutput_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eExportErrorDetailsOutput_Message})
+var sExportS3DataInput_S3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &eExportS3DataInput_S3Uri})
+var sExportS3DataInput_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &eExportS3DataInput_KmsKeyId})
+var sExportVectorEnrichmentJobOutputConfig_S3Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Data", ID: &iVectorEnrichmentJobS3Data, Members: &mVectorEnrichmentJobS3Data, Type: smithy.ShapeTypeStructure, Ext: &eExportVectorEnrichmentJobOutputConfig_S3Data})
+var sFilter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFilter_Name})
+var sFilter_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFilter_Type})
+var sFilter_Minimum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Minimum", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eFilter_Minimum})
+var sFilter_Maximum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Maximum", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eFilter_Maximum})
+var s_FilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure, Ext: &e_FilterList_member})
+var sGeometry_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGeometry_Type})
+var sGeometry_Coordinates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Coordinates", ID: &i_LinearRings, Members: &m_LinearRings, Type: smithy.ShapeTypeList, Ext: &eGeometry_Coordinates})
+var sGeoMosaicConfigInput_AlgorithmName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlgorithmName", ID: &i_AlgorithmNameGeoMosaic, Type: smithy.ShapeTypeString, Ext: &eGeoMosaicConfigInput_AlgorithmName})
+var sGeoMosaicConfigInput_TargetBands = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetBands", ID: &i_StringListInput, Members: &m_StringListInput, Type: smithy.ShapeTypeList, Ext: &eGeoMosaicConfigInput_TargetBands})
+var s_ImageSourceBandList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_ImageSourceBandList_member})
+var sInputConfigInput_PreviousEarthObservationJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreviousEarthObservationJobArn", ID: &i_EarthObservationJobArn, Type: smithy.ShapeTypeString, Ext: &eInputConfigInput_PreviousEarthObservationJobArn})
+var sInputConfigInput_RasterDataCollectionQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RasterDataCollectionQuery", ID: &iRasterDataCollectionQueryInput, Members: &mRasterDataCollectionQueryInput, Type: smithy.ShapeTypeStructure, Ext: &eInputConfigInput_RasterDataCollectionQuery})
+var sInputConfigOutput_PreviousEarthObservationJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreviousEarthObservationJobArn", ID: &i_EarthObservationJobArn, Type: smithy.ShapeTypeString, Ext: &eInputConfigOutput_PreviousEarthObservationJobArn})
+var sInputConfigOutput_RasterDataCollectionQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RasterDataCollectionQuery", ID: &iRasterDataCollectionQueryOutput, Members: &mRasterDataCollectionQueryOutput, Type: smithy.ShapeTypeStructure, Ext: &eInputConfigOutput_RasterDataCollectionQuery})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var sInternalServerException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_ResourceId})
+var sItemSource_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eItemSource_Id})
+var sItemSource_Geometry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Geometry", ID: &iGeometry, Members: &mGeometry, Type: smithy.ShapeTypeStructure, Ext: &eItemSource_Geometry})
+var sItemSource_Assets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Assets", ID: &i_AssetsMap, Members: &m_AssetsMap, Type: smithy.ShapeTypeMap, Ext: &eItemSource_Assets})
+var sItemSource_DateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eItemSource_DateTime})
+var sItemSource_Properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Properties", ID: &iProperties, Members: &mProperties, Type: smithy.ShapeTypeStructure, Ext: &eItemSource_Properties})
+var s_ItemSourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iItemSource, Members: &mItemSource, Type: smithy.ShapeTypeStructure, Ext: &e_ItemSourceList_member})
+var sJobConfigInput_BandMathConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BandMathConfig", ID: &iBandMathConfigInput, Members: &mBandMathConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eJobConfigInput_BandMathConfig})
+var sJobConfigInput_ResamplingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResamplingConfig", ID: &iResamplingConfigInput, Members: &mResamplingConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eJobConfigInput_ResamplingConfig})
+var sJobConfigInput_TemporalStatisticsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemporalStatisticsConfig", ID: &iTemporalStatisticsConfigInput, Members: &mTemporalStatisticsConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eJobConfigInput_TemporalStatisticsConfig})
+var sJobConfigInput_CloudRemovalConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudRemovalConfig", ID: &iCloudRemovalConfigInput, Members: &mCloudRemovalConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eJobConfigInput_CloudRemovalConfig})
+var sJobConfigInput_ZonalStatisticsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZonalStatisticsConfig", ID: &iZonalStatisticsConfigInput, Members: &mZonalStatisticsConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eJobConfigInput_ZonalStatisticsConfig})
+var sJobConfigInput_GeoMosaicConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeoMosaicConfig", ID: &iGeoMosaicConfigInput, Members: &mGeoMosaicConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eJobConfigInput_GeoMosaicConfig})
+var sJobConfigInput_StackConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StackConfig", ID: &iStackConfigInput, Members: &mStackConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eJobConfigInput_StackConfig})
+var sJobConfigInput_CloudMaskingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudMaskingConfig", ID: &iCloudMaskingConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eJobConfigInput_CloudMaskingConfig})
+var sJobConfigInput_LandCoverSegmentationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LandCoverSegmentationConfig", ID: &iLandCoverSegmentationConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eJobConfigInput_LandCoverSegmentationConfig})
+var sLandsatCloudCoverLandInput_LowerBound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LowerBound", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eLandsatCloudCoverLandInput_LowerBound})
+var sLandsatCloudCoverLandInput_UpperBound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpperBound", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eLandsatCloudCoverLandInput_UpperBound})
+var s_LinearRing_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Position, Members: &m_Position, Traits: &t23, Type: smithy.ShapeTypeList, Ext: &e_LinearRing_member})
+var s_LinearRings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LinearRing, Members: &m_LinearRing, Type: smithy.ShapeTypeList, Ext: &e_LinearRings_member})
+var s_LinearRingsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LinearRings, Members: &m_LinearRings, Type: smithy.ShapeTypeList, Ext: &e_LinearRingsList_member})
+var sListEarthObservationJobOutputConfig_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListEarthObservationJobOutputConfig_Arn})
+var sListEarthObservationJobOutputConfig_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListEarthObservationJobOutputConfig_Name})
+var sListEarthObservationJobOutputConfig_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &pTimestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eListEarthObservationJobOutputConfig_CreationTime})
+var sListEarthObservationJobOutputConfig_DurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListEarthObservationJobOutputConfig_DurationInSeconds})
+var sListEarthObservationJobOutputConfig_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_EarthObservationJobStatus, Type: smithy.ShapeTypeString, Ext: &eListEarthObservationJobOutputConfig_Status})
+var sListEarthObservationJobOutputConfig_OperationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListEarthObservationJobOutputConfig_OperationType})
+var sListEarthObservationJobOutputConfig_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eListEarthObservationJobOutputConfig_Tags})
+var sListVectorEnrichmentJobOutputConfig_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_VectorEnrichmentJobArn, Type: smithy.ShapeTypeString, Ext: &eListVectorEnrichmentJobOutputConfig_Arn})
+var sListVectorEnrichmentJobOutputConfig_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListVectorEnrichmentJobOutputConfig_Name})
+var sListVectorEnrichmentJobOutputConfig_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_VectorEnrichmentJobType, Type: smithy.ShapeTypeString, Ext: &eListVectorEnrichmentJobOutputConfig_Type})
+var sListVectorEnrichmentJobOutputConfig_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &pTimestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eListVectorEnrichmentJobOutputConfig_CreationTime})
+var sListVectorEnrichmentJobOutputConfig_DurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListVectorEnrichmentJobOutputConfig_DurationInSeconds})
+var sListVectorEnrichmentJobOutputConfig_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_VectorEnrichmentJobStatus, Type: smithy.ShapeTypeString, Ext: &eListVectorEnrichmentJobOutputConfig_Status})
+var sListVectorEnrichmentJobOutputConfig_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eListVectorEnrichmentJobOutputConfig_Tags})
+var sMapMatchingConfig_IdAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdAttributeName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMapMatchingConfig_IdAttributeName})
+var sMapMatchingConfig_YAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YAttributeName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMapMatchingConfig_YAttributeName})
+var sMapMatchingConfig_XAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XAttributeName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMapMatchingConfig_XAttributeName})
+var sMapMatchingConfig_TimestampAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimestampAttributeName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMapMatchingConfig_TimestampAttributeName})
+var sMultiPolygonGeometryInput_Coordinates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Coordinates", ID: &i_LinearRingsList, Members: &m_LinearRingsList, Type: smithy.ShapeTypeList, Ext: &eMultiPolygonGeometryInput_Coordinates})
+var sOperation_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eOperation_Name})
+var sOperation_Equation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Equation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eOperation_Equation})
+var sOperation_OutputType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputType", ID: &i_OutputType, Type: smithy.ShapeTypeString, Ext: &eOperation_OutputType})
+var s_OperationsListInput_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOperation, Members: &mOperation, Type: smithy.ShapeTypeStructure, Ext: &e_OperationsListInput_member})
+var sOutputBand_BandName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BandName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eOutputBand_BandName})
+var sOutputBand_OutputDataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputDataType", ID: &i_OutputType, Type: smithy.ShapeTypeString, Ext: &eOutputBand_OutputDataType})
+var sOutputConfigInput_S3Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Data", ID: &iExportS3DataInput, Members: &mExportS3DataInput, Type: smithy.ShapeTypeStructure, Ext: &eOutputConfigInput_S3Data})
+var sOutputResolutionResamplingInput_UserDefined = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserDefined", ID: &iUserDefined, Members: &mUserDefined, Type: smithy.ShapeTypeStructure, Ext: &eOutputResolutionResamplingInput_UserDefined})
+var sOutputResolutionStackInput_Predefined = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Predefined", ID: &i_PredefinedResolution, Type: smithy.ShapeTypeString, Ext: &eOutputResolutionStackInput_Predefined})
+var sOutputResolutionStackInput_UserDefined = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserDefined", ID: &iUserDefined, Members: &mUserDefined, Type: smithy.ShapeTypeStructure, Ext: &eOutputResolutionStackInput_UserDefined})
+var sPlatformInput_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePlatformInput_Value})
+var sPlatformInput_ComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComparisonOperator", ID: &i_ComparisonOperator, Type: smithy.ShapeTypeString, Ext: &ePlatformInput_ComparisonOperator})
+var sPolygonGeometryInput_Coordinates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Coordinates", ID: &i_LinearRings, Members: &m_LinearRings, Type: smithy.ShapeTypeList, Ext: &ePolygonGeometryInput_Coordinates})
+var s_Position_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &e_Position_member})
+var sProperties_EoCloudCover = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EoCloudCover", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eProperties_EoCloudCover})
+var sProperties_ViewOffNadir = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewOffNadir", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eProperties_ViewOffNadir})
+var sProperties_ViewSunAzimuth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewSunAzimuth", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eProperties_ViewSunAzimuth})
+var sProperties_ViewSunElevation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewSunElevation", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eProperties_ViewSunElevation})
+var sProperties_Platform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Platform", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eProperties_Platform})
+var sProperties_LandsatCloudCoverLand = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LandsatCloudCoverLand", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eProperties_LandsatCloudCoverLand})
+var sProperty_EoCloudCover = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EoCloudCover", ID: &iEoCloudCoverInput, Members: &mEoCloudCoverInput, Type: smithy.ShapeTypeStructure, Ext: &eProperty_EoCloudCover})
+var sProperty_ViewOffNadir = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewOffNadir", ID: &iViewOffNadirInput, Members: &mViewOffNadirInput, Type: smithy.ShapeTypeStructure, Ext: &eProperty_ViewOffNadir})
+var sProperty_ViewSunAzimuth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewSunAzimuth", ID: &iViewSunAzimuthInput, Members: &mViewSunAzimuthInput, Type: smithy.ShapeTypeStructure, Ext: &eProperty_ViewSunAzimuth})
+var sProperty_ViewSunElevation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewSunElevation", ID: &iViewSunElevationInput, Members: &mViewSunElevationInput, Type: smithy.ShapeTypeStructure, Ext: &eProperty_ViewSunElevation})
+var sProperty_Platform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Platform", ID: &iPlatformInput, Members: &mPlatformInput, Type: smithy.ShapeTypeStructure, Ext: &eProperty_Platform})
+var sProperty_LandsatCloudCoverLand = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LandsatCloudCoverLand", ID: &iLandsatCloudCoverLandInput, Members: &mLandsatCloudCoverLandInput, Type: smithy.ShapeTypeStructure, Ext: &eProperty_LandsatCloudCoverLand})
+var sPropertyFilter_Property = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Property", ID: &iProperty, Members: &mProperty, Type: smithy.ShapeTypeUnion, Ext: &ePropertyFilter_Property})
+var sPropertyFilters_Properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Properties", ID: &i_PropertyFiltersList, Members: &m_PropertyFiltersList, Type: smithy.ShapeTypeList, Ext: &ePropertyFilters_Properties})
+var sPropertyFilters_LogicalOperator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogicalOperator", ID: &i_LogicalOperator, Type: smithy.ShapeTypeString, Ext: &ePropertyFilters_LogicalOperator})
+var s_PropertyFiltersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPropertyFilter, Members: &mPropertyFilter, Type: smithy.ShapeTypeStructure, Ext: &e_PropertyFiltersList_member})
+var sRasterDataCollectionMetadata_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRasterDataCollectionMetadata_Name})
+var sRasterDataCollectionMetadata_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_DataCollectionArn, Type: smithy.ShapeTypeString, Ext: &eRasterDataCollectionMetadata_Arn})
+var sRasterDataCollectionMetadata_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_DataCollectionType, Type: smithy.ShapeTypeString, Ext: &eRasterDataCollectionMetadata_Type})
+var sRasterDataCollectionMetadata_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRasterDataCollectionMetadata_Description})
+var sRasterDataCollectionMetadata_DescriptionPageUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DescriptionPageUrl", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRasterDataCollectionMetadata_DescriptionPageUrl})
+var sRasterDataCollectionMetadata_SupportedFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportedFilters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eRasterDataCollectionMetadata_SupportedFilters})
+var sRasterDataCollectionMetadata_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eRasterDataCollectionMetadata_Tags})
+var sRasterDataCollectionQueryInput_RasterDataCollectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RasterDataCollectionArn", ID: &i_DataCollectionArn, Type: smithy.ShapeTypeString, Ext: &eRasterDataCollectionQueryInput_RasterDataCollectionArn})
+var sRasterDataCollectionQueryInput_TimeRangeFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeRangeFilter", ID: &iTimeRangeFilterInput, Members: &mTimeRangeFilterInput, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &eRasterDataCollectionQueryInput_TimeRangeFilter})
+var sRasterDataCollectionQueryInput_AreaOfInterest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AreaOfInterest", ID: &iAreaOfInterest, Members: &mAreaOfInterest, Type: smithy.ShapeTypeUnion, Ext: &eRasterDataCollectionQueryInput_AreaOfInterest})
+var sRasterDataCollectionQueryInput_PropertyFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PropertyFilters", ID: &iPropertyFilters, Members: &mPropertyFilters, Type: smithy.ShapeTypeStructure, Ext: &eRasterDataCollectionQueryInput_PropertyFilters})
+var sRasterDataCollectionQueryOutput_RasterDataCollectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RasterDataCollectionArn", ID: &i_DataCollectionArn, Type: smithy.ShapeTypeString, Ext: &eRasterDataCollectionQueryOutput_RasterDataCollectionArn})
+var sRasterDataCollectionQueryOutput_RasterDataCollectionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RasterDataCollectionName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRasterDataCollectionQueryOutput_RasterDataCollectionName})
+var sRasterDataCollectionQueryOutput_TimeRangeFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeRangeFilter", ID: &iTimeRangeFilterOutput, Members: &mTimeRangeFilterOutput, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &eRasterDataCollectionQueryOutput_TimeRangeFilter})
+var sRasterDataCollectionQueryOutput_AreaOfInterest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AreaOfInterest", ID: &iAreaOfInterest, Members: &mAreaOfInterest, Type: smithy.ShapeTypeUnion, Ext: &eRasterDataCollectionQueryOutput_AreaOfInterest})
+var sRasterDataCollectionQueryOutput_PropertyFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PropertyFilters", ID: &iPropertyFilters, Members: &mPropertyFilters, Type: smithy.ShapeTypeStructure, Ext: &eRasterDataCollectionQueryOutput_PropertyFilters})
+var sRasterDataCollectionQueryWithBandFilterInput_TimeRangeFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeRangeFilter", ID: &iTimeRangeFilterInput, Members: &mTimeRangeFilterInput, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &eRasterDataCollectionQueryWithBandFilterInput_TimeRangeFilter})
+var sRasterDataCollectionQueryWithBandFilterInput_AreaOfInterest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AreaOfInterest", ID: &iAreaOfInterest, Members: &mAreaOfInterest, Type: smithy.ShapeTypeUnion, Ext: &eRasterDataCollectionQueryWithBandFilterInput_AreaOfInterest})
+var sRasterDataCollectionQueryWithBandFilterInput_PropertyFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PropertyFilters", ID: &iPropertyFilters, Members: &mPropertyFilters, Type: smithy.ShapeTypeStructure, Ext: &eRasterDataCollectionQueryWithBandFilterInput_PropertyFilters})
+var sRasterDataCollectionQueryWithBandFilterInput_BandFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BandFilter", ID: &i_StringListInput, Members: &m_StringListInput, Type: smithy.ShapeTypeList, Ext: &eRasterDataCollectionQueryWithBandFilterInput_BandFilter})
+var sResamplingConfigInput_OutputResolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputResolution", ID: &iOutputResolutionResamplingInput, Members: &mOutputResolutionResamplingInput, Type: smithy.ShapeTypeStructure, Ext: &eResamplingConfigInput_OutputResolution})
+var sResamplingConfigInput_AlgorithmName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlgorithmName", ID: &i_AlgorithmNameResampling, Type: smithy.ShapeTypeString, Ext: &eResamplingConfigInput_AlgorithmName})
+var sResamplingConfigInput_TargetBands = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetBands", ID: &i_StringListInput, Members: &m_StringListInput, Type: smithy.ShapeTypeList, Ext: &eResamplingConfigInput_TargetBands})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sResourceNotFoundException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_ResourceId})
+var sReverseGeocodingConfig_YAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YAttributeName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eReverseGeocodingConfig_YAttributeName})
+var sReverseGeocodingConfig_XAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XAttributeName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eReverseGeocodingConfig_XAttributeName})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_Message})
+var sServiceQuotaExceededException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_ResourceId})
+var sStackConfigInput_OutputResolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputResolution", ID: &iOutputResolutionStackInput, Members: &mOutputResolutionStackInput, Type: smithy.ShapeTypeStructure, Ext: &eStackConfigInput_OutputResolution})
+var sStackConfigInput_TargetBands = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetBands", ID: &i_StringListInput, Members: &m_StringListInput, Type: smithy.ShapeTypeList, Ext: &eStackConfigInput_TargetBands})
+var s_StringListInput_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_StringListInput_member})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_Tags_key})
+var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_Tags_value})
+var sTemporalStatisticsConfigInput_GroupBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupBy", ID: &i_GroupBy, Type: smithy.ShapeTypeString, Ext: &eTemporalStatisticsConfigInput_GroupBy})
+var sTemporalStatisticsConfigInput_Statistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Statistics", ID: &i_TemporalStatisticsListInput, Members: &m_TemporalStatisticsListInput, Type: smithy.ShapeTypeList, Ext: &eTemporalStatisticsConfigInput_Statistics})
+var sTemporalStatisticsConfigInput_TargetBands = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetBands", ID: &i_StringListInput, Members: &m_StringListInput, Type: smithy.ShapeTypeList, Ext: &eTemporalStatisticsConfigInput_TargetBands})
+var s_TemporalStatisticsListInput_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TemporalStatistics, Type: smithy.ShapeTypeString, Ext: &e_TemporalStatisticsListInput_member})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var sThrottlingException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_ResourceId})
+var sTimeRangeFilterInput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTimeRangeFilterInput_StartTime})
+var sTimeRangeFilterInput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eTimeRangeFilterInput_EndTime})
+var sTimeRangeFilterOutput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eTimeRangeFilterOutput_StartTime})
+var sTimeRangeFilterOutput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eTimeRangeFilterOutput_EndTime})
+var sUserDefined_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eUserDefined_Value})
+var sUserDefined_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &i_Unit, Type: smithy.ShapeTypeString, Ext: &eUserDefined_Unit})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sValidationException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_ResourceId})
+var sVectorEnrichmentJobConfig_ReverseGeocodingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReverseGeocodingConfig", ID: &iReverseGeocodingConfig, Members: &mReverseGeocodingConfig, Type: smithy.ShapeTypeStructure, Ext: &eVectorEnrichmentJobConfig_ReverseGeocodingConfig})
+var sVectorEnrichmentJobConfig_MapMatchingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MapMatchingConfig", ID: &iMapMatchingConfig, Members: &mMapMatchingConfig, Type: smithy.ShapeTypeStructure, Ext: &eVectorEnrichmentJobConfig_MapMatchingConfig})
+var sVectorEnrichmentJobDataSourceConfigInput_S3Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Data", ID: &iVectorEnrichmentJobS3Data, Members: &mVectorEnrichmentJobS3Data, Type: smithy.ShapeTypeStructure, Ext: &eVectorEnrichmentJobDataSourceConfigInput_S3Data})
+var sVectorEnrichmentJobErrorDetails_ErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorType", ID: &i_VectorEnrichmentJobErrorType, Type: smithy.ShapeTypeString, Ext: &eVectorEnrichmentJobErrorDetails_ErrorType})
+var sVectorEnrichmentJobErrorDetails_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eVectorEnrichmentJobErrorDetails_ErrorMessage})
+var sVectorEnrichmentJobExportErrorDetails_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_VectorEnrichmentJobExportErrorType, Type: smithy.ShapeTypeString, Ext: &eVectorEnrichmentJobExportErrorDetails_Type})
+var sVectorEnrichmentJobExportErrorDetails_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eVectorEnrichmentJobExportErrorDetails_Message})
+var sVectorEnrichmentJobInputConfig_DocumentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentType", ID: &i_VectorEnrichmentJobDocumentType, Type: smithy.ShapeTypeString, Ext: &eVectorEnrichmentJobInputConfig_DocumentType})
+var sVectorEnrichmentJobInputConfig_DataSourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSourceConfig", ID: &iVectorEnrichmentJobDataSourceConfigInput, Members: &mVectorEnrichmentJobDataSourceConfigInput, Type: smithy.ShapeTypeUnion, Ext: &eVectorEnrichmentJobInputConfig_DataSourceConfig})
+var s_VectorEnrichmentJobList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListVectorEnrichmentJobOutputConfig, Members: &mListVectorEnrichmentJobOutputConfig, Type: smithy.ShapeTypeStructure, Ext: &e_VectorEnrichmentJobList_member})
+var sVectorEnrichmentJobS3Data_S3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &eVectorEnrichmentJobS3Data_S3Uri})
+var sVectorEnrichmentJobS3Data_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &eVectorEnrichmentJobS3Data_KmsKeyId})
+var sViewOffNadirInput_LowerBound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LowerBound", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eViewOffNadirInput_LowerBound})
+var sViewOffNadirInput_UpperBound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpperBound", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eViewOffNadirInput_UpperBound})
+var sViewSunAzimuthInput_LowerBound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LowerBound", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eViewSunAzimuthInput_LowerBound})
+var sViewSunAzimuthInput_UpperBound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpperBound", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eViewSunAzimuthInput_UpperBound})
+var sViewSunElevationInput_LowerBound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LowerBound", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eViewSunElevationInput_LowerBound})
+var sViewSunElevationInput_UpperBound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpperBound", ID: &pFloat, Type: smithy.ShapeTypeFloat, Ext: &eViewSunElevationInput_UpperBound})
+var sZonalStatisticsConfigInput_ZoneS3Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZoneS3Path", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &eZonalStatisticsConfigInput_ZoneS3Path})
+var sZonalStatisticsConfigInput_Statistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Statistics", ID: &i_ZonalStatisticsListInput, Members: &m_ZonalStatisticsListInput, Type: smithy.ShapeTypeList, Ext: &eZonalStatisticsConfigInput_Statistics})
+var sZonalStatisticsConfigInput_TargetBands = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetBands", ID: &i_StringListInput, Members: &m_StringListInput, Type: smithy.ShapeTypeList, Ext: &eZonalStatisticsConfigInput_TargetBands})
+var sZonalStatisticsConfigInput_ZoneS3PathKmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZoneS3PathKmsKeyId", ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &eZonalStatisticsConfigInput_ZoneS3PathKmsKeyId})
+var s_ZonalStatisticsListInput_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ZonalStatistics, Type: smithy.ShapeTypeString, Ext: &e_ZonalStatisticsListInput_member})
+var sDeleteEarthObservationJobInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_EarthObservationJobArn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eDeleteEarthObservationJobInput_Arn})
+var sDeleteVectorEnrichmentJobInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_VectorEnrichmentJobArn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eDeleteVectorEnrichmentJobInput_Arn})
+var sExportEarthObservationJobInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_EarthObservationJobArn, Type: smithy.ShapeTypeString, Ext: &eExportEarthObservationJobInput_Arn})
+var sExportEarthObservationJobInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eExportEarthObservationJobInput_ClientToken})
+var sExportEarthObservationJobInput_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &eExportEarthObservationJobInput_ExecutionRoleArn})
+var sExportEarthObservationJobInput_OutputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputConfig", ID: &iOutputConfigInput, Members: &mOutputConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eExportEarthObservationJobInput_OutputConfig})
+var sExportEarthObservationJobInput_ExportSourceImages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportSourceImages", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eExportEarthObservationJobInput_ExportSourceImages})
+var sExportEarthObservationJobOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_EarthObservationJobArn, Type: smithy.ShapeTypeString, Ext: &eExportEarthObservationJobOutput_Arn})
+var sExportEarthObservationJobOutput_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &pTimestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eExportEarthObservationJobOutput_CreationTime})
+var sExportEarthObservationJobOutput_ExportStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportStatus", ID: &i_EarthObservationJobExportStatus, Type: smithy.ShapeTypeString, Ext: &eExportEarthObservationJobOutput_ExportStatus})
+var sExportEarthObservationJobOutput_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &eExportEarthObservationJobOutput_ExecutionRoleArn})
+var sExportEarthObservationJobOutput_OutputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputConfig", ID: &iOutputConfigInput, Members: &mOutputConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eExportEarthObservationJobOutput_OutputConfig})
+var sExportEarthObservationJobOutput_ExportSourceImages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportSourceImages", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eExportEarthObservationJobOutput_ExportSourceImages})
+var sExportVectorEnrichmentJobInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_VectorEnrichmentJobArn, Type: smithy.ShapeTypeString, Ext: &eExportVectorEnrichmentJobInput_Arn})
+var sExportVectorEnrichmentJobInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eExportVectorEnrichmentJobInput_ClientToken})
+var sExportVectorEnrichmentJobInput_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &eExportVectorEnrichmentJobInput_ExecutionRoleArn})
+var sExportVectorEnrichmentJobInput_OutputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputConfig", ID: &iExportVectorEnrichmentJobOutputConfig, Members: &mExportVectorEnrichmentJobOutputConfig, Type: smithy.ShapeTypeStructure, Ext: &eExportVectorEnrichmentJobInput_OutputConfig})
+var sExportVectorEnrichmentJobOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_VectorEnrichmentJobArn, Type: smithy.ShapeTypeString, Ext: &eExportVectorEnrichmentJobOutput_Arn})
+var sExportVectorEnrichmentJobOutput_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &pTimestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eExportVectorEnrichmentJobOutput_CreationTime})
+var sExportVectorEnrichmentJobOutput_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &eExportVectorEnrichmentJobOutput_ExecutionRoleArn})
+var sExportVectorEnrichmentJobOutput_ExportStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportStatus", ID: &i_VectorEnrichmentJobExportStatus, Type: smithy.ShapeTypeString, Ext: &eExportVectorEnrichmentJobOutput_ExportStatus})
+var sExportVectorEnrichmentJobOutput_OutputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputConfig", ID: &iExportVectorEnrichmentJobOutputConfig, Members: &mExportVectorEnrichmentJobOutputConfig, Type: smithy.ShapeTypeStructure, Ext: &eExportVectorEnrichmentJobOutput_OutputConfig})
+var sGetEarthObservationJobInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_EarthObservationJobArn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eGetEarthObservationJobInput_Arn})
+var sGetEarthObservationJobOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetEarthObservationJobOutput_Arn})
+var sGetEarthObservationJobOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetEarthObservationJobOutput_Name})
+var sGetEarthObservationJobOutput_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &pTimestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eGetEarthObservationJobOutput_CreationTime})
+var sGetEarthObservationJobOutput_DurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetEarthObservationJobOutput_DurationInSeconds})
+var sGetEarthObservationJobOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_EarthObservationJobStatus, Type: smithy.ShapeTypeString, Ext: &eGetEarthObservationJobOutput_Status})
+var sGetEarthObservationJobOutput_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &eGetEarthObservationJobOutput_KmsKeyId})
+var sGetEarthObservationJobOutput_InputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputConfig", ID: &iInputConfigOutput, Members: &mInputConfigOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetEarthObservationJobOutput_InputConfig})
+var sGetEarthObservationJobOutput_JobConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobConfig", ID: &iJobConfigInput, Members: &mJobConfigInput, Type: smithy.ShapeTypeUnion, Ext: &eGetEarthObservationJobOutput_JobConfig})
+var sGetEarthObservationJobOutput_OutputBands = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputBands", ID: &i_EarthObservationJobOutputBands, Members: &m_EarthObservationJobOutputBands, Type: smithy.ShapeTypeList, Ext: &eGetEarthObservationJobOutput_OutputBands})
+var sGetEarthObservationJobOutput_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &eGetEarthObservationJobOutput_ExecutionRoleArn})
+var sGetEarthObservationJobOutput_ErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorDetails", ID: &iEarthObservationJobErrorDetails, Members: &mEarthObservationJobErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &eGetEarthObservationJobOutput_ErrorDetails})
+var sGetEarthObservationJobOutput_ExportStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportStatus", ID: &i_EarthObservationJobExportStatus, Type: smithy.ShapeTypeString, Ext: &eGetEarthObservationJobOutput_ExportStatus})
+var sGetEarthObservationJobOutput_ExportErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportErrorDetails", ID: &iExportErrorDetails, Members: &mExportErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &eGetEarthObservationJobOutput_ExportErrorDetails})
+var sGetEarthObservationJobOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eGetEarthObservationJobOutput_Tags})
+var sGetRasterDataCollectionInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_DataCollectionArn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eGetRasterDataCollectionInput_Arn})
+var sGetRasterDataCollectionOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetRasterDataCollectionOutput_Name})
+var sGetRasterDataCollectionOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_DataCollectionArn, Type: smithy.ShapeTypeString, Ext: &eGetRasterDataCollectionOutput_Arn})
+var sGetRasterDataCollectionOutput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_DataCollectionType, Type: smithy.ShapeTypeString, Ext: &eGetRasterDataCollectionOutput_Type})
+var sGetRasterDataCollectionOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetRasterDataCollectionOutput_Description})
+var sGetRasterDataCollectionOutput_DescriptionPageUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DescriptionPageUrl", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetRasterDataCollectionOutput_DescriptionPageUrl})
+var sGetRasterDataCollectionOutput_SupportedFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportedFilters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eGetRasterDataCollectionOutput_SupportedFilters})
+var sGetRasterDataCollectionOutput_ImageSourceBands = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageSourceBands", ID: &i_ImageSourceBandList, Members: &m_ImageSourceBandList, Type: smithy.ShapeTypeList, Ext: &eGetRasterDataCollectionOutput_ImageSourceBands})
+var sGetRasterDataCollectionOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eGetRasterDataCollectionOutput_Tags})
+var sGetTileInput_x = smithy.NewStaticSchema(smithy.StaticSchema{Member: "x", ID: &pInteger, Traits: &t30, Type: smithy.ShapeTypeInteger, Ext: &eGetTileInput_x})
+var sGetTileInput_y = smithy.NewStaticSchema(smithy.StaticSchema{Member: "y", ID: &pInteger, Traits: &t30, Type: smithy.ShapeTypeInteger, Ext: &eGetTileInput_y})
+var sGetTileInput_z = smithy.NewStaticSchema(smithy.StaticSchema{Member: "z", ID: &pInteger, Traits: &t30, Type: smithy.ShapeTypeInteger, Ext: &eGetTileInput_z})
+var sGetTileInput_ImageAssets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageAssets", ID: &i_StringListInput, Members: &m_StringListInput, Traits: &t31, Type: smithy.ShapeTypeList, Ext: &eGetTileInput_ImageAssets})
+var sGetTileInput_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_TargetOptions, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eGetTileInput_Target})
+var sGetTileInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_EarthObservationJobArn, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eGetTileInput_Arn})
+var sGetTileInput_ImageMask = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageMask", ID: &pBoolean, Traits: &t34, Type: smithy.ShapeTypeBoolean, Ext: &eGetTileInput_ImageMask})
+var sGetTileInput_OutputFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputFormat", ID: &pString, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eGetTileInput_OutputFormat})
+var sGetTileInput_TimeRangeFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeRangeFilter", ID: &pString, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eGetTileInput_TimeRangeFilter})
+var sGetTileInput_PropertyFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PropertyFilters", ID: &pString, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eGetTileInput_PropertyFilters})
+var sGetTileInput_OutputDataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputDataType", ID: &i_OutputType, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eGetTileInput_OutputDataType})
+var sGetTileInput_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eGetTileInput_ExecutionRoleArn})
+var sGetTileOutput_BinaryFile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BinaryFile", ID: &i_BinaryFile, Traits: &t40, Type: smithy.ShapeTypeBlob, Ext: &eGetTileOutput_BinaryFile})
+var sGetVectorEnrichmentJobInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_VectorEnrichmentJobArn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eGetVectorEnrichmentJobInput_Arn})
+var sGetVectorEnrichmentJobOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetVectorEnrichmentJobOutput_Arn})
+var sGetVectorEnrichmentJobOutput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_VectorEnrichmentJobType, Type: smithy.ShapeTypeString, Ext: &eGetVectorEnrichmentJobOutput_Type})
+var sGetVectorEnrichmentJobOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetVectorEnrichmentJobOutput_Name})
+var sGetVectorEnrichmentJobOutput_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &pTimestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eGetVectorEnrichmentJobOutput_CreationTime})
+var sGetVectorEnrichmentJobOutput_DurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetVectorEnrichmentJobOutput_DurationInSeconds})
+var sGetVectorEnrichmentJobOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_VectorEnrichmentJobStatus, Type: smithy.ShapeTypeString, Ext: &eGetVectorEnrichmentJobOutput_Status})
+var sGetVectorEnrichmentJobOutput_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &eGetVectorEnrichmentJobOutput_KmsKeyId})
+var sGetVectorEnrichmentJobOutput_InputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputConfig", ID: &iVectorEnrichmentJobInputConfig, Members: &mVectorEnrichmentJobInputConfig, Type: smithy.ShapeTypeStructure, Ext: &eGetVectorEnrichmentJobOutput_InputConfig})
+var sGetVectorEnrichmentJobOutput_JobConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobConfig", ID: &iVectorEnrichmentJobConfig, Members: &mVectorEnrichmentJobConfig, Type: smithy.ShapeTypeUnion, Ext: &eGetVectorEnrichmentJobOutput_JobConfig})
+var sGetVectorEnrichmentJobOutput_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &eGetVectorEnrichmentJobOutput_ExecutionRoleArn})
+var sGetVectorEnrichmentJobOutput_ErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorDetails", ID: &iVectorEnrichmentJobErrorDetails, Members: &mVectorEnrichmentJobErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &eGetVectorEnrichmentJobOutput_ErrorDetails})
+var sGetVectorEnrichmentJobOutput_ExportStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportStatus", ID: &i_VectorEnrichmentJobExportStatus, Type: smithy.ShapeTypeString, Ext: &eGetVectorEnrichmentJobOutput_ExportStatus})
+var sGetVectorEnrichmentJobOutput_ExportErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportErrorDetails", ID: &iVectorEnrichmentJobExportErrorDetails, Members: &mVectorEnrichmentJobExportErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &eGetVectorEnrichmentJobOutput_ExportErrorDetails})
+var sGetVectorEnrichmentJobOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eGetVectorEnrichmentJobOutput_Tags})
+var sListEarthObservationJobInput_StatusEquals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusEquals", ID: &i_EarthObservationJobStatus, Type: smithy.ShapeTypeString, Ext: &eListEarthObservationJobInput_StatusEquals})
+var sListEarthObservationJobInput_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &i_SortOrder, Type: smithy.ShapeTypeString, Ext: &eListEarthObservationJobInput_SortOrder})
+var sListEarthObservationJobInput_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListEarthObservationJobInput_SortBy})
+var sListEarthObservationJobInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eListEarthObservationJobInput_NextToken})
+var sListEarthObservationJobInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListEarthObservationJobInput_MaxResults})
+var sListEarthObservationJobOutput_EarthObservationJobSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EarthObservationJobSummaries", ID: &i_EarthObservationJobList, Members: &m_EarthObservationJobList, Type: smithy.ShapeTypeList, Ext: &eListEarthObservationJobOutput_EarthObservationJobSummaries})
+var sListEarthObservationJobOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eListEarthObservationJobOutput_NextToken})
+var sListRasterDataCollectionsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eListRasterDataCollectionsInput_NextToken})
+var sListRasterDataCollectionsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Traits: &t42, Type: smithy.ShapeTypeInteger, Ext: &eListRasterDataCollectionsInput_MaxResults})
+var sListRasterDataCollectionsOutput_RasterDataCollectionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RasterDataCollectionSummaries", ID: &i_DataCollectionsList, Members: &m_DataCollectionsList, Type: smithy.ShapeTypeList, Ext: &eListRasterDataCollectionsOutput_RasterDataCollectionSummaries})
+var sListRasterDataCollectionsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eListRasterDataCollectionsOutput_NextToken})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_Tags})
+var sListVectorEnrichmentJobInput_StatusEquals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusEquals", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListVectorEnrichmentJobInput_StatusEquals})
+var sListVectorEnrichmentJobInput_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &i_SortOrder, Type: smithy.ShapeTypeString, Ext: &eListVectorEnrichmentJobInput_SortOrder})
+var sListVectorEnrichmentJobInput_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListVectorEnrichmentJobInput_SortBy})
+var sListVectorEnrichmentJobInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eListVectorEnrichmentJobInput_NextToken})
+var sListVectorEnrichmentJobInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListVectorEnrichmentJobInput_MaxResults})
+var sListVectorEnrichmentJobOutput_VectorEnrichmentJobSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VectorEnrichmentJobSummaries", ID: &i_VectorEnrichmentJobList, Members: &m_VectorEnrichmentJobList, Type: smithy.ShapeTypeList, Ext: &eListVectorEnrichmentJobOutput_VectorEnrichmentJobSummaries})
+var sListVectorEnrichmentJobOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eListVectorEnrichmentJobOutput_NextToken})
+var sSearchRasterDataCollectionInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_DataCollectionArn, Type: smithy.ShapeTypeString, Ext: &eSearchRasterDataCollectionInput_Arn})
+var sSearchRasterDataCollectionInput_RasterDataCollectionQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RasterDataCollectionQuery", ID: &iRasterDataCollectionQueryWithBandFilterInput, Members: &mRasterDataCollectionQueryWithBandFilterInput, Type: smithy.ShapeTypeStructure, Ext: &eSearchRasterDataCollectionInput_RasterDataCollectionQuery})
+var sSearchRasterDataCollectionInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eSearchRasterDataCollectionInput_NextToken})
+var sSearchRasterDataCollectionOutput_ApproximateResultCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApproximateResultCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSearchRasterDataCollectionOutput_ApproximateResultCount})
+var sSearchRasterDataCollectionOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eSearchRasterDataCollectionOutput_NextToken})
+var sSearchRasterDataCollectionOutput_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_ItemSourceList, Members: &m_ItemSourceList, Type: smithy.ShapeTypeList, Ext: &eSearchRasterDataCollectionOutput_Items})
+var sStartEarthObservationJobInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eStartEarthObservationJobInput_Name})
+var sStartEarthObservationJobInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eStartEarthObservationJobInput_ClientToken})
+var sStartEarthObservationJobInput_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &eStartEarthObservationJobInput_KmsKeyId})
+var sStartEarthObservationJobInput_InputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputConfig", ID: &iInputConfigInput, Members: &mInputConfigInput, Type: smithy.ShapeTypeStructure, Ext: &eStartEarthObservationJobInput_InputConfig})
+var sStartEarthObservationJobInput_JobConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobConfig", ID: &iJobConfigInput, Members: &mJobConfigInput, Type: smithy.ShapeTypeUnion, Ext: &eStartEarthObservationJobInput_JobConfig})
+var sStartEarthObservationJobInput_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &eStartEarthObservationJobInput_ExecutionRoleArn})
+var sStartEarthObservationJobInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eStartEarthObservationJobInput_Tags})
+var sStartEarthObservationJobOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eStartEarthObservationJobOutput_Name})
+var sStartEarthObservationJobOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eStartEarthObservationJobOutput_Arn})
+var sStartEarthObservationJobOutput_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &pTimestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eStartEarthObservationJobOutput_CreationTime})
+var sStartEarthObservationJobOutput_DurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eStartEarthObservationJobOutput_DurationInSeconds})
+var sStartEarthObservationJobOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_EarthObservationJobStatus, Type: smithy.ShapeTypeString, Ext: &eStartEarthObservationJobOutput_Status})
+var sStartEarthObservationJobOutput_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &eStartEarthObservationJobOutput_KmsKeyId})
+var sStartEarthObservationJobOutput_InputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputConfig", ID: &iInputConfigOutput, Members: &mInputConfigOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartEarthObservationJobOutput_InputConfig})
+var sStartEarthObservationJobOutput_JobConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobConfig", ID: &iJobConfigInput, Members: &mJobConfigInput, Type: smithy.ShapeTypeUnion, Ext: &eStartEarthObservationJobOutput_JobConfig})
+var sStartEarthObservationJobOutput_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &eStartEarthObservationJobOutput_ExecutionRoleArn})
+var sStartEarthObservationJobOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eStartEarthObservationJobOutput_Tags})
+var sStartVectorEnrichmentJobInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eStartVectorEnrichmentJobInput_Name})
+var sStartVectorEnrichmentJobInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eStartVectorEnrichmentJobInput_ClientToken})
+var sStartVectorEnrichmentJobInput_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &eStartVectorEnrichmentJobInput_KmsKeyId})
+var sStartVectorEnrichmentJobInput_InputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputConfig", ID: &iVectorEnrichmentJobInputConfig, Members: &mVectorEnrichmentJobInputConfig, Type: smithy.ShapeTypeStructure, Ext: &eStartVectorEnrichmentJobInput_InputConfig})
+var sStartVectorEnrichmentJobInput_JobConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobConfig", ID: &iVectorEnrichmentJobConfig, Members: &mVectorEnrichmentJobConfig, Type: smithy.ShapeTypeUnion, Ext: &eStartVectorEnrichmentJobInput_JobConfig})
+var sStartVectorEnrichmentJobInput_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &eStartVectorEnrichmentJobInput_ExecutionRoleArn})
+var sStartVectorEnrichmentJobInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eStartVectorEnrichmentJobInput_Tags})
+var sStartVectorEnrichmentJobOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eStartVectorEnrichmentJobOutput_Name})
+var sStartVectorEnrichmentJobOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_VectorEnrichmentJobArn, Type: smithy.ShapeTypeString, Ext: &eStartVectorEnrichmentJobOutput_Arn})
+var sStartVectorEnrichmentJobOutput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_VectorEnrichmentJobType, Type: smithy.ShapeTypeString, Ext: &eStartVectorEnrichmentJobOutput_Type})
+var sStartVectorEnrichmentJobOutput_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &pTimestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp, Ext: &eStartVectorEnrichmentJobOutput_CreationTime})
+var sStartVectorEnrichmentJobOutput_DurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eStartVectorEnrichmentJobOutput_DurationInSeconds})
+var sStartVectorEnrichmentJobOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_VectorEnrichmentJobStatus, Type: smithy.ShapeTypeString, Ext: &eStartVectorEnrichmentJobOutput_Status})
+var sStartVectorEnrichmentJobOutput_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKey, Type: smithy.ShapeTypeString, Ext: &eStartVectorEnrichmentJobOutput_KmsKeyId})
+var sStartVectorEnrichmentJobOutput_InputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputConfig", ID: &iVectorEnrichmentJobInputConfig, Members: &mVectorEnrichmentJobInputConfig, Type: smithy.ShapeTypeStructure, Ext: &eStartVectorEnrichmentJobOutput_InputConfig})
+var sStartVectorEnrichmentJobOutput_JobConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobConfig", ID: &iVectorEnrichmentJobConfig, Members: &mVectorEnrichmentJobConfig, Type: smithy.ShapeTypeUnion, Ext: &eStartVectorEnrichmentJobOutput_JobConfig})
+var sStartVectorEnrichmentJobOutput_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &eStartVectorEnrichmentJobOutput_ExecutionRoleArn})
+var sStartVectorEnrichmentJobOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eStartVectorEnrichmentJobOutput_Tags})
+var sStopEarthObservationJobInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_EarthObservationJobArn, Type: smithy.ShapeTypeString, Ext: &eStopEarthObservationJobInput_Arn})
+var sStopVectorEnrichmentJobInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_VectorEnrichmentJobArn, Type: smithy.ShapeTypeString, Ext: &eStopVectorEnrichmentJobInput_Arn})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_Tags})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t43, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
 
 var DeleteEarthObservationJob = &sDeleteEarthObservationJob
 

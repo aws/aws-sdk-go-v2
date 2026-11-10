@@ -7,9 +7,429 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [421]smithy.SchemaExtensions
+var (
+	eDescribeAffectedAccountsForOrganization                                                     smithy.SchemaExtensions
+	eDescribeAffectedEntities                                                                    smithy.SchemaExtensions
+	eDescribeAffectedEntitiesForOrganization                                                     smithy.SchemaExtensions
+	eDescribeEntityAggregates                                                                    smithy.SchemaExtensions
+	eDescribeEntityAggregatesForOrganization                                                     smithy.SchemaExtensions
+	eDescribeEventAggregates                                                                     smithy.SchemaExtensions
+	eDescribeEventDetails                                                                        smithy.SchemaExtensions
+	eDescribeEventDetailsForOrganization                                                         smithy.SchemaExtensions
+	eDescribeEvents                                                                              smithy.SchemaExtensions
+	eDescribeEventsForOrganization                                                               smithy.SchemaExtensions
+	eDescribeEventTypes                                                                          smithy.SchemaExtensions
+	eDescribeHealthServiceStatusForOrganization                                                  smithy.SchemaExtensions
+	eDescribeServiceLifecycle                                                                    smithy.SchemaExtensions
+	eDisableHealthServiceAccessForOrganization                                                   smithy.SchemaExtensions
+	eEnableHealthServiceAccessForOrganization                                                    smithy.SchemaExtensions
+	e_AWSHealth_20160804                                                                         smithy.SchemaExtensions
+	eAccountEntityAggregate                                                                      smithy.SchemaExtensions
+	eAccountEntityAggregate_accountId                                                            smithy.SchemaExtensions
+	eAccountEntityAggregate_count                                                                smithy.SchemaExtensions
+	eAccountEntityAggregate_statuses                                                             smithy.SchemaExtensions
+	e_AccountEntityAggregatesList                                                                smithy.SchemaExtensions
+	e_AccountEntityAggregatesList_member                                                         smithy.SchemaExtensions
+	e_accountId                                                                                  smithy.SchemaExtensions
+	e_affectedAccountsList                                                                       smithy.SchemaExtensions
+	e_affectedAccountsList_member                                                                smithy.SchemaExtensions
+	eAffectedEntity                                                                              smithy.SchemaExtensions
+	eAffectedEntity_entityArn                                                                    smithy.SchemaExtensions
+	eAffectedEntity_eventArn                                                                     smithy.SchemaExtensions
+	eAffectedEntity_entityValue                                                                  smithy.SchemaExtensions
+	eAffectedEntity_entityUrl                                                                    smithy.SchemaExtensions
+	eAffectedEntity_awsAccountId                                                                 smithy.SchemaExtensions
+	eAffectedEntity_lastUpdatedTime                                                              smithy.SchemaExtensions
+	eAffectedEntity_statusCode                                                                   smithy.SchemaExtensions
+	eAffectedEntity_tags                                                                         smithy.SchemaExtensions
+	eAffectedEntity_entityMetadata                                                               smithy.SchemaExtensions
+	e_aggregateValue                                                                             smithy.SchemaExtensions
+	e_availabilityZone                                                                           smithy.SchemaExtensions
+	e_availabilityZones                                                                          smithy.SchemaExtensions
+	e_availabilityZones_member                                                                   smithy.SchemaExtensions
+	e_awsAccountIdsList                                                                          smithy.SchemaExtensions
+	e_awsAccountIdsList_member                                                                   smithy.SchemaExtensions
+	eConcurrentModificationException                                                             smithy.SchemaExtensions
+	eConcurrentModificationException_message                                                     smithy.SchemaExtensions
+	e_count                                                                                      smithy.SchemaExtensions
+	eDateTimeRange                                                                               smithy.SchemaExtensions
+	eDateTimeRange_from                                                                          smithy.SchemaExtensions
+	eDateTimeRange_to                                                                            smithy.SchemaExtensions
+	e_dateTimeRangeList                                                                          smithy.SchemaExtensions
+	e_dateTimeRangeList_member                                                                   smithy.SchemaExtensions
+	e_DescribeAffectedEntitiesForOrganizationFailedSet                                           smithy.SchemaExtensions
+	e_DescribeAffectedEntitiesForOrganizationFailedSet_member                                    smithy.SchemaExtensions
+	e_DescribeEventDetailsFailedSet                                                              smithy.SchemaExtensions
+	e_DescribeEventDetailsFailedSet_member                                                       smithy.SchemaExtensions
+	e_DescribeEventDetailsForOrganizationFailedSet                                               smithy.SchemaExtensions
+	e_DescribeEventDetailsForOrganizationFailedSet_member                                        smithy.SchemaExtensions
+	e_DescribeEventDetailsForOrganizationSuccessfulSet                                           smithy.SchemaExtensions
+	e_DescribeEventDetailsForOrganizationSuccessfulSet_member                                    smithy.SchemaExtensions
+	e_DescribeEventDetailsSuccessfulSet                                                          smithy.SchemaExtensions
+	e_DescribeEventDetailsSuccessfulSet_member                                                   smithy.SchemaExtensions
+	eEntityAccountFilter                                                                         smithy.SchemaExtensions
+	eEntityAccountFilter_eventArn                                                                smithy.SchemaExtensions
+	eEntityAccountFilter_awsAccountId                                                            smithy.SchemaExtensions
+	eEntityAccountFilter_statusCodes                                                             smithy.SchemaExtensions
+	eEntityAggregate                                                                             smithy.SchemaExtensions
+	eEntityAggregate_eventArn                                                                    smithy.SchemaExtensions
+	eEntityAggregate_count                                                                       smithy.SchemaExtensions
+	eEntityAggregate_statuses                                                                    smithy.SchemaExtensions
+	e_EntityAggregateList                                                                        smithy.SchemaExtensions
+	e_EntityAggregateList_member                                                                 smithy.SchemaExtensions
+	e_entityArn                                                                                  smithy.SchemaExtensions
+	e_entityArnList                                                                              smithy.SchemaExtensions
+	e_entityArnList_member                                                                       smithy.SchemaExtensions
+	eEntityFilter                                                                                smithy.SchemaExtensions
+	eEntityFilter_eventArns                                                                      smithy.SchemaExtensions
+	eEntityFilter_entityArns                                                                     smithy.SchemaExtensions
+	eEntityFilter_entityValues                                                                   smithy.SchemaExtensions
+	eEntityFilter_lastUpdatedTimes                                                               smithy.SchemaExtensions
+	eEntityFilter_tags                                                                           smithy.SchemaExtensions
+	eEntityFilter_statusCodes                                                                    smithy.SchemaExtensions
+	e_EntityList                                                                                 smithy.SchemaExtensions
+	e_EntityList_member                                                                          smithy.SchemaExtensions
+	e_entityMetadata                                                                             smithy.SchemaExtensions
+	e_entityMetadata_key                                                                         smithy.SchemaExtensions
+	e_entityMetadata_value                                                                       smithy.SchemaExtensions
+	e_entityMetadataKey                                                                          smithy.SchemaExtensions
+	e_entityMetadataValue                                                                        smithy.SchemaExtensions
+	eentityStatusCode                                                                            smithy.SchemaExtensions
+	eentityStatusCode_IMPAIRED                                                                   smithy.SchemaExtensions
+	eentityStatusCode_UNIMPAIRED                                                                 smithy.SchemaExtensions
+	eentityStatusCode_UNKNOWN                                                                    smithy.SchemaExtensions
+	eentityStatusCode_PENDING                                                                    smithy.SchemaExtensions
+	eentityStatusCode_RESOLVED                                                                   smithy.SchemaExtensions
+	e_entityStatusCodeList                                                                       smithy.SchemaExtensions
+	e_entityStatusCodeList_member                                                                smithy.SchemaExtensions
+	e_entityStatuses                                                                             smithy.SchemaExtensions
+	e_entityStatuses_key                                                                         smithy.SchemaExtensions
+	e_entityStatuses_value                                                                       smithy.SchemaExtensions
+	e_entityUrl                                                                                  smithy.SchemaExtensions
+	e_entityValue                                                                                smithy.SchemaExtensions
+	e_entityValueList                                                                            smithy.SchemaExtensions
+	e_entityValueList_member                                                                     smithy.SchemaExtensions
+	eEvent                                                                                       smithy.SchemaExtensions
+	eEvent_arn                                                                                   smithy.SchemaExtensions
+	eEvent_service                                                                               smithy.SchemaExtensions
+	eEvent_eventTypeCode                                                                         smithy.SchemaExtensions
+	eEvent_eventTypeCategory                                                                     smithy.SchemaExtensions
+	eEvent_region                                                                                smithy.SchemaExtensions
+	eEvent_availabilityZone                                                                      smithy.SchemaExtensions
+	eEvent_startTime                                                                             smithy.SchemaExtensions
+	eEvent_endTime                                                                               smithy.SchemaExtensions
+	eEvent_lastUpdatedTime                                                                       smithy.SchemaExtensions
+	eEvent_statusCode                                                                            smithy.SchemaExtensions
+	eEvent_eventScopeCode                                                                        smithy.SchemaExtensions
+	eEvent_actionability                                                                         smithy.SchemaExtensions
+	eEvent_personas                                                                              smithy.SchemaExtensions
+	eEventAccountFilter                                                                          smithy.SchemaExtensions
+	eEventAccountFilter_eventArn                                                                 smithy.SchemaExtensions
+	eEventAccountFilter_awsAccountId                                                             smithy.SchemaExtensions
+	eEventActionability                                                                          smithy.SchemaExtensions
+	eEventActionability_ACTION_REQUIRED                                                          smithy.SchemaExtensions
+	eEventActionability_ACTION_MAY_BE_REQUIRED                                                   smithy.SchemaExtensions
+	eEventActionability_INFORMATIONAL                                                            smithy.SchemaExtensions
+	e_EventActionabilityList                                                                     smithy.SchemaExtensions
+	e_EventActionabilityList_member                                                              smithy.SchemaExtensions
+	eEventAggregate                                                                              smithy.SchemaExtensions
+	eEventAggregate_aggregateValue                                                               smithy.SchemaExtensions
+	eEventAggregate_count                                                                        smithy.SchemaExtensions
+	eeventAggregateField                                                                         smithy.SchemaExtensions
+	eeventAggregateField_EventTypeCategory                                                       smithy.SchemaExtensions
+	e_EventAggregateList                                                                         smithy.SchemaExtensions
+	e_EventAggregateList_member                                                                  smithy.SchemaExtensions
+	e_eventArn                                                                                   smithy.SchemaExtensions
+	e_eventArnList                                                                               smithy.SchemaExtensions
+	e_eventArnList_member                                                                        smithy.SchemaExtensions
+	e_EventArnsList                                                                              smithy.SchemaExtensions
+	e_EventArnsList_member                                                                       smithy.SchemaExtensions
+	eEventDescription                                                                            smithy.SchemaExtensions
+	eEventDescription_latestDescription                                                          smithy.SchemaExtensions
+	e_EventDescription2                                                                          smithy.SchemaExtensions
+	eEventDetails                                                                                smithy.SchemaExtensions
+	eEventDetails_event                                                                          smithy.SchemaExtensions
+	eEventDetails_eventDescription                                                               smithy.SchemaExtensions
+	eEventDetails_eventMetadata                                                                  smithy.SchemaExtensions
+	eEventDetailsErrorItem                                                                       smithy.SchemaExtensions
+	eEventDetailsErrorItem_eventArn                                                              smithy.SchemaExtensions
+	eEventDetailsErrorItem_errorName                                                             smithy.SchemaExtensions
+	eEventDetailsErrorItem_errorMessage                                                          smithy.SchemaExtensions
+	eEventFilter                                                                                 smithy.SchemaExtensions
+	eEventFilter_actionabilities                                                                 smithy.SchemaExtensions
+	eEventFilter_eventArns                                                                       smithy.SchemaExtensions
+	eEventFilter_eventTypeCodes                                                                  smithy.SchemaExtensions
+	eEventFilter_services                                                                        smithy.SchemaExtensions
+	eEventFilter_regions                                                                         smithy.SchemaExtensions
+	eEventFilter_availabilityZones                                                               smithy.SchemaExtensions
+	eEventFilter_startTimes                                                                      smithy.SchemaExtensions
+	eEventFilter_endTimes                                                                        smithy.SchemaExtensions
+	eEventFilter_lastUpdatedTimes                                                                smithy.SchemaExtensions
+	eEventFilter_entityArns                                                                      smithy.SchemaExtensions
+	eEventFilter_entityValues                                                                    smithy.SchemaExtensions
+	eEventFilter_eventTypeCategories                                                             smithy.SchemaExtensions
+	eEventFilter_tags                                                                            smithy.SchemaExtensions
+	eEventFilter_eventStatusCodes                                                                smithy.SchemaExtensions
+	eEventFilter_personas                                                                        smithy.SchemaExtensions
+	e_EventList                                                                                  smithy.SchemaExtensions
+	e_EventList_member                                                                           smithy.SchemaExtensions
+	e_eventMetadata                                                                              smithy.SchemaExtensions
+	e_eventMetadata_key                                                                          smithy.SchemaExtensions
+	e_eventMetadata_value                                                                        smithy.SchemaExtensions
+	eEventPersona                                                                                smithy.SchemaExtensions
+	eEventPersona_OPERATIONS                                                                     smithy.SchemaExtensions
+	eEventPersona_SECURITY                                                                       smithy.SchemaExtensions
+	eEventPersona_BILLING                                                                        smithy.SchemaExtensions
+	e_EventPersonaList                                                                           smithy.SchemaExtensions
+	e_EventPersonaList_member                                                                    smithy.SchemaExtensions
+	eeventScopeCode                                                                              smithy.SchemaExtensions
+	eeventScopeCode_PUBLIC                                                                       smithy.SchemaExtensions
+	eeventScopeCode_ACCOUNT_SPECIFIC                                                             smithy.SchemaExtensions
+	eeventScopeCode_NONE                                                                         smithy.SchemaExtensions
+	eeventStatusCode                                                                             smithy.SchemaExtensions
+	eeventStatusCode_OPEN                                                                        smithy.SchemaExtensions
+	eeventStatusCode_CLOSED                                                                      smithy.SchemaExtensions
+	eeventStatusCode_UPCOMING                                                                    smithy.SchemaExtensions
+	e_eventStatusCodeList                                                                        smithy.SchemaExtensions
+	e_eventStatusCodeList_member                                                                 smithy.SchemaExtensions
+	eEventType                                                                                   smithy.SchemaExtensions
+	eEventType_service                                                                           smithy.SchemaExtensions
+	eEventType_code                                                                              smithy.SchemaExtensions
+	eEventType_category                                                                          smithy.SchemaExtensions
+	eEventType_actionability                                                                     smithy.SchemaExtensions
+	eEventType_personas                                                                          smithy.SchemaExtensions
+	e_EventType2                                                                                 smithy.SchemaExtensions
+	eEventTypeActionability                                                                      smithy.SchemaExtensions
+	eEventTypeActionability_ACTION_REQUIRED                                                      smithy.SchemaExtensions
+	eEventTypeActionability_ACTION_MAY_BE_REQUIRED                                               smithy.SchemaExtensions
+	eEventTypeActionability_INFORMATIONAL                                                        smithy.SchemaExtensions
+	e_EventTypeActionabilityList                                                                 smithy.SchemaExtensions
+	e_EventTypeActionabilityList_member                                                          smithy.SchemaExtensions
+	eeventTypeCategory                                                                           smithy.SchemaExtensions
+	eeventTypeCategory_ISSUE                                                                     smithy.SchemaExtensions
+	eeventTypeCategory_ACCOUNT_NOTIFICATION                                                      smithy.SchemaExtensions
+	eeventTypeCategory_SCHEDULED_CHANGE                                                          smithy.SchemaExtensions
+	eeventTypeCategory_INVESTIGATION                                                             smithy.SchemaExtensions
+	e_EventTypeCategoryList                                                                      smithy.SchemaExtensions
+	e_EventTypeCategoryList_member                                                               smithy.SchemaExtensions
+	e_eventTypeCategoryList2                                                                     smithy.SchemaExtensions
+	e_eventTypeCategoryList2_member                                                              smithy.SchemaExtensions
+	e_eventTypeCode                                                                              smithy.SchemaExtensions
+	e_EventTypeCodeList                                                                          smithy.SchemaExtensions
+	e_EventTypeCodeList_member                                                                   smithy.SchemaExtensions
+	eEventTypeFilter                                                                             smithy.SchemaExtensions
+	eEventTypeFilter_eventTypeCodes                                                              smithy.SchemaExtensions
+	eEventTypeFilter_services                                                                    smithy.SchemaExtensions
+	eEventTypeFilter_eventTypeCategories                                                         smithy.SchemaExtensions
+	eEventTypeFilter_actionabilities                                                             smithy.SchemaExtensions
+	eEventTypeFilter_personas                                                                    smithy.SchemaExtensions
+	e_EventTypeList                                                                              smithy.SchemaExtensions
+	e_EventTypeList_member                                                                       smithy.SchemaExtensions
+	e_eventTypeList2                                                                             smithy.SchemaExtensions
+	e_eventTypeList2_member                                                                      smithy.SchemaExtensions
+	eEventTypePersona                                                                            smithy.SchemaExtensions
+	eEventTypePersona_OPERATIONS                                                                 smithy.SchemaExtensions
+	eEventTypePersona_SECURITY                                                                   smithy.SchemaExtensions
+	eEventTypePersona_BILLING                                                                    smithy.SchemaExtensions
+	e_EventTypePersonaList                                                                       smithy.SchemaExtensions
+	e_EventTypePersonaList_member                                                                smithy.SchemaExtensions
+	e_healthServiceAccessStatusForOrganization                                                   smithy.SchemaExtensions
+	e_ImpactRiskList                                                                             smithy.SchemaExtensions
+	e_ImpactRiskList_member                                                                      smithy.SchemaExtensions
+	eInvalidPaginationToken                                                                      smithy.SchemaExtensions
+	eInvalidPaginationToken_message                                                              smithy.SchemaExtensions
+	eLifecycleEvent                                                                              smithy.SchemaExtensions
+	eLifecycleEvent_lifecycleEventType                                                           smithy.SchemaExtensions
+	eLifecycleEvent_date                                                                         smithy.SchemaExtensions
+	eLifecycleEvent_regions                                                                      smithy.SchemaExtensions
+	eLifecycleEvent_impactRisks                                                                  smithy.SchemaExtensions
+	eLifecycleEvent_description                                                                  smithy.SchemaExtensions
+	e_LifecycleEventList                                                                         smithy.SchemaExtensions
+	e_LifecycleEventList_member                                                                  smithy.SchemaExtensions
+	e_LifecycleMaxResults                                                                        smithy.SchemaExtensions
+	e_locale                                                                                     smithy.SchemaExtensions
+	e_maxResults                                                                                 smithy.SchemaExtensions
+	e_maxResultsLowerRange                                                                       smithy.SchemaExtensions
+	e_metadataKey                                                                                smithy.SchemaExtensions
+	e_metadataValue                                                                              smithy.SchemaExtensions
+	e_nextToken                                                                                  smithy.SchemaExtensions
+	e_OrganizationAccountIdsList                                                                 smithy.SchemaExtensions
+	e_OrganizationAccountIdsList_member                                                          smithy.SchemaExtensions
+	eOrganizationAffectedEntitiesErrorItem                                                       smithy.SchemaExtensions
+	eOrganizationAffectedEntitiesErrorItem_awsAccountId                                          smithy.SchemaExtensions
+	eOrganizationAffectedEntitiesErrorItem_eventArn                                              smithy.SchemaExtensions
+	eOrganizationAffectedEntitiesErrorItem_errorName                                             smithy.SchemaExtensions
+	eOrganizationAffectedEntitiesErrorItem_errorMessage                                          smithy.SchemaExtensions
+	e_OrganizationEntityAccountFiltersList                                                       smithy.SchemaExtensions
+	e_OrganizationEntityAccountFiltersList_member                                                smithy.SchemaExtensions
+	eOrganizationEntityAggregate                                                                 smithy.SchemaExtensions
+	eOrganizationEntityAggregate_eventArn                                                        smithy.SchemaExtensions
+	eOrganizationEntityAggregate_count                                                           smithy.SchemaExtensions
+	eOrganizationEntityAggregate_statuses                                                        smithy.SchemaExtensions
+	eOrganizationEntityAggregate_accounts                                                        smithy.SchemaExtensions
+	e_OrganizationEntityAggregatesList                                                           smithy.SchemaExtensions
+	e_OrganizationEntityAggregatesList_member                                                    smithy.SchemaExtensions
+	e_OrganizationEntityFiltersList                                                              smithy.SchemaExtensions
+	e_OrganizationEntityFiltersList_member                                                       smithy.SchemaExtensions
+	eOrganizationEvent                                                                           smithy.SchemaExtensions
+	eOrganizationEvent_arn                                                                       smithy.SchemaExtensions
+	eOrganizationEvent_service                                                                   smithy.SchemaExtensions
+	eOrganizationEvent_eventTypeCode                                                             smithy.SchemaExtensions
+	eOrganizationEvent_eventTypeCategory                                                         smithy.SchemaExtensions
+	eOrganizationEvent_eventScopeCode                                                            smithy.SchemaExtensions
+	eOrganizationEvent_region                                                                    smithy.SchemaExtensions
+	eOrganizationEvent_startTime                                                                 smithy.SchemaExtensions
+	eOrganizationEvent_endTime                                                                   smithy.SchemaExtensions
+	eOrganizationEvent_lastUpdatedTime                                                           smithy.SchemaExtensions
+	eOrganizationEvent_statusCode                                                                smithy.SchemaExtensions
+	eOrganizationEvent_actionability                                                             smithy.SchemaExtensions
+	eOrganizationEvent_personas                                                                  smithy.SchemaExtensions
+	e_OrganizationEventArnsList                                                                  smithy.SchemaExtensions
+	e_OrganizationEventArnsList_member                                                           smithy.SchemaExtensions
+	e_OrganizationEventDetailFiltersList                                                         smithy.SchemaExtensions
+	e_OrganizationEventDetailFiltersList_member                                                  smithy.SchemaExtensions
+	eOrganizationEventDetails                                                                    smithy.SchemaExtensions
+	eOrganizationEventDetails_awsAccountId                                                       smithy.SchemaExtensions
+	eOrganizationEventDetails_event                                                              smithy.SchemaExtensions
+	eOrganizationEventDetails_eventDescription                                                   smithy.SchemaExtensions
+	eOrganizationEventDetails_eventMetadata                                                      smithy.SchemaExtensions
+	eOrganizationEventDetailsErrorItem                                                           smithy.SchemaExtensions
+	eOrganizationEventDetailsErrorItem_awsAccountId                                              smithy.SchemaExtensions
+	eOrganizationEventDetailsErrorItem_eventArn                                                  smithy.SchemaExtensions
+	eOrganizationEventDetailsErrorItem_errorName                                                 smithy.SchemaExtensions
+	eOrganizationEventDetailsErrorItem_errorMessage                                              smithy.SchemaExtensions
+	eOrganizationEventFilter                                                                     smithy.SchemaExtensions
+	eOrganizationEventFilter_actionabilities                                                     smithy.SchemaExtensions
+	eOrganizationEventFilter_eventTypeCodes                                                      smithy.SchemaExtensions
+	eOrganizationEventFilter_awsAccountIds                                                       smithy.SchemaExtensions
+	eOrganizationEventFilter_services                                                            smithy.SchemaExtensions
+	eOrganizationEventFilter_regions                                                             smithy.SchemaExtensions
+	eOrganizationEventFilter_startTime                                                           smithy.SchemaExtensions
+	eOrganizationEventFilter_endTime                                                             smithy.SchemaExtensions
+	eOrganizationEventFilter_lastUpdatedTime                                                     smithy.SchemaExtensions
+	eOrganizationEventFilter_entityArns                                                          smithy.SchemaExtensions
+	eOrganizationEventFilter_entityValues                                                        smithy.SchemaExtensions
+	eOrganizationEventFilter_eventTypeCategories                                                 smithy.SchemaExtensions
+	eOrganizationEventFilter_eventStatusCodes                                                    smithy.SchemaExtensions
+	eOrganizationEventFilter_personas                                                            smithy.SchemaExtensions
+	e_OrganizationEventList                                                                      smithy.SchemaExtensions
+	e_OrganizationEventList_member                                                               smithy.SchemaExtensions
+	e_region                                                                                     smithy.SchemaExtensions
+	e_regionList                                                                                 smithy.SchemaExtensions
+	e_regionList_member                                                                          smithy.SchemaExtensions
+	e_service                                                                                    smithy.SchemaExtensions
+	eServiceLifecycle                                                                            smithy.SchemaExtensions
+	eServiceLifecycle_service                                                                    smithy.SchemaExtensions
+	eServiceLifecycle_version                                                                    smithy.SchemaExtensions
+	eServiceLifecycle_title                                                                      smithy.SchemaExtensions
+	eServiceLifecycle_recommendedVersion                                                         smithy.SchemaExtensions
+	eServiceLifecycle_lifecycleEvents                                                            smithy.SchemaExtensions
+	eServiceLifecycleFilter                                                                      smithy.SchemaExtensions
+	eServiceLifecycleFilter_service                                                              smithy.SchemaExtensions
+	e_ServiceLifecycleList                                                                       smithy.SchemaExtensions
+	e_ServiceLifecycleList_member                                                                smithy.SchemaExtensions
+	e_serviceList                                                                                smithy.SchemaExtensions
+	e_serviceList_member                                                                         smithy.SchemaExtensions
+	e_string                                                                                     smithy.SchemaExtensions
+	e_tagFilter                                                                                  smithy.SchemaExtensions
+	e_tagFilter_member                                                                           smithy.SchemaExtensions
+	e_tagKey                                                                                     smithy.SchemaExtensions
+	e_tagSet                                                                                     smithy.SchemaExtensions
+	e_tagSet_key                                                                                 smithy.SchemaExtensions
+	e_tagSet_value                                                                               smithy.SchemaExtensions
+	e_tagValue                                                                                   smithy.SchemaExtensions
+	e_timestamp                                                                                  smithy.SchemaExtensions
+	eUnsupportedLocale                                                                           smithy.SchemaExtensions
+	eUnsupportedLocale_message                                                                   smithy.SchemaExtensions
+	eDescribeAffectedAccountsForOrganizationRequest                                              smithy.SchemaExtensions
+	eDescribeAffectedAccountsForOrganizationRequest_eventArn                                     smithy.SchemaExtensions
+	eDescribeAffectedAccountsForOrganizationRequest_nextToken                                    smithy.SchemaExtensions
+	eDescribeAffectedAccountsForOrganizationRequest_maxResults                                   smithy.SchemaExtensions
+	eDescribeAffectedAccountsForOrganizationResponse                                             smithy.SchemaExtensions
+	eDescribeAffectedAccountsForOrganizationResponse_affectedAccounts                            smithy.SchemaExtensions
+	eDescribeAffectedAccountsForOrganizationResponse_eventScopeCode                              smithy.SchemaExtensions
+	eDescribeAffectedAccountsForOrganizationResponse_nextToken                                   smithy.SchemaExtensions
+	eDescribeAffectedEntitiesForOrganizationRequest                                              smithy.SchemaExtensions
+	eDescribeAffectedEntitiesForOrganizationRequest_organizationEntityFilters                    smithy.SchemaExtensions
+	eDescribeAffectedEntitiesForOrganizationRequest_locale                                       smithy.SchemaExtensions
+	eDescribeAffectedEntitiesForOrganizationRequest_nextToken                                    smithy.SchemaExtensions
+	eDescribeAffectedEntitiesForOrganizationRequest_maxResults                                   smithy.SchemaExtensions
+	eDescribeAffectedEntitiesForOrganizationRequest_organizationEntityAccountFilters             smithy.SchemaExtensions
+	eDescribeAffectedEntitiesForOrganizationResponse                                             smithy.SchemaExtensions
+	eDescribeAffectedEntitiesForOrganizationResponse_entities                                    smithy.SchemaExtensions
+	eDescribeAffectedEntitiesForOrganizationResponse_failedSet                                   smithy.SchemaExtensions
+	eDescribeAffectedEntitiesForOrganizationResponse_nextToken                                   smithy.SchemaExtensions
+	eDescribeAffectedEntitiesRequest                                                             smithy.SchemaExtensions
+	eDescribeAffectedEntitiesRequest_filter                                                      smithy.SchemaExtensions
+	eDescribeAffectedEntitiesRequest_locale                                                      smithy.SchemaExtensions
+	eDescribeAffectedEntitiesRequest_nextToken                                                   smithy.SchemaExtensions
+	eDescribeAffectedEntitiesRequest_maxResults                                                  smithy.SchemaExtensions
+	eDescribeAffectedEntitiesResponse                                                            smithy.SchemaExtensions
+	eDescribeAffectedEntitiesResponse_entities                                                   smithy.SchemaExtensions
+	eDescribeAffectedEntitiesResponse_nextToken                                                  smithy.SchemaExtensions
+	eDescribeEntityAggregatesForOrganizationRequest                                              smithy.SchemaExtensions
+	eDescribeEntityAggregatesForOrganizationRequest_eventArns                                    smithy.SchemaExtensions
+	eDescribeEntityAggregatesForOrganizationRequest_awsAccountIds                                smithy.SchemaExtensions
+	eDescribeEntityAggregatesForOrganizationResponse                                             smithy.SchemaExtensions
+	eDescribeEntityAggregatesForOrganizationResponse_organizationEntityAggregates                smithy.SchemaExtensions
+	eDescribeEntityAggregatesRequest                                                             smithy.SchemaExtensions
+	eDescribeEntityAggregatesRequest_eventArns                                                   smithy.SchemaExtensions
+	eDescribeEntityAggregatesResponse                                                            smithy.SchemaExtensions
+	eDescribeEntityAggregatesResponse_entityAggregates                                           smithy.SchemaExtensions
+	eDescribeEventAggregatesRequest                                                              smithy.SchemaExtensions
+	eDescribeEventAggregatesRequest_filter                                                       smithy.SchemaExtensions
+	eDescribeEventAggregatesRequest_aggregateField                                               smithy.SchemaExtensions
+	eDescribeEventAggregatesRequest_maxResults                                                   smithy.SchemaExtensions
+	eDescribeEventAggregatesRequest_nextToken                                                    smithy.SchemaExtensions
+	eDescribeEventAggregatesResponse                                                             smithy.SchemaExtensions
+	eDescribeEventAggregatesResponse_eventAggregates                                             smithy.SchemaExtensions
+	eDescribeEventAggregatesResponse_nextToken                                                   smithy.SchemaExtensions
+	eDescribeEventDetailsForOrganizationRequest                                                  smithy.SchemaExtensions
+	eDescribeEventDetailsForOrganizationRequest_organizationEventDetailFilters                   smithy.SchemaExtensions
+	eDescribeEventDetailsForOrganizationRequest_locale                                           smithy.SchemaExtensions
+	eDescribeEventDetailsForOrganizationResponse                                                 smithy.SchemaExtensions
+	eDescribeEventDetailsForOrganizationResponse_successfulSet                                   smithy.SchemaExtensions
+	eDescribeEventDetailsForOrganizationResponse_failedSet                                       smithy.SchemaExtensions
+	eDescribeEventDetailsRequest                                                                 smithy.SchemaExtensions
+	eDescribeEventDetailsRequest_eventArns                                                       smithy.SchemaExtensions
+	eDescribeEventDetailsRequest_locale                                                          smithy.SchemaExtensions
+	eDescribeEventDetailsResponse                                                                smithy.SchemaExtensions
+	eDescribeEventDetailsResponse_successfulSet                                                  smithy.SchemaExtensions
+	eDescribeEventDetailsResponse_failedSet                                                      smithy.SchemaExtensions
+	eDescribeEventsForOrganizationRequest                                                        smithy.SchemaExtensions
+	eDescribeEventsForOrganizationRequest_filter                                                 smithy.SchemaExtensions
+	eDescribeEventsForOrganizationRequest_nextToken                                              smithy.SchemaExtensions
+	eDescribeEventsForOrganizationRequest_maxResults                                             smithy.SchemaExtensions
+	eDescribeEventsForOrganizationRequest_locale                                                 smithy.SchemaExtensions
+	eDescribeEventsForOrganizationResponse                                                       smithy.SchemaExtensions
+	eDescribeEventsForOrganizationResponse_events                                                smithy.SchemaExtensions
+	eDescribeEventsForOrganizationResponse_nextToken                                             smithy.SchemaExtensions
+	eDescribeEventsRequest                                                                       smithy.SchemaExtensions
+	eDescribeEventsRequest_filter                                                                smithy.SchemaExtensions
+	eDescribeEventsRequest_nextToken                                                             smithy.SchemaExtensions
+	eDescribeEventsRequest_maxResults                                                            smithy.SchemaExtensions
+	eDescribeEventsRequest_locale                                                                smithy.SchemaExtensions
+	eDescribeEventsResponse                                                                      smithy.SchemaExtensions
+	eDescribeEventsResponse_events                                                               smithy.SchemaExtensions
+	eDescribeEventsResponse_nextToken                                                            smithy.SchemaExtensions
+	eDescribeEventTypesRequest                                                                   smithy.SchemaExtensions
+	eDescribeEventTypesRequest_filter                                                            smithy.SchemaExtensions
+	eDescribeEventTypesRequest_locale                                                            smithy.SchemaExtensions
+	eDescribeEventTypesRequest_nextToken                                                         smithy.SchemaExtensions
+	eDescribeEventTypesRequest_maxResults                                                        smithy.SchemaExtensions
+	eDescribeEventTypesResponse                                                                  smithy.SchemaExtensions
+	eDescribeEventTypesResponse_eventTypes                                                       smithy.SchemaExtensions
+	eDescribeEventTypesResponse_nextToken                                                        smithy.SchemaExtensions
+	eDescribeHealthServiceStatusForOrganizationResponse                                          smithy.SchemaExtensions
+	eDescribeHealthServiceStatusForOrganizationResponse_healthServiceAccessStatusForOrganization smithy.SchemaExtensions
+	eDescribeServiceLifecycleRequest                                                             smithy.SchemaExtensions
+	eDescribeServiceLifecycleRequest_filter                                                      smithy.SchemaExtensions
+	eDescribeServiceLifecycleRequest_nextToken                                                   smithy.SchemaExtensions
+	eDescribeServiceLifecycleRequest_maxResults                                                  smithy.SchemaExtensions
+	eDescribeServiceLifecycleResponse                                                            smithy.SchemaExtensions
+	eDescribeServiceLifecycleResponse_serviceLifecycles                                          smithy.SchemaExtensions
+	eDescribeServiceLifecycleResponse_nextToken                                                  smithy.SchemaExtensions
+)
 
 var (
 	iDescribeAffectedAccountsForOrganization            = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeAffectedAccountsForOrganization"}
@@ -290,428 +710,428 @@ var mDescribeHealthServiceStatusForOrganizationResponse = smithy.SchemaMembers{L
 var mDescribeServiceLifecycleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeServiceLifecycleRequest_filter, &sDescribeServiceLifecycleRequest_nextToken, &sDescribeServiceLifecycleRequest_maxResults}}
 var mDescribeServiceLifecycleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeServiceLifecycleResponse_serviceLifecycles, &sDescribeServiceLifecycleResponse_nextToken}}
 
-var sDescribeAffectedAccountsForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedAccountsForOrganization, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sDescribeAffectedEntities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedEntities, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sDescribeAffectedEntitiesForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedEntitiesForOrganization, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sDescribeEntityAggregates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntityAggregates, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sDescribeEntityAggregatesForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntityAggregatesForOrganization, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sDescribeEventAggregates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventAggregates, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sDescribeEventDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventDetails, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sDescribeEventDetailsForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventDetailsForOrganization, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sDescribeEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEvents, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sDescribeEventsForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventsForOrganization, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sDescribeEventTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventTypes, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sDescribeHealthServiceStatusForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHealthServiceStatusForOrganization, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sDescribeServiceLifecycle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServiceLifecycle, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sDisableHealthServiceAccessForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableHealthServiceAccessForOrganization, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sEnableHealthServiceAccessForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableHealthServiceAccessForOrganization, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var s_AWSHealth_20160804 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSHealth_20160804, Type: smithy.ShapeTypeService, Ext: &ext[15]})
-var sAccountEntityAggregate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountEntityAggregate, Members: &mAccountEntityAggregate, Type: smithy.ShapeTypeStructure, Ext: &ext[16]})
-var s_AccountEntityAggregatesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountEntityAggregatesList, Members: &m_AccountEntityAggregatesList, Type: smithy.ShapeTypeList, Ext: &ext[20]})
-var s_accountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_accountId, Type: smithy.ShapeTypeString, Ext: &ext[22]})
-var s_affectedAccountsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_affectedAccountsList, Members: &m_affectedAccountsList, Type: smithy.ShapeTypeList, Ext: &ext[23]})
-var sAffectedEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAffectedEntity, Members: &mAffectedEntity, Type: smithy.ShapeTypeStructure, Ext: &ext[25]})
-var s_aggregateValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_aggregateValue, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var s_availabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_availabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var s_availabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_availabilityZones, Members: &m_availabilityZones, Type: smithy.ShapeTypeList, Ext: &ext[37]})
-var s_awsAccountIdsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_awsAccountIdsList, Members: &m_awsAccountIdsList, Type: smithy.ShapeTypeList, Ext: &ext[39]})
-var sConcurrentModificationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentModificationException, Members: &mConcurrentModificationException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[41]})
-var s_count = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_count, Type: smithy.ShapeTypeInteger, Ext: &ext[43]})
-var sDateTimeRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDateTimeRange, Members: &mDateTimeRange, Type: smithy.ShapeTypeStructure, Ext: &ext[44]})
-var s_dateTimeRangeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_dateTimeRangeList, Members: &m_dateTimeRangeList, Type: smithy.ShapeTypeList, Ext: &ext[47]})
-var s_DescribeAffectedEntitiesForOrganizationFailedSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeAffectedEntitiesForOrganizationFailedSet, Members: &m_DescribeAffectedEntitiesForOrganizationFailedSet, Type: smithy.ShapeTypeList, Ext: &ext[49]})
-var s_DescribeEventDetailsFailedSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeEventDetailsFailedSet, Members: &m_DescribeEventDetailsFailedSet, Type: smithy.ShapeTypeList, Ext: &ext[51]})
-var s_DescribeEventDetailsForOrganizationFailedSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeEventDetailsForOrganizationFailedSet, Members: &m_DescribeEventDetailsForOrganizationFailedSet, Type: smithy.ShapeTypeList, Ext: &ext[53]})
-var s_DescribeEventDetailsForOrganizationSuccessfulSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeEventDetailsForOrganizationSuccessfulSet, Members: &m_DescribeEventDetailsForOrganizationSuccessfulSet, Type: smithy.ShapeTypeList, Ext: &ext[55]})
-var s_DescribeEventDetailsSuccessfulSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeEventDetailsSuccessfulSet, Members: &m_DescribeEventDetailsSuccessfulSet, Type: smithy.ShapeTypeList, Ext: &ext[57]})
-var sEntityAccountFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityAccountFilter, Members: &mEntityAccountFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[59]})
-var sEntityAggregate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityAggregate, Members: &mEntityAggregate, Type: smithy.ShapeTypeStructure, Ext: &ext[63]})
-var s_EntityAggregateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityAggregateList, Members: &m_EntityAggregateList, Type: smithy.ShapeTypeList, Ext: &ext[67]})
-var s_entityArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityArn, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var s_entityArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityArnList, Members: &m_entityArnList, Type: smithy.ShapeTypeList, Ext: &ext[70]})
-var sEntityFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityFilter, Members: &mEntityFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var s_EntityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityList, Members: &m_EntityList, Type: smithy.ShapeTypeList, Ext: &ext[79]})
-var s_entityMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityMetadata, Members: &m_entityMetadata, Type: smithy.ShapeTypeMap, Ext: &ext[81]})
-var s_entityMetadataKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityMetadataKey, Type: smithy.ShapeTypeString, Ext: &ext[84]})
-var s_entityMetadataValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityMetadataValue, Type: smithy.ShapeTypeString, Ext: &ext[85]})
-var sentityStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &ientityStatusCode, Members: &mentityStatusCode, Type: smithy.ShapeTypeEnum, Ext: &ext[86]})
-var s_entityStatusCodeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityStatusCodeList, Members: &m_entityStatusCodeList, Type: smithy.ShapeTypeList, Ext: &ext[92]})
-var s_entityStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityStatuses, Members: &m_entityStatuses, Type: smithy.ShapeTypeMap, Ext: &ext[94]})
-var s_entityUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityUrl, Type: smithy.ShapeTypeString, Ext: &ext[97]})
-var s_entityValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityValue, Type: smithy.ShapeTypeString, Ext: &ext[98]})
-var s_entityValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityValueList, Members: &m_entityValueList, Type: smithy.ShapeTypeList, Ext: &ext[99]})
-var sEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvent, Members: &mEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[101]})
-var sEventAccountFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventAccountFilter, Members: &mEventAccountFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[115]})
-var sEventActionability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventActionability, Members: &mEventActionability, Type: smithy.ShapeTypeEnum, Ext: &ext[118]})
-var s_EventActionabilityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventActionabilityList, Members: &m_EventActionabilityList, Type: smithy.ShapeTypeList, Ext: &ext[122]})
-var sEventAggregate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventAggregate, Members: &mEventAggregate, Type: smithy.ShapeTypeStructure, Ext: &ext[124]})
-var seventAggregateField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &ieventAggregateField, Members: &meventAggregateField, Type: smithy.ShapeTypeEnum, Ext: &ext[127]})
-var s_EventAggregateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventAggregateList, Members: &m_EventAggregateList, Type: smithy.ShapeTypeList, Ext: &ext[129]})
-var s_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &ext[131]})
-var s_eventArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_eventArnList, Members: &m_eventArnList, Type: smithy.ShapeTypeList, Ext: &ext[132]})
-var s_EventArnsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventArnsList, Members: &m_EventArnsList, Type: smithy.ShapeTypeList, Ext: &ext[134]})
-var sEventDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventDescription, Members: &mEventDescription, Type: smithy.ShapeTypeStructure, Ext: &ext[136]})
-var s_EventDescription2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventDescription2, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var sEventDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventDetails, Members: &mEventDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[139]})
-var sEventDetailsErrorItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventDetailsErrorItem, Members: &mEventDetailsErrorItem, Type: smithy.ShapeTypeStructure, Ext: &ext[143]})
-var sEventFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventFilter, Members: &mEventFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[147]})
-var s_EventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventList, Members: &m_EventList, Type: smithy.ShapeTypeList, Ext: &ext[163]})
-var s_eventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_eventMetadata, Members: &m_eventMetadata, Type: smithy.ShapeTypeMap, Ext: &ext[165]})
-var sEventPersona = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventPersona, Members: &mEventPersona, Type: smithy.ShapeTypeEnum, Ext: &ext[168]})
-var s_EventPersonaList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventPersonaList, Members: &m_EventPersonaList, Type: smithy.ShapeTypeList, Ext: &ext[172]})
-var seventScopeCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &ieventScopeCode, Members: &meventScopeCode, Type: smithy.ShapeTypeEnum, Ext: &ext[174]})
-var seventStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &ieventStatusCode, Members: &meventStatusCode, Type: smithy.ShapeTypeEnum, Ext: &ext[178]})
-var s_eventStatusCodeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_eventStatusCodeList, Members: &m_eventStatusCodeList, Type: smithy.ShapeTypeList, Ext: &ext[182]})
-var sEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeStructure, Ext: &ext[184]})
-var s_EventType2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventType2, Type: smithy.ShapeTypeString, Ext: &ext[190]})
-var sEventTypeActionability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventTypeActionability, Members: &mEventTypeActionability, Type: smithy.ShapeTypeEnum, Ext: &ext[191]})
-var s_EventTypeActionabilityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTypeActionabilityList, Members: &m_EventTypeActionabilityList, Type: smithy.ShapeTypeList, Ext: &ext[195]})
-var seventTypeCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &ieventTypeCategory, Members: &meventTypeCategory, Type: smithy.ShapeTypeEnum, Ext: &ext[197]})
-var s_EventTypeCategoryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTypeCategoryList, Members: &m_EventTypeCategoryList, Type: smithy.ShapeTypeList, Ext: &ext[202]})
-var s_eventTypeCategoryList2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_eventTypeCategoryList2, Members: &m_eventTypeCategoryList2, Type: smithy.ShapeTypeList, Ext: &ext[204]})
-var s_eventTypeCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_eventTypeCode, Type: smithy.ShapeTypeString, Ext: &ext[206]})
-var s_EventTypeCodeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTypeCodeList, Members: &m_EventTypeCodeList, Type: smithy.ShapeTypeList, Ext: &ext[207]})
-var sEventTypeFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventTypeFilter, Members: &mEventTypeFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[209]})
-var s_EventTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTypeList, Members: &m_EventTypeList, Type: smithy.ShapeTypeList, Ext: &ext[215]})
-var s_eventTypeList2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_eventTypeList2, Members: &m_eventTypeList2, Type: smithy.ShapeTypeList, Ext: &ext[217]})
-var sEventTypePersona = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventTypePersona, Members: &mEventTypePersona, Type: smithy.ShapeTypeEnum, Ext: &ext[219]})
-var s_EventTypePersonaList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTypePersonaList, Members: &m_EventTypePersonaList, Type: smithy.ShapeTypeList, Ext: &ext[223]})
-var s_healthServiceAccessStatusForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_healthServiceAccessStatusForOrganization, Type: smithy.ShapeTypeString, Ext: &ext[225]})
-var s_ImpactRiskList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImpactRiskList, Members: &m_ImpactRiskList, Type: smithy.ShapeTypeList, Ext: &ext[226]})
-var sInvalidPaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidPaginationToken, Members: &mInvalidPaginationToken, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[228]})
-var sLifecycleEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLifecycleEvent, Members: &mLifecycleEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[230]})
-var s_LifecycleEventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LifecycleEventList, Members: &m_LifecycleEventList, Type: smithy.ShapeTypeList, Ext: &ext[236]})
-var s_LifecycleMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LifecycleMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[238]})
-var s_locale = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_locale, Type: smithy.ShapeTypeString, Ext: &ext[239]})
-var s_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_maxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[240]})
-var s_maxResultsLowerRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_maxResultsLowerRange, Type: smithy.ShapeTypeInteger, Ext: &ext[241]})
-var s_metadataKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_metadataKey, Type: smithy.ShapeTypeString, Ext: &ext[242]})
-var s_metadataValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_metadataValue, Type: smithy.ShapeTypeString, Ext: &ext[243]})
-var s_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &ext[244]})
-var s_OrganizationAccountIdsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationAccountIdsList, Members: &m_OrganizationAccountIdsList, Type: smithy.ShapeTypeList, Ext: &ext[245]})
-var sOrganizationAffectedEntitiesErrorItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationAffectedEntitiesErrorItem, Members: &mOrganizationAffectedEntitiesErrorItem, Type: smithy.ShapeTypeStructure, Ext: &ext[247]})
-var s_OrganizationEntityAccountFiltersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationEntityAccountFiltersList, Members: &m_OrganizationEntityAccountFiltersList, Type: smithy.ShapeTypeList, Ext: &ext[252]})
-var sOrganizationEntityAggregate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationEntityAggregate, Members: &mOrganizationEntityAggregate, Type: smithy.ShapeTypeStructure, Ext: &ext[254]})
-var s_OrganizationEntityAggregatesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationEntityAggregatesList, Members: &m_OrganizationEntityAggregatesList, Type: smithy.ShapeTypeList, Ext: &ext[259]})
-var s_OrganizationEntityFiltersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationEntityFiltersList, Members: &m_OrganizationEntityFiltersList, Type: smithy.ShapeTypeList, Ext: &ext[261]})
-var sOrganizationEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationEvent, Members: &mOrganizationEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[263]})
-var s_OrganizationEventArnsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationEventArnsList, Members: &m_OrganizationEventArnsList, Type: smithy.ShapeTypeList, Ext: &ext[276]})
-var s_OrganizationEventDetailFiltersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationEventDetailFiltersList, Members: &m_OrganizationEventDetailFiltersList, Type: smithy.ShapeTypeList, Ext: &ext[278]})
-var sOrganizationEventDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationEventDetails, Members: &mOrganizationEventDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[280]})
-var sOrganizationEventDetailsErrorItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationEventDetailsErrorItem, Members: &mOrganizationEventDetailsErrorItem, Type: smithy.ShapeTypeStructure, Ext: &ext[285]})
-var sOrganizationEventFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationEventFilter, Members: &mOrganizationEventFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[290]})
-var s_OrganizationEventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationEventList, Members: &m_OrganizationEventList, Type: smithy.ShapeTypeList, Ext: &ext[304]})
-var s_region = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_region, Type: smithy.ShapeTypeString, Ext: &ext[306]})
-var s_regionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_regionList, Members: &m_regionList, Type: smithy.ShapeTypeList, Ext: &ext[307]})
-var s_service = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_service, Type: smithy.ShapeTypeString, Ext: &ext[309]})
-var sServiceLifecycle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLifecycle, Members: &mServiceLifecycle, Type: smithy.ShapeTypeStructure, Ext: &ext[310]})
-var sServiceLifecycleFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLifecycleFilter, Members: &mServiceLifecycleFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[316]})
-var s_ServiceLifecycleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceLifecycleList, Members: &m_ServiceLifecycleList, Type: smithy.ShapeTypeList, Ext: &ext[318]})
-var s_serviceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_serviceList, Members: &m_serviceList, Type: smithy.ShapeTypeList, Ext: &ext[320]})
-var s_string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_string, Type: smithy.ShapeTypeString, Ext: &ext[322]})
-var s_tagFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_tagFilter, Members: &m_tagFilter, Type: smithy.ShapeTypeList, Ext: &ext[323]})
-var s_tagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_tagKey, Type: smithy.ShapeTypeString, Ext: &ext[325]})
-var s_tagSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_tagSet, Members: &m_tagSet, Type: smithy.ShapeTypeMap, Ext: &ext[326]})
-var s_tagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_tagValue, Type: smithy.ShapeTypeString, Ext: &ext[329]})
-var s_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[330]})
-var sUnsupportedLocale = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedLocale, Members: &mUnsupportedLocale, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[331]})
-var sDescribeAffectedAccountsForOrganizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedAccountsForOrganizationRequest, Members: &mDescribeAffectedAccountsForOrganizationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[333]})
-var sDescribeAffectedAccountsForOrganizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedAccountsForOrganizationResponse, Members: &mDescribeAffectedAccountsForOrganizationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[337]})
-var sDescribeAffectedEntitiesForOrganizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedEntitiesForOrganizationRequest, Members: &mDescribeAffectedEntitiesForOrganizationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[341]})
-var sDescribeAffectedEntitiesForOrganizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedEntitiesForOrganizationResponse, Members: &mDescribeAffectedEntitiesForOrganizationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[347]})
-var sDescribeAffectedEntitiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedEntitiesRequest, Members: &mDescribeAffectedEntitiesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[351]})
-var sDescribeAffectedEntitiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedEntitiesResponse, Members: &mDescribeAffectedEntitiesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[356]})
-var sDescribeEntityAggregatesForOrganizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntityAggregatesForOrganizationRequest, Members: &mDescribeEntityAggregatesForOrganizationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[359]})
-var sDescribeEntityAggregatesForOrganizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntityAggregatesForOrganizationResponse, Members: &mDescribeEntityAggregatesForOrganizationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[362]})
-var sDescribeEntityAggregatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntityAggregatesRequest, Members: &mDescribeEntityAggregatesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[364]})
-var sDescribeEntityAggregatesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntityAggregatesResponse, Members: &mDescribeEntityAggregatesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[366]})
-var sDescribeEventAggregatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventAggregatesRequest, Members: &mDescribeEventAggregatesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[368]})
-var sDescribeEventAggregatesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventAggregatesResponse, Members: &mDescribeEventAggregatesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[373]})
-var sDescribeEventDetailsForOrganizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventDetailsForOrganizationRequest, Members: &mDescribeEventDetailsForOrganizationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[376]})
-var sDescribeEventDetailsForOrganizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventDetailsForOrganizationResponse, Members: &mDescribeEventDetailsForOrganizationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[379]})
-var sDescribeEventDetailsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventDetailsRequest, Members: &mDescribeEventDetailsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[382]})
-var sDescribeEventDetailsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventDetailsResponse, Members: &mDescribeEventDetailsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[385]})
-var sDescribeEventsForOrganizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventsForOrganizationRequest, Members: &mDescribeEventsForOrganizationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[388]})
-var sDescribeEventsForOrganizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventsForOrganizationResponse, Members: &mDescribeEventsForOrganizationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[393]})
-var sDescribeEventsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventsRequest, Members: &mDescribeEventsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[396]})
-var sDescribeEventsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventsResponse, Members: &mDescribeEventsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[401]})
-var sDescribeEventTypesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventTypesRequest, Members: &mDescribeEventTypesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[404]})
-var sDescribeEventTypesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventTypesResponse, Members: &mDescribeEventTypesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[409]})
-var sDescribeHealthServiceStatusForOrganizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHealthServiceStatusForOrganizationResponse, Members: &mDescribeHealthServiceStatusForOrganizationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[412]})
-var sDescribeServiceLifecycleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServiceLifecycleRequest, Members: &mDescribeServiceLifecycleRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[414]})
-var sDescribeServiceLifecycleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServiceLifecycleResponse, Members: &mDescribeServiceLifecycleResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[418]})
+var sDescribeAffectedAccountsForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedAccountsForOrganization, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAffectedAccountsForOrganization})
+var sDescribeAffectedEntities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedEntities, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAffectedEntities})
+var sDescribeAffectedEntitiesForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedEntitiesForOrganization, Type: smithy.ShapeTypeOperation, Ext: &eDescribeAffectedEntitiesForOrganization})
+var sDescribeEntityAggregates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntityAggregates, Type: smithy.ShapeTypeOperation, Ext: &eDescribeEntityAggregates})
+var sDescribeEntityAggregatesForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntityAggregatesForOrganization, Type: smithy.ShapeTypeOperation, Ext: &eDescribeEntityAggregatesForOrganization})
+var sDescribeEventAggregates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventAggregates, Type: smithy.ShapeTypeOperation, Ext: &eDescribeEventAggregates})
+var sDescribeEventDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventDetails, Type: smithy.ShapeTypeOperation, Ext: &eDescribeEventDetails})
+var sDescribeEventDetailsForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventDetailsForOrganization, Type: smithy.ShapeTypeOperation, Ext: &eDescribeEventDetailsForOrganization})
+var sDescribeEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEvents, Type: smithy.ShapeTypeOperation, Ext: &eDescribeEvents})
+var sDescribeEventsForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventsForOrganization, Type: smithy.ShapeTypeOperation, Ext: &eDescribeEventsForOrganization})
+var sDescribeEventTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventTypes, Type: smithy.ShapeTypeOperation, Ext: &eDescribeEventTypes})
+var sDescribeHealthServiceStatusForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHealthServiceStatusForOrganization, Type: smithy.ShapeTypeOperation, Ext: &eDescribeHealthServiceStatusForOrganization})
+var sDescribeServiceLifecycle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServiceLifecycle, Type: smithy.ShapeTypeOperation, Ext: &eDescribeServiceLifecycle})
+var sDisableHealthServiceAccessForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableHealthServiceAccessForOrganization, Type: smithy.ShapeTypeOperation, Ext: &eDisableHealthServiceAccessForOrganization})
+var sEnableHealthServiceAccessForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableHealthServiceAccessForOrganization, Type: smithy.ShapeTypeOperation, Ext: &eEnableHealthServiceAccessForOrganization})
+var s_AWSHealth_20160804 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSHealth_20160804, Type: smithy.ShapeTypeService, Ext: &e_AWSHealth_20160804})
+var sAccountEntityAggregate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountEntityAggregate, Members: &mAccountEntityAggregate, Type: smithy.ShapeTypeStructure, Ext: &eAccountEntityAggregate})
+var s_AccountEntityAggregatesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountEntityAggregatesList, Members: &m_AccountEntityAggregatesList, Type: smithy.ShapeTypeList, Ext: &e_AccountEntityAggregatesList})
+var s_accountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_accountId, Type: smithy.ShapeTypeString, Ext: &e_accountId})
+var s_affectedAccountsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_affectedAccountsList, Members: &m_affectedAccountsList, Type: smithy.ShapeTypeList, Ext: &e_affectedAccountsList})
+var sAffectedEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAffectedEntity, Members: &mAffectedEntity, Type: smithy.ShapeTypeStructure, Ext: &eAffectedEntity})
+var s_aggregateValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_aggregateValue, Type: smithy.ShapeTypeString, Ext: &e_aggregateValue})
+var s_availabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_availabilityZone, Type: smithy.ShapeTypeString, Ext: &e_availabilityZone})
+var s_availabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_availabilityZones, Members: &m_availabilityZones, Type: smithy.ShapeTypeList, Ext: &e_availabilityZones})
+var s_awsAccountIdsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_awsAccountIdsList, Members: &m_awsAccountIdsList, Type: smithy.ShapeTypeList, Ext: &e_awsAccountIdsList})
+var sConcurrentModificationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentModificationException, Members: &mConcurrentModificationException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eConcurrentModificationException})
+var s_count = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_count, Type: smithy.ShapeTypeInteger, Ext: &e_count})
+var sDateTimeRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDateTimeRange, Members: &mDateTimeRange, Type: smithy.ShapeTypeStructure, Ext: &eDateTimeRange})
+var s_dateTimeRangeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_dateTimeRangeList, Members: &m_dateTimeRangeList, Type: smithy.ShapeTypeList, Ext: &e_dateTimeRangeList})
+var s_DescribeAffectedEntitiesForOrganizationFailedSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeAffectedEntitiesForOrganizationFailedSet, Members: &m_DescribeAffectedEntitiesForOrganizationFailedSet, Type: smithy.ShapeTypeList, Ext: &e_DescribeAffectedEntitiesForOrganizationFailedSet})
+var s_DescribeEventDetailsFailedSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeEventDetailsFailedSet, Members: &m_DescribeEventDetailsFailedSet, Type: smithy.ShapeTypeList, Ext: &e_DescribeEventDetailsFailedSet})
+var s_DescribeEventDetailsForOrganizationFailedSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeEventDetailsForOrganizationFailedSet, Members: &m_DescribeEventDetailsForOrganizationFailedSet, Type: smithy.ShapeTypeList, Ext: &e_DescribeEventDetailsForOrganizationFailedSet})
+var s_DescribeEventDetailsForOrganizationSuccessfulSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeEventDetailsForOrganizationSuccessfulSet, Members: &m_DescribeEventDetailsForOrganizationSuccessfulSet, Type: smithy.ShapeTypeList, Ext: &e_DescribeEventDetailsForOrganizationSuccessfulSet})
+var s_DescribeEventDetailsSuccessfulSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeEventDetailsSuccessfulSet, Members: &m_DescribeEventDetailsSuccessfulSet, Type: smithy.ShapeTypeList, Ext: &e_DescribeEventDetailsSuccessfulSet})
+var sEntityAccountFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityAccountFilter, Members: &mEntityAccountFilter, Type: smithy.ShapeTypeStructure, Ext: &eEntityAccountFilter})
+var sEntityAggregate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityAggregate, Members: &mEntityAggregate, Type: smithy.ShapeTypeStructure, Ext: &eEntityAggregate})
+var s_EntityAggregateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityAggregateList, Members: &m_EntityAggregateList, Type: smithy.ShapeTypeList, Ext: &e_EntityAggregateList})
+var s_entityArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityArn, Type: smithy.ShapeTypeString, Ext: &e_entityArn})
+var s_entityArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityArnList, Members: &m_entityArnList, Type: smithy.ShapeTypeList, Ext: &e_entityArnList})
+var sEntityFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityFilter, Members: &mEntityFilter, Type: smithy.ShapeTypeStructure, Ext: &eEntityFilter})
+var s_EntityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityList, Members: &m_EntityList, Type: smithy.ShapeTypeList, Ext: &e_EntityList})
+var s_entityMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityMetadata, Members: &m_entityMetadata, Type: smithy.ShapeTypeMap, Ext: &e_entityMetadata})
+var s_entityMetadataKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityMetadataKey, Type: smithy.ShapeTypeString, Ext: &e_entityMetadataKey})
+var s_entityMetadataValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityMetadataValue, Type: smithy.ShapeTypeString, Ext: &e_entityMetadataValue})
+var sentityStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &ientityStatusCode, Members: &mentityStatusCode, Type: smithy.ShapeTypeEnum, Ext: &eentityStatusCode})
+var s_entityStatusCodeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityStatusCodeList, Members: &m_entityStatusCodeList, Type: smithy.ShapeTypeList, Ext: &e_entityStatusCodeList})
+var s_entityStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityStatuses, Members: &m_entityStatuses, Type: smithy.ShapeTypeMap, Ext: &e_entityStatuses})
+var s_entityUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityUrl, Type: smithy.ShapeTypeString, Ext: &e_entityUrl})
+var s_entityValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityValue, Type: smithy.ShapeTypeString, Ext: &e_entityValue})
+var s_entityValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityValueList, Members: &m_entityValueList, Type: smithy.ShapeTypeList, Ext: &e_entityValueList})
+var sEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvent, Members: &mEvent, Type: smithy.ShapeTypeStructure, Ext: &eEvent})
+var sEventAccountFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventAccountFilter, Members: &mEventAccountFilter, Type: smithy.ShapeTypeStructure, Ext: &eEventAccountFilter})
+var sEventActionability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventActionability, Members: &mEventActionability, Type: smithy.ShapeTypeEnum, Ext: &eEventActionability})
+var s_EventActionabilityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventActionabilityList, Members: &m_EventActionabilityList, Type: smithy.ShapeTypeList, Ext: &e_EventActionabilityList})
+var sEventAggregate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventAggregate, Members: &mEventAggregate, Type: smithy.ShapeTypeStructure, Ext: &eEventAggregate})
+var seventAggregateField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &ieventAggregateField, Members: &meventAggregateField, Type: smithy.ShapeTypeEnum, Ext: &eeventAggregateField})
+var s_EventAggregateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventAggregateList, Members: &m_EventAggregateList, Type: smithy.ShapeTypeList, Ext: &e_EventAggregateList})
+var s_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &e_eventArn})
+var s_eventArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_eventArnList, Members: &m_eventArnList, Type: smithy.ShapeTypeList, Ext: &e_eventArnList})
+var s_EventArnsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventArnsList, Members: &m_EventArnsList, Type: smithy.ShapeTypeList, Ext: &e_EventArnsList})
+var sEventDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventDescription, Members: &mEventDescription, Type: smithy.ShapeTypeStructure, Ext: &eEventDescription})
+var s_EventDescription2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventDescription2, Type: smithy.ShapeTypeString, Ext: &e_EventDescription2})
+var sEventDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventDetails, Members: &mEventDetails, Type: smithy.ShapeTypeStructure, Ext: &eEventDetails})
+var sEventDetailsErrorItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventDetailsErrorItem, Members: &mEventDetailsErrorItem, Type: smithy.ShapeTypeStructure, Ext: &eEventDetailsErrorItem})
+var sEventFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventFilter, Members: &mEventFilter, Type: smithy.ShapeTypeStructure, Ext: &eEventFilter})
+var s_EventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventList, Members: &m_EventList, Type: smithy.ShapeTypeList, Ext: &e_EventList})
+var s_eventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_eventMetadata, Members: &m_eventMetadata, Type: smithy.ShapeTypeMap, Ext: &e_eventMetadata})
+var sEventPersona = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventPersona, Members: &mEventPersona, Type: smithy.ShapeTypeEnum, Ext: &eEventPersona})
+var s_EventPersonaList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventPersonaList, Members: &m_EventPersonaList, Type: smithy.ShapeTypeList, Ext: &e_EventPersonaList})
+var seventScopeCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &ieventScopeCode, Members: &meventScopeCode, Type: smithy.ShapeTypeEnum, Ext: &eeventScopeCode})
+var seventStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &ieventStatusCode, Members: &meventStatusCode, Type: smithy.ShapeTypeEnum, Ext: &eeventStatusCode})
+var s_eventStatusCodeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_eventStatusCodeList, Members: &m_eventStatusCodeList, Type: smithy.ShapeTypeList, Ext: &e_eventStatusCodeList})
+var sEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeStructure, Ext: &eEventType})
+var s_EventType2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventType2, Type: smithy.ShapeTypeString, Ext: &e_EventType2})
+var sEventTypeActionability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventTypeActionability, Members: &mEventTypeActionability, Type: smithy.ShapeTypeEnum, Ext: &eEventTypeActionability})
+var s_EventTypeActionabilityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTypeActionabilityList, Members: &m_EventTypeActionabilityList, Type: smithy.ShapeTypeList, Ext: &e_EventTypeActionabilityList})
+var seventTypeCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &ieventTypeCategory, Members: &meventTypeCategory, Type: smithy.ShapeTypeEnum, Ext: &eeventTypeCategory})
+var s_EventTypeCategoryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTypeCategoryList, Members: &m_EventTypeCategoryList, Type: smithy.ShapeTypeList, Ext: &e_EventTypeCategoryList})
+var s_eventTypeCategoryList2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_eventTypeCategoryList2, Members: &m_eventTypeCategoryList2, Type: smithy.ShapeTypeList, Ext: &e_eventTypeCategoryList2})
+var s_eventTypeCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_eventTypeCode, Type: smithy.ShapeTypeString, Ext: &e_eventTypeCode})
+var s_EventTypeCodeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTypeCodeList, Members: &m_EventTypeCodeList, Type: smithy.ShapeTypeList, Ext: &e_EventTypeCodeList})
+var sEventTypeFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventTypeFilter, Members: &mEventTypeFilter, Type: smithy.ShapeTypeStructure, Ext: &eEventTypeFilter})
+var s_EventTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTypeList, Members: &m_EventTypeList, Type: smithy.ShapeTypeList, Ext: &e_EventTypeList})
+var s_eventTypeList2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_eventTypeList2, Members: &m_eventTypeList2, Type: smithy.ShapeTypeList, Ext: &e_eventTypeList2})
+var sEventTypePersona = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventTypePersona, Members: &mEventTypePersona, Type: smithy.ShapeTypeEnum, Ext: &eEventTypePersona})
+var s_EventTypePersonaList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTypePersonaList, Members: &m_EventTypePersonaList, Type: smithy.ShapeTypeList, Ext: &e_EventTypePersonaList})
+var s_healthServiceAccessStatusForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_healthServiceAccessStatusForOrganization, Type: smithy.ShapeTypeString, Ext: &e_healthServiceAccessStatusForOrganization})
+var s_ImpactRiskList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImpactRiskList, Members: &m_ImpactRiskList, Type: smithy.ShapeTypeList, Ext: &e_ImpactRiskList})
+var sInvalidPaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidPaginationToken, Members: &mInvalidPaginationToken, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eInvalidPaginationToken})
+var sLifecycleEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLifecycleEvent, Members: &mLifecycleEvent, Type: smithy.ShapeTypeStructure, Ext: &eLifecycleEvent})
+var s_LifecycleEventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LifecycleEventList, Members: &m_LifecycleEventList, Type: smithy.ShapeTypeList, Ext: &e_LifecycleEventList})
+var s_LifecycleMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LifecycleMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_LifecycleMaxResults})
+var s_locale = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_locale, Type: smithy.ShapeTypeString, Ext: &e_locale})
+var s_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_maxResults, Type: smithy.ShapeTypeInteger, Ext: &e_maxResults})
+var s_maxResultsLowerRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_maxResultsLowerRange, Type: smithy.ShapeTypeInteger, Ext: &e_maxResultsLowerRange})
+var s_metadataKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_metadataKey, Type: smithy.ShapeTypeString, Ext: &e_metadataKey})
+var s_metadataValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_metadataValue, Type: smithy.ShapeTypeString, Ext: &e_metadataValue})
+var s_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &e_nextToken})
+var s_OrganizationAccountIdsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationAccountIdsList, Members: &m_OrganizationAccountIdsList, Type: smithy.ShapeTypeList, Ext: &e_OrganizationAccountIdsList})
+var sOrganizationAffectedEntitiesErrorItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationAffectedEntitiesErrorItem, Members: &mOrganizationAffectedEntitiesErrorItem, Type: smithy.ShapeTypeStructure, Ext: &eOrganizationAffectedEntitiesErrorItem})
+var s_OrganizationEntityAccountFiltersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationEntityAccountFiltersList, Members: &m_OrganizationEntityAccountFiltersList, Type: smithy.ShapeTypeList, Ext: &e_OrganizationEntityAccountFiltersList})
+var sOrganizationEntityAggregate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationEntityAggregate, Members: &mOrganizationEntityAggregate, Type: smithy.ShapeTypeStructure, Ext: &eOrganizationEntityAggregate})
+var s_OrganizationEntityAggregatesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationEntityAggregatesList, Members: &m_OrganizationEntityAggregatesList, Type: smithy.ShapeTypeList, Ext: &e_OrganizationEntityAggregatesList})
+var s_OrganizationEntityFiltersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationEntityFiltersList, Members: &m_OrganizationEntityFiltersList, Type: smithy.ShapeTypeList, Ext: &e_OrganizationEntityFiltersList})
+var sOrganizationEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationEvent, Members: &mOrganizationEvent, Type: smithy.ShapeTypeStructure, Ext: &eOrganizationEvent})
+var s_OrganizationEventArnsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationEventArnsList, Members: &m_OrganizationEventArnsList, Type: smithy.ShapeTypeList, Ext: &e_OrganizationEventArnsList})
+var s_OrganizationEventDetailFiltersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationEventDetailFiltersList, Members: &m_OrganizationEventDetailFiltersList, Type: smithy.ShapeTypeList, Ext: &e_OrganizationEventDetailFiltersList})
+var sOrganizationEventDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationEventDetails, Members: &mOrganizationEventDetails, Type: smithy.ShapeTypeStructure, Ext: &eOrganizationEventDetails})
+var sOrganizationEventDetailsErrorItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationEventDetailsErrorItem, Members: &mOrganizationEventDetailsErrorItem, Type: smithy.ShapeTypeStructure, Ext: &eOrganizationEventDetailsErrorItem})
+var sOrganizationEventFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationEventFilter, Members: &mOrganizationEventFilter, Type: smithy.ShapeTypeStructure, Ext: &eOrganizationEventFilter})
+var s_OrganizationEventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationEventList, Members: &m_OrganizationEventList, Type: smithy.ShapeTypeList, Ext: &e_OrganizationEventList})
+var s_region = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_region, Type: smithy.ShapeTypeString, Ext: &e_region})
+var s_regionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_regionList, Members: &m_regionList, Type: smithy.ShapeTypeList, Ext: &e_regionList})
+var s_service = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_service, Type: smithy.ShapeTypeString, Ext: &e_service})
+var sServiceLifecycle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLifecycle, Members: &mServiceLifecycle, Type: smithy.ShapeTypeStructure, Ext: &eServiceLifecycle})
+var sServiceLifecycleFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLifecycleFilter, Members: &mServiceLifecycleFilter, Type: smithy.ShapeTypeStructure, Ext: &eServiceLifecycleFilter})
+var s_ServiceLifecycleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceLifecycleList, Members: &m_ServiceLifecycleList, Type: smithy.ShapeTypeList, Ext: &e_ServiceLifecycleList})
+var s_serviceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_serviceList, Members: &m_serviceList, Type: smithy.ShapeTypeList, Ext: &e_serviceList})
+var s_string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_string, Type: smithy.ShapeTypeString, Ext: &e_string})
+var s_tagFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_tagFilter, Members: &m_tagFilter, Type: smithy.ShapeTypeList, Ext: &e_tagFilter})
+var s_tagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_tagKey, Type: smithy.ShapeTypeString, Ext: &e_tagKey})
+var s_tagSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_tagSet, Members: &m_tagSet, Type: smithy.ShapeTypeMap, Ext: &e_tagSet})
+var s_tagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_tagValue, Type: smithy.ShapeTypeString, Ext: &e_tagValue})
+var s_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_timestamp})
+var sUnsupportedLocale = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedLocale, Members: &mUnsupportedLocale, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eUnsupportedLocale})
+var sDescribeAffectedAccountsForOrganizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedAccountsForOrganizationRequest, Members: &mDescribeAffectedAccountsForOrganizationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAffectedAccountsForOrganizationRequest})
+var sDescribeAffectedAccountsForOrganizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedAccountsForOrganizationResponse, Members: &mDescribeAffectedAccountsForOrganizationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAffectedAccountsForOrganizationResponse})
+var sDescribeAffectedEntitiesForOrganizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedEntitiesForOrganizationRequest, Members: &mDescribeAffectedEntitiesForOrganizationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAffectedEntitiesForOrganizationRequest})
+var sDescribeAffectedEntitiesForOrganizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedEntitiesForOrganizationResponse, Members: &mDescribeAffectedEntitiesForOrganizationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAffectedEntitiesForOrganizationResponse})
+var sDescribeAffectedEntitiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedEntitiesRequest, Members: &mDescribeAffectedEntitiesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAffectedEntitiesRequest})
+var sDescribeAffectedEntitiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedEntitiesResponse, Members: &mDescribeAffectedEntitiesResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAffectedEntitiesResponse})
+var sDescribeEntityAggregatesForOrganizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntityAggregatesForOrganizationRequest, Members: &mDescribeEntityAggregatesForOrganizationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEntityAggregatesForOrganizationRequest})
+var sDescribeEntityAggregatesForOrganizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntityAggregatesForOrganizationResponse, Members: &mDescribeEntityAggregatesForOrganizationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEntityAggregatesForOrganizationResponse})
+var sDescribeEntityAggregatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntityAggregatesRequest, Members: &mDescribeEntityAggregatesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEntityAggregatesRequest})
+var sDescribeEntityAggregatesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntityAggregatesResponse, Members: &mDescribeEntityAggregatesResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEntityAggregatesResponse})
+var sDescribeEventAggregatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventAggregatesRequest, Members: &mDescribeEventAggregatesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEventAggregatesRequest})
+var sDescribeEventAggregatesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventAggregatesResponse, Members: &mDescribeEventAggregatesResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEventAggregatesResponse})
+var sDescribeEventDetailsForOrganizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventDetailsForOrganizationRequest, Members: &mDescribeEventDetailsForOrganizationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEventDetailsForOrganizationRequest})
+var sDescribeEventDetailsForOrganizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventDetailsForOrganizationResponse, Members: &mDescribeEventDetailsForOrganizationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEventDetailsForOrganizationResponse})
+var sDescribeEventDetailsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventDetailsRequest, Members: &mDescribeEventDetailsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEventDetailsRequest})
+var sDescribeEventDetailsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventDetailsResponse, Members: &mDescribeEventDetailsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEventDetailsResponse})
+var sDescribeEventsForOrganizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventsForOrganizationRequest, Members: &mDescribeEventsForOrganizationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEventsForOrganizationRequest})
+var sDescribeEventsForOrganizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventsForOrganizationResponse, Members: &mDescribeEventsForOrganizationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEventsForOrganizationResponse})
+var sDescribeEventsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventsRequest, Members: &mDescribeEventsRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEventsRequest})
+var sDescribeEventsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventsResponse, Members: &mDescribeEventsResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEventsResponse})
+var sDescribeEventTypesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventTypesRequest, Members: &mDescribeEventTypesRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEventTypesRequest})
+var sDescribeEventTypesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventTypesResponse, Members: &mDescribeEventTypesResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEventTypesResponse})
+var sDescribeHealthServiceStatusForOrganizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHealthServiceStatusForOrganizationResponse, Members: &mDescribeHealthServiceStatusForOrganizationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeHealthServiceStatusForOrganizationResponse})
+var sDescribeServiceLifecycleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServiceLifecycleRequest, Members: &mDescribeServiceLifecycleRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeServiceLifecycleRequest})
+var sDescribeServiceLifecycleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServiceLifecycleResponse, Members: &mDescribeServiceLifecycleResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeServiceLifecycleResponse})
 
-var sAccountEntityAggregate_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &ext[17]})
-var sAccountEntityAggregate_count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "count", ID: &i_count, Type: smithy.ShapeTypeInteger, Ext: &ext[18]})
-var sAccountEntityAggregate_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_entityStatuses, Members: &m_entityStatuses, Type: smithy.ShapeTypeMap, Ext: &ext[19]})
-var s_AccountEntityAggregatesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccountEntityAggregate, Members: &mAccountEntityAggregate, Type: smithy.ShapeTypeStructure, Ext: &ext[21]})
-var s_affectedAccountsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_accountId, Type: smithy.ShapeTypeString, Ext: &ext[24]})
-var sAffectedEntity_entityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityArn", ID: &i_entityArn, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var sAffectedEntity_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &ext[27]})
-var sAffectedEntity_entityValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityValue", ID: &i_entityValue, Type: smithy.ShapeTypeString, Ext: &ext[28]})
-var sAffectedEntity_entityUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityUrl", ID: &i_entityUrl, Type: smithy.ShapeTypeString, Ext: &ext[29]})
-var sAffectedEntity_awsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountId", ID: &i_accountId, Type: smithy.ShapeTypeString, Ext: &ext[30]})
-var sAffectedEntity_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[31]})
-var sAffectedEntity_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &ientityStatusCode, Members: &mentityStatusCode, Type: smithy.ShapeTypeEnum, Ext: &ext[32]})
-var sAffectedEntity_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagSet, Members: &m_tagSet, Type: smithy.ShapeTypeMap, Ext: &ext[33]})
-var sAffectedEntity_entityMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityMetadata", ID: &i_entityMetadata, Members: &m_entityMetadata, Type: smithy.ShapeTypeMap, Ext: &ext[34]})
-var s_availabilityZones_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_availabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[38]})
-var s_awsAccountIdsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_accountId, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var sConcurrentModificationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var sDateTimeRange_from = smithy.NewStaticSchema(smithy.StaticSchema{Member: "from", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[45]})
-var sDateTimeRange_to = smithy.NewStaticSchema(smithy.StaticSchema{Member: "to", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[46]})
-var s_dateTimeRangeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDateTimeRange, Members: &mDateTimeRange, Type: smithy.ShapeTypeStructure, Ext: &ext[48]})
-var s_DescribeAffectedEntitiesForOrganizationFailedSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOrganizationAffectedEntitiesErrorItem, Members: &mOrganizationAffectedEntitiesErrorItem, Type: smithy.ShapeTypeStructure, Ext: &ext[50]})
-var s_DescribeEventDetailsFailedSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventDetailsErrorItem, Members: &mEventDetailsErrorItem, Type: smithy.ShapeTypeStructure, Ext: &ext[52]})
-var s_DescribeEventDetailsForOrganizationFailedSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOrganizationEventDetailsErrorItem, Members: &mOrganizationEventDetailsErrorItem, Type: smithy.ShapeTypeStructure, Ext: &ext[54]})
-var s_DescribeEventDetailsForOrganizationSuccessfulSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOrganizationEventDetails, Members: &mOrganizationEventDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[56]})
-var s_DescribeEventDetailsSuccessfulSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventDetails, Members: &mEventDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[58]})
-var sEntityAccountFilter_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &ext[60]})
-var sEntityAccountFilter_awsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountId", ID: &i_accountId, Type: smithy.ShapeTypeString, Ext: &ext[61]})
-var sEntityAccountFilter_statusCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCodes", ID: &i_entityStatusCodeList, Members: &m_entityStatusCodeList, Type: smithy.ShapeTypeList, Ext: &ext[62]})
-var sEntityAggregate_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &ext[64]})
-var sEntityAggregate_count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "count", ID: &i_count, Type: smithy.ShapeTypeInteger, Ext: &ext[65]})
-var sEntityAggregate_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_entityStatuses, Members: &m_entityStatuses, Type: smithy.ShapeTypeMap, Ext: &ext[66]})
-var s_EntityAggregateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntityAggregate, Members: &mEntityAggregate, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var s_entityArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_entityArn, Type: smithy.ShapeTypeString, Ext: &ext[71]})
-var sEntityFilter_eventArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArns", ID: &i_eventArnList, Members: &m_eventArnList, Type: smithy.ShapeTypeList, Ext: &ext[73]})
-var sEntityFilter_entityArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityArns", ID: &i_entityArnList, Members: &m_entityArnList, Type: smithy.ShapeTypeList, Ext: &ext[74]})
-var sEntityFilter_entityValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityValues", ID: &i_entityValueList, Members: &m_entityValueList, Type: smithy.ShapeTypeList, Ext: &ext[75]})
-var sEntityFilter_lastUpdatedTimes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTimes", ID: &i_dateTimeRangeList, Members: &m_dateTimeRangeList, Type: smithy.ShapeTypeList, Ext: &ext[76]})
-var sEntityFilter_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagFilter, Members: &m_tagFilter, Type: smithy.ShapeTypeList, Ext: &ext[77]})
-var sEntityFilter_statusCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCodes", ID: &i_entityStatusCodeList, Members: &m_entityStatusCodeList, Type: smithy.ShapeTypeList, Ext: &ext[78]})
-var s_EntityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAffectedEntity, Members: &mAffectedEntity, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var s_entityMetadata_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_entityMetadataKey, Type: smithy.ShapeTypeString, Ext: &ext[82]})
-var s_entityMetadata_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_entityMetadataValue, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var sentityStatusCode_IMPAIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPAIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[87]})
-var sentityStatusCode_UNIMPAIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNIMPAIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[88]})
-var sentityStatusCode_UNKNOWN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[89]})
-var sentityStatusCode_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[90]})
-var sentityStatusCode_RESOLVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOLVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[91]})
-var s_entityStatusCodeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &ientityStatusCode, Members: &mentityStatusCode, Type: smithy.ShapeTypeEnum, Ext: &ext[93]})
-var s_entityStatuses_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &ientityStatusCode, Members: &mentityStatusCode, Type: smithy.ShapeTypeEnum, Ext: &ext[95]})
-var s_entityStatuses_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_count, Type: smithy.ShapeTypeInteger, Ext: &ext[96]})
-var s_entityValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_entityValue, Type: smithy.ShapeTypeString, Ext: &ext[100]})
-var sEvent_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var sEvent_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "service", ID: &i_service, Type: smithy.ShapeTypeString, Ext: &ext[103]})
-var sEvent_eventTypeCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCode", ID: &i_eventTypeCode, Type: smithy.ShapeTypeString, Ext: &ext[104]})
-var sEvent_eventTypeCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCategory", ID: &ieventTypeCategory, Members: &meventTypeCategory, Type: smithy.ShapeTypeEnum, Ext: &ext[105]})
-var sEvent_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_region, Type: smithy.ShapeTypeString, Ext: &ext[106]})
-var sEvent_availabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "availabilityZone", ID: &i_availabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[107]})
-var sEvent_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[108]})
-var sEvent_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[109]})
-var sEvent_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[110]})
-var sEvent_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &ieventStatusCode, Members: &meventStatusCode, Type: smithy.ShapeTypeEnum, Ext: &ext[111]})
-var sEvent_eventScopeCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventScopeCode", ID: &ieventScopeCode, Members: &meventScopeCode, Type: smithy.ShapeTypeEnum, Ext: &ext[112]})
-var sEvent_actionability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionability", ID: &iEventActionability, Members: &mEventActionability, Type: smithy.ShapeTypeEnum, Ext: &ext[113]})
-var sEvent_personas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "personas", ID: &i_EventPersonaList, Members: &m_EventPersonaList, Type: smithy.ShapeTypeList, Ext: &ext[114]})
-var sEventAccountFilter_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &ext[116]})
-var sEventAccountFilter_awsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountId", ID: &i_accountId, Type: smithy.ShapeTypeString, Ext: &ext[117]})
-var sEventActionability_ACTION_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTION_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[119]})
-var sEventActionability_ACTION_MAY_BE_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTION_MAY_BE_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var sEventActionability_INFORMATIONAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFORMATIONAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[121]})
-var s_EventActionabilityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventActionability, Members: &mEventActionability, Type: smithy.ShapeTypeEnum, Ext: &ext[123]})
-var sEventAggregate_aggregateValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregateValue", ID: &i_aggregateValue, Type: smithy.ShapeTypeString, Ext: &ext[125]})
-var sEventAggregate_count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "count", ID: &i_count, Type: smithy.ShapeTypeInteger, Ext: &ext[126]})
-var seventAggregateField_EventTypeCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventTypeCategory", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[128]})
-var s_EventAggregateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventAggregate, Members: &mEventAggregate, Type: smithy.ShapeTypeStructure, Ext: &ext[130]})
-var s_eventArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &ext[133]})
-var s_EventArnsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &ext[135]})
-var sEventDescription_latestDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestDescription", ID: &i_EventDescription2, Type: smithy.ShapeTypeString, Ext: &ext[137]})
-var sEventDetails_event = smithy.NewStaticSchema(smithy.StaticSchema{Member: "event", ID: &iEvent, Members: &mEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[140]})
-var sEventDetails_eventDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventDescription", ID: &iEventDescription, Members: &mEventDescription, Type: smithy.ShapeTypeStructure, Ext: &ext[141]})
-var sEventDetails_eventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventMetadata", ID: &i_eventMetadata, Members: &m_eventMetadata, Type: smithy.ShapeTypeMap, Ext: &ext[142]})
-var sEventDetailsErrorItem_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &ext[144]})
-var sEventDetailsErrorItem_errorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorName", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &ext[145]})
-var sEventDetailsErrorItem_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &ext[146]})
-var sEventFilter_actionabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionabilities", ID: &i_EventActionabilityList, Members: &m_EventActionabilityList, Type: smithy.ShapeTypeList, Ext: &ext[148]})
-var sEventFilter_eventArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArns", ID: &i_eventArnList, Members: &m_eventArnList, Type: smithy.ShapeTypeList, Ext: &ext[149]})
-var sEventFilter_eventTypeCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCodes", ID: &i_eventTypeList2, Members: &m_eventTypeList2, Type: smithy.ShapeTypeList, Ext: &ext[150]})
-var sEventFilter_services = smithy.NewStaticSchema(smithy.StaticSchema{Member: "services", ID: &i_serviceList, Members: &m_serviceList, Type: smithy.ShapeTypeList, Ext: &ext[151]})
-var sEventFilter_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_regionList, Members: &m_regionList, Type: smithy.ShapeTypeList, Ext: &ext[152]})
-var sEventFilter_availabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "availabilityZones", ID: &i_availabilityZones, Members: &m_availabilityZones, Type: smithy.ShapeTypeList, Ext: &ext[153]})
-var sEventFilter_startTimes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTimes", ID: &i_dateTimeRangeList, Members: &m_dateTimeRangeList, Type: smithy.ShapeTypeList, Ext: &ext[154]})
-var sEventFilter_endTimes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTimes", ID: &i_dateTimeRangeList, Members: &m_dateTimeRangeList, Type: smithy.ShapeTypeList, Ext: &ext[155]})
-var sEventFilter_lastUpdatedTimes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTimes", ID: &i_dateTimeRangeList, Members: &m_dateTimeRangeList, Type: smithy.ShapeTypeList, Ext: &ext[156]})
-var sEventFilter_entityArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityArns", ID: &i_entityArnList, Members: &m_entityArnList, Type: smithy.ShapeTypeList, Ext: &ext[157]})
-var sEventFilter_entityValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityValues", ID: &i_entityValueList, Members: &m_entityValueList, Type: smithy.ShapeTypeList, Ext: &ext[158]})
-var sEventFilter_eventTypeCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCategories", ID: &i_eventTypeCategoryList2, Members: &m_eventTypeCategoryList2, Type: smithy.ShapeTypeList, Ext: &ext[159]})
-var sEventFilter_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagFilter, Members: &m_tagFilter, Type: smithy.ShapeTypeList, Ext: &ext[160]})
-var sEventFilter_eventStatusCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventStatusCodes", ID: &i_eventStatusCodeList, Members: &m_eventStatusCodeList, Type: smithy.ShapeTypeList, Ext: &ext[161]})
-var sEventFilter_personas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "personas", ID: &i_EventPersonaList, Members: &m_EventPersonaList, Type: smithy.ShapeTypeList, Ext: &ext[162]})
-var s_EventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEvent, Members: &mEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[164]})
-var s_eventMetadata_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_metadataKey, Type: smithy.ShapeTypeString, Ext: &ext[166]})
-var s_eventMetadata_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_metadataValue, Type: smithy.ShapeTypeString, Ext: &ext[167]})
-var sEventPersona_OPERATIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[169]})
-var sEventPersona_SECURITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECURITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[170]})
-var sEventPersona_BILLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BILLING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[171]})
-var s_EventPersonaList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventPersona, Members: &mEventPersona, Type: smithy.ShapeTypeEnum, Ext: &ext[173]})
-var seventScopeCode_PUBLIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[175]})
-var seventScopeCode_ACCOUNT_SPECIFIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT_SPECIFIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[176]})
-var seventScopeCode_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[177]})
-var seventStatusCode_OPEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[179]})
-var seventStatusCode_CLOSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOSED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[180]})
-var seventStatusCode_UPCOMING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPCOMING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[181]})
-var s_eventStatusCodeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &ieventStatusCode, Members: &meventStatusCode, Type: smithy.ShapeTypeEnum, Ext: &ext[183]})
-var sEventType_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "service", ID: &i_service, Type: smithy.ShapeTypeString, Ext: &ext[185]})
-var sEventType_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_eventTypeCode, Type: smithy.ShapeTypeString, Ext: &ext[186]})
-var sEventType_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &ieventTypeCategory, Members: &meventTypeCategory, Type: smithy.ShapeTypeEnum, Ext: &ext[187]})
-var sEventType_actionability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionability", ID: &iEventTypeActionability, Members: &mEventTypeActionability, Type: smithy.ShapeTypeEnum, Ext: &ext[188]})
-var sEventType_personas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "personas", ID: &i_EventTypePersonaList, Members: &m_EventTypePersonaList, Type: smithy.ShapeTypeList, Ext: &ext[189]})
-var sEventTypeActionability_ACTION_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTION_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[192]})
-var sEventTypeActionability_ACTION_MAY_BE_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTION_MAY_BE_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[193]})
-var sEventTypeActionability_INFORMATIONAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFORMATIONAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[194]})
-var s_EventTypeActionabilityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventTypeActionability, Members: &mEventTypeActionability, Type: smithy.ShapeTypeEnum, Ext: &ext[196]})
-var seventTypeCategory_ISSUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ISSUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[198]})
-var seventTypeCategory_ACCOUNT_NOTIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT_NOTIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[199]})
-var seventTypeCategory_SCHEDULED_CHANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCHEDULED_CHANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[200]})
-var seventTypeCategory_INVESTIGATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVESTIGATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[201]})
-var s_EventTypeCategoryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &ieventTypeCategory, Members: &meventTypeCategory, Type: smithy.ShapeTypeEnum, Ext: &ext[203]})
-var s_eventTypeCategoryList2_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &ieventTypeCategory, Members: &meventTypeCategory, Type: smithy.ShapeTypeEnum, Ext: &ext[205]})
-var s_EventTypeCodeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_eventTypeCode, Type: smithy.ShapeTypeString, Ext: &ext[208]})
-var sEventTypeFilter_eventTypeCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCodes", ID: &i_EventTypeCodeList, Members: &m_EventTypeCodeList, Type: smithy.ShapeTypeList, Ext: &ext[210]})
-var sEventTypeFilter_services = smithy.NewStaticSchema(smithy.StaticSchema{Member: "services", ID: &i_serviceList, Members: &m_serviceList, Type: smithy.ShapeTypeList, Ext: &ext[211]})
-var sEventTypeFilter_eventTypeCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCategories", ID: &i_EventTypeCategoryList, Members: &m_EventTypeCategoryList, Type: smithy.ShapeTypeList, Ext: &ext[212]})
-var sEventTypeFilter_actionabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionabilities", ID: &i_EventTypeActionabilityList, Members: &m_EventTypeActionabilityList, Type: smithy.ShapeTypeList, Ext: &ext[213]})
-var sEventTypeFilter_personas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "personas", ID: &i_EventTypePersonaList, Members: &m_EventTypePersonaList, Type: smithy.ShapeTypeList, Ext: &ext[214]})
-var s_EventTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeStructure, Ext: &ext[216]})
-var s_eventTypeList2_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EventType2, Type: smithy.ShapeTypeString, Ext: &ext[218]})
-var sEventTypePersona_OPERATIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[220]})
-var sEventTypePersona_SECURITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECURITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[221]})
-var sEventTypePersona_BILLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BILLING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[222]})
-var s_EventTypePersonaList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventTypePersona, Members: &mEventTypePersona, Type: smithy.ShapeTypeEnum, Ext: &ext[224]})
-var s_ImpactRiskList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &ext[227]})
-var sInvalidPaginationToken_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &ext[229]})
-var sLifecycleEvent_lifecycleEventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lifecycleEventType", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &ext[231]})
-var sLifecycleEvent_date = smithy.NewStaticSchema(smithy.StaticSchema{Member: "date", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[232]})
-var sLifecycleEvent_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_regionList, Members: &m_regionList, Type: smithy.ShapeTypeList, Ext: &ext[233]})
-var sLifecycleEvent_impactRisks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "impactRisks", ID: &i_ImpactRiskList, Members: &m_ImpactRiskList, Type: smithy.ShapeTypeList, Ext: &ext[234]})
-var sLifecycleEvent_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &ext[235]})
-var s_LifecycleEventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLifecycleEvent, Members: &mLifecycleEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[237]})
-var s_OrganizationAccountIdsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_accountId, Type: smithy.ShapeTypeString, Ext: &ext[246]})
-var sOrganizationAffectedEntitiesErrorItem_awsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountId", ID: &i_accountId, Type: smithy.ShapeTypeString, Ext: &ext[248]})
-var sOrganizationAffectedEntitiesErrorItem_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &ext[249]})
-var sOrganizationAffectedEntitiesErrorItem_errorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorName", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &ext[250]})
-var sOrganizationAffectedEntitiesErrorItem_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &ext[251]})
-var s_OrganizationEntityAccountFiltersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntityAccountFilter, Members: &mEntityAccountFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[253]})
-var sOrganizationEntityAggregate_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &ext[255]})
-var sOrganizationEntityAggregate_count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "count", ID: &i_count, Type: smithy.ShapeTypeInteger, Ext: &ext[256]})
-var sOrganizationEntityAggregate_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_entityStatuses, Members: &m_entityStatuses, Type: smithy.ShapeTypeMap, Ext: &ext[257]})
-var sOrganizationEntityAggregate_accounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accounts", ID: &i_AccountEntityAggregatesList, Members: &m_AccountEntityAggregatesList, Type: smithy.ShapeTypeList, Ext: &ext[258]})
-var s_OrganizationEntityAggregatesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOrganizationEntityAggregate, Members: &mOrganizationEntityAggregate, Type: smithy.ShapeTypeStructure, Ext: &ext[260]})
-var s_OrganizationEntityFiltersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventAccountFilter, Members: &mEventAccountFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[262]})
-var sOrganizationEvent_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &ext[264]})
-var sOrganizationEvent_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "service", ID: &i_service, Type: smithy.ShapeTypeString, Ext: &ext[265]})
-var sOrganizationEvent_eventTypeCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCode", ID: &i_eventTypeCode, Type: smithy.ShapeTypeString, Ext: &ext[266]})
-var sOrganizationEvent_eventTypeCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCategory", ID: &ieventTypeCategory, Members: &meventTypeCategory, Type: smithy.ShapeTypeEnum, Ext: &ext[267]})
-var sOrganizationEvent_eventScopeCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventScopeCode", ID: &ieventScopeCode, Members: &meventScopeCode, Type: smithy.ShapeTypeEnum, Ext: &ext[268]})
-var sOrganizationEvent_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_region, Type: smithy.ShapeTypeString, Ext: &ext[269]})
-var sOrganizationEvent_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[270]})
-var sOrganizationEvent_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[271]})
-var sOrganizationEvent_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[272]})
-var sOrganizationEvent_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &ieventStatusCode, Members: &meventStatusCode, Type: smithy.ShapeTypeEnum, Ext: &ext[273]})
-var sOrganizationEvent_actionability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionability", ID: &iEventActionability, Members: &mEventActionability, Type: smithy.ShapeTypeEnum, Ext: &ext[274]})
-var sOrganizationEvent_personas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "personas", ID: &i_EventPersonaList, Members: &m_EventPersonaList, Type: smithy.ShapeTypeList, Ext: &ext[275]})
-var s_OrganizationEventArnsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &ext[277]})
-var s_OrganizationEventDetailFiltersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventAccountFilter, Members: &mEventAccountFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[279]})
-var sOrganizationEventDetails_awsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountId", ID: &i_accountId, Type: smithy.ShapeTypeString, Ext: &ext[281]})
-var sOrganizationEventDetails_event = smithy.NewStaticSchema(smithy.StaticSchema{Member: "event", ID: &iEvent, Members: &mEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[282]})
-var sOrganizationEventDetails_eventDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventDescription", ID: &iEventDescription, Members: &mEventDescription, Type: smithy.ShapeTypeStructure, Ext: &ext[283]})
-var sOrganizationEventDetails_eventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventMetadata", ID: &i_eventMetadata, Members: &m_eventMetadata, Type: smithy.ShapeTypeMap, Ext: &ext[284]})
-var sOrganizationEventDetailsErrorItem_awsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountId", ID: &i_accountId, Type: smithy.ShapeTypeString, Ext: &ext[286]})
-var sOrganizationEventDetailsErrorItem_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &ext[287]})
-var sOrganizationEventDetailsErrorItem_errorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorName", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &ext[288]})
-var sOrganizationEventDetailsErrorItem_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &ext[289]})
-var sOrganizationEventFilter_actionabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionabilities", ID: &i_EventActionabilityList, Members: &m_EventActionabilityList, Type: smithy.ShapeTypeList, Ext: &ext[291]})
-var sOrganizationEventFilter_eventTypeCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCodes", ID: &i_eventTypeList2, Members: &m_eventTypeList2, Type: smithy.ShapeTypeList, Ext: &ext[292]})
-var sOrganizationEventFilter_awsAccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountIds", ID: &i_awsAccountIdsList, Members: &m_awsAccountIdsList, Type: smithy.ShapeTypeList, Ext: &ext[293]})
-var sOrganizationEventFilter_services = smithy.NewStaticSchema(smithy.StaticSchema{Member: "services", ID: &i_serviceList, Members: &m_serviceList, Type: smithy.ShapeTypeList, Ext: &ext[294]})
-var sOrganizationEventFilter_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_regionList, Members: &m_regionList, Type: smithy.ShapeTypeList, Ext: &ext[295]})
-var sOrganizationEventFilter_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &iDateTimeRange, Members: &mDateTimeRange, Type: smithy.ShapeTypeStructure, Ext: &ext[296]})
-var sOrganizationEventFilter_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &iDateTimeRange, Members: &mDateTimeRange, Type: smithy.ShapeTypeStructure, Ext: &ext[297]})
-var sOrganizationEventFilter_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &iDateTimeRange, Members: &mDateTimeRange, Type: smithy.ShapeTypeStructure, Ext: &ext[298]})
-var sOrganizationEventFilter_entityArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityArns", ID: &i_entityArnList, Members: &m_entityArnList, Type: smithy.ShapeTypeList, Ext: &ext[299]})
-var sOrganizationEventFilter_entityValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityValues", ID: &i_entityValueList, Members: &m_entityValueList, Type: smithy.ShapeTypeList, Ext: &ext[300]})
-var sOrganizationEventFilter_eventTypeCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCategories", ID: &i_eventTypeCategoryList2, Members: &m_eventTypeCategoryList2, Type: smithy.ShapeTypeList, Ext: &ext[301]})
-var sOrganizationEventFilter_eventStatusCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventStatusCodes", ID: &i_eventStatusCodeList, Members: &m_eventStatusCodeList, Type: smithy.ShapeTypeList, Ext: &ext[302]})
-var sOrganizationEventFilter_personas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "personas", ID: &i_EventPersonaList, Members: &m_EventPersonaList, Type: smithy.ShapeTypeList, Ext: &ext[303]})
-var s_OrganizationEventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOrganizationEvent, Members: &mOrganizationEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[305]})
-var s_regionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_region, Type: smithy.ShapeTypeString, Ext: &ext[308]})
-var sServiceLifecycle_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "service", ID: &i_service, Type: smithy.ShapeTypeString, Ext: &ext[311]})
-var sServiceLifecycle_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &ext[312]})
-var sServiceLifecycle_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &ext[313]})
-var sServiceLifecycle_recommendedVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedVersion", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &ext[314]})
-var sServiceLifecycle_lifecycleEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lifecycleEvents", ID: &i_LifecycleEventList, Members: &m_LifecycleEventList, Type: smithy.ShapeTypeList, Ext: &ext[315]})
-var sServiceLifecycleFilter_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "service", ID: &i_service, Type: smithy.ShapeTypeString, Ext: &ext[317]})
-var s_ServiceLifecycleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceLifecycle, Members: &mServiceLifecycle, Type: smithy.ShapeTypeStructure, Ext: &ext[319]})
-var s_serviceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_service, Type: smithy.ShapeTypeString, Ext: &ext[321]})
-var s_tagFilter_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_tagSet, Members: &m_tagSet, Type: smithy.ShapeTypeMap, Ext: &ext[324]})
-var s_tagSet_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_tagKey, Type: smithy.ShapeTypeString, Ext: &ext[327]})
-var s_tagSet_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_tagValue, Type: smithy.ShapeTypeString, Ext: &ext[328]})
-var sUnsupportedLocale_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &ext[332]})
-var sDescribeAffectedAccountsForOrganizationRequest_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &ext[334]})
-var sDescribeAffectedAccountsForOrganizationRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &ext[335]})
-var sDescribeAffectedAccountsForOrganizationRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[336]})
-var sDescribeAffectedAccountsForOrganizationResponse_affectedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "affectedAccounts", ID: &i_affectedAccountsList, Members: &m_affectedAccountsList, Type: smithy.ShapeTypeList, Ext: &ext[338]})
-var sDescribeAffectedAccountsForOrganizationResponse_eventScopeCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventScopeCode", ID: &ieventScopeCode, Members: &meventScopeCode, Type: smithy.ShapeTypeEnum, Ext: &ext[339]})
-var sDescribeAffectedAccountsForOrganizationResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &ext[340]})
-var sDescribeAffectedEntitiesForOrganizationRequest_organizationEntityFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationEntityFilters", ID: &i_OrganizationEntityFiltersList, Members: &m_OrganizationEntityFiltersList, Type: smithy.ShapeTypeList, Ext: &ext[342]})
-var sDescribeAffectedEntitiesForOrganizationRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_locale, Type: smithy.ShapeTypeString, Ext: &ext[343]})
-var sDescribeAffectedEntitiesForOrganizationRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &ext[344]})
-var sDescribeAffectedEntitiesForOrganizationRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResultsLowerRange, Type: smithy.ShapeTypeInteger, Ext: &ext[345]})
-var sDescribeAffectedEntitiesForOrganizationRequest_organizationEntityAccountFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationEntityAccountFilters", ID: &i_OrganizationEntityAccountFiltersList, Members: &m_OrganizationEntityAccountFiltersList, Type: smithy.ShapeTypeList, Ext: &ext[346]})
-var sDescribeAffectedEntitiesForOrganizationResponse_entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entities", ID: &i_EntityList, Members: &m_EntityList, Type: smithy.ShapeTypeList, Ext: &ext[348]})
-var sDescribeAffectedEntitiesForOrganizationResponse_failedSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failedSet", ID: &i_DescribeAffectedEntitiesForOrganizationFailedSet, Members: &m_DescribeAffectedEntitiesForOrganizationFailedSet, Type: smithy.ShapeTypeList, Ext: &ext[349]})
-var sDescribeAffectedEntitiesForOrganizationResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &ext[350]})
-var sDescribeAffectedEntitiesRequest_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iEntityFilter, Members: &mEntityFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[352]})
-var sDescribeAffectedEntitiesRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_locale, Type: smithy.ShapeTypeString, Ext: &ext[353]})
-var sDescribeAffectedEntitiesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &ext[354]})
-var sDescribeAffectedEntitiesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResultsLowerRange, Type: smithy.ShapeTypeInteger, Ext: &ext[355]})
-var sDescribeAffectedEntitiesResponse_entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entities", ID: &i_EntityList, Members: &m_EntityList, Type: smithy.ShapeTypeList, Ext: &ext[357]})
-var sDescribeAffectedEntitiesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &ext[358]})
-var sDescribeEntityAggregatesForOrganizationRequest_eventArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArns", ID: &i_OrganizationEventArnsList, Members: &m_OrganizationEventArnsList, Type: smithy.ShapeTypeList, Ext: &ext[360]})
-var sDescribeEntityAggregatesForOrganizationRequest_awsAccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountIds", ID: &i_OrganizationAccountIdsList, Members: &m_OrganizationAccountIdsList, Type: smithy.ShapeTypeList, Ext: &ext[361]})
-var sDescribeEntityAggregatesForOrganizationResponse_organizationEntityAggregates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationEntityAggregates", ID: &i_OrganizationEntityAggregatesList, Members: &m_OrganizationEntityAggregatesList, Type: smithy.ShapeTypeList, Ext: &ext[363]})
-var sDescribeEntityAggregatesRequest_eventArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArns", ID: &i_EventArnsList, Members: &m_EventArnsList, Type: smithy.ShapeTypeList, Ext: &ext[365]})
-var sDescribeEntityAggregatesResponse_entityAggregates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityAggregates", ID: &i_EntityAggregateList, Members: &m_EntityAggregateList, Type: smithy.ShapeTypeList, Ext: &ext[367]})
-var sDescribeEventAggregatesRequest_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iEventFilter, Members: &mEventFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[369]})
-var sDescribeEventAggregatesRequest_aggregateField = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregateField", ID: &ieventAggregateField, Members: &meventAggregateField, Type: smithy.ShapeTypeEnum, Ext: &ext[370]})
-var sDescribeEventAggregatesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[371]})
-var sDescribeEventAggregatesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &ext[372]})
-var sDescribeEventAggregatesResponse_eventAggregates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventAggregates", ID: &i_EventAggregateList, Members: &m_EventAggregateList, Type: smithy.ShapeTypeList, Ext: &ext[374]})
-var sDescribeEventAggregatesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &ext[375]})
-var sDescribeEventDetailsForOrganizationRequest_organizationEventDetailFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationEventDetailFilters", ID: &i_OrganizationEventDetailFiltersList, Members: &m_OrganizationEventDetailFiltersList, Type: smithy.ShapeTypeList, Ext: &ext[377]})
-var sDescribeEventDetailsForOrganizationRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_locale, Type: smithy.ShapeTypeString, Ext: &ext[378]})
-var sDescribeEventDetailsForOrganizationResponse_successfulSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successfulSet", ID: &i_DescribeEventDetailsForOrganizationSuccessfulSet, Members: &m_DescribeEventDetailsForOrganizationSuccessfulSet, Type: smithy.ShapeTypeList, Ext: &ext[380]})
-var sDescribeEventDetailsForOrganizationResponse_failedSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failedSet", ID: &i_DescribeEventDetailsForOrganizationFailedSet, Members: &m_DescribeEventDetailsForOrganizationFailedSet, Type: smithy.ShapeTypeList, Ext: &ext[381]})
-var sDescribeEventDetailsRequest_eventArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArns", ID: &i_eventArnList, Members: &m_eventArnList, Type: smithy.ShapeTypeList, Ext: &ext[383]})
-var sDescribeEventDetailsRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_locale, Type: smithy.ShapeTypeString, Ext: &ext[384]})
-var sDescribeEventDetailsResponse_successfulSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successfulSet", ID: &i_DescribeEventDetailsSuccessfulSet, Members: &m_DescribeEventDetailsSuccessfulSet, Type: smithy.ShapeTypeList, Ext: &ext[386]})
-var sDescribeEventDetailsResponse_failedSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failedSet", ID: &i_DescribeEventDetailsFailedSet, Members: &m_DescribeEventDetailsFailedSet, Type: smithy.ShapeTypeList, Ext: &ext[387]})
-var sDescribeEventsForOrganizationRequest_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iOrganizationEventFilter, Members: &mOrganizationEventFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[389]})
-var sDescribeEventsForOrganizationRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &ext[390]})
-var sDescribeEventsForOrganizationRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResultsLowerRange, Type: smithy.ShapeTypeInteger, Ext: &ext[391]})
-var sDescribeEventsForOrganizationRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_locale, Type: smithy.ShapeTypeString, Ext: &ext[392]})
-var sDescribeEventsForOrganizationResponse_events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "events", ID: &i_OrganizationEventList, Members: &m_OrganizationEventList, Type: smithy.ShapeTypeList, Ext: &ext[394]})
-var sDescribeEventsForOrganizationResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &ext[395]})
-var sDescribeEventsRequest_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iEventFilter, Members: &mEventFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[397]})
-var sDescribeEventsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &ext[398]})
-var sDescribeEventsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResultsLowerRange, Type: smithy.ShapeTypeInteger, Ext: &ext[399]})
-var sDescribeEventsRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_locale, Type: smithy.ShapeTypeString, Ext: &ext[400]})
-var sDescribeEventsResponse_events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "events", ID: &i_EventList, Members: &m_EventList, Type: smithy.ShapeTypeList, Ext: &ext[402]})
-var sDescribeEventsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &ext[403]})
-var sDescribeEventTypesRequest_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iEventTypeFilter, Members: &mEventTypeFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[405]})
-var sDescribeEventTypesRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_locale, Type: smithy.ShapeTypeString, Ext: &ext[406]})
-var sDescribeEventTypesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &ext[407]})
-var sDescribeEventTypesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[408]})
-var sDescribeEventTypesResponse_eventTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypes", ID: &i_EventTypeList, Members: &m_EventTypeList, Type: smithy.ShapeTypeList, Ext: &ext[410]})
-var sDescribeEventTypesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &ext[411]})
-var sDescribeHealthServiceStatusForOrganizationResponse_healthServiceAccessStatusForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "healthServiceAccessStatusForOrganization", ID: &i_healthServiceAccessStatusForOrganization, Type: smithy.ShapeTypeString, Ext: &ext[413]})
-var sDescribeServiceLifecycleRequest_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iServiceLifecycleFilter, Members: &mServiceLifecycleFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[415]})
-var sDescribeServiceLifecycleRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &ext[416]})
-var sDescribeServiceLifecycleRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_LifecycleMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[417]})
-var sDescribeServiceLifecycleResponse_serviceLifecycles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceLifecycles", ID: &i_ServiceLifecycleList, Members: &m_ServiceLifecycleList, Type: smithy.ShapeTypeList, Ext: &ext[419]})
-var sDescribeServiceLifecycleResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &ext[420]})
+var sAccountEntityAggregate_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &eAccountEntityAggregate_accountId})
+var sAccountEntityAggregate_count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "count", ID: &i_count, Type: smithy.ShapeTypeInteger, Ext: &eAccountEntityAggregate_count})
+var sAccountEntityAggregate_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_entityStatuses, Members: &m_entityStatuses, Type: smithy.ShapeTypeMap, Ext: &eAccountEntityAggregate_statuses})
+var s_AccountEntityAggregatesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccountEntityAggregate, Members: &mAccountEntityAggregate, Type: smithy.ShapeTypeStructure, Ext: &e_AccountEntityAggregatesList_member})
+var s_affectedAccountsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_accountId, Type: smithy.ShapeTypeString, Ext: &e_affectedAccountsList_member})
+var sAffectedEntity_entityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityArn", ID: &i_entityArn, Type: smithy.ShapeTypeString, Ext: &eAffectedEntity_entityArn})
+var sAffectedEntity_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &eAffectedEntity_eventArn})
+var sAffectedEntity_entityValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityValue", ID: &i_entityValue, Type: smithy.ShapeTypeString, Ext: &eAffectedEntity_entityValue})
+var sAffectedEntity_entityUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityUrl", ID: &i_entityUrl, Type: smithy.ShapeTypeString, Ext: &eAffectedEntity_entityUrl})
+var sAffectedEntity_awsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountId", ID: &i_accountId, Type: smithy.ShapeTypeString, Ext: &eAffectedEntity_awsAccountId})
+var sAffectedEntity_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAffectedEntity_lastUpdatedTime})
+var sAffectedEntity_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &ientityStatusCode, Members: &mentityStatusCode, Type: smithy.ShapeTypeEnum, Ext: &eAffectedEntity_statusCode})
+var sAffectedEntity_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagSet, Members: &m_tagSet, Type: smithy.ShapeTypeMap, Ext: &eAffectedEntity_tags})
+var sAffectedEntity_entityMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityMetadata", ID: &i_entityMetadata, Members: &m_entityMetadata, Type: smithy.ShapeTypeMap, Ext: &eAffectedEntity_entityMetadata})
+var s_availabilityZones_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_availabilityZone, Type: smithy.ShapeTypeString, Ext: &e_availabilityZones_member})
+var s_awsAccountIdsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_accountId, Type: smithy.ShapeTypeString, Ext: &e_awsAccountIdsList_member})
+var sConcurrentModificationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eConcurrentModificationException_message})
+var sDateTimeRange_from = smithy.NewStaticSchema(smithy.StaticSchema{Member: "from", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDateTimeRange_from})
+var sDateTimeRange_to = smithy.NewStaticSchema(smithy.StaticSchema{Member: "to", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDateTimeRange_to})
+var s_dateTimeRangeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDateTimeRange, Members: &mDateTimeRange, Type: smithy.ShapeTypeStructure, Ext: &e_dateTimeRangeList_member})
+var s_DescribeAffectedEntitiesForOrganizationFailedSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOrganizationAffectedEntitiesErrorItem, Members: &mOrganizationAffectedEntitiesErrorItem, Type: smithy.ShapeTypeStructure, Ext: &e_DescribeAffectedEntitiesForOrganizationFailedSet_member})
+var s_DescribeEventDetailsFailedSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventDetailsErrorItem, Members: &mEventDetailsErrorItem, Type: smithy.ShapeTypeStructure, Ext: &e_DescribeEventDetailsFailedSet_member})
+var s_DescribeEventDetailsForOrganizationFailedSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOrganizationEventDetailsErrorItem, Members: &mOrganizationEventDetailsErrorItem, Type: smithy.ShapeTypeStructure, Ext: &e_DescribeEventDetailsForOrganizationFailedSet_member})
+var s_DescribeEventDetailsForOrganizationSuccessfulSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOrganizationEventDetails, Members: &mOrganizationEventDetails, Type: smithy.ShapeTypeStructure, Ext: &e_DescribeEventDetailsForOrganizationSuccessfulSet_member})
+var s_DescribeEventDetailsSuccessfulSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventDetails, Members: &mEventDetails, Type: smithy.ShapeTypeStructure, Ext: &e_DescribeEventDetailsSuccessfulSet_member})
+var sEntityAccountFilter_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &eEntityAccountFilter_eventArn})
+var sEntityAccountFilter_awsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountId", ID: &i_accountId, Type: smithy.ShapeTypeString, Ext: &eEntityAccountFilter_awsAccountId})
+var sEntityAccountFilter_statusCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCodes", ID: &i_entityStatusCodeList, Members: &m_entityStatusCodeList, Type: smithy.ShapeTypeList, Ext: &eEntityAccountFilter_statusCodes})
+var sEntityAggregate_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &eEntityAggregate_eventArn})
+var sEntityAggregate_count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "count", ID: &i_count, Type: smithy.ShapeTypeInteger, Ext: &eEntityAggregate_count})
+var sEntityAggregate_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_entityStatuses, Members: &m_entityStatuses, Type: smithy.ShapeTypeMap, Ext: &eEntityAggregate_statuses})
+var s_EntityAggregateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntityAggregate, Members: &mEntityAggregate, Type: smithy.ShapeTypeStructure, Ext: &e_EntityAggregateList_member})
+var s_entityArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_entityArn, Type: smithy.ShapeTypeString, Ext: &e_entityArnList_member})
+var sEntityFilter_eventArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArns", ID: &i_eventArnList, Members: &m_eventArnList, Type: smithy.ShapeTypeList, Ext: &eEntityFilter_eventArns})
+var sEntityFilter_entityArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityArns", ID: &i_entityArnList, Members: &m_entityArnList, Type: smithy.ShapeTypeList, Ext: &eEntityFilter_entityArns})
+var sEntityFilter_entityValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityValues", ID: &i_entityValueList, Members: &m_entityValueList, Type: smithy.ShapeTypeList, Ext: &eEntityFilter_entityValues})
+var sEntityFilter_lastUpdatedTimes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTimes", ID: &i_dateTimeRangeList, Members: &m_dateTimeRangeList, Type: smithy.ShapeTypeList, Ext: &eEntityFilter_lastUpdatedTimes})
+var sEntityFilter_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagFilter, Members: &m_tagFilter, Type: smithy.ShapeTypeList, Ext: &eEntityFilter_tags})
+var sEntityFilter_statusCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCodes", ID: &i_entityStatusCodeList, Members: &m_entityStatusCodeList, Type: smithy.ShapeTypeList, Ext: &eEntityFilter_statusCodes})
+var s_EntityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAffectedEntity, Members: &mAffectedEntity, Type: smithy.ShapeTypeStructure, Ext: &e_EntityList_member})
+var s_entityMetadata_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_entityMetadataKey, Type: smithy.ShapeTypeString, Ext: &e_entityMetadata_key})
+var s_entityMetadata_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_entityMetadataValue, Type: smithy.ShapeTypeString, Ext: &e_entityMetadata_value})
+var sentityStatusCode_IMPAIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPAIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eentityStatusCode_IMPAIRED})
+var sentityStatusCode_UNIMPAIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNIMPAIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eentityStatusCode_UNIMPAIRED})
+var sentityStatusCode_UNKNOWN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eentityStatusCode_UNKNOWN})
+var sentityStatusCode_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eentityStatusCode_PENDING})
+var sentityStatusCode_RESOLVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOLVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eentityStatusCode_RESOLVED})
+var s_entityStatusCodeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &ientityStatusCode, Members: &mentityStatusCode, Type: smithy.ShapeTypeEnum, Ext: &e_entityStatusCodeList_member})
+var s_entityStatuses_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &ientityStatusCode, Members: &mentityStatusCode, Type: smithy.ShapeTypeEnum, Ext: &e_entityStatuses_key})
+var s_entityStatuses_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_count, Type: smithy.ShapeTypeInteger, Ext: &e_entityStatuses_value})
+var s_entityValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_entityValue, Type: smithy.ShapeTypeString, Ext: &e_entityValueList_member})
+var sEvent_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &eEvent_arn})
+var sEvent_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "service", ID: &i_service, Type: smithy.ShapeTypeString, Ext: &eEvent_service})
+var sEvent_eventTypeCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCode", ID: &i_eventTypeCode, Type: smithy.ShapeTypeString, Ext: &eEvent_eventTypeCode})
+var sEvent_eventTypeCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCategory", ID: &ieventTypeCategory, Members: &meventTypeCategory, Type: smithy.ShapeTypeEnum, Ext: &eEvent_eventTypeCategory})
+var sEvent_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_region, Type: smithy.ShapeTypeString, Ext: &eEvent_region})
+var sEvent_availabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "availabilityZone", ID: &i_availabilityZone, Type: smithy.ShapeTypeString, Ext: &eEvent_availabilityZone})
+var sEvent_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eEvent_startTime})
+var sEvent_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eEvent_endTime})
+var sEvent_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eEvent_lastUpdatedTime})
+var sEvent_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &ieventStatusCode, Members: &meventStatusCode, Type: smithy.ShapeTypeEnum, Ext: &eEvent_statusCode})
+var sEvent_eventScopeCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventScopeCode", ID: &ieventScopeCode, Members: &meventScopeCode, Type: smithy.ShapeTypeEnum, Ext: &eEvent_eventScopeCode})
+var sEvent_actionability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionability", ID: &iEventActionability, Members: &mEventActionability, Type: smithy.ShapeTypeEnum, Ext: &eEvent_actionability})
+var sEvent_personas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "personas", ID: &i_EventPersonaList, Members: &m_EventPersonaList, Type: smithy.ShapeTypeList, Ext: &eEvent_personas})
+var sEventAccountFilter_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &eEventAccountFilter_eventArn})
+var sEventAccountFilter_awsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountId", ID: &i_accountId, Type: smithy.ShapeTypeString, Ext: &eEventAccountFilter_awsAccountId})
+var sEventActionability_ACTION_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTION_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventActionability_ACTION_REQUIRED})
+var sEventActionability_ACTION_MAY_BE_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTION_MAY_BE_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventActionability_ACTION_MAY_BE_REQUIRED})
+var sEventActionability_INFORMATIONAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFORMATIONAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventActionability_INFORMATIONAL})
+var s_EventActionabilityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventActionability, Members: &mEventActionability, Type: smithy.ShapeTypeEnum, Ext: &e_EventActionabilityList_member})
+var sEventAggregate_aggregateValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregateValue", ID: &i_aggregateValue, Type: smithy.ShapeTypeString, Ext: &eEventAggregate_aggregateValue})
+var sEventAggregate_count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "count", ID: &i_count, Type: smithy.ShapeTypeInteger, Ext: &eEventAggregate_count})
+var seventAggregateField_EventTypeCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventTypeCategory", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eeventAggregateField_EventTypeCategory})
+var s_EventAggregateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventAggregate, Members: &mEventAggregate, Type: smithy.ShapeTypeStructure, Ext: &e_EventAggregateList_member})
+var s_eventArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &e_eventArnList_member})
+var s_EventArnsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &e_EventArnsList_member})
+var sEventDescription_latestDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestDescription", ID: &i_EventDescription2, Type: smithy.ShapeTypeString, Ext: &eEventDescription_latestDescription})
+var sEventDetails_event = smithy.NewStaticSchema(smithy.StaticSchema{Member: "event", ID: &iEvent, Members: &mEvent, Type: smithy.ShapeTypeStructure, Ext: &eEventDetails_event})
+var sEventDetails_eventDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventDescription", ID: &iEventDescription, Members: &mEventDescription, Type: smithy.ShapeTypeStructure, Ext: &eEventDetails_eventDescription})
+var sEventDetails_eventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventMetadata", ID: &i_eventMetadata, Members: &m_eventMetadata, Type: smithy.ShapeTypeMap, Ext: &eEventDetails_eventMetadata})
+var sEventDetailsErrorItem_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &eEventDetailsErrorItem_eventArn})
+var sEventDetailsErrorItem_errorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorName", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eEventDetailsErrorItem_errorName})
+var sEventDetailsErrorItem_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eEventDetailsErrorItem_errorMessage})
+var sEventFilter_actionabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionabilities", ID: &i_EventActionabilityList, Members: &m_EventActionabilityList, Type: smithy.ShapeTypeList, Ext: &eEventFilter_actionabilities})
+var sEventFilter_eventArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArns", ID: &i_eventArnList, Members: &m_eventArnList, Type: smithy.ShapeTypeList, Ext: &eEventFilter_eventArns})
+var sEventFilter_eventTypeCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCodes", ID: &i_eventTypeList2, Members: &m_eventTypeList2, Type: smithy.ShapeTypeList, Ext: &eEventFilter_eventTypeCodes})
+var sEventFilter_services = smithy.NewStaticSchema(smithy.StaticSchema{Member: "services", ID: &i_serviceList, Members: &m_serviceList, Type: smithy.ShapeTypeList, Ext: &eEventFilter_services})
+var sEventFilter_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_regionList, Members: &m_regionList, Type: smithy.ShapeTypeList, Ext: &eEventFilter_regions})
+var sEventFilter_availabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "availabilityZones", ID: &i_availabilityZones, Members: &m_availabilityZones, Type: smithy.ShapeTypeList, Ext: &eEventFilter_availabilityZones})
+var sEventFilter_startTimes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTimes", ID: &i_dateTimeRangeList, Members: &m_dateTimeRangeList, Type: smithy.ShapeTypeList, Ext: &eEventFilter_startTimes})
+var sEventFilter_endTimes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTimes", ID: &i_dateTimeRangeList, Members: &m_dateTimeRangeList, Type: smithy.ShapeTypeList, Ext: &eEventFilter_endTimes})
+var sEventFilter_lastUpdatedTimes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTimes", ID: &i_dateTimeRangeList, Members: &m_dateTimeRangeList, Type: smithy.ShapeTypeList, Ext: &eEventFilter_lastUpdatedTimes})
+var sEventFilter_entityArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityArns", ID: &i_entityArnList, Members: &m_entityArnList, Type: smithy.ShapeTypeList, Ext: &eEventFilter_entityArns})
+var sEventFilter_entityValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityValues", ID: &i_entityValueList, Members: &m_entityValueList, Type: smithy.ShapeTypeList, Ext: &eEventFilter_entityValues})
+var sEventFilter_eventTypeCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCategories", ID: &i_eventTypeCategoryList2, Members: &m_eventTypeCategoryList2, Type: smithy.ShapeTypeList, Ext: &eEventFilter_eventTypeCategories})
+var sEventFilter_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagFilter, Members: &m_tagFilter, Type: smithy.ShapeTypeList, Ext: &eEventFilter_tags})
+var sEventFilter_eventStatusCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventStatusCodes", ID: &i_eventStatusCodeList, Members: &m_eventStatusCodeList, Type: smithy.ShapeTypeList, Ext: &eEventFilter_eventStatusCodes})
+var sEventFilter_personas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "personas", ID: &i_EventPersonaList, Members: &m_EventPersonaList, Type: smithy.ShapeTypeList, Ext: &eEventFilter_personas})
+var s_EventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEvent, Members: &mEvent, Type: smithy.ShapeTypeStructure, Ext: &e_EventList_member})
+var s_eventMetadata_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_metadataKey, Type: smithy.ShapeTypeString, Ext: &e_eventMetadata_key})
+var s_eventMetadata_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_metadataValue, Type: smithy.ShapeTypeString, Ext: &e_eventMetadata_value})
+var sEventPersona_OPERATIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventPersona_OPERATIONS})
+var sEventPersona_SECURITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECURITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventPersona_SECURITY})
+var sEventPersona_BILLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BILLING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventPersona_BILLING})
+var s_EventPersonaList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventPersona, Members: &mEventPersona, Type: smithy.ShapeTypeEnum, Ext: &e_EventPersonaList_member})
+var seventScopeCode_PUBLIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eeventScopeCode_PUBLIC})
+var seventScopeCode_ACCOUNT_SPECIFIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT_SPECIFIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eeventScopeCode_ACCOUNT_SPECIFIC})
+var seventScopeCode_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eeventScopeCode_NONE})
+var seventStatusCode_OPEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eeventStatusCode_OPEN})
+var seventStatusCode_CLOSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOSED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eeventStatusCode_CLOSED})
+var seventStatusCode_UPCOMING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPCOMING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eeventStatusCode_UPCOMING})
+var s_eventStatusCodeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &ieventStatusCode, Members: &meventStatusCode, Type: smithy.ShapeTypeEnum, Ext: &e_eventStatusCodeList_member})
+var sEventType_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "service", ID: &i_service, Type: smithy.ShapeTypeString, Ext: &eEventType_service})
+var sEventType_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_eventTypeCode, Type: smithy.ShapeTypeString, Ext: &eEventType_code})
+var sEventType_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &ieventTypeCategory, Members: &meventTypeCategory, Type: smithy.ShapeTypeEnum, Ext: &eEventType_category})
+var sEventType_actionability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionability", ID: &iEventTypeActionability, Members: &mEventTypeActionability, Type: smithy.ShapeTypeEnum, Ext: &eEventType_actionability})
+var sEventType_personas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "personas", ID: &i_EventTypePersonaList, Members: &m_EventTypePersonaList, Type: smithy.ShapeTypeList, Ext: &eEventType_personas})
+var sEventTypeActionability_ACTION_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTION_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventTypeActionability_ACTION_REQUIRED})
+var sEventTypeActionability_ACTION_MAY_BE_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTION_MAY_BE_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventTypeActionability_ACTION_MAY_BE_REQUIRED})
+var sEventTypeActionability_INFORMATIONAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFORMATIONAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventTypeActionability_INFORMATIONAL})
+var s_EventTypeActionabilityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventTypeActionability, Members: &mEventTypeActionability, Type: smithy.ShapeTypeEnum, Ext: &e_EventTypeActionabilityList_member})
+var seventTypeCategory_ISSUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ISSUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eeventTypeCategory_ISSUE})
+var seventTypeCategory_ACCOUNT_NOTIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT_NOTIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eeventTypeCategory_ACCOUNT_NOTIFICATION})
+var seventTypeCategory_SCHEDULED_CHANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCHEDULED_CHANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eeventTypeCategory_SCHEDULED_CHANGE})
+var seventTypeCategory_INVESTIGATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVESTIGATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eeventTypeCategory_INVESTIGATION})
+var s_EventTypeCategoryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &ieventTypeCategory, Members: &meventTypeCategory, Type: smithy.ShapeTypeEnum, Ext: &e_EventTypeCategoryList_member})
+var s_eventTypeCategoryList2_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &ieventTypeCategory, Members: &meventTypeCategory, Type: smithy.ShapeTypeEnum, Ext: &e_eventTypeCategoryList2_member})
+var s_EventTypeCodeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_eventTypeCode, Type: smithy.ShapeTypeString, Ext: &e_EventTypeCodeList_member})
+var sEventTypeFilter_eventTypeCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCodes", ID: &i_EventTypeCodeList, Members: &m_EventTypeCodeList, Type: smithy.ShapeTypeList, Ext: &eEventTypeFilter_eventTypeCodes})
+var sEventTypeFilter_services = smithy.NewStaticSchema(smithy.StaticSchema{Member: "services", ID: &i_serviceList, Members: &m_serviceList, Type: smithy.ShapeTypeList, Ext: &eEventTypeFilter_services})
+var sEventTypeFilter_eventTypeCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCategories", ID: &i_EventTypeCategoryList, Members: &m_EventTypeCategoryList, Type: smithy.ShapeTypeList, Ext: &eEventTypeFilter_eventTypeCategories})
+var sEventTypeFilter_actionabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionabilities", ID: &i_EventTypeActionabilityList, Members: &m_EventTypeActionabilityList, Type: smithy.ShapeTypeList, Ext: &eEventTypeFilter_actionabilities})
+var sEventTypeFilter_personas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "personas", ID: &i_EventTypePersonaList, Members: &m_EventTypePersonaList, Type: smithy.ShapeTypeList, Ext: &eEventTypeFilter_personas})
+var s_EventTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeStructure, Ext: &e_EventTypeList_member})
+var s_eventTypeList2_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EventType2, Type: smithy.ShapeTypeString, Ext: &e_eventTypeList2_member})
+var sEventTypePersona_OPERATIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventTypePersona_OPERATIONS})
+var sEventTypePersona_SECURITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECURITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventTypePersona_SECURITY})
+var sEventTypePersona_BILLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BILLING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventTypePersona_BILLING})
+var s_EventTypePersonaList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventTypePersona, Members: &mEventTypePersona, Type: smithy.ShapeTypeEnum, Ext: &e_EventTypePersonaList_member})
+var s_ImpactRiskList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &e_ImpactRiskList_member})
+var sInvalidPaginationToken_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eInvalidPaginationToken_message})
+var sLifecycleEvent_lifecycleEventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lifecycleEventType", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eLifecycleEvent_lifecycleEventType})
+var sLifecycleEvent_date = smithy.NewStaticSchema(smithy.StaticSchema{Member: "date", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eLifecycleEvent_date})
+var sLifecycleEvent_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_regionList, Members: &m_regionList, Type: smithy.ShapeTypeList, Ext: &eLifecycleEvent_regions})
+var sLifecycleEvent_impactRisks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "impactRisks", ID: &i_ImpactRiskList, Members: &m_ImpactRiskList, Type: smithy.ShapeTypeList, Ext: &eLifecycleEvent_impactRisks})
+var sLifecycleEvent_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eLifecycleEvent_description})
+var s_LifecycleEventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLifecycleEvent, Members: &mLifecycleEvent, Type: smithy.ShapeTypeStructure, Ext: &e_LifecycleEventList_member})
+var s_OrganizationAccountIdsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_accountId, Type: smithy.ShapeTypeString, Ext: &e_OrganizationAccountIdsList_member})
+var sOrganizationAffectedEntitiesErrorItem_awsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountId", ID: &i_accountId, Type: smithy.ShapeTypeString, Ext: &eOrganizationAffectedEntitiesErrorItem_awsAccountId})
+var sOrganizationAffectedEntitiesErrorItem_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &eOrganizationAffectedEntitiesErrorItem_eventArn})
+var sOrganizationAffectedEntitiesErrorItem_errorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorName", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eOrganizationAffectedEntitiesErrorItem_errorName})
+var sOrganizationAffectedEntitiesErrorItem_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eOrganizationAffectedEntitiesErrorItem_errorMessage})
+var s_OrganizationEntityAccountFiltersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntityAccountFilter, Members: &mEntityAccountFilter, Type: smithy.ShapeTypeStructure, Ext: &e_OrganizationEntityAccountFiltersList_member})
+var sOrganizationEntityAggregate_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &eOrganizationEntityAggregate_eventArn})
+var sOrganizationEntityAggregate_count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "count", ID: &i_count, Type: smithy.ShapeTypeInteger, Ext: &eOrganizationEntityAggregate_count})
+var sOrganizationEntityAggregate_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_entityStatuses, Members: &m_entityStatuses, Type: smithy.ShapeTypeMap, Ext: &eOrganizationEntityAggregate_statuses})
+var sOrganizationEntityAggregate_accounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accounts", ID: &i_AccountEntityAggregatesList, Members: &m_AccountEntityAggregatesList, Type: smithy.ShapeTypeList, Ext: &eOrganizationEntityAggregate_accounts})
+var s_OrganizationEntityAggregatesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOrganizationEntityAggregate, Members: &mOrganizationEntityAggregate, Type: smithy.ShapeTypeStructure, Ext: &e_OrganizationEntityAggregatesList_member})
+var s_OrganizationEntityFiltersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventAccountFilter, Members: &mEventAccountFilter, Type: smithy.ShapeTypeStructure, Ext: &e_OrganizationEntityFiltersList_member})
+var sOrganizationEvent_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &eOrganizationEvent_arn})
+var sOrganizationEvent_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "service", ID: &i_service, Type: smithy.ShapeTypeString, Ext: &eOrganizationEvent_service})
+var sOrganizationEvent_eventTypeCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCode", ID: &i_eventTypeCode, Type: smithy.ShapeTypeString, Ext: &eOrganizationEvent_eventTypeCode})
+var sOrganizationEvent_eventTypeCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCategory", ID: &ieventTypeCategory, Members: &meventTypeCategory, Type: smithy.ShapeTypeEnum, Ext: &eOrganizationEvent_eventTypeCategory})
+var sOrganizationEvent_eventScopeCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventScopeCode", ID: &ieventScopeCode, Members: &meventScopeCode, Type: smithy.ShapeTypeEnum, Ext: &eOrganizationEvent_eventScopeCode})
+var sOrganizationEvent_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_region, Type: smithy.ShapeTypeString, Ext: &eOrganizationEvent_region})
+var sOrganizationEvent_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eOrganizationEvent_startTime})
+var sOrganizationEvent_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eOrganizationEvent_endTime})
+var sOrganizationEvent_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eOrganizationEvent_lastUpdatedTime})
+var sOrganizationEvent_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &ieventStatusCode, Members: &meventStatusCode, Type: smithy.ShapeTypeEnum, Ext: &eOrganizationEvent_statusCode})
+var sOrganizationEvent_actionability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionability", ID: &iEventActionability, Members: &mEventActionability, Type: smithy.ShapeTypeEnum, Ext: &eOrganizationEvent_actionability})
+var sOrganizationEvent_personas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "personas", ID: &i_EventPersonaList, Members: &m_EventPersonaList, Type: smithy.ShapeTypeList, Ext: &eOrganizationEvent_personas})
+var s_OrganizationEventArnsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &e_OrganizationEventArnsList_member})
+var s_OrganizationEventDetailFiltersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventAccountFilter, Members: &mEventAccountFilter, Type: smithy.ShapeTypeStructure, Ext: &e_OrganizationEventDetailFiltersList_member})
+var sOrganizationEventDetails_awsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountId", ID: &i_accountId, Type: smithy.ShapeTypeString, Ext: &eOrganizationEventDetails_awsAccountId})
+var sOrganizationEventDetails_event = smithy.NewStaticSchema(smithy.StaticSchema{Member: "event", ID: &iEvent, Members: &mEvent, Type: smithy.ShapeTypeStructure, Ext: &eOrganizationEventDetails_event})
+var sOrganizationEventDetails_eventDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventDescription", ID: &iEventDescription, Members: &mEventDescription, Type: smithy.ShapeTypeStructure, Ext: &eOrganizationEventDetails_eventDescription})
+var sOrganizationEventDetails_eventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventMetadata", ID: &i_eventMetadata, Members: &m_eventMetadata, Type: smithy.ShapeTypeMap, Ext: &eOrganizationEventDetails_eventMetadata})
+var sOrganizationEventDetailsErrorItem_awsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountId", ID: &i_accountId, Type: smithy.ShapeTypeString, Ext: &eOrganizationEventDetailsErrorItem_awsAccountId})
+var sOrganizationEventDetailsErrorItem_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &eOrganizationEventDetailsErrorItem_eventArn})
+var sOrganizationEventDetailsErrorItem_errorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorName", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eOrganizationEventDetailsErrorItem_errorName})
+var sOrganizationEventDetailsErrorItem_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eOrganizationEventDetailsErrorItem_errorMessage})
+var sOrganizationEventFilter_actionabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionabilities", ID: &i_EventActionabilityList, Members: &m_EventActionabilityList, Type: smithy.ShapeTypeList, Ext: &eOrganizationEventFilter_actionabilities})
+var sOrganizationEventFilter_eventTypeCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCodes", ID: &i_eventTypeList2, Members: &m_eventTypeList2, Type: smithy.ShapeTypeList, Ext: &eOrganizationEventFilter_eventTypeCodes})
+var sOrganizationEventFilter_awsAccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountIds", ID: &i_awsAccountIdsList, Members: &m_awsAccountIdsList, Type: smithy.ShapeTypeList, Ext: &eOrganizationEventFilter_awsAccountIds})
+var sOrganizationEventFilter_services = smithy.NewStaticSchema(smithy.StaticSchema{Member: "services", ID: &i_serviceList, Members: &m_serviceList, Type: smithy.ShapeTypeList, Ext: &eOrganizationEventFilter_services})
+var sOrganizationEventFilter_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_regionList, Members: &m_regionList, Type: smithy.ShapeTypeList, Ext: &eOrganizationEventFilter_regions})
+var sOrganizationEventFilter_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &iDateTimeRange, Members: &mDateTimeRange, Type: smithy.ShapeTypeStructure, Ext: &eOrganizationEventFilter_startTime})
+var sOrganizationEventFilter_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &iDateTimeRange, Members: &mDateTimeRange, Type: smithy.ShapeTypeStructure, Ext: &eOrganizationEventFilter_endTime})
+var sOrganizationEventFilter_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &iDateTimeRange, Members: &mDateTimeRange, Type: smithy.ShapeTypeStructure, Ext: &eOrganizationEventFilter_lastUpdatedTime})
+var sOrganizationEventFilter_entityArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityArns", ID: &i_entityArnList, Members: &m_entityArnList, Type: smithy.ShapeTypeList, Ext: &eOrganizationEventFilter_entityArns})
+var sOrganizationEventFilter_entityValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityValues", ID: &i_entityValueList, Members: &m_entityValueList, Type: smithy.ShapeTypeList, Ext: &eOrganizationEventFilter_entityValues})
+var sOrganizationEventFilter_eventTypeCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCategories", ID: &i_eventTypeCategoryList2, Members: &m_eventTypeCategoryList2, Type: smithy.ShapeTypeList, Ext: &eOrganizationEventFilter_eventTypeCategories})
+var sOrganizationEventFilter_eventStatusCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventStatusCodes", ID: &i_eventStatusCodeList, Members: &m_eventStatusCodeList, Type: smithy.ShapeTypeList, Ext: &eOrganizationEventFilter_eventStatusCodes})
+var sOrganizationEventFilter_personas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "personas", ID: &i_EventPersonaList, Members: &m_EventPersonaList, Type: smithy.ShapeTypeList, Ext: &eOrganizationEventFilter_personas})
+var s_OrganizationEventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOrganizationEvent, Members: &mOrganizationEvent, Type: smithy.ShapeTypeStructure, Ext: &e_OrganizationEventList_member})
+var s_regionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_region, Type: smithy.ShapeTypeString, Ext: &e_regionList_member})
+var sServiceLifecycle_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "service", ID: &i_service, Type: smithy.ShapeTypeString, Ext: &eServiceLifecycle_service})
+var sServiceLifecycle_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eServiceLifecycle_version})
+var sServiceLifecycle_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eServiceLifecycle_title})
+var sServiceLifecycle_recommendedVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedVersion", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eServiceLifecycle_recommendedVersion})
+var sServiceLifecycle_lifecycleEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lifecycleEvents", ID: &i_LifecycleEventList, Members: &m_LifecycleEventList, Type: smithy.ShapeTypeList, Ext: &eServiceLifecycle_lifecycleEvents})
+var sServiceLifecycleFilter_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "service", ID: &i_service, Type: smithy.ShapeTypeString, Ext: &eServiceLifecycleFilter_service})
+var s_ServiceLifecycleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceLifecycle, Members: &mServiceLifecycle, Type: smithy.ShapeTypeStructure, Ext: &e_ServiceLifecycleList_member})
+var s_serviceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_service, Type: smithy.ShapeTypeString, Ext: &e_serviceList_member})
+var s_tagFilter_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_tagSet, Members: &m_tagSet, Type: smithy.ShapeTypeMap, Ext: &e_tagFilter_member})
+var s_tagSet_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_tagKey, Type: smithy.ShapeTypeString, Ext: &e_tagSet_key})
+var s_tagSet_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_tagValue, Type: smithy.ShapeTypeString, Ext: &e_tagSet_value})
+var sUnsupportedLocale_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString, Ext: &eUnsupportedLocale_message})
+var sDescribeAffectedAccountsForOrganizationRequest_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString, Ext: &eDescribeAffectedAccountsForOrganizationRequest_eventArn})
+var sDescribeAffectedAccountsForOrganizationRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeAffectedAccountsForOrganizationRequest_nextToken})
+var sDescribeAffectedAccountsForOrganizationRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResults, Type: smithy.ShapeTypeInteger, Ext: &eDescribeAffectedAccountsForOrganizationRequest_maxResults})
+var sDescribeAffectedAccountsForOrganizationResponse_affectedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "affectedAccounts", ID: &i_affectedAccountsList, Members: &m_affectedAccountsList, Type: smithy.ShapeTypeList, Ext: &eDescribeAffectedAccountsForOrganizationResponse_affectedAccounts})
+var sDescribeAffectedAccountsForOrganizationResponse_eventScopeCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventScopeCode", ID: &ieventScopeCode, Members: &meventScopeCode, Type: smithy.ShapeTypeEnum, Ext: &eDescribeAffectedAccountsForOrganizationResponse_eventScopeCode})
+var sDescribeAffectedAccountsForOrganizationResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeAffectedAccountsForOrganizationResponse_nextToken})
+var sDescribeAffectedEntitiesForOrganizationRequest_organizationEntityFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationEntityFilters", ID: &i_OrganizationEntityFiltersList, Members: &m_OrganizationEntityFiltersList, Type: smithy.ShapeTypeList, Ext: &eDescribeAffectedEntitiesForOrganizationRequest_organizationEntityFilters})
+var sDescribeAffectedEntitiesForOrganizationRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_locale, Type: smithy.ShapeTypeString, Ext: &eDescribeAffectedEntitiesForOrganizationRequest_locale})
+var sDescribeAffectedEntitiesForOrganizationRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeAffectedEntitiesForOrganizationRequest_nextToken})
+var sDescribeAffectedEntitiesForOrganizationRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResultsLowerRange, Type: smithy.ShapeTypeInteger, Ext: &eDescribeAffectedEntitiesForOrganizationRequest_maxResults})
+var sDescribeAffectedEntitiesForOrganizationRequest_organizationEntityAccountFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationEntityAccountFilters", ID: &i_OrganizationEntityAccountFiltersList, Members: &m_OrganizationEntityAccountFiltersList, Type: smithy.ShapeTypeList, Ext: &eDescribeAffectedEntitiesForOrganizationRequest_organizationEntityAccountFilters})
+var sDescribeAffectedEntitiesForOrganizationResponse_entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entities", ID: &i_EntityList, Members: &m_EntityList, Type: smithy.ShapeTypeList, Ext: &eDescribeAffectedEntitiesForOrganizationResponse_entities})
+var sDescribeAffectedEntitiesForOrganizationResponse_failedSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failedSet", ID: &i_DescribeAffectedEntitiesForOrganizationFailedSet, Members: &m_DescribeAffectedEntitiesForOrganizationFailedSet, Type: smithy.ShapeTypeList, Ext: &eDescribeAffectedEntitiesForOrganizationResponse_failedSet})
+var sDescribeAffectedEntitiesForOrganizationResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeAffectedEntitiesForOrganizationResponse_nextToken})
+var sDescribeAffectedEntitiesRequest_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iEntityFilter, Members: &mEntityFilter, Type: smithy.ShapeTypeStructure, Ext: &eDescribeAffectedEntitiesRequest_filter})
+var sDescribeAffectedEntitiesRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_locale, Type: smithy.ShapeTypeString, Ext: &eDescribeAffectedEntitiesRequest_locale})
+var sDescribeAffectedEntitiesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeAffectedEntitiesRequest_nextToken})
+var sDescribeAffectedEntitiesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResultsLowerRange, Type: smithy.ShapeTypeInteger, Ext: &eDescribeAffectedEntitiesRequest_maxResults})
+var sDescribeAffectedEntitiesResponse_entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entities", ID: &i_EntityList, Members: &m_EntityList, Type: smithy.ShapeTypeList, Ext: &eDescribeAffectedEntitiesResponse_entities})
+var sDescribeAffectedEntitiesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeAffectedEntitiesResponse_nextToken})
+var sDescribeEntityAggregatesForOrganizationRequest_eventArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArns", ID: &i_OrganizationEventArnsList, Members: &m_OrganizationEventArnsList, Type: smithy.ShapeTypeList, Ext: &eDescribeEntityAggregatesForOrganizationRequest_eventArns})
+var sDescribeEntityAggregatesForOrganizationRequest_awsAccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountIds", ID: &i_OrganizationAccountIdsList, Members: &m_OrganizationAccountIdsList, Type: smithy.ShapeTypeList, Ext: &eDescribeEntityAggregatesForOrganizationRequest_awsAccountIds})
+var sDescribeEntityAggregatesForOrganizationResponse_organizationEntityAggregates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationEntityAggregates", ID: &i_OrganizationEntityAggregatesList, Members: &m_OrganizationEntityAggregatesList, Type: smithy.ShapeTypeList, Ext: &eDescribeEntityAggregatesForOrganizationResponse_organizationEntityAggregates})
+var sDescribeEntityAggregatesRequest_eventArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArns", ID: &i_EventArnsList, Members: &m_EventArnsList, Type: smithy.ShapeTypeList, Ext: &eDescribeEntityAggregatesRequest_eventArns})
+var sDescribeEntityAggregatesResponse_entityAggregates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityAggregates", ID: &i_EntityAggregateList, Members: &m_EntityAggregateList, Type: smithy.ShapeTypeList, Ext: &eDescribeEntityAggregatesResponse_entityAggregates})
+var sDescribeEventAggregatesRequest_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iEventFilter, Members: &mEventFilter, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEventAggregatesRequest_filter})
+var sDescribeEventAggregatesRequest_aggregateField = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregateField", ID: &ieventAggregateField, Members: &meventAggregateField, Type: smithy.ShapeTypeEnum, Ext: &eDescribeEventAggregatesRequest_aggregateField})
+var sDescribeEventAggregatesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResults, Type: smithy.ShapeTypeInteger, Ext: &eDescribeEventAggregatesRequest_maxResults})
+var sDescribeEventAggregatesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeEventAggregatesRequest_nextToken})
+var sDescribeEventAggregatesResponse_eventAggregates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventAggregates", ID: &i_EventAggregateList, Members: &m_EventAggregateList, Type: smithy.ShapeTypeList, Ext: &eDescribeEventAggregatesResponse_eventAggregates})
+var sDescribeEventAggregatesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeEventAggregatesResponse_nextToken})
+var sDescribeEventDetailsForOrganizationRequest_organizationEventDetailFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationEventDetailFilters", ID: &i_OrganizationEventDetailFiltersList, Members: &m_OrganizationEventDetailFiltersList, Type: smithy.ShapeTypeList, Ext: &eDescribeEventDetailsForOrganizationRequest_organizationEventDetailFilters})
+var sDescribeEventDetailsForOrganizationRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_locale, Type: smithy.ShapeTypeString, Ext: &eDescribeEventDetailsForOrganizationRequest_locale})
+var sDescribeEventDetailsForOrganizationResponse_successfulSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successfulSet", ID: &i_DescribeEventDetailsForOrganizationSuccessfulSet, Members: &m_DescribeEventDetailsForOrganizationSuccessfulSet, Type: smithy.ShapeTypeList, Ext: &eDescribeEventDetailsForOrganizationResponse_successfulSet})
+var sDescribeEventDetailsForOrganizationResponse_failedSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failedSet", ID: &i_DescribeEventDetailsForOrganizationFailedSet, Members: &m_DescribeEventDetailsForOrganizationFailedSet, Type: smithy.ShapeTypeList, Ext: &eDescribeEventDetailsForOrganizationResponse_failedSet})
+var sDescribeEventDetailsRequest_eventArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArns", ID: &i_eventArnList, Members: &m_eventArnList, Type: smithy.ShapeTypeList, Ext: &eDescribeEventDetailsRequest_eventArns})
+var sDescribeEventDetailsRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_locale, Type: smithy.ShapeTypeString, Ext: &eDescribeEventDetailsRequest_locale})
+var sDescribeEventDetailsResponse_successfulSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successfulSet", ID: &i_DescribeEventDetailsSuccessfulSet, Members: &m_DescribeEventDetailsSuccessfulSet, Type: smithy.ShapeTypeList, Ext: &eDescribeEventDetailsResponse_successfulSet})
+var sDescribeEventDetailsResponse_failedSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failedSet", ID: &i_DescribeEventDetailsFailedSet, Members: &m_DescribeEventDetailsFailedSet, Type: smithy.ShapeTypeList, Ext: &eDescribeEventDetailsResponse_failedSet})
+var sDescribeEventsForOrganizationRequest_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iOrganizationEventFilter, Members: &mOrganizationEventFilter, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEventsForOrganizationRequest_filter})
+var sDescribeEventsForOrganizationRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeEventsForOrganizationRequest_nextToken})
+var sDescribeEventsForOrganizationRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResultsLowerRange, Type: smithy.ShapeTypeInteger, Ext: &eDescribeEventsForOrganizationRequest_maxResults})
+var sDescribeEventsForOrganizationRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_locale, Type: smithy.ShapeTypeString, Ext: &eDescribeEventsForOrganizationRequest_locale})
+var sDescribeEventsForOrganizationResponse_events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "events", ID: &i_OrganizationEventList, Members: &m_OrganizationEventList, Type: smithy.ShapeTypeList, Ext: &eDescribeEventsForOrganizationResponse_events})
+var sDescribeEventsForOrganizationResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeEventsForOrganizationResponse_nextToken})
+var sDescribeEventsRequest_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iEventFilter, Members: &mEventFilter, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEventsRequest_filter})
+var sDescribeEventsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeEventsRequest_nextToken})
+var sDescribeEventsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResultsLowerRange, Type: smithy.ShapeTypeInteger, Ext: &eDescribeEventsRequest_maxResults})
+var sDescribeEventsRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_locale, Type: smithy.ShapeTypeString, Ext: &eDescribeEventsRequest_locale})
+var sDescribeEventsResponse_events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "events", ID: &i_EventList, Members: &m_EventList, Type: smithy.ShapeTypeList, Ext: &eDescribeEventsResponse_events})
+var sDescribeEventsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeEventsResponse_nextToken})
+var sDescribeEventTypesRequest_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iEventTypeFilter, Members: &mEventTypeFilter, Type: smithy.ShapeTypeStructure, Ext: &eDescribeEventTypesRequest_filter})
+var sDescribeEventTypesRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_locale, Type: smithy.ShapeTypeString, Ext: &eDescribeEventTypesRequest_locale})
+var sDescribeEventTypesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeEventTypesRequest_nextToken})
+var sDescribeEventTypesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResults, Type: smithy.ShapeTypeInteger, Ext: &eDescribeEventTypesRequest_maxResults})
+var sDescribeEventTypesResponse_eventTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypes", ID: &i_EventTypeList, Members: &m_EventTypeList, Type: smithy.ShapeTypeList, Ext: &eDescribeEventTypesResponse_eventTypes})
+var sDescribeEventTypesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeEventTypesResponse_nextToken})
+var sDescribeHealthServiceStatusForOrganizationResponse_healthServiceAccessStatusForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "healthServiceAccessStatusForOrganization", ID: &i_healthServiceAccessStatusForOrganization, Type: smithy.ShapeTypeString, Ext: &eDescribeHealthServiceStatusForOrganizationResponse_healthServiceAccessStatusForOrganization})
+var sDescribeServiceLifecycleRequest_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iServiceLifecycleFilter, Members: &mServiceLifecycleFilter, Type: smithy.ShapeTypeStructure, Ext: &eDescribeServiceLifecycleRequest_filter})
+var sDescribeServiceLifecycleRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeServiceLifecycleRequest_nextToken})
+var sDescribeServiceLifecycleRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_LifecycleMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eDescribeServiceLifecycleRequest_maxResults})
+var sDescribeServiceLifecycleResponse_serviceLifecycles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceLifecycles", ID: &i_ServiceLifecycleList, Members: &m_ServiceLifecycleList, Type: smithy.ShapeTypeList, Ext: &eDescribeServiceLifecycleResponse_serviceLifecycles})
+var sDescribeServiceLifecycleResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeServiceLifecycleResponse_nextToken})
 
 var DescribeAffectedAccountsForOrganization = &sDescribeAffectedAccountsForOrganization
 

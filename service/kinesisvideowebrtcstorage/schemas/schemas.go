@@ -7,9 +7,26 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [18]smithy.SchemaExtensions
+var (
+	eJoinStorageSession                         smithy.SchemaExtensions
+	eJoinStorageSessionAsViewer                 smithy.SchemaExtensions
+	e_AWSAcuityRoutingServiceLambda             smithy.SchemaExtensions
+	eAccessDeniedException                      smithy.SchemaExtensions
+	eAccessDeniedException_message              smithy.SchemaExtensions
+	e_ChannelArn                                smithy.SchemaExtensions
+	e_ClientId                                  smithy.SchemaExtensions
+	eClientLimitExceededException               smithy.SchemaExtensions
+	eClientLimitExceededException_message       smithy.SchemaExtensions
+	eInvalidArgumentException                   smithy.SchemaExtensions
+	eInvalidArgumentException_message           smithy.SchemaExtensions
+	eResourceNotFoundException                  smithy.SchemaExtensions
+	eResourceNotFoundException_message          smithy.SchemaExtensions
+	eJoinStorageSessionAsViewerInput            smithy.SchemaExtensions
+	eJoinStorageSessionAsViewerInput_channelArn smithy.SchemaExtensions
+	eJoinStorageSessionAsViewerInput_clientId   smithy.SchemaExtensions
+	eJoinStorageSessionInput                    smithy.SchemaExtensions
+	eJoinStorageSessionInput_channelArn         smithy.SchemaExtensions
+)
 
 var (
 	iJoinStorageSession              = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideowebrtcstorage", Name: "JoinStorageSession"}
@@ -43,25 +60,25 @@ var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sR
 var mJoinStorageSessionAsViewerInput = smithy.SchemaMembers{List: []*smithy.Schema{&sJoinStorageSessionAsViewerInput_channelArn, &sJoinStorageSessionAsViewerInput_clientId}}
 var mJoinStorageSessionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sJoinStorageSessionInput_channelArn}}
 
-var sJoinStorageSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJoinStorageSession, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sJoinStorageSessionAsViewer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJoinStorageSessionAsViewer, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var s_AWSAcuityRoutingServiceLambda = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSAcuityRoutingServiceLambda, Type: smithy.ShapeTypeService, Ext: &ext[2]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[3]})
-var s_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &ext[5]})
-var s_ClientId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientId, Type: smithy.ShapeTypeString, Ext: &ext[6]})
-var sClientLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientLimitExceededException, Members: &mClientLimitExceededException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[7]})
-var sInvalidArgumentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidArgumentException, Members: &mInvalidArgumentException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[9]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &ext[11]})
-var sJoinStorageSessionAsViewerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJoinStorageSessionAsViewerInput, Members: &mJoinStorageSessionAsViewerInput, Type: smithy.ShapeTypeStructure, Ext: &ext[13]})
-var sJoinStorageSessionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJoinStorageSessionInput, Members: &mJoinStorageSessionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[16]})
+var sJoinStorageSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJoinStorageSession, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eJoinStorageSession})
+var sJoinStorageSessionAsViewer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJoinStorageSessionAsViewer, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eJoinStorageSessionAsViewer})
+var s_AWSAcuityRoutingServiceLambda = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSAcuityRoutingServiceLambda, Type: smithy.ShapeTypeService, Ext: &e_AWSAcuityRoutingServiceLambda})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var s_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &e_ChannelArn})
+var s_ClientId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientId, Type: smithy.ShapeTypeString, Ext: &e_ClientId})
+var sClientLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientLimitExceededException, Members: &mClientLimitExceededException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eClientLimitExceededException})
+var sInvalidArgumentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidArgumentException, Members: &mInvalidArgumentException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eInvalidArgumentException})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sJoinStorageSessionAsViewerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJoinStorageSessionAsViewerInput, Members: &mJoinStorageSessionAsViewerInput, Type: smithy.ShapeTypeStructure, Ext: &eJoinStorageSessionAsViewerInput})
+var sJoinStorageSessionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJoinStorageSessionInput, Members: &mJoinStorageSessionInput, Type: smithy.ShapeTypeStructure, Ext: &eJoinStorageSessionInput})
 
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[4]})
-var sClientLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[8]})
-var sInvalidArgumentException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[10]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[12]})
-var sJoinStorageSessionAsViewerInput_channelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelArn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &ext[14]})
-var sJoinStorageSessionAsViewerInput_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_ClientId, Type: smithy.ShapeTypeString, Ext: &ext[15]})
-var sJoinStorageSessionInput_channelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelArn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &ext[17]})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sClientLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eClientLimitExceededException_message})
+var sInvalidArgumentException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInvalidArgumentException_message})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sJoinStorageSessionAsViewerInput_channelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelArn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &eJoinStorageSessionAsViewerInput_channelArn})
+var sJoinStorageSessionAsViewerInput_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_ClientId, Type: smithy.ShapeTypeString, Ext: &eJoinStorageSessionAsViewerInput_clientId})
+var sJoinStorageSessionInput_channelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelArn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString, Ext: &eJoinStorageSessionInput_channelArn})
 
 var JoinStorageSession = &sJoinStorageSession
 

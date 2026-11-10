@@ -7,9 +7,829 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [821]smithy.SchemaExtensions
+var (
+	eAcceptDomainTransferFromAnotherAwsAccount                     smithy.SchemaExtensions
+	eAssociateDelegationSignerToDomain                             smithy.SchemaExtensions
+	eCancelDomainTransferToAnotherAwsAccount                       smithy.SchemaExtensions
+	eCheckDomainAvailability                                       smithy.SchemaExtensions
+	eCheckDomainTransferability                                    smithy.SchemaExtensions
+	eDeleteDomain                                                  smithy.SchemaExtensions
+	eDeleteTagsForDomain                                           smithy.SchemaExtensions
+	eDisableDomainAutoRenew                                        smithy.SchemaExtensions
+	eDisableDomainTransferLock                                     smithy.SchemaExtensions
+	eDisassociateDelegationSignerFromDomain                        smithy.SchemaExtensions
+	eEnableDomainAutoRenew                                         smithy.SchemaExtensions
+	eEnableDomainTransferLock                                      smithy.SchemaExtensions
+	eGetContactReachabilityStatus                                  smithy.SchemaExtensions
+	eGetDomainDetail                                               smithy.SchemaExtensions
+	eGetDomainPrices                                               smithy.SchemaExtensions
+	eGetDomainSuggestions                                          smithy.SchemaExtensions
+	eGetOperationDetail                                            smithy.SchemaExtensions
+	eListDomains                                                   smithy.SchemaExtensions
+	eListOperations                                                smithy.SchemaExtensions
+	eListPrices                                                    smithy.SchemaExtensions
+	eListTagsForDomain                                             smithy.SchemaExtensions
+	ePushDomain                                                    smithy.SchemaExtensions
+	eRegisterDomain                                                smithy.SchemaExtensions
+	eRejectDomainTransferFromAnotherAwsAccount                     smithy.SchemaExtensions
+	eRenewDomain                                                   smithy.SchemaExtensions
+	eResendContactReachabilityEmail                                smithy.SchemaExtensions
+	eResendOperationAuthorization                                  smithy.SchemaExtensions
+	eRetrieveDomainAuthCode                                        smithy.SchemaExtensions
+	eTransferDomain                                                smithy.SchemaExtensions
+	eTransferDomainToAnotherAwsAccount                             smithy.SchemaExtensions
+	eUpdateDomainContact                                           smithy.SchemaExtensions
+	eUpdateDomainContactPrivacy                                    smithy.SchemaExtensions
+	eUpdateDomainNameservers                                       smithy.SchemaExtensions
+	eUpdateTagsForDomain                                           smithy.SchemaExtensions
+	eViewBilling                                                   smithy.SchemaExtensions
+	e_Route53Domains_v20140515                                     smithy.SchemaExtensions
+	e_AccountId                                                    smithy.SchemaExtensions
+	e_AddressLine                                                  smithy.SchemaExtensions
+	eBillingRecord                                                 smithy.SchemaExtensions
+	eBillingRecord_DomainName                                      smithy.SchemaExtensions
+	eBillingRecord_Operation                                       smithy.SchemaExtensions
+	eBillingRecord_InvoiceId                                       smithy.SchemaExtensions
+	eBillingRecord_BillDate                                        smithy.SchemaExtensions
+	eBillingRecord_Price                                           smithy.SchemaExtensions
+	e_BillingRecords                                               smithy.SchemaExtensions
+	e_BillingRecords_member                                        smithy.SchemaExtensions
+	e_Boolean                                                      smithy.SchemaExtensions
+	e_City                                                         smithy.SchemaExtensions
+	eConsent                                                       smithy.SchemaExtensions
+	eConsent_MaxPrice                                              smithy.SchemaExtensions
+	eConsent_Currency                                              smithy.SchemaExtensions
+	e_ConsentPrice                                                 smithy.SchemaExtensions
+	eContactDetail                                                 smithy.SchemaExtensions
+	eContactDetail_FirstName                                       smithy.SchemaExtensions
+	eContactDetail_LastName                                        smithy.SchemaExtensions
+	eContactDetail_ContactType                                     smithy.SchemaExtensions
+	eContactDetail_OrganizationName                                smithy.SchemaExtensions
+	eContactDetail_AddressLine1                                    smithy.SchemaExtensions
+	eContactDetail_AddressLine2                                    smithy.SchemaExtensions
+	eContactDetail_City                                            smithy.SchemaExtensions
+	eContactDetail_State                                           smithy.SchemaExtensions
+	eContactDetail_CountryCode                                     smithy.SchemaExtensions
+	eContactDetail_ZipCode                                         smithy.SchemaExtensions
+	eContactDetail_PhoneNumber                                     smithy.SchemaExtensions
+	eContactDetail_Email                                           smithy.SchemaExtensions
+	eContactDetail_Fax                                             smithy.SchemaExtensions
+	eContactDetail_ExtraParams                                     smithy.SchemaExtensions
+	e_ContactName                                                  smithy.SchemaExtensions
+	e_ContactNumber                                                smithy.SchemaExtensions
+	eContactType                                                   smithy.SchemaExtensions
+	eContactType_PERSON                                            smithy.SchemaExtensions
+	eContactType_COMPANY                                           smithy.SchemaExtensions
+	eContactType_ASSOCIATION                                       smithy.SchemaExtensions
+	eContactType_PUBLIC_BODY                                       smithy.SchemaExtensions
+	eContactType_RESELLER                                          smithy.SchemaExtensions
+	eCountryCode                                                   smithy.SchemaExtensions
+	eCountryCode_AC                                                smithy.SchemaExtensions
+	eCountryCode_AD                                                smithy.SchemaExtensions
+	eCountryCode_AE                                                smithy.SchemaExtensions
+	eCountryCode_AF                                                smithy.SchemaExtensions
+	eCountryCode_AG                                                smithy.SchemaExtensions
+	eCountryCode_AI                                                smithy.SchemaExtensions
+	eCountryCode_AL                                                smithy.SchemaExtensions
+	eCountryCode_AM                                                smithy.SchemaExtensions
+	eCountryCode_AN                                                smithy.SchemaExtensions
+	eCountryCode_AO                                                smithy.SchemaExtensions
+	eCountryCode_AQ                                                smithy.SchemaExtensions
+	eCountryCode_AR                                                smithy.SchemaExtensions
+	eCountryCode_AS                                                smithy.SchemaExtensions
+	eCountryCode_AT                                                smithy.SchemaExtensions
+	eCountryCode_AU                                                smithy.SchemaExtensions
+	eCountryCode_AW                                                smithy.SchemaExtensions
+	eCountryCode_AX                                                smithy.SchemaExtensions
+	eCountryCode_AZ                                                smithy.SchemaExtensions
+	eCountryCode_BA                                                smithy.SchemaExtensions
+	eCountryCode_BB                                                smithy.SchemaExtensions
+	eCountryCode_BD                                                smithy.SchemaExtensions
+	eCountryCode_BE                                                smithy.SchemaExtensions
+	eCountryCode_BF                                                smithy.SchemaExtensions
+	eCountryCode_BG                                                smithy.SchemaExtensions
+	eCountryCode_BH                                                smithy.SchemaExtensions
+	eCountryCode_BI                                                smithy.SchemaExtensions
+	eCountryCode_BJ                                                smithy.SchemaExtensions
+	eCountryCode_BL                                                smithy.SchemaExtensions
+	eCountryCode_BM                                                smithy.SchemaExtensions
+	eCountryCode_BN                                                smithy.SchemaExtensions
+	eCountryCode_BO                                                smithy.SchemaExtensions
+	eCountryCode_BQ                                                smithy.SchemaExtensions
+	eCountryCode_BR                                                smithy.SchemaExtensions
+	eCountryCode_BS                                                smithy.SchemaExtensions
+	eCountryCode_BT                                                smithy.SchemaExtensions
+	eCountryCode_BV                                                smithy.SchemaExtensions
+	eCountryCode_BW                                                smithy.SchemaExtensions
+	eCountryCode_BY                                                smithy.SchemaExtensions
+	eCountryCode_BZ                                                smithy.SchemaExtensions
+	eCountryCode_CA                                                smithy.SchemaExtensions
+	eCountryCode_CC                                                smithy.SchemaExtensions
+	eCountryCode_CD                                                smithy.SchemaExtensions
+	eCountryCode_CF                                                smithy.SchemaExtensions
+	eCountryCode_CG                                                smithy.SchemaExtensions
+	eCountryCode_CH                                                smithy.SchemaExtensions
+	eCountryCode_CI                                                smithy.SchemaExtensions
+	eCountryCode_CK                                                smithy.SchemaExtensions
+	eCountryCode_CL                                                smithy.SchemaExtensions
+	eCountryCode_CM                                                smithy.SchemaExtensions
+	eCountryCode_CN                                                smithy.SchemaExtensions
+	eCountryCode_CO                                                smithy.SchemaExtensions
+	eCountryCode_CR                                                smithy.SchemaExtensions
+	eCountryCode_CU                                                smithy.SchemaExtensions
+	eCountryCode_CV                                                smithy.SchemaExtensions
+	eCountryCode_CW                                                smithy.SchemaExtensions
+	eCountryCode_CX                                                smithy.SchemaExtensions
+	eCountryCode_CY                                                smithy.SchemaExtensions
+	eCountryCode_CZ                                                smithy.SchemaExtensions
+	eCountryCode_DE                                                smithy.SchemaExtensions
+	eCountryCode_DJ                                                smithy.SchemaExtensions
+	eCountryCode_DK                                                smithy.SchemaExtensions
+	eCountryCode_DM                                                smithy.SchemaExtensions
+	eCountryCode_DO                                                smithy.SchemaExtensions
+	eCountryCode_DZ                                                smithy.SchemaExtensions
+	eCountryCode_EC                                                smithy.SchemaExtensions
+	eCountryCode_EE                                                smithy.SchemaExtensions
+	eCountryCode_EG                                                smithy.SchemaExtensions
+	eCountryCode_EH                                                smithy.SchemaExtensions
+	eCountryCode_ER                                                smithy.SchemaExtensions
+	eCountryCode_ES                                                smithy.SchemaExtensions
+	eCountryCode_ET                                                smithy.SchemaExtensions
+	eCountryCode_FI                                                smithy.SchemaExtensions
+	eCountryCode_FJ                                                smithy.SchemaExtensions
+	eCountryCode_FK                                                smithy.SchemaExtensions
+	eCountryCode_FM                                                smithy.SchemaExtensions
+	eCountryCode_FO                                                smithy.SchemaExtensions
+	eCountryCode_FR                                                smithy.SchemaExtensions
+	eCountryCode_GA                                                smithy.SchemaExtensions
+	eCountryCode_GB                                                smithy.SchemaExtensions
+	eCountryCode_GD                                                smithy.SchemaExtensions
+	eCountryCode_GE                                                smithy.SchemaExtensions
+	eCountryCode_GF                                                smithy.SchemaExtensions
+	eCountryCode_GG                                                smithy.SchemaExtensions
+	eCountryCode_GH                                                smithy.SchemaExtensions
+	eCountryCode_GI                                                smithy.SchemaExtensions
+	eCountryCode_GL                                                smithy.SchemaExtensions
+	eCountryCode_GM                                                smithy.SchemaExtensions
+	eCountryCode_GN                                                smithy.SchemaExtensions
+	eCountryCode_GP                                                smithy.SchemaExtensions
+	eCountryCode_GQ                                                smithy.SchemaExtensions
+	eCountryCode_GR                                                smithy.SchemaExtensions
+	eCountryCode_GS                                                smithy.SchemaExtensions
+	eCountryCode_GT                                                smithy.SchemaExtensions
+	eCountryCode_GU                                                smithy.SchemaExtensions
+	eCountryCode_GW                                                smithy.SchemaExtensions
+	eCountryCode_GY                                                smithy.SchemaExtensions
+	eCountryCode_HK                                                smithy.SchemaExtensions
+	eCountryCode_HM                                                smithy.SchemaExtensions
+	eCountryCode_HN                                                smithy.SchemaExtensions
+	eCountryCode_HR                                                smithy.SchemaExtensions
+	eCountryCode_HT                                                smithy.SchemaExtensions
+	eCountryCode_HU                                                smithy.SchemaExtensions
+	eCountryCode_ID                                                smithy.SchemaExtensions
+	eCountryCode_IE                                                smithy.SchemaExtensions
+	eCountryCode_IL                                                smithy.SchemaExtensions
+	eCountryCode_IM                                                smithy.SchemaExtensions
+	eCountryCode_IN                                                smithy.SchemaExtensions
+	eCountryCode_IO                                                smithy.SchemaExtensions
+	eCountryCode_IQ                                                smithy.SchemaExtensions
+	eCountryCode_IR                                                smithy.SchemaExtensions
+	eCountryCode_IS                                                smithy.SchemaExtensions
+	eCountryCode_IT                                                smithy.SchemaExtensions
+	eCountryCode_JE                                                smithy.SchemaExtensions
+	eCountryCode_JM                                                smithy.SchemaExtensions
+	eCountryCode_JO                                                smithy.SchemaExtensions
+	eCountryCode_JP                                                smithy.SchemaExtensions
+	eCountryCode_KE                                                smithy.SchemaExtensions
+	eCountryCode_KG                                                smithy.SchemaExtensions
+	eCountryCode_KH                                                smithy.SchemaExtensions
+	eCountryCode_KI                                                smithy.SchemaExtensions
+	eCountryCode_KM                                                smithy.SchemaExtensions
+	eCountryCode_KN                                                smithy.SchemaExtensions
+	eCountryCode_KP                                                smithy.SchemaExtensions
+	eCountryCode_KR                                                smithy.SchemaExtensions
+	eCountryCode_KW                                                smithy.SchemaExtensions
+	eCountryCode_KY                                                smithy.SchemaExtensions
+	eCountryCode_KZ                                                smithy.SchemaExtensions
+	eCountryCode_LA                                                smithy.SchemaExtensions
+	eCountryCode_LB                                                smithy.SchemaExtensions
+	eCountryCode_LC                                                smithy.SchemaExtensions
+	eCountryCode_LI                                                smithy.SchemaExtensions
+	eCountryCode_LK                                                smithy.SchemaExtensions
+	eCountryCode_LR                                                smithy.SchemaExtensions
+	eCountryCode_LS                                                smithy.SchemaExtensions
+	eCountryCode_LT                                                smithy.SchemaExtensions
+	eCountryCode_LU                                                smithy.SchemaExtensions
+	eCountryCode_LV                                                smithy.SchemaExtensions
+	eCountryCode_LY                                                smithy.SchemaExtensions
+	eCountryCode_MA                                                smithy.SchemaExtensions
+	eCountryCode_MC                                                smithy.SchemaExtensions
+	eCountryCode_MD                                                smithy.SchemaExtensions
+	eCountryCode_ME                                                smithy.SchemaExtensions
+	eCountryCode_MF                                                smithy.SchemaExtensions
+	eCountryCode_MG                                                smithy.SchemaExtensions
+	eCountryCode_MH                                                smithy.SchemaExtensions
+	eCountryCode_MK                                                smithy.SchemaExtensions
+	eCountryCode_ML                                                smithy.SchemaExtensions
+	eCountryCode_MM                                                smithy.SchemaExtensions
+	eCountryCode_MN                                                smithy.SchemaExtensions
+	eCountryCode_MO                                                smithy.SchemaExtensions
+	eCountryCode_MP                                                smithy.SchemaExtensions
+	eCountryCode_MQ                                                smithy.SchemaExtensions
+	eCountryCode_MR                                                smithy.SchemaExtensions
+	eCountryCode_MS                                                smithy.SchemaExtensions
+	eCountryCode_MT                                                smithy.SchemaExtensions
+	eCountryCode_MU                                                smithy.SchemaExtensions
+	eCountryCode_MV                                                smithy.SchemaExtensions
+	eCountryCode_MW                                                smithy.SchemaExtensions
+	eCountryCode_MX                                                smithy.SchemaExtensions
+	eCountryCode_MY                                                smithy.SchemaExtensions
+	eCountryCode_MZ                                                smithy.SchemaExtensions
+	eCountryCode_NA                                                smithy.SchemaExtensions
+	eCountryCode_NC                                                smithy.SchemaExtensions
+	eCountryCode_NE                                                smithy.SchemaExtensions
+	eCountryCode_NF                                                smithy.SchemaExtensions
+	eCountryCode_NG                                                smithy.SchemaExtensions
+	eCountryCode_NI                                                smithy.SchemaExtensions
+	eCountryCode_NL                                                smithy.SchemaExtensions
+	eCountryCode_NO                                                smithy.SchemaExtensions
+	eCountryCode_NP                                                smithy.SchemaExtensions
+	eCountryCode_NR                                                smithy.SchemaExtensions
+	eCountryCode_NU                                                smithy.SchemaExtensions
+	eCountryCode_NZ                                                smithy.SchemaExtensions
+	eCountryCode_OM                                                smithy.SchemaExtensions
+	eCountryCode_PA                                                smithy.SchemaExtensions
+	eCountryCode_PE                                                smithy.SchemaExtensions
+	eCountryCode_PF                                                smithy.SchemaExtensions
+	eCountryCode_PG                                                smithy.SchemaExtensions
+	eCountryCode_PH                                                smithy.SchemaExtensions
+	eCountryCode_PK                                                smithy.SchemaExtensions
+	eCountryCode_PL                                                smithy.SchemaExtensions
+	eCountryCode_PM                                                smithy.SchemaExtensions
+	eCountryCode_PN                                                smithy.SchemaExtensions
+	eCountryCode_PR                                                smithy.SchemaExtensions
+	eCountryCode_PS                                                smithy.SchemaExtensions
+	eCountryCode_PT                                                smithy.SchemaExtensions
+	eCountryCode_PW                                                smithy.SchemaExtensions
+	eCountryCode_PY                                                smithy.SchemaExtensions
+	eCountryCode_QA                                                smithy.SchemaExtensions
+	eCountryCode_RE                                                smithy.SchemaExtensions
+	eCountryCode_RO                                                smithy.SchemaExtensions
+	eCountryCode_RS                                                smithy.SchemaExtensions
+	eCountryCode_RU                                                smithy.SchemaExtensions
+	eCountryCode_RW                                                smithy.SchemaExtensions
+	eCountryCode_SA                                                smithy.SchemaExtensions
+	eCountryCode_SB                                                smithy.SchemaExtensions
+	eCountryCode_SC                                                smithy.SchemaExtensions
+	eCountryCode_SD                                                smithy.SchemaExtensions
+	eCountryCode_SE                                                smithy.SchemaExtensions
+	eCountryCode_SG                                                smithy.SchemaExtensions
+	eCountryCode_SH                                                smithy.SchemaExtensions
+	eCountryCode_SI                                                smithy.SchemaExtensions
+	eCountryCode_SJ                                                smithy.SchemaExtensions
+	eCountryCode_SK                                                smithy.SchemaExtensions
+	eCountryCode_SL                                                smithy.SchemaExtensions
+	eCountryCode_SM                                                smithy.SchemaExtensions
+	eCountryCode_SN                                                smithy.SchemaExtensions
+	eCountryCode_SO                                                smithy.SchemaExtensions
+	eCountryCode_SR                                                smithy.SchemaExtensions
+	eCountryCode_SS                                                smithy.SchemaExtensions
+	eCountryCode_ST                                                smithy.SchemaExtensions
+	eCountryCode_SV                                                smithy.SchemaExtensions
+	eCountryCode_SX                                                smithy.SchemaExtensions
+	eCountryCode_SY                                                smithy.SchemaExtensions
+	eCountryCode_SZ                                                smithy.SchemaExtensions
+	eCountryCode_TC                                                smithy.SchemaExtensions
+	eCountryCode_TD                                                smithy.SchemaExtensions
+	eCountryCode_TF                                                smithy.SchemaExtensions
+	eCountryCode_TG                                                smithy.SchemaExtensions
+	eCountryCode_TH                                                smithy.SchemaExtensions
+	eCountryCode_TJ                                                smithy.SchemaExtensions
+	eCountryCode_TK                                                smithy.SchemaExtensions
+	eCountryCode_TL                                                smithy.SchemaExtensions
+	eCountryCode_TM                                                smithy.SchemaExtensions
+	eCountryCode_TN                                                smithy.SchemaExtensions
+	eCountryCode_TO                                                smithy.SchemaExtensions
+	eCountryCode_TP                                                smithy.SchemaExtensions
+	eCountryCode_TR                                                smithy.SchemaExtensions
+	eCountryCode_TT                                                smithy.SchemaExtensions
+	eCountryCode_TV                                                smithy.SchemaExtensions
+	eCountryCode_TW                                                smithy.SchemaExtensions
+	eCountryCode_TZ                                                smithy.SchemaExtensions
+	eCountryCode_UA                                                smithy.SchemaExtensions
+	eCountryCode_UG                                                smithy.SchemaExtensions
+	eCountryCode_US                                                smithy.SchemaExtensions
+	eCountryCode_UY                                                smithy.SchemaExtensions
+	eCountryCode_UZ                                                smithy.SchemaExtensions
+	eCountryCode_VA                                                smithy.SchemaExtensions
+	eCountryCode_VC                                                smithy.SchemaExtensions
+	eCountryCode_VE                                                smithy.SchemaExtensions
+	eCountryCode_VG                                                smithy.SchemaExtensions
+	eCountryCode_VI                                                smithy.SchemaExtensions
+	eCountryCode_VN                                                smithy.SchemaExtensions
+	eCountryCode_VU                                                smithy.SchemaExtensions
+	eCountryCode_WF                                                smithy.SchemaExtensions
+	eCountryCode_WS                                                smithy.SchemaExtensions
+	eCountryCode_YE                                                smithy.SchemaExtensions
+	eCountryCode_YT                                                smithy.SchemaExtensions
+	eCountryCode_ZA                                                smithy.SchemaExtensions
+	eCountryCode_ZM                                                smithy.SchemaExtensions
+	eCountryCode_ZW                                                smithy.SchemaExtensions
+	e_Currency                                                     smithy.SchemaExtensions
+	e_CurrentExpiryYear                                            smithy.SchemaExtensions
+	e_DNSSec                                                       smithy.SchemaExtensions
+	eDnssecKey                                                     smithy.SchemaExtensions
+	eDnssecKey_Algorithm                                           smithy.SchemaExtensions
+	eDnssecKey_Flags                                               smithy.SchemaExtensions
+	eDnssecKey_PublicKey                                           smithy.SchemaExtensions
+	eDnssecKey_DigestType                                          smithy.SchemaExtensions
+	eDnssecKey_Digest                                              smithy.SchemaExtensions
+	eDnssecKey_KeyTag                                              smithy.SchemaExtensions
+	eDnssecKey_Id                                                  smithy.SchemaExtensions
+	e_DnssecKeyList                                                smithy.SchemaExtensions
+	e_DnssecKeyList_member                                         smithy.SchemaExtensions
+	eDnssecLimitExceeded                                           smithy.SchemaExtensions
+	eDnssecLimitExceeded_message                                   smithy.SchemaExtensions
+	e_DnssecPublicKey                                              smithy.SchemaExtensions
+	eDnssecSigningAttributes                                       smithy.SchemaExtensions
+	eDnssecSigningAttributes_Algorithm                             smithy.SchemaExtensions
+	eDnssecSigningAttributes_Flags                                 smithy.SchemaExtensions
+	eDnssecSigningAttributes_PublicKey                             smithy.SchemaExtensions
+	e_DomainAuthCode                                               smithy.SchemaExtensions
+	eDomainAvailability                                            smithy.SchemaExtensions
+	eDomainAvailability_AVAILABLE                                  smithy.SchemaExtensions
+	eDomainAvailability_AVAILABLE_RESERVED                         smithy.SchemaExtensions
+	eDomainAvailability_AVAILABLE_PREORDER                         smithy.SchemaExtensions
+	eDomainAvailability_UNAVAILABLE                                smithy.SchemaExtensions
+	eDomainAvailability_UNAVAILABLE_PREMIUM                        smithy.SchemaExtensions
+	eDomainAvailability_UNAVAILABLE_RESTRICTED                     smithy.SchemaExtensions
+	eDomainAvailability_RESERVED                                   smithy.SchemaExtensions
+	eDomainAvailability_DONT_KNOW                                  smithy.SchemaExtensions
+	eDomainAvailability_INVALID_NAME_FOR_TLD                       smithy.SchemaExtensions
+	eDomainAvailability_PENDING                                    smithy.SchemaExtensions
+	eDomainLimitExceeded                                           smithy.SchemaExtensions
+	eDomainLimitExceeded_message                                   smithy.SchemaExtensions
+	e_DomainName                                                   smithy.SchemaExtensions
+	eDomainPrice                                                   smithy.SchemaExtensions
+	eDomainPrice_Name                                              smithy.SchemaExtensions
+	eDomainPrice_RegistrationPrice                                 smithy.SchemaExtensions
+	eDomainPrice_TransferPrice                                     smithy.SchemaExtensions
+	eDomainPrice_RenewalPrice                                      smithy.SchemaExtensions
+	eDomainPrice_ChangeOwnershipPrice                              smithy.SchemaExtensions
+	eDomainPrice_RestorationPrice                                  smithy.SchemaExtensions
+	e_DomainPriceList                                              smithy.SchemaExtensions
+	e_DomainPriceList_member                                       smithy.SchemaExtensions
+	e_DomainPriceName                                              smithy.SchemaExtensions
+	e_DomainStatus                                                 smithy.SchemaExtensions
+	e_DomainStatusList                                             smithy.SchemaExtensions
+	e_DomainStatusList_member                                      smithy.SchemaExtensions
+	eDomainSuggestion                                              smithy.SchemaExtensions
+	eDomainSuggestion_DomainName                                   smithy.SchemaExtensions
+	eDomainSuggestion_Availability                                 smithy.SchemaExtensions
+	eDomainSuggestion_Price                                        smithy.SchemaExtensions
+	e_DomainSuggestionsList                                        smithy.SchemaExtensions
+	e_DomainSuggestionsList_member                                 smithy.SchemaExtensions
+	eDomainSummary                                                 smithy.SchemaExtensions
+	eDomainSummary_DomainName                                      smithy.SchemaExtensions
+	eDomainSummary_AutoRenew                                       smithy.SchemaExtensions
+	eDomainSummary_TransferLock                                    smithy.SchemaExtensions
+	eDomainSummary_Expiry                                          smithy.SchemaExtensions
+	e_DomainSummaryList                                            smithy.SchemaExtensions
+	e_DomainSummaryList_member                                     smithy.SchemaExtensions
+	eDomainTransferability                                         smithy.SchemaExtensions
+	eDomainTransferability_Transferable                            smithy.SchemaExtensions
+	eDuplicateRequest                                              smithy.SchemaExtensions
+	eDuplicateRequest_requestId                                    smithy.SchemaExtensions
+	eDuplicateRequest_message                                      smithy.SchemaExtensions
+	e_DurationInYears                                              smithy.SchemaExtensions
+	e_Email                                                        smithy.SchemaExtensions
+	e_ErrorMessage                                                 smithy.SchemaExtensions
+	eExtraParam                                                    smithy.SchemaExtensions
+	eExtraParam_Name                                               smithy.SchemaExtensions
+	eExtraParam_Value                                              smithy.SchemaExtensions
+	e_ExtraParamList                                               smithy.SchemaExtensions
+	e_ExtraParamList_member                                        smithy.SchemaExtensions
+	eExtraParamName                                                smithy.SchemaExtensions
+	eExtraParamName_DUNS_NUMBER                                    smithy.SchemaExtensions
+	eExtraParamName_BRAND_NUMBER                                   smithy.SchemaExtensions
+	eExtraParamName_BIRTH_DEPARTMENT                               smithy.SchemaExtensions
+	eExtraParamName_BIRTH_DATE_IN_YYYY_MM_DD                       smithy.SchemaExtensions
+	eExtraParamName_BIRTH_COUNTRY                                  smithy.SchemaExtensions
+	eExtraParamName_BIRTH_CITY                                     smithy.SchemaExtensions
+	eExtraParamName_DOCUMENT_NUMBER                                smithy.SchemaExtensions
+	eExtraParamName_AU_ID_NUMBER                                   smithy.SchemaExtensions
+	eExtraParamName_AU_ID_TYPE                                     smithy.SchemaExtensions
+	eExtraParamName_CA_LEGAL_TYPE                                  smithy.SchemaExtensions
+	eExtraParamName_CA_BUSINESS_ENTITY_TYPE                        smithy.SchemaExtensions
+	eExtraParamName_CA_LEGAL_REPRESENTATIVE                        smithy.SchemaExtensions
+	eExtraParamName_CA_LEGAL_REPRESENTATIVE_CAPACITY               smithy.SchemaExtensions
+	eExtraParamName_ES_IDENTIFICATION                              smithy.SchemaExtensions
+	eExtraParamName_ES_IDENTIFICATION_TYPE                         smithy.SchemaExtensions
+	eExtraParamName_ES_LEGAL_FORM                                  smithy.SchemaExtensions
+	eExtraParamName_FI_BUSINESS_NUMBER                             smithy.SchemaExtensions
+	eExtraParamName_ONWER_FI_ID_NUMBER                             smithy.SchemaExtensions
+	eExtraParamName_FI_NATIONALITY                                 smithy.SchemaExtensions
+	eExtraParamName_FI_ORGANIZATION_TYPE                           smithy.SchemaExtensions
+	eExtraParamName_IT_NATIONALITY                                 smithy.SchemaExtensions
+	eExtraParamName_IT_PIN                                         smithy.SchemaExtensions
+	eExtraParamName_IT_REGISTRANT_ENTITY_TYPE                      smithy.SchemaExtensions
+	eExtraParamName_RU_PASSPORT_DATA                               smithy.SchemaExtensions
+	eExtraParamName_SE_ID_NUMBER                                   smithy.SchemaExtensions
+	eExtraParamName_SG_ID_NUMBER                                   smithy.SchemaExtensions
+	eExtraParamName_VAT_NUMBER                                     smithy.SchemaExtensions
+	eExtraParamName_UK_CONTACT_TYPE                                smithy.SchemaExtensions
+	eExtraParamName_UK_COMPANY_NUMBER                              smithy.SchemaExtensions
+	eExtraParamName_EU_COUNTRY_OF_CITIZENSHIP                      smithy.SchemaExtensions
+	eExtraParamName_AU_PRIORITY_TOKEN                              smithy.SchemaExtensions
+	eExtraParamName_AU_ELIGIBILITY_TYPE                            smithy.SchemaExtensions
+	eExtraParamName_AU_POLICY_REASON                               smithy.SchemaExtensions
+	eExtraParamName_AU_REGISTRANT_NAME                             smithy.SchemaExtensions
+	e_ExtraParamValue                                              smithy.SchemaExtensions
+	e_FIAuthKey                                                    smithy.SchemaExtensions
+	eFilterCondition                                               smithy.SchemaExtensions
+	eFilterCondition_Name                                          smithy.SchemaExtensions
+	eFilterCondition_Operator                                      smithy.SchemaExtensions
+	eFilterCondition_Values                                        smithy.SchemaExtensions
+	e_FilterConditions                                             smithy.SchemaExtensions
+	e_FilterConditions_member                                      smithy.SchemaExtensions
+	e_GlueIp                                                       smithy.SchemaExtensions
+	e_GlueIpList                                                   smithy.SchemaExtensions
+	e_GlueIpList_member                                            smithy.SchemaExtensions
+	e_HostName                                                     smithy.SchemaExtensions
+	e_Integer                                                      smithy.SchemaExtensions
+	eInvalidInput                                                  smithy.SchemaExtensions
+	eInvalidInput_message                                          smithy.SchemaExtensions
+	e_InvoiceId                                                    smithy.SchemaExtensions
+	e_Label                                                        smithy.SchemaExtensions
+	e_LangCode                                                     smithy.SchemaExtensions
+	eListDomainsAttributeName                                      smithy.SchemaExtensions
+	eListDomainsAttributeName_DomainName                           smithy.SchemaExtensions
+	eListDomainsAttributeName_Expiry                               smithy.SchemaExtensions
+	eListOperationsSortAttributeName                               smithy.SchemaExtensions
+	eListOperationsSortAttributeName_SubmittedDate                 smithy.SchemaExtensions
+	e_ListPricesPageMaxItems                                       smithy.SchemaExtensions
+	e_Message                                                      smithy.SchemaExtensions
+	eNameserver                                                    smithy.SchemaExtensions
+	eNameserver_Name                                               smithy.SchemaExtensions
+	eNameserver_GlueIps                                            smithy.SchemaExtensions
+	e_NameserverList                                               smithy.SchemaExtensions
+	e_NameserverList_member                                        smithy.SchemaExtensions
+	e_NullableInteger                                              smithy.SchemaExtensions
+	e_OperationId                                                  smithy.SchemaExtensions
+	eOperationLimitExceeded                                        smithy.SchemaExtensions
+	eOperationLimitExceeded_message                                smithy.SchemaExtensions
+	eOperationStatus                                               smithy.SchemaExtensions
+	eOperationStatus_SUBMITTED                                     smithy.SchemaExtensions
+	eOperationStatus_IN_PROGRESS                                   smithy.SchemaExtensions
+	eOperationStatus_ERROR                                         smithy.SchemaExtensions
+	eOperationStatus_SUCCESSFUL                                    smithy.SchemaExtensions
+	eOperationStatus_FAILED                                        smithy.SchemaExtensions
+	e_OperationStatusList                                          smithy.SchemaExtensions
+	e_OperationStatusList_member                                   smithy.SchemaExtensions
+	eOperationSummary                                              smithy.SchemaExtensions
+	eOperationSummary_OperationId                                  smithy.SchemaExtensions
+	eOperationSummary_Status                                       smithy.SchemaExtensions
+	eOperationSummary_Type                                         smithy.SchemaExtensions
+	eOperationSummary_SubmittedDate                                smithy.SchemaExtensions
+	eOperationSummary_DomainName                                   smithy.SchemaExtensions
+	eOperationSummary_Message                                      smithy.SchemaExtensions
+	eOperationSummary_StatusFlag                                   smithy.SchemaExtensions
+	eOperationSummary_LastUpdatedDate                              smithy.SchemaExtensions
+	e_OperationSummaryList                                         smithy.SchemaExtensions
+	e_OperationSummaryList_member                                  smithy.SchemaExtensions
+	eOperationType                                                 smithy.SchemaExtensions
+	eOperationType_REGISTER_DOMAIN                                 smithy.SchemaExtensions
+	eOperationType_DELETE_DOMAIN                                   smithy.SchemaExtensions
+	eOperationType_TRANSFER_IN_DOMAIN                              smithy.SchemaExtensions
+	eOperationType_UPDATE_DOMAIN_CONTACT                           smithy.SchemaExtensions
+	eOperationType_UPDATE_NAMESERVER                               smithy.SchemaExtensions
+	eOperationType_CHANGE_PRIVACY_PROTECTION                       smithy.SchemaExtensions
+	eOperationType_DOMAIN_LOCK                                     smithy.SchemaExtensions
+	eOperationType_ENABLE_AUTORENEW                                smithy.SchemaExtensions
+	eOperationType_DISABLE_AUTORENEW                               smithy.SchemaExtensions
+	eOperationType_ADD_DNSSEC                                      smithy.SchemaExtensions
+	eOperationType_REMOVE_DNSSEC                                   smithy.SchemaExtensions
+	eOperationType_EXPIRE_DOMAIN                                   smithy.SchemaExtensions
+	eOperationType_TRANSFER_OUT_DOMAIN                             smithy.SchemaExtensions
+	eOperationType_CHANGE_DOMAIN_OWNER                             smithy.SchemaExtensions
+	eOperationType_RENEW_DOMAIN                                    smithy.SchemaExtensions
+	eOperationType_PUSH_DOMAIN                                     smithy.SchemaExtensions
+	eOperationType_INTERNAL_TRANSFER_OUT_DOMAIN                    smithy.SchemaExtensions
+	eOperationType_INTERNAL_TRANSFER_IN_DOMAIN                     smithy.SchemaExtensions
+	eOperationType_RELEASE_TO_GANDI                                smithy.SchemaExtensions
+	eOperationType_TRANSFER_ON_RENEW                               smithy.SchemaExtensions
+	eOperationType_RESTORE_DOMAIN                                  smithy.SchemaExtensions
+	e_OperationTypeList                                            smithy.SchemaExtensions
+	e_OperationTypeList_member                                     smithy.SchemaExtensions
+	eOperator                                                      smithy.SchemaExtensions
+	eOperator_LE                                                   smithy.SchemaExtensions
+	eOperator_GE                                                   smithy.SchemaExtensions
+	eOperator_BEGINS_WITH                                          smithy.SchemaExtensions
+	e_PageMarker                                                   smithy.SchemaExtensions
+	e_PageMaxItems                                                 smithy.SchemaExtensions
+	e_Password                                                     smithy.SchemaExtensions
+	e_Price                                                        smithy.SchemaExtensions
+	ePriceType                                                     smithy.SchemaExtensions
+	ePriceType_STANDARD                                            smithy.SchemaExtensions
+	ePriceType_REGISTRY_PREMIUM                                    smithy.SchemaExtensions
+	ePriceWithCurrency                                             smithy.SchemaExtensions
+	ePriceWithCurrency_Price                                       smithy.SchemaExtensions
+	ePriceWithCurrency_Currency                                    smithy.SchemaExtensions
+	ePriceWithCurrency_PriceType                                   smithy.SchemaExtensions
+	eReachabilityStatus                                            smithy.SchemaExtensions
+	eReachabilityStatus_PENDING                                    smithy.SchemaExtensions
+	eReachabilityStatus_DONE                                       smithy.SchemaExtensions
+	eReachabilityStatus_EXPIRED                                    smithy.SchemaExtensions
+	e_RegistrarName                                                smithy.SchemaExtensions
+	e_RegistrarUrl                                                 smithy.SchemaExtensions
+	e_RegistrarWhoIsServer                                         smithy.SchemaExtensions
+	e_RegistryDomainId                                             smithy.SchemaExtensions
+	e_RequestId                                                    smithy.SchemaExtensions
+	e_Reseller                                                     smithy.SchemaExtensions
+	eSortCondition                                                 smithy.SchemaExtensions
+	eSortCondition_Name                                            smithy.SchemaExtensions
+	eSortCondition_SortOrder                                       smithy.SchemaExtensions
+	eSortOrder                                                     smithy.SchemaExtensions
+	eSortOrder_ASC                                                 smithy.SchemaExtensions
+	eSortOrder_DESC                                                smithy.SchemaExtensions
+	e_State                                                        smithy.SchemaExtensions
+	eStatusFlag                                                    smithy.SchemaExtensions
+	eStatusFlag_PENDING_ACCEPTANCE                                 smithy.SchemaExtensions
+	eStatusFlag_PENDING_CUSTOMER_ACTION                            smithy.SchemaExtensions
+	eStatusFlag_PENDING_AUTHORIZATION                              smithy.SchemaExtensions
+	eStatusFlag_PENDING_PAYMENT_VERIFICATION                       smithy.SchemaExtensions
+	eStatusFlag_PENDING_SUPPORT_CASE                               smithy.SchemaExtensions
+	e_String                                                       smithy.SchemaExtensions
+	eTag                                                           smithy.SchemaExtensions
+	eTag_Key                                                       smithy.SchemaExtensions
+	eTag_Value                                                     smithy.SchemaExtensions
+	e_TagKey                                                       smithy.SchemaExtensions
+	e_TagKeyList                                                   smithy.SchemaExtensions
+	e_TagKeyList_member                                            smithy.SchemaExtensions
+	e_TagList                                                      smithy.SchemaExtensions
+	e_TagList_member                                               smithy.SchemaExtensions
+	e_TagValue                                                     smithy.SchemaExtensions
+	e_Timestamp                                                    smithy.SchemaExtensions
+	eTLDInMaintenance                                              smithy.SchemaExtensions
+	eTLDInMaintenance_message                                      smithy.SchemaExtensions
+	eTLDInMaintenance_tld                                          smithy.SchemaExtensions
+	e_TldName                                                      smithy.SchemaExtensions
+	eTLDRulesViolation                                             smithy.SchemaExtensions
+	eTLDRulesViolation_message                                     smithy.SchemaExtensions
+	eTransferable                                                  smithy.SchemaExtensions
+	eTransferable_TRANSFERABLE                                     smithy.SchemaExtensions
+	eTransferable_UNTRANSFERABLE                                   smithy.SchemaExtensions
+	eTransferable_DONT_KNOW                                        smithy.SchemaExtensions
+	eTransferable_DOMAIN_IN_OWN_ACCOUNT                            smithy.SchemaExtensions
+	eTransferable_DOMAIN_IN_ANOTHER_ACCOUNT                        smithy.SchemaExtensions
+	eTransferable_PREMIUM_DOMAIN                                   smithy.SchemaExtensions
+	eTransferable_PENDING                                          smithy.SchemaExtensions
+	eUnsupportedTLD                                                smithy.SchemaExtensions
+	eUnsupportedTLD_message                                        smithy.SchemaExtensions
+	e_Value                                                        smithy.SchemaExtensions
+	e_Values                                                       smithy.SchemaExtensions
+	e_Values_member                                                smithy.SchemaExtensions
+	e_ZipCode                                                      smithy.SchemaExtensions
+	eAcceptDomainTransferFromAnotherAwsAccountRequest              smithy.SchemaExtensions
+	eAcceptDomainTransferFromAnotherAwsAccountRequest_DomainName   smithy.SchemaExtensions
+	eAcceptDomainTransferFromAnotherAwsAccountRequest_Password     smithy.SchemaExtensions
+	eAcceptDomainTransferFromAnotherAwsAccountResponse             smithy.SchemaExtensions
+	eAcceptDomainTransferFromAnotherAwsAccountResponse_OperationId smithy.SchemaExtensions
+	eAssociateDelegationSignerToDomainRequest                      smithy.SchemaExtensions
+	eAssociateDelegationSignerToDomainRequest_DomainName           smithy.SchemaExtensions
+	eAssociateDelegationSignerToDomainRequest_SigningAttributes    smithy.SchemaExtensions
+	eAssociateDelegationSignerToDomainResponse                     smithy.SchemaExtensions
+	eAssociateDelegationSignerToDomainResponse_OperationId         smithy.SchemaExtensions
+	eCancelDomainTransferToAnotherAwsAccountRequest                smithy.SchemaExtensions
+	eCancelDomainTransferToAnotherAwsAccountRequest_DomainName     smithy.SchemaExtensions
+	eCancelDomainTransferToAnotherAwsAccountResponse               smithy.SchemaExtensions
+	eCancelDomainTransferToAnotherAwsAccountResponse_OperationId   smithy.SchemaExtensions
+	eCheckDomainAvailabilityRequest                                smithy.SchemaExtensions
+	eCheckDomainAvailabilityRequest_DomainName                     smithy.SchemaExtensions
+	eCheckDomainAvailabilityRequest_IdnLangCode                    smithy.SchemaExtensions
+	eCheckDomainAvailabilityResponse                               smithy.SchemaExtensions
+	eCheckDomainAvailabilityResponse_Availability                  smithy.SchemaExtensions
+	eCheckDomainAvailabilityResponse_Price                         smithy.SchemaExtensions
+	eCheckDomainTransferabilityRequest                             smithy.SchemaExtensions
+	eCheckDomainTransferabilityRequest_DomainName                  smithy.SchemaExtensions
+	eCheckDomainTransferabilityRequest_AuthCode                    smithy.SchemaExtensions
+	eCheckDomainTransferabilityResponse                            smithy.SchemaExtensions
+	eCheckDomainTransferabilityResponse_Transferability            smithy.SchemaExtensions
+	eCheckDomainTransferabilityResponse_Message                    smithy.SchemaExtensions
+	eCheckDomainTransferabilityResponse_Price                      smithy.SchemaExtensions
+	eDeleteDomainRequest                                           smithy.SchemaExtensions
+	eDeleteDomainRequest_DomainName                                smithy.SchemaExtensions
+	eDeleteDomainResponse                                          smithy.SchemaExtensions
+	eDeleteDomainResponse_OperationId                              smithy.SchemaExtensions
+	eDeleteTagsForDomainRequest                                    smithy.SchemaExtensions
+	eDeleteTagsForDomainRequest_DomainName                         smithy.SchemaExtensions
+	eDeleteTagsForDomainRequest_TagsToDelete                       smithy.SchemaExtensions
+	eDeleteTagsForDomainResponse                                   smithy.SchemaExtensions
+	eDisableDomainAutoRenewRequest                                 smithy.SchemaExtensions
+	eDisableDomainAutoRenewRequest_DomainName                      smithy.SchemaExtensions
+	eDisableDomainAutoRenewResponse                                smithy.SchemaExtensions
+	eDisableDomainTransferLockRequest                              smithy.SchemaExtensions
+	eDisableDomainTransferLockRequest_DomainName                   smithy.SchemaExtensions
+	eDisableDomainTransferLockResponse                             smithy.SchemaExtensions
+	eDisableDomainTransferLockResponse_OperationId                 smithy.SchemaExtensions
+	eDisassociateDelegationSignerFromDomainRequest                 smithy.SchemaExtensions
+	eDisassociateDelegationSignerFromDomainRequest_DomainName      smithy.SchemaExtensions
+	eDisassociateDelegationSignerFromDomainRequest_Id              smithy.SchemaExtensions
+	eDisassociateDelegationSignerFromDomainResponse                smithy.SchemaExtensions
+	eDisassociateDelegationSignerFromDomainResponse_OperationId    smithy.SchemaExtensions
+	eEnableDomainAutoRenewRequest                                  smithy.SchemaExtensions
+	eEnableDomainAutoRenewRequest_DomainName                       smithy.SchemaExtensions
+	eEnableDomainAutoRenewResponse                                 smithy.SchemaExtensions
+	eEnableDomainTransferLockRequest                               smithy.SchemaExtensions
+	eEnableDomainTransferLockRequest_DomainName                    smithy.SchemaExtensions
+	eEnableDomainTransferLockResponse                              smithy.SchemaExtensions
+	eEnableDomainTransferLockResponse_OperationId                  smithy.SchemaExtensions
+	eGetContactReachabilityStatusRequest                           smithy.SchemaExtensions
+	eGetContactReachabilityStatusRequest_domainName                smithy.SchemaExtensions
+	eGetContactReachabilityStatusResponse                          smithy.SchemaExtensions
+	eGetContactReachabilityStatusResponse_domainName               smithy.SchemaExtensions
+	eGetContactReachabilityStatusResponse_status                   smithy.SchemaExtensions
+	eGetDomainDetailRequest                                        smithy.SchemaExtensions
+	eGetDomainDetailRequest_DomainName                             smithy.SchemaExtensions
+	eGetDomainDetailResponse                                       smithy.SchemaExtensions
+	eGetDomainDetailResponse_DomainName                            smithy.SchemaExtensions
+	eGetDomainDetailResponse_Nameservers                           smithy.SchemaExtensions
+	eGetDomainDetailResponse_AutoRenew                             smithy.SchemaExtensions
+	eGetDomainDetailResponse_AdminContact                          smithy.SchemaExtensions
+	eGetDomainDetailResponse_RegistrantContact                     smithy.SchemaExtensions
+	eGetDomainDetailResponse_TechContact                           smithy.SchemaExtensions
+	eGetDomainDetailResponse_AdminPrivacy                          smithy.SchemaExtensions
+	eGetDomainDetailResponse_RegistrantPrivacy                     smithy.SchemaExtensions
+	eGetDomainDetailResponse_TechPrivacy                           smithy.SchemaExtensions
+	eGetDomainDetailResponse_RegistrarName                         smithy.SchemaExtensions
+	eGetDomainDetailResponse_WhoIsServer                           smithy.SchemaExtensions
+	eGetDomainDetailResponse_RegistrarUrl                          smithy.SchemaExtensions
+	eGetDomainDetailResponse_AbuseContactEmail                     smithy.SchemaExtensions
+	eGetDomainDetailResponse_AbuseContactPhone                     smithy.SchemaExtensions
+	eGetDomainDetailResponse_RegistryDomainId                      smithy.SchemaExtensions
+	eGetDomainDetailResponse_CreationDate                          smithy.SchemaExtensions
+	eGetDomainDetailResponse_UpdatedDate                           smithy.SchemaExtensions
+	eGetDomainDetailResponse_ExpirationDate                        smithy.SchemaExtensions
+	eGetDomainDetailResponse_Reseller                              smithy.SchemaExtensions
+	eGetDomainDetailResponse_DnsSec                                smithy.SchemaExtensions
+	eGetDomainDetailResponse_StatusList                            smithy.SchemaExtensions
+	eGetDomainDetailResponse_DnssecKeys                            smithy.SchemaExtensions
+	eGetDomainDetailResponse_BillingContact                        smithy.SchemaExtensions
+	eGetDomainDetailResponse_BillingPrivacy                        smithy.SchemaExtensions
+	eGetDomainPricesRequest                                        smithy.SchemaExtensions
+	eGetDomainPricesRequest_DomainName                             smithy.SchemaExtensions
+	eGetDomainPricesResponse                                       smithy.SchemaExtensions
+	eGetDomainPricesResponse_DomainPrice                           smithy.SchemaExtensions
+	eGetDomainSuggestionsRequest                                   smithy.SchemaExtensions
+	eGetDomainSuggestionsRequest_DomainName                        smithy.SchemaExtensions
+	eGetDomainSuggestionsRequest_SuggestionCount                   smithy.SchemaExtensions
+	eGetDomainSuggestionsRequest_OnlyAvailable                     smithy.SchemaExtensions
+	eGetDomainSuggestionsRequest_OnlyStandardPrices                smithy.SchemaExtensions
+	eGetDomainSuggestionsResponse                                  smithy.SchemaExtensions
+	eGetDomainSuggestionsResponse_SuggestionsList                  smithy.SchemaExtensions
+	eGetOperationDetailRequest                                     smithy.SchemaExtensions
+	eGetOperationDetailRequest_OperationId                         smithy.SchemaExtensions
+	eGetOperationDetailResponse                                    smithy.SchemaExtensions
+	eGetOperationDetailResponse_OperationId                        smithy.SchemaExtensions
+	eGetOperationDetailResponse_Status                             smithy.SchemaExtensions
+	eGetOperationDetailResponse_Message                            smithy.SchemaExtensions
+	eGetOperationDetailResponse_DomainName                         smithy.SchemaExtensions
+	eGetOperationDetailResponse_Type                               smithy.SchemaExtensions
+	eGetOperationDetailResponse_SubmittedDate                      smithy.SchemaExtensions
+	eGetOperationDetailResponse_LastUpdatedDate                    smithy.SchemaExtensions
+	eGetOperationDetailResponse_StatusFlag                         smithy.SchemaExtensions
+	eListDomainsRequest                                            smithy.SchemaExtensions
+	eListDomainsRequest_FilterConditions                           smithy.SchemaExtensions
+	eListDomainsRequest_SortCondition                              smithy.SchemaExtensions
+	eListDomainsRequest_Marker                                     smithy.SchemaExtensions
+	eListDomainsRequest_MaxItems                                   smithy.SchemaExtensions
+	eListDomainsResponse                                           smithy.SchemaExtensions
+	eListDomainsResponse_Domains                                   smithy.SchemaExtensions
+	eListDomainsResponse_NextPageMarker                            smithy.SchemaExtensions
+	eListOperationsRequest                                         smithy.SchemaExtensions
+	eListOperationsRequest_SubmittedSince                          smithy.SchemaExtensions
+	eListOperationsRequest_Marker                                  smithy.SchemaExtensions
+	eListOperationsRequest_MaxItems                                smithy.SchemaExtensions
+	eListOperationsRequest_Status                                  smithy.SchemaExtensions
+	eListOperationsRequest_Type                                    smithy.SchemaExtensions
+	eListOperationsRequest_SortBy                                  smithy.SchemaExtensions
+	eListOperationsRequest_SortOrder                               smithy.SchemaExtensions
+	eListOperationsResponse                                        smithy.SchemaExtensions
+	eListOperationsResponse_Operations                             smithy.SchemaExtensions
+	eListOperationsResponse_NextPageMarker                         smithy.SchemaExtensions
+	eListPricesRequest                                             smithy.SchemaExtensions
+	eListPricesRequest_Tld                                         smithy.SchemaExtensions
+	eListPricesRequest_Marker                                      smithy.SchemaExtensions
+	eListPricesRequest_MaxItems                                    smithy.SchemaExtensions
+	eListPricesResponse                                            smithy.SchemaExtensions
+	eListPricesResponse_Prices                                     smithy.SchemaExtensions
+	eListPricesResponse_NextPageMarker                             smithy.SchemaExtensions
+	eListTagsForDomainRequest                                      smithy.SchemaExtensions
+	eListTagsForDomainRequest_DomainName                           smithy.SchemaExtensions
+	eListTagsForDomainResponse                                     smithy.SchemaExtensions
+	eListTagsForDomainResponse_TagList                             smithy.SchemaExtensions
+	ePushDomainRequest                                             smithy.SchemaExtensions
+	ePushDomainRequest_DomainName                                  smithy.SchemaExtensions
+	ePushDomainRequest_Target                                      smithy.SchemaExtensions
+	eRegisterDomainRequest                                         smithy.SchemaExtensions
+	eRegisterDomainRequest_DomainName                              smithy.SchemaExtensions
+	eRegisterDomainRequest_IdnLangCode                             smithy.SchemaExtensions
+	eRegisterDomainRequest_DurationInYears                         smithy.SchemaExtensions
+	eRegisterDomainRequest_AutoRenew                               smithy.SchemaExtensions
+	eRegisterDomainRequest_AdminContact                            smithy.SchemaExtensions
+	eRegisterDomainRequest_RegistrantContact                       smithy.SchemaExtensions
+	eRegisterDomainRequest_TechContact                             smithy.SchemaExtensions
+	eRegisterDomainRequest_PrivacyProtectAdminContact              smithy.SchemaExtensions
+	eRegisterDomainRequest_PrivacyProtectRegistrantContact         smithy.SchemaExtensions
+	eRegisterDomainRequest_PrivacyProtectTechContact               smithy.SchemaExtensions
+	eRegisterDomainRequest_BillingContact                          smithy.SchemaExtensions
+	eRegisterDomainRequest_PrivacyProtectBillingContact            smithy.SchemaExtensions
+	eRegisterDomainRequest_Consent                                 smithy.SchemaExtensions
+	eRegisterDomainResponse                                        smithy.SchemaExtensions
+	eRegisterDomainResponse_OperationId                            smithy.SchemaExtensions
+	eRejectDomainTransferFromAnotherAwsAccountRequest              smithy.SchemaExtensions
+	eRejectDomainTransferFromAnotherAwsAccountRequest_DomainName   smithy.SchemaExtensions
+	eRejectDomainTransferFromAnotherAwsAccountResponse             smithy.SchemaExtensions
+	eRejectDomainTransferFromAnotherAwsAccountResponse_OperationId smithy.SchemaExtensions
+	eRenewDomainRequest                                            smithy.SchemaExtensions
+	eRenewDomainRequest_DomainName                                 smithy.SchemaExtensions
+	eRenewDomainRequest_DurationInYears                            smithy.SchemaExtensions
+	eRenewDomainRequest_CurrentExpiryYear                          smithy.SchemaExtensions
+	eRenewDomainRequest_Consent                                    smithy.SchemaExtensions
+	eRenewDomainResponse                                           smithy.SchemaExtensions
+	eRenewDomainResponse_OperationId                               smithy.SchemaExtensions
+	eResendContactReachabilityEmailRequest                         smithy.SchemaExtensions
+	eResendContactReachabilityEmailRequest_domainName              smithy.SchemaExtensions
+	eResendContactReachabilityEmailResponse                        smithy.SchemaExtensions
+	eResendContactReachabilityEmailResponse_domainName             smithy.SchemaExtensions
+	eResendContactReachabilityEmailResponse_emailAddress           smithy.SchemaExtensions
+	eResendContactReachabilityEmailResponse_isAlreadyVerified      smithy.SchemaExtensions
+	eResendOperationAuthorizationRequest                           smithy.SchemaExtensions
+	eResendOperationAuthorizationRequest_OperationId               smithy.SchemaExtensions
+	eRetrieveDomainAuthCodeRequest                                 smithy.SchemaExtensions
+	eRetrieveDomainAuthCodeRequest_DomainName                      smithy.SchemaExtensions
+	eRetrieveDomainAuthCodeResponse                                smithy.SchemaExtensions
+	eRetrieveDomainAuthCodeResponse_AuthCode                       smithy.SchemaExtensions
+	eTransferDomainRequest                                         smithy.SchemaExtensions
+	eTransferDomainRequest_DomainName                              smithy.SchemaExtensions
+	eTransferDomainRequest_IdnLangCode                             smithy.SchemaExtensions
+	eTransferDomainRequest_DurationInYears                         smithy.SchemaExtensions
+	eTransferDomainRequest_Nameservers                             smithy.SchemaExtensions
+	eTransferDomainRequest_AuthCode                                smithy.SchemaExtensions
+	eTransferDomainRequest_AutoRenew                               smithy.SchemaExtensions
+	eTransferDomainRequest_AdminContact                            smithy.SchemaExtensions
+	eTransferDomainRequest_RegistrantContact                       smithy.SchemaExtensions
+	eTransferDomainRequest_TechContact                             smithy.SchemaExtensions
+	eTransferDomainRequest_PrivacyProtectAdminContact              smithy.SchemaExtensions
+	eTransferDomainRequest_PrivacyProtectRegistrantContact         smithy.SchemaExtensions
+	eTransferDomainRequest_PrivacyProtectTechContact               smithy.SchemaExtensions
+	eTransferDomainRequest_BillingContact                          smithy.SchemaExtensions
+	eTransferDomainRequest_PrivacyProtectBillingContact            smithy.SchemaExtensions
+	eTransferDomainRequest_Consent                                 smithy.SchemaExtensions
+	eTransferDomainResponse                                        smithy.SchemaExtensions
+	eTransferDomainResponse_OperationId                            smithy.SchemaExtensions
+	eTransferDomainToAnotherAwsAccountRequest                      smithy.SchemaExtensions
+	eTransferDomainToAnotherAwsAccountRequest_DomainName           smithy.SchemaExtensions
+	eTransferDomainToAnotherAwsAccountRequest_AccountId            smithy.SchemaExtensions
+	eTransferDomainToAnotherAwsAccountResponse                     smithy.SchemaExtensions
+	eTransferDomainToAnotherAwsAccountResponse_OperationId         smithy.SchemaExtensions
+	eTransferDomainToAnotherAwsAccountResponse_Password            smithy.SchemaExtensions
+	eUpdateDomainContactRequest                                    smithy.SchemaExtensions
+	eUpdateDomainContactRequest_DomainName                         smithy.SchemaExtensions
+	eUpdateDomainContactRequest_AdminContact                       smithy.SchemaExtensions
+	eUpdateDomainContactRequest_RegistrantContact                  smithy.SchemaExtensions
+	eUpdateDomainContactRequest_TechContact                        smithy.SchemaExtensions
+	eUpdateDomainContactRequest_Consent                            smithy.SchemaExtensions
+	eUpdateDomainContactRequest_BillingContact                     smithy.SchemaExtensions
+	eUpdateDomainContactResponse                                   smithy.SchemaExtensions
+	eUpdateDomainContactResponse_OperationId                       smithy.SchemaExtensions
+	eUpdateDomainContactPrivacyRequest                             smithy.SchemaExtensions
+	eUpdateDomainContactPrivacyRequest_DomainName                  smithy.SchemaExtensions
+	eUpdateDomainContactPrivacyRequest_AdminPrivacy                smithy.SchemaExtensions
+	eUpdateDomainContactPrivacyRequest_RegistrantPrivacy           smithy.SchemaExtensions
+	eUpdateDomainContactPrivacyRequest_TechPrivacy                 smithy.SchemaExtensions
+	eUpdateDomainContactPrivacyRequest_BillingPrivacy              smithy.SchemaExtensions
+	eUpdateDomainContactPrivacyResponse                            smithy.SchemaExtensions
+	eUpdateDomainContactPrivacyResponse_OperationId                smithy.SchemaExtensions
+	eUpdateDomainNameserversRequest                                smithy.SchemaExtensions
+	eUpdateDomainNameserversRequest_DomainName                     smithy.SchemaExtensions
+	eUpdateDomainNameserversRequest_FIAuthKey                      smithy.SchemaExtensions
+	eUpdateDomainNameserversRequest_Nameservers                    smithy.SchemaExtensions
+	eUpdateDomainNameserversResponse                               smithy.SchemaExtensions
+	eUpdateDomainNameserversResponse_OperationId                   smithy.SchemaExtensions
+	eUpdateTagsForDomainRequest                                    smithy.SchemaExtensions
+	eUpdateTagsForDomainRequest_DomainName                         smithy.SchemaExtensions
+	eUpdateTagsForDomainRequest_TagsToUpdate                       smithy.SchemaExtensions
+	eUpdateTagsForDomainResponse                                   smithy.SchemaExtensions
+	eViewBillingRequest                                            smithy.SchemaExtensions
+	eViewBillingRequest_Start                                      smithy.SchemaExtensions
+	eViewBillingRequest_End                                        smithy.SchemaExtensions
+	eViewBillingRequest_Marker                                     smithy.SchemaExtensions
+	eViewBillingRequest_MaxItems                                   smithy.SchemaExtensions
+	eViewBillingResponse                                           smithy.SchemaExtensions
+	eViewBillingResponse_NextPageMarker                            smithy.SchemaExtensions
+	eViewBillingResponse_BillingRecords                            smithy.SchemaExtensions
+)
 
 var (
 	iAcceptDomainTransferFromAnotherAwsAccount         = smithy.ShapeID{Namespace: "com.amazonaws.route53domains", Name: "AcceptDomainTransferFromAnotherAwsAccount"}
@@ -544,828 +1364,828 @@ var mUpdateTagsForDomainRequest = smithy.SchemaMembers{List: []*smithy.Schema{&s
 var mViewBillingRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sViewBillingRequest_Start, &sViewBillingRequest_End, &sViewBillingRequest_Marker, &sViewBillingRequest_MaxItems}}
 var mViewBillingResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sViewBillingResponse_NextPageMarker, &sViewBillingResponse_BillingRecords}}
 
-var sAcceptDomainTransferFromAnotherAwsAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptDomainTransferFromAnotherAwsAccount, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sAssociateDelegationSignerToDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateDelegationSignerToDomain, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sCancelDomainTransferToAnotherAwsAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelDomainTransferToAnotherAwsAccount, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sCheckDomainAvailability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCheckDomainAvailability, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sCheckDomainTransferability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCheckDomainTransferability, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sDeleteDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomain, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sDeleteTagsForDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTagsForDomain, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sDisableDomainAutoRenew = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableDomainAutoRenew, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sDisableDomainTransferLock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableDomainTransferLock, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sDisassociateDelegationSignerFromDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateDelegationSignerFromDomain, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sEnableDomainAutoRenew = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableDomainAutoRenew, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sEnableDomainTransferLock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableDomainTransferLock, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sGetContactReachabilityStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContactReachabilityStatus, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sGetDomainDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainDetail, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sGetDomainPrices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainPrices, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sGetDomainSuggestions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainSuggestions, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sGetOperationDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOperationDetail, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sListDomains = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomains, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sListOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOperations, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sListPrices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPrices, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var sListTagsForDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForDomain, Type: smithy.ShapeTypeOperation, Ext: &ext[20]})
-var sPushDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPushDomain, Type: smithy.ShapeTypeOperation, Ext: &ext[21]})
-var sRegisterDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterDomain, Type: smithy.ShapeTypeOperation, Ext: &ext[22]})
-var sRejectDomainTransferFromAnotherAwsAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectDomainTransferFromAnotherAwsAccount, Type: smithy.ShapeTypeOperation, Ext: &ext[23]})
-var sRenewDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRenewDomain, Type: smithy.ShapeTypeOperation, Ext: &ext[24]})
-var sResendContactReachabilityEmail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResendContactReachabilityEmail, Type: smithy.ShapeTypeOperation, Ext: &ext[25]})
-var sResendOperationAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResendOperationAuthorization, Type: smithy.ShapeTypeOperation, Ext: &ext[26]})
-var sRetrieveDomainAuthCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetrieveDomainAuthCode, Type: smithy.ShapeTypeOperation, Ext: &ext[27]})
-var sTransferDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransferDomain, Type: smithy.ShapeTypeOperation, Ext: &ext[28]})
-var sTransferDomainToAnotherAwsAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransferDomainToAnotherAwsAccount, Type: smithy.ShapeTypeOperation, Ext: &ext[29]})
-var sUpdateDomainContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainContact, Type: smithy.ShapeTypeOperation, Ext: &ext[30]})
-var sUpdateDomainContactPrivacy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainContactPrivacy, Type: smithy.ShapeTypeOperation, Ext: &ext[31]})
-var sUpdateDomainNameservers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainNameservers, Type: smithy.ShapeTypeOperation, Ext: &ext[32]})
-var sUpdateTagsForDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTagsForDomain, Type: smithy.ShapeTypeOperation, Ext: &ext[33]})
-var sViewBilling = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iViewBilling, Type: smithy.ShapeTypeOperation, Ext: &ext[34]})
-var s_Route53Domains_v20140515 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Route53Domains_v20140515, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &ext[35]})
-var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var s_AddressLine = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddressLine, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[37]})
-var sBillingRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBillingRecord, Members: &mBillingRecord, Type: smithy.ShapeTypeStructure, Ext: &ext[38]})
-var s_BillingRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingRecords, Members: &m_BillingRecords, Type: smithy.ShapeTypeList, Ext: &ext[44]})
-var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[46]})
-var s_City = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_City, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[47]})
-var sConsent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConsent, Members: &mConsent, Type: smithy.ShapeTypeStructure, Ext: &ext[48]})
-var s_ConsentPrice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConsentPrice, Type: smithy.ShapeTypeDouble, Ext: &ext[51]})
-var sContactDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContactDetail, Members: &mContactDetail, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[52]})
-var s_ContactName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[67]})
-var s_ContactNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactNumber, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[68]})
-var sContactType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContactType, Members: &mContactType, Type: smithy.ShapeTypeEnum, Ext: &ext[69]})
-var sCountryCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCountryCode, Members: &mCountryCode, Traits: &t1, Type: smithy.ShapeTypeEnum, Ext: &ext[75]})
-var s_Currency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Currency, Type: smithy.ShapeTypeString, Ext: &ext[327]})
-var s_CurrentExpiryYear = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CurrentExpiryYear, Type: smithy.ShapeTypeInteger, Ext: &ext[328]})
-var s_DNSSec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DNSSec, Type: smithy.ShapeTypeString, Ext: &ext[329]})
-var sDnssecKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDnssecKey, Members: &mDnssecKey, Type: smithy.ShapeTypeStructure, Ext: &ext[330]})
-var s_DnssecKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DnssecKeyList, Members: &m_DnssecKeyList, Type: smithy.ShapeTypeList, Ext: &ext[338]})
-var sDnssecLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDnssecLimitExceeded, Members: &mDnssecLimitExceeded, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[340]})
-var s_DnssecPublicKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DnssecPublicKey, Type: smithy.ShapeTypeString, Ext: &ext[342]})
-var sDnssecSigningAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDnssecSigningAttributes, Members: &mDnssecSigningAttributes, Type: smithy.ShapeTypeStructure, Ext: &ext[343]})
-var s_DomainAuthCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainAuthCode, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[347]})
-var sDomainAvailability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainAvailability, Members: &mDomainAvailability, Type: smithy.ShapeTypeEnum, Ext: &ext[348]})
-var sDomainLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainLimitExceeded, Members: &mDomainLimitExceeded, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[359]})
-var s_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[361]})
-var sDomainPrice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainPrice, Members: &mDomainPrice, Type: smithy.ShapeTypeStructure, Ext: &ext[362]})
-var s_DomainPriceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainPriceList, Members: &m_DomainPriceList, Type: smithy.ShapeTypeList, Ext: &ext[369]})
-var s_DomainPriceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainPriceName, Type: smithy.ShapeTypeString, Ext: &ext[371]})
-var s_DomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainStatus, Type: smithy.ShapeTypeString, Ext: &ext[372]})
-var s_DomainStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainStatusList, Members: &m_DomainStatusList, Type: smithy.ShapeTypeList, Ext: &ext[373]})
-var sDomainSuggestion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainSuggestion, Members: &mDomainSuggestion, Type: smithy.ShapeTypeStructure, Ext: &ext[375]})
-var s_DomainSuggestionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainSuggestionsList, Members: &m_DomainSuggestionsList, Type: smithy.ShapeTypeList, Ext: &ext[379]})
-var sDomainSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainSummary, Members: &mDomainSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[381]})
-var s_DomainSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainSummaryList, Members: &m_DomainSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[386]})
-var sDomainTransferability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainTransferability, Members: &mDomainTransferability, Type: smithy.ShapeTypeStructure, Ext: &ext[388]})
-var sDuplicateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplicateRequest, Members: &mDuplicateRequest, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[390]})
-var s_DurationInYears = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DurationInYears, Type: smithy.ShapeTypeInteger, Ext: &ext[393]})
-var s_Email = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Email, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[394]})
-var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[395]})
-var sExtraParam = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtraParam, Members: &mExtraParam, Type: smithy.ShapeTypeStructure, Ext: &ext[396]})
-var s_ExtraParamList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtraParamList, Members: &m_ExtraParamList, Type: smithy.ShapeTypeList, Ext: &ext[399]})
-var sExtraParamName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtraParamName, Members: &mExtraParamName, Type: smithy.ShapeTypeEnum, Ext: &ext[401]})
-var s_ExtraParamValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtraParamValue, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[436]})
-var s_FIAuthKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FIAuthKey, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[437]})
-var sFilterCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterCondition, Members: &mFilterCondition, Type: smithy.ShapeTypeStructure, Ext: &ext[438]})
-var s_FilterConditions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterConditions, Members: &m_FilterConditions, Type: smithy.ShapeTypeList, Ext: &ext[442]})
-var s_GlueIp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GlueIp, Type: smithy.ShapeTypeString, Ext: &ext[444]})
-var s_GlueIpList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GlueIpList, Members: &m_GlueIpList, Type: smithy.ShapeTypeList, Ext: &ext[445]})
-var s_HostName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HostName, Type: smithy.ShapeTypeString, Ext: &ext[447]})
-var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[448]})
-var sInvalidInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidInput, Members: &mInvalidInput, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[449]})
-var s_InvoiceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvoiceId, Type: smithy.ShapeTypeString, Ext: &ext[451]})
-var s_Label = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Label, Type: smithy.ShapeTypeString, Ext: &ext[452]})
-var s_LangCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LangCode, Type: smithy.ShapeTypeString, Ext: &ext[453]})
-var sListDomainsAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainsAttributeName, Members: &mListDomainsAttributeName, Type: smithy.ShapeTypeEnum, Ext: &ext[454]})
-var sListOperationsSortAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOperationsSortAttributeName, Members: &mListOperationsSortAttributeName, Type: smithy.ShapeTypeEnum, Ext: &ext[457]})
-var s_ListPricesPageMaxItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListPricesPageMaxItems, Type: smithy.ShapeTypeInteger, Ext: &ext[459]})
-var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[460]})
-var sNameserver = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNameserver, Members: &mNameserver, Type: smithy.ShapeTypeStructure, Ext: &ext[461]})
-var s_NameserverList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NameserverList, Members: &m_NameserverList, Type: smithy.ShapeTypeList, Ext: &ext[464]})
-var s_NullableInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[466]})
-var s_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &ext[467]})
-var sOperationLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationLimitExceeded, Members: &mOperationLimitExceeded, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[468]})
-var sOperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationStatus, Members: &mOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[470]})
-var s_OperationStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationStatusList, Members: &m_OperationStatusList, Type: smithy.ShapeTypeList, Ext: &ext[476]})
-var sOperationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationSummary, Members: &mOperationSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[478]})
-var s_OperationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationSummaryList, Members: &m_OperationSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[487]})
-var sOperationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationType, Members: &mOperationType, Type: smithy.ShapeTypeEnum, Ext: &ext[489]})
-var s_OperationTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationTypeList, Members: &m_OperationTypeList, Type: smithy.ShapeTypeList, Ext: &ext[511]})
-var sOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperator, Members: &mOperator, Type: smithy.ShapeTypeEnum, Ext: &ext[513]})
-var s_PageMarker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PageMarker, Type: smithy.ShapeTypeString, Ext: &ext[517]})
-var s_PageMaxItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PageMaxItems, Type: smithy.ShapeTypeInteger, Ext: &ext[518]})
-var s_Password = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Password, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[519]})
-var s_Price = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Price, Type: smithy.ShapeTypeDouble, Ext: &ext[520]})
-var sPriceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPriceType, Members: &mPriceType, Type: smithy.ShapeTypeEnum, Ext: &ext[521]})
-var sPriceWithCurrency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPriceWithCurrency, Members: &mPriceWithCurrency, Type: smithy.ShapeTypeStructure, Ext: &ext[524]})
-var sReachabilityStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReachabilityStatus, Members: &mReachabilityStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[528]})
-var s_RegistrarName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistrarName, Type: smithy.ShapeTypeString, Ext: &ext[532]})
-var s_RegistrarUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistrarUrl, Type: smithy.ShapeTypeString, Ext: &ext[533]})
-var s_RegistrarWhoIsServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistrarWhoIsServer, Type: smithy.ShapeTypeString, Ext: &ext[534]})
-var s_RegistryDomainId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryDomainId, Type: smithy.ShapeTypeString, Ext: &ext[535]})
-var s_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &ext[536]})
-var s_Reseller = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Reseller, Type: smithy.ShapeTypeString, Ext: &ext[537]})
-var sSortCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortCondition, Members: &mSortCondition, Type: smithy.ShapeTypeStructure, Ext: &ext[538]})
-var sSortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &ext[541]})
-var s_State = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_State, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[544]})
-var sStatusFlag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatusFlag, Members: &mStatusFlag, Type: smithy.ShapeTypeEnum, Ext: &ext[545]})
-var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[551]})
-var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[552]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[555]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[556]})
-var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[558]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[560]})
-var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[561]})
-var sTLDInMaintenance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTLDInMaintenance, Members: &mTLDInMaintenance, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[562]})
-var s_TldName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TldName, Type: smithy.ShapeTypeString, Ext: &ext[565]})
-var sTLDRulesViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTLDRulesViolation, Members: &mTLDRulesViolation, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[566]})
-var sTransferable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransferable, Members: &mTransferable, Type: smithy.ShapeTypeEnum, Ext: &ext[568]})
-var sUnsupportedTLD = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedTLD, Members: &mUnsupportedTLD, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[576]})
-var s_Value = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Value, Type: smithy.ShapeTypeString, Ext: &ext[578]})
-var s_Values = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList, Ext: &ext[579]})
-var s_ZipCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ZipCode, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[581]})
-var sAcceptDomainTransferFromAnotherAwsAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptDomainTransferFromAnotherAwsAccountRequest, Members: &mAcceptDomainTransferFromAnotherAwsAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[582]})
-var sAcceptDomainTransferFromAnotherAwsAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptDomainTransferFromAnotherAwsAccountResponse, Members: &mAcceptDomainTransferFromAnotherAwsAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[585]})
-var sAssociateDelegationSignerToDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateDelegationSignerToDomainRequest, Members: &mAssociateDelegationSignerToDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[587]})
-var sAssociateDelegationSignerToDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateDelegationSignerToDomainResponse, Members: &mAssociateDelegationSignerToDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[590]})
-var sCancelDomainTransferToAnotherAwsAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelDomainTransferToAnotherAwsAccountRequest, Members: &mCancelDomainTransferToAnotherAwsAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[592]})
-var sCancelDomainTransferToAnotherAwsAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelDomainTransferToAnotherAwsAccountResponse, Members: &mCancelDomainTransferToAnotherAwsAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[594]})
-var sCheckDomainAvailabilityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCheckDomainAvailabilityRequest, Members: &mCheckDomainAvailabilityRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[596]})
-var sCheckDomainAvailabilityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCheckDomainAvailabilityResponse, Members: &mCheckDomainAvailabilityResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[599]})
-var sCheckDomainTransferabilityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCheckDomainTransferabilityRequest, Members: &mCheckDomainTransferabilityRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[602]})
-var sCheckDomainTransferabilityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCheckDomainTransferabilityResponse, Members: &mCheckDomainTransferabilityResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[605]})
-var sDeleteDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomainRequest, Members: &mDeleteDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[609]})
-var sDeleteDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomainResponse, Members: &mDeleteDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[611]})
-var sDeleteTagsForDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTagsForDomainRequest, Members: &mDeleteTagsForDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[613]})
-var sDeleteTagsForDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTagsForDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[616]})
-var sDisableDomainAutoRenewRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableDomainAutoRenewRequest, Members: &mDisableDomainAutoRenewRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[617]})
-var sDisableDomainAutoRenewResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableDomainAutoRenewResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[619]})
-var sDisableDomainTransferLockRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableDomainTransferLockRequest, Members: &mDisableDomainTransferLockRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[620]})
-var sDisableDomainTransferLockResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableDomainTransferLockResponse, Members: &mDisableDomainTransferLockResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[622]})
-var sDisassociateDelegationSignerFromDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateDelegationSignerFromDomainRequest, Members: &mDisassociateDelegationSignerFromDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[624]})
-var sDisassociateDelegationSignerFromDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateDelegationSignerFromDomainResponse, Members: &mDisassociateDelegationSignerFromDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[627]})
-var sEnableDomainAutoRenewRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableDomainAutoRenewRequest, Members: &mEnableDomainAutoRenewRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[629]})
-var sEnableDomainAutoRenewResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableDomainAutoRenewResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[631]})
-var sEnableDomainTransferLockRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableDomainTransferLockRequest, Members: &mEnableDomainTransferLockRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[632]})
-var sEnableDomainTransferLockResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableDomainTransferLockResponse, Members: &mEnableDomainTransferLockResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[634]})
-var sGetContactReachabilityStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContactReachabilityStatusRequest, Members: &mGetContactReachabilityStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[636]})
-var sGetContactReachabilityStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContactReachabilityStatusResponse, Members: &mGetContactReachabilityStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[638]})
-var sGetDomainDetailRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainDetailRequest, Members: &mGetDomainDetailRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[641]})
-var sGetDomainDetailResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainDetailResponse, Members: &mGetDomainDetailResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[643]})
-var sGetDomainPricesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainPricesRequest, Members: &mGetDomainPricesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[668]})
-var sGetDomainPricesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainPricesResponse, Members: &mGetDomainPricesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[670]})
-var sGetDomainSuggestionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainSuggestionsRequest, Members: &mGetDomainSuggestionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[672]})
-var sGetDomainSuggestionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainSuggestionsResponse, Members: &mGetDomainSuggestionsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[677]})
-var sGetOperationDetailRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOperationDetailRequest, Members: &mGetOperationDetailRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[679]})
-var sGetOperationDetailResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOperationDetailResponse, Members: &mGetOperationDetailResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[681]})
-var sListDomainsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainsRequest, Members: &mListDomainsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[690]})
-var sListDomainsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainsResponse, Members: &mListDomainsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[695]})
-var sListOperationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOperationsRequest, Members: &mListOperationsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[698]})
-var sListOperationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOperationsResponse, Members: &mListOperationsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[706]})
-var sListPricesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricesRequest, Members: &mListPricesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[709]})
-var sListPricesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricesResponse, Members: &mListPricesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[713]})
-var sListTagsForDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForDomainRequest, Members: &mListTagsForDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[716]})
-var sListTagsForDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForDomainResponse, Members: &mListTagsForDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[718]})
-var sPushDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPushDomainRequest, Members: &mPushDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[720]})
-var sRegisterDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterDomainRequest, Members: &mRegisterDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[723]})
-var sRegisterDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterDomainResponse, Members: &mRegisterDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[737]})
-var sRejectDomainTransferFromAnotherAwsAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectDomainTransferFromAnotherAwsAccountRequest, Members: &mRejectDomainTransferFromAnotherAwsAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[739]})
-var sRejectDomainTransferFromAnotherAwsAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectDomainTransferFromAnotherAwsAccountResponse, Members: &mRejectDomainTransferFromAnotherAwsAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[741]})
-var sRenewDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRenewDomainRequest, Members: &mRenewDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[743]})
-var sRenewDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRenewDomainResponse, Members: &mRenewDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[748]})
-var sResendContactReachabilityEmailRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResendContactReachabilityEmailRequest, Members: &mResendContactReachabilityEmailRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[750]})
-var sResendContactReachabilityEmailResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResendContactReachabilityEmailResponse, Members: &mResendContactReachabilityEmailResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[752]})
-var sResendOperationAuthorizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResendOperationAuthorizationRequest, Members: &mResendOperationAuthorizationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[756]})
-var sRetrieveDomainAuthCodeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetrieveDomainAuthCodeRequest, Members: &mRetrieveDomainAuthCodeRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[758]})
-var sRetrieveDomainAuthCodeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetrieveDomainAuthCodeResponse, Members: &mRetrieveDomainAuthCodeResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[760]})
-var sTransferDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransferDomainRequest, Members: &mTransferDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[762]})
-var sTransferDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransferDomainResponse, Members: &mTransferDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[778]})
-var sTransferDomainToAnotherAwsAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransferDomainToAnotherAwsAccountRequest, Members: &mTransferDomainToAnotherAwsAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[780]})
-var sTransferDomainToAnotherAwsAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransferDomainToAnotherAwsAccountResponse, Members: &mTransferDomainToAnotherAwsAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[783]})
-var sUpdateDomainContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainContactRequest, Members: &mUpdateDomainContactRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[786]})
-var sUpdateDomainContactResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainContactResponse, Members: &mUpdateDomainContactResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[793]})
-var sUpdateDomainContactPrivacyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainContactPrivacyRequest, Members: &mUpdateDomainContactPrivacyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[795]})
-var sUpdateDomainContactPrivacyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainContactPrivacyResponse, Members: &mUpdateDomainContactPrivacyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[801]})
-var sUpdateDomainNameserversRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainNameserversRequest, Members: &mUpdateDomainNameserversRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[803]})
-var sUpdateDomainNameserversResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainNameserversResponse, Members: &mUpdateDomainNameserversResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[807]})
-var sUpdateTagsForDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTagsForDomainRequest, Members: &mUpdateTagsForDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[809]})
-var sUpdateTagsForDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTagsForDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[812]})
-var sViewBillingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iViewBillingRequest, Members: &mViewBillingRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[813]})
-var sViewBillingResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iViewBillingResponse, Members: &mViewBillingResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[818]})
+var sAcceptDomainTransferFromAnotherAwsAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptDomainTransferFromAnotherAwsAccount, Type: smithy.ShapeTypeOperation, Ext: &eAcceptDomainTransferFromAnotherAwsAccount})
+var sAssociateDelegationSignerToDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateDelegationSignerToDomain, Type: smithy.ShapeTypeOperation, Ext: &eAssociateDelegationSignerToDomain})
+var sCancelDomainTransferToAnotherAwsAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelDomainTransferToAnotherAwsAccount, Type: smithy.ShapeTypeOperation, Ext: &eCancelDomainTransferToAnotherAwsAccount})
+var sCheckDomainAvailability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCheckDomainAvailability, Type: smithy.ShapeTypeOperation, Ext: &eCheckDomainAvailability})
+var sCheckDomainTransferability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCheckDomainTransferability, Type: smithy.ShapeTypeOperation, Ext: &eCheckDomainTransferability})
+var sDeleteDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomain, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDomain})
+var sDeleteTagsForDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTagsForDomain, Type: smithy.ShapeTypeOperation, Ext: &eDeleteTagsForDomain})
+var sDisableDomainAutoRenew = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableDomainAutoRenew, Type: smithy.ShapeTypeOperation, Ext: &eDisableDomainAutoRenew})
+var sDisableDomainTransferLock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableDomainTransferLock, Type: smithy.ShapeTypeOperation, Ext: &eDisableDomainTransferLock})
+var sDisassociateDelegationSignerFromDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateDelegationSignerFromDomain, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateDelegationSignerFromDomain})
+var sEnableDomainAutoRenew = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableDomainAutoRenew, Type: smithy.ShapeTypeOperation, Ext: &eEnableDomainAutoRenew})
+var sEnableDomainTransferLock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableDomainTransferLock, Type: smithy.ShapeTypeOperation, Ext: &eEnableDomainTransferLock})
+var sGetContactReachabilityStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContactReachabilityStatus, Type: smithy.ShapeTypeOperation, Ext: &eGetContactReachabilityStatus})
+var sGetDomainDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainDetail, Type: smithy.ShapeTypeOperation, Ext: &eGetDomainDetail})
+var sGetDomainPrices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainPrices, Type: smithy.ShapeTypeOperation, Ext: &eGetDomainPrices})
+var sGetDomainSuggestions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainSuggestions, Type: smithy.ShapeTypeOperation, Ext: &eGetDomainSuggestions})
+var sGetOperationDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOperationDetail, Type: smithy.ShapeTypeOperation, Ext: &eGetOperationDetail})
+var sListDomains = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomains, Type: smithy.ShapeTypeOperation, Ext: &eListDomains})
+var sListOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOperations, Type: smithy.ShapeTypeOperation, Ext: &eListOperations})
+var sListPrices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPrices, Type: smithy.ShapeTypeOperation, Ext: &eListPrices})
+var sListTagsForDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForDomain, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForDomain})
+var sPushDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPushDomain, Type: smithy.ShapeTypeOperation, Ext: &ePushDomain})
+var sRegisterDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterDomain, Type: smithy.ShapeTypeOperation, Ext: &eRegisterDomain})
+var sRejectDomainTransferFromAnotherAwsAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectDomainTransferFromAnotherAwsAccount, Type: smithy.ShapeTypeOperation, Ext: &eRejectDomainTransferFromAnotherAwsAccount})
+var sRenewDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRenewDomain, Type: smithy.ShapeTypeOperation, Ext: &eRenewDomain})
+var sResendContactReachabilityEmail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResendContactReachabilityEmail, Type: smithy.ShapeTypeOperation, Ext: &eResendContactReachabilityEmail})
+var sResendOperationAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResendOperationAuthorization, Type: smithy.ShapeTypeOperation, Ext: &eResendOperationAuthorization})
+var sRetrieveDomainAuthCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetrieveDomainAuthCode, Type: smithy.ShapeTypeOperation, Ext: &eRetrieveDomainAuthCode})
+var sTransferDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransferDomain, Type: smithy.ShapeTypeOperation, Ext: &eTransferDomain})
+var sTransferDomainToAnotherAwsAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransferDomainToAnotherAwsAccount, Type: smithy.ShapeTypeOperation, Ext: &eTransferDomainToAnotherAwsAccount})
+var sUpdateDomainContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainContact, Type: smithy.ShapeTypeOperation, Ext: &eUpdateDomainContact})
+var sUpdateDomainContactPrivacy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainContactPrivacy, Type: smithy.ShapeTypeOperation, Ext: &eUpdateDomainContactPrivacy})
+var sUpdateDomainNameservers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainNameservers, Type: smithy.ShapeTypeOperation, Ext: &eUpdateDomainNameservers})
+var sUpdateTagsForDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTagsForDomain, Type: smithy.ShapeTypeOperation, Ext: &eUpdateTagsForDomain})
+var sViewBilling = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iViewBilling, Type: smithy.ShapeTypeOperation, Ext: &eViewBilling})
+var s_Route53Domains_v20140515 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Route53Domains_v20140515, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &e_Route53Domains_v20140515})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountId})
+var s_AddressLine = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddressLine, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_AddressLine})
+var sBillingRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBillingRecord, Members: &mBillingRecord, Type: smithy.ShapeTypeStructure, Ext: &eBillingRecord})
+var s_BillingRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillingRecords, Members: &m_BillingRecords, Type: smithy.ShapeTypeList, Ext: &e_BillingRecords})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var s_City = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_City, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_City})
+var sConsent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConsent, Members: &mConsent, Type: smithy.ShapeTypeStructure, Ext: &eConsent})
+var s_ConsentPrice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConsentPrice, Type: smithy.ShapeTypeDouble, Ext: &e_ConsentPrice})
+var sContactDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContactDetail, Members: &mContactDetail, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eContactDetail})
+var s_ContactName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_ContactName})
+var s_ContactNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactNumber, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_ContactNumber})
+var sContactType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContactType, Members: &mContactType, Type: smithy.ShapeTypeEnum, Ext: &eContactType})
+var sCountryCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCountryCode, Members: &mCountryCode, Traits: &t1, Type: smithy.ShapeTypeEnum, Ext: &eCountryCode})
+var s_Currency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Currency, Type: smithy.ShapeTypeString, Ext: &e_Currency})
+var s_CurrentExpiryYear = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CurrentExpiryYear, Type: smithy.ShapeTypeInteger, Ext: &e_CurrentExpiryYear})
+var s_DNSSec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DNSSec, Type: smithy.ShapeTypeString, Ext: &e_DNSSec})
+var sDnssecKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDnssecKey, Members: &mDnssecKey, Type: smithy.ShapeTypeStructure, Ext: &eDnssecKey})
+var s_DnssecKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DnssecKeyList, Members: &m_DnssecKeyList, Type: smithy.ShapeTypeList, Ext: &e_DnssecKeyList})
+var sDnssecLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDnssecLimitExceeded, Members: &mDnssecLimitExceeded, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eDnssecLimitExceeded})
+var s_DnssecPublicKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DnssecPublicKey, Type: smithy.ShapeTypeString, Ext: &e_DnssecPublicKey})
+var sDnssecSigningAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDnssecSigningAttributes, Members: &mDnssecSigningAttributes, Type: smithy.ShapeTypeStructure, Ext: &eDnssecSigningAttributes})
+var s_DomainAuthCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainAuthCode, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_DomainAuthCode})
+var sDomainAvailability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainAvailability, Members: &mDomainAvailability, Type: smithy.ShapeTypeEnum, Ext: &eDomainAvailability})
+var sDomainLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainLimitExceeded, Members: &mDomainLimitExceeded, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eDomainLimitExceeded})
+var s_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &e_DomainName})
+var sDomainPrice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainPrice, Members: &mDomainPrice, Type: smithy.ShapeTypeStructure, Ext: &eDomainPrice})
+var s_DomainPriceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainPriceList, Members: &m_DomainPriceList, Type: smithy.ShapeTypeList, Ext: &e_DomainPriceList})
+var s_DomainPriceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainPriceName, Type: smithy.ShapeTypeString, Ext: &e_DomainPriceName})
+var s_DomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainStatus, Type: smithy.ShapeTypeString, Ext: &e_DomainStatus})
+var s_DomainStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainStatusList, Members: &m_DomainStatusList, Type: smithy.ShapeTypeList, Ext: &e_DomainStatusList})
+var sDomainSuggestion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainSuggestion, Members: &mDomainSuggestion, Type: smithy.ShapeTypeStructure, Ext: &eDomainSuggestion})
+var s_DomainSuggestionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainSuggestionsList, Members: &m_DomainSuggestionsList, Type: smithy.ShapeTypeList, Ext: &e_DomainSuggestionsList})
+var sDomainSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainSummary, Members: &mDomainSummary, Type: smithy.ShapeTypeStructure, Ext: &eDomainSummary})
+var s_DomainSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainSummaryList, Members: &m_DomainSummaryList, Type: smithy.ShapeTypeList, Ext: &e_DomainSummaryList})
+var sDomainTransferability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainTransferability, Members: &mDomainTransferability, Type: smithy.ShapeTypeStructure, Ext: &eDomainTransferability})
+var sDuplicateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplicateRequest, Members: &mDuplicateRequest, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eDuplicateRequest})
+var s_DurationInYears = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DurationInYears, Type: smithy.ShapeTypeInteger, Ext: &e_DurationInYears})
+var s_Email = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Email, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_Email})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var sExtraParam = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtraParam, Members: &mExtraParam, Type: smithy.ShapeTypeStructure, Ext: &eExtraParam})
+var s_ExtraParamList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtraParamList, Members: &m_ExtraParamList, Type: smithy.ShapeTypeList, Ext: &e_ExtraParamList})
+var sExtraParamName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtraParamName, Members: &mExtraParamName, Type: smithy.ShapeTypeEnum, Ext: &eExtraParamName})
+var s_ExtraParamValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtraParamValue, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_ExtraParamValue})
+var s_FIAuthKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FIAuthKey, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_FIAuthKey})
+var sFilterCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterCondition, Members: &mFilterCondition, Type: smithy.ShapeTypeStructure, Ext: &eFilterCondition})
+var s_FilterConditions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterConditions, Members: &m_FilterConditions, Type: smithy.ShapeTypeList, Ext: &e_FilterConditions})
+var s_GlueIp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GlueIp, Type: smithy.ShapeTypeString, Ext: &e_GlueIp})
+var s_GlueIpList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GlueIpList, Members: &m_GlueIpList, Type: smithy.ShapeTypeList, Ext: &e_GlueIpList})
+var s_HostName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HostName, Type: smithy.ShapeTypeString, Ext: &e_HostName})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &e_Integer})
+var sInvalidInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidInput, Members: &mInvalidInput, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eInvalidInput})
+var s_InvoiceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvoiceId, Type: smithy.ShapeTypeString, Ext: &e_InvoiceId})
+var s_Label = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Label, Type: smithy.ShapeTypeString, Ext: &e_Label})
+var s_LangCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LangCode, Type: smithy.ShapeTypeString, Ext: &e_LangCode})
+var sListDomainsAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainsAttributeName, Members: &mListDomainsAttributeName, Type: smithy.ShapeTypeEnum, Ext: &eListDomainsAttributeName})
+var sListOperationsSortAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOperationsSortAttributeName, Members: &mListOperationsSortAttributeName, Type: smithy.ShapeTypeEnum, Ext: &eListOperationsSortAttributeName})
+var s_ListPricesPageMaxItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListPricesPageMaxItems, Type: smithy.ShapeTypeInteger, Ext: &e_ListPricesPageMaxItems})
+var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &e_Message})
+var sNameserver = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNameserver, Members: &mNameserver, Type: smithy.ShapeTypeStructure, Ext: &eNameserver})
+var s_NameserverList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NameserverList, Members: &m_NameserverList, Type: smithy.ShapeTypeList, Ext: &e_NameserverList})
+var s_NullableInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &e_NullableInteger})
+var s_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &e_OperationId})
+var sOperationLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationLimitExceeded, Members: &mOperationLimitExceeded, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eOperationLimitExceeded})
+var sOperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationStatus, Members: &mOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &eOperationStatus})
+var s_OperationStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationStatusList, Members: &m_OperationStatusList, Type: smithy.ShapeTypeList, Ext: &e_OperationStatusList})
+var sOperationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationSummary, Members: &mOperationSummary, Type: smithy.ShapeTypeStructure, Ext: &eOperationSummary})
+var s_OperationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationSummaryList, Members: &m_OperationSummaryList, Type: smithy.ShapeTypeList, Ext: &e_OperationSummaryList})
+var sOperationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationType, Members: &mOperationType, Type: smithy.ShapeTypeEnum, Ext: &eOperationType})
+var s_OperationTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationTypeList, Members: &m_OperationTypeList, Type: smithy.ShapeTypeList, Ext: &e_OperationTypeList})
+var sOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperator, Members: &mOperator, Type: smithy.ShapeTypeEnum, Ext: &eOperator})
+var s_PageMarker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PageMarker, Type: smithy.ShapeTypeString, Ext: &e_PageMarker})
+var s_PageMaxItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PageMaxItems, Type: smithy.ShapeTypeInteger, Ext: &e_PageMaxItems})
+var s_Password = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Password, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_Password})
+var s_Price = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Price, Type: smithy.ShapeTypeDouble, Ext: &e_Price})
+var sPriceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPriceType, Members: &mPriceType, Type: smithy.ShapeTypeEnum, Ext: &ePriceType})
+var sPriceWithCurrency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPriceWithCurrency, Members: &mPriceWithCurrency, Type: smithy.ShapeTypeStructure, Ext: &ePriceWithCurrency})
+var sReachabilityStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReachabilityStatus, Members: &mReachabilityStatus, Type: smithy.ShapeTypeEnum, Ext: &eReachabilityStatus})
+var s_RegistrarName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistrarName, Type: smithy.ShapeTypeString, Ext: &e_RegistrarName})
+var s_RegistrarUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistrarUrl, Type: smithy.ShapeTypeString, Ext: &e_RegistrarUrl})
+var s_RegistrarWhoIsServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistrarWhoIsServer, Type: smithy.ShapeTypeString, Ext: &e_RegistrarWhoIsServer})
+var s_RegistryDomainId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryDomainId, Type: smithy.ShapeTypeString, Ext: &e_RegistryDomainId})
+var s_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &e_RequestId})
+var s_Reseller = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Reseller, Type: smithy.ShapeTypeString, Ext: &e_Reseller})
+var sSortCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortCondition, Members: &mSortCondition, Type: smithy.ShapeTypeStructure, Ext: &eSortCondition})
+var sSortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &eSortOrder})
+var s_State = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_State, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_State})
+var sStatusFlag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatusFlag, Members: &mStatusFlag, Type: smithy.ShapeTypeEnum, Ext: &eStatusFlag})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var sTLDInMaintenance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTLDInMaintenance, Members: &mTLDInMaintenance, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eTLDInMaintenance})
+var s_TldName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TldName, Type: smithy.ShapeTypeString, Ext: &e_TldName})
+var sTLDRulesViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTLDRulesViolation, Members: &mTLDRulesViolation, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eTLDRulesViolation})
+var sTransferable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransferable, Members: &mTransferable, Type: smithy.ShapeTypeEnum, Ext: &eTransferable})
+var sUnsupportedTLD = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedTLD, Members: &mUnsupportedTLD, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eUnsupportedTLD})
+var s_Value = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Value, Type: smithy.ShapeTypeString, Ext: &e_Value})
+var s_Values = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList, Ext: &e_Values})
+var s_ZipCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ZipCode, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_ZipCode})
+var sAcceptDomainTransferFromAnotherAwsAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptDomainTransferFromAnotherAwsAccountRequest, Members: &mAcceptDomainTransferFromAnotherAwsAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &eAcceptDomainTransferFromAnotherAwsAccountRequest})
+var sAcceptDomainTransferFromAnotherAwsAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptDomainTransferFromAnotherAwsAccountResponse, Members: &mAcceptDomainTransferFromAnotherAwsAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &eAcceptDomainTransferFromAnotherAwsAccountResponse})
+var sAssociateDelegationSignerToDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateDelegationSignerToDomainRequest, Members: &mAssociateDelegationSignerToDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateDelegationSignerToDomainRequest})
+var sAssociateDelegationSignerToDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateDelegationSignerToDomainResponse, Members: &mAssociateDelegationSignerToDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssociateDelegationSignerToDomainResponse})
+var sCancelDomainTransferToAnotherAwsAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelDomainTransferToAnotherAwsAccountRequest, Members: &mCancelDomainTransferToAnotherAwsAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &eCancelDomainTransferToAnotherAwsAccountRequest})
+var sCancelDomainTransferToAnotherAwsAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelDomainTransferToAnotherAwsAccountResponse, Members: &mCancelDomainTransferToAnotherAwsAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &eCancelDomainTransferToAnotherAwsAccountResponse})
+var sCheckDomainAvailabilityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCheckDomainAvailabilityRequest, Members: &mCheckDomainAvailabilityRequest, Type: smithy.ShapeTypeStructure, Ext: &eCheckDomainAvailabilityRequest})
+var sCheckDomainAvailabilityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCheckDomainAvailabilityResponse, Members: &mCheckDomainAvailabilityResponse, Type: smithy.ShapeTypeStructure, Ext: &eCheckDomainAvailabilityResponse})
+var sCheckDomainTransferabilityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCheckDomainTransferabilityRequest, Members: &mCheckDomainTransferabilityRequest, Type: smithy.ShapeTypeStructure, Ext: &eCheckDomainTransferabilityRequest})
+var sCheckDomainTransferabilityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCheckDomainTransferabilityResponse, Members: &mCheckDomainTransferabilityResponse, Type: smithy.ShapeTypeStructure, Ext: &eCheckDomainTransferabilityResponse})
+var sDeleteDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomainRequest, Members: &mDeleteDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDomainRequest})
+var sDeleteDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomainResponse, Members: &mDeleteDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDomainResponse})
+var sDeleteTagsForDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTagsForDomainRequest, Members: &mDeleteTagsForDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTagsForDomainRequest})
+var sDeleteTagsForDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTagsForDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteTagsForDomainResponse})
+var sDisableDomainAutoRenewRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableDomainAutoRenewRequest, Members: &mDisableDomainAutoRenewRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisableDomainAutoRenewRequest})
+var sDisableDomainAutoRenewResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableDomainAutoRenewResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisableDomainAutoRenewResponse})
+var sDisableDomainTransferLockRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableDomainTransferLockRequest, Members: &mDisableDomainTransferLockRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisableDomainTransferLockRequest})
+var sDisableDomainTransferLockResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableDomainTransferLockResponse, Members: &mDisableDomainTransferLockResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisableDomainTransferLockResponse})
+var sDisassociateDelegationSignerFromDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateDelegationSignerFromDomainRequest, Members: &mDisassociateDelegationSignerFromDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateDelegationSignerFromDomainRequest})
+var sDisassociateDelegationSignerFromDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateDelegationSignerFromDomainResponse, Members: &mDisassociateDelegationSignerFromDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateDelegationSignerFromDomainResponse})
+var sEnableDomainAutoRenewRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableDomainAutoRenewRequest, Members: &mEnableDomainAutoRenewRequest, Type: smithy.ShapeTypeStructure, Ext: &eEnableDomainAutoRenewRequest})
+var sEnableDomainAutoRenewResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableDomainAutoRenewResponse, Type: smithy.ShapeTypeStructure, Ext: &eEnableDomainAutoRenewResponse})
+var sEnableDomainTransferLockRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableDomainTransferLockRequest, Members: &mEnableDomainTransferLockRequest, Type: smithy.ShapeTypeStructure, Ext: &eEnableDomainTransferLockRequest})
+var sEnableDomainTransferLockResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableDomainTransferLockResponse, Members: &mEnableDomainTransferLockResponse, Type: smithy.ShapeTypeStructure, Ext: &eEnableDomainTransferLockResponse})
+var sGetContactReachabilityStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContactReachabilityStatusRequest, Members: &mGetContactReachabilityStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetContactReachabilityStatusRequest})
+var sGetContactReachabilityStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContactReachabilityStatusResponse, Members: &mGetContactReachabilityStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetContactReachabilityStatusResponse})
+var sGetDomainDetailRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainDetailRequest, Members: &mGetDomainDetailRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDomainDetailRequest})
+var sGetDomainDetailResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainDetailResponse, Members: &mGetDomainDetailResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDomainDetailResponse})
+var sGetDomainPricesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainPricesRequest, Members: &mGetDomainPricesRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDomainPricesRequest})
+var sGetDomainPricesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainPricesResponse, Members: &mGetDomainPricesResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDomainPricesResponse})
+var sGetDomainSuggestionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainSuggestionsRequest, Members: &mGetDomainSuggestionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDomainSuggestionsRequest})
+var sGetDomainSuggestionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainSuggestionsResponse, Members: &mGetDomainSuggestionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDomainSuggestionsResponse})
+var sGetOperationDetailRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOperationDetailRequest, Members: &mGetOperationDetailRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetOperationDetailRequest})
+var sGetOperationDetailResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOperationDetailResponse, Members: &mGetOperationDetailResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetOperationDetailResponse})
+var sListDomainsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainsRequest, Members: &mListDomainsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDomainsRequest})
+var sListDomainsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainsResponse, Members: &mListDomainsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDomainsResponse})
+var sListOperationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOperationsRequest, Members: &mListOperationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListOperationsRequest})
+var sListOperationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOperationsResponse, Members: &mListOperationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListOperationsResponse})
+var sListPricesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricesRequest, Members: &mListPricesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPricesRequest})
+var sListPricesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPricesResponse, Members: &mListPricesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListPricesResponse})
+var sListTagsForDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForDomainRequest, Members: &mListTagsForDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForDomainRequest})
+var sListTagsForDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForDomainResponse, Members: &mListTagsForDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForDomainResponse})
+var sPushDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPushDomainRequest, Members: &mPushDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &ePushDomainRequest})
+var sRegisterDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterDomainRequest, Members: &mRegisterDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eRegisterDomainRequest})
+var sRegisterDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterDomainResponse, Members: &mRegisterDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &eRegisterDomainResponse})
+var sRejectDomainTransferFromAnotherAwsAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectDomainTransferFromAnotherAwsAccountRequest, Members: &mRejectDomainTransferFromAnotherAwsAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &eRejectDomainTransferFromAnotherAwsAccountRequest})
+var sRejectDomainTransferFromAnotherAwsAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectDomainTransferFromAnotherAwsAccountResponse, Members: &mRejectDomainTransferFromAnotherAwsAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &eRejectDomainTransferFromAnotherAwsAccountResponse})
+var sRenewDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRenewDomainRequest, Members: &mRenewDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eRenewDomainRequest})
+var sRenewDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRenewDomainResponse, Members: &mRenewDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &eRenewDomainResponse})
+var sResendContactReachabilityEmailRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResendContactReachabilityEmailRequest, Members: &mResendContactReachabilityEmailRequest, Type: smithy.ShapeTypeStructure, Ext: &eResendContactReachabilityEmailRequest})
+var sResendContactReachabilityEmailResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResendContactReachabilityEmailResponse, Members: &mResendContactReachabilityEmailResponse, Type: smithy.ShapeTypeStructure, Ext: &eResendContactReachabilityEmailResponse})
+var sResendOperationAuthorizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResendOperationAuthorizationRequest, Members: &mResendOperationAuthorizationRequest, Type: smithy.ShapeTypeStructure, Ext: &eResendOperationAuthorizationRequest})
+var sRetrieveDomainAuthCodeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetrieveDomainAuthCodeRequest, Members: &mRetrieveDomainAuthCodeRequest, Type: smithy.ShapeTypeStructure, Ext: &eRetrieveDomainAuthCodeRequest})
+var sRetrieveDomainAuthCodeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetrieveDomainAuthCodeResponse, Members: &mRetrieveDomainAuthCodeResponse, Type: smithy.ShapeTypeStructure, Ext: &eRetrieveDomainAuthCodeResponse})
+var sTransferDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransferDomainRequest, Members: &mTransferDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eTransferDomainRequest})
+var sTransferDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransferDomainResponse, Members: &mTransferDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &eTransferDomainResponse})
+var sTransferDomainToAnotherAwsAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransferDomainToAnotherAwsAccountRequest, Members: &mTransferDomainToAnotherAwsAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &eTransferDomainToAnotherAwsAccountRequest})
+var sTransferDomainToAnotherAwsAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransferDomainToAnotherAwsAccountResponse, Members: &mTransferDomainToAnotherAwsAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &eTransferDomainToAnotherAwsAccountResponse})
+var sUpdateDomainContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainContactRequest, Members: &mUpdateDomainContactRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDomainContactRequest})
+var sUpdateDomainContactResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainContactResponse, Members: &mUpdateDomainContactResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDomainContactResponse})
+var sUpdateDomainContactPrivacyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainContactPrivacyRequest, Members: &mUpdateDomainContactPrivacyRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDomainContactPrivacyRequest})
+var sUpdateDomainContactPrivacyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainContactPrivacyResponse, Members: &mUpdateDomainContactPrivacyResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDomainContactPrivacyResponse})
+var sUpdateDomainNameserversRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainNameserversRequest, Members: &mUpdateDomainNameserversRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDomainNameserversRequest})
+var sUpdateDomainNameserversResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainNameserversResponse, Members: &mUpdateDomainNameserversResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDomainNameserversResponse})
+var sUpdateTagsForDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTagsForDomainRequest, Members: &mUpdateTagsForDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTagsForDomainRequest})
+var sUpdateTagsForDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTagsForDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateTagsForDomainResponse})
+var sViewBillingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iViewBillingRequest, Members: &mViewBillingRequest, Type: smithy.ShapeTypeStructure, Ext: &eViewBillingRequest})
+var sViewBillingResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iViewBillingResponse, Members: &mViewBillingResponse, Type: smithy.ShapeTypeStructure, Ext: &eViewBillingResponse})
 
-var sBillingRecord_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[39]})
-var sBillingRecord_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &iOperationType, Members: &mOperationType, Type: smithy.ShapeTypeEnum, Ext: &ext[40]})
-var sBillingRecord_InvoiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceId", ID: &i_InvoiceId, Type: smithy.ShapeTypeString, Ext: &ext[41]})
-var sBillingRecord_BillDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[42]})
-var sBillingRecord_Price = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Price", ID: &i_Price, Type: smithy.ShapeTypeDouble, Ext: &ext[43]})
-var s_BillingRecords_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBillingRecord, Members: &mBillingRecord, Type: smithy.ShapeTypeStructure, Ext: &ext[45]})
-var sConsent_MaxPrice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxPrice", ID: &i_ConsentPrice, Type: smithy.ShapeTypeDouble, Ext: &ext[49]})
-var sConsent_Currency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Currency", ID: &i_Currency, Type: smithy.ShapeTypeString, Ext: &ext[50]})
-var sContactDetail_FirstName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirstName", ID: &i_ContactName, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[53]})
-var sContactDetail_LastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastName", ID: &i_ContactName, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var sContactDetail_ContactType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactType", ID: &iContactType, Members: &mContactType, Type: smithy.ShapeTypeEnum, Ext: &ext[55]})
-var sContactDetail_OrganizationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationName", ID: &i_ContactName, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[56]})
-var sContactDetail_AddressLine1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressLine1", ID: &i_AddressLine, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var sContactDetail_AddressLine2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressLine2", ID: &i_AddressLine, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var sContactDetail_City = smithy.NewStaticSchema(smithy.StaticSchema{Member: "City", ID: &i_City, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[59]})
-var sContactDetail_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_State, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[60]})
-var sContactDetail_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountryCode", ID: &iCountryCode, Members: &mCountryCode, Traits: &t2, Type: smithy.ShapeTypeEnum, Ext: &ext[61]})
-var sContactDetail_ZipCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZipCode", ID: &i_ZipCode, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[62]})
-var sContactDetail_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &i_ContactNumber, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[63]})
-var sContactDetail_Email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Email", ID: &i_Email, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[64]})
-var sContactDetail_Fax = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fax", ID: &i_ContactNumber, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[65]})
-var sContactDetail_ExtraParams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtraParams", ID: &i_ExtraParamList, Members: &m_ExtraParamList, Type: smithy.ShapeTypeList, Ext: &ext[66]})
-var sContactType_PERSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERSON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[70]})
-var sContactType_COMPANY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPANY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[71]})
-var sContactType_ASSOCIATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASSOCIATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sContactType_PUBLIC_BODY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLIC_BODY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[73]})
-var sContactType_RESELLER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESELLER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var sCountryCode_AC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[76]})
-var sCountryCode_AD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
-var sCountryCode_AE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[78]})
-var sCountryCode_AF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[79]})
-var sCountryCode_AG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var sCountryCode_AI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[81]})
-var sCountryCode_AL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[82]})
-var sCountryCode_AM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[83]})
-var sCountryCode_AN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[84]})
-var sCountryCode_AO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[85]})
-var sCountryCode_AQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AQ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[86]})
-var sCountryCode_AR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[87]})
-var sCountryCode_AS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[88]})
-var sCountryCode_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[89]})
-var sCountryCode_AU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[90]})
-var sCountryCode_AW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[91]})
-var sCountryCode_AX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[92]})
-var sCountryCode_AZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[93]})
-var sCountryCode_BA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[94]})
-var sCountryCode_BB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[95]})
-var sCountryCode_BD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[96]})
-var sCountryCode_BE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[97]})
-var sCountryCode_BF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[98]})
-var sCountryCode_BG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[99]})
-var sCountryCode_BH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[100]})
-var sCountryCode_BI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[101]})
-var sCountryCode_BJ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BJ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[102]})
-var sCountryCode_BL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[103]})
-var sCountryCode_BM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[104]})
-var sCountryCode_BN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[105]})
-var sCountryCode_BO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[106]})
-var sCountryCode_BQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BQ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[107]})
-var sCountryCode_BR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[108]})
-var sCountryCode_BS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[109]})
-var sCountryCode_BT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[110]})
-var sCountryCode_BV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[111]})
-var sCountryCode_BW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[112]})
-var sCountryCode_BY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[113]})
-var sCountryCode_BZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[114]})
-var sCountryCode_CA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[115]})
-var sCountryCode_CC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[116]})
-var sCountryCode_CD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[117]})
-var sCountryCode_CF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[118]})
-var sCountryCode_CG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[119]})
-var sCountryCode_CH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var sCountryCode_CI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[121]})
-var sCountryCode_CK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[122]})
-var sCountryCode_CL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[123]})
-var sCountryCode_CM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[124]})
-var sCountryCode_CN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[125]})
-var sCountryCode_CO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var sCountryCode_CR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[127]})
-var sCountryCode_CU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[128]})
-var sCountryCode_CV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[129]})
-var sCountryCode_CW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[130]})
-var sCountryCode_CX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[131]})
-var sCountryCode_CY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[132]})
-var sCountryCode_CZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[133]})
-var sCountryCode_DE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[134]})
-var sCountryCode_DJ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DJ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[135]})
-var sCountryCode_DK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[136]})
-var sCountryCode_DM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[137]})
-var sCountryCode_DO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[138]})
-var sCountryCode_DZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[139]})
-var sCountryCode_EC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[140]})
-var sCountryCode_EE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[141]})
-var sCountryCode_EG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[142]})
-var sCountryCode_EH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[143]})
-var sCountryCode_ER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[144]})
-var sCountryCode_ES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[145]})
-var sCountryCode_ET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[146]})
-var sCountryCode_FI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[147]})
-var sCountryCode_FJ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FJ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[148]})
-var sCountryCode_FK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[149]})
-var sCountryCode_FM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[150]})
-var sCountryCode_FO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[151]})
-var sCountryCode_FR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[152]})
-var sCountryCode_GA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[153]})
-var sCountryCode_GB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[154]})
-var sCountryCode_GD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[155]})
-var sCountryCode_GE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[156]})
-var sCountryCode_GF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[157]})
-var sCountryCode_GG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[158]})
-var sCountryCode_GH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[159]})
-var sCountryCode_GI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[160]})
-var sCountryCode_GL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[161]})
-var sCountryCode_GM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[162]})
-var sCountryCode_GN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[163]})
-var sCountryCode_GP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[164]})
-var sCountryCode_GQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GQ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[165]})
-var sCountryCode_GR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[166]})
-var sCountryCode_GS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[167]})
-var sCountryCode_GT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[168]})
-var sCountryCode_GU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[169]})
-var sCountryCode_GW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[170]})
-var sCountryCode_GY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[171]})
-var sCountryCode_HK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[172]})
-var sCountryCode_HM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[173]})
-var sCountryCode_HN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[174]})
-var sCountryCode_HR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[175]})
-var sCountryCode_HT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[176]})
-var sCountryCode_HU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[177]})
-var sCountryCode_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[178]})
-var sCountryCode_IE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[179]})
-var sCountryCode_IL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[180]})
-var sCountryCode_IM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[181]})
-var sCountryCode_IN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[182]})
-var sCountryCode_IO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[183]})
-var sCountryCode_IQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IQ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[184]})
-var sCountryCode_IR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[185]})
-var sCountryCode_IS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[186]})
-var sCountryCode_IT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[187]})
-var sCountryCode_JE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[188]})
-var sCountryCode_JM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[189]})
-var sCountryCode_JO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[190]})
-var sCountryCode_JP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[191]})
-var sCountryCode_KE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[192]})
-var sCountryCode_KG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[193]})
-var sCountryCode_KH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[194]})
-var sCountryCode_KI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[195]})
-var sCountryCode_KM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[196]})
-var sCountryCode_KN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[197]})
-var sCountryCode_KP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[198]})
-var sCountryCode_KR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[199]})
-var sCountryCode_KW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[200]})
-var sCountryCode_KY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[201]})
-var sCountryCode_KZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[202]})
-var sCountryCode_LA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[203]})
-var sCountryCode_LB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[204]})
-var sCountryCode_LC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[205]})
-var sCountryCode_LI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[206]})
-var sCountryCode_LK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[207]})
-var sCountryCode_LR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[208]})
-var sCountryCode_LS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[209]})
-var sCountryCode_LT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[210]})
-var sCountryCode_LU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[211]})
-var sCountryCode_LV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[212]})
-var sCountryCode_LY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[213]})
-var sCountryCode_MA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[214]})
-var sCountryCode_MC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[215]})
-var sCountryCode_MD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[216]})
-var sCountryCode_ME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[217]})
-var sCountryCode_MF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[218]})
-var sCountryCode_MG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[219]})
-var sCountryCode_MH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[220]})
-var sCountryCode_MK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[221]})
-var sCountryCode_ML = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[222]})
-var sCountryCode_MM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[223]})
-var sCountryCode_MN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[224]})
-var sCountryCode_MO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[225]})
-var sCountryCode_MP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[226]})
-var sCountryCode_MQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MQ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[227]})
-var sCountryCode_MR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[228]})
-var sCountryCode_MS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[229]})
-var sCountryCode_MT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[230]})
-var sCountryCode_MU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[231]})
-var sCountryCode_MV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[232]})
-var sCountryCode_MW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[233]})
-var sCountryCode_MX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[234]})
-var sCountryCode_MY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[235]})
-var sCountryCode_MZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[236]})
-var sCountryCode_NA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[237]})
-var sCountryCode_NC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[238]})
-var sCountryCode_NE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[239]})
-var sCountryCode_NF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[240]})
-var sCountryCode_NG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[241]})
-var sCountryCode_NI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[242]})
-var sCountryCode_NL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[243]})
-var sCountryCode_NO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[244]})
-var sCountryCode_NP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[245]})
-var sCountryCode_NR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[246]})
-var sCountryCode_NU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[247]})
-var sCountryCode_NZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[248]})
-var sCountryCode_OM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[249]})
-var sCountryCode_PA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[250]})
-var sCountryCode_PE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[251]})
-var sCountryCode_PF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[252]})
-var sCountryCode_PG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[253]})
-var sCountryCode_PH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[254]})
-var sCountryCode_PK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[255]})
-var sCountryCode_PL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[256]})
-var sCountryCode_PM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[257]})
-var sCountryCode_PN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[258]})
-var sCountryCode_PR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[259]})
-var sCountryCode_PS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[260]})
-var sCountryCode_PT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[261]})
-var sCountryCode_PW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[262]})
-var sCountryCode_PY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[263]})
-var sCountryCode_QA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[264]})
-var sCountryCode_RE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[265]})
-var sCountryCode_RO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[266]})
-var sCountryCode_RS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[267]})
-var sCountryCode_RU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[268]})
-var sCountryCode_RW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[269]})
-var sCountryCode_SA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[270]})
-var sCountryCode_SB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[271]})
-var sCountryCode_SC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[272]})
-var sCountryCode_SD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[273]})
-var sCountryCode_SE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[274]})
-var sCountryCode_SG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[275]})
-var sCountryCode_SH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[276]})
-var sCountryCode_SI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[277]})
-var sCountryCode_SJ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SJ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[278]})
-var sCountryCode_SK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[279]})
-var sCountryCode_SL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[280]})
-var sCountryCode_SM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[281]})
-var sCountryCode_SN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[282]})
-var sCountryCode_SO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[283]})
-var sCountryCode_SR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[284]})
-var sCountryCode_SS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[285]})
-var sCountryCode_ST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[286]})
-var sCountryCode_SV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[287]})
-var sCountryCode_SX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[288]})
-var sCountryCode_SY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[289]})
-var sCountryCode_SZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[290]})
-var sCountryCode_TC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[291]})
-var sCountryCode_TD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[292]})
-var sCountryCode_TF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[293]})
-var sCountryCode_TG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[294]})
-var sCountryCode_TH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[295]})
-var sCountryCode_TJ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TJ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[296]})
-var sCountryCode_TK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[297]})
-var sCountryCode_TL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[298]})
-var sCountryCode_TM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[299]})
-var sCountryCode_TN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[300]})
-var sCountryCode_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[301]})
-var sCountryCode_TP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[302]})
-var sCountryCode_TR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[303]})
-var sCountryCode_TT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[304]})
-var sCountryCode_TV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[305]})
-var sCountryCode_TW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[306]})
-var sCountryCode_TZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[307]})
-var sCountryCode_UA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[308]})
-var sCountryCode_UG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[309]})
-var sCountryCode_US = smithy.NewStaticSchema(smithy.StaticSchema{Member: "US", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[310]})
-var sCountryCode_UY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[311]})
-var sCountryCode_UZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[312]})
-var sCountryCode_VA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[313]})
-var sCountryCode_VC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[314]})
-var sCountryCode_VE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[315]})
-var sCountryCode_VG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[316]})
-var sCountryCode_VI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[317]})
-var sCountryCode_VN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[318]})
-var sCountryCode_VU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[319]})
-var sCountryCode_WF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[320]})
-var sCountryCode_WS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[321]})
-var sCountryCode_YE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[322]})
-var sCountryCode_YT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[323]})
-var sCountryCode_ZA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[324]})
-var sCountryCode_ZM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[325]})
-var sCountryCode_ZW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[326]})
-var sDnssecKey_Algorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Algorithm", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[331]})
-var sDnssecKey_Flags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Flags", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[332]})
-var sDnssecKey_PublicKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicKey", ID: &i_DnssecPublicKey, Type: smithy.ShapeTypeString, Ext: &ext[333]})
-var sDnssecKey_DigestType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DigestType", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[334]})
-var sDnssecKey_Digest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Digest", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[335]})
-var sDnssecKey_KeyTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyTag", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[336]})
-var sDnssecKey_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[337]})
-var s_DnssecKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDnssecKey, Members: &mDnssecKey, Type: smithy.ShapeTypeStructure, Ext: &ext[339]})
-var sDnssecLimitExceeded_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[341]})
-var sDnssecSigningAttributes_Algorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Algorithm", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[344]})
-var sDnssecSigningAttributes_Flags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Flags", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[345]})
-var sDnssecSigningAttributes_PublicKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicKey", ID: &i_DnssecPublicKey, Type: smithy.ShapeTypeString, Ext: &ext[346]})
-var sDomainAvailability_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[349]})
-var sDomainAvailability_AVAILABLE_RESERVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE_RESERVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[350]})
-var sDomainAvailability_AVAILABLE_PREORDER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE_PREORDER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[351]})
-var sDomainAvailability_UNAVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNAVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[352]})
-var sDomainAvailability_UNAVAILABLE_PREMIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNAVAILABLE_PREMIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[353]})
-var sDomainAvailability_UNAVAILABLE_RESTRICTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNAVAILABLE_RESTRICTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[354]})
-var sDomainAvailability_RESERVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESERVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[355]})
-var sDomainAvailability_DONT_KNOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DONT_KNOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[356]})
-var sDomainAvailability_INVALID_NAME_FOR_TLD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_NAME_FOR_TLD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[357]})
-var sDomainAvailability_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[358]})
-var sDomainLimitExceeded_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[360]})
-var sDomainPrice_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DomainPriceName, Type: smithy.ShapeTypeString, Ext: &ext[363]})
-var sDomainPrice_RegistrationPrice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistrationPrice", ID: &iPriceWithCurrency, Members: &mPriceWithCurrency, Type: smithy.ShapeTypeStructure, Ext: &ext[364]})
-var sDomainPrice_TransferPrice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransferPrice", ID: &iPriceWithCurrency, Members: &mPriceWithCurrency, Type: smithy.ShapeTypeStructure, Ext: &ext[365]})
-var sDomainPrice_RenewalPrice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RenewalPrice", ID: &iPriceWithCurrency, Members: &mPriceWithCurrency, Type: smithy.ShapeTypeStructure, Ext: &ext[366]})
-var sDomainPrice_ChangeOwnershipPrice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeOwnershipPrice", ID: &iPriceWithCurrency, Members: &mPriceWithCurrency, Type: smithy.ShapeTypeStructure, Ext: &ext[367]})
-var sDomainPrice_RestorationPrice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RestorationPrice", ID: &iPriceWithCurrency, Members: &mPriceWithCurrency, Type: smithy.ShapeTypeStructure, Ext: &ext[368]})
-var s_DomainPriceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainPrice, Members: &mDomainPrice, Type: smithy.ShapeTypeStructure, Ext: &ext[370]})
-var s_DomainStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DomainStatus, Type: smithy.ShapeTypeString, Ext: &ext[374]})
-var sDomainSuggestion_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[376]})
-var sDomainSuggestion_Availability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Availability", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[377]})
-var sDomainSuggestion_Price = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Price", ID: &iPriceWithCurrency, Members: &mPriceWithCurrency, Type: smithy.ShapeTypeStructure, Ext: &ext[378]})
-var s_DomainSuggestionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainSuggestion, Members: &mDomainSuggestion, Type: smithy.ShapeTypeStructure, Ext: &ext[380]})
-var sDomainSummary_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[382]})
-var sDomainSummary_AutoRenew = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoRenew", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[383]})
-var sDomainSummary_TransferLock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransferLock", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[384]})
-var sDomainSummary_Expiry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expiry", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[385]})
-var s_DomainSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainSummary, Members: &mDomainSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[387]})
-var sDomainTransferability_Transferable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Transferable", ID: &iTransferable, Members: &mTransferable, Type: smithy.ShapeTypeEnum, Ext: &ext[389]})
-var sDuplicateRequest_requestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestId", ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &ext[391]})
-var sDuplicateRequest_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[392]})
-var sExtraParam_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iExtraParamName, Members: &mExtraParamName, Type: smithy.ShapeTypeEnum, Ext: &ext[397]})
-var sExtraParam_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_ExtraParamValue, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[398]})
-var s_ExtraParamList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExtraParam, Members: &mExtraParam, Type: smithy.ShapeTypeStructure, Ext: &ext[400]})
-var sExtraParamName_DUNS_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUNS_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[402]})
-var sExtraParamName_BRAND_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BRAND_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[403]})
-var sExtraParamName_BIRTH_DEPARTMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BIRTH_DEPARTMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[404]})
-var sExtraParamName_BIRTH_DATE_IN_YYYY_MM_DD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BIRTH_DATE_IN_YYYY_MM_DD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[405]})
-var sExtraParamName_BIRTH_COUNTRY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BIRTH_COUNTRY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[406]})
-var sExtraParamName_BIRTH_CITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BIRTH_CITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[407]})
-var sExtraParamName_DOCUMENT_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOCUMENT_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[408]})
-var sExtraParamName_AU_ID_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AU_ID_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[409]})
-var sExtraParamName_AU_ID_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AU_ID_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[410]})
-var sExtraParamName_CA_LEGAL_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CA_LEGAL_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[411]})
-var sExtraParamName_CA_BUSINESS_ENTITY_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CA_BUSINESS_ENTITY_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[412]})
-var sExtraParamName_CA_LEGAL_REPRESENTATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CA_LEGAL_REPRESENTATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[413]})
-var sExtraParamName_CA_LEGAL_REPRESENTATIVE_CAPACITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CA_LEGAL_REPRESENTATIVE_CAPACITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[414]})
-var sExtraParamName_ES_IDENTIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ES_IDENTIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[415]})
-var sExtraParamName_ES_IDENTIFICATION_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ES_IDENTIFICATION_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[416]})
-var sExtraParamName_ES_LEGAL_FORM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ES_LEGAL_FORM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[417]})
-var sExtraParamName_FI_BUSINESS_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FI_BUSINESS_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[418]})
-var sExtraParamName_ONWER_FI_ID_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONWER_FI_ID_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[419]})
-var sExtraParamName_FI_NATIONALITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FI_NATIONALITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[420]})
-var sExtraParamName_FI_ORGANIZATION_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FI_ORGANIZATION_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[421]})
-var sExtraParamName_IT_NATIONALITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IT_NATIONALITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[422]})
-var sExtraParamName_IT_PIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IT_PIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[423]})
-var sExtraParamName_IT_REGISTRANT_ENTITY_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IT_REGISTRANT_ENTITY_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[424]})
-var sExtraParamName_RU_PASSPORT_DATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RU_PASSPORT_DATA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[425]})
-var sExtraParamName_SE_ID_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SE_ID_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[426]})
-var sExtraParamName_SG_ID_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SG_ID_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[427]})
-var sExtraParamName_VAT_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VAT_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[428]})
-var sExtraParamName_UK_CONTACT_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UK_CONTACT_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[429]})
-var sExtraParamName_UK_COMPANY_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UK_COMPANY_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[430]})
-var sExtraParamName_EU_COUNTRY_OF_CITIZENSHIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EU_COUNTRY_OF_CITIZENSHIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[431]})
-var sExtraParamName_AU_PRIORITY_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AU_PRIORITY_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[432]})
-var sExtraParamName_AU_ELIGIBILITY_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AU_ELIGIBILITY_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[433]})
-var sExtraParamName_AU_POLICY_REASON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AU_POLICY_REASON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[434]})
-var sExtraParamName_AU_REGISTRANT_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AU_REGISTRANT_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[435]})
-var sFilterCondition_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iListDomainsAttributeName, Members: &mListDomainsAttributeName, Type: smithy.ShapeTypeEnum, Ext: &ext[439]})
-var sFilterCondition_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &iOperator, Members: &mOperator, Type: smithy.ShapeTypeEnum, Ext: &ext[440]})
-var sFilterCondition_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList, Ext: &ext[441]})
-var s_FilterConditions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilterCondition, Members: &mFilterCondition, Type: smithy.ShapeTypeStructure, Ext: &ext[443]})
-var s_GlueIpList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GlueIp, Type: smithy.ShapeTypeString, Ext: &ext[446]})
-var sInvalidInput_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[450]})
-var sListDomainsAttributeName_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[455]})
-var sListDomainsAttributeName_Expiry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expiry", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[456]})
-var sListOperationsSortAttributeName_SubmittedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubmittedDate", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[458]})
-var sNameserver_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_HostName, Type: smithy.ShapeTypeString, Ext: &ext[462]})
-var sNameserver_GlueIps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlueIps", ID: &i_GlueIpList, Members: &m_GlueIpList, Type: smithy.ShapeTypeList, Ext: &ext[463]})
-var s_NameserverList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNameserver, Members: &mNameserver, Type: smithy.ShapeTypeStructure, Ext: &ext[465]})
-var sOperationLimitExceeded_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[469]})
-var sOperationStatus_SUBMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[471]})
-var sOperationStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[472]})
-var sOperationStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[473]})
-var sOperationStatus_SUCCESSFUL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESSFUL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[474]})
-var sOperationStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[475]})
-var s_OperationStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOperationStatus, Members: &mOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[477]})
-var sOperationSummary_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &ext[479]})
-var sOperationSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOperationStatus, Members: &mOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[480]})
-var sOperationSummary_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iOperationType, Members: &mOperationType, Type: smithy.ShapeTypeEnum, Ext: &ext[481]})
-var sOperationSummary_SubmittedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubmittedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[482]})
-var sOperationSummary_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[483]})
-var sOperationSummary_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[484]})
-var sOperationSummary_StatusFlag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusFlag", ID: &iStatusFlag, Members: &mStatusFlag, Type: smithy.ShapeTypeEnum, Ext: &ext[485]})
-var sOperationSummary_LastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[486]})
-var s_OperationSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOperationSummary, Members: &mOperationSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[488]})
-var sOperationType_REGISTER_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGISTER_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[490]})
-var sOperationType_DELETE_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[491]})
-var sOperationType_TRANSFER_IN_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSFER_IN_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[492]})
-var sOperationType_UPDATE_DOMAIN_CONTACT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_DOMAIN_CONTACT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[493]})
-var sOperationType_UPDATE_NAMESERVER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_NAMESERVER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[494]})
-var sOperationType_CHANGE_PRIVACY_PROTECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHANGE_PRIVACY_PROTECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[495]})
-var sOperationType_DOMAIN_LOCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_LOCK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[496]})
-var sOperationType_ENABLE_AUTORENEW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLE_AUTORENEW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[497]})
-var sOperationType_DISABLE_AUTORENEW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLE_AUTORENEW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[498]})
-var sOperationType_ADD_DNSSEC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADD_DNSSEC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[499]})
-var sOperationType_REMOVE_DNSSEC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REMOVE_DNSSEC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[500]})
-var sOperationType_EXPIRE_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRE_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[501]})
-var sOperationType_TRANSFER_OUT_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSFER_OUT_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[502]})
-var sOperationType_CHANGE_DOMAIN_OWNER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHANGE_DOMAIN_OWNER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[503]})
-var sOperationType_RENEW_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RENEW_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[504]})
-var sOperationType_PUSH_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUSH_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[505]})
-var sOperationType_INTERNAL_TRANSFER_OUT_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_TRANSFER_OUT_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[506]})
-var sOperationType_INTERNAL_TRANSFER_IN_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_TRANSFER_IN_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[507]})
-var sOperationType_RELEASE_TO_GANDI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RELEASE_TO_GANDI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[508]})
-var sOperationType_TRANSFER_ON_RENEW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSFER_ON_RENEW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[509]})
-var sOperationType_RESTORE_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESTORE_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[510]})
-var s_OperationTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOperationType, Members: &mOperationType, Type: smithy.ShapeTypeEnum, Ext: &ext[512]})
-var sOperator_LE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[514]})
-var sOperator_GE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[515]})
-var sOperator_BEGINS_WITH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEGINS_WITH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[516]})
-var sPriceType_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[522]})
-var sPriceType_REGISTRY_PREMIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGISTRY_PREMIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[523]})
-var sPriceWithCurrency_Price = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Price", ID: &i_Price, Type: smithy.ShapeTypeDouble, Ext: &ext[525]})
-var sPriceWithCurrency_Currency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Currency", ID: &i_Currency, Type: smithy.ShapeTypeString, Ext: &ext[526]})
-var sPriceWithCurrency_PriceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PriceType", ID: &iPriceType, Members: &mPriceType, Type: smithy.ShapeTypeEnum, Ext: &ext[527]})
-var sReachabilityStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[529]})
-var sReachabilityStatus_DONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[530]})
-var sReachabilityStatus_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[531]})
-var sSortCondition_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iListDomainsAttributeName, Members: &mListDomainsAttributeName, Type: smithy.ShapeTypeEnum, Ext: &ext[539]})
-var sSortCondition_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &ext[540]})
-var sSortOrder_ASC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[542]})
-var sSortOrder_DESC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[543]})
-var sStatusFlag_PENDING_ACCEPTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_ACCEPTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[546]})
-var sStatusFlag_PENDING_CUSTOMER_ACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_CUSTOMER_ACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[547]})
-var sStatusFlag_PENDING_AUTHORIZATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_AUTHORIZATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[548]})
-var sStatusFlag_PENDING_PAYMENT_VERIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_PAYMENT_VERIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[549]})
-var sStatusFlag_PENDING_SUPPORT_CASE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_SUPPORT_CASE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[550]})
-var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[553]})
-var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[554]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[557]})
-var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[559]})
-var sTLDInMaintenance_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[563]})
-var sTLDInMaintenance_tld = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tld", ID: &i_TldName, Type: smithy.ShapeTypeString, Ext: &ext[564]})
-var sTLDRulesViolation_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[567]})
-var sTransferable_TRANSFERABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSFERABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[569]})
-var sTransferable_UNTRANSFERABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNTRANSFERABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[570]})
-var sTransferable_DONT_KNOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DONT_KNOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[571]})
-var sTransferable_DOMAIN_IN_OWN_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_IN_OWN_ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[572]})
-var sTransferable_DOMAIN_IN_ANOTHER_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_IN_ANOTHER_ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[573]})
-var sTransferable_PREMIUM_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PREMIUM_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[574]})
-var sTransferable_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[575]})
-var sUnsupportedTLD_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[577]})
-var s_Values_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Value, Type: smithy.ShapeTypeString, Ext: &ext[580]})
-var sAcceptDomainTransferFromAnotherAwsAccountRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[583]})
-var sAcceptDomainTransferFromAnotherAwsAccountRequest_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_Password, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[584]})
-var sAcceptDomainTransferFromAnotherAwsAccountResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &ext[586]})
-var sAssociateDelegationSignerToDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[588]})
-var sAssociateDelegationSignerToDomainRequest_SigningAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningAttributes", ID: &iDnssecSigningAttributes, Members: &mDnssecSigningAttributes, Type: smithy.ShapeTypeStructure, Ext: &ext[589]})
-var sAssociateDelegationSignerToDomainResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &ext[591]})
-var sCancelDomainTransferToAnotherAwsAccountRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[593]})
-var sCancelDomainTransferToAnotherAwsAccountResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &ext[595]})
-var sCheckDomainAvailabilityRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[597]})
-var sCheckDomainAvailabilityRequest_IdnLangCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdnLangCode", ID: &i_LangCode, Type: smithy.ShapeTypeString, Ext: &ext[598]})
-var sCheckDomainAvailabilityResponse_Availability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Availability", ID: &iDomainAvailability, Members: &mDomainAvailability, Type: smithy.ShapeTypeEnum, Ext: &ext[600]})
-var sCheckDomainAvailabilityResponse_Price = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Price", ID: &iPriceWithCurrency, Members: &mPriceWithCurrency, Type: smithy.ShapeTypeStructure, Ext: &ext[601]})
-var sCheckDomainTransferabilityRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[603]})
-var sCheckDomainTransferabilityRequest_AuthCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthCode", ID: &i_DomainAuthCode, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[604]})
-var sCheckDomainTransferabilityResponse_Transferability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Transferability", ID: &iDomainTransferability, Members: &mDomainTransferability, Type: smithy.ShapeTypeStructure, Ext: &ext[606]})
-var sCheckDomainTransferabilityResponse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[607]})
-var sCheckDomainTransferabilityResponse_Price = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Price", ID: &iPriceWithCurrency, Members: &mPriceWithCurrency, Type: smithy.ShapeTypeStructure, Ext: &ext[608]})
-var sDeleteDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[610]})
-var sDeleteDomainResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &ext[612]})
-var sDeleteTagsForDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[614]})
-var sDeleteTagsForDomainRequest_TagsToDelete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagsToDelete", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[615]})
-var sDisableDomainAutoRenewRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[618]})
-var sDisableDomainTransferLockRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[621]})
-var sDisableDomainTransferLockResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &ext[623]})
-var sDisassociateDelegationSignerFromDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[625]})
-var sDisassociateDelegationSignerFromDomainRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[626]})
-var sDisassociateDelegationSignerFromDomainResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &ext[628]})
-var sEnableDomainAutoRenewRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[630]})
-var sEnableDomainTransferLockRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[633]})
-var sEnableDomainTransferLockResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &ext[635]})
-var sGetContactReachabilityStatusRequest_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[637]})
-var sGetContactReachabilityStatusResponse_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[639]})
-var sGetContactReachabilityStatusResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iReachabilityStatus, Members: &mReachabilityStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[640]})
-var sGetDomainDetailRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[642]})
-var sGetDomainDetailResponse_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[644]})
-var sGetDomainDetailResponse_Nameservers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Nameservers", ID: &i_NameserverList, Members: &m_NameserverList, Type: smithy.ShapeTypeList, Ext: &ext[645]})
-var sGetDomainDetailResponse_AutoRenew = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoRenew", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[646]})
-var sGetDomainDetailResponse_AdminContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[647]})
-var sGetDomainDetailResponse_RegistrantContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistrantContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[648]})
-var sGetDomainDetailResponse_TechContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TechContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[649]})
-var sGetDomainDetailResponse_AdminPrivacy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminPrivacy", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[650]})
-var sGetDomainDetailResponse_RegistrantPrivacy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistrantPrivacy", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[651]})
-var sGetDomainDetailResponse_TechPrivacy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TechPrivacy", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[652]})
-var sGetDomainDetailResponse_RegistrarName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistrarName", ID: &i_RegistrarName, Type: smithy.ShapeTypeString, Ext: &ext[653]})
-var sGetDomainDetailResponse_WhoIsServer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhoIsServer", ID: &i_RegistrarWhoIsServer, Type: smithy.ShapeTypeString, Ext: &ext[654]})
-var sGetDomainDetailResponse_RegistrarUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistrarUrl", ID: &i_RegistrarUrl, Type: smithy.ShapeTypeString, Ext: &ext[655]})
-var sGetDomainDetailResponse_AbuseContactEmail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AbuseContactEmail", ID: &i_Email, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[656]})
-var sGetDomainDetailResponse_AbuseContactPhone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AbuseContactPhone", ID: &i_ContactNumber, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[657]})
-var sGetDomainDetailResponse_RegistryDomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryDomainId", ID: &i_RegistryDomainId, Type: smithy.ShapeTypeString, Ext: &ext[658]})
-var sGetDomainDetailResponse_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[659]})
-var sGetDomainDetailResponse_UpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[660]})
-var sGetDomainDetailResponse_ExpirationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[661]})
-var sGetDomainDetailResponse_Reseller = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reseller", ID: &i_Reseller, Type: smithy.ShapeTypeString, Ext: &ext[662]})
-var sGetDomainDetailResponse_DnsSec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsSec", ID: &i_DNSSec, Type: smithy.ShapeTypeString, Ext: &ext[663]})
-var sGetDomainDetailResponse_StatusList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusList", ID: &i_DomainStatusList, Members: &m_DomainStatusList, Type: smithy.ShapeTypeList, Ext: &ext[664]})
-var sGetDomainDetailResponse_DnssecKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnssecKeys", ID: &i_DnssecKeyList, Members: &m_DnssecKeyList, Type: smithy.ShapeTypeList, Ext: &ext[665]})
-var sGetDomainDetailResponse_BillingContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[666]})
-var sGetDomainDetailResponse_BillingPrivacy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPrivacy", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[667]})
-var sGetDomainPricesRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[669]})
-var sGetDomainPricesResponse_DomainPrice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainPrice", ID: &iDomainPrice, Members: &mDomainPrice, Type: smithy.ShapeTypeStructure, Ext: &ext[671]})
-var sGetDomainSuggestionsRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[673]})
-var sGetDomainSuggestionsRequest_SuggestionCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuggestionCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[674]})
-var sGetDomainSuggestionsRequest_OnlyAvailable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnlyAvailable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[675]})
-var sGetDomainSuggestionsRequest_OnlyStandardPrices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnlyStandardPrices", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[676]})
-var sGetDomainSuggestionsResponse_SuggestionsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuggestionsList", ID: &i_DomainSuggestionsList, Members: &m_DomainSuggestionsList, Type: smithy.ShapeTypeList, Ext: &ext[678]})
-var sGetOperationDetailRequest_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &ext[680]})
-var sGetOperationDetailResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &ext[682]})
-var sGetOperationDetailResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOperationStatus, Members: &mOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[683]})
-var sGetOperationDetailResponse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[684]})
-var sGetOperationDetailResponse_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[685]})
-var sGetOperationDetailResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iOperationType, Members: &mOperationType, Type: smithy.ShapeTypeEnum, Ext: &ext[686]})
-var sGetOperationDetailResponse_SubmittedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubmittedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[687]})
-var sGetOperationDetailResponse_LastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[688]})
-var sGetOperationDetailResponse_StatusFlag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusFlag", ID: &iStatusFlag, Members: &mStatusFlag, Type: smithy.ShapeTypeEnum, Ext: &ext[689]})
-var sListDomainsRequest_FilterConditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterConditions", ID: &i_FilterConditions, Members: &m_FilterConditions, Type: smithy.ShapeTypeList, Ext: &ext[691]})
-var sListDomainsRequest_SortCondition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortCondition", ID: &iSortCondition, Members: &mSortCondition, Type: smithy.ShapeTypeStructure, Ext: &ext[692]})
-var sListDomainsRequest_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_PageMarker, Type: smithy.ShapeTypeString, Ext: &ext[693]})
-var sListDomainsRequest_MaxItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxItems", ID: &i_PageMaxItems, Type: smithy.ShapeTypeInteger, Ext: &ext[694]})
-var sListDomainsResponse_Domains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domains", ID: &i_DomainSummaryList, Members: &m_DomainSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[696]})
-var sListDomainsResponse_NextPageMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextPageMarker", ID: &i_PageMarker, Type: smithy.ShapeTypeString, Ext: &ext[697]})
-var sListOperationsRequest_SubmittedSince = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubmittedSince", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[699]})
-var sListOperationsRequest_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_PageMarker, Type: smithy.ShapeTypeString, Ext: &ext[700]})
-var sListOperationsRequest_MaxItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxItems", ID: &i_PageMaxItems, Type: smithy.ShapeTypeInteger, Ext: &ext[701]})
-var sListOperationsRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_OperationStatusList, Members: &m_OperationStatusList, Type: smithy.ShapeTypeList, Ext: &ext[702]})
-var sListOperationsRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_OperationTypeList, Members: &m_OperationTypeList, Type: smithy.ShapeTypeList, Ext: &ext[703]})
-var sListOperationsRequest_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iListOperationsSortAttributeName, Members: &mListOperationsSortAttributeName, Type: smithy.ShapeTypeEnum, Ext: &ext[704]})
-var sListOperationsRequest_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &ext[705]})
-var sListOperationsResponse_Operations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operations", ID: &i_OperationSummaryList, Members: &m_OperationSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[707]})
-var sListOperationsResponse_NextPageMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextPageMarker", ID: &i_PageMarker, Type: smithy.ShapeTypeString, Ext: &ext[708]})
-var sListPricesRequest_Tld = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tld", ID: &i_TldName, Type: smithy.ShapeTypeString, Ext: &ext[710]})
-var sListPricesRequest_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_PageMarker, Type: smithy.ShapeTypeString, Ext: &ext[711]})
-var sListPricesRequest_MaxItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxItems", ID: &i_ListPricesPageMaxItems, Type: smithy.ShapeTypeInteger, Ext: &ext[712]})
-var sListPricesResponse_Prices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prices", ID: &i_DomainPriceList, Members: &m_DomainPriceList, Type: smithy.ShapeTypeList, Ext: &ext[714]})
-var sListPricesResponse_NextPageMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextPageMarker", ID: &i_PageMarker, Type: smithy.ShapeTypeString, Ext: &ext[715]})
-var sListTagsForDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[717]})
-var sListTagsForDomainResponse_TagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[719]})
-var sPushDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[721]})
-var sPushDomainRequest_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_Label, Type: smithy.ShapeTypeString, Ext: &ext[722]})
-var sRegisterDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[724]})
-var sRegisterDomainRequest_IdnLangCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdnLangCode", ID: &i_LangCode, Type: smithy.ShapeTypeString, Ext: &ext[725]})
-var sRegisterDomainRequest_DurationInYears = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInYears", ID: &i_DurationInYears, Type: smithy.ShapeTypeInteger, Ext: &ext[726]})
-var sRegisterDomainRequest_AutoRenew = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoRenew", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[727]})
-var sRegisterDomainRequest_AdminContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[728]})
-var sRegisterDomainRequest_RegistrantContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistrantContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[729]})
-var sRegisterDomainRequest_TechContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TechContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[730]})
-var sRegisterDomainRequest_PrivacyProtectAdminContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivacyProtectAdminContact", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[731]})
-var sRegisterDomainRequest_PrivacyProtectRegistrantContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivacyProtectRegistrantContact", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[732]})
-var sRegisterDomainRequest_PrivacyProtectTechContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivacyProtectTechContact", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[733]})
-var sRegisterDomainRequest_BillingContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[734]})
-var sRegisterDomainRequest_PrivacyProtectBillingContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivacyProtectBillingContact", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[735]})
-var sRegisterDomainRequest_Consent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Consent", ID: &iConsent, Members: &mConsent, Type: smithy.ShapeTypeStructure, Ext: &ext[736]})
-var sRegisterDomainResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &ext[738]})
-var sRejectDomainTransferFromAnotherAwsAccountRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[740]})
-var sRejectDomainTransferFromAnotherAwsAccountResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &ext[742]})
-var sRenewDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[744]})
-var sRenewDomainRequest_DurationInYears = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInYears", ID: &i_DurationInYears, Type: smithy.ShapeTypeInteger, Ext: &ext[745]})
-var sRenewDomainRequest_CurrentExpiryYear = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentExpiryYear", ID: &i_CurrentExpiryYear, Type: smithy.ShapeTypeInteger, Ext: &ext[746]})
-var sRenewDomainRequest_Consent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Consent", ID: &iConsent, Members: &mConsent, Type: smithy.ShapeTypeStructure, Ext: &ext[747]})
-var sRenewDomainResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &ext[749]})
-var sResendContactReachabilityEmailRequest_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[751]})
-var sResendContactReachabilityEmailResponse_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[753]})
-var sResendContactReachabilityEmailResponse_emailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emailAddress", ID: &i_Email, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[754]})
-var sResendContactReachabilityEmailResponse_isAlreadyVerified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isAlreadyVerified", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[755]})
-var sResendOperationAuthorizationRequest_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &ext[757]})
-var sRetrieveDomainAuthCodeRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[759]})
-var sRetrieveDomainAuthCodeResponse_AuthCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthCode", ID: &i_DomainAuthCode, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[761]})
-var sTransferDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[763]})
-var sTransferDomainRequest_IdnLangCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdnLangCode", ID: &i_LangCode, Type: smithy.ShapeTypeString, Ext: &ext[764]})
-var sTransferDomainRequest_DurationInYears = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInYears", ID: &i_DurationInYears, Type: smithy.ShapeTypeInteger, Ext: &ext[765]})
-var sTransferDomainRequest_Nameservers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Nameservers", ID: &i_NameserverList, Members: &m_NameserverList, Type: smithy.ShapeTypeList, Ext: &ext[766]})
-var sTransferDomainRequest_AuthCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthCode", ID: &i_DomainAuthCode, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[767]})
-var sTransferDomainRequest_AutoRenew = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoRenew", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[768]})
-var sTransferDomainRequest_AdminContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[769]})
-var sTransferDomainRequest_RegistrantContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistrantContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[770]})
-var sTransferDomainRequest_TechContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TechContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[771]})
-var sTransferDomainRequest_PrivacyProtectAdminContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivacyProtectAdminContact", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[772]})
-var sTransferDomainRequest_PrivacyProtectRegistrantContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivacyProtectRegistrantContact", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[773]})
-var sTransferDomainRequest_PrivacyProtectTechContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivacyProtectTechContact", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[774]})
-var sTransferDomainRequest_BillingContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[775]})
-var sTransferDomainRequest_PrivacyProtectBillingContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivacyProtectBillingContact", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[776]})
-var sTransferDomainRequest_Consent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Consent", ID: &iConsent, Members: &mConsent, Type: smithy.ShapeTypeStructure, Ext: &ext[777]})
-var sTransferDomainResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &ext[779]})
-var sTransferDomainToAnotherAwsAccountRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[781]})
-var sTransferDomainToAnotherAwsAccountRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[782]})
-var sTransferDomainToAnotherAwsAccountResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &ext[784]})
-var sTransferDomainToAnotherAwsAccountResponse_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_Password, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[785]})
-var sUpdateDomainContactRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[787]})
-var sUpdateDomainContactRequest_AdminContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[788]})
-var sUpdateDomainContactRequest_RegistrantContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistrantContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[789]})
-var sUpdateDomainContactRequest_TechContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TechContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[790]})
-var sUpdateDomainContactRequest_Consent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Consent", ID: &iConsent, Members: &mConsent, Type: smithy.ShapeTypeStructure, Ext: &ext[791]})
-var sUpdateDomainContactRequest_BillingContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[792]})
-var sUpdateDomainContactResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &ext[794]})
-var sUpdateDomainContactPrivacyRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[796]})
-var sUpdateDomainContactPrivacyRequest_AdminPrivacy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminPrivacy", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[797]})
-var sUpdateDomainContactPrivacyRequest_RegistrantPrivacy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistrantPrivacy", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[798]})
-var sUpdateDomainContactPrivacyRequest_TechPrivacy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TechPrivacy", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[799]})
-var sUpdateDomainContactPrivacyRequest_BillingPrivacy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPrivacy", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[800]})
-var sUpdateDomainContactPrivacyResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &ext[802]})
-var sUpdateDomainNameserversRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[804]})
-var sUpdateDomainNameserversRequest_FIAuthKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIAuthKey", ID: &i_FIAuthKey, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[805]})
-var sUpdateDomainNameserversRequest_Nameservers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Nameservers", ID: &i_NameserverList, Members: &m_NameserverList, Type: smithy.ShapeTypeList, Ext: &ext[806]})
-var sUpdateDomainNameserversResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &ext[808]})
-var sUpdateTagsForDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ext[810]})
-var sUpdateTagsForDomainRequest_TagsToUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagsToUpdate", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[811]})
-var sViewBillingRequest_Start = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Start", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[814]})
-var sViewBillingRequest_End = smithy.NewStaticSchema(smithy.StaticSchema{Member: "End", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[815]})
-var sViewBillingRequest_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_PageMarker, Type: smithy.ShapeTypeString, Ext: &ext[816]})
-var sViewBillingRequest_MaxItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxItems", ID: &i_PageMaxItems, Type: smithy.ShapeTypeInteger, Ext: &ext[817]})
-var sViewBillingResponse_NextPageMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextPageMarker", ID: &i_PageMarker, Type: smithy.ShapeTypeString, Ext: &ext[819]})
-var sViewBillingResponse_BillingRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingRecords", ID: &i_BillingRecords, Members: &m_BillingRecords, Type: smithy.ShapeTypeList, Ext: &ext[820]})
+var sBillingRecord_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eBillingRecord_DomainName})
+var sBillingRecord_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &iOperationType, Members: &mOperationType, Type: smithy.ShapeTypeEnum, Ext: &eBillingRecord_Operation})
+var sBillingRecord_InvoiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceId", ID: &i_InvoiceId, Type: smithy.ShapeTypeString, Ext: &eBillingRecord_InvoiceId})
+var sBillingRecord_BillDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eBillingRecord_BillDate})
+var sBillingRecord_Price = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Price", ID: &i_Price, Type: smithy.ShapeTypeDouble, Ext: &eBillingRecord_Price})
+var s_BillingRecords_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBillingRecord, Members: &mBillingRecord, Type: smithy.ShapeTypeStructure, Ext: &e_BillingRecords_member})
+var sConsent_MaxPrice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxPrice", ID: &i_ConsentPrice, Type: smithy.ShapeTypeDouble, Ext: &eConsent_MaxPrice})
+var sConsent_Currency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Currency", ID: &i_Currency, Type: smithy.ShapeTypeString, Ext: &eConsent_Currency})
+var sContactDetail_FirstName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirstName", ID: &i_ContactName, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eContactDetail_FirstName})
+var sContactDetail_LastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastName", ID: &i_ContactName, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eContactDetail_LastName})
+var sContactDetail_ContactType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactType", ID: &iContactType, Members: &mContactType, Type: smithy.ShapeTypeEnum, Ext: &eContactDetail_ContactType})
+var sContactDetail_OrganizationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationName", ID: &i_ContactName, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eContactDetail_OrganizationName})
+var sContactDetail_AddressLine1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressLine1", ID: &i_AddressLine, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eContactDetail_AddressLine1})
+var sContactDetail_AddressLine2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressLine2", ID: &i_AddressLine, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eContactDetail_AddressLine2})
+var sContactDetail_City = smithy.NewStaticSchema(smithy.StaticSchema{Member: "City", ID: &i_City, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eContactDetail_City})
+var sContactDetail_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_State, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eContactDetail_State})
+var sContactDetail_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountryCode", ID: &iCountryCode, Members: &mCountryCode, Traits: &t2, Type: smithy.ShapeTypeEnum, Ext: &eContactDetail_CountryCode})
+var sContactDetail_ZipCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZipCode", ID: &i_ZipCode, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eContactDetail_ZipCode})
+var sContactDetail_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &i_ContactNumber, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eContactDetail_PhoneNumber})
+var sContactDetail_Email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Email", ID: &i_Email, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eContactDetail_Email})
+var sContactDetail_Fax = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fax", ID: &i_ContactNumber, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eContactDetail_Fax})
+var sContactDetail_ExtraParams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtraParams", ID: &i_ExtraParamList, Members: &m_ExtraParamList, Type: smithy.ShapeTypeList, Ext: &eContactDetail_ExtraParams})
+var sContactType_PERSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERSON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContactType_PERSON})
+var sContactType_COMPANY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPANY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContactType_COMPANY})
+var sContactType_ASSOCIATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASSOCIATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContactType_ASSOCIATION})
+var sContactType_PUBLIC_BODY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLIC_BODY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContactType_PUBLIC_BODY})
+var sContactType_RESELLER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESELLER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eContactType_RESELLER})
+var sCountryCode_AC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_AC})
+var sCountryCode_AD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_AD})
+var sCountryCode_AE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_AE})
+var sCountryCode_AF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_AF})
+var sCountryCode_AG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_AG})
+var sCountryCode_AI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_AI})
+var sCountryCode_AL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_AL})
+var sCountryCode_AM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_AM})
+var sCountryCode_AN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_AN})
+var sCountryCode_AO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_AO})
+var sCountryCode_AQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AQ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_AQ})
+var sCountryCode_AR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_AR})
+var sCountryCode_AS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_AS})
+var sCountryCode_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_AT})
+var sCountryCode_AU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_AU})
+var sCountryCode_AW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_AW})
+var sCountryCode_AX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_AX})
+var sCountryCode_AZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_AZ})
+var sCountryCode_BA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_BA})
+var sCountryCode_BB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_BB})
+var sCountryCode_BD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_BD})
+var sCountryCode_BE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_BE})
+var sCountryCode_BF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_BF})
+var sCountryCode_BG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_BG})
+var sCountryCode_BH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_BH})
+var sCountryCode_BI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_BI})
+var sCountryCode_BJ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BJ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_BJ})
+var sCountryCode_BL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_BL})
+var sCountryCode_BM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_BM})
+var sCountryCode_BN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_BN})
+var sCountryCode_BO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_BO})
+var sCountryCode_BQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BQ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_BQ})
+var sCountryCode_BR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_BR})
+var sCountryCode_BS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_BS})
+var sCountryCode_BT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_BT})
+var sCountryCode_BV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_BV})
+var sCountryCode_BW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_BW})
+var sCountryCode_BY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_BY})
+var sCountryCode_BZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_BZ})
+var sCountryCode_CA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_CA})
+var sCountryCode_CC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_CC})
+var sCountryCode_CD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_CD})
+var sCountryCode_CF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_CF})
+var sCountryCode_CG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_CG})
+var sCountryCode_CH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_CH})
+var sCountryCode_CI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_CI})
+var sCountryCode_CK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_CK})
+var sCountryCode_CL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_CL})
+var sCountryCode_CM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_CM})
+var sCountryCode_CN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_CN})
+var sCountryCode_CO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_CO})
+var sCountryCode_CR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_CR})
+var sCountryCode_CU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_CU})
+var sCountryCode_CV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_CV})
+var sCountryCode_CW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_CW})
+var sCountryCode_CX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_CX})
+var sCountryCode_CY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_CY})
+var sCountryCode_CZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_CZ})
+var sCountryCode_DE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_DE})
+var sCountryCode_DJ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DJ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_DJ})
+var sCountryCode_DK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_DK})
+var sCountryCode_DM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_DM})
+var sCountryCode_DO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_DO})
+var sCountryCode_DZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_DZ})
+var sCountryCode_EC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_EC})
+var sCountryCode_EE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_EE})
+var sCountryCode_EG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_EG})
+var sCountryCode_EH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_EH})
+var sCountryCode_ER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_ER})
+var sCountryCode_ES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_ES})
+var sCountryCode_ET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_ET})
+var sCountryCode_FI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_FI})
+var sCountryCode_FJ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FJ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_FJ})
+var sCountryCode_FK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_FK})
+var sCountryCode_FM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_FM})
+var sCountryCode_FO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_FO})
+var sCountryCode_FR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_FR})
+var sCountryCode_GA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_GA})
+var sCountryCode_GB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_GB})
+var sCountryCode_GD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_GD})
+var sCountryCode_GE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_GE})
+var sCountryCode_GF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_GF})
+var sCountryCode_GG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_GG})
+var sCountryCode_GH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_GH})
+var sCountryCode_GI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_GI})
+var sCountryCode_GL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_GL})
+var sCountryCode_GM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_GM})
+var sCountryCode_GN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_GN})
+var sCountryCode_GP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_GP})
+var sCountryCode_GQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GQ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_GQ})
+var sCountryCode_GR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_GR})
+var sCountryCode_GS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_GS})
+var sCountryCode_GT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_GT})
+var sCountryCode_GU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_GU})
+var sCountryCode_GW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_GW})
+var sCountryCode_GY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_GY})
+var sCountryCode_HK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_HK})
+var sCountryCode_HM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_HM})
+var sCountryCode_HN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_HN})
+var sCountryCode_HR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_HR})
+var sCountryCode_HT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_HT})
+var sCountryCode_HU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_HU})
+var sCountryCode_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_ID})
+var sCountryCode_IE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_IE})
+var sCountryCode_IL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_IL})
+var sCountryCode_IM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_IM})
+var sCountryCode_IN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_IN})
+var sCountryCode_IO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_IO})
+var sCountryCode_IQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IQ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_IQ})
+var sCountryCode_IR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_IR})
+var sCountryCode_IS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_IS})
+var sCountryCode_IT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_IT})
+var sCountryCode_JE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_JE})
+var sCountryCode_JM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_JM})
+var sCountryCode_JO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_JO})
+var sCountryCode_JP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_JP})
+var sCountryCode_KE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_KE})
+var sCountryCode_KG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_KG})
+var sCountryCode_KH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_KH})
+var sCountryCode_KI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_KI})
+var sCountryCode_KM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_KM})
+var sCountryCode_KN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_KN})
+var sCountryCode_KP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_KP})
+var sCountryCode_KR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_KR})
+var sCountryCode_KW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_KW})
+var sCountryCode_KY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_KY})
+var sCountryCode_KZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_KZ})
+var sCountryCode_LA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_LA})
+var sCountryCode_LB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_LB})
+var sCountryCode_LC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_LC})
+var sCountryCode_LI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_LI})
+var sCountryCode_LK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_LK})
+var sCountryCode_LR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_LR})
+var sCountryCode_LS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_LS})
+var sCountryCode_LT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_LT})
+var sCountryCode_LU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_LU})
+var sCountryCode_LV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_LV})
+var sCountryCode_LY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_LY})
+var sCountryCode_MA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_MA})
+var sCountryCode_MC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_MC})
+var sCountryCode_MD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_MD})
+var sCountryCode_ME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_ME})
+var sCountryCode_MF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_MF})
+var sCountryCode_MG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_MG})
+var sCountryCode_MH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_MH})
+var sCountryCode_MK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_MK})
+var sCountryCode_ML = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_ML})
+var sCountryCode_MM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_MM})
+var sCountryCode_MN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_MN})
+var sCountryCode_MO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_MO})
+var sCountryCode_MP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_MP})
+var sCountryCode_MQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MQ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_MQ})
+var sCountryCode_MR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_MR})
+var sCountryCode_MS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_MS})
+var sCountryCode_MT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_MT})
+var sCountryCode_MU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_MU})
+var sCountryCode_MV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_MV})
+var sCountryCode_MW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_MW})
+var sCountryCode_MX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_MX})
+var sCountryCode_MY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_MY})
+var sCountryCode_MZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_MZ})
+var sCountryCode_NA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_NA})
+var sCountryCode_NC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_NC})
+var sCountryCode_NE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_NE})
+var sCountryCode_NF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_NF})
+var sCountryCode_NG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_NG})
+var sCountryCode_NI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_NI})
+var sCountryCode_NL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_NL})
+var sCountryCode_NO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_NO})
+var sCountryCode_NP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_NP})
+var sCountryCode_NR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_NR})
+var sCountryCode_NU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_NU})
+var sCountryCode_NZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_NZ})
+var sCountryCode_OM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_OM})
+var sCountryCode_PA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_PA})
+var sCountryCode_PE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_PE})
+var sCountryCode_PF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_PF})
+var sCountryCode_PG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_PG})
+var sCountryCode_PH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_PH})
+var sCountryCode_PK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_PK})
+var sCountryCode_PL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_PL})
+var sCountryCode_PM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_PM})
+var sCountryCode_PN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_PN})
+var sCountryCode_PR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_PR})
+var sCountryCode_PS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_PS})
+var sCountryCode_PT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_PT})
+var sCountryCode_PW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_PW})
+var sCountryCode_PY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_PY})
+var sCountryCode_QA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_QA})
+var sCountryCode_RE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_RE})
+var sCountryCode_RO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_RO})
+var sCountryCode_RS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_RS})
+var sCountryCode_RU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_RU})
+var sCountryCode_RW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_RW})
+var sCountryCode_SA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_SA})
+var sCountryCode_SB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_SB})
+var sCountryCode_SC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_SC})
+var sCountryCode_SD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_SD})
+var sCountryCode_SE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_SE})
+var sCountryCode_SG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_SG})
+var sCountryCode_SH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_SH})
+var sCountryCode_SI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_SI})
+var sCountryCode_SJ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SJ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_SJ})
+var sCountryCode_SK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_SK})
+var sCountryCode_SL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_SL})
+var sCountryCode_SM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_SM})
+var sCountryCode_SN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_SN})
+var sCountryCode_SO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_SO})
+var sCountryCode_SR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_SR})
+var sCountryCode_SS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_SS})
+var sCountryCode_ST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_ST})
+var sCountryCode_SV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_SV})
+var sCountryCode_SX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_SX})
+var sCountryCode_SY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_SY})
+var sCountryCode_SZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_SZ})
+var sCountryCode_TC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_TC})
+var sCountryCode_TD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_TD})
+var sCountryCode_TF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_TF})
+var sCountryCode_TG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_TG})
+var sCountryCode_TH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_TH})
+var sCountryCode_TJ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TJ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_TJ})
+var sCountryCode_TK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_TK})
+var sCountryCode_TL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_TL})
+var sCountryCode_TM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_TM})
+var sCountryCode_TN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_TN})
+var sCountryCode_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_TO})
+var sCountryCode_TP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_TP})
+var sCountryCode_TR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_TR})
+var sCountryCode_TT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_TT})
+var sCountryCode_TV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_TV})
+var sCountryCode_TW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_TW})
+var sCountryCode_TZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_TZ})
+var sCountryCode_UA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_UA})
+var sCountryCode_UG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_UG})
+var sCountryCode_US = smithy.NewStaticSchema(smithy.StaticSchema{Member: "US", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_US})
+var sCountryCode_UY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_UY})
+var sCountryCode_UZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_UZ})
+var sCountryCode_VA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_VA})
+var sCountryCode_VC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_VC})
+var sCountryCode_VE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_VE})
+var sCountryCode_VG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_VG})
+var sCountryCode_VI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_VI})
+var sCountryCode_VN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_VN})
+var sCountryCode_VU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_VU})
+var sCountryCode_WF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_WF})
+var sCountryCode_WS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_WS})
+var sCountryCode_YE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_YE})
+var sCountryCode_YT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_YT})
+var sCountryCode_ZA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_ZA})
+var sCountryCode_ZM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_ZM})
+var sCountryCode_ZW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCountryCode_ZW})
+var sDnssecKey_Algorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Algorithm", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eDnssecKey_Algorithm})
+var sDnssecKey_Flags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Flags", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eDnssecKey_Flags})
+var sDnssecKey_PublicKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicKey", ID: &i_DnssecPublicKey, Type: smithy.ShapeTypeString, Ext: &eDnssecKey_PublicKey})
+var sDnssecKey_DigestType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DigestType", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eDnssecKey_DigestType})
+var sDnssecKey_Digest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Digest", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDnssecKey_Digest})
+var sDnssecKey_KeyTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyTag", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eDnssecKey_KeyTag})
+var sDnssecKey_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDnssecKey_Id})
+var s_DnssecKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDnssecKey, Members: &mDnssecKey, Type: smithy.ShapeTypeStructure, Ext: &e_DnssecKeyList_member})
+var sDnssecLimitExceeded_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eDnssecLimitExceeded_message})
+var sDnssecSigningAttributes_Algorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Algorithm", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eDnssecSigningAttributes_Algorithm})
+var sDnssecSigningAttributes_Flags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Flags", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger, Ext: &eDnssecSigningAttributes_Flags})
+var sDnssecSigningAttributes_PublicKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicKey", ID: &i_DnssecPublicKey, Type: smithy.ShapeTypeString, Ext: &eDnssecSigningAttributes_PublicKey})
+var sDomainAvailability_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainAvailability_AVAILABLE})
+var sDomainAvailability_AVAILABLE_RESERVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE_RESERVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainAvailability_AVAILABLE_RESERVED})
+var sDomainAvailability_AVAILABLE_PREORDER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE_PREORDER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainAvailability_AVAILABLE_PREORDER})
+var sDomainAvailability_UNAVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNAVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainAvailability_UNAVAILABLE})
+var sDomainAvailability_UNAVAILABLE_PREMIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNAVAILABLE_PREMIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainAvailability_UNAVAILABLE_PREMIUM})
+var sDomainAvailability_UNAVAILABLE_RESTRICTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNAVAILABLE_RESTRICTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainAvailability_UNAVAILABLE_RESTRICTED})
+var sDomainAvailability_RESERVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESERVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainAvailability_RESERVED})
+var sDomainAvailability_DONT_KNOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DONT_KNOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainAvailability_DONT_KNOW})
+var sDomainAvailability_INVALID_NAME_FOR_TLD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_NAME_FOR_TLD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainAvailability_INVALID_NAME_FOR_TLD})
+var sDomainAvailability_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDomainAvailability_PENDING})
+var sDomainLimitExceeded_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eDomainLimitExceeded_message})
+var sDomainPrice_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DomainPriceName, Type: smithy.ShapeTypeString, Ext: &eDomainPrice_Name})
+var sDomainPrice_RegistrationPrice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistrationPrice", ID: &iPriceWithCurrency, Members: &mPriceWithCurrency, Type: smithy.ShapeTypeStructure, Ext: &eDomainPrice_RegistrationPrice})
+var sDomainPrice_TransferPrice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransferPrice", ID: &iPriceWithCurrency, Members: &mPriceWithCurrency, Type: smithy.ShapeTypeStructure, Ext: &eDomainPrice_TransferPrice})
+var sDomainPrice_RenewalPrice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RenewalPrice", ID: &iPriceWithCurrency, Members: &mPriceWithCurrency, Type: smithy.ShapeTypeStructure, Ext: &eDomainPrice_RenewalPrice})
+var sDomainPrice_ChangeOwnershipPrice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeOwnershipPrice", ID: &iPriceWithCurrency, Members: &mPriceWithCurrency, Type: smithy.ShapeTypeStructure, Ext: &eDomainPrice_ChangeOwnershipPrice})
+var sDomainPrice_RestorationPrice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RestorationPrice", ID: &iPriceWithCurrency, Members: &mPriceWithCurrency, Type: smithy.ShapeTypeStructure, Ext: &eDomainPrice_RestorationPrice})
+var s_DomainPriceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainPrice, Members: &mDomainPrice, Type: smithy.ShapeTypeStructure, Ext: &e_DomainPriceList_member})
+var s_DomainStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DomainStatus, Type: smithy.ShapeTypeString, Ext: &e_DomainStatusList_member})
+var sDomainSuggestion_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDomainSuggestion_DomainName})
+var sDomainSuggestion_Availability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Availability", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDomainSuggestion_Availability})
+var sDomainSuggestion_Price = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Price", ID: &iPriceWithCurrency, Members: &mPriceWithCurrency, Type: smithy.ShapeTypeStructure, Ext: &eDomainSuggestion_Price})
+var s_DomainSuggestionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainSuggestion, Members: &mDomainSuggestion, Type: smithy.ShapeTypeStructure, Ext: &e_DomainSuggestionsList_member})
+var sDomainSummary_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDomainSummary_DomainName})
+var sDomainSummary_AutoRenew = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoRenew", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDomainSummary_AutoRenew})
+var sDomainSummary_TransferLock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransferLock", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eDomainSummary_TransferLock})
+var sDomainSummary_Expiry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expiry", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDomainSummary_Expiry})
+var s_DomainSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainSummary, Members: &mDomainSummary, Type: smithy.ShapeTypeStructure, Ext: &e_DomainSummaryList_member})
+var sDomainTransferability_Transferable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Transferable", ID: &iTransferable, Members: &mTransferable, Type: smithy.ShapeTypeEnum, Ext: &eDomainTransferability_Transferable})
+var sDuplicateRequest_requestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestId", ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &eDuplicateRequest_requestId})
+var sDuplicateRequest_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eDuplicateRequest_message})
+var sExtraParam_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iExtraParamName, Members: &mExtraParamName, Type: smithy.ShapeTypeEnum, Ext: &eExtraParam_Name})
+var sExtraParam_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_ExtraParamValue, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eExtraParam_Value})
+var s_ExtraParamList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExtraParam, Members: &mExtraParam, Type: smithy.ShapeTypeStructure, Ext: &e_ExtraParamList_member})
+var sExtraParamName_DUNS_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUNS_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_DUNS_NUMBER})
+var sExtraParamName_BRAND_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BRAND_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_BRAND_NUMBER})
+var sExtraParamName_BIRTH_DEPARTMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BIRTH_DEPARTMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_BIRTH_DEPARTMENT})
+var sExtraParamName_BIRTH_DATE_IN_YYYY_MM_DD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BIRTH_DATE_IN_YYYY_MM_DD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_BIRTH_DATE_IN_YYYY_MM_DD})
+var sExtraParamName_BIRTH_COUNTRY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BIRTH_COUNTRY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_BIRTH_COUNTRY})
+var sExtraParamName_BIRTH_CITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BIRTH_CITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_BIRTH_CITY})
+var sExtraParamName_DOCUMENT_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOCUMENT_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_DOCUMENT_NUMBER})
+var sExtraParamName_AU_ID_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AU_ID_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_AU_ID_NUMBER})
+var sExtraParamName_AU_ID_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AU_ID_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_AU_ID_TYPE})
+var sExtraParamName_CA_LEGAL_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CA_LEGAL_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_CA_LEGAL_TYPE})
+var sExtraParamName_CA_BUSINESS_ENTITY_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CA_BUSINESS_ENTITY_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_CA_BUSINESS_ENTITY_TYPE})
+var sExtraParamName_CA_LEGAL_REPRESENTATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CA_LEGAL_REPRESENTATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_CA_LEGAL_REPRESENTATIVE})
+var sExtraParamName_CA_LEGAL_REPRESENTATIVE_CAPACITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CA_LEGAL_REPRESENTATIVE_CAPACITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_CA_LEGAL_REPRESENTATIVE_CAPACITY})
+var sExtraParamName_ES_IDENTIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ES_IDENTIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_ES_IDENTIFICATION})
+var sExtraParamName_ES_IDENTIFICATION_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ES_IDENTIFICATION_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_ES_IDENTIFICATION_TYPE})
+var sExtraParamName_ES_LEGAL_FORM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ES_LEGAL_FORM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_ES_LEGAL_FORM})
+var sExtraParamName_FI_BUSINESS_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FI_BUSINESS_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_FI_BUSINESS_NUMBER})
+var sExtraParamName_ONWER_FI_ID_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONWER_FI_ID_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_ONWER_FI_ID_NUMBER})
+var sExtraParamName_FI_NATIONALITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FI_NATIONALITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_FI_NATIONALITY})
+var sExtraParamName_FI_ORGANIZATION_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FI_ORGANIZATION_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_FI_ORGANIZATION_TYPE})
+var sExtraParamName_IT_NATIONALITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IT_NATIONALITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_IT_NATIONALITY})
+var sExtraParamName_IT_PIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IT_PIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_IT_PIN})
+var sExtraParamName_IT_REGISTRANT_ENTITY_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IT_REGISTRANT_ENTITY_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_IT_REGISTRANT_ENTITY_TYPE})
+var sExtraParamName_RU_PASSPORT_DATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RU_PASSPORT_DATA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_RU_PASSPORT_DATA})
+var sExtraParamName_SE_ID_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SE_ID_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_SE_ID_NUMBER})
+var sExtraParamName_SG_ID_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SG_ID_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_SG_ID_NUMBER})
+var sExtraParamName_VAT_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VAT_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_VAT_NUMBER})
+var sExtraParamName_UK_CONTACT_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UK_CONTACT_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_UK_CONTACT_TYPE})
+var sExtraParamName_UK_COMPANY_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UK_COMPANY_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_UK_COMPANY_NUMBER})
+var sExtraParamName_EU_COUNTRY_OF_CITIZENSHIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EU_COUNTRY_OF_CITIZENSHIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_EU_COUNTRY_OF_CITIZENSHIP})
+var sExtraParamName_AU_PRIORITY_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AU_PRIORITY_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_AU_PRIORITY_TOKEN})
+var sExtraParamName_AU_ELIGIBILITY_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AU_ELIGIBILITY_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_AU_ELIGIBILITY_TYPE})
+var sExtraParamName_AU_POLICY_REASON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AU_POLICY_REASON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_AU_POLICY_REASON})
+var sExtraParamName_AU_REGISTRANT_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AU_REGISTRANT_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExtraParamName_AU_REGISTRANT_NAME})
+var sFilterCondition_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iListDomainsAttributeName, Members: &mListDomainsAttributeName, Type: smithy.ShapeTypeEnum, Ext: &eFilterCondition_Name})
+var sFilterCondition_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &iOperator, Members: &mOperator, Type: smithy.ShapeTypeEnum, Ext: &eFilterCondition_Operator})
+var sFilterCondition_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList, Ext: &eFilterCondition_Values})
+var s_FilterConditions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilterCondition, Members: &mFilterCondition, Type: smithy.ShapeTypeStructure, Ext: &e_FilterConditions_member})
+var s_GlueIpList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GlueIp, Type: smithy.ShapeTypeString, Ext: &e_GlueIpList_member})
+var sInvalidInput_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidInput_message})
+var sListDomainsAttributeName_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListDomainsAttributeName_DomainName})
+var sListDomainsAttributeName_Expiry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expiry", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListDomainsAttributeName_Expiry})
+var sListOperationsSortAttributeName_SubmittedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubmittedDate", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListOperationsSortAttributeName_SubmittedDate})
+var sNameserver_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_HostName, Type: smithy.ShapeTypeString, Ext: &eNameserver_Name})
+var sNameserver_GlueIps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlueIps", ID: &i_GlueIpList, Members: &m_GlueIpList, Type: smithy.ShapeTypeList, Ext: &eNameserver_GlueIps})
+var s_NameserverList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNameserver, Members: &mNameserver, Type: smithy.ShapeTypeStructure, Ext: &e_NameserverList_member})
+var sOperationLimitExceeded_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eOperationLimitExceeded_message})
+var sOperationStatus_SUBMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationStatus_SUBMITTED})
+var sOperationStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationStatus_IN_PROGRESS})
+var sOperationStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationStatus_ERROR})
+var sOperationStatus_SUCCESSFUL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESSFUL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationStatus_SUCCESSFUL})
+var sOperationStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationStatus_FAILED})
+var s_OperationStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOperationStatus, Members: &mOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &e_OperationStatusList_member})
+var sOperationSummary_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eOperationSummary_OperationId})
+var sOperationSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOperationStatus, Members: &mOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &eOperationSummary_Status})
+var sOperationSummary_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iOperationType, Members: &mOperationType, Type: smithy.ShapeTypeEnum, Ext: &eOperationSummary_Type})
+var sOperationSummary_SubmittedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubmittedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eOperationSummary_SubmittedDate})
+var sOperationSummary_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eOperationSummary_DomainName})
+var sOperationSummary_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eOperationSummary_Message})
+var sOperationSummary_StatusFlag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusFlag", ID: &iStatusFlag, Members: &mStatusFlag, Type: smithy.ShapeTypeEnum, Ext: &eOperationSummary_StatusFlag})
+var sOperationSummary_LastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eOperationSummary_LastUpdatedDate})
+var s_OperationSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOperationSummary, Members: &mOperationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_OperationSummaryList_member})
+var sOperationType_REGISTER_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGISTER_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_REGISTER_DOMAIN})
+var sOperationType_DELETE_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_DELETE_DOMAIN})
+var sOperationType_TRANSFER_IN_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSFER_IN_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_TRANSFER_IN_DOMAIN})
+var sOperationType_UPDATE_DOMAIN_CONTACT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_DOMAIN_CONTACT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_UPDATE_DOMAIN_CONTACT})
+var sOperationType_UPDATE_NAMESERVER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_NAMESERVER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_UPDATE_NAMESERVER})
+var sOperationType_CHANGE_PRIVACY_PROTECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHANGE_PRIVACY_PROTECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_CHANGE_PRIVACY_PROTECTION})
+var sOperationType_DOMAIN_LOCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_LOCK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_DOMAIN_LOCK})
+var sOperationType_ENABLE_AUTORENEW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLE_AUTORENEW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_ENABLE_AUTORENEW})
+var sOperationType_DISABLE_AUTORENEW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLE_AUTORENEW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_DISABLE_AUTORENEW})
+var sOperationType_ADD_DNSSEC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADD_DNSSEC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_ADD_DNSSEC})
+var sOperationType_REMOVE_DNSSEC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REMOVE_DNSSEC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_REMOVE_DNSSEC})
+var sOperationType_EXPIRE_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRE_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_EXPIRE_DOMAIN})
+var sOperationType_TRANSFER_OUT_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSFER_OUT_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_TRANSFER_OUT_DOMAIN})
+var sOperationType_CHANGE_DOMAIN_OWNER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHANGE_DOMAIN_OWNER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_CHANGE_DOMAIN_OWNER})
+var sOperationType_RENEW_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RENEW_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_RENEW_DOMAIN})
+var sOperationType_PUSH_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUSH_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_PUSH_DOMAIN})
+var sOperationType_INTERNAL_TRANSFER_OUT_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_TRANSFER_OUT_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_INTERNAL_TRANSFER_OUT_DOMAIN})
+var sOperationType_INTERNAL_TRANSFER_IN_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_TRANSFER_IN_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_INTERNAL_TRANSFER_IN_DOMAIN})
+var sOperationType_RELEASE_TO_GANDI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RELEASE_TO_GANDI", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_RELEASE_TO_GANDI})
+var sOperationType_TRANSFER_ON_RENEW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSFER_ON_RENEW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_TRANSFER_ON_RENEW})
+var sOperationType_RESTORE_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESTORE_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperationType_RESTORE_DOMAIN})
+var s_OperationTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOperationType, Members: &mOperationType, Type: smithy.ShapeTypeEnum, Ext: &e_OperationTypeList_member})
+var sOperator_LE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperator_LE})
+var sOperator_GE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperator_GE})
+var sOperator_BEGINS_WITH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEGINS_WITH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOperator_BEGINS_WITH})
+var sPriceType_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePriceType_STANDARD})
+var sPriceType_REGISTRY_PREMIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGISTRY_PREMIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePriceType_REGISTRY_PREMIUM})
+var sPriceWithCurrency_Price = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Price", ID: &i_Price, Type: smithy.ShapeTypeDouble, Ext: &ePriceWithCurrency_Price})
+var sPriceWithCurrency_Currency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Currency", ID: &i_Currency, Type: smithy.ShapeTypeString, Ext: &ePriceWithCurrency_Currency})
+var sPriceWithCurrency_PriceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PriceType", ID: &iPriceType, Members: &mPriceType, Type: smithy.ShapeTypeEnum, Ext: &ePriceWithCurrency_PriceType})
+var sReachabilityStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReachabilityStatus_PENDING})
+var sReachabilityStatus_DONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReachabilityStatus_DONE})
+var sReachabilityStatus_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReachabilityStatus_EXPIRED})
+var sSortCondition_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iListDomainsAttributeName, Members: &mListDomainsAttributeName, Type: smithy.ShapeTypeEnum, Ext: &eSortCondition_Name})
+var sSortCondition_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &eSortCondition_SortOrder})
+var sSortOrder_ASC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortOrder_ASC})
+var sSortOrder_DESC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortOrder_DESC})
+var sStatusFlag_PENDING_ACCEPTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_ACCEPTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatusFlag_PENDING_ACCEPTANCE})
+var sStatusFlag_PENDING_CUSTOMER_ACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_CUSTOMER_ACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatusFlag_PENDING_CUSTOMER_ACTION})
+var sStatusFlag_PENDING_AUTHORIZATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_AUTHORIZATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatusFlag_PENDING_AUTHORIZATION})
+var sStatusFlag_PENDING_PAYMENT_VERIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_PAYMENT_VERIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatusFlag_PENDING_PAYMENT_VERIFICATION})
+var sStatusFlag_PENDING_SUPPORT_CASE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_SUPPORT_CASE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatusFlag_PENDING_SUPPORT_CASE})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var sTLDInMaintenance_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eTLDInMaintenance_message})
+var sTLDInMaintenance_tld = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tld", ID: &i_TldName, Type: smithy.ShapeTypeString, Ext: &eTLDInMaintenance_tld})
+var sTLDRulesViolation_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eTLDRulesViolation_message})
+var sTransferable_TRANSFERABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSFERABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTransferable_TRANSFERABLE})
+var sTransferable_UNTRANSFERABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNTRANSFERABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTransferable_UNTRANSFERABLE})
+var sTransferable_DONT_KNOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DONT_KNOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTransferable_DONT_KNOW})
+var sTransferable_DOMAIN_IN_OWN_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_IN_OWN_ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTransferable_DOMAIN_IN_OWN_ACCOUNT})
+var sTransferable_DOMAIN_IN_ANOTHER_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_IN_ANOTHER_ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTransferable_DOMAIN_IN_ANOTHER_ACCOUNT})
+var sTransferable_PREMIUM_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PREMIUM_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTransferable_PREMIUM_DOMAIN})
+var sTransferable_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTransferable_PENDING})
+var sUnsupportedTLD_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eUnsupportedTLD_message})
+var s_Values_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Value, Type: smithy.ShapeTypeString, Ext: &e_Values_member})
+var sAcceptDomainTransferFromAnotherAwsAccountRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eAcceptDomainTransferFromAnotherAwsAccountRequest_DomainName})
+var sAcceptDomainTransferFromAnotherAwsAccountRequest_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_Password, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eAcceptDomainTransferFromAnotherAwsAccountRequest_Password})
+var sAcceptDomainTransferFromAnotherAwsAccountResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eAcceptDomainTransferFromAnotherAwsAccountResponse_OperationId})
+var sAssociateDelegationSignerToDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eAssociateDelegationSignerToDomainRequest_DomainName})
+var sAssociateDelegationSignerToDomainRequest_SigningAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningAttributes", ID: &iDnssecSigningAttributes, Members: &mDnssecSigningAttributes, Type: smithy.ShapeTypeStructure, Ext: &eAssociateDelegationSignerToDomainRequest_SigningAttributes})
+var sAssociateDelegationSignerToDomainResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eAssociateDelegationSignerToDomainResponse_OperationId})
+var sCancelDomainTransferToAnotherAwsAccountRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eCancelDomainTransferToAnotherAwsAccountRequest_DomainName})
+var sCancelDomainTransferToAnotherAwsAccountResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eCancelDomainTransferToAnotherAwsAccountResponse_OperationId})
+var sCheckDomainAvailabilityRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eCheckDomainAvailabilityRequest_DomainName})
+var sCheckDomainAvailabilityRequest_IdnLangCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdnLangCode", ID: &i_LangCode, Type: smithy.ShapeTypeString, Ext: &eCheckDomainAvailabilityRequest_IdnLangCode})
+var sCheckDomainAvailabilityResponse_Availability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Availability", ID: &iDomainAvailability, Members: &mDomainAvailability, Type: smithy.ShapeTypeEnum, Ext: &eCheckDomainAvailabilityResponse_Availability})
+var sCheckDomainAvailabilityResponse_Price = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Price", ID: &iPriceWithCurrency, Members: &mPriceWithCurrency, Type: smithy.ShapeTypeStructure, Ext: &eCheckDomainAvailabilityResponse_Price})
+var sCheckDomainTransferabilityRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eCheckDomainTransferabilityRequest_DomainName})
+var sCheckDomainTransferabilityRequest_AuthCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthCode", ID: &i_DomainAuthCode, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eCheckDomainTransferabilityRequest_AuthCode})
+var sCheckDomainTransferabilityResponse_Transferability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Transferability", ID: &iDomainTransferability, Members: &mDomainTransferability, Type: smithy.ShapeTypeStructure, Ext: &eCheckDomainTransferabilityResponse_Transferability})
+var sCheckDomainTransferabilityResponse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eCheckDomainTransferabilityResponse_Message})
+var sCheckDomainTransferabilityResponse_Price = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Price", ID: &iPriceWithCurrency, Members: &mPriceWithCurrency, Type: smithy.ShapeTypeStructure, Ext: &eCheckDomainTransferabilityResponse_Price})
+var sDeleteDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDeleteDomainRequest_DomainName})
+var sDeleteDomainResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eDeleteDomainResponse_OperationId})
+var sDeleteTagsForDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDeleteTagsForDomainRequest_DomainName})
+var sDeleteTagsForDomainRequest_TagsToDelete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagsToDelete", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eDeleteTagsForDomainRequest_TagsToDelete})
+var sDisableDomainAutoRenewRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDisableDomainAutoRenewRequest_DomainName})
+var sDisableDomainTransferLockRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDisableDomainTransferLockRequest_DomainName})
+var sDisableDomainTransferLockResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eDisableDomainTransferLockResponse_OperationId})
+var sDisassociateDelegationSignerFromDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eDisassociateDelegationSignerFromDomainRequest_DomainName})
+var sDisassociateDelegationSignerFromDomainRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDisassociateDelegationSignerFromDomainRequest_Id})
+var sDisassociateDelegationSignerFromDomainResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eDisassociateDelegationSignerFromDomainResponse_OperationId})
+var sEnableDomainAutoRenewRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eEnableDomainAutoRenewRequest_DomainName})
+var sEnableDomainTransferLockRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eEnableDomainTransferLockRequest_DomainName})
+var sEnableDomainTransferLockResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eEnableDomainTransferLockResponse_OperationId})
+var sGetContactReachabilityStatusRequest_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eGetContactReachabilityStatusRequest_domainName})
+var sGetContactReachabilityStatusResponse_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eGetContactReachabilityStatusResponse_domainName})
+var sGetContactReachabilityStatusResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iReachabilityStatus, Members: &mReachabilityStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetContactReachabilityStatusResponse_status})
+var sGetDomainDetailRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eGetDomainDetailRequest_DomainName})
+var sGetDomainDetailResponse_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eGetDomainDetailResponse_DomainName})
+var sGetDomainDetailResponse_Nameservers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Nameservers", ID: &i_NameserverList, Members: &m_NameserverList, Type: smithy.ShapeTypeList, Ext: &eGetDomainDetailResponse_Nameservers})
+var sGetDomainDetailResponse_AutoRenew = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoRenew", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eGetDomainDetailResponse_AutoRenew})
+var sGetDomainDetailResponse_AdminContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eGetDomainDetailResponse_AdminContact})
+var sGetDomainDetailResponse_RegistrantContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistrantContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eGetDomainDetailResponse_RegistrantContact})
+var sGetDomainDetailResponse_TechContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TechContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eGetDomainDetailResponse_TechContact})
+var sGetDomainDetailResponse_AdminPrivacy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminPrivacy", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eGetDomainDetailResponse_AdminPrivacy})
+var sGetDomainDetailResponse_RegistrantPrivacy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistrantPrivacy", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eGetDomainDetailResponse_RegistrantPrivacy})
+var sGetDomainDetailResponse_TechPrivacy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TechPrivacy", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eGetDomainDetailResponse_TechPrivacy})
+var sGetDomainDetailResponse_RegistrarName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistrarName", ID: &i_RegistrarName, Type: smithy.ShapeTypeString, Ext: &eGetDomainDetailResponse_RegistrarName})
+var sGetDomainDetailResponse_WhoIsServer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhoIsServer", ID: &i_RegistrarWhoIsServer, Type: smithy.ShapeTypeString, Ext: &eGetDomainDetailResponse_WhoIsServer})
+var sGetDomainDetailResponse_RegistrarUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistrarUrl", ID: &i_RegistrarUrl, Type: smithy.ShapeTypeString, Ext: &eGetDomainDetailResponse_RegistrarUrl})
+var sGetDomainDetailResponse_AbuseContactEmail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AbuseContactEmail", ID: &i_Email, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eGetDomainDetailResponse_AbuseContactEmail})
+var sGetDomainDetailResponse_AbuseContactPhone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AbuseContactPhone", ID: &i_ContactNumber, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eGetDomainDetailResponse_AbuseContactPhone})
+var sGetDomainDetailResponse_RegistryDomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryDomainId", ID: &i_RegistryDomainId, Type: smithy.ShapeTypeString, Ext: &eGetDomainDetailResponse_RegistryDomainId})
+var sGetDomainDetailResponse_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetDomainDetailResponse_CreationDate})
+var sGetDomainDetailResponse_UpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetDomainDetailResponse_UpdatedDate})
+var sGetDomainDetailResponse_ExpirationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetDomainDetailResponse_ExpirationDate})
+var sGetDomainDetailResponse_Reseller = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reseller", ID: &i_Reseller, Type: smithy.ShapeTypeString, Ext: &eGetDomainDetailResponse_Reseller})
+var sGetDomainDetailResponse_DnsSec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsSec", ID: &i_DNSSec, Type: smithy.ShapeTypeString, Ext: &eGetDomainDetailResponse_DnsSec})
+var sGetDomainDetailResponse_StatusList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusList", ID: &i_DomainStatusList, Members: &m_DomainStatusList, Type: smithy.ShapeTypeList, Ext: &eGetDomainDetailResponse_StatusList})
+var sGetDomainDetailResponse_DnssecKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnssecKeys", ID: &i_DnssecKeyList, Members: &m_DnssecKeyList, Type: smithy.ShapeTypeList, Ext: &eGetDomainDetailResponse_DnssecKeys})
+var sGetDomainDetailResponse_BillingContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eGetDomainDetailResponse_BillingContact})
+var sGetDomainDetailResponse_BillingPrivacy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPrivacy", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eGetDomainDetailResponse_BillingPrivacy})
+var sGetDomainPricesRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eGetDomainPricesRequest_DomainName})
+var sGetDomainPricesResponse_DomainPrice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainPrice", ID: &iDomainPrice, Members: &mDomainPrice, Type: smithy.ShapeTypeStructure, Ext: &eGetDomainPricesResponse_DomainPrice})
+var sGetDomainSuggestionsRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eGetDomainSuggestionsRequest_DomainName})
+var sGetDomainSuggestionsRequest_SuggestionCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuggestionCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eGetDomainSuggestionsRequest_SuggestionCount})
+var sGetDomainSuggestionsRequest_OnlyAvailable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnlyAvailable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eGetDomainSuggestionsRequest_OnlyAvailable})
+var sGetDomainSuggestionsRequest_OnlyStandardPrices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnlyStandardPrices", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eGetDomainSuggestionsRequest_OnlyStandardPrices})
+var sGetDomainSuggestionsResponse_SuggestionsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuggestionsList", ID: &i_DomainSuggestionsList, Members: &m_DomainSuggestionsList, Type: smithy.ShapeTypeList, Ext: &eGetDomainSuggestionsResponse_SuggestionsList})
+var sGetOperationDetailRequest_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eGetOperationDetailRequest_OperationId})
+var sGetOperationDetailResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eGetOperationDetailResponse_OperationId})
+var sGetOperationDetailResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOperationStatus, Members: &mOperationStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetOperationDetailResponse_Status})
+var sGetOperationDetailResponse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eGetOperationDetailResponse_Message})
+var sGetOperationDetailResponse_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eGetOperationDetailResponse_DomainName})
+var sGetOperationDetailResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iOperationType, Members: &mOperationType, Type: smithy.ShapeTypeEnum, Ext: &eGetOperationDetailResponse_Type})
+var sGetOperationDetailResponse_SubmittedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubmittedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetOperationDetailResponse_SubmittedDate})
+var sGetOperationDetailResponse_LastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetOperationDetailResponse_LastUpdatedDate})
+var sGetOperationDetailResponse_StatusFlag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusFlag", ID: &iStatusFlag, Members: &mStatusFlag, Type: smithy.ShapeTypeEnum, Ext: &eGetOperationDetailResponse_StatusFlag})
+var sListDomainsRequest_FilterConditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterConditions", ID: &i_FilterConditions, Members: &m_FilterConditions, Type: smithy.ShapeTypeList, Ext: &eListDomainsRequest_FilterConditions})
+var sListDomainsRequest_SortCondition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortCondition", ID: &iSortCondition, Members: &mSortCondition, Type: smithy.ShapeTypeStructure, Ext: &eListDomainsRequest_SortCondition})
+var sListDomainsRequest_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_PageMarker, Type: smithy.ShapeTypeString, Ext: &eListDomainsRequest_Marker})
+var sListDomainsRequest_MaxItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxItems", ID: &i_PageMaxItems, Type: smithy.ShapeTypeInteger, Ext: &eListDomainsRequest_MaxItems})
+var sListDomainsResponse_Domains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domains", ID: &i_DomainSummaryList, Members: &m_DomainSummaryList, Type: smithy.ShapeTypeList, Ext: &eListDomainsResponse_Domains})
+var sListDomainsResponse_NextPageMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextPageMarker", ID: &i_PageMarker, Type: smithy.ShapeTypeString, Ext: &eListDomainsResponse_NextPageMarker})
+var sListOperationsRequest_SubmittedSince = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubmittedSince", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListOperationsRequest_SubmittedSince})
+var sListOperationsRequest_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_PageMarker, Type: smithy.ShapeTypeString, Ext: &eListOperationsRequest_Marker})
+var sListOperationsRequest_MaxItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxItems", ID: &i_PageMaxItems, Type: smithy.ShapeTypeInteger, Ext: &eListOperationsRequest_MaxItems})
+var sListOperationsRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_OperationStatusList, Members: &m_OperationStatusList, Type: smithy.ShapeTypeList, Ext: &eListOperationsRequest_Status})
+var sListOperationsRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_OperationTypeList, Members: &m_OperationTypeList, Type: smithy.ShapeTypeList, Ext: &eListOperationsRequest_Type})
+var sListOperationsRequest_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iListOperationsSortAttributeName, Members: &mListOperationsSortAttributeName, Type: smithy.ShapeTypeEnum, Ext: &eListOperationsRequest_SortBy})
+var sListOperationsRequest_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &eListOperationsRequest_SortOrder})
+var sListOperationsResponse_Operations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operations", ID: &i_OperationSummaryList, Members: &m_OperationSummaryList, Type: smithy.ShapeTypeList, Ext: &eListOperationsResponse_Operations})
+var sListOperationsResponse_NextPageMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextPageMarker", ID: &i_PageMarker, Type: smithy.ShapeTypeString, Ext: &eListOperationsResponse_NextPageMarker})
+var sListPricesRequest_Tld = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tld", ID: &i_TldName, Type: smithy.ShapeTypeString, Ext: &eListPricesRequest_Tld})
+var sListPricesRequest_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_PageMarker, Type: smithy.ShapeTypeString, Ext: &eListPricesRequest_Marker})
+var sListPricesRequest_MaxItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxItems", ID: &i_ListPricesPageMaxItems, Type: smithy.ShapeTypeInteger, Ext: &eListPricesRequest_MaxItems})
+var sListPricesResponse_Prices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prices", ID: &i_DomainPriceList, Members: &m_DomainPriceList, Type: smithy.ShapeTypeList, Ext: &eListPricesResponse_Prices})
+var sListPricesResponse_NextPageMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextPageMarker", ID: &i_PageMarker, Type: smithy.ShapeTypeString, Ext: &eListPricesResponse_NextPageMarker})
+var sListTagsForDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eListTagsForDomainRequest_DomainName})
+var sListTagsForDomainResponse_TagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForDomainResponse_TagList})
+var sPushDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &ePushDomainRequest_DomainName})
+var sPushDomainRequest_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_Label, Type: smithy.ShapeTypeString, Ext: &ePushDomainRequest_Target})
+var sRegisterDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eRegisterDomainRequest_DomainName})
+var sRegisterDomainRequest_IdnLangCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdnLangCode", ID: &i_LangCode, Type: smithy.ShapeTypeString, Ext: &eRegisterDomainRequest_IdnLangCode})
+var sRegisterDomainRequest_DurationInYears = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInYears", ID: &i_DurationInYears, Type: smithy.ShapeTypeInteger, Ext: &eRegisterDomainRequest_DurationInYears})
+var sRegisterDomainRequest_AutoRenew = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoRenew", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eRegisterDomainRequest_AutoRenew})
+var sRegisterDomainRequest_AdminContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eRegisterDomainRequest_AdminContact})
+var sRegisterDomainRequest_RegistrantContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistrantContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eRegisterDomainRequest_RegistrantContact})
+var sRegisterDomainRequest_TechContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TechContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eRegisterDomainRequest_TechContact})
+var sRegisterDomainRequest_PrivacyProtectAdminContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivacyProtectAdminContact", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eRegisterDomainRequest_PrivacyProtectAdminContact})
+var sRegisterDomainRequest_PrivacyProtectRegistrantContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivacyProtectRegistrantContact", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eRegisterDomainRequest_PrivacyProtectRegistrantContact})
+var sRegisterDomainRequest_PrivacyProtectTechContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivacyProtectTechContact", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eRegisterDomainRequest_PrivacyProtectTechContact})
+var sRegisterDomainRequest_BillingContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eRegisterDomainRequest_BillingContact})
+var sRegisterDomainRequest_PrivacyProtectBillingContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivacyProtectBillingContact", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eRegisterDomainRequest_PrivacyProtectBillingContact})
+var sRegisterDomainRequest_Consent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Consent", ID: &iConsent, Members: &mConsent, Type: smithy.ShapeTypeStructure, Ext: &eRegisterDomainRequest_Consent})
+var sRegisterDomainResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eRegisterDomainResponse_OperationId})
+var sRejectDomainTransferFromAnotherAwsAccountRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eRejectDomainTransferFromAnotherAwsAccountRequest_DomainName})
+var sRejectDomainTransferFromAnotherAwsAccountResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eRejectDomainTransferFromAnotherAwsAccountResponse_OperationId})
+var sRenewDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eRenewDomainRequest_DomainName})
+var sRenewDomainRequest_DurationInYears = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInYears", ID: &i_DurationInYears, Type: smithy.ShapeTypeInteger, Ext: &eRenewDomainRequest_DurationInYears})
+var sRenewDomainRequest_CurrentExpiryYear = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentExpiryYear", ID: &i_CurrentExpiryYear, Type: smithy.ShapeTypeInteger, Ext: &eRenewDomainRequest_CurrentExpiryYear})
+var sRenewDomainRequest_Consent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Consent", ID: &iConsent, Members: &mConsent, Type: smithy.ShapeTypeStructure, Ext: &eRenewDomainRequest_Consent})
+var sRenewDomainResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eRenewDomainResponse_OperationId})
+var sResendContactReachabilityEmailRequest_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eResendContactReachabilityEmailRequest_domainName})
+var sResendContactReachabilityEmailResponse_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eResendContactReachabilityEmailResponse_domainName})
+var sResendContactReachabilityEmailResponse_emailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emailAddress", ID: &i_Email, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eResendContactReachabilityEmailResponse_emailAddress})
+var sResendContactReachabilityEmailResponse_isAlreadyVerified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isAlreadyVerified", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eResendContactReachabilityEmailResponse_isAlreadyVerified})
+var sResendOperationAuthorizationRequest_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eResendOperationAuthorizationRequest_OperationId})
+var sRetrieveDomainAuthCodeRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eRetrieveDomainAuthCodeRequest_DomainName})
+var sRetrieveDomainAuthCodeResponse_AuthCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthCode", ID: &i_DomainAuthCode, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eRetrieveDomainAuthCodeResponse_AuthCode})
+var sTransferDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eTransferDomainRequest_DomainName})
+var sTransferDomainRequest_IdnLangCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdnLangCode", ID: &i_LangCode, Type: smithy.ShapeTypeString, Ext: &eTransferDomainRequest_IdnLangCode})
+var sTransferDomainRequest_DurationInYears = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInYears", ID: &i_DurationInYears, Type: smithy.ShapeTypeInteger, Ext: &eTransferDomainRequest_DurationInYears})
+var sTransferDomainRequest_Nameservers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Nameservers", ID: &i_NameserverList, Members: &m_NameserverList, Type: smithy.ShapeTypeList, Ext: &eTransferDomainRequest_Nameservers})
+var sTransferDomainRequest_AuthCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthCode", ID: &i_DomainAuthCode, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eTransferDomainRequest_AuthCode})
+var sTransferDomainRequest_AutoRenew = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoRenew", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eTransferDomainRequest_AutoRenew})
+var sTransferDomainRequest_AdminContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eTransferDomainRequest_AdminContact})
+var sTransferDomainRequest_RegistrantContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistrantContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eTransferDomainRequest_RegistrantContact})
+var sTransferDomainRequest_TechContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TechContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eTransferDomainRequest_TechContact})
+var sTransferDomainRequest_PrivacyProtectAdminContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivacyProtectAdminContact", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eTransferDomainRequest_PrivacyProtectAdminContact})
+var sTransferDomainRequest_PrivacyProtectRegistrantContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivacyProtectRegistrantContact", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eTransferDomainRequest_PrivacyProtectRegistrantContact})
+var sTransferDomainRequest_PrivacyProtectTechContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivacyProtectTechContact", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eTransferDomainRequest_PrivacyProtectTechContact})
+var sTransferDomainRequest_BillingContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eTransferDomainRequest_BillingContact})
+var sTransferDomainRequest_PrivacyProtectBillingContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivacyProtectBillingContact", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eTransferDomainRequest_PrivacyProtectBillingContact})
+var sTransferDomainRequest_Consent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Consent", ID: &iConsent, Members: &mConsent, Type: smithy.ShapeTypeStructure, Ext: &eTransferDomainRequest_Consent})
+var sTransferDomainResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eTransferDomainResponse_OperationId})
+var sTransferDomainToAnotherAwsAccountRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eTransferDomainToAnotherAwsAccountRequest_DomainName})
+var sTransferDomainToAnotherAwsAccountRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eTransferDomainToAnotherAwsAccountRequest_AccountId})
+var sTransferDomainToAnotherAwsAccountResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eTransferDomainToAnotherAwsAccountResponse_OperationId})
+var sTransferDomainToAnotherAwsAccountResponse_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_Password, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eTransferDomainToAnotherAwsAccountResponse_Password})
+var sUpdateDomainContactRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eUpdateDomainContactRequest_DomainName})
+var sUpdateDomainContactRequest_AdminContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDomainContactRequest_AdminContact})
+var sUpdateDomainContactRequest_RegistrantContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistrantContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDomainContactRequest_RegistrantContact})
+var sUpdateDomainContactRequest_TechContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TechContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDomainContactRequest_TechContact})
+var sUpdateDomainContactRequest_Consent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Consent", ID: &iConsent, Members: &mConsent, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDomainContactRequest_Consent})
+var sUpdateDomainContactRequest_BillingContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingContact", ID: &iContactDetail, Members: &mContactDetail, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDomainContactRequest_BillingContact})
+var sUpdateDomainContactResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eUpdateDomainContactResponse_OperationId})
+var sUpdateDomainContactPrivacyRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eUpdateDomainContactPrivacyRequest_DomainName})
+var sUpdateDomainContactPrivacyRequest_AdminPrivacy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminPrivacy", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateDomainContactPrivacyRequest_AdminPrivacy})
+var sUpdateDomainContactPrivacyRequest_RegistrantPrivacy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistrantPrivacy", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateDomainContactPrivacyRequest_RegistrantPrivacy})
+var sUpdateDomainContactPrivacyRequest_TechPrivacy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TechPrivacy", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateDomainContactPrivacyRequest_TechPrivacy})
+var sUpdateDomainContactPrivacyRequest_BillingPrivacy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPrivacy", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateDomainContactPrivacyRequest_BillingPrivacy})
+var sUpdateDomainContactPrivacyResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eUpdateDomainContactPrivacyResponse_OperationId})
+var sUpdateDomainNameserversRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eUpdateDomainNameserversRequest_DomainName})
+var sUpdateDomainNameserversRequest_FIAuthKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIAuthKey", ID: &i_FIAuthKey, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &eUpdateDomainNameserversRequest_FIAuthKey})
+var sUpdateDomainNameserversRequest_Nameservers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Nameservers", ID: &i_NameserverList, Members: &m_NameserverList, Type: smithy.ShapeTypeList, Ext: &eUpdateDomainNameserversRequest_Nameservers})
+var sUpdateDomainNameserversResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eUpdateDomainNameserversResponse_OperationId})
+var sUpdateTagsForDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString, Ext: &eUpdateTagsForDomainRequest_DomainName})
+var sUpdateTagsForDomainRequest_TagsToUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagsToUpdate", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eUpdateTagsForDomainRequest_TagsToUpdate})
+var sViewBillingRequest_Start = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Start", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eViewBillingRequest_Start})
+var sViewBillingRequest_End = smithy.NewStaticSchema(smithy.StaticSchema{Member: "End", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eViewBillingRequest_End})
+var sViewBillingRequest_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_PageMarker, Type: smithy.ShapeTypeString, Ext: &eViewBillingRequest_Marker})
+var sViewBillingRequest_MaxItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxItems", ID: &i_PageMaxItems, Type: smithy.ShapeTypeInteger, Ext: &eViewBillingRequest_MaxItems})
+var sViewBillingResponse_NextPageMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextPageMarker", ID: &i_PageMarker, Type: smithy.ShapeTypeString, Ext: &eViewBillingResponse_NextPageMarker})
+var sViewBillingResponse_BillingRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingRecords", ID: &i_BillingRecords, Members: &m_BillingRecords, Type: smithy.ShapeTypeList, Ext: &eViewBillingResponse_BillingRecords})
 
 var AcceptDomainTransferFromAnotherAwsAccount = &sAcceptDomainTransferFromAnotherAwsAccount
 

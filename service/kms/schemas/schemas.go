@@ -7,9 +7,1005 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [997]smithy.SchemaExtensions
+var (
+	eCancelKeyDeletion                                                      smithy.SchemaExtensions
+	eConnectCustomKeyStore                                                  smithy.SchemaExtensions
+	eCreateAlias                                                            smithy.SchemaExtensions
+	eCreateCustomKeyStore                                                   smithy.SchemaExtensions
+	eCreateGrant                                                            smithy.SchemaExtensions
+	eCreateKey                                                              smithy.SchemaExtensions
+	eDecapsulate                                                            smithy.SchemaExtensions
+	eDecrypt                                                                smithy.SchemaExtensions
+	eDeleteAlias                                                            smithy.SchemaExtensions
+	eDeleteCustomKeyStore                                                   smithy.SchemaExtensions
+	eDeleteImportedKeyMaterial                                              smithy.SchemaExtensions
+	eDeriveSharedSecret                                                     smithy.SchemaExtensions
+	eDescribeCustomKeyStores                                                smithy.SchemaExtensions
+	eDescribeKey                                                            smithy.SchemaExtensions
+	eDisableKey                                                             smithy.SchemaExtensions
+	eDisableKeyRotation                                                     smithy.SchemaExtensions
+	eDisconnectCustomKeyStore                                               smithy.SchemaExtensions
+	eEnableKey                                                              smithy.SchemaExtensions
+	eEnableKeyRotation                                                      smithy.SchemaExtensions
+	eEncapsulate                                                            smithy.SchemaExtensions
+	eEncrypt                                                                smithy.SchemaExtensions
+	eGenerateDataKey                                                        smithy.SchemaExtensions
+	eGenerateDataKeyPair                                                    smithy.SchemaExtensions
+	eGenerateDataKeyPairWithoutPlaintext                                    smithy.SchemaExtensions
+	eGenerateDataKeyWithoutPlaintext                                        smithy.SchemaExtensions
+	eGenerateMac                                                            smithy.SchemaExtensions
+	eGenerateRandom                                                         smithy.SchemaExtensions
+	eGetKeyLastUsage                                                        smithy.SchemaExtensions
+	eGetKeyPolicy                                                           smithy.SchemaExtensions
+	eGetKeyRotationStatus                                                   smithy.SchemaExtensions
+	eGetParametersForImport                                                 smithy.SchemaExtensions
+	eGetPublicKey                                                           smithy.SchemaExtensions
+	eImportKeyMaterial                                                      smithy.SchemaExtensions
+	eListAliases                                                            smithy.SchemaExtensions
+	eListGrants                                                             smithy.SchemaExtensions
+	eListKeyPolicies                                                        smithy.SchemaExtensions
+	eListKeyRotations                                                       smithy.SchemaExtensions
+	eListKeys                                                               smithy.SchemaExtensions
+	eListResourceTags                                                       smithy.SchemaExtensions
+	eListRetirableGrants                                                    smithy.SchemaExtensions
+	ePutKeyPolicy                                                           smithy.SchemaExtensions
+	eReEncrypt                                                              smithy.SchemaExtensions
+	eReplicateKey                                                           smithy.SchemaExtensions
+	eRetireGrant                                                            smithy.SchemaExtensions
+	eRevokeGrant                                                            smithy.SchemaExtensions
+	eRotateKeyOnDemand                                                      smithy.SchemaExtensions
+	eScheduleKeyDeletion                                                    smithy.SchemaExtensions
+	eSign                                                                   smithy.SchemaExtensions
+	eTagResource                                                            smithy.SchemaExtensions
+	eUntagResource                                                          smithy.SchemaExtensions
+	eUpdateAlias                                                            smithy.SchemaExtensions
+	eUpdateCustomKeyStore                                                   smithy.SchemaExtensions
+	eUpdateKeyDescription                                                   smithy.SchemaExtensions
+	eUpdatePrimaryRegion                                                    smithy.SchemaExtensions
+	eVerify                                                                 smithy.SchemaExtensions
+	eVerifyMac                                                              smithy.SchemaExtensions
+	e_TrentService                                                          smithy.SchemaExtensions
+	e_AccountIdType                                                         smithy.SchemaExtensions
+	eAlgorithmSpec                                                          smithy.SchemaExtensions
+	eAlgorithmSpec_RSAES_PKCS1_V1_5                                         smithy.SchemaExtensions
+	eAlgorithmSpec_RSAES_OAEP_SHA_1                                         smithy.SchemaExtensions
+	eAlgorithmSpec_RSAES_OAEP_SHA_256                                       smithy.SchemaExtensions
+	eAlgorithmSpec_RSA_AES_KEY_WRAP_SHA_1                                   smithy.SchemaExtensions
+	eAlgorithmSpec_RSA_AES_KEY_WRAP_SHA_256                                 smithy.SchemaExtensions
+	eAlgorithmSpec_SM2PKE                                                   smithy.SchemaExtensions
+	e_AliasList                                                             smithy.SchemaExtensions
+	e_AliasList_member                                                      smithy.SchemaExtensions
+	eAliasListEntry                                                         smithy.SchemaExtensions
+	eAliasListEntry_AliasName                                               smithy.SchemaExtensions
+	eAliasListEntry_AliasArn                                                smithy.SchemaExtensions
+	eAliasListEntry_TargetKeyId                                             smithy.SchemaExtensions
+	eAliasListEntry_CreationDate                                            smithy.SchemaExtensions
+	eAliasListEntry_LastUpdatedDate                                         smithy.SchemaExtensions
+	e_AliasNameType                                                         smithy.SchemaExtensions
+	eAlreadyExistsException                                                 smithy.SchemaExtensions
+	eAlreadyExistsException_message                                         smithy.SchemaExtensions
+	e_ArnType                                                               smithy.SchemaExtensions
+	e_AttestationDocumentType                                               smithy.SchemaExtensions
+	e_AWSAccountIdType                                                      smithy.SchemaExtensions
+	e_BackingKeyIdResponseType                                              smithy.SchemaExtensions
+	e_BackingKeyIdType                                                      smithy.SchemaExtensions
+	e_BooleanType                                                           smithy.SchemaExtensions
+	e_CiphertextType                                                        smithy.SchemaExtensions
+	e_CloudHsmClusterIdType                                                 smithy.SchemaExtensions
+	eCloudHsmClusterInUseException                                          smithy.SchemaExtensions
+	eCloudHsmClusterInUseException_message                                  smithy.SchemaExtensions
+	eCloudHsmClusterInvalidConfigurationException                           smithy.SchemaExtensions
+	eCloudHsmClusterInvalidConfigurationException_message                   smithy.SchemaExtensions
+	eCloudHsmClusterNotActiveException                                      smithy.SchemaExtensions
+	eCloudHsmClusterNotActiveException_message                              smithy.SchemaExtensions
+	eCloudHsmClusterNotFoundException                                       smithy.SchemaExtensions
+	eCloudHsmClusterNotFoundException_message                               smithy.SchemaExtensions
+	eCloudHsmClusterNotRelatedException                                     smithy.SchemaExtensions
+	eCloudHsmClusterNotRelatedException_message                             smithy.SchemaExtensions
+	e_CloudTrailEventIdType                                                 smithy.SchemaExtensions
+	eConflictException                                                      smithy.SchemaExtensions
+	eConflictException_message                                              smithy.SchemaExtensions
+	eConnectionErrorCodeType                                                smithy.SchemaExtensions
+	eConnectionErrorCodeType_INVALID_CREDENTIALS                            smithy.SchemaExtensions
+	eConnectionErrorCodeType_CLUSTER_NOT_FOUND                              smithy.SchemaExtensions
+	eConnectionErrorCodeType_NETWORK_ERRORS                                 smithy.SchemaExtensions
+	eConnectionErrorCodeType_INTERNAL_ERROR                                 smithy.SchemaExtensions
+	eConnectionErrorCodeType_INSUFFICIENT_CLOUDHSM_HSMS                     smithy.SchemaExtensions
+	eConnectionErrorCodeType_USER_LOCKED_OUT                                smithy.SchemaExtensions
+	eConnectionErrorCodeType_USER_NOT_FOUND                                 smithy.SchemaExtensions
+	eConnectionErrorCodeType_USER_LOGGED_IN                                 smithy.SchemaExtensions
+	eConnectionErrorCodeType_SUBNET_NOT_FOUND                               smithy.SchemaExtensions
+	eConnectionErrorCodeType_INSUFFICIENT_FREE_ADDRESSES_IN_SUBNET          smithy.SchemaExtensions
+	eConnectionErrorCodeType_XKS_PROXY_ACCESS_DENIED                        smithy.SchemaExtensions
+	eConnectionErrorCodeType_XKS_PROXY_NOT_REACHABLE                        smithy.SchemaExtensions
+	eConnectionErrorCodeType_XKS_VPC_ENDPOINT_SERVICE_NOT_FOUND             smithy.SchemaExtensions
+	eConnectionErrorCodeType_XKS_PROXY_INVALID_RESPONSE                     smithy.SchemaExtensions
+	eConnectionErrorCodeType_XKS_PROXY_INVALID_CONFIGURATION                smithy.SchemaExtensions
+	eConnectionErrorCodeType_XKS_VPC_ENDPOINT_SERVICE_INVALID_CONFIGURATION smithy.SchemaExtensions
+	eConnectionErrorCodeType_XKS_PROXY_TIMED_OUT                            smithy.SchemaExtensions
+	eConnectionErrorCodeType_XKS_PROXY_INVALID_TLS_CONFIGURATION            smithy.SchemaExtensions
+	eConnectionStateType                                                    smithy.SchemaExtensions
+	eConnectionStateType_CONNECTED                                          smithy.SchemaExtensions
+	eConnectionStateType_CONNECTING                                         smithy.SchemaExtensions
+	eConnectionStateType_FAILED                                             smithy.SchemaExtensions
+	eConnectionStateType_DISCONNECTED                                       smithy.SchemaExtensions
+	eConnectionStateType_DISCONNECTING                                      smithy.SchemaExtensions
+	eCustomerMasterKeySpec                                                  smithy.SchemaExtensions
+	eCustomerMasterKeySpec_RSA_2048                                         smithy.SchemaExtensions
+	eCustomerMasterKeySpec_RSA_3072                                         smithy.SchemaExtensions
+	eCustomerMasterKeySpec_RSA_4096                                         smithy.SchemaExtensions
+	eCustomerMasterKeySpec_ECC_NIST_P256                                    smithy.SchemaExtensions
+	eCustomerMasterKeySpec_ECC_NIST_P384                                    smithy.SchemaExtensions
+	eCustomerMasterKeySpec_ECC_NIST_P521                                    smithy.SchemaExtensions
+	eCustomerMasterKeySpec_ECC_SECG_P256K1                                  smithy.SchemaExtensions
+	eCustomerMasterKeySpec_SYMMETRIC_DEFAULT                                smithy.SchemaExtensions
+	eCustomerMasterKeySpec_HMAC_224                                         smithy.SchemaExtensions
+	eCustomerMasterKeySpec_HMAC_256                                         smithy.SchemaExtensions
+	eCustomerMasterKeySpec_HMAC_384                                         smithy.SchemaExtensions
+	eCustomerMasterKeySpec_HMAC_512                                         smithy.SchemaExtensions
+	eCustomerMasterKeySpec_SM2                                              smithy.SchemaExtensions
+	eCustomKeyStoreHasCMKsException                                         smithy.SchemaExtensions
+	eCustomKeyStoreHasCMKsException_message                                 smithy.SchemaExtensions
+	e_CustomKeyStoreIdType                                                  smithy.SchemaExtensions
+	eCustomKeyStoreInvalidStateException                                    smithy.SchemaExtensions
+	eCustomKeyStoreInvalidStateException_message                            smithy.SchemaExtensions
+	eCustomKeyStoreNameInUseException                                       smithy.SchemaExtensions
+	eCustomKeyStoreNameInUseException_message                               smithy.SchemaExtensions
+	e_CustomKeyStoreNameType                                                smithy.SchemaExtensions
+	eCustomKeyStoreNotFoundException                                        smithy.SchemaExtensions
+	eCustomKeyStoreNotFoundException_message                                smithy.SchemaExtensions
+	e_CustomKeyStoresList                                                   smithy.SchemaExtensions
+	e_CustomKeyStoresList_member                                            smithy.SchemaExtensions
+	eCustomKeyStoresListEntry                                               smithy.SchemaExtensions
+	eCustomKeyStoresListEntry_CustomKeyStoreId                              smithy.SchemaExtensions
+	eCustomKeyStoresListEntry_CustomKeyStoreName                            smithy.SchemaExtensions
+	eCustomKeyStoresListEntry_CloudHsmClusterId                             smithy.SchemaExtensions
+	eCustomKeyStoresListEntry_TrustAnchorCertificate                        smithy.SchemaExtensions
+	eCustomKeyStoresListEntry_ConnectionState                               smithy.SchemaExtensions
+	eCustomKeyStoresListEntry_ConnectionErrorCode                           smithy.SchemaExtensions
+	eCustomKeyStoresListEntry_CreationDate                                  smithy.SchemaExtensions
+	eCustomKeyStoresListEntry_CustomKeyStoreType                            smithy.SchemaExtensions
+	eCustomKeyStoresListEntry_XksProxyConfiguration                         smithy.SchemaExtensions
+	eCustomKeyStoreType                                                     smithy.SchemaExtensions
+	eCustomKeyStoreType_AWS_CLOUDHSM                                        smithy.SchemaExtensions
+	eCustomKeyStoreType_EXTERNAL_KEY_STORE                                  smithy.SchemaExtensions
+	eDataKeyPairSpec                                                        smithy.SchemaExtensions
+	eDataKeyPairSpec_RSA_2048                                               smithy.SchemaExtensions
+	eDataKeyPairSpec_RSA_3072                                               smithy.SchemaExtensions
+	eDataKeyPairSpec_RSA_4096                                               smithy.SchemaExtensions
+	eDataKeyPairSpec_ECC_NIST_P256                                          smithy.SchemaExtensions
+	eDataKeyPairSpec_ECC_NIST_P384                                          smithy.SchemaExtensions
+	eDataKeyPairSpec_ECC_NIST_P521                                          smithy.SchemaExtensions
+	eDataKeyPairSpec_ECC_SECG_P256K1                                        smithy.SchemaExtensions
+	eDataKeyPairSpec_SM2                                                    smithy.SchemaExtensions
+	eDataKeyPairSpec_ECC_NIST_EDWARDS25519                                  smithy.SchemaExtensions
+	eDataKeyPairSpec_ML_KEM_512                                             smithy.SchemaExtensions
+	eDataKeyPairSpec_ML_KEM_768                                             smithy.SchemaExtensions
+	eDataKeyPairSpec_ML_KEM_1024                                            smithy.SchemaExtensions
+	eDataKeySpec                                                            smithy.SchemaExtensions
+	eDataKeySpec_AES_256                                                    smithy.SchemaExtensions
+	eDataKeySpec_AES_128                                                    smithy.SchemaExtensions
+	e_DateType                                                              smithy.SchemaExtensions
+	eDependencyTimeoutException                                             smithy.SchemaExtensions
+	eDependencyTimeoutException_message                                     smithy.SchemaExtensions
+	e_DescriptionType                                                       smithy.SchemaExtensions
+	eDisabledException                                                      smithy.SchemaExtensions
+	eDisabledException_message                                              smithy.SchemaExtensions
+	e_DryRunModifierList                                                    smithy.SchemaExtensions
+	e_DryRunModifierList_member                                             smithy.SchemaExtensions
+	eDryRunModifierType                                                     smithy.SchemaExtensions
+	eDryRunModifierType_IGNORE_CIPHERTEXT                                   smithy.SchemaExtensions
+	eDryRunOperationException                                               smithy.SchemaExtensions
+	eDryRunOperationException_message                                       smithy.SchemaExtensions
+	eEncapsulationAlgorithmSpec                                             smithy.SchemaExtensions
+	eEncapsulationAlgorithmSpec_ML_KEM                                      smithy.SchemaExtensions
+	e_EncapsulationAlgorithmSpecList                                        smithy.SchemaExtensions
+	e_EncapsulationAlgorithmSpecList_member                                 smithy.SchemaExtensions
+	eEncryptionAlgorithmSpec                                                smithy.SchemaExtensions
+	eEncryptionAlgorithmSpec_SYMMETRIC_DEFAULT                              smithy.SchemaExtensions
+	eEncryptionAlgorithmSpec_RSAES_OAEP_SHA_1                               smithy.SchemaExtensions
+	eEncryptionAlgorithmSpec_RSAES_OAEP_SHA_256                             smithy.SchemaExtensions
+	eEncryptionAlgorithmSpec_SM2PKE                                         smithy.SchemaExtensions
+	e_EncryptionAlgorithmSpecList                                           smithy.SchemaExtensions
+	e_EncryptionAlgorithmSpecList_member                                    smithy.SchemaExtensions
+	e_EncryptionContextKey                                                  smithy.SchemaExtensions
+	e_EncryptionContextType                                                 smithy.SchemaExtensions
+	e_EncryptionContextType_key                                             smithy.SchemaExtensions
+	e_EncryptionContextType_value                                           smithy.SchemaExtensions
+	e_EncryptionContextValue                                                smithy.SchemaExtensions
+	e_ErrorMessageType                                                      smithy.SchemaExtensions
+	eExpirationModelType                                                    smithy.SchemaExtensions
+	eExpirationModelType_KEY_MATERIAL_EXPIRES                               smithy.SchemaExtensions
+	eExpirationModelType_KEY_MATERIAL_DOES_NOT_EXPIRE                       smithy.SchemaExtensions
+	eExpiredImportTokenException                                            smithy.SchemaExtensions
+	eExpiredImportTokenException_message                                    smithy.SchemaExtensions
+	eGrantConstraints                                                       smithy.SchemaExtensions
+	eGrantConstraints_EncryptionContextSubset                               smithy.SchemaExtensions
+	eGrantConstraints_EncryptionContextEquals                               smithy.SchemaExtensions
+	eGrantConstraints_SourceArn                                             smithy.SchemaExtensions
+	e_GrantConstraintSourceArnType                                          smithy.SchemaExtensions
+	e_GrantIdType                                                           smithy.SchemaExtensions
+	e_GrantList                                                             smithy.SchemaExtensions
+	e_GrantList_member                                                      smithy.SchemaExtensions
+	eGrantListEntry                                                         smithy.SchemaExtensions
+	eGrantListEntry_KeyId                                                   smithy.SchemaExtensions
+	eGrantListEntry_GrantId                                                 smithy.SchemaExtensions
+	eGrantListEntry_Name                                                    smithy.SchemaExtensions
+	eGrantListEntry_CreationDate                                            smithy.SchemaExtensions
+	eGrantListEntry_GranteePrincipal                                        smithy.SchemaExtensions
+	eGrantListEntry_RetiringPrincipal                                       smithy.SchemaExtensions
+	eGrantListEntry_IssuingAccount                                          smithy.SchemaExtensions
+	eGrantListEntry_Operations                                              smithy.SchemaExtensions
+	eGrantListEntry_Constraints                                             smithy.SchemaExtensions
+	eGrantListEntry_GranteeServicePrincipal                                 smithy.SchemaExtensions
+	eGrantListEntry_RetiringServicePrincipal                                smithy.SchemaExtensions
+	e_GrantNameType                                                         smithy.SchemaExtensions
+	eGrantOperation                                                         smithy.SchemaExtensions
+	eGrantOperation_Decrypt                                                 smithy.SchemaExtensions
+	eGrantOperation_Encrypt                                                 smithy.SchemaExtensions
+	eGrantOperation_GenerateDataKey                                         smithy.SchemaExtensions
+	eGrantOperation_GenerateDataKeyWithoutPlaintext                         smithy.SchemaExtensions
+	eGrantOperation_ReEncryptFrom                                           smithy.SchemaExtensions
+	eGrantOperation_ReEncryptTo                                             smithy.SchemaExtensions
+	eGrantOperation_Sign                                                    smithy.SchemaExtensions
+	eGrantOperation_Verify                                                  smithy.SchemaExtensions
+	eGrantOperation_GetPublicKey                                            smithy.SchemaExtensions
+	eGrantOperation_CreateGrant                                             smithy.SchemaExtensions
+	eGrantOperation_RetireGrant                                             smithy.SchemaExtensions
+	eGrantOperation_DescribeKey                                             smithy.SchemaExtensions
+	eGrantOperation_GenerateDataKeyPair                                     smithy.SchemaExtensions
+	eGrantOperation_GenerateDataKeyPairWithoutPlaintext                     smithy.SchemaExtensions
+	eGrantOperation_GenerateMac                                             smithy.SchemaExtensions
+	eGrantOperation_VerifyMac                                               smithy.SchemaExtensions
+	eGrantOperation_DeriveSharedSecret                                      smithy.SchemaExtensions
+	eGrantOperation_Encapsulate                                             smithy.SchemaExtensions
+	eGrantOperation_Decapsulate                                             smithy.SchemaExtensions
+	e_GrantOperationList                                                    smithy.SchemaExtensions
+	e_GrantOperationList_member                                             smithy.SchemaExtensions
+	e_GrantTokenList                                                        smithy.SchemaExtensions
+	e_GrantTokenList_member                                                 smithy.SchemaExtensions
+	e_GrantTokenType                                                        smithy.SchemaExtensions
+	eImportState                                                            smithy.SchemaExtensions
+	eImportState_IMPORTED                                                   smithy.SchemaExtensions
+	eImportState_PENDING_IMPORT                                             smithy.SchemaExtensions
+	eImportType                                                             smithy.SchemaExtensions
+	eImportType_NEW_KEY_MATERIAL                                            smithy.SchemaExtensions
+	eImportType_EXISTING_KEY_MATERIAL                                       smithy.SchemaExtensions
+	eIncludeKeyMaterial                                                     smithy.SchemaExtensions
+	eIncludeKeyMaterial_ALL_KEY_MATERIAL                                    smithy.SchemaExtensions
+	eIncludeKeyMaterial_ROTATIONS_ONLY                                      smithy.SchemaExtensions
+	eIncorrectKeyException                                                  smithy.SchemaExtensions
+	eIncorrectKeyException_message                                          smithy.SchemaExtensions
+	eIncorrectKeyMaterialException                                          smithy.SchemaExtensions
+	eIncorrectKeyMaterialException_message                                  smithy.SchemaExtensions
+	eIncorrectTrustAnchorException                                          smithy.SchemaExtensions
+	eIncorrectTrustAnchorException_message                                  smithy.SchemaExtensions
+	eInvalidAliasNameException                                              smithy.SchemaExtensions
+	eInvalidAliasNameException_message                                      smithy.SchemaExtensions
+	eInvalidArnException                                                    smithy.SchemaExtensions
+	eInvalidArnException_message                                            smithy.SchemaExtensions
+	eInvalidCiphertextException                                             smithy.SchemaExtensions
+	eInvalidCiphertextException_message                                     smithy.SchemaExtensions
+	eInvalidGrantIdException                                                smithy.SchemaExtensions
+	eInvalidGrantIdException_message                                        smithy.SchemaExtensions
+	eInvalidGrantTokenException                                             smithy.SchemaExtensions
+	eInvalidGrantTokenException_message                                     smithy.SchemaExtensions
+	eInvalidImportTokenException                                            smithy.SchemaExtensions
+	eInvalidImportTokenException_message                                    smithy.SchemaExtensions
+	eInvalidKeyUsageException                                               smithy.SchemaExtensions
+	eInvalidKeyUsageException_message                                       smithy.SchemaExtensions
+	eInvalidMarkerException                                                 smithy.SchemaExtensions
+	eInvalidMarkerException_message                                         smithy.SchemaExtensions
+	eKeyAgreementAlgorithmSpec                                              smithy.SchemaExtensions
+	eKeyAgreementAlgorithmSpec_ECDH                                         smithy.SchemaExtensions
+	e_KeyAgreementAlgorithmSpecList                                         smithy.SchemaExtensions
+	e_KeyAgreementAlgorithmSpecList_member                                  smithy.SchemaExtensions
+	eKeyEncryptionMechanism                                                 smithy.SchemaExtensions
+	eKeyEncryptionMechanism_RSAES_OAEP_SHA_256                              smithy.SchemaExtensions
+	e_KeyIdType                                                             smithy.SchemaExtensions
+	eKeyLastUsageData                                                       smithy.SchemaExtensions
+	eKeyLastUsageData_Operation                                             smithy.SchemaExtensions
+	eKeyLastUsageData_Timestamp                                             smithy.SchemaExtensions
+	eKeyLastUsageData_CloudTrailEventId                                     smithy.SchemaExtensions
+	eKeyLastUsageData_KmsRequestId                                          smithy.SchemaExtensions
+	eKeyLastUsageTrackingOperation                                          smithy.SchemaExtensions
+	eKeyLastUsageTrackingOperation_Decrypt                                  smithy.SchemaExtensions
+	eKeyLastUsageTrackingOperation_DeriveSharedSecret                       smithy.SchemaExtensions
+	eKeyLastUsageTrackingOperation_Encrypt                                  smithy.SchemaExtensions
+	eKeyLastUsageTrackingOperation_GenerateDataKey                          smithy.SchemaExtensions
+	eKeyLastUsageTrackingOperation_GenerateDataKeyPair                      smithy.SchemaExtensions
+	eKeyLastUsageTrackingOperation_GenerateDataKeyPairWithoutPlaintext      smithy.SchemaExtensions
+	eKeyLastUsageTrackingOperation_GenerateDataKeyWithoutPlaintext          smithy.SchemaExtensions
+	eKeyLastUsageTrackingOperation_GenerateMac                              smithy.SchemaExtensions
+	eKeyLastUsageTrackingOperation_ReEncrypt                                smithy.SchemaExtensions
+	eKeyLastUsageTrackingOperation_Sign                                     smithy.SchemaExtensions
+	eKeyLastUsageTrackingOperation_Verify                                   smithy.SchemaExtensions
+	eKeyLastUsageTrackingOperation_VerifyMac                                smithy.SchemaExtensions
+	eKeyLastUsageTrackingOperation_Encapsulate                              smithy.SchemaExtensions
+	eKeyLastUsageTrackingOperation_Decapsulate                              smithy.SchemaExtensions
+	e_KeyList                                                               smithy.SchemaExtensions
+	e_KeyList_member                                                        smithy.SchemaExtensions
+	eKeyListEntry                                                           smithy.SchemaExtensions
+	eKeyListEntry_KeyId                                                     smithy.SchemaExtensions
+	eKeyListEntry_KeyArn                                                    smithy.SchemaExtensions
+	eKeyManagerType                                                         smithy.SchemaExtensions
+	eKeyManagerType_AWS                                                     smithy.SchemaExtensions
+	eKeyManagerType_CUSTOMER                                                smithy.SchemaExtensions
+	e_KeyMaterialDescriptionType                                            smithy.SchemaExtensions
+	eKeyMaterialState                                                       smithy.SchemaExtensions
+	eKeyMaterialState_NON_CURRENT                                           smithy.SchemaExtensions
+	eKeyMaterialState_CURRENT                                               smithy.SchemaExtensions
+	eKeyMaterialState_PENDING_ROTATION                                      smithy.SchemaExtensions
+	eKeyMaterialState_PENDING_MULTI_REGION_IMPORT_AND_ROTATION              smithy.SchemaExtensions
+	eKeyMetadata                                                            smithy.SchemaExtensions
+	eKeyMetadata_AWSAccountId                                               smithy.SchemaExtensions
+	eKeyMetadata_KeyId                                                      smithy.SchemaExtensions
+	eKeyMetadata_Arn                                                        smithy.SchemaExtensions
+	eKeyMetadata_CreationDate                                               smithy.SchemaExtensions
+	eKeyMetadata_Enabled                                                    smithy.SchemaExtensions
+	eKeyMetadata_Description                                                smithy.SchemaExtensions
+	eKeyMetadata_KeyUsage                                                   smithy.SchemaExtensions
+	eKeyMetadata_KeyState                                                   smithy.SchemaExtensions
+	eKeyMetadata_DeletionDate                                               smithy.SchemaExtensions
+	eKeyMetadata_ValidTo                                                    smithy.SchemaExtensions
+	eKeyMetadata_Origin                                                     smithy.SchemaExtensions
+	eKeyMetadata_CustomKeyStoreId                                           smithy.SchemaExtensions
+	eKeyMetadata_CloudHsmClusterId                                          smithy.SchemaExtensions
+	eKeyMetadata_ExpirationModel                                            smithy.SchemaExtensions
+	eKeyMetadata_KeyManager                                                 smithy.SchemaExtensions
+	eKeyMetadata_CustomerMasterKeySpec                                      smithy.SchemaExtensions
+	eKeyMetadata_KeySpec                                                    smithy.SchemaExtensions
+	eKeyMetadata_EncryptionAlgorithms                                       smithy.SchemaExtensions
+	eKeyMetadata_SigningAlgorithms                                          smithy.SchemaExtensions
+	eKeyMetadata_KeyAgreementAlgorithms                                     smithy.SchemaExtensions
+	eKeyMetadata_EncapsulationAlgorithms                                    smithy.SchemaExtensions
+	eKeyMetadata_MultiRegion                                                smithy.SchemaExtensions
+	eKeyMetadata_MultiRegionConfiguration                                   smithy.SchemaExtensions
+	eKeyMetadata_PendingDeletionWindowInDays                                smithy.SchemaExtensions
+	eKeyMetadata_MacAlgorithms                                              smithy.SchemaExtensions
+	eKeyMetadata_XksKeyConfiguration                                        smithy.SchemaExtensions
+	eKeyMetadata_CurrentKeyMaterialId                                       smithy.SchemaExtensions
+	eKeySpec                                                                smithy.SchemaExtensions
+	eKeySpec_RSA_2048                                                       smithy.SchemaExtensions
+	eKeySpec_RSA_3072                                                       smithy.SchemaExtensions
+	eKeySpec_RSA_4096                                                       smithy.SchemaExtensions
+	eKeySpec_ECC_NIST_P256                                                  smithy.SchemaExtensions
+	eKeySpec_ECC_NIST_P384                                                  smithy.SchemaExtensions
+	eKeySpec_ECC_NIST_P521                                                  smithy.SchemaExtensions
+	eKeySpec_ECC_SECG_P256K1                                                smithy.SchemaExtensions
+	eKeySpec_SYMMETRIC_DEFAULT                                              smithy.SchemaExtensions
+	eKeySpec_HMAC_224                                                       smithy.SchemaExtensions
+	eKeySpec_HMAC_256                                                       smithy.SchemaExtensions
+	eKeySpec_HMAC_384                                                       smithy.SchemaExtensions
+	eKeySpec_HMAC_512                                                       smithy.SchemaExtensions
+	eKeySpec_SM2                                                            smithy.SchemaExtensions
+	eKeySpec_ML_DSA_44                                                      smithy.SchemaExtensions
+	eKeySpec_ML_DSA_65                                                      smithy.SchemaExtensions
+	eKeySpec_ML_DSA_87                                                      smithy.SchemaExtensions
+	eKeySpec_ECC_NIST_EDWARDS25519                                          smithy.SchemaExtensions
+	eKeySpec_ML_KEM_512                                                     smithy.SchemaExtensions
+	eKeySpec_ML_KEM_768                                                     smithy.SchemaExtensions
+	eKeySpec_ML_KEM_1024                                                    smithy.SchemaExtensions
+	eKeyState                                                               smithy.SchemaExtensions
+	eKeyState_Creating                                                      smithy.SchemaExtensions
+	eKeyState_Enabled                                                       smithy.SchemaExtensions
+	eKeyState_Disabled                                                      smithy.SchemaExtensions
+	eKeyState_PendingDeletion                                               smithy.SchemaExtensions
+	eKeyState_PendingImport                                                 smithy.SchemaExtensions
+	eKeyState_PendingReplicaDeletion                                        smithy.SchemaExtensions
+	eKeyState_Unavailable                                                   smithy.SchemaExtensions
+	eKeyState_Updating                                                      smithy.SchemaExtensions
+	e_KeyStorePasswordType                                                  smithy.SchemaExtensions
+	eKeyUnavailableException                                                smithy.SchemaExtensions
+	eKeyUnavailableException_message                                        smithy.SchemaExtensions
+	eKeyUsageType                                                           smithy.SchemaExtensions
+	eKeyUsageType_SIGN_VERIFY                                               smithy.SchemaExtensions
+	eKeyUsageType_ENCRYPT_DECRYPT                                           smithy.SchemaExtensions
+	eKeyUsageType_GENERATE_VERIFY_MAC                                       smithy.SchemaExtensions
+	eKeyUsageType_KEY_AGREEMENT                                             smithy.SchemaExtensions
+	eKeyUsageType_ENCAPSULATE_DECAPSULATE                                   smithy.SchemaExtensions
+	eKMSInternalException                                                   smithy.SchemaExtensions
+	eKMSInternalException_message                                           smithy.SchemaExtensions
+	eKMSInvalidMacException                                                 smithy.SchemaExtensions
+	eKMSInvalidMacException_message                                         smithy.SchemaExtensions
+	eKMSInvalidSignatureException                                           smithy.SchemaExtensions
+	eKMSInvalidSignatureException_message                                   smithy.SchemaExtensions
+	eKMSInvalidStateException                                               smithy.SchemaExtensions
+	eKMSInvalidStateException_message                                       smithy.SchemaExtensions
+	e_KmsRequestIdType                                                      smithy.SchemaExtensions
+	eLimitExceededException                                                 smithy.SchemaExtensions
+	eLimitExceededException_message                                         smithy.SchemaExtensions
+	e_LimitType                                                             smithy.SchemaExtensions
+	eMacAlgorithmSpec                                                       smithy.SchemaExtensions
+	eMacAlgorithmSpec_HMAC_SHA_224                                          smithy.SchemaExtensions
+	eMacAlgorithmSpec_HMAC_SHA_256                                          smithy.SchemaExtensions
+	eMacAlgorithmSpec_HMAC_SHA_384                                          smithy.SchemaExtensions
+	eMacAlgorithmSpec_HMAC_SHA_512                                          smithy.SchemaExtensions
+	e_MacAlgorithmSpecList                                                  smithy.SchemaExtensions
+	e_MacAlgorithmSpecList_member                                           smithy.SchemaExtensions
+	eMalformedPolicyDocumentException                                       smithy.SchemaExtensions
+	eMalformedPolicyDocumentException_message                               smithy.SchemaExtensions
+	e_MarkerType                                                            smithy.SchemaExtensions
+	eMessageType                                                            smithy.SchemaExtensions
+	eMessageType_RAW                                                        smithy.SchemaExtensions
+	eMessageType_DIGEST                                                     smithy.SchemaExtensions
+	eMessageType_EXTERNAL_MU                                                smithy.SchemaExtensions
+	eMultiRegionConfiguration                                               smithy.SchemaExtensions
+	eMultiRegionConfiguration_MultiRegionKeyType                            smithy.SchemaExtensions
+	eMultiRegionConfiguration_PrimaryKey                                    smithy.SchemaExtensions
+	eMultiRegionConfiguration_ReplicaKeys                                   smithy.SchemaExtensions
+	eMultiRegionKey                                                         smithy.SchemaExtensions
+	eMultiRegionKey_Arn                                                     smithy.SchemaExtensions
+	eMultiRegionKey_Region                                                  smithy.SchemaExtensions
+	e_MultiRegionKeyList                                                    smithy.SchemaExtensions
+	e_MultiRegionKeyList_member                                             smithy.SchemaExtensions
+	eMultiRegionKeyType                                                     smithy.SchemaExtensions
+	eMultiRegionKeyType_PRIMARY                                             smithy.SchemaExtensions
+	eMultiRegionKeyType_REPLICA                                             smithy.SchemaExtensions
+	eNotFoundException                                                      smithy.SchemaExtensions
+	eNotFoundException_message                                              smithy.SchemaExtensions
+	e_NullableBooleanType                                                   smithy.SchemaExtensions
+	e_NumberOfBytesType                                                     smithy.SchemaExtensions
+	eOriginType                                                             smithy.SchemaExtensions
+	eOriginType_AWS_KMS                                                     smithy.SchemaExtensions
+	eOriginType_EXTERNAL                                                    smithy.SchemaExtensions
+	eOriginType_AWS_CLOUDHSM                                                smithy.SchemaExtensions
+	eOriginType_EXTERNAL_KEY_STORE                                          smithy.SchemaExtensions
+	e_PendingWindowInDaysType                                               smithy.SchemaExtensions
+	e_PlaintextType                                                         smithy.SchemaExtensions
+	e_PolicyNameList                                                        smithy.SchemaExtensions
+	e_PolicyNameList_member                                                 smithy.SchemaExtensions
+	e_PolicyNameType                                                        smithy.SchemaExtensions
+	e_PolicyType                                                            smithy.SchemaExtensions
+	e_PrincipalIdType                                                       smithy.SchemaExtensions
+	e_PublicKeyType                                                         smithy.SchemaExtensions
+	eRecipientInfo                                                          smithy.SchemaExtensions
+	eRecipientInfo_KeyEncryptionAlgorithm                                   smithy.SchemaExtensions
+	eRecipientInfo_AttestationDocument                                      smithy.SchemaExtensions
+	e_RegionType                                                            smithy.SchemaExtensions
+	e_RotationPeriodInDaysType                                              smithy.SchemaExtensions
+	e_RotationsList                                                         smithy.SchemaExtensions
+	e_RotationsList_member                                                  smithy.SchemaExtensions
+	eRotationsListEntry                                                     smithy.SchemaExtensions
+	eRotationsListEntry_KeyId                                               smithy.SchemaExtensions
+	eRotationsListEntry_KeyMaterialId                                       smithy.SchemaExtensions
+	eRotationsListEntry_KeyMaterialDescription                              smithy.SchemaExtensions
+	eRotationsListEntry_ImportState                                         smithy.SchemaExtensions
+	eRotationsListEntry_KeyMaterialState                                    smithy.SchemaExtensions
+	eRotationsListEntry_ExpirationModel                                     smithy.SchemaExtensions
+	eRotationsListEntry_ValidTo                                             smithy.SchemaExtensions
+	eRotationsListEntry_RotationDate                                        smithy.SchemaExtensions
+	eRotationsListEntry_RotationType                                        smithy.SchemaExtensions
+	eRotationType                                                           smithy.SchemaExtensions
+	eRotationType_AUTOMATIC                                                 smithy.SchemaExtensions
+	eRotationType_ON_DEMAND                                                 smithy.SchemaExtensions
+	e_ServicePrincipalType                                                  smithy.SchemaExtensions
+	eSigningAlgorithmSpec                                                   smithy.SchemaExtensions
+	eSigningAlgorithmSpec_RSASSA_PSS_SHA_256                                smithy.SchemaExtensions
+	eSigningAlgorithmSpec_RSASSA_PSS_SHA_384                                smithy.SchemaExtensions
+	eSigningAlgorithmSpec_RSASSA_PSS_SHA_512                                smithy.SchemaExtensions
+	eSigningAlgorithmSpec_RSASSA_PKCS1_V1_5_SHA_256                         smithy.SchemaExtensions
+	eSigningAlgorithmSpec_RSASSA_PKCS1_V1_5_SHA_384                         smithy.SchemaExtensions
+	eSigningAlgorithmSpec_RSASSA_PKCS1_V1_5_SHA_512                         smithy.SchemaExtensions
+	eSigningAlgorithmSpec_ECDSA_SHA_256                                     smithy.SchemaExtensions
+	eSigningAlgorithmSpec_ECDSA_SHA_384                                     smithy.SchemaExtensions
+	eSigningAlgorithmSpec_ECDSA_SHA_512                                     smithy.SchemaExtensions
+	eSigningAlgorithmSpec_SM2DSA                                            smithy.SchemaExtensions
+	eSigningAlgorithmSpec_ML_DSA_SHAKE_256                                  smithy.SchemaExtensions
+	eSigningAlgorithmSpec_ED25519_SHA_512                                   smithy.SchemaExtensions
+	eSigningAlgorithmSpec_ED25519_PH_SHA_512                                smithy.SchemaExtensions
+	e_SigningAlgorithmSpecList                                              smithy.SchemaExtensions
+	e_SigningAlgorithmSpecList_member                                       smithy.SchemaExtensions
+	eTag                                                                    smithy.SchemaExtensions
+	eTag_TagKey                                                             smithy.SchemaExtensions
+	eTag_TagValue                                                           smithy.SchemaExtensions
+	eTagException                                                           smithy.SchemaExtensions
+	eTagException_message                                                   smithy.SchemaExtensions
+	e_TagKeyList                                                            smithy.SchemaExtensions
+	e_TagKeyList_member                                                     smithy.SchemaExtensions
+	e_TagKeyType                                                            smithy.SchemaExtensions
+	e_TagList                                                               smithy.SchemaExtensions
+	e_TagList_member                                                        smithy.SchemaExtensions
+	e_TagValueType                                                          smithy.SchemaExtensions
+	e_TrustAnchorCertificateType                                            smithy.SchemaExtensions
+	eUnsupportedOperationException                                          smithy.SchemaExtensions
+	eUnsupportedOperationException_message                                  smithy.SchemaExtensions
+	eWrappingKeySpec                                                        smithy.SchemaExtensions
+	eWrappingKeySpec_RSA_2048                                               smithy.SchemaExtensions
+	eWrappingKeySpec_RSA_3072                                               smithy.SchemaExtensions
+	eWrappingKeySpec_RSA_4096                                               smithy.SchemaExtensions
+	eWrappingKeySpec_SM2                                                    smithy.SchemaExtensions
+	eXksKeyAlreadyInUseException                                            smithy.SchemaExtensions
+	eXksKeyAlreadyInUseException_message                                    smithy.SchemaExtensions
+	eXksKeyConfigurationType                                                smithy.SchemaExtensions
+	eXksKeyConfigurationType_Id                                             smithy.SchemaExtensions
+	e_XksKeyIdType                                                          smithy.SchemaExtensions
+	eXksKeyInvalidConfigurationException                                    smithy.SchemaExtensions
+	eXksKeyInvalidConfigurationException_message                            smithy.SchemaExtensions
+	eXksKeyNotFoundException                                                smithy.SchemaExtensions
+	eXksKeyNotFoundException_message                                        smithy.SchemaExtensions
+	e_XksProxyAuthenticationAccessKeyIdType                                 smithy.SchemaExtensions
+	eXksProxyAuthenticationCredentialType                                   smithy.SchemaExtensions
+	eXksProxyAuthenticationCredentialType_AccessKeyId                       smithy.SchemaExtensions
+	eXksProxyAuthenticationCredentialType_RawSecretAccessKey                smithy.SchemaExtensions
+	e_XksProxyAuthenticationRawSecretAccessKeyType                          smithy.SchemaExtensions
+	eXksProxyConfigurationType                                              smithy.SchemaExtensions
+	eXksProxyConfigurationType_Connectivity                                 smithy.SchemaExtensions
+	eXksProxyConfigurationType_AccessKeyId                                  smithy.SchemaExtensions
+	eXksProxyConfigurationType_UriEndpoint                                  smithy.SchemaExtensions
+	eXksProxyConfigurationType_UriPath                                      smithy.SchemaExtensions
+	eXksProxyConfigurationType_VpcEndpointServiceName                       smithy.SchemaExtensions
+	eXksProxyConfigurationType_VpcEndpointServiceOwner                      smithy.SchemaExtensions
+	eXksProxyConnectivityType                                               smithy.SchemaExtensions
+	eXksProxyConnectivityType_PUBLIC_ENDPOINT                               smithy.SchemaExtensions
+	eXksProxyConnectivityType_VPC_ENDPOINT_SERVICE                          smithy.SchemaExtensions
+	eXksProxyIncorrectAuthenticationCredentialException                     smithy.SchemaExtensions
+	eXksProxyIncorrectAuthenticationCredentialException_message             smithy.SchemaExtensions
+	eXksProxyInvalidConfigurationException                                  smithy.SchemaExtensions
+	eXksProxyInvalidConfigurationException_message                          smithy.SchemaExtensions
+	eXksProxyInvalidResponseException                                       smithy.SchemaExtensions
+	eXksProxyInvalidResponseException_message                               smithy.SchemaExtensions
+	eXksProxyUriEndpointInUseException                                      smithy.SchemaExtensions
+	eXksProxyUriEndpointInUseException_message                              smithy.SchemaExtensions
+	e_XksProxyUriEndpointType                                               smithy.SchemaExtensions
+	eXksProxyUriInUseException                                              smithy.SchemaExtensions
+	eXksProxyUriInUseException_message                                      smithy.SchemaExtensions
+	e_XksProxyUriPathType                                                   smithy.SchemaExtensions
+	eXksProxyUriUnreachableException                                        smithy.SchemaExtensions
+	eXksProxyUriUnreachableException_message                                smithy.SchemaExtensions
+	eXksProxyVpcEndpointServiceInUseException                               smithy.SchemaExtensions
+	eXksProxyVpcEndpointServiceInUseException_message                       smithy.SchemaExtensions
+	eXksProxyVpcEndpointServiceInvalidConfigurationException                smithy.SchemaExtensions
+	eXksProxyVpcEndpointServiceInvalidConfigurationException_message        smithy.SchemaExtensions
+	e_XksProxyVpcEndpointServiceNameType                                    smithy.SchemaExtensions
+	eXksProxyVpcEndpointServiceNotFoundException                            smithy.SchemaExtensions
+	eXksProxyVpcEndpointServiceNotFoundException_message                    smithy.SchemaExtensions
+	eCancelKeyDeletionRequest                                               smithy.SchemaExtensions
+	eCancelKeyDeletionRequest_KeyId                                         smithy.SchemaExtensions
+	eCancelKeyDeletionResponse                                              smithy.SchemaExtensions
+	eCancelKeyDeletionResponse_KeyId                                        smithy.SchemaExtensions
+	eConnectCustomKeyStoreRequest                                           smithy.SchemaExtensions
+	eConnectCustomKeyStoreRequest_CustomKeyStoreId                          smithy.SchemaExtensions
+	eConnectCustomKeyStoreResponse                                          smithy.SchemaExtensions
+	eCreateAliasRequest                                                     smithy.SchemaExtensions
+	eCreateAliasRequest_AliasName                                           smithy.SchemaExtensions
+	eCreateAliasRequest_TargetKeyId                                         smithy.SchemaExtensions
+	eCreateCustomKeyStoreRequest                                            smithy.SchemaExtensions
+	eCreateCustomKeyStoreRequest_CustomKeyStoreName                         smithy.SchemaExtensions
+	eCreateCustomKeyStoreRequest_CloudHsmClusterId                          smithy.SchemaExtensions
+	eCreateCustomKeyStoreRequest_TrustAnchorCertificate                     smithy.SchemaExtensions
+	eCreateCustomKeyStoreRequest_KeyStorePassword                           smithy.SchemaExtensions
+	eCreateCustomKeyStoreRequest_CustomKeyStoreType                         smithy.SchemaExtensions
+	eCreateCustomKeyStoreRequest_XksProxyUriEndpoint                        smithy.SchemaExtensions
+	eCreateCustomKeyStoreRequest_XksProxyUriPath                            smithy.SchemaExtensions
+	eCreateCustomKeyStoreRequest_XksProxyVpcEndpointServiceName             smithy.SchemaExtensions
+	eCreateCustomKeyStoreRequest_XksProxyVpcEndpointServiceOwner            smithy.SchemaExtensions
+	eCreateCustomKeyStoreRequest_XksProxyAuthenticationCredential           smithy.SchemaExtensions
+	eCreateCustomKeyStoreRequest_XksProxyConnectivity                       smithy.SchemaExtensions
+	eCreateCustomKeyStoreResponse                                           smithy.SchemaExtensions
+	eCreateCustomKeyStoreResponse_CustomKeyStoreId                          smithy.SchemaExtensions
+	eCreateGrantRequest                                                     smithy.SchemaExtensions
+	eCreateGrantRequest_KeyId                                               smithy.SchemaExtensions
+	eCreateGrantRequest_GranteePrincipal                                    smithy.SchemaExtensions
+	eCreateGrantRequest_RetiringPrincipal                                   smithy.SchemaExtensions
+	eCreateGrantRequest_Operations                                          smithy.SchemaExtensions
+	eCreateGrantRequest_Constraints                                         smithy.SchemaExtensions
+	eCreateGrantRequest_GrantTokens                                         smithy.SchemaExtensions
+	eCreateGrantRequest_Name                                                smithy.SchemaExtensions
+	eCreateGrantRequest_DryRun                                              smithy.SchemaExtensions
+	eCreateGrantRequest_GranteeServicePrincipal                             smithy.SchemaExtensions
+	eCreateGrantRequest_RetiringServicePrincipal                            smithy.SchemaExtensions
+	eCreateGrantResponse                                                    smithy.SchemaExtensions
+	eCreateGrantResponse_GrantToken                                         smithy.SchemaExtensions
+	eCreateGrantResponse_GrantId                                            smithy.SchemaExtensions
+	eCreateKeyRequest                                                       smithy.SchemaExtensions
+	eCreateKeyRequest_Policy                                                smithy.SchemaExtensions
+	eCreateKeyRequest_Description                                           smithy.SchemaExtensions
+	eCreateKeyRequest_KeyUsage                                              smithy.SchemaExtensions
+	eCreateKeyRequest_CustomerMasterKeySpec                                 smithy.SchemaExtensions
+	eCreateKeyRequest_KeySpec                                               smithy.SchemaExtensions
+	eCreateKeyRequest_Origin                                                smithy.SchemaExtensions
+	eCreateKeyRequest_CustomKeyStoreId                                      smithy.SchemaExtensions
+	eCreateKeyRequest_BypassPolicyLockoutSafetyCheck                        smithy.SchemaExtensions
+	eCreateKeyRequest_Tags                                                  smithy.SchemaExtensions
+	eCreateKeyRequest_MultiRegion                                           smithy.SchemaExtensions
+	eCreateKeyRequest_XksKeyId                                              smithy.SchemaExtensions
+	eCreateKeyResponse                                                      smithy.SchemaExtensions
+	eCreateKeyResponse_KeyMetadata                                          smithy.SchemaExtensions
+	eDecapsulateRequest                                                     smithy.SchemaExtensions
+	eDecapsulateRequest_KeyId                                               smithy.SchemaExtensions
+	eDecapsulateRequest_SharedSecretCiphertextBlob                          smithy.SchemaExtensions
+	eDecapsulateRequest_EncapsulationAlgorithm                              smithy.SchemaExtensions
+	eDecapsulateRequest_GrantTokens                                         smithy.SchemaExtensions
+	eDecapsulateRequest_DryRun                                              smithy.SchemaExtensions
+	eDecapsulateResponse                                                    smithy.SchemaExtensions
+	eDecapsulateResponse_KeyId                                              smithy.SchemaExtensions
+	eDecapsulateResponse_SharedSecret                                       smithy.SchemaExtensions
+	eDecapsulateResponse_EncapsulationAlgorithm                             smithy.SchemaExtensions
+	eDecryptRequest                                                         smithy.SchemaExtensions
+	eDecryptRequest_CiphertextBlob                                          smithy.SchemaExtensions
+	eDecryptRequest_EncryptionContext                                       smithy.SchemaExtensions
+	eDecryptRequest_GrantTokens                                             smithy.SchemaExtensions
+	eDecryptRequest_KeyId                                                   smithy.SchemaExtensions
+	eDecryptRequest_EncryptionAlgorithm                                     smithy.SchemaExtensions
+	eDecryptRequest_Recipient                                               smithy.SchemaExtensions
+	eDecryptRequest_DryRun                                                  smithy.SchemaExtensions
+	eDecryptRequest_DryRunModifiers                                         smithy.SchemaExtensions
+	eDecryptResponse                                                        smithy.SchemaExtensions
+	eDecryptResponse_KeyId                                                  smithy.SchemaExtensions
+	eDecryptResponse_Plaintext                                              smithy.SchemaExtensions
+	eDecryptResponse_EncryptionAlgorithm                                    smithy.SchemaExtensions
+	eDecryptResponse_CiphertextForRecipient                                 smithy.SchemaExtensions
+	eDecryptResponse_KeyMaterialId                                          smithy.SchemaExtensions
+	eDeleteAliasRequest                                                     smithy.SchemaExtensions
+	eDeleteAliasRequest_AliasName                                           smithy.SchemaExtensions
+	eDeleteCustomKeyStoreRequest                                            smithy.SchemaExtensions
+	eDeleteCustomKeyStoreRequest_CustomKeyStoreId                           smithy.SchemaExtensions
+	eDeleteCustomKeyStoreResponse                                           smithy.SchemaExtensions
+	eDeleteImportedKeyMaterialRequest                                       smithy.SchemaExtensions
+	eDeleteImportedKeyMaterialRequest_KeyId                                 smithy.SchemaExtensions
+	eDeleteImportedKeyMaterialRequest_KeyMaterialId                         smithy.SchemaExtensions
+	eDeleteImportedKeyMaterialResponse                                      smithy.SchemaExtensions
+	eDeleteImportedKeyMaterialResponse_KeyId                                smithy.SchemaExtensions
+	eDeleteImportedKeyMaterialResponse_KeyMaterialId                        smithy.SchemaExtensions
+	eDeriveSharedSecretRequest                                              smithy.SchemaExtensions
+	eDeriveSharedSecretRequest_KeyId                                        smithy.SchemaExtensions
+	eDeriveSharedSecretRequest_KeyAgreementAlgorithm                        smithy.SchemaExtensions
+	eDeriveSharedSecretRequest_PublicKey                                    smithy.SchemaExtensions
+	eDeriveSharedSecretRequest_GrantTokens                                  smithy.SchemaExtensions
+	eDeriveSharedSecretRequest_DryRun                                       smithy.SchemaExtensions
+	eDeriveSharedSecretRequest_Recipient                                    smithy.SchemaExtensions
+	eDeriveSharedSecretResponse                                             smithy.SchemaExtensions
+	eDeriveSharedSecretResponse_KeyId                                       smithy.SchemaExtensions
+	eDeriveSharedSecretResponse_SharedSecret                                smithy.SchemaExtensions
+	eDeriveSharedSecretResponse_CiphertextForRecipient                      smithy.SchemaExtensions
+	eDeriveSharedSecretResponse_KeyAgreementAlgorithm                       smithy.SchemaExtensions
+	eDeriveSharedSecretResponse_KeyOrigin                                   smithy.SchemaExtensions
+	eDescribeCustomKeyStoresRequest                                         smithy.SchemaExtensions
+	eDescribeCustomKeyStoresRequest_CustomKeyStoreId                        smithy.SchemaExtensions
+	eDescribeCustomKeyStoresRequest_CustomKeyStoreName                      smithy.SchemaExtensions
+	eDescribeCustomKeyStoresRequest_Limit                                   smithy.SchemaExtensions
+	eDescribeCustomKeyStoresRequest_Marker                                  smithy.SchemaExtensions
+	eDescribeCustomKeyStoresResponse                                        smithy.SchemaExtensions
+	eDescribeCustomKeyStoresResponse_CustomKeyStores                        smithy.SchemaExtensions
+	eDescribeCustomKeyStoresResponse_NextMarker                             smithy.SchemaExtensions
+	eDescribeCustomKeyStoresResponse_Truncated                              smithy.SchemaExtensions
+	eDescribeKeyRequest                                                     smithy.SchemaExtensions
+	eDescribeKeyRequest_KeyId                                               smithy.SchemaExtensions
+	eDescribeKeyRequest_GrantTokens                                         smithy.SchemaExtensions
+	eDescribeKeyResponse                                                    smithy.SchemaExtensions
+	eDescribeKeyResponse_KeyMetadata                                        smithy.SchemaExtensions
+	eDisableKeyRequest                                                      smithy.SchemaExtensions
+	eDisableKeyRequest_KeyId                                                smithy.SchemaExtensions
+	eDisableKeyRotationRequest                                              smithy.SchemaExtensions
+	eDisableKeyRotationRequest_KeyId                                        smithy.SchemaExtensions
+	eDisconnectCustomKeyStoreRequest                                        smithy.SchemaExtensions
+	eDisconnectCustomKeyStoreRequest_CustomKeyStoreId                       smithy.SchemaExtensions
+	eDisconnectCustomKeyStoreResponse                                       smithy.SchemaExtensions
+	eEnableKeyRequest                                                       smithy.SchemaExtensions
+	eEnableKeyRequest_KeyId                                                 smithy.SchemaExtensions
+	eEnableKeyRotationRequest                                               smithy.SchemaExtensions
+	eEnableKeyRotationRequest_KeyId                                         smithy.SchemaExtensions
+	eEnableKeyRotationRequest_RotationPeriodInDays                          smithy.SchemaExtensions
+	eEncapsulateRequest                                                     smithy.SchemaExtensions
+	eEncapsulateRequest_KeyId                                               smithy.SchemaExtensions
+	eEncapsulateRequest_EncapsulationAlgorithm                              smithy.SchemaExtensions
+	eEncapsulateRequest_GrantTokens                                         smithy.SchemaExtensions
+	eEncapsulateRequest_DryRun                                              smithy.SchemaExtensions
+	eEncapsulateResponse                                                    smithy.SchemaExtensions
+	eEncapsulateResponse_KeyId                                              smithy.SchemaExtensions
+	eEncapsulateResponse_SharedSecret                                       smithy.SchemaExtensions
+	eEncapsulateResponse_SharedSecretCiphertextBlob                         smithy.SchemaExtensions
+	eEncapsulateResponse_EncapsulationAlgorithm                             smithy.SchemaExtensions
+	eEncryptRequest                                                         smithy.SchemaExtensions
+	eEncryptRequest_KeyId                                                   smithy.SchemaExtensions
+	eEncryptRequest_Plaintext                                               smithy.SchemaExtensions
+	eEncryptRequest_EncryptionContext                                       smithy.SchemaExtensions
+	eEncryptRequest_GrantTokens                                             smithy.SchemaExtensions
+	eEncryptRequest_EncryptionAlgorithm                                     smithy.SchemaExtensions
+	eEncryptRequest_DryRun                                                  smithy.SchemaExtensions
+	eEncryptResponse                                                        smithy.SchemaExtensions
+	eEncryptResponse_CiphertextBlob                                         smithy.SchemaExtensions
+	eEncryptResponse_KeyId                                                  smithy.SchemaExtensions
+	eEncryptResponse_EncryptionAlgorithm                                    smithy.SchemaExtensions
+	eGenerateDataKeyRequest                                                 smithy.SchemaExtensions
+	eGenerateDataKeyRequest_KeyId                                           smithy.SchemaExtensions
+	eGenerateDataKeyRequest_EncryptionContext                               smithy.SchemaExtensions
+	eGenerateDataKeyRequest_NumberOfBytes                                   smithy.SchemaExtensions
+	eGenerateDataKeyRequest_KeySpec                                         smithy.SchemaExtensions
+	eGenerateDataKeyRequest_GrantTokens                                     smithy.SchemaExtensions
+	eGenerateDataKeyRequest_Recipient                                       smithy.SchemaExtensions
+	eGenerateDataKeyRequest_DryRun                                          smithy.SchemaExtensions
+	eGenerateDataKeyResponse                                                smithy.SchemaExtensions
+	eGenerateDataKeyResponse_CiphertextBlob                                 smithy.SchemaExtensions
+	eGenerateDataKeyResponse_Plaintext                                      smithy.SchemaExtensions
+	eGenerateDataKeyResponse_KeyId                                          smithy.SchemaExtensions
+	eGenerateDataKeyResponse_CiphertextForRecipient                         smithy.SchemaExtensions
+	eGenerateDataKeyResponse_KeyMaterialId                                  smithy.SchemaExtensions
+	eGenerateDataKeyPairRequest                                             smithy.SchemaExtensions
+	eGenerateDataKeyPairRequest_EncryptionContext                           smithy.SchemaExtensions
+	eGenerateDataKeyPairRequest_KeyId                                       smithy.SchemaExtensions
+	eGenerateDataKeyPairRequest_KeyPairSpec                                 smithy.SchemaExtensions
+	eGenerateDataKeyPairRequest_GrantTokens                                 smithy.SchemaExtensions
+	eGenerateDataKeyPairRequest_Recipient                                   smithy.SchemaExtensions
+	eGenerateDataKeyPairRequest_DryRun                                      smithy.SchemaExtensions
+	eGenerateDataKeyPairResponse                                            smithy.SchemaExtensions
+	eGenerateDataKeyPairResponse_PrivateKeyCiphertextBlob                   smithy.SchemaExtensions
+	eGenerateDataKeyPairResponse_PrivateKeyPlaintext                        smithy.SchemaExtensions
+	eGenerateDataKeyPairResponse_PublicKey                                  smithy.SchemaExtensions
+	eGenerateDataKeyPairResponse_KeyId                                      smithy.SchemaExtensions
+	eGenerateDataKeyPairResponse_KeyPairSpec                                smithy.SchemaExtensions
+	eGenerateDataKeyPairResponse_CiphertextForRecipient                     smithy.SchemaExtensions
+	eGenerateDataKeyPairResponse_KeyMaterialId                              smithy.SchemaExtensions
+	eGenerateDataKeyPairWithoutPlaintextRequest                             smithy.SchemaExtensions
+	eGenerateDataKeyPairWithoutPlaintextRequest_EncryptionContext           smithy.SchemaExtensions
+	eGenerateDataKeyPairWithoutPlaintextRequest_KeyId                       smithy.SchemaExtensions
+	eGenerateDataKeyPairWithoutPlaintextRequest_KeyPairSpec                 smithy.SchemaExtensions
+	eGenerateDataKeyPairWithoutPlaintextRequest_GrantTokens                 smithy.SchemaExtensions
+	eGenerateDataKeyPairWithoutPlaintextRequest_DryRun                      smithy.SchemaExtensions
+	eGenerateDataKeyPairWithoutPlaintextResponse                            smithy.SchemaExtensions
+	eGenerateDataKeyPairWithoutPlaintextResponse_PrivateKeyCiphertextBlob   smithy.SchemaExtensions
+	eGenerateDataKeyPairWithoutPlaintextResponse_PublicKey                  smithy.SchemaExtensions
+	eGenerateDataKeyPairWithoutPlaintextResponse_KeyId                      smithy.SchemaExtensions
+	eGenerateDataKeyPairWithoutPlaintextResponse_KeyPairSpec                smithy.SchemaExtensions
+	eGenerateDataKeyPairWithoutPlaintextResponse_KeyMaterialId              smithy.SchemaExtensions
+	eGenerateDataKeyWithoutPlaintextRequest                                 smithy.SchemaExtensions
+	eGenerateDataKeyWithoutPlaintextRequest_KeyId                           smithy.SchemaExtensions
+	eGenerateDataKeyWithoutPlaintextRequest_EncryptionContext               smithy.SchemaExtensions
+	eGenerateDataKeyWithoutPlaintextRequest_KeySpec                         smithy.SchemaExtensions
+	eGenerateDataKeyWithoutPlaintextRequest_NumberOfBytes                   smithy.SchemaExtensions
+	eGenerateDataKeyWithoutPlaintextRequest_GrantTokens                     smithy.SchemaExtensions
+	eGenerateDataKeyWithoutPlaintextRequest_DryRun                          smithy.SchemaExtensions
+	eGenerateDataKeyWithoutPlaintextResponse                                smithy.SchemaExtensions
+	eGenerateDataKeyWithoutPlaintextResponse_CiphertextBlob                 smithy.SchemaExtensions
+	eGenerateDataKeyWithoutPlaintextResponse_KeyId                          smithy.SchemaExtensions
+	eGenerateDataKeyWithoutPlaintextResponse_KeyMaterialId                  smithy.SchemaExtensions
+	eGenerateMacRequest                                                     smithy.SchemaExtensions
+	eGenerateMacRequest_Message                                             smithy.SchemaExtensions
+	eGenerateMacRequest_KeyId                                               smithy.SchemaExtensions
+	eGenerateMacRequest_MacAlgorithm                                        smithy.SchemaExtensions
+	eGenerateMacRequest_GrantTokens                                         smithy.SchemaExtensions
+	eGenerateMacRequest_DryRun                                              smithy.SchemaExtensions
+	eGenerateMacResponse                                                    smithy.SchemaExtensions
+	eGenerateMacResponse_Mac                                                smithy.SchemaExtensions
+	eGenerateMacResponse_MacAlgorithm                                       smithy.SchemaExtensions
+	eGenerateMacResponse_KeyId                                              smithy.SchemaExtensions
+	eGenerateRandomRequest                                                  smithy.SchemaExtensions
+	eGenerateRandomRequest_NumberOfBytes                                    smithy.SchemaExtensions
+	eGenerateRandomRequest_CustomKeyStoreId                                 smithy.SchemaExtensions
+	eGenerateRandomRequest_Recipient                                        smithy.SchemaExtensions
+	eGenerateRandomResponse                                                 smithy.SchemaExtensions
+	eGenerateRandomResponse_Plaintext                                       smithy.SchemaExtensions
+	eGenerateRandomResponse_CiphertextForRecipient                          smithy.SchemaExtensions
+	eGetKeyLastUsageRequest                                                 smithy.SchemaExtensions
+	eGetKeyLastUsageRequest_KeyId                                           smithy.SchemaExtensions
+	eGetKeyLastUsageResponse                                                smithy.SchemaExtensions
+	eGetKeyLastUsageResponse_KeyId                                          smithy.SchemaExtensions
+	eGetKeyLastUsageResponse_KeyLastUsage                                   smithy.SchemaExtensions
+	eGetKeyLastUsageResponse_TrackingStartDate                              smithy.SchemaExtensions
+	eGetKeyLastUsageResponse_KeyCreationDate                                smithy.SchemaExtensions
+	eGetKeyPolicyRequest                                                    smithy.SchemaExtensions
+	eGetKeyPolicyRequest_KeyId                                              smithy.SchemaExtensions
+	eGetKeyPolicyRequest_PolicyName                                         smithy.SchemaExtensions
+	eGetKeyPolicyResponse                                                   smithy.SchemaExtensions
+	eGetKeyPolicyResponse_Policy                                            smithy.SchemaExtensions
+	eGetKeyPolicyResponse_PolicyName                                        smithy.SchemaExtensions
+	eGetKeyRotationStatusRequest                                            smithy.SchemaExtensions
+	eGetKeyRotationStatusRequest_KeyId                                      smithy.SchemaExtensions
+	eGetKeyRotationStatusResponse                                           smithy.SchemaExtensions
+	eGetKeyRotationStatusResponse_KeyRotationEnabled                        smithy.SchemaExtensions
+	eGetKeyRotationStatusResponse_KeyId                                     smithy.SchemaExtensions
+	eGetKeyRotationStatusResponse_RotationPeriodInDays                      smithy.SchemaExtensions
+	eGetKeyRotationStatusResponse_NextRotationDate                          smithy.SchemaExtensions
+	eGetKeyRotationStatusResponse_OnDemandRotationStartDate                 smithy.SchemaExtensions
+	eGetParametersForImportRequest                                          smithy.SchemaExtensions
+	eGetParametersForImportRequest_KeyId                                    smithy.SchemaExtensions
+	eGetParametersForImportRequest_WrappingAlgorithm                        smithy.SchemaExtensions
+	eGetParametersForImportRequest_WrappingKeySpec                          smithy.SchemaExtensions
+	eGetParametersForImportResponse                                         smithy.SchemaExtensions
+	eGetParametersForImportResponse_KeyId                                   smithy.SchemaExtensions
+	eGetParametersForImportResponse_ImportToken                             smithy.SchemaExtensions
+	eGetParametersForImportResponse_PublicKey                               smithy.SchemaExtensions
+	eGetParametersForImportResponse_ParametersValidTo                       smithy.SchemaExtensions
+	eGetPublicKeyRequest                                                    smithy.SchemaExtensions
+	eGetPublicKeyRequest_KeyId                                              smithy.SchemaExtensions
+	eGetPublicKeyRequest_GrantTokens                                        smithy.SchemaExtensions
+	eGetPublicKeyResponse                                                   smithy.SchemaExtensions
+	eGetPublicKeyResponse_KeyId                                             smithy.SchemaExtensions
+	eGetPublicKeyResponse_PublicKey                                         smithy.SchemaExtensions
+	eGetPublicKeyResponse_CustomerMasterKeySpec                             smithy.SchemaExtensions
+	eGetPublicKeyResponse_KeySpec                                           smithy.SchemaExtensions
+	eGetPublicKeyResponse_KeyUsage                                          smithy.SchemaExtensions
+	eGetPublicKeyResponse_EncryptionAlgorithms                              smithy.SchemaExtensions
+	eGetPublicKeyResponse_SigningAlgorithms                                 smithy.SchemaExtensions
+	eGetPublicKeyResponse_KeyAgreementAlgorithms                            smithy.SchemaExtensions
+	eGetPublicKeyResponse_EncapsulationAlgorithms                           smithy.SchemaExtensions
+	eImportKeyMaterialRequest                                               smithy.SchemaExtensions
+	eImportKeyMaterialRequest_KeyId                                         smithy.SchemaExtensions
+	eImportKeyMaterialRequest_ImportToken                                   smithy.SchemaExtensions
+	eImportKeyMaterialRequest_EncryptedKeyMaterial                          smithy.SchemaExtensions
+	eImportKeyMaterialRequest_ValidTo                                       smithy.SchemaExtensions
+	eImportKeyMaterialRequest_ExpirationModel                               smithy.SchemaExtensions
+	eImportKeyMaterialRequest_ImportType                                    smithy.SchemaExtensions
+	eImportKeyMaterialRequest_KeyMaterialDescription                        smithy.SchemaExtensions
+	eImportKeyMaterialRequest_KeyMaterialId                                 smithy.SchemaExtensions
+	eImportKeyMaterialResponse                                              smithy.SchemaExtensions
+	eImportKeyMaterialResponse_KeyId                                        smithy.SchemaExtensions
+	eImportKeyMaterialResponse_KeyMaterialId                                smithy.SchemaExtensions
+	eListAliasesRequest                                                     smithy.SchemaExtensions
+	eListAliasesRequest_KeyId                                               smithy.SchemaExtensions
+	eListAliasesRequest_Limit                                               smithy.SchemaExtensions
+	eListAliasesRequest_Marker                                              smithy.SchemaExtensions
+	eListAliasesResponse                                                    smithy.SchemaExtensions
+	eListAliasesResponse_Aliases                                            smithy.SchemaExtensions
+	eListAliasesResponse_NextMarker                                         smithy.SchemaExtensions
+	eListAliasesResponse_Truncated                                          smithy.SchemaExtensions
+	eListGrantsRequest                                                      smithy.SchemaExtensions
+	eListGrantsRequest_Limit                                                smithy.SchemaExtensions
+	eListGrantsRequest_Marker                                               smithy.SchemaExtensions
+	eListGrantsRequest_KeyId                                                smithy.SchemaExtensions
+	eListGrantsRequest_GrantId                                              smithy.SchemaExtensions
+	eListGrantsRequest_GranteePrincipal                                     smithy.SchemaExtensions
+	eListGrantsRequest_GranteeServicePrincipal                              smithy.SchemaExtensions
+	eListGrantsResponse                                                     smithy.SchemaExtensions
+	eListGrantsResponse_Grants                                              smithy.SchemaExtensions
+	eListGrantsResponse_NextMarker                                          smithy.SchemaExtensions
+	eListGrantsResponse_Truncated                                           smithy.SchemaExtensions
+	eListKeyPoliciesRequest                                                 smithy.SchemaExtensions
+	eListKeyPoliciesRequest_KeyId                                           smithy.SchemaExtensions
+	eListKeyPoliciesRequest_Limit                                           smithy.SchemaExtensions
+	eListKeyPoliciesRequest_Marker                                          smithy.SchemaExtensions
+	eListKeyPoliciesResponse                                                smithy.SchemaExtensions
+	eListKeyPoliciesResponse_PolicyNames                                    smithy.SchemaExtensions
+	eListKeyPoliciesResponse_NextMarker                                     smithy.SchemaExtensions
+	eListKeyPoliciesResponse_Truncated                                      smithy.SchemaExtensions
+	eListKeyRotationsRequest                                                smithy.SchemaExtensions
+	eListKeyRotationsRequest_KeyId                                          smithy.SchemaExtensions
+	eListKeyRotationsRequest_IncludeKeyMaterial                             smithy.SchemaExtensions
+	eListKeyRotationsRequest_Limit                                          smithy.SchemaExtensions
+	eListKeyRotationsRequest_Marker                                         smithy.SchemaExtensions
+	eListKeyRotationsResponse                                               smithy.SchemaExtensions
+	eListKeyRotationsResponse_Rotations                                     smithy.SchemaExtensions
+	eListKeyRotationsResponse_NextMarker                                    smithy.SchemaExtensions
+	eListKeyRotationsResponse_Truncated                                     smithy.SchemaExtensions
+	eListKeysRequest                                                        smithy.SchemaExtensions
+	eListKeysRequest_Limit                                                  smithy.SchemaExtensions
+	eListKeysRequest_Marker                                                 smithy.SchemaExtensions
+	eListKeysResponse                                                       smithy.SchemaExtensions
+	eListKeysResponse_Keys                                                  smithy.SchemaExtensions
+	eListKeysResponse_NextMarker                                            smithy.SchemaExtensions
+	eListKeysResponse_Truncated                                             smithy.SchemaExtensions
+	eListResourceTagsRequest                                                smithy.SchemaExtensions
+	eListResourceTagsRequest_KeyId                                          smithy.SchemaExtensions
+	eListResourceTagsRequest_Limit                                          smithy.SchemaExtensions
+	eListResourceTagsRequest_Marker                                         smithy.SchemaExtensions
+	eListResourceTagsResponse                                               smithy.SchemaExtensions
+	eListResourceTagsResponse_Tags                                          smithy.SchemaExtensions
+	eListResourceTagsResponse_NextMarker                                    smithy.SchemaExtensions
+	eListResourceTagsResponse_Truncated                                     smithy.SchemaExtensions
+	eListRetirableGrantsRequest                                             smithy.SchemaExtensions
+	eListRetirableGrantsRequest_Limit                                       smithy.SchemaExtensions
+	eListRetirableGrantsRequest_Marker                                      smithy.SchemaExtensions
+	eListRetirableGrantsRequest_RetiringPrincipal                           smithy.SchemaExtensions
+	eListRetirableGrantsRequest_RetiringServicePrincipal                    smithy.SchemaExtensions
+	ePutKeyPolicyRequest                                                    smithy.SchemaExtensions
+	ePutKeyPolicyRequest_KeyId                                              smithy.SchemaExtensions
+	ePutKeyPolicyRequest_PolicyName                                         smithy.SchemaExtensions
+	ePutKeyPolicyRequest_Policy                                             smithy.SchemaExtensions
+	ePutKeyPolicyRequest_BypassPolicyLockoutSafetyCheck                     smithy.SchemaExtensions
+	eReEncryptRequest                                                       smithy.SchemaExtensions
+	eReEncryptRequest_CiphertextBlob                                        smithy.SchemaExtensions
+	eReEncryptRequest_SourceEncryptionContext                               smithy.SchemaExtensions
+	eReEncryptRequest_SourceKeyId                                           smithy.SchemaExtensions
+	eReEncryptRequest_DestinationKeyId                                      smithy.SchemaExtensions
+	eReEncryptRequest_DestinationEncryptionContext                          smithy.SchemaExtensions
+	eReEncryptRequest_SourceEncryptionAlgorithm                             smithy.SchemaExtensions
+	eReEncryptRequest_DestinationEncryptionAlgorithm                        smithy.SchemaExtensions
+	eReEncryptRequest_GrantTokens                                           smithy.SchemaExtensions
+	eReEncryptRequest_DryRun                                                smithy.SchemaExtensions
+	eReEncryptRequest_DryRunModifiers                                       smithy.SchemaExtensions
+	eReEncryptResponse                                                      smithy.SchemaExtensions
+	eReEncryptResponse_CiphertextBlob                                       smithy.SchemaExtensions
+	eReEncryptResponse_SourceKeyId                                          smithy.SchemaExtensions
+	eReEncryptResponse_KeyId                                                smithy.SchemaExtensions
+	eReEncryptResponse_SourceEncryptionAlgorithm                            smithy.SchemaExtensions
+	eReEncryptResponse_DestinationEncryptionAlgorithm                       smithy.SchemaExtensions
+	eReEncryptResponse_SourceKeyMaterialId                                  smithy.SchemaExtensions
+	eReEncryptResponse_DestinationKeyMaterialId                             smithy.SchemaExtensions
+	eReplicateKeyRequest                                                    smithy.SchemaExtensions
+	eReplicateKeyRequest_KeyId                                              smithy.SchemaExtensions
+	eReplicateKeyRequest_ReplicaRegion                                      smithy.SchemaExtensions
+	eReplicateKeyRequest_Policy                                             smithy.SchemaExtensions
+	eReplicateKeyRequest_BypassPolicyLockoutSafetyCheck                     smithy.SchemaExtensions
+	eReplicateKeyRequest_Description                                        smithy.SchemaExtensions
+	eReplicateKeyRequest_Tags                                               smithy.SchemaExtensions
+	eReplicateKeyResponse                                                   smithy.SchemaExtensions
+	eReplicateKeyResponse_ReplicaKeyMetadata                                smithy.SchemaExtensions
+	eReplicateKeyResponse_ReplicaPolicy                                     smithy.SchemaExtensions
+	eReplicateKeyResponse_ReplicaTags                                       smithy.SchemaExtensions
+	eRetireGrantRequest                                                     smithy.SchemaExtensions
+	eRetireGrantRequest_GrantToken                                          smithy.SchemaExtensions
+	eRetireGrantRequest_KeyId                                               smithy.SchemaExtensions
+	eRetireGrantRequest_GrantId                                             smithy.SchemaExtensions
+	eRetireGrantRequest_DryRun                                              smithy.SchemaExtensions
+	eRevokeGrantRequest                                                     smithy.SchemaExtensions
+	eRevokeGrantRequest_KeyId                                               smithy.SchemaExtensions
+	eRevokeGrantRequest_GrantId                                             smithy.SchemaExtensions
+	eRevokeGrantRequest_DryRun                                              smithy.SchemaExtensions
+	eRotateKeyOnDemandRequest                                               smithy.SchemaExtensions
+	eRotateKeyOnDemandRequest_KeyId                                         smithy.SchemaExtensions
+	eRotateKeyOnDemandResponse                                              smithy.SchemaExtensions
+	eRotateKeyOnDemandResponse_KeyId                                        smithy.SchemaExtensions
+	eScheduleKeyDeletionRequest                                             smithy.SchemaExtensions
+	eScheduleKeyDeletionRequest_KeyId                                       smithy.SchemaExtensions
+	eScheduleKeyDeletionRequest_PendingWindowInDays                         smithy.SchemaExtensions
+	eScheduleKeyDeletionResponse                                            smithy.SchemaExtensions
+	eScheduleKeyDeletionResponse_KeyId                                      smithy.SchemaExtensions
+	eScheduleKeyDeletionResponse_DeletionDate                               smithy.SchemaExtensions
+	eScheduleKeyDeletionResponse_KeyState                                   smithy.SchemaExtensions
+	eScheduleKeyDeletionResponse_PendingWindowInDays                        smithy.SchemaExtensions
+	eSignRequest                                                            smithy.SchemaExtensions
+	eSignRequest_KeyId                                                      smithy.SchemaExtensions
+	eSignRequest_Message                                                    smithy.SchemaExtensions
+	eSignRequest_MessageType                                                smithy.SchemaExtensions
+	eSignRequest_GrantTokens                                                smithy.SchemaExtensions
+	eSignRequest_SigningAlgorithm                                           smithy.SchemaExtensions
+	eSignRequest_DryRun                                                     smithy.SchemaExtensions
+	eSignResponse                                                           smithy.SchemaExtensions
+	eSignResponse_KeyId                                                     smithy.SchemaExtensions
+	eSignResponse_Signature                                                 smithy.SchemaExtensions
+	eSignResponse_SigningAlgorithm                                          smithy.SchemaExtensions
+	eTagResourceRequest                                                     smithy.SchemaExtensions
+	eTagResourceRequest_KeyId                                               smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                                smithy.SchemaExtensions
+	eUntagResourceRequest                                                   smithy.SchemaExtensions
+	eUntagResourceRequest_KeyId                                             smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                           smithy.SchemaExtensions
+	eUpdateAliasRequest                                                     smithy.SchemaExtensions
+	eUpdateAliasRequest_AliasName                                           smithy.SchemaExtensions
+	eUpdateAliasRequest_TargetKeyId                                         smithy.SchemaExtensions
+	eUpdateCustomKeyStoreRequest                                            smithy.SchemaExtensions
+	eUpdateCustomKeyStoreRequest_CustomKeyStoreId                           smithy.SchemaExtensions
+	eUpdateCustomKeyStoreRequest_NewCustomKeyStoreName                      smithy.SchemaExtensions
+	eUpdateCustomKeyStoreRequest_KeyStorePassword                           smithy.SchemaExtensions
+	eUpdateCustomKeyStoreRequest_CloudHsmClusterId                          smithy.SchemaExtensions
+	eUpdateCustomKeyStoreRequest_XksProxyUriEndpoint                        smithy.SchemaExtensions
+	eUpdateCustomKeyStoreRequest_XksProxyUriPath                            smithy.SchemaExtensions
+	eUpdateCustomKeyStoreRequest_XksProxyVpcEndpointServiceName             smithy.SchemaExtensions
+	eUpdateCustomKeyStoreRequest_XksProxyVpcEndpointServiceOwner            smithy.SchemaExtensions
+	eUpdateCustomKeyStoreRequest_XksProxyAuthenticationCredential           smithy.SchemaExtensions
+	eUpdateCustomKeyStoreRequest_XksProxyConnectivity                       smithy.SchemaExtensions
+	eUpdateCustomKeyStoreResponse                                           smithy.SchemaExtensions
+	eUpdateKeyDescriptionRequest                                            smithy.SchemaExtensions
+	eUpdateKeyDescriptionRequest_KeyId                                      smithy.SchemaExtensions
+	eUpdateKeyDescriptionRequest_Description                                smithy.SchemaExtensions
+	eUpdatePrimaryRegionRequest                                             smithy.SchemaExtensions
+	eUpdatePrimaryRegionRequest_KeyId                                       smithy.SchemaExtensions
+	eUpdatePrimaryRegionRequest_PrimaryRegion                               smithy.SchemaExtensions
+	eVerifyRequest                                                          smithy.SchemaExtensions
+	eVerifyRequest_KeyId                                                    smithy.SchemaExtensions
+	eVerifyRequest_Message                                                  smithy.SchemaExtensions
+	eVerifyRequest_MessageType                                              smithy.SchemaExtensions
+	eVerifyRequest_Signature                                                smithy.SchemaExtensions
+	eVerifyRequest_SigningAlgorithm                                         smithy.SchemaExtensions
+	eVerifyRequest_GrantTokens                                              smithy.SchemaExtensions
+	eVerifyRequest_DryRun                                                   smithy.SchemaExtensions
+	eVerifyMacRequest                                                       smithy.SchemaExtensions
+	eVerifyMacRequest_Message                                               smithy.SchemaExtensions
+	eVerifyMacRequest_KeyId                                                 smithy.SchemaExtensions
+	eVerifyMacRequest_MacAlgorithm                                          smithy.SchemaExtensions
+	eVerifyMacRequest_Mac                                                   smithy.SchemaExtensions
+	eVerifyMacRequest_GrantTokens                                           smithy.SchemaExtensions
+	eVerifyMacRequest_DryRun                                                smithy.SchemaExtensions
+	eVerifyMacResponse                                                      smithy.SchemaExtensions
+	eVerifyMacResponse_KeyId                                                smithy.SchemaExtensions
+	eVerifyMacResponse_MacValid                                             smithy.SchemaExtensions
+	eVerifyMacResponse_MacAlgorithm                                         smithy.SchemaExtensions
+	eVerifyResponse                                                         smithy.SchemaExtensions
+	eVerifyResponse_KeyId                                                   smithy.SchemaExtensions
+	eVerifyResponse_SignatureValid                                          smithy.SchemaExtensions
+	eVerifyResponse_SigningAlgorithm                                        smithy.SchemaExtensions
+)
 
 var (
 	iCancelKeyDeletion                                       = smithy.ShapeID{Namespace: "com.amazonaws.kms", Name: "CancelKeyDeletion"}
@@ -690,1004 +1686,1004 @@ var mVerifyMacRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sVerifyMacR
 var mVerifyMacResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sVerifyMacResponse_KeyId, &sVerifyMacResponse_MacValid, &sVerifyMacResponse_MacAlgorithm}}
 var mVerifyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sVerifyResponse_KeyId, &sVerifyResponse_SignatureValid, &sVerifyResponse_SigningAlgorithm}}
 
-var sCancelKeyDeletion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelKeyDeletion, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sConnectCustomKeyStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectCustomKeyStore, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sCreateAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAlias, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sCreateCustomKeyStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomKeyStore, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sCreateGrant = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGrant, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sCreateKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateKey, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sDecapsulate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecapsulate, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sDecrypt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecrypt, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sDeleteAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAlias, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sDeleteCustomKeyStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomKeyStore, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sDeleteImportedKeyMaterial = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteImportedKeyMaterial, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sDeriveSharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeriveSharedSecret, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sDescribeCustomKeyStores = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCustomKeyStores, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sDescribeKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeKey, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sDisableKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableKey, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sDisableKeyRotation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableKeyRotation, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sDisconnectCustomKeyStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisconnectCustomKeyStore, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sEnableKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableKey, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sEnableKeyRotation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableKeyRotation, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sEncapsulate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncapsulate, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var sEncrypt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncrypt, Type: smithy.ShapeTypeOperation, Ext: &ext[20]})
-var sGenerateDataKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataKey, Type: smithy.ShapeTypeOperation, Ext: &ext[21]})
-var sGenerateDataKeyPair = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataKeyPair, Type: smithy.ShapeTypeOperation, Ext: &ext[22]})
-var sGenerateDataKeyPairWithoutPlaintext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataKeyPairWithoutPlaintext, Type: smithy.ShapeTypeOperation, Ext: &ext[23]})
-var sGenerateDataKeyWithoutPlaintext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataKeyWithoutPlaintext, Type: smithy.ShapeTypeOperation, Ext: &ext[24]})
-var sGenerateMac = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateMac, Type: smithy.ShapeTypeOperation, Ext: &ext[25]})
-var sGenerateRandom = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateRandom, Type: smithy.ShapeTypeOperation, Ext: &ext[26]})
-var sGetKeyLastUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyLastUsage, Type: smithy.ShapeTypeOperation, Ext: &ext[27]})
-var sGetKeyPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyPolicy, Type: smithy.ShapeTypeOperation, Ext: &ext[28]})
-var sGetKeyRotationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyRotationStatus, Type: smithy.ShapeTypeOperation, Ext: &ext[29]})
-var sGetParametersForImport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetParametersForImport, Type: smithy.ShapeTypeOperation, Ext: &ext[30]})
-var sGetPublicKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPublicKey, Type: smithy.ShapeTypeOperation, Ext: &ext[31]})
-var sImportKeyMaterial = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportKeyMaterial, Type: smithy.ShapeTypeOperation, Ext: &ext[32]})
-var sListAliases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAliases, Type: smithy.ShapeTypeOperation, Ext: &ext[33]})
-var sListGrants = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGrants, Type: smithy.ShapeTypeOperation, Ext: &ext[34]})
-var sListKeyPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeyPolicies, Type: smithy.ShapeTypeOperation, Ext: &ext[35]})
-var sListKeyRotations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeyRotations, Type: smithy.ShapeTypeOperation, Ext: &ext[36]})
-var sListKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeys, Type: smithy.ShapeTypeOperation, Ext: &ext[37]})
-var sListResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceTags, Type: smithy.ShapeTypeOperation, Ext: &ext[38]})
-var sListRetirableGrants = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRetirableGrants, Type: smithy.ShapeTypeOperation, Ext: &ext[39]})
-var sPutKeyPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutKeyPolicy, Type: smithy.ShapeTypeOperation, Ext: &ext[40]})
-var sReEncrypt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReEncrypt, Type: smithy.ShapeTypeOperation, Ext: &ext[41]})
-var sReplicateKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicateKey, Type: smithy.ShapeTypeOperation, Ext: &ext[42]})
-var sRetireGrant = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetireGrant, Type: smithy.ShapeTypeOperation, Ext: &ext[43]})
-var sRevokeGrant = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeGrant, Type: smithy.ShapeTypeOperation, Ext: &ext[44]})
-var sRotateKeyOnDemand = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateKeyOnDemand, Type: smithy.ShapeTypeOperation, Ext: &ext[45]})
-var sScheduleKeyDeletion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduleKeyDeletion, Type: smithy.ShapeTypeOperation, Ext: &ext[46]})
-var sSign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSign, Type: smithy.ShapeTypeOperation, Ext: &ext[47]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[48]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[49]})
-var sUpdateAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAlias, Type: smithy.ShapeTypeOperation, Ext: &ext[50]})
-var sUpdateCustomKeyStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomKeyStore, Type: smithy.ShapeTypeOperation, Ext: &ext[51]})
-var sUpdateKeyDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateKeyDescription, Type: smithy.ShapeTypeOperation, Ext: &ext[52]})
-var sUpdatePrimaryRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePrimaryRegion, Type: smithy.ShapeTypeOperation, Ext: &ext[53]})
-var sVerify = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerify, Type: smithy.ShapeTypeOperation, Ext: &ext[54]})
-var sVerifyMac = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifyMac, Type: smithy.ShapeTypeOperation, Ext: &ext[55]})
-var s_TrentService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrentService, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &ext[56]})
-var s_AccountIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountIdType, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var sAlgorithmSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlgorithmSpec, Members: &mAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[58]})
-var s_AliasList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AliasList, Members: &m_AliasList, Type: smithy.ShapeTypeList, Ext: &ext[65]})
-var sAliasListEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAliasListEntry, Members: &mAliasListEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[67]})
-var s_AliasNameType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AliasNameType, Type: smithy.ShapeTypeString, Ext: &ext[73]})
-var sAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlreadyExistsException, Members: &mAlreadyExistsException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var s_ArnType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArnType, Type: smithy.ShapeTypeString, Ext: &ext[76]})
-var s_AttestationDocumentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttestationDocumentType, Type: smithy.ShapeTypeBlob, Ext: &ext[77]})
-var s_AWSAccountIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSAccountIdType, Type: smithy.ShapeTypeString, Ext: &ext[78]})
-var s_BackingKeyIdResponseType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BackingKeyIdResponseType, Type: smithy.ShapeTypeString, Ext: &ext[79]})
-var s_BackingKeyIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BackingKeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[80]})
-var s_BooleanType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[81]})
-var s_CiphertextType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &ext[82]})
-var s_CloudHsmClusterIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudHsmClusterIdType, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var sCloudHsmClusterInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudHsmClusterInUseException, Members: &mCloudHsmClusterInUseException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[84]})
-var sCloudHsmClusterInvalidConfigurationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudHsmClusterInvalidConfigurationException, Members: &mCloudHsmClusterInvalidConfigurationException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[86]})
-var sCloudHsmClusterNotActiveException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudHsmClusterNotActiveException, Members: &mCloudHsmClusterNotActiveException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &ext[88]})
-var sCloudHsmClusterNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudHsmClusterNotFoundException, Members: &mCloudHsmClusterNotFoundException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &ext[90]})
-var sCloudHsmClusterNotRelatedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudHsmClusterNotRelatedException, Members: &mCloudHsmClusterNotRelatedException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &ext[92]})
-var s_CloudTrailEventIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudTrailEventIdType, Type: smithy.ShapeTypeString, Ext: &ext[94]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &ext[95]})
-var sConnectionErrorCodeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionErrorCodeType, Members: &mConnectionErrorCodeType, Type: smithy.ShapeTypeEnum, Ext: &ext[97]})
-var sConnectionStateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionStateType, Members: &mConnectionStateType, Type: smithy.ShapeTypeEnum, Ext: &ext[116]})
-var sCustomerMasterKeySpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomerMasterKeySpec, Members: &mCustomerMasterKeySpec, Type: smithy.ShapeTypeEnum, Ext: &ext[122]})
-var sCustomKeyStoreHasCMKsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomKeyStoreHasCMKsException, Members: &mCustomKeyStoreHasCMKsException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &ext[136]})
-var s_CustomKeyStoreIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomKeyStoreIdType, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var sCustomKeyStoreInvalidStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomKeyStoreInvalidStateException, Members: &mCustomKeyStoreInvalidStateException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &ext[139]})
-var sCustomKeyStoreNameInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomKeyStoreNameInUseException, Members: &mCustomKeyStoreNameInUseException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &ext[141]})
-var s_CustomKeyStoreNameType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomKeyStoreNameType, Type: smithy.ShapeTypeString, Ext: &ext[143]})
-var sCustomKeyStoreNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomKeyStoreNotFoundException, Members: &mCustomKeyStoreNotFoundException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &ext[144]})
-var s_CustomKeyStoresList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomKeyStoresList, Members: &m_CustomKeyStoresList, Type: smithy.ShapeTypeList, Ext: &ext[146]})
-var sCustomKeyStoresListEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomKeyStoresListEntry, Members: &mCustomKeyStoresListEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[148]})
-var sCustomKeyStoreType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomKeyStoreType, Members: &mCustomKeyStoreType, Type: smithy.ShapeTypeEnum, Ext: &ext[158]})
-var sDataKeyPairSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataKeyPairSpec, Members: &mDataKeyPairSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[161]})
-var sDataKeySpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataKeySpec, Members: &mDataKeySpec, Type: smithy.ShapeTypeEnum, Ext: &ext[174]})
-var s_DateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[177]})
-var sDependencyTimeoutException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDependencyTimeoutException, Members: &mDependencyTimeoutException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &ext[178]})
-var s_DescriptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescriptionType, Type: smithy.ShapeTypeString, Ext: &ext[180]})
-var sDisabledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisabledException, Members: &mDisabledException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &ext[181]})
-var s_DryRunModifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DryRunModifierList, Members: &m_DryRunModifierList, Type: smithy.ShapeTypeList, Ext: &ext[183]})
-var sDryRunModifierType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDryRunModifierType, Members: &mDryRunModifierType, Type: smithy.ShapeTypeEnum, Ext: &ext[185]})
-var sDryRunOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDryRunOperationException, Members: &mDryRunOperationException, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &ext[187]})
-var sEncapsulationAlgorithmSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncapsulationAlgorithmSpec, Members: &mEncapsulationAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[189]})
-var s_EncapsulationAlgorithmSpecList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncapsulationAlgorithmSpecList, Members: &m_EncapsulationAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &ext[191]})
-var sEncryptionAlgorithmSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionAlgorithmSpec, Members: &mEncryptionAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[193]})
-var s_EncryptionAlgorithmSpecList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionAlgorithmSpecList, Members: &m_EncryptionAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &ext[198]})
-var s_EncryptionContextKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionContextKey, Type: smithy.ShapeTypeString, Ext: &ext[200]})
-var s_EncryptionContextType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionContextType, Members: &m_EncryptionContextType, Type: smithy.ShapeTypeMap, Ext: &ext[201]})
-var s_EncryptionContextValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionContextValue, Type: smithy.ShapeTypeString, Ext: &ext[204]})
-var s_ErrorMessageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[205]})
-var sExpirationModelType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpirationModelType, Members: &mExpirationModelType, Type: smithy.ShapeTypeEnum, Ext: &ext[206]})
-var sExpiredImportTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpiredImportTokenException, Members: &mExpiredImportTokenException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &ext[209]})
-var sGrantConstraints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGrantConstraints, Members: &mGrantConstraints, Type: smithy.ShapeTypeStructure, Ext: &ext[211]})
-var s_GrantConstraintSourceArnType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GrantConstraintSourceArnType, Type: smithy.ShapeTypeString, Ext: &ext[215]})
-var s_GrantIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GrantIdType, Type: smithy.ShapeTypeString, Ext: &ext[216]})
-var s_GrantList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GrantList, Members: &m_GrantList, Type: smithy.ShapeTypeList, Ext: &ext[217]})
-var sGrantListEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGrantListEntry, Members: &mGrantListEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[219]})
-var s_GrantNameType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GrantNameType, Type: smithy.ShapeTypeString, Ext: &ext[231]})
-var sGrantOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGrantOperation, Members: &mGrantOperation, Type: smithy.ShapeTypeEnum, Ext: &ext[232]})
-var s_GrantOperationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GrantOperationList, Members: &m_GrantOperationList, Type: smithy.ShapeTypeList, Ext: &ext[252]})
-var s_GrantTokenList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &ext[254]})
-var s_GrantTokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GrantTokenType, Type: smithy.ShapeTypeString, Ext: &ext[256]})
-var sImportState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportState, Members: &mImportState, Type: smithy.ShapeTypeEnum, Ext: &ext[257]})
-var sImportType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportType, Members: &mImportType, Type: smithy.ShapeTypeEnum, Ext: &ext[260]})
-var sIncludeKeyMaterial = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncludeKeyMaterial, Members: &mIncludeKeyMaterial, Type: smithy.ShapeTypeEnum, Ext: &ext[263]})
-var sIncorrectKeyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncorrectKeyException, Members: &mIncorrectKeyException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &ext[266]})
-var sIncorrectKeyMaterialException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncorrectKeyMaterialException, Members: &mIncorrectKeyMaterialException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &ext[268]})
-var sIncorrectTrustAnchorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncorrectTrustAnchorException, Members: &mIncorrectTrustAnchorException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &ext[270]})
-var sInvalidAliasNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidAliasNameException, Members: &mInvalidAliasNameException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &ext[272]})
-var sInvalidArnException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidArnException, Members: &mInvalidArnException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &ext[274]})
-var sInvalidCiphertextException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidCiphertextException, Members: &mInvalidCiphertextException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &ext[276]})
-var sInvalidGrantIdException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidGrantIdException, Members: &mInvalidGrantIdException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &ext[278]})
-var sInvalidGrantTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidGrantTokenException, Members: &mInvalidGrantTokenException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &ext[280]})
-var sInvalidImportTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidImportTokenException, Members: &mInvalidImportTokenException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &ext[282]})
-var sInvalidKeyUsageException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidKeyUsageException, Members: &mInvalidKeyUsageException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &ext[284]})
-var sInvalidMarkerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidMarkerException, Members: &mInvalidMarkerException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &ext[286]})
-var sKeyAgreementAlgorithmSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyAgreementAlgorithmSpec, Members: &mKeyAgreementAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[288]})
-var s_KeyAgreementAlgorithmSpecList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyAgreementAlgorithmSpecList, Members: &m_KeyAgreementAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &ext[290]})
-var sKeyEncryptionMechanism = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyEncryptionMechanism, Members: &mKeyEncryptionMechanism, Type: smithy.ShapeTypeEnum, Ext: &ext[292]})
-var s_KeyIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[294]})
-var sKeyLastUsageData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyLastUsageData, Members: &mKeyLastUsageData, Type: smithy.ShapeTypeStructure, Ext: &ext[295]})
-var sKeyLastUsageTrackingOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyLastUsageTrackingOperation, Members: &mKeyLastUsageTrackingOperation, Type: smithy.ShapeTypeEnum, Ext: &ext[300]})
-var s_KeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyList, Members: &m_KeyList, Type: smithy.ShapeTypeList, Ext: &ext[315]})
-var sKeyListEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyListEntry, Members: &mKeyListEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[317]})
-var sKeyManagerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyManagerType, Members: &mKeyManagerType, Type: smithy.ShapeTypeEnum, Ext: &ext[320]})
-var s_KeyMaterialDescriptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyMaterialDescriptionType, Type: smithy.ShapeTypeString, Ext: &ext[323]})
-var sKeyMaterialState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyMaterialState, Members: &mKeyMaterialState, Type: smithy.ShapeTypeEnum, Ext: &ext[324]})
-var sKeyMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyMetadata, Members: &mKeyMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[329]})
-var sKeySpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeySpec, Members: &mKeySpec, Type: smithy.ShapeTypeEnum, Ext: &ext[357]})
-var sKeyState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyState, Members: &mKeyState, Type: smithy.ShapeTypeEnum, Ext: &ext[378]})
-var s_KeyStorePasswordType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyStorePasswordType, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[387]})
-var sKeyUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyUnavailableException, Members: &mKeyUnavailableException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &ext[388]})
-var sKeyUsageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyUsageType, Members: &mKeyUsageType, Type: smithy.ShapeTypeEnum, Ext: &ext[390]})
-var sKMSInternalException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKMSInternalException, Members: &mKMSInternalException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &ext[396]})
-var sKMSInvalidMacException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKMSInvalidMacException, Members: &mKMSInvalidMacException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &ext[398]})
-var sKMSInvalidSignatureException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKMSInvalidSignatureException, Members: &mKMSInvalidSignatureException, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &ext[400]})
-var sKMSInvalidStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKMSInvalidStateException, Members: &mKMSInvalidStateException, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &ext[402]})
-var s_KmsRequestIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsRequestIdType, Type: smithy.ShapeTypeString, Ext: &ext[404]})
-var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &ext[405]})
-var s_LimitType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LimitType, Type: smithy.ShapeTypeInteger, Ext: &ext[407]})
-var sMacAlgorithmSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMacAlgorithmSpec, Members: &mMacAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[408]})
-var s_MacAlgorithmSpecList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MacAlgorithmSpecList, Members: &m_MacAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &ext[413]})
-var sMalformedPolicyDocumentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedPolicyDocumentException, Members: &mMalformedPolicyDocumentException, Traits: &t34, Type: smithy.ShapeTypeStructure, Ext: &ext[415]})
-var s_MarkerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &ext[417]})
-var sMessageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageType, Members: &mMessageType, Type: smithy.ShapeTypeEnum, Ext: &ext[418]})
-var sMultiRegionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMultiRegionConfiguration, Members: &mMultiRegionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[422]})
-var sMultiRegionKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMultiRegionKey, Members: &mMultiRegionKey, Type: smithy.ShapeTypeStructure, Ext: &ext[426]})
-var s_MultiRegionKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MultiRegionKeyList, Members: &m_MultiRegionKeyList, Type: smithy.ShapeTypeList, Ext: &ext[429]})
-var sMultiRegionKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMultiRegionKeyType, Members: &mMultiRegionKeyType, Type: smithy.ShapeTypeEnum, Ext: &ext[431]})
-var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t35, Type: smithy.ShapeTypeStructure, Ext: &ext[434]})
-var s_NullableBooleanType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[436]})
-var s_NumberOfBytesType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberOfBytesType, Type: smithy.ShapeTypeInteger, Ext: &ext[437]})
-var sOriginType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOriginType, Members: &mOriginType, Type: smithy.ShapeTypeEnum, Ext: &ext[438]})
-var s_PendingWindowInDaysType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PendingWindowInDaysType, Type: smithy.ShapeTypeInteger, Ext: &ext[443]})
-var s_PlaintextType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlaintextType, Traits: &t27, Type: smithy.ShapeTypeBlob, Ext: &ext[444]})
-var s_PolicyNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyNameList, Members: &m_PolicyNameList, Type: smithy.ShapeTypeList, Ext: &ext[445]})
-var s_PolicyNameType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyNameType, Type: smithy.ShapeTypeString, Ext: &ext[447]})
-var s_PolicyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyType, Type: smithy.ShapeTypeString, Ext: &ext[448]})
-var s_PrincipalIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrincipalIdType, Type: smithy.ShapeTypeString, Ext: &ext[449]})
-var s_PublicKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PublicKeyType, Type: smithy.ShapeTypeBlob, Ext: &ext[450]})
-var sRecipientInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecipientInfo, Members: &mRecipientInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[451]})
-var s_RegionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionType, Type: smithy.ShapeTypeString, Ext: &ext[454]})
-var s_RotationPeriodInDaysType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RotationPeriodInDaysType, Type: smithy.ShapeTypeInteger, Ext: &ext[455]})
-var s_RotationsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RotationsList, Members: &m_RotationsList, Type: smithy.ShapeTypeList, Ext: &ext[456]})
-var sRotationsListEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotationsListEntry, Members: &mRotationsListEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[458]})
-var sRotationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotationType, Members: &mRotationType, Type: smithy.ShapeTypeEnum, Ext: &ext[468]})
-var s_ServicePrincipalType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServicePrincipalType, Type: smithy.ShapeTypeString, Ext: &ext[471]})
-var sSigningAlgorithmSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSigningAlgorithmSpec, Members: &mSigningAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[472]})
-var s_SigningAlgorithmSpecList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SigningAlgorithmSpecList, Members: &m_SigningAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &ext[486]})
-var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[488]})
-var sTagException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagException, Members: &mTagException, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &ext[491]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[493]})
-var s_TagKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyType, Type: smithy.ShapeTypeString, Ext: &ext[495]})
-var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[496]})
-var s_TagValueType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValueType, Type: smithy.ShapeTypeString, Ext: &ext[498]})
-var s_TrustAnchorCertificateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrustAnchorCertificateType, Type: smithy.ShapeTypeString, Ext: &ext[499]})
-var sUnsupportedOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedOperationException, Members: &mUnsupportedOperationException, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &ext[500]})
-var sWrappingKeySpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWrappingKeySpec, Members: &mWrappingKeySpec, Type: smithy.ShapeTypeEnum, Ext: &ext[502]})
-var sXksKeyAlreadyInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksKeyAlreadyInUseException, Members: &mXksKeyAlreadyInUseException, Traits: &t38, Type: smithy.ShapeTypeStructure, Ext: &ext[507]})
-var sXksKeyConfigurationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksKeyConfigurationType, Members: &mXksKeyConfigurationType, Type: smithy.ShapeTypeStructure, Ext: &ext[509]})
-var s_XksKeyIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XksKeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[511]})
-var sXksKeyInvalidConfigurationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksKeyInvalidConfigurationException, Members: &mXksKeyInvalidConfigurationException, Traits: &t39, Type: smithy.ShapeTypeStructure, Ext: &ext[512]})
-var sXksKeyNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksKeyNotFoundException, Members: &mXksKeyNotFoundException, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &ext[514]})
-var s_XksProxyAuthenticationAccessKeyIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XksProxyAuthenticationAccessKeyIdType, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[516]})
-var sXksProxyAuthenticationCredentialType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksProxyAuthenticationCredentialType, Members: &mXksProxyAuthenticationCredentialType, Type: smithy.ShapeTypeStructure, Ext: &ext[517]})
-var s_XksProxyAuthenticationRawSecretAccessKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XksProxyAuthenticationRawSecretAccessKeyType, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[520]})
-var sXksProxyConfigurationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksProxyConfigurationType, Members: &mXksProxyConfigurationType, Type: smithy.ShapeTypeStructure, Ext: &ext[521]})
-var sXksProxyConnectivityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksProxyConnectivityType, Members: &mXksProxyConnectivityType, Type: smithy.ShapeTypeEnum, Ext: &ext[528]})
-var sXksProxyIncorrectAuthenticationCredentialException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksProxyIncorrectAuthenticationCredentialException, Members: &mXksProxyIncorrectAuthenticationCredentialException, Traits: &t42, Type: smithy.ShapeTypeStructure, Ext: &ext[531]})
-var sXksProxyInvalidConfigurationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksProxyInvalidConfigurationException, Members: &mXksProxyInvalidConfigurationException, Traits: &t43, Type: smithy.ShapeTypeStructure, Ext: &ext[533]})
-var sXksProxyInvalidResponseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksProxyInvalidResponseException, Members: &mXksProxyInvalidResponseException, Traits: &t44, Type: smithy.ShapeTypeStructure, Ext: &ext[535]})
-var sXksProxyUriEndpointInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksProxyUriEndpointInUseException, Members: &mXksProxyUriEndpointInUseException, Traits: &t45, Type: smithy.ShapeTypeStructure, Ext: &ext[537]})
-var s_XksProxyUriEndpointType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XksProxyUriEndpointType, Type: smithy.ShapeTypeString, Ext: &ext[539]})
-var sXksProxyUriInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksProxyUriInUseException, Members: &mXksProxyUriInUseException, Traits: &t46, Type: smithy.ShapeTypeStructure, Ext: &ext[540]})
-var s_XksProxyUriPathType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XksProxyUriPathType, Type: smithy.ShapeTypeString, Ext: &ext[542]})
-var sXksProxyUriUnreachableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksProxyUriUnreachableException, Members: &mXksProxyUriUnreachableException, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &ext[543]})
-var sXksProxyVpcEndpointServiceInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksProxyVpcEndpointServiceInUseException, Members: &mXksProxyVpcEndpointServiceInUseException, Traits: &t48, Type: smithy.ShapeTypeStructure, Ext: &ext[545]})
-var sXksProxyVpcEndpointServiceInvalidConfigurationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksProxyVpcEndpointServiceInvalidConfigurationException, Members: &mXksProxyVpcEndpointServiceInvalidConfigurationException, Traits: &t49, Type: smithy.ShapeTypeStructure, Ext: &ext[547]})
-var s_XksProxyVpcEndpointServiceNameType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XksProxyVpcEndpointServiceNameType, Type: smithy.ShapeTypeString, Ext: &ext[549]})
-var sXksProxyVpcEndpointServiceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksProxyVpcEndpointServiceNotFoundException, Members: &mXksProxyVpcEndpointServiceNotFoundException, Traits: &t50, Type: smithy.ShapeTypeStructure, Ext: &ext[550]})
-var sCancelKeyDeletionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelKeyDeletionRequest, Members: &mCancelKeyDeletionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[552]})
-var sCancelKeyDeletionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelKeyDeletionResponse, Members: &mCancelKeyDeletionResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[554]})
-var sConnectCustomKeyStoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectCustomKeyStoreRequest, Members: &mConnectCustomKeyStoreRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[556]})
-var sConnectCustomKeyStoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectCustomKeyStoreResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[558]})
-var sCreateAliasRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAliasRequest, Members: &mCreateAliasRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[559]})
-var sCreateCustomKeyStoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomKeyStoreRequest, Members: &mCreateCustomKeyStoreRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[562]})
-var sCreateCustomKeyStoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomKeyStoreResponse, Members: &mCreateCustomKeyStoreResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[574]})
-var sCreateGrantRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGrantRequest, Members: &mCreateGrantRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[576]})
-var sCreateGrantResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGrantResponse, Members: &mCreateGrantResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[587]})
-var sCreateKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateKeyRequest, Members: &mCreateKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[590]})
-var sCreateKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateKeyResponse, Members: &mCreateKeyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[602]})
-var sDecapsulateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecapsulateRequest, Members: &mDecapsulateRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[604]})
-var sDecapsulateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecapsulateResponse, Members: &mDecapsulateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[610]})
-var sDecryptRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecryptRequest, Members: &mDecryptRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[614]})
-var sDecryptResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecryptResponse, Members: &mDecryptResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[623]})
-var sDeleteAliasRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAliasRequest, Members: &mDeleteAliasRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[629]})
-var sDeleteCustomKeyStoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomKeyStoreRequest, Members: &mDeleteCustomKeyStoreRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[631]})
-var sDeleteCustomKeyStoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomKeyStoreResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[633]})
-var sDeleteImportedKeyMaterialRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteImportedKeyMaterialRequest, Members: &mDeleteImportedKeyMaterialRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[634]})
-var sDeleteImportedKeyMaterialResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteImportedKeyMaterialResponse, Members: &mDeleteImportedKeyMaterialResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[637]})
-var sDeriveSharedSecretRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeriveSharedSecretRequest, Members: &mDeriveSharedSecretRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[640]})
-var sDeriveSharedSecretResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeriveSharedSecretResponse, Members: &mDeriveSharedSecretResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[647]})
-var sDescribeCustomKeyStoresRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCustomKeyStoresRequest, Members: &mDescribeCustomKeyStoresRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[653]})
-var sDescribeCustomKeyStoresResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCustomKeyStoresResponse, Members: &mDescribeCustomKeyStoresResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[658]})
-var sDescribeKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeKeyRequest, Members: &mDescribeKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[662]})
-var sDescribeKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeKeyResponse, Members: &mDescribeKeyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[665]})
-var sDisableKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableKeyRequest, Members: &mDisableKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[667]})
-var sDisableKeyRotationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableKeyRotationRequest, Members: &mDisableKeyRotationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[669]})
-var sDisconnectCustomKeyStoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisconnectCustomKeyStoreRequest, Members: &mDisconnectCustomKeyStoreRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[671]})
-var sDisconnectCustomKeyStoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisconnectCustomKeyStoreResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[673]})
-var sEnableKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableKeyRequest, Members: &mEnableKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[674]})
-var sEnableKeyRotationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableKeyRotationRequest, Members: &mEnableKeyRotationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[676]})
-var sEncapsulateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncapsulateRequest, Members: &mEncapsulateRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[679]})
-var sEncapsulateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncapsulateResponse, Members: &mEncapsulateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[684]})
-var sEncryptRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptRequest, Members: &mEncryptRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[689]})
-var sEncryptResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptResponse, Members: &mEncryptResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[696]})
-var sGenerateDataKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataKeyRequest, Members: &mGenerateDataKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[700]})
-var sGenerateDataKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataKeyResponse, Members: &mGenerateDataKeyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[708]})
-var sGenerateDataKeyPairRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataKeyPairRequest, Members: &mGenerateDataKeyPairRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[714]})
-var sGenerateDataKeyPairResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataKeyPairResponse, Members: &mGenerateDataKeyPairResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[721]})
-var sGenerateDataKeyPairWithoutPlaintextRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataKeyPairWithoutPlaintextRequest, Members: &mGenerateDataKeyPairWithoutPlaintextRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[729]})
-var sGenerateDataKeyPairWithoutPlaintextResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataKeyPairWithoutPlaintextResponse, Members: &mGenerateDataKeyPairWithoutPlaintextResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[735]})
-var sGenerateDataKeyWithoutPlaintextRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataKeyWithoutPlaintextRequest, Members: &mGenerateDataKeyWithoutPlaintextRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[741]})
-var sGenerateDataKeyWithoutPlaintextResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataKeyWithoutPlaintextResponse, Members: &mGenerateDataKeyWithoutPlaintextResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[748]})
-var sGenerateMacRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateMacRequest, Members: &mGenerateMacRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[752]})
-var sGenerateMacResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateMacResponse, Members: &mGenerateMacResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[758]})
-var sGenerateRandomRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateRandomRequest, Members: &mGenerateRandomRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[762]})
-var sGenerateRandomResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateRandomResponse, Members: &mGenerateRandomResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[766]})
-var sGetKeyLastUsageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyLastUsageRequest, Members: &mGetKeyLastUsageRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[769]})
-var sGetKeyLastUsageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyLastUsageResponse, Members: &mGetKeyLastUsageResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[771]})
-var sGetKeyPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyPolicyRequest, Members: &mGetKeyPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[776]})
-var sGetKeyPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyPolicyResponse, Members: &mGetKeyPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[779]})
-var sGetKeyRotationStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyRotationStatusRequest, Members: &mGetKeyRotationStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[782]})
-var sGetKeyRotationStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyRotationStatusResponse, Members: &mGetKeyRotationStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[784]})
-var sGetParametersForImportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetParametersForImportRequest, Members: &mGetParametersForImportRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[790]})
-var sGetParametersForImportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetParametersForImportResponse, Members: &mGetParametersForImportResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[794]})
-var sGetPublicKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPublicKeyRequest, Members: &mGetPublicKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[799]})
-var sGetPublicKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPublicKeyResponse, Members: &mGetPublicKeyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[802]})
-var sImportKeyMaterialRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportKeyMaterialRequest, Members: &mImportKeyMaterialRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[812]})
-var sImportKeyMaterialResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportKeyMaterialResponse, Members: &mImportKeyMaterialResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[821]})
-var sListAliasesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAliasesRequest, Members: &mListAliasesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[824]})
-var sListAliasesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAliasesResponse, Members: &mListAliasesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[828]})
-var sListGrantsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGrantsRequest, Members: &mListGrantsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[832]})
-var sListGrantsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGrantsResponse, Members: &mListGrantsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[839]})
-var sListKeyPoliciesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeyPoliciesRequest, Members: &mListKeyPoliciesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[843]})
-var sListKeyPoliciesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeyPoliciesResponse, Members: &mListKeyPoliciesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[847]})
-var sListKeyRotationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeyRotationsRequest, Members: &mListKeyRotationsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[851]})
-var sListKeyRotationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeyRotationsResponse, Members: &mListKeyRotationsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[856]})
-var sListKeysRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeysRequest, Members: &mListKeysRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[860]})
-var sListKeysResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeysResponse, Members: &mListKeysResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[863]})
-var sListResourceTagsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceTagsRequest, Members: &mListResourceTagsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[867]})
-var sListResourceTagsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceTagsResponse, Members: &mListResourceTagsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[871]})
-var sListRetirableGrantsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRetirableGrantsRequest, Members: &mListRetirableGrantsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[875]})
-var sPutKeyPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutKeyPolicyRequest, Members: &mPutKeyPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[880]})
-var sReEncryptRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReEncryptRequest, Members: &mReEncryptRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[885]})
-var sReEncryptResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReEncryptResponse, Members: &mReEncryptResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[896]})
-var sReplicateKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicateKeyRequest, Members: &mReplicateKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[904]})
-var sReplicateKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicateKeyResponse, Members: &mReplicateKeyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[911]})
-var sRetireGrantRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetireGrantRequest, Members: &mRetireGrantRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[915]})
-var sRevokeGrantRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeGrantRequest, Members: &mRevokeGrantRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[920]})
-var sRotateKeyOnDemandRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateKeyOnDemandRequest, Members: &mRotateKeyOnDemandRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[924]})
-var sRotateKeyOnDemandResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateKeyOnDemandResponse, Members: &mRotateKeyOnDemandResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[926]})
-var sScheduleKeyDeletionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduleKeyDeletionRequest, Members: &mScheduleKeyDeletionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[928]})
-var sScheduleKeyDeletionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduleKeyDeletionResponse, Members: &mScheduleKeyDeletionResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[931]})
-var sSignRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignRequest, Members: &mSignRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[936]})
-var sSignResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignResponse, Members: &mSignResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[943]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[947]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[950]})
-var sUpdateAliasRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAliasRequest, Members: &mUpdateAliasRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[953]})
-var sUpdateCustomKeyStoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomKeyStoreRequest, Members: &mUpdateCustomKeyStoreRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[956]})
-var sUpdateCustomKeyStoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomKeyStoreResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[967]})
-var sUpdateKeyDescriptionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateKeyDescriptionRequest, Members: &mUpdateKeyDescriptionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[968]})
-var sUpdatePrimaryRegionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePrimaryRegionRequest, Members: &mUpdatePrimaryRegionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[971]})
-var sVerifyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifyRequest, Members: &mVerifyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[974]})
-var sVerifyMacRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifyMacRequest, Members: &mVerifyMacRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[982]})
-var sVerifyMacResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifyMacResponse, Members: &mVerifyMacResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[989]})
-var sVerifyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifyResponse, Members: &mVerifyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[993]})
+var sCancelKeyDeletion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelKeyDeletion, Type: smithy.ShapeTypeOperation, Ext: &eCancelKeyDeletion})
+var sConnectCustomKeyStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectCustomKeyStore, Type: smithy.ShapeTypeOperation, Ext: &eConnectCustomKeyStore})
+var sCreateAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAlias, Type: smithy.ShapeTypeOperation, Ext: &eCreateAlias})
+var sCreateCustomKeyStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomKeyStore, Type: smithy.ShapeTypeOperation, Ext: &eCreateCustomKeyStore})
+var sCreateGrant = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGrant, Type: smithy.ShapeTypeOperation, Ext: &eCreateGrant})
+var sCreateKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateKey, Type: smithy.ShapeTypeOperation, Ext: &eCreateKey})
+var sDecapsulate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecapsulate, Type: smithy.ShapeTypeOperation, Ext: &eDecapsulate})
+var sDecrypt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecrypt, Type: smithy.ShapeTypeOperation, Ext: &eDecrypt})
+var sDeleteAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAlias, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAlias})
+var sDeleteCustomKeyStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomKeyStore, Type: smithy.ShapeTypeOperation, Ext: &eDeleteCustomKeyStore})
+var sDeleteImportedKeyMaterial = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteImportedKeyMaterial, Type: smithy.ShapeTypeOperation, Ext: &eDeleteImportedKeyMaterial})
+var sDeriveSharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeriveSharedSecret, Type: smithy.ShapeTypeOperation, Ext: &eDeriveSharedSecret})
+var sDescribeCustomKeyStores = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCustomKeyStores, Type: smithy.ShapeTypeOperation, Ext: &eDescribeCustomKeyStores})
+var sDescribeKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeKey, Type: smithy.ShapeTypeOperation, Ext: &eDescribeKey})
+var sDisableKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableKey, Type: smithy.ShapeTypeOperation, Ext: &eDisableKey})
+var sDisableKeyRotation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableKeyRotation, Type: smithy.ShapeTypeOperation, Ext: &eDisableKeyRotation})
+var sDisconnectCustomKeyStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisconnectCustomKeyStore, Type: smithy.ShapeTypeOperation, Ext: &eDisconnectCustomKeyStore})
+var sEnableKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableKey, Type: smithy.ShapeTypeOperation, Ext: &eEnableKey})
+var sEnableKeyRotation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableKeyRotation, Type: smithy.ShapeTypeOperation, Ext: &eEnableKeyRotation})
+var sEncapsulate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncapsulate, Type: smithy.ShapeTypeOperation, Ext: &eEncapsulate})
+var sEncrypt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncrypt, Type: smithy.ShapeTypeOperation, Ext: &eEncrypt})
+var sGenerateDataKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataKey, Type: smithy.ShapeTypeOperation, Ext: &eGenerateDataKey})
+var sGenerateDataKeyPair = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataKeyPair, Type: smithy.ShapeTypeOperation, Ext: &eGenerateDataKeyPair})
+var sGenerateDataKeyPairWithoutPlaintext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataKeyPairWithoutPlaintext, Type: smithy.ShapeTypeOperation, Ext: &eGenerateDataKeyPairWithoutPlaintext})
+var sGenerateDataKeyWithoutPlaintext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataKeyWithoutPlaintext, Type: smithy.ShapeTypeOperation, Ext: &eGenerateDataKeyWithoutPlaintext})
+var sGenerateMac = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateMac, Type: smithy.ShapeTypeOperation, Ext: &eGenerateMac})
+var sGenerateRandom = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateRandom, Type: smithy.ShapeTypeOperation, Ext: &eGenerateRandom})
+var sGetKeyLastUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyLastUsage, Type: smithy.ShapeTypeOperation, Ext: &eGetKeyLastUsage})
+var sGetKeyPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyPolicy, Type: smithy.ShapeTypeOperation, Ext: &eGetKeyPolicy})
+var sGetKeyRotationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyRotationStatus, Type: smithy.ShapeTypeOperation, Ext: &eGetKeyRotationStatus})
+var sGetParametersForImport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetParametersForImport, Type: smithy.ShapeTypeOperation, Ext: &eGetParametersForImport})
+var sGetPublicKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPublicKey, Type: smithy.ShapeTypeOperation, Ext: &eGetPublicKey})
+var sImportKeyMaterial = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportKeyMaterial, Type: smithy.ShapeTypeOperation, Ext: &eImportKeyMaterial})
+var sListAliases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAliases, Type: smithy.ShapeTypeOperation, Ext: &eListAliases})
+var sListGrants = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGrants, Type: smithy.ShapeTypeOperation, Ext: &eListGrants})
+var sListKeyPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeyPolicies, Type: smithy.ShapeTypeOperation, Ext: &eListKeyPolicies})
+var sListKeyRotations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeyRotations, Type: smithy.ShapeTypeOperation, Ext: &eListKeyRotations})
+var sListKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeys, Type: smithy.ShapeTypeOperation, Ext: &eListKeys})
+var sListResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceTags, Type: smithy.ShapeTypeOperation, Ext: &eListResourceTags})
+var sListRetirableGrants = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRetirableGrants, Type: smithy.ShapeTypeOperation, Ext: &eListRetirableGrants})
+var sPutKeyPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutKeyPolicy, Type: smithy.ShapeTypeOperation, Ext: &ePutKeyPolicy})
+var sReEncrypt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReEncrypt, Type: smithy.ShapeTypeOperation, Ext: &eReEncrypt})
+var sReplicateKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicateKey, Type: smithy.ShapeTypeOperation, Ext: &eReplicateKey})
+var sRetireGrant = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetireGrant, Type: smithy.ShapeTypeOperation, Ext: &eRetireGrant})
+var sRevokeGrant = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeGrant, Type: smithy.ShapeTypeOperation, Ext: &eRevokeGrant})
+var sRotateKeyOnDemand = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateKeyOnDemand, Type: smithy.ShapeTypeOperation, Ext: &eRotateKeyOnDemand})
+var sScheduleKeyDeletion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduleKeyDeletion, Type: smithy.ShapeTypeOperation, Ext: &eScheduleKeyDeletion})
+var sSign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSign, Type: smithy.ShapeTypeOperation, Ext: &eSign})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAlias, Type: smithy.ShapeTypeOperation, Ext: &eUpdateAlias})
+var sUpdateCustomKeyStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomKeyStore, Type: smithy.ShapeTypeOperation, Ext: &eUpdateCustomKeyStore})
+var sUpdateKeyDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateKeyDescription, Type: smithy.ShapeTypeOperation, Ext: &eUpdateKeyDescription})
+var sUpdatePrimaryRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePrimaryRegion, Type: smithy.ShapeTypeOperation, Ext: &eUpdatePrimaryRegion})
+var sVerify = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerify, Type: smithy.ShapeTypeOperation, Ext: &eVerify})
+var sVerifyMac = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifyMac, Type: smithy.ShapeTypeOperation, Ext: &eVerifyMac})
+var s_TrentService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrentService, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &e_TrentService})
+var s_AccountIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountIdType, Type: smithy.ShapeTypeString, Ext: &e_AccountIdType})
+var sAlgorithmSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlgorithmSpec, Members: &mAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eAlgorithmSpec})
+var s_AliasList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AliasList, Members: &m_AliasList, Type: smithy.ShapeTypeList, Ext: &e_AliasList})
+var sAliasListEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAliasListEntry, Members: &mAliasListEntry, Type: smithy.ShapeTypeStructure, Ext: &eAliasListEntry})
+var s_AliasNameType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AliasNameType, Type: smithy.ShapeTypeString, Ext: &e_AliasNameType})
+var sAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlreadyExistsException, Members: &mAlreadyExistsException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eAlreadyExistsException})
+var s_ArnType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArnType, Type: smithy.ShapeTypeString, Ext: &e_ArnType})
+var s_AttestationDocumentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttestationDocumentType, Type: smithy.ShapeTypeBlob, Ext: &e_AttestationDocumentType})
+var s_AWSAccountIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSAccountIdType, Type: smithy.ShapeTypeString, Ext: &e_AWSAccountIdType})
+var s_BackingKeyIdResponseType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BackingKeyIdResponseType, Type: smithy.ShapeTypeString, Ext: &e_BackingKeyIdResponseType})
+var s_BackingKeyIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BackingKeyIdType, Type: smithy.ShapeTypeString, Ext: &e_BackingKeyIdType})
+var s_BooleanType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &e_BooleanType})
+var s_CiphertextType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &e_CiphertextType})
+var s_CloudHsmClusterIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudHsmClusterIdType, Type: smithy.ShapeTypeString, Ext: &e_CloudHsmClusterIdType})
+var sCloudHsmClusterInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudHsmClusterInUseException, Members: &mCloudHsmClusterInUseException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eCloudHsmClusterInUseException})
+var sCloudHsmClusterInvalidConfigurationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudHsmClusterInvalidConfigurationException, Members: &mCloudHsmClusterInvalidConfigurationException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eCloudHsmClusterInvalidConfigurationException})
+var sCloudHsmClusterNotActiveException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudHsmClusterNotActiveException, Members: &mCloudHsmClusterNotActiveException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eCloudHsmClusterNotActiveException})
+var sCloudHsmClusterNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudHsmClusterNotFoundException, Members: &mCloudHsmClusterNotFoundException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eCloudHsmClusterNotFoundException})
+var sCloudHsmClusterNotRelatedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudHsmClusterNotRelatedException, Members: &mCloudHsmClusterNotRelatedException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eCloudHsmClusterNotRelatedException})
+var s_CloudTrailEventIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudTrailEventIdType, Type: smithy.ShapeTypeString, Ext: &e_CloudTrailEventIdType})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConnectionErrorCodeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionErrorCodeType, Members: &mConnectionErrorCodeType, Type: smithy.ShapeTypeEnum, Ext: &eConnectionErrorCodeType})
+var sConnectionStateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionStateType, Members: &mConnectionStateType, Type: smithy.ShapeTypeEnum, Ext: &eConnectionStateType})
+var sCustomerMasterKeySpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomerMasterKeySpec, Members: &mCustomerMasterKeySpec, Type: smithy.ShapeTypeEnum, Ext: &eCustomerMasterKeySpec})
+var sCustomKeyStoreHasCMKsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomKeyStoreHasCMKsException, Members: &mCustomKeyStoreHasCMKsException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eCustomKeyStoreHasCMKsException})
+var s_CustomKeyStoreIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomKeyStoreIdType, Type: smithy.ShapeTypeString, Ext: &e_CustomKeyStoreIdType})
+var sCustomKeyStoreInvalidStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomKeyStoreInvalidStateException, Members: &mCustomKeyStoreInvalidStateException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eCustomKeyStoreInvalidStateException})
+var sCustomKeyStoreNameInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomKeyStoreNameInUseException, Members: &mCustomKeyStoreNameInUseException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eCustomKeyStoreNameInUseException})
+var s_CustomKeyStoreNameType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomKeyStoreNameType, Type: smithy.ShapeTypeString, Ext: &e_CustomKeyStoreNameType})
+var sCustomKeyStoreNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomKeyStoreNotFoundException, Members: &mCustomKeyStoreNotFoundException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eCustomKeyStoreNotFoundException})
+var s_CustomKeyStoresList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomKeyStoresList, Members: &m_CustomKeyStoresList, Type: smithy.ShapeTypeList, Ext: &e_CustomKeyStoresList})
+var sCustomKeyStoresListEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomKeyStoresListEntry, Members: &mCustomKeyStoresListEntry, Type: smithy.ShapeTypeStructure, Ext: &eCustomKeyStoresListEntry})
+var sCustomKeyStoreType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomKeyStoreType, Members: &mCustomKeyStoreType, Type: smithy.ShapeTypeEnum, Ext: &eCustomKeyStoreType})
+var sDataKeyPairSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataKeyPairSpec, Members: &mDataKeyPairSpec, Type: smithy.ShapeTypeEnum, Ext: &eDataKeyPairSpec})
+var sDataKeySpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataKeySpec, Members: &mDataKeySpec, Type: smithy.ShapeTypeEnum, Ext: &eDataKeySpec})
+var s_DateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &e_DateType})
+var sDependencyTimeoutException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDependencyTimeoutException, Members: &mDependencyTimeoutException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eDependencyTimeoutException})
+var s_DescriptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescriptionType, Type: smithy.ShapeTypeString, Ext: &e_DescriptionType})
+var sDisabledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisabledException, Members: &mDisabledException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eDisabledException})
+var s_DryRunModifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DryRunModifierList, Members: &m_DryRunModifierList, Type: smithy.ShapeTypeList, Ext: &e_DryRunModifierList})
+var sDryRunModifierType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDryRunModifierType, Members: &mDryRunModifierType, Type: smithy.ShapeTypeEnum, Ext: &eDryRunModifierType})
+var sDryRunOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDryRunOperationException, Members: &mDryRunOperationException, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &eDryRunOperationException})
+var sEncapsulationAlgorithmSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncapsulationAlgorithmSpec, Members: &mEncapsulationAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eEncapsulationAlgorithmSpec})
+var s_EncapsulationAlgorithmSpecList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncapsulationAlgorithmSpecList, Members: &m_EncapsulationAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &e_EncapsulationAlgorithmSpecList})
+var sEncryptionAlgorithmSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionAlgorithmSpec, Members: &mEncryptionAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eEncryptionAlgorithmSpec})
+var s_EncryptionAlgorithmSpecList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionAlgorithmSpecList, Members: &m_EncryptionAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &e_EncryptionAlgorithmSpecList})
+var s_EncryptionContextKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionContextKey, Type: smithy.ShapeTypeString, Ext: &e_EncryptionContextKey})
+var s_EncryptionContextType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionContextType, Members: &m_EncryptionContextType, Type: smithy.ShapeTypeMap, Ext: &e_EncryptionContextType})
+var s_EncryptionContextValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionContextValue, Type: smithy.ShapeTypeString, Ext: &e_EncryptionContextValue})
+var s_ErrorMessageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessageType})
+var sExpirationModelType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpirationModelType, Members: &mExpirationModelType, Type: smithy.ShapeTypeEnum, Ext: &eExpirationModelType})
+var sExpiredImportTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpiredImportTokenException, Members: &mExpiredImportTokenException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &eExpiredImportTokenException})
+var sGrantConstraints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGrantConstraints, Members: &mGrantConstraints, Type: smithy.ShapeTypeStructure, Ext: &eGrantConstraints})
+var s_GrantConstraintSourceArnType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GrantConstraintSourceArnType, Type: smithy.ShapeTypeString, Ext: &e_GrantConstraintSourceArnType})
+var s_GrantIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GrantIdType, Type: smithy.ShapeTypeString, Ext: &e_GrantIdType})
+var s_GrantList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GrantList, Members: &m_GrantList, Type: smithy.ShapeTypeList, Ext: &e_GrantList})
+var sGrantListEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGrantListEntry, Members: &mGrantListEntry, Type: smithy.ShapeTypeStructure, Ext: &eGrantListEntry})
+var s_GrantNameType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GrantNameType, Type: smithy.ShapeTypeString, Ext: &e_GrantNameType})
+var sGrantOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGrantOperation, Members: &mGrantOperation, Type: smithy.ShapeTypeEnum, Ext: &eGrantOperation})
+var s_GrantOperationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GrantOperationList, Members: &m_GrantOperationList, Type: smithy.ShapeTypeList, Ext: &e_GrantOperationList})
+var s_GrantTokenList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &e_GrantTokenList})
+var s_GrantTokenType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GrantTokenType, Type: smithy.ShapeTypeString, Ext: &e_GrantTokenType})
+var sImportState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportState, Members: &mImportState, Type: smithy.ShapeTypeEnum, Ext: &eImportState})
+var sImportType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportType, Members: &mImportType, Type: smithy.ShapeTypeEnum, Ext: &eImportType})
+var sIncludeKeyMaterial = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncludeKeyMaterial, Members: &mIncludeKeyMaterial, Type: smithy.ShapeTypeEnum, Ext: &eIncludeKeyMaterial})
+var sIncorrectKeyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncorrectKeyException, Members: &mIncorrectKeyException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eIncorrectKeyException})
+var sIncorrectKeyMaterialException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncorrectKeyMaterialException, Members: &mIncorrectKeyMaterialException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eIncorrectKeyMaterialException})
+var sIncorrectTrustAnchorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncorrectTrustAnchorException, Members: &mIncorrectTrustAnchorException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eIncorrectTrustAnchorException})
+var sInvalidAliasNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidAliasNameException, Members: &mInvalidAliasNameException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eInvalidAliasNameException})
+var sInvalidArnException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidArnException, Members: &mInvalidArnException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &eInvalidArnException})
+var sInvalidCiphertextException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidCiphertextException, Members: &mInvalidCiphertextException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &eInvalidCiphertextException})
+var sInvalidGrantIdException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidGrantIdException, Members: &mInvalidGrantIdException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &eInvalidGrantIdException})
+var sInvalidGrantTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidGrantTokenException, Members: &mInvalidGrantTokenException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &eInvalidGrantTokenException})
+var sInvalidImportTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidImportTokenException, Members: &mInvalidImportTokenException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eInvalidImportTokenException})
+var sInvalidKeyUsageException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidKeyUsageException, Members: &mInvalidKeyUsageException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eInvalidKeyUsageException})
+var sInvalidMarkerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidMarkerException, Members: &mInvalidMarkerException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &eInvalidMarkerException})
+var sKeyAgreementAlgorithmSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyAgreementAlgorithmSpec, Members: &mKeyAgreementAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eKeyAgreementAlgorithmSpec})
+var s_KeyAgreementAlgorithmSpecList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyAgreementAlgorithmSpecList, Members: &m_KeyAgreementAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &e_KeyAgreementAlgorithmSpecList})
+var sKeyEncryptionMechanism = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyEncryptionMechanism, Members: &mKeyEncryptionMechanism, Type: smithy.ShapeTypeEnum, Ext: &eKeyEncryptionMechanism})
+var s_KeyIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &e_KeyIdType})
+var sKeyLastUsageData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyLastUsageData, Members: &mKeyLastUsageData, Type: smithy.ShapeTypeStructure, Ext: &eKeyLastUsageData})
+var sKeyLastUsageTrackingOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyLastUsageTrackingOperation, Members: &mKeyLastUsageTrackingOperation, Type: smithy.ShapeTypeEnum, Ext: &eKeyLastUsageTrackingOperation})
+var s_KeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyList, Members: &m_KeyList, Type: smithy.ShapeTypeList, Ext: &e_KeyList})
+var sKeyListEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyListEntry, Members: &mKeyListEntry, Type: smithy.ShapeTypeStructure, Ext: &eKeyListEntry})
+var sKeyManagerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyManagerType, Members: &mKeyManagerType, Type: smithy.ShapeTypeEnum, Ext: &eKeyManagerType})
+var s_KeyMaterialDescriptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyMaterialDescriptionType, Type: smithy.ShapeTypeString, Ext: &e_KeyMaterialDescriptionType})
+var sKeyMaterialState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyMaterialState, Members: &mKeyMaterialState, Type: smithy.ShapeTypeEnum, Ext: &eKeyMaterialState})
+var sKeyMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyMetadata, Members: &mKeyMetadata, Type: smithy.ShapeTypeStructure, Ext: &eKeyMetadata})
+var sKeySpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeySpec, Members: &mKeySpec, Type: smithy.ShapeTypeEnum, Ext: &eKeySpec})
+var sKeyState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyState, Members: &mKeyState, Type: smithy.ShapeTypeEnum, Ext: &eKeyState})
+var s_KeyStorePasswordType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyStorePasswordType, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &e_KeyStorePasswordType})
+var sKeyUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyUnavailableException, Members: &mKeyUnavailableException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eKeyUnavailableException})
+var sKeyUsageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyUsageType, Members: &mKeyUsageType, Type: smithy.ShapeTypeEnum, Ext: &eKeyUsageType})
+var sKMSInternalException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKMSInternalException, Members: &mKMSInternalException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &eKMSInternalException})
+var sKMSInvalidMacException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKMSInvalidMacException, Members: &mKMSInvalidMacException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &eKMSInvalidMacException})
+var sKMSInvalidSignatureException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKMSInvalidSignatureException, Members: &mKMSInvalidSignatureException, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &eKMSInvalidSignatureException})
+var sKMSInvalidStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKMSInvalidStateException, Members: &mKMSInvalidStateException, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &eKMSInvalidStateException})
+var s_KmsRequestIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsRequestIdType, Type: smithy.ShapeTypeString, Ext: &e_KmsRequestIdType})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var s_LimitType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LimitType, Type: smithy.ShapeTypeInteger, Ext: &e_LimitType})
+var sMacAlgorithmSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMacAlgorithmSpec, Members: &mMacAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eMacAlgorithmSpec})
+var s_MacAlgorithmSpecList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MacAlgorithmSpecList, Members: &m_MacAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &e_MacAlgorithmSpecList})
+var sMalformedPolicyDocumentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedPolicyDocumentException, Members: &mMalformedPolicyDocumentException, Traits: &t34, Type: smithy.ShapeTypeStructure, Ext: &eMalformedPolicyDocumentException})
+var s_MarkerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &e_MarkerType})
+var sMessageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageType, Members: &mMessageType, Type: smithy.ShapeTypeEnum, Ext: &eMessageType})
+var sMultiRegionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMultiRegionConfiguration, Members: &mMultiRegionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eMultiRegionConfiguration})
+var sMultiRegionKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMultiRegionKey, Members: &mMultiRegionKey, Type: smithy.ShapeTypeStructure, Ext: &eMultiRegionKey})
+var s_MultiRegionKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MultiRegionKeyList, Members: &m_MultiRegionKeyList, Type: smithy.ShapeTypeList, Ext: &e_MultiRegionKeyList})
+var sMultiRegionKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMultiRegionKeyType, Members: &mMultiRegionKeyType, Type: smithy.ShapeTypeEnum, Ext: &eMultiRegionKeyType})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t35, Type: smithy.ShapeTypeStructure, Ext: &eNotFoundException})
+var s_NullableBooleanType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &e_NullableBooleanType})
+var s_NumberOfBytesType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberOfBytesType, Type: smithy.ShapeTypeInteger, Ext: &e_NumberOfBytesType})
+var sOriginType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOriginType, Members: &mOriginType, Type: smithy.ShapeTypeEnum, Ext: &eOriginType})
+var s_PendingWindowInDaysType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PendingWindowInDaysType, Type: smithy.ShapeTypeInteger, Ext: &e_PendingWindowInDaysType})
+var s_PlaintextType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlaintextType, Traits: &t27, Type: smithy.ShapeTypeBlob, Ext: &e_PlaintextType})
+var s_PolicyNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyNameList, Members: &m_PolicyNameList, Type: smithy.ShapeTypeList, Ext: &e_PolicyNameList})
+var s_PolicyNameType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyNameType, Type: smithy.ShapeTypeString, Ext: &e_PolicyNameType})
+var s_PolicyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyType, Type: smithy.ShapeTypeString, Ext: &e_PolicyType})
+var s_PrincipalIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrincipalIdType, Type: smithy.ShapeTypeString, Ext: &e_PrincipalIdType})
+var s_PublicKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PublicKeyType, Type: smithy.ShapeTypeBlob, Ext: &e_PublicKeyType})
+var sRecipientInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecipientInfo, Members: &mRecipientInfo, Type: smithy.ShapeTypeStructure, Ext: &eRecipientInfo})
+var s_RegionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionType, Type: smithy.ShapeTypeString, Ext: &e_RegionType})
+var s_RotationPeriodInDaysType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RotationPeriodInDaysType, Type: smithy.ShapeTypeInteger, Ext: &e_RotationPeriodInDaysType})
+var s_RotationsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RotationsList, Members: &m_RotationsList, Type: smithy.ShapeTypeList, Ext: &e_RotationsList})
+var sRotationsListEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotationsListEntry, Members: &mRotationsListEntry, Type: smithy.ShapeTypeStructure, Ext: &eRotationsListEntry})
+var sRotationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotationType, Members: &mRotationType, Type: smithy.ShapeTypeEnum, Ext: &eRotationType})
+var s_ServicePrincipalType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServicePrincipalType, Type: smithy.ShapeTypeString, Ext: &e_ServicePrincipalType})
+var sSigningAlgorithmSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSigningAlgorithmSpec, Members: &mSigningAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eSigningAlgorithmSpec})
+var s_SigningAlgorithmSpecList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SigningAlgorithmSpecList, Members: &m_SigningAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &e_SigningAlgorithmSpecList})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var sTagException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagException, Members: &mTagException, Traits: &t36, Type: smithy.ShapeTypeStructure, Ext: &eTagException})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyType, Type: smithy.ShapeTypeString, Ext: &e_TagKeyType})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagValueType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValueType, Type: smithy.ShapeTypeString, Ext: &e_TagValueType})
+var s_TrustAnchorCertificateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrustAnchorCertificateType, Type: smithy.ShapeTypeString, Ext: &e_TrustAnchorCertificateType})
+var sUnsupportedOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedOperationException, Members: &mUnsupportedOperationException, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &eUnsupportedOperationException})
+var sWrappingKeySpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWrappingKeySpec, Members: &mWrappingKeySpec, Type: smithy.ShapeTypeEnum, Ext: &eWrappingKeySpec})
+var sXksKeyAlreadyInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksKeyAlreadyInUseException, Members: &mXksKeyAlreadyInUseException, Traits: &t38, Type: smithy.ShapeTypeStructure, Ext: &eXksKeyAlreadyInUseException})
+var sXksKeyConfigurationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksKeyConfigurationType, Members: &mXksKeyConfigurationType, Type: smithy.ShapeTypeStructure, Ext: &eXksKeyConfigurationType})
+var s_XksKeyIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XksKeyIdType, Type: smithy.ShapeTypeString, Ext: &e_XksKeyIdType})
+var sXksKeyInvalidConfigurationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksKeyInvalidConfigurationException, Members: &mXksKeyInvalidConfigurationException, Traits: &t39, Type: smithy.ShapeTypeStructure, Ext: &eXksKeyInvalidConfigurationException})
+var sXksKeyNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksKeyNotFoundException, Members: &mXksKeyNotFoundException, Traits: &t40, Type: smithy.ShapeTypeStructure, Ext: &eXksKeyNotFoundException})
+var s_XksProxyAuthenticationAccessKeyIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XksProxyAuthenticationAccessKeyIdType, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &e_XksProxyAuthenticationAccessKeyIdType})
+var sXksProxyAuthenticationCredentialType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksProxyAuthenticationCredentialType, Members: &mXksProxyAuthenticationCredentialType, Type: smithy.ShapeTypeStructure, Ext: &eXksProxyAuthenticationCredentialType})
+var s_XksProxyAuthenticationRawSecretAccessKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XksProxyAuthenticationRawSecretAccessKeyType, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &e_XksProxyAuthenticationRawSecretAccessKeyType})
+var sXksProxyConfigurationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksProxyConfigurationType, Members: &mXksProxyConfigurationType, Type: smithy.ShapeTypeStructure, Ext: &eXksProxyConfigurationType})
+var sXksProxyConnectivityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksProxyConnectivityType, Members: &mXksProxyConnectivityType, Type: smithy.ShapeTypeEnum, Ext: &eXksProxyConnectivityType})
+var sXksProxyIncorrectAuthenticationCredentialException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksProxyIncorrectAuthenticationCredentialException, Members: &mXksProxyIncorrectAuthenticationCredentialException, Traits: &t42, Type: smithy.ShapeTypeStructure, Ext: &eXksProxyIncorrectAuthenticationCredentialException})
+var sXksProxyInvalidConfigurationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksProxyInvalidConfigurationException, Members: &mXksProxyInvalidConfigurationException, Traits: &t43, Type: smithy.ShapeTypeStructure, Ext: &eXksProxyInvalidConfigurationException})
+var sXksProxyInvalidResponseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksProxyInvalidResponseException, Members: &mXksProxyInvalidResponseException, Traits: &t44, Type: smithy.ShapeTypeStructure, Ext: &eXksProxyInvalidResponseException})
+var sXksProxyUriEndpointInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksProxyUriEndpointInUseException, Members: &mXksProxyUriEndpointInUseException, Traits: &t45, Type: smithy.ShapeTypeStructure, Ext: &eXksProxyUriEndpointInUseException})
+var s_XksProxyUriEndpointType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XksProxyUriEndpointType, Type: smithy.ShapeTypeString, Ext: &e_XksProxyUriEndpointType})
+var sXksProxyUriInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksProxyUriInUseException, Members: &mXksProxyUriInUseException, Traits: &t46, Type: smithy.ShapeTypeStructure, Ext: &eXksProxyUriInUseException})
+var s_XksProxyUriPathType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XksProxyUriPathType, Type: smithy.ShapeTypeString, Ext: &e_XksProxyUriPathType})
+var sXksProxyUriUnreachableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksProxyUriUnreachableException, Members: &mXksProxyUriUnreachableException, Traits: &t47, Type: smithy.ShapeTypeStructure, Ext: &eXksProxyUriUnreachableException})
+var sXksProxyVpcEndpointServiceInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksProxyVpcEndpointServiceInUseException, Members: &mXksProxyVpcEndpointServiceInUseException, Traits: &t48, Type: smithy.ShapeTypeStructure, Ext: &eXksProxyVpcEndpointServiceInUseException})
+var sXksProxyVpcEndpointServiceInvalidConfigurationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksProxyVpcEndpointServiceInvalidConfigurationException, Members: &mXksProxyVpcEndpointServiceInvalidConfigurationException, Traits: &t49, Type: smithy.ShapeTypeStructure, Ext: &eXksProxyVpcEndpointServiceInvalidConfigurationException})
+var s_XksProxyVpcEndpointServiceNameType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XksProxyVpcEndpointServiceNameType, Type: smithy.ShapeTypeString, Ext: &e_XksProxyVpcEndpointServiceNameType})
+var sXksProxyVpcEndpointServiceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iXksProxyVpcEndpointServiceNotFoundException, Members: &mXksProxyVpcEndpointServiceNotFoundException, Traits: &t50, Type: smithy.ShapeTypeStructure, Ext: &eXksProxyVpcEndpointServiceNotFoundException})
+var sCancelKeyDeletionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelKeyDeletionRequest, Members: &mCancelKeyDeletionRequest, Type: smithy.ShapeTypeStructure, Ext: &eCancelKeyDeletionRequest})
+var sCancelKeyDeletionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelKeyDeletionResponse, Members: &mCancelKeyDeletionResponse, Type: smithy.ShapeTypeStructure, Ext: &eCancelKeyDeletionResponse})
+var sConnectCustomKeyStoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectCustomKeyStoreRequest, Members: &mConnectCustomKeyStoreRequest, Type: smithy.ShapeTypeStructure, Ext: &eConnectCustomKeyStoreRequest})
+var sConnectCustomKeyStoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectCustomKeyStoreResponse, Type: smithy.ShapeTypeStructure, Ext: &eConnectCustomKeyStoreResponse})
+var sCreateAliasRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAliasRequest, Members: &mCreateAliasRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateAliasRequest})
+var sCreateCustomKeyStoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomKeyStoreRequest, Members: &mCreateCustomKeyStoreRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateCustomKeyStoreRequest})
+var sCreateCustomKeyStoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomKeyStoreResponse, Members: &mCreateCustomKeyStoreResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateCustomKeyStoreResponse})
+var sCreateGrantRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGrantRequest, Members: &mCreateGrantRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateGrantRequest})
+var sCreateGrantResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGrantResponse, Members: &mCreateGrantResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateGrantResponse})
+var sCreateKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateKeyRequest, Members: &mCreateKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateKeyRequest})
+var sCreateKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateKeyResponse, Members: &mCreateKeyResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateKeyResponse})
+var sDecapsulateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecapsulateRequest, Members: &mDecapsulateRequest, Type: smithy.ShapeTypeStructure, Ext: &eDecapsulateRequest})
+var sDecapsulateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecapsulateResponse, Members: &mDecapsulateResponse, Type: smithy.ShapeTypeStructure, Ext: &eDecapsulateResponse})
+var sDecryptRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecryptRequest, Members: &mDecryptRequest, Type: smithy.ShapeTypeStructure, Ext: &eDecryptRequest})
+var sDecryptResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecryptResponse, Members: &mDecryptResponse, Type: smithy.ShapeTypeStructure, Ext: &eDecryptResponse})
+var sDeleteAliasRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAliasRequest, Members: &mDeleteAliasRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAliasRequest})
+var sDeleteCustomKeyStoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomKeyStoreRequest, Members: &mDeleteCustomKeyStoreRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteCustomKeyStoreRequest})
+var sDeleteCustomKeyStoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomKeyStoreResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteCustomKeyStoreResponse})
+var sDeleteImportedKeyMaterialRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteImportedKeyMaterialRequest, Members: &mDeleteImportedKeyMaterialRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteImportedKeyMaterialRequest})
+var sDeleteImportedKeyMaterialResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteImportedKeyMaterialResponse, Members: &mDeleteImportedKeyMaterialResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteImportedKeyMaterialResponse})
+var sDeriveSharedSecretRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeriveSharedSecretRequest, Members: &mDeriveSharedSecretRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeriveSharedSecretRequest})
+var sDeriveSharedSecretResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeriveSharedSecretResponse, Members: &mDeriveSharedSecretResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeriveSharedSecretResponse})
+var sDescribeCustomKeyStoresRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCustomKeyStoresRequest, Members: &mDescribeCustomKeyStoresRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCustomKeyStoresRequest})
+var sDescribeCustomKeyStoresResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCustomKeyStoresResponse, Members: &mDescribeCustomKeyStoresResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeCustomKeyStoresResponse})
+var sDescribeKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeKeyRequest, Members: &mDescribeKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeKeyRequest})
+var sDescribeKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeKeyResponse, Members: &mDescribeKeyResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeKeyResponse})
+var sDisableKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableKeyRequest, Members: &mDisableKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisableKeyRequest})
+var sDisableKeyRotationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableKeyRotationRequest, Members: &mDisableKeyRotationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisableKeyRotationRequest})
+var sDisconnectCustomKeyStoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisconnectCustomKeyStoreRequest, Members: &mDisconnectCustomKeyStoreRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisconnectCustomKeyStoreRequest})
+var sDisconnectCustomKeyStoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisconnectCustomKeyStoreResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisconnectCustomKeyStoreResponse})
+var sEnableKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableKeyRequest, Members: &mEnableKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &eEnableKeyRequest})
+var sEnableKeyRotationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableKeyRotationRequest, Members: &mEnableKeyRotationRequest, Type: smithy.ShapeTypeStructure, Ext: &eEnableKeyRotationRequest})
+var sEncapsulateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncapsulateRequest, Members: &mEncapsulateRequest, Type: smithy.ShapeTypeStructure, Ext: &eEncapsulateRequest})
+var sEncapsulateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncapsulateResponse, Members: &mEncapsulateResponse, Type: smithy.ShapeTypeStructure, Ext: &eEncapsulateResponse})
+var sEncryptRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptRequest, Members: &mEncryptRequest, Type: smithy.ShapeTypeStructure, Ext: &eEncryptRequest})
+var sEncryptResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptResponse, Members: &mEncryptResponse, Type: smithy.ShapeTypeStructure, Ext: &eEncryptResponse})
+var sGenerateDataKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataKeyRequest, Members: &mGenerateDataKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &eGenerateDataKeyRequest})
+var sGenerateDataKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataKeyResponse, Members: &mGenerateDataKeyResponse, Type: smithy.ShapeTypeStructure, Ext: &eGenerateDataKeyResponse})
+var sGenerateDataKeyPairRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataKeyPairRequest, Members: &mGenerateDataKeyPairRequest, Type: smithy.ShapeTypeStructure, Ext: &eGenerateDataKeyPairRequest})
+var sGenerateDataKeyPairResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataKeyPairResponse, Members: &mGenerateDataKeyPairResponse, Type: smithy.ShapeTypeStructure, Ext: &eGenerateDataKeyPairResponse})
+var sGenerateDataKeyPairWithoutPlaintextRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataKeyPairWithoutPlaintextRequest, Members: &mGenerateDataKeyPairWithoutPlaintextRequest, Type: smithy.ShapeTypeStructure, Ext: &eGenerateDataKeyPairWithoutPlaintextRequest})
+var sGenerateDataKeyPairWithoutPlaintextResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataKeyPairWithoutPlaintextResponse, Members: &mGenerateDataKeyPairWithoutPlaintextResponse, Type: smithy.ShapeTypeStructure, Ext: &eGenerateDataKeyPairWithoutPlaintextResponse})
+var sGenerateDataKeyWithoutPlaintextRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataKeyWithoutPlaintextRequest, Members: &mGenerateDataKeyWithoutPlaintextRequest, Type: smithy.ShapeTypeStructure, Ext: &eGenerateDataKeyWithoutPlaintextRequest})
+var sGenerateDataKeyWithoutPlaintextResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateDataKeyWithoutPlaintextResponse, Members: &mGenerateDataKeyWithoutPlaintextResponse, Type: smithy.ShapeTypeStructure, Ext: &eGenerateDataKeyWithoutPlaintextResponse})
+var sGenerateMacRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateMacRequest, Members: &mGenerateMacRequest, Type: smithy.ShapeTypeStructure, Ext: &eGenerateMacRequest})
+var sGenerateMacResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateMacResponse, Members: &mGenerateMacResponse, Type: smithy.ShapeTypeStructure, Ext: &eGenerateMacResponse})
+var sGenerateRandomRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateRandomRequest, Members: &mGenerateRandomRequest, Type: smithy.ShapeTypeStructure, Ext: &eGenerateRandomRequest})
+var sGenerateRandomResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateRandomResponse, Members: &mGenerateRandomResponse, Type: smithy.ShapeTypeStructure, Ext: &eGenerateRandomResponse})
+var sGetKeyLastUsageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyLastUsageRequest, Members: &mGetKeyLastUsageRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetKeyLastUsageRequest})
+var sGetKeyLastUsageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyLastUsageResponse, Members: &mGetKeyLastUsageResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetKeyLastUsageResponse})
+var sGetKeyPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyPolicyRequest, Members: &mGetKeyPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetKeyPolicyRequest})
+var sGetKeyPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyPolicyResponse, Members: &mGetKeyPolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetKeyPolicyResponse})
+var sGetKeyRotationStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyRotationStatusRequest, Members: &mGetKeyRotationStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetKeyRotationStatusRequest})
+var sGetKeyRotationStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyRotationStatusResponse, Members: &mGetKeyRotationStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetKeyRotationStatusResponse})
+var sGetParametersForImportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetParametersForImportRequest, Members: &mGetParametersForImportRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetParametersForImportRequest})
+var sGetParametersForImportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetParametersForImportResponse, Members: &mGetParametersForImportResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetParametersForImportResponse})
+var sGetPublicKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPublicKeyRequest, Members: &mGetPublicKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetPublicKeyRequest})
+var sGetPublicKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPublicKeyResponse, Members: &mGetPublicKeyResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetPublicKeyResponse})
+var sImportKeyMaterialRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportKeyMaterialRequest, Members: &mImportKeyMaterialRequest, Type: smithy.ShapeTypeStructure, Ext: &eImportKeyMaterialRequest})
+var sImportKeyMaterialResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportKeyMaterialResponse, Members: &mImportKeyMaterialResponse, Type: smithy.ShapeTypeStructure, Ext: &eImportKeyMaterialResponse})
+var sListAliasesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAliasesRequest, Members: &mListAliasesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAliasesRequest})
+var sListAliasesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAliasesResponse, Members: &mListAliasesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAliasesResponse})
+var sListGrantsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGrantsRequest, Members: &mListGrantsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListGrantsRequest})
+var sListGrantsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGrantsResponse, Members: &mListGrantsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListGrantsResponse})
+var sListKeyPoliciesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeyPoliciesRequest, Members: &mListKeyPoliciesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListKeyPoliciesRequest})
+var sListKeyPoliciesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeyPoliciesResponse, Members: &mListKeyPoliciesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListKeyPoliciesResponse})
+var sListKeyRotationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeyRotationsRequest, Members: &mListKeyRotationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListKeyRotationsRequest})
+var sListKeyRotationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeyRotationsResponse, Members: &mListKeyRotationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListKeyRotationsResponse})
+var sListKeysRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeysRequest, Members: &mListKeysRequest, Type: smithy.ShapeTypeStructure, Ext: &eListKeysRequest})
+var sListKeysResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeysResponse, Members: &mListKeysResponse, Type: smithy.ShapeTypeStructure, Ext: &eListKeysResponse})
+var sListResourceTagsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceTagsRequest, Members: &mListResourceTagsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListResourceTagsRequest})
+var sListResourceTagsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceTagsResponse, Members: &mListResourceTagsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListResourceTagsResponse})
+var sListRetirableGrantsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRetirableGrantsRequest, Members: &mListRetirableGrantsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRetirableGrantsRequest})
+var sPutKeyPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutKeyPolicyRequest, Members: &mPutKeyPolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutKeyPolicyRequest})
+var sReEncryptRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReEncryptRequest, Members: &mReEncryptRequest, Type: smithy.ShapeTypeStructure, Ext: &eReEncryptRequest})
+var sReEncryptResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReEncryptResponse, Members: &mReEncryptResponse, Type: smithy.ShapeTypeStructure, Ext: &eReEncryptResponse})
+var sReplicateKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicateKeyRequest, Members: &mReplicateKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &eReplicateKeyRequest})
+var sReplicateKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicateKeyResponse, Members: &mReplicateKeyResponse, Type: smithy.ShapeTypeStructure, Ext: &eReplicateKeyResponse})
+var sRetireGrantRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetireGrantRequest, Members: &mRetireGrantRequest, Type: smithy.ShapeTypeStructure, Ext: &eRetireGrantRequest})
+var sRevokeGrantRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeGrantRequest, Members: &mRevokeGrantRequest, Type: smithy.ShapeTypeStructure, Ext: &eRevokeGrantRequest})
+var sRotateKeyOnDemandRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateKeyOnDemandRequest, Members: &mRotateKeyOnDemandRequest, Type: smithy.ShapeTypeStructure, Ext: &eRotateKeyOnDemandRequest})
+var sRotateKeyOnDemandResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateKeyOnDemandResponse, Members: &mRotateKeyOnDemandResponse, Type: smithy.ShapeTypeStructure, Ext: &eRotateKeyOnDemandResponse})
+var sScheduleKeyDeletionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduleKeyDeletionRequest, Members: &mScheduleKeyDeletionRequest, Type: smithy.ShapeTypeStructure, Ext: &eScheduleKeyDeletionRequest})
+var sScheduleKeyDeletionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduleKeyDeletionResponse, Members: &mScheduleKeyDeletionResponse, Type: smithy.ShapeTypeStructure, Ext: &eScheduleKeyDeletionResponse})
+var sSignRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignRequest, Members: &mSignRequest, Type: smithy.ShapeTypeStructure, Ext: &eSignRequest})
+var sSignResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignResponse, Members: &mSignResponse, Type: smithy.ShapeTypeStructure, Ext: &eSignResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUpdateAliasRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAliasRequest, Members: &mUpdateAliasRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAliasRequest})
+var sUpdateCustomKeyStoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomKeyStoreRequest, Members: &mUpdateCustomKeyStoreRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCustomKeyStoreRequest})
+var sUpdateCustomKeyStoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomKeyStoreResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCustomKeyStoreResponse})
+var sUpdateKeyDescriptionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateKeyDescriptionRequest, Members: &mUpdateKeyDescriptionRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateKeyDescriptionRequest})
+var sUpdatePrimaryRegionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePrimaryRegionRequest, Members: &mUpdatePrimaryRegionRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePrimaryRegionRequest})
+var sVerifyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifyRequest, Members: &mVerifyRequest, Type: smithy.ShapeTypeStructure, Ext: &eVerifyRequest})
+var sVerifyMacRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifyMacRequest, Members: &mVerifyMacRequest, Type: smithy.ShapeTypeStructure, Ext: &eVerifyMacRequest})
+var sVerifyMacResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifyMacResponse, Members: &mVerifyMacResponse, Type: smithy.ShapeTypeStructure, Ext: &eVerifyMacResponse})
+var sVerifyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifyResponse, Members: &mVerifyResponse, Type: smithy.ShapeTypeStructure, Ext: &eVerifyResponse})
 
-var sAlgorithmSpec_RSAES_PKCS1_V1_5 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSAES_PKCS1_V1_5", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[59]})
-var sAlgorithmSpec_RSAES_OAEP_SHA_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSAES_OAEP_SHA_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[60]})
-var sAlgorithmSpec_RSAES_OAEP_SHA_256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSAES_OAEP_SHA_256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[61]})
-var sAlgorithmSpec_RSA_AES_KEY_WRAP_SHA_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_AES_KEY_WRAP_SHA_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[62]})
-var sAlgorithmSpec_RSA_AES_KEY_WRAP_SHA_256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_AES_KEY_WRAP_SHA_256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[63]})
-var sAlgorithmSpec_SM2PKE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SM2PKE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[64]})
-var s_AliasList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAliasListEntry, Members: &mAliasListEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[66]})
-var sAliasListEntry_AliasName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AliasName", ID: &i_AliasNameType, Type: smithy.ShapeTypeString, Ext: &ext[68]})
-var sAliasListEntry_AliasArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AliasArn", ID: &i_ArnType, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var sAliasListEntry_TargetKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetKeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[70]})
-var sAliasListEntry_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[71]})
-var sAliasListEntry_LastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedDate", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[72]})
-var sAlreadyExistsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[75]})
-var sCloudHsmClusterInUseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[85]})
-var sCloudHsmClusterInvalidConfigurationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[87]})
-var sCloudHsmClusterNotActiveException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[89]})
-var sCloudHsmClusterNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[91]})
-var sCloudHsmClusterNotRelatedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[93]})
-var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[96]})
-var sConnectionErrorCodeType_INVALID_CREDENTIALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_CREDENTIALS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[98]})
-var sConnectionErrorCodeType_CLUSTER_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLUSTER_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[99]})
-var sConnectionErrorCodeType_NETWORK_ERRORS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NETWORK_ERRORS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[100]})
-var sConnectionErrorCodeType_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[101]})
-var sConnectionErrorCodeType_INSUFFICIENT_CLOUDHSM_HSMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSUFFICIENT_CLOUDHSM_HSMS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[102]})
-var sConnectionErrorCodeType_USER_LOCKED_OUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER_LOCKED_OUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[103]})
-var sConnectionErrorCodeType_USER_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[104]})
-var sConnectionErrorCodeType_USER_LOGGED_IN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER_LOGGED_IN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[105]})
-var sConnectionErrorCodeType_SUBNET_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBNET_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[106]})
-var sConnectionErrorCodeType_INSUFFICIENT_FREE_ADDRESSES_IN_SUBNET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSUFFICIENT_FREE_ADDRESSES_IN_SUBNET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[107]})
-var sConnectionErrorCodeType_XKS_PROXY_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XKS_PROXY_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[108]})
-var sConnectionErrorCodeType_XKS_PROXY_NOT_REACHABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XKS_PROXY_NOT_REACHABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[109]})
-var sConnectionErrorCodeType_XKS_VPC_ENDPOINT_SERVICE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XKS_VPC_ENDPOINT_SERVICE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[110]})
-var sConnectionErrorCodeType_XKS_PROXY_INVALID_RESPONSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XKS_PROXY_INVALID_RESPONSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[111]})
-var sConnectionErrorCodeType_XKS_PROXY_INVALID_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XKS_PROXY_INVALID_CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[112]})
-var sConnectionErrorCodeType_XKS_VPC_ENDPOINT_SERVICE_INVALID_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XKS_VPC_ENDPOINT_SERVICE_INVALID_CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[113]})
-var sConnectionErrorCodeType_XKS_PROXY_TIMED_OUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XKS_PROXY_TIMED_OUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[114]})
-var sConnectionErrorCodeType_XKS_PROXY_INVALID_TLS_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XKS_PROXY_INVALID_TLS_CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[115]})
-var sConnectionStateType_CONNECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONNECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[117]})
-var sConnectionStateType_CONNECTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONNECTING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[118]})
-var sConnectionStateType_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[119]})
-var sConnectionStateType_DISCONNECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISCONNECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var sConnectionStateType_DISCONNECTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISCONNECTING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[121]})
-var sCustomerMasterKeySpec_RSA_2048 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_2048", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[123]})
-var sCustomerMasterKeySpec_RSA_3072 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_3072", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[124]})
-var sCustomerMasterKeySpec_RSA_4096 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_4096", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[125]})
-var sCustomerMasterKeySpec_ECC_NIST_P256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_NIST_P256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var sCustomerMasterKeySpec_ECC_NIST_P384 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_NIST_P384", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[127]})
-var sCustomerMasterKeySpec_ECC_NIST_P521 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_NIST_P521", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[128]})
-var sCustomerMasterKeySpec_ECC_SECG_P256K1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_SECG_P256K1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[129]})
-var sCustomerMasterKeySpec_SYMMETRIC_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYMMETRIC_DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[130]})
-var sCustomerMasterKeySpec_HMAC_224 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_224", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[131]})
-var sCustomerMasterKeySpec_HMAC_256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[132]})
-var sCustomerMasterKeySpec_HMAC_384 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_384", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[133]})
-var sCustomerMasterKeySpec_HMAC_512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_512", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[134]})
-var sCustomerMasterKeySpec_SM2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SM2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[135]})
-var sCustomKeyStoreHasCMKsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[137]})
-var sCustomKeyStoreInvalidStateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[140]})
-var sCustomKeyStoreNameInUseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[142]})
-var sCustomKeyStoreNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[145]})
-var s_CustomKeyStoresList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomKeyStoresListEntry, Members: &mCustomKeyStoresListEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[147]})
-var sCustomKeyStoresListEntry_CustomKeyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreId", ID: &i_CustomKeyStoreIdType, Type: smithy.ShapeTypeString, Ext: &ext[149]})
-var sCustomKeyStoresListEntry_CustomKeyStoreName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreName", ID: &i_CustomKeyStoreNameType, Type: smithy.ShapeTypeString, Ext: &ext[150]})
-var sCustomKeyStoresListEntry_CloudHsmClusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudHsmClusterId", ID: &i_CloudHsmClusterIdType, Type: smithy.ShapeTypeString, Ext: &ext[151]})
-var sCustomKeyStoresListEntry_TrustAnchorCertificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustAnchorCertificate", ID: &i_TrustAnchorCertificateType, Type: smithy.ShapeTypeString, Ext: &ext[152]})
-var sCustomKeyStoresListEntry_ConnectionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionState", ID: &iConnectionStateType, Members: &mConnectionStateType, Type: smithy.ShapeTypeEnum, Ext: &ext[153]})
-var sCustomKeyStoresListEntry_ConnectionErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionErrorCode", ID: &iConnectionErrorCodeType, Members: &mConnectionErrorCodeType, Type: smithy.ShapeTypeEnum, Ext: &ext[154]})
-var sCustomKeyStoresListEntry_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[155]})
-var sCustomKeyStoresListEntry_CustomKeyStoreType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreType", ID: &iCustomKeyStoreType, Members: &mCustomKeyStoreType, Type: smithy.ShapeTypeEnum, Ext: &ext[156]})
-var sCustomKeyStoresListEntry_XksProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksProxyConfiguration", ID: &iXksProxyConfigurationType, Members: &mXksProxyConfigurationType, Type: smithy.ShapeTypeStructure, Ext: &ext[157]})
-var sCustomKeyStoreType_AWS_CLOUDHSM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_CLOUDHSM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[159]})
-var sCustomKeyStoreType_EXTERNAL_KEY_STORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXTERNAL_KEY_STORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[160]})
-var sDataKeyPairSpec_RSA_2048 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_2048", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[162]})
-var sDataKeyPairSpec_RSA_3072 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_3072", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[163]})
-var sDataKeyPairSpec_RSA_4096 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_4096", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[164]})
-var sDataKeyPairSpec_ECC_NIST_P256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_NIST_P256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[165]})
-var sDataKeyPairSpec_ECC_NIST_P384 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_NIST_P384", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[166]})
-var sDataKeyPairSpec_ECC_NIST_P521 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_NIST_P521", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[167]})
-var sDataKeyPairSpec_ECC_SECG_P256K1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_SECG_P256K1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[168]})
-var sDataKeyPairSpec_SM2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SM2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[169]})
-var sDataKeyPairSpec_ECC_NIST_EDWARDS25519 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_NIST_EDWARDS25519", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[170]})
-var sDataKeyPairSpec_ML_KEM_512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_KEM_512", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[171]})
-var sDataKeyPairSpec_ML_KEM_768 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_KEM_768", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[172]})
-var sDataKeyPairSpec_ML_KEM_1024 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_KEM_1024", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[173]})
-var sDataKeySpec_AES_256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AES_256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[175]})
-var sDataKeySpec_AES_128 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AES_128", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[176]})
-var sDependencyTimeoutException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[179]})
-var sDisabledException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[182]})
-var s_DryRunModifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDryRunModifierType, Members: &mDryRunModifierType, Type: smithy.ShapeTypeEnum, Ext: &ext[184]})
-var sDryRunModifierType_IGNORE_CIPHERTEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IGNORE_CIPHERTEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[186]})
-var sDryRunOperationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[188]})
-var sEncapsulationAlgorithmSpec_ML_KEM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_KEM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[190]})
-var s_EncapsulationAlgorithmSpecList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEncapsulationAlgorithmSpec, Members: &mEncapsulationAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[192]})
-var sEncryptionAlgorithmSpec_SYMMETRIC_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYMMETRIC_DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[194]})
-var sEncryptionAlgorithmSpec_RSAES_OAEP_SHA_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSAES_OAEP_SHA_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[195]})
-var sEncryptionAlgorithmSpec_RSAES_OAEP_SHA_256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSAES_OAEP_SHA_256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[196]})
-var sEncryptionAlgorithmSpec_SM2PKE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SM2PKE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[197]})
-var s_EncryptionAlgorithmSpecList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEncryptionAlgorithmSpec, Members: &mEncryptionAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[199]})
-var s_EncryptionContextType_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_EncryptionContextKey, Type: smithy.ShapeTypeString, Ext: &ext[202]})
-var s_EncryptionContextType_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_EncryptionContextValue, Type: smithy.ShapeTypeString, Ext: &ext[203]})
-var sExpirationModelType_KEY_MATERIAL_EXPIRES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEY_MATERIAL_EXPIRES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[207]})
-var sExpirationModelType_KEY_MATERIAL_DOES_NOT_EXPIRE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEY_MATERIAL_DOES_NOT_EXPIRE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[208]})
-var sExpiredImportTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[210]})
-var sGrantConstraints_EncryptionContextSubset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionContextSubset", ID: &i_EncryptionContextType, Members: &m_EncryptionContextType, Type: smithy.ShapeTypeMap, Ext: &ext[212]})
-var sGrantConstraints_EncryptionContextEquals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionContextEquals", ID: &i_EncryptionContextType, Members: &m_EncryptionContextType, Type: smithy.ShapeTypeMap, Ext: &ext[213]})
-var sGrantConstraints_SourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceArn", ID: &i_GrantConstraintSourceArnType, Type: smithy.ShapeTypeString, Ext: &ext[214]})
-var s_GrantList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGrantListEntry, Members: &mGrantListEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[218]})
-var sGrantListEntry_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[220]})
-var sGrantListEntry_GrantId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantId", ID: &i_GrantIdType, Type: smithy.ShapeTypeString, Ext: &ext[221]})
-var sGrantListEntry_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_GrantNameType, Type: smithy.ShapeTypeString, Ext: &ext[222]})
-var sGrantListEntry_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[223]})
-var sGrantListEntry_GranteePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GranteePrincipal", ID: &i_PrincipalIdType, Type: smithy.ShapeTypeString, Ext: &ext[224]})
-var sGrantListEntry_RetiringPrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetiringPrincipal", ID: &i_PrincipalIdType, Type: smithy.ShapeTypeString, Ext: &ext[225]})
-var sGrantListEntry_IssuingAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssuingAccount", ID: &i_PrincipalIdType, Type: smithy.ShapeTypeString, Ext: &ext[226]})
-var sGrantListEntry_Operations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operations", ID: &i_GrantOperationList, Members: &m_GrantOperationList, Type: smithy.ShapeTypeList, Ext: &ext[227]})
-var sGrantListEntry_Constraints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Constraints", ID: &iGrantConstraints, Members: &mGrantConstraints, Type: smithy.ShapeTypeStructure, Ext: &ext[228]})
-var sGrantListEntry_GranteeServicePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GranteeServicePrincipal", ID: &i_ServicePrincipalType, Type: smithy.ShapeTypeString, Ext: &ext[229]})
-var sGrantListEntry_RetiringServicePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetiringServicePrincipal", ID: &i_ServicePrincipalType, Type: smithy.ShapeTypeString, Ext: &ext[230]})
-var sGrantOperation_Decrypt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Decrypt", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[233]})
-var sGrantOperation_Encrypt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encrypt", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[234]})
-var sGrantOperation_GenerateDataKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GenerateDataKey", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[235]})
-var sGrantOperation_GenerateDataKeyWithoutPlaintext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GenerateDataKeyWithoutPlaintext", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[236]})
-var sGrantOperation_ReEncryptFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReEncryptFrom", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[237]})
-var sGrantOperation_ReEncryptTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReEncryptTo", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[238]})
-var sGrantOperation_Sign = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sign", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[239]})
-var sGrantOperation_Verify = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Verify", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[240]})
-var sGrantOperation_GetPublicKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GetPublicKey", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[241]})
-var sGrantOperation_CreateGrant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateGrant", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[242]})
-var sGrantOperation_RetireGrant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetireGrant", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[243]})
-var sGrantOperation_DescribeKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DescribeKey", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[244]})
-var sGrantOperation_GenerateDataKeyPair = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GenerateDataKeyPair", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[245]})
-var sGrantOperation_GenerateDataKeyPairWithoutPlaintext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GenerateDataKeyPairWithoutPlaintext", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[246]})
-var sGrantOperation_GenerateMac = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GenerateMac", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[247]})
-var sGrantOperation_VerifyMac = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VerifyMac", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[248]})
-var sGrantOperation_DeriveSharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeriveSharedSecret", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[249]})
-var sGrantOperation_Encapsulate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encapsulate", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[250]})
-var sGrantOperation_Decapsulate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Decapsulate", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[251]})
-var s_GrantOperationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGrantOperation, Members: &mGrantOperation, Type: smithy.ShapeTypeEnum, Ext: &ext[253]})
-var s_GrantTokenList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GrantTokenType, Type: smithy.ShapeTypeString, Ext: &ext[255]})
-var sImportState_IMPORTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPORTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[258]})
-var sImportState_PENDING_IMPORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_IMPORT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[259]})
-var sImportType_NEW_KEY_MATERIAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEW_KEY_MATERIAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[261]})
-var sImportType_EXISTING_KEY_MATERIAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXISTING_KEY_MATERIAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[262]})
-var sIncludeKeyMaterial_ALL_KEY_MATERIAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL_KEY_MATERIAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[264]})
-var sIncludeKeyMaterial_ROTATIONS_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROTATIONS_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[265]})
-var sIncorrectKeyException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[267]})
-var sIncorrectKeyMaterialException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[269]})
-var sIncorrectTrustAnchorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[271]})
-var sInvalidAliasNameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[273]})
-var sInvalidArnException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[275]})
-var sInvalidCiphertextException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[277]})
-var sInvalidGrantIdException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[279]})
-var sInvalidGrantTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[281]})
-var sInvalidImportTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[283]})
-var sInvalidKeyUsageException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[285]})
-var sInvalidMarkerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[287]})
-var sKeyAgreementAlgorithmSpec_ECDH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECDH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[289]})
-var s_KeyAgreementAlgorithmSpecList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iKeyAgreementAlgorithmSpec, Members: &mKeyAgreementAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[291]})
-var sKeyEncryptionMechanism_RSAES_OAEP_SHA_256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSAES_OAEP_SHA_256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[293]})
-var sKeyLastUsageData_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &iKeyLastUsageTrackingOperation, Members: &mKeyLastUsageTrackingOperation, Type: smithy.ShapeTypeEnum, Ext: &ext[296]})
-var sKeyLastUsageData_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[297]})
-var sKeyLastUsageData_CloudTrailEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudTrailEventId", ID: &i_CloudTrailEventIdType, Type: smithy.ShapeTypeString, Ext: &ext[298]})
-var sKeyLastUsageData_KmsRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsRequestId", ID: &i_KmsRequestIdType, Type: smithy.ShapeTypeString, Ext: &ext[299]})
-var sKeyLastUsageTrackingOperation_Decrypt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Decrypt", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[301]})
-var sKeyLastUsageTrackingOperation_DeriveSharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeriveSharedSecret", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[302]})
-var sKeyLastUsageTrackingOperation_Encrypt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encrypt", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[303]})
-var sKeyLastUsageTrackingOperation_GenerateDataKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GenerateDataKey", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[304]})
-var sKeyLastUsageTrackingOperation_GenerateDataKeyPair = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GenerateDataKeyPair", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[305]})
-var sKeyLastUsageTrackingOperation_GenerateDataKeyPairWithoutPlaintext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GenerateDataKeyPairWithoutPlaintext", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[306]})
-var sKeyLastUsageTrackingOperation_GenerateDataKeyWithoutPlaintext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GenerateDataKeyWithoutPlaintext", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[307]})
-var sKeyLastUsageTrackingOperation_GenerateMac = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GenerateMac", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[308]})
-var sKeyLastUsageTrackingOperation_ReEncrypt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReEncrypt", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[309]})
-var sKeyLastUsageTrackingOperation_Sign = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sign", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[310]})
-var sKeyLastUsageTrackingOperation_Verify = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Verify", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[311]})
-var sKeyLastUsageTrackingOperation_VerifyMac = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VerifyMac", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[312]})
-var sKeyLastUsageTrackingOperation_Encapsulate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encapsulate", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[313]})
-var sKeyLastUsageTrackingOperation_Decapsulate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Decapsulate", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[314]})
-var s_KeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iKeyListEntry, Members: &mKeyListEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[316]})
-var sKeyListEntry_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[318]})
-var sKeyListEntry_KeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyArn", ID: &i_ArnType, Type: smithy.ShapeTypeString, Ext: &ext[319]})
-var sKeyManagerType_AWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[321]})
-var sKeyManagerType_CUSTOMER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[322]})
-var sKeyMaterialState_NON_CURRENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NON_CURRENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[325]})
-var sKeyMaterialState_CURRENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CURRENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[326]})
-var sKeyMaterialState_PENDING_ROTATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_ROTATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[327]})
-var sKeyMaterialState_PENDING_MULTI_REGION_IMPORT_AND_ROTATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_MULTI_REGION_IMPORT_AND_ROTATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[328]})
-var sKeyMetadata_AWSAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWSAccountId", ID: &i_AWSAccountIdType, Type: smithy.ShapeTypeString, Ext: &ext[330]})
-var sKeyMetadata_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[331]})
-var sKeyMetadata_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ArnType, Type: smithy.ShapeTypeString, Ext: &ext[332]})
-var sKeyMetadata_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[333]})
-var sKeyMetadata_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[334]})
-var sKeyMetadata_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionType, Type: smithy.ShapeTypeString, Ext: &ext[335]})
-var sKeyMetadata_KeyUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyUsage", ID: &iKeyUsageType, Members: &mKeyUsageType, Type: smithy.ShapeTypeEnum, Ext: &ext[336]})
-var sKeyMetadata_KeyState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyState", ID: &iKeyState, Members: &mKeyState, Type: smithy.ShapeTypeEnum, Ext: &ext[337]})
-var sKeyMetadata_DeletionDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionDate", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[338]})
-var sKeyMetadata_ValidTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidTo", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[339]})
-var sKeyMetadata_Origin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Origin", ID: &iOriginType, Members: &mOriginType, Type: smithy.ShapeTypeEnum, Ext: &ext[340]})
-var sKeyMetadata_CustomKeyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreId", ID: &i_CustomKeyStoreIdType, Type: smithy.ShapeTypeString, Ext: &ext[341]})
-var sKeyMetadata_CloudHsmClusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudHsmClusterId", ID: &i_CloudHsmClusterIdType, Type: smithy.ShapeTypeString, Ext: &ext[342]})
-var sKeyMetadata_ExpirationModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationModel", ID: &iExpirationModelType, Members: &mExpirationModelType, Type: smithy.ShapeTypeEnum, Ext: &ext[343]})
-var sKeyMetadata_KeyManager = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyManager", ID: &iKeyManagerType, Members: &mKeyManagerType, Type: smithy.ShapeTypeEnum, Ext: &ext[344]})
-var sKeyMetadata_CustomerMasterKeySpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerMasterKeySpec", ID: &iCustomerMasterKeySpec, Members: &mCustomerMasterKeySpec, Type: smithy.ShapeTypeEnum, Ext: &ext[345]})
-var sKeyMetadata_KeySpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeySpec", ID: &iKeySpec, Members: &mKeySpec, Type: smithy.ShapeTypeEnum, Ext: &ext[346]})
-var sKeyMetadata_EncryptionAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionAlgorithms", ID: &i_EncryptionAlgorithmSpecList, Members: &m_EncryptionAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &ext[347]})
-var sKeyMetadata_SigningAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningAlgorithms", ID: &i_SigningAlgorithmSpecList, Members: &m_SigningAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &ext[348]})
-var sKeyMetadata_KeyAgreementAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAgreementAlgorithms", ID: &i_KeyAgreementAlgorithmSpecList, Members: &m_KeyAgreementAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &ext[349]})
-var sKeyMetadata_EncapsulationAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncapsulationAlgorithms", ID: &i_EncapsulationAlgorithmSpecList, Members: &m_EncapsulationAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &ext[350]})
-var sKeyMetadata_MultiRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiRegion", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[351]})
-var sKeyMetadata_MultiRegionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiRegionConfiguration", ID: &iMultiRegionConfiguration, Members: &mMultiRegionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[352]})
-var sKeyMetadata_PendingDeletionWindowInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingDeletionWindowInDays", ID: &i_PendingWindowInDaysType, Type: smithy.ShapeTypeInteger, Ext: &ext[353]})
-var sKeyMetadata_MacAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MacAlgorithms", ID: &i_MacAlgorithmSpecList, Members: &m_MacAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &ext[354]})
-var sKeyMetadata_XksKeyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksKeyConfiguration", ID: &iXksKeyConfigurationType, Members: &mXksKeyConfigurationType, Type: smithy.ShapeTypeStructure, Ext: &ext[355]})
-var sKeyMetadata_CurrentKeyMaterialId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentKeyMaterialId", ID: &i_BackingKeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[356]})
-var sKeySpec_RSA_2048 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_2048", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[358]})
-var sKeySpec_RSA_3072 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_3072", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[359]})
-var sKeySpec_RSA_4096 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_4096", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[360]})
-var sKeySpec_ECC_NIST_P256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_NIST_P256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[361]})
-var sKeySpec_ECC_NIST_P384 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_NIST_P384", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[362]})
-var sKeySpec_ECC_NIST_P521 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_NIST_P521", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[363]})
-var sKeySpec_ECC_SECG_P256K1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_SECG_P256K1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[364]})
-var sKeySpec_SYMMETRIC_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYMMETRIC_DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[365]})
-var sKeySpec_HMAC_224 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_224", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[366]})
-var sKeySpec_HMAC_256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[367]})
-var sKeySpec_HMAC_384 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_384", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[368]})
-var sKeySpec_HMAC_512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_512", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[369]})
-var sKeySpec_SM2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SM2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[370]})
-var sKeySpec_ML_DSA_44 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_DSA_44", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[371]})
-var sKeySpec_ML_DSA_65 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_DSA_65", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[372]})
-var sKeySpec_ML_DSA_87 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_DSA_87", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[373]})
-var sKeySpec_ECC_NIST_EDWARDS25519 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_NIST_EDWARDS25519", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[374]})
-var sKeySpec_ML_KEM_512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_KEM_512", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[375]})
-var sKeySpec_ML_KEM_768 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_KEM_768", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[376]})
-var sKeySpec_ML_KEM_1024 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_KEM_1024", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[377]})
-var sKeyState_Creating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Creating", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[379]})
-var sKeyState_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[380]})
-var sKeyState_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[381]})
-var sKeyState_PendingDeletion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingDeletion", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[382]})
-var sKeyState_PendingImport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingImport", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[383]})
-var sKeyState_PendingReplicaDeletion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingReplicaDeletion", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[384]})
-var sKeyState_Unavailable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unavailable", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[385]})
-var sKeyState_Updating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Updating", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[386]})
-var sKeyUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[389]})
-var sKeyUsageType_SIGN_VERIFY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIGN_VERIFY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[391]})
-var sKeyUsageType_ENCRYPT_DECRYPT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCRYPT_DECRYPT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[392]})
-var sKeyUsageType_GENERATE_VERIFY_MAC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GENERATE_VERIFY_MAC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[393]})
-var sKeyUsageType_KEY_AGREEMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEY_AGREEMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[394]})
-var sKeyUsageType_ENCAPSULATE_DECAPSULATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCAPSULATE_DECAPSULATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[395]})
-var sKMSInternalException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[397]})
-var sKMSInvalidMacException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[399]})
-var sKMSInvalidSignatureException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[401]})
-var sKMSInvalidStateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[403]})
-var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[406]})
-var sMacAlgorithmSpec_HMAC_SHA_224 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_SHA_224", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[409]})
-var sMacAlgorithmSpec_HMAC_SHA_256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_SHA_256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[410]})
-var sMacAlgorithmSpec_HMAC_SHA_384 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_SHA_384", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[411]})
-var sMacAlgorithmSpec_HMAC_SHA_512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_SHA_512", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[412]})
-var s_MacAlgorithmSpecList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMacAlgorithmSpec, Members: &mMacAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[414]})
-var sMalformedPolicyDocumentException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[416]})
-var sMessageType_RAW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RAW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[419]})
-var sMessageType_DIGEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIGEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[420]})
-var sMessageType_EXTERNAL_MU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXTERNAL_MU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[421]})
-var sMultiRegionConfiguration_MultiRegionKeyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiRegionKeyType", ID: &iMultiRegionKeyType, Members: &mMultiRegionKeyType, Type: smithy.ShapeTypeEnum, Ext: &ext[423]})
-var sMultiRegionConfiguration_PrimaryKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryKey", ID: &iMultiRegionKey, Members: &mMultiRegionKey, Type: smithy.ShapeTypeStructure, Ext: &ext[424]})
-var sMultiRegionConfiguration_ReplicaKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicaKeys", ID: &i_MultiRegionKeyList, Members: &m_MultiRegionKeyList, Type: smithy.ShapeTypeList, Ext: &ext[425]})
-var sMultiRegionKey_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ArnType, Type: smithy.ShapeTypeString, Ext: &ext[427]})
-var sMultiRegionKey_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_RegionType, Type: smithy.ShapeTypeString, Ext: &ext[428]})
-var s_MultiRegionKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMultiRegionKey, Members: &mMultiRegionKey, Type: smithy.ShapeTypeStructure, Ext: &ext[430]})
-var sMultiRegionKeyType_PRIMARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIMARY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[432]})
-var sMultiRegionKeyType_REPLICA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPLICA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[433]})
-var sNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[435]})
-var sOriginType_AWS_KMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_KMS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[439]})
-var sOriginType_EXTERNAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXTERNAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[440]})
-var sOriginType_AWS_CLOUDHSM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_CLOUDHSM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[441]})
-var sOriginType_EXTERNAL_KEY_STORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXTERNAL_KEY_STORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[442]})
-var s_PolicyNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PolicyNameType, Type: smithy.ShapeTypeString, Ext: &ext[446]})
-var sRecipientInfo_KeyEncryptionAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyEncryptionAlgorithm", ID: &iKeyEncryptionMechanism, Members: &mKeyEncryptionMechanism, Type: smithy.ShapeTypeEnum, Ext: &ext[452]})
-var sRecipientInfo_AttestationDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttestationDocument", ID: &i_AttestationDocumentType, Type: smithy.ShapeTypeBlob, Ext: &ext[453]})
-var s_RotationsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRotationsListEntry, Members: &mRotationsListEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[457]})
-var sRotationsListEntry_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[459]})
-var sRotationsListEntry_KeyMaterialId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialId", ID: &i_BackingKeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[460]})
-var sRotationsListEntry_KeyMaterialDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialDescription", ID: &i_KeyMaterialDescriptionType, Type: smithy.ShapeTypeString, Ext: &ext[461]})
-var sRotationsListEntry_ImportState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportState", ID: &iImportState, Members: &mImportState, Type: smithy.ShapeTypeEnum, Ext: &ext[462]})
-var sRotationsListEntry_KeyMaterialState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialState", ID: &iKeyMaterialState, Members: &mKeyMaterialState, Type: smithy.ShapeTypeEnum, Ext: &ext[463]})
-var sRotationsListEntry_ExpirationModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationModel", ID: &iExpirationModelType, Members: &mExpirationModelType, Type: smithy.ShapeTypeEnum, Ext: &ext[464]})
-var sRotationsListEntry_ValidTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidTo", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[465]})
-var sRotationsListEntry_RotationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationDate", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[466]})
-var sRotationsListEntry_RotationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationType", ID: &iRotationType, Members: &mRotationType, Type: smithy.ShapeTypeEnum, Ext: &ext[467]})
-var sRotationType_AUTOMATIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTOMATIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[469]})
-var sRotationType_ON_DEMAND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ON_DEMAND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[470]})
-var sSigningAlgorithmSpec_RSASSA_PSS_SHA_256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSASSA_PSS_SHA_256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[473]})
-var sSigningAlgorithmSpec_RSASSA_PSS_SHA_384 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSASSA_PSS_SHA_384", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[474]})
-var sSigningAlgorithmSpec_RSASSA_PSS_SHA_512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSASSA_PSS_SHA_512", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[475]})
-var sSigningAlgorithmSpec_RSASSA_PKCS1_V1_5_SHA_256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSASSA_PKCS1_V1_5_SHA_256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[476]})
-var sSigningAlgorithmSpec_RSASSA_PKCS1_V1_5_SHA_384 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSASSA_PKCS1_V1_5_SHA_384", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[477]})
-var sSigningAlgorithmSpec_RSASSA_PKCS1_V1_5_SHA_512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSASSA_PKCS1_V1_5_SHA_512", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[478]})
-var sSigningAlgorithmSpec_ECDSA_SHA_256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECDSA_SHA_256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[479]})
-var sSigningAlgorithmSpec_ECDSA_SHA_384 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECDSA_SHA_384", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[480]})
-var sSigningAlgorithmSpec_ECDSA_SHA_512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECDSA_SHA_512", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[481]})
-var sSigningAlgorithmSpec_SM2DSA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SM2DSA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[482]})
-var sSigningAlgorithmSpec_ML_DSA_SHAKE_256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_DSA_SHAKE_256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[483]})
-var sSigningAlgorithmSpec_ED25519_SHA_512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ED25519_SHA_512", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[484]})
-var sSigningAlgorithmSpec_ED25519_PH_SHA_512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ED25519_PH_SHA_512", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[485]})
-var s_SigningAlgorithmSpecList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSigningAlgorithmSpec, Members: &mSigningAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[487]})
-var sTag_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKey", ID: &i_TagKeyType, Type: smithy.ShapeTypeString, Ext: &ext[489]})
-var sTag_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagValue", ID: &i_TagValueType, Type: smithy.ShapeTypeString, Ext: &ext[490]})
-var sTagException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[492]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKeyType, Type: smithy.ShapeTypeString, Ext: &ext[494]})
-var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[497]})
-var sUnsupportedOperationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[501]})
-var sWrappingKeySpec_RSA_2048 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_2048", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[503]})
-var sWrappingKeySpec_RSA_3072 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_3072", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[504]})
-var sWrappingKeySpec_RSA_4096 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_4096", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[505]})
-var sWrappingKeySpec_SM2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SM2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[506]})
-var sXksKeyAlreadyInUseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[508]})
-var sXksKeyConfigurationType_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_XksKeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[510]})
-var sXksKeyInvalidConfigurationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[513]})
-var sXksKeyNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[515]})
-var sXksProxyAuthenticationCredentialType_AccessKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessKeyId", ID: &i_XksProxyAuthenticationAccessKeyIdType, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &ext[518]})
-var sXksProxyAuthenticationCredentialType_RawSecretAccessKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RawSecretAccessKey", ID: &i_XksProxyAuthenticationRawSecretAccessKeyType, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &ext[519]})
-var sXksProxyConfigurationType_Connectivity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Connectivity", ID: &iXksProxyConnectivityType, Members: &mXksProxyConnectivityType, Type: smithy.ShapeTypeEnum, Ext: &ext[522]})
-var sXksProxyConfigurationType_AccessKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessKeyId", ID: &i_XksProxyAuthenticationAccessKeyIdType, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &ext[523]})
-var sXksProxyConfigurationType_UriEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UriEndpoint", ID: &i_XksProxyUriEndpointType, Type: smithy.ShapeTypeString, Ext: &ext[524]})
-var sXksProxyConfigurationType_UriPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UriPath", ID: &i_XksProxyUriPathType, Type: smithy.ShapeTypeString, Ext: &ext[525]})
-var sXksProxyConfigurationType_VpcEndpointServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointServiceName", ID: &i_XksProxyVpcEndpointServiceNameType, Type: smithy.ShapeTypeString, Ext: &ext[526]})
-var sXksProxyConfigurationType_VpcEndpointServiceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointServiceOwner", ID: &i_AccountIdType, Type: smithy.ShapeTypeString, Ext: &ext[527]})
-var sXksProxyConnectivityType_PUBLIC_ENDPOINT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLIC_ENDPOINT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[529]})
-var sXksProxyConnectivityType_VPC_ENDPOINT_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC_ENDPOINT_SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[530]})
-var sXksProxyIncorrectAuthenticationCredentialException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[532]})
-var sXksProxyInvalidConfigurationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[534]})
-var sXksProxyInvalidResponseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[536]})
-var sXksProxyUriEndpointInUseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[538]})
-var sXksProxyUriInUseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[541]})
-var sXksProxyUriUnreachableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[544]})
-var sXksProxyVpcEndpointServiceInUseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[546]})
-var sXksProxyVpcEndpointServiceInvalidConfigurationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[548]})
-var sXksProxyVpcEndpointServiceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &ext[551]})
-var sCancelKeyDeletionRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[553]})
-var sCancelKeyDeletionResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[555]})
-var sConnectCustomKeyStoreRequest_CustomKeyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreId", ID: &i_CustomKeyStoreIdType, Type: smithy.ShapeTypeString, Ext: &ext[557]})
-var sCreateAliasRequest_AliasName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AliasName", ID: &i_AliasNameType, Type: smithy.ShapeTypeString, Ext: &ext[560]})
-var sCreateAliasRequest_TargetKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetKeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[561]})
-var sCreateCustomKeyStoreRequest_CustomKeyStoreName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreName", ID: &i_CustomKeyStoreNameType, Type: smithy.ShapeTypeString, Ext: &ext[563]})
-var sCreateCustomKeyStoreRequest_CloudHsmClusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudHsmClusterId", ID: &i_CloudHsmClusterIdType, Type: smithy.ShapeTypeString, Ext: &ext[564]})
-var sCreateCustomKeyStoreRequest_TrustAnchorCertificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustAnchorCertificate", ID: &i_TrustAnchorCertificateType, Type: smithy.ShapeTypeString, Ext: &ext[565]})
-var sCreateCustomKeyStoreRequest_KeyStorePassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyStorePassword", ID: &i_KeyStorePasswordType, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &ext[566]})
-var sCreateCustomKeyStoreRequest_CustomKeyStoreType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreType", ID: &iCustomKeyStoreType, Members: &mCustomKeyStoreType, Type: smithy.ShapeTypeEnum, Ext: &ext[567]})
-var sCreateCustomKeyStoreRequest_XksProxyUriEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksProxyUriEndpoint", ID: &i_XksProxyUriEndpointType, Type: smithy.ShapeTypeString, Ext: &ext[568]})
-var sCreateCustomKeyStoreRequest_XksProxyUriPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksProxyUriPath", ID: &i_XksProxyUriPathType, Type: smithy.ShapeTypeString, Ext: &ext[569]})
-var sCreateCustomKeyStoreRequest_XksProxyVpcEndpointServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksProxyVpcEndpointServiceName", ID: &i_XksProxyVpcEndpointServiceNameType, Type: smithy.ShapeTypeString, Ext: &ext[570]})
-var sCreateCustomKeyStoreRequest_XksProxyVpcEndpointServiceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksProxyVpcEndpointServiceOwner", ID: &i_AccountIdType, Type: smithy.ShapeTypeString, Ext: &ext[571]})
-var sCreateCustomKeyStoreRequest_XksProxyAuthenticationCredential = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksProxyAuthenticationCredential", ID: &iXksProxyAuthenticationCredentialType, Members: &mXksProxyAuthenticationCredentialType, Type: smithy.ShapeTypeStructure, Ext: &ext[572]})
-var sCreateCustomKeyStoreRequest_XksProxyConnectivity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksProxyConnectivity", ID: &iXksProxyConnectivityType, Members: &mXksProxyConnectivityType, Type: smithy.ShapeTypeEnum, Ext: &ext[573]})
-var sCreateCustomKeyStoreResponse_CustomKeyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreId", ID: &i_CustomKeyStoreIdType, Type: smithy.ShapeTypeString, Ext: &ext[575]})
-var sCreateGrantRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[577]})
-var sCreateGrantRequest_GranteePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GranteePrincipal", ID: &i_PrincipalIdType, Type: smithy.ShapeTypeString, Ext: &ext[578]})
-var sCreateGrantRequest_RetiringPrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetiringPrincipal", ID: &i_PrincipalIdType, Type: smithy.ShapeTypeString, Ext: &ext[579]})
-var sCreateGrantRequest_Operations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operations", ID: &i_GrantOperationList, Members: &m_GrantOperationList, Type: smithy.ShapeTypeList, Ext: &ext[580]})
-var sCreateGrantRequest_Constraints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Constraints", ID: &iGrantConstraints, Members: &mGrantConstraints, Type: smithy.ShapeTypeStructure, Ext: &ext[581]})
-var sCreateGrantRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &ext[582]})
-var sCreateGrantRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_GrantNameType, Type: smithy.ShapeTypeString, Ext: &ext[583]})
-var sCreateGrantRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[584]})
-var sCreateGrantRequest_GranteeServicePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GranteeServicePrincipal", ID: &i_ServicePrincipalType, Type: smithy.ShapeTypeString, Ext: &ext[585]})
-var sCreateGrantRequest_RetiringServicePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetiringServicePrincipal", ID: &i_ServicePrincipalType, Type: smithy.ShapeTypeString, Ext: &ext[586]})
-var sCreateGrantResponse_GrantToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantToken", ID: &i_GrantTokenType, Type: smithy.ShapeTypeString, Ext: &ext[588]})
-var sCreateGrantResponse_GrantId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantId", ID: &i_GrantIdType, Type: smithy.ShapeTypeString, Ext: &ext[589]})
-var sCreateKeyRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_PolicyType, Type: smithy.ShapeTypeString, Ext: &ext[591]})
-var sCreateKeyRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionType, Type: smithy.ShapeTypeString, Ext: &ext[592]})
-var sCreateKeyRequest_KeyUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyUsage", ID: &iKeyUsageType, Members: &mKeyUsageType, Type: smithy.ShapeTypeEnum, Ext: &ext[593]})
-var sCreateKeyRequest_CustomerMasterKeySpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerMasterKeySpec", ID: &iCustomerMasterKeySpec, Members: &mCustomerMasterKeySpec, Type: smithy.ShapeTypeEnum, Ext: &ext[594]})
-var sCreateKeyRequest_KeySpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeySpec", ID: &iKeySpec, Members: &mKeySpec, Type: smithy.ShapeTypeEnum, Ext: &ext[595]})
-var sCreateKeyRequest_Origin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Origin", ID: &iOriginType, Members: &mOriginType, Type: smithy.ShapeTypeEnum, Ext: &ext[596]})
-var sCreateKeyRequest_CustomKeyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreId", ID: &i_CustomKeyStoreIdType, Type: smithy.ShapeTypeString, Ext: &ext[597]})
-var sCreateKeyRequest_BypassPolicyLockoutSafetyCheck = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BypassPolicyLockoutSafetyCheck", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[598]})
-var sCreateKeyRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[599]})
-var sCreateKeyRequest_MultiRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiRegion", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[600]})
-var sCreateKeyRequest_XksKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksKeyId", ID: &i_XksKeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[601]})
-var sCreateKeyResponse_KeyMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMetadata", ID: &iKeyMetadata, Members: &mKeyMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[603]})
-var sDecapsulateRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[605]})
-var sDecapsulateRequest_SharedSecretCiphertextBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedSecretCiphertextBlob", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &ext[606]})
-var sDecapsulateRequest_EncapsulationAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncapsulationAlgorithm", ID: &iEncapsulationAlgorithmSpec, Members: &mEncapsulationAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[607]})
-var sDecapsulateRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &ext[608]})
-var sDecapsulateRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[609]})
-var sDecapsulateResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[611]})
-var sDecapsulateResponse_SharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedSecret", ID: &i_PlaintextType, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &ext[612]})
-var sDecapsulateResponse_EncapsulationAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncapsulationAlgorithm", ID: &iEncapsulationAlgorithmSpec, Members: &mEncapsulationAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[613]})
-var sDecryptRequest_CiphertextBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CiphertextBlob", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &ext[615]})
-var sDecryptRequest_EncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionContext", ID: &i_EncryptionContextType, Members: &m_EncryptionContextType, Type: smithy.ShapeTypeMap, Ext: &ext[616]})
-var sDecryptRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &ext[617]})
-var sDecryptRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[618]})
-var sDecryptRequest_EncryptionAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionAlgorithm", ID: &iEncryptionAlgorithmSpec, Members: &mEncryptionAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[619]})
-var sDecryptRequest_Recipient = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Recipient", ID: &iRecipientInfo, Members: &mRecipientInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[620]})
-var sDecryptRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[621]})
-var sDecryptRequest_DryRunModifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRunModifiers", ID: &i_DryRunModifierList, Members: &m_DryRunModifierList, Type: smithy.ShapeTypeList, Ext: &ext[622]})
-var sDecryptResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[624]})
-var sDecryptResponse_Plaintext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Plaintext", ID: &i_PlaintextType, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &ext[625]})
-var sDecryptResponse_EncryptionAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionAlgorithm", ID: &iEncryptionAlgorithmSpec, Members: &mEncryptionAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[626]})
-var sDecryptResponse_CiphertextForRecipient = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CiphertextForRecipient", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &ext[627]})
-var sDecryptResponse_KeyMaterialId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialId", ID: &i_BackingKeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[628]})
-var sDeleteAliasRequest_AliasName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AliasName", ID: &i_AliasNameType, Type: smithy.ShapeTypeString, Ext: &ext[630]})
-var sDeleteCustomKeyStoreRequest_CustomKeyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreId", ID: &i_CustomKeyStoreIdType, Type: smithy.ShapeTypeString, Ext: &ext[632]})
-var sDeleteImportedKeyMaterialRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[635]})
-var sDeleteImportedKeyMaterialRequest_KeyMaterialId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialId", ID: &i_BackingKeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[636]})
-var sDeleteImportedKeyMaterialResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[638]})
-var sDeleteImportedKeyMaterialResponse_KeyMaterialId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialId", ID: &i_BackingKeyIdResponseType, Type: smithy.ShapeTypeString, Ext: &ext[639]})
-var sDeriveSharedSecretRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[641]})
-var sDeriveSharedSecretRequest_KeyAgreementAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAgreementAlgorithm", ID: &iKeyAgreementAlgorithmSpec, Members: &mKeyAgreementAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[642]})
-var sDeriveSharedSecretRequest_PublicKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicKey", ID: &i_PublicKeyType, Type: smithy.ShapeTypeBlob, Ext: &ext[643]})
-var sDeriveSharedSecretRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &ext[644]})
-var sDeriveSharedSecretRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[645]})
-var sDeriveSharedSecretRequest_Recipient = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Recipient", ID: &iRecipientInfo, Members: &mRecipientInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[646]})
-var sDeriveSharedSecretResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[648]})
-var sDeriveSharedSecretResponse_SharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedSecret", ID: &i_PlaintextType, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &ext[649]})
-var sDeriveSharedSecretResponse_CiphertextForRecipient = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CiphertextForRecipient", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &ext[650]})
-var sDeriveSharedSecretResponse_KeyAgreementAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAgreementAlgorithm", ID: &iKeyAgreementAlgorithmSpec, Members: &mKeyAgreementAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[651]})
-var sDeriveSharedSecretResponse_KeyOrigin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyOrigin", ID: &iOriginType, Members: &mOriginType, Type: smithy.ShapeTypeEnum, Ext: &ext[652]})
-var sDescribeCustomKeyStoresRequest_CustomKeyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreId", ID: &i_CustomKeyStoreIdType, Type: smithy.ShapeTypeString, Ext: &ext[654]})
-var sDescribeCustomKeyStoresRequest_CustomKeyStoreName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreName", ID: &i_CustomKeyStoreNameType, Type: smithy.ShapeTypeString, Ext: &ext[655]})
-var sDescribeCustomKeyStoresRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitType, Type: smithy.ShapeTypeInteger, Ext: &ext[656]})
-var sDescribeCustomKeyStoresRequest_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &ext[657]})
-var sDescribeCustomKeyStoresResponse_CustomKeyStores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStores", ID: &i_CustomKeyStoresList, Members: &m_CustomKeyStoresList, Type: smithy.ShapeTypeList, Ext: &ext[659]})
-var sDescribeCustomKeyStoresResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &ext[660]})
-var sDescribeCustomKeyStoresResponse_Truncated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Truncated", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[661]})
-var sDescribeKeyRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[663]})
-var sDescribeKeyRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &ext[664]})
-var sDescribeKeyResponse_KeyMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMetadata", ID: &iKeyMetadata, Members: &mKeyMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[666]})
-var sDisableKeyRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[668]})
-var sDisableKeyRotationRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[670]})
-var sDisconnectCustomKeyStoreRequest_CustomKeyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreId", ID: &i_CustomKeyStoreIdType, Type: smithy.ShapeTypeString, Ext: &ext[672]})
-var sEnableKeyRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[675]})
-var sEnableKeyRotationRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[677]})
-var sEnableKeyRotationRequest_RotationPeriodInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationPeriodInDays", ID: &i_RotationPeriodInDaysType, Type: smithy.ShapeTypeInteger, Ext: &ext[678]})
-var sEncapsulateRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[680]})
-var sEncapsulateRequest_EncapsulationAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncapsulationAlgorithm", ID: &iEncapsulationAlgorithmSpec, Members: &mEncapsulationAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[681]})
-var sEncapsulateRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &ext[682]})
-var sEncapsulateRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[683]})
-var sEncapsulateResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[685]})
-var sEncapsulateResponse_SharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedSecret", ID: &i_PlaintextType, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &ext[686]})
-var sEncapsulateResponse_SharedSecretCiphertextBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedSecretCiphertextBlob", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &ext[687]})
-var sEncapsulateResponse_EncapsulationAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncapsulationAlgorithm", ID: &iEncapsulationAlgorithmSpec, Members: &mEncapsulationAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[688]})
-var sEncryptRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[690]})
-var sEncryptRequest_Plaintext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Plaintext", ID: &i_PlaintextType, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &ext[691]})
-var sEncryptRequest_EncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionContext", ID: &i_EncryptionContextType, Members: &m_EncryptionContextType, Type: smithy.ShapeTypeMap, Ext: &ext[692]})
-var sEncryptRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &ext[693]})
-var sEncryptRequest_EncryptionAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionAlgorithm", ID: &iEncryptionAlgorithmSpec, Members: &mEncryptionAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[694]})
-var sEncryptRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[695]})
-var sEncryptResponse_CiphertextBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CiphertextBlob", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &ext[697]})
-var sEncryptResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[698]})
-var sEncryptResponse_EncryptionAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionAlgorithm", ID: &iEncryptionAlgorithmSpec, Members: &mEncryptionAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[699]})
-var sGenerateDataKeyRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[701]})
-var sGenerateDataKeyRequest_EncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionContext", ID: &i_EncryptionContextType, Members: &m_EncryptionContextType, Type: smithy.ShapeTypeMap, Ext: &ext[702]})
-var sGenerateDataKeyRequest_NumberOfBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfBytes", ID: &i_NumberOfBytesType, Type: smithy.ShapeTypeInteger, Ext: &ext[703]})
-var sGenerateDataKeyRequest_KeySpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeySpec", ID: &iDataKeySpec, Members: &mDataKeySpec, Type: smithy.ShapeTypeEnum, Ext: &ext[704]})
-var sGenerateDataKeyRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &ext[705]})
-var sGenerateDataKeyRequest_Recipient = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Recipient", ID: &iRecipientInfo, Members: &mRecipientInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[706]})
-var sGenerateDataKeyRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[707]})
-var sGenerateDataKeyResponse_CiphertextBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CiphertextBlob", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &ext[709]})
-var sGenerateDataKeyResponse_Plaintext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Plaintext", ID: &i_PlaintextType, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &ext[710]})
-var sGenerateDataKeyResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[711]})
-var sGenerateDataKeyResponse_CiphertextForRecipient = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CiphertextForRecipient", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &ext[712]})
-var sGenerateDataKeyResponse_KeyMaterialId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialId", ID: &i_BackingKeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[713]})
-var sGenerateDataKeyPairRequest_EncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionContext", ID: &i_EncryptionContextType, Members: &m_EncryptionContextType, Type: smithy.ShapeTypeMap, Ext: &ext[715]})
-var sGenerateDataKeyPairRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[716]})
-var sGenerateDataKeyPairRequest_KeyPairSpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyPairSpec", ID: &iDataKeyPairSpec, Members: &mDataKeyPairSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[717]})
-var sGenerateDataKeyPairRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &ext[718]})
-var sGenerateDataKeyPairRequest_Recipient = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Recipient", ID: &iRecipientInfo, Members: &mRecipientInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[719]})
-var sGenerateDataKeyPairRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[720]})
-var sGenerateDataKeyPairResponse_PrivateKeyCiphertextBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateKeyCiphertextBlob", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &ext[722]})
-var sGenerateDataKeyPairResponse_PrivateKeyPlaintext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateKeyPlaintext", ID: &i_PlaintextType, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &ext[723]})
-var sGenerateDataKeyPairResponse_PublicKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicKey", ID: &i_PublicKeyType, Type: smithy.ShapeTypeBlob, Ext: &ext[724]})
-var sGenerateDataKeyPairResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[725]})
-var sGenerateDataKeyPairResponse_KeyPairSpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyPairSpec", ID: &iDataKeyPairSpec, Members: &mDataKeyPairSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[726]})
-var sGenerateDataKeyPairResponse_CiphertextForRecipient = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CiphertextForRecipient", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &ext[727]})
-var sGenerateDataKeyPairResponse_KeyMaterialId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialId", ID: &i_BackingKeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[728]})
-var sGenerateDataKeyPairWithoutPlaintextRequest_EncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionContext", ID: &i_EncryptionContextType, Members: &m_EncryptionContextType, Type: smithy.ShapeTypeMap, Ext: &ext[730]})
-var sGenerateDataKeyPairWithoutPlaintextRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[731]})
-var sGenerateDataKeyPairWithoutPlaintextRequest_KeyPairSpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyPairSpec", ID: &iDataKeyPairSpec, Members: &mDataKeyPairSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[732]})
-var sGenerateDataKeyPairWithoutPlaintextRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &ext[733]})
-var sGenerateDataKeyPairWithoutPlaintextRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[734]})
-var sGenerateDataKeyPairWithoutPlaintextResponse_PrivateKeyCiphertextBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateKeyCiphertextBlob", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &ext[736]})
-var sGenerateDataKeyPairWithoutPlaintextResponse_PublicKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicKey", ID: &i_PublicKeyType, Type: smithy.ShapeTypeBlob, Ext: &ext[737]})
-var sGenerateDataKeyPairWithoutPlaintextResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[738]})
-var sGenerateDataKeyPairWithoutPlaintextResponse_KeyPairSpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyPairSpec", ID: &iDataKeyPairSpec, Members: &mDataKeyPairSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[739]})
-var sGenerateDataKeyPairWithoutPlaintextResponse_KeyMaterialId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialId", ID: &i_BackingKeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[740]})
-var sGenerateDataKeyWithoutPlaintextRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[742]})
-var sGenerateDataKeyWithoutPlaintextRequest_EncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionContext", ID: &i_EncryptionContextType, Members: &m_EncryptionContextType, Type: smithy.ShapeTypeMap, Ext: &ext[743]})
-var sGenerateDataKeyWithoutPlaintextRequest_KeySpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeySpec", ID: &iDataKeySpec, Members: &mDataKeySpec, Type: smithy.ShapeTypeEnum, Ext: &ext[744]})
-var sGenerateDataKeyWithoutPlaintextRequest_NumberOfBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfBytes", ID: &i_NumberOfBytesType, Type: smithy.ShapeTypeInteger, Ext: &ext[745]})
-var sGenerateDataKeyWithoutPlaintextRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &ext[746]})
-var sGenerateDataKeyWithoutPlaintextRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[747]})
-var sGenerateDataKeyWithoutPlaintextResponse_CiphertextBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CiphertextBlob", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &ext[749]})
-var sGenerateDataKeyWithoutPlaintextResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[750]})
-var sGenerateDataKeyWithoutPlaintextResponse_KeyMaterialId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialId", ID: &i_BackingKeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[751]})
-var sGenerateMacRequest_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_PlaintextType, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &ext[753]})
-var sGenerateMacRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[754]})
-var sGenerateMacRequest_MacAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MacAlgorithm", ID: &iMacAlgorithmSpec, Members: &mMacAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[755]})
-var sGenerateMacRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &ext[756]})
-var sGenerateMacRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[757]})
-var sGenerateMacResponse_Mac = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mac", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &ext[759]})
-var sGenerateMacResponse_MacAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MacAlgorithm", ID: &iMacAlgorithmSpec, Members: &mMacAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[760]})
-var sGenerateMacResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[761]})
-var sGenerateRandomRequest_NumberOfBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfBytes", ID: &i_NumberOfBytesType, Type: smithy.ShapeTypeInteger, Ext: &ext[763]})
-var sGenerateRandomRequest_CustomKeyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreId", ID: &i_CustomKeyStoreIdType, Type: smithy.ShapeTypeString, Ext: &ext[764]})
-var sGenerateRandomRequest_Recipient = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Recipient", ID: &iRecipientInfo, Members: &mRecipientInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[765]})
-var sGenerateRandomResponse_Plaintext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Plaintext", ID: &i_PlaintextType, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &ext[767]})
-var sGenerateRandomResponse_CiphertextForRecipient = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CiphertextForRecipient", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &ext[768]})
-var sGetKeyLastUsageRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[770]})
-var sGetKeyLastUsageResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[772]})
-var sGetKeyLastUsageResponse_KeyLastUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyLastUsage", ID: &iKeyLastUsageData, Members: &mKeyLastUsageData, Type: smithy.ShapeTypeStructure, Ext: &ext[773]})
-var sGetKeyLastUsageResponse_TrackingStartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrackingStartDate", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[774]})
-var sGetKeyLastUsageResponse_KeyCreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyCreationDate", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[775]})
-var sGetKeyPolicyRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[777]})
-var sGetKeyPolicyRequest_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_PolicyNameType, Type: smithy.ShapeTypeString, Ext: &ext[778]})
-var sGetKeyPolicyResponse_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_PolicyType, Type: smithy.ShapeTypeString, Ext: &ext[780]})
-var sGetKeyPolicyResponse_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_PolicyNameType, Type: smithy.ShapeTypeString, Ext: &ext[781]})
-var sGetKeyRotationStatusRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[783]})
-var sGetKeyRotationStatusResponse_KeyRotationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyRotationEnabled", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[785]})
-var sGetKeyRotationStatusResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[786]})
-var sGetKeyRotationStatusResponse_RotationPeriodInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationPeriodInDays", ID: &i_RotationPeriodInDaysType, Type: smithy.ShapeTypeInteger, Ext: &ext[787]})
-var sGetKeyRotationStatusResponse_NextRotationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextRotationDate", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[788]})
-var sGetKeyRotationStatusResponse_OnDemandRotationStartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnDemandRotationStartDate", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[789]})
-var sGetParametersForImportRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[791]})
-var sGetParametersForImportRequest_WrappingAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WrappingAlgorithm", ID: &iAlgorithmSpec, Members: &mAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[792]})
-var sGetParametersForImportRequest_WrappingKeySpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WrappingKeySpec", ID: &iWrappingKeySpec, Members: &mWrappingKeySpec, Type: smithy.ShapeTypeEnum, Ext: &ext[793]})
-var sGetParametersForImportResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[795]})
-var sGetParametersForImportResponse_ImportToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportToken", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &ext[796]})
-var sGetParametersForImportResponse_PublicKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicKey", ID: &i_PlaintextType, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &ext[797]})
-var sGetParametersForImportResponse_ParametersValidTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParametersValidTo", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[798]})
-var sGetPublicKeyRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[800]})
-var sGetPublicKeyRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &ext[801]})
-var sGetPublicKeyResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[803]})
-var sGetPublicKeyResponse_PublicKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicKey", ID: &i_PublicKeyType, Type: smithy.ShapeTypeBlob, Ext: &ext[804]})
-var sGetPublicKeyResponse_CustomerMasterKeySpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerMasterKeySpec", ID: &iCustomerMasterKeySpec, Members: &mCustomerMasterKeySpec, Type: smithy.ShapeTypeEnum, Ext: &ext[805]})
-var sGetPublicKeyResponse_KeySpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeySpec", ID: &iKeySpec, Members: &mKeySpec, Type: smithy.ShapeTypeEnum, Ext: &ext[806]})
-var sGetPublicKeyResponse_KeyUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyUsage", ID: &iKeyUsageType, Members: &mKeyUsageType, Type: smithy.ShapeTypeEnum, Ext: &ext[807]})
-var sGetPublicKeyResponse_EncryptionAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionAlgorithms", ID: &i_EncryptionAlgorithmSpecList, Members: &m_EncryptionAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &ext[808]})
-var sGetPublicKeyResponse_SigningAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningAlgorithms", ID: &i_SigningAlgorithmSpecList, Members: &m_SigningAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &ext[809]})
-var sGetPublicKeyResponse_KeyAgreementAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAgreementAlgorithms", ID: &i_KeyAgreementAlgorithmSpecList, Members: &m_KeyAgreementAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &ext[810]})
-var sGetPublicKeyResponse_EncapsulationAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncapsulationAlgorithms", ID: &i_EncapsulationAlgorithmSpecList, Members: &m_EncapsulationAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &ext[811]})
-var sImportKeyMaterialRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[813]})
-var sImportKeyMaterialRequest_ImportToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportToken", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &ext[814]})
-var sImportKeyMaterialRequest_EncryptedKeyMaterial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptedKeyMaterial", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &ext[815]})
-var sImportKeyMaterialRequest_ValidTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidTo", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[816]})
-var sImportKeyMaterialRequest_ExpirationModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationModel", ID: &iExpirationModelType, Members: &mExpirationModelType, Type: smithy.ShapeTypeEnum, Ext: &ext[817]})
-var sImportKeyMaterialRequest_ImportType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportType", ID: &iImportType, Members: &mImportType, Type: smithy.ShapeTypeEnum, Ext: &ext[818]})
-var sImportKeyMaterialRequest_KeyMaterialDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialDescription", ID: &i_KeyMaterialDescriptionType, Type: smithy.ShapeTypeString, Ext: &ext[819]})
-var sImportKeyMaterialRequest_KeyMaterialId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialId", ID: &i_BackingKeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[820]})
-var sImportKeyMaterialResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[822]})
-var sImportKeyMaterialResponse_KeyMaterialId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialId", ID: &i_BackingKeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[823]})
-var sListAliasesRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[825]})
-var sListAliasesRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitType, Type: smithy.ShapeTypeInteger, Ext: &ext[826]})
-var sListAliasesRequest_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &ext[827]})
-var sListAliasesResponse_Aliases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Aliases", ID: &i_AliasList, Members: &m_AliasList, Type: smithy.ShapeTypeList, Ext: &ext[829]})
-var sListAliasesResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &ext[830]})
-var sListAliasesResponse_Truncated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Truncated", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[831]})
-var sListGrantsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitType, Type: smithy.ShapeTypeInteger, Ext: &ext[833]})
-var sListGrantsRequest_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &ext[834]})
-var sListGrantsRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[835]})
-var sListGrantsRequest_GrantId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantId", ID: &i_GrantIdType, Type: smithy.ShapeTypeString, Ext: &ext[836]})
-var sListGrantsRequest_GranteePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GranteePrincipal", ID: &i_PrincipalIdType, Type: smithy.ShapeTypeString, Ext: &ext[837]})
-var sListGrantsRequest_GranteeServicePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GranteeServicePrincipal", ID: &i_ServicePrincipalType, Type: smithy.ShapeTypeString, Ext: &ext[838]})
-var sListGrantsResponse_Grants = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Grants", ID: &i_GrantList, Members: &m_GrantList, Type: smithy.ShapeTypeList, Ext: &ext[840]})
-var sListGrantsResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &ext[841]})
-var sListGrantsResponse_Truncated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Truncated", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[842]})
-var sListKeyPoliciesRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[844]})
-var sListKeyPoliciesRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitType, Type: smithy.ShapeTypeInteger, Ext: &ext[845]})
-var sListKeyPoliciesRequest_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &ext[846]})
-var sListKeyPoliciesResponse_PolicyNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyNames", ID: &i_PolicyNameList, Members: &m_PolicyNameList, Type: smithy.ShapeTypeList, Ext: &ext[848]})
-var sListKeyPoliciesResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &ext[849]})
-var sListKeyPoliciesResponse_Truncated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Truncated", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[850]})
-var sListKeyRotationsRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[852]})
-var sListKeyRotationsRequest_IncludeKeyMaterial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeKeyMaterial", ID: &iIncludeKeyMaterial, Members: &mIncludeKeyMaterial, Type: smithy.ShapeTypeEnum, Ext: &ext[853]})
-var sListKeyRotationsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitType, Type: smithy.ShapeTypeInteger, Ext: &ext[854]})
-var sListKeyRotationsRequest_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &ext[855]})
-var sListKeyRotationsResponse_Rotations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rotations", ID: &i_RotationsList, Members: &m_RotationsList, Type: smithy.ShapeTypeList, Ext: &ext[857]})
-var sListKeyRotationsResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &ext[858]})
-var sListKeyRotationsResponse_Truncated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Truncated", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[859]})
-var sListKeysRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitType, Type: smithy.ShapeTypeInteger, Ext: &ext[861]})
-var sListKeysRequest_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &ext[862]})
-var sListKeysResponse_Keys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Keys", ID: &i_KeyList, Members: &m_KeyList, Type: smithy.ShapeTypeList, Ext: &ext[864]})
-var sListKeysResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &ext[865]})
-var sListKeysResponse_Truncated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Truncated", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[866]})
-var sListResourceTagsRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[868]})
-var sListResourceTagsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitType, Type: smithy.ShapeTypeInteger, Ext: &ext[869]})
-var sListResourceTagsRequest_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &ext[870]})
-var sListResourceTagsResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[872]})
-var sListResourceTagsResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &ext[873]})
-var sListResourceTagsResponse_Truncated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Truncated", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[874]})
-var sListRetirableGrantsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitType, Type: smithy.ShapeTypeInteger, Ext: &ext[876]})
-var sListRetirableGrantsRequest_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &ext[877]})
-var sListRetirableGrantsRequest_RetiringPrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetiringPrincipal", ID: &i_PrincipalIdType, Type: smithy.ShapeTypeString, Ext: &ext[878]})
-var sListRetirableGrantsRequest_RetiringServicePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetiringServicePrincipal", ID: &i_ServicePrincipalType, Type: smithy.ShapeTypeString, Ext: &ext[879]})
-var sPutKeyPolicyRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[881]})
-var sPutKeyPolicyRequest_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_PolicyNameType, Type: smithy.ShapeTypeString, Ext: &ext[882]})
-var sPutKeyPolicyRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_PolicyType, Type: smithy.ShapeTypeString, Ext: &ext[883]})
-var sPutKeyPolicyRequest_BypassPolicyLockoutSafetyCheck = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BypassPolicyLockoutSafetyCheck", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[884]})
-var sReEncryptRequest_CiphertextBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CiphertextBlob", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &ext[886]})
-var sReEncryptRequest_SourceEncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceEncryptionContext", ID: &i_EncryptionContextType, Members: &m_EncryptionContextType, Type: smithy.ShapeTypeMap, Ext: &ext[887]})
-var sReEncryptRequest_SourceKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceKeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[888]})
-var sReEncryptRequest_DestinationKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationKeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[889]})
-var sReEncryptRequest_DestinationEncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationEncryptionContext", ID: &i_EncryptionContextType, Members: &m_EncryptionContextType, Type: smithy.ShapeTypeMap, Ext: &ext[890]})
-var sReEncryptRequest_SourceEncryptionAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceEncryptionAlgorithm", ID: &iEncryptionAlgorithmSpec, Members: &mEncryptionAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[891]})
-var sReEncryptRequest_DestinationEncryptionAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationEncryptionAlgorithm", ID: &iEncryptionAlgorithmSpec, Members: &mEncryptionAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[892]})
-var sReEncryptRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &ext[893]})
-var sReEncryptRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[894]})
-var sReEncryptRequest_DryRunModifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRunModifiers", ID: &i_DryRunModifierList, Members: &m_DryRunModifierList, Type: smithy.ShapeTypeList, Ext: &ext[895]})
-var sReEncryptResponse_CiphertextBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CiphertextBlob", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &ext[897]})
-var sReEncryptResponse_SourceKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceKeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[898]})
-var sReEncryptResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[899]})
-var sReEncryptResponse_SourceEncryptionAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceEncryptionAlgorithm", ID: &iEncryptionAlgorithmSpec, Members: &mEncryptionAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[900]})
-var sReEncryptResponse_DestinationEncryptionAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationEncryptionAlgorithm", ID: &iEncryptionAlgorithmSpec, Members: &mEncryptionAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[901]})
-var sReEncryptResponse_SourceKeyMaterialId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceKeyMaterialId", ID: &i_BackingKeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[902]})
-var sReEncryptResponse_DestinationKeyMaterialId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationKeyMaterialId", ID: &i_BackingKeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[903]})
-var sReplicateKeyRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[905]})
-var sReplicateKeyRequest_ReplicaRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicaRegion", ID: &i_RegionType, Type: smithy.ShapeTypeString, Ext: &ext[906]})
-var sReplicateKeyRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_PolicyType, Type: smithy.ShapeTypeString, Ext: &ext[907]})
-var sReplicateKeyRequest_BypassPolicyLockoutSafetyCheck = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BypassPolicyLockoutSafetyCheck", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[908]})
-var sReplicateKeyRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionType, Type: smithy.ShapeTypeString, Ext: &ext[909]})
-var sReplicateKeyRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[910]})
-var sReplicateKeyResponse_ReplicaKeyMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicaKeyMetadata", ID: &iKeyMetadata, Members: &mKeyMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[912]})
-var sReplicateKeyResponse_ReplicaPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicaPolicy", ID: &i_PolicyType, Type: smithy.ShapeTypeString, Ext: &ext[913]})
-var sReplicateKeyResponse_ReplicaTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicaTags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[914]})
-var sRetireGrantRequest_GrantToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantToken", ID: &i_GrantTokenType, Type: smithy.ShapeTypeString, Ext: &ext[916]})
-var sRetireGrantRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[917]})
-var sRetireGrantRequest_GrantId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantId", ID: &i_GrantIdType, Type: smithy.ShapeTypeString, Ext: &ext[918]})
-var sRetireGrantRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[919]})
-var sRevokeGrantRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[921]})
-var sRevokeGrantRequest_GrantId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantId", ID: &i_GrantIdType, Type: smithy.ShapeTypeString, Ext: &ext[922]})
-var sRevokeGrantRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[923]})
-var sRotateKeyOnDemandRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[925]})
-var sRotateKeyOnDemandResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[927]})
-var sScheduleKeyDeletionRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[929]})
-var sScheduleKeyDeletionRequest_PendingWindowInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingWindowInDays", ID: &i_PendingWindowInDaysType, Type: smithy.ShapeTypeInteger, Ext: &ext[930]})
-var sScheduleKeyDeletionResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[932]})
-var sScheduleKeyDeletionResponse_DeletionDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionDate", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[933]})
-var sScheduleKeyDeletionResponse_KeyState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyState", ID: &iKeyState, Members: &mKeyState, Type: smithy.ShapeTypeEnum, Ext: &ext[934]})
-var sScheduleKeyDeletionResponse_PendingWindowInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingWindowInDays", ID: &i_PendingWindowInDaysType, Type: smithy.ShapeTypeInteger, Ext: &ext[935]})
-var sSignRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[937]})
-var sSignRequest_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_PlaintextType, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &ext[938]})
-var sSignRequest_MessageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageType", ID: &iMessageType, Members: &mMessageType, Type: smithy.ShapeTypeEnum, Ext: &ext[939]})
-var sSignRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &ext[940]})
-var sSignRequest_SigningAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningAlgorithm", ID: &iSigningAlgorithmSpec, Members: &mSigningAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[941]})
-var sSignRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[942]})
-var sSignResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[944]})
-var sSignResponse_Signature = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Signature", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &ext[945]})
-var sSignResponse_SigningAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningAlgorithm", ID: &iSigningAlgorithmSpec, Members: &mSigningAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[946]})
-var sTagResourceRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[948]})
-var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[949]})
-var sUntagResourceRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[951]})
-var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[952]})
-var sUpdateAliasRequest_AliasName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AliasName", ID: &i_AliasNameType, Type: smithy.ShapeTypeString, Ext: &ext[954]})
-var sUpdateAliasRequest_TargetKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetKeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[955]})
-var sUpdateCustomKeyStoreRequest_CustomKeyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreId", ID: &i_CustomKeyStoreIdType, Type: smithy.ShapeTypeString, Ext: &ext[957]})
-var sUpdateCustomKeyStoreRequest_NewCustomKeyStoreName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewCustomKeyStoreName", ID: &i_CustomKeyStoreNameType, Type: smithy.ShapeTypeString, Ext: &ext[958]})
-var sUpdateCustomKeyStoreRequest_KeyStorePassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyStorePassword", ID: &i_KeyStorePasswordType, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &ext[959]})
-var sUpdateCustomKeyStoreRequest_CloudHsmClusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudHsmClusterId", ID: &i_CloudHsmClusterIdType, Type: smithy.ShapeTypeString, Ext: &ext[960]})
-var sUpdateCustomKeyStoreRequest_XksProxyUriEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksProxyUriEndpoint", ID: &i_XksProxyUriEndpointType, Type: smithy.ShapeTypeString, Ext: &ext[961]})
-var sUpdateCustomKeyStoreRequest_XksProxyUriPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksProxyUriPath", ID: &i_XksProxyUriPathType, Type: smithy.ShapeTypeString, Ext: &ext[962]})
-var sUpdateCustomKeyStoreRequest_XksProxyVpcEndpointServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksProxyVpcEndpointServiceName", ID: &i_XksProxyVpcEndpointServiceNameType, Type: smithy.ShapeTypeString, Ext: &ext[963]})
-var sUpdateCustomKeyStoreRequest_XksProxyVpcEndpointServiceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksProxyVpcEndpointServiceOwner", ID: &i_AccountIdType, Type: smithy.ShapeTypeString, Ext: &ext[964]})
-var sUpdateCustomKeyStoreRequest_XksProxyAuthenticationCredential = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksProxyAuthenticationCredential", ID: &iXksProxyAuthenticationCredentialType, Members: &mXksProxyAuthenticationCredentialType, Type: smithy.ShapeTypeStructure, Ext: &ext[965]})
-var sUpdateCustomKeyStoreRequest_XksProxyConnectivity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksProxyConnectivity", ID: &iXksProxyConnectivityType, Members: &mXksProxyConnectivityType, Type: smithy.ShapeTypeEnum, Ext: &ext[966]})
-var sUpdateKeyDescriptionRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[969]})
-var sUpdateKeyDescriptionRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionType, Type: smithy.ShapeTypeString, Ext: &ext[970]})
-var sUpdatePrimaryRegionRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[972]})
-var sUpdatePrimaryRegionRequest_PrimaryRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryRegion", ID: &i_RegionType, Type: smithy.ShapeTypeString, Ext: &ext[973]})
-var sVerifyRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[975]})
-var sVerifyRequest_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_PlaintextType, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &ext[976]})
-var sVerifyRequest_MessageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageType", ID: &iMessageType, Members: &mMessageType, Type: smithy.ShapeTypeEnum, Ext: &ext[977]})
-var sVerifyRequest_Signature = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Signature", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &ext[978]})
-var sVerifyRequest_SigningAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningAlgorithm", ID: &iSigningAlgorithmSpec, Members: &mSigningAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[979]})
-var sVerifyRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &ext[980]})
-var sVerifyRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[981]})
-var sVerifyMacRequest_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_PlaintextType, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &ext[983]})
-var sVerifyMacRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[984]})
-var sVerifyMacRequest_MacAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MacAlgorithm", ID: &iMacAlgorithmSpec, Members: &mMacAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[985]})
-var sVerifyMacRequest_Mac = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mac", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &ext[986]})
-var sVerifyMacRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &ext[987]})
-var sVerifyMacRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[988]})
-var sVerifyMacResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[990]})
-var sVerifyMacResponse_MacValid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MacValid", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[991]})
-var sVerifyMacResponse_MacAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MacAlgorithm", ID: &iMacAlgorithmSpec, Members: &mMacAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[992]})
-var sVerifyResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ext[994]})
-var sVerifyResponse_SignatureValid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignatureValid", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ext[995]})
-var sVerifyResponse_SigningAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningAlgorithm", ID: &iSigningAlgorithmSpec, Members: &mSigningAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &ext[996]})
+var sAlgorithmSpec_RSAES_PKCS1_V1_5 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSAES_PKCS1_V1_5", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAlgorithmSpec_RSAES_PKCS1_V1_5})
+var sAlgorithmSpec_RSAES_OAEP_SHA_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSAES_OAEP_SHA_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAlgorithmSpec_RSAES_OAEP_SHA_1})
+var sAlgorithmSpec_RSAES_OAEP_SHA_256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSAES_OAEP_SHA_256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAlgorithmSpec_RSAES_OAEP_SHA_256})
+var sAlgorithmSpec_RSA_AES_KEY_WRAP_SHA_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_AES_KEY_WRAP_SHA_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAlgorithmSpec_RSA_AES_KEY_WRAP_SHA_1})
+var sAlgorithmSpec_RSA_AES_KEY_WRAP_SHA_256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_AES_KEY_WRAP_SHA_256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAlgorithmSpec_RSA_AES_KEY_WRAP_SHA_256})
+var sAlgorithmSpec_SM2PKE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SM2PKE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAlgorithmSpec_SM2PKE})
+var s_AliasList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAliasListEntry, Members: &mAliasListEntry, Type: smithy.ShapeTypeStructure, Ext: &e_AliasList_member})
+var sAliasListEntry_AliasName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AliasName", ID: &i_AliasNameType, Type: smithy.ShapeTypeString, Ext: &eAliasListEntry_AliasName})
+var sAliasListEntry_AliasArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AliasArn", ID: &i_ArnType, Type: smithy.ShapeTypeString, Ext: &eAliasListEntry_AliasArn})
+var sAliasListEntry_TargetKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetKeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eAliasListEntry_TargetKeyId})
+var sAliasListEntry_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eAliasListEntry_CreationDate})
+var sAliasListEntry_LastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedDate", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eAliasListEntry_LastUpdatedDate})
+var sAlreadyExistsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eAlreadyExistsException_message})
+var sCloudHsmClusterInUseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eCloudHsmClusterInUseException_message})
+var sCloudHsmClusterInvalidConfigurationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eCloudHsmClusterInvalidConfigurationException_message})
+var sCloudHsmClusterNotActiveException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eCloudHsmClusterNotActiveException_message})
+var sCloudHsmClusterNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eCloudHsmClusterNotFoundException_message})
+var sCloudHsmClusterNotRelatedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eCloudHsmClusterNotRelatedException_message})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConnectionErrorCodeType_INVALID_CREDENTIALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_CREDENTIALS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionErrorCodeType_INVALID_CREDENTIALS})
+var sConnectionErrorCodeType_CLUSTER_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLUSTER_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionErrorCodeType_CLUSTER_NOT_FOUND})
+var sConnectionErrorCodeType_NETWORK_ERRORS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NETWORK_ERRORS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionErrorCodeType_NETWORK_ERRORS})
+var sConnectionErrorCodeType_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionErrorCodeType_INTERNAL_ERROR})
+var sConnectionErrorCodeType_INSUFFICIENT_CLOUDHSM_HSMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSUFFICIENT_CLOUDHSM_HSMS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionErrorCodeType_INSUFFICIENT_CLOUDHSM_HSMS})
+var sConnectionErrorCodeType_USER_LOCKED_OUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER_LOCKED_OUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionErrorCodeType_USER_LOCKED_OUT})
+var sConnectionErrorCodeType_USER_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionErrorCodeType_USER_NOT_FOUND})
+var sConnectionErrorCodeType_USER_LOGGED_IN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER_LOGGED_IN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionErrorCodeType_USER_LOGGED_IN})
+var sConnectionErrorCodeType_SUBNET_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBNET_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionErrorCodeType_SUBNET_NOT_FOUND})
+var sConnectionErrorCodeType_INSUFFICIENT_FREE_ADDRESSES_IN_SUBNET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSUFFICIENT_FREE_ADDRESSES_IN_SUBNET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionErrorCodeType_INSUFFICIENT_FREE_ADDRESSES_IN_SUBNET})
+var sConnectionErrorCodeType_XKS_PROXY_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XKS_PROXY_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionErrorCodeType_XKS_PROXY_ACCESS_DENIED})
+var sConnectionErrorCodeType_XKS_PROXY_NOT_REACHABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XKS_PROXY_NOT_REACHABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionErrorCodeType_XKS_PROXY_NOT_REACHABLE})
+var sConnectionErrorCodeType_XKS_VPC_ENDPOINT_SERVICE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XKS_VPC_ENDPOINT_SERVICE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionErrorCodeType_XKS_VPC_ENDPOINT_SERVICE_NOT_FOUND})
+var sConnectionErrorCodeType_XKS_PROXY_INVALID_RESPONSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XKS_PROXY_INVALID_RESPONSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionErrorCodeType_XKS_PROXY_INVALID_RESPONSE})
+var sConnectionErrorCodeType_XKS_PROXY_INVALID_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XKS_PROXY_INVALID_CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionErrorCodeType_XKS_PROXY_INVALID_CONFIGURATION})
+var sConnectionErrorCodeType_XKS_VPC_ENDPOINT_SERVICE_INVALID_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XKS_VPC_ENDPOINT_SERVICE_INVALID_CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionErrorCodeType_XKS_VPC_ENDPOINT_SERVICE_INVALID_CONFIGURATION})
+var sConnectionErrorCodeType_XKS_PROXY_TIMED_OUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XKS_PROXY_TIMED_OUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionErrorCodeType_XKS_PROXY_TIMED_OUT})
+var sConnectionErrorCodeType_XKS_PROXY_INVALID_TLS_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XKS_PROXY_INVALID_TLS_CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionErrorCodeType_XKS_PROXY_INVALID_TLS_CONFIGURATION})
+var sConnectionStateType_CONNECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONNECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionStateType_CONNECTED})
+var sConnectionStateType_CONNECTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONNECTING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionStateType_CONNECTING})
+var sConnectionStateType_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionStateType_FAILED})
+var sConnectionStateType_DISCONNECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISCONNECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionStateType_DISCONNECTED})
+var sConnectionStateType_DISCONNECTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISCONNECTING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionStateType_DISCONNECTING})
+var sCustomerMasterKeySpec_RSA_2048 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_2048", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomerMasterKeySpec_RSA_2048})
+var sCustomerMasterKeySpec_RSA_3072 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_3072", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomerMasterKeySpec_RSA_3072})
+var sCustomerMasterKeySpec_RSA_4096 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_4096", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomerMasterKeySpec_RSA_4096})
+var sCustomerMasterKeySpec_ECC_NIST_P256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_NIST_P256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomerMasterKeySpec_ECC_NIST_P256})
+var sCustomerMasterKeySpec_ECC_NIST_P384 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_NIST_P384", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomerMasterKeySpec_ECC_NIST_P384})
+var sCustomerMasterKeySpec_ECC_NIST_P521 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_NIST_P521", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomerMasterKeySpec_ECC_NIST_P521})
+var sCustomerMasterKeySpec_ECC_SECG_P256K1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_SECG_P256K1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomerMasterKeySpec_ECC_SECG_P256K1})
+var sCustomerMasterKeySpec_SYMMETRIC_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYMMETRIC_DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomerMasterKeySpec_SYMMETRIC_DEFAULT})
+var sCustomerMasterKeySpec_HMAC_224 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_224", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomerMasterKeySpec_HMAC_224})
+var sCustomerMasterKeySpec_HMAC_256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomerMasterKeySpec_HMAC_256})
+var sCustomerMasterKeySpec_HMAC_384 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_384", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomerMasterKeySpec_HMAC_384})
+var sCustomerMasterKeySpec_HMAC_512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_512", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomerMasterKeySpec_HMAC_512})
+var sCustomerMasterKeySpec_SM2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SM2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomerMasterKeySpec_SM2})
+var sCustomKeyStoreHasCMKsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eCustomKeyStoreHasCMKsException_message})
+var sCustomKeyStoreInvalidStateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eCustomKeyStoreInvalidStateException_message})
+var sCustomKeyStoreNameInUseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eCustomKeyStoreNameInUseException_message})
+var sCustomKeyStoreNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eCustomKeyStoreNotFoundException_message})
+var s_CustomKeyStoresList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomKeyStoresListEntry, Members: &mCustomKeyStoresListEntry, Type: smithy.ShapeTypeStructure, Ext: &e_CustomKeyStoresList_member})
+var sCustomKeyStoresListEntry_CustomKeyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreId", ID: &i_CustomKeyStoreIdType, Type: smithy.ShapeTypeString, Ext: &eCustomKeyStoresListEntry_CustomKeyStoreId})
+var sCustomKeyStoresListEntry_CustomKeyStoreName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreName", ID: &i_CustomKeyStoreNameType, Type: smithy.ShapeTypeString, Ext: &eCustomKeyStoresListEntry_CustomKeyStoreName})
+var sCustomKeyStoresListEntry_CloudHsmClusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudHsmClusterId", ID: &i_CloudHsmClusterIdType, Type: smithy.ShapeTypeString, Ext: &eCustomKeyStoresListEntry_CloudHsmClusterId})
+var sCustomKeyStoresListEntry_TrustAnchorCertificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustAnchorCertificate", ID: &i_TrustAnchorCertificateType, Type: smithy.ShapeTypeString, Ext: &eCustomKeyStoresListEntry_TrustAnchorCertificate})
+var sCustomKeyStoresListEntry_ConnectionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionState", ID: &iConnectionStateType, Members: &mConnectionStateType, Type: smithy.ShapeTypeEnum, Ext: &eCustomKeyStoresListEntry_ConnectionState})
+var sCustomKeyStoresListEntry_ConnectionErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionErrorCode", ID: &iConnectionErrorCodeType, Members: &mConnectionErrorCodeType, Type: smithy.ShapeTypeEnum, Ext: &eCustomKeyStoresListEntry_ConnectionErrorCode})
+var sCustomKeyStoresListEntry_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eCustomKeyStoresListEntry_CreationDate})
+var sCustomKeyStoresListEntry_CustomKeyStoreType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreType", ID: &iCustomKeyStoreType, Members: &mCustomKeyStoreType, Type: smithy.ShapeTypeEnum, Ext: &eCustomKeyStoresListEntry_CustomKeyStoreType})
+var sCustomKeyStoresListEntry_XksProxyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksProxyConfiguration", ID: &iXksProxyConfigurationType, Members: &mXksProxyConfigurationType, Type: smithy.ShapeTypeStructure, Ext: &eCustomKeyStoresListEntry_XksProxyConfiguration})
+var sCustomKeyStoreType_AWS_CLOUDHSM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_CLOUDHSM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomKeyStoreType_AWS_CLOUDHSM})
+var sCustomKeyStoreType_EXTERNAL_KEY_STORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXTERNAL_KEY_STORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomKeyStoreType_EXTERNAL_KEY_STORE})
+var sDataKeyPairSpec_RSA_2048 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_2048", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataKeyPairSpec_RSA_2048})
+var sDataKeyPairSpec_RSA_3072 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_3072", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataKeyPairSpec_RSA_3072})
+var sDataKeyPairSpec_RSA_4096 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_4096", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataKeyPairSpec_RSA_4096})
+var sDataKeyPairSpec_ECC_NIST_P256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_NIST_P256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataKeyPairSpec_ECC_NIST_P256})
+var sDataKeyPairSpec_ECC_NIST_P384 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_NIST_P384", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataKeyPairSpec_ECC_NIST_P384})
+var sDataKeyPairSpec_ECC_NIST_P521 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_NIST_P521", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataKeyPairSpec_ECC_NIST_P521})
+var sDataKeyPairSpec_ECC_SECG_P256K1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_SECG_P256K1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataKeyPairSpec_ECC_SECG_P256K1})
+var sDataKeyPairSpec_SM2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SM2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataKeyPairSpec_SM2})
+var sDataKeyPairSpec_ECC_NIST_EDWARDS25519 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_NIST_EDWARDS25519", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataKeyPairSpec_ECC_NIST_EDWARDS25519})
+var sDataKeyPairSpec_ML_KEM_512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_KEM_512", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataKeyPairSpec_ML_KEM_512})
+var sDataKeyPairSpec_ML_KEM_768 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_KEM_768", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataKeyPairSpec_ML_KEM_768})
+var sDataKeyPairSpec_ML_KEM_1024 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_KEM_1024", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataKeyPairSpec_ML_KEM_1024})
+var sDataKeySpec_AES_256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AES_256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataKeySpec_AES_256})
+var sDataKeySpec_AES_128 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AES_128", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataKeySpec_AES_128})
+var sDependencyTimeoutException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eDependencyTimeoutException_message})
+var sDisabledException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eDisabledException_message})
+var s_DryRunModifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDryRunModifierType, Members: &mDryRunModifierType, Type: smithy.ShapeTypeEnum, Ext: &e_DryRunModifierList_member})
+var sDryRunModifierType_IGNORE_CIPHERTEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IGNORE_CIPHERTEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDryRunModifierType_IGNORE_CIPHERTEXT})
+var sDryRunOperationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eDryRunOperationException_message})
+var sEncapsulationAlgorithmSpec_ML_KEM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_KEM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncapsulationAlgorithmSpec_ML_KEM})
+var s_EncapsulationAlgorithmSpecList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEncapsulationAlgorithmSpec, Members: &mEncapsulationAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &e_EncapsulationAlgorithmSpecList_member})
+var sEncryptionAlgorithmSpec_SYMMETRIC_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYMMETRIC_DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionAlgorithmSpec_SYMMETRIC_DEFAULT})
+var sEncryptionAlgorithmSpec_RSAES_OAEP_SHA_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSAES_OAEP_SHA_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionAlgorithmSpec_RSAES_OAEP_SHA_1})
+var sEncryptionAlgorithmSpec_RSAES_OAEP_SHA_256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSAES_OAEP_SHA_256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionAlgorithmSpec_RSAES_OAEP_SHA_256})
+var sEncryptionAlgorithmSpec_SM2PKE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SM2PKE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionAlgorithmSpec_SM2PKE})
+var s_EncryptionAlgorithmSpecList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEncryptionAlgorithmSpec, Members: &mEncryptionAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &e_EncryptionAlgorithmSpecList_member})
+var s_EncryptionContextType_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_EncryptionContextKey, Type: smithy.ShapeTypeString, Ext: &e_EncryptionContextType_key})
+var s_EncryptionContextType_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_EncryptionContextValue, Type: smithy.ShapeTypeString, Ext: &e_EncryptionContextType_value})
+var sExpirationModelType_KEY_MATERIAL_EXPIRES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEY_MATERIAL_EXPIRES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExpirationModelType_KEY_MATERIAL_EXPIRES})
+var sExpirationModelType_KEY_MATERIAL_DOES_NOT_EXPIRE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEY_MATERIAL_DOES_NOT_EXPIRE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExpirationModelType_KEY_MATERIAL_DOES_NOT_EXPIRE})
+var sExpiredImportTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eExpiredImportTokenException_message})
+var sGrantConstraints_EncryptionContextSubset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionContextSubset", ID: &i_EncryptionContextType, Members: &m_EncryptionContextType, Type: smithy.ShapeTypeMap, Ext: &eGrantConstraints_EncryptionContextSubset})
+var sGrantConstraints_EncryptionContextEquals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionContextEquals", ID: &i_EncryptionContextType, Members: &m_EncryptionContextType, Type: smithy.ShapeTypeMap, Ext: &eGrantConstraints_EncryptionContextEquals})
+var sGrantConstraints_SourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceArn", ID: &i_GrantConstraintSourceArnType, Type: smithy.ShapeTypeString, Ext: &eGrantConstraints_SourceArn})
+var s_GrantList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGrantListEntry, Members: &mGrantListEntry, Type: smithy.ShapeTypeStructure, Ext: &e_GrantList_member})
+var sGrantListEntry_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eGrantListEntry_KeyId})
+var sGrantListEntry_GrantId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantId", ID: &i_GrantIdType, Type: smithy.ShapeTypeString, Ext: &eGrantListEntry_GrantId})
+var sGrantListEntry_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_GrantNameType, Type: smithy.ShapeTypeString, Ext: &eGrantListEntry_Name})
+var sGrantListEntry_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eGrantListEntry_CreationDate})
+var sGrantListEntry_GranteePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GranteePrincipal", ID: &i_PrincipalIdType, Type: smithy.ShapeTypeString, Ext: &eGrantListEntry_GranteePrincipal})
+var sGrantListEntry_RetiringPrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetiringPrincipal", ID: &i_PrincipalIdType, Type: smithy.ShapeTypeString, Ext: &eGrantListEntry_RetiringPrincipal})
+var sGrantListEntry_IssuingAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssuingAccount", ID: &i_PrincipalIdType, Type: smithy.ShapeTypeString, Ext: &eGrantListEntry_IssuingAccount})
+var sGrantListEntry_Operations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operations", ID: &i_GrantOperationList, Members: &m_GrantOperationList, Type: smithy.ShapeTypeList, Ext: &eGrantListEntry_Operations})
+var sGrantListEntry_Constraints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Constraints", ID: &iGrantConstraints, Members: &mGrantConstraints, Type: smithy.ShapeTypeStructure, Ext: &eGrantListEntry_Constraints})
+var sGrantListEntry_GranteeServicePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GranteeServicePrincipal", ID: &i_ServicePrincipalType, Type: smithy.ShapeTypeString, Ext: &eGrantListEntry_GranteeServicePrincipal})
+var sGrantListEntry_RetiringServicePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetiringServicePrincipal", ID: &i_ServicePrincipalType, Type: smithy.ShapeTypeString, Ext: &eGrantListEntry_RetiringServicePrincipal})
+var sGrantOperation_Decrypt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Decrypt", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGrantOperation_Decrypt})
+var sGrantOperation_Encrypt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encrypt", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGrantOperation_Encrypt})
+var sGrantOperation_GenerateDataKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GenerateDataKey", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGrantOperation_GenerateDataKey})
+var sGrantOperation_GenerateDataKeyWithoutPlaintext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GenerateDataKeyWithoutPlaintext", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGrantOperation_GenerateDataKeyWithoutPlaintext})
+var sGrantOperation_ReEncryptFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReEncryptFrom", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGrantOperation_ReEncryptFrom})
+var sGrantOperation_ReEncryptTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReEncryptTo", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGrantOperation_ReEncryptTo})
+var sGrantOperation_Sign = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sign", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGrantOperation_Sign})
+var sGrantOperation_Verify = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Verify", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGrantOperation_Verify})
+var sGrantOperation_GetPublicKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GetPublicKey", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGrantOperation_GetPublicKey})
+var sGrantOperation_CreateGrant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateGrant", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGrantOperation_CreateGrant})
+var sGrantOperation_RetireGrant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetireGrant", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGrantOperation_RetireGrant})
+var sGrantOperation_DescribeKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DescribeKey", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGrantOperation_DescribeKey})
+var sGrantOperation_GenerateDataKeyPair = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GenerateDataKeyPair", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGrantOperation_GenerateDataKeyPair})
+var sGrantOperation_GenerateDataKeyPairWithoutPlaintext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GenerateDataKeyPairWithoutPlaintext", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGrantOperation_GenerateDataKeyPairWithoutPlaintext})
+var sGrantOperation_GenerateMac = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GenerateMac", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGrantOperation_GenerateMac})
+var sGrantOperation_VerifyMac = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VerifyMac", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGrantOperation_VerifyMac})
+var sGrantOperation_DeriveSharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeriveSharedSecret", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGrantOperation_DeriveSharedSecret})
+var sGrantOperation_Encapsulate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encapsulate", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGrantOperation_Encapsulate})
+var sGrantOperation_Decapsulate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Decapsulate", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGrantOperation_Decapsulate})
+var s_GrantOperationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGrantOperation, Members: &mGrantOperation, Type: smithy.ShapeTypeEnum, Ext: &e_GrantOperationList_member})
+var s_GrantTokenList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GrantTokenType, Type: smithy.ShapeTypeString, Ext: &e_GrantTokenList_member})
+var sImportState_IMPORTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPORTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImportState_IMPORTED})
+var sImportState_PENDING_IMPORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_IMPORT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImportState_PENDING_IMPORT})
+var sImportType_NEW_KEY_MATERIAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEW_KEY_MATERIAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImportType_NEW_KEY_MATERIAL})
+var sImportType_EXISTING_KEY_MATERIAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXISTING_KEY_MATERIAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eImportType_EXISTING_KEY_MATERIAL})
+var sIncludeKeyMaterial_ALL_KEY_MATERIAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL_KEY_MATERIAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIncludeKeyMaterial_ALL_KEY_MATERIAL})
+var sIncludeKeyMaterial_ROTATIONS_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROTATIONS_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIncludeKeyMaterial_ROTATIONS_ONLY})
+var sIncorrectKeyException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eIncorrectKeyException_message})
+var sIncorrectKeyMaterialException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eIncorrectKeyMaterialException_message})
+var sIncorrectTrustAnchorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eIncorrectTrustAnchorException_message})
+var sInvalidAliasNameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eInvalidAliasNameException_message})
+var sInvalidArnException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eInvalidArnException_message})
+var sInvalidCiphertextException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eInvalidCiphertextException_message})
+var sInvalidGrantIdException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eInvalidGrantIdException_message})
+var sInvalidGrantTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eInvalidGrantTokenException_message})
+var sInvalidImportTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eInvalidImportTokenException_message})
+var sInvalidKeyUsageException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eInvalidKeyUsageException_message})
+var sInvalidMarkerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eInvalidMarkerException_message})
+var sKeyAgreementAlgorithmSpec_ECDH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECDH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyAgreementAlgorithmSpec_ECDH})
+var s_KeyAgreementAlgorithmSpecList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iKeyAgreementAlgorithmSpec, Members: &mKeyAgreementAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &e_KeyAgreementAlgorithmSpecList_member})
+var sKeyEncryptionMechanism_RSAES_OAEP_SHA_256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSAES_OAEP_SHA_256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyEncryptionMechanism_RSAES_OAEP_SHA_256})
+var sKeyLastUsageData_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &iKeyLastUsageTrackingOperation, Members: &mKeyLastUsageTrackingOperation, Type: smithy.ShapeTypeEnum, Ext: &eKeyLastUsageData_Operation})
+var sKeyLastUsageData_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eKeyLastUsageData_Timestamp})
+var sKeyLastUsageData_CloudTrailEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudTrailEventId", ID: &i_CloudTrailEventIdType, Type: smithy.ShapeTypeString, Ext: &eKeyLastUsageData_CloudTrailEventId})
+var sKeyLastUsageData_KmsRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsRequestId", ID: &i_KmsRequestIdType, Type: smithy.ShapeTypeString, Ext: &eKeyLastUsageData_KmsRequestId})
+var sKeyLastUsageTrackingOperation_Decrypt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Decrypt", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyLastUsageTrackingOperation_Decrypt})
+var sKeyLastUsageTrackingOperation_DeriveSharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeriveSharedSecret", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyLastUsageTrackingOperation_DeriveSharedSecret})
+var sKeyLastUsageTrackingOperation_Encrypt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encrypt", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyLastUsageTrackingOperation_Encrypt})
+var sKeyLastUsageTrackingOperation_GenerateDataKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GenerateDataKey", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyLastUsageTrackingOperation_GenerateDataKey})
+var sKeyLastUsageTrackingOperation_GenerateDataKeyPair = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GenerateDataKeyPair", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyLastUsageTrackingOperation_GenerateDataKeyPair})
+var sKeyLastUsageTrackingOperation_GenerateDataKeyPairWithoutPlaintext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GenerateDataKeyPairWithoutPlaintext", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyLastUsageTrackingOperation_GenerateDataKeyPairWithoutPlaintext})
+var sKeyLastUsageTrackingOperation_GenerateDataKeyWithoutPlaintext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GenerateDataKeyWithoutPlaintext", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyLastUsageTrackingOperation_GenerateDataKeyWithoutPlaintext})
+var sKeyLastUsageTrackingOperation_GenerateMac = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GenerateMac", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyLastUsageTrackingOperation_GenerateMac})
+var sKeyLastUsageTrackingOperation_ReEncrypt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReEncrypt", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyLastUsageTrackingOperation_ReEncrypt})
+var sKeyLastUsageTrackingOperation_Sign = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sign", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyLastUsageTrackingOperation_Sign})
+var sKeyLastUsageTrackingOperation_Verify = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Verify", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyLastUsageTrackingOperation_Verify})
+var sKeyLastUsageTrackingOperation_VerifyMac = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VerifyMac", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyLastUsageTrackingOperation_VerifyMac})
+var sKeyLastUsageTrackingOperation_Encapsulate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encapsulate", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyLastUsageTrackingOperation_Encapsulate})
+var sKeyLastUsageTrackingOperation_Decapsulate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Decapsulate", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyLastUsageTrackingOperation_Decapsulate})
+var s_KeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iKeyListEntry, Members: &mKeyListEntry, Type: smithy.ShapeTypeStructure, Ext: &e_KeyList_member})
+var sKeyListEntry_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eKeyListEntry_KeyId})
+var sKeyListEntry_KeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyArn", ID: &i_ArnType, Type: smithy.ShapeTypeString, Ext: &eKeyListEntry_KeyArn})
+var sKeyManagerType_AWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyManagerType_AWS})
+var sKeyManagerType_CUSTOMER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyManagerType_CUSTOMER})
+var sKeyMaterialState_NON_CURRENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NON_CURRENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyMaterialState_NON_CURRENT})
+var sKeyMaterialState_CURRENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CURRENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyMaterialState_CURRENT})
+var sKeyMaterialState_PENDING_ROTATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_ROTATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyMaterialState_PENDING_ROTATION})
+var sKeyMaterialState_PENDING_MULTI_REGION_IMPORT_AND_ROTATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_MULTI_REGION_IMPORT_AND_ROTATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyMaterialState_PENDING_MULTI_REGION_IMPORT_AND_ROTATION})
+var sKeyMetadata_AWSAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWSAccountId", ID: &i_AWSAccountIdType, Type: smithy.ShapeTypeString, Ext: &eKeyMetadata_AWSAccountId})
+var sKeyMetadata_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eKeyMetadata_KeyId})
+var sKeyMetadata_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ArnType, Type: smithy.ShapeTypeString, Ext: &eKeyMetadata_Arn})
+var sKeyMetadata_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eKeyMetadata_CreationDate})
+var sKeyMetadata_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eKeyMetadata_Enabled})
+var sKeyMetadata_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionType, Type: smithy.ShapeTypeString, Ext: &eKeyMetadata_Description})
+var sKeyMetadata_KeyUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyUsage", ID: &iKeyUsageType, Members: &mKeyUsageType, Type: smithy.ShapeTypeEnum, Ext: &eKeyMetadata_KeyUsage})
+var sKeyMetadata_KeyState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyState", ID: &iKeyState, Members: &mKeyState, Type: smithy.ShapeTypeEnum, Ext: &eKeyMetadata_KeyState})
+var sKeyMetadata_DeletionDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionDate", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eKeyMetadata_DeletionDate})
+var sKeyMetadata_ValidTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidTo", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eKeyMetadata_ValidTo})
+var sKeyMetadata_Origin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Origin", ID: &iOriginType, Members: &mOriginType, Type: smithy.ShapeTypeEnum, Ext: &eKeyMetadata_Origin})
+var sKeyMetadata_CustomKeyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreId", ID: &i_CustomKeyStoreIdType, Type: smithy.ShapeTypeString, Ext: &eKeyMetadata_CustomKeyStoreId})
+var sKeyMetadata_CloudHsmClusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudHsmClusterId", ID: &i_CloudHsmClusterIdType, Type: smithy.ShapeTypeString, Ext: &eKeyMetadata_CloudHsmClusterId})
+var sKeyMetadata_ExpirationModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationModel", ID: &iExpirationModelType, Members: &mExpirationModelType, Type: smithy.ShapeTypeEnum, Ext: &eKeyMetadata_ExpirationModel})
+var sKeyMetadata_KeyManager = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyManager", ID: &iKeyManagerType, Members: &mKeyManagerType, Type: smithy.ShapeTypeEnum, Ext: &eKeyMetadata_KeyManager})
+var sKeyMetadata_CustomerMasterKeySpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerMasterKeySpec", ID: &iCustomerMasterKeySpec, Members: &mCustomerMasterKeySpec, Type: smithy.ShapeTypeEnum, Ext: &eKeyMetadata_CustomerMasterKeySpec})
+var sKeyMetadata_KeySpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeySpec", ID: &iKeySpec, Members: &mKeySpec, Type: smithy.ShapeTypeEnum, Ext: &eKeyMetadata_KeySpec})
+var sKeyMetadata_EncryptionAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionAlgorithms", ID: &i_EncryptionAlgorithmSpecList, Members: &m_EncryptionAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &eKeyMetadata_EncryptionAlgorithms})
+var sKeyMetadata_SigningAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningAlgorithms", ID: &i_SigningAlgorithmSpecList, Members: &m_SigningAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &eKeyMetadata_SigningAlgorithms})
+var sKeyMetadata_KeyAgreementAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAgreementAlgorithms", ID: &i_KeyAgreementAlgorithmSpecList, Members: &m_KeyAgreementAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &eKeyMetadata_KeyAgreementAlgorithms})
+var sKeyMetadata_EncapsulationAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncapsulationAlgorithms", ID: &i_EncapsulationAlgorithmSpecList, Members: &m_EncapsulationAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &eKeyMetadata_EncapsulationAlgorithms})
+var sKeyMetadata_MultiRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiRegion", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eKeyMetadata_MultiRegion})
+var sKeyMetadata_MultiRegionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiRegionConfiguration", ID: &iMultiRegionConfiguration, Members: &mMultiRegionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eKeyMetadata_MultiRegionConfiguration})
+var sKeyMetadata_PendingDeletionWindowInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingDeletionWindowInDays", ID: &i_PendingWindowInDaysType, Type: smithy.ShapeTypeInteger, Ext: &eKeyMetadata_PendingDeletionWindowInDays})
+var sKeyMetadata_MacAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MacAlgorithms", ID: &i_MacAlgorithmSpecList, Members: &m_MacAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &eKeyMetadata_MacAlgorithms})
+var sKeyMetadata_XksKeyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksKeyConfiguration", ID: &iXksKeyConfigurationType, Members: &mXksKeyConfigurationType, Type: smithy.ShapeTypeStructure, Ext: &eKeyMetadata_XksKeyConfiguration})
+var sKeyMetadata_CurrentKeyMaterialId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentKeyMaterialId", ID: &i_BackingKeyIdType, Type: smithy.ShapeTypeString, Ext: &eKeyMetadata_CurrentKeyMaterialId})
+var sKeySpec_RSA_2048 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_2048", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeySpec_RSA_2048})
+var sKeySpec_RSA_3072 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_3072", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeySpec_RSA_3072})
+var sKeySpec_RSA_4096 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_4096", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeySpec_RSA_4096})
+var sKeySpec_ECC_NIST_P256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_NIST_P256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeySpec_ECC_NIST_P256})
+var sKeySpec_ECC_NIST_P384 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_NIST_P384", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeySpec_ECC_NIST_P384})
+var sKeySpec_ECC_NIST_P521 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_NIST_P521", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeySpec_ECC_NIST_P521})
+var sKeySpec_ECC_SECG_P256K1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_SECG_P256K1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeySpec_ECC_SECG_P256K1})
+var sKeySpec_SYMMETRIC_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYMMETRIC_DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeySpec_SYMMETRIC_DEFAULT})
+var sKeySpec_HMAC_224 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_224", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeySpec_HMAC_224})
+var sKeySpec_HMAC_256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeySpec_HMAC_256})
+var sKeySpec_HMAC_384 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_384", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeySpec_HMAC_384})
+var sKeySpec_HMAC_512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_512", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeySpec_HMAC_512})
+var sKeySpec_SM2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SM2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeySpec_SM2})
+var sKeySpec_ML_DSA_44 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_DSA_44", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeySpec_ML_DSA_44})
+var sKeySpec_ML_DSA_65 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_DSA_65", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeySpec_ML_DSA_65})
+var sKeySpec_ML_DSA_87 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_DSA_87", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeySpec_ML_DSA_87})
+var sKeySpec_ECC_NIST_EDWARDS25519 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECC_NIST_EDWARDS25519", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeySpec_ECC_NIST_EDWARDS25519})
+var sKeySpec_ML_KEM_512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_KEM_512", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeySpec_ML_KEM_512})
+var sKeySpec_ML_KEM_768 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_KEM_768", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeySpec_ML_KEM_768})
+var sKeySpec_ML_KEM_1024 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_KEM_1024", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeySpec_ML_KEM_1024})
+var sKeyState_Creating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Creating", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyState_Creating})
+var sKeyState_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyState_Enabled})
+var sKeyState_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyState_Disabled})
+var sKeyState_PendingDeletion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingDeletion", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyState_PendingDeletion})
+var sKeyState_PendingImport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingImport", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyState_PendingImport})
+var sKeyState_PendingReplicaDeletion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingReplicaDeletion", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyState_PendingReplicaDeletion})
+var sKeyState_Unavailable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unavailable", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyState_Unavailable})
+var sKeyState_Updating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Updating", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyState_Updating})
+var sKeyUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eKeyUnavailableException_message})
+var sKeyUsageType_SIGN_VERIFY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIGN_VERIFY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyUsageType_SIGN_VERIFY})
+var sKeyUsageType_ENCRYPT_DECRYPT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCRYPT_DECRYPT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyUsageType_ENCRYPT_DECRYPT})
+var sKeyUsageType_GENERATE_VERIFY_MAC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GENERATE_VERIFY_MAC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyUsageType_GENERATE_VERIFY_MAC})
+var sKeyUsageType_KEY_AGREEMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEY_AGREEMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyUsageType_KEY_AGREEMENT})
+var sKeyUsageType_ENCAPSULATE_DECAPSULATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCAPSULATE_DECAPSULATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eKeyUsageType_ENCAPSULATE_DECAPSULATE})
+var sKMSInternalException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eKMSInternalException_message})
+var sKMSInvalidMacException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eKMSInvalidMacException_message})
+var sKMSInvalidSignatureException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eKMSInvalidSignatureException_message})
+var sKMSInvalidStateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eKMSInvalidStateException_message})
+var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_message})
+var sMacAlgorithmSpec_HMAC_SHA_224 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_SHA_224", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMacAlgorithmSpec_HMAC_SHA_224})
+var sMacAlgorithmSpec_HMAC_SHA_256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_SHA_256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMacAlgorithmSpec_HMAC_SHA_256})
+var sMacAlgorithmSpec_HMAC_SHA_384 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_SHA_384", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMacAlgorithmSpec_HMAC_SHA_384})
+var sMacAlgorithmSpec_HMAC_SHA_512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_SHA_512", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMacAlgorithmSpec_HMAC_SHA_512})
+var s_MacAlgorithmSpecList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMacAlgorithmSpec, Members: &mMacAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &e_MacAlgorithmSpecList_member})
+var sMalformedPolicyDocumentException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eMalformedPolicyDocumentException_message})
+var sMessageType_RAW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RAW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMessageType_RAW})
+var sMessageType_DIGEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIGEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMessageType_DIGEST})
+var sMessageType_EXTERNAL_MU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXTERNAL_MU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMessageType_EXTERNAL_MU})
+var sMultiRegionConfiguration_MultiRegionKeyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiRegionKeyType", ID: &iMultiRegionKeyType, Members: &mMultiRegionKeyType, Type: smithy.ShapeTypeEnum, Ext: &eMultiRegionConfiguration_MultiRegionKeyType})
+var sMultiRegionConfiguration_PrimaryKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryKey", ID: &iMultiRegionKey, Members: &mMultiRegionKey, Type: smithy.ShapeTypeStructure, Ext: &eMultiRegionConfiguration_PrimaryKey})
+var sMultiRegionConfiguration_ReplicaKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicaKeys", ID: &i_MultiRegionKeyList, Members: &m_MultiRegionKeyList, Type: smithy.ShapeTypeList, Ext: &eMultiRegionConfiguration_ReplicaKeys})
+var sMultiRegionKey_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ArnType, Type: smithy.ShapeTypeString, Ext: &eMultiRegionKey_Arn})
+var sMultiRegionKey_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_RegionType, Type: smithy.ShapeTypeString, Ext: &eMultiRegionKey_Region})
+var s_MultiRegionKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMultiRegionKey, Members: &mMultiRegionKey, Type: smithy.ShapeTypeStructure, Ext: &e_MultiRegionKeyList_member})
+var sMultiRegionKeyType_PRIMARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIMARY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMultiRegionKeyType_PRIMARY})
+var sMultiRegionKeyType_REPLICA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPLICA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMultiRegionKeyType_REPLICA})
+var sNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eNotFoundException_message})
+var sOriginType_AWS_KMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_KMS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOriginType_AWS_KMS})
+var sOriginType_EXTERNAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXTERNAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOriginType_EXTERNAL})
+var sOriginType_AWS_CLOUDHSM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_CLOUDHSM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOriginType_AWS_CLOUDHSM})
+var sOriginType_EXTERNAL_KEY_STORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXTERNAL_KEY_STORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOriginType_EXTERNAL_KEY_STORE})
+var s_PolicyNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PolicyNameType, Type: smithy.ShapeTypeString, Ext: &e_PolicyNameList_member})
+var sRecipientInfo_KeyEncryptionAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyEncryptionAlgorithm", ID: &iKeyEncryptionMechanism, Members: &mKeyEncryptionMechanism, Type: smithy.ShapeTypeEnum, Ext: &eRecipientInfo_KeyEncryptionAlgorithm})
+var sRecipientInfo_AttestationDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttestationDocument", ID: &i_AttestationDocumentType, Type: smithy.ShapeTypeBlob, Ext: &eRecipientInfo_AttestationDocument})
+var s_RotationsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRotationsListEntry, Members: &mRotationsListEntry, Type: smithy.ShapeTypeStructure, Ext: &e_RotationsList_member})
+var sRotationsListEntry_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eRotationsListEntry_KeyId})
+var sRotationsListEntry_KeyMaterialId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialId", ID: &i_BackingKeyIdType, Type: smithy.ShapeTypeString, Ext: &eRotationsListEntry_KeyMaterialId})
+var sRotationsListEntry_KeyMaterialDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialDescription", ID: &i_KeyMaterialDescriptionType, Type: smithy.ShapeTypeString, Ext: &eRotationsListEntry_KeyMaterialDescription})
+var sRotationsListEntry_ImportState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportState", ID: &iImportState, Members: &mImportState, Type: smithy.ShapeTypeEnum, Ext: &eRotationsListEntry_ImportState})
+var sRotationsListEntry_KeyMaterialState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialState", ID: &iKeyMaterialState, Members: &mKeyMaterialState, Type: smithy.ShapeTypeEnum, Ext: &eRotationsListEntry_KeyMaterialState})
+var sRotationsListEntry_ExpirationModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationModel", ID: &iExpirationModelType, Members: &mExpirationModelType, Type: smithy.ShapeTypeEnum, Ext: &eRotationsListEntry_ExpirationModel})
+var sRotationsListEntry_ValidTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidTo", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eRotationsListEntry_ValidTo})
+var sRotationsListEntry_RotationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationDate", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eRotationsListEntry_RotationDate})
+var sRotationsListEntry_RotationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationType", ID: &iRotationType, Members: &mRotationType, Type: smithy.ShapeTypeEnum, Ext: &eRotationsListEntry_RotationType})
+var sRotationType_AUTOMATIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTOMATIC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRotationType_AUTOMATIC})
+var sRotationType_ON_DEMAND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ON_DEMAND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRotationType_ON_DEMAND})
+var sSigningAlgorithmSpec_RSASSA_PSS_SHA_256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSASSA_PSS_SHA_256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSigningAlgorithmSpec_RSASSA_PSS_SHA_256})
+var sSigningAlgorithmSpec_RSASSA_PSS_SHA_384 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSASSA_PSS_SHA_384", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSigningAlgorithmSpec_RSASSA_PSS_SHA_384})
+var sSigningAlgorithmSpec_RSASSA_PSS_SHA_512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSASSA_PSS_SHA_512", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSigningAlgorithmSpec_RSASSA_PSS_SHA_512})
+var sSigningAlgorithmSpec_RSASSA_PKCS1_V1_5_SHA_256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSASSA_PKCS1_V1_5_SHA_256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSigningAlgorithmSpec_RSASSA_PKCS1_V1_5_SHA_256})
+var sSigningAlgorithmSpec_RSASSA_PKCS1_V1_5_SHA_384 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSASSA_PKCS1_V1_5_SHA_384", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSigningAlgorithmSpec_RSASSA_PKCS1_V1_5_SHA_384})
+var sSigningAlgorithmSpec_RSASSA_PKCS1_V1_5_SHA_512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSASSA_PKCS1_V1_5_SHA_512", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSigningAlgorithmSpec_RSASSA_PKCS1_V1_5_SHA_512})
+var sSigningAlgorithmSpec_ECDSA_SHA_256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECDSA_SHA_256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSigningAlgorithmSpec_ECDSA_SHA_256})
+var sSigningAlgorithmSpec_ECDSA_SHA_384 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECDSA_SHA_384", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSigningAlgorithmSpec_ECDSA_SHA_384})
+var sSigningAlgorithmSpec_ECDSA_SHA_512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECDSA_SHA_512", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSigningAlgorithmSpec_ECDSA_SHA_512})
+var sSigningAlgorithmSpec_SM2DSA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SM2DSA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSigningAlgorithmSpec_SM2DSA})
+var sSigningAlgorithmSpec_ML_DSA_SHAKE_256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_DSA_SHAKE_256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSigningAlgorithmSpec_ML_DSA_SHAKE_256})
+var sSigningAlgorithmSpec_ED25519_SHA_512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ED25519_SHA_512", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSigningAlgorithmSpec_ED25519_SHA_512})
+var sSigningAlgorithmSpec_ED25519_PH_SHA_512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ED25519_PH_SHA_512", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSigningAlgorithmSpec_ED25519_PH_SHA_512})
+var s_SigningAlgorithmSpecList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSigningAlgorithmSpec, Members: &mSigningAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &e_SigningAlgorithmSpecList_member})
+var sTag_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKey", ID: &i_TagKeyType, Type: smithy.ShapeTypeString, Ext: &eTag_TagKey})
+var sTag_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagValue", ID: &i_TagValueType, Type: smithy.ShapeTypeString, Ext: &eTag_TagValue})
+var sTagException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eTagException_message})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKeyType, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var sUnsupportedOperationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eUnsupportedOperationException_message})
+var sWrappingKeySpec_RSA_2048 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_2048", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWrappingKeySpec_RSA_2048})
+var sWrappingKeySpec_RSA_3072 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_3072", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWrappingKeySpec_RSA_3072})
+var sWrappingKeySpec_RSA_4096 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA_4096", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWrappingKeySpec_RSA_4096})
+var sWrappingKeySpec_SM2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SM2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWrappingKeySpec_SM2})
+var sXksKeyAlreadyInUseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eXksKeyAlreadyInUseException_message})
+var sXksKeyConfigurationType_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_XksKeyIdType, Type: smithy.ShapeTypeString, Ext: &eXksKeyConfigurationType_Id})
+var sXksKeyInvalidConfigurationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eXksKeyInvalidConfigurationException_message})
+var sXksKeyNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eXksKeyNotFoundException_message})
+var sXksProxyAuthenticationCredentialType_AccessKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessKeyId", ID: &i_XksProxyAuthenticationAccessKeyIdType, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eXksProxyAuthenticationCredentialType_AccessKeyId})
+var sXksProxyAuthenticationCredentialType_RawSecretAccessKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RawSecretAccessKey", ID: &i_XksProxyAuthenticationRawSecretAccessKeyType, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eXksProxyAuthenticationCredentialType_RawSecretAccessKey})
+var sXksProxyConfigurationType_Connectivity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Connectivity", ID: &iXksProxyConnectivityType, Members: &mXksProxyConnectivityType, Type: smithy.ShapeTypeEnum, Ext: &eXksProxyConfigurationType_Connectivity})
+var sXksProxyConfigurationType_AccessKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessKeyId", ID: &i_XksProxyAuthenticationAccessKeyIdType, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eXksProxyConfigurationType_AccessKeyId})
+var sXksProxyConfigurationType_UriEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UriEndpoint", ID: &i_XksProxyUriEndpointType, Type: smithy.ShapeTypeString, Ext: &eXksProxyConfigurationType_UriEndpoint})
+var sXksProxyConfigurationType_UriPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UriPath", ID: &i_XksProxyUriPathType, Type: smithy.ShapeTypeString, Ext: &eXksProxyConfigurationType_UriPath})
+var sXksProxyConfigurationType_VpcEndpointServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointServiceName", ID: &i_XksProxyVpcEndpointServiceNameType, Type: smithy.ShapeTypeString, Ext: &eXksProxyConfigurationType_VpcEndpointServiceName})
+var sXksProxyConfigurationType_VpcEndpointServiceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointServiceOwner", ID: &i_AccountIdType, Type: smithy.ShapeTypeString, Ext: &eXksProxyConfigurationType_VpcEndpointServiceOwner})
+var sXksProxyConnectivityType_PUBLIC_ENDPOINT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLIC_ENDPOINT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eXksProxyConnectivityType_PUBLIC_ENDPOINT})
+var sXksProxyConnectivityType_VPC_ENDPOINT_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC_ENDPOINT_SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eXksProxyConnectivityType_VPC_ENDPOINT_SERVICE})
+var sXksProxyIncorrectAuthenticationCredentialException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eXksProxyIncorrectAuthenticationCredentialException_message})
+var sXksProxyInvalidConfigurationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eXksProxyInvalidConfigurationException_message})
+var sXksProxyInvalidResponseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eXksProxyInvalidResponseException_message})
+var sXksProxyUriEndpointInUseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eXksProxyUriEndpointInUseException_message})
+var sXksProxyUriInUseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eXksProxyUriInUseException_message})
+var sXksProxyUriUnreachableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eXksProxyUriUnreachableException_message})
+var sXksProxyVpcEndpointServiceInUseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eXksProxyVpcEndpointServiceInUseException_message})
+var sXksProxyVpcEndpointServiceInvalidConfigurationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eXksProxyVpcEndpointServiceInvalidConfigurationException_message})
+var sXksProxyVpcEndpointServiceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessageType, Type: smithy.ShapeTypeString, Ext: &eXksProxyVpcEndpointServiceNotFoundException_message})
+var sCancelKeyDeletionRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eCancelKeyDeletionRequest_KeyId})
+var sCancelKeyDeletionResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eCancelKeyDeletionResponse_KeyId})
+var sConnectCustomKeyStoreRequest_CustomKeyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreId", ID: &i_CustomKeyStoreIdType, Type: smithy.ShapeTypeString, Ext: &eConnectCustomKeyStoreRequest_CustomKeyStoreId})
+var sCreateAliasRequest_AliasName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AliasName", ID: &i_AliasNameType, Type: smithy.ShapeTypeString, Ext: &eCreateAliasRequest_AliasName})
+var sCreateAliasRequest_TargetKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetKeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eCreateAliasRequest_TargetKeyId})
+var sCreateCustomKeyStoreRequest_CustomKeyStoreName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreName", ID: &i_CustomKeyStoreNameType, Type: smithy.ShapeTypeString, Ext: &eCreateCustomKeyStoreRequest_CustomKeyStoreName})
+var sCreateCustomKeyStoreRequest_CloudHsmClusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudHsmClusterId", ID: &i_CloudHsmClusterIdType, Type: smithy.ShapeTypeString, Ext: &eCreateCustomKeyStoreRequest_CloudHsmClusterId})
+var sCreateCustomKeyStoreRequest_TrustAnchorCertificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustAnchorCertificate", ID: &i_TrustAnchorCertificateType, Type: smithy.ShapeTypeString, Ext: &eCreateCustomKeyStoreRequest_TrustAnchorCertificate})
+var sCreateCustomKeyStoreRequest_KeyStorePassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyStorePassword", ID: &i_KeyStorePasswordType, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eCreateCustomKeyStoreRequest_KeyStorePassword})
+var sCreateCustomKeyStoreRequest_CustomKeyStoreType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreType", ID: &iCustomKeyStoreType, Members: &mCustomKeyStoreType, Type: smithy.ShapeTypeEnum, Ext: &eCreateCustomKeyStoreRequest_CustomKeyStoreType})
+var sCreateCustomKeyStoreRequest_XksProxyUriEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksProxyUriEndpoint", ID: &i_XksProxyUriEndpointType, Type: smithy.ShapeTypeString, Ext: &eCreateCustomKeyStoreRequest_XksProxyUriEndpoint})
+var sCreateCustomKeyStoreRequest_XksProxyUriPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksProxyUriPath", ID: &i_XksProxyUriPathType, Type: smithy.ShapeTypeString, Ext: &eCreateCustomKeyStoreRequest_XksProxyUriPath})
+var sCreateCustomKeyStoreRequest_XksProxyVpcEndpointServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksProxyVpcEndpointServiceName", ID: &i_XksProxyVpcEndpointServiceNameType, Type: smithy.ShapeTypeString, Ext: &eCreateCustomKeyStoreRequest_XksProxyVpcEndpointServiceName})
+var sCreateCustomKeyStoreRequest_XksProxyVpcEndpointServiceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksProxyVpcEndpointServiceOwner", ID: &i_AccountIdType, Type: smithy.ShapeTypeString, Ext: &eCreateCustomKeyStoreRequest_XksProxyVpcEndpointServiceOwner})
+var sCreateCustomKeyStoreRequest_XksProxyAuthenticationCredential = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksProxyAuthenticationCredential", ID: &iXksProxyAuthenticationCredentialType, Members: &mXksProxyAuthenticationCredentialType, Type: smithy.ShapeTypeStructure, Ext: &eCreateCustomKeyStoreRequest_XksProxyAuthenticationCredential})
+var sCreateCustomKeyStoreRequest_XksProxyConnectivity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksProxyConnectivity", ID: &iXksProxyConnectivityType, Members: &mXksProxyConnectivityType, Type: smithy.ShapeTypeEnum, Ext: &eCreateCustomKeyStoreRequest_XksProxyConnectivity})
+var sCreateCustomKeyStoreResponse_CustomKeyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreId", ID: &i_CustomKeyStoreIdType, Type: smithy.ShapeTypeString, Ext: &eCreateCustomKeyStoreResponse_CustomKeyStoreId})
+var sCreateGrantRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eCreateGrantRequest_KeyId})
+var sCreateGrantRequest_GranteePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GranteePrincipal", ID: &i_PrincipalIdType, Type: smithy.ShapeTypeString, Ext: &eCreateGrantRequest_GranteePrincipal})
+var sCreateGrantRequest_RetiringPrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetiringPrincipal", ID: &i_PrincipalIdType, Type: smithy.ShapeTypeString, Ext: &eCreateGrantRequest_RetiringPrincipal})
+var sCreateGrantRequest_Operations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operations", ID: &i_GrantOperationList, Members: &m_GrantOperationList, Type: smithy.ShapeTypeList, Ext: &eCreateGrantRequest_Operations})
+var sCreateGrantRequest_Constraints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Constraints", ID: &iGrantConstraints, Members: &mGrantConstraints, Type: smithy.ShapeTypeStructure, Ext: &eCreateGrantRequest_Constraints})
+var sCreateGrantRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &eCreateGrantRequest_GrantTokens})
+var sCreateGrantRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_GrantNameType, Type: smithy.ShapeTypeString, Ext: &eCreateGrantRequest_Name})
+var sCreateGrantRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eCreateGrantRequest_DryRun})
+var sCreateGrantRequest_GranteeServicePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GranteeServicePrincipal", ID: &i_ServicePrincipalType, Type: smithy.ShapeTypeString, Ext: &eCreateGrantRequest_GranteeServicePrincipal})
+var sCreateGrantRequest_RetiringServicePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetiringServicePrincipal", ID: &i_ServicePrincipalType, Type: smithy.ShapeTypeString, Ext: &eCreateGrantRequest_RetiringServicePrincipal})
+var sCreateGrantResponse_GrantToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantToken", ID: &i_GrantTokenType, Type: smithy.ShapeTypeString, Ext: &eCreateGrantResponse_GrantToken})
+var sCreateGrantResponse_GrantId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantId", ID: &i_GrantIdType, Type: smithy.ShapeTypeString, Ext: &eCreateGrantResponse_GrantId})
+var sCreateKeyRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_PolicyType, Type: smithy.ShapeTypeString, Ext: &eCreateKeyRequest_Policy})
+var sCreateKeyRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionType, Type: smithy.ShapeTypeString, Ext: &eCreateKeyRequest_Description})
+var sCreateKeyRequest_KeyUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyUsage", ID: &iKeyUsageType, Members: &mKeyUsageType, Type: smithy.ShapeTypeEnum, Ext: &eCreateKeyRequest_KeyUsage})
+var sCreateKeyRequest_CustomerMasterKeySpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerMasterKeySpec", ID: &iCustomerMasterKeySpec, Members: &mCustomerMasterKeySpec, Type: smithy.ShapeTypeEnum, Ext: &eCreateKeyRequest_CustomerMasterKeySpec})
+var sCreateKeyRequest_KeySpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeySpec", ID: &iKeySpec, Members: &mKeySpec, Type: smithy.ShapeTypeEnum, Ext: &eCreateKeyRequest_KeySpec})
+var sCreateKeyRequest_Origin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Origin", ID: &iOriginType, Members: &mOriginType, Type: smithy.ShapeTypeEnum, Ext: &eCreateKeyRequest_Origin})
+var sCreateKeyRequest_CustomKeyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreId", ID: &i_CustomKeyStoreIdType, Type: smithy.ShapeTypeString, Ext: &eCreateKeyRequest_CustomKeyStoreId})
+var sCreateKeyRequest_BypassPolicyLockoutSafetyCheck = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BypassPolicyLockoutSafetyCheck", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eCreateKeyRequest_BypassPolicyLockoutSafetyCheck})
+var sCreateKeyRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateKeyRequest_Tags})
+var sCreateKeyRequest_MultiRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiRegion", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eCreateKeyRequest_MultiRegion})
+var sCreateKeyRequest_XksKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksKeyId", ID: &i_XksKeyIdType, Type: smithy.ShapeTypeString, Ext: &eCreateKeyRequest_XksKeyId})
+var sCreateKeyResponse_KeyMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMetadata", ID: &iKeyMetadata, Members: &mKeyMetadata, Type: smithy.ShapeTypeStructure, Ext: &eCreateKeyResponse_KeyMetadata})
+var sDecapsulateRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eDecapsulateRequest_KeyId})
+var sDecapsulateRequest_SharedSecretCiphertextBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedSecretCiphertextBlob", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &eDecapsulateRequest_SharedSecretCiphertextBlob})
+var sDecapsulateRequest_EncapsulationAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncapsulationAlgorithm", ID: &iEncapsulationAlgorithmSpec, Members: &mEncapsulationAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eDecapsulateRequest_EncapsulationAlgorithm})
+var sDecapsulateRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &eDecapsulateRequest_GrantTokens})
+var sDecapsulateRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eDecapsulateRequest_DryRun})
+var sDecapsulateResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eDecapsulateResponse_KeyId})
+var sDecapsulateResponse_SharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedSecret", ID: &i_PlaintextType, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &eDecapsulateResponse_SharedSecret})
+var sDecapsulateResponse_EncapsulationAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncapsulationAlgorithm", ID: &iEncapsulationAlgorithmSpec, Members: &mEncapsulationAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eDecapsulateResponse_EncapsulationAlgorithm})
+var sDecryptRequest_CiphertextBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CiphertextBlob", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &eDecryptRequest_CiphertextBlob})
+var sDecryptRequest_EncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionContext", ID: &i_EncryptionContextType, Members: &m_EncryptionContextType, Type: smithy.ShapeTypeMap, Ext: &eDecryptRequest_EncryptionContext})
+var sDecryptRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &eDecryptRequest_GrantTokens})
+var sDecryptRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eDecryptRequest_KeyId})
+var sDecryptRequest_EncryptionAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionAlgorithm", ID: &iEncryptionAlgorithmSpec, Members: &mEncryptionAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eDecryptRequest_EncryptionAlgorithm})
+var sDecryptRequest_Recipient = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Recipient", ID: &iRecipientInfo, Members: &mRecipientInfo, Type: smithy.ShapeTypeStructure, Ext: &eDecryptRequest_Recipient})
+var sDecryptRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eDecryptRequest_DryRun})
+var sDecryptRequest_DryRunModifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRunModifiers", ID: &i_DryRunModifierList, Members: &m_DryRunModifierList, Type: smithy.ShapeTypeList, Ext: &eDecryptRequest_DryRunModifiers})
+var sDecryptResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eDecryptResponse_KeyId})
+var sDecryptResponse_Plaintext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Plaintext", ID: &i_PlaintextType, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &eDecryptResponse_Plaintext})
+var sDecryptResponse_EncryptionAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionAlgorithm", ID: &iEncryptionAlgorithmSpec, Members: &mEncryptionAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eDecryptResponse_EncryptionAlgorithm})
+var sDecryptResponse_CiphertextForRecipient = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CiphertextForRecipient", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &eDecryptResponse_CiphertextForRecipient})
+var sDecryptResponse_KeyMaterialId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialId", ID: &i_BackingKeyIdType, Type: smithy.ShapeTypeString, Ext: &eDecryptResponse_KeyMaterialId})
+var sDeleteAliasRequest_AliasName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AliasName", ID: &i_AliasNameType, Type: smithy.ShapeTypeString, Ext: &eDeleteAliasRequest_AliasName})
+var sDeleteCustomKeyStoreRequest_CustomKeyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreId", ID: &i_CustomKeyStoreIdType, Type: smithy.ShapeTypeString, Ext: &eDeleteCustomKeyStoreRequest_CustomKeyStoreId})
+var sDeleteImportedKeyMaterialRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eDeleteImportedKeyMaterialRequest_KeyId})
+var sDeleteImportedKeyMaterialRequest_KeyMaterialId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialId", ID: &i_BackingKeyIdType, Type: smithy.ShapeTypeString, Ext: &eDeleteImportedKeyMaterialRequest_KeyMaterialId})
+var sDeleteImportedKeyMaterialResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eDeleteImportedKeyMaterialResponse_KeyId})
+var sDeleteImportedKeyMaterialResponse_KeyMaterialId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialId", ID: &i_BackingKeyIdResponseType, Type: smithy.ShapeTypeString, Ext: &eDeleteImportedKeyMaterialResponse_KeyMaterialId})
+var sDeriveSharedSecretRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eDeriveSharedSecretRequest_KeyId})
+var sDeriveSharedSecretRequest_KeyAgreementAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAgreementAlgorithm", ID: &iKeyAgreementAlgorithmSpec, Members: &mKeyAgreementAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eDeriveSharedSecretRequest_KeyAgreementAlgorithm})
+var sDeriveSharedSecretRequest_PublicKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicKey", ID: &i_PublicKeyType, Type: smithy.ShapeTypeBlob, Ext: &eDeriveSharedSecretRequest_PublicKey})
+var sDeriveSharedSecretRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &eDeriveSharedSecretRequest_GrantTokens})
+var sDeriveSharedSecretRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eDeriveSharedSecretRequest_DryRun})
+var sDeriveSharedSecretRequest_Recipient = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Recipient", ID: &iRecipientInfo, Members: &mRecipientInfo, Type: smithy.ShapeTypeStructure, Ext: &eDeriveSharedSecretRequest_Recipient})
+var sDeriveSharedSecretResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eDeriveSharedSecretResponse_KeyId})
+var sDeriveSharedSecretResponse_SharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedSecret", ID: &i_PlaintextType, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &eDeriveSharedSecretResponse_SharedSecret})
+var sDeriveSharedSecretResponse_CiphertextForRecipient = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CiphertextForRecipient", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &eDeriveSharedSecretResponse_CiphertextForRecipient})
+var sDeriveSharedSecretResponse_KeyAgreementAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAgreementAlgorithm", ID: &iKeyAgreementAlgorithmSpec, Members: &mKeyAgreementAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eDeriveSharedSecretResponse_KeyAgreementAlgorithm})
+var sDeriveSharedSecretResponse_KeyOrigin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyOrigin", ID: &iOriginType, Members: &mOriginType, Type: smithy.ShapeTypeEnum, Ext: &eDeriveSharedSecretResponse_KeyOrigin})
+var sDescribeCustomKeyStoresRequest_CustomKeyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreId", ID: &i_CustomKeyStoreIdType, Type: smithy.ShapeTypeString, Ext: &eDescribeCustomKeyStoresRequest_CustomKeyStoreId})
+var sDescribeCustomKeyStoresRequest_CustomKeyStoreName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreName", ID: &i_CustomKeyStoreNameType, Type: smithy.ShapeTypeString, Ext: &eDescribeCustomKeyStoresRequest_CustomKeyStoreName})
+var sDescribeCustomKeyStoresRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitType, Type: smithy.ShapeTypeInteger, Ext: &eDescribeCustomKeyStoresRequest_Limit})
+var sDescribeCustomKeyStoresRequest_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &eDescribeCustomKeyStoresRequest_Marker})
+var sDescribeCustomKeyStoresResponse_CustomKeyStores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStores", ID: &i_CustomKeyStoresList, Members: &m_CustomKeyStoresList, Type: smithy.ShapeTypeList, Ext: &eDescribeCustomKeyStoresResponse_CustomKeyStores})
+var sDescribeCustomKeyStoresResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &eDescribeCustomKeyStoresResponse_NextMarker})
+var sDescribeCustomKeyStoresResponse_Truncated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Truncated", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eDescribeCustomKeyStoresResponse_Truncated})
+var sDescribeKeyRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eDescribeKeyRequest_KeyId})
+var sDescribeKeyRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &eDescribeKeyRequest_GrantTokens})
+var sDescribeKeyResponse_KeyMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMetadata", ID: &iKeyMetadata, Members: &mKeyMetadata, Type: smithy.ShapeTypeStructure, Ext: &eDescribeKeyResponse_KeyMetadata})
+var sDisableKeyRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eDisableKeyRequest_KeyId})
+var sDisableKeyRotationRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eDisableKeyRotationRequest_KeyId})
+var sDisconnectCustomKeyStoreRequest_CustomKeyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreId", ID: &i_CustomKeyStoreIdType, Type: smithy.ShapeTypeString, Ext: &eDisconnectCustomKeyStoreRequest_CustomKeyStoreId})
+var sEnableKeyRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eEnableKeyRequest_KeyId})
+var sEnableKeyRotationRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eEnableKeyRotationRequest_KeyId})
+var sEnableKeyRotationRequest_RotationPeriodInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationPeriodInDays", ID: &i_RotationPeriodInDaysType, Type: smithy.ShapeTypeInteger, Ext: &eEnableKeyRotationRequest_RotationPeriodInDays})
+var sEncapsulateRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eEncapsulateRequest_KeyId})
+var sEncapsulateRequest_EncapsulationAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncapsulationAlgorithm", ID: &iEncapsulationAlgorithmSpec, Members: &mEncapsulationAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eEncapsulateRequest_EncapsulationAlgorithm})
+var sEncapsulateRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &eEncapsulateRequest_GrantTokens})
+var sEncapsulateRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eEncapsulateRequest_DryRun})
+var sEncapsulateResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eEncapsulateResponse_KeyId})
+var sEncapsulateResponse_SharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedSecret", ID: &i_PlaintextType, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &eEncapsulateResponse_SharedSecret})
+var sEncapsulateResponse_SharedSecretCiphertextBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedSecretCiphertextBlob", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &eEncapsulateResponse_SharedSecretCiphertextBlob})
+var sEncapsulateResponse_EncapsulationAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncapsulationAlgorithm", ID: &iEncapsulationAlgorithmSpec, Members: &mEncapsulationAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eEncapsulateResponse_EncapsulationAlgorithm})
+var sEncryptRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eEncryptRequest_KeyId})
+var sEncryptRequest_Plaintext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Plaintext", ID: &i_PlaintextType, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &eEncryptRequest_Plaintext})
+var sEncryptRequest_EncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionContext", ID: &i_EncryptionContextType, Members: &m_EncryptionContextType, Type: smithy.ShapeTypeMap, Ext: &eEncryptRequest_EncryptionContext})
+var sEncryptRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &eEncryptRequest_GrantTokens})
+var sEncryptRequest_EncryptionAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionAlgorithm", ID: &iEncryptionAlgorithmSpec, Members: &mEncryptionAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eEncryptRequest_EncryptionAlgorithm})
+var sEncryptRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eEncryptRequest_DryRun})
+var sEncryptResponse_CiphertextBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CiphertextBlob", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &eEncryptResponse_CiphertextBlob})
+var sEncryptResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eEncryptResponse_KeyId})
+var sEncryptResponse_EncryptionAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionAlgorithm", ID: &iEncryptionAlgorithmSpec, Members: &mEncryptionAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eEncryptResponse_EncryptionAlgorithm})
+var sGenerateDataKeyRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eGenerateDataKeyRequest_KeyId})
+var sGenerateDataKeyRequest_EncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionContext", ID: &i_EncryptionContextType, Members: &m_EncryptionContextType, Type: smithy.ShapeTypeMap, Ext: &eGenerateDataKeyRequest_EncryptionContext})
+var sGenerateDataKeyRequest_NumberOfBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfBytes", ID: &i_NumberOfBytesType, Type: smithy.ShapeTypeInteger, Ext: &eGenerateDataKeyRequest_NumberOfBytes})
+var sGenerateDataKeyRequest_KeySpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeySpec", ID: &iDataKeySpec, Members: &mDataKeySpec, Type: smithy.ShapeTypeEnum, Ext: &eGenerateDataKeyRequest_KeySpec})
+var sGenerateDataKeyRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &eGenerateDataKeyRequest_GrantTokens})
+var sGenerateDataKeyRequest_Recipient = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Recipient", ID: &iRecipientInfo, Members: &mRecipientInfo, Type: smithy.ShapeTypeStructure, Ext: &eGenerateDataKeyRequest_Recipient})
+var sGenerateDataKeyRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eGenerateDataKeyRequest_DryRun})
+var sGenerateDataKeyResponse_CiphertextBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CiphertextBlob", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &eGenerateDataKeyResponse_CiphertextBlob})
+var sGenerateDataKeyResponse_Plaintext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Plaintext", ID: &i_PlaintextType, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &eGenerateDataKeyResponse_Plaintext})
+var sGenerateDataKeyResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eGenerateDataKeyResponse_KeyId})
+var sGenerateDataKeyResponse_CiphertextForRecipient = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CiphertextForRecipient", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &eGenerateDataKeyResponse_CiphertextForRecipient})
+var sGenerateDataKeyResponse_KeyMaterialId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialId", ID: &i_BackingKeyIdType, Type: smithy.ShapeTypeString, Ext: &eGenerateDataKeyResponse_KeyMaterialId})
+var sGenerateDataKeyPairRequest_EncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionContext", ID: &i_EncryptionContextType, Members: &m_EncryptionContextType, Type: smithy.ShapeTypeMap, Ext: &eGenerateDataKeyPairRequest_EncryptionContext})
+var sGenerateDataKeyPairRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eGenerateDataKeyPairRequest_KeyId})
+var sGenerateDataKeyPairRequest_KeyPairSpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyPairSpec", ID: &iDataKeyPairSpec, Members: &mDataKeyPairSpec, Type: smithy.ShapeTypeEnum, Ext: &eGenerateDataKeyPairRequest_KeyPairSpec})
+var sGenerateDataKeyPairRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &eGenerateDataKeyPairRequest_GrantTokens})
+var sGenerateDataKeyPairRequest_Recipient = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Recipient", ID: &iRecipientInfo, Members: &mRecipientInfo, Type: smithy.ShapeTypeStructure, Ext: &eGenerateDataKeyPairRequest_Recipient})
+var sGenerateDataKeyPairRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eGenerateDataKeyPairRequest_DryRun})
+var sGenerateDataKeyPairResponse_PrivateKeyCiphertextBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateKeyCiphertextBlob", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &eGenerateDataKeyPairResponse_PrivateKeyCiphertextBlob})
+var sGenerateDataKeyPairResponse_PrivateKeyPlaintext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateKeyPlaintext", ID: &i_PlaintextType, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &eGenerateDataKeyPairResponse_PrivateKeyPlaintext})
+var sGenerateDataKeyPairResponse_PublicKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicKey", ID: &i_PublicKeyType, Type: smithy.ShapeTypeBlob, Ext: &eGenerateDataKeyPairResponse_PublicKey})
+var sGenerateDataKeyPairResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eGenerateDataKeyPairResponse_KeyId})
+var sGenerateDataKeyPairResponse_KeyPairSpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyPairSpec", ID: &iDataKeyPairSpec, Members: &mDataKeyPairSpec, Type: smithy.ShapeTypeEnum, Ext: &eGenerateDataKeyPairResponse_KeyPairSpec})
+var sGenerateDataKeyPairResponse_CiphertextForRecipient = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CiphertextForRecipient", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &eGenerateDataKeyPairResponse_CiphertextForRecipient})
+var sGenerateDataKeyPairResponse_KeyMaterialId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialId", ID: &i_BackingKeyIdType, Type: smithy.ShapeTypeString, Ext: &eGenerateDataKeyPairResponse_KeyMaterialId})
+var sGenerateDataKeyPairWithoutPlaintextRequest_EncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionContext", ID: &i_EncryptionContextType, Members: &m_EncryptionContextType, Type: smithy.ShapeTypeMap, Ext: &eGenerateDataKeyPairWithoutPlaintextRequest_EncryptionContext})
+var sGenerateDataKeyPairWithoutPlaintextRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eGenerateDataKeyPairWithoutPlaintextRequest_KeyId})
+var sGenerateDataKeyPairWithoutPlaintextRequest_KeyPairSpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyPairSpec", ID: &iDataKeyPairSpec, Members: &mDataKeyPairSpec, Type: smithy.ShapeTypeEnum, Ext: &eGenerateDataKeyPairWithoutPlaintextRequest_KeyPairSpec})
+var sGenerateDataKeyPairWithoutPlaintextRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &eGenerateDataKeyPairWithoutPlaintextRequest_GrantTokens})
+var sGenerateDataKeyPairWithoutPlaintextRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eGenerateDataKeyPairWithoutPlaintextRequest_DryRun})
+var sGenerateDataKeyPairWithoutPlaintextResponse_PrivateKeyCiphertextBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateKeyCiphertextBlob", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &eGenerateDataKeyPairWithoutPlaintextResponse_PrivateKeyCiphertextBlob})
+var sGenerateDataKeyPairWithoutPlaintextResponse_PublicKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicKey", ID: &i_PublicKeyType, Type: smithy.ShapeTypeBlob, Ext: &eGenerateDataKeyPairWithoutPlaintextResponse_PublicKey})
+var sGenerateDataKeyPairWithoutPlaintextResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eGenerateDataKeyPairWithoutPlaintextResponse_KeyId})
+var sGenerateDataKeyPairWithoutPlaintextResponse_KeyPairSpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyPairSpec", ID: &iDataKeyPairSpec, Members: &mDataKeyPairSpec, Type: smithy.ShapeTypeEnum, Ext: &eGenerateDataKeyPairWithoutPlaintextResponse_KeyPairSpec})
+var sGenerateDataKeyPairWithoutPlaintextResponse_KeyMaterialId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialId", ID: &i_BackingKeyIdType, Type: smithy.ShapeTypeString, Ext: &eGenerateDataKeyPairWithoutPlaintextResponse_KeyMaterialId})
+var sGenerateDataKeyWithoutPlaintextRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eGenerateDataKeyWithoutPlaintextRequest_KeyId})
+var sGenerateDataKeyWithoutPlaintextRequest_EncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionContext", ID: &i_EncryptionContextType, Members: &m_EncryptionContextType, Type: smithy.ShapeTypeMap, Ext: &eGenerateDataKeyWithoutPlaintextRequest_EncryptionContext})
+var sGenerateDataKeyWithoutPlaintextRequest_KeySpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeySpec", ID: &iDataKeySpec, Members: &mDataKeySpec, Type: smithy.ShapeTypeEnum, Ext: &eGenerateDataKeyWithoutPlaintextRequest_KeySpec})
+var sGenerateDataKeyWithoutPlaintextRequest_NumberOfBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfBytes", ID: &i_NumberOfBytesType, Type: smithy.ShapeTypeInteger, Ext: &eGenerateDataKeyWithoutPlaintextRequest_NumberOfBytes})
+var sGenerateDataKeyWithoutPlaintextRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &eGenerateDataKeyWithoutPlaintextRequest_GrantTokens})
+var sGenerateDataKeyWithoutPlaintextRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eGenerateDataKeyWithoutPlaintextRequest_DryRun})
+var sGenerateDataKeyWithoutPlaintextResponse_CiphertextBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CiphertextBlob", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &eGenerateDataKeyWithoutPlaintextResponse_CiphertextBlob})
+var sGenerateDataKeyWithoutPlaintextResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eGenerateDataKeyWithoutPlaintextResponse_KeyId})
+var sGenerateDataKeyWithoutPlaintextResponse_KeyMaterialId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialId", ID: &i_BackingKeyIdType, Type: smithy.ShapeTypeString, Ext: &eGenerateDataKeyWithoutPlaintextResponse_KeyMaterialId})
+var sGenerateMacRequest_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_PlaintextType, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &eGenerateMacRequest_Message})
+var sGenerateMacRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eGenerateMacRequest_KeyId})
+var sGenerateMacRequest_MacAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MacAlgorithm", ID: &iMacAlgorithmSpec, Members: &mMacAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eGenerateMacRequest_MacAlgorithm})
+var sGenerateMacRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &eGenerateMacRequest_GrantTokens})
+var sGenerateMacRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eGenerateMacRequest_DryRun})
+var sGenerateMacResponse_Mac = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mac", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &eGenerateMacResponse_Mac})
+var sGenerateMacResponse_MacAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MacAlgorithm", ID: &iMacAlgorithmSpec, Members: &mMacAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eGenerateMacResponse_MacAlgorithm})
+var sGenerateMacResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eGenerateMacResponse_KeyId})
+var sGenerateRandomRequest_NumberOfBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfBytes", ID: &i_NumberOfBytesType, Type: smithy.ShapeTypeInteger, Ext: &eGenerateRandomRequest_NumberOfBytes})
+var sGenerateRandomRequest_CustomKeyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreId", ID: &i_CustomKeyStoreIdType, Type: smithy.ShapeTypeString, Ext: &eGenerateRandomRequest_CustomKeyStoreId})
+var sGenerateRandomRequest_Recipient = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Recipient", ID: &iRecipientInfo, Members: &mRecipientInfo, Type: smithy.ShapeTypeStructure, Ext: &eGenerateRandomRequest_Recipient})
+var sGenerateRandomResponse_Plaintext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Plaintext", ID: &i_PlaintextType, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &eGenerateRandomResponse_Plaintext})
+var sGenerateRandomResponse_CiphertextForRecipient = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CiphertextForRecipient", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &eGenerateRandomResponse_CiphertextForRecipient})
+var sGetKeyLastUsageRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eGetKeyLastUsageRequest_KeyId})
+var sGetKeyLastUsageResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eGetKeyLastUsageResponse_KeyId})
+var sGetKeyLastUsageResponse_KeyLastUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyLastUsage", ID: &iKeyLastUsageData, Members: &mKeyLastUsageData, Type: smithy.ShapeTypeStructure, Ext: &eGetKeyLastUsageResponse_KeyLastUsage})
+var sGetKeyLastUsageResponse_TrackingStartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrackingStartDate", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eGetKeyLastUsageResponse_TrackingStartDate})
+var sGetKeyLastUsageResponse_KeyCreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyCreationDate", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eGetKeyLastUsageResponse_KeyCreationDate})
+var sGetKeyPolicyRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eGetKeyPolicyRequest_KeyId})
+var sGetKeyPolicyRequest_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_PolicyNameType, Type: smithy.ShapeTypeString, Ext: &eGetKeyPolicyRequest_PolicyName})
+var sGetKeyPolicyResponse_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_PolicyType, Type: smithy.ShapeTypeString, Ext: &eGetKeyPolicyResponse_Policy})
+var sGetKeyPolicyResponse_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_PolicyNameType, Type: smithy.ShapeTypeString, Ext: &eGetKeyPolicyResponse_PolicyName})
+var sGetKeyRotationStatusRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eGetKeyRotationStatusRequest_KeyId})
+var sGetKeyRotationStatusResponse_KeyRotationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyRotationEnabled", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eGetKeyRotationStatusResponse_KeyRotationEnabled})
+var sGetKeyRotationStatusResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eGetKeyRotationStatusResponse_KeyId})
+var sGetKeyRotationStatusResponse_RotationPeriodInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationPeriodInDays", ID: &i_RotationPeriodInDaysType, Type: smithy.ShapeTypeInteger, Ext: &eGetKeyRotationStatusResponse_RotationPeriodInDays})
+var sGetKeyRotationStatusResponse_NextRotationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextRotationDate", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eGetKeyRotationStatusResponse_NextRotationDate})
+var sGetKeyRotationStatusResponse_OnDemandRotationStartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnDemandRotationStartDate", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eGetKeyRotationStatusResponse_OnDemandRotationStartDate})
+var sGetParametersForImportRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eGetParametersForImportRequest_KeyId})
+var sGetParametersForImportRequest_WrappingAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WrappingAlgorithm", ID: &iAlgorithmSpec, Members: &mAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eGetParametersForImportRequest_WrappingAlgorithm})
+var sGetParametersForImportRequest_WrappingKeySpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WrappingKeySpec", ID: &iWrappingKeySpec, Members: &mWrappingKeySpec, Type: smithy.ShapeTypeEnum, Ext: &eGetParametersForImportRequest_WrappingKeySpec})
+var sGetParametersForImportResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eGetParametersForImportResponse_KeyId})
+var sGetParametersForImportResponse_ImportToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportToken", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &eGetParametersForImportResponse_ImportToken})
+var sGetParametersForImportResponse_PublicKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicKey", ID: &i_PlaintextType, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &eGetParametersForImportResponse_PublicKey})
+var sGetParametersForImportResponse_ParametersValidTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParametersValidTo", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eGetParametersForImportResponse_ParametersValidTo})
+var sGetPublicKeyRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eGetPublicKeyRequest_KeyId})
+var sGetPublicKeyRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &eGetPublicKeyRequest_GrantTokens})
+var sGetPublicKeyResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eGetPublicKeyResponse_KeyId})
+var sGetPublicKeyResponse_PublicKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicKey", ID: &i_PublicKeyType, Type: smithy.ShapeTypeBlob, Ext: &eGetPublicKeyResponse_PublicKey})
+var sGetPublicKeyResponse_CustomerMasterKeySpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerMasterKeySpec", ID: &iCustomerMasterKeySpec, Members: &mCustomerMasterKeySpec, Type: smithy.ShapeTypeEnum, Ext: &eGetPublicKeyResponse_CustomerMasterKeySpec})
+var sGetPublicKeyResponse_KeySpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeySpec", ID: &iKeySpec, Members: &mKeySpec, Type: smithy.ShapeTypeEnum, Ext: &eGetPublicKeyResponse_KeySpec})
+var sGetPublicKeyResponse_KeyUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyUsage", ID: &iKeyUsageType, Members: &mKeyUsageType, Type: smithy.ShapeTypeEnum, Ext: &eGetPublicKeyResponse_KeyUsage})
+var sGetPublicKeyResponse_EncryptionAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionAlgorithms", ID: &i_EncryptionAlgorithmSpecList, Members: &m_EncryptionAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &eGetPublicKeyResponse_EncryptionAlgorithms})
+var sGetPublicKeyResponse_SigningAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningAlgorithms", ID: &i_SigningAlgorithmSpecList, Members: &m_SigningAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &eGetPublicKeyResponse_SigningAlgorithms})
+var sGetPublicKeyResponse_KeyAgreementAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAgreementAlgorithms", ID: &i_KeyAgreementAlgorithmSpecList, Members: &m_KeyAgreementAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &eGetPublicKeyResponse_KeyAgreementAlgorithms})
+var sGetPublicKeyResponse_EncapsulationAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncapsulationAlgorithms", ID: &i_EncapsulationAlgorithmSpecList, Members: &m_EncapsulationAlgorithmSpecList, Type: smithy.ShapeTypeList, Ext: &eGetPublicKeyResponse_EncapsulationAlgorithms})
+var sImportKeyMaterialRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eImportKeyMaterialRequest_KeyId})
+var sImportKeyMaterialRequest_ImportToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportToken", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &eImportKeyMaterialRequest_ImportToken})
+var sImportKeyMaterialRequest_EncryptedKeyMaterial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptedKeyMaterial", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &eImportKeyMaterialRequest_EncryptedKeyMaterial})
+var sImportKeyMaterialRequest_ValidTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidTo", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eImportKeyMaterialRequest_ValidTo})
+var sImportKeyMaterialRequest_ExpirationModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationModel", ID: &iExpirationModelType, Members: &mExpirationModelType, Type: smithy.ShapeTypeEnum, Ext: &eImportKeyMaterialRequest_ExpirationModel})
+var sImportKeyMaterialRequest_ImportType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportType", ID: &iImportType, Members: &mImportType, Type: smithy.ShapeTypeEnum, Ext: &eImportKeyMaterialRequest_ImportType})
+var sImportKeyMaterialRequest_KeyMaterialDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialDescription", ID: &i_KeyMaterialDescriptionType, Type: smithy.ShapeTypeString, Ext: &eImportKeyMaterialRequest_KeyMaterialDescription})
+var sImportKeyMaterialRequest_KeyMaterialId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialId", ID: &i_BackingKeyIdType, Type: smithy.ShapeTypeString, Ext: &eImportKeyMaterialRequest_KeyMaterialId})
+var sImportKeyMaterialResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eImportKeyMaterialResponse_KeyId})
+var sImportKeyMaterialResponse_KeyMaterialId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialId", ID: &i_BackingKeyIdType, Type: smithy.ShapeTypeString, Ext: &eImportKeyMaterialResponse_KeyMaterialId})
+var sListAliasesRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eListAliasesRequest_KeyId})
+var sListAliasesRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitType, Type: smithy.ShapeTypeInteger, Ext: &eListAliasesRequest_Limit})
+var sListAliasesRequest_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &eListAliasesRequest_Marker})
+var sListAliasesResponse_Aliases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Aliases", ID: &i_AliasList, Members: &m_AliasList, Type: smithy.ShapeTypeList, Ext: &eListAliasesResponse_Aliases})
+var sListAliasesResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &eListAliasesResponse_NextMarker})
+var sListAliasesResponse_Truncated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Truncated", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eListAliasesResponse_Truncated})
+var sListGrantsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitType, Type: smithy.ShapeTypeInteger, Ext: &eListGrantsRequest_Limit})
+var sListGrantsRequest_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &eListGrantsRequest_Marker})
+var sListGrantsRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eListGrantsRequest_KeyId})
+var sListGrantsRequest_GrantId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantId", ID: &i_GrantIdType, Type: smithy.ShapeTypeString, Ext: &eListGrantsRequest_GrantId})
+var sListGrantsRequest_GranteePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GranteePrincipal", ID: &i_PrincipalIdType, Type: smithy.ShapeTypeString, Ext: &eListGrantsRequest_GranteePrincipal})
+var sListGrantsRequest_GranteeServicePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GranteeServicePrincipal", ID: &i_ServicePrincipalType, Type: smithy.ShapeTypeString, Ext: &eListGrantsRequest_GranteeServicePrincipal})
+var sListGrantsResponse_Grants = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Grants", ID: &i_GrantList, Members: &m_GrantList, Type: smithy.ShapeTypeList, Ext: &eListGrantsResponse_Grants})
+var sListGrantsResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &eListGrantsResponse_NextMarker})
+var sListGrantsResponse_Truncated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Truncated", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eListGrantsResponse_Truncated})
+var sListKeyPoliciesRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eListKeyPoliciesRequest_KeyId})
+var sListKeyPoliciesRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitType, Type: smithy.ShapeTypeInteger, Ext: &eListKeyPoliciesRequest_Limit})
+var sListKeyPoliciesRequest_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &eListKeyPoliciesRequest_Marker})
+var sListKeyPoliciesResponse_PolicyNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyNames", ID: &i_PolicyNameList, Members: &m_PolicyNameList, Type: smithy.ShapeTypeList, Ext: &eListKeyPoliciesResponse_PolicyNames})
+var sListKeyPoliciesResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &eListKeyPoliciesResponse_NextMarker})
+var sListKeyPoliciesResponse_Truncated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Truncated", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eListKeyPoliciesResponse_Truncated})
+var sListKeyRotationsRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eListKeyRotationsRequest_KeyId})
+var sListKeyRotationsRequest_IncludeKeyMaterial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeKeyMaterial", ID: &iIncludeKeyMaterial, Members: &mIncludeKeyMaterial, Type: smithy.ShapeTypeEnum, Ext: &eListKeyRotationsRequest_IncludeKeyMaterial})
+var sListKeyRotationsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitType, Type: smithy.ShapeTypeInteger, Ext: &eListKeyRotationsRequest_Limit})
+var sListKeyRotationsRequest_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &eListKeyRotationsRequest_Marker})
+var sListKeyRotationsResponse_Rotations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rotations", ID: &i_RotationsList, Members: &m_RotationsList, Type: smithy.ShapeTypeList, Ext: &eListKeyRotationsResponse_Rotations})
+var sListKeyRotationsResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &eListKeyRotationsResponse_NextMarker})
+var sListKeyRotationsResponse_Truncated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Truncated", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eListKeyRotationsResponse_Truncated})
+var sListKeysRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitType, Type: smithy.ShapeTypeInteger, Ext: &eListKeysRequest_Limit})
+var sListKeysRequest_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &eListKeysRequest_Marker})
+var sListKeysResponse_Keys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Keys", ID: &i_KeyList, Members: &m_KeyList, Type: smithy.ShapeTypeList, Ext: &eListKeysResponse_Keys})
+var sListKeysResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &eListKeysResponse_NextMarker})
+var sListKeysResponse_Truncated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Truncated", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eListKeysResponse_Truncated})
+var sListResourceTagsRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eListResourceTagsRequest_KeyId})
+var sListResourceTagsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitType, Type: smithy.ShapeTypeInteger, Ext: &eListResourceTagsRequest_Limit})
+var sListResourceTagsRequest_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &eListResourceTagsRequest_Marker})
+var sListResourceTagsResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListResourceTagsResponse_Tags})
+var sListResourceTagsResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &eListResourceTagsResponse_NextMarker})
+var sListResourceTagsResponse_Truncated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Truncated", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eListResourceTagsResponse_Truncated})
+var sListRetirableGrantsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitType, Type: smithy.ShapeTypeInteger, Ext: &eListRetirableGrantsRequest_Limit})
+var sListRetirableGrantsRequest_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_MarkerType, Type: smithy.ShapeTypeString, Ext: &eListRetirableGrantsRequest_Marker})
+var sListRetirableGrantsRequest_RetiringPrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetiringPrincipal", ID: &i_PrincipalIdType, Type: smithy.ShapeTypeString, Ext: &eListRetirableGrantsRequest_RetiringPrincipal})
+var sListRetirableGrantsRequest_RetiringServicePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetiringServicePrincipal", ID: &i_ServicePrincipalType, Type: smithy.ShapeTypeString, Ext: &eListRetirableGrantsRequest_RetiringServicePrincipal})
+var sPutKeyPolicyRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &ePutKeyPolicyRequest_KeyId})
+var sPutKeyPolicyRequest_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_PolicyNameType, Type: smithy.ShapeTypeString, Ext: &ePutKeyPolicyRequest_PolicyName})
+var sPutKeyPolicyRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_PolicyType, Type: smithy.ShapeTypeString, Ext: &ePutKeyPolicyRequest_Policy})
+var sPutKeyPolicyRequest_BypassPolicyLockoutSafetyCheck = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BypassPolicyLockoutSafetyCheck", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &ePutKeyPolicyRequest_BypassPolicyLockoutSafetyCheck})
+var sReEncryptRequest_CiphertextBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CiphertextBlob", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &eReEncryptRequest_CiphertextBlob})
+var sReEncryptRequest_SourceEncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceEncryptionContext", ID: &i_EncryptionContextType, Members: &m_EncryptionContextType, Type: smithy.ShapeTypeMap, Ext: &eReEncryptRequest_SourceEncryptionContext})
+var sReEncryptRequest_SourceKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceKeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eReEncryptRequest_SourceKeyId})
+var sReEncryptRequest_DestinationKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationKeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eReEncryptRequest_DestinationKeyId})
+var sReEncryptRequest_DestinationEncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationEncryptionContext", ID: &i_EncryptionContextType, Members: &m_EncryptionContextType, Type: smithy.ShapeTypeMap, Ext: &eReEncryptRequest_DestinationEncryptionContext})
+var sReEncryptRequest_SourceEncryptionAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceEncryptionAlgorithm", ID: &iEncryptionAlgorithmSpec, Members: &mEncryptionAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eReEncryptRequest_SourceEncryptionAlgorithm})
+var sReEncryptRequest_DestinationEncryptionAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationEncryptionAlgorithm", ID: &iEncryptionAlgorithmSpec, Members: &mEncryptionAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eReEncryptRequest_DestinationEncryptionAlgorithm})
+var sReEncryptRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &eReEncryptRequest_GrantTokens})
+var sReEncryptRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eReEncryptRequest_DryRun})
+var sReEncryptRequest_DryRunModifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRunModifiers", ID: &i_DryRunModifierList, Members: &m_DryRunModifierList, Type: smithy.ShapeTypeList, Ext: &eReEncryptRequest_DryRunModifiers})
+var sReEncryptResponse_CiphertextBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CiphertextBlob", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &eReEncryptResponse_CiphertextBlob})
+var sReEncryptResponse_SourceKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceKeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eReEncryptResponse_SourceKeyId})
+var sReEncryptResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eReEncryptResponse_KeyId})
+var sReEncryptResponse_SourceEncryptionAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceEncryptionAlgorithm", ID: &iEncryptionAlgorithmSpec, Members: &mEncryptionAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eReEncryptResponse_SourceEncryptionAlgorithm})
+var sReEncryptResponse_DestinationEncryptionAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationEncryptionAlgorithm", ID: &iEncryptionAlgorithmSpec, Members: &mEncryptionAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eReEncryptResponse_DestinationEncryptionAlgorithm})
+var sReEncryptResponse_SourceKeyMaterialId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceKeyMaterialId", ID: &i_BackingKeyIdType, Type: smithy.ShapeTypeString, Ext: &eReEncryptResponse_SourceKeyMaterialId})
+var sReEncryptResponse_DestinationKeyMaterialId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationKeyMaterialId", ID: &i_BackingKeyIdType, Type: smithy.ShapeTypeString, Ext: &eReEncryptResponse_DestinationKeyMaterialId})
+var sReplicateKeyRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eReplicateKeyRequest_KeyId})
+var sReplicateKeyRequest_ReplicaRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicaRegion", ID: &i_RegionType, Type: smithy.ShapeTypeString, Ext: &eReplicateKeyRequest_ReplicaRegion})
+var sReplicateKeyRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_PolicyType, Type: smithy.ShapeTypeString, Ext: &eReplicateKeyRequest_Policy})
+var sReplicateKeyRequest_BypassPolicyLockoutSafetyCheck = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BypassPolicyLockoutSafetyCheck", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eReplicateKeyRequest_BypassPolicyLockoutSafetyCheck})
+var sReplicateKeyRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionType, Type: smithy.ShapeTypeString, Ext: &eReplicateKeyRequest_Description})
+var sReplicateKeyRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eReplicateKeyRequest_Tags})
+var sReplicateKeyResponse_ReplicaKeyMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicaKeyMetadata", ID: &iKeyMetadata, Members: &mKeyMetadata, Type: smithy.ShapeTypeStructure, Ext: &eReplicateKeyResponse_ReplicaKeyMetadata})
+var sReplicateKeyResponse_ReplicaPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicaPolicy", ID: &i_PolicyType, Type: smithy.ShapeTypeString, Ext: &eReplicateKeyResponse_ReplicaPolicy})
+var sReplicateKeyResponse_ReplicaTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicaTags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eReplicateKeyResponse_ReplicaTags})
+var sRetireGrantRequest_GrantToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantToken", ID: &i_GrantTokenType, Type: smithy.ShapeTypeString, Ext: &eRetireGrantRequest_GrantToken})
+var sRetireGrantRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eRetireGrantRequest_KeyId})
+var sRetireGrantRequest_GrantId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantId", ID: &i_GrantIdType, Type: smithy.ShapeTypeString, Ext: &eRetireGrantRequest_GrantId})
+var sRetireGrantRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eRetireGrantRequest_DryRun})
+var sRevokeGrantRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eRevokeGrantRequest_KeyId})
+var sRevokeGrantRequest_GrantId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantId", ID: &i_GrantIdType, Type: smithy.ShapeTypeString, Ext: &eRevokeGrantRequest_GrantId})
+var sRevokeGrantRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eRevokeGrantRequest_DryRun})
+var sRotateKeyOnDemandRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eRotateKeyOnDemandRequest_KeyId})
+var sRotateKeyOnDemandResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eRotateKeyOnDemandResponse_KeyId})
+var sScheduleKeyDeletionRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eScheduleKeyDeletionRequest_KeyId})
+var sScheduleKeyDeletionRequest_PendingWindowInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingWindowInDays", ID: &i_PendingWindowInDaysType, Type: smithy.ShapeTypeInteger, Ext: &eScheduleKeyDeletionRequest_PendingWindowInDays})
+var sScheduleKeyDeletionResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eScheduleKeyDeletionResponse_KeyId})
+var sScheduleKeyDeletionResponse_DeletionDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionDate", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eScheduleKeyDeletionResponse_DeletionDate})
+var sScheduleKeyDeletionResponse_KeyState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyState", ID: &iKeyState, Members: &mKeyState, Type: smithy.ShapeTypeEnum, Ext: &eScheduleKeyDeletionResponse_KeyState})
+var sScheduleKeyDeletionResponse_PendingWindowInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingWindowInDays", ID: &i_PendingWindowInDaysType, Type: smithy.ShapeTypeInteger, Ext: &eScheduleKeyDeletionResponse_PendingWindowInDays})
+var sSignRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eSignRequest_KeyId})
+var sSignRequest_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_PlaintextType, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &eSignRequest_Message})
+var sSignRequest_MessageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageType", ID: &iMessageType, Members: &mMessageType, Type: smithy.ShapeTypeEnum, Ext: &eSignRequest_MessageType})
+var sSignRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &eSignRequest_GrantTokens})
+var sSignRequest_SigningAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningAlgorithm", ID: &iSigningAlgorithmSpec, Members: &mSigningAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eSignRequest_SigningAlgorithm})
+var sSignRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eSignRequest_DryRun})
+var sSignResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eSignResponse_KeyId})
+var sSignResponse_Signature = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Signature", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &eSignResponse_Signature})
+var sSignResponse_SigningAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningAlgorithm", ID: &iSigningAlgorithmSpec, Members: &mSigningAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eSignResponse_SigningAlgorithm})
+var sTagResourceRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_KeyId})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_Tags})
+var sUntagResourceRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_KeyId})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUpdateAliasRequest_AliasName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AliasName", ID: &i_AliasNameType, Type: smithy.ShapeTypeString, Ext: &eUpdateAliasRequest_AliasName})
+var sUpdateAliasRequest_TargetKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetKeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eUpdateAliasRequest_TargetKeyId})
+var sUpdateCustomKeyStoreRequest_CustomKeyStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomKeyStoreId", ID: &i_CustomKeyStoreIdType, Type: smithy.ShapeTypeString, Ext: &eUpdateCustomKeyStoreRequest_CustomKeyStoreId})
+var sUpdateCustomKeyStoreRequest_NewCustomKeyStoreName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewCustomKeyStoreName", ID: &i_CustomKeyStoreNameType, Type: smithy.ShapeTypeString, Ext: &eUpdateCustomKeyStoreRequest_NewCustomKeyStoreName})
+var sUpdateCustomKeyStoreRequest_KeyStorePassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyStorePassword", ID: &i_KeyStorePasswordType, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eUpdateCustomKeyStoreRequest_KeyStorePassword})
+var sUpdateCustomKeyStoreRequest_CloudHsmClusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudHsmClusterId", ID: &i_CloudHsmClusterIdType, Type: smithy.ShapeTypeString, Ext: &eUpdateCustomKeyStoreRequest_CloudHsmClusterId})
+var sUpdateCustomKeyStoreRequest_XksProxyUriEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksProxyUriEndpoint", ID: &i_XksProxyUriEndpointType, Type: smithy.ShapeTypeString, Ext: &eUpdateCustomKeyStoreRequest_XksProxyUriEndpoint})
+var sUpdateCustomKeyStoreRequest_XksProxyUriPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksProxyUriPath", ID: &i_XksProxyUriPathType, Type: smithy.ShapeTypeString, Ext: &eUpdateCustomKeyStoreRequest_XksProxyUriPath})
+var sUpdateCustomKeyStoreRequest_XksProxyVpcEndpointServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksProxyVpcEndpointServiceName", ID: &i_XksProxyVpcEndpointServiceNameType, Type: smithy.ShapeTypeString, Ext: &eUpdateCustomKeyStoreRequest_XksProxyVpcEndpointServiceName})
+var sUpdateCustomKeyStoreRequest_XksProxyVpcEndpointServiceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksProxyVpcEndpointServiceOwner", ID: &i_AccountIdType, Type: smithy.ShapeTypeString, Ext: &eUpdateCustomKeyStoreRequest_XksProxyVpcEndpointServiceOwner})
+var sUpdateCustomKeyStoreRequest_XksProxyAuthenticationCredential = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksProxyAuthenticationCredential", ID: &iXksProxyAuthenticationCredentialType, Members: &mXksProxyAuthenticationCredentialType, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCustomKeyStoreRequest_XksProxyAuthenticationCredential})
+var sUpdateCustomKeyStoreRequest_XksProxyConnectivity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XksProxyConnectivity", ID: &iXksProxyConnectivityType, Members: &mXksProxyConnectivityType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateCustomKeyStoreRequest_XksProxyConnectivity})
+var sUpdateKeyDescriptionRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eUpdateKeyDescriptionRequest_KeyId})
+var sUpdateKeyDescriptionRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionType, Type: smithy.ShapeTypeString, Ext: &eUpdateKeyDescriptionRequest_Description})
+var sUpdatePrimaryRegionRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eUpdatePrimaryRegionRequest_KeyId})
+var sUpdatePrimaryRegionRequest_PrimaryRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryRegion", ID: &i_RegionType, Type: smithy.ShapeTypeString, Ext: &eUpdatePrimaryRegionRequest_PrimaryRegion})
+var sVerifyRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eVerifyRequest_KeyId})
+var sVerifyRequest_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_PlaintextType, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &eVerifyRequest_Message})
+var sVerifyRequest_MessageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageType", ID: &iMessageType, Members: &mMessageType, Type: smithy.ShapeTypeEnum, Ext: &eVerifyRequest_MessageType})
+var sVerifyRequest_Signature = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Signature", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &eVerifyRequest_Signature})
+var sVerifyRequest_SigningAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningAlgorithm", ID: &iSigningAlgorithmSpec, Members: &mSigningAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eVerifyRequest_SigningAlgorithm})
+var sVerifyRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &eVerifyRequest_GrantTokens})
+var sVerifyRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eVerifyRequest_DryRun})
+var sVerifyMacRequest_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_PlaintextType, Traits: &t41, Type: smithy.ShapeTypeBlob, Ext: &eVerifyMacRequest_Message})
+var sVerifyMacRequest_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eVerifyMacRequest_KeyId})
+var sVerifyMacRequest_MacAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MacAlgorithm", ID: &iMacAlgorithmSpec, Members: &mMacAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eVerifyMacRequest_MacAlgorithm})
+var sVerifyMacRequest_Mac = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mac", ID: &i_CiphertextType, Type: smithy.ShapeTypeBlob, Ext: &eVerifyMacRequest_Mac})
+var sVerifyMacRequest_GrantTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTokens", ID: &i_GrantTokenList, Members: &m_GrantTokenList, Type: smithy.ShapeTypeList, Ext: &eVerifyMacRequest_GrantTokens})
+var sVerifyMacRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_NullableBooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eVerifyMacRequest_DryRun})
+var sVerifyMacResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eVerifyMacResponse_KeyId})
+var sVerifyMacResponse_MacValid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MacValid", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eVerifyMacResponse_MacValid})
+var sVerifyMacResponse_MacAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MacAlgorithm", ID: &iMacAlgorithmSpec, Members: &mMacAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eVerifyMacResponse_MacAlgorithm})
+var sVerifyResponse_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyIdType, Type: smithy.ShapeTypeString, Ext: &eVerifyResponse_KeyId})
+var sVerifyResponse_SignatureValid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignatureValid", ID: &i_BooleanType, Type: smithy.ShapeTypeBoolean, Ext: &eVerifyResponse_SignatureValid})
+var sVerifyResponse_SigningAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningAlgorithm", ID: &iSigningAlgorithmSpec, Members: &mSigningAlgorithmSpec, Type: smithy.ShapeTypeEnum, Ext: &eVerifyResponse_SigningAlgorithm})
 
 var CancelKeyDeletion = &sCancelKeyDeletion
 

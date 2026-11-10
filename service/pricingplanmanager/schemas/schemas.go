@@ -7,9 +7,146 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [138]smithy.SchemaExtensions
+var (
+	eApprovePaidSubscription                                  smithy.SchemaExtensions
+	eAssociateResourcesToSubscription                         smithy.SchemaExtensions
+	eCancelSubscription                                       smithy.SchemaExtensions
+	eCancelSubscriptionChange                                 smithy.SchemaExtensions
+	eCreateSubscription                                       smithy.SchemaExtensions
+	eDisassociateResourcesFromSubscription                    smithy.SchemaExtensions
+	eGetSubscription                                          smithy.SchemaExtensions
+	eListSubscriptions                                        smithy.SchemaExtensions
+	eUpdateSubscription                                       smithy.SchemaExtensions
+	e_AWSPricingPlanManager                                   smithy.SchemaExtensions
+	eAccessDeniedException                                    smithy.SchemaExtensions
+	eAccessDeniedException_message                            smithy.SchemaExtensions
+	eApprovalMode                                             smithy.SchemaExtensions
+	eApprovalMode_MANUAL                                      smithy.SchemaExtensions
+	eApprovalMode_IMMEDIATE                                   smithy.SchemaExtensions
+	eConflictException                                        smithy.SchemaExtensions
+	eConflictException_message                                smithy.SchemaExtensions
+	eConflictException_resourceId                             smithy.SchemaExtensions
+	e_IdempotencyToken                                        smithy.SchemaExtensions
+	eInternalServerException                                  smithy.SchemaExtensions
+	eInternalServerException_message                          smithy.SchemaExtensions
+	e_ResourceArns                                            smithy.SchemaExtensions
+	e_ResourceArns_member                                     smithy.SchemaExtensions
+	eResourceNotFoundException                                smithy.SchemaExtensions
+	eResourceNotFoundException_message                        smithy.SchemaExtensions
+	eResourceNotFoundException_resourceId                     smithy.SchemaExtensions
+	eScheduledChange                                          smithy.SchemaExtensions
+	eScheduledChange_changeType                               smithy.SchemaExtensions
+	eScheduledChange_effectiveDate                            smithy.SchemaExtensions
+	eScheduledChange_planTier                                 smithy.SchemaExtensions
+	eScheduledChange_usageLevel                               smithy.SchemaExtensions
+	eScheduledChangeType                                      smithy.SchemaExtensions
+	eScheduledChangeType_DOWNGRADE                            smithy.SchemaExtensions
+	eScheduledChangeType_CANCELLATION                         smithy.SchemaExtensions
+	eServiceQuotaExceededException                            smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                    smithy.SchemaExtensions
+	eStatus                                                   smithy.SchemaExtensions
+	eStatus_PENDING_APPROVAL                                  smithy.SchemaExtensions
+	eStatus_ACTIVE                                            smithy.SchemaExtensions
+	eStatus_SYNC_IN_PROGRESS                                  smithy.SchemaExtensions
+	eStatus_FAILED                                            smithy.SchemaExtensions
+	eSubscription                                             smithy.SchemaExtensions
+	eSubscription_arn                                         smithy.SchemaExtensions
+	eSubscription_planFamily                                  smithy.SchemaExtensions
+	eSubscription_planTier                                    smithy.SchemaExtensions
+	eSubscription_usageLevel                                  smithy.SchemaExtensions
+	eSubscription_scheduledChange                             smithy.SchemaExtensions
+	eSubscription_status                                      smithy.SchemaExtensions
+	eSubscription_statusReason                                smithy.SchemaExtensions
+	eSubscription_resourceArns                                smithy.SchemaExtensions
+	eSubscription_createdAt                                   smithy.SchemaExtensions
+	eSubscription_updatedAt                                   smithy.SchemaExtensions
+	e_SubscriptionArn                                         smithy.SchemaExtensions
+	eSubscriptionSummary                                      smithy.SchemaExtensions
+	eSubscriptionSummary_arn                                  smithy.SchemaExtensions
+	eSubscriptionSummary_planFamily                           smithy.SchemaExtensions
+	eSubscriptionSummary_planTier                             smithy.SchemaExtensions
+	eSubscriptionSummary_usageLevel                           smithy.SchemaExtensions
+	eSubscriptionSummary_scheduledChange                      smithy.SchemaExtensions
+	eSubscriptionSummary_status                               smithy.SchemaExtensions
+	eSubscriptionSummary_statusReason                         smithy.SchemaExtensions
+	eSubscriptionSummary_resourceArns                         smithy.SchemaExtensions
+	eSubscriptionSummary_createdAt                            smithy.SchemaExtensions
+	eSubscriptionSummary_updatedAt                            smithy.SchemaExtensions
+	eSubscriptionSummary_eTag                                 smithy.SchemaExtensions
+	e_SubscriptionSummaryList                                 smithy.SchemaExtensions
+	e_SubscriptionSummaryList_member                          smithy.SchemaExtensions
+	eThrottlingException                                      smithy.SchemaExtensions
+	eThrottlingException_message                              smithy.SchemaExtensions
+	eValidationException                                      smithy.SchemaExtensions
+	eValidationException_message                              smithy.SchemaExtensions
+	eValidationException_resourceId                           smithy.SchemaExtensions
+	eApprovePaidSubscriptionInput                             smithy.SchemaExtensions
+	eApprovePaidSubscriptionInput_arn                         smithy.SchemaExtensions
+	eApprovePaidSubscriptionInput_ifMatch                     smithy.SchemaExtensions
+	eApprovePaidSubscriptionInput_clientToken                 smithy.SchemaExtensions
+	eApprovePaidSubscriptionOutput                            smithy.SchemaExtensions
+	eApprovePaidSubscriptionOutput_subscription               smithy.SchemaExtensions
+	eApprovePaidSubscriptionOutput_eTag                       smithy.SchemaExtensions
+	eAssociateResourcesToSubscriptionInput                    smithy.SchemaExtensions
+	eAssociateResourcesToSubscriptionInput_arn                smithy.SchemaExtensions
+	eAssociateResourcesToSubscriptionInput_resourceArns       smithy.SchemaExtensions
+	eAssociateResourcesToSubscriptionInput_ifMatch            smithy.SchemaExtensions
+	eAssociateResourcesToSubscriptionInput_clientToken        smithy.SchemaExtensions
+	eAssociateResourcesToSubscriptionOutput                   smithy.SchemaExtensions
+	eAssociateResourcesToSubscriptionOutput_subscription      smithy.SchemaExtensions
+	eAssociateResourcesToSubscriptionOutput_eTag              smithy.SchemaExtensions
+	eCancelSubscriptionChangeInput                            smithy.SchemaExtensions
+	eCancelSubscriptionChangeInput_arn                        smithy.SchemaExtensions
+	eCancelSubscriptionChangeInput_ifMatch                    smithy.SchemaExtensions
+	eCancelSubscriptionChangeInput_clientToken                smithy.SchemaExtensions
+	eCancelSubscriptionChangeOutput                           smithy.SchemaExtensions
+	eCancelSubscriptionChangeOutput_subscription              smithy.SchemaExtensions
+	eCancelSubscriptionChangeOutput_eTag                      smithy.SchemaExtensions
+	eCancelSubscriptionInput                                  smithy.SchemaExtensions
+	eCancelSubscriptionInput_arn                              smithy.SchemaExtensions
+	eCancelSubscriptionInput_ifMatch                          smithy.SchemaExtensions
+	eCancelSubscriptionInput_clientToken                      smithy.SchemaExtensions
+	eCancelSubscriptionOutput                                 smithy.SchemaExtensions
+	eCancelSubscriptionOutput_subscription                    smithy.SchemaExtensions
+	eCancelSubscriptionOutput_eTag                            smithy.SchemaExtensions
+	eCreateSubscriptionInput                                  smithy.SchemaExtensions
+	eCreateSubscriptionInput_planFamily                       smithy.SchemaExtensions
+	eCreateSubscriptionInput_planTier                         smithy.SchemaExtensions
+	eCreateSubscriptionInput_usageLevel                       smithy.SchemaExtensions
+	eCreateSubscriptionInput_resourceArns                     smithy.SchemaExtensions
+	eCreateSubscriptionInput_approvalMode                     smithy.SchemaExtensions
+	eCreateSubscriptionInput_clientToken                      smithy.SchemaExtensions
+	eCreateSubscriptionOutput                                 smithy.SchemaExtensions
+	eCreateSubscriptionOutput_subscription                    smithy.SchemaExtensions
+	eCreateSubscriptionOutput_eTag                            smithy.SchemaExtensions
+	eDisassociateResourcesFromSubscriptionInput               smithy.SchemaExtensions
+	eDisassociateResourcesFromSubscriptionInput_arn           smithy.SchemaExtensions
+	eDisassociateResourcesFromSubscriptionInput_resourceArns  smithy.SchemaExtensions
+	eDisassociateResourcesFromSubscriptionInput_ifMatch       smithy.SchemaExtensions
+	eDisassociateResourcesFromSubscriptionInput_clientToken   smithy.SchemaExtensions
+	eDisassociateResourcesFromSubscriptionOutput              smithy.SchemaExtensions
+	eDisassociateResourcesFromSubscriptionOutput_subscription smithy.SchemaExtensions
+	eDisassociateResourcesFromSubscriptionOutput_eTag         smithy.SchemaExtensions
+	eGetSubscriptionInput                                     smithy.SchemaExtensions
+	eGetSubscriptionInput_arn                                 smithy.SchemaExtensions
+	eGetSubscriptionOutput                                    smithy.SchemaExtensions
+	eGetSubscriptionOutput_subscription                       smithy.SchemaExtensions
+	eGetSubscriptionOutput_eTag                               smithy.SchemaExtensions
+	eListSubscriptionsInput                                   smithy.SchemaExtensions
+	eListSubscriptionsInput_nextToken                         smithy.SchemaExtensions
+	eListSubscriptionsOutput                                  smithy.SchemaExtensions
+	eListSubscriptionsOutput_subscriptionSummaries            smithy.SchemaExtensions
+	eListSubscriptionsOutput_nextToken                        smithy.SchemaExtensions
+	eUpdateSubscriptionInput                                  smithy.SchemaExtensions
+	eUpdateSubscriptionInput_arn                              smithy.SchemaExtensions
+	eUpdateSubscriptionInput_planTier                         smithy.SchemaExtensions
+	eUpdateSubscriptionInput_usageLevel                       smithy.SchemaExtensions
+	eUpdateSubscriptionInput_ifMatch                          smithy.SchemaExtensions
+	eUpdateSubscriptionInput_clientToken                      smithy.SchemaExtensions
+	eUpdateSubscriptionOutput                                 smithy.SchemaExtensions
+	eUpdateSubscriptionOutput_subscription                    smithy.SchemaExtensions
+	eUpdateSubscriptionOutput_eTag                            smithy.SchemaExtensions
+)
 
 var (
 	iApprovePaidSubscription                     = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "ApprovePaidSubscription"}
@@ -141,145 +278,145 @@ var mListSubscriptionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sLis
 var mUpdateSubscriptionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSubscriptionInput_arn, &sUpdateSubscriptionInput_planTier, &sUpdateSubscriptionInput_usageLevel, &sUpdateSubscriptionInput_ifMatch, &sUpdateSubscriptionInput_clientToken}}
 var mUpdateSubscriptionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSubscriptionOutput_subscription, &sUpdateSubscriptionOutput_eTag}}
 
-var sApprovePaidSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovePaidSubscription, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sAssociateResourcesToSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResourcesToSubscription, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sCancelSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelSubscription, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sCancelSubscriptionChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelSubscriptionChange, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sCreateSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscription, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sDisassociateResourcesFromSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateResourcesFromSubscription, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sGetSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSubscription, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sListSubscriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscriptions, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sUpdateSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubscription, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var s_AWSPricingPlanManager = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSPricingPlanManager, Type: smithy.ShapeTypeService, Ext: &ext[9]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &ext[10]})
-var sApprovalMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalMode, Members: &mApprovalMode, Type: smithy.ShapeTypeEnum, Ext: &ext[12]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &ext[15]})
-var s_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &ext[18]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &ext[19]})
-var s_ResourceArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArns, Members: &m_ResourceArns, Type: smithy.ShapeTypeList, Ext: &ext[21]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &ext[23]})
-var sScheduledChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduledChange, Members: &mScheduledChange, Type: smithy.ShapeTypeStructure, Ext: &ext[26]})
-var sScheduledChangeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduledChangeType, Members: &mScheduledChangeType, Type: smithy.ShapeTypeEnum, Ext: &ext[31]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &ext[34]})
-var sStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[36]})
-var sSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscription, Members: &mSubscription, Type: smithy.ShapeTypeStructure, Ext: &ext[41]})
-var s_SubscriptionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var sSubscriptionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscriptionSummary, Members: &mSubscriptionSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[53]})
-var s_SubscriptionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubscriptionSummaryList, Members: &m_SubscriptionSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[65]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &ext[67]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &ext[69]})
-var sApprovePaidSubscriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovePaidSubscriptionInput, Members: &mApprovePaidSubscriptionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sApprovePaidSubscriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovePaidSubscriptionOutput, Members: &mApprovePaidSubscriptionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[76]})
-var sAssociateResourcesToSubscriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResourcesToSubscriptionInput, Members: &mAssociateResourcesToSubscriptionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[79]})
-var sAssociateResourcesToSubscriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResourcesToSubscriptionOutput, Members: &mAssociateResourcesToSubscriptionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[84]})
-var sCancelSubscriptionChangeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelSubscriptionChangeInput, Members: &mCancelSubscriptionChangeInput, Type: smithy.ShapeTypeStructure, Ext: &ext[87]})
-var sCancelSubscriptionChangeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelSubscriptionChangeOutput, Members: &mCancelSubscriptionChangeOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[91]})
-var sCancelSubscriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelSubscriptionInput, Members: &mCancelSubscriptionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[94]})
-var sCancelSubscriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelSubscriptionOutput, Members: &mCancelSubscriptionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[98]})
-var sCreateSubscriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscriptionInput, Members: &mCreateSubscriptionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[101]})
-var sCreateSubscriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscriptionOutput, Members: &mCreateSubscriptionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[108]})
-var sDisassociateResourcesFromSubscriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateResourcesFromSubscriptionInput, Members: &mDisassociateResourcesFromSubscriptionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[111]})
-var sDisassociateResourcesFromSubscriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateResourcesFromSubscriptionOutput, Members: &mDisassociateResourcesFromSubscriptionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[116]})
-var sGetSubscriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSubscriptionInput, Members: &mGetSubscriptionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[119]})
-var sGetSubscriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSubscriptionOutput, Members: &mGetSubscriptionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[121]})
-var sListSubscriptionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscriptionsInput, Members: &mListSubscriptionsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[124]})
-var sListSubscriptionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscriptionsOutput, Members: &mListSubscriptionsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var sUpdateSubscriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubscriptionInput, Members: &mUpdateSubscriptionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[129]})
-var sUpdateSubscriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubscriptionOutput, Members: &mUpdateSubscriptionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[135]})
+var sApprovePaidSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovePaidSubscription, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eApprovePaidSubscription})
+var sAssociateResourcesToSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResourcesToSubscription, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eAssociateResourcesToSubscription})
+var sCancelSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelSubscription, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCancelSubscription})
+var sCancelSubscriptionChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelSubscriptionChange, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCancelSubscriptionChange})
+var sCreateSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscription, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreateSubscription})
+var sDisassociateResourcesFromSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateResourcesFromSubscription, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateResourcesFromSubscription})
+var sGetSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSubscription, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eGetSubscription})
+var sListSubscriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscriptions, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eListSubscriptions})
+var sUpdateSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubscription, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eUpdateSubscription})
+var s_AWSPricingPlanManager = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSPricingPlanManager, Type: smithy.ShapeTypeService, Ext: &e_AWSPricingPlanManager})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sApprovalMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalMode, Members: &mApprovalMode, Type: smithy.ShapeTypeEnum, Ext: &eApprovalMode})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var s_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &e_IdempotencyToken})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var s_ResourceArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArns, Members: &m_ResourceArns, Type: smithy.ShapeTypeList, Ext: &e_ResourceArns})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sScheduledChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduledChange, Members: &mScheduledChange, Type: smithy.ShapeTypeStructure, Ext: &eScheduledChange})
+var sScheduledChangeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduledChangeType, Members: &mScheduledChangeType, Type: smithy.ShapeTypeEnum, Ext: &eScheduledChangeType})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eStatus})
+var sSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscription, Members: &mSubscription, Type: smithy.ShapeTypeStructure, Ext: &eSubscription})
+var s_SubscriptionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString, Ext: &e_SubscriptionArn})
+var sSubscriptionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscriptionSummary, Members: &mSubscriptionSummary, Type: smithy.ShapeTypeStructure, Ext: &eSubscriptionSummary})
+var s_SubscriptionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubscriptionSummaryList, Members: &m_SubscriptionSummaryList, Type: smithy.ShapeTypeList, Ext: &e_SubscriptionSummaryList})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sApprovePaidSubscriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovePaidSubscriptionInput, Members: &mApprovePaidSubscriptionInput, Type: smithy.ShapeTypeStructure, Ext: &eApprovePaidSubscriptionInput})
+var sApprovePaidSubscriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovePaidSubscriptionOutput, Members: &mApprovePaidSubscriptionOutput, Type: smithy.ShapeTypeStructure, Ext: &eApprovePaidSubscriptionOutput})
+var sAssociateResourcesToSubscriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResourcesToSubscriptionInput, Members: &mAssociateResourcesToSubscriptionInput, Type: smithy.ShapeTypeStructure, Ext: &eAssociateResourcesToSubscriptionInput})
+var sAssociateResourcesToSubscriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResourcesToSubscriptionOutput, Members: &mAssociateResourcesToSubscriptionOutput, Type: smithy.ShapeTypeStructure, Ext: &eAssociateResourcesToSubscriptionOutput})
+var sCancelSubscriptionChangeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelSubscriptionChangeInput, Members: &mCancelSubscriptionChangeInput, Type: smithy.ShapeTypeStructure, Ext: &eCancelSubscriptionChangeInput})
+var sCancelSubscriptionChangeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelSubscriptionChangeOutput, Members: &mCancelSubscriptionChangeOutput, Type: smithy.ShapeTypeStructure, Ext: &eCancelSubscriptionChangeOutput})
+var sCancelSubscriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelSubscriptionInput, Members: &mCancelSubscriptionInput, Type: smithy.ShapeTypeStructure, Ext: &eCancelSubscriptionInput})
+var sCancelSubscriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelSubscriptionOutput, Members: &mCancelSubscriptionOutput, Type: smithy.ShapeTypeStructure, Ext: &eCancelSubscriptionOutput})
+var sCreateSubscriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscriptionInput, Members: &mCreateSubscriptionInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateSubscriptionInput})
+var sCreateSubscriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscriptionOutput, Members: &mCreateSubscriptionOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateSubscriptionOutput})
+var sDisassociateResourcesFromSubscriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateResourcesFromSubscriptionInput, Members: &mDisassociateResourcesFromSubscriptionInput, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateResourcesFromSubscriptionInput})
+var sDisassociateResourcesFromSubscriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateResourcesFromSubscriptionOutput, Members: &mDisassociateResourcesFromSubscriptionOutput, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateResourcesFromSubscriptionOutput})
+var sGetSubscriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSubscriptionInput, Members: &mGetSubscriptionInput, Type: smithy.ShapeTypeStructure, Ext: &eGetSubscriptionInput})
+var sGetSubscriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSubscriptionOutput, Members: &mGetSubscriptionOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetSubscriptionOutput})
+var sListSubscriptionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscriptionsInput, Members: &mListSubscriptionsInput, Type: smithy.ShapeTypeStructure, Ext: &eListSubscriptionsInput})
+var sListSubscriptionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscriptionsOutput, Members: &mListSubscriptionsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListSubscriptionsOutput})
+var sUpdateSubscriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubscriptionInput, Members: &mUpdateSubscriptionInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSubscriptionInput})
+var sUpdateSubscriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubscriptionOutput, Members: &mUpdateSubscriptionOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSubscriptionOutput})
 
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[11]})
-var sApprovalMode_MANUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[13]})
-var sApprovalMode_IMMEDIATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMMEDIATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[14]})
-var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[16]})
-var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[17]})
-var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[20]})
-var s_ResourceArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[22]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[24]})
-var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[25]})
-var sScheduledChange_changeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "changeType", ID: &iScheduledChangeType, Members: &mScheduledChangeType, Type: smithy.ShapeTypeEnum, Ext: &ext[27]})
-var sScheduledChange_effectiveDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "effectiveDate", ID: &pTimestamp, Traits: &t13, Type: smithy.ShapeTypeTimestamp, Ext: &ext[28]})
-var sScheduledChange_planTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planTier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[29]})
-var sScheduledChange_usageLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageLevel", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[30]})
-var sScheduledChangeType_DOWNGRADE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOWNGRADE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[32]})
-var sScheduledChangeType_CANCELLATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[33]})
-var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var sStatus_PENDING_APPROVAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_APPROVAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var sStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[38]})
-var sStatus_SYNC_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYNC_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[39]})
-var sStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[40]})
-var sSubscription_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var sSubscription_planFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planFamily", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[43]})
-var sSubscription_planTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planTier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var sSubscription_usageLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageLevel", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var sSubscription_scheduledChange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledChange", ID: &iScheduledChange, Members: &mScheduledChange, Type: smithy.ShapeTypeStructure, Ext: &ext[46]})
-var sSubscription_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[47]})
-var sSubscription_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[48]})
-var sSubscription_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArns, Members: &m_ResourceArns, Type: smithy.ShapeTypeList, Ext: &ext[49]})
-var sSubscription_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t13, Type: smithy.ShapeTypeTimestamp, Ext: &ext[50]})
-var sSubscription_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Traits: &t13, Type: smithy.ShapeTypeTimestamp, Ext: &ext[51]})
-var sSubscriptionSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var sSubscriptionSummary_planFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planFamily", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var sSubscriptionSummary_planTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planTier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[56]})
-var sSubscriptionSummary_usageLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageLevel", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var sSubscriptionSummary_scheduledChange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledChange", ID: &iScheduledChange, Members: &mScheduledChange, Type: smithy.ShapeTypeStructure, Ext: &ext[58]})
-var sSubscriptionSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[59]})
-var sSubscriptionSummary_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[60]})
-var sSubscriptionSummary_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArns, Members: &m_ResourceArns, Type: smithy.ShapeTypeList, Ext: &ext[61]})
-var sSubscriptionSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t13, Type: smithy.ShapeTypeTimestamp, Ext: &ext[62]})
-var sSubscriptionSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Traits: &t13, Type: smithy.ShapeTypeTimestamp, Ext: &ext[63]})
-var sSubscriptionSummary_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[64]})
-var s_SubscriptionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSubscriptionSummary, Members: &mSubscriptionSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[66]})
-var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[68]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[70]})
-var sValidationException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[71]})
-var sApprovePaidSubscriptionInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString, Ext: &ext[73]})
-var sApprovePaidSubscriptionInput_ifMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ifMatch", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[74]})
-var sApprovePaidSubscriptionInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &ext[75]})
-var sApprovePaidSubscriptionOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscription, Members: &mSubscription, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
-var sApprovePaidSubscriptionOutput_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[78]})
-var sAssociateResourcesToSubscriptionInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString, Ext: &ext[80]})
-var sAssociateResourcesToSubscriptionInput_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArns, Members: &m_ResourceArns, Type: smithy.ShapeTypeList, Ext: &ext[81]})
-var sAssociateResourcesToSubscriptionInput_ifMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ifMatch", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[82]})
-var sAssociateResourcesToSubscriptionInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var sAssociateResourcesToSubscriptionOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscription, Members: &mSubscription, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &ext[85]})
-var sAssociateResourcesToSubscriptionOutput_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[86]})
-var sCancelSubscriptionChangeInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString, Ext: &ext[88]})
-var sCancelSubscriptionChangeInput_ifMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ifMatch", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[89]})
-var sCancelSubscriptionChangeInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &ext[90]})
-var sCancelSubscriptionChangeOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscription, Members: &mSubscription, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &ext[92]})
-var sCancelSubscriptionChangeOutput_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[93]})
-var sCancelSubscriptionInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString, Ext: &ext[95]})
-var sCancelSubscriptionInput_ifMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ifMatch", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[96]})
-var sCancelSubscriptionInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &ext[97]})
-var sCancelSubscriptionOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscription, Members: &mSubscription, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &ext[99]})
-var sCancelSubscriptionOutput_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[100]})
-var sCreateSubscriptionInput_planFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planFamily", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var sCreateSubscriptionInput_planTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planTier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[103]})
-var sCreateSubscriptionInput_usageLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageLevel", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[104]})
-var sCreateSubscriptionInput_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArns, Members: &m_ResourceArns, Type: smithy.ShapeTypeList, Ext: &ext[105]})
-var sCreateSubscriptionInput_approvalMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalMode", ID: &iApprovalMode, Members: &mApprovalMode, Type: smithy.ShapeTypeEnum, Ext: &ext[106]})
-var sCreateSubscriptionInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &ext[107]})
-var sCreateSubscriptionOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscription, Members: &mSubscription, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &ext[109]})
-var sCreateSubscriptionOutput_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[110]})
-var sDisassociateResourcesFromSubscriptionInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString, Ext: &ext[112]})
-var sDisassociateResourcesFromSubscriptionInput_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArns, Members: &m_ResourceArns, Type: smithy.ShapeTypeList, Ext: &ext[113]})
-var sDisassociateResourcesFromSubscriptionInput_ifMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ifMatch", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[114]})
-var sDisassociateResourcesFromSubscriptionInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &ext[115]})
-var sDisassociateResourcesFromSubscriptionOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscription, Members: &mSubscription, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &ext[117]})
-var sDisassociateResourcesFromSubscriptionOutput_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[118]})
-var sGetSubscriptionInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString, Ext: &ext[120]})
-var sGetSubscriptionOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscription, Members: &mSubscription, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &ext[122]})
-var sGetSubscriptionOutput_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[123]})
-var sListSubscriptionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[125]})
-var sListSubscriptionsOutput_subscriptionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriptionSummaries", ID: &i_SubscriptionSummaryList, Members: &m_SubscriptionSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[127]})
-var sListSubscriptionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[128]})
-var sUpdateSubscriptionInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var sUpdateSubscriptionInput_planTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planTier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[131]})
-var sUpdateSubscriptionInput_usageLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageLevel", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[132]})
-var sUpdateSubscriptionInput_ifMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ifMatch", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[133]})
-var sUpdateSubscriptionInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &ext[134]})
-var sUpdateSubscriptionOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscription, Members: &mSubscription, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &ext[136]})
-var sUpdateSubscriptionOutput_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[137]})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sApprovalMode_MANUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApprovalMode_MANUAL})
+var sApprovalMode_IMMEDIATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMMEDIATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApprovalMode_IMMEDIATE})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceId})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var s_ResourceArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_ResourceArns_member})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceId})
+var sScheduledChange_changeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "changeType", ID: &iScheduledChangeType, Members: &mScheduledChangeType, Type: smithy.ShapeTypeEnum, Ext: &eScheduledChange_changeType})
+var sScheduledChange_effectiveDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "effectiveDate", ID: &pTimestamp, Traits: &t13, Type: smithy.ShapeTypeTimestamp, Ext: &eScheduledChange_effectiveDate})
+var sScheduledChange_planTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planTier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eScheduledChange_planTier})
+var sScheduledChange_usageLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageLevel", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eScheduledChange_usageLevel})
+var sScheduledChangeType_DOWNGRADE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOWNGRADE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScheduledChangeType_DOWNGRADE})
+var sScheduledChangeType_CANCELLATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScheduledChangeType_CANCELLATION})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sStatus_PENDING_APPROVAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_APPROVAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_PENDING_APPROVAL})
+var sStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_ACTIVE})
+var sStatus_SYNC_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYNC_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_SYNC_IN_PROGRESS})
+var sStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_FAILED})
+var sSubscription_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString, Ext: &eSubscription_arn})
+var sSubscription_planFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planFamily", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSubscription_planFamily})
+var sSubscription_planTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planTier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSubscription_planTier})
+var sSubscription_usageLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageLevel", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSubscription_usageLevel})
+var sSubscription_scheduledChange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledChange", ID: &iScheduledChange, Members: &mScheduledChange, Type: smithy.ShapeTypeStructure, Ext: &eSubscription_scheduledChange})
+var sSubscription_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eSubscription_status})
+var sSubscription_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSubscription_statusReason})
+var sSubscription_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArns, Members: &m_ResourceArns, Type: smithy.ShapeTypeList, Ext: &eSubscription_resourceArns})
+var sSubscription_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t13, Type: smithy.ShapeTypeTimestamp, Ext: &eSubscription_createdAt})
+var sSubscription_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Traits: &t13, Type: smithy.ShapeTypeTimestamp, Ext: &eSubscription_updatedAt})
+var sSubscriptionSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString, Ext: &eSubscriptionSummary_arn})
+var sSubscriptionSummary_planFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planFamily", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSubscriptionSummary_planFamily})
+var sSubscriptionSummary_planTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planTier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSubscriptionSummary_planTier})
+var sSubscriptionSummary_usageLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageLevel", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSubscriptionSummary_usageLevel})
+var sSubscriptionSummary_scheduledChange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledChange", ID: &iScheduledChange, Members: &mScheduledChange, Type: smithy.ShapeTypeStructure, Ext: &eSubscriptionSummary_scheduledChange})
+var sSubscriptionSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eSubscriptionSummary_status})
+var sSubscriptionSummary_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSubscriptionSummary_statusReason})
+var sSubscriptionSummary_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArns, Members: &m_ResourceArns, Type: smithy.ShapeTypeList, Ext: &eSubscriptionSummary_resourceArns})
+var sSubscriptionSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t13, Type: smithy.ShapeTypeTimestamp, Ext: &eSubscriptionSummary_createdAt})
+var sSubscriptionSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Traits: &t13, Type: smithy.ShapeTypeTimestamp, Ext: &eSubscriptionSummary_updatedAt})
+var sSubscriptionSummary_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSubscriptionSummary_eTag})
+var s_SubscriptionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSubscriptionSummary, Members: &mSubscriptionSummary, Type: smithy.ShapeTypeStructure, Ext: &e_SubscriptionSummaryList_member})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_resourceId})
+var sApprovePaidSubscriptionInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString, Ext: &eApprovePaidSubscriptionInput_arn})
+var sApprovePaidSubscriptionInput_ifMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ifMatch", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eApprovePaidSubscriptionInput_ifMatch})
+var sApprovePaidSubscriptionInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eApprovePaidSubscriptionInput_clientToken})
+var sApprovePaidSubscriptionOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscription, Members: &mSubscription, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eApprovePaidSubscriptionOutput_subscription})
+var sApprovePaidSubscriptionOutput_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eApprovePaidSubscriptionOutput_eTag})
+var sAssociateResourcesToSubscriptionInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString, Ext: &eAssociateResourcesToSubscriptionInput_arn})
+var sAssociateResourcesToSubscriptionInput_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArns, Members: &m_ResourceArns, Type: smithy.ShapeTypeList, Ext: &eAssociateResourcesToSubscriptionInput_resourceArns})
+var sAssociateResourcesToSubscriptionInput_ifMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ifMatch", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eAssociateResourcesToSubscriptionInput_ifMatch})
+var sAssociateResourcesToSubscriptionInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eAssociateResourcesToSubscriptionInput_clientToken})
+var sAssociateResourcesToSubscriptionOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscription, Members: &mSubscription, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eAssociateResourcesToSubscriptionOutput_subscription})
+var sAssociateResourcesToSubscriptionOutput_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eAssociateResourcesToSubscriptionOutput_eTag})
+var sCancelSubscriptionChangeInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString, Ext: &eCancelSubscriptionChangeInput_arn})
+var sCancelSubscriptionChangeInput_ifMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ifMatch", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eCancelSubscriptionChangeInput_ifMatch})
+var sCancelSubscriptionChangeInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCancelSubscriptionChangeInput_clientToken})
+var sCancelSubscriptionChangeOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscription, Members: &mSubscription, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eCancelSubscriptionChangeOutput_subscription})
+var sCancelSubscriptionChangeOutput_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eCancelSubscriptionChangeOutput_eTag})
+var sCancelSubscriptionInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString, Ext: &eCancelSubscriptionInput_arn})
+var sCancelSubscriptionInput_ifMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ifMatch", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eCancelSubscriptionInput_ifMatch})
+var sCancelSubscriptionInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCancelSubscriptionInput_clientToken})
+var sCancelSubscriptionOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscription, Members: &mSubscription, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eCancelSubscriptionOutput_subscription})
+var sCancelSubscriptionOutput_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eCancelSubscriptionOutput_eTag})
+var sCreateSubscriptionInput_planFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planFamily", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateSubscriptionInput_planFamily})
+var sCreateSubscriptionInput_planTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planTier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateSubscriptionInput_planTier})
+var sCreateSubscriptionInput_usageLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageLevel", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateSubscriptionInput_usageLevel})
+var sCreateSubscriptionInput_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArns, Members: &m_ResourceArns, Type: smithy.ShapeTypeList, Ext: &eCreateSubscriptionInput_resourceArns})
+var sCreateSubscriptionInput_approvalMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalMode", ID: &iApprovalMode, Members: &mApprovalMode, Type: smithy.ShapeTypeEnum, Ext: &eCreateSubscriptionInput_approvalMode})
+var sCreateSubscriptionInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateSubscriptionInput_clientToken})
+var sCreateSubscriptionOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscription, Members: &mSubscription, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eCreateSubscriptionOutput_subscription})
+var sCreateSubscriptionOutput_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eCreateSubscriptionOutput_eTag})
+var sDisassociateResourcesFromSubscriptionInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString, Ext: &eDisassociateResourcesFromSubscriptionInput_arn})
+var sDisassociateResourcesFromSubscriptionInput_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArns, Members: &m_ResourceArns, Type: smithy.ShapeTypeList, Ext: &eDisassociateResourcesFromSubscriptionInput_resourceArns})
+var sDisassociateResourcesFromSubscriptionInput_ifMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ifMatch", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eDisassociateResourcesFromSubscriptionInput_ifMatch})
+var sDisassociateResourcesFromSubscriptionInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eDisassociateResourcesFromSubscriptionInput_clientToken})
+var sDisassociateResourcesFromSubscriptionOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscription, Members: &mSubscription, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateResourcesFromSubscriptionOutput_subscription})
+var sDisassociateResourcesFromSubscriptionOutput_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eDisassociateResourcesFromSubscriptionOutput_eTag})
+var sGetSubscriptionInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString, Ext: &eGetSubscriptionInput_arn})
+var sGetSubscriptionOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscription, Members: &mSubscription, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eGetSubscriptionOutput_subscription})
+var sGetSubscriptionOutput_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eGetSubscriptionOutput_eTag})
+var sListSubscriptionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListSubscriptionsInput_nextToken})
+var sListSubscriptionsOutput_subscriptionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriptionSummaries", ID: &i_SubscriptionSummaryList, Members: &m_SubscriptionSummaryList, Type: smithy.ShapeTypeList, Ext: &eListSubscriptionsOutput_subscriptionSummaries})
+var sListSubscriptionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListSubscriptionsOutput_nextToken})
+var sUpdateSubscriptionInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString, Ext: &eUpdateSubscriptionInput_arn})
+var sUpdateSubscriptionInput_planTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planTier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateSubscriptionInput_planTier})
+var sUpdateSubscriptionInput_usageLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageLevel", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateSubscriptionInput_usageLevel})
+var sUpdateSubscriptionInput_ifMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ifMatch", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eUpdateSubscriptionInput_ifMatch})
+var sUpdateSubscriptionInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eUpdateSubscriptionInput_clientToken})
+var sUpdateSubscriptionOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscription, Members: &mSubscription, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSubscriptionOutput_subscription})
+var sUpdateSubscriptionOutput_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eUpdateSubscriptionOutput_eTag})
 
 var ApprovePaidSubscription = &sApprovePaidSubscription
 

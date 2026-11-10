@@ -7,9 +7,97 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [89]smithy.SchemaExtensions
+var (
+	eDeleteKey                                      smithy.SchemaExtensions
+	eDescribeKeyValueStore                          smithy.SchemaExtensions
+	eGetKey                                         smithy.SchemaExtensions
+	eListKeys                                       smithy.SchemaExtensions
+	ePutKey                                         smithy.SchemaExtensions
+	eUpdateKeys                                     smithy.SchemaExtensions
+	e_CloudFrontKeyValueStore                       smithy.SchemaExtensions
+	eAccessDeniedException                          smithy.SchemaExtensions
+	eAccessDeniedException_Message                  smithy.SchemaExtensions
+	eConflictException                              smithy.SchemaExtensions
+	eConflictException_Message                      smithy.SchemaExtensions
+	eDeleteKeyRequestListItem                       smithy.SchemaExtensions
+	eDeleteKeyRequestListItem_Key                   smithy.SchemaExtensions
+	e_DeleteKeyRequestsList                         smithy.SchemaExtensions
+	e_DeleteKeyRequestsList_member                  smithy.SchemaExtensions
+	e_Etag                                          smithy.SchemaExtensions
+	eInternalServerException                        smithy.SchemaExtensions
+	eInternalServerException_Message                smithy.SchemaExtensions
+	e_Key                                           smithy.SchemaExtensions
+	e_KvsARN                                        smithy.SchemaExtensions
+	e_ListKeysResponseList                          smithy.SchemaExtensions
+	e_ListKeysResponseList_member                   smithy.SchemaExtensions
+	eListKeysResponseListItem                       smithy.SchemaExtensions
+	eListKeysResponseListItem_Key                   smithy.SchemaExtensions
+	eListKeysResponseListItem_Value                 smithy.SchemaExtensions
+	ePutKeyRequestListItem                          smithy.SchemaExtensions
+	ePutKeyRequestListItem_Key                      smithy.SchemaExtensions
+	ePutKeyRequestListItem_Value                    smithy.SchemaExtensions
+	e_PutKeyRequestsList                            smithy.SchemaExtensions
+	e_PutKeyRequestsList_member                     smithy.SchemaExtensions
+	eResourceNotFoundException                      smithy.SchemaExtensions
+	eResourceNotFoundException_Message              smithy.SchemaExtensions
+	eServiceQuotaExceededException                  smithy.SchemaExtensions
+	eServiceQuotaExceededException_Message          smithy.SchemaExtensions
+	eValidationException                            smithy.SchemaExtensions
+	eValidationException_Message                    smithy.SchemaExtensions
+	e_Value                                         smithy.SchemaExtensions
+	eDeleteKeyRequest                               smithy.SchemaExtensions
+	eDeleteKeyRequest_KvsARN                        smithy.SchemaExtensions
+	eDeleteKeyRequest_Key                           smithy.SchemaExtensions
+	eDeleteKeyRequest_IfMatch                       smithy.SchemaExtensions
+	eDeleteKeyResponse                              smithy.SchemaExtensions
+	eDeleteKeyResponse_ItemCount                    smithy.SchemaExtensions
+	eDeleteKeyResponse_TotalSizeInBytes             smithy.SchemaExtensions
+	eDeleteKeyResponse_ETag                         smithy.SchemaExtensions
+	eDescribeKeyValueStoreRequest                   smithy.SchemaExtensions
+	eDescribeKeyValueStoreRequest_KvsARN            smithy.SchemaExtensions
+	eDescribeKeyValueStoreResponse                  smithy.SchemaExtensions
+	eDescribeKeyValueStoreResponse_ItemCount        smithy.SchemaExtensions
+	eDescribeKeyValueStoreResponse_TotalSizeInBytes smithy.SchemaExtensions
+	eDescribeKeyValueStoreResponse_KvsARN           smithy.SchemaExtensions
+	eDescribeKeyValueStoreResponse_Created          smithy.SchemaExtensions
+	eDescribeKeyValueStoreResponse_ETag             smithy.SchemaExtensions
+	eDescribeKeyValueStoreResponse_LastModified     smithy.SchemaExtensions
+	eDescribeKeyValueStoreResponse_Status           smithy.SchemaExtensions
+	eDescribeKeyValueStoreResponse_FailureReason    smithy.SchemaExtensions
+	eGetKeyRequest                                  smithy.SchemaExtensions
+	eGetKeyRequest_KvsARN                           smithy.SchemaExtensions
+	eGetKeyRequest_Key                              smithy.SchemaExtensions
+	eGetKeyResponse                                 smithy.SchemaExtensions
+	eGetKeyResponse_Key                             smithy.SchemaExtensions
+	eGetKeyResponse_Value                           smithy.SchemaExtensions
+	eGetKeyResponse_ItemCount                       smithy.SchemaExtensions
+	eGetKeyResponse_TotalSizeInBytes                smithy.SchemaExtensions
+	eListKeysRequest                                smithy.SchemaExtensions
+	eListKeysRequest_KvsARN                         smithy.SchemaExtensions
+	eListKeysRequest_NextToken                      smithy.SchemaExtensions
+	eListKeysRequest_MaxResults                     smithy.SchemaExtensions
+	eListKeysResponse                               smithy.SchemaExtensions
+	eListKeysResponse_NextToken                     smithy.SchemaExtensions
+	eListKeysResponse_Items                         smithy.SchemaExtensions
+	ePutKeyRequest                                  smithy.SchemaExtensions
+	ePutKeyRequest_Key                              smithy.SchemaExtensions
+	ePutKeyRequest_Value                            smithy.SchemaExtensions
+	ePutKeyRequest_KvsARN                           smithy.SchemaExtensions
+	ePutKeyRequest_IfMatch                          smithy.SchemaExtensions
+	ePutKeyResponse                                 smithy.SchemaExtensions
+	ePutKeyResponse_ItemCount                       smithy.SchemaExtensions
+	ePutKeyResponse_TotalSizeInBytes                smithy.SchemaExtensions
+	ePutKeyResponse_ETag                            smithy.SchemaExtensions
+	eUpdateKeysRequest                              smithy.SchemaExtensions
+	eUpdateKeysRequest_KvsARN                       smithy.SchemaExtensions
+	eUpdateKeysRequest_IfMatch                      smithy.SchemaExtensions
+	eUpdateKeysRequest_Puts                         smithy.SchemaExtensions
+	eUpdateKeysRequest_Deletes                      smithy.SchemaExtensions
+	eUpdateKeysResponse                             smithy.SchemaExtensions
+	eUpdateKeysResponse_ItemCount                   smithy.SchemaExtensions
+	eUpdateKeysResponse_TotalSizeInBytes            smithy.SchemaExtensions
+	eUpdateKeysResponse_ETag                        smithy.SchemaExtensions
+)
 
 var (
 	iDeleteKey                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudfrontkeyvaluestore", Name: "DeleteKey"}
@@ -111,96 +199,96 @@ var mPutKeyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutKeyRespon
 var mUpdateKeysRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateKeysRequest_KvsARN, &sUpdateKeysRequest_IfMatch, &sUpdateKeysRequest_Puts, &sUpdateKeysRequest_Deletes}}
 var mUpdateKeysResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateKeysResponse_ItemCount, &sUpdateKeysResponse_TotalSizeInBytes, &sUpdateKeysResponse_ETag}}
 
-var sDeleteKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteKey, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sDescribeKeyValueStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeKeyValueStore, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sGetKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKey, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sListKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeys, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sPutKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutKey, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sUpdateKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateKeys, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var s_CloudFrontKeyValueStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudFrontKeyValueStore, Type: smithy.ShapeTypeService, Ext: &ext[6]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &ext[7]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &ext[9]})
-var sDeleteKeyRequestListItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteKeyRequestListItem, Members: &mDeleteKeyRequestListItem, Type: smithy.ShapeTypeStructure, Ext: &ext[11]})
-var s_DeleteKeyRequestsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeleteKeyRequestsList, Members: &m_DeleteKeyRequestsList, Type: smithy.ShapeTypeList, Ext: &ext[13]})
-var s_Etag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Etag, Type: smithy.ShapeTypeString, Ext: &ext[15]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &ext[16]})
-var s_Key = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Key, Type: smithy.ShapeTypeString, Ext: &ext[18]})
-var s_KvsARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KvsARN, Type: smithy.ShapeTypeString, Ext: &ext[19]})
-var s_ListKeysResponseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListKeysResponseList, Members: &m_ListKeysResponseList, Type: smithy.ShapeTypeList, Ext: &ext[20]})
-var sListKeysResponseListItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeysResponseListItem, Members: &mListKeysResponseListItem, Type: smithy.ShapeTypeStructure, Ext: &ext[22]})
-var sPutKeyRequestListItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutKeyRequestListItem, Members: &mPutKeyRequestListItem, Type: smithy.ShapeTypeStructure, Ext: &ext[25]})
-var s_PutKeyRequestsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PutKeyRequestsList, Members: &m_PutKeyRequestsList, Type: smithy.ShapeTypeList, Ext: &ext[28]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &ext[30]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &ext[32]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &ext[34]})
-var s_Value = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Value, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var sDeleteKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteKeyRequest, Members: &mDeleteKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var sDeleteKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteKeyResponse, Members: &mDeleteKeyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[41]})
-var sDescribeKeyValueStoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeKeyValueStoreRequest, Members: &mDescribeKeyValueStoreRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[45]})
-var sDescribeKeyValueStoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeKeyValueStoreResponse, Members: &mDescribeKeyValueStoreResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[47]})
-var sGetKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyRequest, Members: &mGetKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[56]})
-var sGetKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyResponse, Members: &mGetKeyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[59]})
-var sListKeysRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeysRequest, Members: &mListKeysRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[64]})
-var sListKeysResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeysResponse, Members: &mListKeysResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var sPutKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutKeyRequest, Members: &mPutKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[71]})
-var sPutKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutKeyResponse, Members: &mPutKeyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[76]})
-var sUpdateKeysRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateKeysRequest, Members: &mUpdateKeysRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var sUpdateKeysResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateKeysResponse, Members: &mUpdateKeysResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[85]})
+var sDeleteKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteKey, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eDeleteKey})
+var sDescribeKeyValueStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeKeyValueStore, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eDescribeKeyValueStore})
+var sGetKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKey, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eGetKey})
+var sListKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeys, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eListKeys})
+var sPutKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutKey, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ePutKey})
+var sUpdateKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateKeys, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eUpdateKeys})
+var s_CloudFrontKeyValueStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudFrontKeyValueStore, Type: smithy.ShapeTypeService, Ext: &e_CloudFrontKeyValueStore})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sDeleteKeyRequestListItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteKeyRequestListItem, Members: &mDeleteKeyRequestListItem, Type: smithy.ShapeTypeStructure, Ext: &eDeleteKeyRequestListItem})
+var s_DeleteKeyRequestsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeleteKeyRequestsList, Members: &m_DeleteKeyRequestsList, Type: smithy.ShapeTypeList, Ext: &e_DeleteKeyRequestsList})
+var s_Etag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Etag, Type: smithy.ShapeTypeString, Ext: &e_Etag})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var s_Key = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Key, Type: smithy.ShapeTypeString, Ext: &e_Key})
+var s_KvsARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KvsARN, Type: smithy.ShapeTypeString, Ext: &e_KvsARN})
+var s_ListKeysResponseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListKeysResponseList, Members: &m_ListKeysResponseList, Type: smithy.ShapeTypeList, Ext: &e_ListKeysResponseList})
+var sListKeysResponseListItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeysResponseListItem, Members: &mListKeysResponseListItem, Type: smithy.ShapeTypeStructure, Ext: &eListKeysResponseListItem})
+var sPutKeyRequestListItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutKeyRequestListItem, Members: &mPutKeyRequestListItem, Type: smithy.ShapeTypeStructure, Ext: &ePutKeyRequestListItem})
+var s_PutKeyRequestsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PutKeyRequestsList, Members: &m_PutKeyRequestsList, Type: smithy.ShapeTypeList, Ext: &e_PutKeyRequestsList})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var s_Value = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Value, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &e_Value})
+var sDeleteKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteKeyRequest, Members: &mDeleteKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteKeyRequest})
+var sDeleteKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteKeyResponse, Members: &mDeleteKeyResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteKeyResponse})
+var sDescribeKeyValueStoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeKeyValueStoreRequest, Members: &mDescribeKeyValueStoreRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeKeyValueStoreRequest})
+var sDescribeKeyValueStoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeKeyValueStoreResponse, Members: &mDescribeKeyValueStoreResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeKeyValueStoreResponse})
+var sGetKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyRequest, Members: &mGetKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetKeyRequest})
+var sGetKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyResponse, Members: &mGetKeyResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetKeyResponse})
+var sListKeysRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeysRequest, Members: &mListKeysRequest, Type: smithy.ShapeTypeStructure, Ext: &eListKeysRequest})
+var sListKeysResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeysResponse, Members: &mListKeysResponse, Type: smithy.ShapeTypeStructure, Ext: &eListKeysResponse})
+var sPutKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutKeyRequest, Members: &mPutKeyRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutKeyRequest})
+var sPutKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutKeyResponse, Members: &mPutKeyResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutKeyResponse})
+var sUpdateKeysRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateKeysRequest, Members: &mUpdateKeysRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateKeysRequest})
+var sUpdateKeysResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateKeysResponse, Members: &mUpdateKeysResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateKeysResponse})
 
-var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[8]})
-var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[10]})
-var sDeleteKeyRequestListItem_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_Key, Type: smithy.ShapeTypeString, Ext: &ext[12]})
-var s_DeleteKeyRequestsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeleteKeyRequestListItem, Members: &mDeleteKeyRequestListItem, Type: smithy.ShapeTypeStructure, Ext: &ext[14]})
-var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[17]})
-var s_ListKeysResponseList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListKeysResponseListItem, Members: &mListKeysResponseListItem, Type: smithy.ShapeTypeStructure, Ext: &ext[21]})
-var sListKeysResponseListItem_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_Key, Type: smithy.ShapeTypeString, Ext: &ext[23]})
-var sListKeysResponseListItem_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_Value, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[24]})
-var sPutKeyRequestListItem_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_Key, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var sPutKeyRequestListItem_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_Value, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[27]})
-var s_PutKeyRequestsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPutKeyRequestListItem, Members: &mPutKeyRequestListItem, Type: smithy.ShapeTypeStructure, Ext: &ext[29]})
-var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var sDeleteKeyRequest_KvsARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KvsARN", ID: &i_KvsARN, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[38]})
-var sDeleteKeyRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_Key, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &ext[39]})
-var sDeleteKeyRequest_IfMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IfMatch", ID: &i_Etag, Traits: &t16, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var sDeleteKeyResponse_ItemCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ItemCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[42]})
-var sDeleteKeyResponse_TotalSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalSizeInBytes", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[43]})
-var sDeleteKeyResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_Etag, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var sDescribeKeyValueStoreRequest_KvsARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KvsARN", ID: &i_KvsARN, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[46]})
-var sDescribeKeyValueStoreResponse_ItemCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ItemCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[48]})
-var sDescribeKeyValueStoreResponse_TotalSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalSizeInBytes", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[49]})
-var sDescribeKeyValueStoreResponse_KvsARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KvsARN", ID: &i_KvsARN, Type: smithy.ShapeTypeString, Ext: &ext[50]})
-var sDescribeKeyValueStoreResponse_Created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Created", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[51]})
-var sDescribeKeyValueStoreResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_Etag, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var sDescribeKeyValueStoreResponse_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[53]})
-var sDescribeKeyValueStoreResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var sDescribeKeyValueStoreResponse_FailureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var sGetKeyRequest_KvsARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KvsARN", ID: &i_KvsARN, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var sGetKeyRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_Key, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var sGetKeyResponse_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_Key, Type: smithy.ShapeTypeString, Ext: &ext[60]})
-var sGetKeyResponse_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_Value, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[61]})
-var sGetKeyResponse_ItemCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ItemCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[62]})
-var sGetKeyResponse_TotalSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalSizeInBytes", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[63]})
-var sListKeysRequest_KvsARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KvsARN", ID: &i_KvsARN, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[65]})
-var sListKeysRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &ext[66]})
-var sListKeysRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Traits: &t19, Type: smithy.ShapeTypeInteger, Ext: &ext[67]})
-var sListKeysResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var sListKeysResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_ListKeysResponseList, Members: &m_ListKeysResponseList, Type: smithy.ShapeTypeList, Ext: &ext[70]})
-var sPutKeyRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_Key, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &ext[72]})
-var sPutKeyRequest_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_Value, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[73]})
-var sPutKeyRequest_KvsARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KvsARN", ID: &i_KvsARN, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[74]})
-var sPutKeyRequest_IfMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IfMatch", ID: &i_Etag, Traits: &t16, Type: smithy.ShapeTypeString, Ext: &ext[75]})
-var sPutKeyResponse_ItemCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ItemCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[77]})
-var sPutKeyResponse_TotalSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalSizeInBytes", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[78]})
-var sPutKeyResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_Etag, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[79]})
-var sUpdateKeysRequest_KvsARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KvsARN", ID: &i_KvsARN, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[81]})
-var sUpdateKeysRequest_IfMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IfMatch", ID: &i_Etag, Traits: &t16, Type: smithy.ShapeTypeString, Ext: &ext[82]})
-var sUpdateKeysRequest_Puts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Puts", ID: &i_PutKeyRequestsList, Members: &m_PutKeyRequestsList, Type: smithy.ShapeTypeList, Ext: &ext[83]})
-var sUpdateKeysRequest_Deletes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deletes", ID: &i_DeleteKeyRequestsList, Members: &m_DeleteKeyRequestsList, Type: smithy.ShapeTypeList, Ext: &ext[84]})
-var sUpdateKeysResponse_ItemCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ItemCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[86]})
-var sUpdateKeysResponse_TotalSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalSizeInBytes", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[87]})
-var sUpdateKeysResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_Etag, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[88]})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var sDeleteKeyRequestListItem_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_Key, Type: smithy.ShapeTypeString, Ext: &eDeleteKeyRequestListItem_Key})
+var s_DeleteKeyRequestsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeleteKeyRequestListItem, Members: &mDeleteKeyRequestListItem, Type: smithy.ShapeTypeStructure, Ext: &e_DeleteKeyRequestsList_member})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var s_ListKeysResponseList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListKeysResponseListItem, Members: &mListKeysResponseListItem, Type: smithy.ShapeTypeStructure, Ext: &e_ListKeysResponseList_member})
+var sListKeysResponseListItem_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_Key, Type: smithy.ShapeTypeString, Ext: &eListKeysResponseListItem_Key})
+var sListKeysResponseListItem_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_Value, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eListKeysResponseListItem_Value})
+var sPutKeyRequestListItem_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_Key, Type: smithy.ShapeTypeString, Ext: &ePutKeyRequestListItem_Key})
+var sPutKeyRequestListItem_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_Value, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ePutKeyRequestListItem_Value})
+var s_PutKeyRequestsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPutKeyRequestListItem, Members: &mPutKeyRequestListItem, Type: smithy.ShapeTypeStructure, Ext: &e_PutKeyRequestsList_member})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_Message})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sDeleteKeyRequest_KvsARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KvsARN", ID: &i_KvsARN, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eDeleteKeyRequest_KvsARN})
+var sDeleteKeyRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_Key, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &eDeleteKeyRequest_Key})
+var sDeleteKeyRequest_IfMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IfMatch", ID: &i_Etag, Traits: &t16, Type: smithy.ShapeTypeString, Ext: &eDeleteKeyRequest_IfMatch})
+var sDeleteKeyResponse_ItemCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ItemCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eDeleteKeyResponse_ItemCount})
+var sDeleteKeyResponse_TotalSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalSizeInBytes", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eDeleteKeyResponse_TotalSizeInBytes})
+var sDeleteKeyResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_Etag, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eDeleteKeyResponse_ETag})
+var sDescribeKeyValueStoreRequest_KvsARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KvsARN", ID: &i_KvsARN, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eDescribeKeyValueStoreRequest_KvsARN})
+var sDescribeKeyValueStoreResponse_ItemCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ItemCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eDescribeKeyValueStoreResponse_ItemCount})
+var sDescribeKeyValueStoreResponse_TotalSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalSizeInBytes", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eDescribeKeyValueStoreResponse_TotalSizeInBytes})
+var sDescribeKeyValueStoreResponse_KvsARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KvsARN", ID: &i_KvsARN, Type: smithy.ShapeTypeString, Ext: &eDescribeKeyValueStoreResponse_KvsARN})
+var sDescribeKeyValueStoreResponse_Created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Created", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeKeyValueStoreResponse_Created})
+var sDescribeKeyValueStoreResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_Etag, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eDescribeKeyValueStoreResponse_ETag})
+var sDescribeKeyValueStoreResponse_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeKeyValueStoreResponse_LastModified})
+var sDescribeKeyValueStoreResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDescribeKeyValueStoreResponse_Status})
+var sDescribeKeyValueStoreResponse_FailureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDescribeKeyValueStoreResponse_FailureReason})
+var sGetKeyRequest_KvsARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KvsARN", ID: &i_KvsARN, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eGetKeyRequest_KvsARN})
+var sGetKeyRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_Key, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &eGetKeyRequest_Key})
+var sGetKeyResponse_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_Key, Type: smithy.ShapeTypeString, Ext: &eGetKeyResponse_Key})
+var sGetKeyResponse_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_Value, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eGetKeyResponse_Value})
+var sGetKeyResponse_ItemCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ItemCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetKeyResponse_ItemCount})
+var sGetKeyResponse_TotalSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalSizeInBytes", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eGetKeyResponse_TotalSizeInBytes})
+var sListKeysRequest_KvsARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KvsARN", ID: &i_KvsARN, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eListKeysRequest_KvsARN})
+var sListKeysRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &eListKeysRequest_NextToken})
+var sListKeysRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Traits: &t19, Type: smithy.ShapeTypeInteger, Ext: &eListKeysRequest_MaxResults})
+var sListKeysResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListKeysResponse_NextToken})
+var sListKeysResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_ListKeysResponseList, Members: &m_ListKeysResponseList, Type: smithy.ShapeTypeList, Ext: &eListKeysResponse_Items})
+var sPutKeyRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_Key, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &ePutKeyRequest_Key})
+var sPutKeyRequest_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_Value, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ePutKeyRequest_Value})
+var sPutKeyRequest_KvsARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KvsARN", ID: &i_KvsARN, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ePutKeyRequest_KvsARN})
+var sPutKeyRequest_IfMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IfMatch", ID: &i_Etag, Traits: &t16, Type: smithy.ShapeTypeString, Ext: &ePutKeyRequest_IfMatch})
+var sPutKeyResponse_ItemCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ItemCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ePutKeyResponse_ItemCount})
+var sPutKeyResponse_TotalSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalSizeInBytes", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ePutKeyResponse_TotalSizeInBytes})
+var sPutKeyResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_Etag, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ePutKeyResponse_ETag})
+var sUpdateKeysRequest_KvsARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KvsARN", ID: &i_KvsARN, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eUpdateKeysRequest_KvsARN})
+var sUpdateKeysRequest_IfMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IfMatch", ID: &i_Etag, Traits: &t16, Type: smithy.ShapeTypeString, Ext: &eUpdateKeysRequest_IfMatch})
+var sUpdateKeysRequest_Puts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Puts", ID: &i_PutKeyRequestsList, Members: &m_PutKeyRequestsList, Type: smithy.ShapeTypeList, Ext: &eUpdateKeysRequest_Puts})
+var sUpdateKeysRequest_Deletes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deletes", ID: &i_DeleteKeyRequestsList, Members: &m_DeleteKeyRequestsList, Type: smithy.ShapeTypeList, Ext: &eUpdateKeysRequest_Deletes})
+var sUpdateKeysResponse_ItemCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ItemCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eUpdateKeysResponse_ItemCount})
+var sUpdateKeysResponse_TotalSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalSizeInBytes", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eUpdateKeysResponse_TotalSizeInBytes})
+var sUpdateKeysResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_Etag, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eUpdateKeysResponse_ETag})
 
 var DeleteKey = &sDeleteKey
 

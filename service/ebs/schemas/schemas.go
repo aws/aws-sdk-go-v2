@@ -7,9 +7,188 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [180]smithy.SchemaExtensions
+var (
+	eCompleteSnapshot                                                      smithy.SchemaExtensions
+	eGetSnapshotBlock                                                      smithy.SchemaExtensions
+	eListChangedBlocks                                                     smithy.SchemaExtensions
+	eListSnapshotBlocks                                                    smithy.SchemaExtensions
+	ePutSnapshotBlock                                                      smithy.SchemaExtensions
+	eStartSnapshot                                                         smithy.SchemaExtensions
+	e_Ebs                                                                  smithy.SchemaExtensions
+	eAccessDeniedException                                                 smithy.SchemaExtensions
+	eAccessDeniedException_Message                                         smithy.SchemaExtensions
+	eAccessDeniedException_Reason                                          smithy.SchemaExtensions
+	eAccessDeniedExceptionReason                                           smithy.SchemaExtensions
+	eAccessDeniedExceptionReason_UNAUTHORIZED_ACCOUNT                      smithy.SchemaExtensions
+	eAccessDeniedExceptionReason_DEPENDENCY_ACCESS_DENIED                  smithy.SchemaExtensions
+	eBlock                                                                 smithy.SchemaExtensions
+	eBlock_BlockIndex                                                      smithy.SchemaExtensions
+	eBlock_BlockToken                                                      smithy.SchemaExtensions
+	e_BlockData                                                            smithy.SchemaExtensions
+	e_BlockIndex                                                           smithy.SchemaExtensions
+	e_Blocks                                                               smithy.SchemaExtensions
+	e_Blocks_member                                                        smithy.SchemaExtensions
+	e_BlockSize                                                            smithy.SchemaExtensions
+	e_BlockToken                                                           smithy.SchemaExtensions
+	e_Boolean                                                              smithy.SchemaExtensions
+	eChangedBlock                                                          smithy.SchemaExtensions
+	eChangedBlock_BlockIndex                                               smithy.SchemaExtensions
+	eChangedBlock_FirstBlockToken                                          smithy.SchemaExtensions
+	eChangedBlock_SecondBlockToken                                         smithy.SchemaExtensions
+	e_ChangedBlocks                                                        smithy.SchemaExtensions
+	e_ChangedBlocks_member                                                 smithy.SchemaExtensions
+	e_ChangedBlocksCount                                                   smithy.SchemaExtensions
+	e_Checksum                                                             smithy.SchemaExtensions
+	eChecksumAggregationMethod                                             smithy.SchemaExtensions
+	eChecksumAggregationMethod_CHECKSUM_AGGREGATION_LINEAR                 smithy.SchemaExtensions
+	eChecksumAlgorithm                                                     smithy.SchemaExtensions
+	eChecksumAlgorithm_CHECKSUM_ALGORITHM_SHA256                           smithy.SchemaExtensions
+	eConcurrentLimitExceededException                                      smithy.SchemaExtensions
+	eConcurrentLimitExceededException_Message                              smithy.SchemaExtensions
+	eConflictException                                                     smithy.SchemaExtensions
+	eConflictException_Message                                             smithy.SchemaExtensions
+	e_DataLength                                                           smithy.SchemaExtensions
+	e_Description                                                          smithy.SchemaExtensions
+	e_ErrorMessage                                                         smithy.SchemaExtensions
+	e_IdempotencyToken                                                     smithy.SchemaExtensions
+	eInternalServerException                                               smithy.SchemaExtensions
+	eInternalServerException_Message                                       smithy.SchemaExtensions
+	e_KmsKeyArn                                                            smithy.SchemaExtensions
+	e_MaxResults                                                           smithy.SchemaExtensions
+	e_OwnerId                                                              smithy.SchemaExtensions
+	e_PageToken                                                            smithy.SchemaExtensions
+	e_Progress                                                             smithy.SchemaExtensions
+	eRequestThrottledException                                             smithy.SchemaExtensions
+	eRequestThrottledException_Message                                     smithy.SchemaExtensions
+	eRequestThrottledException_Reason                                      smithy.SchemaExtensions
+	eRequestThrottledExceptionReason                                       smithy.SchemaExtensions
+	eRequestThrottledExceptionReason_ACCOUNT_THROTTLED                     smithy.SchemaExtensions
+	eRequestThrottledExceptionReason_DEPENDENCY_REQUEST_THROTTLED          smithy.SchemaExtensions
+	eRequestThrottledExceptionReason_RESOURCE_LEVEL_THROTTLE               smithy.SchemaExtensions
+	eResourceNotFoundException                                             smithy.SchemaExtensions
+	eResourceNotFoundException_Message                                     smithy.SchemaExtensions
+	eResourceNotFoundException_Reason                                      smithy.SchemaExtensions
+	eResourceNotFoundExceptionReason                                       smithy.SchemaExtensions
+	eResourceNotFoundExceptionReason_SNAPSHOT_NOT_FOUND                    smithy.SchemaExtensions
+	eResourceNotFoundExceptionReason_GRANT_NOT_FOUND                       smithy.SchemaExtensions
+	eResourceNotFoundExceptionReason_DEPENDENCY_RESOURCE_NOT_FOUND         smithy.SchemaExtensions
+	eResourceNotFoundExceptionReason_IMAGE_NOT_FOUND                       smithy.SchemaExtensions
+	eServiceQuotaExceededException                                         smithy.SchemaExtensions
+	eServiceQuotaExceededException_Message                                 smithy.SchemaExtensions
+	eServiceQuotaExceededException_Reason                                  smithy.SchemaExtensions
+	eServiceQuotaExceededExceptionReason                                   smithy.SchemaExtensions
+	eServiceQuotaExceededExceptionReason_DEPENDENCY_SERVICE_QUOTA_EXCEEDED smithy.SchemaExtensions
+	e_SnapshotId                                                           smithy.SchemaExtensions
+	eSSEType                                                               smithy.SchemaExtensions
+	eSSEType_SSE_EBS                                                       smithy.SchemaExtensions
+	eSSEType_SSE_KMS                                                       smithy.SchemaExtensions
+	eSSEType_NONE                                                          smithy.SchemaExtensions
+	eStatus                                                                smithy.SchemaExtensions
+	eStatus_COMPLETED                                                      smithy.SchemaExtensions
+	eStatus_PENDING                                                        smithy.SchemaExtensions
+	eStatus_ERROR                                                          smithy.SchemaExtensions
+	eTag                                                                   smithy.SchemaExtensions
+	eTag_Key                                                               smithy.SchemaExtensions
+	eTag_Value                                                             smithy.SchemaExtensions
+	e_TagKey                                                               smithy.SchemaExtensions
+	e_Tags                                                                 smithy.SchemaExtensions
+	e_Tags_member                                                          smithy.SchemaExtensions
+	e_TagValue                                                             smithy.SchemaExtensions
+	e_Timeout                                                              smithy.SchemaExtensions
+	e_TimeStamp                                                            smithy.SchemaExtensions
+	eValidationException                                                   smithy.SchemaExtensions
+	eValidationException_Message                                           smithy.SchemaExtensions
+	eValidationException_Reason                                            smithy.SchemaExtensions
+	eValidationExceptionReason                                             smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_CUSTOMER_KEY                        smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_PAGE_TOKEN                          smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_BLOCK_TOKEN                         smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_GRANT_TOKEN                         smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_SNAPSHOT_ID                         smithy.SchemaExtensions
+	eValidationExceptionReason_UNRELATED_SNAPSHOTS                         smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_BLOCK                               smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_CONTENT_ENCODING                    smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_TAG                                 smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_DEPENDENCY_REQUEST                  smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_PARAMETER_VALUE                     smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_VOLUME_SIZE                         smithy.SchemaExtensions
+	eValidationExceptionReason_CONFLICTING_BLOCK_UPDATE                    smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_IMAGE_ID                            smithy.SchemaExtensions
+	eValidationExceptionReason_WRITE_REQUEST_TIMEOUT                       smithy.SchemaExtensions
+	e_VolumeSize                                                           smithy.SchemaExtensions
+	eCompleteSnapshotRequest                                               smithy.SchemaExtensions
+	eCompleteSnapshotRequest_SnapshotId                                    smithy.SchemaExtensions
+	eCompleteSnapshotRequest_ChangedBlocksCount                            smithy.SchemaExtensions
+	eCompleteSnapshotRequest_Checksum                                      smithy.SchemaExtensions
+	eCompleteSnapshotRequest_ChecksumAlgorithm                             smithy.SchemaExtensions
+	eCompleteSnapshotRequest_ChecksumAggregationMethod                     smithy.SchemaExtensions
+	eCompleteSnapshotResponse                                              smithy.SchemaExtensions
+	eCompleteSnapshotResponse_Status                                       smithy.SchemaExtensions
+	eGetSnapshotBlockRequest                                               smithy.SchemaExtensions
+	eGetSnapshotBlockRequest_SnapshotId                                    smithy.SchemaExtensions
+	eGetSnapshotBlockRequest_BlockIndex                                    smithy.SchemaExtensions
+	eGetSnapshotBlockRequest_BlockToken                                    smithy.SchemaExtensions
+	eGetSnapshotBlockResponse                                              smithy.SchemaExtensions
+	eGetSnapshotBlockResponse_DataLength                                   smithy.SchemaExtensions
+	eGetSnapshotBlockResponse_BlockData                                    smithy.SchemaExtensions
+	eGetSnapshotBlockResponse_Checksum                                     smithy.SchemaExtensions
+	eGetSnapshotBlockResponse_ChecksumAlgorithm                            smithy.SchemaExtensions
+	eListChangedBlocksRequest                                              smithy.SchemaExtensions
+	eListChangedBlocksRequest_FirstSnapshotId                              smithy.SchemaExtensions
+	eListChangedBlocksRequest_SecondSnapshotId                             smithy.SchemaExtensions
+	eListChangedBlocksRequest_NextToken                                    smithy.SchemaExtensions
+	eListChangedBlocksRequest_MaxResults                                   smithy.SchemaExtensions
+	eListChangedBlocksRequest_StartingBlockIndex                           smithy.SchemaExtensions
+	eListChangedBlocksResponse                                             smithy.SchemaExtensions
+	eListChangedBlocksResponse_ChangedBlocks                               smithy.SchemaExtensions
+	eListChangedBlocksResponse_ExpiryTime                                  smithy.SchemaExtensions
+	eListChangedBlocksResponse_VolumeSize                                  smithy.SchemaExtensions
+	eListChangedBlocksResponse_BlockSize                                   smithy.SchemaExtensions
+	eListChangedBlocksResponse_NextToken                                   smithy.SchemaExtensions
+	eListSnapshotBlocksRequest                                             smithy.SchemaExtensions
+	eListSnapshotBlocksRequest_SnapshotId                                  smithy.SchemaExtensions
+	eListSnapshotBlocksRequest_NextToken                                   smithy.SchemaExtensions
+	eListSnapshotBlocksRequest_MaxResults                                  smithy.SchemaExtensions
+	eListSnapshotBlocksRequest_StartingBlockIndex                          smithy.SchemaExtensions
+	eListSnapshotBlocksResponse                                            smithy.SchemaExtensions
+	eListSnapshotBlocksResponse_Blocks                                     smithy.SchemaExtensions
+	eListSnapshotBlocksResponse_ExpiryTime                                 smithy.SchemaExtensions
+	eListSnapshotBlocksResponse_VolumeSize                                 smithy.SchemaExtensions
+	eListSnapshotBlocksResponse_BlockSize                                  smithy.SchemaExtensions
+	eListSnapshotBlocksResponse_NextToken                                  smithy.SchemaExtensions
+	ePutSnapshotBlockRequest                                               smithy.SchemaExtensions
+	ePutSnapshotBlockRequest_SnapshotId                                    smithy.SchemaExtensions
+	ePutSnapshotBlockRequest_BlockIndex                                    smithy.SchemaExtensions
+	ePutSnapshotBlockRequest_BlockData                                     smithy.SchemaExtensions
+	ePutSnapshotBlockRequest_DataLength                                    smithy.SchemaExtensions
+	ePutSnapshotBlockRequest_Progress                                      smithy.SchemaExtensions
+	ePutSnapshotBlockRequest_Checksum                                      smithy.SchemaExtensions
+	ePutSnapshotBlockRequest_ChecksumAlgorithm                             smithy.SchemaExtensions
+	ePutSnapshotBlockResponse                                              smithy.SchemaExtensions
+	ePutSnapshotBlockResponse_Checksum                                     smithy.SchemaExtensions
+	ePutSnapshotBlockResponse_ChecksumAlgorithm                            smithy.SchemaExtensions
+	eStartSnapshotRequest                                                  smithy.SchemaExtensions
+	eStartSnapshotRequest_VolumeSize                                       smithy.SchemaExtensions
+	eStartSnapshotRequest_ParentSnapshotId                                 smithy.SchemaExtensions
+	eStartSnapshotRequest_Tags                                             smithy.SchemaExtensions
+	eStartSnapshotRequest_Description                                      smithy.SchemaExtensions
+	eStartSnapshotRequest_ClientToken                                      smithy.SchemaExtensions
+	eStartSnapshotRequest_Encrypted                                        smithy.SchemaExtensions
+	eStartSnapshotRequest_KmsKeyArn                                        smithy.SchemaExtensions
+	eStartSnapshotRequest_Timeout                                          smithy.SchemaExtensions
+	eStartSnapshotResponse                                                 smithy.SchemaExtensions
+	eStartSnapshotResponse_Description                                     smithy.SchemaExtensions
+	eStartSnapshotResponse_SnapshotId                                      smithy.SchemaExtensions
+	eStartSnapshotResponse_OwnerId                                         smithy.SchemaExtensions
+	eStartSnapshotResponse_Status                                          smithy.SchemaExtensions
+	eStartSnapshotResponse_StartTime                                       smithy.SchemaExtensions
+	eStartSnapshotResponse_VolumeSize                                      smithy.SchemaExtensions
+	eStartSnapshotResponse_BlockSize                                       smithy.SchemaExtensions
+	eStartSnapshotResponse_Tags                                            smithy.SchemaExtensions
+	eStartSnapshotResponse_ParentSnapshotId                                smithy.SchemaExtensions
+	eStartSnapshotResponse_KmsKeyArn                                       smithy.SchemaExtensions
+	eStartSnapshotResponse_SseType                                         smithy.SchemaExtensions
+)
 
 var (
 	iCompleteSnapshot                    = smithy.ShapeID{Namespace: "com.amazonaws.ebs", Name: "CompleteSnapshot"}
@@ -162,187 +341,187 @@ var mStartSnapshotResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStart
 	2, 0, 0, 6, 0, 0, 0, 1,
 }}
 
-var sCompleteSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompleteSnapshot, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sGetSnapshotBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSnapshotBlock, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sListChangedBlocks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChangedBlocks, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sListSnapshotBlocks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSnapshotBlocks, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sPutSnapshotBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSnapshotBlock, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sStartSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSnapshot, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var s_Ebs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ebs, Type: smithy.ShapeTypeService, Ext: &ext[6]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &ext[7]})
-var sAccessDeniedExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedExceptionReason, Members: &mAccessDeniedExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[10]})
-var sBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlock, Members: &mBlock, Type: smithy.ShapeTypeStructure, Ext: &ext[13]})
-var s_BlockData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockData, Traits: &t7, Type: smithy.ShapeTypeBlob, Ext: &ext[16]})
-var s_BlockIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockIndex, Type: smithy.ShapeTypeInteger, Ext: &ext[17]})
-var s_Blocks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Blocks, Members: &m_Blocks, Traits: &t8, Type: smithy.ShapeTypeList, Ext: &ext[18]})
-var s_BlockSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockSize, Type: smithy.ShapeTypeInteger, Ext: &ext[20]})
-var s_BlockToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockToken, Type: smithy.ShapeTypeString, Ext: &ext[21]})
-var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[22]})
-var sChangedBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangedBlock, Members: &mChangedBlock, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &ext[23]})
-var s_ChangedBlocks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChangedBlocks, Members: &m_ChangedBlocks, Type: smithy.ShapeTypeList, Ext: &ext[27]})
-var s_ChangedBlocksCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChangedBlocksCount, Type: smithy.ShapeTypeInteger, Ext: &ext[29]})
-var s_Checksum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Checksum, Type: smithy.ShapeTypeString, Ext: &ext[30]})
-var sChecksumAggregationMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChecksumAggregationMethod, Members: &mChecksumAggregationMethod, Type: smithy.ShapeTypeEnum, Ext: &ext[31]})
-var sChecksumAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChecksumAlgorithm, Members: &mChecksumAlgorithm, Type: smithy.ShapeTypeEnum, Ext: &ext[33]})
-var sConcurrentLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentLimitExceededException, Members: &mConcurrentLimitExceededException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &ext[35]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var s_DataLength = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataLength, Type: smithy.ShapeTypeInteger, Ext: &ext[39]})
-var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[41]})
-var s_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &ext[43]})
-var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[46]})
-var s_OwnerId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OwnerId, Type: smithy.ShapeTypeString, Ext: &ext[47]})
-var s_PageToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PageToken, Type: smithy.ShapeTypeString, Ext: &ext[48]})
-var s_Progress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Progress, Type: smithy.ShapeTypeInteger, Ext: &ext[49]})
-var sRequestThrottledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestThrottledException, Members: &mRequestThrottledException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &ext[50]})
-var sRequestThrottledExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestThrottledExceptionReason, Members: &mRequestThrottledExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[53]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &ext[57]})
-var sResourceNotFoundExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundExceptionReason, Members: &mResourceNotFoundExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[60]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &ext[65]})
-var sServiceQuotaExceededExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededExceptionReason, Members: &mServiceQuotaExceededExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[68]})
-var s_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnapshotId, Type: smithy.ShapeTypeString, Ext: &ext[70]})
-var sSSEType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSSEType, Members: &mSSEType, Type: smithy.ShapeTypeEnum, Ext: &ext[71]})
-var sStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[75]})
-var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[79]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[82]})
-var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &ext[83]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[85]})
-var s_Timeout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timeout, Type: smithy.ShapeTypeInteger, Ext: &ext[86]})
-var s_TimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[87]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &ext[88]})
-var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[91]})
-var s_VolumeSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumeSize, Type: smithy.ShapeTypeLong, Ext: &ext[107]})
-var sCompleteSnapshotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompleteSnapshotRequest, Members: &mCompleteSnapshotRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[108]})
-var sCompleteSnapshotResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompleteSnapshotResponse, Members: &mCompleteSnapshotResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[114]})
-var sGetSnapshotBlockRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSnapshotBlockRequest, Members: &mGetSnapshotBlockRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[116]})
-var sGetSnapshotBlockResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSnapshotBlockResponse, Members: &mGetSnapshotBlockResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var sListChangedBlocksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChangedBlocksRequest, Members: &mListChangedBlocksRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[125]})
-var sListChangedBlocksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChangedBlocksResponse, Members: &mListChangedBlocksResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[131]})
-var sListSnapshotBlocksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSnapshotBlocksRequest, Members: &mListSnapshotBlocksRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[137]})
-var sListSnapshotBlocksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSnapshotBlocksResponse, Members: &mListSnapshotBlocksResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[142]})
-var sPutSnapshotBlockRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSnapshotBlockRequest, Members: &mPutSnapshotBlockRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[148]})
-var sPutSnapshotBlockResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSnapshotBlockResponse, Members: &mPutSnapshotBlockResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[156]})
-var sStartSnapshotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSnapshotRequest, Members: &mStartSnapshotRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[159]})
-var sStartSnapshotResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSnapshotResponse, Members: &mStartSnapshotResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[168]})
+var sCompleteSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompleteSnapshot, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCompleteSnapshot})
+var sGetSnapshotBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSnapshotBlock, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eGetSnapshotBlock})
+var sListChangedBlocks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChangedBlocks, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eListChangedBlocks})
+var sListSnapshotBlocks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSnapshotBlocks, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eListSnapshotBlocks})
+var sPutSnapshotBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSnapshotBlock, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ePutSnapshotBlock})
+var sStartSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSnapshot, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eStartSnapshot})
+var s_Ebs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ebs, Type: smithy.ShapeTypeService, Ext: &e_Ebs})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedExceptionReason, Members: &mAccessDeniedExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eAccessDeniedExceptionReason})
+var sBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlock, Members: &mBlock, Type: smithy.ShapeTypeStructure, Ext: &eBlock})
+var s_BlockData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockData, Traits: &t7, Type: smithy.ShapeTypeBlob, Ext: &e_BlockData})
+var s_BlockIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockIndex, Type: smithy.ShapeTypeInteger, Ext: &e_BlockIndex})
+var s_Blocks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Blocks, Members: &m_Blocks, Traits: &t8, Type: smithy.ShapeTypeList, Ext: &e_Blocks})
+var s_BlockSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockSize, Type: smithy.ShapeTypeInteger, Ext: &e_BlockSize})
+var s_BlockToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockToken, Type: smithy.ShapeTypeString, Ext: &e_BlockToken})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var sChangedBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangedBlock, Members: &mChangedBlock, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eChangedBlock})
+var s_ChangedBlocks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChangedBlocks, Members: &m_ChangedBlocks, Type: smithy.ShapeTypeList, Ext: &e_ChangedBlocks})
+var s_ChangedBlocksCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChangedBlocksCount, Type: smithy.ShapeTypeInteger, Ext: &e_ChangedBlocksCount})
+var s_Checksum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Checksum, Type: smithy.ShapeTypeString, Ext: &e_Checksum})
+var sChecksumAggregationMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChecksumAggregationMethod, Members: &mChecksumAggregationMethod, Type: smithy.ShapeTypeEnum, Ext: &eChecksumAggregationMethod})
+var sChecksumAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChecksumAlgorithm, Members: &mChecksumAlgorithm, Type: smithy.ShapeTypeEnum, Ext: &eChecksumAlgorithm})
+var sConcurrentLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentLimitExceededException, Members: &mConcurrentLimitExceededException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eConcurrentLimitExceededException})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var s_DataLength = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataLength, Type: smithy.ShapeTypeInteger, Ext: &e_DataLength})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &e_Description})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var s_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &e_IdempotencyToken})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyArn})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_OwnerId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OwnerId, Type: smithy.ShapeTypeString, Ext: &e_OwnerId})
+var s_PageToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PageToken, Type: smithy.ShapeTypeString, Ext: &e_PageToken})
+var s_Progress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Progress, Type: smithy.ShapeTypeInteger, Ext: &e_Progress})
+var sRequestThrottledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestThrottledException, Members: &mRequestThrottledException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eRequestThrottledException})
+var sRequestThrottledExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestThrottledExceptionReason, Members: &mRequestThrottledExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eRequestThrottledExceptionReason})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundExceptionReason, Members: &mResourceNotFoundExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eResourceNotFoundExceptionReason})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededExceptionReason, Members: &mServiceQuotaExceededExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eServiceQuotaExceededExceptionReason})
+var s_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnapshotId, Type: smithy.ShapeTypeString, Ext: &e_SnapshotId})
+var sSSEType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSSEType, Members: &mSSEType, Type: smithy.ShapeTypeEnum, Ext: &eSSEType})
+var sStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eStatus})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &e_Tags})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_Timeout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timeout, Type: smithy.ShapeTypeInteger, Ext: &e_Timeout})
+var s_TimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_TimeStamp})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
+var s_VolumeSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumeSize, Type: smithy.ShapeTypeLong, Ext: &e_VolumeSize})
+var sCompleteSnapshotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompleteSnapshotRequest, Members: &mCompleteSnapshotRequest, Type: smithy.ShapeTypeStructure, Ext: &eCompleteSnapshotRequest})
+var sCompleteSnapshotResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompleteSnapshotResponse, Members: &mCompleteSnapshotResponse, Type: smithy.ShapeTypeStructure, Ext: &eCompleteSnapshotResponse})
+var sGetSnapshotBlockRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSnapshotBlockRequest, Members: &mGetSnapshotBlockRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetSnapshotBlockRequest})
+var sGetSnapshotBlockResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSnapshotBlockResponse, Members: &mGetSnapshotBlockResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetSnapshotBlockResponse})
+var sListChangedBlocksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChangedBlocksRequest, Members: &mListChangedBlocksRequest, Type: smithy.ShapeTypeStructure, Ext: &eListChangedBlocksRequest})
+var sListChangedBlocksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChangedBlocksResponse, Members: &mListChangedBlocksResponse, Type: smithy.ShapeTypeStructure, Ext: &eListChangedBlocksResponse})
+var sListSnapshotBlocksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSnapshotBlocksRequest, Members: &mListSnapshotBlocksRequest, Type: smithy.ShapeTypeStructure, Ext: &eListSnapshotBlocksRequest})
+var sListSnapshotBlocksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSnapshotBlocksResponse, Members: &mListSnapshotBlocksResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSnapshotBlocksResponse})
+var sPutSnapshotBlockRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSnapshotBlockRequest, Members: &mPutSnapshotBlockRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutSnapshotBlockRequest})
+var sPutSnapshotBlockResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSnapshotBlockResponse, Members: &mPutSnapshotBlockResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutSnapshotBlockResponse})
+var sStartSnapshotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSnapshotRequest, Members: &mStartSnapshotRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartSnapshotRequest})
+var sStartSnapshotResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSnapshotResponse, Members: &mStartSnapshotResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartSnapshotResponse})
 
-var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[8]})
-var sAccessDeniedException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iAccessDeniedExceptionReason, Members: &mAccessDeniedExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[9]})
-var sAccessDeniedExceptionReason_UNAUTHORIZED_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNAUTHORIZED_ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[11]})
-var sAccessDeniedExceptionReason_DEPENDENCY_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPENDENCY_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[12]})
-var sBlock_BlockIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockIndex", ID: &i_BlockIndex, Type: smithy.ShapeTypeInteger, Ext: &ext[14]})
-var sBlock_BlockToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockToken", ID: &i_BlockToken, Type: smithy.ShapeTypeString, Ext: &ext[15]})
-var s_Blocks_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBlock, Members: &mBlock, Type: smithy.ShapeTypeStructure, Ext: &ext[19]})
-var sChangedBlock_BlockIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockIndex", ID: &i_BlockIndex, Type: smithy.ShapeTypeInteger, Ext: &ext[24]})
-var sChangedBlock_FirstBlockToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirstBlockToken", ID: &i_BlockToken, Type: smithy.ShapeTypeString, Ext: &ext[25]})
-var sChangedBlock_SecondBlockToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecondBlockToken", ID: &i_BlockToken, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var s_ChangedBlocks_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChangedBlock, Members: &mChangedBlock, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
-var sChecksumAggregationMethod_CHECKSUM_AGGREGATION_LINEAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHECKSUM_AGGREGATION_LINEAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[32]})
-var sChecksumAlgorithm_CHECKSUM_ALGORITHM_SHA256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHECKSUM_ALGORITHM_SHA256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[34]})
-var sConcurrentLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[38]})
-var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var sRequestThrottledException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[51]})
-var sRequestThrottledException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iRequestThrottledExceptionReason, Members: &mRequestThrottledExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[52]})
-var sRequestThrottledExceptionReason_ACCOUNT_THROTTLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT_THROTTLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[54]})
-var sRequestThrottledExceptionReason_DEPENDENCY_REQUEST_THROTTLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPENDENCY_REQUEST_THROTTLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[55]})
-var sRequestThrottledExceptionReason_RESOURCE_LEVEL_THROTTLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_LEVEL_THROTTLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[56]})
-var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var sResourceNotFoundException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iResourceNotFoundExceptionReason, Members: &mResourceNotFoundExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[59]})
-var sResourceNotFoundExceptionReason_SNAPSHOT_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNAPSHOT_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[61]})
-var sResourceNotFoundExceptionReason_GRANT_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GRANT_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[62]})
-var sResourceNotFoundExceptionReason_DEPENDENCY_RESOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPENDENCY_RESOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[63]})
-var sResourceNotFoundExceptionReason_IMAGE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMAGE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[64]})
-var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[66]})
-var sServiceQuotaExceededException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iServiceQuotaExceededExceptionReason, Members: &mServiceQuotaExceededExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[67]})
-var sServiceQuotaExceededExceptionReason_DEPENDENCY_SERVICE_QUOTA_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPENDENCY_SERVICE_QUOTA_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[69]})
-var sSSEType_SSE_EBS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSE_EBS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sSSEType_SSE_KMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSE_KMS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[73]})
-var sSSEType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var sStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[76]})
-var sStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
-var sStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[78]})
-var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[80]})
-var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[81]})
-var s_Tags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[84]})
-var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[89]})
-var sValidationException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[90]})
-var sValidationExceptionReason_INVALID_CUSTOMER_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_CUSTOMER_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[92]})
-var sValidationExceptionReason_INVALID_PAGE_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_PAGE_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[93]})
-var sValidationExceptionReason_INVALID_BLOCK_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_BLOCK_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[94]})
-var sValidationExceptionReason_INVALID_GRANT_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_GRANT_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[95]})
-var sValidationExceptionReason_INVALID_SNAPSHOT_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_SNAPSHOT_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[96]})
-var sValidationExceptionReason_UNRELATED_SNAPSHOTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNRELATED_SNAPSHOTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[97]})
-var sValidationExceptionReason_INVALID_BLOCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_BLOCK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[98]})
-var sValidationExceptionReason_INVALID_CONTENT_ENCODING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_CONTENT_ENCODING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[99]})
-var sValidationExceptionReason_INVALID_TAG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_TAG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[100]})
-var sValidationExceptionReason_INVALID_DEPENDENCY_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_DEPENDENCY_REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[101]})
-var sValidationExceptionReason_INVALID_PARAMETER_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_PARAMETER_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[102]})
-var sValidationExceptionReason_INVALID_VOLUME_SIZE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_VOLUME_SIZE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[103]})
-var sValidationExceptionReason_CONFLICTING_BLOCK_UPDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFLICTING_BLOCK_UPDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[104]})
-var sValidationExceptionReason_INVALID_IMAGE_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_IMAGE_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[105]})
-var sValidationExceptionReason_WRITE_REQUEST_TIMEOUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WRITE_REQUEST_TIMEOUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[106]})
-var sCompleteSnapshotRequest_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotId", ID: &i_SnapshotId, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &ext[109]})
-var sCompleteSnapshotRequest_ChangedBlocksCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangedBlocksCount", ID: &i_ChangedBlocksCount, Traits: &t16, Type: smithy.ShapeTypeInteger, Ext: &ext[110]})
-var sCompleteSnapshotRequest_Checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Checksum", ID: &i_Checksum, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[111]})
-var sCompleteSnapshotRequest_ChecksumAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumAlgorithm", ID: &iChecksumAlgorithm, Members: &mChecksumAlgorithm, Traits: &t18, Type: smithy.ShapeTypeEnum, Ext: &ext[112]})
-var sCompleteSnapshotRequest_ChecksumAggregationMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumAggregationMethod", ID: &iChecksumAggregationMethod, Members: &mChecksumAggregationMethod, Traits: &t19, Type: smithy.ShapeTypeEnum, Ext: &ext[113]})
-var sCompleteSnapshotResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[115]})
-var sGetSnapshotBlockRequest_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotId", ID: &i_SnapshotId, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &ext[117]})
-var sGetSnapshotBlockRequest_BlockIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockIndex", ID: &i_BlockIndex, Traits: &t15, Type: smithy.ShapeTypeInteger, Ext: &ext[118]})
-var sGetSnapshotBlockRequest_BlockToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockToken", ID: &i_BlockToken, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &ext[119]})
-var sGetSnapshotBlockResponse_DataLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataLength", ID: &i_DataLength, Traits: &t21, Type: smithy.ShapeTypeInteger, Ext: &ext[121]})
-var sGetSnapshotBlockResponse_BlockData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockData", ID: &i_BlockData, Traits: &t22, Type: smithy.ShapeTypeBlob, Ext: &ext[122]})
-var sGetSnapshotBlockResponse_Checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Checksum", ID: &i_Checksum, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[123]})
-var sGetSnapshotBlockResponse_ChecksumAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumAlgorithm", ID: &iChecksumAlgorithm, Members: &mChecksumAlgorithm, Traits: &t18, Type: smithy.ShapeTypeEnum, Ext: &ext[124]})
-var sListChangedBlocksRequest_FirstSnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirstSnapshotId", ID: &i_SnapshotId, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[126]})
-var sListChangedBlocksRequest_SecondSnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecondSnapshotId", ID: &i_SnapshotId, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &ext[127]})
-var sListChangedBlocksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PageToken, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &ext[128]})
-var sListChangedBlocksRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t25, Type: smithy.ShapeTypeInteger, Ext: &ext[129]})
-var sListChangedBlocksRequest_StartingBlockIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartingBlockIndex", ID: &i_BlockIndex, Traits: &t26, Type: smithy.ShapeTypeInteger, Ext: &ext[130]})
-var sListChangedBlocksResponse_ChangedBlocks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangedBlocks", ID: &i_ChangedBlocks, Members: &m_ChangedBlocks, Type: smithy.ShapeTypeList, Ext: &ext[132]})
-var sListChangedBlocksResponse_ExpiryTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiryTime", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[133]})
-var sListChangedBlocksResponse_VolumeSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeSize", ID: &i_VolumeSize, Type: smithy.ShapeTypeLong, Ext: &ext[134]})
-var sListChangedBlocksResponse_BlockSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockSize", ID: &i_BlockSize, Type: smithy.ShapeTypeInteger, Ext: &ext[135]})
-var sListChangedBlocksResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PageToken, Type: smithy.ShapeTypeString, Ext: &ext[136]})
-var sListSnapshotBlocksRequest_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotId", ID: &i_SnapshotId, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var sListSnapshotBlocksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PageToken, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &ext[139]})
-var sListSnapshotBlocksRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t25, Type: smithy.ShapeTypeInteger, Ext: &ext[140]})
-var sListSnapshotBlocksRequest_StartingBlockIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartingBlockIndex", ID: &i_BlockIndex, Traits: &t26, Type: smithy.ShapeTypeInteger, Ext: &ext[141]})
-var sListSnapshotBlocksResponse_Blocks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Blocks", ID: &i_Blocks, Members: &m_Blocks, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[143]})
-var sListSnapshotBlocksResponse_ExpiryTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiryTime", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[144]})
-var sListSnapshotBlocksResponse_VolumeSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeSize", ID: &i_VolumeSize, Type: smithy.ShapeTypeLong, Ext: &ext[145]})
-var sListSnapshotBlocksResponse_BlockSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockSize", ID: &i_BlockSize, Type: smithy.ShapeTypeInteger, Ext: &ext[146]})
-var sListSnapshotBlocksResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PageToken, Type: smithy.ShapeTypeString, Ext: &ext[147]})
-var sPutSnapshotBlockRequest_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotId", ID: &i_SnapshotId, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &ext[149]})
-var sPutSnapshotBlockRequest_BlockIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockIndex", ID: &i_BlockIndex, Traits: &t15, Type: smithy.ShapeTypeInteger, Ext: &ext[150]})
-var sPutSnapshotBlockRequest_BlockData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockData", ID: &i_BlockData, Traits: &t22, Type: smithy.ShapeTypeBlob, Ext: &ext[151]})
-var sPutSnapshotBlockRequest_DataLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataLength", ID: &i_DataLength, Traits: &t21, Type: smithy.ShapeTypeInteger, Ext: &ext[152]})
-var sPutSnapshotBlockRequest_Progress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Progress", ID: &i_Progress, Traits: &t27, Type: smithy.ShapeTypeInteger, Ext: &ext[153]})
-var sPutSnapshotBlockRequest_Checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Checksum", ID: &i_Checksum, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[154]})
-var sPutSnapshotBlockRequest_ChecksumAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumAlgorithm", ID: &iChecksumAlgorithm, Members: &mChecksumAlgorithm, Traits: &t18, Type: smithy.ShapeTypeEnum, Ext: &ext[155]})
-var sPutSnapshotBlockResponse_Checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Checksum", ID: &i_Checksum, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[157]})
-var sPutSnapshotBlockResponse_ChecksumAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumAlgorithm", ID: &iChecksumAlgorithm, Members: &mChecksumAlgorithm, Traits: &t18, Type: smithy.ShapeTypeEnum, Ext: &ext[158]})
-var sStartSnapshotRequest_VolumeSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeSize", ID: &i_VolumeSize, Type: smithy.ShapeTypeLong, Ext: &ext[160]})
-var sStartSnapshotRequest_ParentSnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentSnapshotId", ID: &i_SnapshotId, Type: smithy.ShapeTypeString, Ext: &ext[161]})
-var sStartSnapshotRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &ext[162]})
-var sStartSnapshotRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[163]})
-var sStartSnapshotRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &ext[164]})
-var sStartSnapshotRequest_Encrypted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encrypted", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[165]})
-var sStartSnapshotRequest_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[166]})
-var sStartSnapshotRequest_Timeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timeout", ID: &i_Timeout, Type: smithy.ShapeTypeInteger, Ext: &ext[167]})
-var sStartSnapshotResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[169]})
-var sStartSnapshotResponse_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotId", ID: &i_SnapshotId, Type: smithy.ShapeTypeString, Ext: &ext[170]})
-var sStartSnapshotResponse_OwnerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerId", ID: &i_OwnerId, Type: smithy.ShapeTypeString, Ext: &ext[171]})
-var sStartSnapshotResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[172]})
-var sStartSnapshotResponse_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[173]})
-var sStartSnapshotResponse_VolumeSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeSize", ID: &i_VolumeSize, Type: smithy.ShapeTypeLong, Ext: &ext[174]})
-var sStartSnapshotResponse_BlockSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockSize", ID: &i_BlockSize, Type: smithy.ShapeTypeInteger, Ext: &ext[175]})
-var sStartSnapshotResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &ext[176]})
-var sStartSnapshotResponse_ParentSnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentSnapshotId", ID: &i_SnapshotId, Type: smithy.ShapeTypeString, Ext: &ext[177]})
-var sStartSnapshotResponse_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &ext[178]})
-var sStartSnapshotResponse_SseType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SseType", ID: &iSSEType, Members: &mSSEType, Type: smithy.ShapeTypeEnum, Ext: &ext[179]})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var sAccessDeniedException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iAccessDeniedExceptionReason, Members: &mAccessDeniedExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eAccessDeniedException_Reason})
+var sAccessDeniedExceptionReason_UNAUTHORIZED_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNAUTHORIZED_ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedExceptionReason_UNAUTHORIZED_ACCOUNT})
+var sAccessDeniedExceptionReason_DEPENDENCY_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPENDENCY_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedExceptionReason_DEPENDENCY_ACCESS_DENIED})
+var sBlock_BlockIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockIndex", ID: &i_BlockIndex, Type: smithy.ShapeTypeInteger, Ext: &eBlock_BlockIndex})
+var sBlock_BlockToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockToken", ID: &i_BlockToken, Type: smithy.ShapeTypeString, Ext: &eBlock_BlockToken})
+var s_Blocks_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBlock, Members: &mBlock, Type: smithy.ShapeTypeStructure, Ext: &e_Blocks_member})
+var sChangedBlock_BlockIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockIndex", ID: &i_BlockIndex, Type: smithy.ShapeTypeInteger, Ext: &eChangedBlock_BlockIndex})
+var sChangedBlock_FirstBlockToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirstBlockToken", ID: &i_BlockToken, Type: smithy.ShapeTypeString, Ext: &eChangedBlock_FirstBlockToken})
+var sChangedBlock_SecondBlockToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecondBlockToken", ID: &i_BlockToken, Type: smithy.ShapeTypeString, Ext: &eChangedBlock_SecondBlockToken})
+var s_ChangedBlocks_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChangedBlock, Members: &mChangedBlock, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &e_ChangedBlocks_member})
+var sChecksumAggregationMethod_CHECKSUM_AGGREGATION_LINEAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHECKSUM_AGGREGATION_LINEAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChecksumAggregationMethod_CHECKSUM_AGGREGATION_LINEAR})
+var sChecksumAlgorithm_CHECKSUM_ALGORITHM_SHA256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHECKSUM_ALGORITHM_SHA256", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChecksumAlgorithm_CHECKSUM_ALGORITHM_SHA256})
+var sConcurrentLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eConcurrentLimitExceededException_Message})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var sRequestThrottledException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eRequestThrottledException_Message})
+var sRequestThrottledException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iRequestThrottledExceptionReason, Members: &mRequestThrottledExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eRequestThrottledException_Reason})
+var sRequestThrottledExceptionReason_ACCOUNT_THROTTLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT_THROTTLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequestThrottledExceptionReason_ACCOUNT_THROTTLED})
+var sRequestThrottledExceptionReason_DEPENDENCY_REQUEST_THROTTLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPENDENCY_REQUEST_THROTTLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequestThrottledExceptionReason_DEPENDENCY_REQUEST_THROTTLED})
+var sRequestThrottledExceptionReason_RESOURCE_LEVEL_THROTTLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_LEVEL_THROTTLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequestThrottledExceptionReason_RESOURCE_LEVEL_THROTTLE})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sResourceNotFoundException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iResourceNotFoundExceptionReason, Members: &mResourceNotFoundExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eResourceNotFoundException_Reason})
+var sResourceNotFoundExceptionReason_SNAPSHOT_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNAPSHOT_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundExceptionReason_SNAPSHOT_NOT_FOUND})
+var sResourceNotFoundExceptionReason_GRANT_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GRANT_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundExceptionReason_GRANT_NOT_FOUND})
+var sResourceNotFoundExceptionReason_DEPENDENCY_RESOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPENDENCY_RESOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundExceptionReason_DEPENDENCY_RESOURCE_NOT_FOUND})
+var sResourceNotFoundExceptionReason_IMAGE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMAGE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundExceptionReason_IMAGE_NOT_FOUND})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_Message})
+var sServiceQuotaExceededException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iServiceQuotaExceededExceptionReason, Members: &mServiceQuotaExceededExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eServiceQuotaExceededException_Reason})
+var sServiceQuotaExceededExceptionReason_DEPENDENCY_SERVICE_QUOTA_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPENDENCY_SERVICE_QUOTA_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededExceptionReason_DEPENDENCY_SERVICE_QUOTA_EXCEEDED})
+var sSSEType_SSE_EBS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSE_EBS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSSEType_SSE_EBS})
+var sSSEType_SSE_KMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSE_KMS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSSEType_SSE_KMS})
+var sSSEType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSSEType_NONE})
+var sStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_COMPLETED})
+var sStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_PENDING})
+var sStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_ERROR})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_Tags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_Tags_member})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sValidationException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_Reason})
+var sValidationExceptionReason_INVALID_CUSTOMER_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_CUSTOMER_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_CUSTOMER_KEY})
+var sValidationExceptionReason_INVALID_PAGE_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_PAGE_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_PAGE_TOKEN})
+var sValidationExceptionReason_INVALID_BLOCK_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_BLOCK_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_BLOCK_TOKEN})
+var sValidationExceptionReason_INVALID_GRANT_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_GRANT_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_GRANT_TOKEN})
+var sValidationExceptionReason_INVALID_SNAPSHOT_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_SNAPSHOT_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_SNAPSHOT_ID})
+var sValidationExceptionReason_UNRELATED_SNAPSHOTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNRELATED_SNAPSHOTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_UNRELATED_SNAPSHOTS})
+var sValidationExceptionReason_INVALID_BLOCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_BLOCK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_BLOCK})
+var sValidationExceptionReason_INVALID_CONTENT_ENCODING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_CONTENT_ENCODING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_CONTENT_ENCODING})
+var sValidationExceptionReason_INVALID_TAG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_TAG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_TAG})
+var sValidationExceptionReason_INVALID_DEPENDENCY_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_DEPENDENCY_REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_DEPENDENCY_REQUEST})
+var sValidationExceptionReason_INVALID_PARAMETER_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_PARAMETER_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_PARAMETER_VALUE})
+var sValidationExceptionReason_INVALID_VOLUME_SIZE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_VOLUME_SIZE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_VOLUME_SIZE})
+var sValidationExceptionReason_CONFLICTING_BLOCK_UPDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFLICTING_BLOCK_UPDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_CONFLICTING_BLOCK_UPDATE})
+var sValidationExceptionReason_INVALID_IMAGE_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_IMAGE_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_IMAGE_ID})
+var sValidationExceptionReason_WRITE_REQUEST_TIMEOUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WRITE_REQUEST_TIMEOUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_WRITE_REQUEST_TIMEOUT})
+var sCompleteSnapshotRequest_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotId", ID: &i_SnapshotId, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &eCompleteSnapshotRequest_SnapshotId})
+var sCompleteSnapshotRequest_ChangedBlocksCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangedBlocksCount", ID: &i_ChangedBlocksCount, Traits: &t16, Type: smithy.ShapeTypeInteger, Ext: &eCompleteSnapshotRequest_ChangedBlocksCount})
+var sCompleteSnapshotRequest_Checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Checksum", ID: &i_Checksum, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eCompleteSnapshotRequest_Checksum})
+var sCompleteSnapshotRequest_ChecksumAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumAlgorithm", ID: &iChecksumAlgorithm, Members: &mChecksumAlgorithm, Traits: &t18, Type: smithy.ShapeTypeEnum, Ext: &eCompleteSnapshotRequest_ChecksumAlgorithm})
+var sCompleteSnapshotRequest_ChecksumAggregationMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumAggregationMethod", ID: &iChecksumAggregationMethod, Members: &mChecksumAggregationMethod, Traits: &t19, Type: smithy.ShapeTypeEnum, Ext: &eCompleteSnapshotRequest_ChecksumAggregationMethod})
+var sCompleteSnapshotResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eCompleteSnapshotResponse_Status})
+var sGetSnapshotBlockRequest_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotId", ID: &i_SnapshotId, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &eGetSnapshotBlockRequest_SnapshotId})
+var sGetSnapshotBlockRequest_BlockIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockIndex", ID: &i_BlockIndex, Traits: &t15, Type: smithy.ShapeTypeInteger, Ext: &eGetSnapshotBlockRequest_BlockIndex})
+var sGetSnapshotBlockRequest_BlockToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockToken", ID: &i_BlockToken, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eGetSnapshotBlockRequest_BlockToken})
+var sGetSnapshotBlockResponse_DataLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataLength", ID: &i_DataLength, Traits: &t21, Type: smithy.ShapeTypeInteger, Ext: &eGetSnapshotBlockResponse_DataLength})
+var sGetSnapshotBlockResponse_BlockData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockData", ID: &i_BlockData, Traits: &t22, Type: smithy.ShapeTypeBlob, Ext: &eGetSnapshotBlockResponse_BlockData})
+var sGetSnapshotBlockResponse_Checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Checksum", ID: &i_Checksum, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eGetSnapshotBlockResponse_Checksum})
+var sGetSnapshotBlockResponse_ChecksumAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumAlgorithm", ID: &iChecksumAlgorithm, Members: &mChecksumAlgorithm, Traits: &t18, Type: smithy.ShapeTypeEnum, Ext: &eGetSnapshotBlockResponse_ChecksumAlgorithm})
+var sListChangedBlocksRequest_FirstSnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirstSnapshotId", ID: &i_SnapshotId, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eListChangedBlocksRequest_FirstSnapshotId})
+var sListChangedBlocksRequest_SecondSnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecondSnapshotId", ID: &i_SnapshotId, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &eListChangedBlocksRequest_SecondSnapshotId})
+var sListChangedBlocksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PageToken, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &eListChangedBlocksRequest_NextToken})
+var sListChangedBlocksRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t25, Type: smithy.ShapeTypeInteger, Ext: &eListChangedBlocksRequest_MaxResults})
+var sListChangedBlocksRequest_StartingBlockIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartingBlockIndex", ID: &i_BlockIndex, Traits: &t26, Type: smithy.ShapeTypeInteger, Ext: &eListChangedBlocksRequest_StartingBlockIndex})
+var sListChangedBlocksResponse_ChangedBlocks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangedBlocks", ID: &i_ChangedBlocks, Members: &m_ChangedBlocks, Type: smithy.ShapeTypeList, Ext: &eListChangedBlocksResponse_ChangedBlocks})
+var sListChangedBlocksResponse_ExpiryTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiryTime", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListChangedBlocksResponse_ExpiryTime})
+var sListChangedBlocksResponse_VolumeSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeSize", ID: &i_VolumeSize, Type: smithy.ShapeTypeLong, Ext: &eListChangedBlocksResponse_VolumeSize})
+var sListChangedBlocksResponse_BlockSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockSize", ID: &i_BlockSize, Type: smithy.ShapeTypeInteger, Ext: &eListChangedBlocksResponse_BlockSize})
+var sListChangedBlocksResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PageToken, Type: smithy.ShapeTypeString, Ext: &eListChangedBlocksResponse_NextToken})
+var sListSnapshotBlocksRequest_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotId", ID: &i_SnapshotId, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &eListSnapshotBlocksRequest_SnapshotId})
+var sListSnapshotBlocksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PageToken, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &eListSnapshotBlocksRequest_NextToken})
+var sListSnapshotBlocksRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t25, Type: smithy.ShapeTypeInteger, Ext: &eListSnapshotBlocksRequest_MaxResults})
+var sListSnapshotBlocksRequest_StartingBlockIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartingBlockIndex", ID: &i_BlockIndex, Traits: &t26, Type: smithy.ShapeTypeInteger, Ext: &eListSnapshotBlocksRequest_StartingBlockIndex})
+var sListSnapshotBlocksResponse_Blocks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Blocks", ID: &i_Blocks, Members: &m_Blocks, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eListSnapshotBlocksResponse_Blocks})
+var sListSnapshotBlocksResponse_ExpiryTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiryTime", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListSnapshotBlocksResponse_ExpiryTime})
+var sListSnapshotBlocksResponse_VolumeSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeSize", ID: &i_VolumeSize, Type: smithy.ShapeTypeLong, Ext: &eListSnapshotBlocksResponse_VolumeSize})
+var sListSnapshotBlocksResponse_BlockSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockSize", ID: &i_BlockSize, Type: smithy.ShapeTypeInteger, Ext: &eListSnapshotBlocksResponse_BlockSize})
+var sListSnapshotBlocksResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PageToken, Type: smithy.ShapeTypeString, Ext: &eListSnapshotBlocksResponse_NextToken})
+var sPutSnapshotBlockRequest_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotId", ID: &i_SnapshotId, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &ePutSnapshotBlockRequest_SnapshotId})
+var sPutSnapshotBlockRequest_BlockIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockIndex", ID: &i_BlockIndex, Traits: &t15, Type: smithy.ShapeTypeInteger, Ext: &ePutSnapshotBlockRequest_BlockIndex})
+var sPutSnapshotBlockRequest_BlockData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockData", ID: &i_BlockData, Traits: &t22, Type: smithy.ShapeTypeBlob, Ext: &ePutSnapshotBlockRequest_BlockData})
+var sPutSnapshotBlockRequest_DataLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataLength", ID: &i_DataLength, Traits: &t21, Type: smithy.ShapeTypeInteger, Ext: &ePutSnapshotBlockRequest_DataLength})
+var sPutSnapshotBlockRequest_Progress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Progress", ID: &i_Progress, Traits: &t27, Type: smithy.ShapeTypeInteger, Ext: &ePutSnapshotBlockRequest_Progress})
+var sPutSnapshotBlockRequest_Checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Checksum", ID: &i_Checksum, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ePutSnapshotBlockRequest_Checksum})
+var sPutSnapshotBlockRequest_ChecksumAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumAlgorithm", ID: &iChecksumAlgorithm, Members: &mChecksumAlgorithm, Traits: &t18, Type: smithy.ShapeTypeEnum, Ext: &ePutSnapshotBlockRequest_ChecksumAlgorithm})
+var sPutSnapshotBlockResponse_Checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Checksum", ID: &i_Checksum, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ePutSnapshotBlockResponse_Checksum})
+var sPutSnapshotBlockResponse_ChecksumAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChecksumAlgorithm", ID: &iChecksumAlgorithm, Members: &mChecksumAlgorithm, Traits: &t18, Type: smithy.ShapeTypeEnum, Ext: &ePutSnapshotBlockResponse_ChecksumAlgorithm})
+var sStartSnapshotRequest_VolumeSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeSize", ID: &i_VolumeSize, Type: smithy.ShapeTypeLong, Ext: &eStartSnapshotRequest_VolumeSize})
+var sStartSnapshotRequest_ParentSnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentSnapshotId", ID: &i_SnapshotId, Type: smithy.ShapeTypeString, Ext: &eStartSnapshotRequest_ParentSnapshotId})
+var sStartSnapshotRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eStartSnapshotRequest_Tags})
+var sStartSnapshotRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eStartSnapshotRequest_Description})
+var sStartSnapshotRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eStartSnapshotRequest_ClientToken})
+var sStartSnapshotRequest_Encrypted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encrypted", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eStartSnapshotRequest_Encrypted})
+var sStartSnapshotRequest_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eStartSnapshotRequest_KmsKeyArn})
+var sStartSnapshotRequest_Timeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timeout", ID: &i_Timeout, Type: smithy.ShapeTypeInteger, Ext: &eStartSnapshotRequest_Timeout})
+var sStartSnapshotResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eStartSnapshotResponse_Description})
+var sStartSnapshotResponse_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotId", ID: &i_SnapshotId, Type: smithy.ShapeTypeString, Ext: &eStartSnapshotResponse_SnapshotId})
+var sStartSnapshotResponse_OwnerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerId", ID: &i_OwnerId, Type: smithy.ShapeTypeString, Ext: &eStartSnapshotResponse_OwnerId})
+var sStartSnapshotResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eStartSnapshotResponse_Status})
+var sStartSnapshotResponse_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp, Ext: &eStartSnapshotResponse_StartTime})
+var sStartSnapshotResponse_VolumeSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeSize", ID: &i_VolumeSize, Type: smithy.ShapeTypeLong, Ext: &eStartSnapshotResponse_VolumeSize})
+var sStartSnapshotResponse_BlockSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockSize", ID: &i_BlockSize, Type: smithy.ShapeTypeInteger, Ext: &eStartSnapshotResponse_BlockSize})
+var sStartSnapshotResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eStartSnapshotResponse_Tags})
+var sStartSnapshotResponse_ParentSnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentSnapshotId", ID: &i_SnapshotId, Type: smithy.ShapeTypeString, Ext: &eStartSnapshotResponse_ParentSnapshotId})
+var sStartSnapshotResponse_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Traits: &t9, Type: smithy.ShapeTypeString, Ext: &eStartSnapshotResponse_KmsKeyArn})
+var sStartSnapshotResponse_SseType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SseType", ID: &iSSEType, Members: &mSSEType, Type: smithy.ShapeTypeEnum, Ext: &eStartSnapshotResponse_SseType})
 
 var CompleteSnapshot = &sCompleteSnapshot
 

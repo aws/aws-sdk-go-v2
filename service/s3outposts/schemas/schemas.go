@@ -7,9 +7,116 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [108]smithy.SchemaExtensions
+var (
+	eCreateEndpoint                              smithy.SchemaExtensions
+	eDeleteEndpoint                              smithy.SchemaExtensions
+	eListEndpoints                               smithy.SchemaExtensions
+	eListOutpostsWithS3                          smithy.SchemaExtensions
+	eListSharedEndpoints                         smithy.SchemaExtensions
+	e_S3Outposts                                 smithy.SchemaExtensions
+	eAccessDeniedException                       smithy.SchemaExtensions
+	eAccessDeniedException_Message               smithy.SchemaExtensions
+	e_AwsAccountId                               smithy.SchemaExtensions
+	e_CapacityInBytes                            smithy.SchemaExtensions
+	e_CidrBlock                                  smithy.SchemaExtensions
+	eConflictException                           smithy.SchemaExtensions
+	eConflictException_Message                   smithy.SchemaExtensions
+	e_CreationTime                               smithy.SchemaExtensions
+	e_CustomerOwnedIpv4Pool                      smithy.SchemaExtensions
+	eEndpoint                                    smithy.SchemaExtensions
+	eEndpoint_EndpointArn                        smithy.SchemaExtensions
+	eEndpoint_OutpostsId                         smithy.SchemaExtensions
+	eEndpoint_CidrBlock                          smithy.SchemaExtensions
+	eEndpoint_Status                             smithy.SchemaExtensions
+	eEndpoint_CreationTime                       smithy.SchemaExtensions
+	eEndpoint_NetworkInterfaces                  smithy.SchemaExtensions
+	eEndpoint_VpcId                              smithy.SchemaExtensions
+	eEndpoint_SubnetId                           smithy.SchemaExtensions
+	eEndpoint_SecurityGroupId                    smithy.SchemaExtensions
+	eEndpoint_AccessType                         smithy.SchemaExtensions
+	eEndpoint_CustomerOwnedIpv4Pool              smithy.SchemaExtensions
+	eEndpoint_FailedReason                       smithy.SchemaExtensions
+	eEndpointAccessType                          smithy.SchemaExtensions
+	eEndpointAccessType_PRIVATE                  smithy.SchemaExtensions
+	eEndpointAccessType_CUSTOMER_OWNED_IP        smithy.SchemaExtensions
+	e_EndpointArn                                smithy.SchemaExtensions
+	e_EndpointId                                 smithy.SchemaExtensions
+	e_Endpoints                                  smithy.SchemaExtensions
+	e_Endpoints_member                           smithy.SchemaExtensions
+	eEndpointStatus                              smithy.SchemaExtensions
+	eEndpointStatus_PENDING                      smithy.SchemaExtensions
+	eEndpointStatus_AVAILABLE                    smithy.SchemaExtensions
+	eEndpointStatus_DELETING                     smithy.SchemaExtensions
+	eEndpointStatus_CREATE_FAILED                smithy.SchemaExtensions
+	eEndpointStatus_DELETE_FAILED                smithy.SchemaExtensions
+	e_ErrorCode                                  smithy.SchemaExtensions
+	e_ErrorMessage                               smithy.SchemaExtensions
+	eFailedReason                                smithy.SchemaExtensions
+	eFailedReason_ErrorCode                      smithy.SchemaExtensions
+	eFailedReason_Message                        smithy.SchemaExtensions
+	eInternalServerException                     smithy.SchemaExtensions
+	eInternalServerException_Message             smithy.SchemaExtensions
+	e_MaxResults                                 smithy.SchemaExtensions
+	e_Message                                    smithy.SchemaExtensions
+	eNetworkInterface                            smithy.SchemaExtensions
+	eNetworkInterface_NetworkInterfaceId         smithy.SchemaExtensions
+	e_NetworkInterfaceId                         smithy.SchemaExtensions
+	e_NetworkInterfaces                          smithy.SchemaExtensions
+	e_NetworkInterfaces_member                   smithy.SchemaExtensions
+	e_NextToken                                  smithy.SchemaExtensions
+	eOutpost                                     smithy.SchemaExtensions
+	eOutpost_OutpostArn                          smithy.SchemaExtensions
+	eOutpost_S3OutpostArn                        smithy.SchemaExtensions
+	eOutpost_OutpostId                           smithy.SchemaExtensions
+	eOutpost_OwnerId                             smithy.SchemaExtensions
+	eOutpost_CapacityInBytes                     smithy.SchemaExtensions
+	e_OutpostArn                                 smithy.SchemaExtensions
+	e_OutpostId                                  smithy.SchemaExtensions
+	eOutpostOfflineException                     smithy.SchemaExtensions
+	eOutpostOfflineException_Message             smithy.SchemaExtensions
+	e_Outposts                                   smithy.SchemaExtensions
+	e_Outposts_member                            smithy.SchemaExtensions
+	eResourceNotFoundException                   smithy.SchemaExtensions
+	eResourceNotFoundException_Message           smithy.SchemaExtensions
+	e_S3OutpostArn                               smithy.SchemaExtensions
+	e_SecurityGroupId                            smithy.SchemaExtensions
+	e_SubnetId                                   smithy.SchemaExtensions
+	eThrottlingException                         smithy.SchemaExtensions
+	eThrottlingException_Message                 smithy.SchemaExtensions
+	eValidationException                         smithy.SchemaExtensions
+	eValidationException_Message                 smithy.SchemaExtensions
+	e_VpcId                                      smithy.SchemaExtensions
+	eCreateEndpointRequest                       smithy.SchemaExtensions
+	eCreateEndpointRequest_OutpostId             smithy.SchemaExtensions
+	eCreateEndpointRequest_SubnetId              smithy.SchemaExtensions
+	eCreateEndpointRequest_SecurityGroupId       smithy.SchemaExtensions
+	eCreateEndpointRequest_AccessType            smithy.SchemaExtensions
+	eCreateEndpointRequest_CustomerOwnedIpv4Pool smithy.SchemaExtensions
+	eCreateEndpointResult                        smithy.SchemaExtensions
+	eCreateEndpointResult_EndpointArn            smithy.SchemaExtensions
+	eDeleteEndpointRequest                       smithy.SchemaExtensions
+	eDeleteEndpointRequest_EndpointId            smithy.SchemaExtensions
+	eDeleteEndpointRequest_OutpostId             smithy.SchemaExtensions
+	eListEndpointsRequest                        smithy.SchemaExtensions
+	eListEndpointsRequest_NextToken              smithy.SchemaExtensions
+	eListEndpointsRequest_MaxResults             smithy.SchemaExtensions
+	eListEndpointsResult                         smithy.SchemaExtensions
+	eListEndpointsResult_Endpoints               smithy.SchemaExtensions
+	eListEndpointsResult_NextToken               smithy.SchemaExtensions
+	eListOutpostsWithS3Request                   smithy.SchemaExtensions
+	eListOutpostsWithS3Request_NextToken         smithy.SchemaExtensions
+	eListOutpostsWithS3Request_MaxResults        smithy.SchemaExtensions
+	eListOutpostsWithS3Result                    smithy.SchemaExtensions
+	eListOutpostsWithS3Result_Outposts           smithy.SchemaExtensions
+	eListOutpostsWithS3Result_NextToken          smithy.SchemaExtensions
+	eListSharedEndpointsRequest                  smithy.SchemaExtensions
+	eListSharedEndpointsRequest_NextToken        smithy.SchemaExtensions
+	eListSharedEndpointsRequest_MaxResults       smithy.SchemaExtensions
+	eListSharedEndpointsRequest_OutpostId        smithy.SchemaExtensions
+	eListSharedEndpointsResult                   smithy.SchemaExtensions
+	eListSharedEndpointsResult_Endpoints         smithy.SchemaExtensions
+	eListSharedEndpointsResult_NextToken         smithy.SchemaExtensions
+)
 
 var (
 	iCreateEndpoint             = smithy.ShapeID{Namespace: "com.amazonaws.s3outposts", Name: "CreateEndpoint"}
@@ -120,115 +227,115 @@ var mListOutpostsWithS3Result = smithy.SchemaMembers{List: []*smithy.Schema{&sLi
 var mListSharedEndpointsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSharedEndpointsRequest_NextToken, &sListSharedEndpointsRequest_MaxResults, &sListSharedEndpointsRequest_OutpostId}}
 var mListSharedEndpointsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListSharedEndpointsResult_Endpoints, &sListSharedEndpointsResult_NextToken}}
 
-var sCreateEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEndpoint, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sDeleteEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEndpoint, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sListEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEndpoints, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sListOutpostsWithS3 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOutpostsWithS3, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sListSharedEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSharedEndpoints, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var s_S3Outposts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Outposts, Type: smithy.ShapeTypeService, Ext: &ext[5]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &ext[6]})
-var s_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &ext[8]})
-var s_CapacityInBytes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapacityInBytes, Type: smithy.ShapeTypeLong, Ext: &ext[9]})
-var s_CidrBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CidrBlock, Type: smithy.ShapeTypeString, Ext: &ext[10]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &ext[11]})
-var s_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreationTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[13]})
-var s_CustomerOwnedIpv4Pool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerOwnedIpv4Pool, Type: smithy.ShapeTypeString, Ext: &ext[14]})
-var sEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpoint, Members: &mEndpoint, Type: smithy.ShapeTypeStructure, Ext: &ext[15]})
-var sEndpointAccessType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointAccessType, Members: &mEndpointAccessType, Type: smithy.ShapeTypeEnum, Ext: &ext[28]})
-var s_EndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndpointArn, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var s_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndpointId, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var s_Endpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Endpoints, Members: &m_Endpoints, Type: smithy.ShapeTypeList, Ext: &ext[33]})
-var sEndpointStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointStatus, Members: &mEndpointStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[35]})
-var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[41]})
-var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var sFailedReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailedReason, Members: &mFailedReason, Type: smithy.ShapeTypeStructure, Ext: &ext[43]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &ext[46]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[48]})
-var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[49]})
-var sNetworkInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkInterface, Members: &mNetworkInterface, Type: smithy.ShapeTypeStructure, Ext: &ext[50]})
-var s_NetworkInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkInterfaceId, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var s_NetworkInterfaces = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkInterfaces, Members: &m_NetworkInterfaces, Type: smithy.ShapeTypeList, Ext: &ext[53]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var sOutpost = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutpost, Members: &mOutpost, Type: smithy.ShapeTypeStructure, Ext: &ext[56]})
-var s_OutpostArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutpostArn, Type: smithy.ShapeTypeString, Ext: &ext[62]})
-var s_OutpostId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutpostId, Type: smithy.ShapeTypeString, Ext: &ext[63]})
-var sOutpostOfflineException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutpostOfflineException, Members: &mOutpostOfflineException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &ext[64]})
-var s_Outposts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Outposts, Members: &m_Outposts, Type: smithy.ShapeTypeList, Ext: &ext[66]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var s_S3OutpostArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3OutpostArn, Type: smithy.ShapeTypeString, Ext: &ext[70]})
-var s_SecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString, Ext: &ext[71]})
-var s_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &ext[72]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &ext[73]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &ext[75]})
-var s_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &ext[77]})
-var sCreateEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEndpointRequest, Members: &mCreateEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[78]})
-var sCreateEndpointResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEndpointResult, Members: &mCreateEndpointResult, Type: smithy.ShapeTypeStructure, Ext: &ext[84]})
-var sDeleteEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEndpointRequest, Members: &mDeleteEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[86]})
-var sListEndpointsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEndpointsRequest, Members: &mListEndpointsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[89]})
-var sListEndpointsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEndpointsResult, Members: &mListEndpointsResult, Type: smithy.ShapeTypeStructure, Ext: &ext[92]})
-var sListOutpostsWithS3Request = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOutpostsWithS3Request, Members: &mListOutpostsWithS3Request, Type: smithy.ShapeTypeStructure, Ext: &ext[95]})
-var sListOutpostsWithS3Result = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOutpostsWithS3Result, Members: &mListOutpostsWithS3Result, Type: smithy.ShapeTypeStructure, Ext: &ext[98]})
-var sListSharedEndpointsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSharedEndpointsRequest, Members: &mListSharedEndpointsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[101]})
-var sListSharedEndpointsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSharedEndpointsResult, Members: &mListSharedEndpointsResult, Type: smithy.ShapeTypeStructure, Ext: &ext[105]})
+var sCreateEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEndpoint, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateEndpoint})
+var sDeleteEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEndpoint, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eDeleteEndpoint})
+var sListEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEndpoints, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eListEndpoints})
+var sListOutpostsWithS3 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOutpostsWithS3, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eListOutpostsWithS3})
+var sListSharedEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSharedEndpoints, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eListSharedEndpoints})
+var s_S3Outposts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Outposts, Type: smithy.ShapeTypeService, Ext: &e_S3Outposts})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var s_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &e_AwsAccountId})
+var s_CapacityInBytes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapacityInBytes, Type: smithy.ShapeTypeLong, Ext: &e_CapacityInBytes})
+var s_CidrBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CidrBlock, Type: smithy.ShapeTypeString, Ext: &e_CidrBlock})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var s_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreationTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_CreationTime})
+var s_CustomerOwnedIpv4Pool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerOwnedIpv4Pool, Type: smithy.ShapeTypeString, Ext: &e_CustomerOwnedIpv4Pool})
+var sEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpoint, Members: &mEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eEndpoint})
+var sEndpointAccessType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointAccessType, Members: &mEndpointAccessType, Type: smithy.ShapeTypeEnum, Ext: &eEndpointAccessType})
+var s_EndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndpointArn, Type: smithy.ShapeTypeString, Ext: &e_EndpointArn})
+var s_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndpointId, Type: smithy.ShapeTypeString, Ext: &e_EndpointId})
+var s_Endpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Endpoints, Members: &m_Endpoints, Type: smithy.ShapeTypeList, Ext: &e_Endpoints})
+var sEndpointStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointStatus, Members: &mEndpointStatus, Type: smithy.ShapeTypeEnum, Ext: &eEndpointStatus})
+var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &e_ErrorCode})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var sFailedReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailedReason, Members: &mFailedReason, Type: smithy.ShapeTypeStructure, Ext: &eFailedReason})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &e_Message})
+var sNetworkInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkInterface, Members: &mNetworkInterface, Type: smithy.ShapeTypeStructure, Ext: &eNetworkInterface})
+var s_NetworkInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkInterfaceId, Type: smithy.ShapeTypeString, Ext: &e_NetworkInterfaceId})
+var s_NetworkInterfaces = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkInterfaces, Members: &m_NetworkInterfaces, Type: smithy.ShapeTypeList, Ext: &e_NetworkInterfaces})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sOutpost = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutpost, Members: &mOutpost, Type: smithy.ShapeTypeStructure, Ext: &eOutpost})
+var s_OutpostArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutpostArn, Type: smithy.ShapeTypeString, Ext: &e_OutpostArn})
+var s_OutpostId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutpostId, Type: smithy.ShapeTypeString, Ext: &e_OutpostId})
+var sOutpostOfflineException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutpostOfflineException, Members: &mOutpostOfflineException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eOutpostOfflineException})
+var s_Outposts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Outposts, Members: &m_Outposts, Type: smithy.ShapeTypeList, Ext: &e_Outposts})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var s_S3OutpostArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3OutpostArn, Type: smithy.ShapeTypeString, Ext: &e_S3OutpostArn})
+var s_SecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString, Ext: &e_SecurityGroupId})
+var s_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &e_SubnetId})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var s_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &e_VpcId})
+var sCreateEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEndpointRequest, Members: &mCreateEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateEndpointRequest})
+var sCreateEndpointResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEndpointResult, Members: &mCreateEndpointResult, Type: smithy.ShapeTypeStructure, Ext: &eCreateEndpointResult})
+var sDeleteEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEndpointRequest, Members: &mDeleteEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteEndpointRequest})
+var sListEndpointsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEndpointsRequest, Members: &mListEndpointsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListEndpointsRequest})
+var sListEndpointsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEndpointsResult, Members: &mListEndpointsResult, Type: smithy.ShapeTypeStructure, Ext: &eListEndpointsResult})
+var sListOutpostsWithS3Request = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOutpostsWithS3Request, Members: &mListOutpostsWithS3Request, Type: smithy.ShapeTypeStructure, Ext: &eListOutpostsWithS3Request})
+var sListOutpostsWithS3Result = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOutpostsWithS3Result, Members: &mListOutpostsWithS3Result, Type: smithy.ShapeTypeStructure, Ext: &eListOutpostsWithS3Result})
+var sListSharedEndpointsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSharedEndpointsRequest, Members: &mListSharedEndpointsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListSharedEndpointsRequest})
+var sListSharedEndpointsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSharedEndpointsResult, Members: &mListSharedEndpointsResult, Type: smithy.ShapeTypeStructure, Ext: &eListSharedEndpointsResult})
 
-var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[7]})
-var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[12]})
-var sEndpoint_EndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointArn", ID: &i_EndpointArn, Type: smithy.ShapeTypeString, Ext: &ext[16]})
-var sEndpoint_OutpostsId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutpostsId", ID: &i_OutpostId, Type: smithy.ShapeTypeString, Ext: &ext[17]})
-var sEndpoint_CidrBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CidrBlock", ID: &i_CidrBlock, Type: smithy.ShapeTypeString, Ext: &ext[18]})
-var sEndpoint_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iEndpointStatus, Members: &mEndpointStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[19]})
-var sEndpoint_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_CreationTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[20]})
-var sEndpoint_NetworkInterfaces = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkInterfaces", ID: &i_NetworkInterfaces, Members: &m_NetworkInterfaces, Type: smithy.ShapeTypeList, Ext: &ext[21]})
-var sEndpoint_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &ext[22]})
-var sEndpoint_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &ext[23]})
-var sEndpoint_SecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupId", ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString, Ext: &ext[24]})
-var sEndpoint_AccessType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessType", ID: &iEndpointAccessType, Members: &mEndpointAccessType, Type: smithy.ShapeTypeEnum, Ext: &ext[25]})
-var sEndpoint_CustomerOwnedIpv4Pool = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerOwnedIpv4Pool", ID: &i_CustomerOwnedIpv4Pool, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var sEndpoint_FailedReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedReason", ID: &iFailedReason, Members: &mFailedReason, Type: smithy.ShapeTypeStructure, Ext: &ext[27]})
-var sEndpointAccessType_PRIVATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIVATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[29]})
-var sEndpointAccessType_CUSTOMER_OWNED_IP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_OWNED_IP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[30]})
-var s_Endpoints_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEndpoint, Members: &mEndpoint, Type: smithy.ShapeTypeStructure, Ext: &ext[34]})
-var sEndpointStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[36]})
-var sEndpointStatus_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var sEndpointStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[38]})
-var sEndpointStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[39]})
-var sEndpointStatus_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[40]})
-var sFailedReason_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var sFailedReason_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[47]})
-var sNetworkInterface_NetworkInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkInterfaceId", ID: &i_NetworkInterfaceId, Type: smithy.ShapeTypeString, Ext: &ext[51]})
-var s_NetworkInterfaces_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNetworkInterface, Members: &mNetworkInterface, Type: smithy.ShapeTypeStructure, Ext: &ext[54]})
-var sOutpost_OutpostArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutpostArn", ID: &i_OutpostArn, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var sOutpost_S3OutpostArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3OutpostArn", ID: &i_S3OutpostArn, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var sOutpost_OutpostId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutpostId", ID: &i_OutpostId, Type: smithy.ShapeTypeString, Ext: &ext[59]})
-var sOutpost_OwnerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &ext[60]})
-var sOutpost_CapacityInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityInBytes", ID: &i_CapacityInBytes, Type: smithy.ShapeTypeLong, Ext: &ext[61]})
-var sOutpostOfflineException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[65]})
-var s_Outposts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOutpost, Members: &mOutpost, Type: smithy.ShapeTypeStructure, Ext: &ext[67]})
-var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[74]})
-var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[76]})
-var sCreateEndpointRequest_OutpostId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutpostId", ID: &i_OutpostId, Type: smithy.ShapeTypeString, Ext: &ext[79]})
-var sCreateEndpointRequest_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &ext[80]})
-var sCreateEndpointRequest_SecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupId", ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString, Ext: &ext[81]})
-var sCreateEndpointRequest_AccessType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessType", ID: &iEndpointAccessType, Members: &mEndpointAccessType, Type: smithy.ShapeTypeEnum, Ext: &ext[82]})
-var sCreateEndpointRequest_CustomerOwnedIpv4Pool = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerOwnedIpv4Pool", ID: &i_CustomerOwnedIpv4Pool, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var sCreateEndpointResult_EndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointArn", ID: &i_EndpointArn, Type: smithy.ShapeTypeString, Ext: &ext[85]})
-var sDeleteEndpointRequest_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointId", ID: &i_EndpointId, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &ext[87]})
-var sDeleteEndpointRequest_OutpostId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutpostId", ID: &i_OutpostId, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &ext[88]})
-var sListEndpointsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &ext[90]})
-var sListEndpointsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t14, Type: smithy.ShapeTypeInteger, Ext: &ext[91]})
-var sListEndpointsResult_Endpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoints", ID: &i_Endpoints, Members: &m_Endpoints, Type: smithy.ShapeTypeList, Ext: &ext[93]})
-var sListEndpointsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[94]})
-var sListOutpostsWithS3Request_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &ext[96]})
-var sListOutpostsWithS3Request_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t14, Type: smithy.ShapeTypeInteger, Ext: &ext[97]})
-var sListOutpostsWithS3Result_Outposts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Outposts", ID: &i_Outposts, Members: &m_Outposts, Type: smithy.ShapeTypeList, Ext: &ext[99]})
-var sListOutpostsWithS3Result_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[100]})
-var sListSharedEndpointsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var sListSharedEndpointsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t14, Type: smithy.ShapeTypeInteger, Ext: &ext[103]})
-var sListSharedEndpointsRequest_OutpostId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutpostId", ID: &i_OutpostId, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &ext[104]})
-var sListSharedEndpointsResult_Endpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoints", ID: &i_Endpoints, Members: &m_Endpoints, Type: smithy.ShapeTypeList, Ext: &ext[106]})
-var sListSharedEndpointsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[107]})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var sEndpoint_EndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointArn", ID: &i_EndpointArn, Type: smithy.ShapeTypeString, Ext: &eEndpoint_EndpointArn})
+var sEndpoint_OutpostsId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutpostsId", ID: &i_OutpostId, Type: smithy.ShapeTypeString, Ext: &eEndpoint_OutpostsId})
+var sEndpoint_CidrBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CidrBlock", ID: &i_CidrBlock, Type: smithy.ShapeTypeString, Ext: &eEndpoint_CidrBlock})
+var sEndpoint_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iEndpointStatus, Members: &mEndpointStatus, Type: smithy.ShapeTypeEnum, Ext: &eEndpoint_Status})
+var sEndpoint_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_CreationTime, Type: smithy.ShapeTypeTimestamp, Ext: &eEndpoint_CreationTime})
+var sEndpoint_NetworkInterfaces = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkInterfaces", ID: &i_NetworkInterfaces, Members: &m_NetworkInterfaces, Type: smithy.ShapeTypeList, Ext: &eEndpoint_NetworkInterfaces})
+var sEndpoint_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &eEndpoint_VpcId})
+var sEndpoint_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &eEndpoint_SubnetId})
+var sEndpoint_SecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupId", ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString, Ext: &eEndpoint_SecurityGroupId})
+var sEndpoint_AccessType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessType", ID: &iEndpointAccessType, Members: &mEndpointAccessType, Type: smithy.ShapeTypeEnum, Ext: &eEndpoint_AccessType})
+var sEndpoint_CustomerOwnedIpv4Pool = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerOwnedIpv4Pool", ID: &i_CustomerOwnedIpv4Pool, Type: smithy.ShapeTypeString, Ext: &eEndpoint_CustomerOwnedIpv4Pool})
+var sEndpoint_FailedReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedReason", ID: &iFailedReason, Members: &mFailedReason, Type: smithy.ShapeTypeStructure, Ext: &eEndpoint_FailedReason})
+var sEndpointAccessType_PRIVATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIVATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointAccessType_PRIVATE})
+var sEndpointAccessType_CUSTOMER_OWNED_IP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_OWNED_IP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointAccessType_CUSTOMER_OWNED_IP})
+var s_Endpoints_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEndpoint, Members: &mEndpoint, Type: smithy.ShapeTypeStructure, Ext: &e_Endpoints_member})
+var sEndpointStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointStatus_PENDING})
+var sEndpointStatus_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointStatus_AVAILABLE})
+var sEndpointStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointStatus_DELETING})
+var sEndpointStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointStatus_CREATE_FAILED})
+var sEndpointStatus_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointStatus_DELETE_FAILED})
+var sFailedReason_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eFailedReason_ErrorCode})
+var sFailedReason_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eFailedReason_Message})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var sNetworkInterface_NetworkInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkInterfaceId", ID: &i_NetworkInterfaceId, Type: smithy.ShapeTypeString, Ext: &eNetworkInterface_NetworkInterfaceId})
+var s_NetworkInterfaces_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNetworkInterface, Members: &mNetworkInterface, Type: smithy.ShapeTypeStructure, Ext: &e_NetworkInterfaces_member})
+var sOutpost_OutpostArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutpostArn", ID: &i_OutpostArn, Type: smithy.ShapeTypeString, Ext: &eOutpost_OutpostArn})
+var sOutpost_S3OutpostArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3OutpostArn", ID: &i_S3OutpostArn, Type: smithy.ShapeTypeString, Ext: &eOutpost_S3OutpostArn})
+var sOutpost_OutpostId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutpostId", ID: &i_OutpostId, Type: smithy.ShapeTypeString, Ext: &eOutpost_OutpostId})
+var sOutpost_OwnerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &eOutpost_OwnerId})
+var sOutpost_CapacityInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityInBytes", ID: &i_CapacityInBytes, Type: smithy.ShapeTypeLong, Ext: &eOutpost_CapacityInBytes})
+var sOutpostOfflineException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eOutpostOfflineException_Message})
+var s_Outposts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOutpost, Members: &mOutpost, Type: smithy.ShapeTypeStructure, Ext: &e_Outposts_member})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sCreateEndpointRequest_OutpostId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutpostId", ID: &i_OutpostId, Type: smithy.ShapeTypeString, Ext: &eCreateEndpointRequest_OutpostId})
+var sCreateEndpointRequest_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &eCreateEndpointRequest_SubnetId})
+var sCreateEndpointRequest_SecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupId", ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString, Ext: &eCreateEndpointRequest_SecurityGroupId})
+var sCreateEndpointRequest_AccessType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessType", ID: &iEndpointAccessType, Members: &mEndpointAccessType, Type: smithy.ShapeTypeEnum, Ext: &eCreateEndpointRequest_AccessType})
+var sCreateEndpointRequest_CustomerOwnedIpv4Pool = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerOwnedIpv4Pool", ID: &i_CustomerOwnedIpv4Pool, Type: smithy.ShapeTypeString, Ext: &eCreateEndpointRequest_CustomerOwnedIpv4Pool})
+var sCreateEndpointResult_EndpointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointArn", ID: &i_EndpointArn, Type: smithy.ShapeTypeString, Ext: &eCreateEndpointResult_EndpointArn})
+var sDeleteEndpointRequest_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointId", ID: &i_EndpointId, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &eDeleteEndpointRequest_EndpointId})
+var sDeleteEndpointRequest_OutpostId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutpostId", ID: &i_OutpostId, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &eDeleteEndpointRequest_OutpostId})
+var sListEndpointsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eListEndpointsRequest_NextToken})
+var sListEndpointsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t14, Type: smithy.ShapeTypeInteger, Ext: &eListEndpointsRequest_MaxResults})
+var sListEndpointsResult_Endpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoints", ID: &i_Endpoints, Members: &m_Endpoints, Type: smithy.ShapeTypeList, Ext: &eListEndpointsResult_Endpoints})
+var sListEndpointsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListEndpointsResult_NextToken})
+var sListOutpostsWithS3Request_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eListOutpostsWithS3Request_NextToken})
+var sListOutpostsWithS3Request_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t14, Type: smithy.ShapeTypeInteger, Ext: &eListOutpostsWithS3Request_MaxResults})
+var sListOutpostsWithS3Result_Outposts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Outposts", ID: &i_Outposts, Members: &m_Outposts, Type: smithy.ShapeTypeList, Ext: &eListOutpostsWithS3Result_Outposts})
+var sListOutpostsWithS3Result_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListOutpostsWithS3Result_NextToken})
+var sListSharedEndpointsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eListSharedEndpointsRequest_NextToken})
+var sListSharedEndpointsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t14, Type: smithy.ShapeTypeInteger, Ext: &eListSharedEndpointsRequest_MaxResults})
+var sListSharedEndpointsRequest_OutpostId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutpostId", ID: &i_OutpostId, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &eListSharedEndpointsRequest_OutpostId})
+var sListSharedEndpointsResult_Endpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoints", ID: &i_Endpoints, Members: &m_Endpoints, Type: smithy.ShapeTypeList, Ext: &eListSharedEndpointsResult_Endpoints})
+var sListSharedEndpointsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListSharedEndpointsResult_NextToken})
 
 var CreateEndpoint = &sCreateEndpoint
 

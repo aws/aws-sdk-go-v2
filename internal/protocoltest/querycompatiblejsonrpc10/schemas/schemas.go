@@ -7,9 +7,14 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [6]smithy.SchemaExtensions
+var (
+	eQueryCompatibleOperation  smithy.SchemaExtensions
+	e_QueryCompatibleJsonRpc10 smithy.SchemaExtensions
+	eCustomCodeError           smithy.SchemaExtensions
+	eCustomCodeError_message   smithy.SchemaExtensions
+	eNoCustomCodeError         smithy.SchemaExtensions
+	eNoCustomCodeError_message smithy.SchemaExtensions
+)
 
 var (
 	iQueryCompatibleOperation  = smithy.ShapeID{Namespace: "aws.protocoltests.json10", Name: "QueryCompatibleOperation"}
@@ -27,13 +32,13 @@ var t2 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client
 var mCustomCodeError = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomCodeError_message}}
 var mNoCustomCodeError = smithy.SchemaMembers{List: []*smithy.Schema{&sNoCustomCodeError_message}}
 
-var sQueryCompatibleOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryCompatibleOperation, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var s_QueryCompatibleJsonRpc10 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryCompatibleJsonRpc10, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &ext[1]})
-var sCustomCodeError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomCodeError, Members: &mCustomCodeError, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[2]})
-var sNoCustomCodeError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoCustomCodeError, Members: &mNoCustomCodeError, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[4]})
+var sQueryCompatibleOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryCompatibleOperation, Type: smithy.ShapeTypeOperation, Ext: &eQueryCompatibleOperation})
+var s_QueryCompatibleJsonRpc10 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryCompatibleJsonRpc10, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &e_QueryCompatibleJsonRpc10})
+var sCustomCodeError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomCodeError, Members: &mCustomCodeError, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eCustomCodeError})
+var sNoCustomCodeError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoCustomCodeError, Members: &mNoCustomCodeError, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eNoCustomCodeError})
 
-var sCustomCodeError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[3]})
-var sNoCustomCodeError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[5]})
+var sCustomCodeError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCustomCodeError_message})
+var sNoCustomCodeError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eNoCustomCodeError_message})
 
 var QueryCompatibleOperation = &sQueryCompatibleOperation
 

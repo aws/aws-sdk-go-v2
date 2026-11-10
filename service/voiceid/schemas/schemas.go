@@ -7,9 +7,467 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [459]smithy.SchemaExtensions
+var (
+	eAssociateFraudster                                      smithy.SchemaExtensions
+	eCreateDomain                                            smithy.SchemaExtensions
+	eCreateWatchlist                                         smithy.SchemaExtensions
+	eDeleteDomain                                            smithy.SchemaExtensions
+	eDeleteFraudster                                         smithy.SchemaExtensions
+	eDeleteSpeaker                                           smithy.SchemaExtensions
+	eDeleteWatchlist                                         smithy.SchemaExtensions
+	eDescribeDomain                                          smithy.SchemaExtensions
+	eDescribeFraudster                                       smithy.SchemaExtensions
+	eDescribeFraudsterRegistrationJob                        smithy.SchemaExtensions
+	eDescribeSpeaker                                         smithy.SchemaExtensions
+	eDescribeSpeakerEnrollmentJob                            smithy.SchemaExtensions
+	eDescribeWatchlist                                       smithy.SchemaExtensions
+	eDisassociateFraudster                                   smithy.SchemaExtensions
+	eEvaluateSession                                         smithy.SchemaExtensions
+	eListDomains                                             smithy.SchemaExtensions
+	eListFraudsterRegistrationJobs                           smithy.SchemaExtensions
+	eListFraudsters                                          smithy.SchemaExtensions
+	eListSpeakerEnrollmentJobs                               smithy.SchemaExtensions
+	eListSpeakers                                            smithy.SchemaExtensions
+	eListTagsForResource                                     smithy.SchemaExtensions
+	eListWatchlists                                          smithy.SchemaExtensions
+	eOptOutSpeaker                                           smithy.SchemaExtensions
+	eStartFraudsterRegistrationJob                           smithy.SchemaExtensions
+	eStartSpeakerEnrollmentJob                               smithy.SchemaExtensions
+	eTagResource                                             smithy.SchemaExtensions
+	eUntagResource                                           smithy.SchemaExtensions
+	eUpdateDomain                                            smithy.SchemaExtensions
+	eUpdateWatchlist                                         smithy.SchemaExtensions
+	e_VoiceID                                                smithy.SchemaExtensions
+	eAccessDeniedException                                   smithy.SchemaExtensions
+	eAccessDeniedException_Message                           smithy.SchemaExtensions
+	e_AmazonResourceName                                     smithy.SchemaExtensions
+	e_Arn                                                    smithy.SchemaExtensions
+	eAuthenticationConfiguration                             smithy.SchemaExtensions
+	eAuthenticationConfiguration_AcceptanceThreshold         smithy.SchemaExtensions
+	e_AuthenticationDecision                                 smithy.SchemaExtensions
+	eAuthenticationResult                                    smithy.SchemaExtensions
+	eAuthenticationResult_AuthenticationResultId             smithy.SchemaExtensions
+	eAuthenticationResult_AudioAggregationStartedAt          smithy.SchemaExtensions
+	eAuthenticationResult_AudioAggregationEndedAt            smithy.SchemaExtensions
+	eAuthenticationResult_CustomerSpeakerId                  smithy.SchemaExtensions
+	eAuthenticationResult_GeneratedSpeakerId                 smithy.SchemaExtensions
+	eAuthenticationResult_Decision                           smithy.SchemaExtensions
+	eAuthenticationResult_Score                              smithy.SchemaExtensions
+	eAuthenticationResult_Configuration                      smithy.SchemaExtensions
+	e_Boolean                                                smithy.SchemaExtensions
+	e_ClientTokenString                                      smithy.SchemaExtensions
+	eConflictException                                       smithy.SchemaExtensions
+	eConflictException_Message                               smithy.SchemaExtensions
+	eConflictException_ConflictType                          smithy.SchemaExtensions
+	e_ConflictType                                           smithy.SchemaExtensions
+	e_CustomerSpeakerId                                      smithy.SchemaExtensions
+	e_Description                                            smithy.SchemaExtensions
+	eDomain                                                  smithy.SchemaExtensions
+	eDomain_DomainId                                         smithy.SchemaExtensions
+	eDomain_Arn                                              smithy.SchemaExtensions
+	eDomain_Name                                             smithy.SchemaExtensions
+	eDomain_Description                                      smithy.SchemaExtensions
+	eDomain_DomainStatus                                     smithy.SchemaExtensions
+	eDomain_ServerSideEncryptionConfiguration                smithy.SchemaExtensions
+	eDomain_CreatedAt                                        smithy.SchemaExtensions
+	eDomain_UpdatedAt                                        smithy.SchemaExtensions
+	eDomain_ServerSideEncryptionUpdateDetails                smithy.SchemaExtensions
+	eDomain_WatchlistDetails                                 smithy.SchemaExtensions
+	e_DomainId                                               smithy.SchemaExtensions
+	e_DomainName                                             smithy.SchemaExtensions
+	e_DomainStatus                                           smithy.SchemaExtensions
+	e_DomainSummaries                                        smithy.SchemaExtensions
+	e_DomainSummaries_member                                 smithy.SchemaExtensions
+	eDomainSummary                                           smithy.SchemaExtensions
+	eDomainSummary_DomainId                                  smithy.SchemaExtensions
+	eDomainSummary_Arn                                       smithy.SchemaExtensions
+	eDomainSummary_Name                                      smithy.SchemaExtensions
+	eDomainSummary_Description                               smithy.SchemaExtensions
+	eDomainSummary_DomainStatus                              smithy.SchemaExtensions
+	eDomainSummary_ServerSideEncryptionConfiguration         smithy.SchemaExtensions
+	eDomainSummary_CreatedAt                                 smithy.SchemaExtensions
+	eDomainSummary_UpdatedAt                                 smithy.SchemaExtensions
+	eDomainSummary_ServerSideEncryptionUpdateDetails         smithy.SchemaExtensions
+	eDomainSummary_WatchlistDetails                          smithy.SchemaExtensions
+	e_DuplicateRegistrationAction                            smithy.SchemaExtensions
+	eEnrollmentConfig                                        smithy.SchemaExtensions
+	eEnrollmentConfig_ExistingEnrollmentAction               smithy.SchemaExtensions
+	eEnrollmentConfig_FraudDetectionConfig                   smithy.SchemaExtensions
+	eEnrollmentJobFraudDetectionConfig                       smithy.SchemaExtensions
+	eEnrollmentJobFraudDetectionConfig_FraudDetectionAction  smithy.SchemaExtensions
+	eEnrollmentJobFraudDetectionConfig_RiskThreshold         smithy.SchemaExtensions
+	eEnrollmentJobFraudDetectionConfig_WatchlistIds          smithy.SchemaExtensions
+	e_EnrollmentJobFraudDetectionConfigWatchlistIds          smithy.SchemaExtensions
+	e_EnrollmentJobFraudDetectionConfigWatchlistIds_member   smithy.SchemaExtensions
+	e_ExistingEnrollmentAction                               smithy.SchemaExtensions
+	eFailureDetails                                          smithy.SchemaExtensions
+	eFailureDetails_StatusCode                               smithy.SchemaExtensions
+	eFailureDetails_Message                                  smithy.SchemaExtensions
+	e_FraudDetectionAction                                   smithy.SchemaExtensions
+	eFraudDetectionConfiguration                             smithy.SchemaExtensions
+	eFraudDetectionConfiguration_RiskThreshold               smithy.SchemaExtensions
+	eFraudDetectionConfiguration_WatchlistId                 smithy.SchemaExtensions
+	e_FraudDetectionDecision                                 smithy.SchemaExtensions
+	e_FraudDetectionReason                                   smithy.SchemaExtensions
+	e_FraudDetectionReasons                                  smithy.SchemaExtensions
+	e_FraudDetectionReasons_member                           smithy.SchemaExtensions
+	eFraudDetectionResult                                    smithy.SchemaExtensions
+	eFraudDetectionResult_FraudDetectionResultId             smithy.SchemaExtensions
+	eFraudDetectionResult_AudioAggregationStartedAt          smithy.SchemaExtensions
+	eFraudDetectionResult_AudioAggregationEndedAt            smithy.SchemaExtensions
+	eFraudDetectionResult_Configuration                      smithy.SchemaExtensions
+	eFraudDetectionResult_Decision                           smithy.SchemaExtensions
+	eFraudDetectionResult_Reasons                            smithy.SchemaExtensions
+	eFraudDetectionResult_RiskDetails                        smithy.SchemaExtensions
+	eFraudRiskDetails                                        smithy.SchemaExtensions
+	eFraudRiskDetails_KnownFraudsterRisk                     smithy.SchemaExtensions
+	eFraudRiskDetails_VoiceSpoofingRisk                      smithy.SchemaExtensions
+	eFraudster                                               smithy.SchemaExtensions
+	eFraudster_DomainId                                      smithy.SchemaExtensions
+	eFraudster_GeneratedFraudsterId                          smithy.SchemaExtensions
+	eFraudster_CreatedAt                                     smithy.SchemaExtensions
+	eFraudster_WatchlistIds                                  smithy.SchemaExtensions
+	e_FraudsterId                                            smithy.SchemaExtensions
+	eFraudsterRegistrationJob                                smithy.SchemaExtensions
+	eFraudsterRegistrationJob_JobName                        smithy.SchemaExtensions
+	eFraudsterRegistrationJob_JobId                          smithy.SchemaExtensions
+	eFraudsterRegistrationJob_JobStatus                      smithy.SchemaExtensions
+	eFraudsterRegistrationJob_DomainId                       smithy.SchemaExtensions
+	eFraudsterRegistrationJob_DataAccessRoleArn              smithy.SchemaExtensions
+	eFraudsterRegistrationJob_RegistrationConfig             smithy.SchemaExtensions
+	eFraudsterRegistrationJob_InputDataConfig                smithy.SchemaExtensions
+	eFraudsterRegistrationJob_OutputDataConfig               smithy.SchemaExtensions
+	eFraudsterRegistrationJob_CreatedAt                      smithy.SchemaExtensions
+	eFraudsterRegistrationJob_EndedAt                        smithy.SchemaExtensions
+	eFraudsterRegistrationJob_FailureDetails                 smithy.SchemaExtensions
+	eFraudsterRegistrationJob_JobProgress                    smithy.SchemaExtensions
+	e_FraudsterRegistrationJobStatus                         smithy.SchemaExtensions
+	e_FraudsterRegistrationJobSummaries                      smithy.SchemaExtensions
+	e_FraudsterRegistrationJobSummaries_member               smithy.SchemaExtensions
+	eFraudsterRegistrationJobSummary                         smithy.SchemaExtensions
+	eFraudsterRegistrationJobSummary_JobName                 smithy.SchemaExtensions
+	eFraudsterRegistrationJobSummary_JobId                   smithy.SchemaExtensions
+	eFraudsterRegistrationJobSummary_JobStatus               smithy.SchemaExtensions
+	eFraudsterRegistrationJobSummary_DomainId                smithy.SchemaExtensions
+	eFraudsterRegistrationJobSummary_CreatedAt               smithy.SchemaExtensions
+	eFraudsterRegistrationJobSummary_EndedAt                 smithy.SchemaExtensions
+	eFraudsterRegistrationJobSummary_FailureDetails          smithy.SchemaExtensions
+	eFraudsterRegistrationJobSummary_JobProgress             smithy.SchemaExtensions
+	e_FraudsterSummaries                                     smithy.SchemaExtensions
+	e_FraudsterSummaries_member                              smithy.SchemaExtensions
+	eFraudsterSummary                                        smithy.SchemaExtensions
+	eFraudsterSummary_DomainId                               smithy.SchemaExtensions
+	eFraudsterSummary_GeneratedFraudsterId                   smithy.SchemaExtensions
+	eFraudsterSummary_CreatedAt                              smithy.SchemaExtensions
+	eFraudsterSummary_WatchlistIds                           smithy.SchemaExtensions
+	e_GeneratedFraudsterId                                   smithy.SchemaExtensions
+	e_GeneratedSpeakerId                                     smithy.SchemaExtensions
+	e_IamRoleArn                                             smithy.SchemaExtensions
+	eInputDataConfig                                         smithy.SchemaExtensions
+	eInputDataConfig_S3Uri                                   smithy.SchemaExtensions
+	e_Integer                                                smithy.SchemaExtensions
+	eInternalServerException                                 smithy.SchemaExtensions
+	eInternalServerException_Message                         smithy.SchemaExtensions
+	e_JobId                                                  smithy.SchemaExtensions
+	e_JobName                                                smithy.SchemaExtensions
+	eJobProgress                                             smithy.SchemaExtensions
+	eJobProgress_PercentComplete                             smithy.SchemaExtensions
+	e_KmsKeyId                                               smithy.SchemaExtensions
+	eKnownFraudsterRisk                                      smithy.SchemaExtensions
+	eKnownFraudsterRisk_RiskScore                            smithy.SchemaExtensions
+	eKnownFraudsterRisk_GeneratedFraudsterId                 smithy.SchemaExtensions
+	e_MaxResultsForList                                      smithy.SchemaExtensions
+	e_MaxResultsForListDomainFe                              smithy.SchemaExtensions
+	e_NextToken                                              smithy.SchemaExtensions
+	eOutputDataConfig                                        smithy.SchemaExtensions
+	eOutputDataConfig_S3Uri                                  smithy.SchemaExtensions
+	eOutputDataConfig_KmsKeyId                               smithy.SchemaExtensions
+	eRegistrationConfig                                      smithy.SchemaExtensions
+	eRegistrationConfig_DuplicateRegistrationAction          smithy.SchemaExtensions
+	eRegistrationConfig_FraudsterSimilarityThreshold         smithy.SchemaExtensions
+	eRegistrationConfig_WatchlistIds                         smithy.SchemaExtensions
+	e_RegistrationConfigWatchlistIds                         smithy.SchemaExtensions
+	e_RegistrationConfigWatchlistIds_member                  smithy.SchemaExtensions
+	eResourceNotFoundException                               smithy.SchemaExtensions
+	eResourceNotFoundException_Message                       smithy.SchemaExtensions
+	eResourceNotFoundException_ResourceType                  smithy.SchemaExtensions
+	e_ResourceType                                           smithy.SchemaExtensions
+	e_ResponseWatchlistIds                                   smithy.SchemaExtensions
+	e_ResponseWatchlistIds_member                            smithy.SchemaExtensions
+	e_S3Uri                                                  smithy.SchemaExtensions
+	e_Score                                                  smithy.SchemaExtensions
+	eServerSideEncryptionConfiguration                       smithy.SchemaExtensions
+	eServerSideEncryptionConfiguration_KmsKeyId              smithy.SchemaExtensions
+	eServerSideEncryptionUpdateDetails                       smithy.SchemaExtensions
+	eServerSideEncryptionUpdateDetails_OldKmsKeyId           smithy.SchemaExtensions
+	eServerSideEncryptionUpdateDetails_UpdateStatus          smithy.SchemaExtensions
+	eServerSideEncryptionUpdateDetails_Message               smithy.SchemaExtensions
+	e_ServerSideEncryptionUpdateStatus                       smithy.SchemaExtensions
+	eServiceQuotaExceededException                           smithy.SchemaExtensions
+	eServiceQuotaExceededException_Message                   smithy.SchemaExtensions
+	e_SessionId                                              smithy.SchemaExtensions
+	e_SessionName                                            smithy.SchemaExtensions
+	e_SessionNameOrId                                        smithy.SchemaExtensions
+	eSpeaker                                                 smithy.SchemaExtensions
+	eSpeaker_DomainId                                        smithy.SchemaExtensions
+	eSpeaker_CustomerSpeakerId                               smithy.SchemaExtensions
+	eSpeaker_GeneratedSpeakerId                              smithy.SchemaExtensions
+	eSpeaker_Status                                          smithy.SchemaExtensions
+	eSpeaker_CreatedAt                                       smithy.SchemaExtensions
+	eSpeaker_UpdatedAt                                       smithy.SchemaExtensions
+	eSpeaker_LastAccessedAt                                  smithy.SchemaExtensions
+	eSpeakerEnrollmentJob                                    smithy.SchemaExtensions
+	eSpeakerEnrollmentJob_JobName                            smithy.SchemaExtensions
+	eSpeakerEnrollmentJob_JobId                              smithy.SchemaExtensions
+	eSpeakerEnrollmentJob_JobStatus                          smithy.SchemaExtensions
+	eSpeakerEnrollmentJob_DomainId                           smithy.SchemaExtensions
+	eSpeakerEnrollmentJob_DataAccessRoleArn                  smithy.SchemaExtensions
+	eSpeakerEnrollmentJob_EnrollmentConfig                   smithy.SchemaExtensions
+	eSpeakerEnrollmentJob_InputDataConfig                    smithy.SchemaExtensions
+	eSpeakerEnrollmentJob_OutputDataConfig                   smithy.SchemaExtensions
+	eSpeakerEnrollmentJob_CreatedAt                          smithy.SchemaExtensions
+	eSpeakerEnrollmentJob_EndedAt                            smithy.SchemaExtensions
+	eSpeakerEnrollmentJob_FailureDetails                     smithy.SchemaExtensions
+	eSpeakerEnrollmentJob_JobProgress                        smithy.SchemaExtensions
+	e_SpeakerEnrollmentJobStatus                             smithy.SchemaExtensions
+	e_SpeakerEnrollmentJobSummaries                          smithy.SchemaExtensions
+	e_SpeakerEnrollmentJobSummaries_member                   smithy.SchemaExtensions
+	eSpeakerEnrollmentJobSummary                             smithy.SchemaExtensions
+	eSpeakerEnrollmentJobSummary_JobName                     smithy.SchemaExtensions
+	eSpeakerEnrollmentJobSummary_JobId                       smithy.SchemaExtensions
+	eSpeakerEnrollmentJobSummary_JobStatus                   smithy.SchemaExtensions
+	eSpeakerEnrollmentJobSummary_DomainId                    smithy.SchemaExtensions
+	eSpeakerEnrollmentJobSummary_CreatedAt                   smithy.SchemaExtensions
+	eSpeakerEnrollmentJobSummary_EndedAt                     smithy.SchemaExtensions
+	eSpeakerEnrollmentJobSummary_FailureDetails              smithy.SchemaExtensions
+	eSpeakerEnrollmentJobSummary_JobProgress                 smithy.SchemaExtensions
+	e_SpeakerId                                              smithy.SchemaExtensions
+	e_SpeakerStatus                                          smithy.SchemaExtensions
+	e_SpeakerSummaries                                       smithy.SchemaExtensions
+	e_SpeakerSummaries_member                                smithy.SchemaExtensions
+	eSpeakerSummary                                          smithy.SchemaExtensions
+	eSpeakerSummary_DomainId                                 smithy.SchemaExtensions
+	eSpeakerSummary_CustomerSpeakerId                        smithy.SchemaExtensions
+	eSpeakerSummary_GeneratedSpeakerId                       smithy.SchemaExtensions
+	eSpeakerSummary_Status                                   smithy.SchemaExtensions
+	eSpeakerSummary_CreatedAt                                smithy.SchemaExtensions
+	eSpeakerSummary_UpdatedAt                                smithy.SchemaExtensions
+	eSpeakerSummary_LastAccessedAt                           smithy.SchemaExtensions
+	e_StreamingStatus                                        smithy.SchemaExtensions
+	e_String                                                 smithy.SchemaExtensions
+	eTag                                                     smithy.SchemaExtensions
+	eTag_Key                                                 smithy.SchemaExtensions
+	eTag_Value                                               smithy.SchemaExtensions
+	e_TagKey                                                 smithy.SchemaExtensions
+	e_TagKeyList                                             smithy.SchemaExtensions
+	e_TagKeyList_member                                      smithy.SchemaExtensions
+	e_TagList                                                smithy.SchemaExtensions
+	e_TagList_member                                         smithy.SchemaExtensions
+	e_TagValue                                               smithy.SchemaExtensions
+	eThrottlingException                                     smithy.SchemaExtensions
+	eThrottlingException_Message                             smithy.SchemaExtensions
+	e_Timestamp                                              smithy.SchemaExtensions
+	e_UniqueIdLarge                                          smithy.SchemaExtensions
+	eValidationException                                     smithy.SchemaExtensions
+	eValidationException_Message                             smithy.SchemaExtensions
+	eVoiceSpoofingRisk                                       smithy.SchemaExtensions
+	eVoiceSpoofingRisk_RiskScore                             smithy.SchemaExtensions
+	eWatchlist                                               smithy.SchemaExtensions
+	eWatchlist_DomainId                                      smithy.SchemaExtensions
+	eWatchlist_WatchlistId                                   smithy.SchemaExtensions
+	eWatchlist_Name                                          smithy.SchemaExtensions
+	eWatchlist_Description                                   smithy.SchemaExtensions
+	eWatchlist_DefaultWatchlist                              smithy.SchemaExtensions
+	eWatchlist_CreatedAt                                     smithy.SchemaExtensions
+	eWatchlist_UpdatedAt                                     smithy.SchemaExtensions
+	e_WatchlistDescription                                   smithy.SchemaExtensions
+	eWatchlistDetails                                        smithy.SchemaExtensions
+	eWatchlistDetails_DefaultWatchlistId                     smithy.SchemaExtensions
+	e_WatchlistId                                            smithy.SchemaExtensions
+	e_WatchlistName                                          smithy.SchemaExtensions
+	e_WatchlistSummaries                                     smithy.SchemaExtensions
+	e_WatchlistSummaries_member                              smithy.SchemaExtensions
+	eWatchlistSummary                                        smithy.SchemaExtensions
+	eWatchlistSummary_DomainId                               smithy.SchemaExtensions
+	eWatchlistSummary_WatchlistId                            smithy.SchemaExtensions
+	eWatchlistSummary_Name                                   smithy.SchemaExtensions
+	eWatchlistSummary_Description                            smithy.SchemaExtensions
+	eWatchlistSummary_DefaultWatchlist                       smithy.SchemaExtensions
+	eWatchlistSummary_CreatedAt                              smithy.SchemaExtensions
+	eWatchlistSummary_UpdatedAt                              smithy.SchemaExtensions
+	eAssociateFraudsterRequest                               smithy.SchemaExtensions
+	eAssociateFraudsterRequest_DomainId                      smithy.SchemaExtensions
+	eAssociateFraudsterRequest_WatchlistId                   smithy.SchemaExtensions
+	eAssociateFraudsterRequest_FraudsterId                   smithy.SchemaExtensions
+	eAssociateFraudsterResponse                              smithy.SchemaExtensions
+	eAssociateFraudsterResponse_Fraudster                    smithy.SchemaExtensions
+	eCreateDomainRequest                                     smithy.SchemaExtensions
+	eCreateDomainRequest_Name                                smithy.SchemaExtensions
+	eCreateDomainRequest_Description                         smithy.SchemaExtensions
+	eCreateDomainRequest_ServerSideEncryptionConfiguration   smithy.SchemaExtensions
+	eCreateDomainRequest_ClientToken                         smithy.SchemaExtensions
+	eCreateDomainRequest_Tags                                smithy.SchemaExtensions
+	eCreateDomainResponse                                    smithy.SchemaExtensions
+	eCreateDomainResponse_Domain                             smithy.SchemaExtensions
+	eCreateWatchlistRequest                                  smithy.SchemaExtensions
+	eCreateWatchlistRequest_DomainId                         smithy.SchemaExtensions
+	eCreateWatchlistRequest_Name                             smithy.SchemaExtensions
+	eCreateWatchlistRequest_Description                      smithy.SchemaExtensions
+	eCreateWatchlistRequest_ClientToken                      smithy.SchemaExtensions
+	eCreateWatchlistResponse                                 smithy.SchemaExtensions
+	eCreateWatchlistResponse_Watchlist                       smithy.SchemaExtensions
+	eDeleteDomainRequest                                     smithy.SchemaExtensions
+	eDeleteDomainRequest_DomainId                            smithy.SchemaExtensions
+	eDeleteFraudsterRequest                                  smithy.SchemaExtensions
+	eDeleteFraudsterRequest_DomainId                         smithy.SchemaExtensions
+	eDeleteFraudsterRequest_FraudsterId                      smithy.SchemaExtensions
+	eDeleteSpeakerRequest                                    smithy.SchemaExtensions
+	eDeleteSpeakerRequest_DomainId                           smithy.SchemaExtensions
+	eDeleteSpeakerRequest_SpeakerId                          smithy.SchemaExtensions
+	eDeleteWatchlistRequest                                  smithy.SchemaExtensions
+	eDeleteWatchlistRequest_DomainId                         smithy.SchemaExtensions
+	eDeleteWatchlistRequest_WatchlistId                      smithy.SchemaExtensions
+	eDescribeDomainRequest                                   smithy.SchemaExtensions
+	eDescribeDomainRequest_DomainId                          smithy.SchemaExtensions
+	eDescribeDomainResponse                                  smithy.SchemaExtensions
+	eDescribeDomainResponse_Domain                           smithy.SchemaExtensions
+	eDescribeFraudsterRequest                                smithy.SchemaExtensions
+	eDescribeFraudsterRequest_DomainId                       smithy.SchemaExtensions
+	eDescribeFraudsterRequest_FraudsterId                    smithy.SchemaExtensions
+	eDescribeFraudsterResponse                               smithy.SchemaExtensions
+	eDescribeFraudsterResponse_Fraudster                     smithy.SchemaExtensions
+	eDescribeFraudsterRegistrationJobRequest                 smithy.SchemaExtensions
+	eDescribeFraudsterRegistrationJobRequest_DomainId        smithy.SchemaExtensions
+	eDescribeFraudsterRegistrationJobRequest_JobId           smithy.SchemaExtensions
+	eDescribeFraudsterRegistrationJobResponse                smithy.SchemaExtensions
+	eDescribeFraudsterRegistrationJobResponse_Job            smithy.SchemaExtensions
+	eDescribeSpeakerEnrollmentJobRequest                     smithy.SchemaExtensions
+	eDescribeSpeakerEnrollmentJobRequest_DomainId            smithy.SchemaExtensions
+	eDescribeSpeakerEnrollmentJobRequest_JobId               smithy.SchemaExtensions
+	eDescribeSpeakerEnrollmentJobResponse                    smithy.SchemaExtensions
+	eDescribeSpeakerEnrollmentJobResponse_Job                smithy.SchemaExtensions
+	eDescribeSpeakerRequest                                  smithy.SchemaExtensions
+	eDescribeSpeakerRequest_DomainId                         smithy.SchemaExtensions
+	eDescribeSpeakerRequest_SpeakerId                        smithy.SchemaExtensions
+	eDescribeSpeakerResponse                                 smithy.SchemaExtensions
+	eDescribeSpeakerResponse_Speaker                         smithy.SchemaExtensions
+	eDescribeWatchlistRequest                                smithy.SchemaExtensions
+	eDescribeWatchlistRequest_DomainId                       smithy.SchemaExtensions
+	eDescribeWatchlistRequest_WatchlistId                    smithy.SchemaExtensions
+	eDescribeWatchlistResponse                               smithy.SchemaExtensions
+	eDescribeWatchlistResponse_Watchlist                     smithy.SchemaExtensions
+	eDisassociateFraudsterRequest                            smithy.SchemaExtensions
+	eDisassociateFraudsterRequest_DomainId                   smithy.SchemaExtensions
+	eDisassociateFraudsterRequest_WatchlistId                smithy.SchemaExtensions
+	eDisassociateFraudsterRequest_FraudsterId                smithy.SchemaExtensions
+	eDisassociateFraudsterResponse                           smithy.SchemaExtensions
+	eDisassociateFraudsterResponse_Fraudster                 smithy.SchemaExtensions
+	eEvaluateSessionRequest                                  smithy.SchemaExtensions
+	eEvaluateSessionRequest_DomainId                         smithy.SchemaExtensions
+	eEvaluateSessionRequest_SessionNameOrId                  smithy.SchemaExtensions
+	eEvaluateSessionResponse                                 smithy.SchemaExtensions
+	eEvaluateSessionResponse_DomainId                        smithy.SchemaExtensions
+	eEvaluateSessionResponse_SessionId                       smithy.SchemaExtensions
+	eEvaluateSessionResponse_SessionName                     smithy.SchemaExtensions
+	eEvaluateSessionResponse_StreamingStatus                 smithy.SchemaExtensions
+	eEvaluateSessionResponse_AuthenticationResult            smithy.SchemaExtensions
+	eEvaluateSessionResponse_FraudDetectionResult            smithy.SchemaExtensions
+	eListDomainsRequest                                      smithy.SchemaExtensions
+	eListDomainsRequest_MaxResults                           smithy.SchemaExtensions
+	eListDomainsRequest_NextToken                            smithy.SchemaExtensions
+	eListDomainsResponse                                     smithy.SchemaExtensions
+	eListDomainsResponse_DomainSummaries                     smithy.SchemaExtensions
+	eListDomainsResponse_NextToken                           smithy.SchemaExtensions
+	eListFraudsterRegistrationJobsRequest                    smithy.SchemaExtensions
+	eListFraudsterRegistrationJobsRequest_DomainId           smithy.SchemaExtensions
+	eListFraudsterRegistrationJobsRequest_JobStatus          smithy.SchemaExtensions
+	eListFraudsterRegistrationJobsRequest_MaxResults         smithy.SchemaExtensions
+	eListFraudsterRegistrationJobsRequest_NextToken          smithy.SchemaExtensions
+	eListFraudsterRegistrationJobsResponse                   smithy.SchemaExtensions
+	eListFraudsterRegistrationJobsResponse_JobSummaries      smithy.SchemaExtensions
+	eListFraudsterRegistrationJobsResponse_NextToken         smithy.SchemaExtensions
+	eListFraudstersRequest                                   smithy.SchemaExtensions
+	eListFraudstersRequest_DomainId                          smithy.SchemaExtensions
+	eListFraudstersRequest_WatchlistId                       smithy.SchemaExtensions
+	eListFraudstersRequest_MaxResults                        smithy.SchemaExtensions
+	eListFraudstersRequest_NextToken                         smithy.SchemaExtensions
+	eListFraudstersResponse                                  smithy.SchemaExtensions
+	eListFraudstersResponse_FraudsterSummaries               smithy.SchemaExtensions
+	eListFraudstersResponse_NextToken                        smithy.SchemaExtensions
+	eListSpeakerEnrollmentJobsRequest                        smithy.SchemaExtensions
+	eListSpeakerEnrollmentJobsRequest_DomainId               smithy.SchemaExtensions
+	eListSpeakerEnrollmentJobsRequest_JobStatus              smithy.SchemaExtensions
+	eListSpeakerEnrollmentJobsRequest_MaxResults             smithy.SchemaExtensions
+	eListSpeakerEnrollmentJobsRequest_NextToken              smithy.SchemaExtensions
+	eListSpeakerEnrollmentJobsResponse                       smithy.SchemaExtensions
+	eListSpeakerEnrollmentJobsResponse_JobSummaries          smithy.SchemaExtensions
+	eListSpeakerEnrollmentJobsResponse_NextToken             smithy.SchemaExtensions
+	eListSpeakersRequest                                     smithy.SchemaExtensions
+	eListSpeakersRequest_DomainId                            smithy.SchemaExtensions
+	eListSpeakersRequest_MaxResults                          smithy.SchemaExtensions
+	eListSpeakersRequest_NextToken                           smithy.SchemaExtensions
+	eListSpeakersResponse                                    smithy.SchemaExtensions
+	eListSpeakersResponse_SpeakerSummaries                   smithy.SchemaExtensions
+	eListSpeakersResponse_NextToken                          smithy.SchemaExtensions
+	eListTagsForResourceRequest                              smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn                  smithy.SchemaExtensions
+	eListTagsForResourceResponse                             smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                        smithy.SchemaExtensions
+	eListWatchlistsRequest                                   smithy.SchemaExtensions
+	eListWatchlistsRequest_DomainId                          smithy.SchemaExtensions
+	eListWatchlistsRequest_MaxResults                        smithy.SchemaExtensions
+	eListWatchlistsRequest_NextToken                         smithy.SchemaExtensions
+	eListWatchlistsResponse                                  smithy.SchemaExtensions
+	eListWatchlistsResponse_WatchlistSummaries               smithy.SchemaExtensions
+	eListWatchlistsResponse_NextToken                        smithy.SchemaExtensions
+	eOptOutSpeakerRequest                                    smithy.SchemaExtensions
+	eOptOutSpeakerRequest_DomainId                           smithy.SchemaExtensions
+	eOptOutSpeakerRequest_SpeakerId                          smithy.SchemaExtensions
+	eOptOutSpeakerResponse                                   smithy.SchemaExtensions
+	eOptOutSpeakerResponse_Speaker                           smithy.SchemaExtensions
+	eStartFraudsterRegistrationJobRequest                    smithy.SchemaExtensions
+	eStartFraudsterRegistrationJobRequest_ClientToken        smithy.SchemaExtensions
+	eStartFraudsterRegistrationJobRequest_JobName            smithy.SchemaExtensions
+	eStartFraudsterRegistrationJobRequest_DomainId           smithy.SchemaExtensions
+	eStartFraudsterRegistrationJobRequest_DataAccessRoleArn  smithy.SchemaExtensions
+	eStartFraudsterRegistrationJobRequest_RegistrationConfig smithy.SchemaExtensions
+	eStartFraudsterRegistrationJobRequest_InputDataConfig    smithy.SchemaExtensions
+	eStartFraudsterRegistrationJobRequest_OutputDataConfig   smithy.SchemaExtensions
+	eStartFraudsterRegistrationJobResponse                   smithy.SchemaExtensions
+	eStartFraudsterRegistrationJobResponse_Job               smithy.SchemaExtensions
+	eStartSpeakerEnrollmentJobRequest                        smithy.SchemaExtensions
+	eStartSpeakerEnrollmentJobRequest_ClientToken            smithy.SchemaExtensions
+	eStartSpeakerEnrollmentJobRequest_JobName                smithy.SchemaExtensions
+	eStartSpeakerEnrollmentJobRequest_DomainId               smithy.SchemaExtensions
+	eStartSpeakerEnrollmentJobRequest_DataAccessRoleArn      smithy.SchemaExtensions
+	eStartSpeakerEnrollmentJobRequest_EnrollmentConfig       smithy.SchemaExtensions
+	eStartSpeakerEnrollmentJobRequest_InputDataConfig        smithy.SchemaExtensions
+	eStartSpeakerEnrollmentJobRequest_OutputDataConfig       smithy.SchemaExtensions
+	eStartSpeakerEnrollmentJobResponse                       smithy.SchemaExtensions
+	eStartSpeakerEnrollmentJobResponse_Job                   smithy.SchemaExtensions
+	eTagResourceRequest                                      smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                          smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                 smithy.SchemaExtensions
+	eTagResourceResponse                                     smithy.SchemaExtensions
+	eUntagResourceRequest                                    smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                        smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                            smithy.SchemaExtensions
+	eUntagResourceResponse                                   smithy.SchemaExtensions
+	eUpdateDomainRequest                                     smithy.SchemaExtensions
+	eUpdateDomainRequest_DomainId                            smithy.SchemaExtensions
+	eUpdateDomainRequest_Name                                smithy.SchemaExtensions
+	eUpdateDomainRequest_Description                         smithy.SchemaExtensions
+	eUpdateDomainRequest_ServerSideEncryptionConfiguration   smithy.SchemaExtensions
+	eUpdateDomainResponse                                    smithy.SchemaExtensions
+	eUpdateDomainResponse_Domain                             smithy.SchemaExtensions
+	eUpdateWatchlistRequest                                  smithy.SchemaExtensions
+	eUpdateWatchlistRequest_DomainId                         smithy.SchemaExtensions
+	eUpdateWatchlistRequest_WatchlistId                      smithy.SchemaExtensions
+	eUpdateWatchlistRequest_Name                             smithy.SchemaExtensions
+	eUpdateWatchlistRequest_Description                      smithy.SchemaExtensions
+	eUpdateWatchlistResponse                                 smithy.SchemaExtensions
+	eUpdateWatchlistResponse_Watchlist                       smithy.SchemaExtensions
+)
 
 var (
 	iAssociateFraudster                             = smithy.ShapeID{Namespace: "com.amazonaws.voiceid", Name: "AssociateFraudster"}
@@ -318,466 +776,466 @@ var mUpdateDomainResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdate
 var mUpdateWatchlistRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWatchlistRequest_DomainId, &sUpdateWatchlistRequest_WatchlistId, &sUpdateWatchlistRequest_Name, &sUpdateWatchlistRequest_Description}}
 var mUpdateWatchlistResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWatchlistResponse_Watchlist}}
 
-var sAssociateFraudster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateFraudster, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCreateDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDomain, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sCreateWatchlist = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWatchlist, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sDeleteDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomain, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sDeleteFraudster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFraudster, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sDeleteSpeaker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSpeaker, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sDeleteWatchlist = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWatchlist, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sDescribeDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDomain, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sDescribeFraudster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFraudster, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sDescribeFraudsterRegistrationJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFraudsterRegistrationJob, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sDescribeSpeaker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSpeaker, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sDescribeSpeakerEnrollmentJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSpeakerEnrollmentJob, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sDescribeWatchlist = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWatchlist, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sDisassociateFraudster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateFraudster, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sEvaluateSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluateSession, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sListDomains = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomains, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sListFraudsterRegistrationJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFraudsterRegistrationJobs, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sListFraudsters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFraudsters, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sListSpeakerEnrollmentJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSpeakerEnrollmentJobs, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sListSpeakers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSpeakers, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &ext[20]})
-var sListWatchlists = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWatchlists, Type: smithy.ShapeTypeOperation, Ext: &ext[21]})
-var sOptOutSpeaker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptOutSpeaker, Type: smithy.ShapeTypeOperation, Ext: &ext[22]})
-var sStartFraudsterRegistrationJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFraudsterRegistrationJob, Type: smithy.ShapeTypeOperation, Ext: &ext[23]})
-var sStartSpeakerEnrollmentJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSpeakerEnrollmentJob, Type: smithy.ShapeTypeOperation, Ext: &ext[24]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[25]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[26]})
-var sUpdateDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomain, Type: smithy.ShapeTypeOperation, Ext: &ext[27]})
-var sUpdateWatchlist = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWatchlist, Type: smithy.ShapeTypeOperation, Ext: &ext[28]})
-var s_VoiceID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceID, Type: smithy.ShapeTypeService, Ext: &ext[29]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[30]})
-var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var sAuthenticationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthenticationConfiguration, Members: &mAuthenticationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[34]})
-var s_AuthenticationDecision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthenticationDecision, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var sAuthenticationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthenticationResult, Members: &mAuthenticationResult, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[46]})
-var s_ClientTokenString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientTokenString, Type: smithy.ShapeTypeString, Ext: &ext[47]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[48]})
-var s_ConflictType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConflictType, Type: smithy.ShapeTypeString, Ext: &ext[51]})
-var s_CustomerSpeakerId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerSpeakerId, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[53]})
-var sDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomain, Members: &mDomain, Type: smithy.ShapeTypeStructure, Ext: &ext[54]})
-var s_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[65]})
-var s_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainName, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[66]})
-var s_DomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainStatus, Type: smithy.ShapeTypeString, Ext: &ext[67]})
-var s_DomainSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainSummaries, Members: &m_DomainSummaries, Type: smithy.ShapeTypeList, Ext: &ext[68]})
-var sDomainSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainSummary, Members: &mDomainSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[70]})
-var s_DuplicateRegistrationAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DuplicateRegistrationAction, Type: smithy.ShapeTypeString, Ext: &ext[81]})
-var sEnrollmentConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnrollmentConfig, Members: &mEnrollmentConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[82]})
-var sEnrollmentJobFraudDetectionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnrollmentJobFraudDetectionConfig, Members: &mEnrollmentJobFraudDetectionConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[85]})
-var s_EnrollmentJobFraudDetectionConfigWatchlistIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnrollmentJobFraudDetectionConfigWatchlistIds, Members: &m_EnrollmentJobFraudDetectionConfigWatchlistIds, Type: smithy.ShapeTypeList, Ext: &ext[89]})
-var s_ExistingEnrollmentAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExistingEnrollmentAction, Type: smithy.ShapeTypeString, Ext: &ext[91]})
-var sFailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailureDetails, Members: &mFailureDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[92]})
-var s_FraudDetectionAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FraudDetectionAction, Type: smithy.ShapeTypeString, Ext: &ext[95]})
-var sFraudDetectionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFraudDetectionConfiguration, Members: &mFraudDetectionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[96]})
-var s_FraudDetectionDecision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FraudDetectionDecision, Type: smithy.ShapeTypeString, Ext: &ext[99]})
-var s_FraudDetectionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FraudDetectionReason, Type: smithy.ShapeTypeString, Ext: &ext[100]})
-var s_FraudDetectionReasons = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FraudDetectionReasons, Members: &m_FraudDetectionReasons, Type: smithy.ShapeTypeList, Ext: &ext[101]})
-var sFraudDetectionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFraudDetectionResult, Members: &mFraudDetectionResult, Type: smithy.ShapeTypeStructure, Ext: &ext[103]})
-var sFraudRiskDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFraudRiskDetails, Members: &mFraudRiskDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[111]})
-var sFraudster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFraudster, Members: &mFraudster, Type: smithy.ShapeTypeStructure, Ext: &ext[114]})
-var s_FraudsterId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FraudsterId, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[119]})
-var sFraudsterRegistrationJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFraudsterRegistrationJob, Members: &mFraudsterRegistrationJob, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var s_FraudsterRegistrationJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FraudsterRegistrationJobStatus, Type: smithy.ShapeTypeString, Ext: &ext[133]})
-var s_FraudsterRegistrationJobSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FraudsterRegistrationJobSummaries, Members: &m_FraudsterRegistrationJobSummaries, Type: smithy.ShapeTypeList, Ext: &ext[134]})
-var sFraudsterRegistrationJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFraudsterRegistrationJobSummary, Members: &mFraudsterRegistrationJobSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[136]})
-var s_FraudsterSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FraudsterSummaries, Members: &m_FraudsterSummaries, Type: smithy.ShapeTypeList, Ext: &ext[145]})
-var sFraudsterSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFraudsterSummary, Members: &mFraudsterSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[147]})
-var s_GeneratedFraudsterId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GeneratedFraudsterId, Type: smithy.ShapeTypeString, Ext: &ext[152]})
-var s_GeneratedSpeakerId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GeneratedSpeakerId, Type: smithy.ShapeTypeString, Ext: &ext[153]})
-var s_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[154]})
-var sInputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputDataConfig, Members: &mInputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[155]})
-var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[157]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &ext[158]})
-var s_JobId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &ext[160]})
-var s_JobName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobName, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[161]})
-var sJobProgress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobProgress, Members: &mJobProgress, Type: smithy.ShapeTypeStructure, Ext: &ext[162]})
-var s_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &ext[164]})
-var sKnownFraudsterRisk = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKnownFraudsterRisk, Members: &mKnownFraudsterRisk, Type: smithy.ShapeTypeStructure, Ext: &ext[165]})
-var s_MaxResultsForList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsForList, Type: smithy.ShapeTypeInteger, Ext: &ext[168]})
-var s_MaxResultsForListDomainFe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsForListDomainFe, Type: smithy.ShapeTypeInteger, Ext: &ext[169]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[170]})
-var sOutputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputDataConfig, Members: &mOutputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[171]})
-var sRegistrationConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegistrationConfig, Members: &mRegistrationConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[174]})
-var s_RegistrationConfigWatchlistIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistrationConfigWatchlistIds, Members: &m_RegistrationConfigWatchlistIds, Type: smithy.ShapeTypeList, Ext: &ext[178]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &ext[180]})
-var s_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &ext[183]})
-var s_ResponseWatchlistIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResponseWatchlistIds, Members: &m_ResponseWatchlistIds, Type: smithy.ShapeTypeList, Ext: &ext[184]})
-var s_S3Uri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &ext[186]})
-var s_Score = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Score, Type: smithy.ShapeTypeInteger, Ext: &ext[187]})
-var sServerSideEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerSideEncryptionConfiguration, Members: &mServerSideEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[188]})
-var sServerSideEncryptionUpdateDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerSideEncryptionUpdateDetails, Members: &mServerSideEncryptionUpdateDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[190]})
-var s_ServerSideEncryptionUpdateStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServerSideEncryptionUpdateStatus, Type: smithy.ShapeTypeString, Ext: &ext[194]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &ext[195]})
-var s_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionId, Type: smithy.ShapeTypeString, Ext: &ext[197]})
-var s_SessionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionName, Type: smithy.ShapeTypeString, Ext: &ext[198]})
-var s_SessionNameOrId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionNameOrId, Type: smithy.ShapeTypeString, Ext: &ext[199]})
-var sSpeaker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpeaker, Members: &mSpeaker, Type: smithy.ShapeTypeStructure, Ext: &ext[200]})
-var sSpeakerEnrollmentJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpeakerEnrollmentJob, Members: &mSpeakerEnrollmentJob, Type: smithy.ShapeTypeStructure, Ext: &ext[208]})
-var s_SpeakerEnrollmentJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SpeakerEnrollmentJobStatus, Type: smithy.ShapeTypeString, Ext: &ext[221]})
-var s_SpeakerEnrollmentJobSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SpeakerEnrollmentJobSummaries, Members: &m_SpeakerEnrollmentJobSummaries, Type: smithy.ShapeTypeList, Ext: &ext[222]})
-var sSpeakerEnrollmentJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpeakerEnrollmentJobSummary, Members: &mSpeakerEnrollmentJobSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[224]})
-var s_SpeakerId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SpeakerId, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[233]})
-var s_SpeakerStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SpeakerStatus, Type: smithy.ShapeTypeString, Ext: &ext[234]})
-var s_SpeakerSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SpeakerSummaries, Members: &m_SpeakerSummaries, Type: smithy.ShapeTypeList, Ext: &ext[235]})
-var sSpeakerSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpeakerSummary, Members: &mSpeakerSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[237]})
-var s_StreamingStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamingStatus, Type: smithy.ShapeTypeString, Ext: &ext[245]})
-var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[246]})
-var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[247]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[250]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[251]})
-var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[253]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[255]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &ext[256]})
-var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[258]})
-var s_UniqueIdLarge = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UniqueIdLarge, Type: smithy.ShapeTypeString, Ext: &ext[259]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &ext[260]})
-var sVoiceSpoofingRisk = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceSpoofingRisk, Members: &mVoiceSpoofingRisk, Type: smithy.ShapeTypeStructure, Ext: &ext[262]})
-var sWatchlist = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWatchlist, Members: &mWatchlist, Type: smithy.ShapeTypeStructure, Ext: &ext[264]})
-var s_WatchlistDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WatchlistDescription, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[272]})
-var sWatchlistDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWatchlistDetails, Members: &mWatchlistDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[273]})
-var s_WatchlistId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &ext[275]})
-var s_WatchlistName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WatchlistName, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[276]})
-var s_WatchlistSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WatchlistSummaries, Members: &m_WatchlistSummaries, Type: smithy.ShapeTypeList, Ext: &ext[277]})
-var sWatchlistSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWatchlistSummary, Members: &mWatchlistSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[279]})
-var sAssociateFraudsterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateFraudsterRequest, Members: &mAssociateFraudsterRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[287]})
-var sAssociateFraudsterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateFraudsterResponse, Members: &mAssociateFraudsterResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[291]})
-var sCreateDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDomainRequest, Members: &mCreateDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[293]})
-var sCreateDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDomainResponse, Members: &mCreateDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[299]})
-var sCreateWatchlistRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWatchlistRequest, Members: &mCreateWatchlistRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[301]})
-var sCreateWatchlistResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWatchlistResponse, Members: &mCreateWatchlistResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[306]})
-var sDeleteDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomainRequest, Members: &mDeleteDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[308]})
-var sDeleteFraudsterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFraudsterRequest, Members: &mDeleteFraudsterRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[310]})
-var sDeleteSpeakerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSpeakerRequest, Members: &mDeleteSpeakerRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[313]})
-var sDeleteWatchlistRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWatchlistRequest, Members: &mDeleteWatchlistRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[316]})
-var sDescribeDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDomainRequest, Members: &mDescribeDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[319]})
-var sDescribeDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDomainResponse, Members: &mDescribeDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[321]})
-var sDescribeFraudsterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFraudsterRequest, Members: &mDescribeFraudsterRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[323]})
-var sDescribeFraudsterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFraudsterResponse, Members: &mDescribeFraudsterResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[326]})
-var sDescribeFraudsterRegistrationJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFraudsterRegistrationJobRequest, Members: &mDescribeFraudsterRegistrationJobRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[328]})
-var sDescribeFraudsterRegistrationJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFraudsterRegistrationJobResponse, Members: &mDescribeFraudsterRegistrationJobResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[331]})
-var sDescribeSpeakerEnrollmentJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSpeakerEnrollmentJobRequest, Members: &mDescribeSpeakerEnrollmentJobRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[333]})
-var sDescribeSpeakerEnrollmentJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSpeakerEnrollmentJobResponse, Members: &mDescribeSpeakerEnrollmentJobResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[336]})
-var sDescribeSpeakerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSpeakerRequest, Members: &mDescribeSpeakerRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[338]})
-var sDescribeSpeakerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSpeakerResponse, Members: &mDescribeSpeakerResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[341]})
-var sDescribeWatchlistRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWatchlistRequest, Members: &mDescribeWatchlistRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[343]})
-var sDescribeWatchlistResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWatchlistResponse, Members: &mDescribeWatchlistResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[346]})
-var sDisassociateFraudsterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateFraudsterRequest, Members: &mDisassociateFraudsterRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[348]})
-var sDisassociateFraudsterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateFraudsterResponse, Members: &mDisassociateFraudsterResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[352]})
-var sEvaluateSessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluateSessionRequest, Members: &mEvaluateSessionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[354]})
-var sEvaluateSessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluateSessionResponse, Members: &mEvaluateSessionResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[357]})
-var sListDomainsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainsRequest, Members: &mListDomainsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[364]})
-var sListDomainsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainsResponse, Members: &mListDomainsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[367]})
-var sListFraudsterRegistrationJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFraudsterRegistrationJobsRequest, Members: &mListFraudsterRegistrationJobsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[370]})
-var sListFraudsterRegistrationJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFraudsterRegistrationJobsResponse, Members: &mListFraudsterRegistrationJobsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[375]})
-var sListFraudstersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFraudstersRequest, Members: &mListFraudstersRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[378]})
-var sListFraudstersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFraudstersResponse, Members: &mListFraudstersResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[383]})
-var sListSpeakerEnrollmentJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSpeakerEnrollmentJobsRequest, Members: &mListSpeakerEnrollmentJobsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[386]})
-var sListSpeakerEnrollmentJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSpeakerEnrollmentJobsResponse, Members: &mListSpeakerEnrollmentJobsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[391]})
-var sListSpeakersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSpeakersRequest, Members: &mListSpeakersRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[394]})
-var sListSpeakersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSpeakersResponse, Members: &mListSpeakersResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[398]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[401]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[403]})
-var sListWatchlistsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWatchlistsRequest, Members: &mListWatchlistsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[405]})
-var sListWatchlistsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWatchlistsResponse, Members: &mListWatchlistsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[409]})
-var sOptOutSpeakerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptOutSpeakerRequest, Members: &mOptOutSpeakerRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[412]})
-var sOptOutSpeakerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptOutSpeakerResponse, Members: &mOptOutSpeakerResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[415]})
-var sStartFraudsterRegistrationJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFraudsterRegistrationJobRequest, Members: &mStartFraudsterRegistrationJobRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[417]})
-var sStartFraudsterRegistrationJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFraudsterRegistrationJobResponse, Members: &mStartFraudsterRegistrationJobResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[425]})
-var sStartSpeakerEnrollmentJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSpeakerEnrollmentJobRequest, Members: &mStartSpeakerEnrollmentJobRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[427]})
-var sStartSpeakerEnrollmentJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSpeakerEnrollmentJobResponse, Members: &mStartSpeakerEnrollmentJobResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[435]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[437]})
-var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[440]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[441]})
-var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[444]})
-var sUpdateDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainRequest, Members: &mUpdateDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[445]})
-var sUpdateDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainResponse, Members: &mUpdateDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[450]})
-var sUpdateWatchlistRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWatchlistRequest, Members: &mUpdateWatchlistRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[452]})
-var sUpdateWatchlistResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWatchlistResponse, Members: &mUpdateWatchlistResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[457]})
+var sAssociateFraudster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateFraudster, Type: smithy.ShapeTypeOperation, Ext: &eAssociateFraudster})
+var sCreateDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDomain, Type: smithy.ShapeTypeOperation, Ext: &eCreateDomain})
+var sCreateWatchlist = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWatchlist, Type: smithy.ShapeTypeOperation, Ext: &eCreateWatchlist})
+var sDeleteDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomain, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDomain})
+var sDeleteFraudster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFraudster, Type: smithy.ShapeTypeOperation, Ext: &eDeleteFraudster})
+var sDeleteSpeaker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSpeaker, Type: smithy.ShapeTypeOperation, Ext: &eDeleteSpeaker})
+var sDeleteWatchlist = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWatchlist, Type: smithy.ShapeTypeOperation, Ext: &eDeleteWatchlist})
+var sDescribeDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDomain, Type: smithy.ShapeTypeOperation, Ext: &eDescribeDomain})
+var sDescribeFraudster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFraudster, Type: smithy.ShapeTypeOperation, Ext: &eDescribeFraudster})
+var sDescribeFraudsterRegistrationJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFraudsterRegistrationJob, Type: smithy.ShapeTypeOperation, Ext: &eDescribeFraudsterRegistrationJob})
+var sDescribeSpeaker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSpeaker, Type: smithy.ShapeTypeOperation, Ext: &eDescribeSpeaker})
+var sDescribeSpeakerEnrollmentJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSpeakerEnrollmentJob, Type: smithy.ShapeTypeOperation, Ext: &eDescribeSpeakerEnrollmentJob})
+var sDescribeWatchlist = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWatchlist, Type: smithy.ShapeTypeOperation, Ext: &eDescribeWatchlist})
+var sDisassociateFraudster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateFraudster, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateFraudster})
+var sEvaluateSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluateSession, Type: smithy.ShapeTypeOperation, Ext: &eEvaluateSession})
+var sListDomains = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomains, Type: smithy.ShapeTypeOperation, Ext: &eListDomains})
+var sListFraudsterRegistrationJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFraudsterRegistrationJobs, Type: smithy.ShapeTypeOperation, Ext: &eListFraudsterRegistrationJobs})
+var sListFraudsters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFraudsters, Type: smithy.ShapeTypeOperation, Ext: &eListFraudsters})
+var sListSpeakerEnrollmentJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSpeakerEnrollmentJobs, Type: smithy.ShapeTypeOperation, Ext: &eListSpeakerEnrollmentJobs})
+var sListSpeakers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSpeakers, Type: smithy.ShapeTypeOperation, Ext: &eListSpeakers})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListWatchlists = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWatchlists, Type: smithy.ShapeTypeOperation, Ext: &eListWatchlists})
+var sOptOutSpeaker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptOutSpeaker, Type: smithy.ShapeTypeOperation, Ext: &eOptOutSpeaker})
+var sStartFraudsterRegistrationJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFraudsterRegistrationJob, Type: smithy.ShapeTypeOperation, Ext: &eStartFraudsterRegistrationJob})
+var sStartSpeakerEnrollmentJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSpeakerEnrollmentJob, Type: smithy.ShapeTypeOperation, Ext: &eStartSpeakerEnrollmentJob})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomain, Type: smithy.ShapeTypeOperation, Ext: &eUpdateDomain})
+var sUpdateWatchlist = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWatchlist, Type: smithy.ShapeTypeOperation, Ext: &eUpdateWatchlist})
+var s_VoiceID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VoiceID, Type: smithy.ShapeTypeService, Ext: &e_VoiceID})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &e_AmazonResourceName})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var sAuthenticationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthenticationConfiguration, Members: &mAuthenticationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticationConfiguration})
+var s_AuthenticationDecision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthenticationDecision, Type: smithy.ShapeTypeString, Ext: &e_AuthenticationDecision})
+var sAuthenticationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthenticationResult, Members: &mAuthenticationResult, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticationResult})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var s_ClientTokenString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientTokenString, Type: smithy.ShapeTypeString, Ext: &e_ClientTokenString})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var s_ConflictType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConflictType, Type: smithy.ShapeTypeString, Ext: &e_ConflictType})
+var s_CustomerSpeakerId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerSpeakerId, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &e_CustomerSpeakerId})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &e_Description})
+var sDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomain, Members: &mDomain, Type: smithy.ShapeTypeStructure, Ext: &eDomain})
+var s_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &e_DomainId})
+var s_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainName, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &e_DomainName})
+var s_DomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainStatus, Type: smithy.ShapeTypeString, Ext: &e_DomainStatus})
+var s_DomainSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainSummaries, Members: &m_DomainSummaries, Type: smithy.ShapeTypeList, Ext: &e_DomainSummaries})
+var sDomainSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainSummary, Members: &mDomainSummary, Type: smithy.ShapeTypeStructure, Ext: &eDomainSummary})
+var s_DuplicateRegistrationAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DuplicateRegistrationAction, Type: smithy.ShapeTypeString, Ext: &e_DuplicateRegistrationAction})
+var sEnrollmentConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnrollmentConfig, Members: &mEnrollmentConfig, Type: smithy.ShapeTypeStructure, Ext: &eEnrollmentConfig})
+var sEnrollmentJobFraudDetectionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnrollmentJobFraudDetectionConfig, Members: &mEnrollmentJobFraudDetectionConfig, Type: smithy.ShapeTypeStructure, Ext: &eEnrollmentJobFraudDetectionConfig})
+var s_EnrollmentJobFraudDetectionConfigWatchlistIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnrollmentJobFraudDetectionConfigWatchlistIds, Members: &m_EnrollmentJobFraudDetectionConfigWatchlistIds, Type: smithy.ShapeTypeList, Ext: &e_EnrollmentJobFraudDetectionConfigWatchlistIds})
+var s_ExistingEnrollmentAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExistingEnrollmentAction, Type: smithy.ShapeTypeString, Ext: &e_ExistingEnrollmentAction})
+var sFailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailureDetails, Members: &mFailureDetails, Type: smithy.ShapeTypeStructure, Ext: &eFailureDetails})
+var s_FraudDetectionAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FraudDetectionAction, Type: smithy.ShapeTypeString, Ext: &e_FraudDetectionAction})
+var sFraudDetectionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFraudDetectionConfiguration, Members: &mFraudDetectionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eFraudDetectionConfiguration})
+var s_FraudDetectionDecision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FraudDetectionDecision, Type: smithy.ShapeTypeString, Ext: &e_FraudDetectionDecision})
+var s_FraudDetectionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FraudDetectionReason, Type: smithy.ShapeTypeString, Ext: &e_FraudDetectionReason})
+var s_FraudDetectionReasons = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FraudDetectionReasons, Members: &m_FraudDetectionReasons, Type: smithy.ShapeTypeList, Ext: &e_FraudDetectionReasons})
+var sFraudDetectionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFraudDetectionResult, Members: &mFraudDetectionResult, Type: smithy.ShapeTypeStructure, Ext: &eFraudDetectionResult})
+var sFraudRiskDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFraudRiskDetails, Members: &mFraudRiskDetails, Type: smithy.ShapeTypeStructure, Ext: &eFraudRiskDetails})
+var sFraudster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFraudster, Members: &mFraudster, Type: smithy.ShapeTypeStructure, Ext: &eFraudster})
+var s_FraudsterId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FraudsterId, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &e_FraudsterId})
+var sFraudsterRegistrationJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFraudsterRegistrationJob, Members: &mFraudsterRegistrationJob, Type: smithy.ShapeTypeStructure, Ext: &eFraudsterRegistrationJob})
+var s_FraudsterRegistrationJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FraudsterRegistrationJobStatus, Type: smithy.ShapeTypeString, Ext: &e_FraudsterRegistrationJobStatus})
+var s_FraudsterRegistrationJobSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FraudsterRegistrationJobSummaries, Members: &m_FraudsterRegistrationJobSummaries, Type: smithy.ShapeTypeList, Ext: &e_FraudsterRegistrationJobSummaries})
+var sFraudsterRegistrationJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFraudsterRegistrationJobSummary, Members: &mFraudsterRegistrationJobSummary, Type: smithy.ShapeTypeStructure, Ext: &eFraudsterRegistrationJobSummary})
+var s_FraudsterSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FraudsterSummaries, Members: &m_FraudsterSummaries, Type: smithy.ShapeTypeList, Ext: &e_FraudsterSummaries})
+var sFraudsterSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFraudsterSummary, Members: &mFraudsterSummary, Type: smithy.ShapeTypeStructure, Ext: &eFraudsterSummary})
+var s_GeneratedFraudsterId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GeneratedFraudsterId, Type: smithy.ShapeTypeString, Ext: &e_GeneratedFraudsterId})
+var s_GeneratedSpeakerId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GeneratedSpeakerId, Type: smithy.ShapeTypeString, Ext: &e_GeneratedSpeakerId})
+var s_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &e_IamRoleArn})
+var sInputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputDataConfig, Members: &mInputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eInputDataConfig})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &e_Integer})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var s_JobId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &e_JobId})
+var s_JobName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobName, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &e_JobName})
+var sJobProgress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobProgress, Members: &mJobProgress, Type: smithy.ShapeTypeStructure, Ext: &eJobProgress})
+var s_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyId})
+var sKnownFraudsterRisk = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKnownFraudsterRisk, Members: &mKnownFraudsterRisk, Type: smithy.ShapeTypeStructure, Ext: &eKnownFraudsterRisk})
+var s_MaxResultsForList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsForList, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResultsForList})
+var s_MaxResultsForListDomainFe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsForListDomainFe, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResultsForListDomainFe})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sOutputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputDataConfig, Members: &mOutputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eOutputDataConfig})
+var sRegistrationConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegistrationConfig, Members: &mRegistrationConfig, Type: smithy.ShapeTypeStructure, Ext: &eRegistrationConfig})
+var s_RegistrationConfigWatchlistIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistrationConfigWatchlistIds, Members: &m_RegistrationConfigWatchlistIds, Type: smithy.ShapeTypeList, Ext: &e_RegistrationConfigWatchlistIds})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var s_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &e_ResourceType})
+var s_ResponseWatchlistIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResponseWatchlistIds, Members: &m_ResponseWatchlistIds, Type: smithy.ShapeTypeList, Ext: &e_ResponseWatchlistIds})
+var s_S3Uri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &e_S3Uri})
+var s_Score = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Score, Type: smithy.ShapeTypeInteger, Ext: &e_Score})
+var sServerSideEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerSideEncryptionConfiguration, Members: &mServerSideEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eServerSideEncryptionConfiguration})
+var sServerSideEncryptionUpdateDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerSideEncryptionUpdateDetails, Members: &mServerSideEncryptionUpdateDetails, Type: smithy.ShapeTypeStructure, Ext: &eServerSideEncryptionUpdateDetails})
+var s_ServerSideEncryptionUpdateStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServerSideEncryptionUpdateStatus, Type: smithy.ShapeTypeString, Ext: &e_ServerSideEncryptionUpdateStatus})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var s_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionId, Type: smithy.ShapeTypeString, Ext: &e_SessionId})
+var s_SessionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionName, Type: smithy.ShapeTypeString, Ext: &e_SessionName})
+var s_SessionNameOrId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionNameOrId, Type: smithy.ShapeTypeString, Ext: &e_SessionNameOrId})
+var sSpeaker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpeaker, Members: &mSpeaker, Type: smithy.ShapeTypeStructure, Ext: &eSpeaker})
+var sSpeakerEnrollmentJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpeakerEnrollmentJob, Members: &mSpeakerEnrollmentJob, Type: smithy.ShapeTypeStructure, Ext: &eSpeakerEnrollmentJob})
+var s_SpeakerEnrollmentJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SpeakerEnrollmentJobStatus, Type: smithy.ShapeTypeString, Ext: &e_SpeakerEnrollmentJobStatus})
+var s_SpeakerEnrollmentJobSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SpeakerEnrollmentJobSummaries, Members: &m_SpeakerEnrollmentJobSummaries, Type: smithy.ShapeTypeList, Ext: &e_SpeakerEnrollmentJobSummaries})
+var sSpeakerEnrollmentJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpeakerEnrollmentJobSummary, Members: &mSpeakerEnrollmentJobSummary, Type: smithy.ShapeTypeStructure, Ext: &eSpeakerEnrollmentJobSummary})
+var s_SpeakerId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SpeakerId, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &e_SpeakerId})
+var s_SpeakerStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SpeakerStatus, Type: smithy.ShapeTypeString, Ext: &e_SpeakerStatus})
+var s_SpeakerSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SpeakerSummaries, Members: &m_SpeakerSummaries, Type: smithy.ShapeTypeList, Ext: &e_SpeakerSummaries})
+var sSpeakerSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpeakerSummary, Members: &mSpeakerSummary, Type: smithy.ShapeTypeStructure, Ext: &eSpeakerSummary})
+var s_StreamingStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamingStatus, Type: smithy.ShapeTypeString, Ext: &e_StreamingStatus})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var s_UniqueIdLarge = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UniqueIdLarge, Type: smithy.ShapeTypeString, Ext: &e_UniqueIdLarge})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sVoiceSpoofingRisk = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceSpoofingRisk, Members: &mVoiceSpoofingRisk, Type: smithy.ShapeTypeStructure, Ext: &eVoiceSpoofingRisk})
+var sWatchlist = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWatchlist, Members: &mWatchlist, Type: smithy.ShapeTypeStructure, Ext: &eWatchlist})
+var s_WatchlistDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WatchlistDescription, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &e_WatchlistDescription})
+var sWatchlistDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWatchlistDetails, Members: &mWatchlistDetails, Type: smithy.ShapeTypeStructure, Ext: &eWatchlistDetails})
+var s_WatchlistId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &e_WatchlistId})
+var s_WatchlistName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WatchlistName, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &e_WatchlistName})
+var s_WatchlistSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WatchlistSummaries, Members: &m_WatchlistSummaries, Type: smithy.ShapeTypeList, Ext: &e_WatchlistSummaries})
+var sWatchlistSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWatchlistSummary, Members: &mWatchlistSummary, Type: smithy.ShapeTypeStructure, Ext: &eWatchlistSummary})
+var sAssociateFraudsterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateFraudsterRequest, Members: &mAssociateFraudsterRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateFraudsterRequest})
+var sAssociateFraudsterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateFraudsterResponse, Members: &mAssociateFraudsterResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssociateFraudsterResponse})
+var sCreateDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDomainRequest, Members: &mCreateDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateDomainRequest})
+var sCreateDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDomainResponse, Members: &mCreateDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateDomainResponse})
+var sCreateWatchlistRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWatchlistRequest, Members: &mCreateWatchlistRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateWatchlistRequest})
+var sCreateWatchlistResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWatchlistResponse, Members: &mCreateWatchlistResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateWatchlistResponse})
+var sDeleteDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomainRequest, Members: &mDeleteDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDomainRequest})
+var sDeleteFraudsterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFraudsterRequest, Members: &mDeleteFraudsterRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFraudsterRequest})
+var sDeleteSpeakerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSpeakerRequest, Members: &mDeleteSpeakerRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteSpeakerRequest})
+var sDeleteWatchlistRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWatchlistRequest, Members: &mDeleteWatchlistRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteWatchlistRequest})
+var sDescribeDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDomainRequest, Members: &mDescribeDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDomainRequest})
+var sDescribeDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDomainResponse, Members: &mDescribeDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDomainResponse})
+var sDescribeFraudsterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFraudsterRequest, Members: &mDescribeFraudsterRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeFraudsterRequest})
+var sDescribeFraudsterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFraudsterResponse, Members: &mDescribeFraudsterResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeFraudsterResponse})
+var sDescribeFraudsterRegistrationJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFraudsterRegistrationJobRequest, Members: &mDescribeFraudsterRegistrationJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeFraudsterRegistrationJobRequest})
+var sDescribeFraudsterRegistrationJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFraudsterRegistrationJobResponse, Members: &mDescribeFraudsterRegistrationJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeFraudsterRegistrationJobResponse})
+var sDescribeSpeakerEnrollmentJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSpeakerEnrollmentJobRequest, Members: &mDescribeSpeakerEnrollmentJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSpeakerEnrollmentJobRequest})
+var sDescribeSpeakerEnrollmentJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSpeakerEnrollmentJobResponse, Members: &mDescribeSpeakerEnrollmentJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSpeakerEnrollmentJobResponse})
+var sDescribeSpeakerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSpeakerRequest, Members: &mDescribeSpeakerRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSpeakerRequest})
+var sDescribeSpeakerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSpeakerResponse, Members: &mDescribeSpeakerResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSpeakerResponse})
+var sDescribeWatchlistRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWatchlistRequest, Members: &mDescribeWatchlistRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeWatchlistRequest})
+var sDescribeWatchlistResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWatchlistResponse, Members: &mDescribeWatchlistResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeWatchlistResponse})
+var sDisassociateFraudsterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateFraudsterRequest, Members: &mDisassociateFraudsterRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateFraudsterRequest})
+var sDisassociateFraudsterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateFraudsterResponse, Members: &mDisassociateFraudsterResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateFraudsterResponse})
+var sEvaluateSessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluateSessionRequest, Members: &mEvaluateSessionRequest, Type: smithy.ShapeTypeStructure, Ext: &eEvaluateSessionRequest})
+var sEvaluateSessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluateSessionResponse, Members: &mEvaluateSessionResponse, Type: smithy.ShapeTypeStructure, Ext: &eEvaluateSessionResponse})
+var sListDomainsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainsRequest, Members: &mListDomainsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDomainsRequest})
+var sListDomainsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainsResponse, Members: &mListDomainsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDomainsResponse})
+var sListFraudsterRegistrationJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFraudsterRegistrationJobsRequest, Members: &mListFraudsterRegistrationJobsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListFraudsterRegistrationJobsRequest})
+var sListFraudsterRegistrationJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFraudsterRegistrationJobsResponse, Members: &mListFraudsterRegistrationJobsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListFraudsterRegistrationJobsResponse})
+var sListFraudstersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFraudstersRequest, Members: &mListFraudstersRequest, Type: smithy.ShapeTypeStructure, Ext: &eListFraudstersRequest})
+var sListFraudstersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFraudstersResponse, Members: &mListFraudstersResponse, Type: smithy.ShapeTypeStructure, Ext: &eListFraudstersResponse})
+var sListSpeakerEnrollmentJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSpeakerEnrollmentJobsRequest, Members: &mListSpeakerEnrollmentJobsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListSpeakerEnrollmentJobsRequest})
+var sListSpeakerEnrollmentJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSpeakerEnrollmentJobsResponse, Members: &mListSpeakerEnrollmentJobsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSpeakerEnrollmentJobsResponse})
+var sListSpeakersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSpeakersRequest, Members: &mListSpeakersRequest, Type: smithy.ShapeTypeStructure, Ext: &eListSpeakersRequest})
+var sListSpeakersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSpeakersResponse, Members: &mListSpeakersResponse, Type: smithy.ShapeTypeStructure, Ext: &eListSpeakersResponse})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListWatchlistsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWatchlistsRequest, Members: &mListWatchlistsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListWatchlistsRequest})
+var sListWatchlistsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWatchlistsResponse, Members: &mListWatchlistsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListWatchlistsResponse})
+var sOptOutSpeakerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptOutSpeakerRequest, Members: &mOptOutSpeakerRequest, Type: smithy.ShapeTypeStructure, Ext: &eOptOutSpeakerRequest})
+var sOptOutSpeakerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptOutSpeakerResponse, Members: &mOptOutSpeakerResponse, Type: smithy.ShapeTypeStructure, Ext: &eOptOutSpeakerResponse})
+var sStartFraudsterRegistrationJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFraudsterRegistrationJobRequest, Members: &mStartFraudsterRegistrationJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartFraudsterRegistrationJobRequest})
+var sStartFraudsterRegistrationJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFraudsterRegistrationJobResponse, Members: &mStartFraudsterRegistrationJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartFraudsterRegistrationJobResponse})
+var sStartSpeakerEnrollmentJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSpeakerEnrollmentJobRequest, Members: &mStartSpeakerEnrollmentJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartSpeakerEnrollmentJobRequest})
+var sStartSpeakerEnrollmentJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSpeakerEnrollmentJobResponse, Members: &mStartSpeakerEnrollmentJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartSpeakerEnrollmentJobResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainRequest, Members: &mUpdateDomainRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDomainRequest})
+var sUpdateDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainResponse, Members: &mUpdateDomainResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDomainResponse})
+var sUpdateWatchlistRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWatchlistRequest, Members: &mUpdateWatchlistRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWatchlistRequest})
+var sUpdateWatchlistResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWatchlistResponse, Members: &mUpdateWatchlistResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWatchlistResponse})
 
-var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var sAuthenticationConfiguration_AcceptanceThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceptanceThreshold", ID: &i_Score, Type: smithy.ShapeTypeInteger, Ext: &ext[35]})
-var sAuthenticationResult_AuthenticationResultId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationResultId", ID: &i_UniqueIdLarge, Type: smithy.ShapeTypeString, Ext: &ext[38]})
-var sAuthenticationResult_AudioAggregationStartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudioAggregationStartedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[39]})
-var sAuthenticationResult_AudioAggregationEndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudioAggregationEndedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[40]})
-var sAuthenticationResult_CustomerSpeakerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerSpeakerId", ID: &i_CustomerSpeakerId, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[41]})
-var sAuthenticationResult_GeneratedSpeakerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeneratedSpeakerId", ID: &i_GeneratedSpeakerId, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var sAuthenticationResult_Decision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Decision", ID: &i_AuthenticationDecision, Type: smithy.ShapeTypeString, Ext: &ext[43]})
-var sAuthenticationResult_Score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Score", ID: &i_Score, Type: smithy.ShapeTypeInteger, Ext: &ext[44]})
-var sAuthenticationResult_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iAuthenticationConfiguration, Members: &mAuthenticationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[45]})
-var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[49]})
-var sConflictException_ConflictType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConflictType", ID: &i_ConflictType, Type: smithy.ShapeTypeString, Ext: &ext[50]})
-var sDomain_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var sDomain_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[56]})
-var sDomain_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DomainName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var sDomain_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var sDomain_DomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainStatus", ID: &i_DomainStatus, Type: smithy.ShapeTypeString, Ext: &ext[59]})
-var sDomain_ServerSideEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideEncryptionConfiguration", ID: &iServerSideEncryptionConfiguration, Members: &mServerSideEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[60]})
-var sDomain_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[61]})
-var sDomain_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[62]})
-var sDomain_ServerSideEncryptionUpdateDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideEncryptionUpdateDetails", ID: &iServerSideEncryptionUpdateDetails, Members: &mServerSideEncryptionUpdateDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[63]})
-var sDomain_WatchlistDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistDetails", ID: &iWatchlistDetails, Members: &mWatchlistDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[64]})
-var s_DomainSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainSummary, Members: &mDomainSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[69]})
-var sDomainSummary_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[71]})
-var sDomainSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[72]})
-var sDomainSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DomainName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[73]})
-var sDomainSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[74]})
-var sDomainSummary_DomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainStatus", ID: &i_DomainStatus, Type: smithy.ShapeTypeString, Ext: &ext[75]})
-var sDomainSummary_ServerSideEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideEncryptionConfiguration", ID: &iServerSideEncryptionConfiguration, Members: &mServerSideEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[76]})
-var sDomainSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[77]})
-var sDomainSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[78]})
-var sDomainSummary_ServerSideEncryptionUpdateDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideEncryptionUpdateDetails", ID: &iServerSideEncryptionUpdateDetails, Members: &mServerSideEncryptionUpdateDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[79]})
-var sDomainSummary_WatchlistDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistDetails", ID: &iWatchlistDetails, Members: &mWatchlistDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var sEnrollmentConfig_ExistingEnrollmentAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExistingEnrollmentAction", ID: &i_ExistingEnrollmentAction, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var sEnrollmentConfig_FraudDetectionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FraudDetectionConfig", ID: &iEnrollmentJobFraudDetectionConfig, Members: &mEnrollmentJobFraudDetectionConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[84]})
-var sEnrollmentJobFraudDetectionConfig_FraudDetectionAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FraudDetectionAction", ID: &i_FraudDetectionAction, Type: smithy.ShapeTypeString, Ext: &ext[86]})
-var sEnrollmentJobFraudDetectionConfig_RiskThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RiskThreshold", ID: &i_Score, Type: smithy.ShapeTypeInteger, Ext: &ext[87]})
-var sEnrollmentJobFraudDetectionConfig_WatchlistIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistIds", ID: &i_EnrollmentJobFraudDetectionConfigWatchlistIds, Members: &m_EnrollmentJobFraudDetectionConfigWatchlistIds, Type: smithy.ShapeTypeList, Ext: &ext[88]})
-var s_EnrollmentJobFraudDetectionConfigWatchlistIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &ext[90]})
-var sFailureDetails_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusCode", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[93]})
-var sFailureDetails_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[94]})
-var sFraudDetectionConfiguration_RiskThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RiskThreshold", ID: &i_Score, Type: smithy.ShapeTypeInteger, Ext: &ext[97]})
-var sFraudDetectionConfiguration_WatchlistId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistId", ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &ext[98]})
-var s_FraudDetectionReasons_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FraudDetectionReason, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var sFraudDetectionResult_FraudDetectionResultId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FraudDetectionResultId", ID: &i_UniqueIdLarge, Type: smithy.ShapeTypeString, Ext: &ext[104]})
-var sFraudDetectionResult_AudioAggregationStartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudioAggregationStartedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[105]})
-var sFraudDetectionResult_AudioAggregationEndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudioAggregationEndedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[106]})
-var sFraudDetectionResult_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iFraudDetectionConfiguration, Members: &mFraudDetectionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[107]})
-var sFraudDetectionResult_Decision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Decision", ID: &i_FraudDetectionDecision, Type: smithy.ShapeTypeString, Ext: &ext[108]})
-var sFraudDetectionResult_Reasons = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reasons", ID: &i_FraudDetectionReasons, Members: &m_FraudDetectionReasons, Type: smithy.ShapeTypeList, Ext: &ext[109]})
-var sFraudDetectionResult_RiskDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RiskDetails", ID: &iFraudRiskDetails, Members: &mFraudRiskDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[110]})
-var sFraudRiskDetails_KnownFraudsterRisk = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KnownFraudsterRisk", ID: &iKnownFraudsterRisk, Members: &mKnownFraudsterRisk, Type: smithy.ShapeTypeStructure, Ext: &ext[112]})
-var sFraudRiskDetails_VoiceSpoofingRisk = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceSpoofingRisk", ID: &iVoiceSpoofingRisk, Members: &mVoiceSpoofingRisk, Type: smithy.ShapeTypeStructure, Ext: &ext[113]})
-var sFraudster_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[115]})
-var sFraudster_GeneratedFraudsterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeneratedFraudsterId", ID: &i_GeneratedFraudsterId, Type: smithy.ShapeTypeString, Ext: &ext[116]})
-var sFraudster_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[117]})
-var sFraudster_WatchlistIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistIds", ID: &i_ResponseWatchlistIds, Members: &m_ResponseWatchlistIds, Type: smithy.ShapeTypeList, Ext: &ext[118]})
-var sFraudsterRegistrationJob_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &i_JobName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[121]})
-var sFraudsterRegistrationJob_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &ext[122]})
-var sFraudsterRegistrationJob_JobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobStatus", ID: &i_FraudsterRegistrationJobStatus, Type: smithy.ShapeTypeString, Ext: &ext[123]})
-var sFraudsterRegistrationJob_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[124]})
-var sFraudsterRegistrationJob_DataAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataAccessRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[125]})
-var sFraudsterRegistrationJob_RegistrationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistrationConfig", ID: &iRegistrationConfig, Members: &mRegistrationConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var sFraudsterRegistrationJob_InputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputDataConfig", ID: &iInputDataConfig, Members: &mInputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[127]})
-var sFraudsterRegistrationJob_OutputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputDataConfig", ID: &iOutputDataConfig, Members: &mOutputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[128]})
-var sFraudsterRegistrationJob_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[129]})
-var sFraudsterRegistrationJob_EndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[130]})
-var sFraudsterRegistrationJob_FailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureDetails", ID: &iFailureDetails, Members: &mFailureDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[131]})
-var sFraudsterRegistrationJob_JobProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobProgress", ID: &iJobProgress, Members: &mJobProgress, Type: smithy.ShapeTypeStructure, Ext: &ext[132]})
-var s_FraudsterRegistrationJobSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFraudsterRegistrationJobSummary, Members: &mFraudsterRegistrationJobSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[135]})
-var sFraudsterRegistrationJobSummary_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &i_JobName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[137]})
-var sFraudsterRegistrationJobSummary_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var sFraudsterRegistrationJobSummary_JobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobStatus", ID: &i_FraudsterRegistrationJobStatus, Type: smithy.ShapeTypeString, Ext: &ext[139]})
-var sFraudsterRegistrationJobSummary_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[140]})
-var sFraudsterRegistrationJobSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[141]})
-var sFraudsterRegistrationJobSummary_EndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[142]})
-var sFraudsterRegistrationJobSummary_FailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureDetails", ID: &iFailureDetails, Members: &mFailureDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[143]})
-var sFraudsterRegistrationJobSummary_JobProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobProgress", ID: &iJobProgress, Members: &mJobProgress, Type: smithy.ShapeTypeStructure, Ext: &ext[144]})
-var s_FraudsterSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFraudsterSummary, Members: &mFraudsterSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[146]})
-var sFraudsterSummary_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[148]})
-var sFraudsterSummary_GeneratedFraudsterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeneratedFraudsterId", ID: &i_GeneratedFraudsterId, Type: smithy.ShapeTypeString, Ext: &ext[149]})
-var sFraudsterSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[150]})
-var sFraudsterSummary_WatchlistIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistIds", ID: &i_ResponseWatchlistIds, Members: &m_ResponseWatchlistIds, Type: smithy.ShapeTypeList, Ext: &ext[151]})
-var sInputDataConfig_S3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &ext[156]})
-var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[159]})
-var sJobProgress_PercentComplete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentComplete", ID: &i_Score, Type: smithy.ShapeTypeInteger, Ext: &ext[163]})
-var sKnownFraudsterRisk_RiskScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RiskScore", ID: &i_Score, Type: smithy.ShapeTypeInteger, Ext: &ext[166]})
-var sKnownFraudsterRisk_GeneratedFraudsterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeneratedFraudsterId", ID: &i_GeneratedFraudsterId, Type: smithy.ShapeTypeString, Ext: &ext[167]})
-var sOutputDataConfig_S3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &ext[172]})
-var sOutputDataConfig_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &ext[173]})
-var sRegistrationConfig_DuplicateRegistrationAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DuplicateRegistrationAction", ID: &i_DuplicateRegistrationAction, Type: smithy.ShapeTypeString, Ext: &ext[175]})
-var sRegistrationConfig_FraudsterSimilarityThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FraudsterSimilarityThreshold", ID: &i_Score, Type: smithy.ShapeTypeInteger, Ext: &ext[176]})
-var sRegistrationConfig_WatchlistIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistIds", ID: &i_RegistrationConfigWatchlistIds, Members: &m_RegistrationConfigWatchlistIds, Type: smithy.ShapeTypeList, Ext: &ext[177]})
-var s_RegistrationConfigWatchlistIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &ext[179]})
-var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[181]})
-var sResourceNotFoundException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &ext[182]})
-var s_ResponseWatchlistIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &ext[185]})
-var sServerSideEncryptionConfiguration_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &ext[189]})
-var sServerSideEncryptionUpdateDetails_OldKmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OldKmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &ext[191]})
-var sServerSideEncryptionUpdateDetails_UpdateStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateStatus", ID: &i_ServerSideEncryptionUpdateStatus, Type: smithy.ShapeTypeString, Ext: &ext[192]})
-var sServerSideEncryptionUpdateDetails_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[193]})
-var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[196]})
-var sSpeaker_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[201]})
-var sSpeaker_CustomerSpeakerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerSpeakerId", ID: &i_CustomerSpeakerId, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[202]})
-var sSpeaker_GeneratedSpeakerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeneratedSpeakerId", ID: &i_GeneratedSpeakerId, Type: smithy.ShapeTypeString, Ext: &ext[203]})
-var sSpeaker_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_SpeakerStatus, Type: smithy.ShapeTypeString, Ext: &ext[204]})
-var sSpeaker_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[205]})
-var sSpeaker_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[206]})
-var sSpeaker_LastAccessedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastAccessedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[207]})
-var sSpeakerEnrollmentJob_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &i_JobName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[209]})
-var sSpeakerEnrollmentJob_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &ext[210]})
-var sSpeakerEnrollmentJob_JobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobStatus", ID: &i_SpeakerEnrollmentJobStatus, Type: smithy.ShapeTypeString, Ext: &ext[211]})
-var sSpeakerEnrollmentJob_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[212]})
-var sSpeakerEnrollmentJob_DataAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataAccessRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[213]})
-var sSpeakerEnrollmentJob_EnrollmentConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnrollmentConfig", ID: &iEnrollmentConfig, Members: &mEnrollmentConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[214]})
-var sSpeakerEnrollmentJob_InputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputDataConfig", ID: &iInputDataConfig, Members: &mInputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[215]})
-var sSpeakerEnrollmentJob_OutputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputDataConfig", ID: &iOutputDataConfig, Members: &mOutputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[216]})
-var sSpeakerEnrollmentJob_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[217]})
-var sSpeakerEnrollmentJob_EndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[218]})
-var sSpeakerEnrollmentJob_FailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureDetails", ID: &iFailureDetails, Members: &mFailureDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[219]})
-var sSpeakerEnrollmentJob_JobProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobProgress", ID: &iJobProgress, Members: &mJobProgress, Type: smithy.ShapeTypeStructure, Ext: &ext[220]})
-var s_SpeakerEnrollmentJobSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSpeakerEnrollmentJobSummary, Members: &mSpeakerEnrollmentJobSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[223]})
-var sSpeakerEnrollmentJobSummary_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &i_JobName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[225]})
-var sSpeakerEnrollmentJobSummary_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &ext[226]})
-var sSpeakerEnrollmentJobSummary_JobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobStatus", ID: &i_SpeakerEnrollmentJobStatus, Type: smithy.ShapeTypeString, Ext: &ext[227]})
-var sSpeakerEnrollmentJobSummary_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[228]})
-var sSpeakerEnrollmentJobSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[229]})
-var sSpeakerEnrollmentJobSummary_EndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[230]})
-var sSpeakerEnrollmentJobSummary_FailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureDetails", ID: &iFailureDetails, Members: &mFailureDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[231]})
-var sSpeakerEnrollmentJobSummary_JobProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobProgress", ID: &iJobProgress, Members: &mJobProgress, Type: smithy.ShapeTypeStructure, Ext: &ext[232]})
-var s_SpeakerSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSpeakerSummary, Members: &mSpeakerSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[236]})
-var sSpeakerSummary_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[238]})
-var sSpeakerSummary_CustomerSpeakerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerSpeakerId", ID: &i_CustomerSpeakerId, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[239]})
-var sSpeakerSummary_GeneratedSpeakerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeneratedSpeakerId", ID: &i_GeneratedSpeakerId, Type: smithy.ShapeTypeString, Ext: &ext[240]})
-var sSpeakerSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_SpeakerStatus, Type: smithy.ShapeTypeString, Ext: &ext[241]})
-var sSpeakerSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[242]})
-var sSpeakerSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[243]})
-var sSpeakerSummary_LastAccessedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastAccessedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[244]})
-var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[248]})
-var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[249]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[252]})
-var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[254]})
-var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[257]})
-var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[261]})
-var sVoiceSpoofingRisk_RiskScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RiskScore", ID: &i_Score, Type: smithy.ShapeTypeInteger, Ext: &ext[263]})
-var sWatchlist_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[265]})
-var sWatchlist_WatchlistId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistId", ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &ext[266]})
-var sWatchlist_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_WatchlistName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[267]})
-var sWatchlist_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_WatchlistDescription, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[268]})
-var sWatchlist_DefaultWatchlist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultWatchlist", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[269]})
-var sWatchlist_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[270]})
-var sWatchlist_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[271]})
-var sWatchlistDetails_DefaultWatchlistId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultWatchlistId", ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &ext[274]})
-var s_WatchlistSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWatchlistSummary, Members: &mWatchlistSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[278]})
-var sWatchlistSummary_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[280]})
-var sWatchlistSummary_WatchlistId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistId", ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &ext[281]})
-var sWatchlistSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_WatchlistName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[282]})
-var sWatchlistSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_WatchlistDescription, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[283]})
-var sWatchlistSummary_DefaultWatchlist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultWatchlist", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[284]})
-var sWatchlistSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[285]})
-var sWatchlistSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[286]})
-var sAssociateFraudsterRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[288]})
-var sAssociateFraudsterRequest_WatchlistId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistId", ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &ext[289]})
-var sAssociateFraudsterRequest_FraudsterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FraudsterId", ID: &i_FraudsterId, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[290]})
-var sAssociateFraudsterResponse_Fraudster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fraudster", ID: &iFraudster, Members: &mFraudster, Type: smithy.ShapeTypeStructure, Ext: &ext[292]})
-var sCreateDomainRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DomainName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[294]})
-var sCreateDomainRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[295]})
-var sCreateDomainRequest_ServerSideEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideEncryptionConfiguration", ID: &iServerSideEncryptionConfiguration, Members: &mServerSideEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[296]})
-var sCreateDomainRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientTokenString, Type: smithy.ShapeTypeString, Ext: &ext[297]})
-var sCreateDomainRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[298]})
-var sCreateDomainResponse_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &iDomain, Members: &mDomain, Type: smithy.ShapeTypeStructure, Ext: &ext[300]})
-var sCreateWatchlistRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[302]})
-var sCreateWatchlistRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_WatchlistName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[303]})
-var sCreateWatchlistRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_WatchlistDescription, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[304]})
-var sCreateWatchlistRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientTokenString, Type: smithy.ShapeTypeString, Ext: &ext[305]})
-var sCreateWatchlistResponse_Watchlist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Watchlist", ID: &iWatchlist, Members: &mWatchlist, Type: smithy.ShapeTypeStructure, Ext: &ext[307]})
-var sDeleteDomainRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[309]})
-var sDeleteFraudsterRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[311]})
-var sDeleteFraudsterRequest_FraudsterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FraudsterId", ID: &i_FraudsterId, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[312]})
-var sDeleteSpeakerRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[314]})
-var sDeleteSpeakerRequest_SpeakerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerId", ID: &i_SpeakerId, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[315]})
-var sDeleteWatchlistRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[317]})
-var sDeleteWatchlistRequest_WatchlistId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistId", ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &ext[318]})
-var sDescribeDomainRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[320]})
-var sDescribeDomainResponse_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &iDomain, Members: &mDomain, Type: smithy.ShapeTypeStructure, Ext: &ext[322]})
-var sDescribeFraudsterRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[324]})
-var sDescribeFraudsterRequest_FraudsterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FraudsterId", ID: &i_FraudsterId, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[325]})
-var sDescribeFraudsterResponse_Fraudster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fraudster", ID: &iFraudster, Members: &mFraudster, Type: smithy.ShapeTypeStructure, Ext: &ext[327]})
-var sDescribeFraudsterRegistrationJobRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[329]})
-var sDescribeFraudsterRegistrationJobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &ext[330]})
-var sDescribeFraudsterRegistrationJobResponse_Job = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Job", ID: &iFraudsterRegistrationJob, Members: &mFraudsterRegistrationJob, Type: smithy.ShapeTypeStructure, Ext: &ext[332]})
-var sDescribeSpeakerEnrollmentJobRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[334]})
-var sDescribeSpeakerEnrollmentJobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &ext[335]})
-var sDescribeSpeakerEnrollmentJobResponse_Job = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Job", ID: &iSpeakerEnrollmentJob, Members: &mSpeakerEnrollmentJob, Type: smithy.ShapeTypeStructure, Ext: &ext[337]})
-var sDescribeSpeakerRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[339]})
-var sDescribeSpeakerRequest_SpeakerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerId", ID: &i_SpeakerId, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[340]})
-var sDescribeSpeakerResponse_Speaker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Speaker", ID: &iSpeaker, Members: &mSpeaker, Type: smithy.ShapeTypeStructure, Ext: &ext[342]})
-var sDescribeWatchlistRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[344]})
-var sDescribeWatchlistRequest_WatchlistId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistId", ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &ext[345]})
-var sDescribeWatchlistResponse_Watchlist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Watchlist", ID: &iWatchlist, Members: &mWatchlist, Type: smithy.ShapeTypeStructure, Ext: &ext[347]})
-var sDisassociateFraudsterRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[349]})
-var sDisassociateFraudsterRequest_WatchlistId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistId", ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &ext[350]})
-var sDisassociateFraudsterRequest_FraudsterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FraudsterId", ID: &i_FraudsterId, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[351]})
-var sDisassociateFraudsterResponse_Fraudster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fraudster", ID: &iFraudster, Members: &mFraudster, Type: smithy.ShapeTypeStructure, Ext: &ext[353]})
-var sEvaluateSessionRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[355]})
-var sEvaluateSessionRequest_SessionNameOrId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionNameOrId", ID: &i_SessionNameOrId, Type: smithy.ShapeTypeString, Ext: &ext[356]})
-var sEvaluateSessionResponse_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[358]})
-var sEvaluateSessionResponse_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_SessionId, Type: smithy.ShapeTypeString, Ext: &ext[359]})
-var sEvaluateSessionResponse_SessionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionName", ID: &i_SessionName, Type: smithy.ShapeTypeString, Ext: &ext[360]})
-var sEvaluateSessionResponse_StreamingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamingStatus", ID: &i_StreamingStatus, Type: smithy.ShapeTypeString, Ext: &ext[361]})
-var sEvaluateSessionResponse_AuthenticationResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationResult", ID: &iAuthenticationResult, Members: &mAuthenticationResult, Type: smithy.ShapeTypeStructure, Ext: &ext[362]})
-var sEvaluateSessionResponse_FraudDetectionResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FraudDetectionResult", ID: &iFraudDetectionResult, Members: &mFraudDetectionResult, Type: smithy.ShapeTypeStructure, Ext: &ext[363]})
-var sListDomainsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsForListDomainFe, Type: smithy.ShapeTypeInteger, Ext: &ext[365]})
-var sListDomainsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[366]})
-var sListDomainsResponse_DomainSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainSummaries", ID: &i_DomainSummaries, Members: &m_DomainSummaries, Type: smithy.ShapeTypeList, Ext: &ext[368]})
-var sListDomainsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[369]})
-var sListFraudsterRegistrationJobsRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[371]})
-var sListFraudsterRegistrationJobsRequest_JobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobStatus", ID: &i_FraudsterRegistrationJobStatus, Type: smithy.ShapeTypeString, Ext: &ext[372]})
-var sListFraudsterRegistrationJobsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsForList, Type: smithy.ShapeTypeInteger, Ext: &ext[373]})
-var sListFraudsterRegistrationJobsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[374]})
-var sListFraudsterRegistrationJobsResponse_JobSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobSummaries", ID: &i_FraudsterRegistrationJobSummaries, Members: &m_FraudsterRegistrationJobSummaries, Type: smithy.ShapeTypeList, Ext: &ext[376]})
-var sListFraudsterRegistrationJobsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[377]})
-var sListFraudstersRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[379]})
-var sListFraudstersRequest_WatchlistId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistId", ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &ext[380]})
-var sListFraudstersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsForList, Type: smithy.ShapeTypeInteger, Ext: &ext[381]})
-var sListFraudstersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[382]})
-var sListFraudstersResponse_FraudsterSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FraudsterSummaries", ID: &i_FraudsterSummaries, Members: &m_FraudsterSummaries, Type: smithy.ShapeTypeList, Ext: &ext[384]})
-var sListFraudstersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[385]})
-var sListSpeakerEnrollmentJobsRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[387]})
-var sListSpeakerEnrollmentJobsRequest_JobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobStatus", ID: &i_SpeakerEnrollmentJobStatus, Type: smithy.ShapeTypeString, Ext: &ext[388]})
-var sListSpeakerEnrollmentJobsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsForList, Type: smithy.ShapeTypeInteger, Ext: &ext[389]})
-var sListSpeakerEnrollmentJobsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[390]})
-var sListSpeakerEnrollmentJobsResponse_JobSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobSummaries", ID: &i_SpeakerEnrollmentJobSummaries, Members: &m_SpeakerEnrollmentJobSummaries, Type: smithy.ShapeTypeList, Ext: &ext[392]})
-var sListSpeakerEnrollmentJobsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[393]})
-var sListSpeakersRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[395]})
-var sListSpeakersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsForList, Type: smithy.ShapeTypeInteger, Ext: &ext[396]})
-var sListSpeakersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[397]})
-var sListSpeakersResponse_SpeakerSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSummaries", ID: &i_SpeakerSummaries, Members: &m_SpeakerSummaries, Type: smithy.ShapeTypeList, Ext: &ext[399]})
-var sListSpeakersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[400]})
-var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[402]})
-var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[404]})
-var sListWatchlistsRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[406]})
-var sListWatchlistsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsForList, Type: smithy.ShapeTypeInteger, Ext: &ext[407]})
-var sListWatchlistsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[408]})
-var sListWatchlistsResponse_WatchlistSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistSummaries", ID: &i_WatchlistSummaries, Members: &m_WatchlistSummaries, Type: smithy.ShapeTypeList, Ext: &ext[410]})
-var sListWatchlistsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[411]})
-var sOptOutSpeakerRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[413]})
-var sOptOutSpeakerRequest_SpeakerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerId", ID: &i_SpeakerId, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[414]})
-var sOptOutSpeakerResponse_Speaker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Speaker", ID: &iSpeaker, Members: &mSpeaker, Type: smithy.ShapeTypeStructure, Ext: &ext[416]})
-var sStartFraudsterRegistrationJobRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientTokenString, Type: smithy.ShapeTypeString, Ext: &ext[418]})
-var sStartFraudsterRegistrationJobRequest_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &i_JobName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[419]})
-var sStartFraudsterRegistrationJobRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[420]})
-var sStartFraudsterRegistrationJobRequest_DataAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataAccessRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[421]})
-var sStartFraudsterRegistrationJobRequest_RegistrationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistrationConfig", ID: &iRegistrationConfig, Members: &mRegistrationConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[422]})
-var sStartFraudsterRegistrationJobRequest_InputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputDataConfig", ID: &iInputDataConfig, Members: &mInputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[423]})
-var sStartFraudsterRegistrationJobRequest_OutputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputDataConfig", ID: &iOutputDataConfig, Members: &mOutputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[424]})
-var sStartFraudsterRegistrationJobResponse_Job = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Job", ID: &iFraudsterRegistrationJob, Members: &mFraudsterRegistrationJob, Type: smithy.ShapeTypeStructure, Ext: &ext[426]})
-var sStartSpeakerEnrollmentJobRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientTokenString, Type: smithy.ShapeTypeString, Ext: &ext[428]})
-var sStartSpeakerEnrollmentJobRequest_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &i_JobName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[429]})
-var sStartSpeakerEnrollmentJobRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[430]})
-var sStartSpeakerEnrollmentJobRequest_DataAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataAccessRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[431]})
-var sStartSpeakerEnrollmentJobRequest_EnrollmentConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnrollmentConfig", ID: &iEnrollmentConfig, Members: &mEnrollmentConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[432]})
-var sStartSpeakerEnrollmentJobRequest_InputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputDataConfig", ID: &iInputDataConfig, Members: &mInputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[433]})
-var sStartSpeakerEnrollmentJobRequest_OutputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputDataConfig", ID: &iOutputDataConfig, Members: &mOutputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[434]})
-var sStartSpeakerEnrollmentJobResponse_Job = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Job", ID: &iSpeakerEnrollmentJob, Members: &mSpeakerEnrollmentJob, Type: smithy.ShapeTypeStructure, Ext: &ext[436]})
-var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[438]})
-var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[439]})
-var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[442]})
-var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[443]})
-var sUpdateDomainRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[446]})
-var sUpdateDomainRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DomainName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[447]})
-var sUpdateDomainRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[448]})
-var sUpdateDomainRequest_ServerSideEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideEncryptionConfiguration", ID: &iServerSideEncryptionConfiguration, Members: &mServerSideEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[449]})
-var sUpdateDomainResponse_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &iDomain, Members: &mDomain, Type: smithy.ShapeTypeStructure, Ext: &ext[451]})
-var sUpdateWatchlistRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &ext[453]})
-var sUpdateWatchlistRequest_WatchlistId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistId", ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &ext[454]})
-var sUpdateWatchlistRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_WatchlistName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[455]})
-var sUpdateWatchlistRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_WatchlistDescription, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[456]})
-var sUpdateWatchlistResponse_Watchlist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Watchlist", ID: &iWatchlist, Members: &mWatchlist, Type: smithy.ShapeTypeStructure, Ext: &ext[458]})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var sAuthenticationConfiguration_AcceptanceThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceptanceThreshold", ID: &i_Score, Type: smithy.ShapeTypeInteger, Ext: &eAuthenticationConfiguration_AcceptanceThreshold})
+var sAuthenticationResult_AuthenticationResultId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationResultId", ID: &i_UniqueIdLarge, Type: smithy.ShapeTypeString, Ext: &eAuthenticationResult_AuthenticationResultId})
+var sAuthenticationResult_AudioAggregationStartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudioAggregationStartedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAuthenticationResult_AudioAggregationStartedAt})
+var sAuthenticationResult_AudioAggregationEndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudioAggregationEndedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAuthenticationResult_AudioAggregationEndedAt})
+var sAuthenticationResult_CustomerSpeakerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerSpeakerId", ID: &i_CustomerSpeakerId, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eAuthenticationResult_CustomerSpeakerId})
+var sAuthenticationResult_GeneratedSpeakerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeneratedSpeakerId", ID: &i_GeneratedSpeakerId, Type: smithy.ShapeTypeString, Ext: &eAuthenticationResult_GeneratedSpeakerId})
+var sAuthenticationResult_Decision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Decision", ID: &i_AuthenticationDecision, Type: smithy.ShapeTypeString, Ext: &eAuthenticationResult_Decision})
+var sAuthenticationResult_Score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Score", ID: &i_Score, Type: smithy.ShapeTypeInteger, Ext: &eAuthenticationResult_Score})
+var sAuthenticationResult_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iAuthenticationConfiguration, Members: &mAuthenticationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAuthenticationResult_Configuration})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var sConflictException_ConflictType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConflictType", ID: &i_ConflictType, Type: smithy.ShapeTypeString, Ext: &eConflictException_ConflictType})
+var sDomain_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eDomain_DomainId})
+var sDomain_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDomain_Arn})
+var sDomain_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DomainName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eDomain_Name})
+var sDomain_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eDomain_Description})
+var sDomain_DomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainStatus", ID: &i_DomainStatus, Type: smithy.ShapeTypeString, Ext: &eDomain_DomainStatus})
+var sDomain_ServerSideEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideEncryptionConfiguration", ID: &iServerSideEncryptionConfiguration, Members: &mServerSideEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDomain_ServerSideEncryptionConfiguration})
+var sDomain_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDomain_CreatedAt})
+var sDomain_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDomain_UpdatedAt})
+var sDomain_ServerSideEncryptionUpdateDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideEncryptionUpdateDetails", ID: &iServerSideEncryptionUpdateDetails, Members: &mServerSideEncryptionUpdateDetails, Type: smithy.ShapeTypeStructure, Ext: &eDomain_ServerSideEncryptionUpdateDetails})
+var sDomain_WatchlistDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistDetails", ID: &iWatchlistDetails, Members: &mWatchlistDetails, Type: smithy.ShapeTypeStructure, Ext: &eDomain_WatchlistDetails})
+var s_DomainSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainSummary, Members: &mDomainSummary, Type: smithy.ShapeTypeStructure, Ext: &e_DomainSummaries_member})
+var sDomainSummary_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eDomainSummary_DomainId})
+var sDomainSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDomainSummary_Arn})
+var sDomainSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DomainName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eDomainSummary_Name})
+var sDomainSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eDomainSummary_Description})
+var sDomainSummary_DomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainStatus", ID: &i_DomainStatus, Type: smithy.ShapeTypeString, Ext: &eDomainSummary_DomainStatus})
+var sDomainSummary_ServerSideEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideEncryptionConfiguration", ID: &iServerSideEncryptionConfiguration, Members: &mServerSideEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDomainSummary_ServerSideEncryptionConfiguration})
+var sDomainSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDomainSummary_CreatedAt})
+var sDomainSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDomainSummary_UpdatedAt})
+var sDomainSummary_ServerSideEncryptionUpdateDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideEncryptionUpdateDetails", ID: &iServerSideEncryptionUpdateDetails, Members: &mServerSideEncryptionUpdateDetails, Type: smithy.ShapeTypeStructure, Ext: &eDomainSummary_ServerSideEncryptionUpdateDetails})
+var sDomainSummary_WatchlistDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistDetails", ID: &iWatchlistDetails, Members: &mWatchlistDetails, Type: smithy.ShapeTypeStructure, Ext: &eDomainSummary_WatchlistDetails})
+var sEnrollmentConfig_ExistingEnrollmentAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExistingEnrollmentAction", ID: &i_ExistingEnrollmentAction, Type: smithy.ShapeTypeString, Ext: &eEnrollmentConfig_ExistingEnrollmentAction})
+var sEnrollmentConfig_FraudDetectionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FraudDetectionConfig", ID: &iEnrollmentJobFraudDetectionConfig, Members: &mEnrollmentJobFraudDetectionConfig, Type: smithy.ShapeTypeStructure, Ext: &eEnrollmentConfig_FraudDetectionConfig})
+var sEnrollmentJobFraudDetectionConfig_FraudDetectionAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FraudDetectionAction", ID: &i_FraudDetectionAction, Type: smithy.ShapeTypeString, Ext: &eEnrollmentJobFraudDetectionConfig_FraudDetectionAction})
+var sEnrollmentJobFraudDetectionConfig_RiskThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RiskThreshold", ID: &i_Score, Type: smithy.ShapeTypeInteger, Ext: &eEnrollmentJobFraudDetectionConfig_RiskThreshold})
+var sEnrollmentJobFraudDetectionConfig_WatchlistIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistIds", ID: &i_EnrollmentJobFraudDetectionConfigWatchlistIds, Members: &m_EnrollmentJobFraudDetectionConfigWatchlistIds, Type: smithy.ShapeTypeList, Ext: &eEnrollmentJobFraudDetectionConfig_WatchlistIds})
+var s_EnrollmentJobFraudDetectionConfigWatchlistIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &e_EnrollmentJobFraudDetectionConfigWatchlistIds_member})
+var sFailureDetails_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusCode", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eFailureDetails_StatusCode})
+var sFailureDetails_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eFailureDetails_Message})
+var sFraudDetectionConfiguration_RiskThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RiskThreshold", ID: &i_Score, Type: smithy.ShapeTypeInteger, Ext: &eFraudDetectionConfiguration_RiskThreshold})
+var sFraudDetectionConfiguration_WatchlistId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistId", ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &eFraudDetectionConfiguration_WatchlistId})
+var s_FraudDetectionReasons_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FraudDetectionReason, Type: smithy.ShapeTypeString, Ext: &e_FraudDetectionReasons_member})
+var sFraudDetectionResult_FraudDetectionResultId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FraudDetectionResultId", ID: &i_UniqueIdLarge, Type: smithy.ShapeTypeString, Ext: &eFraudDetectionResult_FraudDetectionResultId})
+var sFraudDetectionResult_AudioAggregationStartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudioAggregationStartedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eFraudDetectionResult_AudioAggregationStartedAt})
+var sFraudDetectionResult_AudioAggregationEndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudioAggregationEndedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eFraudDetectionResult_AudioAggregationEndedAt})
+var sFraudDetectionResult_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iFraudDetectionConfiguration, Members: &mFraudDetectionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eFraudDetectionResult_Configuration})
+var sFraudDetectionResult_Decision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Decision", ID: &i_FraudDetectionDecision, Type: smithy.ShapeTypeString, Ext: &eFraudDetectionResult_Decision})
+var sFraudDetectionResult_Reasons = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reasons", ID: &i_FraudDetectionReasons, Members: &m_FraudDetectionReasons, Type: smithy.ShapeTypeList, Ext: &eFraudDetectionResult_Reasons})
+var sFraudDetectionResult_RiskDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RiskDetails", ID: &iFraudRiskDetails, Members: &mFraudRiskDetails, Type: smithy.ShapeTypeStructure, Ext: &eFraudDetectionResult_RiskDetails})
+var sFraudRiskDetails_KnownFraudsterRisk = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KnownFraudsterRisk", ID: &iKnownFraudsterRisk, Members: &mKnownFraudsterRisk, Type: smithy.ShapeTypeStructure, Ext: &eFraudRiskDetails_KnownFraudsterRisk})
+var sFraudRiskDetails_VoiceSpoofingRisk = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceSpoofingRisk", ID: &iVoiceSpoofingRisk, Members: &mVoiceSpoofingRisk, Type: smithy.ShapeTypeStructure, Ext: &eFraudRiskDetails_VoiceSpoofingRisk})
+var sFraudster_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eFraudster_DomainId})
+var sFraudster_GeneratedFraudsterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeneratedFraudsterId", ID: &i_GeneratedFraudsterId, Type: smithy.ShapeTypeString, Ext: &eFraudster_GeneratedFraudsterId})
+var sFraudster_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eFraudster_CreatedAt})
+var sFraudster_WatchlistIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistIds", ID: &i_ResponseWatchlistIds, Members: &m_ResponseWatchlistIds, Type: smithy.ShapeTypeList, Ext: &eFraudster_WatchlistIds})
+var sFraudsterRegistrationJob_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &i_JobName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eFraudsterRegistrationJob_JobName})
+var sFraudsterRegistrationJob_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eFraudsterRegistrationJob_JobId})
+var sFraudsterRegistrationJob_JobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobStatus", ID: &i_FraudsterRegistrationJobStatus, Type: smithy.ShapeTypeString, Ext: &eFraudsterRegistrationJob_JobStatus})
+var sFraudsterRegistrationJob_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eFraudsterRegistrationJob_DomainId})
+var sFraudsterRegistrationJob_DataAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataAccessRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eFraudsterRegistrationJob_DataAccessRoleArn})
+var sFraudsterRegistrationJob_RegistrationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistrationConfig", ID: &iRegistrationConfig, Members: &mRegistrationConfig, Type: smithy.ShapeTypeStructure, Ext: &eFraudsterRegistrationJob_RegistrationConfig})
+var sFraudsterRegistrationJob_InputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputDataConfig", ID: &iInputDataConfig, Members: &mInputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eFraudsterRegistrationJob_InputDataConfig})
+var sFraudsterRegistrationJob_OutputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputDataConfig", ID: &iOutputDataConfig, Members: &mOutputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eFraudsterRegistrationJob_OutputDataConfig})
+var sFraudsterRegistrationJob_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eFraudsterRegistrationJob_CreatedAt})
+var sFraudsterRegistrationJob_EndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eFraudsterRegistrationJob_EndedAt})
+var sFraudsterRegistrationJob_FailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureDetails", ID: &iFailureDetails, Members: &mFailureDetails, Type: smithy.ShapeTypeStructure, Ext: &eFraudsterRegistrationJob_FailureDetails})
+var sFraudsterRegistrationJob_JobProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobProgress", ID: &iJobProgress, Members: &mJobProgress, Type: smithy.ShapeTypeStructure, Ext: &eFraudsterRegistrationJob_JobProgress})
+var s_FraudsterRegistrationJobSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFraudsterRegistrationJobSummary, Members: &mFraudsterRegistrationJobSummary, Type: smithy.ShapeTypeStructure, Ext: &e_FraudsterRegistrationJobSummaries_member})
+var sFraudsterRegistrationJobSummary_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &i_JobName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eFraudsterRegistrationJobSummary_JobName})
+var sFraudsterRegistrationJobSummary_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eFraudsterRegistrationJobSummary_JobId})
+var sFraudsterRegistrationJobSummary_JobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobStatus", ID: &i_FraudsterRegistrationJobStatus, Type: smithy.ShapeTypeString, Ext: &eFraudsterRegistrationJobSummary_JobStatus})
+var sFraudsterRegistrationJobSummary_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eFraudsterRegistrationJobSummary_DomainId})
+var sFraudsterRegistrationJobSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eFraudsterRegistrationJobSummary_CreatedAt})
+var sFraudsterRegistrationJobSummary_EndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eFraudsterRegistrationJobSummary_EndedAt})
+var sFraudsterRegistrationJobSummary_FailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureDetails", ID: &iFailureDetails, Members: &mFailureDetails, Type: smithy.ShapeTypeStructure, Ext: &eFraudsterRegistrationJobSummary_FailureDetails})
+var sFraudsterRegistrationJobSummary_JobProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobProgress", ID: &iJobProgress, Members: &mJobProgress, Type: smithy.ShapeTypeStructure, Ext: &eFraudsterRegistrationJobSummary_JobProgress})
+var s_FraudsterSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFraudsterSummary, Members: &mFraudsterSummary, Type: smithy.ShapeTypeStructure, Ext: &e_FraudsterSummaries_member})
+var sFraudsterSummary_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eFraudsterSummary_DomainId})
+var sFraudsterSummary_GeneratedFraudsterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeneratedFraudsterId", ID: &i_GeneratedFraudsterId, Type: smithy.ShapeTypeString, Ext: &eFraudsterSummary_GeneratedFraudsterId})
+var sFraudsterSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eFraudsterSummary_CreatedAt})
+var sFraudsterSummary_WatchlistIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistIds", ID: &i_ResponseWatchlistIds, Members: &m_ResponseWatchlistIds, Type: smithy.ShapeTypeList, Ext: &eFraudsterSummary_WatchlistIds})
+var sInputDataConfig_S3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &eInputDataConfig_S3Uri})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var sJobProgress_PercentComplete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentComplete", ID: &i_Score, Type: smithy.ShapeTypeInteger, Ext: &eJobProgress_PercentComplete})
+var sKnownFraudsterRisk_RiskScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RiskScore", ID: &i_Score, Type: smithy.ShapeTypeInteger, Ext: &eKnownFraudsterRisk_RiskScore})
+var sKnownFraudsterRisk_GeneratedFraudsterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeneratedFraudsterId", ID: &i_GeneratedFraudsterId, Type: smithy.ShapeTypeString, Ext: &eKnownFraudsterRisk_GeneratedFraudsterId})
+var sOutputDataConfig_S3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &eOutputDataConfig_S3Uri})
+var sOutputDataConfig_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &eOutputDataConfig_KmsKeyId})
+var sRegistrationConfig_DuplicateRegistrationAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DuplicateRegistrationAction", ID: &i_DuplicateRegistrationAction, Type: smithy.ShapeTypeString, Ext: &eRegistrationConfig_DuplicateRegistrationAction})
+var sRegistrationConfig_FraudsterSimilarityThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FraudsterSimilarityThreshold", ID: &i_Score, Type: smithy.ShapeTypeInteger, Ext: &eRegistrationConfig_FraudsterSimilarityThreshold})
+var sRegistrationConfig_WatchlistIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistIds", ID: &i_RegistrationConfigWatchlistIds, Members: &m_RegistrationConfigWatchlistIds, Type: smithy.ShapeTypeList, Ext: &eRegistrationConfig_WatchlistIds})
+var s_RegistrationConfigWatchlistIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &e_RegistrationConfigWatchlistIds_member})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sResourceNotFoundException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_ResourceType})
+var s_ResponseWatchlistIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &e_ResponseWatchlistIds_member})
+var sServerSideEncryptionConfiguration_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &eServerSideEncryptionConfiguration_KmsKeyId})
+var sServerSideEncryptionUpdateDetails_OldKmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OldKmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &eServerSideEncryptionUpdateDetails_OldKmsKeyId})
+var sServerSideEncryptionUpdateDetails_UpdateStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateStatus", ID: &i_ServerSideEncryptionUpdateStatus, Type: smithy.ShapeTypeString, Ext: &eServerSideEncryptionUpdateDetails_UpdateStatus})
+var sServerSideEncryptionUpdateDetails_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServerSideEncryptionUpdateDetails_Message})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_Message})
+var sSpeaker_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eSpeaker_DomainId})
+var sSpeaker_CustomerSpeakerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerSpeakerId", ID: &i_CustomerSpeakerId, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eSpeaker_CustomerSpeakerId})
+var sSpeaker_GeneratedSpeakerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeneratedSpeakerId", ID: &i_GeneratedSpeakerId, Type: smithy.ShapeTypeString, Ext: &eSpeaker_GeneratedSpeakerId})
+var sSpeaker_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_SpeakerStatus, Type: smithy.ShapeTypeString, Ext: &eSpeaker_Status})
+var sSpeaker_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSpeaker_CreatedAt})
+var sSpeaker_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSpeaker_UpdatedAt})
+var sSpeaker_LastAccessedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastAccessedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSpeaker_LastAccessedAt})
+var sSpeakerEnrollmentJob_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &i_JobName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eSpeakerEnrollmentJob_JobName})
+var sSpeakerEnrollmentJob_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eSpeakerEnrollmentJob_JobId})
+var sSpeakerEnrollmentJob_JobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobStatus", ID: &i_SpeakerEnrollmentJobStatus, Type: smithy.ShapeTypeString, Ext: &eSpeakerEnrollmentJob_JobStatus})
+var sSpeakerEnrollmentJob_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eSpeakerEnrollmentJob_DomainId})
+var sSpeakerEnrollmentJob_DataAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataAccessRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eSpeakerEnrollmentJob_DataAccessRoleArn})
+var sSpeakerEnrollmentJob_EnrollmentConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnrollmentConfig", ID: &iEnrollmentConfig, Members: &mEnrollmentConfig, Type: smithy.ShapeTypeStructure, Ext: &eSpeakerEnrollmentJob_EnrollmentConfig})
+var sSpeakerEnrollmentJob_InputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputDataConfig", ID: &iInputDataConfig, Members: &mInputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eSpeakerEnrollmentJob_InputDataConfig})
+var sSpeakerEnrollmentJob_OutputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputDataConfig", ID: &iOutputDataConfig, Members: &mOutputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eSpeakerEnrollmentJob_OutputDataConfig})
+var sSpeakerEnrollmentJob_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSpeakerEnrollmentJob_CreatedAt})
+var sSpeakerEnrollmentJob_EndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSpeakerEnrollmentJob_EndedAt})
+var sSpeakerEnrollmentJob_FailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureDetails", ID: &iFailureDetails, Members: &mFailureDetails, Type: smithy.ShapeTypeStructure, Ext: &eSpeakerEnrollmentJob_FailureDetails})
+var sSpeakerEnrollmentJob_JobProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobProgress", ID: &iJobProgress, Members: &mJobProgress, Type: smithy.ShapeTypeStructure, Ext: &eSpeakerEnrollmentJob_JobProgress})
+var s_SpeakerEnrollmentJobSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSpeakerEnrollmentJobSummary, Members: &mSpeakerEnrollmentJobSummary, Type: smithy.ShapeTypeStructure, Ext: &e_SpeakerEnrollmentJobSummaries_member})
+var sSpeakerEnrollmentJobSummary_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &i_JobName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eSpeakerEnrollmentJobSummary_JobName})
+var sSpeakerEnrollmentJobSummary_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eSpeakerEnrollmentJobSummary_JobId})
+var sSpeakerEnrollmentJobSummary_JobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobStatus", ID: &i_SpeakerEnrollmentJobStatus, Type: smithy.ShapeTypeString, Ext: &eSpeakerEnrollmentJobSummary_JobStatus})
+var sSpeakerEnrollmentJobSummary_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eSpeakerEnrollmentJobSummary_DomainId})
+var sSpeakerEnrollmentJobSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSpeakerEnrollmentJobSummary_CreatedAt})
+var sSpeakerEnrollmentJobSummary_EndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSpeakerEnrollmentJobSummary_EndedAt})
+var sSpeakerEnrollmentJobSummary_FailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureDetails", ID: &iFailureDetails, Members: &mFailureDetails, Type: smithy.ShapeTypeStructure, Ext: &eSpeakerEnrollmentJobSummary_FailureDetails})
+var sSpeakerEnrollmentJobSummary_JobProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobProgress", ID: &iJobProgress, Members: &mJobProgress, Type: smithy.ShapeTypeStructure, Ext: &eSpeakerEnrollmentJobSummary_JobProgress})
+var s_SpeakerSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSpeakerSummary, Members: &mSpeakerSummary, Type: smithy.ShapeTypeStructure, Ext: &e_SpeakerSummaries_member})
+var sSpeakerSummary_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eSpeakerSummary_DomainId})
+var sSpeakerSummary_CustomerSpeakerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerSpeakerId", ID: &i_CustomerSpeakerId, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eSpeakerSummary_CustomerSpeakerId})
+var sSpeakerSummary_GeneratedSpeakerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeneratedSpeakerId", ID: &i_GeneratedSpeakerId, Type: smithy.ShapeTypeString, Ext: &eSpeakerSummary_GeneratedSpeakerId})
+var sSpeakerSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_SpeakerStatus, Type: smithy.ShapeTypeString, Ext: &eSpeakerSummary_Status})
+var sSpeakerSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSpeakerSummary_CreatedAt})
+var sSpeakerSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSpeakerSummary_UpdatedAt})
+var sSpeakerSummary_LastAccessedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastAccessedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSpeakerSummary_LastAccessedAt})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sVoiceSpoofingRisk_RiskScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RiskScore", ID: &i_Score, Type: smithy.ShapeTypeInteger, Ext: &eVoiceSpoofingRisk_RiskScore})
+var sWatchlist_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eWatchlist_DomainId})
+var sWatchlist_WatchlistId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistId", ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &eWatchlist_WatchlistId})
+var sWatchlist_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_WatchlistName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eWatchlist_Name})
+var sWatchlist_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_WatchlistDescription, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eWatchlist_Description})
+var sWatchlist_DefaultWatchlist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultWatchlist", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eWatchlist_DefaultWatchlist})
+var sWatchlist_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eWatchlist_CreatedAt})
+var sWatchlist_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eWatchlist_UpdatedAt})
+var sWatchlistDetails_DefaultWatchlistId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultWatchlistId", ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &eWatchlistDetails_DefaultWatchlistId})
+var s_WatchlistSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWatchlistSummary, Members: &mWatchlistSummary, Type: smithy.ShapeTypeStructure, Ext: &e_WatchlistSummaries_member})
+var sWatchlistSummary_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eWatchlistSummary_DomainId})
+var sWatchlistSummary_WatchlistId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistId", ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &eWatchlistSummary_WatchlistId})
+var sWatchlistSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_WatchlistName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eWatchlistSummary_Name})
+var sWatchlistSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_WatchlistDescription, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eWatchlistSummary_Description})
+var sWatchlistSummary_DefaultWatchlist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultWatchlist", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eWatchlistSummary_DefaultWatchlist})
+var sWatchlistSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eWatchlistSummary_CreatedAt})
+var sWatchlistSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eWatchlistSummary_UpdatedAt})
+var sAssociateFraudsterRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eAssociateFraudsterRequest_DomainId})
+var sAssociateFraudsterRequest_WatchlistId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistId", ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &eAssociateFraudsterRequest_WatchlistId})
+var sAssociateFraudsterRequest_FraudsterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FraudsterId", ID: &i_FraudsterId, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eAssociateFraudsterRequest_FraudsterId})
+var sAssociateFraudsterResponse_Fraudster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fraudster", ID: &iFraudster, Members: &mFraudster, Type: smithy.ShapeTypeStructure, Ext: &eAssociateFraudsterResponse_Fraudster})
+var sCreateDomainRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DomainName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eCreateDomainRequest_Name})
+var sCreateDomainRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eCreateDomainRequest_Description})
+var sCreateDomainRequest_ServerSideEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideEncryptionConfiguration", ID: &iServerSideEncryptionConfiguration, Members: &mServerSideEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateDomainRequest_ServerSideEncryptionConfiguration})
+var sCreateDomainRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientTokenString, Type: smithy.ShapeTypeString, Ext: &eCreateDomainRequest_ClientToken})
+var sCreateDomainRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateDomainRequest_Tags})
+var sCreateDomainResponse_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &iDomain, Members: &mDomain, Type: smithy.ShapeTypeStructure, Ext: &eCreateDomainResponse_Domain})
+var sCreateWatchlistRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eCreateWatchlistRequest_DomainId})
+var sCreateWatchlistRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_WatchlistName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eCreateWatchlistRequest_Name})
+var sCreateWatchlistRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_WatchlistDescription, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eCreateWatchlistRequest_Description})
+var sCreateWatchlistRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientTokenString, Type: smithy.ShapeTypeString, Ext: &eCreateWatchlistRequest_ClientToken})
+var sCreateWatchlistResponse_Watchlist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Watchlist", ID: &iWatchlist, Members: &mWatchlist, Type: smithy.ShapeTypeStructure, Ext: &eCreateWatchlistResponse_Watchlist})
+var sDeleteDomainRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eDeleteDomainRequest_DomainId})
+var sDeleteFraudsterRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eDeleteFraudsterRequest_DomainId})
+var sDeleteFraudsterRequest_FraudsterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FraudsterId", ID: &i_FraudsterId, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eDeleteFraudsterRequest_FraudsterId})
+var sDeleteSpeakerRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eDeleteSpeakerRequest_DomainId})
+var sDeleteSpeakerRequest_SpeakerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerId", ID: &i_SpeakerId, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eDeleteSpeakerRequest_SpeakerId})
+var sDeleteWatchlistRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eDeleteWatchlistRequest_DomainId})
+var sDeleteWatchlistRequest_WatchlistId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistId", ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &eDeleteWatchlistRequest_WatchlistId})
+var sDescribeDomainRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eDescribeDomainRequest_DomainId})
+var sDescribeDomainResponse_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &iDomain, Members: &mDomain, Type: smithy.ShapeTypeStructure, Ext: &eDescribeDomainResponse_Domain})
+var sDescribeFraudsterRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eDescribeFraudsterRequest_DomainId})
+var sDescribeFraudsterRequest_FraudsterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FraudsterId", ID: &i_FraudsterId, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eDescribeFraudsterRequest_FraudsterId})
+var sDescribeFraudsterResponse_Fraudster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fraudster", ID: &iFraudster, Members: &mFraudster, Type: smithy.ShapeTypeStructure, Ext: &eDescribeFraudsterResponse_Fraudster})
+var sDescribeFraudsterRegistrationJobRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eDescribeFraudsterRegistrationJobRequest_DomainId})
+var sDescribeFraudsterRegistrationJobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eDescribeFraudsterRegistrationJobRequest_JobId})
+var sDescribeFraudsterRegistrationJobResponse_Job = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Job", ID: &iFraudsterRegistrationJob, Members: &mFraudsterRegistrationJob, Type: smithy.ShapeTypeStructure, Ext: &eDescribeFraudsterRegistrationJobResponse_Job})
+var sDescribeSpeakerEnrollmentJobRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eDescribeSpeakerEnrollmentJobRequest_DomainId})
+var sDescribeSpeakerEnrollmentJobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eDescribeSpeakerEnrollmentJobRequest_JobId})
+var sDescribeSpeakerEnrollmentJobResponse_Job = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Job", ID: &iSpeakerEnrollmentJob, Members: &mSpeakerEnrollmentJob, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSpeakerEnrollmentJobResponse_Job})
+var sDescribeSpeakerRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eDescribeSpeakerRequest_DomainId})
+var sDescribeSpeakerRequest_SpeakerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerId", ID: &i_SpeakerId, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eDescribeSpeakerRequest_SpeakerId})
+var sDescribeSpeakerResponse_Speaker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Speaker", ID: &iSpeaker, Members: &mSpeaker, Type: smithy.ShapeTypeStructure, Ext: &eDescribeSpeakerResponse_Speaker})
+var sDescribeWatchlistRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eDescribeWatchlistRequest_DomainId})
+var sDescribeWatchlistRequest_WatchlistId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistId", ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &eDescribeWatchlistRequest_WatchlistId})
+var sDescribeWatchlistResponse_Watchlist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Watchlist", ID: &iWatchlist, Members: &mWatchlist, Type: smithy.ShapeTypeStructure, Ext: &eDescribeWatchlistResponse_Watchlist})
+var sDisassociateFraudsterRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eDisassociateFraudsterRequest_DomainId})
+var sDisassociateFraudsterRequest_WatchlistId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistId", ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &eDisassociateFraudsterRequest_WatchlistId})
+var sDisassociateFraudsterRequest_FraudsterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FraudsterId", ID: &i_FraudsterId, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eDisassociateFraudsterRequest_FraudsterId})
+var sDisassociateFraudsterResponse_Fraudster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fraudster", ID: &iFraudster, Members: &mFraudster, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateFraudsterResponse_Fraudster})
+var sEvaluateSessionRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eEvaluateSessionRequest_DomainId})
+var sEvaluateSessionRequest_SessionNameOrId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionNameOrId", ID: &i_SessionNameOrId, Type: smithy.ShapeTypeString, Ext: &eEvaluateSessionRequest_SessionNameOrId})
+var sEvaluateSessionResponse_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eEvaluateSessionResponse_DomainId})
+var sEvaluateSessionResponse_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_SessionId, Type: smithy.ShapeTypeString, Ext: &eEvaluateSessionResponse_SessionId})
+var sEvaluateSessionResponse_SessionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionName", ID: &i_SessionName, Type: smithy.ShapeTypeString, Ext: &eEvaluateSessionResponse_SessionName})
+var sEvaluateSessionResponse_StreamingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamingStatus", ID: &i_StreamingStatus, Type: smithy.ShapeTypeString, Ext: &eEvaluateSessionResponse_StreamingStatus})
+var sEvaluateSessionResponse_AuthenticationResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationResult", ID: &iAuthenticationResult, Members: &mAuthenticationResult, Type: smithy.ShapeTypeStructure, Ext: &eEvaluateSessionResponse_AuthenticationResult})
+var sEvaluateSessionResponse_FraudDetectionResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FraudDetectionResult", ID: &iFraudDetectionResult, Members: &mFraudDetectionResult, Type: smithy.ShapeTypeStructure, Ext: &eEvaluateSessionResponse_FraudDetectionResult})
+var sListDomainsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsForListDomainFe, Type: smithy.ShapeTypeInteger, Ext: &eListDomainsRequest_MaxResults})
+var sListDomainsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDomainsRequest_NextToken})
+var sListDomainsResponse_DomainSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainSummaries", ID: &i_DomainSummaries, Members: &m_DomainSummaries, Type: smithy.ShapeTypeList, Ext: &eListDomainsResponse_DomainSummaries})
+var sListDomainsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListDomainsResponse_NextToken})
+var sListFraudsterRegistrationJobsRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eListFraudsterRegistrationJobsRequest_DomainId})
+var sListFraudsterRegistrationJobsRequest_JobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobStatus", ID: &i_FraudsterRegistrationJobStatus, Type: smithy.ShapeTypeString, Ext: &eListFraudsterRegistrationJobsRequest_JobStatus})
+var sListFraudsterRegistrationJobsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsForList, Type: smithy.ShapeTypeInteger, Ext: &eListFraudsterRegistrationJobsRequest_MaxResults})
+var sListFraudsterRegistrationJobsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListFraudsterRegistrationJobsRequest_NextToken})
+var sListFraudsterRegistrationJobsResponse_JobSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobSummaries", ID: &i_FraudsterRegistrationJobSummaries, Members: &m_FraudsterRegistrationJobSummaries, Type: smithy.ShapeTypeList, Ext: &eListFraudsterRegistrationJobsResponse_JobSummaries})
+var sListFraudsterRegistrationJobsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListFraudsterRegistrationJobsResponse_NextToken})
+var sListFraudstersRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eListFraudstersRequest_DomainId})
+var sListFraudstersRequest_WatchlistId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistId", ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &eListFraudstersRequest_WatchlistId})
+var sListFraudstersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsForList, Type: smithy.ShapeTypeInteger, Ext: &eListFraudstersRequest_MaxResults})
+var sListFraudstersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListFraudstersRequest_NextToken})
+var sListFraudstersResponse_FraudsterSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FraudsterSummaries", ID: &i_FraudsterSummaries, Members: &m_FraudsterSummaries, Type: smithy.ShapeTypeList, Ext: &eListFraudstersResponse_FraudsterSummaries})
+var sListFraudstersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListFraudstersResponse_NextToken})
+var sListSpeakerEnrollmentJobsRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eListSpeakerEnrollmentJobsRequest_DomainId})
+var sListSpeakerEnrollmentJobsRequest_JobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobStatus", ID: &i_SpeakerEnrollmentJobStatus, Type: smithy.ShapeTypeString, Ext: &eListSpeakerEnrollmentJobsRequest_JobStatus})
+var sListSpeakerEnrollmentJobsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsForList, Type: smithy.ShapeTypeInteger, Ext: &eListSpeakerEnrollmentJobsRequest_MaxResults})
+var sListSpeakerEnrollmentJobsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListSpeakerEnrollmentJobsRequest_NextToken})
+var sListSpeakerEnrollmentJobsResponse_JobSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobSummaries", ID: &i_SpeakerEnrollmentJobSummaries, Members: &m_SpeakerEnrollmentJobSummaries, Type: smithy.ShapeTypeList, Ext: &eListSpeakerEnrollmentJobsResponse_JobSummaries})
+var sListSpeakerEnrollmentJobsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListSpeakerEnrollmentJobsResponse_NextToken})
+var sListSpeakersRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eListSpeakersRequest_DomainId})
+var sListSpeakersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsForList, Type: smithy.ShapeTypeInteger, Ext: &eListSpeakersRequest_MaxResults})
+var sListSpeakersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListSpeakersRequest_NextToken})
+var sListSpeakersResponse_SpeakerSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSummaries", ID: &i_SpeakerSummaries, Members: &m_SpeakerSummaries, Type: smithy.ShapeTypeList, Ext: &eListSpeakersResponse_SpeakerSummaries})
+var sListSpeakersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListSpeakersResponse_NextToken})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_Tags})
+var sListWatchlistsRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eListWatchlistsRequest_DomainId})
+var sListWatchlistsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsForList, Type: smithy.ShapeTypeInteger, Ext: &eListWatchlistsRequest_MaxResults})
+var sListWatchlistsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListWatchlistsRequest_NextToken})
+var sListWatchlistsResponse_WatchlistSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistSummaries", ID: &i_WatchlistSummaries, Members: &m_WatchlistSummaries, Type: smithy.ShapeTypeList, Ext: &eListWatchlistsResponse_WatchlistSummaries})
+var sListWatchlistsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListWatchlistsResponse_NextToken})
+var sOptOutSpeakerRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eOptOutSpeakerRequest_DomainId})
+var sOptOutSpeakerRequest_SpeakerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerId", ID: &i_SpeakerId, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eOptOutSpeakerRequest_SpeakerId})
+var sOptOutSpeakerResponse_Speaker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Speaker", ID: &iSpeaker, Members: &mSpeaker, Type: smithy.ShapeTypeStructure, Ext: &eOptOutSpeakerResponse_Speaker})
+var sStartFraudsterRegistrationJobRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientTokenString, Type: smithy.ShapeTypeString, Ext: &eStartFraudsterRegistrationJobRequest_ClientToken})
+var sStartFraudsterRegistrationJobRequest_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &i_JobName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eStartFraudsterRegistrationJobRequest_JobName})
+var sStartFraudsterRegistrationJobRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eStartFraudsterRegistrationJobRequest_DomainId})
+var sStartFraudsterRegistrationJobRequest_DataAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataAccessRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eStartFraudsterRegistrationJobRequest_DataAccessRoleArn})
+var sStartFraudsterRegistrationJobRequest_RegistrationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistrationConfig", ID: &iRegistrationConfig, Members: &mRegistrationConfig, Type: smithy.ShapeTypeStructure, Ext: &eStartFraudsterRegistrationJobRequest_RegistrationConfig})
+var sStartFraudsterRegistrationJobRequest_InputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputDataConfig", ID: &iInputDataConfig, Members: &mInputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eStartFraudsterRegistrationJobRequest_InputDataConfig})
+var sStartFraudsterRegistrationJobRequest_OutputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputDataConfig", ID: &iOutputDataConfig, Members: &mOutputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eStartFraudsterRegistrationJobRequest_OutputDataConfig})
+var sStartFraudsterRegistrationJobResponse_Job = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Job", ID: &iFraudsterRegistrationJob, Members: &mFraudsterRegistrationJob, Type: smithy.ShapeTypeStructure, Ext: &eStartFraudsterRegistrationJobResponse_Job})
+var sStartSpeakerEnrollmentJobRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientTokenString, Type: smithy.ShapeTypeString, Ext: &eStartSpeakerEnrollmentJobRequest_ClientToken})
+var sStartSpeakerEnrollmentJobRequest_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &i_JobName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eStartSpeakerEnrollmentJobRequest_JobName})
+var sStartSpeakerEnrollmentJobRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eStartSpeakerEnrollmentJobRequest_DomainId})
+var sStartSpeakerEnrollmentJobRequest_DataAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataAccessRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString, Ext: &eStartSpeakerEnrollmentJobRequest_DataAccessRoleArn})
+var sStartSpeakerEnrollmentJobRequest_EnrollmentConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnrollmentConfig", ID: &iEnrollmentConfig, Members: &mEnrollmentConfig, Type: smithy.ShapeTypeStructure, Ext: &eStartSpeakerEnrollmentJobRequest_EnrollmentConfig})
+var sStartSpeakerEnrollmentJobRequest_InputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputDataConfig", ID: &iInputDataConfig, Members: &mInputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eStartSpeakerEnrollmentJobRequest_InputDataConfig})
+var sStartSpeakerEnrollmentJobRequest_OutputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputDataConfig", ID: &iOutputDataConfig, Members: &mOutputDataConfig, Type: smithy.ShapeTypeStructure, Ext: &eStartSpeakerEnrollmentJobRequest_OutputDataConfig})
+var sStartSpeakerEnrollmentJobResponse_Job = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Job", ID: &iSpeakerEnrollmentJob, Members: &mSpeakerEnrollmentJob, Type: smithy.ShapeTypeStructure, Ext: &eStartSpeakerEnrollmentJobResponse_Job})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_Tags})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUpdateDomainRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eUpdateDomainRequest_DomainId})
+var sUpdateDomainRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DomainName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eUpdateDomainRequest_Name})
+var sUpdateDomainRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eUpdateDomainRequest_Description})
+var sUpdateDomainRequest_ServerSideEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideEncryptionConfiguration", ID: &iServerSideEncryptionConfiguration, Members: &mServerSideEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDomainRequest_ServerSideEncryptionConfiguration})
+var sUpdateDomainResponse_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &iDomain, Members: &mDomain, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDomainResponse_Domain})
+var sUpdateWatchlistRequest_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainId", ID: &i_DomainId, Type: smithy.ShapeTypeString, Ext: &eUpdateWatchlistRequest_DomainId})
+var sUpdateWatchlistRequest_WatchlistId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WatchlistId", ID: &i_WatchlistId, Type: smithy.ShapeTypeString, Ext: &eUpdateWatchlistRequest_WatchlistId})
+var sUpdateWatchlistRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_WatchlistName, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eUpdateWatchlistRequest_Name})
+var sUpdateWatchlistRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_WatchlistDescription, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &eUpdateWatchlistRequest_Description})
+var sUpdateWatchlistResponse_Watchlist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Watchlist", ID: &iWatchlist, Members: &mWatchlist, Type: smithy.ShapeTypeStructure, Ext: &eUpdateWatchlistResponse_Watchlist})
 
 var AssociateFraudster = &sAssociateFraudster
 

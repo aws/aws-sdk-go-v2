@@ -7,9 +7,565 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [557]smithy.SchemaExtensions
+var (
+	eAcceptQualificationRequest                                             smithy.SchemaExtensions
+	eApproveAssignment                                                      smithy.SchemaExtensions
+	eAssociateQualificationWithWorker                                       smithy.SchemaExtensions
+	eCreateAdditionalAssignmentsForHIT                                      smithy.SchemaExtensions
+	eCreateHIT                                                              smithy.SchemaExtensions
+	eCreateHITType                                                          smithy.SchemaExtensions
+	eCreateHITWithHITType                                                   smithy.SchemaExtensions
+	eCreateQualificationType                                                smithy.SchemaExtensions
+	eCreateWorkerBlock                                                      smithy.SchemaExtensions
+	eDeleteHIT                                                              smithy.SchemaExtensions
+	eDeleteQualificationType                                                smithy.SchemaExtensions
+	eDeleteWorkerBlock                                                      smithy.SchemaExtensions
+	eDisassociateQualificationFromWorker                                    smithy.SchemaExtensions
+	eGetAccountBalance                                                      smithy.SchemaExtensions
+	eGetAssignment                                                          smithy.SchemaExtensions
+	eGetFileUploadURL                                                       smithy.SchemaExtensions
+	eGetHIT                                                                 smithy.SchemaExtensions
+	eGetQualificationScore                                                  smithy.SchemaExtensions
+	eGetQualificationType                                                   smithy.SchemaExtensions
+	eListAssignmentsForHIT                                                  smithy.SchemaExtensions
+	eListBonusPayments                                                      smithy.SchemaExtensions
+	eListHITs                                                               smithy.SchemaExtensions
+	eListHITsForQualificationType                                           smithy.SchemaExtensions
+	eListQualificationRequests                                              smithy.SchemaExtensions
+	eListQualificationTypes                                                 smithy.SchemaExtensions
+	eListReviewableHITs                                                     smithy.SchemaExtensions
+	eListReviewPolicyResultsForHIT                                          smithy.SchemaExtensions
+	eListWorkerBlocks                                                       smithy.SchemaExtensions
+	eListWorkersWithQualificationType                                       smithy.SchemaExtensions
+	eNotifyWorkers                                                          smithy.SchemaExtensions
+	eRejectAssignment                                                       smithy.SchemaExtensions
+	eRejectQualificationRequest                                             smithy.SchemaExtensions
+	eSendBonus                                                              smithy.SchemaExtensions
+	eSendTestEventNotification                                              smithy.SchemaExtensions
+	eUpdateExpirationForHIT                                                 smithy.SchemaExtensions
+	eUpdateHITReviewStatus                                                  smithy.SchemaExtensions
+	eUpdateHITTypeOfHIT                                                     smithy.SchemaExtensions
+	eUpdateNotificationSettings                                             smithy.SchemaExtensions
+	eUpdateQualificationType                                                smithy.SchemaExtensions
+	e_MTurkRequesterServiceV20170117                                        smithy.SchemaExtensions
+	eAssignment                                                             smithy.SchemaExtensions
+	eAssignment_AssignmentId                                                smithy.SchemaExtensions
+	eAssignment_WorkerId                                                    smithy.SchemaExtensions
+	eAssignment_HITId                                                       smithy.SchemaExtensions
+	eAssignment_AssignmentStatus                                            smithy.SchemaExtensions
+	eAssignment_AutoApprovalTime                                            smithy.SchemaExtensions
+	eAssignment_AcceptTime                                                  smithy.SchemaExtensions
+	eAssignment_SubmitTime                                                  smithy.SchemaExtensions
+	eAssignment_ApprovalTime                                                smithy.SchemaExtensions
+	eAssignment_RejectionTime                                               smithy.SchemaExtensions
+	eAssignment_Deadline                                                    smithy.SchemaExtensions
+	eAssignment_Answer                                                      smithy.SchemaExtensions
+	eAssignment_RequesterFeedback                                           smithy.SchemaExtensions
+	e_AssignmentList                                                        smithy.SchemaExtensions
+	e_AssignmentList_member                                                 smithy.SchemaExtensions
+	eAssignmentStatus                                                       smithy.SchemaExtensions
+	eAssignmentStatus_Submitted                                             smithy.SchemaExtensions
+	eAssignmentStatus_Approved                                              smithy.SchemaExtensions
+	eAssignmentStatus_Rejected                                              smithy.SchemaExtensions
+	e_AssignmentStatusList                                                  smithy.SchemaExtensions
+	e_AssignmentStatusList_member                                           smithy.SchemaExtensions
+	eBonusPayment                                                           smithy.SchemaExtensions
+	eBonusPayment_WorkerId                                                  smithy.SchemaExtensions
+	eBonusPayment_BonusAmount                                               smithy.SchemaExtensions
+	eBonusPayment_AssignmentId                                              smithy.SchemaExtensions
+	eBonusPayment_Reason                                                    smithy.SchemaExtensions
+	eBonusPayment_GrantTime                                                 smithy.SchemaExtensions
+	e_BonusPaymentList                                                      smithy.SchemaExtensions
+	e_BonusPaymentList_member                                               smithy.SchemaExtensions
+	e_Boolean                                                               smithy.SchemaExtensions
+	eComparator                                                             smithy.SchemaExtensions
+	eComparator_LessThan                                                    smithy.SchemaExtensions
+	eComparator_LessThanOrEqualTo                                           smithy.SchemaExtensions
+	eComparator_GreaterThan                                                 smithy.SchemaExtensions
+	eComparator_GreaterThanOrEqualTo                                        smithy.SchemaExtensions
+	eComparator_EqualTo                                                     smithy.SchemaExtensions
+	eComparator_NotEqualTo                                                  smithy.SchemaExtensions
+	eComparator_Exists                                                      smithy.SchemaExtensions
+	eComparator_DoesNotExist                                                smithy.SchemaExtensions
+	eComparator_In                                                          smithy.SchemaExtensions
+	eComparator_NotIn                                                       smithy.SchemaExtensions
+	e_CountryParameters                                                     smithy.SchemaExtensions
+	e_CurrencyAmount                                                        smithy.SchemaExtensions
+	e_CustomerId                                                            smithy.SchemaExtensions
+	e_CustomerIdList                                                        smithy.SchemaExtensions
+	e_CustomerIdList_member                                                 smithy.SchemaExtensions
+	e_EntityId                                                              smithy.SchemaExtensions
+	eEventType                                                              smithy.SchemaExtensions
+	eEventType_AssignmentAccepted                                           smithy.SchemaExtensions
+	eEventType_AssignmentAbandoned                                          smithy.SchemaExtensions
+	eEventType_AssignmentReturned                                           smithy.SchemaExtensions
+	eEventType_AssignmentSubmitted                                          smithy.SchemaExtensions
+	eEventType_AssignmentRejected                                           smithy.SchemaExtensions
+	eEventType_AssignmentApproved                                           smithy.SchemaExtensions
+	eEventType_HITCreated                                                   smithy.SchemaExtensions
+	eEventType_HITExpired                                                   smithy.SchemaExtensions
+	eEventType_HITReviewable                                                smithy.SchemaExtensions
+	eEventType_HITExtended                                                  smithy.SchemaExtensions
+	eEventType_HITDisposed                                                  smithy.SchemaExtensions
+	eEventType_Ping                                                         smithy.SchemaExtensions
+	e_EventTypeList                                                         smithy.SchemaExtensions
+	e_EventTypeList_member                                                  smithy.SchemaExtensions
+	e_ExceptionMessage                                                      smithy.SchemaExtensions
+	eHIT                                                                    smithy.SchemaExtensions
+	eHIT_HITId                                                              smithy.SchemaExtensions
+	eHIT_HITTypeId                                                          smithy.SchemaExtensions
+	eHIT_HITGroupId                                                         smithy.SchemaExtensions
+	eHIT_HITLayoutId                                                        smithy.SchemaExtensions
+	eHIT_CreationTime                                                       smithy.SchemaExtensions
+	eHIT_Title                                                              smithy.SchemaExtensions
+	eHIT_Description                                                        smithy.SchemaExtensions
+	eHIT_Question                                                           smithy.SchemaExtensions
+	eHIT_Keywords                                                           smithy.SchemaExtensions
+	eHIT_HITStatus                                                          smithy.SchemaExtensions
+	eHIT_MaxAssignments                                                     smithy.SchemaExtensions
+	eHIT_Reward                                                             smithy.SchemaExtensions
+	eHIT_AutoApprovalDelayInSeconds                                         smithy.SchemaExtensions
+	eHIT_Expiration                                                         smithy.SchemaExtensions
+	eHIT_AssignmentDurationInSeconds                                        smithy.SchemaExtensions
+	eHIT_RequesterAnnotation                                                smithy.SchemaExtensions
+	eHIT_QualificationRequirements                                          smithy.SchemaExtensions
+	eHIT_HITReviewStatus                                                    smithy.SchemaExtensions
+	eHIT_NumberOfAssignmentsPending                                         smithy.SchemaExtensions
+	eHIT_NumberOfAssignmentsAvailable                                       smithy.SchemaExtensions
+	eHIT_NumberOfAssignmentsCompleted                                       smithy.SchemaExtensions
+	eHITAccessActions                                                       smithy.SchemaExtensions
+	eHITAccessActions_Accept                                                smithy.SchemaExtensions
+	eHITAccessActions_PreviewAndAccept                                      smithy.SchemaExtensions
+	eHITAccessActions_DiscoverPreviewAndAccept                              smithy.SchemaExtensions
+	eHITLayoutParameter                                                     smithy.SchemaExtensions
+	eHITLayoutParameter_Name                                                smithy.SchemaExtensions
+	eHITLayoutParameter_Value                                               smithy.SchemaExtensions
+	e_HITLayoutParameterList                                                smithy.SchemaExtensions
+	e_HITLayoutParameterList_member                                         smithy.SchemaExtensions
+	e_HITList                                                               smithy.SchemaExtensions
+	e_HITList_member                                                        smithy.SchemaExtensions
+	eHITReviewStatus                                                        smithy.SchemaExtensions
+	eHITReviewStatus_NotReviewed                                            smithy.SchemaExtensions
+	eHITReviewStatus_MarkedForReview                                        smithy.SchemaExtensions
+	eHITReviewStatus_ReviewedAppropriate                                    smithy.SchemaExtensions
+	eHITReviewStatus_ReviewedInappropriate                                  smithy.SchemaExtensions
+	eHITStatus                                                              smithy.SchemaExtensions
+	eHITStatus_Assignable                                                   smithy.SchemaExtensions
+	eHITStatus_Unassignable                                                 smithy.SchemaExtensions
+	eHITStatus_Reviewable                                                   smithy.SchemaExtensions
+	eHITStatus_Reviewing                                                    smithy.SchemaExtensions
+	eHITStatus_Disposed                                                     smithy.SchemaExtensions
+	e_IdempotencyToken                                                      smithy.SchemaExtensions
+	e_Integer                                                               smithy.SchemaExtensions
+	e_IntegerList                                                           smithy.SchemaExtensions
+	e_IntegerList_member                                                    smithy.SchemaExtensions
+	eLocale                                                                 smithy.SchemaExtensions
+	eLocale_Country                                                         smithy.SchemaExtensions
+	eLocale_Subdivision                                                     smithy.SchemaExtensions
+	e_LocaleList                                                            smithy.SchemaExtensions
+	e_LocaleList_member                                                     smithy.SchemaExtensions
+	e_Long                                                                  smithy.SchemaExtensions
+	eNotificationSpecification                                              smithy.SchemaExtensions
+	eNotificationSpecification_Destination                                  smithy.SchemaExtensions
+	eNotificationSpecification_Transport                                    smithy.SchemaExtensions
+	eNotificationSpecification_Version                                      smithy.SchemaExtensions
+	eNotificationSpecification_EventTypes                                   smithy.SchemaExtensions
+	eNotificationTransport                                                  smithy.SchemaExtensions
+	eNotificationTransport_Email                                            smithy.SchemaExtensions
+	eNotificationTransport_SQS                                              smithy.SchemaExtensions
+	eNotificationTransport_SNS                                              smithy.SchemaExtensions
+	eNotifyWorkersFailureCode                                               smithy.SchemaExtensions
+	eNotifyWorkersFailureCode_SoftFailure                                   smithy.SchemaExtensions
+	eNotifyWorkersFailureCode_HardFailure                                   smithy.SchemaExtensions
+	eNotifyWorkersFailureStatus                                             smithy.SchemaExtensions
+	eNotifyWorkersFailureStatus_NotifyWorkersFailureCode                    smithy.SchemaExtensions
+	eNotifyWorkersFailureStatus_NotifyWorkersFailureMessage                 smithy.SchemaExtensions
+	eNotifyWorkersFailureStatus_WorkerId                                    smithy.SchemaExtensions
+	e_NotifyWorkersFailureStatusList                                        smithy.SchemaExtensions
+	e_NotifyWorkersFailureStatusList_member                                 smithy.SchemaExtensions
+	e_PaginationToken                                                       smithy.SchemaExtensions
+	eParameterMapEntry                                                      smithy.SchemaExtensions
+	eParameterMapEntry_Key                                                  smithy.SchemaExtensions
+	eParameterMapEntry_Values                                               smithy.SchemaExtensions
+	e_ParameterMapEntryList                                                 smithy.SchemaExtensions
+	e_ParameterMapEntryList_member                                          smithy.SchemaExtensions
+	ePolicyParameter                                                        smithy.SchemaExtensions
+	ePolicyParameter_Key                                                    smithy.SchemaExtensions
+	ePolicyParameter_Values                                                 smithy.SchemaExtensions
+	ePolicyParameter_MapEntries                                             smithy.SchemaExtensions
+	e_PolicyParameterList                                                   smithy.SchemaExtensions
+	e_PolicyParameterList_member                                            smithy.SchemaExtensions
+	eQualification                                                          smithy.SchemaExtensions
+	eQualification_QualificationTypeId                                      smithy.SchemaExtensions
+	eQualification_WorkerId                                                 smithy.SchemaExtensions
+	eQualification_GrantTime                                                smithy.SchemaExtensions
+	eQualification_IntegerValue                                             smithy.SchemaExtensions
+	eQualification_LocaleValue                                              smithy.SchemaExtensions
+	eQualification_Status                                                   smithy.SchemaExtensions
+	e_QualificationList                                                     smithy.SchemaExtensions
+	e_QualificationList_member                                              smithy.SchemaExtensions
+	eQualificationRequest                                                   smithy.SchemaExtensions
+	eQualificationRequest_QualificationRequestId                            smithy.SchemaExtensions
+	eQualificationRequest_QualificationTypeId                               smithy.SchemaExtensions
+	eQualificationRequest_WorkerId                                          smithy.SchemaExtensions
+	eQualificationRequest_Test                                              smithy.SchemaExtensions
+	eQualificationRequest_Answer                                            smithy.SchemaExtensions
+	eQualificationRequest_SubmitTime                                        smithy.SchemaExtensions
+	e_QualificationRequestList                                              smithy.SchemaExtensions
+	e_QualificationRequestList_member                                       smithy.SchemaExtensions
+	eQualificationRequirement                                               smithy.SchemaExtensions
+	eQualificationRequirement_QualificationTypeId                           smithy.SchemaExtensions
+	eQualificationRequirement_Comparator                                    smithy.SchemaExtensions
+	eQualificationRequirement_IntegerValues                                 smithy.SchemaExtensions
+	eQualificationRequirement_LocaleValues                                  smithy.SchemaExtensions
+	eQualificationRequirement_RequiredToPreview                             smithy.SchemaExtensions
+	eQualificationRequirement_ActionsGuarded                                smithy.SchemaExtensions
+	e_QualificationRequirementList                                          smithy.SchemaExtensions
+	e_QualificationRequirementList_member                                   smithy.SchemaExtensions
+	eQualificationStatus                                                    smithy.SchemaExtensions
+	eQualificationStatus_Granted                                            smithy.SchemaExtensions
+	eQualificationStatus_Revoked                                            smithy.SchemaExtensions
+	eQualificationType                                                      smithy.SchemaExtensions
+	eQualificationType_QualificationTypeId                                  smithy.SchemaExtensions
+	eQualificationType_CreationTime                                         smithy.SchemaExtensions
+	eQualificationType_Name                                                 smithy.SchemaExtensions
+	eQualificationType_Description                                          smithy.SchemaExtensions
+	eQualificationType_Keywords                                             smithy.SchemaExtensions
+	eQualificationType_QualificationTypeStatus                              smithy.SchemaExtensions
+	eQualificationType_Test                                                 smithy.SchemaExtensions
+	eQualificationType_TestDurationInSeconds                                smithy.SchemaExtensions
+	eQualificationType_AnswerKey                                            smithy.SchemaExtensions
+	eQualificationType_RetryDelayInSeconds                                  smithy.SchemaExtensions
+	eQualificationType_IsRequestable                                        smithy.SchemaExtensions
+	eQualificationType_AutoGranted                                          smithy.SchemaExtensions
+	eQualificationType_AutoGrantedValue                                     smithy.SchemaExtensions
+	e_QualificationTypeList                                                 smithy.SchemaExtensions
+	e_QualificationTypeList_member                                          smithy.SchemaExtensions
+	eQualificationTypeStatus                                                smithy.SchemaExtensions
+	eQualificationTypeStatus_Active                                         smithy.SchemaExtensions
+	eQualificationTypeStatus_Inactive                                       smithy.SchemaExtensions
+	eRequestError                                                           smithy.SchemaExtensions
+	eRequestError_Message                                                   smithy.SchemaExtensions
+	eRequestError_TurkErrorCode                                             smithy.SchemaExtensions
+	e_ResultSize                                                            smithy.SchemaExtensions
+	eReviewableHITStatus                                                    smithy.SchemaExtensions
+	eReviewableHITStatus_Reviewable                                         smithy.SchemaExtensions
+	eReviewableHITStatus_Reviewing                                          smithy.SchemaExtensions
+	eReviewActionDetail                                                     smithy.SchemaExtensions
+	eReviewActionDetail_ActionId                                            smithy.SchemaExtensions
+	eReviewActionDetail_ActionName                                          smithy.SchemaExtensions
+	eReviewActionDetail_TargetId                                            smithy.SchemaExtensions
+	eReviewActionDetail_TargetType                                          smithy.SchemaExtensions
+	eReviewActionDetail_Status                                              smithy.SchemaExtensions
+	eReviewActionDetail_CompleteTime                                        smithy.SchemaExtensions
+	eReviewActionDetail_Result                                              smithy.SchemaExtensions
+	eReviewActionDetail_ErrorCode                                           smithy.SchemaExtensions
+	e_ReviewActionDetailList                                                smithy.SchemaExtensions
+	e_ReviewActionDetailList_member                                         smithy.SchemaExtensions
+	eReviewActionStatus                                                     smithy.SchemaExtensions
+	eReviewActionStatus_Intended                                            smithy.SchemaExtensions
+	eReviewActionStatus_Succeeded                                           smithy.SchemaExtensions
+	eReviewActionStatus_Failed                                              smithy.SchemaExtensions
+	eReviewActionStatus_Cancelled                                           smithy.SchemaExtensions
+	eReviewPolicy                                                           smithy.SchemaExtensions
+	eReviewPolicy_PolicyName                                                smithy.SchemaExtensions
+	eReviewPolicy_Parameters                                                smithy.SchemaExtensions
+	eReviewPolicyLevel                                                      smithy.SchemaExtensions
+	eReviewPolicyLevel_Assignment                                           smithy.SchemaExtensions
+	eReviewPolicyLevel_HIT                                                  smithy.SchemaExtensions
+	e_ReviewPolicyLevelList                                                 smithy.SchemaExtensions
+	e_ReviewPolicyLevelList_member                                          smithy.SchemaExtensions
+	eReviewReport                                                           smithy.SchemaExtensions
+	eReviewReport_ReviewResults                                             smithy.SchemaExtensions
+	eReviewReport_ReviewActions                                             smithy.SchemaExtensions
+	eReviewResultDetail                                                     smithy.SchemaExtensions
+	eReviewResultDetail_ActionId                                            smithy.SchemaExtensions
+	eReviewResultDetail_SubjectId                                           smithy.SchemaExtensions
+	eReviewResultDetail_SubjectType                                         smithy.SchemaExtensions
+	eReviewResultDetail_QuestionId                                          smithy.SchemaExtensions
+	eReviewResultDetail_Key                                                 smithy.SchemaExtensions
+	eReviewResultDetail_Value                                               smithy.SchemaExtensions
+	e_ReviewResultDetailList                                                smithy.SchemaExtensions
+	e_ReviewResultDetailList_member                                         smithy.SchemaExtensions
+	eServiceFault                                                           smithy.SchemaExtensions
+	eServiceFault_Message                                                   smithy.SchemaExtensions
+	eServiceFault_TurkErrorCode                                             smithy.SchemaExtensions
+	e_String                                                                smithy.SchemaExtensions
+	e_StringList                                                            smithy.SchemaExtensions
+	e_StringList_member                                                     smithy.SchemaExtensions
+	e_Timestamp                                                             smithy.SchemaExtensions
+	e_TurkErrorCode                                                         smithy.SchemaExtensions
+	eWorkerBlock                                                            smithy.SchemaExtensions
+	eWorkerBlock_WorkerId                                                   smithy.SchemaExtensions
+	eWorkerBlock_Reason                                                     smithy.SchemaExtensions
+	e_WorkerBlockList                                                       smithy.SchemaExtensions
+	e_WorkerBlockList_member                                                smithy.SchemaExtensions
+	eAcceptQualificationRequestRequest                                      smithy.SchemaExtensions
+	eAcceptQualificationRequestRequest_QualificationRequestId               smithy.SchemaExtensions
+	eAcceptQualificationRequestRequest_IntegerValue                         smithy.SchemaExtensions
+	eAcceptQualificationRequestResponse                                     smithy.SchemaExtensions
+	eApproveAssignmentRequest                                               smithy.SchemaExtensions
+	eApproveAssignmentRequest_AssignmentId                                  smithy.SchemaExtensions
+	eApproveAssignmentRequest_RequesterFeedback                             smithy.SchemaExtensions
+	eApproveAssignmentRequest_OverrideRejection                             smithy.SchemaExtensions
+	eApproveAssignmentResponse                                              smithy.SchemaExtensions
+	eAssociateQualificationWithWorkerRequest                                smithy.SchemaExtensions
+	eAssociateQualificationWithWorkerRequest_QualificationTypeId            smithy.SchemaExtensions
+	eAssociateQualificationWithWorkerRequest_WorkerId                       smithy.SchemaExtensions
+	eAssociateQualificationWithWorkerRequest_IntegerValue                   smithy.SchemaExtensions
+	eAssociateQualificationWithWorkerRequest_SendNotification               smithy.SchemaExtensions
+	eAssociateQualificationWithWorkerResponse                               smithy.SchemaExtensions
+	eCreateAdditionalAssignmentsForHITRequest                               smithy.SchemaExtensions
+	eCreateAdditionalAssignmentsForHITRequest_HITId                         smithy.SchemaExtensions
+	eCreateAdditionalAssignmentsForHITRequest_NumberOfAdditionalAssignments smithy.SchemaExtensions
+	eCreateAdditionalAssignmentsForHITRequest_UniqueRequestToken            smithy.SchemaExtensions
+	eCreateAdditionalAssignmentsForHITResponse                              smithy.SchemaExtensions
+	eCreateHITRequest                                                       smithy.SchemaExtensions
+	eCreateHITRequest_MaxAssignments                                        smithy.SchemaExtensions
+	eCreateHITRequest_AutoApprovalDelayInSeconds                            smithy.SchemaExtensions
+	eCreateHITRequest_LifetimeInSeconds                                     smithy.SchemaExtensions
+	eCreateHITRequest_AssignmentDurationInSeconds                           smithy.SchemaExtensions
+	eCreateHITRequest_Reward                                                smithy.SchemaExtensions
+	eCreateHITRequest_Title                                                 smithy.SchemaExtensions
+	eCreateHITRequest_Keywords                                              smithy.SchemaExtensions
+	eCreateHITRequest_Description                                           smithy.SchemaExtensions
+	eCreateHITRequest_Question                                              smithy.SchemaExtensions
+	eCreateHITRequest_RequesterAnnotation                                   smithy.SchemaExtensions
+	eCreateHITRequest_QualificationRequirements                             smithy.SchemaExtensions
+	eCreateHITRequest_UniqueRequestToken                                    smithy.SchemaExtensions
+	eCreateHITRequest_AssignmentReviewPolicy                                smithy.SchemaExtensions
+	eCreateHITRequest_HITReviewPolicy                                       smithy.SchemaExtensions
+	eCreateHITRequest_HITLayoutId                                           smithy.SchemaExtensions
+	eCreateHITRequest_HITLayoutParameters                                   smithy.SchemaExtensions
+	eCreateHITResponse                                                      smithy.SchemaExtensions
+	eCreateHITResponse_HIT                                                  smithy.SchemaExtensions
+	eCreateHITTypeRequest                                                   smithy.SchemaExtensions
+	eCreateHITTypeRequest_AutoApprovalDelayInSeconds                        smithy.SchemaExtensions
+	eCreateHITTypeRequest_AssignmentDurationInSeconds                       smithy.SchemaExtensions
+	eCreateHITTypeRequest_Reward                                            smithy.SchemaExtensions
+	eCreateHITTypeRequest_Title                                             smithy.SchemaExtensions
+	eCreateHITTypeRequest_Keywords                                          smithy.SchemaExtensions
+	eCreateHITTypeRequest_Description                                       smithy.SchemaExtensions
+	eCreateHITTypeRequest_QualificationRequirements                         smithy.SchemaExtensions
+	eCreateHITTypeResponse                                                  smithy.SchemaExtensions
+	eCreateHITTypeResponse_HITTypeId                                        smithy.SchemaExtensions
+	eCreateHITWithHITTypeRequest                                            smithy.SchemaExtensions
+	eCreateHITWithHITTypeRequest_HITTypeId                                  smithy.SchemaExtensions
+	eCreateHITWithHITTypeRequest_MaxAssignments                             smithy.SchemaExtensions
+	eCreateHITWithHITTypeRequest_LifetimeInSeconds                          smithy.SchemaExtensions
+	eCreateHITWithHITTypeRequest_Question                                   smithy.SchemaExtensions
+	eCreateHITWithHITTypeRequest_RequesterAnnotation                        smithy.SchemaExtensions
+	eCreateHITWithHITTypeRequest_UniqueRequestToken                         smithy.SchemaExtensions
+	eCreateHITWithHITTypeRequest_AssignmentReviewPolicy                     smithy.SchemaExtensions
+	eCreateHITWithHITTypeRequest_HITReviewPolicy                            smithy.SchemaExtensions
+	eCreateHITWithHITTypeRequest_HITLayoutId                                smithy.SchemaExtensions
+	eCreateHITWithHITTypeRequest_HITLayoutParameters                        smithy.SchemaExtensions
+	eCreateHITWithHITTypeResponse                                           smithy.SchemaExtensions
+	eCreateHITWithHITTypeResponse_HIT                                       smithy.SchemaExtensions
+	eCreateQualificationTypeRequest                                         smithy.SchemaExtensions
+	eCreateQualificationTypeRequest_Name                                    smithy.SchemaExtensions
+	eCreateQualificationTypeRequest_Keywords                                smithy.SchemaExtensions
+	eCreateQualificationTypeRequest_Description                             smithy.SchemaExtensions
+	eCreateQualificationTypeRequest_QualificationTypeStatus                 smithy.SchemaExtensions
+	eCreateQualificationTypeRequest_RetryDelayInSeconds                     smithy.SchemaExtensions
+	eCreateQualificationTypeRequest_Test                                    smithy.SchemaExtensions
+	eCreateQualificationTypeRequest_AnswerKey                               smithy.SchemaExtensions
+	eCreateQualificationTypeRequest_TestDurationInSeconds                   smithy.SchemaExtensions
+	eCreateQualificationTypeRequest_AutoGranted                             smithy.SchemaExtensions
+	eCreateQualificationTypeRequest_AutoGrantedValue                        smithy.SchemaExtensions
+	eCreateQualificationTypeResponse                                        smithy.SchemaExtensions
+	eCreateQualificationTypeResponse_QualificationType                      smithy.SchemaExtensions
+	eCreateWorkerBlockRequest                                               smithy.SchemaExtensions
+	eCreateWorkerBlockRequest_WorkerId                                      smithy.SchemaExtensions
+	eCreateWorkerBlockRequest_Reason                                        smithy.SchemaExtensions
+	eCreateWorkerBlockResponse                                              smithy.SchemaExtensions
+	eDeleteHITRequest                                                       smithy.SchemaExtensions
+	eDeleteHITRequest_HITId                                                 smithy.SchemaExtensions
+	eDeleteHITResponse                                                      smithy.SchemaExtensions
+	eDeleteQualificationTypeRequest                                         smithy.SchemaExtensions
+	eDeleteQualificationTypeRequest_QualificationTypeId                     smithy.SchemaExtensions
+	eDeleteQualificationTypeResponse                                        smithy.SchemaExtensions
+	eDeleteWorkerBlockRequest                                               smithy.SchemaExtensions
+	eDeleteWorkerBlockRequest_WorkerId                                      smithy.SchemaExtensions
+	eDeleteWorkerBlockRequest_Reason                                        smithy.SchemaExtensions
+	eDeleteWorkerBlockResponse                                              smithy.SchemaExtensions
+	eDisassociateQualificationFromWorkerRequest                             smithy.SchemaExtensions
+	eDisassociateQualificationFromWorkerRequest_WorkerId                    smithy.SchemaExtensions
+	eDisassociateQualificationFromWorkerRequest_QualificationTypeId         smithy.SchemaExtensions
+	eDisassociateQualificationFromWorkerRequest_Reason                      smithy.SchemaExtensions
+	eDisassociateQualificationFromWorkerResponse                            smithy.SchemaExtensions
+	eGetAccountBalanceRequest                                               smithy.SchemaExtensions
+	eGetAccountBalanceResponse                                              smithy.SchemaExtensions
+	eGetAccountBalanceResponse_AvailableBalance                             smithy.SchemaExtensions
+	eGetAccountBalanceResponse_OnHoldBalance                                smithy.SchemaExtensions
+	eGetAssignmentRequest                                                   smithy.SchemaExtensions
+	eGetAssignmentRequest_AssignmentId                                      smithy.SchemaExtensions
+	eGetAssignmentResponse                                                  smithy.SchemaExtensions
+	eGetAssignmentResponse_Assignment                                       smithy.SchemaExtensions
+	eGetAssignmentResponse_HIT                                              smithy.SchemaExtensions
+	eGetFileUploadURLRequest                                                smithy.SchemaExtensions
+	eGetFileUploadURLRequest_AssignmentId                                   smithy.SchemaExtensions
+	eGetFileUploadURLRequest_QuestionIdentifier                             smithy.SchemaExtensions
+	eGetFileUploadURLResponse                                               smithy.SchemaExtensions
+	eGetFileUploadURLResponse_FileUploadURL                                 smithy.SchemaExtensions
+	eGetHITRequest                                                          smithy.SchemaExtensions
+	eGetHITRequest_HITId                                                    smithy.SchemaExtensions
+	eGetHITResponse                                                         smithy.SchemaExtensions
+	eGetHITResponse_HIT                                                     smithy.SchemaExtensions
+	eGetQualificationScoreRequest                                           smithy.SchemaExtensions
+	eGetQualificationScoreRequest_QualificationTypeId                       smithy.SchemaExtensions
+	eGetQualificationScoreRequest_WorkerId                                  smithy.SchemaExtensions
+	eGetQualificationScoreResponse                                          smithy.SchemaExtensions
+	eGetQualificationScoreResponse_Qualification                            smithy.SchemaExtensions
+	eGetQualificationTypeRequest                                            smithy.SchemaExtensions
+	eGetQualificationTypeRequest_QualificationTypeId                        smithy.SchemaExtensions
+	eGetQualificationTypeResponse                                           smithy.SchemaExtensions
+	eGetQualificationTypeResponse_QualificationType                         smithy.SchemaExtensions
+	eListAssignmentsForHITRequest                                           smithy.SchemaExtensions
+	eListAssignmentsForHITRequest_HITId                                     smithy.SchemaExtensions
+	eListAssignmentsForHITRequest_NextToken                                 smithy.SchemaExtensions
+	eListAssignmentsForHITRequest_MaxResults                                smithy.SchemaExtensions
+	eListAssignmentsForHITRequest_AssignmentStatuses                        smithy.SchemaExtensions
+	eListAssignmentsForHITResponse                                          smithy.SchemaExtensions
+	eListAssignmentsForHITResponse_NextToken                                smithy.SchemaExtensions
+	eListAssignmentsForHITResponse_NumResults                               smithy.SchemaExtensions
+	eListAssignmentsForHITResponse_Assignments                              smithy.SchemaExtensions
+	eListBonusPaymentsRequest                                               smithy.SchemaExtensions
+	eListBonusPaymentsRequest_HITId                                         smithy.SchemaExtensions
+	eListBonusPaymentsRequest_AssignmentId                                  smithy.SchemaExtensions
+	eListBonusPaymentsRequest_NextToken                                     smithy.SchemaExtensions
+	eListBonusPaymentsRequest_MaxResults                                    smithy.SchemaExtensions
+	eListBonusPaymentsResponse                                              smithy.SchemaExtensions
+	eListBonusPaymentsResponse_NumResults                                   smithy.SchemaExtensions
+	eListBonusPaymentsResponse_NextToken                                    smithy.SchemaExtensions
+	eListBonusPaymentsResponse_BonusPayments                                smithy.SchemaExtensions
+	eListHITsForQualificationTypeRequest                                    smithy.SchemaExtensions
+	eListHITsForQualificationTypeRequest_QualificationTypeId                smithy.SchemaExtensions
+	eListHITsForQualificationTypeRequest_NextToken                          smithy.SchemaExtensions
+	eListHITsForQualificationTypeRequest_MaxResults                         smithy.SchemaExtensions
+	eListHITsForQualificationTypeResponse                                   smithy.SchemaExtensions
+	eListHITsForQualificationTypeResponse_NextToken                         smithy.SchemaExtensions
+	eListHITsForQualificationTypeResponse_NumResults                        smithy.SchemaExtensions
+	eListHITsForQualificationTypeResponse_HITs                              smithy.SchemaExtensions
+	eListHITsRequest                                                        smithy.SchemaExtensions
+	eListHITsRequest_NextToken                                              smithy.SchemaExtensions
+	eListHITsRequest_MaxResults                                             smithy.SchemaExtensions
+	eListHITsResponse                                                       smithy.SchemaExtensions
+	eListHITsResponse_NextToken                                             smithy.SchemaExtensions
+	eListHITsResponse_NumResults                                            smithy.SchemaExtensions
+	eListHITsResponse_HITs                                                  smithy.SchemaExtensions
+	eListQualificationRequestsRequest                                       smithy.SchemaExtensions
+	eListQualificationRequestsRequest_QualificationTypeId                   smithy.SchemaExtensions
+	eListQualificationRequestsRequest_NextToken                             smithy.SchemaExtensions
+	eListQualificationRequestsRequest_MaxResults                            smithy.SchemaExtensions
+	eListQualificationRequestsResponse                                      smithy.SchemaExtensions
+	eListQualificationRequestsResponse_NumResults                           smithy.SchemaExtensions
+	eListQualificationRequestsResponse_NextToken                            smithy.SchemaExtensions
+	eListQualificationRequestsResponse_QualificationRequests                smithy.SchemaExtensions
+	eListQualificationTypesRequest                                          smithy.SchemaExtensions
+	eListQualificationTypesRequest_Query                                    smithy.SchemaExtensions
+	eListQualificationTypesRequest_MustBeRequestable                        smithy.SchemaExtensions
+	eListQualificationTypesRequest_MustBeOwnedByCaller                      smithy.SchemaExtensions
+	eListQualificationTypesRequest_NextToken                                smithy.SchemaExtensions
+	eListQualificationTypesRequest_MaxResults                               smithy.SchemaExtensions
+	eListQualificationTypesResponse                                         smithy.SchemaExtensions
+	eListQualificationTypesResponse_NumResults                              smithy.SchemaExtensions
+	eListQualificationTypesResponse_NextToken                               smithy.SchemaExtensions
+	eListQualificationTypesResponse_QualificationTypes                      smithy.SchemaExtensions
+	eListReviewableHITsRequest                                              smithy.SchemaExtensions
+	eListReviewableHITsRequest_HITTypeId                                    smithy.SchemaExtensions
+	eListReviewableHITsRequest_Status                                       smithy.SchemaExtensions
+	eListReviewableHITsRequest_NextToken                                    smithy.SchemaExtensions
+	eListReviewableHITsRequest_MaxResults                                   smithy.SchemaExtensions
+	eListReviewableHITsResponse                                             smithy.SchemaExtensions
+	eListReviewableHITsResponse_NextToken                                   smithy.SchemaExtensions
+	eListReviewableHITsResponse_NumResults                                  smithy.SchemaExtensions
+	eListReviewableHITsResponse_HITs                                        smithy.SchemaExtensions
+	eListReviewPolicyResultsForHITRequest                                   smithy.SchemaExtensions
+	eListReviewPolicyResultsForHITRequest_HITId                             smithy.SchemaExtensions
+	eListReviewPolicyResultsForHITRequest_PolicyLevels                      smithy.SchemaExtensions
+	eListReviewPolicyResultsForHITRequest_RetrieveActions                   smithy.SchemaExtensions
+	eListReviewPolicyResultsForHITRequest_RetrieveResults                   smithy.SchemaExtensions
+	eListReviewPolicyResultsForHITRequest_NextToken                         smithy.SchemaExtensions
+	eListReviewPolicyResultsForHITRequest_MaxResults                        smithy.SchemaExtensions
+	eListReviewPolicyResultsForHITResponse                                  smithy.SchemaExtensions
+	eListReviewPolicyResultsForHITResponse_HITId                            smithy.SchemaExtensions
+	eListReviewPolicyResultsForHITResponse_AssignmentReviewPolicy           smithy.SchemaExtensions
+	eListReviewPolicyResultsForHITResponse_HITReviewPolicy                  smithy.SchemaExtensions
+	eListReviewPolicyResultsForHITResponse_AssignmentReviewReport           smithy.SchemaExtensions
+	eListReviewPolicyResultsForHITResponse_HITReviewReport                  smithy.SchemaExtensions
+	eListReviewPolicyResultsForHITResponse_NextToken                        smithy.SchemaExtensions
+	eListWorkerBlocksRequest                                                smithy.SchemaExtensions
+	eListWorkerBlocksRequest_NextToken                                      smithy.SchemaExtensions
+	eListWorkerBlocksRequest_MaxResults                                     smithy.SchemaExtensions
+	eListWorkerBlocksResponse                                               smithy.SchemaExtensions
+	eListWorkerBlocksResponse_NextToken                                     smithy.SchemaExtensions
+	eListWorkerBlocksResponse_NumResults                                    smithy.SchemaExtensions
+	eListWorkerBlocksResponse_WorkerBlocks                                  smithy.SchemaExtensions
+	eListWorkersWithQualificationTypeRequest                                smithy.SchemaExtensions
+	eListWorkersWithQualificationTypeRequest_QualificationTypeId            smithy.SchemaExtensions
+	eListWorkersWithQualificationTypeRequest_Status                         smithy.SchemaExtensions
+	eListWorkersWithQualificationTypeRequest_NextToken                      smithy.SchemaExtensions
+	eListWorkersWithQualificationTypeRequest_MaxResults                     smithy.SchemaExtensions
+	eListWorkersWithQualificationTypeResponse                               smithy.SchemaExtensions
+	eListWorkersWithQualificationTypeResponse_NextToken                     smithy.SchemaExtensions
+	eListWorkersWithQualificationTypeResponse_NumResults                    smithy.SchemaExtensions
+	eListWorkersWithQualificationTypeResponse_Qualifications                smithy.SchemaExtensions
+	eNotifyWorkersRequest                                                   smithy.SchemaExtensions
+	eNotifyWorkersRequest_Subject                                           smithy.SchemaExtensions
+	eNotifyWorkersRequest_MessageText                                       smithy.SchemaExtensions
+	eNotifyWorkersRequest_WorkerIds                                         smithy.SchemaExtensions
+	eNotifyWorkersResponse                                                  smithy.SchemaExtensions
+	eNotifyWorkersResponse_NotifyWorkersFailureStatuses                     smithy.SchemaExtensions
+	eRejectAssignmentRequest                                                smithy.SchemaExtensions
+	eRejectAssignmentRequest_AssignmentId                                   smithy.SchemaExtensions
+	eRejectAssignmentRequest_RequesterFeedback                              smithy.SchemaExtensions
+	eRejectAssignmentResponse                                               smithy.SchemaExtensions
+	eRejectQualificationRequestRequest                                      smithy.SchemaExtensions
+	eRejectQualificationRequestRequest_QualificationRequestId               smithy.SchemaExtensions
+	eRejectQualificationRequestRequest_Reason                               smithy.SchemaExtensions
+	eRejectQualificationRequestResponse                                     smithy.SchemaExtensions
+	eSendBonusRequest                                                       smithy.SchemaExtensions
+	eSendBonusRequest_WorkerId                                              smithy.SchemaExtensions
+	eSendBonusRequest_BonusAmount                                           smithy.SchemaExtensions
+	eSendBonusRequest_AssignmentId                                          smithy.SchemaExtensions
+	eSendBonusRequest_Reason                                                smithy.SchemaExtensions
+	eSendBonusRequest_UniqueRequestToken                                    smithy.SchemaExtensions
+	eSendBonusResponse                                                      smithy.SchemaExtensions
+	eSendTestEventNotificationRequest                                       smithy.SchemaExtensions
+	eSendTestEventNotificationRequest_Notification                          smithy.SchemaExtensions
+	eSendTestEventNotificationRequest_TestEventType                         smithy.SchemaExtensions
+	eSendTestEventNotificationResponse                                      smithy.SchemaExtensions
+	eUpdateExpirationForHITRequest                                          smithy.SchemaExtensions
+	eUpdateExpirationForHITRequest_HITId                                    smithy.SchemaExtensions
+	eUpdateExpirationForHITRequest_ExpireAt                                 smithy.SchemaExtensions
+	eUpdateExpirationForHITResponse                                         smithy.SchemaExtensions
+	eUpdateHITReviewStatusRequest                                           smithy.SchemaExtensions
+	eUpdateHITReviewStatusRequest_HITId                                     smithy.SchemaExtensions
+	eUpdateHITReviewStatusRequest_Revert                                    smithy.SchemaExtensions
+	eUpdateHITReviewStatusResponse                                          smithy.SchemaExtensions
+	eUpdateHITTypeOfHITRequest                                              smithy.SchemaExtensions
+	eUpdateHITTypeOfHITRequest_HITId                                        smithy.SchemaExtensions
+	eUpdateHITTypeOfHITRequest_HITTypeId                                    smithy.SchemaExtensions
+	eUpdateHITTypeOfHITResponse                                             smithy.SchemaExtensions
+	eUpdateNotificationSettingsRequest                                      smithy.SchemaExtensions
+	eUpdateNotificationSettingsRequest_HITTypeId                            smithy.SchemaExtensions
+	eUpdateNotificationSettingsRequest_Notification                         smithy.SchemaExtensions
+	eUpdateNotificationSettingsRequest_Active                               smithy.SchemaExtensions
+	eUpdateNotificationSettingsResponse                                     smithy.SchemaExtensions
+	eUpdateQualificationTypeRequest                                         smithy.SchemaExtensions
+	eUpdateQualificationTypeRequest_QualificationTypeId                     smithy.SchemaExtensions
+	eUpdateQualificationTypeRequest_Description                             smithy.SchemaExtensions
+	eUpdateQualificationTypeRequest_QualificationTypeStatus                 smithy.SchemaExtensions
+	eUpdateQualificationTypeRequest_Test                                    smithy.SchemaExtensions
+	eUpdateQualificationTypeRequest_AnswerKey                               smithy.SchemaExtensions
+	eUpdateQualificationTypeRequest_TestDurationInSeconds                   smithy.SchemaExtensions
+	eUpdateQualificationTypeRequest_RetryDelayInSeconds                     smithy.SchemaExtensions
+	eUpdateQualificationTypeRequest_AutoGranted                             smithy.SchemaExtensions
+	eUpdateQualificationTypeRequest_AutoGrantedValue                        smithy.SchemaExtensions
+	eUpdateQualificationTypeResponse                                        smithy.SchemaExtensions
+	eUpdateQualificationTypeResponse_QualificationType                      smithy.SchemaExtensions
+)
 
 var (
 	iAcceptQualificationRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.mturk", Name: "AcceptQualificationRequest"}
@@ -350,564 +906,564 @@ var mUpdateQualificationTypeRequest = smithy.SchemaMembers{List: []*smithy.Schem
 }}
 var mUpdateQualificationTypeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateQualificationTypeResponse_QualificationType}}
 
-var sAcceptQualificationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptQualificationRequest, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sApproveAssignment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApproveAssignment, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sAssociateQualificationWithWorker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateQualificationWithWorker, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sCreateAdditionalAssignmentsForHIT = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAdditionalAssignmentsForHIT, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sCreateHIT = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHIT, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sCreateHITType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHITType, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sCreateHITWithHITType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHITWithHITType, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sCreateQualificationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateQualificationType, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sCreateWorkerBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkerBlock, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sDeleteHIT = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHIT, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sDeleteQualificationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteQualificationType, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sDeleteWorkerBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkerBlock, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sDisassociateQualificationFromWorker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateQualificationFromWorker, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sGetAccountBalance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountBalance, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sGetAssignment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssignment, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sGetFileUploadURL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFileUploadURL, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sGetHIT = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHIT, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sGetQualificationScore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQualificationScore, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sGetQualificationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQualificationType, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sListAssignmentsForHIT = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssignmentsForHIT, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var sListBonusPayments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBonusPayments, Type: smithy.ShapeTypeOperation, Ext: &ext[20]})
-var sListHITs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHITs, Type: smithy.ShapeTypeOperation, Ext: &ext[21]})
-var sListHITsForQualificationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHITsForQualificationType, Type: smithy.ShapeTypeOperation, Ext: &ext[22]})
-var sListQualificationRequests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQualificationRequests, Type: smithy.ShapeTypeOperation, Ext: &ext[23]})
-var sListQualificationTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQualificationTypes, Type: smithy.ShapeTypeOperation, Ext: &ext[24]})
-var sListReviewableHITs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReviewableHITs, Type: smithy.ShapeTypeOperation, Ext: &ext[25]})
-var sListReviewPolicyResultsForHIT = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReviewPolicyResultsForHIT, Type: smithy.ShapeTypeOperation, Ext: &ext[26]})
-var sListWorkerBlocks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkerBlocks, Type: smithy.ShapeTypeOperation, Ext: &ext[27]})
-var sListWorkersWithQualificationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkersWithQualificationType, Type: smithy.ShapeTypeOperation, Ext: &ext[28]})
-var sNotifyWorkers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotifyWorkers, Type: smithy.ShapeTypeOperation, Ext: &ext[29]})
-var sRejectAssignment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectAssignment, Type: smithy.ShapeTypeOperation, Ext: &ext[30]})
-var sRejectQualificationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectQualificationRequest, Type: smithy.ShapeTypeOperation, Ext: &ext[31]})
-var sSendBonus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendBonus, Type: smithy.ShapeTypeOperation, Ext: &ext[32]})
-var sSendTestEventNotification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendTestEventNotification, Type: smithy.ShapeTypeOperation, Ext: &ext[33]})
-var sUpdateExpirationForHIT = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExpirationForHIT, Type: smithy.ShapeTypeOperation, Ext: &ext[34]})
-var sUpdateHITReviewStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHITReviewStatus, Type: smithy.ShapeTypeOperation, Ext: &ext[35]})
-var sUpdateHITTypeOfHIT = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHITTypeOfHIT, Type: smithy.ShapeTypeOperation, Ext: &ext[36]})
-var sUpdateNotificationSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotificationSettings, Type: smithy.ShapeTypeOperation, Ext: &ext[37]})
-var sUpdateQualificationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateQualificationType, Type: smithy.ShapeTypeOperation, Ext: &ext[38]})
-var s_MTurkRequesterServiceV20170117 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MTurkRequesterServiceV20170117, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &ext[39]})
-var sAssignment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssignment, Members: &mAssignment, Type: smithy.ShapeTypeStructure, Ext: &ext[40]})
-var s_AssignmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssignmentList, Members: &m_AssignmentList, Type: smithy.ShapeTypeList, Ext: &ext[53]})
-var sAssignmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssignmentStatus, Members: &mAssignmentStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[55]})
-var s_AssignmentStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssignmentStatusList, Members: &m_AssignmentStatusList, Type: smithy.ShapeTypeList, Ext: &ext[59]})
-var sBonusPayment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBonusPayment, Members: &mBonusPayment, Type: smithy.ShapeTypeStructure, Ext: &ext[61]})
-var s_BonusPaymentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BonusPaymentList, Members: &m_BonusPaymentList, Type: smithy.ShapeTypeList, Ext: &ext[67]})
-var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[69]})
-var sComparator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComparator, Members: &mComparator, Type: smithy.ShapeTypeEnum, Ext: &ext[70]})
-var s_CountryParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CountryParameters, Type: smithy.ShapeTypeString, Ext: &ext[81]})
-var s_CurrencyAmount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CurrencyAmount, Type: smithy.ShapeTypeString, Ext: &ext[82]})
-var s_CustomerId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var s_CustomerIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerIdList, Members: &m_CustomerIdList, Type: smithy.ShapeTypeList, Ext: &ext[84]})
-var s_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[86]})
-var sEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeEnum, Ext: &ext[87]})
-var s_EventTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTypeList, Members: &m_EventTypeList, Type: smithy.ShapeTypeList, Ext: &ext[100]})
-var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var sHIT = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHIT, Members: &mHIT, Type: smithy.ShapeTypeStructure, Ext: &ext[103]})
-var sHITAccessActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHITAccessActions, Members: &mHITAccessActions, Type: smithy.ShapeTypeEnum, Ext: &ext[125]})
-var sHITLayoutParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHITLayoutParameter, Members: &mHITLayoutParameter, Type: smithy.ShapeTypeStructure, Ext: &ext[129]})
-var s_HITLayoutParameterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HITLayoutParameterList, Members: &m_HITLayoutParameterList, Type: smithy.ShapeTypeList, Ext: &ext[132]})
-var s_HITList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HITList, Members: &m_HITList, Type: smithy.ShapeTypeList, Ext: &ext[134]})
-var sHITReviewStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHITReviewStatus, Members: &mHITReviewStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[136]})
-var sHITStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHITStatus, Members: &mHITStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[141]})
-var s_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &ext[147]})
-var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[148]})
-var s_IntegerList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerList, Members: &m_IntegerList, Type: smithy.ShapeTypeList, Ext: &ext[149]})
-var sLocale = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLocale, Members: &mLocale, Type: smithy.ShapeTypeStructure, Ext: &ext[151]})
-var s_LocaleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocaleList, Members: &m_LocaleList, Type: smithy.ShapeTypeList, Ext: &ext[154]})
-var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[156]})
-var sNotificationSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationSpecification, Members: &mNotificationSpecification, Type: smithy.ShapeTypeStructure, Ext: &ext[157]})
-var sNotificationTransport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationTransport, Members: &mNotificationTransport, Type: smithy.ShapeTypeEnum, Ext: &ext[162]})
-var sNotifyWorkersFailureCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotifyWorkersFailureCode, Members: &mNotifyWorkersFailureCode, Type: smithy.ShapeTypeEnum, Ext: &ext[166]})
-var sNotifyWorkersFailureStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotifyWorkersFailureStatus, Members: &mNotifyWorkersFailureStatus, Type: smithy.ShapeTypeStructure, Ext: &ext[169]})
-var s_NotifyWorkersFailureStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotifyWorkersFailureStatusList, Members: &m_NotifyWorkersFailureStatusList, Type: smithy.ShapeTypeList, Ext: &ext[173]})
-var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[175]})
-var sParameterMapEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParameterMapEntry, Members: &mParameterMapEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[176]})
-var s_ParameterMapEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParameterMapEntryList, Members: &m_ParameterMapEntryList, Type: smithy.ShapeTypeList, Ext: &ext[179]})
-var sPolicyParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyParameter, Members: &mPolicyParameter, Type: smithy.ShapeTypeStructure, Ext: &ext[181]})
-var s_PolicyParameterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyParameterList, Members: &m_PolicyParameterList, Type: smithy.ShapeTypeList, Ext: &ext[185]})
-var sQualification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQualification, Members: &mQualification, Type: smithy.ShapeTypeStructure, Ext: &ext[187]})
-var s_QualificationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QualificationList, Members: &m_QualificationList, Type: smithy.ShapeTypeList, Ext: &ext[194]})
-var sQualificationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQualificationRequest, Members: &mQualificationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[196]})
-var s_QualificationRequestList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QualificationRequestList, Members: &m_QualificationRequestList, Type: smithy.ShapeTypeList, Ext: &ext[203]})
-var sQualificationRequirement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQualificationRequirement, Members: &mQualificationRequirement, Type: smithy.ShapeTypeStructure, Ext: &ext[205]})
-var s_QualificationRequirementList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QualificationRequirementList, Members: &m_QualificationRequirementList, Type: smithy.ShapeTypeList, Ext: &ext[212]})
-var sQualificationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQualificationStatus, Members: &mQualificationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[214]})
-var sQualificationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQualificationType, Members: &mQualificationType, Type: smithy.ShapeTypeStructure, Ext: &ext[217]})
-var s_QualificationTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QualificationTypeList, Members: &m_QualificationTypeList, Type: smithy.ShapeTypeList, Ext: &ext[231]})
-var sQualificationTypeStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQualificationTypeStatus, Members: &mQualificationTypeStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[233]})
-var sRequestError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestError, Members: &mRequestError, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[236]})
-var s_ResultSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResultSize, Type: smithy.ShapeTypeInteger, Ext: &ext[239]})
-var sReviewableHITStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReviewableHITStatus, Members: &mReviewableHITStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[240]})
-var sReviewActionDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReviewActionDetail, Members: &mReviewActionDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[243]})
-var s_ReviewActionDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReviewActionDetailList, Members: &m_ReviewActionDetailList, Type: smithy.ShapeTypeList, Ext: &ext[252]})
-var sReviewActionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReviewActionStatus, Members: &mReviewActionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[254]})
-var sReviewPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReviewPolicy, Members: &mReviewPolicy, Type: smithy.ShapeTypeStructure, Ext: &ext[259]})
-var sReviewPolicyLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReviewPolicyLevel, Members: &mReviewPolicyLevel, Type: smithy.ShapeTypeEnum, Ext: &ext[262]})
-var s_ReviewPolicyLevelList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReviewPolicyLevelList, Members: &m_ReviewPolicyLevelList, Type: smithy.ShapeTypeList, Ext: &ext[265]})
-var sReviewReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReviewReport, Members: &mReviewReport, Type: smithy.ShapeTypeStructure, Ext: &ext[267]})
-var sReviewResultDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReviewResultDetail, Members: &mReviewResultDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[270]})
-var s_ReviewResultDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReviewResultDetailList, Members: &m_ReviewResultDetailList, Type: smithy.ShapeTypeList, Ext: &ext[277]})
-var sServiceFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceFault, Members: &mServiceFault, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[279]})
-var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[282]})
-var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[283]})
-var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[285]})
-var s_TurkErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TurkErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[286]})
-var sWorkerBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkerBlock, Members: &mWorkerBlock, Type: smithy.ShapeTypeStructure, Ext: &ext[287]})
-var s_WorkerBlockList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkerBlockList, Members: &m_WorkerBlockList, Type: smithy.ShapeTypeList, Ext: &ext[290]})
-var sAcceptQualificationRequestRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptQualificationRequestRequest, Members: &mAcceptQualificationRequestRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[292]})
-var sAcceptQualificationRequestResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptQualificationRequestResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[295]})
-var sApproveAssignmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApproveAssignmentRequest, Members: &mApproveAssignmentRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[296]})
-var sApproveAssignmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApproveAssignmentResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[300]})
-var sAssociateQualificationWithWorkerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateQualificationWithWorkerRequest, Members: &mAssociateQualificationWithWorkerRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[301]})
-var sAssociateQualificationWithWorkerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateQualificationWithWorkerResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[306]})
-var sCreateAdditionalAssignmentsForHITRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAdditionalAssignmentsForHITRequest, Members: &mCreateAdditionalAssignmentsForHITRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[307]})
-var sCreateAdditionalAssignmentsForHITResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAdditionalAssignmentsForHITResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[311]})
-var sCreateHITRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHITRequest, Members: &mCreateHITRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[312]})
-var sCreateHITResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHITResponse, Members: &mCreateHITResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[329]})
-var sCreateHITTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHITTypeRequest, Members: &mCreateHITTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[331]})
-var sCreateHITTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHITTypeResponse, Members: &mCreateHITTypeResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[339]})
-var sCreateHITWithHITTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHITWithHITTypeRequest, Members: &mCreateHITWithHITTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[341]})
-var sCreateHITWithHITTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHITWithHITTypeResponse, Members: &mCreateHITWithHITTypeResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[352]})
-var sCreateQualificationTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateQualificationTypeRequest, Members: &mCreateQualificationTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[354]})
-var sCreateQualificationTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateQualificationTypeResponse, Members: &mCreateQualificationTypeResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[365]})
-var sCreateWorkerBlockRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkerBlockRequest, Members: &mCreateWorkerBlockRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[367]})
-var sCreateWorkerBlockResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkerBlockResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[370]})
-var sDeleteHITRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHITRequest, Members: &mDeleteHITRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[371]})
-var sDeleteHITResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHITResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[373]})
-var sDeleteQualificationTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteQualificationTypeRequest, Members: &mDeleteQualificationTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[374]})
-var sDeleteQualificationTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteQualificationTypeResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[376]})
-var sDeleteWorkerBlockRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkerBlockRequest, Members: &mDeleteWorkerBlockRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[377]})
-var sDeleteWorkerBlockResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkerBlockResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[380]})
-var sDisassociateQualificationFromWorkerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateQualificationFromWorkerRequest, Members: &mDisassociateQualificationFromWorkerRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[381]})
-var sDisassociateQualificationFromWorkerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateQualificationFromWorkerResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[385]})
-var sGetAccountBalanceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountBalanceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[386]})
-var sGetAccountBalanceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountBalanceResponse, Members: &mGetAccountBalanceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[387]})
-var sGetAssignmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssignmentRequest, Members: &mGetAssignmentRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[390]})
-var sGetAssignmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssignmentResponse, Members: &mGetAssignmentResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[392]})
-var sGetFileUploadURLRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFileUploadURLRequest, Members: &mGetFileUploadURLRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[395]})
-var sGetFileUploadURLResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFileUploadURLResponse, Members: &mGetFileUploadURLResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[398]})
-var sGetHITRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHITRequest, Members: &mGetHITRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[400]})
-var sGetHITResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHITResponse, Members: &mGetHITResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[402]})
-var sGetQualificationScoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQualificationScoreRequest, Members: &mGetQualificationScoreRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[404]})
-var sGetQualificationScoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQualificationScoreResponse, Members: &mGetQualificationScoreResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[407]})
-var sGetQualificationTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQualificationTypeRequest, Members: &mGetQualificationTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[409]})
-var sGetQualificationTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQualificationTypeResponse, Members: &mGetQualificationTypeResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[411]})
-var sListAssignmentsForHITRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssignmentsForHITRequest, Members: &mListAssignmentsForHITRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[413]})
-var sListAssignmentsForHITResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssignmentsForHITResponse, Members: &mListAssignmentsForHITResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[418]})
-var sListBonusPaymentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBonusPaymentsRequest, Members: &mListBonusPaymentsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[422]})
-var sListBonusPaymentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBonusPaymentsResponse, Members: &mListBonusPaymentsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[427]})
-var sListHITsForQualificationTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHITsForQualificationTypeRequest, Members: &mListHITsForQualificationTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[431]})
-var sListHITsForQualificationTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHITsForQualificationTypeResponse, Members: &mListHITsForQualificationTypeResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[435]})
-var sListHITsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHITsRequest, Members: &mListHITsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[439]})
-var sListHITsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHITsResponse, Members: &mListHITsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[442]})
-var sListQualificationRequestsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQualificationRequestsRequest, Members: &mListQualificationRequestsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[446]})
-var sListQualificationRequestsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQualificationRequestsResponse, Members: &mListQualificationRequestsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[450]})
-var sListQualificationTypesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQualificationTypesRequest, Members: &mListQualificationTypesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[454]})
-var sListQualificationTypesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQualificationTypesResponse, Members: &mListQualificationTypesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[460]})
-var sListReviewableHITsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReviewableHITsRequest, Members: &mListReviewableHITsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[464]})
-var sListReviewableHITsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReviewableHITsResponse, Members: &mListReviewableHITsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[469]})
-var sListReviewPolicyResultsForHITRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReviewPolicyResultsForHITRequest, Members: &mListReviewPolicyResultsForHITRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[473]})
-var sListReviewPolicyResultsForHITResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReviewPolicyResultsForHITResponse, Members: &mListReviewPolicyResultsForHITResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[480]})
-var sListWorkerBlocksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkerBlocksRequest, Members: &mListWorkerBlocksRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[487]})
-var sListWorkerBlocksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkerBlocksResponse, Members: &mListWorkerBlocksResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[490]})
-var sListWorkersWithQualificationTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkersWithQualificationTypeRequest, Members: &mListWorkersWithQualificationTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[494]})
-var sListWorkersWithQualificationTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkersWithQualificationTypeResponse, Members: &mListWorkersWithQualificationTypeResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[499]})
-var sNotifyWorkersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotifyWorkersRequest, Members: &mNotifyWorkersRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[503]})
-var sNotifyWorkersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotifyWorkersResponse, Members: &mNotifyWorkersResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[507]})
-var sRejectAssignmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectAssignmentRequest, Members: &mRejectAssignmentRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[509]})
-var sRejectAssignmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectAssignmentResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[512]})
-var sRejectQualificationRequestRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectQualificationRequestRequest, Members: &mRejectQualificationRequestRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[513]})
-var sRejectQualificationRequestResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectQualificationRequestResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[516]})
-var sSendBonusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendBonusRequest, Members: &mSendBonusRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[517]})
-var sSendBonusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendBonusResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[523]})
-var sSendTestEventNotificationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendTestEventNotificationRequest, Members: &mSendTestEventNotificationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[524]})
-var sSendTestEventNotificationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendTestEventNotificationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[527]})
-var sUpdateExpirationForHITRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExpirationForHITRequest, Members: &mUpdateExpirationForHITRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[528]})
-var sUpdateExpirationForHITResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExpirationForHITResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[531]})
-var sUpdateHITReviewStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHITReviewStatusRequest, Members: &mUpdateHITReviewStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[532]})
-var sUpdateHITReviewStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHITReviewStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[535]})
-var sUpdateHITTypeOfHITRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHITTypeOfHITRequest, Members: &mUpdateHITTypeOfHITRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[536]})
-var sUpdateHITTypeOfHITResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHITTypeOfHITResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[539]})
-var sUpdateNotificationSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotificationSettingsRequest, Members: &mUpdateNotificationSettingsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[540]})
-var sUpdateNotificationSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotificationSettingsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[544]})
-var sUpdateQualificationTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateQualificationTypeRequest, Members: &mUpdateQualificationTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[545]})
-var sUpdateQualificationTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateQualificationTypeResponse, Members: &mUpdateQualificationTypeResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[555]})
+var sAcceptQualificationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptQualificationRequest, Type: smithy.ShapeTypeOperation, Ext: &eAcceptQualificationRequest})
+var sApproveAssignment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApproveAssignment, Type: smithy.ShapeTypeOperation, Ext: &eApproveAssignment})
+var sAssociateQualificationWithWorker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateQualificationWithWorker, Type: smithy.ShapeTypeOperation, Ext: &eAssociateQualificationWithWorker})
+var sCreateAdditionalAssignmentsForHIT = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAdditionalAssignmentsForHIT, Type: smithy.ShapeTypeOperation, Ext: &eCreateAdditionalAssignmentsForHIT})
+var sCreateHIT = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHIT, Type: smithy.ShapeTypeOperation, Ext: &eCreateHIT})
+var sCreateHITType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHITType, Type: smithy.ShapeTypeOperation, Ext: &eCreateHITType})
+var sCreateHITWithHITType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHITWithHITType, Type: smithy.ShapeTypeOperation, Ext: &eCreateHITWithHITType})
+var sCreateQualificationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateQualificationType, Type: smithy.ShapeTypeOperation, Ext: &eCreateQualificationType})
+var sCreateWorkerBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkerBlock, Type: smithy.ShapeTypeOperation, Ext: &eCreateWorkerBlock})
+var sDeleteHIT = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHIT, Type: smithy.ShapeTypeOperation, Ext: &eDeleteHIT})
+var sDeleteQualificationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteQualificationType, Type: smithy.ShapeTypeOperation, Ext: &eDeleteQualificationType})
+var sDeleteWorkerBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkerBlock, Type: smithy.ShapeTypeOperation, Ext: &eDeleteWorkerBlock})
+var sDisassociateQualificationFromWorker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateQualificationFromWorker, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateQualificationFromWorker})
+var sGetAccountBalance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountBalance, Type: smithy.ShapeTypeOperation, Ext: &eGetAccountBalance})
+var sGetAssignment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssignment, Type: smithy.ShapeTypeOperation, Ext: &eGetAssignment})
+var sGetFileUploadURL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFileUploadURL, Type: smithy.ShapeTypeOperation, Ext: &eGetFileUploadURL})
+var sGetHIT = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHIT, Type: smithy.ShapeTypeOperation, Ext: &eGetHIT})
+var sGetQualificationScore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQualificationScore, Type: smithy.ShapeTypeOperation, Ext: &eGetQualificationScore})
+var sGetQualificationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQualificationType, Type: smithy.ShapeTypeOperation, Ext: &eGetQualificationType})
+var sListAssignmentsForHIT = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssignmentsForHIT, Type: smithy.ShapeTypeOperation, Ext: &eListAssignmentsForHIT})
+var sListBonusPayments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBonusPayments, Type: smithy.ShapeTypeOperation, Ext: &eListBonusPayments})
+var sListHITs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHITs, Type: smithy.ShapeTypeOperation, Ext: &eListHITs})
+var sListHITsForQualificationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHITsForQualificationType, Type: smithy.ShapeTypeOperation, Ext: &eListHITsForQualificationType})
+var sListQualificationRequests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQualificationRequests, Type: smithy.ShapeTypeOperation, Ext: &eListQualificationRequests})
+var sListQualificationTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQualificationTypes, Type: smithy.ShapeTypeOperation, Ext: &eListQualificationTypes})
+var sListReviewableHITs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReviewableHITs, Type: smithy.ShapeTypeOperation, Ext: &eListReviewableHITs})
+var sListReviewPolicyResultsForHIT = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReviewPolicyResultsForHIT, Type: smithy.ShapeTypeOperation, Ext: &eListReviewPolicyResultsForHIT})
+var sListWorkerBlocks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkerBlocks, Type: smithy.ShapeTypeOperation, Ext: &eListWorkerBlocks})
+var sListWorkersWithQualificationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkersWithQualificationType, Type: smithy.ShapeTypeOperation, Ext: &eListWorkersWithQualificationType})
+var sNotifyWorkers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotifyWorkers, Type: smithy.ShapeTypeOperation, Ext: &eNotifyWorkers})
+var sRejectAssignment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectAssignment, Type: smithy.ShapeTypeOperation, Ext: &eRejectAssignment})
+var sRejectQualificationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectQualificationRequest, Type: smithy.ShapeTypeOperation, Ext: &eRejectQualificationRequest})
+var sSendBonus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendBonus, Type: smithy.ShapeTypeOperation, Ext: &eSendBonus})
+var sSendTestEventNotification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendTestEventNotification, Type: smithy.ShapeTypeOperation, Ext: &eSendTestEventNotification})
+var sUpdateExpirationForHIT = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExpirationForHIT, Type: smithy.ShapeTypeOperation, Ext: &eUpdateExpirationForHIT})
+var sUpdateHITReviewStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHITReviewStatus, Type: smithy.ShapeTypeOperation, Ext: &eUpdateHITReviewStatus})
+var sUpdateHITTypeOfHIT = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHITTypeOfHIT, Type: smithy.ShapeTypeOperation, Ext: &eUpdateHITTypeOfHIT})
+var sUpdateNotificationSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotificationSettings, Type: smithy.ShapeTypeOperation, Ext: &eUpdateNotificationSettings})
+var sUpdateQualificationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateQualificationType, Type: smithy.ShapeTypeOperation, Ext: &eUpdateQualificationType})
+var s_MTurkRequesterServiceV20170117 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MTurkRequesterServiceV20170117, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &e_MTurkRequesterServiceV20170117})
+var sAssignment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssignment, Members: &mAssignment, Type: smithy.ShapeTypeStructure, Ext: &eAssignment})
+var s_AssignmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssignmentList, Members: &m_AssignmentList, Type: smithy.ShapeTypeList, Ext: &e_AssignmentList})
+var sAssignmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssignmentStatus, Members: &mAssignmentStatus, Type: smithy.ShapeTypeEnum, Ext: &eAssignmentStatus})
+var s_AssignmentStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssignmentStatusList, Members: &m_AssignmentStatusList, Type: smithy.ShapeTypeList, Ext: &e_AssignmentStatusList})
+var sBonusPayment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBonusPayment, Members: &mBonusPayment, Type: smithy.ShapeTypeStructure, Ext: &eBonusPayment})
+var s_BonusPaymentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BonusPaymentList, Members: &m_BonusPaymentList, Type: smithy.ShapeTypeList, Ext: &e_BonusPaymentList})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var sComparator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComparator, Members: &mComparator, Type: smithy.ShapeTypeEnum, Ext: &eComparator})
+var s_CountryParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CountryParameters, Type: smithy.ShapeTypeString, Ext: &e_CountryParameters})
+var s_CurrencyAmount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CurrencyAmount, Type: smithy.ShapeTypeString, Ext: &e_CurrencyAmount})
+var s_CustomerId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &e_CustomerId})
+var s_CustomerIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerIdList, Members: &m_CustomerIdList, Type: smithy.ShapeTypeList, Ext: &e_CustomerIdList})
+var s_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &e_EntityId})
+var sEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeEnum, Ext: &eEventType})
+var s_EventTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTypeList, Members: &m_EventTypeList, Type: smithy.ShapeTypeList, Ext: &e_EventTypeList})
+var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &e_ExceptionMessage})
+var sHIT = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHIT, Members: &mHIT, Type: smithy.ShapeTypeStructure, Ext: &eHIT})
+var sHITAccessActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHITAccessActions, Members: &mHITAccessActions, Type: smithy.ShapeTypeEnum, Ext: &eHITAccessActions})
+var sHITLayoutParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHITLayoutParameter, Members: &mHITLayoutParameter, Type: smithy.ShapeTypeStructure, Ext: &eHITLayoutParameter})
+var s_HITLayoutParameterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HITLayoutParameterList, Members: &m_HITLayoutParameterList, Type: smithy.ShapeTypeList, Ext: &e_HITLayoutParameterList})
+var s_HITList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HITList, Members: &m_HITList, Type: smithy.ShapeTypeList, Ext: &e_HITList})
+var sHITReviewStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHITReviewStatus, Members: &mHITReviewStatus, Type: smithy.ShapeTypeEnum, Ext: &eHITReviewStatus})
+var sHITStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHITStatus, Members: &mHITStatus, Type: smithy.ShapeTypeEnum, Ext: &eHITStatus})
+var s_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &e_IdempotencyToken})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &e_Integer})
+var s_IntegerList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerList, Members: &m_IntegerList, Type: smithy.ShapeTypeList, Ext: &e_IntegerList})
+var sLocale = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLocale, Members: &mLocale, Type: smithy.ShapeTypeStructure, Ext: &eLocale})
+var s_LocaleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocaleList, Members: &m_LocaleList, Type: smithy.ShapeTypeList, Ext: &e_LocaleList})
+var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &e_Long})
+var sNotificationSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationSpecification, Members: &mNotificationSpecification, Type: smithy.ShapeTypeStructure, Ext: &eNotificationSpecification})
+var sNotificationTransport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationTransport, Members: &mNotificationTransport, Type: smithy.ShapeTypeEnum, Ext: &eNotificationTransport})
+var sNotifyWorkersFailureCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotifyWorkersFailureCode, Members: &mNotifyWorkersFailureCode, Type: smithy.ShapeTypeEnum, Ext: &eNotifyWorkersFailureCode})
+var sNotifyWorkersFailureStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotifyWorkersFailureStatus, Members: &mNotifyWorkersFailureStatus, Type: smithy.ShapeTypeStructure, Ext: &eNotifyWorkersFailureStatus})
+var s_NotifyWorkersFailureStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotifyWorkersFailureStatusList, Members: &m_NotifyWorkersFailureStatusList, Type: smithy.ShapeTypeList, Ext: &e_NotifyWorkersFailureStatusList})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &e_PaginationToken})
+var sParameterMapEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParameterMapEntry, Members: &mParameterMapEntry, Type: smithy.ShapeTypeStructure, Ext: &eParameterMapEntry})
+var s_ParameterMapEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParameterMapEntryList, Members: &m_ParameterMapEntryList, Type: smithy.ShapeTypeList, Ext: &e_ParameterMapEntryList})
+var sPolicyParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyParameter, Members: &mPolicyParameter, Type: smithy.ShapeTypeStructure, Ext: &ePolicyParameter})
+var s_PolicyParameterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyParameterList, Members: &m_PolicyParameterList, Type: smithy.ShapeTypeList, Ext: &e_PolicyParameterList})
+var sQualification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQualification, Members: &mQualification, Type: smithy.ShapeTypeStructure, Ext: &eQualification})
+var s_QualificationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QualificationList, Members: &m_QualificationList, Type: smithy.ShapeTypeList, Ext: &e_QualificationList})
+var sQualificationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQualificationRequest, Members: &mQualificationRequest, Type: smithy.ShapeTypeStructure, Ext: &eQualificationRequest})
+var s_QualificationRequestList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QualificationRequestList, Members: &m_QualificationRequestList, Type: smithy.ShapeTypeList, Ext: &e_QualificationRequestList})
+var sQualificationRequirement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQualificationRequirement, Members: &mQualificationRequirement, Type: smithy.ShapeTypeStructure, Ext: &eQualificationRequirement})
+var s_QualificationRequirementList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QualificationRequirementList, Members: &m_QualificationRequirementList, Type: smithy.ShapeTypeList, Ext: &e_QualificationRequirementList})
+var sQualificationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQualificationStatus, Members: &mQualificationStatus, Type: smithy.ShapeTypeEnum, Ext: &eQualificationStatus})
+var sQualificationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQualificationType, Members: &mQualificationType, Type: smithy.ShapeTypeStructure, Ext: &eQualificationType})
+var s_QualificationTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QualificationTypeList, Members: &m_QualificationTypeList, Type: smithy.ShapeTypeList, Ext: &e_QualificationTypeList})
+var sQualificationTypeStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQualificationTypeStatus, Members: &mQualificationTypeStatus, Type: smithy.ShapeTypeEnum, Ext: &eQualificationTypeStatus})
+var sRequestError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestError, Members: &mRequestError, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eRequestError})
+var s_ResultSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResultSize, Type: smithy.ShapeTypeInteger, Ext: &e_ResultSize})
+var sReviewableHITStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReviewableHITStatus, Members: &mReviewableHITStatus, Type: smithy.ShapeTypeEnum, Ext: &eReviewableHITStatus})
+var sReviewActionDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReviewActionDetail, Members: &mReviewActionDetail, Type: smithy.ShapeTypeStructure, Ext: &eReviewActionDetail})
+var s_ReviewActionDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReviewActionDetailList, Members: &m_ReviewActionDetailList, Type: smithy.ShapeTypeList, Ext: &e_ReviewActionDetailList})
+var sReviewActionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReviewActionStatus, Members: &mReviewActionStatus, Type: smithy.ShapeTypeEnum, Ext: &eReviewActionStatus})
+var sReviewPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReviewPolicy, Members: &mReviewPolicy, Type: smithy.ShapeTypeStructure, Ext: &eReviewPolicy})
+var sReviewPolicyLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReviewPolicyLevel, Members: &mReviewPolicyLevel, Type: smithy.ShapeTypeEnum, Ext: &eReviewPolicyLevel})
+var s_ReviewPolicyLevelList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReviewPolicyLevelList, Members: &m_ReviewPolicyLevelList, Type: smithy.ShapeTypeList, Ext: &e_ReviewPolicyLevelList})
+var sReviewReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReviewReport, Members: &mReviewReport, Type: smithy.ShapeTypeStructure, Ext: &eReviewReport})
+var sReviewResultDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReviewResultDetail, Members: &mReviewResultDetail, Type: smithy.ShapeTypeStructure, Ext: &eReviewResultDetail})
+var s_ReviewResultDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReviewResultDetailList, Members: &m_ReviewResultDetailList, Type: smithy.ShapeTypeList, Ext: &e_ReviewResultDetailList})
+var sServiceFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceFault, Members: &mServiceFault, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eServiceFault})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &e_StringList})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var s_TurkErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TurkErrorCode, Type: smithy.ShapeTypeString, Ext: &e_TurkErrorCode})
+var sWorkerBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkerBlock, Members: &mWorkerBlock, Type: smithy.ShapeTypeStructure, Ext: &eWorkerBlock})
+var s_WorkerBlockList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkerBlockList, Members: &m_WorkerBlockList, Type: smithy.ShapeTypeList, Ext: &e_WorkerBlockList})
+var sAcceptQualificationRequestRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptQualificationRequestRequest, Members: &mAcceptQualificationRequestRequest, Type: smithy.ShapeTypeStructure, Ext: &eAcceptQualificationRequestRequest})
+var sAcceptQualificationRequestResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptQualificationRequestResponse, Type: smithy.ShapeTypeStructure, Ext: &eAcceptQualificationRequestResponse})
+var sApproveAssignmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApproveAssignmentRequest, Members: &mApproveAssignmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eApproveAssignmentRequest})
+var sApproveAssignmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApproveAssignmentResponse, Type: smithy.ShapeTypeStructure, Ext: &eApproveAssignmentResponse})
+var sAssociateQualificationWithWorkerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateQualificationWithWorkerRequest, Members: &mAssociateQualificationWithWorkerRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateQualificationWithWorkerRequest})
+var sAssociateQualificationWithWorkerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateQualificationWithWorkerResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssociateQualificationWithWorkerResponse})
+var sCreateAdditionalAssignmentsForHITRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAdditionalAssignmentsForHITRequest, Members: &mCreateAdditionalAssignmentsForHITRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateAdditionalAssignmentsForHITRequest})
+var sCreateAdditionalAssignmentsForHITResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAdditionalAssignmentsForHITResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateAdditionalAssignmentsForHITResponse})
+var sCreateHITRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHITRequest, Members: &mCreateHITRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateHITRequest})
+var sCreateHITResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHITResponse, Members: &mCreateHITResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateHITResponse})
+var sCreateHITTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHITTypeRequest, Members: &mCreateHITTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateHITTypeRequest})
+var sCreateHITTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHITTypeResponse, Members: &mCreateHITTypeResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateHITTypeResponse})
+var sCreateHITWithHITTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHITWithHITTypeRequest, Members: &mCreateHITWithHITTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateHITWithHITTypeRequest})
+var sCreateHITWithHITTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHITWithHITTypeResponse, Members: &mCreateHITWithHITTypeResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateHITWithHITTypeResponse})
+var sCreateQualificationTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateQualificationTypeRequest, Members: &mCreateQualificationTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateQualificationTypeRequest})
+var sCreateQualificationTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateQualificationTypeResponse, Members: &mCreateQualificationTypeResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateQualificationTypeResponse})
+var sCreateWorkerBlockRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkerBlockRequest, Members: &mCreateWorkerBlockRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateWorkerBlockRequest})
+var sCreateWorkerBlockResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkerBlockResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateWorkerBlockResponse})
+var sDeleteHITRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHITRequest, Members: &mDeleteHITRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteHITRequest})
+var sDeleteHITResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHITResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteHITResponse})
+var sDeleteQualificationTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteQualificationTypeRequest, Members: &mDeleteQualificationTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteQualificationTypeRequest})
+var sDeleteQualificationTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteQualificationTypeResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteQualificationTypeResponse})
+var sDeleteWorkerBlockRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkerBlockRequest, Members: &mDeleteWorkerBlockRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteWorkerBlockRequest})
+var sDeleteWorkerBlockResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkerBlockResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteWorkerBlockResponse})
+var sDisassociateQualificationFromWorkerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateQualificationFromWorkerRequest, Members: &mDisassociateQualificationFromWorkerRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateQualificationFromWorkerRequest})
+var sDisassociateQualificationFromWorkerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateQualificationFromWorkerResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateQualificationFromWorkerResponse})
+var sGetAccountBalanceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountBalanceRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAccountBalanceRequest})
+var sGetAccountBalanceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountBalanceResponse, Members: &mGetAccountBalanceResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAccountBalanceResponse})
+var sGetAssignmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssignmentRequest, Members: &mGetAssignmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAssignmentRequest})
+var sGetAssignmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssignmentResponse, Members: &mGetAssignmentResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAssignmentResponse})
+var sGetFileUploadURLRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFileUploadURLRequest, Members: &mGetFileUploadURLRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetFileUploadURLRequest})
+var sGetFileUploadURLResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFileUploadURLResponse, Members: &mGetFileUploadURLResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetFileUploadURLResponse})
+var sGetHITRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHITRequest, Members: &mGetHITRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetHITRequest})
+var sGetHITResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHITResponse, Members: &mGetHITResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetHITResponse})
+var sGetQualificationScoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQualificationScoreRequest, Members: &mGetQualificationScoreRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetQualificationScoreRequest})
+var sGetQualificationScoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQualificationScoreResponse, Members: &mGetQualificationScoreResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetQualificationScoreResponse})
+var sGetQualificationTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQualificationTypeRequest, Members: &mGetQualificationTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetQualificationTypeRequest})
+var sGetQualificationTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQualificationTypeResponse, Members: &mGetQualificationTypeResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetQualificationTypeResponse})
+var sListAssignmentsForHITRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssignmentsForHITRequest, Members: &mListAssignmentsForHITRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAssignmentsForHITRequest})
+var sListAssignmentsForHITResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssignmentsForHITResponse, Members: &mListAssignmentsForHITResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAssignmentsForHITResponse})
+var sListBonusPaymentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBonusPaymentsRequest, Members: &mListBonusPaymentsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListBonusPaymentsRequest})
+var sListBonusPaymentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBonusPaymentsResponse, Members: &mListBonusPaymentsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListBonusPaymentsResponse})
+var sListHITsForQualificationTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHITsForQualificationTypeRequest, Members: &mListHITsForQualificationTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &eListHITsForQualificationTypeRequest})
+var sListHITsForQualificationTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHITsForQualificationTypeResponse, Members: &mListHITsForQualificationTypeResponse, Type: smithy.ShapeTypeStructure, Ext: &eListHITsForQualificationTypeResponse})
+var sListHITsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHITsRequest, Members: &mListHITsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListHITsRequest})
+var sListHITsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHITsResponse, Members: &mListHITsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListHITsResponse})
+var sListQualificationRequestsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQualificationRequestsRequest, Members: &mListQualificationRequestsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListQualificationRequestsRequest})
+var sListQualificationRequestsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQualificationRequestsResponse, Members: &mListQualificationRequestsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListQualificationRequestsResponse})
+var sListQualificationTypesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQualificationTypesRequest, Members: &mListQualificationTypesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListQualificationTypesRequest})
+var sListQualificationTypesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQualificationTypesResponse, Members: &mListQualificationTypesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListQualificationTypesResponse})
+var sListReviewableHITsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReviewableHITsRequest, Members: &mListReviewableHITsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListReviewableHITsRequest})
+var sListReviewableHITsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReviewableHITsResponse, Members: &mListReviewableHITsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListReviewableHITsResponse})
+var sListReviewPolicyResultsForHITRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReviewPolicyResultsForHITRequest, Members: &mListReviewPolicyResultsForHITRequest, Type: smithy.ShapeTypeStructure, Ext: &eListReviewPolicyResultsForHITRequest})
+var sListReviewPolicyResultsForHITResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReviewPolicyResultsForHITResponse, Members: &mListReviewPolicyResultsForHITResponse, Type: smithy.ShapeTypeStructure, Ext: &eListReviewPolicyResultsForHITResponse})
+var sListWorkerBlocksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkerBlocksRequest, Members: &mListWorkerBlocksRequest, Type: smithy.ShapeTypeStructure, Ext: &eListWorkerBlocksRequest})
+var sListWorkerBlocksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkerBlocksResponse, Members: &mListWorkerBlocksResponse, Type: smithy.ShapeTypeStructure, Ext: &eListWorkerBlocksResponse})
+var sListWorkersWithQualificationTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkersWithQualificationTypeRequest, Members: &mListWorkersWithQualificationTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &eListWorkersWithQualificationTypeRequest})
+var sListWorkersWithQualificationTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkersWithQualificationTypeResponse, Members: &mListWorkersWithQualificationTypeResponse, Type: smithy.ShapeTypeStructure, Ext: &eListWorkersWithQualificationTypeResponse})
+var sNotifyWorkersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotifyWorkersRequest, Members: &mNotifyWorkersRequest, Type: smithy.ShapeTypeStructure, Ext: &eNotifyWorkersRequest})
+var sNotifyWorkersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotifyWorkersResponse, Members: &mNotifyWorkersResponse, Type: smithy.ShapeTypeStructure, Ext: &eNotifyWorkersResponse})
+var sRejectAssignmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectAssignmentRequest, Members: &mRejectAssignmentRequest, Type: smithy.ShapeTypeStructure, Ext: &eRejectAssignmentRequest})
+var sRejectAssignmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectAssignmentResponse, Type: smithy.ShapeTypeStructure, Ext: &eRejectAssignmentResponse})
+var sRejectQualificationRequestRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectQualificationRequestRequest, Members: &mRejectQualificationRequestRequest, Type: smithy.ShapeTypeStructure, Ext: &eRejectQualificationRequestRequest})
+var sRejectQualificationRequestResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectQualificationRequestResponse, Type: smithy.ShapeTypeStructure, Ext: &eRejectQualificationRequestResponse})
+var sSendBonusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendBonusRequest, Members: &mSendBonusRequest, Type: smithy.ShapeTypeStructure, Ext: &eSendBonusRequest})
+var sSendBonusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendBonusResponse, Type: smithy.ShapeTypeStructure, Ext: &eSendBonusResponse})
+var sSendTestEventNotificationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendTestEventNotificationRequest, Members: &mSendTestEventNotificationRequest, Type: smithy.ShapeTypeStructure, Ext: &eSendTestEventNotificationRequest})
+var sSendTestEventNotificationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendTestEventNotificationResponse, Type: smithy.ShapeTypeStructure, Ext: &eSendTestEventNotificationResponse})
+var sUpdateExpirationForHITRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExpirationForHITRequest, Members: &mUpdateExpirationForHITRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExpirationForHITRequest})
+var sUpdateExpirationForHITResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateExpirationForHITResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateExpirationForHITResponse})
+var sUpdateHITReviewStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHITReviewStatusRequest, Members: &mUpdateHITReviewStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateHITReviewStatusRequest})
+var sUpdateHITReviewStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHITReviewStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateHITReviewStatusResponse})
+var sUpdateHITTypeOfHITRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHITTypeOfHITRequest, Members: &mUpdateHITTypeOfHITRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateHITTypeOfHITRequest})
+var sUpdateHITTypeOfHITResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHITTypeOfHITResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateHITTypeOfHITResponse})
+var sUpdateNotificationSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotificationSettingsRequest, Members: &mUpdateNotificationSettingsRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateNotificationSettingsRequest})
+var sUpdateNotificationSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotificationSettingsResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateNotificationSettingsResponse})
+var sUpdateQualificationTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateQualificationTypeRequest, Members: &mUpdateQualificationTypeRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateQualificationTypeRequest})
+var sUpdateQualificationTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateQualificationTypeResponse, Members: &mUpdateQualificationTypeResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateQualificationTypeResponse})
 
-var sAssignment_AssignmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[41]})
-var sAssignment_WorkerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerId", ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var sAssignment_HITId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[43]})
-var sAssignment_AssignmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentStatus", ID: &iAssignmentStatus, Members: &mAssignmentStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[44]})
-var sAssignment_AutoApprovalTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoApprovalTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[45]})
-var sAssignment_AcceptTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceptTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[46]})
-var sAssignment_SubmitTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubmitTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[47]})
-var sAssignment_ApprovalTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApprovalTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[48]})
-var sAssignment_RejectionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RejectionTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[49]})
-var sAssignment_Deadline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deadline", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[50]})
-var sAssignment_Answer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Answer", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[51]})
-var sAssignment_RequesterFeedback = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterFeedback", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var s_AssignmentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssignment, Members: &mAssignment, Type: smithy.ShapeTypeStructure, Ext: &ext[54]})
-var sAssignmentStatus_Submitted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Submitted", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[56]})
-var sAssignmentStatus_Approved = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Approved", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[57]})
-var sAssignmentStatus_Rejected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rejected", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[58]})
-var s_AssignmentStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssignmentStatus, Members: &mAssignmentStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[60]})
-var sBonusPayment_WorkerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerId", ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &ext[62]})
-var sBonusPayment_BonusAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BonusAmount", ID: &i_CurrencyAmount, Type: smithy.ShapeTypeString, Ext: &ext[63]})
-var sBonusPayment_AssignmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[64]})
-var sBonusPayment_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[65]})
-var sBonusPayment_GrantTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[66]})
-var s_BonusPaymentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBonusPayment, Members: &mBonusPayment, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var sComparator_LessThan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LessThan", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[71]})
-var sComparator_LessThanOrEqualTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LessThanOrEqualTo", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sComparator_GreaterThan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GreaterThan", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[73]})
-var sComparator_GreaterThanOrEqualTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GreaterThanOrEqualTo", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var sComparator_EqualTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EqualTo", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[75]})
-var sComparator_NotEqualTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotEqualTo", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[76]})
-var sComparator_Exists = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Exists", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
-var sComparator_DoesNotExist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DoesNotExist", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[78]})
-var sComparator_In = smithy.NewStaticSchema(smithy.StaticSchema{Member: "In", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[79]})
-var sComparator_NotIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotIn", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var s_CustomerIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &ext[85]})
-var sEventType_AssignmentAccepted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentAccepted", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[88]})
-var sEventType_AssignmentAbandoned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentAbandoned", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[89]})
-var sEventType_AssignmentReturned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentReturned", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[90]})
-var sEventType_AssignmentSubmitted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentSubmitted", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[91]})
-var sEventType_AssignmentRejected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentRejected", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[92]})
-var sEventType_AssignmentApproved = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentApproved", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[93]})
-var sEventType_HITCreated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITCreated", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[94]})
-var sEventType_HITExpired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITExpired", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[95]})
-var sEventType_HITReviewable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITReviewable", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[96]})
-var sEventType_HITExtended = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITExtended", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[97]})
-var sEventType_HITDisposed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITDisposed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[98]})
-var sEventType_Ping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ping", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[99]})
-var s_EventTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeEnum, Ext: &ext[101]})
-var sHIT_HITId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[104]})
-var sHIT_HITTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[105]})
-var sHIT_HITGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITGroupId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[106]})
-var sHIT_HITLayoutId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITLayoutId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[107]})
-var sHIT_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[108]})
-var sHIT_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[109]})
-var sHIT_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[110]})
-var sHIT_Question = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Question", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[111]})
-var sHIT_Keywords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Keywords", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[112]})
-var sHIT_HITStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITStatus", ID: &iHITStatus, Members: &mHITStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[113]})
-var sHIT_MaxAssignments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxAssignments", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[114]})
-var sHIT_Reward = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reward", ID: &i_CurrencyAmount, Type: smithy.ShapeTypeString, Ext: &ext[115]})
-var sHIT_AutoApprovalDelayInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoApprovalDelayInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[116]})
-var sHIT_Expiration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expiration", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[117]})
-var sHIT_AssignmentDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentDurationInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[118]})
-var sHIT_RequesterAnnotation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterAnnotation", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[119]})
-var sHIT_QualificationRequirements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationRequirements", ID: &i_QualificationRequirementList, Members: &m_QualificationRequirementList, Type: smithy.ShapeTypeList, Ext: &ext[120]})
-var sHIT_HITReviewStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITReviewStatus", ID: &iHITReviewStatus, Members: &mHITReviewStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[121]})
-var sHIT_NumberOfAssignmentsPending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfAssignmentsPending", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[122]})
-var sHIT_NumberOfAssignmentsAvailable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfAssignmentsAvailable", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[123]})
-var sHIT_NumberOfAssignmentsCompleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfAssignmentsCompleted", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[124]})
-var sHITAccessActions_Accept = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Accept", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var sHITAccessActions_PreviewAndAccept = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreviewAndAccept", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[127]})
-var sHITAccessActions_DiscoverPreviewAndAccept = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiscoverPreviewAndAccept", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[128]})
-var sHITLayoutParameter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var sHITLayoutParameter_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[131]})
-var s_HITLayoutParameterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHITLayoutParameter, Members: &mHITLayoutParameter, Type: smithy.ShapeTypeStructure, Ext: &ext[133]})
-var s_HITList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHIT, Members: &mHIT, Type: smithy.ShapeTypeStructure, Ext: &ext[135]})
-var sHITReviewStatus_NotReviewed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotReviewed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[137]})
-var sHITReviewStatus_MarkedForReview = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarkedForReview", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[138]})
-var sHITReviewStatus_ReviewedAppropriate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReviewedAppropriate", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[139]})
-var sHITReviewStatus_ReviewedInappropriate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReviewedInappropriate", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[140]})
-var sHITStatus_Assignable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Assignable", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[142]})
-var sHITStatus_Unassignable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unassignable", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[143]})
-var sHITStatus_Reviewable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reviewable", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[144]})
-var sHITStatus_Reviewing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reviewing", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[145]})
-var sHITStatus_Disposed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disposed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[146]})
-var s_IntegerList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[150]})
-var sLocale_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &i_CountryParameters, Type: smithy.ShapeTypeString, Ext: &ext[152]})
-var sLocale_Subdivision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdivision", ID: &i_CountryParameters, Type: smithy.ShapeTypeString, Ext: &ext[153]})
-var s_LocaleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLocale, Members: &mLocale, Type: smithy.ShapeTypeStructure, Ext: &ext[155]})
-var sNotificationSpecification_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[158]})
-var sNotificationSpecification_Transport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Transport", ID: &iNotificationTransport, Members: &mNotificationTransport, Type: smithy.ShapeTypeEnum, Ext: &ext[159]})
-var sNotificationSpecification_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[160]})
-var sNotificationSpecification_EventTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventTypes", ID: &i_EventTypeList, Members: &m_EventTypeList, Type: smithy.ShapeTypeList, Ext: &ext[161]})
-var sNotificationTransport_Email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Email", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[163]})
-var sNotificationTransport_SQS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SQS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[164]})
-var sNotificationTransport_SNS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[165]})
-var sNotifyWorkersFailureCode_SoftFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SoftFailure", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[167]})
-var sNotifyWorkersFailureCode_HardFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HardFailure", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[168]})
-var sNotifyWorkersFailureStatus_NotifyWorkersFailureCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotifyWorkersFailureCode", ID: &iNotifyWorkersFailureCode, Members: &mNotifyWorkersFailureCode, Type: smithy.ShapeTypeEnum, Ext: &ext[170]})
-var sNotifyWorkersFailureStatus_NotifyWorkersFailureMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotifyWorkersFailureMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[171]})
-var sNotifyWorkersFailureStatus_WorkerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerId", ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &ext[172]})
-var s_NotifyWorkersFailureStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNotifyWorkersFailureStatus, Members: &mNotifyWorkersFailureStatus, Type: smithy.ShapeTypeStructure, Ext: &ext[174]})
-var sParameterMapEntry_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[177]})
-var sParameterMapEntry_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[178]})
-var s_ParameterMapEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iParameterMapEntry, Members: &mParameterMapEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[180]})
-var sPolicyParameter_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[182]})
-var sPolicyParameter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[183]})
-var sPolicyParameter_MapEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MapEntries", ID: &i_ParameterMapEntryList, Members: &m_ParameterMapEntryList, Type: smithy.ShapeTypeList, Ext: &ext[184]})
-var s_PolicyParameterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPolicyParameter, Members: &mPolicyParameter, Type: smithy.ShapeTypeStructure, Ext: &ext[186]})
-var sQualification_QualificationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[188]})
-var sQualification_WorkerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerId", ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &ext[189]})
-var sQualification_GrantTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[190]})
-var sQualification_IntegerValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegerValue", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[191]})
-var sQualification_LocaleValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocaleValue", ID: &iLocale, Members: &mLocale, Type: smithy.ShapeTypeStructure, Ext: &ext[192]})
-var sQualification_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iQualificationStatus, Members: &mQualificationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[193]})
-var s_QualificationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQualification, Members: &mQualification, Type: smithy.ShapeTypeStructure, Ext: &ext[195]})
-var sQualificationRequest_QualificationRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationRequestId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[197]})
-var sQualificationRequest_QualificationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[198]})
-var sQualificationRequest_WorkerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerId", ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &ext[199]})
-var sQualificationRequest_Test = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Test", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[200]})
-var sQualificationRequest_Answer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Answer", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[201]})
-var sQualificationRequest_SubmitTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubmitTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[202]})
-var s_QualificationRequestList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQualificationRequest, Members: &mQualificationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[204]})
-var sQualificationRequirement_QualificationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[206]})
-var sQualificationRequirement_Comparator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Comparator", ID: &iComparator, Members: &mComparator, Type: smithy.ShapeTypeEnum, Ext: &ext[207]})
-var sQualificationRequirement_IntegerValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegerValues", ID: &i_IntegerList, Members: &m_IntegerList, Type: smithy.ShapeTypeList, Ext: &ext[208]})
-var sQualificationRequirement_LocaleValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocaleValues", ID: &i_LocaleList, Members: &m_LocaleList, Type: smithy.ShapeTypeList, Ext: &ext[209]})
-var sQualificationRequirement_RequiredToPreview = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequiredToPreview", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[210]})
-var sQualificationRequirement_ActionsGuarded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionsGuarded", ID: &iHITAccessActions, Members: &mHITAccessActions, Type: smithy.ShapeTypeEnum, Ext: &ext[211]})
-var s_QualificationRequirementList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQualificationRequirement, Members: &mQualificationRequirement, Type: smithy.ShapeTypeStructure, Ext: &ext[213]})
-var sQualificationStatus_Granted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Granted", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[215]})
-var sQualificationStatus_Revoked = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revoked", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[216]})
-var sQualificationType_QualificationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[218]})
-var sQualificationType_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[219]})
-var sQualificationType_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[220]})
-var sQualificationType_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[221]})
-var sQualificationType_Keywords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Keywords", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[222]})
-var sQualificationType_QualificationTypeStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeStatus", ID: &iQualificationTypeStatus, Members: &mQualificationTypeStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[223]})
-var sQualificationType_Test = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Test", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[224]})
-var sQualificationType_TestDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TestDurationInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[225]})
-var sQualificationType_AnswerKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnswerKey", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[226]})
-var sQualificationType_RetryDelayInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryDelayInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[227]})
-var sQualificationType_IsRequestable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsRequestable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[228]})
-var sQualificationType_AutoGranted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoGranted", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[229]})
-var sQualificationType_AutoGrantedValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoGrantedValue", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[230]})
-var s_QualificationTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQualificationType, Members: &mQualificationType, Type: smithy.ShapeTypeStructure, Ext: &ext[232]})
-var sQualificationTypeStatus_Active = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Active", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[234]})
-var sQualificationTypeStatus_Inactive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Inactive", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[235]})
-var sRequestError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[237]})
-var sRequestError_TurkErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TurkErrorCode", ID: &i_TurkErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[238]})
-var sReviewableHITStatus_Reviewable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reviewable", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[241]})
-var sReviewableHITStatus_Reviewing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reviewing", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[242]})
-var sReviewActionDetail_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[244]})
-var sReviewActionDetail_ActionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[245]})
-var sReviewActionDetail_TargetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[246]})
-var sReviewActionDetail_TargetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[247]})
-var sReviewActionDetail_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iReviewActionStatus, Members: &mReviewActionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[248]})
-var sReviewActionDetail_CompleteTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompleteTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[249]})
-var sReviewActionDetail_Result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Result", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[250]})
-var sReviewActionDetail_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[251]})
-var s_ReviewActionDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReviewActionDetail, Members: &mReviewActionDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[253]})
-var sReviewActionStatus_Intended = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Intended", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[255]})
-var sReviewActionStatus_Succeeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Succeeded", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[256]})
-var sReviewActionStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[257]})
-var sReviewActionStatus_Cancelled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cancelled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[258]})
-var sReviewPolicy_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[260]})
-var sReviewPolicy_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_PolicyParameterList, Members: &m_PolicyParameterList, Type: smithy.ShapeTypeList, Ext: &ext[261]})
-var sReviewPolicyLevel_Assignment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Assignment", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[263]})
-var sReviewPolicyLevel_HIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[264]})
-var s_ReviewPolicyLevelList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReviewPolicyLevel, Members: &mReviewPolicyLevel, Type: smithy.ShapeTypeEnum, Ext: &ext[266]})
-var sReviewReport_ReviewResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReviewResults", ID: &i_ReviewResultDetailList, Members: &m_ReviewResultDetailList, Type: smithy.ShapeTypeList, Ext: &ext[268]})
-var sReviewReport_ReviewActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReviewActions", ID: &i_ReviewActionDetailList, Members: &m_ReviewActionDetailList, Type: smithy.ShapeTypeList, Ext: &ext[269]})
-var sReviewResultDetail_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[271]})
-var sReviewResultDetail_SubjectId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubjectId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[272]})
-var sReviewResultDetail_SubjectType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubjectType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[273]})
-var sReviewResultDetail_QuestionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuestionId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[274]})
-var sReviewResultDetail_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[275]})
-var sReviewResultDetail_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[276]})
-var s_ReviewResultDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReviewResultDetail, Members: &mReviewResultDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[278]})
-var sServiceFault_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[280]})
-var sServiceFault_TurkErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TurkErrorCode", ID: &i_TurkErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[281]})
-var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[284]})
-var sWorkerBlock_WorkerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerId", ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &ext[288]})
-var sWorkerBlock_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[289]})
-var s_WorkerBlockList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkerBlock, Members: &mWorkerBlock, Type: smithy.ShapeTypeStructure, Ext: &ext[291]})
-var sAcceptQualificationRequestRequest_QualificationRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationRequestId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[293]})
-var sAcceptQualificationRequestRequest_IntegerValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegerValue", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[294]})
-var sApproveAssignmentRequest_AssignmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[297]})
-var sApproveAssignmentRequest_RequesterFeedback = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterFeedback", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[298]})
-var sApproveAssignmentRequest_OverrideRejection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OverrideRejection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[299]})
-var sAssociateQualificationWithWorkerRequest_QualificationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[302]})
-var sAssociateQualificationWithWorkerRequest_WorkerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerId", ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &ext[303]})
-var sAssociateQualificationWithWorkerRequest_IntegerValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegerValue", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[304]})
-var sAssociateQualificationWithWorkerRequest_SendNotification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendNotification", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[305]})
-var sCreateAdditionalAssignmentsForHITRequest_HITId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[308]})
-var sCreateAdditionalAssignmentsForHITRequest_NumberOfAdditionalAssignments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfAdditionalAssignments", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[309]})
-var sCreateAdditionalAssignmentsForHITRequest_UniqueRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UniqueRequestToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &ext[310]})
-var sCreateHITRequest_MaxAssignments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxAssignments", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[313]})
-var sCreateHITRequest_AutoApprovalDelayInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoApprovalDelayInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[314]})
-var sCreateHITRequest_LifetimeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LifetimeInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[315]})
-var sCreateHITRequest_AssignmentDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentDurationInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[316]})
-var sCreateHITRequest_Reward = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reward", ID: &i_CurrencyAmount, Type: smithy.ShapeTypeString, Ext: &ext[317]})
-var sCreateHITRequest_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[318]})
-var sCreateHITRequest_Keywords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Keywords", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[319]})
-var sCreateHITRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[320]})
-var sCreateHITRequest_Question = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Question", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[321]})
-var sCreateHITRequest_RequesterAnnotation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterAnnotation", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[322]})
-var sCreateHITRequest_QualificationRequirements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationRequirements", ID: &i_QualificationRequirementList, Members: &m_QualificationRequirementList, Type: smithy.ShapeTypeList, Ext: &ext[323]})
-var sCreateHITRequest_UniqueRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UniqueRequestToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &ext[324]})
-var sCreateHITRequest_AssignmentReviewPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentReviewPolicy", ID: &iReviewPolicy, Members: &mReviewPolicy, Type: smithy.ShapeTypeStructure, Ext: &ext[325]})
-var sCreateHITRequest_HITReviewPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITReviewPolicy", ID: &iReviewPolicy, Members: &mReviewPolicy, Type: smithy.ShapeTypeStructure, Ext: &ext[326]})
-var sCreateHITRequest_HITLayoutId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITLayoutId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[327]})
-var sCreateHITRequest_HITLayoutParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITLayoutParameters", ID: &i_HITLayoutParameterList, Members: &m_HITLayoutParameterList, Type: smithy.ShapeTypeList, Ext: &ext[328]})
-var sCreateHITResponse_HIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIT", ID: &iHIT, Members: &mHIT, Type: smithy.ShapeTypeStructure, Ext: &ext[330]})
-var sCreateHITTypeRequest_AutoApprovalDelayInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoApprovalDelayInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[332]})
-var sCreateHITTypeRequest_AssignmentDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentDurationInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[333]})
-var sCreateHITTypeRequest_Reward = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reward", ID: &i_CurrencyAmount, Type: smithy.ShapeTypeString, Ext: &ext[334]})
-var sCreateHITTypeRequest_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[335]})
-var sCreateHITTypeRequest_Keywords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Keywords", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[336]})
-var sCreateHITTypeRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[337]})
-var sCreateHITTypeRequest_QualificationRequirements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationRequirements", ID: &i_QualificationRequirementList, Members: &m_QualificationRequirementList, Type: smithy.ShapeTypeList, Ext: &ext[338]})
-var sCreateHITTypeResponse_HITTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[340]})
-var sCreateHITWithHITTypeRequest_HITTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[342]})
-var sCreateHITWithHITTypeRequest_MaxAssignments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxAssignments", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[343]})
-var sCreateHITWithHITTypeRequest_LifetimeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LifetimeInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[344]})
-var sCreateHITWithHITTypeRequest_Question = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Question", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[345]})
-var sCreateHITWithHITTypeRequest_RequesterAnnotation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterAnnotation", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[346]})
-var sCreateHITWithHITTypeRequest_UniqueRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UniqueRequestToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &ext[347]})
-var sCreateHITWithHITTypeRequest_AssignmentReviewPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentReviewPolicy", ID: &iReviewPolicy, Members: &mReviewPolicy, Type: smithy.ShapeTypeStructure, Ext: &ext[348]})
-var sCreateHITWithHITTypeRequest_HITReviewPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITReviewPolicy", ID: &iReviewPolicy, Members: &mReviewPolicy, Type: smithy.ShapeTypeStructure, Ext: &ext[349]})
-var sCreateHITWithHITTypeRequest_HITLayoutId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITLayoutId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[350]})
-var sCreateHITWithHITTypeRequest_HITLayoutParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITLayoutParameters", ID: &i_HITLayoutParameterList, Members: &m_HITLayoutParameterList, Type: smithy.ShapeTypeList, Ext: &ext[351]})
-var sCreateHITWithHITTypeResponse_HIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIT", ID: &iHIT, Members: &mHIT, Type: smithy.ShapeTypeStructure, Ext: &ext[353]})
-var sCreateQualificationTypeRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[355]})
-var sCreateQualificationTypeRequest_Keywords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Keywords", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[356]})
-var sCreateQualificationTypeRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[357]})
-var sCreateQualificationTypeRequest_QualificationTypeStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeStatus", ID: &iQualificationTypeStatus, Members: &mQualificationTypeStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[358]})
-var sCreateQualificationTypeRequest_RetryDelayInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryDelayInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[359]})
-var sCreateQualificationTypeRequest_Test = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Test", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[360]})
-var sCreateQualificationTypeRequest_AnswerKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnswerKey", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[361]})
-var sCreateQualificationTypeRequest_TestDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TestDurationInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[362]})
-var sCreateQualificationTypeRequest_AutoGranted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoGranted", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[363]})
-var sCreateQualificationTypeRequest_AutoGrantedValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoGrantedValue", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[364]})
-var sCreateQualificationTypeResponse_QualificationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationType", ID: &iQualificationType, Members: &mQualificationType, Type: smithy.ShapeTypeStructure, Ext: &ext[366]})
-var sCreateWorkerBlockRequest_WorkerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerId", ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &ext[368]})
-var sCreateWorkerBlockRequest_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[369]})
-var sDeleteHITRequest_HITId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[372]})
-var sDeleteQualificationTypeRequest_QualificationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[375]})
-var sDeleteWorkerBlockRequest_WorkerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerId", ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &ext[378]})
-var sDeleteWorkerBlockRequest_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[379]})
-var sDisassociateQualificationFromWorkerRequest_WorkerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerId", ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &ext[382]})
-var sDisassociateQualificationFromWorkerRequest_QualificationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[383]})
-var sDisassociateQualificationFromWorkerRequest_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[384]})
-var sGetAccountBalanceResponse_AvailableBalance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailableBalance", ID: &i_CurrencyAmount, Type: smithy.ShapeTypeString, Ext: &ext[388]})
-var sGetAccountBalanceResponse_OnHoldBalance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnHoldBalance", ID: &i_CurrencyAmount, Type: smithy.ShapeTypeString, Ext: &ext[389]})
-var sGetAssignmentRequest_AssignmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[391]})
-var sGetAssignmentResponse_Assignment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Assignment", ID: &iAssignment, Members: &mAssignment, Type: smithy.ShapeTypeStructure, Ext: &ext[393]})
-var sGetAssignmentResponse_HIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIT", ID: &iHIT, Members: &mHIT, Type: smithy.ShapeTypeStructure, Ext: &ext[394]})
-var sGetFileUploadURLRequest_AssignmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[396]})
-var sGetFileUploadURLRequest_QuestionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuestionIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[397]})
-var sGetFileUploadURLResponse_FileUploadURL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileUploadURL", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[399]})
-var sGetHITRequest_HITId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[401]})
-var sGetHITResponse_HIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIT", ID: &iHIT, Members: &mHIT, Type: smithy.ShapeTypeStructure, Ext: &ext[403]})
-var sGetQualificationScoreRequest_QualificationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[405]})
-var sGetQualificationScoreRequest_WorkerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerId", ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &ext[406]})
-var sGetQualificationScoreResponse_Qualification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Qualification", ID: &iQualification, Members: &mQualification, Type: smithy.ShapeTypeStructure, Ext: &ext[408]})
-var sGetQualificationTypeRequest_QualificationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[410]})
-var sGetQualificationTypeResponse_QualificationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationType", ID: &iQualificationType, Members: &mQualificationType, Type: smithy.ShapeTypeStructure, Ext: &ext[412]})
-var sListAssignmentsForHITRequest_HITId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[414]})
-var sListAssignmentsForHITRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[415]})
-var sListAssignmentsForHITRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultSize, Type: smithy.ShapeTypeInteger, Ext: &ext[416]})
-var sListAssignmentsForHITRequest_AssignmentStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentStatuses", ID: &i_AssignmentStatusList, Members: &m_AssignmentStatusList, Type: smithy.ShapeTypeList, Ext: &ext[417]})
-var sListAssignmentsForHITResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[419]})
-var sListAssignmentsForHITResponse_NumResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[420]})
-var sListAssignmentsForHITResponse_Assignments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Assignments", ID: &i_AssignmentList, Members: &m_AssignmentList, Type: smithy.ShapeTypeList, Ext: &ext[421]})
-var sListBonusPaymentsRequest_HITId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[423]})
-var sListBonusPaymentsRequest_AssignmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[424]})
-var sListBonusPaymentsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[425]})
-var sListBonusPaymentsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultSize, Type: smithy.ShapeTypeInteger, Ext: &ext[426]})
-var sListBonusPaymentsResponse_NumResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[428]})
-var sListBonusPaymentsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[429]})
-var sListBonusPaymentsResponse_BonusPayments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BonusPayments", ID: &i_BonusPaymentList, Members: &m_BonusPaymentList, Type: smithy.ShapeTypeList, Ext: &ext[430]})
-var sListHITsForQualificationTypeRequest_QualificationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[432]})
-var sListHITsForQualificationTypeRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[433]})
-var sListHITsForQualificationTypeRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultSize, Type: smithy.ShapeTypeInteger, Ext: &ext[434]})
-var sListHITsForQualificationTypeResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[436]})
-var sListHITsForQualificationTypeResponse_NumResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[437]})
-var sListHITsForQualificationTypeResponse_HITs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITs", ID: &i_HITList, Members: &m_HITList, Type: smithy.ShapeTypeList, Ext: &ext[438]})
-var sListHITsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[440]})
-var sListHITsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultSize, Type: smithy.ShapeTypeInteger, Ext: &ext[441]})
-var sListHITsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[443]})
-var sListHITsResponse_NumResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[444]})
-var sListHITsResponse_HITs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITs", ID: &i_HITList, Members: &m_HITList, Type: smithy.ShapeTypeList, Ext: &ext[445]})
-var sListQualificationRequestsRequest_QualificationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[447]})
-var sListQualificationRequestsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[448]})
-var sListQualificationRequestsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultSize, Type: smithy.ShapeTypeInteger, Ext: &ext[449]})
-var sListQualificationRequestsResponse_NumResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[451]})
-var sListQualificationRequestsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[452]})
-var sListQualificationRequestsResponse_QualificationRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationRequests", ID: &i_QualificationRequestList, Members: &m_QualificationRequestList, Type: smithy.ShapeTypeList, Ext: &ext[453]})
-var sListQualificationTypesRequest_Query = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Query", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[455]})
-var sListQualificationTypesRequest_MustBeRequestable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MustBeRequestable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[456]})
-var sListQualificationTypesRequest_MustBeOwnedByCaller = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MustBeOwnedByCaller", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[457]})
-var sListQualificationTypesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[458]})
-var sListQualificationTypesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultSize, Type: smithy.ShapeTypeInteger, Ext: &ext[459]})
-var sListQualificationTypesResponse_NumResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[461]})
-var sListQualificationTypesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[462]})
-var sListQualificationTypesResponse_QualificationTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypes", ID: &i_QualificationTypeList, Members: &m_QualificationTypeList, Type: smithy.ShapeTypeList, Ext: &ext[463]})
-var sListReviewableHITsRequest_HITTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[465]})
-var sListReviewableHITsRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iReviewableHITStatus, Members: &mReviewableHITStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[466]})
-var sListReviewableHITsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[467]})
-var sListReviewableHITsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultSize, Type: smithy.ShapeTypeInteger, Ext: &ext[468]})
-var sListReviewableHITsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[470]})
-var sListReviewableHITsResponse_NumResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[471]})
-var sListReviewableHITsResponse_HITs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITs", ID: &i_HITList, Members: &m_HITList, Type: smithy.ShapeTypeList, Ext: &ext[472]})
-var sListReviewPolicyResultsForHITRequest_HITId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[474]})
-var sListReviewPolicyResultsForHITRequest_PolicyLevels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyLevels", ID: &i_ReviewPolicyLevelList, Members: &m_ReviewPolicyLevelList, Type: smithy.ShapeTypeList, Ext: &ext[475]})
-var sListReviewPolicyResultsForHITRequest_RetrieveActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetrieveActions", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[476]})
-var sListReviewPolicyResultsForHITRequest_RetrieveResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetrieveResults", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[477]})
-var sListReviewPolicyResultsForHITRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[478]})
-var sListReviewPolicyResultsForHITRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultSize, Type: smithy.ShapeTypeInteger, Ext: &ext[479]})
-var sListReviewPolicyResultsForHITResponse_HITId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[481]})
-var sListReviewPolicyResultsForHITResponse_AssignmentReviewPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentReviewPolicy", ID: &iReviewPolicy, Members: &mReviewPolicy, Type: smithy.ShapeTypeStructure, Ext: &ext[482]})
-var sListReviewPolicyResultsForHITResponse_HITReviewPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITReviewPolicy", ID: &iReviewPolicy, Members: &mReviewPolicy, Type: smithy.ShapeTypeStructure, Ext: &ext[483]})
-var sListReviewPolicyResultsForHITResponse_AssignmentReviewReport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentReviewReport", ID: &iReviewReport, Members: &mReviewReport, Type: smithy.ShapeTypeStructure, Ext: &ext[484]})
-var sListReviewPolicyResultsForHITResponse_HITReviewReport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITReviewReport", ID: &iReviewReport, Members: &mReviewReport, Type: smithy.ShapeTypeStructure, Ext: &ext[485]})
-var sListReviewPolicyResultsForHITResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[486]})
-var sListWorkerBlocksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[488]})
-var sListWorkerBlocksRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultSize, Type: smithy.ShapeTypeInteger, Ext: &ext[489]})
-var sListWorkerBlocksResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[491]})
-var sListWorkerBlocksResponse_NumResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[492]})
-var sListWorkerBlocksResponse_WorkerBlocks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerBlocks", ID: &i_WorkerBlockList, Members: &m_WorkerBlockList, Type: smithy.ShapeTypeList, Ext: &ext[493]})
-var sListWorkersWithQualificationTypeRequest_QualificationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[495]})
-var sListWorkersWithQualificationTypeRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iQualificationStatus, Members: &mQualificationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[496]})
-var sListWorkersWithQualificationTypeRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[497]})
-var sListWorkersWithQualificationTypeRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultSize, Type: smithy.ShapeTypeInteger, Ext: &ext[498]})
-var sListWorkersWithQualificationTypeResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[500]})
-var sListWorkersWithQualificationTypeResponse_NumResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[501]})
-var sListWorkersWithQualificationTypeResponse_Qualifications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Qualifications", ID: &i_QualificationList, Members: &m_QualificationList, Type: smithy.ShapeTypeList, Ext: &ext[502]})
-var sNotifyWorkersRequest_Subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subject", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[504]})
-var sNotifyWorkersRequest_MessageText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageText", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[505]})
-var sNotifyWorkersRequest_WorkerIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerIds", ID: &i_CustomerIdList, Members: &m_CustomerIdList, Type: smithy.ShapeTypeList, Ext: &ext[506]})
-var sNotifyWorkersResponse_NotifyWorkersFailureStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotifyWorkersFailureStatuses", ID: &i_NotifyWorkersFailureStatusList, Members: &m_NotifyWorkersFailureStatusList, Type: smithy.ShapeTypeList, Ext: &ext[508]})
-var sRejectAssignmentRequest_AssignmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[510]})
-var sRejectAssignmentRequest_RequesterFeedback = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterFeedback", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[511]})
-var sRejectQualificationRequestRequest_QualificationRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationRequestId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[514]})
-var sRejectQualificationRequestRequest_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[515]})
-var sSendBonusRequest_WorkerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerId", ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &ext[518]})
-var sSendBonusRequest_BonusAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BonusAmount", ID: &i_CurrencyAmount, Type: smithy.ShapeTypeString, Ext: &ext[519]})
-var sSendBonusRequest_AssignmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[520]})
-var sSendBonusRequest_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[521]})
-var sSendBonusRequest_UniqueRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UniqueRequestToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &ext[522]})
-var sSendTestEventNotificationRequest_Notification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notification", ID: &iNotificationSpecification, Members: &mNotificationSpecification, Type: smithy.ShapeTypeStructure, Ext: &ext[525]})
-var sSendTestEventNotificationRequest_TestEventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TestEventType", ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeEnum, Ext: &ext[526]})
-var sUpdateExpirationForHITRequest_HITId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[529]})
-var sUpdateExpirationForHITRequest_ExpireAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpireAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[530]})
-var sUpdateHITReviewStatusRequest_HITId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[533]})
-var sUpdateHITReviewStatusRequest_Revert = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revert", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[534]})
-var sUpdateHITTypeOfHITRequest_HITId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[537]})
-var sUpdateHITTypeOfHITRequest_HITTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[538]})
-var sUpdateNotificationSettingsRequest_HITTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[541]})
-var sUpdateNotificationSettingsRequest_Notification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notification", ID: &iNotificationSpecification, Members: &mNotificationSpecification, Type: smithy.ShapeTypeStructure, Ext: &ext[542]})
-var sUpdateNotificationSettingsRequest_Active = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Active", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[543]})
-var sUpdateQualificationTypeRequest_QualificationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &ext[546]})
-var sUpdateQualificationTypeRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[547]})
-var sUpdateQualificationTypeRequest_QualificationTypeStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeStatus", ID: &iQualificationTypeStatus, Members: &mQualificationTypeStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[548]})
-var sUpdateQualificationTypeRequest_Test = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Test", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[549]})
-var sUpdateQualificationTypeRequest_AnswerKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnswerKey", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[550]})
-var sUpdateQualificationTypeRequest_TestDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TestDurationInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[551]})
-var sUpdateQualificationTypeRequest_RetryDelayInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryDelayInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &ext[552]})
-var sUpdateQualificationTypeRequest_AutoGranted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoGranted", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[553]})
-var sUpdateQualificationTypeRequest_AutoGrantedValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoGrantedValue", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[554]})
-var sUpdateQualificationTypeResponse_QualificationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationType", ID: &iQualificationType, Members: &mQualificationType, Type: smithy.ShapeTypeStructure, Ext: &ext[556]})
+var sAssignment_AssignmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eAssignment_AssignmentId})
+var sAssignment_WorkerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerId", ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &eAssignment_WorkerId})
+var sAssignment_HITId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eAssignment_HITId})
+var sAssignment_AssignmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentStatus", ID: &iAssignmentStatus, Members: &mAssignmentStatus, Type: smithy.ShapeTypeEnum, Ext: &eAssignment_AssignmentStatus})
+var sAssignment_AutoApprovalTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoApprovalTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAssignment_AutoApprovalTime})
+var sAssignment_AcceptTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceptTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAssignment_AcceptTime})
+var sAssignment_SubmitTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubmitTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAssignment_SubmitTime})
+var sAssignment_ApprovalTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApprovalTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAssignment_ApprovalTime})
+var sAssignment_RejectionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RejectionTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAssignment_RejectionTime})
+var sAssignment_Deadline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deadline", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAssignment_Deadline})
+var sAssignment_Answer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Answer", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssignment_Answer})
+var sAssignment_RequesterFeedback = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterFeedback", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAssignment_RequesterFeedback})
+var s_AssignmentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssignment, Members: &mAssignment, Type: smithy.ShapeTypeStructure, Ext: &e_AssignmentList_member})
+var sAssignmentStatus_Submitted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Submitted", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAssignmentStatus_Submitted})
+var sAssignmentStatus_Approved = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Approved", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAssignmentStatus_Approved})
+var sAssignmentStatus_Rejected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rejected", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAssignmentStatus_Rejected})
+var s_AssignmentStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssignmentStatus, Members: &mAssignmentStatus, Type: smithy.ShapeTypeEnum, Ext: &e_AssignmentStatusList_member})
+var sBonusPayment_WorkerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerId", ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &eBonusPayment_WorkerId})
+var sBonusPayment_BonusAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BonusAmount", ID: &i_CurrencyAmount, Type: smithy.ShapeTypeString, Ext: &eBonusPayment_BonusAmount})
+var sBonusPayment_AssignmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eBonusPayment_AssignmentId})
+var sBonusPayment_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eBonusPayment_Reason})
+var sBonusPayment_GrantTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eBonusPayment_GrantTime})
+var s_BonusPaymentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBonusPayment, Members: &mBonusPayment, Type: smithy.ShapeTypeStructure, Ext: &e_BonusPaymentList_member})
+var sComparator_LessThan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LessThan", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparator_LessThan})
+var sComparator_LessThanOrEqualTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LessThanOrEqualTo", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparator_LessThanOrEqualTo})
+var sComparator_GreaterThan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GreaterThan", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparator_GreaterThan})
+var sComparator_GreaterThanOrEqualTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GreaterThanOrEqualTo", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparator_GreaterThanOrEqualTo})
+var sComparator_EqualTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EqualTo", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparator_EqualTo})
+var sComparator_NotEqualTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotEqualTo", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparator_NotEqualTo})
+var sComparator_Exists = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Exists", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparator_Exists})
+var sComparator_DoesNotExist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DoesNotExist", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparator_DoesNotExist})
+var sComparator_In = smithy.NewStaticSchema(smithy.StaticSchema{Member: "In", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparator_In})
+var sComparator_NotIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotIn", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComparator_NotIn})
+var s_CustomerIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &e_CustomerIdList_member})
+var sEventType_AssignmentAccepted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentAccepted", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventType_AssignmentAccepted})
+var sEventType_AssignmentAbandoned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentAbandoned", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventType_AssignmentAbandoned})
+var sEventType_AssignmentReturned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentReturned", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventType_AssignmentReturned})
+var sEventType_AssignmentSubmitted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentSubmitted", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventType_AssignmentSubmitted})
+var sEventType_AssignmentRejected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentRejected", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventType_AssignmentRejected})
+var sEventType_AssignmentApproved = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentApproved", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventType_AssignmentApproved})
+var sEventType_HITCreated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITCreated", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventType_HITCreated})
+var sEventType_HITExpired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITExpired", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventType_HITExpired})
+var sEventType_HITReviewable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITReviewable", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventType_HITReviewable})
+var sEventType_HITExtended = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITExtended", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventType_HITExtended})
+var sEventType_HITDisposed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITDisposed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventType_HITDisposed})
+var sEventType_Ping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ping", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventType_Ping})
+var s_EventTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeEnum, Ext: &e_EventTypeList_member})
+var sHIT_HITId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eHIT_HITId})
+var sHIT_HITTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eHIT_HITTypeId})
+var sHIT_HITGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITGroupId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eHIT_HITGroupId})
+var sHIT_HITLayoutId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITLayoutId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eHIT_HITLayoutId})
+var sHIT_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eHIT_CreationTime})
+var sHIT_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eHIT_Title})
+var sHIT_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eHIT_Description})
+var sHIT_Question = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Question", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eHIT_Question})
+var sHIT_Keywords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Keywords", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eHIT_Keywords})
+var sHIT_HITStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITStatus", ID: &iHITStatus, Members: &mHITStatus, Type: smithy.ShapeTypeEnum, Ext: &eHIT_HITStatus})
+var sHIT_MaxAssignments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxAssignments", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eHIT_MaxAssignments})
+var sHIT_Reward = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reward", ID: &i_CurrencyAmount, Type: smithy.ShapeTypeString, Ext: &eHIT_Reward})
+var sHIT_AutoApprovalDelayInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoApprovalDelayInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eHIT_AutoApprovalDelayInSeconds})
+var sHIT_Expiration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expiration", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eHIT_Expiration})
+var sHIT_AssignmentDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentDurationInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eHIT_AssignmentDurationInSeconds})
+var sHIT_RequesterAnnotation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterAnnotation", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eHIT_RequesterAnnotation})
+var sHIT_QualificationRequirements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationRequirements", ID: &i_QualificationRequirementList, Members: &m_QualificationRequirementList, Type: smithy.ShapeTypeList, Ext: &eHIT_QualificationRequirements})
+var sHIT_HITReviewStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITReviewStatus", ID: &iHITReviewStatus, Members: &mHITReviewStatus, Type: smithy.ShapeTypeEnum, Ext: &eHIT_HITReviewStatus})
+var sHIT_NumberOfAssignmentsPending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfAssignmentsPending", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eHIT_NumberOfAssignmentsPending})
+var sHIT_NumberOfAssignmentsAvailable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfAssignmentsAvailable", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eHIT_NumberOfAssignmentsAvailable})
+var sHIT_NumberOfAssignmentsCompleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfAssignmentsCompleted", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eHIT_NumberOfAssignmentsCompleted})
+var sHITAccessActions_Accept = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Accept", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHITAccessActions_Accept})
+var sHITAccessActions_PreviewAndAccept = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreviewAndAccept", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHITAccessActions_PreviewAndAccept})
+var sHITAccessActions_DiscoverPreviewAndAccept = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiscoverPreviewAndAccept", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHITAccessActions_DiscoverPreviewAndAccept})
+var sHITLayoutParameter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eHITLayoutParameter_Name})
+var sHITLayoutParameter_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eHITLayoutParameter_Value})
+var s_HITLayoutParameterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHITLayoutParameter, Members: &mHITLayoutParameter, Type: smithy.ShapeTypeStructure, Ext: &e_HITLayoutParameterList_member})
+var s_HITList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHIT, Members: &mHIT, Type: smithy.ShapeTypeStructure, Ext: &e_HITList_member})
+var sHITReviewStatus_NotReviewed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotReviewed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHITReviewStatus_NotReviewed})
+var sHITReviewStatus_MarkedForReview = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarkedForReview", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHITReviewStatus_MarkedForReview})
+var sHITReviewStatus_ReviewedAppropriate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReviewedAppropriate", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHITReviewStatus_ReviewedAppropriate})
+var sHITReviewStatus_ReviewedInappropriate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReviewedInappropriate", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHITReviewStatus_ReviewedInappropriate})
+var sHITStatus_Assignable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Assignable", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHITStatus_Assignable})
+var sHITStatus_Unassignable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unassignable", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHITStatus_Unassignable})
+var sHITStatus_Reviewable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reviewable", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHITStatus_Reviewable})
+var sHITStatus_Reviewing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reviewing", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHITStatus_Reviewing})
+var sHITStatus_Disposed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disposed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHITStatus_Disposed})
+var s_IntegerList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &e_IntegerList_member})
+var sLocale_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &i_CountryParameters, Type: smithy.ShapeTypeString, Ext: &eLocale_Country})
+var sLocale_Subdivision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdivision", ID: &i_CountryParameters, Type: smithy.ShapeTypeString, Ext: &eLocale_Subdivision})
+var s_LocaleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLocale, Members: &mLocale, Type: smithy.ShapeTypeStructure, Ext: &e_LocaleList_member})
+var sNotificationSpecification_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eNotificationSpecification_Destination})
+var sNotificationSpecification_Transport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Transport", ID: &iNotificationTransport, Members: &mNotificationTransport, Type: smithy.ShapeTypeEnum, Ext: &eNotificationSpecification_Transport})
+var sNotificationSpecification_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eNotificationSpecification_Version})
+var sNotificationSpecification_EventTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventTypes", ID: &i_EventTypeList, Members: &m_EventTypeList, Type: smithy.ShapeTypeList, Ext: &eNotificationSpecification_EventTypes})
+var sNotificationTransport_Email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Email", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNotificationTransport_Email})
+var sNotificationTransport_SQS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SQS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNotificationTransport_SQS})
+var sNotificationTransport_SNS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNotificationTransport_SNS})
+var sNotifyWorkersFailureCode_SoftFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SoftFailure", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNotifyWorkersFailureCode_SoftFailure})
+var sNotifyWorkersFailureCode_HardFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HardFailure", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNotifyWorkersFailureCode_HardFailure})
+var sNotifyWorkersFailureStatus_NotifyWorkersFailureCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotifyWorkersFailureCode", ID: &iNotifyWorkersFailureCode, Members: &mNotifyWorkersFailureCode, Type: smithy.ShapeTypeEnum, Ext: &eNotifyWorkersFailureStatus_NotifyWorkersFailureCode})
+var sNotifyWorkersFailureStatus_NotifyWorkersFailureMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotifyWorkersFailureMessage", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eNotifyWorkersFailureStatus_NotifyWorkersFailureMessage})
+var sNotifyWorkersFailureStatus_WorkerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerId", ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &eNotifyWorkersFailureStatus_WorkerId})
+var s_NotifyWorkersFailureStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNotifyWorkersFailureStatus, Members: &mNotifyWorkersFailureStatus, Type: smithy.ShapeTypeStructure, Ext: &e_NotifyWorkersFailureStatusList_member})
+var sParameterMapEntry_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eParameterMapEntry_Key})
+var sParameterMapEntry_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eParameterMapEntry_Values})
+var s_ParameterMapEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iParameterMapEntry, Members: &mParameterMapEntry, Type: smithy.ShapeTypeStructure, Ext: &e_ParameterMapEntryList_member})
+var sPolicyParameter_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePolicyParameter_Key})
+var sPolicyParameter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ePolicyParameter_Values})
+var sPolicyParameter_MapEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MapEntries", ID: &i_ParameterMapEntryList, Members: &m_ParameterMapEntryList, Type: smithy.ShapeTypeList, Ext: &ePolicyParameter_MapEntries})
+var s_PolicyParameterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPolicyParameter, Members: &mPolicyParameter, Type: smithy.ShapeTypeStructure, Ext: &e_PolicyParameterList_member})
+var sQualification_QualificationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eQualification_QualificationTypeId})
+var sQualification_WorkerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerId", ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &eQualification_WorkerId})
+var sQualification_GrantTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GrantTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eQualification_GrantTime})
+var sQualification_IntegerValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegerValue", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eQualification_IntegerValue})
+var sQualification_LocaleValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocaleValue", ID: &iLocale, Members: &mLocale, Type: smithy.ShapeTypeStructure, Ext: &eQualification_LocaleValue})
+var sQualification_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iQualificationStatus, Members: &mQualificationStatus, Type: smithy.ShapeTypeEnum, Ext: &eQualification_Status})
+var s_QualificationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQualification, Members: &mQualification, Type: smithy.ShapeTypeStructure, Ext: &e_QualificationList_member})
+var sQualificationRequest_QualificationRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationRequestId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eQualificationRequest_QualificationRequestId})
+var sQualificationRequest_QualificationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eQualificationRequest_QualificationTypeId})
+var sQualificationRequest_WorkerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerId", ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &eQualificationRequest_WorkerId})
+var sQualificationRequest_Test = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Test", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eQualificationRequest_Test})
+var sQualificationRequest_Answer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Answer", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eQualificationRequest_Answer})
+var sQualificationRequest_SubmitTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubmitTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eQualificationRequest_SubmitTime})
+var s_QualificationRequestList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQualificationRequest, Members: &mQualificationRequest, Type: smithy.ShapeTypeStructure, Ext: &e_QualificationRequestList_member})
+var sQualificationRequirement_QualificationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eQualificationRequirement_QualificationTypeId})
+var sQualificationRequirement_Comparator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Comparator", ID: &iComparator, Members: &mComparator, Type: smithy.ShapeTypeEnum, Ext: &eQualificationRequirement_Comparator})
+var sQualificationRequirement_IntegerValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegerValues", ID: &i_IntegerList, Members: &m_IntegerList, Type: smithy.ShapeTypeList, Ext: &eQualificationRequirement_IntegerValues})
+var sQualificationRequirement_LocaleValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocaleValues", ID: &i_LocaleList, Members: &m_LocaleList, Type: smithy.ShapeTypeList, Ext: &eQualificationRequirement_LocaleValues})
+var sQualificationRequirement_RequiredToPreview = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequiredToPreview", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eQualificationRequirement_RequiredToPreview})
+var sQualificationRequirement_ActionsGuarded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionsGuarded", ID: &iHITAccessActions, Members: &mHITAccessActions, Type: smithy.ShapeTypeEnum, Ext: &eQualificationRequirement_ActionsGuarded})
+var s_QualificationRequirementList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQualificationRequirement, Members: &mQualificationRequirement, Type: smithy.ShapeTypeStructure, Ext: &e_QualificationRequirementList_member})
+var sQualificationStatus_Granted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Granted", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQualificationStatus_Granted})
+var sQualificationStatus_Revoked = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revoked", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQualificationStatus_Revoked})
+var sQualificationType_QualificationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eQualificationType_QualificationTypeId})
+var sQualificationType_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eQualificationType_CreationTime})
+var sQualificationType_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eQualificationType_Name})
+var sQualificationType_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eQualificationType_Description})
+var sQualificationType_Keywords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Keywords", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eQualificationType_Keywords})
+var sQualificationType_QualificationTypeStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeStatus", ID: &iQualificationTypeStatus, Members: &mQualificationTypeStatus, Type: smithy.ShapeTypeEnum, Ext: &eQualificationType_QualificationTypeStatus})
+var sQualificationType_Test = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Test", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eQualificationType_Test})
+var sQualificationType_TestDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TestDurationInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eQualificationType_TestDurationInSeconds})
+var sQualificationType_AnswerKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnswerKey", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eQualificationType_AnswerKey})
+var sQualificationType_RetryDelayInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryDelayInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eQualificationType_RetryDelayInSeconds})
+var sQualificationType_IsRequestable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsRequestable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eQualificationType_IsRequestable})
+var sQualificationType_AutoGranted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoGranted", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eQualificationType_AutoGranted})
+var sQualificationType_AutoGrantedValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoGrantedValue", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eQualificationType_AutoGrantedValue})
+var s_QualificationTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQualificationType, Members: &mQualificationType, Type: smithy.ShapeTypeStructure, Ext: &e_QualificationTypeList_member})
+var sQualificationTypeStatus_Active = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Active", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQualificationTypeStatus_Active})
+var sQualificationTypeStatus_Inactive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Inactive", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQualificationTypeStatus_Inactive})
+var sRequestError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eRequestError_Message})
+var sRequestError_TurkErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TurkErrorCode", ID: &i_TurkErrorCode, Type: smithy.ShapeTypeString, Ext: &eRequestError_TurkErrorCode})
+var sReviewableHITStatus_Reviewable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reviewable", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReviewableHITStatus_Reviewable})
+var sReviewableHITStatus_Reviewing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reviewing", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReviewableHITStatus_Reviewing})
+var sReviewActionDetail_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eReviewActionDetail_ActionId})
+var sReviewActionDetail_ActionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReviewActionDetail_ActionName})
+var sReviewActionDetail_TargetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eReviewActionDetail_TargetId})
+var sReviewActionDetail_TargetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReviewActionDetail_TargetType})
+var sReviewActionDetail_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iReviewActionStatus, Members: &mReviewActionStatus, Type: smithy.ShapeTypeEnum, Ext: &eReviewActionDetail_Status})
+var sReviewActionDetail_CompleteTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompleteTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eReviewActionDetail_CompleteTime})
+var sReviewActionDetail_Result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Result", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReviewActionDetail_Result})
+var sReviewActionDetail_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReviewActionDetail_ErrorCode})
+var s_ReviewActionDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReviewActionDetail, Members: &mReviewActionDetail, Type: smithy.ShapeTypeStructure, Ext: &e_ReviewActionDetailList_member})
+var sReviewActionStatus_Intended = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Intended", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReviewActionStatus_Intended})
+var sReviewActionStatus_Succeeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Succeeded", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReviewActionStatus_Succeeded})
+var sReviewActionStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReviewActionStatus_Failed})
+var sReviewActionStatus_Cancelled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cancelled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReviewActionStatus_Cancelled})
+var sReviewPolicy_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReviewPolicy_PolicyName})
+var sReviewPolicy_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_PolicyParameterList, Members: &m_PolicyParameterList, Type: smithy.ShapeTypeList, Ext: &eReviewPolicy_Parameters})
+var sReviewPolicyLevel_Assignment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Assignment", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReviewPolicyLevel_Assignment})
+var sReviewPolicyLevel_HIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReviewPolicyLevel_HIT})
+var s_ReviewPolicyLevelList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReviewPolicyLevel, Members: &mReviewPolicyLevel, Type: smithy.ShapeTypeEnum, Ext: &e_ReviewPolicyLevelList_member})
+var sReviewReport_ReviewResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReviewResults", ID: &i_ReviewResultDetailList, Members: &m_ReviewResultDetailList, Type: smithy.ShapeTypeList, Ext: &eReviewReport_ReviewResults})
+var sReviewReport_ReviewActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReviewActions", ID: &i_ReviewActionDetailList, Members: &m_ReviewActionDetailList, Type: smithy.ShapeTypeList, Ext: &eReviewReport_ReviewActions})
+var sReviewResultDetail_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eReviewResultDetail_ActionId})
+var sReviewResultDetail_SubjectId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubjectId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eReviewResultDetail_SubjectId})
+var sReviewResultDetail_SubjectType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubjectType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReviewResultDetail_SubjectType})
+var sReviewResultDetail_QuestionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuestionId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eReviewResultDetail_QuestionId})
+var sReviewResultDetail_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReviewResultDetail_Key})
+var sReviewResultDetail_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eReviewResultDetail_Value})
+var s_ReviewResultDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReviewResultDetail, Members: &mReviewResultDetail, Type: smithy.ShapeTypeStructure, Ext: &e_ReviewResultDetailList_member})
+var sServiceFault_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eServiceFault_Message})
+var sServiceFault_TurkErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TurkErrorCode", ID: &i_TurkErrorCode, Type: smithy.ShapeTypeString, Ext: &eServiceFault_TurkErrorCode})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_StringList_member})
+var sWorkerBlock_WorkerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerId", ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &eWorkerBlock_WorkerId})
+var sWorkerBlock_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eWorkerBlock_Reason})
+var s_WorkerBlockList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkerBlock, Members: &mWorkerBlock, Type: smithy.ShapeTypeStructure, Ext: &e_WorkerBlockList_member})
+var sAcceptQualificationRequestRequest_QualificationRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationRequestId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAcceptQualificationRequestRequest_QualificationRequestId})
+var sAcceptQualificationRequestRequest_IntegerValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegerValue", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eAcceptQualificationRequestRequest_IntegerValue})
+var sApproveAssignmentRequest_AssignmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eApproveAssignmentRequest_AssignmentId})
+var sApproveAssignmentRequest_RequesterFeedback = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterFeedback", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eApproveAssignmentRequest_RequesterFeedback})
+var sApproveAssignmentRequest_OverrideRejection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OverrideRejection", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eApproveAssignmentRequest_OverrideRejection})
+var sAssociateQualificationWithWorkerRequest_QualificationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eAssociateQualificationWithWorkerRequest_QualificationTypeId})
+var sAssociateQualificationWithWorkerRequest_WorkerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerId", ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &eAssociateQualificationWithWorkerRequest_WorkerId})
+var sAssociateQualificationWithWorkerRequest_IntegerValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegerValue", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eAssociateQualificationWithWorkerRequest_IntegerValue})
+var sAssociateQualificationWithWorkerRequest_SendNotification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendNotification", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eAssociateQualificationWithWorkerRequest_SendNotification})
+var sCreateAdditionalAssignmentsForHITRequest_HITId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eCreateAdditionalAssignmentsForHITRequest_HITId})
+var sCreateAdditionalAssignmentsForHITRequest_NumberOfAdditionalAssignments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfAdditionalAssignments", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eCreateAdditionalAssignmentsForHITRequest_NumberOfAdditionalAssignments})
+var sCreateAdditionalAssignmentsForHITRequest_UniqueRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UniqueRequestToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateAdditionalAssignmentsForHITRequest_UniqueRequestToken})
+var sCreateHITRequest_MaxAssignments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxAssignments", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eCreateHITRequest_MaxAssignments})
+var sCreateHITRequest_AutoApprovalDelayInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoApprovalDelayInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eCreateHITRequest_AutoApprovalDelayInSeconds})
+var sCreateHITRequest_LifetimeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LifetimeInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eCreateHITRequest_LifetimeInSeconds})
+var sCreateHITRequest_AssignmentDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentDurationInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eCreateHITRequest_AssignmentDurationInSeconds})
+var sCreateHITRequest_Reward = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reward", ID: &i_CurrencyAmount, Type: smithy.ShapeTypeString, Ext: &eCreateHITRequest_Reward})
+var sCreateHITRequest_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateHITRequest_Title})
+var sCreateHITRequest_Keywords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Keywords", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateHITRequest_Keywords})
+var sCreateHITRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateHITRequest_Description})
+var sCreateHITRequest_Question = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Question", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateHITRequest_Question})
+var sCreateHITRequest_RequesterAnnotation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterAnnotation", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateHITRequest_RequesterAnnotation})
+var sCreateHITRequest_QualificationRequirements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationRequirements", ID: &i_QualificationRequirementList, Members: &m_QualificationRequirementList, Type: smithy.ShapeTypeList, Ext: &eCreateHITRequest_QualificationRequirements})
+var sCreateHITRequest_UniqueRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UniqueRequestToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateHITRequest_UniqueRequestToken})
+var sCreateHITRequest_AssignmentReviewPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentReviewPolicy", ID: &iReviewPolicy, Members: &mReviewPolicy, Type: smithy.ShapeTypeStructure, Ext: &eCreateHITRequest_AssignmentReviewPolicy})
+var sCreateHITRequest_HITReviewPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITReviewPolicy", ID: &iReviewPolicy, Members: &mReviewPolicy, Type: smithy.ShapeTypeStructure, Ext: &eCreateHITRequest_HITReviewPolicy})
+var sCreateHITRequest_HITLayoutId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITLayoutId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eCreateHITRequest_HITLayoutId})
+var sCreateHITRequest_HITLayoutParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITLayoutParameters", ID: &i_HITLayoutParameterList, Members: &m_HITLayoutParameterList, Type: smithy.ShapeTypeList, Ext: &eCreateHITRequest_HITLayoutParameters})
+var sCreateHITResponse_HIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIT", ID: &iHIT, Members: &mHIT, Type: smithy.ShapeTypeStructure, Ext: &eCreateHITResponse_HIT})
+var sCreateHITTypeRequest_AutoApprovalDelayInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoApprovalDelayInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eCreateHITTypeRequest_AutoApprovalDelayInSeconds})
+var sCreateHITTypeRequest_AssignmentDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentDurationInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eCreateHITTypeRequest_AssignmentDurationInSeconds})
+var sCreateHITTypeRequest_Reward = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reward", ID: &i_CurrencyAmount, Type: smithy.ShapeTypeString, Ext: &eCreateHITTypeRequest_Reward})
+var sCreateHITTypeRequest_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateHITTypeRequest_Title})
+var sCreateHITTypeRequest_Keywords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Keywords", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateHITTypeRequest_Keywords})
+var sCreateHITTypeRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateHITTypeRequest_Description})
+var sCreateHITTypeRequest_QualificationRequirements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationRequirements", ID: &i_QualificationRequirementList, Members: &m_QualificationRequirementList, Type: smithy.ShapeTypeList, Ext: &eCreateHITTypeRequest_QualificationRequirements})
+var sCreateHITTypeResponse_HITTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eCreateHITTypeResponse_HITTypeId})
+var sCreateHITWithHITTypeRequest_HITTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eCreateHITWithHITTypeRequest_HITTypeId})
+var sCreateHITWithHITTypeRequest_MaxAssignments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxAssignments", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eCreateHITWithHITTypeRequest_MaxAssignments})
+var sCreateHITWithHITTypeRequest_LifetimeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LifetimeInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eCreateHITWithHITTypeRequest_LifetimeInSeconds})
+var sCreateHITWithHITTypeRequest_Question = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Question", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateHITWithHITTypeRequest_Question})
+var sCreateHITWithHITTypeRequest_RequesterAnnotation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterAnnotation", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateHITWithHITTypeRequest_RequesterAnnotation})
+var sCreateHITWithHITTypeRequest_UniqueRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UniqueRequestToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eCreateHITWithHITTypeRequest_UniqueRequestToken})
+var sCreateHITWithHITTypeRequest_AssignmentReviewPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentReviewPolicy", ID: &iReviewPolicy, Members: &mReviewPolicy, Type: smithy.ShapeTypeStructure, Ext: &eCreateHITWithHITTypeRequest_AssignmentReviewPolicy})
+var sCreateHITWithHITTypeRequest_HITReviewPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITReviewPolicy", ID: &iReviewPolicy, Members: &mReviewPolicy, Type: smithy.ShapeTypeStructure, Ext: &eCreateHITWithHITTypeRequest_HITReviewPolicy})
+var sCreateHITWithHITTypeRequest_HITLayoutId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITLayoutId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eCreateHITWithHITTypeRequest_HITLayoutId})
+var sCreateHITWithHITTypeRequest_HITLayoutParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITLayoutParameters", ID: &i_HITLayoutParameterList, Members: &m_HITLayoutParameterList, Type: smithy.ShapeTypeList, Ext: &eCreateHITWithHITTypeRequest_HITLayoutParameters})
+var sCreateHITWithHITTypeResponse_HIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIT", ID: &iHIT, Members: &mHIT, Type: smithy.ShapeTypeStructure, Ext: &eCreateHITWithHITTypeResponse_HIT})
+var sCreateQualificationTypeRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateQualificationTypeRequest_Name})
+var sCreateQualificationTypeRequest_Keywords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Keywords", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateQualificationTypeRequest_Keywords})
+var sCreateQualificationTypeRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateQualificationTypeRequest_Description})
+var sCreateQualificationTypeRequest_QualificationTypeStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeStatus", ID: &iQualificationTypeStatus, Members: &mQualificationTypeStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateQualificationTypeRequest_QualificationTypeStatus})
+var sCreateQualificationTypeRequest_RetryDelayInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryDelayInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eCreateQualificationTypeRequest_RetryDelayInSeconds})
+var sCreateQualificationTypeRequest_Test = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Test", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateQualificationTypeRequest_Test})
+var sCreateQualificationTypeRequest_AnswerKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnswerKey", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateQualificationTypeRequest_AnswerKey})
+var sCreateQualificationTypeRequest_TestDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TestDurationInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eCreateQualificationTypeRequest_TestDurationInSeconds})
+var sCreateQualificationTypeRequest_AutoGranted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoGranted", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateQualificationTypeRequest_AutoGranted})
+var sCreateQualificationTypeRequest_AutoGrantedValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoGrantedValue", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eCreateQualificationTypeRequest_AutoGrantedValue})
+var sCreateQualificationTypeResponse_QualificationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationType", ID: &iQualificationType, Members: &mQualificationType, Type: smithy.ShapeTypeStructure, Ext: &eCreateQualificationTypeResponse_QualificationType})
+var sCreateWorkerBlockRequest_WorkerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerId", ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &eCreateWorkerBlockRequest_WorkerId})
+var sCreateWorkerBlockRequest_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreateWorkerBlockRequest_Reason})
+var sDeleteHITRequest_HITId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eDeleteHITRequest_HITId})
+var sDeleteQualificationTypeRequest_QualificationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eDeleteQualificationTypeRequest_QualificationTypeId})
+var sDeleteWorkerBlockRequest_WorkerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerId", ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &eDeleteWorkerBlockRequest_WorkerId})
+var sDeleteWorkerBlockRequest_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeleteWorkerBlockRequest_Reason})
+var sDisassociateQualificationFromWorkerRequest_WorkerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerId", ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &eDisassociateQualificationFromWorkerRequest_WorkerId})
+var sDisassociateQualificationFromWorkerRequest_QualificationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eDisassociateQualificationFromWorkerRequest_QualificationTypeId})
+var sDisassociateQualificationFromWorkerRequest_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDisassociateQualificationFromWorkerRequest_Reason})
+var sGetAccountBalanceResponse_AvailableBalance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailableBalance", ID: &i_CurrencyAmount, Type: smithy.ShapeTypeString, Ext: &eGetAccountBalanceResponse_AvailableBalance})
+var sGetAccountBalanceResponse_OnHoldBalance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnHoldBalance", ID: &i_CurrencyAmount, Type: smithy.ShapeTypeString, Ext: &eGetAccountBalanceResponse_OnHoldBalance})
+var sGetAssignmentRequest_AssignmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eGetAssignmentRequest_AssignmentId})
+var sGetAssignmentResponse_Assignment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Assignment", ID: &iAssignment, Members: &mAssignment, Type: smithy.ShapeTypeStructure, Ext: &eGetAssignmentResponse_Assignment})
+var sGetAssignmentResponse_HIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIT", ID: &iHIT, Members: &mHIT, Type: smithy.ShapeTypeStructure, Ext: &eGetAssignmentResponse_HIT})
+var sGetFileUploadURLRequest_AssignmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eGetFileUploadURLRequest_AssignmentId})
+var sGetFileUploadURLRequest_QuestionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuestionIdentifier", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetFileUploadURLRequest_QuestionIdentifier})
+var sGetFileUploadURLResponse_FileUploadURL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileUploadURL", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetFileUploadURLResponse_FileUploadURL})
+var sGetHITRequest_HITId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eGetHITRequest_HITId})
+var sGetHITResponse_HIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIT", ID: &iHIT, Members: &mHIT, Type: smithy.ShapeTypeStructure, Ext: &eGetHITResponse_HIT})
+var sGetQualificationScoreRequest_QualificationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eGetQualificationScoreRequest_QualificationTypeId})
+var sGetQualificationScoreRequest_WorkerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerId", ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &eGetQualificationScoreRequest_WorkerId})
+var sGetQualificationScoreResponse_Qualification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Qualification", ID: &iQualification, Members: &mQualification, Type: smithy.ShapeTypeStructure, Ext: &eGetQualificationScoreResponse_Qualification})
+var sGetQualificationTypeRequest_QualificationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eGetQualificationTypeRequest_QualificationTypeId})
+var sGetQualificationTypeResponse_QualificationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationType", ID: &iQualificationType, Members: &mQualificationType, Type: smithy.ShapeTypeStructure, Ext: &eGetQualificationTypeResponse_QualificationType})
+var sListAssignmentsForHITRequest_HITId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eListAssignmentsForHITRequest_HITId})
+var sListAssignmentsForHITRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListAssignmentsForHITRequest_NextToken})
+var sListAssignmentsForHITRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultSize, Type: smithy.ShapeTypeInteger, Ext: &eListAssignmentsForHITRequest_MaxResults})
+var sListAssignmentsForHITRequest_AssignmentStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentStatuses", ID: &i_AssignmentStatusList, Members: &m_AssignmentStatusList, Type: smithy.ShapeTypeList, Ext: &eListAssignmentsForHITRequest_AssignmentStatuses})
+var sListAssignmentsForHITResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListAssignmentsForHITResponse_NextToken})
+var sListAssignmentsForHITResponse_NumResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eListAssignmentsForHITResponse_NumResults})
+var sListAssignmentsForHITResponse_Assignments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Assignments", ID: &i_AssignmentList, Members: &m_AssignmentList, Type: smithy.ShapeTypeList, Ext: &eListAssignmentsForHITResponse_Assignments})
+var sListBonusPaymentsRequest_HITId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eListBonusPaymentsRequest_HITId})
+var sListBonusPaymentsRequest_AssignmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eListBonusPaymentsRequest_AssignmentId})
+var sListBonusPaymentsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListBonusPaymentsRequest_NextToken})
+var sListBonusPaymentsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultSize, Type: smithy.ShapeTypeInteger, Ext: &eListBonusPaymentsRequest_MaxResults})
+var sListBonusPaymentsResponse_NumResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eListBonusPaymentsResponse_NumResults})
+var sListBonusPaymentsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListBonusPaymentsResponse_NextToken})
+var sListBonusPaymentsResponse_BonusPayments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BonusPayments", ID: &i_BonusPaymentList, Members: &m_BonusPaymentList, Type: smithy.ShapeTypeList, Ext: &eListBonusPaymentsResponse_BonusPayments})
+var sListHITsForQualificationTypeRequest_QualificationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eListHITsForQualificationTypeRequest_QualificationTypeId})
+var sListHITsForQualificationTypeRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListHITsForQualificationTypeRequest_NextToken})
+var sListHITsForQualificationTypeRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultSize, Type: smithy.ShapeTypeInteger, Ext: &eListHITsForQualificationTypeRequest_MaxResults})
+var sListHITsForQualificationTypeResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListHITsForQualificationTypeResponse_NextToken})
+var sListHITsForQualificationTypeResponse_NumResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eListHITsForQualificationTypeResponse_NumResults})
+var sListHITsForQualificationTypeResponse_HITs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITs", ID: &i_HITList, Members: &m_HITList, Type: smithy.ShapeTypeList, Ext: &eListHITsForQualificationTypeResponse_HITs})
+var sListHITsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListHITsRequest_NextToken})
+var sListHITsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultSize, Type: smithy.ShapeTypeInteger, Ext: &eListHITsRequest_MaxResults})
+var sListHITsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListHITsResponse_NextToken})
+var sListHITsResponse_NumResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eListHITsResponse_NumResults})
+var sListHITsResponse_HITs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITs", ID: &i_HITList, Members: &m_HITList, Type: smithy.ShapeTypeList, Ext: &eListHITsResponse_HITs})
+var sListQualificationRequestsRequest_QualificationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eListQualificationRequestsRequest_QualificationTypeId})
+var sListQualificationRequestsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListQualificationRequestsRequest_NextToken})
+var sListQualificationRequestsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultSize, Type: smithy.ShapeTypeInteger, Ext: &eListQualificationRequestsRequest_MaxResults})
+var sListQualificationRequestsResponse_NumResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eListQualificationRequestsResponse_NumResults})
+var sListQualificationRequestsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListQualificationRequestsResponse_NextToken})
+var sListQualificationRequestsResponse_QualificationRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationRequests", ID: &i_QualificationRequestList, Members: &m_QualificationRequestList, Type: smithy.ShapeTypeList, Ext: &eListQualificationRequestsResponse_QualificationRequests})
+var sListQualificationTypesRequest_Query = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Query", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListQualificationTypesRequest_Query})
+var sListQualificationTypesRequest_MustBeRequestable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MustBeRequestable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eListQualificationTypesRequest_MustBeRequestable})
+var sListQualificationTypesRequest_MustBeOwnedByCaller = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MustBeOwnedByCaller", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eListQualificationTypesRequest_MustBeOwnedByCaller})
+var sListQualificationTypesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListQualificationTypesRequest_NextToken})
+var sListQualificationTypesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultSize, Type: smithy.ShapeTypeInteger, Ext: &eListQualificationTypesRequest_MaxResults})
+var sListQualificationTypesResponse_NumResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eListQualificationTypesResponse_NumResults})
+var sListQualificationTypesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListQualificationTypesResponse_NextToken})
+var sListQualificationTypesResponse_QualificationTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypes", ID: &i_QualificationTypeList, Members: &m_QualificationTypeList, Type: smithy.ShapeTypeList, Ext: &eListQualificationTypesResponse_QualificationTypes})
+var sListReviewableHITsRequest_HITTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eListReviewableHITsRequest_HITTypeId})
+var sListReviewableHITsRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iReviewableHITStatus, Members: &mReviewableHITStatus, Type: smithy.ShapeTypeEnum, Ext: &eListReviewableHITsRequest_Status})
+var sListReviewableHITsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListReviewableHITsRequest_NextToken})
+var sListReviewableHITsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultSize, Type: smithy.ShapeTypeInteger, Ext: &eListReviewableHITsRequest_MaxResults})
+var sListReviewableHITsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListReviewableHITsResponse_NextToken})
+var sListReviewableHITsResponse_NumResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eListReviewableHITsResponse_NumResults})
+var sListReviewableHITsResponse_HITs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITs", ID: &i_HITList, Members: &m_HITList, Type: smithy.ShapeTypeList, Ext: &eListReviewableHITsResponse_HITs})
+var sListReviewPolicyResultsForHITRequest_HITId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eListReviewPolicyResultsForHITRequest_HITId})
+var sListReviewPolicyResultsForHITRequest_PolicyLevels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyLevels", ID: &i_ReviewPolicyLevelList, Members: &m_ReviewPolicyLevelList, Type: smithy.ShapeTypeList, Ext: &eListReviewPolicyResultsForHITRequest_PolicyLevels})
+var sListReviewPolicyResultsForHITRequest_RetrieveActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetrieveActions", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eListReviewPolicyResultsForHITRequest_RetrieveActions})
+var sListReviewPolicyResultsForHITRequest_RetrieveResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetrieveResults", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eListReviewPolicyResultsForHITRequest_RetrieveResults})
+var sListReviewPolicyResultsForHITRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListReviewPolicyResultsForHITRequest_NextToken})
+var sListReviewPolicyResultsForHITRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultSize, Type: smithy.ShapeTypeInteger, Ext: &eListReviewPolicyResultsForHITRequest_MaxResults})
+var sListReviewPolicyResultsForHITResponse_HITId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eListReviewPolicyResultsForHITResponse_HITId})
+var sListReviewPolicyResultsForHITResponse_AssignmentReviewPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentReviewPolicy", ID: &iReviewPolicy, Members: &mReviewPolicy, Type: smithy.ShapeTypeStructure, Ext: &eListReviewPolicyResultsForHITResponse_AssignmentReviewPolicy})
+var sListReviewPolicyResultsForHITResponse_HITReviewPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITReviewPolicy", ID: &iReviewPolicy, Members: &mReviewPolicy, Type: smithy.ShapeTypeStructure, Ext: &eListReviewPolicyResultsForHITResponse_HITReviewPolicy})
+var sListReviewPolicyResultsForHITResponse_AssignmentReviewReport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentReviewReport", ID: &iReviewReport, Members: &mReviewReport, Type: smithy.ShapeTypeStructure, Ext: &eListReviewPolicyResultsForHITResponse_AssignmentReviewReport})
+var sListReviewPolicyResultsForHITResponse_HITReviewReport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITReviewReport", ID: &iReviewReport, Members: &mReviewReport, Type: smithy.ShapeTypeStructure, Ext: &eListReviewPolicyResultsForHITResponse_HITReviewReport})
+var sListReviewPolicyResultsForHITResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListReviewPolicyResultsForHITResponse_NextToken})
+var sListWorkerBlocksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListWorkerBlocksRequest_NextToken})
+var sListWorkerBlocksRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultSize, Type: smithy.ShapeTypeInteger, Ext: &eListWorkerBlocksRequest_MaxResults})
+var sListWorkerBlocksResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListWorkerBlocksResponse_NextToken})
+var sListWorkerBlocksResponse_NumResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eListWorkerBlocksResponse_NumResults})
+var sListWorkerBlocksResponse_WorkerBlocks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerBlocks", ID: &i_WorkerBlockList, Members: &m_WorkerBlockList, Type: smithy.ShapeTypeList, Ext: &eListWorkerBlocksResponse_WorkerBlocks})
+var sListWorkersWithQualificationTypeRequest_QualificationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eListWorkersWithQualificationTypeRequest_QualificationTypeId})
+var sListWorkersWithQualificationTypeRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iQualificationStatus, Members: &mQualificationStatus, Type: smithy.ShapeTypeEnum, Ext: &eListWorkersWithQualificationTypeRequest_Status})
+var sListWorkersWithQualificationTypeRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListWorkersWithQualificationTypeRequest_NextToken})
+var sListWorkersWithQualificationTypeRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultSize, Type: smithy.ShapeTypeInteger, Ext: &eListWorkersWithQualificationTypeRequest_MaxResults})
+var sListWorkersWithQualificationTypeResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListWorkersWithQualificationTypeResponse_NextToken})
+var sListWorkersWithQualificationTypeResponse_NumResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eListWorkersWithQualificationTypeResponse_NumResults})
+var sListWorkersWithQualificationTypeResponse_Qualifications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Qualifications", ID: &i_QualificationList, Members: &m_QualificationList, Type: smithy.ShapeTypeList, Ext: &eListWorkersWithQualificationTypeResponse_Qualifications})
+var sNotifyWorkersRequest_Subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subject", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eNotifyWorkersRequest_Subject})
+var sNotifyWorkersRequest_MessageText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageText", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eNotifyWorkersRequest_MessageText})
+var sNotifyWorkersRequest_WorkerIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerIds", ID: &i_CustomerIdList, Members: &m_CustomerIdList, Type: smithy.ShapeTypeList, Ext: &eNotifyWorkersRequest_WorkerIds})
+var sNotifyWorkersResponse_NotifyWorkersFailureStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotifyWorkersFailureStatuses", ID: &i_NotifyWorkersFailureStatusList, Members: &m_NotifyWorkersFailureStatusList, Type: smithy.ShapeTypeList, Ext: &eNotifyWorkersResponse_NotifyWorkersFailureStatuses})
+var sRejectAssignmentRequest_AssignmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eRejectAssignmentRequest_AssignmentId})
+var sRejectAssignmentRequest_RequesterFeedback = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterFeedback", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRejectAssignmentRequest_RequesterFeedback})
+var sRejectQualificationRequestRequest_QualificationRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationRequestId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRejectQualificationRequestRequest_QualificationRequestId})
+var sRejectQualificationRequestRequest_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eRejectQualificationRequestRequest_Reason})
+var sSendBonusRequest_WorkerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerId", ID: &i_CustomerId, Type: smithy.ShapeTypeString, Ext: &eSendBonusRequest_WorkerId})
+var sSendBonusRequest_BonusAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BonusAmount", ID: &i_CurrencyAmount, Type: smithy.ShapeTypeString, Ext: &eSendBonusRequest_BonusAmount})
+var sSendBonusRequest_AssignmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignmentId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eSendBonusRequest_AssignmentId})
+var sSendBonusRequest_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eSendBonusRequest_Reason})
+var sSendBonusRequest_UniqueRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UniqueRequestToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eSendBonusRequest_UniqueRequestToken})
+var sSendTestEventNotificationRequest_Notification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notification", ID: &iNotificationSpecification, Members: &mNotificationSpecification, Type: smithy.ShapeTypeStructure, Ext: &eSendTestEventNotificationRequest_Notification})
+var sSendTestEventNotificationRequest_TestEventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TestEventType", ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeEnum, Ext: &eSendTestEventNotificationRequest_TestEventType})
+var sUpdateExpirationForHITRequest_HITId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eUpdateExpirationForHITRequest_HITId})
+var sUpdateExpirationForHITRequest_ExpireAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpireAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateExpirationForHITRequest_ExpireAt})
+var sUpdateHITReviewStatusRequest_HITId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eUpdateHITReviewStatusRequest_HITId})
+var sUpdateHITReviewStatusRequest_Revert = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revert", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateHITReviewStatusRequest_Revert})
+var sUpdateHITTypeOfHITRequest_HITId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eUpdateHITTypeOfHITRequest_HITId})
+var sUpdateHITTypeOfHITRequest_HITTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eUpdateHITTypeOfHITRequest_HITTypeId})
+var sUpdateNotificationSettingsRequest_HITTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HITTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eUpdateNotificationSettingsRequest_HITTypeId})
+var sUpdateNotificationSettingsRequest_Notification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notification", ID: &iNotificationSpecification, Members: &mNotificationSpecification, Type: smithy.ShapeTypeStructure, Ext: &eUpdateNotificationSettingsRequest_Notification})
+var sUpdateNotificationSettingsRequest_Active = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Active", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateNotificationSettingsRequest_Active})
+var sUpdateQualificationTypeRequest_QualificationTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeId", ID: &i_EntityId, Type: smithy.ShapeTypeString, Ext: &eUpdateQualificationTypeRequest_QualificationTypeId})
+var sUpdateQualificationTypeRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateQualificationTypeRequest_Description})
+var sUpdateQualificationTypeRequest_QualificationTypeStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationTypeStatus", ID: &iQualificationTypeStatus, Members: &mQualificationTypeStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateQualificationTypeRequest_QualificationTypeStatus})
+var sUpdateQualificationTypeRequest_Test = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Test", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateQualificationTypeRequest_Test})
+var sUpdateQualificationTypeRequest_AnswerKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnswerKey", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUpdateQualificationTypeRequest_AnswerKey})
+var sUpdateQualificationTypeRequest_TestDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TestDurationInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eUpdateQualificationTypeRequest_TestDurationInSeconds})
+var sUpdateQualificationTypeRequest_RetryDelayInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryDelayInSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong, Ext: &eUpdateQualificationTypeRequest_RetryDelayInSeconds})
+var sUpdateQualificationTypeRequest_AutoGranted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoGranted", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateQualificationTypeRequest_AutoGranted})
+var sUpdateQualificationTypeRequest_AutoGrantedValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoGrantedValue", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eUpdateQualificationTypeRequest_AutoGrantedValue})
+var sUpdateQualificationTypeResponse_QualificationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationType", ID: &iQualificationType, Members: &mQualificationType, Type: smithy.ShapeTypeStructure, Ext: &eUpdateQualificationTypeResponse_QualificationType})
 
 var AcceptQualificationRequest = &sAcceptQualificationRequest
 

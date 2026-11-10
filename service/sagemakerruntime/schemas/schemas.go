@@ -7,9 +7,117 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [109]smithy.SchemaExtensions
+var (
+	eInvokeEndpoint                                                  smithy.SchemaExtensions
+	eInvokeEndpointAsync                                             smithy.SchemaExtensions
+	eInvokeEndpointWithResponseStream                                smithy.SchemaExtensions
+	e_AmazonSageMakerRuntime                                         smithy.SchemaExtensions
+	e_AsyncBodyBlob                                                  smithy.SchemaExtensions
+	e_BodyBlob                                                       smithy.SchemaExtensions
+	e_CustomAttributesHeader                                         smithy.SchemaExtensions
+	e_EnableExplanationsHeader                                       smithy.SchemaExtensions
+	e_EndpointName                                                   smithy.SchemaExtensions
+	e_ErrorCode                                                      smithy.SchemaExtensions
+	e_FilenameHeader                                                 smithy.SchemaExtensions
+	e_Header                                                         smithy.SchemaExtensions
+	e_InferenceComponentHeader                                       smithy.SchemaExtensions
+	e_InferenceId                                                    smithy.SchemaExtensions
+	e_InputLocationHeader                                            smithy.SchemaExtensions
+	eInternalDependencyException                                     smithy.SchemaExtensions
+	eInternalDependencyException_Message                             smithy.SchemaExtensions
+	eInternalFailure                                                 smithy.SchemaExtensions
+	eInternalFailure_Message                                         smithy.SchemaExtensions
+	eInternalStreamFailure                                           smithy.SchemaExtensions
+	eInternalStreamFailure_Message                                   smithy.SchemaExtensions
+	e_InvocationTimeoutSecondsHeader                                 smithy.SchemaExtensions
+	e_LogStreamArn                                                   smithy.SchemaExtensions
+	e_Message                                                        smithy.SchemaExtensions
+	eModelError                                                      smithy.SchemaExtensions
+	eModelError_Message                                              smithy.SchemaExtensions
+	eModelError_OriginalStatusCode                                   smithy.SchemaExtensions
+	eModelError_OriginalMessage                                      smithy.SchemaExtensions
+	eModelError_LogStreamArn                                         smithy.SchemaExtensions
+	eModelNotReadyException                                          smithy.SchemaExtensions
+	eModelNotReadyException_Message                                  smithy.SchemaExtensions
+	eModelStreamError                                                smithy.SchemaExtensions
+	eModelStreamError_Message                                        smithy.SchemaExtensions
+	eModelStreamError_ErrorCode                                      smithy.SchemaExtensions
+	e_NewSessionResponseHeader                                       smithy.SchemaExtensions
+	e_PartBlob                                                       smithy.SchemaExtensions
+	ePayloadPart                                                     smithy.SchemaExtensions
+	ePayloadPart_Bytes                                               smithy.SchemaExtensions
+	e_PrefixAwareIdHeader                                            smithy.SchemaExtensions
+	e_RequestTTLSecondsHeader                                        smithy.SchemaExtensions
+	eResponseStream                                                  smithy.SchemaExtensions
+	eResponseStream_PayloadPart                                      smithy.SchemaExtensions
+	eResponseStream_ModelStreamError                                 smithy.SchemaExtensions
+	eResponseStream_InternalStreamFailure                            smithy.SchemaExtensions
+	e_S3OutputPathExtensionHeader                                    smithy.SchemaExtensions
+	eServiceUnavailable                                              smithy.SchemaExtensions
+	eServiceUnavailable_Message                                      smithy.SchemaExtensions
+	e_SessionIdHeader                                                smithy.SchemaExtensions
+	e_SessionIdOrNewSessionConstantHeader                            smithy.SchemaExtensions
+	e_StatusCode                                                     smithy.SchemaExtensions
+	e_TargetContainerHostnameHeader                                  smithy.SchemaExtensions
+	e_TargetModelHeader                                              smithy.SchemaExtensions
+	e_TargetVariantHeader                                            smithy.SchemaExtensions
+	eValidationError                                                 smithy.SchemaExtensions
+	eValidationError_Message                                         smithy.SchemaExtensions
+	eInvokeEndpointAsyncInput                                        smithy.SchemaExtensions
+	eInvokeEndpointAsyncInput_EndpointName                           smithy.SchemaExtensions
+	eInvokeEndpointAsyncInput_ContentType                            smithy.SchemaExtensions
+	eInvokeEndpointAsyncInput_Accept                                 smithy.SchemaExtensions
+	eInvokeEndpointAsyncInput_CustomAttributes                       smithy.SchemaExtensions
+	eInvokeEndpointAsyncInput_InferenceId                            smithy.SchemaExtensions
+	eInvokeEndpointAsyncInput_InputLocation                          smithy.SchemaExtensions
+	eInvokeEndpointAsyncInput_S3OutputPathExtension                  smithy.SchemaExtensions
+	eInvokeEndpointAsyncInput_Filename                               smithy.SchemaExtensions
+	eInvokeEndpointAsyncInput_RequestTTLSeconds                      smithy.SchemaExtensions
+	eInvokeEndpointAsyncInput_InvocationTimeoutSeconds               smithy.SchemaExtensions
+	eInvokeEndpointAsyncInput_Body                                   smithy.SchemaExtensions
+	eInvokeEndpointAsyncOutput                                       smithy.SchemaExtensions
+	eInvokeEndpointAsyncOutput_InferenceId                           smithy.SchemaExtensions
+	eInvokeEndpointAsyncOutput_OutputLocation                        smithy.SchemaExtensions
+	eInvokeEndpointAsyncOutput_FailureLocation                       smithy.SchemaExtensions
+	eInvokeEndpointInput                                             smithy.SchemaExtensions
+	eInvokeEndpointInput_EndpointName                                smithy.SchemaExtensions
+	eInvokeEndpointInput_Body                                        smithy.SchemaExtensions
+	eInvokeEndpointInput_ContentType                                 smithy.SchemaExtensions
+	eInvokeEndpointInput_Accept                                      smithy.SchemaExtensions
+	eInvokeEndpointInput_CustomAttributes                            smithy.SchemaExtensions
+	eInvokeEndpointInput_TargetModel                                 smithy.SchemaExtensions
+	eInvokeEndpointInput_TargetVariant                               smithy.SchemaExtensions
+	eInvokeEndpointInput_TargetContainerHostname                     smithy.SchemaExtensions
+	eInvokeEndpointInput_InferenceId                                 smithy.SchemaExtensions
+	eInvokeEndpointInput_EnableExplanations                          smithy.SchemaExtensions
+	eInvokeEndpointInput_InferenceComponentName                      smithy.SchemaExtensions
+	eInvokeEndpointInput_SessionId                                   smithy.SchemaExtensions
+	eInvokeEndpointInput_PrefixAwareId                               smithy.SchemaExtensions
+	eInvokeEndpointOutput                                            smithy.SchemaExtensions
+	eInvokeEndpointOutput_Body                                       smithy.SchemaExtensions
+	eInvokeEndpointOutput_ContentType                                smithy.SchemaExtensions
+	eInvokeEndpointOutput_InvokedProductionVariant                   smithy.SchemaExtensions
+	eInvokeEndpointOutput_CustomAttributes                           smithy.SchemaExtensions
+	eInvokeEndpointOutput_NewSessionId                               smithy.SchemaExtensions
+	eInvokeEndpointOutput_ClosedSessionId                            smithy.SchemaExtensions
+	eInvokeEndpointWithResponseStreamInput                           smithy.SchemaExtensions
+	eInvokeEndpointWithResponseStreamInput_EndpointName              smithy.SchemaExtensions
+	eInvokeEndpointWithResponseStreamInput_Body                      smithy.SchemaExtensions
+	eInvokeEndpointWithResponseStreamInput_ContentType               smithy.SchemaExtensions
+	eInvokeEndpointWithResponseStreamInput_Accept                    smithy.SchemaExtensions
+	eInvokeEndpointWithResponseStreamInput_CustomAttributes          smithy.SchemaExtensions
+	eInvokeEndpointWithResponseStreamInput_TargetVariant             smithy.SchemaExtensions
+	eInvokeEndpointWithResponseStreamInput_TargetContainerHostname   smithy.SchemaExtensions
+	eInvokeEndpointWithResponseStreamInput_InferenceId               smithy.SchemaExtensions
+	eInvokeEndpointWithResponseStreamInput_InferenceComponentName    smithy.SchemaExtensions
+	eInvokeEndpointWithResponseStreamInput_SessionId                 smithy.SchemaExtensions
+	eInvokeEndpointWithResponseStreamInput_PrefixAwareId             smithy.SchemaExtensions
+	eInvokeEndpointWithResponseStreamOutput                          smithy.SchemaExtensions
+	eInvokeEndpointWithResponseStreamOutput_Body                     smithy.SchemaExtensions
+	eInvokeEndpointWithResponseStreamOutput_ContentType              smithy.SchemaExtensions
+	eInvokeEndpointWithResponseStreamOutput_InvokedProductionVariant smithy.SchemaExtensions
+	eInvokeEndpointWithResponseStreamOutput_CustomAttributes         smithy.SchemaExtensions
+)
 
 var (
 	iInvokeEndpoint                         = smithy.ShapeID{Namespace: "com.amazonaws.sagemakerruntime", Name: "InvokeEndpoint"}
@@ -133,116 +241,116 @@ var mInvokeEndpointWithResponseStreamInput = smithy.SchemaMembers{List: []*smith
 }}
 var mInvokeEndpointWithResponseStreamOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sInvokeEndpointWithResponseStreamOutput_Body, &sInvokeEndpointWithResponseStreamOutput_ContentType, &sInvokeEndpointWithResponseStreamOutput_InvokedProductionVariant, &sInvokeEndpointWithResponseStreamOutput_CustomAttributes}}
 
-var sInvokeEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeEndpoint, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sInvokeEndpointAsync = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeEndpointAsync, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sInvokeEndpointWithResponseStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeEndpointWithResponseStream, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var s_AmazonSageMakerRuntime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonSageMakerRuntime, Type: smithy.ShapeTypeService, Ext: &ext[3]})
-var s_AsyncBodyBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AsyncBodyBlob, Traits: &t3, Type: smithy.ShapeTypeBlob, Ext: &ext[4]})
-var s_BodyBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BodyBlob, Traits: &t3, Type: smithy.ShapeTypeBlob, Ext: &ext[5]})
-var s_CustomAttributesHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomAttributesHeader, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[6]})
-var s_EnableExplanationsHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnableExplanationsHeader, Type: smithy.ShapeTypeString, Ext: &ext[7]})
-var s_EndpointName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndpointName, Type: smithy.ShapeTypeString, Ext: &ext[8]})
-var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[9]})
-var s_FilenameHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilenameHeader, Type: smithy.ShapeTypeString, Ext: &ext[10]})
-var s_Header = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Header, Type: smithy.ShapeTypeString, Ext: &ext[11]})
-var s_InferenceComponentHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InferenceComponentHeader, Type: smithy.ShapeTypeString, Ext: &ext[12]})
-var s_InferenceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InferenceId, Type: smithy.ShapeTypeString, Ext: &ext[13]})
-var s_InputLocationHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InputLocationHeader, Type: smithy.ShapeTypeString, Ext: &ext[14]})
-var sInternalDependencyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalDependencyException, Members: &mInternalDependencyException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &ext[15]})
-var sInternalFailure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalFailure, Members: &mInternalFailure, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &ext[17]})
-var sInternalStreamFailure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalStreamFailure, Members: &mInternalStreamFailure, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &ext[19]})
-var s_InvocationTimeoutSecondsHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvocationTimeoutSecondsHeader, Type: smithy.ShapeTypeInteger, Ext: &ext[21]})
-var s_LogStreamArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogStreamArn, Type: smithy.ShapeTypeString, Ext: &ext[22]})
-var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[23]})
-var sModelError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelError, Members: &mModelError, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &ext[24]})
-var sModelNotReadyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelNotReadyException, Members: &mModelNotReadyException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &ext[29]})
-var sModelStreamError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelStreamError, Members: &mModelStreamError, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &ext[31]})
-var s_NewSessionResponseHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NewSessionResponseHeader, Type: smithy.ShapeTypeString, Ext: &ext[34]})
-var s_PartBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartBlob, Traits: &t3, Type: smithy.ShapeTypeBlob, Ext: &ext[35]})
-var sPayloadPart = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPayloadPart, Members: &mPayloadPart, Type: smithy.ShapeTypeStructure, Ext: &ext[36]})
-var s_PrefixAwareIdHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrefixAwareIdHeader, Type: smithy.ShapeTypeString, Ext: &ext[38]})
-var s_RequestTTLSecondsHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestTTLSecondsHeader, Type: smithy.ShapeTypeInteger, Ext: &ext[39]})
-var sResponseStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResponseStream, Members: &mResponseStream, Traits: &t11, Type: smithy.ShapeTypeUnion, Ext: &ext[40]})
-var s_S3OutputPathExtensionHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3OutputPathExtensionHeader, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var sServiceUnavailable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailable, Members: &mServiceUnavailable, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &ext[45]})
-var s_SessionIdHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionIdHeader, Type: smithy.ShapeTypeString, Ext: &ext[47]})
-var s_SessionIdOrNewSessionConstantHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionIdOrNewSessionConstantHeader, Type: smithy.ShapeTypeString, Ext: &ext[48]})
-var s_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusCode, Type: smithy.ShapeTypeInteger, Ext: &ext[49]})
-var s_TargetContainerHostnameHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetContainerHostnameHeader, Type: smithy.ShapeTypeString, Ext: &ext[50]})
-var s_TargetModelHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetModelHeader, Type: smithy.ShapeTypeString, Ext: &ext[51]})
-var s_TargetVariantHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetVariantHeader, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var sValidationError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationError, Members: &mValidationError, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &ext[53]})
-var sInvokeEndpointAsyncInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeEndpointAsyncInput, Members: &mInvokeEndpointAsyncInput, Type: smithy.ShapeTypeStructure, Ext: &ext[55]})
-var sInvokeEndpointAsyncOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeEndpointAsyncOutput, Members: &mInvokeEndpointAsyncOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[67]})
-var sInvokeEndpointInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeEndpointInput, Members: &mInvokeEndpointInput, Type: smithy.ShapeTypeStructure, Ext: &ext[71]})
-var sInvokeEndpointOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeEndpointOutput, Members: &mInvokeEndpointOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[85]})
-var sInvokeEndpointWithResponseStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeEndpointWithResponseStreamInput, Members: &mInvokeEndpointWithResponseStreamInput, Type: smithy.ShapeTypeStructure, Ext: &ext[92]})
-var sInvokeEndpointWithResponseStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeEndpointWithResponseStreamOutput, Members: &mInvokeEndpointWithResponseStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[104]})
+var sInvokeEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeEndpoint, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eInvokeEndpoint})
+var sInvokeEndpointAsync = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeEndpointAsync, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eInvokeEndpointAsync})
+var sInvokeEndpointWithResponseStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeEndpointWithResponseStream, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eInvokeEndpointWithResponseStream})
+var s_AmazonSageMakerRuntime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonSageMakerRuntime, Type: smithy.ShapeTypeService, Ext: &e_AmazonSageMakerRuntime})
+var s_AsyncBodyBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AsyncBodyBlob, Traits: &t3, Type: smithy.ShapeTypeBlob, Ext: &e_AsyncBodyBlob})
+var s_BodyBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BodyBlob, Traits: &t3, Type: smithy.ShapeTypeBlob, Ext: &e_BodyBlob})
+var s_CustomAttributesHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomAttributesHeader, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &e_CustomAttributesHeader})
+var s_EnableExplanationsHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnableExplanationsHeader, Type: smithy.ShapeTypeString, Ext: &e_EnableExplanationsHeader})
+var s_EndpointName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndpointName, Type: smithy.ShapeTypeString, Ext: &e_EndpointName})
+var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &e_ErrorCode})
+var s_FilenameHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilenameHeader, Type: smithy.ShapeTypeString, Ext: &e_FilenameHeader})
+var s_Header = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Header, Type: smithy.ShapeTypeString, Ext: &e_Header})
+var s_InferenceComponentHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InferenceComponentHeader, Type: smithy.ShapeTypeString, Ext: &e_InferenceComponentHeader})
+var s_InferenceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InferenceId, Type: smithy.ShapeTypeString, Ext: &e_InferenceId})
+var s_InputLocationHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InputLocationHeader, Type: smithy.ShapeTypeString, Ext: &e_InputLocationHeader})
+var sInternalDependencyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalDependencyException, Members: &mInternalDependencyException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eInternalDependencyException})
+var sInternalFailure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalFailure, Members: &mInternalFailure, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eInternalFailure})
+var sInternalStreamFailure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalStreamFailure, Members: &mInternalStreamFailure, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eInternalStreamFailure})
+var s_InvocationTimeoutSecondsHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvocationTimeoutSecondsHeader, Type: smithy.ShapeTypeInteger, Ext: &e_InvocationTimeoutSecondsHeader})
+var s_LogStreamArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogStreamArn, Type: smithy.ShapeTypeString, Ext: &e_LogStreamArn})
+var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &e_Message})
+var sModelError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelError, Members: &mModelError, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eModelError})
+var sModelNotReadyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelNotReadyException, Members: &mModelNotReadyException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eModelNotReadyException})
+var sModelStreamError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelStreamError, Members: &mModelStreamError, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eModelStreamError})
+var s_NewSessionResponseHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NewSessionResponseHeader, Type: smithy.ShapeTypeString, Ext: &e_NewSessionResponseHeader})
+var s_PartBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartBlob, Traits: &t3, Type: smithy.ShapeTypeBlob, Ext: &e_PartBlob})
+var sPayloadPart = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPayloadPart, Members: &mPayloadPart, Type: smithy.ShapeTypeStructure, Ext: &ePayloadPart})
+var s_PrefixAwareIdHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrefixAwareIdHeader, Type: smithy.ShapeTypeString, Ext: &e_PrefixAwareIdHeader})
+var s_RequestTTLSecondsHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestTTLSecondsHeader, Type: smithy.ShapeTypeInteger, Ext: &e_RequestTTLSecondsHeader})
+var sResponseStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResponseStream, Members: &mResponseStream, Traits: &t11, Type: smithy.ShapeTypeUnion, Ext: &eResponseStream})
+var s_S3OutputPathExtensionHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3OutputPathExtensionHeader, Type: smithy.ShapeTypeString, Ext: &e_S3OutputPathExtensionHeader})
+var sServiceUnavailable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailable, Members: &mServiceUnavailable, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eServiceUnavailable})
+var s_SessionIdHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionIdHeader, Type: smithy.ShapeTypeString, Ext: &e_SessionIdHeader})
+var s_SessionIdOrNewSessionConstantHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionIdOrNewSessionConstantHeader, Type: smithy.ShapeTypeString, Ext: &e_SessionIdOrNewSessionConstantHeader})
+var s_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusCode, Type: smithy.ShapeTypeInteger, Ext: &e_StatusCode})
+var s_TargetContainerHostnameHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetContainerHostnameHeader, Type: smithy.ShapeTypeString, Ext: &e_TargetContainerHostnameHeader})
+var s_TargetModelHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetModelHeader, Type: smithy.ShapeTypeString, Ext: &e_TargetModelHeader})
+var s_TargetVariantHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetVariantHeader, Type: smithy.ShapeTypeString, Ext: &e_TargetVariantHeader})
+var sValidationError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationError, Members: &mValidationError, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eValidationError})
+var sInvokeEndpointAsyncInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeEndpointAsyncInput, Members: &mInvokeEndpointAsyncInput, Type: smithy.ShapeTypeStructure, Ext: &eInvokeEndpointAsyncInput})
+var sInvokeEndpointAsyncOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeEndpointAsyncOutput, Members: &mInvokeEndpointAsyncOutput, Type: smithy.ShapeTypeStructure, Ext: &eInvokeEndpointAsyncOutput})
+var sInvokeEndpointInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeEndpointInput, Members: &mInvokeEndpointInput, Type: smithy.ShapeTypeStructure, Ext: &eInvokeEndpointInput})
+var sInvokeEndpointOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeEndpointOutput, Members: &mInvokeEndpointOutput, Type: smithy.ShapeTypeStructure, Ext: &eInvokeEndpointOutput})
+var sInvokeEndpointWithResponseStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeEndpointWithResponseStreamInput, Members: &mInvokeEndpointWithResponseStreamInput, Type: smithy.ShapeTypeStructure, Ext: &eInvokeEndpointWithResponseStreamInput})
+var sInvokeEndpointWithResponseStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeEndpointWithResponseStreamOutput, Members: &mInvokeEndpointWithResponseStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &eInvokeEndpointWithResponseStreamOutput})
 
-var sInternalDependencyException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[16]})
-var sInternalFailure_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[18]})
-var sInternalStreamFailure_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[20]})
-var sModelError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[25]})
-var sModelError_OriginalStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginalStatusCode", ID: &i_StatusCode, Type: smithy.ShapeTypeInteger, Ext: &ext[26]})
-var sModelError_OriginalMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginalMessage", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[27]})
-var sModelError_LogStreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogStreamArn", ID: &i_LogStreamArn, Type: smithy.ShapeTypeString, Ext: &ext[28]})
-var sModelNotReadyException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[30]})
-var sModelStreamError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var sModelStreamError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var sPayloadPart_Bytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bytes", ID: &i_PartBlob, Traits: &t10, Type: smithy.ShapeTypeBlob, Ext: &ext[37]})
-var sResponseStream_PayloadPart = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PayloadPart", ID: &iPayloadPart, Members: &mPayloadPart, Type: smithy.ShapeTypeStructure, Ext: &ext[41]})
-var sResponseStream_ModelStreamError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelStreamError", ID: &iModelStreamError, Members: &mModelStreamError, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &ext[42]})
-var sResponseStream_InternalStreamFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternalStreamFailure", ID: &iInternalStreamFailure, Members: &mInternalStreamFailure, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &ext[43]})
-var sServiceUnavailable_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[46]})
-var sValidationError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var sInvokeEndpointAsyncInput_EndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointName", ID: &i_EndpointName, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[56]})
-var sInvokeEndpointAsyncInput_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_Header, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var sInvokeEndpointAsyncInput_Accept = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Accept", ID: &i_Header, Traits: &t16, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var sInvokeEndpointAsyncInput_CustomAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomAttributes", ID: &i_CustomAttributesHeader, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[59]})
-var sInvokeEndpointAsyncInput_InferenceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceId", ID: &i_InferenceId, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &ext[60]})
-var sInvokeEndpointAsyncInput_InputLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputLocation", ID: &i_InputLocationHeader, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[61]})
-var sInvokeEndpointAsyncInput_S3OutputPathExtension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3OutputPathExtension", ID: &i_S3OutputPathExtensionHeader, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &ext[62]})
-var sInvokeEndpointAsyncInput_Filename = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filename", ID: &i_FilenameHeader, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[63]})
-var sInvokeEndpointAsyncInput_RequestTTLSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestTTLSeconds", ID: &i_RequestTTLSecondsHeader, Traits: &t22, Type: smithy.ShapeTypeInteger, Ext: &ext[64]})
-var sInvokeEndpointAsyncInput_InvocationTimeoutSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationTimeoutSeconds", ID: &i_InvocationTimeoutSecondsHeader, Traits: &t23, Type: smithy.ShapeTypeInteger, Ext: &ext[65]})
-var sInvokeEndpointAsyncInput_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &i_AsyncBodyBlob, Traits: &t24, Type: smithy.ShapeTypeBlob, Ext: &ext[66]})
-var sInvokeEndpointAsyncOutput_InferenceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceId", ID: &i_Header, Type: smithy.ShapeTypeString, Ext: &ext[68]})
-var sInvokeEndpointAsyncOutput_OutputLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputLocation", ID: &i_Header, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var sInvokeEndpointAsyncOutput_FailureLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureLocation", ID: &i_Header, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[70]})
-var sInvokeEndpointInput_EndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointName", ID: &i_EndpointName, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[72]})
-var sInvokeEndpointInput_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &i_BodyBlob, Traits: &t24, Type: smithy.ShapeTypeBlob, Ext: &ext[73]})
-var sInvokeEndpointInput_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_Header, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[74]})
-var sInvokeEndpointInput_Accept = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Accept", ID: &i_Header, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &ext[75]})
-var sInvokeEndpointInput_CustomAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomAttributes", ID: &i_CustomAttributesHeader, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[76]})
-var sInvokeEndpointInput_TargetModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetModel", ID: &i_TargetModelHeader, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &ext[77]})
-var sInvokeEndpointInput_TargetVariant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetVariant", ID: &i_TargetVariantHeader, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[78]})
-var sInvokeEndpointInput_TargetContainerHostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetContainerHostname", ID: &i_TargetContainerHostnameHeader, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[79]})
-var sInvokeEndpointInput_InferenceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceId", ID: &i_InferenceId, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &ext[80]})
-var sInvokeEndpointInput_EnableExplanations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableExplanations", ID: &i_EnableExplanationsHeader, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ext[81]})
-var sInvokeEndpointInput_InferenceComponentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceComponentName", ID: &i_InferenceComponentHeader, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[82]})
-var sInvokeEndpointInput_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_SessionIdOrNewSessionConstantHeader, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var sInvokeEndpointInput_PrefixAwareId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrefixAwareId", ID: &i_PrefixAwareIdHeader, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[84]})
-var sInvokeEndpointOutput_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &i_BodyBlob, Traits: &t24, Type: smithy.ShapeTypeBlob, Ext: &ext[86]})
-var sInvokeEndpointOutput_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_Header, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[87]})
-var sInvokeEndpointOutput_InvokedProductionVariant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvokedProductionVariant", ID: &i_Header, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[88]})
-var sInvokeEndpointOutput_CustomAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomAttributes", ID: &i_CustomAttributesHeader, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[89]})
-var sInvokeEndpointOutput_NewSessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewSessionId", ID: &i_NewSessionResponseHeader, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &ext[90]})
-var sInvokeEndpointOutput_ClosedSessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClosedSessionId", ID: &i_SessionIdHeader, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &ext[91]})
-var sInvokeEndpointWithResponseStreamInput_EndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointName", ID: &i_EndpointName, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[93]})
-var sInvokeEndpointWithResponseStreamInput_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &i_BodyBlob, Traits: &t24, Type: smithy.ShapeTypeBlob, Ext: &ext[94]})
-var sInvokeEndpointWithResponseStreamInput_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_Header, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[95]})
-var sInvokeEndpointWithResponseStreamInput_Accept = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Accept", ID: &i_Header, Traits: &t16, Type: smithy.ShapeTypeString, Ext: &ext[96]})
-var sInvokeEndpointWithResponseStreamInput_CustomAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomAttributes", ID: &i_CustomAttributesHeader, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[97]})
-var sInvokeEndpointWithResponseStreamInput_TargetVariant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetVariant", ID: &i_TargetVariantHeader, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &ext[98]})
-var sInvokeEndpointWithResponseStreamInput_TargetContainerHostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetContainerHostname", ID: &i_TargetContainerHostnameHeader, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[99]})
-var sInvokeEndpointWithResponseStreamInput_InferenceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceId", ID: &i_InferenceId, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &ext[100]})
-var sInvokeEndpointWithResponseStreamInput_InferenceComponentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceComponentName", ID: &i_InferenceComponentHeader, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[101]})
-var sInvokeEndpointWithResponseStreamInput_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_SessionIdHeader, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var sInvokeEndpointWithResponseStreamInput_PrefixAwareId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrefixAwareId", ID: &i_PrefixAwareIdHeader, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[103]})
-var sInvokeEndpointWithResponseStreamOutput_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &iResponseStream, Members: &mResponseStream, Traits: &t39, Type: smithy.ShapeTypeUnion, Ext: &ext[105]})
-var sInvokeEndpointWithResponseStreamOutput_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_Header, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &ext[106]})
-var sInvokeEndpointWithResponseStreamOutput_InvokedProductionVariant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvokedProductionVariant", ID: &i_Header, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[107]})
-var sInvokeEndpointWithResponseStreamOutput_CustomAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomAttributes", ID: &i_CustomAttributesHeader, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[108]})
+var sInternalDependencyException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInternalDependencyException_Message})
+var sInternalFailure_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInternalFailure_Message})
+var sInternalStreamFailure_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInternalStreamFailure_Message})
+var sModelError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eModelError_Message})
+var sModelError_OriginalStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginalStatusCode", ID: &i_StatusCode, Type: smithy.ShapeTypeInteger, Ext: &eModelError_OriginalStatusCode})
+var sModelError_OriginalMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginalMessage", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eModelError_OriginalMessage})
+var sModelError_LogStreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogStreamArn", ID: &i_LogStreamArn, Type: smithy.ShapeTypeString, Ext: &eModelError_LogStreamArn})
+var sModelNotReadyException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eModelNotReadyException_Message})
+var sModelStreamError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eModelStreamError_Message})
+var sModelStreamError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eModelStreamError_ErrorCode})
+var sPayloadPart_Bytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bytes", ID: &i_PartBlob, Traits: &t10, Type: smithy.ShapeTypeBlob, Ext: &ePayloadPart_Bytes})
+var sResponseStream_PayloadPart = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PayloadPart", ID: &iPayloadPart, Members: &mPayloadPart, Type: smithy.ShapeTypeStructure, Ext: &eResponseStream_PayloadPart})
+var sResponseStream_ModelStreamError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelStreamError", ID: &iModelStreamError, Members: &mModelStreamError, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eResponseStream_ModelStreamError})
+var sResponseStream_InternalStreamFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternalStreamFailure", ID: &iInternalStreamFailure, Members: &mInternalStreamFailure, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eResponseStream_InternalStreamFailure})
+var sServiceUnavailable_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailable_Message})
+var sValidationError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eValidationError_Message})
+var sInvokeEndpointAsyncInput_EndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointName", ID: &i_EndpointName, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointAsyncInput_EndpointName})
+var sInvokeEndpointAsyncInput_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_Header, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointAsyncInput_ContentType})
+var sInvokeEndpointAsyncInput_Accept = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Accept", ID: &i_Header, Traits: &t16, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointAsyncInput_Accept})
+var sInvokeEndpointAsyncInput_CustomAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomAttributes", ID: &i_CustomAttributesHeader, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointAsyncInput_CustomAttributes})
+var sInvokeEndpointAsyncInput_InferenceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceId", ID: &i_InferenceId, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointAsyncInput_InferenceId})
+var sInvokeEndpointAsyncInput_InputLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputLocation", ID: &i_InputLocationHeader, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointAsyncInput_InputLocation})
+var sInvokeEndpointAsyncInput_S3OutputPathExtension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3OutputPathExtension", ID: &i_S3OutputPathExtensionHeader, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointAsyncInput_S3OutputPathExtension})
+var sInvokeEndpointAsyncInput_Filename = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filename", ID: &i_FilenameHeader, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointAsyncInput_Filename})
+var sInvokeEndpointAsyncInput_RequestTTLSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestTTLSeconds", ID: &i_RequestTTLSecondsHeader, Traits: &t22, Type: smithy.ShapeTypeInteger, Ext: &eInvokeEndpointAsyncInput_RequestTTLSeconds})
+var sInvokeEndpointAsyncInput_InvocationTimeoutSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationTimeoutSeconds", ID: &i_InvocationTimeoutSecondsHeader, Traits: &t23, Type: smithy.ShapeTypeInteger, Ext: &eInvokeEndpointAsyncInput_InvocationTimeoutSeconds})
+var sInvokeEndpointAsyncInput_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &i_AsyncBodyBlob, Traits: &t24, Type: smithy.ShapeTypeBlob, Ext: &eInvokeEndpointAsyncInput_Body})
+var sInvokeEndpointAsyncOutput_InferenceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceId", ID: &i_Header, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointAsyncOutput_InferenceId})
+var sInvokeEndpointAsyncOutput_OutputLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputLocation", ID: &i_Header, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointAsyncOutput_OutputLocation})
+var sInvokeEndpointAsyncOutput_FailureLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureLocation", ID: &i_Header, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointAsyncOutput_FailureLocation})
+var sInvokeEndpointInput_EndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointName", ID: &i_EndpointName, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointInput_EndpointName})
+var sInvokeEndpointInput_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &i_BodyBlob, Traits: &t24, Type: smithy.ShapeTypeBlob, Ext: &eInvokeEndpointInput_Body})
+var sInvokeEndpointInput_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_Header, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointInput_ContentType})
+var sInvokeEndpointInput_Accept = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Accept", ID: &i_Header, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointInput_Accept})
+var sInvokeEndpointInput_CustomAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomAttributes", ID: &i_CustomAttributesHeader, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointInput_CustomAttributes})
+var sInvokeEndpointInput_TargetModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetModel", ID: &i_TargetModelHeader, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointInput_TargetModel})
+var sInvokeEndpointInput_TargetVariant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetVariant", ID: &i_TargetVariantHeader, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointInput_TargetVariant})
+var sInvokeEndpointInput_TargetContainerHostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetContainerHostname", ID: &i_TargetContainerHostnameHeader, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointInput_TargetContainerHostname})
+var sInvokeEndpointInput_InferenceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceId", ID: &i_InferenceId, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointInput_InferenceId})
+var sInvokeEndpointInput_EnableExplanations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableExplanations", ID: &i_EnableExplanationsHeader, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointInput_EnableExplanations})
+var sInvokeEndpointInput_InferenceComponentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceComponentName", ID: &i_InferenceComponentHeader, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointInput_InferenceComponentName})
+var sInvokeEndpointInput_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_SessionIdOrNewSessionConstantHeader, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointInput_SessionId})
+var sInvokeEndpointInput_PrefixAwareId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrefixAwareId", ID: &i_PrefixAwareIdHeader, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointInput_PrefixAwareId})
+var sInvokeEndpointOutput_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &i_BodyBlob, Traits: &t24, Type: smithy.ShapeTypeBlob, Ext: &eInvokeEndpointOutput_Body})
+var sInvokeEndpointOutput_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_Header, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointOutput_ContentType})
+var sInvokeEndpointOutput_InvokedProductionVariant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvokedProductionVariant", ID: &i_Header, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointOutput_InvokedProductionVariant})
+var sInvokeEndpointOutput_CustomAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomAttributes", ID: &i_CustomAttributesHeader, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointOutput_CustomAttributes})
+var sInvokeEndpointOutput_NewSessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewSessionId", ID: &i_NewSessionResponseHeader, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointOutput_NewSessionId})
+var sInvokeEndpointOutput_ClosedSessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClosedSessionId", ID: &i_SessionIdHeader, Traits: &t38, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointOutput_ClosedSessionId})
+var sInvokeEndpointWithResponseStreamInput_EndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointName", ID: &i_EndpointName, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointWithResponseStreamInput_EndpointName})
+var sInvokeEndpointWithResponseStreamInput_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &i_BodyBlob, Traits: &t24, Type: smithy.ShapeTypeBlob, Ext: &eInvokeEndpointWithResponseStreamInput_Body})
+var sInvokeEndpointWithResponseStreamInput_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_Header, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointWithResponseStreamInput_ContentType})
+var sInvokeEndpointWithResponseStreamInput_Accept = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Accept", ID: &i_Header, Traits: &t16, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointWithResponseStreamInput_Accept})
+var sInvokeEndpointWithResponseStreamInput_CustomAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomAttributes", ID: &i_CustomAttributesHeader, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointWithResponseStreamInput_CustomAttributes})
+var sInvokeEndpointWithResponseStreamInput_TargetVariant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetVariant", ID: &i_TargetVariantHeader, Traits: &t30, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointWithResponseStreamInput_TargetVariant})
+var sInvokeEndpointWithResponseStreamInput_TargetContainerHostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetContainerHostname", ID: &i_TargetContainerHostnameHeader, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointWithResponseStreamInput_TargetContainerHostname})
+var sInvokeEndpointWithResponseStreamInput_InferenceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceId", ID: &i_InferenceId, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointWithResponseStreamInput_InferenceId})
+var sInvokeEndpointWithResponseStreamInput_InferenceComponentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceComponentName", ID: &i_InferenceComponentHeader, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointWithResponseStreamInput_InferenceComponentName})
+var sInvokeEndpointWithResponseStreamInput_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_SessionIdHeader, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointWithResponseStreamInput_SessionId})
+var sInvokeEndpointWithResponseStreamInput_PrefixAwareId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrefixAwareId", ID: &i_PrefixAwareIdHeader, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointWithResponseStreamInput_PrefixAwareId})
+var sInvokeEndpointWithResponseStreamOutput_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &iResponseStream, Members: &mResponseStream, Traits: &t39, Type: smithy.ShapeTypeUnion, Ext: &eInvokeEndpointWithResponseStreamOutput_Body})
+var sInvokeEndpointWithResponseStreamOutput_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_Header, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointWithResponseStreamOutput_ContentType})
+var sInvokeEndpointWithResponseStreamOutput_InvokedProductionVariant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvokedProductionVariant", ID: &i_Header, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointWithResponseStreamOutput_InvokedProductionVariant})
+var sInvokeEndpointWithResponseStreamOutput_CustomAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomAttributes", ID: &i_CustomAttributesHeader, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eInvokeEndpointWithResponseStreamOutput_CustomAttributes})
 
 var InvokeEndpoint = &sInvokeEndpoint
 

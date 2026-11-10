@@ -7,9 +7,535 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [527]smithy.SchemaExtensions
+var (
+	eCreateCluster                                                              smithy.SchemaExtensions
+	eCreateComputeNodeGroup                                                     smithy.SchemaExtensions
+	eCreateQueue                                                                smithy.SchemaExtensions
+	eDeleteCluster                                                              smithy.SchemaExtensions
+	eDeleteComputeNodeGroup                                                     smithy.SchemaExtensions
+	eDeleteQueue                                                                smithy.SchemaExtensions
+	eGetCluster                                                                 smithy.SchemaExtensions
+	eGetComputeNodeGroup                                                        smithy.SchemaExtensions
+	eGetQueue                                                                   smithy.SchemaExtensions
+	eListClusters                                                               smithy.SchemaExtensions
+	eListComputeNodeGroups                                                      smithy.SchemaExtensions
+	eListQueues                                                                 smithy.SchemaExtensions
+	eListTagsForResource                                                        smithy.SchemaExtensions
+	eRegisterComputeNodeGroupInstance                                           smithy.SchemaExtensions
+	eTagResource                                                                smithy.SchemaExtensions
+	eUntagResource                                                              smithy.SchemaExtensions
+	eUpdateCluster                                                              smithy.SchemaExtensions
+	eUpdateComputeNodeGroup                                                     smithy.SchemaExtensions
+	eUpdateQueue                                                                smithy.SchemaExtensions
+	e_AWSParallelComputingService                                               smithy.SchemaExtensions
+	eAccessDeniedException                                                      smithy.SchemaExtensions
+	eAccessDeniedException_message                                              smithy.SchemaExtensions
+	eAccounting                                                                 smithy.SchemaExtensions
+	eAccounting_defaultPurgeTimeInDays                                          smithy.SchemaExtensions
+	eAccounting_mode                                                            smithy.SchemaExtensions
+	eAccountingMode                                                             smithy.SchemaExtensions
+	eAccountingMode_STANDARD                                                    smithy.SchemaExtensions
+	eAccountingMode_NONE                                                        smithy.SchemaExtensions
+	eAccountingRequest                                                          smithy.SchemaExtensions
+	eAccountingRequest_defaultPurgeTimeInDays                                   smithy.SchemaExtensions
+	eAccountingRequest_mode                                                     smithy.SchemaExtensions
+	e_AmiId                                                                     smithy.SchemaExtensions
+	e_Arn                                                                       smithy.SchemaExtensions
+	e_BootstrapId                                                               smithy.SchemaExtensions
+	eCgroupCustomSetting                                                        smithy.SchemaExtensions
+	eCgroupCustomSetting_parameterName                                          smithy.SchemaExtensions
+	eCgroupCustomSetting_parameterValue                                         smithy.SchemaExtensions
+	e_CgroupCustomSettings                                                      smithy.SchemaExtensions
+	e_CgroupCustomSettings_member                                               smithy.SchemaExtensions
+	eCluster                                                                    smithy.SchemaExtensions
+	eCluster_name                                                               smithy.SchemaExtensions
+	eCluster_id                                                                 smithy.SchemaExtensions
+	eCluster_arn                                                                smithy.SchemaExtensions
+	eCluster_status                                                             smithy.SchemaExtensions
+	eCluster_createdAt                                                          smithy.SchemaExtensions
+	eCluster_modifiedAt                                                         smithy.SchemaExtensions
+	eCluster_scheduler                                                          smithy.SchemaExtensions
+	eCluster_size                                                               smithy.SchemaExtensions
+	eCluster_slurmConfiguration                                                 smithy.SchemaExtensions
+	eCluster_networking                                                         smithy.SchemaExtensions
+	eCluster_endpoints                                                          smithy.SchemaExtensions
+	eCluster_errorInfo                                                          smithy.SchemaExtensions
+	e_ClusterIdentifier                                                         smithy.SchemaExtensions
+	e_ClusterList                                                               smithy.SchemaExtensions
+	e_ClusterList_member                                                        smithy.SchemaExtensions
+	e_ClusterName                                                               smithy.SchemaExtensions
+	eClusterSlurmConfiguration                                                  smithy.SchemaExtensions
+	eClusterSlurmConfiguration_scaleDownIdleTimeInSeconds                       smithy.SchemaExtensions
+	eClusterSlurmConfiguration_slurmCustomSettings                              smithy.SchemaExtensions
+	eClusterSlurmConfiguration_slurmdbdCustomSettings                           smithy.SchemaExtensions
+	eClusterSlurmConfiguration_cgroupCustomSettings                             smithy.SchemaExtensions
+	eClusterSlurmConfiguration_authKey                                          smithy.SchemaExtensions
+	eClusterSlurmConfiguration_jwtAuth                                          smithy.SchemaExtensions
+	eClusterSlurmConfiguration_accounting                                       smithy.SchemaExtensions
+	eClusterSlurmConfiguration_slurmRest                                        smithy.SchemaExtensions
+	eClusterSlurmConfigurationRequest                                           smithy.SchemaExtensions
+	eClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds                smithy.SchemaExtensions
+	eClusterSlurmConfigurationRequest_slurmCustomSettings                       smithy.SchemaExtensions
+	eClusterSlurmConfigurationRequest_slurmdbdCustomSettings                    smithy.SchemaExtensions
+	eClusterSlurmConfigurationRequest_cgroupCustomSettings                      smithy.SchemaExtensions
+	eClusterSlurmConfigurationRequest_accounting                                smithy.SchemaExtensions
+	eClusterSlurmConfigurationRequest_slurmRest                                 smithy.SchemaExtensions
+	eClusterStatus                                                              smithy.SchemaExtensions
+	eClusterStatus_CREATING                                                     smithy.SchemaExtensions
+	eClusterStatus_ACTIVE                                                       smithy.SchemaExtensions
+	eClusterStatus_UPDATING                                                     smithy.SchemaExtensions
+	eClusterStatus_DELETING                                                     smithy.SchemaExtensions
+	eClusterStatus_CREATE_FAILED                                                smithy.SchemaExtensions
+	eClusterStatus_DELETE_FAILED                                                smithy.SchemaExtensions
+	eClusterStatus_UPDATE_FAILED                                                smithy.SchemaExtensions
+	eClusterStatus_SUSPENDING                                                   smithy.SchemaExtensions
+	eClusterStatus_SUSPENDED                                                    smithy.SchemaExtensions
+	eClusterStatus_RESUMING                                                     smithy.SchemaExtensions
+	eClusterSummary                                                             smithy.SchemaExtensions
+	eClusterSummary_name                                                        smithy.SchemaExtensions
+	eClusterSummary_id                                                          smithy.SchemaExtensions
+	eClusterSummary_arn                                                         smithy.SchemaExtensions
+	eClusterSummary_createdAt                                                   smithy.SchemaExtensions
+	eClusterSummary_modifiedAt                                                  smithy.SchemaExtensions
+	eClusterSummary_status                                                      smithy.SchemaExtensions
+	eComputeNodeGroup                                                           smithy.SchemaExtensions
+	eComputeNodeGroup_name                                                      smithy.SchemaExtensions
+	eComputeNodeGroup_id                                                        smithy.SchemaExtensions
+	eComputeNodeGroup_arn                                                       smithy.SchemaExtensions
+	eComputeNodeGroup_clusterId                                                 smithy.SchemaExtensions
+	eComputeNodeGroup_createdAt                                                 smithy.SchemaExtensions
+	eComputeNodeGroup_modifiedAt                                                smithy.SchemaExtensions
+	eComputeNodeGroup_status                                                    smithy.SchemaExtensions
+	eComputeNodeGroup_amiId                                                     smithy.SchemaExtensions
+	eComputeNodeGroup_subnetIds                                                 smithy.SchemaExtensions
+	eComputeNodeGroup_purchaseOption                                            smithy.SchemaExtensions
+	eComputeNodeGroup_customLaunchTemplate                                      smithy.SchemaExtensions
+	eComputeNodeGroup_iamInstanceProfileArn                                     smithy.SchemaExtensions
+	eComputeNodeGroup_scalingConfiguration                                      smithy.SchemaExtensions
+	eComputeNodeGroup_instanceConfigs                                           smithy.SchemaExtensions
+	eComputeNodeGroup_spotOptions                                               smithy.SchemaExtensions
+	eComputeNodeGroup_slurmConfiguration                                        smithy.SchemaExtensions
+	eComputeNodeGroup_nodeLifecycleActions                                      smithy.SchemaExtensions
+	eComputeNodeGroup_errorInfo                                                 smithy.SchemaExtensions
+	eComputeNodeGroupConfiguration                                              smithy.SchemaExtensions
+	eComputeNodeGroupConfiguration_computeNodeGroupId                           smithy.SchemaExtensions
+	e_ComputeNodeGroupConfigurationList                                         smithy.SchemaExtensions
+	e_ComputeNodeGroupConfigurationList_member                                  smithy.SchemaExtensions
+	e_ComputeNodeGroupIdentifier                                                smithy.SchemaExtensions
+	e_ComputeNodeGroupList                                                      smithy.SchemaExtensions
+	e_ComputeNodeGroupList_member                                               smithy.SchemaExtensions
+	e_ComputeNodeGroupName                                                      smithy.SchemaExtensions
+	eComputeNodeGroupSlurmConfiguration                                         smithy.SchemaExtensions
+	eComputeNodeGroupSlurmConfiguration_scaleDownIdleTimeInSeconds              smithy.SchemaExtensions
+	eComputeNodeGroupSlurmConfiguration_slurmCustomSettings                     smithy.SchemaExtensions
+	eComputeNodeGroupSlurmConfiguration_gresCustomSettings                      smithy.SchemaExtensions
+	eComputeNodeGroupSlurmConfigurationRequest                                  smithy.SchemaExtensions
+	eComputeNodeGroupSlurmConfigurationRequest_scaleDownIdleTimeInSeconds       smithy.SchemaExtensions
+	eComputeNodeGroupSlurmConfigurationRequest_slurmCustomSettings              smithy.SchemaExtensions
+	eComputeNodeGroupSlurmConfigurationRequest_gresCustomSettings               smithy.SchemaExtensions
+	eComputeNodeGroupStatus                                                     smithy.SchemaExtensions
+	eComputeNodeGroupStatus_CREATING                                            smithy.SchemaExtensions
+	eComputeNodeGroupStatus_ACTIVE                                              smithy.SchemaExtensions
+	eComputeNodeGroupStatus_UPDATING                                            smithy.SchemaExtensions
+	eComputeNodeGroupStatus_DELETING                                            smithy.SchemaExtensions
+	eComputeNodeGroupStatus_CREATE_FAILED                                       smithy.SchemaExtensions
+	eComputeNodeGroupStatus_DELETE_FAILED                                       smithy.SchemaExtensions
+	eComputeNodeGroupStatus_UPDATE_FAILED                                       smithy.SchemaExtensions
+	eComputeNodeGroupStatus_DELETED                                             smithy.SchemaExtensions
+	eComputeNodeGroupStatus_SUSPENDING                                          smithy.SchemaExtensions
+	eComputeNodeGroupStatus_SUSPENDED                                           smithy.SchemaExtensions
+	eComputeNodeGroupStatus_RESUMING                                            smithy.SchemaExtensions
+	eComputeNodeGroupSummary                                                    smithy.SchemaExtensions
+	eComputeNodeGroupSummary_name                                               smithy.SchemaExtensions
+	eComputeNodeGroupSummary_id                                                 smithy.SchemaExtensions
+	eComputeNodeGroupSummary_arn                                                smithy.SchemaExtensions
+	eComputeNodeGroupSummary_clusterId                                          smithy.SchemaExtensions
+	eComputeNodeGroupSummary_createdAt                                          smithy.SchemaExtensions
+	eComputeNodeGroupSummary_modifiedAt                                         smithy.SchemaExtensions
+	eComputeNodeGroupSummary_status                                             smithy.SchemaExtensions
+	eConflictException                                                          smithy.SchemaExtensions
+	eConflictException_message                                                  smithy.SchemaExtensions
+	eConflictException_resourceId                                               smithy.SchemaExtensions
+	eConflictException_resourceType                                             smithy.SchemaExtensions
+	eCustomLaunchTemplate                                                       smithy.SchemaExtensions
+	eCustomLaunchTemplate_id                                                    smithy.SchemaExtensions
+	eCustomLaunchTemplate_version                                               smithy.SchemaExtensions
+	eEndpoint                                                                   smithy.SchemaExtensions
+	eEndpoint_type                                                              smithy.SchemaExtensions
+	eEndpoint_privateIpAddress                                                  smithy.SchemaExtensions
+	eEndpoint_publicIpAddress                                                   smithy.SchemaExtensions
+	eEndpoint_ipv6Address                                                       smithy.SchemaExtensions
+	eEndpoint_port                                                              smithy.SchemaExtensions
+	e_Endpoints                                                                 smithy.SchemaExtensions
+	e_Endpoints_member                                                          smithy.SchemaExtensions
+	eEndpointType                                                               smithy.SchemaExtensions
+	eEndpointType_SLURMCTLD                                                     smithy.SchemaExtensions
+	eEndpointType_SLURMDBD                                                      smithy.SchemaExtensions
+	eEndpointType_SLURMRESTD                                                    smithy.SchemaExtensions
+	eErrorInfo                                                                  smithy.SchemaExtensions
+	eErrorInfo_code                                                             smithy.SchemaExtensions
+	eErrorInfo_message                                                          smithy.SchemaExtensions
+	e_ErrorInfoList                                                             smithy.SchemaExtensions
+	e_ErrorInfoList_member                                                      smithy.SchemaExtensions
+	eExecutionPolicy                                                            smithy.SchemaExtensions
+	eExecutionPolicy_FIRST_BOOT_ONLY                                            smithy.SchemaExtensions
+	eExecutionPolicy_EVERY_BOOT                                                 smithy.SchemaExtensions
+	e_GresCustomSettingMap                                                      smithy.SchemaExtensions
+	e_GresCustomSettingMap_key                                                  smithy.SchemaExtensions
+	e_GresCustomSettingMap_value                                                smithy.SchemaExtensions
+	e_GresCustomSettings                                                        smithy.SchemaExtensions
+	e_GresCustomSettings_member                                                 smithy.SchemaExtensions
+	eInstanceConfig                                                             smithy.SchemaExtensions
+	eInstanceConfig_instanceType                                                smithy.SchemaExtensions
+	e_InstanceList                                                              smithy.SchemaExtensions
+	e_InstanceList_member                                                       smithy.SchemaExtensions
+	e_InstanceProfileArn                                                        smithy.SchemaExtensions
+	eInternalServerException                                                    smithy.SchemaExtensions
+	eInternalServerException_message                                            smithy.SchemaExtensions
+	eJwtAuth                                                                    smithy.SchemaExtensions
+	eJwtAuth_jwtKey                                                             smithy.SchemaExtensions
+	eJwtKey                                                                     smithy.SchemaExtensions
+	eJwtKey_secretArn                                                           smithy.SchemaExtensions
+	eJwtKey_secretVersion                                                       smithy.SchemaExtensions
+	e_MaxResults                                                                smithy.SchemaExtensions
+	eNetworking                                                                 smithy.SchemaExtensions
+	eNetworking_subnetIds                                                       smithy.SchemaExtensions
+	eNetworking_securityGroupIds                                                smithy.SchemaExtensions
+	eNetworking_networkType                                                     smithy.SchemaExtensions
+	eNetworkingRequest                                                          smithy.SchemaExtensions
+	eNetworkingRequest_subnetIds                                                smithy.SchemaExtensions
+	eNetworkingRequest_securityGroupIds                                         smithy.SchemaExtensions
+	eNetworkingRequest_networkType                                              smithy.SchemaExtensions
+	eNetworkType                                                                smithy.SchemaExtensions
+	eNetworkType_IPV4                                                           smithy.SchemaExtensions
+	eNetworkType_IPV6                                                           smithy.SchemaExtensions
+	eNodeLifecycleActions                                                       smithy.SchemaExtensions
+	eNodeLifecycleActions_stages                                                smithy.SchemaExtensions
+	eNodeLifecycleActions_scriptCachingPolicy                                   smithy.SchemaExtensions
+	eNodeLifecycleActionsRequest                                                smithy.SchemaExtensions
+	eNodeLifecycleActionsRequest_stages                                         smithy.SchemaExtensions
+	eNodeLifecycleActionsRequest_scriptCachingPolicy                            smithy.SchemaExtensions
+	eNodeLifecycleScript                                                        smithy.SchemaExtensions
+	eNodeLifecycleScript_name                                                   smithy.SchemaExtensions
+	eNodeLifecycleScript_scriptSource                                           smithy.SchemaExtensions
+	eNodeLifecycleScript_arguments                                              smithy.SchemaExtensions
+	eNodeLifecycleScript_onError                                                smithy.SchemaExtensions
+	eNodeLifecycleScript_executionPolicy                                        smithy.SchemaExtensions
+	e_NodeLifecycleScriptArgument                                               smithy.SchemaExtensions
+	e_NodeLifecycleScriptArguments                                              smithy.SchemaExtensions
+	e_NodeLifecycleScriptArguments_member                                       smithy.SchemaExtensions
+	e_NodeLifecycleScriptList                                                   smithy.SchemaExtensions
+	e_NodeLifecycleScriptList_member                                            smithy.SchemaExtensions
+	eNodeLifecycleStages                                                        smithy.SchemaExtensions
+	eNodeLifecycleStages_nodeBootstrapped                                       smithy.SchemaExtensions
+	eNodeLifecycleStages_nodeReady                                              smithy.SchemaExtensions
+	eOnError                                                                    smithy.SchemaExtensions
+	eOnError_TERMINATE                                                          smithy.SchemaExtensions
+	eOnError_STOP_SEQUENCE                                                      smithy.SchemaExtensions
+	eOnError_CONTINUE                                                           smithy.SchemaExtensions
+	ePurchaseOption                                                             smithy.SchemaExtensions
+	ePurchaseOption_ONDEMAND                                                    smithy.SchemaExtensions
+	ePurchaseOption_SPOT                                                        smithy.SchemaExtensions
+	ePurchaseOption_CAPACITY_BLOCK                                              smithy.SchemaExtensions
+	ePurchaseOption_INTERRUPTIBLE_CAPACITY_RESERVATION                          smithy.SchemaExtensions
+	eQueue                                                                      smithy.SchemaExtensions
+	eQueue_name                                                                 smithy.SchemaExtensions
+	eQueue_id                                                                   smithy.SchemaExtensions
+	eQueue_arn                                                                  smithy.SchemaExtensions
+	eQueue_clusterId                                                            smithy.SchemaExtensions
+	eQueue_createdAt                                                            smithy.SchemaExtensions
+	eQueue_modifiedAt                                                           smithy.SchemaExtensions
+	eQueue_status                                                               smithy.SchemaExtensions
+	eQueue_computeNodeGroupConfigurations                                       smithy.SchemaExtensions
+	eQueue_slurmConfiguration                                                   smithy.SchemaExtensions
+	eQueue_errorInfo                                                            smithy.SchemaExtensions
+	e_QueueIdentifier                                                           smithy.SchemaExtensions
+	e_QueueList                                                                 smithy.SchemaExtensions
+	e_QueueList_member                                                          smithy.SchemaExtensions
+	e_QueueName                                                                 smithy.SchemaExtensions
+	eQueueSlurmConfiguration                                                    smithy.SchemaExtensions
+	eQueueSlurmConfiguration_slurmCustomSettings                                smithy.SchemaExtensions
+	eQueueSlurmConfigurationRequest                                             smithy.SchemaExtensions
+	eQueueSlurmConfigurationRequest_slurmCustomSettings                         smithy.SchemaExtensions
+	eQueueStatus                                                                smithy.SchemaExtensions
+	eQueueStatus_CREATING                                                       smithy.SchemaExtensions
+	eQueueStatus_ACTIVE                                                         smithy.SchemaExtensions
+	eQueueStatus_UPDATING                                                       smithy.SchemaExtensions
+	eQueueStatus_DELETING                                                       smithy.SchemaExtensions
+	eQueueStatus_CREATE_FAILED                                                  smithy.SchemaExtensions
+	eQueueStatus_DELETE_FAILED                                                  smithy.SchemaExtensions
+	eQueueStatus_UPDATE_FAILED                                                  smithy.SchemaExtensions
+	eQueueStatus_SUSPENDING                                                     smithy.SchemaExtensions
+	eQueueStatus_SUSPENDED                                                      smithy.SchemaExtensions
+	eQueueStatus_RESUMING                                                       smithy.SchemaExtensions
+	eQueueSummary                                                               smithy.SchemaExtensions
+	eQueueSummary_name                                                          smithy.SchemaExtensions
+	eQueueSummary_id                                                            smithy.SchemaExtensions
+	eQueueSummary_arn                                                           smithy.SchemaExtensions
+	eQueueSummary_clusterId                                                     smithy.SchemaExtensions
+	eQueueSummary_createdAt                                                     smithy.SchemaExtensions
+	eQueueSummary_modifiedAt                                                    smithy.SchemaExtensions
+	eQueueSummary_status                                                        smithy.SchemaExtensions
+	e_RequestTagMap                                                             smithy.SchemaExtensions
+	e_RequestTagMap_key                                                         smithy.SchemaExtensions
+	e_RequestTagMap_value                                                       smithy.SchemaExtensions
+	eResourceNotFoundException                                                  smithy.SchemaExtensions
+	eResourceNotFoundException_message                                          smithy.SchemaExtensions
+	eResourceNotFoundException_resourceId                                       smithy.SchemaExtensions
+	eResourceNotFoundException_resourceType                                     smithy.SchemaExtensions
+	e_ResponseTagMap                                                            smithy.SchemaExtensions
+	e_ResponseTagMap_key                                                        smithy.SchemaExtensions
+	e_ResponseTagMap_value                                                      smithy.SchemaExtensions
+	e_SBClientToken                                                             smithy.SchemaExtensions
+	eScalingConfiguration                                                       smithy.SchemaExtensions
+	eScalingConfiguration_minInstanceCount                                      smithy.SchemaExtensions
+	eScalingConfiguration_maxInstanceCount                                      smithy.SchemaExtensions
+	eScalingConfigurationRequest                                                smithy.SchemaExtensions
+	eScalingConfigurationRequest_minInstanceCount                               smithy.SchemaExtensions
+	eScalingConfigurationRequest_maxInstanceCount                               smithy.SchemaExtensions
+	eScheduler                                                                  smithy.SchemaExtensions
+	eScheduler_type                                                             smithy.SchemaExtensions
+	eScheduler_version                                                          smithy.SchemaExtensions
+	eSchedulerRequest                                                           smithy.SchemaExtensions
+	eSchedulerRequest_type                                                      smithy.SchemaExtensions
+	eSchedulerRequest_version                                                   smithy.SchemaExtensions
+	eSchedulerType                                                              smithy.SchemaExtensions
+	eSchedulerType_SLURM                                                        smithy.SchemaExtensions
+	eScriptCachingPolicy                                                        smithy.SchemaExtensions
+	eScriptCachingPolicy_CACHE_ONCE                                             smithy.SchemaExtensions
+	eScriptCachingPolicy_REFRESH_ON_REBOOT                                      smithy.SchemaExtensions
+	eScriptSource                                                               smithy.SchemaExtensions
+	eScriptSource_scriptLocation                                                smithy.SchemaExtensions
+	eScriptSource_s3VersionId                                                   smithy.SchemaExtensions
+	eScriptSource_checksum                                                      smithy.SchemaExtensions
+	e_SecurityGroupId                                                           smithy.SchemaExtensions
+	e_SecurityGroupIdList                                                       smithy.SchemaExtensions
+	e_SecurityGroupIdList_member                                                smithy.SchemaExtensions
+	eServiceQuotaExceededException                                              smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                                      smithy.SchemaExtensions
+	eServiceQuotaExceededException_serviceCode                                  smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceId                                   smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceType                                 smithy.SchemaExtensions
+	eServiceQuotaExceededException_quotaCode                                    smithy.SchemaExtensions
+	e_SharedSecret                                                              smithy.SchemaExtensions
+	eSize                                                                       smithy.SchemaExtensions
+	eSize_SMALL                                                                 smithy.SchemaExtensions
+	eSize_MEDIUM                                                                smithy.SchemaExtensions
+	eSize_LARGE                                                                 smithy.SchemaExtensions
+	eSlurmAuthKey                                                               smithy.SchemaExtensions
+	eSlurmAuthKey_secretArn                                                     smithy.SchemaExtensions
+	eSlurmAuthKey_secretVersion                                                 smithy.SchemaExtensions
+	eSlurmCustomSetting                                                         smithy.SchemaExtensions
+	eSlurmCustomSetting_parameterName                                           smithy.SchemaExtensions
+	eSlurmCustomSetting_parameterValue                                          smithy.SchemaExtensions
+	e_SlurmCustomSettings                                                       smithy.SchemaExtensions
+	e_SlurmCustomSettings_member                                                smithy.SchemaExtensions
+	eSlurmdbdCustomSetting                                                      smithy.SchemaExtensions
+	eSlurmdbdCustomSetting_parameterName                                        smithy.SchemaExtensions
+	eSlurmdbdCustomSetting_parameterValue                                       smithy.SchemaExtensions
+	e_SlurmdbdCustomSettings                                                    smithy.SchemaExtensions
+	e_SlurmdbdCustomSettings_member                                             smithy.SchemaExtensions
+	eSlurmRest                                                                  smithy.SchemaExtensions
+	eSlurmRest_mode                                                             smithy.SchemaExtensions
+	eSlurmRestMode                                                              smithy.SchemaExtensions
+	eSlurmRestMode_STANDARD                                                     smithy.SchemaExtensions
+	eSlurmRestMode_NONE                                                         smithy.SchemaExtensions
+	eSlurmRestRequest                                                           smithy.SchemaExtensions
+	eSlurmRestRequest_mode                                                      smithy.SchemaExtensions
+	eSpotAllocationStrategy                                                     smithy.SchemaExtensions
+	eSpotAllocationStrategy_LOWEST_PRICE                                        smithy.SchemaExtensions
+	eSpotAllocationStrategy_CAPACITY_OPTIMIZED                                  smithy.SchemaExtensions
+	eSpotAllocationStrategy_PRICE_CAPACITY_OPTIMIZED                            smithy.SchemaExtensions
+	eSpotOptions                                                                smithy.SchemaExtensions
+	eSpotOptions_allocationStrategy                                             smithy.SchemaExtensions
+	e_StringList                                                                smithy.SchemaExtensions
+	e_StringList_member                                                         smithy.SchemaExtensions
+	e_SubnetId                                                                  smithy.SchemaExtensions
+	e_SubnetIdList                                                              smithy.SchemaExtensions
+	e_SubnetIdList_member                                                       smithy.SchemaExtensions
+	e_TagKey                                                                    smithy.SchemaExtensions
+	e_TagKeys                                                                   smithy.SchemaExtensions
+	e_TagKeys_member                                                            smithy.SchemaExtensions
+	e_TagValue                                                                  smithy.SchemaExtensions
+	eThrottlingException                                                        smithy.SchemaExtensions
+	eThrottlingException_message                                                smithy.SchemaExtensions
+	eThrottlingException_retryAfterSeconds                                      smithy.SchemaExtensions
+	eUpdateAccountingRequest                                                    smithy.SchemaExtensions
+	eUpdateAccountingRequest_defaultPurgeTimeInDays                             smithy.SchemaExtensions
+	eUpdateAccountingRequest_mode                                               smithy.SchemaExtensions
+	eUpdateClusterSlurmConfigurationRequest                                     smithy.SchemaExtensions
+	eUpdateClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds          smithy.SchemaExtensions
+	eUpdateClusterSlurmConfigurationRequest_slurmCustomSettings                 smithy.SchemaExtensions
+	eUpdateClusterSlurmConfigurationRequest_slurmdbdCustomSettings              smithy.SchemaExtensions
+	eUpdateClusterSlurmConfigurationRequest_cgroupCustomSettings                smithy.SchemaExtensions
+	eUpdateClusterSlurmConfigurationRequest_accounting                          smithy.SchemaExtensions
+	eUpdateClusterSlurmConfigurationRequest_slurmRest                           smithy.SchemaExtensions
+	eUpdateComputeNodeGroupSlurmConfigurationRequest                            smithy.SchemaExtensions
+	eUpdateComputeNodeGroupSlurmConfigurationRequest_scaleDownIdleTimeInSeconds smithy.SchemaExtensions
+	eUpdateComputeNodeGroupSlurmConfigurationRequest_slurmCustomSettings        smithy.SchemaExtensions
+	eUpdateComputeNodeGroupSlurmConfigurationRequest_gresCustomSettings         smithy.SchemaExtensions
+	eUpdateNodeLifecycleActionsRequest                                          smithy.SchemaExtensions
+	eUpdateNodeLifecycleActionsRequest_stages                                   smithy.SchemaExtensions
+	eUpdateNodeLifecycleActionsRequest_scriptCachingPolicy                      smithy.SchemaExtensions
+	eUpdateQueueSlurmConfigurationRequest                                       smithy.SchemaExtensions
+	eUpdateQueueSlurmConfigurationRequest_slurmCustomSettings                   smithy.SchemaExtensions
+	eUpdateSchedulerRequest                                                     smithy.SchemaExtensions
+	eUpdateSchedulerRequest_version                                             smithy.SchemaExtensions
+	eUpdateSlurmRestRequest                                                     smithy.SchemaExtensions
+	eUpdateSlurmRestRequest_mode                                                smithy.SchemaExtensions
+	eValidationException                                                        smithy.SchemaExtensions
+	eValidationException_message                                                smithy.SchemaExtensions
+	eValidationException_reason                                                 smithy.SchemaExtensions
+	eValidationException_fieldList                                              smithy.SchemaExtensions
+	eValidationExceptionField                                                   smithy.SchemaExtensions
+	eValidationExceptionField_name                                              smithy.SchemaExtensions
+	eValidationExceptionField_message                                           smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                                              smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member                                       smithy.SchemaExtensions
+	eValidationExceptionReason                                                  smithy.SchemaExtensions
+	eValidationExceptionReason_UNKNOWN_OPERATION                                smithy.SchemaExtensions
+	eValidationExceptionReason_CANNOT_PARSE                                     smithy.SchemaExtensions
+	eValidationExceptionReason_FIELD_VALIDATION_FAILED                          smithy.SchemaExtensions
+	eValidationExceptionReason_OTHER                                            smithy.SchemaExtensions
+	eCreateClusterRequest                                                       smithy.SchemaExtensions
+	eCreateClusterRequest_clusterName                                           smithy.SchemaExtensions
+	eCreateClusterRequest_scheduler                                             smithy.SchemaExtensions
+	eCreateClusterRequest_size                                                  smithy.SchemaExtensions
+	eCreateClusterRequest_networking                                            smithy.SchemaExtensions
+	eCreateClusterRequest_slurmConfiguration                                    smithy.SchemaExtensions
+	eCreateClusterRequest_clientToken                                           smithy.SchemaExtensions
+	eCreateClusterRequest_tags                                                  smithy.SchemaExtensions
+	eCreateClusterResponse                                                      smithy.SchemaExtensions
+	eCreateClusterResponse_cluster                                              smithy.SchemaExtensions
+	eCreateComputeNodeGroupRequest                                              smithy.SchemaExtensions
+	eCreateComputeNodeGroupRequest_clusterIdentifier                            smithy.SchemaExtensions
+	eCreateComputeNodeGroupRequest_computeNodeGroupName                         smithy.SchemaExtensions
+	eCreateComputeNodeGroupRequest_amiId                                        smithy.SchemaExtensions
+	eCreateComputeNodeGroupRequest_subnetIds                                    smithy.SchemaExtensions
+	eCreateComputeNodeGroupRequest_purchaseOption                               smithy.SchemaExtensions
+	eCreateComputeNodeGroupRequest_customLaunchTemplate                         smithy.SchemaExtensions
+	eCreateComputeNodeGroupRequest_iamInstanceProfileArn                        smithy.SchemaExtensions
+	eCreateComputeNodeGroupRequest_scalingConfiguration                         smithy.SchemaExtensions
+	eCreateComputeNodeGroupRequest_instanceConfigs                              smithy.SchemaExtensions
+	eCreateComputeNodeGroupRequest_spotOptions                                  smithy.SchemaExtensions
+	eCreateComputeNodeGroupRequest_slurmConfiguration                           smithy.SchemaExtensions
+	eCreateComputeNodeGroupRequest_nodeLifecycleActions                         smithy.SchemaExtensions
+	eCreateComputeNodeGroupRequest_clientToken                                  smithy.SchemaExtensions
+	eCreateComputeNodeGroupRequest_tags                                         smithy.SchemaExtensions
+	eCreateComputeNodeGroupResponse                                             smithy.SchemaExtensions
+	eCreateComputeNodeGroupResponse_computeNodeGroup                            smithy.SchemaExtensions
+	eCreateQueueRequest                                                         smithy.SchemaExtensions
+	eCreateQueueRequest_clusterIdentifier                                       smithy.SchemaExtensions
+	eCreateQueueRequest_queueName                                               smithy.SchemaExtensions
+	eCreateQueueRequest_computeNodeGroupConfigurations                          smithy.SchemaExtensions
+	eCreateQueueRequest_slurmConfiguration                                      smithy.SchemaExtensions
+	eCreateQueueRequest_clientToken                                             smithy.SchemaExtensions
+	eCreateQueueRequest_tags                                                    smithy.SchemaExtensions
+	eCreateQueueResponse                                                        smithy.SchemaExtensions
+	eCreateQueueResponse_queue                                                  smithy.SchemaExtensions
+	eDeleteClusterRequest                                                       smithy.SchemaExtensions
+	eDeleteClusterRequest_clusterIdentifier                                     smithy.SchemaExtensions
+	eDeleteClusterRequest_clientToken                                           smithy.SchemaExtensions
+	eDeleteClusterResponse                                                      smithy.SchemaExtensions
+	eDeleteComputeNodeGroupRequest                                              smithy.SchemaExtensions
+	eDeleteComputeNodeGroupRequest_clusterIdentifier                            smithy.SchemaExtensions
+	eDeleteComputeNodeGroupRequest_computeNodeGroupIdentifier                   smithy.SchemaExtensions
+	eDeleteComputeNodeGroupRequest_clientToken                                  smithy.SchemaExtensions
+	eDeleteComputeNodeGroupResponse                                             smithy.SchemaExtensions
+	eDeleteQueueRequest                                                         smithy.SchemaExtensions
+	eDeleteQueueRequest_clusterIdentifier                                       smithy.SchemaExtensions
+	eDeleteQueueRequest_queueIdentifier                                         smithy.SchemaExtensions
+	eDeleteQueueRequest_clientToken                                             smithy.SchemaExtensions
+	eDeleteQueueResponse                                                        smithy.SchemaExtensions
+	eGetClusterRequest                                                          smithy.SchemaExtensions
+	eGetClusterRequest_clusterIdentifier                                        smithy.SchemaExtensions
+	eGetClusterResponse                                                         smithy.SchemaExtensions
+	eGetClusterResponse_cluster                                                 smithy.SchemaExtensions
+	eGetComputeNodeGroupRequest                                                 smithy.SchemaExtensions
+	eGetComputeNodeGroupRequest_clusterIdentifier                               smithy.SchemaExtensions
+	eGetComputeNodeGroupRequest_computeNodeGroupIdentifier                      smithy.SchemaExtensions
+	eGetComputeNodeGroupResponse                                                smithy.SchemaExtensions
+	eGetComputeNodeGroupResponse_computeNodeGroup                               smithy.SchemaExtensions
+	eGetQueueRequest                                                            smithy.SchemaExtensions
+	eGetQueueRequest_clusterIdentifier                                          smithy.SchemaExtensions
+	eGetQueueRequest_queueIdentifier                                            smithy.SchemaExtensions
+	eGetQueueResponse                                                           smithy.SchemaExtensions
+	eGetQueueResponse_queue                                                     smithy.SchemaExtensions
+	eListClustersRequest                                                        smithy.SchemaExtensions
+	eListClustersRequest_nextToken                                              smithy.SchemaExtensions
+	eListClustersRequest_maxResults                                             smithy.SchemaExtensions
+	eListClustersResponse                                                       smithy.SchemaExtensions
+	eListClustersResponse_clusters                                              smithy.SchemaExtensions
+	eListClustersResponse_nextToken                                             smithy.SchemaExtensions
+	eListComputeNodeGroupsRequest                                               smithy.SchemaExtensions
+	eListComputeNodeGroupsRequest_clusterIdentifier                             smithy.SchemaExtensions
+	eListComputeNodeGroupsRequest_nextToken                                     smithy.SchemaExtensions
+	eListComputeNodeGroupsRequest_maxResults                                    smithy.SchemaExtensions
+	eListComputeNodeGroupsResponse                                              smithy.SchemaExtensions
+	eListComputeNodeGroupsResponse_computeNodeGroups                            smithy.SchemaExtensions
+	eListComputeNodeGroupsResponse_nextToken                                    smithy.SchemaExtensions
+	eListQueuesRequest                                                          smithy.SchemaExtensions
+	eListQueuesRequest_clusterIdentifier                                        smithy.SchemaExtensions
+	eListQueuesRequest_nextToken                                                smithy.SchemaExtensions
+	eListQueuesRequest_maxResults                                               smithy.SchemaExtensions
+	eListQueuesResponse                                                         smithy.SchemaExtensions
+	eListQueuesResponse_queues                                                  smithy.SchemaExtensions
+	eListQueuesResponse_nextToken                                               smithy.SchemaExtensions
+	eListTagsForResourceRequest                                                 smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceArn                                     smithy.SchemaExtensions
+	eListTagsForResourceResponse                                                smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                                           smithy.SchemaExtensions
+	eRegisterComputeNodeGroupInstanceRequest                                    smithy.SchemaExtensions
+	eRegisterComputeNodeGroupInstanceRequest_clusterIdentifier                  smithy.SchemaExtensions
+	eRegisterComputeNodeGroupInstanceRequest_bootstrapId                        smithy.SchemaExtensions
+	eRegisterComputeNodeGroupInstanceResponse                                   smithy.SchemaExtensions
+	eRegisterComputeNodeGroupInstanceResponse_nodeID                            smithy.SchemaExtensions
+	eRegisterComputeNodeGroupInstanceResponse_sharedSecret                      smithy.SchemaExtensions
+	eRegisterComputeNodeGroupInstanceResponse_endpoints                         smithy.SchemaExtensions
+	eRegisterComputeNodeGroupInstanceResponse_clusterName                       smithy.SchemaExtensions
+	eRegisterComputeNodeGroupInstanceResponse_computeNodeGroupId                smithy.SchemaExtensions
+	eRegisterComputeNodeGroupInstanceResponse_computeNodeGroupName              smithy.SchemaExtensions
+	eRegisterComputeNodeGroupInstanceResponse_nodeLifecycleActions              smithy.SchemaExtensions
+	eRegisterComputeNodeGroupInstanceResponse_schedulerVersion                  smithy.SchemaExtensions
+	eTagResourceRequest                                                         smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                                             smithy.SchemaExtensions
+	eTagResourceRequest_tags                                                    smithy.SchemaExtensions
+	eTagResourceResponse                                                        smithy.SchemaExtensions
+	eUntagResourceRequest                                                       smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                                           smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                                               smithy.SchemaExtensions
+	eUntagResourceResponse                                                      smithy.SchemaExtensions
+	eUpdateClusterRequest                                                       smithy.SchemaExtensions
+	eUpdateClusterRequest_clusterIdentifier                                     smithy.SchemaExtensions
+	eUpdateClusterRequest_clientToken                                           smithy.SchemaExtensions
+	eUpdateClusterRequest_slurmConfiguration                                    smithy.SchemaExtensions
+	eUpdateClusterRequest_scheduler                                             smithy.SchemaExtensions
+	eUpdateClusterResponse                                                      smithy.SchemaExtensions
+	eUpdateClusterResponse_cluster                                              smithy.SchemaExtensions
+	eUpdateComputeNodeGroupRequest                                              smithy.SchemaExtensions
+	eUpdateComputeNodeGroupRequest_clusterIdentifier                            smithy.SchemaExtensions
+	eUpdateComputeNodeGroupRequest_computeNodeGroupIdentifier                   smithy.SchemaExtensions
+	eUpdateComputeNodeGroupRequest_amiId                                        smithy.SchemaExtensions
+	eUpdateComputeNodeGroupRequest_subnetIds                                    smithy.SchemaExtensions
+	eUpdateComputeNodeGroupRequest_customLaunchTemplate                         smithy.SchemaExtensions
+	eUpdateComputeNodeGroupRequest_purchaseOption                               smithy.SchemaExtensions
+	eUpdateComputeNodeGroupRequest_spotOptions                                  smithy.SchemaExtensions
+	eUpdateComputeNodeGroupRequest_scalingConfiguration                         smithy.SchemaExtensions
+	eUpdateComputeNodeGroupRequest_iamInstanceProfileArn                        smithy.SchemaExtensions
+	eUpdateComputeNodeGroupRequest_slurmConfiguration                           smithy.SchemaExtensions
+	eUpdateComputeNodeGroupRequest_nodeLifecycleActions                         smithy.SchemaExtensions
+	eUpdateComputeNodeGroupRequest_clientToken                                  smithy.SchemaExtensions
+	eUpdateComputeNodeGroupResponse                                             smithy.SchemaExtensions
+	eUpdateComputeNodeGroupResponse_computeNodeGroup                            smithy.SchemaExtensions
+	eUpdateQueueRequest                                                         smithy.SchemaExtensions
+	eUpdateQueueRequest_clusterIdentifier                                       smithy.SchemaExtensions
+	eUpdateQueueRequest_queueIdentifier                                         smithy.SchemaExtensions
+	eUpdateQueueRequest_computeNodeGroupConfigurations                          smithy.SchemaExtensions
+	eUpdateQueueRequest_slurmConfiguration                                      smithy.SchemaExtensions
+	eUpdateQueueRequest_clientToken                                             smithy.SchemaExtensions
+	eUpdateQueueResponse                                                        smithy.SchemaExtensions
+	eUpdateQueueResponse_queue                                                  smithy.SchemaExtensions
+)
 
 var (
 	iCreateCluster                                   = smithy.ShapeID{Namespace: "com.amazonaws.pcs", Name: "CreateCluster"}
@@ -348,534 +874,534 @@ var mUpdateComputeNodeGroupResponse = smithy.SchemaMembers{List: []*smithy.Schem
 var mUpdateQueueRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateQueueRequest_clusterIdentifier, &sUpdateQueueRequest_queueIdentifier, &sUpdateQueueRequest_computeNodeGroupConfigurations, &sUpdateQueueRequest_slurmConfiguration, &sUpdateQueueRequest_clientToken}}
 var mUpdateQueueResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateQueueResponse_queue}}
 
-var sCreateCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCluster, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCreateComputeNodeGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComputeNodeGroup, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sCreateQueue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateQueue, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sDeleteCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCluster, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sDeleteComputeNodeGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteComputeNodeGroup, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sDeleteQueue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteQueue, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sGetCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCluster, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sGetComputeNodeGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComputeNodeGroup, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sGetQueue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueue, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sListClusters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClusters, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sListComputeNodeGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComputeNodeGroups, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sListQueues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQueues, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sRegisterComputeNodeGroupInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterComputeNodeGroupInstance, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sUpdateCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCluster, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sUpdateComputeNodeGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComputeNodeGroup, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sUpdateQueue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateQueue, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var s_AWSParallelComputingService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSParallelComputingService, Type: smithy.ShapeTypeService, Ext: &ext[19]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[20]})
-var sAccounting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccounting, Members: &mAccounting, Type: smithy.ShapeTypeStructure, Ext: &ext[22]})
-var sAccountingMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountingMode, Members: &mAccountingMode, Type: smithy.ShapeTypeEnum, Ext: &ext[25]})
-var sAccountingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountingRequest, Members: &mAccountingRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
-var s_AmiId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmiId, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var s_BootstrapId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BootstrapId, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var sCgroupCustomSetting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCgroupCustomSetting, Members: &mCgroupCustomSetting, Type: smithy.ShapeTypeStructure, Ext: &ext[34]})
-var s_CgroupCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CgroupCustomSettings, Members: &m_CgroupCustomSettings, Type: smithy.ShapeTypeList, Ext: &ext[37]})
-var sCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure, Ext: &ext[39]})
-var s_ClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var s_ClusterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClusterList, Members: &m_ClusterList, Type: smithy.ShapeTypeList, Ext: &ext[53]})
-var s_ClusterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClusterName, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var sClusterSlurmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterSlurmConfiguration, Members: &mClusterSlurmConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[56]})
-var sClusterSlurmConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterSlurmConfigurationRequest, Members: &mClusterSlurmConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[65]})
-var sClusterStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterStatus, Members: &mClusterStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[72]})
-var sClusterSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterSummary, Members: &mClusterSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[83]})
-var sComputeNodeGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeNodeGroup, Members: &mComputeNodeGroup, Type: smithy.ShapeTypeStructure, Ext: &ext[90]})
-var sComputeNodeGroupConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeNodeGroupConfiguration, Members: &mComputeNodeGroupConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[109]})
-var s_ComputeNodeGroupConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComputeNodeGroupConfigurationList, Members: &m_ComputeNodeGroupConfigurationList, Type: smithy.ShapeTypeList, Ext: &ext[111]})
-var s_ComputeNodeGroupIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComputeNodeGroupIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[113]})
-var s_ComputeNodeGroupList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComputeNodeGroupList, Members: &m_ComputeNodeGroupList, Type: smithy.ShapeTypeList, Ext: &ext[114]})
-var s_ComputeNodeGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComputeNodeGroupName, Type: smithy.ShapeTypeString, Ext: &ext[116]})
-var sComputeNodeGroupSlurmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeNodeGroupSlurmConfiguration, Members: &mComputeNodeGroupSlurmConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[117]})
-var sComputeNodeGroupSlurmConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeNodeGroupSlurmConfigurationRequest, Members: &mComputeNodeGroupSlurmConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[121]})
-var sComputeNodeGroupStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeNodeGroupStatus, Members: &mComputeNodeGroupStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[125]})
-var sComputeNodeGroupSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeNodeGroupSummary, Members: &mComputeNodeGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[137]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[145]})
-var sCustomLaunchTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomLaunchTemplate, Members: &mCustomLaunchTemplate, Type: smithy.ShapeTypeStructure, Ext: &ext[149]})
-var sEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpoint, Members: &mEndpoint, Type: smithy.ShapeTypeStructure, Ext: &ext[152]})
-var s_Endpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Endpoints, Members: &m_Endpoints, Type: smithy.ShapeTypeList, Ext: &ext[158]})
-var sEndpointType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointType, Members: &mEndpointType, Type: smithy.ShapeTypeEnum, Ext: &ext[160]})
-var sErrorInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorInfo, Members: &mErrorInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[164]})
-var s_ErrorInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorInfoList, Members: &m_ErrorInfoList, Type: smithy.ShapeTypeList, Ext: &ext[167]})
-var sExecutionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionPolicy, Members: &mExecutionPolicy, Type: smithy.ShapeTypeEnum, Ext: &ext[169]})
-var s_GresCustomSettingMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GresCustomSettingMap, Members: &m_GresCustomSettingMap, Type: smithy.ShapeTypeMap, Ext: &ext[172]})
-var s_GresCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GresCustomSettings, Members: &m_GresCustomSettings, Type: smithy.ShapeTypeList, Ext: &ext[175]})
-var sInstanceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceConfig, Members: &mInstanceConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[177]})
-var s_InstanceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceList, Members: &m_InstanceList, Type: smithy.ShapeTypeList, Ext: &ext[179]})
-var s_InstanceProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceProfileArn, Type: smithy.ShapeTypeString, Ext: &ext[181]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[182]})
-var sJwtAuth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJwtAuth, Members: &mJwtAuth, Type: smithy.ShapeTypeStructure, Ext: &ext[184]})
-var sJwtKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJwtKey, Members: &mJwtKey, Type: smithy.ShapeTypeStructure, Ext: &ext[186]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[189]})
-var sNetworking = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworking, Members: &mNetworking, Type: smithy.ShapeTypeStructure, Ext: &ext[190]})
-var sNetworkingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkingRequest, Members: &mNetworkingRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[194]})
-var sNetworkType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum, Ext: &ext[198]})
-var sNodeLifecycleActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeLifecycleActions, Members: &mNodeLifecycleActions, Type: smithy.ShapeTypeStructure, Ext: &ext[201]})
-var sNodeLifecycleActionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeLifecycleActionsRequest, Members: &mNodeLifecycleActionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[204]})
-var sNodeLifecycleScript = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeLifecycleScript, Members: &mNodeLifecycleScript, Type: smithy.ShapeTypeStructure, Ext: &ext[207]})
-var s_NodeLifecycleScriptArgument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NodeLifecycleScriptArgument, Type: smithy.ShapeTypeString, Ext: &ext[213]})
-var s_NodeLifecycleScriptArguments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NodeLifecycleScriptArguments, Members: &m_NodeLifecycleScriptArguments, Type: smithy.ShapeTypeList, Ext: &ext[214]})
-var s_NodeLifecycleScriptList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NodeLifecycleScriptList, Members: &m_NodeLifecycleScriptList, Type: smithy.ShapeTypeList, Ext: &ext[216]})
-var sNodeLifecycleStages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeLifecycleStages, Members: &mNodeLifecycleStages, Type: smithy.ShapeTypeStructure, Ext: &ext[218]})
-var sOnError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOnError, Members: &mOnError, Type: smithy.ShapeTypeEnum, Ext: &ext[221]})
-var sPurchaseOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPurchaseOption, Members: &mPurchaseOption, Type: smithy.ShapeTypeEnum, Ext: &ext[225]})
-var sQueue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueue, Members: &mQueue, Type: smithy.ShapeTypeStructure, Ext: &ext[230]})
-var s_QueueIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueueIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[241]})
-var s_QueueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueueList, Members: &m_QueueList, Type: smithy.ShapeTypeList, Ext: &ext[242]})
-var s_QueueName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueueName, Type: smithy.ShapeTypeString, Ext: &ext[244]})
-var sQueueSlurmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueueSlurmConfiguration, Members: &mQueueSlurmConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[245]})
-var sQueueSlurmConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueueSlurmConfigurationRequest, Members: &mQueueSlurmConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[247]})
-var sQueueStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueueStatus, Members: &mQueueStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[249]})
-var sQueueSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueueSummary, Members: &mQueueSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[260]})
-var s_RequestTagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestTagMap, Members: &m_RequestTagMap, Type: smithy.ShapeTypeMap, Ext: &ext[268]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &ext[271]})
-var s_ResponseTagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResponseTagMap, Members: &m_ResponseTagMap, Type: smithy.ShapeTypeMap, Ext: &ext[275]})
-var s_SBClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SBClientToken, Type: smithy.ShapeTypeString, Ext: &ext[278]})
-var sScalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScalingConfiguration, Members: &mScalingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[279]})
-var sScalingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScalingConfigurationRequest, Members: &mScalingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[282]})
-var sScheduler = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduler, Members: &mScheduler, Type: smithy.ShapeTypeStructure, Ext: &ext[285]})
-var sSchedulerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchedulerRequest, Members: &mSchedulerRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[288]})
-var sSchedulerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchedulerType, Members: &mSchedulerType, Type: smithy.ShapeTypeEnum, Ext: &ext[291]})
-var sScriptCachingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScriptCachingPolicy, Members: &mScriptCachingPolicy, Type: smithy.ShapeTypeEnum, Ext: &ext[293]})
-var sScriptSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScriptSource, Members: &mScriptSource, Type: smithy.ShapeTypeStructure, Ext: &ext[296]})
-var s_SecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString, Ext: &ext[300]})
-var s_SecurityGroupIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList, Ext: &ext[301]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &ext[303]})
-var s_SharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SharedSecret, Traits: &t6, Type: smithy.ShapeTypeString, Ext: &ext[309]})
-var sSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSize, Members: &mSize, Type: smithy.ShapeTypeEnum, Ext: &ext[310]})
-var sSlurmAuthKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlurmAuthKey, Members: &mSlurmAuthKey, Type: smithy.ShapeTypeStructure, Ext: &ext[314]})
-var sSlurmCustomSetting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlurmCustomSetting, Members: &mSlurmCustomSetting, Type: smithy.ShapeTypeStructure, Ext: &ext[317]})
-var s_SlurmCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlurmCustomSettings, Members: &m_SlurmCustomSettings, Type: smithy.ShapeTypeList, Ext: &ext[320]})
-var sSlurmdbdCustomSetting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlurmdbdCustomSetting, Members: &mSlurmdbdCustomSetting, Type: smithy.ShapeTypeStructure, Ext: &ext[322]})
-var s_SlurmdbdCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlurmdbdCustomSettings, Members: &m_SlurmdbdCustomSettings, Type: smithy.ShapeTypeList, Ext: &ext[325]})
-var sSlurmRest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlurmRest, Members: &mSlurmRest, Type: smithy.ShapeTypeStructure, Ext: &ext[327]})
-var sSlurmRestMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlurmRestMode, Members: &mSlurmRestMode, Type: smithy.ShapeTypeEnum, Ext: &ext[329]})
-var sSlurmRestRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlurmRestRequest, Members: &mSlurmRestRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[332]})
-var sSpotAllocationStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpotAllocationStrategy, Members: &mSpotAllocationStrategy, Type: smithy.ShapeTypeEnum, Ext: &ext[334]})
-var sSpotOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpotOptions, Members: &mSpotOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[338]})
-var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[340]})
-var s_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &ext[342]})
-var s_SubnetIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetIdList, Members: &m_SubnetIdList, Type: smithy.ShapeTypeList, Ext: &ext[343]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[345]})
-var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &ext[346]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[348]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &ext[349]})
-var sUpdateAccountingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountingRequest, Members: &mUpdateAccountingRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[352]})
-var sUpdateClusterSlurmConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateClusterSlurmConfigurationRequest, Members: &mUpdateClusterSlurmConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[355]})
-var sUpdateComputeNodeGroupSlurmConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComputeNodeGroupSlurmConfigurationRequest, Members: &mUpdateComputeNodeGroupSlurmConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[362]})
-var sUpdateNodeLifecycleActionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNodeLifecycleActionsRequest, Members: &mUpdateNodeLifecycleActionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[366]})
-var sUpdateQueueSlurmConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateQueueSlurmConfigurationRequest, Members: &mUpdateQueueSlurmConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[369]})
-var sUpdateSchedulerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSchedulerRequest, Members: &mUpdateSchedulerRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[371]})
-var sUpdateSlurmRestRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSlurmRestRequest, Members: &mUpdateSlurmRestRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[373]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &ext[375]})
-var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[379]})
-var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[382]})
-var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[384]})
-var sCreateClusterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateClusterRequest, Members: &mCreateClusterRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[389]})
-var sCreateClusterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateClusterResponse, Members: &mCreateClusterResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[397]})
-var sCreateComputeNodeGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComputeNodeGroupRequest, Members: &mCreateComputeNodeGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[399]})
-var sCreateComputeNodeGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComputeNodeGroupResponse, Members: &mCreateComputeNodeGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[414]})
-var sCreateQueueRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateQueueRequest, Members: &mCreateQueueRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[416]})
-var sCreateQueueResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateQueueResponse, Members: &mCreateQueueResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[423]})
-var sDeleteClusterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteClusterRequest, Members: &mDeleteClusterRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[425]})
-var sDeleteClusterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteClusterResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[428]})
-var sDeleteComputeNodeGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteComputeNodeGroupRequest, Members: &mDeleteComputeNodeGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[429]})
-var sDeleteComputeNodeGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteComputeNodeGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[433]})
-var sDeleteQueueRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteQueueRequest, Members: &mDeleteQueueRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[434]})
-var sDeleteQueueResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteQueueResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[438]})
-var sGetClusterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetClusterRequest, Members: &mGetClusterRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[439]})
-var sGetClusterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetClusterResponse, Members: &mGetClusterResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[441]})
-var sGetComputeNodeGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComputeNodeGroupRequest, Members: &mGetComputeNodeGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[443]})
-var sGetComputeNodeGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComputeNodeGroupResponse, Members: &mGetComputeNodeGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[446]})
-var sGetQueueRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueueRequest, Members: &mGetQueueRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[448]})
-var sGetQueueResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueueResponse, Members: &mGetQueueResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[451]})
-var sListClustersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClustersRequest, Members: &mListClustersRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[453]})
-var sListClustersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClustersResponse, Members: &mListClustersResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[456]})
-var sListComputeNodeGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComputeNodeGroupsRequest, Members: &mListComputeNodeGroupsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[459]})
-var sListComputeNodeGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComputeNodeGroupsResponse, Members: &mListComputeNodeGroupsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[463]})
-var sListQueuesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQueuesRequest, Members: &mListQueuesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[466]})
-var sListQueuesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQueuesResponse, Members: &mListQueuesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[470]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[473]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[475]})
-var sRegisterComputeNodeGroupInstanceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterComputeNodeGroupInstanceRequest, Members: &mRegisterComputeNodeGroupInstanceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[477]})
-var sRegisterComputeNodeGroupInstanceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterComputeNodeGroupInstanceResponse, Members: &mRegisterComputeNodeGroupInstanceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[480]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[489]})
-var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[492]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[493]})
-var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[496]})
-var sUpdateClusterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateClusterRequest, Members: &mUpdateClusterRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[497]})
-var sUpdateClusterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateClusterResponse, Members: &mUpdateClusterResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[502]})
-var sUpdateComputeNodeGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComputeNodeGroupRequest, Members: &mUpdateComputeNodeGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[504]})
-var sUpdateComputeNodeGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComputeNodeGroupResponse, Members: &mUpdateComputeNodeGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[517]})
-var sUpdateQueueRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateQueueRequest, Members: &mUpdateQueueRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[519]})
-var sUpdateQueueResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateQueueResponse, Members: &mUpdateQueueResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[525]})
+var sCreateCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCluster, Type: smithy.ShapeTypeOperation, Ext: &eCreateCluster})
+var sCreateComputeNodeGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComputeNodeGroup, Type: smithy.ShapeTypeOperation, Ext: &eCreateComputeNodeGroup})
+var sCreateQueue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateQueue, Type: smithy.ShapeTypeOperation, Ext: &eCreateQueue})
+var sDeleteCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCluster, Type: smithy.ShapeTypeOperation, Ext: &eDeleteCluster})
+var sDeleteComputeNodeGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteComputeNodeGroup, Type: smithy.ShapeTypeOperation, Ext: &eDeleteComputeNodeGroup})
+var sDeleteQueue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteQueue, Type: smithy.ShapeTypeOperation, Ext: &eDeleteQueue})
+var sGetCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCluster, Type: smithy.ShapeTypeOperation, Ext: &eGetCluster})
+var sGetComputeNodeGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComputeNodeGroup, Type: smithy.ShapeTypeOperation, Ext: &eGetComputeNodeGroup})
+var sGetQueue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueue, Type: smithy.ShapeTypeOperation, Ext: &eGetQueue})
+var sListClusters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClusters, Type: smithy.ShapeTypeOperation, Ext: &eListClusters})
+var sListComputeNodeGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComputeNodeGroups, Type: smithy.ShapeTypeOperation, Ext: &eListComputeNodeGroups})
+var sListQueues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQueues, Type: smithy.ShapeTypeOperation, Ext: &eListQueues})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sRegisterComputeNodeGroupInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterComputeNodeGroupInstance, Type: smithy.ShapeTypeOperation, Ext: &eRegisterComputeNodeGroupInstance})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCluster, Type: smithy.ShapeTypeOperation, Ext: &eUpdateCluster})
+var sUpdateComputeNodeGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComputeNodeGroup, Type: smithy.ShapeTypeOperation, Ext: &eUpdateComputeNodeGroup})
+var sUpdateQueue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateQueue, Type: smithy.ShapeTypeOperation, Ext: &eUpdateQueue})
+var s_AWSParallelComputingService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSParallelComputingService, Type: smithy.ShapeTypeService, Ext: &e_AWSParallelComputingService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccounting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccounting, Members: &mAccounting, Type: smithy.ShapeTypeStructure, Ext: &eAccounting})
+var sAccountingMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountingMode, Members: &mAccountingMode, Type: smithy.ShapeTypeEnum, Ext: &eAccountingMode})
+var sAccountingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountingRequest, Members: &mAccountingRequest, Type: smithy.ShapeTypeStructure, Ext: &eAccountingRequest})
+var s_AmiId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmiId, Type: smithy.ShapeTypeString, Ext: &e_AmiId})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var s_BootstrapId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BootstrapId, Type: smithy.ShapeTypeString, Ext: &e_BootstrapId})
+var sCgroupCustomSetting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCgroupCustomSetting, Members: &mCgroupCustomSetting, Type: smithy.ShapeTypeStructure, Ext: &eCgroupCustomSetting})
+var s_CgroupCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CgroupCustomSettings, Members: &m_CgroupCustomSettings, Type: smithy.ShapeTypeList, Ext: &e_CgroupCustomSettings})
+var sCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure, Ext: &eCluster})
+var s_ClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &e_ClusterIdentifier})
+var s_ClusterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClusterList, Members: &m_ClusterList, Type: smithy.ShapeTypeList, Ext: &e_ClusterList})
+var s_ClusterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClusterName, Type: smithy.ShapeTypeString, Ext: &e_ClusterName})
+var sClusterSlurmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterSlurmConfiguration, Members: &mClusterSlurmConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eClusterSlurmConfiguration})
+var sClusterSlurmConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterSlurmConfigurationRequest, Members: &mClusterSlurmConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eClusterSlurmConfigurationRequest})
+var sClusterStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterStatus, Members: &mClusterStatus, Type: smithy.ShapeTypeEnum, Ext: &eClusterStatus})
+var sClusterSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterSummary, Members: &mClusterSummary, Type: smithy.ShapeTypeStructure, Ext: &eClusterSummary})
+var sComputeNodeGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeNodeGroup, Members: &mComputeNodeGroup, Type: smithy.ShapeTypeStructure, Ext: &eComputeNodeGroup})
+var sComputeNodeGroupConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeNodeGroupConfiguration, Members: &mComputeNodeGroupConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eComputeNodeGroupConfiguration})
+var s_ComputeNodeGroupConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComputeNodeGroupConfigurationList, Members: &m_ComputeNodeGroupConfigurationList, Type: smithy.ShapeTypeList, Ext: &e_ComputeNodeGroupConfigurationList})
+var s_ComputeNodeGroupIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComputeNodeGroupIdentifier, Type: smithy.ShapeTypeString, Ext: &e_ComputeNodeGroupIdentifier})
+var s_ComputeNodeGroupList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComputeNodeGroupList, Members: &m_ComputeNodeGroupList, Type: smithy.ShapeTypeList, Ext: &e_ComputeNodeGroupList})
+var s_ComputeNodeGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComputeNodeGroupName, Type: smithy.ShapeTypeString, Ext: &e_ComputeNodeGroupName})
+var sComputeNodeGroupSlurmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeNodeGroupSlurmConfiguration, Members: &mComputeNodeGroupSlurmConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eComputeNodeGroupSlurmConfiguration})
+var sComputeNodeGroupSlurmConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeNodeGroupSlurmConfigurationRequest, Members: &mComputeNodeGroupSlurmConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eComputeNodeGroupSlurmConfigurationRequest})
+var sComputeNodeGroupStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeNodeGroupStatus, Members: &mComputeNodeGroupStatus, Type: smithy.ShapeTypeEnum, Ext: &eComputeNodeGroupStatus})
+var sComputeNodeGroupSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeNodeGroupSummary, Members: &mComputeNodeGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &eComputeNodeGroupSummary})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sCustomLaunchTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomLaunchTemplate, Members: &mCustomLaunchTemplate, Type: smithy.ShapeTypeStructure, Ext: &eCustomLaunchTemplate})
+var sEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpoint, Members: &mEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eEndpoint})
+var s_Endpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Endpoints, Members: &m_Endpoints, Type: smithy.ShapeTypeList, Ext: &e_Endpoints})
+var sEndpointType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointType, Members: &mEndpointType, Type: smithy.ShapeTypeEnum, Ext: &eEndpointType})
+var sErrorInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorInfo, Members: &mErrorInfo, Type: smithy.ShapeTypeStructure, Ext: &eErrorInfo})
+var s_ErrorInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorInfoList, Members: &m_ErrorInfoList, Type: smithy.ShapeTypeList, Ext: &e_ErrorInfoList})
+var sExecutionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionPolicy, Members: &mExecutionPolicy, Type: smithy.ShapeTypeEnum, Ext: &eExecutionPolicy})
+var s_GresCustomSettingMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GresCustomSettingMap, Members: &m_GresCustomSettingMap, Type: smithy.ShapeTypeMap, Ext: &e_GresCustomSettingMap})
+var s_GresCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GresCustomSettings, Members: &m_GresCustomSettings, Type: smithy.ShapeTypeList, Ext: &e_GresCustomSettings})
+var sInstanceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceConfig, Members: &mInstanceConfig, Type: smithy.ShapeTypeStructure, Ext: &eInstanceConfig})
+var s_InstanceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceList, Members: &m_InstanceList, Type: smithy.ShapeTypeList, Ext: &e_InstanceList})
+var s_InstanceProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceProfileArn, Type: smithy.ShapeTypeString, Ext: &e_InstanceProfileArn})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sJwtAuth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJwtAuth, Members: &mJwtAuth, Type: smithy.ShapeTypeStructure, Ext: &eJwtAuth})
+var sJwtKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJwtKey, Members: &mJwtKey, Type: smithy.ShapeTypeStructure, Ext: &eJwtKey})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var sNetworking = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworking, Members: &mNetworking, Type: smithy.ShapeTypeStructure, Ext: &eNetworking})
+var sNetworkingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkingRequest, Members: &mNetworkingRequest, Type: smithy.ShapeTypeStructure, Ext: &eNetworkingRequest})
+var sNetworkType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum, Ext: &eNetworkType})
+var sNodeLifecycleActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeLifecycleActions, Members: &mNodeLifecycleActions, Type: smithy.ShapeTypeStructure, Ext: &eNodeLifecycleActions})
+var sNodeLifecycleActionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeLifecycleActionsRequest, Members: &mNodeLifecycleActionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eNodeLifecycleActionsRequest})
+var sNodeLifecycleScript = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeLifecycleScript, Members: &mNodeLifecycleScript, Type: smithy.ShapeTypeStructure, Ext: &eNodeLifecycleScript})
+var s_NodeLifecycleScriptArgument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NodeLifecycleScriptArgument, Type: smithy.ShapeTypeString, Ext: &e_NodeLifecycleScriptArgument})
+var s_NodeLifecycleScriptArguments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NodeLifecycleScriptArguments, Members: &m_NodeLifecycleScriptArguments, Type: smithy.ShapeTypeList, Ext: &e_NodeLifecycleScriptArguments})
+var s_NodeLifecycleScriptList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NodeLifecycleScriptList, Members: &m_NodeLifecycleScriptList, Type: smithy.ShapeTypeList, Ext: &e_NodeLifecycleScriptList})
+var sNodeLifecycleStages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeLifecycleStages, Members: &mNodeLifecycleStages, Type: smithy.ShapeTypeStructure, Ext: &eNodeLifecycleStages})
+var sOnError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOnError, Members: &mOnError, Type: smithy.ShapeTypeEnum, Ext: &eOnError})
+var sPurchaseOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPurchaseOption, Members: &mPurchaseOption, Type: smithy.ShapeTypeEnum, Ext: &ePurchaseOption})
+var sQueue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueue, Members: &mQueue, Type: smithy.ShapeTypeStructure, Ext: &eQueue})
+var s_QueueIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueueIdentifier, Type: smithy.ShapeTypeString, Ext: &e_QueueIdentifier})
+var s_QueueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueueList, Members: &m_QueueList, Type: smithy.ShapeTypeList, Ext: &e_QueueList})
+var s_QueueName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueueName, Type: smithy.ShapeTypeString, Ext: &e_QueueName})
+var sQueueSlurmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueueSlurmConfiguration, Members: &mQueueSlurmConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eQueueSlurmConfiguration})
+var sQueueSlurmConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueueSlurmConfigurationRequest, Members: &mQueueSlurmConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eQueueSlurmConfigurationRequest})
+var sQueueStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueueStatus, Members: &mQueueStatus, Type: smithy.ShapeTypeEnum, Ext: &eQueueStatus})
+var sQueueSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueueSummary, Members: &mQueueSummary, Type: smithy.ShapeTypeStructure, Ext: &eQueueSummary})
+var s_RequestTagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestTagMap, Members: &m_RequestTagMap, Type: smithy.ShapeTypeMap, Ext: &e_RequestTagMap})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var s_ResponseTagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResponseTagMap, Members: &m_ResponseTagMap, Type: smithy.ShapeTypeMap, Ext: &e_ResponseTagMap})
+var s_SBClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SBClientToken, Type: smithy.ShapeTypeString, Ext: &e_SBClientToken})
+var sScalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScalingConfiguration, Members: &mScalingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eScalingConfiguration})
+var sScalingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScalingConfigurationRequest, Members: &mScalingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eScalingConfigurationRequest})
+var sScheduler = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduler, Members: &mScheduler, Type: smithy.ShapeTypeStructure, Ext: &eScheduler})
+var sSchedulerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchedulerRequest, Members: &mSchedulerRequest, Type: smithy.ShapeTypeStructure, Ext: &eSchedulerRequest})
+var sSchedulerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchedulerType, Members: &mSchedulerType, Type: smithy.ShapeTypeEnum, Ext: &eSchedulerType})
+var sScriptCachingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScriptCachingPolicy, Members: &mScriptCachingPolicy, Type: smithy.ShapeTypeEnum, Ext: &eScriptCachingPolicy})
+var sScriptSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScriptSource, Members: &mScriptSource, Type: smithy.ShapeTypeStructure, Ext: &eScriptSource})
+var s_SecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString, Ext: &e_SecurityGroupId})
+var s_SecurityGroupIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList, Ext: &e_SecurityGroupIdList})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var s_SharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SharedSecret, Traits: &t6, Type: smithy.ShapeTypeString, Ext: &e_SharedSecret})
+var sSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSize, Members: &mSize, Type: smithy.ShapeTypeEnum, Ext: &eSize})
+var sSlurmAuthKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlurmAuthKey, Members: &mSlurmAuthKey, Type: smithy.ShapeTypeStructure, Ext: &eSlurmAuthKey})
+var sSlurmCustomSetting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlurmCustomSetting, Members: &mSlurmCustomSetting, Type: smithy.ShapeTypeStructure, Ext: &eSlurmCustomSetting})
+var s_SlurmCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlurmCustomSettings, Members: &m_SlurmCustomSettings, Type: smithy.ShapeTypeList, Ext: &e_SlurmCustomSettings})
+var sSlurmdbdCustomSetting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlurmdbdCustomSetting, Members: &mSlurmdbdCustomSetting, Type: smithy.ShapeTypeStructure, Ext: &eSlurmdbdCustomSetting})
+var s_SlurmdbdCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlurmdbdCustomSettings, Members: &m_SlurmdbdCustomSettings, Type: smithy.ShapeTypeList, Ext: &e_SlurmdbdCustomSettings})
+var sSlurmRest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlurmRest, Members: &mSlurmRest, Type: smithy.ShapeTypeStructure, Ext: &eSlurmRest})
+var sSlurmRestMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlurmRestMode, Members: &mSlurmRestMode, Type: smithy.ShapeTypeEnum, Ext: &eSlurmRestMode})
+var sSlurmRestRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlurmRestRequest, Members: &mSlurmRestRequest, Type: smithy.ShapeTypeStructure, Ext: &eSlurmRestRequest})
+var sSpotAllocationStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpotAllocationStrategy, Members: &mSpotAllocationStrategy, Type: smithy.ShapeTypeEnum, Ext: &eSpotAllocationStrategy})
+var sSpotOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpotOptions, Members: &mSpotOptions, Type: smithy.ShapeTypeStructure, Ext: &eSpotOptions})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &e_StringList})
+var s_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &e_SubnetId})
+var s_SubnetIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetIdList, Members: &m_SubnetIdList, Type: smithy.ShapeTypeList, Ext: &e_SubnetIdList})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &e_TagKeys})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sUpdateAccountingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountingRequest, Members: &mUpdateAccountingRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAccountingRequest})
+var sUpdateClusterSlurmConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateClusterSlurmConfigurationRequest, Members: &mUpdateClusterSlurmConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateClusterSlurmConfigurationRequest})
+var sUpdateComputeNodeGroupSlurmConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComputeNodeGroupSlurmConfigurationRequest, Members: &mUpdateComputeNodeGroupSlurmConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateComputeNodeGroupSlurmConfigurationRequest})
+var sUpdateNodeLifecycleActionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNodeLifecycleActionsRequest, Members: &mUpdateNodeLifecycleActionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateNodeLifecycleActionsRequest})
+var sUpdateQueueSlurmConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateQueueSlurmConfigurationRequest, Members: &mUpdateQueueSlurmConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateQueueSlurmConfigurationRequest})
+var sUpdateSchedulerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSchedulerRequest, Members: &mUpdateSchedulerRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSchedulerRequest})
+var sUpdateSlurmRestRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSlurmRestRequest, Members: &mUpdateSlurmRestRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateSlurmRestRequest})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
+var sCreateClusterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateClusterRequest, Members: &mCreateClusterRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterRequest})
+var sCreateClusterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateClusterResponse, Members: &mCreateClusterResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterResponse})
+var sCreateComputeNodeGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComputeNodeGroupRequest, Members: &mCreateComputeNodeGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateComputeNodeGroupRequest})
+var sCreateComputeNodeGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComputeNodeGroupResponse, Members: &mCreateComputeNodeGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateComputeNodeGroupResponse})
+var sCreateQueueRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateQueueRequest, Members: &mCreateQueueRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateQueueRequest})
+var sCreateQueueResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateQueueResponse, Members: &mCreateQueueResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateQueueResponse})
+var sDeleteClusterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteClusterRequest, Members: &mDeleteClusterRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteClusterRequest})
+var sDeleteClusterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteClusterResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteClusterResponse})
+var sDeleteComputeNodeGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteComputeNodeGroupRequest, Members: &mDeleteComputeNodeGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteComputeNodeGroupRequest})
+var sDeleteComputeNodeGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteComputeNodeGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteComputeNodeGroupResponse})
+var sDeleteQueueRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteQueueRequest, Members: &mDeleteQueueRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteQueueRequest})
+var sDeleteQueueResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteQueueResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteQueueResponse})
+var sGetClusterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetClusterRequest, Members: &mGetClusterRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetClusterRequest})
+var sGetClusterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetClusterResponse, Members: &mGetClusterResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetClusterResponse})
+var sGetComputeNodeGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComputeNodeGroupRequest, Members: &mGetComputeNodeGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetComputeNodeGroupRequest})
+var sGetComputeNodeGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComputeNodeGroupResponse, Members: &mGetComputeNodeGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetComputeNodeGroupResponse})
+var sGetQueueRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueueRequest, Members: &mGetQueueRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetQueueRequest})
+var sGetQueueResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueueResponse, Members: &mGetQueueResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetQueueResponse})
+var sListClustersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClustersRequest, Members: &mListClustersRequest, Type: smithy.ShapeTypeStructure, Ext: &eListClustersRequest})
+var sListClustersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClustersResponse, Members: &mListClustersResponse, Type: smithy.ShapeTypeStructure, Ext: &eListClustersResponse})
+var sListComputeNodeGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComputeNodeGroupsRequest, Members: &mListComputeNodeGroupsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListComputeNodeGroupsRequest})
+var sListComputeNodeGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComputeNodeGroupsResponse, Members: &mListComputeNodeGroupsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListComputeNodeGroupsResponse})
+var sListQueuesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQueuesRequest, Members: &mListQueuesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListQueuesRequest})
+var sListQueuesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQueuesResponse, Members: &mListQueuesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListQueuesResponse})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sRegisterComputeNodeGroupInstanceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterComputeNodeGroupInstanceRequest, Members: &mRegisterComputeNodeGroupInstanceRequest, Type: smithy.ShapeTypeStructure, Ext: &eRegisterComputeNodeGroupInstanceRequest})
+var sRegisterComputeNodeGroupInstanceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterComputeNodeGroupInstanceResponse, Members: &mRegisterComputeNodeGroupInstanceResponse, Type: smithy.ShapeTypeStructure, Ext: &eRegisterComputeNodeGroupInstanceResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateClusterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateClusterRequest, Members: &mUpdateClusterRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateClusterRequest})
+var sUpdateClusterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateClusterResponse, Members: &mUpdateClusterResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateClusterResponse})
+var sUpdateComputeNodeGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComputeNodeGroupRequest, Members: &mUpdateComputeNodeGroupRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateComputeNodeGroupRequest})
+var sUpdateComputeNodeGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComputeNodeGroupResponse, Members: &mUpdateComputeNodeGroupResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateComputeNodeGroupResponse})
+var sUpdateQueueRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateQueueRequest, Members: &mUpdateQueueRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateQueueRequest})
+var sUpdateQueueResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateQueueResponse, Members: &mUpdateQueueResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateQueueResponse})
 
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[21]})
-var sAccounting_defaultPurgeTimeInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultPurgeTimeInDays", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[23]})
-var sAccounting_mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mode", ID: &iAccountingMode, Members: &mAccountingMode, Type: smithy.ShapeTypeEnum, Ext: &ext[24]})
-var sAccountingMode_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[26]})
-var sAccountingMode_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[27]})
-var sAccountingRequest_defaultPurgeTimeInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultPurgeTimeInDays", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[29]})
-var sAccountingRequest_mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mode", ID: &iAccountingMode, Members: &mAccountingMode, Type: smithy.ShapeTypeEnum, Ext: &ext[30]})
-var sCgroupCustomSetting_parameterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameterName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var sCgroupCustomSetting_parameterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameterValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var s_CgroupCustomSettings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCgroupCustomSetting, Members: &mCgroupCustomSetting, Type: smithy.ShapeTypeStructure, Ext: &ext[38]})
-var sCluster_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var sCluster_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[41]})
-var sCluster_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var sCluster_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iClusterStatus, Members: &mClusterStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[43]})
-var sCluster_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &ext[44]})
-var sCluster_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &ext[45]})
-var sCluster_scheduler = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduler", ID: &iScheduler, Members: &mScheduler, Type: smithy.ShapeTypeStructure, Ext: &ext[46]})
-var sCluster_size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "size", ID: &iSize, Members: &mSize, Type: smithy.ShapeTypeEnum, Ext: &ext[47]})
-var sCluster_slurmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmConfiguration", ID: &iClusterSlurmConfiguration, Members: &mClusterSlurmConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[48]})
-var sCluster_networking = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networking", ID: &iNetworking, Members: &mNetworking, Type: smithy.ShapeTypeStructure, Ext: &ext[49]})
-var sCluster_endpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpoints", ID: &i_Endpoints, Members: &m_Endpoints, Type: smithy.ShapeTypeList, Ext: &ext[50]})
-var sCluster_errorInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorInfo", ID: &i_ErrorInfoList, Members: &m_ErrorInfoList, Type: smithy.ShapeTypeList, Ext: &ext[51]})
-var s_ClusterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iClusterSummary, Members: &mClusterSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[54]})
-var sClusterSlurmConfiguration_scaleDownIdleTimeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scaleDownIdleTimeInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[57]})
-var sClusterSlurmConfiguration_slurmCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmCustomSettings", ID: &i_SlurmCustomSettings, Members: &m_SlurmCustomSettings, Type: smithy.ShapeTypeList, Ext: &ext[58]})
-var sClusterSlurmConfiguration_slurmdbdCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmdbdCustomSettings", ID: &i_SlurmdbdCustomSettings, Members: &m_SlurmdbdCustomSettings, Type: smithy.ShapeTypeList, Ext: &ext[59]})
-var sClusterSlurmConfiguration_cgroupCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cgroupCustomSettings", ID: &i_CgroupCustomSettings, Members: &m_CgroupCustomSettings, Type: smithy.ShapeTypeList, Ext: &ext[60]})
-var sClusterSlurmConfiguration_authKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authKey", ID: &iSlurmAuthKey, Members: &mSlurmAuthKey, Type: smithy.ShapeTypeStructure, Ext: &ext[61]})
-var sClusterSlurmConfiguration_jwtAuth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jwtAuth", ID: &iJwtAuth, Members: &mJwtAuth, Type: smithy.ShapeTypeStructure, Ext: &ext[62]})
-var sClusterSlurmConfiguration_accounting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accounting", ID: &iAccounting, Members: &mAccounting, Type: smithy.ShapeTypeStructure, Ext: &ext[63]})
-var sClusterSlurmConfiguration_slurmRest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmRest", ID: &iSlurmRest, Members: &mSlurmRest, Type: smithy.ShapeTypeStructure, Ext: &ext[64]})
-var sClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scaleDownIdleTimeInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[66]})
-var sClusterSlurmConfigurationRequest_slurmCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmCustomSettings", ID: &i_SlurmCustomSettings, Members: &m_SlurmCustomSettings, Type: smithy.ShapeTypeList, Ext: &ext[67]})
-var sClusterSlurmConfigurationRequest_slurmdbdCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmdbdCustomSettings", ID: &i_SlurmdbdCustomSettings, Members: &m_SlurmdbdCustomSettings, Type: smithy.ShapeTypeList, Ext: &ext[68]})
-var sClusterSlurmConfigurationRequest_cgroupCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cgroupCustomSettings", ID: &i_CgroupCustomSettings, Members: &m_CgroupCustomSettings, Type: smithy.ShapeTypeList, Ext: &ext[69]})
-var sClusterSlurmConfigurationRequest_accounting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accounting", ID: &iAccountingRequest, Members: &mAccountingRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[70]})
-var sClusterSlurmConfigurationRequest_slurmRest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmRest", ID: &iSlurmRestRequest, Members: &mSlurmRestRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[71]})
-var sClusterStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[73]})
-var sClusterStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var sClusterStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[75]})
-var sClusterStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[76]})
-var sClusterStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
-var sClusterStatus_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[78]})
-var sClusterStatus_UPDATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[79]})
-var sClusterStatus_SUSPENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var sClusterStatus_SUSPENDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[81]})
-var sClusterStatus_RESUMING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESUMING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[82]})
-var sClusterSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[84]})
-var sClusterSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[85]})
-var sClusterSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[86]})
-var sClusterSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &ext[87]})
-var sClusterSummary_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &ext[88]})
-var sClusterSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iClusterStatus, Members: &mClusterStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[89]})
-var sComputeNodeGroup_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ComputeNodeGroupName, Type: smithy.ShapeTypeString, Ext: &ext[91]})
-var sComputeNodeGroup_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[92]})
-var sComputeNodeGroup_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[93]})
-var sComputeNodeGroup_clusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[94]})
-var sComputeNodeGroup_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &ext[95]})
-var sComputeNodeGroup_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &ext[96]})
-var sComputeNodeGroup_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iComputeNodeGroupStatus, Members: &mComputeNodeGroupStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[97]})
-var sComputeNodeGroup_amiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amiId", ID: &i_AmiId, Type: smithy.ShapeTypeString, Ext: &ext[98]})
-var sComputeNodeGroup_subnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetIds", ID: &i_SubnetIdList, Members: &m_SubnetIdList, Type: smithy.ShapeTypeList, Ext: &ext[99]})
-var sComputeNodeGroup_purchaseOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "purchaseOption", ID: &iPurchaseOption, Members: &mPurchaseOption, Type: smithy.ShapeTypeEnum, Ext: &ext[100]})
-var sComputeNodeGroup_customLaunchTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customLaunchTemplate", ID: &iCustomLaunchTemplate, Members: &mCustomLaunchTemplate, Type: smithy.ShapeTypeStructure, Ext: &ext[101]})
-var sComputeNodeGroup_iamInstanceProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iamInstanceProfileArn", ID: &i_InstanceProfileArn, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var sComputeNodeGroup_scalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scalingConfiguration", ID: &iScalingConfiguration, Members: &mScalingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[103]})
-var sComputeNodeGroup_instanceConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceConfigs", ID: &i_InstanceList, Members: &m_InstanceList, Type: smithy.ShapeTypeList, Ext: &ext[104]})
-var sComputeNodeGroup_spotOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spotOptions", ID: &iSpotOptions, Members: &mSpotOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[105]})
-var sComputeNodeGroup_slurmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmConfiguration", ID: &iComputeNodeGroupSlurmConfiguration, Members: &mComputeNodeGroupSlurmConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[106]})
-var sComputeNodeGroup_nodeLifecycleActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodeLifecycleActions", ID: &iNodeLifecycleActions, Members: &mNodeLifecycleActions, Type: smithy.ShapeTypeStructure, Ext: &ext[107]})
-var sComputeNodeGroup_errorInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorInfo", ID: &i_ErrorInfoList, Members: &m_ErrorInfoList, Type: smithy.ShapeTypeList, Ext: &ext[108]})
-var sComputeNodeGroupConfiguration_computeNodeGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroupId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[110]})
-var s_ComputeNodeGroupConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iComputeNodeGroupConfiguration, Members: &mComputeNodeGroupConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[112]})
-var s_ComputeNodeGroupList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iComputeNodeGroupSummary, Members: &mComputeNodeGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[115]})
-var sComputeNodeGroupSlurmConfiguration_scaleDownIdleTimeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scaleDownIdleTimeInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[118]})
-var sComputeNodeGroupSlurmConfiguration_slurmCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmCustomSettings", ID: &i_SlurmCustomSettings, Members: &m_SlurmCustomSettings, Type: smithy.ShapeTypeList, Ext: &ext[119]})
-var sComputeNodeGroupSlurmConfiguration_gresCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gresCustomSettings", ID: &i_GresCustomSettings, Members: &m_GresCustomSettings, Type: smithy.ShapeTypeList, Ext: &ext[120]})
-var sComputeNodeGroupSlurmConfigurationRequest_scaleDownIdleTimeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scaleDownIdleTimeInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[122]})
-var sComputeNodeGroupSlurmConfigurationRequest_slurmCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmCustomSettings", ID: &i_SlurmCustomSettings, Members: &m_SlurmCustomSettings, Type: smithy.ShapeTypeList, Ext: &ext[123]})
-var sComputeNodeGroupSlurmConfigurationRequest_gresCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gresCustomSettings", ID: &i_GresCustomSettings, Members: &m_GresCustomSettings, Type: smithy.ShapeTypeList, Ext: &ext[124]})
-var sComputeNodeGroupStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var sComputeNodeGroupStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[127]})
-var sComputeNodeGroupStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[128]})
-var sComputeNodeGroupStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[129]})
-var sComputeNodeGroupStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[130]})
-var sComputeNodeGroupStatus_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[131]})
-var sComputeNodeGroupStatus_UPDATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[132]})
-var sComputeNodeGroupStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[133]})
-var sComputeNodeGroupStatus_SUSPENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[134]})
-var sComputeNodeGroupStatus_SUSPENDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[135]})
-var sComputeNodeGroupStatus_RESUMING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESUMING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[136]})
-var sComputeNodeGroupSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ComputeNodeGroupName, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var sComputeNodeGroupSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[139]})
-var sComputeNodeGroupSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[140]})
-var sComputeNodeGroupSummary_clusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[141]})
-var sComputeNodeGroupSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &ext[142]})
-var sComputeNodeGroupSummary_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &ext[143]})
-var sComputeNodeGroupSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iComputeNodeGroupStatus, Members: &mComputeNodeGroupStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[144]})
-var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[146]})
-var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[147]})
-var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[148]})
-var sCustomLaunchTemplate_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[150]})
-var sCustomLaunchTemplate_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[151]})
-var sEndpoint_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iEndpointType, Members: &mEndpointType, Type: smithy.ShapeTypeEnum, Ext: &ext[153]})
-var sEndpoint_privateIpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "privateIpAddress", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[154]})
-var sEndpoint_publicIpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "publicIpAddress", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[155]})
-var sEndpoint_ipv6Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipv6Address", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[156]})
-var sEndpoint_port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "port", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[157]})
-var s_Endpoints_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEndpoint, Members: &mEndpoint, Type: smithy.ShapeTypeStructure, Ext: &ext[159]})
-var sEndpointType_SLURMCTLD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SLURMCTLD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[161]})
-var sEndpointType_SLURMDBD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SLURMDBD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[162]})
-var sEndpointType_SLURMRESTD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SLURMRESTD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[163]})
-var sErrorInfo_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[165]})
-var sErrorInfo_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[166]})
-var s_ErrorInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iErrorInfo, Members: &mErrorInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[168]})
-var sExecutionPolicy_FIRST_BOOT_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIRST_BOOT_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[170]})
-var sExecutionPolicy_EVERY_BOOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVERY_BOOT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[171]})
-var s_GresCustomSettingMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[173]})
-var s_GresCustomSettingMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[174]})
-var s_GresCustomSettings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GresCustomSettingMap, Members: &m_GresCustomSettingMap, Type: smithy.ShapeTypeMap, Ext: &ext[176]})
-var sInstanceConfig_instanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[178]})
-var s_InstanceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInstanceConfig, Members: &mInstanceConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[180]})
-var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[183]})
-var sJwtAuth_jwtKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jwtKey", ID: &iJwtKey, Members: &mJwtKey, Type: smithy.ShapeTypeStructure, Ext: &ext[185]})
-var sJwtKey_secretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[187]})
-var sJwtKey_secretVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[188]})
-var sNetworking_subnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetIds", ID: &i_SubnetIdList, Members: &m_SubnetIdList, Type: smithy.ShapeTypeList, Ext: &ext[191]})
-var sNetworking_securityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroupIds", ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList, Ext: &ext[192]})
-var sNetworking_networkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkType", ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum, Ext: &ext[193]})
-var sNetworkingRequest_subnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetIds", ID: &i_SubnetIdList, Members: &m_SubnetIdList, Type: smithy.ShapeTypeList, Ext: &ext[195]})
-var sNetworkingRequest_securityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroupIds", ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList, Ext: &ext[196]})
-var sNetworkingRequest_networkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkType", ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum, Ext: &ext[197]})
-var sNetworkType_IPV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[199]})
-var sNetworkType_IPV6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV6", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[200]})
-var sNodeLifecycleActions_stages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stages", ID: &iNodeLifecycleStages, Members: &mNodeLifecycleStages, Type: smithy.ShapeTypeStructure, Ext: &ext[202]})
-var sNodeLifecycleActions_scriptCachingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scriptCachingPolicy", ID: &iScriptCachingPolicy, Members: &mScriptCachingPolicy, Type: smithy.ShapeTypeEnum, Ext: &ext[203]})
-var sNodeLifecycleActionsRequest_stages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stages", ID: &iNodeLifecycleStages, Members: &mNodeLifecycleStages, Type: smithy.ShapeTypeStructure, Ext: &ext[205]})
-var sNodeLifecycleActionsRequest_scriptCachingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scriptCachingPolicy", ID: &iScriptCachingPolicy, Members: &mScriptCachingPolicy, Type: smithy.ShapeTypeEnum, Ext: &ext[206]})
-var sNodeLifecycleScript_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[208]})
-var sNodeLifecycleScript_scriptSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scriptSource", ID: &iScriptSource, Members: &mScriptSource, Type: smithy.ShapeTypeStructure, Ext: &ext[209]})
-var sNodeLifecycleScript_arguments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arguments", ID: &i_NodeLifecycleScriptArguments, Members: &m_NodeLifecycleScriptArguments, Type: smithy.ShapeTypeList, Ext: &ext[210]})
-var sNodeLifecycleScript_onError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "onError", ID: &iOnError, Members: &mOnError, Type: smithy.ShapeTypeEnum, Ext: &ext[211]})
-var sNodeLifecycleScript_executionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionPolicy", ID: &iExecutionPolicy, Members: &mExecutionPolicy, Type: smithy.ShapeTypeEnum, Ext: &ext[212]})
-var s_NodeLifecycleScriptArguments_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NodeLifecycleScriptArgument, Type: smithy.ShapeTypeString, Ext: &ext[215]})
-var s_NodeLifecycleScriptList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNodeLifecycleScript, Members: &mNodeLifecycleScript, Type: smithy.ShapeTypeStructure, Ext: &ext[217]})
-var sNodeLifecycleStages_nodeBootstrapped = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodeBootstrapped", ID: &i_NodeLifecycleScriptList, Members: &m_NodeLifecycleScriptList, Type: smithy.ShapeTypeList, Ext: &ext[219]})
-var sNodeLifecycleStages_nodeReady = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodeReady", ID: &i_NodeLifecycleScriptList, Members: &m_NodeLifecycleScriptList, Type: smithy.ShapeTypeList, Ext: &ext[220]})
-var sOnError_TERMINATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[222]})
-var sOnError_STOP_SEQUENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOP_SEQUENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[223]})
-var sOnError_CONTINUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTINUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[224]})
-var sPurchaseOption_ONDEMAND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONDEMAND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[226]})
-var sPurchaseOption_SPOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPOT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[227]})
-var sPurchaseOption_CAPACITY_BLOCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CAPACITY_BLOCK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[228]})
-var sPurchaseOption_INTERRUPTIBLE_CAPACITY_RESERVATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERRUPTIBLE_CAPACITY_RESERVATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[229]})
-var sQueue_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_QueueName, Type: smithy.ShapeTypeString, Ext: &ext[231]})
-var sQueue_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[232]})
-var sQueue_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[233]})
-var sQueue_clusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[234]})
-var sQueue_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &ext[235]})
-var sQueue_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &ext[236]})
-var sQueue_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iQueueStatus, Members: &mQueueStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[237]})
-var sQueue_computeNodeGroupConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroupConfigurations", ID: &i_ComputeNodeGroupConfigurationList, Members: &m_ComputeNodeGroupConfigurationList, Type: smithy.ShapeTypeList, Ext: &ext[238]})
-var sQueue_slurmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmConfiguration", ID: &iQueueSlurmConfiguration, Members: &mQueueSlurmConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[239]})
-var sQueue_errorInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorInfo", ID: &i_ErrorInfoList, Members: &m_ErrorInfoList, Type: smithy.ShapeTypeList, Ext: &ext[240]})
-var s_QueueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQueueSummary, Members: &mQueueSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[243]})
-var sQueueSlurmConfiguration_slurmCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmCustomSettings", ID: &i_SlurmCustomSettings, Members: &m_SlurmCustomSettings, Type: smithy.ShapeTypeList, Ext: &ext[246]})
-var sQueueSlurmConfigurationRequest_slurmCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmCustomSettings", ID: &i_SlurmCustomSettings, Members: &m_SlurmCustomSettings, Type: smithy.ShapeTypeList, Ext: &ext[248]})
-var sQueueStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[250]})
-var sQueueStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[251]})
-var sQueueStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[252]})
-var sQueueStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[253]})
-var sQueueStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[254]})
-var sQueueStatus_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[255]})
-var sQueueStatus_UPDATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[256]})
-var sQueueStatus_SUSPENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[257]})
-var sQueueStatus_SUSPENDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[258]})
-var sQueueStatus_RESUMING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESUMING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[259]})
-var sQueueSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_QueueName, Type: smithy.ShapeTypeString, Ext: &ext[261]})
-var sQueueSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[262]})
-var sQueueSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[263]})
-var sQueueSummary_clusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[264]})
-var sQueueSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &ext[265]})
-var sQueueSummary_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &ext[266]})
-var sQueueSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iQueueStatus, Members: &mQueueStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[267]})
-var s_RequestTagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[269]})
-var s_RequestTagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[270]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[272]})
-var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[273]})
-var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[274]})
-var s_ResponseTagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[276]})
-var s_ResponseTagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[277]})
-var sScalingConfiguration_minInstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minInstanceCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[280]})
-var sScalingConfiguration_maxInstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxInstanceCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[281]})
-var sScalingConfigurationRequest_minInstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minInstanceCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[283]})
-var sScalingConfigurationRequest_maxInstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxInstanceCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[284]})
-var sScheduler_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iSchedulerType, Members: &mSchedulerType, Type: smithy.ShapeTypeEnum, Ext: &ext[286]})
-var sScheduler_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[287]})
-var sSchedulerRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iSchedulerType, Members: &mSchedulerType, Type: smithy.ShapeTypeEnum, Ext: &ext[289]})
-var sSchedulerRequest_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[290]})
-var sSchedulerType_SLURM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SLURM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[292]})
-var sScriptCachingPolicy_CACHE_ONCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CACHE_ONCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[294]})
-var sScriptCachingPolicy_REFRESH_ON_REBOOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REFRESH_ON_REBOOT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[295]})
-var sScriptSource_scriptLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scriptLocation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[297]})
-var sScriptSource_s3VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3VersionId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[298]})
-var sScriptSource_checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checksum", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[299]})
-var s_SecurityGroupIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString, Ext: &ext[302]})
-var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[304]})
-var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[305]})
-var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[306]})
-var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[307]})
-var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[308]})
-var sSize_SMALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[311]})
-var sSize_MEDIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[312]})
-var sSize_LARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[313]})
-var sSlurmAuthKey_secretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[315]})
-var sSlurmAuthKey_secretVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[316]})
-var sSlurmCustomSetting_parameterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameterName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[318]})
-var sSlurmCustomSetting_parameterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameterValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[319]})
-var s_SlurmCustomSettings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSlurmCustomSetting, Members: &mSlurmCustomSetting, Type: smithy.ShapeTypeStructure, Ext: &ext[321]})
-var sSlurmdbdCustomSetting_parameterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameterName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[323]})
-var sSlurmdbdCustomSetting_parameterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameterValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[324]})
-var s_SlurmdbdCustomSettings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSlurmdbdCustomSetting, Members: &mSlurmdbdCustomSetting, Type: smithy.ShapeTypeStructure, Ext: &ext[326]})
-var sSlurmRest_mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mode", ID: &iSlurmRestMode, Members: &mSlurmRestMode, Type: smithy.ShapeTypeEnum, Ext: &ext[328]})
-var sSlurmRestMode_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[330]})
-var sSlurmRestMode_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[331]})
-var sSlurmRestRequest_mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mode", ID: &iSlurmRestMode, Members: &mSlurmRestMode, Type: smithy.ShapeTypeEnum, Ext: &ext[333]})
-var sSpotAllocationStrategy_LOWEST_PRICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOWEST_PRICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[335]})
-var sSpotAllocationStrategy_CAPACITY_OPTIMIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CAPACITY_OPTIMIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[336]})
-var sSpotAllocationStrategy_PRICE_CAPACITY_OPTIMIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRICE_CAPACITY_OPTIMIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[337]})
-var sSpotOptions_allocationStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allocationStrategy", ID: &iSpotAllocationStrategy, Members: &mSpotAllocationStrategy, Type: smithy.ShapeTypeEnum, Ext: &ext[339]})
-var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[341]})
-var s_SubnetIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &ext[344]})
-var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[347]})
-var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[350]})
-var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t8, Type: smithy.ShapeTypeInteger, Ext: &ext[351]})
-var sUpdateAccountingRequest_defaultPurgeTimeInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultPurgeTimeInDays", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[353]})
-var sUpdateAccountingRequest_mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mode", ID: &iAccountingMode, Members: &mAccountingMode, Type: smithy.ShapeTypeEnum, Ext: &ext[354]})
-var sUpdateClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scaleDownIdleTimeInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[356]})
-var sUpdateClusterSlurmConfigurationRequest_slurmCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmCustomSettings", ID: &i_SlurmCustomSettings, Members: &m_SlurmCustomSettings, Type: smithy.ShapeTypeList, Ext: &ext[357]})
-var sUpdateClusterSlurmConfigurationRequest_slurmdbdCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmdbdCustomSettings", ID: &i_SlurmdbdCustomSettings, Members: &m_SlurmdbdCustomSettings, Type: smithy.ShapeTypeList, Ext: &ext[358]})
-var sUpdateClusterSlurmConfigurationRequest_cgroupCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cgroupCustomSettings", ID: &i_CgroupCustomSettings, Members: &m_CgroupCustomSettings, Type: smithy.ShapeTypeList, Ext: &ext[359]})
-var sUpdateClusterSlurmConfigurationRequest_accounting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accounting", ID: &iUpdateAccountingRequest, Members: &mUpdateAccountingRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[360]})
-var sUpdateClusterSlurmConfigurationRequest_slurmRest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmRest", ID: &iUpdateSlurmRestRequest, Members: &mUpdateSlurmRestRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[361]})
-var sUpdateComputeNodeGroupSlurmConfigurationRequest_scaleDownIdleTimeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scaleDownIdleTimeInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[363]})
-var sUpdateComputeNodeGroupSlurmConfigurationRequest_slurmCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmCustomSettings", ID: &i_SlurmCustomSettings, Members: &m_SlurmCustomSettings, Type: smithy.ShapeTypeList, Ext: &ext[364]})
-var sUpdateComputeNodeGroupSlurmConfigurationRequest_gresCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gresCustomSettings", ID: &i_GresCustomSettings, Members: &m_GresCustomSettings, Type: smithy.ShapeTypeList, Ext: &ext[365]})
-var sUpdateNodeLifecycleActionsRequest_stages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stages", ID: &iNodeLifecycleStages, Members: &mNodeLifecycleStages, Type: smithy.ShapeTypeStructure, Ext: &ext[367]})
-var sUpdateNodeLifecycleActionsRequest_scriptCachingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scriptCachingPolicy", ID: &iScriptCachingPolicy, Members: &mScriptCachingPolicy, Type: smithy.ShapeTypeEnum, Ext: &ext[368]})
-var sUpdateQueueSlurmConfigurationRequest_slurmCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmCustomSettings", ID: &i_SlurmCustomSettings, Members: &m_SlurmCustomSettings, Type: smithy.ShapeTypeList, Ext: &ext[370]})
-var sUpdateSchedulerRequest_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[372]})
-var sUpdateSlurmRestRequest_mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mode", ID: &iSlurmRestMode, Members: &mSlurmRestMode, Type: smithy.ShapeTypeEnum, Ext: &ext[374]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[376]})
-var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[377]})
-var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[378]})
-var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[380]})
-var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[381]})
-var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[383]})
-var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[385]})
-var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[386]})
-var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[387]})
-var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[388]})
-var sCreateClusterRequest_clusterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterName", ID: &i_ClusterName, Type: smithy.ShapeTypeString, Ext: &ext[390]})
-var sCreateClusterRequest_scheduler = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduler", ID: &iSchedulerRequest, Members: &mSchedulerRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[391]})
-var sCreateClusterRequest_size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "size", ID: &iSize, Members: &mSize, Type: smithy.ShapeTypeEnum, Ext: &ext[392]})
-var sCreateClusterRequest_networking = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networking", ID: &iNetworkingRequest, Members: &mNetworkingRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[393]})
-var sCreateClusterRequest_slurmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmConfiguration", ID: &iClusterSlurmConfigurationRequest, Members: &mClusterSlurmConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[394]})
-var sCreateClusterRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_SBClientToken, Type: smithy.ShapeTypeString, Ext: &ext[395]})
-var sCreateClusterRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_RequestTagMap, Members: &m_RequestTagMap, Type: smithy.ShapeTypeMap, Ext: &ext[396]})
-var sCreateClusterResponse_cluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cluster", ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure, Ext: &ext[398]})
-var sCreateComputeNodeGroupRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[400]})
-var sCreateComputeNodeGroupRequest_computeNodeGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroupName", ID: &i_ComputeNodeGroupName, Type: smithy.ShapeTypeString, Ext: &ext[401]})
-var sCreateComputeNodeGroupRequest_amiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amiId", ID: &i_AmiId, Type: smithy.ShapeTypeString, Ext: &ext[402]})
-var sCreateComputeNodeGroupRequest_subnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetIds", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[403]})
-var sCreateComputeNodeGroupRequest_purchaseOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "purchaseOption", ID: &iPurchaseOption, Members: &mPurchaseOption, Type: smithy.ShapeTypeEnum, Ext: &ext[404]})
-var sCreateComputeNodeGroupRequest_customLaunchTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customLaunchTemplate", ID: &iCustomLaunchTemplate, Members: &mCustomLaunchTemplate, Type: smithy.ShapeTypeStructure, Ext: &ext[405]})
-var sCreateComputeNodeGroupRequest_iamInstanceProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iamInstanceProfileArn", ID: &i_InstanceProfileArn, Type: smithy.ShapeTypeString, Ext: &ext[406]})
-var sCreateComputeNodeGroupRequest_scalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scalingConfiguration", ID: &iScalingConfigurationRequest, Members: &mScalingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[407]})
-var sCreateComputeNodeGroupRequest_instanceConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceConfigs", ID: &i_InstanceList, Members: &m_InstanceList, Type: smithy.ShapeTypeList, Ext: &ext[408]})
-var sCreateComputeNodeGroupRequest_spotOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spotOptions", ID: &iSpotOptions, Members: &mSpotOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[409]})
-var sCreateComputeNodeGroupRequest_slurmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmConfiguration", ID: &iComputeNodeGroupSlurmConfigurationRequest, Members: &mComputeNodeGroupSlurmConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[410]})
-var sCreateComputeNodeGroupRequest_nodeLifecycleActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodeLifecycleActions", ID: &iNodeLifecycleActionsRequest, Members: &mNodeLifecycleActionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[411]})
-var sCreateComputeNodeGroupRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_SBClientToken, Type: smithy.ShapeTypeString, Ext: &ext[412]})
-var sCreateComputeNodeGroupRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_RequestTagMap, Members: &m_RequestTagMap, Type: smithy.ShapeTypeMap, Ext: &ext[413]})
-var sCreateComputeNodeGroupResponse_computeNodeGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroup", ID: &iComputeNodeGroup, Members: &mComputeNodeGroup, Type: smithy.ShapeTypeStructure, Ext: &ext[415]})
-var sCreateQueueRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[417]})
-var sCreateQueueRequest_queueName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queueName", ID: &i_QueueName, Type: smithy.ShapeTypeString, Ext: &ext[418]})
-var sCreateQueueRequest_computeNodeGroupConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroupConfigurations", ID: &i_ComputeNodeGroupConfigurationList, Members: &m_ComputeNodeGroupConfigurationList, Type: smithy.ShapeTypeList, Ext: &ext[419]})
-var sCreateQueueRequest_slurmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmConfiguration", ID: &iQueueSlurmConfigurationRequest, Members: &mQueueSlurmConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[420]})
-var sCreateQueueRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_SBClientToken, Type: smithy.ShapeTypeString, Ext: &ext[421]})
-var sCreateQueueRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_RequestTagMap, Members: &m_RequestTagMap, Type: smithy.ShapeTypeMap, Ext: &ext[422]})
-var sCreateQueueResponse_queue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queue", ID: &iQueue, Members: &mQueue, Type: smithy.ShapeTypeStructure, Ext: &ext[424]})
-var sDeleteClusterRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[426]})
-var sDeleteClusterRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_SBClientToken, Type: smithy.ShapeTypeString, Ext: &ext[427]})
-var sDeleteComputeNodeGroupRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[430]})
-var sDeleteComputeNodeGroupRequest_computeNodeGroupIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroupIdentifier", ID: &i_ComputeNodeGroupIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[431]})
-var sDeleteComputeNodeGroupRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_SBClientToken, Type: smithy.ShapeTypeString, Ext: &ext[432]})
-var sDeleteQueueRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[435]})
-var sDeleteQueueRequest_queueIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queueIdentifier", ID: &i_QueueIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[436]})
-var sDeleteQueueRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_SBClientToken, Type: smithy.ShapeTypeString, Ext: &ext[437]})
-var sGetClusterRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[440]})
-var sGetClusterResponse_cluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cluster", ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure, Ext: &ext[442]})
-var sGetComputeNodeGroupRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[444]})
-var sGetComputeNodeGroupRequest_computeNodeGroupIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroupIdentifier", ID: &i_ComputeNodeGroupIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[445]})
-var sGetComputeNodeGroupResponse_computeNodeGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroup", ID: &iComputeNodeGroup, Members: &mComputeNodeGroup, Type: smithy.ShapeTypeStructure, Ext: &ext[447]})
-var sGetQueueRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[449]})
-var sGetQueueRequest_queueIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queueIdentifier", ID: &i_QueueIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[450]})
-var sGetQueueResponse_queue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queue", ID: &iQueue, Members: &mQueue, Type: smithy.ShapeTypeStructure, Ext: &ext[452]})
-var sListClustersRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &ext[454]})
-var sListClustersRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t11, Type: smithy.ShapeTypeInteger, Ext: &ext[455]})
-var sListClustersResponse_clusters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusters", ID: &i_ClusterList, Members: &m_ClusterList, Type: smithy.ShapeTypeList, Ext: &ext[457]})
-var sListClustersResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[458]})
-var sListComputeNodeGroupsRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[460]})
-var sListComputeNodeGroupsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[461]})
-var sListComputeNodeGroupsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[462]})
-var sListComputeNodeGroupsResponse_computeNodeGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroups", ID: &i_ComputeNodeGroupList, Members: &m_ComputeNodeGroupList, Type: smithy.ShapeTypeList, Ext: &ext[464]})
-var sListComputeNodeGroupsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[465]})
-var sListQueuesRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[467]})
-var sListQueuesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[468]})
-var sListQueuesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[469]})
-var sListQueuesResponse_queues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queues", ID: &i_QueueList, Members: &m_QueueList, Type: smithy.ShapeTypeList, Ext: &ext[471]})
-var sListQueuesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[472]})
-var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[474]})
-var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_ResponseTagMap, Members: &m_ResponseTagMap, Type: smithy.ShapeTypeMap, Ext: &ext[476]})
-var sRegisterComputeNodeGroupInstanceRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[478]})
-var sRegisterComputeNodeGroupInstanceRequest_bootstrapId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bootstrapId", ID: &i_BootstrapId, Type: smithy.ShapeTypeString, Ext: &ext[479]})
-var sRegisterComputeNodeGroupInstanceResponse_nodeID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodeID", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[481]})
-var sRegisterComputeNodeGroupInstanceResponse_sharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sharedSecret", ID: &i_SharedSecret, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &ext[482]})
-var sRegisterComputeNodeGroupInstanceResponse_endpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpoints", ID: &i_Endpoints, Members: &m_Endpoints, Type: smithy.ShapeTypeList, Ext: &ext[483]})
-var sRegisterComputeNodeGroupInstanceResponse_clusterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[484]})
-var sRegisterComputeNodeGroupInstanceResponse_computeNodeGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroupId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[485]})
-var sRegisterComputeNodeGroupInstanceResponse_computeNodeGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroupName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[486]})
-var sRegisterComputeNodeGroupInstanceResponse_nodeLifecycleActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodeLifecycleActions", ID: &iNodeLifecycleActions, Members: &mNodeLifecycleActions, Type: smithy.ShapeTypeStructure, Ext: &ext[487]})
-var sRegisterComputeNodeGroupInstanceResponse_schedulerVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schedulerVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[488]})
-var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[490]})
-var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_RequestTagMap, Members: &m_RequestTagMap, Type: smithy.ShapeTypeMap, Ext: &ext[491]})
-var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &ext[494]})
-var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &ext[495]})
-var sUpdateClusterRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[498]})
-var sUpdateClusterRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_SBClientToken, Type: smithy.ShapeTypeString, Ext: &ext[499]})
-var sUpdateClusterRequest_slurmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmConfiguration", ID: &iUpdateClusterSlurmConfigurationRequest, Members: &mUpdateClusterSlurmConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[500]})
-var sUpdateClusterRequest_scheduler = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduler", ID: &iUpdateSchedulerRequest, Members: &mUpdateSchedulerRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[501]})
-var sUpdateClusterResponse_cluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cluster", ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure, Ext: &ext[503]})
-var sUpdateComputeNodeGroupRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[505]})
-var sUpdateComputeNodeGroupRequest_computeNodeGroupIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroupIdentifier", ID: &i_ComputeNodeGroupIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[506]})
-var sUpdateComputeNodeGroupRequest_amiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amiId", ID: &i_AmiId, Type: smithy.ShapeTypeString, Ext: &ext[507]})
-var sUpdateComputeNodeGroupRequest_subnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetIds", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[508]})
-var sUpdateComputeNodeGroupRequest_customLaunchTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customLaunchTemplate", ID: &iCustomLaunchTemplate, Members: &mCustomLaunchTemplate, Type: smithy.ShapeTypeStructure, Ext: &ext[509]})
-var sUpdateComputeNodeGroupRequest_purchaseOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "purchaseOption", ID: &iPurchaseOption, Members: &mPurchaseOption, Type: smithy.ShapeTypeEnum, Ext: &ext[510]})
-var sUpdateComputeNodeGroupRequest_spotOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spotOptions", ID: &iSpotOptions, Members: &mSpotOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[511]})
-var sUpdateComputeNodeGroupRequest_scalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scalingConfiguration", ID: &iScalingConfigurationRequest, Members: &mScalingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[512]})
-var sUpdateComputeNodeGroupRequest_iamInstanceProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iamInstanceProfileArn", ID: &i_InstanceProfileArn, Type: smithy.ShapeTypeString, Ext: &ext[513]})
-var sUpdateComputeNodeGroupRequest_slurmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmConfiguration", ID: &iUpdateComputeNodeGroupSlurmConfigurationRequest, Members: &mUpdateComputeNodeGroupSlurmConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[514]})
-var sUpdateComputeNodeGroupRequest_nodeLifecycleActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodeLifecycleActions", ID: &iUpdateNodeLifecycleActionsRequest, Members: &mUpdateNodeLifecycleActionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[515]})
-var sUpdateComputeNodeGroupRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_SBClientToken, Type: smithy.ShapeTypeString, Ext: &ext[516]})
-var sUpdateComputeNodeGroupResponse_computeNodeGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroup", ID: &iComputeNodeGroup, Members: &mComputeNodeGroup, Type: smithy.ShapeTypeStructure, Ext: &ext[518]})
-var sUpdateQueueRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[520]})
-var sUpdateQueueRequest_queueIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queueIdentifier", ID: &i_QueueIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[521]})
-var sUpdateQueueRequest_computeNodeGroupConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroupConfigurations", ID: &i_ComputeNodeGroupConfigurationList, Members: &m_ComputeNodeGroupConfigurationList, Type: smithy.ShapeTypeList, Ext: &ext[522]})
-var sUpdateQueueRequest_slurmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmConfiguration", ID: &iUpdateQueueSlurmConfigurationRequest, Members: &mUpdateQueueSlurmConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[523]})
-var sUpdateQueueRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_SBClientToken, Type: smithy.ShapeTypeString, Ext: &ext[524]})
-var sUpdateQueueResponse_queue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queue", ID: &iQueue, Members: &mQueue, Type: smithy.ShapeTypeStructure, Ext: &ext[526]})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAccounting_defaultPurgeTimeInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultPurgeTimeInDays", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eAccounting_defaultPurgeTimeInDays})
+var sAccounting_mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mode", ID: &iAccountingMode, Members: &mAccountingMode, Type: smithy.ShapeTypeEnum, Ext: &eAccounting_mode})
+var sAccountingMode_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccountingMode_STANDARD})
+var sAccountingMode_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccountingMode_NONE})
+var sAccountingRequest_defaultPurgeTimeInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultPurgeTimeInDays", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eAccountingRequest_defaultPurgeTimeInDays})
+var sAccountingRequest_mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mode", ID: &iAccountingMode, Members: &mAccountingMode, Type: smithy.ShapeTypeEnum, Ext: &eAccountingRequest_mode})
+var sCgroupCustomSetting_parameterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameterName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCgroupCustomSetting_parameterName})
+var sCgroupCustomSetting_parameterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameterValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCgroupCustomSetting_parameterValue})
+var s_CgroupCustomSettings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCgroupCustomSetting, Members: &mCgroupCustomSetting, Type: smithy.ShapeTypeStructure, Ext: &e_CgroupCustomSettings_member})
+var sCluster_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCluster_name})
+var sCluster_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCluster_id})
+var sCluster_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCluster_arn})
+var sCluster_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iClusterStatus, Members: &mClusterStatus, Type: smithy.ShapeTypeEnum, Ext: &eCluster_status})
+var sCluster_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &eCluster_createdAt})
+var sCluster_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &eCluster_modifiedAt})
+var sCluster_scheduler = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduler", ID: &iScheduler, Members: &mScheduler, Type: smithy.ShapeTypeStructure, Ext: &eCluster_scheduler})
+var sCluster_size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "size", ID: &iSize, Members: &mSize, Type: smithy.ShapeTypeEnum, Ext: &eCluster_size})
+var sCluster_slurmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmConfiguration", ID: &iClusterSlurmConfiguration, Members: &mClusterSlurmConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCluster_slurmConfiguration})
+var sCluster_networking = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networking", ID: &iNetworking, Members: &mNetworking, Type: smithy.ShapeTypeStructure, Ext: &eCluster_networking})
+var sCluster_endpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpoints", ID: &i_Endpoints, Members: &m_Endpoints, Type: smithy.ShapeTypeList, Ext: &eCluster_endpoints})
+var sCluster_errorInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorInfo", ID: &i_ErrorInfoList, Members: &m_ErrorInfoList, Type: smithy.ShapeTypeList, Ext: &eCluster_errorInfo})
+var s_ClusterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iClusterSummary, Members: &mClusterSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ClusterList_member})
+var sClusterSlurmConfiguration_scaleDownIdleTimeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scaleDownIdleTimeInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eClusterSlurmConfiguration_scaleDownIdleTimeInSeconds})
+var sClusterSlurmConfiguration_slurmCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmCustomSettings", ID: &i_SlurmCustomSettings, Members: &m_SlurmCustomSettings, Type: smithy.ShapeTypeList, Ext: &eClusterSlurmConfiguration_slurmCustomSettings})
+var sClusterSlurmConfiguration_slurmdbdCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmdbdCustomSettings", ID: &i_SlurmdbdCustomSettings, Members: &m_SlurmdbdCustomSettings, Type: smithy.ShapeTypeList, Ext: &eClusterSlurmConfiguration_slurmdbdCustomSettings})
+var sClusterSlurmConfiguration_cgroupCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cgroupCustomSettings", ID: &i_CgroupCustomSettings, Members: &m_CgroupCustomSettings, Type: smithy.ShapeTypeList, Ext: &eClusterSlurmConfiguration_cgroupCustomSettings})
+var sClusterSlurmConfiguration_authKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authKey", ID: &iSlurmAuthKey, Members: &mSlurmAuthKey, Type: smithy.ShapeTypeStructure, Ext: &eClusterSlurmConfiguration_authKey})
+var sClusterSlurmConfiguration_jwtAuth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jwtAuth", ID: &iJwtAuth, Members: &mJwtAuth, Type: smithy.ShapeTypeStructure, Ext: &eClusterSlurmConfiguration_jwtAuth})
+var sClusterSlurmConfiguration_accounting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accounting", ID: &iAccounting, Members: &mAccounting, Type: smithy.ShapeTypeStructure, Ext: &eClusterSlurmConfiguration_accounting})
+var sClusterSlurmConfiguration_slurmRest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmRest", ID: &iSlurmRest, Members: &mSlurmRest, Type: smithy.ShapeTypeStructure, Ext: &eClusterSlurmConfiguration_slurmRest})
+var sClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scaleDownIdleTimeInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds})
+var sClusterSlurmConfigurationRequest_slurmCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmCustomSettings", ID: &i_SlurmCustomSettings, Members: &m_SlurmCustomSettings, Type: smithy.ShapeTypeList, Ext: &eClusterSlurmConfigurationRequest_slurmCustomSettings})
+var sClusterSlurmConfigurationRequest_slurmdbdCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmdbdCustomSettings", ID: &i_SlurmdbdCustomSettings, Members: &m_SlurmdbdCustomSettings, Type: smithy.ShapeTypeList, Ext: &eClusterSlurmConfigurationRequest_slurmdbdCustomSettings})
+var sClusterSlurmConfigurationRequest_cgroupCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cgroupCustomSettings", ID: &i_CgroupCustomSettings, Members: &m_CgroupCustomSettings, Type: smithy.ShapeTypeList, Ext: &eClusterSlurmConfigurationRequest_cgroupCustomSettings})
+var sClusterSlurmConfigurationRequest_accounting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accounting", ID: &iAccountingRequest, Members: &mAccountingRequest, Type: smithy.ShapeTypeStructure, Ext: &eClusterSlurmConfigurationRequest_accounting})
+var sClusterSlurmConfigurationRequest_slurmRest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmRest", ID: &iSlurmRestRequest, Members: &mSlurmRestRequest, Type: smithy.ShapeTypeStructure, Ext: &eClusterSlurmConfigurationRequest_slurmRest})
+var sClusterStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClusterStatus_CREATING})
+var sClusterStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClusterStatus_ACTIVE})
+var sClusterStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClusterStatus_UPDATING})
+var sClusterStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClusterStatus_DELETING})
+var sClusterStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClusterStatus_CREATE_FAILED})
+var sClusterStatus_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClusterStatus_DELETE_FAILED})
+var sClusterStatus_UPDATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClusterStatus_UPDATE_FAILED})
+var sClusterStatus_SUSPENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClusterStatus_SUSPENDING})
+var sClusterStatus_SUSPENDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClusterStatus_SUSPENDED})
+var sClusterStatus_RESUMING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESUMING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClusterStatus_RESUMING})
+var sClusterSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eClusterSummary_name})
+var sClusterSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eClusterSummary_id})
+var sClusterSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eClusterSummary_arn})
+var sClusterSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &eClusterSummary_createdAt})
+var sClusterSummary_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &eClusterSummary_modifiedAt})
+var sClusterSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iClusterStatus, Members: &mClusterStatus, Type: smithy.ShapeTypeEnum, Ext: &eClusterSummary_status})
+var sComputeNodeGroup_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ComputeNodeGroupName, Type: smithy.ShapeTypeString, Ext: &eComputeNodeGroup_name})
+var sComputeNodeGroup_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComputeNodeGroup_id})
+var sComputeNodeGroup_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComputeNodeGroup_arn})
+var sComputeNodeGroup_clusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComputeNodeGroup_clusterId})
+var sComputeNodeGroup_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &eComputeNodeGroup_createdAt})
+var sComputeNodeGroup_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &eComputeNodeGroup_modifiedAt})
+var sComputeNodeGroup_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iComputeNodeGroupStatus, Members: &mComputeNodeGroupStatus, Type: smithy.ShapeTypeEnum, Ext: &eComputeNodeGroup_status})
+var sComputeNodeGroup_amiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amiId", ID: &i_AmiId, Type: smithy.ShapeTypeString, Ext: &eComputeNodeGroup_amiId})
+var sComputeNodeGroup_subnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetIds", ID: &i_SubnetIdList, Members: &m_SubnetIdList, Type: smithy.ShapeTypeList, Ext: &eComputeNodeGroup_subnetIds})
+var sComputeNodeGroup_purchaseOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "purchaseOption", ID: &iPurchaseOption, Members: &mPurchaseOption, Type: smithy.ShapeTypeEnum, Ext: &eComputeNodeGroup_purchaseOption})
+var sComputeNodeGroup_customLaunchTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customLaunchTemplate", ID: &iCustomLaunchTemplate, Members: &mCustomLaunchTemplate, Type: smithy.ShapeTypeStructure, Ext: &eComputeNodeGroup_customLaunchTemplate})
+var sComputeNodeGroup_iamInstanceProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iamInstanceProfileArn", ID: &i_InstanceProfileArn, Type: smithy.ShapeTypeString, Ext: &eComputeNodeGroup_iamInstanceProfileArn})
+var sComputeNodeGroup_scalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scalingConfiguration", ID: &iScalingConfiguration, Members: &mScalingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eComputeNodeGroup_scalingConfiguration})
+var sComputeNodeGroup_instanceConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceConfigs", ID: &i_InstanceList, Members: &m_InstanceList, Type: smithy.ShapeTypeList, Ext: &eComputeNodeGroup_instanceConfigs})
+var sComputeNodeGroup_spotOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spotOptions", ID: &iSpotOptions, Members: &mSpotOptions, Type: smithy.ShapeTypeStructure, Ext: &eComputeNodeGroup_spotOptions})
+var sComputeNodeGroup_slurmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmConfiguration", ID: &iComputeNodeGroupSlurmConfiguration, Members: &mComputeNodeGroupSlurmConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eComputeNodeGroup_slurmConfiguration})
+var sComputeNodeGroup_nodeLifecycleActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodeLifecycleActions", ID: &iNodeLifecycleActions, Members: &mNodeLifecycleActions, Type: smithy.ShapeTypeStructure, Ext: &eComputeNodeGroup_nodeLifecycleActions})
+var sComputeNodeGroup_errorInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorInfo", ID: &i_ErrorInfoList, Members: &m_ErrorInfoList, Type: smithy.ShapeTypeList, Ext: &eComputeNodeGroup_errorInfo})
+var sComputeNodeGroupConfiguration_computeNodeGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroupId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComputeNodeGroupConfiguration_computeNodeGroupId})
+var s_ComputeNodeGroupConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iComputeNodeGroupConfiguration, Members: &mComputeNodeGroupConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_ComputeNodeGroupConfigurationList_member})
+var s_ComputeNodeGroupList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iComputeNodeGroupSummary, Members: &mComputeNodeGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ComputeNodeGroupList_member})
+var sComputeNodeGroupSlurmConfiguration_scaleDownIdleTimeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scaleDownIdleTimeInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eComputeNodeGroupSlurmConfiguration_scaleDownIdleTimeInSeconds})
+var sComputeNodeGroupSlurmConfiguration_slurmCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmCustomSettings", ID: &i_SlurmCustomSettings, Members: &m_SlurmCustomSettings, Type: smithy.ShapeTypeList, Ext: &eComputeNodeGroupSlurmConfiguration_slurmCustomSettings})
+var sComputeNodeGroupSlurmConfiguration_gresCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gresCustomSettings", ID: &i_GresCustomSettings, Members: &m_GresCustomSettings, Type: smithy.ShapeTypeList, Ext: &eComputeNodeGroupSlurmConfiguration_gresCustomSettings})
+var sComputeNodeGroupSlurmConfigurationRequest_scaleDownIdleTimeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scaleDownIdleTimeInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eComputeNodeGroupSlurmConfigurationRequest_scaleDownIdleTimeInSeconds})
+var sComputeNodeGroupSlurmConfigurationRequest_slurmCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmCustomSettings", ID: &i_SlurmCustomSettings, Members: &m_SlurmCustomSettings, Type: smithy.ShapeTypeList, Ext: &eComputeNodeGroupSlurmConfigurationRequest_slurmCustomSettings})
+var sComputeNodeGroupSlurmConfigurationRequest_gresCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gresCustomSettings", ID: &i_GresCustomSettings, Members: &m_GresCustomSettings, Type: smithy.ShapeTypeList, Ext: &eComputeNodeGroupSlurmConfigurationRequest_gresCustomSettings})
+var sComputeNodeGroupStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputeNodeGroupStatus_CREATING})
+var sComputeNodeGroupStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputeNodeGroupStatus_ACTIVE})
+var sComputeNodeGroupStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputeNodeGroupStatus_UPDATING})
+var sComputeNodeGroupStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputeNodeGroupStatus_DELETING})
+var sComputeNodeGroupStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputeNodeGroupStatus_CREATE_FAILED})
+var sComputeNodeGroupStatus_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputeNodeGroupStatus_DELETE_FAILED})
+var sComputeNodeGroupStatus_UPDATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputeNodeGroupStatus_UPDATE_FAILED})
+var sComputeNodeGroupStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputeNodeGroupStatus_DELETED})
+var sComputeNodeGroupStatus_SUSPENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputeNodeGroupStatus_SUSPENDING})
+var sComputeNodeGroupStatus_SUSPENDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputeNodeGroupStatus_SUSPENDED})
+var sComputeNodeGroupStatus_RESUMING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESUMING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eComputeNodeGroupStatus_RESUMING})
+var sComputeNodeGroupSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ComputeNodeGroupName, Type: smithy.ShapeTypeString, Ext: &eComputeNodeGroupSummary_name})
+var sComputeNodeGroupSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComputeNodeGroupSummary_id})
+var sComputeNodeGroupSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComputeNodeGroupSummary_arn})
+var sComputeNodeGroupSummary_clusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComputeNodeGroupSummary_clusterId})
+var sComputeNodeGroupSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &eComputeNodeGroupSummary_createdAt})
+var sComputeNodeGroupSummary_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &eComputeNodeGroupSummary_modifiedAt})
+var sComputeNodeGroupSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iComputeNodeGroupStatus, Members: &mComputeNodeGroupStatus, Type: smithy.ShapeTypeEnum, Ext: &eComputeNodeGroupSummary_status})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceId})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceType})
+var sCustomLaunchTemplate_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCustomLaunchTemplate_id})
+var sCustomLaunchTemplate_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCustomLaunchTemplate_version})
+var sEndpoint_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iEndpointType, Members: &mEndpointType, Type: smithy.ShapeTypeEnum, Ext: &eEndpoint_type})
+var sEndpoint_privateIpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "privateIpAddress", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEndpoint_privateIpAddress})
+var sEndpoint_publicIpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "publicIpAddress", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEndpoint_publicIpAddress})
+var sEndpoint_ipv6Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipv6Address", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEndpoint_ipv6Address})
+var sEndpoint_port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "port", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eEndpoint_port})
+var s_Endpoints_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEndpoint, Members: &mEndpoint, Type: smithy.ShapeTypeStructure, Ext: &e_Endpoints_member})
+var sEndpointType_SLURMCTLD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SLURMCTLD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointType_SLURMCTLD})
+var sEndpointType_SLURMDBD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SLURMDBD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointType_SLURMDBD})
+var sEndpointType_SLURMRESTD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SLURMRESTD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEndpointType_SLURMRESTD})
+var sErrorInfo_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eErrorInfo_code})
+var sErrorInfo_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eErrorInfo_message})
+var s_ErrorInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iErrorInfo, Members: &mErrorInfo, Type: smithy.ShapeTypeStructure, Ext: &e_ErrorInfoList_member})
+var sExecutionPolicy_FIRST_BOOT_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIRST_BOOT_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExecutionPolicy_FIRST_BOOT_ONLY})
+var sExecutionPolicy_EVERY_BOOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVERY_BOOT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExecutionPolicy_EVERY_BOOT})
+var s_GresCustomSettingMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_GresCustomSettingMap_key})
+var s_GresCustomSettingMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_GresCustomSettingMap_value})
+var s_GresCustomSettings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GresCustomSettingMap, Members: &m_GresCustomSettingMap, Type: smithy.ShapeTypeMap, Ext: &e_GresCustomSettings_member})
+var sInstanceConfig_instanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInstanceConfig_instanceType})
+var s_InstanceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInstanceConfig, Members: &mInstanceConfig, Type: smithy.ShapeTypeStructure, Ext: &e_InstanceList_member})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sJwtAuth_jwtKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jwtKey", ID: &iJwtKey, Members: &mJwtKey, Type: smithy.ShapeTypeStructure, Ext: &eJwtAuth_jwtKey})
+var sJwtKey_secretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eJwtKey_secretArn})
+var sJwtKey_secretVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eJwtKey_secretVersion})
+var sNetworking_subnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetIds", ID: &i_SubnetIdList, Members: &m_SubnetIdList, Type: smithy.ShapeTypeList, Ext: &eNetworking_subnetIds})
+var sNetworking_securityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroupIds", ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList, Ext: &eNetworking_securityGroupIds})
+var sNetworking_networkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkType", ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum, Ext: &eNetworking_networkType})
+var sNetworkingRequest_subnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetIds", ID: &i_SubnetIdList, Members: &m_SubnetIdList, Type: smithy.ShapeTypeList, Ext: &eNetworkingRequest_subnetIds})
+var sNetworkingRequest_securityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroupIds", ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList, Ext: &eNetworkingRequest_securityGroupIds})
+var sNetworkingRequest_networkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkType", ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum, Ext: &eNetworkingRequest_networkType})
+var sNetworkType_IPV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkType_IPV4})
+var sNetworkType_IPV6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV6", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eNetworkType_IPV6})
+var sNodeLifecycleActions_stages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stages", ID: &iNodeLifecycleStages, Members: &mNodeLifecycleStages, Type: smithy.ShapeTypeStructure, Ext: &eNodeLifecycleActions_stages})
+var sNodeLifecycleActions_scriptCachingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scriptCachingPolicy", ID: &iScriptCachingPolicy, Members: &mScriptCachingPolicy, Type: smithy.ShapeTypeEnum, Ext: &eNodeLifecycleActions_scriptCachingPolicy})
+var sNodeLifecycleActionsRequest_stages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stages", ID: &iNodeLifecycleStages, Members: &mNodeLifecycleStages, Type: smithy.ShapeTypeStructure, Ext: &eNodeLifecycleActionsRequest_stages})
+var sNodeLifecycleActionsRequest_scriptCachingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scriptCachingPolicy", ID: &iScriptCachingPolicy, Members: &mScriptCachingPolicy, Type: smithy.ShapeTypeEnum, Ext: &eNodeLifecycleActionsRequest_scriptCachingPolicy})
+var sNodeLifecycleScript_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eNodeLifecycleScript_name})
+var sNodeLifecycleScript_scriptSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scriptSource", ID: &iScriptSource, Members: &mScriptSource, Type: smithy.ShapeTypeStructure, Ext: &eNodeLifecycleScript_scriptSource})
+var sNodeLifecycleScript_arguments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arguments", ID: &i_NodeLifecycleScriptArguments, Members: &m_NodeLifecycleScriptArguments, Type: smithy.ShapeTypeList, Ext: &eNodeLifecycleScript_arguments})
+var sNodeLifecycleScript_onError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "onError", ID: &iOnError, Members: &mOnError, Type: smithy.ShapeTypeEnum, Ext: &eNodeLifecycleScript_onError})
+var sNodeLifecycleScript_executionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionPolicy", ID: &iExecutionPolicy, Members: &mExecutionPolicy, Type: smithy.ShapeTypeEnum, Ext: &eNodeLifecycleScript_executionPolicy})
+var s_NodeLifecycleScriptArguments_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NodeLifecycleScriptArgument, Type: smithy.ShapeTypeString, Ext: &e_NodeLifecycleScriptArguments_member})
+var s_NodeLifecycleScriptList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNodeLifecycleScript, Members: &mNodeLifecycleScript, Type: smithy.ShapeTypeStructure, Ext: &e_NodeLifecycleScriptList_member})
+var sNodeLifecycleStages_nodeBootstrapped = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodeBootstrapped", ID: &i_NodeLifecycleScriptList, Members: &m_NodeLifecycleScriptList, Type: smithy.ShapeTypeList, Ext: &eNodeLifecycleStages_nodeBootstrapped})
+var sNodeLifecycleStages_nodeReady = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodeReady", ID: &i_NodeLifecycleScriptList, Members: &m_NodeLifecycleScriptList, Type: smithy.ShapeTypeList, Ext: &eNodeLifecycleStages_nodeReady})
+var sOnError_TERMINATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOnError_TERMINATE})
+var sOnError_STOP_SEQUENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOP_SEQUENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOnError_STOP_SEQUENCE})
+var sOnError_CONTINUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTINUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOnError_CONTINUE})
+var sPurchaseOption_ONDEMAND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONDEMAND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseOption_ONDEMAND})
+var sPurchaseOption_SPOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPOT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseOption_SPOT})
+var sPurchaseOption_CAPACITY_BLOCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CAPACITY_BLOCK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseOption_CAPACITY_BLOCK})
+var sPurchaseOption_INTERRUPTIBLE_CAPACITY_RESERVATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERRUPTIBLE_CAPACITY_RESERVATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseOption_INTERRUPTIBLE_CAPACITY_RESERVATION})
+var sQueue_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_QueueName, Type: smithy.ShapeTypeString, Ext: &eQueue_name})
+var sQueue_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eQueue_id})
+var sQueue_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eQueue_arn})
+var sQueue_clusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eQueue_clusterId})
+var sQueue_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &eQueue_createdAt})
+var sQueue_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &eQueue_modifiedAt})
+var sQueue_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iQueueStatus, Members: &mQueueStatus, Type: smithy.ShapeTypeEnum, Ext: &eQueue_status})
+var sQueue_computeNodeGroupConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroupConfigurations", ID: &i_ComputeNodeGroupConfigurationList, Members: &m_ComputeNodeGroupConfigurationList, Type: smithy.ShapeTypeList, Ext: &eQueue_computeNodeGroupConfigurations})
+var sQueue_slurmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmConfiguration", ID: &iQueueSlurmConfiguration, Members: &mQueueSlurmConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eQueue_slurmConfiguration})
+var sQueue_errorInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorInfo", ID: &i_ErrorInfoList, Members: &m_ErrorInfoList, Type: smithy.ShapeTypeList, Ext: &eQueue_errorInfo})
+var s_QueueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQueueSummary, Members: &mQueueSummary, Type: smithy.ShapeTypeStructure, Ext: &e_QueueList_member})
+var sQueueSlurmConfiguration_slurmCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmCustomSettings", ID: &i_SlurmCustomSettings, Members: &m_SlurmCustomSettings, Type: smithy.ShapeTypeList, Ext: &eQueueSlurmConfiguration_slurmCustomSettings})
+var sQueueSlurmConfigurationRequest_slurmCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmCustomSettings", ID: &i_SlurmCustomSettings, Members: &m_SlurmCustomSettings, Type: smithy.ShapeTypeList, Ext: &eQueueSlurmConfigurationRequest_slurmCustomSettings})
+var sQueueStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQueueStatus_CREATING})
+var sQueueStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQueueStatus_ACTIVE})
+var sQueueStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQueueStatus_UPDATING})
+var sQueueStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQueueStatus_DELETING})
+var sQueueStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQueueStatus_CREATE_FAILED})
+var sQueueStatus_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQueueStatus_DELETE_FAILED})
+var sQueueStatus_UPDATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQueueStatus_UPDATE_FAILED})
+var sQueueStatus_SUSPENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQueueStatus_SUSPENDING})
+var sQueueStatus_SUSPENDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQueueStatus_SUSPENDED})
+var sQueueStatus_RESUMING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESUMING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQueueStatus_RESUMING})
+var sQueueSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_QueueName, Type: smithy.ShapeTypeString, Ext: &eQueueSummary_name})
+var sQueueSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eQueueSummary_id})
+var sQueueSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eQueueSummary_arn})
+var sQueueSummary_clusterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eQueueSummary_clusterId})
+var sQueueSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &eQueueSummary_createdAt})
+var sQueueSummary_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &pTimestamp, Traits: &t1, Type: smithy.ShapeTypeTimestamp, Ext: &eQueueSummary_modifiedAt})
+var sQueueSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iQueueStatus, Members: &mQueueStatus, Type: smithy.ShapeTypeEnum, Ext: &eQueueSummary_status})
+var s_RequestTagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_RequestTagMap_key})
+var s_RequestTagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_RequestTagMap_value})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceId})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceType})
+var s_ResponseTagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_ResponseTagMap_key})
+var s_ResponseTagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_ResponseTagMap_value})
+var sScalingConfiguration_minInstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minInstanceCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eScalingConfiguration_minInstanceCount})
+var sScalingConfiguration_maxInstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxInstanceCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eScalingConfiguration_maxInstanceCount})
+var sScalingConfigurationRequest_minInstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minInstanceCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eScalingConfigurationRequest_minInstanceCount})
+var sScalingConfigurationRequest_maxInstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxInstanceCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eScalingConfigurationRequest_maxInstanceCount})
+var sScheduler_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iSchedulerType, Members: &mSchedulerType, Type: smithy.ShapeTypeEnum, Ext: &eScheduler_type})
+var sScheduler_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eScheduler_version})
+var sSchedulerRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iSchedulerType, Members: &mSchedulerType, Type: smithy.ShapeTypeEnum, Ext: &eSchedulerRequest_type})
+var sSchedulerRequest_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSchedulerRequest_version})
+var sSchedulerType_SLURM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SLURM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSchedulerType_SLURM})
+var sScriptCachingPolicy_CACHE_ONCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CACHE_ONCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScriptCachingPolicy_CACHE_ONCE})
+var sScriptCachingPolicy_REFRESH_ON_REBOOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REFRESH_ON_REBOOT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScriptCachingPolicy_REFRESH_ON_REBOOT})
+var sScriptSource_scriptLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scriptLocation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eScriptSource_scriptLocation})
+var sScriptSource_s3VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3VersionId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eScriptSource_s3VersionId})
+var sScriptSource_checksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checksum", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eScriptSource_checksum})
+var s_SecurityGroupIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString, Ext: &e_SecurityGroupIdList_member})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_serviceCode})
+var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceId})
+var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceType})
+var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_quotaCode})
+var sSize_SMALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSize_SMALL})
+var sSize_MEDIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSize_MEDIUM})
+var sSize_LARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSize_LARGE})
+var sSlurmAuthKey_secretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSlurmAuthKey_secretArn})
+var sSlurmAuthKey_secretVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSlurmAuthKey_secretVersion})
+var sSlurmCustomSetting_parameterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameterName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSlurmCustomSetting_parameterName})
+var sSlurmCustomSetting_parameterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameterValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSlurmCustomSetting_parameterValue})
+var s_SlurmCustomSettings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSlurmCustomSetting, Members: &mSlurmCustomSetting, Type: smithy.ShapeTypeStructure, Ext: &e_SlurmCustomSettings_member})
+var sSlurmdbdCustomSetting_parameterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameterName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSlurmdbdCustomSetting_parameterName})
+var sSlurmdbdCustomSetting_parameterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameterValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSlurmdbdCustomSetting_parameterValue})
+var s_SlurmdbdCustomSettings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSlurmdbdCustomSetting, Members: &mSlurmdbdCustomSetting, Type: smithy.ShapeTypeStructure, Ext: &e_SlurmdbdCustomSettings_member})
+var sSlurmRest_mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mode", ID: &iSlurmRestMode, Members: &mSlurmRestMode, Type: smithy.ShapeTypeEnum, Ext: &eSlurmRest_mode})
+var sSlurmRestMode_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSlurmRestMode_STANDARD})
+var sSlurmRestMode_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSlurmRestMode_NONE})
+var sSlurmRestRequest_mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mode", ID: &iSlurmRestMode, Members: &mSlurmRestMode, Type: smithy.ShapeTypeEnum, Ext: &eSlurmRestRequest_mode})
+var sSpotAllocationStrategy_LOWEST_PRICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOWEST_PRICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSpotAllocationStrategy_LOWEST_PRICE})
+var sSpotAllocationStrategy_CAPACITY_OPTIMIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CAPACITY_OPTIMIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSpotAllocationStrategy_CAPACITY_OPTIMIZED})
+var sSpotAllocationStrategy_PRICE_CAPACITY_OPTIMIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRICE_CAPACITY_OPTIMIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSpotAllocationStrategy_PRICE_CAPACITY_OPTIMIZED})
+var sSpotOptions_allocationStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allocationStrategy", ID: &iSpotAllocationStrategy, Members: &mSpotAllocationStrategy, Type: smithy.ShapeTypeEnum, Ext: &eSpotOptions_allocationStrategy})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_StringList_member})
+var s_SubnetIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &e_SubnetIdList_member})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeys_member})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t8, Type: smithy.ShapeTypeInteger, Ext: &eThrottlingException_retryAfterSeconds})
+var sUpdateAccountingRequest_defaultPurgeTimeInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultPurgeTimeInDays", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eUpdateAccountingRequest_defaultPurgeTimeInDays})
+var sUpdateAccountingRequest_mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mode", ID: &iAccountingMode, Members: &mAccountingMode, Type: smithy.ShapeTypeEnum, Ext: &eUpdateAccountingRequest_mode})
+var sUpdateClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scaleDownIdleTimeInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eUpdateClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds})
+var sUpdateClusterSlurmConfigurationRequest_slurmCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmCustomSettings", ID: &i_SlurmCustomSettings, Members: &m_SlurmCustomSettings, Type: smithy.ShapeTypeList, Ext: &eUpdateClusterSlurmConfigurationRequest_slurmCustomSettings})
+var sUpdateClusterSlurmConfigurationRequest_slurmdbdCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmdbdCustomSettings", ID: &i_SlurmdbdCustomSettings, Members: &m_SlurmdbdCustomSettings, Type: smithy.ShapeTypeList, Ext: &eUpdateClusterSlurmConfigurationRequest_slurmdbdCustomSettings})
+var sUpdateClusterSlurmConfigurationRequest_cgroupCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cgroupCustomSettings", ID: &i_CgroupCustomSettings, Members: &m_CgroupCustomSettings, Type: smithy.ShapeTypeList, Ext: &eUpdateClusterSlurmConfigurationRequest_cgroupCustomSettings})
+var sUpdateClusterSlurmConfigurationRequest_accounting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accounting", ID: &iUpdateAccountingRequest, Members: &mUpdateAccountingRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateClusterSlurmConfigurationRequest_accounting})
+var sUpdateClusterSlurmConfigurationRequest_slurmRest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmRest", ID: &iUpdateSlurmRestRequest, Members: &mUpdateSlurmRestRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateClusterSlurmConfigurationRequest_slurmRest})
+var sUpdateComputeNodeGroupSlurmConfigurationRequest_scaleDownIdleTimeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scaleDownIdleTimeInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eUpdateComputeNodeGroupSlurmConfigurationRequest_scaleDownIdleTimeInSeconds})
+var sUpdateComputeNodeGroupSlurmConfigurationRequest_slurmCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmCustomSettings", ID: &i_SlurmCustomSettings, Members: &m_SlurmCustomSettings, Type: smithy.ShapeTypeList, Ext: &eUpdateComputeNodeGroupSlurmConfigurationRequest_slurmCustomSettings})
+var sUpdateComputeNodeGroupSlurmConfigurationRequest_gresCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gresCustomSettings", ID: &i_GresCustomSettings, Members: &m_GresCustomSettings, Type: smithy.ShapeTypeList, Ext: &eUpdateComputeNodeGroupSlurmConfigurationRequest_gresCustomSettings})
+var sUpdateNodeLifecycleActionsRequest_stages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stages", ID: &iNodeLifecycleStages, Members: &mNodeLifecycleStages, Type: smithy.ShapeTypeStructure, Ext: &eUpdateNodeLifecycleActionsRequest_stages})
+var sUpdateNodeLifecycleActionsRequest_scriptCachingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scriptCachingPolicy", ID: &iScriptCachingPolicy, Members: &mScriptCachingPolicy, Type: smithy.ShapeTypeEnum, Ext: &eUpdateNodeLifecycleActionsRequest_scriptCachingPolicy})
+var sUpdateQueueSlurmConfigurationRequest_slurmCustomSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmCustomSettings", ID: &i_SlurmCustomSettings, Members: &m_SlurmCustomSettings, Type: smithy.ShapeTypeList, Ext: &eUpdateQueueSlurmConfigurationRequest_slurmCustomSettings})
+var sUpdateSchedulerRequest_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateSchedulerRequest_version})
+var sUpdateSlurmRestRequest_mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mode", ID: &iSlurmRestMode, Members: &mSlurmRestMode, Type: smithy.ShapeTypeEnum, Ext: &eUpdateSlurmRestRequest_mode})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_reason})
+var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_fieldList})
+var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_name})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_message})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_UNKNOWN_OPERATION})
+var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_CANNOT_PARSE})
+var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_FIELD_VALIDATION_FAILED})
+var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_OTHER})
+var sCreateClusterRequest_clusterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterName", ID: &i_ClusterName, Type: smithy.ShapeTypeString, Ext: &eCreateClusterRequest_clusterName})
+var sCreateClusterRequest_scheduler = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduler", ID: &iSchedulerRequest, Members: &mSchedulerRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterRequest_scheduler})
+var sCreateClusterRequest_size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "size", ID: &iSize, Members: &mSize, Type: smithy.ShapeTypeEnum, Ext: &eCreateClusterRequest_size})
+var sCreateClusterRequest_networking = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networking", ID: &iNetworkingRequest, Members: &mNetworkingRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterRequest_networking})
+var sCreateClusterRequest_slurmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmConfiguration", ID: &iClusterSlurmConfigurationRequest, Members: &mClusterSlurmConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterRequest_slurmConfiguration})
+var sCreateClusterRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_SBClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateClusterRequest_clientToken})
+var sCreateClusterRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_RequestTagMap, Members: &m_RequestTagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateClusterRequest_tags})
+var sCreateClusterResponse_cluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cluster", ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure, Ext: &eCreateClusterResponse_cluster})
+var sCreateComputeNodeGroupRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &eCreateComputeNodeGroupRequest_clusterIdentifier})
+var sCreateComputeNodeGroupRequest_computeNodeGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroupName", ID: &i_ComputeNodeGroupName, Type: smithy.ShapeTypeString, Ext: &eCreateComputeNodeGroupRequest_computeNodeGroupName})
+var sCreateComputeNodeGroupRequest_amiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amiId", ID: &i_AmiId, Type: smithy.ShapeTypeString, Ext: &eCreateComputeNodeGroupRequest_amiId})
+var sCreateComputeNodeGroupRequest_subnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetIds", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eCreateComputeNodeGroupRequest_subnetIds})
+var sCreateComputeNodeGroupRequest_purchaseOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "purchaseOption", ID: &iPurchaseOption, Members: &mPurchaseOption, Type: smithy.ShapeTypeEnum, Ext: &eCreateComputeNodeGroupRequest_purchaseOption})
+var sCreateComputeNodeGroupRequest_customLaunchTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customLaunchTemplate", ID: &iCustomLaunchTemplate, Members: &mCustomLaunchTemplate, Type: smithy.ShapeTypeStructure, Ext: &eCreateComputeNodeGroupRequest_customLaunchTemplate})
+var sCreateComputeNodeGroupRequest_iamInstanceProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iamInstanceProfileArn", ID: &i_InstanceProfileArn, Type: smithy.ShapeTypeString, Ext: &eCreateComputeNodeGroupRequest_iamInstanceProfileArn})
+var sCreateComputeNodeGroupRequest_scalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scalingConfiguration", ID: &iScalingConfigurationRequest, Members: &mScalingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateComputeNodeGroupRequest_scalingConfiguration})
+var sCreateComputeNodeGroupRequest_instanceConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceConfigs", ID: &i_InstanceList, Members: &m_InstanceList, Type: smithy.ShapeTypeList, Ext: &eCreateComputeNodeGroupRequest_instanceConfigs})
+var sCreateComputeNodeGroupRequest_spotOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spotOptions", ID: &iSpotOptions, Members: &mSpotOptions, Type: smithy.ShapeTypeStructure, Ext: &eCreateComputeNodeGroupRequest_spotOptions})
+var sCreateComputeNodeGroupRequest_slurmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmConfiguration", ID: &iComputeNodeGroupSlurmConfigurationRequest, Members: &mComputeNodeGroupSlurmConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateComputeNodeGroupRequest_slurmConfiguration})
+var sCreateComputeNodeGroupRequest_nodeLifecycleActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodeLifecycleActions", ID: &iNodeLifecycleActionsRequest, Members: &mNodeLifecycleActionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateComputeNodeGroupRequest_nodeLifecycleActions})
+var sCreateComputeNodeGroupRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_SBClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateComputeNodeGroupRequest_clientToken})
+var sCreateComputeNodeGroupRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_RequestTagMap, Members: &m_RequestTagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateComputeNodeGroupRequest_tags})
+var sCreateComputeNodeGroupResponse_computeNodeGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroup", ID: &iComputeNodeGroup, Members: &mComputeNodeGroup, Type: smithy.ShapeTypeStructure, Ext: &eCreateComputeNodeGroupResponse_computeNodeGroup})
+var sCreateQueueRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &eCreateQueueRequest_clusterIdentifier})
+var sCreateQueueRequest_queueName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queueName", ID: &i_QueueName, Type: smithy.ShapeTypeString, Ext: &eCreateQueueRequest_queueName})
+var sCreateQueueRequest_computeNodeGroupConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroupConfigurations", ID: &i_ComputeNodeGroupConfigurationList, Members: &m_ComputeNodeGroupConfigurationList, Type: smithy.ShapeTypeList, Ext: &eCreateQueueRequest_computeNodeGroupConfigurations})
+var sCreateQueueRequest_slurmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmConfiguration", ID: &iQueueSlurmConfigurationRequest, Members: &mQueueSlurmConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateQueueRequest_slurmConfiguration})
+var sCreateQueueRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_SBClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateQueueRequest_clientToken})
+var sCreateQueueRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_RequestTagMap, Members: &m_RequestTagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateQueueRequest_tags})
+var sCreateQueueResponse_queue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queue", ID: &iQueue, Members: &mQueue, Type: smithy.ShapeTypeStructure, Ext: &eCreateQueueResponse_queue})
+var sDeleteClusterRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &eDeleteClusterRequest_clusterIdentifier})
+var sDeleteClusterRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_SBClientToken, Type: smithy.ShapeTypeString, Ext: &eDeleteClusterRequest_clientToken})
+var sDeleteComputeNodeGroupRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &eDeleteComputeNodeGroupRequest_clusterIdentifier})
+var sDeleteComputeNodeGroupRequest_computeNodeGroupIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroupIdentifier", ID: &i_ComputeNodeGroupIdentifier, Type: smithy.ShapeTypeString, Ext: &eDeleteComputeNodeGroupRequest_computeNodeGroupIdentifier})
+var sDeleteComputeNodeGroupRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_SBClientToken, Type: smithy.ShapeTypeString, Ext: &eDeleteComputeNodeGroupRequest_clientToken})
+var sDeleteQueueRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &eDeleteQueueRequest_clusterIdentifier})
+var sDeleteQueueRequest_queueIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queueIdentifier", ID: &i_QueueIdentifier, Type: smithy.ShapeTypeString, Ext: &eDeleteQueueRequest_queueIdentifier})
+var sDeleteQueueRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_SBClientToken, Type: smithy.ShapeTypeString, Ext: &eDeleteQueueRequest_clientToken})
+var sGetClusterRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetClusterRequest_clusterIdentifier})
+var sGetClusterResponse_cluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cluster", ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure, Ext: &eGetClusterResponse_cluster})
+var sGetComputeNodeGroupRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetComputeNodeGroupRequest_clusterIdentifier})
+var sGetComputeNodeGroupRequest_computeNodeGroupIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroupIdentifier", ID: &i_ComputeNodeGroupIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetComputeNodeGroupRequest_computeNodeGroupIdentifier})
+var sGetComputeNodeGroupResponse_computeNodeGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroup", ID: &iComputeNodeGroup, Members: &mComputeNodeGroup, Type: smithy.ShapeTypeStructure, Ext: &eGetComputeNodeGroupResponse_computeNodeGroup})
+var sGetQueueRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetQueueRequest_clusterIdentifier})
+var sGetQueueRequest_queueIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queueIdentifier", ID: &i_QueueIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetQueueRequest_queueIdentifier})
+var sGetQueueResponse_queue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queue", ID: &iQueue, Members: &mQueue, Type: smithy.ShapeTypeStructure, Ext: &eGetQueueResponse_queue})
+var sListClustersRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &eListClustersRequest_nextToken})
+var sListClustersRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t11, Type: smithy.ShapeTypeInteger, Ext: &eListClustersRequest_maxResults})
+var sListClustersResponse_clusters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusters", ID: &i_ClusterList, Members: &m_ClusterList, Type: smithy.ShapeTypeList, Ext: &eListClustersResponse_clusters})
+var sListClustersResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListClustersResponse_nextToken})
+var sListComputeNodeGroupsRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &eListComputeNodeGroupsRequest_clusterIdentifier})
+var sListComputeNodeGroupsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListComputeNodeGroupsRequest_nextToken})
+var sListComputeNodeGroupsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListComputeNodeGroupsRequest_maxResults})
+var sListComputeNodeGroupsResponse_computeNodeGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroups", ID: &i_ComputeNodeGroupList, Members: &m_ComputeNodeGroupList, Type: smithy.ShapeTypeList, Ext: &eListComputeNodeGroupsResponse_computeNodeGroups})
+var sListComputeNodeGroupsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListComputeNodeGroupsResponse_nextToken})
+var sListQueuesRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &eListQueuesRequest_clusterIdentifier})
+var sListQueuesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListQueuesRequest_nextToken})
+var sListQueuesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListQueuesRequest_maxResults})
+var sListQueuesResponse_queues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queues", ID: &i_QueueList, Members: &m_QueueList, Type: smithy.ShapeTypeList, Ext: &eListQueuesResponse_queues})
+var sListQueuesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListQueuesResponse_nextToken})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_ResponseTagMap, Members: &m_ResponseTagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_tags})
+var sRegisterComputeNodeGroupInstanceRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &eRegisterComputeNodeGroupInstanceRequest_clusterIdentifier})
+var sRegisterComputeNodeGroupInstanceRequest_bootstrapId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bootstrapId", ID: &i_BootstrapId, Type: smithy.ShapeTypeString, Ext: &eRegisterComputeNodeGroupInstanceRequest_bootstrapId})
+var sRegisterComputeNodeGroupInstanceResponse_nodeID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodeID", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRegisterComputeNodeGroupInstanceResponse_nodeID})
+var sRegisterComputeNodeGroupInstanceResponse_sharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sharedSecret", ID: &i_SharedSecret, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &eRegisterComputeNodeGroupInstanceResponse_sharedSecret})
+var sRegisterComputeNodeGroupInstanceResponse_endpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpoints", ID: &i_Endpoints, Members: &m_Endpoints, Type: smithy.ShapeTypeList, Ext: &eRegisterComputeNodeGroupInstanceResponse_endpoints})
+var sRegisterComputeNodeGroupInstanceResponse_clusterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRegisterComputeNodeGroupInstanceResponse_clusterName})
+var sRegisterComputeNodeGroupInstanceResponse_computeNodeGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroupId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRegisterComputeNodeGroupInstanceResponse_computeNodeGroupId})
+var sRegisterComputeNodeGroupInstanceResponse_computeNodeGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroupName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRegisterComputeNodeGroupInstanceResponse_computeNodeGroupName})
+var sRegisterComputeNodeGroupInstanceResponse_nodeLifecycleActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodeLifecycleActions", ID: &iNodeLifecycleActions, Members: &mNodeLifecycleActions, Type: smithy.ShapeTypeStructure, Ext: &eRegisterComputeNodeGroupInstanceResponse_nodeLifecycleActions})
+var sRegisterComputeNodeGroupInstanceResponse_schedulerVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schedulerVersion", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRegisterComputeNodeGroupInstanceResponse_schedulerVersion})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_RequestTagMap, Members: &m_RequestTagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_tags})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUpdateClusterRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &eUpdateClusterRequest_clusterIdentifier})
+var sUpdateClusterRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_SBClientToken, Type: smithy.ShapeTypeString, Ext: &eUpdateClusterRequest_clientToken})
+var sUpdateClusterRequest_slurmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmConfiguration", ID: &iUpdateClusterSlurmConfigurationRequest, Members: &mUpdateClusterSlurmConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateClusterRequest_slurmConfiguration})
+var sUpdateClusterRequest_scheduler = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduler", ID: &iUpdateSchedulerRequest, Members: &mUpdateSchedulerRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateClusterRequest_scheduler})
+var sUpdateClusterResponse_cluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cluster", ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure, Ext: &eUpdateClusterResponse_cluster})
+var sUpdateComputeNodeGroupRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &eUpdateComputeNodeGroupRequest_clusterIdentifier})
+var sUpdateComputeNodeGroupRequest_computeNodeGroupIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroupIdentifier", ID: &i_ComputeNodeGroupIdentifier, Type: smithy.ShapeTypeString, Ext: &eUpdateComputeNodeGroupRequest_computeNodeGroupIdentifier})
+var sUpdateComputeNodeGroupRequest_amiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amiId", ID: &i_AmiId, Type: smithy.ShapeTypeString, Ext: &eUpdateComputeNodeGroupRequest_amiId})
+var sUpdateComputeNodeGroupRequest_subnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetIds", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eUpdateComputeNodeGroupRequest_subnetIds})
+var sUpdateComputeNodeGroupRequest_customLaunchTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customLaunchTemplate", ID: &iCustomLaunchTemplate, Members: &mCustomLaunchTemplate, Type: smithy.ShapeTypeStructure, Ext: &eUpdateComputeNodeGroupRequest_customLaunchTemplate})
+var sUpdateComputeNodeGroupRequest_purchaseOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "purchaseOption", ID: &iPurchaseOption, Members: &mPurchaseOption, Type: smithy.ShapeTypeEnum, Ext: &eUpdateComputeNodeGroupRequest_purchaseOption})
+var sUpdateComputeNodeGroupRequest_spotOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spotOptions", ID: &iSpotOptions, Members: &mSpotOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpdateComputeNodeGroupRequest_spotOptions})
+var sUpdateComputeNodeGroupRequest_scalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scalingConfiguration", ID: &iScalingConfigurationRequest, Members: &mScalingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateComputeNodeGroupRequest_scalingConfiguration})
+var sUpdateComputeNodeGroupRequest_iamInstanceProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iamInstanceProfileArn", ID: &i_InstanceProfileArn, Type: smithy.ShapeTypeString, Ext: &eUpdateComputeNodeGroupRequest_iamInstanceProfileArn})
+var sUpdateComputeNodeGroupRequest_slurmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmConfiguration", ID: &iUpdateComputeNodeGroupSlurmConfigurationRequest, Members: &mUpdateComputeNodeGroupSlurmConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateComputeNodeGroupRequest_slurmConfiguration})
+var sUpdateComputeNodeGroupRequest_nodeLifecycleActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodeLifecycleActions", ID: &iUpdateNodeLifecycleActionsRequest, Members: &mUpdateNodeLifecycleActionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateComputeNodeGroupRequest_nodeLifecycleActions})
+var sUpdateComputeNodeGroupRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_SBClientToken, Type: smithy.ShapeTypeString, Ext: &eUpdateComputeNodeGroupRequest_clientToken})
+var sUpdateComputeNodeGroupResponse_computeNodeGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroup", ID: &iComputeNodeGroup, Members: &mComputeNodeGroup, Type: smithy.ShapeTypeStructure, Ext: &eUpdateComputeNodeGroupResponse_computeNodeGroup})
+var sUpdateQueueRequest_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString, Ext: &eUpdateQueueRequest_clusterIdentifier})
+var sUpdateQueueRequest_queueIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queueIdentifier", ID: &i_QueueIdentifier, Type: smithy.ShapeTypeString, Ext: &eUpdateQueueRequest_queueIdentifier})
+var sUpdateQueueRequest_computeNodeGroupConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeNodeGroupConfigurations", ID: &i_ComputeNodeGroupConfigurationList, Members: &m_ComputeNodeGroupConfigurationList, Type: smithy.ShapeTypeList, Ext: &eUpdateQueueRequest_computeNodeGroupConfigurations})
+var sUpdateQueueRequest_slurmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slurmConfiguration", ID: &iUpdateQueueSlurmConfigurationRequest, Members: &mUpdateQueueSlurmConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateQueueRequest_slurmConfiguration})
+var sUpdateQueueRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_SBClientToken, Type: smithy.ShapeTypeString, Ext: &eUpdateQueueRequest_clientToken})
+var sUpdateQueueResponse_queue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queue", ID: &iQueue, Members: &mQueue, Type: smithy.ShapeTypeStructure, Ext: &eUpdateQueueResponse_queue})
 
 var CreateCluster = &sCreateCluster
 

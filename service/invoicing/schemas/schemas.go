@@ -7,9 +7,575 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [567]smithy.SchemaExtensions
+var (
+	eBatchGetInvoiceProfile                                                                      smithy.SchemaExtensions
+	eCreateInvoiceUnit                                                                           smithy.SchemaExtensions
+	eCreateProcurementPortalPreference                                                           smithy.SchemaExtensions
+	eDeleteInvoiceUnit                                                                           smithy.SchemaExtensions
+	eDeleteProcurementPortalPreference                                                           smithy.SchemaExtensions
+	eGetInvoicePDF                                                                               smithy.SchemaExtensions
+	eGetInvoiceUnit                                                                              smithy.SchemaExtensions
+	eGetProcurementPortalPreference                                                              smithy.SchemaExtensions
+	eListInvoiceSummaries                                                                        smithy.SchemaExtensions
+	eListInvoiceUnits                                                                            smithy.SchemaExtensions
+	eListProcurementPortalPreferences                                                            smithy.SchemaExtensions
+	eListProcurementPortals                                                                      smithy.SchemaExtensions
+	eListProcurementPortalSuppliers                                                              smithy.SchemaExtensions
+	eListTagsForResource                                                                         smithy.SchemaExtensions
+	ePutProcurementPortalPreference                                                              smithy.SchemaExtensions
+	eSendProcurementPortalValidation                                                             smithy.SchemaExtensions
+	eTagResource                                                                                 smithy.SchemaExtensions
+	eUntagResource                                                                               smithy.SchemaExtensions
+	eUpdateInvoiceUnit                                                                           smithy.SchemaExtensions
+	eUpdateProcurementPortalPreferenceStatus                                                     smithy.SchemaExtensions
+	eVerifyProcurementPortalValidation                                                           smithy.SchemaExtensions
+	e_Invoicing                                                                                  smithy.SchemaExtensions
+	eAccessDeniedException                                                                       smithy.SchemaExtensions
+	eAccessDeniedException_message                                                               smithy.SchemaExtensions
+	eAccessDeniedException_resourceName                                                          smithy.SchemaExtensions
+	e_AccountIdList                                                                              smithy.SchemaExtensions
+	e_AccountIdList_member                                                                       smithy.SchemaExtensions
+	e_AccountIdString                                                                            smithy.SchemaExtensions
+	eAmountBreakdown                                                                             smithy.SchemaExtensions
+	eAmountBreakdown_SubTotalAmount                                                              smithy.SchemaExtensions
+	eAmountBreakdown_Discounts                                                                   smithy.SchemaExtensions
+	eAmountBreakdown_Taxes                                                                       smithy.SchemaExtensions
+	eAmountBreakdown_Fees                                                                        smithy.SchemaExtensions
+	e_AsOfTimestamp                                                                              smithy.SchemaExtensions
+	e_BasicString                                                                                smithy.SchemaExtensions
+	e_BasicStringWithoutSpace                                                                    smithy.SchemaExtensions
+	eBillingEntity                                                                               smithy.SchemaExtensions
+	eBillingEntity_AWS                                                                           smithy.SchemaExtensions
+	eBillingEntity_AWS_MARKETPLACE                                                               smithy.SchemaExtensions
+	eBillingPeriod                                                                               smithy.SchemaExtensions
+	eBillingPeriod_Month                                                                         smithy.SchemaExtensions
+	eBillingPeriod_Year                                                                          smithy.SchemaExtensions
+	e_BillSourceAccountList                                                                      smithy.SchemaExtensions
+	e_BillSourceAccountList_member                                                               smithy.SchemaExtensions
+	eBillType                                                                                    smithy.SchemaExtensions
+	eBillType_ANNIVERSARY                                                                        smithy.SchemaExtensions
+	eBillType_PURCHASE                                                                           smithy.SchemaExtensions
+	eBillType_REFUND                                                                             smithy.SchemaExtensions
+	eBuyerDomain                                                                                 smithy.SchemaExtensions
+	eBuyerDomain_NetworkID                                                                       smithy.SchemaExtensions
+	eConflictException                                                                           smithy.SchemaExtensions
+	eConflictException_message                                                                   smithy.SchemaExtensions
+	eConflictException_resourceId                                                                smithy.SchemaExtensions
+	eConflictException_resourceType                                                              smithy.SchemaExtensions
+	eConnectionTestingMethod                                                                     smithy.SchemaExtensions
+	eConnectionTestingMethod_PROD_ENV_DOLLAR_TEST                                                smithy.SchemaExtensions
+	eConnectionTestingMethod_TEST_ENV_REPLAY_TEST                                                smithy.SchemaExtensions
+	eContact                                                                                     smithy.SchemaExtensions
+	eContact_Name                                                                                smithy.SchemaExtensions
+	eContact_Email                                                                               smithy.SchemaExtensions
+	e_Contacts                                                                                   smithy.SchemaExtensions
+	e_Contacts_member                                                                            smithy.SchemaExtensions
+	e_CountryCode                                                                                smithy.SchemaExtensions
+	e_CurrencyCode                                                                               smithy.SchemaExtensions
+	eCurrencyExchangeDetails                                                                     smithy.SchemaExtensions
+	eCurrencyExchangeDetails_SourceCurrencyCode                                                  smithy.SchemaExtensions
+	eCurrencyExchangeDetails_TargetCurrencyCode                                                  smithy.SchemaExtensions
+	eCurrencyExchangeDetails_Rate                                                                smithy.SchemaExtensions
+	eDateInterval                                                                                smithy.SchemaExtensions
+	eDateInterval_StartDate                                                                      smithy.SchemaExtensions
+	eDateInterval_EndDate                                                                        smithy.SchemaExtensions
+	e_DescriptionString                                                                          smithy.SchemaExtensions
+	eDiscountsBreakdown                                                                          smithy.SchemaExtensions
+	eDiscountsBreakdown_Breakdown                                                                smithy.SchemaExtensions
+	eDiscountsBreakdown_TotalAmount                                                              smithy.SchemaExtensions
+	eDiscountsBreakdownAmount                                                                    smithy.SchemaExtensions
+	eDiscountsBreakdownAmount_Description                                                        smithy.SchemaExtensions
+	eDiscountsBreakdownAmount_Amount                                                             smithy.SchemaExtensions
+	eDiscountsBreakdownAmount_Rate                                                               smithy.SchemaExtensions
+	e_DiscountsBreakdownAmountList                                                               smithy.SchemaExtensions
+	e_DiscountsBreakdownAmountList_member                                                        smithy.SchemaExtensions
+	eEinvoiceDeliveryAttachmentType                                                              smithy.SchemaExtensions
+	eEinvoiceDeliveryAttachmentType_INVOICE_PDF                                                  smithy.SchemaExtensions
+	eEinvoiceDeliveryAttachmentType_RFP_PDF                                                      smithy.SchemaExtensions
+	e_EinvoiceDeliveryAttachmentTypes                                                            smithy.SchemaExtensions
+	e_EinvoiceDeliveryAttachmentTypes_member                                                     smithy.SchemaExtensions
+	eEinvoiceDeliveryDocumentType                                                                smithy.SchemaExtensions
+	eEinvoiceDeliveryDocumentType_AWS_CLOUD_INVOICE                                              smithy.SchemaExtensions
+	eEinvoiceDeliveryDocumentType_AWS_CLOUD_CREDIT_MEMO                                          smithy.SchemaExtensions
+	eEinvoiceDeliveryDocumentType_AWS_MARKETPLACE_INVOICE                                        smithy.SchemaExtensions
+	eEinvoiceDeliveryDocumentType_AWS_MARKETPLACE_CREDIT_MEMO                                    smithy.SchemaExtensions
+	eEinvoiceDeliveryDocumentType_AWS_REQUEST_FOR_PAYMENT                                        smithy.SchemaExtensions
+	e_EinvoiceDeliveryDocumentTypes                                                              smithy.SchemaExtensions
+	e_EinvoiceDeliveryDocumentTypes_member                                                       smithy.SchemaExtensions
+	eEinvoiceDeliveryPreference                                                                  smithy.SchemaExtensions
+	eEinvoiceDeliveryPreference_EinvoiceDeliveryDocumentTypes                                    smithy.SchemaExtensions
+	eEinvoiceDeliveryPreference_EinvoiceDeliveryAttachmentTypes                                  smithy.SchemaExtensions
+	eEinvoiceDeliveryPreference_Protocol                                                         smithy.SchemaExtensions
+	eEinvoiceDeliveryPreference_PurchaseOrderDataSources                                         smithy.SchemaExtensions
+	eEinvoiceDeliveryPreference_ConnectionTestingMethod                                          smithy.SchemaExtensions
+	eEinvoiceDeliveryPreference_EinvoiceDeliveryActivationDate                                   smithy.SchemaExtensions
+	eEinvoiceDeliveryStatus                                                                      smithy.SchemaExtensions
+	eEinvoiceDeliveryStatus_DELIVERED                                                            smithy.SchemaExtensions
+	eEinvoiceDeliveryStatus_NOT_DELIVERED                                                        smithy.SchemaExtensions
+	e_EmailString                                                                                smithy.SchemaExtensions
+	eEntity                                                                                      smithy.SchemaExtensions
+	eEntity_InvoicingEntity                                                                      smithy.SchemaExtensions
+	eEntity_BillingEntity                                                                        smithy.SchemaExtensions
+	eFeatureConfigurations                                                                       smithy.SchemaExtensions
+	eFeatureConfigurations_InvoiceConfiguration                                                  smithy.SchemaExtensions
+	eFeesBreakdown                                                                               smithy.SchemaExtensions
+	eFeesBreakdown_Breakdown                                                                     smithy.SchemaExtensions
+	eFeesBreakdown_TotalAmount                                                                   smithy.SchemaExtensions
+	eFeesBreakdownAmount                                                                         smithy.SchemaExtensions
+	eFeesBreakdownAmount_Description                                                             smithy.SchemaExtensions
+	eFeesBreakdownAmount_Amount                                                                  smithy.SchemaExtensions
+	eFeesBreakdownAmount_Rate                                                                    smithy.SchemaExtensions
+	e_FeesBreakdownAmountList                                                                    smithy.SchemaExtensions
+	e_FeesBreakdownAmountList_member                                                             smithy.SchemaExtensions
+	eFilters                                                                                     smithy.SchemaExtensions
+	eFilters_Names                                                                               smithy.SchemaExtensions
+	eFilters_InvoiceReceivers                                                                    smithy.SchemaExtensions
+	eFilters_Accounts                                                                            smithy.SchemaExtensions
+	eFilters_BillSourceAccounts                                                                  smithy.SchemaExtensions
+	eInternalServerException                                                                     smithy.SchemaExtensions
+	eInternalServerException_retryAfterSeconds                                                   smithy.SchemaExtensions
+	eInternalServerException_message                                                             smithy.SchemaExtensions
+	eInvoiceConfiguration                                                                        smithy.SchemaExtensions
+	eInvoiceConfiguration_DocumentTypes                                                          smithy.SchemaExtensions
+	eInvoiceConfiguration_AttachmentTypes                                                        smithy.SchemaExtensions
+	eInvoiceCurrencyAmount                                                                       smithy.SchemaExtensions
+	eInvoiceCurrencyAmount_TotalAmount                                                           smithy.SchemaExtensions
+	eInvoiceCurrencyAmount_TotalAmountBeforeTax                                                  smithy.SchemaExtensions
+	eInvoiceCurrencyAmount_CurrencyCode                                                          smithy.SchemaExtensions
+	eInvoiceCurrencyAmount_AmountBreakdown                                                       smithy.SchemaExtensions
+	eInvoiceCurrencyAmount_CurrencyExchangeDetails                                               smithy.SchemaExtensions
+	eInvoiceFrequency                                                                            smithy.SchemaExtensions
+	eInvoiceFrequency_ONE_TIME                                                                   smithy.SchemaExtensions
+	eInvoiceFrequency_RECURRING                                                                  smithy.SchemaExtensions
+	eInvoicePDF                                                                                  smithy.SchemaExtensions
+	eInvoicePDF_InvoiceId                                                                        smithy.SchemaExtensions
+	eInvoicePDF_DocumentUrl                                                                      smithy.SchemaExtensions
+	eInvoicePDF_DocumentUrlExpirationDate                                                        smithy.SchemaExtensions
+	eInvoicePDF_SupplementalDocuments                                                            smithy.SchemaExtensions
+	eInvoiceProfile                                                                              smithy.SchemaExtensions
+	eInvoiceProfile_AccountId                                                                    smithy.SchemaExtensions
+	eInvoiceProfile_ReceiverName                                                                 smithy.SchemaExtensions
+	eInvoiceProfile_ReceiverAddress                                                              smithy.SchemaExtensions
+	eInvoiceProfile_ReceiverEmail                                                                smithy.SchemaExtensions
+	eInvoiceProfile_Issuer                                                                       smithy.SchemaExtensions
+	eInvoiceProfile_TaxRegistrationNumber                                                        smithy.SchemaExtensions
+	e_InvoiceSummaries                                                                           smithy.SchemaExtensions
+	e_InvoiceSummaries_member                                                                    smithy.SchemaExtensions
+	eInvoiceSummariesFilter                                                                      smithy.SchemaExtensions
+	eInvoiceSummariesFilter_TimeInterval                                                         smithy.SchemaExtensions
+	eInvoiceSummariesFilter_BillingPeriod                                                        smithy.SchemaExtensions
+	eInvoiceSummariesFilter_InvoicingEntity                                                      smithy.SchemaExtensions
+	eInvoiceSummariesFilter_ReceiverRole                                                         smithy.SchemaExtensions
+	e_InvoiceSummariesMaxResults                                                                 smithy.SchemaExtensions
+	eInvoiceSummariesSelector                                                                    smithy.SchemaExtensions
+	eInvoiceSummariesSelector_ResourceType                                                       smithy.SchemaExtensions
+	eInvoiceSummariesSelector_Value                                                              smithy.SchemaExtensions
+	eInvoiceSummary                                                                              smithy.SchemaExtensions
+	eInvoiceSummary_AccountId                                                                    smithy.SchemaExtensions
+	eInvoiceSummary_InvoiceId                                                                    smithy.SchemaExtensions
+	eInvoiceSummary_IssuedDate                                                                   smithy.SchemaExtensions
+	eInvoiceSummary_DueDate                                                                      smithy.SchemaExtensions
+	eInvoiceSummary_BillSourceAccounts                                                           smithy.SchemaExtensions
+	eInvoiceSummary_BillSourceAccountsTotalCount                                                 smithy.SchemaExtensions
+	eInvoiceSummary_ReceiverRole                                                                 smithy.SchemaExtensions
+	eInvoiceSummary_Entity                                                                       smithy.SchemaExtensions
+	eInvoiceSummary_BillingPeriod                                                                smithy.SchemaExtensions
+	eInvoiceSummary_InvoiceFrequency                                                             smithy.SchemaExtensions
+	eInvoiceSummary_BillType                                                                     smithy.SchemaExtensions
+	eInvoiceSummary_InvoiceType                                                                  smithy.SchemaExtensions
+	eInvoiceSummary_CommercialInvoiceId                                                          smithy.SchemaExtensions
+	eInvoiceSummary_OriginalInvoiceId                                                            smithy.SchemaExtensions
+	eInvoiceSummary_PurchaseOrderNumber                                                          smithy.SchemaExtensions
+	eInvoiceSummary_EinvoiceDeliveryStatus                                                       smithy.SchemaExtensions
+	eInvoiceSummary_TaxAuthorityStatus                                                           smithy.SchemaExtensions
+	eInvoiceSummary_BaseCurrencyAmount                                                           smithy.SchemaExtensions
+	eInvoiceSummary_TaxCurrencyAmount                                                            smithy.SchemaExtensions
+	eInvoiceSummary_PaymentCurrencyAmount                                                        smithy.SchemaExtensions
+	eInvoiceType                                                                                 smithy.SchemaExtensions
+	eInvoiceType_INVOICE                                                                         smithy.SchemaExtensions
+	eInvoiceType_CREDIT_MEMO                                                                     smithy.SchemaExtensions
+	eInvoiceType_PAYMENT_RECEIPT                                                                 smithy.SchemaExtensions
+	eInvoiceUnit                                                                                 smithy.SchemaExtensions
+	eInvoiceUnit_InvoiceUnitArn                                                                  smithy.SchemaExtensions
+	eInvoiceUnit_InvoiceReceiver                                                                 smithy.SchemaExtensions
+	eInvoiceUnit_Name                                                                            smithy.SchemaExtensions
+	eInvoiceUnit_Description                                                                     smithy.SchemaExtensions
+	eInvoiceUnit_TaxInheritanceDisabled                                                          smithy.SchemaExtensions
+	eInvoiceUnit_Rule                                                                            smithy.SchemaExtensions
+	eInvoiceUnit_LastModified                                                                    smithy.SchemaExtensions
+	e_InvoiceUnitArns                                                                            smithy.SchemaExtensions
+	e_InvoiceUnitArns_member                                                                     smithy.SchemaExtensions
+	e_InvoiceUnitArnString                                                                       smithy.SchemaExtensions
+	e_InvoiceUnitName                                                                            smithy.SchemaExtensions
+	e_InvoiceUnitNames                                                                           smithy.SchemaExtensions
+	e_InvoiceUnitNames_member                                                                    smithy.SchemaExtensions
+	eInvoiceUnitRule                                                                             smithy.SchemaExtensions
+	eInvoiceUnitRule_LinkedAccounts                                                              smithy.SchemaExtensions
+	eInvoiceUnitRule_BillSourceAccounts                                                          smithy.SchemaExtensions
+	e_InvoiceUnits                                                                               smithy.SchemaExtensions
+	e_InvoiceUnits_member                                                                        smithy.SchemaExtensions
+	e_LastModifiedTimestamp                                                                      smithy.SchemaExtensions
+	eListInvoiceSummariesResourceType                                                            smithy.SchemaExtensions
+	eListInvoiceSummariesResourceType_ACCOUNT_ID                                                 smithy.SchemaExtensions
+	eListInvoiceSummariesResourceType_INVOICE_ID                                                 smithy.SchemaExtensions
+	eMarketplacePunchOutPreference                                                               smithy.SchemaExtensions
+	eMarketplacePunchOutPreference_ApprovalRequestRedirectUrl                                    smithy.SchemaExtensions
+	e_MaxResults                                                                                 smithy.SchemaExtensions
+	e_MaxResultsInteger                                                                          smithy.SchemaExtensions
+	e_Month                                                                                      smithy.SchemaExtensions
+	e_NextTokenString                                                                            smithy.SchemaExtensions
+	eProcurementPortal                                                                           smithy.SchemaExtensions
+	eProcurementPortal_PortalIdentifier                                                          smithy.SchemaExtensions
+	eProcurementPortal_PortalName                                                                smithy.SchemaExtensions
+	eProcurementPortal_PortalDisplayName                                                         smithy.SchemaExtensions
+	eProcurementPortal_DefaultFeatureConfigurations                                              smithy.SchemaExtensions
+	eProcurementPortalEnv                                                                        smithy.SchemaExtensions
+	eProcurementPortalEnv_PROD                                                                   smithy.SchemaExtensions
+	eProcurementPortalEnv_TEST                                                                   smithy.SchemaExtensions
+	e_ProcurementPortalIdString                                                                  smithy.SchemaExtensions
+	eProcurementPortalName                                                                       smithy.SchemaExtensions
+	eProcurementPortalName_SAP_BUSINESS_NETWORK                                                  smithy.SchemaExtensions
+	eProcurementPortalName_COUPA                                                                 smithy.SchemaExtensions
+	eProcurementPortalPreference                                                                 smithy.SchemaExtensions
+	eProcurementPortalPreference_AwsAccountId                                                    smithy.SchemaExtensions
+	eProcurementPortalPreference_ProcurementPortalPreferenceArn                                  smithy.SchemaExtensions
+	eProcurementPortalPreference_ProcurementPortalName                                           smithy.SchemaExtensions
+	eProcurementPortalPreference_BuyerDomain                                                     smithy.SchemaExtensions
+	eProcurementPortalPreference_BuyerIdentifier                                                 smithy.SchemaExtensions
+	eProcurementPortalPreference_SupplierDomain                                                  smithy.SchemaExtensions
+	eProcurementPortalPreference_SupplierIdentifier                                              smithy.SchemaExtensions
+	eProcurementPortalPreference_Selector                                                        smithy.SchemaExtensions
+	eProcurementPortalPreference_ProcurementPortalSharedSecret                                   smithy.SchemaExtensions
+	eProcurementPortalPreference_ProcurementPortalInstanceEndpoint                               smithy.SchemaExtensions
+	eProcurementPortalPreference_PurchaseOrderRetrievalEndpoint                                  smithy.SchemaExtensions
+	eProcurementPortalPreference_TestEnvPreference                                               smithy.SchemaExtensions
+	eProcurementPortalPreference_EinvoiceDeliveryEnabled                                         smithy.SchemaExtensions
+	eProcurementPortalPreference_EinvoiceDeliveryPreference                                      smithy.SchemaExtensions
+	eProcurementPortalPreference_PurchaseOrderRetrievalEnabled                                   smithy.SchemaExtensions
+	eProcurementPortalPreference_MarketplacePunchOutEnabled                                      smithy.SchemaExtensions
+	eProcurementPortalPreference_MarketplacePunchOutPreference                                   smithy.SchemaExtensions
+	eProcurementPortalPreference_Contacts                                                        smithy.SchemaExtensions
+	eProcurementPortalPreference_EinvoiceDeliveryPreferenceStatus                                smithy.SchemaExtensions
+	eProcurementPortalPreference_EinvoiceDeliveryPreferenceStatusReason                          smithy.SchemaExtensions
+	eProcurementPortalPreference_PurchaseOrderRetrievalPreferenceStatus                          smithy.SchemaExtensions
+	eProcurementPortalPreference_PurchaseOrderRetrievalPreferenceStatusReason                    smithy.SchemaExtensions
+	eProcurementPortalPreference_Version                                                         smithy.SchemaExtensions
+	eProcurementPortalPreference_CreateDate                                                      smithy.SchemaExtensions
+	eProcurementPortalPreference_LastUpdateDate                                                  smithy.SchemaExtensions
+	e_ProcurementPortalPreferenceArnString                                                       smithy.SchemaExtensions
+	eProcurementPortalPreferenceSelector                                                         smithy.SchemaExtensions
+	eProcurementPortalPreferenceSelector_InvoiceUnitArns                                         smithy.SchemaExtensions
+	eProcurementPortalPreferenceSelector_SellerOfRecords                                         smithy.SchemaExtensions
+	eProcurementPortalPreferenceStatus                                                           smithy.SchemaExtensions
+	eProcurementPortalPreferenceStatus_PENDING_VERIFICATION                                      smithy.SchemaExtensions
+	eProcurementPortalPreferenceStatus_VALIDATED                                                 smithy.SchemaExtensions
+	eProcurementPortalPreferenceStatus_TEST_INITIALIZED                                          smithy.SchemaExtensions
+	eProcurementPortalPreferenceStatus_TEST_INITIALIZATION_FAILED                                smithy.SchemaExtensions
+	eProcurementPortalPreferenceStatus_TEST_FAILED                                               smithy.SchemaExtensions
+	eProcurementPortalPreferenceStatus_ACTIVE                                                    smithy.SchemaExtensions
+	eProcurementPortalPreferenceStatus_SUSPENDED                                                 smithy.SchemaExtensions
+	e_ProcurementPortalPreferenceSummaries                                                       smithy.SchemaExtensions
+	e_ProcurementPortalPreferenceSummaries_member                                                smithy.SchemaExtensions
+	eProcurementPortalPreferenceSummary                                                          smithy.SchemaExtensions
+	eProcurementPortalPreferenceSummary_AwsAccountId                                             smithy.SchemaExtensions
+	eProcurementPortalPreferenceSummary_ProcurementPortalPreferenceArn                           smithy.SchemaExtensions
+	eProcurementPortalPreferenceSummary_ProcurementPortalName                                    smithy.SchemaExtensions
+	eProcurementPortalPreferenceSummary_BuyerDomain                                              smithy.SchemaExtensions
+	eProcurementPortalPreferenceSummary_BuyerIdentifier                                          smithy.SchemaExtensions
+	eProcurementPortalPreferenceSummary_SupplierDomain                                           smithy.SchemaExtensions
+	eProcurementPortalPreferenceSummary_SupplierIdentifier                                       smithy.SchemaExtensions
+	eProcurementPortalPreferenceSummary_Selector                                                 smithy.SchemaExtensions
+	eProcurementPortalPreferenceSummary_EinvoiceDeliveryEnabled                                  smithy.SchemaExtensions
+	eProcurementPortalPreferenceSummary_PurchaseOrderRetrievalEnabled                            smithy.SchemaExtensions
+	eProcurementPortalPreferenceSummary_MarketplacePunchOutEnabled                               smithy.SchemaExtensions
+	eProcurementPortalPreferenceSummary_EinvoiceDeliveryPreferenceStatus                         smithy.SchemaExtensions
+	eProcurementPortalPreferenceSummary_EinvoiceDeliveryPreferenceStatusReason                   smithy.SchemaExtensions
+	eProcurementPortalPreferenceSummary_PurchaseOrderRetrievalPreferenceStatus                   smithy.SchemaExtensions
+	eProcurementPortalPreferenceSummary_PurchaseOrderRetrievalPreferenceStatusReason             smithy.SchemaExtensions
+	eProcurementPortalPreferenceSummary_Version                                                  smithy.SchemaExtensions
+	eProcurementPortalPreferenceSummary_CreateDate                                               smithy.SchemaExtensions
+	eProcurementPortalPreferenceSummary_LastUpdateDate                                           smithy.SchemaExtensions
+	e_ProcurementPortals                                                                         smithy.SchemaExtensions
+	e_ProcurementPortals_member                                                                  smithy.SchemaExtensions
+	eProcurementPortalSupplier                                                                   smithy.SchemaExtensions
+	eProcurementPortalSupplier_SupplierIdentifier                                                smithy.SchemaExtensions
+	eProcurementPortalSupplier_SellerOfRecord                                                    smithy.SchemaExtensions
+	eProcurementPortalSupplier_CountryCode                                                       smithy.SchemaExtensions
+	eProcurementPortalSupplier_Environment                                                       smithy.SchemaExtensions
+	e_ProcurementPortalSuppliers                                                                 smithy.SchemaExtensions
+	e_ProcurementPortalSuppliers_member                                                          smithy.SchemaExtensions
+	e_ProfileList                                                                                smithy.SchemaExtensions
+	e_ProfileList_member                                                                         smithy.SchemaExtensions
+	eProtocol                                                                                    smithy.SchemaExtensions
+	eProtocol_CXML                                                                               smithy.SchemaExtensions
+	ePurchaseOrderDataSource                                                                     smithy.SchemaExtensions
+	ePurchaseOrderDataSource_EinvoiceDeliveryDocumentType                                        smithy.SchemaExtensions
+	ePurchaseOrderDataSource_PurchaseOrderDataSourceType                                         smithy.SchemaExtensions
+	e_PurchaseOrderDataSources                                                                   smithy.SchemaExtensions
+	e_PurchaseOrderDataSources_member                                                            smithy.SchemaExtensions
+	ePurchaseOrderDataSourceType                                                                 smithy.SchemaExtensions
+	ePurchaseOrderDataSourceType_ASSOCIATED_PURCHASE_ORDER_REQUIRED                              smithy.SchemaExtensions
+	ePurchaseOrderDataSourceType_PURCHASE_ORDER_NOT_REQUIRED                                     smithy.SchemaExtensions
+	eReceiverAddress                                                                             smithy.SchemaExtensions
+	eReceiverAddress_AddressLine1                                                                smithy.SchemaExtensions
+	eReceiverAddress_AddressLine2                                                                smithy.SchemaExtensions
+	eReceiverAddress_AddressLine3                                                                smithy.SchemaExtensions
+	eReceiverAddress_DistrictOrCounty                                                            smithy.SchemaExtensions
+	eReceiverAddress_City                                                                        smithy.SchemaExtensions
+	eReceiverAddress_StateOrRegion                                                               smithy.SchemaExtensions
+	eReceiverAddress_CountryCode                                                                 smithy.SchemaExtensions
+	eReceiverAddress_CompanyName                                                                 smithy.SchemaExtensions
+	eReceiverAddress_PostalCode                                                                  smithy.SchemaExtensions
+	eReceiverRole                                                                                smithy.SchemaExtensions
+	eReceiverRole_SELLER                                                                         smithy.SchemaExtensions
+	eReceiverRole_RESELLER                                                                       smithy.SchemaExtensions
+	eReceiverRole_BUYER                                                                          smithy.SchemaExtensions
+	eResourceNotFoundException                                                                   smithy.SchemaExtensions
+	eResourceNotFoundException_message                                                           smithy.SchemaExtensions
+	eResourceNotFoundException_resourceName                                                      smithy.SchemaExtensions
+	eResourceTag                                                                                 smithy.SchemaExtensions
+	eResourceTag_Key                                                                             smithy.SchemaExtensions
+	eResourceTag_Value                                                                           smithy.SchemaExtensions
+	e_ResourceTagKey                                                                             smithy.SchemaExtensions
+	e_ResourceTagKeyList                                                                         smithy.SchemaExtensions
+	e_ResourceTagKeyList_member                                                                  smithy.SchemaExtensions
+	e_ResourceTagList                                                                            smithy.SchemaExtensions
+	e_ResourceTagList_member                                                                     smithy.SchemaExtensions
+	e_ResourceTagValue                                                                           smithy.SchemaExtensions
+	e_RuleAccountIdList                                                                          smithy.SchemaExtensions
+	e_RuleAccountIdList_member                                                                   smithy.SchemaExtensions
+	e_SellerOfRecords                                                                            smithy.SchemaExtensions
+	e_SellerOfRecords_member                                                                     smithy.SchemaExtensions
+	e_SensitiveBasicStringWithoutSpace                                                           smithy.SchemaExtensions
+	eServiceQuotaExceededException                                                               smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                                                       smithy.SchemaExtensions
+	e_StringWithoutNewLine                                                                       smithy.SchemaExtensions
+	eSupplementalDocument                                                                        smithy.SchemaExtensions
+	eSupplementalDocument_DocumentType                                                           smithy.SchemaExtensions
+	eSupplementalDocument_DocumentId                                                             smithy.SchemaExtensions
+	eSupplementalDocument_DocumentUrl                                                            smithy.SchemaExtensions
+	eSupplementalDocument_DocumentUrlExpirationDate                                              smithy.SchemaExtensions
+	e_SupplementalDocuments                                                                      smithy.SchemaExtensions
+	e_SupplementalDocuments_member                                                               smithy.SchemaExtensions
+	eSupplementalDocumentType                                                                    smithy.SchemaExtensions
+	eSupplementalDocumentType_GOVERNMENT_INVOICE                                                 smithy.SchemaExtensions
+	eSupplementalDocumentType_TAX_E_INVOICE                                                      smithy.SchemaExtensions
+	eSupplementalDocumentType_PAYMENT_RECEIPT                                                    smithy.SchemaExtensions
+	eSupplementalDocumentType_SUPPLEMENT                                                         smithy.SchemaExtensions
+	eSupplierDomain                                                                              smithy.SchemaExtensions
+	eSupplierDomain_NetworkID                                                                    smithy.SchemaExtensions
+	e_SupplierIdString                                                                           smithy.SchemaExtensions
+	e_TagrisArn                                                                                  smithy.SchemaExtensions
+	eTaxAuthorityStatus                                                                          smithy.SchemaExtensions
+	eTaxAuthorityStatus_ISSUED                                                                   smithy.SchemaExtensions
+	eTaxAuthorityStatus_CANCELLED                                                                smithy.SchemaExtensions
+	eTaxesBreakdown                                                                              smithy.SchemaExtensions
+	eTaxesBreakdown_Breakdown                                                                    smithy.SchemaExtensions
+	eTaxesBreakdown_TotalAmount                                                                  smithy.SchemaExtensions
+	eTaxesBreakdownAmount                                                                        smithy.SchemaExtensions
+	eTaxesBreakdownAmount_Description                                                            smithy.SchemaExtensions
+	eTaxesBreakdownAmount_Amount                                                                 smithy.SchemaExtensions
+	eTaxesBreakdownAmount_Rate                                                                   smithy.SchemaExtensions
+	e_TaxesBreakdownAmountList                                                                   smithy.SchemaExtensions
+	e_TaxesBreakdownAmountList_member                                                            smithy.SchemaExtensions
+	e_TaxInheritanceDisabledFlag                                                                 smithy.SchemaExtensions
+	eTestEnvPreference                                                                           smithy.SchemaExtensions
+	eTestEnvPreference_BuyerDomain                                                               smithy.SchemaExtensions
+	eTestEnvPreference_BuyerIdentifier                                                           smithy.SchemaExtensions
+	eTestEnvPreference_SupplierDomain                                                            smithy.SchemaExtensions
+	eTestEnvPreference_SupplierIdentifier                                                        smithy.SchemaExtensions
+	eTestEnvPreference_ProcurementPortalSharedSecret                                             smithy.SchemaExtensions
+	eTestEnvPreference_ProcurementPortalInstanceEndpoint                                         smithy.SchemaExtensions
+	eTestEnvPreference_PurchaseOrderRetrievalEndpoint                                            smithy.SchemaExtensions
+	eTestEnvPreferenceInput                                                                      smithy.SchemaExtensions
+	eTestEnvPreferenceInput_BuyerDomain                                                          smithy.SchemaExtensions
+	eTestEnvPreferenceInput_BuyerIdentifier                                                      smithy.SchemaExtensions
+	eTestEnvPreferenceInput_SupplierDomain                                                       smithy.SchemaExtensions
+	eTestEnvPreferenceInput_SupplierIdentifier                                                   smithy.SchemaExtensions
+	eTestEnvPreferenceInput_ProcurementPortalSharedSecret                                        smithy.SchemaExtensions
+	eTestEnvPreferenceInput_ProcurementPortalInstanceEndpoint                                    smithy.SchemaExtensions
+	eThrottlingException                                                                         smithy.SchemaExtensions
+	eThrottlingException_message                                                                 smithy.SchemaExtensions
+	eValidationException                                                                         smithy.SchemaExtensions
+	eValidationException_message                                                                 smithy.SchemaExtensions
+	eValidationException_resourceName                                                            smithy.SchemaExtensions
+	eValidationException_reason                                                                  smithy.SchemaExtensions
+	eValidationException_fieldList                                                               smithy.SchemaExtensions
+	eValidationExceptionField                                                                    smithy.SchemaExtensions
+	eValidationExceptionField_name                                                               smithy.SchemaExtensions
+	eValidationExceptionField_message                                                            smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                                                               smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member                                                        smithy.SchemaExtensions
+	eValidationExceptionReason                                                                   smithy.SchemaExtensions
+	eValidationExceptionReason_NON_MEMBERS_PRESENT                                               smithy.SchemaExtensions
+	eValidationExceptionReason_MAX_ACCOUNTS_EXCEEDED                                             smithy.SchemaExtensions
+	eValidationExceptionReason_MAX_INVOICE_UNITS_EXCEEDED                                        smithy.SchemaExtensions
+	eValidationExceptionReason_DUPLICATE_INVOICE_UNIT                                            smithy.SchemaExtensions
+	eValidationExceptionReason_MUTUAL_EXCLUSION_ERROR                                            smithy.SchemaExtensions
+	eValidationExceptionReason_ACCOUNT_MEMBERSHIP_ERROR                                          smithy.SchemaExtensions
+	eValidationExceptionReason_TAX_SETTINGS_ERROR                                                smithy.SchemaExtensions
+	eValidationExceptionReason_EXPIRED_NEXT_TOKEN                                                smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_NEXT_TOKEN                                                smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_INPUT                                                     smithy.SchemaExtensions
+	eValidationExceptionReason_FIELD_VALIDATION_FAILED                                           smithy.SchemaExtensions
+	eValidationExceptionReason_CANNOT_PARSE                                                      smithy.SchemaExtensions
+	eValidationExceptionReason_UNKNOWN_OPERATION                                                 smithy.SchemaExtensions
+	eValidationExceptionReason_OTHER                                                             smithy.SchemaExtensions
+	e_Year                                                                                       smithy.SchemaExtensions
+	eBatchGetInvoiceProfileRequest                                                               smithy.SchemaExtensions
+	eBatchGetInvoiceProfileRequest_AccountIds                                                    smithy.SchemaExtensions
+	eBatchGetInvoiceProfileResponse                                                              smithy.SchemaExtensions
+	eBatchGetInvoiceProfileResponse_Profiles                                                     smithy.SchemaExtensions
+	eCreateInvoiceUnitRequest                                                                    smithy.SchemaExtensions
+	eCreateInvoiceUnitRequest_Name                                                               smithy.SchemaExtensions
+	eCreateInvoiceUnitRequest_InvoiceReceiver                                                    smithy.SchemaExtensions
+	eCreateInvoiceUnitRequest_Description                                                        smithy.SchemaExtensions
+	eCreateInvoiceUnitRequest_TaxInheritanceDisabled                                             smithy.SchemaExtensions
+	eCreateInvoiceUnitRequest_Rule                                                               smithy.SchemaExtensions
+	eCreateInvoiceUnitRequest_ResourceTags                                                       smithy.SchemaExtensions
+	eCreateInvoiceUnitRequest_ClientToken                                                        smithy.SchemaExtensions
+	eCreateInvoiceUnitResponse                                                                   smithy.SchemaExtensions
+	eCreateInvoiceUnitResponse_InvoiceUnitArn                                                    smithy.SchemaExtensions
+	eCreateProcurementPortalPreferenceRequest                                                    smithy.SchemaExtensions
+	eCreateProcurementPortalPreferenceRequest_ProcurementPortalName                              smithy.SchemaExtensions
+	eCreateProcurementPortalPreferenceRequest_BuyerDomain                                        smithy.SchemaExtensions
+	eCreateProcurementPortalPreferenceRequest_BuyerIdentifier                                    smithy.SchemaExtensions
+	eCreateProcurementPortalPreferenceRequest_SupplierDomain                                     smithy.SchemaExtensions
+	eCreateProcurementPortalPreferenceRequest_SupplierIdentifier                                 smithy.SchemaExtensions
+	eCreateProcurementPortalPreferenceRequest_Selector                                           smithy.SchemaExtensions
+	eCreateProcurementPortalPreferenceRequest_ProcurementPortalSharedSecret                      smithy.SchemaExtensions
+	eCreateProcurementPortalPreferenceRequest_ProcurementPortalInstanceEndpoint                  smithy.SchemaExtensions
+	eCreateProcurementPortalPreferenceRequest_TestEnvPreference                                  smithy.SchemaExtensions
+	eCreateProcurementPortalPreferenceRequest_EinvoiceDeliveryEnabled                            smithy.SchemaExtensions
+	eCreateProcurementPortalPreferenceRequest_EinvoiceDeliveryPreference                         smithy.SchemaExtensions
+	eCreateProcurementPortalPreferenceRequest_PurchaseOrderRetrievalEnabled                      smithy.SchemaExtensions
+	eCreateProcurementPortalPreferenceRequest_MarketplacePunchOutEnabled                         smithy.SchemaExtensions
+	eCreateProcurementPortalPreferenceRequest_MarketplacePunchOutPreference                      smithy.SchemaExtensions
+	eCreateProcurementPortalPreferenceRequest_Contacts                                           smithy.SchemaExtensions
+	eCreateProcurementPortalPreferenceRequest_ResourceTags                                       smithy.SchemaExtensions
+	eCreateProcurementPortalPreferenceRequest_ClientToken                                        smithy.SchemaExtensions
+	eCreateProcurementPortalPreferenceResponse                                                   smithy.SchemaExtensions
+	eCreateProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn                    smithy.SchemaExtensions
+	eDeleteInvoiceUnitRequest                                                                    smithy.SchemaExtensions
+	eDeleteInvoiceUnitRequest_InvoiceUnitArn                                                     smithy.SchemaExtensions
+	eDeleteInvoiceUnitRequest_ClientToken                                                        smithy.SchemaExtensions
+	eDeleteInvoiceUnitResponse                                                                   smithy.SchemaExtensions
+	eDeleteInvoiceUnitResponse_InvoiceUnitArn                                                    smithy.SchemaExtensions
+	eDeleteProcurementPortalPreferenceRequest                                                    smithy.SchemaExtensions
+	eDeleteProcurementPortalPreferenceRequest_ProcurementPortalPreferenceArn                     smithy.SchemaExtensions
+	eDeleteProcurementPortalPreferenceRequest_ClientToken                                        smithy.SchemaExtensions
+	eDeleteProcurementPortalPreferenceResponse                                                   smithy.SchemaExtensions
+	eDeleteProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn                    smithy.SchemaExtensions
+	eGetInvoicePDFRequest                                                                        smithy.SchemaExtensions
+	eGetInvoicePDFRequest_InvoiceId                                                              smithy.SchemaExtensions
+	eGetInvoicePDFResponse                                                                       smithy.SchemaExtensions
+	eGetInvoicePDFResponse_InvoicePDF                                                            smithy.SchemaExtensions
+	eGetInvoiceUnitRequest                                                                       smithy.SchemaExtensions
+	eGetInvoiceUnitRequest_InvoiceUnitArn                                                        smithy.SchemaExtensions
+	eGetInvoiceUnitRequest_AsOf                                                                  smithy.SchemaExtensions
+	eGetInvoiceUnitResponse                                                                      smithy.SchemaExtensions
+	eGetInvoiceUnitResponse_InvoiceUnitArn                                                       smithy.SchemaExtensions
+	eGetInvoiceUnitResponse_InvoiceReceiver                                                      smithy.SchemaExtensions
+	eGetInvoiceUnitResponse_Name                                                                 smithy.SchemaExtensions
+	eGetInvoiceUnitResponse_Description                                                          smithy.SchemaExtensions
+	eGetInvoiceUnitResponse_TaxInheritanceDisabled                                               smithy.SchemaExtensions
+	eGetInvoiceUnitResponse_Rule                                                                 smithy.SchemaExtensions
+	eGetInvoiceUnitResponse_LastModified                                                         smithy.SchemaExtensions
+	eGetProcurementPortalPreferenceRequest                                                       smithy.SchemaExtensions
+	eGetProcurementPortalPreferenceRequest_ProcurementPortalPreferenceArn                        smithy.SchemaExtensions
+	eGetProcurementPortalPreferenceResponse                                                      smithy.SchemaExtensions
+	eGetProcurementPortalPreferenceResponse_ProcurementPortalPreference                          smithy.SchemaExtensions
+	eListInvoiceSummariesRequest                                                                 smithy.SchemaExtensions
+	eListInvoiceSummariesRequest_Selector                                                        smithy.SchemaExtensions
+	eListInvoiceSummariesRequest_Filter                                                          smithy.SchemaExtensions
+	eListInvoiceSummariesRequest_NextToken                                                       smithy.SchemaExtensions
+	eListInvoiceSummariesRequest_MaxResults                                                      smithy.SchemaExtensions
+	eListInvoiceSummariesResponse                                                                smithy.SchemaExtensions
+	eListInvoiceSummariesResponse_InvoiceSummaries                                               smithy.SchemaExtensions
+	eListInvoiceSummariesResponse_NextToken                                                      smithy.SchemaExtensions
+	eListInvoiceUnitsRequest                                                                     smithy.SchemaExtensions
+	eListInvoiceUnitsRequest_Filters                                                             smithy.SchemaExtensions
+	eListInvoiceUnitsRequest_NextToken                                                           smithy.SchemaExtensions
+	eListInvoiceUnitsRequest_MaxResults                                                          smithy.SchemaExtensions
+	eListInvoiceUnitsRequest_AsOf                                                                smithy.SchemaExtensions
+	eListInvoiceUnitsResponse                                                                    smithy.SchemaExtensions
+	eListInvoiceUnitsResponse_InvoiceUnits                                                       smithy.SchemaExtensions
+	eListInvoiceUnitsResponse_NextToken                                                          smithy.SchemaExtensions
+	eListProcurementPortalPreferencesRequest                                                     smithy.SchemaExtensions
+	eListProcurementPortalPreferencesRequest_NextToken                                           smithy.SchemaExtensions
+	eListProcurementPortalPreferencesRequest_MaxResults                                          smithy.SchemaExtensions
+	eListProcurementPortalPreferencesResponse                                                    smithy.SchemaExtensions
+	eListProcurementPortalPreferencesResponse_ProcurementPortalPreferences                       smithy.SchemaExtensions
+	eListProcurementPortalPreferencesResponse_NextToken                                          smithy.SchemaExtensions
+	eListProcurementPortalsRequest                                                               smithy.SchemaExtensions
+	eListProcurementPortalsRequest_NextToken                                                     smithy.SchemaExtensions
+	eListProcurementPortalsRequest_MaxResults                                                    smithy.SchemaExtensions
+	eListProcurementPortalsResponse                                                              smithy.SchemaExtensions
+	eListProcurementPortalsResponse_ProcurementPortals                                           smithy.SchemaExtensions
+	eListProcurementPortalsResponse_NextToken                                                    smithy.SchemaExtensions
+	eListProcurementPortalSuppliersRequest                                                       smithy.SchemaExtensions
+	eListProcurementPortalSuppliersRequest_PortalIdentifier                                      smithy.SchemaExtensions
+	eListProcurementPortalSuppliersRequest_NextToken                                             smithy.SchemaExtensions
+	eListProcurementPortalSuppliersRequest_MaxResults                                            smithy.SchemaExtensions
+	eListProcurementPortalSuppliersResponse                                                      smithy.SchemaExtensions
+	eListProcurementPortalSuppliersResponse_ProcurementPortalSuppliers                           smithy.SchemaExtensions
+	eListProcurementPortalSuppliersResponse_NextToken                                            smithy.SchemaExtensions
+	eListTagsForResourceRequest                                                                  smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn                                                      smithy.SchemaExtensions
+	eListTagsForResourceResponse                                                                 smithy.SchemaExtensions
+	eListTagsForResourceResponse_ResourceTags                                                    smithy.SchemaExtensions
+	ePutProcurementPortalPreferenceRequest                                                       smithy.SchemaExtensions
+	ePutProcurementPortalPreferenceRequest_ProcurementPortalPreferenceArn                        smithy.SchemaExtensions
+	ePutProcurementPortalPreferenceRequest_Selector                                              smithy.SchemaExtensions
+	ePutProcurementPortalPreferenceRequest_ProcurementPortalSharedSecret                         smithy.SchemaExtensions
+	ePutProcurementPortalPreferenceRequest_ProcurementPortalInstanceEndpoint                     smithy.SchemaExtensions
+	ePutProcurementPortalPreferenceRequest_TestEnvPreference                                     smithy.SchemaExtensions
+	ePutProcurementPortalPreferenceRequest_EinvoiceDeliveryEnabled                               smithy.SchemaExtensions
+	ePutProcurementPortalPreferenceRequest_EinvoiceDeliveryPreference                            smithy.SchemaExtensions
+	ePutProcurementPortalPreferenceRequest_PurchaseOrderRetrievalEnabled                         smithy.SchemaExtensions
+	ePutProcurementPortalPreferenceRequest_MarketplacePunchOutEnabled                            smithy.SchemaExtensions
+	ePutProcurementPortalPreferenceRequest_MarketplacePunchOutPreference                         smithy.SchemaExtensions
+	ePutProcurementPortalPreferenceRequest_Contacts                                              smithy.SchemaExtensions
+	ePutProcurementPortalPreferenceRequest_ClientToken                                           smithy.SchemaExtensions
+	ePutProcurementPortalPreferenceResponse                                                      smithy.SchemaExtensions
+	ePutProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn                       smithy.SchemaExtensions
+	eSendProcurementPortalValidationRequest                                                      smithy.SchemaExtensions
+	eSendProcurementPortalValidationRequest_ProcurementPortalPreferenceArn                       smithy.SchemaExtensions
+	eSendProcurementPortalValidationRequest_ClientToken                                          smithy.SchemaExtensions
+	eSendProcurementPortalValidationResponse                                                     smithy.SchemaExtensions
+	eSendProcurementPortalValidationResponse_ProcurementPortalPreferenceArn                      smithy.SchemaExtensions
+	eTagResourceRequest                                                                          smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                                                              smithy.SchemaExtensions
+	eTagResourceRequest_ResourceTags                                                             smithy.SchemaExtensions
+	eTagResourceResponse                                                                         smithy.SchemaExtensions
+	eUntagResourceRequest                                                                        smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                                                            smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceTagKeys                                                        smithy.SchemaExtensions
+	eUntagResourceResponse                                                                       smithy.SchemaExtensions
+	eUpdateInvoiceUnitRequest                                                                    smithy.SchemaExtensions
+	eUpdateInvoiceUnitRequest_InvoiceUnitArn                                                     smithy.SchemaExtensions
+	eUpdateInvoiceUnitRequest_Description                                                        smithy.SchemaExtensions
+	eUpdateInvoiceUnitRequest_TaxInheritanceDisabled                                             smithy.SchemaExtensions
+	eUpdateInvoiceUnitRequest_Rule                                                               smithy.SchemaExtensions
+	eUpdateInvoiceUnitRequest_ClientToken                                                        smithy.SchemaExtensions
+	eUpdateInvoiceUnitResponse                                                                   smithy.SchemaExtensions
+	eUpdateInvoiceUnitResponse_InvoiceUnitArn                                                    smithy.SchemaExtensions
+	eUpdateProcurementPortalPreferenceStatusRequest                                              smithy.SchemaExtensions
+	eUpdateProcurementPortalPreferenceStatusRequest_ProcurementPortalPreferenceArn               smithy.SchemaExtensions
+	eUpdateProcurementPortalPreferenceStatusRequest_EinvoiceDeliveryPreferenceStatus             smithy.SchemaExtensions
+	eUpdateProcurementPortalPreferenceStatusRequest_EinvoiceDeliveryPreferenceStatusReason       smithy.SchemaExtensions
+	eUpdateProcurementPortalPreferenceStatusRequest_PurchaseOrderRetrievalPreferenceStatus       smithy.SchemaExtensions
+	eUpdateProcurementPortalPreferenceStatusRequest_PurchaseOrderRetrievalPreferenceStatusReason smithy.SchemaExtensions
+	eUpdateProcurementPortalPreferenceStatusRequest_ClientToken                                  smithy.SchemaExtensions
+	eUpdateProcurementPortalPreferenceStatusResponse                                             smithy.SchemaExtensions
+	eUpdateProcurementPortalPreferenceStatusResponse_ProcurementPortalPreferenceArn              smithy.SchemaExtensions
+	eVerifyProcurementPortalValidationRequest                                                    smithy.SchemaExtensions
+	eVerifyProcurementPortalValidationRequest_ProcurementPortalPreferenceArn                     smithy.SchemaExtensions
+	eVerifyProcurementPortalValidationRequest_Code                                               smithy.SchemaExtensions
+	eVerifyProcurementPortalValidationRequest_ClientToken                                        smithy.SchemaExtensions
+	eVerifyProcurementPortalValidationResponse                                                   smithy.SchemaExtensions
+	eVerifyProcurementPortalValidationResponse_ProcurementPortalPreferenceArn                    smithy.SchemaExtensions
+)
 
 var (
 	iBatchGetInvoiceProfile                          = smithy.ShapeID{Namespace: "com.amazonaws.invoicing", Name: "BatchGetInvoiceProfile"}
@@ -367,574 +933,574 @@ var mUpdateProcurementPortalPreferenceStatusResponse = smithy.SchemaMembers{List
 var mVerifyProcurementPortalValidationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sVerifyProcurementPortalValidationRequest_ProcurementPortalPreferenceArn, &sVerifyProcurementPortalValidationRequest_Code, &sVerifyProcurementPortalValidationRequest_ClientToken}}
 var mVerifyProcurementPortalValidationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sVerifyProcurementPortalValidationResponse_ProcurementPortalPreferenceArn}}
 
-var sBatchGetInvoiceProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetInvoiceProfile, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCreateInvoiceUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateInvoiceUnit, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sCreateProcurementPortalPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProcurementPortalPreference, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sDeleteInvoiceUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInvoiceUnit, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sDeleteProcurementPortalPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProcurementPortalPreference, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sGetInvoicePDF = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInvoicePDF, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sGetInvoiceUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInvoiceUnit, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sGetProcurementPortalPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProcurementPortalPreference, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sListInvoiceSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvoiceSummaries, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sListInvoiceUnits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvoiceUnits, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sListProcurementPortalPreferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProcurementPortalPreferences, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sListProcurementPortals = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProcurementPortals, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sListProcurementPortalSuppliers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProcurementPortalSuppliers, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sPutProcurementPortalPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutProcurementPortalPreference, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sSendProcurementPortalValidation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendProcurementPortalValidation, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sUpdateInvoiceUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateInvoiceUnit, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sUpdateProcurementPortalPreferenceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProcurementPortalPreferenceStatus, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var sVerifyProcurementPortalValidation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifyProcurementPortalValidation, Type: smithy.ShapeTypeOperation, Ext: &ext[20]})
-var s_Invoicing = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Invoicing, Type: smithy.ShapeTypeService, Ext: &ext[21]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[22]})
-var s_AccountIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList, Ext: &ext[25]})
-var s_AccountIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountIdString, Type: smithy.ShapeTypeString, Ext: &ext[27]})
-var sAmountBreakdown = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmountBreakdown, Members: &mAmountBreakdown, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
-var s_AsOfTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AsOfTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[33]})
-var s_BasicString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[34]})
-var s_BasicStringWithoutSpace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var sBillingEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBillingEntity, Members: &mBillingEntity, Type: smithy.ShapeTypeEnum, Ext: &ext[36]})
-var sBillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBillingPeriod, Members: &mBillingPeriod, Type: smithy.ShapeTypeStructure, Ext: &ext[39]})
-var s_BillSourceAccountList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillSourceAccountList, Members: &m_BillSourceAccountList, Type: smithy.ShapeTypeList, Ext: &ext[42]})
-var sBillType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBillType, Members: &mBillType, Type: smithy.ShapeTypeEnum, Ext: &ext[44]})
-var sBuyerDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBuyerDomain, Members: &mBuyerDomain, Type: smithy.ShapeTypeEnum, Ext: &ext[48]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[50]})
-var sConnectionTestingMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionTestingMethod, Members: &mConnectionTestingMethod, Type: smithy.ShapeTypeEnum, Ext: &ext[54]})
-var sContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContact, Members: &mContact, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[57]})
-var s_Contacts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Contacts, Members: &m_Contacts, Type: smithy.ShapeTypeList, Ext: &ext[60]})
-var s_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CountryCode, Type: smithy.ShapeTypeString, Ext: &ext[62]})
-var s_CurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CurrencyCode, Type: smithy.ShapeTypeString, Ext: &ext[63]})
-var sCurrencyExchangeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCurrencyExchangeDetails, Members: &mCurrencyExchangeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[64]})
-var sDateInterval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDateInterval, Members: &mDateInterval, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var s_DescriptionString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescriptionString, Type: smithy.ShapeTypeString, Ext: &ext[71]})
-var sDiscountsBreakdown = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiscountsBreakdown, Members: &mDiscountsBreakdown, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sDiscountsBreakdownAmount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiscountsBreakdownAmount, Members: &mDiscountsBreakdownAmount, Type: smithy.ShapeTypeStructure, Ext: &ext[75]})
-var s_DiscountsBreakdownAmountList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DiscountsBreakdownAmountList, Members: &m_DiscountsBreakdownAmountList, Type: smithy.ShapeTypeList, Ext: &ext[79]})
-var sEinvoiceDeliveryAttachmentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEinvoiceDeliveryAttachmentType, Members: &mEinvoiceDeliveryAttachmentType, Type: smithy.ShapeTypeEnum, Ext: &ext[81]})
-var s_EinvoiceDeliveryAttachmentTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EinvoiceDeliveryAttachmentTypes, Members: &m_EinvoiceDeliveryAttachmentTypes, Type: smithy.ShapeTypeList, Ext: &ext[84]})
-var sEinvoiceDeliveryDocumentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEinvoiceDeliveryDocumentType, Members: &mEinvoiceDeliveryDocumentType, Type: smithy.ShapeTypeEnum, Ext: &ext[86]})
-var s_EinvoiceDeliveryDocumentTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EinvoiceDeliveryDocumentTypes, Members: &m_EinvoiceDeliveryDocumentTypes, Type: smithy.ShapeTypeList, Ext: &ext[92]})
-var sEinvoiceDeliveryPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEinvoiceDeliveryPreference, Members: &mEinvoiceDeliveryPreference, Type: smithy.ShapeTypeStructure, Ext: &ext[94]})
-var sEinvoiceDeliveryStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEinvoiceDeliveryStatus, Members: &mEinvoiceDeliveryStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[101]})
-var s_EmailString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailString, Type: smithy.ShapeTypeString, Ext: &ext[104]})
-var sEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntity, Members: &mEntity, Type: smithy.ShapeTypeStructure, Ext: &ext[105]})
-var sFeatureConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFeatureConfigurations, Members: &mFeatureConfigurations, Type: smithy.ShapeTypeStructure, Ext: &ext[108]})
-var sFeesBreakdown = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFeesBreakdown, Members: &mFeesBreakdown, Type: smithy.ShapeTypeStructure, Ext: &ext[110]})
-var sFeesBreakdownAmount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFeesBreakdownAmount, Members: &mFeesBreakdownAmount, Type: smithy.ShapeTypeStructure, Ext: &ext[113]})
-var s_FeesBreakdownAmountList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FeesBreakdownAmountList, Members: &m_FeesBreakdownAmountList, Type: smithy.ShapeTypeList, Ext: &ext[117]})
-var sFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilters, Members: &mFilters, Type: smithy.ShapeTypeStructure, Ext: &ext[119]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &ext[124]})
-var sInvoiceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvoiceConfiguration, Members: &mInvoiceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[127]})
-var sInvoiceCurrencyAmount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvoiceCurrencyAmount, Members: &mInvoiceCurrencyAmount, Type: smithy.ShapeTypeStructure, Ext: &ext[130]})
-var sInvoiceFrequency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvoiceFrequency, Members: &mInvoiceFrequency, Type: smithy.ShapeTypeEnum, Ext: &ext[136]})
-var sInvoicePDF = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvoicePDF, Members: &mInvoicePDF, Type: smithy.ShapeTypeStructure, Ext: &ext[139]})
-var sInvoiceProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvoiceProfile, Members: &mInvoiceProfile, Type: smithy.ShapeTypeStructure, Ext: &ext[144]})
-var s_InvoiceSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvoiceSummaries, Members: &m_InvoiceSummaries, Type: smithy.ShapeTypeList, Ext: &ext[151]})
-var sInvoiceSummariesFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvoiceSummariesFilter, Members: &mInvoiceSummariesFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[153]})
-var s_InvoiceSummariesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvoiceSummariesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[158]})
-var sInvoiceSummariesSelector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvoiceSummariesSelector, Members: &mInvoiceSummariesSelector, Type: smithy.ShapeTypeStructure, Ext: &ext[159]})
-var sInvoiceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvoiceSummary, Members: &mInvoiceSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[162]})
-var sInvoiceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvoiceType, Members: &mInvoiceType, Type: smithy.ShapeTypeEnum, Ext: &ext[183]})
-var sInvoiceUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvoiceUnit, Members: &mInvoiceUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[187]})
-var s_InvoiceUnitArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvoiceUnitArns, Members: &m_InvoiceUnitArns, Type: smithy.ShapeTypeList, Ext: &ext[195]})
-var s_InvoiceUnitArnString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvoiceUnitArnString, Type: smithy.ShapeTypeString, Ext: &ext[197]})
-var s_InvoiceUnitName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvoiceUnitName, Type: smithy.ShapeTypeString, Ext: &ext[198]})
-var s_InvoiceUnitNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvoiceUnitNames, Members: &m_InvoiceUnitNames, Type: smithy.ShapeTypeList, Ext: &ext[199]})
-var sInvoiceUnitRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvoiceUnitRule, Members: &mInvoiceUnitRule, Type: smithy.ShapeTypeStructure, Ext: &ext[201]})
-var s_InvoiceUnits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvoiceUnits, Members: &m_InvoiceUnits, Type: smithy.ShapeTypeList, Ext: &ext[204]})
-var s_LastModifiedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastModifiedTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[206]})
-var sListInvoiceSummariesResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvoiceSummariesResourceType, Members: &mListInvoiceSummariesResourceType, Type: smithy.ShapeTypeEnum, Ext: &ext[207]})
-var sMarketplacePunchOutPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMarketplacePunchOutPreference, Members: &mMarketplacePunchOutPreference, Type: smithy.ShapeTypeStructure, Ext: &ext[210]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[212]})
-var s_MaxResultsInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[213]})
-var s_Month = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Month, Type: smithy.ShapeTypeInteger, Ext: &ext[214]})
-var s_NextTokenString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextTokenString, Type: smithy.ShapeTypeString, Ext: &ext[215]})
-var sProcurementPortal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcurementPortal, Members: &mProcurementPortal, Type: smithy.ShapeTypeStructure, Ext: &ext[216]})
-var sProcurementPortalEnv = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcurementPortalEnv, Members: &mProcurementPortalEnv, Type: smithy.ShapeTypeEnum, Ext: &ext[221]})
-var s_ProcurementPortalIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProcurementPortalIdString, Type: smithy.ShapeTypeString, Ext: &ext[224]})
-var sProcurementPortalName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcurementPortalName, Members: &mProcurementPortalName, Type: smithy.ShapeTypeEnum, Ext: &ext[225]})
-var sProcurementPortalPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcurementPortalPreference, Members: &mProcurementPortalPreference, Type: smithy.ShapeTypeStructure, Ext: &ext[228]})
-var s_ProcurementPortalPreferenceArnString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &ext[254]})
-var sProcurementPortalPreferenceSelector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcurementPortalPreferenceSelector, Members: &mProcurementPortalPreferenceSelector, Type: smithy.ShapeTypeStructure, Ext: &ext[255]})
-var sProcurementPortalPreferenceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcurementPortalPreferenceStatus, Members: &mProcurementPortalPreferenceStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[258]})
-var s_ProcurementPortalPreferenceSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProcurementPortalPreferenceSummaries, Members: &m_ProcurementPortalPreferenceSummaries, Type: smithy.ShapeTypeList, Ext: &ext[266]})
-var sProcurementPortalPreferenceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcurementPortalPreferenceSummary, Members: &mProcurementPortalPreferenceSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[268]})
-var s_ProcurementPortals = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProcurementPortals, Members: &m_ProcurementPortals, Type: smithy.ShapeTypeList, Ext: &ext[287]})
-var sProcurementPortalSupplier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcurementPortalSupplier, Members: &mProcurementPortalSupplier, Type: smithy.ShapeTypeStructure, Ext: &ext[289]})
-var s_ProcurementPortalSuppliers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProcurementPortalSuppliers, Members: &m_ProcurementPortalSuppliers, Type: smithy.ShapeTypeList, Ext: &ext[294]})
-var s_ProfileList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProfileList, Members: &m_ProfileList, Type: smithy.ShapeTypeList, Ext: &ext[296]})
-var sProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &ext[298]})
-var sPurchaseOrderDataSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPurchaseOrderDataSource, Members: &mPurchaseOrderDataSource, Type: smithy.ShapeTypeStructure, Ext: &ext[300]})
-var s_PurchaseOrderDataSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PurchaseOrderDataSources, Members: &m_PurchaseOrderDataSources, Type: smithy.ShapeTypeList, Ext: &ext[303]})
-var sPurchaseOrderDataSourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPurchaseOrderDataSourceType, Members: &mPurchaseOrderDataSourceType, Type: smithy.ShapeTypeEnum, Ext: &ext[305]})
-var sReceiverAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReceiverAddress, Members: &mReceiverAddress, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[308]})
-var sReceiverRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReceiverRole, Members: &mReceiverRole, Type: smithy.ShapeTypeEnum, Ext: &ext[318]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &ext[322]})
-var sResourceTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceTag, Members: &mResourceTag, Type: smithy.ShapeTypeStructure, Ext: &ext[325]})
-var s_ResourceTagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagKey, Type: smithy.ShapeTypeString, Ext: &ext[328]})
-var s_ResourceTagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagKeyList, Members: &m_ResourceTagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[329]})
-var s_ResourceTagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList, Ext: &ext[331]})
-var s_ResourceTagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagValue, Type: smithy.ShapeTypeString, Ext: &ext[333]})
-var s_RuleAccountIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleAccountIdList, Members: &m_RuleAccountIdList, Type: smithy.ShapeTypeList, Ext: &ext[334]})
-var s_SellerOfRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SellerOfRecords, Members: &m_SellerOfRecords, Type: smithy.ShapeTypeList, Ext: &ext[336]})
-var s_SensitiveBasicStringWithoutSpace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveBasicStringWithoutSpace, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[338]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &ext[339]})
-var s_StringWithoutNewLine = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringWithoutNewLine, Type: smithy.ShapeTypeString, Ext: &ext[341]})
-var sSupplementalDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupplementalDocument, Members: &mSupplementalDocument, Type: smithy.ShapeTypeStructure, Ext: &ext[342]})
-var s_SupplementalDocuments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupplementalDocuments, Members: &m_SupplementalDocuments, Type: smithy.ShapeTypeList, Ext: &ext[347]})
-var sSupplementalDocumentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupplementalDocumentType, Members: &mSupplementalDocumentType, Type: smithy.ShapeTypeEnum, Ext: &ext[349]})
-var sSupplierDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupplierDomain, Members: &mSupplierDomain, Type: smithy.ShapeTypeEnum, Ext: &ext[354]})
-var s_SupplierIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupplierIdString, Type: smithy.ShapeTypeString, Ext: &ext[356]})
-var s_TagrisArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagrisArn, Type: smithy.ShapeTypeString, Ext: &ext[357]})
-var sTaxAuthorityStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaxAuthorityStatus, Members: &mTaxAuthorityStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[358]})
-var sTaxesBreakdown = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaxesBreakdown, Members: &mTaxesBreakdown, Type: smithy.ShapeTypeStructure, Ext: &ext[361]})
-var sTaxesBreakdownAmount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaxesBreakdownAmount, Members: &mTaxesBreakdownAmount, Type: smithy.ShapeTypeStructure, Ext: &ext[364]})
-var s_TaxesBreakdownAmountList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaxesBreakdownAmountList, Members: &m_TaxesBreakdownAmountList, Type: smithy.ShapeTypeList, Ext: &ext[368]})
-var s_TaxInheritanceDisabledFlag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaxInheritanceDisabledFlag, Type: smithy.ShapeTypeBoolean, Ext: &ext[370]})
-var sTestEnvPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestEnvPreference, Members: &mTestEnvPreference, Type: smithy.ShapeTypeStructure, Ext: &ext[371]})
-var sTestEnvPreferenceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestEnvPreferenceInput, Members: &mTestEnvPreferenceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[379]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &ext[386]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &ext[388]})
-var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[393]})
-var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[396]})
-var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[398]})
-var s_Year = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Year, Type: smithy.ShapeTypeInteger, Ext: &ext[413]})
-var sBatchGetInvoiceProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetInvoiceProfileRequest, Members: &mBatchGetInvoiceProfileRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[414]})
-var sBatchGetInvoiceProfileResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetInvoiceProfileResponse, Members: &mBatchGetInvoiceProfileResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[416]})
-var sCreateInvoiceUnitRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateInvoiceUnitRequest, Members: &mCreateInvoiceUnitRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[418]})
-var sCreateInvoiceUnitResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateInvoiceUnitResponse, Members: &mCreateInvoiceUnitResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[426]})
-var sCreateProcurementPortalPreferenceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProcurementPortalPreferenceRequest, Members: &mCreateProcurementPortalPreferenceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[428]})
-var sCreateProcurementPortalPreferenceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProcurementPortalPreferenceResponse, Members: &mCreateProcurementPortalPreferenceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[446]})
-var sDeleteInvoiceUnitRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInvoiceUnitRequest, Members: &mDeleteInvoiceUnitRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[448]})
-var sDeleteInvoiceUnitResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInvoiceUnitResponse, Members: &mDeleteInvoiceUnitResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[451]})
-var sDeleteProcurementPortalPreferenceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProcurementPortalPreferenceRequest, Members: &mDeleteProcurementPortalPreferenceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[453]})
-var sDeleteProcurementPortalPreferenceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProcurementPortalPreferenceResponse, Members: &mDeleteProcurementPortalPreferenceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[456]})
-var sGetInvoicePDFRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInvoicePDFRequest, Members: &mGetInvoicePDFRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[458]})
-var sGetInvoicePDFResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInvoicePDFResponse, Members: &mGetInvoicePDFResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[460]})
-var sGetInvoiceUnitRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInvoiceUnitRequest, Members: &mGetInvoiceUnitRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[462]})
-var sGetInvoiceUnitResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInvoiceUnitResponse, Members: &mGetInvoiceUnitResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[465]})
-var sGetProcurementPortalPreferenceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProcurementPortalPreferenceRequest, Members: &mGetProcurementPortalPreferenceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[473]})
-var sGetProcurementPortalPreferenceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProcurementPortalPreferenceResponse, Members: &mGetProcurementPortalPreferenceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[475]})
-var sListInvoiceSummariesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvoiceSummariesRequest, Members: &mListInvoiceSummariesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[477]})
-var sListInvoiceSummariesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvoiceSummariesResponse, Members: &mListInvoiceSummariesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[482]})
-var sListInvoiceUnitsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvoiceUnitsRequest, Members: &mListInvoiceUnitsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[485]})
-var sListInvoiceUnitsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvoiceUnitsResponse, Members: &mListInvoiceUnitsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[490]})
-var sListProcurementPortalPreferencesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProcurementPortalPreferencesRequest, Members: &mListProcurementPortalPreferencesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[493]})
-var sListProcurementPortalPreferencesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProcurementPortalPreferencesResponse, Members: &mListProcurementPortalPreferencesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[496]})
-var sListProcurementPortalsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProcurementPortalsRequest, Members: &mListProcurementPortalsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[499]})
-var sListProcurementPortalsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProcurementPortalsResponse, Members: &mListProcurementPortalsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[502]})
-var sListProcurementPortalSuppliersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProcurementPortalSuppliersRequest, Members: &mListProcurementPortalSuppliersRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[505]})
-var sListProcurementPortalSuppliersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProcurementPortalSuppliersResponse, Members: &mListProcurementPortalSuppliersResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[509]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[512]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[514]})
-var sPutProcurementPortalPreferenceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutProcurementPortalPreferenceRequest, Members: &mPutProcurementPortalPreferenceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[516]})
-var sPutProcurementPortalPreferenceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutProcurementPortalPreferenceResponse, Members: &mPutProcurementPortalPreferenceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[529]})
-var sSendProcurementPortalValidationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendProcurementPortalValidationRequest, Members: &mSendProcurementPortalValidationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[531]})
-var sSendProcurementPortalValidationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendProcurementPortalValidationResponse, Members: &mSendProcurementPortalValidationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[534]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[536]})
-var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[539]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[540]})
-var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[543]})
-var sUpdateInvoiceUnitRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateInvoiceUnitRequest, Members: &mUpdateInvoiceUnitRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[544]})
-var sUpdateInvoiceUnitResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateInvoiceUnitResponse, Members: &mUpdateInvoiceUnitResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[550]})
-var sUpdateProcurementPortalPreferenceStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProcurementPortalPreferenceStatusRequest, Members: &mUpdateProcurementPortalPreferenceStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[552]})
-var sUpdateProcurementPortalPreferenceStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProcurementPortalPreferenceStatusResponse, Members: &mUpdateProcurementPortalPreferenceStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[559]})
-var sVerifyProcurementPortalValidationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifyProcurementPortalValidationRequest, Members: &mVerifyProcurementPortalValidationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[561]})
-var sVerifyProcurementPortalValidationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifyProcurementPortalValidationResponse, Members: &mVerifyProcurementPortalValidationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[565]})
+var sBatchGetInvoiceProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetInvoiceProfile, Type: smithy.ShapeTypeOperation, Ext: &eBatchGetInvoiceProfile})
+var sCreateInvoiceUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateInvoiceUnit, Type: smithy.ShapeTypeOperation, Ext: &eCreateInvoiceUnit})
+var sCreateProcurementPortalPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProcurementPortalPreference, Type: smithy.ShapeTypeOperation, Ext: &eCreateProcurementPortalPreference})
+var sDeleteInvoiceUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInvoiceUnit, Type: smithy.ShapeTypeOperation, Ext: &eDeleteInvoiceUnit})
+var sDeleteProcurementPortalPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProcurementPortalPreference, Type: smithy.ShapeTypeOperation, Ext: &eDeleteProcurementPortalPreference})
+var sGetInvoicePDF = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInvoicePDF, Type: smithy.ShapeTypeOperation, Ext: &eGetInvoicePDF})
+var sGetInvoiceUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInvoiceUnit, Type: smithy.ShapeTypeOperation, Ext: &eGetInvoiceUnit})
+var sGetProcurementPortalPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProcurementPortalPreference, Type: smithy.ShapeTypeOperation, Ext: &eGetProcurementPortalPreference})
+var sListInvoiceSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvoiceSummaries, Type: smithy.ShapeTypeOperation, Ext: &eListInvoiceSummaries})
+var sListInvoiceUnits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvoiceUnits, Type: smithy.ShapeTypeOperation, Ext: &eListInvoiceUnits})
+var sListProcurementPortalPreferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProcurementPortalPreferences, Type: smithy.ShapeTypeOperation, Ext: &eListProcurementPortalPreferences})
+var sListProcurementPortals = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProcurementPortals, Type: smithy.ShapeTypeOperation, Ext: &eListProcurementPortals})
+var sListProcurementPortalSuppliers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProcurementPortalSuppliers, Type: smithy.ShapeTypeOperation, Ext: &eListProcurementPortalSuppliers})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sPutProcurementPortalPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutProcurementPortalPreference, Type: smithy.ShapeTypeOperation, Ext: &ePutProcurementPortalPreference})
+var sSendProcurementPortalValidation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendProcurementPortalValidation, Type: smithy.ShapeTypeOperation, Ext: &eSendProcurementPortalValidation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateInvoiceUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateInvoiceUnit, Type: smithy.ShapeTypeOperation, Ext: &eUpdateInvoiceUnit})
+var sUpdateProcurementPortalPreferenceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProcurementPortalPreferenceStatus, Type: smithy.ShapeTypeOperation, Ext: &eUpdateProcurementPortalPreferenceStatus})
+var sVerifyProcurementPortalValidation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifyProcurementPortalValidation, Type: smithy.ShapeTypeOperation, Ext: &eVerifyProcurementPortalValidation})
+var s_Invoicing = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Invoicing, Type: smithy.ShapeTypeService, Ext: &e_Invoicing})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var s_AccountIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList, Ext: &e_AccountIdList})
+var s_AccountIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountIdString, Type: smithy.ShapeTypeString, Ext: &e_AccountIdString})
+var sAmountBreakdown = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmountBreakdown, Members: &mAmountBreakdown, Type: smithy.ShapeTypeStructure, Ext: &eAmountBreakdown})
+var s_AsOfTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AsOfTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_AsOfTimestamp})
+var s_BasicString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &e_BasicString})
+var s_BasicStringWithoutSpace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &e_BasicStringWithoutSpace})
+var sBillingEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBillingEntity, Members: &mBillingEntity, Type: smithy.ShapeTypeEnum, Ext: &eBillingEntity})
+var sBillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBillingPeriod, Members: &mBillingPeriod, Type: smithy.ShapeTypeStructure, Ext: &eBillingPeriod})
+var s_BillSourceAccountList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BillSourceAccountList, Members: &m_BillSourceAccountList, Type: smithy.ShapeTypeList, Ext: &e_BillSourceAccountList})
+var sBillType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBillType, Members: &mBillType, Type: smithy.ShapeTypeEnum, Ext: &eBillType})
+var sBuyerDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBuyerDomain, Members: &mBuyerDomain, Type: smithy.ShapeTypeEnum, Ext: &eBuyerDomain})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConnectionTestingMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionTestingMethod, Members: &mConnectionTestingMethod, Type: smithy.ShapeTypeEnum, Ext: &eConnectionTestingMethod})
+var sContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContact, Members: &mContact, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eContact})
+var s_Contacts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Contacts, Members: &m_Contacts, Type: smithy.ShapeTypeList, Ext: &e_Contacts})
+var s_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CountryCode, Type: smithy.ShapeTypeString, Ext: &e_CountryCode})
+var s_CurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CurrencyCode, Type: smithy.ShapeTypeString, Ext: &e_CurrencyCode})
+var sCurrencyExchangeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCurrencyExchangeDetails, Members: &mCurrencyExchangeDetails, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyExchangeDetails})
+var sDateInterval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDateInterval, Members: &mDateInterval, Type: smithy.ShapeTypeStructure, Ext: &eDateInterval})
+var s_DescriptionString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescriptionString, Type: smithy.ShapeTypeString, Ext: &e_DescriptionString})
+var sDiscountsBreakdown = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiscountsBreakdown, Members: &mDiscountsBreakdown, Type: smithy.ShapeTypeStructure, Ext: &eDiscountsBreakdown})
+var sDiscountsBreakdownAmount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiscountsBreakdownAmount, Members: &mDiscountsBreakdownAmount, Type: smithy.ShapeTypeStructure, Ext: &eDiscountsBreakdownAmount})
+var s_DiscountsBreakdownAmountList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DiscountsBreakdownAmountList, Members: &m_DiscountsBreakdownAmountList, Type: smithy.ShapeTypeList, Ext: &e_DiscountsBreakdownAmountList})
+var sEinvoiceDeliveryAttachmentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEinvoiceDeliveryAttachmentType, Members: &mEinvoiceDeliveryAttachmentType, Type: smithy.ShapeTypeEnum, Ext: &eEinvoiceDeliveryAttachmentType})
+var s_EinvoiceDeliveryAttachmentTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EinvoiceDeliveryAttachmentTypes, Members: &m_EinvoiceDeliveryAttachmentTypes, Type: smithy.ShapeTypeList, Ext: &e_EinvoiceDeliveryAttachmentTypes})
+var sEinvoiceDeliveryDocumentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEinvoiceDeliveryDocumentType, Members: &mEinvoiceDeliveryDocumentType, Type: smithy.ShapeTypeEnum, Ext: &eEinvoiceDeliveryDocumentType})
+var s_EinvoiceDeliveryDocumentTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EinvoiceDeliveryDocumentTypes, Members: &m_EinvoiceDeliveryDocumentTypes, Type: smithy.ShapeTypeList, Ext: &e_EinvoiceDeliveryDocumentTypes})
+var sEinvoiceDeliveryPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEinvoiceDeliveryPreference, Members: &mEinvoiceDeliveryPreference, Type: smithy.ShapeTypeStructure, Ext: &eEinvoiceDeliveryPreference})
+var sEinvoiceDeliveryStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEinvoiceDeliveryStatus, Members: &mEinvoiceDeliveryStatus, Type: smithy.ShapeTypeEnum, Ext: &eEinvoiceDeliveryStatus})
+var s_EmailString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailString, Type: smithy.ShapeTypeString, Ext: &e_EmailString})
+var sEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntity, Members: &mEntity, Type: smithy.ShapeTypeStructure, Ext: &eEntity})
+var sFeatureConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFeatureConfigurations, Members: &mFeatureConfigurations, Type: smithy.ShapeTypeStructure, Ext: &eFeatureConfigurations})
+var sFeesBreakdown = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFeesBreakdown, Members: &mFeesBreakdown, Type: smithy.ShapeTypeStructure, Ext: &eFeesBreakdown})
+var sFeesBreakdownAmount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFeesBreakdownAmount, Members: &mFeesBreakdownAmount, Type: smithy.ShapeTypeStructure, Ext: &eFeesBreakdownAmount})
+var s_FeesBreakdownAmountList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FeesBreakdownAmountList, Members: &m_FeesBreakdownAmountList, Type: smithy.ShapeTypeList, Ext: &e_FeesBreakdownAmountList})
+var sFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilters, Members: &mFilters, Type: smithy.ShapeTypeStructure, Ext: &eFilters})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInvoiceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvoiceConfiguration, Members: &mInvoiceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eInvoiceConfiguration})
+var sInvoiceCurrencyAmount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvoiceCurrencyAmount, Members: &mInvoiceCurrencyAmount, Type: smithy.ShapeTypeStructure, Ext: &eInvoiceCurrencyAmount})
+var sInvoiceFrequency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvoiceFrequency, Members: &mInvoiceFrequency, Type: smithy.ShapeTypeEnum, Ext: &eInvoiceFrequency})
+var sInvoicePDF = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvoicePDF, Members: &mInvoicePDF, Type: smithy.ShapeTypeStructure, Ext: &eInvoicePDF})
+var sInvoiceProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvoiceProfile, Members: &mInvoiceProfile, Type: smithy.ShapeTypeStructure, Ext: &eInvoiceProfile})
+var s_InvoiceSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvoiceSummaries, Members: &m_InvoiceSummaries, Type: smithy.ShapeTypeList, Ext: &e_InvoiceSummaries})
+var sInvoiceSummariesFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvoiceSummariesFilter, Members: &mInvoiceSummariesFilter, Type: smithy.ShapeTypeStructure, Ext: &eInvoiceSummariesFilter})
+var s_InvoiceSummariesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvoiceSummariesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_InvoiceSummariesMaxResults})
+var sInvoiceSummariesSelector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvoiceSummariesSelector, Members: &mInvoiceSummariesSelector, Type: smithy.ShapeTypeStructure, Ext: &eInvoiceSummariesSelector})
+var sInvoiceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvoiceSummary, Members: &mInvoiceSummary, Type: smithy.ShapeTypeStructure, Ext: &eInvoiceSummary})
+var sInvoiceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvoiceType, Members: &mInvoiceType, Type: smithy.ShapeTypeEnum, Ext: &eInvoiceType})
+var sInvoiceUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvoiceUnit, Members: &mInvoiceUnit, Type: smithy.ShapeTypeStructure, Ext: &eInvoiceUnit})
+var s_InvoiceUnitArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvoiceUnitArns, Members: &m_InvoiceUnitArns, Type: smithy.ShapeTypeList, Ext: &e_InvoiceUnitArns})
+var s_InvoiceUnitArnString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvoiceUnitArnString, Type: smithy.ShapeTypeString, Ext: &e_InvoiceUnitArnString})
+var s_InvoiceUnitName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvoiceUnitName, Type: smithy.ShapeTypeString, Ext: &e_InvoiceUnitName})
+var s_InvoiceUnitNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvoiceUnitNames, Members: &m_InvoiceUnitNames, Type: smithy.ShapeTypeList, Ext: &e_InvoiceUnitNames})
+var sInvoiceUnitRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvoiceUnitRule, Members: &mInvoiceUnitRule, Type: smithy.ShapeTypeStructure, Ext: &eInvoiceUnitRule})
+var s_InvoiceUnits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvoiceUnits, Members: &m_InvoiceUnits, Type: smithy.ShapeTypeList, Ext: &e_InvoiceUnits})
+var s_LastModifiedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastModifiedTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_LastModifiedTimestamp})
+var sListInvoiceSummariesResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvoiceSummariesResourceType, Members: &mListInvoiceSummariesResourceType, Type: smithy.ShapeTypeEnum, Ext: &eListInvoiceSummariesResourceType})
+var sMarketplacePunchOutPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMarketplacePunchOutPreference, Members: &mMarketplacePunchOutPreference, Type: smithy.ShapeTypeStructure, Ext: &eMarketplacePunchOutPreference})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_MaxResultsInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsInteger, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResultsInteger})
+var s_Month = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Month, Type: smithy.ShapeTypeInteger, Ext: &e_Month})
+var s_NextTokenString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextTokenString, Type: smithy.ShapeTypeString, Ext: &e_NextTokenString})
+var sProcurementPortal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcurementPortal, Members: &mProcurementPortal, Type: smithy.ShapeTypeStructure, Ext: &eProcurementPortal})
+var sProcurementPortalEnv = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcurementPortalEnv, Members: &mProcurementPortalEnv, Type: smithy.ShapeTypeEnum, Ext: &eProcurementPortalEnv})
+var s_ProcurementPortalIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProcurementPortalIdString, Type: smithy.ShapeTypeString, Ext: &e_ProcurementPortalIdString})
+var sProcurementPortalName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcurementPortalName, Members: &mProcurementPortalName, Type: smithy.ShapeTypeEnum, Ext: &eProcurementPortalName})
+var sProcurementPortalPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcurementPortalPreference, Members: &mProcurementPortalPreference, Type: smithy.ShapeTypeStructure, Ext: &eProcurementPortalPreference})
+var s_ProcurementPortalPreferenceArnString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &e_ProcurementPortalPreferenceArnString})
+var sProcurementPortalPreferenceSelector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcurementPortalPreferenceSelector, Members: &mProcurementPortalPreferenceSelector, Type: smithy.ShapeTypeStructure, Ext: &eProcurementPortalPreferenceSelector})
+var sProcurementPortalPreferenceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcurementPortalPreferenceStatus, Members: &mProcurementPortalPreferenceStatus, Type: smithy.ShapeTypeEnum, Ext: &eProcurementPortalPreferenceStatus})
+var s_ProcurementPortalPreferenceSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProcurementPortalPreferenceSummaries, Members: &m_ProcurementPortalPreferenceSummaries, Type: smithy.ShapeTypeList, Ext: &e_ProcurementPortalPreferenceSummaries})
+var sProcurementPortalPreferenceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcurementPortalPreferenceSummary, Members: &mProcurementPortalPreferenceSummary, Type: smithy.ShapeTypeStructure, Ext: &eProcurementPortalPreferenceSummary})
+var s_ProcurementPortals = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProcurementPortals, Members: &m_ProcurementPortals, Type: smithy.ShapeTypeList, Ext: &e_ProcurementPortals})
+var sProcurementPortalSupplier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProcurementPortalSupplier, Members: &mProcurementPortalSupplier, Type: smithy.ShapeTypeStructure, Ext: &eProcurementPortalSupplier})
+var s_ProcurementPortalSuppliers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProcurementPortalSuppliers, Members: &m_ProcurementPortalSuppliers, Type: smithy.ShapeTypeList, Ext: &e_ProcurementPortalSuppliers})
+var s_ProfileList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProfileList, Members: &m_ProfileList, Type: smithy.ShapeTypeList, Ext: &e_ProfileList})
+var sProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &eProtocol})
+var sPurchaseOrderDataSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPurchaseOrderDataSource, Members: &mPurchaseOrderDataSource, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseOrderDataSource})
+var s_PurchaseOrderDataSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PurchaseOrderDataSources, Members: &m_PurchaseOrderDataSources, Type: smithy.ShapeTypeList, Ext: &e_PurchaseOrderDataSources})
+var sPurchaseOrderDataSourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPurchaseOrderDataSourceType, Members: &mPurchaseOrderDataSourceType, Type: smithy.ShapeTypeEnum, Ext: &ePurchaseOrderDataSourceType})
+var sReceiverAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReceiverAddress, Members: &mReceiverAddress, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eReceiverAddress})
+var sReceiverRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReceiverRole, Members: &mReceiverRole, Type: smithy.ShapeTypeEnum, Ext: &eReceiverRole})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceTag, Members: &mResourceTag, Type: smithy.ShapeTypeStructure, Ext: &eResourceTag})
+var s_ResourceTagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagKey, Type: smithy.ShapeTypeString, Ext: &e_ResourceTagKey})
+var s_ResourceTagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagKeyList, Members: &m_ResourceTagKeyList, Type: smithy.ShapeTypeList, Ext: &e_ResourceTagKeyList})
+var s_ResourceTagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList, Ext: &e_ResourceTagList})
+var s_ResourceTagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagValue, Type: smithy.ShapeTypeString, Ext: &e_ResourceTagValue})
+var s_RuleAccountIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleAccountIdList, Members: &m_RuleAccountIdList, Type: smithy.ShapeTypeList, Ext: &e_RuleAccountIdList})
+var s_SellerOfRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SellerOfRecords, Members: &m_SellerOfRecords, Type: smithy.ShapeTypeList, Ext: &e_SellerOfRecords})
+var s_SensitiveBasicStringWithoutSpace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveBasicStringWithoutSpace, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_SensitiveBasicStringWithoutSpace})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var s_StringWithoutNewLine = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringWithoutNewLine, Type: smithy.ShapeTypeString, Ext: &e_StringWithoutNewLine})
+var sSupplementalDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupplementalDocument, Members: &mSupplementalDocument, Type: smithy.ShapeTypeStructure, Ext: &eSupplementalDocument})
+var s_SupplementalDocuments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupplementalDocuments, Members: &m_SupplementalDocuments, Type: smithy.ShapeTypeList, Ext: &e_SupplementalDocuments})
+var sSupplementalDocumentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupplementalDocumentType, Members: &mSupplementalDocumentType, Type: smithy.ShapeTypeEnum, Ext: &eSupplementalDocumentType})
+var sSupplierDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupplierDomain, Members: &mSupplierDomain, Type: smithy.ShapeTypeEnum, Ext: &eSupplierDomain})
+var s_SupplierIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupplierIdString, Type: smithy.ShapeTypeString, Ext: &e_SupplierIdString})
+var s_TagrisArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagrisArn, Type: smithy.ShapeTypeString, Ext: &e_TagrisArn})
+var sTaxAuthorityStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaxAuthorityStatus, Members: &mTaxAuthorityStatus, Type: smithy.ShapeTypeEnum, Ext: &eTaxAuthorityStatus})
+var sTaxesBreakdown = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaxesBreakdown, Members: &mTaxesBreakdown, Type: smithy.ShapeTypeStructure, Ext: &eTaxesBreakdown})
+var sTaxesBreakdownAmount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaxesBreakdownAmount, Members: &mTaxesBreakdownAmount, Type: smithy.ShapeTypeStructure, Ext: &eTaxesBreakdownAmount})
+var s_TaxesBreakdownAmountList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaxesBreakdownAmountList, Members: &m_TaxesBreakdownAmountList, Type: smithy.ShapeTypeList, Ext: &e_TaxesBreakdownAmountList})
+var s_TaxInheritanceDisabledFlag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaxInheritanceDisabledFlag, Type: smithy.ShapeTypeBoolean, Ext: &e_TaxInheritanceDisabledFlag})
+var sTestEnvPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestEnvPreference, Members: &mTestEnvPreference, Type: smithy.ShapeTypeStructure, Ext: &eTestEnvPreference})
+var sTestEnvPreferenceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestEnvPreferenceInput, Members: &mTestEnvPreferenceInput, Type: smithy.ShapeTypeStructure, Ext: &eTestEnvPreferenceInput})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
+var s_Year = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Year, Type: smithy.ShapeTypeInteger, Ext: &e_Year})
+var sBatchGetInvoiceProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetInvoiceProfileRequest, Members: &mBatchGetInvoiceProfileRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetInvoiceProfileRequest})
+var sBatchGetInvoiceProfileResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetInvoiceProfileResponse, Members: &mBatchGetInvoiceProfileResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetInvoiceProfileResponse})
+var sCreateInvoiceUnitRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateInvoiceUnitRequest, Members: &mCreateInvoiceUnitRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateInvoiceUnitRequest})
+var sCreateInvoiceUnitResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateInvoiceUnitResponse, Members: &mCreateInvoiceUnitResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateInvoiceUnitResponse})
+var sCreateProcurementPortalPreferenceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProcurementPortalPreferenceRequest, Members: &mCreateProcurementPortalPreferenceRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateProcurementPortalPreferenceRequest})
+var sCreateProcurementPortalPreferenceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProcurementPortalPreferenceResponse, Members: &mCreateProcurementPortalPreferenceResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateProcurementPortalPreferenceResponse})
+var sDeleteInvoiceUnitRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInvoiceUnitRequest, Members: &mDeleteInvoiceUnitRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteInvoiceUnitRequest})
+var sDeleteInvoiceUnitResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInvoiceUnitResponse, Members: &mDeleteInvoiceUnitResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteInvoiceUnitResponse})
+var sDeleteProcurementPortalPreferenceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProcurementPortalPreferenceRequest, Members: &mDeleteProcurementPortalPreferenceRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteProcurementPortalPreferenceRequest})
+var sDeleteProcurementPortalPreferenceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProcurementPortalPreferenceResponse, Members: &mDeleteProcurementPortalPreferenceResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteProcurementPortalPreferenceResponse})
+var sGetInvoicePDFRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInvoicePDFRequest, Members: &mGetInvoicePDFRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetInvoicePDFRequest})
+var sGetInvoicePDFResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInvoicePDFResponse, Members: &mGetInvoicePDFResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetInvoicePDFResponse})
+var sGetInvoiceUnitRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInvoiceUnitRequest, Members: &mGetInvoiceUnitRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetInvoiceUnitRequest})
+var sGetInvoiceUnitResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInvoiceUnitResponse, Members: &mGetInvoiceUnitResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetInvoiceUnitResponse})
+var sGetProcurementPortalPreferenceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProcurementPortalPreferenceRequest, Members: &mGetProcurementPortalPreferenceRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetProcurementPortalPreferenceRequest})
+var sGetProcurementPortalPreferenceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProcurementPortalPreferenceResponse, Members: &mGetProcurementPortalPreferenceResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetProcurementPortalPreferenceResponse})
+var sListInvoiceSummariesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvoiceSummariesRequest, Members: &mListInvoiceSummariesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListInvoiceSummariesRequest})
+var sListInvoiceSummariesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvoiceSummariesResponse, Members: &mListInvoiceSummariesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListInvoiceSummariesResponse})
+var sListInvoiceUnitsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvoiceUnitsRequest, Members: &mListInvoiceUnitsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListInvoiceUnitsRequest})
+var sListInvoiceUnitsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvoiceUnitsResponse, Members: &mListInvoiceUnitsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListInvoiceUnitsResponse})
+var sListProcurementPortalPreferencesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProcurementPortalPreferencesRequest, Members: &mListProcurementPortalPreferencesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListProcurementPortalPreferencesRequest})
+var sListProcurementPortalPreferencesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProcurementPortalPreferencesResponse, Members: &mListProcurementPortalPreferencesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListProcurementPortalPreferencesResponse})
+var sListProcurementPortalsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProcurementPortalsRequest, Members: &mListProcurementPortalsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListProcurementPortalsRequest})
+var sListProcurementPortalsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProcurementPortalsResponse, Members: &mListProcurementPortalsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListProcurementPortalsResponse})
+var sListProcurementPortalSuppliersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProcurementPortalSuppliersRequest, Members: &mListProcurementPortalSuppliersRequest, Type: smithy.ShapeTypeStructure, Ext: &eListProcurementPortalSuppliersRequest})
+var sListProcurementPortalSuppliersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProcurementPortalSuppliersResponse, Members: &mListProcurementPortalSuppliersResponse, Type: smithy.ShapeTypeStructure, Ext: &eListProcurementPortalSuppliersResponse})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sPutProcurementPortalPreferenceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutProcurementPortalPreferenceRequest, Members: &mPutProcurementPortalPreferenceRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutProcurementPortalPreferenceRequest})
+var sPutProcurementPortalPreferenceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutProcurementPortalPreferenceResponse, Members: &mPutProcurementPortalPreferenceResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutProcurementPortalPreferenceResponse})
+var sSendProcurementPortalValidationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendProcurementPortalValidationRequest, Members: &mSendProcurementPortalValidationRequest, Type: smithy.ShapeTypeStructure, Ext: &eSendProcurementPortalValidationRequest})
+var sSendProcurementPortalValidationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendProcurementPortalValidationResponse, Members: &mSendProcurementPortalValidationResponse, Type: smithy.ShapeTypeStructure, Ext: &eSendProcurementPortalValidationResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateInvoiceUnitRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateInvoiceUnitRequest, Members: &mUpdateInvoiceUnitRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateInvoiceUnitRequest})
+var sUpdateInvoiceUnitResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateInvoiceUnitResponse, Members: &mUpdateInvoiceUnitResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateInvoiceUnitResponse})
+var sUpdateProcurementPortalPreferenceStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProcurementPortalPreferenceStatusRequest, Members: &mUpdateProcurementPortalPreferenceStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProcurementPortalPreferenceStatusRequest})
+var sUpdateProcurementPortalPreferenceStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProcurementPortalPreferenceStatusResponse, Members: &mUpdateProcurementPortalPreferenceStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateProcurementPortalPreferenceStatusResponse})
+var sVerifyProcurementPortalValidationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifyProcurementPortalValidationRequest, Members: &mVerifyProcurementPortalValidationRequest, Type: smithy.ShapeTypeStructure, Ext: &eVerifyProcurementPortalValidationRequest})
+var sVerifyProcurementPortalValidationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifyProcurementPortalValidationResponse, Members: &mVerifyProcurementPortalValidationResponse, Type: smithy.ShapeTypeStructure, Ext: &eVerifyProcurementPortalValidationResponse})
 
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[23]})
-var sAccessDeniedException_resourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceName", ID: &i_InvoiceUnitArnString, Type: smithy.ShapeTypeString, Ext: &ext[24]})
-var s_AccountIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccountIdString, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var sAmountBreakdown_SubTotalAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubTotalAmount", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[29]})
-var sAmountBreakdown_Discounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Discounts", ID: &iDiscountsBreakdown, Members: &mDiscountsBreakdown, Type: smithy.ShapeTypeStructure, Ext: &ext[30]})
-var sAmountBreakdown_Taxes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Taxes", ID: &iTaxesBreakdown, Members: &mTaxesBreakdown, Type: smithy.ShapeTypeStructure, Ext: &ext[31]})
-var sAmountBreakdown_Fees = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fees", ID: &iFeesBreakdown, Members: &mFeesBreakdown, Type: smithy.ShapeTypeStructure, Ext: &ext[32]})
-var sBillingEntity_AWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var sBillingEntity_AWS_MARKETPLACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_MARKETPLACE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[38]})
-var sBillingPeriod_Month = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Month", ID: &i_Month, Type: smithy.ShapeTypeInteger, Ext: &ext[40]})
-var sBillingPeriod_Year = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Year", ID: &i_Year, Type: smithy.ShapeTypeInteger, Ext: &ext[41]})
-var s_BillSourceAccountList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccountIdString, Type: smithy.ShapeTypeString, Ext: &ext[43]})
-var sBillType_ANNIVERSARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANNIVERSARY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[45]})
-var sBillType_PURCHASE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PURCHASE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[46]})
-var sBillType_REFUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REFUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[47]})
-var sBuyerDomain_NetworkID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[49]})
-var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[51]})
-var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[53]})
-var sConnectionTestingMethod_PROD_ENV_DOLLAR_TEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROD_ENV_DOLLAR_TEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[55]})
-var sConnectionTestingMethod_TEST_ENV_REPLAY_TEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEST_ENV_REPLAY_TEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[56]})
-var sContact_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var sContact_Email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Email", ID: &i_EmailString, Type: smithy.ShapeTypeString, Ext: &ext[59]})
-var s_Contacts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContact, Members: &mContact, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[61]})
-var sCurrencyExchangeDetails_SourceCurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceCurrencyCode", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[65]})
-var sCurrencyExchangeDetails_TargetCurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetCurrencyCode", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[66]})
-var sCurrencyExchangeDetails_Rate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rate", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[67]})
-var sDateInterval_StartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[69]})
-var sDateInterval_EndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[70]})
-var sDiscountsBreakdown_Breakdown = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Breakdown", ID: &i_DiscountsBreakdownAmountList, Members: &m_DiscountsBreakdownAmountList, Type: smithy.ShapeTypeList, Ext: &ext[73]})
-var sDiscountsBreakdown_TotalAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalAmount", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[74]})
-var sDiscountsBreakdownAmount_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[76]})
-var sDiscountsBreakdownAmount_Amount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Amount", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[77]})
-var sDiscountsBreakdownAmount_Rate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rate", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[78]})
-var s_DiscountsBreakdownAmountList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDiscountsBreakdownAmount, Members: &mDiscountsBreakdownAmount, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var sEinvoiceDeliveryAttachmentType_INVOICE_PDF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVOICE_PDF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[82]})
-var sEinvoiceDeliveryAttachmentType_RFP_PDF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RFP_PDF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[83]})
-var s_EinvoiceDeliveryAttachmentTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEinvoiceDeliveryAttachmentType, Members: &mEinvoiceDeliveryAttachmentType, Type: smithy.ShapeTypeEnum, Ext: &ext[85]})
-var sEinvoiceDeliveryDocumentType_AWS_CLOUD_INVOICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_CLOUD_INVOICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[87]})
-var sEinvoiceDeliveryDocumentType_AWS_CLOUD_CREDIT_MEMO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_CLOUD_CREDIT_MEMO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[88]})
-var sEinvoiceDeliveryDocumentType_AWS_MARKETPLACE_INVOICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_MARKETPLACE_INVOICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[89]})
-var sEinvoiceDeliveryDocumentType_AWS_MARKETPLACE_CREDIT_MEMO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_MARKETPLACE_CREDIT_MEMO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[90]})
-var sEinvoiceDeliveryDocumentType_AWS_REQUEST_FOR_PAYMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_REQUEST_FOR_PAYMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[91]})
-var s_EinvoiceDeliveryDocumentTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEinvoiceDeliveryDocumentType, Members: &mEinvoiceDeliveryDocumentType, Type: smithy.ShapeTypeEnum, Ext: &ext[93]})
-var sEinvoiceDeliveryPreference_EinvoiceDeliveryDocumentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryDocumentTypes", ID: &i_EinvoiceDeliveryDocumentTypes, Members: &m_EinvoiceDeliveryDocumentTypes, Type: smithy.ShapeTypeList, Ext: &ext[95]})
-var sEinvoiceDeliveryPreference_EinvoiceDeliveryAttachmentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryAttachmentTypes", ID: &i_EinvoiceDeliveryAttachmentTypes, Members: &m_EinvoiceDeliveryAttachmentTypes, Type: smithy.ShapeTypeList, Ext: &ext[96]})
-var sEinvoiceDeliveryPreference_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &ext[97]})
-var sEinvoiceDeliveryPreference_PurchaseOrderDataSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderDataSources", ID: &i_PurchaseOrderDataSources, Members: &m_PurchaseOrderDataSources, Type: smithy.ShapeTypeList, Ext: &ext[98]})
-var sEinvoiceDeliveryPreference_ConnectionTestingMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionTestingMethod", ID: &iConnectionTestingMethod, Members: &mConnectionTestingMethod, Type: smithy.ShapeTypeEnum, Ext: &ext[99]})
-var sEinvoiceDeliveryPreference_EinvoiceDeliveryActivationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryActivationDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[100]})
-var sEinvoiceDeliveryStatus_DELIVERED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELIVERED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[102]})
-var sEinvoiceDeliveryStatus_NOT_DELIVERED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_DELIVERED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[103]})
-var sEntity_InvoicingEntity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoicingEntity", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[106]})
-var sEntity_BillingEntity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingEntity", ID: &iBillingEntity, Members: &mBillingEntity, Type: smithy.ShapeTypeEnum, Ext: &ext[107]})
-var sFeatureConfigurations_InvoiceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceConfiguration", ID: &iInvoiceConfiguration, Members: &mInvoiceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[109]})
-var sFeesBreakdown_Breakdown = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Breakdown", ID: &i_FeesBreakdownAmountList, Members: &m_FeesBreakdownAmountList, Type: smithy.ShapeTypeList, Ext: &ext[111]})
-var sFeesBreakdown_TotalAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalAmount", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[112]})
-var sFeesBreakdownAmount_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[114]})
-var sFeesBreakdownAmount_Amount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Amount", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[115]})
-var sFeesBreakdownAmount_Rate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rate", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[116]})
-var s_FeesBreakdownAmountList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFeesBreakdownAmount, Members: &mFeesBreakdownAmount, Type: smithy.ShapeTypeStructure, Ext: &ext[118]})
-var sFilters_Names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Names", ID: &i_InvoiceUnitNames, Members: &m_InvoiceUnitNames, Type: smithy.ShapeTypeList, Ext: &ext[120]})
-var sFilters_InvoiceReceivers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceReceivers", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList, Ext: &ext[121]})
-var sFilters_Accounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Accounts", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList, Ext: &ext[122]})
-var sFilters_BillSourceAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillSourceAccounts", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList, Ext: &ext[123]})
-var sInternalServerException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t5, Type: smithy.ShapeTypeInteger, Ext: &ext[125]})
-var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[126]})
-var sInvoiceConfiguration_DocumentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentTypes", ID: &i_EinvoiceDeliveryDocumentTypes, Members: &m_EinvoiceDeliveryDocumentTypes, Type: smithy.ShapeTypeList, Ext: &ext[128]})
-var sInvoiceConfiguration_AttachmentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentTypes", ID: &i_EinvoiceDeliveryAttachmentTypes, Members: &m_EinvoiceDeliveryAttachmentTypes, Type: smithy.ShapeTypeList, Ext: &ext[129]})
-var sInvoiceCurrencyAmount_TotalAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalAmount", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[131]})
-var sInvoiceCurrencyAmount_TotalAmountBeforeTax = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalAmountBeforeTax", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[132]})
-var sInvoiceCurrencyAmount_CurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrencyCode", ID: &i_CurrencyCode, Type: smithy.ShapeTypeString, Ext: &ext[133]})
-var sInvoiceCurrencyAmount_AmountBreakdown = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AmountBreakdown", ID: &iAmountBreakdown, Members: &mAmountBreakdown, Type: smithy.ShapeTypeStructure, Ext: &ext[134]})
-var sInvoiceCurrencyAmount_CurrencyExchangeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrencyExchangeDetails", ID: &iCurrencyExchangeDetails, Members: &mCurrencyExchangeDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[135]})
-var sInvoiceFrequency_ONE_TIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONE_TIME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[137]})
-var sInvoiceFrequency_RECURRING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECURRING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[138]})
-var sInvoicePDF_InvoiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceId", ID: &i_StringWithoutNewLine, Type: smithy.ShapeTypeString, Ext: &ext[140]})
-var sInvoicePDF_DocumentUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentUrl", ID: &i_StringWithoutNewLine, Type: smithy.ShapeTypeString, Ext: &ext[141]})
-var sInvoicePDF_DocumentUrlExpirationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentUrlExpirationDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[142]})
-var sInvoicePDF_SupplementalDocuments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupplementalDocuments", ID: &i_SupplementalDocuments, Members: &m_SupplementalDocuments, Type: smithy.ShapeTypeList, Ext: &ext[143]})
-var sInvoiceProfile_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountIdString, Type: smithy.ShapeTypeString, Ext: &ext[145]})
-var sInvoiceProfile_ReceiverName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReceiverName", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[146]})
-var sInvoiceProfile_ReceiverAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReceiverAddress", ID: &iReceiverAddress, Members: &mReceiverAddress, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[147]})
-var sInvoiceProfile_ReceiverEmail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReceiverEmail", ID: &i_SensitiveBasicStringWithoutSpace, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[148]})
-var sInvoiceProfile_Issuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Issuer", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[149]})
-var sInvoiceProfile_TaxRegistrationNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaxRegistrationNumber", ID: &i_SensitiveBasicStringWithoutSpace, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[150]})
-var s_InvoiceSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInvoiceSummary, Members: &mInvoiceSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[152]})
-var sInvoiceSummariesFilter_TimeInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeInterval", ID: &iDateInterval, Members: &mDateInterval, Type: smithy.ShapeTypeStructure, Ext: &ext[154]})
-var sInvoiceSummariesFilter_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &iBillingPeriod, Members: &mBillingPeriod, Type: smithy.ShapeTypeStructure, Ext: &ext[155]})
-var sInvoiceSummariesFilter_InvoicingEntity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoicingEntity", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[156]})
-var sInvoiceSummariesFilter_ReceiverRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReceiverRole", ID: &iReceiverRole, Members: &mReceiverRole, Type: smithy.ShapeTypeEnum, Ext: &ext[157]})
-var sInvoiceSummariesSelector_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iListInvoiceSummariesResourceType, Members: &mListInvoiceSummariesResourceType, Type: smithy.ShapeTypeEnum, Ext: &ext[160]})
-var sInvoiceSummariesSelector_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_StringWithoutNewLine, Type: smithy.ShapeTypeString, Ext: &ext[161]})
-var sInvoiceSummary_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountIdString, Type: smithy.ShapeTypeString, Ext: &ext[163]})
-var sInvoiceSummary_InvoiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceId", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[164]})
-var sInvoiceSummary_IssuedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssuedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[165]})
-var sInvoiceSummary_DueDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DueDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[166]})
-var sInvoiceSummary_BillSourceAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillSourceAccounts", ID: &i_BillSourceAccountList, Members: &m_BillSourceAccountList, Type: smithy.ShapeTypeList, Ext: &ext[167]})
-var sInvoiceSummary_BillSourceAccountsTotalCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillSourceAccountsTotalCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[168]})
-var sInvoiceSummary_ReceiverRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReceiverRole", ID: &iReceiverRole, Members: &mReceiverRole, Type: smithy.ShapeTypeEnum, Ext: &ext[169]})
-var sInvoiceSummary_Entity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entity", ID: &iEntity, Members: &mEntity, Type: smithy.ShapeTypeStructure, Ext: &ext[170]})
-var sInvoiceSummary_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &iBillingPeriod, Members: &mBillingPeriod, Type: smithy.ShapeTypeStructure, Ext: &ext[171]})
-var sInvoiceSummary_InvoiceFrequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceFrequency", ID: &iInvoiceFrequency, Members: &mInvoiceFrequency, Type: smithy.ShapeTypeEnum, Ext: &ext[172]})
-var sInvoiceSummary_BillType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillType", ID: &iBillType, Members: &mBillType, Type: smithy.ShapeTypeEnum, Ext: &ext[173]})
-var sInvoiceSummary_InvoiceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceType", ID: &iInvoiceType, Members: &mInvoiceType, Type: smithy.ShapeTypeEnum, Ext: &ext[174]})
-var sInvoiceSummary_CommercialInvoiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CommercialInvoiceId", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[175]})
-var sInvoiceSummary_OriginalInvoiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginalInvoiceId", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[176]})
-var sInvoiceSummary_PurchaseOrderNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderNumber", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[177]})
-var sInvoiceSummary_EinvoiceDeliveryStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryStatus", ID: &iEinvoiceDeliveryStatus, Members: &mEinvoiceDeliveryStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[178]})
-var sInvoiceSummary_TaxAuthorityStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaxAuthorityStatus", ID: &iTaxAuthorityStatus, Members: &mTaxAuthorityStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[179]})
-var sInvoiceSummary_BaseCurrencyAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BaseCurrencyAmount", ID: &iInvoiceCurrencyAmount, Members: &mInvoiceCurrencyAmount, Type: smithy.ShapeTypeStructure, Ext: &ext[180]})
-var sInvoiceSummary_TaxCurrencyAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaxCurrencyAmount", ID: &iInvoiceCurrencyAmount, Members: &mInvoiceCurrencyAmount, Type: smithy.ShapeTypeStructure, Ext: &ext[181]})
-var sInvoiceSummary_PaymentCurrencyAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PaymentCurrencyAmount", ID: &iInvoiceCurrencyAmount, Members: &mInvoiceCurrencyAmount, Type: smithy.ShapeTypeStructure, Ext: &ext[182]})
-var sInvoiceType_INVOICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVOICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[184]})
-var sInvoiceType_CREDIT_MEMO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREDIT_MEMO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[185]})
-var sInvoiceType_PAYMENT_RECEIPT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAYMENT_RECEIPT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[186]})
-var sInvoiceUnit_InvoiceUnitArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceUnitArn", ID: &i_InvoiceUnitArnString, Type: smithy.ShapeTypeString, Ext: &ext[188]})
-var sInvoiceUnit_InvoiceReceiver = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceReceiver", ID: &i_AccountIdString, Type: smithy.ShapeTypeString, Ext: &ext[189]})
-var sInvoiceUnit_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_InvoiceUnitName, Type: smithy.ShapeTypeString, Ext: &ext[190]})
-var sInvoiceUnit_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString, Ext: &ext[191]})
-var sInvoiceUnit_TaxInheritanceDisabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaxInheritanceDisabled", ID: &i_TaxInheritanceDisabledFlag, Type: smithy.ShapeTypeBoolean, Ext: &ext[192]})
-var sInvoiceUnit_Rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rule", ID: &iInvoiceUnitRule, Members: &mInvoiceUnitRule, Type: smithy.ShapeTypeStructure, Ext: &ext[193]})
-var sInvoiceUnit_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i_LastModifiedTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[194]})
-var s_InvoiceUnitArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_InvoiceUnitArnString, Type: smithy.ShapeTypeString, Ext: &ext[196]})
-var s_InvoiceUnitNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_InvoiceUnitName, Type: smithy.ShapeTypeString, Ext: &ext[200]})
-var sInvoiceUnitRule_LinkedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkedAccounts", ID: &i_RuleAccountIdList, Members: &m_RuleAccountIdList, Type: smithy.ShapeTypeList, Ext: &ext[202]})
-var sInvoiceUnitRule_BillSourceAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillSourceAccounts", ID: &i_RuleAccountIdList, Members: &m_RuleAccountIdList, Type: smithy.ShapeTypeList, Ext: &ext[203]})
-var s_InvoiceUnits_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInvoiceUnit, Members: &mInvoiceUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[205]})
-var sListInvoiceSummariesResourceType_ACCOUNT_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[208]})
-var sListInvoiceSummariesResourceType_INVOICE_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVOICE_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[209]})
-var sMarketplacePunchOutPreference_ApprovalRequestRedirectUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApprovalRequestRedirectUrl", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[211]})
-var sProcurementPortal_PortalIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalIdentifier", ID: &i_ProcurementPortalIdString, Type: smithy.ShapeTypeString, Ext: &ext[217]})
-var sProcurementPortal_PortalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalName", ID: &iProcurementPortalName, Members: &mProcurementPortalName, Type: smithy.ShapeTypeEnum, Ext: &ext[218]})
-var sProcurementPortal_PortalDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalDisplayName", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[219]})
-var sProcurementPortal_DefaultFeatureConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultFeatureConfigurations", ID: &iFeatureConfigurations, Members: &mFeatureConfigurations, Type: smithy.ShapeTypeStructure, Ext: &ext[220]})
-var sProcurementPortalEnv_PROD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[222]})
-var sProcurementPortalEnv_TEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[223]})
-var sProcurementPortalName_SAP_BUSINESS_NETWORK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAP_BUSINESS_NETWORK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[226]})
-var sProcurementPortalName_COUPA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COUPA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[227]})
-var sProcurementPortalPreference_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsAccountId", ID: &i_AccountIdString, Type: smithy.ShapeTypeString, Ext: &ext[229]})
-var sProcurementPortalPreference_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &ext[230]})
-var sProcurementPortalPreference_ProcurementPortalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalName", ID: &iProcurementPortalName, Members: &mProcurementPortalName, Type: smithy.ShapeTypeEnum, Ext: &ext[231]})
-var sProcurementPortalPreference_BuyerDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuyerDomain", ID: &iBuyerDomain, Members: &mBuyerDomain, Type: smithy.ShapeTypeEnum, Ext: &ext[232]})
-var sProcurementPortalPreference_BuyerIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuyerIdentifier", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[233]})
-var sProcurementPortalPreference_SupplierDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupplierDomain", ID: &iSupplierDomain, Members: &mSupplierDomain, Type: smithy.ShapeTypeEnum, Ext: &ext[234]})
-var sProcurementPortalPreference_SupplierIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupplierIdentifier", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[235]})
-var sProcurementPortalPreference_Selector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Selector", ID: &iProcurementPortalPreferenceSelector, Members: &mProcurementPortalPreferenceSelector, Type: smithy.ShapeTypeStructure, Ext: &ext[236]})
-var sProcurementPortalPreference_ProcurementPortalSharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalSharedSecret", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[237]})
-var sProcurementPortalPreference_ProcurementPortalInstanceEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalInstanceEndpoint", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[238]})
-var sProcurementPortalPreference_PurchaseOrderRetrievalEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderRetrievalEndpoint", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[239]})
-var sProcurementPortalPreference_TestEnvPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TestEnvPreference", ID: &iTestEnvPreference, Members: &mTestEnvPreference, Type: smithy.ShapeTypeStructure, Ext: &ext[240]})
-var sProcurementPortalPreference_EinvoiceDeliveryEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[241]})
-var sProcurementPortalPreference_EinvoiceDeliveryPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryPreference", ID: &iEinvoiceDeliveryPreference, Members: &mEinvoiceDeliveryPreference, Type: smithy.ShapeTypeStructure, Ext: &ext[242]})
-var sProcurementPortalPreference_PurchaseOrderRetrievalEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderRetrievalEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[243]})
-var sProcurementPortalPreference_MarketplacePunchOutEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplacePunchOutEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[244]})
-var sProcurementPortalPreference_MarketplacePunchOutPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplacePunchOutPreference", ID: &iMarketplacePunchOutPreference, Members: &mMarketplacePunchOutPreference, Type: smithy.ShapeTypeStructure, Ext: &ext[245]})
-var sProcurementPortalPreference_Contacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contacts", ID: &i_Contacts, Members: &m_Contacts, Type: smithy.ShapeTypeList, Ext: &ext[246]})
-var sProcurementPortalPreference_EinvoiceDeliveryPreferenceStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryPreferenceStatus", ID: &iProcurementPortalPreferenceStatus, Members: &mProcurementPortalPreferenceStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[247]})
-var sProcurementPortalPreference_EinvoiceDeliveryPreferenceStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryPreferenceStatusReason", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[248]})
-var sProcurementPortalPreference_PurchaseOrderRetrievalPreferenceStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderRetrievalPreferenceStatus", ID: &iProcurementPortalPreferenceStatus, Members: &mProcurementPortalPreferenceStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[249]})
-var sProcurementPortalPreference_PurchaseOrderRetrievalPreferenceStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderRetrievalPreferenceStatusReason", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[250]})
-var sProcurementPortalPreference_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[251]})
-var sProcurementPortalPreference_CreateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[252]})
-var sProcurementPortalPreference_LastUpdateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[253]})
-var sProcurementPortalPreferenceSelector_InvoiceUnitArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceUnitArns", ID: &i_InvoiceUnitArns, Members: &m_InvoiceUnitArns, Type: smithy.ShapeTypeList, Ext: &ext[256]})
-var sProcurementPortalPreferenceSelector_SellerOfRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SellerOfRecords", ID: &i_SellerOfRecords, Members: &m_SellerOfRecords, Type: smithy.ShapeTypeList, Ext: &ext[257]})
-var sProcurementPortalPreferenceStatus_PENDING_VERIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_VERIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[259]})
-var sProcurementPortalPreferenceStatus_VALIDATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[260]})
-var sProcurementPortalPreferenceStatus_TEST_INITIALIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEST_INITIALIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[261]})
-var sProcurementPortalPreferenceStatus_TEST_INITIALIZATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEST_INITIALIZATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[262]})
-var sProcurementPortalPreferenceStatus_TEST_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEST_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[263]})
-var sProcurementPortalPreferenceStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[264]})
-var sProcurementPortalPreferenceStatus_SUSPENDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[265]})
-var s_ProcurementPortalPreferenceSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProcurementPortalPreferenceSummary, Members: &mProcurementPortalPreferenceSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[267]})
-var sProcurementPortalPreferenceSummary_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsAccountId", ID: &i_AccountIdString, Type: smithy.ShapeTypeString, Ext: &ext[269]})
-var sProcurementPortalPreferenceSummary_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &ext[270]})
-var sProcurementPortalPreferenceSummary_ProcurementPortalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalName", ID: &iProcurementPortalName, Members: &mProcurementPortalName, Type: smithy.ShapeTypeEnum, Ext: &ext[271]})
-var sProcurementPortalPreferenceSummary_BuyerDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuyerDomain", ID: &iBuyerDomain, Members: &mBuyerDomain, Type: smithy.ShapeTypeEnum, Ext: &ext[272]})
-var sProcurementPortalPreferenceSummary_BuyerIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuyerIdentifier", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[273]})
-var sProcurementPortalPreferenceSummary_SupplierDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupplierDomain", ID: &iSupplierDomain, Members: &mSupplierDomain, Type: smithy.ShapeTypeEnum, Ext: &ext[274]})
-var sProcurementPortalPreferenceSummary_SupplierIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupplierIdentifier", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[275]})
-var sProcurementPortalPreferenceSummary_Selector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Selector", ID: &iProcurementPortalPreferenceSelector, Members: &mProcurementPortalPreferenceSelector, Type: smithy.ShapeTypeStructure, Ext: &ext[276]})
-var sProcurementPortalPreferenceSummary_EinvoiceDeliveryEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[277]})
-var sProcurementPortalPreferenceSummary_PurchaseOrderRetrievalEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderRetrievalEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[278]})
-var sProcurementPortalPreferenceSummary_MarketplacePunchOutEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplacePunchOutEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[279]})
-var sProcurementPortalPreferenceSummary_EinvoiceDeliveryPreferenceStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryPreferenceStatus", ID: &iProcurementPortalPreferenceStatus, Members: &mProcurementPortalPreferenceStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[280]})
-var sProcurementPortalPreferenceSummary_EinvoiceDeliveryPreferenceStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryPreferenceStatusReason", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[281]})
-var sProcurementPortalPreferenceSummary_PurchaseOrderRetrievalPreferenceStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderRetrievalPreferenceStatus", ID: &iProcurementPortalPreferenceStatus, Members: &mProcurementPortalPreferenceStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[282]})
-var sProcurementPortalPreferenceSummary_PurchaseOrderRetrievalPreferenceStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderRetrievalPreferenceStatusReason", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[283]})
-var sProcurementPortalPreferenceSummary_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[284]})
-var sProcurementPortalPreferenceSummary_CreateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[285]})
-var sProcurementPortalPreferenceSummary_LastUpdateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[286]})
-var s_ProcurementPortals_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProcurementPortal, Members: &mProcurementPortal, Type: smithy.ShapeTypeStructure, Ext: &ext[288]})
-var sProcurementPortalSupplier_SupplierIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupplierIdentifier", ID: &i_SupplierIdString, Type: smithy.ShapeTypeString, Ext: &ext[290]})
-var sProcurementPortalSupplier_SellerOfRecord = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SellerOfRecord", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[291]})
-var sProcurementPortalSupplier_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountryCode", ID: &i_CountryCode, Type: smithy.ShapeTypeString, Ext: &ext[292]})
-var sProcurementPortalSupplier_Environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Environment", ID: &iProcurementPortalEnv, Members: &mProcurementPortalEnv, Type: smithy.ShapeTypeEnum, Ext: &ext[293]})
-var s_ProcurementPortalSuppliers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProcurementPortalSupplier, Members: &mProcurementPortalSupplier, Type: smithy.ShapeTypeStructure, Ext: &ext[295]})
-var s_ProfileList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInvoiceProfile, Members: &mInvoiceProfile, Type: smithy.ShapeTypeStructure, Ext: &ext[297]})
-var sProtocol_CXML = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CXML", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[299]})
-var sPurchaseOrderDataSource_EinvoiceDeliveryDocumentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryDocumentType", ID: &iEinvoiceDeliveryDocumentType, Members: &mEinvoiceDeliveryDocumentType, Type: smithy.ShapeTypeEnum, Ext: &ext[301]})
-var sPurchaseOrderDataSource_PurchaseOrderDataSourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderDataSourceType", ID: &iPurchaseOrderDataSourceType, Members: &mPurchaseOrderDataSourceType, Type: smithy.ShapeTypeEnum, Ext: &ext[302]})
-var s_PurchaseOrderDataSources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPurchaseOrderDataSource, Members: &mPurchaseOrderDataSource, Type: smithy.ShapeTypeStructure, Ext: &ext[304]})
-var sPurchaseOrderDataSourceType_ASSOCIATED_PURCHASE_ORDER_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASSOCIATED_PURCHASE_ORDER_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[306]})
-var sPurchaseOrderDataSourceType_PURCHASE_ORDER_NOT_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PURCHASE_ORDER_NOT_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[307]})
-var sReceiverAddress_AddressLine1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressLine1", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[309]})
-var sReceiverAddress_AddressLine2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressLine2", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[310]})
-var sReceiverAddress_AddressLine3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressLine3", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[311]})
-var sReceiverAddress_DistrictOrCounty = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DistrictOrCounty", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[312]})
-var sReceiverAddress_City = smithy.NewStaticSchema(smithy.StaticSchema{Member: "City", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[313]})
-var sReceiverAddress_StateOrRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateOrRegion", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[314]})
-var sReceiverAddress_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountryCode", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[315]})
-var sReceiverAddress_CompanyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompanyName", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[316]})
-var sReceiverAddress_PostalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCode", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[317]})
-var sReceiverRole_SELLER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SELLER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[319]})
-var sReceiverRole_RESELLER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESELLER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[320]})
-var sReceiverRole_BUYER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUYER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[321]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[323]})
-var sResourceNotFoundException_resourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceName", ID: &i_InvoiceUnitArnString, Type: smithy.ShapeTypeString, Ext: &ext[324]})
-var sResourceTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ResourceTagKey, Type: smithy.ShapeTypeString, Ext: &ext[326]})
-var sResourceTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_ResourceTagValue, Type: smithy.ShapeTypeString, Ext: &ext[327]})
-var s_ResourceTagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceTagKey, Type: smithy.ShapeTypeString, Ext: &ext[330]})
-var s_ResourceTagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceTag, Members: &mResourceTag, Type: smithy.ShapeTypeStructure, Ext: &ext[332]})
-var s_RuleAccountIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccountIdString, Type: smithy.ShapeTypeString, Ext: &ext[335]})
-var s_SellerOfRecords_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[337]})
-var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[340]})
-var sSupplementalDocument_DocumentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentType", ID: &iSupplementalDocumentType, Members: &mSupplementalDocumentType, Type: smithy.ShapeTypeEnum, Ext: &ext[343]})
-var sSupplementalDocument_DocumentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentId", ID: &i_StringWithoutNewLine, Type: smithy.ShapeTypeString, Ext: &ext[344]})
-var sSupplementalDocument_DocumentUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentUrl", ID: &i_StringWithoutNewLine, Type: smithy.ShapeTypeString, Ext: &ext[345]})
-var sSupplementalDocument_DocumentUrlExpirationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentUrlExpirationDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[346]})
-var s_SupplementalDocuments_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSupplementalDocument, Members: &mSupplementalDocument, Type: smithy.ShapeTypeStructure, Ext: &ext[348]})
-var sSupplementalDocumentType_GOVERNMENT_INVOICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GOVERNMENT_INVOICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[350]})
-var sSupplementalDocumentType_TAX_E_INVOICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TAX_E_INVOICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[351]})
-var sSupplementalDocumentType_PAYMENT_RECEIPT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAYMENT_RECEIPT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[352]})
-var sSupplementalDocumentType_SUPPLEMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUPPLEMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[353]})
-var sSupplierDomain_NetworkID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[355]})
-var sTaxAuthorityStatus_ISSUED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ISSUED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[359]})
-var sTaxAuthorityStatus_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[360]})
-var sTaxesBreakdown_Breakdown = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Breakdown", ID: &i_TaxesBreakdownAmountList, Members: &m_TaxesBreakdownAmountList, Type: smithy.ShapeTypeList, Ext: &ext[362]})
-var sTaxesBreakdown_TotalAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalAmount", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[363]})
-var sTaxesBreakdownAmount_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[365]})
-var sTaxesBreakdownAmount_Amount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Amount", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[366]})
-var sTaxesBreakdownAmount_Rate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rate", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[367]})
-var s_TaxesBreakdownAmountList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTaxesBreakdownAmount, Members: &mTaxesBreakdownAmount, Type: smithy.ShapeTypeStructure, Ext: &ext[369]})
-var sTestEnvPreference_BuyerDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuyerDomain", ID: &iBuyerDomain, Members: &mBuyerDomain, Type: smithy.ShapeTypeEnum, Ext: &ext[372]})
-var sTestEnvPreference_BuyerIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuyerIdentifier", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[373]})
-var sTestEnvPreference_SupplierDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupplierDomain", ID: &iSupplierDomain, Members: &mSupplierDomain, Type: smithy.ShapeTypeEnum, Ext: &ext[374]})
-var sTestEnvPreference_SupplierIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupplierIdentifier", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[375]})
-var sTestEnvPreference_ProcurementPortalSharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalSharedSecret", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[376]})
-var sTestEnvPreference_ProcurementPortalInstanceEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalInstanceEndpoint", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[377]})
-var sTestEnvPreference_PurchaseOrderRetrievalEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderRetrievalEndpoint", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[378]})
-var sTestEnvPreferenceInput_BuyerDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuyerDomain", ID: &iBuyerDomain, Members: &mBuyerDomain, Type: smithy.ShapeTypeEnum, Ext: &ext[380]})
-var sTestEnvPreferenceInput_BuyerIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuyerIdentifier", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[381]})
-var sTestEnvPreferenceInput_SupplierDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupplierDomain", ID: &iSupplierDomain, Members: &mSupplierDomain, Type: smithy.ShapeTypeEnum, Ext: &ext[382]})
-var sTestEnvPreferenceInput_SupplierIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupplierIdentifier", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[383]})
-var sTestEnvPreferenceInput_ProcurementPortalSharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalSharedSecret", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[384]})
-var sTestEnvPreferenceInput_ProcurementPortalInstanceEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalInstanceEndpoint", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[385]})
-var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[387]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[389]})
-var sValidationException_resourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceName", ID: &i_InvoiceUnitArnString, Type: smithy.ShapeTypeString, Ext: &ext[390]})
-var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[391]})
-var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[392]})
-var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[394]})
-var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[395]})
-var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[397]})
-var sValidationExceptionReason_NON_MEMBERS_PRESENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NON_MEMBERS_PRESENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[399]})
-var sValidationExceptionReason_MAX_ACCOUNTS_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAX_ACCOUNTS_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[400]})
-var sValidationExceptionReason_MAX_INVOICE_UNITS_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAX_INVOICE_UNITS_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[401]})
-var sValidationExceptionReason_DUPLICATE_INVOICE_UNIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUPLICATE_INVOICE_UNIT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[402]})
-var sValidationExceptionReason_MUTUAL_EXCLUSION_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MUTUAL_EXCLUSION_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[403]})
-var sValidationExceptionReason_ACCOUNT_MEMBERSHIP_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT_MEMBERSHIP_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[404]})
-var sValidationExceptionReason_TAX_SETTINGS_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TAX_SETTINGS_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[405]})
-var sValidationExceptionReason_EXPIRED_NEXT_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRED_NEXT_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[406]})
-var sValidationExceptionReason_INVALID_NEXT_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_NEXT_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[407]})
-var sValidationExceptionReason_INVALID_INPUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_INPUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[408]})
-var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[409]})
-var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[410]})
-var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[411]})
-var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[412]})
-var sBatchGetInvoiceProfileRequest_AccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountIds", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList, Ext: &ext[415]})
-var sBatchGetInvoiceProfileResponse_Profiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Profiles", ID: &i_ProfileList, Members: &m_ProfileList, Type: smithy.ShapeTypeList, Ext: &ext[417]})
-var sCreateInvoiceUnitRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_InvoiceUnitName, Type: smithy.ShapeTypeString, Ext: &ext[419]})
-var sCreateInvoiceUnitRequest_InvoiceReceiver = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceReceiver", ID: &i_AccountIdString, Type: smithy.ShapeTypeString, Ext: &ext[420]})
-var sCreateInvoiceUnitRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString, Ext: &ext[421]})
-var sCreateInvoiceUnitRequest_TaxInheritanceDisabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaxInheritanceDisabled", ID: &i_TaxInheritanceDisabledFlag, Type: smithy.ShapeTypeBoolean, Ext: &ext[422]})
-var sCreateInvoiceUnitRequest_Rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rule", ID: &iInvoiceUnitRule, Members: &mInvoiceUnitRule, Type: smithy.ShapeTypeStructure, Ext: &ext[423]})
-var sCreateInvoiceUnitRequest_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList, Ext: &ext[424]})
-var sCreateInvoiceUnitRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[425]})
-var sCreateInvoiceUnitResponse_InvoiceUnitArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceUnitArn", ID: &i_InvoiceUnitArnString, Type: smithy.ShapeTypeString, Ext: &ext[427]})
-var sCreateProcurementPortalPreferenceRequest_ProcurementPortalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalName", ID: &iProcurementPortalName, Members: &mProcurementPortalName, Type: smithy.ShapeTypeEnum, Ext: &ext[429]})
-var sCreateProcurementPortalPreferenceRequest_BuyerDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuyerDomain", ID: &iBuyerDomain, Members: &mBuyerDomain, Type: smithy.ShapeTypeEnum, Ext: &ext[430]})
-var sCreateProcurementPortalPreferenceRequest_BuyerIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuyerIdentifier", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[431]})
-var sCreateProcurementPortalPreferenceRequest_SupplierDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupplierDomain", ID: &iSupplierDomain, Members: &mSupplierDomain, Type: smithy.ShapeTypeEnum, Ext: &ext[432]})
-var sCreateProcurementPortalPreferenceRequest_SupplierIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupplierIdentifier", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[433]})
-var sCreateProcurementPortalPreferenceRequest_Selector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Selector", ID: &iProcurementPortalPreferenceSelector, Members: &mProcurementPortalPreferenceSelector, Type: smithy.ShapeTypeStructure, Ext: &ext[434]})
-var sCreateProcurementPortalPreferenceRequest_ProcurementPortalSharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalSharedSecret", ID: &i_SensitiveBasicStringWithoutSpace, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[435]})
-var sCreateProcurementPortalPreferenceRequest_ProcurementPortalInstanceEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalInstanceEndpoint", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[436]})
-var sCreateProcurementPortalPreferenceRequest_TestEnvPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TestEnvPreference", ID: &iTestEnvPreferenceInput, Members: &mTestEnvPreferenceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[437]})
-var sCreateProcurementPortalPreferenceRequest_EinvoiceDeliveryEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[438]})
-var sCreateProcurementPortalPreferenceRequest_EinvoiceDeliveryPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryPreference", ID: &iEinvoiceDeliveryPreference, Members: &mEinvoiceDeliveryPreference, Type: smithy.ShapeTypeStructure, Ext: &ext[439]})
-var sCreateProcurementPortalPreferenceRequest_PurchaseOrderRetrievalEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderRetrievalEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[440]})
-var sCreateProcurementPortalPreferenceRequest_MarketplacePunchOutEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplacePunchOutEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[441]})
-var sCreateProcurementPortalPreferenceRequest_MarketplacePunchOutPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplacePunchOutPreference", ID: &iMarketplacePunchOutPreference, Members: &mMarketplacePunchOutPreference, Type: smithy.ShapeTypeStructure, Ext: &ext[442]})
-var sCreateProcurementPortalPreferenceRequest_Contacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contacts", ID: &i_Contacts, Members: &m_Contacts, Type: smithy.ShapeTypeList, Ext: &ext[443]})
-var sCreateProcurementPortalPreferenceRequest_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList, Ext: &ext[444]})
-var sCreateProcurementPortalPreferenceRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[445]})
-var sCreateProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &ext[447]})
-var sDeleteInvoiceUnitRequest_InvoiceUnitArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceUnitArn", ID: &i_InvoiceUnitArnString, Type: smithy.ShapeTypeString, Ext: &ext[449]})
-var sDeleteInvoiceUnitRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[450]})
-var sDeleteInvoiceUnitResponse_InvoiceUnitArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceUnitArn", ID: &i_InvoiceUnitArnString, Type: smithy.ShapeTypeString, Ext: &ext[452]})
-var sDeleteProcurementPortalPreferenceRequest_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &ext[454]})
-var sDeleteProcurementPortalPreferenceRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[455]})
-var sDeleteProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &ext[457]})
-var sGetInvoicePDFRequest_InvoiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceId", ID: &i_StringWithoutNewLine, Type: smithy.ShapeTypeString, Ext: &ext[459]})
-var sGetInvoicePDFResponse_InvoicePDF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoicePDF", ID: &iInvoicePDF, Members: &mInvoicePDF, Type: smithy.ShapeTypeStructure, Ext: &ext[461]})
-var sGetInvoiceUnitRequest_InvoiceUnitArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceUnitArn", ID: &i_InvoiceUnitArnString, Type: smithy.ShapeTypeString, Ext: &ext[463]})
-var sGetInvoiceUnitRequest_AsOf = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AsOf", ID: &i_AsOfTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[464]})
-var sGetInvoiceUnitResponse_InvoiceUnitArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceUnitArn", ID: &i_InvoiceUnitArnString, Type: smithy.ShapeTypeString, Ext: &ext[466]})
-var sGetInvoiceUnitResponse_InvoiceReceiver = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceReceiver", ID: &i_AccountIdString, Type: smithy.ShapeTypeString, Ext: &ext[467]})
-var sGetInvoiceUnitResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_InvoiceUnitName, Type: smithy.ShapeTypeString, Ext: &ext[468]})
-var sGetInvoiceUnitResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString, Ext: &ext[469]})
-var sGetInvoiceUnitResponse_TaxInheritanceDisabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaxInheritanceDisabled", ID: &i_TaxInheritanceDisabledFlag, Type: smithy.ShapeTypeBoolean, Ext: &ext[470]})
-var sGetInvoiceUnitResponse_Rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rule", ID: &iInvoiceUnitRule, Members: &mInvoiceUnitRule, Type: smithy.ShapeTypeStructure, Ext: &ext[471]})
-var sGetInvoiceUnitResponse_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i_LastModifiedTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[472]})
-var sGetProcurementPortalPreferenceRequest_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &ext[474]})
-var sGetProcurementPortalPreferenceResponse_ProcurementPortalPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreference", ID: &iProcurementPortalPreference, Members: &mProcurementPortalPreference, Type: smithy.ShapeTypeStructure, Ext: &ext[476]})
-var sListInvoiceSummariesRequest_Selector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Selector", ID: &iInvoiceSummariesSelector, Members: &mInvoiceSummariesSelector, Type: smithy.ShapeTypeStructure, Ext: &ext[478]})
-var sListInvoiceSummariesRequest_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &iInvoiceSummariesFilter, Members: &mInvoiceSummariesFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[479]})
-var sListInvoiceSummariesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenString, Type: smithy.ShapeTypeString, Ext: &ext[480]})
-var sListInvoiceSummariesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_InvoiceSummariesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[481]})
-var sListInvoiceSummariesResponse_InvoiceSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceSummaries", ID: &i_InvoiceSummaries, Members: &m_InvoiceSummaries, Type: smithy.ShapeTypeList, Ext: &ext[483]})
-var sListInvoiceSummariesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenString, Type: smithy.ShapeTypeString, Ext: &ext[484]})
-var sListInvoiceUnitsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iFilters, Members: &mFilters, Type: smithy.ShapeTypeStructure, Ext: &ext[486]})
-var sListInvoiceUnitsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenString, Type: smithy.ShapeTypeString, Ext: &ext[487]})
-var sListInvoiceUnitsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[488]})
-var sListInvoiceUnitsRequest_AsOf = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AsOf", ID: &i_AsOfTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[489]})
-var sListInvoiceUnitsResponse_InvoiceUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceUnits", ID: &i_InvoiceUnits, Members: &m_InvoiceUnits, Type: smithy.ShapeTypeList, Ext: &ext[491]})
-var sListInvoiceUnitsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenString, Type: smithy.ShapeTypeString, Ext: &ext[492]})
-var sListProcurementPortalPreferencesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[494]})
-var sListProcurementPortalPreferencesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[495]})
-var sListProcurementPortalPreferencesResponse_ProcurementPortalPreferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferences", ID: &i_ProcurementPortalPreferenceSummaries, Members: &m_ProcurementPortalPreferenceSummaries, Type: smithy.ShapeTypeList, Ext: &ext[497]})
-var sListProcurementPortalPreferencesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[498]})
-var sListProcurementPortalsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[500]})
-var sListProcurementPortalsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[501]})
-var sListProcurementPortalsResponse_ProcurementPortals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortals", ID: &i_ProcurementPortals, Members: &m_ProcurementPortals, Type: smithy.ShapeTypeList, Ext: &ext[503]})
-var sListProcurementPortalsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[504]})
-var sListProcurementPortalSuppliersRequest_PortalIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalIdentifier", ID: &i_ProcurementPortalIdString, Type: smithy.ShapeTypeString, Ext: &ext[506]})
-var sListProcurementPortalSuppliersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[507]})
-var sListProcurementPortalSuppliersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[508]})
-var sListProcurementPortalSuppliersResponse_ProcurementPortalSuppliers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalSuppliers", ID: &i_ProcurementPortalSuppliers, Members: &m_ProcurementPortalSuppliers, Type: smithy.ShapeTypeList, Ext: &ext[510]})
-var sListProcurementPortalSuppliersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[511]})
-var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_TagrisArn, Type: smithy.ShapeTypeString, Ext: &ext[513]})
-var sListTagsForResourceResponse_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList, Ext: &ext[515]})
-var sPutProcurementPortalPreferenceRequest_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &ext[517]})
-var sPutProcurementPortalPreferenceRequest_Selector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Selector", ID: &iProcurementPortalPreferenceSelector, Members: &mProcurementPortalPreferenceSelector, Type: smithy.ShapeTypeStructure, Ext: &ext[518]})
-var sPutProcurementPortalPreferenceRequest_ProcurementPortalSharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalSharedSecret", ID: &i_SensitiveBasicStringWithoutSpace, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[519]})
-var sPutProcurementPortalPreferenceRequest_ProcurementPortalInstanceEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalInstanceEndpoint", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[520]})
-var sPutProcurementPortalPreferenceRequest_TestEnvPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TestEnvPreference", ID: &iTestEnvPreferenceInput, Members: &mTestEnvPreferenceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[521]})
-var sPutProcurementPortalPreferenceRequest_EinvoiceDeliveryEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[522]})
-var sPutProcurementPortalPreferenceRequest_EinvoiceDeliveryPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryPreference", ID: &iEinvoiceDeliveryPreference, Members: &mEinvoiceDeliveryPreference, Type: smithy.ShapeTypeStructure, Ext: &ext[523]})
-var sPutProcurementPortalPreferenceRequest_PurchaseOrderRetrievalEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderRetrievalEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[524]})
-var sPutProcurementPortalPreferenceRequest_MarketplacePunchOutEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplacePunchOutEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[525]})
-var sPutProcurementPortalPreferenceRequest_MarketplacePunchOutPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplacePunchOutPreference", ID: &iMarketplacePunchOutPreference, Members: &mMarketplacePunchOutPreference, Type: smithy.ShapeTypeStructure, Ext: &ext[526]})
-var sPutProcurementPortalPreferenceRequest_Contacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contacts", ID: &i_Contacts, Members: &m_Contacts, Type: smithy.ShapeTypeList, Ext: &ext[527]})
-var sPutProcurementPortalPreferenceRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[528]})
-var sPutProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &ext[530]})
-var sSendProcurementPortalValidationRequest_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &ext[532]})
-var sSendProcurementPortalValidationRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[533]})
-var sSendProcurementPortalValidationResponse_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &ext[535]})
-var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_TagrisArn, Type: smithy.ShapeTypeString, Ext: &ext[537]})
-var sTagResourceRequest_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList, Ext: &ext[538]})
-var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_TagrisArn, Type: smithy.ShapeTypeString, Ext: &ext[541]})
-var sUntagResourceRequest_ResourceTagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTagKeys", ID: &i_ResourceTagKeyList, Members: &m_ResourceTagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[542]})
-var sUpdateInvoiceUnitRequest_InvoiceUnitArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceUnitArn", ID: &i_InvoiceUnitArnString, Type: smithy.ShapeTypeString, Ext: &ext[545]})
-var sUpdateInvoiceUnitRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString, Ext: &ext[546]})
-var sUpdateInvoiceUnitRequest_TaxInheritanceDisabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaxInheritanceDisabled", ID: &i_TaxInheritanceDisabledFlag, Type: smithy.ShapeTypeBoolean, Ext: &ext[547]})
-var sUpdateInvoiceUnitRequest_Rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rule", ID: &iInvoiceUnitRule, Members: &mInvoiceUnitRule, Type: smithy.ShapeTypeStructure, Ext: &ext[548]})
-var sUpdateInvoiceUnitRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[549]})
-var sUpdateInvoiceUnitResponse_InvoiceUnitArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceUnitArn", ID: &i_InvoiceUnitArnString, Type: smithy.ShapeTypeString, Ext: &ext[551]})
-var sUpdateProcurementPortalPreferenceStatusRequest_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &ext[553]})
-var sUpdateProcurementPortalPreferenceStatusRequest_EinvoiceDeliveryPreferenceStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryPreferenceStatus", ID: &iProcurementPortalPreferenceStatus, Members: &mProcurementPortalPreferenceStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[554]})
-var sUpdateProcurementPortalPreferenceStatusRequest_EinvoiceDeliveryPreferenceStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryPreferenceStatusReason", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[555]})
-var sUpdateProcurementPortalPreferenceStatusRequest_PurchaseOrderRetrievalPreferenceStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderRetrievalPreferenceStatus", ID: &iProcurementPortalPreferenceStatus, Members: &mProcurementPortalPreferenceStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[556]})
-var sUpdateProcurementPortalPreferenceStatusRequest_PurchaseOrderRetrievalPreferenceStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderRetrievalPreferenceStatusReason", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &ext[557]})
-var sUpdateProcurementPortalPreferenceStatusRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[558]})
-var sUpdateProcurementPortalPreferenceStatusResponse_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &ext[560]})
-var sVerifyProcurementPortalValidationRequest_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &ext[562]})
-var sVerifyProcurementPortalValidationRequest_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[563]})
-var sVerifyProcurementPortalValidationRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ext[564]})
-var sVerifyProcurementPortalValidationResponse_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &ext[566]})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAccessDeniedException_resourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceName", ID: &i_InvoiceUnitArnString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_resourceName})
+var s_AccountIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccountIdString, Type: smithy.ShapeTypeString, Ext: &e_AccountIdList_member})
+var sAmountBreakdown_SubTotalAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubTotalAmount", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eAmountBreakdown_SubTotalAmount})
+var sAmountBreakdown_Discounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Discounts", ID: &iDiscountsBreakdown, Members: &mDiscountsBreakdown, Type: smithy.ShapeTypeStructure, Ext: &eAmountBreakdown_Discounts})
+var sAmountBreakdown_Taxes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Taxes", ID: &iTaxesBreakdown, Members: &mTaxesBreakdown, Type: smithy.ShapeTypeStructure, Ext: &eAmountBreakdown_Taxes})
+var sAmountBreakdown_Fees = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fees", ID: &iFeesBreakdown, Members: &mFeesBreakdown, Type: smithy.ShapeTypeStructure, Ext: &eAmountBreakdown_Fees})
+var sBillingEntity_AWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBillingEntity_AWS})
+var sBillingEntity_AWS_MARKETPLACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_MARKETPLACE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBillingEntity_AWS_MARKETPLACE})
+var sBillingPeriod_Month = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Month", ID: &i_Month, Type: smithy.ShapeTypeInteger, Ext: &eBillingPeriod_Month})
+var sBillingPeriod_Year = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Year", ID: &i_Year, Type: smithy.ShapeTypeInteger, Ext: &eBillingPeriod_Year})
+var s_BillSourceAccountList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccountIdString, Type: smithy.ShapeTypeString, Ext: &e_BillSourceAccountList_member})
+var sBillType_ANNIVERSARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANNIVERSARY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBillType_ANNIVERSARY})
+var sBillType_PURCHASE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PURCHASE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBillType_PURCHASE})
+var sBillType_REFUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REFUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBillType_REFUND})
+var sBuyerDomain_NetworkID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBuyerDomain_NetworkID})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceId})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceType})
+var sConnectionTestingMethod_PROD_ENV_DOLLAR_TEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROD_ENV_DOLLAR_TEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionTestingMethod_PROD_ENV_DOLLAR_TEST})
+var sConnectionTestingMethod_TEST_ENV_REPLAY_TEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEST_ENV_REPLAY_TEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionTestingMethod_TEST_ENV_REPLAY_TEST})
+var sContact_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eContact_Name})
+var sContact_Email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Email", ID: &i_EmailString, Type: smithy.ShapeTypeString, Ext: &eContact_Email})
+var s_Contacts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContact, Members: &mContact, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &e_Contacts_member})
+var sCurrencyExchangeDetails_SourceCurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceCurrencyCode", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eCurrencyExchangeDetails_SourceCurrencyCode})
+var sCurrencyExchangeDetails_TargetCurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetCurrencyCode", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eCurrencyExchangeDetails_TargetCurrencyCode})
+var sCurrencyExchangeDetails_Rate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rate", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eCurrencyExchangeDetails_Rate})
+var sDateInterval_StartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDateInterval_StartDate})
+var sDateInterval_EndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDateInterval_EndDate})
+var sDiscountsBreakdown_Breakdown = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Breakdown", ID: &i_DiscountsBreakdownAmountList, Members: &m_DiscountsBreakdownAmountList, Type: smithy.ShapeTypeList, Ext: &eDiscountsBreakdown_Breakdown})
+var sDiscountsBreakdown_TotalAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalAmount", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eDiscountsBreakdown_TotalAmount})
+var sDiscountsBreakdownAmount_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eDiscountsBreakdownAmount_Description})
+var sDiscountsBreakdownAmount_Amount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Amount", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eDiscountsBreakdownAmount_Amount})
+var sDiscountsBreakdownAmount_Rate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rate", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eDiscountsBreakdownAmount_Rate})
+var s_DiscountsBreakdownAmountList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDiscountsBreakdownAmount, Members: &mDiscountsBreakdownAmount, Type: smithy.ShapeTypeStructure, Ext: &e_DiscountsBreakdownAmountList_member})
+var sEinvoiceDeliveryAttachmentType_INVOICE_PDF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVOICE_PDF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEinvoiceDeliveryAttachmentType_INVOICE_PDF})
+var sEinvoiceDeliveryAttachmentType_RFP_PDF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RFP_PDF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEinvoiceDeliveryAttachmentType_RFP_PDF})
+var s_EinvoiceDeliveryAttachmentTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEinvoiceDeliveryAttachmentType, Members: &mEinvoiceDeliveryAttachmentType, Type: smithy.ShapeTypeEnum, Ext: &e_EinvoiceDeliveryAttachmentTypes_member})
+var sEinvoiceDeliveryDocumentType_AWS_CLOUD_INVOICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_CLOUD_INVOICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEinvoiceDeliveryDocumentType_AWS_CLOUD_INVOICE})
+var sEinvoiceDeliveryDocumentType_AWS_CLOUD_CREDIT_MEMO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_CLOUD_CREDIT_MEMO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEinvoiceDeliveryDocumentType_AWS_CLOUD_CREDIT_MEMO})
+var sEinvoiceDeliveryDocumentType_AWS_MARKETPLACE_INVOICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_MARKETPLACE_INVOICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEinvoiceDeliveryDocumentType_AWS_MARKETPLACE_INVOICE})
+var sEinvoiceDeliveryDocumentType_AWS_MARKETPLACE_CREDIT_MEMO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_MARKETPLACE_CREDIT_MEMO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEinvoiceDeliveryDocumentType_AWS_MARKETPLACE_CREDIT_MEMO})
+var sEinvoiceDeliveryDocumentType_AWS_REQUEST_FOR_PAYMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_REQUEST_FOR_PAYMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEinvoiceDeliveryDocumentType_AWS_REQUEST_FOR_PAYMENT})
+var s_EinvoiceDeliveryDocumentTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEinvoiceDeliveryDocumentType, Members: &mEinvoiceDeliveryDocumentType, Type: smithy.ShapeTypeEnum, Ext: &e_EinvoiceDeliveryDocumentTypes_member})
+var sEinvoiceDeliveryPreference_EinvoiceDeliveryDocumentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryDocumentTypes", ID: &i_EinvoiceDeliveryDocumentTypes, Members: &m_EinvoiceDeliveryDocumentTypes, Type: smithy.ShapeTypeList, Ext: &eEinvoiceDeliveryPreference_EinvoiceDeliveryDocumentTypes})
+var sEinvoiceDeliveryPreference_EinvoiceDeliveryAttachmentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryAttachmentTypes", ID: &i_EinvoiceDeliveryAttachmentTypes, Members: &m_EinvoiceDeliveryAttachmentTypes, Type: smithy.ShapeTypeList, Ext: &eEinvoiceDeliveryPreference_EinvoiceDeliveryAttachmentTypes})
+var sEinvoiceDeliveryPreference_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &eEinvoiceDeliveryPreference_Protocol})
+var sEinvoiceDeliveryPreference_PurchaseOrderDataSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderDataSources", ID: &i_PurchaseOrderDataSources, Members: &m_PurchaseOrderDataSources, Type: smithy.ShapeTypeList, Ext: &eEinvoiceDeliveryPreference_PurchaseOrderDataSources})
+var sEinvoiceDeliveryPreference_ConnectionTestingMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionTestingMethod", ID: &iConnectionTestingMethod, Members: &mConnectionTestingMethod, Type: smithy.ShapeTypeEnum, Ext: &eEinvoiceDeliveryPreference_ConnectionTestingMethod})
+var sEinvoiceDeliveryPreference_EinvoiceDeliveryActivationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryActivationDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eEinvoiceDeliveryPreference_EinvoiceDeliveryActivationDate})
+var sEinvoiceDeliveryStatus_DELIVERED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELIVERED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEinvoiceDeliveryStatus_DELIVERED})
+var sEinvoiceDeliveryStatus_NOT_DELIVERED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_DELIVERED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEinvoiceDeliveryStatus_NOT_DELIVERED})
+var sEntity_InvoicingEntity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoicingEntity", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eEntity_InvoicingEntity})
+var sEntity_BillingEntity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingEntity", ID: &iBillingEntity, Members: &mBillingEntity, Type: smithy.ShapeTypeEnum, Ext: &eEntity_BillingEntity})
+var sFeatureConfigurations_InvoiceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceConfiguration", ID: &iInvoiceConfiguration, Members: &mInvoiceConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eFeatureConfigurations_InvoiceConfiguration})
+var sFeesBreakdown_Breakdown = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Breakdown", ID: &i_FeesBreakdownAmountList, Members: &m_FeesBreakdownAmountList, Type: smithy.ShapeTypeList, Ext: &eFeesBreakdown_Breakdown})
+var sFeesBreakdown_TotalAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalAmount", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eFeesBreakdown_TotalAmount})
+var sFeesBreakdownAmount_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eFeesBreakdownAmount_Description})
+var sFeesBreakdownAmount_Amount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Amount", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eFeesBreakdownAmount_Amount})
+var sFeesBreakdownAmount_Rate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rate", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eFeesBreakdownAmount_Rate})
+var s_FeesBreakdownAmountList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFeesBreakdownAmount, Members: &mFeesBreakdownAmount, Type: smithy.ShapeTypeStructure, Ext: &e_FeesBreakdownAmountList_member})
+var sFilters_Names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Names", ID: &i_InvoiceUnitNames, Members: &m_InvoiceUnitNames, Type: smithy.ShapeTypeList, Ext: &eFilters_Names})
+var sFilters_InvoiceReceivers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceReceivers", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList, Ext: &eFilters_InvoiceReceivers})
+var sFilters_Accounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Accounts", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList, Ext: &eFilters_Accounts})
+var sFilters_BillSourceAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillSourceAccounts", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList, Ext: &eFilters_BillSourceAccounts})
+var sInternalServerException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t5, Type: smithy.ShapeTypeInteger, Ext: &eInternalServerException_retryAfterSeconds})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sInvoiceConfiguration_DocumentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentTypes", ID: &i_EinvoiceDeliveryDocumentTypes, Members: &m_EinvoiceDeliveryDocumentTypes, Type: smithy.ShapeTypeList, Ext: &eInvoiceConfiguration_DocumentTypes})
+var sInvoiceConfiguration_AttachmentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentTypes", ID: &i_EinvoiceDeliveryAttachmentTypes, Members: &m_EinvoiceDeliveryAttachmentTypes, Type: smithy.ShapeTypeList, Ext: &eInvoiceConfiguration_AttachmentTypes})
+var sInvoiceCurrencyAmount_TotalAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalAmount", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eInvoiceCurrencyAmount_TotalAmount})
+var sInvoiceCurrencyAmount_TotalAmountBeforeTax = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalAmountBeforeTax", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eInvoiceCurrencyAmount_TotalAmountBeforeTax})
+var sInvoiceCurrencyAmount_CurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrencyCode", ID: &i_CurrencyCode, Type: smithy.ShapeTypeString, Ext: &eInvoiceCurrencyAmount_CurrencyCode})
+var sInvoiceCurrencyAmount_AmountBreakdown = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AmountBreakdown", ID: &iAmountBreakdown, Members: &mAmountBreakdown, Type: smithy.ShapeTypeStructure, Ext: &eInvoiceCurrencyAmount_AmountBreakdown})
+var sInvoiceCurrencyAmount_CurrencyExchangeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrencyExchangeDetails", ID: &iCurrencyExchangeDetails, Members: &mCurrencyExchangeDetails, Type: smithy.ShapeTypeStructure, Ext: &eInvoiceCurrencyAmount_CurrencyExchangeDetails})
+var sInvoiceFrequency_ONE_TIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONE_TIME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInvoiceFrequency_ONE_TIME})
+var sInvoiceFrequency_RECURRING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECURRING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInvoiceFrequency_RECURRING})
+var sInvoicePDF_InvoiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceId", ID: &i_StringWithoutNewLine, Type: smithy.ShapeTypeString, Ext: &eInvoicePDF_InvoiceId})
+var sInvoicePDF_DocumentUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentUrl", ID: &i_StringWithoutNewLine, Type: smithy.ShapeTypeString, Ext: &eInvoicePDF_DocumentUrl})
+var sInvoicePDF_DocumentUrlExpirationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentUrlExpirationDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eInvoicePDF_DocumentUrlExpirationDate})
+var sInvoicePDF_SupplementalDocuments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupplementalDocuments", ID: &i_SupplementalDocuments, Members: &m_SupplementalDocuments, Type: smithy.ShapeTypeList, Ext: &eInvoicePDF_SupplementalDocuments})
+var sInvoiceProfile_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountIdString, Type: smithy.ShapeTypeString, Ext: &eInvoiceProfile_AccountId})
+var sInvoiceProfile_ReceiverName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReceiverName", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eInvoiceProfile_ReceiverName})
+var sInvoiceProfile_ReceiverAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReceiverAddress", ID: &iReceiverAddress, Members: &mReceiverAddress, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eInvoiceProfile_ReceiverAddress})
+var sInvoiceProfile_ReceiverEmail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReceiverEmail", ID: &i_SensitiveBasicStringWithoutSpace, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eInvoiceProfile_ReceiverEmail})
+var sInvoiceProfile_Issuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Issuer", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eInvoiceProfile_Issuer})
+var sInvoiceProfile_TaxRegistrationNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaxRegistrationNumber", ID: &i_SensitiveBasicStringWithoutSpace, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eInvoiceProfile_TaxRegistrationNumber})
+var s_InvoiceSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInvoiceSummary, Members: &mInvoiceSummary, Type: smithy.ShapeTypeStructure, Ext: &e_InvoiceSummaries_member})
+var sInvoiceSummariesFilter_TimeInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeInterval", ID: &iDateInterval, Members: &mDateInterval, Type: smithy.ShapeTypeStructure, Ext: &eInvoiceSummariesFilter_TimeInterval})
+var sInvoiceSummariesFilter_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &iBillingPeriod, Members: &mBillingPeriod, Type: smithy.ShapeTypeStructure, Ext: &eInvoiceSummariesFilter_BillingPeriod})
+var sInvoiceSummariesFilter_InvoicingEntity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoicingEntity", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eInvoiceSummariesFilter_InvoicingEntity})
+var sInvoiceSummariesFilter_ReceiverRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReceiverRole", ID: &iReceiverRole, Members: &mReceiverRole, Type: smithy.ShapeTypeEnum, Ext: &eInvoiceSummariesFilter_ReceiverRole})
+var sInvoiceSummariesSelector_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iListInvoiceSummariesResourceType, Members: &mListInvoiceSummariesResourceType, Type: smithy.ShapeTypeEnum, Ext: &eInvoiceSummariesSelector_ResourceType})
+var sInvoiceSummariesSelector_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_StringWithoutNewLine, Type: smithy.ShapeTypeString, Ext: &eInvoiceSummariesSelector_Value})
+var sInvoiceSummary_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountIdString, Type: smithy.ShapeTypeString, Ext: &eInvoiceSummary_AccountId})
+var sInvoiceSummary_InvoiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceId", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eInvoiceSummary_InvoiceId})
+var sInvoiceSummary_IssuedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssuedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eInvoiceSummary_IssuedDate})
+var sInvoiceSummary_DueDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DueDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eInvoiceSummary_DueDate})
+var sInvoiceSummary_BillSourceAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillSourceAccounts", ID: &i_BillSourceAccountList, Members: &m_BillSourceAccountList, Type: smithy.ShapeTypeList, Ext: &eInvoiceSummary_BillSourceAccounts})
+var sInvoiceSummary_BillSourceAccountsTotalCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillSourceAccountsTotalCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eInvoiceSummary_BillSourceAccountsTotalCount})
+var sInvoiceSummary_ReceiverRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReceiverRole", ID: &iReceiverRole, Members: &mReceiverRole, Type: smithy.ShapeTypeEnum, Ext: &eInvoiceSummary_ReceiverRole})
+var sInvoiceSummary_Entity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entity", ID: &iEntity, Members: &mEntity, Type: smithy.ShapeTypeStructure, Ext: &eInvoiceSummary_Entity})
+var sInvoiceSummary_BillingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingPeriod", ID: &iBillingPeriod, Members: &mBillingPeriod, Type: smithy.ShapeTypeStructure, Ext: &eInvoiceSummary_BillingPeriod})
+var sInvoiceSummary_InvoiceFrequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceFrequency", ID: &iInvoiceFrequency, Members: &mInvoiceFrequency, Type: smithy.ShapeTypeEnum, Ext: &eInvoiceSummary_InvoiceFrequency})
+var sInvoiceSummary_BillType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillType", ID: &iBillType, Members: &mBillType, Type: smithy.ShapeTypeEnum, Ext: &eInvoiceSummary_BillType})
+var sInvoiceSummary_InvoiceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceType", ID: &iInvoiceType, Members: &mInvoiceType, Type: smithy.ShapeTypeEnum, Ext: &eInvoiceSummary_InvoiceType})
+var sInvoiceSummary_CommercialInvoiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CommercialInvoiceId", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eInvoiceSummary_CommercialInvoiceId})
+var sInvoiceSummary_OriginalInvoiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginalInvoiceId", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eInvoiceSummary_OriginalInvoiceId})
+var sInvoiceSummary_PurchaseOrderNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderNumber", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eInvoiceSummary_PurchaseOrderNumber})
+var sInvoiceSummary_EinvoiceDeliveryStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryStatus", ID: &iEinvoiceDeliveryStatus, Members: &mEinvoiceDeliveryStatus, Type: smithy.ShapeTypeEnum, Ext: &eInvoiceSummary_EinvoiceDeliveryStatus})
+var sInvoiceSummary_TaxAuthorityStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaxAuthorityStatus", ID: &iTaxAuthorityStatus, Members: &mTaxAuthorityStatus, Type: smithy.ShapeTypeEnum, Ext: &eInvoiceSummary_TaxAuthorityStatus})
+var sInvoiceSummary_BaseCurrencyAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BaseCurrencyAmount", ID: &iInvoiceCurrencyAmount, Members: &mInvoiceCurrencyAmount, Type: smithy.ShapeTypeStructure, Ext: &eInvoiceSummary_BaseCurrencyAmount})
+var sInvoiceSummary_TaxCurrencyAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaxCurrencyAmount", ID: &iInvoiceCurrencyAmount, Members: &mInvoiceCurrencyAmount, Type: smithy.ShapeTypeStructure, Ext: &eInvoiceSummary_TaxCurrencyAmount})
+var sInvoiceSummary_PaymentCurrencyAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PaymentCurrencyAmount", ID: &iInvoiceCurrencyAmount, Members: &mInvoiceCurrencyAmount, Type: smithy.ShapeTypeStructure, Ext: &eInvoiceSummary_PaymentCurrencyAmount})
+var sInvoiceType_INVOICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVOICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInvoiceType_INVOICE})
+var sInvoiceType_CREDIT_MEMO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREDIT_MEMO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInvoiceType_CREDIT_MEMO})
+var sInvoiceType_PAYMENT_RECEIPT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAYMENT_RECEIPT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eInvoiceType_PAYMENT_RECEIPT})
+var sInvoiceUnit_InvoiceUnitArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceUnitArn", ID: &i_InvoiceUnitArnString, Type: smithy.ShapeTypeString, Ext: &eInvoiceUnit_InvoiceUnitArn})
+var sInvoiceUnit_InvoiceReceiver = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceReceiver", ID: &i_AccountIdString, Type: smithy.ShapeTypeString, Ext: &eInvoiceUnit_InvoiceReceiver})
+var sInvoiceUnit_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_InvoiceUnitName, Type: smithy.ShapeTypeString, Ext: &eInvoiceUnit_Name})
+var sInvoiceUnit_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString, Ext: &eInvoiceUnit_Description})
+var sInvoiceUnit_TaxInheritanceDisabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaxInheritanceDisabled", ID: &i_TaxInheritanceDisabledFlag, Type: smithy.ShapeTypeBoolean, Ext: &eInvoiceUnit_TaxInheritanceDisabled})
+var sInvoiceUnit_Rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rule", ID: &iInvoiceUnitRule, Members: &mInvoiceUnitRule, Type: smithy.ShapeTypeStructure, Ext: &eInvoiceUnit_Rule})
+var sInvoiceUnit_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i_LastModifiedTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eInvoiceUnit_LastModified})
+var s_InvoiceUnitArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_InvoiceUnitArnString, Type: smithy.ShapeTypeString, Ext: &e_InvoiceUnitArns_member})
+var s_InvoiceUnitNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_InvoiceUnitName, Type: smithy.ShapeTypeString, Ext: &e_InvoiceUnitNames_member})
+var sInvoiceUnitRule_LinkedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkedAccounts", ID: &i_RuleAccountIdList, Members: &m_RuleAccountIdList, Type: smithy.ShapeTypeList, Ext: &eInvoiceUnitRule_LinkedAccounts})
+var sInvoiceUnitRule_BillSourceAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillSourceAccounts", ID: &i_RuleAccountIdList, Members: &m_RuleAccountIdList, Type: smithy.ShapeTypeList, Ext: &eInvoiceUnitRule_BillSourceAccounts})
+var s_InvoiceUnits_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInvoiceUnit, Members: &mInvoiceUnit, Type: smithy.ShapeTypeStructure, Ext: &e_InvoiceUnits_member})
+var sListInvoiceSummariesResourceType_ACCOUNT_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListInvoiceSummariesResourceType_ACCOUNT_ID})
+var sListInvoiceSummariesResourceType_INVOICE_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVOICE_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eListInvoiceSummariesResourceType_INVOICE_ID})
+var sMarketplacePunchOutPreference_ApprovalRequestRedirectUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApprovalRequestRedirectUrl", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eMarketplacePunchOutPreference_ApprovalRequestRedirectUrl})
+var sProcurementPortal_PortalIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalIdentifier", ID: &i_ProcurementPortalIdString, Type: smithy.ShapeTypeString, Ext: &eProcurementPortal_PortalIdentifier})
+var sProcurementPortal_PortalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalName", ID: &iProcurementPortalName, Members: &mProcurementPortalName, Type: smithy.ShapeTypeEnum, Ext: &eProcurementPortal_PortalName})
+var sProcurementPortal_PortalDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalDisplayName", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eProcurementPortal_PortalDisplayName})
+var sProcurementPortal_DefaultFeatureConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultFeatureConfigurations", ID: &iFeatureConfigurations, Members: &mFeatureConfigurations, Type: smithy.ShapeTypeStructure, Ext: &eProcurementPortal_DefaultFeatureConfigurations})
+var sProcurementPortalEnv_PROD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProcurementPortalEnv_PROD})
+var sProcurementPortalEnv_TEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProcurementPortalEnv_TEST})
+var sProcurementPortalName_SAP_BUSINESS_NETWORK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAP_BUSINESS_NETWORK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProcurementPortalName_SAP_BUSINESS_NETWORK})
+var sProcurementPortalName_COUPA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COUPA", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProcurementPortalName_COUPA})
+var sProcurementPortalPreference_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsAccountId", ID: &i_AccountIdString, Type: smithy.ShapeTypeString, Ext: &eProcurementPortalPreference_AwsAccountId})
+var sProcurementPortalPreference_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &eProcurementPortalPreference_ProcurementPortalPreferenceArn})
+var sProcurementPortalPreference_ProcurementPortalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalName", ID: &iProcurementPortalName, Members: &mProcurementPortalName, Type: smithy.ShapeTypeEnum, Ext: &eProcurementPortalPreference_ProcurementPortalName})
+var sProcurementPortalPreference_BuyerDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuyerDomain", ID: &iBuyerDomain, Members: &mBuyerDomain, Type: smithy.ShapeTypeEnum, Ext: &eProcurementPortalPreference_BuyerDomain})
+var sProcurementPortalPreference_BuyerIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuyerIdentifier", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eProcurementPortalPreference_BuyerIdentifier})
+var sProcurementPortalPreference_SupplierDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupplierDomain", ID: &iSupplierDomain, Members: &mSupplierDomain, Type: smithy.ShapeTypeEnum, Ext: &eProcurementPortalPreference_SupplierDomain})
+var sProcurementPortalPreference_SupplierIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupplierIdentifier", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eProcurementPortalPreference_SupplierIdentifier})
+var sProcurementPortalPreference_Selector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Selector", ID: &iProcurementPortalPreferenceSelector, Members: &mProcurementPortalPreferenceSelector, Type: smithy.ShapeTypeStructure, Ext: &eProcurementPortalPreference_Selector})
+var sProcurementPortalPreference_ProcurementPortalSharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalSharedSecret", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eProcurementPortalPreference_ProcurementPortalSharedSecret})
+var sProcurementPortalPreference_ProcurementPortalInstanceEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalInstanceEndpoint", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eProcurementPortalPreference_ProcurementPortalInstanceEndpoint})
+var sProcurementPortalPreference_PurchaseOrderRetrievalEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderRetrievalEndpoint", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eProcurementPortalPreference_PurchaseOrderRetrievalEndpoint})
+var sProcurementPortalPreference_TestEnvPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TestEnvPreference", ID: &iTestEnvPreference, Members: &mTestEnvPreference, Type: smithy.ShapeTypeStructure, Ext: &eProcurementPortalPreference_TestEnvPreference})
+var sProcurementPortalPreference_EinvoiceDeliveryEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eProcurementPortalPreference_EinvoiceDeliveryEnabled})
+var sProcurementPortalPreference_EinvoiceDeliveryPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryPreference", ID: &iEinvoiceDeliveryPreference, Members: &mEinvoiceDeliveryPreference, Type: smithy.ShapeTypeStructure, Ext: &eProcurementPortalPreference_EinvoiceDeliveryPreference})
+var sProcurementPortalPreference_PurchaseOrderRetrievalEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderRetrievalEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eProcurementPortalPreference_PurchaseOrderRetrievalEnabled})
+var sProcurementPortalPreference_MarketplacePunchOutEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplacePunchOutEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eProcurementPortalPreference_MarketplacePunchOutEnabled})
+var sProcurementPortalPreference_MarketplacePunchOutPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplacePunchOutPreference", ID: &iMarketplacePunchOutPreference, Members: &mMarketplacePunchOutPreference, Type: smithy.ShapeTypeStructure, Ext: &eProcurementPortalPreference_MarketplacePunchOutPreference})
+var sProcurementPortalPreference_Contacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contacts", ID: &i_Contacts, Members: &m_Contacts, Type: smithy.ShapeTypeList, Ext: &eProcurementPortalPreference_Contacts})
+var sProcurementPortalPreference_EinvoiceDeliveryPreferenceStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryPreferenceStatus", ID: &iProcurementPortalPreferenceStatus, Members: &mProcurementPortalPreferenceStatus, Type: smithy.ShapeTypeEnum, Ext: &eProcurementPortalPreference_EinvoiceDeliveryPreferenceStatus})
+var sProcurementPortalPreference_EinvoiceDeliveryPreferenceStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryPreferenceStatusReason", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eProcurementPortalPreference_EinvoiceDeliveryPreferenceStatusReason})
+var sProcurementPortalPreference_PurchaseOrderRetrievalPreferenceStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderRetrievalPreferenceStatus", ID: &iProcurementPortalPreferenceStatus, Members: &mProcurementPortalPreferenceStatus, Type: smithy.ShapeTypeEnum, Ext: &eProcurementPortalPreference_PurchaseOrderRetrievalPreferenceStatus})
+var sProcurementPortalPreference_PurchaseOrderRetrievalPreferenceStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderRetrievalPreferenceStatusReason", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eProcurementPortalPreference_PurchaseOrderRetrievalPreferenceStatusReason})
+var sProcurementPortalPreference_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eProcurementPortalPreference_Version})
+var sProcurementPortalPreference_CreateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eProcurementPortalPreference_CreateDate})
+var sProcurementPortalPreference_LastUpdateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eProcurementPortalPreference_LastUpdateDate})
+var sProcurementPortalPreferenceSelector_InvoiceUnitArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceUnitArns", ID: &i_InvoiceUnitArns, Members: &m_InvoiceUnitArns, Type: smithy.ShapeTypeList, Ext: &eProcurementPortalPreferenceSelector_InvoiceUnitArns})
+var sProcurementPortalPreferenceSelector_SellerOfRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SellerOfRecords", ID: &i_SellerOfRecords, Members: &m_SellerOfRecords, Type: smithy.ShapeTypeList, Ext: &eProcurementPortalPreferenceSelector_SellerOfRecords})
+var sProcurementPortalPreferenceStatus_PENDING_VERIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_VERIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProcurementPortalPreferenceStatus_PENDING_VERIFICATION})
+var sProcurementPortalPreferenceStatus_VALIDATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProcurementPortalPreferenceStatus_VALIDATED})
+var sProcurementPortalPreferenceStatus_TEST_INITIALIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEST_INITIALIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProcurementPortalPreferenceStatus_TEST_INITIALIZED})
+var sProcurementPortalPreferenceStatus_TEST_INITIALIZATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEST_INITIALIZATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProcurementPortalPreferenceStatus_TEST_INITIALIZATION_FAILED})
+var sProcurementPortalPreferenceStatus_TEST_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEST_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProcurementPortalPreferenceStatus_TEST_FAILED})
+var sProcurementPortalPreferenceStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProcurementPortalPreferenceStatus_ACTIVE})
+var sProcurementPortalPreferenceStatus_SUSPENDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProcurementPortalPreferenceStatus_SUSPENDED})
+var s_ProcurementPortalPreferenceSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProcurementPortalPreferenceSummary, Members: &mProcurementPortalPreferenceSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ProcurementPortalPreferenceSummaries_member})
+var sProcurementPortalPreferenceSummary_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsAccountId", ID: &i_AccountIdString, Type: smithy.ShapeTypeString, Ext: &eProcurementPortalPreferenceSummary_AwsAccountId})
+var sProcurementPortalPreferenceSummary_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &eProcurementPortalPreferenceSummary_ProcurementPortalPreferenceArn})
+var sProcurementPortalPreferenceSummary_ProcurementPortalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalName", ID: &iProcurementPortalName, Members: &mProcurementPortalName, Type: smithy.ShapeTypeEnum, Ext: &eProcurementPortalPreferenceSummary_ProcurementPortalName})
+var sProcurementPortalPreferenceSummary_BuyerDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuyerDomain", ID: &iBuyerDomain, Members: &mBuyerDomain, Type: smithy.ShapeTypeEnum, Ext: &eProcurementPortalPreferenceSummary_BuyerDomain})
+var sProcurementPortalPreferenceSummary_BuyerIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuyerIdentifier", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eProcurementPortalPreferenceSummary_BuyerIdentifier})
+var sProcurementPortalPreferenceSummary_SupplierDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupplierDomain", ID: &iSupplierDomain, Members: &mSupplierDomain, Type: smithy.ShapeTypeEnum, Ext: &eProcurementPortalPreferenceSummary_SupplierDomain})
+var sProcurementPortalPreferenceSummary_SupplierIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupplierIdentifier", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eProcurementPortalPreferenceSummary_SupplierIdentifier})
+var sProcurementPortalPreferenceSummary_Selector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Selector", ID: &iProcurementPortalPreferenceSelector, Members: &mProcurementPortalPreferenceSelector, Type: smithy.ShapeTypeStructure, Ext: &eProcurementPortalPreferenceSummary_Selector})
+var sProcurementPortalPreferenceSummary_EinvoiceDeliveryEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eProcurementPortalPreferenceSummary_EinvoiceDeliveryEnabled})
+var sProcurementPortalPreferenceSummary_PurchaseOrderRetrievalEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderRetrievalEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eProcurementPortalPreferenceSummary_PurchaseOrderRetrievalEnabled})
+var sProcurementPortalPreferenceSummary_MarketplacePunchOutEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplacePunchOutEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eProcurementPortalPreferenceSummary_MarketplacePunchOutEnabled})
+var sProcurementPortalPreferenceSummary_EinvoiceDeliveryPreferenceStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryPreferenceStatus", ID: &iProcurementPortalPreferenceStatus, Members: &mProcurementPortalPreferenceStatus, Type: smithy.ShapeTypeEnum, Ext: &eProcurementPortalPreferenceSummary_EinvoiceDeliveryPreferenceStatus})
+var sProcurementPortalPreferenceSummary_EinvoiceDeliveryPreferenceStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryPreferenceStatusReason", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eProcurementPortalPreferenceSummary_EinvoiceDeliveryPreferenceStatusReason})
+var sProcurementPortalPreferenceSummary_PurchaseOrderRetrievalPreferenceStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderRetrievalPreferenceStatus", ID: &iProcurementPortalPreferenceStatus, Members: &mProcurementPortalPreferenceStatus, Type: smithy.ShapeTypeEnum, Ext: &eProcurementPortalPreferenceSummary_PurchaseOrderRetrievalPreferenceStatus})
+var sProcurementPortalPreferenceSummary_PurchaseOrderRetrievalPreferenceStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderRetrievalPreferenceStatusReason", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eProcurementPortalPreferenceSummary_PurchaseOrderRetrievalPreferenceStatusReason})
+var sProcurementPortalPreferenceSummary_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eProcurementPortalPreferenceSummary_Version})
+var sProcurementPortalPreferenceSummary_CreateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eProcurementPortalPreferenceSummary_CreateDate})
+var sProcurementPortalPreferenceSummary_LastUpdateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eProcurementPortalPreferenceSummary_LastUpdateDate})
+var s_ProcurementPortals_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProcurementPortal, Members: &mProcurementPortal, Type: smithy.ShapeTypeStructure, Ext: &e_ProcurementPortals_member})
+var sProcurementPortalSupplier_SupplierIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupplierIdentifier", ID: &i_SupplierIdString, Type: smithy.ShapeTypeString, Ext: &eProcurementPortalSupplier_SupplierIdentifier})
+var sProcurementPortalSupplier_SellerOfRecord = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SellerOfRecord", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eProcurementPortalSupplier_SellerOfRecord})
+var sProcurementPortalSupplier_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountryCode", ID: &i_CountryCode, Type: smithy.ShapeTypeString, Ext: &eProcurementPortalSupplier_CountryCode})
+var sProcurementPortalSupplier_Environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Environment", ID: &iProcurementPortalEnv, Members: &mProcurementPortalEnv, Type: smithy.ShapeTypeEnum, Ext: &eProcurementPortalSupplier_Environment})
+var s_ProcurementPortalSuppliers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProcurementPortalSupplier, Members: &mProcurementPortalSupplier, Type: smithy.ShapeTypeStructure, Ext: &e_ProcurementPortalSuppliers_member})
+var s_ProfileList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInvoiceProfile, Members: &mInvoiceProfile, Type: smithy.ShapeTypeStructure, Ext: &e_ProfileList_member})
+var sProtocol_CXML = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CXML", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProtocol_CXML})
+var sPurchaseOrderDataSource_EinvoiceDeliveryDocumentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryDocumentType", ID: &iEinvoiceDeliveryDocumentType, Members: &mEinvoiceDeliveryDocumentType, Type: smithy.ShapeTypeEnum, Ext: &ePurchaseOrderDataSource_EinvoiceDeliveryDocumentType})
+var sPurchaseOrderDataSource_PurchaseOrderDataSourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderDataSourceType", ID: &iPurchaseOrderDataSourceType, Members: &mPurchaseOrderDataSourceType, Type: smithy.ShapeTypeEnum, Ext: &ePurchaseOrderDataSource_PurchaseOrderDataSourceType})
+var s_PurchaseOrderDataSources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPurchaseOrderDataSource, Members: &mPurchaseOrderDataSource, Type: smithy.ShapeTypeStructure, Ext: &e_PurchaseOrderDataSources_member})
+var sPurchaseOrderDataSourceType_ASSOCIATED_PURCHASE_ORDER_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASSOCIATED_PURCHASE_ORDER_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseOrderDataSourceType_ASSOCIATED_PURCHASE_ORDER_REQUIRED})
+var sPurchaseOrderDataSourceType_PURCHASE_ORDER_NOT_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PURCHASE_ORDER_NOT_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePurchaseOrderDataSourceType_PURCHASE_ORDER_NOT_REQUIRED})
+var sReceiverAddress_AddressLine1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressLine1", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eReceiverAddress_AddressLine1})
+var sReceiverAddress_AddressLine2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressLine2", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eReceiverAddress_AddressLine2})
+var sReceiverAddress_AddressLine3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressLine3", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eReceiverAddress_AddressLine3})
+var sReceiverAddress_DistrictOrCounty = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DistrictOrCounty", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eReceiverAddress_DistrictOrCounty})
+var sReceiverAddress_City = smithy.NewStaticSchema(smithy.StaticSchema{Member: "City", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eReceiverAddress_City})
+var sReceiverAddress_StateOrRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateOrRegion", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eReceiverAddress_StateOrRegion})
+var sReceiverAddress_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountryCode", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eReceiverAddress_CountryCode})
+var sReceiverAddress_CompanyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompanyName", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eReceiverAddress_CompanyName})
+var sReceiverAddress_PostalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCode", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eReceiverAddress_PostalCode})
+var sReceiverRole_SELLER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SELLER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReceiverRole_SELLER})
+var sReceiverRole_RESELLER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESELLER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReceiverRole_RESELLER})
+var sReceiverRole_BUYER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUYER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReceiverRole_BUYER})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceNotFoundException_resourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceName", ID: &i_InvoiceUnitArnString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceName})
+var sResourceTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ResourceTagKey, Type: smithy.ShapeTypeString, Ext: &eResourceTag_Key})
+var sResourceTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_ResourceTagValue, Type: smithy.ShapeTypeString, Ext: &eResourceTag_Value})
+var s_ResourceTagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceTagKey, Type: smithy.ShapeTypeString, Ext: &e_ResourceTagKeyList_member})
+var s_ResourceTagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceTag, Members: &mResourceTag, Type: smithy.ShapeTypeStructure, Ext: &e_ResourceTagList_member})
+var s_RuleAccountIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccountIdString, Type: smithy.ShapeTypeString, Ext: &e_RuleAccountIdList_member})
+var s_SellerOfRecords_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &e_SellerOfRecords_member})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sSupplementalDocument_DocumentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentType", ID: &iSupplementalDocumentType, Members: &mSupplementalDocumentType, Type: smithy.ShapeTypeEnum, Ext: &eSupplementalDocument_DocumentType})
+var sSupplementalDocument_DocumentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentId", ID: &i_StringWithoutNewLine, Type: smithy.ShapeTypeString, Ext: &eSupplementalDocument_DocumentId})
+var sSupplementalDocument_DocumentUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentUrl", ID: &i_StringWithoutNewLine, Type: smithy.ShapeTypeString, Ext: &eSupplementalDocument_DocumentUrl})
+var sSupplementalDocument_DocumentUrlExpirationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentUrlExpirationDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eSupplementalDocument_DocumentUrlExpirationDate})
+var s_SupplementalDocuments_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSupplementalDocument, Members: &mSupplementalDocument, Type: smithy.ShapeTypeStructure, Ext: &e_SupplementalDocuments_member})
+var sSupplementalDocumentType_GOVERNMENT_INVOICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GOVERNMENT_INVOICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSupplementalDocumentType_GOVERNMENT_INVOICE})
+var sSupplementalDocumentType_TAX_E_INVOICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TAX_E_INVOICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSupplementalDocumentType_TAX_E_INVOICE})
+var sSupplementalDocumentType_PAYMENT_RECEIPT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAYMENT_RECEIPT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSupplementalDocumentType_PAYMENT_RECEIPT})
+var sSupplementalDocumentType_SUPPLEMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUPPLEMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSupplementalDocumentType_SUPPLEMENT})
+var sSupplierDomain_NetworkID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSupplierDomain_NetworkID})
+var sTaxAuthorityStatus_ISSUED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ISSUED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaxAuthorityStatus_ISSUED})
+var sTaxAuthorityStatus_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTaxAuthorityStatus_CANCELLED})
+var sTaxesBreakdown_Breakdown = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Breakdown", ID: &i_TaxesBreakdownAmountList, Members: &m_TaxesBreakdownAmountList, Type: smithy.ShapeTypeList, Ext: &eTaxesBreakdown_Breakdown})
+var sTaxesBreakdown_TotalAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalAmount", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eTaxesBreakdown_TotalAmount})
+var sTaxesBreakdownAmount_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eTaxesBreakdownAmount_Description})
+var sTaxesBreakdownAmount_Amount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Amount", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eTaxesBreakdownAmount_Amount})
+var sTaxesBreakdownAmount_Rate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rate", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eTaxesBreakdownAmount_Rate})
+var s_TaxesBreakdownAmountList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTaxesBreakdownAmount, Members: &mTaxesBreakdownAmount, Type: smithy.ShapeTypeStructure, Ext: &e_TaxesBreakdownAmountList_member})
+var sTestEnvPreference_BuyerDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuyerDomain", ID: &iBuyerDomain, Members: &mBuyerDomain, Type: smithy.ShapeTypeEnum, Ext: &eTestEnvPreference_BuyerDomain})
+var sTestEnvPreference_BuyerIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuyerIdentifier", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eTestEnvPreference_BuyerIdentifier})
+var sTestEnvPreference_SupplierDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupplierDomain", ID: &iSupplierDomain, Members: &mSupplierDomain, Type: smithy.ShapeTypeEnum, Ext: &eTestEnvPreference_SupplierDomain})
+var sTestEnvPreference_SupplierIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupplierIdentifier", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eTestEnvPreference_SupplierIdentifier})
+var sTestEnvPreference_ProcurementPortalSharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalSharedSecret", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eTestEnvPreference_ProcurementPortalSharedSecret})
+var sTestEnvPreference_ProcurementPortalInstanceEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalInstanceEndpoint", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eTestEnvPreference_ProcurementPortalInstanceEndpoint})
+var sTestEnvPreference_PurchaseOrderRetrievalEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderRetrievalEndpoint", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eTestEnvPreference_PurchaseOrderRetrievalEndpoint})
+var sTestEnvPreferenceInput_BuyerDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuyerDomain", ID: &iBuyerDomain, Members: &mBuyerDomain, Type: smithy.ShapeTypeEnum, Ext: &eTestEnvPreferenceInput_BuyerDomain})
+var sTestEnvPreferenceInput_BuyerIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuyerIdentifier", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eTestEnvPreferenceInput_BuyerIdentifier})
+var sTestEnvPreferenceInput_SupplierDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupplierDomain", ID: &iSupplierDomain, Members: &mSupplierDomain, Type: smithy.ShapeTypeEnum, Ext: &eTestEnvPreferenceInput_SupplierDomain})
+var sTestEnvPreferenceInput_SupplierIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupplierIdentifier", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eTestEnvPreferenceInput_SupplierIdentifier})
+var sTestEnvPreferenceInput_ProcurementPortalSharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalSharedSecret", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eTestEnvPreferenceInput_ProcurementPortalSharedSecret})
+var sTestEnvPreferenceInput_ProcurementPortalInstanceEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalInstanceEndpoint", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eTestEnvPreferenceInput_ProcurementPortalInstanceEndpoint})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_resourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceName", ID: &i_InvoiceUnitArnString, Type: smithy.ShapeTypeString, Ext: &eValidationException_resourceName})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_reason})
+var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_fieldList})
+var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_name})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_message})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var sValidationExceptionReason_NON_MEMBERS_PRESENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NON_MEMBERS_PRESENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_NON_MEMBERS_PRESENT})
+var sValidationExceptionReason_MAX_ACCOUNTS_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAX_ACCOUNTS_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_MAX_ACCOUNTS_EXCEEDED})
+var sValidationExceptionReason_MAX_INVOICE_UNITS_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAX_INVOICE_UNITS_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_MAX_INVOICE_UNITS_EXCEEDED})
+var sValidationExceptionReason_DUPLICATE_INVOICE_UNIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUPLICATE_INVOICE_UNIT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_DUPLICATE_INVOICE_UNIT})
+var sValidationExceptionReason_MUTUAL_EXCLUSION_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MUTUAL_EXCLUSION_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_MUTUAL_EXCLUSION_ERROR})
+var sValidationExceptionReason_ACCOUNT_MEMBERSHIP_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT_MEMBERSHIP_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_ACCOUNT_MEMBERSHIP_ERROR})
+var sValidationExceptionReason_TAX_SETTINGS_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TAX_SETTINGS_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_TAX_SETTINGS_ERROR})
+var sValidationExceptionReason_EXPIRED_NEXT_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRED_NEXT_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_EXPIRED_NEXT_TOKEN})
+var sValidationExceptionReason_INVALID_NEXT_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_NEXT_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_NEXT_TOKEN})
+var sValidationExceptionReason_INVALID_INPUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_INPUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_INPUT})
+var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_FIELD_VALIDATION_FAILED})
+var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_CANNOT_PARSE})
+var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_UNKNOWN_OPERATION})
+var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_OTHER})
+var sBatchGetInvoiceProfileRequest_AccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountIds", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList, Ext: &eBatchGetInvoiceProfileRequest_AccountIds})
+var sBatchGetInvoiceProfileResponse_Profiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Profiles", ID: &i_ProfileList, Members: &m_ProfileList, Type: smithy.ShapeTypeList, Ext: &eBatchGetInvoiceProfileResponse_Profiles})
+var sCreateInvoiceUnitRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_InvoiceUnitName, Type: smithy.ShapeTypeString, Ext: &eCreateInvoiceUnitRequest_Name})
+var sCreateInvoiceUnitRequest_InvoiceReceiver = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceReceiver", ID: &i_AccountIdString, Type: smithy.ShapeTypeString, Ext: &eCreateInvoiceUnitRequest_InvoiceReceiver})
+var sCreateInvoiceUnitRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString, Ext: &eCreateInvoiceUnitRequest_Description})
+var sCreateInvoiceUnitRequest_TaxInheritanceDisabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaxInheritanceDisabled", ID: &i_TaxInheritanceDisabledFlag, Type: smithy.ShapeTypeBoolean, Ext: &eCreateInvoiceUnitRequest_TaxInheritanceDisabled})
+var sCreateInvoiceUnitRequest_Rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rule", ID: &iInvoiceUnitRule, Members: &mInvoiceUnitRule, Type: smithy.ShapeTypeStructure, Ext: &eCreateInvoiceUnitRequest_Rule})
+var sCreateInvoiceUnitRequest_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList, Ext: &eCreateInvoiceUnitRequest_ResourceTags})
+var sCreateInvoiceUnitRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eCreateInvoiceUnitRequest_ClientToken})
+var sCreateInvoiceUnitResponse_InvoiceUnitArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceUnitArn", ID: &i_InvoiceUnitArnString, Type: smithy.ShapeTypeString, Ext: &eCreateInvoiceUnitResponse_InvoiceUnitArn})
+var sCreateProcurementPortalPreferenceRequest_ProcurementPortalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalName", ID: &iProcurementPortalName, Members: &mProcurementPortalName, Type: smithy.ShapeTypeEnum, Ext: &eCreateProcurementPortalPreferenceRequest_ProcurementPortalName})
+var sCreateProcurementPortalPreferenceRequest_BuyerDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuyerDomain", ID: &iBuyerDomain, Members: &mBuyerDomain, Type: smithy.ShapeTypeEnum, Ext: &eCreateProcurementPortalPreferenceRequest_BuyerDomain})
+var sCreateProcurementPortalPreferenceRequest_BuyerIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuyerIdentifier", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eCreateProcurementPortalPreferenceRequest_BuyerIdentifier})
+var sCreateProcurementPortalPreferenceRequest_SupplierDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupplierDomain", ID: &iSupplierDomain, Members: &mSupplierDomain, Type: smithy.ShapeTypeEnum, Ext: &eCreateProcurementPortalPreferenceRequest_SupplierDomain})
+var sCreateProcurementPortalPreferenceRequest_SupplierIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupplierIdentifier", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eCreateProcurementPortalPreferenceRequest_SupplierIdentifier})
+var sCreateProcurementPortalPreferenceRequest_Selector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Selector", ID: &iProcurementPortalPreferenceSelector, Members: &mProcurementPortalPreferenceSelector, Type: smithy.ShapeTypeStructure, Ext: &eCreateProcurementPortalPreferenceRequest_Selector})
+var sCreateProcurementPortalPreferenceRequest_ProcurementPortalSharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalSharedSecret", ID: &i_SensitiveBasicStringWithoutSpace, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eCreateProcurementPortalPreferenceRequest_ProcurementPortalSharedSecret})
+var sCreateProcurementPortalPreferenceRequest_ProcurementPortalInstanceEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalInstanceEndpoint", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eCreateProcurementPortalPreferenceRequest_ProcurementPortalInstanceEndpoint})
+var sCreateProcurementPortalPreferenceRequest_TestEnvPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TestEnvPreference", ID: &iTestEnvPreferenceInput, Members: &mTestEnvPreferenceInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateProcurementPortalPreferenceRequest_TestEnvPreference})
+var sCreateProcurementPortalPreferenceRequest_EinvoiceDeliveryEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateProcurementPortalPreferenceRequest_EinvoiceDeliveryEnabled})
+var sCreateProcurementPortalPreferenceRequest_EinvoiceDeliveryPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryPreference", ID: &iEinvoiceDeliveryPreference, Members: &mEinvoiceDeliveryPreference, Type: smithy.ShapeTypeStructure, Ext: &eCreateProcurementPortalPreferenceRequest_EinvoiceDeliveryPreference})
+var sCreateProcurementPortalPreferenceRequest_PurchaseOrderRetrievalEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderRetrievalEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateProcurementPortalPreferenceRequest_PurchaseOrderRetrievalEnabled})
+var sCreateProcurementPortalPreferenceRequest_MarketplacePunchOutEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplacePunchOutEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eCreateProcurementPortalPreferenceRequest_MarketplacePunchOutEnabled})
+var sCreateProcurementPortalPreferenceRequest_MarketplacePunchOutPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplacePunchOutPreference", ID: &iMarketplacePunchOutPreference, Members: &mMarketplacePunchOutPreference, Type: smithy.ShapeTypeStructure, Ext: &eCreateProcurementPortalPreferenceRequest_MarketplacePunchOutPreference})
+var sCreateProcurementPortalPreferenceRequest_Contacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contacts", ID: &i_Contacts, Members: &m_Contacts, Type: smithy.ShapeTypeList, Ext: &eCreateProcurementPortalPreferenceRequest_Contacts})
+var sCreateProcurementPortalPreferenceRequest_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList, Ext: &eCreateProcurementPortalPreferenceRequest_ResourceTags})
+var sCreateProcurementPortalPreferenceRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eCreateProcurementPortalPreferenceRequest_ClientToken})
+var sCreateProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &eCreateProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn})
+var sDeleteInvoiceUnitRequest_InvoiceUnitArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceUnitArn", ID: &i_InvoiceUnitArnString, Type: smithy.ShapeTypeString, Ext: &eDeleteInvoiceUnitRequest_InvoiceUnitArn})
+var sDeleteInvoiceUnitRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eDeleteInvoiceUnitRequest_ClientToken})
+var sDeleteInvoiceUnitResponse_InvoiceUnitArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceUnitArn", ID: &i_InvoiceUnitArnString, Type: smithy.ShapeTypeString, Ext: &eDeleteInvoiceUnitResponse_InvoiceUnitArn})
+var sDeleteProcurementPortalPreferenceRequest_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &eDeleteProcurementPortalPreferenceRequest_ProcurementPortalPreferenceArn})
+var sDeleteProcurementPortalPreferenceRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eDeleteProcurementPortalPreferenceRequest_ClientToken})
+var sDeleteProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &eDeleteProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn})
+var sGetInvoicePDFRequest_InvoiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceId", ID: &i_StringWithoutNewLine, Type: smithy.ShapeTypeString, Ext: &eGetInvoicePDFRequest_InvoiceId})
+var sGetInvoicePDFResponse_InvoicePDF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoicePDF", ID: &iInvoicePDF, Members: &mInvoicePDF, Type: smithy.ShapeTypeStructure, Ext: &eGetInvoicePDFResponse_InvoicePDF})
+var sGetInvoiceUnitRequest_InvoiceUnitArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceUnitArn", ID: &i_InvoiceUnitArnString, Type: smithy.ShapeTypeString, Ext: &eGetInvoiceUnitRequest_InvoiceUnitArn})
+var sGetInvoiceUnitRequest_AsOf = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AsOf", ID: &i_AsOfTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetInvoiceUnitRequest_AsOf})
+var sGetInvoiceUnitResponse_InvoiceUnitArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceUnitArn", ID: &i_InvoiceUnitArnString, Type: smithy.ShapeTypeString, Ext: &eGetInvoiceUnitResponse_InvoiceUnitArn})
+var sGetInvoiceUnitResponse_InvoiceReceiver = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceReceiver", ID: &i_AccountIdString, Type: smithy.ShapeTypeString, Ext: &eGetInvoiceUnitResponse_InvoiceReceiver})
+var sGetInvoiceUnitResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_InvoiceUnitName, Type: smithy.ShapeTypeString, Ext: &eGetInvoiceUnitResponse_Name})
+var sGetInvoiceUnitResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString, Ext: &eGetInvoiceUnitResponse_Description})
+var sGetInvoiceUnitResponse_TaxInheritanceDisabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaxInheritanceDisabled", ID: &i_TaxInheritanceDisabledFlag, Type: smithy.ShapeTypeBoolean, Ext: &eGetInvoiceUnitResponse_TaxInheritanceDisabled})
+var sGetInvoiceUnitResponse_Rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rule", ID: &iInvoiceUnitRule, Members: &mInvoiceUnitRule, Type: smithy.ShapeTypeStructure, Ext: &eGetInvoiceUnitResponse_Rule})
+var sGetInvoiceUnitResponse_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i_LastModifiedTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetInvoiceUnitResponse_LastModified})
+var sGetProcurementPortalPreferenceRequest_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &eGetProcurementPortalPreferenceRequest_ProcurementPortalPreferenceArn})
+var sGetProcurementPortalPreferenceResponse_ProcurementPortalPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreference", ID: &iProcurementPortalPreference, Members: &mProcurementPortalPreference, Type: smithy.ShapeTypeStructure, Ext: &eGetProcurementPortalPreferenceResponse_ProcurementPortalPreference})
+var sListInvoiceSummariesRequest_Selector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Selector", ID: &iInvoiceSummariesSelector, Members: &mInvoiceSummariesSelector, Type: smithy.ShapeTypeStructure, Ext: &eListInvoiceSummariesRequest_Selector})
+var sListInvoiceSummariesRequest_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &iInvoiceSummariesFilter, Members: &mInvoiceSummariesFilter, Type: smithy.ShapeTypeStructure, Ext: &eListInvoiceSummariesRequest_Filter})
+var sListInvoiceSummariesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenString, Type: smithy.ShapeTypeString, Ext: &eListInvoiceSummariesRequest_NextToken})
+var sListInvoiceSummariesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_InvoiceSummariesMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListInvoiceSummariesRequest_MaxResults})
+var sListInvoiceSummariesResponse_InvoiceSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceSummaries", ID: &i_InvoiceSummaries, Members: &m_InvoiceSummaries, Type: smithy.ShapeTypeList, Ext: &eListInvoiceSummariesResponse_InvoiceSummaries})
+var sListInvoiceSummariesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenString, Type: smithy.ShapeTypeString, Ext: &eListInvoiceSummariesResponse_NextToken})
+var sListInvoiceUnitsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iFilters, Members: &mFilters, Type: smithy.ShapeTypeStructure, Ext: &eListInvoiceUnitsRequest_Filters})
+var sListInvoiceUnitsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenString, Type: smithy.ShapeTypeString, Ext: &eListInvoiceUnitsRequest_NextToken})
+var sListInvoiceUnitsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsInteger, Type: smithy.ShapeTypeInteger, Ext: &eListInvoiceUnitsRequest_MaxResults})
+var sListInvoiceUnitsRequest_AsOf = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AsOf", ID: &i_AsOfTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListInvoiceUnitsRequest_AsOf})
+var sListInvoiceUnitsResponse_InvoiceUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceUnits", ID: &i_InvoiceUnits, Members: &m_InvoiceUnits, Type: smithy.ShapeTypeList, Ext: &eListInvoiceUnitsResponse_InvoiceUnits})
+var sListInvoiceUnitsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextTokenString, Type: smithy.ShapeTypeString, Ext: &eListInvoiceUnitsResponse_NextToken})
+var sListProcurementPortalPreferencesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eListProcurementPortalPreferencesRequest_NextToken})
+var sListProcurementPortalPreferencesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListProcurementPortalPreferencesRequest_MaxResults})
+var sListProcurementPortalPreferencesResponse_ProcurementPortalPreferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferences", ID: &i_ProcurementPortalPreferenceSummaries, Members: &m_ProcurementPortalPreferenceSummaries, Type: smithy.ShapeTypeList, Ext: &eListProcurementPortalPreferencesResponse_ProcurementPortalPreferences})
+var sListProcurementPortalPreferencesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eListProcurementPortalPreferencesResponse_NextToken})
+var sListProcurementPortalsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eListProcurementPortalsRequest_NextToken})
+var sListProcurementPortalsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListProcurementPortalsRequest_MaxResults})
+var sListProcurementPortalsResponse_ProcurementPortals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortals", ID: &i_ProcurementPortals, Members: &m_ProcurementPortals, Type: smithy.ShapeTypeList, Ext: &eListProcurementPortalsResponse_ProcurementPortals})
+var sListProcurementPortalsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eListProcurementPortalsResponse_NextToken})
+var sListProcurementPortalSuppliersRequest_PortalIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalIdentifier", ID: &i_ProcurementPortalIdString, Type: smithy.ShapeTypeString, Ext: &eListProcurementPortalSuppliersRequest_PortalIdentifier})
+var sListProcurementPortalSuppliersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eListProcurementPortalSuppliersRequest_NextToken})
+var sListProcurementPortalSuppliersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListProcurementPortalSuppliersRequest_MaxResults})
+var sListProcurementPortalSuppliersResponse_ProcurementPortalSuppliers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalSuppliers", ID: &i_ProcurementPortalSuppliers, Members: &m_ProcurementPortalSuppliers, Type: smithy.ShapeTypeList, Ext: &eListProcurementPortalSuppliersResponse_ProcurementPortalSuppliers})
+var sListProcurementPortalSuppliersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eListProcurementPortalSuppliersResponse_NextToken})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_TagrisArn, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceResponse_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_ResourceTags})
+var sPutProcurementPortalPreferenceRequest_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &ePutProcurementPortalPreferenceRequest_ProcurementPortalPreferenceArn})
+var sPutProcurementPortalPreferenceRequest_Selector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Selector", ID: &iProcurementPortalPreferenceSelector, Members: &mProcurementPortalPreferenceSelector, Type: smithy.ShapeTypeStructure, Ext: &ePutProcurementPortalPreferenceRequest_Selector})
+var sPutProcurementPortalPreferenceRequest_ProcurementPortalSharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalSharedSecret", ID: &i_SensitiveBasicStringWithoutSpace, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ePutProcurementPortalPreferenceRequest_ProcurementPortalSharedSecret})
+var sPutProcurementPortalPreferenceRequest_ProcurementPortalInstanceEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalInstanceEndpoint", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ePutProcurementPortalPreferenceRequest_ProcurementPortalInstanceEndpoint})
+var sPutProcurementPortalPreferenceRequest_TestEnvPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TestEnvPreference", ID: &iTestEnvPreferenceInput, Members: &mTestEnvPreferenceInput, Type: smithy.ShapeTypeStructure, Ext: &ePutProcurementPortalPreferenceRequest_TestEnvPreference})
+var sPutProcurementPortalPreferenceRequest_EinvoiceDeliveryEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ePutProcurementPortalPreferenceRequest_EinvoiceDeliveryEnabled})
+var sPutProcurementPortalPreferenceRequest_EinvoiceDeliveryPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryPreference", ID: &iEinvoiceDeliveryPreference, Members: &mEinvoiceDeliveryPreference, Type: smithy.ShapeTypeStructure, Ext: &ePutProcurementPortalPreferenceRequest_EinvoiceDeliveryPreference})
+var sPutProcurementPortalPreferenceRequest_PurchaseOrderRetrievalEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderRetrievalEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ePutProcurementPortalPreferenceRequest_PurchaseOrderRetrievalEnabled})
+var sPutProcurementPortalPreferenceRequest_MarketplacePunchOutEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplacePunchOutEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ePutProcurementPortalPreferenceRequest_MarketplacePunchOutEnabled})
+var sPutProcurementPortalPreferenceRequest_MarketplacePunchOutPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplacePunchOutPreference", ID: &iMarketplacePunchOutPreference, Members: &mMarketplacePunchOutPreference, Type: smithy.ShapeTypeStructure, Ext: &ePutProcurementPortalPreferenceRequest_MarketplacePunchOutPreference})
+var sPutProcurementPortalPreferenceRequest_Contacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contacts", ID: &i_Contacts, Members: &m_Contacts, Type: smithy.ShapeTypeList, Ext: &ePutProcurementPortalPreferenceRequest_Contacts})
+var sPutProcurementPortalPreferenceRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &ePutProcurementPortalPreferenceRequest_ClientToken})
+var sPutProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &ePutProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn})
+var sSendProcurementPortalValidationRequest_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &eSendProcurementPortalValidationRequest_ProcurementPortalPreferenceArn})
+var sSendProcurementPortalValidationRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eSendProcurementPortalValidationRequest_ClientToken})
+var sSendProcurementPortalValidationResponse_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &eSendProcurementPortalValidationResponse_ProcurementPortalPreferenceArn})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_TagrisArn, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_ResourceTags})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_TagrisArn, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_ResourceTagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTagKeys", ID: &i_ResourceTagKeyList, Members: &m_ResourceTagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_ResourceTagKeys})
+var sUpdateInvoiceUnitRequest_InvoiceUnitArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceUnitArn", ID: &i_InvoiceUnitArnString, Type: smithy.ShapeTypeString, Ext: &eUpdateInvoiceUnitRequest_InvoiceUnitArn})
+var sUpdateInvoiceUnitRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString, Ext: &eUpdateInvoiceUnitRequest_Description})
+var sUpdateInvoiceUnitRequest_TaxInheritanceDisabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaxInheritanceDisabled", ID: &i_TaxInheritanceDisabledFlag, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateInvoiceUnitRequest_TaxInheritanceDisabled})
+var sUpdateInvoiceUnitRequest_Rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rule", ID: &iInvoiceUnitRule, Members: &mInvoiceUnitRule, Type: smithy.ShapeTypeStructure, Ext: &eUpdateInvoiceUnitRequest_Rule})
+var sUpdateInvoiceUnitRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eUpdateInvoiceUnitRequest_ClientToken})
+var sUpdateInvoiceUnitResponse_InvoiceUnitArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvoiceUnitArn", ID: &i_InvoiceUnitArnString, Type: smithy.ShapeTypeString, Ext: &eUpdateInvoiceUnitResponse_InvoiceUnitArn})
+var sUpdateProcurementPortalPreferenceStatusRequest_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &eUpdateProcurementPortalPreferenceStatusRequest_ProcurementPortalPreferenceArn})
+var sUpdateProcurementPortalPreferenceStatusRequest_EinvoiceDeliveryPreferenceStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryPreferenceStatus", ID: &iProcurementPortalPreferenceStatus, Members: &mProcurementPortalPreferenceStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateProcurementPortalPreferenceStatusRequest_EinvoiceDeliveryPreferenceStatus})
+var sUpdateProcurementPortalPreferenceStatusRequest_EinvoiceDeliveryPreferenceStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EinvoiceDeliveryPreferenceStatusReason", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eUpdateProcurementPortalPreferenceStatusRequest_EinvoiceDeliveryPreferenceStatusReason})
+var sUpdateProcurementPortalPreferenceStatusRequest_PurchaseOrderRetrievalPreferenceStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderRetrievalPreferenceStatus", ID: &iProcurementPortalPreferenceStatus, Members: &mProcurementPortalPreferenceStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateProcurementPortalPreferenceStatusRequest_PurchaseOrderRetrievalPreferenceStatus})
+var sUpdateProcurementPortalPreferenceStatusRequest_PurchaseOrderRetrievalPreferenceStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PurchaseOrderRetrievalPreferenceStatusReason", ID: &i_BasicString, Type: smithy.ShapeTypeString, Ext: &eUpdateProcurementPortalPreferenceStatusRequest_PurchaseOrderRetrievalPreferenceStatusReason})
+var sUpdateProcurementPortalPreferenceStatusRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eUpdateProcurementPortalPreferenceStatusRequest_ClientToken})
+var sUpdateProcurementPortalPreferenceStatusResponse_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &eUpdateProcurementPortalPreferenceStatusResponse_ProcurementPortalPreferenceArn})
+var sVerifyProcurementPortalValidationRequest_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &eVerifyProcurementPortalValidationRequest_ProcurementPortalPreferenceArn})
+var sVerifyProcurementPortalValidationRequest_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eVerifyProcurementPortalValidationRequest_Code})
+var sVerifyProcurementPortalValidationRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_BasicStringWithoutSpace, Type: smithy.ShapeTypeString, Ext: &eVerifyProcurementPortalValidationRequest_ClientToken})
+var sVerifyProcurementPortalValidationResponse_ProcurementPortalPreferenceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcurementPortalPreferenceArn", ID: &i_ProcurementPortalPreferenceArnString, Type: smithy.ShapeTypeString, Ext: &eVerifyProcurementPortalValidationResponse_ProcurementPortalPreferenceArn})
 
 var BatchGetInvoiceProfile = &sBatchGetInvoiceProfile
 

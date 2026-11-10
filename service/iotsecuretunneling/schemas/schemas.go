@@ -7,9 +7,129 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [121]smithy.SchemaExtensions
+var (
+	eCloseTunnel                                            smithy.SchemaExtensions
+	eDescribeTunnel                                         smithy.SchemaExtensions
+	eListTagsForResource                                    smithy.SchemaExtensions
+	eListTunnels                                            smithy.SchemaExtensions
+	eOpenTunnel                                             smithy.SchemaExtensions
+	eRotateTunnelAccessToken                                smithy.SchemaExtensions
+	eTagResource                                            smithy.SchemaExtensions
+	eUntagResource                                          smithy.SchemaExtensions
+	e_IoTSecuredTunneling                                   smithy.SchemaExtensions
+	e_AmazonResourceName                                    smithy.SchemaExtensions
+	e_ClientAccessToken                                     smithy.SchemaExtensions
+	eClientMode                                             smithy.SchemaExtensions
+	eClientMode_SOURCE                                      smithy.SchemaExtensions
+	eClientMode_DESTINATION                                 smithy.SchemaExtensions
+	eClientMode_ALL                                         smithy.SchemaExtensions
+	eConnectionState                                        smithy.SchemaExtensions
+	eConnectionState_status                                 smithy.SchemaExtensions
+	eConnectionState_lastUpdatedAt                          smithy.SchemaExtensions
+	eConnectionStatus                                       smithy.SchemaExtensions
+	eConnectionStatus_CONNECTED                             smithy.SchemaExtensions
+	eConnectionStatus_DISCONNECTED                          smithy.SchemaExtensions
+	e_DateType                                              smithy.SchemaExtensions
+	e_DeleteFlag                                            smithy.SchemaExtensions
+	e_Description                                           smithy.SchemaExtensions
+	eDestinationConfig                                      smithy.SchemaExtensions
+	eDestinationConfig_thingName                            smithy.SchemaExtensions
+	eDestinationConfig_services                             smithy.SchemaExtensions
+	e_ErrorMessage                                          smithy.SchemaExtensions
+	eLimitExceededException                                 smithy.SchemaExtensions
+	eLimitExceededException_message                         smithy.SchemaExtensions
+	e_MaxResults                                            smithy.SchemaExtensions
+	e_NextToken                                             smithy.SchemaExtensions
+	eResourceNotFoundException                              smithy.SchemaExtensions
+	eResourceNotFoundException_message                      smithy.SchemaExtensions
+	e_Service                                               smithy.SchemaExtensions
+	e_ServiceList                                           smithy.SchemaExtensions
+	e_ServiceList_member                                    smithy.SchemaExtensions
+	eTag                                                    smithy.SchemaExtensions
+	eTag_key                                                smithy.SchemaExtensions
+	eTag_value                                              smithy.SchemaExtensions
+	e_TagKey                                                smithy.SchemaExtensions
+	e_TagKeyList                                            smithy.SchemaExtensions
+	e_TagKeyList_member                                     smithy.SchemaExtensions
+	e_TagList                                               smithy.SchemaExtensions
+	e_TagList_member                                        smithy.SchemaExtensions
+	e_TagValue                                              smithy.SchemaExtensions
+	e_ThingName                                             smithy.SchemaExtensions
+	eTimeoutConfig                                          smithy.SchemaExtensions
+	eTimeoutConfig_maxLifetimeTimeoutMinutes                smithy.SchemaExtensions
+	e_TimeoutInMin                                          smithy.SchemaExtensions
+	eTunnel                                                 smithy.SchemaExtensions
+	eTunnel_tunnelId                                        smithy.SchemaExtensions
+	eTunnel_tunnelArn                                       smithy.SchemaExtensions
+	eTunnel_status                                          smithy.SchemaExtensions
+	eTunnel_sourceConnectionState                           smithy.SchemaExtensions
+	eTunnel_destinationConnectionState                      smithy.SchemaExtensions
+	eTunnel_description                                     smithy.SchemaExtensions
+	eTunnel_destinationConfig                               smithy.SchemaExtensions
+	eTunnel_timeoutConfig                                   smithy.SchemaExtensions
+	eTunnel_tags                                            smithy.SchemaExtensions
+	eTunnel_createdAt                                       smithy.SchemaExtensions
+	eTunnel_lastUpdatedAt                                   smithy.SchemaExtensions
+	e_TunnelArn                                             smithy.SchemaExtensions
+	e_TunnelId                                              smithy.SchemaExtensions
+	eTunnelStatus                                           smithy.SchemaExtensions
+	eTunnelStatus_OPEN                                      smithy.SchemaExtensions
+	eTunnelStatus_CLOSED                                    smithy.SchemaExtensions
+	eTunnelSummary                                          smithy.SchemaExtensions
+	eTunnelSummary_tunnelId                                 smithy.SchemaExtensions
+	eTunnelSummary_tunnelArn                                smithy.SchemaExtensions
+	eTunnelSummary_status                                   smithy.SchemaExtensions
+	eTunnelSummary_description                              smithy.SchemaExtensions
+	eTunnelSummary_createdAt                                smithy.SchemaExtensions
+	eTunnelSummary_lastUpdatedAt                            smithy.SchemaExtensions
+	e_TunnelSummaryList                                     smithy.SchemaExtensions
+	e_TunnelSummaryList_member                              smithy.SchemaExtensions
+	eCloseTunnelRequest                                     smithy.SchemaExtensions
+	eCloseTunnelRequest_tunnelId                            smithy.SchemaExtensions
+	eCloseTunnelRequest_delete                              smithy.SchemaExtensions
+	eCloseTunnelResponse                                    smithy.SchemaExtensions
+	eDescribeTunnelRequest                                  smithy.SchemaExtensions
+	eDescribeTunnelRequest_tunnelId                         smithy.SchemaExtensions
+	eDescribeTunnelResponse                                 smithy.SchemaExtensions
+	eDescribeTunnelResponse_tunnel                          smithy.SchemaExtensions
+	eListTagsForResourceRequest                             smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceArn                 smithy.SchemaExtensions
+	eListTagsForResourceResponse                            smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                       smithy.SchemaExtensions
+	eListTunnelsRequest                                     smithy.SchemaExtensions
+	eListTunnelsRequest_thingName                           smithy.SchemaExtensions
+	eListTunnelsRequest_maxResults                          smithy.SchemaExtensions
+	eListTunnelsRequest_nextToken                           smithy.SchemaExtensions
+	eListTunnelsResponse                                    smithy.SchemaExtensions
+	eListTunnelsResponse_tunnelSummaries                    smithy.SchemaExtensions
+	eListTunnelsResponse_nextToken                          smithy.SchemaExtensions
+	eOpenTunnelRequest                                      smithy.SchemaExtensions
+	eOpenTunnelRequest_description                          smithy.SchemaExtensions
+	eOpenTunnelRequest_tags                                 smithy.SchemaExtensions
+	eOpenTunnelRequest_destinationConfig                    smithy.SchemaExtensions
+	eOpenTunnelRequest_timeoutConfig                        smithy.SchemaExtensions
+	eOpenTunnelResponse                                     smithy.SchemaExtensions
+	eOpenTunnelResponse_tunnelId                            smithy.SchemaExtensions
+	eOpenTunnelResponse_tunnelArn                           smithy.SchemaExtensions
+	eOpenTunnelResponse_sourceAccessToken                   smithy.SchemaExtensions
+	eOpenTunnelResponse_destinationAccessToken              smithy.SchemaExtensions
+	eRotateTunnelAccessTokenRequest                         smithy.SchemaExtensions
+	eRotateTunnelAccessTokenRequest_tunnelId                smithy.SchemaExtensions
+	eRotateTunnelAccessTokenRequest_clientMode              smithy.SchemaExtensions
+	eRotateTunnelAccessTokenRequest_destinationConfig       smithy.SchemaExtensions
+	eRotateTunnelAccessTokenResponse                        smithy.SchemaExtensions
+	eRotateTunnelAccessTokenResponse_tunnelArn              smithy.SchemaExtensions
+	eRotateTunnelAccessTokenResponse_sourceAccessToken      smithy.SchemaExtensions
+	eRotateTunnelAccessTokenResponse_destinationAccessToken smithy.SchemaExtensions
+	eTagResourceRequest                                     smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                         smithy.SchemaExtensions
+	eTagResourceRequest_tags                                smithy.SchemaExtensions
+	eTagResourceResponse                                    smithy.SchemaExtensions
+	eUntagResourceRequest                                   smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                       smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                           smithy.SchemaExtensions
+	eUntagResourceResponse                                  smithy.SchemaExtensions
+)
 
 var (
 	iCloseTunnel                     = smithy.ShapeID{Namespace: "com.amazonaws.iotsecuretunneling", Name: "CloseTunnel"}
@@ -139,128 +259,128 @@ var mRotateTunnelAccessTokenResponse = smithy.SchemaMembers{List: []*smithy.Sche
 var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
 var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
 
-var sCloseTunnel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloseTunnel, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sDescribeTunnel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTunnel, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sListTunnels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTunnels, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sOpenTunnel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenTunnel, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sRotateTunnelAccessToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateTunnelAccessToken, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var s_IoTSecuredTunneling = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IoTSecuredTunneling, Type: smithy.ShapeTypeService, Ext: &ext[8]})
-var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[9]})
-var s_ClientAccessToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientAccessToken, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &ext[10]})
-var sClientMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientMode, Members: &mClientMode, Type: smithy.ShapeTypeEnum, Ext: &ext[11]})
-var sConnectionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeStructure, Ext: &ext[15]})
-var sConnectionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionStatus, Members: &mConnectionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[18]})
-var s_DateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[21]})
-var s_DeleteFlag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeleteFlag, Type: smithy.ShapeTypeBoolean, Ext: &ext[22]})
-var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[23]})
-var sDestinationConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationConfig, Members: &mDestinationConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[24]})
-var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[27]})
-var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[30]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &ext[32]})
-var s_Service = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Service, Type: smithy.ShapeTypeString, Ext: &ext[34]})
-var s_ServiceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceList, Members: &m_ServiceList, Type: smithy.ShapeTypeList, Ext: &ext[35]})
-var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[41]})
-var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[43]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var s_ThingName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThingName, Type: smithy.ShapeTypeString, Ext: &ext[46]})
-var sTimeoutConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeoutConfig, Members: &mTimeoutConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[47]})
-var s_TimeoutInMin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeoutInMin, Type: smithy.ShapeTypeInteger, Ext: &ext[49]})
-var sTunnel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTunnel, Members: &mTunnel, Type: smithy.ShapeTypeStructure, Ext: &ext[50]})
-var s_TunnelArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TunnelArn, Type: smithy.ShapeTypeString, Ext: &ext[62]})
-var s_TunnelId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TunnelId, Type: smithy.ShapeTypeString, Ext: &ext[63]})
-var sTunnelStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTunnelStatus, Members: &mTunnelStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[64]})
-var sTunnelSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTunnelSummary, Members: &mTunnelSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[67]})
-var s_TunnelSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TunnelSummaryList, Members: &m_TunnelSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[74]})
-var sCloseTunnelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloseTunnelRequest, Members: &mCloseTunnelRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[76]})
-var sCloseTunnelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloseTunnelResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[79]})
-var sDescribeTunnelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTunnelRequest, Members: &mDescribeTunnelRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var sDescribeTunnelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTunnelResponse, Members: &mDescribeTunnelResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[82]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[84]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[86]})
-var sListTunnelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTunnelsRequest, Members: &mListTunnelsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[88]})
-var sListTunnelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTunnelsResponse, Members: &mListTunnelsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[92]})
-var sOpenTunnelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenTunnelRequest, Members: &mOpenTunnelRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[95]})
-var sOpenTunnelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenTunnelResponse, Members: &mOpenTunnelResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[100]})
-var sRotateTunnelAccessTokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateTunnelAccessTokenRequest, Members: &mRotateTunnelAccessTokenRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[105]})
-var sRotateTunnelAccessTokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateTunnelAccessTokenResponse, Members: &mRotateTunnelAccessTokenResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[109]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[113]})
-var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[116]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[117]})
-var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
+var sCloseTunnel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloseTunnel, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCloseTunnel})
+var sDescribeTunnel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTunnel, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eDescribeTunnel})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListTunnels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTunnels, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eListTunnels})
+var sOpenTunnel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenTunnel, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eOpenTunnel})
+var sRotateTunnelAccessToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateTunnelAccessToken, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eRotateTunnelAccessToken})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var s_IoTSecuredTunneling = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IoTSecuredTunneling, Type: smithy.ShapeTypeService, Ext: &e_IoTSecuredTunneling})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &e_AmazonResourceName})
+var s_ClientAccessToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientAccessToken, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &e_ClientAccessToken})
+var sClientMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientMode, Members: &mClientMode, Type: smithy.ShapeTypeEnum, Ext: &eClientMode})
+var sConnectionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeStructure, Ext: &eConnectionState})
+var sConnectionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionStatus, Members: &mConnectionStatus, Type: smithy.ShapeTypeEnum, Ext: &eConnectionStatus})
+var s_DateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &e_DateType})
+var s_DeleteFlag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeleteFlag, Type: smithy.ShapeTypeBoolean, Ext: &e_DeleteFlag})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &e_Description})
+var sDestinationConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationConfig, Members: &mDestinationConfig, Type: smithy.ShapeTypeStructure, Ext: &eDestinationConfig})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var s_Service = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Service, Type: smithy.ShapeTypeString, Ext: &e_Service})
+var s_ServiceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceList, Members: &m_ServiceList, Type: smithy.ShapeTypeList, Ext: &e_ServiceList})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_ThingName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThingName, Type: smithy.ShapeTypeString, Ext: &e_ThingName})
+var sTimeoutConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeoutConfig, Members: &mTimeoutConfig, Type: smithy.ShapeTypeStructure, Ext: &eTimeoutConfig})
+var s_TimeoutInMin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeoutInMin, Type: smithy.ShapeTypeInteger, Ext: &e_TimeoutInMin})
+var sTunnel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTunnel, Members: &mTunnel, Type: smithy.ShapeTypeStructure, Ext: &eTunnel})
+var s_TunnelArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TunnelArn, Type: smithy.ShapeTypeString, Ext: &e_TunnelArn})
+var s_TunnelId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TunnelId, Type: smithy.ShapeTypeString, Ext: &e_TunnelId})
+var sTunnelStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTunnelStatus, Members: &mTunnelStatus, Type: smithy.ShapeTypeEnum, Ext: &eTunnelStatus})
+var sTunnelSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTunnelSummary, Members: &mTunnelSummary, Type: smithy.ShapeTypeStructure, Ext: &eTunnelSummary})
+var s_TunnelSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TunnelSummaryList, Members: &m_TunnelSummaryList, Type: smithy.ShapeTypeList, Ext: &e_TunnelSummaryList})
+var sCloseTunnelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloseTunnelRequest, Members: &mCloseTunnelRequest, Type: smithy.ShapeTypeStructure, Ext: &eCloseTunnelRequest})
+var sCloseTunnelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloseTunnelResponse, Type: smithy.ShapeTypeStructure, Ext: &eCloseTunnelResponse})
+var sDescribeTunnelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTunnelRequest, Members: &mDescribeTunnelRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTunnelRequest})
+var sDescribeTunnelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTunnelResponse, Members: &mDescribeTunnelResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTunnelResponse})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sListTunnelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTunnelsRequest, Members: &mListTunnelsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTunnelsRequest})
+var sListTunnelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTunnelsResponse, Members: &mListTunnelsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTunnelsResponse})
+var sOpenTunnelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenTunnelRequest, Members: &mOpenTunnelRequest, Type: smithy.ShapeTypeStructure, Ext: &eOpenTunnelRequest})
+var sOpenTunnelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenTunnelResponse, Members: &mOpenTunnelResponse, Type: smithy.ShapeTypeStructure, Ext: &eOpenTunnelResponse})
+var sRotateTunnelAccessTokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateTunnelAccessTokenRequest, Members: &mRotateTunnelAccessTokenRequest, Type: smithy.ShapeTypeStructure, Ext: &eRotateTunnelAccessTokenRequest})
+var sRotateTunnelAccessTokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateTunnelAccessTokenResponse, Members: &mRotateTunnelAccessTokenResponse, Type: smithy.ShapeTypeStructure, Ext: &eRotateTunnelAccessTokenResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
 
-var sClientMode_SOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[12]})
-var sClientMode_DESTINATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESTINATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[13]})
-var sClientMode_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[14]})
-var sConnectionState_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iConnectionStatus, Members: &mConnectionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[16]})
-var sConnectionState_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[17]})
-var sConnectionStatus_CONNECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONNECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[19]})
-var sConnectionStatus_DISCONNECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISCONNECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[20]})
-var sDestinationConfig_thingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thingName", ID: &i_ThingName, Type: smithy.ShapeTypeString, Ext: &ext[25]})
-var sDestinationConfig_services = smithy.NewStaticSchema(smithy.StaticSchema{Member: "services", ID: &i_ServiceList, Members: &m_ServiceList, Type: smithy.ShapeTypeList, Ext: &ext[26]})
-var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[29]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var s_ServiceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Service, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var sTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[38]})
-var sTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[39]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[44]})
-var sTimeoutConfig_maxLifetimeTimeoutMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxLifetimeTimeoutMinutes", ID: &i_TimeoutInMin, Type: smithy.ShapeTypeInteger, Ext: &ext[48]})
-var sTunnel_tunnelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tunnelId", ID: &i_TunnelId, Type: smithy.ShapeTypeString, Ext: &ext[51]})
-var sTunnel_tunnelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tunnelArn", ID: &i_TunnelArn, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var sTunnel_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTunnelStatus, Members: &mTunnelStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[53]})
-var sTunnel_sourceConnectionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceConnectionState", ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeStructure, Ext: &ext[54]})
-var sTunnel_destinationConnectionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConnectionState", ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeStructure, Ext: &ext[55]})
-var sTunnel_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[56]})
-var sTunnel_destinationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConfig", ID: &iDestinationConfig, Members: &mDestinationConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[57]})
-var sTunnel_timeoutConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutConfig", ID: &iTimeoutConfig, Members: &mTimeoutConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[58]})
-var sTunnel_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[59]})
-var sTunnel_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[60]})
-var sTunnel_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[61]})
-var sTunnelStatus_OPEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[65]})
-var sTunnelStatus_CLOSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOSED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[66]})
-var sTunnelSummary_tunnelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tunnelId", ID: &i_TunnelId, Type: smithy.ShapeTypeString, Ext: &ext[68]})
-var sTunnelSummary_tunnelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tunnelArn", ID: &i_TunnelArn, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var sTunnelSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTunnelStatus, Members: &mTunnelStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[70]})
-var sTunnelSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[71]})
-var sTunnelSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[72]})
-var sTunnelSummary_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &ext[73]})
-var s_TunnelSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTunnelSummary, Members: &mTunnelSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[75]})
-var sCloseTunnelRequest_tunnelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tunnelId", ID: &i_TunnelId, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &ext[77]})
-var sCloseTunnelRequest_delete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "delete", ID: &i_DeleteFlag, Traits: &t12, Type: smithy.ShapeTypeBoolean, Ext: &ext[78]})
-var sDescribeTunnelRequest_tunnelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tunnelId", ID: &i_TunnelId, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &ext[81]})
-var sDescribeTunnelResponse_tunnel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tunnel", ID: &iTunnel, Members: &mTunnel, Type: smithy.ShapeTypeStructure, Ext: &ext[83]})
-var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AmazonResourceName, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &ext[85]})
-var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[87]})
-var sListTunnelsRequest_thingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thingName", ID: &i_ThingName, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[89]})
-var sListTunnelsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t15, Type: smithy.ShapeTypeInteger, Ext: &ext[90]})
-var sListTunnelsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t16, Type: smithy.ShapeTypeString, Ext: &ext[91]})
-var sListTunnelsResponse_tunnelSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tunnelSummaries", ID: &i_TunnelSummaryList, Members: &m_TunnelSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[93]})
-var sListTunnelsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[94]})
-var sOpenTunnelRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[96]})
-var sOpenTunnelRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[97]})
-var sOpenTunnelRequest_destinationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConfig", ID: &iDestinationConfig, Members: &mDestinationConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[98]})
-var sOpenTunnelRequest_timeoutConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutConfig", ID: &iTimeoutConfig, Members: &mTimeoutConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[99]})
-var sOpenTunnelResponse_tunnelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tunnelId", ID: &i_TunnelId, Type: smithy.ShapeTypeString, Ext: &ext[101]})
-var sOpenTunnelResponse_tunnelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tunnelArn", ID: &i_TunnelArn, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var sOpenTunnelResponse_sourceAccessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceAccessToken", ID: &i_ClientAccessToken, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[103]})
-var sOpenTunnelResponse_destinationAccessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationAccessToken", ID: &i_ClientAccessToken, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[104]})
-var sRotateTunnelAccessTokenRequest_tunnelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tunnelId", ID: &i_TunnelId, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &ext[106]})
-var sRotateTunnelAccessTokenRequest_clientMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientMode", ID: &iClientMode, Members: &mClientMode, Type: smithy.ShapeTypeEnum, Ext: &ext[107]})
-var sRotateTunnelAccessTokenRequest_destinationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConfig", ID: &iDestinationConfig, Members: &mDestinationConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[108]})
-var sRotateTunnelAccessTokenResponse_tunnelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tunnelArn", ID: &i_TunnelArn, Type: smithy.ShapeTypeString, Ext: &ext[110]})
-var sRotateTunnelAccessTokenResponse_sourceAccessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceAccessToken", ID: &i_ClientAccessToken, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[111]})
-var sRotateTunnelAccessTokenResponse_destinationAccessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationAccessToken", ID: &i_ClientAccessToken, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[112]})
-var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[114]})
-var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[115]})
-var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[118]})
-var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[119]})
+var sClientMode_SOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClientMode_SOURCE})
+var sClientMode_DESTINATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESTINATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClientMode_DESTINATION})
+var sClientMode_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eClientMode_ALL})
+var sConnectionState_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iConnectionStatus, Members: &mConnectionStatus, Type: smithy.ShapeTypeEnum, Ext: &eConnectionState_status})
+var sConnectionState_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eConnectionState_lastUpdatedAt})
+var sConnectionStatus_CONNECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONNECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionStatus_CONNECTED})
+var sConnectionStatus_DISCONNECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISCONNECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConnectionStatus_DISCONNECTED})
+var sDestinationConfig_thingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thingName", ID: &i_ThingName, Type: smithy.ShapeTypeString, Ext: &eDestinationConfig_thingName})
+var sDestinationConfig_services = smithy.NewStaticSchema(smithy.StaticSchema{Member: "services", ID: &i_ServiceList, Members: &m_ServiceList, Type: smithy.ShapeTypeList, Ext: &eDestinationConfig_services})
+var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_message})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var s_ServiceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Service, Type: smithy.ShapeTypeString, Ext: &e_ServiceList_member})
+var sTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_key})
+var sTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_value})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var sTimeoutConfig_maxLifetimeTimeoutMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxLifetimeTimeoutMinutes", ID: &i_TimeoutInMin, Type: smithy.ShapeTypeInteger, Ext: &eTimeoutConfig_maxLifetimeTimeoutMinutes})
+var sTunnel_tunnelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tunnelId", ID: &i_TunnelId, Type: smithy.ShapeTypeString, Ext: &eTunnel_tunnelId})
+var sTunnel_tunnelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tunnelArn", ID: &i_TunnelArn, Type: smithy.ShapeTypeString, Ext: &eTunnel_tunnelArn})
+var sTunnel_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTunnelStatus, Members: &mTunnelStatus, Type: smithy.ShapeTypeEnum, Ext: &eTunnel_status})
+var sTunnel_sourceConnectionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceConnectionState", ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeStructure, Ext: &eTunnel_sourceConnectionState})
+var sTunnel_destinationConnectionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConnectionState", ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeStructure, Ext: &eTunnel_destinationConnectionState})
+var sTunnel_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eTunnel_description})
+var sTunnel_destinationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConfig", ID: &iDestinationConfig, Members: &mDestinationConfig, Type: smithy.ShapeTypeStructure, Ext: &eTunnel_destinationConfig})
+var sTunnel_timeoutConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutConfig", ID: &iTimeoutConfig, Members: &mTimeoutConfig, Type: smithy.ShapeTypeStructure, Ext: &eTunnel_timeoutConfig})
+var sTunnel_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTunnel_tags})
+var sTunnel_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eTunnel_createdAt})
+var sTunnel_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eTunnel_lastUpdatedAt})
+var sTunnelStatus_OPEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTunnelStatus_OPEN})
+var sTunnelStatus_CLOSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOSED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTunnelStatus_CLOSED})
+var sTunnelSummary_tunnelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tunnelId", ID: &i_TunnelId, Type: smithy.ShapeTypeString, Ext: &eTunnelSummary_tunnelId})
+var sTunnelSummary_tunnelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tunnelArn", ID: &i_TunnelArn, Type: smithy.ShapeTypeString, Ext: &eTunnelSummary_tunnelArn})
+var sTunnelSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTunnelStatus, Members: &mTunnelStatus, Type: smithy.ShapeTypeEnum, Ext: &eTunnelSummary_status})
+var sTunnelSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eTunnelSummary_description})
+var sTunnelSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eTunnelSummary_createdAt})
+var sTunnelSummary_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &i_DateType, Type: smithy.ShapeTypeTimestamp, Ext: &eTunnelSummary_lastUpdatedAt})
+var s_TunnelSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTunnelSummary, Members: &mTunnelSummary, Type: smithy.ShapeTypeStructure, Ext: &e_TunnelSummaryList_member})
+var sCloseTunnelRequest_tunnelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tunnelId", ID: &i_TunnelId, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &eCloseTunnelRequest_tunnelId})
+var sCloseTunnelRequest_delete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "delete", ID: &i_DeleteFlag, Traits: &t12, Type: smithy.ShapeTypeBoolean, Ext: &eCloseTunnelRequest_delete})
+var sDescribeTunnelRequest_tunnelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tunnelId", ID: &i_TunnelId, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &eDescribeTunnelRequest_tunnelId})
+var sDescribeTunnelResponse_tunnel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tunnel", ID: &iTunnel, Members: &mTunnel, Type: smithy.ShapeTypeStructure, Ext: &eDescribeTunnelResponse_tunnel})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AmazonResourceName, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_tags})
+var sListTunnelsRequest_thingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thingName", ID: &i_ThingName, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eListTunnelsRequest_thingName})
+var sListTunnelsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t15, Type: smithy.ShapeTypeInteger, Ext: &eListTunnelsRequest_maxResults})
+var sListTunnelsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t16, Type: smithy.ShapeTypeString, Ext: &eListTunnelsRequest_nextToken})
+var sListTunnelsResponse_tunnelSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tunnelSummaries", ID: &i_TunnelSummaryList, Members: &m_TunnelSummaryList, Type: smithy.ShapeTypeList, Ext: &eListTunnelsResponse_tunnelSummaries})
+var sListTunnelsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTunnelsResponse_nextToken})
+var sOpenTunnelRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eOpenTunnelRequest_description})
+var sOpenTunnelRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eOpenTunnelRequest_tags})
+var sOpenTunnelRequest_destinationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConfig", ID: &iDestinationConfig, Members: &mDestinationConfig, Type: smithy.ShapeTypeStructure, Ext: &eOpenTunnelRequest_destinationConfig})
+var sOpenTunnelRequest_timeoutConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutConfig", ID: &iTimeoutConfig, Members: &mTimeoutConfig, Type: smithy.ShapeTypeStructure, Ext: &eOpenTunnelRequest_timeoutConfig})
+var sOpenTunnelResponse_tunnelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tunnelId", ID: &i_TunnelId, Type: smithy.ShapeTypeString, Ext: &eOpenTunnelResponse_tunnelId})
+var sOpenTunnelResponse_tunnelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tunnelArn", ID: &i_TunnelArn, Type: smithy.ShapeTypeString, Ext: &eOpenTunnelResponse_tunnelArn})
+var sOpenTunnelResponse_sourceAccessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceAccessToken", ID: &i_ClientAccessToken, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eOpenTunnelResponse_sourceAccessToken})
+var sOpenTunnelResponse_destinationAccessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationAccessToken", ID: &i_ClientAccessToken, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eOpenTunnelResponse_destinationAccessToken})
+var sRotateTunnelAccessTokenRequest_tunnelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tunnelId", ID: &i_TunnelId, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &eRotateTunnelAccessTokenRequest_tunnelId})
+var sRotateTunnelAccessTokenRequest_clientMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientMode", ID: &iClientMode, Members: &mClientMode, Type: smithy.ShapeTypeEnum, Ext: &eRotateTunnelAccessTokenRequest_clientMode})
+var sRotateTunnelAccessTokenRequest_destinationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConfig", ID: &iDestinationConfig, Members: &mDestinationConfig, Type: smithy.ShapeTypeStructure, Ext: &eRotateTunnelAccessTokenRequest_destinationConfig})
+var sRotateTunnelAccessTokenResponse_tunnelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tunnelArn", ID: &i_TunnelArn, Type: smithy.ShapeTypeString, Ext: &eRotateTunnelAccessTokenResponse_tunnelArn})
+var sRotateTunnelAccessTokenResponse_sourceAccessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceAccessToken", ID: &i_ClientAccessToken, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eRotateTunnelAccessTokenResponse_sourceAccessToken})
+var sRotateTunnelAccessTokenResponse_destinationAccessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationAccessToken", ID: &i_ClientAccessToken, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eRotateTunnelAccessTokenResponse_destinationAccessToken})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_tags})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
 
 var CloseTunnel = &sCloseTunnel
 

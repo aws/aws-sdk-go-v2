@@ -7,9 +7,357 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [349]smithy.SchemaExtensions
+var (
+	eCreatePipeline                                                      smithy.SchemaExtensions
+	eCreatePipelineEndpoint                                              smithy.SchemaExtensions
+	eDeletePipeline                                                      smithy.SchemaExtensions
+	eDeletePipelineEndpoint                                              smithy.SchemaExtensions
+	eDeleteResourcePolicy                                                smithy.SchemaExtensions
+	eGetPipeline                                                         smithy.SchemaExtensions
+	eGetPipelineBlueprint                                                smithy.SchemaExtensions
+	eGetPipelineChangeProgress                                           smithy.SchemaExtensions
+	eGetResourcePolicy                                                   smithy.SchemaExtensions
+	eListPipelineBlueprints                                              smithy.SchemaExtensions
+	eListPipelineEndpointConnections                                     smithy.SchemaExtensions
+	eListPipelineEndpoints                                               smithy.SchemaExtensions
+	eListPipelines                                                       smithy.SchemaExtensions
+	eListTagsForResource                                                 smithy.SchemaExtensions
+	ePutResourcePolicy                                                   smithy.SchemaExtensions
+	eRevokePipelineEndpointConnections                                   smithy.SchemaExtensions
+	eStartPipeline                                                       smithy.SchemaExtensions
+	eStopPipeline                                                        smithy.SchemaExtensions
+	eTagResource                                                         smithy.SchemaExtensions
+	eUntagResource                                                       smithy.SchemaExtensions
+	eUpdatePipeline                                                      smithy.SchemaExtensions
+	eValidatePipeline                                                    smithy.SchemaExtensions
+	e_AmazonOpenSearchIngestionService                                   smithy.SchemaExtensions
+	eAccessDeniedException                                               smithy.SchemaExtensions
+	eAccessDeniedException_message                                       smithy.SchemaExtensions
+	e_AwsAccountId                                                       smithy.SchemaExtensions
+	e_BlueprintFormat                                                    smithy.SchemaExtensions
+	e_Boolean                                                            smithy.SchemaExtensions
+	eBufferOptions                                                       smithy.SchemaExtensions
+	eBufferOptions_PersistentBufferEnabled                               smithy.SchemaExtensions
+	eChangeProgressStage                                                 smithy.SchemaExtensions
+	eChangeProgressStage_Name                                            smithy.SchemaExtensions
+	eChangeProgressStage_Status                                          smithy.SchemaExtensions
+	eChangeProgressStage_Description                                     smithy.SchemaExtensions
+	eChangeProgressStage_LastUpdatedAt                                   smithy.SchemaExtensions
+	e_ChangeProgressStageList                                            smithy.SchemaExtensions
+	e_ChangeProgressStageList_member                                     smithy.SchemaExtensions
+	eChangeProgressStageStatuses                                         smithy.SchemaExtensions
+	eChangeProgressStageStatuses_PENDING                                 smithy.SchemaExtensions
+	eChangeProgressStageStatuses_IN_PROGRESS                             smithy.SchemaExtensions
+	eChangeProgressStageStatuses_COMPLETED                               smithy.SchemaExtensions
+	eChangeProgressStageStatuses_FAILED                                  smithy.SchemaExtensions
+	eChangeProgressStatus                                                smithy.SchemaExtensions
+	eChangeProgressStatus_StartTime                                      smithy.SchemaExtensions
+	eChangeProgressStatus_Status                                         smithy.SchemaExtensions
+	eChangeProgressStatus_TotalNumberOfStages                            smithy.SchemaExtensions
+	eChangeProgressStatus_ChangeProgressStages                           smithy.SchemaExtensions
+	eChangeProgressStatuses                                              smithy.SchemaExtensions
+	eChangeProgressStatuses_PENDING                                      smithy.SchemaExtensions
+	eChangeProgressStatuses_IN_PROGRESS                                  smithy.SchemaExtensions
+	eChangeProgressStatuses_COMPLETED                                    smithy.SchemaExtensions
+	eChangeProgressStatuses_FAILED                                       smithy.SchemaExtensions
+	e_ChangeProgressStatusList                                           smithy.SchemaExtensions
+	e_ChangeProgressStatusList_member                                    smithy.SchemaExtensions
+	e_CidrBlock                                                          smithy.SchemaExtensions
+	eCloudWatchLogDestination                                            smithy.SchemaExtensions
+	eCloudWatchLogDestination_LogGroup                                   smithy.SchemaExtensions
+	eConflictException                                                   smithy.SchemaExtensions
+	eConflictException_message                                           smithy.SchemaExtensions
+	eDisabledOperationException                                          smithy.SchemaExtensions
+	eDisabledOperationException_message                                  smithy.SchemaExtensions
+	eEncryptionAtRestOptions                                             smithy.SchemaExtensions
+	eEncryptionAtRestOptions_KmsKeyArn                                   smithy.SchemaExtensions
+	e_ErrorMessage                                                       smithy.SchemaExtensions
+	e_IngestEndpointUrlsList                                             smithy.SchemaExtensions
+	e_IngestEndpointUrlsList_member                                      smithy.SchemaExtensions
+	e_Integer                                                            smithy.SchemaExtensions
+	eInternalException                                                   smithy.SchemaExtensions
+	eInternalException_message                                           smithy.SchemaExtensions
+	eInvalidPaginationTokenException                                     smithy.SchemaExtensions
+	eInvalidPaginationTokenException_message                             smithy.SchemaExtensions
+	e_KmsKeyArn                                                          smithy.SchemaExtensions
+	eLimitExceededException                                              smithy.SchemaExtensions
+	eLimitExceededException_message                                      smithy.SchemaExtensions
+	e_LogGroup                                                           smithy.SchemaExtensions
+	eLogPublishingOptions                                                smithy.SchemaExtensions
+	eLogPublishingOptions_IsLoggingEnabled                               smithy.SchemaExtensions
+	eLogPublishingOptions_CloudWatchLogDestination                       smithy.SchemaExtensions
+	e_MaxResults                                                         smithy.SchemaExtensions
+	e_NextToken                                                          smithy.SchemaExtensions
+	ePipeline                                                            smithy.SchemaExtensions
+	ePipeline_PipelineName                                               smithy.SchemaExtensions
+	ePipeline_PipelineArn                                                smithy.SchemaExtensions
+	ePipeline_MinUnits                                                   smithy.SchemaExtensions
+	ePipeline_MaxUnits                                                   smithy.SchemaExtensions
+	ePipeline_Status                                                     smithy.SchemaExtensions
+	ePipeline_StatusReason                                               smithy.SchemaExtensions
+	ePipeline_PipelineConfigurationBody                                  smithy.SchemaExtensions
+	ePipeline_CreatedAt                                                  smithy.SchemaExtensions
+	ePipeline_LastUpdatedAt                                              smithy.SchemaExtensions
+	ePipeline_IngestEndpointUrls                                         smithy.SchemaExtensions
+	ePipeline_LogPublishingOptions                                       smithy.SchemaExtensions
+	ePipeline_VpcEndpoints                                               smithy.SchemaExtensions
+	ePipeline_BufferOptions                                              smithy.SchemaExtensions
+	ePipeline_EncryptionAtRestOptions                                    smithy.SchemaExtensions
+	ePipeline_VpcEndpointService                                         smithy.SchemaExtensions
+	ePipeline_ServiceVpcEndpoints                                        smithy.SchemaExtensions
+	ePipeline_Destinations                                               smithy.SchemaExtensions
+	ePipeline_Tags                                                       smithy.SchemaExtensions
+	ePipeline_PipelineRoleArn                                            smithy.SchemaExtensions
+	e_PipelineArn                                                        smithy.SchemaExtensions
+	ePipelineBlueprint                                                   smithy.SchemaExtensions
+	ePipelineBlueprint_BlueprintName                                     smithy.SchemaExtensions
+	ePipelineBlueprint_PipelineConfigurationBody                         smithy.SchemaExtensions
+	ePipelineBlueprint_DisplayName                                       smithy.SchemaExtensions
+	ePipelineBlueprint_DisplayDescription                                smithy.SchemaExtensions
+	ePipelineBlueprint_Service                                           smithy.SchemaExtensions
+	ePipelineBlueprint_UseCase                                           smithy.SchemaExtensions
+	e_PipelineBlueprintsSummaryList                                      smithy.SchemaExtensions
+	e_PipelineBlueprintsSummaryList_member                               smithy.SchemaExtensions
+	ePipelineBlueprintSummary                                            smithy.SchemaExtensions
+	ePipelineBlueprintSummary_BlueprintName                              smithy.SchemaExtensions
+	ePipelineBlueprintSummary_DisplayName                                smithy.SchemaExtensions
+	ePipelineBlueprintSummary_DisplayDescription                         smithy.SchemaExtensions
+	ePipelineBlueprintSummary_Service                                    smithy.SchemaExtensions
+	ePipelineBlueprintSummary_UseCase                                    smithy.SchemaExtensions
+	e_PipelineConfigurationBody                                          smithy.SchemaExtensions
+	ePipelineDestination                                                 smithy.SchemaExtensions
+	ePipelineDestination_ServiceName                                     smithy.SchemaExtensions
+	ePipelineDestination_Endpoint                                        smithy.SchemaExtensions
+	e_PipelineDestinationList                                            smithy.SchemaExtensions
+	e_PipelineDestinationList_member                                     smithy.SchemaExtensions
+	ePipelineEndpoint                                                    smithy.SchemaExtensions
+	ePipelineEndpoint_PipelineArn                                        smithy.SchemaExtensions
+	ePipelineEndpoint_EndpointId                                         smithy.SchemaExtensions
+	ePipelineEndpoint_Status                                             smithy.SchemaExtensions
+	ePipelineEndpoint_VpcId                                              smithy.SchemaExtensions
+	ePipelineEndpoint_VpcOptions                                         smithy.SchemaExtensions
+	ePipelineEndpoint_IngestEndpointUrl                                  smithy.SchemaExtensions
+	ePipelineEndpointConnection                                          smithy.SchemaExtensions
+	ePipelineEndpointConnection_PipelineArn                              smithy.SchemaExtensions
+	ePipelineEndpointConnection_EndpointId                               smithy.SchemaExtensions
+	ePipelineEndpointConnection_Status                                   smithy.SchemaExtensions
+	ePipelineEndpointConnection_VpcEndpointOwner                         smithy.SchemaExtensions
+	e_PipelineEndpointConnectionsSummaryList                             smithy.SchemaExtensions
+	e_PipelineEndpointConnectionsSummaryList_member                      smithy.SchemaExtensions
+	e_PipelineEndpointId                                                 smithy.SchemaExtensions
+	e_PipelineEndpointIdsList                                            smithy.SchemaExtensions
+	e_PipelineEndpointIdsList_member                                     smithy.SchemaExtensions
+	e_PipelineEndpointsSummaryList                                       smithy.SchemaExtensions
+	e_PipelineEndpointsSummaryList_member                                smithy.SchemaExtensions
+	ePipelineEndpointStatus                                              smithy.SchemaExtensions
+	ePipelineEndpointStatus_CREATING                                     smithy.SchemaExtensions
+	ePipelineEndpointStatus_ACTIVE                                       smithy.SchemaExtensions
+	ePipelineEndpointStatus_CREATE_FAILED                                smithy.SchemaExtensions
+	ePipelineEndpointStatus_DELETING                                     smithy.SchemaExtensions
+	ePipelineEndpointStatus_REVOKING                                     smithy.SchemaExtensions
+	ePipelineEndpointStatus_REVOKED                                      smithy.SchemaExtensions
+	ePipelineEndpointVpcOptions                                          smithy.SchemaExtensions
+	ePipelineEndpointVpcOptions_SubnetIds                                smithy.SchemaExtensions
+	ePipelineEndpointVpcOptions_SecurityGroupIds                         smithy.SchemaExtensions
+	e_PipelineName                                                       smithy.SchemaExtensions
+	e_PipelineRoleArn                                                    smithy.SchemaExtensions
+	ePipelineStatus                                                      smithy.SchemaExtensions
+	ePipelineStatus_CREATING                                             smithy.SchemaExtensions
+	ePipelineStatus_ACTIVE                                               smithy.SchemaExtensions
+	ePipelineStatus_UPDATING                                             smithy.SchemaExtensions
+	ePipelineStatus_DELETING                                             smithy.SchemaExtensions
+	ePipelineStatus_CREATE_FAILED                                        smithy.SchemaExtensions
+	ePipelineStatus_UPDATE_FAILED                                        smithy.SchemaExtensions
+	ePipelineStatus_STARTING                                             smithy.SchemaExtensions
+	ePipelineStatus_START_FAILED                                         smithy.SchemaExtensions
+	ePipelineStatus_STOPPING                                             smithy.SchemaExtensions
+	ePipelineStatus_STOPPED                                              smithy.SchemaExtensions
+	ePipelineStatusReason                                                smithy.SchemaExtensions
+	ePipelineStatusReason_Description                                    smithy.SchemaExtensions
+	ePipelineSummary                                                     smithy.SchemaExtensions
+	ePipelineSummary_Status                                              smithy.SchemaExtensions
+	ePipelineSummary_StatusReason                                        smithy.SchemaExtensions
+	ePipelineSummary_PipelineName                                        smithy.SchemaExtensions
+	ePipelineSummary_PipelineArn                                         smithy.SchemaExtensions
+	ePipelineSummary_MinUnits                                            smithy.SchemaExtensions
+	ePipelineSummary_MaxUnits                                            smithy.SchemaExtensions
+	ePipelineSummary_CreatedAt                                           smithy.SchemaExtensions
+	ePipelineSummary_LastUpdatedAt                                       smithy.SchemaExtensions
+	ePipelineSummary_Destinations                                        smithy.SchemaExtensions
+	ePipelineSummary_Tags                                                smithy.SchemaExtensions
+	e_PipelineSummaryList                                                smithy.SchemaExtensions
+	e_PipelineSummaryList_member                                         smithy.SchemaExtensions
+	e_PipelineUnits                                                      smithy.SchemaExtensions
+	eResourceAlreadyExistsException                                      smithy.SchemaExtensions
+	eResourceAlreadyExistsException_message                              smithy.SchemaExtensions
+	eResourceNotFoundException                                           smithy.SchemaExtensions
+	eResourceNotFoundException_message                                   smithy.SchemaExtensions
+	e_ResourcePolicy                                                     smithy.SchemaExtensions
+	e_SecurityGroupId                                                    smithy.SchemaExtensions
+	e_SecurityGroupIds                                                   smithy.SchemaExtensions
+	e_SecurityGroupIds_member                                            smithy.SchemaExtensions
+	eServiceVpcEndpoint                                                  smithy.SchemaExtensions
+	eServiceVpcEndpoint_ServiceName                                      smithy.SchemaExtensions
+	eServiceVpcEndpoint_VpcEndpointId                                    smithy.SchemaExtensions
+	e_ServiceVpcEndpointsList                                            smithy.SchemaExtensions
+	e_ServiceVpcEndpointsList_member                                     smithy.SchemaExtensions
+	e_String                                                             smithy.SchemaExtensions
+	e_StringList                                                         smithy.SchemaExtensions
+	e_StringList_member                                                  smithy.SchemaExtensions
+	e_SubnetId                                                           smithy.SchemaExtensions
+	e_SubnetIds                                                          smithy.SchemaExtensions
+	e_SubnetIds_member                                                   smithy.SchemaExtensions
+	eTag                                                                 smithy.SchemaExtensions
+	eTag_Key                                                             smithy.SchemaExtensions
+	eTag_Value                                                           smithy.SchemaExtensions
+	e_TagKey                                                             smithy.SchemaExtensions
+	e_TagList                                                            smithy.SchemaExtensions
+	e_TagList_member                                                     smithy.SchemaExtensions
+	e_TagValue                                                           smithy.SchemaExtensions
+	e_Timestamp                                                          smithy.SchemaExtensions
+	eValidationException                                                 smithy.SchemaExtensions
+	eValidationException_message                                         smithy.SchemaExtensions
+	eValidationMessage                                                   smithy.SchemaExtensions
+	eValidationMessage_Message                                           smithy.SchemaExtensions
+	e_ValidationMessageList                                              smithy.SchemaExtensions
+	e_ValidationMessageList_member                                       smithy.SchemaExtensions
+	eVpcAttachmentOptions                                                smithy.SchemaExtensions
+	eVpcAttachmentOptions_AttachToVpc                                    smithy.SchemaExtensions
+	eVpcAttachmentOptions_CidrBlock                                      smithy.SchemaExtensions
+	eVpcEndpoint                                                         smithy.SchemaExtensions
+	eVpcEndpoint_VpcEndpointId                                           smithy.SchemaExtensions
+	eVpcEndpoint_VpcId                                                   smithy.SchemaExtensions
+	eVpcEndpoint_VpcOptions                                              smithy.SchemaExtensions
+	eVpcEndpointManagement                                               smithy.SchemaExtensions
+	eVpcEndpointManagement_CUSTOMER                                      smithy.SchemaExtensions
+	eVpcEndpointManagement_SERVICE                                       smithy.SchemaExtensions
+	eVpcEndpointServiceName                                              smithy.SchemaExtensions
+	eVpcEndpointServiceName_OPENSEARCH_SERVERLESS                        smithy.SchemaExtensions
+	e_VpcEndpointsList                                                   smithy.SchemaExtensions
+	e_VpcEndpointsList_member                                            smithy.SchemaExtensions
+	eVpcOptions                                                          smithy.SchemaExtensions
+	eVpcOptions_SubnetIds                                                smithy.SchemaExtensions
+	eVpcOptions_SecurityGroupIds                                         smithy.SchemaExtensions
+	eVpcOptions_VpcAttachmentOptions                                     smithy.SchemaExtensions
+	eVpcOptions_VpcEndpointManagement                                    smithy.SchemaExtensions
+	eCreatePipelineEndpointRequest                                       smithy.SchemaExtensions
+	eCreatePipelineEndpointRequest_PipelineArn                           smithy.SchemaExtensions
+	eCreatePipelineEndpointRequest_VpcOptions                            smithy.SchemaExtensions
+	eCreatePipelineEndpointResponse                                      smithy.SchemaExtensions
+	eCreatePipelineEndpointResponse_PipelineArn                          smithy.SchemaExtensions
+	eCreatePipelineEndpointResponse_EndpointId                           smithy.SchemaExtensions
+	eCreatePipelineEndpointResponse_Status                               smithy.SchemaExtensions
+	eCreatePipelineEndpointResponse_VpcId                                smithy.SchemaExtensions
+	eCreatePipelineRequest                                               smithy.SchemaExtensions
+	eCreatePipelineRequest_PipelineName                                  smithy.SchemaExtensions
+	eCreatePipelineRequest_MinUnits                                      smithy.SchemaExtensions
+	eCreatePipelineRequest_MaxUnits                                      smithy.SchemaExtensions
+	eCreatePipelineRequest_PipelineConfigurationBody                     smithy.SchemaExtensions
+	eCreatePipelineRequest_LogPublishingOptions                          smithy.SchemaExtensions
+	eCreatePipelineRequest_VpcOptions                                    smithy.SchemaExtensions
+	eCreatePipelineRequest_BufferOptions                                 smithy.SchemaExtensions
+	eCreatePipelineRequest_EncryptionAtRestOptions                       smithy.SchemaExtensions
+	eCreatePipelineRequest_Tags                                          smithy.SchemaExtensions
+	eCreatePipelineRequest_PipelineRoleArn                               smithy.SchemaExtensions
+	eCreatePipelineResponse                                              smithy.SchemaExtensions
+	eCreatePipelineResponse_Pipeline                                     smithy.SchemaExtensions
+	eDeletePipelineEndpointRequest                                       smithy.SchemaExtensions
+	eDeletePipelineEndpointRequest_EndpointId                            smithy.SchemaExtensions
+	eDeletePipelineEndpointResponse                                      smithy.SchemaExtensions
+	eDeletePipelineRequest                                               smithy.SchemaExtensions
+	eDeletePipelineRequest_PipelineName                                  smithy.SchemaExtensions
+	eDeletePipelineResponse                                              smithy.SchemaExtensions
+	eDeleteResourcePolicyRequest                                         smithy.SchemaExtensions
+	eDeleteResourcePolicyRequest_ResourceArn                             smithy.SchemaExtensions
+	eDeleteResourcePolicyResponse                                        smithy.SchemaExtensions
+	eGetPipelineBlueprintRequest                                         smithy.SchemaExtensions
+	eGetPipelineBlueprintRequest_BlueprintName                           smithy.SchemaExtensions
+	eGetPipelineBlueprintRequest_Format                                  smithy.SchemaExtensions
+	eGetPipelineBlueprintResponse                                        smithy.SchemaExtensions
+	eGetPipelineBlueprintResponse_Blueprint                              smithy.SchemaExtensions
+	eGetPipelineBlueprintResponse_Format                                 smithy.SchemaExtensions
+	eGetPipelineChangeProgressRequest                                    smithy.SchemaExtensions
+	eGetPipelineChangeProgressRequest_PipelineName                       smithy.SchemaExtensions
+	eGetPipelineChangeProgressResponse                                   smithy.SchemaExtensions
+	eGetPipelineChangeProgressResponse_ChangeProgressStatuses            smithy.SchemaExtensions
+	eGetPipelineRequest                                                  smithy.SchemaExtensions
+	eGetPipelineRequest_PipelineName                                     smithy.SchemaExtensions
+	eGetPipelineResponse                                                 smithy.SchemaExtensions
+	eGetPipelineResponse_Pipeline                                        smithy.SchemaExtensions
+	eGetResourcePolicyRequest                                            smithy.SchemaExtensions
+	eGetResourcePolicyRequest_ResourceArn                                smithy.SchemaExtensions
+	eGetResourcePolicyResponse                                           smithy.SchemaExtensions
+	eGetResourcePolicyResponse_ResourceArn                               smithy.SchemaExtensions
+	eGetResourcePolicyResponse_Policy                                    smithy.SchemaExtensions
+	eListPipelineBlueprintsRequest                                       smithy.SchemaExtensions
+	eListPipelineBlueprintsResponse                                      smithy.SchemaExtensions
+	eListPipelineBlueprintsResponse_Blueprints                           smithy.SchemaExtensions
+	eListPipelineEndpointConnectionsRequest                              smithy.SchemaExtensions
+	eListPipelineEndpointConnectionsRequest_MaxResults                   smithy.SchemaExtensions
+	eListPipelineEndpointConnectionsRequest_NextToken                    smithy.SchemaExtensions
+	eListPipelineEndpointConnectionsResponse                             smithy.SchemaExtensions
+	eListPipelineEndpointConnectionsResponse_NextToken                   smithy.SchemaExtensions
+	eListPipelineEndpointConnectionsResponse_PipelineEndpointConnections smithy.SchemaExtensions
+	eListPipelineEndpointsRequest                                        smithy.SchemaExtensions
+	eListPipelineEndpointsRequest_MaxResults                             smithy.SchemaExtensions
+	eListPipelineEndpointsRequest_NextToken                              smithy.SchemaExtensions
+	eListPipelineEndpointsResponse                                       smithy.SchemaExtensions
+	eListPipelineEndpointsResponse_NextToken                             smithy.SchemaExtensions
+	eListPipelineEndpointsResponse_PipelineEndpoints                     smithy.SchemaExtensions
+	eListPipelinesRequest                                                smithy.SchemaExtensions
+	eListPipelinesRequest_MaxResults                                     smithy.SchemaExtensions
+	eListPipelinesRequest_NextToken                                      smithy.SchemaExtensions
+	eListPipelinesResponse                                               smithy.SchemaExtensions
+	eListPipelinesResponse_NextToken                                     smithy.SchemaExtensions
+	eListPipelinesResponse_Pipelines                                     smithy.SchemaExtensions
+	eListTagsForResourceRequest                                          smithy.SchemaExtensions
+	eListTagsForResourceRequest_Arn                                      smithy.SchemaExtensions
+	eListTagsForResourceResponse                                         smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                                    smithy.SchemaExtensions
+	ePutResourcePolicyRequest                                            smithy.SchemaExtensions
+	ePutResourcePolicyRequest_ResourceArn                                smithy.SchemaExtensions
+	ePutResourcePolicyRequest_Policy                                     smithy.SchemaExtensions
+	ePutResourcePolicyResponse                                           smithy.SchemaExtensions
+	ePutResourcePolicyResponse_ResourceArn                               smithy.SchemaExtensions
+	ePutResourcePolicyResponse_Policy                                    smithy.SchemaExtensions
+	eRevokePipelineEndpointConnectionsRequest                            smithy.SchemaExtensions
+	eRevokePipelineEndpointConnectionsRequest_PipelineArn                smithy.SchemaExtensions
+	eRevokePipelineEndpointConnectionsRequest_EndpointIds                smithy.SchemaExtensions
+	eRevokePipelineEndpointConnectionsResponse                           smithy.SchemaExtensions
+	eRevokePipelineEndpointConnectionsResponse_PipelineArn               smithy.SchemaExtensions
+	eStartPipelineRequest                                                smithy.SchemaExtensions
+	eStartPipelineRequest_PipelineName                                   smithy.SchemaExtensions
+	eStartPipelineResponse                                               smithy.SchemaExtensions
+	eStartPipelineResponse_Pipeline                                      smithy.SchemaExtensions
+	eStopPipelineRequest                                                 smithy.SchemaExtensions
+	eStopPipelineRequest_PipelineName                                    smithy.SchemaExtensions
+	eStopPipelineResponse                                                smithy.SchemaExtensions
+	eStopPipelineResponse_Pipeline                                       smithy.SchemaExtensions
+	eTagResourceRequest                                                  smithy.SchemaExtensions
+	eTagResourceRequest_Arn                                              smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                             smithy.SchemaExtensions
+	eTagResourceResponse                                                 smithy.SchemaExtensions
+	eUntagResourceRequest                                                smithy.SchemaExtensions
+	eUntagResourceRequest_Arn                                            smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                        smithy.SchemaExtensions
+	eUntagResourceResponse                                               smithy.SchemaExtensions
+	eUpdatePipelineRequest                                               smithy.SchemaExtensions
+	eUpdatePipelineRequest_PipelineName                                  smithy.SchemaExtensions
+	eUpdatePipelineRequest_MinUnits                                      smithy.SchemaExtensions
+	eUpdatePipelineRequest_MaxUnits                                      smithy.SchemaExtensions
+	eUpdatePipelineRequest_PipelineConfigurationBody                     smithy.SchemaExtensions
+	eUpdatePipelineRequest_LogPublishingOptions                          smithy.SchemaExtensions
+	eUpdatePipelineRequest_BufferOptions                                 smithy.SchemaExtensions
+	eUpdatePipelineRequest_EncryptionAtRestOptions                       smithy.SchemaExtensions
+	eUpdatePipelineRequest_PipelineRoleArn                               smithy.SchemaExtensions
+	eUpdatePipelineResponse                                              smithy.SchemaExtensions
+	eUpdatePipelineResponse_Pipeline                                     smithy.SchemaExtensions
+	eValidatePipelineRequest                                             smithy.SchemaExtensions
+	eValidatePipelineRequest_PipelineConfigurationBody                   smithy.SchemaExtensions
+	eValidatePipelineResponse                                            smithy.SchemaExtensions
+	eValidatePipelineResponse_isValid                                    smithy.SchemaExtensions
+	eValidatePipelineResponse_Errors                                     smithy.SchemaExtensions
+)
 
 var (
 	iCreatePipeline                            = smithy.ShapeID{Namespace: "com.amazonaws.osis", Name: "CreatePipeline"}
@@ -339,356 +687,356 @@ var mUpdatePipelineResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpda
 var mValidatePipelineRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sValidatePipelineRequest_PipelineConfigurationBody}}
 var mValidatePipelineResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sValidatePipelineResponse_isValid, &sValidatePipelineResponse_Errors}}
 
-var sCreatePipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePipeline, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCreatePipelineEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePipelineEndpoint, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sDeletePipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePipeline, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sDeletePipelineEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePipelineEndpoint, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sDeleteResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicy, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sGetPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipeline, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sGetPipelineBlueprint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineBlueprint, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sGetPipelineChangeProgress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineChangeProgress, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sGetResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicy, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sListPipelineBlueprints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelineBlueprints, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sListPipelineEndpointConnections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelineEndpointConnections, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sListPipelineEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelineEndpoints, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sListPipelines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelines, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sPutResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicy, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sRevokePipelineEndpointConnections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokePipelineEndpointConnections, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sStartPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPipeline, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sStopPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopPipeline, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var sUpdatePipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePipeline, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &ext[20]})
-var sValidatePipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidatePipeline, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &ext[21]})
-var s_AmazonOpenSearchIngestionService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonOpenSearchIngestionService, Traits: &t22, Type: smithy.ShapeTypeService, Ext: &ext[22]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &ext[23]})
-var s_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &ext[25]})
-var s_BlueprintFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlueprintFormat, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[27]})
-var sBufferOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBufferOptions, Members: &mBufferOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
-var sChangeProgressStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangeProgressStage, Members: &mChangeProgressStage, Type: smithy.ShapeTypeStructure, Ext: &ext[30]})
-var s_ChangeProgressStageList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChangeProgressStageList, Members: &m_ChangeProgressStageList, Type: smithy.ShapeTypeList, Ext: &ext[35]})
-var sChangeProgressStageStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangeProgressStageStatuses, Members: &mChangeProgressStageStatuses, Type: smithy.ShapeTypeEnum, Ext: &ext[37]})
-var sChangeProgressStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangeProgressStatus, Members: &mChangeProgressStatus, Type: smithy.ShapeTypeStructure, Ext: &ext[42]})
-var sChangeProgressStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangeProgressStatuses, Members: &mChangeProgressStatuses, Type: smithy.ShapeTypeEnum, Ext: &ext[47]})
-var s_ChangeProgressStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChangeProgressStatusList, Members: &m_ChangeProgressStatusList, Type: smithy.ShapeTypeList, Ext: &ext[52]})
-var s_CidrBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CidrBlock, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var sCloudWatchLogDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudWatchLogDestination, Members: &mCloudWatchLogDestination, Type: smithy.ShapeTypeStructure, Ext: &ext[55]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &ext[57]})
-var sDisabledOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisabledOperationException, Members: &mDisabledOperationException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &ext[59]})
-var sEncryptionAtRestOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionAtRestOptions, Members: &mEncryptionAtRestOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[61]})
-var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[63]})
-var s_IngestEndpointUrlsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngestEndpointUrlsList, Members: &m_IngestEndpointUrlsList, Type: smithy.ShapeTypeList, Ext: &ext[64]})
-var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[66]})
-var sInternalException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalException, Members: &mInternalException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &ext[67]})
-var sInvalidPaginationTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidPaginationTokenException, Members: &mInvalidPaginationTokenException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &ext[69]})
-var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &ext[71]})
-var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var s_LogGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogGroup, Type: smithy.ShapeTypeString, Ext: &ext[74]})
-var sLogPublishingOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogPublishingOptions, Members: &mLogPublishingOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[75]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[78]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[79]})
-var sPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeline, Members: &mPipeline, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var s_PipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineArn, Type: smithy.ShapeTypeString, Ext: &ext[100]})
-var sPipelineBlueprint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineBlueprint, Members: &mPipelineBlueprint, Type: smithy.ShapeTypeStructure, Ext: &ext[101]})
-var s_PipelineBlueprintsSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineBlueprintsSummaryList, Members: &m_PipelineBlueprintsSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[108]})
-var sPipelineBlueprintSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineBlueprintSummary, Members: &mPipelineBlueprintSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[110]})
-var s_PipelineConfigurationBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineConfigurationBody, Type: smithy.ShapeTypeString, Ext: &ext[116]})
-var sPipelineDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineDestination, Members: &mPipelineDestination, Type: smithy.ShapeTypeStructure, Ext: &ext[117]})
-var s_PipelineDestinationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineDestinationList, Members: &m_PipelineDestinationList, Type: smithy.ShapeTypeList, Ext: &ext[120]})
-var sPipelineEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineEndpoint, Members: &mPipelineEndpoint, Type: smithy.ShapeTypeStructure, Ext: &ext[122]})
-var sPipelineEndpointConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineEndpointConnection, Members: &mPipelineEndpointConnection, Type: smithy.ShapeTypeStructure, Ext: &ext[129]})
-var s_PipelineEndpointConnectionsSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineEndpointConnectionsSummaryList, Members: &m_PipelineEndpointConnectionsSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[134]})
-var s_PipelineEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineEndpointId, Type: smithy.ShapeTypeString, Ext: &ext[136]})
-var s_PipelineEndpointIdsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineEndpointIdsList, Members: &m_PipelineEndpointIdsList, Type: smithy.ShapeTypeList, Ext: &ext[137]})
-var s_PipelineEndpointsSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineEndpointsSummaryList, Members: &m_PipelineEndpointsSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[139]})
-var sPipelineEndpointStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineEndpointStatus, Members: &mPipelineEndpointStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[141]})
-var sPipelineEndpointVpcOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineEndpointVpcOptions, Members: &mPipelineEndpointVpcOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[148]})
-var s_PipelineName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[151]})
-var s_PipelineRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[152]})
-var sPipelineStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineStatus, Members: &mPipelineStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[153]})
-var sPipelineStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineStatusReason, Members: &mPipelineStatusReason, Type: smithy.ShapeTypeStructure, Ext: &ext[164]})
-var sPipelineSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineSummary, Members: &mPipelineSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[166]})
-var s_PipelineSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineSummaryList, Members: &m_PipelineSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[177]})
-var s_PipelineUnits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineUnits, Type: smithy.ShapeTypeInteger, Ext: &ext[179]})
-var sResourceAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceAlreadyExistsException, Members: &mResourceAlreadyExistsException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &ext[180]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &ext[182]})
-var s_ResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString, Ext: &ext[184]})
-var s_SecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString, Ext: &ext[185]})
-var s_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList, Ext: &ext[186]})
-var sServiceVpcEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceVpcEndpoint, Members: &mServiceVpcEndpoint, Type: smithy.ShapeTypeStructure, Ext: &ext[188]})
-var s_ServiceVpcEndpointsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceVpcEndpointsList, Members: &m_ServiceVpcEndpointsList, Type: smithy.ShapeTypeList, Ext: &ext[191]})
-var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[193]})
-var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[194]})
-var s_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &ext[196]})
-var s_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList, Ext: &ext[197]})
-var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[199]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[202]})
-var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[203]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[205]})
-var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[206]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &ext[207]})
-var sValidationMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationMessage, Members: &mValidationMessage, Type: smithy.ShapeTypeStructure, Ext: &ext[209]})
-var s_ValidationMessageList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationMessageList, Members: &m_ValidationMessageList, Type: smithy.ShapeTypeList, Ext: &ext[211]})
-var sVpcAttachmentOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcAttachmentOptions, Members: &mVpcAttachmentOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[213]})
-var sVpcEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcEndpoint, Members: &mVpcEndpoint, Type: smithy.ShapeTypeStructure, Ext: &ext[216]})
-var sVpcEndpointManagement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcEndpointManagement, Members: &mVpcEndpointManagement, Type: smithy.ShapeTypeEnum, Ext: &ext[220]})
-var sVpcEndpointServiceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcEndpointServiceName, Members: &mVpcEndpointServiceName, Type: smithy.ShapeTypeEnum, Ext: &ext[223]})
-var s_VpcEndpointsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointsList, Members: &m_VpcEndpointsList, Type: smithy.ShapeTypeList, Ext: &ext[225]})
-var sVpcOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcOptions, Members: &mVpcOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[227]})
-var sCreatePipelineEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePipelineEndpointRequest, Members: &mCreatePipelineEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[232]})
-var sCreatePipelineEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePipelineEndpointResponse, Members: &mCreatePipelineEndpointResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[235]})
-var sCreatePipelineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePipelineRequest, Members: &mCreatePipelineRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[240]})
-var sCreatePipelineResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePipelineResponse, Members: &mCreatePipelineResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[251]})
-var sDeletePipelineEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePipelineEndpointRequest, Members: &mDeletePipelineEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[253]})
-var sDeletePipelineEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePipelineEndpointResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[255]})
-var sDeletePipelineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePipelineRequest, Members: &mDeletePipelineRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[256]})
-var sDeletePipelineResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePipelineResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[258]})
-var sDeleteResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyRequest, Members: &mDeleteResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[259]})
-var sDeleteResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[261]})
-var sGetPipelineBlueprintRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineBlueprintRequest, Members: &mGetPipelineBlueprintRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[262]})
-var sGetPipelineBlueprintResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineBlueprintResponse, Members: &mGetPipelineBlueprintResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[265]})
-var sGetPipelineChangeProgressRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineChangeProgressRequest, Members: &mGetPipelineChangeProgressRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[268]})
-var sGetPipelineChangeProgressResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineChangeProgressResponse, Members: &mGetPipelineChangeProgressResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[270]})
-var sGetPipelineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineRequest, Members: &mGetPipelineRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[272]})
-var sGetPipelineResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineResponse, Members: &mGetPipelineResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[274]})
-var sGetResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyRequest, Members: &mGetResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[276]})
-var sGetResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyResponse, Members: &mGetResourcePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[278]})
-var sListPipelineBlueprintsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelineBlueprintsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[281]})
-var sListPipelineBlueprintsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelineBlueprintsResponse, Members: &mListPipelineBlueprintsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[282]})
-var sListPipelineEndpointConnectionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelineEndpointConnectionsRequest, Members: &mListPipelineEndpointConnectionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[284]})
-var sListPipelineEndpointConnectionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelineEndpointConnectionsResponse, Members: &mListPipelineEndpointConnectionsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[287]})
-var sListPipelineEndpointsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelineEndpointsRequest, Members: &mListPipelineEndpointsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[290]})
-var sListPipelineEndpointsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelineEndpointsResponse, Members: &mListPipelineEndpointsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[293]})
-var sListPipelinesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelinesRequest, Members: &mListPipelinesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[296]})
-var sListPipelinesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelinesResponse, Members: &mListPipelinesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[299]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[302]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[304]})
-var sPutResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyRequest, Members: &mPutResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[306]})
-var sPutResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyResponse, Members: &mPutResourcePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[309]})
-var sRevokePipelineEndpointConnectionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokePipelineEndpointConnectionsRequest, Members: &mRevokePipelineEndpointConnectionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[312]})
-var sRevokePipelineEndpointConnectionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokePipelineEndpointConnectionsResponse, Members: &mRevokePipelineEndpointConnectionsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[315]})
-var sStartPipelineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPipelineRequest, Members: &mStartPipelineRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[317]})
-var sStartPipelineResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPipelineResponse, Members: &mStartPipelineResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[319]})
-var sStopPipelineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopPipelineRequest, Members: &mStopPipelineRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[321]})
-var sStopPipelineResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopPipelineResponse, Members: &mStopPipelineResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[323]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[325]})
-var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[328]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[329]})
-var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[332]})
-var sUpdatePipelineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePipelineRequest, Members: &mUpdatePipelineRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[333]})
-var sUpdatePipelineResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePipelineResponse, Members: &mUpdatePipelineResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[342]})
-var sValidatePipelineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidatePipelineRequest, Members: &mValidatePipelineRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[344]})
-var sValidatePipelineResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidatePipelineResponse, Members: &mValidatePipelineResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[346]})
+var sCreatePipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePipeline, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreatePipeline})
+var sCreatePipelineEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePipelineEndpoint, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreatePipelineEndpoint})
+var sDeletePipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePipeline, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eDeletePipeline})
+var sDeletePipelineEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePipelineEndpoint, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDeletePipelineEndpoint})
+var sDeleteResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicy, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDeleteResourcePolicy})
+var sGetPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipeline, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eGetPipeline})
+var sGetPipelineBlueprint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineBlueprint, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eGetPipelineBlueprint})
+var sGetPipelineChangeProgress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineChangeProgress, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eGetPipelineChangeProgress})
+var sGetResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicy, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eGetResourcePolicy})
+var sListPipelineBlueprints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelineBlueprints, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eListPipelineBlueprints})
+var sListPipelineEndpointConnections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelineEndpointConnections, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eListPipelineEndpointConnections})
+var sListPipelineEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelineEndpoints, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eListPipelineEndpoints})
+var sListPipelines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelines, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eListPipelines})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sPutResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicy, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ePutResourcePolicy})
+var sRevokePipelineEndpointConnections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokePipelineEndpointConnections, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eRevokePipelineEndpointConnections})
+var sStartPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPipeline, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eStartPipeline})
+var sStopPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopPipeline, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eStopPipeline})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdatePipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePipeline, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eUpdatePipeline})
+var sValidatePipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidatePipeline, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eValidatePipeline})
+var s_AmazonOpenSearchIngestionService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonOpenSearchIngestionService, Traits: &t22, Type: smithy.ShapeTypeService, Ext: &e_AmazonOpenSearchIngestionService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var s_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &e_AwsAccountId})
+var s_BlueprintFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlueprintFormat, Type: smithy.ShapeTypeString, Ext: &e_BlueprintFormat})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var sBufferOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBufferOptions, Members: &mBufferOptions, Type: smithy.ShapeTypeStructure, Ext: &eBufferOptions})
+var sChangeProgressStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangeProgressStage, Members: &mChangeProgressStage, Type: smithy.ShapeTypeStructure, Ext: &eChangeProgressStage})
+var s_ChangeProgressStageList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChangeProgressStageList, Members: &m_ChangeProgressStageList, Type: smithy.ShapeTypeList, Ext: &e_ChangeProgressStageList})
+var sChangeProgressStageStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangeProgressStageStatuses, Members: &mChangeProgressStageStatuses, Type: smithy.ShapeTypeEnum, Ext: &eChangeProgressStageStatuses})
+var sChangeProgressStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangeProgressStatus, Members: &mChangeProgressStatus, Type: smithy.ShapeTypeStructure, Ext: &eChangeProgressStatus})
+var sChangeProgressStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangeProgressStatuses, Members: &mChangeProgressStatuses, Type: smithy.ShapeTypeEnum, Ext: &eChangeProgressStatuses})
+var s_ChangeProgressStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChangeProgressStatusList, Members: &m_ChangeProgressStatusList, Type: smithy.ShapeTypeList, Ext: &e_ChangeProgressStatusList})
+var s_CidrBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CidrBlock, Type: smithy.ShapeTypeString, Ext: &e_CidrBlock})
+var sCloudWatchLogDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudWatchLogDestination, Members: &mCloudWatchLogDestination, Type: smithy.ShapeTypeStructure, Ext: &eCloudWatchLogDestination})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sDisabledOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisabledOperationException, Members: &mDisabledOperationException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eDisabledOperationException})
+var sEncryptionAtRestOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionAtRestOptions, Members: &mEncryptionAtRestOptions, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionAtRestOptions})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var s_IngestEndpointUrlsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngestEndpointUrlsList, Members: &m_IngestEndpointUrlsList, Type: smithy.ShapeTypeList, Ext: &e_IngestEndpointUrlsList})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &e_Integer})
+var sInternalException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalException, Members: &mInternalException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eInternalException})
+var sInvalidPaginationTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidPaginationTokenException, Members: &mInvalidPaginationTokenException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &eInvalidPaginationTokenException})
+var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyArn})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var s_LogGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogGroup, Type: smithy.ShapeTypeString, Ext: &e_LogGroup})
+var sLogPublishingOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogPublishingOptions, Members: &mLogPublishingOptions, Type: smithy.ShapeTypeStructure, Ext: &eLogPublishingOptions})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeline, Members: &mPipeline, Type: smithy.ShapeTypeStructure, Ext: &ePipeline})
+var s_PipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineArn, Type: smithy.ShapeTypeString, Ext: &e_PipelineArn})
+var sPipelineBlueprint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineBlueprint, Members: &mPipelineBlueprint, Type: smithy.ShapeTypeStructure, Ext: &ePipelineBlueprint})
+var s_PipelineBlueprintsSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineBlueprintsSummaryList, Members: &m_PipelineBlueprintsSummaryList, Type: smithy.ShapeTypeList, Ext: &e_PipelineBlueprintsSummaryList})
+var sPipelineBlueprintSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineBlueprintSummary, Members: &mPipelineBlueprintSummary, Type: smithy.ShapeTypeStructure, Ext: &ePipelineBlueprintSummary})
+var s_PipelineConfigurationBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineConfigurationBody, Type: smithy.ShapeTypeString, Ext: &e_PipelineConfigurationBody})
+var sPipelineDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineDestination, Members: &mPipelineDestination, Type: smithy.ShapeTypeStructure, Ext: &ePipelineDestination})
+var s_PipelineDestinationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineDestinationList, Members: &m_PipelineDestinationList, Type: smithy.ShapeTypeList, Ext: &e_PipelineDestinationList})
+var sPipelineEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineEndpoint, Members: &mPipelineEndpoint, Type: smithy.ShapeTypeStructure, Ext: &ePipelineEndpoint})
+var sPipelineEndpointConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineEndpointConnection, Members: &mPipelineEndpointConnection, Type: smithy.ShapeTypeStructure, Ext: &ePipelineEndpointConnection})
+var s_PipelineEndpointConnectionsSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineEndpointConnectionsSummaryList, Members: &m_PipelineEndpointConnectionsSummaryList, Type: smithy.ShapeTypeList, Ext: &e_PipelineEndpointConnectionsSummaryList})
+var s_PipelineEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineEndpointId, Type: smithy.ShapeTypeString, Ext: &e_PipelineEndpointId})
+var s_PipelineEndpointIdsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineEndpointIdsList, Members: &m_PipelineEndpointIdsList, Type: smithy.ShapeTypeList, Ext: &e_PipelineEndpointIdsList})
+var s_PipelineEndpointsSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineEndpointsSummaryList, Members: &m_PipelineEndpointsSummaryList, Type: smithy.ShapeTypeList, Ext: &e_PipelineEndpointsSummaryList})
+var sPipelineEndpointStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineEndpointStatus, Members: &mPipelineEndpointStatus, Type: smithy.ShapeTypeEnum, Ext: &ePipelineEndpointStatus})
+var sPipelineEndpointVpcOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineEndpointVpcOptions, Members: &mPipelineEndpointVpcOptions, Type: smithy.ShapeTypeStructure, Ext: &ePipelineEndpointVpcOptions})
+var s_PipelineName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &e_PipelineName})
+var s_PipelineRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineRoleArn, Type: smithy.ShapeTypeString, Ext: &e_PipelineRoleArn})
+var sPipelineStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineStatus, Members: &mPipelineStatus, Type: smithy.ShapeTypeEnum, Ext: &ePipelineStatus})
+var sPipelineStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineStatusReason, Members: &mPipelineStatusReason, Type: smithy.ShapeTypeStructure, Ext: &ePipelineStatusReason})
+var sPipelineSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineSummary, Members: &mPipelineSummary, Type: smithy.ShapeTypeStructure, Ext: &ePipelineSummary})
+var s_PipelineSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineSummaryList, Members: &m_PipelineSummaryList, Type: smithy.ShapeTypeList, Ext: &e_PipelineSummaryList})
+var s_PipelineUnits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineUnits, Type: smithy.ShapeTypeInteger, Ext: &e_PipelineUnits})
+var sResourceAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceAlreadyExistsException, Members: &mResourceAlreadyExistsException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eResourceAlreadyExistsException})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var s_ResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString, Ext: &e_ResourcePolicy})
+var s_SecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString, Ext: &e_SecurityGroupId})
+var s_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList, Ext: &e_SecurityGroupIds})
+var sServiceVpcEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceVpcEndpoint, Members: &mServiceVpcEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eServiceVpcEndpoint})
+var s_ServiceVpcEndpointsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceVpcEndpointsList, Members: &m_ServiceVpcEndpointsList, Type: smithy.ShapeTypeList, Ext: &e_ServiceVpcEndpointsList})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &e_StringList})
+var s_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &e_SubnetId})
+var s_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList, Ext: &e_SubnetIds})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationMessage, Members: &mValidationMessage, Type: smithy.ShapeTypeStructure, Ext: &eValidationMessage})
+var s_ValidationMessageList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationMessageList, Members: &m_ValidationMessageList, Type: smithy.ShapeTypeList, Ext: &e_ValidationMessageList})
+var sVpcAttachmentOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcAttachmentOptions, Members: &mVpcAttachmentOptions, Type: smithy.ShapeTypeStructure, Ext: &eVpcAttachmentOptions})
+var sVpcEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcEndpoint, Members: &mVpcEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eVpcEndpoint})
+var sVpcEndpointManagement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcEndpointManagement, Members: &mVpcEndpointManagement, Type: smithy.ShapeTypeEnum, Ext: &eVpcEndpointManagement})
+var sVpcEndpointServiceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcEndpointServiceName, Members: &mVpcEndpointServiceName, Type: smithy.ShapeTypeEnum, Ext: &eVpcEndpointServiceName})
+var s_VpcEndpointsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointsList, Members: &m_VpcEndpointsList, Type: smithy.ShapeTypeList, Ext: &e_VpcEndpointsList})
+var sVpcOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcOptions, Members: &mVpcOptions, Type: smithy.ShapeTypeStructure, Ext: &eVpcOptions})
+var sCreatePipelineEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePipelineEndpointRequest, Members: &mCreatePipelineEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreatePipelineEndpointRequest})
+var sCreatePipelineEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePipelineEndpointResponse, Members: &mCreatePipelineEndpointResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreatePipelineEndpointResponse})
+var sCreatePipelineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePipelineRequest, Members: &mCreatePipelineRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreatePipelineRequest})
+var sCreatePipelineResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePipelineResponse, Members: &mCreatePipelineResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreatePipelineResponse})
+var sDeletePipelineEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePipelineEndpointRequest, Members: &mDeletePipelineEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeletePipelineEndpointRequest})
+var sDeletePipelineEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePipelineEndpointResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeletePipelineEndpointResponse})
+var sDeletePipelineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePipelineRequest, Members: &mDeletePipelineRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeletePipelineRequest})
+var sDeletePipelineResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePipelineResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeletePipelineResponse})
+var sDeleteResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyRequest, Members: &mDeleteResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResourcePolicyRequest})
+var sDeleteResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResourcePolicyResponse})
+var sGetPipelineBlueprintRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineBlueprintRequest, Members: &mGetPipelineBlueprintRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetPipelineBlueprintRequest})
+var sGetPipelineBlueprintResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineBlueprintResponse, Members: &mGetPipelineBlueprintResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetPipelineBlueprintResponse})
+var sGetPipelineChangeProgressRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineChangeProgressRequest, Members: &mGetPipelineChangeProgressRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetPipelineChangeProgressRequest})
+var sGetPipelineChangeProgressResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineChangeProgressResponse, Members: &mGetPipelineChangeProgressResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetPipelineChangeProgressResponse})
+var sGetPipelineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineRequest, Members: &mGetPipelineRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetPipelineRequest})
+var sGetPipelineResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineResponse, Members: &mGetPipelineResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetPipelineResponse})
+var sGetResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyRequest, Members: &mGetResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetResourcePolicyRequest})
+var sGetResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyResponse, Members: &mGetResourcePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetResourcePolicyResponse})
+var sListPipelineBlueprintsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelineBlueprintsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPipelineBlueprintsRequest})
+var sListPipelineBlueprintsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelineBlueprintsResponse, Members: &mListPipelineBlueprintsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListPipelineBlueprintsResponse})
+var sListPipelineEndpointConnectionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelineEndpointConnectionsRequest, Members: &mListPipelineEndpointConnectionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPipelineEndpointConnectionsRequest})
+var sListPipelineEndpointConnectionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelineEndpointConnectionsResponse, Members: &mListPipelineEndpointConnectionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListPipelineEndpointConnectionsResponse})
+var sListPipelineEndpointsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelineEndpointsRequest, Members: &mListPipelineEndpointsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPipelineEndpointsRequest})
+var sListPipelineEndpointsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelineEndpointsResponse, Members: &mListPipelineEndpointsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListPipelineEndpointsResponse})
+var sListPipelinesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelinesRequest, Members: &mListPipelinesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListPipelinesRequest})
+var sListPipelinesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelinesResponse, Members: &mListPipelinesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListPipelinesResponse})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sPutResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyRequest, Members: &mPutResourcePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutResourcePolicyRequest})
+var sPutResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyResponse, Members: &mPutResourcePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutResourcePolicyResponse})
+var sRevokePipelineEndpointConnectionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokePipelineEndpointConnectionsRequest, Members: &mRevokePipelineEndpointConnectionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eRevokePipelineEndpointConnectionsRequest})
+var sRevokePipelineEndpointConnectionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokePipelineEndpointConnectionsResponse, Members: &mRevokePipelineEndpointConnectionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eRevokePipelineEndpointConnectionsResponse})
+var sStartPipelineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPipelineRequest, Members: &mStartPipelineRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartPipelineRequest})
+var sStartPipelineResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPipelineResponse, Members: &mStartPipelineResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartPipelineResponse})
+var sStopPipelineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopPipelineRequest, Members: &mStopPipelineRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopPipelineRequest})
+var sStopPipelineResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopPipelineResponse, Members: &mStopPipelineResponse, Type: smithy.ShapeTypeStructure, Ext: &eStopPipelineResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdatePipelineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePipelineRequest, Members: &mUpdatePipelineRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePipelineRequest})
+var sUpdatePipelineResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePipelineResponse, Members: &mUpdatePipelineResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePipelineResponse})
+var sValidatePipelineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidatePipelineRequest, Members: &mValidatePipelineRequest, Type: smithy.ShapeTypeStructure, Ext: &eValidatePipelineRequest})
+var sValidatePipelineResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidatePipelineResponse, Members: &mValidatePipelineResponse, Type: smithy.ShapeTypeStructure, Ext: &eValidatePipelineResponse})
 
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[24]})
-var sBufferOptions_PersistentBufferEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PersistentBufferEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[29]})
-var sChangeProgressStage_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var sChangeProgressStage_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iChangeProgressStageStatuses, Members: &mChangeProgressStageStatuses, Type: smithy.ShapeTypeEnum, Ext: &ext[32]})
-var sChangeProgressStage_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var sChangeProgressStage_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[34]})
-var s_ChangeProgressStageList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChangeProgressStage, Members: &mChangeProgressStage, Type: smithy.ShapeTypeStructure, Ext: &ext[36]})
-var sChangeProgressStageStatuses_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[38]})
-var sChangeProgressStageStatuses_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[39]})
-var sChangeProgressStageStatuses_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[40]})
-var sChangeProgressStageStatuses_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[41]})
-var sChangeProgressStatus_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[43]})
-var sChangeProgressStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iChangeProgressStatuses, Members: &mChangeProgressStatuses, Type: smithy.ShapeTypeEnum, Ext: &ext[44]})
-var sChangeProgressStatus_TotalNumberOfStages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalNumberOfStages", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[45]})
-var sChangeProgressStatus_ChangeProgressStages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeProgressStages", ID: &i_ChangeProgressStageList, Members: &m_ChangeProgressStageList, Type: smithy.ShapeTypeList, Ext: &ext[46]})
-var sChangeProgressStatuses_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[48]})
-var sChangeProgressStatuses_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[49]})
-var sChangeProgressStatuses_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[50]})
-var sChangeProgressStatuses_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[51]})
-var s_ChangeProgressStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChangeProgressStatus, Members: &mChangeProgressStatus, Type: smithy.ShapeTypeStructure, Ext: &ext[53]})
-var sCloudWatchLogDestination_LogGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroup", ID: &i_LogGroup, Type: smithy.ShapeTypeString, Ext: &ext[56]})
-var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var sDisabledOperationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[60]})
-var sEncryptionAtRestOptions_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &ext[62]})
-var s_IngestEndpointUrlsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[65]})
-var sInternalException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[68]})
-var sInvalidPaginationTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[70]})
-var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[73]})
-var sLogPublishingOptions_IsLoggingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsLoggingEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[76]})
-var sLogPublishingOptions_CloudWatchLogDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogDestination", ID: &iCloudWatchLogDestination, Members: &mCloudWatchLogDestination, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
-var sPipeline_PipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[81]})
-var sPipeline_PipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[82]})
-var sPipeline_MinUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinUnits", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[83]})
-var sPipeline_MaxUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxUnits", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ext[84]})
-var sPipeline_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iPipelineStatus, Members: &mPipelineStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[85]})
-var sPipeline_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iPipelineStatusReason, Members: &mPipelineStatusReason, Type: smithy.ShapeTypeStructure, Ext: &ext[86]})
-var sPipeline_PipelineConfigurationBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineConfigurationBody", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[87]})
-var sPipeline_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[88]})
-var sPipeline_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[89]})
-var sPipeline_IngestEndpointUrls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngestEndpointUrls", ID: &i_IngestEndpointUrlsList, Members: &m_IngestEndpointUrlsList, Type: smithy.ShapeTypeList, Ext: &ext[90]})
-var sPipeline_LogPublishingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogPublishingOptions", ID: &iLogPublishingOptions, Members: &mLogPublishingOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[91]})
-var sPipeline_VpcEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpoints", ID: &i_VpcEndpointsList, Members: &m_VpcEndpointsList, Type: smithy.ShapeTypeList, Ext: &ext[92]})
-var sPipeline_BufferOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BufferOptions", ID: &iBufferOptions, Members: &mBufferOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[93]})
-var sPipeline_EncryptionAtRestOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionAtRestOptions", ID: &iEncryptionAtRestOptions, Members: &mEncryptionAtRestOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[94]})
-var sPipeline_VpcEndpointService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointService", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[95]})
-var sPipeline_ServiceVpcEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceVpcEndpoints", ID: &i_ServiceVpcEndpointsList, Members: &m_ServiceVpcEndpointsList, Type: smithy.ShapeTypeList, Ext: &ext[96]})
-var sPipeline_Destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destinations", ID: &i_PipelineDestinationList, Members: &m_PipelineDestinationList, Type: smithy.ShapeTypeList, Ext: &ext[97]})
-var sPipeline_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[98]})
-var sPipeline_PipelineRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineRoleArn", ID: &i_PipelineRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[99]})
-var sPipelineBlueprint_BlueprintName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlueprintName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var sPipelineBlueprint_PipelineConfigurationBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineConfigurationBody", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[103]})
-var sPipelineBlueprint_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[104]})
-var sPipelineBlueprint_DisplayDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayDescription", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[105]})
-var sPipelineBlueprint_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[106]})
-var sPipelineBlueprint_UseCase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UseCase", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[107]})
-var s_PipelineBlueprintsSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPipelineBlueprintSummary, Members: &mPipelineBlueprintSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[109]})
-var sPipelineBlueprintSummary_BlueprintName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlueprintName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[111]})
-var sPipelineBlueprintSummary_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[112]})
-var sPipelineBlueprintSummary_DisplayDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayDescription", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[113]})
-var sPipelineBlueprintSummary_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[114]})
-var sPipelineBlueprintSummary_UseCase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UseCase", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[115]})
-var sPipelineDestination_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[118]})
-var sPipelineDestination_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[119]})
-var s_PipelineDestinationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPipelineDestination, Members: &mPipelineDestination, Type: smithy.ShapeTypeStructure, Ext: &ext[121]})
-var sPipelineEndpoint_PipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineArn", ID: &i_PipelineArn, Type: smithy.ShapeTypeString, Ext: &ext[123]})
-var sPipelineEndpoint_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointId", ID: &i_PipelineEndpointId, Type: smithy.ShapeTypeString, Ext: &ext[124]})
-var sPipelineEndpoint_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iPipelineEndpointStatus, Members: &mPipelineEndpointStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[125]})
-var sPipelineEndpoint_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[126]})
-var sPipelineEndpoint_VpcOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcOptions", ID: &iPipelineEndpointVpcOptions, Members: &mPipelineEndpointVpcOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[127]})
-var sPipelineEndpoint_IngestEndpointUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngestEndpointUrl", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[128]})
-var sPipelineEndpointConnection_PipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineArn", ID: &i_PipelineArn, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var sPipelineEndpointConnection_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointId", ID: &i_PipelineEndpointId, Type: smithy.ShapeTypeString, Ext: &ext[131]})
-var sPipelineEndpointConnection_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iPipelineEndpointStatus, Members: &mPipelineEndpointStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[132]})
-var sPipelineEndpointConnection_VpcEndpointOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointOwner", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &ext[133]})
-var s_PipelineEndpointConnectionsSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPipelineEndpointConnection, Members: &mPipelineEndpointConnection, Type: smithy.ShapeTypeStructure, Ext: &ext[135]})
-var s_PipelineEndpointIdsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PipelineEndpointId, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var s_PipelineEndpointsSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPipelineEndpoint, Members: &mPipelineEndpoint, Type: smithy.ShapeTypeStructure, Ext: &ext[140]})
-var sPipelineEndpointStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[142]})
-var sPipelineEndpointStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[143]})
-var sPipelineEndpointStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[144]})
-var sPipelineEndpointStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[145]})
-var sPipelineEndpointStatus_REVOKING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVOKING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[146]})
-var sPipelineEndpointStatus_REVOKED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVOKED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[147]})
-var sPipelineEndpointVpcOptions_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList, Ext: &ext[149]})
-var sPipelineEndpointVpcOptions_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList, Ext: &ext[150]})
-var sPipelineStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[154]})
-var sPipelineStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[155]})
-var sPipelineStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[156]})
-var sPipelineStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[157]})
-var sPipelineStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[158]})
-var sPipelineStatus_UPDATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[159]})
-var sPipelineStatus_STARTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STARTING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[160]})
-var sPipelineStatus_START_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "START_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[161]})
-var sPipelineStatus_STOPPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[162]})
-var sPipelineStatus_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[163]})
-var sPipelineStatusReason_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[165]})
-var sPipelineSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iPipelineStatus, Members: &mPipelineStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[167]})
-var sPipelineSummary_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iPipelineStatusReason, Members: &mPipelineStatusReason, Type: smithy.ShapeTypeStructure, Ext: &ext[168]})
-var sPipelineSummary_PipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[169]})
-var sPipelineSummary_PipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineArn", ID: &i_PipelineArn, Type: smithy.ShapeTypeString, Ext: &ext[170]})
-var sPipelineSummary_MinUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinUnits", ID: &i_PipelineUnits, Type: smithy.ShapeTypeInteger, Ext: &ext[171]})
-var sPipelineSummary_MaxUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxUnits", ID: &i_PipelineUnits, Type: smithy.ShapeTypeInteger, Ext: &ext[172]})
-var sPipelineSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[173]})
-var sPipelineSummary_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[174]})
-var sPipelineSummary_Destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destinations", ID: &i_PipelineDestinationList, Members: &m_PipelineDestinationList, Type: smithy.ShapeTypeList, Ext: &ext[175]})
-var sPipelineSummary_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[176]})
-var s_PipelineSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPipelineSummary, Members: &mPipelineSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[178]})
-var sResourceAlreadyExistsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[181]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[183]})
-var s_SecurityGroupIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString, Ext: &ext[187]})
-var sServiceVpcEndpoint_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &iVpcEndpointServiceName, Members: &mVpcEndpointServiceName, Type: smithy.ShapeTypeEnum, Ext: &ext[189]})
-var sServiceVpcEndpoint_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[190]})
-var s_ServiceVpcEndpointsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceVpcEndpoint, Members: &mServiceVpcEndpoint, Type: smithy.ShapeTypeStructure, Ext: &ext[192]})
-var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[195]})
-var s_SubnetIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &ext[198]})
-var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[200]})
-var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[201]})
-var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[204]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[208]})
-var sValidationMessage_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[210]})
-var s_ValidationMessageList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationMessage, Members: &mValidationMessage, Type: smithy.ShapeTypeStructure, Ext: &ext[212]})
-var sVpcAttachmentOptions_AttachToVpc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachToVpc", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[214]})
-var sVpcAttachmentOptions_CidrBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CidrBlock", ID: &i_CidrBlock, Type: smithy.ShapeTypeString, Ext: &ext[215]})
-var sVpcEndpoint_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[217]})
-var sVpcEndpoint_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[218]})
-var sVpcEndpoint_VpcOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcOptions", ID: &iVpcOptions, Members: &mVpcOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[219]})
-var sVpcEndpointManagement_CUSTOMER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[221]})
-var sVpcEndpointManagement_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[222]})
-var sVpcEndpointServiceName_OPENSEARCH_SERVERLESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPENSEARCH_SERVERLESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[224]})
-var s_VpcEndpointsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVpcEndpoint, Members: &mVpcEndpoint, Type: smithy.ShapeTypeStructure, Ext: &ext[226]})
-var sVpcOptions_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList, Ext: &ext[228]})
-var sVpcOptions_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList, Ext: &ext[229]})
-var sVpcOptions_VpcAttachmentOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcAttachmentOptions", ID: &iVpcAttachmentOptions, Members: &mVpcAttachmentOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[230]})
-var sVpcOptions_VpcEndpointManagement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointManagement", ID: &iVpcEndpointManagement, Members: &mVpcEndpointManagement, Type: smithy.ShapeTypeEnum, Ext: &ext[231]})
-var sCreatePipelineEndpointRequest_PipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineArn", ID: &i_PipelineArn, Type: smithy.ShapeTypeString, Ext: &ext[233]})
-var sCreatePipelineEndpointRequest_VpcOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcOptions", ID: &iPipelineEndpointVpcOptions, Members: &mPipelineEndpointVpcOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[234]})
-var sCreatePipelineEndpointResponse_PipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineArn", ID: &i_PipelineArn, Type: smithy.ShapeTypeString, Ext: &ext[236]})
-var sCreatePipelineEndpointResponse_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointId", ID: &i_PipelineEndpointId, Type: smithy.ShapeTypeString, Ext: &ext[237]})
-var sCreatePipelineEndpointResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iPipelineEndpointStatus, Members: &mPipelineEndpointStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[238]})
-var sCreatePipelineEndpointResponse_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[239]})
-var sCreatePipelineRequest_PipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[241]})
-var sCreatePipelineRequest_MinUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinUnits", ID: &i_PipelineUnits, Type: smithy.ShapeTypeInteger, Ext: &ext[242]})
-var sCreatePipelineRequest_MaxUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxUnits", ID: &i_PipelineUnits, Type: smithy.ShapeTypeInteger, Ext: &ext[243]})
-var sCreatePipelineRequest_PipelineConfigurationBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineConfigurationBody", ID: &i_PipelineConfigurationBody, Type: smithy.ShapeTypeString, Ext: &ext[244]})
-var sCreatePipelineRequest_LogPublishingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogPublishingOptions", ID: &iLogPublishingOptions, Members: &mLogPublishingOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[245]})
-var sCreatePipelineRequest_VpcOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcOptions", ID: &iVpcOptions, Members: &mVpcOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[246]})
-var sCreatePipelineRequest_BufferOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BufferOptions", ID: &iBufferOptions, Members: &mBufferOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[247]})
-var sCreatePipelineRequest_EncryptionAtRestOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionAtRestOptions", ID: &iEncryptionAtRestOptions, Members: &mEncryptionAtRestOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[248]})
-var sCreatePipelineRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[249]})
-var sCreatePipelineRequest_PipelineRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineRoleArn", ID: &i_PipelineRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[250]})
-var sCreatePipelineResponse_Pipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pipeline", ID: &iPipeline, Members: &mPipeline, Type: smithy.ShapeTypeStructure, Ext: &ext[252]})
-var sDeletePipelineEndpointRequest_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointId", ID: &i_PipelineEndpointId, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &ext[254]})
-var sDeletePipelineRequest_PipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineName", ID: &i_PipelineName, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &ext[257]})
-var sDeleteResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_PipelineArn, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &ext[260]})
-var sGetPipelineBlueprintRequest_BlueprintName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlueprintName", ID: &i_String, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &ext[263]})
-var sGetPipelineBlueprintRequest_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &i_BlueprintFormat, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &ext[264]})
-var sGetPipelineBlueprintResponse_Blueprint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Blueprint", ID: &iPipelineBlueprint, Members: &mPipelineBlueprint, Type: smithy.ShapeTypeStructure, Ext: &ext[266]})
-var sGetPipelineBlueprintResponse_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[267]})
-var sGetPipelineChangeProgressRequest_PipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineName", ID: &i_PipelineName, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &ext[269]})
-var sGetPipelineChangeProgressResponse_ChangeProgressStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeProgressStatuses", ID: &i_ChangeProgressStatusList, Members: &m_ChangeProgressStatusList, Type: smithy.ShapeTypeList, Ext: &ext[271]})
-var sGetPipelineRequest_PipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineName", ID: &i_PipelineName, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &ext[273]})
-var sGetPipelineResponse_Pipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pipeline", ID: &iPipeline, Members: &mPipeline, Type: smithy.ShapeTypeStructure, Ext: &ext[275]})
-var sGetResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_PipelineArn, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &ext[277]})
-var sGetResourcePolicyResponse_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_PipelineArn, Type: smithy.ShapeTypeString, Ext: &ext[279]})
-var sGetResourcePolicyResponse_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString, Ext: &ext[280]})
-var sListPipelineBlueprintsResponse_Blueprints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Blueprints", ID: &i_PipelineBlueprintsSummaryList, Members: &m_PipelineBlueprintsSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[283]})
-var sListPipelineEndpointConnectionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t30, Type: smithy.ShapeTypeInteger, Ext: &ext[285]})
-var sListPipelineEndpointConnectionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[286]})
-var sListPipelineEndpointConnectionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[288]})
-var sListPipelineEndpointConnectionsResponse_PipelineEndpointConnections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineEndpointConnections", ID: &i_PipelineEndpointConnectionsSummaryList, Members: &m_PipelineEndpointConnectionsSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[289]})
-var sListPipelineEndpointsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t30, Type: smithy.ShapeTypeInteger, Ext: &ext[291]})
-var sListPipelineEndpointsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[292]})
-var sListPipelineEndpointsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[294]})
-var sListPipelineEndpointsResponse_PipelineEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineEndpoints", ID: &i_PipelineEndpointsSummaryList, Members: &m_PipelineEndpointsSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[295]})
-var sListPipelinesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t30, Type: smithy.ShapeTypeInteger, Ext: &ext[297]})
-var sListPipelinesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[298]})
-var sListPipelinesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[300]})
-var sListPipelinesResponse_Pipelines = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pipelines", ID: &i_PipelineSummaryList, Members: &m_PipelineSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[301]})
-var sListTagsForResourceRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PipelineArn, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ext[303]})
-var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[305]})
-var sPutResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_PipelineArn, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &ext[307]})
-var sPutResourcePolicyRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString, Ext: &ext[308]})
-var sPutResourcePolicyResponse_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_PipelineArn, Type: smithy.ShapeTypeString, Ext: &ext[310]})
-var sPutResourcePolicyResponse_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString, Ext: &ext[311]})
-var sRevokePipelineEndpointConnectionsRequest_PipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineArn", ID: &i_PipelineArn, Type: smithy.ShapeTypeString, Ext: &ext[313]})
-var sRevokePipelineEndpointConnectionsRequest_EndpointIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointIds", ID: &i_PipelineEndpointIdsList, Members: &m_PipelineEndpointIdsList, Type: smithy.ShapeTypeList, Ext: &ext[314]})
-var sRevokePipelineEndpointConnectionsResponse_PipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineArn", ID: &i_PipelineArn, Type: smithy.ShapeTypeString, Ext: &ext[316]})
-var sStartPipelineRequest_PipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineName", ID: &i_PipelineName, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &ext[318]})
-var sStartPipelineResponse_Pipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pipeline", ID: &iPipeline, Members: &mPipeline, Type: smithy.ShapeTypeStructure, Ext: &ext[320]})
-var sStopPipelineRequest_PipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineName", ID: &i_PipelineName, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &ext[322]})
-var sStopPipelineResponse_Pipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pipeline", ID: &iPipeline, Members: &mPipeline, Type: smithy.ShapeTypeStructure, Ext: &ext[324]})
-var sTagResourceRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PipelineArn, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ext[326]})
-var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[327]})
-var sUntagResourceRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PipelineArn, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ext[330]})
-var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &ext[331]})
-var sUpdatePipelineRequest_PipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineName", ID: &i_PipelineName, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &ext[334]})
-var sUpdatePipelineRequest_MinUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinUnits", ID: &i_PipelineUnits, Type: smithy.ShapeTypeInteger, Ext: &ext[335]})
-var sUpdatePipelineRequest_MaxUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxUnits", ID: &i_PipelineUnits, Type: smithy.ShapeTypeInteger, Ext: &ext[336]})
-var sUpdatePipelineRequest_PipelineConfigurationBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineConfigurationBody", ID: &i_PipelineConfigurationBody, Type: smithy.ShapeTypeString, Ext: &ext[337]})
-var sUpdatePipelineRequest_LogPublishingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogPublishingOptions", ID: &iLogPublishingOptions, Members: &mLogPublishingOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[338]})
-var sUpdatePipelineRequest_BufferOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BufferOptions", ID: &iBufferOptions, Members: &mBufferOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[339]})
-var sUpdatePipelineRequest_EncryptionAtRestOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionAtRestOptions", ID: &iEncryptionAtRestOptions, Members: &mEncryptionAtRestOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[340]})
-var sUpdatePipelineRequest_PipelineRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineRoleArn", ID: &i_PipelineRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[341]})
-var sUpdatePipelineResponse_Pipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pipeline", ID: &iPipeline, Members: &mPipeline, Type: smithy.ShapeTypeStructure, Ext: &ext[343]})
-var sValidatePipelineRequest_PipelineConfigurationBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineConfigurationBody", ID: &i_PipelineConfigurationBody, Type: smithy.ShapeTypeString, Ext: &ext[345]})
-var sValidatePipelineResponse_isValid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isValid", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[347]})
-var sValidatePipelineResponse_Errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errors", ID: &i_ValidationMessageList, Members: &m_ValidationMessageList, Type: smithy.ShapeTypeList, Ext: &ext[348]})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sBufferOptions_PersistentBufferEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PersistentBufferEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eBufferOptions_PersistentBufferEnabled})
+var sChangeProgressStage_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eChangeProgressStage_Name})
+var sChangeProgressStage_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iChangeProgressStageStatuses, Members: &mChangeProgressStageStatuses, Type: smithy.ShapeTypeEnum, Ext: &eChangeProgressStage_Status})
+var sChangeProgressStage_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eChangeProgressStage_Description})
+var sChangeProgressStage_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChangeProgressStage_LastUpdatedAt})
+var s_ChangeProgressStageList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChangeProgressStage, Members: &mChangeProgressStage, Type: smithy.ShapeTypeStructure, Ext: &e_ChangeProgressStageList_member})
+var sChangeProgressStageStatuses_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChangeProgressStageStatuses_PENDING})
+var sChangeProgressStageStatuses_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChangeProgressStageStatuses_IN_PROGRESS})
+var sChangeProgressStageStatuses_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChangeProgressStageStatuses_COMPLETED})
+var sChangeProgressStageStatuses_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChangeProgressStageStatuses_FAILED})
+var sChangeProgressStatus_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eChangeProgressStatus_StartTime})
+var sChangeProgressStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iChangeProgressStatuses, Members: &mChangeProgressStatuses, Type: smithy.ShapeTypeEnum, Ext: &eChangeProgressStatus_Status})
+var sChangeProgressStatus_TotalNumberOfStages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalNumberOfStages", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &eChangeProgressStatus_TotalNumberOfStages})
+var sChangeProgressStatus_ChangeProgressStages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeProgressStages", ID: &i_ChangeProgressStageList, Members: &m_ChangeProgressStageList, Type: smithy.ShapeTypeList, Ext: &eChangeProgressStatus_ChangeProgressStages})
+var sChangeProgressStatuses_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChangeProgressStatuses_PENDING})
+var sChangeProgressStatuses_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChangeProgressStatuses_IN_PROGRESS})
+var sChangeProgressStatuses_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChangeProgressStatuses_COMPLETED})
+var sChangeProgressStatuses_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChangeProgressStatuses_FAILED})
+var s_ChangeProgressStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChangeProgressStatus, Members: &mChangeProgressStatus, Type: smithy.ShapeTypeStructure, Ext: &e_ChangeProgressStatusList_member})
+var sCloudWatchLogDestination_LogGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroup", ID: &i_LogGroup, Type: smithy.ShapeTypeString, Ext: &eCloudWatchLogDestination_LogGroup})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sDisabledOperationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eDisabledOperationException_message})
+var sEncryptionAtRestOptions_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eEncryptionAtRestOptions_KmsKeyArn})
+var s_IngestEndpointUrlsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_IngestEndpointUrlsList_member})
+var sInternalException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalException_message})
+var sInvalidPaginationTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidPaginationTokenException_message})
+var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_message})
+var sLogPublishingOptions_IsLoggingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsLoggingEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eLogPublishingOptions_IsLoggingEnabled})
+var sLogPublishingOptions_CloudWatchLogDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogDestination", ID: &iCloudWatchLogDestination, Members: &mCloudWatchLogDestination, Type: smithy.ShapeTypeStructure, Ext: &eLogPublishingOptions_CloudWatchLogDestination})
+var sPipeline_PipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePipeline_PipelineName})
+var sPipeline_PipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineArn", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePipeline_PipelineArn})
+var sPipeline_MinUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinUnits", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ePipeline_MinUnits})
+var sPipeline_MaxUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxUnits", ID: &i_Integer, Type: smithy.ShapeTypeInteger, Ext: &ePipeline_MaxUnits})
+var sPipeline_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iPipelineStatus, Members: &mPipelineStatus, Type: smithy.ShapeTypeEnum, Ext: &ePipeline_Status})
+var sPipeline_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iPipelineStatusReason, Members: &mPipelineStatusReason, Type: smithy.ShapeTypeStructure, Ext: &ePipeline_StatusReason})
+var sPipeline_PipelineConfigurationBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineConfigurationBody", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePipeline_PipelineConfigurationBody})
+var sPipeline_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePipeline_CreatedAt})
+var sPipeline_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePipeline_LastUpdatedAt})
+var sPipeline_IngestEndpointUrls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngestEndpointUrls", ID: &i_IngestEndpointUrlsList, Members: &m_IngestEndpointUrlsList, Type: smithy.ShapeTypeList, Ext: &ePipeline_IngestEndpointUrls})
+var sPipeline_LogPublishingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogPublishingOptions", ID: &iLogPublishingOptions, Members: &mLogPublishingOptions, Type: smithy.ShapeTypeStructure, Ext: &ePipeline_LogPublishingOptions})
+var sPipeline_VpcEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpoints", ID: &i_VpcEndpointsList, Members: &m_VpcEndpointsList, Type: smithy.ShapeTypeList, Ext: &ePipeline_VpcEndpoints})
+var sPipeline_BufferOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BufferOptions", ID: &iBufferOptions, Members: &mBufferOptions, Type: smithy.ShapeTypeStructure, Ext: &ePipeline_BufferOptions})
+var sPipeline_EncryptionAtRestOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionAtRestOptions", ID: &iEncryptionAtRestOptions, Members: &mEncryptionAtRestOptions, Type: smithy.ShapeTypeStructure, Ext: &ePipeline_EncryptionAtRestOptions})
+var sPipeline_VpcEndpointService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointService", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePipeline_VpcEndpointService})
+var sPipeline_ServiceVpcEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceVpcEndpoints", ID: &i_ServiceVpcEndpointsList, Members: &m_ServiceVpcEndpointsList, Type: smithy.ShapeTypeList, Ext: &ePipeline_ServiceVpcEndpoints})
+var sPipeline_Destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destinations", ID: &i_PipelineDestinationList, Members: &m_PipelineDestinationList, Type: smithy.ShapeTypeList, Ext: &ePipeline_Destinations})
+var sPipeline_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ePipeline_Tags})
+var sPipeline_PipelineRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineRoleArn", ID: &i_PipelineRoleArn, Type: smithy.ShapeTypeString, Ext: &ePipeline_PipelineRoleArn})
+var sPipelineBlueprint_BlueprintName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlueprintName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePipelineBlueprint_BlueprintName})
+var sPipelineBlueprint_PipelineConfigurationBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineConfigurationBody", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePipelineBlueprint_PipelineConfigurationBody})
+var sPipelineBlueprint_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePipelineBlueprint_DisplayName})
+var sPipelineBlueprint_DisplayDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayDescription", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePipelineBlueprint_DisplayDescription})
+var sPipelineBlueprint_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePipelineBlueprint_Service})
+var sPipelineBlueprint_UseCase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UseCase", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePipelineBlueprint_UseCase})
+var s_PipelineBlueprintsSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPipelineBlueprintSummary, Members: &mPipelineBlueprintSummary, Type: smithy.ShapeTypeStructure, Ext: &e_PipelineBlueprintsSummaryList_member})
+var sPipelineBlueprintSummary_BlueprintName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlueprintName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePipelineBlueprintSummary_BlueprintName})
+var sPipelineBlueprintSummary_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePipelineBlueprintSummary_DisplayName})
+var sPipelineBlueprintSummary_DisplayDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayDescription", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePipelineBlueprintSummary_DisplayDescription})
+var sPipelineBlueprintSummary_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePipelineBlueprintSummary_Service})
+var sPipelineBlueprintSummary_UseCase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UseCase", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePipelineBlueprintSummary_UseCase})
+var sPipelineDestination_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePipelineDestination_ServiceName})
+var sPipelineDestination_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePipelineDestination_Endpoint})
+var s_PipelineDestinationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPipelineDestination, Members: &mPipelineDestination, Type: smithy.ShapeTypeStructure, Ext: &e_PipelineDestinationList_member})
+var sPipelineEndpoint_PipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineArn", ID: &i_PipelineArn, Type: smithy.ShapeTypeString, Ext: &ePipelineEndpoint_PipelineArn})
+var sPipelineEndpoint_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointId", ID: &i_PipelineEndpointId, Type: smithy.ShapeTypeString, Ext: &ePipelineEndpoint_EndpointId})
+var sPipelineEndpoint_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iPipelineEndpointStatus, Members: &mPipelineEndpointStatus, Type: smithy.ShapeTypeEnum, Ext: &ePipelineEndpoint_Status})
+var sPipelineEndpoint_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePipelineEndpoint_VpcId})
+var sPipelineEndpoint_VpcOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcOptions", ID: &iPipelineEndpointVpcOptions, Members: &mPipelineEndpointVpcOptions, Type: smithy.ShapeTypeStructure, Ext: &ePipelineEndpoint_VpcOptions})
+var sPipelineEndpoint_IngestEndpointUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngestEndpointUrl", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePipelineEndpoint_IngestEndpointUrl})
+var sPipelineEndpointConnection_PipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineArn", ID: &i_PipelineArn, Type: smithy.ShapeTypeString, Ext: &ePipelineEndpointConnection_PipelineArn})
+var sPipelineEndpointConnection_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointId", ID: &i_PipelineEndpointId, Type: smithy.ShapeTypeString, Ext: &ePipelineEndpointConnection_EndpointId})
+var sPipelineEndpointConnection_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iPipelineEndpointStatus, Members: &mPipelineEndpointStatus, Type: smithy.ShapeTypeEnum, Ext: &ePipelineEndpointConnection_Status})
+var sPipelineEndpointConnection_VpcEndpointOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointOwner", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &ePipelineEndpointConnection_VpcEndpointOwner})
+var s_PipelineEndpointConnectionsSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPipelineEndpointConnection, Members: &mPipelineEndpointConnection, Type: smithy.ShapeTypeStructure, Ext: &e_PipelineEndpointConnectionsSummaryList_member})
+var s_PipelineEndpointIdsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PipelineEndpointId, Type: smithy.ShapeTypeString, Ext: &e_PipelineEndpointIdsList_member})
+var s_PipelineEndpointsSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPipelineEndpoint, Members: &mPipelineEndpoint, Type: smithy.ShapeTypeStructure, Ext: &e_PipelineEndpointsSummaryList_member})
+var sPipelineEndpointStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePipelineEndpointStatus_CREATING})
+var sPipelineEndpointStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePipelineEndpointStatus_ACTIVE})
+var sPipelineEndpointStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePipelineEndpointStatus_CREATE_FAILED})
+var sPipelineEndpointStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePipelineEndpointStatus_DELETING})
+var sPipelineEndpointStatus_REVOKING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVOKING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePipelineEndpointStatus_REVOKING})
+var sPipelineEndpointStatus_REVOKED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVOKED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePipelineEndpointStatus_REVOKED})
+var sPipelineEndpointVpcOptions_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList, Ext: &ePipelineEndpointVpcOptions_SubnetIds})
+var sPipelineEndpointVpcOptions_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList, Ext: &ePipelineEndpointVpcOptions_SecurityGroupIds})
+var sPipelineStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePipelineStatus_CREATING})
+var sPipelineStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePipelineStatus_ACTIVE})
+var sPipelineStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePipelineStatus_UPDATING})
+var sPipelineStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePipelineStatus_DELETING})
+var sPipelineStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePipelineStatus_CREATE_FAILED})
+var sPipelineStatus_UPDATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePipelineStatus_UPDATE_FAILED})
+var sPipelineStatus_STARTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STARTING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePipelineStatus_STARTING})
+var sPipelineStatus_START_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "START_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePipelineStatus_START_FAILED})
+var sPipelineStatus_STOPPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePipelineStatus_STOPPING})
+var sPipelineStatus_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePipelineStatus_STOPPED})
+var sPipelineStatusReason_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ePipelineStatusReason_Description})
+var sPipelineSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iPipelineStatus, Members: &mPipelineStatus, Type: smithy.ShapeTypeEnum, Ext: &ePipelineSummary_Status})
+var sPipelineSummary_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iPipelineStatusReason, Members: &mPipelineStatusReason, Type: smithy.ShapeTypeStructure, Ext: &ePipelineSummary_StatusReason})
+var sPipelineSummary_PipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ePipelineSummary_PipelineName})
+var sPipelineSummary_PipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineArn", ID: &i_PipelineArn, Type: smithy.ShapeTypeString, Ext: &ePipelineSummary_PipelineArn})
+var sPipelineSummary_MinUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinUnits", ID: &i_PipelineUnits, Type: smithy.ShapeTypeInteger, Ext: &ePipelineSummary_MinUnits})
+var sPipelineSummary_MaxUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxUnits", ID: &i_PipelineUnits, Type: smithy.ShapeTypeInteger, Ext: &ePipelineSummary_MaxUnits})
+var sPipelineSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePipelineSummary_CreatedAt})
+var sPipelineSummary_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePipelineSummary_LastUpdatedAt})
+var sPipelineSummary_Destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destinations", ID: &i_PipelineDestinationList, Members: &m_PipelineDestinationList, Type: smithy.ShapeTypeList, Ext: &ePipelineSummary_Destinations})
+var sPipelineSummary_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ePipelineSummary_Tags})
+var s_PipelineSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPipelineSummary, Members: &mPipelineSummary, Type: smithy.ShapeTypeStructure, Ext: &e_PipelineSummaryList_member})
+var sResourceAlreadyExistsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceAlreadyExistsException_message})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var s_SecurityGroupIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString, Ext: &e_SecurityGroupIds_member})
+var sServiceVpcEndpoint_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &iVpcEndpointServiceName, Members: &mVpcEndpointServiceName, Type: smithy.ShapeTypeEnum, Ext: &eServiceVpcEndpoint_ServiceName})
+var sServiceVpcEndpoint_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceVpcEndpoint_VpcEndpointId})
+var s_ServiceVpcEndpointsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceVpcEndpoint, Members: &mServiceVpcEndpoint, Type: smithy.ShapeTypeStructure, Ext: &e_ServiceVpcEndpointsList_member})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_StringList_member})
+var s_SubnetIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &e_SubnetIds_member})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationMessage_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eValidationMessage_Message})
+var s_ValidationMessageList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationMessage, Members: &mValidationMessage, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationMessageList_member})
+var sVpcAttachmentOptions_AttachToVpc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachToVpc", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eVpcAttachmentOptions_AttachToVpc})
+var sVpcAttachmentOptions_CidrBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CidrBlock", ID: &i_CidrBlock, Type: smithy.ShapeTypeString, Ext: &eVpcAttachmentOptions_CidrBlock})
+var sVpcEndpoint_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eVpcEndpoint_VpcEndpointId})
+var sVpcEndpoint_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eVpcEndpoint_VpcId})
+var sVpcEndpoint_VpcOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcOptions", ID: &iVpcOptions, Members: &mVpcOptions, Type: smithy.ShapeTypeStructure, Ext: &eVpcEndpoint_VpcOptions})
+var sVpcEndpointManagement_CUSTOMER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVpcEndpointManagement_CUSTOMER})
+var sVpcEndpointManagement_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVpcEndpointManagement_SERVICE})
+var sVpcEndpointServiceName_OPENSEARCH_SERVERLESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPENSEARCH_SERVERLESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eVpcEndpointServiceName_OPENSEARCH_SERVERLESS})
+var s_VpcEndpointsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVpcEndpoint, Members: &mVpcEndpoint, Type: smithy.ShapeTypeStructure, Ext: &e_VpcEndpointsList_member})
+var sVpcOptions_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList, Ext: &eVpcOptions_SubnetIds})
+var sVpcOptions_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList, Ext: &eVpcOptions_SecurityGroupIds})
+var sVpcOptions_VpcAttachmentOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcAttachmentOptions", ID: &iVpcAttachmentOptions, Members: &mVpcAttachmentOptions, Type: smithy.ShapeTypeStructure, Ext: &eVpcOptions_VpcAttachmentOptions})
+var sVpcOptions_VpcEndpointManagement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointManagement", ID: &iVpcEndpointManagement, Members: &mVpcEndpointManagement, Type: smithy.ShapeTypeEnum, Ext: &eVpcOptions_VpcEndpointManagement})
+var sCreatePipelineEndpointRequest_PipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineArn", ID: &i_PipelineArn, Type: smithy.ShapeTypeString, Ext: &eCreatePipelineEndpointRequest_PipelineArn})
+var sCreatePipelineEndpointRequest_VpcOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcOptions", ID: &iPipelineEndpointVpcOptions, Members: &mPipelineEndpointVpcOptions, Type: smithy.ShapeTypeStructure, Ext: &eCreatePipelineEndpointRequest_VpcOptions})
+var sCreatePipelineEndpointResponse_PipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineArn", ID: &i_PipelineArn, Type: smithy.ShapeTypeString, Ext: &eCreatePipelineEndpointResponse_PipelineArn})
+var sCreatePipelineEndpointResponse_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointId", ID: &i_PipelineEndpointId, Type: smithy.ShapeTypeString, Ext: &eCreatePipelineEndpointResponse_EndpointId})
+var sCreatePipelineEndpointResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iPipelineEndpointStatus, Members: &mPipelineEndpointStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreatePipelineEndpointResponse_Status})
+var sCreatePipelineEndpointResponse_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCreatePipelineEndpointResponse_VpcId})
+var sCreatePipelineRequest_PipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &eCreatePipelineRequest_PipelineName})
+var sCreatePipelineRequest_MinUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinUnits", ID: &i_PipelineUnits, Type: smithy.ShapeTypeInteger, Ext: &eCreatePipelineRequest_MinUnits})
+var sCreatePipelineRequest_MaxUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxUnits", ID: &i_PipelineUnits, Type: smithy.ShapeTypeInteger, Ext: &eCreatePipelineRequest_MaxUnits})
+var sCreatePipelineRequest_PipelineConfigurationBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineConfigurationBody", ID: &i_PipelineConfigurationBody, Type: smithy.ShapeTypeString, Ext: &eCreatePipelineRequest_PipelineConfigurationBody})
+var sCreatePipelineRequest_LogPublishingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogPublishingOptions", ID: &iLogPublishingOptions, Members: &mLogPublishingOptions, Type: smithy.ShapeTypeStructure, Ext: &eCreatePipelineRequest_LogPublishingOptions})
+var sCreatePipelineRequest_VpcOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcOptions", ID: &iVpcOptions, Members: &mVpcOptions, Type: smithy.ShapeTypeStructure, Ext: &eCreatePipelineRequest_VpcOptions})
+var sCreatePipelineRequest_BufferOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BufferOptions", ID: &iBufferOptions, Members: &mBufferOptions, Type: smithy.ShapeTypeStructure, Ext: &eCreatePipelineRequest_BufferOptions})
+var sCreatePipelineRequest_EncryptionAtRestOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionAtRestOptions", ID: &iEncryptionAtRestOptions, Members: &mEncryptionAtRestOptions, Type: smithy.ShapeTypeStructure, Ext: &eCreatePipelineRequest_EncryptionAtRestOptions})
+var sCreatePipelineRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreatePipelineRequest_Tags})
+var sCreatePipelineRequest_PipelineRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineRoleArn", ID: &i_PipelineRoleArn, Type: smithy.ShapeTypeString, Ext: &eCreatePipelineRequest_PipelineRoleArn})
+var sCreatePipelineResponse_Pipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pipeline", ID: &iPipeline, Members: &mPipeline, Type: smithy.ShapeTypeStructure, Ext: &eCreatePipelineResponse_Pipeline})
+var sDeletePipelineEndpointRequest_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointId", ID: &i_PipelineEndpointId, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &eDeletePipelineEndpointRequest_EndpointId})
+var sDeletePipelineRequest_PipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineName", ID: &i_PipelineName, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &eDeletePipelineRequest_PipelineName})
+var sDeleteResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_PipelineArn, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &eDeleteResourcePolicyRequest_ResourceArn})
+var sGetPipelineBlueprintRequest_BlueprintName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlueprintName", ID: &i_String, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &eGetPipelineBlueprintRequest_BlueprintName})
+var sGetPipelineBlueprintRequest_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &i_BlueprintFormat, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eGetPipelineBlueprintRequest_Format})
+var sGetPipelineBlueprintResponse_Blueprint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Blueprint", ID: &iPipelineBlueprint, Members: &mPipelineBlueprint, Type: smithy.ShapeTypeStructure, Ext: &eGetPipelineBlueprintResponse_Blueprint})
+var sGetPipelineBlueprintResponse_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eGetPipelineBlueprintResponse_Format})
+var sGetPipelineChangeProgressRequest_PipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineName", ID: &i_PipelineName, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &eGetPipelineChangeProgressRequest_PipelineName})
+var sGetPipelineChangeProgressResponse_ChangeProgressStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeProgressStatuses", ID: &i_ChangeProgressStatusList, Members: &m_ChangeProgressStatusList, Type: smithy.ShapeTypeList, Ext: &eGetPipelineChangeProgressResponse_ChangeProgressStatuses})
+var sGetPipelineRequest_PipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineName", ID: &i_PipelineName, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &eGetPipelineRequest_PipelineName})
+var sGetPipelineResponse_Pipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pipeline", ID: &iPipeline, Members: &mPipeline, Type: smithy.ShapeTypeStructure, Ext: &eGetPipelineResponse_Pipeline})
+var sGetResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_PipelineArn, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &eGetResourcePolicyRequest_ResourceArn})
+var sGetResourcePolicyResponse_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_PipelineArn, Type: smithy.ShapeTypeString, Ext: &eGetResourcePolicyResponse_ResourceArn})
+var sGetResourcePolicyResponse_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString, Ext: &eGetResourcePolicyResponse_Policy})
+var sListPipelineBlueprintsResponse_Blueprints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Blueprints", ID: &i_PipelineBlueprintsSummaryList, Members: &m_PipelineBlueprintsSummaryList, Type: smithy.ShapeTypeList, Ext: &eListPipelineBlueprintsResponse_Blueprints})
+var sListPipelineEndpointConnectionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t30, Type: smithy.ShapeTypeInteger, Ext: &eListPipelineEndpointConnectionsRequest_MaxResults})
+var sListPipelineEndpointConnectionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eListPipelineEndpointConnectionsRequest_NextToken})
+var sListPipelineEndpointConnectionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPipelineEndpointConnectionsResponse_NextToken})
+var sListPipelineEndpointConnectionsResponse_PipelineEndpointConnections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineEndpointConnections", ID: &i_PipelineEndpointConnectionsSummaryList, Members: &m_PipelineEndpointConnectionsSummaryList, Type: smithy.ShapeTypeList, Ext: &eListPipelineEndpointConnectionsResponse_PipelineEndpointConnections})
+var sListPipelineEndpointsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t30, Type: smithy.ShapeTypeInteger, Ext: &eListPipelineEndpointsRequest_MaxResults})
+var sListPipelineEndpointsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eListPipelineEndpointsRequest_NextToken})
+var sListPipelineEndpointsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPipelineEndpointsResponse_NextToken})
+var sListPipelineEndpointsResponse_PipelineEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineEndpoints", ID: &i_PipelineEndpointsSummaryList, Members: &m_PipelineEndpointsSummaryList, Type: smithy.ShapeTypeList, Ext: &eListPipelineEndpointsResponse_PipelineEndpoints})
+var sListPipelinesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t30, Type: smithy.ShapeTypeInteger, Ext: &eListPipelinesRequest_MaxResults})
+var sListPipelinesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eListPipelinesRequest_NextToken})
+var sListPipelinesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPipelinesResponse_NextToken})
+var sListPipelinesResponse_Pipelines = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pipelines", ID: &i_PipelineSummaryList, Members: &m_PipelineSummaryList, Type: smithy.ShapeTypeList, Ext: &eListPipelinesResponse_Pipelines})
+var sListTagsForResourceRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PipelineArn, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_Arn})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_Tags})
+var sPutResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_PipelineArn, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyRequest_ResourceArn})
+var sPutResourcePolicyRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyRequest_Policy})
+var sPutResourcePolicyResponse_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_PipelineArn, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyResponse_ResourceArn})
+var sPutResourcePolicyResponse_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString, Ext: &ePutResourcePolicyResponse_Policy})
+var sRevokePipelineEndpointConnectionsRequest_PipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineArn", ID: &i_PipelineArn, Type: smithy.ShapeTypeString, Ext: &eRevokePipelineEndpointConnectionsRequest_PipelineArn})
+var sRevokePipelineEndpointConnectionsRequest_EndpointIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointIds", ID: &i_PipelineEndpointIdsList, Members: &m_PipelineEndpointIdsList, Type: smithy.ShapeTypeList, Ext: &eRevokePipelineEndpointConnectionsRequest_EndpointIds})
+var sRevokePipelineEndpointConnectionsResponse_PipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineArn", ID: &i_PipelineArn, Type: smithy.ShapeTypeString, Ext: &eRevokePipelineEndpointConnectionsResponse_PipelineArn})
+var sStartPipelineRequest_PipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineName", ID: &i_PipelineName, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &eStartPipelineRequest_PipelineName})
+var sStartPipelineResponse_Pipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pipeline", ID: &iPipeline, Members: &mPipeline, Type: smithy.ShapeTypeStructure, Ext: &eStartPipelineResponse_Pipeline})
+var sStopPipelineRequest_PipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineName", ID: &i_PipelineName, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &eStopPipelineRequest_PipelineName})
+var sStopPipelineResponse_Pipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pipeline", ID: &iPipeline, Members: &mPipeline, Type: smithy.ShapeTypeStructure, Ext: &eStopPipelineResponse_Pipeline})
+var sTagResourceRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PipelineArn, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_Arn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_Tags})
+var sUntagResourceRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PipelineArn, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_Arn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUpdatePipelineRequest_PipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineName", ID: &i_PipelineName, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &eUpdatePipelineRequest_PipelineName})
+var sUpdatePipelineRequest_MinUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinUnits", ID: &i_PipelineUnits, Type: smithy.ShapeTypeInteger, Ext: &eUpdatePipelineRequest_MinUnits})
+var sUpdatePipelineRequest_MaxUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxUnits", ID: &i_PipelineUnits, Type: smithy.ShapeTypeInteger, Ext: &eUpdatePipelineRequest_MaxUnits})
+var sUpdatePipelineRequest_PipelineConfigurationBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineConfigurationBody", ID: &i_PipelineConfigurationBody, Type: smithy.ShapeTypeString, Ext: &eUpdatePipelineRequest_PipelineConfigurationBody})
+var sUpdatePipelineRequest_LogPublishingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogPublishingOptions", ID: &iLogPublishingOptions, Members: &mLogPublishingOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePipelineRequest_LogPublishingOptions})
+var sUpdatePipelineRequest_BufferOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BufferOptions", ID: &iBufferOptions, Members: &mBufferOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePipelineRequest_BufferOptions})
+var sUpdatePipelineRequest_EncryptionAtRestOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionAtRestOptions", ID: &iEncryptionAtRestOptions, Members: &mEncryptionAtRestOptions, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePipelineRequest_EncryptionAtRestOptions})
+var sUpdatePipelineRequest_PipelineRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineRoleArn", ID: &i_PipelineRoleArn, Type: smithy.ShapeTypeString, Ext: &eUpdatePipelineRequest_PipelineRoleArn})
+var sUpdatePipelineResponse_Pipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pipeline", ID: &iPipeline, Members: &mPipeline, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePipelineResponse_Pipeline})
+var sValidatePipelineRequest_PipelineConfigurationBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineConfigurationBody", ID: &i_PipelineConfigurationBody, Type: smithy.ShapeTypeString, Ext: &eValidatePipelineRequest_PipelineConfigurationBody})
+var sValidatePipelineResponse_isValid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isValid", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eValidatePipelineResponse_isValid})
+var sValidatePipelineResponse_Errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errors", ID: &i_ValidationMessageList, Members: &m_ValidationMessageList, Type: smithy.ShapeTypeList, Ext: &eValidatePipelineResponse_Errors})
 
 var CreatePipeline = &sCreatePipeline
 

@@ -7,9 +7,232 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [224]smithy.SchemaExtensions
+var (
+	eExecuteSamplingOperation                                         smithy.SchemaExtensions
+	eExecuteTrainingOperation                                         smithy.SchemaExtensions
+	eGetSamplingOperationResult                                       smithy.SchemaExtensions
+	eGetTrainingOperationResult                                       smithy.SchemaExtensions
+	eSampleTrainingSession                                            smithy.SchemaExtensions
+	eSampleTrainingSessionWithResponseStream                          smithy.SchemaExtensions
+	e_LegoRouterService                                               smithy.SchemaExtensions
+	eAdamParamsConfig                                                 smithy.SchemaExtensions
+	eAdamParamsConfig_learningRate                                    smithy.SchemaExtensions
+	eAdamParamsConfig_beta1                                           smithy.SchemaExtensions
+	eAdamParamsConfig_beta2                                           smithy.SchemaExtensions
+	eAdamParamsConfig_eps                                             smithy.SchemaExtensions
+	eAdamParamsConfig_weightDecay                                     smithy.SchemaExtensions
+	eAdamParamsConfig_gradClipNorm                                    smithy.SchemaExtensions
+	eAdamParamsConfig_loraPlusLrRatio                                 smithy.SchemaExtensions
+	e_ClientToken                                                     smithy.SchemaExtensions
+	eComputeLogprobsConfig                                            smithy.SchemaExtensions
+	eComputeLogprobsConfig_prompt                                     smithy.SchemaExtensions
+	eComputeLogprobsConfig_modelPackageArn                            smithy.SchemaExtensions
+	eComputeLogprobsResult                                            smithy.SchemaExtensions
+	eComputeLogprobsResult_logprobs                                   smithy.SchemaExtensions
+	eConflictException                                                smithy.SchemaExtensions
+	eConflictException_message                                        smithy.SchemaExtensions
+	eDatum                                                            smithy.SchemaExtensions
+	eDatum_modelInput                                                 smithy.SchemaExtensions
+	eDatum_lossFnInputs                                               smithy.SchemaExtensions
+	e_DatumList                                                       smithy.SchemaExtensions
+	e_DatumList_member                                                smithy.SchemaExtensions
+	e_DoubleList                                                      smithy.SchemaExtensions
+	e_DoubleList_member                                               smithy.SchemaExtensions
+	eEncodedTextChunk                                                 smithy.SchemaExtensions
+	eEncodedTextChunk_tokens                                          smithy.SchemaExtensions
+	eEncodedTextChunk_type                                            smithy.SchemaExtensions
+	e_EncodedTextChunkList                                            smithy.SchemaExtensions
+	e_EncodedTextChunkList_member                                     smithy.SchemaExtensions
+	eEncodedTextChunkType                                             smithy.SchemaExtensions
+	eEncodedTextChunkType_ENCODED_TEXT                                smithy.SchemaExtensions
+	eForwardBackwardConfig                                            smithy.SchemaExtensions
+	eForwardBackwardConfig_lossFnName                                 smithy.SchemaExtensions
+	eForwardBackwardConfig_datumList                                  smithy.SchemaExtensions
+	eForwardBackwardConfig_lossFnConfig                               smithy.SchemaExtensions
+	eForwardBackwardResult                                            smithy.SchemaExtensions
+	eForwardBackwardResult_lossFnOutputType                           smithy.SchemaExtensions
+	eForwardBackwardResult_lossFnOutputs                              smithy.SchemaExtensions
+	eForwardBackwardResult_metrics                                    smithy.SchemaExtensions
+	eForwardBackwardResult_tokenUsage                                 smithy.SchemaExtensions
+	eForwardConfig                                                    smithy.SchemaExtensions
+	eForwardConfig_lossFnName                                         smithy.SchemaExtensions
+	eForwardConfig_datumList                                          smithy.SchemaExtensions
+	eForwardConfig_lossFnConfig                                       smithy.SchemaExtensions
+	eForwardResult                                                    smithy.SchemaExtensions
+	eForwardResult_lossFnOutputType                                   smithy.SchemaExtensions
+	eForwardResult_lossFnOutputs                                      smithy.SchemaExtensions
+	eForwardResult_metrics                                            smithy.SchemaExtensions
+	eForwardResult_tokenUsage                                         smithy.SchemaExtensions
+	e_InferenceBody                                                   smithy.SchemaExtensions
+	e_IntegerList                                                     smithy.SchemaExtensions
+	e_IntegerList_member                                              smithy.SchemaExtensions
+	eInternalServerException                                          smithy.SchemaExtensions
+	eInternalServerException_message                                  smithy.SchemaExtensions
+	eLoadStateConfig                                                  smithy.SchemaExtensions
+	eLoadStateConfig_modelPackageArn                                  smithy.SchemaExtensions
+	eLoadStateConfig_loadOptimizer                                    smithy.SchemaExtensions
+	eLoadStateResult                                                  smithy.SchemaExtensions
+	eLoadWeightsForSamplingConfig                                     smithy.SchemaExtensions
+	eLoadWeightsForSamplingConfig_modelPackageArn                     smithy.SchemaExtensions
+	eLoadWeightsForSamplingResult                                     smithy.SchemaExtensions
+	eLossFnName                                                       smithy.SchemaExtensions
+	eLossFnName_CROSS_ENTROPY                                         smithy.SchemaExtensions
+	eLossFnName_IMPORTANCE_SAMPLING                                   smithy.SchemaExtensions
+	eLossFnName_PPO                                                   smithy.SchemaExtensions
+	eLossFnName_CISPO                                                 smithy.SchemaExtensions
+	e_MetricsMap                                                      smithy.SchemaExtensions
+	e_MetricsMap_key                                                  smithy.SchemaExtensions
+	e_MetricsMap_value                                                smithy.SchemaExtensions
+	eModelInput                                                       smithy.SchemaExtensions
+	eModelInput_chunks                                                smithy.SchemaExtensions
+	eOperationConfig                                                  smithy.SchemaExtensions
+	eOperationConfig_forward                                          smithy.SchemaExtensions
+	eOperationConfig_forwardBackward                                  smithy.SchemaExtensions
+	eOperationConfig_optimizerStep                                    smithy.SchemaExtensions
+	eOperationConfig_saveWeights                                      smithy.SchemaExtensions
+	eOperationConfig_saveState                                        smithy.SchemaExtensions
+	eOperationConfig_loadState                                        smithy.SchemaExtensions
+	e_OperationId                                                     smithy.SchemaExtensions
+	eOperationResult                                                  smithy.SchemaExtensions
+	eOperationResult_forward                                          smithy.SchemaExtensions
+	eOperationResult_forwardBackward                                  smithy.SchemaExtensions
+	eOperationResult_optimizerStep                                    smithy.SchemaExtensions
+	eOperationResult_saveWeights                                      smithy.SchemaExtensions
+	eOperationResult_saveState                                        smithy.SchemaExtensions
+	eOperationResult_loadState                                        smithy.SchemaExtensions
+	eOptimizerStepConfig                                              smithy.SchemaExtensions
+	eOptimizerStepConfig_adamParamsConfig                             smithy.SchemaExtensions
+	eOptimizerStepResult                                              smithy.SchemaExtensions
+	eOptimizerStepResult_metrics                                      smithy.SchemaExtensions
+	eRequestStatus                                                    smithy.SchemaExtensions
+	eRequestStatus_PENDING                                            smithy.SchemaExtensions
+	eRequestStatus_IN_PROGRESS                                        smithy.SchemaExtensions
+	eRequestStatus_COMPLETED                                          smithy.SchemaExtensions
+	eRequestStatus_FAILED                                             smithy.SchemaExtensions
+	eRequestStatus_SKIPPED                                            smithy.SchemaExtensions
+	eResourceNotFoundException                                        smithy.SchemaExtensions
+	eResourceNotFoundException_message                                smithy.SchemaExtensions
+	eSampleConfig                                                     smithy.SchemaExtensions
+	eSampleConfig_prompt                                              smithy.SchemaExtensions
+	eSampleConfig_numSamples                                          smithy.SchemaExtensions
+	eSampleConfig_samplingParams                                      smithy.SchemaExtensions
+	eSampleConfig_includePromptLogprobs                               smithy.SchemaExtensions
+	eSampleConfig_topkPromptLogprobs                                  smithy.SchemaExtensions
+	eSampleConfig_modelPackageArn                                     smithy.SchemaExtensions
+	eSampledSequence                                                  smithy.SchemaExtensions
+	eSampledSequence_stopReason                                       smithy.SchemaExtensions
+	eSampledSequence_tokens                                           smithy.SchemaExtensions
+	eSampledSequence_logprobs                                         smithy.SchemaExtensions
+	eSampledSequence_tokenUsage                                       smithy.SchemaExtensions
+	e_SampledSequenceList                                             smithy.SchemaExtensions
+	e_SampledSequenceList_member                                      smithy.SchemaExtensions
+	eSampleOperationConfig                                            smithy.SchemaExtensions
+	eSampleOperationConfig_sample                                     smithy.SchemaExtensions
+	eSampleOperationConfig_computeLogprobs                            smithy.SchemaExtensions
+	eSampleOperationConfig_loadWeightsForSampling                     smithy.SchemaExtensions
+	eSampleOperationResult                                            smithy.SchemaExtensions
+	eSampleOperationResult_sample                                     smithy.SchemaExtensions
+	eSampleOperationResult_computeLogprobs                            smithy.SchemaExtensions
+	eSampleOperationResult_loadWeightsForSampling                     smithy.SchemaExtensions
+	eSampleResponse                                                   smithy.SchemaExtensions
+	eSampleResponse_sequences                                         smithy.SchemaExtensions
+	eSampleResponse_promptLogprobs                                    smithy.SchemaExtensions
+	eSampleResponse_topkPromptLogprobs                                smithy.SchemaExtensions
+	e_SampleResponseStream                                            smithy.SchemaExtensions
+	eSampleTokenUsage                                                 smithy.SchemaExtensions
+	eSampleTokenUsage_prefill                                         smithy.SchemaExtensions
+	eSampleTokenUsage_decode                                          smithy.SchemaExtensions
+	eSamplingParams                                                   smithy.SchemaExtensions
+	eSamplingParams_maxTokens                                         smithy.SchemaExtensions
+	eSamplingParams_temperature                                       smithy.SchemaExtensions
+	eSamplingParams_topK                                              smithy.SchemaExtensions
+	eSamplingParams_topP                                              smithy.SchemaExtensions
+	eSamplingParams_seed                                              smithy.SchemaExtensions
+	eSamplingParams_stop                                              smithy.SchemaExtensions
+	eSaveStateConfig                                                  smithy.SchemaExtensions
+	eSaveStateConfig_description                                      smithy.SchemaExtensions
+	eSaveStateResult                                                  smithy.SchemaExtensions
+	eSaveStateResult_modelPackageArn                                  smithy.SchemaExtensions
+	eSaveWeightsConfig                                                smithy.SchemaExtensions
+	eSaveWeightsConfig_mergeWeights                                   smithy.SchemaExtensions
+	eSaveWeightsConfig_description                                    smithy.SchemaExtensions
+	eSaveWeightsResult                                                smithy.SchemaExtensions
+	eSaveWeightsResult_modelPackageArn                                smithy.SchemaExtensions
+	e_SequenceNumber                                                  smithy.SchemaExtensions
+	eStopReason                                                       smithy.SchemaExtensions
+	eStopReason_STOP                                                  smithy.SchemaExtensions
+	eStopReason_LENGTH                                                smithy.SchemaExtensions
+	e_StopSequenceList                                                smithy.SchemaExtensions
+	e_StopSequenceList_member                                         smithy.SchemaExtensions
+	eTensorData                                                       smithy.SchemaExtensions
+	eTensorData_data                                                  smithy.SchemaExtensions
+	eTensorData_dtype                                                 smithy.SchemaExtensions
+	eTensorData_shape                                                 smithy.SchemaExtensions
+	e_TensorDataMap                                                   smithy.SchemaExtensions
+	e_TensorDataMap_key                                               smithy.SchemaExtensions
+	e_TensorDataMap_value                                             smithy.SchemaExtensions
+	e_TensorDataMapList                                               smithy.SchemaExtensions
+	e_TensorDataMapList_member                                        smithy.SchemaExtensions
+	eThrottlingException                                              smithy.SchemaExtensions
+	eThrottlingException_message                                      smithy.SchemaExtensions
+	eTokenLogprob                                                     smithy.SchemaExtensions
+	eTokenLogprob_tokenId                                             smithy.SchemaExtensions
+	eTokenLogprob_logprob                                             smithy.SchemaExtensions
+	e_TokenLogprobList                                                smithy.SchemaExtensions
+	e_TokenLogprobList_member                                         smithy.SchemaExtensions
+	e_TopkPromptLogprobsList                                          smithy.SchemaExtensions
+	e_TopkPromptLogprobsList_member                                   smithy.SchemaExtensions
+	e_TrainingSessionName                                             smithy.SchemaExtensions
+	eTrainingTokenUsage                                               smithy.SchemaExtensions
+	eTrainingTokenUsage_trainingTokens                                smithy.SchemaExtensions
+	eValidationException                                              smithy.SchemaExtensions
+	eValidationException_message                                      smithy.SchemaExtensions
+	eExecuteSamplingOperationInput                                    smithy.SchemaExtensions
+	eExecuteSamplingOperationInput_trainingSessionName                smithy.SchemaExtensions
+	eExecuteSamplingOperationInput_operationConfig                    smithy.SchemaExtensions
+	eExecuteSamplingOperationOutput                                   smithy.SchemaExtensions
+	eExecuteSamplingOperationOutput_operationId                       smithy.SchemaExtensions
+	eExecuteTrainingOperationInput                                    smithy.SchemaExtensions
+	eExecuteTrainingOperationInput_trainingSessionName                smithy.SchemaExtensions
+	eExecuteTrainingOperationInput_sequenceNumber                     smithy.SchemaExtensions
+	eExecuteTrainingOperationInput_clientToken                        smithy.SchemaExtensions
+	eExecuteTrainingOperationInput_operationConfig                    smithy.SchemaExtensions
+	eExecuteTrainingOperationOutput                                   smithy.SchemaExtensions
+	eExecuteTrainingOperationOutput_operationId                       smithy.SchemaExtensions
+	eGetSamplingOperationResultInput                                  smithy.SchemaExtensions
+	eGetSamplingOperationResultInput_trainingSessionName              smithy.SchemaExtensions
+	eGetSamplingOperationResultInput_operationId                      smithy.SchemaExtensions
+	eGetSamplingOperationResultOutput                                 smithy.SchemaExtensions
+	eGetSamplingOperationResultOutput_status                          smithy.SchemaExtensions
+	eGetSamplingOperationResultOutput_operationResult                 smithy.SchemaExtensions
+	eGetSamplingOperationResultOutput_errorDetails                    smithy.SchemaExtensions
+	eGetTrainingOperationResultInput                                  smithy.SchemaExtensions
+	eGetTrainingOperationResultInput_trainingSessionName              smithy.SchemaExtensions
+	eGetTrainingOperationResultInput_operationId                      smithy.SchemaExtensions
+	eGetTrainingOperationResultOutput                                 smithy.SchemaExtensions
+	eGetTrainingOperationResultOutput_status                          smithy.SchemaExtensions
+	eGetTrainingOperationResultOutput_operationResult                 smithy.SchemaExtensions
+	eGetTrainingOperationResultOutput_errorDetails                    smithy.SchemaExtensions
+	eGetTrainingOperationResultOutput_tokenUsage                      smithy.SchemaExtensions
+	eSampleTrainingSessionInput                                       smithy.SchemaExtensions
+	eSampleTrainingSessionInput_trainingSessionName                   smithy.SchemaExtensions
+	eSampleTrainingSessionInput_contentType                           smithy.SchemaExtensions
+	eSampleTrainingSessionInput_accept                                smithy.SchemaExtensions
+	eSampleTrainingSessionInput_modelPackageArn                       smithy.SchemaExtensions
+	eSampleTrainingSessionInput_body                                  smithy.SchemaExtensions
+	eSampleTrainingSessionOutput                                      smithy.SchemaExtensions
+	eSampleTrainingSessionOutput_contentType                          smithy.SchemaExtensions
+	eSampleTrainingSessionOutput_body                                 smithy.SchemaExtensions
+	eSampleTrainingSessionWithResponseStreamInput                     smithy.SchemaExtensions
+	eSampleTrainingSessionWithResponseStreamInput_trainingSessionName smithy.SchemaExtensions
+	eSampleTrainingSessionWithResponseStreamInput_contentType         smithy.SchemaExtensions
+	eSampleTrainingSessionWithResponseStreamInput_accept              smithy.SchemaExtensions
+	eSampleTrainingSessionWithResponseStreamInput_modelPackageArn     smithy.SchemaExtensions
+	eSampleTrainingSessionWithResponseStreamInput_body                smithy.SchemaExtensions
+	eSampleTrainingSessionWithResponseStreamOutput                    smithy.SchemaExtensions
+	eSampleTrainingSessionWithResponseStreamOutput_contentType        smithy.SchemaExtensions
+	eSampleTrainingSessionWithResponseStreamOutput_body               smithy.SchemaExtensions
+)
 
 var (
 	iExecuteSamplingOperation                      = smithy.ShapeID{Namespace: "com.amazonaws.sagemakertrainingsessionruntime", Name: "ExecuteSamplingOperation"}
@@ -193,231 +416,231 @@ var mSampleTrainingSessionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&
 var mSampleTrainingSessionWithResponseStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSampleTrainingSessionWithResponseStreamInput_trainingSessionName, &sSampleTrainingSessionWithResponseStreamInput_contentType, &sSampleTrainingSessionWithResponseStreamInput_accept, &sSampleTrainingSessionWithResponseStreamInput_modelPackageArn, &sSampleTrainingSessionWithResponseStreamInput_body}}
 var mSampleTrainingSessionWithResponseStreamOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sSampleTrainingSessionWithResponseStreamOutput_contentType, &sSampleTrainingSessionWithResponseStreamOutput_body}}
 
-var sExecuteSamplingOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteSamplingOperation, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sExecuteTrainingOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteTrainingOperation, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sGetSamplingOperationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSamplingOperationResult, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sGetTrainingOperationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrainingOperationResult, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sSampleTrainingSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampleTrainingSession, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sSampleTrainingSessionWithResponseStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampleTrainingSessionWithResponseStream, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var s_LegoRouterService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LegoRouterService, Type: smithy.ShapeTypeService, Ext: &ext[6]})
-var sAdamParamsConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdamParamsConfig, Members: &mAdamParamsConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[7]})
-var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[15]})
-var sComputeLogprobsConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeLogprobsConfig, Members: &mComputeLogprobsConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[16]})
-var sComputeLogprobsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeLogprobsResult, Members: &mComputeLogprobsResult, Type: smithy.ShapeTypeStructure, Ext: &ext[19]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &ext[21]})
-var sDatum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatum, Members: &mDatum, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &ext[23]})
-var s_DatumList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatumList, Members: &m_DatumList, Type: smithy.ShapeTypeList, Ext: &ext[26]})
-var s_DoubleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DoubleList, Members: &m_DoubleList, Type: smithy.ShapeTypeList, Ext: &ext[28]})
-var sEncodedTextChunk = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncodedTextChunk, Members: &mEncodedTextChunk, Type: smithy.ShapeTypeStructure, Ext: &ext[30]})
-var s_EncodedTextChunkList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncodedTextChunkList, Members: &m_EncodedTextChunkList, Type: smithy.ShapeTypeList, Ext: &ext[33]})
-var sEncodedTextChunkType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncodedTextChunkType, Members: &mEncodedTextChunkType, Type: smithy.ShapeTypeEnum, Ext: &ext[35]})
-var sForwardBackwardConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForwardBackwardConfig, Members: &mForwardBackwardConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var sForwardBackwardResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForwardBackwardResult, Members: &mForwardBackwardResult, Type: smithy.ShapeTypeStructure, Ext: &ext[41]})
-var sForwardConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForwardConfig, Members: &mForwardConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[46]})
-var sForwardResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForwardResult, Members: &mForwardResult, Type: smithy.ShapeTypeStructure, Ext: &ext[50]})
-var s_InferenceBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InferenceBody, Traits: &t8, Type: smithy.ShapeTypeBlob, Ext: &ext[55]})
-var s_IntegerList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerList, Members: &m_IntegerList, Type: smithy.ShapeTypeList, Ext: &ext[56]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &ext[58]})
-var sLoadStateConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoadStateConfig, Members: &mLoadStateConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[60]})
-var sLoadStateResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoadStateResult, Type: smithy.ShapeTypeStructure, Ext: &ext[63]})
-var sLoadWeightsForSamplingConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoadWeightsForSamplingConfig, Members: &mLoadWeightsForSamplingConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[64]})
-var sLoadWeightsForSamplingResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoadWeightsForSamplingResult, Type: smithy.ShapeTypeStructure, Ext: &ext[66]})
-var sLossFnName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLossFnName, Members: &mLossFnName, Type: smithy.ShapeTypeEnum, Ext: &ext[67]})
-var s_MetricsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricsMap, Members: &m_MetricsMap, Type: smithy.ShapeTypeMap, Ext: &ext[72]})
-var sModelInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelInput, Members: &mModelInput, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &ext[75]})
-var sOperationConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationConfig, Members: &mOperationConfig, Type: smithy.ShapeTypeUnion, Ext: &ext[77]})
-var s_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &ext[84]})
-var sOperationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationResult, Members: &mOperationResult, Type: smithy.ShapeTypeUnion, Ext: &ext[85]})
-var sOptimizerStepConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptimizerStepConfig, Members: &mOptimizerStepConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[92]})
-var sOptimizerStepResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptimizerStepResult, Members: &mOptimizerStepResult, Type: smithy.ShapeTypeStructure, Ext: &ext[94]})
-var sRequestStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestStatus, Members: &mRequestStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[96]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &ext[102]})
-var sSampleConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampleConfig, Members: &mSampleConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[104]})
-var sSampledSequence = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampledSequence, Members: &mSampledSequence, Type: smithy.ShapeTypeStructure, Ext: &ext[111]})
-var s_SampledSequenceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SampledSequenceList, Members: &m_SampledSequenceList, Type: smithy.ShapeTypeList, Ext: &ext[116]})
-var sSampleOperationConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampleOperationConfig, Members: &mSampleOperationConfig, Type: smithy.ShapeTypeUnion, Ext: &ext[118]})
-var sSampleOperationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampleOperationResult, Members: &mSampleOperationResult, Type: smithy.ShapeTypeUnion, Ext: &ext[122]})
-var sSampleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampleResponse, Members: &mSampleResponse, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var s_SampleResponseStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SampleResponseStream, Traits: &t11, Type: smithy.ShapeTypeBlob, Ext: &ext[130]})
-var sSampleTokenUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampleTokenUsage, Members: &mSampleTokenUsage, Type: smithy.ShapeTypeStructure, Ext: &ext[131]})
-var sSamplingParams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSamplingParams, Members: &mSamplingParams, Type: smithy.ShapeTypeStructure, Ext: &ext[134]})
-var sSaveStateConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSaveStateConfig, Members: &mSaveStateConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[141]})
-var sSaveStateResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSaveStateResult, Members: &mSaveStateResult, Type: smithy.ShapeTypeStructure, Ext: &ext[143]})
-var sSaveWeightsConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSaveWeightsConfig, Members: &mSaveWeightsConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[145]})
-var sSaveWeightsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSaveWeightsResult, Members: &mSaveWeightsResult, Type: smithy.ShapeTypeStructure, Ext: &ext[148]})
-var s_SequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SequenceNumber, Type: smithy.ShapeTypeInteger, Ext: &ext[150]})
-var sStopReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopReason, Members: &mStopReason, Type: smithy.ShapeTypeEnum, Ext: &ext[151]})
-var s_StopSequenceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StopSequenceList, Members: &m_StopSequenceList, Type: smithy.ShapeTypeList, Ext: &ext[154]})
-var sTensorData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTensorData, Members: &mTensorData, Type: smithy.ShapeTypeStructure, Ext: &ext[156]})
-var s_TensorDataMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TensorDataMap, Members: &m_TensorDataMap, Type: smithy.ShapeTypeMap, Ext: &ext[160]})
-var s_TensorDataMapList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TensorDataMapList, Members: &m_TensorDataMapList, Type: smithy.ShapeTypeList, Ext: &ext[163]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &ext[165]})
-var sTokenLogprob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTokenLogprob, Members: &mTokenLogprob, Type: smithy.ShapeTypeStructure, Ext: &ext[167]})
-var s_TokenLogprobList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TokenLogprobList, Members: &m_TokenLogprobList, Type: smithy.ShapeTypeList, Ext: &ext[170]})
-var s_TopkPromptLogprobsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TopkPromptLogprobsList, Members: &m_TopkPromptLogprobsList, Type: smithy.ShapeTypeList, Ext: &ext[172]})
-var s_TrainingSessionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrainingSessionName, Type: smithy.ShapeTypeString, Ext: &ext[174]})
-var sTrainingTokenUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainingTokenUsage, Members: &mTrainingTokenUsage, Type: smithy.ShapeTypeStructure, Ext: &ext[175]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &ext[177]})
-var sExecuteSamplingOperationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteSamplingOperationInput, Members: &mExecuteSamplingOperationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[179]})
-var sExecuteSamplingOperationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteSamplingOperationOutput, Members: &mExecuteSamplingOperationOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[182]})
-var sExecuteTrainingOperationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteTrainingOperationInput, Members: &mExecuteTrainingOperationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[184]})
-var sExecuteTrainingOperationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteTrainingOperationOutput, Members: &mExecuteTrainingOperationOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[189]})
-var sGetSamplingOperationResultInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSamplingOperationResultInput, Members: &mGetSamplingOperationResultInput, Type: smithy.ShapeTypeStructure, Ext: &ext[191]})
-var sGetSamplingOperationResultOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSamplingOperationResultOutput, Members: &mGetSamplingOperationResultOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[194]})
-var sGetTrainingOperationResultInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrainingOperationResultInput, Members: &mGetTrainingOperationResultInput, Type: smithy.ShapeTypeStructure, Ext: &ext[198]})
-var sGetTrainingOperationResultOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrainingOperationResultOutput, Members: &mGetTrainingOperationResultOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[201]})
-var sSampleTrainingSessionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampleTrainingSessionInput, Members: &mSampleTrainingSessionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[206]})
-var sSampleTrainingSessionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampleTrainingSessionOutput, Members: &mSampleTrainingSessionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[212]})
-var sSampleTrainingSessionWithResponseStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampleTrainingSessionWithResponseStreamInput, Members: &mSampleTrainingSessionWithResponseStreamInput, Type: smithy.ShapeTypeStructure, Ext: &ext[215]})
-var sSampleTrainingSessionWithResponseStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampleTrainingSessionWithResponseStreamOutput, Members: &mSampleTrainingSessionWithResponseStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[221]})
+var sExecuteSamplingOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteSamplingOperation, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eExecuteSamplingOperation})
+var sExecuteTrainingOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteTrainingOperation, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eExecuteTrainingOperation})
+var sGetSamplingOperationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSamplingOperationResult, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eGetSamplingOperationResult})
+var sGetTrainingOperationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrainingOperationResult, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eGetTrainingOperationResult})
+var sSampleTrainingSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampleTrainingSession, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eSampleTrainingSession})
+var sSampleTrainingSessionWithResponseStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampleTrainingSessionWithResponseStream, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eSampleTrainingSessionWithResponseStream})
+var s_LegoRouterService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LegoRouterService, Type: smithy.ShapeTypeService, Ext: &e_LegoRouterService})
+var sAdamParamsConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdamParamsConfig, Members: &mAdamParamsConfig, Type: smithy.ShapeTypeStructure, Ext: &eAdamParamsConfig})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
+var sComputeLogprobsConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeLogprobsConfig, Members: &mComputeLogprobsConfig, Type: smithy.ShapeTypeStructure, Ext: &eComputeLogprobsConfig})
+var sComputeLogprobsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeLogprobsResult, Members: &mComputeLogprobsResult, Type: smithy.ShapeTypeStructure, Ext: &eComputeLogprobsResult})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sDatum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatum, Members: &mDatum, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eDatum})
+var s_DatumList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatumList, Members: &m_DatumList, Type: smithy.ShapeTypeList, Ext: &e_DatumList})
+var s_DoubleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DoubleList, Members: &m_DoubleList, Type: smithy.ShapeTypeList, Ext: &e_DoubleList})
+var sEncodedTextChunk = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncodedTextChunk, Members: &mEncodedTextChunk, Type: smithy.ShapeTypeStructure, Ext: &eEncodedTextChunk})
+var s_EncodedTextChunkList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncodedTextChunkList, Members: &m_EncodedTextChunkList, Type: smithy.ShapeTypeList, Ext: &e_EncodedTextChunkList})
+var sEncodedTextChunkType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncodedTextChunkType, Members: &mEncodedTextChunkType, Type: smithy.ShapeTypeEnum, Ext: &eEncodedTextChunkType})
+var sForwardBackwardConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForwardBackwardConfig, Members: &mForwardBackwardConfig, Type: smithy.ShapeTypeStructure, Ext: &eForwardBackwardConfig})
+var sForwardBackwardResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForwardBackwardResult, Members: &mForwardBackwardResult, Type: smithy.ShapeTypeStructure, Ext: &eForwardBackwardResult})
+var sForwardConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForwardConfig, Members: &mForwardConfig, Type: smithy.ShapeTypeStructure, Ext: &eForwardConfig})
+var sForwardResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForwardResult, Members: &mForwardResult, Type: smithy.ShapeTypeStructure, Ext: &eForwardResult})
+var s_InferenceBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InferenceBody, Traits: &t8, Type: smithy.ShapeTypeBlob, Ext: &e_InferenceBody})
+var s_IntegerList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerList, Members: &m_IntegerList, Type: smithy.ShapeTypeList, Ext: &e_IntegerList})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sLoadStateConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoadStateConfig, Members: &mLoadStateConfig, Type: smithy.ShapeTypeStructure, Ext: &eLoadStateConfig})
+var sLoadStateResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoadStateResult, Type: smithy.ShapeTypeStructure, Ext: &eLoadStateResult})
+var sLoadWeightsForSamplingConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoadWeightsForSamplingConfig, Members: &mLoadWeightsForSamplingConfig, Type: smithy.ShapeTypeStructure, Ext: &eLoadWeightsForSamplingConfig})
+var sLoadWeightsForSamplingResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoadWeightsForSamplingResult, Type: smithy.ShapeTypeStructure, Ext: &eLoadWeightsForSamplingResult})
+var sLossFnName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLossFnName, Members: &mLossFnName, Type: smithy.ShapeTypeEnum, Ext: &eLossFnName})
+var s_MetricsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricsMap, Members: &m_MetricsMap, Type: smithy.ShapeTypeMap, Ext: &e_MetricsMap})
+var sModelInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelInput, Members: &mModelInput, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eModelInput})
+var sOperationConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationConfig, Members: &mOperationConfig, Type: smithy.ShapeTypeUnion, Ext: &eOperationConfig})
+var s_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &e_OperationId})
+var sOperationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationResult, Members: &mOperationResult, Type: smithy.ShapeTypeUnion, Ext: &eOperationResult})
+var sOptimizerStepConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptimizerStepConfig, Members: &mOptimizerStepConfig, Type: smithy.ShapeTypeStructure, Ext: &eOptimizerStepConfig})
+var sOptimizerStepResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptimizerStepResult, Members: &mOptimizerStepResult, Type: smithy.ShapeTypeStructure, Ext: &eOptimizerStepResult})
+var sRequestStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestStatus, Members: &mRequestStatus, Type: smithy.ShapeTypeEnum, Ext: &eRequestStatus})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sSampleConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampleConfig, Members: &mSampleConfig, Type: smithy.ShapeTypeStructure, Ext: &eSampleConfig})
+var sSampledSequence = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampledSequence, Members: &mSampledSequence, Type: smithy.ShapeTypeStructure, Ext: &eSampledSequence})
+var s_SampledSequenceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SampledSequenceList, Members: &m_SampledSequenceList, Type: smithy.ShapeTypeList, Ext: &e_SampledSequenceList})
+var sSampleOperationConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampleOperationConfig, Members: &mSampleOperationConfig, Type: smithy.ShapeTypeUnion, Ext: &eSampleOperationConfig})
+var sSampleOperationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampleOperationResult, Members: &mSampleOperationResult, Type: smithy.ShapeTypeUnion, Ext: &eSampleOperationResult})
+var sSampleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampleResponse, Members: &mSampleResponse, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eSampleResponse})
+var s_SampleResponseStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SampleResponseStream, Traits: &t11, Type: smithy.ShapeTypeBlob, Ext: &e_SampleResponseStream})
+var sSampleTokenUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampleTokenUsage, Members: &mSampleTokenUsage, Type: smithy.ShapeTypeStructure, Ext: &eSampleTokenUsage})
+var sSamplingParams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSamplingParams, Members: &mSamplingParams, Type: smithy.ShapeTypeStructure, Ext: &eSamplingParams})
+var sSaveStateConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSaveStateConfig, Members: &mSaveStateConfig, Type: smithy.ShapeTypeStructure, Ext: &eSaveStateConfig})
+var sSaveStateResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSaveStateResult, Members: &mSaveStateResult, Type: smithy.ShapeTypeStructure, Ext: &eSaveStateResult})
+var sSaveWeightsConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSaveWeightsConfig, Members: &mSaveWeightsConfig, Type: smithy.ShapeTypeStructure, Ext: &eSaveWeightsConfig})
+var sSaveWeightsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSaveWeightsResult, Members: &mSaveWeightsResult, Type: smithy.ShapeTypeStructure, Ext: &eSaveWeightsResult})
+var s_SequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SequenceNumber, Type: smithy.ShapeTypeInteger, Ext: &e_SequenceNumber})
+var sStopReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopReason, Members: &mStopReason, Type: smithy.ShapeTypeEnum, Ext: &eStopReason})
+var s_StopSequenceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StopSequenceList, Members: &m_StopSequenceList, Type: smithy.ShapeTypeList, Ext: &e_StopSequenceList})
+var sTensorData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTensorData, Members: &mTensorData, Type: smithy.ShapeTypeStructure, Ext: &eTensorData})
+var s_TensorDataMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TensorDataMap, Members: &m_TensorDataMap, Type: smithy.ShapeTypeMap, Ext: &e_TensorDataMap})
+var s_TensorDataMapList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TensorDataMapList, Members: &m_TensorDataMapList, Type: smithy.ShapeTypeList, Ext: &e_TensorDataMapList})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sTokenLogprob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTokenLogprob, Members: &mTokenLogprob, Type: smithy.ShapeTypeStructure, Ext: &eTokenLogprob})
+var s_TokenLogprobList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TokenLogprobList, Members: &m_TokenLogprobList, Type: smithy.ShapeTypeList, Ext: &e_TokenLogprobList})
+var s_TopkPromptLogprobsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TopkPromptLogprobsList, Members: &m_TopkPromptLogprobsList, Type: smithy.ShapeTypeList, Ext: &e_TopkPromptLogprobsList})
+var s_TrainingSessionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrainingSessionName, Type: smithy.ShapeTypeString, Ext: &e_TrainingSessionName})
+var sTrainingTokenUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainingTokenUsage, Members: &mTrainingTokenUsage, Type: smithy.ShapeTypeStructure, Ext: &eTrainingTokenUsage})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sExecuteSamplingOperationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteSamplingOperationInput, Members: &mExecuteSamplingOperationInput, Type: smithy.ShapeTypeStructure, Ext: &eExecuteSamplingOperationInput})
+var sExecuteSamplingOperationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteSamplingOperationOutput, Members: &mExecuteSamplingOperationOutput, Type: smithy.ShapeTypeStructure, Ext: &eExecuteSamplingOperationOutput})
+var sExecuteTrainingOperationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteTrainingOperationInput, Members: &mExecuteTrainingOperationInput, Type: smithy.ShapeTypeStructure, Ext: &eExecuteTrainingOperationInput})
+var sExecuteTrainingOperationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteTrainingOperationOutput, Members: &mExecuteTrainingOperationOutput, Type: smithy.ShapeTypeStructure, Ext: &eExecuteTrainingOperationOutput})
+var sGetSamplingOperationResultInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSamplingOperationResultInput, Members: &mGetSamplingOperationResultInput, Type: smithy.ShapeTypeStructure, Ext: &eGetSamplingOperationResultInput})
+var sGetSamplingOperationResultOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSamplingOperationResultOutput, Members: &mGetSamplingOperationResultOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetSamplingOperationResultOutput})
+var sGetTrainingOperationResultInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrainingOperationResultInput, Members: &mGetTrainingOperationResultInput, Type: smithy.ShapeTypeStructure, Ext: &eGetTrainingOperationResultInput})
+var sGetTrainingOperationResultOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrainingOperationResultOutput, Members: &mGetTrainingOperationResultOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetTrainingOperationResultOutput})
+var sSampleTrainingSessionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampleTrainingSessionInput, Members: &mSampleTrainingSessionInput, Type: smithy.ShapeTypeStructure, Ext: &eSampleTrainingSessionInput})
+var sSampleTrainingSessionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampleTrainingSessionOutput, Members: &mSampleTrainingSessionOutput, Type: smithy.ShapeTypeStructure, Ext: &eSampleTrainingSessionOutput})
+var sSampleTrainingSessionWithResponseStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampleTrainingSessionWithResponseStreamInput, Members: &mSampleTrainingSessionWithResponseStreamInput, Type: smithy.ShapeTypeStructure, Ext: &eSampleTrainingSessionWithResponseStreamInput})
+var sSampleTrainingSessionWithResponseStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampleTrainingSessionWithResponseStreamOutput, Members: &mSampleTrainingSessionWithResponseStreamOutput, Type: smithy.ShapeTypeStructure, Ext: &eSampleTrainingSessionWithResponseStreamOutput})
 
-var sAdamParamsConfig_learningRate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "learningRate", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[8]})
-var sAdamParamsConfig_beta1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beta1", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[9]})
-var sAdamParamsConfig_beta2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beta2", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[10]})
-var sAdamParamsConfig_eps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eps", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[11]})
-var sAdamParamsConfig_weightDecay = smithy.NewStaticSchema(smithy.StaticSchema{Member: "weightDecay", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[12]})
-var sAdamParamsConfig_gradClipNorm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gradClipNorm", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[13]})
-var sAdamParamsConfig_loraPlusLrRatio = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loraPlusLrRatio", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[14]})
-var sComputeLogprobsConfig_prompt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prompt", ID: &iModelInput, Members: &mModelInput, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &ext[17]})
-var sComputeLogprobsConfig_modelPackageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelPackageArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[18]})
-var sComputeLogprobsResult_logprobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logprobs", ID: &i_DoubleList, Members: &m_DoubleList, Type: smithy.ShapeTypeList, Ext: &ext[20]})
-var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[22]})
-var sDatum_modelInput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelInput", ID: &iModelInput, Members: &mModelInput, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &ext[24]})
-var sDatum_lossFnInputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lossFnInputs", ID: &i_TensorDataMap, Members: &m_TensorDataMap, Type: smithy.ShapeTypeMap, Ext: &ext[25]})
-var s_DatumList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDatum, Members: &mDatum, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &ext[27]})
-var s_DoubleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[29]})
-var sEncodedTextChunk_tokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokens", ID: &i_IntegerList, Members: &m_IntegerList, Type: smithy.ShapeTypeList, Ext: &ext[31]})
-var sEncodedTextChunk_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iEncodedTextChunkType, Members: &mEncodedTextChunkType, Type: smithy.ShapeTypeEnum, Ext: &ext[32]})
-var s_EncodedTextChunkList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEncodedTextChunk, Members: &mEncodedTextChunk, Type: smithy.ShapeTypeStructure, Ext: &ext[34]})
-var sEncodedTextChunkType_ENCODED_TEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCODED_TEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[36]})
-var sForwardBackwardConfig_lossFnName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lossFnName", ID: &iLossFnName, Members: &mLossFnName, Type: smithy.ShapeTypeEnum, Ext: &ext[38]})
-var sForwardBackwardConfig_datumList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datumList", ID: &i_DatumList, Members: &m_DatumList, Type: smithy.ShapeTypeList, Ext: &ext[39]})
-var sForwardBackwardConfig_lossFnConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lossFnConfig", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &ext[40]})
-var sForwardBackwardResult_lossFnOutputType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lossFnOutputType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var sForwardBackwardResult_lossFnOutputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lossFnOutputs", ID: &i_TensorDataMapList, Members: &m_TensorDataMapList, Type: smithy.ShapeTypeList, Ext: &ext[43]})
-var sForwardBackwardResult_metrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metrics", ID: &i_MetricsMap, Members: &m_MetricsMap, Type: smithy.ShapeTypeMap, Ext: &ext[44]})
-var sForwardBackwardResult_tokenUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenUsage", ID: &iTrainingTokenUsage, Members: &mTrainingTokenUsage, Type: smithy.ShapeTypeStructure, Ext: &ext[45]})
-var sForwardConfig_lossFnName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lossFnName", ID: &iLossFnName, Members: &mLossFnName, Type: smithy.ShapeTypeEnum, Ext: &ext[47]})
-var sForwardConfig_datumList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datumList", ID: &i_DatumList, Members: &m_DatumList, Type: smithy.ShapeTypeList, Ext: &ext[48]})
-var sForwardConfig_lossFnConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lossFnConfig", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &ext[49]})
-var sForwardResult_lossFnOutputType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lossFnOutputType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[51]})
-var sForwardResult_lossFnOutputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lossFnOutputs", ID: &i_TensorDataMapList, Members: &m_TensorDataMapList, Type: smithy.ShapeTypeList, Ext: &ext[52]})
-var sForwardResult_metrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metrics", ID: &i_MetricsMap, Members: &m_MetricsMap, Type: smithy.ShapeTypeMap, Ext: &ext[53]})
-var sForwardResult_tokenUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenUsage", ID: &iTrainingTokenUsage, Members: &mTrainingTokenUsage, Type: smithy.ShapeTypeStructure, Ext: &ext[54]})
-var s_IntegerList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[57]})
-var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[59]})
-var sLoadStateConfig_modelPackageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelPackageArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[61]})
-var sLoadStateConfig_loadOptimizer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loadOptimizer", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[62]})
-var sLoadWeightsForSamplingConfig_modelPackageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelPackageArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[65]})
-var sLossFnName_CROSS_ENTROPY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CROSS_ENTROPY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var sLossFnName_IMPORTANCE_SAMPLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPORTANCE_SAMPLING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[69]})
-var sLossFnName_PPO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PPO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[70]})
-var sLossFnName_CISPO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CISPO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[71]})
-var s_MetricsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[73]})
-var s_MetricsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[74]})
-var sModelInput_chunks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chunks", ID: &i_EncodedTextChunkList, Members: &m_EncodedTextChunkList, Type: smithy.ShapeTypeList, Ext: &ext[76]})
-var sOperationConfig_forward = smithy.NewStaticSchema(smithy.StaticSchema{Member: "forward", ID: &iForwardConfig, Members: &mForwardConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[78]})
-var sOperationConfig_forwardBackward = smithy.NewStaticSchema(smithy.StaticSchema{Member: "forwardBackward", ID: &iForwardBackwardConfig, Members: &mForwardBackwardConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[79]})
-var sOperationConfig_optimizerStep = smithy.NewStaticSchema(smithy.StaticSchema{Member: "optimizerStep", ID: &iOptimizerStepConfig, Members: &mOptimizerStepConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var sOperationConfig_saveWeights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "saveWeights", ID: &iSaveWeightsConfig, Members: &mSaveWeightsConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[81]})
-var sOperationConfig_saveState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "saveState", ID: &iSaveStateConfig, Members: &mSaveStateConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[82]})
-var sOperationConfig_loadState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loadState", ID: &iLoadStateConfig, Members: &mLoadStateConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[83]})
-var sOperationResult_forward = smithy.NewStaticSchema(smithy.StaticSchema{Member: "forward", ID: &iForwardResult, Members: &mForwardResult, Type: smithy.ShapeTypeStructure, Ext: &ext[86]})
-var sOperationResult_forwardBackward = smithy.NewStaticSchema(smithy.StaticSchema{Member: "forwardBackward", ID: &iForwardBackwardResult, Members: &mForwardBackwardResult, Type: smithy.ShapeTypeStructure, Ext: &ext[87]})
-var sOperationResult_optimizerStep = smithy.NewStaticSchema(smithy.StaticSchema{Member: "optimizerStep", ID: &iOptimizerStepResult, Members: &mOptimizerStepResult, Type: smithy.ShapeTypeStructure, Ext: &ext[88]})
-var sOperationResult_saveWeights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "saveWeights", ID: &iSaveWeightsResult, Members: &mSaveWeightsResult, Type: smithy.ShapeTypeStructure, Ext: &ext[89]})
-var sOperationResult_saveState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "saveState", ID: &iSaveStateResult, Members: &mSaveStateResult, Type: smithy.ShapeTypeStructure, Ext: &ext[90]})
-var sOperationResult_loadState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loadState", ID: &iLoadStateResult, Type: smithy.ShapeTypeStructure, Ext: &ext[91]})
-var sOptimizerStepConfig_adamParamsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adamParamsConfig", ID: &iAdamParamsConfig, Members: &mAdamParamsConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[93]})
-var sOptimizerStepResult_metrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metrics", ID: &i_MetricsMap, Members: &m_MetricsMap, Type: smithy.ShapeTypeMap, Ext: &ext[95]})
-var sRequestStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[97]})
-var sRequestStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[98]})
-var sRequestStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[99]})
-var sRequestStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[100]})
-var sRequestStatus_SKIPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SKIPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[101]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[103]})
-var sSampleConfig_prompt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prompt", ID: &iModelInput, Members: &mModelInput, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &ext[105]})
-var sSampleConfig_numSamples = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numSamples", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[106]})
-var sSampleConfig_samplingParams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "samplingParams", ID: &iSamplingParams, Members: &mSamplingParams, Type: smithy.ShapeTypeStructure, Ext: &ext[107]})
-var sSampleConfig_includePromptLogprobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includePromptLogprobs", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[108]})
-var sSampleConfig_topkPromptLogprobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topkPromptLogprobs", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[109]})
-var sSampleConfig_modelPackageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelPackageArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[110]})
-var sSampledSequence_stopReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stopReason", ID: &iStopReason, Members: &mStopReason, Type: smithy.ShapeTypeEnum, Ext: &ext[112]})
-var sSampledSequence_tokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokens", ID: &i_IntegerList, Members: &m_IntegerList, Type: smithy.ShapeTypeList, Ext: &ext[113]})
-var sSampledSequence_logprobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logprobs", ID: &i_DoubleList, Members: &m_DoubleList, Type: smithy.ShapeTypeList, Ext: &ext[114]})
-var sSampledSequence_tokenUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenUsage", ID: &iSampleTokenUsage, Members: &mSampleTokenUsage, Type: smithy.ShapeTypeStructure, Ext: &ext[115]})
-var s_SampledSequenceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSampledSequence, Members: &mSampledSequence, Type: smithy.ShapeTypeStructure, Ext: &ext[117]})
-var sSampleOperationConfig_sample = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sample", ID: &iSampleConfig, Members: &mSampleConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[119]})
-var sSampleOperationConfig_computeLogprobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeLogprobs", ID: &iComputeLogprobsConfig, Members: &mComputeLogprobsConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var sSampleOperationConfig_loadWeightsForSampling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loadWeightsForSampling", ID: &iLoadWeightsForSamplingConfig, Members: &mLoadWeightsForSamplingConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[121]})
-var sSampleOperationResult_sample = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sample", ID: &iSampleResponse, Members: &mSampleResponse, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &ext[123]})
-var sSampleOperationResult_computeLogprobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeLogprobs", ID: &iComputeLogprobsResult, Members: &mComputeLogprobsResult, Type: smithy.ShapeTypeStructure, Ext: &ext[124]})
-var sSampleOperationResult_loadWeightsForSampling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loadWeightsForSampling", ID: &iLoadWeightsForSamplingResult, Type: smithy.ShapeTypeStructure, Ext: &ext[125]})
-var sSampleResponse_sequences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sequences", ID: &i_SampledSequenceList, Members: &m_SampledSequenceList, Type: smithy.ShapeTypeList, Ext: &ext[127]})
-var sSampleResponse_promptLogprobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "promptLogprobs", ID: &i_DoubleList, Members: &m_DoubleList, Type: smithy.ShapeTypeList, Ext: &ext[128]})
-var sSampleResponse_topkPromptLogprobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topkPromptLogprobs", ID: &i_TopkPromptLogprobsList, Members: &m_TopkPromptLogprobsList, Type: smithy.ShapeTypeList, Ext: &ext[129]})
-var sSampleTokenUsage_prefill = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefill", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[132]})
-var sSampleTokenUsage_decode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decode", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[133]})
-var sSamplingParams_maxTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxTokens", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[135]})
-var sSamplingParams_temperature = smithy.NewStaticSchema(smithy.StaticSchema{Member: "temperature", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[136]})
-var sSamplingParams_topK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topK", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[137]})
-var sSamplingParams_topP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topP", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[138]})
-var sSamplingParams_seed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "seed", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[139]})
-var sSamplingParams_stop = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stop", ID: &i_StopSequenceList, Members: &m_StopSequenceList, Type: smithy.ShapeTypeList, Ext: &ext[140]})
-var sSaveStateConfig_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[142]})
-var sSaveStateResult_modelPackageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelPackageArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[144]})
-var sSaveWeightsConfig_mergeWeights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeWeights", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[146]})
-var sSaveWeightsConfig_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[147]})
-var sSaveWeightsResult_modelPackageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelPackageArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[149]})
-var sStopReason_STOP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[152]})
-var sStopReason_LENGTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LENGTH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[153]})
-var s_StopSequenceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[155]})
-var sTensorData_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &ext[157]})
-var sTensorData_dtype = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dtype", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[158]})
-var sTensorData_shape = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shape", ID: &i_IntegerList, Members: &m_IntegerList, Type: smithy.ShapeTypeList, Ext: &ext[159]})
-var s_TensorDataMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[161]})
-var s_TensorDataMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iTensorData, Members: &mTensorData, Type: smithy.ShapeTypeStructure, Ext: &ext[162]})
-var s_TensorDataMapList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TensorDataMap, Members: &m_TensorDataMap, Type: smithy.ShapeTypeMap, Ext: &ext[164]})
-var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[166]})
-var sTokenLogprob_tokenId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenId", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[168]})
-var sTokenLogprob_logprob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logprob", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[169]})
-var s_TokenLogprobList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTokenLogprob, Members: &mTokenLogprob, Type: smithy.ShapeTypeStructure, Ext: &ext[171]})
-var s_TopkPromptLogprobsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TokenLogprobList, Members: &m_TokenLogprobList, Type: smithy.ShapeTypeList, Ext: &ext[173]})
-var sTrainingTokenUsage_trainingTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingTokens", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[176]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[178]})
-var sExecuteSamplingOperationInput_trainingSessionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingSessionName", ID: &i_TrainingSessionName, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[180]})
-var sExecuteSamplingOperationInput_operationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationConfig", ID: &iSampleOperationConfig, Members: &mSampleOperationConfig, Type: smithy.ShapeTypeUnion, Ext: &ext[181]})
-var sExecuteSamplingOperationOutput_operationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &ext[183]})
-var sExecuteTrainingOperationInput_trainingSessionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingSessionName", ID: &i_TrainingSessionName, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[185]})
-var sExecuteTrainingOperationInput_sequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeInteger, Ext: &ext[186]})
-var sExecuteTrainingOperationInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[187]})
-var sExecuteTrainingOperationInput_operationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationConfig", ID: &iOperationConfig, Members: &mOperationConfig, Type: smithy.ShapeTypeUnion, Ext: &ext[188]})
-var sExecuteTrainingOperationOutput_operationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &ext[190]})
-var sGetSamplingOperationResultInput_trainingSessionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingSessionName", ID: &i_TrainingSessionName, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[192]})
-var sGetSamplingOperationResultInput_operationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationId", ID: &i_OperationId, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[193]})
-var sGetSamplingOperationResultOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRequestStatus, Members: &mRequestStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[195]})
-var sGetSamplingOperationResultOutput_operationResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationResult", ID: &iSampleOperationResult, Members: &mSampleOperationResult, Type: smithy.ShapeTypeUnion, Ext: &ext[196]})
-var sGetSamplingOperationResultOutput_errorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorDetails", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[197]})
-var sGetTrainingOperationResultInput_trainingSessionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingSessionName", ID: &i_TrainingSessionName, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[199]})
-var sGetTrainingOperationResultInput_operationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationId", ID: &i_OperationId, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[200]})
-var sGetTrainingOperationResultOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRequestStatus, Members: &mRequestStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[202]})
-var sGetTrainingOperationResultOutput_operationResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationResult", ID: &iOperationResult, Members: &mOperationResult, Type: smithy.ShapeTypeUnion, Ext: &ext[203]})
-var sGetTrainingOperationResultOutput_errorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorDetails", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[204]})
-var sGetTrainingOperationResultOutput_tokenUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenUsage", ID: &iTrainingTokenUsage, Members: &mTrainingTokenUsage, Type: smithy.ShapeTypeStructure, Ext: &ext[205]})
-var sSampleTrainingSessionInput_trainingSessionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingSessionName", ID: &i_TrainingSessionName, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[207]})
-var sSampleTrainingSessionInput_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &pString, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &ext[208]})
-var sSampleTrainingSessionInput_accept = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accept", ID: &pString, Traits: &t16, Type: smithy.ShapeTypeString, Ext: &ext[209]})
-var sSampleTrainingSessionInput_modelPackageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelPackageArn", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[210]})
-var sSampleTrainingSessionInput_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &i_InferenceBody, Traits: &t18, Type: smithy.ShapeTypeBlob, Ext: &ext[211]})
-var sSampleTrainingSessionOutput_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &pString, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &ext[213]})
-var sSampleTrainingSessionOutput_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &i_InferenceBody, Traits: &t18, Type: smithy.ShapeTypeBlob, Ext: &ext[214]})
-var sSampleTrainingSessionWithResponseStreamInput_trainingSessionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingSessionName", ID: &i_TrainingSessionName, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[216]})
-var sSampleTrainingSessionWithResponseStreamInput_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &pString, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &ext[217]})
-var sSampleTrainingSessionWithResponseStreamInput_accept = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accept", ID: &pString, Traits: &t16, Type: smithy.ShapeTypeString, Ext: &ext[218]})
-var sSampleTrainingSessionWithResponseStreamInput_modelPackageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelPackageArn", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &ext[219]})
-var sSampleTrainingSessionWithResponseStreamInput_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &i_InferenceBody, Traits: &t18, Type: smithy.ShapeTypeBlob, Ext: &ext[220]})
-var sSampleTrainingSessionWithResponseStreamOutput_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &pString, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &ext[222]})
-var sSampleTrainingSessionWithResponseStreamOutput_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &i_SampleResponseStream, Traits: &t19, Type: smithy.ShapeTypeBlob, Ext: &ext[223]})
+var sAdamParamsConfig_learningRate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "learningRate", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eAdamParamsConfig_learningRate})
+var sAdamParamsConfig_beta1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beta1", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eAdamParamsConfig_beta1})
+var sAdamParamsConfig_beta2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beta2", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eAdamParamsConfig_beta2})
+var sAdamParamsConfig_eps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eps", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eAdamParamsConfig_eps})
+var sAdamParamsConfig_weightDecay = smithy.NewStaticSchema(smithy.StaticSchema{Member: "weightDecay", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eAdamParamsConfig_weightDecay})
+var sAdamParamsConfig_gradClipNorm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gradClipNorm", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eAdamParamsConfig_gradClipNorm})
+var sAdamParamsConfig_loraPlusLrRatio = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loraPlusLrRatio", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eAdamParamsConfig_loraPlusLrRatio})
+var sComputeLogprobsConfig_prompt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prompt", ID: &iModelInput, Members: &mModelInput, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eComputeLogprobsConfig_prompt})
+var sComputeLogprobsConfig_modelPackageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelPackageArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eComputeLogprobsConfig_modelPackageArn})
+var sComputeLogprobsResult_logprobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logprobs", ID: &i_DoubleList, Members: &m_DoubleList, Type: smithy.ShapeTypeList, Ext: &eComputeLogprobsResult_logprobs})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sDatum_modelInput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelInput", ID: &iModelInput, Members: &mModelInput, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eDatum_modelInput})
+var sDatum_lossFnInputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lossFnInputs", ID: &i_TensorDataMap, Members: &m_TensorDataMap, Type: smithy.ShapeTypeMap, Ext: &eDatum_lossFnInputs})
+var s_DatumList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDatum, Members: &mDatum, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &e_DatumList_member})
+var s_DoubleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &e_DoubleList_member})
+var sEncodedTextChunk_tokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokens", ID: &i_IntegerList, Members: &m_IntegerList, Type: smithy.ShapeTypeList, Ext: &eEncodedTextChunk_tokens})
+var sEncodedTextChunk_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iEncodedTextChunkType, Members: &mEncodedTextChunkType, Type: smithy.ShapeTypeEnum, Ext: &eEncodedTextChunk_type})
+var s_EncodedTextChunkList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEncodedTextChunk, Members: &mEncodedTextChunk, Type: smithy.ShapeTypeStructure, Ext: &e_EncodedTextChunkList_member})
+var sEncodedTextChunkType_ENCODED_TEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCODED_TEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncodedTextChunkType_ENCODED_TEXT})
+var sForwardBackwardConfig_lossFnName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lossFnName", ID: &iLossFnName, Members: &mLossFnName, Type: smithy.ShapeTypeEnum, Ext: &eForwardBackwardConfig_lossFnName})
+var sForwardBackwardConfig_datumList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datumList", ID: &i_DatumList, Members: &m_DatumList, Type: smithy.ShapeTypeList, Ext: &eForwardBackwardConfig_datumList})
+var sForwardBackwardConfig_lossFnConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lossFnConfig", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &eForwardBackwardConfig_lossFnConfig})
+var sForwardBackwardResult_lossFnOutputType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lossFnOutputType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eForwardBackwardResult_lossFnOutputType})
+var sForwardBackwardResult_lossFnOutputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lossFnOutputs", ID: &i_TensorDataMapList, Members: &m_TensorDataMapList, Type: smithy.ShapeTypeList, Ext: &eForwardBackwardResult_lossFnOutputs})
+var sForwardBackwardResult_metrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metrics", ID: &i_MetricsMap, Members: &m_MetricsMap, Type: smithy.ShapeTypeMap, Ext: &eForwardBackwardResult_metrics})
+var sForwardBackwardResult_tokenUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenUsage", ID: &iTrainingTokenUsage, Members: &mTrainingTokenUsage, Type: smithy.ShapeTypeStructure, Ext: &eForwardBackwardResult_tokenUsage})
+var sForwardConfig_lossFnName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lossFnName", ID: &iLossFnName, Members: &mLossFnName, Type: smithy.ShapeTypeEnum, Ext: &eForwardConfig_lossFnName})
+var sForwardConfig_datumList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datumList", ID: &i_DatumList, Members: &m_DatumList, Type: smithy.ShapeTypeList, Ext: &eForwardConfig_datumList})
+var sForwardConfig_lossFnConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lossFnConfig", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &eForwardConfig_lossFnConfig})
+var sForwardResult_lossFnOutputType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lossFnOutputType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eForwardResult_lossFnOutputType})
+var sForwardResult_lossFnOutputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lossFnOutputs", ID: &i_TensorDataMapList, Members: &m_TensorDataMapList, Type: smithy.ShapeTypeList, Ext: &eForwardResult_lossFnOutputs})
+var sForwardResult_metrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metrics", ID: &i_MetricsMap, Members: &m_MetricsMap, Type: smithy.ShapeTypeMap, Ext: &eForwardResult_metrics})
+var sForwardResult_tokenUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenUsage", ID: &iTrainingTokenUsage, Members: &mTrainingTokenUsage, Type: smithy.ShapeTypeStructure, Ext: &eForwardResult_tokenUsage})
+var s_IntegerList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &e_IntegerList_member})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sLoadStateConfig_modelPackageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelPackageArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eLoadStateConfig_modelPackageArn})
+var sLoadStateConfig_loadOptimizer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loadOptimizer", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eLoadStateConfig_loadOptimizer})
+var sLoadWeightsForSamplingConfig_modelPackageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelPackageArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eLoadWeightsForSamplingConfig_modelPackageArn})
+var sLossFnName_CROSS_ENTROPY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CROSS_ENTROPY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLossFnName_CROSS_ENTROPY})
+var sLossFnName_IMPORTANCE_SAMPLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPORTANCE_SAMPLING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLossFnName_IMPORTANCE_SAMPLING})
+var sLossFnName_PPO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PPO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLossFnName_PPO})
+var sLossFnName_CISPO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CISPO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLossFnName_CISPO})
+var s_MetricsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_MetricsMap_key})
+var s_MetricsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &e_MetricsMap_value})
+var sModelInput_chunks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chunks", ID: &i_EncodedTextChunkList, Members: &m_EncodedTextChunkList, Type: smithy.ShapeTypeList, Ext: &eModelInput_chunks})
+var sOperationConfig_forward = smithy.NewStaticSchema(smithy.StaticSchema{Member: "forward", ID: &iForwardConfig, Members: &mForwardConfig, Type: smithy.ShapeTypeStructure, Ext: &eOperationConfig_forward})
+var sOperationConfig_forwardBackward = smithy.NewStaticSchema(smithy.StaticSchema{Member: "forwardBackward", ID: &iForwardBackwardConfig, Members: &mForwardBackwardConfig, Type: smithy.ShapeTypeStructure, Ext: &eOperationConfig_forwardBackward})
+var sOperationConfig_optimizerStep = smithy.NewStaticSchema(smithy.StaticSchema{Member: "optimizerStep", ID: &iOptimizerStepConfig, Members: &mOptimizerStepConfig, Type: smithy.ShapeTypeStructure, Ext: &eOperationConfig_optimizerStep})
+var sOperationConfig_saveWeights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "saveWeights", ID: &iSaveWeightsConfig, Members: &mSaveWeightsConfig, Type: smithy.ShapeTypeStructure, Ext: &eOperationConfig_saveWeights})
+var sOperationConfig_saveState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "saveState", ID: &iSaveStateConfig, Members: &mSaveStateConfig, Type: smithy.ShapeTypeStructure, Ext: &eOperationConfig_saveState})
+var sOperationConfig_loadState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loadState", ID: &iLoadStateConfig, Members: &mLoadStateConfig, Type: smithy.ShapeTypeStructure, Ext: &eOperationConfig_loadState})
+var sOperationResult_forward = smithy.NewStaticSchema(smithy.StaticSchema{Member: "forward", ID: &iForwardResult, Members: &mForwardResult, Type: smithy.ShapeTypeStructure, Ext: &eOperationResult_forward})
+var sOperationResult_forwardBackward = smithy.NewStaticSchema(smithy.StaticSchema{Member: "forwardBackward", ID: &iForwardBackwardResult, Members: &mForwardBackwardResult, Type: smithy.ShapeTypeStructure, Ext: &eOperationResult_forwardBackward})
+var sOperationResult_optimizerStep = smithy.NewStaticSchema(smithy.StaticSchema{Member: "optimizerStep", ID: &iOptimizerStepResult, Members: &mOptimizerStepResult, Type: smithy.ShapeTypeStructure, Ext: &eOperationResult_optimizerStep})
+var sOperationResult_saveWeights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "saveWeights", ID: &iSaveWeightsResult, Members: &mSaveWeightsResult, Type: smithy.ShapeTypeStructure, Ext: &eOperationResult_saveWeights})
+var sOperationResult_saveState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "saveState", ID: &iSaveStateResult, Members: &mSaveStateResult, Type: smithy.ShapeTypeStructure, Ext: &eOperationResult_saveState})
+var sOperationResult_loadState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loadState", ID: &iLoadStateResult, Type: smithy.ShapeTypeStructure, Ext: &eOperationResult_loadState})
+var sOptimizerStepConfig_adamParamsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adamParamsConfig", ID: &iAdamParamsConfig, Members: &mAdamParamsConfig, Type: smithy.ShapeTypeStructure, Ext: &eOptimizerStepConfig_adamParamsConfig})
+var sOptimizerStepResult_metrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metrics", ID: &i_MetricsMap, Members: &m_MetricsMap, Type: smithy.ShapeTypeMap, Ext: &eOptimizerStepResult_metrics})
+var sRequestStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequestStatus_PENDING})
+var sRequestStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequestStatus_IN_PROGRESS})
+var sRequestStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequestStatus_COMPLETED})
+var sRequestStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequestStatus_FAILED})
+var sRequestStatus_SKIPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SKIPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequestStatus_SKIPPED})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sSampleConfig_prompt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prompt", ID: &iModelInput, Members: &mModelInput, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eSampleConfig_prompt})
+var sSampleConfig_numSamples = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numSamples", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSampleConfig_numSamples})
+var sSampleConfig_samplingParams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "samplingParams", ID: &iSamplingParams, Members: &mSamplingParams, Type: smithy.ShapeTypeStructure, Ext: &eSampleConfig_samplingParams})
+var sSampleConfig_includePromptLogprobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includePromptLogprobs", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eSampleConfig_includePromptLogprobs})
+var sSampleConfig_topkPromptLogprobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topkPromptLogprobs", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSampleConfig_topkPromptLogprobs})
+var sSampleConfig_modelPackageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelPackageArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSampleConfig_modelPackageArn})
+var sSampledSequence_stopReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stopReason", ID: &iStopReason, Members: &mStopReason, Type: smithy.ShapeTypeEnum, Ext: &eSampledSequence_stopReason})
+var sSampledSequence_tokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokens", ID: &i_IntegerList, Members: &m_IntegerList, Type: smithy.ShapeTypeList, Ext: &eSampledSequence_tokens})
+var sSampledSequence_logprobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logprobs", ID: &i_DoubleList, Members: &m_DoubleList, Type: smithy.ShapeTypeList, Ext: &eSampledSequence_logprobs})
+var sSampledSequence_tokenUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenUsage", ID: &iSampleTokenUsage, Members: &mSampleTokenUsage, Type: smithy.ShapeTypeStructure, Ext: &eSampledSequence_tokenUsage})
+var s_SampledSequenceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSampledSequence, Members: &mSampledSequence, Type: smithy.ShapeTypeStructure, Ext: &e_SampledSequenceList_member})
+var sSampleOperationConfig_sample = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sample", ID: &iSampleConfig, Members: &mSampleConfig, Type: smithy.ShapeTypeStructure, Ext: &eSampleOperationConfig_sample})
+var sSampleOperationConfig_computeLogprobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeLogprobs", ID: &iComputeLogprobsConfig, Members: &mComputeLogprobsConfig, Type: smithy.ShapeTypeStructure, Ext: &eSampleOperationConfig_computeLogprobs})
+var sSampleOperationConfig_loadWeightsForSampling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loadWeightsForSampling", ID: &iLoadWeightsForSamplingConfig, Members: &mLoadWeightsForSamplingConfig, Type: smithy.ShapeTypeStructure, Ext: &eSampleOperationConfig_loadWeightsForSampling})
+var sSampleOperationResult_sample = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sample", ID: &iSampleResponse, Members: &mSampleResponse, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eSampleOperationResult_sample})
+var sSampleOperationResult_computeLogprobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeLogprobs", ID: &iComputeLogprobsResult, Members: &mComputeLogprobsResult, Type: smithy.ShapeTypeStructure, Ext: &eSampleOperationResult_computeLogprobs})
+var sSampleOperationResult_loadWeightsForSampling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loadWeightsForSampling", ID: &iLoadWeightsForSamplingResult, Type: smithy.ShapeTypeStructure, Ext: &eSampleOperationResult_loadWeightsForSampling})
+var sSampleResponse_sequences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sequences", ID: &i_SampledSequenceList, Members: &m_SampledSequenceList, Type: smithy.ShapeTypeList, Ext: &eSampleResponse_sequences})
+var sSampleResponse_promptLogprobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "promptLogprobs", ID: &i_DoubleList, Members: &m_DoubleList, Type: smithy.ShapeTypeList, Ext: &eSampleResponse_promptLogprobs})
+var sSampleResponse_topkPromptLogprobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topkPromptLogprobs", ID: &i_TopkPromptLogprobsList, Members: &m_TopkPromptLogprobsList, Type: smithy.ShapeTypeList, Ext: &eSampleResponse_topkPromptLogprobs})
+var sSampleTokenUsage_prefill = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefill", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSampleTokenUsage_prefill})
+var sSampleTokenUsage_decode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decode", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSampleTokenUsage_decode})
+var sSamplingParams_maxTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxTokens", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSamplingParams_maxTokens})
+var sSamplingParams_temperature = smithy.NewStaticSchema(smithy.StaticSchema{Member: "temperature", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eSamplingParams_temperature})
+var sSamplingParams_topK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topK", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSamplingParams_topK})
+var sSamplingParams_topP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topP", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eSamplingParams_topP})
+var sSamplingParams_seed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "seed", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eSamplingParams_seed})
+var sSamplingParams_stop = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stop", ID: &i_StopSequenceList, Members: &m_StopSequenceList, Type: smithy.ShapeTypeList, Ext: &eSamplingParams_stop})
+var sSaveStateConfig_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSaveStateConfig_description})
+var sSaveStateResult_modelPackageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelPackageArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSaveStateResult_modelPackageArn})
+var sSaveWeightsConfig_mergeWeights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeWeights", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eSaveWeightsConfig_mergeWeights})
+var sSaveWeightsConfig_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSaveWeightsConfig_description})
+var sSaveWeightsResult_modelPackageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelPackageArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSaveWeightsResult_modelPackageArn})
+var sStopReason_STOP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStopReason_STOP})
+var sStopReason_LENGTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LENGTH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStopReason_LENGTH})
+var s_StopSequenceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_StopSequenceList_member})
+var sTensorData_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &eTensorData_data})
+var sTensorData_dtype = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dtype", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTensorData_dtype})
+var sTensorData_shape = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shape", ID: &i_IntegerList, Members: &m_IntegerList, Type: smithy.ShapeTypeList, Ext: &eTensorData_shape})
+var s_TensorDataMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_TensorDataMap_key})
+var s_TensorDataMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iTensorData, Members: &mTensorData, Type: smithy.ShapeTypeStructure, Ext: &e_TensorDataMap_value})
+var s_TensorDataMapList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TensorDataMap, Members: &m_TensorDataMap, Type: smithy.ShapeTypeMap, Ext: &e_TensorDataMapList_member})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sTokenLogprob_tokenId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenId", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eTokenLogprob_tokenId})
+var sTokenLogprob_logprob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logprob", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eTokenLogprob_logprob})
+var s_TokenLogprobList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTokenLogprob, Members: &mTokenLogprob, Type: smithy.ShapeTypeStructure, Ext: &e_TokenLogprobList_member})
+var s_TopkPromptLogprobsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TokenLogprobList, Members: &m_TokenLogprobList, Type: smithy.ShapeTypeList, Ext: &e_TopkPromptLogprobsList_member})
+var sTrainingTokenUsage_trainingTokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingTokens", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eTrainingTokenUsage_trainingTokens})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sExecuteSamplingOperationInput_trainingSessionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingSessionName", ID: &i_TrainingSessionName, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eExecuteSamplingOperationInput_trainingSessionName})
+var sExecuteSamplingOperationInput_operationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationConfig", ID: &iSampleOperationConfig, Members: &mSampleOperationConfig, Type: smithy.ShapeTypeUnion, Ext: &eExecuteSamplingOperationInput_operationConfig})
+var sExecuteSamplingOperationOutput_operationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eExecuteSamplingOperationOutput_operationId})
+var sExecuteTrainingOperationInput_trainingSessionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingSessionName", ID: &i_TrainingSessionName, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eExecuteTrainingOperationInput_trainingSessionName})
+var sExecuteTrainingOperationInput_sequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeInteger, Ext: &eExecuteTrainingOperationInput_sequenceNumber})
+var sExecuteTrainingOperationInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eExecuteTrainingOperationInput_clientToken})
+var sExecuteTrainingOperationInput_operationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationConfig", ID: &iOperationConfig, Members: &mOperationConfig, Type: smithy.ShapeTypeUnion, Ext: &eExecuteTrainingOperationInput_operationConfig})
+var sExecuteTrainingOperationOutput_operationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationId", ID: &i_OperationId, Type: smithy.ShapeTypeString, Ext: &eExecuteTrainingOperationOutput_operationId})
+var sGetSamplingOperationResultInput_trainingSessionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingSessionName", ID: &i_TrainingSessionName, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eGetSamplingOperationResultInput_trainingSessionName})
+var sGetSamplingOperationResultInput_operationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationId", ID: &i_OperationId, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eGetSamplingOperationResultInput_operationId})
+var sGetSamplingOperationResultOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRequestStatus, Members: &mRequestStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetSamplingOperationResultOutput_status})
+var sGetSamplingOperationResultOutput_operationResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationResult", ID: &iSampleOperationResult, Members: &mSampleOperationResult, Type: smithy.ShapeTypeUnion, Ext: &eGetSamplingOperationResultOutput_operationResult})
+var sGetSamplingOperationResultOutput_errorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorDetails", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetSamplingOperationResultOutput_errorDetails})
+var sGetTrainingOperationResultInput_trainingSessionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingSessionName", ID: &i_TrainingSessionName, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eGetTrainingOperationResultInput_trainingSessionName})
+var sGetTrainingOperationResultInput_operationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationId", ID: &i_OperationId, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eGetTrainingOperationResultInput_operationId})
+var sGetTrainingOperationResultOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRequestStatus, Members: &mRequestStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetTrainingOperationResultOutput_status})
+var sGetTrainingOperationResultOutput_operationResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationResult", ID: &iOperationResult, Members: &mOperationResult, Type: smithy.ShapeTypeUnion, Ext: &eGetTrainingOperationResultOutput_operationResult})
+var sGetTrainingOperationResultOutput_errorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorDetails", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetTrainingOperationResultOutput_errorDetails})
+var sGetTrainingOperationResultOutput_tokenUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenUsage", ID: &iTrainingTokenUsage, Members: &mTrainingTokenUsage, Type: smithy.ShapeTypeStructure, Ext: &eGetTrainingOperationResultOutput_tokenUsage})
+var sSampleTrainingSessionInput_trainingSessionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingSessionName", ID: &i_TrainingSessionName, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eSampleTrainingSessionInput_trainingSessionName})
+var sSampleTrainingSessionInput_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &pString, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &eSampleTrainingSessionInput_contentType})
+var sSampleTrainingSessionInput_accept = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accept", ID: &pString, Traits: &t16, Type: smithy.ShapeTypeString, Ext: &eSampleTrainingSessionInput_accept})
+var sSampleTrainingSessionInput_modelPackageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelPackageArn", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eSampleTrainingSessionInput_modelPackageArn})
+var sSampleTrainingSessionInput_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &i_InferenceBody, Traits: &t18, Type: smithy.ShapeTypeBlob, Ext: &eSampleTrainingSessionInput_body})
+var sSampleTrainingSessionOutput_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &pString, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &eSampleTrainingSessionOutput_contentType})
+var sSampleTrainingSessionOutput_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &i_InferenceBody, Traits: &t18, Type: smithy.ShapeTypeBlob, Ext: &eSampleTrainingSessionOutput_body})
+var sSampleTrainingSessionWithResponseStreamInput_trainingSessionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingSessionName", ID: &i_TrainingSessionName, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eSampleTrainingSessionWithResponseStreamInput_trainingSessionName})
+var sSampleTrainingSessionWithResponseStreamInput_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &pString, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &eSampleTrainingSessionWithResponseStreamInput_contentType})
+var sSampleTrainingSessionWithResponseStreamInput_accept = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accept", ID: &pString, Traits: &t16, Type: smithy.ShapeTypeString, Ext: &eSampleTrainingSessionWithResponseStreamInput_accept})
+var sSampleTrainingSessionWithResponseStreamInput_modelPackageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelPackageArn", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString, Ext: &eSampleTrainingSessionWithResponseStreamInput_modelPackageArn})
+var sSampleTrainingSessionWithResponseStreamInput_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &i_InferenceBody, Traits: &t18, Type: smithy.ShapeTypeBlob, Ext: &eSampleTrainingSessionWithResponseStreamInput_body})
+var sSampleTrainingSessionWithResponseStreamOutput_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &pString, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &eSampleTrainingSessionWithResponseStreamOutput_contentType})
+var sSampleTrainingSessionWithResponseStreamOutput_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &i_SampleResponseStream, Traits: &t19, Type: smithy.ShapeTypeBlob, Ext: &eSampleTrainingSessionWithResponseStreamOutput_body})
 
 var ExecuteSamplingOperation = &sExecuteSamplingOperation
 

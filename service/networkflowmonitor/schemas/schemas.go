@@ -7,9 +7,426 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [418]smithy.SchemaExtensions
+var (
+	eCreateMonitor                                                          smithy.SchemaExtensions
+	eCreateScope                                                            smithy.SchemaExtensions
+	eDeleteMonitor                                                          smithy.SchemaExtensions
+	eDeleteScope                                                            smithy.SchemaExtensions
+	eGetMonitor                                                             smithy.SchemaExtensions
+	eGetQueryResultsMonitorTopContributors                                  smithy.SchemaExtensions
+	eGetQueryResultsWorkloadInsightsTopContributors                         smithy.SchemaExtensions
+	eGetQueryResultsWorkloadInsightsTopContributorsData                     smithy.SchemaExtensions
+	eGetQueryStatusMonitorTopContributors                                   smithy.SchemaExtensions
+	eGetQueryStatusWorkloadInsightsTopContributors                          smithy.SchemaExtensions
+	eGetQueryStatusWorkloadInsightsTopContributorsData                      smithy.SchemaExtensions
+	eGetScope                                                               smithy.SchemaExtensions
+	eListMonitors                                                           smithy.SchemaExtensions
+	eListScopes                                                             smithy.SchemaExtensions
+	eListTagsForResource                                                    smithy.SchemaExtensions
+	eStartQueryMonitorTopContributors                                       smithy.SchemaExtensions
+	eStartQueryWorkloadInsightsTopContributors                              smithy.SchemaExtensions
+	eStartQueryWorkloadInsightsTopContributorsData                          smithy.SchemaExtensions
+	eStopQueryMonitorTopContributors                                        smithy.SchemaExtensions
+	eStopQueryWorkloadInsightsTopContributors                               smithy.SchemaExtensions
+	eStopQueryWorkloadInsightsTopContributorsData                           smithy.SchemaExtensions
+	eTagResource                                                            smithy.SchemaExtensions
+	eUntagResource                                                          smithy.SchemaExtensions
+	eUpdateMonitor                                                          smithy.SchemaExtensions
+	eUpdateScope                                                            smithy.SchemaExtensions
+	e_NetworkFlowMonitor                                                    smithy.SchemaExtensions
+	eAccessDeniedException                                                  smithy.SchemaExtensions
+	eAccessDeniedException_message                                          smithy.SchemaExtensions
+	e_AccountId                                                             smithy.SchemaExtensions
+	e_Arn                                                                   smithy.SchemaExtensions
+	e_AvailabilityZone                                                      smithy.SchemaExtensions
+	e_AwsRegion                                                             smithy.SchemaExtensions
+	e_Component                                                             smithy.SchemaExtensions
+	e_ComponentType                                                         smithy.SchemaExtensions
+	eConflictException                                                      smithy.SchemaExtensions
+	eConflictException_message                                              smithy.SchemaExtensions
+	eDestinationCategory                                                    smithy.SchemaExtensions
+	eDestinationCategory_INTRA_AZ                                           smithy.SchemaExtensions
+	eDestinationCategory_INTER_AZ                                           smithy.SchemaExtensions
+	eDestinationCategory_INTER_VPC                                          smithy.SchemaExtensions
+	eDestinationCategory_UNCLASSIFIED                                       smithy.SchemaExtensions
+	eDestinationCategory_AMAZON_S3                                          smithy.SchemaExtensions
+	eDestinationCategory_AMAZON_DYNAMODB                                    smithy.SchemaExtensions
+	eDestinationCategory_INTER_REGION                                       smithy.SchemaExtensions
+	e_InstanceArn                                                           smithy.SchemaExtensions
+	e_InstanceId                                                            smithy.SchemaExtensions
+	eInternalServerException                                                smithy.SchemaExtensions
+	eInternalServerException_message                                        smithy.SchemaExtensions
+	e_Iso8601Timestamp                                                      smithy.SchemaExtensions
+	eKubernetesMetadata                                                     smithy.SchemaExtensions
+	eKubernetesMetadata_localServiceName                                    smithy.SchemaExtensions
+	eKubernetesMetadata_localPodName                                        smithy.SchemaExtensions
+	eKubernetesMetadata_localPodNamespace                                   smithy.SchemaExtensions
+	eKubernetesMetadata_remoteServiceName                                   smithy.SchemaExtensions
+	eKubernetesMetadata_remotePodName                                       smithy.SchemaExtensions
+	eKubernetesMetadata_remotePodNamespace                                  smithy.SchemaExtensions
+	e_Limit                                                                 smithy.SchemaExtensions
+	e_MaxResults                                                            smithy.SchemaExtensions
+	eMetricUnit                                                             smithy.SchemaExtensions
+	eMetricUnit_SECONDS                                                     smithy.SchemaExtensions
+	eMetricUnit_MICROSECONDS                                                smithy.SchemaExtensions
+	eMetricUnit_MILLISECONDS                                                smithy.SchemaExtensions
+	eMetricUnit_BYTES                                                       smithy.SchemaExtensions
+	eMetricUnit_KILOBYTES                                                   smithy.SchemaExtensions
+	eMetricUnit_MEGABYTES                                                   smithy.SchemaExtensions
+	eMetricUnit_GIGABYTES                                                   smithy.SchemaExtensions
+	eMetricUnit_TERABYTES                                                   smithy.SchemaExtensions
+	eMetricUnit_BITS                                                        smithy.SchemaExtensions
+	eMetricUnit_KILOBITS                                                    smithy.SchemaExtensions
+	eMetricUnit_MEGABITS                                                    smithy.SchemaExtensions
+	eMetricUnit_GIGABITS                                                    smithy.SchemaExtensions
+	eMetricUnit_TERABITS                                                    smithy.SchemaExtensions
+	eMetricUnit_PERCENT                                                     smithy.SchemaExtensions
+	eMetricUnit_COUNT                                                       smithy.SchemaExtensions
+	eMetricUnit_BYTES_PER_SECOND                                            smithy.SchemaExtensions
+	eMetricUnit_KILOBYTES_PER_SECOND                                        smithy.SchemaExtensions
+	eMetricUnit_MEGABYTES_PER_SECOND                                        smithy.SchemaExtensions
+	eMetricUnit_GIGABYTES_PER_SECOND                                        smithy.SchemaExtensions
+	eMetricUnit_TERABYTES_PER_SECOND                                        smithy.SchemaExtensions
+	eMetricUnit_BITS_PER_SECOND                                             smithy.SchemaExtensions
+	eMetricUnit_KILOBITS_PER_SECOND                                         smithy.SchemaExtensions
+	eMetricUnit_MEGABITS_PER_SECOND                                         smithy.SchemaExtensions
+	eMetricUnit_GIGABITS_PER_SECOND                                         smithy.SchemaExtensions
+	eMetricUnit_TERABITS_PER_SECOND                                         smithy.SchemaExtensions
+	eMetricUnit_COUNT_PER_SECOND                                            smithy.SchemaExtensions
+	eMetricUnit_NONE                                                        smithy.SchemaExtensions
+	e_MonitorArn                                                            smithy.SchemaExtensions
+	e_MonitorList                                                           smithy.SchemaExtensions
+	e_MonitorList_member                                                    smithy.SchemaExtensions
+	eMonitorLocalResource                                                   smithy.SchemaExtensions
+	eMonitorLocalResource_type                                              smithy.SchemaExtensions
+	eMonitorLocalResource_identifier                                        smithy.SchemaExtensions
+	e_MonitorLocalResources                                                 smithy.SchemaExtensions
+	e_MonitorLocalResources_member                                          smithy.SchemaExtensions
+	eMonitorLocalResourceType                                               smithy.SchemaExtensions
+	eMonitorLocalResourceType_AWS_VPC                                       smithy.SchemaExtensions
+	eMonitorLocalResourceType_AWS_AZ                                        smithy.SchemaExtensions
+	eMonitorLocalResourceType_AWS_SUBNET                                    smithy.SchemaExtensions
+	eMonitorLocalResourceType_AWS_REGION                                    smithy.SchemaExtensions
+	eMonitorLocalResourceType_EKS_CLUSTER                                   smithy.SchemaExtensions
+	eMonitorMetric                                                          smithy.SchemaExtensions
+	eMonitorMetric_ROUND_TRIP_TIME                                          smithy.SchemaExtensions
+	eMonitorMetric_TIMEOUTS                                                 smithy.SchemaExtensions
+	eMonitorMetric_RETRANSMISSIONS                                          smithy.SchemaExtensions
+	eMonitorMetric_DATA_TRANSFERRED                                         smithy.SchemaExtensions
+	eMonitorRemoteResource                                                  smithy.SchemaExtensions
+	eMonitorRemoteResource_type                                             smithy.SchemaExtensions
+	eMonitorRemoteResource_identifier                                       smithy.SchemaExtensions
+	e_MonitorRemoteResources                                                smithy.SchemaExtensions
+	e_MonitorRemoteResources_member                                         smithy.SchemaExtensions
+	eMonitorRemoteResourceType                                              smithy.SchemaExtensions
+	eMonitorRemoteResourceType_AWS_VPC                                      smithy.SchemaExtensions
+	eMonitorRemoteResourceType_AWS_AZ                                       smithy.SchemaExtensions
+	eMonitorRemoteResourceType_AWS_SUBNET                                   smithy.SchemaExtensions
+	eMonitorRemoteResourceType_AWS_SERVICE                                  smithy.SchemaExtensions
+	eMonitorRemoteResourceType_AWS_REGION                                   smithy.SchemaExtensions
+	eMonitorStatus                                                          smithy.SchemaExtensions
+	eMonitorStatus_PENDING                                                  smithy.SchemaExtensions
+	eMonitorStatus_ACTIVE                                                   smithy.SchemaExtensions
+	eMonitorStatus_INACTIVE                                                 smithy.SchemaExtensions
+	eMonitorStatus_ERROR                                                    smithy.SchemaExtensions
+	eMonitorStatus_DELETING                                                 smithy.SchemaExtensions
+	eMonitorSummary                                                         smithy.SchemaExtensions
+	eMonitorSummary_monitorArn                                              smithy.SchemaExtensions
+	eMonitorSummary_monitorName                                             smithy.SchemaExtensions
+	eMonitorSummary_monitorStatus                                           smithy.SchemaExtensions
+	eMonitorTopContributorsRow                                              smithy.SchemaExtensions
+	eMonitorTopContributorsRow_localIp                                      smithy.SchemaExtensions
+	eMonitorTopContributorsRow_snatIp                                       smithy.SchemaExtensions
+	eMonitorTopContributorsRow_localInstanceId                              smithy.SchemaExtensions
+	eMonitorTopContributorsRow_localVpcId                                   smithy.SchemaExtensions
+	eMonitorTopContributorsRow_localRegion                                  smithy.SchemaExtensions
+	eMonitorTopContributorsRow_localAz                                      smithy.SchemaExtensions
+	eMonitorTopContributorsRow_localSubnetId                                smithy.SchemaExtensions
+	eMonitorTopContributorsRow_targetPort                                   smithy.SchemaExtensions
+	eMonitorTopContributorsRow_destinationCategory                          smithy.SchemaExtensions
+	eMonitorTopContributorsRow_remoteVpcId                                  smithy.SchemaExtensions
+	eMonitorTopContributorsRow_remoteRegion                                 smithy.SchemaExtensions
+	eMonitorTopContributorsRow_remoteAz                                     smithy.SchemaExtensions
+	eMonitorTopContributorsRow_remoteSubnetId                               smithy.SchemaExtensions
+	eMonitorTopContributorsRow_remoteInstanceId                             smithy.SchemaExtensions
+	eMonitorTopContributorsRow_remoteIp                                     smithy.SchemaExtensions
+	eMonitorTopContributorsRow_dnatIp                                       smithy.SchemaExtensions
+	eMonitorTopContributorsRow_value                                        smithy.SchemaExtensions
+	eMonitorTopContributorsRow_traversedConstructs                          smithy.SchemaExtensions
+	eMonitorTopContributorsRow_kubernetesMetadata                           smithy.SchemaExtensions
+	eMonitorTopContributorsRow_localInstanceArn                             smithy.SchemaExtensions
+	eMonitorTopContributorsRow_localSubnetArn                               smithy.SchemaExtensions
+	eMonitorTopContributorsRow_localVpcArn                                  smithy.SchemaExtensions
+	eMonitorTopContributorsRow_remoteInstanceArn                            smithy.SchemaExtensions
+	eMonitorTopContributorsRow_remoteSubnetArn                              smithy.SchemaExtensions
+	eMonitorTopContributorsRow_remoteVpcArn                                 smithy.SchemaExtensions
+	e_MonitorTopContributorsRowList                                         smithy.SchemaExtensions
+	e_MonitorTopContributorsRowList_member                                  smithy.SchemaExtensions
+	eQueryStatus                                                            smithy.SchemaExtensions
+	eQueryStatus_QUEUED                                                     smithy.SchemaExtensions
+	eQueryStatus_RUNNING                                                    smithy.SchemaExtensions
+	eQueryStatus_SUCCEEDED                                                  smithy.SchemaExtensions
+	eQueryStatus_FAILED                                                     smithy.SchemaExtensions
+	eQueryStatus_CANCELED                                                   smithy.SchemaExtensions
+	e_ResourceName                                                          smithy.SchemaExtensions
+	eResourceNotFoundException                                              smithy.SchemaExtensions
+	eResourceNotFoundException_message                                      smithy.SchemaExtensions
+	e_ScopeId                                                               smithy.SchemaExtensions
+	eScopeStatus                                                            smithy.SchemaExtensions
+	eScopeStatus_SUCCEEDED                                                  smithy.SchemaExtensions
+	eScopeStatus_IN_PROGRESS                                                smithy.SchemaExtensions
+	eScopeStatus_FAILED                                                     smithy.SchemaExtensions
+	eScopeStatus_DEACTIVATING                                               smithy.SchemaExtensions
+	eScopeStatus_DEACTIVATED                                                smithy.SchemaExtensions
+	eScopeSummary                                                           smithy.SchemaExtensions
+	eScopeSummary_scopeId                                                   smithy.SchemaExtensions
+	eScopeSummary_status                                                    smithy.SchemaExtensions
+	eScopeSummary_scopeArn                                                  smithy.SchemaExtensions
+	e_ScopeSummaryList                                                      smithy.SchemaExtensions
+	e_ScopeSummaryList_member                                               smithy.SchemaExtensions
+	eServiceQuotaExceededException                                          smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                                  smithy.SchemaExtensions
+	e_SubnetArn                                                             smithy.SchemaExtensions
+	e_SubnetId                                                              smithy.SchemaExtensions
+	e_TagKey                                                                smithy.SchemaExtensions
+	e_TagKeyList                                                            smithy.SchemaExtensions
+	e_TagKeyList_member                                                     smithy.SchemaExtensions
+	e_TagMap                                                                smithy.SchemaExtensions
+	e_TagMap_key                                                            smithy.SchemaExtensions
+	e_TagMap_value                                                          smithy.SchemaExtensions
+	e_TagValue                                                              smithy.SchemaExtensions
+	eTargetId                                                               smithy.SchemaExtensions
+	eTargetId_accountId                                                     smithy.SchemaExtensions
+	eTargetIdentifier                                                       smithy.SchemaExtensions
+	eTargetIdentifier_targetId                                              smithy.SchemaExtensions
+	eTargetIdentifier_targetType                                            smithy.SchemaExtensions
+	eTargetResource                                                         smithy.SchemaExtensions
+	eTargetResource_targetIdentifier                                        smithy.SchemaExtensions
+	eTargetResource_region                                                  smithy.SchemaExtensions
+	e_TargetResourceList                                                    smithy.SchemaExtensions
+	e_TargetResourceList_member                                             smithy.SchemaExtensions
+	eTargetType                                                             smithy.SchemaExtensions
+	eTargetType_ACCOUNT                                                     smithy.SchemaExtensions
+	eThrottlingException                                                    smithy.SchemaExtensions
+	eThrottlingException_message                                            smithy.SchemaExtensions
+	eTraversedComponent                                                     smithy.SchemaExtensions
+	eTraversedComponent_componentId                                         smithy.SchemaExtensions
+	eTraversedComponent_componentType                                       smithy.SchemaExtensions
+	eTraversedComponent_componentArn                                        smithy.SchemaExtensions
+	eTraversedComponent_serviceName                                         smithy.SchemaExtensions
+	e_TraversedConstructsList                                               smithy.SchemaExtensions
+	e_TraversedConstructsList_member                                        smithy.SchemaExtensions
+	e_UuidString                                                            smithy.SchemaExtensions
+	eValidationException                                                    smithy.SchemaExtensions
+	eValidationException_message                                            smithy.SchemaExtensions
+	e_VpcArn                                                                smithy.SchemaExtensions
+	e_VpcId                                                                 smithy.SchemaExtensions
+	eWorkloadInsightsMetric                                                 smithy.SchemaExtensions
+	eWorkloadInsightsMetric_TIMEOUTS                                        smithy.SchemaExtensions
+	eWorkloadInsightsMetric_RETRANSMISSIONS                                 smithy.SchemaExtensions
+	eWorkloadInsightsMetric_DATA_TRANSFERRED                                smithy.SchemaExtensions
+	eWorkloadInsightsTopContributorsDataPoint                               smithy.SchemaExtensions
+	eWorkloadInsightsTopContributorsDataPoint_timestamps                    smithy.SchemaExtensions
+	eWorkloadInsightsTopContributorsDataPoint_values                        smithy.SchemaExtensions
+	eWorkloadInsightsTopContributorsDataPoint_label                         smithy.SchemaExtensions
+	e_WorkloadInsightsTopContributorsDataPoints                             smithy.SchemaExtensions
+	e_WorkloadInsightsTopContributorsDataPoints_member                      smithy.SchemaExtensions
+	eWorkloadInsightsTopContributorsRow                                     smithy.SchemaExtensions
+	eWorkloadInsightsTopContributorsRow_accountId                           smithy.SchemaExtensions
+	eWorkloadInsightsTopContributorsRow_localSubnetId                       smithy.SchemaExtensions
+	eWorkloadInsightsTopContributorsRow_localAz                             smithy.SchemaExtensions
+	eWorkloadInsightsTopContributorsRow_localVpcId                          smithy.SchemaExtensions
+	eWorkloadInsightsTopContributorsRow_localRegion                         smithy.SchemaExtensions
+	eWorkloadInsightsTopContributorsRow_remoteIdentifier                    smithy.SchemaExtensions
+	eWorkloadInsightsTopContributorsRow_value                               smithy.SchemaExtensions
+	eWorkloadInsightsTopContributorsRow_localSubnetArn                      smithy.SchemaExtensions
+	eWorkloadInsightsTopContributorsRow_localVpcArn                         smithy.SchemaExtensions
+	e_WorkloadInsightsTopContributorsRowList                                smithy.SchemaExtensions
+	e_WorkloadInsightsTopContributorsRowList_member                         smithy.SchemaExtensions
+	e_WorkloadInsightsTopContributorsTimestampsList                         smithy.SchemaExtensions
+	e_WorkloadInsightsTopContributorsTimestampsList_member                  smithy.SchemaExtensions
+	e_WorkloadInsightsTopContributorsValuesList                             smithy.SchemaExtensions
+	e_WorkloadInsightsTopContributorsValuesList_member                      smithy.SchemaExtensions
+	eCreateMonitorInput                                                     smithy.SchemaExtensions
+	eCreateMonitorInput_monitorName                                         smithy.SchemaExtensions
+	eCreateMonitorInput_localResources                                      smithy.SchemaExtensions
+	eCreateMonitorInput_remoteResources                                     smithy.SchemaExtensions
+	eCreateMonitorInput_scopeArn                                            smithy.SchemaExtensions
+	eCreateMonitorInput_clientToken                                         smithy.SchemaExtensions
+	eCreateMonitorInput_tags                                                smithy.SchemaExtensions
+	eCreateMonitorOutput                                                    smithy.SchemaExtensions
+	eCreateMonitorOutput_monitorArn                                         smithy.SchemaExtensions
+	eCreateMonitorOutput_monitorName                                        smithy.SchemaExtensions
+	eCreateMonitorOutput_monitorStatus                                      smithy.SchemaExtensions
+	eCreateMonitorOutput_localResources                                     smithy.SchemaExtensions
+	eCreateMonitorOutput_remoteResources                                    smithy.SchemaExtensions
+	eCreateMonitorOutput_createdAt                                          smithy.SchemaExtensions
+	eCreateMonitorOutput_modifiedAt                                         smithy.SchemaExtensions
+	eCreateMonitorOutput_tags                                               smithy.SchemaExtensions
+	eCreateScopeInput                                                       smithy.SchemaExtensions
+	eCreateScopeInput_targets                                               smithy.SchemaExtensions
+	eCreateScopeInput_clientToken                                           smithy.SchemaExtensions
+	eCreateScopeInput_tags                                                  smithy.SchemaExtensions
+	eCreateScopeOutput                                                      smithy.SchemaExtensions
+	eCreateScopeOutput_scopeId                                              smithy.SchemaExtensions
+	eCreateScopeOutput_status                                               smithy.SchemaExtensions
+	eCreateScopeOutput_scopeArn                                             smithy.SchemaExtensions
+	eCreateScopeOutput_tags                                                 smithy.SchemaExtensions
+	eDeleteMonitorInput                                                     smithy.SchemaExtensions
+	eDeleteMonitorInput_monitorName                                         smithy.SchemaExtensions
+	eDeleteMonitorOutput                                                    smithy.SchemaExtensions
+	eDeleteScopeInput                                                       smithy.SchemaExtensions
+	eDeleteScopeInput_scopeId                                               smithy.SchemaExtensions
+	eDeleteScopeOutput                                                      smithy.SchemaExtensions
+	eGetMonitorInput                                                        smithy.SchemaExtensions
+	eGetMonitorInput_monitorName                                            smithy.SchemaExtensions
+	eGetMonitorOutput                                                       smithy.SchemaExtensions
+	eGetMonitorOutput_monitorArn                                            smithy.SchemaExtensions
+	eGetMonitorOutput_monitorName                                           smithy.SchemaExtensions
+	eGetMonitorOutput_monitorStatus                                         smithy.SchemaExtensions
+	eGetMonitorOutput_localResources                                        smithy.SchemaExtensions
+	eGetMonitorOutput_remoteResources                                       smithy.SchemaExtensions
+	eGetMonitorOutput_createdAt                                             smithy.SchemaExtensions
+	eGetMonitorOutput_modifiedAt                                            smithy.SchemaExtensions
+	eGetMonitorOutput_tags                                                  smithy.SchemaExtensions
+	eGetQueryResultsMonitorTopContributorsInput                             smithy.SchemaExtensions
+	eGetQueryResultsMonitorTopContributorsInput_monitorName                 smithy.SchemaExtensions
+	eGetQueryResultsMonitorTopContributorsInput_queryId                     smithy.SchemaExtensions
+	eGetQueryResultsMonitorTopContributorsInput_nextToken                   smithy.SchemaExtensions
+	eGetQueryResultsMonitorTopContributorsInput_maxResults                  smithy.SchemaExtensions
+	eGetQueryResultsMonitorTopContributorsOutput                            smithy.SchemaExtensions
+	eGetQueryResultsMonitorTopContributorsOutput_unit                       smithy.SchemaExtensions
+	eGetQueryResultsMonitorTopContributorsOutput_topContributors            smithy.SchemaExtensions
+	eGetQueryResultsMonitorTopContributorsOutput_nextToken                  smithy.SchemaExtensions
+	eGetQueryResultsWorkloadInsightsTopContributorsDataInput                smithy.SchemaExtensions
+	eGetQueryResultsWorkloadInsightsTopContributorsDataInput_scopeId        smithy.SchemaExtensions
+	eGetQueryResultsWorkloadInsightsTopContributorsDataInput_queryId        smithy.SchemaExtensions
+	eGetQueryResultsWorkloadInsightsTopContributorsDataInput_nextToken      smithy.SchemaExtensions
+	eGetQueryResultsWorkloadInsightsTopContributorsDataInput_maxResults     smithy.SchemaExtensions
+	eGetQueryResultsWorkloadInsightsTopContributorsDataOutput               smithy.SchemaExtensions
+	eGetQueryResultsWorkloadInsightsTopContributorsDataOutput_unit          smithy.SchemaExtensions
+	eGetQueryResultsWorkloadInsightsTopContributorsDataOutput_datapoints    smithy.SchemaExtensions
+	eGetQueryResultsWorkloadInsightsTopContributorsDataOutput_nextToken     smithy.SchemaExtensions
+	eGetQueryResultsWorkloadInsightsTopContributorsInput                    smithy.SchemaExtensions
+	eGetQueryResultsWorkloadInsightsTopContributorsInput_scopeId            smithy.SchemaExtensions
+	eGetQueryResultsWorkloadInsightsTopContributorsInput_queryId            smithy.SchemaExtensions
+	eGetQueryResultsWorkloadInsightsTopContributorsInput_nextToken          smithy.SchemaExtensions
+	eGetQueryResultsWorkloadInsightsTopContributorsInput_maxResults         smithy.SchemaExtensions
+	eGetQueryResultsWorkloadInsightsTopContributorsOutput                   smithy.SchemaExtensions
+	eGetQueryResultsWorkloadInsightsTopContributorsOutput_topContributors   smithy.SchemaExtensions
+	eGetQueryResultsWorkloadInsightsTopContributorsOutput_nextToken         smithy.SchemaExtensions
+	eGetQueryStatusMonitorTopContributorsInput                              smithy.SchemaExtensions
+	eGetQueryStatusMonitorTopContributorsInput_monitorName                  smithy.SchemaExtensions
+	eGetQueryStatusMonitorTopContributorsInput_queryId                      smithy.SchemaExtensions
+	eGetQueryStatusMonitorTopContributorsOutput                             smithy.SchemaExtensions
+	eGetQueryStatusMonitorTopContributorsOutput_status                      smithy.SchemaExtensions
+	eGetQueryStatusWorkloadInsightsTopContributorsDataInput                 smithy.SchemaExtensions
+	eGetQueryStatusWorkloadInsightsTopContributorsDataInput_scopeId         smithy.SchemaExtensions
+	eGetQueryStatusWorkloadInsightsTopContributorsDataInput_queryId         smithy.SchemaExtensions
+	eGetQueryStatusWorkloadInsightsTopContributorsDataOutput                smithy.SchemaExtensions
+	eGetQueryStatusWorkloadInsightsTopContributorsDataOutput_status         smithy.SchemaExtensions
+	eGetQueryStatusWorkloadInsightsTopContributorsInput                     smithy.SchemaExtensions
+	eGetQueryStatusWorkloadInsightsTopContributorsInput_scopeId             smithy.SchemaExtensions
+	eGetQueryStatusWorkloadInsightsTopContributorsInput_queryId             smithy.SchemaExtensions
+	eGetQueryStatusWorkloadInsightsTopContributorsOutput                    smithy.SchemaExtensions
+	eGetQueryStatusWorkloadInsightsTopContributorsOutput_status             smithy.SchemaExtensions
+	eGetScopeInput                                                          smithy.SchemaExtensions
+	eGetScopeInput_scopeId                                                  smithy.SchemaExtensions
+	eGetScopeOutput                                                         smithy.SchemaExtensions
+	eGetScopeOutput_scopeId                                                 smithy.SchemaExtensions
+	eGetScopeOutput_status                                                  smithy.SchemaExtensions
+	eGetScopeOutput_scopeArn                                                smithy.SchemaExtensions
+	eGetScopeOutput_targets                                                 smithy.SchemaExtensions
+	eGetScopeOutput_tags                                                    smithy.SchemaExtensions
+	eListMonitorsInput                                                      smithy.SchemaExtensions
+	eListMonitorsInput_nextToken                                            smithy.SchemaExtensions
+	eListMonitorsInput_maxResults                                           smithy.SchemaExtensions
+	eListMonitorsInput_monitorStatus                                        smithy.SchemaExtensions
+	eListMonitorsOutput                                                     smithy.SchemaExtensions
+	eListMonitorsOutput_monitors                                            smithy.SchemaExtensions
+	eListMonitorsOutput_nextToken                                           smithy.SchemaExtensions
+	eListScopesInput                                                        smithy.SchemaExtensions
+	eListScopesInput_nextToken                                              smithy.SchemaExtensions
+	eListScopesInput_maxResults                                             smithy.SchemaExtensions
+	eListScopesOutput                                                       smithy.SchemaExtensions
+	eListScopesOutput_scopes                                                smithy.SchemaExtensions
+	eListScopesOutput_nextToken                                             smithy.SchemaExtensions
+	eListTagsForResourceInput                                               smithy.SchemaExtensions
+	eListTagsForResourceInput_resourceArn                                   smithy.SchemaExtensions
+	eListTagsForResourceOutput                                              smithy.SchemaExtensions
+	eListTagsForResourceOutput_tags                                         smithy.SchemaExtensions
+	eStartQueryMonitorTopContributorsInput                                  smithy.SchemaExtensions
+	eStartQueryMonitorTopContributorsInput_monitorName                      smithy.SchemaExtensions
+	eStartQueryMonitorTopContributorsInput_startTime                        smithy.SchemaExtensions
+	eStartQueryMonitorTopContributorsInput_endTime                          smithy.SchemaExtensions
+	eStartQueryMonitorTopContributorsInput_metricName                       smithy.SchemaExtensions
+	eStartQueryMonitorTopContributorsInput_destinationCategory              smithy.SchemaExtensions
+	eStartQueryMonitorTopContributorsInput_limit                            smithy.SchemaExtensions
+	eStartQueryMonitorTopContributorsOutput                                 smithy.SchemaExtensions
+	eStartQueryMonitorTopContributorsOutput_queryId                         smithy.SchemaExtensions
+	eStartQueryWorkloadInsightsTopContributorsDataInput                     smithy.SchemaExtensions
+	eStartQueryWorkloadInsightsTopContributorsDataInput_scopeId             smithy.SchemaExtensions
+	eStartQueryWorkloadInsightsTopContributorsDataInput_startTime           smithy.SchemaExtensions
+	eStartQueryWorkloadInsightsTopContributorsDataInput_endTime             smithy.SchemaExtensions
+	eStartQueryWorkloadInsightsTopContributorsDataInput_metricName          smithy.SchemaExtensions
+	eStartQueryWorkloadInsightsTopContributorsDataInput_destinationCategory smithy.SchemaExtensions
+	eStartQueryWorkloadInsightsTopContributorsDataOutput                    smithy.SchemaExtensions
+	eStartQueryWorkloadInsightsTopContributorsDataOutput_queryId            smithy.SchemaExtensions
+	eStartQueryWorkloadInsightsTopContributorsInput                         smithy.SchemaExtensions
+	eStartQueryWorkloadInsightsTopContributorsInput_scopeId                 smithy.SchemaExtensions
+	eStartQueryWorkloadInsightsTopContributorsInput_startTime               smithy.SchemaExtensions
+	eStartQueryWorkloadInsightsTopContributorsInput_endTime                 smithy.SchemaExtensions
+	eStartQueryWorkloadInsightsTopContributorsInput_metricName              smithy.SchemaExtensions
+	eStartQueryWorkloadInsightsTopContributorsInput_destinationCategory     smithy.SchemaExtensions
+	eStartQueryWorkloadInsightsTopContributorsInput_limit                   smithy.SchemaExtensions
+	eStartQueryWorkloadInsightsTopContributorsOutput                        smithy.SchemaExtensions
+	eStartQueryWorkloadInsightsTopContributorsOutput_queryId                smithy.SchemaExtensions
+	eStopQueryMonitorTopContributorsInput                                   smithy.SchemaExtensions
+	eStopQueryMonitorTopContributorsInput_monitorName                       smithy.SchemaExtensions
+	eStopQueryMonitorTopContributorsInput_queryId                           smithy.SchemaExtensions
+	eStopQueryMonitorTopContributorsOutput                                  smithy.SchemaExtensions
+	eStopQueryWorkloadInsightsTopContributorsDataInput                      smithy.SchemaExtensions
+	eStopQueryWorkloadInsightsTopContributorsDataInput_scopeId              smithy.SchemaExtensions
+	eStopQueryWorkloadInsightsTopContributorsDataInput_queryId              smithy.SchemaExtensions
+	eStopQueryWorkloadInsightsTopContributorsDataOutput                     smithy.SchemaExtensions
+	eStopQueryWorkloadInsightsTopContributorsInput                          smithy.SchemaExtensions
+	eStopQueryWorkloadInsightsTopContributorsInput_scopeId                  smithy.SchemaExtensions
+	eStopQueryWorkloadInsightsTopContributorsInput_queryId                  smithy.SchemaExtensions
+	eStopQueryWorkloadInsightsTopContributorsOutput                         smithy.SchemaExtensions
+	eTagResourceInput                                                       smithy.SchemaExtensions
+	eTagResourceInput_resourceArn                                           smithy.SchemaExtensions
+	eTagResourceInput_tags                                                  smithy.SchemaExtensions
+	eTagResourceOutput                                                      smithy.SchemaExtensions
+	eUntagResourceInput                                                     smithy.SchemaExtensions
+	eUntagResourceInput_resourceArn                                         smithy.SchemaExtensions
+	eUntagResourceInput_tagKeys                                             smithy.SchemaExtensions
+	eUntagResourceOutput                                                    smithy.SchemaExtensions
+	eUpdateMonitorInput                                                     smithy.SchemaExtensions
+	eUpdateMonitorInput_monitorName                                         smithy.SchemaExtensions
+	eUpdateMonitorInput_localResourcesToAdd                                 smithy.SchemaExtensions
+	eUpdateMonitorInput_localResourcesToRemove                              smithy.SchemaExtensions
+	eUpdateMonitorInput_remoteResourcesToAdd                                smithy.SchemaExtensions
+	eUpdateMonitorInput_remoteResourcesToRemove                             smithy.SchemaExtensions
+	eUpdateMonitorInput_clientToken                                         smithy.SchemaExtensions
+	eUpdateMonitorOutput                                                    smithy.SchemaExtensions
+	eUpdateMonitorOutput_monitorArn                                         smithy.SchemaExtensions
+	eUpdateMonitorOutput_monitorName                                        smithy.SchemaExtensions
+	eUpdateMonitorOutput_monitorStatus                                      smithy.SchemaExtensions
+	eUpdateMonitorOutput_localResources                                     smithy.SchemaExtensions
+	eUpdateMonitorOutput_remoteResources                                    smithy.SchemaExtensions
+	eUpdateMonitorOutput_createdAt                                          smithy.SchemaExtensions
+	eUpdateMonitorOutput_modifiedAt                                         smithy.SchemaExtensions
+	eUpdateMonitorOutput_tags                                               smithy.SchemaExtensions
+	eUpdateScopeInput                                                       smithy.SchemaExtensions
+	eUpdateScopeInput_scopeId                                               smithy.SchemaExtensions
+	eUpdateScopeInput_resourcesToAdd                                        smithy.SchemaExtensions
+	eUpdateScopeInput_resourcesToDelete                                     smithy.SchemaExtensions
+	eUpdateScopeOutput                                                      smithy.SchemaExtensions
+	eUpdateScopeOutput_scopeId                                              smithy.SchemaExtensions
+	eUpdateScopeOutput_status                                               smithy.SchemaExtensions
+	eUpdateScopeOutput_scopeArn                                             smithy.SchemaExtensions
+	eUpdateScopeOutput_tags                                                 smithy.SchemaExtensions
+)
 
 var (
 	iCreateMonitor                                            = smithy.ShapeID{Namespace: "com.amazonaws.networkflowmonitor", Name: "CreateMonitor"}
@@ -345,425 +762,425 @@ var mUpdateMonitorOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateM
 var mUpdateScopeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateScopeInput_scopeId, &sUpdateScopeInput_resourcesToAdd, &sUpdateScopeInput_resourcesToDelete}}
 var mUpdateScopeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateScopeOutput_scopeId, &sUpdateScopeOutput_status, &sUpdateScopeOutput_scopeArn, &sUpdateScopeOutput_tags}}
 
-var sCreateMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMonitor, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCreateScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateScope, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sDeleteMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMonitor, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sDeleteScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScope, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sGetMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMonitor, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sGetQueryResultsMonitorTopContributors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsMonitorTopContributors, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sGetQueryResultsWorkloadInsightsTopContributors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsWorkloadInsightsTopContributors, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sGetQueryResultsWorkloadInsightsTopContributorsData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsWorkloadInsightsTopContributorsData, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sGetQueryStatusMonitorTopContributors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatusMonitorTopContributors, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sGetQueryStatusWorkloadInsightsTopContributors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatusWorkloadInsightsTopContributors, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sGetQueryStatusWorkloadInsightsTopContributorsData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatusWorkloadInsightsTopContributorsData, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sGetScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetScope, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sListMonitors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMonitors, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sListScopes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScopes, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sStartQueryMonitorTopContributors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryMonitorTopContributors, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sStartQueryWorkloadInsightsTopContributors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryWorkloadInsightsTopContributors, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sStartQueryWorkloadInsightsTopContributorsData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryWorkloadInsightsTopContributorsData, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sStopQueryMonitorTopContributors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryMonitorTopContributors, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sStopQueryWorkloadInsightsTopContributors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryWorkloadInsightsTopContributors, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var sStopQueryWorkloadInsightsTopContributorsData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryWorkloadInsightsTopContributorsData, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &ext[20]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &ext[21]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &ext[22]})
-var sUpdateMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMonitor, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &ext[23]})
-var sUpdateScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateScope, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &ext[24]})
-var s_NetworkFlowMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkFlowMonitor, Type: smithy.ShapeTypeService, Ext: &ext[25]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &ext[26]})
-var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[28]})
-var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[29]})
-var s_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[30]})
-var s_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var s_Component = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Component, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var s_ComponentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentType, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &ext[34]})
-var sDestinationCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationCategory, Members: &mDestinationCategory, Type: smithy.ShapeTypeEnum, Ext: &ext[36]})
-var s_InstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceArn, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var s_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &ext[46]})
-var s_Iso8601Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Iso8601Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[48]})
-var sKubernetesMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKubernetesMetadata, Members: &mKubernetesMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[49]})
-var s_Limit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Limit, Type: smithy.ShapeTypeInteger, Ext: &ext[56]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[57]})
-var sMetricUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricUnit, Members: &mMetricUnit, Type: smithy.ShapeTypeEnum, Ext: &ext[58]})
-var s_MonitorArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &ext[86]})
-var s_MonitorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonitorList, Members: &m_MonitorList, Type: smithy.ShapeTypeList, Ext: &ext[87]})
-var sMonitorLocalResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitorLocalResource, Members: &mMonitorLocalResource, Type: smithy.ShapeTypeStructure, Ext: &ext[89]})
-var s_MonitorLocalResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonitorLocalResources, Members: &m_MonitorLocalResources, Type: smithy.ShapeTypeList, Ext: &ext[92]})
-var sMonitorLocalResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitorLocalResourceType, Members: &mMonitorLocalResourceType, Type: smithy.ShapeTypeEnum, Ext: &ext[94]})
-var sMonitorMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitorMetric, Members: &mMonitorMetric, Type: smithy.ShapeTypeEnum, Ext: &ext[100]})
-var sMonitorRemoteResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitorRemoteResource, Members: &mMonitorRemoteResource, Type: smithy.ShapeTypeStructure, Ext: &ext[105]})
-var s_MonitorRemoteResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonitorRemoteResources, Members: &m_MonitorRemoteResources, Type: smithy.ShapeTypeList, Ext: &ext[108]})
-var sMonitorRemoteResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitorRemoteResourceType, Members: &mMonitorRemoteResourceType, Type: smithy.ShapeTypeEnum, Ext: &ext[110]})
-var sMonitorStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitorStatus, Members: &mMonitorStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[116]})
-var sMonitorSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitorSummary, Members: &mMonitorSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[122]})
-var sMonitorTopContributorsRow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitorTopContributorsRow, Members: &mMonitorTopContributorsRow, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var s_MonitorTopContributorsRowList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonitorTopContributorsRowList, Members: &m_MonitorTopContributorsRowList, Type: smithy.ShapeTypeList, Ext: &ext[152]})
-var sQueryStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryStatus, Members: &mQueryStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[154]})
-var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[160]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &ext[161]})
-var s_ScopeId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScopeId, Type: smithy.ShapeTypeString, Ext: &ext[163]})
-var sScopeStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScopeStatus, Members: &mScopeStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[164]})
-var sScopeSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScopeSummary, Members: &mScopeSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[170]})
-var s_ScopeSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScopeSummaryList, Members: &m_ScopeSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[174]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &ext[176]})
-var s_SubnetArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetArn, Type: smithy.ShapeTypeString, Ext: &ext[178]})
-var s_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &ext[179]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[180]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[181]})
-var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[183]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[186]})
-var sTargetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetId, Members: &mTargetId, Type: smithy.ShapeTypeUnion, Ext: &ext[187]})
-var sTargetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetIdentifier, Members: &mTargetIdentifier, Type: smithy.ShapeTypeStructure, Ext: &ext[189]})
-var sTargetResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetResource, Members: &mTargetResource, Type: smithy.ShapeTypeStructure, Ext: &ext[192]})
-var s_TargetResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetResourceList, Members: &m_TargetResourceList, Type: smithy.ShapeTypeList, Ext: &ext[195]})
-var sTargetType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetType, Members: &mTargetType, Type: smithy.ShapeTypeEnum, Ext: &ext[197]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &ext[199]})
-var sTraversedComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTraversedComponent, Members: &mTraversedComponent, Type: smithy.ShapeTypeStructure, Ext: &ext[201]})
-var s_TraversedConstructsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TraversedConstructsList, Members: &m_TraversedConstructsList, Type: smithy.ShapeTypeList, Ext: &ext[206]})
-var s_UuidString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UuidString, Type: smithy.ShapeTypeString, Ext: &ext[208]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &ext[209]})
-var s_VpcArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcArn, Type: smithy.ShapeTypeString, Ext: &ext[211]})
-var s_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &ext[212]})
-var sWorkloadInsightsMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkloadInsightsMetric, Members: &mWorkloadInsightsMetric, Type: smithy.ShapeTypeEnum, Ext: &ext[213]})
-var sWorkloadInsightsTopContributorsDataPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkloadInsightsTopContributorsDataPoint, Members: &mWorkloadInsightsTopContributorsDataPoint, Type: smithy.ShapeTypeStructure, Ext: &ext[217]})
-var s_WorkloadInsightsTopContributorsDataPoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkloadInsightsTopContributorsDataPoints, Members: &m_WorkloadInsightsTopContributorsDataPoints, Type: smithy.ShapeTypeList, Ext: &ext[221]})
-var sWorkloadInsightsTopContributorsRow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkloadInsightsTopContributorsRow, Members: &mWorkloadInsightsTopContributorsRow, Type: smithy.ShapeTypeStructure, Ext: &ext[223]})
-var s_WorkloadInsightsTopContributorsRowList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkloadInsightsTopContributorsRowList, Members: &m_WorkloadInsightsTopContributorsRowList, Type: smithy.ShapeTypeList, Ext: &ext[233]})
-var s_WorkloadInsightsTopContributorsTimestampsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkloadInsightsTopContributorsTimestampsList, Members: &m_WorkloadInsightsTopContributorsTimestampsList, Type: smithy.ShapeTypeList, Ext: &ext[235]})
-var s_WorkloadInsightsTopContributorsValuesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkloadInsightsTopContributorsValuesList, Members: &m_WorkloadInsightsTopContributorsValuesList, Type: smithy.ShapeTypeList, Ext: &ext[237]})
-var sCreateMonitorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMonitorInput, Members: &mCreateMonitorInput, Type: smithy.ShapeTypeStructure, Ext: &ext[239]})
-var sCreateMonitorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMonitorOutput, Members: &mCreateMonitorOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[246]})
-var sCreateScopeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateScopeInput, Members: &mCreateScopeInput, Type: smithy.ShapeTypeStructure, Ext: &ext[255]})
-var sCreateScopeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateScopeOutput, Members: &mCreateScopeOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[259]})
-var sDeleteMonitorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMonitorInput, Members: &mDeleteMonitorInput, Type: smithy.ShapeTypeStructure, Ext: &ext[264]})
-var sDeleteMonitorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMonitorOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[266]})
-var sDeleteScopeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScopeInput, Members: &mDeleteScopeInput, Type: smithy.ShapeTypeStructure, Ext: &ext[267]})
-var sDeleteScopeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScopeOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[269]})
-var sGetMonitorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMonitorInput, Members: &mGetMonitorInput, Type: smithy.ShapeTypeStructure, Ext: &ext[270]})
-var sGetMonitorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMonitorOutput, Members: &mGetMonitorOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[272]})
-var sGetQueryResultsMonitorTopContributorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsMonitorTopContributorsInput, Members: &mGetQueryResultsMonitorTopContributorsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[281]})
-var sGetQueryResultsMonitorTopContributorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsMonitorTopContributorsOutput, Members: &mGetQueryResultsMonitorTopContributorsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[286]})
-var sGetQueryResultsWorkloadInsightsTopContributorsDataInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsWorkloadInsightsTopContributorsDataInput, Members: &mGetQueryResultsWorkloadInsightsTopContributorsDataInput, Type: smithy.ShapeTypeStructure, Ext: &ext[290]})
-var sGetQueryResultsWorkloadInsightsTopContributorsDataOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsWorkloadInsightsTopContributorsDataOutput, Members: &mGetQueryResultsWorkloadInsightsTopContributorsDataOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[295]})
-var sGetQueryResultsWorkloadInsightsTopContributorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsWorkloadInsightsTopContributorsInput, Members: &mGetQueryResultsWorkloadInsightsTopContributorsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[299]})
-var sGetQueryResultsWorkloadInsightsTopContributorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsWorkloadInsightsTopContributorsOutput, Members: &mGetQueryResultsWorkloadInsightsTopContributorsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[304]})
-var sGetQueryStatusMonitorTopContributorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatusMonitorTopContributorsInput, Members: &mGetQueryStatusMonitorTopContributorsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[307]})
-var sGetQueryStatusMonitorTopContributorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatusMonitorTopContributorsOutput, Members: &mGetQueryStatusMonitorTopContributorsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[310]})
-var sGetQueryStatusWorkloadInsightsTopContributorsDataInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatusWorkloadInsightsTopContributorsDataInput, Members: &mGetQueryStatusWorkloadInsightsTopContributorsDataInput, Type: smithy.ShapeTypeStructure, Ext: &ext[312]})
-var sGetQueryStatusWorkloadInsightsTopContributorsDataOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatusWorkloadInsightsTopContributorsDataOutput, Members: &mGetQueryStatusWorkloadInsightsTopContributorsDataOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[315]})
-var sGetQueryStatusWorkloadInsightsTopContributorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatusWorkloadInsightsTopContributorsInput, Members: &mGetQueryStatusWorkloadInsightsTopContributorsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[317]})
-var sGetQueryStatusWorkloadInsightsTopContributorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatusWorkloadInsightsTopContributorsOutput, Members: &mGetQueryStatusWorkloadInsightsTopContributorsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[320]})
-var sGetScopeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetScopeInput, Members: &mGetScopeInput, Type: smithy.ShapeTypeStructure, Ext: &ext[322]})
-var sGetScopeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetScopeOutput, Members: &mGetScopeOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[324]})
-var sListMonitorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMonitorsInput, Members: &mListMonitorsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[330]})
-var sListMonitorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMonitorsOutput, Members: &mListMonitorsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[334]})
-var sListScopesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScopesInput, Members: &mListScopesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[337]})
-var sListScopesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScopesOutput, Members: &mListScopesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[340]})
-var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[343]})
-var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[345]})
-var sStartQueryMonitorTopContributorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryMonitorTopContributorsInput, Members: &mStartQueryMonitorTopContributorsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[347]})
-var sStartQueryMonitorTopContributorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryMonitorTopContributorsOutput, Members: &mStartQueryMonitorTopContributorsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[354]})
-var sStartQueryWorkloadInsightsTopContributorsDataInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryWorkloadInsightsTopContributorsDataInput, Members: &mStartQueryWorkloadInsightsTopContributorsDataInput, Type: smithy.ShapeTypeStructure, Ext: &ext[356]})
-var sStartQueryWorkloadInsightsTopContributorsDataOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryWorkloadInsightsTopContributorsDataOutput, Members: &mStartQueryWorkloadInsightsTopContributorsDataOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[362]})
-var sStartQueryWorkloadInsightsTopContributorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryWorkloadInsightsTopContributorsInput, Members: &mStartQueryWorkloadInsightsTopContributorsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[364]})
-var sStartQueryWorkloadInsightsTopContributorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryWorkloadInsightsTopContributorsOutput, Members: &mStartQueryWorkloadInsightsTopContributorsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[371]})
-var sStopQueryMonitorTopContributorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryMonitorTopContributorsInput, Members: &mStopQueryMonitorTopContributorsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[373]})
-var sStopQueryMonitorTopContributorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryMonitorTopContributorsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[376]})
-var sStopQueryWorkloadInsightsTopContributorsDataInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryWorkloadInsightsTopContributorsDataInput, Members: &mStopQueryWorkloadInsightsTopContributorsDataInput, Type: smithy.ShapeTypeStructure, Ext: &ext[377]})
-var sStopQueryWorkloadInsightsTopContributorsDataOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryWorkloadInsightsTopContributorsDataOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[380]})
-var sStopQueryWorkloadInsightsTopContributorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryWorkloadInsightsTopContributorsInput, Members: &mStopQueryWorkloadInsightsTopContributorsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[381]})
-var sStopQueryWorkloadInsightsTopContributorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryWorkloadInsightsTopContributorsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[384]})
-var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[385]})
-var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[388]})
-var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[389]})
-var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[392]})
-var sUpdateMonitorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMonitorInput, Members: &mUpdateMonitorInput, Type: smithy.ShapeTypeStructure, Ext: &ext[393]})
-var sUpdateMonitorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMonitorOutput, Members: &mUpdateMonitorOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[400]})
-var sUpdateScopeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateScopeInput, Members: &mUpdateScopeInput, Type: smithy.ShapeTypeStructure, Ext: &ext[409]})
-var sUpdateScopeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateScopeOutput, Members: &mUpdateScopeOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[413]})
+var sCreateMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMonitor, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateMonitor})
+var sCreateScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateScope, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateScope})
+var sDeleteMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMonitor, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eDeleteMonitor})
+var sDeleteScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScope, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDeleteScope})
+var sGetMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMonitor, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eGetMonitor})
+var sGetQueryResultsMonitorTopContributors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsMonitorTopContributors, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eGetQueryResultsMonitorTopContributors})
+var sGetQueryResultsWorkloadInsightsTopContributors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsWorkloadInsightsTopContributors, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eGetQueryResultsWorkloadInsightsTopContributors})
+var sGetQueryResultsWorkloadInsightsTopContributorsData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsWorkloadInsightsTopContributorsData, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eGetQueryResultsWorkloadInsightsTopContributorsData})
+var sGetQueryStatusMonitorTopContributors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatusMonitorTopContributors, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eGetQueryStatusMonitorTopContributors})
+var sGetQueryStatusWorkloadInsightsTopContributors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatusWorkloadInsightsTopContributors, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eGetQueryStatusWorkloadInsightsTopContributors})
+var sGetQueryStatusWorkloadInsightsTopContributorsData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatusWorkloadInsightsTopContributorsData, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eGetQueryStatusWorkloadInsightsTopContributorsData})
+var sGetScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetScope, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eGetScope})
+var sListMonitors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMonitors, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eListMonitors})
+var sListScopes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScopes, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eListScopes})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sStartQueryMonitorTopContributors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryMonitorTopContributors, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eStartQueryMonitorTopContributors})
+var sStartQueryWorkloadInsightsTopContributors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryWorkloadInsightsTopContributors, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eStartQueryWorkloadInsightsTopContributors})
+var sStartQueryWorkloadInsightsTopContributorsData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryWorkloadInsightsTopContributorsData, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eStartQueryWorkloadInsightsTopContributorsData})
+var sStopQueryMonitorTopContributors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryMonitorTopContributors, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eStopQueryMonitorTopContributors})
+var sStopQueryWorkloadInsightsTopContributors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryWorkloadInsightsTopContributors, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eStopQueryWorkloadInsightsTopContributors})
+var sStopQueryWorkloadInsightsTopContributorsData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryWorkloadInsightsTopContributorsData, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eStopQueryWorkloadInsightsTopContributorsData})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMonitor, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eUpdateMonitor})
+var sUpdateScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateScope, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eUpdateScope})
+var s_NetworkFlowMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkFlowMonitor, Type: smithy.ShapeTypeService, Ext: &e_NetworkFlowMonitor})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountId})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var s_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &e_AvailabilityZone})
+var s_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &e_AwsRegion})
+var s_Component = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Component, Type: smithy.ShapeTypeString, Ext: &e_Component})
+var s_ComponentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentType, Type: smithy.ShapeTypeString, Ext: &e_ComponentType})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sDestinationCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationCategory, Members: &mDestinationCategory, Type: smithy.ShapeTypeEnum, Ext: &eDestinationCategory})
+var s_InstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceArn, Type: smithy.ShapeTypeString, Ext: &e_InstanceArn})
+var s_InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &e_InstanceId})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var s_Iso8601Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Iso8601Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Iso8601Timestamp})
+var sKubernetesMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKubernetesMetadata, Members: &mKubernetesMetadata, Type: smithy.ShapeTypeStructure, Ext: &eKubernetesMetadata})
+var s_Limit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Limit, Type: smithy.ShapeTypeInteger, Ext: &e_Limit})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var sMetricUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricUnit, Members: &mMetricUnit, Type: smithy.ShapeTypeEnum, Ext: &eMetricUnit})
+var s_MonitorArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &e_MonitorArn})
+var s_MonitorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonitorList, Members: &m_MonitorList, Type: smithy.ShapeTypeList, Ext: &e_MonitorList})
+var sMonitorLocalResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitorLocalResource, Members: &mMonitorLocalResource, Type: smithy.ShapeTypeStructure, Ext: &eMonitorLocalResource})
+var s_MonitorLocalResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonitorLocalResources, Members: &m_MonitorLocalResources, Type: smithy.ShapeTypeList, Ext: &e_MonitorLocalResources})
+var sMonitorLocalResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitorLocalResourceType, Members: &mMonitorLocalResourceType, Type: smithy.ShapeTypeEnum, Ext: &eMonitorLocalResourceType})
+var sMonitorMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitorMetric, Members: &mMonitorMetric, Type: smithy.ShapeTypeEnum, Ext: &eMonitorMetric})
+var sMonitorRemoteResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitorRemoteResource, Members: &mMonitorRemoteResource, Type: smithy.ShapeTypeStructure, Ext: &eMonitorRemoteResource})
+var s_MonitorRemoteResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonitorRemoteResources, Members: &m_MonitorRemoteResources, Type: smithy.ShapeTypeList, Ext: &e_MonitorRemoteResources})
+var sMonitorRemoteResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitorRemoteResourceType, Members: &mMonitorRemoteResourceType, Type: smithy.ShapeTypeEnum, Ext: &eMonitorRemoteResourceType})
+var sMonitorStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitorStatus, Members: &mMonitorStatus, Type: smithy.ShapeTypeEnum, Ext: &eMonitorStatus})
+var sMonitorSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitorSummary, Members: &mMonitorSummary, Type: smithy.ShapeTypeStructure, Ext: &eMonitorSummary})
+var sMonitorTopContributorsRow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitorTopContributorsRow, Members: &mMonitorTopContributorsRow, Type: smithy.ShapeTypeStructure, Ext: &eMonitorTopContributorsRow})
+var s_MonitorTopContributorsRowList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonitorTopContributorsRowList, Members: &m_MonitorTopContributorsRowList, Type: smithy.ShapeTypeList, Ext: &e_MonitorTopContributorsRowList})
+var sQueryStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryStatus, Members: &mQueryStatus, Type: smithy.ShapeTypeEnum, Ext: &eQueryStatus})
+var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &e_ResourceName})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var s_ScopeId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScopeId, Type: smithy.ShapeTypeString, Ext: &e_ScopeId})
+var sScopeStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScopeStatus, Members: &mScopeStatus, Type: smithy.ShapeTypeEnum, Ext: &eScopeStatus})
+var sScopeSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScopeSummary, Members: &mScopeSummary, Type: smithy.ShapeTypeStructure, Ext: &eScopeSummary})
+var s_ScopeSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScopeSummaryList, Members: &m_ScopeSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ScopeSummaryList})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t29, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var s_SubnetArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetArn, Type: smithy.ShapeTypeString, Ext: &e_SubnetArn})
+var s_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &e_SubnetId})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTargetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetId, Members: &mTargetId, Type: smithy.ShapeTypeUnion, Ext: &eTargetId})
+var sTargetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetIdentifier, Members: &mTargetIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eTargetIdentifier})
+var sTargetResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetResource, Members: &mTargetResource, Type: smithy.ShapeTypeStructure, Ext: &eTargetResource})
+var s_TargetResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetResourceList, Members: &m_TargetResourceList, Type: smithy.ShapeTypeList, Ext: &e_TargetResourceList})
+var sTargetType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetType, Members: &mTargetType, Type: smithy.ShapeTypeEnum, Ext: &eTargetType})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sTraversedComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTraversedComponent, Members: &mTraversedComponent, Type: smithy.ShapeTypeStructure, Ext: &eTraversedComponent})
+var s_TraversedConstructsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TraversedConstructsList, Members: &m_TraversedConstructsList, Type: smithy.ShapeTypeList, Ext: &e_TraversedConstructsList})
+var s_UuidString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UuidString, Type: smithy.ShapeTypeString, Ext: &e_UuidString})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var s_VpcArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcArn, Type: smithy.ShapeTypeString, Ext: &e_VpcArn})
+var s_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &e_VpcId})
+var sWorkloadInsightsMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkloadInsightsMetric, Members: &mWorkloadInsightsMetric, Type: smithy.ShapeTypeEnum, Ext: &eWorkloadInsightsMetric})
+var sWorkloadInsightsTopContributorsDataPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkloadInsightsTopContributorsDataPoint, Members: &mWorkloadInsightsTopContributorsDataPoint, Type: smithy.ShapeTypeStructure, Ext: &eWorkloadInsightsTopContributorsDataPoint})
+var s_WorkloadInsightsTopContributorsDataPoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkloadInsightsTopContributorsDataPoints, Members: &m_WorkloadInsightsTopContributorsDataPoints, Type: smithy.ShapeTypeList, Ext: &e_WorkloadInsightsTopContributorsDataPoints})
+var sWorkloadInsightsTopContributorsRow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkloadInsightsTopContributorsRow, Members: &mWorkloadInsightsTopContributorsRow, Type: smithy.ShapeTypeStructure, Ext: &eWorkloadInsightsTopContributorsRow})
+var s_WorkloadInsightsTopContributorsRowList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkloadInsightsTopContributorsRowList, Members: &m_WorkloadInsightsTopContributorsRowList, Type: smithy.ShapeTypeList, Ext: &e_WorkloadInsightsTopContributorsRowList})
+var s_WorkloadInsightsTopContributorsTimestampsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkloadInsightsTopContributorsTimestampsList, Members: &m_WorkloadInsightsTopContributorsTimestampsList, Type: smithy.ShapeTypeList, Ext: &e_WorkloadInsightsTopContributorsTimestampsList})
+var s_WorkloadInsightsTopContributorsValuesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkloadInsightsTopContributorsValuesList, Members: &m_WorkloadInsightsTopContributorsValuesList, Type: smithy.ShapeTypeList, Ext: &e_WorkloadInsightsTopContributorsValuesList})
+var sCreateMonitorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMonitorInput, Members: &mCreateMonitorInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateMonitorInput})
+var sCreateMonitorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMonitorOutput, Members: &mCreateMonitorOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateMonitorOutput})
+var sCreateScopeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateScopeInput, Members: &mCreateScopeInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateScopeInput})
+var sCreateScopeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateScopeOutput, Members: &mCreateScopeOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateScopeOutput})
+var sDeleteMonitorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMonitorInput, Members: &mDeleteMonitorInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMonitorInput})
+var sDeleteMonitorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMonitorOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMonitorOutput})
+var sDeleteScopeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScopeInput, Members: &mDeleteScopeInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteScopeInput})
+var sDeleteScopeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScopeOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteScopeOutput})
+var sGetMonitorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMonitorInput, Members: &mGetMonitorInput, Type: smithy.ShapeTypeStructure, Ext: &eGetMonitorInput})
+var sGetMonitorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMonitorOutput, Members: &mGetMonitorOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetMonitorOutput})
+var sGetQueryResultsMonitorTopContributorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsMonitorTopContributorsInput, Members: &mGetQueryResultsMonitorTopContributorsInput, Type: smithy.ShapeTypeStructure, Ext: &eGetQueryResultsMonitorTopContributorsInput})
+var sGetQueryResultsMonitorTopContributorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsMonitorTopContributorsOutput, Members: &mGetQueryResultsMonitorTopContributorsOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetQueryResultsMonitorTopContributorsOutput})
+var sGetQueryResultsWorkloadInsightsTopContributorsDataInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsWorkloadInsightsTopContributorsDataInput, Members: &mGetQueryResultsWorkloadInsightsTopContributorsDataInput, Type: smithy.ShapeTypeStructure, Ext: &eGetQueryResultsWorkloadInsightsTopContributorsDataInput})
+var sGetQueryResultsWorkloadInsightsTopContributorsDataOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsWorkloadInsightsTopContributorsDataOutput, Members: &mGetQueryResultsWorkloadInsightsTopContributorsDataOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetQueryResultsWorkloadInsightsTopContributorsDataOutput})
+var sGetQueryResultsWorkloadInsightsTopContributorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsWorkloadInsightsTopContributorsInput, Members: &mGetQueryResultsWorkloadInsightsTopContributorsInput, Type: smithy.ShapeTypeStructure, Ext: &eGetQueryResultsWorkloadInsightsTopContributorsInput})
+var sGetQueryResultsWorkloadInsightsTopContributorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsWorkloadInsightsTopContributorsOutput, Members: &mGetQueryResultsWorkloadInsightsTopContributorsOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetQueryResultsWorkloadInsightsTopContributorsOutput})
+var sGetQueryStatusMonitorTopContributorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatusMonitorTopContributorsInput, Members: &mGetQueryStatusMonitorTopContributorsInput, Type: smithy.ShapeTypeStructure, Ext: &eGetQueryStatusMonitorTopContributorsInput})
+var sGetQueryStatusMonitorTopContributorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatusMonitorTopContributorsOutput, Members: &mGetQueryStatusMonitorTopContributorsOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetQueryStatusMonitorTopContributorsOutput})
+var sGetQueryStatusWorkloadInsightsTopContributorsDataInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatusWorkloadInsightsTopContributorsDataInput, Members: &mGetQueryStatusWorkloadInsightsTopContributorsDataInput, Type: smithy.ShapeTypeStructure, Ext: &eGetQueryStatusWorkloadInsightsTopContributorsDataInput})
+var sGetQueryStatusWorkloadInsightsTopContributorsDataOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatusWorkloadInsightsTopContributorsDataOutput, Members: &mGetQueryStatusWorkloadInsightsTopContributorsDataOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetQueryStatusWorkloadInsightsTopContributorsDataOutput})
+var sGetQueryStatusWorkloadInsightsTopContributorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatusWorkloadInsightsTopContributorsInput, Members: &mGetQueryStatusWorkloadInsightsTopContributorsInput, Type: smithy.ShapeTypeStructure, Ext: &eGetQueryStatusWorkloadInsightsTopContributorsInput})
+var sGetQueryStatusWorkloadInsightsTopContributorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatusWorkloadInsightsTopContributorsOutput, Members: &mGetQueryStatusWorkloadInsightsTopContributorsOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetQueryStatusWorkloadInsightsTopContributorsOutput})
+var sGetScopeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetScopeInput, Members: &mGetScopeInput, Type: smithy.ShapeTypeStructure, Ext: &eGetScopeInput})
+var sGetScopeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetScopeOutput, Members: &mGetScopeOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetScopeOutput})
+var sListMonitorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMonitorsInput, Members: &mListMonitorsInput, Type: smithy.ShapeTypeStructure, Ext: &eListMonitorsInput})
+var sListMonitorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMonitorsOutput, Members: &mListMonitorsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListMonitorsOutput})
+var sListScopesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScopesInput, Members: &mListScopesInput, Type: smithy.ShapeTypeStructure, Ext: &eListScopesInput})
+var sListScopesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScopesOutput, Members: &mListScopesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListScopesOutput})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceInput})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceOutput})
+var sStartQueryMonitorTopContributorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryMonitorTopContributorsInput, Members: &mStartQueryMonitorTopContributorsInput, Type: smithy.ShapeTypeStructure, Ext: &eStartQueryMonitorTopContributorsInput})
+var sStartQueryMonitorTopContributorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryMonitorTopContributorsOutput, Members: &mStartQueryMonitorTopContributorsOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartQueryMonitorTopContributorsOutput})
+var sStartQueryWorkloadInsightsTopContributorsDataInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryWorkloadInsightsTopContributorsDataInput, Members: &mStartQueryWorkloadInsightsTopContributorsDataInput, Type: smithy.ShapeTypeStructure, Ext: &eStartQueryWorkloadInsightsTopContributorsDataInput})
+var sStartQueryWorkloadInsightsTopContributorsDataOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryWorkloadInsightsTopContributorsDataOutput, Members: &mStartQueryWorkloadInsightsTopContributorsDataOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartQueryWorkloadInsightsTopContributorsDataOutput})
+var sStartQueryWorkloadInsightsTopContributorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryWorkloadInsightsTopContributorsInput, Members: &mStartQueryWorkloadInsightsTopContributorsInput, Type: smithy.ShapeTypeStructure, Ext: &eStartQueryWorkloadInsightsTopContributorsInput})
+var sStartQueryWorkloadInsightsTopContributorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryWorkloadInsightsTopContributorsOutput, Members: &mStartQueryWorkloadInsightsTopContributorsOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartQueryWorkloadInsightsTopContributorsOutput})
+var sStopQueryMonitorTopContributorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryMonitorTopContributorsInput, Members: &mStopQueryMonitorTopContributorsInput, Type: smithy.ShapeTypeStructure, Ext: &eStopQueryMonitorTopContributorsInput})
+var sStopQueryMonitorTopContributorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryMonitorTopContributorsOutput, Type: smithy.ShapeTypeStructure, Ext: &eStopQueryMonitorTopContributorsOutput})
+var sStopQueryWorkloadInsightsTopContributorsDataInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryWorkloadInsightsTopContributorsDataInput, Members: &mStopQueryWorkloadInsightsTopContributorsDataInput, Type: smithy.ShapeTypeStructure, Ext: &eStopQueryWorkloadInsightsTopContributorsDataInput})
+var sStopQueryWorkloadInsightsTopContributorsDataOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryWorkloadInsightsTopContributorsDataOutput, Type: smithy.ShapeTypeStructure, Ext: &eStopQueryWorkloadInsightsTopContributorsDataOutput})
+var sStopQueryWorkloadInsightsTopContributorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryWorkloadInsightsTopContributorsInput, Members: &mStopQueryWorkloadInsightsTopContributorsInput, Type: smithy.ShapeTypeStructure, Ext: &eStopQueryWorkloadInsightsTopContributorsInput})
+var sStopQueryWorkloadInsightsTopContributorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryWorkloadInsightsTopContributorsOutput, Type: smithy.ShapeTypeStructure, Ext: &eStopQueryWorkloadInsightsTopContributorsOutput})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceInput})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceOutput})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceInput})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceOutput})
+var sUpdateMonitorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMonitorInput, Members: &mUpdateMonitorInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMonitorInput})
+var sUpdateMonitorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMonitorOutput, Members: &mUpdateMonitorOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMonitorOutput})
+var sUpdateScopeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateScopeInput, Members: &mUpdateScopeInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateScopeInput})
+var sUpdateScopeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateScopeOutput, Members: &mUpdateScopeOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateScopeOutput})
 
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[27]})
-var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var sDestinationCategory_INTRA_AZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTRA_AZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var sDestinationCategory_INTER_AZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTER_AZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[38]})
-var sDestinationCategory_INTER_VPC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTER_VPC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[39]})
-var sDestinationCategory_UNCLASSIFIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNCLASSIFIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[40]})
-var sDestinationCategory_AMAZON_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMAZON_S3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[41]})
-var sDestinationCategory_AMAZON_DYNAMODB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMAZON_DYNAMODB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[42]})
-var sDestinationCategory_INTER_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTER_REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[43]})
-var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[47]})
-var sKubernetesMetadata_localServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localServiceName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[50]})
-var sKubernetesMetadata_localPodName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localPodName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[51]})
-var sKubernetesMetadata_localPodNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localPodNamespace", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var sKubernetesMetadata_remoteServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteServiceName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[53]})
-var sKubernetesMetadata_remotePodName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remotePodName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var sKubernetesMetadata_remotePodNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remotePodNamespace", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var sMetricUnit_SECONDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECONDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[59]})
-var sMetricUnit_MICROSECONDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MICROSECONDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[60]})
-var sMetricUnit_MILLISECONDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MILLISECONDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[61]})
-var sMetricUnit_BYTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BYTES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[62]})
-var sMetricUnit_KILOBYTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KILOBYTES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[63]})
-var sMetricUnit_MEGABYTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEGABYTES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[64]})
-var sMetricUnit_GIGABYTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIGABYTES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[65]})
-var sMetricUnit_TERABYTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERABYTES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[66]})
-var sMetricUnit_BITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BITS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[67]})
-var sMetricUnit_KILOBITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KILOBITS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var sMetricUnit_MEGABITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEGABITS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[69]})
-var sMetricUnit_GIGABITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIGABITS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[70]})
-var sMetricUnit_TERABITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERABITS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[71]})
-var sMetricUnit_PERCENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERCENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sMetricUnit_COUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[73]})
-var sMetricUnit_BYTES_PER_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BYTES_PER_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var sMetricUnit_KILOBYTES_PER_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KILOBYTES_PER_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[75]})
-var sMetricUnit_MEGABYTES_PER_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEGABYTES_PER_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[76]})
-var sMetricUnit_GIGABYTES_PER_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIGABYTES_PER_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
-var sMetricUnit_TERABYTES_PER_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERABYTES_PER_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[78]})
-var sMetricUnit_BITS_PER_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BITS_PER_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[79]})
-var sMetricUnit_KILOBITS_PER_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KILOBITS_PER_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var sMetricUnit_MEGABITS_PER_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEGABITS_PER_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[81]})
-var sMetricUnit_GIGABITS_PER_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIGABITS_PER_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[82]})
-var sMetricUnit_TERABITS_PER_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERABITS_PER_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[83]})
-var sMetricUnit_COUNT_PER_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COUNT_PER_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[84]})
-var sMetricUnit_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[85]})
-var s_MonitorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMonitorSummary, Members: &mMonitorSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[88]})
-var sMonitorLocalResource_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iMonitorLocalResourceType, Members: &mMonitorLocalResourceType, Type: smithy.ShapeTypeEnum, Ext: &ext[90]})
-var sMonitorLocalResource_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[91]})
-var s_MonitorLocalResources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMonitorLocalResource, Members: &mMonitorLocalResource, Type: smithy.ShapeTypeStructure, Ext: &ext[93]})
-var sMonitorLocalResourceType_AWS_VPC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_VPC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[95]})
-var sMonitorLocalResourceType_AWS_AZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_AZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[96]})
-var sMonitorLocalResourceType_AWS_SUBNET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_SUBNET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[97]})
-var sMonitorLocalResourceType_AWS_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[98]})
-var sMonitorLocalResourceType_EKS_CLUSTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EKS_CLUSTER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[99]})
-var sMonitorMetric_ROUND_TRIP_TIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROUND_TRIP_TIME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[101]})
-var sMonitorMetric_TIMEOUTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMEOUTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[102]})
-var sMonitorMetric_RETRANSMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RETRANSMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[103]})
-var sMonitorMetric_DATA_TRANSFERRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATA_TRANSFERRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[104]})
-var sMonitorRemoteResource_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iMonitorRemoteResourceType, Members: &mMonitorRemoteResourceType, Type: smithy.ShapeTypeEnum, Ext: &ext[106]})
-var sMonitorRemoteResource_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[107]})
-var s_MonitorRemoteResources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMonitorRemoteResource, Members: &mMonitorRemoteResource, Type: smithy.ShapeTypeStructure, Ext: &ext[109]})
-var sMonitorRemoteResourceType_AWS_VPC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_VPC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[111]})
-var sMonitorRemoteResourceType_AWS_AZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_AZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[112]})
-var sMonitorRemoteResourceType_AWS_SUBNET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_SUBNET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[113]})
-var sMonitorRemoteResourceType_AWS_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[114]})
-var sMonitorRemoteResourceType_AWS_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[115]})
-var sMonitorStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[117]})
-var sMonitorStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[118]})
-var sMonitorStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[119]})
-var sMonitorStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var sMonitorStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[121]})
-var sMonitorSummary_monitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorArn", ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &ext[123]})
-var sMonitorSummary_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[124]})
-var sMonitorSummary_monitorStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorStatus", ID: &iMonitorStatus, Members: &mMonitorStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[125]})
-var sMonitorTopContributorsRow_localIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localIp", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[127]})
-var sMonitorTopContributorsRow_snatIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snatIp", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[128]})
-var sMonitorTopContributorsRow_localInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localInstanceId", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &ext[129]})
-var sMonitorTopContributorsRow_localVpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localVpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var sMonitorTopContributorsRow_localRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localRegion", ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &ext[131]})
-var sMonitorTopContributorsRow_localAz = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localAz", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[132]})
-var sMonitorTopContributorsRow_localSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localSubnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &ext[133]})
-var sMonitorTopContributorsRow_targetPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetPort", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[134]})
-var sMonitorTopContributorsRow_destinationCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCategory", ID: &iDestinationCategory, Members: &mDestinationCategory, Type: smithy.ShapeTypeEnum, Ext: &ext[135]})
-var sMonitorTopContributorsRow_remoteVpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteVpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &ext[136]})
-var sMonitorTopContributorsRow_remoteRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteRegion", ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &ext[137]})
-var sMonitorTopContributorsRow_remoteAz = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteAz", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var sMonitorTopContributorsRow_remoteSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteSubnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &ext[139]})
-var sMonitorTopContributorsRow_remoteInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteInstanceId", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &ext[140]})
-var sMonitorTopContributorsRow_remoteIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteIp", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[141]})
-var sMonitorTopContributorsRow_dnatIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dnatIp", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[142]})
-var sMonitorTopContributorsRow_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[143]})
-var sMonitorTopContributorsRow_traversedConstructs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "traversedConstructs", ID: &i_TraversedConstructsList, Members: &m_TraversedConstructsList, Type: smithy.ShapeTypeList, Ext: &ext[144]})
-var sMonitorTopContributorsRow_kubernetesMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kubernetesMetadata", ID: &iKubernetesMetadata, Members: &mKubernetesMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[145]})
-var sMonitorTopContributorsRow_localInstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localInstanceArn", ID: &i_InstanceArn, Type: smithy.ShapeTypeString, Ext: &ext[146]})
-var sMonitorTopContributorsRow_localSubnetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localSubnetArn", ID: &i_SubnetArn, Type: smithy.ShapeTypeString, Ext: &ext[147]})
-var sMonitorTopContributorsRow_localVpcArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localVpcArn", ID: &i_VpcArn, Type: smithy.ShapeTypeString, Ext: &ext[148]})
-var sMonitorTopContributorsRow_remoteInstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteInstanceArn", ID: &i_InstanceArn, Type: smithy.ShapeTypeString, Ext: &ext[149]})
-var sMonitorTopContributorsRow_remoteSubnetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteSubnetArn", ID: &i_SubnetArn, Type: smithy.ShapeTypeString, Ext: &ext[150]})
-var sMonitorTopContributorsRow_remoteVpcArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteVpcArn", ID: &i_VpcArn, Type: smithy.ShapeTypeString, Ext: &ext[151]})
-var s_MonitorTopContributorsRowList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMonitorTopContributorsRow, Members: &mMonitorTopContributorsRow, Type: smithy.ShapeTypeStructure, Ext: &ext[153]})
-var sQueryStatus_QUEUED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUEUED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[155]})
-var sQueryStatus_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[156]})
-var sQueryStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[157]})
-var sQueryStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[158]})
-var sQueryStatus_CANCELED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[159]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[162]})
-var sScopeStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[165]})
-var sScopeStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[166]})
-var sScopeStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[167]})
-var sScopeStatus_DEACTIVATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEACTIVATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[168]})
-var sScopeStatus_DEACTIVATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEACTIVATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[169]})
-var sScopeSummary_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Type: smithy.ShapeTypeString, Ext: &ext[171]})
-var sScopeSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iScopeStatus, Members: &mScopeStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[172]})
-var sScopeSummary_scopeArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[173]})
-var s_ScopeSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iScopeSummary, Members: &mScopeSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[175]})
-var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[177]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[182]})
-var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[184]})
-var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[185]})
-var sTargetId_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[188]})
-var sTargetIdentifier_targetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetId", ID: &iTargetId, Members: &mTargetId, Type: smithy.ShapeTypeUnion, Ext: &ext[190]})
-var sTargetIdentifier_targetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetType", ID: &iTargetType, Members: &mTargetType, Type: smithy.ShapeTypeEnum, Ext: &ext[191]})
-var sTargetResource_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &iTargetIdentifier, Members: &mTargetIdentifier, Type: smithy.ShapeTypeStructure, Ext: &ext[193]})
-var sTargetResource_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &ext[194]})
-var s_TargetResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTargetResource, Members: &mTargetResource, Type: smithy.ShapeTypeStructure, Ext: &ext[196]})
-var sTargetType_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[198]})
-var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[200]})
-var sTraversedComponent_componentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentId", ID: &i_Component, Type: smithy.ShapeTypeString, Ext: &ext[202]})
-var sTraversedComponent_componentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentType", ID: &i_ComponentType, Type: smithy.ShapeTypeString, Ext: &ext[203]})
-var sTraversedComponent_componentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[204]})
-var sTraversedComponent_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[205]})
-var s_TraversedConstructsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTraversedComponent, Members: &mTraversedComponent, Type: smithy.ShapeTypeStructure, Ext: &ext[207]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[210]})
-var sWorkloadInsightsMetric_TIMEOUTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMEOUTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[214]})
-var sWorkloadInsightsMetric_RETRANSMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RETRANSMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[215]})
-var sWorkloadInsightsMetric_DATA_TRANSFERRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATA_TRANSFERRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[216]})
-var sWorkloadInsightsTopContributorsDataPoint_timestamps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamps", ID: &i_WorkloadInsightsTopContributorsTimestampsList, Members: &m_WorkloadInsightsTopContributorsTimestampsList, Type: smithy.ShapeTypeList, Ext: &ext[218]})
-var sWorkloadInsightsTopContributorsDataPoint_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_WorkloadInsightsTopContributorsValuesList, Members: &m_WorkloadInsightsTopContributorsValuesList, Type: smithy.ShapeTypeList, Ext: &ext[219]})
-var sWorkloadInsightsTopContributorsDataPoint_label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "label", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[220]})
-var s_WorkloadInsightsTopContributorsDataPoints_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkloadInsightsTopContributorsDataPoint, Members: &mWorkloadInsightsTopContributorsDataPoint, Type: smithy.ShapeTypeStructure, Ext: &ext[222]})
-var sWorkloadInsightsTopContributorsRow_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[224]})
-var sWorkloadInsightsTopContributorsRow_localSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localSubnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &ext[225]})
-var sWorkloadInsightsTopContributorsRow_localAz = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localAz", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[226]})
-var sWorkloadInsightsTopContributorsRow_localVpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localVpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &ext[227]})
-var sWorkloadInsightsTopContributorsRow_localRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localRegion", ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &ext[228]})
-var sWorkloadInsightsTopContributorsRow_remoteIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[229]})
-var sWorkloadInsightsTopContributorsRow_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[230]})
-var sWorkloadInsightsTopContributorsRow_localSubnetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localSubnetArn", ID: &i_SubnetArn, Type: smithy.ShapeTypeString, Ext: &ext[231]})
-var sWorkloadInsightsTopContributorsRow_localVpcArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localVpcArn", ID: &i_VpcArn, Type: smithy.ShapeTypeString, Ext: &ext[232]})
-var s_WorkloadInsightsTopContributorsRowList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkloadInsightsTopContributorsRow, Members: &mWorkloadInsightsTopContributorsRow, Type: smithy.ShapeTypeStructure, Ext: &ext[234]})
-var s_WorkloadInsightsTopContributorsTimestampsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pTimestamp, Traits: &t32, Type: smithy.ShapeTypeTimestamp, Ext: &ext[236]})
-var s_WorkloadInsightsTopContributorsValuesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[238]})
-var sCreateMonitorInput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[240]})
-var sCreateMonitorInput_localResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localResources", ID: &i_MonitorLocalResources, Members: &m_MonitorLocalResources, Type: smithy.ShapeTypeList, Ext: &ext[241]})
-var sCreateMonitorInput_remoteResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteResources", ID: &i_MonitorRemoteResources, Members: &m_MonitorRemoteResources, Type: smithy.ShapeTypeList, Ext: &ext[242]})
-var sCreateMonitorInput_scopeArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[243]})
-var sCreateMonitorInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_UuidString, Type: smithy.ShapeTypeString, Ext: &ext[244]})
-var sCreateMonitorInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[245]})
-var sCreateMonitorOutput_monitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorArn", ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &ext[247]})
-var sCreateMonitorOutput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[248]})
-var sCreateMonitorOutput_monitorStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorStatus", ID: &iMonitorStatus, Members: &mMonitorStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[249]})
-var sCreateMonitorOutput_localResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localResources", ID: &i_MonitorLocalResources, Members: &m_MonitorLocalResources, Type: smithy.ShapeTypeList, Ext: &ext[250]})
-var sCreateMonitorOutput_remoteResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteResources", ID: &i_MonitorRemoteResources, Members: &m_MonitorRemoteResources, Type: smithy.ShapeTypeList, Ext: &ext[251]})
-var sCreateMonitorOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Iso8601Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[252]})
-var sCreateMonitorOutput_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &i_Iso8601Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[253]})
-var sCreateMonitorOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[254]})
-var sCreateScopeInput_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_TargetResourceList, Members: &m_TargetResourceList, Type: smithy.ShapeTypeList, Ext: &ext[256]})
-var sCreateScopeInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_UuidString, Type: smithy.ShapeTypeString, Ext: &ext[257]})
-var sCreateScopeInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[258]})
-var sCreateScopeOutput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Type: smithy.ShapeTypeString, Ext: &ext[260]})
-var sCreateScopeOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iScopeStatus, Members: &mScopeStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[261]})
-var sCreateScopeOutput_scopeArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[262]})
-var sCreateScopeOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[263]})
-var sDeleteMonitorInput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[265]})
-var sDeleteScopeInput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[268]})
-var sGetMonitorInput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[271]})
-var sGetMonitorOutput_monitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorArn", ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &ext[273]})
-var sGetMonitorOutput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[274]})
-var sGetMonitorOutput_monitorStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorStatus", ID: &iMonitorStatus, Members: &mMonitorStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[275]})
-var sGetMonitorOutput_localResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localResources", ID: &i_MonitorLocalResources, Members: &m_MonitorLocalResources, Type: smithy.ShapeTypeList, Ext: &ext[276]})
-var sGetMonitorOutput_remoteResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteResources", ID: &i_MonitorRemoteResources, Members: &m_MonitorRemoteResources, Type: smithy.ShapeTypeList, Ext: &ext[277]})
-var sGetMonitorOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Iso8601Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[278]})
-var sGetMonitorOutput_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &i_Iso8601Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[279]})
-var sGetMonitorOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[280]})
-var sGetQueryResultsMonitorTopContributorsInput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[282]})
-var sGetQueryResultsMonitorTopContributorsInput_queryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryId", ID: &pString, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[283]})
-var sGetQueryResultsMonitorTopContributorsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[284]})
-var sGetQueryResultsMonitorTopContributorsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t35, Type: smithy.ShapeTypeInteger, Ext: &ext[285]})
-var sGetQueryResultsMonitorTopContributorsOutput_unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unit", ID: &iMetricUnit, Members: &mMetricUnit, Type: smithy.ShapeTypeEnum, Ext: &ext[287]})
-var sGetQueryResultsMonitorTopContributorsOutput_topContributors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topContributors", ID: &i_MonitorTopContributorsRowList, Members: &m_MonitorTopContributorsRowList, Type: smithy.ShapeTypeList, Ext: &ext[288]})
-var sGetQueryResultsMonitorTopContributorsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[289]})
-var sGetQueryResultsWorkloadInsightsTopContributorsDataInput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[291]})
-var sGetQueryResultsWorkloadInsightsTopContributorsDataInput_queryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryId", ID: &pString, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[292]})
-var sGetQueryResultsWorkloadInsightsTopContributorsDataInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[293]})
-var sGetQueryResultsWorkloadInsightsTopContributorsDataInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t35, Type: smithy.ShapeTypeInteger, Ext: &ext[294]})
-var sGetQueryResultsWorkloadInsightsTopContributorsDataOutput_unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unit", ID: &iMetricUnit, Members: &mMetricUnit, Type: smithy.ShapeTypeEnum, Ext: &ext[296]})
-var sGetQueryResultsWorkloadInsightsTopContributorsDataOutput_datapoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datapoints", ID: &i_WorkloadInsightsTopContributorsDataPoints, Members: &m_WorkloadInsightsTopContributorsDataPoints, Type: smithy.ShapeTypeList, Ext: &ext[297]})
-var sGetQueryResultsWorkloadInsightsTopContributorsDataOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[298]})
-var sGetQueryResultsWorkloadInsightsTopContributorsInput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[300]})
-var sGetQueryResultsWorkloadInsightsTopContributorsInput_queryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryId", ID: &pString, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[301]})
-var sGetQueryResultsWorkloadInsightsTopContributorsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[302]})
-var sGetQueryResultsWorkloadInsightsTopContributorsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t35, Type: smithy.ShapeTypeInteger, Ext: &ext[303]})
-var sGetQueryResultsWorkloadInsightsTopContributorsOutput_topContributors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topContributors", ID: &i_WorkloadInsightsTopContributorsRowList, Members: &m_WorkloadInsightsTopContributorsRowList, Type: smithy.ShapeTypeList, Ext: &ext[305]})
-var sGetQueryResultsWorkloadInsightsTopContributorsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[306]})
-var sGetQueryStatusMonitorTopContributorsInput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[308]})
-var sGetQueryStatusMonitorTopContributorsInput_queryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryId", ID: &pString, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[309]})
-var sGetQueryStatusMonitorTopContributorsOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iQueryStatus, Members: &mQueryStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[311]})
-var sGetQueryStatusWorkloadInsightsTopContributorsDataInput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[313]})
-var sGetQueryStatusWorkloadInsightsTopContributorsDataInput_queryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryId", ID: &pString, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[314]})
-var sGetQueryStatusWorkloadInsightsTopContributorsDataOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iQueryStatus, Members: &mQueryStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[316]})
-var sGetQueryStatusWorkloadInsightsTopContributorsInput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[318]})
-var sGetQueryStatusWorkloadInsightsTopContributorsInput_queryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryId", ID: &pString, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[319]})
-var sGetQueryStatusWorkloadInsightsTopContributorsOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iQueryStatus, Members: &mQueryStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[321]})
-var sGetScopeInput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[323]})
-var sGetScopeOutput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Type: smithy.ShapeTypeString, Ext: &ext[325]})
-var sGetScopeOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iScopeStatus, Members: &mScopeStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[326]})
-var sGetScopeOutput_scopeArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[327]})
-var sGetScopeOutput_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_TargetResourceList, Members: &m_TargetResourceList, Type: smithy.ShapeTypeList, Ext: &ext[328]})
-var sGetScopeOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[329]})
-var sListMonitorsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[331]})
-var sListMonitorsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t35, Type: smithy.ShapeTypeInteger, Ext: &ext[332]})
-var sListMonitorsInput_monitorStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorStatus", ID: &iMonitorStatus, Members: &mMonitorStatus, Traits: &t36, Type: smithy.ShapeTypeEnum, Ext: &ext[333]})
-var sListMonitorsOutput_monitors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitors", ID: &i_MonitorList, Members: &m_MonitorList, Type: smithy.ShapeTypeList, Ext: &ext[335]})
-var sListMonitorsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[336]})
-var sListScopesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &ext[338]})
-var sListScopesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t35, Type: smithy.ShapeTypeInteger, Ext: &ext[339]})
-var sListScopesOutput_scopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopes", ID: &i_ScopeSummaryList, Members: &m_ScopeSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[341]})
-var sListScopesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[342]})
-var sListTagsForResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[344]})
-var sListTagsForResourceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[346]})
-var sStartQueryMonitorTopContributorsInput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[348]})
-var sStartQueryMonitorTopContributorsInput_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &pTimestamp, Traits: &t32, Type: smithy.ShapeTypeTimestamp, Ext: &ext[349]})
-var sStartQueryMonitorTopContributorsInput_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Traits: &t32, Type: smithy.ShapeTypeTimestamp, Ext: &ext[350]})
-var sStartQueryMonitorTopContributorsInput_metricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricName", ID: &iMonitorMetric, Members: &mMonitorMetric, Type: smithy.ShapeTypeEnum, Ext: &ext[351]})
-var sStartQueryMonitorTopContributorsInput_destinationCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCategory", ID: &iDestinationCategory, Members: &mDestinationCategory, Type: smithy.ShapeTypeEnum, Ext: &ext[352]})
-var sStartQueryMonitorTopContributorsInput_limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "limit", ID: &i_Limit, Type: smithy.ShapeTypeInteger, Ext: &ext[353]})
-var sStartQueryMonitorTopContributorsOutput_queryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[355]})
-var sStartQueryWorkloadInsightsTopContributorsDataInput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[357]})
-var sStartQueryWorkloadInsightsTopContributorsDataInput_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &pTimestamp, Traits: &t32, Type: smithy.ShapeTypeTimestamp, Ext: &ext[358]})
-var sStartQueryWorkloadInsightsTopContributorsDataInput_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Traits: &t32, Type: smithy.ShapeTypeTimestamp, Ext: &ext[359]})
-var sStartQueryWorkloadInsightsTopContributorsDataInput_metricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricName", ID: &iWorkloadInsightsMetric, Members: &mWorkloadInsightsMetric, Type: smithy.ShapeTypeEnum, Ext: &ext[360]})
-var sStartQueryWorkloadInsightsTopContributorsDataInput_destinationCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCategory", ID: &iDestinationCategory, Members: &mDestinationCategory, Type: smithy.ShapeTypeEnum, Ext: &ext[361]})
-var sStartQueryWorkloadInsightsTopContributorsDataOutput_queryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[363]})
-var sStartQueryWorkloadInsightsTopContributorsInput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[365]})
-var sStartQueryWorkloadInsightsTopContributorsInput_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &pTimestamp, Traits: &t32, Type: smithy.ShapeTypeTimestamp, Ext: &ext[366]})
-var sStartQueryWorkloadInsightsTopContributorsInput_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Traits: &t32, Type: smithy.ShapeTypeTimestamp, Ext: &ext[367]})
-var sStartQueryWorkloadInsightsTopContributorsInput_metricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricName", ID: &iWorkloadInsightsMetric, Members: &mWorkloadInsightsMetric, Type: smithy.ShapeTypeEnum, Ext: &ext[368]})
-var sStartQueryWorkloadInsightsTopContributorsInput_destinationCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCategory", ID: &iDestinationCategory, Members: &mDestinationCategory, Type: smithy.ShapeTypeEnum, Ext: &ext[369]})
-var sStartQueryWorkloadInsightsTopContributorsInput_limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "limit", ID: &i_Limit, Type: smithy.ShapeTypeInteger, Ext: &ext[370]})
-var sStartQueryWorkloadInsightsTopContributorsOutput_queryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[372]})
-var sStopQueryMonitorTopContributorsInput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[374]})
-var sStopQueryMonitorTopContributorsInput_queryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryId", ID: &pString, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[375]})
-var sStopQueryWorkloadInsightsTopContributorsDataInput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[378]})
-var sStopQueryWorkloadInsightsTopContributorsDataInput_queryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryId", ID: &pString, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[379]})
-var sStopQueryWorkloadInsightsTopContributorsInput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[382]})
-var sStopQueryWorkloadInsightsTopContributorsInput_queryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryId", ID: &pString, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[383]})
-var sTagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[386]})
-var sTagResourceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[387]})
-var sUntagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[390]})
-var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t37, Type: smithy.ShapeTypeList, Ext: &ext[391]})
-var sUpdateMonitorInput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[394]})
-var sUpdateMonitorInput_localResourcesToAdd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localResourcesToAdd", ID: &i_MonitorLocalResources, Members: &m_MonitorLocalResources, Type: smithy.ShapeTypeList, Ext: &ext[395]})
-var sUpdateMonitorInput_localResourcesToRemove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localResourcesToRemove", ID: &i_MonitorLocalResources, Members: &m_MonitorLocalResources, Type: smithy.ShapeTypeList, Ext: &ext[396]})
-var sUpdateMonitorInput_remoteResourcesToAdd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteResourcesToAdd", ID: &i_MonitorRemoteResources, Members: &m_MonitorRemoteResources, Type: smithy.ShapeTypeList, Ext: &ext[397]})
-var sUpdateMonitorInput_remoteResourcesToRemove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteResourcesToRemove", ID: &i_MonitorRemoteResources, Members: &m_MonitorRemoteResources, Type: smithy.ShapeTypeList, Ext: &ext[398]})
-var sUpdateMonitorInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_UuidString, Type: smithy.ShapeTypeString, Ext: &ext[399]})
-var sUpdateMonitorOutput_monitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorArn", ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &ext[401]})
-var sUpdateMonitorOutput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[402]})
-var sUpdateMonitorOutput_monitorStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorStatus", ID: &iMonitorStatus, Members: &mMonitorStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[403]})
-var sUpdateMonitorOutput_localResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localResources", ID: &i_MonitorLocalResources, Members: &m_MonitorLocalResources, Type: smithy.ShapeTypeList, Ext: &ext[404]})
-var sUpdateMonitorOutput_remoteResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteResources", ID: &i_MonitorRemoteResources, Members: &m_MonitorRemoteResources, Type: smithy.ShapeTypeList, Ext: &ext[405]})
-var sUpdateMonitorOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Iso8601Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[406]})
-var sUpdateMonitorOutput_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &i_Iso8601Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[407]})
-var sUpdateMonitorOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[408]})
-var sUpdateScopeInput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[410]})
-var sUpdateScopeInput_resourcesToAdd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourcesToAdd", ID: &i_TargetResourceList, Members: &m_TargetResourceList, Type: smithy.ShapeTypeList, Ext: &ext[411]})
-var sUpdateScopeInput_resourcesToDelete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourcesToDelete", ID: &i_TargetResourceList, Members: &m_TargetResourceList, Type: smithy.ShapeTypeList, Ext: &ext[412]})
-var sUpdateScopeOutput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Type: smithy.ShapeTypeString, Ext: &ext[414]})
-var sUpdateScopeOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iScopeStatus, Members: &mScopeStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[415]})
-var sUpdateScopeOutput_scopeArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[416]})
-var sUpdateScopeOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[417]})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sDestinationCategory_INTRA_AZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTRA_AZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDestinationCategory_INTRA_AZ})
+var sDestinationCategory_INTER_AZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTER_AZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDestinationCategory_INTER_AZ})
+var sDestinationCategory_INTER_VPC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTER_VPC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDestinationCategory_INTER_VPC})
+var sDestinationCategory_UNCLASSIFIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNCLASSIFIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDestinationCategory_UNCLASSIFIED})
+var sDestinationCategory_AMAZON_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMAZON_S3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDestinationCategory_AMAZON_S3})
+var sDestinationCategory_AMAZON_DYNAMODB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMAZON_DYNAMODB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDestinationCategory_AMAZON_DYNAMODB})
+var sDestinationCategory_INTER_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTER_REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDestinationCategory_INTER_REGION})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sKubernetesMetadata_localServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localServiceName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKubernetesMetadata_localServiceName})
+var sKubernetesMetadata_localPodName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localPodName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKubernetesMetadata_localPodName})
+var sKubernetesMetadata_localPodNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localPodNamespace", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKubernetesMetadata_localPodNamespace})
+var sKubernetesMetadata_remoteServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteServiceName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKubernetesMetadata_remoteServiceName})
+var sKubernetesMetadata_remotePodName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remotePodName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKubernetesMetadata_remotePodName})
+var sKubernetesMetadata_remotePodNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remotePodNamespace", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eKubernetesMetadata_remotePodNamespace})
+var sMetricUnit_SECONDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECONDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_SECONDS})
+var sMetricUnit_MICROSECONDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MICROSECONDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_MICROSECONDS})
+var sMetricUnit_MILLISECONDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MILLISECONDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_MILLISECONDS})
+var sMetricUnit_BYTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BYTES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_BYTES})
+var sMetricUnit_KILOBYTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KILOBYTES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_KILOBYTES})
+var sMetricUnit_MEGABYTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEGABYTES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_MEGABYTES})
+var sMetricUnit_GIGABYTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIGABYTES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_GIGABYTES})
+var sMetricUnit_TERABYTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERABYTES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_TERABYTES})
+var sMetricUnit_BITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BITS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_BITS})
+var sMetricUnit_KILOBITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KILOBITS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_KILOBITS})
+var sMetricUnit_MEGABITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEGABITS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_MEGABITS})
+var sMetricUnit_GIGABITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIGABITS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_GIGABITS})
+var sMetricUnit_TERABITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERABITS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_TERABITS})
+var sMetricUnit_PERCENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERCENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_PERCENT})
+var sMetricUnit_COUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_COUNT})
+var sMetricUnit_BYTES_PER_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BYTES_PER_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_BYTES_PER_SECOND})
+var sMetricUnit_KILOBYTES_PER_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KILOBYTES_PER_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_KILOBYTES_PER_SECOND})
+var sMetricUnit_MEGABYTES_PER_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEGABYTES_PER_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_MEGABYTES_PER_SECOND})
+var sMetricUnit_GIGABYTES_PER_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIGABYTES_PER_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_GIGABYTES_PER_SECOND})
+var sMetricUnit_TERABYTES_PER_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERABYTES_PER_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_TERABYTES_PER_SECOND})
+var sMetricUnit_BITS_PER_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BITS_PER_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_BITS_PER_SECOND})
+var sMetricUnit_KILOBITS_PER_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KILOBITS_PER_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_KILOBITS_PER_SECOND})
+var sMetricUnit_MEGABITS_PER_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEGABITS_PER_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_MEGABITS_PER_SECOND})
+var sMetricUnit_GIGABITS_PER_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIGABITS_PER_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_GIGABITS_PER_SECOND})
+var sMetricUnit_TERABITS_PER_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERABITS_PER_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_TERABITS_PER_SECOND})
+var sMetricUnit_COUNT_PER_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COUNT_PER_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_COUNT_PER_SECOND})
+var sMetricUnit_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMetricUnit_NONE})
+var s_MonitorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMonitorSummary, Members: &mMonitorSummary, Type: smithy.ShapeTypeStructure, Ext: &e_MonitorList_member})
+var sMonitorLocalResource_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iMonitorLocalResourceType, Members: &mMonitorLocalResourceType, Type: smithy.ShapeTypeEnum, Ext: &eMonitorLocalResource_type})
+var sMonitorLocalResource_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMonitorLocalResource_identifier})
+var s_MonitorLocalResources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMonitorLocalResource, Members: &mMonitorLocalResource, Type: smithy.ShapeTypeStructure, Ext: &e_MonitorLocalResources_member})
+var sMonitorLocalResourceType_AWS_VPC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_VPC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonitorLocalResourceType_AWS_VPC})
+var sMonitorLocalResourceType_AWS_AZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_AZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonitorLocalResourceType_AWS_AZ})
+var sMonitorLocalResourceType_AWS_SUBNET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_SUBNET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonitorLocalResourceType_AWS_SUBNET})
+var sMonitorLocalResourceType_AWS_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonitorLocalResourceType_AWS_REGION})
+var sMonitorLocalResourceType_EKS_CLUSTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EKS_CLUSTER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonitorLocalResourceType_EKS_CLUSTER})
+var sMonitorMetric_ROUND_TRIP_TIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROUND_TRIP_TIME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonitorMetric_ROUND_TRIP_TIME})
+var sMonitorMetric_TIMEOUTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMEOUTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonitorMetric_TIMEOUTS})
+var sMonitorMetric_RETRANSMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RETRANSMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonitorMetric_RETRANSMISSIONS})
+var sMonitorMetric_DATA_TRANSFERRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATA_TRANSFERRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonitorMetric_DATA_TRANSFERRED})
+var sMonitorRemoteResource_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iMonitorRemoteResourceType, Members: &mMonitorRemoteResourceType, Type: smithy.ShapeTypeEnum, Ext: &eMonitorRemoteResource_type})
+var sMonitorRemoteResource_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMonitorRemoteResource_identifier})
+var s_MonitorRemoteResources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMonitorRemoteResource, Members: &mMonitorRemoteResource, Type: smithy.ShapeTypeStructure, Ext: &e_MonitorRemoteResources_member})
+var sMonitorRemoteResourceType_AWS_VPC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_VPC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonitorRemoteResourceType_AWS_VPC})
+var sMonitorRemoteResourceType_AWS_AZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_AZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonitorRemoteResourceType_AWS_AZ})
+var sMonitorRemoteResourceType_AWS_SUBNET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_SUBNET", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonitorRemoteResourceType_AWS_SUBNET})
+var sMonitorRemoteResourceType_AWS_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonitorRemoteResourceType_AWS_SERVICE})
+var sMonitorRemoteResourceType_AWS_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonitorRemoteResourceType_AWS_REGION})
+var sMonitorStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonitorStatus_PENDING})
+var sMonitorStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonitorStatus_ACTIVE})
+var sMonitorStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonitorStatus_INACTIVE})
+var sMonitorStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonitorStatus_ERROR})
+var sMonitorStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMonitorStatus_DELETING})
+var sMonitorSummary_monitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorArn", ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &eMonitorSummary_monitorArn})
+var sMonitorSummary_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eMonitorSummary_monitorName})
+var sMonitorSummary_monitorStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorStatus", ID: &iMonitorStatus, Members: &mMonitorStatus, Type: smithy.ShapeTypeEnum, Ext: &eMonitorSummary_monitorStatus})
+var sMonitorTopContributorsRow_localIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localIp", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMonitorTopContributorsRow_localIp})
+var sMonitorTopContributorsRow_snatIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snatIp", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMonitorTopContributorsRow_snatIp})
+var sMonitorTopContributorsRow_localInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localInstanceId", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &eMonitorTopContributorsRow_localInstanceId})
+var sMonitorTopContributorsRow_localVpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localVpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &eMonitorTopContributorsRow_localVpcId})
+var sMonitorTopContributorsRow_localRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localRegion", ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &eMonitorTopContributorsRow_localRegion})
+var sMonitorTopContributorsRow_localAz = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localAz", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &eMonitorTopContributorsRow_localAz})
+var sMonitorTopContributorsRow_localSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localSubnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &eMonitorTopContributorsRow_localSubnetId})
+var sMonitorTopContributorsRow_targetPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetPort", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eMonitorTopContributorsRow_targetPort})
+var sMonitorTopContributorsRow_destinationCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCategory", ID: &iDestinationCategory, Members: &mDestinationCategory, Type: smithy.ShapeTypeEnum, Ext: &eMonitorTopContributorsRow_destinationCategory})
+var sMonitorTopContributorsRow_remoteVpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteVpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &eMonitorTopContributorsRow_remoteVpcId})
+var sMonitorTopContributorsRow_remoteRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteRegion", ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &eMonitorTopContributorsRow_remoteRegion})
+var sMonitorTopContributorsRow_remoteAz = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteAz", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &eMonitorTopContributorsRow_remoteAz})
+var sMonitorTopContributorsRow_remoteSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteSubnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &eMonitorTopContributorsRow_remoteSubnetId})
+var sMonitorTopContributorsRow_remoteInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteInstanceId", ID: &i_InstanceId, Type: smithy.ShapeTypeString, Ext: &eMonitorTopContributorsRow_remoteInstanceId})
+var sMonitorTopContributorsRow_remoteIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteIp", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMonitorTopContributorsRow_remoteIp})
+var sMonitorTopContributorsRow_dnatIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dnatIp", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMonitorTopContributorsRow_dnatIp})
+var sMonitorTopContributorsRow_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eMonitorTopContributorsRow_value})
+var sMonitorTopContributorsRow_traversedConstructs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "traversedConstructs", ID: &i_TraversedConstructsList, Members: &m_TraversedConstructsList, Type: smithy.ShapeTypeList, Ext: &eMonitorTopContributorsRow_traversedConstructs})
+var sMonitorTopContributorsRow_kubernetesMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kubernetesMetadata", ID: &iKubernetesMetadata, Members: &mKubernetesMetadata, Type: smithy.ShapeTypeStructure, Ext: &eMonitorTopContributorsRow_kubernetesMetadata})
+var sMonitorTopContributorsRow_localInstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localInstanceArn", ID: &i_InstanceArn, Type: smithy.ShapeTypeString, Ext: &eMonitorTopContributorsRow_localInstanceArn})
+var sMonitorTopContributorsRow_localSubnetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localSubnetArn", ID: &i_SubnetArn, Type: smithy.ShapeTypeString, Ext: &eMonitorTopContributorsRow_localSubnetArn})
+var sMonitorTopContributorsRow_localVpcArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localVpcArn", ID: &i_VpcArn, Type: smithy.ShapeTypeString, Ext: &eMonitorTopContributorsRow_localVpcArn})
+var sMonitorTopContributorsRow_remoteInstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteInstanceArn", ID: &i_InstanceArn, Type: smithy.ShapeTypeString, Ext: &eMonitorTopContributorsRow_remoteInstanceArn})
+var sMonitorTopContributorsRow_remoteSubnetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteSubnetArn", ID: &i_SubnetArn, Type: smithy.ShapeTypeString, Ext: &eMonitorTopContributorsRow_remoteSubnetArn})
+var sMonitorTopContributorsRow_remoteVpcArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteVpcArn", ID: &i_VpcArn, Type: smithy.ShapeTypeString, Ext: &eMonitorTopContributorsRow_remoteVpcArn})
+var s_MonitorTopContributorsRowList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMonitorTopContributorsRow, Members: &mMonitorTopContributorsRow, Type: smithy.ShapeTypeStructure, Ext: &e_MonitorTopContributorsRowList_member})
+var sQueryStatus_QUEUED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUEUED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQueryStatus_QUEUED})
+var sQueryStatus_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQueryStatus_RUNNING})
+var sQueryStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQueryStatus_SUCCEEDED})
+var sQueryStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQueryStatus_FAILED})
+var sQueryStatus_CANCELED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQueryStatus_CANCELED})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sScopeStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScopeStatus_SUCCEEDED})
+var sScopeStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScopeStatus_IN_PROGRESS})
+var sScopeStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScopeStatus_FAILED})
+var sScopeStatus_DEACTIVATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEACTIVATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScopeStatus_DEACTIVATING})
+var sScopeStatus_DEACTIVATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEACTIVATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScopeStatus_DEACTIVATED})
+var sScopeSummary_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Type: smithy.ShapeTypeString, Ext: &eScopeSummary_scopeId})
+var sScopeSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iScopeStatus, Members: &mScopeStatus, Type: smithy.ShapeTypeEnum, Ext: &eScopeSummary_status})
+var sScopeSummary_scopeArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eScopeSummary_scopeArn})
+var s_ScopeSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iScopeSummary, Members: &mScopeSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ScopeSummaryList_member})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var sTargetId_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eTargetId_accountId})
+var sTargetIdentifier_targetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetId", ID: &iTargetId, Members: &mTargetId, Type: smithy.ShapeTypeUnion, Ext: &eTargetIdentifier_targetId})
+var sTargetIdentifier_targetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetType", ID: &iTargetType, Members: &mTargetType, Type: smithy.ShapeTypeEnum, Ext: &eTargetIdentifier_targetType})
+var sTargetResource_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &iTargetIdentifier, Members: &mTargetIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eTargetResource_targetIdentifier})
+var sTargetResource_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &eTargetResource_region})
+var s_TargetResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTargetResource, Members: &mTargetResource, Type: smithy.ShapeTypeStructure, Ext: &e_TargetResourceList_member})
+var sTargetType_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetType_ACCOUNT})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sTraversedComponent_componentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentId", ID: &i_Component, Type: smithy.ShapeTypeString, Ext: &eTraversedComponent_componentId})
+var sTraversedComponent_componentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentType", ID: &i_ComponentType, Type: smithy.ShapeTypeString, Ext: &eTraversedComponent_componentType})
+var sTraversedComponent_componentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eTraversedComponent_componentArn})
+var sTraversedComponent_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTraversedComponent_serviceName})
+var s_TraversedConstructsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTraversedComponent, Members: &mTraversedComponent, Type: smithy.ShapeTypeStructure, Ext: &e_TraversedConstructsList_member})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sWorkloadInsightsMetric_TIMEOUTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMEOUTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWorkloadInsightsMetric_TIMEOUTS})
+var sWorkloadInsightsMetric_RETRANSMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RETRANSMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWorkloadInsightsMetric_RETRANSMISSIONS})
+var sWorkloadInsightsMetric_DATA_TRANSFERRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATA_TRANSFERRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWorkloadInsightsMetric_DATA_TRANSFERRED})
+var sWorkloadInsightsTopContributorsDataPoint_timestamps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamps", ID: &i_WorkloadInsightsTopContributorsTimestampsList, Members: &m_WorkloadInsightsTopContributorsTimestampsList, Type: smithy.ShapeTypeList, Ext: &eWorkloadInsightsTopContributorsDataPoint_timestamps})
+var sWorkloadInsightsTopContributorsDataPoint_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_WorkloadInsightsTopContributorsValuesList, Members: &m_WorkloadInsightsTopContributorsValuesList, Type: smithy.ShapeTypeList, Ext: &eWorkloadInsightsTopContributorsDataPoint_values})
+var sWorkloadInsightsTopContributorsDataPoint_label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "label", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWorkloadInsightsTopContributorsDataPoint_label})
+var s_WorkloadInsightsTopContributorsDataPoints_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkloadInsightsTopContributorsDataPoint, Members: &mWorkloadInsightsTopContributorsDataPoint, Type: smithy.ShapeTypeStructure, Ext: &e_WorkloadInsightsTopContributorsDataPoints_member})
+var sWorkloadInsightsTopContributorsRow_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eWorkloadInsightsTopContributorsRow_accountId})
+var sWorkloadInsightsTopContributorsRow_localSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localSubnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString, Ext: &eWorkloadInsightsTopContributorsRow_localSubnetId})
+var sWorkloadInsightsTopContributorsRow_localAz = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localAz", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &eWorkloadInsightsTopContributorsRow_localAz})
+var sWorkloadInsightsTopContributorsRow_localVpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localVpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &eWorkloadInsightsTopContributorsRow_localVpcId})
+var sWorkloadInsightsTopContributorsRow_localRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localRegion", ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &eWorkloadInsightsTopContributorsRow_localRegion})
+var sWorkloadInsightsTopContributorsRow_remoteIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eWorkloadInsightsTopContributorsRow_remoteIdentifier})
+var sWorkloadInsightsTopContributorsRow_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eWorkloadInsightsTopContributorsRow_value})
+var sWorkloadInsightsTopContributorsRow_localSubnetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localSubnetArn", ID: &i_SubnetArn, Type: smithy.ShapeTypeString, Ext: &eWorkloadInsightsTopContributorsRow_localSubnetArn})
+var sWorkloadInsightsTopContributorsRow_localVpcArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localVpcArn", ID: &i_VpcArn, Type: smithy.ShapeTypeString, Ext: &eWorkloadInsightsTopContributorsRow_localVpcArn})
+var s_WorkloadInsightsTopContributorsRowList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkloadInsightsTopContributorsRow, Members: &mWorkloadInsightsTopContributorsRow, Type: smithy.ShapeTypeStructure, Ext: &e_WorkloadInsightsTopContributorsRowList_member})
+var s_WorkloadInsightsTopContributorsTimestampsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pTimestamp, Traits: &t32, Type: smithy.ShapeTypeTimestamp, Ext: &e_WorkloadInsightsTopContributorsTimestampsList_member})
+var s_WorkloadInsightsTopContributorsValuesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &e_WorkloadInsightsTopContributorsValuesList_member})
+var sCreateMonitorInput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateMonitorInput_monitorName})
+var sCreateMonitorInput_localResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localResources", ID: &i_MonitorLocalResources, Members: &m_MonitorLocalResources, Type: smithy.ShapeTypeList, Ext: &eCreateMonitorInput_localResources})
+var sCreateMonitorInput_remoteResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteResources", ID: &i_MonitorRemoteResources, Members: &m_MonitorRemoteResources, Type: smithy.ShapeTypeList, Ext: &eCreateMonitorInput_remoteResources})
+var sCreateMonitorInput_scopeArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateMonitorInput_scopeArn})
+var sCreateMonitorInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_UuidString, Type: smithy.ShapeTypeString, Ext: &eCreateMonitorInput_clientToken})
+var sCreateMonitorInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateMonitorInput_tags})
+var sCreateMonitorOutput_monitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorArn", ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &eCreateMonitorOutput_monitorArn})
+var sCreateMonitorOutput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateMonitorOutput_monitorName})
+var sCreateMonitorOutput_monitorStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorStatus", ID: &iMonitorStatus, Members: &mMonitorStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateMonitorOutput_monitorStatus})
+var sCreateMonitorOutput_localResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localResources", ID: &i_MonitorLocalResources, Members: &m_MonitorLocalResources, Type: smithy.ShapeTypeList, Ext: &eCreateMonitorOutput_localResources})
+var sCreateMonitorOutput_remoteResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteResources", ID: &i_MonitorRemoteResources, Members: &m_MonitorRemoteResources, Type: smithy.ShapeTypeList, Ext: &eCreateMonitorOutput_remoteResources})
+var sCreateMonitorOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Iso8601Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateMonitorOutput_createdAt})
+var sCreateMonitorOutput_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &i_Iso8601Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateMonitorOutput_modifiedAt})
+var sCreateMonitorOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateMonitorOutput_tags})
+var sCreateScopeInput_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_TargetResourceList, Members: &m_TargetResourceList, Type: smithy.ShapeTypeList, Ext: &eCreateScopeInput_targets})
+var sCreateScopeInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_UuidString, Type: smithy.ShapeTypeString, Ext: &eCreateScopeInput_clientToken})
+var sCreateScopeInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateScopeInput_tags})
+var sCreateScopeOutput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Type: smithy.ShapeTypeString, Ext: &eCreateScopeOutput_scopeId})
+var sCreateScopeOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iScopeStatus, Members: &mScopeStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateScopeOutput_status})
+var sCreateScopeOutput_scopeArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateScopeOutput_scopeArn})
+var sCreateScopeOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateScopeOutput_tags})
+var sDeleteMonitorInput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eDeleteMonitorInput_monitorName})
+var sDeleteScopeInput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eDeleteScopeInput_scopeId})
+var sGetMonitorInput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eGetMonitorInput_monitorName})
+var sGetMonitorOutput_monitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorArn", ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &eGetMonitorOutput_monitorArn})
+var sGetMonitorOutput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eGetMonitorOutput_monitorName})
+var sGetMonitorOutput_monitorStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorStatus", ID: &iMonitorStatus, Members: &mMonitorStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetMonitorOutput_monitorStatus})
+var sGetMonitorOutput_localResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localResources", ID: &i_MonitorLocalResources, Members: &m_MonitorLocalResources, Type: smithy.ShapeTypeList, Ext: &eGetMonitorOutput_localResources})
+var sGetMonitorOutput_remoteResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteResources", ID: &i_MonitorRemoteResources, Members: &m_MonitorRemoteResources, Type: smithy.ShapeTypeList, Ext: &eGetMonitorOutput_remoteResources})
+var sGetMonitorOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Iso8601Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMonitorOutput_createdAt})
+var sGetMonitorOutput_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &i_Iso8601Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMonitorOutput_modifiedAt})
+var sGetMonitorOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eGetMonitorOutput_tags})
+var sGetQueryResultsMonitorTopContributorsInput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eGetQueryResultsMonitorTopContributorsInput_monitorName})
+var sGetQueryResultsMonitorTopContributorsInput_queryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryId", ID: &pString, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eGetQueryResultsMonitorTopContributorsInput_queryId})
+var sGetQueryResultsMonitorTopContributorsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eGetQueryResultsMonitorTopContributorsInput_nextToken})
+var sGetQueryResultsMonitorTopContributorsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t35, Type: smithy.ShapeTypeInteger, Ext: &eGetQueryResultsMonitorTopContributorsInput_maxResults})
+var sGetQueryResultsMonitorTopContributorsOutput_unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unit", ID: &iMetricUnit, Members: &mMetricUnit, Type: smithy.ShapeTypeEnum, Ext: &eGetQueryResultsMonitorTopContributorsOutput_unit})
+var sGetQueryResultsMonitorTopContributorsOutput_topContributors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topContributors", ID: &i_MonitorTopContributorsRowList, Members: &m_MonitorTopContributorsRowList, Type: smithy.ShapeTypeList, Ext: &eGetQueryResultsMonitorTopContributorsOutput_topContributors})
+var sGetQueryResultsMonitorTopContributorsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetQueryResultsMonitorTopContributorsOutput_nextToken})
+var sGetQueryResultsWorkloadInsightsTopContributorsDataInput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eGetQueryResultsWorkloadInsightsTopContributorsDataInput_scopeId})
+var sGetQueryResultsWorkloadInsightsTopContributorsDataInput_queryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryId", ID: &pString, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eGetQueryResultsWorkloadInsightsTopContributorsDataInput_queryId})
+var sGetQueryResultsWorkloadInsightsTopContributorsDataInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eGetQueryResultsWorkloadInsightsTopContributorsDataInput_nextToken})
+var sGetQueryResultsWorkloadInsightsTopContributorsDataInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t35, Type: smithy.ShapeTypeInteger, Ext: &eGetQueryResultsWorkloadInsightsTopContributorsDataInput_maxResults})
+var sGetQueryResultsWorkloadInsightsTopContributorsDataOutput_unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unit", ID: &iMetricUnit, Members: &mMetricUnit, Type: smithy.ShapeTypeEnum, Ext: &eGetQueryResultsWorkloadInsightsTopContributorsDataOutput_unit})
+var sGetQueryResultsWorkloadInsightsTopContributorsDataOutput_datapoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datapoints", ID: &i_WorkloadInsightsTopContributorsDataPoints, Members: &m_WorkloadInsightsTopContributorsDataPoints, Type: smithy.ShapeTypeList, Ext: &eGetQueryResultsWorkloadInsightsTopContributorsDataOutput_datapoints})
+var sGetQueryResultsWorkloadInsightsTopContributorsDataOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetQueryResultsWorkloadInsightsTopContributorsDataOutput_nextToken})
+var sGetQueryResultsWorkloadInsightsTopContributorsInput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eGetQueryResultsWorkloadInsightsTopContributorsInput_scopeId})
+var sGetQueryResultsWorkloadInsightsTopContributorsInput_queryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryId", ID: &pString, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eGetQueryResultsWorkloadInsightsTopContributorsInput_queryId})
+var sGetQueryResultsWorkloadInsightsTopContributorsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eGetQueryResultsWorkloadInsightsTopContributorsInput_nextToken})
+var sGetQueryResultsWorkloadInsightsTopContributorsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t35, Type: smithy.ShapeTypeInteger, Ext: &eGetQueryResultsWorkloadInsightsTopContributorsInput_maxResults})
+var sGetQueryResultsWorkloadInsightsTopContributorsOutput_topContributors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topContributors", ID: &i_WorkloadInsightsTopContributorsRowList, Members: &m_WorkloadInsightsTopContributorsRowList, Type: smithy.ShapeTypeList, Ext: &eGetQueryResultsWorkloadInsightsTopContributorsOutput_topContributors})
+var sGetQueryResultsWorkloadInsightsTopContributorsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetQueryResultsWorkloadInsightsTopContributorsOutput_nextToken})
+var sGetQueryStatusMonitorTopContributorsInput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eGetQueryStatusMonitorTopContributorsInput_monitorName})
+var sGetQueryStatusMonitorTopContributorsInput_queryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryId", ID: &pString, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eGetQueryStatusMonitorTopContributorsInput_queryId})
+var sGetQueryStatusMonitorTopContributorsOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iQueryStatus, Members: &mQueryStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetQueryStatusMonitorTopContributorsOutput_status})
+var sGetQueryStatusWorkloadInsightsTopContributorsDataInput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eGetQueryStatusWorkloadInsightsTopContributorsDataInput_scopeId})
+var sGetQueryStatusWorkloadInsightsTopContributorsDataInput_queryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryId", ID: &pString, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eGetQueryStatusWorkloadInsightsTopContributorsDataInput_queryId})
+var sGetQueryStatusWorkloadInsightsTopContributorsDataOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iQueryStatus, Members: &mQueryStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetQueryStatusWorkloadInsightsTopContributorsDataOutput_status})
+var sGetQueryStatusWorkloadInsightsTopContributorsInput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eGetQueryStatusWorkloadInsightsTopContributorsInput_scopeId})
+var sGetQueryStatusWorkloadInsightsTopContributorsInput_queryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryId", ID: &pString, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eGetQueryStatusWorkloadInsightsTopContributorsInput_queryId})
+var sGetQueryStatusWorkloadInsightsTopContributorsOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iQueryStatus, Members: &mQueryStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetQueryStatusWorkloadInsightsTopContributorsOutput_status})
+var sGetScopeInput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eGetScopeInput_scopeId})
+var sGetScopeOutput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Type: smithy.ShapeTypeString, Ext: &eGetScopeOutput_scopeId})
+var sGetScopeOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iScopeStatus, Members: &mScopeStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetScopeOutput_status})
+var sGetScopeOutput_scopeArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetScopeOutput_scopeArn})
+var sGetScopeOutput_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_TargetResourceList, Members: &m_TargetResourceList, Type: smithy.ShapeTypeList, Ext: &eGetScopeOutput_targets})
+var sGetScopeOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eGetScopeOutput_tags})
+var sListMonitorsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eListMonitorsInput_nextToken})
+var sListMonitorsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t35, Type: smithy.ShapeTypeInteger, Ext: &eListMonitorsInput_maxResults})
+var sListMonitorsInput_monitorStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorStatus", ID: &iMonitorStatus, Members: &mMonitorStatus, Traits: &t36, Type: smithy.ShapeTypeEnum, Ext: &eListMonitorsInput_monitorStatus})
+var sListMonitorsOutput_monitors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitors", ID: &i_MonitorList, Members: &m_MonitorList, Type: smithy.ShapeTypeList, Ext: &eListMonitorsOutput_monitors})
+var sListMonitorsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListMonitorsOutput_nextToken})
+var sListScopesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t34, Type: smithy.ShapeTypeString, Ext: &eListScopesInput_nextToken})
+var sListScopesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t35, Type: smithy.ShapeTypeInteger, Ext: &eListScopesInput_maxResults})
+var sListScopesOutput_scopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopes", ID: &i_ScopeSummaryList, Members: &m_ScopeSummaryList, Type: smithy.ShapeTypeList, Ext: &eListScopesOutput_scopes})
+var sListScopesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListScopesOutput_nextToken})
+var sListTagsForResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceInput_resourceArn})
+var sListTagsForResourceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceOutput_tags})
+var sStartQueryMonitorTopContributorsInput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eStartQueryMonitorTopContributorsInput_monitorName})
+var sStartQueryMonitorTopContributorsInput_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &pTimestamp, Traits: &t32, Type: smithy.ShapeTypeTimestamp, Ext: &eStartQueryMonitorTopContributorsInput_startTime})
+var sStartQueryMonitorTopContributorsInput_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Traits: &t32, Type: smithy.ShapeTypeTimestamp, Ext: &eStartQueryMonitorTopContributorsInput_endTime})
+var sStartQueryMonitorTopContributorsInput_metricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricName", ID: &iMonitorMetric, Members: &mMonitorMetric, Type: smithy.ShapeTypeEnum, Ext: &eStartQueryMonitorTopContributorsInput_metricName})
+var sStartQueryMonitorTopContributorsInput_destinationCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCategory", ID: &iDestinationCategory, Members: &mDestinationCategory, Type: smithy.ShapeTypeEnum, Ext: &eStartQueryMonitorTopContributorsInput_destinationCategory})
+var sStartQueryMonitorTopContributorsInput_limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "limit", ID: &i_Limit, Type: smithy.ShapeTypeInteger, Ext: &eStartQueryMonitorTopContributorsInput_limit})
+var sStartQueryMonitorTopContributorsOutput_queryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eStartQueryMonitorTopContributorsOutput_queryId})
+var sStartQueryWorkloadInsightsTopContributorsDataInput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eStartQueryWorkloadInsightsTopContributorsDataInput_scopeId})
+var sStartQueryWorkloadInsightsTopContributorsDataInput_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &pTimestamp, Traits: &t32, Type: smithy.ShapeTypeTimestamp, Ext: &eStartQueryWorkloadInsightsTopContributorsDataInput_startTime})
+var sStartQueryWorkloadInsightsTopContributorsDataInput_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Traits: &t32, Type: smithy.ShapeTypeTimestamp, Ext: &eStartQueryWorkloadInsightsTopContributorsDataInput_endTime})
+var sStartQueryWorkloadInsightsTopContributorsDataInput_metricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricName", ID: &iWorkloadInsightsMetric, Members: &mWorkloadInsightsMetric, Type: smithy.ShapeTypeEnum, Ext: &eStartQueryWorkloadInsightsTopContributorsDataInput_metricName})
+var sStartQueryWorkloadInsightsTopContributorsDataInput_destinationCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCategory", ID: &iDestinationCategory, Members: &mDestinationCategory, Type: smithy.ShapeTypeEnum, Ext: &eStartQueryWorkloadInsightsTopContributorsDataInput_destinationCategory})
+var sStartQueryWorkloadInsightsTopContributorsDataOutput_queryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eStartQueryWorkloadInsightsTopContributorsDataOutput_queryId})
+var sStartQueryWorkloadInsightsTopContributorsInput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eStartQueryWorkloadInsightsTopContributorsInput_scopeId})
+var sStartQueryWorkloadInsightsTopContributorsInput_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &pTimestamp, Traits: &t32, Type: smithy.ShapeTypeTimestamp, Ext: &eStartQueryWorkloadInsightsTopContributorsInput_startTime})
+var sStartQueryWorkloadInsightsTopContributorsInput_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Traits: &t32, Type: smithy.ShapeTypeTimestamp, Ext: &eStartQueryWorkloadInsightsTopContributorsInput_endTime})
+var sStartQueryWorkloadInsightsTopContributorsInput_metricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricName", ID: &iWorkloadInsightsMetric, Members: &mWorkloadInsightsMetric, Type: smithy.ShapeTypeEnum, Ext: &eStartQueryWorkloadInsightsTopContributorsInput_metricName})
+var sStartQueryWorkloadInsightsTopContributorsInput_destinationCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCategory", ID: &iDestinationCategory, Members: &mDestinationCategory, Type: smithy.ShapeTypeEnum, Ext: &eStartQueryWorkloadInsightsTopContributorsInput_destinationCategory})
+var sStartQueryWorkloadInsightsTopContributorsInput_limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "limit", ID: &i_Limit, Type: smithy.ShapeTypeInteger, Ext: &eStartQueryWorkloadInsightsTopContributorsInput_limit})
+var sStartQueryWorkloadInsightsTopContributorsOutput_queryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eStartQueryWorkloadInsightsTopContributorsOutput_queryId})
+var sStopQueryMonitorTopContributorsInput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eStopQueryMonitorTopContributorsInput_monitorName})
+var sStopQueryMonitorTopContributorsInput_queryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryId", ID: &pString, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eStopQueryMonitorTopContributorsInput_queryId})
+var sStopQueryWorkloadInsightsTopContributorsDataInput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eStopQueryWorkloadInsightsTopContributorsDataInput_scopeId})
+var sStopQueryWorkloadInsightsTopContributorsDataInput_queryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryId", ID: &pString, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eStopQueryWorkloadInsightsTopContributorsDataInput_queryId})
+var sStopQueryWorkloadInsightsTopContributorsInput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eStopQueryWorkloadInsightsTopContributorsInput_scopeId})
+var sStopQueryWorkloadInsightsTopContributorsInput_queryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryId", ID: &pString, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eStopQueryWorkloadInsightsTopContributorsInput_queryId})
+var sTagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eTagResourceInput_resourceArn})
+var sTagResourceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceInput_tags})
+var sUntagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eUntagResourceInput_resourceArn})
+var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t37, Type: smithy.ShapeTypeList, Ext: &eUntagResourceInput_tagKeys})
+var sUpdateMonitorInput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eUpdateMonitorInput_monitorName})
+var sUpdateMonitorInput_localResourcesToAdd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localResourcesToAdd", ID: &i_MonitorLocalResources, Members: &m_MonitorLocalResources, Type: smithy.ShapeTypeList, Ext: &eUpdateMonitorInput_localResourcesToAdd})
+var sUpdateMonitorInput_localResourcesToRemove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localResourcesToRemove", ID: &i_MonitorLocalResources, Members: &m_MonitorLocalResources, Type: smithy.ShapeTypeList, Ext: &eUpdateMonitorInput_localResourcesToRemove})
+var sUpdateMonitorInput_remoteResourcesToAdd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteResourcesToAdd", ID: &i_MonitorRemoteResources, Members: &m_MonitorRemoteResources, Type: smithy.ShapeTypeList, Ext: &eUpdateMonitorInput_remoteResourcesToAdd})
+var sUpdateMonitorInput_remoteResourcesToRemove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteResourcesToRemove", ID: &i_MonitorRemoteResources, Members: &m_MonitorRemoteResources, Type: smithy.ShapeTypeList, Ext: &eUpdateMonitorInput_remoteResourcesToRemove})
+var sUpdateMonitorInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_UuidString, Type: smithy.ShapeTypeString, Ext: &eUpdateMonitorInput_clientToken})
+var sUpdateMonitorOutput_monitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorArn", ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &eUpdateMonitorOutput_monitorArn})
+var sUpdateMonitorOutput_monitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateMonitorOutput_monitorName})
+var sUpdateMonitorOutput_monitorStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitorStatus", ID: &iMonitorStatus, Members: &mMonitorStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateMonitorOutput_monitorStatus})
+var sUpdateMonitorOutput_localResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localResources", ID: &i_MonitorLocalResources, Members: &m_MonitorLocalResources, Type: smithy.ShapeTypeList, Ext: &eUpdateMonitorOutput_localResources})
+var sUpdateMonitorOutput_remoteResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteResources", ID: &i_MonitorRemoteResources, Members: &m_MonitorRemoteResources, Type: smithy.ShapeTypeList, Ext: &eUpdateMonitorOutput_remoteResources})
+var sUpdateMonitorOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Iso8601Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateMonitorOutput_createdAt})
+var sUpdateMonitorOutput_modifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedAt", ID: &i_Iso8601Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateMonitorOutput_modifiedAt})
+var sUpdateMonitorOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eUpdateMonitorOutput_tags})
+var sUpdateScopeInput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &eUpdateScopeInput_scopeId})
+var sUpdateScopeInput_resourcesToAdd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourcesToAdd", ID: &i_TargetResourceList, Members: &m_TargetResourceList, Type: smithy.ShapeTypeList, Ext: &eUpdateScopeInput_resourcesToAdd})
+var sUpdateScopeInput_resourcesToDelete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourcesToDelete", ID: &i_TargetResourceList, Members: &m_TargetResourceList, Type: smithy.ShapeTypeList, Ext: &eUpdateScopeInput_resourcesToDelete})
+var sUpdateScopeOutput_scopeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeId", ID: &i_ScopeId, Type: smithy.ShapeTypeString, Ext: &eUpdateScopeOutput_scopeId})
+var sUpdateScopeOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iScopeStatus, Members: &mScopeStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateScopeOutput_status})
+var sUpdateScopeOutput_scopeArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopeArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateScopeOutput_scopeArn})
+var sUpdateScopeOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eUpdateScopeOutput_tags})
 
 var CreateMonitor = &sCreateMonitor
 

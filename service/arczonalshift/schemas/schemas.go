@@ -7,9 +7,302 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [294]smithy.SchemaExtensions
+var (
+	eCancelPracticeRun                                                smithy.SchemaExtensions
+	eCancelZonalShift                                                 smithy.SchemaExtensions
+	eCreatePracticeRunConfiguration                                   smithy.SchemaExtensions
+	eDeletePracticeRunConfiguration                                   smithy.SchemaExtensions
+	eGetAutoshiftObserverNotificationStatus                           smithy.SchemaExtensions
+	eGetManagedResource                                               smithy.SchemaExtensions
+	eListAutoshifts                                                   smithy.SchemaExtensions
+	eListManagedResources                                             smithy.SchemaExtensions
+	eListZonalShifts                                                  smithy.SchemaExtensions
+	eStartPracticeRun                                                 smithy.SchemaExtensions
+	eStartZonalShift                                                  smithy.SchemaExtensions
+	eUpdateAutoshiftObserverNotificationStatus                        smithy.SchemaExtensions
+	eUpdatePracticeRunConfiguration                                   smithy.SchemaExtensions
+	eUpdateZonalAutoshiftConfiguration                                smithy.SchemaExtensions
+	eUpdateZonalShift                                                 smithy.SchemaExtensions
+	e_PercDataPlane                                                   smithy.SchemaExtensions
+	eAccessDeniedException                                            smithy.SchemaExtensions
+	eAccessDeniedException_message                                    smithy.SchemaExtensions
+	e_AllowedWindow                                                   smithy.SchemaExtensions
+	e_AllowedWindows                                                  smithy.SchemaExtensions
+	e_AllowedWindows_member                                           smithy.SchemaExtensions
+	eAppliedStatus                                                    smithy.SchemaExtensions
+	eAppliedStatus_APPLIED                                            smithy.SchemaExtensions
+	eAppliedStatus_NOT_APPLIED                                        smithy.SchemaExtensions
+	e_AppliedWeights                                                  smithy.SchemaExtensions
+	e_AppliedWeights_key                                              smithy.SchemaExtensions
+	e_AppliedWeights_value                                            smithy.SchemaExtensions
+	eAutoshiftAppliedStatus                                           smithy.SchemaExtensions
+	eAutoshiftAppliedStatus_APPLIED                                   smithy.SchemaExtensions
+	eAutoshiftAppliedStatus_NOT_APPLIED                               smithy.SchemaExtensions
+	eAutoshiftExecutionStatus                                         smithy.SchemaExtensions
+	eAutoshiftExecutionStatus_ACTIVE                                  smithy.SchemaExtensions
+	eAutoshiftExecutionStatus_COMPLETED                               smithy.SchemaExtensions
+	eAutoshiftInResource                                              smithy.SchemaExtensions
+	eAutoshiftInResource_appliedStatus                                smithy.SchemaExtensions
+	eAutoshiftInResource_awayFrom                                     smithy.SchemaExtensions
+	eAutoshiftInResource_startTime                                    smithy.SchemaExtensions
+	eAutoshiftObserverNotificationStatus                              smithy.SchemaExtensions
+	eAutoshiftObserverNotificationStatus_ENABLED                      smithy.SchemaExtensions
+	eAutoshiftObserverNotificationStatus_DISABLED                     smithy.SchemaExtensions
+	e_AutoshiftsInResource                                            smithy.SchemaExtensions
+	e_AutoshiftsInResource_member                                     smithy.SchemaExtensions
+	e_AutoshiftSummaries                                              smithy.SchemaExtensions
+	e_AutoshiftSummaries_member                                       smithy.SchemaExtensions
+	eAutoshiftSummary                                                 smithy.SchemaExtensions
+	eAutoshiftSummary_awayFrom                                        smithy.SchemaExtensions
+	eAutoshiftSummary_endTime                                         smithy.SchemaExtensions
+	eAutoshiftSummary_startTime                                       smithy.SchemaExtensions
+	eAutoshiftSummary_status                                          smithy.SchemaExtensions
+	e_AvailabilityZone                                                smithy.SchemaExtensions
+	e_AvailabilityZones                                               smithy.SchemaExtensions
+	e_AvailabilityZones_member                                        smithy.SchemaExtensions
+	e_BlockedDate                                                     smithy.SchemaExtensions
+	e_BlockedDates                                                    smithy.SchemaExtensions
+	e_BlockedDates_member                                             smithy.SchemaExtensions
+	e_BlockedWindow                                                   smithy.SchemaExtensions
+	e_BlockedWindows                                                  smithy.SchemaExtensions
+	e_BlockedWindows_member                                           smithy.SchemaExtensions
+	e_BlockingAlarms                                                  smithy.SchemaExtensions
+	e_BlockingAlarms_member                                           smithy.SchemaExtensions
+	eConflictException                                                smithy.SchemaExtensions
+	eConflictException_message                                        smithy.SchemaExtensions
+	eConflictException_reason                                         smithy.SchemaExtensions
+	eConflictException_zonalShiftId                                   smithy.SchemaExtensions
+	eConflictExceptionReason                                          smithy.SchemaExtensions
+	eConflictExceptionReason_ZONAL_SHIFT_ALREADY_EXISTS               smithy.SchemaExtensions
+	eConflictExceptionReason_ZONAL_SHIFT_STATUS_NOT_ACTIVE            smithy.SchemaExtensions
+	eConflictExceptionReason_SIMULTANEOUS_ZONAL_SHIFTS_CONFLICT       smithy.SchemaExtensions
+	eConflictExceptionReason_PRACTICE_CONFIGURATION_ALREADY_EXISTS    smithy.SchemaExtensions
+	eConflictExceptionReason_AUTOSHIFT_ENABLED                        smithy.SchemaExtensions
+	eConflictExceptionReason_PRACTICE_CONFIGURATION_DOES_NOT_EXIST    smithy.SchemaExtensions
+	eConflictExceptionReason_ZONAL_AUTOSHIFT_ACTIVE                   smithy.SchemaExtensions
+	eConflictExceptionReason_PRACTICE_OUTCOME_ALARMS_RED              smithy.SchemaExtensions
+	eConflictExceptionReason_PRACTICE_BLOCKING_ALARMS_RED             smithy.SchemaExtensions
+	eConflictExceptionReason_PRACTICE_IN_BLOCKED_DATES                smithy.SchemaExtensions
+	eConflictExceptionReason_PRACTICE_IN_BLOCKED_WINDOWS              smithy.SchemaExtensions
+	eConflictExceptionReason_PRACTICE_OUTSIDE_ALLOWED_WINDOWS         smithy.SchemaExtensions
+	eControlCondition                                                 smithy.SchemaExtensions
+	eControlCondition_type                                            smithy.SchemaExtensions
+	eControlCondition_alarmIdentifier                                 smithy.SchemaExtensions
+	eControlConditionType                                             smithy.SchemaExtensions
+	eControlConditionType_CLOUDWATCH                                  smithy.SchemaExtensions
+	e_ExpiresIn                                                       smithy.SchemaExtensions
+	e_ExpiryTime                                                      smithy.SchemaExtensions
+	eInternalServerException                                          smithy.SchemaExtensions
+	eInternalServerException_message                                  smithy.SchemaExtensions
+	e_ManagedResourceSummaries                                        smithy.SchemaExtensions
+	e_ManagedResourceSummaries_member                                 smithy.SchemaExtensions
+	eManagedResourceSummary                                           smithy.SchemaExtensions
+	eManagedResourceSummary_arn                                       smithy.SchemaExtensions
+	eManagedResourceSummary_name                                      smithy.SchemaExtensions
+	eManagedResourceSummary_availabilityZones                         smithy.SchemaExtensions
+	eManagedResourceSummary_appliedWeights                            smithy.SchemaExtensions
+	eManagedResourceSummary_zonalShifts                               smithy.SchemaExtensions
+	eManagedResourceSummary_autoshifts                                smithy.SchemaExtensions
+	eManagedResourceSummary_zonalAutoshiftStatus                      smithy.SchemaExtensions
+	eManagedResourceSummary_practiceRunStatus                         smithy.SchemaExtensions
+	e_MaxResults                                                      smithy.SchemaExtensions
+	e_MetricIdentifier                                                smithy.SchemaExtensions
+	e_OutcomeAlarms                                                   smithy.SchemaExtensions
+	e_OutcomeAlarms_member                                            smithy.SchemaExtensions
+	ePracticeRunConfiguration                                         smithy.SchemaExtensions
+	ePracticeRunConfiguration_blockingAlarms                          smithy.SchemaExtensions
+	ePracticeRunConfiguration_outcomeAlarms                           smithy.SchemaExtensions
+	ePracticeRunConfiguration_blockedWindows                          smithy.SchemaExtensions
+	ePracticeRunConfiguration_allowedWindows                          smithy.SchemaExtensions
+	ePracticeRunConfiguration_blockedDates                            smithy.SchemaExtensions
+	ePracticeRunOutcome                                               smithy.SchemaExtensions
+	ePracticeRunOutcome_FAILED                                        smithy.SchemaExtensions
+	ePracticeRunOutcome_INTERRUPTED                                   smithy.SchemaExtensions
+	ePracticeRunOutcome_PENDING                                       smithy.SchemaExtensions
+	ePracticeRunOutcome_SUCCEEDED                                     smithy.SchemaExtensions
+	ePracticeRunOutcome_CAPACITY_CHECK_FAILED                         smithy.SchemaExtensions
+	e_ResourceArn                                                     smithy.SchemaExtensions
+	e_ResourceIdentifier                                              smithy.SchemaExtensions
+	e_ResourceName                                                    smithy.SchemaExtensions
+	eResourceNotFoundException                                        smithy.SchemaExtensions
+	eResourceNotFoundException_message                                smithy.SchemaExtensions
+	eShiftType                                                        smithy.SchemaExtensions
+	eShiftType_ZONAL_SHIFT                                            smithy.SchemaExtensions
+	eShiftType_PRACTICE_RUN                                           smithy.SchemaExtensions
+	eShiftType_FIS_EXPERIMENT                                         smithy.SchemaExtensions
+	eShiftType_ZONAL_AUTOSHIFT                                        smithy.SchemaExtensions
+	e_StartTime                                                       smithy.SchemaExtensions
+	eThrottlingException                                              smithy.SchemaExtensions
+	eThrottlingException_message                                      smithy.SchemaExtensions
+	eValidationException                                              smithy.SchemaExtensions
+	eValidationException_message                                      smithy.SchemaExtensions
+	eValidationException_reason                                       smithy.SchemaExtensions
+	eValidationExceptionReason                                        smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_EXPIRES_IN                     smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_STATUS                         smithy.SchemaExtensions
+	eValidationExceptionReason_MISSING_VALUE                          smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_TOKEN                          smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_RESOURCE_IDENTIFIER            smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_AZ                             smithy.SchemaExtensions
+	eValidationExceptionReason_UNSUPPORTED_AZ                         smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_ALARM_CONDITION                smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_CONDITION_TYPE                 smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_PRACTICE_BLOCKER               smithy.SchemaExtensions
+	eValidationExceptionReason_FIS_EXPERIMENT_UPDATE_NOT_ALLOWED      smithy.SchemaExtensions
+	eValidationExceptionReason_AUTOSHIFT_UPDATE_NOT_ALLOWED           smithy.SchemaExtensions
+	eValidationExceptionReason_UNSUPPORTED_PRACTICE_CANCEL_SHIFT_TYPE smithy.SchemaExtensions
+	eValidationExceptionReason_INVALID_PRACTICE_ALLOWED_WINDOW        smithy.SchemaExtensions
+	eValidationExceptionReason_CONFLICTING_PRACTICE_WINDOWS           smithy.SchemaExtensions
+	e_Weight                                                          smithy.SchemaExtensions
+	eZonalAutoshiftStatus                                             smithy.SchemaExtensions
+	eZonalAutoshiftStatus_ENABLED                                     smithy.SchemaExtensions
+	eZonalAutoshiftStatus_DISABLED                                    smithy.SchemaExtensions
+	e_ZonalShiftComment                                               smithy.SchemaExtensions
+	e_ZonalShiftId                                                    smithy.SchemaExtensions
+	eZonalShiftInResource                                             smithy.SchemaExtensions
+	eZonalShiftInResource_appliedStatus                               smithy.SchemaExtensions
+	eZonalShiftInResource_zonalShiftId                                smithy.SchemaExtensions
+	eZonalShiftInResource_resourceIdentifier                          smithy.SchemaExtensions
+	eZonalShiftInResource_awayFrom                                    smithy.SchemaExtensions
+	eZonalShiftInResource_expiryTime                                  smithy.SchemaExtensions
+	eZonalShiftInResource_startTime                                   smithy.SchemaExtensions
+	eZonalShiftInResource_comment                                     smithy.SchemaExtensions
+	eZonalShiftInResource_shiftType                                   smithy.SchemaExtensions
+	eZonalShiftInResource_practiceRunOutcome                          smithy.SchemaExtensions
+	e_ZonalShiftsInResource                                           smithy.SchemaExtensions
+	e_ZonalShiftsInResource_member                                    smithy.SchemaExtensions
+	eZonalShiftStatus                                                 smithy.SchemaExtensions
+	eZonalShiftStatus_ACTIVE                                          smithy.SchemaExtensions
+	eZonalShiftStatus_EXPIRED                                         smithy.SchemaExtensions
+	eZonalShiftStatus_CANCELED                                        smithy.SchemaExtensions
+	e_ZonalShiftSummaries                                             smithy.SchemaExtensions
+	e_ZonalShiftSummaries_member                                      smithy.SchemaExtensions
+	eZonalShiftSummary                                                smithy.SchemaExtensions
+	eZonalShiftSummary_zonalShiftId                                   smithy.SchemaExtensions
+	eZonalShiftSummary_resourceIdentifier                             smithy.SchemaExtensions
+	eZonalShiftSummary_awayFrom                                       smithy.SchemaExtensions
+	eZonalShiftSummary_expiryTime                                     smithy.SchemaExtensions
+	eZonalShiftSummary_startTime                                      smithy.SchemaExtensions
+	eZonalShiftSummary_status                                         smithy.SchemaExtensions
+	eZonalShiftSummary_comment                                        smithy.SchemaExtensions
+	eZonalShiftSummary_shiftType                                      smithy.SchemaExtensions
+	eZonalShiftSummary_practiceRunOutcome                             smithy.SchemaExtensions
+	eCancelPracticeRunRequest                                         smithy.SchemaExtensions
+	eCancelPracticeRunRequest_zonalShiftId                            smithy.SchemaExtensions
+	eCancelPracticeRunResponse                                        smithy.SchemaExtensions
+	eCancelPracticeRunResponse_zonalShiftId                           smithy.SchemaExtensions
+	eCancelPracticeRunResponse_resourceIdentifier                     smithy.SchemaExtensions
+	eCancelPracticeRunResponse_awayFrom                               smithy.SchemaExtensions
+	eCancelPracticeRunResponse_expiryTime                             smithy.SchemaExtensions
+	eCancelPracticeRunResponse_startTime                              smithy.SchemaExtensions
+	eCancelPracticeRunResponse_status                                 smithy.SchemaExtensions
+	eCancelPracticeRunResponse_comment                                smithy.SchemaExtensions
+	eCancelZonalShiftRequest                                          smithy.SchemaExtensions
+	eCancelZonalShiftRequest_zonalShiftId                             smithy.SchemaExtensions
+	eZonalShift                                                       smithy.SchemaExtensions
+	eZonalShift_zonalShiftId                                          smithy.SchemaExtensions
+	eZonalShift_resourceIdentifier                                    smithy.SchemaExtensions
+	eZonalShift_awayFrom                                              smithy.SchemaExtensions
+	eZonalShift_expiryTime                                            smithy.SchemaExtensions
+	eZonalShift_startTime                                             smithy.SchemaExtensions
+	eZonalShift_status                                                smithy.SchemaExtensions
+	eZonalShift_comment                                               smithy.SchemaExtensions
+	eCreatePracticeRunConfigurationRequest                            smithy.SchemaExtensions
+	eCreatePracticeRunConfigurationRequest_resourceIdentifier         smithy.SchemaExtensions
+	eCreatePracticeRunConfigurationRequest_blockedWindows             smithy.SchemaExtensions
+	eCreatePracticeRunConfigurationRequest_blockedDates               smithy.SchemaExtensions
+	eCreatePracticeRunConfigurationRequest_blockingAlarms             smithy.SchemaExtensions
+	eCreatePracticeRunConfigurationRequest_allowedWindows             smithy.SchemaExtensions
+	eCreatePracticeRunConfigurationRequest_outcomeAlarms              smithy.SchemaExtensions
+	eCreatePracticeRunConfigurationResponse                           smithy.SchemaExtensions
+	eCreatePracticeRunConfigurationResponse_arn                       smithy.SchemaExtensions
+	eCreatePracticeRunConfigurationResponse_name                      smithy.SchemaExtensions
+	eCreatePracticeRunConfigurationResponse_zonalAutoshiftStatus      smithy.SchemaExtensions
+	eCreatePracticeRunConfigurationResponse_practiceRunConfiguration  smithy.SchemaExtensions
+	eDeletePracticeRunConfigurationRequest                            smithy.SchemaExtensions
+	eDeletePracticeRunConfigurationRequest_resourceIdentifier         smithy.SchemaExtensions
+	eDeletePracticeRunConfigurationResponse                           smithy.SchemaExtensions
+	eDeletePracticeRunConfigurationResponse_arn                       smithy.SchemaExtensions
+	eDeletePracticeRunConfigurationResponse_name                      smithy.SchemaExtensions
+	eDeletePracticeRunConfigurationResponse_zonalAutoshiftStatus      smithy.SchemaExtensions
+	eGetAutoshiftObserverNotificationStatusRequest                    smithy.SchemaExtensions
+	eGetAutoshiftObserverNotificationStatusResponse                   smithy.SchemaExtensions
+	eGetAutoshiftObserverNotificationStatusResponse_status            smithy.SchemaExtensions
+	eGetManagedResourceRequest                                        smithy.SchemaExtensions
+	eGetManagedResourceRequest_resourceIdentifier                     smithy.SchemaExtensions
+	eGetManagedResourceResponse                                       smithy.SchemaExtensions
+	eGetManagedResourceResponse_arn                                   smithy.SchemaExtensions
+	eGetManagedResourceResponse_name                                  smithy.SchemaExtensions
+	eGetManagedResourceResponse_appliedWeights                        smithy.SchemaExtensions
+	eGetManagedResourceResponse_zonalShifts                           smithy.SchemaExtensions
+	eGetManagedResourceResponse_autoshifts                            smithy.SchemaExtensions
+	eGetManagedResourceResponse_practiceRunConfiguration              smithy.SchemaExtensions
+	eGetManagedResourceResponse_zonalAutoshiftStatus                  smithy.SchemaExtensions
+	eListAutoshiftsRequest                                            smithy.SchemaExtensions
+	eListAutoshiftsRequest_nextToken                                  smithy.SchemaExtensions
+	eListAutoshiftsRequest_status                                     smithy.SchemaExtensions
+	eListAutoshiftsRequest_maxResults                                 smithy.SchemaExtensions
+	eListAutoshiftsResponse                                           smithy.SchemaExtensions
+	eListAutoshiftsResponse_items                                     smithy.SchemaExtensions
+	eListAutoshiftsResponse_nextToken                                 smithy.SchemaExtensions
+	eListManagedResourcesRequest                                      smithy.SchemaExtensions
+	eListManagedResourcesRequest_nextToken                            smithy.SchemaExtensions
+	eListManagedResourcesRequest_maxResults                           smithy.SchemaExtensions
+	eListManagedResourcesResponse                                     smithy.SchemaExtensions
+	eListManagedResourcesResponse_items                               smithy.SchemaExtensions
+	eListManagedResourcesResponse_nextToken                           smithy.SchemaExtensions
+	eListZonalShiftsRequest                                           smithy.SchemaExtensions
+	eListZonalShiftsRequest_nextToken                                 smithy.SchemaExtensions
+	eListZonalShiftsRequest_status                                    smithy.SchemaExtensions
+	eListZonalShiftsRequest_maxResults                                smithy.SchemaExtensions
+	eListZonalShiftsRequest_resourceIdentifier                        smithy.SchemaExtensions
+	eListZonalShiftsResponse                                          smithy.SchemaExtensions
+	eListZonalShiftsResponse_items                                    smithy.SchemaExtensions
+	eListZonalShiftsResponse_nextToken                                smithy.SchemaExtensions
+	eStartPracticeRunRequest                                          smithy.SchemaExtensions
+	eStartPracticeRunRequest_resourceIdentifier                       smithy.SchemaExtensions
+	eStartPracticeRunRequest_awayFrom                                 smithy.SchemaExtensions
+	eStartPracticeRunRequest_comment                                  smithy.SchemaExtensions
+	eStartPracticeRunResponse                                         smithy.SchemaExtensions
+	eStartPracticeRunResponse_zonalShiftId                            smithy.SchemaExtensions
+	eStartPracticeRunResponse_resourceIdentifier                      smithy.SchemaExtensions
+	eStartPracticeRunResponse_awayFrom                                smithy.SchemaExtensions
+	eStartPracticeRunResponse_expiryTime                              smithy.SchemaExtensions
+	eStartPracticeRunResponse_startTime                               smithy.SchemaExtensions
+	eStartPracticeRunResponse_status                                  smithy.SchemaExtensions
+	eStartPracticeRunResponse_comment                                 smithy.SchemaExtensions
+	eStartZonalShiftRequest                                           smithy.SchemaExtensions
+	eStartZonalShiftRequest_resourceIdentifier                        smithy.SchemaExtensions
+	eStartZonalShiftRequest_awayFrom                                  smithy.SchemaExtensions
+	eStartZonalShiftRequest_expiresIn                                 smithy.SchemaExtensions
+	eStartZonalShiftRequest_comment                                   smithy.SchemaExtensions
+	eUpdateAutoshiftObserverNotificationStatusRequest                 smithy.SchemaExtensions
+	eUpdateAutoshiftObserverNotificationStatusRequest_status          smithy.SchemaExtensions
+	eUpdateAutoshiftObserverNotificationStatusResponse                smithy.SchemaExtensions
+	eUpdateAutoshiftObserverNotificationStatusResponse_status         smithy.SchemaExtensions
+	eUpdatePracticeRunConfigurationRequest                            smithy.SchemaExtensions
+	eUpdatePracticeRunConfigurationRequest_resourceIdentifier         smithy.SchemaExtensions
+	eUpdatePracticeRunConfigurationRequest_blockedWindows             smithy.SchemaExtensions
+	eUpdatePracticeRunConfigurationRequest_blockedDates               smithy.SchemaExtensions
+	eUpdatePracticeRunConfigurationRequest_blockingAlarms             smithy.SchemaExtensions
+	eUpdatePracticeRunConfigurationRequest_allowedWindows             smithy.SchemaExtensions
+	eUpdatePracticeRunConfigurationRequest_outcomeAlarms              smithy.SchemaExtensions
+	eUpdatePracticeRunConfigurationResponse                           smithy.SchemaExtensions
+	eUpdatePracticeRunConfigurationResponse_arn                       smithy.SchemaExtensions
+	eUpdatePracticeRunConfigurationResponse_name                      smithy.SchemaExtensions
+	eUpdatePracticeRunConfigurationResponse_zonalAutoshiftStatus      smithy.SchemaExtensions
+	eUpdatePracticeRunConfigurationResponse_practiceRunConfiguration  smithy.SchemaExtensions
+	eUpdateZonalAutoshiftConfigurationRequest                         smithy.SchemaExtensions
+	eUpdateZonalAutoshiftConfigurationRequest_resourceIdentifier      smithy.SchemaExtensions
+	eUpdateZonalAutoshiftConfigurationRequest_zonalAutoshiftStatus    smithy.SchemaExtensions
+	eUpdateZonalAutoshiftConfigurationResponse                        smithy.SchemaExtensions
+	eUpdateZonalAutoshiftConfigurationResponse_resourceIdentifier     smithy.SchemaExtensions
+	eUpdateZonalAutoshiftConfigurationResponse_zonalAutoshiftStatus   smithy.SchemaExtensions
+	eUpdateZonalShiftRequest                                          smithy.SchemaExtensions
+	eUpdateZonalShiftRequest_zonalShiftId                             smithy.SchemaExtensions
+	eUpdateZonalShiftRequest_comment                                  smithy.SchemaExtensions
+	eUpdateZonalShiftRequest_expiresIn                                smithy.SchemaExtensions
+)
 
 var (
 	iCancelPracticeRun                                 = smithy.ShapeID{Namespace: "com.amazonaws.arczonalshift", Name: "CancelPracticeRun"}
@@ -244,301 +537,301 @@ var mUpdateZonalAutoshiftConfigurationRequest = smithy.SchemaMembers{List: []*sm
 var mUpdateZonalAutoshiftConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateZonalAutoshiftConfigurationResponse_resourceIdentifier, &sUpdateZonalAutoshiftConfigurationResponse_zonalAutoshiftStatus}}
 var mUpdateZonalShiftRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateZonalShiftRequest_zonalShiftId, &sUpdateZonalShiftRequest_comment, &sUpdateZonalShiftRequest_expiresIn}}
 
-var sCancelPracticeRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelPracticeRun, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCancelZonalShift = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelZonalShift, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sCreatePracticeRunConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePracticeRunConfiguration, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sDeletePracticeRunConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePracticeRunConfiguration, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sGetAutoshiftObserverNotificationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAutoshiftObserverNotificationStatus, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sGetManagedResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetManagedResource, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sListAutoshifts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutoshifts, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sListManagedResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedResources, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sListZonalShifts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListZonalShifts, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sStartPracticeRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPracticeRun, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sStartZonalShift = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartZonalShift, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sUpdateAutoshiftObserverNotificationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAutoshiftObserverNotificationStatus, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sUpdatePracticeRunConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePracticeRunConfiguration, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sUpdateZonalAutoshiftConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateZonalAutoshiftConfiguration, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sUpdateZonalShift = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateZonalShift, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var s_PercDataPlane = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PercDataPlane, Type: smithy.ShapeTypeService, Ext: &ext[15]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &ext[16]})
-var s_AllowedWindow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AllowedWindow, Type: smithy.ShapeTypeString, Ext: &ext[18]})
-var s_AllowedWindows = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AllowedWindows, Members: &m_AllowedWindows, Type: smithy.ShapeTypeList, Ext: &ext[19]})
-var sAppliedStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppliedStatus, Members: &mAppliedStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[21]})
-var s_AppliedWeights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppliedWeights, Members: &m_AppliedWeights, Type: smithy.ShapeTypeMap, Ext: &ext[24]})
-var sAutoshiftAppliedStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoshiftAppliedStatus, Members: &mAutoshiftAppliedStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[27]})
-var sAutoshiftExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoshiftExecutionStatus, Members: &mAutoshiftExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[30]})
-var sAutoshiftInResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoshiftInResource, Members: &mAutoshiftInResource, Type: smithy.ShapeTypeStructure, Ext: &ext[33]})
-var sAutoshiftObserverNotificationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoshiftObserverNotificationStatus, Members: &mAutoshiftObserverNotificationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[37]})
-var s_AutoshiftsInResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutoshiftsInResource, Members: &m_AutoshiftsInResource, Type: smithy.ShapeTypeList, Ext: &ext[40]})
-var s_AutoshiftSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutoshiftSummaries, Members: &m_AutoshiftSummaries, Type: smithy.ShapeTypeList, Ext: &ext[42]})
-var sAutoshiftSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoshiftSummary, Members: &mAutoshiftSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[44]})
-var s_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[49]})
-var s_AvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZones, Members: &m_AvailabilityZones, Type: smithy.ShapeTypeList, Ext: &ext[50]})
-var s_BlockedDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockedDate, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var s_BlockedDates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockedDates, Members: &m_BlockedDates, Type: smithy.ShapeTypeList, Ext: &ext[53]})
-var s_BlockedWindow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockedWindow, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var s_BlockedWindows = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockedWindows, Members: &m_BlockedWindows, Type: smithy.ShapeTypeList, Ext: &ext[56]})
-var s_BlockingAlarms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockingAlarms, Members: &m_BlockingAlarms, Type: smithy.ShapeTypeList, Ext: &ext[58]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &ext[60]})
-var sConflictExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictExceptionReason, Members: &mConflictExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[64]})
-var sControlCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlCondition, Members: &mControlCondition, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
-var sControlConditionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlConditionType, Members: &mControlConditionType, Type: smithy.ShapeTypeEnum, Ext: &ext[80]})
-var s_ExpiresIn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpiresIn, Type: smithy.ShapeTypeString, Ext: &ext[82]})
-var s_ExpiryTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpiryTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[83]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &ext[84]})
-var s_ManagedResourceSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedResourceSummaries, Members: &m_ManagedResourceSummaries, Type: smithy.ShapeTypeList, Ext: &ext[86]})
-var sManagedResourceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedResourceSummary, Members: &mManagedResourceSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[88]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[97]})
-var s_MetricIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[98]})
-var s_OutcomeAlarms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutcomeAlarms, Members: &m_OutcomeAlarms, Type: smithy.ShapeTypeList, Ext: &ext[99]})
-var sPracticeRunConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPracticeRunConfiguration, Members: &mPracticeRunConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[101]})
-var sPracticeRunOutcome = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPracticeRunOutcome, Members: &mPracticeRunOutcome, Type: smithy.ShapeTypeEnum, Ext: &ext[107]})
-var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[113]})
-var s_ResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[114]})
-var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[115]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &ext[116]})
-var sShiftType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShiftType, Members: &mShiftType, Type: smithy.ShapeTypeEnum, Ext: &ext[118]})
-var s_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[123]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &ext[124]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[129]})
-var s_Weight = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Weight, Type: smithy.ShapeTypeFloat, Ext: &ext[145]})
-var sZonalAutoshiftStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iZonalAutoshiftStatus, Members: &mZonalAutoshiftStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[146]})
-var s_ZonalShiftComment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ZonalShiftComment, Type: smithy.ShapeTypeString, Ext: &ext[149]})
-var s_ZonalShiftId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ZonalShiftId, Type: smithy.ShapeTypeString, Ext: &ext[150]})
-var sZonalShiftInResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iZonalShiftInResource, Members: &mZonalShiftInResource, Type: smithy.ShapeTypeStructure, Ext: &ext[151]})
-var s_ZonalShiftsInResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ZonalShiftsInResource, Members: &m_ZonalShiftsInResource, Type: smithy.ShapeTypeList, Ext: &ext[161]})
-var sZonalShiftStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iZonalShiftStatus, Members: &mZonalShiftStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[163]})
-var s_ZonalShiftSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ZonalShiftSummaries, Members: &m_ZonalShiftSummaries, Type: smithy.ShapeTypeList, Ext: &ext[167]})
-var sZonalShiftSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iZonalShiftSummary, Members: &mZonalShiftSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[169]})
-var sCancelPracticeRunRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelPracticeRunRequest, Members: &mCancelPracticeRunRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[179]})
-var sCancelPracticeRunResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelPracticeRunResponse, Members: &mCancelPracticeRunResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[181]})
-var sCancelZonalShiftRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelZonalShiftRequest, Members: &mCancelZonalShiftRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[189]})
-var sZonalShift = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iZonalShift, Members: &mZonalShift, Type: smithy.ShapeTypeStructure, Ext: &ext[191]})
-var sCreatePracticeRunConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePracticeRunConfigurationRequest, Members: &mCreatePracticeRunConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[199]})
-var sCreatePracticeRunConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePracticeRunConfigurationResponse, Members: &mCreatePracticeRunConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[206]})
-var sDeletePracticeRunConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePracticeRunConfigurationRequest, Members: &mDeletePracticeRunConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[211]})
-var sDeletePracticeRunConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePracticeRunConfigurationResponse, Members: &mDeletePracticeRunConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[213]})
-var sGetAutoshiftObserverNotificationStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAutoshiftObserverNotificationStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[217]})
-var sGetAutoshiftObserverNotificationStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAutoshiftObserverNotificationStatusResponse, Members: &mGetAutoshiftObserverNotificationStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[218]})
-var sGetManagedResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetManagedResourceRequest, Members: &mGetManagedResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[220]})
-var sGetManagedResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetManagedResourceResponse, Members: &mGetManagedResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[222]})
-var sListAutoshiftsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutoshiftsRequest, Members: &mListAutoshiftsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[230]})
-var sListAutoshiftsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutoshiftsResponse, Members: &mListAutoshiftsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[234]})
-var sListManagedResourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedResourcesRequest, Members: &mListManagedResourcesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[237]})
-var sListManagedResourcesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedResourcesResponse, Members: &mListManagedResourcesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[240]})
-var sListZonalShiftsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListZonalShiftsRequest, Members: &mListZonalShiftsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[243]})
-var sListZonalShiftsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListZonalShiftsResponse, Members: &mListZonalShiftsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[248]})
-var sStartPracticeRunRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPracticeRunRequest, Members: &mStartPracticeRunRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[251]})
-var sStartPracticeRunResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPracticeRunResponse, Members: &mStartPracticeRunResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[255]})
-var sStartZonalShiftRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartZonalShiftRequest, Members: &mStartZonalShiftRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[263]})
-var sUpdateAutoshiftObserverNotificationStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAutoshiftObserverNotificationStatusRequest, Members: &mUpdateAutoshiftObserverNotificationStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[268]})
-var sUpdateAutoshiftObserverNotificationStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAutoshiftObserverNotificationStatusResponse, Members: &mUpdateAutoshiftObserverNotificationStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[270]})
-var sUpdatePracticeRunConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePracticeRunConfigurationRequest, Members: &mUpdatePracticeRunConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[272]})
-var sUpdatePracticeRunConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePracticeRunConfigurationResponse, Members: &mUpdatePracticeRunConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[279]})
-var sUpdateZonalAutoshiftConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateZonalAutoshiftConfigurationRequest, Members: &mUpdateZonalAutoshiftConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[284]})
-var sUpdateZonalAutoshiftConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateZonalAutoshiftConfigurationResponse, Members: &mUpdateZonalAutoshiftConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[287]})
-var sUpdateZonalShiftRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateZonalShiftRequest, Members: &mUpdateZonalShiftRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[290]})
+var sCancelPracticeRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelPracticeRun, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCancelPracticeRun})
+var sCancelZonalShift = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelZonalShift, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCancelZonalShift})
+var sCreatePracticeRunConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePracticeRunConfiguration, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreatePracticeRunConfiguration})
+var sDeletePracticeRunConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePracticeRunConfiguration, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDeletePracticeRunConfiguration})
+var sGetAutoshiftObserverNotificationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAutoshiftObserverNotificationStatus, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eGetAutoshiftObserverNotificationStatus})
+var sGetManagedResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetManagedResource, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eGetManagedResource})
+var sListAutoshifts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutoshifts, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eListAutoshifts})
+var sListManagedResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedResources, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eListManagedResources})
+var sListZonalShifts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListZonalShifts, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eListZonalShifts})
+var sStartPracticeRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPracticeRun, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eStartPracticeRun})
+var sStartZonalShift = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartZonalShift, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eStartZonalShift})
+var sUpdateAutoshiftObserverNotificationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAutoshiftObserverNotificationStatus, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eUpdateAutoshiftObserverNotificationStatus})
+var sUpdatePracticeRunConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePracticeRunConfiguration, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eUpdatePracticeRunConfiguration})
+var sUpdateZonalAutoshiftConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateZonalAutoshiftConfiguration, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eUpdateZonalAutoshiftConfiguration})
+var sUpdateZonalShift = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateZonalShift, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eUpdateZonalShift})
+var s_PercDataPlane = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PercDataPlane, Type: smithy.ShapeTypeService, Ext: &e_PercDataPlane})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var s_AllowedWindow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AllowedWindow, Type: smithy.ShapeTypeString, Ext: &e_AllowedWindow})
+var s_AllowedWindows = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AllowedWindows, Members: &m_AllowedWindows, Type: smithy.ShapeTypeList, Ext: &e_AllowedWindows})
+var sAppliedStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppliedStatus, Members: &mAppliedStatus, Type: smithy.ShapeTypeEnum, Ext: &eAppliedStatus})
+var s_AppliedWeights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppliedWeights, Members: &m_AppliedWeights, Type: smithy.ShapeTypeMap, Ext: &e_AppliedWeights})
+var sAutoshiftAppliedStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoshiftAppliedStatus, Members: &mAutoshiftAppliedStatus, Type: smithy.ShapeTypeEnum, Ext: &eAutoshiftAppliedStatus})
+var sAutoshiftExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoshiftExecutionStatus, Members: &mAutoshiftExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &eAutoshiftExecutionStatus})
+var sAutoshiftInResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoshiftInResource, Members: &mAutoshiftInResource, Type: smithy.ShapeTypeStructure, Ext: &eAutoshiftInResource})
+var sAutoshiftObserverNotificationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoshiftObserverNotificationStatus, Members: &mAutoshiftObserverNotificationStatus, Type: smithy.ShapeTypeEnum, Ext: &eAutoshiftObserverNotificationStatus})
+var s_AutoshiftsInResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutoshiftsInResource, Members: &m_AutoshiftsInResource, Type: smithy.ShapeTypeList, Ext: &e_AutoshiftsInResource})
+var s_AutoshiftSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutoshiftSummaries, Members: &m_AutoshiftSummaries, Type: smithy.ShapeTypeList, Ext: &e_AutoshiftSummaries})
+var sAutoshiftSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoshiftSummary, Members: &mAutoshiftSummary, Type: smithy.ShapeTypeStructure, Ext: &eAutoshiftSummary})
+var s_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &e_AvailabilityZone})
+var s_AvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZones, Members: &m_AvailabilityZones, Type: smithy.ShapeTypeList, Ext: &e_AvailabilityZones})
+var s_BlockedDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockedDate, Type: smithy.ShapeTypeString, Ext: &e_BlockedDate})
+var s_BlockedDates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockedDates, Members: &m_BlockedDates, Type: smithy.ShapeTypeList, Ext: &e_BlockedDates})
+var s_BlockedWindow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockedWindow, Type: smithy.ShapeTypeString, Ext: &e_BlockedWindow})
+var s_BlockedWindows = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockedWindows, Members: &m_BlockedWindows, Type: smithy.ShapeTypeList, Ext: &e_BlockedWindows})
+var s_BlockingAlarms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockingAlarms, Members: &m_BlockingAlarms, Type: smithy.ShapeTypeList, Ext: &e_BlockingAlarms})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictExceptionReason, Members: &mConflictExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eConflictExceptionReason})
+var sControlCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlCondition, Members: &mControlCondition, Type: smithy.ShapeTypeStructure, Ext: &eControlCondition})
+var sControlConditionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlConditionType, Members: &mControlConditionType, Type: smithy.ShapeTypeEnum, Ext: &eControlConditionType})
+var s_ExpiresIn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpiresIn, Type: smithy.ShapeTypeString, Ext: &e_ExpiresIn})
+var s_ExpiryTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpiryTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_ExpiryTime})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var s_ManagedResourceSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedResourceSummaries, Members: &m_ManagedResourceSummaries, Type: smithy.ShapeTypeList, Ext: &e_ManagedResourceSummaries})
+var sManagedResourceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedResourceSummary, Members: &mManagedResourceSummary, Type: smithy.ShapeTypeStructure, Ext: &eManagedResourceSummary})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_MetricIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricIdentifier, Type: smithy.ShapeTypeString, Ext: &e_MetricIdentifier})
+var s_OutcomeAlarms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutcomeAlarms, Members: &m_OutcomeAlarms, Type: smithy.ShapeTypeList, Ext: &e_OutcomeAlarms})
+var sPracticeRunConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPracticeRunConfiguration, Members: &mPracticeRunConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePracticeRunConfiguration})
+var sPracticeRunOutcome = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPracticeRunOutcome, Members: &mPracticeRunOutcome, Type: smithy.ShapeTypeEnum, Ext: &ePracticeRunOutcome})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArn})
+var s_ResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &e_ResourceIdentifier})
+var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &e_ResourceName})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sShiftType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShiftType, Members: &mShiftType, Type: smithy.ShapeTypeEnum, Ext: &eShiftType})
+var s_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_StartTime})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
+var s_Weight = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Weight, Type: smithy.ShapeTypeFloat, Ext: &e_Weight})
+var sZonalAutoshiftStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iZonalAutoshiftStatus, Members: &mZonalAutoshiftStatus, Type: smithy.ShapeTypeEnum, Ext: &eZonalAutoshiftStatus})
+var s_ZonalShiftComment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ZonalShiftComment, Type: smithy.ShapeTypeString, Ext: &e_ZonalShiftComment})
+var s_ZonalShiftId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ZonalShiftId, Type: smithy.ShapeTypeString, Ext: &e_ZonalShiftId})
+var sZonalShiftInResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iZonalShiftInResource, Members: &mZonalShiftInResource, Type: smithy.ShapeTypeStructure, Ext: &eZonalShiftInResource})
+var s_ZonalShiftsInResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ZonalShiftsInResource, Members: &m_ZonalShiftsInResource, Type: smithy.ShapeTypeList, Ext: &e_ZonalShiftsInResource})
+var sZonalShiftStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iZonalShiftStatus, Members: &mZonalShiftStatus, Type: smithy.ShapeTypeEnum, Ext: &eZonalShiftStatus})
+var s_ZonalShiftSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ZonalShiftSummaries, Members: &m_ZonalShiftSummaries, Type: smithy.ShapeTypeList, Ext: &e_ZonalShiftSummaries})
+var sZonalShiftSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iZonalShiftSummary, Members: &mZonalShiftSummary, Type: smithy.ShapeTypeStructure, Ext: &eZonalShiftSummary})
+var sCancelPracticeRunRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelPracticeRunRequest, Members: &mCancelPracticeRunRequest, Type: smithy.ShapeTypeStructure, Ext: &eCancelPracticeRunRequest})
+var sCancelPracticeRunResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelPracticeRunResponse, Members: &mCancelPracticeRunResponse, Type: smithy.ShapeTypeStructure, Ext: &eCancelPracticeRunResponse})
+var sCancelZonalShiftRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelZonalShiftRequest, Members: &mCancelZonalShiftRequest, Type: smithy.ShapeTypeStructure, Ext: &eCancelZonalShiftRequest})
+var sZonalShift = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iZonalShift, Members: &mZonalShift, Type: smithy.ShapeTypeStructure, Ext: &eZonalShift})
+var sCreatePracticeRunConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePracticeRunConfigurationRequest, Members: &mCreatePracticeRunConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreatePracticeRunConfigurationRequest})
+var sCreatePracticeRunConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePracticeRunConfigurationResponse, Members: &mCreatePracticeRunConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreatePracticeRunConfigurationResponse})
+var sDeletePracticeRunConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePracticeRunConfigurationRequest, Members: &mDeletePracticeRunConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeletePracticeRunConfigurationRequest})
+var sDeletePracticeRunConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePracticeRunConfigurationResponse, Members: &mDeletePracticeRunConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeletePracticeRunConfigurationResponse})
+var sGetAutoshiftObserverNotificationStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAutoshiftObserverNotificationStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAutoshiftObserverNotificationStatusRequest})
+var sGetAutoshiftObserverNotificationStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAutoshiftObserverNotificationStatusResponse, Members: &mGetAutoshiftObserverNotificationStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAutoshiftObserverNotificationStatusResponse})
+var sGetManagedResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetManagedResourceRequest, Members: &mGetManagedResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetManagedResourceRequest})
+var sGetManagedResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetManagedResourceResponse, Members: &mGetManagedResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetManagedResourceResponse})
+var sListAutoshiftsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutoshiftsRequest, Members: &mListAutoshiftsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAutoshiftsRequest})
+var sListAutoshiftsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutoshiftsResponse, Members: &mListAutoshiftsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAutoshiftsResponse})
+var sListManagedResourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedResourcesRequest, Members: &mListManagedResourcesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListManagedResourcesRequest})
+var sListManagedResourcesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedResourcesResponse, Members: &mListManagedResourcesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListManagedResourcesResponse})
+var sListZonalShiftsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListZonalShiftsRequest, Members: &mListZonalShiftsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListZonalShiftsRequest})
+var sListZonalShiftsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListZonalShiftsResponse, Members: &mListZonalShiftsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListZonalShiftsResponse})
+var sStartPracticeRunRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPracticeRunRequest, Members: &mStartPracticeRunRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartPracticeRunRequest})
+var sStartPracticeRunResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPracticeRunResponse, Members: &mStartPracticeRunResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartPracticeRunResponse})
+var sStartZonalShiftRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartZonalShiftRequest, Members: &mStartZonalShiftRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartZonalShiftRequest})
+var sUpdateAutoshiftObserverNotificationStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAutoshiftObserverNotificationStatusRequest, Members: &mUpdateAutoshiftObserverNotificationStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAutoshiftObserverNotificationStatusRequest})
+var sUpdateAutoshiftObserverNotificationStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAutoshiftObserverNotificationStatusResponse, Members: &mUpdateAutoshiftObserverNotificationStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAutoshiftObserverNotificationStatusResponse})
+var sUpdatePracticeRunConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePracticeRunConfigurationRequest, Members: &mUpdatePracticeRunConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePracticeRunConfigurationRequest})
+var sUpdatePracticeRunConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePracticeRunConfigurationResponse, Members: &mUpdatePracticeRunConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePracticeRunConfigurationResponse})
+var sUpdateZonalAutoshiftConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateZonalAutoshiftConfigurationRequest, Members: &mUpdateZonalAutoshiftConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateZonalAutoshiftConfigurationRequest})
+var sUpdateZonalAutoshiftConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateZonalAutoshiftConfigurationResponse, Members: &mUpdateZonalAutoshiftConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateZonalAutoshiftConfigurationResponse})
+var sUpdateZonalShiftRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateZonalShiftRequest, Members: &mUpdateZonalShiftRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateZonalShiftRequest})
 
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[17]})
-var s_AllowedWindows_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AllowedWindow, Type: smithy.ShapeTypeString, Ext: &ext[20]})
-var sAppliedStatus_APPLIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPLIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[22]})
-var sAppliedStatus_NOT_APPLIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_APPLIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[23]})
-var s_AppliedWeights_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[25]})
-var s_AppliedWeights_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_Weight, Type: smithy.ShapeTypeFloat, Ext: &ext[26]})
-var sAutoshiftAppliedStatus_APPLIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPLIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
-var sAutoshiftAppliedStatus_NOT_APPLIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_APPLIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[29]})
-var sAutoshiftExecutionStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[31]})
-var sAutoshiftExecutionStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[32]})
-var sAutoshiftInResource_appliedStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appliedStatus", ID: &iAutoshiftAppliedStatus, Members: &mAutoshiftAppliedStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[34]})
-var sAutoshiftInResource_awayFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awayFrom", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var sAutoshiftInResource_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[36]})
-var sAutoshiftObserverNotificationStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[38]})
-var sAutoshiftObserverNotificationStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[39]})
-var s_AutoshiftsInResource_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAutoshiftInResource, Members: &mAutoshiftInResource, Type: smithy.ShapeTypeStructure, Ext: &ext[41]})
-var s_AutoshiftSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAutoshiftSummary, Members: &mAutoshiftSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[43]})
-var sAutoshiftSummary_awayFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awayFrom", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var sAutoshiftSummary_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_ExpiryTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[46]})
-var sAutoshiftSummary_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[47]})
-var sAutoshiftSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAutoshiftExecutionStatus, Members: &mAutoshiftExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[48]})
-var s_AvailabilityZones_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[51]})
-var s_BlockedDates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BlockedDate, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var s_BlockedWindows_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BlockedWindow, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var s_BlockingAlarms_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iControlCondition, Members: &mControlCondition, Type: smithy.ShapeTypeStructure, Ext: &ext[59]})
-var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[61]})
-var sConflictException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iConflictExceptionReason, Members: &mConflictExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[62]})
-var sConflictException_zonalShiftId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalShiftId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[63]})
-var sConflictExceptionReason_ZONAL_SHIFT_ALREADY_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZONAL_SHIFT_ALREADY_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[65]})
-var sConflictExceptionReason_ZONAL_SHIFT_STATUS_NOT_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZONAL_SHIFT_STATUS_NOT_ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[66]})
-var sConflictExceptionReason_SIMULTANEOUS_ZONAL_SHIFTS_CONFLICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIMULTANEOUS_ZONAL_SHIFTS_CONFLICT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[67]})
-var sConflictExceptionReason_PRACTICE_CONFIGURATION_ALREADY_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRACTICE_CONFIGURATION_ALREADY_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var sConflictExceptionReason_AUTOSHIFT_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTOSHIFT_ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[69]})
-var sConflictExceptionReason_PRACTICE_CONFIGURATION_DOES_NOT_EXIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRACTICE_CONFIGURATION_DOES_NOT_EXIST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[70]})
-var sConflictExceptionReason_ZONAL_AUTOSHIFT_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZONAL_AUTOSHIFT_ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[71]})
-var sConflictExceptionReason_PRACTICE_OUTCOME_ALARMS_RED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRACTICE_OUTCOME_ALARMS_RED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sConflictExceptionReason_PRACTICE_BLOCKING_ALARMS_RED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRACTICE_BLOCKING_ALARMS_RED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[73]})
-var sConflictExceptionReason_PRACTICE_IN_BLOCKED_DATES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRACTICE_IN_BLOCKED_DATES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var sConflictExceptionReason_PRACTICE_IN_BLOCKED_WINDOWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRACTICE_IN_BLOCKED_WINDOWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[75]})
-var sConflictExceptionReason_PRACTICE_OUTSIDE_ALLOWED_WINDOWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRACTICE_OUTSIDE_ALLOWED_WINDOWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[76]})
-var sControlCondition_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iControlConditionType, Members: &mControlConditionType, Type: smithy.ShapeTypeEnum, Ext: &ext[78]})
-var sControlCondition_alarmIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "alarmIdentifier", ID: &i_MetricIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[79]})
-var sControlConditionType_CLOUDWATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOUDWATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[81]})
-var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[85]})
-var s_ManagedResourceSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iManagedResourceSummary, Members: &mManagedResourceSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[87]})
-var sManagedResourceSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[89]})
-var sManagedResourceSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[90]})
-var sManagedResourceSummary_availabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "availabilityZones", ID: &i_AvailabilityZones, Members: &m_AvailabilityZones, Type: smithy.ShapeTypeList, Ext: &ext[91]})
-var sManagedResourceSummary_appliedWeights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appliedWeights", ID: &i_AppliedWeights, Members: &m_AppliedWeights, Type: smithy.ShapeTypeMap, Ext: &ext[92]})
-var sManagedResourceSummary_zonalShifts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalShifts", ID: &i_ZonalShiftsInResource, Members: &m_ZonalShiftsInResource, Type: smithy.ShapeTypeList, Ext: &ext[93]})
-var sManagedResourceSummary_autoshifts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoshifts", ID: &i_AutoshiftsInResource, Members: &m_AutoshiftsInResource, Type: smithy.ShapeTypeList, Ext: &ext[94]})
-var sManagedResourceSummary_zonalAutoshiftStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalAutoshiftStatus", ID: &iZonalAutoshiftStatus, Members: &mZonalAutoshiftStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[95]})
-var sManagedResourceSummary_practiceRunStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "practiceRunStatus", ID: &iZonalAutoshiftStatus, Members: &mZonalAutoshiftStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[96]})
-var s_OutcomeAlarms_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iControlCondition, Members: &mControlCondition, Type: smithy.ShapeTypeStructure, Ext: &ext[100]})
-var sPracticeRunConfiguration_blockingAlarms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockingAlarms", ID: &i_BlockingAlarms, Members: &m_BlockingAlarms, Type: smithy.ShapeTypeList, Ext: &ext[102]})
-var sPracticeRunConfiguration_outcomeAlarms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outcomeAlarms", ID: &i_OutcomeAlarms, Members: &m_OutcomeAlarms, Type: smithy.ShapeTypeList, Ext: &ext[103]})
-var sPracticeRunConfiguration_blockedWindows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockedWindows", ID: &i_BlockedWindows, Members: &m_BlockedWindows, Type: smithy.ShapeTypeList, Ext: &ext[104]})
-var sPracticeRunConfiguration_allowedWindows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedWindows", ID: &i_AllowedWindows, Members: &m_AllowedWindows, Type: smithy.ShapeTypeList, Ext: &ext[105]})
-var sPracticeRunConfiguration_blockedDates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockedDates", ID: &i_BlockedDates, Members: &m_BlockedDates, Type: smithy.ShapeTypeList, Ext: &ext[106]})
-var sPracticeRunOutcome_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[108]})
-var sPracticeRunOutcome_INTERRUPTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERRUPTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[109]})
-var sPracticeRunOutcome_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[110]})
-var sPracticeRunOutcome_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[111]})
-var sPracticeRunOutcome_CAPACITY_CHECK_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CAPACITY_CHECK_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[112]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[117]})
-var sShiftType_ZONAL_SHIFT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZONAL_SHIFT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[119]})
-var sShiftType_PRACTICE_RUN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRACTICE_RUN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var sShiftType_FIS_EXPERIMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIS_EXPERIMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[121]})
-var sShiftType_ZONAL_AUTOSHIFT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZONAL_AUTOSHIFT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[122]})
-var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[125]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[127]})
-var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[128]})
-var sValidationExceptionReason_INVALID_EXPIRES_IN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_EXPIRES_IN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[130]})
-var sValidationExceptionReason_INVALID_STATUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_STATUS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[131]})
-var sValidationExceptionReason_MISSING_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[132]})
-var sValidationExceptionReason_INVALID_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[133]})
-var sValidationExceptionReason_INVALID_RESOURCE_IDENTIFIER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_RESOURCE_IDENTIFIER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[134]})
-var sValidationExceptionReason_INVALID_AZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_AZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[135]})
-var sValidationExceptionReason_UNSUPPORTED_AZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNSUPPORTED_AZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[136]})
-var sValidationExceptionReason_INVALID_ALARM_CONDITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ALARM_CONDITION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[137]})
-var sValidationExceptionReason_INVALID_CONDITION_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_CONDITION_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[138]})
-var sValidationExceptionReason_INVALID_PRACTICE_BLOCKER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_PRACTICE_BLOCKER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[139]})
-var sValidationExceptionReason_FIS_EXPERIMENT_UPDATE_NOT_ALLOWED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIS_EXPERIMENT_UPDATE_NOT_ALLOWED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[140]})
-var sValidationExceptionReason_AUTOSHIFT_UPDATE_NOT_ALLOWED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTOSHIFT_UPDATE_NOT_ALLOWED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[141]})
-var sValidationExceptionReason_UNSUPPORTED_PRACTICE_CANCEL_SHIFT_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNSUPPORTED_PRACTICE_CANCEL_SHIFT_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[142]})
-var sValidationExceptionReason_INVALID_PRACTICE_ALLOWED_WINDOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_PRACTICE_ALLOWED_WINDOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[143]})
-var sValidationExceptionReason_CONFLICTING_PRACTICE_WINDOWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFLICTING_PRACTICE_WINDOWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[144]})
-var sZonalAutoshiftStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[147]})
-var sZonalAutoshiftStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[148]})
-var sZonalShiftInResource_appliedStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appliedStatus", ID: &iAppliedStatus, Members: &mAppliedStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[152]})
-var sZonalShiftInResource_zonalShiftId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalShiftId", ID: &i_ZonalShiftId, Type: smithy.ShapeTypeString, Ext: &ext[153]})
-var sZonalShiftInResource_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[154]})
-var sZonalShiftInResource_awayFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awayFrom", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[155]})
-var sZonalShiftInResource_expiryTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiryTime", ID: &i_ExpiryTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[156]})
-var sZonalShiftInResource_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[157]})
-var sZonalShiftInResource_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_ZonalShiftComment, Type: smithy.ShapeTypeString, Ext: &ext[158]})
-var sZonalShiftInResource_shiftType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shiftType", ID: &iShiftType, Members: &mShiftType, Type: smithy.ShapeTypeEnum, Ext: &ext[159]})
-var sZonalShiftInResource_practiceRunOutcome = smithy.NewStaticSchema(smithy.StaticSchema{Member: "practiceRunOutcome", ID: &iPracticeRunOutcome, Members: &mPracticeRunOutcome, Type: smithy.ShapeTypeEnum, Ext: &ext[160]})
-var s_ZonalShiftsInResource_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iZonalShiftInResource, Members: &mZonalShiftInResource, Type: smithy.ShapeTypeStructure, Ext: &ext[162]})
-var sZonalShiftStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[164]})
-var sZonalShiftStatus_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[165]})
-var sZonalShiftStatus_CANCELED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[166]})
-var s_ZonalShiftSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iZonalShiftSummary, Members: &mZonalShiftSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[168]})
-var sZonalShiftSummary_zonalShiftId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalShiftId", ID: &i_ZonalShiftId, Type: smithy.ShapeTypeString, Ext: &ext[170]})
-var sZonalShiftSummary_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[171]})
-var sZonalShiftSummary_awayFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awayFrom", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[172]})
-var sZonalShiftSummary_expiryTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiryTime", ID: &i_ExpiryTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[173]})
-var sZonalShiftSummary_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[174]})
-var sZonalShiftSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iZonalShiftStatus, Members: &mZonalShiftStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[175]})
-var sZonalShiftSummary_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_ZonalShiftComment, Type: smithy.ShapeTypeString, Ext: &ext[176]})
-var sZonalShiftSummary_shiftType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shiftType", ID: &iShiftType, Members: &mShiftType, Type: smithy.ShapeTypeEnum, Ext: &ext[177]})
-var sZonalShiftSummary_practiceRunOutcome = smithy.NewStaticSchema(smithy.StaticSchema{Member: "practiceRunOutcome", ID: &iPracticeRunOutcome, Members: &mPracticeRunOutcome, Type: smithy.ShapeTypeEnum, Ext: &ext[178]})
-var sCancelPracticeRunRequest_zonalShiftId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalShiftId", ID: &i_ZonalShiftId, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[180]})
-var sCancelPracticeRunResponse_zonalShiftId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalShiftId", ID: &i_ZonalShiftId, Type: smithy.ShapeTypeString, Ext: &ext[182]})
-var sCancelPracticeRunResponse_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[183]})
-var sCancelPracticeRunResponse_awayFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awayFrom", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[184]})
-var sCancelPracticeRunResponse_expiryTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiryTime", ID: &i_ExpiryTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[185]})
-var sCancelPracticeRunResponse_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[186]})
-var sCancelPracticeRunResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iZonalShiftStatus, Members: &mZonalShiftStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[187]})
-var sCancelPracticeRunResponse_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_ZonalShiftComment, Type: smithy.ShapeTypeString, Ext: &ext[188]})
-var sCancelZonalShiftRequest_zonalShiftId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalShiftId", ID: &i_ZonalShiftId, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[190]})
-var sZonalShift_zonalShiftId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalShiftId", ID: &i_ZonalShiftId, Type: smithy.ShapeTypeString, Ext: &ext[192]})
-var sZonalShift_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[193]})
-var sZonalShift_awayFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awayFrom", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[194]})
-var sZonalShift_expiryTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiryTime", ID: &i_ExpiryTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[195]})
-var sZonalShift_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[196]})
-var sZonalShift_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iZonalShiftStatus, Members: &mZonalShiftStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[197]})
-var sZonalShift_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_ZonalShiftComment, Type: smithy.ShapeTypeString, Ext: &ext[198]})
-var sCreatePracticeRunConfigurationRequest_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[200]})
-var sCreatePracticeRunConfigurationRequest_blockedWindows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockedWindows", ID: &i_BlockedWindows, Members: &m_BlockedWindows, Type: smithy.ShapeTypeList, Ext: &ext[201]})
-var sCreatePracticeRunConfigurationRequest_blockedDates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockedDates", ID: &i_BlockedDates, Members: &m_BlockedDates, Type: smithy.ShapeTypeList, Ext: &ext[202]})
-var sCreatePracticeRunConfigurationRequest_blockingAlarms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockingAlarms", ID: &i_BlockingAlarms, Members: &m_BlockingAlarms, Type: smithy.ShapeTypeList, Ext: &ext[203]})
-var sCreatePracticeRunConfigurationRequest_allowedWindows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedWindows", ID: &i_AllowedWindows, Members: &m_AllowedWindows, Type: smithy.ShapeTypeList, Ext: &ext[204]})
-var sCreatePracticeRunConfigurationRequest_outcomeAlarms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outcomeAlarms", ID: &i_OutcomeAlarms, Members: &m_OutcomeAlarms, Type: smithy.ShapeTypeList, Ext: &ext[205]})
-var sCreatePracticeRunConfigurationResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[207]})
-var sCreatePracticeRunConfigurationResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[208]})
-var sCreatePracticeRunConfigurationResponse_zonalAutoshiftStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalAutoshiftStatus", ID: &iZonalAutoshiftStatus, Members: &mZonalAutoshiftStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[209]})
-var sCreatePracticeRunConfigurationResponse_practiceRunConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "practiceRunConfiguration", ID: &iPracticeRunConfiguration, Members: &mPracticeRunConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[210]})
-var sDeletePracticeRunConfigurationRequest_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[212]})
-var sDeletePracticeRunConfigurationResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[214]})
-var sDeletePracticeRunConfigurationResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[215]})
-var sDeletePracticeRunConfigurationResponse_zonalAutoshiftStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalAutoshiftStatus", ID: &iZonalAutoshiftStatus, Members: &mZonalAutoshiftStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[216]})
-var sGetAutoshiftObserverNotificationStatusResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAutoshiftObserverNotificationStatus, Members: &mAutoshiftObserverNotificationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[219]})
-var sGetManagedResourceRequest_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[221]})
-var sGetManagedResourceResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[223]})
-var sGetManagedResourceResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[224]})
-var sGetManagedResourceResponse_appliedWeights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appliedWeights", ID: &i_AppliedWeights, Members: &m_AppliedWeights, Type: smithy.ShapeTypeMap, Ext: &ext[225]})
-var sGetManagedResourceResponse_zonalShifts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalShifts", ID: &i_ZonalShiftsInResource, Members: &m_ZonalShiftsInResource, Type: smithy.ShapeTypeList, Ext: &ext[226]})
-var sGetManagedResourceResponse_autoshifts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoshifts", ID: &i_AutoshiftsInResource, Members: &m_AutoshiftsInResource, Type: smithy.ShapeTypeList, Ext: &ext[227]})
-var sGetManagedResourceResponse_practiceRunConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "practiceRunConfiguration", ID: &iPracticeRunConfiguration, Members: &mPracticeRunConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[228]})
-var sGetManagedResourceResponse_zonalAutoshiftStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalAutoshiftStatus", ID: &iZonalAutoshiftStatus, Members: &mZonalAutoshiftStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[229]})
-var sListAutoshiftsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[231]})
-var sListAutoshiftsRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAutoshiftExecutionStatus, Members: &mAutoshiftExecutionStatus, Traits: &t23, Type: smithy.ShapeTypeEnum, Ext: &ext[232]})
-var sListAutoshiftsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t24, Type: smithy.ShapeTypeInteger, Ext: &ext[233]})
-var sListAutoshiftsResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_AutoshiftSummaries, Members: &m_AutoshiftSummaries, Type: smithy.ShapeTypeList, Ext: &ext[235]})
-var sListAutoshiftsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[236]})
-var sListManagedResourcesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[238]})
-var sListManagedResourcesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t24, Type: smithy.ShapeTypeInteger, Ext: &ext[239]})
-var sListManagedResourcesResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_ManagedResourceSummaries, Members: &m_ManagedResourceSummaries, Type: smithy.ShapeTypeList, Ext: &ext[241]})
-var sListManagedResourcesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[242]})
-var sListZonalShiftsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[244]})
-var sListZonalShiftsRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iZonalShiftStatus, Members: &mZonalShiftStatus, Traits: &t23, Type: smithy.ShapeTypeEnum, Ext: &ext[245]})
-var sListZonalShiftsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t24, Type: smithy.ShapeTypeInteger, Ext: &ext[246]})
-var sListZonalShiftsRequest_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &ext[247]})
-var sListZonalShiftsResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_ZonalShiftSummaries, Members: &m_ZonalShiftSummaries, Type: smithy.ShapeTypeList, Ext: &ext[249]})
-var sListZonalShiftsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[250]})
-var sStartPracticeRunRequest_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[252]})
-var sStartPracticeRunRequest_awayFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awayFrom", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[253]})
-var sStartPracticeRunRequest_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_ZonalShiftComment, Type: smithy.ShapeTypeString, Ext: &ext[254]})
-var sStartPracticeRunResponse_zonalShiftId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalShiftId", ID: &i_ZonalShiftId, Type: smithy.ShapeTypeString, Ext: &ext[256]})
-var sStartPracticeRunResponse_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[257]})
-var sStartPracticeRunResponse_awayFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awayFrom", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[258]})
-var sStartPracticeRunResponse_expiryTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiryTime", ID: &i_ExpiryTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[259]})
-var sStartPracticeRunResponse_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[260]})
-var sStartPracticeRunResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iZonalShiftStatus, Members: &mZonalShiftStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[261]})
-var sStartPracticeRunResponse_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_ZonalShiftComment, Type: smithy.ShapeTypeString, Ext: &ext[262]})
-var sStartZonalShiftRequest_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[264]})
-var sStartZonalShiftRequest_awayFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awayFrom", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[265]})
-var sStartZonalShiftRequest_expiresIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiresIn", ID: &i_ExpiresIn, Type: smithy.ShapeTypeString, Ext: &ext[266]})
-var sStartZonalShiftRequest_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_ZonalShiftComment, Type: smithy.ShapeTypeString, Ext: &ext[267]})
-var sUpdateAutoshiftObserverNotificationStatusRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAutoshiftObserverNotificationStatus, Members: &mAutoshiftObserverNotificationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[269]})
-var sUpdateAutoshiftObserverNotificationStatusResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAutoshiftObserverNotificationStatus, Members: &mAutoshiftObserverNotificationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[271]})
-var sUpdatePracticeRunConfigurationRequest_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[273]})
-var sUpdatePracticeRunConfigurationRequest_blockedWindows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockedWindows", ID: &i_BlockedWindows, Members: &m_BlockedWindows, Type: smithy.ShapeTypeList, Ext: &ext[274]})
-var sUpdatePracticeRunConfigurationRequest_blockedDates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockedDates", ID: &i_BlockedDates, Members: &m_BlockedDates, Type: smithy.ShapeTypeList, Ext: &ext[275]})
-var sUpdatePracticeRunConfigurationRequest_blockingAlarms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockingAlarms", ID: &i_BlockingAlarms, Members: &m_BlockingAlarms, Type: smithy.ShapeTypeList, Ext: &ext[276]})
-var sUpdatePracticeRunConfigurationRequest_allowedWindows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedWindows", ID: &i_AllowedWindows, Members: &m_AllowedWindows, Type: smithy.ShapeTypeList, Ext: &ext[277]})
-var sUpdatePracticeRunConfigurationRequest_outcomeAlarms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outcomeAlarms", ID: &i_OutcomeAlarms, Members: &m_OutcomeAlarms, Type: smithy.ShapeTypeList, Ext: &ext[278]})
-var sUpdatePracticeRunConfigurationResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[280]})
-var sUpdatePracticeRunConfigurationResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[281]})
-var sUpdatePracticeRunConfigurationResponse_zonalAutoshiftStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalAutoshiftStatus", ID: &iZonalAutoshiftStatus, Members: &mZonalAutoshiftStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[282]})
-var sUpdatePracticeRunConfigurationResponse_practiceRunConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "practiceRunConfiguration", ID: &iPracticeRunConfiguration, Members: &mPracticeRunConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[283]})
-var sUpdateZonalAutoshiftConfigurationRequest_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[285]})
-var sUpdateZonalAutoshiftConfigurationRequest_zonalAutoshiftStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalAutoshiftStatus", ID: &iZonalAutoshiftStatus, Members: &mZonalAutoshiftStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[286]})
-var sUpdateZonalAutoshiftConfigurationResponse_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[288]})
-var sUpdateZonalAutoshiftConfigurationResponse_zonalAutoshiftStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalAutoshiftStatus", ID: &iZonalAutoshiftStatus, Members: &mZonalAutoshiftStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[289]})
-var sUpdateZonalShiftRequest_zonalShiftId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalShiftId", ID: &i_ZonalShiftId, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[291]})
-var sUpdateZonalShiftRequest_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_ZonalShiftComment, Type: smithy.ShapeTypeString, Ext: &ext[292]})
-var sUpdateZonalShiftRequest_expiresIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiresIn", ID: &i_ExpiresIn, Type: smithy.ShapeTypeString, Ext: &ext[293]})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var s_AllowedWindows_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AllowedWindow, Type: smithy.ShapeTypeString, Ext: &e_AllowedWindows_member})
+var sAppliedStatus_APPLIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPLIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAppliedStatus_APPLIED})
+var sAppliedStatus_NOT_APPLIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_APPLIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAppliedStatus_NOT_APPLIED})
+var s_AppliedWeights_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &e_AppliedWeights_key})
+var s_AppliedWeights_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_Weight, Type: smithy.ShapeTypeFloat, Ext: &e_AppliedWeights_value})
+var sAutoshiftAppliedStatus_APPLIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPLIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutoshiftAppliedStatus_APPLIED})
+var sAutoshiftAppliedStatus_NOT_APPLIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_APPLIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutoshiftAppliedStatus_NOT_APPLIED})
+var sAutoshiftExecutionStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutoshiftExecutionStatus_ACTIVE})
+var sAutoshiftExecutionStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutoshiftExecutionStatus_COMPLETED})
+var sAutoshiftInResource_appliedStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appliedStatus", ID: &iAutoshiftAppliedStatus, Members: &mAutoshiftAppliedStatus, Type: smithy.ShapeTypeEnum, Ext: &eAutoshiftInResource_appliedStatus})
+var sAutoshiftInResource_awayFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awayFrom", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &eAutoshiftInResource_awayFrom})
+var sAutoshiftInResource_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp, Ext: &eAutoshiftInResource_startTime})
+var sAutoshiftObserverNotificationStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutoshiftObserverNotificationStatus_ENABLED})
+var sAutoshiftObserverNotificationStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutoshiftObserverNotificationStatus_DISABLED})
+var s_AutoshiftsInResource_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAutoshiftInResource, Members: &mAutoshiftInResource, Type: smithy.ShapeTypeStructure, Ext: &e_AutoshiftsInResource_member})
+var s_AutoshiftSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAutoshiftSummary, Members: &mAutoshiftSummary, Type: smithy.ShapeTypeStructure, Ext: &e_AutoshiftSummaries_member})
+var sAutoshiftSummary_awayFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awayFrom", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &eAutoshiftSummary_awayFrom})
+var sAutoshiftSummary_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_ExpiryTime, Type: smithy.ShapeTypeTimestamp, Ext: &eAutoshiftSummary_endTime})
+var sAutoshiftSummary_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp, Ext: &eAutoshiftSummary_startTime})
+var sAutoshiftSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAutoshiftExecutionStatus, Members: &mAutoshiftExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &eAutoshiftSummary_status})
+var s_AvailabilityZones_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &e_AvailabilityZones_member})
+var s_BlockedDates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BlockedDate, Type: smithy.ShapeTypeString, Ext: &e_BlockedDates_member})
+var s_BlockedWindows_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BlockedWindow, Type: smithy.ShapeTypeString, Ext: &e_BlockedWindows_member})
+var s_BlockingAlarms_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iControlCondition, Members: &mControlCondition, Type: smithy.ShapeTypeStructure, Ext: &e_BlockingAlarms_member})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iConflictExceptionReason, Members: &mConflictExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eConflictException_reason})
+var sConflictException_zonalShiftId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalShiftId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_zonalShiftId})
+var sConflictExceptionReason_ZONAL_SHIFT_ALREADY_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZONAL_SHIFT_ALREADY_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictExceptionReason_ZONAL_SHIFT_ALREADY_EXISTS})
+var sConflictExceptionReason_ZONAL_SHIFT_STATUS_NOT_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZONAL_SHIFT_STATUS_NOT_ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictExceptionReason_ZONAL_SHIFT_STATUS_NOT_ACTIVE})
+var sConflictExceptionReason_SIMULTANEOUS_ZONAL_SHIFTS_CONFLICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIMULTANEOUS_ZONAL_SHIFTS_CONFLICT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictExceptionReason_SIMULTANEOUS_ZONAL_SHIFTS_CONFLICT})
+var sConflictExceptionReason_PRACTICE_CONFIGURATION_ALREADY_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRACTICE_CONFIGURATION_ALREADY_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictExceptionReason_PRACTICE_CONFIGURATION_ALREADY_EXISTS})
+var sConflictExceptionReason_AUTOSHIFT_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTOSHIFT_ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictExceptionReason_AUTOSHIFT_ENABLED})
+var sConflictExceptionReason_PRACTICE_CONFIGURATION_DOES_NOT_EXIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRACTICE_CONFIGURATION_DOES_NOT_EXIST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictExceptionReason_PRACTICE_CONFIGURATION_DOES_NOT_EXIST})
+var sConflictExceptionReason_ZONAL_AUTOSHIFT_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZONAL_AUTOSHIFT_ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictExceptionReason_ZONAL_AUTOSHIFT_ACTIVE})
+var sConflictExceptionReason_PRACTICE_OUTCOME_ALARMS_RED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRACTICE_OUTCOME_ALARMS_RED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictExceptionReason_PRACTICE_OUTCOME_ALARMS_RED})
+var sConflictExceptionReason_PRACTICE_BLOCKING_ALARMS_RED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRACTICE_BLOCKING_ALARMS_RED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictExceptionReason_PRACTICE_BLOCKING_ALARMS_RED})
+var sConflictExceptionReason_PRACTICE_IN_BLOCKED_DATES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRACTICE_IN_BLOCKED_DATES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictExceptionReason_PRACTICE_IN_BLOCKED_DATES})
+var sConflictExceptionReason_PRACTICE_IN_BLOCKED_WINDOWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRACTICE_IN_BLOCKED_WINDOWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictExceptionReason_PRACTICE_IN_BLOCKED_WINDOWS})
+var sConflictExceptionReason_PRACTICE_OUTSIDE_ALLOWED_WINDOWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRACTICE_OUTSIDE_ALLOWED_WINDOWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictExceptionReason_PRACTICE_OUTSIDE_ALLOWED_WINDOWS})
+var sControlCondition_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iControlConditionType, Members: &mControlConditionType, Type: smithy.ShapeTypeEnum, Ext: &eControlCondition_type})
+var sControlCondition_alarmIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "alarmIdentifier", ID: &i_MetricIdentifier, Type: smithy.ShapeTypeString, Ext: &eControlCondition_alarmIdentifier})
+var sControlConditionType_CLOUDWATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOUDWATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eControlConditionType_CLOUDWATCH})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var s_ManagedResourceSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iManagedResourceSummary, Members: &mManagedResourceSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ManagedResourceSummaries_member})
+var sManagedResourceSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eManagedResourceSummary_arn})
+var sManagedResourceSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eManagedResourceSummary_name})
+var sManagedResourceSummary_availabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "availabilityZones", ID: &i_AvailabilityZones, Members: &m_AvailabilityZones, Type: smithy.ShapeTypeList, Ext: &eManagedResourceSummary_availabilityZones})
+var sManagedResourceSummary_appliedWeights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appliedWeights", ID: &i_AppliedWeights, Members: &m_AppliedWeights, Type: smithy.ShapeTypeMap, Ext: &eManagedResourceSummary_appliedWeights})
+var sManagedResourceSummary_zonalShifts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalShifts", ID: &i_ZonalShiftsInResource, Members: &m_ZonalShiftsInResource, Type: smithy.ShapeTypeList, Ext: &eManagedResourceSummary_zonalShifts})
+var sManagedResourceSummary_autoshifts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoshifts", ID: &i_AutoshiftsInResource, Members: &m_AutoshiftsInResource, Type: smithy.ShapeTypeList, Ext: &eManagedResourceSummary_autoshifts})
+var sManagedResourceSummary_zonalAutoshiftStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalAutoshiftStatus", ID: &iZonalAutoshiftStatus, Members: &mZonalAutoshiftStatus, Type: smithy.ShapeTypeEnum, Ext: &eManagedResourceSummary_zonalAutoshiftStatus})
+var sManagedResourceSummary_practiceRunStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "practiceRunStatus", ID: &iZonalAutoshiftStatus, Members: &mZonalAutoshiftStatus, Type: smithy.ShapeTypeEnum, Ext: &eManagedResourceSummary_practiceRunStatus})
+var s_OutcomeAlarms_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iControlCondition, Members: &mControlCondition, Type: smithy.ShapeTypeStructure, Ext: &e_OutcomeAlarms_member})
+var sPracticeRunConfiguration_blockingAlarms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockingAlarms", ID: &i_BlockingAlarms, Members: &m_BlockingAlarms, Type: smithy.ShapeTypeList, Ext: &ePracticeRunConfiguration_blockingAlarms})
+var sPracticeRunConfiguration_outcomeAlarms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outcomeAlarms", ID: &i_OutcomeAlarms, Members: &m_OutcomeAlarms, Type: smithy.ShapeTypeList, Ext: &ePracticeRunConfiguration_outcomeAlarms})
+var sPracticeRunConfiguration_blockedWindows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockedWindows", ID: &i_BlockedWindows, Members: &m_BlockedWindows, Type: smithy.ShapeTypeList, Ext: &ePracticeRunConfiguration_blockedWindows})
+var sPracticeRunConfiguration_allowedWindows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedWindows", ID: &i_AllowedWindows, Members: &m_AllowedWindows, Type: smithy.ShapeTypeList, Ext: &ePracticeRunConfiguration_allowedWindows})
+var sPracticeRunConfiguration_blockedDates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockedDates", ID: &i_BlockedDates, Members: &m_BlockedDates, Type: smithy.ShapeTypeList, Ext: &ePracticeRunConfiguration_blockedDates})
+var sPracticeRunOutcome_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePracticeRunOutcome_FAILED})
+var sPracticeRunOutcome_INTERRUPTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERRUPTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePracticeRunOutcome_INTERRUPTED})
+var sPracticeRunOutcome_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePracticeRunOutcome_PENDING})
+var sPracticeRunOutcome_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePracticeRunOutcome_SUCCEEDED})
+var sPracticeRunOutcome_CAPACITY_CHECK_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CAPACITY_CHECK_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePracticeRunOutcome_CAPACITY_CHECK_FAILED})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sShiftType_ZONAL_SHIFT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZONAL_SHIFT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShiftType_ZONAL_SHIFT})
+var sShiftType_PRACTICE_RUN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRACTICE_RUN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShiftType_PRACTICE_RUN})
+var sShiftType_FIS_EXPERIMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIS_EXPERIMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShiftType_FIS_EXPERIMENT})
+var sShiftType_ZONAL_AUTOSHIFT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZONAL_AUTOSHIFT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShiftType_ZONAL_AUTOSHIFT})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_reason})
+var sValidationExceptionReason_INVALID_EXPIRES_IN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_EXPIRES_IN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_EXPIRES_IN})
+var sValidationExceptionReason_INVALID_STATUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_STATUS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_STATUS})
+var sValidationExceptionReason_MISSING_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_MISSING_VALUE})
+var sValidationExceptionReason_INVALID_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_TOKEN})
+var sValidationExceptionReason_INVALID_RESOURCE_IDENTIFIER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_RESOURCE_IDENTIFIER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_RESOURCE_IDENTIFIER})
+var sValidationExceptionReason_INVALID_AZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_AZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_AZ})
+var sValidationExceptionReason_UNSUPPORTED_AZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNSUPPORTED_AZ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_UNSUPPORTED_AZ})
+var sValidationExceptionReason_INVALID_ALARM_CONDITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ALARM_CONDITION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_ALARM_CONDITION})
+var sValidationExceptionReason_INVALID_CONDITION_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_CONDITION_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_CONDITION_TYPE})
+var sValidationExceptionReason_INVALID_PRACTICE_BLOCKER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_PRACTICE_BLOCKER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_PRACTICE_BLOCKER})
+var sValidationExceptionReason_FIS_EXPERIMENT_UPDATE_NOT_ALLOWED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIS_EXPERIMENT_UPDATE_NOT_ALLOWED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_FIS_EXPERIMENT_UPDATE_NOT_ALLOWED})
+var sValidationExceptionReason_AUTOSHIFT_UPDATE_NOT_ALLOWED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTOSHIFT_UPDATE_NOT_ALLOWED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_AUTOSHIFT_UPDATE_NOT_ALLOWED})
+var sValidationExceptionReason_UNSUPPORTED_PRACTICE_CANCEL_SHIFT_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNSUPPORTED_PRACTICE_CANCEL_SHIFT_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_UNSUPPORTED_PRACTICE_CANCEL_SHIFT_TYPE})
+var sValidationExceptionReason_INVALID_PRACTICE_ALLOWED_WINDOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_PRACTICE_ALLOWED_WINDOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_INVALID_PRACTICE_ALLOWED_WINDOW})
+var sValidationExceptionReason_CONFLICTING_PRACTICE_WINDOWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFLICTING_PRACTICE_WINDOWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_CONFLICTING_PRACTICE_WINDOWS})
+var sZonalAutoshiftStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eZonalAutoshiftStatus_ENABLED})
+var sZonalAutoshiftStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eZonalAutoshiftStatus_DISABLED})
+var sZonalShiftInResource_appliedStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appliedStatus", ID: &iAppliedStatus, Members: &mAppliedStatus, Type: smithy.ShapeTypeEnum, Ext: &eZonalShiftInResource_appliedStatus})
+var sZonalShiftInResource_zonalShiftId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalShiftId", ID: &i_ZonalShiftId, Type: smithy.ShapeTypeString, Ext: &eZonalShiftInResource_zonalShiftId})
+var sZonalShiftInResource_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &eZonalShiftInResource_resourceIdentifier})
+var sZonalShiftInResource_awayFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awayFrom", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &eZonalShiftInResource_awayFrom})
+var sZonalShiftInResource_expiryTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiryTime", ID: &i_ExpiryTime, Type: smithy.ShapeTypeTimestamp, Ext: &eZonalShiftInResource_expiryTime})
+var sZonalShiftInResource_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp, Ext: &eZonalShiftInResource_startTime})
+var sZonalShiftInResource_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_ZonalShiftComment, Type: smithy.ShapeTypeString, Ext: &eZonalShiftInResource_comment})
+var sZonalShiftInResource_shiftType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shiftType", ID: &iShiftType, Members: &mShiftType, Type: smithy.ShapeTypeEnum, Ext: &eZonalShiftInResource_shiftType})
+var sZonalShiftInResource_practiceRunOutcome = smithy.NewStaticSchema(smithy.StaticSchema{Member: "practiceRunOutcome", ID: &iPracticeRunOutcome, Members: &mPracticeRunOutcome, Type: smithy.ShapeTypeEnum, Ext: &eZonalShiftInResource_practiceRunOutcome})
+var s_ZonalShiftsInResource_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iZonalShiftInResource, Members: &mZonalShiftInResource, Type: smithy.ShapeTypeStructure, Ext: &e_ZonalShiftsInResource_member})
+var sZonalShiftStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eZonalShiftStatus_ACTIVE})
+var sZonalShiftStatus_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eZonalShiftStatus_EXPIRED})
+var sZonalShiftStatus_CANCELED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eZonalShiftStatus_CANCELED})
+var s_ZonalShiftSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iZonalShiftSummary, Members: &mZonalShiftSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ZonalShiftSummaries_member})
+var sZonalShiftSummary_zonalShiftId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalShiftId", ID: &i_ZonalShiftId, Type: smithy.ShapeTypeString, Ext: &eZonalShiftSummary_zonalShiftId})
+var sZonalShiftSummary_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &eZonalShiftSummary_resourceIdentifier})
+var sZonalShiftSummary_awayFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awayFrom", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &eZonalShiftSummary_awayFrom})
+var sZonalShiftSummary_expiryTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiryTime", ID: &i_ExpiryTime, Type: smithy.ShapeTypeTimestamp, Ext: &eZonalShiftSummary_expiryTime})
+var sZonalShiftSummary_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp, Ext: &eZonalShiftSummary_startTime})
+var sZonalShiftSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iZonalShiftStatus, Members: &mZonalShiftStatus, Type: smithy.ShapeTypeEnum, Ext: &eZonalShiftSummary_status})
+var sZonalShiftSummary_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_ZonalShiftComment, Type: smithy.ShapeTypeString, Ext: &eZonalShiftSummary_comment})
+var sZonalShiftSummary_shiftType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shiftType", ID: &iShiftType, Members: &mShiftType, Type: smithy.ShapeTypeEnum, Ext: &eZonalShiftSummary_shiftType})
+var sZonalShiftSummary_practiceRunOutcome = smithy.NewStaticSchema(smithy.StaticSchema{Member: "practiceRunOutcome", ID: &iPracticeRunOutcome, Members: &mPracticeRunOutcome, Type: smithy.ShapeTypeEnum, Ext: &eZonalShiftSummary_practiceRunOutcome})
+var sCancelPracticeRunRequest_zonalShiftId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalShiftId", ID: &i_ZonalShiftId, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eCancelPracticeRunRequest_zonalShiftId})
+var sCancelPracticeRunResponse_zonalShiftId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalShiftId", ID: &i_ZonalShiftId, Type: smithy.ShapeTypeString, Ext: &eCancelPracticeRunResponse_zonalShiftId})
+var sCancelPracticeRunResponse_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &eCancelPracticeRunResponse_resourceIdentifier})
+var sCancelPracticeRunResponse_awayFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awayFrom", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &eCancelPracticeRunResponse_awayFrom})
+var sCancelPracticeRunResponse_expiryTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiryTime", ID: &i_ExpiryTime, Type: smithy.ShapeTypeTimestamp, Ext: &eCancelPracticeRunResponse_expiryTime})
+var sCancelPracticeRunResponse_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp, Ext: &eCancelPracticeRunResponse_startTime})
+var sCancelPracticeRunResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iZonalShiftStatus, Members: &mZonalShiftStatus, Type: smithy.ShapeTypeEnum, Ext: &eCancelPracticeRunResponse_status})
+var sCancelPracticeRunResponse_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_ZonalShiftComment, Type: smithy.ShapeTypeString, Ext: &eCancelPracticeRunResponse_comment})
+var sCancelZonalShiftRequest_zonalShiftId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalShiftId", ID: &i_ZonalShiftId, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eCancelZonalShiftRequest_zonalShiftId})
+var sZonalShift_zonalShiftId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalShiftId", ID: &i_ZonalShiftId, Type: smithy.ShapeTypeString, Ext: &eZonalShift_zonalShiftId})
+var sZonalShift_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &eZonalShift_resourceIdentifier})
+var sZonalShift_awayFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awayFrom", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &eZonalShift_awayFrom})
+var sZonalShift_expiryTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiryTime", ID: &i_ExpiryTime, Type: smithy.ShapeTypeTimestamp, Ext: &eZonalShift_expiryTime})
+var sZonalShift_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp, Ext: &eZonalShift_startTime})
+var sZonalShift_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iZonalShiftStatus, Members: &mZonalShiftStatus, Type: smithy.ShapeTypeEnum, Ext: &eZonalShift_status})
+var sZonalShift_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_ZonalShiftComment, Type: smithy.ShapeTypeString, Ext: &eZonalShift_comment})
+var sCreatePracticeRunConfigurationRequest_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &eCreatePracticeRunConfigurationRequest_resourceIdentifier})
+var sCreatePracticeRunConfigurationRequest_blockedWindows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockedWindows", ID: &i_BlockedWindows, Members: &m_BlockedWindows, Type: smithy.ShapeTypeList, Ext: &eCreatePracticeRunConfigurationRequest_blockedWindows})
+var sCreatePracticeRunConfigurationRequest_blockedDates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockedDates", ID: &i_BlockedDates, Members: &m_BlockedDates, Type: smithy.ShapeTypeList, Ext: &eCreatePracticeRunConfigurationRequest_blockedDates})
+var sCreatePracticeRunConfigurationRequest_blockingAlarms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockingAlarms", ID: &i_BlockingAlarms, Members: &m_BlockingAlarms, Type: smithy.ShapeTypeList, Ext: &eCreatePracticeRunConfigurationRequest_blockingAlarms})
+var sCreatePracticeRunConfigurationRequest_allowedWindows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedWindows", ID: &i_AllowedWindows, Members: &m_AllowedWindows, Type: smithy.ShapeTypeList, Ext: &eCreatePracticeRunConfigurationRequest_allowedWindows})
+var sCreatePracticeRunConfigurationRequest_outcomeAlarms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outcomeAlarms", ID: &i_OutcomeAlarms, Members: &m_OutcomeAlarms, Type: smithy.ShapeTypeList, Ext: &eCreatePracticeRunConfigurationRequest_outcomeAlarms})
+var sCreatePracticeRunConfigurationResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eCreatePracticeRunConfigurationResponse_arn})
+var sCreatePracticeRunConfigurationResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreatePracticeRunConfigurationResponse_name})
+var sCreatePracticeRunConfigurationResponse_zonalAutoshiftStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalAutoshiftStatus", ID: &iZonalAutoshiftStatus, Members: &mZonalAutoshiftStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreatePracticeRunConfigurationResponse_zonalAutoshiftStatus})
+var sCreatePracticeRunConfigurationResponse_practiceRunConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "practiceRunConfiguration", ID: &iPracticeRunConfiguration, Members: &mPracticeRunConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreatePracticeRunConfigurationResponse_practiceRunConfiguration})
+var sDeletePracticeRunConfigurationRequest_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eDeletePracticeRunConfigurationRequest_resourceIdentifier})
+var sDeletePracticeRunConfigurationResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eDeletePracticeRunConfigurationResponse_arn})
+var sDeletePracticeRunConfigurationResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eDeletePracticeRunConfigurationResponse_name})
+var sDeletePracticeRunConfigurationResponse_zonalAutoshiftStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalAutoshiftStatus", ID: &iZonalAutoshiftStatus, Members: &mZonalAutoshiftStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeletePracticeRunConfigurationResponse_zonalAutoshiftStatus})
+var sGetAutoshiftObserverNotificationStatusResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAutoshiftObserverNotificationStatus, Members: &mAutoshiftObserverNotificationStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetAutoshiftObserverNotificationStatusResponse_status})
+var sGetManagedResourceRequest_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eGetManagedResourceRequest_resourceIdentifier})
+var sGetManagedResourceResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eGetManagedResourceResponse_arn})
+var sGetManagedResourceResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eGetManagedResourceResponse_name})
+var sGetManagedResourceResponse_appliedWeights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appliedWeights", ID: &i_AppliedWeights, Members: &m_AppliedWeights, Type: smithy.ShapeTypeMap, Ext: &eGetManagedResourceResponse_appliedWeights})
+var sGetManagedResourceResponse_zonalShifts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalShifts", ID: &i_ZonalShiftsInResource, Members: &m_ZonalShiftsInResource, Type: smithy.ShapeTypeList, Ext: &eGetManagedResourceResponse_zonalShifts})
+var sGetManagedResourceResponse_autoshifts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoshifts", ID: &i_AutoshiftsInResource, Members: &m_AutoshiftsInResource, Type: smithy.ShapeTypeList, Ext: &eGetManagedResourceResponse_autoshifts})
+var sGetManagedResourceResponse_practiceRunConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "practiceRunConfiguration", ID: &iPracticeRunConfiguration, Members: &mPracticeRunConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetManagedResourceResponse_practiceRunConfiguration})
+var sGetManagedResourceResponse_zonalAutoshiftStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalAutoshiftStatus", ID: &iZonalAutoshiftStatus, Members: &mZonalAutoshiftStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetManagedResourceResponse_zonalAutoshiftStatus})
+var sListAutoshiftsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eListAutoshiftsRequest_nextToken})
+var sListAutoshiftsRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAutoshiftExecutionStatus, Members: &mAutoshiftExecutionStatus, Traits: &t23, Type: smithy.ShapeTypeEnum, Ext: &eListAutoshiftsRequest_status})
+var sListAutoshiftsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t24, Type: smithy.ShapeTypeInteger, Ext: &eListAutoshiftsRequest_maxResults})
+var sListAutoshiftsResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_AutoshiftSummaries, Members: &m_AutoshiftSummaries, Type: smithy.ShapeTypeList, Ext: &eListAutoshiftsResponse_items})
+var sListAutoshiftsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListAutoshiftsResponse_nextToken})
+var sListManagedResourcesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eListManagedResourcesRequest_nextToken})
+var sListManagedResourcesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t24, Type: smithy.ShapeTypeInteger, Ext: &eListManagedResourcesRequest_maxResults})
+var sListManagedResourcesResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_ManagedResourceSummaries, Members: &m_ManagedResourceSummaries, Type: smithy.ShapeTypeList, Ext: &eListManagedResourcesResponse_items})
+var sListManagedResourcesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListManagedResourcesResponse_nextToken})
+var sListZonalShiftsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eListZonalShiftsRequest_nextToken})
+var sListZonalShiftsRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iZonalShiftStatus, Members: &mZonalShiftStatus, Traits: &t23, Type: smithy.ShapeTypeEnum, Ext: &eListZonalShiftsRequest_status})
+var sListZonalShiftsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t24, Type: smithy.ShapeTypeInteger, Ext: &eListZonalShiftsRequest_maxResults})
+var sListZonalShiftsRequest_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &eListZonalShiftsRequest_resourceIdentifier})
+var sListZonalShiftsResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_ZonalShiftSummaries, Members: &m_ZonalShiftSummaries, Type: smithy.ShapeTypeList, Ext: &eListZonalShiftsResponse_items})
+var sListZonalShiftsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListZonalShiftsResponse_nextToken})
+var sStartPracticeRunRequest_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &eStartPracticeRunRequest_resourceIdentifier})
+var sStartPracticeRunRequest_awayFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awayFrom", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &eStartPracticeRunRequest_awayFrom})
+var sStartPracticeRunRequest_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_ZonalShiftComment, Type: smithy.ShapeTypeString, Ext: &eStartPracticeRunRequest_comment})
+var sStartPracticeRunResponse_zonalShiftId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalShiftId", ID: &i_ZonalShiftId, Type: smithy.ShapeTypeString, Ext: &eStartPracticeRunResponse_zonalShiftId})
+var sStartPracticeRunResponse_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &eStartPracticeRunResponse_resourceIdentifier})
+var sStartPracticeRunResponse_awayFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awayFrom", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &eStartPracticeRunResponse_awayFrom})
+var sStartPracticeRunResponse_expiryTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiryTime", ID: &i_ExpiryTime, Type: smithy.ShapeTypeTimestamp, Ext: &eStartPracticeRunResponse_expiryTime})
+var sStartPracticeRunResponse_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp, Ext: &eStartPracticeRunResponse_startTime})
+var sStartPracticeRunResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iZonalShiftStatus, Members: &mZonalShiftStatus, Type: smithy.ShapeTypeEnum, Ext: &eStartPracticeRunResponse_status})
+var sStartPracticeRunResponse_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_ZonalShiftComment, Type: smithy.ShapeTypeString, Ext: &eStartPracticeRunResponse_comment})
+var sStartZonalShiftRequest_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &eStartZonalShiftRequest_resourceIdentifier})
+var sStartZonalShiftRequest_awayFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awayFrom", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &eStartZonalShiftRequest_awayFrom})
+var sStartZonalShiftRequest_expiresIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiresIn", ID: &i_ExpiresIn, Type: smithy.ShapeTypeString, Ext: &eStartZonalShiftRequest_expiresIn})
+var sStartZonalShiftRequest_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_ZonalShiftComment, Type: smithy.ShapeTypeString, Ext: &eStartZonalShiftRequest_comment})
+var sUpdateAutoshiftObserverNotificationStatusRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAutoshiftObserverNotificationStatus, Members: &mAutoshiftObserverNotificationStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateAutoshiftObserverNotificationStatusRequest_status})
+var sUpdateAutoshiftObserverNotificationStatusResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAutoshiftObserverNotificationStatus, Members: &mAutoshiftObserverNotificationStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateAutoshiftObserverNotificationStatusResponse_status})
+var sUpdatePracticeRunConfigurationRequest_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eUpdatePracticeRunConfigurationRequest_resourceIdentifier})
+var sUpdatePracticeRunConfigurationRequest_blockedWindows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockedWindows", ID: &i_BlockedWindows, Members: &m_BlockedWindows, Type: smithy.ShapeTypeList, Ext: &eUpdatePracticeRunConfigurationRequest_blockedWindows})
+var sUpdatePracticeRunConfigurationRequest_blockedDates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockedDates", ID: &i_BlockedDates, Members: &m_BlockedDates, Type: smithy.ShapeTypeList, Ext: &eUpdatePracticeRunConfigurationRequest_blockedDates})
+var sUpdatePracticeRunConfigurationRequest_blockingAlarms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockingAlarms", ID: &i_BlockingAlarms, Members: &m_BlockingAlarms, Type: smithy.ShapeTypeList, Ext: &eUpdatePracticeRunConfigurationRequest_blockingAlarms})
+var sUpdatePracticeRunConfigurationRequest_allowedWindows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedWindows", ID: &i_AllowedWindows, Members: &m_AllowedWindows, Type: smithy.ShapeTypeList, Ext: &eUpdatePracticeRunConfigurationRequest_allowedWindows})
+var sUpdatePracticeRunConfigurationRequest_outcomeAlarms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outcomeAlarms", ID: &i_OutcomeAlarms, Members: &m_OutcomeAlarms, Type: smithy.ShapeTypeList, Ext: &eUpdatePracticeRunConfigurationRequest_outcomeAlarms})
+var sUpdatePracticeRunConfigurationResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUpdatePracticeRunConfigurationResponse_arn})
+var sUpdatePracticeRunConfigurationResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdatePracticeRunConfigurationResponse_name})
+var sUpdatePracticeRunConfigurationResponse_zonalAutoshiftStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalAutoshiftStatus", ID: &iZonalAutoshiftStatus, Members: &mZonalAutoshiftStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdatePracticeRunConfigurationResponse_zonalAutoshiftStatus})
+var sUpdatePracticeRunConfigurationResponse_practiceRunConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "practiceRunConfiguration", ID: &iPracticeRunConfiguration, Members: &mPracticeRunConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePracticeRunConfigurationResponse_practiceRunConfiguration})
+var sUpdateZonalAutoshiftConfigurationRequest_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eUpdateZonalAutoshiftConfigurationRequest_resourceIdentifier})
+var sUpdateZonalAutoshiftConfigurationRequest_zonalAutoshiftStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalAutoshiftStatus", ID: &iZonalAutoshiftStatus, Members: &mZonalAutoshiftStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateZonalAutoshiftConfigurationRequest_zonalAutoshiftStatus})
+var sUpdateZonalAutoshiftConfigurationResponse_resourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString, Ext: &eUpdateZonalAutoshiftConfigurationResponse_resourceIdentifier})
+var sUpdateZonalAutoshiftConfigurationResponse_zonalAutoshiftStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalAutoshiftStatus", ID: &iZonalAutoshiftStatus, Members: &mZonalAutoshiftStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateZonalAutoshiftConfigurationResponse_zonalAutoshiftStatus})
+var sUpdateZonalShiftRequest_zonalShiftId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zonalShiftId", ID: &i_ZonalShiftId, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eUpdateZonalShiftRequest_zonalShiftId})
+var sUpdateZonalShiftRequest_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &i_ZonalShiftComment, Type: smithy.ShapeTypeString, Ext: &eUpdateZonalShiftRequest_comment})
+var sUpdateZonalShiftRequest_expiresIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiresIn", ID: &i_ExpiresIn, Type: smithy.ShapeTypeString, Ext: &eUpdateZonalShiftRequest_expiresIn})
 
 var CancelPracticeRun = &sCancelPracticeRun
 

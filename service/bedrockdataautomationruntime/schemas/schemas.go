@@ -7,9 +7,157 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [149]smithy.SchemaExtensions
+var (
+	eGetDataAutomationStatus                                      smithy.SchemaExtensions
+	eInvokeDataAutomation                                         smithy.SchemaExtensions
+	eInvokeDataAutomationAsync                                    smithy.SchemaExtensions
+	eListTagsForResource                                          smithy.SchemaExtensions
+	eTagResource                                                  smithy.SchemaExtensions
+	eUntagResource                                                smithy.SchemaExtensions
+	e_AmazonBedrockKeystoneRuntimeService                         smithy.SchemaExtensions
+	eAccessDeniedException                                        smithy.SchemaExtensions
+	eAccessDeniedException_message                                smithy.SchemaExtensions
+	eAssetProcessingConfiguration                                 smithy.SchemaExtensions
+	eAssetProcessingConfiguration_video                           smithy.SchemaExtensions
+	eAutomationJobStatus                                          smithy.SchemaExtensions
+	eAutomationJobStatus_CREATED                                  smithy.SchemaExtensions
+	eAutomationJobStatus_IN_PROGRESS                              smithy.SchemaExtensions
+	eAutomationJobStatus_SUCCESS                                  smithy.SchemaExtensions
+	eAutomationJobStatus_SERVICE_ERROR                            smithy.SchemaExtensions
+	eAutomationJobStatus_CLIENT_ERROR                             smithy.SchemaExtensions
+	eBlueprint                                                    smithy.SchemaExtensions
+	eBlueprint_blueprintArn                                       smithy.SchemaExtensions
+	eBlueprint_version                                            smithy.SchemaExtensions
+	eBlueprint_stage                                              smithy.SchemaExtensions
+	e_BlueprintArn                                                smithy.SchemaExtensions
+	e_BlueprintList                                               smithy.SchemaExtensions
+	e_BlueprintList_member                                        smithy.SchemaExtensions
+	eBlueprintStage                                               smithy.SchemaExtensions
+	eBlueprintStage_DEVELOPMENT                                   smithy.SchemaExtensions
+	eBlueprintStage_LIVE                                          smithy.SchemaExtensions
+	e_BlueprintVersion                                            smithy.SchemaExtensions
+	eCustomOutputStatus                                           smithy.SchemaExtensions
+	eCustomOutputStatus_MATCH                                     smithy.SchemaExtensions
+	eCustomOutputStatus_NO_MATCH                                  smithy.SchemaExtensions
+	e_DataAutomationArn                                           smithy.SchemaExtensions
+	eDataAutomationConfiguration                                  smithy.SchemaExtensions
+	eDataAutomationConfiguration_dataAutomationProjectArn         smithy.SchemaExtensions
+	eDataAutomationConfiguration_stage                            smithy.SchemaExtensions
+	e_DataAutomationProfileArn                                    smithy.SchemaExtensions
+	eDataAutomationStage                                          smithy.SchemaExtensions
+	eDataAutomationStage_LIVE                                     smithy.SchemaExtensions
+	eDataAutomationStage_DEVELOPMENT                              smithy.SchemaExtensions
+	eEncryptionConfiguration                                      smithy.SchemaExtensions
+	eEncryptionConfiguration_kmsKeyId                             smithy.SchemaExtensions
+	eEncryptionConfiguration_kmsEncryptionContext                 smithy.SchemaExtensions
+	e_EncryptionContextKey                                        smithy.SchemaExtensions
+	e_EncryptionContextMap                                        smithy.SchemaExtensions
+	e_EncryptionContextMap_key                                    smithy.SchemaExtensions
+	e_EncryptionContextMap_value                                  smithy.SchemaExtensions
+	e_EncryptionContextValue                                      smithy.SchemaExtensions
+	eEventBridgeConfiguration                                     smithy.SchemaExtensions
+	eEventBridgeConfiguration_eventBridgeEnabled                  smithy.SchemaExtensions
+	e_IdempotencyToken                                            smithy.SchemaExtensions
+	eInputConfiguration                                           smithy.SchemaExtensions
+	eInputConfiguration_s3Uri                                     smithy.SchemaExtensions
+	eInputConfiguration_assetProcessingConfiguration              smithy.SchemaExtensions
+	eInternalServerException                                      smithy.SchemaExtensions
+	eInternalServerException_message                              smithy.SchemaExtensions
+	e_InvocationArn                                               smithy.SchemaExtensions
+	e_KMSKeyId                                                    smithy.SchemaExtensions
+	e_NonBlankString                                              smithy.SchemaExtensions
+	eNotificationConfiguration                                    smithy.SchemaExtensions
+	eNotificationConfiguration_eventBridgeConfiguration           smithy.SchemaExtensions
+	eOutputConfiguration                                          smithy.SchemaExtensions
+	eOutputConfiguration_s3Uri                                    smithy.SchemaExtensions
+	eOutputSegment                                                smithy.SchemaExtensions
+	eOutputSegment_customOutputStatus                             smithy.SchemaExtensions
+	eOutputSegment_customOutput                                   smithy.SchemaExtensions
+	eOutputSegment_standardOutput                                 smithy.SchemaExtensions
+	e_OutputSegmentList                                           smithy.SchemaExtensions
+	e_OutputSegmentList_member                                    smithy.SchemaExtensions
+	eResourceNotFoundException                                    smithy.SchemaExtensions
+	eResourceNotFoundException_message                            smithy.SchemaExtensions
+	e_S3Uri                                                       smithy.SchemaExtensions
+	eSemanticModality                                             smithy.SchemaExtensions
+	eSemanticModality_DOCUMENT                                    smithy.SchemaExtensions
+	eSemanticModality_IMAGE                                       smithy.SchemaExtensions
+	eSemanticModality_AUDIO                                       smithy.SchemaExtensions
+	eSemanticModality_VIDEO                                       smithy.SchemaExtensions
+	eServiceQuotaExceededException                                smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                        smithy.SchemaExtensions
+	eServiceUnavailableException                                  smithy.SchemaExtensions
+	eServiceUnavailableException_message                          smithy.SchemaExtensions
+	eSyncInputConfiguration                                       smithy.SchemaExtensions
+	eSyncInputConfiguration_bytes                                 smithy.SchemaExtensions
+	eSyncInputConfiguration_s3Uri                                 smithy.SchemaExtensions
+	eTag                                                          smithy.SchemaExtensions
+	eTag_key                                                      smithy.SchemaExtensions
+	eTag_value                                                    smithy.SchemaExtensions
+	e_TaggableResourceArn                                         smithy.SchemaExtensions
+	e_TagKey                                                      smithy.SchemaExtensions
+	e_TagKeyList                                                  smithy.SchemaExtensions
+	e_TagKeyList_member                                           smithy.SchemaExtensions
+	e_TagList                                                     smithy.SchemaExtensions
+	e_TagList_member                                              smithy.SchemaExtensions
+	e_TagValue                                                    smithy.SchemaExtensions
+	eThrottlingException                                          smithy.SchemaExtensions
+	eThrottlingException_message                                  smithy.SchemaExtensions
+	eTimestampSegment                                             smithy.SchemaExtensions
+	eTimestampSegment_startTimeMillis                             smithy.SchemaExtensions
+	eTimestampSegment_endTimeMillis                               smithy.SchemaExtensions
+	eValidationException                                          smithy.SchemaExtensions
+	eValidationException_message                                  smithy.SchemaExtensions
+	eVideoAssetProcessingConfiguration                            smithy.SchemaExtensions
+	eVideoAssetProcessingConfiguration_segmentConfiguration       smithy.SchemaExtensions
+	eVideoSegmentConfiguration                                    smithy.SchemaExtensions
+	eVideoSegmentConfiguration_timestampSegment                   smithy.SchemaExtensions
+	eGetDataAutomationStatusRequest                               smithy.SchemaExtensions
+	eGetDataAutomationStatusRequest_invocationArn                 smithy.SchemaExtensions
+	eGetDataAutomationStatusResponse                              smithy.SchemaExtensions
+	eGetDataAutomationStatusResponse_status                       smithy.SchemaExtensions
+	eGetDataAutomationStatusResponse_errorType                    smithy.SchemaExtensions
+	eGetDataAutomationStatusResponse_errorMessage                 smithy.SchemaExtensions
+	eGetDataAutomationStatusResponse_outputConfiguration          smithy.SchemaExtensions
+	eGetDataAutomationStatusResponse_jobSubmissionTime            smithy.SchemaExtensions
+	eGetDataAutomationStatusResponse_jobCompletionTime            smithy.SchemaExtensions
+	eGetDataAutomationStatusResponse_jobDurationInSeconds         smithy.SchemaExtensions
+	eInvokeDataAutomationAsyncRequest                             smithy.SchemaExtensions
+	eInvokeDataAutomationAsyncRequest_clientToken                 smithy.SchemaExtensions
+	eInvokeDataAutomationAsyncRequest_inputConfiguration          smithy.SchemaExtensions
+	eInvokeDataAutomationAsyncRequest_outputConfiguration         smithy.SchemaExtensions
+	eInvokeDataAutomationAsyncRequest_dataAutomationConfiguration smithy.SchemaExtensions
+	eInvokeDataAutomationAsyncRequest_encryptionConfiguration     smithy.SchemaExtensions
+	eInvokeDataAutomationAsyncRequest_notificationConfiguration   smithy.SchemaExtensions
+	eInvokeDataAutomationAsyncRequest_blueprints                  smithy.SchemaExtensions
+	eInvokeDataAutomationAsyncRequest_dataAutomationProfileArn    smithy.SchemaExtensions
+	eInvokeDataAutomationAsyncRequest_tags                        smithy.SchemaExtensions
+	eInvokeDataAutomationAsyncResponse                            smithy.SchemaExtensions
+	eInvokeDataAutomationAsyncResponse_invocationArn              smithy.SchemaExtensions
+	eInvokeDataAutomationRequest                                  smithy.SchemaExtensions
+	eInvokeDataAutomationRequest_inputConfiguration               smithy.SchemaExtensions
+	eInvokeDataAutomationRequest_dataAutomationConfiguration      smithy.SchemaExtensions
+	eInvokeDataAutomationRequest_blueprints                       smithy.SchemaExtensions
+	eInvokeDataAutomationRequest_dataAutomationProfileArn         smithy.SchemaExtensions
+	eInvokeDataAutomationRequest_encryptionConfiguration          smithy.SchemaExtensions
+	eInvokeDataAutomationRequest_outputConfiguration              smithy.SchemaExtensions
+	eInvokeDataAutomationResponse                                 smithy.SchemaExtensions
+	eInvokeDataAutomationResponse_outputConfiguration             smithy.SchemaExtensions
+	eInvokeDataAutomationResponse_semanticModality                smithy.SchemaExtensions
+	eInvokeDataAutomationResponse_outputSegments                  smithy.SchemaExtensions
+	eListTagsForResourceRequest                                   smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceARN                       smithy.SchemaExtensions
+	eListTagsForResourceResponse                                  smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                             smithy.SchemaExtensions
+	eTagResourceRequest                                           smithy.SchemaExtensions
+	eTagResourceRequest_resourceARN                               smithy.SchemaExtensions
+	eTagResourceRequest_tags                                      smithy.SchemaExtensions
+	eTagResourceResponse                                          smithy.SchemaExtensions
+	eUntagResourceRequest                                         smithy.SchemaExtensions
+	eUntagResourceRequest_resourceARN                             smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                                 smithy.SchemaExtensions
+	eUntagResourceResponse                                        smithy.SchemaExtensions
+)
 
 var (
 	iGetDataAutomationStatus              = smithy.ShapeID{Namespace: "com.amazonaws.bedrockdataautomationruntime", Name: "GetDataAutomationStatus"}
@@ -140,156 +288,156 @@ var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&
 var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceARN, &sTagResourceRequest_tags}}
 var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceARN, &sUntagResourceRequest_tagKeys}}
 
-var sGetDataAutomationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataAutomationStatus, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sInvokeDataAutomation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeDataAutomation, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sInvokeDataAutomationAsync = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeDataAutomationAsync, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var s_AmazonBedrockKeystoneRuntimeService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonBedrockKeystoneRuntimeService, Type: smithy.ShapeTypeService, Ext: &ext[6]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[7]})
-var sAssetProcessingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssetProcessingConfiguration, Members: &mAssetProcessingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[9]})
-var sAutomationJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutomationJobStatus, Members: &mAutomationJobStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[11]})
-var sBlueprint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlueprint, Members: &mBlueprint, Type: smithy.ShapeTypeStructure, Ext: &ext[17]})
-var s_BlueprintArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlueprintArn, Type: smithy.ShapeTypeString, Ext: &ext[21]})
-var s_BlueprintList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlueprintList, Members: &m_BlueprintList, Type: smithy.ShapeTypeList, Ext: &ext[22]})
-var sBlueprintStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlueprintStage, Members: &mBlueprintStage, Type: smithy.ShapeTypeEnum, Ext: &ext[24]})
-var s_BlueprintVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlueprintVersion, Type: smithy.ShapeTypeString, Ext: &ext[27]})
-var sCustomOutputStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomOutputStatus, Members: &mCustomOutputStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[28]})
-var s_DataAutomationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataAutomationArn, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var sDataAutomationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataAutomationConfiguration, Members: &mDataAutomationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[32]})
-var s_DataAutomationProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataAutomationProfileArn, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var sDataAutomationStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataAutomationStage, Members: &mDataAutomationStage, Type: smithy.ShapeTypeEnum, Ext: &ext[36]})
-var sEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[39]})
-var s_EncryptionContextKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionContextKey, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var s_EncryptionContextMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionContextMap, Members: &m_EncryptionContextMap, Type: smithy.ShapeTypeMap, Ext: &ext[43]})
-var s_EncryptionContextValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionContextValue, Type: smithy.ShapeTypeString, Ext: &ext[46]})
-var sEventBridgeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventBridgeConfiguration, Members: &mEventBridgeConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[47]})
-var s_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &ext[49]})
-var sInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputConfiguration, Members: &mInputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[50]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[53]})
-var s_InvocationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvocationArn, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var s_KMSKeyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KMSKeyId, Type: smithy.ShapeTypeString, Ext: &ext[56]})
-var s_NonBlankString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var sNotificationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationConfiguration, Members: &mNotificationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[58]})
-var sOutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputConfiguration, Members: &mOutputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[60]})
-var sOutputSegment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputSegment, Members: &mOutputSegment, Type: smithy.ShapeTypeStructure, Ext: &ext[62]})
-var s_OutputSegmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputSegmentList, Members: &m_OutputSegmentList, Type: smithy.ShapeTypeList, Ext: &ext[66]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var s_S3Uri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &ext[70]})
-var sSemanticModality = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSemanticModality, Members: &mSemanticModality, Type: smithy.ShapeTypeEnum, Ext: &ext[71]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[76]})
-var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &ext[78]})
-var sSyncInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncInputConfiguration, Members: &mSyncInputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[83]})
-var s_TaggableResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[86]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[87]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[88]})
-var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[90]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[92]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &ext[93]})
-var sTimestampSegment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimestampSegment, Members: &mTimestampSegment, Type: smithy.ShapeTypeStructure, Ext: &ext[95]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &ext[98]})
-var sVideoAssetProcessingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVideoAssetProcessingConfiguration, Members: &mVideoAssetProcessingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[100]})
-var sVideoSegmentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVideoSegmentConfiguration, Members: &mVideoSegmentConfiguration, Type: smithy.ShapeTypeUnion, Ext: &ext[102]})
-var sGetDataAutomationStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataAutomationStatusRequest, Members: &mGetDataAutomationStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[104]})
-var sGetDataAutomationStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataAutomationStatusResponse, Members: &mGetDataAutomationStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[106]})
-var sInvokeDataAutomationAsyncRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeDataAutomationAsyncRequest, Members: &mInvokeDataAutomationAsyncRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[114]})
-var sInvokeDataAutomationAsyncResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeDataAutomationAsyncResponse, Members: &mInvokeDataAutomationAsyncResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[124]})
-var sInvokeDataAutomationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeDataAutomationRequest, Members: &mInvokeDataAutomationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var sInvokeDataAutomationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeDataAutomationResponse, Members: &mInvokeDataAutomationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[133]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[137]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[139]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[141]})
-var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[144]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[145]})
-var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[148]})
+var sGetDataAutomationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataAutomationStatus, Type: smithy.ShapeTypeOperation, Ext: &eGetDataAutomationStatus})
+var sInvokeDataAutomation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeDataAutomation, Type: smithy.ShapeTypeOperation, Ext: &eInvokeDataAutomation})
+var sInvokeDataAutomationAsync = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeDataAutomationAsync, Type: smithy.ShapeTypeOperation, Ext: &eInvokeDataAutomationAsync})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var s_AmazonBedrockKeystoneRuntimeService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonBedrockKeystoneRuntimeService, Type: smithy.ShapeTypeService, Ext: &e_AmazonBedrockKeystoneRuntimeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAssetProcessingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssetProcessingConfiguration, Members: &mAssetProcessingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAssetProcessingConfiguration})
+var sAutomationJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutomationJobStatus, Members: &mAutomationJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eAutomationJobStatus})
+var sBlueprint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlueprint, Members: &mBlueprint, Type: smithy.ShapeTypeStructure, Ext: &eBlueprint})
+var s_BlueprintArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlueprintArn, Type: smithy.ShapeTypeString, Ext: &e_BlueprintArn})
+var s_BlueprintList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlueprintList, Members: &m_BlueprintList, Type: smithy.ShapeTypeList, Ext: &e_BlueprintList})
+var sBlueprintStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlueprintStage, Members: &mBlueprintStage, Type: smithy.ShapeTypeEnum, Ext: &eBlueprintStage})
+var s_BlueprintVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlueprintVersion, Type: smithy.ShapeTypeString, Ext: &e_BlueprintVersion})
+var sCustomOutputStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomOutputStatus, Members: &mCustomOutputStatus, Type: smithy.ShapeTypeEnum, Ext: &eCustomOutputStatus})
+var s_DataAutomationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataAutomationArn, Type: smithy.ShapeTypeString, Ext: &e_DataAutomationArn})
+var sDataAutomationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataAutomationConfiguration, Members: &mDataAutomationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDataAutomationConfiguration})
+var s_DataAutomationProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataAutomationProfileArn, Type: smithy.ShapeTypeString, Ext: &e_DataAutomationProfileArn})
+var sDataAutomationStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataAutomationStage, Members: &mDataAutomationStage, Type: smithy.ShapeTypeEnum, Ext: &eDataAutomationStage})
+var sEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionConfiguration})
+var s_EncryptionContextKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionContextKey, Type: smithy.ShapeTypeString, Ext: &e_EncryptionContextKey})
+var s_EncryptionContextMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionContextMap, Members: &m_EncryptionContextMap, Type: smithy.ShapeTypeMap, Ext: &e_EncryptionContextMap})
+var s_EncryptionContextValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionContextValue, Type: smithy.ShapeTypeString, Ext: &e_EncryptionContextValue})
+var sEventBridgeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventBridgeConfiguration, Members: &mEventBridgeConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eEventBridgeConfiguration})
+var s_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &e_IdempotencyToken})
+var sInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputConfiguration, Members: &mInputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eInputConfiguration})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var s_InvocationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvocationArn, Type: smithy.ShapeTypeString, Ext: &e_InvocationArn})
+var s_KMSKeyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KMSKeyId, Type: smithy.ShapeTypeString, Ext: &e_KMSKeyId})
+var s_NonBlankString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &e_NonBlankString})
+var sNotificationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationConfiguration, Members: &mNotificationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eNotificationConfiguration})
+var sOutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputConfiguration, Members: &mOutputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eOutputConfiguration})
+var sOutputSegment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputSegment, Members: &mOutputSegment, Type: smithy.ShapeTypeStructure, Ext: &eOutputSegment})
+var s_OutputSegmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputSegmentList, Members: &m_OutputSegmentList, Type: smithy.ShapeTypeList, Ext: &e_OutputSegmentList})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var s_S3Uri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &e_S3Uri})
+var sSemanticModality = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSemanticModality, Members: &mSemanticModality, Type: smithy.ShapeTypeEnum, Ext: &eSemanticModality})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eServiceUnavailableException})
+var sSyncInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncInputConfiguration, Members: &mSyncInputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eSyncInputConfiguration})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var s_TaggableResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString, Ext: &e_TaggableResourceArn})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sTimestampSegment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimestampSegment, Members: &mTimestampSegment, Type: smithy.ShapeTypeStructure, Ext: &eTimestampSegment})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sVideoAssetProcessingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVideoAssetProcessingConfiguration, Members: &mVideoAssetProcessingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eVideoAssetProcessingConfiguration})
+var sVideoSegmentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVideoSegmentConfiguration, Members: &mVideoSegmentConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eVideoSegmentConfiguration})
+var sGetDataAutomationStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataAutomationStatusRequest, Members: &mGetDataAutomationStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDataAutomationStatusRequest})
+var sGetDataAutomationStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataAutomationStatusResponse, Members: &mGetDataAutomationStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDataAutomationStatusResponse})
+var sInvokeDataAutomationAsyncRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeDataAutomationAsyncRequest, Members: &mInvokeDataAutomationAsyncRequest, Type: smithy.ShapeTypeStructure, Ext: &eInvokeDataAutomationAsyncRequest})
+var sInvokeDataAutomationAsyncResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeDataAutomationAsyncResponse, Members: &mInvokeDataAutomationAsyncResponse, Type: smithy.ShapeTypeStructure, Ext: &eInvokeDataAutomationAsyncResponse})
+var sInvokeDataAutomationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeDataAutomationRequest, Members: &mInvokeDataAutomationRequest, Type: smithy.ShapeTypeStructure, Ext: &eInvokeDataAutomationRequest})
+var sInvokeDataAutomationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeDataAutomationResponse, Members: &mInvokeDataAutomationResponse, Type: smithy.ShapeTypeStructure, Ext: &eInvokeDataAutomationResponse})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
 
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[8]})
-var sAssetProcessingConfiguration_video = smithy.NewStaticSchema(smithy.StaticSchema{Member: "video", ID: &iVideoAssetProcessingConfiguration, Members: &mVideoAssetProcessingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[10]})
-var sAutomationJobStatus_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[12]})
-var sAutomationJobStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[13]})
-var sAutomationJobStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[14]})
-var sAutomationJobStatus_SERVICE_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[15]})
-var sAutomationJobStatus_CLIENT_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLIENT_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[16]})
-var sBlueprint_blueprintArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blueprintArn", ID: &i_BlueprintArn, Type: smithy.ShapeTypeString, Ext: &ext[18]})
-var sBlueprint_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_BlueprintVersion, Type: smithy.ShapeTypeString, Ext: &ext[19]})
-var sBlueprint_stage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stage", ID: &iBlueprintStage, Members: &mBlueprintStage, Type: smithy.ShapeTypeEnum, Ext: &ext[20]})
-var s_BlueprintList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBlueprint, Members: &mBlueprint, Type: smithy.ShapeTypeStructure, Ext: &ext[23]})
-var sBlueprintStage_DEVELOPMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEVELOPMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[25]})
-var sBlueprintStage_LIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[26]})
-var sCustomOutputStatus_MATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[29]})
-var sCustomOutputStatus_NO_MATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_MATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[30]})
-var sDataAutomationConfiguration_dataAutomationProjectArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataAutomationProjectArn", ID: &i_DataAutomationArn, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var sDataAutomationConfiguration_stage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stage", ID: &iDataAutomationStage, Members: &mDataAutomationStage, Type: smithy.ShapeTypeEnum, Ext: &ext[34]})
-var sDataAutomationStage_LIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var sDataAutomationStage_DEVELOPMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEVELOPMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[38]})
-var sEncryptionConfiguration_kmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyId", ID: &i_KMSKeyId, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var sEncryptionConfiguration_kmsEncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsEncryptionContext", ID: &i_EncryptionContextMap, Members: &m_EncryptionContextMap, Type: smithy.ShapeTypeMap, Ext: &ext[41]})
-var s_EncryptionContextMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_EncryptionContextKey, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var s_EncryptionContextMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_EncryptionContextValue, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var sEventBridgeConfiguration_eventBridgeEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventBridgeEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[48]})
-var sInputConfiguration_s3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &ext[51]})
-var sInputConfiguration_assetProcessingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assetProcessingConfiguration", ID: &iAssetProcessingConfiguration, Members: &mAssetProcessingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[52]})
-var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var sNotificationConfiguration_eventBridgeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventBridgeConfiguration", ID: &iEventBridgeConfiguration, Members: &mEventBridgeConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[59]})
-var sOutputConfiguration_s3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &ext[61]})
-var sOutputSegment_customOutputStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customOutputStatus", ID: &iCustomOutputStatus, Members: &mCustomOutputStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[63]})
-var sOutputSegment_customOutput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customOutput", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[64]})
-var sOutputSegment_standardOutput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "standardOutput", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[65]})
-var s_OutputSegmentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOutputSegment, Members: &mOutputSegment, Type: smithy.ShapeTypeStructure, Ext: &ext[67]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var sSemanticModality_DOCUMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOCUMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sSemanticModality_IMAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[73]})
-var sSemanticModality_AUDIO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUDIO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var sSemanticModality_VIDEO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VIDEO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[75]})
-var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[77]})
-var sServiceUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[79]})
-var sSyncInputConfiguration_bytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bytes", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &ext[81]})
-var sSyncInputConfiguration_s3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &ext[82]})
-var sTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[84]})
-var sTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[85]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[89]})
-var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[91]})
-var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[94]})
-var sTimestampSegment_startTimeMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTimeMillis", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[96]})
-var sTimestampSegment_endTimeMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTimeMillis", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[97]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[99]})
-var sVideoAssetProcessingConfiguration_segmentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "segmentConfiguration", ID: &iVideoSegmentConfiguration, Members: &mVideoSegmentConfiguration, Type: smithy.ShapeTypeUnion, Ext: &ext[101]})
-var sVideoSegmentConfiguration_timestampSegment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestampSegment", ID: &iTimestampSegment, Members: &mTimestampSegment, Type: smithy.ShapeTypeStructure, Ext: &ext[103]})
-var sGetDataAutomationStatusRequest_invocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invocationArn", ID: &i_InvocationArn, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &ext[105]})
-var sGetDataAutomationStatusResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAutomationJobStatus, Members: &mAutomationJobStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[107]})
-var sGetDataAutomationStatusResponse_errorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[108]})
-var sGetDataAutomationStatusResponse_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[109]})
-var sGetDataAutomationStatusResponse_outputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputConfiguration", ID: &iOutputConfiguration, Members: &mOutputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[110]})
-var sGetDataAutomationStatusResponse_jobSubmissionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobSubmissionTime", ID: &pTimestamp, Traits: &t8, Type: smithy.ShapeTypeTimestamp, Ext: &ext[111]})
-var sGetDataAutomationStatusResponse_jobCompletionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobCompletionTime", ID: &pTimestamp, Traits: &t8, Type: smithy.ShapeTypeTimestamp, Ext: &ext[112]})
-var sGetDataAutomationStatusResponse_jobDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobDurationInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[113]})
-var sInvokeDataAutomationAsyncRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &ext[115]})
-var sInvokeDataAutomationAsyncRequest_inputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputConfiguration", ID: &iInputConfiguration, Members: &mInputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[116]})
-var sInvokeDataAutomationAsyncRequest_outputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputConfiguration", ID: &iOutputConfiguration, Members: &mOutputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[117]})
-var sInvokeDataAutomationAsyncRequest_dataAutomationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataAutomationConfiguration", ID: &iDataAutomationConfiguration, Members: &mDataAutomationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[118]})
-var sInvokeDataAutomationAsyncRequest_encryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[119]})
-var sInvokeDataAutomationAsyncRequest_notificationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationConfiguration", ID: &iNotificationConfiguration, Members: &mNotificationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var sInvokeDataAutomationAsyncRequest_blueprints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blueprints", ID: &i_BlueprintList, Members: &m_BlueprintList, Type: smithy.ShapeTypeList, Ext: &ext[121]})
-var sInvokeDataAutomationAsyncRequest_dataAutomationProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataAutomationProfileArn", ID: &i_DataAutomationProfileArn, Type: smithy.ShapeTypeString, Ext: &ext[122]})
-var sInvokeDataAutomationAsyncRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[123]})
-var sInvokeDataAutomationAsyncResponse_invocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invocationArn", ID: &i_InvocationArn, Type: smithy.ShapeTypeString, Ext: &ext[125]})
-var sInvokeDataAutomationRequest_inputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputConfiguration", ID: &iSyncInputConfiguration, Members: &mSyncInputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[127]})
-var sInvokeDataAutomationRequest_dataAutomationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataAutomationConfiguration", ID: &iDataAutomationConfiguration, Members: &mDataAutomationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[128]})
-var sInvokeDataAutomationRequest_blueprints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blueprints", ID: &i_BlueprintList, Members: &m_BlueprintList, Type: smithy.ShapeTypeList, Ext: &ext[129]})
-var sInvokeDataAutomationRequest_dataAutomationProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataAutomationProfileArn", ID: &i_DataAutomationProfileArn, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var sInvokeDataAutomationRequest_encryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[131]})
-var sInvokeDataAutomationRequest_outputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputConfiguration", ID: &iOutputConfiguration, Members: &mOutputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[132]})
-var sInvokeDataAutomationResponse_outputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputConfiguration", ID: &iOutputConfiguration, Members: &mOutputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[134]})
-var sInvokeDataAutomationResponse_semanticModality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "semanticModality", ID: &iSemanticModality, Members: &mSemanticModality, Type: smithy.ShapeTypeEnum, Ext: &ext[135]})
-var sInvokeDataAutomationResponse_outputSegments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputSegments", ID: &i_OutputSegmentList, Members: &m_OutputSegmentList, Type: smithy.ShapeTypeList, Ext: &ext[136]})
-var sListTagsForResourceRequest_resourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceARN", ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[140]})
-var sTagResourceRequest_resourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceARN", ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[142]})
-var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[143]})
-var sUntagResourceRequest_resourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceARN", ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[146]})
-var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[147]})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAssetProcessingConfiguration_video = smithy.NewStaticSchema(smithy.StaticSchema{Member: "video", ID: &iVideoAssetProcessingConfiguration, Members: &mVideoAssetProcessingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eAssetProcessingConfiguration_video})
+var sAutomationJobStatus_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutomationJobStatus_CREATED})
+var sAutomationJobStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutomationJobStatus_IN_PROGRESS})
+var sAutomationJobStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutomationJobStatus_SUCCESS})
+var sAutomationJobStatus_SERVICE_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutomationJobStatus_SERVICE_ERROR})
+var sAutomationJobStatus_CLIENT_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLIENT_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAutomationJobStatus_CLIENT_ERROR})
+var sBlueprint_blueprintArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blueprintArn", ID: &i_BlueprintArn, Type: smithy.ShapeTypeString, Ext: &eBlueprint_blueprintArn})
+var sBlueprint_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_BlueprintVersion, Type: smithy.ShapeTypeString, Ext: &eBlueprint_version})
+var sBlueprint_stage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stage", ID: &iBlueprintStage, Members: &mBlueprintStage, Type: smithy.ShapeTypeEnum, Ext: &eBlueprint_stage})
+var s_BlueprintList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBlueprint, Members: &mBlueprint, Type: smithy.ShapeTypeStructure, Ext: &e_BlueprintList_member})
+var sBlueprintStage_DEVELOPMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEVELOPMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBlueprintStage_DEVELOPMENT})
+var sBlueprintStage_LIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBlueprintStage_LIVE})
+var sCustomOutputStatus_MATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomOutputStatus_MATCH})
+var sCustomOutputStatus_NO_MATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_MATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCustomOutputStatus_NO_MATCH})
+var sDataAutomationConfiguration_dataAutomationProjectArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataAutomationProjectArn", ID: &i_DataAutomationArn, Type: smithy.ShapeTypeString, Ext: &eDataAutomationConfiguration_dataAutomationProjectArn})
+var sDataAutomationConfiguration_stage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stage", ID: &iDataAutomationStage, Members: &mDataAutomationStage, Type: smithy.ShapeTypeEnum, Ext: &eDataAutomationConfiguration_stage})
+var sDataAutomationStage_LIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataAutomationStage_LIVE})
+var sDataAutomationStage_DEVELOPMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEVELOPMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDataAutomationStage_DEVELOPMENT})
+var sEncryptionConfiguration_kmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyId", ID: &i_KMSKeyId, Type: smithy.ShapeTypeString, Ext: &eEncryptionConfiguration_kmsKeyId})
+var sEncryptionConfiguration_kmsEncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsEncryptionContext", ID: &i_EncryptionContextMap, Members: &m_EncryptionContextMap, Type: smithy.ShapeTypeMap, Ext: &eEncryptionConfiguration_kmsEncryptionContext})
+var s_EncryptionContextMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_EncryptionContextKey, Type: smithy.ShapeTypeString, Ext: &e_EncryptionContextMap_key})
+var s_EncryptionContextMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_EncryptionContextValue, Type: smithy.ShapeTypeString, Ext: &e_EncryptionContextMap_value})
+var sEventBridgeConfiguration_eventBridgeEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventBridgeEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eEventBridgeConfiguration_eventBridgeEnabled})
+var sInputConfiguration_s3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &eInputConfiguration_s3Uri})
+var sInputConfiguration_assetProcessingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assetProcessingConfiguration", ID: &iAssetProcessingConfiguration, Members: &mAssetProcessingConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eInputConfiguration_assetProcessingConfiguration})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sNotificationConfiguration_eventBridgeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventBridgeConfiguration", ID: &iEventBridgeConfiguration, Members: &mEventBridgeConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eNotificationConfiguration_eventBridgeConfiguration})
+var sOutputConfiguration_s3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &eOutputConfiguration_s3Uri})
+var sOutputSegment_customOutputStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customOutputStatus", ID: &iCustomOutputStatus, Members: &mCustomOutputStatus, Type: smithy.ShapeTypeEnum, Ext: &eOutputSegment_customOutputStatus})
+var sOutputSegment_customOutput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customOutput", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eOutputSegment_customOutput})
+var sOutputSegment_standardOutput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "standardOutput", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eOutputSegment_standardOutput})
+var s_OutputSegmentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOutputSegment, Members: &mOutputSegment, Type: smithy.ShapeTypeStructure, Ext: &e_OutputSegmentList_member})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sSemanticModality_DOCUMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOCUMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSemanticModality_DOCUMENT})
+var sSemanticModality_IMAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSemanticModality_IMAGE})
+var sSemanticModality_AUDIO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUDIO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSemanticModality_AUDIO})
+var sSemanticModality_VIDEO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VIDEO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSemanticModality_VIDEO})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sServiceUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailableException_message})
+var sSyncInputConfiguration_bytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bytes", ID: &pBlob, Type: smithy.ShapeTypeBlob, Ext: &eSyncInputConfiguration_bytes})
+var sSyncInputConfiguration_s3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString, Ext: &eSyncInputConfiguration_s3Uri})
+var sTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_key})
+var sTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_value})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sTimestampSegment_startTimeMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTimeMillis", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eTimestampSegment_startTimeMillis})
+var sTimestampSegment_endTimeMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTimeMillis", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eTimestampSegment_endTimeMillis})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sVideoAssetProcessingConfiguration_segmentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "segmentConfiguration", ID: &iVideoSegmentConfiguration, Members: &mVideoSegmentConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eVideoAssetProcessingConfiguration_segmentConfiguration})
+var sVideoSegmentConfiguration_timestampSegment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestampSegment", ID: &iTimestampSegment, Members: &mTimestampSegment, Type: smithy.ShapeTypeStructure, Ext: &eVideoSegmentConfiguration_timestampSegment})
+var sGetDataAutomationStatusRequest_invocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invocationArn", ID: &i_InvocationArn, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &eGetDataAutomationStatusRequest_invocationArn})
+var sGetDataAutomationStatusResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAutomationJobStatus, Members: &mAutomationJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetDataAutomationStatusResponse_status})
+var sGetDataAutomationStatusResponse_errorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetDataAutomationStatusResponse_errorType})
+var sGetDataAutomationStatusResponse_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetDataAutomationStatusResponse_errorMessage})
+var sGetDataAutomationStatusResponse_outputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputConfiguration", ID: &iOutputConfiguration, Members: &mOutputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetDataAutomationStatusResponse_outputConfiguration})
+var sGetDataAutomationStatusResponse_jobSubmissionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobSubmissionTime", ID: &pTimestamp, Traits: &t8, Type: smithy.ShapeTypeTimestamp, Ext: &eGetDataAutomationStatusResponse_jobSubmissionTime})
+var sGetDataAutomationStatusResponse_jobCompletionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobCompletionTime", ID: &pTimestamp, Traits: &t8, Type: smithy.ShapeTypeTimestamp, Ext: &eGetDataAutomationStatusResponse_jobCompletionTime})
+var sGetDataAutomationStatusResponse_jobDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobDurationInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetDataAutomationStatusResponse_jobDurationInSeconds})
+var sInvokeDataAutomationAsyncRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString, Ext: &eInvokeDataAutomationAsyncRequest_clientToken})
+var sInvokeDataAutomationAsyncRequest_inputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputConfiguration", ID: &iInputConfiguration, Members: &mInputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eInvokeDataAutomationAsyncRequest_inputConfiguration})
+var sInvokeDataAutomationAsyncRequest_outputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputConfiguration", ID: &iOutputConfiguration, Members: &mOutputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eInvokeDataAutomationAsyncRequest_outputConfiguration})
+var sInvokeDataAutomationAsyncRequest_dataAutomationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataAutomationConfiguration", ID: &iDataAutomationConfiguration, Members: &mDataAutomationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eInvokeDataAutomationAsyncRequest_dataAutomationConfiguration})
+var sInvokeDataAutomationAsyncRequest_encryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eInvokeDataAutomationAsyncRequest_encryptionConfiguration})
+var sInvokeDataAutomationAsyncRequest_notificationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notificationConfiguration", ID: &iNotificationConfiguration, Members: &mNotificationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eInvokeDataAutomationAsyncRequest_notificationConfiguration})
+var sInvokeDataAutomationAsyncRequest_blueprints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blueprints", ID: &i_BlueprintList, Members: &m_BlueprintList, Type: smithy.ShapeTypeList, Ext: &eInvokeDataAutomationAsyncRequest_blueprints})
+var sInvokeDataAutomationAsyncRequest_dataAutomationProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataAutomationProfileArn", ID: &i_DataAutomationProfileArn, Type: smithy.ShapeTypeString, Ext: &eInvokeDataAutomationAsyncRequest_dataAutomationProfileArn})
+var sInvokeDataAutomationAsyncRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eInvokeDataAutomationAsyncRequest_tags})
+var sInvokeDataAutomationAsyncResponse_invocationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invocationArn", ID: &i_InvocationArn, Type: smithy.ShapeTypeString, Ext: &eInvokeDataAutomationAsyncResponse_invocationArn})
+var sInvokeDataAutomationRequest_inputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputConfiguration", ID: &iSyncInputConfiguration, Members: &mSyncInputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eInvokeDataAutomationRequest_inputConfiguration})
+var sInvokeDataAutomationRequest_dataAutomationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataAutomationConfiguration", ID: &iDataAutomationConfiguration, Members: &mDataAutomationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eInvokeDataAutomationRequest_dataAutomationConfiguration})
+var sInvokeDataAutomationRequest_blueprints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blueprints", ID: &i_BlueprintList, Members: &m_BlueprintList, Type: smithy.ShapeTypeList, Ext: &eInvokeDataAutomationRequest_blueprints})
+var sInvokeDataAutomationRequest_dataAutomationProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataAutomationProfileArn", ID: &i_DataAutomationProfileArn, Type: smithy.ShapeTypeString, Ext: &eInvokeDataAutomationRequest_dataAutomationProfileArn})
+var sInvokeDataAutomationRequest_encryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eInvokeDataAutomationRequest_encryptionConfiguration})
+var sInvokeDataAutomationRequest_outputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputConfiguration", ID: &iOutputConfiguration, Members: &mOutputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eInvokeDataAutomationRequest_outputConfiguration})
+var sInvokeDataAutomationResponse_outputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputConfiguration", ID: &iOutputConfiguration, Members: &mOutputConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eInvokeDataAutomationResponse_outputConfiguration})
+var sInvokeDataAutomationResponse_semanticModality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "semanticModality", ID: &iSemanticModality, Members: &mSemanticModality, Type: smithy.ShapeTypeEnum, Ext: &eInvokeDataAutomationResponse_semanticModality})
+var sInvokeDataAutomationResponse_outputSegments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputSegments", ID: &i_OutputSegmentList, Members: &m_OutputSegmentList, Type: smithy.ShapeTypeList, Ext: &eInvokeDataAutomationResponse_outputSegments})
+var sListTagsForResourceRequest_resourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceARN", ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceARN})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_tags})
+var sTagResourceRequest_resourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceARN", ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceARN})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_tags})
+var sUntagResourceRequest_resourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceARN", ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceARN})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
 
 var GetDataAutomationStatus = &sGetDataAutomationStatus
 

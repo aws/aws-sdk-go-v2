@@ -7,9 +7,177 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [169]smithy.SchemaExtensions
+var (
+	eCancelResourceRequest                                     smithy.SchemaExtensions
+	eCreateResource                                            smithy.SchemaExtensions
+	eDeleteResource                                            smithy.SchemaExtensions
+	eGetResource                                               smithy.SchemaExtensions
+	eGetResourceRequestStatus                                  smithy.SchemaExtensions
+	eListResourceRequests                                      smithy.SchemaExtensions
+	eListResources                                             smithy.SchemaExtensions
+	eUpdateResource                                            smithy.SchemaExtensions
+	e_CloudApiService                                          smithy.SchemaExtensions
+	eAlreadyExistsException                                    smithy.SchemaExtensions
+	eAlreadyExistsException_Message                            smithy.SchemaExtensions
+	e_ClientToken                                              smithy.SchemaExtensions
+	eClientTokenConflictException                              smithy.SchemaExtensions
+	eClientTokenConflictException_Message                      smithy.SchemaExtensions
+	eConcurrentModificationException                           smithy.SchemaExtensions
+	eConcurrentModificationException_Message                   smithy.SchemaExtensions
+	eConcurrentOperationException                              smithy.SchemaExtensions
+	eConcurrentOperationException_Message                      smithy.SchemaExtensions
+	e_ErrorMessage                                             smithy.SchemaExtensions
+	eGeneralServiceException                                   smithy.SchemaExtensions
+	eGeneralServiceException_Message                           smithy.SchemaExtensions
+	e_HandlerErrorCode                                         smithy.SchemaExtensions
+	eHandlerFailureException                                   smithy.SchemaExtensions
+	eHandlerFailureException_Message                           smithy.SchemaExtensions
+	eHandlerInternalFailureException                           smithy.SchemaExtensions
+	eHandlerInternalFailureException_Message                   smithy.SchemaExtensions
+	e_HandlerNextToken                                         smithy.SchemaExtensions
+	e_HookFailureMode                                          smithy.SchemaExtensions
+	e_HookInvocationPoint                                      smithy.SchemaExtensions
+	eHookProgressEvent                                         smithy.SchemaExtensions
+	eHookProgressEvent_HookTypeName                            smithy.SchemaExtensions
+	eHookProgressEvent_HookTypeVersionId                       smithy.SchemaExtensions
+	eHookProgressEvent_HookTypeArn                             smithy.SchemaExtensions
+	eHookProgressEvent_InvocationPoint                         smithy.SchemaExtensions
+	eHookProgressEvent_HookStatus                              smithy.SchemaExtensions
+	eHookProgressEvent_HookEventTime                           smithy.SchemaExtensions
+	eHookProgressEvent_HookStatusMessage                       smithy.SchemaExtensions
+	eHookProgressEvent_FailureMode                             smithy.SchemaExtensions
+	e_HooksProgressEvent                                       smithy.SchemaExtensions
+	e_HooksProgressEvent_member                                smithy.SchemaExtensions
+	e_HookStatus                                               smithy.SchemaExtensions
+	e_HookTypeArn                                              smithy.SchemaExtensions
+	e_Identifier                                               smithy.SchemaExtensions
+	eInvalidCredentialsException                               smithy.SchemaExtensions
+	eInvalidCredentialsException_Message                       smithy.SchemaExtensions
+	eInvalidRequestException                                   smithy.SchemaExtensions
+	eInvalidRequestException_Message                           smithy.SchemaExtensions
+	e_MaxResults                                               smithy.SchemaExtensions
+	eNetworkFailureException                                   smithy.SchemaExtensions
+	eNetworkFailureException_Message                           smithy.SchemaExtensions
+	e_NextToken                                                smithy.SchemaExtensions
+	eNotStabilizedException                                    smithy.SchemaExtensions
+	eNotStabilizedException_Message                            smithy.SchemaExtensions
+	eNotUpdatableException                                     smithy.SchemaExtensions
+	eNotUpdatableException_Message                             smithy.SchemaExtensions
+	e_Operation                                                smithy.SchemaExtensions
+	e_Operations                                               smithy.SchemaExtensions
+	e_Operations_member                                        smithy.SchemaExtensions
+	e_OperationStatus                                          smithy.SchemaExtensions
+	e_OperationStatuses                                        smithy.SchemaExtensions
+	e_OperationStatuses_member                                 smithy.SchemaExtensions
+	e_PatchDocument                                            smithy.SchemaExtensions
+	ePrivateTypeException                                      smithy.SchemaExtensions
+	ePrivateTypeException_Message                              smithy.SchemaExtensions
+	eProgressEvent                                             smithy.SchemaExtensions
+	eProgressEvent_TypeName                                    smithy.SchemaExtensions
+	eProgressEvent_Identifier                                  smithy.SchemaExtensions
+	eProgressEvent_RequestToken                                smithy.SchemaExtensions
+	eProgressEvent_HooksRequestToken                           smithy.SchemaExtensions
+	eProgressEvent_Operation                                   smithy.SchemaExtensions
+	eProgressEvent_OperationStatus                             smithy.SchemaExtensions
+	eProgressEvent_EventTime                                   smithy.SchemaExtensions
+	eProgressEvent_ResourceModel                               smithy.SchemaExtensions
+	eProgressEvent_StatusMessage                               smithy.SchemaExtensions
+	eProgressEvent_ErrorCode                                   smithy.SchemaExtensions
+	eProgressEvent_RetryAfter                                  smithy.SchemaExtensions
+	e_Properties                                               smithy.SchemaExtensions
+	e_RequestToken                                             smithy.SchemaExtensions
+	eRequestTokenNotFoundException                             smithy.SchemaExtensions
+	eRequestTokenNotFoundException_Message                     smithy.SchemaExtensions
+	eResourceConflictException                                 smithy.SchemaExtensions
+	eResourceConflictException_Message                         smithy.SchemaExtensions
+	eResourceDescription                                       smithy.SchemaExtensions
+	eResourceDescription_Identifier                            smithy.SchemaExtensions
+	eResourceDescription_Properties                            smithy.SchemaExtensions
+	e_ResourceDescriptions                                     smithy.SchemaExtensions
+	e_ResourceDescriptions_member                              smithy.SchemaExtensions
+	eResourceNotFoundException                                 smithy.SchemaExtensions
+	eResourceNotFoundException_Message                         smithy.SchemaExtensions
+	eResourceRequestStatusFilter                               smithy.SchemaExtensions
+	eResourceRequestStatusFilter_Operations                    smithy.SchemaExtensions
+	eResourceRequestStatusFilter_OperationStatuses             smithy.SchemaExtensions
+	e_ResourceRequestStatusSummaries                           smithy.SchemaExtensions
+	e_ResourceRequestStatusSummaries_member                    smithy.SchemaExtensions
+	e_RoleArn                                                  smithy.SchemaExtensions
+	eServiceInternalErrorException                             smithy.SchemaExtensions
+	eServiceInternalErrorException_Message                     smithy.SchemaExtensions
+	eServiceLimitExceededException                             smithy.SchemaExtensions
+	eServiceLimitExceededException_Message                     smithy.SchemaExtensions
+	e_StatusMessage                                            smithy.SchemaExtensions
+	eThrottlingException                                       smithy.SchemaExtensions
+	eThrottlingException_Message                               smithy.SchemaExtensions
+	e_Timestamp                                                smithy.SchemaExtensions
+	e_TypeName                                                 smithy.SchemaExtensions
+	eTypeNotFoundException                                     smithy.SchemaExtensions
+	eTypeNotFoundException_Message                             smithy.SchemaExtensions
+	e_TypeVersionId                                            smithy.SchemaExtensions
+	eUnsupportedActionException                                smithy.SchemaExtensions
+	eUnsupportedActionException_Message                        smithy.SchemaExtensions
+	eCancelResourceRequestInput                                smithy.SchemaExtensions
+	eCancelResourceRequestInput_RequestToken                   smithy.SchemaExtensions
+	eCancelResourceRequestOutput                               smithy.SchemaExtensions
+	eCancelResourceRequestOutput_ProgressEvent                 smithy.SchemaExtensions
+	eCreateResourceInput                                       smithy.SchemaExtensions
+	eCreateResourceInput_TypeName                              smithy.SchemaExtensions
+	eCreateResourceInput_TypeVersionId                         smithy.SchemaExtensions
+	eCreateResourceInput_RoleArn                               smithy.SchemaExtensions
+	eCreateResourceInput_ClientToken                           smithy.SchemaExtensions
+	eCreateResourceInput_DesiredState                          smithy.SchemaExtensions
+	eCreateResourceOutput                                      smithy.SchemaExtensions
+	eCreateResourceOutput_ProgressEvent                        smithy.SchemaExtensions
+	eDeleteResourceInput                                       smithy.SchemaExtensions
+	eDeleteResourceInput_TypeName                              smithy.SchemaExtensions
+	eDeleteResourceInput_TypeVersionId                         smithy.SchemaExtensions
+	eDeleteResourceInput_RoleArn                               smithy.SchemaExtensions
+	eDeleteResourceInput_ClientToken                           smithy.SchemaExtensions
+	eDeleteResourceInput_Identifier                            smithy.SchemaExtensions
+	eDeleteResourceOutput                                      smithy.SchemaExtensions
+	eDeleteResourceOutput_ProgressEvent                        smithy.SchemaExtensions
+	eGetResourceInput                                          smithy.SchemaExtensions
+	eGetResourceInput_TypeName                                 smithy.SchemaExtensions
+	eGetResourceInput_TypeVersionId                            smithy.SchemaExtensions
+	eGetResourceInput_RoleArn                                  smithy.SchemaExtensions
+	eGetResourceInput_Identifier                               smithy.SchemaExtensions
+	eGetResourceOutput                                         smithy.SchemaExtensions
+	eGetResourceOutput_TypeName                                smithy.SchemaExtensions
+	eGetResourceOutput_ResourceDescription                     smithy.SchemaExtensions
+	eGetResourceRequestStatusInput                             smithy.SchemaExtensions
+	eGetResourceRequestStatusInput_RequestToken                smithy.SchemaExtensions
+	eGetResourceRequestStatusOutput                            smithy.SchemaExtensions
+	eGetResourceRequestStatusOutput_ProgressEvent              smithy.SchemaExtensions
+	eGetResourceRequestStatusOutput_HooksProgressEvent         smithy.SchemaExtensions
+	eListResourceRequestsInput                                 smithy.SchemaExtensions
+	eListResourceRequestsInput_MaxResults                      smithy.SchemaExtensions
+	eListResourceRequestsInput_NextToken                       smithy.SchemaExtensions
+	eListResourceRequestsInput_ResourceRequestStatusFilter     smithy.SchemaExtensions
+	eListResourceRequestsOutput                                smithy.SchemaExtensions
+	eListResourceRequestsOutput_ResourceRequestStatusSummaries smithy.SchemaExtensions
+	eListResourceRequestsOutput_NextToken                      smithy.SchemaExtensions
+	eListResourcesInput                                        smithy.SchemaExtensions
+	eListResourcesInput_TypeName                               smithy.SchemaExtensions
+	eListResourcesInput_TypeVersionId                          smithy.SchemaExtensions
+	eListResourcesInput_RoleArn                                smithy.SchemaExtensions
+	eListResourcesInput_NextToken                              smithy.SchemaExtensions
+	eListResourcesInput_MaxResults                             smithy.SchemaExtensions
+	eListResourcesInput_ResourceModel                          smithy.SchemaExtensions
+	eListResourcesOutput                                       smithy.SchemaExtensions
+	eListResourcesOutput_TypeName                              smithy.SchemaExtensions
+	eListResourcesOutput_ResourceDescriptions                  smithy.SchemaExtensions
+	eListResourcesOutput_NextToken                             smithy.SchemaExtensions
+	eUpdateResourceInput                                       smithy.SchemaExtensions
+	eUpdateResourceInput_TypeName                              smithy.SchemaExtensions
+	eUpdateResourceInput_TypeVersionId                         smithy.SchemaExtensions
+	eUpdateResourceInput_RoleArn                               smithy.SchemaExtensions
+	eUpdateResourceInput_ClientToken                           smithy.SchemaExtensions
+	eUpdateResourceInput_Identifier                            smithy.SchemaExtensions
+	eUpdateResourceInput_PatchDocument                         smithy.SchemaExtensions
+	eUpdateResourceOutput                                      smithy.SchemaExtensions
+	eUpdateResourceOutput_ProgressEvent                        smithy.SchemaExtensions
+)
 
 var (
 	iCancelResourceRequest           = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "CancelResourceRequest"}
@@ -185,176 +353,176 @@ var mListResourcesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListRes
 var mUpdateResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateResourceInput_TypeName, &sUpdateResourceInput_TypeVersionId, &sUpdateResourceInput_RoleArn, &sUpdateResourceInput_ClientToken, &sUpdateResourceInput_Identifier, &sUpdateResourceInput_PatchDocument}}
 var mUpdateResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateResourceOutput_ProgressEvent}}
 
-var sCancelResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelResourceRequest, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCreateResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResource, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sDeleteResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResource, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sGetResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResource, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sGetResourceRequestStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceRequestStatus, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sListResourceRequests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceRequests, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sListResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResources, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sUpdateResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResource, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var s_CloudApiService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudApiService, Type: smithy.ShapeTypeService, Ext: &ext[8]})
-var sAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlreadyExistsException, Members: &mAlreadyExistsException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[9]})
-var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[11]})
-var sClientTokenConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientTokenConflictException, Members: &mClientTokenConflictException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[12]})
-var sConcurrentModificationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentModificationException, Members: &mConcurrentModificationException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[14]})
-var sConcurrentOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentOperationException, Members: &mConcurrentOperationException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[16]})
-var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[18]})
-var sGeneralServiceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeneralServiceException, Members: &mGeneralServiceException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &ext[19]})
-var s_HandlerErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HandlerErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[21]})
-var sHandlerFailureException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHandlerFailureException, Members: &mHandlerFailureException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &ext[22]})
-var sHandlerInternalFailureException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHandlerInternalFailureException, Members: &mHandlerInternalFailureException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &ext[24]})
-var s_HandlerNextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HandlerNextToken, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var s_HookFailureMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HookFailureMode, Type: smithy.ShapeTypeString, Ext: &ext[27]})
-var s_HookInvocationPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HookInvocationPoint, Type: smithy.ShapeTypeString, Ext: &ext[28]})
-var sHookProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHookProgressEvent, Members: &mHookProgressEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[29]})
-var s_HooksProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HooksProgressEvent, Members: &m_HooksProgressEvent, Type: smithy.ShapeTypeList, Ext: &ext[38]})
-var s_HookStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HookStatus, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var s_HookTypeArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HookTypeArn, Type: smithy.ShapeTypeString, Ext: &ext[41]})
-var s_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var sInvalidCredentialsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidCredentialsException, Members: &mInvalidCredentialsException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &ext[43]})
-var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &ext[45]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[47]})
-var sNetworkFailureException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkFailureException, Members: &mNetworkFailureException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &ext[48]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[50]})
-var sNotStabilizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotStabilizedException, Members: &mNotStabilizedException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &ext[51]})
-var sNotUpdatableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotUpdatableException, Members: &mNotUpdatableException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &ext[53]})
-var s_Operation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Operation, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var s_Operations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Operations, Members: &m_Operations, Type: smithy.ShapeTypeList, Ext: &ext[56]})
-var s_OperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationStatus, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var s_OperationStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationStatuses, Members: &m_OperationStatuses, Type: smithy.ShapeTypeList, Ext: &ext[59]})
-var s_PatchDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PatchDocument, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &ext[61]})
-var sPrivateTypeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrivateTypeException, Members: &mPrivateTypeException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &ext[62]})
-var sProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProgressEvent, Members: &mProgressEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[64]})
-var s_Properties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Properties, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &ext[76]})
-var s_RequestToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestToken, Type: smithy.ShapeTypeString, Ext: &ext[77]})
-var sRequestTokenNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestTokenNotFoundException, Members: &mRequestTokenNotFoundException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &ext[78]})
-var sResourceConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceConflictException, Members: &mResourceConflictException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var sResourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceDescription, Members: &mResourceDescription, Type: smithy.ShapeTypeStructure, Ext: &ext[82]})
-var s_ResourceDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceDescriptions, Members: &m_ResourceDescriptions, Type: smithy.ShapeTypeList, Ext: &ext[85]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &ext[87]})
-var sResourceRequestStatusFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceRequestStatusFilter, Members: &mResourceRequestStatusFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[89]})
-var s_ResourceRequestStatusSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceRequestStatusSummaries, Members: &m_ResourceRequestStatusSummaries, Type: smithy.ShapeTypeList, Ext: &ext[92]})
-var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[94]})
-var sServiceInternalErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceInternalErrorException, Members: &mServiceInternalErrorException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &ext[95]})
-var sServiceLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLimitExceededException, Members: &mServiceLimitExceededException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &ext[97]})
-var s_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusMessage, Type: smithy.ShapeTypeString, Ext: &ext[99]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &ext[100]})
-var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[102]})
-var s_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TypeName, Type: smithy.ShapeTypeString, Ext: &ext[103]})
-var sTypeNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTypeNotFoundException, Members: &mTypeNotFoundException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &ext[104]})
-var s_TypeVersionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TypeVersionId, Type: smithy.ShapeTypeString, Ext: &ext[106]})
-var sUnsupportedActionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedActionException, Members: &mUnsupportedActionException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &ext[107]})
-var sCancelResourceRequestInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelResourceRequestInput, Members: &mCancelResourceRequestInput, Type: smithy.ShapeTypeStructure, Ext: &ext[109]})
-var sCancelResourceRequestOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelResourceRequestOutput, Members: &mCancelResourceRequestOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[111]})
-var sCreateResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResourceInput, Members: &mCreateResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[113]})
-var sCreateResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResourceOutput, Members: &mCreateResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[119]})
-var sDeleteResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourceInput, Members: &mDeleteResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[121]})
-var sDeleteResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourceOutput, Members: &mDeleteResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[127]})
-var sGetResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceInput, Members: &mGetResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[129]})
-var sGetResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceOutput, Members: &mGetResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[134]})
-var sGetResourceRequestStatusInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceRequestStatusInput, Members: &mGetResourceRequestStatusInput, Type: smithy.ShapeTypeStructure, Ext: &ext[137]})
-var sGetResourceRequestStatusOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceRequestStatusOutput, Members: &mGetResourceRequestStatusOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[139]})
-var sListResourceRequestsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceRequestsInput, Members: &mListResourceRequestsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[142]})
-var sListResourceRequestsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceRequestsOutput, Members: &mListResourceRequestsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[146]})
-var sListResourcesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcesInput, Members: &mListResourcesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[149]})
-var sListResourcesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcesOutput, Members: &mListResourcesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[156]})
-var sUpdateResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResourceInput, Members: &mUpdateResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[160]})
-var sUpdateResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResourceOutput, Members: &mUpdateResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[167]})
+var sCancelResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelResourceRequest, Type: smithy.ShapeTypeOperation, Ext: &eCancelResourceRequest})
+var sCreateResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResource, Type: smithy.ShapeTypeOperation, Ext: &eCreateResource})
+var sDeleteResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResource, Type: smithy.ShapeTypeOperation, Ext: &eDeleteResource})
+var sGetResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResource, Type: smithy.ShapeTypeOperation, Ext: &eGetResource})
+var sGetResourceRequestStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceRequestStatus, Type: smithy.ShapeTypeOperation, Ext: &eGetResourceRequestStatus})
+var sListResourceRequests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceRequests, Type: smithy.ShapeTypeOperation, Ext: &eListResourceRequests})
+var sListResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResources, Type: smithy.ShapeTypeOperation, Ext: &eListResources})
+var sUpdateResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResource, Type: smithy.ShapeTypeOperation, Ext: &eUpdateResource})
+var s_CloudApiService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudApiService, Type: smithy.ShapeTypeService, Ext: &e_CloudApiService})
+var sAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlreadyExistsException, Members: &mAlreadyExistsException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eAlreadyExistsException})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
+var sClientTokenConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientTokenConflictException, Members: &mClientTokenConflictException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eClientTokenConflictException})
+var sConcurrentModificationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentModificationException, Members: &mConcurrentModificationException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eConcurrentModificationException})
+var sConcurrentOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentOperationException, Members: &mConcurrentOperationException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eConcurrentOperationException})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var sGeneralServiceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeneralServiceException, Members: &mGeneralServiceException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eGeneralServiceException})
+var s_HandlerErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HandlerErrorCode, Type: smithy.ShapeTypeString, Ext: &e_HandlerErrorCode})
+var sHandlerFailureException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHandlerFailureException, Members: &mHandlerFailureException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eHandlerFailureException})
+var sHandlerInternalFailureException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHandlerInternalFailureException, Members: &mHandlerInternalFailureException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eHandlerInternalFailureException})
+var s_HandlerNextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HandlerNextToken, Type: smithy.ShapeTypeString, Ext: &e_HandlerNextToken})
+var s_HookFailureMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HookFailureMode, Type: smithy.ShapeTypeString, Ext: &e_HookFailureMode})
+var s_HookInvocationPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HookInvocationPoint, Type: smithy.ShapeTypeString, Ext: &e_HookInvocationPoint})
+var sHookProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHookProgressEvent, Members: &mHookProgressEvent, Type: smithy.ShapeTypeStructure, Ext: &eHookProgressEvent})
+var s_HooksProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HooksProgressEvent, Members: &m_HooksProgressEvent, Type: smithy.ShapeTypeList, Ext: &e_HooksProgressEvent})
+var s_HookStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HookStatus, Type: smithy.ShapeTypeString, Ext: &e_HookStatus})
+var s_HookTypeArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HookTypeArn, Type: smithy.ShapeTypeString, Ext: &e_HookTypeArn})
+var s_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &e_Identifier})
+var sInvalidCredentialsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidCredentialsException, Members: &mInvalidCredentialsException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eInvalidCredentialsException})
+var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRequestException})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var sNetworkFailureException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkFailureException, Members: &mNetworkFailureException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eNetworkFailureException})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sNotStabilizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotStabilizedException, Members: &mNotStabilizedException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eNotStabilizedException})
+var sNotUpdatableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotUpdatableException, Members: &mNotUpdatableException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eNotUpdatableException})
+var s_Operation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Operation, Type: smithy.ShapeTypeString, Ext: &e_Operation})
+var s_Operations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Operations, Members: &m_Operations, Type: smithy.ShapeTypeList, Ext: &e_Operations})
+var s_OperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationStatus, Type: smithy.ShapeTypeString, Ext: &e_OperationStatus})
+var s_OperationStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationStatuses, Members: &m_OperationStatuses, Type: smithy.ShapeTypeList, Ext: &e_OperationStatuses})
+var s_PatchDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PatchDocument, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &e_PatchDocument})
+var sPrivateTypeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrivateTypeException, Members: &mPrivateTypeException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &ePrivateTypeException})
+var sProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProgressEvent, Members: &mProgressEvent, Type: smithy.ShapeTypeStructure, Ext: &eProgressEvent})
+var s_Properties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Properties, Traits: &t12, Type: smithy.ShapeTypeString, Ext: &e_Properties})
+var s_RequestToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestToken, Type: smithy.ShapeTypeString, Ext: &e_RequestToken})
+var sRequestTokenNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestTokenNotFoundException, Members: &mRequestTokenNotFoundException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &eRequestTokenNotFoundException})
+var sResourceConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceConflictException, Members: &mResourceConflictException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eResourceConflictException})
+var sResourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceDescription, Members: &mResourceDescription, Type: smithy.ShapeTypeStructure, Ext: &eResourceDescription})
+var s_ResourceDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceDescriptions, Members: &m_ResourceDescriptions, Type: smithy.ShapeTypeList, Ext: &e_ResourceDescriptions})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceRequestStatusFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceRequestStatusFilter, Members: &mResourceRequestStatusFilter, Type: smithy.ShapeTypeStructure, Ext: &eResourceRequestStatusFilter})
+var s_ResourceRequestStatusSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceRequestStatusSummaries, Members: &m_ResourceRequestStatusSummaries, Type: smithy.ShapeTypeList, Ext: &e_ResourceRequestStatusSummaries})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &e_RoleArn})
+var sServiceInternalErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceInternalErrorException, Members: &mServiceInternalErrorException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eServiceInternalErrorException})
+var sServiceLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLimitExceededException, Members: &mServiceLimitExceededException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eServiceLimitExceededException})
+var s_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusMessage, Type: smithy.ShapeTypeString, Ext: &e_StatusMessage})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var s_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TypeName, Type: smithy.ShapeTypeString, Ext: &e_TypeName})
+var sTypeNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTypeNotFoundException, Members: &mTypeNotFoundException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &eTypeNotFoundException})
+var s_TypeVersionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TypeVersionId, Type: smithy.ShapeTypeString, Ext: &e_TypeVersionId})
+var sUnsupportedActionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedActionException, Members: &mUnsupportedActionException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &eUnsupportedActionException})
+var sCancelResourceRequestInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelResourceRequestInput, Members: &mCancelResourceRequestInput, Type: smithy.ShapeTypeStructure, Ext: &eCancelResourceRequestInput})
+var sCancelResourceRequestOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelResourceRequestOutput, Members: &mCancelResourceRequestOutput, Type: smithy.ShapeTypeStructure, Ext: &eCancelResourceRequestOutput})
+var sCreateResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResourceInput, Members: &mCreateResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateResourceInput})
+var sCreateResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResourceOutput, Members: &mCreateResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateResourceOutput})
+var sDeleteResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourceInput, Members: &mDeleteResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResourceInput})
+var sDeleteResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourceOutput, Members: &mDeleteResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResourceOutput})
+var sGetResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceInput, Members: &mGetResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eGetResourceInput})
+var sGetResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceOutput, Members: &mGetResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetResourceOutput})
+var sGetResourceRequestStatusInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceRequestStatusInput, Members: &mGetResourceRequestStatusInput, Type: smithy.ShapeTypeStructure, Ext: &eGetResourceRequestStatusInput})
+var sGetResourceRequestStatusOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceRequestStatusOutput, Members: &mGetResourceRequestStatusOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetResourceRequestStatusOutput})
+var sListResourceRequestsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceRequestsInput, Members: &mListResourceRequestsInput, Type: smithy.ShapeTypeStructure, Ext: &eListResourceRequestsInput})
+var sListResourceRequestsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceRequestsOutput, Members: &mListResourceRequestsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListResourceRequestsOutput})
+var sListResourcesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcesInput, Members: &mListResourcesInput, Type: smithy.ShapeTypeStructure, Ext: &eListResourcesInput})
+var sListResourcesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcesOutput, Members: &mListResourcesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListResourcesOutput})
+var sUpdateResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResourceInput, Members: &mUpdateResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateResourceInput})
+var sUpdateResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResourceOutput, Members: &mUpdateResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateResourceOutput})
 
-var sAlreadyExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[10]})
-var sClientTokenConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[13]})
-var sConcurrentModificationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[15]})
-var sConcurrentOperationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[17]})
-var sGeneralServiceException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[20]})
-var sHandlerFailureException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[23]})
-var sHandlerInternalFailureException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[25]})
-var sHookProgressEvent_HookTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HookTypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString, Ext: &ext[30]})
-var sHookProgressEvent_HookTypeVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HookTypeVersionId", ID: &i_TypeVersionId, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var sHookProgressEvent_HookTypeArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HookTypeArn", ID: &i_HookTypeArn, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var sHookProgressEvent_InvocationPoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationPoint", ID: &i_HookInvocationPoint, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var sHookProgressEvent_HookStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HookStatus", ID: &i_HookStatus, Type: smithy.ShapeTypeString, Ext: &ext[34]})
-var sHookProgressEvent_HookEventTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HookEventTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[35]})
-var sHookProgressEvent_HookStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HookStatusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var sHookProgressEvent_FailureMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureMode", ID: &i_HookFailureMode, Type: smithy.ShapeTypeString, Ext: &ext[37]})
-var s_HooksProgressEvent_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHookProgressEvent, Members: &mHookProgressEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[39]})
-var sInvalidCredentialsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var sInvalidRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[46]})
-var sNetworkFailureException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[49]})
-var sNotStabilizedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var sNotUpdatableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var s_Operations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Operation, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var s_OperationStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OperationStatus, Type: smithy.ShapeTypeString, Ext: &ext[60]})
-var sPrivateTypeException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[63]})
-var sProgressEvent_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString, Ext: &ext[65]})
-var sProgressEvent_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &ext[66]})
-var sProgressEvent_RequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestToken", ID: &i_RequestToken, Type: smithy.ShapeTypeString, Ext: &ext[67]})
-var sProgressEvent_HooksRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HooksRequestToken", ID: &i_RequestToken, Type: smithy.ShapeTypeString, Ext: &ext[68]})
-var sProgressEvent_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i_Operation, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var sProgressEvent_OperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationStatus", ID: &i_OperationStatus, Type: smithy.ShapeTypeString, Ext: &ext[70]})
-var sProgressEvent_EventTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[71]})
-var sProgressEvent_ResourceModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceModel", ID: &i_Properties, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[72]})
-var sProgressEvent_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString, Ext: &ext[73]})
-var sProgressEvent_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_HandlerErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[74]})
-var sProgressEvent_RetryAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryAfter", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[75]})
-var sRequestTokenNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[79]})
-var sResourceConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[81]})
-var sResourceDescription_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var sResourceDescription_Properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Properties", ID: &i_Properties, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[84]})
-var s_ResourceDescriptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceDescription, Members: &mResourceDescription, Type: smithy.ShapeTypeStructure, Ext: &ext[86]})
-var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[88]})
-var sResourceRequestStatusFilter_Operations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operations", ID: &i_Operations, Members: &m_Operations, Type: smithy.ShapeTypeList, Ext: &ext[90]})
-var sResourceRequestStatusFilter_OperationStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationStatuses", ID: &i_OperationStatuses, Members: &m_OperationStatuses, Type: smithy.ShapeTypeList, Ext: &ext[91]})
-var s_ResourceRequestStatusSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProgressEvent, Members: &mProgressEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[93]})
-var sServiceInternalErrorException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[96]})
-var sServiceLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[98]})
-var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[101]})
-var sTypeNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[105]})
-var sUnsupportedActionException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[108]})
-var sCancelResourceRequestInput_RequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestToken", ID: &i_RequestToken, Type: smithy.ShapeTypeString, Ext: &ext[110]})
-var sCancelResourceRequestOutput_ProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressEvent", ID: &iProgressEvent, Members: &mProgressEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[112]})
-var sCreateResourceInput_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString, Ext: &ext[114]})
-var sCreateResourceInput_TypeVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeVersionId", ID: &i_TypeVersionId, Type: smithy.ShapeTypeString, Ext: &ext[115]})
-var sCreateResourceInput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[116]})
-var sCreateResourceInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[117]})
-var sCreateResourceInput_DesiredState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredState", ID: &i_Properties, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[118]})
-var sCreateResourceOutput_ProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressEvent", ID: &iProgressEvent, Members: &mProgressEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var sDeleteResourceInput_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString, Ext: &ext[122]})
-var sDeleteResourceInput_TypeVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeVersionId", ID: &i_TypeVersionId, Type: smithy.ShapeTypeString, Ext: &ext[123]})
-var sDeleteResourceInput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[124]})
-var sDeleteResourceInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[125]})
-var sDeleteResourceInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &ext[126]})
-var sDeleteResourceOutput_ProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressEvent", ID: &iProgressEvent, Members: &mProgressEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[128]})
-var sGetResourceInput_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var sGetResourceInput_TypeVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeVersionId", ID: &i_TypeVersionId, Type: smithy.ShapeTypeString, Ext: &ext[131]})
-var sGetResourceInput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[132]})
-var sGetResourceInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &ext[133]})
-var sGetResourceOutput_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString, Ext: &ext[135]})
-var sGetResourceOutput_ResourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceDescription", ID: &iResourceDescription, Members: &mResourceDescription, Type: smithy.ShapeTypeStructure, Ext: &ext[136]})
-var sGetResourceRequestStatusInput_RequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestToken", ID: &i_RequestToken, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var sGetResourceRequestStatusOutput_ProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressEvent", ID: &iProgressEvent, Members: &mProgressEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[140]})
-var sGetResourceRequestStatusOutput_HooksProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HooksProgressEvent", ID: &i_HooksProgressEvent, Members: &m_HooksProgressEvent, Type: smithy.ShapeTypeList, Ext: &ext[141]})
-var sListResourceRequestsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[143]})
-var sListResourceRequestsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[144]})
-var sListResourceRequestsInput_ResourceRequestStatusFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceRequestStatusFilter", ID: &iResourceRequestStatusFilter, Members: &mResourceRequestStatusFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[145]})
-var sListResourceRequestsOutput_ResourceRequestStatusSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceRequestStatusSummaries", ID: &i_ResourceRequestStatusSummaries, Members: &m_ResourceRequestStatusSummaries, Type: smithy.ShapeTypeList, Ext: &ext[147]})
-var sListResourceRequestsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[148]})
-var sListResourcesInput_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString, Ext: &ext[150]})
-var sListResourcesInput_TypeVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeVersionId", ID: &i_TypeVersionId, Type: smithy.ShapeTypeString, Ext: &ext[151]})
-var sListResourcesInput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[152]})
-var sListResourcesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_HandlerNextToken, Type: smithy.ShapeTypeString, Ext: &ext[153]})
-var sListResourcesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[154]})
-var sListResourcesInput_ResourceModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceModel", ID: &i_Properties, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[155]})
-var sListResourcesOutput_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString, Ext: &ext[157]})
-var sListResourcesOutput_ResourceDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceDescriptions", ID: &i_ResourceDescriptions, Members: &m_ResourceDescriptions, Type: smithy.ShapeTypeList, Ext: &ext[158]})
-var sListResourcesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_HandlerNextToken, Type: smithy.ShapeTypeString, Ext: &ext[159]})
-var sUpdateResourceInput_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString, Ext: &ext[161]})
-var sUpdateResourceInput_TypeVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeVersionId", ID: &i_TypeVersionId, Type: smithy.ShapeTypeString, Ext: &ext[162]})
-var sUpdateResourceInput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[163]})
-var sUpdateResourceInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[164]})
-var sUpdateResourceInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &ext[165]})
-var sUpdateResourceInput_PatchDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PatchDocument", ID: &i_PatchDocument, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[166]})
-var sUpdateResourceOutput_ProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressEvent", ID: &iProgressEvent, Members: &mProgressEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[168]})
+var sAlreadyExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAlreadyExistsException_Message})
+var sClientTokenConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eClientTokenConflictException_Message})
+var sConcurrentModificationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eConcurrentModificationException_Message})
+var sConcurrentOperationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eConcurrentOperationException_Message})
+var sGeneralServiceException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eGeneralServiceException_Message})
+var sHandlerFailureException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eHandlerFailureException_Message})
+var sHandlerInternalFailureException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eHandlerInternalFailureException_Message})
+var sHookProgressEvent_HookTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HookTypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString, Ext: &eHookProgressEvent_HookTypeName})
+var sHookProgressEvent_HookTypeVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HookTypeVersionId", ID: &i_TypeVersionId, Type: smithy.ShapeTypeString, Ext: &eHookProgressEvent_HookTypeVersionId})
+var sHookProgressEvent_HookTypeArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HookTypeArn", ID: &i_HookTypeArn, Type: smithy.ShapeTypeString, Ext: &eHookProgressEvent_HookTypeArn})
+var sHookProgressEvent_InvocationPoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationPoint", ID: &i_HookInvocationPoint, Type: smithy.ShapeTypeString, Ext: &eHookProgressEvent_InvocationPoint})
+var sHookProgressEvent_HookStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HookStatus", ID: &i_HookStatus, Type: smithy.ShapeTypeString, Ext: &eHookProgressEvent_HookStatus})
+var sHookProgressEvent_HookEventTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HookEventTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eHookProgressEvent_HookEventTime})
+var sHookProgressEvent_HookStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HookStatusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString, Ext: &eHookProgressEvent_HookStatusMessage})
+var sHookProgressEvent_FailureMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureMode", ID: &i_HookFailureMode, Type: smithy.ShapeTypeString, Ext: &eHookProgressEvent_FailureMode})
+var s_HooksProgressEvent_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHookProgressEvent, Members: &mHookProgressEvent, Type: smithy.ShapeTypeStructure, Ext: &e_HooksProgressEvent_member})
+var sInvalidCredentialsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidCredentialsException_Message})
+var sInvalidRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidRequestException_Message})
+var sNetworkFailureException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eNetworkFailureException_Message})
+var sNotStabilizedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eNotStabilizedException_Message})
+var sNotUpdatableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eNotUpdatableException_Message})
+var s_Operations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Operation, Type: smithy.ShapeTypeString, Ext: &e_Operations_member})
+var s_OperationStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OperationStatus, Type: smithy.ShapeTypeString, Ext: &e_OperationStatuses_member})
+var sPrivateTypeException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ePrivateTypeException_Message})
+var sProgressEvent_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString, Ext: &eProgressEvent_TypeName})
+var sProgressEvent_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eProgressEvent_Identifier})
+var sProgressEvent_RequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestToken", ID: &i_RequestToken, Type: smithy.ShapeTypeString, Ext: &eProgressEvent_RequestToken})
+var sProgressEvent_HooksRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HooksRequestToken", ID: &i_RequestToken, Type: smithy.ShapeTypeString, Ext: &eProgressEvent_HooksRequestToken})
+var sProgressEvent_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i_Operation, Type: smithy.ShapeTypeString, Ext: &eProgressEvent_Operation})
+var sProgressEvent_OperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationStatus", ID: &i_OperationStatus, Type: smithy.ShapeTypeString, Ext: &eProgressEvent_OperationStatus})
+var sProgressEvent_EventTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eProgressEvent_EventTime})
+var sProgressEvent_ResourceModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceModel", ID: &i_Properties, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eProgressEvent_ResourceModel})
+var sProgressEvent_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString, Ext: &eProgressEvent_StatusMessage})
+var sProgressEvent_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_HandlerErrorCode, Type: smithy.ShapeTypeString, Ext: &eProgressEvent_ErrorCode})
+var sProgressEvent_RetryAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryAfter", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eProgressEvent_RetryAfter})
+var sRequestTokenNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eRequestTokenNotFoundException_Message})
+var sResourceConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceConflictException_Message})
+var sResourceDescription_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eResourceDescription_Identifier})
+var sResourceDescription_Properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Properties", ID: &i_Properties, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eResourceDescription_Properties})
+var s_ResourceDescriptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceDescription, Members: &mResourceDescription, Type: smithy.ShapeTypeStructure, Ext: &e_ResourceDescriptions_member})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sResourceRequestStatusFilter_Operations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operations", ID: &i_Operations, Members: &m_Operations, Type: smithy.ShapeTypeList, Ext: &eResourceRequestStatusFilter_Operations})
+var sResourceRequestStatusFilter_OperationStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationStatuses", ID: &i_OperationStatuses, Members: &m_OperationStatuses, Type: smithy.ShapeTypeList, Ext: &eResourceRequestStatusFilter_OperationStatuses})
+var s_ResourceRequestStatusSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProgressEvent, Members: &mProgressEvent, Type: smithy.ShapeTypeStructure, Ext: &e_ResourceRequestStatusSummaries_member})
+var sServiceInternalErrorException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eServiceInternalErrorException_Message})
+var sServiceLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eServiceLimitExceededException_Message})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var sTypeNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eTypeNotFoundException_Message})
+var sUnsupportedActionException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eUnsupportedActionException_Message})
+var sCancelResourceRequestInput_RequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestToken", ID: &i_RequestToken, Type: smithy.ShapeTypeString, Ext: &eCancelResourceRequestInput_RequestToken})
+var sCancelResourceRequestOutput_ProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressEvent", ID: &iProgressEvent, Members: &mProgressEvent, Type: smithy.ShapeTypeStructure, Ext: &eCancelResourceRequestOutput_ProgressEvent})
+var sCreateResourceInput_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString, Ext: &eCreateResourceInput_TypeName})
+var sCreateResourceInput_TypeVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeVersionId", ID: &i_TypeVersionId, Type: smithy.ShapeTypeString, Ext: &eCreateResourceInput_TypeVersionId})
+var sCreateResourceInput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eCreateResourceInput_RoleArn})
+var sCreateResourceInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateResourceInput_ClientToken})
+var sCreateResourceInput_DesiredState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredState", ID: &i_Properties, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eCreateResourceInput_DesiredState})
+var sCreateResourceOutput_ProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressEvent", ID: &iProgressEvent, Members: &mProgressEvent, Type: smithy.ShapeTypeStructure, Ext: &eCreateResourceOutput_ProgressEvent})
+var sDeleteResourceInput_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString, Ext: &eDeleteResourceInput_TypeName})
+var sDeleteResourceInput_TypeVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeVersionId", ID: &i_TypeVersionId, Type: smithy.ShapeTypeString, Ext: &eDeleteResourceInput_TypeVersionId})
+var sDeleteResourceInput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eDeleteResourceInput_RoleArn})
+var sDeleteResourceInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eDeleteResourceInput_ClientToken})
+var sDeleteResourceInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eDeleteResourceInput_Identifier})
+var sDeleteResourceOutput_ProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressEvent", ID: &iProgressEvent, Members: &mProgressEvent, Type: smithy.ShapeTypeStructure, Ext: &eDeleteResourceOutput_ProgressEvent})
+var sGetResourceInput_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString, Ext: &eGetResourceInput_TypeName})
+var sGetResourceInput_TypeVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeVersionId", ID: &i_TypeVersionId, Type: smithy.ShapeTypeString, Ext: &eGetResourceInput_TypeVersionId})
+var sGetResourceInput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eGetResourceInput_RoleArn})
+var sGetResourceInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eGetResourceInput_Identifier})
+var sGetResourceOutput_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString, Ext: &eGetResourceOutput_TypeName})
+var sGetResourceOutput_ResourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceDescription", ID: &iResourceDescription, Members: &mResourceDescription, Type: smithy.ShapeTypeStructure, Ext: &eGetResourceOutput_ResourceDescription})
+var sGetResourceRequestStatusInput_RequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestToken", ID: &i_RequestToken, Type: smithy.ShapeTypeString, Ext: &eGetResourceRequestStatusInput_RequestToken})
+var sGetResourceRequestStatusOutput_ProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressEvent", ID: &iProgressEvent, Members: &mProgressEvent, Type: smithy.ShapeTypeStructure, Ext: &eGetResourceRequestStatusOutput_ProgressEvent})
+var sGetResourceRequestStatusOutput_HooksProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HooksProgressEvent", ID: &i_HooksProgressEvent, Members: &m_HooksProgressEvent, Type: smithy.ShapeTypeList, Ext: &eGetResourceRequestStatusOutput_HooksProgressEvent})
+var sListResourceRequestsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListResourceRequestsInput_MaxResults})
+var sListResourceRequestsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListResourceRequestsInput_NextToken})
+var sListResourceRequestsInput_ResourceRequestStatusFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceRequestStatusFilter", ID: &iResourceRequestStatusFilter, Members: &mResourceRequestStatusFilter, Type: smithy.ShapeTypeStructure, Ext: &eListResourceRequestsInput_ResourceRequestStatusFilter})
+var sListResourceRequestsOutput_ResourceRequestStatusSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceRequestStatusSummaries", ID: &i_ResourceRequestStatusSummaries, Members: &m_ResourceRequestStatusSummaries, Type: smithy.ShapeTypeList, Ext: &eListResourceRequestsOutput_ResourceRequestStatusSummaries})
+var sListResourceRequestsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListResourceRequestsOutput_NextToken})
+var sListResourcesInput_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString, Ext: &eListResourcesInput_TypeName})
+var sListResourcesInput_TypeVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeVersionId", ID: &i_TypeVersionId, Type: smithy.ShapeTypeString, Ext: &eListResourcesInput_TypeVersionId})
+var sListResourcesInput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eListResourcesInput_RoleArn})
+var sListResourcesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_HandlerNextToken, Type: smithy.ShapeTypeString, Ext: &eListResourcesInput_NextToken})
+var sListResourcesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListResourcesInput_MaxResults})
+var sListResourcesInput_ResourceModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceModel", ID: &i_Properties, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eListResourcesInput_ResourceModel})
+var sListResourcesOutput_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString, Ext: &eListResourcesOutput_TypeName})
+var sListResourcesOutput_ResourceDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceDescriptions", ID: &i_ResourceDescriptions, Members: &m_ResourceDescriptions, Type: smithy.ShapeTypeList, Ext: &eListResourcesOutput_ResourceDescriptions})
+var sListResourcesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_HandlerNextToken, Type: smithy.ShapeTypeString, Ext: &eListResourcesOutput_NextToken})
+var sUpdateResourceInput_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString, Ext: &eUpdateResourceInput_TypeName})
+var sUpdateResourceInput_TypeVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeVersionId", ID: &i_TypeVersionId, Type: smithy.ShapeTypeString, Ext: &eUpdateResourceInput_TypeVersionId})
+var sUpdateResourceInput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eUpdateResourceInput_RoleArn})
+var sUpdateResourceInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eUpdateResourceInput_ClientToken})
+var sUpdateResourceInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eUpdateResourceInput_Identifier})
+var sUpdateResourceInput_PatchDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PatchDocument", ID: &i_PatchDocument, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eUpdateResourceInput_PatchDocument})
+var sUpdateResourceOutput_ProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressEvent", ID: &iProgressEvent, Members: &mProgressEvent, Type: smithy.ShapeTypeStructure, Ext: &eUpdateResourceOutput_ProgressEvent})
 
 var CancelResourceRequest = &sCancelResourceRequest
 

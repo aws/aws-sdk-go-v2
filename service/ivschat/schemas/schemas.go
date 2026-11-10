@@ -7,9 +7,293 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [285]smithy.SchemaExtensions
+var (
+	eCreateChatToken                                             smithy.SchemaExtensions
+	eCreateLoggingConfiguration                                  smithy.SchemaExtensions
+	eCreateRoom                                                  smithy.SchemaExtensions
+	eDeleteLoggingConfiguration                                  smithy.SchemaExtensions
+	eDeleteMessage                                               smithy.SchemaExtensions
+	eDeleteRoom                                                  smithy.SchemaExtensions
+	eDisconnectUser                                              smithy.SchemaExtensions
+	eGetLoggingConfiguration                                     smithy.SchemaExtensions
+	eGetRoom                                                     smithy.SchemaExtensions
+	eListLoggingConfigurations                                   smithy.SchemaExtensions
+	eListRooms                                                   smithy.SchemaExtensions
+	eListTagsForResource                                         smithy.SchemaExtensions
+	eSendEvent                                                   smithy.SchemaExtensions
+	eTagResource                                                 smithy.SchemaExtensions
+	eUntagResource                                               smithy.SchemaExtensions
+	eUpdateLoggingConfiguration                                  smithy.SchemaExtensions
+	eUpdateRoom                                                  smithy.SchemaExtensions
+	e_AmazonInteractiveVideoServiceChat                          smithy.SchemaExtensions
+	eAccessDeniedException                                       smithy.SchemaExtensions
+	eAccessDeniedException_message                               smithy.SchemaExtensions
+	e_BucketName                                                 smithy.SchemaExtensions
+	e_ChatToken                                                  smithy.SchemaExtensions
+	e_ChatTokenAttributes                                        smithy.SchemaExtensions
+	e_ChatTokenAttributes_key                                    smithy.SchemaExtensions
+	e_ChatTokenAttributes_value                                  smithy.SchemaExtensions
+	e_ChatTokenCapabilities                                      smithy.SchemaExtensions
+	e_ChatTokenCapabilities_member                               smithy.SchemaExtensions
+	e_ChatTokenCapability                                        smithy.SchemaExtensions
+	eCloudWatchLogsDestinationConfiguration                      smithy.SchemaExtensions
+	eCloudWatchLogsDestinationConfiguration_logGroupName         smithy.SchemaExtensions
+	eConflictException                                           smithy.SchemaExtensions
+	eConflictException_message                                   smithy.SchemaExtensions
+	eConflictException_resourceId                                smithy.SchemaExtensions
+	eConflictException_resourceType                              smithy.SchemaExtensions
+	e_CreateLoggingConfigurationState                            smithy.SchemaExtensions
+	e_DeliveryStreamName                                         smithy.SchemaExtensions
+	eDestinationConfiguration                                    smithy.SchemaExtensions
+	eDestinationConfiguration_s3                                 smithy.SchemaExtensions
+	eDestinationConfiguration_cloudWatchLogs                     smithy.SchemaExtensions
+	eDestinationConfiguration_firehose                           smithy.SchemaExtensions
+	e_ErrorMessage                                               smithy.SchemaExtensions
+	e_EventAttributes                                            smithy.SchemaExtensions
+	e_EventAttributes_key                                        smithy.SchemaExtensions
+	e_EventAttributes_value                                      smithy.SchemaExtensions
+	e_EventName                                                  smithy.SchemaExtensions
+	e_FallbackResult                                             smithy.SchemaExtensions
+	e_FieldName                                                  smithy.SchemaExtensions
+	eFirehoseDestinationConfiguration                            smithy.SchemaExtensions
+	eFirehoseDestinationConfiguration_deliveryStreamName         smithy.SchemaExtensions
+	e_ID                                                         smithy.SchemaExtensions
+	eInternalServerException                                     smithy.SchemaExtensions
+	eInternalServerException_message                             smithy.SchemaExtensions
+	e_LambdaArn                                                  smithy.SchemaExtensions
+	e_Limit                                                      smithy.SchemaExtensions
+	e_LoggingConfigurationArn                                    smithy.SchemaExtensions
+	e_LoggingConfigurationID                                     smithy.SchemaExtensions
+	e_LoggingConfigurationIdentifier                             smithy.SchemaExtensions
+	e_LoggingConfigurationIdentifierList                         smithy.SchemaExtensions
+	e_LoggingConfigurationIdentifierList_member                  smithy.SchemaExtensions
+	e_LoggingConfigurationList                                   smithy.SchemaExtensions
+	e_LoggingConfigurationList_member                            smithy.SchemaExtensions
+	e_LoggingConfigurationName                                   smithy.SchemaExtensions
+	e_LoggingConfigurationState                                  smithy.SchemaExtensions
+	eLoggingConfigurationSummary                                 smithy.SchemaExtensions
+	eLoggingConfigurationSummary_arn                             smithy.SchemaExtensions
+	eLoggingConfigurationSummary_id                              smithy.SchemaExtensions
+	eLoggingConfigurationSummary_createTime                      smithy.SchemaExtensions
+	eLoggingConfigurationSummary_updateTime                      smithy.SchemaExtensions
+	eLoggingConfigurationSummary_name                            smithy.SchemaExtensions
+	eLoggingConfigurationSummary_destinationConfiguration        smithy.SchemaExtensions
+	eLoggingConfigurationSummary_state                           smithy.SchemaExtensions
+	eLoggingConfigurationSummary_tags                            smithy.SchemaExtensions
+	e_LogGroupName                                               smithy.SchemaExtensions
+	e_MaxLoggingConfigurationResults                             smithy.SchemaExtensions
+	e_MaxRoomResults                                             smithy.SchemaExtensions
+	e_MessageID                                                  smithy.SchemaExtensions
+	eMessageReviewHandler                                        smithy.SchemaExtensions
+	eMessageReviewHandler_uri                                    smithy.SchemaExtensions
+	eMessageReviewHandler_fallbackResult                         smithy.SchemaExtensions
+	e_PaginationToken                                            smithy.SchemaExtensions
+	ePendingVerification                                         smithy.SchemaExtensions
+	ePendingVerification_message                                 smithy.SchemaExtensions
+	e_Reason                                                     smithy.SchemaExtensions
+	e_ResourceArn                                                smithy.SchemaExtensions
+	e_ResourceId                                                 smithy.SchemaExtensions
+	eResourceNotFoundException                                   smithy.SchemaExtensions
+	eResourceNotFoundException_message                           smithy.SchemaExtensions
+	eResourceNotFoundException_resourceId                        smithy.SchemaExtensions
+	eResourceNotFoundException_resourceType                      smithy.SchemaExtensions
+	e_ResourceType                                               smithy.SchemaExtensions
+	e_RoomArn                                                    smithy.SchemaExtensions
+	e_RoomID                                                     smithy.SchemaExtensions
+	e_RoomIdentifier                                             smithy.SchemaExtensions
+	e_RoomList                                                   smithy.SchemaExtensions
+	e_RoomList_member                                            smithy.SchemaExtensions
+	e_RoomMaxMessageLength                                       smithy.SchemaExtensions
+	e_RoomMaxMessageRatePerSecond                                smithy.SchemaExtensions
+	e_RoomName                                                   smithy.SchemaExtensions
+	eRoomSummary                                                 smithy.SchemaExtensions
+	eRoomSummary_arn                                             smithy.SchemaExtensions
+	eRoomSummary_id                                              smithy.SchemaExtensions
+	eRoomSummary_name                                            smithy.SchemaExtensions
+	eRoomSummary_messageReviewHandler                            smithy.SchemaExtensions
+	eRoomSummary_createTime                                      smithy.SchemaExtensions
+	eRoomSummary_updateTime                                      smithy.SchemaExtensions
+	eRoomSummary_tags                                            smithy.SchemaExtensions
+	eRoomSummary_loggingConfigurationIdentifiers                 smithy.SchemaExtensions
+	eS3DestinationConfiguration                                  smithy.SchemaExtensions
+	eS3DestinationConfiguration_bucketName                       smithy.SchemaExtensions
+	eServiceQuotaExceededException                               smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                       smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceId                    smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceType                  smithy.SchemaExtensions
+	eServiceQuotaExceededException_limit                         smithy.SchemaExtensions
+	e_SessionDurationInMinutes                                   smithy.SchemaExtensions
+	e_String                                                     smithy.SchemaExtensions
+	e_TagKey                                                     smithy.SchemaExtensions
+	e_TagKeyList                                                 smithy.SchemaExtensions
+	e_TagKeyList_member                                          smithy.SchemaExtensions
+	e_Tags                                                       smithy.SchemaExtensions
+	e_Tags_key                                                   smithy.SchemaExtensions
+	e_Tags_value                                                 smithy.SchemaExtensions
+	e_TagValue                                                   smithy.SchemaExtensions
+	eThrottlingException                                         smithy.SchemaExtensions
+	eThrottlingException_message                                 smithy.SchemaExtensions
+	eThrottlingException_resourceId                              smithy.SchemaExtensions
+	eThrottlingException_resourceType                            smithy.SchemaExtensions
+	eThrottlingException_limit                                   smithy.SchemaExtensions
+	e_Time                                                       smithy.SchemaExtensions
+	e_UpdateLoggingConfigurationState                            smithy.SchemaExtensions
+	e_UserID                                                     smithy.SchemaExtensions
+	eValidationException                                         smithy.SchemaExtensions
+	eValidationException_message                                 smithy.SchemaExtensions
+	eValidationException_reason                                  smithy.SchemaExtensions
+	eValidationException_fieldList                               smithy.SchemaExtensions
+	eValidationExceptionField                                    smithy.SchemaExtensions
+	eValidationExceptionField_name                               smithy.SchemaExtensions
+	eValidationExceptionField_message                            smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                               smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member                        smithy.SchemaExtensions
+	e_ValidationExceptionReason                                  smithy.SchemaExtensions
+	eCreateChatTokenRequest                                      smithy.SchemaExtensions
+	eCreateChatTokenRequest_roomIdentifier                       smithy.SchemaExtensions
+	eCreateChatTokenRequest_userId                               smithy.SchemaExtensions
+	eCreateChatTokenRequest_capabilities                         smithy.SchemaExtensions
+	eCreateChatTokenRequest_sessionDurationInMinutes             smithy.SchemaExtensions
+	eCreateChatTokenRequest_attributes                           smithy.SchemaExtensions
+	eCreateChatTokenResponse                                     smithy.SchemaExtensions
+	eCreateChatTokenResponse_token                               smithy.SchemaExtensions
+	eCreateChatTokenResponse_tokenExpirationTime                 smithy.SchemaExtensions
+	eCreateChatTokenResponse_sessionExpirationTime               smithy.SchemaExtensions
+	eCreateLoggingConfigurationRequest                           smithy.SchemaExtensions
+	eCreateLoggingConfigurationRequest_name                      smithy.SchemaExtensions
+	eCreateLoggingConfigurationRequest_destinationConfiguration  smithy.SchemaExtensions
+	eCreateLoggingConfigurationRequest_tags                      smithy.SchemaExtensions
+	eCreateLoggingConfigurationResponse                          smithy.SchemaExtensions
+	eCreateLoggingConfigurationResponse_arn                      smithy.SchemaExtensions
+	eCreateLoggingConfigurationResponse_id                       smithy.SchemaExtensions
+	eCreateLoggingConfigurationResponse_createTime               smithy.SchemaExtensions
+	eCreateLoggingConfigurationResponse_updateTime               smithy.SchemaExtensions
+	eCreateLoggingConfigurationResponse_name                     smithy.SchemaExtensions
+	eCreateLoggingConfigurationResponse_destinationConfiguration smithy.SchemaExtensions
+	eCreateLoggingConfigurationResponse_state                    smithy.SchemaExtensions
+	eCreateLoggingConfigurationResponse_tags                     smithy.SchemaExtensions
+	eCreateRoomRequest                                           smithy.SchemaExtensions
+	eCreateRoomRequest_name                                      smithy.SchemaExtensions
+	eCreateRoomRequest_maximumMessageRatePerSecond               smithy.SchemaExtensions
+	eCreateRoomRequest_maximumMessageLength                      smithy.SchemaExtensions
+	eCreateRoomRequest_messageReviewHandler                      smithy.SchemaExtensions
+	eCreateRoomRequest_tags                                      smithy.SchemaExtensions
+	eCreateRoomRequest_loggingConfigurationIdentifiers           smithy.SchemaExtensions
+	eCreateRoomResponse                                          smithy.SchemaExtensions
+	eCreateRoomResponse_arn                                      smithy.SchemaExtensions
+	eCreateRoomResponse_id                                       smithy.SchemaExtensions
+	eCreateRoomResponse_name                                     smithy.SchemaExtensions
+	eCreateRoomResponse_createTime                               smithy.SchemaExtensions
+	eCreateRoomResponse_updateTime                               smithy.SchemaExtensions
+	eCreateRoomResponse_maximumMessageRatePerSecond              smithy.SchemaExtensions
+	eCreateRoomResponse_maximumMessageLength                     smithy.SchemaExtensions
+	eCreateRoomResponse_messageReviewHandler                     smithy.SchemaExtensions
+	eCreateRoomResponse_tags                                     smithy.SchemaExtensions
+	eCreateRoomResponse_loggingConfigurationIdentifiers          smithy.SchemaExtensions
+	eDeleteLoggingConfigurationRequest                           smithy.SchemaExtensions
+	eDeleteLoggingConfigurationRequest_identifier                smithy.SchemaExtensions
+	eDeleteMessageRequest                                        smithy.SchemaExtensions
+	eDeleteMessageRequest_roomIdentifier                         smithy.SchemaExtensions
+	eDeleteMessageRequest_id                                     smithy.SchemaExtensions
+	eDeleteMessageRequest_reason                                 smithy.SchemaExtensions
+	eDeleteMessageResponse                                       smithy.SchemaExtensions
+	eDeleteMessageResponse_id                                    smithy.SchemaExtensions
+	eDeleteRoomRequest                                           smithy.SchemaExtensions
+	eDeleteRoomRequest_identifier                                smithy.SchemaExtensions
+	eDisconnectUserRequest                                       smithy.SchemaExtensions
+	eDisconnectUserRequest_roomIdentifier                        smithy.SchemaExtensions
+	eDisconnectUserRequest_userId                                smithy.SchemaExtensions
+	eDisconnectUserRequest_reason                                smithy.SchemaExtensions
+	eDisconnectUserResponse                                      smithy.SchemaExtensions
+	eGetLoggingConfigurationRequest                              smithy.SchemaExtensions
+	eGetLoggingConfigurationRequest_identifier                   smithy.SchemaExtensions
+	eGetLoggingConfigurationResponse                             smithy.SchemaExtensions
+	eGetLoggingConfigurationResponse_arn                         smithy.SchemaExtensions
+	eGetLoggingConfigurationResponse_id                          smithy.SchemaExtensions
+	eGetLoggingConfigurationResponse_createTime                  smithy.SchemaExtensions
+	eGetLoggingConfigurationResponse_updateTime                  smithy.SchemaExtensions
+	eGetLoggingConfigurationResponse_name                        smithy.SchemaExtensions
+	eGetLoggingConfigurationResponse_destinationConfiguration    smithy.SchemaExtensions
+	eGetLoggingConfigurationResponse_state                       smithy.SchemaExtensions
+	eGetLoggingConfigurationResponse_tags                        smithy.SchemaExtensions
+	eGetRoomRequest                                              smithy.SchemaExtensions
+	eGetRoomRequest_identifier                                   smithy.SchemaExtensions
+	eGetRoomResponse                                             smithy.SchemaExtensions
+	eGetRoomResponse_arn                                         smithy.SchemaExtensions
+	eGetRoomResponse_id                                          smithy.SchemaExtensions
+	eGetRoomResponse_name                                        smithy.SchemaExtensions
+	eGetRoomResponse_createTime                                  smithy.SchemaExtensions
+	eGetRoomResponse_updateTime                                  smithy.SchemaExtensions
+	eGetRoomResponse_maximumMessageRatePerSecond                 smithy.SchemaExtensions
+	eGetRoomResponse_maximumMessageLength                        smithy.SchemaExtensions
+	eGetRoomResponse_messageReviewHandler                        smithy.SchemaExtensions
+	eGetRoomResponse_tags                                        smithy.SchemaExtensions
+	eGetRoomResponse_loggingConfigurationIdentifiers             smithy.SchemaExtensions
+	eListLoggingConfigurationsRequest                            smithy.SchemaExtensions
+	eListLoggingConfigurationsRequest_nextToken                  smithy.SchemaExtensions
+	eListLoggingConfigurationsRequest_maxResults                 smithy.SchemaExtensions
+	eListLoggingConfigurationsResponse                           smithy.SchemaExtensions
+	eListLoggingConfigurationsResponse_loggingConfigurations     smithy.SchemaExtensions
+	eListLoggingConfigurationsResponse_nextToken                 smithy.SchemaExtensions
+	eListRoomsRequest                                            smithy.SchemaExtensions
+	eListRoomsRequest_name                                       smithy.SchemaExtensions
+	eListRoomsRequest_nextToken                                  smithy.SchemaExtensions
+	eListRoomsRequest_maxResults                                 smithy.SchemaExtensions
+	eListRoomsRequest_messageReviewHandlerUri                    smithy.SchemaExtensions
+	eListRoomsRequest_loggingConfigurationIdentifier             smithy.SchemaExtensions
+	eListRoomsResponse                                           smithy.SchemaExtensions
+	eListRoomsResponse_rooms                                     smithy.SchemaExtensions
+	eListRoomsResponse_nextToken                                 smithy.SchemaExtensions
+	eListTagsForResourceRequest                                  smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceArn                      smithy.SchemaExtensions
+	eListTagsForResourceResponse                                 smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                            smithy.SchemaExtensions
+	eSendEventRequest                                            smithy.SchemaExtensions
+	eSendEventRequest_roomIdentifier                             smithy.SchemaExtensions
+	eSendEventRequest_eventName                                  smithy.SchemaExtensions
+	eSendEventRequest_attributes                                 smithy.SchemaExtensions
+	eSendEventResponse                                           smithy.SchemaExtensions
+	eSendEventResponse_id                                        smithy.SchemaExtensions
+	eTagResourceRequest                                          smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                              smithy.SchemaExtensions
+	eTagResourceRequest_tags                                     smithy.SchemaExtensions
+	eTagResourceResponse                                         smithy.SchemaExtensions
+	eUntagResourceRequest                                        smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                            smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                                smithy.SchemaExtensions
+	eUntagResourceResponse                                       smithy.SchemaExtensions
+	eUpdateLoggingConfigurationRequest                           smithy.SchemaExtensions
+	eUpdateLoggingConfigurationRequest_identifier                smithy.SchemaExtensions
+	eUpdateLoggingConfigurationRequest_name                      smithy.SchemaExtensions
+	eUpdateLoggingConfigurationRequest_destinationConfiguration  smithy.SchemaExtensions
+	eUpdateLoggingConfigurationResponse                          smithy.SchemaExtensions
+	eUpdateLoggingConfigurationResponse_arn                      smithy.SchemaExtensions
+	eUpdateLoggingConfigurationResponse_id                       smithy.SchemaExtensions
+	eUpdateLoggingConfigurationResponse_createTime               smithy.SchemaExtensions
+	eUpdateLoggingConfigurationResponse_updateTime               smithy.SchemaExtensions
+	eUpdateLoggingConfigurationResponse_name                     smithy.SchemaExtensions
+	eUpdateLoggingConfigurationResponse_destinationConfiguration smithy.SchemaExtensions
+	eUpdateLoggingConfigurationResponse_state                    smithy.SchemaExtensions
+	eUpdateLoggingConfigurationResponse_tags                     smithy.SchemaExtensions
+	eUpdateRoomRequest                                           smithy.SchemaExtensions
+	eUpdateRoomRequest_identifier                                smithy.SchemaExtensions
+	eUpdateRoomRequest_name                                      smithy.SchemaExtensions
+	eUpdateRoomRequest_maximumMessageRatePerSecond               smithy.SchemaExtensions
+	eUpdateRoomRequest_maximumMessageLength                      smithy.SchemaExtensions
+	eUpdateRoomRequest_messageReviewHandler                      smithy.SchemaExtensions
+	eUpdateRoomRequest_loggingConfigurationIdentifiers           smithy.SchemaExtensions
+	eUpdateRoomResponse                                          smithy.SchemaExtensions
+	eUpdateRoomResponse_arn                                      smithy.SchemaExtensions
+	eUpdateRoomResponse_id                                       smithy.SchemaExtensions
+	eUpdateRoomResponse_name                                     smithy.SchemaExtensions
+	eUpdateRoomResponse_createTime                               smithy.SchemaExtensions
+	eUpdateRoomResponse_updateTime                               smithy.SchemaExtensions
+	eUpdateRoomResponse_maximumMessageRatePerSecond              smithy.SchemaExtensions
+	eUpdateRoomResponse_maximumMessageLength                     smithy.SchemaExtensions
+	eUpdateRoomResponse_messageReviewHandler                     smithy.SchemaExtensions
+	eUpdateRoomResponse_tags                                     smithy.SchemaExtensions
+	eUpdateRoomResponse_loggingConfigurationIdentifiers          smithy.SchemaExtensions
+)
 
 var (
 	iCreateChatToken                        = smithy.ShapeID{Namespace: "com.amazonaws.ivschat", Name: "CreateChatToken"}
@@ -258,292 +542,292 @@ var mUpdateRoomResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRo
 	0, 0, 6, 0, 0, 0, 10, 7,
 }}
 
-var sCreateChatToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChatToken, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCreateLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLoggingConfiguration, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sCreateRoom = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRoom, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sDeleteLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLoggingConfiguration, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sDeleteMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMessage, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sDeleteRoom = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRoom, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sDisconnectUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisconnectUser, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sGetLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLoggingConfiguration, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sGetRoom = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoom, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sListLoggingConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLoggingConfigurations, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sListRooms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRooms, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sSendEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendEvent, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sUpdateLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLoggingConfiguration, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sUpdateRoom = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoom, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var s_AmazonInteractiveVideoServiceChat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonInteractiveVideoServiceChat, Type: smithy.ShapeTypeService, Ext: &ext[17]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &ext[18]})
-var s_BucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BucketName, Type: smithy.ShapeTypeString, Ext: &ext[20]})
-var s_ChatToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChatToken, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &ext[21]})
-var s_ChatTokenAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChatTokenAttributes, Members: &m_ChatTokenAttributes, Traits: &t18, Type: smithy.ShapeTypeMap, Ext: &ext[22]})
-var s_ChatTokenCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChatTokenCapabilities, Members: &m_ChatTokenCapabilities, Type: smithy.ShapeTypeList, Ext: &ext[25]})
-var s_ChatTokenCapability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChatTokenCapability, Type: smithy.ShapeTypeString, Ext: &ext[27]})
-var sCloudWatchLogsDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudWatchLogsDestinationConfiguration, Members: &mCloudWatchLogsDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &ext[30]})
-var s_CreateLoggingConfigurationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateLoggingConfigurationState, Type: smithy.ShapeTypeString, Ext: &ext[34]})
-var s_DeliveryStreamName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeliveryStreamName, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var sDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationConfiguration, Members: &mDestinationConfiguration, Type: smithy.ShapeTypeUnion, Ext: &ext[36]})
-var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var s_EventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventAttributes, Members: &m_EventAttributes, Type: smithy.ShapeTypeMap, Ext: &ext[41]})
-var s_EventName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventName, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var s_FallbackResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FallbackResult, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var s_FieldName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldName, Type: smithy.ShapeTypeString, Ext: &ext[46]})
-var sFirehoseDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirehoseDestinationConfiguration, Members: &mFirehoseDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[47]})
-var s_ID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ID, Type: smithy.ShapeTypeString, Ext: &ext[49]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &ext[50]})
-var s_LambdaArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LambdaArn, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var s_Limit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Limit, Type: smithy.ShapeTypeInteger, Ext: &ext[53]})
-var s_LoggingConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoggingConfigurationArn, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var s_LoggingConfigurationID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoggingConfigurationID, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var s_LoggingConfigurationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoggingConfigurationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[56]})
-var s_LoggingConfigurationIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoggingConfigurationIdentifierList, Members: &m_LoggingConfigurationIdentifierList, Type: smithy.ShapeTypeList, Ext: &ext[57]})
-var s_LoggingConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoggingConfigurationList, Members: &m_LoggingConfigurationList, Type: smithy.ShapeTypeList, Ext: &ext[59]})
-var s_LoggingConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoggingConfigurationName, Type: smithy.ShapeTypeString, Ext: &ext[61]})
-var s_LoggingConfigurationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoggingConfigurationState, Type: smithy.ShapeTypeString, Ext: &ext[62]})
-var sLoggingConfigurationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoggingConfigurationSummary, Members: &mLoggingConfigurationSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[63]})
-var s_LogGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogGroupName, Type: smithy.ShapeTypeString, Ext: &ext[72]})
-var s_MaxLoggingConfigurationResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxLoggingConfigurationResults, Type: smithy.ShapeTypeInteger, Ext: &ext[73]})
-var s_MaxRoomResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxRoomResults, Type: smithy.ShapeTypeInteger, Ext: &ext[74]})
-var s_MessageID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageID, Type: smithy.ShapeTypeString, Ext: &ext[75]})
-var sMessageReviewHandler = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageReviewHandler, Members: &mMessageReviewHandler, Type: smithy.ShapeTypeStructure, Ext: &ext[76]})
-var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[79]})
-var sPendingVerification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPendingVerification, Members: &mPendingVerification, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var s_Reason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Reason, Type: smithy.ShapeTypeString, Ext: &ext[82]})
-var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var s_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &ext[84]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &ext[85]})
-var s_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &ext[89]})
-var s_RoomArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoomArn, Type: smithy.ShapeTypeString, Ext: &ext[90]})
-var s_RoomID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoomID, Type: smithy.ShapeTypeString, Ext: &ext[91]})
-var s_RoomIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoomIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[92]})
-var s_RoomList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoomList, Members: &m_RoomList, Type: smithy.ShapeTypeList, Ext: &ext[93]})
-var s_RoomMaxMessageLength = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoomMaxMessageLength, Type: smithy.ShapeTypeInteger, Ext: &ext[95]})
-var s_RoomMaxMessageRatePerSecond = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoomMaxMessageRatePerSecond, Type: smithy.ShapeTypeInteger, Ext: &ext[96]})
-var s_RoomName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoomName, Type: smithy.ShapeTypeString, Ext: &ext[97]})
-var sRoomSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoomSummary, Members: &mRoomSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[98]})
-var sS3DestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3DestinationConfiguration, Members: &mS3DestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[107]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &ext[109]})
-var s_SessionDurationInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionDurationInMinutes, Type: smithy.ShapeTypeInteger, Ext: &ext[114]})
-var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[115]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[116]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[117]})
-var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[119]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[122]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &ext[123]})
-var s_Time = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Time, Traits: &t25, Type: smithy.ShapeTypeTimestamp, Ext: &ext[128]})
-var s_UpdateLoggingConfigurationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateLoggingConfigurationState, Type: smithy.ShapeTypeString, Ext: &ext[129]})
-var s_UserID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserID, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &ext[131]})
-var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[135]})
-var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[138]})
-var s_ValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionReason, Type: smithy.ShapeTypeString, Ext: &ext[140]})
-var sCreateChatTokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChatTokenRequest, Members: &mCreateChatTokenRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[141]})
-var sCreateChatTokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChatTokenResponse, Members: &mCreateChatTokenResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[147]})
-var sCreateLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLoggingConfigurationRequest, Members: &mCreateLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[151]})
-var sCreateLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLoggingConfigurationResponse, Members: &mCreateLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[155]})
-var sCreateRoomRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRoomRequest, Members: &mCreateRoomRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[164]})
-var sCreateRoomResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRoomResponse, Members: &mCreateRoomResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[171]})
-var sDeleteLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLoggingConfigurationRequest, Members: &mDeleteLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[182]})
-var sDeleteMessageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMessageRequest, Members: &mDeleteMessageRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[184]})
-var sDeleteMessageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMessageResponse, Members: &mDeleteMessageResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[188]})
-var sDeleteRoomRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRoomRequest, Members: &mDeleteRoomRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[190]})
-var sDisconnectUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisconnectUserRequest, Members: &mDisconnectUserRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[192]})
-var sDisconnectUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisconnectUserResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[196]})
-var sGetLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLoggingConfigurationRequest, Members: &mGetLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[197]})
-var sGetLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLoggingConfigurationResponse, Members: &mGetLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[199]})
-var sGetRoomRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoomRequest, Members: &mGetRoomRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[208]})
-var sGetRoomResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoomResponse, Members: &mGetRoomResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[210]})
-var sListLoggingConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLoggingConfigurationsRequest, Members: &mListLoggingConfigurationsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[221]})
-var sListLoggingConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLoggingConfigurationsResponse, Members: &mListLoggingConfigurationsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[224]})
-var sListRoomsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoomsRequest, Members: &mListRoomsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[227]})
-var sListRoomsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoomsResponse, Members: &mListRoomsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[233]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[236]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[238]})
-var sSendEventRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendEventRequest, Members: &mSendEventRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[240]})
-var sSendEventResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendEventResponse, Members: &mSendEventResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[244]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[246]})
-var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[249]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[250]})
-var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[253]})
-var sUpdateLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLoggingConfigurationRequest, Members: &mUpdateLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[254]})
-var sUpdateLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLoggingConfigurationResponse, Members: &mUpdateLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[258]})
-var sUpdateRoomRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoomRequest, Members: &mUpdateRoomRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[267]})
-var sUpdateRoomResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoomResponse, Members: &mUpdateRoomResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[274]})
+var sCreateChatToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChatToken, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateChatToken})
+var sCreateLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLoggingConfiguration, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateLoggingConfiguration})
+var sCreateRoom = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRoom, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateRoom})
+var sDeleteLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLoggingConfiguration, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDeleteLoggingConfiguration})
+var sDeleteMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMessage, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDeleteMessage})
+var sDeleteRoom = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRoom, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRoom})
+var sDisconnectUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisconnectUser, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eDisconnectUser})
+var sGetLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLoggingConfiguration, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eGetLoggingConfiguration})
+var sGetRoom = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoom, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eGetRoom})
+var sListLoggingConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLoggingConfigurations, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eListLoggingConfigurations})
+var sListRooms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRooms, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eListRooms})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sSendEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendEvent, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eSendEvent})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLoggingConfiguration, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eUpdateLoggingConfiguration})
+var sUpdateRoom = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoom, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRoom})
+var s_AmazonInteractiveVideoServiceChat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonInteractiveVideoServiceChat, Type: smithy.ShapeTypeService, Ext: &e_AmazonInteractiveVideoServiceChat})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var s_BucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BucketName, Type: smithy.ShapeTypeString, Ext: &e_BucketName})
+var s_ChatToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChatToken, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &e_ChatToken})
+var s_ChatTokenAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChatTokenAttributes, Members: &m_ChatTokenAttributes, Traits: &t18, Type: smithy.ShapeTypeMap, Ext: &e_ChatTokenAttributes})
+var s_ChatTokenCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChatTokenCapabilities, Members: &m_ChatTokenCapabilities, Type: smithy.ShapeTypeList, Ext: &e_ChatTokenCapabilities})
+var s_ChatTokenCapability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChatTokenCapability, Type: smithy.ShapeTypeString, Ext: &e_ChatTokenCapability})
+var sCloudWatchLogsDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudWatchLogsDestinationConfiguration, Members: &mCloudWatchLogsDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCloudWatchLogsDestinationConfiguration})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var s_CreateLoggingConfigurationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateLoggingConfigurationState, Type: smithy.ShapeTypeString, Ext: &e_CreateLoggingConfigurationState})
+var s_DeliveryStreamName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeliveryStreamName, Type: smithy.ShapeTypeString, Ext: &e_DeliveryStreamName})
+var sDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationConfiguration, Members: &mDestinationConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eDestinationConfiguration})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var s_EventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventAttributes, Members: &m_EventAttributes, Type: smithy.ShapeTypeMap, Ext: &e_EventAttributes})
+var s_EventName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventName, Type: smithy.ShapeTypeString, Ext: &e_EventName})
+var s_FallbackResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FallbackResult, Type: smithy.ShapeTypeString, Ext: &e_FallbackResult})
+var s_FieldName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldName, Type: smithy.ShapeTypeString, Ext: &e_FieldName})
+var sFirehoseDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirehoseDestinationConfiguration, Members: &mFirehoseDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eFirehoseDestinationConfiguration})
+var s_ID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ID, Type: smithy.ShapeTypeString, Ext: &e_ID})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var s_LambdaArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LambdaArn, Type: smithy.ShapeTypeString, Ext: &e_LambdaArn})
+var s_Limit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Limit, Type: smithy.ShapeTypeInteger, Ext: &e_Limit})
+var s_LoggingConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoggingConfigurationArn, Type: smithy.ShapeTypeString, Ext: &e_LoggingConfigurationArn})
+var s_LoggingConfigurationID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoggingConfigurationID, Type: smithy.ShapeTypeString, Ext: &e_LoggingConfigurationID})
+var s_LoggingConfigurationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoggingConfigurationIdentifier, Type: smithy.ShapeTypeString, Ext: &e_LoggingConfigurationIdentifier})
+var s_LoggingConfigurationIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoggingConfigurationIdentifierList, Members: &m_LoggingConfigurationIdentifierList, Type: smithy.ShapeTypeList, Ext: &e_LoggingConfigurationIdentifierList})
+var s_LoggingConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoggingConfigurationList, Members: &m_LoggingConfigurationList, Type: smithy.ShapeTypeList, Ext: &e_LoggingConfigurationList})
+var s_LoggingConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoggingConfigurationName, Type: smithy.ShapeTypeString, Ext: &e_LoggingConfigurationName})
+var s_LoggingConfigurationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoggingConfigurationState, Type: smithy.ShapeTypeString, Ext: &e_LoggingConfigurationState})
+var sLoggingConfigurationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoggingConfigurationSummary, Members: &mLoggingConfigurationSummary, Type: smithy.ShapeTypeStructure, Ext: &eLoggingConfigurationSummary})
+var s_LogGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogGroupName, Type: smithy.ShapeTypeString, Ext: &e_LogGroupName})
+var s_MaxLoggingConfigurationResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxLoggingConfigurationResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxLoggingConfigurationResults})
+var s_MaxRoomResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxRoomResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxRoomResults})
+var s_MessageID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageID, Type: smithy.ShapeTypeString, Ext: &e_MessageID})
+var sMessageReviewHandler = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageReviewHandler, Members: &mMessageReviewHandler, Type: smithy.ShapeTypeStructure, Ext: &eMessageReviewHandler})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &e_PaginationToken})
+var sPendingVerification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPendingVerification, Members: &mPendingVerification, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &ePendingVerification})
+var s_Reason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Reason, Type: smithy.ShapeTypeString, Ext: &e_Reason})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArn})
+var s_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &e_ResourceId})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var s_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &e_ResourceType})
+var s_RoomArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoomArn, Type: smithy.ShapeTypeString, Ext: &e_RoomArn})
+var s_RoomID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoomID, Type: smithy.ShapeTypeString, Ext: &e_RoomID})
+var s_RoomIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoomIdentifier, Type: smithy.ShapeTypeString, Ext: &e_RoomIdentifier})
+var s_RoomList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoomList, Members: &m_RoomList, Type: smithy.ShapeTypeList, Ext: &e_RoomList})
+var s_RoomMaxMessageLength = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoomMaxMessageLength, Type: smithy.ShapeTypeInteger, Ext: &e_RoomMaxMessageLength})
+var s_RoomMaxMessageRatePerSecond = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoomMaxMessageRatePerSecond, Type: smithy.ShapeTypeInteger, Ext: &e_RoomMaxMessageRatePerSecond})
+var s_RoomName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoomName, Type: smithy.ShapeTypeString, Ext: &e_RoomName})
+var sRoomSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoomSummary, Members: &mRoomSummary, Type: smithy.ShapeTypeStructure, Ext: &eRoomSummary})
+var sS3DestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3DestinationConfiguration, Members: &mS3DestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eS3DestinationConfiguration})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var s_SessionDurationInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionDurationInMinutes, Type: smithy.ShapeTypeInteger, Ext: &e_SessionDurationInMinutes})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &e_Tags})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var s_Time = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Time, Traits: &t25, Type: smithy.ShapeTypeTimestamp, Ext: &e_Time})
+var s_UpdateLoggingConfigurationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateLoggingConfigurationState, Type: smithy.ShapeTypeString, Ext: &e_UpdateLoggingConfigurationState})
+var s_UserID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserID, Traits: &t18, Type: smithy.ShapeTypeString, Ext: &e_UserID})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var s_ValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionReason, Type: smithy.ShapeTypeString, Ext: &e_ValidationExceptionReason})
+var sCreateChatTokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChatTokenRequest, Members: &mCreateChatTokenRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateChatTokenRequest})
+var sCreateChatTokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChatTokenResponse, Members: &mCreateChatTokenResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateChatTokenResponse})
+var sCreateLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLoggingConfigurationRequest, Members: &mCreateLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateLoggingConfigurationRequest})
+var sCreateLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLoggingConfigurationResponse, Members: &mCreateLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateLoggingConfigurationResponse})
+var sCreateRoomRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRoomRequest, Members: &mCreateRoomRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateRoomRequest})
+var sCreateRoomResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRoomResponse, Members: &mCreateRoomResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateRoomResponse})
+var sDeleteLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLoggingConfigurationRequest, Members: &mDeleteLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLoggingConfigurationRequest})
+var sDeleteMessageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMessageRequest, Members: &mDeleteMessageRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMessageRequest})
+var sDeleteMessageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMessageResponse, Members: &mDeleteMessageResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMessageResponse})
+var sDeleteRoomRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRoomRequest, Members: &mDeleteRoomRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRoomRequest})
+var sDisconnectUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisconnectUserRequest, Members: &mDisconnectUserRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisconnectUserRequest})
+var sDisconnectUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisconnectUserResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisconnectUserResponse})
+var sGetLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLoggingConfigurationRequest, Members: &mGetLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetLoggingConfigurationRequest})
+var sGetLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLoggingConfigurationResponse, Members: &mGetLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetLoggingConfigurationResponse})
+var sGetRoomRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoomRequest, Members: &mGetRoomRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRoomRequest})
+var sGetRoomResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoomResponse, Members: &mGetRoomResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRoomResponse})
+var sListLoggingConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLoggingConfigurationsRequest, Members: &mListLoggingConfigurationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListLoggingConfigurationsRequest})
+var sListLoggingConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLoggingConfigurationsResponse, Members: &mListLoggingConfigurationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListLoggingConfigurationsResponse})
+var sListRoomsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoomsRequest, Members: &mListRoomsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRoomsRequest})
+var sListRoomsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoomsResponse, Members: &mListRoomsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRoomsResponse})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sSendEventRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendEventRequest, Members: &mSendEventRequest, Type: smithy.ShapeTypeStructure, Ext: &eSendEventRequest})
+var sSendEventResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendEventResponse, Members: &mSendEventResponse, Type: smithy.ShapeTypeStructure, Ext: &eSendEventResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateLoggingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLoggingConfigurationRequest, Members: &mUpdateLoggingConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLoggingConfigurationRequest})
+var sUpdateLoggingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLoggingConfigurationResponse, Members: &mUpdateLoggingConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLoggingConfigurationResponse})
+var sUpdateRoomRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoomRequest, Members: &mUpdateRoomRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRoomRequest})
+var sUpdateRoomResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoomResponse, Members: &mUpdateRoomResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRoomResponse})
 
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[19]})
-var s_ChatTokenAttributes_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[23]})
-var s_ChatTokenAttributes_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[24]})
-var s_ChatTokenCapabilities_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ChatTokenCapability, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var sCloudWatchLogsDestinationConfiguration_logGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logGroupName", ID: &i_LogGroupName, Type: smithy.ShapeTypeString, Ext: &ext[29]})
-var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var sDestinationConfiguration_s3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3", ID: &iS3DestinationConfiguration, Members: &mS3DestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var sDestinationConfiguration_cloudWatchLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchLogs", ID: &iCloudWatchLogsDestinationConfiguration, Members: &mCloudWatchLogsDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[38]})
-var sDestinationConfiguration_firehose = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firehose", ID: &iFirehoseDestinationConfiguration, Members: &mFirehoseDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[39]})
-var s_EventAttributes_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var s_EventAttributes_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[43]})
-var sFirehoseDestinationConfiguration_deliveryStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deliveryStreamName", ID: &i_DeliveryStreamName, Type: smithy.ShapeTypeString, Ext: &ext[48]})
-var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[51]})
-var s_LoggingConfigurationIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LoggingConfigurationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var s_LoggingConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLoggingConfigurationSummary, Members: &mLoggingConfigurationSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[60]})
-var sLoggingConfigurationSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_LoggingConfigurationArn, Type: smithy.ShapeTypeString, Ext: &ext[64]})
-var sLoggingConfigurationSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LoggingConfigurationID, Type: smithy.ShapeTypeString, Ext: &ext[65]})
-var sLoggingConfigurationSummary_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &ext[66]})
-var sLoggingConfigurationSummary_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &ext[67]})
-var sLoggingConfigurationSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_LoggingConfigurationName, Type: smithy.ShapeTypeString, Ext: &ext[68]})
-var sLoggingConfigurationSummary_destinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConfiguration", ID: &iDestinationConfiguration, Members: &mDestinationConfiguration, Type: smithy.ShapeTypeUnion, Ext: &ext[69]})
-var sLoggingConfigurationSummary_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_LoggingConfigurationState, Type: smithy.ShapeTypeString, Ext: &ext[70]})
-var sLoggingConfigurationSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[71]})
-var sMessageReviewHandler_uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uri", ID: &i_LambdaArn, Type: smithy.ShapeTypeString, Ext: &ext[77]})
-var sMessageReviewHandler_fallbackResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fallbackResult", ID: &i_FallbackResult, Type: smithy.ShapeTypeString, Ext: &ext[78]})
-var sPendingVerification_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[81]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[86]})
-var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &ext[87]})
-var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &ext[88]})
-var s_RoomList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRoomSummary, Members: &mRoomSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[94]})
-var sRoomSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_RoomArn, Type: smithy.ShapeTypeString, Ext: &ext[99]})
-var sRoomSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_RoomID, Type: smithy.ShapeTypeString, Ext: &ext[100]})
-var sRoomSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RoomName, Type: smithy.ShapeTypeString, Ext: &ext[101]})
-var sRoomSummary_messageReviewHandler = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageReviewHandler", ID: &iMessageReviewHandler, Members: &mMessageReviewHandler, Type: smithy.ShapeTypeStructure, Ext: &ext[102]})
-var sRoomSummary_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &ext[103]})
-var sRoomSummary_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &ext[104]})
-var sRoomSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[105]})
-var sRoomSummary_loggingConfigurationIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loggingConfigurationIdentifiers", ID: &i_LoggingConfigurationIdentifierList, Members: &m_LoggingConfigurationIdentifierList, Type: smithy.ShapeTypeList, Ext: &ext[106]})
-var sS3DestinationConfiguration_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_BucketName, Type: smithy.ShapeTypeString, Ext: &ext[108]})
-var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[110]})
-var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &ext[111]})
-var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &ext[112]})
-var sServiceQuotaExceededException_limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "limit", ID: &i_Limit, Type: smithy.ShapeTypeInteger, Ext: &ext[113]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[118]})
-var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[120]})
-var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[121]})
-var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[124]})
-var sThrottlingException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &ext[125]})
-var sThrottlingException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &ext[126]})
-var sThrottlingException_limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "limit", ID: &i_Limit, Type: smithy.ShapeTypeInteger, Ext: &ext[127]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[132]})
-var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_ValidationExceptionReason, Type: smithy.ShapeTypeString, Ext: &ext[133]})
-var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[134]})
-var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FieldName, Type: smithy.ShapeTypeString, Ext: &ext[136]})
-var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[137]})
-var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[139]})
-var sCreateChatTokenRequest_roomIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roomIdentifier", ID: &i_RoomIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[142]})
-var sCreateChatTokenRequest_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_UserID, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[143]})
-var sCreateChatTokenRequest_capabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capabilities", ID: &i_ChatTokenCapabilities, Members: &m_ChatTokenCapabilities, Type: smithy.ShapeTypeList, Ext: &ext[144]})
-var sCreateChatTokenRequest_sessionDurationInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionDurationInMinutes", ID: &i_SessionDurationInMinutes, Type: smithy.ShapeTypeInteger, Ext: &ext[145]})
-var sCreateChatTokenRequest_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_ChatTokenAttributes, Members: &m_ChatTokenAttributes, Traits: &t27, Type: smithy.ShapeTypeMap, Ext: &ext[146]})
-var sCreateChatTokenResponse_token = smithy.NewStaticSchema(smithy.StaticSchema{Member: "token", ID: &i_ChatToken, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[148]})
-var sCreateChatTokenResponse_tokenExpirationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenExpirationTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &ext[149]})
-var sCreateChatTokenResponse_sessionExpirationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionExpirationTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &ext[150]})
-var sCreateLoggingConfigurationRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_LoggingConfigurationName, Type: smithy.ShapeTypeString, Ext: &ext[152]})
-var sCreateLoggingConfigurationRequest_destinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConfiguration", ID: &iDestinationConfiguration, Members: &mDestinationConfiguration, Type: smithy.ShapeTypeUnion, Ext: &ext[153]})
-var sCreateLoggingConfigurationRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[154]})
-var sCreateLoggingConfigurationResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_LoggingConfigurationArn, Type: smithy.ShapeTypeString, Ext: &ext[156]})
-var sCreateLoggingConfigurationResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LoggingConfigurationID, Type: smithy.ShapeTypeString, Ext: &ext[157]})
-var sCreateLoggingConfigurationResponse_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &ext[158]})
-var sCreateLoggingConfigurationResponse_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &ext[159]})
-var sCreateLoggingConfigurationResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_LoggingConfigurationName, Type: smithy.ShapeTypeString, Ext: &ext[160]})
-var sCreateLoggingConfigurationResponse_destinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConfiguration", ID: &iDestinationConfiguration, Members: &mDestinationConfiguration, Type: smithy.ShapeTypeUnion, Ext: &ext[161]})
-var sCreateLoggingConfigurationResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_CreateLoggingConfigurationState, Type: smithy.ShapeTypeString, Ext: &ext[162]})
-var sCreateLoggingConfigurationResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[163]})
-var sCreateRoomRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RoomName, Type: smithy.ShapeTypeString, Ext: &ext[165]})
-var sCreateRoomRequest_maximumMessageRatePerSecond = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumMessageRatePerSecond", ID: &i_RoomMaxMessageRatePerSecond, Type: smithy.ShapeTypeInteger, Ext: &ext[166]})
-var sCreateRoomRequest_maximumMessageLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumMessageLength", ID: &i_RoomMaxMessageLength, Type: smithy.ShapeTypeInteger, Ext: &ext[167]})
-var sCreateRoomRequest_messageReviewHandler = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageReviewHandler", ID: &iMessageReviewHandler, Members: &mMessageReviewHandler, Type: smithy.ShapeTypeStructure, Ext: &ext[168]})
-var sCreateRoomRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[169]})
-var sCreateRoomRequest_loggingConfigurationIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loggingConfigurationIdentifiers", ID: &i_LoggingConfigurationIdentifierList, Members: &m_LoggingConfigurationIdentifierList, Type: smithy.ShapeTypeList, Ext: &ext[170]})
-var sCreateRoomResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_RoomArn, Type: smithy.ShapeTypeString, Ext: &ext[172]})
-var sCreateRoomResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_RoomID, Type: smithy.ShapeTypeString, Ext: &ext[173]})
-var sCreateRoomResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RoomName, Type: smithy.ShapeTypeString, Ext: &ext[174]})
-var sCreateRoomResponse_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &ext[175]})
-var sCreateRoomResponse_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &ext[176]})
-var sCreateRoomResponse_maximumMessageRatePerSecond = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumMessageRatePerSecond", ID: &i_RoomMaxMessageRatePerSecond, Type: smithy.ShapeTypeInteger, Ext: &ext[177]})
-var sCreateRoomResponse_maximumMessageLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumMessageLength", ID: &i_RoomMaxMessageLength, Type: smithy.ShapeTypeInteger, Ext: &ext[178]})
-var sCreateRoomResponse_messageReviewHandler = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageReviewHandler", ID: &iMessageReviewHandler, Members: &mMessageReviewHandler, Type: smithy.ShapeTypeStructure, Ext: &ext[179]})
-var sCreateRoomResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[180]})
-var sCreateRoomResponse_loggingConfigurationIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loggingConfigurationIdentifiers", ID: &i_LoggingConfigurationIdentifierList, Members: &m_LoggingConfigurationIdentifierList, Type: smithy.ShapeTypeList, Ext: &ext[181]})
-var sDeleteLoggingConfigurationRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_LoggingConfigurationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[183]})
-var sDeleteMessageRequest_roomIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roomIdentifier", ID: &i_RoomIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[185]})
-var sDeleteMessageRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MessageID, Type: smithy.ShapeTypeString, Ext: &ext[186]})
-var sDeleteMessageRequest_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_Reason, Type: smithy.ShapeTypeString, Ext: &ext[187]})
-var sDeleteMessageResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ID, Type: smithy.ShapeTypeString, Ext: &ext[189]})
-var sDeleteRoomRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_RoomIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[191]})
-var sDisconnectUserRequest_roomIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roomIdentifier", ID: &i_RoomIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[193]})
-var sDisconnectUserRequest_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_UserID, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[194]})
-var sDisconnectUserRequest_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_Reason, Type: smithy.ShapeTypeString, Ext: &ext[195]})
-var sGetLoggingConfigurationRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_LoggingConfigurationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[198]})
-var sGetLoggingConfigurationResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_LoggingConfigurationArn, Type: smithy.ShapeTypeString, Ext: &ext[200]})
-var sGetLoggingConfigurationResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LoggingConfigurationID, Type: smithy.ShapeTypeString, Ext: &ext[201]})
-var sGetLoggingConfigurationResponse_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &ext[202]})
-var sGetLoggingConfigurationResponse_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &ext[203]})
-var sGetLoggingConfigurationResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_LoggingConfigurationName, Type: smithy.ShapeTypeString, Ext: &ext[204]})
-var sGetLoggingConfigurationResponse_destinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConfiguration", ID: &iDestinationConfiguration, Members: &mDestinationConfiguration, Type: smithy.ShapeTypeUnion, Ext: &ext[205]})
-var sGetLoggingConfigurationResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_LoggingConfigurationState, Type: smithy.ShapeTypeString, Ext: &ext[206]})
-var sGetLoggingConfigurationResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[207]})
-var sGetRoomRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_RoomIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[209]})
-var sGetRoomResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_RoomArn, Type: smithy.ShapeTypeString, Ext: &ext[211]})
-var sGetRoomResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_RoomID, Type: smithy.ShapeTypeString, Ext: &ext[212]})
-var sGetRoomResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RoomName, Type: smithy.ShapeTypeString, Ext: &ext[213]})
-var sGetRoomResponse_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &ext[214]})
-var sGetRoomResponse_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &ext[215]})
-var sGetRoomResponse_maximumMessageRatePerSecond = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumMessageRatePerSecond", ID: &i_RoomMaxMessageRatePerSecond, Type: smithy.ShapeTypeInteger, Ext: &ext[216]})
-var sGetRoomResponse_maximumMessageLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumMessageLength", ID: &i_RoomMaxMessageLength, Type: smithy.ShapeTypeInteger, Ext: &ext[217]})
-var sGetRoomResponse_messageReviewHandler = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageReviewHandler", ID: &iMessageReviewHandler, Members: &mMessageReviewHandler, Type: smithy.ShapeTypeStructure, Ext: &ext[218]})
-var sGetRoomResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[219]})
-var sGetRoomResponse_loggingConfigurationIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loggingConfigurationIdentifiers", ID: &i_LoggingConfigurationIdentifierList, Members: &m_LoggingConfigurationIdentifierList, Type: smithy.ShapeTypeList, Ext: &ext[220]})
-var sListLoggingConfigurationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[222]})
-var sListLoggingConfigurationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxLoggingConfigurationResults, Type: smithy.ShapeTypeInteger, Ext: &ext[223]})
-var sListLoggingConfigurationsResponse_loggingConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loggingConfigurations", ID: &i_LoggingConfigurationList, Members: &m_LoggingConfigurationList, Type: smithy.ShapeTypeList, Ext: &ext[225]})
-var sListLoggingConfigurationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[226]})
-var sListRoomsRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RoomName, Type: smithy.ShapeTypeString, Ext: &ext[228]})
-var sListRoomsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[229]})
-var sListRoomsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxRoomResults, Type: smithy.ShapeTypeInteger, Ext: &ext[230]})
-var sListRoomsRequest_messageReviewHandlerUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageReviewHandlerUri", ID: &i_LambdaArn, Type: smithy.ShapeTypeString, Ext: &ext[231]})
-var sListRoomsRequest_loggingConfigurationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loggingConfigurationIdentifier", ID: &i_LoggingConfigurationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[232]})
-var sListRoomsResponse_rooms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rooms", ID: &i_RoomList, Members: &m_RoomList, Type: smithy.ShapeTypeList, Ext: &ext[234]})
-var sListRoomsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &ext[235]})
-var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &ext[237]})
-var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[239]})
-var sSendEventRequest_roomIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roomIdentifier", ID: &i_RoomIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[241]})
-var sSendEventRequest_eventName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventName", ID: &i_EventName, Type: smithy.ShapeTypeString, Ext: &ext[242]})
-var sSendEventRequest_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_EventAttributes, Members: &m_EventAttributes, Type: smithy.ShapeTypeMap, Ext: &ext[243]})
-var sSendEventResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ID, Type: smithy.ShapeTypeString, Ext: &ext[245]})
-var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &ext[247]})
-var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[248]})
-var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &ext[251]})
-var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t29, Type: smithy.ShapeTypeList, Ext: &ext[252]})
-var sUpdateLoggingConfigurationRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_LoggingConfigurationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[255]})
-var sUpdateLoggingConfigurationRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_LoggingConfigurationName, Type: smithy.ShapeTypeString, Ext: &ext[256]})
-var sUpdateLoggingConfigurationRequest_destinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConfiguration", ID: &iDestinationConfiguration, Members: &mDestinationConfiguration, Type: smithy.ShapeTypeUnion, Ext: &ext[257]})
-var sUpdateLoggingConfigurationResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_LoggingConfigurationArn, Type: smithy.ShapeTypeString, Ext: &ext[259]})
-var sUpdateLoggingConfigurationResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LoggingConfigurationID, Type: smithy.ShapeTypeString, Ext: &ext[260]})
-var sUpdateLoggingConfigurationResponse_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &ext[261]})
-var sUpdateLoggingConfigurationResponse_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &ext[262]})
-var sUpdateLoggingConfigurationResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_LoggingConfigurationName, Type: smithy.ShapeTypeString, Ext: &ext[263]})
-var sUpdateLoggingConfigurationResponse_destinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConfiguration", ID: &iDestinationConfiguration, Members: &mDestinationConfiguration, Type: smithy.ShapeTypeUnion, Ext: &ext[264]})
-var sUpdateLoggingConfigurationResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_UpdateLoggingConfigurationState, Type: smithy.ShapeTypeString, Ext: &ext[265]})
-var sUpdateLoggingConfigurationResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[266]})
-var sUpdateRoomRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_RoomIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[268]})
-var sUpdateRoomRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RoomName, Type: smithy.ShapeTypeString, Ext: &ext[269]})
-var sUpdateRoomRequest_maximumMessageRatePerSecond = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumMessageRatePerSecond", ID: &i_RoomMaxMessageRatePerSecond, Type: smithy.ShapeTypeInteger, Ext: &ext[270]})
-var sUpdateRoomRequest_maximumMessageLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumMessageLength", ID: &i_RoomMaxMessageLength, Type: smithy.ShapeTypeInteger, Ext: &ext[271]})
-var sUpdateRoomRequest_messageReviewHandler = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageReviewHandler", ID: &iMessageReviewHandler, Members: &mMessageReviewHandler, Type: smithy.ShapeTypeStructure, Ext: &ext[272]})
-var sUpdateRoomRequest_loggingConfigurationIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loggingConfigurationIdentifiers", ID: &i_LoggingConfigurationIdentifierList, Members: &m_LoggingConfigurationIdentifierList, Type: smithy.ShapeTypeList, Ext: &ext[273]})
-var sUpdateRoomResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_RoomArn, Type: smithy.ShapeTypeString, Ext: &ext[275]})
-var sUpdateRoomResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_RoomID, Type: smithy.ShapeTypeString, Ext: &ext[276]})
-var sUpdateRoomResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RoomName, Type: smithy.ShapeTypeString, Ext: &ext[277]})
-var sUpdateRoomResponse_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &ext[278]})
-var sUpdateRoomResponse_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &ext[279]})
-var sUpdateRoomResponse_maximumMessageRatePerSecond = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumMessageRatePerSecond", ID: &i_RoomMaxMessageRatePerSecond, Type: smithy.ShapeTypeInteger, Ext: &ext[280]})
-var sUpdateRoomResponse_maximumMessageLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumMessageLength", ID: &i_RoomMaxMessageLength, Type: smithy.ShapeTypeInteger, Ext: &ext[281]})
-var sUpdateRoomResponse_messageReviewHandler = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageReviewHandler", ID: &iMessageReviewHandler, Members: &mMessageReviewHandler, Type: smithy.ShapeTypeStructure, Ext: &ext[282]})
-var sUpdateRoomResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[283]})
-var sUpdateRoomResponse_loggingConfigurationIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loggingConfigurationIdentifiers", ID: &i_LoggingConfigurationIdentifierList, Members: &m_LoggingConfigurationIdentifierList, Type: smithy.ShapeTypeList, Ext: &ext[284]})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var s_ChatTokenAttributes_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_ChatTokenAttributes_key})
+var s_ChatTokenAttributes_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_ChatTokenAttributes_value})
+var s_ChatTokenCapabilities_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ChatTokenCapability, Type: smithy.ShapeTypeString, Ext: &e_ChatTokenCapabilities_member})
+var sCloudWatchLogsDestinationConfiguration_logGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logGroupName", ID: &i_LogGroupName, Type: smithy.ShapeTypeString, Ext: &eCloudWatchLogsDestinationConfiguration_logGroupName})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceId})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceType})
+var sDestinationConfiguration_s3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3", ID: &iS3DestinationConfiguration, Members: &mS3DestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDestinationConfiguration_s3})
+var sDestinationConfiguration_cloudWatchLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatchLogs", ID: &iCloudWatchLogsDestinationConfiguration, Members: &mCloudWatchLogsDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDestinationConfiguration_cloudWatchLogs})
+var sDestinationConfiguration_firehose = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firehose", ID: &iFirehoseDestinationConfiguration, Members: &mFirehoseDestinationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDestinationConfiguration_firehose})
+var s_EventAttributes_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_EventAttributes_key})
+var s_EventAttributes_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_EventAttributes_value})
+var sFirehoseDestinationConfiguration_deliveryStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deliveryStreamName", ID: &i_DeliveryStreamName, Type: smithy.ShapeTypeString, Ext: &eFirehoseDestinationConfiguration_deliveryStreamName})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var s_LoggingConfigurationIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LoggingConfigurationIdentifier, Type: smithy.ShapeTypeString, Ext: &e_LoggingConfigurationIdentifierList_member})
+var s_LoggingConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLoggingConfigurationSummary, Members: &mLoggingConfigurationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_LoggingConfigurationList_member})
+var sLoggingConfigurationSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_LoggingConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eLoggingConfigurationSummary_arn})
+var sLoggingConfigurationSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LoggingConfigurationID, Type: smithy.ShapeTypeString, Ext: &eLoggingConfigurationSummary_id})
+var sLoggingConfigurationSummary_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &eLoggingConfigurationSummary_createTime})
+var sLoggingConfigurationSummary_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &eLoggingConfigurationSummary_updateTime})
+var sLoggingConfigurationSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_LoggingConfigurationName, Type: smithy.ShapeTypeString, Ext: &eLoggingConfigurationSummary_name})
+var sLoggingConfigurationSummary_destinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConfiguration", ID: &iDestinationConfiguration, Members: &mDestinationConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eLoggingConfigurationSummary_destinationConfiguration})
+var sLoggingConfigurationSummary_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_LoggingConfigurationState, Type: smithy.ShapeTypeString, Ext: &eLoggingConfigurationSummary_state})
+var sLoggingConfigurationSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eLoggingConfigurationSummary_tags})
+var sMessageReviewHandler_uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uri", ID: &i_LambdaArn, Type: smithy.ShapeTypeString, Ext: &eMessageReviewHandler_uri})
+var sMessageReviewHandler_fallbackResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fallbackResult", ID: &i_FallbackResult, Type: smithy.ShapeTypeString, Ext: &eMessageReviewHandler_fallbackResult})
+var sPendingVerification_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ePendingVerification_message})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceId})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceType})
+var s_RoomList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRoomSummary, Members: &mRoomSummary, Type: smithy.ShapeTypeStructure, Ext: &e_RoomList_member})
+var sRoomSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_RoomArn, Type: smithy.ShapeTypeString, Ext: &eRoomSummary_arn})
+var sRoomSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_RoomID, Type: smithy.ShapeTypeString, Ext: &eRoomSummary_id})
+var sRoomSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RoomName, Type: smithy.ShapeTypeString, Ext: &eRoomSummary_name})
+var sRoomSummary_messageReviewHandler = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageReviewHandler", ID: &iMessageReviewHandler, Members: &mMessageReviewHandler, Type: smithy.ShapeTypeStructure, Ext: &eRoomSummary_messageReviewHandler})
+var sRoomSummary_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &eRoomSummary_createTime})
+var sRoomSummary_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &eRoomSummary_updateTime})
+var sRoomSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eRoomSummary_tags})
+var sRoomSummary_loggingConfigurationIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loggingConfigurationIdentifiers", ID: &i_LoggingConfigurationIdentifierList, Members: &m_LoggingConfigurationIdentifierList, Type: smithy.ShapeTypeList, Ext: &eRoomSummary_loggingConfigurationIdentifiers})
+var sS3DestinationConfiguration_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_BucketName, Type: smithy.ShapeTypeString, Ext: &eS3DestinationConfiguration_bucketName})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceId})
+var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceType})
+var sServiceQuotaExceededException_limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "limit", ID: &i_Limit, Type: smithy.ShapeTypeInteger, Ext: &eServiceQuotaExceededException_limit})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_Tags_key})
+var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_Tags_value})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sThrottlingException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_resourceId})
+var sThrottlingException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_resourceType})
+var sThrottlingException_limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "limit", ID: &i_Limit, Type: smithy.ShapeTypeInteger, Ext: &eThrottlingException_limit})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_ValidationExceptionReason, Type: smithy.ShapeTypeString, Ext: &eValidationException_reason})
+var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_fieldList})
+var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FieldName, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_name})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_message})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var sCreateChatTokenRequest_roomIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roomIdentifier", ID: &i_RoomIdentifier, Type: smithy.ShapeTypeString, Ext: &eCreateChatTokenRequest_roomIdentifier})
+var sCreateChatTokenRequest_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_UserID, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eCreateChatTokenRequest_userId})
+var sCreateChatTokenRequest_capabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capabilities", ID: &i_ChatTokenCapabilities, Members: &m_ChatTokenCapabilities, Type: smithy.ShapeTypeList, Ext: &eCreateChatTokenRequest_capabilities})
+var sCreateChatTokenRequest_sessionDurationInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionDurationInMinutes", ID: &i_SessionDurationInMinutes, Type: smithy.ShapeTypeInteger, Ext: &eCreateChatTokenRequest_sessionDurationInMinutes})
+var sCreateChatTokenRequest_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_ChatTokenAttributes, Members: &m_ChatTokenAttributes, Traits: &t27, Type: smithy.ShapeTypeMap, Ext: &eCreateChatTokenRequest_attributes})
+var sCreateChatTokenResponse_token = smithy.NewStaticSchema(smithy.StaticSchema{Member: "token", ID: &i_ChatToken, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eCreateChatTokenResponse_token})
+var sCreateChatTokenResponse_tokenExpirationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenExpirationTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateChatTokenResponse_tokenExpirationTime})
+var sCreateChatTokenResponse_sessionExpirationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionExpirationTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateChatTokenResponse_sessionExpirationTime})
+var sCreateLoggingConfigurationRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_LoggingConfigurationName, Type: smithy.ShapeTypeString, Ext: &eCreateLoggingConfigurationRequest_name})
+var sCreateLoggingConfigurationRequest_destinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConfiguration", ID: &iDestinationConfiguration, Members: &mDestinationConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eCreateLoggingConfigurationRequest_destinationConfiguration})
+var sCreateLoggingConfigurationRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateLoggingConfigurationRequest_tags})
+var sCreateLoggingConfigurationResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_LoggingConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eCreateLoggingConfigurationResponse_arn})
+var sCreateLoggingConfigurationResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LoggingConfigurationID, Type: smithy.ShapeTypeString, Ext: &eCreateLoggingConfigurationResponse_id})
+var sCreateLoggingConfigurationResponse_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateLoggingConfigurationResponse_createTime})
+var sCreateLoggingConfigurationResponse_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateLoggingConfigurationResponse_updateTime})
+var sCreateLoggingConfigurationResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_LoggingConfigurationName, Type: smithy.ShapeTypeString, Ext: &eCreateLoggingConfigurationResponse_name})
+var sCreateLoggingConfigurationResponse_destinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConfiguration", ID: &iDestinationConfiguration, Members: &mDestinationConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eCreateLoggingConfigurationResponse_destinationConfiguration})
+var sCreateLoggingConfigurationResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_CreateLoggingConfigurationState, Type: smithy.ShapeTypeString, Ext: &eCreateLoggingConfigurationResponse_state})
+var sCreateLoggingConfigurationResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateLoggingConfigurationResponse_tags})
+var sCreateRoomRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RoomName, Type: smithy.ShapeTypeString, Ext: &eCreateRoomRequest_name})
+var sCreateRoomRequest_maximumMessageRatePerSecond = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumMessageRatePerSecond", ID: &i_RoomMaxMessageRatePerSecond, Type: smithy.ShapeTypeInteger, Ext: &eCreateRoomRequest_maximumMessageRatePerSecond})
+var sCreateRoomRequest_maximumMessageLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumMessageLength", ID: &i_RoomMaxMessageLength, Type: smithy.ShapeTypeInteger, Ext: &eCreateRoomRequest_maximumMessageLength})
+var sCreateRoomRequest_messageReviewHandler = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageReviewHandler", ID: &iMessageReviewHandler, Members: &mMessageReviewHandler, Type: smithy.ShapeTypeStructure, Ext: &eCreateRoomRequest_messageReviewHandler})
+var sCreateRoomRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateRoomRequest_tags})
+var sCreateRoomRequest_loggingConfigurationIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loggingConfigurationIdentifiers", ID: &i_LoggingConfigurationIdentifierList, Members: &m_LoggingConfigurationIdentifierList, Type: smithy.ShapeTypeList, Ext: &eCreateRoomRequest_loggingConfigurationIdentifiers})
+var sCreateRoomResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_RoomArn, Type: smithy.ShapeTypeString, Ext: &eCreateRoomResponse_arn})
+var sCreateRoomResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_RoomID, Type: smithy.ShapeTypeString, Ext: &eCreateRoomResponse_id})
+var sCreateRoomResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RoomName, Type: smithy.ShapeTypeString, Ext: &eCreateRoomResponse_name})
+var sCreateRoomResponse_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateRoomResponse_createTime})
+var sCreateRoomResponse_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateRoomResponse_updateTime})
+var sCreateRoomResponse_maximumMessageRatePerSecond = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumMessageRatePerSecond", ID: &i_RoomMaxMessageRatePerSecond, Type: smithy.ShapeTypeInteger, Ext: &eCreateRoomResponse_maximumMessageRatePerSecond})
+var sCreateRoomResponse_maximumMessageLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumMessageLength", ID: &i_RoomMaxMessageLength, Type: smithy.ShapeTypeInteger, Ext: &eCreateRoomResponse_maximumMessageLength})
+var sCreateRoomResponse_messageReviewHandler = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageReviewHandler", ID: &iMessageReviewHandler, Members: &mMessageReviewHandler, Type: smithy.ShapeTypeStructure, Ext: &eCreateRoomResponse_messageReviewHandler})
+var sCreateRoomResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateRoomResponse_tags})
+var sCreateRoomResponse_loggingConfigurationIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loggingConfigurationIdentifiers", ID: &i_LoggingConfigurationIdentifierList, Members: &m_LoggingConfigurationIdentifierList, Type: smithy.ShapeTypeList, Ext: &eCreateRoomResponse_loggingConfigurationIdentifiers})
+var sDeleteLoggingConfigurationRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_LoggingConfigurationIdentifier, Type: smithy.ShapeTypeString, Ext: &eDeleteLoggingConfigurationRequest_identifier})
+var sDeleteMessageRequest_roomIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roomIdentifier", ID: &i_RoomIdentifier, Type: smithy.ShapeTypeString, Ext: &eDeleteMessageRequest_roomIdentifier})
+var sDeleteMessageRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MessageID, Type: smithy.ShapeTypeString, Ext: &eDeleteMessageRequest_id})
+var sDeleteMessageRequest_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_Reason, Type: smithy.ShapeTypeString, Ext: &eDeleteMessageRequest_reason})
+var sDeleteMessageResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ID, Type: smithy.ShapeTypeString, Ext: &eDeleteMessageResponse_id})
+var sDeleteRoomRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_RoomIdentifier, Type: smithy.ShapeTypeString, Ext: &eDeleteRoomRequest_identifier})
+var sDisconnectUserRequest_roomIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roomIdentifier", ID: &i_RoomIdentifier, Type: smithy.ShapeTypeString, Ext: &eDisconnectUserRequest_roomIdentifier})
+var sDisconnectUserRequest_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_UserID, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eDisconnectUserRequest_userId})
+var sDisconnectUserRequest_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_Reason, Type: smithy.ShapeTypeString, Ext: &eDisconnectUserRequest_reason})
+var sGetLoggingConfigurationRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_LoggingConfigurationIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetLoggingConfigurationRequest_identifier})
+var sGetLoggingConfigurationResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_LoggingConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eGetLoggingConfigurationResponse_arn})
+var sGetLoggingConfigurationResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LoggingConfigurationID, Type: smithy.ShapeTypeString, Ext: &eGetLoggingConfigurationResponse_id})
+var sGetLoggingConfigurationResponse_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &eGetLoggingConfigurationResponse_createTime})
+var sGetLoggingConfigurationResponse_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &eGetLoggingConfigurationResponse_updateTime})
+var sGetLoggingConfigurationResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_LoggingConfigurationName, Type: smithy.ShapeTypeString, Ext: &eGetLoggingConfigurationResponse_name})
+var sGetLoggingConfigurationResponse_destinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConfiguration", ID: &iDestinationConfiguration, Members: &mDestinationConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eGetLoggingConfigurationResponse_destinationConfiguration})
+var sGetLoggingConfigurationResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_LoggingConfigurationState, Type: smithy.ShapeTypeString, Ext: &eGetLoggingConfigurationResponse_state})
+var sGetLoggingConfigurationResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eGetLoggingConfigurationResponse_tags})
+var sGetRoomRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_RoomIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetRoomRequest_identifier})
+var sGetRoomResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_RoomArn, Type: smithy.ShapeTypeString, Ext: &eGetRoomResponse_arn})
+var sGetRoomResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_RoomID, Type: smithy.ShapeTypeString, Ext: &eGetRoomResponse_id})
+var sGetRoomResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RoomName, Type: smithy.ShapeTypeString, Ext: &eGetRoomResponse_name})
+var sGetRoomResponse_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &eGetRoomResponse_createTime})
+var sGetRoomResponse_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &eGetRoomResponse_updateTime})
+var sGetRoomResponse_maximumMessageRatePerSecond = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumMessageRatePerSecond", ID: &i_RoomMaxMessageRatePerSecond, Type: smithy.ShapeTypeInteger, Ext: &eGetRoomResponse_maximumMessageRatePerSecond})
+var sGetRoomResponse_maximumMessageLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumMessageLength", ID: &i_RoomMaxMessageLength, Type: smithy.ShapeTypeInteger, Ext: &eGetRoomResponse_maximumMessageLength})
+var sGetRoomResponse_messageReviewHandler = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageReviewHandler", ID: &iMessageReviewHandler, Members: &mMessageReviewHandler, Type: smithy.ShapeTypeStructure, Ext: &eGetRoomResponse_messageReviewHandler})
+var sGetRoomResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eGetRoomResponse_tags})
+var sGetRoomResponse_loggingConfigurationIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loggingConfigurationIdentifiers", ID: &i_LoggingConfigurationIdentifierList, Members: &m_LoggingConfigurationIdentifierList, Type: smithy.ShapeTypeList, Ext: &eGetRoomResponse_loggingConfigurationIdentifiers})
+var sListLoggingConfigurationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListLoggingConfigurationsRequest_nextToken})
+var sListLoggingConfigurationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxLoggingConfigurationResults, Type: smithy.ShapeTypeInteger, Ext: &eListLoggingConfigurationsRequest_maxResults})
+var sListLoggingConfigurationsResponse_loggingConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loggingConfigurations", ID: &i_LoggingConfigurationList, Members: &m_LoggingConfigurationList, Type: smithy.ShapeTypeList, Ext: &eListLoggingConfigurationsResponse_loggingConfigurations})
+var sListLoggingConfigurationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListLoggingConfigurationsResponse_nextToken})
+var sListRoomsRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RoomName, Type: smithy.ShapeTypeString, Ext: &eListRoomsRequest_name})
+var sListRoomsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRoomsRequest_nextToken})
+var sListRoomsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxRoomResults, Type: smithy.ShapeTypeInteger, Ext: &eListRoomsRequest_maxResults})
+var sListRoomsRequest_messageReviewHandlerUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageReviewHandlerUri", ID: &i_LambdaArn, Type: smithy.ShapeTypeString, Ext: &eListRoomsRequest_messageReviewHandlerUri})
+var sListRoomsRequest_loggingConfigurationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loggingConfigurationIdentifier", ID: &i_LoggingConfigurationIdentifier, Type: smithy.ShapeTypeString, Ext: &eListRoomsRequest_loggingConfigurationIdentifier})
+var sListRoomsResponse_rooms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rooms", ID: &i_RoomList, Members: &m_RoomList, Type: smithy.ShapeTypeList, Ext: &eListRoomsResponse_rooms})
+var sListRoomsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString, Ext: &eListRoomsResponse_nextToken})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_tags})
+var sSendEventRequest_roomIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roomIdentifier", ID: &i_RoomIdentifier, Type: smithy.ShapeTypeString, Ext: &eSendEventRequest_roomIdentifier})
+var sSendEventRequest_eventName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventName", ID: &i_EventName, Type: smithy.ShapeTypeString, Ext: &eSendEventRequest_eventName})
+var sSendEventRequest_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_EventAttributes, Members: &m_EventAttributes, Type: smithy.ShapeTypeMap, Ext: &eSendEventRequest_attributes})
+var sSendEventResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ID, Type: smithy.ShapeTypeString, Ext: &eSendEventResponse_id})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_tags})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Traits: &t28, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t29, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUpdateLoggingConfigurationRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_LoggingConfigurationIdentifier, Type: smithy.ShapeTypeString, Ext: &eUpdateLoggingConfigurationRequest_identifier})
+var sUpdateLoggingConfigurationRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_LoggingConfigurationName, Type: smithy.ShapeTypeString, Ext: &eUpdateLoggingConfigurationRequest_name})
+var sUpdateLoggingConfigurationRequest_destinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConfiguration", ID: &iDestinationConfiguration, Members: &mDestinationConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eUpdateLoggingConfigurationRequest_destinationConfiguration})
+var sUpdateLoggingConfigurationResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_LoggingConfigurationArn, Type: smithy.ShapeTypeString, Ext: &eUpdateLoggingConfigurationResponse_arn})
+var sUpdateLoggingConfigurationResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LoggingConfigurationID, Type: smithy.ShapeTypeString, Ext: &eUpdateLoggingConfigurationResponse_id})
+var sUpdateLoggingConfigurationResponse_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateLoggingConfigurationResponse_createTime})
+var sUpdateLoggingConfigurationResponse_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateLoggingConfigurationResponse_updateTime})
+var sUpdateLoggingConfigurationResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_LoggingConfigurationName, Type: smithy.ShapeTypeString, Ext: &eUpdateLoggingConfigurationResponse_name})
+var sUpdateLoggingConfigurationResponse_destinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConfiguration", ID: &iDestinationConfiguration, Members: &mDestinationConfiguration, Type: smithy.ShapeTypeUnion, Ext: &eUpdateLoggingConfigurationResponse_destinationConfiguration})
+var sUpdateLoggingConfigurationResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_UpdateLoggingConfigurationState, Type: smithy.ShapeTypeString, Ext: &eUpdateLoggingConfigurationResponse_state})
+var sUpdateLoggingConfigurationResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eUpdateLoggingConfigurationResponse_tags})
+var sUpdateRoomRequest_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_RoomIdentifier, Type: smithy.ShapeTypeString, Ext: &eUpdateRoomRequest_identifier})
+var sUpdateRoomRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RoomName, Type: smithy.ShapeTypeString, Ext: &eUpdateRoomRequest_name})
+var sUpdateRoomRequest_maximumMessageRatePerSecond = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumMessageRatePerSecond", ID: &i_RoomMaxMessageRatePerSecond, Type: smithy.ShapeTypeInteger, Ext: &eUpdateRoomRequest_maximumMessageRatePerSecond})
+var sUpdateRoomRequest_maximumMessageLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumMessageLength", ID: &i_RoomMaxMessageLength, Type: smithy.ShapeTypeInteger, Ext: &eUpdateRoomRequest_maximumMessageLength})
+var sUpdateRoomRequest_messageReviewHandler = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageReviewHandler", ID: &iMessageReviewHandler, Members: &mMessageReviewHandler, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRoomRequest_messageReviewHandler})
+var sUpdateRoomRequest_loggingConfigurationIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loggingConfigurationIdentifiers", ID: &i_LoggingConfigurationIdentifierList, Members: &m_LoggingConfigurationIdentifierList, Type: smithy.ShapeTypeList, Ext: &eUpdateRoomRequest_loggingConfigurationIdentifiers})
+var sUpdateRoomResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_RoomArn, Type: smithy.ShapeTypeString, Ext: &eUpdateRoomResponse_arn})
+var sUpdateRoomResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_RoomID, Type: smithy.ShapeTypeString, Ext: &eUpdateRoomResponse_id})
+var sUpdateRoomResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RoomName, Type: smithy.ShapeTypeString, Ext: &eUpdateRoomResponse_name})
+var sUpdateRoomResponse_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateRoomResponse_createTime})
+var sUpdateRoomResponse_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &i_Time, Traits: &t21, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateRoomResponse_updateTime})
+var sUpdateRoomResponse_maximumMessageRatePerSecond = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumMessageRatePerSecond", ID: &i_RoomMaxMessageRatePerSecond, Type: smithy.ShapeTypeInteger, Ext: &eUpdateRoomResponse_maximumMessageRatePerSecond})
+var sUpdateRoomResponse_maximumMessageLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumMessageLength", ID: &i_RoomMaxMessageLength, Type: smithy.ShapeTypeInteger, Ext: &eUpdateRoomResponse_maximumMessageLength})
+var sUpdateRoomResponse_messageReviewHandler = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageReviewHandler", ID: &iMessageReviewHandler, Members: &mMessageReviewHandler, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRoomResponse_messageReviewHandler})
+var sUpdateRoomResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eUpdateRoomResponse_tags})
+var sUpdateRoomResponse_loggingConfigurationIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loggingConfigurationIdentifiers", ID: &i_LoggingConfigurationIdentifierList, Members: &m_LoggingConfigurationIdentifierList, Type: smithy.ShapeTypeList, Ext: &eUpdateRoomResponse_loggingConfigurationIdentifiers})
 
 var CreateChatToken = &sCreateChatToken
 

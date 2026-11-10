@@ -7,9 +7,548 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [540]smithy.SchemaExtensions
+var (
+	eCreateMicrovmAuthToken                                     smithy.SchemaExtensions
+	eCreateMicrovmImage                                         smithy.SchemaExtensions
+	eCreateMicrovmShellAuthToken                                smithy.SchemaExtensions
+	eDeleteMicrovmImage                                         smithy.SchemaExtensions
+	eDeleteMicrovmImageVersion                                  smithy.SchemaExtensions
+	eGetMicrovm                                                 smithy.SchemaExtensions
+	eGetMicrovmImage                                            smithy.SchemaExtensions
+	eGetMicrovmImageBuild                                       smithy.SchemaExtensions
+	eGetMicrovmImageVersion                                     smithy.SchemaExtensions
+	eListManagedMicrovmImages                                   smithy.SchemaExtensions
+	eListManagedMicrovmImageVersions                            smithy.SchemaExtensions
+	eListMicrovmImageBuilds                                     smithy.SchemaExtensions
+	eListMicrovmImages                                          smithy.SchemaExtensions
+	eListMicrovmImageVersions                                   smithy.SchemaExtensions
+	eListMicrovms                                               smithy.SchemaExtensions
+	eListTags                                                   smithy.SchemaExtensions
+	eResumeMicrovm                                              smithy.SchemaExtensions
+	eRunMicrovm                                                 smithy.SchemaExtensions
+	eSuspendMicrovm                                             smithy.SchemaExtensions
+	eTagResource                                                smithy.SchemaExtensions
+	eTerminateMicrovm                                           smithy.SchemaExtensions
+	eUntagResource                                              smithy.SchemaExtensions
+	eUpdateMicrovmImage                                         smithy.SchemaExtensions
+	eUpdateMicrovmImageVersion                                  smithy.SchemaExtensions
+	e_LambdaMicrovms                                            smithy.SchemaExtensions
+	eAccessDeniedException                                      smithy.SchemaExtensions
+	eAccessDeniedException_message                              smithy.SchemaExtensions
+	eArchitecture                                               smithy.SchemaExtensions
+	eArchitecture_ARM_64                                        smithy.SchemaExtensions
+	e_AuthTokenKey                                              smithy.SchemaExtensions
+	e_AuthTokenValue                                            smithy.SchemaExtensions
+	eBuildState                                                 smithy.SchemaExtensions
+	eBuildState_PENDING                                         smithy.SchemaExtensions
+	eBuildState_IN_PROGRESS                                     smithy.SchemaExtensions
+	eBuildState_SUCCESSFUL                                      smithy.SchemaExtensions
+	eBuildState_FAILED                                          smithy.SchemaExtensions
+	eCapability                                                 smithy.SchemaExtensions
+	eCapability_ALL                                             smithy.SchemaExtensions
+	e_CapabilityList                                            smithy.SchemaExtensions
+	e_CapabilityList_member                                     smithy.SchemaExtensions
+	eChipset                                                    smithy.SchemaExtensions
+	eChipset_GRAVITON                                           smithy.SchemaExtensions
+	eCloudWatchLogging                                          smithy.SchemaExtensions
+	eCloudWatchLogging_logGroup                                 smithy.SchemaExtensions
+	eCloudWatchLogging_logStream                                smithy.SchemaExtensions
+	eCodeArtifact                                               smithy.SchemaExtensions
+	eCodeArtifact_uri                                           smithy.SchemaExtensions
+	eConflictException                                          smithy.SchemaExtensions
+	eConflictException_message                                  smithy.SchemaExtensions
+	eConflictException_resourceId                               smithy.SchemaExtensions
+	eConflictException_resourceType                             smithy.SchemaExtensions
+	eCpuConfiguration                                           smithy.SchemaExtensions
+	eCpuConfiguration_architecture                              smithy.SchemaExtensions
+	e_CpuConfigurationList                                      smithy.SchemaExtensions
+	e_CpuConfigurationList_member                               smithy.SchemaExtensions
+	e_EnvironmentVariableKey                                    smithy.SchemaExtensions
+	e_EnvironmentVariableMap                                    smithy.SchemaExtensions
+	e_EnvironmentVariableMap_key                                smithy.SchemaExtensions
+	e_EnvironmentVariableMap_value                              smithy.SchemaExtensions
+	e_EnvironmentVariableValue                                  smithy.SchemaExtensions
+	eHooks                                                      smithy.SchemaExtensions
+	eHooks_port                                                 smithy.SchemaExtensions
+	eHooks_microvmHooks                                         smithy.SchemaExtensions
+	eHooks_microvmImageHooks                                    smithy.SchemaExtensions
+	eHookState                                                  smithy.SchemaExtensions
+	eHookState_DISABLED                                         smithy.SchemaExtensions
+	eHookState_ENABLED                                          smithy.SchemaExtensions
+	eIdlePolicy                                                 smithy.SchemaExtensions
+	eIdlePolicy_maxIdleDurationSeconds                          smithy.SchemaExtensions
+	eIdlePolicy_suspendedDurationSeconds                        smithy.SchemaExtensions
+	eIdlePolicy_autoResumeEnabled                               smithy.SchemaExtensions
+	e_ImageName                                                 smithy.SchemaExtensions
+	eInsufficientCapacityException                              smithy.SchemaExtensions
+	eInsufficientCapacityException_message                      smithy.SchemaExtensions
+	eInternalServerException                                    smithy.SchemaExtensions
+	eInternalServerException_message                            smithy.SchemaExtensions
+	eInternalServerException_retryAfterSeconds                  smithy.SchemaExtensions
+	eInvalidParameterValueException                             smithy.SchemaExtensions
+	eInvalidParameterValueException_Type                        smithy.SchemaExtensions
+	eInvalidParameterValueException_message                     smithy.SchemaExtensions
+	e_ListOfPortSpecification                                   smithy.SchemaExtensions
+	e_ListOfPortSpecification_member                            smithy.SchemaExtensions
+	eLogging                                                    smithy.SchemaExtensions
+	eLogging_disabled                                           smithy.SchemaExtensions
+	eLogging_cloudWatch                                         smithy.SchemaExtensions
+	eLoggingDisabled                                            smithy.SchemaExtensions
+	eManagedMicrovmImageSummary                                 smithy.SchemaExtensions
+	eManagedMicrovmImageSummary_imageArn                        smithy.SchemaExtensions
+	eManagedMicrovmImageSummary_createdAt                       smithy.SchemaExtensions
+	eManagedMicrovmImageSummary_updatedAt                       smithy.SchemaExtensions
+	e_ManagedMicrovmImageSummaryList                            smithy.SchemaExtensions
+	e_ManagedMicrovmImageSummaryList_member                     smithy.SchemaExtensions
+	eManagedMicrovmImageVersion                                 smithy.SchemaExtensions
+	eManagedMicrovmImageVersion_imageArn                        smithy.SchemaExtensions
+	eManagedMicrovmImageVersion_imageVersion                    smithy.SchemaExtensions
+	eManagedMicrovmImageVersion_status                          smithy.SchemaExtensions
+	eManagedMicrovmImageVersion_createdAt                       smithy.SchemaExtensions
+	eManagedMicrovmImageVersion_updatedAt                       smithy.SchemaExtensions
+	e_ManagedMicrovmImageVersionList                            smithy.SchemaExtensions
+	e_ManagedMicrovmImageVersionList_member                     smithy.SchemaExtensions
+	eManagedMicrovmImageVersionStatus                           smithy.SchemaExtensions
+	eManagedMicrovmImageVersionStatus_AVAILABLE                 smithy.SchemaExtensions
+	eManagedMicrovmImageVersionStatus_DEPRECATED                smithy.SchemaExtensions
+	eMicrovmHooks                                               smithy.SchemaExtensions
+	eMicrovmHooks_run                                           smithy.SchemaExtensions
+	eMicrovmHooks_runTimeoutInSeconds                           smithy.SchemaExtensions
+	eMicrovmHooks_resume                                        smithy.SchemaExtensions
+	eMicrovmHooks_resumeTimeoutInSeconds                        smithy.SchemaExtensions
+	eMicrovmHooks_suspend                                       smithy.SchemaExtensions
+	eMicrovmHooks_suspendTimeoutInSeconds                       smithy.SchemaExtensions
+	eMicrovmHooks_terminate                                     smithy.SchemaExtensions
+	eMicrovmHooks_terminateTimeoutInSeconds                     smithy.SchemaExtensions
+	e_MicrovmIdentifier                                         smithy.SchemaExtensions
+	e_MicrovmImageArn                                           smithy.SchemaExtensions
+	e_MicrovmImageBuildSummaries                                smithy.SchemaExtensions
+	e_MicrovmImageBuildSummaries_member                         smithy.SchemaExtensions
+	eMicrovmImageBuildSummary                                   smithy.SchemaExtensions
+	eMicrovmImageBuildSummary_imageArn                          smithy.SchemaExtensions
+	eMicrovmImageBuildSummary_imageVersion                      smithy.SchemaExtensions
+	eMicrovmImageBuildSummary_buildId                           smithy.SchemaExtensions
+	eMicrovmImageBuildSummary_buildState                        smithy.SchemaExtensions
+	eMicrovmImageBuildSummary_architecture                      smithy.SchemaExtensions
+	eMicrovmImageBuildSummary_chipset                           smithy.SchemaExtensions
+	eMicrovmImageBuildSummary_chipsetGeneration                 smithy.SchemaExtensions
+	eMicrovmImageBuildSummary_stateReason                       smithy.SchemaExtensions
+	eMicrovmImageBuildSummary_createdAt                         smithy.SchemaExtensions
+	eMicrovmImageHooks                                          smithy.SchemaExtensions
+	eMicrovmImageHooks_ready                                    smithy.SchemaExtensions
+	eMicrovmImageHooks_readyTimeoutInSeconds                    smithy.SchemaExtensions
+	eMicrovmImageHooks_validate                                 smithy.SchemaExtensions
+	eMicrovmImageHooks_validateTimeoutInSeconds                 smithy.SchemaExtensions
+	e_MicrovmImageIdentifier                                    smithy.SchemaExtensions
+	eMicrovmImageState                                          smithy.SchemaExtensions
+	eMicrovmImageState_CREATING                                 smithy.SchemaExtensions
+	eMicrovmImageState_CREATED                                  smithy.SchemaExtensions
+	eMicrovmImageState_CREATE_FAILED                            smithy.SchemaExtensions
+	eMicrovmImageState_UPDATING                                 smithy.SchemaExtensions
+	eMicrovmImageState_UPDATED                                  smithy.SchemaExtensions
+	eMicrovmImageState_UPDATE_FAILED                            smithy.SchemaExtensions
+	eMicrovmImageState_DELETING                                 smithy.SchemaExtensions
+	eMicrovmImageState_DELETE_FAILED                            smithy.SchemaExtensions
+	eMicrovmImageState_DELETED                                  smithy.SchemaExtensions
+	e_MicrovmImageSummaries                                     smithy.SchemaExtensions
+	e_MicrovmImageSummaries_member                              smithy.SchemaExtensions
+	eMicrovmImageSummary                                        smithy.SchemaExtensions
+	eMicrovmImageSummary_imageArn                               smithy.SchemaExtensions
+	eMicrovmImageSummary_name                                   smithy.SchemaExtensions
+	eMicrovmImageSummary_state                                  smithy.SchemaExtensions
+	eMicrovmImageSummary_latestActiveImageVersion               smithy.SchemaExtensions
+	eMicrovmImageSummary_latestFailedImageVersion               smithy.SchemaExtensions
+	eMicrovmImageSummary_createdAt                              smithy.SchemaExtensions
+	eMicrovmImageVersionState                                   smithy.SchemaExtensions
+	eMicrovmImageVersionState_PENDING                           smithy.SchemaExtensions
+	eMicrovmImageVersionState_IN_PROGRESS                       smithy.SchemaExtensions
+	eMicrovmImageVersionState_SUCCESSFUL                        smithy.SchemaExtensions
+	eMicrovmImageVersionState_FAILED                            smithy.SchemaExtensions
+	eMicrovmImageVersionState_DELETING                          smithy.SchemaExtensions
+	eMicrovmImageVersionState_DELETED                           smithy.SchemaExtensions
+	eMicrovmImageVersionState_DELETE_FAILED                     smithy.SchemaExtensions
+	eMicrovmImageVersionStatus                                  smithy.SchemaExtensions
+	eMicrovmImageVersionStatus_ACTIVE                           smithy.SchemaExtensions
+	eMicrovmImageVersionStatus_INACTIVE                         smithy.SchemaExtensions
+	eMicrovmImageVersionSummary                                 smithy.SchemaExtensions
+	eMicrovmImageVersionSummary_baseImageArn                    smithy.SchemaExtensions
+	eMicrovmImageVersionSummary_baseImageVersion                smithy.SchemaExtensions
+	eMicrovmImageVersionSummary_buildRoleArn                    smithy.SchemaExtensions
+	eMicrovmImageVersionSummary_description                     smithy.SchemaExtensions
+	eMicrovmImageVersionSummary_codeArtifact                    smithy.SchemaExtensions
+	eMicrovmImageVersionSummary_logging                         smithy.SchemaExtensions
+	eMicrovmImageVersionSummary_egressNetworkConnectors         smithy.SchemaExtensions
+	eMicrovmImageVersionSummary_cpuConfigurations               smithy.SchemaExtensions
+	eMicrovmImageVersionSummary_resources                       smithy.SchemaExtensions
+	eMicrovmImageVersionSummary_additionalOsCapabilities        smithy.SchemaExtensions
+	eMicrovmImageVersionSummary_hooks                           smithy.SchemaExtensions
+	eMicrovmImageVersionSummary_environmentVariables            smithy.SchemaExtensions
+	eMicrovmImageVersionSummary_imageArn                        smithy.SchemaExtensions
+	eMicrovmImageVersionSummary_imageVersion                    smithy.SchemaExtensions
+	eMicrovmImageVersionSummary_state                           smithy.SchemaExtensions
+	eMicrovmImageVersionSummary_status                          smithy.SchemaExtensions
+	eMicrovmImageVersionSummary_createdAt                       smithy.SchemaExtensions
+	eMicrovmImageVersionSummary_updatedAt                       smithy.SchemaExtensions
+	eMicrovmImageVersionSummary_stateReason                     smithy.SchemaExtensions
+	eMicrovmImageVersionSummary_tags                            smithy.SchemaExtensions
+	e_MicrovmImageVersionSummaryList                            smithy.SchemaExtensions
+	e_MicrovmImageVersionSummaryList_member                     smithy.SchemaExtensions
+	eMicrovmItem                                                smithy.SchemaExtensions
+	eMicrovmItem_microvmId                                      smithy.SchemaExtensions
+	eMicrovmItem_state                                          smithy.SchemaExtensions
+	eMicrovmItem_imageArn                                       smithy.SchemaExtensions
+	eMicrovmItem_imageVersion                                   smithy.SchemaExtensions
+	eMicrovmItem_startedAt                                      smithy.SchemaExtensions
+	e_MicrovmItemList                                           smithy.SchemaExtensions
+	e_MicrovmItemList_member                                    smithy.SchemaExtensions
+	eMicrovmState                                               smithy.SchemaExtensions
+	eMicrovmState_PENDING                                       smithy.SchemaExtensions
+	eMicrovmState_RUNNING                                       smithy.SchemaExtensions
+	eMicrovmState_SUSPENDING                                    smithy.SchemaExtensions
+	eMicrovmState_SUSPENDED                                     smithy.SchemaExtensions
+	eMicrovmState_TERMINATING                                   smithy.SchemaExtensions
+	eMicrovmState_TERMINATED                                    smithy.SchemaExtensions
+	e_NetworkConnector                                          smithy.SchemaExtensions
+	e_NetworkConnectorList                                      smithy.SchemaExtensions
+	e_NetworkConnectorList_member                               smithy.SchemaExtensions
+	e_NonBlankString                                            smithy.SchemaExtensions
+	e_PortNumber                                                smithy.SchemaExtensions
+	ePortRange                                                  smithy.SchemaExtensions
+	ePortRange_startPort                                        smithy.SchemaExtensions
+	ePortRange_endPort                                          smithy.SchemaExtensions
+	ePortSpecification                                          smithy.SchemaExtensions
+	ePortSpecification_port                                     smithy.SchemaExtensions
+	ePortSpecification_range                                    smithy.SchemaExtensions
+	ePortSpecification_allPorts                                 smithy.SchemaExtensions
+	e_PositiveInteger                                           smithy.SchemaExtensions
+	eResourceConflictException                                  smithy.SchemaExtensions
+	eResourceConflictException_Type                             smithy.SchemaExtensions
+	eResourceConflictException_message                          smithy.SchemaExtensions
+	eResourceNotFoundException                                  smithy.SchemaExtensions
+	eResourceNotFoundException_message                          smithy.SchemaExtensions
+	eResourceNotFoundException_resourceType                     smithy.SchemaExtensions
+	eResourceNotFoundException_resourceId                       smithy.SchemaExtensions
+	eResources                                                  smithy.SchemaExtensions
+	eResources_minimumMemoryInMiB                               smithy.SchemaExtensions
+	e_ResourcesList                                             smithy.SchemaExtensions
+	e_ResourcesList_member                                      smithy.SchemaExtensions
+	e_RoleArn                                                   smithy.SchemaExtensions
+	e_RunHookPayload                                            smithy.SchemaExtensions
+	eServiceException                                           smithy.SchemaExtensions
+	eServiceException_Type                                      smithy.SchemaExtensions
+	eServiceException_message                                   smithy.SchemaExtensions
+	eServiceQuotaExceededException                              smithy.SchemaExtensions
+	eServiceQuotaExceededException_message                      smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceId                   smithy.SchemaExtensions
+	eServiceQuotaExceededException_resourceType                 smithy.SchemaExtensions
+	eServiceQuotaExceededException_serviceCode                  smithy.SchemaExtensions
+	eServiceQuotaExceededException_quotaCode                    smithy.SchemaExtensions
+	eSnapshotBuild                                              smithy.SchemaExtensions
+	eSnapshotBuild_memorySnapshotSizeInBytes                    smithy.SchemaExtensions
+	eSnapshotBuild_codeInstallSizeInBytes                       smithy.SchemaExtensions
+	eSnapshotBuild_diskSnapshotSizeInBytes                      smithy.SchemaExtensions
+	e_String                                                    smithy.SchemaExtensions
+	e_TaggableResource                                          smithy.SchemaExtensions
+	e_TagKey                                                    smithy.SchemaExtensions
+	e_TagKeyList                                                smithy.SchemaExtensions
+	e_TagKeyList_member                                         smithy.SchemaExtensions
+	e_Tags                                                      smithy.SchemaExtensions
+	e_Tags_key                                                  smithy.SchemaExtensions
+	e_Tags_value                                                smithy.SchemaExtensions
+	e_TagValue                                                  smithy.SchemaExtensions
+	eThrottlingException                                        smithy.SchemaExtensions
+	eThrottlingException_message                                smithy.SchemaExtensions
+	eThrottlingException_serviceCode                            smithy.SchemaExtensions
+	eThrottlingException_quotaCode                              smithy.SchemaExtensions
+	eThrottlingException_retryAfterSeconds                      smithy.SchemaExtensions
+	e_TokenParts                                                smithy.SchemaExtensions
+	e_TokenParts_key                                            smithy.SchemaExtensions
+	e_TokenParts_value                                          smithy.SchemaExtensions
+	eTooManyRequestsException                                   smithy.SchemaExtensions
+	eTooManyRequestsException_Type                              smithy.SchemaExtensions
+	eTooManyRequestsException_message                           smithy.SchemaExtensions
+	eValidationException                                        smithy.SchemaExtensions
+	eValidationException_message                                smithy.SchemaExtensions
+	e_Version                                                   smithy.SchemaExtensions
+	eCreateMicrovmAuthTokenRequest                              smithy.SchemaExtensions
+	eCreateMicrovmAuthTokenRequest_microvmIdentifier            smithy.SchemaExtensions
+	eCreateMicrovmAuthTokenRequest_expirationInMinutes          smithy.SchemaExtensions
+	eCreateMicrovmAuthTokenRequest_allowedPorts                 smithy.SchemaExtensions
+	eCreateMicrovmAuthTokenResponse                             smithy.SchemaExtensions
+	eCreateMicrovmAuthTokenResponse_authToken                   smithy.SchemaExtensions
+	eCreateMicrovmImageRequest                                  smithy.SchemaExtensions
+	eCreateMicrovmImageRequest_baseImageArn                     smithy.SchemaExtensions
+	eCreateMicrovmImageRequest_baseImageVersion                 smithy.SchemaExtensions
+	eCreateMicrovmImageRequest_buildRoleArn                     smithy.SchemaExtensions
+	eCreateMicrovmImageRequest_description                      smithy.SchemaExtensions
+	eCreateMicrovmImageRequest_codeArtifact                     smithy.SchemaExtensions
+	eCreateMicrovmImageRequest_logging                          smithy.SchemaExtensions
+	eCreateMicrovmImageRequest_egressNetworkConnectors          smithy.SchemaExtensions
+	eCreateMicrovmImageRequest_cpuConfigurations                smithy.SchemaExtensions
+	eCreateMicrovmImageRequest_resources                        smithy.SchemaExtensions
+	eCreateMicrovmImageRequest_additionalOsCapabilities         smithy.SchemaExtensions
+	eCreateMicrovmImageRequest_hooks                            smithy.SchemaExtensions
+	eCreateMicrovmImageRequest_environmentVariables             smithy.SchemaExtensions
+	eCreateMicrovmImageRequest_name                             smithy.SchemaExtensions
+	eCreateMicrovmImageRequest_tags                             smithy.SchemaExtensions
+	eCreateMicrovmImageRequest_clientToken                      smithy.SchemaExtensions
+	eCreateMicrovmImageResponse                                 smithy.SchemaExtensions
+	eCreateMicrovmImageResponse_imageArn                        smithy.SchemaExtensions
+	eCreateMicrovmImageResponse_name                            smithy.SchemaExtensions
+	eCreateMicrovmImageResponse_state                           smithy.SchemaExtensions
+	eCreateMicrovmImageResponse_latestActiveImageVersion        smithy.SchemaExtensions
+	eCreateMicrovmImageResponse_latestFailedImageVersion        smithy.SchemaExtensions
+	eCreateMicrovmImageResponse_createdAt                       smithy.SchemaExtensions
+	eCreateMicrovmImageResponse_baseImageArn                    smithy.SchemaExtensions
+	eCreateMicrovmImageResponse_baseImageVersion                smithy.SchemaExtensions
+	eCreateMicrovmImageResponse_buildRoleArn                    smithy.SchemaExtensions
+	eCreateMicrovmImageResponse_description                     smithy.SchemaExtensions
+	eCreateMicrovmImageResponse_codeArtifact                    smithy.SchemaExtensions
+	eCreateMicrovmImageResponse_logging                         smithy.SchemaExtensions
+	eCreateMicrovmImageResponse_egressNetworkConnectors         smithy.SchemaExtensions
+	eCreateMicrovmImageResponse_cpuConfigurations               smithy.SchemaExtensions
+	eCreateMicrovmImageResponse_resources                       smithy.SchemaExtensions
+	eCreateMicrovmImageResponse_additionalOsCapabilities        smithy.SchemaExtensions
+	eCreateMicrovmImageResponse_hooks                           smithy.SchemaExtensions
+	eCreateMicrovmImageResponse_environmentVariables            smithy.SchemaExtensions
+	eCreateMicrovmImageResponse_tags                            smithy.SchemaExtensions
+	eCreateMicrovmImageResponse_updatedAt                       smithy.SchemaExtensions
+	eCreateMicrovmImageResponse_imageVersion                    smithy.SchemaExtensions
+	eCreateMicrovmShellAuthTokenRequest                         smithy.SchemaExtensions
+	eCreateMicrovmShellAuthTokenRequest_microvmIdentifier       smithy.SchemaExtensions
+	eCreateMicrovmShellAuthTokenRequest_expirationInMinutes     smithy.SchemaExtensions
+	eCreateMicrovmShellAuthTokenResponse                        smithy.SchemaExtensions
+	eCreateMicrovmShellAuthTokenResponse_authToken              smithy.SchemaExtensions
+	eDeleteMicrovmImageInput                                    smithy.SchemaExtensions
+	eDeleteMicrovmImageInput_imageIdentifier                    smithy.SchemaExtensions
+	eDeleteMicrovmImageOutput                                   smithy.SchemaExtensions
+	eDeleteMicrovmImageOutput_imageIdentifier                   smithy.SchemaExtensions
+	eDeleteMicrovmImageOutput_state                             smithy.SchemaExtensions
+	eDeleteMicrovmImageVersionInput                             smithy.SchemaExtensions
+	eDeleteMicrovmImageVersionInput_imageIdentifier             smithy.SchemaExtensions
+	eDeleteMicrovmImageVersionInput_imageVersion                smithy.SchemaExtensions
+	eDeleteMicrovmImageVersionOutput                            smithy.SchemaExtensions
+	eDeleteMicrovmImageVersionOutput_imageIdentifier            smithy.SchemaExtensions
+	eDeleteMicrovmImageVersionOutput_imageVersion               smithy.SchemaExtensions
+	eDeleteMicrovmImageVersionOutput_state                      smithy.SchemaExtensions
+	eGetMicrovmImageBuildInput                                  smithy.SchemaExtensions
+	eGetMicrovmImageBuildInput_imageIdentifier                  smithy.SchemaExtensions
+	eGetMicrovmImageBuildInput_imageVersion                     smithy.SchemaExtensions
+	eGetMicrovmImageBuildInput_buildId                          smithy.SchemaExtensions
+	eGetMicrovmImageBuildOutput                                 smithy.SchemaExtensions
+	eGetMicrovmImageBuildOutput_imageArn                        smithy.SchemaExtensions
+	eGetMicrovmImageBuildOutput_imageVersion                    smithy.SchemaExtensions
+	eGetMicrovmImageBuildOutput_buildId                         smithy.SchemaExtensions
+	eGetMicrovmImageBuildOutput_buildState                      smithy.SchemaExtensions
+	eGetMicrovmImageBuildOutput_architecture                    smithy.SchemaExtensions
+	eGetMicrovmImageBuildOutput_chipset                         smithy.SchemaExtensions
+	eGetMicrovmImageBuildOutput_chipsetGeneration               smithy.SchemaExtensions
+	eGetMicrovmImageBuildOutput_stateReason                     smithy.SchemaExtensions
+	eGetMicrovmImageBuildOutput_createdAt                       smithy.SchemaExtensions
+	eGetMicrovmImageBuildOutput_snapshotBuild                   smithy.SchemaExtensions
+	eGetMicrovmImageInput                                       smithy.SchemaExtensions
+	eGetMicrovmImageInput_imageIdentifier                       smithy.SchemaExtensions
+	eGetMicrovmImageOutput                                      smithy.SchemaExtensions
+	eGetMicrovmImageOutput_imageArn                             smithy.SchemaExtensions
+	eGetMicrovmImageOutput_name                                 smithy.SchemaExtensions
+	eGetMicrovmImageOutput_state                                smithy.SchemaExtensions
+	eGetMicrovmImageOutput_latestActiveImageVersion             smithy.SchemaExtensions
+	eGetMicrovmImageOutput_latestFailedImageVersion             smithy.SchemaExtensions
+	eGetMicrovmImageOutput_createdAt                            smithy.SchemaExtensions
+	eGetMicrovmImageOutput_tags                                 smithy.SchemaExtensions
+	eGetMicrovmImageOutput_updatedAt                            smithy.SchemaExtensions
+	eGetMicrovmImageVersionInput                                smithy.SchemaExtensions
+	eGetMicrovmImageVersionInput_imageIdentifier                smithy.SchemaExtensions
+	eGetMicrovmImageVersionInput_imageVersion                   smithy.SchemaExtensions
+	eGetMicrovmImageVersionOutput                               smithy.SchemaExtensions
+	eGetMicrovmImageVersionOutput_baseImageArn                  smithy.SchemaExtensions
+	eGetMicrovmImageVersionOutput_baseImageVersion              smithy.SchemaExtensions
+	eGetMicrovmImageVersionOutput_buildRoleArn                  smithy.SchemaExtensions
+	eGetMicrovmImageVersionOutput_description                   smithy.SchemaExtensions
+	eGetMicrovmImageVersionOutput_codeArtifact                  smithy.SchemaExtensions
+	eGetMicrovmImageVersionOutput_logging                       smithy.SchemaExtensions
+	eGetMicrovmImageVersionOutput_egressNetworkConnectors       smithy.SchemaExtensions
+	eGetMicrovmImageVersionOutput_cpuConfigurations             smithy.SchemaExtensions
+	eGetMicrovmImageVersionOutput_resources                     smithy.SchemaExtensions
+	eGetMicrovmImageVersionOutput_additionalOsCapabilities      smithy.SchemaExtensions
+	eGetMicrovmImageVersionOutput_hooks                         smithy.SchemaExtensions
+	eGetMicrovmImageVersionOutput_environmentVariables          smithy.SchemaExtensions
+	eGetMicrovmImageVersionOutput_imageArn                      smithy.SchemaExtensions
+	eGetMicrovmImageVersionOutput_imageVersion                  smithy.SchemaExtensions
+	eGetMicrovmImageVersionOutput_state                         smithy.SchemaExtensions
+	eGetMicrovmImageVersionOutput_status                        smithy.SchemaExtensions
+	eGetMicrovmImageVersionOutput_createdAt                     smithy.SchemaExtensions
+	eGetMicrovmImageVersionOutput_updatedAt                     smithy.SchemaExtensions
+	eGetMicrovmImageVersionOutput_stateReason                   smithy.SchemaExtensions
+	eGetMicrovmImageVersionOutput_tags                          smithy.SchemaExtensions
+	eGetMicrovmRequest                                          smithy.SchemaExtensions
+	eGetMicrovmRequest_microvmIdentifier                        smithy.SchemaExtensions
+	eGetMicrovmResponse                                         smithy.SchemaExtensions
+	eGetMicrovmResponse_microvmId                               smithy.SchemaExtensions
+	eGetMicrovmResponse_state                                   smithy.SchemaExtensions
+	eGetMicrovmResponse_endpoint                                smithy.SchemaExtensions
+	eGetMicrovmResponse_imageArn                                smithy.SchemaExtensions
+	eGetMicrovmResponse_imageVersion                            smithy.SchemaExtensions
+	eGetMicrovmResponse_executionRoleArn                        smithy.SchemaExtensions
+	eGetMicrovmResponse_idlePolicy                              smithy.SchemaExtensions
+	eGetMicrovmResponse_maximumDurationInSeconds                smithy.SchemaExtensions
+	eGetMicrovmResponse_startedAt                               smithy.SchemaExtensions
+	eGetMicrovmResponse_terminatedAt                            smithy.SchemaExtensions
+	eGetMicrovmResponse_stateReason                             smithy.SchemaExtensions
+	eGetMicrovmResponse_ingressNetworkConnectors                smithy.SchemaExtensions
+	eGetMicrovmResponse_egressNetworkConnectors                 smithy.SchemaExtensions
+	eListManagedMicrovmImagesInput                              smithy.SchemaExtensions
+	eListManagedMicrovmImagesInput_maxResults                   smithy.SchemaExtensions
+	eListManagedMicrovmImagesInput_nextToken                    smithy.SchemaExtensions
+	eListManagedMicrovmImagesOutput                             smithy.SchemaExtensions
+	eListManagedMicrovmImagesOutput_nextToken                   smithy.SchemaExtensions
+	eListManagedMicrovmImagesOutput_items                       smithy.SchemaExtensions
+	eListManagedMicrovmImageVersionsInput                       smithy.SchemaExtensions
+	eListManagedMicrovmImageVersionsInput_maxResults            smithy.SchemaExtensions
+	eListManagedMicrovmImageVersionsInput_nextToken             smithy.SchemaExtensions
+	eListManagedMicrovmImageVersionsInput_imageIdentifier       smithy.SchemaExtensions
+	eListManagedMicrovmImageVersionsOutput                      smithy.SchemaExtensions
+	eListManagedMicrovmImageVersionsOutput_nextToken            smithy.SchemaExtensions
+	eListManagedMicrovmImageVersionsOutput_items                smithy.SchemaExtensions
+	eListMicrovmImageBuildsInput                                smithy.SchemaExtensions
+	eListMicrovmImageBuildsInput_maxResults                     smithy.SchemaExtensions
+	eListMicrovmImageBuildsInput_nextToken                      smithy.SchemaExtensions
+	eListMicrovmImageBuildsInput_imageIdentifier                smithy.SchemaExtensions
+	eListMicrovmImageBuildsInput_imageVersion                   smithy.SchemaExtensions
+	eListMicrovmImageBuildsInput_architecture                   smithy.SchemaExtensions
+	eListMicrovmImageBuildsInput_chipset                        smithy.SchemaExtensions
+	eListMicrovmImageBuildsInput_chipsetGeneration              smithy.SchemaExtensions
+	eListMicrovmImageBuildsOutput                               smithy.SchemaExtensions
+	eListMicrovmImageBuildsOutput_nextToken                     smithy.SchemaExtensions
+	eListMicrovmImageBuildsOutput_items                         smithy.SchemaExtensions
+	eListMicrovmImagesRequest                                   smithy.SchemaExtensions
+	eListMicrovmImagesRequest_maxResults                        smithy.SchemaExtensions
+	eListMicrovmImagesRequest_nextToken                         smithy.SchemaExtensions
+	eListMicrovmImagesRequest_nameFilter                        smithy.SchemaExtensions
+	eListMicrovmImagesResponse                                  smithy.SchemaExtensions
+	eListMicrovmImagesResponse_nextToken                        smithy.SchemaExtensions
+	eListMicrovmImagesResponse_items                            smithy.SchemaExtensions
+	eListMicrovmImageVersionsInput                              smithy.SchemaExtensions
+	eListMicrovmImageVersionsInput_maxResults                   smithy.SchemaExtensions
+	eListMicrovmImageVersionsInput_nextToken                    smithy.SchemaExtensions
+	eListMicrovmImageVersionsInput_imageIdentifier              smithy.SchemaExtensions
+	eListMicrovmImageVersionsOutput                             smithy.SchemaExtensions
+	eListMicrovmImageVersionsOutput_nextToken                   smithy.SchemaExtensions
+	eListMicrovmImageVersionsOutput_items                       smithy.SchemaExtensions
+	eListMicrovmsRequest                                        smithy.SchemaExtensions
+	eListMicrovmsRequest_maxResults                             smithy.SchemaExtensions
+	eListMicrovmsRequest_nextToken                              smithy.SchemaExtensions
+	eListMicrovmsRequest_imageIdentifier                        smithy.SchemaExtensions
+	eListMicrovmsRequest_imageVersion                           smithy.SchemaExtensions
+	eListMicrovmsResponse                                       smithy.SchemaExtensions
+	eListMicrovmsResponse_nextToken                             smithy.SchemaExtensions
+	eListMicrovmsResponse_items                                 smithy.SchemaExtensions
+	eListTagsRequest                                            smithy.SchemaExtensions
+	eListTagsRequest_Resource                                   smithy.SchemaExtensions
+	eListTagsResponse                                           smithy.SchemaExtensions
+	eListTagsResponse_Tags                                      smithy.SchemaExtensions
+	eResumeMicrovmRequest                                       smithy.SchemaExtensions
+	eResumeMicrovmRequest_microvmIdentifier                     smithy.SchemaExtensions
+	eResumeMicrovmResponse                                      smithy.SchemaExtensions
+	eRunMicrovmRequest                                          smithy.SchemaExtensions
+	eRunMicrovmRequest_ingressNetworkConnectors                 smithy.SchemaExtensions
+	eRunMicrovmRequest_egressNetworkConnectors                  smithy.SchemaExtensions
+	eRunMicrovmRequest_imageIdentifier                          smithy.SchemaExtensions
+	eRunMicrovmRequest_imageVersion                             smithy.SchemaExtensions
+	eRunMicrovmRequest_executionRoleArn                         smithy.SchemaExtensions
+	eRunMicrovmRequest_idlePolicy                               smithy.SchemaExtensions
+	eRunMicrovmRequest_logging                                  smithy.SchemaExtensions
+	eRunMicrovmRequest_runHookPayload                           smithy.SchemaExtensions
+	eRunMicrovmRequest_maximumDurationInSeconds                 smithy.SchemaExtensions
+	eRunMicrovmRequest_clientToken                              smithy.SchemaExtensions
+	eRunMicrovmResponse                                         smithy.SchemaExtensions
+	eRunMicrovmResponse_microvmId                               smithy.SchemaExtensions
+	eRunMicrovmResponse_state                                   smithy.SchemaExtensions
+	eRunMicrovmResponse_endpoint                                smithy.SchemaExtensions
+	eRunMicrovmResponse_imageArn                                smithy.SchemaExtensions
+	eRunMicrovmResponse_imageVersion                            smithy.SchemaExtensions
+	eRunMicrovmResponse_executionRoleArn                        smithy.SchemaExtensions
+	eRunMicrovmResponse_idlePolicy                              smithy.SchemaExtensions
+	eRunMicrovmResponse_maximumDurationInSeconds                smithy.SchemaExtensions
+	eRunMicrovmResponse_startedAt                               smithy.SchemaExtensions
+	eRunMicrovmResponse_terminatedAt                            smithy.SchemaExtensions
+	eRunMicrovmResponse_stateReason                             smithy.SchemaExtensions
+	eRunMicrovmResponse_ingressNetworkConnectors                smithy.SchemaExtensions
+	eRunMicrovmResponse_egressNetworkConnectors                 smithy.SchemaExtensions
+	eSuspendMicrovmRequest                                      smithy.SchemaExtensions
+	eSuspendMicrovmRequest_microvmIdentifier                    smithy.SchemaExtensions
+	eSuspendMicrovmResponse                                     smithy.SchemaExtensions
+	eTagResourceRequest                                         smithy.SchemaExtensions
+	eTagResourceRequest_Resource                                smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                    smithy.SchemaExtensions
+	eTerminateMicrovmRequest                                    smithy.SchemaExtensions
+	eTerminateMicrovmRequest_microvmIdentifier                  smithy.SchemaExtensions
+	eTerminateMicrovmResponse                                   smithy.SchemaExtensions
+	eUntagResourceRequest                                       smithy.SchemaExtensions
+	eUntagResourceRequest_Resource                              smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                               smithy.SchemaExtensions
+	eUpdateMicrovmImageRequest                                  smithy.SchemaExtensions
+	eUpdateMicrovmImageRequest_baseImageArn                     smithy.SchemaExtensions
+	eUpdateMicrovmImageRequest_baseImageVersion                 smithy.SchemaExtensions
+	eUpdateMicrovmImageRequest_buildRoleArn                     smithy.SchemaExtensions
+	eUpdateMicrovmImageRequest_description                      smithy.SchemaExtensions
+	eUpdateMicrovmImageRequest_codeArtifact                     smithy.SchemaExtensions
+	eUpdateMicrovmImageRequest_logging                          smithy.SchemaExtensions
+	eUpdateMicrovmImageRequest_egressNetworkConnectors          smithy.SchemaExtensions
+	eUpdateMicrovmImageRequest_cpuConfigurations                smithy.SchemaExtensions
+	eUpdateMicrovmImageRequest_resources                        smithy.SchemaExtensions
+	eUpdateMicrovmImageRequest_additionalOsCapabilities         smithy.SchemaExtensions
+	eUpdateMicrovmImageRequest_hooks                            smithy.SchemaExtensions
+	eUpdateMicrovmImageRequest_environmentVariables             smithy.SchemaExtensions
+	eUpdateMicrovmImageRequest_imageIdentifier                  smithy.SchemaExtensions
+	eUpdateMicrovmImageRequest_clientToken                      smithy.SchemaExtensions
+	eUpdateMicrovmImageResponse                                 smithy.SchemaExtensions
+	eUpdateMicrovmImageResponse_imageArn                        smithy.SchemaExtensions
+	eUpdateMicrovmImageResponse_name                            smithy.SchemaExtensions
+	eUpdateMicrovmImageResponse_state                           smithy.SchemaExtensions
+	eUpdateMicrovmImageResponse_latestActiveImageVersion        smithy.SchemaExtensions
+	eUpdateMicrovmImageResponse_latestFailedImageVersion        smithy.SchemaExtensions
+	eUpdateMicrovmImageResponse_createdAt                       smithy.SchemaExtensions
+	eUpdateMicrovmImageResponse_baseImageArn                    smithy.SchemaExtensions
+	eUpdateMicrovmImageResponse_baseImageVersion                smithy.SchemaExtensions
+	eUpdateMicrovmImageResponse_buildRoleArn                    smithy.SchemaExtensions
+	eUpdateMicrovmImageResponse_description                     smithy.SchemaExtensions
+	eUpdateMicrovmImageResponse_codeArtifact                    smithy.SchemaExtensions
+	eUpdateMicrovmImageResponse_logging                         smithy.SchemaExtensions
+	eUpdateMicrovmImageResponse_egressNetworkConnectors         smithy.SchemaExtensions
+	eUpdateMicrovmImageResponse_cpuConfigurations               smithy.SchemaExtensions
+	eUpdateMicrovmImageResponse_resources                       smithy.SchemaExtensions
+	eUpdateMicrovmImageResponse_additionalOsCapabilities        smithy.SchemaExtensions
+	eUpdateMicrovmImageResponse_hooks                           smithy.SchemaExtensions
+	eUpdateMicrovmImageResponse_environmentVariables            smithy.SchemaExtensions
+	eUpdateMicrovmImageResponse_updatedAt                       smithy.SchemaExtensions
+	eUpdateMicrovmImageResponse_imageVersion                    smithy.SchemaExtensions
+	eUpdateMicrovmImageVersionRequest                           smithy.SchemaExtensions
+	eUpdateMicrovmImageVersionRequest_imageIdentifier           smithy.SchemaExtensions
+	eUpdateMicrovmImageVersionRequest_imageVersion              smithy.SchemaExtensions
+	eUpdateMicrovmImageVersionRequest_status                    smithy.SchemaExtensions
+	eUpdateMicrovmImageVersionResponse                          smithy.SchemaExtensions
+	eUpdateMicrovmImageVersionResponse_baseImageArn             smithy.SchemaExtensions
+	eUpdateMicrovmImageVersionResponse_baseImageVersion         smithy.SchemaExtensions
+	eUpdateMicrovmImageVersionResponse_buildRoleArn             smithy.SchemaExtensions
+	eUpdateMicrovmImageVersionResponse_description              smithy.SchemaExtensions
+	eUpdateMicrovmImageVersionResponse_codeArtifact             smithy.SchemaExtensions
+	eUpdateMicrovmImageVersionResponse_logging                  smithy.SchemaExtensions
+	eUpdateMicrovmImageVersionResponse_egressNetworkConnectors  smithy.SchemaExtensions
+	eUpdateMicrovmImageVersionResponse_cpuConfigurations        smithy.SchemaExtensions
+	eUpdateMicrovmImageVersionResponse_resources                smithy.SchemaExtensions
+	eUpdateMicrovmImageVersionResponse_additionalOsCapabilities smithy.SchemaExtensions
+	eUpdateMicrovmImageVersionResponse_hooks                    smithy.SchemaExtensions
+	eUpdateMicrovmImageVersionResponse_environmentVariables     smithy.SchemaExtensions
+	eUpdateMicrovmImageVersionResponse_imageArn                 smithy.SchemaExtensions
+	eUpdateMicrovmImageVersionResponse_imageVersion             smithy.SchemaExtensions
+	eUpdateMicrovmImageVersionResponse_state                    smithy.SchemaExtensions
+	eUpdateMicrovmImageVersionResponse_status                   smithy.SchemaExtensions
+	eUpdateMicrovmImageVersionResponse_createdAt                smithy.SchemaExtensions
+	eUpdateMicrovmImageVersionResponse_updatedAt                smithy.SchemaExtensions
+	eUpdateMicrovmImageVersionResponse_stateReason              smithy.SchemaExtensions
+	eUpdateMicrovmImageVersionResponse_tags                     smithy.SchemaExtensions
+)
 
 var (
 	iCreateMicrovmAuthToken                = smithy.ShapeID{Namespace: "com.amazonaws.lambdamicrovms", Name: "CreateMicrovmAuthToken"}
@@ -403,547 +942,547 @@ var mUpdateMicrovmImageVersionResponse = smithy.SchemaMembers{List: []*smithy.Sc
 	9, 0, 3, 0, 0, 11, 6, 0, 0, 14, 13, 0, 0, 0, 0, 0,
 }}
 
-var sCreateMicrovmAuthToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMicrovmAuthToken, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCreateMicrovmImage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMicrovmImage, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sCreateMicrovmShellAuthToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMicrovmShellAuthToken, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sDeleteMicrovmImage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMicrovmImage, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sDeleteMicrovmImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMicrovmImageVersion, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sGetMicrovm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMicrovm, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sGetMicrovmImage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMicrovmImage, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sGetMicrovmImageBuild = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMicrovmImageBuild, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sGetMicrovmImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMicrovmImageVersion, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sListManagedMicrovmImages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedMicrovmImages, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sListManagedMicrovmImageVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedMicrovmImageVersions, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sListMicrovmImageBuilds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrovmImageBuilds, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sListMicrovmImages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrovmImages, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sListMicrovmImageVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrovmImageVersions, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sListMicrovms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrovms, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sListTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTags, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sResumeMicrovm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResumeMicrovm, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sRunMicrovm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRunMicrovm, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sSuspendMicrovm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuspendMicrovm, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var sTerminateMicrovm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateMicrovm, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &ext[20]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &ext[21]})
-var sUpdateMicrovmImage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMicrovmImage, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &ext[22]})
-var sUpdateMicrovmImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMicrovmImageVersion, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &ext[23]})
-var s_LambdaMicrovms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LambdaMicrovms, Type: smithy.ShapeTypeService, Ext: &ext[24]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &ext[25]})
-var sArchitecture = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArchitecture, Members: &mArchitecture, Type: smithy.ShapeTypeEnum, Ext: &ext[27]})
-var s_AuthTokenKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthTokenKey, Type: smithy.ShapeTypeString, Ext: &ext[29]})
-var s_AuthTokenValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthTokenValue, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &ext[30]})
-var sBuildState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBuildState, Members: &mBuildState, Type: smithy.ShapeTypeEnum, Ext: &ext[31]})
-var sCapability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapability, Members: &mCapability, Type: smithy.ShapeTypeEnum, Ext: &ext[36]})
-var s_CapabilityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapabilityList, Members: &m_CapabilityList, Type: smithy.ShapeTypeList, Ext: &ext[38]})
-var sChipset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChipset, Members: &mChipset, Type: smithy.ShapeTypeEnum, Ext: &ext[40]})
-var sCloudWatchLogging = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudWatchLogging, Members: &mCloudWatchLogging, Type: smithy.ShapeTypeStructure, Ext: &ext[42]})
-var sCodeArtifact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeArtifact, Members: &mCodeArtifact, Type: smithy.ShapeTypeUnion, Ext: &ext[45]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &ext[47]})
-var sCpuConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCpuConfiguration, Members: &mCpuConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[51]})
-var s_CpuConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CpuConfigurationList, Members: &m_CpuConfigurationList, Type: smithy.ShapeTypeList, Ext: &ext[53]})
-var s_EnvironmentVariableKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentVariableKey, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var s_EnvironmentVariableMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentVariableMap, Members: &m_EnvironmentVariableMap, Type: smithy.ShapeTypeMap, Ext: &ext[56]})
-var s_EnvironmentVariableValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentVariableValue, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &ext[59]})
-var sHooks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHooks, Members: &mHooks, Type: smithy.ShapeTypeStructure, Ext: &ext[60]})
-var sHookState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHookState, Members: &mHookState, Type: smithy.ShapeTypeEnum, Ext: &ext[64]})
-var sIdlePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdlePolicy, Members: &mIdlePolicy, Type: smithy.ShapeTypeStructure, Ext: &ext[67]})
-var s_ImageName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImageName, Type: smithy.ShapeTypeString, Ext: &ext[71]})
-var sInsufficientCapacityException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsufficientCapacityException, Members: &mInsufficientCapacityException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var sInvalidParameterValueException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterValueException, Members: &mInvalidParameterValueException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
-var s_ListOfPortSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfPortSpecification, Members: &m_ListOfPortSpecification, Type: smithy.ShapeTypeList, Ext: &ext[80]})
-var sLogging = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogging, Members: &mLogging, Type: smithy.ShapeTypeUnion, Ext: &ext[82]})
-var sLoggingDisabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoggingDisabled, Type: smithy.ShapeTypeStructure, Ext: &ext[85]})
-var sManagedMicrovmImageSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedMicrovmImageSummary, Members: &mManagedMicrovmImageSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[86]})
-var s_ManagedMicrovmImageSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedMicrovmImageSummaryList, Members: &m_ManagedMicrovmImageSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[90]})
-var sManagedMicrovmImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedMicrovmImageVersion, Members: &mManagedMicrovmImageVersion, Type: smithy.ShapeTypeStructure, Ext: &ext[92]})
-var s_ManagedMicrovmImageVersionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedMicrovmImageVersionList, Members: &m_ManagedMicrovmImageVersionList, Type: smithy.ShapeTypeList, Ext: &ext[98]})
-var sManagedMicrovmImageVersionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedMicrovmImageVersionStatus, Members: &mManagedMicrovmImageVersionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[100]})
-var sMicrovmHooks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMicrovmHooks, Members: &mMicrovmHooks, Type: smithy.ShapeTypeStructure, Ext: &ext[103]})
-var s_MicrovmIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MicrovmIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[112]})
-var s_MicrovmImageArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MicrovmImageArn, Type: smithy.ShapeTypeString, Ext: &ext[113]})
-var s_MicrovmImageBuildSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MicrovmImageBuildSummaries, Members: &m_MicrovmImageBuildSummaries, Type: smithy.ShapeTypeList, Ext: &ext[114]})
-var sMicrovmImageBuildSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMicrovmImageBuildSummary, Members: &mMicrovmImageBuildSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[116]})
-var sMicrovmImageHooks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMicrovmImageHooks, Members: &mMicrovmImageHooks, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var s_MicrovmImageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MicrovmImageIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[131]})
-var sMicrovmImageState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMicrovmImageState, Members: &mMicrovmImageState, Type: smithy.ShapeTypeEnum, Ext: &ext[132]})
-var s_MicrovmImageSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MicrovmImageSummaries, Members: &m_MicrovmImageSummaries, Type: smithy.ShapeTypeList, Ext: &ext[142]})
-var sMicrovmImageSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMicrovmImageSummary, Members: &mMicrovmImageSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[144]})
-var sMicrovmImageVersionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMicrovmImageVersionState, Members: &mMicrovmImageVersionState, Type: smithy.ShapeTypeEnum, Ext: &ext[151]})
-var sMicrovmImageVersionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMicrovmImageVersionStatus, Members: &mMicrovmImageVersionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[159]})
-var sMicrovmImageVersionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMicrovmImageVersionSummary, Members: &mMicrovmImageVersionSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[162]})
-var s_MicrovmImageVersionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MicrovmImageVersionSummaryList, Members: &m_MicrovmImageVersionSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[183]})
-var sMicrovmItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMicrovmItem, Members: &mMicrovmItem, Type: smithy.ShapeTypeStructure, Ext: &ext[185]})
-var s_MicrovmItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MicrovmItemList, Members: &m_MicrovmItemList, Type: smithy.ShapeTypeList, Ext: &ext[191]})
-var sMicrovmState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMicrovmState, Members: &mMicrovmState, Type: smithy.ShapeTypeEnum, Ext: &ext[193]})
-var s_NetworkConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkConnector, Type: smithy.ShapeTypeString, Ext: &ext[200]})
-var s_NetworkConnectorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &ext[201]})
-var s_NonBlankString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[203]})
-var s_PortNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PortNumber, Type: smithy.ShapeTypeInteger, Ext: &ext[204]})
-var sPortRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPortRange, Members: &mPortRange, Type: smithy.ShapeTypeStructure, Ext: &ext[205]})
-var sPortSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPortSpecification, Members: &mPortSpecification, Type: smithy.ShapeTypeUnion, Ext: &ext[208]})
-var s_PositiveInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[212]})
-var sResourceConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceConflictException, Members: &mResourceConflictException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &ext[213]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &ext[216]})
-var sResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResources, Members: &mResources, Type: smithy.ShapeTypeStructure, Ext: &ext[220]})
-var s_ResourcesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourcesList, Members: &m_ResourcesList, Type: smithy.ShapeTypeList, Ext: &ext[222]})
-var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[224]})
-var s_RunHookPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RunHookPayload, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &ext[225]})
-var sServiceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceException, Members: &mServiceException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &ext[226]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &ext[229]})
-var sSnapshotBuild = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnapshotBuild, Members: &mSnapshotBuild, Type: smithy.ShapeTypeStructure, Ext: &ext[235]})
-var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[239]})
-var s_TaggableResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaggableResource, Type: smithy.ShapeTypeString, Ext: &ext[240]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[241]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[242]})
-var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[244]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[247]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t34, Type: smithy.ShapeTypeStructure, Ext: &ext[248]})
-var s_TokenParts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TokenParts, Members: &m_TokenParts, Type: smithy.ShapeTypeMap, Ext: &ext[253]})
-var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t34, Type: smithy.ShapeTypeStructure, Ext: &ext[256]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &ext[259]})
-var s_Version = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &ext[261]})
-var sCreateMicrovmAuthTokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMicrovmAuthTokenRequest, Members: &mCreateMicrovmAuthTokenRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[262]})
-var sCreateMicrovmAuthTokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMicrovmAuthTokenResponse, Members: &mCreateMicrovmAuthTokenResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[266]})
-var sCreateMicrovmImageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMicrovmImageRequest, Members: &mCreateMicrovmImageRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[268]})
-var sCreateMicrovmImageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMicrovmImageResponse, Members: &mCreateMicrovmImageResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[284]})
-var sCreateMicrovmShellAuthTokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMicrovmShellAuthTokenRequest, Members: &mCreateMicrovmShellAuthTokenRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[306]})
-var sCreateMicrovmShellAuthTokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMicrovmShellAuthTokenResponse, Members: &mCreateMicrovmShellAuthTokenResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[309]})
-var sDeleteMicrovmImageInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMicrovmImageInput, Members: &mDeleteMicrovmImageInput, Type: smithy.ShapeTypeStructure, Ext: &ext[311]})
-var sDeleteMicrovmImageOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMicrovmImageOutput, Members: &mDeleteMicrovmImageOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[313]})
-var sDeleteMicrovmImageVersionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMicrovmImageVersionInput, Members: &mDeleteMicrovmImageVersionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[316]})
-var sDeleteMicrovmImageVersionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMicrovmImageVersionOutput, Members: &mDeleteMicrovmImageVersionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[319]})
-var sGetMicrovmImageBuildInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMicrovmImageBuildInput, Members: &mGetMicrovmImageBuildInput, Type: smithy.ShapeTypeStructure, Ext: &ext[323]})
-var sGetMicrovmImageBuildOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMicrovmImageBuildOutput, Members: &mGetMicrovmImageBuildOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[327]})
-var sGetMicrovmImageInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMicrovmImageInput, Members: &mGetMicrovmImageInput, Type: smithy.ShapeTypeStructure, Ext: &ext[338]})
-var sGetMicrovmImageOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMicrovmImageOutput, Members: &mGetMicrovmImageOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[340]})
-var sGetMicrovmImageVersionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMicrovmImageVersionInput, Members: &mGetMicrovmImageVersionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[349]})
-var sGetMicrovmImageVersionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMicrovmImageVersionOutput, Members: &mGetMicrovmImageVersionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[352]})
-var sGetMicrovmRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMicrovmRequest, Members: &mGetMicrovmRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[373]})
-var sGetMicrovmResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMicrovmResponse, Members: &mGetMicrovmResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[375]})
-var sListManagedMicrovmImagesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedMicrovmImagesInput, Members: &mListManagedMicrovmImagesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[389]})
-var sListManagedMicrovmImagesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedMicrovmImagesOutput, Members: &mListManagedMicrovmImagesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[392]})
-var sListManagedMicrovmImageVersionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedMicrovmImageVersionsInput, Members: &mListManagedMicrovmImageVersionsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[395]})
-var sListManagedMicrovmImageVersionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedMicrovmImageVersionsOutput, Members: &mListManagedMicrovmImageVersionsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[399]})
-var sListMicrovmImageBuildsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrovmImageBuildsInput, Members: &mListMicrovmImageBuildsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[402]})
-var sListMicrovmImageBuildsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrovmImageBuildsOutput, Members: &mListMicrovmImageBuildsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[410]})
-var sListMicrovmImagesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrovmImagesRequest, Members: &mListMicrovmImagesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[413]})
-var sListMicrovmImagesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrovmImagesResponse, Members: &mListMicrovmImagesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[417]})
-var sListMicrovmImageVersionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrovmImageVersionsInput, Members: &mListMicrovmImageVersionsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[420]})
-var sListMicrovmImageVersionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrovmImageVersionsOutput, Members: &mListMicrovmImageVersionsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[424]})
-var sListMicrovmsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrovmsRequest, Members: &mListMicrovmsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[427]})
-var sListMicrovmsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrovmsResponse, Members: &mListMicrovmsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[432]})
-var sListTagsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsRequest, Members: &mListTagsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[435]})
-var sListTagsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsResponse, Members: &mListTagsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[437]})
-var sResumeMicrovmRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResumeMicrovmRequest, Members: &mResumeMicrovmRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[439]})
-var sResumeMicrovmResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResumeMicrovmResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[441]})
-var sRunMicrovmRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRunMicrovmRequest, Members: &mRunMicrovmRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[442]})
-var sRunMicrovmResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRunMicrovmResponse, Members: &mRunMicrovmResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[453]})
-var sSuspendMicrovmRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuspendMicrovmRequest, Members: &mSuspendMicrovmRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[467]})
-var sSuspendMicrovmResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuspendMicrovmResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[469]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[470]})
-var sTerminateMicrovmRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateMicrovmRequest, Members: &mTerminateMicrovmRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[473]})
-var sTerminateMicrovmResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateMicrovmResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[475]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[476]})
-var sUpdateMicrovmImageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMicrovmImageRequest, Members: &mUpdateMicrovmImageRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[479]})
-var sUpdateMicrovmImageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMicrovmImageResponse, Members: &mUpdateMicrovmImageResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[494]})
-var sUpdateMicrovmImageVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMicrovmImageVersionRequest, Members: &mUpdateMicrovmImageVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[515]})
-var sUpdateMicrovmImageVersionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMicrovmImageVersionResponse, Members: &mUpdateMicrovmImageVersionResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[519]})
+var sCreateMicrovmAuthToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMicrovmAuthToken, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateMicrovmAuthToken})
+var sCreateMicrovmImage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMicrovmImage, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateMicrovmImage})
+var sCreateMicrovmShellAuthToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMicrovmShellAuthToken, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateMicrovmShellAuthToken})
+var sDeleteMicrovmImage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMicrovmImage, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eDeleteMicrovmImage})
+var sDeleteMicrovmImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMicrovmImageVersion, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDeleteMicrovmImageVersion})
+var sGetMicrovm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMicrovm, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eGetMicrovm})
+var sGetMicrovmImage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMicrovmImage, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eGetMicrovmImage})
+var sGetMicrovmImageBuild = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMicrovmImageBuild, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eGetMicrovmImageBuild})
+var sGetMicrovmImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMicrovmImageVersion, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eGetMicrovmImageVersion})
+var sListManagedMicrovmImages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedMicrovmImages, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eListManagedMicrovmImages})
+var sListManagedMicrovmImageVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedMicrovmImageVersions, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eListManagedMicrovmImageVersions})
+var sListMicrovmImageBuilds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrovmImageBuilds, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eListMicrovmImageBuilds})
+var sListMicrovmImages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrovmImages, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eListMicrovmImages})
+var sListMicrovmImageVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrovmImageVersions, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eListMicrovmImageVersions})
+var sListMicrovms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrovms, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eListMicrovms})
+var sListTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTags, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eListTags})
+var sResumeMicrovm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResumeMicrovm, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eResumeMicrovm})
+var sRunMicrovm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRunMicrovm, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eRunMicrovm})
+var sSuspendMicrovm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuspendMicrovm, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eSuspendMicrovm})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sTerminateMicrovm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateMicrovm, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eTerminateMicrovm})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateMicrovmImage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMicrovmImage, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eUpdateMicrovmImage})
+var sUpdateMicrovmImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMicrovmImageVersion, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eUpdateMicrovmImageVersion})
+var s_LambdaMicrovms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LambdaMicrovms, Type: smithy.ShapeTypeService, Ext: &e_LambdaMicrovms})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sArchitecture = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArchitecture, Members: &mArchitecture, Type: smithy.ShapeTypeEnum, Ext: &eArchitecture})
+var s_AuthTokenKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthTokenKey, Type: smithy.ShapeTypeString, Ext: &e_AuthTokenKey})
+var s_AuthTokenValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthTokenValue, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &e_AuthTokenValue})
+var sBuildState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBuildState, Members: &mBuildState, Type: smithy.ShapeTypeEnum, Ext: &eBuildState})
+var sCapability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapability, Members: &mCapability, Type: smithy.ShapeTypeEnum, Ext: &eCapability})
+var s_CapabilityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapabilityList, Members: &m_CapabilityList, Type: smithy.ShapeTypeList, Ext: &e_CapabilityList})
+var sChipset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChipset, Members: &mChipset, Type: smithy.ShapeTypeEnum, Ext: &eChipset})
+var sCloudWatchLogging = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudWatchLogging, Members: &mCloudWatchLogging, Type: smithy.ShapeTypeStructure, Ext: &eCloudWatchLogging})
+var sCodeArtifact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeArtifact, Members: &mCodeArtifact, Type: smithy.ShapeTypeUnion, Ext: &eCodeArtifact})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sCpuConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCpuConfiguration, Members: &mCpuConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCpuConfiguration})
+var s_CpuConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CpuConfigurationList, Members: &m_CpuConfigurationList, Type: smithy.ShapeTypeList, Ext: &e_CpuConfigurationList})
+var s_EnvironmentVariableKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentVariableKey, Type: smithy.ShapeTypeString, Ext: &e_EnvironmentVariableKey})
+var s_EnvironmentVariableMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentVariableMap, Members: &m_EnvironmentVariableMap, Type: smithy.ShapeTypeMap, Ext: &e_EnvironmentVariableMap})
+var s_EnvironmentVariableValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentVariableValue, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &e_EnvironmentVariableValue})
+var sHooks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHooks, Members: &mHooks, Type: smithy.ShapeTypeStructure, Ext: &eHooks})
+var sHookState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHookState, Members: &mHookState, Type: smithy.ShapeTypeEnum, Ext: &eHookState})
+var sIdlePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdlePolicy, Members: &mIdlePolicy, Type: smithy.ShapeTypeStructure, Ext: &eIdlePolicy})
+var s_ImageName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImageName, Type: smithy.ShapeTypeString, Ext: &e_ImageName})
+var sInsufficientCapacityException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsufficientCapacityException, Members: &mInsufficientCapacityException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eInsufficientCapacityException})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInvalidParameterValueException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterValueException, Members: &mInvalidParameterValueException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &eInvalidParameterValueException})
+var s_ListOfPortSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfPortSpecification, Members: &m_ListOfPortSpecification, Type: smithy.ShapeTypeList, Ext: &e_ListOfPortSpecification})
+var sLogging = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogging, Members: &mLogging, Type: smithy.ShapeTypeUnion, Ext: &eLogging})
+var sLoggingDisabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoggingDisabled, Type: smithy.ShapeTypeStructure, Ext: &eLoggingDisabled})
+var sManagedMicrovmImageSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedMicrovmImageSummary, Members: &mManagedMicrovmImageSummary, Type: smithy.ShapeTypeStructure, Ext: &eManagedMicrovmImageSummary})
+var s_ManagedMicrovmImageSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedMicrovmImageSummaryList, Members: &m_ManagedMicrovmImageSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ManagedMicrovmImageSummaryList})
+var sManagedMicrovmImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedMicrovmImageVersion, Members: &mManagedMicrovmImageVersion, Type: smithy.ShapeTypeStructure, Ext: &eManagedMicrovmImageVersion})
+var s_ManagedMicrovmImageVersionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedMicrovmImageVersionList, Members: &m_ManagedMicrovmImageVersionList, Type: smithy.ShapeTypeList, Ext: &e_ManagedMicrovmImageVersionList})
+var sManagedMicrovmImageVersionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedMicrovmImageVersionStatus, Members: &mManagedMicrovmImageVersionStatus, Type: smithy.ShapeTypeEnum, Ext: &eManagedMicrovmImageVersionStatus})
+var sMicrovmHooks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMicrovmHooks, Members: &mMicrovmHooks, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmHooks})
+var s_MicrovmIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MicrovmIdentifier, Type: smithy.ShapeTypeString, Ext: &e_MicrovmIdentifier})
+var s_MicrovmImageArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MicrovmImageArn, Type: smithy.ShapeTypeString, Ext: &e_MicrovmImageArn})
+var s_MicrovmImageBuildSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MicrovmImageBuildSummaries, Members: &m_MicrovmImageBuildSummaries, Type: smithy.ShapeTypeList, Ext: &e_MicrovmImageBuildSummaries})
+var sMicrovmImageBuildSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMicrovmImageBuildSummary, Members: &mMicrovmImageBuildSummary, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmImageBuildSummary})
+var sMicrovmImageHooks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMicrovmImageHooks, Members: &mMicrovmImageHooks, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmImageHooks})
+var s_MicrovmImageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MicrovmImageIdentifier, Type: smithy.ShapeTypeString, Ext: &e_MicrovmImageIdentifier})
+var sMicrovmImageState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMicrovmImageState, Members: &mMicrovmImageState, Type: smithy.ShapeTypeEnum, Ext: &eMicrovmImageState})
+var s_MicrovmImageSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MicrovmImageSummaries, Members: &m_MicrovmImageSummaries, Type: smithy.ShapeTypeList, Ext: &e_MicrovmImageSummaries})
+var sMicrovmImageSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMicrovmImageSummary, Members: &mMicrovmImageSummary, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmImageSummary})
+var sMicrovmImageVersionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMicrovmImageVersionState, Members: &mMicrovmImageVersionState, Type: smithy.ShapeTypeEnum, Ext: &eMicrovmImageVersionState})
+var sMicrovmImageVersionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMicrovmImageVersionStatus, Members: &mMicrovmImageVersionStatus, Type: smithy.ShapeTypeEnum, Ext: &eMicrovmImageVersionStatus})
+var sMicrovmImageVersionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMicrovmImageVersionSummary, Members: &mMicrovmImageVersionSummary, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmImageVersionSummary})
+var s_MicrovmImageVersionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MicrovmImageVersionSummaryList, Members: &m_MicrovmImageVersionSummaryList, Type: smithy.ShapeTypeList, Ext: &e_MicrovmImageVersionSummaryList})
+var sMicrovmItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMicrovmItem, Members: &mMicrovmItem, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmItem})
+var s_MicrovmItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MicrovmItemList, Members: &m_MicrovmItemList, Type: smithy.ShapeTypeList, Ext: &e_MicrovmItemList})
+var sMicrovmState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMicrovmState, Members: &mMicrovmState, Type: smithy.ShapeTypeEnum, Ext: &eMicrovmState})
+var s_NetworkConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkConnector, Type: smithy.ShapeTypeString, Ext: &e_NetworkConnector})
+var s_NetworkConnectorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &e_NetworkConnectorList})
+var s_NonBlankString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &e_NonBlankString})
+var s_PortNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PortNumber, Type: smithy.ShapeTypeInteger, Ext: &e_PortNumber})
+var sPortRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPortRange, Members: &mPortRange, Type: smithy.ShapeTypeStructure, Ext: &ePortRange})
+var sPortSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPortSpecification, Members: &mPortSpecification, Type: smithy.ShapeTypeUnion, Ext: &ePortSpecification})
+var s_PositiveInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &e_PositiveInteger})
+var sResourceConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceConflictException, Members: &mResourceConflictException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &eResourceConflictException})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResources, Members: &mResources, Type: smithy.ShapeTypeStructure, Ext: &eResources})
+var s_ResourcesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourcesList, Members: &m_ResourcesList, Type: smithy.ShapeTypeList, Ext: &e_ResourcesList})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &e_RoleArn})
+var s_RunHookPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RunHookPayload, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &e_RunHookPayload})
+var sServiceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceException, Members: &mServiceException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eServiceException})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sSnapshotBuild = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnapshotBuild, Members: &mSnapshotBuild, Type: smithy.ShapeTypeStructure, Ext: &eSnapshotBuild})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var s_TaggableResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaggableResource, Type: smithy.ShapeTypeString, Ext: &e_TaggableResource})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &e_Tags})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t34, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var s_TokenParts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TokenParts, Members: &m_TokenParts, Type: smithy.ShapeTypeMap, Ext: &e_TokenParts})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t34, Type: smithy.ShapeTypeStructure, Ext: &eTooManyRequestsException})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var s_Version = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &e_Version})
+var sCreateMicrovmAuthTokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMicrovmAuthTokenRequest, Members: &mCreateMicrovmAuthTokenRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateMicrovmAuthTokenRequest})
+var sCreateMicrovmAuthTokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMicrovmAuthTokenResponse, Members: &mCreateMicrovmAuthTokenResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateMicrovmAuthTokenResponse})
+var sCreateMicrovmImageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMicrovmImageRequest, Members: &mCreateMicrovmImageRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateMicrovmImageRequest})
+var sCreateMicrovmImageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMicrovmImageResponse, Members: &mCreateMicrovmImageResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateMicrovmImageResponse})
+var sCreateMicrovmShellAuthTokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMicrovmShellAuthTokenRequest, Members: &mCreateMicrovmShellAuthTokenRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateMicrovmShellAuthTokenRequest})
+var sCreateMicrovmShellAuthTokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMicrovmShellAuthTokenResponse, Members: &mCreateMicrovmShellAuthTokenResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateMicrovmShellAuthTokenResponse})
+var sDeleteMicrovmImageInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMicrovmImageInput, Members: &mDeleteMicrovmImageInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMicrovmImageInput})
+var sDeleteMicrovmImageOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMicrovmImageOutput, Members: &mDeleteMicrovmImageOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMicrovmImageOutput})
+var sDeleteMicrovmImageVersionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMicrovmImageVersionInput, Members: &mDeleteMicrovmImageVersionInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMicrovmImageVersionInput})
+var sDeleteMicrovmImageVersionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMicrovmImageVersionOutput, Members: &mDeleteMicrovmImageVersionOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMicrovmImageVersionOutput})
+var sGetMicrovmImageBuildInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMicrovmImageBuildInput, Members: &mGetMicrovmImageBuildInput, Type: smithy.ShapeTypeStructure, Ext: &eGetMicrovmImageBuildInput})
+var sGetMicrovmImageBuildOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMicrovmImageBuildOutput, Members: &mGetMicrovmImageBuildOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetMicrovmImageBuildOutput})
+var sGetMicrovmImageInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMicrovmImageInput, Members: &mGetMicrovmImageInput, Type: smithy.ShapeTypeStructure, Ext: &eGetMicrovmImageInput})
+var sGetMicrovmImageOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMicrovmImageOutput, Members: &mGetMicrovmImageOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetMicrovmImageOutput})
+var sGetMicrovmImageVersionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMicrovmImageVersionInput, Members: &mGetMicrovmImageVersionInput, Type: smithy.ShapeTypeStructure, Ext: &eGetMicrovmImageVersionInput})
+var sGetMicrovmImageVersionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMicrovmImageVersionOutput, Members: &mGetMicrovmImageVersionOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetMicrovmImageVersionOutput})
+var sGetMicrovmRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMicrovmRequest, Members: &mGetMicrovmRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetMicrovmRequest})
+var sGetMicrovmResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMicrovmResponse, Members: &mGetMicrovmResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetMicrovmResponse})
+var sListManagedMicrovmImagesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedMicrovmImagesInput, Members: &mListManagedMicrovmImagesInput, Type: smithy.ShapeTypeStructure, Ext: &eListManagedMicrovmImagesInput})
+var sListManagedMicrovmImagesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedMicrovmImagesOutput, Members: &mListManagedMicrovmImagesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListManagedMicrovmImagesOutput})
+var sListManagedMicrovmImageVersionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedMicrovmImageVersionsInput, Members: &mListManagedMicrovmImageVersionsInput, Type: smithy.ShapeTypeStructure, Ext: &eListManagedMicrovmImageVersionsInput})
+var sListManagedMicrovmImageVersionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedMicrovmImageVersionsOutput, Members: &mListManagedMicrovmImageVersionsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListManagedMicrovmImageVersionsOutput})
+var sListMicrovmImageBuildsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrovmImageBuildsInput, Members: &mListMicrovmImageBuildsInput, Type: smithy.ShapeTypeStructure, Ext: &eListMicrovmImageBuildsInput})
+var sListMicrovmImageBuildsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrovmImageBuildsOutput, Members: &mListMicrovmImageBuildsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListMicrovmImageBuildsOutput})
+var sListMicrovmImagesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrovmImagesRequest, Members: &mListMicrovmImagesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListMicrovmImagesRequest})
+var sListMicrovmImagesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrovmImagesResponse, Members: &mListMicrovmImagesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListMicrovmImagesResponse})
+var sListMicrovmImageVersionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrovmImageVersionsInput, Members: &mListMicrovmImageVersionsInput, Type: smithy.ShapeTypeStructure, Ext: &eListMicrovmImageVersionsInput})
+var sListMicrovmImageVersionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrovmImageVersionsOutput, Members: &mListMicrovmImageVersionsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListMicrovmImageVersionsOutput})
+var sListMicrovmsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrovmsRequest, Members: &mListMicrovmsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListMicrovmsRequest})
+var sListMicrovmsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrovmsResponse, Members: &mListMicrovmsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListMicrovmsResponse})
+var sListTagsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsRequest, Members: &mListTagsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsRequest})
+var sListTagsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsResponse, Members: &mListTagsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsResponse})
+var sResumeMicrovmRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResumeMicrovmRequest, Members: &mResumeMicrovmRequest, Type: smithy.ShapeTypeStructure, Ext: &eResumeMicrovmRequest})
+var sResumeMicrovmResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResumeMicrovmResponse, Type: smithy.ShapeTypeStructure, Ext: &eResumeMicrovmResponse})
+var sRunMicrovmRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRunMicrovmRequest, Members: &mRunMicrovmRequest, Type: smithy.ShapeTypeStructure, Ext: &eRunMicrovmRequest})
+var sRunMicrovmResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRunMicrovmResponse, Members: &mRunMicrovmResponse, Type: smithy.ShapeTypeStructure, Ext: &eRunMicrovmResponse})
+var sSuspendMicrovmRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuspendMicrovmRequest, Members: &mSuspendMicrovmRequest, Type: smithy.ShapeTypeStructure, Ext: &eSuspendMicrovmRequest})
+var sSuspendMicrovmResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuspendMicrovmResponse, Type: smithy.ShapeTypeStructure, Ext: &eSuspendMicrovmResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTerminateMicrovmRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateMicrovmRequest, Members: &mTerminateMicrovmRequest, Type: smithy.ShapeTypeStructure, Ext: &eTerminateMicrovmRequest})
+var sTerminateMicrovmResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateMicrovmResponse, Type: smithy.ShapeTypeStructure, Ext: &eTerminateMicrovmResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUpdateMicrovmImageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMicrovmImageRequest, Members: &mUpdateMicrovmImageRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMicrovmImageRequest})
+var sUpdateMicrovmImageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMicrovmImageResponse, Members: &mUpdateMicrovmImageResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMicrovmImageResponse})
+var sUpdateMicrovmImageVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMicrovmImageVersionRequest, Members: &mUpdateMicrovmImageVersionRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMicrovmImageVersionRequest})
+var sUpdateMicrovmImageVersionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMicrovmImageVersionResponse, Members: &mUpdateMicrovmImageVersionResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMicrovmImageVersionResponse})
 
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var sArchitecture_ARM_64 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARM_64", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
-var sBuildState_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[32]})
-var sBuildState_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[33]})
-var sBuildState_SUCCESSFUL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESSFUL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[34]})
-var sBuildState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[35]})
-var sCapability_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var s_CapabilityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCapability, Members: &mCapability, Type: smithy.ShapeTypeEnum, Ext: &ext[39]})
-var sChipset_GRAVITON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GRAVITON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[41]})
-var sCloudWatchLogging_logGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logGroup", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[43]})
-var sCloudWatchLogging_logStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logStream", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var sCodeArtifact_uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uri", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[46]})
-var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[48]})
-var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[49]})
-var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[50]})
-var sCpuConfiguration_architecture = smithy.NewStaticSchema(smithy.StaticSchema{Member: "architecture", ID: &iArchitecture, Members: &mArchitecture, Type: smithy.ShapeTypeEnum, Ext: &ext[52]})
-var s_CpuConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCpuConfiguration, Members: &mCpuConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[54]})
-var s_EnvironmentVariableMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_EnvironmentVariableKey, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var s_EnvironmentVariableMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_EnvironmentVariableValue, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var sHooks_port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "port", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[61]})
-var sHooks_microvmHooks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "microvmHooks", ID: &iMicrovmHooks, Members: &mMicrovmHooks, Type: smithy.ShapeTypeStructure, Ext: &ext[62]})
-var sHooks_microvmImageHooks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "microvmImageHooks", ID: &iMicrovmImageHooks, Members: &mMicrovmImageHooks, Type: smithy.ShapeTypeStructure, Ext: &ext[63]})
-var sHookState_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[65]})
-var sHookState_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[66]})
-var sIdlePolicy_maxIdleDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxIdleDurationSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[68]})
-var sIdlePolicy_suspendedDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "suspendedDurationSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[69]})
-var sIdlePolicy_autoResumeEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoResumeEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[70]})
-var sInsufficientCapacityException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[73]})
-var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[75]})
-var sInternalServerException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t29, Type: smithy.ShapeTypeInteger, Ext: &ext[76]})
-var sInvalidParameterValueException_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[78]})
-var sInvalidParameterValueException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[79]})
-var s_ListOfPortSpecification_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPortSpecification, Members: &mPortSpecification, Type: smithy.ShapeTypeUnion, Ext: &ext[81]})
-var sLogging_disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "disabled", ID: &iLoggingDisabled, Type: smithy.ShapeTypeStructure, Ext: &ext[83]})
-var sLogging_cloudWatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatch", ID: &iCloudWatchLogging, Members: &mCloudWatchLogging, Type: smithy.ShapeTypeStructure, Ext: &ext[84]})
-var sManagedMicrovmImageSummary_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[87]})
-var sManagedMicrovmImageSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[88]})
-var sManagedMicrovmImageSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[89]})
-var s_ManagedMicrovmImageSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iManagedMicrovmImageSummary, Members: &mManagedMicrovmImageSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[91]})
-var sManagedMicrovmImageVersion_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[93]})
-var sManagedMicrovmImageVersion_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[94]})
-var sManagedMicrovmImageVersion_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iManagedMicrovmImageVersionStatus, Members: &mManagedMicrovmImageVersionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[95]})
-var sManagedMicrovmImageVersion_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[96]})
-var sManagedMicrovmImageVersion_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[97]})
-var s_ManagedMicrovmImageVersionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iManagedMicrovmImageVersion, Members: &mManagedMicrovmImageVersion, Type: smithy.ShapeTypeStructure, Ext: &ext[99]})
-var sManagedMicrovmImageVersionStatus_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[101]})
-var sManagedMicrovmImageVersionStatus_DEPRECATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPRECATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[102]})
-var sMicrovmHooks_run = smithy.NewStaticSchema(smithy.StaticSchema{Member: "run", ID: &iHookState, Members: &mHookState, Type: smithy.ShapeTypeEnum, Ext: &ext[104]})
-var sMicrovmHooks_runTimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runTimeoutInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[105]})
-var sMicrovmHooks_resume = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resume", ID: &iHookState, Members: &mHookState, Type: smithy.ShapeTypeEnum, Ext: &ext[106]})
-var sMicrovmHooks_resumeTimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resumeTimeoutInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[107]})
-var sMicrovmHooks_suspend = smithy.NewStaticSchema(smithy.StaticSchema{Member: "suspend", ID: &iHookState, Members: &mHookState, Type: smithy.ShapeTypeEnum, Ext: &ext[108]})
-var sMicrovmHooks_suspendTimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "suspendTimeoutInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[109]})
-var sMicrovmHooks_terminate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "terminate", ID: &iHookState, Members: &mHookState, Type: smithy.ShapeTypeEnum, Ext: &ext[110]})
-var sMicrovmHooks_terminateTimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "terminateTimeoutInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[111]})
-var s_MicrovmImageBuildSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMicrovmImageBuildSummary, Members: &mMicrovmImageBuildSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[115]})
-var sMicrovmImageBuildSummary_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[117]})
-var sMicrovmImageBuildSummary_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[118]})
-var sMicrovmImageBuildSummary_buildId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildId", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[119]})
-var sMicrovmImageBuildSummary_buildState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildState", ID: &iBuildState, Members: &mBuildState, Type: smithy.ShapeTypeEnum, Ext: &ext[120]})
-var sMicrovmImageBuildSummary_architecture = smithy.NewStaticSchema(smithy.StaticSchema{Member: "architecture", ID: &iArchitecture, Members: &mArchitecture, Type: smithy.ShapeTypeEnum, Ext: &ext[121]})
-var sMicrovmImageBuildSummary_chipset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chipset", ID: &iChipset, Members: &mChipset, Type: smithy.ShapeTypeEnum, Ext: &ext[122]})
-var sMicrovmImageBuildSummary_chipsetGeneration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chipsetGeneration", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[123]})
-var sMicrovmImageBuildSummary_stateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[124]})
-var sMicrovmImageBuildSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[125]})
-var sMicrovmImageHooks_ready = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ready", ID: &iHookState, Members: &mHookState, Type: smithy.ShapeTypeEnum, Ext: &ext[127]})
-var sMicrovmImageHooks_readyTimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "readyTimeoutInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[128]})
-var sMicrovmImageHooks_validate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validate", ID: &iHookState, Members: &mHookState, Type: smithy.ShapeTypeEnum, Ext: &ext[129]})
-var sMicrovmImageHooks_validateTimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validateTimeoutInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[130]})
-var sMicrovmImageState_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[133]})
-var sMicrovmImageState_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[134]})
-var sMicrovmImageState_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[135]})
-var sMicrovmImageState_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[136]})
-var sMicrovmImageState_UPDATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[137]})
-var sMicrovmImageState_UPDATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[138]})
-var sMicrovmImageState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[139]})
-var sMicrovmImageState_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[140]})
-var sMicrovmImageState_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[141]})
-var s_MicrovmImageSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMicrovmImageSummary, Members: &mMicrovmImageSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[143]})
-var sMicrovmImageSummary_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[145]})
-var sMicrovmImageSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ImageName, Type: smithy.ShapeTypeString, Ext: &ext[146]})
-var sMicrovmImageSummary_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMicrovmImageState, Members: &mMicrovmImageState, Type: smithy.ShapeTypeEnum, Ext: &ext[147]})
-var sMicrovmImageSummary_latestActiveImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestActiveImageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[148]})
-var sMicrovmImageSummary_latestFailedImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestFailedImageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[149]})
-var sMicrovmImageSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[150]})
-var sMicrovmImageVersionState_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[152]})
-var sMicrovmImageVersionState_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[153]})
-var sMicrovmImageVersionState_SUCCESSFUL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESSFUL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[154]})
-var sMicrovmImageVersionState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[155]})
-var sMicrovmImageVersionState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[156]})
-var sMicrovmImageVersionState_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[157]})
-var sMicrovmImageVersionState_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[158]})
-var sMicrovmImageVersionStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[160]})
-var sMicrovmImageVersionStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[161]})
-var sMicrovmImageVersionSummary_baseImageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[163]})
-var sMicrovmImageVersionSummary_baseImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &ext[164]})
-var sMicrovmImageVersionSummary_buildRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[165]})
-var sMicrovmImageVersionSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[166]})
-var sMicrovmImageVersionSummary_codeArtifact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeArtifact", ID: &iCodeArtifact, Members: &mCodeArtifact, Type: smithy.ShapeTypeUnion, Ext: &ext[167]})
-var sMicrovmImageVersionSummary_logging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logging", ID: &iLogging, Members: &mLogging, Type: smithy.ShapeTypeUnion, Ext: &ext[168]})
-var sMicrovmImageVersionSummary_egressNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "egressNetworkConnectors", ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &ext[169]})
-var sMicrovmImageVersionSummary_cpuConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cpuConfigurations", ID: &i_CpuConfigurationList, Members: &m_CpuConfigurationList, Type: smithy.ShapeTypeList, Ext: &ext[170]})
-var sMicrovmImageVersionSummary_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_ResourcesList, Members: &m_ResourcesList, Type: smithy.ShapeTypeList, Ext: &ext[171]})
-var sMicrovmImageVersionSummary_additionalOsCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalOsCapabilities", ID: &i_CapabilityList, Members: &m_CapabilityList, Type: smithy.ShapeTypeList, Ext: &ext[172]})
-var sMicrovmImageVersionSummary_hooks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hooks", ID: &iHooks, Members: &mHooks, Type: smithy.ShapeTypeStructure, Ext: &ext[173]})
-var sMicrovmImageVersionSummary_environmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentVariables", ID: &i_EnvironmentVariableMap, Members: &m_EnvironmentVariableMap, Type: smithy.ShapeTypeMap, Ext: &ext[174]})
-var sMicrovmImageVersionSummary_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[175]})
-var sMicrovmImageVersionSummary_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[176]})
-var sMicrovmImageVersionSummary_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMicrovmImageVersionState, Members: &mMicrovmImageVersionState, Type: smithy.ShapeTypeEnum, Ext: &ext[177]})
-var sMicrovmImageVersionSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iMicrovmImageVersionStatus, Members: &mMicrovmImageVersionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[178]})
-var sMicrovmImageVersionSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[179]})
-var sMicrovmImageVersionSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[180]})
-var sMicrovmImageVersionSummary_stateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[181]})
-var sMicrovmImageVersionSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[182]})
-var s_MicrovmImageVersionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMicrovmImageVersionSummary, Members: &mMicrovmImageVersionSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[184]})
-var sMicrovmItem_microvmId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "microvmId", ID: &i_MicrovmIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[186]})
-var sMicrovmItem_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMicrovmState, Members: &mMicrovmState, Type: smithy.ShapeTypeEnum, Ext: &ext[187]})
-var sMicrovmItem_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_MicrovmImageArn, Type: smithy.ShapeTypeString, Ext: &ext[188]})
-var sMicrovmItem_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &ext[189]})
-var sMicrovmItem_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[190]})
-var s_MicrovmItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMicrovmItem, Members: &mMicrovmItem, Type: smithy.ShapeTypeStructure, Ext: &ext[192]})
-var sMicrovmState_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[194]})
-var sMicrovmState_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[195]})
-var sMicrovmState_SUSPENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[196]})
-var sMicrovmState_SUSPENDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[197]})
-var sMicrovmState_TERMINATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[198]})
-var sMicrovmState_TERMINATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[199]})
-var s_NetworkConnectorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NetworkConnector, Type: smithy.ShapeTypeString, Ext: &ext[202]})
-var sPortRange_startPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startPort", ID: &i_PortNumber, Type: smithy.ShapeTypeInteger, Ext: &ext[206]})
-var sPortRange_endPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endPort", ID: &i_PortNumber, Type: smithy.ShapeTypeInteger, Ext: &ext[207]})
-var sPortSpecification_port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "port", ID: &i_PortNumber, Type: smithy.ShapeTypeInteger, Ext: &ext[209]})
-var sPortSpecification_range = smithy.NewStaticSchema(smithy.StaticSchema{Member: "range", ID: &iPortRange, Members: &mPortRange, Type: smithy.ShapeTypeStructure, Ext: &ext[210]})
-var sPortSpecification_allPorts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allPorts", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[211]})
-var sResourceConflictException_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[214]})
-var sResourceConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[215]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[217]})
-var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[218]})
-var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[219]})
-var sResources_minimumMemoryInMiB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minimumMemoryInMiB", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[221]})
-var s_ResourcesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResources, Members: &mResources, Type: smithy.ShapeTypeStructure, Ext: &ext[223]})
-var sServiceException_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[227]})
-var sServiceException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[228]})
-var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[230]})
-var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[231]})
-var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[232]})
-var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[233]})
-var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[234]})
-var sSnapshotBuild_memorySnapshotSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "memorySnapshotSizeInBytes", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[236]})
-var sSnapshotBuild_codeInstallSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeInstallSizeInBytes", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[237]})
-var sSnapshotBuild_diskSnapshotSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "diskSnapshotSizeInBytes", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[238]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &ext[243]})
-var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[245]})
-var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[246]})
-var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[249]})
-var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[250]})
-var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[251]})
-var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t29, Type: smithy.ShapeTypeInteger, Ext: &ext[252]})
-var s_TokenParts_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AuthTokenKey, Type: smithy.ShapeTypeString, Ext: &ext[254]})
-var s_TokenParts_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_AuthTokenValue, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[255]})
-var sTooManyRequestsException_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[257]})
-var sTooManyRequestsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[258]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[260]})
-var sCreateMicrovmAuthTokenRequest_microvmIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "microvmIdentifier", ID: &i_MicrovmIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[263]})
-var sCreateMicrovmAuthTokenRequest_expirationInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expirationInMinutes", ID: &i_PositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[264]})
-var sCreateMicrovmAuthTokenRequest_allowedPorts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedPorts", ID: &i_ListOfPortSpecification, Members: &m_ListOfPortSpecification, Type: smithy.ShapeTypeList, Ext: &ext[265]})
-var sCreateMicrovmAuthTokenResponse_authToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authToken", ID: &i_TokenParts, Members: &m_TokenParts, Type: smithy.ShapeTypeMap, Ext: &ext[267]})
-var sCreateMicrovmImageRequest_baseImageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[269]})
-var sCreateMicrovmImageRequest_baseImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &ext[270]})
-var sCreateMicrovmImageRequest_buildRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[271]})
-var sCreateMicrovmImageRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[272]})
-var sCreateMicrovmImageRequest_codeArtifact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeArtifact", ID: &iCodeArtifact, Members: &mCodeArtifact, Type: smithy.ShapeTypeUnion, Ext: &ext[273]})
-var sCreateMicrovmImageRequest_logging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logging", ID: &iLogging, Members: &mLogging, Type: smithy.ShapeTypeUnion, Ext: &ext[274]})
-var sCreateMicrovmImageRequest_egressNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "egressNetworkConnectors", ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &ext[275]})
-var sCreateMicrovmImageRequest_cpuConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cpuConfigurations", ID: &i_CpuConfigurationList, Members: &m_CpuConfigurationList, Type: smithy.ShapeTypeList, Ext: &ext[276]})
-var sCreateMicrovmImageRequest_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_ResourcesList, Members: &m_ResourcesList, Type: smithy.ShapeTypeList, Ext: &ext[277]})
-var sCreateMicrovmImageRequest_additionalOsCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalOsCapabilities", ID: &i_CapabilityList, Members: &m_CapabilityList, Type: smithy.ShapeTypeList, Ext: &ext[278]})
-var sCreateMicrovmImageRequest_hooks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hooks", ID: &iHooks, Members: &mHooks, Type: smithy.ShapeTypeStructure, Ext: &ext[279]})
-var sCreateMicrovmImageRequest_environmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentVariables", ID: &i_EnvironmentVariableMap, Members: &m_EnvironmentVariableMap, Type: smithy.ShapeTypeMap, Ext: &ext[280]})
-var sCreateMicrovmImageRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ImageName, Type: smithy.ShapeTypeString, Ext: &ext[281]})
-var sCreateMicrovmImageRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[282]})
-var sCreateMicrovmImageRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[283]})
-var sCreateMicrovmImageResponse_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[285]})
-var sCreateMicrovmImageResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ImageName, Type: smithy.ShapeTypeString, Ext: &ext[286]})
-var sCreateMicrovmImageResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMicrovmImageState, Members: &mMicrovmImageState, Type: smithy.ShapeTypeEnum, Ext: &ext[287]})
-var sCreateMicrovmImageResponse_latestActiveImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestActiveImageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[288]})
-var sCreateMicrovmImageResponse_latestFailedImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestFailedImageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[289]})
-var sCreateMicrovmImageResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[290]})
-var sCreateMicrovmImageResponse_baseImageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[291]})
-var sCreateMicrovmImageResponse_baseImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &ext[292]})
-var sCreateMicrovmImageResponse_buildRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[293]})
-var sCreateMicrovmImageResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[294]})
-var sCreateMicrovmImageResponse_codeArtifact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeArtifact", ID: &iCodeArtifact, Members: &mCodeArtifact, Type: smithy.ShapeTypeUnion, Ext: &ext[295]})
-var sCreateMicrovmImageResponse_logging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logging", ID: &iLogging, Members: &mLogging, Type: smithy.ShapeTypeUnion, Ext: &ext[296]})
-var sCreateMicrovmImageResponse_egressNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "egressNetworkConnectors", ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &ext[297]})
-var sCreateMicrovmImageResponse_cpuConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cpuConfigurations", ID: &i_CpuConfigurationList, Members: &m_CpuConfigurationList, Type: smithy.ShapeTypeList, Ext: &ext[298]})
-var sCreateMicrovmImageResponse_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_ResourcesList, Members: &m_ResourcesList, Type: smithy.ShapeTypeList, Ext: &ext[299]})
-var sCreateMicrovmImageResponse_additionalOsCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalOsCapabilities", ID: &i_CapabilityList, Members: &m_CapabilityList, Type: smithy.ShapeTypeList, Ext: &ext[300]})
-var sCreateMicrovmImageResponse_hooks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hooks", ID: &iHooks, Members: &mHooks, Type: smithy.ShapeTypeStructure, Ext: &ext[301]})
-var sCreateMicrovmImageResponse_environmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentVariables", ID: &i_EnvironmentVariableMap, Members: &m_EnvironmentVariableMap, Type: smithy.ShapeTypeMap, Ext: &ext[302]})
-var sCreateMicrovmImageResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[303]})
-var sCreateMicrovmImageResponse_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[304]})
-var sCreateMicrovmImageResponse_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[305]})
-var sCreateMicrovmShellAuthTokenRequest_microvmIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "microvmIdentifier", ID: &i_MicrovmIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[307]})
-var sCreateMicrovmShellAuthTokenRequest_expirationInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expirationInMinutes", ID: &i_PositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[308]})
-var sCreateMicrovmShellAuthTokenResponse_authToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authToken", ID: &i_TokenParts, Members: &m_TokenParts, Type: smithy.ShapeTypeMap, Ext: &ext[310]})
-var sDeleteMicrovmImageInput_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[312]})
-var sDeleteMicrovmImageOutput_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[314]})
-var sDeleteMicrovmImageOutput_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMicrovmImageState, Members: &mMicrovmImageState, Type: smithy.ShapeTypeEnum, Ext: &ext[315]})
-var sDeleteMicrovmImageVersionInput_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[317]})
-var sDeleteMicrovmImageVersionInput_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[318]})
-var sDeleteMicrovmImageVersionOutput_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[320]})
-var sDeleteMicrovmImageVersionOutput_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[321]})
-var sDeleteMicrovmImageVersionOutput_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMicrovmImageVersionState, Members: &mMicrovmImageVersionState, Type: smithy.ShapeTypeEnum, Ext: &ext[322]})
-var sGetMicrovmImageBuildInput_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[324]})
-var sGetMicrovmImageBuildInput_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[325]})
-var sGetMicrovmImageBuildInput_buildId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildId", ID: &i_NonBlankString, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[326]})
-var sGetMicrovmImageBuildOutput_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[328]})
-var sGetMicrovmImageBuildOutput_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[329]})
-var sGetMicrovmImageBuildOutput_buildId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildId", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[330]})
-var sGetMicrovmImageBuildOutput_buildState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildState", ID: &iBuildState, Members: &mBuildState, Type: smithy.ShapeTypeEnum, Ext: &ext[331]})
-var sGetMicrovmImageBuildOutput_architecture = smithy.NewStaticSchema(smithy.StaticSchema{Member: "architecture", ID: &iArchitecture, Members: &mArchitecture, Type: smithy.ShapeTypeEnum, Ext: &ext[332]})
-var sGetMicrovmImageBuildOutput_chipset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chipset", ID: &iChipset, Members: &mChipset, Type: smithy.ShapeTypeEnum, Ext: &ext[333]})
-var sGetMicrovmImageBuildOutput_chipsetGeneration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chipsetGeneration", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[334]})
-var sGetMicrovmImageBuildOutput_stateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[335]})
-var sGetMicrovmImageBuildOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[336]})
-var sGetMicrovmImageBuildOutput_snapshotBuild = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snapshotBuild", ID: &iSnapshotBuild, Members: &mSnapshotBuild, Type: smithy.ShapeTypeStructure, Ext: &ext[337]})
-var sGetMicrovmImageInput_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[339]})
-var sGetMicrovmImageOutput_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[341]})
-var sGetMicrovmImageOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ImageName, Type: smithy.ShapeTypeString, Ext: &ext[342]})
-var sGetMicrovmImageOutput_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMicrovmImageState, Members: &mMicrovmImageState, Type: smithy.ShapeTypeEnum, Ext: &ext[343]})
-var sGetMicrovmImageOutput_latestActiveImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestActiveImageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[344]})
-var sGetMicrovmImageOutput_latestFailedImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestFailedImageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[345]})
-var sGetMicrovmImageOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[346]})
-var sGetMicrovmImageOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[347]})
-var sGetMicrovmImageOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[348]})
-var sGetMicrovmImageVersionInput_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[350]})
-var sGetMicrovmImageVersionInput_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[351]})
-var sGetMicrovmImageVersionOutput_baseImageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[353]})
-var sGetMicrovmImageVersionOutput_baseImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &ext[354]})
-var sGetMicrovmImageVersionOutput_buildRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[355]})
-var sGetMicrovmImageVersionOutput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[356]})
-var sGetMicrovmImageVersionOutput_codeArtifact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeArtifact", ID: &iCodeArtifact, Members: &mCodeArtifact, Type: smithy.ShapeTypeUnion, Ext: &ext[357]})
-var sGetMicrovmImageVersionOutput_logging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logging", ID: &iLogging, Members: &mLogging, Type: smithy.ShapeTypeUnion, Ext: &ext[358]})
-var sGetMicrovmImageVersionOutput_egressNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "egressNetworkConnectors", ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &ext[359]})
-var sGetMicrovmImageVersionOutput_cpuConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cpuConfigurations", ID: &i_CpuConfigurationList, Members: &m_CpuConfigurationList, Type: smithy.ShapeTypeList, Ext: &ext[360]})
-var sGetMicrovmImageVersionOutput_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_ResourcesList, Members: &m_ResourcesList, Type: smithy.ShapeTypeList, Ext: &ext[361]})
-var sGetMicrovmImageVersionOutput_additionalOsCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalOsCapabilities", ID: &i_CapabilityList, Members: &m_CapabilityList, Type: smithy.ShapeTypeList, Ext: &ext[362]})
-var sGetMicrovmImageVersionOutput_hooks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hooks", ID: &iHooks, Members: &mHooks, Type: smithy.ShapeTypeStructure, Ext: &ext[363]})
-var sGetMicrovmImageVersionOutput_environmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentVariables", ID: &i_EnvironmentVariableMap, Members: &m_EnvironmentVariableMap, Type: smithy.ShapeTypeMap, Ext: &ext[364]})
-var sGetMicrovmImageVersionOutput_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[365]})
-var sGetMicrovmImageVersionOutput_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[366]})
-var sGetMicrovmImageVersionOutput_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMicrovmImageVersionState, Members: &mMicrovmImageVersionState, Type: smithy.ShapeTypeEnum, Ext: &ext[367]})
-var sGetMicrovmImageVersionOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iMicrovmImageVersionStatus, Members: &mMicrovmImageVersionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[368]})
-var sGetMicrovmImageVersionOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[369]})
-var sGetMicrovmImageVersionOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[370]})
-var sGetMicrovmImageVersionOutput_stateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[371]})
-var sGetMicrovmImageVersionOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[372]})
-var sGetMicrovmRequest_microvmIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "microvmIdentifier", ID: &i_MicrovmIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[374]})
-var sGetMicrovmResponse_microvmId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "microvmId", ID: &i_MicrovmIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[376]})
-var sGetMicrovmResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMicrovmState, Members: &mMicrovmState, Type: smithy.ShapeTypeEnum, Ext: &ext[377]})
-var sGetMicrovmResponse_endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpoint", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[378]})
-var sGetMicrovmResponse_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_MicrovmImageArn, Type: smithy.ShapeTypeString, Ext: &ext[379]})
-var sGetMicrovmResponse_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &ext[380]})
-var sGetMicrovmResponse_executionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[381]})
-var sGetMicrovmResponse_idlePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idlePolicy", ID: &iIdlePolicy, Members: &mIdlePolicy, Type: smithy.ShapeTypeStructure, Ext: &ext[382]})
-var sGetMicrovmResponse_maximumDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumDurationInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[383]})
-var sGetMicrovmResponse_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[384]})
-var sGetMicrovmResponse_terminatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "terminatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[385]})
-var sGetMicrovmResponse_stateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateReason", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[386]})
-var sGetMicrovmResponse_ingressNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingressNetworkConnectors", ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &ext[387]})
-var sGetMicrovmResponse_egressNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "egressNetworkConnectors", ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &ext[388]})
-var sListManagedMicrovmImagesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t36, Type: smithy.ShapeTypeInteger, Ext: &ext[390]})
-var sListManagedMicrovmImagesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &ext[391]})
-var sListManagedMicrovmImagesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[393]})
-var sListManagedMicrovmImagesOutput_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_ManagedMicrovmImageSummaryList, Members: &m_ManagedMicrovmImageSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[394]})
-var sListManagedMicrovmImageVersionsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t36, Type: smithy.ShapeTypeInteger, Ext: &ext[396]})
-var sListManagedMicrovmImageVersionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &ext[397]})
-var sListManagedMicrovmImageVersionsInput_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[398]})
-var sListManagedMicrovmImageVersionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[400]})
-var sListManagedMicrovmImageVersionsOutput_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_ManagedMicrovmImageVersionList, Members: &m_ManagedMicrovmImageVersionList, Type: smithy.ShapeTypeList, Ext: &ext[401]})
-var sListMicrovmImageBuildsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t36, Type: smithy.ShapeTypeInteger, Ext: &ext[403]})
-var sListMicrovmImageBuildsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &ext[404]})
-var sListMicrovmImageBuildsInput_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[405]})
-var sListMicrovmImageBuildsInput_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[406]})
-var sListMicrovmImageBuildsInput_architecture = smithy.NewStaticSchema(smithy.StaticSchema{Member: "architecture", ID: &iArchitecture, Members: &mArchitecture, Traits: &t38, Type: smithy.ShapeTypeEnum, Ext: &ext[407]})
-var sListMicrovmImageBuildsInput_chipset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chipset", ID: &iChipset, Members: &mChipset, Traits: &t39, Type: smithy.ShapeTypeEnum, Ext: &ext[408]})
-var sListMicrovmImageBuildsInput_chipsetGeneration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chipsetGeneration", ID: &i_NonBlankString, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &ext[409]})
-var sListMicrovmImageBuildsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[411]})
-var sListMicrovmImageBuildsOutput_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_MicrovmImageBuildSummaries, Members: &m_MicrovmImageBuildSummaries, Type: smithy.ShapeTypeList, Ext: &ext[412]})
-var sListMicrovmImagesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t36, Type: smithy.ShapeTypeInteger, Ext: &ext[414]})
-var sListMicrovmImagesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &ext[415]})
-var sListMicrovmImagesRequest_nameFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nameFilter", ID: &i_NonBlankString, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &ext[416]})
-var sListMicrovmImagesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[418]})
-var sListMicrovmImagesResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_MicrovmImageSummaries, Members: &m_MicrovmImageSummaries, Type: smithy.ShapeTypeList, Ext: &ext[419]})
-var sListMicrovmImageVersionsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t36, Type: smithy.ShapeTypeInteger, Ext: &ext[421]})
-var sListMicrovmImageVersionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &ext[422]})
-var sListMicrovmImageVersionsInput_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[423]})
-var sListMicrovmImageVersionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[425]})
-var sListMicrovmImageVersionsOutput_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_MicrovmImageVersionSummaryList, Members: &m_MicrovmImageVersionSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[426]})
-var sListMicrovmsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t36, Type: smithy.ShapeTypeInteger, Ext: &ext[428]})
-var sListMicrovmsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &ext[429]})
-var sListMicrovmsRequest_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &ext[430]})
-var sListMicrovmsRequest_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &pString, Traits: &t43, Type: smithy.ShapeTypeString, Ext: &ext[431]})
-var sListMicrovmsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[433]})
-var sListMicrovmsResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_MicrovmItemList, Members: &m_MicrovmItemList, Type: smithy.ShapeTypeList, Ext: &ext[434]})
-var sListTagsRequest_Resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resource", ID: &i_TaggableResource, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[436]})
-var sListTagsResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[438]})
-var sResumeMicrovmRequest_microvmIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "microvmIdentifier", ID: &i_MicrovmIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[440]})
-var sRunMicrovmRequest_ingressNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingressNetworkConnectors", ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &ext[443]})
-var sRunMicrovmRequest_egressNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "egressNetworkConnectors", ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &ext[444]})
-var sRunMicrovmRequest_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[445]})
-var sRunMicrovmRequest_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &ext[446]})
-var sRunMicrovmRequest_executionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[447]})
-var sRunMicrovmRequest_idlePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idlePolicy", ID: &iIdlePolicy, Members: &mIdlePolicy, Type: smithy.ShapeTypeStructure, Ext: &ext[448]})
-var sRunMicrovmRequest_logging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logging", ID: &iLogging, Members: &mLogging, Type: smithy.ShapeTypeUnion, Ext: &ext[449]})
-var sRunMicrovmRequest_runHookPayload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runHookPayload", ID: &i_RunHookPayload, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &ext[450]})
-var sRunMicrovmRequest_maximumDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumDurationInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[451]})
-var sRunMicrovmRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[452]})
-var sRunMicrovmResponse_microvmId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "microvmId", ID: &i_MicrovmIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[454]})
-var sRunMicrovmResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMicrovmState, Members: &mMicrovmState, Type: smithy.ShapeTypeEnum, Ext: &ext[455]})
-var sRunMicrovmResponse_endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpoint", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[456]})
-var sRunMicrovmResponse_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_MicrovmImageArn, Type: smithy.ShapeTypeString, Ext: &ext[457]})
-var sRunMicrovmResponse_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &ext[458]})
-var sRunMicrovmResponse_executionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[459]})
-var sRunMicrovmResponse_idlePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idlePolicy", ID: &iIdlePolicy, Members: &mIdlePolicy, Type: smithy.ShapeTypeStructure, Ext: &ext[460]})
-var sRunMicrovmResponse_maximumDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumDurationInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[461]})
-var sRunMicrovmResponse_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[462]})
-var sRunMicrovmResponse_terminatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "terminatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[463]})
-var sRunMicrovmResponse_stateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateReason", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[464]})
-var sRunMicrovmResponse_ingressNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingressNetworkConnectors", ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &ext[465]})
-var sRunMicrovmResponse_egressNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "egressNetworkConnectors", ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &ext[466]})
-var sSuspendMicrovmRequest_microvmIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "microvmIdentifier", ID: &i_MicrovmIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[468]})
-var sTagResourceRequest_Resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resource", ID: &i_TaggableResource, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[471]})
-var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[472]})
-var sTerminateMicrovmRequest_microvmIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "microvmIdentifier", ID: &i_MicrovmIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[474]})
-var sUntagResourceRequest_Resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resource", ID: &i_TaggableResource, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[477]})
-var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t44, Type: smithy.ShapeTypeList, Ext: &ext[478]})
-var sUpdateMicrovmImageRequest_baseImageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[480]})
-var sUpdateMicrovmImageRequest_baseImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &ext[481]})
-var sUpdateMicrovmImageRequest_buildRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[482]})
-var sUpdateMicrovmImageRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[483]})
-var sUpdateMicrovmImageRequest_codeArtifact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeArtifact", ID: &iCodeArtifact, Members: &mCodeArtifact, Type: smithy.ShapeTypeUnion, Ext: &ext[484]})
-var sUpdateMicrovmImageRequest_logging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logging", ID: &iLogging, Members: &mLogging, Type: smithy.ShapeTypeUnion, Ext: &ext[485]})
-var sUpdateMicrovmImageRequest_egressNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "egressNetworkConnectors", ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &ext[486]})
-var sUpdateMicrovmImageRequest_cpuConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cpuConfigurations", ID: &i_CpuConfigurationList, Members: &m_CpuConfigurationList, Type: smithy.ShapeTypeList, Ext: &ext[487]})
-var sUpdateMicrovmImageRequest_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_ResourcesList, Members: &m_ResourcesList, Type: smithy.ShapeTypeList, Ext: &ext[488]})
-var sUpdateMicrovmImageRequest_additionalOsCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalOsCapabilities", ID: &i_CapabilityList, Members: &m_CapabilityList, Type: smithy.ShapeTypeList, Ext: &ext[489]})
-var sUpdateMicrovmImageRequest_hooks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hooks", ID: &iHooks, Members: &mHooks, Type: smithy.ShapeTypeStructure, Ext: &ext[490]})
-var sUpdateMicrovmImageRequest_environmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentVariables", ID: &i_EnvironmentVariableMap, Members: &m_EnvironmentVariableMap, Type: smithy.ShapeTypeMap, Ext: &ext[491]})
-var sUpdateMicrovmImageRequest_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[492]})
-var sUpdateMicrovmImageRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[493]})
-var sUpdateMicrovmImageResponse_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[495]})
-var sUpdateMicrovmImageResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ImageName, Type: smithy.ShapeTypeString, Ext: &ext[496]})
-var sUpdateMicrovmImageResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMicrovmImageState, Members: &mMicrovmImageState, Type: smithy.ShapeTypeEnum, Ext: &ext[497]})
-var sUpdateMicrovmImageResponse_latestActiveImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestActiveImageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[498]})
-var sUpdateMicrovmImageResponse_latestFailedImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestFailedImageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[499]})
-var sUpdateMicrovmImageResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[500]})
-var sUpdateMicrovmImageResponse_baseImageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[501]})
-var sUpdateMicrovmImageResponse_baseImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &ext[502]})
-var sUpdateMicrovmImageResponse_buildRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[503]})
-var sUpdateMicrovmImageResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[504]})
-var sUpdateMicrovmImageResponse_codeArtifact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeArtifact", ID: &iCodeArtifact, Members: &mCodeArtifact, Type: smithy.ShapeTypeUnion, Ext: &ext[505]})
-var sUpdateMicrovmImageResponse_logging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logging", ID: &iLogging, Members: &mLogging, Type: smithy.ShapeTypeUnion, Ext: &ext[506]})
-var sUpdateMicrovmImageResponse_egressNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "egressNetworkConnectors", ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &ext[507]})
-var sUpdateMicrovmImageResponse_cpuConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cpuConfigurations", ID: &i_CpuConfigurationList, Members: &m_CpuConfigurationList, Type: smithy.ShapeTypeList, Ext: &ext[508]})
-var sUpdateMicrovmImageResponse_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_ResourcesList, Members: &m_ResourcesList, Type: smithy.ShapeTypeList, Ext: &ext[509]})
-var sUpdateMicrovmImageResponse_additionalOsCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalOsCapabilities", ID: &i_CapabilityList, Members: &m_CapabilityList, Type: smithy.ShapeTypeList, Ext: &ext[510]})
-var sUpdateMicrovmImageResponse_hooks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hooks", ID: &iHooks, Members: &mHooks, Type: smithy.ShapeTypeStructure, Ext: &ext[511]})
-var sUpdateMicrovmImageResponse_environmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentVariables", ID: &i_EnvironmentVariableMap, Members: &m_EnvironmentVariableMap, Type: smithy.ShapeTypeMap, Ext: &ext[512]})
-var sUpdateMicrovmImageResponse_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[513]})
-var sUpdateMicrovmImageResponse_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[514]})
-var sUpdateMicrovmImageVersionRequest_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[516]})
-var sUpdateMicrovmImageVersionRequest_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &ext[517]})
-var sUpdateMicrovmImageVersionRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iMicrovmImageVersionStatus, Members: &mMicrovmImageVersionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[518]})
-var sUpdateMicrovmImageVersionResponse_baseImageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[520]})
-var sUpdateMicrovmImageVersionResponse_baseImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &ext[521]})
-var sUpdateMicrovmImageVersionResponse_buildRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[522]})
-var sUpdateMicrovmImageVersionResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[523]})
-var sUpdateMicrovmImageVersionResponse_codeArtifact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeArtifact", ID: &iCodeArtifact, Members: &mCodeArtifact, Type: smithy.ShapeTypeUnion, Ext: &ext[524]})
-var sUpdateMicrovmImageVersionResponse_logging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logging", ID: &iLogging, Members: &mLogging, Type: smithy.ShapeTypeUnion, Ext: &ext[525]})
-var sUpdateMicrovmImageVersionResponse_egressNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "egressNetworkConnectors", ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &ext[526]})
-var sUpdateMicrovmImageVersionResponse_cpuConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cpuConfigurations", ID: &i_CpuConfigurationList, Members: &m_CpuConfigurationList, Type: smithy.ShapeTypeList, Ext: &ext[527]})
-var sUpdateMicrovmImageVersionResponse_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_ResourcesList, Members: &m_ResourcesList, Type: smithy.ShapeTypeList, Ext: &ext[528]})
-var sUpdateMicrovmImageVersionResponse_additionalOsCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalOsCapabilities", ID: &i_CapabilityList, Members: &m_CapabilityList, Type: smithy.ShapeTypeList, Ext: &ext[529]})
-var sUpdateMicrovmImageVersionResponse_hooks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hooks", ID: &iHooks, Members: &mHooks, Type: smithy.ShapeTypeStructure, Ext: &ext[530]})
-var sUpdateMicrovmImageVersionResponse_environmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentVariables", ID: &i_EnvironmentVariableMap, Members: &m_EnvironmentVariableMap, Type: smithy.ShapeTypeMap, Ext: &ext[531]})
-var sUpdateMicrovmImageVersionResponse_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[532]})
-var sUpdateMicrovmImageVersionResponse_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &ext[533]})
-var sUpdateMicrovmImageVersionResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMicrovmImageVersionState, Members: &mMicrovmImageVersionState, Type: smithy.ShapeTypeEnum, Ext: &ext[534]})
-var sUpdateMicrovmImageVersionResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iMicrovmImageVersionStatus, Members: &mMicrovmImageVersionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[535]})
-var sUpdateMicrovmImageVersionResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[536]})
-var sUpdateMicrovmImageVersionResponse_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[537]})
-var sUpdateMicrovmImageVersionResponse_stateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[538]})
-var sUpdateMicrovmImageVersionResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[539]})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sArchitecture_ARM_64 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARM_64", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eArchitecture_ARM_64})
+var sBuildState_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBuildState_PENDING})
+var sBuildState_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBuildState_IN_PROGRESS})
+var sBuildState_SUCCESSFUL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESSFUL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBuildState_SUCCESSFUL})
+var sBuildState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBuildState_FAILED})
+var sCapability_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCapability_ALL})
+var s_CapabilityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCapability, Members: &mCapability, Type: smithy.ShapeTypeEnum, Ext: &e_CapabilityList_member})
+var sChipset_GRAVITON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GRAVITON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChipset_GRAVITON})
+var sCloudWatchLogging_logGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logGroup", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCloudWatchLogging_logGroup})
+var sCloudWatchLogging_logStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logStream", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eCloudWatchLogging_logStream})
+var sCodeArtifact_uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uri", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eCodeArtifact_uri})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceId})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceType})
+var sCpuConfiguration_architecture = smithy.NewStaticSchema(smithy.StaticSchema{Member: "architecture", ID: &iArchitecture, Members: &mArchitecture, Type: smithy.ShapeTypeEnum, Ext: &eCpuConfiguration_architecture})
+var s_CpuConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCpuConfiguration, Members: &mCpuConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_CpuConfigurationList_member})
+var s_EnvironmentVariableMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_EnvironmentVariableKey, Type: smithy.ShapeTypeString, Ext: &e_EnvironmentVariableMap_key})
+var s_EnvironmentVariableMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_EnvironmentVariableValue, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &e_EnvironmentVariableMap_value})
+var sHooks_port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "port", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eHooks_port})
+var sHooks_microvmHooks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "microvmHooks", ID: &iMicrovmHooks, Members: &mMicrovmHooks, Type: smithy.ShapeTypeStructure, Ext: &eHooks_microvmHooks})
+var sHooks_microvmImageHooks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "microvmImageHooks", ID: &iMicrovmImageHooks, Members: &mMicrovmImageHooks, Type: smithy.ShapeTypeStructure, Ext: &eHooks_microvmImageHooks})
+var sHookState_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHookState_DISABLED})
+var sHookState_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eHookState_ENABLED})
+var sIdlePolicy_maxIdleDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxIdleDurationSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eIdlePolicy_maxIdleDurationSeconds})
+var sIdlePolicy_suspendedDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "suspendedDurationSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eIdlePolicy_suspendedDurationSeconds})
+var sIdlePolicy_autoResumeEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoResumeEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eIdlePolicy_autoResumeEnabled})
+var sInsufficientCapacityException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInsufficientCapacityException_message})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sInternalServerException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t29, Type: smithy.ShapeTypeInteger, Ext: &eInternalServerException_retryAfterSeconds})
+var sInvalidParameterValueException_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInvalidParameterValueException_Type})
+var sInvalidParameterValueException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInvalidParameterValueException_message})
+var s_ListOfPortSpecification_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPortSpecification, Members: &mPortSpecification, Type: smithy.ShapeTypeUnion, Ext: &e_ListOfPortSpecification_member})
+var sLogging_disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "disabled", ID: &iLoggingDisabled, Type: smithy.ShapeTypeStructure, Ext: &eLogging_disabled})
+var sLogging_cloudWatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloudWatch", ID: &iCloudWatchLogging, Members: &mCloudWatchLogging, Type: smithy.ShapeTypeStructure, Ext: &eLogging_cloudWatch})
+var sManagedMicrovmImageSummary_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eManagedMicrovmImageSummary_imageArn})
+var sManagedMicrovmImageSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eManagedMicrovmImageSummary_createdAt})
+var sManagedMicrovmImageSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eManagedMicrovmImageSummary_updatedAt})
+var s_ManagedMicrovmImageSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iManagedMicrovmImageSummary, Members: &mManagedMicrovmImageSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ManagedMicrovmImageSummaryList_member})
+var sManagedMicrovmImageVersion_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eManagedMicrovmImageVersion_imageArn})
+var sManagedMicrovmImageVersion_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eManagedMicrovmImageVersion_imageVersion})
+var sManagedMicrovmImageVersion_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iManagedMicrovmImageVersionStatus, Members: &mManagedMicrovmImageVersionStatus, Type: smithy.ShapeTypeEnum, Ext: &eManagedMicrovmImageVersion_status})
+var sManagedMicrovmImageVersion_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eManagedMicrovmImageVersion_createdAt})
+var sManagedMicrovmImageVersion_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eManagedMicrovmImageVersion_updatedAt})
+var s_ManagedMicrovmImageVersionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iManagedMicrovmImageVersion, Members: &mManagedMicrovmImageVersion, Type: smithy.ShapeTypeStructure, Ext: &e_ManagedMicrovmImageVersionList_member})
+var sManagedMicrovmImageVersionStatus_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManagedMicrovmImageVersionStatus_AVAILABLE})
+var sManagedMicrovmImageVersionStatus_DEPRECATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPRECATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManagedMicrovmImageVersionStatus_DEPRECATED})
+var sMicrovmHooks_run = smithy.NewStaticSchema(smithy.StaticSchema{Member: "run", ID: &iHookState, Members: &mHookState, Type: smithy.ShapeTypeEnum, Ext: &eMicrovmHooks_run})
+var sMicrovmHooks_runTimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runTimeoutInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eMicrovmHooks_runTimeoutInSeconds})
+var sMicrovmHooks_resume = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resume", ID: &iHookState, Members: &mHookState, Type: smithy.ShapeTypeEnum, Ext: &eMicrovmHooks_resume})
+var sMicrovmHooks_resumeTimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resumeTimeoutInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eMicrovmHooks_resumeTimeoutInSeconds})
+var sMicrovmHooks_suspend = smithy.NewStaticSchema(smithy.StaticSchema{Member: "suspend", ID: &iHookState, Members: &mHookState, Type: smithy.ShapeTypeEnum, Ext: &eMicrovmHooks_suspend})
+var sMicrovmHooks_suspendTimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "suspendTimeoutInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eMicrovmHooks_suspendTimeoutInSeconds})
+var sMicrovmHooks_terminate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "terminate", ID: &iHookState, Members: &mHookState, Type: smithy.ShapeTypeEnum, Ext: &eMicrovmHooks_terminate})
+var sMicrovmHooks_terminateTimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "terminateTimeoutInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eMicrovmHooks_terminateTimeoutInSeconds})
+var s_MicrovmImageBuildSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMicrovmImageBuildSummary, Members: &mMicrovmImageBuildSummary, Type: smithy.ShapeTypeStructure, Ext: &e_MicrovmImageBuildSummaries_member})
+var sMicrovmImageBuildSummary_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eMicrovmImageBuildSummary_imageArn})
+var sMicrovmImageBuildSummary_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eMicrovmImageBuildSummary_imageVersion})
+var sMicrovmImageBuildSummary_buildId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildId", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eMicrovmImageBuildSummary_buildId})
+var sMicrovmImageBuildSummary_buildState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildState", ID: &iBuildState, Members: &mBuildState, Type: smithy.ShapeTypeEnum, Ext: &eMicrovmImageBuildSummary_buildState})
+var sMicrovmImageBuildSummary_architecture = smithy.NewStaticSchema(smithy.StaticSchema{Member: "architecture", ID: &iArchitecture, Members: &mArchitecture, Type: smithy.ShapeTypeEnum, Ext: &eMicrovmImageBuildSummary_architecture})
+var sMicrovmImageBuildSummary_chipset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chipset", ID: &iChipset, Members: &mChipset, Type: smithy.ShapeTypeEnum, Ext: &eMicrovmImageBuildSummary_chipset})
+var sMicrovmImageBuildSummary_chipsetGeneration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chipsetGeneration", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eMicrovmImageBuildSummary_chipsetGeneration})
+var sMicrovmImageBuildSummary_stateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMicrovmImageBuildSummary_stateReason})
+var sMicrovmImageBuildSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMicrovmImageBuildSummary_createdAt})
+var sMicrovmImageHooks_ready = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ready", ID: &iHookState, Members: &mHookState, Type: smithy.ShapeTypeEnum, Ext: &eMicrovmImageHooks_ready})
+var sMicrovmImageHooks_readyTimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "readyTimeoutInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eMicrovmImageHooks_readyTimeoutInSeconds})
+var sMicrovmImageHooks_validate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validate", ID: &iHookState, Members: &mHookState, Type: smithy.ShapeTypeEnum, Ext: &eMicrovmImageHooks_validate})
+var sMicrovmImageHooks_validateTimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validateTimeoutInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eMicrovmImageHooks_validateTimeoutInSeconds})
+var sMicrovmImageState_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmImageState_CREATING})
+var sMicrovmImageState_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmImageState_CREATED})
+var sMicrovmImageState_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmImageState_CREATE_FAILED})
+var sMicrovmImageState_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmImageState_UPDATING})
+var sMicrovmImageState_UPDATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmImageState_UPDATED})
+var sMicrovmImageState_UPDATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmImageState_UPDATE_FAILED})
+var sMicrovmImageState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmImageState_DELETING})
+var sMicrovmImageState_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmImageState_DELETE_FAILED})
+var sMicrovmImageState_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmImageState_DELETED})
+var s_MicrovmImageSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMicrovmImageSummary, Members: &mMicrovmImageSummary, Type: smithy.ShapeTypeStructure, Ext: &e_MicrovmImageSummaries_member})
+var sMicrovmImageSummary_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eMicrovmImageSummary_imageArn})
+var sMicrovmImageSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ImageName, Type: smithy.ShapeTypeString, Ext: &eMicrovmImageSummary_name})
+var sMicrovmImageSummary_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMicrovmImageState, Members: &mMicrovmImageState, Type: smithy.ShapeTypeEnum, Ext: &eMicrovmImageSummary_state})
+var sMicrovmImageSummary_latestActiveImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestActiveImageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eMicrovmImageSummary_latestActiveImageVersion})
+var sMicrovmImageSummary_latestFailedImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestFailedImageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eMicrovmImageSummary_latestFailedImageVersion})
+var sMicrovmImageSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMicrovmImageSummary_createdAt})
+var sMicrovmImageVersionState_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmImageVersionState_PENDING})
+var sMicrovmImageVersionState_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmImageVersionState_IN_PROGRESS})
+var sMicrovmImageVersionState_SUCCESSFUL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESSFUL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmImageVersionState_SUCCESSFUL})
+var sMicrovmImageVersionState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmImageVersionState_FAILED})
+var sMicrovmImageVersionState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmImageVersionState_DELETING})
+var sMicrovmImageVersionState_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmImageVersionState_DELETED})
+var sMicrovmImageVersionState_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmImageVersionState_DELETE_FAILED})
+var sMicrovmImageVersionStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmImageVersionStatus_ACTIVE})
+var sMicrovmImageVersionStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmImageVersionStatus_INACTIVE})
+var sMicrovmImageVersionSummary_baseImageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eMicrovmImageVersionSummary_baseImageArn})
+var sMicrovmImageVersionSummary_baseImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eMicrovmImageVersionSummary_baseImageVersion})
+var sMicrovmImageVersionSummary_buildRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eMicrovmImageVersionSummary_buildRoleArn})
+var sMicrovmImageVersionSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMicrovmImageVersionSummary_description})
+var sMicrovmImageVersionSummary_codeArtifact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeArtifact", ID: &iCodeArtifact, Members: &mCodeArtifact, Type: smithy.ShapeTypeUnion, Ext: &eMicrovmImageVersionSummary_codeArtifact})
+var sMicrovmImageVersionSummary_logging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logging", ID: &iLogging, Members: &mLogging, Type: smithy.ShapeTypeUnion, Ext: &eMicrovmImageVersionSummary_logging})
+var sMicrovmImageVersionSummary_egressNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "egressNetworkConnectors", ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &eMicrovmImageVersionSummary_egressNetworkConnectors})
+var sMicrovmImageVersionSummary_cpuConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cpuConfigurations", ID: &i_CpuConfigurationList, Members: &m_CpuConfigurationList, Type: smithy.ShapeTypeList, Ext: &eMicrovmImageVersionSummary_cpuConfigurations})
+var sMicrovmImageVersionSummary_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_ResourcesList, Members: &m_ResourcesList, Type: smithy.ShapeTypeList, Ext: &eMicrovmImageVersionSummary_resources})
+var sMicrovmImageVersionSummary_additionalOsCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalOsCapabilities", ID: &i_CapabilityList, Members: &m_CapabilityList, Type: smithy.ShapeTypeList, Ext: &eMicrovmImageVersionSummary_additionalOsCapabilities})
+var sMicrovmImageVersionSummary_hooks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hooks", ID: &iHooks, Members: &mHooks, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmImageVersionSummary_hooks})
+var sMicrovmImageVersionSummary_environmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentVariables", ID: &i_EnvironmentVariableMap, Members: &m_EnvironmentVariableMap, Type: smithy.ShapeTypeMap, Ext: &eMicrovmImageVersionSummary_environmentVariables})
+var sMicrovmImageVersionSummary_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eMicrovmImageVersionSummary_imageArn})
+var sMicrovmImageVersionSummary_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eMicrovmImageVersionSummary_imageVersion})
+var sMicrovmImageVersionSummary_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMicrovmImageVersionState, Members: &mMicrovmImageVersionState, Type: smithy.ShapeTypeEnum, Ext: &eMicrovmImageVersionSummary_state})
+var sMicrovmImageVersionSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iMicrovmImageVersionStatus, Members: &mMicrovmImageVersionStatus, Type: smithy.ShapeTypeEnum, Ext: &eMicrovmImageVersionSummary_status})
+var sMicrovmImageVersionSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMicrovmImageVersionSummary_createdAt})
+var sMicrovmImageVersionSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMicrovmImageVersionSummary_updatedAt})
+var sMicrovmImageVersionSummary_stateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMicrovmImageVersionSummary_stateReason})
+var sMicrovmImageVersionSummary_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eMicrovmImageVersionSummary_tags})
+var s_MicrovmImageVersionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMicrovmImageVersionSummary, Members: &mMicrovmImageVersionSummary, Type: smithy.ShapeTypeStructure, Ext: &e_MicrovmImageVersionSummaryList_member})
+var sMicrovmItem_microvmId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "microvmId", ID: &i_MicrovmIdentifier, Type: smithy.ShapeTypeString, Ext: &eMicrovmItem_microvmId})
+var sMicrovmItem_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMicrovmState, Members: &mMicrovmState, Type: smithy.ShapeTypeEnum, Ext: &eMicrovmItem_state})
+var sMicrovmItem_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_MicrovmImageArn, Type: smithy.ShapeTypeString, Ext: &eMicrovmItem_imageArn})
+var sMicrovmItem_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eMicrovmItem_imageVersion})
+var sMicrovmItem_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMicrovmItem_startedAt})
+var s_MicrovmItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMicrovmItem, Members: &mMicrovmItem, Type: smithy.ShapeTypeStructure, Ext: &e_MicrovmItemList_member})
+var sMicrovmState_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmState_PENDING})
+var sMicrovmState_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmState_RUNNING})
+var sMicrovmState_SUSPENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmState_SUSPENDING})
+var sMicrovmState_SUSPENDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmState_SUSPENDED})
+var sMicrovmState_TERMINATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmState_TERMINATING})
+var sMicrovmState_TERMINATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMicrovmState_TERMINATED})
+var s_NetworkConnectorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NetworkConnector, Type: smithy.ShapeTypeString, Ext: &e_NetworkConnectorList_member})
+var sPortRange_startPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startPort", ID: &i_PortNumber, Type: smithy.ShapeTypeInteger, Ext: &ePortRange_startPort})
+var sPortRange_endPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endPort", ID: &i_PortNumber, Type: smithy.ShapeTypeInteger, Ext: &ePortRange_endPort})
+var sPortSpecification_port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "port", ID: &i_PortNumber, Type: smithy.ShapeTypeInteger, Ext: &ePortSpecification_port})
+var sPortSpecification_range = smithy.NewStaticSchema(smithy.StaticSchema{Member: "range", ID: &iPortRange, Members: &mPortRange, Type: smithy.ShapeTypeStructure, Ext: &ePortSpecification_range})
+var sPortSpecification_allPorts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allPorts", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePortSpecification_allPorts})
+var sResourceConflictException_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceConflictException_Type})
+var sResourceConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceConflictException_message})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceType})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceId})
+var sResources_minimumMemoryInMiB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minimumMemoryInMiB", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eResources_minimumMemoryInMiB})
+var s_ResourcesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResources, Members: &mResources, Type: smithy.ShapeTypeStructure, Ext: &e_ResourcesList_member})
+var sServiceException_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceException_Type})
+var sServiceException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceException_message})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_message})
+var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceId})
+var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_resourceType})
+var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_serviceCode})
+var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_quotaCode})
+var sSnapshotBuild_memorySnapshotSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "memorySnapshotSizeInBytes", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eSnapshotBuild_memorySnapshotSizeInBytes})
+var sSnapshotBuild_codeInstallSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeInstallSizeInBytes", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eSnapshotBuild_codeInstallSizeInBytes})
+var sSnapshotBuild_diskSnapshotSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "diskSnapshotSizeInBytes", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eSnapshotBuild_diskSnapshotSizeInBytes})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Traits: &t33, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_Tags_key})
+var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_Tags_value})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_serviceCode})
+var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_quotaCode})
+var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t29, Type: smithy.ShapeTypeInteger, Ext: &eThrottlingException_retryAfterSeconds})
+var s_TokenParts_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AuthTokenKey, Type: smithy.ShapeTypeString, Ext: &e_TokenParts_key})
+var s_TokenParts_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_AuthTokenValue, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &e_TokenParts_value})
+var sTooManyRequestsException_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTooManyRequestsException_Type})
+var sTooManyRequestsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTooManyRequestsException_message})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sCreateMicrovmAuthTokenRequest_microvmIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "microvmIdentifier", ID: &i_MicrovmIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eCreateMicrovmAuthTokenRequest_microvmIdentifier})
+var sCreateMicrovmAuthTokenRequest_expirationInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expirationInMinutes", ID: &i_PositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &eCreateMicrovmAuthTokenRequest_expirationInMinutes})
+var sCreateMicrovmAuthTokenRequest_allowedPorts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedPorts", ID: &i_ListOfPortSpecification, Members: &m_ListOfPortSpecification, Type: smithy.ShapeTypeList, Ext: &eCreateMicrovmAuthTokenRequest_allowedPorts})
+var sCreateMicrovmAuthTokenResponse_authToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authToken", ID: &i_TokenParts, Members: &m_TokenParts, Type: smithy.ShapeTypeMap, Ext: &eCreateMicrovmAuthTokenResponse_authToken})
+var sCreateMicrovmImageRequest_baseImageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eCreateMicrovmImageRequest_baseImageArn})
+var sCreateMicrovmImageRequest_baseImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eCreateMicrovmImageRequest_baseImageVersion})
+var sCreateMicrovmImageRequest_buildRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eCreateMicrovmImageRequest_buildRoleArn})
+var sCreateMicrovmImageRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateMicrovmImageRequest_description})
+var sCreateMicrovmImageRequest_codeArtifact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeArtifact", ID: &iCodeArtifact, Members: &mCodeArtifact, Type: smithy.ShapeTypeUnion, Ext: &eCreateMicrovmImageRequest_codeArtifact})
+var sCreateMicrovmImageRequest_logging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logging", ID: &iLogging, Members: &mLogging, Type: smithy.ShapeTypeUnion, Ext: &eCreateMicrovmImageRequest_logging})
+var sCreateMicrovmImageRequest_egressNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "egressNetworkConnectors", ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &eCreateMicrovmImageRequest_egressNetworkConnectors})
+var sCreateMicrovmImageRequest_cpuConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cpuConfigurations", ID: &i_CpuConfigurationList, Members: &m_CpuConfigurationList, Type: smithy.ShapeTypeList, Ext: &eCreateMicrovmImageRequest_cpuConfigurations})
+var sCreateMicrovmImageRequest_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_ResourcesList, Members: &m_ResourcesList, Type: smithy.ShapeTypeList, Ext: &eCreateMicrovmImageRequest_resources})
+var sCreateMicrovmImageRequest_additionalOsCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalOsCapabilities", ID: &i_CapabilityList, Members: &m_CapabilityList, Type: smithy.ShapeTypeList, Ext: &eCreateMicrovmImageRequest_additionalOsCapabilities})
+var sCreateMicrovmImageRequest_hooks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hooks", ID: &iHooks, Members: &mHooks, Type: smithy.ShapeTypeStructure, Ext: &eCreateMicrovmImageRequest_hooks})
+var sCreateMicrovmImageRequest_environmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentVariables", ID: &i_EnvironmentVariableMap, Members: &m_EnvironmentVariableMap, Type: smithy.ShapeTypeMap, Ext: &eCreateMicrovmImageRequest_environmentVariables})
+var sCreateMicrovmImageRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ImageName, Type: smithy.ShapeTypeString, Ext: &eCreateMicrovmImageRequest_name})
+var sCreateMicrovmImageRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateMicrovmImageRequest_tags})
+var sCreateMicrovmImageRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateMicrovmImageRequest_clientToken})
+var sCreateMicrovmImageResponse_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eCreateMicrovmImageResponse_imageArn})
+var sCreateMicrovmImageResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ImageName, Type: smithy.ShapeTypeString, Ext: &eCreateMicrovmImageResponse_name})
+var sCreateMicrovmImageResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMicrovmImageState, Members: &mMicrovmImageState, Type: smithy.ShapeTypeEnum, Ext: &eCreateMicrovmImageResponse_state})
+var sCreateMicrovmImageResponse_latestActiveImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestActiveImageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eCreateMicrovmImageResponse_latestActiveImageVersion})
+var sCreateMicrovmImageResponse_latestFailedImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestFailedImageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eCreateMicrovmImageResponse_latestFailedImageVersion})
+var sCreateMicrovmImageResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateMicrovmImageResponse_createdAt})
+var sCreateMicrovmImageResponse_baseImageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eCreateMicrovmImageResponse_baseImageArn})
+var sCreateMicrovmImageResponse_baseImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eCreateMicrovmImageResponse_baseImageVersion})
+var sCreateMicrovmImageResponse_buildRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eCreateMicrovmImageResponse_buildRoleArn})
+var sCreateMicrovmImageResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateMicrovmImageResponse_description})
+var sCreateMicrovmImageResponse_codeArtifact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeArtifact", ID: &iCodeArtifact, Members: &mCodeArtifact, Type: smithy.ShapeTypeUnion, Ext: &eCreateMicrovmImageResponse_codeArtifact})
+var sCreateMicrovmImageResponse_logging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logging", ID: &iLogging, Members: &mLogging, Type: smithy.ShapeTypeUnion, Ext: &eCreateMicrovmImageResponse_logging})
+var sCreateMicrovmImageResponse_egressNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "egressNetworkConnectors", ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &eCreateMicrovmImageResponse_egressNetworkConnectors})
+var sCreateMicrovmImageResponse_cpuConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cpuConfigurations", ID: &i_CpuConfigurationList, Members: &m_CpuConfigurationList, Type: smithy.ShapeTypeList, Ext: &eCreateMicrovmImageResponse_cpuConfigurations})
+var sCreateMicrovmImageResponse_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_ResourcesList, Members: &m_ResourcesList, Type: smithy.ShapeTypeList, Ext: &eCreateMicrovmImageResponse_resources})
+var sCreateMicrovmImageResponse_additionalOsCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalOsCapabilities", ID: &i_CapabilityList, Members: &m_CapabilityList, Type: smithy.ShapeTypeList, Ext: &eCreateMicrovmImageResponse_additionalOsCapabilities})
+var sCreateMicrovmImageResponse_hooks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hooks", ID: &iHooks, Members: &mHooks, Type: smithy.ShapeTypeStructure, Ext: &eCreateMicrovmImageResponse_hooks})
+var sCreateMicrovmImageResponse_environmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentVariables", ID: &i_EnvironmentVariableMap, Members: &m_EnvironmentVariableMap, Type: smithy.ShapeTypeMap, Ext: &eCreateMicrovmImageResponse_environmentVariables})
+var sCreateMicrovmImageResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateMicrovmImageResponse_tags})
+var sCreateMicrovmImageResponse_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateMicrovmImageResponse_updatedAt})
+var sCreateMicrovmImageResponse_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eCreateMicrovmImageResponse_imageVersion})
+var sCreateMicrovmShellAuthTokenRequest_microvmIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "microvmIdentifier", ID: &i_MicrovmIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eCreateMicrovmShellAuthTokenRequest_microvmIdentifier})
+var sCreateMicrovmShellAuthTokenRequest_expirationInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expirationInMinutes", ID: &i_PositiveInteger, Type: smithy.ShapeTypeInteger, Ext: &eCreateMicrovmShellAuthTokenRequest_expirationInMinutes})
+var sCreateMicrovmShellAuthTokenResponse_authToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authToken", ID: &i_TokenParts, Members: &m_TokenParts, Type: smithy.ShapeTypeMap, Ext: &eCreateMicrovmShellAuthTokenResponse_authToken})
+var sDeleteMicrovmImageInput_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eDeleteMicrovmImageInput_imageIdentifier})
+var sDeleteMicrovmImageOutput_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Type: smithy.ShapeTypeString, Ext: &eDeleteMicrovmImageOutput_imageIdentifier})
+var sDeleteMicrovmImageOutput_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMicrovmImageState, Members: &mMicrovmImageState, Type: smithy.ShapeTypeEnum, Ext: &eDeleteMicrovmImageOutput_state})
+var sDeleteMicrovmImageVersionInput_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eDeleteMicrovmImageVersionInput_imageIdentifier})
+var sDeleteMicrovmImageVersionInput_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eDeleteMicrovmImageVersionInput_imageVersion})
+var sDeleteMicrovmImageVersionOutput_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Type: smithy.ShapeTypeString, Ext: &eDeleteMicrovmImageVersionOutput_imageIdentifier})
+var sDeleteMicrovmImageVersionOutput_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eDeleteMicrovmImageVersionOutput_imageVersion})
+var sDeleteMicrovmImageVersionOutput_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMicrovmImageVersionState, Members: &mMicrovmImageVersionState, Type: smithy.ShapeTypeEnum, Ext: &eDeleteMicrovmImageVersionOutput_state})
+var sGetMicrovmImageBuildInput_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmImageBuildInput_imageIdentifier})
+var sGetMicrovmImageBuildInput_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmImageBuildInput_imageVersion})
+var sGetMicrovmImageBuildInput_buildId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildId", ID: &i_NonBlankString, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmImageBuildInput_buildId})
+var sGetMicrovmImageBuildOutput_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmImageBuildOutput_imageArn})
+var sGetMicrovmImageBuildOutput_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmImageBuildOutput_imageVersion})
+var sGetMicrovmImageBuildOutput_buildId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildId", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmImageBuildOutput_buildId})
+var sGetMicrovmImageBuildOutput_buildState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildState", ID: &iBuildState, Members: &mBuildState, Type: smithy.ShapeTypeEnum, Ext: &eGetMicrovmImageBuildOutput_buildState})
+var sGetMicrovmImageBuildOutput_architecture = smithy.NewStaticSchema(smithy.StaticSchema{Member: "architecture", ID: &iArchitecture, Members: &mArchitecture, Type: smithy.ShapeTypeEnum, Ext: &eGetMicrovmImageBuildOutput_architecture})
+var sGetMicrovmImageBuildOutput_chipset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chipset", ID: &iChipset, Members: &mChipset, Type: smithy.ShapeTypeEnum, Ext: &eGetMicrovmImageBuildOutput_chipset})
+var sGetMicrovmImageBuildOutput_chipsetGeneration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chipsetGeneration", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmImageBuildOutput_chipsetGeneration})
+var sGetMicrovmImageBuildOutput_stateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmImageBuildOutput_stateReason})
+var sGetMicrovmImageBuildOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMicrovmImageBuildOutput_createdAt})
+var sGetMicrovmImageBuildOutput_snapshotBuild = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snapshotBuild", ID: &iSnapshotBuild, Members: &mSnapshotBuild, Type: smithy.ShapeTypeStructure, Ext: &eGetMicrovmImageBuildOutput_snapshotBuild})
+var sGetMicrovmImageInput_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmImageInput_imageIdentifier})
+var sGetMicrovmImageOutput_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmImageOutput_imageArn})
+var sGetMicrovmImageOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ImageName, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmImageOutput_name})
+var sGetMicrovmImageOutput_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMicrovmImageState, Members: &mMicrovmImageState, Type: smithy.ShapeTypeEnum, Ext: &eGetMicrovmImageOutput_state})
+var sGetMicrovmImageOutput_latestActiveImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestActiveImageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmImageOutput_latestActiveImageVersion})
+var sGetMicrovmImageOutput_latestFailedImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestFailedImageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmImageOutput_latestFailedImageVersion})
+var sGetMicrovmImageOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMicrovmImageOutput_createdAt})
+var sGetMicrovmImageOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eGetMicrovmImageOutput_tags})
+var sGetMicrovmImageOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMicrovmImageOutput_updatedAt})
+var sGetMicrovmImageVersionInput_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmImageVersionInput_imageIdentifier})
+var sGetMicrovmImageVersionInput_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmImageVersionInput_imageVersion})
+var sGetMicrovmImageVersionOutput_baseImageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmImageVersionOutput_baseImageArn})
+var sGetMicrovmImageVersionOutput_baseImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmImageVersionOutput_baseImageVersion})
+var sGetMicrovmImageVersionOutput_buildRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmImageVersionOutput_buildRoleArn})
+var sGetMicrovmImageVersionOutput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmImageVersionOutput_description})
+var sGetMicrovmImageVersionOutput_codeArtifact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeArtifact", ID: &iCodeArtifact, Members: &mCodeArtifact, Type: smithy.ShapeTypeUnion, Ext: &eGetMicrovmImageVersionOutput_codeArtifact})
+var sGetMicrovmImageVersionOutput_logging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logging", ID: &iLogging, Members: &mLogging, Type: smithy.ShapeTypeUnion, Ext: &eGetMicrovmImageVersionOutput_logging})
+var sGetMicrovmImageVersionOutput_egressNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "egressNetworkConnectors", ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &eGetMicrovmImageVersionOutput_egressNetworkConnectors})
+var sGetMicrovmImageVersionOutput_cpuConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cpuConfigurations", ID: &i_CpuConfigurationList, Members: &m_CpuConfigurationList, Type: smithy.ShapeTypeList, Ext: &eGetMicrovmImageVersionOutput_cpuConfigurations})
+var sGetMicrovmImageVersionOutput_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_ResourcesList, Members: &m_ResourcesList, Type: smithy.ShapeTypeList, Ext: &eGetMicrovmImageVersionOutput_resources})
+var sGetMicrovmImageVersionOutput_additionalOsCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalOsCapabilities", ID: &i_CapabilityList, Members: &m_CapabilityList, Type: smithy.ShapeTypeList, Ext: &eGetMicrovmImageVersionOutput_additionalOsCapabilities})
+var sGetMicrovmImageVersionOutput_hooks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hooks", ID: &iHooks, Members: &mHooks, Type: smithy.ShapeTypeStructure, Ext: &eGetMicrovmImageVersionOutput_hooks})
+var sGetMicrovmImageVersionOutput_environmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentVariables", ID: &i_EnvironmentVariableMap, Members: &m_EnvironmentVariableMap, Type: smithy.ShapeTypeMap, Ext: &eGetMicrovmImageVersionOutput_environmentVariables})
+var sGetMicrovmImageVersionOutput_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmImageVersionOutput_imageArn})
+var sGetMicrovmImageVersionOutput_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmImageVersionOutput_imageVersion})
+var sGetMicrovmImageVersionOutput_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMicrovmImageVersionState, Members: &mMicrovmImageVersionState, Type: smithy.ShapeTypeEnum, Ext: &eGetMicrovmImageVersionOutput_state})
+var sGetMicrovmImageVersionOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iMicrovmImageVersionStatus, Members: &mMicrovmImageVersionStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetMicrovmImageVersionOutput_status})
+var sGetMicrovmImageVersionOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMicrovmImageVersionOutput_createdAt})
+var sGetMicrovmImageVersionOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMicrovmImageVersionOutput_updatedAt})
+var sGetMicrovmImageVersionOutput_stateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmImageVersionOutput_stateReason})
+var sGetMicrovmImageVersionOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eGetMicrovmImageVersionOutput_tags})
+var sGetMicrovmRequest_microvmIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "microvmIdentifier", ID: &i_MicrovmIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmRequest_microvmIdentifier})
+var sGetMicrovmResponse_microvmId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "microvmId", ID: &i_MicrovmIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmResponse_microvmId})
+var sGetMicrovmResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMicrovmState, Members: &mMicrovmState, Type: smithy.ShapeTypeEnum, Ext: &eGetMicrovmResponse_state})
+var sGetMicrovmResponse_endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpoint", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmResponse_endpoint})
+var sGetMicrovmResponse_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_MicrovmImageArn, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmResponse_imageArn})
+var sGetMicrovmResponse_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmResponse_imageVersion})
+var sGetMicrovmResponse_executionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmResponse_executionRoleArn})
+var sGetMicrovmResponse_idlePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idlePolicy", ID: &iIdlePolicy, Members: &mIdlePolicy, Type: smithy.ShapeTypeStructure, Ext: &eGetMicrovmResponse_idlePolicy})
+var sGetMicrovmResponse_maximumDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumDurationInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetMicrovmResponse_maximumDurationInSeconds})
+var sGetMicrovmResponse_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMicrovmResponse_startedAt})
+var sGetMicrovmResponse_terminatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "terminatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMicrovmResponse_terminatedAt})
+var sGetMicrovmResponse_stateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateReason", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eGetMicrovmResponse_stateReason})
+var sGetMicrovmResponse_ingressNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingressNetworkConnectors", ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &eGetMicrovmResponse_ingressNetworkConnectors})
+var sGetMicrovmResponse_egressNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "egressNetworkConnectors", ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &eGetMicrovmResponse_egressNetworkConnectors})
+var sListManagedMicrovmImagesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t36, Type: smithy.ShapeTypeInteger, Ext: &eListManagedMicrovmImagesInput_maxResults})
+var sListManagedMicrovmImagesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eListManagedMicrovmImagesInput_nextToken})
+var sListManagedMicrovmImagesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListManagedMicrovmImagesOutput_nextToken})
+var sListManagedMicrovmImagesOutput_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_ManagedMicrovmImageSummaryList, Members: &m_ManagedMicrovmImageSummaryList, Type: smithy.ShapeTypeList, Ext: &eListManagedMicrovmImagesOutput_items})
+var sListManagedMicrovmImageVersionsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t36, Type: smithy.ShapeTypeInteger, Ext: &eListManagedMicrovmImageVersionsInput_maxResults})
+var sListManagedMicrovmImageVersionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eListManagedMicrovmImageVersionsInput_nextToken})
+var sListManagedMicrovmImageVersionsInput_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eListManagedMicrovmImageVersionsInput_imageIdentifier})
+var sListManagedMicrovmImageVersionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListManagedMicrovmImageVersionsOutput_nextToken})
+var sListManagedMicrovmImageVersionsOutput_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_ManagedMicrovmImageVersionList, Members: &m_ManagedMicrovmImageVersionList, Type: smithy.ShapeTypeList, Ext: &eListManagedMicrovmImageVersionsOutput_items})
+var sListMicrovmImageBuildsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t36, Type: smithy.ShapeTypeInteger, Ext: &eListMicrovmImageBuildsInput_maxResults})
+var sListMicrovmImageBuildsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eListMicrovmImageBuildsInput_nextToken})
+var sListMicrovmImageBuildsInput_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eListMicrovmImageBuildsInput_imageIdentifier})
+var sListMicrovmImageBuildsInput_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eListMicrovmImageBuildsInput_imageVersion})
+var sListMicrovmImageBuildsInput_architecture = smithy.NewStaticSchema(smithy.StaticSchema{Member: "architecture", ID: &iArchitecture, Members: &mArchitecture, Traits: &t38, Type: smithy.ShapeTypeEnum, Ext: &eListMicrovmImageBuildsInput_architecture})
+var sListMicrovmImageBuildsInput_chipset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chipset", ID: &iChipset, Members: &mChipset, Traits: &t39, Type: smithy.ShapeTypeEnum, Ext: &eListMicrovmImageBuildsInput_chipset})
+var sListMicrovmImageBuildsInput_chipsetGeneration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "chipsetGeneration", ID: &i_NonBlankString, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListMicrovmImageBuildsInput_chipsetGeneration})
+var sListMicrovmImageBuildsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListMicrovmImageBuildsOutput_nextToken})
+var sListMicrovmImageBuildsOutput_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_MicrovmImageBuildSummaries, Members: &m_MicrovmImageBuildSummaries, Type: smithy.ShapeTypeList, Ext: &eListMicrovmImageBuildsOutput_items})
+var sListMicrovmImagesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t36, Type: smithy.ShapeTypeInteger, Ext: &eListMicrovmImagesRequest_maxResults})
+var sListMicrovmImagesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eListMicrovmImagesRequest_nextToken})
+var sListMicrovmImagesRequest_nameFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nameFilter", ID: &i_NonBlankString, Traits: &t41, Type: smithy.ShapeTypeString, Ext: &eListMicrovmImagesRequest_nameFilter})
+var sListMicrovmImagesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListMicrovmImagesResponse_nextToken})
+var sListMicrovmImagesResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_MicrovmImageSummaries, Members: &m_MicrovmImageSummaries, Type: smithy.ShapeTypeList, Ext: &eListMicrovmImagesResponse_items})
+var sListMicrovmImageVersionsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t36, Type: smithy.ShapeTypeInteger, Ext: &eListMicrovmImageVersionsInput_maxResults})
+var sListMicrovmImageVersionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eListMicrovmImageVersionsInput_nextToken})
+var sListMicrovmImageVersionsInput_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eListMicrovmImageVersionsInput_imageIdentifier})
+var sListMicrovmImageVersionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListMicrovmImageVersionsOutput_nextToken})
+var sListMicrovmImageVersionsOutput_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_MicrovmImageVersionSummaryList, Members: &m_MicrovmImageVersionSummaryList, Type: smithy.ShapeTypeList, Ext: &eListMicrovmImageVersionsOutput_items})
+var sListMicrovmsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t36, Type: smithy.ShapeTypeInteger, Ext: &eListMicrovmsRequest_maxResults})
+var sListMicrovmsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Traits: &t37, Type: smithy.ShapeTypeString, Ext: &eListMicrovmsRequest_nextToken})
+var sListMicrovmsRequest_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Traits: &t42, Type: smithy.ShapeTypeString, Ext: &eListMicrovmsRequest_imageIdentifier})
+var sListMicrovmsRequest_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &pString, Traits: &t43, Type: smithy.ShapeTypeString, Ext: &eListMicrovmsRequest_imageVersion})
+var sListMicrovmsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eListMicrovmsResponse_nextToken})
+var sListMicrovmsResponse_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_MicrovmItemList, Members: &m_MicrovmItemList, Type: smithy.ShapeTypeList, Ext: &eListMicrovmsResponse_items})
+var sListTagsRequest_Resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resource", ID: &i_TaggableResource, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eListTagsRequest_Resource})
+var sListTagsResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eListTagsResponse_Tags})
+var sResumeMicrovmRequest_microvmIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "microvmIdentifier", ID: &i_MicrovmIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eResumeMicrovmRequest_microvmIdentifier})
+var sRunMicrovmRequest_ingressNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingressNetworkConnectors", ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &eRunMicrovmRequest_ingressNetworkConnectors})
+var sRunMicrovmRequest_egressNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "egressNetworkConnectors", ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &eRunMicrovmRequest_egressNetworkConnectors})
+var sRunMicrovmRequest_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Type: smithy.ShapeTypeString, Ext: &eRunMicrovmRequest_imageIdentifier})
+var sRunMicrovmRequest_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eRunMicrovmRequest_imageVersion})
+var sRunMicrovmRequest_executionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eRunMicrovmRequest_executionRoleArn})
+var sRunMicrovmRequest_idlePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idlePolicy", ID: &iIdlePolicy, Members: &mIdlePolicy, Type: smithy.ShapeTypeStructure, Ext: &eRunMicrovmRequest_idlePolicy})
+var sRunMicrovmRequest_logging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logging", ID: &iLogging, Members: &mLogging, Type: smithy.ShapeTypeUnion, Ext: &eRunMicrovmRequest_logging})
+var sRunMicrovmRequest_runHookPayload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runHookPayload", ID: &i_RunHookPayload, Traits: &t27, Type: smithy.ShapeTypeString, Ext: &eRunMicrovmRequest_runHookPayload})
+var sRunMicrovmRequest_maximumDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumDurationInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eRunMicrovmRequest_maximumDurationInSeconds})
+var sRunMicrovmRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRunMicrovmRequest_clientToken})
+var sRunMicrovmResponse_microvmId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "microvmId", ID: &i_MicrovmIdentifier, Type: smithy.ShapeTypeString, Ext: &eRunMicrovmResponse_microvmId})
+var sRunMicrovmResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMicrovmState, Members: &mMicrovmState, Type: smithy.ShapeTypeEnum, Ext: &eRunMicrovmResponse_state})
+var sRunMicrovmResponse_endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpoint", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRunMicrovmResponse_endpoint})
+var sRunMicrovmResponse_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_MicrovmImageArn, Type: smithy.ShapeTypeString, Ext: &eRunMicrovmResponse_imageArn})
+var sRunMicrovmResponse_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eRunMicrovmResponse_imageVersion})
+var sRunMicrovmResponse_executionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eRunMicrovmResponse_executionRoleArn})
+var sRunMicrovmResponse_idlePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idlePolicy", ID: &iIdlePolicy, Members: &mIdlePolicy, Type: smithy.ShapeTypeStructure, Ext: &eRunMicrovmResponse_idlePolicy})
+var sRunMicrovmResponse_maximumDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumDurationInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eRunMicrovmResponse_maximumDurationInSeconds})
+var sRunMicrovmResponse_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRunMicrovmResponse_startedAt})
+var sRunMicrovmResponse_terminatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "terminatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRunMicrovmResponse_terminatedAt})
+var sRunMicrovmResponse_stateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateReason", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eRunMicrovmResponse_stateReason})
+var sRunMicrovmResponse_ingressNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingressNetworkConnectors", ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &eRunMicrovmResponse_ingressNetworkConnectors})
+var sRunMicrovmResponse_egressNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "egressNetworkConnectors", ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &eRunMicrovmResponse_egressNetworkConnectors})
+var sSuspendMicrovmRequest_microvmIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "microvmIdentifier", ID: &i_MicrovmIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eSuspendMicrovmRequest_microvmIdentifier})
+var sTagResourceRequest_Resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resource", ID: &i_TaggableResource, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_Resource})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_Tags})
+var sTerminateMicrovmRequest_microvmIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "microvmIdentifier", ID: &i_MicrovmIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eTerminateMicrovmRequest_microvmIdentifier})
+var sUntagResourceRequest_Resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resource", ID: &i_TaggableResource, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_Resource})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t44, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUpdateMicrovmImageRequest_baseImageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eUpdateMicrovmImageRequest_baseImageArn})
+var sUpdateMicrovmImageRequest_baseImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eUpdateMicrovmImageRequest_baseImageVersion})
+var sUpdateMicrovmImageRequest_buildRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eUpdateMicrovmImageRequest_buildRoleArn})
+var sUpdateMicrovmImageRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateMicrovmImageRequest_description})
+var sUpdateMicrovmImageRequest_codeArtifact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeArtifact", ID: &iCodeArtifact, Members: &mCodeArtifact, Type: smithy.ShapeTypeUnion, Ext: &eUpdateMicrovmImageRequest_codeArtifact})
+var sUpdateMicrovmImageRequest_logging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logging", ID: &iLogging, Members: &mLogging, Type: smithy.ShapeTypeUnion, Ext: &eUpdateMicrovmImageRequest_logging})
+var sUpdateMicrovmImageRequest_egressNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "egressNetworkConnectors", ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &eUpdateMicrovmImageRequest_egressNetworkConnectors})
+var sUpdateMicrovmImageRequest_cpuConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cpuConfigurations", ID: &i_CpuConfigurationList, Members: &m_CpuConfigurationList, Type: smithy.ShapeTypeList, Ext: &eUpdateMicrovmImageRequest_cpuConfigurations})
+var sUpdateMicrovmImageRequest_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_ResourcesList, Members: &m_ResourcesList, Type: smithy.ShapeTypeList, Ext: &eUpdateMicrovmImageRequest_resources})
+var sUpdateMicrovmImageRequest_additionalOsCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalOsCapabilities", ID: &i_CapabilityList, Members: &m_CapabilityList, Type: smithy.ShapeTypeList, Ext: &eUpdateMicrovmImageRequest_additionalOsCapabilities})
+var sUpdateMicrovmImageRequest_hooks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hooks", ID: &iHooks, Members: &mHooks, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMicrovmImageRequest_hooks})
+var sUpdateMicrovmImageRequest_environmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentVariables", ID: &i_EnvironmentVariableMap, Members: &m_EnvironmentVariableMap, Type: smithy.ShapeTypeMap, Ext: &eUpdateMicrovmImageRequest_environmentVariables})
+var sUpdateMicrovmImageRequest_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eUpdateMicrovmImageRequest_imageIdentifier})
+var sUpdateMicrovmImageRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateMicrovmImageRequest_clientToken})
+var sUpdateMicrovmImageResponse_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eUpdateMicrovmImageResponse_imageArn})
+var sUpdateMicrovmImageResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ImageName, Type: smithy.ShapeTypeString, Ext: &eUpdateMicrovmImageResponse_name})
+var sUpdateMicrovmImageResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMicrovmImageState, Members: &mMicrovmImageState, Type: smithy.ShapeTypeEnum, Ext: &eUpdateMicrovmImageResponse_state})
+var sUpdateMicrovmImageResponse_latestActiveImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestActiveImageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eUpdateMicrovmImageResponse_latestActiveImageVersion})
+var sUpdateMicrovmImageResponse_latestFailedImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestFailedImageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eUpdateMicrovmImageResponse_latestFailedImageVersion})
+var sUpdateMicrovmImageResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateMicrovmImageResponse_createdAt})
+var sUpdateMicrovmImageResponse_baseImageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eUpdateMicrovmImageResponse_baseImageArn})
+var sUpdateMicrovmImageResponse_baseImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eUpdateMicrovmImageResponse_baseImageVersion})
+var sUpdateMicrovmImageResponse_buildRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eUpdateMicrovmImageResponse_buildRoleArn})
+var sUpdateMicrovmImageResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateMicrovmImageResponse_description})
+var sUpdateMicrovmImageResponse_codeArtifact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeArtifact", ID: &iCodeArtifact, Members: &mCodeArtifact, Type: smithy.ShapeTypeUnion, Ext: &eUpdateMicrovmImageResponse_codeArtifact})
+var sUpdateMicrovmImageResponse_logging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logging", ID: &iLogging, Members: &mLogging, Type: smithy.ShapeTypeUnion, Ext: &eUpdateMicrovmImageResponse_logging})
+var sUpdateMicrovmImageResponse_egressNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "egressNetworkConnectors", ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &eUpdateMicrovmImageResponse_egressNetworkConnectors})
+var sUpdateMicrovmImageResponse_cpuConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cpuConfigurations", ID: &i_CpuConfigurationList, Members: &m_CpuConfigurationList, Type: smithy.ShapeTypeList, Ext: &eUpdateMicrovmImageResponse_cpuConfigurations})
+var sUpdateMicrovmImageResponse_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_ResourcesList, Members: &m_ResourcesList, Type: smithy.ShapeTypeList, Ext: &eUpdateMicrovmImageResponse_resources})
+var sUpdateMicrovmImageResponse_additionalOsCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalOsCapabilities", ID: &i_CapabilityList, Members: &m_CapabilityList, Type: smithy.ShapeTypeList, Ext: &eUpdateMicrovmImageResponse_additionalOsCapabilities})
+var sUpdateMicrovmImageResponse_hooks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hooks", ID: &iHooks, Members: &mHooks, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMicrovmImageResponse_hooks})
+var sUpdateMicrovmImageResponse_environmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentVariables", ID: &i_EnvironmentVariableMap, Members: &m_EnvironmentVariableMap, Type: smithy.ShapeTypeMap, Ext: &eUpdateMicrovmImageResponse_environmentVariables})
+var sUpdateMicrovmImageResponse_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateMicrovmImageResponse_updatedAt})
+var sUpdateMicrovmImageResponse_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eUpdateMicrovmImageResponse_imageVersion})
+var sUpdateMicrovmImageVersionRequest_imageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdentifier", ID: &i_MicrovmImageIdentifier, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eUpdateMicrovmImageVersionRequest_imageIdentifier})
+var sUpdateMicrovmImageVersionRequest_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Traits: &t35, Type: smithy.ShapeTypeString, Ext: &eUpdateMicrovmImageVersionRequest_imageVersion})
+var sUpdateMicrovmImageVersionRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iMicrovmImageVersionStatus, Members: &mMicrovmImageVersionStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateMicrovmImageVersionRequest_status})
+var sUpdateMicrovmImageVersionResponse_baseImageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eUpdateMicrovmImageVersionResponse_baseImageArn})
+var sUpdateMicrovmImageVersionResponse_baseImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseImageVersion", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eUpdateMicrovmImageVersionResponse_baseImageVersion})
+var sUpdateMicrovmImageVersionResponse_buildRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buildRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eUpdateMicrovmImageVersionResponse_buildRoleArn})
+var sUpdateMicrovmImageVersionResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateMicrovmImageVersionResponse_description})
+var sUpdateMicrovmImageVersionResponse_codeArtifact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeArtifact", ID: &iCodeArtifact, Members: &mCodeArtifact, Type: smithy.ShapeTypeUnion, Ext: &eUpdateMicrovmImageVersionResponse_codeArtifact})
+var sUpdateMicrovmImageVersionResponse_logging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logging", ID: &iLogging, Members: &mLogging, Type: smithy.ShapeTypeUnion, Ext: &eUpdateMicrovmImageVersionResponse_logging})
+var sUpdateMicrovmImageVersionResponse_egressNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "egressNetworkConnectors", ID: &i_NetworkConnectorList, Members: &m_NetworkConnectorList, Type: smithy.ShapeTypeList, Ext: &eUpdateMicrovmImageVersionResponse_egressNetworkConnectors})
+var sUpdateMicrovmImageVersionResponse_cpuConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cpuConfigurations", ID: &i_CpuConfigurationList, Members: &m_CpuConfigurationList, Type: smithy.ShapeTypeList, Ext: &eUpdateMicrovmImageVersionResponse_cpuConfigurations})
+var sUpdateMicrovmImageVersionResponse_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_ResourcesList, Members: &m_ResourcesList, Type: smithy.ShapeTypeList, Ext: &eUpdateMicrovmImageVersionResponse_resources})
+var sUpdateMicrovmImageVersionResponse_additionalOsCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalOsCapabilities", ID: &i_CapabilityList, Members: &m_CapabilityList, Type: smithy.ShapeTypeList, Ext: &eUpdateMicrovmImageVersionResponse_additionalOsCapabilities})
+var sUpdateMicrovmImageVersionResponse_hooks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hooks", ID: &iHooks, Members: &mHooks, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMicrovmImageVersionResponse_hooks})
+var sUpdateMicrovmImageVersionResponse_environmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentVariables", ID: &i_EnvironmentVariableMap, Members: &m_EnvironmentVariableMap, Type: smithy.ShapeTypeMap, Ext: &eUpdateMicrovmImageVersionResponse_environmentVariables})
+var sUpdateMicrovmImageVersionResponse_imageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageArn", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eUpdateMicrovmImageVersionResponse_imageArn})
+var sUpdateMicrovmImageVersionResponse_imageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString, Ext: &eUpdateMicrovmImageVersionResponse_imageVersion})
+var sUpdateMicrovmImageVersionResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iMicrovmImageVersionState, Members: &mMicrovmImageVersionState, Type: smithy.ShapeTypeEnum, Ext: &eUpdateMicrovmImageVersionResponse_state})
+var sUpdateMicrovmImageVersionResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iMicrovmImageVersionStatus, Members: &mMicrovmImageVersionStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateMicrovmImageVersionResponse_status})
+var sUpdateMicrovmImageVersionResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateMicrovmImageVersionResponse_createdAt})
+var sUpdateMicrovmImageVersionResponse_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateMicrovmImageVersionResponse_updatedAt})
+var sUpdateMicrovmImageVersionResponse_stateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateMicrovmImageVersionResponse_stateReason})
+var sUpdateMicrovmImageVersionResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eUpdateMicrovmImageVersionResponse_tags})
 
 var CreateMicrovmAuthToken = &sCreateMicrovmAuthToken
 

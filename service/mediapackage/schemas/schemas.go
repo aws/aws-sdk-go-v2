@@ -7,9 +7,520 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [512]smithy.SchemaExtensions
+var (
+	eConfigureLogs                                                      smithy.SchemaExtensions
+	eCreateChannel                                                      smithy.SchemaExtensions
+	eCreateHarvestJob                                                   smithy.SchemaExtensions
+	eCreateOriginEndpoint                                               smithy.SchemaExtensions
+	eDeleteChannel                                                      smithy.SchemaExtensions
+	eDeleteOriginEndpoint                                               smithy.SchemaExtensions
+	eDescribeChannel                                                    smithy.SchemaExtensions
+	eDescribeHarvestJob                                                 smithy.SchemaExtensions
+	eDescribeOriginEndpoint                                             smithy.SchemaExtensions
+	eListChannels                                                       smithy.SchemaExtensions
+	eListHarvestJobs                                                    smithy.SchemaExtensions
+	eListOriginEndpoints                                                smithy.SchemaExtensions
+	eListTagsForResource                                                smithy.SchemaExtensions
+	eRotateChannelCredentials                                           smithy.SchemaExtensions
+	eRotateIngestEndpointCredentials                                    smithy.SchemaExtensions
+	eTagResource                                                        smithy.SchemaExtensions
+	eUntagResource                                                      smithy.SchemaExtensions
+	eUpdateChannel                                                      smithy.SchemaExtensions
+	eUpdateOriginEndpoint                                               smithy.SchemaExtensions
+	e_MediaPackage                                                      smithy.SchemaExtensions
+	e__AdTriggersElement                                                smithy.SchemaExtensions
+	e__AdTriggersElement_SPLICE_INSERT                                  smithy.SchemaExtensions
+	e__AdTriggersElement_BREAK                                          smithy.SchemaExtensions
+	e__AdTriggersElement_PROVIDER_ADVERTISEMENT                         smithy.SchemaExtensions
+	e__AdTriggersElement_DISTRIBUTOR_ADVERTISEMENT                      smithy.SchemaExtensions
+	e__AdTriggersElement_PROVIDER_PLACEMENT_OPPORTUNITY                 smithy.SchemaExtensions
+	e__AdTriggersElement_DISTRIBUTOR_PLACEMENT_OPPORTUNITY              smithy.SchemaExtensions
+	e__AdTriggersElement_PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY         smithy.SchemaExtensions
+	e__AdTriggersElement_DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY      smithy.SchemaExtensions
+	e___boolean                                                         smithy.SchemaExtensions
+	e___integer                                                         smithy.SchemaExtensions
+	e___listOf__PeriodTriggersElement                                   smithy.SchemaExtensions
+	e___listOf__PeriodTriggersElement_member                            smithy.SchemaExtensions
+	e___listOf__string                                                  smithy.SchemaExtensions
+	e___listOf__string_member                                           smithy.SchemaExtensions
+	e___listOfChannel                                                   smithy.SchemaExtensions
+	e___listOfChannel_member                                            smithy.SchemaExtensions
+	e___listOfHarvestJob                                                smithy.SchemaExtensions
+	e___listOfHarvestJob_member                                         smithy.SchemaExtensions
+	e___listOfHlsManifest                                               smithy.SchemaExtensions
+	e___listOfHlsManifest_member                                        smithy.SchemaExtensions
+	e___listOfHlsManifestCreateOrUpdateParameters                       smithy.SchemaExtensions
+	e___listOfHlsManifestCreateOrUpdateParameters_member                smithy.SchemaExtensions
+	e___listOfIngestEndpoint                                            smithy.SchemaExtensions
+	e___listOfIngestEndpoint_member                                     smithy.SchemaExtensions
+	e___listOfOriginEndpoint                                            smithy.SchemaExtensions
+	e___listOfOriginEndpoint_member                                     smithy.SchemaExtensions
+	e___mapOf__string                                                   smithy.SchemaExtensions
+	e___mapOf__string_key                                               smithy.SchemaExtensions
+	e___mapOf__string_value                                             smithy.SchemaExtensions
+	e__PeriodTriggersElement                                            smithy.SchemaExtensions
+	e__PeriodTriggersElement_ADS                                        smithy.SchemaExtensions
+	e___string                                                          smithy.SchemaExtensions
+	eAdMarkers                                                          smithy.SchemaExtensions
+	eAdMarkers_NONE                                                     smithy.SchemaExtensions
+	eAdMarkers_SCTE35_ENHANCED                                          smithy.SchemaExtensions
+	eAdMarkers_PASSTHROUGH                                              smithy.SchemaExtensions
+	eAdMarkers_DATERANGE                                                smithy.SchemaExtensions
+	eAdsOnDeliveryRestrictions                                          smithy.SchemaExtensions
+	eAdsOnDeliveryRestrictions_NONE                                     smithy.SchemaExtensions
+	eAdsOnDeliveryRestrictions_RESTRICTED                               smithy.SchemaExtensions
+	eAdsOnDeliveryRestrictions_UNRESTRICTED                             smithy.SchemaExtensions
+	eAdsOnDeliveryRestrictions_BOTH                                     smithy.SchemaExtensions
+	e_AdTriggers                                                        smithy.SchemaExtensions
+	e_AdTriggers_member                                                 smithy.SchemaExtensions
+	eAuthorization                                                      smithy.SchemaExtensions
+	eAuthorization_CdnIdentifierSecret                                  smithy.SchemaExtensions
+	eAuthorization_SecretsRoleArn                                       smithy.SchemaExtensions
+	eChannel                                                            smithy.SchemaExtensions
+	eChannel_Arn                                                        smithy.SchemaExtensions
+	eChannel_CreatedAt                                                  smithy.SchemaExtensions
+	eChannel_Description                                                smithy.SchemaExtensions
+	eChannel_EgressAccessLogs                                           smithy.SchemaExtensions
+	eChannel_HlsIngest                                                  smithy.SchemaExtensions
+	eChannel_Id                                                         smithy.SchemaExtensions
+	eChannel_IngressAccessLogs                                          smithy.SchemaExtensions
+	eChannel_Tags                                                       smithy.SchemaExtensions
+	eCmafEncryption                                                     smithy.SchemaExtensions
+	eCmafEncryption_ConstantInitializationVector                        smithy.SchemaExtensions
+	eCmafEncryption_EncryptionMethod                                    smithy.SchemaExtensions
+	eCmafEncryption_KeyRotationIntervalSeconds                          smithy.SchemaExtensions
+	eCmafEncryption_SpekeKeyProvider                                    smithy.SchemaExtensions
+	eCmafEncryptionMethod                                               smithy.SchemaExtensions
+	eCmafEncryptionMethod_SAMPLE_AES                                    smithy.SchemaExtensions
+	eCmafEncryptionMethod_AES_CTR                                       smithy.SchemaExtensions
+	eCmafPackage                                                        smithy.SchemaExtensions
+	eCmafPackage_Encryption                                             smithy.SchemaExtensions
+	eCmafPackage_HlsManifests                                           smithy.SchemaExtensions
+	eCmafPackage_SegmentDurationSeconds                                 smithy.SchemaExtensions
+	eCmafPackage_SegmentPrefix                                          smithy.SchemaExtensions
+	eCmafPackage_StreamSelection                                        smithy.SchemaExtensions
+	eCmafPackageCreateOrUpdateParameters                                smithy.SchemaExtensions
+	eCmafPackageCreateOrUpdateParameters_Encryption                     smithy.SchemaExtensions
+	eCmafPackageCreateOrUpdateParameters_HlsManifests                   smithy.SchemaExtensions
+	eCmafPackageCreateOrUpdateParameters_SegmentDurationSeconds         smithy.SchemaExtensions
+	eCmafPackageCreateOrUpdateParameters_SegmentPrefix                  smithy.SchemaExtensions
+	eCmafPackageCreateOrUpdateParameters_StreamSelection                smithy.SchemaExtensions
+	eDashEncryption                                                     smithy.SchemaExtensions
+	eDashEncryption_KeyRotationIntervalSeconds                          smithy.SchemaExtensions
+	eDashEncryption_SpekeKeyProvider                                    smithy.SchemaExtensions
+	eDashPackage                                                        smithy.SchemaExtensions
+	eDashPackage_AdTriggers                                             smithy.SchemaExtensions
+	eDashPackage_AdsOnDeliveryRestrictions                              smithy.SchemaExtensions
+	eDashPackage_Encryption                                             smithy.SchemaExtensions
+	eDashPackage_IncludeIframeOnlyStream                                smithy.SchemaExtensions
+	eDashPackage_ManifestLayout                                         smithy.SchemaExtensions
+	eDashPackage_ManifestWindowSeconds                                  smithy.SchemaExtensions
+	eDashPackage_MinBufferTimeSeconds                                   smithy.SchemaExtensions
+	eDashPackage_MinUpdatePeriodSeconds                                 smithy.SchemaExtensions
+	eDashPackage_PeriodTriggers                                         smithy.SchemaExtensions
+	eDashPackage_Profile                                                smithy.SchemaExtensions
+	eDashPackage_SegmentDurationSeconds                                 smithy.SchemaExtensions
+	eDashPackage_SegmentTemplateFormat                                  smithy.SchemaExtensions
+	eDashPackage_StreamSelection                                        smithy.SchemaExtensions
+	eDashPackage_SuggestedPresentationDelaySeconds                      smithy.SchemaExtensions
+	eDashPackage_UtcTiming                                              smithy.SchemaExtensions
+	eDashPackage_UtcTimingUri                                           smithy.SchemaExtensions
+	eEgressAccessLogs                                                   smithy.SchemaExtensions
+	eEgressAccessLogs_LogGroupName                                      smithy.SchemaExtensions
+	eEncryptionContractConfiguration                                    smithy.SchemaExtensions
+	eEncryptionContractConfiguration_PresetSpeke20Audio                 smithy.SchemaExtensions
+	eEncryptionContractConfiguration_PresetSpeke20Video                 smithy.SchemaExtensions
+	eEncryptionMethod                                                   smithy.SchemaExtensions
+	eEncryptionMethod_AES_128                                           smithy.SchemaExtensions
+	eEncryptionMethod_SAMPLE_AES                                        smithy.SchemaExtensions
+	eForbiddenException                                                 smithy.SchemaExtensions
+	eForbiddenException_Message                                         smithy.SchemaExtensions
+	eHarvestJob                                                         smithy.SchemaExtensions
+	eHarvestJob_Arn                                                     smithy.SchemaExtensions
+	eHarvestJob_ChannelId                                               smithy.SchemaExtensions
+	eHarvestJob_CreatedAt                                               smithy.SchemaExtensions
+	eHarvestJob_EndTime                                                 smithy.SchemaExtensions
+	eHarvestJob_Id                                                      smithy.SchemaExtensions
+	eHarvestJob_OriginEndpointId                                        smithy.SchemaExtensions
+	eHarvestJob_S3Destination                                           smithy.SchemaExtensions
+	eHarvestJob_StartTime                                               smithy.SchemaExtensions
+	eHarvestJob_Status                                                  smithy.SchemaExtensions
+	eHlsEncryption                                                      smithy.SchemaExtensions
+	eHlsEncryption_ConstantInitializationVector                         smithy.SchemaExtensions
+	eHlsEncryption_EncryptionMethod                                     smithy.SchemaExtensions
+	eHlsEncryption_KeyRotationIntervalSeconds                           smithy.SchemaExtensions
+	eHlsEncryption_RepeatExtXKey                                        smithy.SchemaExtensions
+	eHlsEncryption_SpekeKeyProvider                                     smithy.SchemaExtensions
+	eHlsIngest                                                          smithy.SchemaExtensions
+	eHlsIngest_IngestEndpoints                                          smithy.SchemaExtensions
+	eHlsManifest                                                        smithy.SchemaExtensions
+	eHlsManifest_AdMarkers                                              smithy.SchemaExtensions
+	eHlsManifest_Id                                                     smithy.SchemaExtensions
+	eHlsManifest_IncludeIframeOnlyStream                                smithy.SchemaExtensions
+	eHlsManifest_ManifestName                                           smithy.SchemaExtensions
+	eHlsManifest_PlaylistType                                           smithy.SchemaExtensions
+	eHlsManifest_PlaylistWindowSeconds                                  smithy.SchemaExtensions
+	eHlsManifest_ProgramDateTimeIntervalSeconds                         smithy.SchemaExtensions
+	eHlsManifest_Url                                                    smithy.SchemaExtensions
+	eHlsManifest_AdTriggers                                             smithy.SchemaExtensions
+	eHlsManifest_AdsOnDeliveryRestrictions                              smithy.SchemaExtensions
+	eHlsManifestCreateOrUpdateParameters                                smithy.SchemaExtensions
+	eHlsManifestCreateOrUpdateParameters_AdMarkers                      smithy.SchemaExtensions
+	eHlsManifestCreateOrUpdateParameters_AdTriggers                     smithy.SchemaExtensions
+	eHlsManifestCreateOrUpdateParameters_AdsOnDeliveryRestrictions      smithy.SchemaExtensions
+	eHlsManifestCreateOrUpdateParameters_Id                             smithy.SchemaExtensions
+	eHlsManifestCreateOrUpdateParameters_IncludeIframeOnlyStream        smithy.SchemaExtensions
+	eHlsManifestCreateOrUpdateParameters_ManifestName                   smithy.SchemaExtensions
+	eHlsManifestCreateOrUpdateParameters_PlaylistType                   smithy.SchemaExtensions
+	eHlsManifestCreateOrUpdateParameters_PlaylistWindowSeconds          smithy.SchemaExtensions
+	eHlsManifestCreateOrUpdateParameters_ProgramDateTimeIntervalSeconds smithy.SchemaExtensions
+	eHlsPackage                                                         smithy.SchemaExtensions
+	eHlsPackage_AdMarkers                                               smithy.SchemaExtensions
+	eHlsPackage_AdTriggers                                              smithy.SchemaExtensions
+	eHlsPackage_AdsOnDeliveryRestrictions                               smithy.SchemaExtensions
+	eHlsPackage_Encryption                                              smithy.SchemaExtensions
+	eHlsPackage_IncludeDvbSubtitles                                     smithy.SchemaExtensions
+	eHlsPackage_IncludeIframeOnlyStream                                 smithy.SchemaExtensions
+	eHlsPackage_PlaylistType                                            smithy.SchemaExtensions
+	eHlsPackage_PlaylistWindowSeconds                                   smithy.SchemaExtensions
+	eHlsPackage_ProgramDateTimeIntervalSeconds                          smithy.SchemaExtensions
+	eHlsPackage_SegmentDurationSeconds                                  smithy.SchemaExtensions
+	eHlsPackage_StreamSelection                                         smithy.SchemaExtensions
+	eHlsPackage_UseAudioRenditionGroup                                  smithy.SchemaExtensions
+	eIngestEndpoint                                                     smithy.SchemaExtensions
+	eIngestEndpoint_Id                                                  smithy.SchemaExtensions
+	eIngestEndpoint_Password                                            smithy.SchemaExtensions
+	eIngestEndpoint_Url                                                 smithy.SchemaExtensions
+	eIngestEndpoint_Username                                            smithy.SchemaExtensions
+	eIngressAccessLogs                                                  smithy.SchemaExtensions
+	eIngressAccessLogs_LogGroupName                                     smithy.SchemaExtensions
+	eInternalServerErrorException                                       smithy.SchemaExtensions
+	eInternalServerErrorException_Message                               smithy.SchemaExtensions
+	eManifestLayout                                                     smithy.SchemaExtensions
+	eManifestLayout_FULL                                                smithy.SchemaExtensions
+	eManifestLayout_COMPACT                                             smithy.SchemaExtensions
+	eManifestLayout_DRM_TOP_LEVEL_COMPACT                               smithy.SchemaExtensions
+	e_MaxResults                                                        smithy.SchemaExtensions
+	eMssEncryption                                                      smithy.SchemaExtensions
+	eMssEncryption_SpekeKeyProvider                                     smithy.SchemaExtensions
+	eMssPackage                                                         smithy.SchemaExtensions
+	eMssPackage_Encryption                                              smithy.SchemaExtensions
+	eMssPackage_ManifestWindowSeconds                                   smithy.SchemaExtensions
+	eMssPackage_SegmentDurationSeconds                                  smithy.SchemaExtensions
+	eMssPackage_StreamSelection                                         smithy.SchemaExtensions
+	eNotFoundException                                                  smithy.SchemaExtensions
+	eNotFoundException_Message                                          smithy.SchemaExtensions
+	eOrigination                                                        smithy.SchemaExtensions
+	eOrigination_ALLOW                                                  smithy.SchemaExtensions
+	eOrigination_DENY                                                   smithy.SchemaExtensions
+	eOriginEndpoint                                                     smithy.SchemaExtensions
+	eOriginEndpoint_Arn                                                 smithy.SchemaExtensions
+	eOriginEndpoint_Authorization                                       smithy.SchemaExtensions
+	eOriginEndpoint_ChannelId                                           smithy.SchemaExtensions
+	eOriginEndpoint_CmafPackage                                         smithy.SchemaExtensions
+	eOriginEndpoint_CreatedAt                                           smithy.SchemaExtensions
+	eOriginEndpoint_DashPackage                                         smithy.SchemaExtensions
+	eOriginEndpoint_Description                                         smithy.SchemaExtensions
+	eOriginEndpoint_HlsPackage                                          smithy.SchemaExtensions
+	eOriginEndpoint_Id                                                  smithy.SchemaExtensions
+	eOriginEndpoint_ManifestName                                        smithy.SchemaExtensions
+	eOriginEndpoint_MssPackage                                          smithy.SchemaExtensions
+	eOriginEndpoint_Origination                                         smithy.SchemaExtensions
+	eOriginEndpoint_StartoverWindowSeconds                              smithy.SchemaExtensions
+	eOriginEndpoint_Tags                                                smithy.SchemaExtensions
+	eOriginEndpoint_TimeDelaySeconds                                    smithy.SchemaExtensions
+	eOriginEndpoint_Url                                                 smithy.SchemaExtensions
+	eOriginEndpoint_Whitelist                                           smithy.SchemaExtensions
+	ePlaylistType                                                       smithy.SchemaExtensions
+	ePlaylistType_NONE                                                  smithy.SchemaExtensions
+	ePlaylistType_EVENT                                                 smithy.SchemaExtensions
+	ePlaylistType_VOD                                                   smithy.SchemaExtensions
+	ePresetSpeke20Audio                                                 smithy.SchemaExtensions
+	ePresetSpeke20Audio_PRESET_AUDIO_1                                  smithy.SchemaExtensions
+	ePresetSpeke20Audio_PRESET_AUDIO_2                                  smithy.SchemaExtensions
+	ePresetSpeke20Audio_PRESET_AUDIO_3                                  smithy.SchemaExtensions
+	ePresetSpeke20Audio_SHARED                                          smithy.SchemaExtensions
+	ePresetSpeke20Audio_UNENCRYPTED                                     smithy.SchemaExtensions
+	ePresetSpeke20Video                                                 smithy.SchemaExtensions
+	ePresetSpeke20Video_PRESET_VIDEO_1                                  smithy.SchemaExtensions
+	ePresetSpeke20Video_PRESET_VIDEO_2                                  smithy.SchemaExtensions
+	ePresetSpeke20Video_PRESET_VIDEO_3                                  smithy.SchemaExtensions
+	ePresetSpeke20Video_PRESET_VIDEO_4                                  smithy.SchemaExtensions
+	ePresetSpeke20Video_PRESET_VIDEO_5                                  smithy.SchemaExtensions
+	ePresetSpeke20Video_PRESET_VIDEO_6                                  smithy.SchemaExtensions
+	ePresetSpeke20Video_PRESET_VIDEO_7                                  smithy.SchemaExtensions
+	ePresetSpeke20Video_PRESET_VIDEO_8                                  smithy.SchemaExtensions
+	ePresetSpeke20Video_SHARED                                          smithy.SchemaExtensions
+	ePresetSpeke20Video_UNENCRYPTED                                     smithy.SchemaExtensions
+	eProfile                                                            smithy.SchemaExtensions
+	eProfile_NONE                                                       smithy.SchemaExtensions
+	eProfile_HBBTV_1_5                                                  smithy.SchemaExtensions
+	eProfile_HYBRIDCAST                                                 smithy.SchemaExtensions
+	eProfile_DVB_DASH_2014                                              smithy.SchemaExtensions
+	eS3Destination                                                      smithy.SchemaExtensions
+	eS3Destination_BucketName                                           smithy.SchemaExtensions
+	eS3Destination_ManifestKey                                          smithy.SchemaExtensions
+	eS3Destination_RoleArn                                              smithy.SchemaExtensions
+	eSegmentTemplateFormat                                              smithy.SchemaExtensions
+	eSegmentTemplateFormat_NUMBER_WITH_TIMELINE                         smithy.SchemaExtensions
+	eSegmentTemplateFormat_TIME_WITH_TIMELINE                           smithy.SchemaExtensions
+	eSegmentTemplateFormat_NUMBER_WITH_DURATION                         smithy.SchemaExtensions
+	e_SensitiveString                                                   smithy.SchemaExtensions
+	eServiceUnavailableException                                        smithy.SchemaExtensions
+	eServiceUnavailableException_Message                                smithy.SchemaExtensions
+	eSpekeKeyProvider                                                   smithy.SchemaExtensions
+	eSpekeKeyProvider_CertificateArn                                    smithy.SchemaExtensions
+	eSpekeKeyProvider_EncryptionContractConfiguration                   smithy.SchemaExtensions
+	eSpekeKeyProvider_ResourceId                                        smithy.SchemaExtensions
+	eSpekeKeyProvider_RoleArn                                           smithy.SchemaExtensions
+	eSpekeKeyProvider_SystemIds                                         smithy.SchemaExtensions
+	eSpekeKeyProvider_Url                                               smithy.SchemaExtensions
+	eStatus                                                             smithy.SchemaExtensions
+	eStatus_IN_PROGRESS                                                 smithy.SchemaExtensions
+	eStatus_SUCCEEDED                                                   smithy.SchemaExtensions
+	eStatus_FAILED                                                      smithy.SchemaExtensions
+	eStreamOrder                                                        smithy.SchemaExtensions
+	eStreamOrder_ORIGINAL                                               smithy.SchemaExtensions
+	eStreamOrder_VIDEO_BITRATE_ASCENDING                                smithy.SchemaExtensions
+	eStreamOrder_VIDEO_BITRATE_DESCENDING                               smithy.SchemaExtensions
+	eStreamSelection                                                    smithy.SchemaExtensions
+	eStreamSelection_MaxVideoBitsPerSecond                              smithy.SchemaExtensions
+	eStreamSelection_MinVideoBitsPerSecond                              smithy.SchemaExtensions
+	eStreamSelection_StreamOrder                                        smithy.SchemaExtensions
+	e_Tags                                                              smithy.SchemaExtensions
+	e_Tags_key                                                          smithy.SchemaExtensions
+	e_Tags_value                                                        smithy.SchemaExtensions
+	eTooManyRequestsException                                           smithy.SchemaExtensions
+	eTooManyRequestsException_Message                                   smithy.SchemaExtensions
+	eUnprocessableEntityException                                       smithy.SchemaExtensions
+	eUnprocessableEntityException_Message                               smithy.SchemaExtensions
+	eUtcTiming                                                          smithy.SchemaExtensions
+	eUtcTiming_NONE                                                     smithy.SchemaExtensions
+	eUtcTiming_HTTP_HEAD                                                smithy.SchemaExtensions
+	eUtcTiming_HTTP_ISO                                                 smithy.SchemaExtensions
+	eUtcTiming_HTTP_XSDATE                                              smithy.SchemaExtensions
+	eConfigureLogsRequest                                               smithy.SchemaExtensions
+	eConfigureLogsRequest_EgressAccessLogs                              smithy.SchemaExtensions
+	eConfigureLogsRequest_Id                                            smithy.SchemaExtensions
+	eConfigureLogsRequest_IngressAccessLogs                             smithy.SchemaExtensions
+	eConfigureLogsResponse                                              smithy.SchemaExtensions
+	eConfigureLogsResponse_Arn                                          smithy.SchemaExtensions
+	eConfigureLogsResponse_CreatedAt                                    smithy.SchemaExtensions
+	eConfigureLogsResponse_Description                                  smithy.SchemaExtensions
+	eConfigureLogsResponse_EgressAccessLogs                             smithy.SchemaExtensions
+	eConfigureLogsResponse_HlsIngest                                    smithy.SchemaExtensions
+	eConfigureLogsResponse_Id                                           smithy.SchemaExtensions
+	eConfigureLogsResponse_IngressAccessLogs                            smithy.SchemaExtensions
+	eConfigureLogsResponse_Tags                                         smithy.SchemaExtensions
+	eCreateChannelRequest                                               smithy.SchemaExtensions
+	eCreateChannelRequest_Description                                   smithy.SchemaExtensions
+	eCreateChannelRequest_Id                                            smithy.SchemaExtensions
+	eCreateChannelRequest_Tags                                          smithy.SchemaExtensions
+	eCreateChannelResponse                                              smithy.SchemaExtensions
+	eCreateChannelResponse_Arn                                          smithy.SchemaExtensions
+	eCreateChannelResponse_CreatedAt                                    smithy.SchemaExtensions
+	eCreateChannelResponse_Description                                  smithy.SchemaExtensions
+	eCreateChannelResponse_EgressAccessLogs                             smithy.SchemaExtensions
+	eCreateChannelResponse_HlsIngest                                    smithy.SchemaExtensions
+	eCreateChannelResponse_Id                                           smithy.SchemaExtensions
+	eCreateChannelResponse_IngressAccessLogs                            smithy.SchemaExtensions
+	eCreateChannelResponse_Tags                                         smithy.SchemaExtensions
+	eCreateHarvestJobRequest                                            smithy.SchemaExtensions
+	eCreateHarvestJobRequest_EndTime                                    smithy.SchemaExtensions
+	eCreateHarvestJobRequest_Id                                         smithy.SchemaExtensions
+	eCreateHarvestJobRequest_OriginEndpointId                           smithy.SchemaExtensions
+	eCreateHarvestJobRequest_S3Destination                              smithy.SchemaExtensions
+	eCreateHarvestJobRequest_StartTime                                  smithy.SchemaExtensions
+	eCreateHarvestJobResponse                                           smithy.SchemaExtensions
+	eCreateHarvestJobResponse_Arn                                       smithy.SchemaExtensions
+	eCreateHarvestJobResponse_ChannelId                                 smithy.SchemaExtensions
+	eCreateHarvestJobResponse_CreatedAt                                 smithy.SchemaExtensions
+	eCreateHarvestJobResponse_EndTime                                   smithy.SchemaExtensions
+	eCreateHarvestJobResponse_Id                                        smithy.SchemaExtensions
+	eCreateHarvestJobResponse_OriginEndpointId                          smithy.SchemaExtensions
+	eCreateHarvestJobResponse_S3Destination                             smithy.SchemaExtensions
+	eCreateHarvestJobResponse_StartTime                                 smithy.SchemaExtensions
+	eCreateHarvestJobResponse_Status                                    smithy.SchemaExtensions
+	eCreateOriginEndpointRequest                                        smithy.SchemaExtensions
+	eCreateOriginEndpointRequest_Authorization                          smithy.SchemaExtensions
+	eCreateOriginEndpointRequest_ChannelId                              smithy.SchemaExtensions
+	eCreateOriginEndpointRequest_CmafPackage                            smithy.SchemaExtensions
+	eCreateOriginEndpointRequest_DashPackage                            smithy.SchemaExtensions
+	eCreateOriginEndpointRequest_Description                            smithy.SchemaExtensions
+	eCreateOriginEndpointRequest_HlsPackage                             smithy.SchemaExtensions
+	eCreateOriginEndpointRequest_Id                                     smithy.SchemaExtensions
+	eCreateOriginEndpointRequest_ManifestName                           smithy.SchemaExtensions
+	eCreateOriginEndpointRequest_MssPackage                             smithy.SchemaExtensions
+	eCreateOriginEndpointRequest_Origination                            smithy.SchemaExtensions
+	eCreateOriginEndpointRequest_StartoverWindowSeconds                 smithy.SchemaExtensions
+	eCreateOriginEndpointRequest_Tags                                   smithy.SchemaExtensions
+	eCreateOriginEndpointRequest_TimeDelaySeconds                       smithy.SchemaExtensions
+	eCreateOriginEndpointRequest_Whitelist                              smithy.SchemaExtensions
+	eCreateOriginEndpointResponse                                       smithy.SchemaExtensions
+	eCreateOriginEndpointResponse_Arn                                   smithy.SchemaExtensions
+	eCreateOriginEndpointResponse_Authorization                         smithy.SchemaExtensions
+	eCreateOriginEndpointResponse_ChannelId                             smithy.SchemaExtensions
+	eCreateOriginEndpointResponse_CmafPackage                           smithy.SchemaExtensions
+	eCreateOriginEndpointResponse_CreatedAt                             smithy.SchemaExtensions
+	eCreateOriginEndpointResponse_DashPackage                           smithy.SchemaExtensions
+	eCreateOriginEndpointResponse_Description                           smithy.SchemaExtensions
+	eCreateOriginEndpointResponse_HlsPackage                            smithy.SchemaExtensions
+	eCreateOriginEndpointResponse_Id                                    smithy.SchemaExtensions
+	eCreateOriginEndpointResponse_ManifestName                          smithy.SchemaExtensions
+	eCreateOriginEndpointResponse_MssPackage                            smithy.SchemaExtensions
+	eCreateOriginEndpointResponse_Origination                           smithy.SchemaExtensions
+	eCreateOriginEndpointResponse_StartoverWindowSeconds                smithy.SchemaExtensions
+	eCreateOriginEndpointResponse_Tags                                  smithy.SchemaExtensions
+	eCreateOriginEndpointResponse_TimeDelaySeconds                      smithy.SchemaExtensions
+	eCreateOriginEndpointResponse_Url                                   smithy.SchemaExtensions
+	eCreateOriginEndpointResponse_Whitelist                             smithy.SchemaExtensions
+	eDeleteChannelRequest                                               smithy.SchemaExtensions
+	eDeleteChannelRequest_Id                                            smithy.SchemaExtensions
+	eDeleteChannelResponse                                              smithy.SchemaExtensions
+	eDeleteOriginEndpointRequest                                        smithy.SchemaExtensions
+	eDeleteOriginEndpointRequest_Id                                     smithy.SchemaExtensions
+	eDeleteOriginEndpointResponse                                       smithy.SchemaExtensions
+	eDescribeChannelRequest                                             smithy.SchemaExtensions
+	eDescribeChannelRequest_Id                                          smithy.SchemaExtensions
+	eDescribeChannelResponse                                            smithy.SchemaExtensions
+	eDescribeChannelResponse_Arn                                        smithy.SchemaExtensions
+	eDescribeChannelResponse_CreatedAt                                  smithy.SchemaExtensions
+	eDescribeChannelResponse_Description                                smithy.SchemaExtensions
+	eDescribeChannelResponse_EgressAccessLogs                           smithy.SchemaExtensions
+	eDescribeChannelResponse_HlsIngest                                  smithy.SchemaExtensions
+	eDescribeChannelResponse_Id                                         smithy.SchemaExtensions
+	eDescribeChannelResponse_IngressAccessLogs                          smithy.SchemaExtensions
+	eDescribeChannelResponse_Tags                                       smithy.SchemaExtensions
+	eDescribeHarvestJobRequest                                          smithy.SchemaExtensions
+	eDescribeHarvestJobRequest_Id                                       smithy.SchemaExtensions
+	eDescribeHarvestJobResponse                                         smithy.SchemaExtensions
+	eDescribeHarvestJobResponse_Arn                                     smithy.SchemaExtensions
+	eDescribeHarvestJobResponse_ChannelId                               smithy.SchemaExtensions
+	eDescribeHarvestJobResponse_CreatedAt                               smithy.SchemaExtensions
+	eDescribeHarvestJobResponse_EndTime                                 smithy.SchemaExtensions
+	eDescribeHarvestJobResponse_Id                                      smithy.SchemaExtensions
+	eDescribeHarvestJobResponse_OriginEndpointId                        smithy.SchemaExtensions
+	eDescribeHarvestJobResponse_S3Destination                           smithy.SchemaExtensions
+	eDescribeHarvestJobResponse_StartTime                               smithy.SchemaExtensions
+	eDescribeHarvestJobResponse_Status                                  smithy.SchemaExtensions
+	eDescribeOriginEndpointRequest                                      smithy.SchemaExtensions
+	eDescribeOriginEndpointRequest_Id                                   smithy.SchemaExtensions
+	eDescribeOriginEndpointResponse                                     smithy.SchemaExtensions
+	eDescribeOriginEndpointResponse_Arn                                 smithy.SchemaExtensions
+	eDescribeOriginEndpointResponse_Authorization                       smithy.SchemaExtensions
+	eDescribeOriginEndpointResponse_ChannelId                           smithy.SchemaExtensions
+	eDescribeOriginEndpointResponse_CmafPackage                         smithy.SchemaExtensions
+	eDescribeOriginEndpointResponse_CreatedAt                           smithy.SchemaExtensions
+	eDescribeOriginEndpointResponse_DashPackage                         smithy.SchemaExtensions
+	eDescribeOriginEndpointResponse_Description                         smithy.SchemaExtensions
+	eDescribeOriginEndpointResponse_HlsPackage                          smithy.SchemaExtensions
+	eDescribeOriginEndpointResponse_Id                                  smithy.SchemaExtensions
+	eDescribeOriginEndpointResponse_ManifestName                        smithy.SchemaExtensions
+	eDescribeOriginEndpointResponse_MssPackage                          smithy.SchemaExtensions
+	eDescribeOriginEndpointResponse_Origination                         smithy.SchemaExtensions
+	eDescribeOriginEndpointResponse_StartoverWindowSeconds              smithy.SchemaExtensions
+	eDescribeOriginEndpointResponse_Tags                                smithy.SchemaExtensions
+	eDescribeOriginEndpointResponse_TimeDelaySeconds                    smithy.SchemaExtensions
+	eDescribeOriginEndpointResponse_Url                                 smithy.SchemaExtensions
+	eDescribeOriginEndpointResponse_Whitelist                           smithy.SchemaExtensions
+	eListChannelsRequest                                                smithy.SchemaExtensions
+	eListChannelsRequest_MaxResults                                     smithy.SchemaExtensions
+	eListChannelsRequest_NextToken                                      smithy.SchemaExtensions
+	eListChannelsResponse                                               smithy.SchemaExtensions
+	eListChannelsResponse_Channels                                      smithy.SchemaExtensions
+	eListChannelsResponse_NextToken                                     smithy.SchemaExtensions
+	eListHarvestJobsRequest                                             smithy.SchemaExtensions
+	eListHarvestJobsRequest_IncludeChannelId                            smithy.SchemaExtensions
+	eListHarvestJobsRequest_IncludeStatus                               smithy.SchemaExtensions
+	eListHarvestJobsRequest_MaxResults                                  smithy.SchemaExtensions
+	eListHarvestJobsRequest_NextToken                                   smithy.SchemaExtensions
+	eListHarvestJobsResponse                                            smithy.SchemaExtensions
+	eListHarvestJobsResponse_HarvestJobs                                smithy.SchemaExtensions
+	eListHarvestJobsResponse_NextToken                                  smithy.SchemaExtensions
+	eListOriginEndpointsRequest                                         smithy.SchemaExtensions
+	eListOriginEndpointsRequest_ChannelId                               smithy.SchemaExtensions
+	eListOriginEndpointsRequest_MaxResults                              smithy.SchemaExtensions
+	eListOriginEndpointsRequest_NextToken                               smithy.SchemaExtensions
+	eListOriginEndpointsResponse                                        smithy.SchemaExtensions
+	eListOriginEndpointsResponse_NextToken                              smithy.SchemaExtensions
+	eListOriginEndpointsResponse_OriginEndpoints                        smithy.SchemaExtensions
+	eListTagsForResourceRequest                                         smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn                             smithy.SchemaExtensions
+	eListTagsForResourceResponse                                        smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                                   smithy.SchemaExtensions
+	eRotateChannelCredentialsRequest                                    smithy.SchemaExtensions
+	eRotateChannelCredentialsRequest_Id                                 smithy.SchemaExtensions
+	eRotateChannelCredentialsResponse                                   smithy.SchemaExtensions
+	eRotateChannelCredentialsResponse_Arn                               smithy.SchemaExtensions
+	eRotateChannelCredentialsResponse_CreatedAt                         smithy.SchemaExtensions
+	eRotateChannelCredentialsResponse_Description                       smithy.SchemaExtensions
+	eRotateChannelCredentialsResponse_EgressAccessLogs                  smithy.SchemaExtensions
+	eRotateChannelCredentialsResponse_HlsIngest                         smithy.SchemaExtensions
+	eRotateChannelCredentialsResponse_Id                                smithy.SchemaExtensions
+	eRotateChannelCredentialsResponse_IngressAccessLogs                 smithy.SchemaExtensions
+	eRotateChannelCredentialsResponse_Tags                              smithy.SchemaExtensions
+	eRotateIngestEndpointCredentialsRequest                             smithy.SchemaExtensions
+	eRotateIngestEndpointCredentialsRequest_Id                          smithy.SchemaExtensions
+	eRotateIngestEndpointCredentialsRequest_IngestEndpointId            smithy.SchemaExtensions
+	eRotateIngestEndpointCredentialsResponse                            smithy.SchemaExtensions
+	eRotateIngestEndpointCredentialsResponse_Arn                        smithy.SchemaExtensions
+	eRotateIngestEndpointCredentialsResponse_CreatedAt                  smithy.SchemaExtensions
+	eRotateIngestEndpointCredentialsResponse_Description                smithy.SchemaExtensions
+	eRotateIngestEndpointCredentialsResponse_EgressAccessLogs           smithy.SchemaExtensions
+	eRotateIngestEndpointCredentialsResponse_HlsIngest                  smithy.SchemaExtensions
+	eRotateIngestEndpointCredentialsResponse_Id                         smithy.SchemaExtensions
+	eRotateIngestEndpointCredentialsResponse_IngressAccessLogs          smithy.SchemaExtensions
+	eRotateIngestEndpointCredentialsResponse_Tags                       smithy.SchemaExtensions
+	eTagResourceRequest                                                 smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                                     smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                            smithy.SchemaExtensions
+	eUntagResourceRequest                                               smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                                   smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                       smithy.SchemaExtensions
+	eUpdateChannelRequest                                               smithy.SchemaExtensions
+	eUpdateChannelRequest_Description                                   smithy.SchemaExtensions
+	eUpdateChannelRequest_Id                                            smithy.SchemaExtensions
+	eUpdateChannelResponse                                              smithy.SchemaExtensions
+	eUpdateChannelResponse_Arn                                          smithy.SchemaExtensions
+	eUpdateChannelResponse_CreatedAt                                    smithy.SchemaExtensions
+	eUpdateChannelResponse_Description                                  smithy.SchemaExtensions
+	eUpdateChannelResponse_EgressAccessLogs                             smithy.SchemaExtensions
+	eUpdateChannelResponse_HlsIngest                                    smithy.SchemaExtensions
+	eUpdateChannelResponse_Id                                           smithy.SchemaExtensions
+	eUpdateChannelResponse_IngressAccessLogs                            smithy.SchemaExtensions
+	eUpdateChannelResponse_Tags                                         smithy.SchemaExtensions
+	eUpdateOriginEndpointRequest                                        smithy.SchemaExtensions
+	eUpdateOriginEndpointRequest_Authorization                          smithy.SchemaExtensions
+	eUpdateOriginEndpointRequest_CmafPackage                            smithy.SchemaExtensions
+	eUpdateOriginEndpointRequest_DashPackage                            smithy.SchemaExtensions
+	eUpdateOriginEndpointRequest_Description                            smithy.SchemaExtensions
+	eUpdateOriginEndpointRequest_HlsPackage                             smithy.SchemaExtensions
+	eUpdateOriginEndpointRequest_Id                                     smithy.SchemaExtensions
+	eUpdateOriginEndpointRequest_ManifestName                           smithy.SchemaExtensions
+	eUpdateOriginEndpointRequest_MssPackage                             smithy.SchemaExtensions
+	eUpdateOriginEndpointRequest_Origination                            smithy.SchemaExtensions
+	eUpdateOriginEndpointRequest_StartoverWindowSeconds                 smithy.SchemaExtensions
+	eUpdateOriginEndpointRequest_TimeDelaySeconds                       smithy.SchemaExtensions
+	eUpdateOriginEndpointRequest_Whitelist                              smithy.SchemaExtensions
+	eUpdateOriginEndpointResponse                                       smithy.SchemaExtensions
+	eUpdateOriginEndpointResponse_Arn                                   smithy.SchemaExtensions
+	eUpdateOriginEndpointResponse_Authorization                         smithy.SchemaExtensions
+	eUpdateOriginEndpointResponse_ChannelId                             smithy.SchemaExtensions
+	eUpdateOriginEndpointResponse_CmafPackage                           smithy.SchemaExtensions
+	eUpdateOriginEndpointResponse_CreatedAt                             smithy.SchemaExtensions
+	eUpdateOriginEndpointResponse_DashPackage                           smithy.SchemaExtensions
+	eUpdateOriginEndpointResponse_Description                           smithy.SchemaExtensions
+	eUpdateOriginEndpointResponse_HlsPackage                            smithy.SchemaExtensions
+	eUpdateOriginEndpointResponse_Id                                    smithy.SchemaExtensions
+	eUpdateOriginEndpointResponse_ManifestName                          smithy.SchemaExtensions
+	eUpdateOriginEndpointResponse_MssPackage                            smithy.SchemaExtensions
+	eUpdateOriginEndpointResponse_Origination                           smithy.SchemaExtensions
+	eUpdateOriginEndpointResponse_StartoverWindowSeconds                smithy.SchemaExtensions
+	eUpdateOriginEndpointResponse_Tags                                  smithy.SchemaExtensions
+	eUpdateOriginEndpointResponse_TimeDelaySeconds                      smithy.SchemaExtensions
+	eUpdateOriginEndpointResponse_Url                                   smithy.SchemaExtensions
+	eUpdateOriginEndpointResponse_Whitelist                             smithy.SchemaExtensions
+)
 
 var (
 	iConfigureLogs                                = smithy.ShapeID{Namespace: "com.amazonaws.mediapackage", Name: "ConfigureLogs"}
@@ -418,519 +929,519 @@ var mUpdateOriginEndpointResponse = smithy.SchemaMembers{List: []*smithy.Schema{
 	0, 0, 0, 12, 0, 0, 0, 0, 5, 0, 14, 0, 8, 4, 0, 10,
 }}
 
-var sConfigureLogs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigureLogs, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCreateChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannel, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sCreateHarvestJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHarvestJob, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sCreateOriginEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOriginEndpoint, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sDeleteChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannel, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sDeleteOriginEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteOriginEndpoint, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sDescribeChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannel, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sDescribeHarvestJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHarvestJob, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sDescribeOriginEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeOriginEndpoint, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sListChannels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannels, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sListHarvestJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHarvestJobs, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sListOriginEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOriginEndpoints, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sRotateChannelCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateChannelCredentials, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sRotateIngestEndpointCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateIngestEndpointCredentials, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sUpdateChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannel, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sUpdateOriginEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateOriginEndpoint, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var s_MediaPackage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MediaPackage, Type: smithy.ShapeTypeService, Ext: &ext[19]})
-var s__AdTriggersElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i__AdTriggersElement, Members: &m__AdTriggersElement, Type: smithy.ShapeTypeEnum, Ext: &ext[20]})
-var s___boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[29]})
-var s___integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &ext[30]})
-var s___listOf__PeriodTriggersElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOf__PeriodTriggersElement, Members: &m___listOf__PeriodTriggersElement, Type: smithy.ShapeTypeList, Ext: &ext[31]})
-var s___listOf__string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOf__string, Members: &m___listOf__string, Type: smithy.ShapeTypeList, Ext: &ext[33]})
-var s___listOfChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfChannel, Members: &m___listOfChannel, Type: smithy.ShapeTypeList, Ext: &ext[35]})
-var s___listOfHarvestJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfHarvestJob, Members: &m___listOfHarvestJob, Type: smithy.ShapeTypeList, Ext: &ext[37]})
-var s___listOfHlsManifest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfHlsManifest, Members: &m___listOfHlsManifest, Type: smithy.ShapeTypeList, Ext: &ext[39]})
-var s___listOfHlsManifestCreateOrUpdateParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfHlsManifestCreateOrUpdateParameters, Members: &m___listOfHlsManifestCreateOrUpdateParameters, Type: smithy.ShapeTypeList, Ext: &ext[41]})
-var s___listOfIngestEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfIngestEndpoint, Members: &m___listOfIngestEndpoint, Type: smithy.ShapeTypeList, Ext: &ext[43]})
-var s___listOfOriginEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfOriginEndpoint, Members: &m___listOfOriginEndpoint, Type: smithy.ShapeTypeList, Ext: &ext[45]})
-var s___mapOf__string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___mapOf__string, Members: &m___mapOf__string, Type: smithy.ShapeTypeMap, Ext: &ext[47]})
-var s__PeriodTriggersElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i__PeriodTriggersElement, Members: &m__PeriodTriggersElement, Type: smithy.ShapeTypeEnum, Ext: &ext[50]})
-var s___string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var sAdMarkers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdMarkers, Members: &mAdMarkers, Type: smithy.ShapeTypeEnum, Ext: &ext[53]})
-var sAdsOnDeliveryRestrictions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdsOnDeliveryRestrictions, Members: &mAdsOnDeliveryRestrictions, Type: smithy.ShapeTypeEnum, Ext: &ext[58]})
-var s_AdTriggers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdTriggers, Members: &m_AdTriggers, Type: smithy.ShapeTypeList, Ext: &ext[63]})
-var sAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthorization, Members: &mAuthorization, Type: smithy.ShapeTypeStructure, Ext: &ext[65]})
-var sChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannel, Members: &mChannel, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var sCmafEncryption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCmafEncryption, Members: &mCmafEncryption, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
-var sCmafEncryptionMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCmafEncryptionMethod, Members: &mCmafEncryptionMethod, Type: smithy.ShapeTypeEnum, Ext: &ext[82]})
-var sCmafPackage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCmafPackage, Members: &mCmafPackage, Type: smithy.ShapeTypeStructure, Ext: &ext[85]})
-var sCmafPackageCreateOrUpdateParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCmafPackageCreateOrUpdateParameters, Members: &mCmafPackageCreateOrUpdateParameters, Type: smithy.ShapeTypeStructure, Ext: &ext[91]})
-var sDashEncryption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashEncryption, Members: &mDashEncryption, Type: smithy.ShapeTypeStructure, Ext: &ext[97]})
-var sDashPackage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashPackage, Members: &mDashPackage, Type: smithy.ShapeTypeStructure, Ext: &ext[100]})
-var sEgressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEgressAccessLogs, Members: &mEgressAccessLogs, Type: smithy.ShapeTypeStructure, Ext: &ext[117]})
-var sEncryptionContractConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionContractConfiguration, Members: &mEncryptionContractConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[119]})
-var sEncryptionMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionMethod, Members: &mEncryptionMethod, Type: smithy.ShapeTypeEnum, Ext: &ext[122]})
-var sForbiddenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForbiddenException, Members: &mForbiddenException, Traits: &t54, Type: smithy.ShapeTypeStructure, Ext: &ext[125]})
-var sHarvestJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHarvestJob, Members: &mHarvestJob, Type: smithy.ShapeTypeStructure, Ext: &ext[127]})
-var sHlsEncryption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHlsEncryption, Members: &mHlsEncryption, Type: smithy.ShapeTypeStructure, Ext: &ext[137]})
-var sHlsIngest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHlsIngest, Members: &mHlsIngest, Type: smithy.ShapeTypeStructure, Ext: &ext[143]})
-var sHlsManifest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHlsManifest, Members: &mHlsManifest, Type: smithy.ShapeTypeStructure, Ext: &ext[145]})
-var sHlsManifestCreateOrUpdateParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHlsManifestCreateOrUpdateParameters, Members: &mHlsManifestCreateOrUpdateParameters, Type: smithy.ShapeTypeStructure, Ext: &ext[156]})
-var sHlsPackage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHlsPackage, Members: &mHlsPackage, Type: smithy.ShapeTypeStructure, Ext: &ext[166]})
-var sIngestEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestEndpoint, Members: &mIngestEndpoint, Type: smithy.ShapeTypeStructure, Ext: &ext[179]})
-var sIngressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressAccessLogs, Members: &mIngressAccessLogs, Type: smithy.ShapeTypeStructure, Ext: &ext[184]})
-var sInternalServerErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerErrorException, Members: &mInternalServerErrorException, Traits: &t74, Type: smithy.ShapeTypeStructure, Ext: &ext[186]})
-var sManifestLayout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManifestLayout, Members: &mManifestLayout, Type: smithy.ShapeTypeEnum, Ext: &ext[188]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[192]})
-var sMssEncryption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMssEncryption, Members: &mMssEncryption, Type: smithy.ShapeTypeStructure, Ext: &ext[193]})
-var sMssPackage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMssPackage, Members: &mMssPackage, Type: smithy.ShapeTypeStructure, Ext: &ext[195]})
-var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t75, Type: smithy.ShapeTypeStructure, Ext: &ext[200]})
-var sOrigination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrigination, Members: &mOrigination, Type: smithy.ShapeTypeEnum, Ext: &ext[202]})
-var sOriginEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOriginEndpoint, Members: &mOriginEndpoint, Type: smithy.ShapeTypeStructure, Ext: &ext[205]})
-var sPlaylistType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlaylistType, Members: &mPlaylistType, Type: smithy.ShapeTypeEnum, Ext: &ext[223]})
-var sPresetSpeke20Audio = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPresetSpeke20Audio, Members: &mPresetSpeke20Audio, Type: smithy.ShapeTypeEnum, Ext: &ext[227]})
-var sPresetSpeke20Video = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPresetSpeke20Video, Members: &mPresetSpeke20Video, Type: smithy.ShapeTypeEnum, Ext: &ext[233]})
-var sProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProfile, Members: &mProfile, Type: smithy.ShapeTypeEnum, Ext: &ext[244]})
-var sS3Destination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Destination, Members: &mS3Destination, Type: smithy.ShapeTypeStructure, Ext: &ext[249]})
-var sSegmentTemplateFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSegmentTemplateFormat, Members: &mSegmentTemplateFormat, Type: smithy.ShapeTypeEnum, Ext: &ext[253]})
-var s_SensitiveString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveString, Traits: &t88, Type: smithy.ShapeTypeString, Ext: &ext[257]})
-var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t89, Type: smithy.ShapeTypeStructure, Ext: &ext[258]})
-var sSpekeKeyProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpekeKeyProvider, Members: &mSpekeKeyProvider, Type: smithy.ShapeTypeStructure, Ext: &ext[260]})
-var sStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[267]})
-var sStreamOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamOrder, Members: &mStreamOrder, Type: smithy.ShapeTypeEnum, Ext: &ext[271]})
-var sStreamSelection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamSelection, Members: &mStreamSelection, Type: smithy.ShapeTypeStructure, Ext: &ext[275]})
-var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[279]})
-var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t97, Type: smithy.ShapeTypeStructure, Ext: &ext[282]})
-var sUnprocessableEntityException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnprocessableEntityException, Members: &mUnprocessableEntityException, Traits: &t98, Type: smithy.ShapeTypeStructure, Ext: &ext[284]})
-var sUtcTiming = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUtcTiming, Members: &mUtcTiming, Type: smithy.ShapeTypeEnum, Ext: &ext[286]})
-var sConfigureLogsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigureLogsRequest, Members: &mConfigureLogsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[291]})
-var sConfigureLogsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigureLogsResponse, Members: &mConfigureLogsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[295]})
-var sCreateChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelRequest, Members: &mCreateChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[304]})
-var sCreateChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelResponse, Members: &mCreateChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[308]})
-var sCreateHarvestJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHarvestJobRequest, Members: &mCreateHarvestJobRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[317]})
-var sCreateHarvestJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHarvestJobResponse, Members: &mCreateHarvestJobResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[323]})
-var sCreateOriginEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOriginEndpointRequest, Members: &mCreateOriginEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[333]})
-var sCreateOriginEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOriginEndpointResponse, Members: &mCreateOriginEndpointResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[348]})
-var sDeleteChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelRequest, Members: &mDeleteChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[366]})
-var sDeleteChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[368]})
-var sDeleteOriginEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteOriginEndpointRequest, Members: &mDeleteOriginEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[369]})
-var sDeleteOriginEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteOriginEndpointResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[371]})
-var sDescribeChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelRequest, Members: &mDescribeChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[372]})
-var sDescribeChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelResponse, Members: &mDescribeChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[374]})
-var sDescribeHarvestJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHarvestJobRequest, Members: &mDescribeHarvestJobRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[383]})
-var sDescribeHarvestJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHarvestJobResponse, Members: &mDescribeHarvestJobResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[385]})
-var sDescribeOriginEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeOriginEndpointRequest, Members: &mDescribeOriginEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[395]})
-var sDescribeOriginEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeOriginEndpointResponse, Members: &mDescribeOriginEndpointResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[397]})
-var sListChannelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsRequest, Members: &mListChannelsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[415]})
-var sListChannelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsResponse, Members: &mListChannelsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[418]})
-var sListHarvestJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHarvestJobsRequest, Members: &mListHarvestJobsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[421]})
-var sListHarvestJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHarvestJobsResponse, Members: &mListHarvestJobsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[426]})
-var sListOriginEndpointsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOriginEndpointsRequest, Members: &mListOriginEndpointsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[429]})
-var sListOriginEndpointsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOriginEndpointsResponse, Members: &mListOriginEndpointsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[433]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[436]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[438]})
-var sRotateChannelCredentialsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateChannelCredentialsRequest, Members: &mRotateChannelCredentialsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[440]})
-var sRotateChannelCredentialsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateChannelCredentialsResponse, Members: &mRotateChannelCredentialsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[442]})
-var sRotateIngestEndpointCredentialsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateIngestEndpointCredentialsRequest, Members: &mRotateIngestEndpointCredentialsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[451]})
-var sRotateIngestEndpointCredentialsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateIngestEndpointCredentialsResponse, Members: &mRotateIngestEndpointCredentialsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[454]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[463]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[466]})
-var sUpdateChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelRequest, Members: &mUpdateChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[469]})
-var sUpdateChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelResponse, Members: &mUpdateChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[472]})
-var sUpdateOriginEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateOriginEndpointRequest, Members: &mUpdateOriginEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[481]})
-var sUpdateOriginEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateOriginEndpointResponse, Members: &mUpdateOriginEndpointResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[494]})
+var sConfigureLogs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigureLogs, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eConfigureLogs})
+var sCreateChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannel, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateChannel})
+var sCreateHarvestJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHarvestJob, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateHarvestJob})
+var sCreateOriginEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOriginEndpoint, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateOriginEndpoint})
+var sDeleteChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannel, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDeleteChannel})
+var sDeleteOriginEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteOriginEndpoint, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDeleteOriginEndpoint})
+var sDescribeChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannel, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eDescribeChannel})
+var sDescribeHarvestJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHarvestJob, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDescribeHarvestJob})
+var sDescribeOriginEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeOriginEndpoint, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDescribeOriginEndpoint})
+var sListChannels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannels, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eListChannels})
+var sListHarvestJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHarvestJobs, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eListHarvestJobs})
+var sListOriginEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOriginEndpoints, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eListOriginEndpoints})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sRotateChannelCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateChannelCredentials, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eRotateChannelCredentials})
+var sRotateIngestEndpointCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateIngestEndpointCredentials, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eRotateIngestEndpointCredentials})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannel, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eUpdateChannel})
+var sUpdateOriginEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateOriginEndpoint, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eUpdateOriginEndpoint})
+var s_MediaPackage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MediaPackage, Type: smithy.ShapeTypeService, Ext: &e_MediaPackage})
+var s__AdTriggersElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i__AdTriggersElement, Members: &m__AdTriggersElement, Type: smithy.ShapeTypeEnum, Ext: &e__AdTriggersElement})
+var s___boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___boolean, Type: smithy.ShapeTypeBoolean, Ext: &e___boolean})
+var s___integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___integer, Type: smithy.ShapeTypeInteger, Ext: &e___integer})
+var s___listOf__PeriodTriggersElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOf__PeriodTriggersElement, Members: &m___listOf__PeriodTriggersElement, Type: smithy.ShapeTypeList, Ext: &e___listOf__PeriodTriggersElement})
+var s___listOf__string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOf__string, Members: &m___listOf__string, Type: smithy.ShapeTypeList, Ext: &e___listOf__string})
+var s___listOfChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfChannel, Members: &m___listOfChannel, Type: smithy.ShapeTypeList, Ext: &e___listOfChannel})
+var s___listOfHarvestJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfHarvestJob, Members: &m___listOfHarvestJob, Type: smithy.ShapeTypeList, Ext: &e___listOfHarvestJob})
+var s___listOfHlsManifest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfHlsManifest, Members: &m___listOfHlsManifest, Type: smithy.ShapeTypeList, Ext: &e___listOfHlsManifest})
+var s___listOfHlsManifestCreateOrUpdateParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfHlsManifestCreateOrUpdateParameters, Members: &m___listOfHlsManifestCreateOrUpdateParameters, Type: smithy.ShapeTypeList, Ext: &e___listOfHlsManifestCreateOrUpdateParameters})
+var s___listOfIngestEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfIngestEndpoint, Members: &m___listOfIngestEndpoint, Type: smithy.ShapeTypeList, Ext: &e___listOfIngestEndpoint})
+var s___listOfOriginEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfOriginEndpoint, Members: &m___listOfOriginEndpoint, Type: smithy.ShapeTypeList, Ext: &e___listOfOriginEndpoint})
+var s___mapOf__string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___mapOf__string, Members: &m___mapOf__string, Type: smithy.ShapeTypeMap, Ext: &e___mapOf__string})
+var s__PeriodTriggersElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i__PeriodTriggersElement, Members: &m__PeriodTriggersElement, Type: smithy.ShapeTypeEnum, Ext: &e__PeriodTriggersElement})
+var s___string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e___string})
+var sAdMarkers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdMarkers, Members: &mAdMarkers, Type: smithy.ShapeTypeEnum, Ext: &eAdMarkers})
+var sAdsOnDeliveryRestrictions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdsOnDeliveryRestrictions, Members: &mAdsOnDeliveryRestrictions, Type: smithy.ShapeTypeEnum, Ext: &eAdsOnDeliveryRestrictions})
+var s_AdTriggers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdTriggers, Members: &m_AdTriggers, Type: smithy.ShapeTypeList, Ext: &e_AdTriggers})
+var sAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthorization, Members: &mAuthorization, Type: smithy.ShapeTypeStructure, Ext: &eAuthorization})
+var sChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannel, Members: &mChannel, Type: smithy.ShapeTypeStructure, Ext: &eChannel})
+var sCmafEncryption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCmafEncryption, Members: &mCmafEncryption, Type: smithy.ShapeTypeStructure, Ext: &eCmafEncryption})
+var sCmafEncryptionMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCmafEncryptionMethod, Members: &mCmafEncryptionMethod, Type: smithy.ShapeTypeEnum, Ext: &eCmafEncryptionMethod})
+var sCmafPackage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCmafPackage, Members: &mCmafPackage, Type: smithy.ShapeTypeStructure, Ext: &eCmafPackage})
+var sCmafPackageCreateOrUpdateParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCmafPackageCreateOrUpdateParameters, Members: &mCmafPackageCreateOrUpdateParameters, Type: smithy.ShapeTypeStructure, Ext: &eCmafPackageCreateOrUpdateParameters})
+var sDashEncryption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashEncryption, Members: &mDashEncryption, Type: smithy.ShapeTypeStructure, Ext: &eDashEncryption})
+var sDashPackage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashPackage, Members: &mDashPackage, Type: smithy.ShapeTypeStructure, Ext: &eDashPackage})
+var sEgressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEgressAccessLogs, Members: &mEgressAccessLogs, Type: smithy.ShapeTypeStructure, Ext: &eEgressAccessLogs})
+var sEncryptionContractConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionContractConfiguration, Members: &mEncryptionContractConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionContractConfiguration})
+var sEncryptionMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionMethod, Members: &mEncryptionMethod, Type: smithy.ShapeTypeEnum, Ext: &eEncryptionMethod})
+var sForbiddenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForbiddenException, Members: &mForbiddenException, Traits: &t54, Type: smithy.ShapeTypeStructure, Ext: &eForbiddenException})
+var sHarvestJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHarvestJob, Members: &mHarvestJob, Type: smithy.ShapeTypeStructure, Ext: &eHarvestJob})
+var sHlsEncryption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHlsEncryption, Members: &mHlsEncryption, Type: smithy.ShapeTypeStructure, Ext: &eHlsEncryption})
+var sHlsIngest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHlsIngest, Members: &mHlsIngest, Type: smithy.ShapeTypeStructure, Ext: &eHlsIngest})
+var sHlsManifest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHlsManifest, Members: &mHlsManifest, Type: smithy.ShapeTypeStructure, Ext: &eHlsManifest})
+var sHlsManifestCreateOrUpdateParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHlsManifestCreateOrUpdateParameters, Members: &mHlsManifestCreateOrUpdateParameters, Type: smithy.ShapeTypeStructure, Ext: &eHlsManifestCreateOrUpdateParameters})
+var sHlsPackage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHlsPackage, Members: &mHlsPackage, Type: smithy.ShapeTypeStructure, Ext: &eHlsPackage})
+var sIngestEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestEndpoint, Members: &mIngestEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eIngestEndpoint})
+var sIngressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressAccessLogs, Members: &mIngressAccessLogs, Type: smithy.ShapeTypeStructure, Ext: &eIngressAccessLogs})
+var sInternalServerErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerErrorException, Members: &mInternalServerErrorException, Traits: &t74, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerErrorException})
+var sManifestLayout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManifestLayout, Members: &mManifestLayout, Type: smithy.ShapeTypeEnum, Ext: &eManifestLayout})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var sMssEncryption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMssEncryption, Members: &mMssEncryption, Type: smithy.ShapeTypeStructure, Ext: &eMssEncryption})
+var sMssPackage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMssPackage, Members: &mMssPackage, Type: smithy.ShapeTypeStructure, Ext: &eMssPackage})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t75, Type: smithy.ShapeTypeStructure, Ext: &eNotFoundException})
+var sOrigination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrigination, Members: &mOrigination, Type: smithy.ShapeTypeEnum, Ext: &eOrigination})
+var sOriginEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOriginEndpoint, Members: &mOriginEndpoint, Type: smithy.ShapeTypeStructure, Ext: &eOriginEndpoint})
+var sPlaylistType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlaylistType, Members: &mPlaylistType, Type: smithy.ShapeTypeEnum, Ext: &ePlaylistType})
+var sPresetSpeke20Audio = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPresetSpeke20Audio, Members: &mPresetSpeke20Audio, Type: smithy.ShapeTypeEnum, Ext: &ePresetSpeke20Audio})
+var sPresetSpeke20Video = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPresetSpeke20Video, Members: &mPresetSpeke20Video, Type: smithy.ShapeTypeEnum, Ext: &ePresetSpeke20Video})
+var sProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProfile, Members: &mProfile, Type: smithy.ShapeTypeEnum, Ext: &eProfile})
+var sS3Destination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Destination, Members: &mS3Destination, Type: smithy.ShapeTypeStructure, Ext: &eS3Destination})
+var sSegmentTemplateFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSegmentTemplateFormat, Members: &mSegmentTemplateFormat, Type: smithy.ShapeTypeEnum, Ext: &eSegmentTemplateFormat})
+var s_SensitiveString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveString, Traits: &t88, Type: smithy.ShapeTypeString, Ext: &e_SensitiveString})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t89, Type: smithy.ShapeTypeStructure, Ext: &eServiceUnavailableException})
+var sSpekeKeyProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpekeKeyProvider, Members: &mSpekeKeyProvider, Type: smithy.ShapeTypeStructure, Ext: &eSpekeKeyProvider})
+var sStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eStatus})
+var sStreamOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamOrder, Members: &mStreamOrder, Type: smithy.ShapeTypeEnum, Ext: &eStreamOrder})
+var sStreamSelection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamSelection, Members: &mStreamSelection, Type: smithy.ShapeTypeStructure, Ext: &eStreamSelection})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &e_Tags})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t97, Type: smithy.ShapeTypeStructure, Ext: &eTooManyRequestsException})
+var sUnprocessableEntityException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnprocessableEntityException, Members: &mUnprocessableEntityException, Traits: &t98, Type: smithy.ShapeTypeStructure, Ext: &eUnprocessableEntityException})
+var sUtcTiming = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUtcTiming, Members: &mUtcTiming, Type: smithy.ShapeTypeEnum, Ext: &eUtcTiming})
+var sConfigureLogsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigureLogsRequest, Members: &mConfigureLogsRequest, Type: smithy.ShapeTypeStructure, Ext: &eConfigureLogsRequest})
+var sConfigureLogsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigureLogsResponse, Members: &mConfigureLogsResponse, Type: smithy.ShapeTypeStructure, Ext: &eConfigureLogsResponse})
+var sCreateChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelRequest, Members: &mCreateChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelRequest})
+var sCreateChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelResponse, Members: &mCreateChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelResponse})
+var sCreateHarvestJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHarvestJobRequest, Members: &mCreateHarvestJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateHarvestJobRequest})
+var sCreateHarvestJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHarvestJobResponse, Members: &mCreateHarvestJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateHarvestJobResponse})
+var sCreateOriginEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOriginEndpointRequest, Members: &mCreateOriginEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateOriginEndpointRequest})
+var sCreateOriginEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOriginEndpointResponse, Members: &mCreateOriginEndpointResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateOriginEndpointResponse})
+var sDeleteChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelRequest, Members: &mDeleteChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteChannelRequest})
+var sDeleteChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteChannelResponse})
+var sDeleteOriginEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteOriginEndpointRequest, Members: &mDeleteOriginEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteOriginEndpointRequest})
+var sDeleteOriginEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteOriginEndpointResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteOriginEndpointResponse})
+var sDescribeChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelRequest, Members: &mDescribeChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelRequest})
+var sDescribeChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelResponse, Members: &mDescribeChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelResponse})
+var sDescribeHarvestJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHarvestJobRequest, Members: &mDescribeHarvestJobRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeHarvestJobRequest})
+var sDescribeHarvestJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHarvestJobResponse, Members: &mDescribeHarvestJobResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeHarvestJobResponse})
+var sDescribeOriginEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeOriginEndpointRequest, Members: &mDescribeOriginEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeOriginEndpointRequest})
+var sDescribeOriginEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeOriginEndpointResponse, Members: &mDescribeOriginEndpointResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeOriginEndpointResponse})
+var sListChannelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsRequest, Members: &mListChannelsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListChannelsRequest})
+var sListChannelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsResponse, Members: &mListChannelsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListChannelsResponse})
+var sListHarvestJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHarvestJobsRequest, Members: &mListHarvestJobsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListHarvestJobsRequest})
+var sListHarvestJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHarvestJobsResponse, Members: &mListHarvestJobsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListHarvestJobsResponse})
+var sListOriginEndpointsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOriginEndpointsRequest, Members: &mListOriginEndpointsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListOriginEndpointsRequest})
+var sListOriginEndpointsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOriginEndpointsResponse, Members: &mListOriginEndpointsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListOriginEndpointsResponse})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sRotateChannelCredentialsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateChannelCredentialsRequest, Members: &mRotateChannelCredentialsRequest, Type: smithy.ShapeTypeStructure, Ext: &eRotateChannelCredentialsRequest})
+var sRotateChannelCredentialsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateChannelCredentialsResponse, Members: &mRotateChannelCredentialsResponse, Type: smithy.ShapeTypeStructure, Ext: &eRotateChannelCredentialsResponse})
+var sRotateIngestEndpointCredentialsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateIngestEndpointCredentialsRequest, Members: &mRotateIngestEndpointCredentialsRequest, Type: smithy.ShapeTypeStructure, Ext: &eRotateIngestEndpointCredentialsRequest})
+var sRotateIngestEndpointCredentialsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRotateIngestEndpointCredentialsResponse, Members: &mRotateIngestEndpointCredentialsResponse, Type: smithy.ShapeTypeStructure, Ext: &eRotateIngestEndpointCredentialsResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUpdateChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelRequest, Members: &mUpdateChannelRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelRequest})
+var sUpdateChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelResponse, Members: &mUpdateChannelResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelResponse})
+var sUpdateOriginEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateOriginEndpointRequest, Members: &mUpdateOriginEndpointRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateOriginEndpointRequest})
+var sUpdateOriginEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateOriginEndpointResponse, Members: &mUpdateOriginEndpointResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateOriginEndpointResponse})
 
-var s__AdTriggersElement_SPLICE_INSERT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPLICE_INSERT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[21]})
-var s__AdTriggersElement_BREAK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BREAK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[22]})
-var s__AdTriggersElement_PROVIDER_ADVERTISEMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROVIDER_ADVERTISEMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[23]})
-var s__AdTriggersElement_DISTRIBUTOR_ADVERTISEMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRIBUTOR_ADVERTISEMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[24]})
-var s__AdTriggersElement_PROVIDER_PLACEMENT_OPPORTUNITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROVIDER_PLACEMENT_OPPORTUNITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[25]})
-var s__AdTriggersElement_DISTRIBUTOR_PLACEMENT_OPPORTUNITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[26]})
-var s__AdTriggersElement_PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[27]})
-var s__AdTriggersElement_DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
-var s___listOf__PeriodTriggersElement_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i__PeriodTriggersElement, Members: &m__PeriodTriggersElement, Type: smithy.ShapeTypeEnum, Ext: &ext[32]})
-var s___listOf__string_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ext[34]})
-var s___listOfChannel_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannel, Members: &mChannel, Type: smithy.ShapeTypeStructure, Ext: &ext[36]})
-var s___listOfHarvestJob_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHarvestJob, Members: &mHarvestJob, Type: smithy.ShapeTypeStructure, Ext: &ext[38]})
-var s___listOfHlsManifest_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHlsManifest, Members: &mHlsManifest, Type: smithy.ShapeTypeStructure, Ext: &ext[40]})
-var s___listOfHlsManifestCreateOrUpdateParameters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHlsManifestCreateOrUpdateParameters, Members: &mHlsManifestCreateOrUpdateParameters, Type: smithy.ShapeTypeStructure, Ext: &ext[42]})
-var s___listOfIngestEndpoint_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIngestEndpoint, Members: &mIngestEndpoint, Type: smithy.ShapeTypeStructure, Ext: &ext[44]})
-var s___listOfOriginEndpoint_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOriginEndpoint, Members: &mOriginEndpoint, Type: smithy.ShapeTypeStructure, Ext: &ext[46]})
-var s___mapOf__string_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ext[48]})
-var s___mapOf__string_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ext[49]})
-var s__PeriodTriggersElement_ADS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[51]})
-var sAdMarkers_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[54]})
-var sAdMarkers_SCTE35_ENHANCED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCTE35_ENHANCED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[55]})
-var sAdMarkers_PASSTHROUGH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PASSTHROUGH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[56]})
-var sAdMarkers_DATERANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATERANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[57]})
-var sAdsOnDeliveryRestrictions_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[59]})
-var sAdsOnDeliveryRestrictions_RESTRICTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESTRICTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[60]})
-var sAdsOnDeliveryRestrictions_UNRESTRICTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNRESTRICTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[61]})
-var sAdsOnDeliveryRestrictions_BOTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOTH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[62]})
-var s_AdTriggers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i__AdTriggersElement, Members: &m__AdTriggersElement, Type: smithy.ShapeTypeEnum, Ext: &ext[64]})
-var sAuthorization_CdnIdentifierSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CdnIdentifierSecret", ID: &i___string, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[66]})
-var sAuthorization_SecretsRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretsRoleArn", ID: &i___string, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &ext[67]})
-var sChannel_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var sChannel_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[70]})
-var sChannel_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[71]})
-var sChannel_EgressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EgressAccessLogs", ID: &iEgressAccessLogs, Members: &mEgressAccessLogs, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sChannel_HlsIngest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsIngest", ID: &iHlsIngest, Members: &mHlsIngest, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &ext[73]})
-var sChannel_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[74]})
-var sChannel_IngressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressAccessLogs", ID: &iIngressAccessLogs, Members: &mIngressAccessLogs, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &ext[75]})
-var sChannel_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &ext[76]})
-var sCmafEncryption_ConstantInitializationVector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConstantInitializationVector", ID: &i___string, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &ext[78]})
-var sCmafEncryption_EncryptionMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionMethod", ID: &iCmafEncryptionMethod, Members: &mCmafEncryptionMethod, Traits: &t30, Type: smithy.ShapeTypeEnum, Ext: &ext[79]})
-var sCmafEncryption_KeyRotationIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyRotationIntervalSeconds", ID: &i___integer, Traits: &t31, Type: smithy.ShapeTypeInteger, Ext: &ext[80]})
-var sCmafEncryption_SpekeKeyProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpekeKeyProvider", ID: &iSpekeKeyProvider, Members: &mSpekeKeyProvider, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &ext[81]})
-var sCmafEncryptionMethod_SAMPLE_AES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMPLE_AES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[83]})
-var sCmafEncryptionMethod_AES_CTR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AES_CTR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[84]})
-var sCmafPackage_Encryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encryption", ID: &iCmafEncryption, Members: &mCmafEncryption, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &ext[86]})
-var sCmafPackage_HlsManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsManifests", ID: &i___listOfHlsManifest, Members: &m___listOfHlsManifest, Traits: &t34, Type: smithy.ShapeTypeList, Ext: &ext[87]})
-var sCmafPackage_SegmentDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentDurationSeconds", ID: &i___integer, Traits: &t35, Type: smithy.ShapeTypeInteger, Ext: &ext[88]})
-var sCmafPackage_SegmentPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentPrefix", ID: &i___string, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[89]})
-var sCmafPackage_StreamSelection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamSelection", ID: &iStreamSelection, Members: &mStreamSelection, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &ext[90]})
-var sCmafPackageCreateOrUpdateParameters_Encryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encryption", ID: &iCmafEncryption, Members: &mCmafEncryption, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &ext[92]})
-var sCmafPackageCreateOrUpdateParameters_HlsManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsManifests", ID: &i___listOfHlsManifestCreateOrUpdateParameters, Members: &m___listOfHlsManifestCreateOrUpdateParameters, Traits: &t34, Type: smithy.ShapeTypeList, Ext: &ext[93]})
-var sCmafPackageCreateOrUpdateParameters_SegmentDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentDurationSeconds", ID: &i___integer, Traits: &t35, Type: smithy.ShapeTypeInteger, Ext: &ext[94]})
-var sCmafPackageCreateOrUpdateParameters_SegmentPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentPrefix", ID: &i___string, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[95]})
-var sCmafPackageCreateOrUpdateParameters_StreamSelection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamSelection", ID: &iStreamSelection, Members: &mStreamSelection, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &ext[96]})
-var sDashEncryption_KeyRotationIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyRotationIntervalSeconds", ID: &i___integer, Traits: &t31, Type: smithy.ShapeTypeInteger, Ext: &ext[98]})
-var sDashEncryption_SpekeKeyProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpekeKeyProvider", ID: &iSpekeKeyProvider, Members: &mSpekeKeyProvider, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &ext[99]})
-var sDashPackage_AdTriggers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdTriggers", ID: &i_AdTriggers, Members: &m_AdTriggers, Traits: &t38, Type: smithy.ShapeTypeList, Ext: &ext[101]})
-var sDashPackage_AdsOnDeliveryRestrictions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdsOnDeliveryRestrictions", ID: &iAdsOnDeliveryRestrictions, Members: &mAdsOnDeliveryRestrictions, Traits: &t39, Type: smithy.ShapeTypeEnum, Ext: &ext[102]})
-var sDashPackage_Encryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encryption", ID: &iDashEncryption, Members: &mDashEncryption, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &ext[103]})
-var sDashPackage_IncludeIframeOnlyStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeIframeOnlyStream", ID: &i___boolean, Traits: &t40, Type: smithy.ShapeTypeBoolean, Ext: &ext[104]})
-var sDashPackage_ManifestLayout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestLayout", ID: &iManifestLayout, Members: &mManifestLayout, Traits: &t41, Type: smithy.ShapeTypeEnum, Ext: &ext[105]})
-var sDashPackage_ManifestWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestWindowSeconds", ID: &i___integer, Traits: &t42, Type: smithy.ShapeTypeInteger, Ext: &ext[106]})
-var sDashPackage_MinBufferTimeSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinBufferTimeSeconds", ID: &i___integer, Traits: &t43, Type: smithy.ShapeTypeInteger, Ext: &ext[107]})
-var sDashPackage_MinUpdatePeriodSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinUpdatePeriodSeconds", ID: &i___integer, Traits: &t44, Type: smithy.ShapeTypeInteger, Ext: &ext[108]})
-var sDashPackage_PeriodTriggers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeriodTriggers", ID: &i___listOf__PeriodTriggersElement, Members: &m___listOf__PeriodTriggersElement, Traits: &t45, Type: smithy.ShapeTypeList, Ext: &ext[109]})
-var sDashPackage_Profile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Profile", ID: &iProfile, Members: &mProfile, Traits: &t46, Type: smithy.ShapeTypeEnum, Ext: &ext[110]})
-var sDashPackage_SegmentDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentDurationSeconds", ID: &i___integer, Traits: &t35, Type: smithy.ShapeTypeInteger, Ext: &ext[111]})
-var sDashPackage_SegmentTemplateFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentTemplateFormat", ID: &iSegmentTemplateFormat, Members: &mSegmentTemplateFormat, Traits: &t47, Type: smithy.ShapeTypeEnum, Ext: &ext[112]})
-var sDashPackage_StreamSelection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamSelection", ID: &iStreamSelection, Members: &mStreamSelection, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &ext[113]})
-var sDashPackage_SuggestedPresentationDelaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuggestedPresentationDelaySeconds", ID: &i___integer, Traits: &t48, Type: smithy.ShapeTypeInteger, Ext: &ext[114]})
-var sDashPackage_UtcTiming = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UtcTiming", ID: &iUtcTiming, Members: &mUtcTiming, Traits: &t49, Type: smithy.ShapeTypeEnum, Ext: &ext[115]})
-var sDashPackage_UtcTimingUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UtcTimingUri", ID: &i___string, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &ext[116]})
-var sEgressAccessLogs_LogGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroupName", ID: &i___string, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &ext[118]})
-var sEncryptionContractConfiguration_PresetSpeke20Audio = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PresetSpeke20Audio", ID: &iPresetSpeke20Audio, Members: &mPresetSpeke20Audio, Traits: &t52, Type: smithy.ShapeTypeEnum, Ext: &ext[120]})
-var sEncryptionContractConfiguration_PresetSpeke20Video = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PresetSpeke20Video", ID: &iPresetSpeke20Video, Members: &mPresetSpeke20Video, Traits: &t53, Type: smithy.ShapeTypeEnum, Ext: &ext[121]})
-var sEncryptionMethod_AES_128 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AES_128", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[123]})
-var sEncryptionMethod_SAMPLE_AES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMPLE_AES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[124]})
-var sForbiddenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &ext[126]})
-var sHarvestJob_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[128]})
-var sHarvestJob_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelId", ID: &i___string, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &ext[129]})
-var sHarvestJob_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var sHarvestJob_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &ext[131]})
-var sHarvestJob_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[132]})
-var sHarvestJob_OriginEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &ext[133]})
-var sHarvestJob_S3Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Destination", ID: &iS3Destination, Members: &mS3Destination, Traits: &t59, Type: smithy.ShapeTypeStructure, Ext: &ext[134]})
-var sHarvestJob_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &ext[135]})
-var sHarvestJob_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Traits: &t61, Type: smithy.ShapeTypeEnum, Ext: &ext[136]})
-var sHlsEncryption_ConstantInitializationVector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConstantInitializationVector", ID: &i___string, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var sHlsEncryption_EncryptionMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionMethod", ID: &iEncryptionMethod, Members: &mEncryptionMethod, Traits: &t30, Type: smithy.ShapeTypeEnum, Ext: &ext[139]})
-var sHlsEncryption_KeyRotationIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyRotationIntervalSeconds", ID: &i___integer, Traits: &t31, Type: smithy.ShapeTypeInteger, Ext: &ext[140]})
-var sHlsEncryption_RepeatExtXKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepeatExtXKey", ID: &i___boolean, Traits: &t62, Type: smithy.ShapeTypeBoolean, Ext: &ext[141]})
-var sHlsEncryption_SpekeKeyProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpekeKeyProvider", ID: &iSpekeKeyProvider, Members: &mSpekeKeyProvider, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &ext[142]})
-var sHlsIngest_IngestEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngestEndpoints", ID: &i___listOfIngestEndpoint, Members: &m___listOfIngestEndpoint, Traits: &t63, Type: smithy.ShapeTypeList, Ext: &ext[144]})
-var sHlsManifest_AdMarkers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdMarkers", ID: &iAdMarkers, Members: &mAdMarkers, Traits: &t64, Type: smithy.ShapeTypeEnum, Ext: &ext[146]})
-var sHlsManifest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[147]})
-var sHlsManifest_IncludeIframeOnlyStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeIframeOnlyStream", ID: &i___boolean, Traits: &t40, Type: smithy.ShapeTypeBoolean, Ext: &ext[148]})
-var sHlsManifest_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i___string, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &ext[149]})
-var sHlsManifest_PlaylistType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaylistType", ID: &iPlaylistType, Members: &mPlaylistType, Traits: &t66, Type: smithy.ShapeTypeEnum, Ext: &ext[150]})
-var sHlsManifest_PlaylistWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaylistWindowSeconds", ID: &i___integer, Traits: &t67, Type: smithy.ShapeTypeInteger, Ext: &ext[151]})
-var sHlsManifest_ProgramDateTimeIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgramDateTimeIntervalSeconds", ID: &i___integer, Traits: &t68, Type: smithy.ShapeTypeInteger, Ext: &ext[152]})
-var sHlsManifest_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i___string, Traits: &t69, Type: smithy.ShapeTypeString, Ext: &ext[153]})
-var sHlsManifest_AdTriggers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdTriggers", ID: &i_AdTriggers, Members: &m_AdTriggers, Traits: &t38, Type: smithy.ShapeTypeList, Ext: &ext[154]})
-var sHlsManifest_AdsOnDeliveryRestrictions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdsOnDeliveryRestrictions", ID: &iAdsOnDeliveryRestrictions, Members: &mAdsOnDeliveryRestrictions, Traits: &t39, Type: smithy.ShapeTypeEnum, Ext: &ext[155]})
-var sHlsManifestCreateOrUpdateParameters_AdMarkers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdMarkers", ID: &iAdMarkers, Members: &mAdMarkers, Traits: &t64, Type: smithy.ShapeTypeEnum, Ext: &ext[157]})
-var sHlsManifestCreateOrUpdateParameters_AdTriggers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdTriggers", ID: &i_AdTriggers, Members: &m_AdTriggers, Traits: &t38, Type: smithy.ShapeTypeList, Ext: &ext[158]})
-var sHlsManifestCreateOrUpdateParameters_AdsOnDeliveryRestrictions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdsOnDeliveryRestrictions", ID: &iAdsOnDeliveryRestrictions, Members: &mAdsOnDeliveryRestrictions, Traits: &t39, Type: smithy.ShapeTypeEnum, Ext: &ext[159]})
-var sHlsManifestCreateOrUpdateParameters_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[160]})
-var sHlsManifestCreateOrUpdateParameters_IncludeIframeOnlyStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeIframeOnlyStream", ID: &i___boolean, Traits: &t40, Type: smithy.ShapeTypeBoolean, Ext: &ext[161]})
-var sHlsManifestCreateOrUpdateParameters_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i___string, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &ext[162]})
-var sHlsManifestCreateOrUpdateParameters_PlaylistType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaylistType", ID: &iPlaylistType, Members: &mPlaylistType, Traits: &t66, Type: smithy.ShapeTypeEnum, Ext: &ext[163]})
-var sHlsManifestCreateOrUpdateParameters_PlaylistWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaylistWindowSeconds", ID: &i___integer, Traits: &t67, Type: smithy.ShapeTypeInteger, Ext: &ext[164]})
-var sHlsManifestCreateOrUpdateParameters_ProgramDateTimeIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgramDateTimeIntervalSeconds", ID: &i___integer, Traits: &t68, Type: smithy.ShapeTypeInteger, Ext: &ext[165]})
-var sHlsPackage_AdMarkers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdMarkers", ID: &iAdMarkers, Members: &mAdMarkers, Traits: &t64, Type: smithy.ShapeTypeEnum, Ext: &ext[167]})
-var sHlsPackage_AdTriggers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdTriggers", ID: &i_AdTriggers, Members: &m_AdTriggers, Traits: &t38, Type: smithy.ShapeTypeList, Ext: &ext[168]})
-var sHlsPackage_AdsOnDeliveryRestrictions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdsOnDeliveryRestrictions", ID: &iAdsOnDeliveryRestrictions, Members: &mAdsOnDeliveryRestrictions, Traits: &t39, Type: smithy.ShapeTypeEnum, Ext: &ext[169]})
-var sHlsPackage_Encryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encryption", ID: &iHlsEncryption, Members: &mHlsEncryption, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &ext[170]})
-var sHlsPackage_IncludeDvbSubtitles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeDvbSubtitles", ID: &i___boolean, Traits: &t70, Type: smithy.ShapeTypeBoolean, Ext: &ext[171]})
-var sHlsPackage_IncludeIframeOnlyStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeIframeOnlyStream", ID: &i___boolean, Traits: &t40, Type: smithy.ShapeTypeBoolean, Ext: &ext[172]})
-var sHlsPackage_PlaylistType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaylistType", ID: &iPlaylistType, Members: &mPlaylistType, Traits: &t66, Type: smithy.ShapeTypeEnum, Ext: &ext[173]})
-var sHlsPackage_PlaylistWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaylistWindowSeconds", ID: &i___integer, Traits: &t67, Type: smithy.ShapeTypeInteger, Ext: &ext[174]})
-var sHlsPackage_ProgramDateTimeIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgramDateTimeIntervalSeconds", ID: &i___integer, Traits: &t68, Type: smithy.ShapeTypeInteger, Ext: &ext[175]})
-var sHlsPackage_SegmentDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentDurationSeconds", ID: &i___integer, Traits: &t35, Type: smithy.ShapeTypeInteger, Ext: &ext[176]})
-var sHlsPackage_StreamSelection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamSelection", ID: &iStreamSelection, Members: &mStreamSelection, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &ext[177]})
-var sHlsPackage_UseAudioRenditionGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UseAudioRenditionGroup", ID: &i___boolean, Traits: &t71, Type: smithy.ShapeTypeBoolean, Ext: &ext[178]})
-var sIngestEndpoint_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[180]})
-var sIngestEndpoint_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_SensitiveString, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &ext[181]})
-var sIngestEndpoint_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i___string, Traits: &t69, Type: smithy.ShapeTypeString, Ext: &ext[182]})
-var sIngestEndpoint_Username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Username", ID: &i_SensitiveString, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &ext[183]})
-var sIngressAccessLogs_LogGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroupName", ID: &i___string, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &ext[185]})
-var sInternalServerErrorException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &ext[187]})
-var sManifestLayout_FULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[189]})
-var sManifestLayout_COMPACT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPACT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[190]})
-var sManifestLayout_DRM_TOP_LEVEL_COMPACT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRM_TOP_LEVEL_COMPACT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[191]})
-var sMssEncryption_SpekeKeyProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpekeKeyProvider", ID: &iSpekeKeyProvider, Members: &mSpekeKeyProvider, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &ext[194]})
-var sMssPackage_Encryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encryption", ID: &iMssEncryption, Members: &mMssEncryption, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &ext[196]})
-var sMssPackage_ManifestWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestWindowSeconds", ID: &i___integer, Traits: &t42, Type: smithy.ShapeTypeInteger, Ext: &ext[197]})
-var sMssPackage_SegmentDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentDurationSeconds", ID: &i___integer, Traits: &t35, Type: smithy.ShapeTypeInteger, Ext: &ext[198]})
-var sMssPackage_StreamSelection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamSelection", ID: &iStreamSelection, Members: &mStreamSelection, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &ext[199]})
-var sNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &ext[201]})
-var sOrigination_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[203]})
-var sOrigination_DENY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[204]})
-var sOriginEndpoint_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[206]})
-var sOriginEndpoint_Authorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authorization", ID: &iAuthorization, Members: &mAuthorization, Traits: &t76, Type: smithy.ShapeTypeStructure, Ext: &ext[207]})
-var sOriginEndpoint_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelId", ID: &i___string, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &ext[208]})
-var sOriginEndpoint_CmafPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmafPackage", ID: &iCmafPackage, Members: &mCmafPackage, Traits: &t77, Type: smithy.ShapeTypeStructure, Ext: &ext[209]})
-var sOriginEndpoint_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[210]})
-var sOriginEndpoint_DashPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashPackage", ID: &iDashPackage, Members: &mDashPackage, Traits: &t78, Type: smithy.ShapeTypeStructure, Ext: &ext[211]})
-var sOriginEndpoint_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[212]})
-var sOriginEndpoint_HlsPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsPackage", ID: &iHlsPackage, Members: &mHlsPackage, Traits: &t79, Type: smithy.ShapeTypeStructure, Ext: &ext[213]})
-var sOriginEndpoint_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[214]})
-var sOriginEndpoint_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i___string, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &ext[215]})
-var sOriginEndpoint_MssPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MssPackage", ID: &iMssPackage, Members: &mMssPackage, Traits: &t80, Type: smithy.ShapeTypeStructure, Ext: &ext[216]})
-var sOriginEndpoint_Origination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Origination", ID: &iOrigination, Members: &mOrigination, Traits: &t81, Type: smithy.ShapeTypeEnum, Ext: &ext[217]})
-var sOriginEndpoint_StartoverWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartoverWindowSeconds", ID: &i___integer, Traits: &t82, Type: smithy.ShapeTypeInteger, Ext: &ext[218]})
-var sOriginEndpoint_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &ext[219]})
-var sOriginEndpoint_TimeDelaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeDelaySeconds", ID: &i___integer, Traits: &t83, Type: smithy.ShapeTypeInteger, Ext: &ext[220]})
-var sOriginEndpoint_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i___string, Traits: &t69, Type: smithy.ShapeTypeString, Ext: &ext[221]})
-var sOriginEndpoint_Whitelist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Whitelist", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t84, Type: smithy.ShapeTypeList, Ext: &ext[222]})
-var sPlaylistType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[224]})
-var sPlaylistType_EVENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[225]})
-var sPlaylistType_VOD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[226]})
-var sPresetSpeke20Audio_PRESET_AUDIO_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_AUDIO_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[228]})
-var sPresetSpeke20Audio_PRESET_AUDIO_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_AUDIO_2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[229]})
-var sPresetSpeke20Audio_PRESET_AUDIO_3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_AUDIO_3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[230]})
-var sPresetSpeke20Audio_SHARED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHARED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[231]})
-var sPresetSpeke20Audio_UNENCRYPTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNENCRYPTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[232]})
-var sPresetSpeke20Video_PRESET_VIDEO_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_VIDEO_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[234]})
-var sPresetSpeke20Video_PRESET_VIDEO_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_VIDEO_2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[235]})
-var sPresetSpeke20Video_PRESET_VIDEO_3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_VIDEO_3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[236]})
-var sPresetSpeke20Video_PRESET_VIDEO_4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_VIDEO_4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[237]})
-var sPresetSpeke20Video_PRESET_VIDEO_5 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_VIDEO_5", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[238]})
-var sPresetSpeke20Video_PRESET_VIDEO_6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_VIDEO_6", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[239]})
-var sPresetSpeke20Video_PRESET_VIDEO_7 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_VIDEO_7", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[240]})
-var sPresetSpeke20Video_PRESET_VIDEO_8 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_VIDEO_8", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[241]})
-var sPresetSpeke20Video_SHARED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHARED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[242]})
-var sPresetSpeke20Video_UNENCRYPTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNENCRYPTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[243]})
-var sProfile_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[245]})
-var sProfile_HBBTV_1_5 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HBBTV_1_5", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[246]})
-var sProfile_HYBRIDCAST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HYBRIDCAST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[247]})
-var sProfile_DVB_DASH_2014 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DVB_DASH_2014", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[248]})
-var sS3Destination_BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketName", ID: &i___string, Traits: &t85, Type: smithy.ShapeTypeString, Ext: &ext[250]})
-var sS3Destination_ManifestKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestKey", ID: &i___string, Traits: &t86, Type: smithy.ShapeTypeString, Ext: &ext[251]})
-var sS3Destination_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i___string, Traits: &t87, Type: smithy.ShapeTypeString, Ext: &ext[252]})
-var sSegmentTemplateFormat_NUMBER_WITH_TIMELINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUMBER_WITH_TIMELINE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[254]})
-var sSegmentTemplateFormat_TIME_WITH_TIMELINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_WITH_TIMELINE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[255]})
-var sSegmentTemplateFormat_NUMBER_WITH_DURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUMBER_WITH_DURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[256]})
-var sServiceUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &ext[259]})
-var sSpekeKeyProvider_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i___string, Traits: &t90, Type: smithy.ShapeTypeString, Ext: &ext[261]})
-var sSpekeKeyProvider_EncryptionContractConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionContractConfiguration", ID: &iEncryptionContractConfiguration, Members: &mEncryptionContractConfiguration, Traits: &t91, Type: smithy.ShapeTypeStructure, Ext: &ext[262]})
-var sSpekeKeyProvider_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i___string, Traits: &t92, Type: smithy.ShapeTypeString, Ext: &ext[263]})
-var sSpekeKeyProvider_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i___string, Traits: &t87, Type: smithy.ShapeTypeString, Ext: &ext[264]})
-var sSpekeKeyProvider_SystemIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SystemIds", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t93, Type: smithy.ShapeTypeList, Ext: &ext[265]})
-var sSpekeKeyProvider_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i___string, Traits: &t69, Type: smithy.ShapeTypeString, Ext: &ext[266]})
-var sStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[268]})
-var sStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[269]})
-var sStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[270]})
-var sStreamOrder_ORIGINAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ORIGINAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[272]})
-var sStreamOrder_VIDEO_BITRATE_ASCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VIDEO_BITRATE_ASCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[273]})
-var sStreamOrder_VIDEO_BITRATE_DESCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VIDEO_BITRATE_DESCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[274]})
-var sStreamSelection_MaxVideoBitsPerSecond = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxVideoBitsPerSecond", ID: &i___integer, Traits: &t94, Type: smithy.ShapeTypeInteger, Ext: &ext[276]})
-var sStreamSelection_MinVideoBitsPerSecond = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinVideoBitsPerSecond", ID: &i___integer, Traits: &t95, Type: smithy.ShapeTypeInteger, Ext: &ext[277]})
-var sStreamSelection_StreamOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamOrder", ID: &iStreamOrder, Members: &mStreamOrder, Traits: &t96, Type: smithy.ShapeTypeEnum, Ext: &ext[278]})
-var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ext[280]})
-var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ext[281]})
-var sTooManyRequestsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &ext[283]})
-var sUnprocessableEntityException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &ext[285]})
-var sUtcTiming_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[287]})
-var sUtcTiming_HTTP_HEAD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP_HEAD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[288]})
-var sUtcTiming_HTTP_ISO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP_ISO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[289]})
-var sUtcTiming_HTTP_XSDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP_XSDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[290]})
-var sConfigureLogsRequest_EgressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EgressAccessLogs", ID: &iEgressAccessLogs, Members: &mEgressAccessLogs, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &ext[292]})
-var sConfigureLogsRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &ext[293]})
-var sConfigureLogsRequest_IngressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressAccessLogs", ID: &iIngressAccessLogs, Members: &mIngressAccessLogs, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &ext[294]})
-var sConfigureLogsResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[296]})
-var sConfigureLogsResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[297]})
-var sConfigureLogsResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[298]})
-var sConfigureLogsResponse_EgressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EgressAccessLogs", ID: &iEgressAccessLogs, Members: &mEgressAccessLogs, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &ext[299]})
-var sConfigureLogsResponse_HlsIngest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsIngest", ID: &iHlsIngest, Members: &mHlsIngest, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &ext[300]})
-var sConfigureLogsResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[301]})
-var sConfigureLogsResponse_IngressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressAccessLogs", ID: &iIngressAccessLogs, Members: &mIngressAccessLogs, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &ext[302]})
-var sConfigureLogsResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &ext[303]})
-var sCreateChannelRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[305]})
-var sCreateChannelRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[306]})
-var sCreateChannelRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &ext[307]})
-var sCreateChannelResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[309]})
-var sCreateChannelResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[310]})
-var sCreateChannelResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[311]})
-var sCreateChannelResponse_EgressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EgressAccessLogs", ID: &iEgressAccessLogs, Members: &mEgressAccessLogs, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &ext[312]})
-var sCreateChannelResponse_HlsIngest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsIngest", ID: &iHlsIngest, Members: &mHlsIngest, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &ext[313]})
-var sCreateChannelResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[314]})
-var sCreateChannelResponse_IngressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressAccessLogs", ID: &iIngressAccessLogs, Members: &mIngressAccessLogs, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &ext[315]})
-var sCreateChannelResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &ext[316]})
-var sCreateHarvestJobRequest_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &ext[318]})
-var sCreateHarvestJobRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[319]})
-var sCreateHarvestJobRequest_OriginEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &ext[320]})
-var sCreateHarvestJobRequest_S3Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Destination", ID: &iS3Destination, Members: &mS3Destination, Traits: &t59, Type: smithy.ShapeTypeStructure, Ext: &ext[321]})
-var sCreateHarvestJobRequest_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &ext[322]})
-var sCreateHarvestJobResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[324]})
-var sCreateHarvestJobResponse_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelId", ID: &i___string, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &ext[325]})
-var sCreateHarvestJobResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[326]})
-var sCreateHarvestJobResponse_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &ext[327]})
-var sCreateHarvestJobResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[328]})
-var sCreateHarvestJobResponse_OriginEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &ext[329]})
-var sCreateHarvestJobResponse_S3Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Destination", ID: &iS3Destination, Members: &mS3Destination, Traits: &t59, Type: smithy.ShapeTypeStructure, Ext: &ext[330]})
-var sCreateHarvestJobResponse_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &ext[331]})
-var sCreateHarvestJobResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Traits: &t61, Type: smithy.ShapeTypeEnum, Ext: &ext[332]})
-var sCreateOriginEndpointRequest_Authorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authorization", ID: &iAuthorization, Members: &mAuthorization, Traits: &t76, Type: smithy.ShapeTypeStructure, Ext: &ext[334]})
-var sCreateOriginEndpointRequest_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelId", ID: &i___string, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &ext[335]})
-var sCreateOriginEndpointRequest_CmafPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmafPackage", ID: &iCmafPackageCreateOrUpdateParameters, Members: &mCmafPackageCreateOrUpdateParameters, Traits: &t77, Type: smithy.ShapeTypeStructure, Ext: &ext[336]})
-var sCreateOriginEndpointRequest_DashPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashPackage", ID: &iDashPackage, Members: &mDashPackage, Traits: &t78, Type: smithy.ShapeTypeStructure, Ext: &ext[337]})
-var sCreateOriginEndpointRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[338]})
-var sCreateOriginEndpointRequest_HlsPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsPackage", ID: &iHlsPackage, Members: &mHlsPackage, Traits: &t79, Type: smithy.ShapeTypeStructure, Ext: &ext[339]})
-var sCreateOriginEndpointRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[340]})
-var sCreateOriginEndpointRequest_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i___string, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &ext[341]})
-var sCreateOriginEndpointRequest_MssPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MssPackage", ID: &iMssPackage, Members: &mMssPackage, Traits: &t80, Type: smithy.ShapeTypeStructure, Ext: &ext[342]})
-var sCreateOriginEndpointRequest_Origination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Origination", ID: &iOrigination, Members: &mOrigination, Traits: &t81, Type: smithy.ShapeTypeEnum, Ext: &ext[343]})
-var sCreateOriginEndpointRequest_StartoverWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartoverWindowSeconds", ID: &i___integer, Traits: &t82, Type: smithy.ShapeTypeInteger, Ext: &ext[344]})
-var sCreateOriginEndpointRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &ext[345]})
-var sCreateOriginEndpointRequest_TimeDelaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeDelaySeconds", ID: &i___integer, Traits: &t83, Type: smithy.ShapeTypeInteger, Ext: &ext[346]})
-var sCreateOriginEndpointRequest_Whitelist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Whitelist", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t84, Type: smithy.ShapeTypeList, Ext: &ext[347]})
-var sCreateOriginEndpointResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[349]})
-var sCreateOriginEndpointResponse_Authorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authorization", ID: &iAuthorization, Members: &mAuthorization, Traits: &t76, Type: smithy.ShapeTypeStructure, Ext: &ext[350]})
-var sCreateOriginEndpointResponse_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelId", ID: &i___string, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &ext[351]})
-var sCreateOriginEndpointResponse_CmafPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmafPackage", ID: &iCmafPackage, Members: &mCmafPackage, Traits: &t77, Type: smithy.ShapeTypeStructure, Ext: &ext[352]})
-var sCreateOriginEndpointResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[353]})
-var sCreateOriginEndpointResponse_DashPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashPackage", ID: &iDashPackage, Members: &mDashPackage, Traits: &t78, Type: smithy.ShapeTypeStructure, Ext: &ext[354]})
-var sCreateOriginEndpointResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[355]})
-var sCreateOriginEndpointResponse_HlsPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsPackage", ID: &iHlsPackage, Members: &mHlsPackage, Traits: &t79, Type: smithy.ShapeTypeStructure, Ext: &ext[356]})
-var sCreateOriginEndpointResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[357]})
-var sCreateOriginEndpointResponse_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i___string, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &ext[358]})
-var sCreateOriginEndpointResponse_MssPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MssPackage", ID: &iMssPackage, Members: &mMssPackage, Traits: &t80, Type: smithy.ShapeTypeStructure, Ext: &ext[359]})
-var sCreateOriginEndpointResponse_Origination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Origination", ID: &iOrigination, Members: &mOrigination, Traits: &t81, Type: smithy.ShapeTypeEnum, Ext: &ext[360]})
-var sCreateOriginEndpointResponse_StartoverWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartoverWindowSeconds", ID: &i___integer, Traits: &t82, Type: smithy.ShapeTypeInteger, Ext: &ext[361]})
-var sCreateOriginEndpointResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &ext[362]})
-var sCreateOriginEndpointResponse_TimeDelaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeDelaySeconds", ID: &i___integer, Traits: &t83, Type: smithy.ShapeTypeInteger, Ext: &ext[363]})
-var sCreateOriginEndpointResponse_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i___string, Traits: &t69, Type: smithy.ShapeTypeString, Ext: &ext[364]})
-var sCreateOriginEndpointResponse_Whitelist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Whitelist", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t84, Type: smithy.ShapeTypeList, Ext: &ext[365]})
-var sDeleteChannelRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &ext[367]})
-var sDeleteOriginEndpointRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &ext[370]})
-var sDescribeChannelRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &ext[373]})
-var sDescribeChannelResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[375]})
-var sDescribeChannelResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[376]})
-var sDescribeChannelResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[377]})
-var sDescribeChannelResponse_EgressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EgressAccessLogs", ID: &iEgressAccessLogs, Members: &mEgressAccessLogs, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &ext[378]})
-var sDescribeChannelResponse_HlsIngest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsIngest", ID: &iHlsIngest, Members: &mHlsIngest, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &ext[379]})
-var sDescribeChannelResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[380]})
-var sDescribeChannelResponse_IngressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressAccessLogs", ID: &iIngressAccessLogs, Members: &mIngressAccessLogs, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &ext[381]})
-var sDescribeChannelResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &ext[382]})
-var sDescribeHarvestJobRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &ext[384]})
-var sDescribeHarvestJobResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[386]})
-var sDescribeHarvestJobResponse_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelId", ID: &i___string, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &ext[387]})
-var sDescribeHarvestJobResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[388]})
-var sDescribeHarvestJobResponse_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &ext[389]})
-var sDescribeHarvestJobResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[390]})
-var sDescribeHarvestJobResponse_OriginEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &ext[391]})
-var sDescribeHarvestJobResponse_S3Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Destination", ID: &iS3Destination, Members: &mS3Destination, Traits: &t59, Type: smithy.ShapeTypeStructure, Ext: &ext[392]})
-var sDescribeHarvestJobResponse_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &ext[393]})
-var sDescribeHarvestJobResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Traits: &t61, Type: smithy.ShapeTypeEnum, Ext: &ext[394]})
-var sDescribeOriginEndpointRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &ext[396]})
-var sDescribeOriginEndpointResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[398]})
-var sDescribeOriginEndpointResponse_Authorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authorization", ID: &iAuthorization, Members: &mAuthorization, Traits: &t76, Type: smithy.ShapeTypeStructure, Ext: &ext[399]})
-var sDescribeOriginEndpointResponse_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelId", ID: &i___string, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &ext[400]})
-var sDescribeOriginEndpointResponse_CmafPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmafPackage", ID: &iCmafPackage, Members: &mCmafPackage, Traits: &t77, Type: smithy.ShapeTypeStructure, Ext: &ext[401]})
-var sDescribeOriginEndpointResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[402]})
-var sDescribeOriginEndpointResponse_DashPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashPackage", ID: &iDashPackage, Members: &mDashPackage, Traits: &t78, Type: smithy.ShapeTypeStructure, Ext: &ext[403]})
-var sDescribeOriginEndpointResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[404]})
-var sDescribeOriginEndpointResponse_HlsPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsPackage", ID: &iHlsPackage, Members: &mHlsPackage, Traits: &t79, Type: smithy.ShapeTypeStructure, Ext: &ext[405]})
-var sDescribeOriginEndpointResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[406]})
-var sDescribeOriginEndpointResponse_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i___string, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &ext[407]})
-var sDescribeOriginEndpointResponse_MssPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MssPackage", ID: &iMssPackage, Members: &mMssPackage, Traits: &t80, Type: smithy.ShapeTypeStructure, Ext: &ext[408]})
-var sDescribeOriginEndpointResponse_Origination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Origination", ID: &iOrigination, Members: &mOrigination, Traits: &t81, Type: smithy.ShapeTypeEnum, Ext: &ext[409]})
-var sDescribeOriginEndpointResponse_StartoverWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartoverWindowSeconds", ID: &i___integer, Traits: &t82, Type: smithy.ShapeTypeInteger, Ext: &ext[410]})
-var sDescribeOriginEndpointResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &ext[411]})
-var sDescribeOriginEndpointResponse_TimeDelaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeDelaySeconds", ID: &i___integer, Traits: &t83, Type: smithy.ShapeTypeInteger, Ext: &ext[412]})
-var sDescribeOriginEndpointResponse_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i___string, Traits: &t69, Type: smithy.ShapeTypeString, Ext: &ext[413]})
-var sDescribeOriginEndpointResponse_Whitelist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Whitelist", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t84, Type: smithy.ShapeTypeList, Ext: &ext[414]})
-var sListChannelsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t100, Type: smithy.ShapeTypeInteger, Ext: &ext[416]})
-var sListChannelsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t101, Type: smithy.ShapeTypeString, Ext: &ext[417]})
-var sListChannelsResponse_Channels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Channels", ID: &i___listOfChannel, Members: &m___listOfChannel, Traits: &t102, Type: smithy.ShapeTypeList, Ext: &ext[419]})
-var sListChannelsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t103, Type: smithy.ShapeTypeString, Ext: &ext[420]})
-var sListHarvestJobsRequest_IncludeChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeChannelId", ID: &i___string, Traits: &t104, Type: smithy.ShapeTypeString, Ext: &ext[422]})
-var sListHarvestJobsRequest_IncludeStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeStatus", ID: &i___string, Traits: &t105, Type: smithy.ShapeTypeString, Ext: &ext[423]})
-var sListHarvestJobsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t100, Type: smithy.ShapeTypeInteger, Ext: &ext[424]})
-var sListHarvestJobsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t101, Type: smithy.ShapeTypeString, Ext: &ext[425]})
-var sListHarvestJobsResponse_HarvestJobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HarvestJobs", ID: &i___listOfHarvestJob, Members: &m___listOfHarvestJob, Traits: &t106, Type: smithy.ShapeTypeList, Ext: &ext[427]})
-var sListHarvestJobsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t103, Type: smithy.ShapeTypeString, Ext: &ext[428]})
-var sListOriginEndpointsRequest_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelId", ID: &i___string, Traits: &t107, Type: smithy.ShapeTypeString, Ext: &ext[430]})
-var sListOriginEndpointsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t100, Type: smithy.ShapeTypeInteger, Ext: &ext[431]})
-var sListOriginEndpointsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t101, Type: smithy.ShapeTypeString, Ext: &ext[432]})
-var sListOriginEndpointsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t103, Type: smithy.ShapeTypeString, Ext: &ext[434]})
-var sListOriginEndpointsResponse_OriginEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpoints", ID: &i___listOfOriginEndpoint, Members: &m___listOfOriginEndpoint, Traits: &t108, Type: smithy.ShapeTypeList, Ext: &ext[435]})
-var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &ext[437]})
-var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &ext[439]})
-var sRotateChannelCredentialsRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &ext[441]})
-var sRotateChannelCredentialsResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[443]})
-var sRotateChannelCredentialsResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[444]})
-var sRotateChannelCredentialsResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[445]})
-var sRotateChannelCredentialsResponse_EgressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EgressAccessLogs", ID: &iEgressAccessLogs, Members: &mEgressAccessLogs, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &ext[446]})
-var sRotateChannelCredentialsResponse_HlsIngest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsIngest", ID: &iHlsIngest, Members: &mHlsIngest, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &ext[447]})
-var sRotateChannelCredentialsResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[448]})
-var sRotateChannelCredentialsResponse_IngressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressAccessLogs", ID: &iIngressAccessLogs, Members: &mIngressAccessLogs, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &ext[449]})
-var sRotateChannelCredentialsResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &ext[450]})
-var sRotateIngestEndpointCredentialsRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &ext[452]})
-var sRotateIngestEndpointCredentialsRequest_IngestEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngestEndpointId", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &ext[453]})
-var sRotateIngestEndpointCredentialsResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[455]})
-var sRotateIngestEndpointCredentialsResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[456]})
-var sRotateIngestEndpointCredentialsResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[457]})
-var sRotateIngestEndpointCredentialsResponse_EgressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EgressAccessLogs", ID: &iEgressAccessLogs, Members: &mEgressAccessLogs, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &ext[458]})
-var sRotateIngestEndpointCredentialsResponse_HlsIngest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsIngest", ID: &iHlsIngest, Members: &mHlsIngest, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &ext[459]})
-var sRotateIngestEndpointCredentialsResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[460]})
-var sRotateIngestEndpointCredentialsResponse_IngressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressAccessLogs", ID: &iIngressAccessLogs, Members: &mIngressAccessLogs, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &ext[461]})
-var sRotateIngestEndpointCredentialsResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &ext[462]})
-var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &ext[464]})
-var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &ext[465]})
-var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &ext[467]})
-var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t109, Type: smithy.ShapeTypeList, Ext: &ext[468]})
-var sUpdateChannelRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[470]})
-var sUpdateChannelRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &ext[471]})
-var sUpdateChannelResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[473]})
-var sUpdateChannelResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[474]})
-var sUpdateChannelResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[475]})
-var sUpdateChannelResponse_EgressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EgressAccessLogs", ID: &iEgressAccessLogs, Members: &mEgressAccessLogs, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &ext[476]})
-var sUpdateChannelResponse_HlsIngest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsIngest", ID: &iHlsIngest, Members: &mHlsIngest, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &ext[477]})
-var sUpdateChannelResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[478]})
-var sUpdateChannelResponse_IngressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressAccessLogs", ID: &iIngressAccessLogs, Members: &mIngressAccessLogs, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &ext[479]})
-var sUpdateChannelResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &ext[480]})
-var sUpdateOriginEndpointRequest_Authorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authorization", ID: &iAuthorization, Members: &mAuthorization, Traits: &t76, Type: smithy.ShapeTypeStructure, Ext: &ext[482]})
-var sUpdateOriginEndpointRequest_CmafPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmafPackage", ID: &iCmafPackageCreateOrUpdateParameters, Members: &mCmafPackageCreateOrUpdateParameters, Traits: &t77, Type: smithy.ShapeTypeStructure, Ext: &ext[483]})
-var sUpdateOriginEndpointRequest_DashPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashPackage", ID: &iDashPackage, Members: &mDashPackage, Traits: &t78, Type: smithy.ShapeTypeStructure, Ext: &ext[484]})
-var sUpdateOriginEndpointRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[485]})
-var sUpdateOriginEndpointRequest_HlsPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsPackage", ID: &iHlsPackage, Members: &mHlsPackage, Traits: &t79, Type: smithy.ShapeTypeStructure, Ext: &ext[486]})
-var sUpdateOriginEndpointRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &ext[487]})
-var sUpdateOriginEndpointRequest_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i___string, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &ext[488]})
-var sUpdateOriginEndpointRequest_MssPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MssPackage", ID: &iMssPackage, Members: &mMssPackage, Traits: &t80, Type: smithy.ShapeTypeStructure, Ext: &ext[489]})
-var sUpdateOriginEndpointRequest_Origination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Origination", ID: &iOrigination, Members: &mOrigination, Traits: &t81, Type: smithy.ShapeTypeEnum, Ext: &ext[490]})
-var sUpdateOriginEndpointRequest_StartoverWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartoverWindowSeconds", ID: &i___integer, Traits: &t82, Type: smithy.ShapeTypeInteger, Ext: &ext[491]})
-var sUpdateOriginEndpointRequest_TimeDelaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeDelaySeconds", ID: &i___integer, Traits: &t83, Type: smithy.ShapeTypeInteger, Ext: &ext[492]})
-var sUpdateOriginEndpointRequest_Whitelist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Whitelist", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t84, Type: smithy.ShapeTypeList, Ext: &ext[493]})
-var sUpdateOriginEndpointResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[495]})
-var sUpdateOriginEndpointResponse_Authorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authorization", ID: &iAuthorization, Members: &mAuthorization, Traits: &t76, Type: smithy.ShapeTypeStructure, Ext: &ext[496]})
-var sUpdateOriginEndpointResponse_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelId", ID: &i___string, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &ext[497]})
-var sUpdateOriginEndpointResponse_CmafPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmafPackage", ID: &iCmafPackage, Members: &mCmafPackage, Traits: &t77, Type: smithy.ShapeTypeStructure, Ext: &ext[498]})
-var sUpdateOriginEndpointResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[499]})
-var sUpdateOriginEndpointResponse_DashPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashPackage", ID: &iDashPackage, Members: &mDashPackage, Traits: &t78, Type: smithy.ShapeTypeStructure, Ext: &ext[500]})
-var sUpdateOriginEndpointResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[501]})
-var sUpdateOriginEndpointResponse_HlsPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsPackage", ID: &iHlsPackage, Members: &mHlsPackage, Traits: &t79, Type: smithy.ShapeTypeStructure, Ext: &ext[502]})
-var sUpdateOriginEndpointResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[503]})
-var sUpdateOriginEndpointResponse_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i___string, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &ext[504]})
-var sUpdateOriginEndpointResponse_MssPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MssPackage", ID: &iMssPackage, Members: &mMssPackage, Traits: &t80, Type: smithy.ShapeTypeStructure, Ext: &ext[505]})
-var sUpdateOriginEndpointResponse_Origination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Origination", ID: &iOrigination, Members: &mOrigination, Traits: &t81, Type: smithy.ShapeTypeEnum, Ext: &ext[506]})
-var sUpdateOriginEndpointResponse_StartoverWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartoverWindowSeconds", ID: &i___integer, Traits: &t82, Type: smithy.ShapeTypeInteger, Ext: &ext[507]})
-var sUpdateOriginEndpointResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &ext[508]})
-var sUpdateOriginEndpointResponse_TimeDelaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeDelaySeconds", ID: &i___integer, Traits: &t83, Type: smithy.ShapeTypeInteger, Ext: &ext[509]})
-var sUpdateOriginEndpointResponse_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i___string, Traits: &t69, Type: smithy.ShapeTypeString, Ext: &ext[510]})
-var sUpdateOriginEndpointResponse_Whitelist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Whitelist", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t84, Type: smithy.ShapeTypeList, Ext: &ext[511]})
+var s__AdTriggersElement_SPLICE_INSERT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPLICE_INSERT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &e__AdTriggersElement_SPLICE_INSERT})
+var s__AdTriggersElement_BREAK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BREAK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &e__AdTriggersElement_BREAK})
+var s__AdTriggersElement_PROVIDER_ADVERTISEMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROVIDER_ADVERTISEMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &e__AdTriggersElement_PROVIDER_ADVERTISEMENT})
+var s__AdTriggersElement_DISTRIBUTOR_ADVERTISEMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRIBUTOR_ADVERTISEMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &e__AdTriggersElement_DISTRIBUTOR_ADVERTISEMENT})
+var s__AdTriggersElement_PROVIDER_PLACEMENT_OPPORTUNITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROVIDER_PLACEMENT_OPPORTUNITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &e__AdTriggersElement_PROVIDER_PLACEMENT_OPPORTUNITY})
+var s__AdTriggersElement_DISTRIBUTOR_PLACEMENT_OPPORTUNITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &e__AdTriggersElement_DISTRIBUTOR_PLACEMENT_OPPORTUNITY})
+var s__AdTriggersElement_PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &e__AdTriggersElement_PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY})
+var s__AdTriggersElement_DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &e__AdTriggersElement_DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY})
+var s___listOf__PeriodTriggersElement_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i__PeriodTriggersElement, Members: &m__PeriodTriggersElement, Type: smithy.ShapeTypeEnum, Ext: &e___listOf__PeriodTriggersElement_member})
+var s___listOf__string_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e___listOf__string_member})
+var s___listOfChannel_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannel, Members: &mChannel, Type: smithy.ShapeTypeStructure, Ext: &e___listOfChannel_member})
+var s___listOfHarvestJob_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHarvestJob, Members: &mHarvestJob, Type: smithy.ShapeTypeStructure, Ext: &e___listOfHarvestJob_member})
+var s___listOfHlsManifest_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHlsManifest, Members: &mHlsManifest, Type: smithy.ShapeTypeStructure, Ext: &e___listOfHlsManifest_member})
+var s___listOfHlsManifestCreateOrUpdateParameters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHlsManifestCreateOrUpdateParameters, Members: &mHlsManifestCreateOrUpdateParameters, Type: smithy.ShapeTypeStructure, Ext: &e___listOfHlsManifestCreateOrUpdateParameters_member})
+var s___listOfIngestEndpoint_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIngestEndpoint, Members: &mIngestEndpoint, Type: smithy.ShapeTypeStructure, Ext: &e___listOfIngestEndpoint_member})
+var s___listOfOriginEndpoint_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOriginEndpoint, Members: &mOriginEndpoint, Type: smithy.ShapeTypeStructure, Ext: &e___listOfOriginEndpoint_member})
+var s___mapOf__string_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e___mapOf__string_key})
+var s___mapOf__string_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e___mapOf__string_value})
+var s__PeriodTriggersElement_ADS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &e__PeriodTriggersElement_ADS})
+var sAdMarkers_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdMarkers_NONE})
+var sAdMarkers_SCTE35_ENHANCED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCTE35_ENHANCED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdMarkers_SCTE35_ENHANCED})
+var sAdMarkers_PASSTHROUGH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PASSTHROUGH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdMarkers_PASSTHROUGH})
+var sAdMarkers_DATERANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATERANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdMarkers_DATERANGE})
+var sAdsOnDeliveryRestrictions_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsOnDeliveryRestrictions_NONE})
+var sAdsOnDeliveryRestrictions_RESTRICTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESTRICTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsOnDeliveryRestrictions_RESTRICTED})
+var sAdsOnDeliveryRestrictions_UNRESTRICTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNRESTRICTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsOnDeliveryRestrictions_UNRESTRICTED})
+var sAdsOnDeliveryRestrictions_BOTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOTH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdsOnDeliveryRestrictions_BOTH})
+var s_AdTriggers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i__AdTriggersElement, Members: &m__AdTriggersElement, Type: smithy.ShapeTypeEnum, Ext: &e_AdTriggers_member})
+var sAuthorization_CdnIdentifierSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CdnIdentifierSecret", ID: &i___string, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eAuthorization_CdnIdentifierSecret})
+var sAuthorization_SecretsRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretsRoleArn", ID: &i___string, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eAuthorization_SecretsRoleArn})
+var sChannel_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eChannel_Arn})
+var sChannel_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eChannel_CreatedAt})
+var sChannel_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eChannel_Description})
+var sChannel_EgressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EgressAccessLogs", ID: &iEgressAccessLogs, Members: &mEgressAccessLogs, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eChannel_EgressAccessLogs})
+var sChannel_HlsIngest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsIngest", ID: &iHlsIngest, Members: &mHlsIngest, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eChannel_HlsIngest})
+var sChannel_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eChannel_Id})
+var sChannel_IngressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressAccessLogs", ID: &iIngressAccessLogs, Members: &mIngressAccessLogs, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eChannel_IngressAccessLogs})
+var sChannel_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &eChannel_Tags})
+var sCmafEncryption_ConstantInitializationVector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConstantInitializationVector", ID: &i___string, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eCmafEncryption_ConstantInitializationVector})
+var sCmafEncryption_EncryptionMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionMethod", ID: &iCmafEncryptionMethod, Members: &mCmafEncryptionMethod, Traits: &t30, Type: smithy.ShapeTypeEnum, Ext: &eCmafEncryption_EncryptionMethod})
+var sCmafEncryption_KeyRotationIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyRotationIntervalSeconds", ID: &i___integer, Traits: &t31, Type: smithy.ShapeTypeInteger, Ext: &eCmafEncryption_KeyRotationIntervalSeconds})
+var sCmafEncryption_SpekeKeyProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpekeKeyProvider", ID: &iSpekeKeyProvider, Members: &mSpekeKeyProvider, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &eCmafEncryption_SpekeKeyProvider})
+var sCmafEncryptionMethod_SAMPLE_AES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMPLE_AES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCmafEncryptionMethod_SAMPLE_AES})
+var sCmafEncryptionMethod_AES_CTR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AES_CTR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCmafEncryptionMethod_AES_CTR})
+var sCmafPackage_Encryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encryption", ID: &iCmafEncryption, Members: &mCmafEncryption, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &eCmafPackage_Encryption})
+var sCmafPackage_HlsManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsManifests", ID: &i___listOfHlsManifest, Members: &m___listOfHlsManifest, Traits: &t34, Type: smithy.ShapeTypeList, Ext: &eCmafPackage_HlsManifests})
+var sCmafPackage_SegmentDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentDurationSeconds", ID: &i___integer, Traits: &t35, Type: smithy.ShapeTypeInteger, Ext: &eCmafPackage_SegmentDurationSeconds})
+var sCmafPackage_SegmentPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentPrefix", ID: &i___string, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eCmafPackage_SegmentPrefix})
+var sCmafPackage_StreamSelection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamSelection", ID: &iStreamSelection, Members: &mStreamSelection, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &eCmafPackage_StreamSelection})
+var sCmafPackageCreateOrUpdateParameters_Encryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encryption", ID: &iCmafEncryption, Members: &mCmafEncryption, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &eCmafPackageCreateOrUpdateParameters_Encryption})
+var sCmafPackageCreateOrUpdateParameters_HlsManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsManifests", ID: &i___listOfHlsManifestCreateOrUpdateParameters, Members: &m___listOfHlsManifestCreateOrUpdateParameters, Traits: &t34, Type: smithy.ShapeTypeList, Ext: &eCmafPackageCreateOrUpdateParameters_HlsManifests})
+var sCmafPackageCreateOrUpdateParameters_SegmentDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentDurationSeconds", ID: &i___integer, Traits: &t35, Type: smithy.ShapeTypeInteger, Ext: &eCmafPackageCreateOrUpdateParameters_SegmentDurationSeconds})
+var sCmafPackageCreateOrUpdateParameters_SegmentPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentPrefix", ID: &i___string, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eCmafPackageCreateOrUpdateParameters_SegmentPrefix})
+var sCmafPackageCreateOrUpdateParameters_StreamSelection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamSelection", ID: &iStreamSelection, Members: &mStreamSelection, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &eCmafPackageCreateOrUpdateParameters_StreamSelection})
+var sDashEncryption_KeyRotationIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyRotationIntervalSeconds", ID: &i___integer, Traits: &t31, Type: smithy.ShapeTypeInteger, Ext: &eDashEncryption_KeyRotationIntervalSeconds})
+var sDashEncryption_SpekeKeyProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpekeKeyProvider", ID: &iSpekeKeyProvider, Members: &mSpekeKeyProvider, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &eDashEncryption_SpekeKeyProvider})
+var sDashPackage_AdTriggers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdTriggers", ID: &i_AdTriggers, Members: &m_AdTriggers, Traits: &t38, Type: smithy.ShapeTypeList, Ext: &eDashPackage_AdTriggers})
+var sDashPackage_AdsOnDeliveryRestrictions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdsOnDeliveryRestrictions", ID: &iAdsOnDeliveryRestrictions, Members: &mAdsOnDeliveryRestrictions, Traits: &t39, Type: smithy.ShapeTypeEnum, Ext: &eDashPackage_AdsOnDeliveryRestrictions})
+var sDashPackage_Encryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encryption", ID: &iDashEncryption, Members: &mDashEncryption, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &eDashPackage_Encryption})
+var sDashPackage_IncludeIframeOnlyStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeIframeOnlyStream", ID: &i___boolean, Traits: &t40, Type: smithy.ShapeTypeBoolean, Ext: &eDashPackage_IncludeIframeOnlyStream})
+var sDashPackage_ManifestLayout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestLayout", ID: &iManifestLayout, Members: &mManifestLayout, Traits: &t41, Type: smithy.ShapeTypeEnum, Ext: &eDashPackage_ManifestLayout})
+var sDashPackage_ManifestWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestWindowSeconds", ID: &i___integer, Traits: &t42, Type: smithy.ShapeTypeInteger, Ext: &eDashPackage_ManifestWindowSeconds})
+var sDashPackage_MinBufferTimeSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinBufferTimeSeconds", ID: &i___integer, Traits: &t43, Type: smithy.ShapeTypeInteger, Ext: &eDashPackage_MinBufferTimeSeconds})
+var sDashPackage_MinUpdatePeriodSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinUpdatePeriodSeconds", ID: &i___integer, Traits: &t44, Type: smithy.ShapeTypeInteger, Ext: &eDashPackage_MinUpdatePeriodSeconds})
+var sDashPackage_PeriodTriggers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeriodTriggers", ID: &i___listOf__PeriodTriggersElement, Members: &m___listOf__PeriodTriggersElement, Traits: &t45, Type: smithy.ShapeTypeList, Ext: &eDashPackage_PeriodTriggers})
+var sDashPackage_Profile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Profile", ID: &iProfile, Members: &mProfile, Traits: &t46, Type: smithy.ShapeTypeEnum, Ext: &eDashPackage_Profile})
+var sDashPackage_SegmentDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentDurationSeconds", ID: &i___integer, Traits: &t35, Type: smithy.ShapeTypeInteger, Ext: &eDashPackage_SegmentDurationSeconds})
+var sDashPackage_SegmentTemplateFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentTemplateFormat", ID: &iSegmentTemplateFormat, Members: &mSegmentTemplateFormat, Traits: &t47, Type: smithy.ShapeTypeEnum, Ext: &eDashPackage_SegmentTemplateFormat})
+var sDashPackage_StreamSelection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamSelection", ID: &iStreamSelection, Members: &mStreamSelection, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &eDashPackage_StreamSelection})
+var sDashPackage_SuggestedPresentationDelaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuggestedPresentationDelaySeconds", ID: &i___integer, Traits: &t48, Type: smithy.ShapeTypeInteger, Ext: &eDashPackage_SuggestedPresentationDelaySeconds})
+var sDashPackage_UtcTiming = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UtcTiming", ID: &iUtcTiming, Members: &mUtcTiming, Traits: &t49, Type: smithy.ShapeTypeEnum, Ext: &eDashPackage_UtcTiming})
+var sDashPackage_UtcTimingUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UtcTimingUri", ID: &i___string, Traits: &t50, Type: smithy.ShapeTypeString, Ext: &eDashPackage_UtcTimingUri})
+var sEgressAccessLogs_LogGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroupName", ID: &i___string, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eEgressAccessLogs_LogGroupName})
+var sEncryptionContractConfiguration_PresetSpeke20Audio = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PresetSpeke20Audio", ID: &iPresetSpeke20Audio, Members: &mPresetSpeke20Audio, Traits: &t52, Type: smithy.ShapeTypeEnum, Ext: &eEncryptionContractConfiguration_PresetSpeke20Audio})
+var sEncryptionContractConfiguration_PresetSpeke20Video = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PresetSpeke20Video", ID: &iPresetSpeke20Video, Members: &mPresetSpeke20Video, Traits: &t53, Type: smithy.ShapeTypeEnum, Ext: &eEncryptionContractConfiguration_PresetSpeke20Video})
+var sEncryptionMethod_AES_128 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AES_128", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionMethod_AES_128})
+var sEncryptionMethod_SAMPLE_AES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMPLE_AES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionMethod_SAMPLE_AES})
+var sForbiddenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eForbiddenException_Message})
+var sHarvestJob_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eHarvestJob_Arn})
+var sHarvestJob_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelId", ID: &i___string, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eHarvestJob_ChannelId})
+var sHarvestJob_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eHarvestJob_CreatedAt})
+var sHarvestJob_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eHarvestJob_EndTime})
+var sHarvestJob_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eHarvestJob_Id})
+var sHarvestJob_OriginEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eHarvestJob_OriginEndpointId})
+var sHarvestJob_S3Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Destination", ID: &iS3Destination, Members: &mS3Destination, Traits: &t59, Type: smithy.ShapeTypeStructure, Ext: &eHarvestJob_S3Destination})
+var sHarvestJob_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eHarvestJob_StartTime})
+var sHarvestJob_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Traits: &t61, Type: smithy.ShapeTypeEnum, Ext: &eHarvestJob_Status})
+var sHlsEncryption_ConstantInitializationVector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConstantInitializationVector", ID: &i___string, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eHlsEncryption_ConstantInitializationVector})
+var sHlsEncryption_EncryptionMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionMethod", ID: &iEncryptionMethod, Members: &mEncryptionMethod, Traits: &t30, Type: smithy.ShapeTypeEnum, Ext: &eHlsEncryption_EncryptionMethod})
+var sHlsEncryption_KeyRotationIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyRotationIntervalSeconds", ID: &i___integer, Traits: &t31, Type: smithy.ShapeTypeInteger, Ext: &eHlsEncryption_KeyRotationIntervalSeconds})
+var sHlsEncryption_RepeatExtXKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepeatExtXKey", ID: &i___boolean, Traits: &t62, Type: smithy.ShapeTypeBoolean, Ext: &eHlsEncryption_RepeatExtXKey})
+var sHlsEncryption_SpekeKeyProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpekeKeyProvider", ID: &iSpekeKeyProvider, Members: &mSpekeKeyProvider, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &eHlsEncryption_SpekeKeyProvider})
+var sHlsIngest_IngestEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngestEndpoints", ID: &i___listOfIngestEndpoint, Members: &m___listOfIngestEndpoint, Traits: &t63, Type: smithy.ShapeTypeList, Ext: &eHlsIngest_IngestEndpoints})
+var sHlsManifest_AdMarkers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdMarkers", ID: &iAdMarkers, Members: &mAdMarkers, Traits: &t64, Type: smithy.ShapeTypeEnum, Ext: &eHlsManifest_AdMarkers})
+var sHlsManifest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eHlsManifest_Id})
+var sHlsManifest_IncludeIframeOnlyStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeIframeOnlyStream", ID: &i___boolean, Traits: &t40, Type: smithy.ShapeTypeBoolean, Ext: &eHlsManifest_IncludeIframeOnlyStream})
+var sHlsManifest_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i___string, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &eHlsManifest_ManifestName})
+var sHlsManifest_PlaylistType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaylistType", ID: &iPlaylistType, Members: &mPlaylistType, Traits: &t66, Type: smithy.ShapeTypeEnum, Ext: &eHlsManifest_PlaylistType})
+var sHlsManifest_PlaylistWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaylistWindowSeconds", ID: &i___integer, Traits: &t67, Type: smithy.ShapeTypeInteger, Ext: &eHlsManifest_PlaylistWindowSeconds})
+var sHlsManifest_ProgramDateTimeIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgramDateTimeIntervalSeconds", ID: &i___integer, Traits: &t68, Type: smithy.ShapeTypeInteger, Ext: &eHlsManifest_ProgramDateTimeIntervalSeconds})
+var sHlsManifest_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i___string, Traits: &t69, Type: smithy.ShapeTypeString, Ext: &eHlsManifest_Url})
+var sHlsManifest_AdTriggers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdTriggers", ID: &i_AdTriggers, Members: &m_AdTriggers, Traits: &t38, Type: smithy.ShapeTypeList, Ext: &eHlsManifest_AdTriggers})
+var sHlsManifest_AdsOnDeliveryRestrictions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdsOnDeliveryRestrictions", ID: &iAdsOnDeliveryRestrictions, Members: &mAdsOnDeliveryRestrictions, Traits: &t39, Type: smithy.ShapeTypeEnum, Ext: &eHlsManifest_AdsOnDeliveryRestrictions})
+var sHlsManifestCreateOrUpdateParameters_AdMarkers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdMarkers", ID: &iAdMarkers, Members: &mAdMarkers, Traits: &t64, Type: smithy.ShapeTypeEnum, Ext: &eHlsManifestCreateOrUpdateParameters_AdMarkers})
+var sHlsManifestCreateOrUpdateParameters_AdTriggers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdTriggers", ID: &i_AdTriggers, Members: &m_AdTriggers, Traits: &t38, Type: smithy.ShapeTypeList, Ext: &eHlsManifestCreateOrUpdateParameters_AdTriggers})
+var sHlsManifestCreateOrUpdateParameters_AdsOnDeliveryRestrictions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdsOnDeliveryRestrictions", ID: &iAdsOnDeliveryRestrictions, Members: &mAdsOnDeliveryRestrictions, Traits: &t39, Type: smithy.ShapeTypeEnum, Ext: &eHlsManifestCreateOrUpdateParameters_AdsOnDeliveryRestrictions})
+var sHlsManifestCreateOrUpdateParameters_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eHlsManifestCreateOrUpdateParameters_Id})
+var sHlsManifestCreateOrUpdateParameters_IncludeIframeOnlyStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeIframeOnlyStream", ID: &i___boolean, Traits: &t40, Type: smithy.ShapeTypeBoolean, Ext: &eHlsManifestCreateOrUpdateParameters_IncludeIframeOnlyStream})
+var sHlsManifestCreateOrUpdateParameters_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i___string, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &eHlsManifestCreateOrUpdateParameters_ManifestName})
+var sHlsManifestCreateOrUpdateParameters_PlaylistType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaylistType", ID: &iPlaylistType, Members: &mPlaylistType, Traits: &t66, Type: smithy.ShapeTypeEnum, Ext: &eHlsManifestCreateOrUpdateParameters_PlaylistType})
+var sHlsManifestCreateOrUpdateParameters_PlaylistWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaylistWindowSeconds", ID: &i___integer, Traits: &t67, Type: smithy.ShapeTypeInteger, Ext: &eHlsManifestCreateOrUpdateParameters_PlaylistWindowSeconds})
+var sHlsManifestCreateOrUpdateParameters_ProgramDateTimeIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgramDateTimeIntervalSeconds", ID: &i___integer, Traits: &t68, Type: smithy.ShapeTypeInteger, Ext: &eHlsManifestCreateOrUpdateParameters_ProgramDateTimeIntervalSeconds})
+var sHlsPackage_AdMarkers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdMarkers", ID: &iAdMarkers, Members: &mAdMarkers, Traits: &t64, Type: smithy.ShapeTypeEnum, Ext: &eHlsPackage_AdMarkers})
+var sHlsPackage_AdTriggers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdTriggers", ID: &i_AdTriggers, Members: &m_AdTriggers, Traits: &t38, Type: smithy.ShapeTypeList, Ext: &eHlsPackage_AdTriggers})
+var sHlsPackage_AdsOnDeliveryRestrictions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdsOnDeliveryRestrictions", ID: &iAdsOnDeliveryRestrictions, Members: &mAdsOnDeliveryRestrictions, Traits: &t39, Type: smithy.ShapeTypeEnum, Ext: &eHlsPackage_AdsOnDeliveryRestrictions})
+var sHlsPackage_Encryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encryption", ID: &iHlsEncryption, Members: &mHlsEncryption, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &eHlsPackage_Encryption})
+var sHlsPackage_IncludeDvbSubtitles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeDvbSubtitles", ID: &i___boolean, Traits: &t70, Type: smithy.ShapeTypeBoolean, Ext: &eHlsPackage_IncludeDvbSubtitles})
+var sHlsPackage_IncludeIframeOnlyStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeIframeOnlyStream", ID: &i___boolean, Traits: &t40, Type: smithy.ShapeTypeBoolean, Ext: &eHlsPackage_IncludeIframeOnlyStream})
+var sHlsPackage_PlaylistType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaylistType", ID: &iPlaylistType, Members: &mPlaylistType, Traits: &t66, Type: smithy.ShapeTypeEnum, Ext: &eHlsPackage_PlaylistType})
+var sHlsPackage_PlaylistWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaylistWindowSeconds", ID: &i___integer, Traits: &t67, Type: smithy.ShapeTypeInteger, Ext: &eHlsPackage_PlaylistWindowSeconds})
+var sHlsPackage_ProgramDateTimeIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgramDateTimeIntervalSeconds", ID: &i___integer, Traits: &t68, Type: smithy.ShapeTypeInteger, Ext: &eHlsPackage_ProgramDateTimeIntervalSeconds})
+var sHlsPackage_SegmentDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentDurationSeconds", ID: &i___integer, Traits: &t35, Type: smithy.ShapeTypeInteger, Ext: &eHlsPackage_SegmentDurationSeconds})
+var sHlsPackage_StreamSelection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamSelection", ID: &iStreamSelection, Members: &mStreamSelection, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &eHlsPackage_StreamSelection})
+var sHlsPackage_UseAudioRenditionGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UseAudioRenditionGroup", ID: &i___boolean, Traits: &t71, Type: smithy.ShapeTypeBoolean, Ext: &eHlsPackage_UseAudioRenditionGroup})
+var sIngestEndpoint_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eIngestEndpoint_Id})
+var sIngestEndpoint_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_SensitiveString, Traits: &t72, Type: smithy.ShapeTypeString, Ext: &eIngestEndpoint_Password})
+var sIngestEndpoint_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i___string, Traits: &t69, Type: smithy.ShapeTypeString, Ext: &eIngestEndpoint_Url})
+var sIngestEndpoint_Username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Username", ID: &i_SensitiveString, Traits: &t73, Type: smithy.ShapeTypeString, Ext: &eIngestEndpoint_Username})
+var sIngressAccessLogs_LogGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroupName", ID: &i___string, Traits: &t51, Type: smithy.ShapeTypeString, Ext: &eIngressAccessLogs_LogGroupName})
+var sInternalServerErrorException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eInternalServerErrorException_Message})
+var sManifestLayout_FULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestLayout_FULL})
+var sManifestLayout_COMPACT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPACT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestLayout_COMPACT})
+var sManifestLayout_DRM_TOP_LEVEL_COMPACT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRM_TOP_LEVEL_COMPACT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eManifestLayout_DRM_TOP_LEVEL_COMPACT})
+var sMssEncryption_SpekeKeyProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpekeKeyProvider", ID: &iSpekeKeyProvider, Members: &mSpekeKeyProvider, Traits: &t32, Type: smithy.ShapeTypeStructure, Ext: &eMssEncryption_SpekeKeyProvider})
+var sMssPackage_Encryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encryption", ID: &iMssEncryption, Members: &mMssEncryption, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &eMssPackage_Encryption})
+var sMssPackage_ManifestWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestWindowSeconds", ID: &i___integer, Traits: &t42, Type: smithy.ShapeTypeInteger, Ext: &eMssPackage_ManifestWindowSeconds})
+var sMssPackage_SegmentDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentDurationSeconds", ID: &i___integer, Traits: &t35, Type: smithy.ShapeTypeInteger, Ext: &eMssPackage_SegmentDurationSeconds})
+var sMssPackage_StreamSelection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamSelection", ID: &iStreamSelection, Members: &mStreamSelection, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &eMssPackage_StreamSelection})
+var sNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eNotFoundException_Message})
+var sOrigination_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOrigination_ALLOW})
+var sOrigination_DENY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOrigination_DENY})
+var sOriginEndpoint_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eOriginEndpoint_Arn})
+var sOriginEndpoint_Authorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authorization", ID: &iAuthorization, Members: &mAuthorization, Traits: &t76, Type: smithy.ShapeTypeStructure, Ext: &eOriginEndpoint_Authorization})
+var sOriginEndpoint_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelId", ID: &i___string, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eOriginEndpoint_ChannelId})
+var sOriginEndpoint_CmafPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmafPackage", ID: &iCmafPackage, Members: &mCmafPackage, Traits: &t77, Type: smithy.ShapeTypeStructure, Ext: &eOriginEndpoint_CmafPackage})
+var sOriginEndpoint_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eOriginEndpoint_CreatedAt})
+var sOriginEndpoint_DashPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashPackage", ID: &iDashPackage, Members: &mDashPackage, Traits: &t78, Type: smithy.ShapeTypeStructure, Ext: &eOriginEndpoint_DashPackage})
+var sOriginEndpoint_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eOriginEndpoint_Description})
+var sOriginEndpoint_HlsPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsPackage", ID: &iHlsPackage, Members: &mHlsPackage, Traits: &t79, Type: smithy.ShapeTypeStructure, Ext: &eOriginEndpoint_HlsPackage})
+var sOriginEndpoint_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eOriginEndpoint_Id})
+var sOriginEndpoint_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i___string, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &eOriginEndpoint_ManifestName})
+var sOriginEndpoint_MssPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MssPackage", ID: &iMssPackage, Members: &mMssPackage, Traits: &t80, Type: smithy.ShapeTypeStructure, Ext: &eOriginEndpoint_MssPackage})
+var sOriginEndpoint_Origination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Origination", ID: &iOrigination, Members: &mOrigination, Traits: &t81, Type: smithy.ShapeTypeEnum, Ext: &eOriginEndpoint_Origination})
+var sOriginEndpoint_StartoverWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartoverWindowSeconds", ID: &i___integer, Traits: &t82, Type: smithy.ShapeTypeInteger, Ext: &eOriginEndpoint_StartoverWindowSeconds})
+var sOriginEndpoint_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &eOriginEndpoint_Tags})
+var sOriginEndpoint_TimeDelaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeDelaySeconds", ID: &i___integer, Traits: &t83, Type: smithy.ShapeTypeInteger, Ext: &eOriginEndpoint_TimeDelaySeconds})
+var sOriginEndpoint_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i___string, Traits: &t69, Type: smithy.ShapeTypeString, Ext: &eOriginEndpoint_Url})
+var sOriginEndpoint_Whitelist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Whitelist", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t84, Type: smithy.ShapeTypeList, Ext: &eOriginEndpoint_Whitelist})
+var sPlaylistType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlaylistType_NONE})
+var sPlaylistType_EVENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlaylistType_EVENT})
+var sPlaylistType_VOD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePlaylistType_VOD})
+var sPresetSpeke20Audio_PRESET_AUDIO_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_AUDIO_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePresetSpeke20Audio_PRESET_AUDIO_1})
+var sPresetSpeke20Audio_PRESET_AUDIO_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_AUDIO_2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePresetSpeke20Audio_PRESET_AUDIO_2})
+var sPresetSpeke20Audio_PRESET_AUDIO_3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_AUDIO_3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePresetSpeke20Audio_PRESET_AUDIO_3})
+var sPresetSpeke20Audio_SHARED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHARED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePresetSpeke20Audio_SHARED})
+var sPresetSpeke20Audio_UNENCRYPTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNENCRYPTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePresetSpeke20Audio_UNENCRYPTED})
+var sPresetSpeke20Video_PRESET_VIDEO_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_VIDEO_1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePresetSpeke20Video_PRESET_VIDEO_1})
+var sPresetSpeke20Video_PRESET_VIDEO_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_VIDEO_2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePresetSpeke20Video_PRESET_VIDEO_2})
+var sPresetSpeke20Video_PRESET_VIDEO_3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_VIDEO_3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePresetSpeke20Video_PRESET_VIDEO_3})
+var sPresetSpeke20Video_PRESET_VIDEO_4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_VIDEO_4", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePresetSpeke20Video_PRESET_VIDEO_4})
+var sPresetSpeke20Video_PRESET_VIDEO_5 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_VIDEO_5", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePresetSpeke20Video_PRESET_VIDEO_5})
+var sPresetSpeke20Video_PRESET_VIDEO_6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_VIDEO_6", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePresetSpeke20Video_PRESET_VIDEO_6})
+var sPresetSpeke20Video_PRESET_VIDEO_7 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_VIDEO_7", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePresetSpeke20Video_PRESET_VIDEO_7})
+var sPresetSpeke20Video_PRESET_VIDEO_8 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_VIDEO_8", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePresetSpeke20Video_PRESET_VIDEO_8})
+var sPresetSpeke20Video_SHARED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHARED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePresetSpeke20Video_SHARED})
+var sPresetSpeke20Video_UNENCRYPTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNENCRYPTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePresetSpeke20Video_UNENCRYPTED})
+var sProfile_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProfile_NONE})
+var sProfile_HBBTV_1_5 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HBBTV_1_5", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProfile_HBBTV_1_5})
+var sProfile_HYBRIDCAST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HYBRIDCAST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProfile_HYBRIDCAST})
+var sProfile_DVB_DASH_2014 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DVB_DASH_2014", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProfile_DVB_DASH_2014})
+var sS3Destination_BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketName", ID: &i___string, Traits: &t85, Type: smithy.ShapeTypeString, Ext: &eS3Destination_BucketName})
+var sS3Destination_ManifestKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestKey", ID: &i___string, Traits: &t86, Type: smithy.ShapeTypeString, Ext: &eS3Destination_ManifestKey})
+var sS3Destination_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i___string, Traits: &t87, Type: smithy.ShapeTypeString, Ext: &eS3Destination_RoleArn})
+var sSegmentTemplateFormat_NUMBER_WITH_TIMELINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUMBER_WITH_TIMELINE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSegmentTemplateFormat_NUMBER_WITH_TIMELINE})
+var sSegmentTemplateFormat_TIME_WITH_TIMELINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_WITH_TIMELINE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSegmentTemplateFormat_TIME_WITH_TIMELINE})
+var sSegmentTemplateFormat_NUMBER_WITH_DURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUMBER_WITH_DURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSegmentTemplateFormat_NUMBER_WITH_DURATION})
+var sServiceUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailableException_Message})
+var sSpekeKeyProvider_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i___string, Traits: &t90, Type: smithy.ShapeTypeString, Ext: &eSpekeKeyProvider_CertificateArn})
+var sSpekeKeyProvider_EncryptionContractConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionContractConfiguration", ID: &iEncryptionContractConfiguration, Members: &mEncryptionContractConfiguration, Traits: &t91, Type: smithy.ShapeTypeStructure, Ext: &eSpekeKeyProvider_EncryptionContractConfiguration})
+var sSpekeKeyProvider_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i___string, Traits: &t92, Type: smithy.ShapeTypeString, Ext: &eSpekeKeyProvider_ResourceId})
+var sSpekeKeyProvider_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i___string, Traits: &t87, Type: smithy.ShapeTypeString, Ext: &eSpekeKeyProvider_RoleArn})
+var sSpekeKeyProvider_SystemIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SystemIds", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t93, Type: smithy.ShapeTypeList, Ext: &eSpekeKeyProvider_SystemIds})
+var sSpekeKeyProvider_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i___string, Traits: &t69, Type: smithy.ShapeTypeString, Ext: &eSpekeKeyProvider_Url})
+var sStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_IN_PROGRESS})
+var sStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_SUCCEEDED})
+var sStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_FAILED})
+var sStreamOrder_ORIGINAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ORIGINAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamOrder_ORIGINAL})
+var sStreamOrder_VIDEO_BITRATE_ASCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VIDEO_BITRATE_ASCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamOrder_VIDEO_BITRATE_ASCENDING})
+var sStreamOrder_VIDEO_BITRATE_DESCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VIDEO_BITRATE_DESCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamOrder_VIDEO_BITRATE_DESCENDING})
+var sStreamSelection_MaxVideoBitsPerSecond = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxVideoBitsPerSecond", ID: &i___integer, Traits: &t94, Type: smithy.ShapeTypeInteger, Ext: &eStreamSelection_MaxVideoBitsPerSecond})
+var sStreamSelection_MinVideoBitsPerSecond = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinVideoBitsPerSecond", ID: &i___integer, Traits: &t95, Type: smithy.ShapeTypeInteger, Ext: &eStreamSelection_MinVideoBitsPerSecond})
+var sStreamSelection_StreamOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamOrder", ID: &iStreamOrder, Members: &mStreamOrder, Traits: &t96, Type: smithy.ShapeTypeEnum, Ext: &eStreamSelection_StreamOrder})
+var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e_Tags_key})
+var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e_Tags_value})
+var sTooManyRequestsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eTooManyRequestsException_Message})
+var sUnprocessableEntityException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString, Ext: &eUnprocessableEntityException_Message})
+var sUtcTiming_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUtcTiming_NONE})
+var sUtcTiming_HTTP_HEAD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP_HEAD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUtcTiming_HTTP_HEAD})
+var sUtcTiming_HTTP_ISO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP_ISO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUtcTiming_HTTP_ISO})
+var sUtcTiming_HTTP_XSDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP_XSDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eUtcTiming_HTTP_XSDATE})
+var sConfigureLogsRequest_EgressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EgressAccessLogs", ID: &iEgressAccessLogs, Members: &mEgressAccessLogs, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eConfigureLogsRequest_EgressAccessLogs})
+var sConfigureLogsRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &eConfigureLogsRequest_Id})
+var sConfigureLogsRequest_IngressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressAccessLogs", ID: &iIngressAccessLogs, Members: &mIngressAccessLogs, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eConfigureLogsRequest_IngressAccessLogs})
+var sConfigureLogsResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eConfigureLogsResponse_Arn})
+var sConfigureLogsResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eConfigureLogsResponse_CreatedAt})
+var sConfigureLogsResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eConfigureLogsResponse_Description})
+var sConfigureLogsResponse_EgressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EgressAccessLogs", ID: &iEgressAccessLogs, Members: &mEgressAccessLogs, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eConfigureLogsResponse_EgressAccessLogs})
+var sConfigureLogsResponse_HlsIngest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsIngest", ID: &iHlsIngest, Members: &mHlsIngest, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eConfigureLogsResponse_HlsIngest})
+var sConfigureLogsResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eConfigureLogsResponse_Id})
+var sConfigureLogsResponse_IngressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressAccessLogs", ID: &iIngressAccessLogs, Members: &mIngressAccessLogs, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eConfigureLogsResponse_IngressAccessLogs})
+var sConfigureLogsResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &eConfigureLogsResponse_Tags})
+var sCreateChannelRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eCreateChannelRequest_Description})
+var sCreateChannelRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eCreateChannelRequest_Id})
+var sCreateChannelRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &eCreateChannelRequest_Tags})
+var sCreateChannelResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eCreateChannelResponse_Arn})
+var sCreateChannelResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eCreateChannelResponse_CreatedAt})
+var sCreateChannelResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eCreateChannelResponse_Description})
+var sCreateChannelResponse_EgressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EgressAccessLogs", ID: &iEgressAccessLogs, Members: &mEgressAccessLogs, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelResponse_EgressAccessLogs})
+var sCreateChannelResponse_HlsIngest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsIngest", ID: &iHlsIngest, Members: &mHlsIngest, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelResponse_HlsIngest})
+var sCreateChannelResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eCreateChannelResponse_Id})
+var sCreateChannelResponse_IngressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressAccessLogs", ID: &iIngressAccessLogs, Members: &mIngressAccessLogs, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eCreateChannelResponse_IngressAccessLogs})
+var sCreateChannelResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &eCreateChannelResponse_Tags})
+var sCreateHarvestJobRequest_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eCreateHarvestJobRequest_EndTime})
+var sCreateHarvestJobRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eCreateHarvestJobRequest_Id})
+var sCreateHarvestJobRequest_OriginEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eCreateHarvestJobRequest_OriginEndpointId})
+var sCreateHarvestJobRequest_S3Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Destination", ID: &iS3Destination, Members: &mS3Destination, Traits: &t59, Type: smithy.ShapeTypeStructure, Ext: &eCreateHarvestJobRequest_S3Destination})
+var sCreateHarvestJobRequest_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eCreateHarvestJobRequest_StartTime})
+var sCreateHarvestJobResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eCreateHarvestJobResponse_Arn})
+var sCreateHarvestJobResponse_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelId", ID: &i___string, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eCreateHarvestJobResponse_ChannelId})
+var sCreateHarvestJobResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eCreateHarvestJobResponse_CreatedAt})
+var sCreateHarvestJobResponse_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eCreateHarvestJobResponse_EndTime})
+var sCreateHarvestJobResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eCreateHarvestJobResponse_Id})
+var sCreateHarvestJobResponse_OriginEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eCreateHarvestJobResponse_OriginEndpointId})
+var sCreateHarvestJobResponse_S3Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Destination", ID: &iS3Destination, Members: &mS3Destination, Traits: &t59, Type: smithy.ShapeTypeStructure, Ext: &eCreateHarvestJobResponse_S3Destination})
+var sCreateHarvestJobResponse_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eCreateHarvestJobResponse_StartTime})
+var sCreateHarvestJobResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Traits: &t61, Type: smithy.ShapeTypeEnum, Ext: &eCreateHarvestJobResponse_Status})
+var sCreateOriginEndpointRequest_Authorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authorization", ID: &iAuthorization, Members: &mAuthorization, Traits: &t76, Type: smithy.ShapeTypeStructure, Ext: &eCreateOriginEndpointRequest_Authorization})
+var sCreateOriginEndpointRequest_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelId", ID: &i___string, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eCreateOriginEndpointRequest_ChannelId})
+var sCreateOriginEndpointRequest_CmafPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmafPackage", ID: &iCmafPackageCreateOrUpdateParameters, Members: &mCmafPackageCreateOrUpdateParameters, Traits: &t77, Type: smithy.ShapeTypeStructure, Ext: &eCreateOriginEndpointRequest_CmafPackage})
+var sCreateOriginEndpointRequest_DashPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashPackage", ID: &iDashPackage, Members: &mDashPackage, Traits: &t78, Type: smithy.ShapeTypeStructure, Ext: &eCreateOriginEndpointRequest_DashPackage})
+var sCreateOriginEndpointRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eCreateOriginEndpointRequest_Description})
+var sCreateOriginEndpointRequest_HlsPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsPackage", ID: &iHlsPackage, Members: &mHlsPackage, Traits: &t79, Type: smithy.ShapeTypeStructure, Ext: &eCreateOriginEndpointRequest_HlsPackage})
+var sCreateOriginEndpointRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eCreateOriginEndpointRequest_Id})
+var sCreateOriginEndpointRequest_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i___string, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &eCreateOriginEndpointRequest_ManifestName})
+var sCreateOriginEndpointRequest_MssPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MssPackage", ID: &iMssPackage, Members: &mMssPackage, Traits: &t80, Type: smithy.ShapeTypeStructure, Ext: &eCreateOriginEndpointRequest_MssPackage})
+var sCreateOriginEndpointRequest_Origination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Origination", ID: &iOrigination, Members: &mOrigination, Traits: &t81, Type: smithy.ShapeTypeEnum, Ext: &eCreateOriginEndpointRequest_Origination})
+var sCreateOriginEndpointRequest_StartoverWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartoverWindowSeconds", ID: &i___integer, Traits: &t82, Type: smithy.ShapeTypeInteger, Ext: &eCreateOriginEndpointRequest_StartoverWindowSeconds})
+var sCreateOriginEndpointRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &eCreateOriginEndpointRequest_Tags})
+var sCreateOriginEndpointRequest_TimeDelaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeDelaySeconds", ID: &i___integer, Traits: &t83, Type: smithy.ShapeTypeInteger, Ext: &eCreateOriginEndpointRequest_TimeDelaySeconds})
+var sCreateOriginEndpointRequest_Whitelist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Whitelist", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t84, Type: smithy.ShapeTypeList, Ext: &eCreateOriginEndpointRequest_Whitelist})
+var sCreateOriginEndpointResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eCreateOriginEndpointResponse_Arn})
+var sCreateOriginEndpointResponse_Authorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authorization", ID: &iAuthorization, Members: &mAuthorization, Traits: &t76, Type: smithy.ShapeTypeStructure, Ext: &eCreateOriginEndpointResponse_Authorization})
+var sCreateOriginEndpointResponse_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelId", ID: &i___string, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eCreateOriginEndpointResponse_ChannelId})
+var sCreateOriginEndpointResponse_CmafPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmafPackage", ID: &iCmafPackage, Members: &mCmafPackage, Traits: &t77, Type: smithy.ShapeTypeStructure, Ext: &eCreateOriginEndpointResponse_CmafPackage})
+var sCreateOriginEndpointResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eCreateOriginEndpointResponse_CreatedAt})
+var sCreateOriginEndpointResponse_DashPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashPackage", ID: &iDashPackage, Members: &mDashPackage, Traits: &t78, Type: smithy.ShapeTypeStructure, Ext: &eCreateOriginEndpointResponse_DashPackage})
+var sCreateOriginEndpointResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eCreateOriginEndpointResponse_Description})
+var sCreateOriginEndpointResponse_HlsPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsPackage", ID: &iHlsPackage, Members: &mHlsPackage, Traits: &t79, Type: smithy.ShapeTypeStructure, Ext: &eCreateOriginEndpointResponse_HlsPackage})
+var sCreateOriginEndpointResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eCreateOriginEndpointResponse_Id})
+var sCreateOriginEndpointResponse_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i___string, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &eCreateOriginEndpointResponse_ManifestName})
+var sCreateOriginEndpointResponse_MssPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MssPackage", ID: &iMssPackage, Members: &mMssPackage, Traits: &t80, Type: smithy.ShapeTypeStructure, Ext: &eCreateOriginEndpointResponse_MssPackage})
+var sCreateOriginEndpointResponse_Origination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Origination", ID: &iOrigination, Members: &mOrigination, Traits: &t81, Type: smithy.ShapeTypeEnum, Ext: &eCreateOriginEndpointResponse_Origination})
+var sCreateOriginEndpointResponse_StartoverWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartoverWindowSeconds", ID: &i___integer, Traits: &t82, Type: smithy.ShapeTypeInteger, Ext: &eCreateOriginEndpointResponse_StartoverWindowSeconds})
+var sCreateOriginEndpointResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &eCreateOriginEndpointResponse_Tags})
+var sCreateOriginEndpointResponse_TimeDelaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeDelaySeconds", ID: &i___integer, Traits: &t83, Type: smithy.ShapeTypeInteger, Ext: &eCreateOriginEndpointResponse_TimeDelaySeconds})
+var sCreateOriginEndpointResponse_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i___string, Traits: &t69, Type: smithy.ShapeTypeString, Ext: &eCreateOriginEndpointResponse_Url})
+var sCreateOriginEndpointResponse_Whitelist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Whitelist", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t84, Type: smithy.ShapeTypeList, Ext: &eCreateOriginEndpointResponse_Whitelist})
+var sDeleteChannelRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &eDeleteChannelRequest_Id})
+var sDeleteOriginEndpointRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &eDeleteOriginEndpointRequest_Id})
+var sDescribeChannelRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelRequest_Id})
+var sDescribeChannelResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelResponse_Arn})
+var sDescribeChannelResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelResponse_CreatedAt})
+var sDescribeChannelResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelResponse_Description})
+var sDescribeChannelResponse_EgressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EgressAccessLogs", ID: &iEgressAccessLogs, Members: &mEgressAccessLogs, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelResponse_EgressAccessLogs})
+var sDescribeChannelResponse_HlsIngest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsIngest", ID: &iHlsIngest, Members: &mHlsIngest, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelResponse_HlsIngest})
+var sDescribeChannelResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eDescribeChannelResponse_Id})
+var sDescribeChannelResponse_IngressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressAccessLogs", ID: &iIngressAccessLogs, Members: &mIngressAccessLogs, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eDescribeChannelResponse_IngressAccessLogs})
+var sDescribeChannelResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &eDescribeChannelResponse_Tags})
+var sDescribeHarvestJobRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &eDescribeHarvestJobRequest_Id})
+var sDescribeHarvestJobResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eDescribeHarvestJobResponse_Arn})
+var sDescribeHarvestJobResponse_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelId", ID: &i___string, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eDescribeHarvestJobResponse_ChannelId})
+var sDescribeHarvestJobResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eDescribeHarvestJobResponse_CreatedAt})
+var sDescribeHarvestJobResponse_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString, Ext: &eDescribeHarvestJobResponse_EndTime})
+var sDescribeHarvestJobResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eDescribeHarvestJobResponse_Id})
+var sDescribeHarvestJobResponse_OriginEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointId", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString, Ext: &eDescribeHarvestJobResponse_OriginEndpointId})
+var sDescribeHarvestJobResponse_S3Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Destination", ID: &iS3Destination, Members: &mS3Destination, Traits: &t59, Type: smithy.ShapeTypeStructure, Ext: &eDescribeHarvestJobResponse_S3Destination})
+var sDescribeHarvestJobResponse_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i___string, Traits: &t60, Type: smithy.ShapeTypeString, Ext: &eDescribeHarvestJobResponse_StartTime})
+var sDescribeHarvestJobResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Traits: &t61, Type: smithy.ShapeTypeEnum, Ext: &eDescribeHarvestJobResponse_Status})
+var sDescribeOriginEndpointRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &eDescribeOriginEndpointRequest_Id})
+var sDescribeOriginEndpointResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eDescribeOriginEndpointResponse_Arn})
+var sDescribeOriginEndpointResponse_Authorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authorization", ID: &iAuthorization, Members: &mAuthorization, Traits: &t76, Type: smithy.ShapeTypeStructure, Ext: &eDescribeOriginEndpointResponse_Authorization})
+var sDescribeOriginEndpointResponse_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelId", ID: &i___string, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eDescribeOriginEndpointResponse_ChannelId})
+var sDescribeOriginEndpointResponse_CmafPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmafPackage", ID: &iCmafPackage, Members: &mCmafPackage, Traits: &t77, Type: smithy.ShapeTypeStructure, Ext: &eDescribeOriginEndpointResponse_CmafPackage})
+var sDescribeOriginEndpointResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eDescribeOriginEndpointResponse_CreatedAt})
+var sDescribeOriginEndpointResponse_DashPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashPackage", ID: &iDashPackage, Members: &mDashPackage, Traits: &t78, Type: smithy.ShapeTypeStructure, Ext: &eDescribeOriginEndpointResponse_DashPackage})
+var sDescribeOriginEndpointResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eDescribeOriginEndpointResponse_Description})
+var sDescribeOriginEndpointResponse_HlsPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsPackage", ID: &iHlsPackage, Members: &mHlsPackage, Traits: &t79, Type: smithy.ShapeTypeStructure, Ext: &eDescribeOriginEndpointResponse_HlsPackage})
+var sDescribeOriginEndpointResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eDescribeOriginEndpointResponse_Id})
+var sDescribeOriginEndpointResponse_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i___string, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &eDescribeOriginEndpointResponse_ManifestName})
+var sDescribeOriginEndpointResponse_MssPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MssPackage", ID: &iMssPackage, Members: &mMssPackage, Traits: &t80, Type: smithy.ShapeTypeStructure, Ext: &eDescribeOriginEndpointResponse_MssPackage})
+var sDescribeOriginEndpointResponse_Origination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Origination", ID: &iOrigination, Members: &mOrigination, Traits: &t81, Type: smithy.ShapeTypeEnum, Ext: &eDescribeOriginEndpointResponse_Origination})
+var sDescribeOriginEndpointResponse_StartoverWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartoverWindowSeconds", ID: &i___integer, Traits: &t82, Type: smithy.ShapeTypeInteger, Ext: &eDescribeOriginEndpointResponse_StartoverWindowSeconds})
+var sDescribeOriginEndpointResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &eDescribeOriginEndpointResponse_Tags})
+var sDescribeOriginEndpointResponse_TimeDelaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeDelaySeconds", ID: &i___integer, Traits: &t83, Type: smithy.ShapeTypeInteger, Ext: &eDescribeOriginEndpointResponse_TimeDelaySeconds})
+var sDescribeOriginEndpointResponse_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i___string, Traits: &t69, Type: smithy.ShapeTypeString, Ext: &eDescribeOriginEndpointResponse_Url})
+var sDescribeOriginEndpointResponse_Whitelist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Whitelist", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t84, Type: smithy.ShapeTypeList, Ext: &eDescribeOriginEndpointResponse_Whitelist})
+var sListChannelsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t100, Type: smithy.ShapeTypeInteger, Ext: &eListChannelsRequest_MaxResults})
+var sListChannelsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t101, Type: smithy.ShapeTypeString, Ext: &eListChannelsRequest_NextToken})
+var sListChannelsResponse_Channels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Channels", ID: &i___listOfChannel, Members: &m___listOfChannel, Traits: &t102, Type: smithy.ShapeTypeList, Ext: &eListChannelsResponse_Channels})
+var sListChannelsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t103, Type: smithy.ShapeTypeString, Ext: &eListChannelsResponse_NextToken})
+var sListHarvestJobsRequest_IncludeChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeChannelId", ID: &i___string, Traits: &t104, Type: smithy.ShapeTypeString, Ext: &eListHarvestJobsRequest_IncludeChannelId})
+var sListHarvestJobsRequest_IncludeStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeStatus", ID: &i___string, Traits: &t105, Type: smithy.ShapeTypeString, Ext: &eListHarvestJobsRequest_IncludeStatus})
+var sListHarvestJobsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t100, Type: smithy.ShapeTypeInteger, Ext: &eListHarvestJobsRequest_MaxResults})
+var sListHarvestJobsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t101, Type: smithy.ShapeTypeString, Ext: &eListHarvestJobsRequest_NextToken})
+var sListHarvestJobsResponse_HarvestJobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HarvestJobs", ID: &i___listOfHarvestJob, Members: &m___listOfHarvestJob, Traits: &t106, Type: smithy.ShapeTypeList, Ext: &eListHarvestJobsResponse_HarvestJobs})
+var sListHarvestJobsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t103, Type: smithy.ShapeTypeString, Ext: &eListHarvestJobsResponse_NextToken})
+var sListOriginEndpointsRequest_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelId", ID: &i___string, Traits: &t107, Type: smithy.ShapeTypeString, Ext: &eListOriginEndpointsRequest_ChannelId})
+var sListOriginEndpointsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t100, Type: smithy.ShapeTypeInteger, Ext: &eListOriginEndpointsRequest_MaxResults})
+var sListOriginEndpointsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t101, Type: smithy.ShapeTypeString, Ext: &eListOriginEndpointsRequest_NextToken})
+var sListOriginEndpointsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t103, Type: smithy.ShapeTypeString, Ext: &eListOriginEndpointsResponse_NextToken})
+var sListOriginEndpointsResponse_OriginEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpoints", ID: &i___listOfOriginEndpoint, Members: &m___listOfOriginEndpoint, Traits: &t108, Type: smithy.ShapeTypeList, Ext: &eListOriginEndpointsResponse_OriginEndpoints})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_Tags})
+var sRotateChannelCredentialsRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &eRotateChannelCredentialsRequest_Id})
+var sRotateChannelCredentialsResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eRotateChannelCredentialsResponse_Arn})
+var sRotateChannelCredentialsResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eRotateChannelCredentialsResponse_CreatedAt})
+var sRotateChannelCredentialsResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eRotateChannelCredentialsResponse_Description})
+var sRotateChannelCredentialsResponse_EgressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EgressAccessLogs", ID: &iEgressAccessLogs, Members: &mEgressAccessLogs, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eRotateChannelCredentialsResponse_EgressAccessLogs})
+var sRotateChannelCredentialsResponse_HlsIngest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsIngest", ID: &iHlsIngest, Members: &mHlsIngest, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eRotateChannelCredentialsResponse_HlsIngest})
+var sRotateChannelCredentialsResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eRotateChannelCredentialsResponse_Id})
+var sRotateChannelCredentialsResponse_IngressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressAccessLogs", ID: &iIngressAccessLogs, Members: &mIngressAccessLogs, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eRotateChannelCredentialsResponse_IngressAccessLogs})
+var sRotateChannelCredentialsResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &eRotateChannelCredentialsResponse_Tags})
+var sRotateIngestEndpointCredentialsRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &eRotateIngestEndpointCredentialsRequest_Id})
+var sRotateIngestEndpointCredentialsRequest_IngestEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngestEndpointId", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &eRotateIngestEndpointCredentialsRequest_IngestEndpointId})
+var sRotateIngestEndpointCredentialsResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eRotateIngestEndpointCredentialsResponse_Arn})
+var sRotateIngestEndpointCredentialsResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eRotateIngestEndpointCredentialsResponse_CreatedAt})
+var sRotateIngestEndpointCredentialsResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eRotateIngestEndpointCredentialsResponse_Description})
+var sRotateIngestEndpointCredentialsResponse_EgressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EgressAccessLogs", ID: &iEgressAccessLogs, Members: &mEgressAccessLogs, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eRotateIngestEndpointCredentialsResponse_EgressAccessLogs})
+var sRotateIngestEndpointCredentialsResponse_HlsIngest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsIngest", ID: &iHlsIngest, Members: &mHlsIngest, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eRotateIngestEndpointCredentialsResponse_HlsIngest})
+var sRotateIngestEndpointCredentialsResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eRotateIngestEndpointCredentialsResponse_Id})
+var sRotateIngestEndpointCredentialsResponse_IngressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressAccessLogs", ID: &iIngressAccessLogs, Members: &mIngressAccessLogs, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eRotateIngestEndpointCredentialsResponse_IngressAccessLogs})
+var sRotateIngestEndpointCredentialsResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &eRotateIngestEndpointCredentialsResponse_Tags})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i___mapOf__string, Members: &m___mapOf__string, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_Tags})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t109, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUpdateChannelRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelRequest_Description})
+var sUpdateChannelRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelRequest_Id})
+var sUpdateChannelResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelResponse_Arn})
+var sUpdateChannelResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelResponse_CreatedAt})
+var sUpdateChannelResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelResponse_Description})
+var sUpdateChannelResponse_EgressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EgressAccessLogs", ID: &iEgressAccessLogs, Members: &mEgressAccessLogs, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelResponse_EgressAccessLogs})
+var sUpdateChannelResponse_HlsIngest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsIngest", ID: &iHlsIngest, Members: &mHlsIngest, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelResponse_HlsIngest})
+var sUpdateChannelResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eUpdateChannelResponse_Id})
+var sUpdateChannelResponse_IngressAccessLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressAccessLogs", ID: &iIngressAccessLogs, Members: &mIngressAccessLogs, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eUpdateChannelResponse_IngressAccessLogs})
+var sUpdateChannelResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &eUpdateChannelResponse_Tags})
+var sUpdateOriginEndpointRequest_Authorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authorization", ID: &iAuthorization, Members: &mAuthorization, Traits: &t76, Type: smithy.ShapeTypeStructure, Ext: &eUpdateOriginEndpointRequest_Authorization})
+var sUpdateOriginEndpointRequest_CmafPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmafPackage", ID: &iCmafPackageCreateOrUpdateParameters, Members: &mCmafPackageCreateOrUpdateParameters, Traits: &t77, Type: smithy.ShapeTypeStructure, Ext: &eUpdateOriginEndpointRequest_CmafPackage})
+var sUpdateOriginEndpointRequest_DashPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashPackage", ID: &iDashPackage, Members: &mDashPackage, Traits: &t78, Type: smithy.ShapeTypeStructure, Ext: &eUpdateOriginEndpointRequest_DashPackage})
+var sUpdateOriginEndpointRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eUpdateOriginEndpointRequest_Description})
+var sUpdateOriginEndpointRequest_HlsPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsPackage", ID: &iHlsPackage, Members: &mHlsPackage, Traits: &t79, Type: smithy.ShapeTypeStructure, Ext: &eUpdateOriginEndpointRequest_HlsPackage})
+var sUpdateOriginEndpointRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t99, Type: smithy.ShapeTypeString, Ext: &eUpdateOriginEndpointRequest_Id})
+var sUpdateOriginEndpointRequest_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i___string, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &eUpdateOriginEndpointRequest_ManifestName})
+var sUpdateOriginEndpointRequest_MssPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MssPackage", ID: &iMssPackage, Members: &mMssPackage, Traits: &t80, Type: smithy.ShapeTypeStructure, Ext: &eUpdateOriginEndpointRequest_MssPackage})
+var sUpdateOriginEndpointRequest_Origination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Origination", ID: &iOrigination, Members: &mOrigination, Traits: &t81, Type: smithy.ShapeTypeEnum, Ext: &eUpdateOriginEndpointRequest_Origination})
+var sUpdateOriginEndpointRequest_StartoverWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartoverWindowSeconds", ID: &i___integer, Traits: &t82, Type: smithy.ShapeTypeInteger, Ext: &eUpdateOriginEndpointRequest_StartoverWindowSeconds})
+var sUpdateOriginEndpointRequest_TimeDelaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeDelaySeconds", ID: &i___integer, Traits: &t83, Type: smithy.ShapeTypeInteger, Ext: &eUpdateOriginEndpointRequest_TimeDelaySeconds})
+var sUpdateOriginEndpointRequest_Whitelist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Whitelist", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t84, Type: smithy.ShapeTypeList, Ext: &eUpdateOriginEndpointRequest_Whitelist})
+var sUpdateOriginEndpointResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i___string, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eUpdateOriginEndpointResponse_Arn})
+var sUpdateOriginEndpointResponse_Authorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authorization", ID: &iAuthorization, Members: &mAuthorization, Traits: &t76, Type: smithy.ShapeTypeStructure, Ext: &eUpdateOriginEndpointResponse_Authorization})
+var sUpdateOriginEndpointResponse_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelId", ID: &i___string, Traits: &t56, Type: smithy.ShapeTypeString, Ext: &eUpdateOriginEndpointResponse_ChannelId})
+var sUpdateOriginEndpointResponse_CmafPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmafPackage", ID: &iCmafPackage, Members: &mCmafPackage, Traits: &t77, Type: smithy.ShapeTypeStructure, Ext: &eUpdateOriginEndpointResponse_CmafPackage})
+var sUpdateOriginEndpointResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i___string, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eUpdateOriginEndpointResponse_CreatedAt})
+var sUpdateOriginEndpointResponse_DashPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashPackage", ID: &iDashPackage, Members: &mDashPackage, Traits: &t78, Type: smithy.ShapeTypeStructure, Ext: &eUpdateOriginEndpointResponse_DashPackage})
+var sUpdateOriginEndpointResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eUpdateOriginEndpointResponse_Description})
+var sUpdateOriginEndpointResponse_HlsPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsPackage", ID: &iHlsPackage, Members: &mHlsPackage, Traits: &t79, Type: smithy.ShapeTypeStructure, Ext: &eUpdateOriginEndpointResponse_HlsPackage})
+var sUpdateOriginEndpointResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i___string, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eUpdateOriginEndpointResponse_Id})
+var sUpdateOriginEndpointResponse_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i___string, Traits: &t65, Type: smithy.ShapeTypeString, Ext: &eUpdateOriginEndpointResponse_ManifestName})
+var sUpdateOriginEndpointResponse_MssPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MssPackage", ID: &iMssPackage, Members: &mMssPackage, Traits: &t80, Type: smithy.ShapeTypeStructure, Ext: &eUpdateOriginEndpointResponse_MssPackage})
+var sUpdateOriginEndpointResponse_Origination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Origination", ID: &iOrigination, Members: &mOrigination, Traits: &t81, Type: smithy.ShapeTypeEnum, Ext: &eUpdateOriginEndpointResponse_Origination})
+var sUpdateOriginEndpointResponse_StartoverWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartoverWindowSeconds", ID: &i___integer, Traits: &t82, Type: smithy.ShapeTypeInteger, Ext: &eUpdateOriginEndpointResponse_StartoverWindowSeconds})
+var sUpdateOriginEndpointResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t28, Type: smithy.ShapeTypeMap, Ext: &eUpdateOriginEndpointResponse_Tags})
+var sUpdateOriginEndpointResponse_TimeDelaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeDelaySeconds", ID: &i___integer, Traits: &t83, Type: smithy.ShapeTypeInteger, Ext: &eUpdateOriginEndpointResponse_TimeDelaySeconds})
+var sUpdateOriginEndpointResponse_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i___string, Traits: &t69, Type: smithy.ShapeTypeString, Ext: &eUpdateOriginEndpointResponse_Url})
+var sUpdateOriginEndpointResponse_Whitelist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Whitelist", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t84, Type: smithy.ShapeTypeList, Ext: &eUpdateOriginEndpointResponse_Whitelist})
 
 var ConfigureLogs = &sConfigureLogs
 

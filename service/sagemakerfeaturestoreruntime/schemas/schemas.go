@@ -7,9 +7,154 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [146]smithy.SchemaExtensions
+var (
+	eBatchGetRecord                                           smithy.SchemaExtensions
+	eBatchWriteRecord                                         smithy.SchemaExtensions
+	eDeleteRecord                                             smithy.SchemaExtensions
+	eGetRecord                                                smithy.SchemaExtensions
+	eListRecords                                              smithy.SchemaExtensions
+	ePutRecord                                                smithy.SchemaExtensions
+	eUpdateRecord                                             smithy.SchemaExtensions
+	e_AmazonSageMakerFeatureStoreRuntime                      smithy.SchemaExtensions
+	eAccessForbidden                                          smithy.SchemaExtensions
+	eAccessForbidden_Message                                  smithy.SchemaExtensions
+	eBatchGetRecordError                                      smithy.SchemaExtensions
+	eBatchGetRecordError_FeatureGroupName                     smithy.SchemaExtensions
+	eBatchGetRecordError_RecordIdentifierValueAsString        smithy.SchemaExtensions
+	eBatchGetRecordError_ErrorCode                            smithy.SchemaExtensions
+	eBatchGetRecordError_ErrorMessage                         smithy.SchemaExtensions
+	e_BatchGetRecordErrors                                    smithy.SchemaExtensions
+	e_BatchGetRecordErrors_member                             smithy.SchemaExtensions
+	eBatchGetRecordIdentifier                                 smithy.SchemaExtensions
+	eBatchGetRecordIdentifier_FeatureGroupName                smithy.SchemaExtensions
+	eBatchGetRecordIdentifier_RecordIdentifiersValueAsString  smithy.SchemaExtensions
+	eBatchGetRecordIdentifier_FeatureNames                    smithy.SchemaExtensions
+	e_BatchGetRecordIdentifiers                               smithy.SchemaExtensions
+	e_BatchGetRecordIdentifiers_member                        smithy.SchemaExtensions
+	eBatchGetRecordResultDetail                               smithy.SchemaExtensions
+	eBatchGetRecordResultDetail_FeatureGroupName              smithy.SchemaExtensions
+	eBatchGetRecordResultDetail_RecordIdentifierValueAsString smithy.SchemaExtensions
+	eBatchGetRecordResultDetail_Record                        smithy.SchemaExtensions
+	eBatchGetRecordResultDetail_ExpiresAt                     smithy.SchemaExtensions
+	e_BatchGetRecordResultDetails                             smithy.SchemaExtensions
+	e_BatchGetRecordResultDetails_member                      smithy.SchemaExtensions
+	e_BatchWriteRecordEntries                                 smithy.SchemaExtensions
+	e_BatchWriteRecordEntries_member                          smithy.SchemaExtensions
+	eBatchWriteRecordEntry                                    smithy.SchemaExtensions
+	eBatchWriteRecordEntry_FeatureGroupName                   smithy.SchemaExtensions
+	eBatchWriteRecordEntry_Record                             smithy.SchemaExtensions
+	eBatchWriteRecordEntry_TargetStores                       smithy.SchemaExtensions
+	eBatchWriteRecordEntry_TtlDuration                        smithy.SchemaExtensions
+	eBatchWriteRecordError                                    smithy.SchemaExtensions
+	eBatchWriteRecordError_Entry                              smithy.SchemaExtensions
+	eBatchWriteRecordError_ErrorCode                          smithy.SchemaExtensions
+	eBatchWriteRecordError_ErrorMessage                       smithy.SchemaExtensions
+	e_BatchWriteRecordErrors                                  smithy.SchemaExtensions
+	e_BatchWriteRecordErrors_member                           smithy.SchemaExtensions
+	e_Boolean                                                 smithy.SchemaExtensions
+	eConflictException                                        smithy.SchemaExtensions
+	eConflictException_Message                                smithy.SchemaExtensions
+	eDeletionMode                                             smithy.SchemaExtensions
+	eDeletionMode_SOFT_DELETE                                 smithy.SchemaExtensions
+	eDeletionMode_HARD_DELETE                                 smithy.SchemaExtensions
+	eExpirationTimeResponse                                   smithy.SchemaExtensions
+	eExpirationTimeResponse_ENABLED                           smithy.SchemaExtensions
+	eExpirationTimeResponse_DISABLED                          smithy.SchemaExtensions
+	e_ExpiresAt                                               smithy.SchemaExtensions
+	e_FeatureGroupNameOrArn                                   smithy.SchemaExtensions
+	e_FeatureName                                             smithy.SchemaExtensions
+	e_FeatureNames                                            smithy.SchemaExtensions
+	e_FeatureNames_member                                     smithy.SchemaExtensions
+	eFeatureValue                                             smithy.SchemaExtensions
+	eFeatureValue_FeatureName                                 smithy.SchemaExtensions
+	eFeatureValue_ValueAsString                               smithy.SchemaExtensions
+	eFeatureValue_ValueAsStringList                           smithy.SchemaExtensions
+	eInternalFailure                                          smithy.SchemaExtensions
+	eInternalFailure_Message                                  smithy.SchemaExtensions
+	e_ListRecordsMaxResults                                   smithy.SchemaExtensions
+	e_ListRecordsNextToken                                    smithy.SchemaExtensions
+	e_Message                                                 smithy.SchemaExtensions
+	e_Record                                                  smithy.SchemaExtensions
+	e_Record_member                                           smithy.SchemaExtensions
+	e_RecordIdentifierList                                    smithy.SchemaExtensions
+	e_RecordIdentifierList_member                             smithy.SchemaExtensions
+	e_RecordIdentifiers                                       smithy.SchemaExtensions
+	e_RecordIdentifiers_member                                smithy.SchemaExtensions
+	eResourceNotFound                                         smithy.SchemaExtensions
+	eResourceNotFound_Message                                 smithy.SchemaExtensions
+	eServiceUnavailable                                       smithy.SchemaExtensions
+	eServiceUnavailable_Message                               smithy.SchemaExtensions
+	eTargetStore                                              smithy.SchemaExtensions
+	eTargetStore_ONLINE_STORE                                 smithy.SchemaExtensions
+	eTargetStore_OFFLINE_STORE                                smithy.SchemaExtensions
+	e_TargetStores                                            smithy.SchemaExtensions
+	e_TargetStores_member                                     smithy.SchemaExtensions
+	eTtlDuration                                              smithy.SchemaExtensions
+	eTtlDuration_Unit                                         smithy.SchemaExtensions
+	eTtlDuration_Value                                        smithy.SchemaExtensions
+	eTtlDurationUnit                                          smithy.SchemaExtensions
+	eTtlDurationUnit_SECONDS                                  smithy.SchemaExtensions
+	eTtlDurationUnit_MINUTES                                  smithy.SchemaExtensions
+	eTtlDurationUnit_HOURS                                    smithy.SchemaExtensions
+	eTtlDurationUnit_DAYS                                     smithy.SchemaExtensions
+	eTtlDurationUnit_WEEKS                                    smithy.SchemaExtensions
+	e_TtlDurationValue                                        smithy.SchemaExtensions
+	e_UnprocessedBatchWriteRecordEntries                      smithy.SchemaExtensions
+	e_UnprocessedBatchWriteRecordEntries_member               smithy.SchemaExtensions
+	e_UnprocessedIdentifiers                                  smithy.SchemaExtensions
+	e_UnprocessedIdentifiers_member                           smithy.SchemaExtensions
+	eValidationError                                          smithy.SchemaExtensions
+	eValidationError_Message                                  smithy.SchemaExtensions
+	e_ValueAsString                                           smithy.SchemaExtensions
+	e_ValueAsStringList                                       smithy.SchemaExtensions
+	e_ValueAsStringList_member                                smithy.SchemaExtensions
+	eBatchGetRecordRequest                                    smithy.SchemaExtensions
+	eBatchGetRecordRequest_Identifiers                        smithy.SchemaExtensions
+	eBatchGetRecordRequest_ExpirationTimeResponse             smithy.SchemaExtensions
+	eBatchGetRecordResponse                                   smithy.SchemaExtensions
+	eBatchGetRecordResponse_Records                           smithy.SchemaExtensions
+	eBatchGetRecordResponse_Errors                            smithy.SchemaExtensions
+	eBatchGetRecordResponse_UnprocessedIdentifiers            smithy.SchemaExtensions
+	eBatchWriteRecordRequest                                  smithy.SchemaExtensions
+	eBatchWriteRecordRequest_Entries                          smithy.SchemaExtensions
+	eBatchWriteRecordRequest_TtlDuration                      smithy.SchemaExtensions
+	eBatchWriteRecordResponse                                 smithy.SchemaExtensions
+	eBatchWriteRecordResponse_Errors                          smithy.SchemaExtensions
+	eBatchWriteRecordResponse_UnprocessedEntries              smithy.SchemaExtensions
+	eDeleteRecordRequest                                      smithy.SchemaExtensions
+	eDeleteRecordRequest_FeatureGroupName                     smithy.SchemaExtensions
+	eDeleteRecordRequest_RecordIdentifierValueAsString        smithy.SchemaExtensions
+	eDeleteRecordRequest_EventTime                            smithy.SchemaExtensions
+	eDeleteRecordRequest_TargetStores                         smithy.SchemaExtensions
+	eDeleteRecordRequest_DeletionMode                         smithy.SchemaExtensions
+	eGetRecordRequest                                         smithy.SchemaExtensions
+	eGetRecordRequest_FeatureGroupName                        smithy.SchemaExtensions
+	eGetRecordRequest_RecordIdentifierValueAsString           smithy.SchemaExtensions
+	eGetRecordRequest_FeatureNames                            smithy.SchemaExtensions
+	eGetRecordRequest_ExpirationTimeResponse                  smithy.SchemaExtensions
+	eGetRecordResponse                                        smithy.SchemaExtensions
+	eGetRecordResponse_Record                                 smithy.SchemaExtensions
+	eGetRecordResponse_ExpiresAt                              smithy.SchemaExtensions
+	eListRecordsRequest                                       smithy.SchemaExtensions
+	eListRecordsRequest_FeatureGroupName                      smithy.SchemaExtensions
+	eListRecordsRequest_MaxResults                            smithy.SchemaExtensions
+	eListRecordsRequest_NextToken                             smithy.SchemaExtensions
+	eListRecordsRequest_IncludeSoftDeletedRecords             smithy.SchemaExtensions
+	eListRecordsResponse                                      smithy.SchemaExtensions
+	eListRecordsResponse_RecordIdentifiers                    smithy.SchemaExtensions
+	eListRecordsResponse_NextToken                            smithy.SchemaExtensions
+	ePutRecordRequest                                         smithy.SchemaExtensions
+	ePutRecordRequest_FeatureGroupName                        smithy.SchemaExtensions
+	ePutRecordRequest_Record                                  smithy.SchemaExtensions
+	ePutRecordRequest_TargetStores                            smithy.SchemaExtensions
+	ePutRecordRequest_TtlDuration                             smithy.SchemaExtensions
+	eUpdateRecordRequest                                      smithy.SchemaExtensions
+	eUpdateRecordRequest_FeatureGroupName                     smithy.SchemaExtensions
+	eUpdateRecordRequest_RecordIdentifierValueAsString        smithy.SchemaExtensions
+	eUpdateRecordRequest_Features                             smithy.SchemaExtensions
+	eUpdateRecordRequest_TargetStores                         smithy.SchemaExtensions
+	eUpdateRecordRequest_TtlDuration                          smithy.SchemaExtensions
+)
 
 var (
 	iBatchGetRecord                      = smithy.ShapeID{Namespace: "com.amazonaws.sagemakerfeaturestoreruntime", Name: "BatchGetRecord"}
@@ -150,153 +295,153 @@ var mListRecordsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRec
 var mPutRecordRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRecordRequest_FeatureGroupName, &sPutRecordRequest_Record, &sPutRecordRequest_TargetStores, &sPutRecordRequest_TtlDuration}}
 var mUpdateRecordRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRecordRequest_FeatureGroupName, &sUpdateRecordRequest_RecordIdentifierValueAsString, &sUpdateRecordRequest_Features, &sUpdateRecordRequest_TargetStores, &sUpdateRecordRequest_TtlDuration}}
 
-var sBatchGetRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetRecord, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sBatchWriteRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchWriteRecord, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sDeleteRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRecord, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sGetRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecord, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sListRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecords, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sPutRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRecord, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sUpdateRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecord, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var s_AmazonSageMakerFeatureStoreRuntime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonSageMakerFeatureStoreRuntime, Type: smithy.ShapeTypeService, Ext: &ext[7]})
-var sAccessForbidden = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessForbidden, Members: &mAccessForbidden, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &ext[8]})
-var sBatchGetRecordError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetRecordError, Members: &mBatchGetRecordError, Type: smithy.ShapeTypeStructure, Ext: &ext[10]})
-var s_BatchGetRecordErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetRecordErrors, Members: &m_BatchGetRecordErrors, Type: smithy.ShapeTypeList, Ext: &ext[15]})
-var sBatchGetRecordIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetRecordIdentifier, Members: &mBatchGetRecordIdentifier, Type: smithy.ShapeTypeStructure, Ext: &ext[17]})
-var s_BatchGetRecordIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetRecordIdentifiers, Members: &m_BatchGetRecordIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[21]})
-var sBatchGetRecordResultDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetRecordResultDetail, Members: &mBatchGetRecordResultDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[23]})
-var s_BatchGetRecordResultDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetRecordResultDetails, Members: &m_BatchGetRecordResultDetails, Type: smithy.ShapeTypeList, Ext: &ext[28]})
-var s_BatchWriteRecordEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchWriteRecordEntries, Members: &m_BatchWriteRecordEntries, Type: smithy.ShapeTypeList, Ext: &ext[30]})
-var sBatchWriteRecordEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchWriteRecordEntry, Members: &mBatchWriteRecordEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[32]})
-var sBatchWriteRecordError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchWriteRecordError, Members: &mBatchWriteRecordError, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var s_BatchWriteRecordErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchWriteRecordErrors, Members: &m_BatchWriteRecordErrors, Type: smithy.ShapeTypeList, Ext: &ext[41]})
-var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[43]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &ext[44]})
-var sDeletionMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletionMode, Members: &mDeletionMode, Type: smithy.ShapeTypeEnum, Ext: &ext[46]})
-var sExpirationTimeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpirationTimeResponse, Members: &mExpirationTimeResponse, Type: smithy.ShapeTypeEnum, Ext: &ext[49]})
-var s_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpiresAt, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var s_FeatureGroupNameOrArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FeatureGroupNameOrArn, Type: smithy.ShapeTypeString, Ext: &ext[53]})
-var s_FeatureName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FeatureName, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var s_FeatureNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FeatureNames, Members: &m_FeatureNames, Type: smithy.ShapeTypeList, Ext: &ext[55]})
-var sFeatureValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFeatureValue, Members: &mFeatureValue, Type: smithy.ShapeTypeStructure, Ext: &ext[57]})
-var sInternalFailure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalFailure, Members: &mInternalFailure, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &ext[61]})
-var s_ListRecordsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListRecordsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[63]})
-var s_ListRecordsNextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListRecordsNextToken, Type: smithy.ShapeTypeString, Ext: &ext[64]})
-var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[65]})
-var s_Record = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Record, Members: &m_Record, Type: smithy.ShapeTypeList, Ext: &ext[66]})
-var s_RecordIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordIdentifierList, Members: &m_RecordIdentifierList, Type: smithy.ShapeTypeList, Ext: &ext[68]})
-var s_RecordIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordIdentifiers, Members: &m_RecordIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[70]})
-var sResourceNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFound, Members: &mResourceNotFound, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sServiceUnavailable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailable, Members: &mServiceUnavailable, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var sTargetStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetStore, Members: &mTargetStore, Type: smithy.ShapeTypeEnum, Ext: &ext[76]})
-var s_TargetStores = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetStores, Members: &m_TargetStores, Type: smithy.ShapeTypeList, Ext: &ext[79]})
-var sTtlDuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTtlDuration, Members: &mTtlDuration, Type: smithy.ShapeTypeStructure, Ext: &ext[81]})
-var sTtlDurationUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTtlDurationUnit, Members: &mTtlDurationUnit, Type: smithy.ShapeTypeEnum, Ext: &ext[84]})
-var s_TtlDurationValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TtlDurationValue, Type: smithy.ShapeTypeInteger, Ext: &ext[90]})
-var s_UnprocessedBatchWriteRecordEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UnprocessedBatchWriteRecordEntries, Members: &m_UnprocessedBatchWriteRecordEntries, Type: smithy.ShapeTypeList, Ext: &ext[91]})
-var s_UnprocessedIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UnprocessedIdentifiers, Members: &m_UnprocessedIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[93]})
-var sValidationError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationError, Members: &mValidationError, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &ext[95]})
-var s_ValueAsString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValueAsString, Type: smithy.ShapeTypeString, Ext: &ext[97]})
-var s_ValueAsStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValueAsStringList, Members: &m_ValueAsStringList, Type: smithy.ShapeTypeList, Ext: &ext[98]})
-var sBatchGetRecordRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetRecordRequest, Members: &mBatchGetRecordRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[100]})
-var sBatchGetRecordResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetRecordResponse, Members: &mBatchGetRecordResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[103]})
-var sBatchWriteRecordRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchWriteRecordRequest, Members: &mBatchWriteRecordRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[107]})
-var sBatchWriteRecordResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchWriteRecordResponse, Members: &mBatchWriteRecordResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[110]})
-var sDeleteRecordRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRecordRequest, Members: &mDeleteRecordRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[113]})
-var sGetRecordRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecordRequest, Members: &mGetRecordRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[119]})
-var sGetRecordResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecordResponse, Members: &mGetRecordResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[124]})
-var sListRecordsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecordsRequest, Members: &mListRecordsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[127]})
-var sListRecordsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecordsResponse, Members: &mListRecordsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[132]})
-var sPutRecordRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRecordRequest, Members: &mPutRecordRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[135]})
-var sUpdateRecordRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecordRequest, Members: &mUpdateRecordRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[140]})
+var sBatchGetRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetRecord, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eBatchGetRecord})
+var sBatchWriteRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchWriteRecord, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eBatchWriteRecord})
+var sDeleteRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRecord, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRecord})
+var sGetRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecord, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eGetRecord})
+var sListRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecords, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eListRecords})
+var sPutRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRecord, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ePutRecord})
+var sUpdateRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecord, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRecord})
+var s_AmazonSageMakerFeatureStoreRuntime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonSageMakerFeatureStoreRuntime, Type: smithy.ShapeTypeService, Ext: &e_AmazonSageMakerFeatureStoreRuntime})
+var sAccessForbidden = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessForbidden, Members: &mAccessForbidden, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eAccessForbidden})
+var sBatchGetRecordError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetRecordError, Members: &mBatchGetRecordError, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetRecordError})
+var s_BatchGetRecordErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetRecordErrors, Members: &m_BatchGetRecordErrors, Type: smithy.ShapeTypeList, Ext: &e_BatchGetRecordErrors})
+var sBatchGetRecordIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetRecordIdentifier, Members: &mBatchGetRecordIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetRecordIdentifier})
+var s_BatchGetRecordIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetRecordIdentifiers, Members: &m_BatchGetRecordIdentifiers, Type: smithy.ShapeTypeList, Ext: &e_BatchGetRecordIdentifiers})
+var sBatchGetRecordResultDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetRecordResultDetail, Members: &mBatchGetRecordResultDetail, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetRecordResultDetail})
+var s_BatchGetRecordResultDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetRecordResultDetails, Members: &m_BatchGetRecordResultDetails, Type: smithy.ShapeTypeList, Ext: &e_BatchGetRecordResultDetails})
+var s_BatchWriteRecordEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchWriteRecordEntries, Members: &m_BatchWriteRecordEntries, Type: smithy.ShapeTypeList, Ext: &e_BatchWriteRecordEntries})
+var sBatchWriteRecordEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchWriteRecordEntry, Members: &mBatchWriteRecordEntry, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteRecordEntry})
+var sBatchWriteRecordError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchWriteRecordError, Members: &mBatchWriteRecordError, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteRecordError})
+var s_BatchWriteRecordErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchWriteRecordErrors, Members: &m_BatchWriteRecordErrors, Type: smithy.ShapeTypeList, Ext: &e_BatchWriteRecordErrors})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sDeletionMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletionMode, Members: &mDeletionMode, Type: smithy.ShapeTypeEnum, Ext: &eDeletionMode})
+var sExpirationTimeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpirationTimeResponse, Members: &mExpirationTimeResponse, Type: smithy.ShapeTypeEnum, Ext: &eExpirationTimeResponse})
+var s_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpiresAt, Type: smithy.ShapeTypeString, Ext: &e_ExpiresAt})
+var s_FeatureGroupNameOrArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FeatureGroupNameOrArn, Type: smithy.ShapeTypeString, Ext: &e_FeatureGroupNameOrArn})
+var s_FeatureName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FeatureName, Type: smithy.ShapeTypeString, Ext: &e_FeatureName})
+var s_FeatureNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FeatureNames, Members: &m_FeatureNames, Type: smithy.ShapeTypeList, Ext: &e_FeatureNames})
+var sFeatureValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFeatureValue, Members: &mFeatureValue, Type: smithy.ShapeTypeStructure, Ext: &eFeatureValue})
+var sInternalFailure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalFailure, Members: &mInternalFailure, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eInternalFailure})
+var s_ListRecordsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListRecordsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_ListRecordsMaxResults})
+var s_ListRecordsNextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListRecordsNextToken, Type: smithy.ShapeTypeString, Ext: &e_ListRecordsNextToken})
+var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &e_Message})
+var s_Record = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Record, Members: &m_Record, Type: smithy.ShapeTypeList, Ext: &e_Record})
+var s_RecordIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordIdentifierList, Members: &m_RecordIdentifierList, Type: smithy.ShapeTypeList, Ext: &e_RecordIdentifierList})
+var s_RecordIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordIdentifiers, Members: &m_RecordIdentifiers, Type: smithy.ShapeTypeList, Ext: &e_RecordIdentifiers})
+var sResourceNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFound, Members: &mResourceNotFound, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFound})
+var sServiceUnavailable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailable, Members: &mServiceUnavailable, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eServiceUnavailable})
+var sTargetStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetStore, Members: &mTargetStore, Type: smithy.ShapeTypeEnum, Ext: &eTargetStore})
+var s_TargetStores = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetStores, Members: &m_TargetStores, Type: smithy.ShapeTypeList, Ext: &e_TargetStores})
+var sTtlDuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTtlDuration, Members: &mTtlDuration, Type: smithy.ShapeTypeStructure, Ext: &eTtlDuration})
+var sTtlDurationUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTtlDurationUnit, Members: &mTtlDurationUnit, Type: smithy.ShapeTypeEnum, Ext: &eTtlDurationUnit})
+var s_TtlDurationValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TtlDurationValue, Type: smithy.ShapeTypeInteger, Ext: &e_TtlDurationValue})
+var s_UnprocessedBatchWriteRecordEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UnprocessedBatchWriteRecordEntries, Members: &m_UnprocessedBatchWriteRecordEntries, Type: smithy.ShapeTypeList, Ext: &e_UnprocessedBatchWriteRecordEntries})
+var s_UnprocessedIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UnprocessedIdentifiers, Members: &m_UnprocessedIdentifiers, Type: smithy.ShapeTypeList, Ext: &e_UnprocessedIdentifiers})
+var sValidationError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationError, Members: &mValidationError, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eValidationError})
+var s_ValueAsString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValueAsString, Type: smithy.ShapeTypeString, Ext: &e_ValueAsString})
+var s_ValueAsStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValueAsStringList, Members: &m_ValueAsStringList, Type: smithy.ShapeTypeList, Ext: &e_ValueAsStringList})
+var sBatchGetRecordRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetRecordRequest, Members: &mBatchGetRecordRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetRecordRequest})
+var sBatchGetRecordResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetRecordResponse, Members: &mBatchGetRecordResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetRecordResponse})
+var sBatchWriteRecordRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchWriteRecordRequest, Members: &mBatchWriteRecordRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteRecordRequest})
+var sBatchWriteRecordResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchWriteRecordResponse, Members: &mBatchWriteRecordResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteRecordResponse})
+var sDeleteRecordRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRecordRequest, Members: &mDeleteRecordRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRecordRequest})
+var sGetRecordRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecordRequest, Members: &mGetRecordRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRecordRequest})
+var sGetRecordResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecordResponse, Members: &mGetRecordResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRecordResponse})
+var sListRecordsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecordsRequest, Members: &mListRecordsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRecordsRequest})
+var sListRecordsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecordsResponse, Members: &mListRecordsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRecordsResponse})
+var sPutRecordRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRecordRequest, Members: &mPutRecordRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutRecordRequest})
+var sUpdateRecordRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecordRequest, Members: &mUpdateRecordRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRecordRequest})
 
-var sAccessForbidden_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[9]})
-var sBatchGetRecordError_FeatureGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureGroupName", ID: &i_ValueAsString, Type: smithy.ShapeTypeString, Ext: &ext[11]})
-var sBatchGetRecordError_RecordIdentifierValueAsString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordIdentifierValueAsString", ID: &i_ValueAsString, Type: smithy.ShapeTypeString, Ext: &ext[12]})
-var sBatchGetRecordError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ValueAsString, Type: smithy.ShapeTypeString, Ext: &ext[13]})
-var sBatchGetRecordError_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[14]})
-var s_BatchGetRecordErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchGetRecordError, Members: &mBatchGetRecordError, Type: smithy.ShapeTypeStructure, Ext: &ext[16]})
-var sBatchGetRecordIdentifier_FeatureGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureGroupName", ID: &i_FeatureGroupNameOrArn, Type: smithy.ShapeTypeString, Ext: &ext[18]})
-var sBatchGetRecordIdentifier_RecordIdentifiersValueAsString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordIdentifiersValueAsString", ID: &i_RecordIdentifiers, Members: &m_RecordIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[19]})
-var sBatchGetRecordIdentifier_FeatureNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureNames", ID: &i_FeatureNames, Members: &m_FeatureNames, Type: smithy.ShapeTypeList, Ext: &ext[20]})
-var s_BatchGetRecordIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchGetRecordIdentifier, Members: &mBatchGetRecordIdentifier, Type: smithy.ShapeTypeStructure, Ext: &ext[22]})
-var sBatchGetRecordResultDetail_FeatureGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureGroupName", ID: &i_ValueAsString, Type: smithy.ShapeTypeString, Ext: &ext[24]})
-var sBatchGetRecordResultDetail_RecordIdentifierValueAsString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordIdentifierValueAsString", ID: &i_ValueAsString, Type: smithy.ShapeTypeString, Ext: &ext[25]})
-var sBatchGetRecordResultDetail_Record = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Record", ID: &i_Record, Members: &m_Record, Type: smithy.ShapeTypeList, Ext: &ext[26]})
-var sBatchGetRecordResultDetail_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &i_ExpiresAt, Type: smithy.ShapeTypeString, Ext: &ext[27]})
-var s_BatchGetRecordResultDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchGetRecordResultDetail, Members: &mBatchGetRecordResultDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[29]})
-var s_BatchWriteRecordEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchWriteRecordEntry, Members: &mBatchWriteRecordEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[31]})
-var sBatchWriteRecordEntry_FeatureGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureGroupName", ID: &i_FeatureGroupNameOrArn, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var sBatchWriteRecordEntry_Record = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Record", ID: &i_Record, Members: &m_Record, Type: smithy.ShapeTypeList, Ext: &ext[34]})
-var sBatchWriteRecordEntry_TargetStores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetStores", ID: &i_TargetStores, Members: &m_TargetStores, Type: smithy.ShapeTypeList, Ext: &ext[35]})
-var sBatchWriteRecordEntry_TtlDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TtlDuration", ID: &iTtlDuration, Members: &mTtlDuration, Type: smithy.ShapeTypeStructure, Ext: &ext[36]})
-var sBatchWriteRecordError_Entry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entry", ID: &iBatchWriteRecordEntry, Members: &mBatchWriteRecordEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[38]})
-var sBatchWriteRecordError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ValueAsString, Type: smithy.ShapeTypeString, Ext: &ext[39]})
-var sBatchWriteRecordError_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var s_BatchWriteRecordErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchWriteRecordError, Members: &mBatchWriteRecordError, Type: smithy.ShapeTypeStructure, Ext: &ext[42]})
-var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var sDeletionMode_SOFT_DELETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOFT_DELETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[47]})
-var sDeletionMode_HARD_DELETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HARD_DELETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[48]})
-var sExpirationTimeResponse_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[50]})
-var sExpirationTimeResponse_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[51]})
-var s_FeatureNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FeatureName, Type: smithy.ShapeTypeString, Ext: &ext[56]})
-var sFeatureValue_FeatureName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureName", ID: &i_FeatureName, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var sFeatureValue_ValueAsString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueAsString", ID: &i_ValueAsString, Type: smithy.ShapeTypeString, Ext: &ext[59]})
-var sFeatureValue_ValueAsStringList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueAsStringList", ID: &i_ValueAsStringList, Members: &m_ValueAsStringList, Type: smithy.ShapeTypeList, Ext: &ext[60]})
-var sInternalFailure_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[62]})
-var s_Record_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFeatureValue, Members: &mFeatureValue, Type: smithy.ShapeTypeStructure, Ext: &ext[67]})
-var s_RecordIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ValueAsString, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var s_RecordIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ValueAsString, Type: smithy.ShapeTypeString, Ext: &ext[71]})
-var sResourceNotFound_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[73]})
-var sServiceUnavailable_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[75]})
-var sTargetStore_ONLINE_STORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONLINE_STORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
-var sTargetStore_OFFLINE_STORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OFFLINE_STORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[78]})
-var s_TargetStores_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTargetStore, Members: &mTargetStore, Type: smithy.ShapeTypeEnum, Ext: &ext[80]})
-var sTtlDuration_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &iTtlDurationUnit, Members: &mTtlDurationUnit, Type: smithy.ShapeTypeEnum, Ext: &ext[82]})
-var sTtlDuration_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TtlDurationValue, Type: smithy.ShapeTypeInteger, Ext: &ext[83]})
-var sTtlDurationUnit_SECONDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECONDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[85]})
-var sTtlDurationUnit_MINUTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MINUTES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[86]})
-var sTtlDurationUnit_HOURS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOURS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[87]})
-var sTtlDurationUnit_DAYS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAYS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[88]})
-var sTtlDurationUnit_WEEKS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEEKS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[89]})
-var s_UnprocessedBatchWriteRecordEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchWriteRecordEntry, Members: &mBatchWriteRecordEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[92]})
-var s_UnprocessedIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchGetRecordIdentifier, Members: &mBatchGetRecordIdentifier, Type: smithy.ShapeTypeStructure, Ext: &ext[94]})
-var sValidationError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[96]})
-var s_ValueAsStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ValueAsString, Type: smithy.ShapeTypeString, Ext: &ext[99]})
-var sBatchGetRecordRequest_Identifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifiers", ID: &i_BatchGetRecordIdentifiers, Members: &m_BatchGetRecordIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[101]})
-var sBatchGetRecordRequest_ExpirationTimeResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationTimeResponse", ID: &iExpirationTimeResponse, Members: &mExpirationTimeResponse, Type: smithy.ShapeTypeEnum, Ext: &ext[102]})
-var sBatchGetRecordResponse_Records = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Records", ID: &i_BatchGetRecordResultDetails, Members: &m_BatchGetRecordResultDetails, Type: smithy.ShapeTypeList, Ext: &ext[104]})
-var sBatchGetRecordResponse_Errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errors", ID: &i_BatchGetRecordErrors, Members: &m_BatchGetRecordErrors, Type: smithy.ShapeTypeList, Ext: &ext[105]})
-var sBatchGetRecordResponse_UnprocessedIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnprocessedIdentifiers", ID: &i_UnprocessedIdentifiers, Members: &m_UnprocessedIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[106]})
-var sBatchWriteRecordRequest_Entries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entries", ID: &i_BatchWriteRecordEntries, Members: &m_BatchWriteRecordEntries, Type: smithy.ShapeTypeList, Ext: &ext[108]})
-var sBatchWriteRecordRequest_TtlDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TtlDuration", ID: &iTtlDuration, Members: &mTtlDuration, Type: smithy.ShapeTypeStructure, Ext: &ext[109]})
-var sBatchWriteRecordResponse_Errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errors", ID: &i_BatchWriteRecordErrors, Members: &m_BatchWriteRecordErrors, Type: smithy.ShapeTypeList, Ext: &ext[111]})
-var sBatchWriteRecordResponse_UnprocessedEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnprocessedEntries", ID: &i_UnprocessedBatchWriteRecordEntries, Members: &m_UnprocessedBatchWriteRecordEntries, Type: smithy.ShapeTypeList, Ext: &ext[112]})
-var sDeleteRecordRequest_FeatureGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureGroupName", ID: &i_FeatureGroupNameOrArn, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &ext[114]})
-var sDeleteRecordRequest_RecordIdentifierValueAsString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordIdentifierValueAsString", ID: &i_ValueAsString, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[115]})
-var sDeleteRecordRequest_EventTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventTime", ID: &i_ValueAsString, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &ext[116]})
-var sDeleteRecordRequest_TargetStores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetStores", ID: &i_TargetStores, Members: &m_TargetStores, Traits: &t16, Type: smithy.ShapeTypeList, Ext: &ext[117]})
-var sDeleteRecordRequest_DeletionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionMode", ID: &iDeletionMode, Members: &mDeletionMode, Traits: &t17, Type: smithy.ShapeTypeEnum, Ext: &ext[118]})
-var sGetRecordRequest_FeatureGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureGroupName", ID: &i_FeatureGroupNameOrArn, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &ext[120]})
-var sGetRecordRequest_RecordIdentifierValueAsString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordIdentifierValueAsString", ID: &i_ValueAsString, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[121]})
-var sGetRecordRequest_FeatureNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureNames", ID: &i_FeatureNames, Members: &m_FeatureNames, Traits: &t18, Type: smithy.ShapeTypeList, Ext: &ext[122]})
-var sGetRecordRequest_ExpirationTimeResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationTimeResponse", ID: &iExpirationTimeResponse, Members: &mExpirationTimeResponse, Traits: &t19, Type: smithy.ShapeTypeEnum, Ext: &ext[123]})
-var sGetRecordResponse_Record = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Record", ID: &i_Record, Members: &m_Record, Type: smithy.ShapeTypeList, Ext: &ext[125]})
-var sGetRecordResponse_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &i_ExpiresAt, Type: smithy.ShapeTypeString, Ext: &ext[126]})
-var sListRecordsRequest_FeatureGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureGroupName", ID: &i_FeatureGroupNameOrArn, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &ext[128]})
-var sListRecordsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListRecordsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[129]})
-var sListRecordsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_ListRecordsNextToken, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var sListRecordsRequest_IncludeSoftDeletedRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeSoftDeletedRecords", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[131]})
-var sListRecordsResponse_RecordIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordIdentifiers", ID: &i_RecordIdentifierList, Members: &m_RecordIdentifierList, Type: smithy.ShapeTypeList, Ext: &ext[133]})
-var sListRecordsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_ListRecordsNextToken, Type: smithy.ShapeTypeString, Ext: &ext[134]})
-var sPutRecordRequest_FeatureGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureGroupName", ID: &i_FeatureGroupNameOrArn, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &ext[136]})
-var sPutRecordRequest_Record = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Record", ID: &i_Record, Members: &m_Record, Type: smithy.ShapeTypeList, Ext: &ext[137]})
-var sPutRecordRequest_TargetStores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetStores", ID: &i_TargetStores, Members: &m_TargetStores, Type: smithy.ShapeTypeList, Ext: &ext[138]})
-var sPutRecordRequest_TtlDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TtlDuration", ID: &iTtlDuration, Members: &mTtlDuration, Type: smithy.ShapeTypeStructure, Ext: &ext[139]})
-var sUpdateRecordRequest_FeatureGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureGroupName", ID: &i_FeatureGroupNameOrArn, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &ext[141]})
-var sUpdateRecordRequest_RecordIdentifierValueAsString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordIdentifierValueAsString", ID: &i_ValueAsString, Type: smithy.ShapeTypeString, Ext: &ext[142]})
-var sUpdateRecordRequest_Features = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Features", ID: &i_Record, Members: &m_Record, Type: smithy.ShapeTypeList, Ext: &ext[143]})
-var sUpdateRecordRequest_TargetStores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetStores", ID: &i_TargetStores, Members: &m_TargetStores, Type: smithy.ShapeTypeList, Ext: &ext[144]})
-var sUpdateRecordRequest_TtlDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TtlDuration", ID: &iTtlDuration, Members: &mTtlDuration, Type: smithy.ShapeTypeStructure, Ext: &ext[145]})
+var sAccessForbidden_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eAccessForbidden_Message})
+var sBatchGetRecordError_FeatureGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureGroupName", ID: &i_ValueAsString, Type: smithy.ShapeTypeString, Ext: &eBatchGetRecordError_FeatureGroupName})
+var sBatchGetRecordError_RecordIdentifierValueAsString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordIdentifierValueAsString", ID: &i_ValueAsString, Type: smithy.ShapeTypeString, Ext: &eBatchGetRecordError_RecordIdentifierValueAsString})
+var sBatchGetRecordError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ValueAsString, Type: smithy.ShapeTypeString, Ext: &eBatchGetRecordError_ErrorCode})
+var sBatchGetRecordError_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eBatchGetRecordError_ErrorMessage})
+var s_BatchGetRecordErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchGetRecordError, Members: &mBatchGetRecordError, Type: smithy.ShapeTypeStructure, Ext: &e_BatchGetRecordErrors_member})
+var sBatchGetRecordIdentifier_FeatureGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureGroupName", ID: &i_FeatureGroupNameOrArn, Type: smithy.ShapeTypeString, Ext: &eBatchGetRecordIdentifier_FeatureGroupName})
+var sBatchGetRecordIdentifier_RecordIdentifiersValueAsString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordIdentifiersValueAsString", ID: &i_RecordIdentifiers, Members: &m_RecordIdentifiers, Type: smithy.ShapeTypeList, Ext: &eBatchGetRecordIdentifier_RecordIdentifiersValueAsString})
+var sBatchGetRecordIdentifier_FeatureNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureNames", ID: &i_FeatureNames, Members: &m_FeatureNames, Type: smithy.ShapeTypeList, Ext: &eBatchGetRecordIdentifier_FeatureNames})
+var s_BatchGetRecordIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchGetRecordIdentifier, Members: &mBatchGetRecordIdentifier, Type: smithy.ShapeTypeStructure, Ext: &e_BatchGetRecordIdentifiers_member})
+var sBatchGetRecordResultDetail_FeatureGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureGroupName", ID: &i_ValueAsString, Type: smithy.ShapeTypeString, Ext: &eBatchGetRecordResultDetail_FeatureGroupName})
+var sBatchGetRecordResultDetail_RecordIdentifierValueAsString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordIdentifierValueAsString", ID: &i_ValueAsString, Type: smithy.ShapeTypeString, Ext: &eBatchGetRecordResultDetail_RecordIdentifierValueAsString})
+var sBatchGetRecordResultDetail_Record = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Record", ID: &i_Record, Members: &m_Record, Type: smithy.ShapeTypeList, Ext: &eBatchGetRecordResultDetail_Record})
+var sBatchGetRecordResultDetail_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &i_ExpiresAt, Type: smithy.ShapeTypeString, Ext: &eBatchGetRecordResultDetail_ExpiresAt})
+var s_BatchGetRecordResultDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchGetRecordResultDetail, Members: &mBatchGetRecordResultDetail, Type: smithy.ShapeTypeStructure, Ext: &e_BatchGetRecordResultDetails_member})
+var s_BatchWriteRecordEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchWriteRecordEntry, Members: &mBatchWriteRecordEntry, Type: smithy.ShapeTypeStructure, Ext: &e_BatchWriteRecordEntries_member})
+var sBatchWriteRecordEntry_FeatureGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureGroupName", ID: &i_FeatureGroupNameOrArn, Type: smithy.ShapeTypeString, Ext: &eBatchWriteRecordEntry_FeatureGroupName})
+var sBatchWriteRecordEntry_Record = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Record", ID: &i_Record, Members: &m_Record, Type: smithy.ShapeTypeList, Ext: &eBatchWriteRecordEntry_Record})
+var sBatchWriteRecordEntry_TargetStores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetStores", ID: &i_TargetStores, Members: &m_TargetStores, Type: smithy.ShapeTypeList, Ext: &eBatchWriteRecordEntry_TargetStores})
+var sBatchWriteRecordEntry_TtlDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TtlDuration", ID: &iTtlDuration, Members: &mTtlDuration, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteRecordEntry_TtlDuration})
+var sBatchWriteRecordError_Entry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entry", ID: &iBatchWriteRecordEntry, Members: &mBatchWriteRecordEntry, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteRecordError_Entry})
+var sBatchWriteRecordError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ValueAsString, Type: smithy.ShapeTypeString, Ext: &eBatchWriteRecordError_ErrorCode})
+var sBatchWriteRecordError_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eBatchWriteRecordError_ErrorMessage})
+var s_BatchWriteRecordErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchWriteRecordError, Members: &mBatchWriteRecordError, Type: smithy.ShapeTypeStructure, Ext: &e_BatchWriteRecordErrors_member})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var sDeletionMode_SOFT_DELETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOFT_DELETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeletionMode_SOFT_DELETE})
+var sDeletionMode_HARD_DELETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HARD_DELETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeletionMode_HARD_DELETE})
+var sExpirationTimeResponse_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExpirationTimeResponse_ENABLED})
+var sExpirationTimeResponse_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExpirationTimeResponse_DISABLED})
+var s_FeatureNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FeatureName, Type: smithy.ShapeTypeString, Ext: &e_FeatureNames_member})
+var sFeatureValue_FeatureName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureName", ID: &i_FeatureName, Type: smithy.ShapeTypeString, Ext: &eFeatureValue_FeatureName})
+var sFeatureValue_ValueAsString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueAsString", ID: &i_ValueAsString, Type: smithy.ShapeTypeString, Ext: &eFeatureValue_ValueAsString})
+var sFeatureValue_ValueAsStringList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueAsStringList", ID: &i_ValueAsStringList, Members: &m_ValueAsStringList, Type: smithy.ShapeTypeList, Ext: &eFeatureValue_ValueAsStringList})
+var sInternalFailure_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInternalFailure_Message})
+var s_Record_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFeatureValue, Members: &mFeatureValue, Type: smithy.ShapeTypeStructure, Ext: &e_Record_member})
+var s_RecordIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ValueAsString, Type: smithy.ShapeTypeString, Ext: &e_RecordIdentifierList_member})
+var s_RecordIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ValueAsString, Type: smithy.ShapeTypeString, Ext: &e_RecordIdentifiers_member})
+var sResourceNotFound_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eResourceNotFound_Message})
+var sServiceUnavailable_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailable_Message})
+var sTargetStore_ONLINE_STORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONLINE_STORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetStore_ONLINE_STORE})
+var sTargetStore_OFFLINE_STORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OFFLINE_STORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetStore_OFFLINE_STORE})
+var s_TargetStores_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTargetStore, Members: &mTargetStore, Type: smithy.ShapeTypeEnum, Ext: &e_TargetStores_member})
+var sTtlDuration_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &iTtlDurationUnit, Members: &mTtlDurationUnit, Type: smithy.ShapeTypeEnum, Ext: &eTtlDuration_Unit})
+var sTtlDuration_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TtlDurationValue, Type: smithy.ShapeTypeInteger, Ext: &eTtlDuration_Value})
+var sTtlDurationUnit_SECONDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECONDS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTtlDurationUnit_SECONDS})
+var sTtlDurationUnit_MINUTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MINUTES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTtlDurationUnit_MINUTES})
+var sTtlDurationUnit_HOURS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOURS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTtlDurationUnit_HOURS})
+var sTtlDurationUnit_DAYS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAYS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTtlDurationUnit_DAYS})
+var sTtlDurationUnit_WEEKS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEEKS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTtlDurationUnit_WEEKS})
+var s_UnprocessedBatchWriteRecordEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchWriteRecordEntry, Members: &mBatchWriteRecordEntry, Type: smithy.ShapeTypeStructure, Ext: &e_UnprocessedBatchWriteRecordEntries_member})
+var s_UnprocessedIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchGetRecordIdentifier, Members: &mBatchGetRecordIdentifier, Type: smithy.ShapeTypeStructure, Ext: &e_UnprocessedIdentifiers_member})
+var sValidationError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eValidationError_Message})
+var s_ValueAsStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ValueAsString, Type: smithy.ShapeTypeString, Ext: &e_ValueAsStringList_member})
+var sBatchGetRecordRequest_Identifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifiers", ID: &i_BatchGetRecordIdentifiers, Members: &m_BatchGetRecordIdentifiers, Type: smithy.ShapeTypeList, Ext: &eBatchGetRecordRequest_Identifiers})
+var sBatchGetRecordRequest_ExpirationTimeResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationTimeResponse", ID: &iExpirationTimeResponse, Members: &mExpirationTimeResponse, Type: smithy.ShapeTypeEnum, Ext: &eBatchGetRecordRequest_ExpirationTimeResponse})
+var sBatchGetRecordResponse_Records = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Records", ID: &i_BatchGetRecordResultDetails, Members: &m_BatchGetRecordResultDetails, Type: smithy.ShapeTypeList, Ext: &eBatchGetRecordResponse_Records})
+var sBatchGetRecordResponse_Errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errors", ID: &i_BatchGetRecordErrors, Members: &m_BatchGetRecordErrors, Type: smithy.ShapeTypeList, Ext: &eBatchGetRecordResponse_Errors})
+var sBatchGetRecordResponse_UnprocessedIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnprocessedIdentifiers", ID: &i_UnprocessedIdentifiers, Members: &m_UnprocessedIdentifiers, Type: smithy.ShapeTypeList, Ext: &eBatchGetRecordResponse_UnprocessedIdentifiers})
+var sBatchWriteRecordRequest_Entries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entries", ID: &i_BatchWriteRecordEntries, Members: &m_BatchWriteRecordEntries, Type: smithy.ShapeTypeList, Ext: &eBatchWriteRecordRequest_Entries})
+var sBatchWriteRecordRequest_TtlDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TtlDuration", ID: &iTtlDuration, Members: &mTtlDuration, Type: smithy.ShapeTypeStructure, Ext: &eBatchWriteRecordRequest_TtlDuration})
+var sBatchWriteRecordResponse_Errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errors", ID: &i_BatchWriteRecordErrors, Members: &m_BatchWriteRecordErrors, Type: smithy.ShapeTypeList, Ext: &eBatchWriteRecordResponse_Errors})
+var sBatchWriteRecordResponse_UnprocessedEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnprocessedEntries", ID: &i_UnprocessedBatchWriteRecordEntries, Members: &m_UnprocessedBatchWriteRecordEntries, Type: smithy.ShapeTypeList, Ext: &eBatchWriteRecordResponse_UnprocessedEntries})
+var sDeleteRecordRequest_FeatureGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureGroupName", ID: &i_FeatureGroupNameOrArn, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eDeleteRecordRequest_FeatureGroupName})
+var sDeleteRecordRequest_RecordIdentifierValueAsString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordIdentifierValueAsString", ID: &i_ValueAsString, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eDeleteRecordRequest_RecordIdentifierValueAsString})
+var sDeleteRecordRequest_EventTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventTime", ID: &i_ValueAsString, Traits: &t15, Type: smithy.ShapeTypeString, Ext: &eDeleteRecordRequest_EventTime})
+var sDeleteRecordRequest_TargetStores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetStores", ID: &i_TargetStores, Members: &m_TargetStores, Traits: &t16, Type: smithy.ShapeTypeList, Ext: &eDeleteRecordRequest_TargetStores})
+var sDeleteRecordRequest_DeletionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionMode", ID: &iDeletionMode, Members: &mDeletionMode, Traits: &t17, Type: smithy.ShapeTypeEnum, Ext: &eDeleteRecordRequest_DeletionMode})
+var sGetRecordRequest_FeatureGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureGroupName", ID: &i_FeatureGroupNameOrArn, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eGetRecordRequest_FeatureGroupName})
+var sGetRecordRequest_RecordIdentifierValueAsString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordIdentifierValueAsString", ID: &i_ValueAsString, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eGetRecordRequest_RecordIdentifierValueAsString})
+var sGetRecordRequest_FeatureNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureNames", ID: &i_FeatureNames, Members: &m_FeatureNames, Traits: &t18, Type: smithy.ShapeTypeList, Ext: &eGetRecordRequest_FeatureNames})
+var sGetRecordRequest_ExpirationTimeResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationTimeResponse", ID: &iExpirationTimeResponse, Members: &mExpirationTimeResponse, Traits: &t19, Type: smithy.ShapeTypeEnum, Ext: &eGetRecordRequest_ExpirationTimeResponse})
+var sGetRecordResponse_Record = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Record", ID: &i_Record, Members: &m_Record, Type: smithy.ShapeTypeList, Ext: &eGetRecordResponse_Record})
+var sGetRecordResponse_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &i_ExpiresAt, Type: smithy.ShapeTypeString, Ext: &eGetRecordResponse_ExpiresAt})
+var sListRecordsRequest_FeatureGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureGroupName", ID: &i_FeatureGroupNameOrArn, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eListRecordsRequest_FeatureGroupName})
+var sListRecordsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListRecordsMaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListRecordsRequest_MaxResults})
+var sListRecordsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_ListRecordsNextToken, Type: smithy.ShapeTypeString, Ext: &eListRecordsRequest_NextToken})
+var sListRecordsRequest_IncludeSoftDeletedRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeSoftDeletedRecords", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eListRecordsRequest_IncludeSoftDeletedRecords})
+var sListRecordsResponse_RecordIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordIdentifiers", ID: &i_RecordIdentifierList, Members: &m_RecordIdentifierList, Type: smithy.ShapeTypeList, Ext: &eListRecordsResponse_RecordIdentifiers})
+var sListRecordsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_ListRecordsNextToken, Type: smithy.ShapeTypeString, Ext: &eListRecordsResponse_NextToken})
+var sPutRecordRequest_FeatureGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureGroupName", ID: &i_FeatureGroupNameOrArn, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &ePutRecordRequest_FeatureGroupName})
+var sPutRecordRequest_Record = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Record", ID: &i_Record, Members: &m_Record, Type: smithy.ShapeTypeList, Ext: &ePutRecordRequest_Record})
+var sPutRecordRequest_TargetStores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetStores", ID: &i_TargetStores, Members: &m_TargetStores, Type: smithy.ShapeTypeList, Ext: &ePutRecordRequest_TargetStores})
+var sPutRecordRequest_TtlDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TtlDuration", ID: &iTtlDuration, Members: &mTtlDuration, Type: smithy.ShapeTypeStructure, Ext: &ePutRecordRequest_TtlDuration})
+var sUpdateRecordRequest_FeatureGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureGroupName", ID: &i_FeatureGroupNameOrArn, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eUpdateRecordRequest_FeatureGroupName})
+var sUpdateRecordRequest_RecordIdentifierValueAsString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordIdentifierValueAsString", ID: &i_ValueAsString, Type: smithy.ShapeTypeString, Ext: &eUpdateRecordRequest_RecordIdentifierValueAsString})
+var sUpdateRecordRequest_Features = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Features", ID: &i_Record, Members: &m_Record, Type: smithy.ShapeTypeList, Ext: &eUpdateRecordRequest_Features})
+var sUpdateRecordRequest_TargetStores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetStores", ID: &i_TargetStores, Members: &m_TargetStores, Type: smithy.ShapeTypeList, Ext: &eUpdateRecordRequest_TargetStores})
+var sUpdateRecordRequest_TtlDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TtlDuration", ID: &iTtlDuration, Members: &mTtlDuration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRecordRequest_TtlDuration})
 
 var BatchGetRecord = &sBatchGetRecord
 

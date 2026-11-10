@@ -7,9 +7,1641 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [1633]smithy.SchemaExtensions
+var (
+	eAssociateApprovalRuleTemplateWithRepository                                              smithy.SchemaExtensions
+	eBatchAssociateApprovalRuleTemplateWithRepositories                                       smithy.SchemaExtensions
+	eBatchDescribeMergeConflicts                                                              smithy.SchemaExtensions
+	eBatchDisassociateApprovalRuleTemplateFromRepositories                                    smithy.SchemaExtensions
+	eBatchGetCommits                                                                          smithy.SchemaExtensions
+	eBatchGetRepositories                                                                     smithy.SchemaExtensions
+	eCreateApprovalRuleTemplate                                                               smithy.SchemaExtensions
+	eCreateBranch                                                                             smithy.SchemaExtensions
+	eCreateCommit                                                                             smithy.SchemaExtensions
+	eCreatePullRequest                                                                        smithy.SchemaExtensions
+	eCreatePullRequestApprovalRule                                                            smithy.SchemaExtensions
+	eCreateRepository                                                                         smithy.SchemaExtensions
+	eCreateUnreferencedMergeCommit                                                            smithy.SchemaExtensions
+	eDeleteApprovalRuleTemplate                                                               smithy.SchemaExtensions
+	eDeleteBranch                                                                             smithy.SchemaExtensions
+	eDeleteCommentContent                                                                     smithy.SchemaExtensions
+	eDeleteFile                                                                               smithy.SchemaExtensions
+	eDeletePullRequestApprovalRule                                                            smithy.SchemaExtensions
+	eDeleteRepository                                                                         smithy.SchemaExtensions
+	eDescribeMergeConflicts                                                                   smithy.SchemaExtensions
+	eDescribePullRequestEvents                                                                smithy.SchemaExtensions
+	eDisassociateApprovalRuleTemplateFromRepository                                           smithy.SchemaExtensions
+	eEvaluatePullRequestApprovalRules                                                         smithy.SchemaExtensions
+	eGetApprovalRuleTemplate                                                                  smithy.SchemaExtensions
+	eGetBlob                                                                                  smithy.SchemaExtensions
+	eGetBlobDifferences                                                                       smithy.SchemaExtensions
+	eGetBranch                                                                                smithy.SchemaExtensions
+	eGetComment                                                                               smithy.SchemaExtensions
+	eGetCommentReactions                                                                      smithy.SchemaExtensions
+	eGetCommentsForComparedCommit                                                             smithy.SchemaExtensions
+	eGetCommentsForPullRequest                                                                smithy.SchemaExtensions
+	eGetCommit                                                                                smithy.SchemaExtensions
+	eGetDifferences                                                                           smithy.SchemaExtensions
+	eGetFile                                                                                  smithy.SchemaExtensions
+	eGetFolder                                                                                smithy.SchemaExtensions
+	eGetMergeCommit                                                                           smithy.SchemaExtensions
+	eGetMergeConflicts                                                                        smithy.SchemaExtensions
+	eGetMergeOptions                                                                          smithy.SchemaExtensions
+	eGetPullRequest                                                                           smithy.SchemaExtensions
+	eGetPullRequestApprovalStates                                                             smithy.SchemaExtensions
+	eGetPullRequestOverrideState                                                              smithy.SchemaExtensions
+	eGetRepository                                                                            smithy.SchemaExtensions
+	eGetRepositoryTriggers                                                                    smithy.SchemaExtensions
+	eListApprovalRuleTemplates                                                                smithy.SchemaExtensions
+	eListAssociatedApprovalRuleTemplatesForRepository                                         smithy.SchemaExtensions
+	eListBranches                                                                             smithy.SchemaExtensions
+	eListFileCommitHistory                                                                    smithy.SchemaExtensions
+	eListPullRequests                                                                         smithy.SchemaExtensions
+	eListRepositories                                                                         smithy.SchemaExtensions
+	eListRepositoriesForApprovalRuleTemplate                                                  smithy.SchemaExtensions
+	eListTagsForResource                                                                      smithy.SchemaExtensions
+	eMergeBranchesByFastForward                                                               smithy.SchemaExtensions
+	eMergeBranchesBySquash                                                                    smithy.SchemaExtensions
+	eMergeBranchesByThreeWay                                                                  smithy.SchemaExtensions
+	eMergePullRequestByFastForward                                                            smithy.SchemaExtensions
+	eMergePullRequestBySquash                                                                 smithy.SchemaExtensions
+	eMergePullRequestByThreeWay                                                               smithy.SchemaExtensions
+	eOverridePullRequestApprovalRules                                                         smithy.SchemaExtensions
+	ePostCommentForComparedCommit                                                             smithy.SchemaExtensions
+	ePostCommentForPullRequest                                                                smithy.SchemaExtensions
+	ePostCommentReply                                                                         smithy.SchemaExtensions
+	ePutCommentReaction                                                                       smithy.SchemaExtensions
+	ePutFile                                                                                  smithy.SchemaExtensions
+	ePutRepositoryTriggers                                                                    smithy.SchemaExtensions
+	eTagResource                                                                              smithy.SchemaExtensions
+	eTestRepositoryTriggers                                                                   smithy.SchemaExtensions
+	eUntagResource                                                                            smithy.SchemaExtensions
+	eUpdateApprovalRuleTemplateContent                                                        smithy.SchemaExtensions
+	eUpdateApprovalRuleTemplateDescription                                                    smithy.SchemaExtensions
+	eUpdateApprovalRuleTemplateName                                                           smithy.SchemaExtensions
+	eUpdateComment                                                                            smithy.SchemaExtensions
+	eUpdateDefaultBranch                                                                      smithy.SchemaExtensions
+	eUpdatePullRequestApprovalRuleContent                                                     smithy.SchemaExtensions
+	eUpdatePullRequestApprovalState                                                           smithy.SchemaExtensions
+	eUpdatePullRequestDescription                                                             smithy.SchemaExtensions
+	eUpdatePullRequestStatus                                                                  smithy.SchemaExtensions
+	eUpdatePullRequestTitle                                                                   smithy.SchemaExtensions
+	eUpdateRepositoryDescription                                                              smithy.SchemaExtensions
+	eUpdateRepositoryEncryptionKey                                                            smithy.SchemaExtensions
+	eUpdateRepositoryName                                                                     smithy.SchemaExtensions
+	e_CodeCommit_20150413                                                                     smithy.SchemaExtensions
+	e_AccountId                                                                               smithy.SchemaExtensions
+	eActorDoesNotExistException                                                               smithy.SchemaExtensions
+	eActorDoesNotExistException_message                                                       smithy.SchemaExtensions
+	e_AdditionalData                                                                          smithy.SchemaExtensions
+	eApproval                                                                                 smithy.SchemaExtensions
+	eApproval_userArn                                                                         smithy.SchemaExtensions
+	eApproval_approvalState                                                                   smithy.SchemaExtensions
+	e_ApprovalList                                                                            smithy.SchemaExtensions
+	e_ApprovalList_member                                                                     smithy.SchemaExtensions
+	eApprovalRule                                                                             smithy.SchemaExtensions
+	eApprovalRule_approvalRuleId                                                              smithy.SchemaExtensions
+	eApprovalRule_approvalRuleName                                                            smithy.SchemaExtensions
+	eApprovalRule_approvalRuleContent                                                         smithy.SchemaExtensions
+	eApprovalRule_ruleContentSha256                                                           smithy.SchemaExtensions
+	eApprovalRule_lastModifiedDate                                                            smithy.SchemaExtensions
+	eApprovalRule_creationDate                                                                smithy.SchemaExtensions
+	eApprovalRule_lastModifiedUser                                                            smithy.SchemaExtensions
+	eApprovalRule_originApprovalRuleTemplate                                                  smithy.SchemaExtensions
+	e_ApprovalRuleContent                                                                     smithy.SchemaExtensions
+	eApprovalRuleContentRequiredException                                                     smithy.SchemaExtensions
+	eApprovalRuleContentRequiredException_message                                             smithy.SchemaExtensions
+	eApprovalRuleDoesNotExistException                                                        smithy.SchemaExtensions
+	eApprovalRuleDoesNotExistException_message                                                smithy.SchemaExtensions
+	eApprovalRuleEventMetadata                                                                smithy.SchemaExtensions
+	eApprovalRuleEventMetadata_approvalRuleName                                               smithy.SchemaExtensions
+	eApprovalRuleEventMetadata_approvalRuleId                                                 smithy.SchemaExtensions
+	eApprovalRuleEventMetadata_approvalRuleContent                                            smithy.SchemaExtensions
+	e_ApprovalRuleId                                                                          smithy.SchemaExtensions
+	e_ApprovalRuleName                                                                        smithy.SchemaExtensions
+	eApprovalRuleNameAlreadyExistsException                                                   smithy.SchemaExtensions
+	eApprovalRuleNameAlreadyExistsException_message                                           smithy.SchemaExtensions
+	eApprovalRuleNameRequiredException                                                        smithy.SchemaExtensions
+	eApprovalRuleNameRequiredException_message                                                smithy.SchemaExtensions
+	eApprovalRuleOverriddenEventMetadata                                                      smithy.SchemaExtensions
+	eApprovalRuleOverriddenEventMetadata_revisionId                                           smithy.SchemaExtensions
+	eApprovalRuleOverriddenEventMetadata_overrideStatus                                       smithy.SchemaExtensions
+	e_ApprovalRulesList                                                                       smithy.SchemaExtensions
+	e_ApprovalRulesList_member                                                                smithy.SchemaExtensions
+	e_ApprovalRulesNotSatisfiedList                                                           smithy.SchemaExtensions
+	e_ApprovalRulesNotSatisfiedList_member                                                    smithy.SchemaExtensions
+	e_ApprovalRulesSatisfiedList                                                              smithy.SchemaExtensions
+	e_ApprovalRulesSatisfiedList_member                                                       smithy.SchemaExtensions
+	eApprovalRuleTemplate                                                                     smithy.SchemaExtensions
+	eApprovalRuleTemplate_approvalRuleTemplateId                                              smithy.SchemaExtensions
+	eApprovalRuleTemplate_approvalRuleTemplateName                                            smithy.SchemaExtensions
+	eApprovalRuleTemplate_approvalRuleTemplateDescription                                     smithy.SchemaExtensions
+	eApprovalRuleTemplate_approvalRuleTemplateContent                                         smithy.SchemaExtensions
+	eApprovalRuleTemplate_ruleContentSha256                                                   smithy.SchemaExtensions
+	eApprovalRuleTemplate_lastModifiedDate                                                    smithy.SchemaExtensions
+	eApprovalRuleTemplate_creationDate                                                        smithy.SchemaExtensions
+	eApprovalRuleTemplate_lastModifiedUser                                                    smithy.SchemaExtensions
+	e_ApprovalRuleTemplateContent                                                             smithy.SchemaExtensions
+	eApprovalRuleTemplateContentRequiredException                                             smithy.SchemaExtensions
+	eApprovalRuleTemplateContentRequiredException_message                                     smithy.SchemaExtensions
+	e_ApprovalRuleTemplateDescription                                                         smithy.SchemaExtensions
+	eApprovalRuleTemplateDoesNotExistException                                                smithy.SchemaExtensions
+	eApprovalRuleTemplateDoesNotExistException_message                                        smithy.SchemaExtensions
+	e_ApprovalRuleTemplateId                                                                  smithy.SchemaExtensions
+	eApprovalRuleTemplateInUseException                                                       smithy.SchemaExtensions
+	eApprovalRuleTemplateInUseException_message                                               smithy.SchemaExtensions
+	e_ApprovalRuleTemplateName                                                                smithy.SchemaExtensions
+	eApprovalRuleTemplateNameAlreadyExistsException                                           smithy.SchemaExtensions
+	eApprovalRuleTemplateNameAlreadyExistsException_message                                   smithy.SchemaExtensions
+	e_ApprovalRuleTemplateNameList                                                            smithy.SchemaExtensions
+	e_ApprovalRuleTemplateNameList_member                                                     smithy.SchemaExtensions
+	eApprovalRuleTemplateNameRequiredException                                                smithy.SchemaExtensions
+	eApprovalRuleTemplateNameRequiredException_message                                        smithy.SchemaExtensions
+	eApprovalState                                                                            smithy.SchemaExtensions
+	eApprovalState_APPROVE                                                                    smithy.SchemaExtensions
+	eApprovalState_REVOKE                                                                     smithy.SchemaExtensions
+	eApprovalStateChangedEventMetadata                                                        smithy.SchemaExtensions
+	eApprovalStateChangedEventMetadata_revisionId                                             smithy.SchemaExtensions
+	eApprovalStateChangedEventMetadata_approvalStatus                                         smithy.SchemaExtensions
+	eApprovalStateRequiredException                                                           smithy.SchemaExtensions
+	eApprovalStateRequiredException_message                                                   smithy.SchemaExtensions
+	e_Approved                                                                                smithy.SchemaExtensions
+	e_Arn                                                                                     smithy.SchemaExtensions
+	eAuthorDoesNotExistException                                                              smithy.SchemaExtensions
+	eAuthorDoesNotExistException_message                                                      smithy.SchemaExtensions
+	eBatchAssociateApprovalRuleTemplateWithRepositoriesError                                  smithy.SchemaExtensions
+	eBatchAssociateApprovalRuleTemplateWithRepositoriesError_repositoryName                   smithy.SchemaExtensions
+	eBatchAssociateApprovalRuleTemplateWithRepositoriesError_errorCode                        smithy.SchemaExtensions
+	eBatchAssociateApprovalRuleTemplateWithRepositoriesError_errorMessage                     smithy.SchemaExtensions
+	e_BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList                            smithy.SchemaExtensions
+	e_BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList_member                     smithy.SchemaExtensions
+	eBatchDescribeMergeConflictsError                                                         smithy.SchemaExtensions
+	eBatchDescribeMergeConflictsError_filePath                                                smithy.SchemaExtensions
+	eBatchDescribeMergeConflictsError_exceptionName                                           smithy.SchemaExtensions
+	eBatchDescribeMergeConflictsError_message                                                 smithy.SchemaExtensions
+	e_BatchDescribeMergeConflictsErrors                                                       smithy.SchemaExtensions
+	e_BatchDescribeMergeConflictsErrors_member                                                smithy.SchemaExtensions
+	eBatchDisassociateApprovalRuleTemplateFromRepositoriesError                               smithy.SchemaExtensions
+	eBatchDisassociateApprovalRuleTemplateFromRepositoriesError_repositoryName                smithy.SchemaExtensions
+	eBatchDisassociateApprovalRuleTemplateFromRepositoriesError_errorCode                     smithy.SchemaExtensions
+	eBatchDisassociateApprovalRuleTemplateFromRepositoriesError_errorMessage                  smithy.SchemaExtensions
+	e_BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList                         smithy.SchemaExtensions
+	e_BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList_member                  smithy.SchemaExtensions
+	eBatchGetCommitsError                                                                     smithy.SchemaExtensions
+	eBatchGetCommitsError_commitId                                                            smithy.SchemaExtensions
+	eBatchGetCommitsError_errorCode                                                           smithy.SchemaExtensions
+	eBatchGetCommitsError_errorMessage                                                        smithy.SchemaExtensions
+	e_BatchGetCommitsErrorsList                                                               smithy.SchemaExtensions
+	e_BatchGetCommitsErrorsList_member                                                        smithy.SchemaExtensions
+	eBatchGetRepositoriesError                                                                smithy.SchemaExtensions
+	eBatchGetRepositoriesError_repositoryId                                                   smithy.SchemaExtensions
+	eBatchGetRepositoriesError_repositoryName                                                 smithy.SchemaExtensions
+	eBatchGetRepositoriesError_errorCode                                                      smithy.SchemaExtensions
+	eBatchGetRepositoriesError_errorMessage                                                   smithy.SchemaExtensions
+	eBatchGetRepositoriesErrorCodeEnum                                                        smithy.SchemaExtensions
+	eBatchGetRepositoriesErrorCodeEnum_ENCRYPTION_INTEGRITY_CHECKS_FAILED_EXCEPTION           smithy.SchemaExtensions
+	eBatchGetRepositoriesErrorCodeEnum_ENCRYPTION_KEY_ACCESS_DENIED_EXCEPTION                 smithy.SchemaExtensions
+	eBatchGetRepositoriesErrorCodeEnum_ENCRYPTION_KEY_DISABLED_EXCEPTION                      smithy.SchemaExtensions
+	eBatchGetRepositoriesErrorCodeEnum_ENCRYPTION_KEY_NOT_FOUND_EXCEPTION                     smithy.SchemaExtensions
+	eBatchGetRepositoriesErrorCodeEnum_ENCRYPTION_KEY_UNAVAILABLE_EXCEPTION                   smithy.SchemaExtensions
+	eBatchGetRepositoriesErrorCodeEnum_REPOSITORY_DOES_NOT_EXIST_EXCEPTION                    smithy.SchemaExtensions
+	e_BatchGetRepositoriesErrorsList                                                          smithy.SchemaExtensions
+	e_BatchGetRepositoriesErrorsList_member                                                   smithy.SchemaExtensions
+	eBeforeCommitIdAndAfterCommitIdAreSameException                                           smithy.SchemaExtensions
+	eBeforeCommitIdAndAfterCommitIdAreSameException_message                                   smithy.SchemaExtensions
+	e_blob                                                                                    smithy.SchemaExtensions
+	eBlobIdDoesNotExistException                                                              smithy.SchemaExtensions
+	eBlobIdDoesNotExistException_message                                                      smithy.SchemaExtensions
+	eBlobIdRequiredException                                                                  smithy.SchemaExtensions
+	eBlobIdRequiredException_message                                                          smithy.SchemaExtensions
+	eBlobMetadata                                                                             smithy.SchemaExtensions
+	eBlobMetadata_blobId                                                                      smithy.SchemaExtensions
+	eBlobMetadata_path                                                                        smithy.SchemaExtensions
+	eBlobMetadata_mode                                                                        smithy.SchemaExtensions
+	eBranchDoesNotExistException                                                              smithy.SchemaExtensions
+	eBranchDoesNotExistException_message                                                      smithy.SchemaExtensions
+	eBranchInfo                                                                               smithy.SchemaExtensions
+	eBranchInfo_branchName                                                                    smithy.SchemaExtensions
+	eBranchInfo_commitId                                                                      smithy.SchemaExtensions
+	e_BranchName                                                                              smithy.SchemaExtensions
+	eBranchNameExistsException                                                                smithy.SchemaExtensions
+	eBranchNameExistsException_message                                                        smithy.SchemaExtensions
+	eBranchNameIsTagNameException                                                             smithy.SchemaExtensions
+	eBranchNameIsTagNameException_message                                                     smithy.SchemaExtensions
+	e_BranchNameList                                                                          smithy.SchemaExtensions
+	e_BranchNameList_member                                                                   smithy.SchemaExtensions
+	eBranchNameRequiredException                                                              smithy.SchemaExtensions
+	eBranchNameRequiredException_message                                                      smithy.SchemaExtensions
+	e_CallerReactions                                                                         smithy.SchemaExtensions
+	e_CallerReactions_member                                                                  smithy.SchemaExtensions
+	eCannotDeleteApprovalRuleFromTemplateException                                            smithy.SchemaExtensions
+	eCannotDeleteApprovalRuleFromTemplateException_message                                    smithy.SchemaExtensions
+	eCannotModifyApprovalRuleFromTemplateException                                            smithy.SchemaExtensions
+	eCannotModifyApprovalRuleFromTemplateException_message                                    smithy.SchemaExtensions
+	e_CapitalBoolean                                                                          smithy.SchemaExtensions
+	eChangeTypeEnum                                                                           smithy.SchemaExtensions
+	eChangeTypeEnum_ADDED                                                                     smithy.SchemaExtensions
+	eChangeTypeEnum_MODIFIED                                                                  smithy.SchemaExtensions
+	eChangeTypeEnum_DELETED                                                                   smithy.SchemaExtensions
+	e_ClientRequestToken                                                                      smithy.SchemaExtensions
+	eClientRequestTokenRequiredException                                                      smithy.SchemaExtensions
+	eClientRequestTokenRequiredException_message                                              smithy.SchemaExtensions
+	e_CloneUrlHttp                                                                            smithy.SchemaExtensions
+	e_CloneUrlSsh                                                                             smithy.SchemaExtensions
+	eComment                                                                                  smithy.SchemaExtensions
+	eComment_commentId                                                                        smithy.SchemaExtensions
+	eComment_content                                                                          smithy.SchemaExtensions
+	eComment_inReplyTo                                                                        smithy.SchemaExtensions
+	eComment_creationDate                                                                     smithy.SchemaExtensions
+	eComment_lastModifiedDate                                                                 smithy.SchemaExtensions
+	eComment_authorArn                                                                        smithy.SchemaExtensions
+	eComment_deleted                                                                          smithy.SchemaExtensions
+	eComment_clientRequestToken                                                               smithy.SchemaExtensions
+	eComment_callerReactions                                                                  smithy.SchemaExtensions
+	eComment_reactionCounts                                                                   smithy.SchemaExtensions
+	eCommentContentRequiredException                                                          smithy.SchemaExtensions
+	eCommentContentRequiredException_message                                                  smithy.SchemaExtensions
+	eCommentContentSizeLimitExceededException                                                 smithy.SchemaExtensions
+	eCommentContentSizeLimitExceededException_message                                         smithy.SchemaExtensions
+	eCommentDeletedException                                                                  smithy.SchemaExtensions
+	eCommentDeletedException_message                                                          smithy.SchemaExtensions
+	eCommentDoesNotExistException                                                             smithy.SchemaExtensions
+	eCommentDoesNotExistException_message                                                     smithy.SchemaExtensions
+	e_CommentId                                                                               smithy.SchemaExtensions
+	eCommentIdRequiredException                                                               smithy.SchemaExtensions
+	eCommentIdRequiredException_message                                                       smithy.SchemaExtensions
+	eCommentNotCreatedByCallerException                                                       smithy.SchemaExtensions
+	eCommentNotCreatedByCallerException_message                                               smithy.SchemaExtensions
+	e_Comments                                                                                smithy.SchemaExtensions
+	e_Comments_member                                                                         smithy.SchemaExtensions
+	eCommentsForComparedCommit                                                                smithy.SchemaExtensions
+	eCommentsForComparedCommit_repositoryName                                                 smithy.SchemaExtensions
+	eCommentsForComparedCommit_beforeCommitId                                                 smithy.SchemaExtensions
+	eCommentsForComparedCommit_afterCommitId                                                  smithy.SchemaExtensions
+	eCommentsForComparedCommit_beforeBlobId                                                   smithy.SchemaExtensions
+	eCommentsForComparedCommit_afterBlobId                                                    smithy.SchemaExtensions
+	eCommentsForComparedCommit_location                                                       smithy.SchemaExtensions
+	eCommentsForComparedCommit_comments                                                       smithy.SchemaExtensions
+	e_CommentsForComparedCommitData                                                           smithy.SchemaExtensions
+	e_CommentsForComparedCommitData_member                                                    smithy.SchemaExtensions
+	eCommentsForPullRequest                                                                   smithy.SchemaExtensions
+	eCommentsForPullRequest_pullRequestId                                                     smithy.SchemaExtensions
+	eCommentsForPullRequest_repositoryName                                                    smithy.SchemaExtensions
+	eCommentsForPullRequest_beforeCommitId                                                    smithy.SchemaExtensions
+	eCommentsForPullRequest_afterCommitId                                                     smithy.SchemaExtensions
+	eCommentsForPullRequest_beforeBlobId                                                      smithy.SchemaExtensions
+	eCommentsForPullRequest_afterBlobId                                                       smithy.SchemaExtensions
+	eCommentsForPullRequest_location                                                          smithy.SchemaExtensions
+	eCommentsForPullRequest_comments                                                          smithy.SchemaExtensions
+	e_CommentsForPullRequestData                                                              smithy.SchemaExtensions
+	e_CommentsForPullRequestData_member                                                       smithy.SchemaExtensions
+	eCommit                                                                                   smithy.SchemaExtensions
+	eCommit_commitId                                                                          smithy.SchemaExtensions
+	eCommit_treeId                                                                            smithy.SchemaExtensions
+	eCommit_parents                                                                           smithy.SchemaExtensions
+	eCommit_message                                                                           smithy.SchemaExtensions
+	eCommit_author                                                                            smithy.SchemaExtensions
+	eCommit_committer                                                                         smithy.SchemaExtensions
+	eCommit_additionalData                                                                    smithy.SchemaExtensions
+	eCommitDoesNotExistException                                                              smithy.SchemaExtensions
+	eCommitDoesNotExistException_message                                                      smithy.SchemaExtensions
+	e_CommitId                                                                                smithy.SchemaExtensions
+	eCommitIdDoesNotExistException                                                            smithy.SchemaExtensions
+	eCommitIdDoesNotExistException_message                                                    smithy.SchemaExtensions
+	eCommitIdRequiredException                                                                smithy.SchemaExtensions
+	eCommitIdRequiredException_message                                                        smithy.SchemaExtensions
+	e_CommitIdsInputList                                                                      smithy.SchemaExtensions
+	e_CommitIdsInputList_member                                                               smithy.SchemaExtensions
+	eCommitIdsLimitExceededException                                                          smithy.SchemaExtensions
+	eCommitIdsLimitExceededException_message                                                  smithy.SchemaExtensions
+	eCommitIdsListRequiredException                                                           smithy.SchemaExtensions
+	eCommitIdsListRequiredException_message                                                   smithy.SchemaExtensions
+	eCommitMessageLengthExceededException                                                     smithy.SchemaExtensions
+	eCommitMessageLengthExceededException_message                                             smithy.SchemaExtensions
+	e_CommitName                                                                              smithy.SchemaExtensions
+	e_CommitObjectsList                                                                       smithy.SchemaExtensions
+	e_CommitObjectsList_member                                                                smithy.SchemaExtensions
+	eCommitRequiredException                                                                  smithy.SchemaExtensions
+	eCommitRequiredException_message                                                          smithy.SchemaExtensions
+	eConcurrentReferenceUpdateException                                                       smithy.SchemaExtensions
+	eConcurrentReferenceUpdateException_message                                               smithy.SchemaExtensions
+	eConflict                                                                                 smithy.SchemaExtensions
+	eConflict_conflictMetadata                                                                smithy.SchemaExtensions
+	eConflict_mergeHunks                                                                      smithy.SchemaExtensions
+	eConflictDetailLevelTypeEnum                                                              smithy.SchemaExtensions
+	eConflictDetailLevelTypeEnum_FILE_LEVEL                                                   smithy.SchemaExtensions
+	eConflictDetailLevelTypeEnum_LINE_LEVEL                                                   smithy.SchemaExtensions
+	eConflictMetadata                                                                         smithy.SchemaExtensions
+	eConflictMetadata_filePath                                                                smithy.SchemaExtensions
+	eConflictMetadata_fileSizes                                                               smithy.SchemaExtensions
+	eConflictMetadata_fileModes                                                               smithy.SchemaExtensions
+	eConflictMetadata_objectTypes                                                             smithy.SchemaExtensions
+	eConflictMetadata_numberOfConflicts                                                       smithy.SchemaExtensions
+	eConflictMetadata_isBinaryFile                                                            smithy.SchemaExtensions
+	eConflictMetadata_contentConflict                                                         smithy.SchemaExtensions
+	eConflictMetadata_fileModeConflict                                                        smithy.SchemaExtensions
+	eConflictMetadata_objectTypeConflict                                                      smithy.SchemaExtensions
+	eConflictMetadata_mergeOperations                                                         smithy.SchemaExtensions
+	e_ConflictMetadataList                                                                    smithy.SchemaExtensions
+	e_ConflictMetadataList_member                                                             smithy.SchemaExtensions
+	eConflictResolution                                                                       smithy.SchemaExtensions
+	eConflictResolution_replaceContents                                                       smithy.SchemaExtensions
+	eConflictResolution_deleteFiles                                                           smithy.SchemaExtensions
+	eConflictResolution_setFileModes                                                          smithy.SchemaExtensions
+	eConflictResolutionStrategyTypeEnum                                                       smithy.SchemaExtensions
+	eConflictResolutionStrategyTypeEnum_NONE                                                  smithy.SchemaExtensions
+	eConflictResolutionStrategyTypeEnum_ACCEPT_SOURCE                                         smithy.SchemaExtensions
+	eConflictResolutionStrategyTypeEnum_ACCEPT_DESTINATION                                    smithy.SchemaExtensions
+	eConflictResolutionStrategyTypeEnum_AUTOMERGE                                             smithy.SchemaExtensions
+	e_Conflicts                                                                               smithy.SchemaExtensions
+	e_Conflicts_member                                                                        smithy.SchemaExtensions
+	e_Content                                                                                 smithy.SchemaExtensions
+	e_Count                                                                                   smithy.SchemaExtensions
+	e_CreationDate                                                                            smithy.SchemaExtensions
+	e_Date                                                                                    smithy.SchemaExtensions
+	eDefaultBranchCannotBeDeletedException                                                    smithy.SchemaExtensions
+	eDefaultBranchCannotBeDeletedException_message                                            smithy.SchemaExtensions
+	e_DeleteFileEntries                                                                       smithy.SchemaExtensions
+	e_DeleteFileEntries_member                                                                smithy.SchemaExtensions
+	eDeleteFileEntry                                                                          smithy.SchemaExtensions
+	eDeleteFileEntry_filePath                                                                 smithy.SchemaExtensions
+	e_Description                                                                             smithy.SchemaExtensions
+	eDiffChange                                                                               smithy.SchemaExtensions
+	eDiffChange_type                                                                          smithy.SchemaExtensions
+	eDiffChange_beforeLineNumber                                                              smithy.SchemaExtensions
+	eDiffChange_afterLineNumber                                                               smithy.SchemaExtensions
+	eDiffChange_content                                                                       smithy.SchemaExtensions
+	e_DiffChangeList                                                                          smithy.SchemaExtensions
+	e_DiffChangeList_member                                                                   smithy.SchemaExtensions
+	eDiffChangeType                                                                           smithy.SchemaExtensions
+	eDiffChangeType_CONTEXT                                                                   smithy.SchemaExtensions
+	eDiffChangeType_ADD                                                                       smithy.SchemaExtensions
+	eDiffChangeType_DELETE                                                                    smithy.SchemaExtensions
+	e_DiffContext                                                                             smithy.SchemaExtensions
+	eDifference                                                                               smithy.SchemaExtensions
+	eDifference_beforeBlob                                                                    smithy.SchemaExtensions
+	eDifference_afterBlob                                                                     smithy.SchemaExtensions
+	eDifference_changeType                                                                    smithy.SchemaExtensions
+	e_DifferenceList                                                                          smithy.SchemaExtensions
+	e_DifferenceList_member                                                                   smithy.SchemaExtensions
+	eDiffHunk                                                                                 smithy.SchemaExtensions
+	eDiffHunk_beforeStartLine                                                                 smithy.SchemaExtensions
+	eDiffHunk_beforeLineCount                                                                 smithy.SchemaExtensions
+	eDiffHunk_afterStartLine                                                                  smithy.SchemaExtensions
+	eDiffHunk_afterLineCount                                                                  smithy.SchemaExtensions
+	eDiffHunk_changes                                                                         smithy.SchemaExtensions
+	e_DiffHunkList                                                                            smithy.SchemaExtensions
+	e_DiffHunkList_member                                                                     smithy.SchemaExtensions
+	eDirectoryNameConflictsWithFileNameException                                              smithy.SchemaExtensions
+	eDirectoryNameConflictsWithFileNameException_message                                      smithy.SchemaExtensions
+	e_Email                                                                                   smithy.SchemaExtensions
+	eEncryptionIntegrityChecksFailedException                                                 smithy.SchemaExtensions
+	eEncryptionIntegrityChecksFailedException_message                                         smithy.SchemaExtensions
+	eEncryptionKeyAccessDeniedException                                                       smithy.SchemaExtensions
+	eEncryptionKeyAccessDeniedException_message                                               smithy.SchemaExtensions
+	eEncryptionKeyDisabledException                                                           smithy.SchemaExtensions
+	eEncryptionKeyDisabledException_message                                                   smithy.SchemaExtensions
+	eEncryptionKeyInvalidIdException                                                          smithy.SchemaExtensions
+	eEncryptionKeyInvalidIdException_message                                                  smithy.SchemaExtensions
+	eEncryptionKeyInvalidUsageException                                                       smithy.SchemaExtensions
+	eEncryptionKeyInvalidUsageException_message                                               smithy.SchemaExtensions
+	eEncryptionKeyNotFoundException                                                           smithy.SchemaExtensions
+	eEncryptionKeyNotFoundException_message                                                   smithy.SchemaExtensions
+	eEncryptionKeyRequiredException                                                           smithy.SchemaExtensions
+	eEncryptionKeyRequiredException_message                                                   smithy.SchemaExtensions
+	eEncryptionKeyUnavailableException                                                        smithy.SchemaExtensions
+	eEncryptionKeyUnavailableException_message                                                smithy.SchemaExtensions
+	e_ErrorCode                                                                               smithy.SchemaExtensions
+	e_ErrorMessage                                                                            smithy.SchemaExtensions
+	eEvaluation                                                                               smithy.SchemaExtensions
+	eEvaluation_approved                                                                      smithy.SchemaExtensions
+	eEvaluation_overridden                                                                    smithy.SchemaExtensions
+	eEvaluation_approvalRulesSatisfied                                                        smithy.SchemaExtensions
+	eEvaluation_approvalRulesNotSatisfied                                                     smithy.SchemaExtensions
+	e_EventDate                                                                               smithy.SchemaExtensions
+	e_ExceptionName                                                                           smithy.SchemaExtensions
+	eFile                                                                                     smithy.SchemaExtensions
+	eFile_blobId                                                                              smithy.SchemaExtensions
+	eFile_absolutePath                                                                        smithy.SchemaExtensions
+	eFile_relativePath                                                                        smithy.SchemaExtensions
+	eFile_fileMode                                                                            smithy.SchemaExtensions
+	e_FileContent                                                                             smithy.SchemaExtensions
+	eFileContentAndSourceFileSpecifiedException                                               smithy.SchemaExtensions
+	eFileContentAndSourceFileSpecifiedException_message                                       smithy.SchemaExtensions
+	eFileContentRequiredException                                                             smithy.SchemaExtensions
+	eFileContentRequiredException_message                                                     smithy.SchemaExtensions
+	eFileContentSizeLimitExceededException                                                    smithy.SchemaExtensions
+	eFileContentSizeLimitExceededException_message                                            smithy.SchemaExtensions
+	eFileDoesNotExistException                                                                smithy.SchemaExtensions
+	eFileDoesNotExistException_message                                                        smithy.SchemaExtensions
+	eFileEntryRequiredException                                                               smithy.SchemaExtensions
+	eFileEntryRequiredException_message                                                       smithy.SchemaExtensions
+	e_FileList                                                                                smithy.SchemaExtensions
+	e_FileList_member                                                                         smithy.SchemaExtensions
+	eFileMetadata                                                                             smithy.SchemaExtensions
+	eFileMetadata_absolutePath                                                                smithy.SchemaExtensions
+	eFileMetadata_blobId                                                                      smithy.SchemaExtensions
+	eFileMetadata_fileMode                                                                    smithy.SchemaExtensions
+	eFileModeRequiredException                                                                smithy.SchemaExtensions
+	eFileModeRequiredException_message                                                        smithy.SchemaExtensions
+	eFileModes                                                                                smithy.SchemaExtensions
+	eFileModes_source                                                                         smithy.SchemaExtensions
+	eFileModes_destination                                                                    smithy.SchemaExtensions
+	eFileModes_base                                                                           smithy.SchemaExtensions
+	eFileModeTypeEnum                                                                         smithy.SchemaExtensions
+	eFileModeTypeEnum_EXECUTABLE                                                              smithy.SchemaExtensions
+	eFileModeTypeEnum_NORMAL                                                                  smithy.SchemaExtensions
+	eFileModeTypeEnum_SYMLINK                                                                 smithy.SchemaExtensions
+	eFileNameConflictsWithDirectoryNameException                                              smithy.SchemaExtensions
+	eFileNameConflictsWithDirectoryNameException_message                                      smithy.SchemaExtensions
+	eFilePathConflictsWithSubmodulePathException                                              smithy.SchemaExtensions
+	eFilePathConflictsWithSubmodulePathException_message                                      smithy.SchemaExtensions
+	e_FilePaths                                                                               smithy.SchemaExtensions
+	e_FilePaths_member                                                                        smithy.SchemaExtensions
+	e_FileSize                                                                                smithy.SchemaExtensions
+	eFileSizes                                                                                smithy.SchemaExtensions
+	eFileSizes_source                                                                         smithy.SchemaExtensions
+	eFileSizes_destination                                                                    smithy.SchemaExtensions
+	eFileSizes_base                                                                           smithy.SchemaExtensions
+	e_FilesMetadata                                                                           smithy.SchemaExtensions
+	e_FilesMetadata_member                                                                    smithy.SchemaExtensions
+	eFileTooLargeException                                                                    smithy.SchemaExtensions
+	eFileTooLargeException_message                                                            smithy.SchemaExtensions
+	eFileVersion                                                                              smithy.SchemaExtensions
+	eFileVersion_commit                                                                       smithy.SchemaExtensions
+	eFileVersion_blobId                                                                       smithy.SchemaExtensions
+	eFileVersion_path                                                                         smithy.SchemaExtensions
+	eFileVersion_revisionChildren                                                             smithy.SchemaExtensions
+	eFolder                                                                                   smithy.SchemaExtensions
+	eFolder_treeId                                                                            smithy.SchemaExtensions
+	eFolder_absolutePath                                                                      smithy.SchemaExtensions
+	eFolder_relativePath                                                                      smithy.SchemaExtensions
+	eFolderContentSizeLimitExceededException                                                  smithy.SchemaExtensions
+	eFolderContentSizeLimitExceededException_message                                          smithy.SchemaExtensions
+	eFolderDoesNotExistException                                                              smithy.SchemaExtensions
+	eFolderDoesNotExistException_message                                                      smithy.SchemaExtensions
+	e_FolderList                                                                              smithy.SchemaExtensions
+	e_FolderList_member                                                                       smithy.SchemaExtensions
+	e_HunkContent                                                                             smithy.SchemaExtensions
+	eIdempotencyParameterMismatchException                                                    smithy.SchemaExtensions
+	eIdempotencyParameterMismatchException_message                                            smithy.SchemaExtensions
+	e_IgnoreWhiteSpaces                                                                       smithy.SchemaExtensions
+	eInvalidActorArnException                                                                 smithy.SchemaExtensions
+	eInvalidActorArnException_message                                                         smithy.SchemaExtensions
+	eInvalidApprovalRuleContentException                                                      smithy.SchemaExtensions
+	eInvalidApprovalRuleContentException_message                                              smithy.SchemaExtensions
+	eInvalidApprovalRuleNameException                                                         smithy.SchemaExtensions
+	eInvalidApprovalRuleNameException_message                                                 smithy.SchemaExtensions
+	eInvalidApprovalRuleTemplateContentException                                              smithy.SchemaExtensions
+	eInvalidApprovalRuleTemplateContentException_message                                      smithy.SchemaExtensions
+	eInvalidApprovalRuleTemplateDescriptionException                                          smithy.SchemaExtensions
+	eInvalidApprovalRuleTemplateDescriptionException_message                                  smithy.SchemaExtensions
+	eInvalidApprovalRuleTemplateNameException                                                 smithy.SchemaExtensions
+	eInvalidApprovalRuleTemplateNameException_message                                         smithy.SchemaExtensions
+	eInvalidApprovalStateException                                                            smithy.SchemaExtensions
+	eInvalidApprovalStateException_message                                                    smithy.SchemaExtensions
+	eInvalidAuthorArnException                                                                smithy.SchemaExtensions
+	eInvalidAuthorArnException_message                                                        smithy.SchemaExtensions
+	eInvalidBlobIdException                                                                   smithy.SchemaExtensions
+	eInvalidBlobIdException_message                                                           smithy.SchemaExtensions
+	eInvalidBranchNameException                                                               smithy.SchemaExtensions
+	eInvalidBranchNameException_message                                                       smithy.SchemaExtensions
+	eInvalidClientRequestTokenException                                                       smithy.SchemaExtensions
+	eInvalidClientRequestTokenException_message                                               smithy.SchemaExtensions
+	eInvalidCommentIdException                                                                smithy.SchemaExtensions
+	eInvalidCommentIdException_message                                                        smithy.SchemaExtensions
+	eInvalidCommitException                                                                   smithy.SchemaExtensions
+	eInvalidCommitException_message                                                           smithy.SchemaExtensions
+	eInvalidCommitIdException                                                                 smithy.SchemaExtensions
+	eInvalidCommitIdException_message                                                         smithy.SchemaExtensions
+	eInvalidConflictDetailLevelException                                                      smithy.SchemaExtensions
+	eInvalidConflictDetailLevelException_message                                              smithy.SchemaExtensions
+	eInvalidConflictResolutionException                                                       smithy.SchemaExtensions
+	eInvalidConflictResolutionException_message                                               smithy.SchemaExtensions
+	eInvalidConflictResolutionStrategyException                                               smithy.SchemaExtensions
+	eInvalidConflictResolutionStrategyException_message                                       smithy.SchemaExtensions
+	eInvalidContinuationTokenException                                                        smithy.SchemaExtensions
+	eInvalidContinuationTokenException_message                                                smithy.SchemaExtensions
+	eInvalidDeletionParameterException                                                        smithy.SchemaExtensions
+	eInvalidDeletionParameterException_message                                                smithy.SchemaExtensions
+	eInvalidDescriptionException                                                              smithy.SchemaExtensions
+	eInvalidDescriptionException_message                                                      smithy.SchemaExtensions
+	eInvalidDestinationCommitSpecifierException                                               smithy.SchemaExtensions
+	eInvalidDestinationCommitSpecifierException_message                                       smithy.SchemaExtensions
+	eInvalidEmailException                                                                    smithy.SchemaExtensions
+	eInvalidEmailException_message                                                            smithy.SchemaExtensions
+	eInvalidFileLocationException                                                             smithy.SchemaExtensions
+	eInvalidFileLocationException_message                                                     smithy.SchemaExtensions
+	eInvalidFileModeException                                                                 smithy.SchemaExtensions
+	eInvalidFileModeException_message                                                         smithy.SchemaExtensions
+	eInvalidFilePositionException                                                             smithy.SchemaExtensions
+	eInvalidFilePositionException_message                                                     smithy.SchemaExtensions
+	eInvalidMaxConflictFilesException                                                         smithy.SchemaExtensions
+	eInvalidMaxConflictFilesException_message                                                 smithy.SchemaExtensions
+	eInvalidMaxMergeHunksException                                                            smithy.SchemaExtensions
+	eInvalidMaxMergeHunksException_message                                                    smithy.SchemaExtensions
+	eInvalidMaxResultsException                                                               smithy.SchemaExtensions
+	eInvalidMaxResultsException_message                                                       smithy.SchemaExtensions
+	eInvalidMergeOptionException                                                              smithy.SchemaExtensions
+	eInvalidMergeOptionException_message                                                      smithy.SchemaExtensions
+	eInvalidOrderException                                                                    smithy.SchemaExtensions
+	eInvalidOrderException_message                                                            smithy.SchemaExtensions
+	eInvalidOverrideStatusException                                                           smithy.SchemaExtensions
+	eInvalidOverrideStatusException_message                                                   smithy.SchemaExtensions
+	eInvalidParentCommitIdException                                                           smithy.SchemaExtensions
+	eInvalidParentCommitIdException_message                                                   smithy.SchemaExtensions
+	eInvalidPathException                                                                     smithy.SchemaExtensions
+	eInvalidPathException_message                                                             smithy.SchemaExtensions
+	eInvalidPullRequestEventTypeException                                                     smithy.SchemaExtensions
+	eInvalidPullRequestEventTypeException_message                                             smithy.SchemaExtensions
+	eInvalidPullRequestIdException                                                            smithy.SchemaExtensions
+	eInvalidPullRequestIdException_message                                                    smithy.SchemaExtensions
+	eInvalidPullRequestStatusException                                                        smithy.SchemaExtensions
+	eInvalidPullRequestStatusException_message                                                smithy.SchemaExtensions
+	eInvalidPullRequestStatusUpdateException                                                  smithy.SchemaExtensions
+	eInvalidPullRequestStatusUpdateException_message                                          smithy.SchemaExtensions
+	eInvalidReactionUserArnException                                                          smithy.SchemaExtensions
+	eInvalidReactionUserArnException_message                                                  smithy.SchemaExtensions
+	eInvalidReactionValueException                                                            smithy.SchemaExtensions
+	eInvalidReactionValueException_message                                                    smithy.SchemaExtensions
+	eInvalidReferenceNameException                                                            smithy.SchemaExtensions
+	eInvalidReferenceNameException_message                                                    smithy.SchemaExtensions
+	eInvalidRelativeFileVersionEnumException                                                  smithy.SchemaExtensions
+	eInvalidRelativeFileVersionEnumException_message                                          smithy.SchemaExtensions
+	eInvalidReplacementContentException                                                       smithy.SchemaExtensions
+	eInvalidReplacementContentException_message                                               smithy.SchemaExtensions
+	eInvalidReplacementTypeException                                                          smithy.SchemaExtensions
+	eInvalidReplacementTypeException_message                                                  smithy.SchemaExtensions
+	eInvalidRepositoryDescriptionException                                                    smithy.SchemaExtensions
+	eInvalidRepositoryDescriptionException_message                                            smithy.SchemaExtensions
+	eInvalidRepositoryNameException                                                           smithy.SchemaExtensions
+	eInvalidRepositoryNameException_message                                                   smithy.SchemaExtensions
+	eInvalidRepositoryTriggerBranchNameException                                              smithy.SchemaExtensions
+	eInvalidRepositoryTriggerBranchNameException_message                                      smithy.SchemaExtensions
+	eInvalidRepositoryTriggerCustomDataException                                              smithy.SchemaExtensions
+	eInvalidRepositoryTriggerCustomDataException_message                                      smithy.SchemaExtensions
+	eInvalidRepositoryTriggerDestinationArnException                                          smithy.SchemaExtensions
+	eInvalidRepositoryTriggerDestinationArnException_message                                  smithy.SchemaExtensions
+	eInvalidRepositoryTriggerEventsException                                                  smithy.SchemaExtensions
+	eInvalidRepositoryTriggerEventsException_message                                          smithy.SchemaExtensions
+	eInvalidRepositoryTriggerNameException                                                    smithy.SchemaExtensions
+	eInvalidRepositoryTriggerNameException_message                                            smithy.SchemaExtensions
+	eInvalidRepositoryTriggerRegionException                                                  smithy.SchemaExtensions
+	eInvalidRepositoryTriggerRegionException_message                                          smithy.SchemaExtensions
+	eInvalidResourceArnException                                                              smithy.SchemaExtensions
+	eInvalidResourceArnException_message                                                      smithy.SchemaExtensions
+	eInvalidRevisionIdException                                                               smithy.SchemaExtensions
+	eInvalidRevisionIdException_message                                                       smithy.SchemaExtensions
+	eInvalidRuleContentSha256Exception                                                        smithy.SchemaExtensions
+	eInvalidRuleContentSha256Exception_message                                                smithy.SchemaExtensions
+	eInvalidSortByException                                                                   smithy.SchemaExtensions
+	eInvalidSortByException_message                                                           smithy.SchemaExtensions
+	eInvalidSourceCommitSpecifierException                                                    smithy.SchemaExtensions
+	eInvalidSourceCommitSpecifierException_message                                            smithy.SchemaExtensions
+	eInvalidSystemTagUsageException                                                           smithy.SchemaExtensions
+	eInvalidSystemTagUsageException_message                                                   smithy.SchemaExtensions
+	eInvalidTagKeysListException                                                              smithy.SchemaExtensions
+	eInvalidTagKeysListException_message                                                      smithy.SchemaExtensions
+	eInvalidTagsMapException                                                                  smithy.SchemaExtensions
+	eInvalidTagsMapException_message                                                          smithy.SchemaExtensions
+	eInvalidTargetBranchException                                                             smithy.SchemaExtensions
+	eInvalidTargetBranchException_message                                                     smithy.SchemaExtensions
+	eInvalidTargetException                                                                   smithy.SchemaExtensions
+	eInvalidTargetException_message                                                           smithy.SchemaExtensions
+	eInvalidTargetsException                                                                  smithy.SchemaExtensions
+	eInvalidTargetsException_message                                                          smithy.SchemaExtensions
+	eInvalidTitleException                                                                    smithy.SchemaExtensions
+	eInvalidTitleException_message                                                            smithy.SchemaExtensions
+	eIsBinaryFile                                                                             smithy.SchemaExtensions
+	eIsBinaryFile_source                                                                      smithy.SchemaExtensions
+	eIsBinaryFile_destination                                                                 smithy.SchemaExtensions
+	eIsBinaryFile_base                                                                        smithy.SchemaExtensions
+	e_IsCommentDeleted                                                                        smithy.SchemaExtensions
+	e_IsContentConflict                                                                       smithy.SchemaExtensions
+	e_IsFileModeConflict                                                                      smithy.SchemaExtensions
+	e_IsHunkConflict                                                                          smithy.SchemaExtensions
+	e_IsMergeable                                                                             smithy.SchemaExtensions
+	e_IsMerged                                                                                smithy.SchemaExtensions
+	e_IsMove                                                                                  smithy.SchemaExtensions
+	e_IsObjectTypeConflict                                                                    smithy.SchemaExtensions
+	e_KeepEmptyFolders                                                                        smithy.SchemaExtensions
+	e_KmsKeyId                                                                                smithy.SchemaExtensions
+	e_LastModifiedDate                                                                        smithy.SchemaExtensions
+	e_Limit                                                                                   smithy.SchemaExtensions
+	e_LineContent                                                                             smithy.SchemaExtensions
+	e_LineNumber                                                                              smithy.SchemaExtensions
+	eLocation                                                                                 smithy.SchemaExtensions
+	eLocation_filePath                                                                        smithy.SchemaExtensions
+	eLocation_filePosition                                                                    smithy.SchemaExtensions
+	eLocation_relativeFileVersion                                                             smithy.SchemaExtensions
+	eManualMergeRequiredException                                                             smithy.SchemaExtensions
+	eManualMergeRequiredException_message                                                     smithy.SchemaExtensions
+	eMaximumBranchesExceededException                                                         smithy.SchemaExtensions
+	eMaximumBranchesExceededException_message                                                 smithy.SchemaExtensions
+	eMaximumConflictResolutionEntriesExceededException                                        smithy.SchemaExtensions
+	eMaximumConflictResolutionEntriesExceededException_message                                smithy.SchemaExtensions
+	eMaximumFileContentToLoadExceededException                                                smithy.SchemaExtensions
+	eMaximumFileContentToLoadExceededException_message                                        smithy.SchemaExtensions
+	eMaximumFileEntriesExceededException                                                      smithy.SchemaExtensions
+	eMaximumFileEntriesExceededException_message                                              smithy.SchemaExtensions
+	eMaximumItemsToCompareExceededException                                                   smithy.SchemaExtensions
+	eMaximumItemsToCompareExceededException_message                                           smithy.SchemaExtensions
+	eMaximumNumberOfApprovalsExceededException                                                smithy.SchemaExtensions
+	eMaximumNumberOfApprovalsExceededException_message                                        smithy.SchemaExtensions
+	eMaximumOpenPullRequestsExceededException                                                 smithy.SchemaExtensions
+	eMaximumOpenPullRequestsExceededException_message                                         smithy.SchemaExtensions
+	eMaximumRepositoryNamesExceededException                                                  smithy.SchemaExtensions
+	eMaximumRepositoryNamesExceededException_message                                          smithy.SchemaExtensions
+	eMaximumRepositoryTriggersExceededException                                               smithy.SchemaExtensions
+	eMaximumRepositoryTriggersExceededException_message                                       smithy.SchemaExtensions
+	eMaximumRuleTemplatesAssociatedWithRepositoryException                                    smithy.SchemaExtensions
+	eMaximumRuleTemplatesAssociatedWithRepositoryException_message                            smithy.SchemaExtensions
+	e_MaxResults                                                                              smithy.SchemaExtensions
+	eMergeHunk                                                                                smithy.SchemaExtensions
+	eMergeHunk_isConflict                                                                     smithy.SchemaExtensions
+	eMergeHunk_source                                                                         smithy.SchemaExtensions
+	eMergeHunk_destination                                                                    smithy.SchemaExtensions
+	eMergeHunk_base                                                                           smithy.SchemaExtensions
+	eMergeHunkDetail                                                                          smithy.SchemaExtensions
+	eMergeHunkDetail_startLine                                                                smithy.SchemaExtensions
+	eMergeHunkDetail_endLine                                                                  smithy.SchemaExtensions
+	eMergeHunkDetail_hunkContent                                                              smithy.SchemaExtensions
+	e_MergeHunks                                                                              smithy.SchemaExtensions
+	e_MergeHunks_member                                                                       smithy.SchemaExtensions
+	eMergeMetadata                                                                            smithy.SchemaExtensions
+	eMergeMetadata_isMerged                                                                   smithy.SchemaExtensions
+	eMergeMetadata_mergedBy                                                                   smithy.SchemaExtensions
+	eMergeMetadata_mergeCommitId                                                              smithy.SchemaExtensions
+	eMergeMetadata_mergeOption                                                                smithy.SchemaExtensions
+	eMergeOperations                                                                          smithy.SchemaExtensions
+	eMergeOperations_source                                                                   smithy.SchemaExtensions
+	eMergeOperations_destination                                                              smithy.SchemaExtensions
+	eMergeOptionRequiredException                                                             smithy.SchemaExtensions
+	eMergeOptionRequiredException_message                                                     smithy.SchemaExtensions
+	e_MergeOptions                                                                            smithy.SchemaExtensions
+	e_MergeOptions_member                                                                     smithy.SchemaExtensions
+	eMergeOptionTypeEnum                                                                      smithy.SchemaExtensions
+	eMergeOptionTypeEnum_FAST_FORWARD_MERGE                                                   smithy.SchemaExtensions
+	eMergeOptionTypeEnum_SQUASH_MERGE                                                         smithy.SchemaExtensions
+	eMergeOptionTypeEnum_THREE_WAY_MERGE                                                      smithy.SchemaExtensions
+	e_Message                                                                                 smithy.SchemaExtensions
+	e_Mode                                                                                    smithy.SchemaExtensions
+	eMultipleConflictResolutionEntriesException                                               smithy.SchemaExtensions
+	eMultipleConflictResolutionEntriesException_message                                       smithy.SchemaExtensions
+	eMultipleRepositoriesInPullRequestException                                               smithy.SchemaExtensions
+	eMultipleRepositoriesInPullRequestException_message                                       smithy.SchemaExtensions
+	e_Name                                                                                    smithy.SchemaExtensions
+	eNameLengthExceededException                                                              smithy.SchemaExtensions
+	eNameLengthExceededException_message                                                      smithy.SchemaExtensions
+	e_NextToken                                                                               smithy.SchemaExtensions
+	eNoChangeException                                                                        smithy.SchemaExtensions
+	eNoChangeException_message                                                                smithy.SchemaExtensions
+	e_NumberOfConflicts                                                                       smithy.SchemaExtensions
+	eNumberOfRulesExceededException                                                           smithy.SchemaExtensions
+	eNumberOfRulesExceededException_message                                                   smithy.SchemaExtensions
+	eNumberOfRuleTemplatesExceededException                                                   smithy.SchemaExtensions
+	eNumberOfRuleTemplatesExceededException_message                                           smithy.SchemaExtensions
+	e_ObjectId                                                                                smithy.SchemaExtensions
+	e_ObjectSize                                                                              smithy.SchemaExtensions
+	eObjectTypeEnum                                                                           smithy.SchemaExtensions
+	eObjectTypeEnum_FILE                                                                      smithy.SchemaExtensions
+	eObjectTypeEnum_DIRECTORY                                                                 smithy.SchemaExtensions
+	eObjectTypeEnum_GIT_LINK                                                                  smithy.SchemaExtensions
+	eObjectTypeEnum_SYMBOLIC_LINK                                                             smithy.SchemaExtensions
+	eObjectTypes                                                                              smithy.SchemaExtensions
+	eObjectTypes_source                                                                       smithy.SchemaExtensions
+	eObjectTypes_destination                                                                  smithy.SchemaExtensions
+	eObjectTypes_base                                                                         smithy.SchemaExtensions
+	eOperationNotAllowedException                                                             smithy.SchemaExtensions
+	eOperationNotAllowedException_message                                                     smithy.SchemaExtensions
+	eOrderEnum                                                                                smithy.SchemaExtensions
+	eOrderEnum_ASCENDING                                                                      smithy.SchemaExtensions
+	eOrderEnum_DESCENDING                                                                     smithy.SchemaExtensions
+	eOriginApprovalRuleTemplate                                                               smithy.SchemaExtensions
+	eOriginApprovalRuleTemplate_approvalRuleTemplateId                                        smithy.SchemaExtensions
+	eOriginApprovalRuleTemplate_approvalRuleTemplateName                                      smithy.SchemaExtensions
+	e_Overridden                                                                              smithy.SchemaExtensions
+	eOverrideAlreadySetException                                                              smithy.SchemaExtensions
+	eOverrideAlreadySetException_message                                                      smithy.SchemaExtensions
+	eOverrideStatus                                                                           smithy.SchemaExtensions
+	eOverrideStatus_OVERRIDE                                                                  smithy.SchemaExtensions
+	eOverrideStatus_REVOKE                                                                    smithy.SchemaExtensions
+	eOverrideStatusRequiredException                                                          smithy.SchemaExtensions
+	eOverrideStatusRequiredException_message                                                  smithy.SchemaExtensions
+	eParentCommitDoesNotExistException                                                        smithy.SchemaExtensions
+	eParentCommitDoesNotExistException_message                                                smithy.SchemaExtensions
+	eParentCommitIdOutdatedException                                                          smithy.SchemaExtensions
+	eParentCommitIdOutdatedException_message                                                  smithy.SchemaExtensions
+	eParentCommitIdRequiredException                                                          smithy.SchemaExtensions
+	eParentCommitIdRequiredException_message                                                  smithy.SchemaExtensions
+	e_ParentList                                                                              smithy.SchemaExtensions
+	e_ParentList_member                                                                       smithy.SchemaExtensions
+	e_Path                                                                                    smithy.SchemaExtensions
+	ePathDoesNotExistException                                                                smithy.SchemaExtensions
+	ePathDoesNotExistException_message                                                        smithy.SchemaExtensions
+	ePathRequiredException                                                                    smithy.SchemaExtensions
+	ePathRequiredException_message                                                            smithy.SchemaExtensions
+	e_Position                                                                                smithy.SchemaExtensions
+	ePullRequest                                                                              smithy.SchemaExtensions
+	ePullRequest_pullRequestId                                                                smithy.SchemaExtensions
+	ePullRequest_title                                                                        smithy.SchemaExtensions
+	ePullRequest_description                                                                  smithy.SchemaExtensions
+	ePullRequest_lastActivityDate                                                             smithy.SchemaExtensions
+	ePullRequest_creationDate                                                                 smithy.SchemaExtensions
+	ePullRequest_pullRequestStatus                                                            smithy.SchemaExtensions
+	ePullRequest_authorArn                                                                    smithy.SchemaExtensions
+	ePullRequest_pullRequestTargets                                                           smithy.SchemaExtensions
+	ePullRequest_clientRequestToken                                                           smithy.SchemaExtensions
+	ePullRequest_revisionId                                                                   smithy.SchemaExtensions
+	ePullRequest_approvalRules                                                                smithy.SchemaExtensions
+	ePullRequestAlreadyClosedException                                                        smithy.SchemaExtensions
+	ePullRequestAlreadyClosedException_message                                                smithy.SchemaExtensions
+	ePullRequestApprovalRulesNotSatisfiedException                                            smithy.SchemaExtensions
+	ePullRequestApprovalRulesNotSatisfiedException_message                                    smithy.SchemaExtensions
+	ePullRequestCannotBeApprovedByAuthorException                                             smithy.SchemaExtensions
+	ePullRequestCannotBeApprovedByAuthorException_message                                     smithy.SchemaExtensions
+	ePullRequestCreatedEventMetadata                                                          smithy.SchemaExtensions
+	ePullRequestCreatedEventMetadata_repositoryName                                           smithy.SchemaExtensions
+	ePullRequestCreatedEventMetadata_sourceCommitId                                           smithy.SchemaExtensions
+	ePullRequestCreatedEventMetadata_destinationCommitId                                      smithy.SchemaExtensions
+	ePullRequestCreatedEventMetadata_mergeBase                                                smithy.SchemaExtensions
+	ePullRequestDoesNotExistException                                                         smithy.SchemaExtensions
+	ePullRequestDoesNotExistException_message                                                 smithy.SchemaExtensions
+	ePullRequestEvent                                                                         smithy.SchemaExtensions
+	ePullRequestEvent_pullRequestId                                                           smithy.SchemaExtensions
+	ePullRequestEvent_eventDate                                                               smithy.SchemaExtensions
+	ePullRequestEvent_pullRequestEventType                                                    smithy.SchemaExtensions
+	ePullRequestEvent_actorArn                                                                smithy.SchemaExtensions
+	ePullRequestEvent_pullRequestCreatedEventMetadata                                         smithy.SchemaExtensions
+	ePullRequestEvent_pullRequestStatusChangedEventMetadata                                   smithy.SchemaExtensions
+	ePullRequestEvent_pullRequestSourceReferenceUpdatedEventMetadata                          smithy.SchemaExtensions
+	ePullRequestEvent_pullRequestMergedStateChangedEventMetadata                              smithy.SchemaExtensions
+	ePullRequestEvent_approvalRuleEventMetadata                                               smithy.SchemaExtensions
+	ePullRequestEvent_approvalStateChangedEventMetadata                                       smithy.SchemaExtensions
+	ePullRequestEvent_approvalRuleOverriddenEventMetadata                                     smithy.SchemaExtensions
+	e_PullRequestEventList                                                                    smithy.SchemaExtensions
+	e_PullRequestEventList_member                                                             smithy.SchemaExtensions
+	ePullRequestEventType                                                                     smithy.SchemaExtensions
+	ePullRequestEventType_PULL_REQUEST_CREATED                                                smithy.SchemaExtensions
+	ePullRequestEventType_PULL_REQUEST_STATUS_CHANGED                                         smithy.SchemaExtensions
+	ePullRequestEventType_PULL_REQUEST_SOURCE_REFERENCE_UPDATED                               smithy.SchemaExtensions
+	ePullRequestEventType_PULL_REQUEST_MERGE_STATE_CHANGED                                    smithy.SchemaExtensions
+	ePullRequestEventType_PULL_REQUEST_APPROVAL_RULE_CREATED                                  smithy.SchemaExtensions
+	ePullRequestEventType_PULL_REQUEST_APPROVAL_RULE_UPDATED                                  smithy.SchemaExtensions
+	ePullRequestEventType_PULL_REQUEST_APPROVAL_RULE_DELETED                                  smithy.SchemaExtensions
+	ePullRequestEventType_PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN                               smithy.SchemaExtensions
+	ePullRequestEventType_PULL_REQUEST_APPROVAL_STATE_CHANGED                                 smithy.SchemaExtensions
+	e_PullRequestId                                                                           smithy.SchemaExtensions
+	e_PullRequestIdList                                                                       smithy.SchemaExtensions
+	e_PullRequestIdList_member                                                                smithy.SchemaExtensions
+	ePullRequestIdRequiredException                                                           smithy.SchemaExtensions
+	ePullRequestIdRequiredException_message                                                   smithy.SchemaExtensions
+	ePullRequestMergedStateChangedEventMetadata                                               smithy.SchemaExtensions
+	ePullRequestMergedStateChangedEventMetadata_repositoryName                                smithy.SchemaExtensions
+	ePullRequestMergedStateChangedEventMetadata_destinationReference                          smithy.SchemaExtensions
+	ePullRequestMergedStateChangedEventMetadata_mergeMetadata                                 smithy.SchemaExtensions
+	ePullRequestSourceReferenceUpdatedEventMetadata                                           smithy.SchemaExtensions
+	ePullRequestSourceReferenceUpdatedEventMetadata_repositoryName                            smithy.SchemaExtensions
+	ePullRequestSourceReferenceUpdatedEventMetadata_beforeCommitId                            smithy.SchemaExtensions
+	ePullRequestSourceReferenceUpdatedEventMetadata_afterCommitId                             smithy.SchemaExtensions
+	ePullRequestSourceReferenceUpdatedEventMetadata_mergeBase                                 smithy.SchemaExtensions
+	ePullRequestStatusChangedEventMetadata                                                    smithy.SchemaExtensions
+	ePullRequestStatusChangedEventMetadata_pullRequestStatus                                  smithy.SchemaExtensions
+	ePullRequestStatusEnum                                                                    smithy.SchemaExtensions
+	ePullRequestStatusEnum_OPEN                                                               smithy.SchemaExtensions
+	ePullRequestStatusEnum_CLOSED                                                             smithy.SchemaExtensions
+	ePullRequestStatusRequiredException                                                       smithy.SchemaExtensions
+	ePullRequestStatusRequiredException_message                                               smithy.SchemaExtensions
+	ePullRequestTarget                                                                        smithy.SchemaExtensions
+	ePullRequestTarget_repositoryName                                                         smithy.SchemaExtensions
+	ePullRequestTarget_sourceReference                                                        smithy.SchemaExtensions
+	ePullRequestTarget_destinationReference                                                   smithy.SchemaExtensions
+	ePullRequestTarget_destinationCommit                                                      smithy.SchemaExtensions
+	ePullRequestTarget_sourceCommit                                                           smithy.SchemaExtensions
+	ePullRequestTarget_mergeBase                                                              smithy.SchemaExtensions
+	ePullRequestTarget_mergeMetadata                                                          smithy.SchemaExtensions
+	e_PullRequestTargetList                                                                   smithy.SchemaExtensions
+	e_PullRequestTargetList_member                                                            smithy.SchemaExtensions
+	e_PutFileEntries                                                                          smithy.SchemaExtensions
+	e_PutFileEntries_member                                                                   smithy.SchemaExtensions
+	ePutFileEntry                                                                             smithy.SchemaExtensions
+	ePutFileEntry_filePath                                                                    smithy.SchemaExtensions
+	ePutFileEntry_fileMode                                                                    smithy.SchemaExtensions
+	ePutFileEntry_fileContent                                                                 smithy.SchemaExtensions
+	ePutFileEntry_sourceFile                                                                  smithy.SchemaExtensions
+	ePutFileEntryConflictException                                                            smithy.SchemaExtensions
+	ePutFileEntryConflictException_message                                                    smithy.SchemaExtensions
+	e_ReactionCountsMap                                                                       smithy.SchemaExtensions
+	e_ReactionCountsMap_key                                                                   smithy.SchemaExtensions
+	e_ReactionCountsMap_value                                                                 smithy.SchemaExtensions
+	e_ReactionEmoji                                                                           smithy.SchemaExtensions
+	eReactionForComment                                                                       smithy.SchemaExtensions
+	eReactionForComment_reaction                                                              smithy.SchemaExtensions
+	eReactionForComment_reactionUsers                                                         smithy.SchemaExtensions
+	eReactionForComment_reactionsFromDeletedUsersCount                                        smithy.SchemaExtensions
+	eReactionLimitExceededException                                                           smithy.SchemaExtensions
+	eReactionLimitExceededException_message                                                   smithy.SchemaExtensions
+	e_ReactionsForCommentList                                                                 smithy.SchemaExtensions
+	e_ReactionsForCommentList_member                                                          smithy.SchemaExtensions
+	e_ReactionShortCode                                                                       smithy.SchemaExtensions
+	e_ReactionUnicode                                                                         smithy.SchemaExtensions
+	e_ReactionUsersList                                                                       smithy.SchemaExtensions
+	e_ReactionUsersList_member                                                                smithy.SchemaExtensions
+	e_ReactionValue                                                                           smithy.SchemaExtensions
+	eReactionValueFormats                                                                     smithy.SchemaExtensions
+	eReactionValueFormats_emoji                                                               smithy.SchemaExtensions
+	eReactionValueFormats_shortCode                                                           smithy.SchemaExtensions
+	eReactionValueFormats_unicode                                                             smithy.SchemaExtensions
+	eReactionValueRequiredException                                                           smithy.SchemaExtensions
+	eReactionValueRequiredException_message                                                   smithy.SchemaExtensions
+	eReferenceDoesNotExistException                                                           smithy.SchemaExtensions
+	eReferenceDoesNotExistException_message                                                   smithy.SchemaExtensions
+	e_ReferenceName                                                                           smithy.SchemaExtensions
+	eReferenceNameRequiredException                                                           smithy.SchemaExtensions
+	eReferenceNameRequiredException_message                                                   smithy.SchemaExtensions
+	eReferenceTypeNotSupportedException                                                       smithy.SchemaExtensions
+	eReferenceTypeNotSupportedException_message                                               smithy.SchemaExtensions
+	eRelativeFileVersionEnum                                                                  smithy.SchemaExtensions
+	eRelativeFileVersionEnum_BEFORE                                                           smithy.SchemaExtensions
+	eRelativeFileVersionEnum_AFTER                                                            smithy.SchemaExtensions
+	e_ReplaceContentEntries                                                                   smithy.SchemaExtensions
+	e_ReplaceContentEntries_member                                                            smithy.SchemaExtensions
+	eReplaceContentEntry                                                                      smithy.SchemaExtensions
+	eReplaceContentEntry_filePath                                                             smithy.SchemaExtensions
+	eReplaceContentEntry_replacementType                                                      smithy.SchemaExtensions
+	eReplaceContentEntry_content                                                              smithy.SchemaExtensions
+	eReplaceContentEntry_fileMode                                                             smithy.SchemaExtensions
+	eReplacementContentRequiredException                                                      smithy.SchemaExtensions
+	eReplacementContentRequiredException_message                                              smithy.SchemaExtensions
+	eReplacementTypeEnum                                                                      smithy.SchemaExtensions
+	eReplacementTypeEnum_KEEP_BASE                                                            smithy.SchemaExtensions
+	eReplacementTypeEnum_KEEP_SOURCE                                                          smithy.SchemaExtensions
+	eReplacementTypeEnum_KEEP_DESTINATION                                                     smithy.SchemaExtensions
+	eReplacementTypeEnum_USE_NEW_CONTENT                                                      smithy.SchemaExtensions
+	eReplacementTypeRequiredException                                                         smithy.SchemaExtensions
+	eReplacementTypeRequiredException_message                                                 smithy.SchemaExtensions
+	e_RepositoryDescription                                                                   smithy.SchemaExtensions
+	eRepositoryDoesNotExistException                                                          smithy.SchemaExtensions
+	eRepositoryDoesNotExistException_message                                                  smithy.SchemaExtensions
+	e_RepositoryId                                                                            smithy.SchemaExtensions
+	eRepositoryLimitExceededException                                                         smithy.SchemaExtensions
+	eRepositoryLimitExceededException_message                                                 smithy.SchemaExtensions
+	eRepositoryMetadata                                                                       smithy.SchemaExtensions
+	eRepositoryMetadata_accountId                                                             smithy.SchemaExtensions
+	eRepositoryMetadata_repositoryId                                                          smithy.SchemaExtensions
+	eRepositoryMetadata_repositoryName                                                        smithy.SchemaExtensions
+	eRepositoryMetadata_repositoryDescription                                                 smithy.SchemaExtensions
+	eRepositoryMetadata_defaultBranch                                                         smithy.SchemaExtensions
+	eRepositoryMetadata_lastModifiedDate                                                      smithy.SchemaExtensions
+	eRepositoryMetadata_creationDate                                                          smithy.SchemaExtensions
+	eRepositoryMetadata_cloneUrlHttp                                                          smithy.SchemaExtensions
+	eRepositoryMetadata_cloneUrlSsh                                                           smithy.SchemaExtensions
+	eRepositoryMetadata_Arn                                                                   smithy.SchemaExtensions
+	eRepositoryMetadata_kmsKeyId                                                              smithy.SchemaExtensions
+	e_RepositoryMetadataList                                                                  smithy.SchemaExtensions
+	e_RepositoryMetadataList_member                                                           smithy.SchemaExtensions
+	e_RepositoryName                                                                          smithy.SchemaExtensions
+	eRepositoryNameExistsException                                                            smithy.SchemaExtensions
+	eRepositoryNameExistsException_message                                                    smithy.SchemaExtensions
+	eRepositoryNameIdPair                                                                     smithy.SchemaExtensions
+	eRepositoryNameIdPair_repositoryName                                                      smithy.SchemaExtensions
+	eRepositoryNameIdPair_repositoryId                                                        smithy.SchemaExtensions
+	e_RepositoryNameIdPairList                                                                smithy.SchemaExtensions
+	e_RepositoryNameIdPairList_member                                                         smithy.SchemaExtensions
+	e_RepositoryNameList                                                                      smithy.SchemaExtensions
+	e_RepositoryNameList_member                                                               smithy.SchemaExtensions
+	eRepositoryNameRequiredException                                                          smithy.SchemaExtensions
+	eRepositoryNameRequiredException_message                                                  smithy.SchemaExtensions
+	eRepositoryNamesRequiredException                                                         smithy.SchemaExtensions
+	eRepositoryNamesRequiredException_message                                                 smithy.SchemaExtensions
+	eRepositoryNotAssociatedWithPullRequestException                                          smithy.SchemaExtensions
+	eRepositoryNotAssociatedWithPullRequestException_message                                  smithy.SchemaExtensions
+	e_RepositoryNotFoundList                                                                  smithy.SchemaExtensions
+	e_RepositoryNotFoundList_member                                                           smithy.SchemaExtensions
+	eRepositoryTrigger                                                                        smithy.SchemaExtensions
+	eRepositoryTrigger_name                                                                   smithy.SchemaExtensions
+	eRepositoryTrigger_destinationArn                                                         smithy.SchemaExtensions
+	eRepositoryTrigger_customData                                                             smithy.SchemaExtensions
+	eRepositoryTrigger_branches                                                               smithy.SchemaExtensions
+	eRepositoryTrigger_events                                                                 smithy.SchemaExtensions
+	eRepositoryTriggerBranchNameListRequiredException                                         smithy.SchemaExtensions
+	eRepositoryTriggerBranchNameListRequiredException_message                                 smithy.SchemaExtensions
+	e_RepositoryTriggerCustomData                                                             smithy.SchemaExtensions
+	eRepositoryTriggerDestinationArnRequiredException                                         smithy.SchemaExtensions
+	eRepositoryTriggerDestinationArnRequiredException_message                                 smithy.SchemaExtensions
+	eRepositoryTriggerEventEnum                                                               smithy.SchemaExtensions
+	eRepositoryTriggerEventEnum_ALL                                                           smithy.SchemaExtensions
+	eRepositoryTriggerEventEnum_UPDATE_REFERENCE                                              smithy.SchemaExtensions
+	eRepositoryTriggerEventEnum_CREATE_REFERENCE                                              smithy.SchemaExtensions
+	eRepositoryTriggerEventEnum_DELETE_REFERENCE                                              smithy.SchemaExtensions
+	e_RepositoryTriggerEventList                                                              smithy.SchemaExtensions
+	e_RepositoryTriggerEventList_member                                                       smithy.SchemaExtensions
+	eRepositoryTriggerEventsListRequiredException                                             smithy.SchemaExtensions
+	eRepositoryTriggerEventsListRequiredException_message                                     smithy.SchemaExtensions
+	eRepositoryTriggerExecutionFailure                                                        smithy.SchemaExtensions
+	eRepositoryTriggerExecutionFailure_trigger                                                smithy.SchemaExtensions
+	eRepositoryTriggerExecutionFailure_failureMessage                                         smithy.SchemaExtensions
+	e_RepositoryTriggerExecutionFailureList                                                   smithy.SchemaExtensions
+	e_RepositoryTriggerExecutionFailureList_member                                            smithy.SchemaExtensions
+	e_RepositoryTriggerExecutionFailureMessage                                                smithy.SchemaExtensions
+	e_RepositoryTriggerName                                                                   smithy.SchemaExtensions
+	e_RepositoryTriggerNameList                                                               smithy.SchemaExtensions
+	e_RepositoryTriggerNameList_member                                                        smithy.SchemaExtensions
+	eRepositoryTriggerNameRequiredException                                                   smithy.SchemaExtensions
+	eRepositoryTriggerNameRequiredException_message                                           smithy.SchemaExtensions
+	e_RepositoryTriggersConfigurationId                                                       smithy.SchemaExtensions
+	e_RepositoryTriggersList                                                                  smithy.SchemaExtensions
+	e_RepositoryTriggersList_member                                                           smithy.SchemaExtensions
+	eRepositoryTriggersListRequiredException                                                  smithy.SchemaExtensions
+	eRepositoryTriggersListRequiredException_message                                          smithy.SchemaExtensions
+	e_ResourceArn                                                                             smithy.SchemaExtensions
+	eResourceArnRequiredException                                                             smithy.SchemaExtensions
+	eResourceArnRequiredException_message                                                     smithy.SchemaExtensions
+	eRestrictedSourceFileException                                                            smithy.SchemaExtensions
+	eRestrictedSourceFileException_message                                                    smithy.SchemaExtensions
+	e_RevisionChildren                                                                        smithy.SchemaExtensions
+	e_RevisionChildren_member                                                                 smithy.SchemaExtensions
+	e_RevisionDag                                                                             smithy.SchemaExtensions
+	e_RevisionDag_member                                                                      smithy.SchemaExtensions
+	e_RevisionId                                                                              smithy.SchemaExtensions
+	eRevisionIdRequiredException                                                              smithy.SchemaExtensions
+	eRevisionIdRequiredException_message                                                      smithy.SchemaExtensions
+	eRevisionNotCurrentException                                                              smithy.SchemaExtensions
+	eRevisionNotCurrentException_message                                                      smithy.SchemaExtensions
+	e_RuleContentSha256                                                                       smithy.SchemaExtensions
+	eSameFileContentException                                                                 smithy.SchemaExtensions
+	eSameFileContentException_message                                                         smithy.SchemaExtensions
+	eSamePathRequestException                                                                 smithy.SchemaExtensions
+	eSamePathRequestException_message                                                         smithy.SchemaExtensions
+	e_SetFileModeEntries                                                                      smithy.SchemaExtensions
+	e_SetFileModeEntries_member                                                               smithy.SchemaExtensions
+	eSetFileModeEntry                                                                         smithy.SchemaExtensions
+	eSetFileModeEntry_filePath                                                                smithy.SchemaExtensions
+	eSetFileModeEntry_fileMode                                                                smithy.SchemaExtensions
+	eSortByEnum                                                                               smithy.SchemaExtensions
+	eSortByEnum_REPOSITORY_NAME                                                               smithy.SchemaExtensions
+	eSortByEnum_MODIFIED_DATE                                                                 smithy.SchemaExtensions
+	eSourceAndDestinationAreSameException                                                     smithy.SchemaExtensions
+	eSourceAndDestinationAreSameException_message                                             smithy.SchemaExtensions
+	eSourceFileOrContentRequiredException                                                     smithy.SchemaExtensions
+	eSourceFileOrContentRequiredException_message                                             smithy.SchemaExtensions
+	eSourceFileSpecifier                                                                      smithy.SchemaExtensions
+	eSourceFileSpecifier_filePath                                                             smithy.SchemaExtensions
+	eSourceFileSpecifier_isMove                                                               smithy.SchemaExtensions
+	eSubModule                                                                                smithy.SchemaExtensions
+	eSubModule_commitId                                                                       smithy.SchemaExtensions
+	eSubModule_absolutePath                                                                   smithy.SchemaExtensions
+	eSubModule_relativePath                                                                   smithy.SchemaExtensions
+	e_SubModuleList                                                                           smithy.SchemaExtensions
+	e_SubModuleList_member                                                                    smithy.SchemaExtensions
+	eSymbolicLink                                                                             smithy.SchemaExtensions
+	eSymbolicLink_blobId                                                                      smithy.SchemaExtensions
+	eSymbolicLink_absolutePath                                                                smithy.SchemaExtensions
+	eSymbolicLink_relativePath                                                                smithy.SchemaExtensions
+	eSymbolicLink_fileMode                                                                    smithy.SchemaExtensions
+	e_SymbolicLinkList                                                                        smithy.SchemaExtensions
+	e_SymbolicLinkList_member                                                                 smithy.SchemaExtensions
+	e_TagKey                                                                                  smithy.SchemaExtensions
+	e_TagKeysList                                                                             smithy.SchemaExtensions
+	e_TagKeysList_member                                                                      smithy.SchemaExtensions
+	eTagKeysListRequiredException                                                             smithy.SchemaExtensions
+	eTagKeysListRequiredException_message                                                     smithy.SchemaExtensions
+	eTagPolicyException                                                                       smithy.SchemaExtensions
+	eTagPolicyException_message                                                               smithy.SchemaExtensions
+	e_TagsMap                                                                                 smithy.SchemaExtensions
+	e_TagsMap_key                                                                             smithy.SchemaExtensions
+	e_TagsMap_value                                                                           smithy.SchemaExtensions
+	eTagsMapRequiredException                                                                 smithy.SchemaExtensions
+	eTagsMapRequiredException_message                                                         smithy.SchemaExtensions
+	e_TagValue                                                                                smithy.SchemaExtensions
+	eTarget                                                                                   smithy.SchemaExtensions
+	eTarget_repositoryName                                                                    smithy.SchemaExtensions
+	eTarget_sourceReference                                                                   smithy.SchemaExtensions
+	eTarget_destinationReference                                                              smithy.SchemaExtensions
+	e_TargetList                                                                              smithy.SchemaExtensions
+	e_TargetList_member                                                                       smithy.SchemaExtensions
+	eTargetRequiredException                                                                  smithy.SchemaExtensions
+	eTargetRequiredException_message                                                          smithy.SchemaExtensions
+	eTargetsRequiredException                                                                 smithy.SchemaExtensions
+	eTargetsRequiredException_message                                                         smithy.SchemaExtensions
+	eTipOfSourceReferenceIsDifferentException                                                 smithy.SchemaExtensions
+	eTipOfSourceReferenceIsDifferentException_message                                         smithy.SchemaExtensions
+	eTipsDivergenceExceededException                                                          smithy.SchemaExtensions
+	eTipsDivergenceExceededException_message                                                  smithy.SchemaExtensions
+	e_Title                                                                                   smithy.SchemaExtensions
+	eTitleRequiredException                                                                   smithy.SchemaExtensions
+	eTitleRequiredException_message                                                           smithy.SchemaExtensions
+	eTooManyTagsException                                                                     smithy.SchemaExtensions
+	eTooManyTagsException_message                                                             smithy.SchemaExtensions
+	eUserInfo                                                                                 smithy.SchemaExtensions
+	eUserInfo_name                                                                            smithy.SchemaExtensions
+	eUserInfo_email                                                                           smithy.SchemaExtensions
+	eUserInfo_date                                                                            smithy.SchemaExtensions
+	eValidationException                                                                      smithy.SchemaExtensions
+	eValidationException_message                                                              smithy.SchemaExtensions
+	eAssociateApprovalRuleTemplateWithRepositoryInput                                         smithy.SchemaExtensions
+	eAssociateApprovalRuleTemplateWithRepositoryInput_approvalRuleTemplateName                smithy.SchemaExtensions
+	eAssociateApprovalRuleTemplateWithRepositoryInput_repositoryName                          smithy.SchemaExtensions
+	eBatchAssociateApprovalRuleTemplateWithRepositoriesInput                                  smithy.SchemaExtensions
+	eBatchAssociateApprovalRuleTemplateWithRepositoriesInput_approvalRuleTemplateName         smithy.SchemaExtensions
+	eBatchAssociateApprovalRuleTemplateWithRepositoriesInput_repositoryNames                  smithy.SchemaExtensions
+	eBatchAssociateApprovalRuleTemplateWithRepositoriesOutput                                 smithy.SchemaExtensions
+	eBatchAssociateApprovalRuleTemplateWithRepositoriesOutput_associatedRepositoryNames       smithy.SchemaExtensions
+	eBatchAssociateApprovalRuleTemplateWithRepositoriesOutput_errors                          smithy.SchemaExtensions
+	eBatchDescribeMergeConflictsInput                                                         smithy.SchemaExtensions
+	eBatchDescribeMergeConflictsInput_repositoryName                                          smithy.SchemaExtensions
+	eBatchDescribeMergeConflictsInput_destinationCommitSpecifier                              smithy.SchemaExtensions
+	eBatchDescribeMergeConflictsInput_sourceCommitSpecifier                                   smithy.SchemaExtensions
+	eBatchDescribeMergeConflictsInput_mergeOption                                             smithy.SchemaExtensions
+	eBatchDescribeMergeConflictsInput_maxMergeHunks                                           smithy.SchemaExtensions
+	eBatchDescribeMergeConflictsInput_maxConflictFiles                                        smithy.SchemaExtensions
+	eBatchDescribeMergeConflictsInput_filePaths                                               smithy.SchemaExtensions
+	eBatchDescribeMergeConflictsInput_conflictDetailLevel                                     smithy.SchemaExtensions
+	eBatchDescribeMergeConflictsInput_conflictResolutionStrategy                              smithy.SchemaExtensions
+	eBatchDescribeMergeConflictsInput_nextToken                                               smithy.SchemaExtensions
+	eBatchDescribeMergeConflictsOutput                                                        smithy.SchemaExtensions
+	eBatchDescribeMergeConflictsOutput_conflicts                                              smithy.SchemaExtensions
+	eBatchDescribeMergeConflictsOutput_nextToken                                              smithy.SchemaExtensions
+	eBatchDescribeMergeConflictsOutput_errors                                                 smithy.SchemaExtensions
+	eBatchDescribeMergeConflictsOutput_destinationCommitId                                    smithy.SchemaExtensions
+	eBatchDescribeMergeConflictsOutput_sourceCommitId                                         smithy.SchemaExtensions
+	eBatchDescribeMergeConflictsOutput_baseCommitId                                           smithy.SchemaExtensions
+	eBatchDisassociateApprovalRuleTemplateFromRepositoriesInput                               smithy.SchemaExtensions
+	eBatchDisassociateApprovalRuleTemplateFromRepositoriesInput_approvalRuleTemplateName      smithy.SchemaExtensions
+	eBatchDisassociateApprovalRuleTemplateFromRepositoriesInput_repositoryNames               smithy.SchemaExtensions
+	eBatchDisassociateApprovalRuleTemplateFromRepositoriesOutput                              smithy.SchemaExtensions
+	eBatchDisassociateApprovalRuleTemplateFromRepositoriesOutput_disassociatedRepositoryNames smithy.SchemaExtensions
+	eBatchDisassociateApprovalRuleTemplateFromRepositoriesOutput_errors                       smithy.SchemaExtensions
+	eBatchGetCommitsInput                                                                     smithy.SchemaExtensions
+	eBatchGetCommitsInput_commitIds                                                           smithy.SchemaExtensions
+	eBatchGetCommitsInput_repositoryName                                                      smithy.SchemaExtensions
+	eBatchGetCommitsOutput                                                                    smithy.SchemaExtensions
+	eBatchGetCommitsOutput_commits                                                            smithy.SchemaExtensions
+	eBatchGetCommitsOutput_errors                                                             smithy.SchemaExtensions
+	eBatchGetRepositoriesInput                                                                smithy.SchemaExtensions
+	eBatchGetRepositoriesInput_repositoryNames                                                smithy.SchemaExtensions
+	eBatchGetRepositoriesOutput                                                               smithy.SchemaExtensions
+	eBatchGetRepositoriesOutput_repositories                                                  smithy.SchemaExtensions
+	eBatchGetRepositoriesOutput_repositoriesNotFound                                          smithy.SchemaExtensions
+	eBatchGetRepositoriesOutput_errors                                                        smithy.SchemaExtensions
+	eCreateApprovalRuleTemplateInput                                                          smithy.SchemaExtensions
+	eCreateApprovalRuleTemplateInput_approvalRuleTemplateName                                 smithy.SchemaExtensions
+	eCreateApprovalRuleTemplateInput_approvalRuleTemplateContent                              smithy.SchemaExtensions
+	eCreateApprovalRuleTemplateInput_approvalRuleTemplateDescription                          smithy.SchemaExtensions
+	eCreateApprovalRuleTemplateOutput                                                         smithy.SchemaExtensions
+	eCreateApprovalRuleTemplateOutput_approvalRuleTemplate                                    smithy.SchemaExtensions
+	eCreateBranchInput                                                                        smithy.SchemaExtensions
+	eCreateBranchInput_repositoryName                                                         smithy.SchemaExtensions
+	eCreateBranchInput_branchName                                                             smithy.SchemaExtensions
+	eCreateBranchInput_commitId                                                               smithy.SchemaExtensions
+	eCreateCommitInput                                                                        smithy.SchemaExtensions
+	eCreateCommitInput_repositoryName                                                         smithy.SchemaExtensions
+	eCreateCommitInput_branchName                                                             smithy.SchemaExtensions
+	eCreateCommitInput_parentCommitId                                                         smithy.SchemaExtensions
+	eCreateCommitInput_authorName                                                             smithy.SchemaExtensions
+	eCreateCommitInput_email                                                                  smithy.SchemaExtensions
+	eCreateCommitInput_commitMessage                                                          smithy.SchemaExtensions
+	eCreateCommitInput_keepEmptyFolders                                                       smithy.SchemaExtensions
+	eCreateCommitInput_putFiles                                                               smithy.SchemaExtensions
+	eCreateCommitInput_deleteFiles                                                            smithy.SchemaExtensions
+	eCreateCommitInput_setFileModes                                                           smithy.SchemaExtensions
+	eCreateCommitOutput                                                                       smithy.SchemaExtensions
+	eCreateCommitOutput_commitId                                                              smithy.SchemaExtensions
+	eCreateCommitOutput_treeId                                                                smithy.SchemaExtensions
+	eCreateCommitOutput_filesAdded                                                            smithy.SchemaExtensions
+	eCreateCommitOutput_filesUpdated                                                          smithy.SchemaExtensions
+	eCreateCommitOutput_filesDeleted                                                          smithy.SchemaExtensions
+	eCreatePullRequestApprovalRuleInput                                                       smithy.SchemaExtensions
+	eCreatePullRequestApprovalRuleInput_pullRequestId                                         smithy.SchemaExtensions
+	eCreatePullRequestApprovalRuleInput_approvalRuleName                                      smithy.SchemaExtensions
+	eCreatePullRequestApprovalRuleInput_approvalRuleContent                                   smithy.SchemaExtensions
+	eCreatePullRequestApprovalRuleOutput                                                      smithy.SchemaExtensions
+	eCreatePullRequestApprovalRuleOutput_approvalRule                                         smithy.SchemaExtensions
+	eCreatePullRequestInput                                                                   smithy.SchemaExtensions
+	eCreatePullRequestInput_title                                                             smithy.SchemaExtensions
+	eCreatePullRequestInput_description                                                       smithy.SchemaExtensions
+	eCreatePullRequestInput_targets                                                           smithy.SchemaExtensions
+	eCreatePullRequestInput_clientRequestToken                                                smithy.SchemaExtensions
+	eCreatePullRequestOutput                                                                  smithy.SchemaExtensions
+	eCreatePullRequestOutput_pullRequest                                                      smithy.SchemaExtensions
+	eCreateRepositoryInput                                                                    smithy.SchemaExtensions
+	eCreateRepositoryInput_repositoryName                                                     smithy.SchemaExtensions
+	eCreateRepositoryInput_repositoryDescription                                              smithy.SchemaExtensions
+	eCreateRepositoryInput_tags                                                               smithy.SchemaExtensions
+	eCreateRepositoryInput_kmsKeyId                                                           smithy.SchemaExtensions
+	eCreateRepositoryOutput                                                                   smithy.SchemaExtensions
+	eCreateRepositoryOutput_repositoryMetadata                                                smithy.SchemaExtensions
+	eCreateUnreferencedMergeCommitInput                                                       smithy.SchemaExtensions
+	eCreateUnreferencedMergeCommitInput_repositoryName                                        smithy.SchemaExtensions
+	eCreateUnreferencedMergeCommitInput_sourceCommitSpecifier                                 smithy.SchemaExtensions
+	eCreateUnreferencedMergeCommitInput_destinationCommitSpecifier                            smithy.SchemaExtensions
+	eCreateUnreferencedMergeCommitInput_mergeOption                                           smithy.SchemaExtensions
+	eCreateUnreferencedMergeCommitInput_conflictDetailLevel                                   smithy.SchemaExtensions
+	eCreateUnreferencedMergeCommitInput_conflictResolutionStrategy                            smithy.SchemaExtensions
+	eCreateUnreferencedMergeCommitInput_authorName                                            smithy.SchemaExtensions
+	eCreateUnreferencedMergeCommitInput_email                                                 smithy.SchemaExtensions
+	eCreateUnreferencedMergeCommitInput_commitMessage                                         smithy.SchemaExtensions
+	eCreateUnreferencedMergeCommitInput_keepEmptyFolders                                      smithy.SchemaExtensions
+	eCreateUnreferencedMergeCommitInput_conflictResolution                                    smithy.SchemaExtensions
+	eCreateUnreferencedMergeCommitOutput                                                      smithy.SchemaExtensions
+	eCreateUnreferencedMergeCommitOutput_commitId                                             smithy.SchemaExtensions
+	eCreateUnreferencedMergeCommitOutput_treeId                                               smithy.SchemaExtensions
+	eDeleteApprovalRuleTemplateInput                                                          smithy.SchemaExtensions
+	eDeleteApprovalRuleTemplateInput_approvalRuleTemplateName                                 smithy.SchemaExtensions
+	eDeleteApprovalRuleTemplateOutput                                                         smithy.SchemaExtensions
+	eDeleteApprovalRuleTemplateOutput_approvalRuleTemplateId                                  smithy.SchemaExtensions
+	eDeleteBranchInput                                                                        smithy.SchemaExtensions
+	eDeleteBranchInput_repositoryName                                                         smithy.SchemaExtensions
+	eDeleteBranchInput_branchName                                                             smithy.SchemaExtensions
+	eDeleteBranchOutput                                                                       smithy.SchemaExtensions
+	eDeleteBranchOutput_deletedBranch                                                         smithy.SchemaExtensions
+	eDeleteCommentContentInput                                                                smithy.SchemaExtensions
+	eDeleteCommentContentInput_commentId                                                      smithy.SchemaExtensions
+	eDeleteCommentContentOutput                                                               smithy.SchemaExtensions
+	eDeleteCommentContentOutput_comment                                                       smithy.SchemaExtensions
+	eDeleteFileInput                                                                          smithy.SchemaExtensions
+	eDeleteFileInput_repositoryName                                                           smithy.SchemaExtensions
+	eDeleteFileInput_branchName                                                               smithy.SchemaExtensions
+	eDeleteFileInput_filePath                                                                 smithy.SchemaExtensions
+	eDeleteFileInput_parentCommitId                                                           smithy.SchemaExtensions
+	eDeleteFileInput_keepEmptyFolders                                                         smithy.SchemaExtensions
+	eDeleteFileInput_commitMessage                                                            smithy.SchemaExtensions
+	eDeleteFileInput_name                                                                     smithy.SchemaExtensions
+	eDeleteFileInput_email                                                                    smithy.SchemaExtensions
+	eDeleteFileOutput                                                                         smithy.SchemaExtensions
+	eDeleteFileOutput_commitId                                                                smithy.SchemaExtensions
+	eDeleteFileOutput_blobId                                                                  smithy.SchemaExtensions
+	eDeleteFileOutput_treeId                                                                  smithy.SchemaExtensions
+	eDeleteFileOutput_filePath                                                                smithy.SchemaExtensions
+	eDeletePullRequestApprovalRuleInput                                                       smithy.SchemaExtensions
+	eDeletePullRequestApprovalRuleInput_pullRequestId                                         smithy.SchemaExtensions
+	eDeletePullRequestApprovalRuleInput_approvalRuleName                                      smithy.SchemaExtensions
+	eDeletePullRequestApprovalRuleOutput                                                      smithy.SchemaExtensions
+	eDeletePullRequestApprovalRuleOutput_approvalRuleId                                       smithy.SchemaExtensions
+	eDeleteRepositoryInput                                                                    smithy.SchemaExtensions
+	eDeleteRepositoryInput_repositoryName                                                     smithy.SchemaExtensions
+	eDeleteRepositoryOutput                                                                   smithy.SchemaExtensions
+	eDeleteRepositoryOutput_repositoryId                                                      smithy.SchemaExtensions
+	eDescribeMergeConflictsInput                                                              smithy.SchemaExtensions
+	eDescribeMergeConflictsInput_repositoryName                                               smithy.SchemaExtensions
+	eDescribeMergeConflictsInput_destinationCommitSpecifier                                   smithy.SchemaExtensions
+	eDescribeMergeConflictsInput_sourceCommitSpecifier                                        smithy.SchemaExtensions
+	eDescribeMergeConflictsInput_mergeOption                                                  smithy.SchemaExtensions
+	eDescribeMergeConflictsInput_maxMergeHunks                                                smithy.SchemaExtensions
+	eDescribeMergeConflictsInput_filePath                                                     smithy.SchemaExtensions
+	eDescribeMergeConflictsInput_conflictDetailLevel                                          smithy.SchemaExtensions
+	eDescribeMergeConflictsInput_conflictResolutionStrategy                                   smithy.SchemaExtensions
+	eDescribeMergeConflictsInput_nextToken                                                    smithy.SchemaExtensions
+	eDescribeMergeConflictsOutput                                                             smithy.SchemaExtensions
+	eDescribeMergeConflictsOutput_conflictMetadata                                            smithy.SchemaExtensions
+	eDescribeMergeConflictsOutput_mergeHunks                                                  smithy.SchemaExtensions
+	eDescribeMergeConflictsOutput_nextToken                                                   smithy.SchemaExtensions
+	eDescribeMergeConflictsOutput_destinationCommitId                                         smithy.SchemaExtensions
+	eDescribeMergeConflictsOutput_sourceCommitId                                              smithy.SchemaExtensions
+	eDescribeMergeConflictsOutput_baseCommitId                                                smithy.SchemaExtensions
+	eDescribePullRequestEventsInput                                                           smithy.SchemaExtensions
+	eDescribePullRequestEventsInput_pullRequestId                                             smithy.SchemaExtensions
+	eDescribePullRequestEventsInput_pullRequestEventType                                      smithy.SchemaExtensions
+	eDescribePullRequestEventsInput_actorArn                                                  smithy.SchemaExtensions
+	eDescribePullRequestEventsInput_nextToken                                                 smithy.SchemaExtensions
+	eDescribePullRequestEventsInput_maxResults                                                smithy.SchemaExtensions
+	eDescribePullRequestEventsOutput                                                          smithy.SchemaExtensions
+	eDescribePullRequestEventsOutput_pullRequestEvents                                        smithy.SchemaExtensions
+	eDescribePullRequestEventsOutput_nextToken                                                smithy.SchemaExtensions
+	eDisassociateApprovalRuleTemplateFromRepositoryInput                                      smithy.SchemaExtensions
+	eDisassociateApprovalRuleTemplateFromRepositoryInput_approvalRuleTemplateName             smithy.SchemaExtensions
+	eDisassociateApprovalRuleTemplateFromRepositoryInput_repositoryName                       smithy.SchemaExtensions
+	eEvaluatePullRequestApprovalRulesInput                                                    smithy.SchemaExtensions
+	eEvaluatePullRequestApprovalRulesInput_pullRequestId                                      smithy.SchemaExtensions
+	eEvaluatePullRequestApprovalRulesInput_revisionId                                         smithy.SchemaExtensions
+	eEvaluatePullRequestApprovalRulesOutput                                                   smithy.SchemaExtensions
+	eEvaluatePullRequestApprovalRulesOutput_evaluation                                        smithy.SchemaExtensions
+	eGetApprovalRuleTemplateInput                                                             smithy.SchemaExtensions
+	eGetApprovalRuleTemplateInput_approvalRuleTemplateName                                    smithy.SchemaExtensions
+	eGetApprovalRuleTemplateOutput                                                            smithy.SchemaExtensions
+	eGetApprovalRuleTemplateOutput_approvalRuleTemplate                                       smithy.SchemaExtensions
+	eGetBlobDifferencesInput                                                                  smithy.SchemaExtensions
+	eGetBlobDifferencesInput_repositoryName                                                   smithy.SchemaExtensions
+	eGetBlobDifferencesInput_afterBlobId                                                      smithy.SchemaExtensions
+	eGetBlobDifferencesInput_beforeBlobId                                                     smithy.SchemaExtensions
+	eGetBlobDifferencesInput_contextLines                                                     smithy.SchemaExtensions
+	eGetBlobDifferencesInput_ignoreWhitespace                                                 smithy.SchemaExtensions
+	eGetBlobDifferencesInput_MaxResults                                                       smithy.SchemaExtensions
+	eGetBlobDifferencesInput_NextToken                                                        smithy.SchemaExtensions
+	eGetBlobDifferencesOutput                                                                 smithy.SchemaExtensions
+	eGetBlobDifferencesOutput_hunks                                                           smithy.SchemaExtensions
+	eGetBlobDifferencesOutput_isBinary                                                        smithy.SchemaExtensions
+	eGetBlobDifferencesOutput_beforeBlobSize                                                  smithy.SchemaExtensions
+	eGetBlobDifferencesOutput_afterBlobSize                                                   smithy.SchemaExtensions
+	eGetBlobDifferencesOutput_NextToken                                                       smithy.SchemaExtensions
+	eGetBlobInput                                                                             smithy.SchemaExtensions
+	eGetBlobInput_repositoryName                                                              smithy.SchemaExtensions
+	eGetBlobInput_blobId                                                                      smithy.SchemaExtensions
+	eGetBlobOutput                                                                            smithy.SchemaExtensions
+	eGetBlobOutput_content                                                                    smithy.SchemaExtensions
+	eGetBranchInput                                                                           smithy.SchemaExtensions
+	eGetBranchInput_repositoryName                                                            smithy.SchemaExtensions
+	eGetBranchInput_branchName                                                                smithy.SchemaExtensions
+	eGetBranchOutput                                                                          smithy.SchemaExtensions
+	eGetBranchOutput_branch                                                                   smithy.SchemaExtensions
+	eGetCommentInput                                                                          smithy.SchemaExtensions
+	eGetCommentInput_commentId                                                                smithy.SchemaExtensions
+	eGetCommentOutput                                                                         smithy.SchemaExtensions
+	eGetCommentOutput_comment                                                                 smithy.SchemaExtensions
+	eGetCommentReactionsInput                                                                 smithy.SchemaExtensions
+	eGetCommentReactionsInput_commentId                                                       smithy.SchemaExtensions
+	eGetCommentReactionsInput_reactionUserArn                                                 smithy.SchemaExtensions
+	eGetCommentReactionsInput_nextToken                                                       smithy.SchemaExtensions
+	eGetCommentReactionsInput_maxResults                                                      smithy.SchemaExtensions
+	eGetCommentReactionsOutput                                                                smithy.SchemaExtensions
+	eGetCommentReactionsOutput_reactionsForComment                                            smithy.SchemaExtensions
+	eGetCommentReactionsOutput_nextToken                                                      smithy.SchemaExtensions
+	eGetCommentsForComparedCommitInput                                                        smithy.SchemaExtensions
+	eGetCommentsForComparedCommitInput_repositoryName                                         smithy.SchemaExtensions
+	eGetCommentsForComparedCommitInput_beforeCommitId                                         smithy.SchemaExtensions
+	eGetCommentsForComparedCommitInput_afterCommitId                                          smithy.SchemaExtensions
+	eGetCommentsForComparedCommitInput_nextToken                                              smithy.SchemaExtensions
+	eGetCommentsForComparedCommitInput_maxResults                                             smithy.SchemaExtensions
+	eGetCommentsForComparedCommitOutput                                                       smithy.SchemaExtensions
+	eGetCommentsForComparedCommitOutput_commentsForComparedCommitData                         smithy.SchemaExtensions
+	eGetCommentsForComparedCommitOutput_nextToken                                             smithy.SchemaExtensions
+	eGetCommentsForPullRequestInput                                                           smithy.SchemaExtensions
+	eGetCommentsForPullRequestInput_pullRequestId                                             smithy.SchemaExtensions
+	eGetCommentsForPullRequestInput_repositoryName                                            smithy.SchemaExtensions
+	eGetCommentsForPullRequestInput_beforeCommitId                                            smithy.SchemaExtensions
+	eGetCommentsForPullRequestInput_afterCommitId                                             smithy.SchemaExtensions
+	eGetCommentsForPullRequestInput_nextToken                                                 smithy.SchemaExtensions
+	eGetCommentsForPullRequestInput_maxResults                                                smithy.SchemaExtensions
+	eGetCommentsForPullRequestOutput                                                          smithy.SchemaExtensions
+	eGetCommentsForPullRequestOutput_commentsForPullRequestData                               smithy.SchemaExtensions
+	eGetCommentsForPullRequestOutput_nextToken                                                smithy.SchemaExtensions
+	eGetCommitInput                                                                           smithy.SchemaExtensions
+	eGetCommitInput_repositoryName                                                            smithy.SchemaExtensions
+	eGetCommitInput_commitId                                                                  smithy.SchemaExtensions
+	eGetCommitOutput                                                                          smithy.SchemaExtensions
+	eGetCommitOutput_commit                                                                   smithy.SchemaExtensions
+	eGetDifferencesInput                                                                      smithy.SchemaExtensions
+	eGetDifferencesInput_repositoryName                                                       smithy.SchemaExtensions
+	eGetDifferencesInput_beforeCommitSpecifier                                                smithy.SchemaExtensions
+	eGetDifferencesInput_afterCommitSpecifier                                                 smithy.SchemaExtensions
+	eGetDifferencesInput_beforePath                                                           smithy.SchemaExtensions
+	eGetDifferencesInput_afterPath                                                            smithy.SchemaExtensions
+	eGetDifferencesInput_MaxResults                                                           smithy.SchemaExtensions
+	eGetDifferencesInput_NextToken                                                            smithy.SchemaExtensions
+	eGetDifferencesOutput                                                                     smithy.SchemaExtensions
+	eGetDifferencesOutput_differences                                                         smithy.SchemaExtensions
+	eGetDifferencesOutput_NextToken                                                           smithy.SchemaExtensions
+	eGetFileInput                                                                             smithy.SchemaExtensions
+	eGetFileInput_repositoryName                                                              smithy.SchemaExtensions
+	eGetFileInput_commitSpecifier                                                             smithy.SchemaExtensions
+	eGetFileInput_filePath                                                                    smithy.SchemaExtensions
+	eGetFileOutput                                                                            smithy.SchemaExtensions
+	eGetFileOutput_commitId                                                                   smithy.SchemaExtensions
+	eGetFileOutput_blobId                                                                     smithy.SchemaExtensions
+	eGetFileOutput_filePath                                                                   smithy.SchemaExtensions
+	eGetFileOutput_fileMode                                                                   smithy.SchemaExtensions
+	eGetFileOutput_fileSize                                                                   smithy.SchemaExtensions
+	eGetFileOutput_fileContent                                                                smithy.SchemaExtensions
+	eGetFolderInput                                                                           smithy.SchemaExtensions
+	eGetFolderInput_repositoryName                                                            smithy.SchemaExtensions
+	eGetFolderInput_commitSpecifier                                                           smithy.SchemaExtensions
+	eGetFolderInput_folderPath                                                                smithy.SchemaExtensions
+	eGetFolderOutput                                                                          smithy.SchemaExtensions
+	eGetFolderOutput_commitId                                                                 smithy.SchemaExtensions
+	eGetFolderOutput_folderPath                                                               smithy.SchemaExtensions
+	eGetFolderOutput_treeId                                                                   smithy.SchemaExtensions
+	eGetFolderOutput_subFolders                                                               smithy.SchemaExtensions
+	eGetFolderOutput_files                                                                    smithy.SchemaExtensions
+	eGetFolderOutput_symbolicLinks                                                            smithy.SchemaExtensions
+	eGetFolderOutput_subModules                                                               smithy.SchemaExtensions
+	eGetMergeCommitInput                                                                      smithy.SchemaExtensions
+	eGetMergeCommitInput_repositoryName                                                       smithy.SchemaExtensions
+	eGetMergeCommitInput_sourceCommitSpecifier                                                smithy.SchemaExtensions
+	eGetMergeCommitInput_destinationCommitSpecifier                                           smithy.SchemaExtensions
+	eGetMergeCommitInput_conflictDetailLevel                                                  smithy.SchemaExtensions
+	eGetMergeCommitInput_conflictResolutionStrategy                                           smithy.SchemaExtensions
+	eGetMergeCommitOutput                                                                     smithy.SchemaExtensions
+	eGetMergeCommitOutput_sourceCommitId                                                      smithy.SchemaExtensions
+	eGetMergeCommitOutput_destinationCommitId                                                 smithy.SchemaExtensions
+	eGetMergeCommitOutput_baseCommitId                                                        smithy.SchemaExtensions
+	eGetMergeCommitOutput_mergedCommitId                                                      smithy.SchemaExtensions
+	eGetMergeConflictsInput                                                                   smithy.SchemaExtensions
+	eGetMergeConflictsInput_repositoryName                                                    smithy.SchemaExtensions
+	eGetMergeConflictsInput_destinationCommitSpecifier                                        smithy.SchemaExtensions
+	eGetMergeConflictsInput_sourceCommitSpecifier                                             smithy.SchemaExtensions
+	eGetMergeConflictsInput_mergeOption                                                       smithy.SchemaExtensions
+	eGetMergeConflictsInput_conflictDetailLevel                                               smithy.SchemaExtensions
+	eGetMergeConflictsInput_maxConflictFiles                                                  smithy.SchemaExtensions
+	eGetMergeConflictsInput_conflictResolutionStrategy                                        smithy.SchemaExtensions
+	eGetMergeConflictsInput_nextToken                                                         smithy.SchemaExtensions
+	eGetMergeConflictsOutput                                                                  smithy.SchemaExtensions
+	eGetMergeConflictsOutput_mergeable                                                        smithy.SchemaExtensions
+	eGetMergeConflictsOutput_destinationCommitId                                              smithy.SchemaExtensions
+	eGetMergeConflictsOutput_sourceCommitId                                                   smithy.SchemaExtensions
+	eGetMergeConflictsOutput_baseCommitId                                                     smithy.SchemaExtensions
+	eGetMergeConflictsOutput_conflictMetadataList                                             smithy.SchemaExtensions
+	eGetMergeConflictsOutput_nextToken                                                        smithy.SchemaExtensions
+	eGetMergeOptionsInput                                                                     smithy.SchemaExtensions
+	eGetMergeOptionsInput_repositoryName                                                      smithy.SchemaExtensions
+	eGetMergeOptionsInput_sourceCommitSpecifier                                               smithy.SchemaExtensions
+	eGetMergeOptionsInput_destinationCommitSpecifier                                          smithy.SchemaExtensions
+	eGetMergeOptionsInput_conflictDetailLevel                                                 smithy.SchemaExtensions
+	eGetMergeOptionsInput_conflictResolutionStrategy                                          smithy.SchemaExtensions
+	eGetMergeOptionsOutput                                                                    smithy.SchemaExtensions
+	eGetMergeOptionsOutput_mergeOptions                                                       smithy.SchemaExtensions
+	eGetMergeOptionsOutput_sourceCommitId                                                     smithy.SchemaExtensions
+	eGetMergeOptionsOutput_destinationCommitId                                                smithy.SchemaExtensions
+	eGetMergeOptionsOutput_baseCommitId                                                       smithy.SchemaExtensions
+	eGetPullRequestApprovalStatesInput                                                        smithy.SchemaExtensions
+	eGetPullRequestApprovalStatesInput_pullRequestId                                          smithy.SchemaExtensions
+	eGetPullRequestApprovalStatesInput_revisionId                                             smithy.SchemaExtensions
+	eGetPullRequestApprovalStatesOutput                                                       smithy.SchemaExtensions
+	eGetPullRequestApprovalStatesOutput_approvals                                             smithy.SchemaExtensions
+	eGetPullRequestInput                                                                      smithy.SchemaExtensions
+	eGetPullRequestInput_pullRequestId                                                        smithy.SchemaExtensions
+	eGetPullRequestOutput                                                                     smithy.SchemaExtensions
+	eGetPullRequestOutput_pullRequest                                                         smithy.SchemaExtensions
+	eGetPullRequestOverrideStateInput                                                         smithy.SchemaExtensions
+	eGetPullRequestOverrideStateInput_pullRequestId                                           smithy.SchemaExtensions
+	eGetPullRequestOverrideStateInput_revisionId                                              smithy.SchemaExtensions
+	eGetPullRequestOverrideStateOutput                                                        smithy.SchemaExtensions
+	eGetPullRequestOverrideStateOutput_overridden                                             smithy.SchemaExtensions
+	eGetPullRequestOverrideStateOutput_overrider                                              smithy.SchemaExtensions
+	eGetRepositoryInput                                                                       smithy.SchemaExtensions
+	eGetRepositoryInput_repositoryName                                                        smithy.SchemaExtensions
+	eGetRepositoryOutput                                                                      smithy.SchemaExtensions
+	eGetRepositoryOutput_repositoryMetadata                                                   smithy.SchemaExtensions
+	eGetRepositoryTriggersInput                                                               smithy.SchemaExtensions
+	eGetRepositoryTriggersInput_repositoryName                                                smithy.SchemaExtensions
+	eGetRepositoryTriggersOutput                                                              smithy.SchemaExtensions
+	eGetRepositoryTriggersOutput_configurationId                                              smithy.SchemaExtensions
+	eGetRepositoryTriggersOutput_triggers                                                     smithy.SchemaExtensions
+	eListApprovalRuleTemplatesInput                                                           smithy.SchemaExtensions
+	eListApprovalRuleTemplatesInput_nextToken                                                 smithy.SchemaExtensions
+	eListApprovalRuleTemplatesInput_maxResults                                                smithy.SchemaExtensions
+	eListApprovalRuleTemplatesOutput                                                          smithy.SchemaExtensions
+	eListApprovalRuleTemplatesOutput_approvalRuleTemplateNames                                smithy.SchemaExtensions
+	eListApprovalRuleTemplatesOutput_nextToken                                                smithy.SchemaExtensions
+	eListAssociatedApprovalRuleTemplatesForRepositoryInput                                    smithy.SchemaExtensions
+	eListAssociatedApprovalRuleTemplatesForRepositoryInput_repositoryName                     smithy.SchemaExtensions
+	eListAssociatedApprovalRuleTemplatesForRepositoryInput_nextToken                          smithy.SchemaExtensions
+	eListAssociatedApprovalRuleTemplatesForRepositoryInput_maxResults                         smithy.SchemaExtensions
+	eListAssociatedApprovalRuleTemplatesForRepositoryOutput                                   smithy.SchemaExtensions
+	eListAssociatedApprovalRuleTemplatesForRepositoryOutput_approvalRuleTemplateNames         smithy.SchemaExtensions
+	eListAssociatedApprovalRuleTemplatesForRepositoryOutput_nextToken                         smithy.SchemaExtensions
+	eListBranchesInput                                                                        smithy.SchemaExtensions
+	eListBranchesInput_repositoryName                                                         smithy.SchemaExtensions
+	eListBranchesInput_nextToken                                                              smithy.SchemaExtensions
+	eListBranchesOutput                                                                       smithy.SchemaExtensions
+	eListBranchesOutput_branches                                                              smithy.SchemaExtensions
+	eListBranchesOutput_nextToken                                                             smithy.SchemaExtensions
+	eListFileCommitHistoryRequest                                                             smithy.SchemaExtensions
+	eListFileCommitHistoryRequest_repositoryName                                              smithy.SchemaExtensions
+	eListFileCommitHistoryRequest_commitSpecifier                                             smithy.SchemaExtensions
+	eListFileCommitHistoryRequest_filePath                                                    smithy.SchemaExtensions
+	eListFileCommitHistoryRequest_maxResults                                                  smithy.SchemaExtensions
+	eListFileCommitHistoryRequest_nextToken                                                   smithy.SchemaExtensions
+	eListFileCommitHistoryResponse                                                            smithy.SchemaExtensions
+	eListFileCommitHistoryResponse_revisionDag                                                smithy.SchemaExtensions
+	eListFileCommitHistoryResponse_nextToken                                                  smithy.SchemaExtensions
+	eListPullRequestsInput                                                                    smithy.SchemaExtensions
+	eListPullRequestsInput_repositoryName                                                     smithy.SchemaExtensions
+	eListPullRequestsInput_authorArn                                                          smithy.SchemaExtensions
+	eListPullRequestsInput_pullRequestStatus                                                  smithy.SchemaExtensions
+	eListPullRequestsInput_nextToken                                                          smithy.SchemaExtensions
+	eListPullRequestsInput_maxResults                                                         smithy.SchemaExtensions
+	eListPullRequestsOutput                                                                   smithy.SchemaExtensions
+	eListPullRequestsOutput_pullRequestIds                                                    smithy.SchemaExtensions
+	eListPullRequestsOutput_nextToken                                                         smithy.SchemaExtensions
+	eListRepositoriesForApprovalRuleTemplateInput                                             smithy.SchemaExtensions
+	eListRepositoriesForApprovalRuleTemplateInput_approvalRuleTemplateName                    smithy.SchemaExtensions
+	eListRepositoriesForApprovalRuleTemplateInput_nextToken                                   smithy.SchemaExtensions
+	eListRepositoriesForApprovalRuleTemplateInput_maxResults                                  smithy.SchemaExtensions
+	eListRepositoriesForApprovalRuleTemplateOutput                                            smithy.SchemaExtensions
+	eListRepositoriesForApprovalRuleTemplateOutput_repositoryNames                            smithy.SchemaExtensions
+	eListRepositoriesForApprovalRuleTemplateOutput_nextToken                                  smithy.SchemaExtensions
+	eListRepositoriesInput                                                                    smithy.SchemaExtensions
+	eListRepositoriesInput_nextToken                                                          smithy.SchemaExtensions
+	eListRepositoriesInput_sortBy                                                             smithy.SchemaExtensions
+	eListRepositoriesInput_order                                                              smithy.SchemaExtensions
+	eListRepositoriesOutput                                                                   smithy.SchemaExtensions
+	eListRepositoriesOutput_repositories                                                      smithy.SchemaExtensions
+	eListRepositoriesOutput_nextToken                                                         smithy.SchemaExtensions
+	eListTagsForResourceInput                                                                 smithy.SchemaExtensions
+	eListTagsForResourceInput_resourceArn                                                     smithy.SchemaExtensions
+	eListTagsForResourceInput_nextToken                                                       smithy.SchemaExtensions
+	eListTagsForResourceOutput                                                                smithy.SchemaExtensions
+	eListTagsForResourceOutput_tags                                                           smithy.SchemaExtensions
+	eListTagsForResourceOutput_nextToken                                                      smithy.SchemaExtensions
+	eMergeBranchesByFastForwardInput                                                          smithy.SchemaExtensions
+	eMergeBranchesByFastForwardInput_repositoryName                                           smithy.SchemaExtensions
+	eMergeBranchesByFastForwardInput_sourceCommitSpecifier                                    smithy.SchemaExtensions
+	eMergeBranchesByFastForwardInput_destinationCommitSpecifier                               smithy.SchemaExtensions
+	eMergeBranchesByFastForwardInput_targetBranch                                             smithy.SchemaExtensions
+	eMergeBranchesByFastForwardOutput                                                         smithy.SchemaExtensions
+	eMergeBranchesByFastForwardOutput_commitId                                                smithy.SchemaExtensions
+	eMergeBranchesByFastForwardOutput_treeId                                                  smithy.SchemaExtensions
+	eMergeBranchesBySquashInput                                                               smithy.SchemaExtensions
+	eMergeBranchesBySquashInput_repositoryName                                                smithy.SchemaExtensions
+	eMergeBranchesBySquashInput_sourceCommitSpecifier                                         smithy.SchemaExtensions
+	eMergeBranchesBySquashInput_destinationCommitSpecifier                                    smithy.SchemaExtensions
+	eMergeBranchesBySquashInput_targetBranch                                                  smithy.SchemaExtensions
+	eMergeBranchesBySquashInput_conflictDetailLevel                                           smithy.SchemaExtensions
+	eMergeBranchesBySquashInput_conflictResolutionStrategy                                    smithy.SchemaExtensions
+	eMergeBranchesBySquashInput_authorName                                                    smithy.SchemaExtensions
+	eMergeBranchesBySquashInput_email                                                         smithy.SchemaExtensions
+	eMergeBranchesBySquashInput_commitMessage                                                 smithy.SchemaExtensions
+	eMergeBranchesBySquashInput_keepEmptyFolders                                              smithy.SchemaExtensions
+	eMergeBranchesBySquashInput_conflictResolution                                            smithy.SchemaExtensions
+	eMergeBranchesBySquashOutput                                                              smithy.SchemaExtensions
+	eMergeBranchesBySquashOutput_commitId                                                     smithy.SchemaExtensions
+	eMergeBranchesBySquashOutput_treeId                                                       smithy.SchemaExtensions
+	eMergeBranchesByThreeWayInput                                                             smithy.SchemaExtensions
+	eMergeBranchesByThreeWayInput_repositoryName                                              smithy.SchemaExtensions
+	eMergeBranchesByThreeWayInput_sourceCommitSpecifier                                       smithy.SchemaExtensions
+	eMergeBranchesByThreeWayInput_destinationCommitSpecifier                                  smithy.SchemaExtensions
+	eMergeBranchesByThreeWayInput_targetBranch                                                smithy.SchemaExtensions
+	eMergeBranchesByThreeWayInput_conflictDetailLevel                                         smithy.SchemaExtensions
+	eMergeBranchesByThreeWayInput_conflictResolutionStrategy                                  smithy.SchemaExtensions
+	eMergeBranchesByThreeWayInput_authorName                                                  smithy.SchemaExtensions
+	eMergeBranchesByThreeWayInput_email                                                       smithy.SchemaExtensions
+	eMergeBranchesByThreeWayInput_commitMessage                                               smithy.SchemaExtensions
+	eMergeBranchesByThreeWayInput_keepEmptyFolders                                            smithy.SchemaExtensions
+	eMergeBranchesByThreeWayInput_conflictResolution                                          smithy.SchemaExtensions
+	eMergeBranchesByThreeWayOutput                                                            smithy.SchemaExtensions
+	eMergeBranchesByThreeWayOutput_commitId                                                   smithy.SchemaExtensions
+	eMergeBranchesByThreeWayOutput_treeId                                                     smithy.SchemaExtensions
+	eMergePullRequestByFastForwardInput                                                       smithy.SchemaExtensions
+	eMergePullRequestByFastForwardInput_pullRequestId                                         smithy.SchemaExtensions
+	eMergePullRequestByFastForwardInput_repositoryName                                        smithy.SchemaExtensions
+	eMergePullRequestByFastForwardInput_sourceCommitId                                        smithy.SchemaExtensions
+	eMergePullRequestByFastForwardOutput                                                      smithy.SchemaExtensions
+	eMergePullRequestByFastForwardOutput_pullRequest                                          smithy.SchemaExtensions
+	eMergePullRequestBySquashInput                                                            smithy.SchemaExtensions
+	eMergePullRequestBySquashInput_pullRequestId                                              smithy.SchemaExtensions
+	eMergePullRequestBySquashInput_repositoryName                                             smithy.SchemaExtensions
+	eMergePullRequestBySquashInput_sourceCommitId                                             smithy.SchemaExtensions
+	eMergePullRequestBySquashInput_conflictDetailLevel                                        smithy.SchemaExtensions
+	eMergePullRequestBySquashInput_conflictResolutionStrategy                                 smithy.SchemaExtensions
+	eMergePullRequestBySquashInput_commitMessage                                              smithy.SchemaExtensions
+	eMergePullRequestBySquashInput_authorName                                                 smithy.SchemaExtensions
+	eMergePullRequestBySquashInput_email                                                      smithy.SchemaExtensions
+	eMergePullRequestBySquashInput_keepEmptyFolders                                           smithy.SchemaExtensions
+	eMergePullRequestBySquashInput_conflictResolution                                         smithy.SchemaExtensions
+	eMergePullRequestBySquashOutput                                                           smithy.SchemaExtensions
+	eMergePullRequestBySquashOutput_pullRequest                                               smithy.SchemaExtensions
+	eMergePullRequestByThreeWayInput                                                          smithy.SchemaExtensions
+	eMergePullRequestByThreeWayInput_pullRequestId                                            smithy.SchemaExtensions
+	eMergePullRequestByThreeWayInput_repositoryName                                           smithy.SchemaExtensions
+	eMergePullRequestByThreeWayInput_sourceCommitId                                           smithy.SchemaExtensions
+	eMergePullRequestByThreeWayInput_conflictDetailLevel                                      smithy.SchemaExtensions
+	eMergePullRequestByThreeWayInput_conflictResolutionStrategy                               smithy.SchemaExtensions
+	eMergePullRequestByThreeWayInput_commitMessage                                            smithy.SchemaExtensions
+	eMergePullRequestByThreeWayInput_authorName                                               smithy.SchemaExtensions
+	eMergePullRequestByThreeWayInput_email                                                    smithy.SchemaExtensions
+	eMergePullRequestByThreeWayInput_keepEmptyFolders                                         smithy.SchemaExtensions
+	eMergePullRequestByThreeWayInput_conflictResolution                                       smithy.SchemaExtensions
+	eMergePullRequestByThreeWayOutput                                                         smithy.SchemaExtensions
+	eMergePullRequestByThreeWayOutput_pullRequest                                             smithy.SchemaExtensions
+	eOverridePullRequestApprovalRulesInput                                                    smithy.SchemaExtensions
+	eOverridePullRequestApprovalRulesInput_pullRequestId                                      smithy.SchemaExtensions
+	eOverridePullRequestApprovalRulesInput_revisionId                                         smithy.SchemaExtensions
+	eOverridePullRequestApprovalRulesInput_overrideStatus                                     smithy.SchemaExtensions
+	ePostCommentForComparedCommitInput                                                        smithy.SchemaExtensions
+	ePostCommentForComparedCommitInput_repositoryName                                         smithy.SchemaExtensions
+	ePostCommentForComparedCommitInput_beforeCommitId                                         smithy.SchemaExtensions
+	ePostCommentForComparedCommitInput_afterCommitId                                          smithy.SchemaExtensions
+	ePostCommentForComparedCommitInput_location                                               smithy.SchemaExtensions
+	ePostCommentForComparedCommitInput_content                                                smithy.SchemaExtensions
+	ePostCommentForComparedCommitInput_clientRequestToken                                     smithy.SchemaExtensions
+	ePostCommentForComparedCommitOutput                                                       smithy.SchemaExtensions
+	ePostCommentForComparedCommitOutput_repositoryName                                        smithy.SchemaExtensions
+	ePostCommentForComparedCommitOutput_beforeCommitId                                        smithy.SchemaExtensions
+	ePostCommentForComparedCommitOutput_afterCommitId                                         smithy.SchemaExtensions
+	ePostCommentForComparedCommitOutput_beforeBlobId                                          smithy.SchemaExtensions
+	ePostCommentForComparedCommitOutput_afterBlobId                                           smithy.SchemaExtensions
+	ePostCommentForComparedCommitOutput_location                                              smithy.SchemaExtensions
+	ePostCommentForComparedCommitOutput_comment                                               smithy.SchemaExtensions
+	ePostCommentForPullRequestInput                                                           smithy.SchemaExtensions
+	ePostCommentForPullRequestInput_pullRequestId                                             smithy.SchemaExtensions
+	ePostCommentForPullRequestInput_repositoryName                                            smithy.SchemaExtensions
+	ePostCommentForPullRequestInput_beforeCommitId                                            smithy.SchemaExtensions
+	ePostCommentForPullRequestInput_afterCommitId                                             smithy.SchemaExtensions
+	ePostCommentForPullRequestInput_location                                                  smithy.SchemaExtensions
+	ePostCommentForPullRequestInput_content                                                   smithy.SchemaExtensions
+	ePostCommentForPullRequestInput_clientRequestToken                                        smithy.SchemaExtensions
+	ePostCommentForPullRequestOutput                                                          smithy.SchemaExtensions
+	ePostCommentForPullRequestOutput_repositoryName                                           smithy.SchemaExtensions
+	ePostCommentForPullRequestOutput_pullRequestId                                            smithy.SchemaExtensions
+	ePostCommentForPullRequestOutput_beforeCommitId                                           smithy.SchemaExtensions
+	ePostCommentForPullRequestOutput_afterCommitId                                            smithy.SchemaExtensions
+	ePostCommentForPullRequestOutput_beforeBlobId                                             smithy.SchemaExtensions
+	ePostCommentForPullRequestOutput_afterBlobId                                              smithy.SchemaExtensions
+	ePostCommentForPullRequestOutput_location                                                 smithy.SchemaExtensions
+	ePostCommentForPullRequestOutput_comment                                                  smithy.SchemaExtensions
+	ePostCommentReplyInput                                                                    smithy.SchemaExtensions
+	ePostCommentReplyInput_inReplyTo                                                          smithy.SchemaExtensions
+	ePostCommentReplyInput_clientRequestToken                                                 smithy.SchemaExtensions
+	ePostCommentReplyInput_content                                                            smithy.SchemaExtensions
+	ePostCommentReplyOutput                                                                   smithy.SchemaExtensions
+	ePostCommentReplyOutput_comment                                                           smithy.SchemaExtensions
+	ePutCommentReactionInput                                                                  smithy.SchemaExtensions
+	ePutCommentReactionInput_commentId                                                        smithy.SchemaExtensions
+	ePutCommentReactionInput_reactionValue                                                    smithy.SchemaExtensions
+	ePutFileInput                                                                             smithy.SchemaExtensions
+	ePutFileInput_repositoryName                                                              smithy.SchemaExtensions
+	ePutFileInput_branchName                                                                  smithy.SchemaExtensions
+	ePutFileInput_fileContent                                                                 smithy.SchemaExtensions
+	ePutFileInput_filePath                                                                    smithy.SchemaExtensions
+	ePutFileInput_fileMode                                                                    smithy.SchemaExtensions
+	ePutFileInput_parentCommitId                                                              smithy.SchemaExtensions
+	ePutFileInput_commitMessage                                                               smithy.SchemaExtensions
+	ePutFileInput_name                                                                        smithy.SchemaExtensions
+	ePutFileInput_email                                                                       smithy.SchemaExtensions
+	ePutFileOutput                                                                            smithy.SchemaExtensions
+	ePutFileOutput_commitId                                                                   smithy.SchemaExtensions
+	ePutFileOutput_blobId                                                                     smithy.SchemaExtensions
+	ePutFileOutput_treeId                                                                     smithy.SchemaExtensions
+	ePutRepositoryTriggersInput                                                               smithy.SchemaExtensions
+	ePutRepositoryTriggersInput_repositoryName                                                smithy.SchemaExtensions
+	ePutRepositoryTriggersInput_triggers                                                      smithy.SchemaExtensions
+	ePutRepositoryTriggersOutput                                                              smithy.SchemaExtensions
+	ePutRepositoryTriggersOutput_configurationId                                              smithy.SchemaExtensions
+	eTagResourceInput                                                                         smithy.SchemaExtensions
+	eTagResourceInput_resourceArn                                                             smithy.SchemaExtensions
+	eTagResourceInput_tags                                                                    smithy.SchemaExtensions
+	eTestRepositoryTriggersInput                                                              smithy.SchemaExtensions
+	eTestRepositoryTriggersInput_repositoryName                                               smithy.SchemaExtensions
+	eTestRepositoryTriggersInput_triggers                                                     smithy.SchemaExtensions
+	eTestRepositoryTriggersOutput                                                             smithy.SchemaExtensions
+	eTestRepositoryTriggersOutput_successfulExecutions                                        smithy.SchemaExtensions
+	eTestRepositoryTriggersOutput_failedExecutions                                            smithy.SchemaExtensions
+	eUntagResourceInput                                                                       smithy.SchemaExtensions
+	eUntagResourceInput_resourceArn                                                           smithy.SchemaExtensions
+	eUntagResourceInput_tagKeys                                                               smithy.SchemaExtensions
+	eUpdateApprovalRuleTemplateContentInput                                                   smithy.SchemaExtensions
+	eUpdateApprovalRuleTemplateContentInput_approvalRuleTemplateName                          smithy.SchemaExtensions
+	eUpdateApprovalRuleTemplateContentInput_newRuleContent                                    smithy.SchemaExtensions
+	eUpdateApprovalRuleTemplateContentInput_existingRuleContentSha256                         smithy.SchemaExtensions
+	eUpdateApprovalRuleTemplateContentOutput                                                  smithy.SchemaExtensions
+	eUpdateApprovalRuleTemplateContentOutput_approvalRuleTemplate                             smithy.SchemaExtensions
+	eUpdateApprovalRuleTemplateDescriptionInput                                               smithy.SchemaExtensions
+	eUpdateApprovalRuleTemplateDescriptionInput_approvalRuleTemplateName                      smithy.SchemaExtensions
+	eUpdateApprovalRuleTemplateDescriptionInput_approvalRuleTemplateDescription               smithy.SchemaExtensions
+	eUpdateApprovalRuleTemplateDescriptionOutput                                              smithy.SchemaExtensions
+	eUpdateApprovalRuleTemplateDescriptionOutput_approvalRuleTemplate                         smithy.SchemaExtensions
+	eUpdateApprovalRuleTemplateNameInput                                                      smithy.SchemaExtensions
+	eUpdateApprovalRuleTemplateNameInput_oldApprovalRuleTemplateName                          smithy.SchemaExtensions
+	eUpdateApprovalRuleTemplateNameInput_newApprovalRuleTemplateName                          smithy.SchemaExtensions
+	eUpdateApprovalRuleTemplateNameOutput                                                     smithy.SchemaExtensions
+	eUpdateApprovalRuleTemplateNameOutput_approvalRuleTemplate                                smithy.SchemaExtensions
+	eUpdateCommentInput                                                                       smithy.SchemaExtensions
+	eUpdateCommentInput_commentId                                                             smithy.SchemaExtensions
+	eUpdateCommentInput_content                                                               smithy.SchemaExtensions
+	eUpdateCommentOutput                                                                      smithy.SchemaExtensions
+	eUpdateCommentOutput_comment                                                              smithy.SchemaExtensions
+	eUpdateDefaultBranchInput                                                                 smithy.SchemaExtensions
+	eUpdateDefaultBranchInput_repositoryName                                                  smithy.SchemaExtensions
+	eUpdateDefaultBranchInput_defaultBranchName                                               smithy.SchemaExtensions
+	eUpdatePullRequestApprovalRuleContentInput                                                smithy.SchemaExtensions
+	eUpdatePullRequestApprovalRuleContentInput_pullRequestId                                  smithy.SchemaExtensions
+	eUpdatePullRequestApprovalRuleContentInput_approvalRuleName                               smithy.SchemaExtensions
+	eUpdatePullRequestApprovalRuleContentInput_existingRuleContentSha256                      smithy.SchemaExtensions
+	eUpdatePullRequestApprovalRuleContentInput_newRuleContent                                 smithy.SchemaExtensions
+	eUpdatePullRequestApprovalRuleContentOutput                                               smithy.SchemaExtensions
+	eUpdatePullRequestApprovalRuleContentOutput_approvalRule                                  smithy.SchemaExtensions
+	eUpdatePullRequestApprovalStateInput                                                      smithy.SchemaExtensions
+	eUpdatePullRequestApprovalStateInput_pullRequestId                                        smithy.SchemaExtensions
+	eUpdatePullRequestApprovalStateInput_revisionId                                           smithy.SchemaExtensions
+	eUpdatePullRequestApprovalStateInput_approvalState                                        smithy.SchemaExtensions
+	eUpdatePullRequestDescriptionInput                                                        smithy.SchemaExtensions
+	eUpdatePullRequestDescriptionInput_pullRequestId                                          smithy.SchemaExtensions
+	eUpdatePullRequestDescriptionInput_description                                            smithy.SchemaExtensions
+	eUpdatePullRequestDescriptionOutput                                                       smithy.SchemaExtensions
+	eUpdatePullRequestDescriptionOutput_pullRequest                                           smithy.SchemaExtensions
+	eUpdatePullRequestStatusInput                                                             smithy.SchemaExtensions
+	eUpdatePullRequestStatusInput_pullRequestId                                               smithy.SchemaExtensions
+	eUpdatePullRequestStatusInput_pullRequestStatus                                           smithy.SchemaExtensions
+	eUpdatePullRequestStatusOutput                                                            smithy.SchemaExtensions
+	eUpdatePullRequestStatusOutput_pullRequest                                                smithy.SchemaExtensions
+	eUpdatePullRequestTitleInput                                                              smithy.SchemaExtensions
+	eUpdatePullRequestTitleInput_pullRequestId                                                smithy.SchemaExtensions
+	eUpdatePullRequestTitleInput_title                                                        smithy.SchemaExtensions
+	eUpdatePullRequestTitleOutput                                                             smithy.SchemaExtensions
+	eUpdatePullRequestTitleOutput_pullRequest                                                 smithy.SchemaExtensions
+	eUpdateRepositoryDescriptionInput                                                         smithy.SchemaExtensions
+	eUpdateRepositoryDescriptionInput_repositoryName                                          smithy.SchemaExtensions
+	eUpdateRepositoryDescriptionInput_repositoryDescription                                   smithy.SchemaExtensions
+	eUpdateRepositoryEncryptionKeyInput                                                       smithy.SchemaExtensions
+	eUpdateRepositoryEncryptionKeyInput_repositoryName                                        smithy.SchemaExtensions
+	eUpdateRepositoryEncryptionKeyInput_kmsKeyId                                              smithy.SchemaExtensions
+	eUpdateRepositoryEncryptionKeyOutput                                                      smithy.SchemaExtensions
+	eUpdateRepositoryEncryptionKeyOutput_repositoryId                                         smithy.SchemaExtensions
+	eUpdateRepositoryEncryptionKeyOutput_kmsKeyId                                             smithy.SchemaExtensions
+	eUpdateRepositoryEncryptionKeyOutput_originalKmsKeyId                                     smithy.SchemaExtensions
+	eUpdateRepositoryNameInput                                                                smithy.SchemaExtensions
+	eUpdateRepositoryNameInput_oldName                                                        smithy.SchemaExtensions
+	eUpdateRepositoryNameInput_newName                                                        smithy.SchemaExtensions
+)
 
 var (
 	iAssociateApprovalRuleTemplateWithRepository                      = smithy.ShapeID{Namespace: "com.amazonaws.codecommit", Name: "AssociateApprovalRuleTemplateWithRepository"}
@@ -1165,1640 +2797,1640 @@ var mUpdateRepositoryEncryptionKeyInput = smithy.SchemaMembers{List: []*smithy.S
 var mUpdateRepositoryEncryptionKeyOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRepositoryEncryptionKeyOutput_repositoryId, &sUpdateRepositoryEncryptionKeyOutput_kmsKeyId, &sUpdateRepositoryEncryptionKeyOutput_originalKmsKeyId}}
 var mUpdateRepositoryNameInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRepositoryNameInput_oldName, &sUpdateRepositoryNameInput_newName}}
 
-var sAssociateApprovalRuleTemplateWithRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateApprovalRuleTemplateWithRepository, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sBatchAssociateApprovalRuleTemplateWithRepositories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateApprovalRuleTemplateWithRepositories, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sBatchDescribeMergeConflicts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDescribeMergeConflicts, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sBatchDisassociateApprovalRuleTemplateFromRepositories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateApprovalRuleTemplateFromRepositories, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sBatchGetCommits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetCommits, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sBatchGetRepositories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetRepositories, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sCreateApprovalRuleTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApprovalRuleTemplate, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sCreateBranch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBranch, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sCreateCommit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCommit, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sCreatePullRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePullRequest, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sCreatePullRequestApprovalRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePullRequestApprovalRule, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sCreateRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRepository, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sCreateUnreferencedMergeCommit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUnreferencedMergeCommit, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sDeleteApprovalRuleTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApprovalRuleTemplate, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sDeleteBranch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBranch, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sDeleteCommentContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCommentContent, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sDeleteFile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFile, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sDeletePullRequestApprovalRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePullRequestApprovalRule, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sDeleteRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRepository, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sDescribeMergeConflicts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMergeConflicts, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var sDescribePullRequestEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePullRequestEvents, Type: smithy.ShapeTypeOperation, Ext: &ext[20]})
-var sDisassociateApprovalRuleTemplateFromRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateApprovalRuleTemplateFromRepository, Type: smithy.ShapeTypeOperation, Ext: &ext[21]})
-var sEvaluatePullRequestApprovalRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluatePullRequestApprovalRules, Type: smithy.ShapeTypeOperation, Ext: &ext[22]})
-var sGetApprovalRuleTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApprovalRuleTemplate, Type: smithy.ShapeTypeOperation, Ext: &ext[23]})
-var sGetBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBlob, Type: smithy.ShapeTypeOperation, Ext: &ext[24]})
-var sGetBlobDifferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBlobDifferences, Type: smithy.ShapeTypeOperation, Ext: &ext[25]})
-var sGetBranch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBranch, Type: smithy.ShapeTypeOperation, Ext: &ext[26]})
-var sGetComment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComment, Type: smithy.ShapeTypeOperation, Ext: &ext[27]})
-var sGetCommentReactions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommentReactions, Type: smithy.ShapeTypeOperation, Ext: &ext[28]})
-var sGetCommentsForComparedCommit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommentsForComparedCommit, Type: smithy.ShapeTypeOperation, Ext: &ext[29]})
-var sGetCommentsForPullRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommentsForPullRequest, Type: smithy.ShapeTypeOperation, Ext: &ext[30]})
-var sGetCommit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommit, Type: smithy.ShapeTypeOperation, Ext: &ext[31]})
-var sGetDifferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDifferences, Type: smithy.ShapeTypeOperation, Ext: &ext[32]})
-var sGetFile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFile, Type: smithy.ShapeTypeOperation, Ext: &ext[33]})
-var sGetFolder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFolder, Type: smithy.ShapeTypeOperation, Ext: &ext[34]})
-var sGetMergeCommit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMergeCommit, Type: smithy.ShapeTypeOperation, Ext: &ext[35]})
-var sGetMergeConflicts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMergeConflicts, Type: smithy.ShapeTypeOperation, Ext: &ext[36]})
-var sGetMergeOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMergeOptions, Type: smithy.ShapeTypeOperation, Ext: &ext[37]})
-var sGetPullRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPullRequest, Type: smithy.ShapeTypeOperation, Ext: &ext[38]})
-var sGetPullRequestApprovalStates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPullRequestApprovalStates, Type: smithy.ShapeTypeOperation, Ext: &ext[39]})
-var sGetPullRequestOverrideState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPullRequestOverrideState, Type: smithy.ShapeTypeOperation, Ext: &ext[40]})
-var sGetRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepository, Type: smithy.ShapeTypeOperation, Ext: &ext[41]})
-var sGetRepositoryTriggers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositoryTriggers, Type: smithy.ShapeTypeOperation, Ext: &ext[42]})
-var sListApprovalRuleTemplates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApprovalRuleTemplates, Type: smithy.ShapeTypeOperation, Ext: &ext[43]})
-var sListAssociatedApprovalRuleTemplatesForRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedApprovalRuleTemplatesForRepository, Type: smithy.ShapeTypeOperation, Ext: &ext[44]})
-var sListBranches = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBranches, Type: smithy.ShapeTypeOperation, Ext: &ext[45]})
-var sListFileCommitHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFileCommitHistory, Type: smithy.ShapeTypeOperation, Ext: &ext[46]})
-var sListPullRequests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPullRequests, Type: smithy.ShapeTypeOperation, Ext: &ext[47]})
-var sListRepositories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositories, Type: smithy.ShapeTypeOperation, Ext: &ext[48]})
-var sListRepositoriesForApprovalRuleTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositoriesForApprovalRuleTemplate, Type: smithy.ShapeTypeOperation, Ext: &ext[49]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &ext[50]})
-var sMergeBranchesByFastForward = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeBranchesByFastForward, Type: smithy.ShapeTypeOperation, Ext: &ext[51]})
-var sMergeBranchesBySquash = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeBranchesBySquash, Type: smithy.ShapeTypeOperation, Ext: &ext[52]})
-var sMergeBranchesByThreeWay = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeBranchesByThreeWay, Type: smithy.ShapeTypeOperation, Ext: &ext[53]})
-var sMergePullRequestByFastForward = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergePullRequestByFastForward, Type: smithy.ShapeTypeOperation, Ext: &ext[54]})
-var sMergePullRequestBySquash = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergePullRequestBySquash, Type: smithy.ShapeTypeOperation, Ext: &ext[55]})
-var sMergePullRequestByThreeWay = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergePullRequestByThreeWay, Type: smithy.ShapeTypeOperation, Ext: &ext[56]})
-var sOverridePullRequestApprovalRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOverridePullRequestApprovalRules, Type: smithy.ShapeTypeOperation, Ext: &ext[57]})
-var sPostCommentForComparedCommit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostCommentForComparedCommit, Type: smithy.ShapeTypeOperation, Ext: &ext[58]})
-var sPostCommentForPullRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostCommentForPullRequest, Type: smithy.ShapeTypeOperation, Ext: &ext[59]})
-var sPostCommentReply = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostCommentReply, Type: smithy.ShapeTypeOperation, Ext: &ext[60]})
-var sPutCommentReaction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCommentReaction, Type: smithy.ShapeTypeOperation, Ext: &ext[61]})
-var sPutFile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutFile, Type: smithy.ShapeTypeOperation, Ext: &ext[62]})
-var sPutRepositoryTriggers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRepositoryTriggers, Type: smithy.ShapeTypeOperation, Ext: &ext[63]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[64]})
-var sTestRepositoryTriggers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestRepositoryTriggers, Type: smithy.ShapeTypeOperation, Ext: &ext[65]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[66]})
-var sUpdateApprovalRuleTemplateContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApprovalRuleTemplateContent, Type: smithy.ShapeTypeOperation, Ext: &ext[67]})
-var sUpdateApprovalRuleTemplateDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApprovalRuleTemplateDescription, Type: smithy.ShapeTypeOperation, Ext: &ext[68]})
-var sUpdateApprovalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApprovalRuleTemplateName, Type: smithy.ShapeTypeOperation, Ext: &ext[69]})
-var sUpdateComment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComment, Type: smithy.ShapeTypeOperation, Ext: &ext[70]})
-var sUpdateDefaultBranch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDefaultBranch, Type: smithy.ShapeTypeOperation, Ext: &ext[71]})
-var sUpdatePullRequestApprovalRuleContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestApprovalRuleContent, Type: smithy.ShapeTypeOperation, Ext: &ext[72]})
-var sUpdatePullRequestApprovalState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestApprovalState, Type: smithy.ShapeTypeOperation, Ext: &ext[73]})
-var sUpdatePullRequestDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestDescription, Type: smithy.ShapeTypeOperation, Ext: &ext[74]})
-var sUpdatePullRequestStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestStatus, Type: smithy.ShapeTypeOperation, Ext: &ext[75]})
-var sUpdatePullRequestTitle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestTitle, Type: smithy.ShapeTypeOperation, Ext: &ext[76]})
-var sUpdateRepositoryDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRepositoryDescription, Type: smithy.ShapeTypeOperation, Ext: &ext[77]})
-var sUpdateRepositoryEncryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRepositoryEncryptionKey, Type: smithy.ShapeTypeOperation, Ext: &ext[78]})
-var sUpdateRepositoryName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRepositoryName, Type: smithy.ShapeTypeOperation, Ext: &ext[79]})
-var s_CodeCommit_20150413 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeCommit_20150413, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &ext[80]})
-var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[81]})
-var sActorDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActorDoesNotExistException, Members: &mActorDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[82]})
-var s_AdditionalData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdditionalData, Type: smithy.ShapeTypeString, Ext: &ext[84]})
-var sApproval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApproval, Members: &mApproval, Type: smithy.ShapeTypeStructure, Ext: &ext[85]})
-var s_ApprovalList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalList, Members: &m_ApprovalList, Type: smithy.ShapeTypeList, Ext: &ext[88]})
-var sApprovalRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalRule, Members: &mApprovalRule, Type: smithy.ShapeTypeStructure, Ext: &ext[90]})
-var s_ApprovalRuleContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalRuleContent, Type: smithy.ShapeTypeString, Ext: &ext[99]})
-var sApprovalRuleContentRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalRuleContentRequiredException, Members: &mApprovalRuleContentRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[100]})
-var sApprovalRuleDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalRuleDoesNotExistException, Members: &mApprovalRuleDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[102]})
-var sApprovalRuleEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalRuleEventMetadata, Members: &mApprovalRuleEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[104]})
-var s_ApprovalRuleId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalRuleId, Type: smithy.ShapeTypeString, Ext: &ext[108]})
-var s_ApprovalRuleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalRuleName, Type: smithy.ShapeTypeString, Ext: &ext[109]})
-var sApprovalRuleNameAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalRuleNameAlreadyExistsException, Members: &mApprovalRuleNameAlreadyExistsException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[110]})
-var sApprovalRuleNameRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalRuleNameRequiredException, Members: &mApprovalRuleNameRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[112]})
-var sApprovalRuleOverriddenEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalRuleOverriddenEventMetadata, Members: &mApprovalRuleOverriddenEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[114]})
-var s_ApprovalRulesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalRulesList, Members: &m_ApprovalRulesList, Type: smithy.ShapeTypeList, Ext: &ext[117]})
-var s_ApprovalRulesNotSatisfiedList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalRulesNotSatisfiedList, Members: &m_ApprovalRulesNotSatisfiedList, Type: smithy.ShapeTypeList, Ext: &ext[119]})
-var s_ApprovalRulesSatisfiedList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalRulesSatisfiedList, Members: &m_ApprovalRulesSatisfiedList, Type: smithy.ShapeTypeList, Ext: &ext[121]})
-var sApprovalRuleTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalRuleTemplate, Members: &mApprovalRuleTemplate, Type: smithy.ShapeTypeStructure, Ext: &ext[123]})
-var s_ApprovalRuleTemplateContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalRuleTemplateContent, Type: smithy.ShapeTypeString, Ext: &ext[132]})
-var sApprovalRuleTemplateContentRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalRuleTemplateContentRequiredException, Members: &mApprovalRuleTemplateContentRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[133]})
-var s_ApprovalRuleTemplateDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalRuleTemplateDescription, Type: smithy.ShapeTypeString, Ext: &ext[135]})
-var sApprovalRuleTemplateDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalRuleTemplateDoesNotExistException, Members: &mApprovalRuleTemplateDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[136]})
-var s_ApprovalRuleTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalRuleTemplateId, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var sApprovalRuleTemplateInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalRuleTemplateInUseException, Members: &mApprovalRuleTemplateInUseException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[139]})
-var s_ApprovalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &ext[141]})
-var sApprovalRuleTemplateNameAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalRuleTemplateNameAlreadyExistsException, Members: &mApprovalRuleTemplateNameAlreadyExistsException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[142]})
-var s_ApprovalRuleTemplateNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalRuleTemplateNameList, Members: &m_ApprovalRuleTemplateNameList, Type: smithy.ShapeTypeList, Ext: &ext[144]})
-var sApprovalRuleTemplateNameRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalRuleTemplateNameRequiredException, Members: &mApprovalRuleTemplateNameRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[146]})
-var sApprovalState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalState, Members: &mApprovalState, Type: smithy.ShapeTypeEnum, Ext: &ext[148]})
-var sApprovalStateChangedEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalStateChangedEventMetadata, Members: &mApprovalStateChangedEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[151]})
-var sApprovalStateRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalStateRequiredException, Members: &mApprovalStateRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[154]})
-var s_Approved = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Approved, Type: smithy.ShapeTypeBoolean, Ext: &ext[156]})
-var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[157]})
-var sAuthorDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthorDoesNotExistException, Members: &mAuthorDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[158]})
-var sBatchAssociateApprovalRuleTemplateWithRepositoriesError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateApprovalRuleTemplateWithRepositoriesError, Members: &mBatchAssociateApprovalRuleTemplateWithRepositoriesError, Type: smithy.ShapeTypeStructure, Ext: &ext[160]})
-var s_BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList, Members: &m_BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList, Type: smithy.ShapeTypeList, Ext: &ext[164]})
-var sBatchDescribeMergeConflictsError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDescribeMergeConflictsError, Members: &mBatchDescribeMergeConflictsError, Type: smithy.ShapeTypeStructure, Ext: &ext[166]})
-var s_BatchDescribeMergeConflictsErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchDescribeMergeConflictsErrors, Members: &m_BatchDescribeMergeConflictsErrors, Type: smithy.ShapeTypeList, Ext: &ext[170]})
-var sBatchDisassociateApprovalRuleTemplateFromRepositoriesError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateApprovalRuleTemplateFromRepositoriesError, Members: &mBatchDisassociateApprovalRuleTemplateFromRepositoriesError, Type: smithy.ShapeTypeStructure, Ext: &ext[172]})
-var s_BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList, Members: &m_BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList, Type: smithy.ShapeTypeList, Ext: &ext[176]})
-var sBatchGetCommitsError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetCommitsError, Members: &mBatchGetCommitsError, Type: smithy.ShapeTypeStructure, Ext: &ext[178]})
-var s_BatchGetCommitsErrorsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetCommitsErrorsList, Members: &m_BatchGetCommitsErrorsList, Type: smithy.ShapeTypeList, Ext: &ext[182]})
-var sBatchGetRepositoriesError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetRepositoriesError, Members: &mBatchGetRepositoriesError, Type: smithy.ShapeTypeStructure, Ext: &ext[184]})
-var sBatchGetRepositoriesErrorCodeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetRepositoriesErrorCodeEnum, Members: &mBatchGetRepositoriesErrorCodeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[189]})
-var s_BatchGetRepositoriesErrorsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetRepositoriesErrorsList, Members: &m_BatchGetRepositoriesErrorsList, Type: smithy.ShapeTypeList, Ext: &ext[196]})
-var sBeforeCommitIdAndAfterCommitIdAreSameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBeforeCommitIdAndAfterCommitIdAreSameException, Members: &mBeforeCommitIdAndAfterCommitIdAreSameException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[198]})
-var s_blob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_blob, Type: smithy.ShapeTypeBlob, Ext: &ext[200]})
-var sBlobIdDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlobIdDoesNotExistException, Members: &mBlobIdDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[201]})
-var sBlobIdRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlobIdRequiredException, Members: &mBlobIdRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[203]})
-var sBlobMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlobMetadata, Members: &mBlobMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[205]})
-var sBranchDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBranchDoesNotExistException, Members: &mBranchDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[209]})
-var sBranchInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBranchInfo, Members: &mBranchInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[211]})
-var s_BranchName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &ext[214]})
-var sBranchNameExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBranchNameExistsException, Members: &mBranchNameExistsException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[215]})
-var sBranchNameIsTagNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBranchNameIsTagNameException, Members: &mBranchNameIsTagNameException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[217]})
-var s_BranchNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BranchNameList, Members: &m_BranchNameList, Type: smithy.ShapeTypeList, Ext: &ext[219]})
-var sBranchNameRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBranchNameRequiredException, Members: &mBranchNameRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[221]})
-var s_CallerReactions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CallerReactions, Members: &m_CallerReactions, Type: smithy.ShapeTypeList, Ext: &ext[223]})
-var sCannotDeleteApprovalRuleFromTemplateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCannotDeleteApprovalRuleFromTemplateException, Members: &mCannotDeleteApprovalRuleFromTemplateException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[225]})
-var sCannotModifyApprovalRuleFromTemplateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCannotModifyApprovalRuleFromTemplateException, Members: &mCannotModifyApprovalRuleFromTemplateException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[227]})
-var s_CapitalBoolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapitalBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[229]})
-var sChangeTypeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangeTypeEnum, Members: &mChangeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[230]})
-var s_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString, Ext: &ext[234]})
-var sClientRequestTokenRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientRequestTokenRequiredException, Members: &mClientRequestTokenRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[235]})
-var s_CloneUrlHttp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloneUrlHttp, Type: smithy.ShapeTypeString, Ext: &ext[237]})
-var s_CloneUrlSsh = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloneUrlSsh, Type: smithy.ShapeTypeString, Ext: &ext[238]})
-var sComment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComment, Members: &mComment, Type: smithy.ShapeTypeStructure, Ext: &ext[239]})
-var sCommentContentRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommentContentRequiredException, Members: &mCommentContentRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[250]})
-var sCommentContentSizeLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommentContentSizeLimitExceededException, Members: &mCommentContentSizeLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[252]})
-var sCommentDeletedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommentDeletedException, Members: &mCommentDeletedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[254]})
-var sCommentDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommentDoesNotExistException, Members: &mCommentDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[256]})
-var s_CommentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommentId, Type: smithy.ShapeTypeString, Ext: &ext[258]})
-var sCommentIdRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommentIdRequiredException, Members: &mCommentIdRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[259]})
-var sCommentNotCreatedByCallerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommentNotCreatedByCallerException, Members: &mCommentNotCreatedByCallerException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[261]})
-var s_Comments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Comments, Members: &m_Comments, Type: smithy.ShapeTypeList, Ext: &ext[263]})
-var sCommentsForComparedCommit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommentsForComparedCommit, Members: &mCommentsForComparedCommit, Type: smithy.ShapeTypeStructure, Ext: &ext[265]})
-var s_CommentsForComparedCommitData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommentsForComparedCommitData, Members: &m_CommentsForComparedCommitData, Type: smithy.ShapeTypeList, Ext: &ext[273]})
-var sCommentsForPullRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommentsForPullRequest, Members: &mCommentsForPullRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[275]})
-var s_CommentsForPullRequestData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommentsForPullRequestData, Members: &m_CommentsForPullRequestData, Type: smithy.ShapeTypeList, Ext: &ext[284]})
-var sCommit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommit, Members: &mCommit, Type: smithy.ShapeTypeStructure, Ext: &ext[286]})
-var sCommitDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommitDoesNotExistException, Members: &mCommitDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[294]})
-var s_CommitId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[296]})
-var sCommitIdDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommitIdDoesNotExistException, Members: &mCommitIdDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[297]})
-var sCommitIdRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommitIdRequiredException, Members: &mCommitIdRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[299]})
-var s_CommitIdsInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommitIdsInputList, Members: &m_CommitIdsInputList, Type: smithy.ShapeTypeList, Ext: &ext[301]})
-var sCommitIdsLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommitIdsLimitExceededException, Members: &mCommitIdsLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[303]})
-var sCommitIdsListRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommitIdsListRequiredException, Members: &mCommitIdsListRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[305]})
-var sCommitMessageLengthExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommitMessageLengthExceededException, Members: &mCommitMessageLengthExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[307]})
-var s_CommitName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &ext[309]})
-var s_CommitObjectsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommitObjectsList, Members: &m_CommitObjectsList, Type: smithy.ShapeTypeList, Ext: &ext[310]})
-var sCommitRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommitRequiredException, Members: &mCommitRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[312]})
-var sConcurrentReferenceUpdateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentReferenceUpdateException, Members: &mConcurrentReferenceUpdateException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[314]})
-var sConflict = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflict, Members: &mConflict, Type: smithy.ShapeTypeStructure, Ext: &ext[316]})
-var sConflictDetailLevelTypeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictDetailLevelTypeEnum, Members: &mConflictDetailLevelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[319]})
-var sConflictMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictMetadata, Members: &mConflictMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[322]})
-var s_ConflictMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConflictMetadataList, Members: &m_ConflictMetadataList, Type: smithy.ShapeTypeList, Ext: &ext[333]})
-var sConflictResolution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictResolution, Members: &mConflictResolution, Type: smithy.ShapeTypeStructure, Ext: &ext[335]})
-var sConflictResolutionStrategyTypeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictResolutionStrategyTypeEnum, Members: &mConflictResolutionStrategyTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[339]})
-var s_Conflicts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Conflicts, Members: &m_Conflicts, Type: smithy.ShapeTypeList, Ext: &ext[344]})
-var s_Content = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Content, Type: smithy.ShapeTypeString, Ext: &ext[346]})
-var s_Count = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &ext[347]})
-var s_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreationDate, Type: smithy.ShapeTypeTimestamp, Ext: &ext[348]})
-var s_Date = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Date, Type: smithy.ShapeTypeString, Ext: &ext[349]})
-var sDefaultBranchCannotBeDeletedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefaultBranchCannotBeDeletedException, Members: &mDefaultBranchCannotBeDeletedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[350]})
-var s_DeleteFileEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeleteFileEntries, Members: &m_DeleteFileEntries, Type: smithy.ShapeTypeList, Ext: &ext[352]})
-var sDeleteFileEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFileEntry, Members: &mDeleteFileEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[354]})
-var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[356]})
-var sDiffChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiffChange, Members: &mDiffChange, Type: smithy.ShapeTypeStructure, Ext: &ext[357]})
-var s_DiffChangeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DiffChangeList, Members: &m_DiffChangeList, Type: smithy.ShapeTypeList, Ext: &ext[362]})
-var sDiffChangeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiffChangeType, Members: &mDiffChangeType, Type: smithy.ShapeTypeEnum, Ext: &ext[364]})
-var s_DiffContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DiffContext, Type: smithy.ShapeTypeInteger, Ext: &ext[368]})
-var sDifference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDifference, Members: &mDifference, Type: smithy.ShapeTypeStructure, Ext: &ext[369]})
-var s_DifferenceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DifferenceList, Members: &m_DifferenceList, Type: smithy.ShapeTypeList, Ext: &ext[373]})
-var sDiffHunk = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiffHunk, Members: &mDiffHunk, Type: smithy.ShapeTypeStructure, Ext: &ext[375]})
-var s_DiffHunkList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DiffHunkList, Members: &m_DiffHunkList, Type: smithy.ShapeTypeList, Ext: &ext[381]})
-var sDirectoryNameConflictsWithFileNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryNameConflictsWithFileNameException, Members: &mDirectoryNameConflictsWithFileNameException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[383]})
-var s_Email = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Email, Type: smithy.ShapeTypeString, Ext: &ext[385]})
-var sEncryptionIntegrityChecksFailedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionIntegrityChecksFailedException, Members: &mEncryptionIntegrityChecksFailedException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[386]})
-var sEncryptionKeyAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionKeyAccessDeniedException, Members: &mEncryptionKeyAccessDeniedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[388]})
-var sEncryptionKeyDisabledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionKeyDisabledException, Members: &mEncryptionKeyDisabledException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[390]})
-var sEncryptionKeyInvalidIdException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionKeyInvalidIdException, Members: &mEncryptionKeyInvalidIdException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[392]})
-var sEncryptionKeyInvalidUsageException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionKeyInvalidUsageException, Members: &mEncryptionKeyInvalidUsageException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[394]})
-var sEncryptionKeyNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionKeyNotFoundException, Members: &mEncryptionKeyNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[396]})
-var sEncryptionKeyRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionKeyRequiredException, Members: &mEncryptionKeyRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[398]})
-var sEncryptionKeyUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionKeyUnavailableException, Members: &mEncryptionKeyUnavailableException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[400]})
-var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[402]})
-var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[403]})
-var sEvaluation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluation, Members: &mEvaluation, Type: smithy.ShapeTypeStructure, Ext: &ext[404]})
-var s_EventDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventDate, Type: smithy.ShapeTypeTimestamp, Ext: &ext[409]})
-var s_ExceptionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionName, Type: smithy.ShapeTypeString, Ext: &ext[410]})
-var sFile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFile, Members: &mFile, Type: smithy.ShapeTypeStructure, Ext: &ext[411]})
-var s_FileContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileContent, Type: smithy.ShapeTypeBlob, Ext: &ext[416]})
-var sFileContentAndSourceFileSpecifiedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileContentAndSourceFileSpecifiedException, Members: &mFileContentAndSourceFileSpecifiedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[417]})
-var sFileContentRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileContentRequiredException, Members: &mFileContentRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[419]})
-var sFileContentSizeLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileContentSizeLimitExceededException, Members: &mFileContentSizeLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[421]})
-var sFileDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileDoesNotExistException, Members: &mFileDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[423]})
-var sFileEntryRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileEntryRequiredException, Members: &mFileEntryRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[425]})
-var s_FileList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileList, Members: &m_FileList, Type: smithy.ShapeTypeList, Ext: &ext[427]})
-var sFileMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileMetadata, Members: &mFileMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[429]})
-var sFileModeRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileModeRequiredException, Members: &mFileModeRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[433]})
-var sFileModes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileModes, Members: &mFileModes, Type: smithy.ShapeTypeStructure, Ext: &ext[435]})
-var sFileModeTypeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileModeTypeEnum, Members: &mFileModeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[439]})
-var sFileNameConflictsWithDirectoryNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileNameConflictsWithDirectoryNameException, Members: &mFileNameConflictsWithDirectoryNameException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[443]})
-var sFilePathConflictsWithSubmodulePathException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilePathConflictsWithSubmodulePathException, Members: &mFilePathConflictsWithSubmodulePathException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[445]})
-var s_FilePaths = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilePaths, Members: &m_FilePaths, Type: smithy.ShapeTypeList, Ext: &ext[447]})
-var s_FileSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileSize, Type: smithy.ShapeTypeLong, Ext: &ext[449]})
-var sFileSizes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileSizes, Members: &mFileSizes, Type: smithy.ShapeTypeStructure, Ext: &ext[450]})
-var s_FilesMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilesMetadata, Members: &m_FilesMetadata, Type: smithy.ShapeTypeList, Ext: &ext[454]})
-var sFileTooLargeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileTooLargeException, Members: &mFileTooLargeException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[456]})
-var sFileVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileVersion, Members: &mFileVersion, Type: smithy.ShapeTypeStructure, Ext: &ext[458]})
-var sFolder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFolder, Members: &mFolder, Type: smithy.ShapeTypeStructure, Ext: &ext[463]})
-var sFolderContentSizeLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFolderContentSizeLimitExceededException, Members: &mFolderContentSizeLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[467]})
-var sFolderDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFolderDoesNotExistException, Members: &mFolderDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[469]})
-var s_FolderList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FolderList, Members: &m_FolderList, Type: smithy.ShapeTypeList, Ext: &ext[471]})
-var s_HunkContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HunkContent, Type: smithy.ShapeTypeString, Ext: &ext[473]})
-var sIdempotencyParameterMismatchException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdempotencyParameterMismatchException, Members: &mIdempotencyParameterMismatchException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[474]})
-var s_IgnoreWhiteSpaces = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IgnoreWhiteSpaces, Type: smithy.ShapeTypeBoolean, Ext: &ext[476]})
-var sInvalidActorArnException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidActorArnException, Members: &mInvalidActorArnException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[477]})
-var sInvalidApprovalRuleContentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidApprovalRuleContentException, Members: &mInvalidApprovalRuleContentException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[479]})
-var sInvalidApprovalRuleNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidApprovalRuleNameException, Members: &mInvalidApprovalRuleNameException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[481]})
-var sInvalidApprovalRuleTemplateContentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidApprovalRuleTemplateContentException, Members: &mInvalidApprovalRuleTemplateContentException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[483]})
-var sInvalidApprovalRuleTemplateDescriptionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidApprovalRuleTemplateDescriptionException, Members: &mInvalidApprovalRuleTemplateDescriptionException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[485]})
-var sInvalidApprovalRuleTemplateNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidApprovalRuleTemplateNameException, Members: &mInvalidApprovalRuleTemplateNameException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[487]})
-var sInvalidApprovalStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidApprovalStateException, Members: &mInvalidApprovalStateException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[489]})
-var sInvalidAuthorArnException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidAuthorArnException, Members: &mInvalidAuthorArnException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[491]})
-var sInvalidBlobIdException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidBlobIdException, Members: &mInvalidBlobIdException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[493]})
-var sInvalidBranchNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidBranchNameException, Members: &mInvalidBranchNameException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[495]})
-var sInvalidClientRequestTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidClientRequestTokenException, Members: &mInvalidClientRequestTokenException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[497]})
-var sInvalidCommentIdException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidCommentIdException, Members: &mInvalidCommentIdException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[499]})
-var sInvalidCommitException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidCommitException, Members: &mInvalidCommitException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[501]})
-var sInvalidCommitIdException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidCommitIdException, Members: &mInvalidCommitIdException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[503]})
-var sInvalidConflictDetailLevelException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidConflictDetailLevelException, Members: &mInvalidConflictDetailLevelException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[505]})
-var sInvalidConflictResolutionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidConflictResolutionException, Members: &mInvalidConflictResolutionException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[507]})
-var sInvalidConflictResolutionStrategyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidConflictResolutionStrategyException, Members: &mInvalidConflictResolutionStrategyException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[509]})
-var sInvalidContinuationTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidContinuationTokenException, Members: &mInvalidContinuationTokenException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[511]})
-var sInvalidDeletionParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidDeletionParameterException, Members: &mInvalidDeletionParameterException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[513]})
-var sInvalidDescriptionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidDescriptionException, Members: &mInvalidDescriptionException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[515]})
-var sInvalidDestinationCommitSpecifierException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidDestinationCommitSpecifierException, Members: &mInvalidDestinationCommitSpecifierException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[517]})
-var sInvalidEmailException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidEmailException, Members: &mInvalidEmailException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[519]})
-var sInvalidFileLocationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidFileLocationException, Members: &mInvalidFileLocationException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[521]})
-var sInvalidFileModeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidFileModeException, Members: &mInvalidFileModeException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[523]})
-var sInvalidFilePositionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidFilePositionException, Members: &mInvalidFilePositionException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[525]})
-var sInvalidMaxConflictFilesException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidMaxConflictFilesException, Members: &mInvalidMaxConflictFilesException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[527]})
-var sInvalidMaxMergeHunksException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidMaxMergeHunksException, Members: &mInvalidMaxMergeHunksException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[529]})
-var sInvalidMaxResultsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidMaxResultsException, Members: &mInvalidMaxResultsException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[531]})
-var sInvalidMergeOptionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidMergeOptionException, Members: &mInvalidMergeOptionException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[533]})
-var sInvalidOrderException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidOrderException, Members: &mInvalidOrderException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[535]})
-var sInvalidOverrideStatusException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidOverrideStatusException, Members: &mInvalidOverrideStatusException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[537]})
-var sInvalidParentCommitIdException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParentCommitIdException, Members: &mInvalidParentCommitIdException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[539]})
-var sInvalidPathException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidPathException, Members: &mInvalidPathException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[541]})
-var sInvalidPullRequestEventTypeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidPullRequestEventTypeException, Members: &mInvalidPullRequestEventTypeException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[543]})
-var sInvalidPullRequestIdException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidPullRequestIdException, Members: &mInvalidPullRequestIdException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[545]})
-var sInvalidPullRequestStatusException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidPullRequestStatusException, Members: &mInvalidPullRequestStatusException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[547]})
-var sInvalidPullRequestStatusUpdateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidPullRequestStatusUpdateException, Members: &mInvalidPullRequestStatusUpdateException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[549]})
-var sInvalidReactionUserArnException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidReactionUserArnException, Members: &mInvalidReactionUserArnException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[551]})
-var sInvalidReactionValueException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidReactionValueException, Members: &mInvalidReactionValueException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[553]})
-var sInvalidReferenceNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidReferenceNameException, Members: &mInvalidReferenceNameException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[555]})
-var sInvalidRelativeFileVersionEnumException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRelativeFileVersionEnumException, Members: &mInvalidRelativeFileVersionEnumException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[557]})
-var sInvalidReplacementContentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidReplacementContentException, Members: &mInvalidReplacementContentException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[559]})
-var sInvalidReplacementTypeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidReplacementTypeException, Members: &mInvalidReplacementTypeException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[561]})
-var sInvalidRepositoryDescriptionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRepositoryDescriptionException, Members: &mInvalidRepositoryDescriptionException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[563]})
-var sInvalidRepositoryNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRepositoryNameException, Members: &mInvalidRepositoryNameException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[565]})
-var sInvalidRepositoryTriggerBranchNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRepositoryTriggerBranchNameException, Members: &mInvalidRepositoryTriggerBranchNameException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[567]})
-var sInvalidRepositoryTriggerCustomDataException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRepositoryTriggerCustomDataException, Members: &mInvalidRepositoryTriggerCustomDataException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[569]})
-var sInvalidRepositoryTriggerDestinationArnException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRepositoryTriggerDestinationArnException, Members: &mInvalidRepositoryTriggerDestinationArnException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[571]})
-var sInvalidRepositoryTriggerEventsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRepositoryTriggerEventsException, Members: &mInvalidRepositoryTriggerEventsException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[573]})
-var sInvalidRepositoryTriggerNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRepositoryTriggerNameException, Members: &mInvalidRepositoryTriggerNameException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[575]})
-var sInvalidRepositoryTriggerRegionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRepositoryTriggerRegionException, Members: &mInvalidRepositoryTriggerRegionException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[577]})
-var sInvalidResourceArnException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidResourceArnException, Members: &mInvalidResourceArnException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[579]})
-var sInvalidRevisionIdException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRevisionIdException, Members: &mInvalidRevisionIdException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[581]})
-var sInvalidRuleContentSha256Exception = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRuleContentSha256Exception, Members: &mInvalidRuleContentSha256Exception, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[583]})
-var sInvalidSortByException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSortByException, Members: &mInvalidSortByException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[585]})
-var sInvalidSourceCommitSpecifierException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSourceCommitSpecifierException, Members: &mInvalidSourceCommitSpecifierException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[587]})
-var sInvalidSystemTagUsageException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSystemTagUsageException, Members: &mInvalidSystemTagUsageException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[589]})
-var sInvalidTagKeysListException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTagKeysListException, Members: &mInvalidTagKeysListException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[591]})
-var sInvalidTagsMapException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTagsMapException, Members: &mInvalidTagsMapException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[593]})
-var sInvalidTargetBranchException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTargetBranchException, Members: &mInvalidTargetBranchException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[595]})
-var sInvalidTargetException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTargetException, Members: &mInvalidTargetException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[597]})
-var sInvalidTargetsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTargetsException, Members: &mInvalidTargetsException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[599]})
-var sInvalidTitleException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTitleException, Members: &mInvalidTitleException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[601]})
-var sIsBinaryFile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIsBinaryFile, Members: &mIsBinaryFile, Type: smithy.ShapeTypeStructure, Ext: &ext[603]})
-var s_IsCommentDeleted = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsCommentDeleted, Type: smithy.ShapeTypeBoolean, Ext: &ext[607]})
-var s_IsContentConflict = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsContentConflict, Type: smithy.ShapeTypeBoolean, Ext: &ext[608]})
-var s_IsFileModeConflict = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsFileModeConflict, Type: smithy.ShapeTypeBoolean, Ext: &ext[609]})
-var s_IsHunkConflict = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsHunkConflict, Type: smithy.ShapeTypeBoolean, Ext: &ext[610]})
-var s_IsMergeable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsMergeable, Type: smithy.ShapeTypeBoolean, Ext: &ext[611]})
-var s_IsMerged = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsMerged, Type: smithy.ShapeTypeBoolean, Ext: &ext[612]})
-var s_IsMove = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsMove, Type: smithy.ShapeTypeBoolean, Ext: &ext[613]})
-var s_IsObjectTypeConflict = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsObjectTypeConflict, Type: smithy.ShapeTypeBoolean, Ext: &ext[614]})
-var s_KeepEmptyFolders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeepEmptyFolders, Type: smithy.ShapeTypeBoolean, Ext: &ext[615]})
-var s_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &ext[616]})
-var s_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastModifiedDate, Type: smithy.ShapeTypeTimestamp, Ext: &ext[617]})
-var s_Limit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Limit, Type: smithy.ShapeTypeInteger, Ext: &ext[618]})
-var s_LineContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LineContent, Type: smithy.ShapeTypeString, Ext: &ext[619]})
-var s_LineNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LineNumber, Type: smithy.ShapeTypeInteger, Ext: &ext[620]})
-var sLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLocation, Members: &mLocation, Type: smithy.ShapeTypeStructure, Ext: &ext[621]})
-var sManualMergeRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManualMergeRequiredException, Members: &mManualMergeRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[625]})
-var sMaximumBranchesExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaximumBranchesExceededException, Members: &mMaximumBranchesExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[627]})
-var sMaximumConflictResolutionEntriesExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaximumConflictResolutionEntriesExceededException, Members: &mMaximumConflictResolutionEntriesExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[629]})
-var sMaximumFileContentToLoadExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaximumFileContentToLoadExceededException, Members: &mMaximumFileContentToLoadExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[631]})
-var sMaximumFileEntriesExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaximumFileEntriesExceededException, Members: &mMaximumFileEntriesExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[633]})
-var sMaximumItemsToCompareExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaximumItemsToCompareExceededException, Members: &mMaximumItemsToCompareExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[635]})
-var sMaximumNumberOfApprovalsExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaximumNumberOfApprovalsExceededException, Members: &mMaximumNumberOfApprovalsExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[637]})
-var sMaximumOpenPullRequestsExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaximumOpenPullRequestsExceededException, Members: &mMaximumOpenPullRequestsExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[639]})
-var sMaximumRepositoryNamesExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaximumRepositoryNamesExceededException, Members: &mMaximumRepositoryNamesExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[641]})
-var sMaximumRepositoryTriggersExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaximumRepositoryTriggersExceededException, Members: &mMaximumRepositoryTriggersExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[643]})
-var sMaximumRuleTemplatesAssociatedWithRepositoryException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaximumRuleTemplatesAssociatedWithRepositoryException, Members: &mMaximumRuleTemplatesAssociatedWithRepositoryException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[645]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[647]})
-var sMergeHunk = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeHunk, Members: &mMergeHunk, Type: smithy.ShapeTypeStructure, Ext: &ext[648]})
-var sMergeHunkDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeHunkDetail, Members: &mMergeHunkDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[653]})
-var s_MergeHunks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MergeHunks, Members: &m_MergeHunks, Type: smithy.ShapeTypeList, Ext: &ext[657]})
-var sMergeMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeMetadata, Members: &mMergeMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[659]})
-var sMergeOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeOperations, Members: &mMergeOperations, Type: smithy.ShapeTypeStructure, Ext: &ext[664]})
-var sMergeOptionRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeOptionRequiredException, Members: &mMergeOptionRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[667]})
-var s_MergeOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MergeOptions, Members: &m_MergeOptions, Type: smithy.ShapeTypeList, Ext: &ext[669]})
-var sMergeOptionTypeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeOptionTypeEnum, Members: &mMergeOptionTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[671]})
-var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[675]})
-var s_Mode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Mode, Type: smithy.ShapeTypeString, Ext: &ext[676]})
-var sMultipleConflictResolutionEntriesException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMultipleConflictResolutionEntriesException, Members: &mMultipleConflictResolutionEntriesException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[677]})
-var sMultipleRepositoriesInPullRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMultipleRepositoriesInPullRequestException, Members: &mMultipleRepositoriesInPullRequestException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[679]})
-var s_Name = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &ext[681]})
-var sNameLengthExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNameLengthExceededException, Members: &mNameLengthExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[682]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[684]})
-var sNoChangeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoChangeException, Members: &mNoChangeException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[685]})
-var s_NumberOfConflicts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberOfConflicts, Type: smithy.ShapeTypeInteger, Ext: &ext[687]})
-var sNumberOfRulesExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNumberOfRulesExceededException, Members: &mNumberOfRulesExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[688]})
-var sNumberOfRuleTemplatesExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNumberOfRuleTemplatesExceededException, Members: &mNumberOfRuleTemplatesExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[690]})
-var s_ObjectId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[692]})
-var s_ObjectSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObjectSize, Type: smithy.ShapeTypeLong, Ext: &ext[693]})
-var sObjectTypeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObjectTypeEnum, Members: &mObjectTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[694]})
-var sObjectTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObjectTypes, Members: &mObjectTypes, Type: smithy.ShapeTypeStructure, Ext: &ext[699]})
-var sOperationNotAllowedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationNotAllowedException, Members: &mOperationNotAllowedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[703]})
-var sOrderEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrderEnum, Members: &mOrderEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[705]})
-var sOriginApprovalRuleTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOriginApprovalRuleTemplate, Members: &mOriginApprovalRuleTemplate, Type: smithy.ShapeTypeStructure, Ext: &ext[708]})
-var s_Overridden = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Overridden, Type: smithy.ShapeTypeBoolean, Ext: &ext[711]})
-var sOverrideAlreadySetException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOverrideAlreadySetException, Members: &mOverrideAlreadySetException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[712]})
-var sOverrideStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOverrideStatus, Members: &mOverrideStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[714]})
-var sOverrideStatusRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOverrideStatusRequiredException, Members: &mOverrideStatusRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[717]})
-var sParentCommitDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParentCommitDoesNotExistException, Members: &mParentCommitDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[719]})
-var sParentCommitIdOutdatedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParentCommitIdOutdatedException, Members: &mParentCommitIdOutdatedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[721]})
-var sParentCommitIdRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParentCommitIdRequiredException, Members: &mParentCommitIdRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[723]})
-var s_ParentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParentList, Members: &m_ParentList, Type: smithy.ShapeTypeList, Ext: &ext[725]})
-var s_Path = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[727]})
-var sPathDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPathDoesNotExistException, Members: &mPathDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[728]})
-var sPathRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPathRequiredException, Members: &mPathRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[730]})
-var s_Position = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Position, Type: smithy.ShapeTypeLong, Ext: &ext[732]})
-var sPullRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequest, Members: &mPullRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[733]})
-var sPullRequestAlreadyClosedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestAlreadyClosedException, Members: &mPullRequestAlreadyClosedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[745]})
-var sPullRequestApprovalRulesNotSatisfiedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestApprovalRulesNotSatisfiedException, Members: &mPullRequestApprovalRulesNotSatisfiedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[747]})
-var sPullRequestCannotBeApprovedByAuthorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestCannotBeApprovedByAuthorException, Members: &mPullRequestCannotBeApprovedByAuthorException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[749]})
-var sPullRequestCreatedEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestCreatedEventMetadata, Members: &mPullRequestCreatedEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[751]})
-var sPullRequestDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestDoesNotExistException, Members: &mPullRequestDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[756]})
-var sPullRequestEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestEvent, Members: &mPullRequestEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[758]})
-var s_PullRequestEventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PullRequestEventList, Members: &m_PullRequestEventList, Type: smithy.ShapeTypeList, Ext: &ext[770]})
-var sPullRequestEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestEventType, Members: &mPullRequestEventType, Type: smithy.ShapeTypeEnum, Ext: &ext[772]})
-var s_PullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ext[782]})
-var s_PullRequestIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PullRequestIdList, Members: &m_PullRequestIdList, Type: smithy.ShapeTypeList, Ext: &ext[783]})
-var sPullRequestIdRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestIdRequiredException, Members: &mPullRequestIdRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[785]})
-var sPullRequestMergedStateChangedEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestMergedStateChangedEventMetadata, Members: &mPullRequestMergedStateChangedEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[787]})
-var sPullRequestSourceReferenceUpdatedEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestSourceReferenceUpdatedEventMetadata, Members: &mPullRequestSourceReferenceUpdatedEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[791]})
-var sPullRequestStatusChangedEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestStatusChangedEventMetadata, Members: &mPullRequestStatusChangedEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[796]})
-var sPullRequestStatusEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestStatusEnum, Members: &mPullRequestStatusEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[798]})
-var sPullRequestStatusRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestStatusRequiredException, Members: &mPullRequestStatusRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[801]})
-var sPullRequestTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestTarget, Members: &mPullRequestTarget, Type: smithy.ShapeTypeStructure, Ext: &ext[803]})
-var s_PullRequestTargetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PullRequestTargetList, Members: &m_PullRequestTargetList, Type: smithy.ShapeTypeList, Ext: &ext[811]})
-var s_PutFileEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PutFileEntries, Members: &m_PutFileEntries, Type: smithy.ShapeTypeList, Ext: &ext[813]})
-var sPutFileEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutFileEntry, Members: &mPutFileEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[815]})
-var sPutFileEntryConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutFileEntryConflictException, Members: &mPutFileEntryConflictException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[820]})
-var s_ReactionCountsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReactionCountsMap, Members: &m_ReactionCountsMap, Type: smithy.ShapeTypeMap, Ext: &ext[822]})
-var s_ReactionEmoji = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReactionEmoji, Type: smithy.ShapeTypeString, Ext: &ext[825]})
-var sReactionForComment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReactionForComment, Members: &mReactionForComment, Type: smithy.ShapeTypeStructure, Ext: &ext[826]})
-var sReactionLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReactionLimitExceededException, Members: &mReactionLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[830]})
-var s_ReactionsForCommentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReactionsForCommentList, Members: &m_ReactionsForCommentList, Type: smithy.ShapeTypeList, Ext: &ext[832]})
-var s_ReactionShortCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReactionShortCode, Type: smithy.ShapeTypeString, Ext: &ext[834]})
-var s_ReactionUnicode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReactionUnicode, Type: smithy.ShapeTypeString, Ext: &ext[835]})
-var s_ReactionUsersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReactionUsersList, Members: &m_ReactionUsersList, Type: smithy.ShapeTypeList, Ext: &ext[836]})
-var s_ReactionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReactionValue, Type: smithy.ShapeTypeString, Ext: &ext[838]})
-var sReactionValueFormats = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReactionValueFormats, Members: &mReactionValueFormats, Type: smithy.ShapeTypeStructure, Ext: &ext[839]})
-var sReactionValueRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReactionValueRequiredException, Members: &mReactionValueRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[843]})
-var sReferenceDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReferenceDoesNotExistException, Members: &mReferenceDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[845]})
-var s_ReferenceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReferenceName, Type: smithy.ShapeTypeString, Ext: &ext[847]})
-var sReferenceNameRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReferenceNameRequiredException, Members: &mReferenceNameRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[848]})
-var sReferenceTypeNotSupportedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReferenceTypeNotSupportedException, Members: &mReferenceTypeNotSupportedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[850]})
-var sRelativeFileVersionEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelativeFileVersionEnum, Members: &mRelativeFileVersionEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[852]})
-var s_ReplaceContentEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplaceContentEntries, Members: &m_ReplaceContentEntries, Type: smithy.ShapeTypeList, Ext: &ext[855]})
-var sReplaceContentEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplaceContentEntry, Members: &mReplaceContentEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[857]})
-var sReplacementContentRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplacementContentRequiredException, Members: &mReplacementContentRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[862]})
-var sReplacementTypeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplacementTypeEnum, Members: &mReplacementTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[864]})
-var sReplacementTypeRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplacementTypeRequiredException, Members: &mReplacementTypeRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[869]})
-var s_RepositoryDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryDescription, Type: smithy.ShapeTypeString, Ext: &ext[871]})
-var sRepositoryDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryDoesNotExistException, Members: &mRepositoryDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[872]})
-var s_RepositoryId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryId, Type: smithy.ShapeTypeString, Ext: &ext[874]})
-var sRepositoryLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryLimitExceededException, Members: &mRepositoryLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[875]})
-var sRepositoryMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryMetadata, Members: &mRepositoryMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[877]})
-var s_RepositoryMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryMetadataList, Members: &m_RepositoryMetadataList, Type: smithy.ShapeTypeList, Ext: &ext[889]})
-var s_RepositoryName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[891]})
-var sRepositoryNameExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryNameExistsException, Members: &mRepositoryNameExistsException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[892]})
-var sRepositoryNameIdPair = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryNameIdPair, Members: &mRepositoryNameIdPair, Type: smithy.ShapeTypeStructure, Ext: &ext[894]})
-var s_RepositoryNameIdPairList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryNameIdPairList, Members: &m_RepositoryNameIdPairList, Type: smithy.ShapeTypeList, Ext: &ext[897]})
-var s_RepositoryNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryNameList, Members: &m_RepositoryNameList, Type: smithy.ShapeTypeList, Ext: &ext[899]})
-var sRepositoryNameRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryNameRequiredException, Members: &mRepositoryNameRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[901]})
-var sRepositoryNamesRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryNamesRequiredException, Members: &mRepositoryNamesRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[903]})
-var sRepositoryNotAssociatedWithPullRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryNotAssociatedWithPullRequestException, Members: &mRepositoryNotAssociatedWithPullRequestException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[905]})
-var s_RepositoryNotFoundList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryNotFoundList, Members: &m_RepositoryNotFoundList, Type: smithy.ShapeTypeList, Ext: &ext[907]})
-var sRepositoryTrigger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryTrigger, Members: &mRepositoryTrigger, Type: smithy.ShapeTypeStructure, Ext: &ext[909]})
-var sRepositoryTriggerBranchNameListRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryTriggerBranchNameListRequiredException, Members: &mRepositoryTriggerBranchNameListRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[915]})
-var s_RepositoryTriggerCustomData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryTriggerCustomData, Type: smithy.ShapeTypeString, Ext: &ext[917]})
-var sRepositoryTriggerDestinationArnRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryTriggerDestinationArnRequiredException, Members: &mRepositoryTriggerDestinationArnRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[918]})
-var sRepositoryTriggerEventEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryTriggerEventEnum, Members: &mRepositoryTriggerEventEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[920]})
-var s_RepositoryTriggerEventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryTriggerEventList, Members: &m_RepositoryTriggerEventList, Type: smithy.ShapeTypeList, Ext: &ext[925]})
-var sRepositoryTriggerEventsListRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryTriggerEventsListRequiredException, Members: &mRepositoryTriggerEventsListRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[927]})
-var sRepositoryTriggerExecutionFailure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryTriggerExecutionFailure, Members: &mRepositoryTriggerExecutionFailure, Type: smithy.ShapeTypeStructure, Ext: &ext[929]})
-var s_RepositoryTriggerExecutionFailureList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryTriggerExecutionFailureList, Members: &m_RepositoryTriggerExecutionFailureList, Type: smithy.ShapeTypeList, Ext: &ext[932]})
-var s_RepositoryTriggerExecutionFailureMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryTriggerExecutionFailureMessage, Type: smithy.ShapeTypeString, Ext: &ext[934]})
-var s_RepositoryTriggerName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryTriggerName, Type: smithy.ShapeTypeString, Ext: &ext[935]})
-var s_RepositoryTriggerNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryTriggerNameList, Members: &m_RepositoryTriggerNameList, Type: smithy.ShapeTypeList, Ext: &ext[936]})
-var sRepositoryTriggerNameRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryTriggerNameRequiredException, Members: &mRepositoryTriggerNameRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[938]})
-var s_RepositoryTriggersConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryTriggersConfigurationId, Type: smithy.ShapeTypeString, Ext: &ext[940]})
-var s_RepositoryTriggersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryTriggersList, Members: &m_RepositoryTriggersList, Type: smithy.ShapeTypeList, Ext: &ext[941]})
-var sRepositoryTriggersListRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryTriggersListRequiredException, Members: &mRepositoryTriggersListRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[943]})
-var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[945]})
-var sResourceArnRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceArnRequiredException, Members: &mResourceArnRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[946]})
-var sRestrictedSourceFileException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestrictedSourceFileException, Members: &mRestrictedSourceFileException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[948]})
-var s_RevisionChildren = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevisionChildren, Members: &m_RevisionChildren, Type: smithy.ShapeTypeList, Ext: &ext[950]})
-var s_RevisionDag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevisionDag, Members: &m_RevisionDag, Type: smithy.ShapeTypeList, Ext: &ext[952]})
-var s_RevisionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevisionId, Type: smithy.ShapeTypeString, Ext: &ext[954]})
-var sRevisionIdRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevisionIdRequiredException, Members: &mRevisionIdRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[955]})
-var sRevisionNotCurrentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevisionNotCurrentException, Members: &mRevisionNotCurrentException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[957]})
-var s_RuleContentSha256 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleContentSha256, Type: smithy.ShapeTypeString, Ext: &ext[959]})
-var sSameFileContentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSameFileContentException, Members: &mSameFileContentException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[960]})
-var sSamePathRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSamePathRequestException, Members: &mSamePathRequestException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[962]})
-var s_SetFileModeEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SetFileModeEntries, Members: &m_SetFileModeEntries, Type: smithy.ShapeTypeList, Ext: &ext[964]})
-var sSetFileModeEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetFileModeEntry, Members: &mSetFileModeEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[966]})
-var sSortByEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortByEnum, Members: &mSortByEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[969]})
-var sSourceAndDestinationAreSameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceAndDestinationAreSameException, Members: &mSourceAndDestinationAreSameException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[972]})
-var sSourceFileOrContentRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceFileOrContentRequiredException, Members: &mSourceFileOrContentRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[974]})
-var sSourceFileSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceFileSpecifier, Members: &mSourceFileSpecifier, Type: smithy.ShapeTypeStructure, Ext: &ext[976]})
-var sSubModule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubModule, Members: &mSubModule, Type: smithy.ShapeTypeStructure, Ext: &ext[979]})
-var s_SubModuleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubModuleList, Members: &m_SubModuleList, Type: smithy.ShapeTypeList, Ext: &ext[983]})
-var sSymbolicLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSymbolicLink, Members: &mSymbolicLink, Type: smithy.ShapeTypeStructure, Ext: &ext[985]})
-var s_SymbolicLinkList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SymbolicLinkList, Members: &m_SymbolicLinkList, Type: smithy.ShapeTypeList, Ext: &ext[990]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[992]})
-var s_TagKeysList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeysList, Members: &m_TagKeysList, Type: smithy.ShapeTypeList, Ext: &ext[993]})
-var sTagKeysListRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagKeysListRequiredException, Members: &mTagKeysListRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[995]})
-var sTagPolicyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagPolicyException, Members: &mTagPolicyException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[997]})
-var s_TagsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &ext[999]})
-var sTagsMapRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagsMapRequiredException, Members: &mTagsMapRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[1002]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[1004]})
-var sTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTarget, Members: &mTarget, Type: smithy.ShapeTypeStructure, Ext: &ext[1005]})
-var s_TargetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetList, Members: &m_TargetList, Type: smithy.ShapeTypeList, Ext: &ext[1009]})
-var sTargetRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetRequiredException, Members: &mTargetRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[1011]})
-var sTargetsRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetsRequiredException, Members: &mTargetsRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[1013]})
-var sTipOfSourceReferenceIsDifferentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTipOfSourceReferenceIsDifferentException, Members: &mTipOfSourceReferenceIsDifferentException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[1015]})
-var sTipsDivergenceExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTipsDivergenceExceededException, Members: &mTipsDivergenceExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[1017]})
-var s_Title = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Title, Type: smithy.ShapeTypeString, Ext: &ext[1019]})
-var sTitleRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTitleRequiredException, Members: &mTitleRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[1020]})
-var sTooManyTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsException, Members: &mTooManyTagsException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[1022]})
-var sUserInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserInfo, Members: &mUserInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[1024]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[1028]})
-var sAssociateApprovalRuleTemplateWithRepositoryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateApprovalRuleTemplateWithRepositoryInput, Members: &mAssociateApprovalRuleTemplateWithRepositoryInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1030]})
-var sBatchAssociateApprovalRuleTemplateWithRepositoriesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateApprovalRuleTemplateWithRepositoriesInput, Members: &mBatchAssociateApprovalRuleTemplateWithRepositoriesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1033]})
-var sBatchAssociateApprovalRuleTemplateWithRepositoriesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateApprovalRuleTemplateWithRepositoriesOutput, Members: &mBatchAssociateApprovalRuleTemplateWithRepositoriesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1036]})
-var sBatchDescribeMergeConflictsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDescribeMergeConflictsInput, Members: &mBatchDescribeMergeConflictsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1039]})
-var sBatchDescribeMergeConflictsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDescribeMergeConflictsOutput, Members: &mBatchDescribeMergeConflictsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1050]})
-var sBatchDisassociateApprovalRuleTemplateFromRepositoriesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateApprovalRuleTemplateFromRepositoriesInput, Members: &mBatchDisassociateApprovalRuleTemplateFromRepositoriesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1057]})
-var sBatchDisassociateApprovalRuleTemplateFromRepositoriesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateApprovalRuleTemplateFromRepositoriesOutput, Members: &mBatchDisassociateApprovalRuleTemplateFromRepositoriesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1060]})
-var sBatchGetCommitsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetCommitsInput, Members: &mBatchGetCommitsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1063]})
-var sBatchGetCommitsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetCommitsOutput, Members: &mBatchGetCommitsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1066]})
-var sBatchGetRepositoriesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetRepositoriesInput, Members: &mBatchGetRepositoriesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1069]})
-var sBatchGetRepositoriesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetRepositoriesOutput, Members: &mBatchGetRepositoriesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1071]})
-var sCreateApprovalRuleTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApprovalRuleTemplateInput, Members: &mCreateApprovalRuleTemplateInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1075]})
-var sCreateApprovalRuleTemplateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApprovalRuleTemplateOutput, Members: &mCreateApprovalRuleTemplateOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1079]})
-var sCreateBranchInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBranchInput, Members: &mCreateBranchInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1081]})
-var sCreateCommitInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCommitInput, Members: &mCreateCommitInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1085]})
-var sCreateCommitOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCommitOutput, Members: &mCreateCommitOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1096]})
-var sCreatePullRequestApprovalRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePullRequestApprovalRuleInput, Members: &mCreatePullRequestApprovalRuleInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1102]})
-var sCreatePullRequestApprovalRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePullRequestApprovalRuleOutput, Members: &mCreatePullRequestApprovalRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1106]})
-var sCreatePullRequestInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePullRequestInput, Members: &mCreatePullRequestInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1108]})
-var sCreatePullRequestOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePullRequestOutput, Members: &mCreatePullRequestOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1113]})
-var sCreateRepositoryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRepositoryInput, Members: &mCreateRepositoryInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1115]})
-var sCreateRepositoryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRepositoryOutput, Members: &mCreateRepositoryOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1120]})
-var sCreateUnreferencedMergeCommitInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUnreferencedMergeCommitInput, Members: &mCreateUnreferencedMergeCommitInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1122]})
-var sCreateUnreferencedMergeCommitOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUnreferencedMergeCommitOutput, Members: &mCreateUnreferencedMergeCommitOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1134]})
-var sDeleteApprovalRuleTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApprovalRuleTemplateInput, Members: &mDeleteApprovalRuleTemplateInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1137]})
-var sDeleteApprovalRuleTemplateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApprovalRuleTemplateOutput, Members: &mDeleteApprovalRuleTemplateOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1139]})
-var sDeleteBranchInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBranchInput, Members: &mDeleteBranchInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1141]})
-var sDeleteBranchOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBranchOutput, Members: &mDeleteBranchOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1144]})
-var sDeleteCommentContentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCommentContentInput, Members: &mDeleteCommentContentInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1146]})
-var sDeleteCommentContentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCommentContentOutput, Members: &mDeleteCommentContentOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1148]})
-var sDeleteFileInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFileInput, Members: &mDeleteFileInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1150]})
-var sDeleteFileOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFileOutput, Members: &mDeleteFileOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1159]})
-var sDeletePullRequestApprovalRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePullRequestApprovalRuleInput, Members: &mDeletePullRequestApprovalRuleInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1164]})
-var sDeletePullRequestApprovalRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePullRequestApprovalRuleOutput, Members: &mDeletePullRequestApprovalRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1167]})
-var sDeleteRepositoryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRepositoryInput, Members: &mDeleteRepositoryInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1169]})
-var sDeleteRepositoryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRepositoryOutput, Members: &mDeleteRepositoryOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1171]})
-var sDescribeMergeConflictsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMergeConflictsInput, Members: &mDescribeMergeConflictsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1173]})
-var sDescribeMergeConflictsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMergeConflictsOutput, Members: &mDescribeMergeConflictsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1183]})
-var sDescribePullRequestEventsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePullRequestEventsInput, Members: &mDescribePullRequestEventsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1190]})
-var sDescribePullRequestEventsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePullRequestEventsOutput, Members: &mDescribePullRequestEventsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1196]})
-var sDisassociateApprovalRuleTemplateFromRepositoryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateApprovalRuleTemplateFromRepositoryInput, Members: &mDisassociateApprovalRuleTemplateFromRepositoryInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1199]})
-var sEvaluatePullRequestApprovalRulesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluatePullRequestApprovalRulesInput, Members: &mEvaluatePullRequestApprovalRulesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1202]})
-var sEvaluatePullRequestApprovalRulesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluatePullRequestApprovalRulesOutput, Members: &mEvaluatePullRequestApprovalRulesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1205]})
-var sGetApprovalRuleTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApprovalRuleTemplateInput, Members: &mGetApprovalRuleTemplateInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1207]})
-var sGetApprovalRuleTemplateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApprovalRuleTemplateOutput, Members: &mGetApprovalRuleTemplateOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1209]})
-var sGetBlobDifferencesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBlobDifferencesInput, Members: &mGetBlobDifferencesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1211]})
-var sGetBlobDifferencesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBlobDifferencesOutput, Members: &mGetBlobDifferencesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1219]})
-var sGetBlobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBlobInput, Members: &mGetBlobInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1225]})
-var sGetBlobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBlobOutput, Members: &mGetBlobOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1228]})
-var sGetBranchInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBranchInput, Members: &mGetBranchInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1230]})
-var sGetBranchOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBranchOutput, Members: &mGetBranchOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1233]})
-var sGetCommentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommentInput, Members: &mGetCommentInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1235]})
-var sGetCommentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommentOutput, Members: &mGetCommentOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1237]})
-var sGetCommentReactionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommentReactionsInput, Members: &mGetCommentReactionsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1239]})
-var sGetCommentReactionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommentReactionsOutput, Members: &mGetCommentReactionsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1244]})
-var sGetCommentsForComparedCommitInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommentsForComparedCommitInput, Members: &mGetCommentsForComparedCommitInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1247]})
-var sGetCommentsForComparedCommitOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommentsForComparedCommitOutput, Members: &mGetCommentsForComparedCommitOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1253]})
-var sGetCommentsForPullRequestInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommentsForPullRequestInput, Members: &mGetCommentsForPullRequestInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1256]})
-var sGetCommentsForPullRequestOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommentsForPullRequestOutput, Members: &mGetCommentsForPullRequestOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1263]})
-var sGetCommitInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommitInput, Members: &mGetCommitInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1266]})
-var sGetCommitOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommitOutput, Members: &mGetCommitOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1269]})
-var sGetDifferencesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDifferencesInput, Members: &mGetDifferencesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1271]})
-var sGetDifferencesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDifferencesOutput, Members: &mGetDifferencesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1279]})
-var sGetFileInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFileInput, Members: &mGetFileInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1282]})
-var sGetFileOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFileOutput, Members: &mGetFileOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1286]})
-var sGetFolderInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFolderInput, Members: &mGetFolderInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1293]})
-var sGetFolderOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFolderOutput, Members: &mGetFolderOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1297]})
-var sGetMergeCommitInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMergeCommitInput, Members: &mGetMergeCommitInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1305]})
-var sGetMergeCommitOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMergeCommitOutput, Members: &mGetMergeCommitOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1311]})
-var sGetMergeConflictsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMergeConflictsInput, Members: &mGetMergeConflictsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1316]})
-var sGetMergeConflictsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMergeConflictsOutput, Members: &mGetMergeConflictsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1325]})
-var sGetMergeOptionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMergeOptionsInput, Members: &mGetMergeOptionsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1332]})
-var sGetMergeOptionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMergeOptionsOutput, Members: &mGetMergeOptionsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1338]})
-var sGetPullRequestApprovalStatesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPullRequestApprovalStatesInput, Members: &mGetPullRequestApprovalStatesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1343]})
-var sGetPullRequestApprovalStatesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPullRequestApprovalStatesOutput, Members: &mGetPullRequestApprovalStatesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1346]})
-var sGetPullRequestInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPullRequestInput, Members: &mGetPullRequestInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1348]})
-var sGetPullRequestOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPullRequestOutput, Members: &mGetPullRequestOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1350]})
-var sGetPullRequestOverrideStateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPullRequestOverrideStateInput, Members: &mGetPullRequestOverrideStateInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1352]})
-var sGetPullRequestOverrideStateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPullRequestOverrideStateOutput, Members: &mGetPullRequestOverrideStateOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1355]})
-var sGetRepositoryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositoryInput, Members: &mGetRepositoryInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1358]})
-var sGetRepositoryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositoryOutput, Members: &mGetRepositoryOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1360]})
-var sGetRepositoryTriggersInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositoryTriggersInput, Members: &mGetRepositoryTriggersInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1362]})
-var sGetRepositoryTriggersOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositoryTriggersOutput, Members: &mGetRepositoryTriggersOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1364]})
-var sListApprovalRuleTemplatesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApprovalRuleTemplatesInput, Members: &mListApprovalRuleTemplatesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1367]})
-var sListApprovalRuleTemplatesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApprovalRuleTemplatesOutput, Members: &mListApprovalRuleTemplatesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1370]})
-var sListAssociatedApprovalRuleTemplatesForRepositoryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedApprovalRuleTemplatesForRepositoryInput, Members: &mListAssociatedApprovalRuleTemplatesForRepositoryInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1373]})
-var sListAssociatedApprovalRuleTemplatesForRepositoryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedApprovalRuleTemplatesForRepositoryOutput, Members: &mListAssociatedApprovalRuleTemplatesForRepositoryOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1377]})
-var sListBranchesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBranchesInput, Members: &mListBranchesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1380]})
-var sListBranchesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBranchesOutput, Members: &mListBranchesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1383]})
-var sListFileCommitHistoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFileCommitHistoryRequest, Members: &mListFileCommitHistoryRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1386]})
-var sListFileCommitHistoryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFileCommitHistoryResponse, Members: &mListFileCommitHistoryResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[1392]})
-var sListPullRequestsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPullRequestsInput, Members: &mListPullRequestsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1395]})
-var sListPullRequestsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPullRequestsOutput, Members: &mListPullRequestsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1401]})
-var sListRepositoriesForApprovalRuleTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositoriesForApprovalRuleTemplateInput, Members: &mListRepositoriesForApprovalRuleTemplateInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1404]})
-var sListRepositoriesForApprovalRuleTemplateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositoriesForApprovalRuleTemplateOutput, Members: &mListRepositoriesForApprovalRuleTemplateOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1408]})
-var sListRepositoriesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositoriesInput, Members: &mListRepositoriesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1411]})
-var sListRepositoriesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositoriesOutput, Members: &mListRepositoriesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1415]})
-var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1418]})
-var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1421]})
-var sMergeBranchesByFastForwardInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeBranchesByFastForwardInput, Members: &mMergeBranchesByFastForwardInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1424]})
-var sMergeBranchesByFastForwardOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeBranchesByFastForwardOutput, Members: &mMergeBranchesByFastForwardOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1429]})
-var sMergeBranchesBySquashInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeBranchesBySquashInput, Members: &mMergeBranchesBySquashInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1432]})
-var sMergeBranchesBySquashOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeBranchesBySquashOutput, Members: &mMergeBranchesBySquashOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1444]})
-var sMergeBranchesByThreeWayInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeBranchesByThreeWayInput, Members: &mMergeBranchesByThreeWayInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1447]})
-var sMergeBranchesByThreeWayOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeBranchesByThreeWayOutput, Members: &mMergeBranchesByThreeWayOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1459]})
-var sMergePullRequestByFastForwardInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergePullRequestByFastForwardInput, Members: &mMergePullRequestByFastForwardInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1462]})
-var sMergePullRequestByFastForwardOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergePullRequestByFastForwardOutput, Members: &mMergePullRequestByFastForwardOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1466]})
-var sMergePullRequestBySquashInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergePullRequestBySquashInput, Members: &mMergePullRequestBySquashInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1468]})
-var sMergePullRequestBySquashOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergePullRequestBySquashOutput, Members: &mMergePullRequestBySquashOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1479]})
-var sMergePullRequestByThreeWayInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergePullRequestByThreeWayInput, Members: &mMergePullRequestByThreeWayInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1481]})
-var sMergePullRequestByThreeWayOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergePullRequestByThreeWayOutput, Members: &mMergePullRequestByThreeWayOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1492]})
-var sOverridePullRequestApprovalRulesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOverridePullRequestApprovalRulesInput, Members: &mOverridePullRequestApprovalRulesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1494]})
-var sPostCommentForComparedCommitInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostCommentForComparedCommitInput, Members: &mPostCommentForComparedCommitInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1498]})
-var sPostCommentForComparedCommitOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostCommentForComparedCommitOutput, Members: &mPostCommentForComparedCommitOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1505]})
-var sPostCommentForPullRequestInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostCommentForPullRequestInput, Members: &mPostCommentForPullRequestInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1513]})
-var sPostCommentForPullRequestOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostCommentForPullRequestOutput, Members: &mPostCommentForPullRequestOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1521]})
-var sPostCommentReplyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostCommentReplyInput, Members: &mPostCommentReplyInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1530]})
-var sPostCommentReplyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostCommentReplyOutput, Members: &mPostCommentReplyOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1534]})
-var sPutCommentReactionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCommentReactionInput, Members: &mPutCommentReactionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1536]})
-var sPutFileInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutFileInput, Members: &mPutFileInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1539]})
-var sPutFileOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutFileOutput, Members: &mPutFileOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1549]})
-var sPutRepositoryTriggersInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRepositoryTriggersInput, Members: &mPutRepositoryTriggersInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1553]})
-var sPutRepositoryTriggersOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRepositoryTriggersOutput, Members: &mPutRepositoryTriggersOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1556]})
-var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1558]})
-var sTestRepositoryTriggersInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestRepositoryTriggersInput, Members: &mTestRepositoryTriggersInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1561]})
-var sTestRepositoryTriggersOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestRepositoryTriggersOutput, Members: &mTestRepositoryTriggersOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1564]})
-var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1567]})
-var sUpdateApprovalRuleTemplateContentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApprovalRuleTemplateContentInput, Members: &mUpdateApprovalRuleTemplateContentInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1570]})
-var sUpdateApprovalRuleTemplateContentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApprovalRuleTemplateContentOutput, Members: &mUpdateApprovalRuleTemplateContentOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1574]})
-var sUpdateApprovalRuleTemplateDescriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApprovalRuleTemplateDescriptionInput, Members: &mUpdateApprovalRuleTemplateDescriptionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1576]})
-var sUpdateApprovalRuleTemplateDescriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApprovalRuleTemplateDescriptionOutput, Members: &mUpdateApprovalRuleTemplateDescriptionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1579]})
-var sUpdateApprovalRuleTemplateNameInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApprovalRuleTemplateNameInput, Members: &mUpdateApprovalRuleTemplateNameInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1581]})
-var sUpdateApprovalRuleTemplateNameOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApprovalRuleTemplateNameOutput, Members: &mUpdateApprovalRuleTemplateNameOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1584]})
-var sUpdateCommentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCommentInput, Members: &mUpdateCommentInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1586]})
-var sUpdateCommentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCommentOutput, Members: &mUpdateCommentOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1589]})
-var sUpdateDefaultBranchInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDefaultBranchInput, Members: &mUpdateDefaultBranchInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1591]})
-var sUpdatePullRequestApprovalRuleContentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestApprovalRuleContentInput, Members: &mUpdatePullRequestApprovalRuleContentInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1594]})
-var sUpdatePullRequestApprovalRuleContentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestApprovalRuleContentOutput, Members: &mUpdatePullRequestApprovalRuleContentOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1599]})
-var sUpdatePullRequestApprovalStateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestApprovalStateInput, Members: &mUpdatePullRequestApprovalStateInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1601]})
-var sUpdatePullRequestDescriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestDescriptionInput, Members: &mUpdatePullRequestDescriptionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1605]})
-var sUpdatePullRequestDescriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestDescriptionOutput, Members: &mUpdatePullRequestDescriptionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1608]})
-var sUpdatePullRequestStatusInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestStatusInput, Members: &mUpdatePullRequestStatusInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1610]})
-var sUpdatePullRequestStatusOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestStatusOutput, Members: &mUpdatePullRequestStatusOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1613]})
-var sUpdatePullRequestTitleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestTitleInput, Members: &mUpdatePullRequestTitleInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1615]})
-var sUpdatePullRequestTitleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestTitleOutput, Members: &mUpdatePullRequestTitleOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1618]})
-var sUpdateRepositoryDescriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRepositoryDescriptionInput, Members: &mUpdateRepositoryDescriptionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1620]})
-var sUpdateRepositoryEncryptionKeyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRepositoryEncryptionKeyInput, Members: &mUpdateRepositoryEncryptionKeyInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1623]})
-var sUpdateRepositoryEncryptionKeyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRepositoryEncryptionKeyOutput, Members: &mUpdateRepositoryEncryptionKeyOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1626]})
-var sUpdateRepositoryNameInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRepositoryNameInput, Members: &mUpdateRepositoryNameInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1630]})
+var sAssociateApprovalRuleTemplateWithRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateApprovalRuleTemplateWithRepository, Type: smithy.ShapeTypeOperation, Ext: &eAssociateApprovalRuleTemplateWithRepository})
+var sBatchAssociateApprovalRuleTemplateWithRepositories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateApprovalRuleTemplateWithRepositories, Type: smithy.ShapeTypeOperation, Ext: &eBatchAssociateApprovalRuleTemplateWithRepositories})
+var sBatchDescribeMergeConflicts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDescribeMergeConflicts, Type: smithy.ShapeTypeOperation, Ext: &eBatchDescribeMergeConflicts})
+var sBatchDisassociateApprovalRuleTemplateFromRepositories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateApprovalRuleTemplateFromRepositories, Type: smithy.ShapeTypeOperation, Ext: &eBatchDisassociateApprovalRuleTemplateFromRepositories})
+var sBatchGetCommits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetCommits, Type: smithy.ShapeTypeOperation, Ext: &eBatchGetCommits})
+var sBatchGetRepositories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetRepositories, Type: smithy.ShapeTypeOperation, Ext: &eBatchGetRepositories})
+var sCreateApprovalRuleTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApprovalRuleTemplate, Type: smithy.ShapeTypeOperation, Ext: &eCreateApprovalRuleTemplate})
+var sCreateBranch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBranch, Type: smithy.ShapeTypeOperation, Ext: &eCreateBranch})
+var sCreateCommit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCommit, Type: smithy.ShapeTypeOperation, Ext: &eCreateCommit})
+var sCreatePullRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePullRequest, Type: smithy.ShapeTypeOperation, Ext: &eCreatePullRequest})
+var sCreatePullRequestApprovalRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePullRequestApprovalRule, Type: smithy.ShapeTypeOperation, Ext: &eCreatePullRequestApprovalRule})
+var sCreateRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRepository, Type: smithy.ShapeTypeOperation, Ext: &eCreateRepository})
+var sCreateUnreferencedMergeCommit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUnreferencedMergeCommit, Type: smithy.ShapeTypeOperation, Ext: &eCreateUnreferencedMergeCommit})
+var sDeleteApprovalRuleTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApprovalRuleTemplate, Type: smithy.ShapeTypeOperation, Ext: &eDeleteApprovalRuleTemplate})
+var sDeleteBranch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBranch, Type: smithy.ShapeTypeOperation, Ext: &eDeleteBranch})
+var sDeleteCommentContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCommentContent, Type: smithy.ShapeTypeOperation, Ext: &eDeleteCommentContent})
+var sDeleteFile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFile, Type: smithy.ShapeTypeOperation, Ext: &eDeleteFile})
+var sDeletePullRequestApprovalRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePullRequestApprovalRule, Type: smithy.ShapeTypeOperation, Ext: &eDeletePullRequestApprovalRule})
+var sDeleteRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRepository, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRepository})
+var sDescribeMergeConflicts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMergeConflicts, Type: smithy.ShapeTypeOperation, Ext: &eDescribeMergeConflicts})
+var sDescribePullRequestEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePullRequestEvents, Type: smithy.ShapeTypeOperation, Ext: &eDescribePullRequestEvents})
+var sDisassociateApprovalRuleTemplateFromRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateApprovalRuleTemplateFromRepository, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateApprovalRuleTemplateFromRepository})
+var sEvaluatePullRequestApprovalRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluatePullRequestApprovalRules, Type: smithy.ShapeTypeOperation, Ext: &eEvaluatePullRequestApprovalRules})
+var sGetApprovalRuleTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApprovalRuleTemplate, Type: smithy.ShapeTypeOperation, Ext: &eGetApprovalRuleTemplate})
+var sGetBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBlob, Type: smithy.ShapeTypeOperation, Ext: &eGetBlob})
+var sGetBlobDifferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBlobDifferences, Type: smithy.ShapeTypeOperation, Ext: &eGetBlobDifferences})
+var sGetBranch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBranch, Type: smithy.ShapeTypeOperation, Ext: &eGetBranch})
+var sGetComment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComment, Type: smithy.ShapeTypeOperation, Ext: &eGetComment})
+var sGetCommentReactions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommentReactions, Type: smithy.ShapeTypeOperation, Ext: &eGetCommentReactions})
+var sGetCommentsForComparedCommit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommentsForComparedCommit, Type: smithy.ShapeTypeOperation, Ext: &eGetCommentsForComparedCommit})
+var sGetCommentsForPullRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommentsForPullRequest, Type: smithy.ShapeTypeOperation, Ext: &eGetCommentsForPullRequest})
+var sGetCommit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommit, Type: smithy.ShapeTypeOperation, Ext: &eGetCommit})
+var sGetDifferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDifferences, Type: smithy.ShapeTypeOperation, Ext: &eGetDifferences})
+var sGetFile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFile, Type: smithy.ShapeTypeOperation, Ext: &eGetFile})
+var sGetFolder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFolder, Type: smithy.ShapeTypeOperation, Ext: &eGetFolder})
+var sGetMergeCommit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMergeCommit, Type: smithy.ShapeTypeOperation, Ext: &eGetMergeCommit})
+var sGetMergeConflicts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMergeConflicts, Type: smithy.ShapeTypeOperation, Ext: &eGetMergeConflicts})
+var sGetMergeOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMergeOptions, Type: smithy.ShapeTypeOperation, Ext: &eGetMergeOptions})
+var sGetPullRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPullRequest, Type: smithy.ShapeTypeOperation, Ext: &eGetPullRequest})
+var sGetPullRequestApprovalStates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPullRequestApprovalStates, Type: smithy.ShapeTypeOperation, Ext: &eGetPullRequestApprovalStates})
+var sGetPullRequestOverrideState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPullRequestOverrideState, Type: smithy.ShapeTypeOperation, Ext: &eGetPullRequestOverrideState})
+var sGetRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepository, Type: smithy.ShapeTypeOperation, Ext: &eGetRepository})
+var sGetRepositoryTriggers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositoryTriggers, Type: smithy.ShapeTypeOperation, Ext: &eGetRepositoryTriggers})
+var sListApprovalRuleTemplates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApprovalRuleTemplates, Type: smithy.ShapeTypeOperation, Ext: &eListApprovalRuleTemplates})
+var sListAssociatedApprovalRuleTemplatesForRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedApprovalRuleTemplatesForRepository, Type: smithy.ShapeTypeOperation, Ext: &eListAssociatedApprovalRuleTemplatesForRepository})
+var sListBranches = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBranches, Type: smithy.ShapeTypeOperation, Ext: &eListBranches})
+var sListFileCommitHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFileCommitHistory, Type: smithy.ShapeTypeOperation, Ext: &eListFileCommitHistory})
+var sListPullRequests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPullRequests, Type: smithy.ShapeTypeOperation, Ext: &eListPullRequests})
+var sListRepositories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositories, Type: smithy.ShapeTypeOperation, Ext: &eListRepositories})
+var sListRepositoriesForApprovalRuleTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositoriesForApprovalRuleTemplate, Type: smithy.ShapeTypeOperation, Ext: &eListRepositoriesForApprovalRuleTemplate})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sMergeBranchesByFastForward = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeBranchesByFastForward, Type: smithy.ShapeTypeOperation, Ext: &eMergeBranchesByFastForward})
+var sMergeBranchesBySquash = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeBranchesBySquash, Type: smithy.ShapeTypeOperation, Ext: &eMergeBranchesBySquash})
+var sMergeBranchesByThreeWay = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeBranchesByThreeWay, Type: smithy.ShapeTypeOperation, Ext: &eMergeBranchesByThreeWay})
+var sMergePullRequestByFastForward = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergePullRequestByFastForward, Type: smithy.ShapeTypeOperation, Ext: &eMergePullRequestByFastForward})
+var sMergePullRequestBySquash = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergePullRequestBySquash, Type: smithy.ShapeTypeOperation, Ext: &eMergePullRequestBySquash})
+var sMergePullRequestByThreeWay = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergePullRequestByThreeWay, Type: smithy.ShapeTypeOperation, Ext: &eMergePullRequestByThreeWay})
+var sOverridePullRequestApprovalRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOverridePullRequestApprovalRules, Type: smithy.ShapeTypeOperation, Ext: &eOverridePullRequestApprovalRules})
+var sPostCommentForComparedCommit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostCommentForComparedCommit, Type: smithy.ShapeTypeOperation, Ext: &ePostCommentForComparedCommit})
+var sPostCommentForPullRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostCommentForPullRequest, Type: smithy.ShapeTypeOperation, Ext: &ePostCommentForPullRequest})
+var sPostCommentReply = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostCommentReply, Type: smithy.ShapeTypeOperation, Ext: &ePostCommentReply})
+var sPutCommentReaction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCommentReaction, Type: smithy.ShapeTypeOperation, Ext: &ePutCommentReaction})
+var sPutFile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutFile, Type: smithy.ShapeTypeOperation, Ext: &ePutFile})
+var sPutRepositoryTriggers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRepositoryTriggers, Type: smithy.ShapeTypeOperation, Ext: &ePutRepositoryTriggers})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sTestRepositoryTriggers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestRepositoryTriggers, Type: smithy.ShapeTypeOperation, Ext: &eTestRepositoryTriggers})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateApprovalRuleTemplateContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApprovalRuleTemplateContent, Type: smithy.ShapeTypeOperation, Ext: &eUpdateApprovalRuleTemplateContent})
+var sUpdateApprovalRuleTemplateDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApprovalRuleTemplateDescription, Type: smithy.ShapeTypeOperation, Ext: &eUpdateApprovalRuleTemplateDescription})
+var sUpdateApprovalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApprovalRuleTemplateName, Type: smithy.ShapeTypeOperation, Ext: &eUpdateApprovalRuleTemplateName})
+var sUpdateComment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComment, Type: smithy.ShapeTypeOperation, Ext: &eUpdateComment})
+var sUpdateDefaultBranch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDefaultBranch, Type: smithy.ShapeTypeOperation, Ext: &eUpdateDefaultBranch})
+var sUpdatePullRequestApprovalRuleContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestApprovalRuleContent, Type: smithy.ShapeTypeOperation, Ext: &eUpdatePullRequestApprovalRuleContent})
+var sUpdatePullRequestApprovalState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestApprovalState, Type: smithy.ShapeTypeOperation, Ext: &eUpdatePullRequestApprovalState})
+var sUpdatePullRequestDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestDescription, Type: smithy.ShapeTypeOperation, Ext: &eUpdatePullRequestDescription})
+var sUpdatePullRequestStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestStatus, Type: smithy.ShapeTypeOperation, Ext: &eUpdatePullRequestStatus})
+var sUpdatePullRequestTitle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestTitle, Type: smithy.ShapeTypeOperation, Ext: &eUpdatePullRequestTitle})
+var sUpdateRepositoryDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRepositoryDescription, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRepositoryDescription})
+var sUpdateRepositoryEncryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRepositoryEncryptionKey, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRepositoryEncryptionKey})
+var sUpdateRepositoryName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRepositoryName, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRepositoryName})
+var s_CodeCommit_20150413 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeCommit_20150413, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &e_CodeCommit_20150413})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountId})
+var sActorDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActorDoesNotExistException, Members: &mActorDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eActorDoesNotExistException})
+var s_AdditionalData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdditionalData, Type: smithy.ShapeTypeString, Ext: &e_AdditionalData})
+var sApproval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApproval, Members: &mApproval, Type: smithy.ShapeTypeStructure, Ext: &eApproval})
+var s_ApprovalList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalList, Members: &m_ApprovalList, Type: smithy.ShapeTypeList, Ext: &e_ApprovalList})
+var sApprovalRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalRule, Members: &mApprovalRule, Type: smithy.ShapeTypeStructure, Ext: &eApprovalRule})
+var s_ApprovalRuleContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalRuleContent, Type: smithy.ShapeTypeString, Ext: &e_ApprovalRuleContent})
+var sApprovalRuleContentRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalRuleContentRequiredException, Members: &mApprovalRuleContentRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eApprovalRuleContentRequiredException})
+var sApprovalRuleDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalRuleDoesNotExistException, Members: &mApprovalRuleDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eApprovalRuleDoesNotExistException})
+var sApprovalRuleEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalRuleEventMetadata, Members: &mApprovalRuleEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &eApprovalRuleEventMetadata})
+var s_ApprovalRuleId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalRuleId, Type: smithy.ShapeTypeString, Ext: &e_ApprovalRuleId})
+var s_ApprovalRuleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalRuleName, Type: smithy.ShapeTypeString, Ext: &e_ApprovalRuleName})
+var sApprovalRuleNameAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalRuleNameAlreadyExistsException, Members: &mApprovalRuleNameAlreadyExistsException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eApprovalRuleNameAlreadyExistsException})
+var sApprovalRuleNameRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalRuleNameRequiredException, Members: &mApprovalRuleNameRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eApprovalRuleNameRequiredException})
+var sApprovalRuleOverriddenEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalRuleOverriddenEventMetadata, Members: &mApprovalRuleOverriddenEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &eApprovalRuleOverriddenEventMetadata})
+var s_ApprovalRulesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalRulesList, Members: &m_ApprovalRulesList, Type: smithy.ShapeTypeList, Ext: &e_ApprovalRulesList})
+var s_ApprovalRulesNotSatisfiedList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalRulesNotSatisfiedList, Members: &m_ApprovalRulesNotSatisfiedList, Type: smithy.ShapeTypeList, Ext: &e_ApprovalRulesNotSatisfiedList})
+var s_ApprovalRulesSatisfiedList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalRulesSatisfiedList, Members: &m_ApprovalRulesSatisfiedList, Type: smithy.ShapeTypeList, Ext: &e_ApprovalRulesSatisfiedList})
+var sApprovalRuleTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalRuleTemplate, Members: &mApprovalRuleTemplate, Type: smithy.ShapeTypeStructure, Ext: &eApprovalRuleTemplate})
+var s_ApprovalRuleTemplateContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalRuleTemplateContent, Type: smithy.ShapeTypeString, Ext: &e_ApprovalRuleTemplateContent})
+var sApprovalRuleTemplateContentRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalRuleTemplateContentRequiredException, Members: &mApprovalRuleTemplateContentRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eApprovalRuleTemplateContentRequiredException})
+var s_ApprovalRuleTemplateDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalRuleTemplateDescription, Type: smithy.ShapeTypeString, Ext: &e_ApprovalRuleTemplateDescription})
+var sApprovalRuleTemplateDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalRuleTemplateDoesNotExistException, Members: &mApprovalRuleTemplateDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eApprovalRuleTemplateDoesNotExistException})
+var s_ApprovalRuleTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalRuleTemplateId, Type: smithy.ShapeTypeString, Ext: &e_ApprovalRuleTemplateId})
+var sApprovalRuleTemplateInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalRuleTemplateInUseException, Members: &mApprovalRuleTemplateInUseException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eApprovalRuleTemplateInUseException})
+var s_ApprovalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &e_ApprovalRuleTemplateName})
+var sApprovalRuleTemplateNameAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalRuleTemplateNameAlreadyExistsException, Members: &mApprovalRuleTemplateNameAlreadyExistsException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eApprovalRuleTemplateNameAlreadyExistsException})
+var s_ApprovalRuleTemplateNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalRuleTemplateNameList, Members: &m_ApprovalRuleTemplateNameList, Type: smithy.ShapeTypeList, Ext: &e_ApprovalRuleTemplateNameList})
+var sApprovalRuleTemplateNameRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalRuleTemplateNameRequiredException, Members: &mApprovalRuleTemplateNameRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eApprovalRuleTemplateNameRequiredException})
+var sApprovalState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalState, Members: &mApprovalState, Type: smithy.ShapeTypeEnum, Ext: &eApprovalState})
+var sApprovalStateChangedEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalStateChangedEventMetadata, Members: &mApprovalStateChangedEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &eApprovalStateChangedEventMetadata})
+var sApprovalStateRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalStateRequiredException, Members: &mApprovalStateRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eApprovalStateRequiredException})
+var s_Approved = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Approved, Type: smithy.ShapeTypeBoolean, Ext: &e_Approved})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var sAuthorDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthorDoesNotExistException, Members: &mAuthorDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eAuthorDoesNotExistException})
+var sBatchAssociateApprovalRuleTemplateWithRepositoriesError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateApprovalRuleTemplateWithRepositoriesError, Members: &mBatchAssociateApprovalRuleTemplateWithRepositoriesError, Type: smithy.ShapeTypeStructure, Ext: &eBatchAssociateApprovalRuleTemplateWithRepositoriesError})
+var s_BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList, Members: &m_BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList, Type: smithy.ShapeTypeList, Ext: &e_BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList})
+var sBatchDescribeMergeConflictsError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDescribeMergeConflictsError, Members: &mBatchDescribeMergeConflictsError, Type: smithy.ShapeTypeStructure, Ext: &eBatchDescribeMergeConflictsError})
+var s_BatchDescribeMergeConflictsErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchDescribeMergeConflictsErrors, Members: &m_BatchDescribeMergeConflictsErrors, Type: smithy.ShapeTypeList, Ext: &e_BatchDescribeMergeConflictsErrors})
+var sBatchDisassociateApprovalRuleTemplateFromRepositoriesError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateApprovalRuleTemplateFromRepositoriesError, Members: &mBatchDisassociateApprovalRuleTemplateFromRepositoriesError, Type: smithy.ShapeTypeStructure, Ext: &eBatchDisassociateApprovalRuleTemplateFromRepositoriesError})
+var s_BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList, Members: &m_BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList, Type: smithy.ShapeTypeList, Ext: &e_BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList})
+var sBatchGetCommitsError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetCommitsError, Members: &mBatchGetCommitsError, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetCommitsError})
+var s_BatchGetCommitsErrorsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetCommitsErrorsList, Members: &m_BatchGetCommitsErrorsList, Type: smithy.ShapeTypeList, Ext: &e_BatchGetCommitsErrorsList})
+var sBatchGetRepositoriesError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetRepositoriesError, Members: &mBatchGetRepositoriesError, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetRepositoriesError})
+var sBatchGetRepositoriesErrorCodeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetRepositoriesErrorCodeEnum, Members: &mBatchGetRepositoriesErrorCodeEnum, Type: smithy.ShapeTypeEnum, Ext: &eBatchGetRepositoriesErrorCodeEnum})
+var s_BatchGetRepositoriesErrorsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetRepositoriesErrorsList, Members: &m_BatchGetRepositoriesErrorsList, Type: smithy.ShapeTypeList, Ext: &e_BatchGetRepositoriesErrorsList})
+var sBeforeCommitIdAndAfterCommitIdAreSameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBeforeCommitIdAndAfterCommitIdAreSameException, Members: &mBeforeCommitIdAndAfterCommitIdAreSameException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eBeforeCommitIdAndAfterCommitIdAreSameException})
+var s_blob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_blob, Type: smithy.ShapeTypeBlob, Ext: &e_blob})
+var sBlobIdDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlobIdDoesNotExistException, Members: &mBlobIdDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eBlobIdDoesNotExistException})
+var sBlobIdRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlobIdRequiredException, Members: &mBlobIdRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eBlobIdRequiredException})
+var sBlobMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlobMetadata, Members: &mBlobMetadata, Type: smithy.ShapeTypeStructure, Ext: &eBlobMetadata})
+var sBranchDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBranchDoesNotExistException, Members: &mBranchDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eBranchDoesNotExistException})
+var sBranchInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBranchInfo, Members: &mBranchInfo, Type: smithy.ShapeTypeStructure, Ext: &eBranchInfo})
+var s_BranchName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &e_BranchName})
+var sBranchNameExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBranchNameExistsException, Members: &mBranchNameExistsException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eBranchNameExistsException})
+var sBranchNameIsTagNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBranchNameIsTagNameException, Members: &mBranchNameIsTagNameException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eBranchNameIsTagNameException})
+var s_BranchNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BranchNameList, Members: &m_BranchNameList, Type: smithy.ShapeTypeList, Ext: &e_BranchNameList})
+var sBranchNameRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBranchNameRequiredException, Members: &mBranchNameRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eBranchNameRequiredException})
+var s_CallerReactions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CallerReactions, Members: &m_CallerReactions, Type: smithy.ShapeTypeList, Ext: &e_CallerReactions})
+var sCannotDeleteApprovalRuleFromTemplateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCannotDeleteApprovalRuleFromTemplateException, Members: &mCannotDeleteApprovalRuleFromTemplateException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eCannotDeleteApprovalRuleFromTemplateException})
+var sCannotModifyApprovalRuleFromTemplateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCannotModifyApprovalRuleFromTemplateException, Members: &mCannotModifyApprovalRuleFromTemplateException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eCannotModifyApprovalRuleFromTemplateException})
+var s_CapitalBoolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapitalBoolean, Type: smithy.ShapeTypeBoolean, Ext: &e_CapitalBoolean})
+var sChangeTypeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangeTypeEnum, Members: &mChangeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eChangeTypeEnum})
+var s_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString, Ext: &e_ClientRequestToken})
+var sClientRequestTokenRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientRequestTokenRequiredException, Members: &mClientRequestTokenRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eClientRequestTokenRequiredException})
+var s_CloneUrlHttp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloneUrlHttp, Type: smithy.ShapeTypeString, Ext: &e_CloneUrlHttp})
+var s_CloneUrlSsh = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloneUrlSsh, Type: smithy.ShapeTypeString, Ext: &e_CloneUrlSsh})
+var sComment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComment, Members: &mComment, Type: smithy.ShapeTypeStructure, Ext: &eComment})
+var sCommentContentRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommentContentRequiredException, Members: &mCommentContentRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eCommentContentRequiredException})
+var sCommentContentSizeLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommentContentSizeLimitExceededException, Members: &mCommentContentSizeLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eCommentContentSizeLimitExceededException})
+var sCommentDeletedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommentDeletedException, Members: &mCommentDeletedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eCommentDeletedException})
+var sCommentDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommentDoesNotExistException, Members: &mCommentDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eCommentDoesNotExistException})
+var s_CommentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommentId, Type: smithy.ShapeTypeString, Ext: &e_CommentId})
+var sCommentIdRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommentIdRequiredException, Members: &mCommentIdRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eCommentIdRequiredException})
+var sCommentNotCreatedByCallerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommentNotCreatedByCallerException, Members: &mCommentNotCreatedByCallerException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eCommentNotCreatedByCallerException})
+var s_Comments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Comments, Members: &m_Comments, Type: smithy.ShapeTypeList, Ext: &e_Comments})
+var sCommentsForComparedCommit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommentsForComparedCommit, Members: &mCommentsForComparedCommit, Type: smithy.ShapeTypeStructure, Ext: &eCommentsForComparedCommit})
+var s_CommentsForComparedCommitData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommentsForComparedCommitData, Members: &m_CommentsForComparedCommitData, Type: smithy.ShapeTypeList, Ext: &e_CommentsForComparedCommitData})
+var sCommentsForPullRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommentsForPullRequest, Members: &mCommentsForPullRequest, Type: smithy.ShapeTypeStructure, Ext: &eCommentsForPullRequest})
+var s_CommentsForPullRequestData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommentsForPullRequestData, Members: &m_CommentsForPullRequestData, Type: smithy.ShapeTypeList, Ext: &e_CommentsForPullRequestData})
+var sCommit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommit, Members: &mCommit, Type: smithy.ShapeTypeStructure, Ext: &eCommit})
+var sCommitDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommitDoesNotExistException, Members: &mCommitDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eCommitDoesNotExistException})
+var s_CommitId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &e_CommitId})
+var sCommitIdDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommitIdDoesNotExistException, Members: &mCommitIdDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eCommitIdDoesNotExistException})
+var sCommitIdRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommitIdRequiredException, Members: &mCommitIdRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eCommitIdRequiredException})
+var s_CommitIdsInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommitIdsInputList, Members: &m_CommitIdsInputList, Type: smithy.ShapeTypeList, Ext: &e_CommitIdsInputList})
+var sCommitIdsLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommitIdsLimitExceededException, Members: &mCommitIdsLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eCommitIdsLimitExceededException})
+var sCommitIdsListRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommitIdsListRequiredException, Members: &mCommitIdsListRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eCommitIdsListRequiredException})
+var sCommitMessageLengthExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommitMessageLengthExceededException, Members: &mCommitMessageLengthExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eCommitMessageLengthExceededException})
+var s_CommitName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &e_CommitName})
+var s_CommitObjectsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommitObjectsList, Members: &m_CommitObjectsList, Type: smithy.ShapeTypeList, Ext: &e_CommitObjectsList})
+var sCommitRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommitRequiredException, Members: &mCommitRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eCommitRequiredException})
+var sConcurrentReferenceUpdateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentReferenceUpdateException, Members: &mConcurrentReferenceUpdateException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eConcurrentReferenceUpdateException})
+var sConflict = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflict, Members: &mConflict, Type: smithy.ShapeTypeStructure, Ext: &eConflict})
+var sConflictDetailLevelTypeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictDetailLevelTypeEnum, Members: &mConflictDetailLevelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eConflictDetailLevelTypeEnum})
+var sConflictMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictMetadata, Members: &mConflictMetadata, Type: smithy.ShapeTypeStructure, Ext: &eConflictMetadata})
+var s_ConflictMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConflictMetadataList, Members: &m_ConflictMetadataList, Type: smithy.ShapeTypeList, Ext: &e_ConflictMetadataList})
+var sConflictResolution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictResolution, Members: &mConflictResolution, Type: smithy.ShapeTypeStructure, Ext: &eConflictResolution})
+var sConflictResolutionStrategyTypeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictResolutionStrategyTypeEnum, Members: &mConflictResolutionStrategyTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eConflictResolutionStrategyTypeEnum})
+var s_Conflicts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Conflicts, Members: &m_Conflicts, Type: smithy.ShapeTypeList, Ext: &e_Conflicts})
+var s_Content = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Content, Type: smithy.ShapeTypeString, Ext: &e_Content})
+var s_Count = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &e_Count})
+var s_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreationDate, Type: smithy.ShapeTypeTimestamp, Ext: &e_CreationDate})
+var s_Date = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Date, Type: smithy.ShapeTypeString, Ext: &e_Date})
+var sDefaultBranchCannotBeDeletedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefaultBranchCannotBeDeletedException, Members: &mDefaultBranchCannotBeDeletedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eDefaultBranchCannotBeDeletedException})
+var s_DeleteFileEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeleteFileEntries, Members: &m_DeleteFileEntries, Type: smithy.ShapeTypeList, Ext: &e_DeleteFileEntries})
+var sDeleteFileEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFileEntry, Members: &mDeleteFileEntry, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFileEntry})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &e_Description})
+var sDiffChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiffChange, Members: &mDiffChange, Type: smithy.ShapeTypeStructure, Ext: &eDiffChange})
+var s_DiffChangeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DiffChangeList, Members: &m_DiffChangeList, Type: smithy.ShapeTypeList, Ext: &e_DiffChangeList})
+var sDiffChangeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiffChangeType, Members: &mDiffChangeType, Type: smithy.ShapeTypeEnum, Ext: &eDiffChangeType})
+var s_DiffContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DiffContext, Type: smithy.ShapeTypeInteger, Ext: &e_DiffContext})
+var sDifference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDifference, Members: &mDifference, Type: smithy.ShapeTypeStructure, Ext: &eDifference})
+var s_DifferenceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DifferenceList, Members: &m_DifferenceList, Type: smithy.ShapeTypeList, Ext: &e_DifferenceList})
+var sDiffHunk = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiffHunk, Members: &mDiffHunk, Type: smithy.ShapeTypeStructure, Ext: &eDiffHunk})
+var s_DiffHunkList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DiffHunkList, Members: &m_DiffHunkList, Type: smithy.ShapeTypeList, Ext: &e_DiffHunkList})
+var sDirectoryNameConflictsWithFileNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryNameConflictsWithFileNameException, Members: &mDirectoryNameConflictsWithFileNameException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eDirectoryNameConflictsWithFileNameException})
+var s_Email = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Email, Type: smithy.ShapeTypeString, Ext: &e_Email})
+var sEncryptionIntegrityChecksFailedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionIntegrityChecksFailedException, Members: &mEncryptionIntegrityChecksFailedException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionIntegrityChecksFailedException})
+var sEncryptionKeyAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionKeyAccessDeniedException, Members: &mEncryptionKeyAccessDeniedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionKeyAccessDeniedException})
+var sEncryptionKeyDisabledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionKeyDisabledException, Members: &mEncryptionKeyDisabledException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionKeyDisabledException})
+var sEncryptionKeyInvalidIdException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionKeyInvalidIdException, Members: &mEncryptionKeyInvalidIdException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionKeyInvalidIdException})
+var sEncryptionKeyInvalidUsageException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionKeyInvalidUsageException, Members: &mEncryptionKeyInvalidUsageException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionKeyInvalidUsageException})
+var sEncryptionKeyNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionKeyNotFoundException, Members: &mEncryptionKeyNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionKeyNotFoundException})
+var sEncryptionKeyRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionKeyRequiredException, Members: &mEncryptionKeyRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionKeyRequiredException})
+var sEncryptionKeyUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionKeyUnavailableException, Members: &mEncryptionKeyUnavailableException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionKeyUnavailableException})
+var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &e_ErrorCode})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var sEvaluation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluation, Members: &mEvaluation, Type: smithy.ShapeTypeStructure, Ext: &eEvaluation})
+var s_EventDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventDate, Type: smithy.ShapeTypeTimestamp, Ext: &e_EventDate})
+var s_ExceptionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionName, Type: smithy.ShapeTypeString, Ext: &e_ExceptionName})
+var sFile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFile, Members: &mFile, Type: smithy.ShapeTypeStructure, Ext: &eFile})
+var s_FileContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileContent, Type: smithy.ShapeTypeBlob, Ext: &e_FileContent})
+var sFileContentAndSourceFileSpecifiedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileContentAndSourceFileSpecifiedException, Members: &mFileContentAndSourceFileSpecifiedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eFileContentAndSourceFileSpecifiedException})
+var sFileContentRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileContentRequiredException, Members: &mFileContentRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eFileContentRequiredException})
+var sFileContentSizeLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileContentSizeLimitExceededException, Members: &mFileContentSizeLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eFileContentSizeLimitExceededException})
+var sFileDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileDoesNotExistException, Members: &mFileDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eFileDoesNotExistException})
+var sFileEntryRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileEntryRequiredException, Members: &mFileEntryRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eFileEntryRequiredException})
+var s_FileList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileList, Members: &m_FileList, Type: smithy.ShapeTypeList, Ext: &e_FileList})
+var sFileMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileMetadata, Members: &mFileMetadata, Type: smithy.ShapeTypeStructure, Ext: &eFileMetadata})
+var sFileModeRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileModeRequiredException, Members: &mFileModeRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eFileModeRequiredException})
+var sFileModes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileModes, Members: &mFileModes, Type: smithy.ShapeTypeStructure, Ext: &eFileModes})
+var sFileModeTypeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileModeTypeEnum, Members: &mFileModeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eFileModeTypeEnum})
+var sFileNameConflictsWithDirectoryNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileNameConflictsWithDirectoryNameException, Members: &mFileNameConflictsWithDirectoryNameException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eFileNameConflictsWithDirectoryNameException})
+var sFilePathConflictsWithSubmodulePathException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilePathConflictsWithSubmodulePathException, Members: &mFilePathConflictsWithSubmodulePathException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eFilePathConflictsWithSubmodulePathException})
+var s_FilePaths = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilePaths, Members: &m_FilePaths, Type: smithy.ShapeTypeList, Ext: &e_FilePaths})
+var s_FileSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileSize, Type: smithy.ShapeTypeLong, Ext: &e_FileSize})
+var sFileSizes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileSizes, Members: &mFileSizes, Type: smithy.ShapeTypeStructure, Ext: &eFileSizes})
+var s_FilesMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilesMetadata, Members: &m_FilesMetadata, Type: smithy.ShapeTypeList, Ext: &e_FilesMetadata})
+var sFileTooLargeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileTooLargeException, Members: &mFileTooLargeException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eFileTooLargeException})
+var sFileVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileVersion, Members: &mFileVersion, Type: smithy.ShapeTypeStructure, Ext: &eFileVersion})
+var sFolder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFolder, Members: &mFolder, Type: smithy.ShapeTypeStructure, Ext: &eFolder})
+var sFolderContentSizeLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFolderContentSizeLimitExceededException, Members: &mFolderContentSizeLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eFolderContentSizeLimitExceededException})
+var sFolderDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFolderDoesNotExistException, Members: &mFolderDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eFolderDoesNotExistException})
+var s_FolderList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FolderList, Members: &m_FolderList, Type: smithy.ShapeTypeList, Ext: &e_FolderList})
+var s_HunkContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HunkContent, Type: smithy.ShapeTypeString, Ext: &e_HunkContent})
+var sIdempotencyParameterMismatchException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdempotencyParameterMismatchException, Members: &mIdempotencyParameterMismatchException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eIdempotencyParameterMismatchException})
+var s_IgnoreWhiteSpaces = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IgnoreWhiteSpaces, Type: smithy.ShapeTypeBoolean, Ext: &e_IgnoreWhiteSpaces})
+var sInvalidActorArnException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidActorArnException, Members: &mInvalidActorArnException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidActorArnException})
+var sInvalidApprovalRuleContentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidApprovalRuleContentException, Members: &mInvalidApprovalRuleContentException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidApprovalRuleContentException})
+var sInvalidApprovalRuleNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidApprovalRuleNameException, Members: &mInvalidApprovalRuleNameException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidApprovalRuleNameException})
+var sInvalidApprovalRuleTemplateContentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidApprovalRuleTemplateContentException, Members: &mInvalidApprovalRuleTemplateContentException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidApprovalRuleTemplateContentException})
+var sInvalidApprovalRuleTemplateDescriptionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidApprovalRuleTemplateDescriptionException, Members: &mInvalidApprovalRuleTemplateDescriptionException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidApprovalRuleTemplateDescriptionException})
+var sInvalidApprovalRuleTemplateNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidApprovalRuleTemplateNameException, Members: &mInvalidApprovalRuleTemplateNameException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidApprovalRuleTemplateNameException})
+var sInvalidApprovalStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidApprovalStateException, Members: &mInvalidApprovalStateException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidApprovalStateException})
+var sInvalidAuthorArnException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidAuthorArnException, Members: &mInvalidAuthorArnException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidAuthorArnException})
+var sInvalidBlobIdException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidBlobIdException, Members: &mInvalidBlobIdException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidBlobIdException})
+var sInvalidBranchNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidBranchNameException, Members: &mInvalidBranchNameException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidBranchNameException})
+var sInvalidClientRequestTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidClientRequestTokenException, Members: &mInvalidClientRequestTokenException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidClientRequestTokenException})
+var sInvalidCommentIdException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidCommentIdException, Members: &mInvalidCommentIdException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidCommentIdException})
+var sInvalidCommitException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidCommitException, Members: &mInvalidCommitException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidCommitException})
+var sInvalidCommitIdException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidCommitIdException, Members: &mInvalidCommitIdException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidCommitIdException})
+var sInvalidConflictDetailLevelException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidConflictDetailLevelException, Members: &mInvalidConflictDetailLevelException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidConflictDetailLevelException})
+var sInvalidConflictResolutionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidConflictResolutionException, Members: &mInvalidConflictResolutionException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidConflictResolutionException})
+var sInvalidConflictResolutionStrategyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidConflictResolutionStrategyException, Members: &mInvalidConflictResolutionStrategyException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidConflictResolutionStrategyException})
+var sInvalidContinuationTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidContinuationTokenException, Members: &mInvalidContinuationTokenException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidContinuationTokenException})
+var sInvalidDeletionParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidDeletionParameterException, Members: &mInvalidDeletionParameterException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidDeletionParameterException})
+var sInvalidDescriptionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidDescriptionException, Members: &mInvalidDescriptionException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidDescriptionException})
+var sInvalidDestinationCommitSpecifierException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidDestinationCommitSpecifierException, Members: &mInvalidDestinationCommitSpecifierException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidDestinationCommitSpecifierException})
+var sInvalidEmailException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidEmailException, Members: &mInvalidEmailException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidEmailException})
+var sInvalidFileLocationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidFileLocationException, Members: &mInvalidFileLocationException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidFileLocationException})
+var sInvalidFileModeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidFileModeException, Members: &mInvalidFileModeException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidFileModeException})
+var sInvalidFilePositionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidFilePositionException, Members: &mInvalidFilePositionException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidFilePositionException})
+var sInvalidMaxConflictFilesException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidMaxConflictFilesException, Members: &mInvalidMaxConflictFilesException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidMaxConflictFilesException})
+var sInvalidMaxMergeHunksException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidMaxMergeHunksException, Members: &mInvalidMaxMergeHunksException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidMaxMergeHunksException})
+var sInvalidMaxResultsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidMaxResultsException, Members: &mInvalidMaxResultsException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidMaxResultsException})
+var sInvalidMergeOptionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidMergeOptionException, Members: &mInvalidMergeOptionException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidMergeOptionException})
+var sInvalidOrderException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidOrderException, Members: &mInvalidOrderException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidOrderException})
+var sInvalidOverrideStatusException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidOverrideStatusException, Members: &mInvalidOverrideStatusException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidOverrideStatusException})
+var sInvalidParentCommitIdException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParentCommitIdException, Members: &mInvalidParentCommitIdException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidParentCommitIdException})
+var sInvalidPathException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidPathException, Members: &mInvalidPathException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidPathException})
+var sInvalidPullRequestEventTypeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidPullRequestEventTypeException, Members: &mInvalidPullRequestEventTypeException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidPullRequestEventTypeException})
+var sInvalidPullRequestIdException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidPullRequestIdException, Members: &mInvalidPullRequestIdException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidPullRequestIdException})
+var sInvalidPullRequestStatusException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidPullRequestStatusException, Members: &mInvalidPullRequestStatusException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidPullRequestStatusException})
+var sInvalidPullRequestStatusUpdateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidPullRequestStatusUpdateException, Members: &mInvalidPullRequestStatusUpdateException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidPullRequestStatusUpdateException})
+var sInvalidReactionUserArnException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidReactionUserArnException, Members: &mInvalidReactionUserArnException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidReactionUserArnException})
+var sInvalidReactionValueException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidReactionValueException, Members: &mInvalidReactionValueException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidReactionValueException})
+var sInvalidReferenceNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidReferenceNameException, Members: &mInvalidReferenceNameException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidReferenceNameException})
+var sInvalidRelativeFileVersionEnumException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRelativeFileVersionEnumException, Members: &mInvalidRelativeFileVersionEnumException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRelativeFileVersionEnumException})
+var sInvalidReplacementContentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidReplacementContentException, Members: &mInvalidReplacementContentException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidReplacementContentException})
+var sInvalidReplacementTypeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidReplacementTypeException, Members: &mInvalidReplacementTypeException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidReplacementTypeException})
+var sInvalidRepositoryDescriptionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRepositoryDescriptionException, Members: &mInvalidRepositoryDescriptionException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRepositoryDescriptionException})
+var sInvalidRepositoryNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRepositoryNameException, Members: &mInvalidRepositoryNameException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRepositoryNameException})
+var sInvalidRepositoryTriggerBranchNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRepositoryTriggerBranchNameException, Members: &mInvalidRepositoryTriggerBranchNameException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRepositoryTriggerBranchNameException})
+var sInvalidRepositoryTriggerCustomDataException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRepositoryTriggerCustomDataException, Members: &mInvalidRepositoryTriggerCustomDataException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRepositoryTriggerCustomDataException})
+var sInvalidRepositoryTriggerDestinationArnException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRepositoryTriggerDestinationArnException, Members: &mInvalidRepositoryTriggerDestinationArnException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRepositoryTriggerDestinationArnException})
+var sInvalidRepositoryTriggerEventsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRepositoryTriggerEventsException, Members: &mInvalidRepositoryTriggerEventsException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRepositoryTriggerEventsException})
+var sInvalidRepositoryTriggerNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRepositoryTriggerNameException, Members: &mInvalidRepositoryTriggerNameException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRepositoryTriggerNameException})
+var sInvalidRepositoryTriggerRegionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRepositoryTriggerRegionException, Members: &mInvalidRepositoryTriggerRegionException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRepositoryTriggerRegionException})
+var sInvalidResourceArnException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidResourceArnException, Members: &mInvalidResourceArnException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidResourceArnException})
+var sInvalidRevisionIdException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRevisionIdException, Members: &mInvalidRevisionIdException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRevisionIdException})
+var sInvalidRuleContentSha256Exception = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRuleContentSha256Exception, Members: &mInvalidRuleContentSha256Exception, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRuleContentSha256Exception})
+var sInvalidSortByException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSortByException, Members: &mInvalidSortByException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidSortByException})
+var sInvalidSourceCommitSpecifierException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSourceCommitSpecifierException, Members: &mInvalidSourceCommitSpecifierException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidSourceCommitSpecifierException})
+var sInvalidSystemTagUsageException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSystemTagUsageException, Members: &mInvalidSystemTagUsageException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidSystemTagUsageException})
+var sInvalidTagKeysListException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTagKeysListException, Members: &mInvalidTagKeysListException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidTagKeysListException})
+var sInvalidTagsMapException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTagsMapException, Members: &mInvalidTagsMapException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidTagsMapException})
+var sInvalidTargetBranchException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTargetBranchException, Members: &mInvalidTargetBranchException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidTargetBranchException})
+var sInvalidTargetException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTargetException, Members: &mInvalidTargetException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidTargetException})
+var sInvalidTargetsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTargetsException, Members: &mInvalidTargetsException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidTargetsException})
+var sInvalidTitleException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTitleException, Members: &mInvalidTitleException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidTitleException})
+var sIsBinaryFile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIsBinaryFile, Members: &mIsBinaryFile, Type: smithy.ShapeTypeStructure, Ext: &eIsBinaryFile})
+var s_IsCommentDeleted = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsCommentDeleted, Type: smithy.ShapeTypeBoolean, Ext: &e_IsCommentDeleted})
+var s_IsContentConflict = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsContentConflict, Type: smithy.ShapeTypeBoolean, Ext: &e_IsContentConflict})
+var s_IsFileModeConflict = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsFileModeConflict, Type: smithy.ShapeTypeBoolean, Ext: &e_IsFileModeConflict})
+var s_IsHunkConflict = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsHunkConflict, Type: smithy.ShapeTypeBoolean, Ext: &e_IsHunkConflict})
+var s_IsMergeable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsMergeable, Type: smithy.ShapeTypeBoolean, Ext: &e_IsMergeable})
+var s_IsMerged = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsMerged, Type: smithy.ShapeTypeBoolean, Ext: &e_IsMerged})
+var s_IsMove = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsMove, Type: smithy.ShapeTypeBoolean, Ext: &e_IsMove})
+var s_IsObjectTypeConflict = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsObjectTypeConflict, Type: smithy.ShapeTypeBoolean, Ext: &e_IsObjectTypeConflict})
+var s_KeepEmptyFolders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeepEmptyFolders, Type: smithy.ShapeTypeBoolean, Ext: &e_KeepEmptyFolders})
+var s_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyId})
+var s_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastModifiedDate, Type: smithy.ShapeTypeTimestamp, Ext: &e_LastModifiedDate})
+var s_Limit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Limit, Type: smithy.ShapeTypeInteger, Ext: &e_Limit})
+var s_LineContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LineContent, Type: smithy.ShapeTypeString, Ext: &e_LineContent})
+var s_LineNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LineNumber, Type: smithy.ShapeTypeInteger, Ext: &e_LineNumber})
+var sLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLocation, Members: &mLocation, Type: smithy.ShapeTypeStructure, Ext: &eLocation})
+var sManualMergeRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManualMergeRequiredException, Members: &mManualMergeRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eManualMergeRequiredException})
+var sMaximumBranchesExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaximumBranchesExceededException, Members: &mMaximumBranchesExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eMaximumBranchesExceededException})
+var sMaximumConflictResolutionEntriesExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaximumConflictResolutionEntriesExceededException, Members: &mMaximumConflictResolutionEntriesExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eMaximumConflictResolutionEntriesExceededException})
+var sMaximumFileContentToLoadExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaximumFileContentToLoadExceededException, Members: &mMaximumFileContentToLoadExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eMaximumFileContentToLoadExceededException})
+var sMaximumFileEntriesExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaximumFileEntriesExceededException, Members: &mMaximumFileEntriesExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eMaximumFileEntriesExceededException})
+var sMaximumItemsToCompareExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaximumItemsToCompareExceededException, Members: &mMaximumItemsToCompareExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eMaximumItemsToCompareExceededException})
+var sMaximumNumberOfApprovalsExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaximumNumberOfApprovalsExceededException, Members: &mMaximumNumberOfApprovalsExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eMaximumNumberOfApprovalsExceededException})
+var sMaximumOpenPullRequestsExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaximumOpenPullRequestsExceededException, Members: &mMaximumOpenPullRequestsExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eMaximumOpenPullRequestsExceededException})
+var sMaximumRepositoryNamesExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaximumRepositoryNamesExceededException, Members: &mMaximumRepositoryNamesExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eMaximumRepositoryNamesExceededException})
+var sMaximumRepositoryTriggersExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaximumRepositoryTriggersExceededException, Members: &mMaximumRepositoryTriggersExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eMaximumRepositoryTriggersExceededException})
+var sMaximumRuleTemplatesAssociatedWithRepositoryException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaximumRuleTemplatesAssociatedWithRepositoryException, Members: &mMaximumRuleTemplatesAssociatedWithRepositoryException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eMaximumRuleTemplatesAssociatedWithRepositoryException})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var sMergeHunk = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeHunk, Members: &mMergeHunk, Type: smithy.ShapeTypeStructure, Ext: &eMergeHunk})
+var sMergeHunkDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeHunkDetail, Members: &mMergeHunkDetail, Type: smithy.ShapeTypeStructure, Ext: &eMergeHunkDetail})
+var s_MergeHunks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MergeHunks, Members: &m_MergeHunks, Type: smithy.ShapeTypeList, Ext: &e_MergeHunks})
+var sMergeMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeMetadata, Members: &mMergeMetadata, Type: smithy.ShapeTypeStructure, Ext: &eMergeMetadata})
+var sMergeOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeOperations, Members: &mMergeOperations, Type: smithy.ShapeTypeStructure, Ext: &eMergeOperations})
+var sMergeOptionRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeOptionRequiredException, Members: &mMergeOptionRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eMergeOptionRequiredException})
+var s_MergeOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MergeOptions, Members: &m_MergeOptions, Type: smithy.ShapeTypeList, Ext: &e_MergeOptions})
+var sMergeOptionTypeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeOptionTypeEnum, Members: &mMergeOptionTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eMergeOptionTypeEnum})
+var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &e_Message})
+var s_Mode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Mode, Type: smithy.ShapeTypeString, Ext: &e_Mode})
+var sMultipleConflictResolutionEntriesException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMultipleConflictResolutionEntriesException, Members: &mMultipleConflictResolutionEntriesException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eMultipleConflictResolutionEntriesException})
+var sMultipleRepositoriesInPullRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMultipleRepositoriesInPullRequestException, Members: &mMultipleRepositoriesInPullRequestException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eMultipleRepositoriesInPullRequestException})
+var s_Name = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &e_Name})
+var sNameLengthExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNameLengthExceededException, Members: &mNameLengthExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eNameLengthExceededException})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sNoChangeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoChangeException, Members: &mNoChangeException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eNoChangeException})
+var s_NumberOfConflicts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberOfConflicts, Type: smithy.ShapeTypeInteger, Ext: &e_NumberOfConflicts})
+var sNumberOfRulesExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNumberOfRulesExceededException, Members: &mNumberOfRulesExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eNumberOfRulesExceededException})
+var sNumberOfRuleTemplatesExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNumberOfRuleTemplatesExceededException, Members: &mNumberOfRuleTemplatesExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eNumberOfRuleTemplatesExceededException})
+var s_ObjectId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &e_ObjectId})
+var s_ObjectSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObjectSize, Type: smithy.ShapeTypeLong, Ext: &e_ObjectSize})
+var sObjectTypeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObjectTypeEnum, Members: &mObjectTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eObjectTypeEnum})
+var sObjectTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObjectTypes, Members: &mObjectTypes, Type: smithy.ShapeTypeStructure, Ext: &eObjectTypes})
+var sOperationNotAllowedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationNotAllowedException, Members: &mOperationNotAllowedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eOperationNotAllowedException})
+var sOrderEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrderEnum, Members: &mOrderEnum, Type: smithy.ShapeTypeEnum, Ext: &eOrderEnum})
+var sOriginApprovalRuleTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOriginApprovalRuleTemplate, Members: &mOriginApprovalRuleTemplate, Type: smithy.ShapeTypeStructure, Ext: &eOriginApprovalRuleTemplate})
+var s_Overridden = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Overridden, Type: smithy.ShapeTypeBoolean, Ext: &e_Overridden})
+var sOverrideAlreadySetException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOverrideAlreadySetException, Members: &mOverrideAlreadySetException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eOverrideAlreadySetException})
+var sOverrideStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOverrideStatus, Members: &mOverrideStatus, Type: smithy.ShapeTypeEnum, Ext: &eOverrideStatus})
+var sOverrideStatusRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOverrideStatusRequiredException, Members: &mOverrideStatusRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eOverrideStatusRequiredException})
+var sParentCommitDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParentCommitDoesNotExistException, Members: &mParentCommitDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eParentCommitDoesNotExistException})
+var sParentCommitIdOutdatedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParentCommitIdOutdatedException, Members: &mParentCommitIdOutdatedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eParentCommitIdOutdatedException})
+var sParentCommitIdRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParentCommitIdRequiredException, Members: &mParentCommitIdRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eParentCommitIdRequiredException})
+var s_ParentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParentList, Members: &m_ParentList, Type: smithy.ShapeTypeList, Ext: &e_ParentList})
+var s_Path = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &e_Path})
+var sPathDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPathDoesNotExistException, Members: &mPathDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ePathDoesNotExistException})
+var sPathRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPathRequiredException, Members: &mPathRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ePathRequiredException})
+var s_Position = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Position, Type: smithy.ShapeTypeLong, Ext: &e_Position})
+var sPullRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequest, Members: &mPullRequest, Type: smithy.ShapeTypeStructure, Ext: &ePullRequest})
+var sPullRequestAlreadyClosedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestAlreadyClosedException, Members: &mPullRequestAlreadyClosedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestAlreadyClosedException})
+var sPullRequestApprovalRulesNotSatisfiedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestApprovalRulesNotSatisfiedException, Members: &mPullRequestApprovalRulesNotSatisfiedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestApprovalRulesNotSatisfiedException})
+var sPullRequestCannotBeApprovedByAuthorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestCannotBeApprovedByAuthorException, Members: &mPullRequestCannotBeApprovedByAuthorException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestCannotBeApprovedByAuthorException})
+var sPullRequestCreatedEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestCreatedEventMetadata, Members: &mPullRequestCreatedEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestCreatedEventMetadata})
+var sPullRequestDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestDoesNotExistException, Members: &mPullRequestDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestDoesNotExistException})
+var sPullRequestEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestEvent, Members: &mPullRequestEvent, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestEvent})
+var s_PullRequestEventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PullRequestEventList, Members: &m_PullRequestEventList, Type: smithy.ShapeTypeList, Ext: &e_PullRequestEventList})
+var sPullRequestEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestEventType, Members: &mPullRequestEventType, Type: smithy.ShapeTypeEnum, Ext: &ePullRequestEventType})
+var s_PullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &e_PullRequestId})
+var s_PullRequestIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PullRequestIdList, Members: &m_PullRequestIdList, Type: smithy.ShapeTypeList, Ext: &e_PullRequestIdList})
+var sPullRequestIdRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestIdRequiredException, Members: &mPullRequestIdRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestIdRequiredException})
+var sPullRequestMergedStateChangedEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestMergedStateChangedEventMetadata, Members: &mPullRequestMergedStateChangedEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestMergedStateChangedEventMetadata})
+var sPullRequestSourceReferenceUpdatedEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestSourceReferenceUpdatedEventMetadata, Members: &mPullRequestSourceReferenceUpdatedEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestSourceReferenceUpdatedEventMetadata})
+var sPullRequestStatusChangedEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestStatusChangedEventMetadata, Members: &mPullRequestStatusChangedEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestStatusChangedEventMetadata})
+var sPullRequestStatusEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestStatusEnum, Members: &mPullRequestStatusEnum, Type: smithy.ShapeTypeEnum, Ext: &ePullRequestStatusEnum})
+var sPullRequestStatusRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestStatusRequiredException, Members: &mPullRequestStatusRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestStatusRequiredException})
+var sPullRequestTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPullRequestTarget, Members: &mPullRequestTarget, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestTarget})
+var s_PullRequestTargetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PullRequestTargetList, Members: &m_PullRequestTargetList, Type: smithy.ShapeTypeList, Ext: &e_PullRequestTargetList})
+var s_PutFileEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PutFileEntries, Members: &m_PutFileEntries, Type: smithy.ShapeTypeList, Ext: &e_PutFileEntries})
+var sPutFileEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutFileEntry, Members: &mPutFileEntry, Type: smithy.ShapeTypeStructure, Ext: &ePutFileEntry})
+var sPutFileEntryConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutFileEntryConflictException, Members: &mPutFileEntryConflictException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ePutFileEntryConflictException})
+var s_ReactionCountsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReactionCountsMap, Members: &m_ReactionCountsMap, Type: smithy.ShapeTypeMap, Ext: &e_ReactionCountsMap})
+var s_ReactionEmoji = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReactionEmoji, Type: smithy.ShapeTypeString, Ext: &e_ReactionEmoji})
+var sReactionForComment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReactionForComment, Members: &mReactionForComment, Type: smithy.ShapeTypeStructure, Ext: &eReactionForComment})
+var sReactionLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReactionLimitExceededException, Members: &mReactionLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eReactionLimitExceededException})
+var s_ReactionsForCommentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReactionsForCommentList, Members: &m_ReactionsForCommentList, Type: smithy.ShapeTypeList, Ext: &e_ReactionsForCommentList})
+var s_ReactionShortCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReactionShortCode, Type: smithy.ShapeTypeString, Ext: &e_ReactionShortCode})
+var s_ReactionUnicode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReactionUnicode, Type: smithy.ShapeTypeString, Ext: &e_ReactionUnicode})
+var s_ReactionUsersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReactionUsersList, Members: &m_ReactionUsersList, Type: smithy.ShapeTypeList, Ext: &e_ReactionUsersList})
+var s_ReactionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReactionValue, Type: smithy.ShapeTypeString, Ext: &e_ReactionValue})
+var sReactionValueFormats = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReactionValueFormats, Members: &mReactionValueFormats, Type: smithy.ShapeTypeStructure, Ext: &eReactionValueFormats})
+var sReactionValueRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReactionValueRequiredException, Members: &mReactionValueRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eReactionValueRequiredException})
+var sReferenceDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReferenceDoesNotExistException, Members: &mReferenceDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eReferenceDoesNotExistException})
+var s_ReferenceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReferenceName, Type: smithy.ShapeTypeString, Ext: &e_ReferenceName})
+var sReferenceNameRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReferenceNameRequiredException, Members: &mReferenceNameRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eReferenceNameRequiredException})
+var sReferenceTypeNotSupportedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReferenceTypeNotSupportedException, Members: &mReferenceTypeNotSupportedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eReferenceTypeNotSupportedException})
+var sRelativeFileVersionEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelativeFileVersionEnum, Members: &mRelativeFileVersionEnum, Type: smithy.ShapeTypeEnum, Ext: &eRelativeFileVersionEnum})
+var s_ReplaceContentEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplaceContentEntries, Members: &m_ReplaceContentEntries, Type: smithy.ShapeTypeList, Ext: &e_ReplaceContentEntries})
+var sReplaceContentEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplaceContentEntry, Members: &mReplaceContentEntry, Type: smithy.ShapeTypeStructure, Ext: &eReplaceContentEntry})
+var sReplacementContentRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplacementContentRequiredException, Members: &mReplacementContentRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eReplacementContentRequiredException})
+var sReplacementTypeEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplacementTypeEnum, Members: &mReplacementTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eReplacementTypeEnum})
+var sReplacementTypeRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplacementTypeRequiredException, Members: &mReplacementTypeRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eReplacementTypeRequiredException})
+var s_RepositoryDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryDescription, Type: smithy.ShapeTypeString, Ext: &e_RepositoryDescription})
+var sRepositoryDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryDoesNotExistException, Members: &mRepositoryDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryDoesNotExistException})
+var s_RepositoryId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryId, Type: smithy.ShapeTypeString, Ext: &e_RepositoryId})
+var sRepositoryLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryLimitExceededException, Members: &mRepositoryLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryLimitExceededException})
+var sRepositoryMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryMetadata, Members: &mRepositoryMetadata, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryMetadata})
+var s_RepositoryMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryMetadataList, Members: &m_RepositoryMetadataList, Type: smithy.ShapeTypeList, Ext: &e_RepositoryMetadataList})
+var s_RepositoryName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &e_RepositoryName})
+var sRepositoryNameExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryNameExistsException, Members: &mRepositoryNameExistsException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryNameExistsException})
+var sRepositoryNameIdPair = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryNameIdPair, Members: &mRepositoryNameIdPair, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryNameIdPair})
+var s_RepositoryNameIdPairList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryNameIdPairList, Members: &m_RepositoryNameIdPairList, Type: smithy.ShapeTypeList, Ext: &e_RepositoryNameIdPairList})
+var s_RepositoryNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryNameList, Members: &m_RepositoryNameList, Type: smithy.ShapeTypeList, Ext: &e_RepositoryNameList})
+var sRepositoryNameRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryNameRequiredException, Members: &mRepositoryNameRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryNameRequiredException})
+var sRepositoryNamesRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryNamesRequiredException, Members: &mRepositoryNamesRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryNamesRequiredException})
+var sRepositoryNotAssociatedWithPullRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryNotAssociatedWithPullRequestException, Members: &mRepositoryNotAssociatedWithPullRequestException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryNotAssociatedWithPullRequestException})
+var s_RepositoryNotFoundList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryNotFoundList, Members: &m_RepositoryNotFoundList, Type: smithy.ShapeTypeList, Ext: &e_RepositoryNotFoundList})
+var sRepositoryTrigger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryTrigger, Members: &mRepositoryTrigger, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryTrigger})
+var sRepositoryTriggerBranchNameListRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryTriggerBranchNameListRequiredException, Members: &mRepositoryTriggerBranchNameListRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryTriggerBranchNameListRequiredException})
+var s_RepositoryTriggerCustomData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryTriggerCustomData, Type: smithy.ShapeTypeString, Ext: &e_RepositoryTriggerCustomData})
+var sRepositoryTriggerDestinationArnRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryTriggerDestinationArnRequiredException, Members: &mRepositoryTriggerDestinationArnRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryTriggerDestinationArnRequiredException})
+var sRepositoryTriggerEventEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryTriggerEventEnum, Members: &mRepositoryTriggerEventEnum, Type: smithy.ShapeTypeEnum, Ext: &eRepositoryTriggerEventEnum})
+var s_RepositoryTriggerEventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryTriggerEventList, Members: &m_RepositoryTriggerEventList, Type: smithy.ShapeTypeList, Ext: &e_RepositoryTriggerEventList})
+var sRepositoryTriggerEventsListRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryTriggerEventsListRequiredException, Members: &mRepositoryTriggerEventsListRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryTriggerEventsListRequiredException})
+var sRepositoryTriggerExecutionFailure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryTriggerExecutionFailure, Members: &mRepositoryTriggerExecutionFailure, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryTriggerExecutionFailure})
+var s_RepositoryTriggerExecutionFailureList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryTriggerExecutionFailureList, Members: &m_RepositoryTriggerExecutionFailureList, Type: smithy.ShapeTypeList, Ext: &e_RepositoryTriggerExecutionFailureList})
+var s_RepositoryTriggerExecutionFailureMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryTriggerExecutionFailureMessage, Type: smithy.ShapeTypeString, Ext: &e_RepositoryTriggerExecutionFailureMessage})
+var s_RepositoryTriggerName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryTriggerName, Type: smithy.ShapeTypeString, Ext: &e_RepositoryTriggerName})
+var s_RepositoryTriggerNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryTriggerNameList, Members: &m_RepositoryTriggerNameList, Type: smithy.ShapeTypeList, Ext: &e_RepositoryTriggerNameList})
+var sRepositoryTriggerNameRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryTriggerNameRequiredException, Members: &mRepositoryTriggerNameRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryTriggerNameRequiredException})
+var s_RepositoryTriggersConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryTriggersConfigurationId, Type: smithy.ShapeTypeString, Ext: &e_RepositoryTriggersConfigurationId})
+var s_RepositoryTriggersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryTriggersList, Members: &m_RepositoryTriggersList, Type: smithy.ShapeTypeList, Ext: &e_RepositoryTriggersList})
+var sRepositoryTriggersListRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryTriggersListRequiredException, Members: &mRepositoryTriggersListRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryTriggersListRequiredException})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArn})
+var sResourceArnRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceArnRequiredException, Members: &mResourceArnRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eResourceArnRequiredException})
+var sRestrictedSourceFileException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestrictedSourceFileException, Members: &mRestrictedSourceFileException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eRestrictedSourceFileException})
+var s_RevisionChildren = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevisionChildren, Members: &m_RevisionChildren, Type: smithy.ShapeTypeList, Ext: &e_RevisionChildren})
+var s_RevisionDag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevisionDag, Members: &m_RevisionDag, Type: smithy.ShapeTypeList, Ext: &e_RevisionDag})
+var s_RevisionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevisionId, Type: smithy.ShapeTypeString, Ext: &e_RevisionId})
+var sRevisionIdRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevisionIdRequiredException, Members: &mRevisionIdRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eRevisionIdRequiredException})
+var sRevisionNotCurrentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevisionNotCurrentException, Members: &mRevisionNotCurrentException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eRevisionNotCurrentException})
+var s_RuleContentSha256 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleContentSha256, Type: smithy.ShapeTypeString, Ext: &e_RuleContentSha256})
+var sSameFileContentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSameFileContentException, Members: &mSameFileContentException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eSameFileContentException})
+var sSamePathRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSamePathRequestException, Members: &mSamePathRequestException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eSamePathRequestException})
+var s_SetFileModeEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SetFileModeEntries, Members: &m_SetFileModeEntries, Type: smithy.ShapeTypeList, Ext: &e_SetFileModeEntries})
+var sSetFileModeEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetFileModeEntry, Members: &mSetFileModeEntry, Type: smithy.ShapeTypeStructure, Ext: &eSetFileModeEntry})
+var sSortByEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortByEnum, Members: &mSortByEnum, Type: smithy.ShapeTypeEnum, Ext: &eSortByEnum})
+var sSourceAndDestinationAreSameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceAndDestinationAreSameException, Members: &mSourceAndDestinationAreSameException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eSourceAndDestinationAreSameException})
+var sSourceFileOrContentRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceFileOrContentRequiredException, Members: &mSourceFileOrContentRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eSourceFileOrContentRequiredException})
+var sSourceFileSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceFileSpecifier, Members: &mSourceFileSpecifier, Type: smithy.ShapeTypeStructure, Ext: &eSourceFileSpecifier})
+var sSubModule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubModule, Members: &mSubModule, Type: smithy.ShapeTypeStructure, Ext: &eSubModule})
+var s_SubModuleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubModuleList, Members: &m_SubModuleList, Type: smithy.ShapeTypeList, Ext: &e_SubModuleList})
+var sSymbolicLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSymbolicLink, Members: &mSymbolicLink, Type: smithy.ShapeTypeStructure, Ext: &eSymbolicLink})
+var s_SymbolicLinkList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SymbolicLinkList, Members: &m_SymbolicLinkList, Type: smithy.ShapeTypeList, Ext: &e_SymbolicLinkList})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeysList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeysList, Members: &m_TagKeysList, Type: smithy.ShapeTypeList, Ext: &e_TagKeysList})
+var sTagKeysListRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagKeysListRequiredException, Members: &mTagKeysListRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eTagKeysListRequiredException})
+var sTagPolicyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagPolicyException, Members: &mTagPolicyException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eTagPolicyException})
+var s_TagsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &e_TagsMap})
+var sTagsMapRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagsMapRequiredException, Members: &mTagsMapRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eTagsMapRequiredException})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTarget, Members: &mTarget, Type: smithy.ShapeTypeStructure, Ext: &eTarget})
+var s_TargetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetList, Members: &m_TargetList, Type: smithy.ShapeTypeList, Ext: &e_TargetList})
+var sTargetRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetRequiredException, Members: &mTargetRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eTargetRequiredException})
+var sTargetsRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetsRequiredException, Members: &mTargetsRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eTargetsRequiredException})
+var sTipOfSourceReferenceIsDifferentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTipOfSourceReferenceIsDifferentException, Members: &mTipOfSourceReferenceIsDifferentException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eTipOfSourceReferenceIsDifferentException})
+var sTipsDivergenceExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTipsDivergenceExceededException, Members: &mTipsDivergenceExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eTipsDivergenceExceededException})
+var s_Title = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Title, Type: smithy.ShapeTypeString, Ext: &e_Title})
+var sTitleRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTitleRequiredException, Members: &mTitleRequiredException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eTitleRequiredException})
+var sTooManyTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsException, Members: &mTooManyTagsException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eTooManyTagsException})
+var sUserInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserInfo, Members: &mUserInfo, Type: smithy.ShapeTypeStructure, Ext: &eUserInfo})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sAssociateApprovalRuleTemplateWithRepositoryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateApprovalRuleTemplateWithRepositoryInput, Members: &mAssociateApprovalRuleTemplateWithRepositoryInput, Type: smithy.ShapeTypeStructure, Ext: &eAssociateApprovalRuleTemplateWithRepositoryInput})
+var sBatchAssociateApprovalRuleTemplateWithRepositoriesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateApprovalRuleTemplateWithRepositoriesInput, Members: &mBatchAssociateApprovalRuleTemplateWithRepositoriesInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchAssociateApprovalRuleTemplateWithRepositoriesInput})
+var sBatchAssociateApprovalRuleTemplateWithRepositoriesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateApprovalRuleTemplateWithRepositoriesOutput, Members: &mBatchAssociateApprovalRuleTemplateWithRepositoriesOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchAssociateApprovalRuleTemplateWithRepositoriesOutput})
+var sBatchDescribeMergeConflictsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDescribeMergeConflictsInput, Members: &mBatchDescribeMergeConflictsInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchDescribeMergeConflictsInput})
+var sBatchDescribeMergeConflictsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDescribeMergeConflictsOutput, Members: &mBatchDescribeMergeConflictsOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchDescribeMergeConflictsOutput})
+var sBatchDisassociateApprovalRuleTemplateFromRepositoriesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateApprovalRuleTemplateFromRepositoriesInput, Members: &mBatchDisassociateApprovalRuleTemplateFromRepositoriesInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchDisassociateApprovalRuleTemplateFromRepositoriesInput})
+var sBatchDisassociateApprovalRuleTemplateFromRepositoriesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateApprovalRuleTemplateFromRepositoriesOutput, Members: &mBatchDisassociateApprovalRuleTemplateFromRepositoriesOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchDisassociateApprovalRuleTemplateFromRepositoriesOutput})
+var sBatchGetCommitsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetCommitsInput, Members: &mBatchGetCommitsInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetCommitsInput})
+var sBatchGetCommitsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetCommitsOutput, Members: &mBatchGetCommitsOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetCommitsOutput})
+var sBatchGetRepositoriesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetRepositoriesInput, Members: &mBatchGetRepositoriesInput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetRepositoriesInput})
+var sBatchGetRepositoriesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetRepositoriesOutput, Members: &mBatchGetRepositoriesOutput, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetRepositoriesOutput})
+var sCreateApprovalRuleTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApprovalRuleTemplateInput, Members: &mCreateApprovalRuleTemplateInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateApprovalRuleTemplateInput})
+var sCreateApprovalRuleTemplateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApprovalRuleTemplateOutput, Members: &mCreateApprovalRuleTemplateOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateApprovalRuleTemplateOutput})
+var sCreateBranchInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBranchInput, Members: &mCreateBranchInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateBranchInput})
+var sCreateCommitInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCommitInput, Members: &mCreateCommitInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateCommitInput})
+var sCreateCommitOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCommitOutput, Members: &mCreateCommitOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateCommitOutput})
+var sCreatePullRequestApprovalRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePullRequestApprovalRuleInput, Members: &mCreatePullRequestApprovalRuleInput, Type: smithy.ShapeTypeStructure, Ext: &eCreatePullRequestApprovalRuleInput})
+var sCreatePullRequestApprovalRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePullRequestApprovalRuleOutput, Members: &mCreatePullRequestApprovalRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreatePullRequestApprovalRuleOutput})
+var sCreatePullRequestInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePullRequestInput, Members: &mCreatePullRequestInput, Type: smithy.ShapeTypeStructure, Ext: &eCreatePullRequestInput})
+var sCreatePullRequestOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePullRequestOutput, Members: &mCreatePullRequestOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreatePullRequestOutput})
+var sCreateRepositoryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRepositoryInput, Members: &mCreateRepositoryInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateRepositoryInput})
+var sCreateRepositoryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRepositoryOutput, Members: &mCreateRepositoryOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateRepositoryOutput})
+var sCreateUnreferencedMergeCommitInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUnreferencedMergeCommitInput, Members: &mCreateUnreferencedMergeCommitInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateUnreferencedMergeCommitInput})
+var sCreateUnreferencedMergeCommitOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUnreferencedMergeCommitOutput, Members: &mCreateUnreferencedMergeCommitOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateUnreferencedMergeCommitOutput})
+var sDeleteApprovalRuleTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApprovalRuleTemplateInput, Members: &mDeleteApprovalRuleTemplateInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteApprovalRuleTemplateInput})
+var sDeleteApprovalRuleTemplateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApprovalRuleTemplateOutput, Members: &mDeleteApprovalRuleTemplateOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteApprovalRuleTemplateOutput})
+var sDeleteBranchInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBranchInput, Members: &mDeleteBranchInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBranchInput})
+var sDeleteBranchOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBranchOutput, Members: &mDeleteBranchOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBranchOutput})
+var sDeleteCommentContentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCommentContentInput, Members: &mDeleteCommentContentInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteCommentContentInput})
+var sDeleteCommentContentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCommentContentOutput, Members: &mDeleteCommentContentOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteCommentContentOutput})
+var sDeleteFileInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFileInput, Members: &mDeleteFileInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFileInput})
+var sDeleteFileOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFileOutput, Members: &mDeleteFileOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteFileOutput})
+var sDeletePullRequestApprovalRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePullRequestApprovalRuleInput, Members: &mDeletePullRequestApprovalRuleInput, Type: smithy.ShapeTypeStructure, Ext: &eDeletePullRequestApprovalRuleInput})
+var sDeletePullRequestApprovalRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePullRequestApprovalRuleOutput, Members: &mDeletePullRequestApprovalRuleOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeletePullRequestApprovalRuleOutput})
+var sDeleteRepositoryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRepositoryInput, Members: &mDeleteRepositoryInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRepositoryInput})
+var sDeleteRepositoryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRepositoryOutput, Members: &mDeleteRepositoryOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRepositoryOutput})
+var sDescribeMergeConflictsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMergeConflictsInput, Members: &mDescribeMergeConflictsInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeMergeConflictsInput})
+var sDescribeMergeConflictsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMergeConflictsOutput, Members: &mDescribeMergeConflictsOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribeMergeConflictsOutput})
+var sDescribePullRequestEventsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePullRequestEventsInput, Members: &mDescribePullRequestEventsInput, Type: smithy.ShapeTypeStructure, Ext: &eDescribePullRequestEventsInput})
+var sDescribePullRequestEventsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePullRequestEventsOutput, Members: &mDescribePullRequestEventsOutput, Type: smithy.ShapeTypeStructure, Ext: &eDescribePullRequestEventsOutput})
+var sDisassociateApprovalRuleTemplateFromRepositoryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateApprovalRuleTemplateFromRepositoryInput, Members: &mDisassociateApprovalRuleTemplateFromRepositoryInput, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateApprovalRuleTemplateFromRepositoryInput})
+var sEvaluatePullRequestApprovalRulesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluatePullRequestApprovalRulesInput, Members: &mEvaluatePullRequestApprovalRulesInput, Type: smithy.ShapeTypeStructure, Ext: &eEvaluatePullRequestApprovalRulesInput})
+var sEvaluatePullRequestApprovalRulesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluatePullRequestApprovalRulesOutput, Members: &mEvaluatePullRequestApprovalRulesOutput, Type: smithy.ShapeTypeStructure, Ext: &eEvaluatePullRequestApprovalRulesOutput})
+var sGetApprovalRuleTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApprovalRuleTemplateInput, Members: &mGetApprovalRuleTemplateInput, Type: smithy.ShapeTypeStructure, Ext: &eGetApprovalRuleTemplateInput})
+var sGetApprovalRuleTemplateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApprovalRuleTemplateOutput, Members: &mGetApprovalRuleTemplateOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetApprovalRuleTemplateOutput})
+var sGetBlobDifferencesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBlobDifferencesInput, Members: &mGetBlobDifferencesInput, Type: smithy.ShapeTypeStructure, Ext: &eGetBlobDifferencesInput})
+var sGetBlobDifferencesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBlobDifferencesOutput, Members: &mGetBlobDifferencesOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetBlobDifferencesOutput})
+var sGetBlobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBlobInput, Members: &mGetBlobInput, Type: smithy.ShapeTypeStructure, Ext: &eGetBlobInput})
+var sGetBlobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBlobOutput, Members: &mGetBlobOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetBlobOutput})
+var sGetBranchInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBranchInput, Members: &mGetBranchInput, Type: smithy.ShapeTypeStructure, Ext: &eGetBranchInput})
+var sGetBranchOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBranchOutput, Members: &mGetBranchOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetBranchOutput})
+var sGetCommentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommentInput, Members: &mGetCommentInput, Type: smithy.ShapeTypeStructure, Ext: &eGetCommentInput})
+var sGetCommentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommentOutput, Members: &mGetCommentOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetCommentOutput})
+var sGetCommentReactionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommentReactionsInput, Members: &mGetCommentReactionsInput, Type: smithy.ShapeTypeStructure, Ext: &eGetCommentReactionsInput})
+var sGetCommentReactionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommentReactionsOutput, Members: &mGetCommentReactionsOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetCommentReactionsOutput})
+var sGetCommentsForComparedCommitInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommentsForComparedCommitInput, Members: &mGetCommentsForComparedCommitInput, Type: smithy.ShapeTypeStructure, Ext: &eGetCommentsForComparedCommitInput})
+var sGetCommentsForComparedCommitOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommentsForComparedCommitOutput, Members: &mGetCommentsForComparedCommitOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetCommentsForComparedCommitOutput})
+var sGetCommentsForPullRequestInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommentsForPullRequestInput, Members: &mGetCommentsForPullRequestInput, Type: smithy.ShapeTypeStructure, Ext: &eGetCommentsForPullRequestInput})
+var sGetCommentsForPullRequestOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommentsForPullRequestOutput, Members: &mGetCommentsForPullRequestOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetCommentsForPullRequestOutput})
+var sGetCommitInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommitInput, Members: &mGetCommitInput, Type: smithy.ShapeTypeStructure, Ext: &eGetCommitInput})
+var sGetCommitOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCommitOutput, Members: &mGetCommitOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetCommitOutput})
+var sGetDifferencesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDifferencesInput, Members: &mGetDifferencesInput, Type: smithy.ShapeTypeStructure, Ext: &eGetDifferencesInput})
+var sGetDifferencesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDifferencesOutput, Members: &mGetDifferencesOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetDifferencesOutput})
+var sGetFileInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFileInput, Members: &mGetFileInput, Type: smithy.ShapeTypeStructure, Ext: &eGetFileInput})
+var sGetFileOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFileOutput, Members: &mGetFileOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetFileOutput})
+var sGetFolderInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFolderInput, Members: &mGetFolderInput, Type: smithy.ShapeTypeStructure, Ext: &eGetFolderInput})
+var sGetFolderOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFolderOutput, Members: &mGetFolderOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetFolderOutput})
+var sGetMergeCommitInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMergeCommitInput, Members: &mGetMergeCommitInput, Type: smithy.ShapeTypeStructure, Ext: &eGetMergeCommitInput})
+var sGetMergeCommitOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMergeCommitOutput, Members: &mGetMergeCommitOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetMergeCommitOutput})
+var sGetMergeConflictsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMergeConflictsInput, Members: &mGetMergeConflictsInput, Type: smithy.ShapeTypeStructure, Ext: &eGetMergeConflictsInput})
+var sGetMergeConflictsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMergeConflictsOutput, Members: &mGetMergeConflictsOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetMergeConflictsOutput})
+var sGetMergeOptionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMergeOptionsInput, Members: &mGetMergeOptionsInput, Type: smithy.ShapeTypeStructure, Ext: &eGetMergeOptionsInput})
+var sGetMergeOptionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMergeOptionsOutput, Members: &mGetMergeOptionsOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetMergeOptionsOutput})
+var sGetPullRequestApprovalStatesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPullRequestApprovalStatesInput, Members: &mGetPullRequestApprovalStatesInput, Type: smithy.ShapeTypeStructure, Ext: &eGetPullRequestApprovalStatesInput})
+var sGetPullRequestApprovalStatesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPullRequestApprovalStatesOutput, Members: &mGetPullRequestApprovalStatesOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetPullRequestApprovalStatesOutput})
+var sGetPullRequestInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPullRequestInput, Members: &mGetPullRequestInput, Type: smithy.ShapeTypeStructure, Ext: &eGetPullRequestInput})
+var sGetPullRequestOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPullRequestOutput, Members: &mGetPullRequestOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetPullRequestOutput})
+var sGetPullRequestOverrideStateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPullRequestOverrideStateInput, Members: &mGetPullRequestOverrideStateInput, Type: smithy.ShapeTypeStructure, Ext: &eGetPullRequestOverrideStateInput})
+var sGetPullRequestOverrideStateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPullRequestOverrideStateOutput, Members: &mGetPullRequestOverrideStateOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetPullRequestOverrideStateOutput})
+var sGetRepositoryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositoryInput, Members: &mGetRepositoryInput, Type: smithy.ShapeTypeStructure, Ext: &eGetRepositoryInput})
+var sGetRepositoryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositoryOutput, Members: &mGetRepositoryOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetRepositoryOutput})
+var sGetRepositoryTriggersInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositoryTriggersInput, Members: &mGetRepositoryTriggersInput, Type: smithy.ShapeTypeStructure, Ext: &eGetRepositoryTriggersInput})
+var sGetRepositoryTriggersOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositoryTriggersOutput, Members: &mGetRepositoryTriggersOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetRepositoryTriggersOutput})
+var sListApprovalRuleTemplatesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApprovalRuleTemplatesInput, Members: &mListApprovalRuleTemplatesInput, Type: smithy.ShapeTypeStructure, Ext: &eListApprovalRuleTemplatesInput})
+var sListApprovalRuleTemplatesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApprovalRuleTemplatesOutput, Members: &mListApprovalRuleTemplatesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListApprovalRuleTemplatesOutput})
+var sListAssociatedApprovalRuleTemplatesForRepositoryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedApprovalRuleTemplatesForRepositoryInput, Members: &mListAssociatedApprovalRuleTemplatesForRepositoryInput, Type: smithy.ShapeTypeStructure, Ext: &eListAssociatedApprovalRuleTemplatesForRepositoryInput})
+var sListAssociatedApprovalRuleTemplatesForRepositoryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedApprovalRuleTemplatesForRepositoryOutput, Members: &mListAssociatedApprovalRuleTemplatesForRepositoryOutput, Type: smithy.ShapeTypeStructure, Ext: &eListAssociatedApprovalRuleTemplatesForRepositoryOutput})
+var sListBranchesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBranchesInput, Members: &mListBranchesInput, Type: smithy.ShapeTypeStructure, Ext: &eListBranchesInput})
+var sListBranchesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBranchesOutput, Members: &mListBranchesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListBranchesOutput})
+var sListFileCommitHistoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFileCommitHistoryRequest, Members: &mListFileCommitHistoryRequest, Type: smithy.ShapeTypeStructure, Ext: &eListFileCommitHistoryRequest})
+var sListFileCommitHistoryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFileCommitHistoryResponse, Members: &mListFileCommitHistoryResponse, Type: smithy.ShapeTypeStructure, Ext: &eListFileCommitHistoryResponse})
+var sListPullRequestsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPullRequestsInput, Members: &mListPullRequestsInput, Type: smithy.ShapeTypeStructure, Ext: &eListPullRequestsInput})
+var sListPullRequestsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPullRequestsOutput, Members: &mListPullRequestsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListPullRequestsOutput})
+var sListRepositoriesForApprovalRuleTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositoriesForApprovalRuleTemplateInput, Members: &mListRepositoriesForApprovalRuleTemplateInput, Type: smithy.ShapeTypeStructure, Ext: &eListRepositoriesForApprovalRuleTemplateInput})
+var sListRepositoriesForApprovalRuleTemplateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositoriesForApprovalRuleTemplateOutput, Members: &mListRepositoriesForApprovalRuleTemplateOutput, Type: smithy.ShapeTypeStructure, Ext: &eListRepositoriesForApprovalRuleTemplateOutput})
+var sListRepositoriesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositoriesInput, Members: &mListRepositoriesInput, Type: smithy.ShapeTypeStructure, Ext: &eListRepositoriesInput})
+var sListRepositoriesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositoriesOutput, Members: &mListRepositoriesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListRepositoriesOutput})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceInput})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceOutput})
+var sMergeBranchesByFastForwardInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeBranchesByFastForwardInput, Members: &mMergeBranchesByFastForwardInput, Type: smithy.ShapeTypeStructure, Ext: &eMergeBranchesByFastForwardInput})
+var sMergeBranchesByFastForwardOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeBranchesByFastForwardOutput, Members: &mMergeBranchesByFastForwardOutput, Type: smithy.ShapeTypeStructure, Ext: &eMergeBranchesByFastForwardOutput})
+var sMergeBranchesBySquashInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeBranchesBySquashInput, Members: &mMergeBranchesBySquashInput, Type: smithy.ShapeTypeStructure, Ext: &eMergeBranchesBySquashInput})
+var sMergeBranchesBySquashOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeBranchesBySquashOutput, Members: &mMergeBranchesBySquashOutput, Type: smithy.ShapeTypeStructure, Ext: &eMergeBranchesBySquashOutput})
+var sMergeBranchesByThreeWayInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeBranchesByThreeWayInput, Members: &mMergeBranchesByThreeWayInput, Type: smithy.ShapeTypeStructure, Ext: &eMergeBranchesByThreeWayInput})
+var sMergeBranchesByThreeWayOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeBranchesByThreeWayOutput, Members: &mMergeBranchesByThreeWayOutput, Type: smithy.ShapeTypeStructure, Ext: &eMergeBranchesByThreeWayOutput})
+var sMergePullRequestByFastForwardInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergePullRequestByFastForwardInput, Members: &mMergePullRequestByFastForwardInput, Type: smithy.ShapeTypeStructure, Ext: &eMergePullRequestByFastForwardInput})
+var sMergePullRequestByFastForwardOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergePullRequestByFastForwardOutput, Members: &mMergePullRequestByFastForwardOutput, Type: smithy.ShapeTypeStructure, Ext: &eMergePullRequestByFastForwardOutput})
+var sMergePullRequestBySquashInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergePullRequestBySquashInput, Members: &mMergePullRequestBySquashInput, Type: smithy.ShapeTypeStructure, Ext: &eMergePullRequestBySquashInput})
+var sMergePullRequestBySquashOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergePullRequestBySquashOutput, Members: &mMergePullRequestBySquashOutput, Type: smithy.ShapeTypeStructure, Ext: &eMergePullRequestBySquashOutput})
+var sMergePullRequestByThreeWayInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergePullRequestByThreeWayInput, Members: &mMergePullRequestByThreeWayInput, Type: smithy.ShapeTypeStructure, Ext: &eMergePullRequestByThreeWayInput})
+var sMergePullRequestByThreeWayOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergePullRequestByThreeWayOutput, Members: &mMergePullRequestByThreeWayOutput, Type: smithy.ShapeTypeStructure, Ext: &eMergePullRequestByThreeWayOutput})
+var sOverridePullRequestApprovalRulesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOverridePullRequestApprovalRulesInput, Members: &mOverridePullRequestApprovalRulesInput, Type: smithy.ShapeTypeStructure, Ext: &eOverridePullRequestApprovalRulesInput})
+var sPostCommentForComparedCommitInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostCommentForComparedCommitInput, Members: &mPostCommentForComparedCommitInput, Type: smithy.ShapeTypeStructure, Ext: &ePostCommentForComparedCommitInput})
+var sPostCommentForComparedCommitOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostCommentForComparedCommitOutput, Members: &mPostCommentForComparedCommitOutput, Type: smithy.ShapeTypeStructure, Ext: &ePostCommentForComparedCommitOutput})
+var sPostCommentForPullRequestInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostCommentForPullRequestInput, Members: &mPostCommentForPullRequestInput, Type: smithy.ShapeTypeStructure, Ext: &ePostCommentForPullRequestInput})
+var sPostCommentForPullRequestOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostCommentForPullRequestOutput, Members: &mPostCommentForPullRequestOutput, Type: smithy.ShapeTypeStructure, Ext: &ePostCommentForPullRequestOutput})
+var sPostCommentReplyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostCommentReplyInput, Members: &mPostCommentReplyInput, Type: smithy.ShapeTypeStructure, Ext: &ePostCommentReplyInput})
+var sPostCommentReplyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostCommentReplyOutput, Members: &mPostCommentReplyOutput, Type: smithy.ShapeTypeStructure, Ext: &ePostCommentReplyOutput})
+var sPutCommentReactionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCommentReactionInput, Members: &mPutCommentReactionInput, Type: smithy.ShapeTypeStructure, Ext: &ePutCommentReactionInput})
+var sPutFileInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutFileInput, Members: &mPutFileInput, Type: smithy.ShapeTypeStructure, Ext: &ePutFileInput})
+var sPutFileOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutFileOutput, Members: &mPutFileOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutFileOutput})
+var sPutRepositoryTriggersInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRepositoryTriggersInput, Members: &mPutRepositoryTriggersInput, Type: smithy.ShapeTypeStructure, Ext: &ePutRepositoryTriggersInput})
+var sPutRepositoryTriggersOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRepositoryTriggersOutput, Members: &mPutRepositoryTriggersOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutRepositoryTriggersOutput})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceInput})
+var sTestRepositoryTriggersInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestRepositoryTriggersInput, Members: &mTestRepositoryTriggersInput, Type: smithy.ShapeTypeStructure, Ext: &eTestRepositoryTriggersInput})
+var sTestRepositoryTriggersOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestRepositoryTriggersOutput, Members: &mTestRepositoryTriggersOutput, Type: smithy.ShapeTypeStructure, Ext: &eTestRepositoryTriggersOutput})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceInput})
+var sUpdateApprovalRuleTemplateContentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApprovalRuleTemplateContentInput, Members: &mUpdateApprovalRuleTemplateContentInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApprovalRuleTemplateContentInput})
+var sUpdateApprovalRuleTemplateContentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApprovalRuleTemplateContentOutput, Members: &mUpdateApprovalRuleTemplateContentOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApprovalRuleTemplateContentOutput})
+var sUpdateApprovalRuleTemplateDescriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApprovalRuleTemplateDescriptionInput, Members: &mUpdateApprovalRuleTemplateDescriptionInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApprovalRuleTemplateDescriptionInput})
+var sUpdateApprovalRuleTemplateDescriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApprovalRuleTemplateDescriptionOutput, Members: &mUpdateApprovalRuleTemplateDescriptionOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApprovalRuleTemplateDescriptionOutput})
+var sUpdateApprovalRuleTemplateNameInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApprovalRuleTemplateNameInput, Members: &mUpdateApprovalRuleTemplateNameInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApprovalRuleTemplateNameInput})
+var sUpdateApprovalRuleTemplateNameOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApprovalRuleTemplateNameOutput, Members: &mUpdateApprovalRuleTemplateNameOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApprovalRuleTemplateNameOutput})
+var sUpdateCommentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCommentInput, Members: &mUpdateCommentInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCommentInput})
+var sUpdateCommentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCommentOutput, Members: &mUpdateCommentOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCommentOutput})
+var sUpdateDefaultBranchInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDefaultBranchInput, Members: &mUpdateDefaultBranchInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateDefaultBranchInput})
+var sUpdatePullRequestApprovalRuleContentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestApprovalRuleContentInput, Members: &mUpdatePullRequestApprovalRuleContentInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePullRequestApprovalRuleContentInput})
+var sUpdatePullRequestApprovalRuleContentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestApprovalRuleContentOutput, Members: &mUpdatePullRequestApprovalRuleContentOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePullRequestApprovalRuleContentOutput})
+var sUpdatePullRequestApprovalStateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestApprovalStateInput, Members: &mUpdatePullRequestApprovalStateInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePullRequestApprovalStateInput})
+var sUpdatePullRequestDescriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestDescriptionInput, Members: &mUpdatePullRequestDescriptionInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePullRequestDescriptionInput})
+var sUpdatePullRequestDescriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestDescriptionOutput, Members: &mUpdatePullRequestDescriptionOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePullRequestDescriptionOutput})
+var sUpdatePullRequestStatusInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestStatusInput, Members: &mUpdatePullRequestStatusInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePullRequestStatusInput})
+var sUpdatePullRequestStatusOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestStatusOutput, Members: &mUpdatePullRequestStatusOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePullRequestStatusOutput})
+var sUpdatePullRequestTitleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestTitleInput, Members: &mUpdatePullRequestTitleInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePullRequestTitleInput})
+var sUpdatePullRequestTitleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePullRequestTitleOutput, Members: &mUpdatePullRequestTitleOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePullRequestTitleOutput})
+var sUpdateRepositoryDescriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRepositoryDescriptionInput, Members: &mUpdateRepositoryDescriptionInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRepositoryDescriptionInput})
+var sUpdateRepositoryEncryptionKeyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRepositoryEncryptionKeyInput, Members: &mUpdateRepositoryEncryptionKeyInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRepositoryEncryptionKeyInput})
+var sUpdateRepositoryEncryptionKeyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRepositoryEncryptionKeyOutput, Members: &mUpdateRepositoryEncryptionKeyOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRepositoryEncryptionKeyOutput})
+var sUpdateRepositoryNameInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRepositoryNameInput, Members: &mUpdateRepositoryNameInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRepositoryNameInput})
 
-var sActorDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var sApproval_userArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[86]})
-var sApproval_approvalState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalState", ID: &iApprovalState, Members: &mApprovalState, Type: smithy.ShapeTypeEnum, Ext: &ext[87]})
-var s_ApprovalList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApproval, Members: &mApproval, Type: smithy.ShapeTypeStructure, Ext: &ext[89]})
-var sApprovalRule_approvalRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleId", ID: &i_ApprovalRuleId, Type: smithy.ShapeTypeString, Ext: &ext[91]})
-var sApprovalRule_approvalRuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleName", ID: &i_ApprovalRuleName, Type: smithy.ShapeTypeString, Ext: &ext[92]})
-var sApprovalRule_approvalRuleContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleContent", ID: &i_ApprovalRuleContent, Type: smithy.ShapeTypeString, Ext: &ext[93]})
-var sApprovalRule_ruleContentSha256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleContentSha256", ID: &i_RuleContentSha256, Type: smithy.ShapeTypeString, Ext: &ext[94]})
-var sApprovalRule_lastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedDate", ID: &i_LastModifiedDate, Type: smithy.ShapeTypeTimestamp, Ext: &ext[95]})
-var sApprovalRule_creationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDate", ID: &i_CreationDate, Type: smithy.ShapeTypeTimestamp, Ext: &ext[96]})
-var sApprovalRule_lastModifiedUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedUser", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[97]})
-var sApprovalRule_originApprovalRuleTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originApprovalRuleTemplate", ID: &iOriginApprovalRuleTemplate, Members: &mOriginApprovalRuleTemplate, Type: smithy.ShapeTypeStructure, Ext: &ext[98]})
-var sApprovalRuleContentRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[101]})
-var sApprovalRuleDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[103]})
-var sApprovalRuleEventMetadata_approvalRuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleName", ID: &i_ApprovalRuleName, Type: smithy.ShapeTypeString, Ext: &ext[105]})
-var sApprovalRuleEventMetadata_approvalRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleId", ID: &i_ApprovalRuleId, Type: smithy.ShapeTypeString, Ext: &ext[106]})
-var sApprovalRuleEventMetadata_approvalRuleContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleContent", ID: &i_ApprovalRuleContent, Type: smithy.ShapeTypeString, Ext: &ext[107]})
-var sApprovalRuleNameAlreadyExistsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[111]})
-var sApprovalRuleNameRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[113]})
-var sApprovalRuleOverriddenEventMetadata_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_RevisionId, Type: smithy.ShapeTypeString, Ext: &ext[115]})
-var sApprovalRuleOverriddenEventMetadata_overrideStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overrideStatus", ID: &iOverrideStatus, Members: &mOverrideStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[116]})
-var s_ApprovalRulesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApprovalRule, Members: &mApprovalRule, Type: smithy.ShapeTypeStructure, Ext: &ext[118]})
-var s_ApprovalRulesNotSatisfiedList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ApprovalRuleName, Type: smithy.ShapeTypeString, Ext: &ext[120]})
-var s_ApprovalRulesSatisfiedList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ApprovalRuleName, Type: smithy.ShapeTypeString, Ext: &ext[122]})
-var sApprovalRuleTemplate_approvalRuleTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateId", ID: &i_ApprovalRuleTemplateId, Type: smithy.ShapeTypeString, Ext: &ext[124]})
-var sApprovalRuleTemplate_approvalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &ext[125]})
-var sApprovalRuleTemplate_approvalRuleTemplateDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateDescription", ID: &i_ApprovalRuleTemplateDescription, Type: smithy.ShapeTypeString, Ext: &ext[126]})
-var sApprovalRuleTemplate_approvalRuleTemplateContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateContent", ID: &i_ApprovalRuleTemplateContent, Type: smithy.ShapeTypeString, Ext: &ext[127]})
-var sApprovalRuleTemplate_ruleContentSha256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleContentSha256", ID: &i_RuleContentSha256, Type: smithy.ShapeTypeString, Ext: &ext[128]})
-var sApprovalRuleTemplate_lastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedDate", ID: &i_LastModifiedDate, Type: smithy.ShapeTypeTimestamp, Ext: &ext[129]})
-var sApprovalRuleTemplate_creationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDate", ID: &i_CreationDate, Type: smithy.ShapeTypeTimestamp, Ext: &ext[130]})
-var sApprovalRuleTemplate_lastModifiedUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedUser", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[131]})
-var sApprovalRuleTemplateContentRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[134]})
-var sApprovalRuleTemplateDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[137]})
-var sApprovalRuleTemplateInUseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[140]})
-var sApprovalRuleTemplateNameAlreadyExistsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[143]})
-var s_ApprovalRuleTemplateNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &ext[145]})
-var sApprovalRuleTemplateNameRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[147]})
-var sApprovalState_APPROVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPROVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[149]})
-var sApprovalState_REVOKE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVOKE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[150]})
-var sApprovalStateChangedEventMetadata_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_RevisionId, Type: smithy.ShapeTypeString, Ext: &ext[152]})
-var sApprovalStateChangedEventMetadata_approvalStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalStatus", ID: &iApprovalState, Members: &mApprovalState, Type: smithy.ShapeTypeEnum, Ext: &ext[153]})
-var sApprovalStateRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[155]})
-var sAuthorDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[159]})
-var sBatchAssociateApprovalRuleTemplateWithRepositoriesError_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[161]})
-var sBatchAssociateApprovalRuleTemplateWithRepositoriesError_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[162]})
-var sBatchAssociateApprovalRuleTemplateWithRepositoriesError_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[163]})
-var s_BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchAssociateApprovalRuleTemplateWithRepositoriesError, Members: &mBatchAssociateApprovalRuleTemplateWithRepositoriesError, Type: smithy.ShapeTypeStructure, Ext: &ext[165]})
-var sBatchDescribeMergeConflictsError_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[167]})
-var sBatchDescribeMergeConflictsError_exceptionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exceptionName", ID: &i_ExceptionName, Type: smithy.ShapeTypeString, Ext: &ext[168]})
-var sBatchDescribeMergeConflictsError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[169]})
-var s_BatchDescribeMergeConflictsErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchDescribeMergeConflictsError, Members: &mBatchDescribeMergeConflictsError, Type: smithy.ShapeTypeStructure, Ext: &ext[171]})
-var sBatchDisassociateApprovalRuleTemplateFromRepositoriesError_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[173]})
-var sBatchDisassociateApprovalRuleTemplateFromRepositoriesError_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[174]})
-var sBatchDisassociateApprovalRuleTemplateFromRepositoriesError_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[175]})
-var s_BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchDisassociateApprovalRuleTemplateFromRepositoriesError, Members: &mBatchDisassociateApprovalRuleTemplateFromRepositoriesError, Type: smithy.ShapeTypeStructure, Ext: &ext[177]})
-var sBatchGetCommitsError_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[179]})
-var sBatchGetCommitsError_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[180]})
-var sBatchGetCommitsError_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[181]})
-var s_BatchGetCommitsErrorsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchGetCommitsError, Members: &mBatchGetCommitsError, Type: smithy.ShapeTypeStructure, Ext: &ext[183]})
-var sBatchGetRepositoriesError_repositoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryId", ID: &i_RepositoryId, Type: smithy.ShapeTypeString, Ext: &ext[185]})
-var sBatchGetRepositoriesError_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[186]})
-var sBatchGetRepositoriesError_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &iBatchGetRepositoriesErrorCodeEnum, Members: &mBatchGetRepositoriesErrorCodeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[187]})
-var sBatchGetRepositoriesError_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[188]})
-var sBatchGetRepositoriesErrorCodeEnum_ENCRYPTION_INTEGRITY_CHECKS_FAILED_EXCEPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCRYPTION_INTEGRITY_CHECKS_FAILED_EXCEPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[190]})
-var sBatchGetRepositoriesErrorCodeEnum_ENCRYPTION_KEY_ACCESS_DENIED_EXCEPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCRYPTION_KEY_ACCESS_DENIED_EXCEPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[191]})
-var sBatchGetRepositoriesErrorCodeEnum_ENCRYPTION_KEY_DISABLED_EXCEPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCRYPTION_KEY_DISABLED_EXCEPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[192]})
-var sBatchGetRepositoriesErrorCodeEnum_ENCRYPTION_KEY_NOT_FOUND_EXCEPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCRYPTION_KEY_NOT_FOUND_EXCEPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[193]})
-var sBatchGetRepositoriesErrorCodeEnum_ENCRYPTION_KEY_UNAVAILABLE_EXCEPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCRYPTION_KEY_UNAVAILABLE_EXCEPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[194]})
-var sBatchGetRepositoriesErrorCodeEnum_REPOSITORY_DOES_NOT_EXIST_EXCEPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPOSITORY_DOES_NOT_EXIST_EXCEPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[195]})
-var s_BatchGetRepositoriesErrorsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchGetRepositoriesError, Members: &mBatchGetRepositoriesError, Type: smithy.ShapeTypeStructure, Ext: &ext[197]})
-var sBeforeCommitIdAndAfterCommitIdAreSameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[199]})
-var sBlobIdDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[202]})
-var sBlobIdRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[204]})
-var sBlobMetadata_blobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[206]})
-var sBlobMetadata_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[207]})
-var sBlobMetadata_mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mode", ID: &i_Mode, Type: smithy.ShapeTypeString, Ext: &ext[208]})
-var sBranchDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[210]})
-var sBranchInfo_branchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchName", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &ext[212]})
-var sBranchInfo_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[213]})
-var sBranchNameExistsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[216]})
-var sBranchNameIsTagNameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[218]})
-var s_BranchNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &ext[220]})
-var sBranchNameRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[222]})
-var s_CallerReactions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ReactionValue, Type: smithy.ShapeTypeString, Ext: &ext[224]})
-var sCannotDeleteApprovalRuleFromTemplateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[226]})
-var sCannotModifyApprovalRuleFromTemplateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[228]})
-var sChangeTypeEnum_ADDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[231]})
-var sChangeTypeEnum_MODIFIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODIFIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[232]})
-var sChangeTypeEnum_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[233]})
-var sClientRequestTokenRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[236]})
-var sComment_commentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commentId", ID: &i_CommentId, Type: smithy.ShapeTypeString, Ext: &ext[240]})
-var sComment_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_Content, Type: smithy.ShapeTypeString, Ext: &ext[241]})
-var sComment_inReplyTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inReplyTo", ID: &i_CommentId, Type: smithy.ShapeTypeString, Ext: &ext[242]})
-var sComment_creationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDate", ID: &i_CreationDate, Type: smithy.ShapeTypeTimestamp, Ext: &ext[243]})
-var sComment_lastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedDate", ID: &i_LastModifiedDate, Type: smithy.ShapeTypeTimestamp, Ext: &ext[244]})
-var sComment_authorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[245]})
-var sComment_deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleted", ID: &i_IsCommentDeleted, Type: smithy.ShapeTypeBoolean, Ext: &ext[246]})
-var sComment_clientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString, Ext: &ext[247]})
-var sComment_callerReactions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "callerReactions", ID: &i_CallerReactions, Members: &m_CallerReactions, Type: smithy.ShapeTypeList, Ext: &ext[248]})
-var sComment_reactionCounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reactionCounts", ID: &i_ReactionCountsMap, Members: &m_ReactionCountsMap, Type: smithy.ShapeTypeMap, Ext: &ext[249]})
-var sCommentContentRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[251]})
-var sCommentContentSizeLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[253]})
-var sCommentDeletedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[255]})
-var sCommentDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[257]})
-var sCommentIdRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[260]})
-var sCommentNotCreatedByCallerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[262]})
-var s_Comments_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iComment, Members: &mComment, Type: smithy.ShapeTypeStructure, Ext: &ext[264]})
-var sCommentsForComparedCommit_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[266]})
-var sCommentsForComparedCommit_beforeCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[267]})
-var sCommentsForComparedCommit_afterCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[268]})
-var sCommentsForComparedCommit_beforeBlobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeBlobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[269]})
-var sCommentsForComparedCommit_afterBlobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterBlobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[270]})
-var sCommentsForComparedCommit_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &iLocation, Members: &mLocation, Type: smithy.ShapeTypeStructure, Ext: &ext[271]})
-var sCommentsForComparedCommit_comments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comments", ID: &i_Comments, Members: &m_Comments, Type: smithy.ShapeTypeList, Ext: &ext[272]})
-var s_CommentsForComparedCommitData_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCommentsForComparedCommit, Members: &mCommentsForComparedCommit, Type: smithy.ShapeTypeStructure, Ext: &ext[274]})
-var sCommentsForPullRequest_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ext[276]})
-var sCommentsForPullRequest_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[277]})
-var sCommentsForPullRequest_beforeCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[278]})
-var sCommentsForPullRequest_afterCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[279]})
-var sCommentsForPullRequest_beforeBlobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeBlobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[280]})
-var sCommentsForPullRequest_afterBlobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterBlobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[281]})
-var sCommentsForPullRequest_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &iLocation, Members: &mLocation, Type: smithy.ShapeTypeStructure, Ext: &ext[282]})
-var sCommentsForPullRequest_comments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comments", ID: &i_Comments, Members: &m_Comments, Type: smithy.ShapeTypeList, Ext: &ext[283]})
-var s_CommentsForPullRequestData_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCommentsForPullRequest, Members: &mCommentsForPullRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[285]})
-var sCommit_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[287]})
-var sCommit_treeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "treeId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[288]})
-var sCommit_parents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parents", ID: &i_ParentList, Members: &m_ParentList, Type: smithy.ShapeTypeList, Ext: &ext[289]})
-var sCommit_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[290]})
-var sCommit_author = smithy.NewStaticSchema(smithy.StaticSchema{Member: "author", ID: &iUserInfo, Members: &mUserInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[291]})
-var sCommit_committer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "committer", ID: &iUserInfo, Members: &mUserInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[292]})
-var sCommit_additionalData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalData", ID: &i_AdditionalData, Type: smithy.ShapeTypeString, Ext: &ext[293]})
-var sCommitDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[295]})
-var sCommitIdDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[298]})
-var sCommitIdRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[300]})
-var s_CommitIdsInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[302]})
-var sCommitIdsLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[304]})
-var sCommitIdsListRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[306]})
-var sCommitMessageLengthExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[308]})
-var s_CommitObjectsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCommit, Members: &mCommit, Type: smithy.ShapeTypeStructure, Ext: &ext[311]})
-var sCommitRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[313]})
-var sConcurrentReferenceUpdateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[315]})
-var sConflict_conflictMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictMetadata", ID: &iConflictMetadata, Members: &mConflictMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[317]})
-var sConflict_mergeHunks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeHunks", ID: &i_MergeHunks, Members: &m_MergeHunks, Type: smithy.ShapeTypeList, Ext: &ext[318]})
-var sConflictDetailLevelTypeEnum_FILE_LEVEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_LEVEL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[320]})
-var sConflictDetailLevelTypeEnum_LINE_LEVEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINE_LEVEL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[321]})
-var sConflictMetadata_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[323]})
-var sConflictMetadata_fileSizes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSizes", ID: &iFileSizes, Members: &mFileSizes, Type: smithy.ShapeTypeStructure, Ext: &ext[324]})
-var sConflictMetadata_fileModes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileModes", ID: &iFileModes, Members: &mFileModes, Type: smithy.ShapeTypeStructure, Ext: &ext[325]})
-var sConflictMetadata_objectTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectTypes", ID: &iObjectTypes, Members: &mObjectTypes, Type: smithy.ShapeTypeStructure, Ext: &ext[326]})
-var sConflictMetadata_numberOfConflicts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numberOfConflicts", ID: &i_NumberOfConflicts, Type: smithy.ShapeTypeInteger, Ext: &ext[327]})
-var sConflictMetadata_isBinaryFile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isBinaryFile", ID: &iIsBinaryFile, Members: &mIsBinaryFile, Type: smithy.ShapeTypeStructure, Ext: &ext[328]})
-var sConflictMetadata_contentConflict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentConflict", ID: &i_IsContentConflict, Type: smithy.ShapeTypeBoolean, Ext: &ext[329]})
-var sConflictMetadata_fileModeConflict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileModeConflict", ID: &i_IsFileModeConflict, Type: smithy.ShapeTypeBoolean, Ext: &ext[330]})
-var sConflictMetadata_objectTypeConflict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectTypeConflict", ID: &i_IsObjectTypeConflict, Type: smithy.ShapeTypeBoolean, Ext: &ext[331]})
-var sConflictMetadata_mergeOperations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeOperations", ID: &iMergeOperations, Members: &mMergeOperations, Type: smithy.ShapeTypeStructure, Ext: &ext[332]})
-var s_ConflictMetadataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConflictMetadata, Members: &mConflictMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[334]})
-var sConflictResolution_replaceContents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replaceContents", ID: &i_ReplaceContentEntries, Members: &m_ReplaceContentEntries, Type: smithy.ShapeTypeList, Ext: &ext[336]})
-var sConflictResolution_deleteFiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleteFiles", ID: &i_DeleteFileEntries, Members: &m_DeleteFileEntries, Type: smithy.ShapeTypeList, Ext: &ext[337]})
-var sConflictResolution_setFileModes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "setFileModes", ID: &i_SetFileModeEntries, Members: &m_SetFileModeEntries, Type: smithy.ShapeTypeList, Ext: &ext[338]})
-var sConflictResolutionStrategyTypeEnum_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[340]})
-var sConflictResolutionStrategyTypeEnum_ACCEPT_SOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCEPT_SOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[341]})
-var sConflictResolutionStrategyTypeEnum_ACCEPT_DESTINATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCEPT_DESTINATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[342]})
-var sConflictResolutionStrategyTypeEnum_AUTOMERGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTOMERGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[343]})
-var s_Conflicts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConflict, Members: &mConflict, Type: smithy.ShapeTypeStructure, Ext: &ext[345]})
-var sDefaultBranchCannotBeDeletedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[351]})
-var s_DeleteFileEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeleteFileEntry, Members: &mDeleteFileEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[353]})
-var sDeleteFileEntry_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[355]})
-var sDiffChange_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iDiffChangeType, Members: &mDiffChangeType, Type: smithy.ShapeTypeEnum, Ext: &ext[358]})
-var sDiffChange_beforeLineNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeLineNumber", ID: &i_LineNumber, Type: smithy.ShapeTypeInteger, Ext: &ext[359]})
-var sDiffChange_afterLineNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterLineNumber", ID: &i_LineNumber, Type: smithy.ShapeTypeInteger, Ext: &ext[360]})
-var sDiffChange_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_LineContent, Type: smithy.ShapeTypeString, Ext: &ext[361]})
-var s_DiffChangeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDiffChange, Members: &mDiffChange, Type: smithy.ShapeTypeStructure, Ext: &ext[363]})
-var sDiffChangeType_CONTEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[365]})
-var sDiffChangeType_ADD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[366]})
-var sDiffChangeType_DELETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[367]})
-var sDifference_beforeBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeBlob", ID: &iBlobMetadata, Members: &mBlobMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[370]})
-var sDifference_afterBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterBlob", ID: &iBlobMetadata, Members: &mBlobMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[371]})
-var sDifference_changeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "changeType", ID: &iChangeTypeEnum, Members: &mChangeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[372]})
-var s_DifferenceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDifference, Members: &mDifference, Type: smithy.ShapeTypeStructure, Ext: &ext[374]})
-var sDiffHunk_beforeStartLine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeStartLine", ID: &i_LineNumber, Type: smithy.ShapeTypeInteger, Ext: &ext[376]})
-var sDiffHunk_beforeLineCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeLineCount", ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &ext[377]})
-var sDiffHunk_afterStartLine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterStartLine", ID: &i_LineNumber, Type: smithy.ShapeTypeInteger, Ext: &ext[378]})
-var sDiffHunk_afterLineCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterLineCount", ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &ext[379]})
-var sDiffHunk_changes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "changes", ID: &i_DiffChangeList, Members: &m_DiffChangeList, Type: smithy.ShapeTypeList, Ext: &ext[380]})
-var s_DiffHunkList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDiffHunk, Members: &mDiffHunk, Type: smithy.ShapeTypeStructure, Ext: &ext[382]})
-var sDirectoryNameConflictsWithFileNameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[384]})
-var sEncryptionIntegrityChecksFailedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[387]})
-var sEncryptionKeyAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[389]})
-var sEncryptionKeyDisabledException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[391]})
-var sEncryptionKeyInvalidIdException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[393]})
-var sEncryptionKeyInvalidUsageException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[395]})
-var sEncryptionKeyNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[397]})
-var sEncryptionKeyRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[399]})
-var sEncryptionKeyUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[401]})
-var sEvaluation_approved = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approved", ID: &i_Approved, Type: smithy.ShapeTypeBoolean, Ext: &ext[405]})
-var sEvaluation_overridden = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overridden", ID: &i_Overridden, Type: smithy.ShapeTypeBoolean, Ext: &ext[406]})
-var sEvaluation_approvalRulesSatisfied = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRulesSatisfied", ID: &i_ApprovalRulesSatisfiedList, Members: &m_ApprovalRulesSatisfiedList, Type: smithy.ShapeTypeList, Ext: &ext[407]})
-var sEvaluation_approvalRulesNotSatisfied = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRulesNotSatisfied", ID: &i_ApprovalRulesNotSatisfiedList, Members: &m_ApprovalRulesNotSatisfiedList, Type: smithy.ShapeTypeList, Ext: &ext[408]})
-var sFile_blobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[412]})
-var sFile_absolutePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "absolutePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[413]})
-var sFile_relativePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relativePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[414]})
-var sFile_fileMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileMode", ID: &iFileModeTypeEnum, Members: &mFileModeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[415]})
-var sFileContentAndSourceFileSpecifiedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[418]})
-var sFileContentRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[420]})
-var sFileContentSizeLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[422]})
-var sFileDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[424]})
-var sFileEntryRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[426]})
-var s_FileList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFile, Members: &mFile, Type: smithy.ShapeTypeStructure, Ext: &ext[428]})
-var sFileMetadata_absolutePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "absolutePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[430]})
-var sFileMetadata_blobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[431]})
-var sFileMetadata_fileMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileMode", ID: &iFileModeTypeEnum, Members: &mFileModeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[432]})
-var sFileModeRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[434]})
-var sFileModes_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iFileModeTypeEnum, Members: &mFileModeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[436]})
-var sFileModes_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &iFileModeTypeEnum, Members: &mFileModeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[437]})
-var sFileModes_base = smithy.NewStaticSchema(smithy.StaticSchema{Member: "base", ID: &iFileModeTypeEnum, Members: &mFileModeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[438]})
-var sFileModeTypeEnum_EXECUTABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXECUTABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[440]})
-var sFileModeTypeEnum_NORMAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NORMAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[441]})
-var sFileModeTypeEnum_SYMLINK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYMLINK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[442]})
-var sFileNameConflictsWithDirectoryNameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[444]})
-var sFilePathConflictsWithSubmodulePathException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[446]})
-var s_FilePaths_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[448]})
-var sFileSizes_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_FileSize, Type: smithy.ShapeTypeLong, Ext: &ext[451]})
-var sFileSizes_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &i_FileSize, Type: smithy.ShapeTypeLong, Ext: &ext[452]})
-var sFileSizes_base = smithy.NewStaticSchema(smithy.StaticSchema{Member: "base", ID: &i_FileSize, Type: smithy.ShapeTypeLong, Ext: &ext[453]})
-var s_FilesMetadata_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFileMetadata, Members: &mFileMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[455]})
-var sFileTooLargeException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[457]})
-var sFileVersion_commit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commit", ID: &iCommit, Members: &mCommit, Type: smithy.ShapeTypeStructure, Ext: &ext[459]})
-var sFileVersion_blobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[460]})
-var sFileVersion_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[461]})
-var sFileVersion_revisionChildren = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionChildren", ID: &i_RevisionChildren, Members: &m_RevisionChildren, Type: smithy.ShapeTypeList, Ext: &ext[462]})
-var sFolder_treeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "treeId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[464]})
-var sFolder_absolutePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "absolutePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[465]})
-var sFolder_relativePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relativePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[466]})
-var sFolderContentSizeLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[468]})
-var sFolderDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[470]})
-var s_FolderList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFolder, Members: &mFolder, Type: smithy.ShapeTypeStructure, Ext: &ext[472]})
-var sIdempotencyParameterMismatchException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[475]})
-var sInvalidActorArnException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[478]})
-var sInvalidApprovalRuleContentException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[480]})
-var sInvalidApprovalRuleNameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[482]})
-var sInvalidApprovalRuleTemplateContentException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[484]})
-var sInvalidApprovalRuleTemplateDescriptionException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[486]})
-var sInvalidApprovalRuleTemplateNameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[488]})
-var sInvalidApprovalStateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[490]})
-var sInvalidAuthorArnException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[492]})
-var sInvalidBlobIdException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[494]})
-var sInvalidBranchNameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[496]})
-var sInvalidClientRequestTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[498]})
-var sInvalidCommentIdException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[500]})
-var sInvalidCommitException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[502]})
-var sInvalidCommitIdException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[504]})
-var sInvalidConflictDetailLevelException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[506]})
-var sInvalidConflictResolutionException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[508]})
-var sInvalidConflictResolutionStrategyException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[510]})
-var sInvalidContinuationTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[512]})
-var sInvalidDeletionParameterException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[514]})
-var sInvalidDescriptionException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[516]})
-var sInvalidDestinationCommitSpecifierException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[518]})
-var sInvalidEmailException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[520]})
-var sInvalidFileLocationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[522]})
-var sInvalidFileModeException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[524]})
-var sInvalidFilePositionException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[526]})
-var sInvalidMaxConflictFilesException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[528]})
-var sInvalidMaxMergeHunksException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[530]})
-var sInvalidMaxResultsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[532]})
-var sInvalidMergeOptionException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[534]})
-var sInvalidOrderException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[536]})
-var sInvalidOverrideStatusException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[538]})
-var sInvalidParentCommitIdException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[540]})
-var sInvalidPathException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[542]})
-var sInvalidPullRequestEventTypeException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[544]})
-var sInvalidPullRequestIdException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[546]})
-var sInvalidPullRequestStatusException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[548]})
-var sInvalidPullRequestStatusUpdateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[550]})
-var sInvalidReactionUserArnException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[552]})
-var sInvalidReactionValueException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[554]})
-var sInvalidReferenceNameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[556]})
-var sInvalidRelativeFileVersionEnumException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[558]})
-var sInvalidReplacementContentException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[560]})
-var sInvalidReplacementTypeException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[562]})
-var sInvalidRepositoryDescriptionException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[564]})
-var sInvalidRepositoryNameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[566]})
-var sInvalidRepositoryTriggerBranchNameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[568]})
-var sInvalidRepositoryTriggerCustomDataException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[570]})
-var sInvalidRepositoryTriggerDestinationArnException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[572]})
-var sInvalidRepositoryTriggerEventsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[574]})
-var sInvalidRepositoryTriggerNameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[576]})
-var sInvalidRepositoryTriggerRegionException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[578]})
-var sInvalidResourceArnException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[580]})
-var sInvalidRevisionIdException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[582]})
-var sInvalidRuleContentSha256Exception_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[584]})
-var sInvalidSortByException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[586]})
-var sInvalidSourceCommitSpecifierException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[588]})
-var sInvalidSystemTagUsageException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[590]})
-var sInvalidTagKeysListException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[592]})
-var sInvalidTagsMapException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[594]})
-var sInvalidTargetBranchException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[596]})
-var sInvalidTargetException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[598]})
-var sInvalidTargetsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[600]})
-var sInvalidTitleException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[602]})
-var sIsBinaryFile_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_CapitalBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[604]})
-var sIsBinaryFile_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &i_CapitalBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[605]})
-var sIsBinaryFile_base = smithy.NewStaticSchema(smithy.StaticSchema{Member: "base", ID: &i_CapitalBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[606]})
-var sLocation_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[622]})
-var sLocation_filePosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePosition", ID: &i_Position, Type: smithy.ShapeTypeLong, Ext: &ext[623]})
-var sLocation_relativeFileVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relativeFileVersion", ID: &iRelativeFileVersionEnum, Members: &mRelativeFileVersionEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[624]})
-var sManualMergeRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[626]})
-var sMaximumBranchesExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[628]})
-var sMaximumConflictResolutionEntriesExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[630]})
-var sMaximumFileContentToLoadExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[632]})
-var sMaximumFileEntriesExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[634]})
-var sMaximumItemsToCompareExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[636]})
-var sMaximumNumberOfApprovalsExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[638]})
-var sMaximumOpenPullRequestsExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[640]})
-var sMaximumRepositoryNamesExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[642]})
-var sMaximumRepositoryTriggersExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[644]})
-var sMaximumRuleTemplatesAssociatedWithRepositoryException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[646]})
-var sMergeHunk_isConflict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isConflict", ID: &i_IsHunkConflict, Type: smithy.ShapeTypeBoolean, Ext: &ext[649]})
-var sMergeHunk_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iMergeHunkDetail, Members: &mMergeHunkDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[650]})
-var sMergeHunk_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &iMergeHunkDetail, Members: &mMergeHunkDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[651]})
-var sMergeHunk_base = smithy.NewStaticSchema(smithy.StaticSchema{Member: "base", ID: &iMergeHunkDetail, Members: &mMergeHunkDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[652]})
-var sMergeHunkDetail_startLine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startLine", ID: &i_LineNumber, Type: smithy.ShapeTypeInteger, Ext: &ext[654]})
-var sMergeHunkDetail_endLine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endLine", ID: &i_LineNumber, Type: smithy.ShapeTypeInteger, Ext: &ext[655]})
-var sMergeHunkDetail_hunkContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hunkContent", ID: &i_HunkContent, Type: smithy.ShapeTypeString, Ext: &ext[656]})
-var s_MergeHunks_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMergeHunk, Members: &mMergeHunk, Type: smithy.ShapeTypeStructure, Ext: &ext[658]})
-var sMergeMetadata_isMerged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isMerged", ID: &i_IsMerged, Type: smithy.ShapeTypeBoolean, Ext: &ext[660]})
-var sMergeMetadata_mergedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergedBy", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[661]})
-var sMergeMetadata_mergeCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[662]})
-var sMergeMetadata_mergeOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeOption", ID: &iMergeOptionTypeEnum, Members: &mMergeOptionTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[663]})
-var sMergeOperations_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iChangeTypeEnum, Members: &mChangeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[665]})
-var sMergeOperations_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &iChangeTypeEnum, Members: &mChangeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[666]})
-var sMergeOptionRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[668]})
-var s_MergeOptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMergeOptionTypeEnum, Members: &mMergeOptionTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[670]})
-var sMergeOptionTypeEnum_FAST_FORWARD_MERGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAST_FORWARD_MERGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[672]})
-var sMergeOptionTypeEnum_SQUASH_MERGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SQUASH_MERGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[673]})
-var sMergeOptionTypeEnum_THREE_WAY_MERGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "THREE_WAY_MERGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[674]})
-var sMultipleConflictResolutionEntriesException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[678]})
-var sMultipleRepositoriesInPullRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[680]})
-var sNameLengthExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[683]})
-var sNoChangeException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[686]})
-var sNumberOfRulesExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[689]})
-var sNumberOfRuleTemplatesExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[691]})
-var sObjectTypeEnum_FILE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[695]})
-var sObjectTypeEnum_DIRECTORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECTORY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[696]})
-var sObjectTypeEnum_GIT_LINK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIT_LINK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[697]})
-var sObjectTypeEnum_SYMBOLIC_LINK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYMBOLIC_LINK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[698]})
-var sObjectTypes_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iObjectTypeEnum, Members: &mObjectTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[700]})
-var sObjectTypes_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &iObjectTypeEnum, Members: &mObjectTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[701]})
-var sObjectTypes_base = smithy.NewStaticSchema(smithy.StaticSchema{Member: "base", ID: &iObjectTypeEnum, Members: &mObjectTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[702]})
-var sOperationNotAllowedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[704]})
-var sOrderEnum_ASCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[706]})
-var sOrderEnum_DESCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[707]})
-var sOriginApprovalRuleTemplate_approvalRuleTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateId", ID: &i_ApprovalRuleTemplateId, Type: smithy.ShapeTypeString, Ext: &ext[709]})
-var sOriginApprovalRuleTemplate_approvalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &ext[710]})
-var sOverrideAlreadySetException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[713]})
-var sOverrideStatus_OVERRIDE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OVERRIDE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[715]})
-var sOverrideStatus_REVOKE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVOKE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[716]})
-var sOverrideStatusRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[718]})
-var sParentCommitDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[720]})
-var sParentCommitIdOutdatedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[722]})
-var sParentCommitIdRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[724]})
-var s_ParentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[726]})
-var sPathDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[729]})
-var sPathRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[731]})
-var sPullRequest_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ext[734]})
-var sPullRequest_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_Title, Type: smithy.ShapeTypeString, Ext: &ext[735]})
-var sPullRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[736]})
-var sPullRequest_lastActivityDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastActivityDate", ID: &i_LastModifiedDate, Type: smithy.ShapeTypeTimestamp, Ext: &ext[737]})
-var sPullRequest_creationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDate", ID: &i_CreationDate, Type: smithy.ShapeTypeTimestamp, Ext: &ext[738]})
-var sPullRequest_pullRequestStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestStatus", ID: &iPullRequestStatusEnum, Members: &mPullRequestStatusEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[739]})
-var sPullRequest_authorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[740]})
-var sPullRequest_pullRequestTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestTargets", ID: &i_PullRequestTargetList, Members: &m_PullRequestTargetList, Type: smithy.ShapeTypeList, Ext: &ext[741]})
-var sPullRequest_clientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString, Ext: &ext[742]})
-var sPullRequest_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_RevisionId, Type: smithy.ShapeTypeString, Ext: &ext[743]})
-var sPullRequest_approvalRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRules", ID: &i_ApprovalRulesList, Members: &m_ApprovalRulesList, Type: smithy.ShapeTypeList, Ext: &ext[744]})
-var sPullRequestAlreadyClosedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[746]})
-var sPullRequestApprovalRulesNotSatisfiedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[748]})
-var sPullRequestCannotBeApprovedByAuthorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[750]})
-var sPullRequestCreatedEventMetadata_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[752]})
-var sPullRequestCreatedEventMetadata_sourceCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[753]})
-var sPullRequestCreatedEventMetadata_destinationCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[754]})
-var sPullRequestCreatedEventMetadata_mergeBase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeBase", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[755]})
-var sPullRequestDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[757]})
-var sPullRequestEvent_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ext[759]})
-var sPullRequestEvent_eventDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventDate", ID: &i_EventDate, Type: smithy.ShapeTypeTimestamp, Ext: &ext[760]})
-var sPullRequestEvent_pullRequestEventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestEventType", ID: &iPullRequestEventType, Members: &mPullRequestEventType, Type: smithy.ShapeTypeEnum, Ext: &ext[761]})
-var sPullRequestEvent_actorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[762]})
-var sPullRequestEvent_pullRequestCreatedEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestCreatedEventMetadata", ID: &iPullRequestCreatedEventMetadata, Members: &mPullRequestCreatedEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[763]})
-var sPullRequestEvent_pullRequestStatusChangedEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestStatusChangedEventMetadata", ID: &iPullRequestStatusChangedEventMetadata, Members: &mPullRequestStatusChangedEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[764]})
-var sPullRequestEvent_pullRequestSourceReferenceUpdatedEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestSourceReferenceUpdatedEventMetadata", ID: &iPullRequestSourceReferenceUpdatedEventMetadata, Members: &mPullRequestSourceReferenceUpdatedEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[765]})
-var sPullRequestEvent_pullRequestMergedStateChangedEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestMergedStateChangedEventMetadata", ID: &iPullRequestMergedStateChangedEventMetadata, Members: &mPullRequestMergedStateChangedEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[766]})
-var sPullRequestEvent_approvalRuleEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleEventMetadata", ID: &iApprovalRuleEventMetadata, Members: &mApprovalRuleEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[767]})
-var sPullRequestEvent_approvalStateChangedEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalStateChangedEventMetadata", ID: &iApprovalStateChangedEventMetadata, Members: &mApprovalStateChangedEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[768]})
-var sPullRequestEvent_approvalRuleOverriddenEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleOverriddenEventMetadata", ID: &iApprovalRuleOverriddenEventMetadata, Members: &mApprovalRuleOverriddenEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[769]})
-var s_PullRequestEventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPullRequestEvent, Members: &mPullRequestEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[771]})
-var sPullRequestEventType_PULL_REQUEST_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PULL_REQUEST_CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[773]})
-var sPullRequestEventType_PULL_REQUEST_STATUS_CHANGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PULL_REQUEST_STATUS_CHANGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[774]})
-var sPullRequestEventType_PULL_REQUEST_SOURCE_REFERENCE_UPDATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PULL_REQUEST_SOURCE_REFERENCE_UPDATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[775]})
-var sPullRequestEventType_PULL_REQUEST_MERGE_STATE_CHANGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PULL_REQUEST_MERGE_STATE_CHANGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[776]})
-var sPullRequestEventType_PULL_REQUEST_APPROVAL_RULE_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PULL_REQUEST_APPROVAL_RULE_CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[777]})
-var sPullRequestEventType_PULL_REQUEST_APPROVAL_RULE_UPDATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PULL_REQUEST_APPROVAL_RULE_UPDATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[778]})
-var sPullRequestEventType_PULL_REQUEST_APPROVAL_RULE_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PULL_REQUEST_APPROVAL_RULE_DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[779]})
-var sPullRequestEventType_PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[780]})
-var sPullRequestEventType_PULL_REQUEST_APPROVAL_STATE_CHANGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PULL_REQUEST_APPROVAL_STATE_CHANGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[781]})
-var s_PullRequestIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ext[784]})
-var sPullRequestIdRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[786]})
-var sPullRequestMergedStateChangedEventMetadata_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[788]})
-var sPullRequestMergedStateChangedEventMetadata_destinationReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationReference", ID: &i_ReferenceName, Type: smithy.ShapeTypeString, Ext: &ext[789]})
-var sPullRequestMergedStateChangedEventMetadata_mergeMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeMetadata", ID: &iMergeMetadata, Members: &mMergeMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[790]})
-var sPullRequestSourceReferenceUpdatedEventMetadata_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[792]})
-var sPullRequestSourceReferenceUpdatedEventMetadata_beforeCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[793]})
-var sPullRequestSourceReferenceUpdatedEventMetadata_afterCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[794]})
-var sPullRequestSourceReferenceUpdatedEventMetadata_mergeBase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeBase", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[795]})
-var sPullRequestStatusChangedEventMetadata_pullRequestStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestStatus", ID: &iPullRequestStatusEnum, Members: &mPullRequestStatusEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[797]})
-var sPullRequestStatusEnum_OPEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[799]})
-var sPullRequestStatusEnum_CLOSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOSED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[800]})
-var sPullRequestStatusRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[802]})
-var sPullRequestTarget_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[804]})
-var sPullRequestTarget_sourceReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceReference", ID: &i_ReferenceName, Type: smithy.ShapeTypeString, Ext: &ext[805]})
-var sPullRequestTarget_destinationReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationReference", ID: &i_ReferenceName, Type: smithy.ShapeTypeString, Ext: &ext[806]})
-var sPullRequestTarget_destinationCommit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommit", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[807]})
-var sPullRequestTarget_sourceCommit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommit", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[808]})
-var sPullRequestTarget_mergeBase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeBase", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[809]})
-var sPullRequestTarget_mergeMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeMetadata", ID: &iMergeMetadata, Members: &mMergeMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[810]})
-var s_PullRequestTargetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPullRequestTarget, Members: &mPullRequestTarget, Type: smithy.ShapeTypeStructure, Ext: &ext[812]})
-var s_PutFileEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPutFileEntry, Members: &mPutFileEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[814]})
-var sPutFileEntry_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[816]})
-var sPutFileEntry_fileMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileMode", ID: &iFileModeTypeEnum, Members: &mFileModeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[817]})
-var sPutFileEntry_fileContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileContent", ID: &i_FileContent, Type: smithy.ShapeTypeBlob, Ext: &ext[818]})
-var sPutFileEntry_sourceFile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceFile", ID: &iSourceFileSpecifier, Members: &mSourceFileSpecifier, Type: smithy.ShapeTypeStructure, Ext: &ext[819]})
-var sPutFileEntryConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[821]})
-var s_ReactionCountsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ReactionValue, Type: smithy.ShapeTypeString, Ext: &ext[823]})
-var s_ReactionCountsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &ext[824]})
-var sReactionForComment_reaction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reaction", ID: &iReactionValueFormats, Members: &mReactionValueFormats, Type: smithy.ShapeTypeStructure, Ext: &ext[827]})
-var sReactionForComment_reactionUsers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reactionUsers", ID: &i_ReactionUsersList, Members: &m_ReactionUsersList, Type: smithy.ShapeTypeList, Ext: &ext[828]})
-var sReactionForComment_reactionsFromDeletedUsersCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reactionsFromDeletedUsersCount", ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &ext[829]})
-var sReactionLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[831]})
-var s_ReactionsForCommentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReactionForComment, Members: &mReactionForComment, Type: smithy.ShapeTypeStructure, Ext: &ext[833]})
-var s_ReactionUsersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[837]})
-var sReactionValueFormats_emoji = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emoji", ID: &i_ReactionEmoji, Type: smithy.ShapeTypeString, Ext: &ext[840]})
-var sReactionValueFormats_shortCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shortCode", ID: &i_ReactionShortCode, Type: smithy.ShapeTypeString, Ext: &ext[841]})
-var sReactionValueFormats_unicode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unicode", ID: &i_ReactionUnicode, Type: smithy.ShapeTypeString, Ext: &ext[842]})
-var sReactionValueRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[844]})
-var sReferenceDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[846]})
-var sReferenceNameRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[849]})
-var sReferenceTypeNotSupportedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[851]})
-var sRelativeFileVersionEnum_BEFORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEFORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[853]})
-var sRelativeFileVersionEnum_AFTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AFTER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[854]})
-var s_ReplaceContentEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReplaceContentEntry, Members: &mReplaceContentEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[856]})
-var sReplaceContentEntry_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[858]})
-var sReplaceContentEntry_replacementType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replacementType", ID: &iReplacementTypeEnum, Members: &mReplacementTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[859]})
-var sReplaceContentEntry_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_FileContent, Type: smithy.ShapeTypeBlob, Ext: &ext[860]})
-var sReplaceContentEntry_fileMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileMode", ID: &iFileModeTypeEnum, Members: &mFileModeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[861]})
-var sReplacementContentRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[863]})
-var sReplacementTypeEnum_KEEP_BASE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEEP_BASE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[865]})
-var sReplacementTypeEnum_KEEP_SOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEEP_SOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[866]})
-var sReplacementTypeEnum_KEEP_DESTINATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEEP_DESTINATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[867]})
-var sReplacementTypeEnum_USE_NEW_CONTENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USE_NEW_CONTENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[868]})
-var sReplacementTypeRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[870]})
-var sRepositoryDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[873]})
-var sRepositoryLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[876]})
-var sRepositoryMetadata_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[878]})
-var sRepositoryMetadata_repositoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryId", ID: &i_RepositoryId, Type: smithy.ShapeTypeString, Ext: &ext[879]})
-var sRepositoryMetadata_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[880]})
-var sRepositoryMetadata_repositoryDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryDescription", ID: &i_RepositoryDescription, Type: smithy.ShapeTypeString, Ext: &ext[881]})
-var sRepositoryMetadata_defaultBranch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultBranch", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &ext[882]})
-var sRepositoryMetadata_lastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedDate", ID: &i_LastModifiedDate, Type: smithy.ShapeTypeTimestamp, Ext: &ext[883]})
-var sRepositoryMetadata_creationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDate", ID: &i_CreationDate, Type: smithy.ShapeTypeTimestamp, Ext: &ext[884]})
-var sRepositoryMetadata_cloneUrlHttp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloneUrlHttp", ID: &i_CloneUrlHttp, Type: smithy.ShapeTypeString, Ext: &ext[885]})
-var sRepositoryMetadata_cloneUrlSsh = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloneUrlSsh", ID: &i_CloneUrlSsh, Type: smithy.ShapeTypeString, Ext: &ext[886]})
-var sRepositoryMetadata_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[887]})
-var sRepositoryMetadata_kmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &ext[888]})
-var s_RepositoryMetadataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRepositoryMetadata, Members: &mRepositoryMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[890]})
-var sRepositoryNameExistsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[893]})
-var sRepositoryNameIdPair_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[895]})
-var sRepositoryNameIdPair_repositoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryId", ID: &i_RepositoryId, Type: smithy.ShapeTypeString, Ext: &ext[896]})
-var s_RepositoryNameIdPairList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRepositoryNameIdPair, Members: &mRepositoryNameIdPair, Type: smithy.ShapeTypeStructure, Ext: &ext[898]})
-var s_RepositoryNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[900]})
-var sRepositoryNameRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[902]})
-var sRepositoryNamesRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[904]})
-var sRepositoryNotAssociatedWithPullRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[906]})
-var s_RepositoryNotFoundList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[908]})
-var sRepositoryTrigger_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RepositoryTriggerName, Type: smithy.ShapeTypeString, Ext: &ext[910]})
-var sRepositoryTrigger_destinationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[911]})
-var sRepositoryTrigger_customData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customData", ID: &i_RepositoryTriggerCustomData, Type: smithy.ShapeTypeString, Ext: &ext[912]})
-var sRepositoryTrigger_branches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branches", ID: &i_BranchNameList, Members: &m_BranchNameList, Type: smithy.ShapeTypeList, Ext: &ext[913]})
-var sRepositoryTrigger_events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "events", ID: &i_RepositoryTriggerEventList, Members: &m_RepositoryTriggerEventList, Type: smithy.ShapeTypeList, Ext: &ext[914]})
-var sRepositoryTriggerBranchNameListRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[916]})
-var sRepositoryTriggerDestinationArnRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[919]})
-var sRepositoryTriggerEventEnum_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[921]})
-var sRepositoryTriggerEventEnum_UPDATE_REFERENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_REFERENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[922]})
-var sRepositoryTriggerEventEnum_CREATE_REFERENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_REFERENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[923]})
-var sRepositoryTriggerEventEnum_DELETE_REFERENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_REFERENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[924]})
-var s_RepositoryTriggerEventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRepositoryTriggerEventEnum, Members: &mRepositoryTriggerEventEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[926]})
-var sRepositoryTriggerEventsListRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[928]})
-var sRepositoryTriggerExecutionFailure_trigger = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trigger", ID: &i_RepositoryTriggerName, Type: smithy.ShapeTypeString, Ext: &ext[930]})
-var sRepositoryTriggerExecutionFailure_failureMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureMessage", ID: &i_RepositoryTriggerExecutionFailureMessage, Type: smithy.ShapeTypeString, Ext: &ext[931]})
-var s_RepositoryTriggerExecutionFailureList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRepositoryTriggerExecutionFailure, Members: &mRepositoryTriggerExecutionFailure, Type: smithy.ShapeTypeStructure, Ext: &ext[933]})
-var s_RepositoryTriggerNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RepositoryTriggerName, Type: smithy.ShapeTypeString, Ext: &ext[937]})
-var sRepositoryTriggerNameRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[939]})
-var s_RepositoryTriggersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRepositoryTrigger, Members: &mRepositoryTrigger, Type: smithy.ShapeTypeStructure, Ext: &ext[942]})
-var sRepositoryTriggersListRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[944]})
-var sResourceArnRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[947]})
-var sRestrictedSourceFileException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[949]})
-var s_RevisionChildren_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RevisionId, Type: smithy.ShapeTypeString, Ext: &ext[951]})
-var s_RevisionDag_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFileVersion, Members: &mFileVersion, Type: smithy.ShapeTypeStructure, Ext: &ext[953]})
-var sRevisionIdRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[956]})
-var sRevisionNotCurrentException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[958]})
-var sSameFileContentException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[961]})
-var sSamePathRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[963]})
-var s_SetFileModeEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSetFileModeEntry, Members: &mSetFileModeEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[965]})
-var sSetFileModeEntry_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[967]})
-var sSetFileModeEntry_fileMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileMode", ID: &iFileModeTypeEnum, Members: &mFileModeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[968]})
-var sSortByEnum_REPOSITORY_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPOSITORY_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[970]})
-var sSortByEnum_MODIFIED_DATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODIFIED_DATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[971]})
-var sSourceAndDestinationAreSameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[973]})
-var sSourceFileOrContentRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[975]})
-var sSourceFileSpecifier_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[977]})
-var sSourceFileSpecifier_isMove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isMove", ID: &i_IsMove, Type: smithy.ShapeTypeBoolean, Ext: &ext[978]})
-var sSubModule_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[980]})
-var sSubModule_absolutePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "absolutePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[981]})
-var sSubModule_relativePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relativePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[982]})
-var s_SubModuleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSubModule, Members: &mSubModule, Type: smithy.ShapeTypeStructure, Ext: &ext[984]})
-var sSymbolicLink_blobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[986]})
-var sSymbolicLink_absolutePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "absolutePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[987]})
-var sSymbolicLink_relativePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relativePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[988]})
-var sSymbolicLink_fileMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileMode", ID: &iFileModeTypeEnum, Members: &mFileModeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[989]})
-var s_SymbolicLinkList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSymbolicLink, Members: &mSymbolicLink, Type: smithy.ShapeTypeStructure, Ext: &ext[991]})
-var s_TagKeysList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[994]})
-var sTagKeysListRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[996]})
-var sTagPolicyException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[998]})
-var s_TagsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[1000]})
-var s_TagsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[1001]})
-var sTagsMapRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[1003]})
-var sTarget_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1006]})
-var sTarget_sourceReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceReference", ID: &i_ReferenceName, Type: smithy.ShapeTypeString, Ext: &ext[1007]})
-var sTarget_destinationReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationReference", ID: &i_ReferenceName, Type: smithy.ShapeTypeString, Ext: &ext[1008]})
-var s_TargetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTarget, Members: &mTarget, Type: smithy.ShapeTypeStructure, Ext: &ext[1010]})
-var sTargetRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[1012]})
-var sTargetsRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[1014]})
-var sTipOfSourceReferenceIsDifferentException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[1016]})
-var sTipsDivergenceExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[1018]})
-var sTitleRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[1021]})
-var sTooManyTagsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[1023]})
-var sUserInfo_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &ext[1025]})
-var sUserInfo_email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "email", ID: &i_Email, Type: smithy.ShapeTypeString, Ext: &ext[1026]})
-var sUserInfo_date = smithy.NewStaticSchema(smithy.StaticSchema{Member: "date", ID: &i_Date, Type: smithy.ShapeTypeString, Ext: &ext[1027]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[1029]})
-var sAssociateApprovalRuleTemplateWithRepositoryInput_approvalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &ext[1031]})
-var sAssociateApprovalRuleTemplateWithRepositoryInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1032]})
-var sBatchAssociateApprovalRuleTemplateWithRepositoriesInput_approvalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &ext[1034]})
-var sBatchAssociateApprovalRuleTemplateWithRepositoriesInput_repositoryNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryNames", ID: &i_RepositoryNameList, Members: &m_RepositoryNameList, Type: smithy.ShapeTypeList, Ext: &ext[1035]})
-var sBatchAssociateApprovalRuleTemplateWithRepositoriesOutput_associatedRepositoryNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedRepositoryNames", ID: &i_RepositoryNameList, Members: &m_RepositoryNameList, Type: smithy.ShapeTypeList, Ext: &ext[1037]})
-var sBatchAssociateApprovalRuleTemplateWithRepositoriesOutput_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList, Members: &m_BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList, Type: smithy.ShapeTypeList, Ext: &ext[1038]})
-var sBatchDescribeMergeConflictsInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1040]})
-var sBatchDescribeMergeConflictsInput_destinationCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &ext[1041]})
-var sBatchDescribeMergeConflictsInput_sourceCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &ext[1042]})
-var sBatchDescribeMergeConflictsInput_mergeOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeOption", ID: &iMergeOptionTypeEnum, Members: &mMergeOptionTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1043]})
-var sBatchDescribeMergeConflictsInput_maxMergeHunks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxMergeHunks", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1044]})
-var sBatchDescribeMergeConflictsInput_maxConflictFiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxConflictFiles", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1045]})
-var sBatchDescribeMergeConflictsInput_filePaths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePaths", ID: &i_FilePaths, Members: &m_FilePaths, Type: smithy.ShapeTypeList, Ext: &ext[1046]})
-var sBatchDescribeMergeConflictsInput_conflictDetailLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictDetailLevel", ID: &iConflictDetailLevelTypeEnum, Members: &mConflictDetailLevelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1047]})
-var sBatchDescribeMergeConflictsInput_conflictResolutionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolutionStrategy", ID: &iConflictResolutionStrategyTypeEnum, Members: &mConflictResolutionStrategyTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1048]})
-var sBatchDescribeMergeConflictsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1049]})
-var sBatchDescribeMergeConflictsOutput_conflicts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflicts", ID: &i_Conflicts, Members: &m_Conflicts, Type: smithy.ShapeTypeList, Ext: &ext[1051]})
-var sBatchDescribeMergeConflictsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1052]})
-var sBatchDescribeMergeConflictsOutput_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchDescribeMergeConflictsErrors, Members: &m_BatchDescribeMergeConflictsErrors, Type: smithy.ShapeTypeList, Ext: &ext[1053]})
-var sBatchDescribeMergeConflictsOutput_destinationCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1054]})
-var sBatchDescribeMergeConflictsOutput_sourceCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1055]})
-var sBatchDescribeMergeConflictsOutput_baseCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1056]})
-var sBatchDisassociateApprovalRuleTemplateFromRepositoriesInput_approvalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &ext[1058]})
-var sBatchDisassociateApprovalRuleTemplateFromRepositoriesInput_repositoryNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryNames", ID: &i_RepositoryNameList, Members: &m_RepositoryNameList, Type: smithy.ShapeTypeList, Ext: &ext[1059]})
-var sBatchDisassociateApprovalRuleTemplateFromRepositoriesOutput_disassociatedRepositoryNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "disassociatedRepositoryNames", ID: &i_RepositoryNameList, Members: &m_RepositoryNameList, Type: smithy.ShapeTypeList, Ext: &ext[1061]})
-var sBatchDisassociateApprovalRuleTemplateFromRepositoriesOutput_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList, Members: &m_BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList, Type: smithy.ShapeTypeList, Ext: &ext[1062]})
-var sBatchGetCommitsInput_commitIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitIds", ID: &i_CommitIdsInputList, Members: &m_CommitIdsInputList, Type: smithy.ShapeTypeList, Ext: &ext[1064]})
-var sBatchGetCommitsInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1065]})
-var sBatchGetCommitsOutput_commits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commits", ID: &i_CommitObjectsList, Members: &m_CommitObjectsList, Type: smithy.ShapeTypeList, Ext: &ext[1067]})
-var sBatchGetCommitsOutput_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchGetCommitsErrorsList, Members: &m_BatchGetCommitsErrorsList, Type: smithy.ShapeTypeList, Ext: &ext[1068]})
-var sBatchGetRepositoriesInput_repositoryNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryNames", ID: &i_RepositoryNameList, Members: &m_RepositoryNameList, Type: smithy.ShapeTypeList, Ext: &ext[1070]})
-var sBatchGetRepositoriesOutput_repositories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositories", ID: &i_RepositoryMetadataList, Members: &m_RepositoryMetadataList, Type: smithy.ShapeTypeList, Ext: &ext[1072]})
-var sBatchGetRepositoriesOutput_repositoriesNotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoriesNotFound", ID: &i_RepositoryNotFoundList, Members: &m_RepositoryNotFoundList, Type: smithy.ShapeTypeList, Ext: &ext[1073]})
-var sBatchGetRepositoriesOutput_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchGetRepositoriesErrorsList, Members: &m_BatchGetRepositoriesErrorsList, Type: smithy.ShapeTypeList, Ext: &ext[1074]})
-var sCreateApprovalRuleTemplateInput_approvalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &ext[1076]})
-var sCreateApprovalRuleTemplateInput_approvalRuleTemplateContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateContent", ID: &i_ApprovalRuleTemplateContent, Type: smithy.ShapeTypeString, Ext: &ext[1077]})
-var sCreateApprovalRuleTemplateInput_approvalRuleTemplateDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateDescription", ID: &i_ApprovalRuleTemplateDescription, Type: smithy.ShapeTypeString, Ext: &ext[1078]})
-var sCreateApprovalRuleTemplateOutput_approvalRuleTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplate", ID: &iApprovalRuleTemplate, Members: &mApprovalRuleTemplate, Type: smithy.ShapeTypeStructure, Ext: &ext[1080]})
-var sCreateBranchInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1082]})
-var sCreateBranchInput_branchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchName", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &ext[1083]})
-var sCreateBranchInput_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[1084]})
-var sCreateCommitInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1086]})
-var sCreateCommitInput_branchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchName", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &ext[1087]})
-var sCreateCommitInput_parentCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[1088]})
-var sCreateCommitInput_authorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &ext[1089]})
-var sCreateCommitInput_email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "email", ID: &i_Email, Type: smithy.ShapeTypeString, Ext: &ext[1090]})
-var sCreateCommitInput_commitMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitMessage", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[1091]})
-var sCreateCommitInput_keepEmptyFolders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keepEmptyFolders", ID: &i_KeepEmptyFolders, Type: smithy.ShapeTypeBoolean, Ext: &ext[1092]})
-var sCreateCommitInput_putFiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "putFiles", ID: &i_PutFileEntries, Members: &m_PutFileEntries, Type: smithy.ShapeTypeList, Ext: &ext[1093]})
-var sCreateCommitInput_deleteFiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleteFiles", ID: &i_DeleteFileEntries, Members: &m_DeleteFileEntries, Type: smithy.ShapeTypeList, Ext: &ext[1094]})
-var sCreateCommitInput_setFileModes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "setFileModes", ID: &i_SetFileModeEntries, Members: &m_SetFileModeEntries, Type: smithy.ShapeTypeList, Ext: &ext[1095]})
-var sCreateCommitOutput_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1097]})
-var sCreateCommitOutput_treeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "treeId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1098]})
-var sCreateCommitOutput_filesAdded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filesAdded", ID: &i_FilesMetadata, Members: &m_FilesMetadata, Type: smithy.ShapeTypeList, Ext: &ext[1099]})
-var sCreateCommitOutput_filesUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filesUpdated", ID: &i_FilesMetadata, Members: &m_FilesMetadata, Type: smithy.ShapeTypeList, Ext: &ext[1100]})
-var sCreateCommitOutput_filesDeleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filesDeleted", ID: &i_FilesMetadata, Members: &m_FilesMetadata, Type: smithy.ShapeTypeList, Ext: &ext[1101]})
-var sCreatePullRequestApprovalRuleInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ext[1103]})
-var sCreatePullRequestApprovalRuleInput_approvalRuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleName", ID: &i_ApprovalRuleName, Type: smithy.ShapeTypeString, Ext: &ext[1104]})
-var sCreatePullRequestApprovalRuleInput_approvalRuleContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleContent", ID: &i_ApprovalRuleContent, Type: smithy.ShapeTypeString, Ext: &ext[1105]})
-var sCreatePullRequestApprovalRuleOutput_approvalRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRule", ID: &iApprovalRule, Members: &mApprovalRule, Type: smithy.ShapeTypeStructure, Ext: &ext[1107]})
-var sCreatePullRequestInput_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_Title, Type: smithy.ShapeTypeString, Ext: &ext[1109]})
-var sCreatePullRequestInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[1110]})
-var sCreatePullRequestInput_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_TargetList, Members: &m_TargetList, Type: smithy.ShapeTypeList, Ext: &ext[1111]})
-var sCreatePullRequestInput_clientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString, Ext: &ext[1112]})
-var sCreatePullRequestOutput_pullRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequest", ID: &iPullRequest, Members: &mPullRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1114]})
-var sCreateRepositoryInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1116]})
-var sCreateRepositoryInput_repositoryDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryDescription", ID: &i_RepositoryDescription, Type: smithy.ShapeTypeString, Ext: &ext[1117]})
-var sCreateRepositoryInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &ext[1118]})
-var sCreateRepositoryInput_kmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &ext[1119]})
-var sCreateRepositoryOutput_repositoryMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryMetadata", ID: &iRepositoryMetadata, Members: &mRepositoryMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[1121]})
-var sCreateUnreferencedMergeCommitInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1123]})
-var sCreateUnreferencedMergeCommitInput_sourceCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &ext[1124]})
-var sCreateUnreferencedMergeCommitInput_destinationCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &ext[1125]})
-var sCreateUnreferencedMergeCommitInput_mergeOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeOption", ID: &iMergeOptionTypeEnum, Members: &mMergeOptionTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1126]})
-var sCreateUnreferencedMergeCommitInput_conflictDetailLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictDetailLevel", ID: &iConflictDetailLevelTypeEnum, Members: &mConflictDetailLevelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1127]})
-var sCreateUnreferencedMergeCommitInput_conflictResolutionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolutionStrategy", ID: &iConflictResolutionStrategyTypeEnum, Members: &mConflictResolutionStrategyTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1128]})
-var sCreateUnreferencedMergeCommitInput_authorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &ext[1129]})
-var sCreateUnreferencedMergeCommitInput_email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "email", ID: &i_Email, Type: smithy.ShapeTypeString, Ext: &ext[1130]})
-var sCreateUnreferencedMergeCommitInput_commitMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitMessage", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[1131]})
-var sCreateUnreferencedMergeCommitInput_keepEmptyFolders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keepEmptyFolders", ID: &i_KeepEmptyFolders, Type: smithy.ShapeTypeBoolean, Ext: &ext[1132]})
-var sCreateUnreferencedMergeCommitInput_conflictResolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolution", ID: &iConflictResolution, Members: &mConflictResolution, Type: smithy.ShapeTypeStructure, Ext: &ext[1133]})
-var sCreateUnreferencedMergeCommitOutput_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1135]})
-var sCreateUnreferencedMergeCommitOutput_treeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "treeId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1136]})
-var sDeleteApprovalRuleTemplateInput_approvalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &ext[1138]})
-var sDeleteApprovalRuleTemplateOutput_approvalRuleTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateId", ID: &i_ApprovalRuleTemplateId, Type: smithy.ShapeTypeString, Ext: &ext[1140]})
-var sDeleteBranchInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1142]})
-var sDeleteBranchInput_branchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchName", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &ext[1143]})
-var sDeleteBranchOutput_deletedBranch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletedBranch", ID: &iBranchInfo, Members: &mBranchInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[1145]})
-var sDeleteCommentContentInput_commentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commentId", ID: &i_CommentId, Type: smithy.ShapeTypeString, Ext: &ext[1147]})
-var sDeleteCommentContentOutput_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &iComment, Members: &mComment, Type: smithy.ShapeTypeStructure, Ext: &ext[1149]})
-var sDeleteFileInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1151]})
-var sDeleteFileInput_branchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchName", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &ext[1152]})
-var sDeleteFileInput_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[1153]})
-var sDeleteFileInput_parentCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[1154]})
-var sDeleteFileInput_keepEmptyFolders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keepEmptyFolders", ID: &i_KeepEmptyFolders, Type: smithy.ShapeTypeBoolean, Ext: &ext[1155]})
-var sDeleteFileInput_commitMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitMessage", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[1156]})
-var sDeleteFileInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &ext[1157]})
-var sDeleteFileInput_email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "email", ID: &i_Email, Type: smithy.ShapeTypeString, Ext: &ext[1158]})
-var sDeleteFileOutput_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1160]})
-var sDeleteFileOutput_blobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1161]})
-var sDeleteFileOutput_treeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "treeId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1162]})
-var sDeleteFileOutput_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[1163]})
-var sDeletePullRequestApprovalRuleInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ext[1165]})
-var sDeletePullRequestApprovalRuleInput_approvalRuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleName", ID: &i_ApprovalRuleName, Type: smithy.ShapeTypeString, Ext: &ext[1166]})
-var sDeletePullRequestApprovalRuleOutput_approvalRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleId", ID: &i_ApprovalRuleId, Type: smithy.ShapeTypeString, Ext: &ext[1168]})
-var sDeleteRepositoryInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1170]})
-var sDeleteRepositoryOutput_repositoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryId", ID: &i_RepositoryId, Type: smithy.ShapeTypeString, Ext: &ext[1172]})
-var sDescribeMergeConflictsInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1174]})
-var sDescribeMergeConflictsInput_destinationCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &ext[1175]})
-var sDescribeMergeConflictsInput_sourceCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &ext[1176]})
-var sDescribeMergeConflictsInput_mergeOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeOption", ID: &iMergeOptionTypeEnum, Members: &mMergeOptionTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1177]})
-var sDescribeMergeConflictsInput_maxMergeHunks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxMergeHunks", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1178]})
-var sDescribeMergeConflictsInput_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[1179]})
-var sDescribeMergeConflictsInput_conflictDetailLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictDetailLevel", ID: &iConflictDetailLevelTypeEnum, Members: &mConflictDetailLevelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1180]})
-var sDescribeMergeConflictsInput_conflictResolutionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolutionStrategy", ID: &iConflictResolutionStrategyTypeEnum, Members: &mConflictResolutionStrategyTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1181]})
-var sDescribeMergeConflictsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1182]})
-var sDescribeMergeConflictsOutput_conflictMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictMetadata", ID: &iConflictMetadata, Members: &mConflictMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[1184]})
-var sDescribeMergeConflictsOutput_mergeHunks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeHunks", ID: &i_MergeHunks, Members: &m_MergeHunks, Type: smithy.ShapeTypeList, Ext: &ext[1185]})
-var sDescribeMergeConflictsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1186]})
-var sDescribeMergeConflictsOutput_destinationCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1187]})
-var sDescribeMergeConflictsOutput_sourceCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1188]})
-var sDescribeMergeConflictsOutput_baseCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1189]})
-var sDescribePullRequestEventsInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ext[1191]})
-var sDescribePullRequestEventsInput_pullRequestEventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestEventType", ID: &iPullRequestEventType, Members: &mPullRequestEventType, Type: smithy.ShapeTypeEnum, Ext: &ext[1192]})
-var sDescribePullRequestEventsInput_actorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[1193]})
-var sDescribePullRequestEventsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1194]})
-var sDescribePullRequestEventsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1195]})
-var sDescribePullRequestEventsOutput_pullRequestEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestEvents", ID: &i_PullRequestEventList, Members: &m_PullRequestEventList, Type: smithy.ShapeTypeList, Ext: &ext[1197]})
-var sDescribePullRequestEventsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1198]})
-var sDisassociateApprovalRuleTemplateFromRepositoryInput_approvalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &ext[1200]})
-var sDisassociateApprovalRuleTemplateFromRepositoryInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1201]})
-var sEvaluatePullRequestApprovalRulesInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ext[1203]})
-var sEvaluatePullRequestApprovalRulesInput_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_RevisionId, Type: smithy.ShapeTypeString, Ext: &ext[1204]})
-var sEvaluatePullRequestApprovalRulesOutput_evaluation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evaluation", ID: &iEvaluation, Members: &mEvaluation, Type: smithy.ShapeTypeStructure, Ext: &ext[1206]})
-var sGetApprovalRuleTemplateInput_approvalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &ext[1208]})
-var sGetApprovalRuleTemplateOutput_approvalRuleTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplate", ID: &iApprovalRuleTemplate, Members: &mApprovalRuleTemplate, Type: smithy.ShapeTypeStructure, Ext: &ext[1210]})
-var sGetBlobDifferencesInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1212]})
-var sGetBlobDifferencesInput_afterBlobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterBlobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1213]})
-var sGetBlobDifferencesInput_beforeBlobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeBlobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1214]})
-var sGetBlobDifferencesInput_contextLines = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contextLines", ID: &i_DiffContext, Type: smithy.ShapeTypeInteger, Ext: &ext[1215]})
-var sGetBlobDifferencesInput_ignoreWhitespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ignoreWhitespace", ID: &i_IgnoreWhiteSpaces, Type: smithy.ShapeTypeBoolean, Ext: &ext[1216]})
-var sGetBlobDifferencesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_Limit, Type: smithy.ShapeTypeInteger, Ext: &ext[1217]})
-var sGetBlobDifferencesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1218]})
-var sGetBlobDifferencesOutput_hunks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hunks", ID: &i_DiffHunkList, Members: &m_DiffHunkList, Type: smithy.ShapeTypeList, Ext: &ext[1220]})
-var sGetBlobDifferencesOutput_isBinary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isBinary", ID: &i_CapitalBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[1221]})
-var sGetBlobDifferencesOutput_beforeBlobSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeBlobSize", ID: &i_ObjectSize, Type: smithy.ShapeTypeLong, Ext: &ext[1222]})
-var sGetBlobDifferencesOutput_afterBlobSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterBlobSize", ID: &i_ObjectSize, Type: smithy.ShapeTypeLong, Ext: &ext[1223]})
-var sGetBlobDifferencesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1224]})
-var sGetBlobInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1226]})
-var sGetBlobInput_blobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1227]})
-var sGetBlobOutput_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_blob, Type: smithy.ShapeTypeBlob, Ext: &ext[1229]})
-var sGetBranchInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1231]})
-var sGetBranchInput_branchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchName", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &ext[1232]})
-var sGetBranchOutput_branch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branch", ID: &iBranchInfo, Members: &mBranchInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[1234]})
-var sGetCommentInput_commentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commentId", ID: &i_CommentId, Type: smithy.ShapeTypeString, Ext: &ext[1236]})
-var sGetCommentOutput_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &iComment, Members: &mComment, Type: smithy.ShapeTypeStructure, Ext: &ext[1238]})
-var sGetCommentReactionsInput_commentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commentId", ID: &i_CommentId, Type: smithy.ShapeTypeString, Ext: &ext[1240]})
-var sGetCommentReactionsInput_reactionUserArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reactionUserArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[1241]})
-var sGetCommentReactionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1242]})
-var sGetCommentReactionsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1243]})
-var sGetCommentReactionsOutput_reactionsForComment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reactionsForComment", ID: &i_ReactionsForCommentList, Members: &m_ReactionsForCommentList, Type: smithy.ShapeTypeList, Ext: &ext[1245]})
-var sGetCommentReactionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1246]})
-var sGetCommentsForComparedCommitInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1248]})
-var sGetCommentsForComparedCommitInput_beforeCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[1249]})
-var sGetCommentsForComparedCommitInput_afterCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[1250]})
-var sGetCommentsForComparedCommitInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1251]})
-var sGetCommentsForComparedCommitInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1252]})
-var sGetCommentsForComparedCommitOutput_commentsForComparedCommitData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commentsForComparedCommitData", ID: &i_CommentsForComparedCommitData, Members: &m_CommentsForComparedCommitData, Type: smithy.ShapeTypeList, Ext: &ext[1254]})
-var sGetCommentsForComparedCommitOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1255]})
-var sGetCommentsForPullRequestInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ext[1257]})
-var sGetCommentsForPullRequestInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1258]})
-var sGetCommentsForPullRequestInput_beforeCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[1259]})
-var sGetCommentsForPullRequestInput_afterCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[1260]})
-var sGetCommentsForPullRequestInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1261]})
-var sGetCommentsForPullRequestInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1262]})
-var sGetCommentsForPullRequestOutput_commentsForPullRequestData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commentsForPullRequestData", ID: &i_CommentsForPullRequestData, Members: &m_CommentsForPullRequestData, Type: smithy.ShapeTypeList, Ext: &ext[1264]})
-var sGetCommentsForPullRequestOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1265]})
-var sGetCommitInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1267]})
-var sGetCommitInput_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1268]})
-var sGetCommitOutput_commit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commit", ID: &iCommit, Members: &mCommit, Type: smithy.ShapeTypeStructure, Ext: &ext[1270]})
-var sGetDifferencesInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1272]})
-var sGetDifferencesInput_beforeCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &ext[1273]})
-var sGetDifferencesInput_afterCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &ext[1274]})
-var sGetDifferencesInput_beforePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[1275]})
-var sGetDifferencesInput_afterPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterPath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[1276]})
-var sGetDifferencesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_Limit, Type: smithy.ShapeTypeInteger, Ext: &ext[1277]})
-var sGetDifferencesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1278]})
-var sGetDifferencesOutput_differences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "differences", ID: &i_DifferenceList, Members: &m_DifferenceList, Type: smithy.ShapeTypeList, Ext: &ext[1280]})
-var sGetDifferencesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1281]})
-var sGetFileInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1283]})
-var sGetFileInput_commitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &ext[1284]})
-var sGetFileInput_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[1285]})
-var sGetFileOutput_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1287]})
-var sGetFileOutput_blobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1288]})
-var sGetFileOutput_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[1289]})
-var sGetFileOutput_fileMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileMode", ID: &iFileModeTypeEnum, Members: &mFileModeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1290]})
-var sGetFileOutput_fileSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSize", ID: &i_ObjectSize, Type: smithy.ShapeTypeLong, Ext: &ext[1291]})
-var sGetFileOutput_fileContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileContent", ID: &i_FileContent, Type: smithy.ShapeTypeBlob, Ext: &ext[1292]})
-var sGetFolderInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1294]})
-var sGetFolderInput_commitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &ext[1295]})
-var sGetFolderInput_folderPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "folderPath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[1296]})
-var sGetFolderOutput_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1298]})
-var sGetFolderOutput_folderPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "folderPath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[1299]})
-var sGetFolderOutput_treeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "treeId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1300]})
-var sGetFolderOutput_subFolders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subFolders", ID: &i_FolderList, Members: &m_FolderList, Type: smithy.ShapeTypeList, Ext: &ext[1301]})
-var sGetFolderOutput_files = smithy.NewStaticSchema(smithy.StaticSchema{Member: "files", ID: &i_FileList, Members: &m_FileList, Type: smithy.ShapeTypeList, Ext: &ext[1302]})
-var sGetFolderOutput_symbolicLinks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "symbolicLinks", ID: &i_SymbolicLinkList, Members: &m_SymbolicLinkList, Type: smithy.ShapeTypeList, Ext: &ext[1303]})
-var sGetFolderOutput_subModules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subModules", ID: &i_SubModuleList, Members: &m_SubModuleList, Type: smithy.ShapeTypeList, Ext: &ext[1304]})
-var sGetMergeCommitInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1306]})
-var sGetMergeCommitInput_sourceCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &ext[1307]})
-var sGetMergeCommitInput_destinationCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &ext[1308]})
-var sGetMergeCommitInput_conflictDetailLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictDetailLevel", ID: &iConflictDetailLevelTypeEnum, Members: &mConflictDetailLevelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1309]})
-var sGetMergeCommitInput_conflictResolutionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolutionStrategy", ID: &iConflictResolutionStrategyTypeEnum, Members: &mConflictResolutionStrategyTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1310]})
-var sGetMergeCommitOutput_sourceCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1312]})
-var sGetMergeCommitOutput_destinationCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1313]})
-var sGetMergeCommitOutput_baseCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1314]})
-var sGetMergeCommitOutput_mergedCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergedCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1315]})
-var sGetMergeConflictsInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1317]})
-var sGetMergeConflictsInput_destinationCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &ext[1318]})
-var sGetMergeConflictsInput_sourceCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &ext[1319]})
-var sGetMergeConflictsInput_mergeOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeOption", ID: &iMergeOptionTypeEnum, Members: &mMergeOptionTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1320]})
-var sGetMergeConflictsInput_conflictDetailLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictDetailLevel", ID: &iConflictDetailLevelTypeEnum, Members: &mConflictDetailLevelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1321]})
-var sGetMergeConflictsInput_maxConflictFiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxConflictFiles", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1322]})
-var sGetMergeConflictsInput_conflictResolutionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolutionStrategy", ID: &iConflictResolutionStrategyTypeEnum, Members: &mConflictResolutionStrategyTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1323]})
-var sGetMergeConflictsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1324]})
-var sGetMergeConflictsOutput_mergeable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeable", ID: &i_IsMergeable, Type: smithy.ShapeTypeBoolean, Ext: &ext[1326]})
-var sGetMergeConflictsOutput_destinationCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1327]})
-var sGetMergeConflictsOutput_sourceCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1328]})
-var sGetMergeConflictsOutput_baseCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1329]})
-var sGetMergeConflictsOutput_conflictMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictMetadataList", ID: &i_ConflictMetadataList, Members: &m_ConflictMetadataList, Type: smithy.ShapeTypeList, Ext: &ext[1330]})
-var sGetMergeConflictsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1331]})
-var sGetMergeOptionsInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1333]})
-var sGetMergeOptionsInput_sourceCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &ext[1334]})
-var sGetMergeOptionsInput_destinationCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &ext[1335]})
-var sGetMergeOptionsInput_conflictDetailLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictDetailLevel", ID: &iConflictDetailLevelTypeEnum, Members: &mConflictDetailLevelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1336]})
-var sGetMergeOptionsInput_conflictResolutionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolutionStrategy", ID: &iConflictResolutionStrategyTypeEnum, Members: &mConflictResolutionStrategyTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1337]})
-var sGetMergeOptionsOutput_mergeOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeOptions", ID: &i_MergeOptions, Members: &m_MergeOptions, Type: smithy.ShapeTypeList, Ext: &ext[1339]})
-var sGetMergeOptionsOutput_sourceCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1340]})
-var sGetMergeOptionsOutput_destinationCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1341]})
-var sGetMergeOptionsOutput_baseCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1342]})
-var sGetPullRequestApprovalStatesInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ext[1344]})
-var sGetPullRequestApprovalStatesInput_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_RevisionId, Type: smithy.ShapeTypeString, Ext: &ext[1345]})
-var sGetPullRequestApprovalStatesOutput_approvals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvals", ID: &i_ApprovalList, Members: &m_ApprovalList, Type: smithy.ShapeTypeList, Ext: &ext[1347]})
-var sGetPullRequestInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ext[1349]})
-var sGetPullRequestOutput_pullRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequest", ID: &iPullRequest, Members: &mPullRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1351]})
-var sGetPullRequestOverrideStateInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ext[1353]})
-var sGetPullRequestOverrideStateInput_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_RevisionId, Type: smithy.ShapeTypeString, Ext: &ext[1354]})
-var sGetPullRequestOverrideStateOutput_overridden = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overridden", ID: &i_Overridden, Type: smithy.ShapeTypeBoolean, Ext: &ext[1356]})
-var sGetPullRequestOverrideStateOutput_overrider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overrider", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[1357]})
-var sGetRepositoryInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1359]})
-var sGetRepositoryOutput_repositoryMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryMetadata", ID: &iRepositoryMetadata, Members: &mRepositoryMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[1361]})
-var sGetRepositoryTriggersInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1363]})
-var sGetRepositoryTriggersOutput_configurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configurationId", ID: &i_RepositoryTriggersConfigurationId, Type: smithy.ShapeTypeString, Ext: &ext[1365]})
-var sGetRepositoryTriggersOutput_triggers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "triggers", ID: &i_RepositoryTriggersList, Members: &m_RepositoryTriggersList, Type: smithy.ShapeTypeList, Ext: &ext[1366]})
-var sListApprovalRuleTemplatesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1368]})
-var sListApprovalRuleTemplatesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1369]})
-var sListApprovalRuleTemplatesOutput_approvalRuleTemplateNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateNames", ID: &i_ApprovalRuleTemplateNameList, Members: &m_ApprovalRuleTemplateNameList, Type: smithy.ShapeTypeList, Ext: &ext[1371]})
-var sListApprovalRuleTemplatesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1372]})
-var sListAssociatedApprovalRuleTemplatesForRepositoryInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1374]})
-var sListAssociatedApprovalRuleTemplatesForRepositoryInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1375]})
-var sListAssociatedApprovalRuleTemplatesForRepositoryInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1376]})
-var sListAssociatedApprovalRuleTemplatesForRepositoryOutput_approvalRuleTemplateNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateNames", ID: &i_ApprovalRuleTemplateNameList, Members: &m_ApprovalRuleTemplateNameList, Type: smithy.ShapeTypeList, Ext: &ext[1378]})
-var sListAssociatedApprovalRuleTemplatesForRepositoryOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1379]})
-var sListBranchesInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1381]})
-var sListBranchesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1382]})
-var sListBranchesOutput_branches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branches", ID: &i_BranchNameList, Members: &m_BranchNameList, Type: smithy.ShapeTypeList, Ext: &ext[1384]})
-var sListBranchesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1385]})
-var sListFileCommitHistoryRequest_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1387]})
-var sListFileCommitHistoryRequest_commitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &ext[1388]})
-var sListFileCommitHistoryRequest_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[1389]})
-var sListFileCommitHistoryRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_Limit, Type: smithy.ShapeTypeInteger, Ext: &ext[1390]})
-var sListFileCommitHistoryRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1391]})
-var sListFileCommitHistoryResponse_revisionDag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionDag", ID: &i_RevisionDag, Members: &m_RevisionDag, Type: smithy.ShapeTypeList, Ext: &ext[1393]})
-var sListFileCommitHistoryResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1394]})
-var sListPullRequestsInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1396]})
-var sListPullRequestsInput_authorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[1397]})
-var sListPullRequestsInput_pullRequestStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestStatus", ID: &iPullRequestStatusEnum, Members: &mPullRequestStatusEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1398]})
-var sListPullRequestsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1399]})
-var sListPullRequestsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1400]})
-var sListPullRequestsOutput_pullRequestIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestIds", ID: &i_PullRequestIdList, Members: &m_PullRequestIdList, Type: smithy.ShapeTypeList, Ext: &ext[1402]})
-var sListPullRequestsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1403]})
-var sListRepositoriesForApprovalRuleTemplateInput_approvalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &ext[1405]})
-var sListRepositoriesForApprovalRuleTemplateInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1406]})
-var sListRepositoriesForApprovalRuleTemplateInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1407]})
-var sListRepositoriesForApprovalRuleTemplateOutput_repositoryNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryNames", ID: &i_RepositoryNameList, Members: &m_RepositoryNameList, Type: smithy.ShapeTypeList, Ext: &ext[1409]})
-var sListRepositoriesForApprovalRuleTemplateOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1410]})
-var sListRepositoriesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1412]})
-var sListRepositoriesInput_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &iSortByEnum, Members: &mSortByEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1413]})
-var sListRepositoriesInput_order = smithy.NewStaticSchema(smithy.StaticSchema{Member: "order", ID: &iOrderEnum, Members: &mOrderEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1414]})
-var sListRepositoriesOutput_repositories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositories", ID: &i_RepositoryNameIdPairList, Members: &m_RepositoryNameIdPairList, Type: smithy.ShapeTypeList, Ext: &ext[1416]})
-var sListRepositoriesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1417]})
-var sListTagsForResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1419]})
-var sListTagsForResourceInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1420]})
-var sListTagsForResourceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &ext[1422]})
-var sListTagsForResourceOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1423]})
-var sMergeBranchesByFastForwardInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1425]})
-var sMergeBranchesByFastForwardInput_sourceCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &ext[1426]})
-var sMergeBranchesByFastForwardInput_destinationCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &ext[1427]})
-var sMergeBranchesByFastForwardInput_targetBranch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetBranch", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &ext[1428]})
-var sMergeBranchesByFastForwardOutput_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1430]})
-var sMergeBranchesByFastForwardOutput_treeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "treeId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1431]})
-var sMergeBranchesBySquashInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1433]})
-var sMergeBranchesBySquashInput_sourceCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &ext[1434]})
-var sMergeBranchesBySquashInput_destinationCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &ext[1435]})
-var sMergeBranchesBySquashInput_targetBranch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetBranch", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &ext[1436]})
-var sMergeBranchesBySquashInput_conflictDetailLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictDetailLevel", ID: &iConflictDetailLevelTypeEnum, Members: &mConflictDetailLevelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1437]})
-var sMergeBranchesBySquashInput_conflictResolutionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolutionStrategy", ID: &iConflictResolutionStrategyTypeEnum, Members: &mConflictResolutionStrategyTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1438]})
-var sMergeBranchesBySquashInput_authorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &ext[1439]})
-var sMergeBranchesBySquashInput_email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "email", ID: &i_Email, Type: smithy.ShapeTypeString, Ext: &ext[1440]})
-var sMergeBranchesBySquashInput_commitMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitMessage", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[1441]})
-var sMergeBranchesBySquashInput_keepEmptyFolders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keepEmptyFolders", ID: &i_KeepEmptyFolders, Type: smithy.ShapeTypeBoolean, Ext: &ext[1442]})
-var sMergeBranchesBySquashInput_conflictResolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolution", ID: &iConflictResolution, Members: &mConflictResolution, Type: smithy.ShapeTypeStructure, Ext: &ext[1443]})
-var sMergeBranchesBySquashOutput_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1445]})
-var sMergeBranchesBySquashOutput_treeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "treeId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1446]})
-var sMergeBranchesByThreeWayInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1448]})
-var sMergeBranchesByThreeWayInput_sourceCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &ext[1449]})
-var sMergeBranchesByThreeWayInput_destinationCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &ext[1450]})
-var sMergeBranchesByThreeWayInput_targetBranch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetBranch", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &ext[1451]})
-var sMergeBranchesByThreeWayInput_conflictDetailLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictDetailLevel", ID: &iConflictDetailLevelTypeEnum, Members: &mConflictDetailLevelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1452]})
-var sMergeBranchesByThreeWayInput_conflictResolutionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolutionStrategy", ID: &iConflictResolutionStrategyTypeEnum, Members: &mConflictResolutionStrategyTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1453]})
-var sMergeBranchesByThreeWayInput_authorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &ext[1454]})
-var sMergeBranchesByThreeWayInput_email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "email", ID: &i_Email, Type: smithy.ShapeTypeString, Ext: &ext[1455]})
-var sMergeBranchesByThreeWayInput_commitMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitMessage", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[1456]})
-var sMergeBranchesByThreeWayInput_keepEmptyFolders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keepEmptyFolders", ID: &i_KeepEmptyFolders, Type: smithy.ShapeTypeBoolean, Ext: &ext[1457]})
-var sMergeBranchesByThreeWayInput_conflictResolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolution", ID: &iConflictResolution, Members: &mConflictResolution, Type: smithy.ShapeTypeStructure, Ext: &ext[1458]})
-var sMergeBranchesByThreeWayOutput_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1460]})
-var sMergeBranchesByThreeWayOutput_treeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "treeId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1461]})
-var sMergePullRequestByFastForwardInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ext[1463]})
-var sMergePullRequestByFastForwardInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1464]})
-var sMergePullRequestByFastForwardInput_sourceCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1465]})
-var sMergePullRequestByFastForwardOutput_pullRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequest", ID: &iPullRequest, Members: &mPullRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1467]})
-var sMergePullRequestBySquashInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ext[1469]})
-var sMergePullRequestBySquashInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1470]})
-var sMergePullRequestBySquashInput_sourceCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1471]})
-var sMergePullRequestBySquashInput_conflictDetailLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictDetailLevel", ID: &iConflictDetailLevelTypeEnum, Members: &mConflictDetailLevelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1472]})
-var sMergePullRequestBySquashInput_conflictResolutionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolutionStrategy", ID: &iConflictResolutionStrategyTypeEnum, Members: &mConflictResolutionStrategyTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1473]})
-var sMergePullRequestBySquashInput_commitMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitMessage", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[1474]})
-var sMergePullRequestBySquashInput_authorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &ext[1475]})
-var sMergePullRequestBySquashInput_email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "email", ID: &i_Email, Type: smithy.ShapeTypeString, Ext: &ext[1476]})
-var sMergePullRequestBySquashInput_keepEmptyFolders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keepEmptyFolders", ID: &i_KeepEmptyFolders, Type: smithy.ShapeTypeBoolean, Ext: &ext[1477]})
-var sMergePullRequestBySquashInput_conflictResolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolution", ID: &iConflictResolution, Members: &mConflictResolution, Type: smithy.ShapeTypeStructure, Ext: &ext[1478]})
-var sMergePullRequestBySquashOutput_pullRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequest", ID: &iPullRequest, Members: &mPullRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1480]})
-var sMergePullRequestByThreeWayInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ext[1482]})
-var sMergePullRequestByThreeWayInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1483]})
-var sMergePullRequestByThreeWayInput_sourceCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1484]})
-var sMergePullRequestByThreeWayInput_conflictDetailLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictDetailLevel", ID: &iConflictDetailLevelTypeEnum, Members: &mConflictDetailLevelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1485]})
-var sMergePullRequestByThreeWayInput_conflictResolutionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolutionStrategy", ID: &iConflictResolutionStrategyTypeEnum, Members: &mConflictResolutionStrategyTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1486]})
-var sMergePullRequestByThreeWayInput_commitMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitMessage", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[1487]})
-var sMergePullRequestByThreeWayInput_authorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &ext[1488]})
-var sMergePullRequestByThreeWayInput_email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "email", ID: &i_Email, Type: smithy.ShapeTypeString, Ext: &ext[1489]})
-var sMergePullRequestByThreeWayInput_keepEmptyFolders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keepEmptyFolders", ID: &i_KeepEmptyFolders, Type: smithy.ShapeTypeBoolean, Ext: &ext[1490]})
-var sMergePullRequestByThreeWayInput_conflictResolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolution", ID: &iConflictResolution, Members: &mConflictResolution, Type: smithy.ShapeTypeStructure, Ext: &ext[1491]})
-var sMergePullRequestByThreeWayOutput_pullRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequest", ID: &iPullRequest, Members: &mPullRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1493]})
-var sOverridePullRequestApprovalRulesInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ext[1495]})
-var sOverridePullRequestApprovalRulesInput_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_RevisionId, Type: smithy.ShapeTypeString, Ext: &ext[1496]})
-var sOverridePullRequestApprovalRulesInput_overrideStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overrideStatus", ID: &iOverrideStatus, Members: &mOverrideStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[1497]})
-var sPostCommentForComparedCommitInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1499]})
-var sPostCommentForComparedCommitInput_beforeCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[1500]})
-var sPostCommentForComparedCommitInput_afterCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[1501]})
-var sPostCommentForComparedCommitInput_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &iLocation, Members: &mLocation, Type: smithy.ShapeTypeStructure, Ext: &ext[1502]})
-var sPostCommentForComparedCommitInput_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_Content, Type: smithy.ShapeTypeString, Ext: &ext[1503]})
-var sPostCommentForComparedCommitInput_clientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString, Ext: &ext[1504]})
-var sPostCommentForComparedCommitOutput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1506]})
-var sPostCommentForComparedCommitOutput_beforeCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[1507]})
-var sPostCommentForComparedCommitOutput_afterCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[1508]})
-var sPostCommentForComparedCommitOutput_beforeBlobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeBlobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1509]})
-var sPostCommentForComparedCommitOutput_afterBlobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterBlobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1510]})
-var sPostCommentForComparedCommitOutput_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &iLocation, Members: &mLocation, Type: smithy.ShapeTypeStructure, Ext: &ext[1511]})
-var sPostCommentForComparedCommitOutput_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &iComment, Members: &mComment, Type: smithy.ShapeTypeStructure, Ext: &ext[1512]})
-var sPostCommentForPullRequestInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ext[1514]})
-var sPostCommentForPullRequestInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1515]})
-var sPostCommentForPullRequestInput_beforeCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[1516]})
-var sPostCommentForPullRequestInput_afterCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[1517]})
-var sPostCommentForPullRequestInput_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &iLocation, Members: &mLocation, Type: smithy.ShapeTypeStructure, Ext: &ext[1518]})
-var sPostCommentForPullRequestInput_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_Content, Type: smithy.ShapeTypeString, Ext: &ext[1519]})
-var sPostCommentForPullRequestInput_clientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString, Ext: &ext[1520]})
-var sPostCommentForPullRequestOutput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1522]})
-var sPostCommentForPullRequestOutput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ext[1523]})
-var sPostCommentForPullRequestOutput_beforeCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[1524]})
-var sPostCommentForPullRequestOutput_afterCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[1525]})
-var sPostCommentForPullRequestOutput_beforeBlobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeBlobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1526]})
-var sPostCommentForPullRequestOutput_afterBlobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterBlobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1527]})
-var sPostCommentForPullRequestOutput_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &iLocation, Members: &mLocation, Type: smithy.ShapeTypeStructure, Ext: &ext[1528]})
-var sPostCommentForPullRequestOutput_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &iComment, Members: &mComment, Type: smithy.ShapeTypeStructure, Ext: &ext[1529]})
-var sPostCommentReplyInput_inReplyTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inReplyTo", ID: &i_CommentId, Type: smithy.ShapeTypeString, Ext: &ext[1531]})
-var sPostCommentReplyInput_clientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString, Ext: &ext[1532]})
-var sPostCommentReplyInput_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_Content, Type: smithy.ShapeTypeString, Ext: &ext[1533]})
-var sPostCommentReplyOutput_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &iComment, Members: &mComment, Type: smithy.ShapeTypeStructure, Ext: &ext[1535]})
-var sPutCommentReactionInput_commentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commentId", ID: &i_CommentId, Type: smithy.ShapeTypeString, Ext: &ext[1537]})
-var sPutCommentReactionInput_reactionValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reactionValue", ID: &i_ReactionValue, Type: smithy.ShapeTypeString, Ext: &ext[1538]})
-var sPutFileInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1540]})
-var sPutFileInput_branchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchName", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &ext[1541]})
-var sPutFileInput_fileContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileContent", ID: &i_FileContent, Type: smithy.ShapeTypeBlob, Ext: &ext[1542]})
-var sPutFileInput_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ext[1543]})
-var sPutFileInput_fileMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileMode", ID: &iFileModeTypeEnum, Members: &mFileModeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1544]})
-var sPutFileInput_parentCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ext[1545]})
-var sPutFileInput_commitMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitMessage", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[1546]})
-var sPutFileInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &ext[1547]})
-var sPutFileInput_email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "email", ID: &i_Email, Type: smithy.ShapeTypeString, Ext: &ext[1548]})
-var sPutFileOutput_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1550]})
-var sPutFileOutput_blobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1551]})
-var sPutFileOutput_treeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "treeId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ext[1552]})
-var sPutRepositoryTriggersInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1554]})
-var sPutRepositoryTriggersInput_triggers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "triggers", ID: &i_RepositoryTriggersList, Members: &m_RepositoryTriggersList, Type: smithy.ShapeTypeList, Ext: &ext[1555]})
-var sPutRepositoryTriggersOutput_configurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configurationId", ID: &i_RepositoryTriggersConfigurationId, Type: smithy.ShapeTypeString, Ext: &ext[1557]})
-var sTagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1559]})
-var sTagResourceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &ext[1560]})
-var sTestRepositoryTriggersInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1562]})
-var sTestRepositoryTriggersInput_triggers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "triggers", ID: &i_RepositoryTriggersList, Members: &m_RepositoryTriggersList, Type: smithy.ShapeTypeList, Ext: &ext[1563]})
-var sTestRepositoryTriggersOutput_successfulExecutions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successfulExecutions", ID: &i_RepositoryTriggerNameList, Members: &m_RepositoryTriggerNameList, Type: smithy.ShapeTypeList, Ext: &ext[1565]})
-var sTestRepositoryTriggersOutput_failedExecutions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failedExecutions", ID: &i_RepositoryTriggerExecutionFailureList, Members: &m_RepositoryTriggerExecutionFailureList, Type: smithy.ShapeTypeList, Ext: &ext[1566]})
-var sUntagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1568]})
-var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeysList, Members: &m_TagKeysList, Type: smithy.ShapeTypeList, Ext: &ext[1569]})
-var sUpdateApprovalRuleTemplateContentInput_approvalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &ext[1571]})
-var sUpdateApprovalRuleTemplateContentInput_newRuleContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newRuleContent", ID: &i_ApprovalRuleTemplateContent, Type: smithy.ShapeTypeString, Ext: &ext[1572]})
-var sUpdateApprovalRuleTemplateContentInput_existingRuleContentSha256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "existingRuleContentSha256", ID: &i_RuleContentSha256, Type: smithy.ShapeTypeString, Ext: &ext[1573]})
-var sUpdateApprovalRuleTemplateContentOutput_approvalRuleTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplate", ID: &iApprovalRuleTemplate, Members: &mApprovalRuleTemplate, Type: smithy.ShapeTypeStructure, Ext: &ext[1575]})
-var sUpdateApprovalRuleTemplateDescriptionInput_approvalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &ext[1577]})
-var sUpdateApprovalRuleTemplateDescriptionInput_approvalRuleTemplateDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateDescription", ID: &i_ApprovalRuleTemplateDescription, Type: smithy.ShapeTypeString, Ext: &ext[1578]})
-var sUpdateApprovalRuleTemplateDescriptionOutput_approvalRuleTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplate", ID: &iApprovalRuleTemplate, Members: &mApprovalRuleTemplate, Type: smithy.ShapeTypeStructure, Ext: &ext[1580]})
-var sUpdateApprovalRuleTemplateNameInput_oldApprovalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oldApprovalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &ext[1582]})
-var sUpdateApprovalRuleTemplateNameInput_newApprovalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newApprovalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &ext[1583]})
-var sUpdateApprovalRuleTemplateNameOutput_approvalRuleTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplate", ID: &iApprovalRuleTemplate, Members: &mApprovalRuleTemplate, Type: smithy.ShapeTypeStructure, Ext: &ext[1585]})
-var sUpdateCommentInput_commentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commentId", ID: &i_CommentId, Type: smithy.ShapeTypeString, Ext: &ext[1587]})
-var sUpdateCommentInput_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_Content, Type: smithy.ShapeTypeString, Ext: &ext[1588]})
-var sUpdateCommentOutput_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &iComment, Members: &mComment, Type: smithy.ShapeTypeStructure, Ext: &ext[1590]})
-var sUpdateDefaultBranchInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1592]})
-var sUpdateDefaultBranchInput_defaultBranchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultBranchName", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &ext[1593]})
-var sUpdatePullRequestApprovalRuleContentInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ext[1595]})
-var sUpdatePullRequestApprovalRuleContentInput_approvalRuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleName", ID: &i_ApprovalRuleName, Type: smithy.ShapeTypeString, Ext: &ext[1596]})
-var sUpdatePullRequestApprovalRuleContentInput_existingRuleContentSha256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "existingRuleContentSha256", ID: &i_RuleContentSha256, Type: smithy.ShapeTypeString, Ext: &ext[1597]})
-var sUpdatePullRequestApprovalRuleContentInput_newRuleContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newRuleContent", ID: &i_ApprovalRuleContent, Type: smithy.ShapeTypeString, Ext: &ext[1598]})
-var sUpdatePullRequestApprovalRuleContentOutput_approvalRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRule", ID: &iApprovalRule, Members: &mApprovalRule, Type: smithy.ShapeTypeStructure, Ext: &ext[1600]})
-var sUpdatePullRequestApprovalStateInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ext[1602]})
-var sUpdatePullRequestApprovalStateInput_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_RevisionId, Type: smithy.ShapeTypeString, Ext: &ext[1603]})
-var sUpdatePullRequestApprovalStateInput_approvalState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalState", ID: &iApprovalState, Members: &mApprovalState, Type: smithy.ShapeTypeEnum, Ext: &ext[1604]})
-var sUpdatePullRequestDescriptionInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ext[1606]})
-var sUpdatePullRequestDescriptionInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[1607]})
-var sUpdatePullRequestDescriptionOutput_pullRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequest", ID: &iPullRequest, Members: &mPullRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1609]})
-var sUpdatePullRequestStatusInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ext[1611]})
-var sUpdatePullRequestStatusInput_pullRequestStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestStatus", ID: &iPullRequestStatusEnum, Members: &mPullRequestStatusEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[1612]})
-var sUpdatePullRequestStatusOutput_pullRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequest", ID: &iPullRequest, Members: &mPullRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1614]})
-var sUpdatePullRequestTitleInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ext[1616]})
-var sUpdatePullRequestTitleInput_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_Title, Type: smithy.ShapeTypeString, Ext: &ext[1617]})
-var sUpdatePullRequestTitleOutput_pullRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequest", ID: &iPullRequest, Members: &mPullRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[1619]})
-var sUpdateRepositoryDescriptionInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1621]})
-var sUpdateRepositoryDescriptionInput_repositoryDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryDescription", ID: &i_RepositoryDescription, Type: smithy.ShapeTypeString, Ext: &ext[1622]})
-var sUpdateRepositoryEncryptionKeyInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1624]})
-var sUpdateRepositoryEncryptionKeyInput_kmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &ext[1625]})
-var sUpdateRepositoryEncryptionKeyOutput_repositoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryId", ID: &i_RepositoryId, Type: smithy.ShapeTypeString, Ext: &ext[1627]})
-var sUpdateRepositoryEncryptionKeyOutput_kmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &ext[1628]})
-var sUpdateRepositoryEncryptionKeyOutput_originalKmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originalKmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &ext[1629]})
-var sUpdateRepositoryNameInput_oldName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oldName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1631]})
-var sUpdateRepositoryNameInput_newName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ext[1632]})
+var sActorDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eActorDoesNotExistException_message})
+var sApproval_userArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eApproval_userArn})
+var sApproval_approvalState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalState", ID: &iApprovalState, Members: &mApprovalState, Type: smithy.ShapeTypeEnum, Ext: &eApproval_approvalState})
+var s_ApprovalList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApproval, Members: &mApproval, Type: smithy.ShapeTypeStructure, Ext: &e_ApprovalList_member})
+var sApprovalRule_approvalRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleId", ID: &i_ApprovalRuleId, Type: smithy.ShapeTypeString, Ext: &eApprovalRule_approvalRuleId})
+var sApprovalRule_approvalRuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleName", ID: &i_ApprovalRuleName, Type: smithy.ShapeTypeString, Ext: &eApprovalRule_approvalRuleName})
+var sApprovalRule_approvalRuleContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleContent", ID: &i_ApprovalRuleContent, Type: smithy.ShapeTypeString, Ext: &eApprovalRule_approvalRuleContent})
+var sApprovalRule_ruleContentSha256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleContentSha256", ID: &i_RuleContentSha256, Type: smithy.ShapeTypeString, Ext: &eApprovalRule_ruleContentSha256})
+var sApprovalRule_lastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedDate", ID: &i_LastModifiedDate, Type: smithy.ShapeTypeTimestamp, Ext: &eApprovalRule_lastModifiedDate})
+var sApprovalRule_creationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDate", ID: &i_CreationDate, Type: smithy.ShapeTypeTimestamp, Ext: &eApprovalRule_creationDate})
+var sApprovalRule_lastModifiedUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedUser", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eApprovalRule_lastModifiedUser})
+var sApprovalRule_originApprovalRuleTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originApprovalRuleTemplate", ID: &iOriginApprovalRuleTemplate, Members: &mOriginApprovalRuleTemplate, Type: smithy.ShapeTypeStructure, Ext: &eApprovalRule_originApprovalRuleTemplate})
+var sApprovalRuleContentRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eApprovalRuleContentRequiredException_message})
+var sApprovalRuleDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eApprovalRuleDoesNotExistException_message})
+var sApprovalRuleEventMetadata_approvalRuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleName", ID: &i_ApprovalRuleName, Type: smithy.ShapeTypeString, Ext: &eApprovalRuleEventMetadata_approvalRuleName})
+var sApprovalRuleEventMetadata_approvalRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleId", ID: &i_ApprovalRuleId, Type: smithy.ShapeTypeString, Ext: &eApprovalRuleEventMetadata_approvalRuleId})
+var sApprovalRuleEventMetadata_approvalRuleContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleContent", ID: &i_ApprovalRuleContent, Type: smithy.ShapeTypeString, Ext: &eApprovalRuleEventMetadata_approvalRuleContent})
+var sApprovalRuleNameAlreadyExistsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eApprovalRuleNameAlreadyExistsException_message})
+var sApprovalRuleNameRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eApprovalRuleNameRequiredException_message})
+var sApprovalRuleOverriddenEventMetadata_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_RevisionId, Type: smithy.ShapeTypeString, Ext: &eApprovalRuleOverriddenEventMetadata_revisionId})
+var sApprovalRuleOverriddenEventMetadata_overrideStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overrideStatus", ID: &iOverrideStatus, Members: &mOverrideStatus, Type: smithy.ShapeTypeEnum, Ext: &eApprovalRuleOverriddenEventMetadata_overrideStatus})
+var s_ApprovalRulesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApprovalRule, Members: &mApprovalRule, Type: smithy.ShapeTypeStructure, Ext: &e_ApprovalRulesList_member})
+var s_ApprovalRulesNotSatisfiedList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ApprovalRuleName, Type: smithy.ShapeTypeString, Ext: &e_ApprovalRulesNotSatisfiedList_member})
+var s_ApprovalRulesSatisfiedList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ApprovalRuleName, Type: smithy.ShapeTypeString, Ext: &e_ApprovalRulesSatisfiedList_member})
+var sApprovalRuleTemplate_approvalRuleTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateId", ID: &i_ApprovalRuleTemplateId, Type: smithy.ShapeTypeString, Ext: &eApprovalRuleTemplate_approvalRuleTemplateId})
+var sApprovalRuleTemplate_approvalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &eApprovalRuleTemplate_approvalRuleTemplateName})
+var sApprovalRuleTemplate_approvalRuleTemplateDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateDescription", ID: &i_ApprovalRuleTemplateDescription, Type: smithy.ShapeTypeString, Ext: &eApprovalRuleTemplate_approvalRuleTemplateDescription})
+var sApprovalRuleTemplate_approvalRuleTemplateContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateContent", ID: &i_ApprovalRuleTemplateContent, Type: smithy.ShapeTypeString, Ext: &eApprovalRuleTemplate_approvalRuleTemplateContent})
+var sApprovalRuleTemplate_ruleContentSha256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleContentSha256", ID: &i_RuleContentSha256, Type: smithy.ShapeTypeString, Ext: &eApprovalRuleTemplate_ruleContentSha256})
+var sApprovalRuleTemplate_lastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedDate", ID: &i_LastModifiedDate, Type: smithy.ShapeTypeTimestamp, Ext: &eApprovalRuleTemplate_lastModifiedDate})
+var sApprovalRuleTemplate_creationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDate", ID: &i_CreationDate, Type: smithy.ShapeTypeTimestamp, Ext: &eApprovalRuleTemplate_creationDate})
+var sApprovalRuleTemplate_lastModifiedUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedUser", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eApprovalRuleTemplate_lastModifiedUser})
+var sApprovalRuleTemplateContentRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eApprovalRuleTemplateContentRequiredException_message})
+var sApprovalRuleTemplateDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eApprovalRuleTemplateDoesNotExistException_message})
+var sApprovalRuleTemplateInUseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eApprovalRuleTemplateInUseException_message})
+var sApprovalRuleTemplateNameAlreadyExistsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eApprovalRuleTemplateNameAlreadyExistsException_message})
+var s_ApprovalRuleTemplateNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &e_ApprovalRuleTemplateNameList_member})
+var sApprovalRuleTemplateNameRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eApprovalRuleTemplateNameRequiredException_message})
+var sApprovalState_APPROVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPROVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApprovalState_APPROVE})
+var sApprovalState_REVOKE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVOKE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApprovalState_REVOKE})
+var sApprovalStateChangedEventMetadata_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_RevisionId, Type: smithy.ShapeTypeString, Ext: &eApprovalStateChangedEventMetadata_revisionId})
+var sApprovalStateChangedEventMetadata_approvalStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalStatus", ID: &iApprovalState, Members: &mApprovalState, Type: smithy.ShapeTypeEnum, Ext: &eApprovalStateChangedEventMetadata_approvalStatus})
+var sApprovalStateRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eApprovalStateRequiredException_message})
+var sAuthorDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eAuthorDoesNotExistException_message})
+var sBatchAssociateApprovalRuleTemplateWithRepositoriesError_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eBatchAssociateApprovalRuleTemplateWithRepositoriesError_repositoryName})
+var sBatchAssociateApprovalRuleTemplateWithRepositoriesError_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eBatchAssociateApprovalRuleTemplateWithRepositoriesError_errorCode})
+var sBatchAssociateApprovalRuleTemplateWithRepositoriesError_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eBatchAssociateApprovalRuleTemplateWithRepositoriesError_errorMessage})
+var s_BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchAssociateApprovalRuleTemplateWithRepositoriesError, Members: &mBatchAssociateApprovalRuleTemplateWithRepositoriesError, Type: smithy.ShapeTypeStructure, Ext: &e_BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList_member})
+var sBatchDescribeMergeConflictsError_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eBatchDescribeMergeConflictsError_filePath})
+var sBatchDescribeMergeConflictsError_exceptionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exceptionName", ID: &i_ExceptionName, Type: smithy.ShapeTypeString, Ext: &eBatchDescribeMergeConflictsError_exceptionName})
+var sBatchDescribeMergeConflictsError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eBatchDescribeMergeConflictsError_message})
+var s_BatchDescribeMergeConflictsErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchDescribeMergeConflictsError, Members: &mBatchDescribeMergeConflictsError, Type: smithy.ShapeTypeStructure, Ext: &e_BatchDescribeMergeConflictsErrors_member})
+var sBatchDisassociateApprovalRuleTemplateFromRepositoriesError_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eBatchDisassociateApprovalRuleTemplateFromRepositoriesError_repositoryName})
+var sBatchDisassociateApprovalRuleTemplateFromRepositoriesError_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eBatchDisassociateApprovalRuleTemplateFromRepositoriesError_errorCode})
+var sBatchDisassociateApprovalRuleTemplateFromRepositoriesError_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eBatchDisassociateApprovalRuleTemplateFromRepositoriesError_errorMessage})
+var s_BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchDisassociateApprovalRuleTemplateFromRepositoriesError, Members: &mBatchDisassociateApprovalRuleTemplateFromRepositoriesError, Type: smithy.ShapeTypeStructure, Ext: &e_BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList_member})
+var sBatchGetCommitsError_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eBatchGetCommitsError_commitId})
+var sBatchGetCommitsError_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eBatchGetCommitsError_errorCode})
+var sBatchGetCommitsError_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eBatchGetCommitsError_errorMessage})
+var s_BatchGetCommitsErrorsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchGetCommitsError, Members: &mBatchGetCommitsError, Type: smithy.ShapeTypeStructure, Ext: &e_BatchGetCommitsErrorsList_member})
+var sBatchGetRepositoriesError_repositoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryId", ID: &i_RepositoryId, Type: smithy.ShapeTypeString, Ext: &eBatchGetRepositoriesError_repositoryId})
+var sBatchGetRepositoriesError_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eBatchGetRepositoriesError_repositoryName})
+var sBatchGetRepositoriesError_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &iBatchGetRepositoriesErrorCodeEnum, Members: &mBatchGetRepositoriesErrorCodeEnum, Type: smithy.ShapeTypeEnum, Ext: &eBatchGetRepositoriesError_errorCode})
+var sBatchGetRepositoriesError_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eBatchGetRepositoriesError_errorMessage})
+var sBatchGetRepositoriesErrorCodeEnum_ENCRYPTION_INTEGRITY_CHECKS_FAILED_EXCEPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCRYPTION_INTEGRITY_CHECKS_FAILED_EXCEPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetRepositoriesErrorCodeEnum_ENCRYPTION_INTEGRITY_CHECKS_FAILED_EXCEPTION})
+var sBatchGetRepositoriesErrorCodeEnum_ENCRYPTION_KEY_ACCESS_DENIED_EXCEPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCRYPTION_KEY_ACCESS_DENIED_EXCEPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetRepositoriesErrorCodeEnum_ENCRYPTION_KEY_ACCESS_DENIED_EXCEPTION})
+var sBatchGetRepositoriesErrorCodeEnum_ENCRYPTION_KEY_DISABLED_EXCEPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCRYPTION_KEY_DISABLED_EXCEPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetRepositoriesErrorCodeEnum_ENCRYPTION_KEY_DISABLED_EXCEPTION})
+var sBatchGetRepositoriesErrorCodeEnum_ENCRYPTION_KEY_NOT_FOUND_EXCEPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCRYPTION_KEY_NOT_FOUND_EXCEPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetRepositoriesErrorCodeEnum_ENCRYPTION_KEY_NOT_FOUND_EXCEPTION})
+var sBatchGetRepositoriesErrorCodeEnum_ENCRYPTION_KEY_UNAVAILABLE_EXCEPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCRYPTION_KEY_UNAVAILABLE_EXCEPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetRepositoriesErrorCodeEnum_ENCRYPTION_KEY_UNAVAILABLE_EXCEPTION})
+var sBatchGetRepositoriesErrorCodeEnum_REPOSITORY_DOES_NOT_EXIST_EXCEPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPOSITORY_DOES_NOT_EXIST_EXCEPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetRepositoriesErrorCodeEnum_REPOSITORY_DOES_NOT_EXIST_EXCEPTION})
+var s_BatchGetRepositoriesErrorsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchGetRepositoriesError, Members: &mBatchGetRepositoriesError, Type: smithy.ShapeTypeStructure, Ext: &e_BatchGetRepositoriesErrorsList_member})
+var sBeforeCommitIdAndAfterCommitIdAreSameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eBeforeCommitIdAndAfterCommitIdAreSameException_message})
+var sBlobIdDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eBlobIdDoesNotExistException_message})
+var sBlobIdRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eBlobIdRequiredException_message})
+var sBlobMetadata_blobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eBlobMetadata_blobId})
+var sBlobMetadata_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eBlobMetadata_path})
+var sBlobMetadata_mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mode", ID: &i_Mode, Type: smithy.ShapeTypeString, Ext: &eBlobMetadata_mode})
+var sBranchDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eBranchDoesNotExistException_message})
+var sBranchInfo_branchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchName", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &eBranchInfo_branchName})
+var sBranchInfo_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &eBranchInfo_commitId})
+var sBranchNameExistsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eBranchNameExistsException_message})
+var sBranchNameIsTagNameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eBranchNameIsTagNameException_message})
+var s_BranchNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &e_BranchNameList_member})
+var sBranchNameRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eBranchNameRequiredException_message})
+var s_CallerReactions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ReactionValue, Type: smithy.ShapeTypeString, Ext: &e_CallerReactions_member})
+var sCannotDeleteApprovalRuleFromTemplateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eCannotDeleteApprovalRuleFromTemplateException_message})
+var sCannotModifyApprovalRuleFromTemplateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eCannotModifyApprovalRuleFromTemplateException_message})
+var sChangeTypeEnum_ADDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChangeTypeEnum_ADDED})
+var sChangeTypeEnum_MODIFIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODIFIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChangeTypeEnum_MODIFIED})
+var sChangeTypeEnum_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eChangeTypeEnum_DELETED})
+var sClientRequestTokenRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eClientRequestTokenRequiredException_message})
+var sComment_commentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commentId", ID: &i_CommentId, Type: smithy.ShapeTypeString, Ext: &eComment_commentId})
+var sComment_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_Content, Type: smithy.ShapeTypeString, Ext: &eComment_content})
+var sComment_inReplyTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inReplyTo", ID: &i_CommentId, Type: smithy.ShapeTypeString, Ext: &eComment_inReplyTo})
+var sComment_creationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDate", ID: &i_CreationDate, Type: smithy.ShapeTypeTimestamp, Ext: &eComment_creationDate})
+var sComment_lastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedDate", ID: &i_LastModifiedDate, Type: smithy.ShapeTypeTimestamp, Ext: &eComment_lastModifiedDate})
+var sComment_authorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eComment_authorArn})
+var sComment_deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleted", ID: &i_IsCommentDeleted, Type: smithy.ShapeTypeBoolean, Ext: &eComment_deleted})
+var sComment_clientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString, Ext: &eComment_clientRequestToken})
+var sComment_callerReactions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "callerReactions", ID: &i_CallerReactions, Members: &m_CallerReactions, Type: smithy.ShapeTypeList, Ext: &eComment_callerReactions})
+var sComment_reactionCounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reactionCounts", ID: &i_ReactionCountsMap, Members: &m_ReactionCountsMap, Type: smithy.ShapeTypeMap, Ext: &eComment_reactionCounts})
+var sCommentContentRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eCommentContentRequiredException_message})
+var sCommentContentSizeLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eCommentContentSizeLimitExceededException_message})
+var sCommentDeletedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eCommentDeletedException_message})
+var sCommentDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eCommentDoesNotExistException_message})
+var sCommentIdRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eCommentIdRequiredException_message})
+var sCommentNotCreatedByCallerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eCommentNotCreatedByCallerException_message})
+var s_Comments_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iComment, Members: &mComment, Type: smithy.ShapeTypeStructure, Ext: &e_Comments_member})
+var sCommentsForComparedCommit_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eCommentsForComparedCommit_repositoryName})
+var sCommentsForComparedCommit_beforeCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &eCommentsForComparedCommit_beforeCommitId})
+var sCommentsForComparedCommit_afterCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &eCommentsForComparedCommit_afterCommitId})
+var sCommentsForComparedCommit_beforeBlobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeBlobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eCommentsForComparedCommit_beforeBlobId})
+var sCommentsForComparedCommit_afterBlobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterBlobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eCommentsForComparedCommit_afterBlobId})
+var sCommentsForComparedCommit_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &iLocation, Members: &mLocation, Type: smithy.ShapeTypeStructure, Ext: &eCommentsForComparedCommit_location})
+var sCommentsForComparedCommit_comments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comments", ID: &i_Comments, Members: &m_Comments, Type: smithy.ShapeTypeList, Ext: &eCommentsForComparedCommit_comments})
+var s_CommentsForComparedCommitData_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCommentsForComparedCommit, Members: &mCommentsForComparedCommit, Type: smithy.ShapeTypeStructure, Ext: &e_CommentsForComparedCommitData_member})
+var sCommentsForPullRequest_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &eCommentsForPullRequest_pullRequestId})
+var sCommentsForPullRequest_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eCommentsForPullRequest_repositoryName})
+var sCommentsForPullRequest_beforeCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &eCommentsForPullRequest_beforeCommitId})
+var sCommentsForPullRequest_afterCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &eCommentsForPullRequest_afterCommitId})
+var sCommentsForPullRequest_beforeBlobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeBlobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eCommentsForPullRequest_beforeBlobId})
+var sCommentsForPullRequest_afterBlobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterBlobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eCommentsForPullRequest_afterBlobId})
+var sCommentsForPullRequest_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &iLocation, Members: &mLocation, Type: smithy.ShapeTypeStructure, Ext: &eCommentsForPullRequest_location})
+var sCommentsForPullRequest_comments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comments", ID: &i_Comments, Members: &m_Comments, Type: smithy.ShapeTypeList, Ext: &eCommentsForPullRequest_comments})
+var s_CommentsForPullRequestData_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCommentsForPullRequest, Members: &mCommentsForPullRequest, Type: smithy.ShapeTypeStructure, Ext: &e_CommentsForPullRequestData_member})
+var sCommit_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eCommit_commitId})
+var sCommit_treeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "treeId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eCommit_treeId})
+var sCommit_parents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parents", ID: &i_ParentList, Members: &m_ParentList, Type: smithy.ShapeTypeList, Ext: &eCommit_parents})
+var sCommit_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eCommit_message})
+var sCommit_author = smithy.NewStaticSchema(smithy.StaticSchema{Member: "author", ID: &iUserInfo, Members: &mUserInfo, Type: smithy.ShapeTypeStructure, Ext: &eCommit_author})
+var sCommit_committer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "committer", ID: &iUserInfo, Members: &mUserInfo, Type: smithy.ShapeTypeStructure, Ext: &eCommit_committer})
+var sCommit_additionalData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalData", ID: &i_AdditionalData, Type: smithy.ShapeTypeString, Ext: &eCommit_additionalData})
+var sCommitDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eCommitDoesNotExistException_message})
+var sCommitIdDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eCommitIdDoesNotExistException_message})
+var sCommitIdRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eCommitIdRequiredException_message})
+var s_CommitIdsInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &e_CommitIdsInputList_member})
+var sCommitIdsLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eCommitIdsLimitExceededException_message})
+var sCommitIdsListRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eCommitIdsListRequiredException_message})
+var sCommitMessageLengthExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eCommitMessageLengthExceededException_message})
+var s_CommitObjectsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCommit, Members: &mCommit, Type: smithy.ShapeTypeStructure, Ext: &e_CommitObjectsList_member})
+var sCommitRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eCommitRequiredException_message})
+var sConcurrentReferenceUpdateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eConcurrentReferenceUpdateException_message})
+var sConflict_conflictMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictMetadata", ID: &iConflictMetadata, Members: &mConflictMetadata, Type: smithy.ShapeTypeStructure, Ext: &eConflict_conflictMetadata})
+var sConflict_mergeHunks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeHunks", ID: &i_MergeHunks, Members: &m_MergeHunks, Type: smithy.ShapeTypeList, Ext: &eConflict_mergeHunks})
+var sConflictDetailLevelTypeEnum_FILE_LEVEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_LEVEL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictDetailLevelTypeEnum_FILE_LEVEL})
+var sConflictDetailLevelTypeEnum_LINE_LEVEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINE_LEVEL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictDetailLevelTypeEnum_LINE_LEVEL})
+var sConflictMetadata_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eConflictMetadata_filePath})
+var sConflictMetadata_fileSizes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSizes", ID: &iFileSizes, Members: &mFileSizes, Type: smithy.ShapeTypeStructure, Ext: &eConflictMetadata_fileSizes})
+var sConflictMetadata_fileModes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileModes", ID: &iFileModes, Members: &mFileModes, Type: smithy.ShapeTypeStructure, Ext: &eConflictMetadata_fileModes})
+var sConflictMetadata_objectTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectTypes", ID: &iObjectTypes, Members: &mObjectTypes, Type: smithy.ShapeTypeStructure, Ext: &eConflictMetadata_objectTypes})
+var sConflictMetadata_numberOfConflicts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numberOfConflicts", ID: &i_NumberOfConflicts, Type: smithy.ShapeTypeInteger, Ext: &eConflictMetadata_numberOfConflicts})
+var sConflictMetadata_isBinaryFile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isBinaryFile", ID: &iIsBinaryFile, Members: &mIsBinaryFile, Type: smithy.ShapeTypeStructure, Ext: &eConflictMetadata_isBinaryFile})
+var sConflictMetadata_contentConflict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentConflict", ID: &i_IsContentConflict, Type: smithy.ShapeTypeBoolean, Ext: &eConflictMetadata_contentConflict})
+var sConflictMetadata_fileModeConflict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileModeConflict", ID: &i_IsFileModeConflict, Type: smithy.ShapeTypeBoolean, Ext: &eConflictMetadata_fileModeConflict})
+var sConflictMetadata_objectTypeConflict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectTypeConflict", ID: &i_IsObjectTypeConflict, Type: smithy.ShapeTypeBoolean, Ext: &eConflictMetadata_objectTypeConflict})
+var sConflictMetadata_mergeOperations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeOperations", ID: &iMergeOperations, Members: &mMergeOperations, Type: smithy.ShapeTypeStructure, Ext: &eConflictMetadata_mergeOperations})
+var s_ConflictMetadataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConflictMetadata, Members: &mConflictMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_ConflictMetadataList_member})
+var sConflictResolution_replaceContents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replaceContents", ID: &i_ReplaceContentEntries, Members: &m_ReplaceContentEntries, Type: smithy.ShapeTypeList, Ext: &eConflictResolution_replaceContents})
+var sConflictResolution_deleteFiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleteFiles", ID: &i_DeleteFileEntries, Members: &m_DeleteFileEntries, Type: smithy.ShapeTypeList, Ext: &eConflictResolution_deleteFiles})
+var sConflictResolution_setFileModes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "setFileModes", ID: &i_SetFileModeEntries, Members: &m_SetFileModeEntries, Type: smithy.ShapeTypeList, Ext: &eConflictResolution_setFileModes})
+var sConflictResolutionStrategyTypeEnum_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictResolutionStrategyTypeEnum_NONE})
+var sConflictResolutionStrategyTypeEnum_ACCEPT_SOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCEPT_SOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictResolutionStrategyTypeEnum_ACCEPT_SOURCE})
+var sConflictResolutionStrategyTypeEnum_ACCEPT_DESTINATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCEPT_DESTINATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictResolutionStrategyTypeEnum_ACCEPT_DESTINATION})
+var sConflictResolutionStrategyTypeEnum_AUTOMERGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTOMERGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictResolutionStrategyTypeEnum_AUTOMERGE})
+var s_Conflicts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConflict, Members: &mConflict, Type: smithy.ShapeTypeStructure, Ext: &e_Conflicts_member})
+var sDefaultBranchCannotBeDeletedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eDefaultBranchCannotBeDeletedException_message})
+var s_DeleteFileEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeleteFileEntry, Members: &mDeleteFileEntry, Type: smithy.ShapeTypeStructure, Ext: &e_DeleteFileEntries_member})
+var sDeleteFileEntry_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eDeleteFileEntry_filePath})
+var sDiffChange_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iDiffChangeType, Members: &mDiffChangeType, Type: smithy.ShapeTypeEnum, Ext: &eDiffChange_type})
+var sDiffChange_beforeLineNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeLineNumber", ID: &i_LineNumber, Type: smithy.ShapeTypeInteger, Ext: &eDiffChange_beforeLineNumber})
+var sDiffChange_afterLineNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterLineNumber", ID: &i_LineNumber, Type: smithy.ShapeTypeInteger, Ext: &eDiffChange_afterLineNumber})
+var sDiffChange_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_LineContent, Type: smithy.ShapeTypeString, Ext: &eDiffChange_content})
+var s_DiffChangeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDiffChange, Members: &mDiffChange, Type: smithy.ShapeTypeStructure, Ext: &e_DiffChangeList_member})
+var sDiffChangeType_CONTEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDiffChangeType_CONTEXT})
+var sDiffChangeType_ADD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDiffChangeType_ADD})
+var sDiffChangeType_DELETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDiffChangeType_DELETE})
+var sDifference_beforeBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeBlob", ID: &iBlobMetadata, Members: &mBlobMetadata, Type: smithy.ShapeTypeStructure, Ext: &eDifference_beforeBlob})
+var sDifference_afterBlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterBlob", ID: &iBlobMetadata, Members: &mBlobMetadata, Type: smithy.ShapeTypeStructure, Ext: &eDifference_afterBlob})
+var sDifference_changeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "changeType", ID: &iChangeTypeEnum, Members: &mChangeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eDifference_changeType})
+var s_DifferenceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDifference, Members: &mDifference, Type: smithy.ShapeTypeStructure, Ext: &e_DifferenceList_member})
+var sDiffHunk_beforeStartLine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeStartLine", ID: &i_LineNumber, Type: smithy.ShapeTypeInteger, Ext: &eDiffHunk_beforeStartLine})
+var sDiffHunk_beforeLineCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeLineCount", ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &eDiffHunk_beforeLineCount})
+var sDiffHunk_afterStartLine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterStartLine", ID: &i_LineNumber, Type: smithy.ShapeTypeInteger, Ext: &eDiffHunk_afterStartLine})
+var sDiffHunk_afterLineCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterLineCount", ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &eDiffHunk_afterLineCount})
+var sDiffHunk_changes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "changes", ID: &i_DiffChangeList, Members: &m_DiffChangeList, Type: smithy.ShapeTypeList, Ext: &eDiffHunk_changes})
+var s_DiffHunkList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDiffHunk, Members: &mDiffHunk, Type: smithy.ShapeTypeStructure, Ext: &e_DiffHunkList_member})
+var sDirectoryNameConflictsWithFileNameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eDirectoryNameConflictsWithFileNameException_message})
+var sEncryptionIntegrityChecksFailedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eEncryptionIntegrityChecksFailedException_message})
+var sEncryptionKeyAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eEncryptionKeyAccessDeniedException_message})
+var sEncryptionKeyDisabledException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eEncryptionKeyDisabledException_message})
+var sEncryptionKeyInvalidIdException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eEncryptionKeyInvalidIdException_message})
+var sEncryptionKeyInvalidUsageException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eEncryptionKeyInvalidUsageException_message})
+var sEncryptionKeyNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eEncryptionKeyNotFoundException_message})
+var sEncryptionKeyRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eEncryptionKeyRequiredException_message})
+var sEncryptionKeyUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eEncryptionKeyUnavailableException_message})
+var sEvaluation_approved = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approved", ID: &i_Approved, Type: smithy.ShapeTypeBoolean, Ext: &eEvaluation_approved})
+var sEvaluation_overridden = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overridden", ID: &i_Overridden, Type: smithy.ShapeTypeBoolean, Ext: &eEvaluation_overridden})
+var sEvaluation_approvalRulesSatisfied = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRulesSatisfied", ID: &i_ApprovalRulesSatisfiedList, Members: &m_ApprovalRulesSatisfiedList, Type: smithy.ShapeTypeList, Ext: &eEvaluation_approvalRulesSatisfied})
+var sEvaluation_approvalRulesNotSatisfied = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRulesNotSatisfied", ID: &i_ApprovalRulesNotSatisfiedList, Members: &m_ApprovalRulesNotSatisfiedList, Type: smithy.ShapeTypeList, Ext: &eEvaluation_approvalRulesNotSatisfied})
+var sFile_blobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eFile_blobId})
+var sFile_absolutePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "absolutePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eFile_absolutePath})
+var sFile_relativePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relativePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eFile_relativePath})
+var sFile_fileMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileMode", ID: &iFileModeTypeEnum, Members: &mFileModeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eFile_fileMode})
+var sFileContentAndSourceFileSpecifiedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eFileContentAndSourceFileSpecifiedException_message})
+var sFileContentRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eFileContentRequiredException_message})
+var sFileContentSizeLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eFileContentSizeLimitExceededException_message})
+var sFileDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eFileDoesNotExistException_message})
+var sFileEntryRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eFileEntryRequiredException_message})
+var s_FileList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFile, Members: &mFile, Type: smithy.ShapeTypeStructure, Ext: &e_FileList_member})
+var sFileMetadata_absolutePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "absolutePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eFileMetadata_absolutePath})
+var sFileMetadata_blobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eFileMetadata_blobId})
+var sFileMetadata_fileMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileMode", ID: &iFileModeTypeEnum, Members: &mFileModeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eFileMetadata_fileMode})
+var sFileModeRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eFileModeRequiredException_message})
+var sFileModes_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iFileModeTypeEnum, Members: &mFileModeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eFileModes_source})
+var sFileModes_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &iFileModeTypeEnum, Members: &mFileModeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eFileModes_destination})
+var sFileModes_base = smithy.NewStaticSchema(smithy.StaticSchema{Member: "base", ID: &iFileModeTypeEnum, Members: &mFileModeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eFileModes_base})
+var sFileModeTypeEnum_EXECUTABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXECUTABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFileModeTypeEnum_EXECUTABLE})
+var sFileModeTypeEnum_NORMAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NORMAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFileModeTypeEnum_NORMAL})
+var sFileModeTypeEnum_SYMLINK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYMLINK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFileModeTypeEnum_SYMLINK})
+var sFileNameConflictsWithDirectoryNameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eFileNameConflictsWithDirectoryNameException_message})
+var sFilePathConflictsWithSubmodulePathException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eFilePathConflictsWithSubmodulePathException_message})
+var s_FilePaths_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &e_FilePaths_member})
+var sFileSizes_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_FileSize, Type: smithy.ShapeTypeLong, Ext: &eFileSizes_source})
+var sFileSizes_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &i_FileSize, Type: smithy.ShapeTypeLong, Ext: &eFileSizes_destination})
+var sFileSizes_base = smithy.NewStaticSchema(smithy.StaticSchema{Member: "base", ID: &i_FileSize, Type: smithy.ShapeTypeLong, Ext: &eFileSizes_base})
+var s_FilesMetadata_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFileMetadata, Members: &mFileMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_FilesMetadata_member})
+var sFileTooLargeException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eFileTooLargeException_message})
+var sFileVersion_commit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commit", ID: &iCommit, Members: &mCommit, Type: smithy.ShapeTypeStructure, Ext: &eFileVersion_commit})
+var sFileVersion_blobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eFileVersion_blobId})
+var sFileVersion_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eFileVersion_path})
+var sFileVersion_revisionChildren = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionChildren", ID: &i_RevisionChildren, Members: &m_RevisionChildren, Type: smithy.ShapeTypeList, Ext: &eFileVersion_revisionChildren})
+var sFolder_treeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "treeId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eFolder_treeId})
+var sFolder_absolutePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "absolutePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eFolder_absolutePath})
+var sFolder_relativePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relativePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eFolder_relativePath})
+var sFolderContentSizeLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eFolderContentSizeLimitExceededException_message})
+var sFolderDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eFolderDoesNotExistException_message})
+var s_FolderList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFolder, Members: &mFolder, Type: smithy.ShapeTypeStructure, Ext: &e_FolderList_member})
+var sIdempotencyParameterMismatchException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eIdempotencyParameterMismatchException_message})
+var sInvalidActorArnException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidActorArnException_message})
+var sInvalidApprovalRuleContentException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidApprovalRuleContentException_message})
+var sInvalidApprovalRuleNameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidApprovalRuleNameException_message})
+var sInvalidApprovalRuleTemplateContentException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidApprovalRuleTemplateContentException_message})
+var sInvalidApprovalRuleTemplateDescriptionException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidApprovalRuleTemplateDescriptionException_message})
+var sInvalidApprovalRuleTemplateNameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidApprovalRuleTemplateNameException_message})
+var sInvalidApprovalStateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidApprovalStateException_message})
+var sInvalidAuthorArnException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidAuthorArnException_message})
+var sInvalidBlobIdException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidBlobIdException_message})
+var sInvalidBranchNameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidBranchNameException_message})
+var sInvalidClientRequestTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidClientRequestTokenException_message})
+var sInvalidCommentIdException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidCommentIdException_message})
+var sInvalidCommitException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidCommitException_message})
+var sInvalidCommitIdException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidCommitIdException_message})
+var sInvalidConflictDetailLevelException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidConflictDetailLevelException_message})
+var sInvalidConflictResolutionException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidConflictResolutionException_message})
+var sInvalidConflictResolutionStrategyException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidConflictResolutionStrategyException_message})
+var sInvalidContinuationTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidContinuationTokenException_message})
+var sInvalidDeletionParameterException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidDeletionParameterException_message})
+var sInvalidDescriptionException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidDescriptionException_message})
+var sInvalidDestinationCommitSpecifierException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidDestinationCommitSpecifierException_message})
+var sInvalidEmailException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidEmailException_message})
+var sInvalidFileLocationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidFileLocationException_message})
+var sInvalidFileModeException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidFileModeException_message})
+var sInvalidFilePositionException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidFilePositionException_message})
+var sInvalidMaxConflictFilesException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidMaxConflictFilesException_message})
+var sInvalidMaxMergeHunksException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidMaxMergeHunksException_message})
+var sInvalidMaxResultsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidMaxResultsException_message})
+var sInvalidMergeOptionException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidMergeOptionException_message})
+var sInvalidOrderException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidOrderException_message})
+var sInvalidOverrideStatusException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidOverrideStatusException_message})
+var sInvalidParentCommitIdException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidParentCommitIdException_message})
+var sInvalidPathException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidPathException_message})
+var sInvalidPullRequestEventTypeException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidPullRequestEventTypeException_message})
+var sInvalidPullRequestIdException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidPullRequestIdException_message})
+var sInvalidPullRequestStatusException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidPullRequestStatusException_message})
+var sInvalidPullRequestStatusUpdateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidPullRequestStatusUpdateException_message})
+var sInvalidReactionUserArnException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidReactionUserArnException_message})
+var sInvalidReactionValueException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidReactionValueException_message})
+var sInvalidReferenceNameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidReferenceNameException_message})
+var sInvalidRelativeFileVersionEnumException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidRelativeFileVersionEnumException_message})
+var sInvalidReplacementContentException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidReplacementContentException_message})
+var sInvalidReplacementTypeException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidReplacementTypeException_message})
+var sInvalidRepositoryDescriptionException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidRepositoryDescriptionException_message})
+var sInvalidRepositoryNameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidRepositoryNameException_message})
+var sInvalidRepositoryTriggerBranchNameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidRepositoryTriggerBranchNameException_message})
+var sInvalidRepositoryTriggerCustomDataException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidRepositoryTriggerCustomDataException_message})
+var sInvalidRepositoryTriggerDestinationArnException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidRepositoryTriggerDestinationArnException_message})
+var sInvalidRepositoryTriggerEventsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidRepositoryTriggerEventsException_message})
+var sInvalidRepositoryTriggerNameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidRepositoryTriggerNameException_message})
+var sInvalidRepositoryTriggerRegionException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidRepositoryTriggerRegionException_message})
+var sInvalidResourceArnException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidResourceArnException_message})
+var sInvalidRevisionIdException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidRevisionIdException_message})
+var sInvalidRuleContentSha256Exception_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidRuleContentSha256Exception_message})
+var sInvalidSortByException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidSortByException_message})
+var sInvalidSourceCommitSpecifierException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidSourceCommitSpecifierException_message})
+var sInvalidSystemTagUsageException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidSystemTagUsageException_message})
+var sInvalidTagKeysListException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidTagKeysListException_message})
+var sInvalidTagsMapException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidTagsMapException_message})
+var sInvalidTargetBranchException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidTargetBranchException_message})
+var sInvalidTargetException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidTargetException_message})
+var sInvalidTargetsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidTargetsException_message})
+var sInvalidTitleException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidTitleException_message})
+var sIsBinaryFile_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_CapitalBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eIsBinaryFile_source})
+var sIsBinaryFile_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &i_CapitalBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eIsBinaryFile_destination})
+var sIsBinaryFile_base = smithy.NewStaticSchema(smithy.StaticSchema{Member: "base", ID: &i_CapitalBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eIsBinaryFile_base})
+var sLocation_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eLocation_filePath})
+var sLocation_filePosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePosition", ID: &i_Position, Type: smithy.ShapeTypeLong, Ext: &eLocation_filePosition})
+var sLocation_relativeFileVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relativeFileVersion", ID: &iRelativeFileVersionEnum, Members: &mRelativeFileVersionEnum, Type: smithy.ShapeTypeEnum, Ext: &eLocation_relativeFileVersion})
+var sManualMergeRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eManualMergeRequiredException_message})
+var sMaximumBranchesExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eMaximumBranchesExceededException_message})
+var sMaximumConflictResolutionEntriesExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eMaximumConflictResolutionEntriesExceededException_message})
+var sMaximumFileContentToLoadExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eMaximumFileContentToLoadExceededException_message})
+var sMaximumFileEntriesExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eMaximumFileEntriesExceededException_message})
+var sMaximumItemsToCompareExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eMaximumItemsToCompareExceededException_message})
+var sMaximumNumberOfApprovalsExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eMaximumNumberOfApprovalsExceededException_message})
+var sMaximumOpenPullRequestsExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eMaximumOpenPullRequestsExceededException_message})
+var sMaximumRepositoryNamesExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eMaximumRepositoryNamesExceededException_message})
+var sMaximumRepositoryTriggersExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eMaximumRepositoryTriggersExceededException_message})
+var sMaximumRuleTemplatesAssociatedWithRepositoryException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eMaximumRuleTemplatesAssociatedWithRepositoryException_message})
+var sMergeHunk_isConflict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isConflict", ID: &i_IsHunkConflict, Type: smithy.ShapeTypeBoolean, Ext: &eMergeHunk_isConflict})
+var sMergeHunk_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iMergeHunkDetail, Members: &mMergeHunkDetail, Type: smithy.ShapeTypeStructure, Ext: &eMergeHunk_source})
+var sMergeHunk_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &iMergeHunkDetail, Members: &mMergeHunkDetail, Type: smithy.ShapeTypeStructure, Ext: &eMergeHunk_destination})
+var sMergeHunk_base = smithy.NewStaticSchema(smithy.StaticSchema{Member: "base", ID: &iMergeHunkDetail, Members: &mMergeHunkDetail, Type: smithy.ShapeTypeStructure, Ext: &eMergeHunk_base})
+var sMergeHunkDetail_startLine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startLine", ID: &i_LineNumber, Type: smithy.ShapeTypeInteger, Ext: &eMergeHunkDetail_startLine})
+var sMergeHunkDetail_endLine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endLine", ID: &i_LineNumber, Type: smithy.ShapeTypeInteger, Ext: &eMergeHunkDetail_endLine})
+var sMergeHunkDetail_hunkContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hunkContent", ID: &i_HunkContent, Type: smithy.ShapeTypeString, Ext: &eMergeHunkDetail_hunkContent})
+var s_MergeHunks_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMergeHunk, Members: &mMergeHunk, Type: smithy.ShapeTypeStructure, Ext: &e_MergeHunks_member})
+var sMergeMetadata_isMerged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isMerged", ID: &i_IsMerged, Type: smithy.ShapeTypeBoolean, Ext: &eMergeMetadata_isMerged})
+var sMergeMetadata_mergedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergedBy", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eMergeMetadata_mergedBy})
+var sMergeMetadata_mergeCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &eMergeMetadata_mergeCommitId})
+var sMergeMetadata_mergeOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeOption", ID: &iMergeOptionTypeEnum, Members: &mMergeOptionTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eMergeMetadata_mergeOption})
+var sMergeOperations_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iChangeTypeEnum, Members: &mChangeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eMergeOperations_source})
+var sMergeOperations_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &iChangeTypeEnum, Members: &mChangeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eMergeOperations_destination})
+var sMergeOptionRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eMergeOptionRequiredException_message})
+var s_MergeOptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMergeOptionTypeEnum, Members: &mMergeOptionTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &e_MergeOptions_member})
+var sMergeOptionTypeEnum_FAST_FORWARD_MERGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAST_FORWARD_MERGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMergeOptionTypeEnum_FAST_FORWARD_MERGE})
+var sMergeOptionTypeEnum_SQUASH_MERGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SQUASH_MERGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMergeOptionTypeEnum_SQUASH_MERGE})
+var sMergeOptionTypeEnum_THREE_WAY_MERGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "THREE_WAY_MERGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMergeOptionTypeEnum_THREE_WAY_MERGE})
+var sMultipleConflictResolutionEntriesException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eMultipleConflictResolutionEntriesException_message})
+var sMultipleRepositoriesInPullRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eMultipleRepositoriesInPullRequestException_message})
+var sNameLengthExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eNameLengthExceededException_message})
+var sNoChangeException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eNoChangeException_message})
+var sNumberOfRulesExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eNumberOfRulesExceededException_message})
+var sNumberOfRuleTemplatesExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eNumberOfRuleTemplatesExceededException_message})
+var sObjectTypeEnum_FILE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eObjectTypeEnum_FILE})
+var sObjectTypeEnum_DIRECTORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECTORY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eObjectTypeEnum_DIRECTORY})
+var sObjectTypeEnum_GIT_LINK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIT_LINK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eObjectTypeEnum_GIT_LINK})
+var sObjectTypeEnum_SYMBOLIC_LINK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYMBOLIC_LINK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eObjectTypeEnum_SYMBOLIC_LINK})
+var sObjectTypes_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iObjectTypeEnum, Members: &mObjectTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eObjectTypes_source})
+var sObjectTypes_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &iObjectTypeEnum, Members: &mObjectTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eObjectTypes_destination})
+var sObjectTypes_base = smithy.NewStaticSchema(smithy.StaticSchema{Member: "base", ID: &iObjectTypeEnum, Members: &mObjectTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eObjectTypes_base})
+var sOperationNotAllowedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eOperationNotAllowedException_message})
+var sOrderEnum_ASCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOrderEnum_ASCENDING})
+var sOrderEnum_DESCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOrderEnum_DESCENDING})
+var sOriginApprovalRuleTemplate_approvalRuleTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateId", ID: &i_ApprovalRuleTemplateId, Type: smithy.ShapeTypeString, Ext: &eOriginApprovalRuleTemplate_approvalRuleTemplateId})
+var sOriginApprovalRuleTemplate_approvalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &eOriginApprovalRuleTemplate_approvalRuleTemplateName})
+var sOverrideAlreadySetException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eOverrideAlreadySetException_message})
+var sOverrideStatus_OVERRIDE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OVERRIDE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOverrideStatus_OVERRIDE})
+var sOverrideStatus_REVOKE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVOKE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOverrideStatus_REVOKE})
+var sOverrideStatusRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eOverrideStatusRequiredException_message})
+var sParentCommitDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eParentCommitDoesNotExistException_message})
+var sParentCommitIdOutdatedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eParentCommitIdOutdatedException_message})
+var sParentCommitIdRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eParentCommitIdRequiredException_message})
+var s_ParentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &e_ParentList_member})
+var sPathDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ePathDoesNotExistException_message})
+var sPathRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ePathRequiredException_message})
+var sPullRequest_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ePullRequest_pullRequestId})
+var sPullRequest_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_Title, Type: smithy.ShapeTypeString, Ext: &ePullRequest_title})
+var sPullRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ePullRequest_description})
+var sPullRequest_lastActivityDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastActivityDate", ID: &i_LastModifiedDate, Type: smithy.ShapeTypeTimestamp, Ext: &ePullRequest_lastActivityDate})
+var sPullRequest_creationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDate", ID: &i_CreationDate, Type: smithy.ShapeTypeTimestamp, Ext: &ePullRequest_creationDate})
+var sPullRequest_pullRequestStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestStatus", ID: &iPullRequestStatusEnum, Members: &mPullRequestStatusEnum, Type: smithy.ShapeTypeEnum, Ext: &ePullRequest_pullRequestStatus})
+var sPullRequest_authorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ePullRequest_authorArn})
+var sPullRequest_pullRequestTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestTargets", ID: &i_PullRequestTargetList, Members: &m_PullRequestTargetList, Type: smithy.ShapeTypeList, Ext: &ePullRequest_pullRequestTargets})
+var sPullRequest_clientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString, Ext: &ePullRequest_clientRequestToken})
+var sPullRequest_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_RevisionId, Type: smithy.ShapeTypeString, Ext: &ePullRequest_revisionId})
+var sPullRequest_approvalRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRules", ID: &i_ApprovalRulesList, Members: &m_ApprovalRulesList, Type: smithy.ShapeTypeList, Ext: &ePullRequest_approvalRules})
+var sPullRequestAlreadyClosedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ePullRequestAlreadyClosedException_message})
+var sPullRequestApprovalRulesNotSatisfiedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ePullRequestApprovalRulesNotSatisfiedException_message})
+var sPullRequestCannotBeApprovedByAuthorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ePullRequestCannotBeApprovedByAuthorException_message})
+var sPullRequestCreatedEventMetadata_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ePullRequestCreatedEventMetadata_repositoryName})
+var sPullRequestCreatedEventMetadata_sourceCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ePullRequestCreatedEventMetadata_sourceCommitId})
+var sPullRequestCreatedEventMetadata_destinationCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ePullRequestCreatedEventMetadata_destinationCommitId})
+var sPullRequestCreatedEventMetadata_mergeBase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeBase", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ePullRequestCreatedEventMetadata_mergeBase})
+var sPullRequestDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ePullRequestDoesNotExistException_message})
+var sPullRequestEvent_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ePullRequestEvent_pullRequestId})
+var sPullRequestEvent_eventDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventDate", ID: &i_EventDate, Type: smithy.ShapeTypeTimestamp, Ext: &ePullRequestEvent_eventDate})
+var sPullRequestEvent_pullRequestEventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestEventType", ID: &iPullRequestEventType, Members: &mPullRequestEventType, Type: smithy.ShapeTypeEnum, Ext: &ePullRequestEvent_pullRequestEventType})
+var sPullRequestEvent_actorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ePullRequestEvent_actorArn})
+var sPullRequestEvent_pullRequestCreatedEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestCreatedEventMetadata", ID: &iPullRequestCreatedEventMetadata, Members: &mPullRequestCreatedEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestEvent_pullRequestCreatedEventMetadata})
+var sPullRequestEvent_pullRequestStatusChangedEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestStatusChangedEventMetadata", ID: &iPullRequestStatusChangedEventMetadata, Members: &mPullRequestStatusChangedEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestEvent_pullRequestStatusChangedEventMetadata})
+var sPullRequestEvent_pullRequestSourceReferenceUpdatedEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestSourceReferenceUpdatedEventMetadata", ID: &iPullRequestSourceReferenceUpdatedEventMetadata, Members: &mPullRequestSourceReferenceUpdatedEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestEvent_pullRequestSourceReferenceUpdatedEventMetadata})
+var sPullRequestEvent_pullRequestMergedStateChangedEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestMergedStateChangedEventMetadata", ID: &iPullRequestMergedStateChangedEventMetadata, Members: &mPullRequestMergedStateChangedEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestEvent_pullRequestMergedStateChangedEventMetadata})
+var sPullRequestEvent_approvalRuleEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleEventMetadata", ID: &iApprovalRuleEventMetadata, Members: &mApprovalRuleEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestEvent_approvalRuleEventMetadata})
+var sPullRequestEvent_approvalStateChangedEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalStateChangedEventMetadata", ID: &iApprovalStateChangedEventMetadata, Members: &mApprovalStateChangedEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestEvent_approvalStateChangedEventMetadata})
+var sPullRequestEvent_approvalRuleOverriddenEventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleOverriddenEventMetadata", ID: &iApprovalRuleOverriddenEventMetadata, Members: &mApprovalRuleOverriddenEventMetadata, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestEvent_approvalRuleOverriddenEventMetadata})
+var s_PullRequestEventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPullRequestEvent, Members: &mPullRequestEvent, Type: smithy.ShapeTypeStructure, Ext: &e_PullRequestEventList_member})
+var sPullRequestEventType_PULL_REQUEST_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PULL_REQUEST_CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestEventType_PULL_REQUEST_CREATED})
+var sPullRequestEventType_PULL_REQUEST_STATUS_CHANGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PULL_REQUEST_STATUS_CHANGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestEventType_PULL_REQUEST_STATUS_CHANGED})
+var sPullRequestEventType_PULL_REQUEST_SOURCE_REFERENCE_UPDATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PULL_REQUEST_SOURCE_REFERENCE_UPDATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestEventType_PULL_REQUEST_SOURCE_REFERENCE_UPDATED})
+var sPullRequestEventType_PULL_REQUEST_MERGE_STATE_CHANGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PULL_REQUEST_MERGE_STATE_CHANGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestEventType_PULL_REQUEST_MERGE_STATE_CHANGED})
+var sPullRequestEventType_PULL_REQUEST_APPROVAL_RULE_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PULL_REQUEST_APPROVAL_RULE_CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestEventType_PULL_REQUEST_APPROVAL_RULE_CREATED})
+var sPullRequestEventType_PULL_REQUEST_APPROVAL_RULE_UPDATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PULL_REQUEST_APPROVAL_RULE_UPDATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestEventType_PULL_REQUEST_APPROVAL_RULE_UPDATED})
+var sPullRequestEventType_PULL_REQUEST_APPROVAL_RULE_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PULL_REQUEST_APPROVAL_RULE_DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestEventType_PULL_REQUEST_APPROVAL_RULE_DELETED})
+var sPullRequestEventType_PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestEventType_PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN})
+var sPullRequestEventType_PULL_REQUEST_APPROVAL_STATE_CHANGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PULL_REQUEST_APPROVAL_STATE_CHANGED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestEventType_PULL_REQUEST_APPROVAL_STATE_CHANGED})
+var s_PullRequestIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &e_PullRequestIdList_member})
+var sPullRequestIdRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ePullRequestIdRequiredException_message})
+var sPullRequestMergedStateChangedEventMetadata_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ePullRequestMergedStateChangedEventMetadata_repositoryName})
+var sPullRequestMergedStateChangedEventMetadata_destinationReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationReference", ID: &i_ReferenceName, Type: smithy.ShapeTypeString, Ext: &ePullRequestMergedStateChangedEventMetadata_destinationReference})
+var sPullRequestMergedStateChangedEventMetadata_mergeMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeMetadata", ID: &iMergeMetadata, Members: &mMergeMetadata, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestMergedStateChangedEventMetadata_mergeMetadata})
+var sPullRequestSourceReferenceUpdatedEventMetadata_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ePullRequestSourceReferenceUpdatedEventMetadata_repositoryName})
+var sPullRequestSourceReferenceUpdatedEventMetadata_beforeCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ePullRequestSourceReferenceUpdatedEventMetadata_beforeCommitId})
+var sPullRequestSourceReferenceUpdatedEventMetadata_afterCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ePullRequestSourceReferenceUpdatedEventMetadata_afterCommitId})
+var sPullRequestSourceReferenceUpdatedEventMetadata_mergeBase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeBase", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ePullRequestSourceReferenceUpdatedEventMetadata_mergeBase})
+var sPullRequestStatusChangedEventMetadata_pullRequestStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestStatus", ID: &iPullRequestStatusEnum, Members: &mPullRequestStatusEnum, Type: smithy.ShapeTypeEnum, Ext: &ePullRequestStatusChangedEventMetadata_pullRequestStatus})
+var sPullRequestStatusEnum_OPEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestStatusEnum_OPEN})
+var sPullRequestStatusEnum_CLOSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOSED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestStatusEnum_CLOSED})
+var sPullRequestStatusRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ePullRequestStatusRequiredException_message})
+var sPullRequestTarget_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ePullRequestTarget_repositoryName})
+var sPullRequestTarget_sourceReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceReference", ID: &i_ReferenceName, Type: smithy.ShapeTypeString, Ext: &ePullRequestTarget_sourceReference})
+var sPullRequestTarget_destinationReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationReference", ID: &i_ReferenceName, Type: smithy.ShapeTypeString, Ext: &ePullRequestTarget_destinationReference})
+var sPullRequestTarget_destinationCommit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommit", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ePullRequestTarget_destinationCommit})
+var sPullRequestTarget_sourceCommit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommit", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ePullRequestTarget_sourceCommit})
+var sPullRequestTarget_mergeBase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeBase", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ePullRequestTarget_mergeBase})
+var sPullRequestTarget_mergeMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeMetadata", ID: &iMergeMetadata, Members: &mMergeMetadata, Type: smithy.ShapeTypeStructure, Ext: &ePullRequestTarget_mergeMetadata})
+var s_PullRequestTargetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPullRequestTarget, Members: &mPullRequestTarget, Type: smithy.ShapeTypeStructure, Ext: &e_PullRequestTargetList_member})
+var s_PutFileEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPutFileEntry, Members: &mPutFileEntry, Type: smithy.ShapeTypeStructure, Ext: &e_PutFileEntries_member})
+var sPutFileEntry_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ePutFileEntry_filePath})
+var sPutFileEntry_fileMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileMode", ID: &iFileModeTypeEnum, Members: &mFileModeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ePutFileEntry_fileMode})
+var sPutFileEntry_fileContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileContent", ID: &i_FileContent, Type: smithy.ShapeTypeBlob, Ext: &ePutFileEntry_fileContent})
+var sPutFileEntry_sourceFile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceFile", ID: &iSourceFileSpecifier, Members: &mSourceFileSpecifier, Type: smithy.ShapeTypeStructure, Ext: &ePutFileEntry_sourceFile})
+var sPutFileEntryConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ePutFileEntryConflictException_message})
+var s_ReactionCountsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ReactionValue, Type: smithy.ShapeTypeString, Ext: &e_ReactionCountsMap_key})
+var s_ReactionCountsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &e_ReactionCountsMap_value})
+var sReactionForComment_reaction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reaction", ID: &iReactionValueFormats, Members: &mReactionValueFormats, Type: smithy.ShapeTypeStructure, Ext: &eReactionForComment_reaction})
+var sReactionForComment_reactionUsers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reactionUsers", ID: &i_ReactionUsersList, Members: &m_ReactionUsersList, Type: smithy.ShapeTypeList, Ext: &eReactionForComment_reactionUsers})
+var sReactionForComment_reactionsFromDeletedUsersCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reactionsFromDeletedUsersCount", ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &eReactionForComment_reactionsFromDeletedUsersCount})
+var sReactionLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eReactionLimitExceededException_message})
+var s_ReactionsForCommentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReactionForComment, Members: &mReactionForComment, Type: smithy.ShapeTypeStructure, Ext: &e_ReactionsForCommentList_member})
+var s_ReactionUsersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_ReactionUsersList_member})
+var sReactionValueFormats_emoji = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emoji", ID: &i_ReactionEmoji, Type: smithy.ShapeTypeString, Ext: &eReactionValueFormats_emoji})
+var sReactionValueFormats_shortCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shortCode", ID: &i_ReactionShortCode, Type: smithy.ShapeTypeString, Ext: &eReactionValueFormats_shortCode})
+var sReactionValueFormats_unicode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unicode", ID: &i_ReactionUnicode, Type: smithy.ShapeTypeString, Ext: &eReactionValueFormats_unicode})
+var sReactionValueRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eReactionValueRequiredException_message})
+var sReferenceDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eReferenceDoesNotExistException_message})
+var sReferenceNameRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eReferenceNameRequiredException_message})
+var sReferenceTypeNotSupportedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eReferenceTypeNotSupportedException_message})
+var sRelativeFileVersionEnum_BEFORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEFORE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRelativeFileVersionEnum_BEFORE})
+var sRelativeFileVersionEnum_AFTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AFTER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRelativeFileVersionEnum_AFTER})
+var s_ReplaceContentEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReplaceContentEntry, Members: &mReplaceContentEntry, Type: smithy.ShapeTypeStructure, Ext: &e_ReplaceContentEntries_member})
+var sReplaceContentEntry_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eReplaceContentEntry_filePath})
+var sReplaceContentEntry_replacementType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replacementType", ID: &iReplacementTypeEnum, Members: &mReplacementTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eReplaceContentEntry_replacementType})
+var sReplaceContentEntry_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_FileContent, Type: smithy.ShapeTypeBlob, Ext: &eReplaceContentEntry_content})
+var sReplaceContentEntry_fileMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileMode", ID: &iFileModeTypeEnum, Members: &mFileModeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eReplaceContentEntry_fileMode})
+var sReplacementContentRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eReplacementContentRequiredException_message})
+var sReplacementTypeEnum_KEEP_BASE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEEP_BASE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReplacementTypeEnum_KEEP_BASE})
+var sReplacementTypeEnum_KEEP_SOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEEP_SOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReplacementTypeEnum_KEEP_SOURCE})
+var sReplacementTypeEnum_KEEP_DESTINATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEEP_DESTINATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReplacementTypeEnum_KEEP_DESTINATION})
+var sReplacementTypeEnum_USE_NEW_CONTENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USE_NEW_CONTENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReplacementTypeEnum_USE_NEW_CONTENT})
+var sReplacementTypeRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eReplacementTypeRequiredException_message})
+var sRepositoryDoesNotExistException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eRepositoryDoesNotExistException_message})
+var sRepositoryLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eRepositoryLimitExceededException_message})
+var sRepositoryMetadata_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eRepositoryMetadata_accountId})
+var sRepositoryMetadata_repositoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryId", ID: &i_RepositoryId, Type: smithy.ShapeTypeString, Ext: &eRepositoryMetadata_repositoryId})
+var sRepositoryMetadata_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eRepositoryMetadata_repositoryName})
+var sRepositoryMetadata_repositoryDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryDescription", ID: &i_RepositoryDescription, Type: smithy.ShapeTypeString, Ext: &eRepositoryMetadata_repositoryDescription})
+var sRepositoryMetadata_defaultBranch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultBranch", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &eRepositoryMetadata_defaultBranch})
+var sRepositoryMetadata_lastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedDate", ID: &i_LastModifiedDate, Type: smithy.ShapeTypeTimestamp, Ext: &eRepositoryMetadata_lastModifiedDate})
+var sRepositoryMetadata_creationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDate", ID: &i_CreationDate, Type: smithy.ShapeTypeTimestamp, Ext: &eRepositoryMetadata_creationDate})
+var sRepositoryMetadata_cloneUrlHttp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloneUrlHttp", ID: &i_CloneUrlHttp, Type: smithy.ShapeTypeString, Ext: &eRepositoryMetadata_cloneUrlHttp})
+var sRepositoryMetadata_cloneUrlSsh = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloneUrlSsh", ID: &i_CloneUrlSsh, Type: smithy.ShapeTypeString, Ext: &eRepositoryMetadata_cloneUrlSsh})
+var sRepositoryMetadata_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eRepositoryMetadata_Arn})
+var sRepositoryMetadata_kmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &eRepositoryMetadata_kmsKeyId})
+var s_RepositoryMetadataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRepositoryMetadata, Members: &mRepositoryMetadata, Type: smithy.ShapeTypeStructure, Ext: &e_RepositoryMetadataList_member})
+var sRepositoryNameExistsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eRepositoryNameExistsException_message})
+var sRepositoryNameIdPair_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eRepositoryNameIdPair_repositoryName})
+var sRepositoryNameIdPair_repositoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryId", ID: &i_RepositoryId, Type: smithy.ShapeTypeString, Ext: &eRepositoryNameIdPair_repositoryId})
+var s_RepositoryNameIdPairList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRepositoryNameIdPair, Members: &mRepositoryNameIdPair, Type: smithy.ShapeTypeStructure, Ext: &e_RepositoryNameIdPairList_member})
+var s_RepositoryNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &e_RepositoryNameList_member})
+var sRepositoryNameRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eRepositoryNameRequiredException_message})
+var sRepositoryNamesRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eRepositoryNamesRequiredException_message})
+var sRepositoryNotAssociatedWithPullRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eRepositoryNotAssociatedWithPullRequestException_message})
+var s_RepositoryNotFoundList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &e_RepositoryNotFoundList_member})
+var sRepositoryTrigger_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RepositoryTriggerName, Type: smithy.ShapeTypeString, Ext: &eRepositoryTrigger_name})
+var sRepositoryTrigger_destinationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eRepositoryTrigger_destinationArn})
+var sRepositoryTrigger_customData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customData", ID: &i_RepositoryTriggerCustomData, Type: smithy.ShapeTypeString, Ext: &eRepositoryTrigger_customData})
+var sRepositoryTrigger_branches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branches", ID: &i_BranchNameList, Members: &m_BranchNameList, Type: smithy.ShapeTypeList, Ext: &eRepositoryTrigger_branches})
+var sRepositoryTrigger_events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "events", ID: &i_RepositoryTriggerEventList, Members: &m_RepositoryTriggerEventList, Type: smithy.ShapeTypeList, Ext: &eRepositoryTrigger_events})
+var sRepositoryTriggerBranchNameListRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eRepositoryTriggerBranchNameListRequiredException_message})
+var sRepositoryTriggerDestinationArnRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eRepositoryTriggerDestinationArnRequiredException_message})
+var sRepositoryTriggerEventEnum_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryTriggerEventEnum_ALL})
+var sRepositoryTriggerEventEnum_UPDATE_REFERENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_REFERENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryTriggerEventEnum_UPDATE_REFERENCE})
+var sRepositoryTriggerEventEnum_CREATE_REFERENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_REFERENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryTriggerEventEnum_CREATE_REFERENCE})
+var sRepositoryTriggerEventEnum_DELETE_REFERENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_REFERENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRepositoryTriggerEventEnum_DELETE_REFERENCE})
+var s_RepositoryTriggerEventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRepositoryTriggerEventEnum, Members: &mRepositoryTriggerEventEnum, Type: smithy.ShapeTypeEnum, Ext: &e_RepositoryTriggerEventList_member})
+var sRepositoryTriggerEventsListRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eRepositoryTriggerEventsListRequiredException_message})
+var sRepositoryTriggerExecutionFailure_trigger = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trigger", ID: &i_RepositoryTriggerName, Type: smithy.ShapeTypeString, Ext: &eRepositoryTriggerExecutionFailure_trigger})
+var sRepositoryTriggerExecutionFailure_failureMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureMessage", ID: &i_RepositoryTriggerExecutionFailureMessage, Type: smithy.ShapeTypeString, Ext: &eRepositoryTriggerExecutionFailure_failureMessage})
+var s_RepositoryTriggerExecutionFailureList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRepositoryTriggerExecutionFailure, Members: &mRepositoryTriggerExecutionFailure, Type: smithy.ShapeTypeStructure, Ext: &e_RepositoryTriggerExecutionFailureList_member})
+var s_RepositoryTriggerNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RepositoryTriggerName, Type: smithy.ShapeTypeString, Ext: &e_RepositoryTriggerNameList_member})
+var sRepositoryTriggerNameRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eRepositoryTriggerNameRequiredException_message})
+var s_RepositoryTriggersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRepositoryTrigger, Members: &mRepositoryTrigger, Type: smithy.ShapeTypeStructure, Ext: &e_RepositoryTriggersList_member})
+var sRepositoryTriggersListRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eRepositoryTriggersListRequiredException_message})
+var sResourceArnRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eResourceArnRequiredException_message})
+var sRestrictedSourceFileException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eRestrictedSourceFileException_message})
+var s_RevisionChildren_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RevisionId, Type: smithy.ShapeTypeString, Ext: &e_RevisionChildren_member})
+var s_RevisionDag_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFileVersion, Members: &mFileVersion, Type: smithy.ShapeTypeStructure, Ext: &e_RevisionDag_member})
+var sRevisionIdRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eRevisionIdRequiredException_message})
+var sRevisionNotCurrentException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eRevisionNotCurrentException_message})
+var sSameFileContentException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eSameFileContentException_message})
+var sSamePathRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eSamePathRequestException_message})
+var s_SetFileModeEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSetFileModeEntry, Members: &mSetFileModeEntry, Type: smithy.ShapeTypeStructure, Ext: &e_SetFileModeEntries_member})
+var sSetFileModeEntry_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eSetFileModeEntry_filePath})
+var sSetFileModeEntry_fileMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileMode", ID: &iFileModeTypeEnum, Members: &mFileModeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eSetFileModeEntry_fileMode})
+var sSortByEnum_REPOSITORY_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPOSITORY_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortByEnum_REPOSITORY_NAME})
+var sSortByEnum_MODIFIED_DATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODIFIED_DATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortByEnum_MODIFIED_DATE})
+var sSourceAndDestinationAreSameException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eSourceAndDestinationAreSameException_message})
+var sSourceFileOrContentRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eSourceFileOrContentRequiredException_message})
+var sSourceFileSpecifier_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eSourceFileSpecifier_filePath})
+var sSourceFileSpecifier_isMove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isMove", ID: &i_IsMove, Type: smithy.ShapeTypeBoolean, Ext: &eSourceFileSpecifier_isMove})
+var sSubModule_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eSubModule_commitId})
+var sSubModule_absolutePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "absolutePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eSubModule_absolutePath})
+var sSubModule_relativePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relativePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eSubModule_relativePath})
+var s_SubModuleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSubModule, Members: &mSubModule, Type: smithy.ShapeTypeStructure, Ext: &e_SubModuleList_member})
+var sSymbolicLink_blobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eSymbolicLink_blobId})
+var sSymbolicLink_absolutePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "absolutePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eSymbolicLink_absolutePath})
+var sSymbolicLink_relativePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relativePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eSymbolicLink_relativePath})
+var sSymbolicLink_fileMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileMode", ID: &iFileModeTypeEnum, Members: &mFileModeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eSymbolicLink_fileMode})
+var s_SymbolicLinkList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSymbolicLink, Members: &mSymbolicLink, Type: smithy.ShapeTypeStructure, Ext: &e_SymbolicLinkList_member})
+var s_TagKeysList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeysList_member})
+var sTagKeysListRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eTagKeysListRequiredException_message})
+var sTagPolicyException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eTagPolicyException_message})
+var s_TagsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagsMap_key})
+var s_TagsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagsMap_value})
+var sTagsMapRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eTagsMapRequiredException_message})
+var sTarget_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eTarget_repositoryName})
+var sTarget_sourceReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceReference", ID: &i_ReferenceName, Type: smithy.ShapeTypeString, Ext: &eTarget_sourceReference})
+var sTarget_destinationReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationReference", ID: &i_ReferenceName, Type: smithy.ShapeTypeString, Ext: &eTarget_destinationReference})
+var s_TargetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTarget, Members: &mTarget, Type: smithy.ShapeTypeStructure, Ext: &e_TargetList_member})
+var sTargetRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eTargetRequiredException_message})
+var sTargetsRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eTargetsRequiredException_message})
+var sTipOfSourceReferenceIsDifferentException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eTipOfSourceReferenceIsDifferentException_message})
+var sTipsDivergenceExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eTipsDivergenceExceededException_message})
+var sTitleRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eTitleRequiredException_message})
+var sTooManyTagsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eTooManyTagsException_message})
+var sUserInfo_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eUserInfo_name})
+var sUserInfo_email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "email", ID: &i_Email, Type: smithy.ShapeTypeString, Ext: &eUserInfo_email})
+var sUserInfo_date = smithy.NewStaticSchema(smithy.StaticSchema{Member: "date", ID: &i_Date, Type: smithy.ShapeTypeString, Ext: &eUserInfo_date})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sAssociateApprovalRuleTemplateWithRepositoryInput_approvalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &eAssociateApprovalRuleTemplateWithRepositoryInput_approvalRuleTemplateName})
+var sAssociateApprovalRuleTemplateWithRepositoryInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eAssociateApprovalRuleTemplateWithRepositoryInput_repositoryName})
+var sBatchAssociateApprovalRuleTemplateWithRepositoriesInput_approvalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &eBatchAssociateApprovalRuleTemplateWithRepositoriesInput_approvalRuleTemplateName})
+var sBatchAssociateApprovalRuleTemplateWithRepositoriesInput_repositoryNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryNames", ID: &i_RepositoryNameList, Members: &m_RepositoryNameList, Type: smithy.ShapeTypeList, Ext: &eBatchAssociateApprovalRuleTemplateWithRepositoriesInput_repositoryNames})
+var sBatchAssociateApprovalRuleTemplateWithRepositoriesOutput_associatedRepositoryNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedRepositoryNames", ID: &i_RepositoryNameList, Members: &m_RepositoryNameList, Type: smithy.ShapeTypeList, Ext: &eBatchAssociateApprovalRuleTemplateWithRepositoriesOutput_associatedRepositoryNames})
+var sBatchAssociateApprovalRuleTemplateWithRepositoriesOutput_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList, Members: &m_BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList, Type: smithy.ShapeTypeList, Ext: &eBatchAssociateApprovalRuleTemplateWithRepositoriesOutput_errors})
+var sBatchDescribeMergeConflictsInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eBatchDescribeMergeConflictsInput_repositoryName})
+var sBatchDescribeMergeConflictsInput_destinationCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &eBatchDescribeMergeConflictsInput_destinationCommitSpecifier})
+var sBatchDescribeMergeConflictsInput_sourceCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &eBatchDescribeMergeConflictsInput_sourceCommitSpecifier})
+var sBatchDescribeMergeConflictsInput_mergeOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeOption", ID: &iMergeOptionTypeEnum, Members: &mMergeOptionTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eBatchDescribeMergeConflictsInput_mergeOption})
+var sBatchDescribeMergeConflictsInput_maxMergeHunks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxMergeHunks", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eBatchDescribeMergeConflictsInput_maxMergeHunks})
+var sBatchDescribeMergeConflictsInput_maxConflictFiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxConflictFiles", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eBatchDescribeMergeConflictsInput_maxConflictFiles})
+var sBatchDescribeMergeConflictsInput_filePaths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePaths", ID: &i_FilePaths, Members: &m_FilePaths, Type: smithy.ShapeTypeList, Ext: &eBatchDescribeMergeConflictsInput_filePaths})
+var sBatchDescribeMergeConflictsInput_conflictDetailLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictDetailLevel", ID: &iConflictDetailLevelTypeEnum, Members: &mConflictDetailLevelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eBatchDescribeMergeConflictsInput_conflictDetailLevel})
+var sBatchDescribeMergeConflictsInput_conflictResolutionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolutionStrategy", ID: &iConflictResolutionStrategyTypeEnum, Members: &mConflictResolutionStrategyTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eBatchDescribeMergeConflictsInput_conflictResolutionStrategy})
+var sBatchDescribeMergeConflictsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eBatchDescribeMergeConflictsInput_nextToken})
+var sBatchDescribeMergeConflictsOutput_conflicts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflicts", ID: &i_Conflicts, Members: &m_Conflicts, Type: smithy.ShapeTypeList, Ext: &eBatchDescribeMergeConflictsOutput_conflicts})
+var sBatchDescribeMergeConflictsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eBatchDescribeMergeConflictsOutput_nextToken})
+var sBatchDescribeMergeConflictsOutput_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchDescribeMergeConflictsErrors, Members: &m_BatchDescribeMergeConflictsErrors, Type: smithy.ShapeTypeList, Ext: &eBatchDescribeMergeConflictsOutput_errors})
+var sBatchDescribeMergeConflictsOutput_destinationCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eBatchDescribeMergeConflictsOutput_destinationCommitId})
+var sBatchDescribeMergeConflictsOutput_sourceCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eBatchDescribeMergeConflictsOutput_sourceCommitId})
+var sBatchDescribeMergeConflictsOutput_baseCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eBatchDescribeMergeConflictsOutput_baseCommitId})
+var sBatchDisassociateApprovalRuleTemplateFromRepositoriesInput_approvalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &eBatchDisassociateApprovalRuleTemplateFromRepositoriesInput_approvalRuleTemplateName})
+var sBatchDisassociateApprovalRuleTemplateFromRepositoriesInput_repositoryNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryNames", ID: &i_RepositoryNameList, Members: &m_RepositoryNameList, Type: smithy.ShapeTypeList, Ext: &eBatchDisassociateApprovalRuleTemplateFromRepositoriesInput_repositoryNames})
+var sBatchDisassociateApprovalRuleTemplateFromRepositoriesOutput_disassociatedRepositoryNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "disassociatedRepositoryNames", ID: &i_RepositoryNameList, Members: &m_RepositoryNameList, Type: smithy.ShapeTypeList, Ext: &eBatchDisassociateApprovalRuleTemplateFromRepositoriesOutput_disassociatedRepositoryNames})
+var sBatchDisassociateApprovalRuleTemplateFromRepositoriesOutput_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList, Members: &m_BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList, Type: smithy.ShapeTypeList, Ext: &eBatchDisassociateApprovalRuleTemplateFromRepositoriesOutput_errors})
+var sBatchGetCommitsInput_commitIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitIds", ID: &i_CommitIdsInputList, Members: &m_CommitIdsInputList, Type: smithy.ShapeTypeList, Ext: &eBatchGetCommitsInput_commitIds})
+var sBatchGetCommitsInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eBatchGetCommitsInput_repositoryName})
+var sBatchGetCommitsOutput_commits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commits", ID: &i_CommitObjectsList, Members: &m_CommitObjectsList, Type: smithy.ShapeTypeList, Ext: &eBatchGetCommitsOutput_commits})
+var sBatchGetCommitsOutput_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchGetCommitsErrorsList, Members: &m_BatchGetCommitsErrorsList, Type: smithy.ShapeTypeList, Ext: &eBatchGetCommitsOutput_errors})
+var sBatchGetRepositoriesInput_repositoryNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryNames", ID: &i_RepositoryNameList, Members: &m_RepositoryNameList, Type: smithy.ShapeTypeList, Ext: &eBatchGetRepositoriesInput_repositoryNames})
+var sBatchGetRepositoriesOutput_repositories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositories", ID: &i_RepositoryMetadataList, Members: &m_RepositoryMetadataList, Type: smithy.ShapeTypeList, Ext: &eBatchGetRepositoriesOutput_repositories})
+var sBatchGetRepositoriesOutput_repositoriesNotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoriesNotFound", ID: &i_RepositoryNotFoundList, Members: &m_RepositoryNotFoundList, Type: smithy.ShapeTypeList, Ext: &eBatchGetRepositoriesOutput_repositoriesNotFound})
+var sBatchGetRepositoriesOutput_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchGetRepositoriesErrorsList, Members: &m_BatchGetRepositoriesErrorsList, Type: smithy.ShapeTypeList, Ext: &eBatchGetRepositoriesOutput_errors})
+var sCreateApprovalRuleTemplateInput_approvalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &eCreateApprovalRuleTemplateInput_approvalRuleTemplateName})
+var sCreateApprovalRuleTemplateInput_approvalRuleTemplateContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateContent", ID: &i_ApprovalRuleTemplateContent, Type: smithy.ShapeTypeString, Ext: &eCreateApprovalRuleTemplateInput_approvalRuleTemplateContent})
+var sCreateApprovalRuleTemplateInput_approvalRuleTemplateDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateDescription", ID: &i_ApprovalRuleTemplateDescription, Type: smithy.ShapeTypeString, Ext: &eCreateApprovalRuleTemplateInput_approvalRuleTemplateDescription})
+var sCreateApprovalRuleTemplateOutput_approvalRuleTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplate", ID: &iApprovalRuleTemplate, Members: &mApprovalRuleTemplate, Type: smithy.ShapeTypeStructure, Ext: &eCreateApprovalRuleTemplateOutput_approvalRuleTemplate})
+var sCreateBranchInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eCreateBranchInput_repositoryName})
+var sCreateBranchInput_branchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchName", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &eCreateBranchInput_branchName})
+var sCreateBranchInput_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &eCreateBranchInput_commitId})
+var sCreateCommitInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eCreateCommitInput_repositoryName})
+var sCreateCommitInput_branchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchName", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &eCreateCommitInput_branchName})
+var sCreateCommitInput_parentCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &eCreateCommitInput_parentCommitId})
+var sCreateCommitInput_authorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateCommitInput_authorName})
+var sCreateCommitInput_email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "email", ID: &i_Email, Type: smithy.ShapeTypeString, Ext: &eCreateCommitInput_email})
+var sCreateCommitInput_commitMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitMessage", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eCreateCommitInput_commitMessage})
+var sCreateCommitInput_keepEmptyFolders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keepEmptyFolders", ID: &i_KeepEmptyFolders, Type: smithy.ShapeTypeBoolean, Ext: &eCreateCommitInput_keepEmptyFolders})
+var sCreateCommitInput_putFiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "putFiles", ID: &i_PutFileEntries, Members: &m_PutFileEntries, Type: smithy.ShapeTypeList, Ext: &eCreateCommitInput_putFiles})
+var sCreateCommitInput_deleteFiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleteFiles", ID: &i_DeleteFileEntries, Members: &m_DeleteFileEntries, Type: smithy.ShapeTypeList, Ext: &eCreateCommitInput_deleteFiles})
+var sCreateCommitInput_setFileModes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "setFileModes", ID: &i_SetFileModeEntries, Members: &m_SetFileModeEntries, Type: smithy.ShapeTypeList, Ext: &eCreateCommitInput_setFileModes})
+var sCreateCommitOutput_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eCreateCommitOutput_commitId})
+var sCreateCommitOutput_treeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "treeId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eCreateCommitOutput_treeId})
+var sCreateCommitOutput_filesAdded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filesAdded", ID: &i_FilesMetadata, Members: &m_FilesMetadata, Type: smithy.ShapeTypeList, Ext: &eCreateCommitOutput_filesAdded})
+var sCreateCommitOutput_filesUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filesUpdated", ID: &i_FilesMetadata, Members: &m_FilesMetadata, Type: smithy.ShapeTypeList, Ext: &eCreateCommitOutput_filesUpdated})
+var sCreateCommitOutput_filesDeleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filesDeleted", ID: &i_FilesMetadata, Members: &m_FilesMetadata, Type: smithy.ShapeTypeList, Ext: &eCreateCommitOutput_filesDeleted})
+var sCreatePullRequestApprovalRuleInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &eCreatePullRequestApprovalRuleInput_pullRequestId})
+var sCreatePullRequestApprovalRuleInput_approvalRuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleName", ID: &i_ApprovalRuleName, Type: smithy.ShapeTypeString, Ext: &eCreatePullRequestApprovalRuleInput_approvalRuleName})
+var sCreatePullRequestApprovalRuleInput_approvalRuleContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleContent", ID: &i_ApprovalRuleContent, Type: smithy.ShapeTypeString, Ext: &eCreatePullRequestApprovalRuleInput_approvalRuleContent})
+var sCreatePullRequestApprovalRuleOutput_approvalRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRule", ID: &iApprovalRule, Members: &mApprovalRule, Type: smithy.ShapeTypeStructure, Ext: &eCreatePullRequestApprovalRuleOutput_approvalRule})
+var sCreatePullRequestInput_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_Title, Type: smithy.ShapeTypeString, Ext: &eCreatePullRequestInput_title})
+var sCreatePullRequestInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreatePullRequestInput_description})
+var sCreatePullRequestInput_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_TargetList, Members: &m_TargetList, Type: smithy.ShapeTypeList, Ext: &eCreatePullRequestInput_targets})
+var sCreatePullRequestInput_clientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString, Ext: &eCreatePullRequestInput_clientRequestToken})
+var sCreatePullRequestOutput_pullRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequest", ID: &iPullRequest, Members: &mPullRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreatePullRequestOutput_pullRequest})
+var sCreateRepositoryInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eCreateRepositoryInput_repositoryName})
+var sCreateRepositoryInput_repositoryDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryDescription", ID: &i_RepositoryDescription, Type: smithy.ShapeTypeString, Ext: &eCreateRepositoryInput_repositoryDescription})
+var sCreateRepositoryInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eCreateRepositoryInput_tags})
+var sCreateRepositoryInput_kmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &eCreateRepositoryInput_kmsKeyId})
+var sCreateRepositoryOutput_repositoryMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryMetadata", ID: &iRepositoryMetadata, Members: &mRepositoryMetadata, Type: smithy.ShapeTypeStructure, Ext: &eCreateRepositoryOutput_repositoryMetadata})
+var sCreateUnreferencedMergeCommitInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eCreateUnreferencedMergeCommitInput_repositoryName})
+var sCreateUnreferencedMergeCommitInput_sourceCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &eCreateUnreferencedMergeCommitInput_sourceCommitSpecifier})
+var sCreateUnreferencedMergeCommitInput_destinationCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &eCreateUnreferencedMergeCommitInput_destinationCommitSpecifier})
+var sCreateUnreferencedMergeCommitInput_mergeOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeOption", ID: &iMergeOptionTypeEnum, Members: &mMergeOptionTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eCreateUnreferencedMergeCommitInput_mergeOption})
+var sCreateUnreferencedMergeCommitInput_conflictDetailLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictDetailLevel", ID: &iConflictDetailLevelTypeEnum, Members: &mConflictDetailLevelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eCreateUnreferencedMergeCommitInput_conflictDetailLevel})
+var sCreateUnreferencedMergeCommitInput_conflictResolutionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolutionStrategy", ID: &iConflictResolutionStrategyTypeEnum, Members: &mConflictResolutionStrategyTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eCreateUnreferencedMergeCommitInput_conflictResolutionStrategy})
+var sCreateUnreferencedMergeCommitInput_authorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eCreateUnreferencedMergeCommitInput_authorName})
+var sCreateUnreferencedMergeCommitInput_email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "email", ID: &i_Email, Type: smithy.ShapeTypeString, Ext: &eCreateUnreferencedMergeCommitInput_email})
+var sCreateUnreferencedMergeCommitInput_commitMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitMessage", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eCreateUnreferencedMergeCommitInput_commitMessage})
+var sCreateUnreferencedMergeCommitInput_keepEmptyFolders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keepEmptyFolders", ID: &i_KeepEmptyFolders, Type: smithy.ShapeTypeBoolean, Ext: &eCreateUnreferencedMergeCommitInput_keepEmptyFolders})
+var sCreateUnreferencedMergeCommitInput_conflictResolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolution", ID: &iConflictResolution, Members: &mConflictResolution, Type: smithy.ShapeTypeStructure, Ext: &eCreateUnreferencedMergeCommitInput_conflictResolution})
+var sCreateUnreferencedMergeCommitOutput_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eCreateUnreferencedMergeCommitOutput_commitId})
+var sCreateUnreferencedMergeCommitOutput_treeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "treeId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eCreateUnreferencedMergeCommitOutput_treeId})
+var sDeleteApprovalRuleTemplateInput_approvalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &eDeleteApprovalRuleTemplateInput_approvalRuleTemplateName})
+var sDeleteApprovalRuleTemplateOutput_approvalRuleTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateId", ID: &i_ApprovalRuleTemplateId, Type: smithy.ShapeTypeString, Ext: &eDeleteApprovalRuleTemplateOutput_approvalRuleTemplateId})
+var sDeleteBranchInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eDeleteBranchInput_repositoryName})
+var sDeleteBranchInput_branchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchName", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &eDeleteBranchInput_branchName})
+var sDeleteBranchOutput_deletedBranch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletedBranch", ID: &iBranchInfo, Members: &mBranchInfo, Type: smithy.ShapeTypeStructure, Ext: &eDeleteBranchOutput_deletedBranch})
+var sDeleteCommentContentInput_commentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commentId", ID: &i_CommentId, Type: smithy.ShapeTypeString, Ext: &eDeleteCommentContentInput_commentId})
+var sDeleteCommentContentOutput_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &iComment, Members: &mComment, Type: smithy.ShapeTypeStructure, Ext: &eDeleteCommentContentOutput_comment})
+var sDeleteFileInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eDeleteFileInput_repositoryName})
+var sDeleteFileInput_branchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchName", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &eDeleteFileInput_branchName})
+var sDeleteFileInput_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eDeleteFileInput_filePath})
+var sDeleteFileInput_parentCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &eDeleteFileInput_parentCommitId})
+var sDeleteFileInput_keepEmptyFolders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keepEmptyFolders", ID: &i_KeepEmptyFolders, Type: smithy.ShapeTypeBoolean, Ext: &eDeleteFileInput_keepEmptyFolders})
+var sDeleteFileInput_commitMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitMessage", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eDeleteFileInput_commitMessage})
+var sDeleteFileInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eDeleteFileInput_name})
+var sDeleteFileInput_email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "email", ID: &i_Email, Type: smithy.ShapeTypeString, Ext: &eDeleteFileInput_email})
+var sDeleteFileOutput_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eDeleteFileOutput_commitId})
+var sDeleteFileOutput_blobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eDeleteFileOutput_blobId})
+var sDeleteFileOutput_treeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "treeId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eDeleteFileOutput_treeId})
+var sDeleteFileOutput_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eDeleteFileOutput_filePath})
+var sDeletePullRequestApprovalRuleInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &eDeletePullRequestApprovalRuleInput_pullRequestId})
+var sDeletePullRequestApprovalRuleInput_approvalRuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleName", ID: &i_ApprovalRuleName, Type: smithy.ShapeTypeString, Ext: &eDeletePullRequestApprovalRuleInput_approvalRuleName})
+var sDeletePullRequestApprovalRuleOutput_approvalRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleId", ID: &i_ApprovalRuleId, Type: smithy.ShapeTypeString, Ext: &eDeletePullRequestApprovalRuleOutput_approvalRuleId})
+var sDeleteRepositoryInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eDeleteRepositoryInput_repositoryName})
+var sDeleteRepositoryOutput_repositoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryId", ID: &i_RepositoryId, Type: smithy.ShapeTypeString, Ext: &eDeleteRepositoryOutput_repositoryId})
+var sDescribeMergeConflictsInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eDescribeMergeConflictsInput_repositoryName})
+var sDescribeMergeConflictsInput_destinationCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &eDescribeMergeConflictsInput_destinationCommitSpecifier})
+var sDescribeMergeConflictsInput_sourceCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &eDescribeMergeConflictsInput_sourceCommitSpecifier})
+var sDescribeMergeConflictsInput_mergeOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeOption", ID: &iMergeOptionTypeEnum, Members: &mMergeOptionTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eDescribeMergeConflictsInput_mergeOption})
+var sDescribeMergeConflictsInput_maxMergeHunks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxMergeHunks", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eDescribeMergeConflictsInput_maxMergeHunks})
+var sDescribeMergeConflictsInput_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eDescribeMergeConflictsInput_filePath})
+var sDescribeMergeConflictsInput_conflictDetailLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictDetailLevel", ID: &iConflictDetailLevelTypeEnum, Members: &mConflictDetailLevelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eDescribeMergeConflictsInput_conflictDetailLevel})
+var sDescribeMergeConflictsInput_conflictResolutionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolutionStrategy", ID: &iConflictResolutionStrategyTypeEnum, Members: &mConflictResolutionStrategyTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eDescribeMergeConflictsInput_conflictResolutionStrategy})
+var sDescribeMergeConflictsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeMergeConflictsInput_nextToken})
+var sDescribeMergeConflictsOutput_conflictMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictMetadata", ID: &iConflictMetadata, Members: &mConflictMetadata, Type: smithy.ShapeTypeStructure, Ext: &eDescribeMergeConflictsOutput_conflictMetadata})
+var sDescribeMergeConflictsOutput_mergeHunks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeHunks", ID: &i_MergeHunks, Members: &m_MergeHunks, Type: smithy.ShapeTypeList, Ext: &eDescribeMergeConflictsOutput_mergeHunks})
+var sDescribeMergeConflictsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribeMergeConflictsOutput_nextToken})
+var sDescribeMergeConflictsOutput_destinationCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eDescribeMergeConflictsOutput_destinationCommitId})
+var sDescribeMergeConflictsOutput_sourceCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eDescribeMergeConflictsOutput_sourceCommitId})
+var sDescribeMergeConflictsOutput_baseCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eDescribeMergeConflictsOutput_baseCommitId})
+var sDescribePullRequestEventsInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &eDescribePullRequestEventsInput_pullRequestId})
+var sDescribePullRequestEventsInput_pullRequestEventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestEventType", ID: &iPullRequestEventType, Members: &mPullRequestEventType, Type: smithy.ShapeTypeEnum, Ext: &eDescribePullRequestEventsInput_pullRequestEventType})
+var sDescribePullRequestEventsInput_actorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDescribePullRequestEventsInput_actorArn})
+var sDescribePullRequestEventsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribePullRequestEventsInput_nextToken})
+var sDescribePullRequestEventsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eDescribePullRequestEventsInput_maxResults})
+var sDescribePullRequestEventsOutput_pullRequestEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestEvents", ID: &i_PullRequestEventList, Members: &m_PullRequestEventList, Type: smithy.ShapeTypeList, Ext: &eDescribePullRequestEventsOutput_pullRequestEvents})
+var sDescribePullRequestEventsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eDescribePullRequestEventsOutput_nextToken})
+var sDisassociateApprovalRuleTemplateFromRepositoryInput_approvalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &eDisassociateApprovalRuleTemplateFromRepositoryInput_approvalRuleTemplateName})
+var sDisassociateApprovalRuleTemplateFromRepositoryInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eDisassociateApprovalRuleTemplateFromRepositoryInput_repositoryName})
+var sEvaluatePullRequestApprovalRulesInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &eEvaluatePullRequestApprovalRulesInput_pullRequestId})
+var sEvaluatePullRequestApprovalRulesInput_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_RevisionId, Type: smithy.ShapeTypeString, Ext: &eEvaluatePullRequestApprovalRulesInput_revisionId})
+var sEvaluatePullRequestApprovalRulesOutput_evaluation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evaluation", ID: &iEvaluation, Members: &mEvaluation, Type: smithy.ShapeTypeStructure, Ext: &eEvaluatePullRequestApprovalRulesOutput_evaluation})
+var sGetApprovalRuleTemplateInput_approvalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &eGetApprovalRuleTemplateInput_approvalRuleTemplateName})
+var sGetApprovalRuleTemplateOutput_approvalRuleTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplate", ID: &iApprovalRuleTemplate, Members: &mApprovalRuleTemplate, Type: smithy.ShapeTypeStructure, Ext: &eGetApprovalRuleTemplateOutput_approvalRuleTemplate})
+var sGetBlobDifferencesInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eGetBlobDifferencesInput_repositoryName})
+var sGetBlobDifferencesInput_afterBlobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterBlobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eGetBlobDifferencesInput_afterBlobId})
+var sGetBlobDifferencesInput_beforeBlobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeBlobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eGetBlobDifferencesInput_beforeBlobId})
+var sGetBlobDifferencesInput_contextLines = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contextLines", ID: &i_DiffContext, Type: smithy.ShapeTypeInteger, Ext: &eGetBlobDifferencesInput_contextLines})
+var sGetBlobDifferencesInput_ignoreWhitespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ignoreWhitespace", ID: &i_IgnoreWhiteSpaces, Type: smithy.ShapeTypeBoolean, Ext: &eGetBlobDifferencesInput_ignoreWhitespace})
+var sGetBlobDifferencesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_Limit, Type: smithy.ShapeTypeInteger, Ext: &eGetBlobDifferencesInput_MaxResults})
+var sGetBlobDifferencesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetBlobDifferencesInput_NextToken})
+var sGetBlobDifferencesOutput_hunks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hunks", ID: &i_DiffHunkList, Members: &m_DiffHunkList, Type: smithy.ShapeTypeList, Ext: &eGetBlobDifferencesOutput_hunks})
+var sGetBlobDifferencesOutput_isBinary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isBinary", ID: &i_CapitalBoolean, Type: smithy.ShapeTypeBoolean, Ext: &eGetBlobDifferencesOutput_isBinary})
+var sGetBlobDifferencesOutput_beforeBlobSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeBlobSize", ID: &i_ObjectSize, Type: smithy.ShapeTypeLong, Ext: &eGetBlobDifferencesOutput_beforeBlobSize})
+var sGetBlobDifferencesOutput_afterBlobSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterBlobSize", ID: &i_ObjectSize, Type: smithy.ShapeTypeLong, Ext: &eGetBlobDifferencesOutput_afterBlobSize})
+var sGetBlobDifferencesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetBlobDifferencesOutput_NextToken})
+var sGetBlobInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eGetBlobInput_repositoryName})
+var sGetBlobInput_blobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eGetBlobInput_blobId})
+var sGetBlobOutput_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_blob, Type: smithy.ShapeTypeBlob, Ext: &eGetBlobOutput_content})
+var sGetBranchInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eGetBranchInput_repositoryName})
+var sGetBranchInput_branchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchName", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &eGetBranchInput_branchName})
+var sGetBranchOutput_branch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branch", ID: &iBranchInfo, Members: &mBranchInfo, Type: smithy.ShapeTypeStructure, Ext: &eGetBranchOutput_branch})
+var sGetCommentInput_commentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commentId", ID: &i_CommentId, Type: smithy.ShapeTypeString, Ext: &eGetCommentInput_commentId})
+var sGetCommentOutput_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &iComment, Members: &mComment, Type: smithy.ShapeTypeStructure, Ext: &eGetCommentOutput_comment})
+var sGetCommentReactionsInput_commentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commentId", ID: &i_CommentId, Type: smithy.ShapeTypeString, Ext: &eGetCommentReactionsInput_commentId})
+var sGetCommentReactionsInput_reactionUserArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reactionUserArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetCommentReactionsInput_reactionUserArn})
+var sGetCommentReactionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetCommentReactionsInput_nextToken})
+var sGetCommentReactionsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetCommentReactionsInput_maxResults})
+var sGetCommentReactionsOutput_reactionsForComment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reactionsForComment", ID: &i_ReactionsForCommentList, Members: &m_ReactionsForCommentList, Type: smithy.ShapeTypeList, Ext: &eGetCommentReactionsOutput_reactionsForComment})
+var sGetCommentReactionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetCommentReactionsOutput_nextToken})
+var sGetCommentsForComparedCommitInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eGetCommentsForComparedCommitInput_repositoryName})
+var sGetCommentsForComparedCommitInput_beforeCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &eGetCommentsForComparedCommitInput_beforeCommitId})
+var sGetCommentsForComparedCommitInput_afterCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &eGetCommentsForComparedCommitInput_afterCommitId})
+var sGetCommentsForComparedCommitInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetCommentsForComparedCommitInput_nextToken})
+var sGetCommentsForComparedCommitInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetCommentsForComparedCommitInput_maxResults})
+var sGetCommentsForComparedCommitOutput_commentsForComparedCommitData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commentsForComparedCommitData", ID: &i_CommentsForComparedCommitData, Members: &m_CommentsForComparedCommitData, Type: smithy.ShapeTypeList, Ext: &eGetCommentsForComparedCommitOutput_commentsForComparedCommitData})
+var sGetCommentsForComparedCommitOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetCommentsForComparedCommitOutput_nextToken})
+var sGetCommentsForPullRequestInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &eGetCommentsForPullRequestInput_pullRequestId})
+var sGetCommentsForPullRequestInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eGetCommentsForPullRequestInput_repositoryName})
+var sGetCommentsForPullRequestInput_beforeCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &eGetCommentsForPullRequestInput_beforeCommitId})
+var sGetCommentsForPullRequestInput_afterCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &eGetCommentsForPullRequestInput_afterCommitId})
+var sGetCommentsForPullRequestInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetCommentsForPullRequestInput_nextToken})
+var sGetCommentsForPullRequestInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetCommentsForPullRequestInput_maxResults})
+var sGetCommentsForPullRequestOutput_commentsForPullRequestData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commentsForPullRequestData", ID: &i_CommentsForPullRequestData, Members: &m_CommentsForPullRequestData, Type: smithy.ShapeTypeList, Ext: &eGetCommentsForPullRequestOutput_commentsForPullRequestData})
+var sGetCommentsForPullRequestOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetCommentsForPullRequestOutput_nextToken})
+var sGetCommitInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eGetCommitInput_repositoryName})
+var sGetCommitInput_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eGetCommitInput_commitId})
+var sGetCommitOutput_commit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commit", ID: &iCommit, Members: &mCommit, Type: smithy.ShapeTypeStructure, Ext: &eGetCommitOutput_commit})
+var sGetDifferencesInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eGetDifferencesInput_repositoryName})
+var sGetDifferencesInput_beforeCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &eGetDifferencesInput_beforeCommitSpecifier})
+var sGetDifferencesInput_afterCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &eGetDifferencesInput_afterCommitSpecifier})
+var sGetDifferencesInput_beforePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eGetDifferencesInput_beforePath})
+var sGetDifferencesInput_afterPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterPath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eGetDifferencesInput_afterPath})
+var sGetDifferencesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_Limit, Type: smithy.ShapeTypeInteger, Ext: &eGetDifferencesInput_MaxResults})
+var sGetDifferencesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetDifferencesInput_NextToken})
+var sGetDifferencesOutput_differences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "differences", ID: &i_DifferenceList, Members: &m_DifferenceList, Type: smithy.ShapeTypeList, Ext: &eGetDifferencesOutput_differences})
+var sGetDifferencesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetDifferencesOutput_NextToken})
+var sGetFileInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eGetFileInput_repositoryName})
+var sGetFileInput_commitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &eGetFileInput_commitSpecifier})
+var sGetFileInput_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eGetFileInput_filePath})
+var sGetFileOutput_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eGetFileOutput_commitId})
+var sGetFileOutput_blobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eGetFileOutput_blobId})
+var sGetFileOutput_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eGetFileOutput_filePath})
+var sGetFileOutput_fileMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileMode", ID: &iFileModeTypeEnum, Members: &mFileModeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eGetFileOutput_fileMode})
+var sGetFileOutput_fileSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSize", ID: &i_ObjectSize, Type: smithy.ShapeTypeLong, Ext: &eGetFileOutput_fileSize})
+var sGetFileOutput_fileContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileContent", ID: &i_FileContent, Type: smithy.ShapeTypeBlob, Ext: &eGetFileOutput_fileContent})
+var sGetFolderInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eGetFolderInput_repositoryName})
+var sGetFolderInput_commitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &eGetFolderInput_commitSpecifier})
+var sGetFolderInput_folderPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "folderPath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eGetFolderInput_folderPath})
+var sGetFolderOutput_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eGetFolderOutput_commitId})
+var sGetFolderOutput_folderPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "folderPath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eGetFolderOutput_folderPath})
+var sGetFolderOutput_treeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "treeId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eGetFolderOutput_treeId})
+var sGetFolderOutput_subFolders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subFolders", ID: &i_FolderList, Members: &m_FolderList, Type: smithy.ShapeTypeList, Ext: &eGetFolderOutput_subFolders})
+var sGetFolderOutput_files = smithy.NewStaticSchema(smithy.StaticSchema{Member: "files", ID: &i_FileList, Members: &m_FileList, Type: smithy.ShapeTypeList, Ext: &eGetFolderOutput_files})
+var sGetFolderOutput_symbolicLinks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "symbolicLinks", ID: &i_SymbolicLinkList, Members: &m_SymbolicLinkList, Type: smithy.ShapeTypeList, Ext: &eGetFolderOutput_symbolicLinks})
+var sGetFolderOutput_subModules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subModules", ID: &i_SubModuleList, Members: &m_SubModuleList, Type: smithy.ShapeTypeList, Ext: &eGetFolderOutput_subModules})
+var sGetMergeCommitInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eGetMergeCommitInput_repositoryName})
+var sGetMergeCommitInput_sourceCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &eGetMergeCommitInput_sourceCommitSpecifier})
+var sGetMergeCommitInput_destinationCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &eGetMergeCommitInput_destinationCommitSpecifier})
+var sGetMergeCommitInput_conflictDetailLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictDetailLevel", ID: &iConflictDetailLevelTypeEnum, Members: &mConflictDetailLevelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eGetMergeCommitInput_conflictDetailLevel})
+var sGetMergeCommitInput_conflictResolutionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolutionStrategy", ID: &iConflictResolutionStrategyTypeEnum, Members: &mConflictResolutionStrategyTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eGetMergeCommitInput_conflictResolutionStrategy})
+var sGetMergeCommitOutput_sourceCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eGetMergeCommitOutput_sourceCommitId})
+var sGetMergeCommitOutput_destinationCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eGetMergeCommitOutput_destinationCommitId})
+var sGetMergeCommitOutput_baseCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eGetMergeCommitOutput_baseCommitId})
+var sGetMergeCommitOutput_mergedCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergedCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eGetMergeCommitOutput_mergedCommitId})
+var sGetMergeConflictsInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eGetMergeConflictsInput_repositoryName})
+var sGetMergeConflictsInput_destinationCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &eGetMergeConflictsInput_destinationCommitSpecifier})
+var sGetMergeConflictsInput_sourceCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &eGetMergeConflictsInput_sourceCommitSpecifier})
+var sGetMergeConflictsInput_mergeOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeOption", ID: &iMergeOptionTypeEnum, Members: &mMergeOptionTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eGetMergeConflictsInput_mergeOption})
+var sGetMergeConflictsInput_conflictDetailLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictDetailLevel", ID: &iConflictDetailLevelTypeEnum, Members: &mConflictDetailLevelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eGetMergeConflictsInput_conflictDetailLevel})
+var sGetMergeConflictsInput_maxConflictFiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxConflictFiles", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eGetMergeConflictsInput_maxConflictFiles})
+var sGetMergeConflictsInput_conflictResolutionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolutionStrategy", ID: &iConflictResolutionStrategyTypeEnum, Members: &mConflictResolutionStrategyTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eGetMergeConflictsInput_conflictResolutionStrategy})
+var sGetMergeConflictsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetMergeConflictsInput_nextToken})
+var sGetMergeConflictsOutput_mergeable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeable", ID: &i_IsMergeable, Type: smithy.ShapeTypeBoolean, Ext: &eGetMergeConflictsOutput_mergeable})
+var sGetMergeConflictsOutput_destinationCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eGetMergeConflictsOutput_destinationCommitId})
+var sGetMergeConflictsOutput_sourceCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eGetMergeConflictsOutput_sourceCommitId})
+var sGetMergeConflictsOutput_baseCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eGetMergeConflictsOutput_baseCommitId})
+var sGetMergeConflictsOutput_conflictMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictMetadataList", ID: &i_ConflictMetadataList, Members: &m_ConflictMetadataList, Type: smithy.ShapeTypeList, Ext: &eGetMergeConflictsOutput_conflictMetadataList})
+var sGetMergeConflictsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetMergeConflictsOutput_nextToken})
+var sGetMergeOptionsInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eGetMergeOptionsInput_repositoryName})
+var sGetMergeOptionsInput_sourceCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &eGetMergeOptionsInput_sourceCommitSpecifier})
+var sGetMergeOptionsInput_destinationCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &eGetMergeOptionsInput_destinationCommitSpecifier})
+var sGetMergeOptionsInput_conflictDetailLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictDetailLevel", ID: &iConflictDetailLevelTypeEnum, Members: &mConflictDetailLevelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eGetMergeOptionsInput_conflictDetailLevel})
+var sGetMergeOptionsInput_conflictResolutionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolutionStrategy", ID: &iConflictResolutionStrategyTypeEnum, Members: &mConflictResolutionStrategyTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eGetMergeOptionsInput_conflictResolutionStrategy})
+var sGetMergeOptionsOutput_mergeOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mergeOptions", ID: &i_MergeOptions, Members: &m_MergeOptions, Type: smithy.ShapeTypeList, Ext: &eGetMergeOptionsOutput_mergeOptions})
+var sGetMergeOptionsOutput_sourceCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eGetMergeOptionsOutput_sourceCommitId})
+var sGetMergeOptionsOutput_destinationCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eGetMergeOptionsOutput_destinationCommitId})
+var sGetMergeOptionsOutput_baseCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eGetMergeOptionsOutput_baseCommitId})
+var sGetPullRequestApprovalStatesInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &eGetPullRequestApprovalStatesInput_pullRequestId})
+var sGetPullRequestApprovalStatesInput_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_RevisionId, Type: smithy.ShapeTypeString, Ext: &eGetPullRequestApprovalStatesInput_revisionId})
+var sGetPullRequestApprovalStatesOutput_approvals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvals", ID: &i_ApprovalList, Members: &m_ApprovalList, Type: smithy.ShapeTypeList, Ext: &eGetPullRequestApprovalStatesOutput_approvals})
+var sGetPullRequestInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &eGetPullRequestInput_pullRequestId})
+var sGetPullRequestOutput_pullRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequest", ID: &iPullRequest, Members: &mPullRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetPullRequestOutput_pullRequest})
+var sGetPullRequestOverrideStateInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &eGetPullRequestOverrideStateInput_pullRequestId})
+var sGetPullRequestOverrideStateInput_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_RevisionId, Type: smithy.ShapeTypeString, Ext: &eGetPullRequestOverrideStateInput_revisionId})
+var sGetPullRequestOverrideStateOutput_overridden = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overridden", ID: &i_Overridden, Type: smithy.ShapeTypeBoolean, Ext: &eGetPullRequestOverrideStateOutput_overridden})
+var sGetPullRequestOverrideStateOutput_overrider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overrider", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetPullRequestOverrideStateOutput_overrider})
+var sGetRepositoryInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eGetRepositoryInput_repositoryName})
+var sGetRepositoryOutput_repositoryMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryMetadata", ID: &iRepositoryMetadata, Members: &mRepositoryMetadata, Type: smithy.ShapeTypeStructure, Ext: &eGetRepositoryOutput_repositoryMetadata})
+var sGetRepositoryTriggersInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eGetRepositoryTriggersInput_repositoryName})
+var sGetRepositoryTriggersOutput_configurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configurationId", ID: &i_RepositoryTriggersConfigurationId, Type: smithy.ShapeTypeString, Ext: &eGetRepositoryTriggersOutput_configurationId})
+var sGetRepositoryTriggersOutput_triggers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "triggers", ID: &i_RepositoryTriggersList, Members: &m_RepositoryTriggersList, Type: smithy.ShapeTypeList, Ext: &eGetRepositoryTriggersOutput_triggers})
+var sListApprovalRuleTemplatesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListApprovalRuleTemplatesInput_nextToken})
+var sListApprovalRuleTemplatesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListApprovalRuleTemplatesInput_maxResults})
+var sListApprovalRuleTemplatesOutput_approvalRuleTemplateNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateNames", ID: &i_ApprovalRuleTemplateNameList, Members: &m_ApprovalRuleTemplateNameList, Type: smithy.ShapeTypeList, Ext: &eListApprovalRuleTemplatesOutput_approvalRuleTemplateNames})
+var sListApprovalRuleTemplatesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListApprovalRuleTemplatesOutput_nextToken})
+var sListAssociatedApprovalRuleTemplatesForRepositoryInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eListAssociatedApprovalRuleTemplatesForRepositoryInput_repositoryName})
+var sListAssociatedApprovalRuleTemplatesForRepositoryInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListAssociatedApprovalRuleTemplatesForRepositoryInput_nextToken})
+var sListAssociatedApprovalRuleTemplatesForRepositoryInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListAssociatedApprovalRuleTemplatesForRepositoryInput_maxResults})
+var sListAssociatedApprovalRuleTemplatesForRepositoryOutput_approvalRuleTemplateNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateNames", ID: &i_ApprovalRuleTemplateNameList, Members: &m_ApprovalRuleTemplateNameList, Type: smithy.ShapeTypeList, Ext: &eListAssociatedApprovalRuleTemplatesForRepositoryOutput_approvalRuleTemplateNames})
+var sListAssociatedApprovalRuleTemplatesForRepositoryOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListAssociatedApprovalRuleTemplatesForRepositoryOutput_nextToken})
+var sListBranchesInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eListBranchesInput_repositoryName})
+var sListBranchesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListBranchesInput_nextToken})
+var sListBranchesOutput_branches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branches", ID: &i_BranchNameList, Members: &m_BranchNameList, Type: smithy.ShapeTypeList, Ext: &eListBranchesOutput_branches})
+var sListBranchesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListBranchesOutput_nextToken})
+var sListFileCommitHistoryRequest_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eListFileCommitHistoryRequest_repositoryName})
+var sListFileCommitHistoryRequest_commitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &eListFileCommitHistoryRequest_commitSpecifier})
+var sListFileCommitHistoryRequest_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &eListFileCommitHistoryRequest_filePath})
+var sListFileCommitHistoryRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_Limit, Type: smithy.ShapeTypeInteger, Ext: &eListFileCommitHistoryRequest_maxResults})
+var sListFileCommitHistoryRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListFileCommitHistoryRequest_nextToken})
+var sListFileCommitHistoryResponse_revisionDag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionDag", ID: &i_RevisionDag, Members: &m_RevisionDag, Type: smithy.ShapeTypeList, Ext: &eListFileCommitHistoryResponse_revisionDag})
+var sListFileCommitHistoryResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListFileCommitHistoryResponse_nextToken})
+var sListPullRequestsInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eListPullRequestsInput_repositoryName})
+var sListPullRequestsInput_authorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eListPullRequestsInput_authorArn})
+var sListPullRequestsInput_pullRequestStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestStatus", ID: &iPullRequestStatusEnum, Members: &mPullRequestStatusEnum, Type: smithy.ShapeTypeEnum, Ext: &eListPullRequestsInput_pullRequestStatus})
+var sListPullRequestsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPullRequestsInput_nextToken})
+var sListPullRequestsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListPullRequestsInput_maxResults})
+var sListPullRequestsOutput_pullRequestIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestIds", ID: &i_PullRequestIdList, Members: &m_PullRequestIdList, Type: smithy.ShapeTypeList, Ext: &eListPullRequestsOutput_pullRequestIds})
+var sListPullRequestsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPullRequestsOutput_nextToken})
+var sListRepositoriesForApprovalRuleTemplateInput_approvalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &eListRepositoriesForApprovalRuleTemplateInput_approvalRuleTemplateName})
+var sListRepositoriesForApprovalRuleTemplateInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRepositoriesForApprovalRuleTemplateInput_nextToken})
+var sListRepositoriesForApprovalRuleTemplateInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListRepositoriesForApprovalRuleTemplateInput_maxResults})
+var sListRepositoriesForApprovalRuleTemplateOutput_repositoryNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryNames", ID: &i_RepositoryNameList, Members: &m_RepositoryNameList, Type: smithy.ShapeTypeList, Ext: &eListRepositoriesForApprovalRuleTemplateOutput_repositoryNames})
+var sListRepositoriesForApprovalRuleTemplateOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRepositoriesForApprovalRuleTemplateOutput_nextToken})
+var sListRepositoriesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRepositoriesInput_nextToken})
+var sListRepositoriesInput_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &iSortByEnum, Members: &mSortByEnum, Type: smithy.ShapeTypeEnum, Ext: &eListRepositoriesInput_sortBy})
+var sListRepositoriesInput_order = smithy.NewStaticSchema(smithy.StaticSchema{Member: "order", ID: &iOrderEnum, Members: &mOrderEnum, Type: smithy.ShapeTypeEnum, Ext: &eListRepositoriesInput_order})
+var sListRepositoriesOutput_repositories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositories", ID: &i_RepositoryNameIdPairList, Members: &m_RepositoryNameIdPairList, Type: smithy.ShapeTypeList, Ext: &eListRepositoriesOutput_repositories})
+var sListRepositoriesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRepositoriesOutput_nextToken})
+var sListTagsForResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceInput_resourceArn})
+var sListTagsForResourceInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceInput_nextToken})
+var sListTagsForResourceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceOutput_tags})
+var sListTagsForResourceOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceOutput_nextToken})
+var sMergeBranchesByFastForwardInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eMergeBranchesByFastForwardInput_repositoryName})
+var sMergeBranchesByFastForwardInput_sourceCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &eMergeBranchesByFastForwardInput_sourceCommitSpecifier})
+var sMergeBranchesByFastForwardInput_destinationCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &eMergeBranchesByFastForwardInput_destinationCommitSpecifier})
+var sMergeBranchesByFastForwardInput_targetBranch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetBranch", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &eMergeBranchesByFastForwardInput_targetBranch})
+var sMergeBranchesByFastForwardOutput_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eMergeBranchesByFastForwardOutput_commitId})
+var sMergeBranchesByFastForwardOutput_treeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "treeId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eMergeBranchesByFastForwardOutput_treeId})
+var sMergeBranchesBySquashInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eMergeBranchesBySquashInput_repositoryName})
+var sMergeBranchesBySquashInput_sourceCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &eMergeBranchesBySquashInput_sourceCommitSpecifier})
+var sMergeBranchesBySquashInput_destinationCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &eMergeBranchesBySquashInput_destinationCommitSpecifier})
+var sMergeBranchesBySquashInput_targetBranch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetBranch", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &eMergeBranchesBySquashInput_targetBranch})
+var sMergeBranchesBySquashInput_conflictDetailLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictDetailLevel", ID: &iConflictDetailLevelTypeEnum, Members: &mConflictDetailLevelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eMergeBranchesBySquashInput_conflictDetailLevel})
+var sMergeBranchesBySquashInput_conflictResolutionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolutionStrategy", ID: &iConflictResolutionStrategyTypeEnum, Members: &mConflictResolutionStrategyTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eMergeBranchesBySquashInput_conflictResolutionStrategy})
+var sMergeBranchesBySquashInput_authorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eMergeBranchesBySquashInput_authorName})
+var sMergeBranchesBySquashInput_email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "email", ID: &i_Email, Type: smithy.ShapeTypeString, Ext: &eMergeBranchesBySquashInput_email})
+var sMergeBranchesBySquashInput_commitMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitMessage", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eMergeBranchesBySquashInput_commitMessage})
+var sMergeBranchesBySquashInput_keepEmptyFolders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keepEmptyFolders", ID: &i_KeepEmptyFolders, Type: smithy.ShapeTypeBoolean, Ext: &eMergeBranchesBySquashInput_keepEmptyFolders})
+var sMergeBranchesBySquashInput_conflictResolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolution", ID: &iConflictResolution, Members: &mConflictResolution, Type: smithy.ShapeTypeStructure, Ext: &eMergeBranchesBySquashInput_conflictResolution})
+var sMergeBranchesBySquashOutput_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eMergeBranchesBySquashOutput_commitId})
+var sMergeBranchesBySquashOutput_treeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "treeId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eMergeBranchesBySquashOutput_treeId})
+var sMergeBranchesByThreeWayInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eMergeBranchesByThreeWayInput_repositoryName})
+var sMergeBranchesByThreeWayInput_sourceCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &eMergeBranchesByThreeWayInput_sourceCommitSpecifier})
+var sMergeBranchesByThreeWayInput_destinationCommitSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationCommitSpecifier", ID: &i_CommitName, Type: smithy.ShapeTypeString, Ext: &eMergeBranchesByThreeWayInput_destinationCommitSpecifier})
+var sMergeBranchesByThreeWayInput_targetBranch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetBranch", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &eMergeBranchesByThreeWayInput_targetBranch})
+var sMergeBranchesByThreeWayInput_conflictDetailLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictDetailLevel", ID: &iConflictDetailLevelTypeEnum, Members: &mConflictDetailLevelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eMergeBranchesByThreeWayInput_conflictDetailLevel})
+var sMergeBranchesByThreeWayInput_conflictResolutionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolutionStrategy", ID: &iConflictResolutionStrategyTypeEnum, Members: &mConflictResolutionStrategyTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eMergeBranchesByThreeWayInput_conflictResolutionStrategy})
+var sMergeBranchesByThreeWayInput_authorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eMergeBranchesByThreeWayInput_authorName})
+var sMergeBranchesByThreeWayInput_email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "email", ID: &i_Email, Type: smithy.ShapeTypeString, Ext: &eMergeBranchesByThreeWayInput_email})
+var sMergeBranchesByThreeWayInput_commitMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitMessage", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eMergeBranchesByThreeWayInput_commitMessage})
+var sMergeBranchesByThreeWayInput_keepEmptyFolders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keepEmptyFolders", ID: &i_KeepEmptyFolders, Type: smithy.ShapeTypeBoolean, Ext: &eMergeBranchesByThreeWayInput_keepEmptyFolders})
+var sMergeBranchesByThreeWayInput_conflictResolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolution", ID: &iConflictResolution, Members: &mConflictResolution, Type: smithy.ShapeTypeStructure, Ext: &eMergeBranchesByThreeWayInput_conflictResolution})
+var sMergeBranchesByThreeWayOutput_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eMergeBranchesByThreeWayOutput_commitId})
+var sMergeBranchesByThreeWayOutput_treeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "treeId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eMergeBranchesByThreeWayOutput_treeId})
+var sMergePullRequestByFastForwardInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &eMergePullRequestByFastForwardInput_pullRequestId})
+var sMergePullRequestByFastForwardInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eMergePullRequestByFastForwardInput_repositoryName})
+var sMergePullRequestByFastForwardInput_sourceCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eMergePullRequestByFastForwardInput_sourceCommitId})
+var sMergePullRequestByFastForwardOutput_pullRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequest", ID: &iPullRequest, Members: &mPullRequest, Type: smithy.ShapeTypeStructure, Ext: &eMergePullRequestByFastForwardOutput_pullRequest})
+var sMergePullRequestBySquashInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &eMergePullRequestBySquashInput_pullRequestId})
+var sMergePullRequestBySquashInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eMergePullRequestBySquashInput_repositoryName})
+var sMergePullRequestBySquashInput_sourceCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eMergePullRequestBySquashInput_sourceCommitId})
+var sMergePullRequestBySquashInput_conflictDetailLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictDetailLevel", ID: &iConflictDetailLevelTypeEnum, Members: &mConflictDetailLevelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eMergePullRequestBySquashInput_conflictDetailLevel})
+var sMergePullRequestBySquashInput_conflictResolutionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolutionStrategy", ID: &iConflictResolutionStrategyTypeEnum, Members: &mConflictResolutionStrategyTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eMergePullRequestBySquashInput_conflictResolutionStrategy})
+var sMergePullRequestBySquashInput_commitMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitMessage", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eMergePullRequestBySquashInput_commitMessage})
+var sMergePullRequestBySquashInput_authorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eMergePullRequestBySquashInput_authorName})
+var sMergePullRequestBySquashInput_email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "email", ID: &i_Email, Type: smithy.ShapeTypeString, Ext: &eMergePullRequestBySquashInput_email})
+var sMergePullRequestBySquashInput_keepEmptyFolders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keepEmptyFolders", ID: &i_KeepEmptyFolders, Type: smithy.ShapeTypeBoolean, Ext: &eMergePullRequestBySquashInput_keepEmptyFolders})
+var sMergePullRequestBySquashInput_conflictResolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolution", ID: &iConflictResolution, Members: &mConflictResolution, Type: smithy.ShapeTypeStructure, Ext: &eMergePullRequestBySquashInput_conflictResolution})
+var sMergePullRequestBySquashOutput_pullRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequest", ID: &iPullRequest, Members: &mPullRequest, Type: smithy.ShapeTypeStructure, Ext: &eMergePullRequestBySquashOutput_pullRequest})
+var sMergePullRequestByThreeWayInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &eMergePullRequestByThreeWayInput_pullRequestId})
+var sMergePullRequestByThreeWayInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eMergePullRequestByThreeWayInput_repositoryName})
+var sMergePullRequestByThreeWayInput_sourceCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCommitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &eMergePullRequestByThreeWayInput_sourceCommitId})
+var sMergePullRequestByThreeWayInput_conflictDetailLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictDetailLevel", ID: &iConflictDetailLevelTypeEnum, Members: &mConflictDetailLevelTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eMergePullRequestByThreeWayInput_conflictDetailLevel})
+var sMergePullRequestByThreeWayInput_conflictResolutionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolutionStrategy", ID: &iConflictResolutionStrategyTypeEnum, Members: &mConflictResolutionStrategyTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &eMergePullRequestByThreeWayInput_conflictResolutionStrategy})
+var sMergePullRequestByThreeWayInput_commitMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitMessage", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eMergePullRequestByThreeWayInput_commitMessage})
+var sMergePullRequestByThreeWayInput_authorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorName", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &eMergePullRequestByThreeWayInput_authorName})
+var sMergePullRequestByThreeWayInput_email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "email", ID: &i_Email, Type: smithy.ShapeTypeString, Ext: &eMergePullRequestByThreeWayInput_email})
+var sMergePullRequestByThreeWayInput_keepEmptyFolders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keepEmptyFolders", ID: &i_KeepEmptyFolders, Type: smithy.ShapeTypeBoolean, Ext: &eMergePullRequestByThreeWayInput_keepEmptyFolders})
+var sMergePullRequestByThreeWayInput_conflictResolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conflictResolution", ID: &iConflictResolution, Members: &mConflictResolution, Type: smithy.ShapeTypeStructure, Ext: &eMergePullRequestByThreeWayInput_conflictResolution})
+var sMergePullRequestByThreeWayOutput_pullRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequest", ID: &iPullRequest, Members: &mPullRequest, Type: smithy.ShapeTypeStructure, Ext: &eMergePullRequestByThreeWayOutput_pullRequest})
+var sOverridePullRequestApprovalRulesInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &eOverridePullRequestApprovalRulesInput_pullRequestId})
+var sOverridePullRequestApprovalRulesInput_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_RevisionId, Type: smithy.ShapeTypeString, Ext: &eOverridePullRequestApprovalRulesInput_revisionId})
+var sOverridePullRequestApprovalRulesInput_overrideStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overrideStatus", ID: &iOverrideStatus, Members: &mOverrideStatus, Type: smithy.ShapeTypeEnum, Ext: &eOverridePullRequestApprovalRulesInput_overrideStatus})
+var sPostCommentForComparedCommitInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ePostCommentForComparedCommitInput_repositoryName})
+var sPostCommentForComparedCommitInput_beforeCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ePostCommentForComparedCommitInput_beforeCommitId})
+var sPostCommentForComparedCommitInput_afterCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ePostCommentForComparedCommitInput_afterCommitId})
+var sPostCommentForComparedCommitInput_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &iLocation, Members: &mLocation, Type: smithy.ShapeTypeStructure, Ext: &ePostCommentForComparedCommitInput_location})
+var sPostCommentForComparedCommitInput_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_Content, Type: smithy.ShapeTypeString, Ext: &ePostCommentForComparedCommitInput_content})
+var sPostCommentForComparedCommitInput_clientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString, Ext: &ePostCommentForComparedCommitInput_clientRequestToken})
+var sPostCommentForComparedCommitOutput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ePostCommentForComparedCommitOutput_repositoryName})
+var sPostCommentForComparedCommitOutput_beforeCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ePostCommentForComparedCommitOutput_beforeCommitId})
+var sPostCommentForComparedCommitOutput_afterCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ePostCommentForComparedCommitOutput_afterCommitId})
+var sPostCommentForComparedCommitOutput_beforeBlobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeBlobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ePostCommentForComparedCommitOutput_beforeBlobId})
+var sPostCommentForComparedCommitOutput_afterBlobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterBlobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ePostCommentForComparedCommitOutput_afterBlobId})
+var sPostCommentForComparedCommitOutput_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &iLocation, Members: &mLocation, Type: smithy.ShapeTypeStructure, Ext: &ePostCommentForComparedCommitOutput_location})
+var sPostCommentForComparedCommitOutput_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &iComment, Members: &mComment, Type: smithy.ShapeTypeStructure, Ext: &ePostCommentForComparedCommitOutput_comment})
+var sPostCommentForPullRequestInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ePostCommentForPullRequestInput_pullRequestId})
+var sPostCommentForPullRequestInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ePostCommentForPullRequestInput_repositoryName})
+var sPostCommentForPullRequestInput_beforeCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ePostCommentForPullRequestInput_beforeCommitId})
+var sPostCommentForPullRequestInput_afterCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ePostCommentForPullRequestInput_afterCommitId})
+var sPostCommentForPullRequestInput_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &iLocation, Members: &mLocation, Type: smithy.ShapeTypeStructure, Ext: &ePostCommentForPullRequestInput_location})
+var sPostCommentForPullRequestInput_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_Content, Type: smithy.ShapeTypeString, Ext: &ePostCommentForPullRequestInput_content})
+var sPostCommentForPullRequestInput_clientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString, Ext: &ePostCommentForPullRequestInput_clientRequestToken})
+var sPostCommentForPullRequestOutput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ePostCommentForPullRequestOutput_repositoryName})
+var sPostCommentForPullRequestOutput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &ePostCommentForPullRequestOutput_pullRequestId})
+var sPostCommentForPullRequestOutput_beforeCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ePostCommentForPullRequestOutput_beforeCommitId})
+var sPostCommentForPullRequestOutput_afterCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ePostCommentForPullRequestOutput_afterCommitId})
+var sPostCommentForPullRequestOutput_beforeBlobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeBlobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ePostCommentForPullRequestOutput_beforeBlobId})
+var sPostCommentForPullRequestOutput_afterBlobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterBlobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ePostCommentForPullRequestOutput_afterBlobId})
+var sPostCommentForPullRequestOutput_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &iLocation, Members: &mLocation, Type: smithy.ShapeTypeStructure, Ext: &ePostCommentForPullRequestOutput_location})
+var sPostCommentForPullRequestOutput_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &iComment, Members: &mComment, Type: smithy.ShapeTypeStructure, Ext: &ePostCommentForPullRequestOutput_comment})
+var sPostCommentReplyInput_inReplyTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inReplyTo", ID: &i_CommentId, Type: smithy.ShapeTypeString, Ext: &ePostCommentReplyInput_inReplyTo})
+var sPostCommentReplyInput_clientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString, Ext: &ePostCommentReplyInput_clientRequestToken})
+var sPostCommentReplyInput_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_Content, Type: smithy.ShapeTypeString, Ext: &ePostCommentReplyInput_content})
+var sPostCommentReplyOutput_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &iComment, Members: &mComment, Type: smithy.ShapeTypeStructure, Ext: &ePostCommentReplyOutput_comment})
+var sPutCommentReactionInput_commentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commentId", ID: &i_CommentId, Type: smithy.ShapeTypeString, Ext: &ePutCommentReactionInput_commentId})
+var sPutCommentReactionInput_reactionValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reactionValue", ID: &i_ReactionValue, Type: smithy.ShapeTypeString, Ext: &ePutCommentReactionInput_reactionValue})
+var sPutFileInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ePutFileInput_repositoryName})
+var sPutFileInput_branchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchName", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &ePutFileInput_branchName})
+var sPutFileInput_fileContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileContent", ID: &i_FileContent, Type: smithy.ShapeTypeBlob, Ext: &ePutFileInput_fileContent})
+var sPutFileInput_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_Path, Type: smithy.ShapeTypeString, Ext: &ePutFileInput_filePath})
+var sPutFileInput_fileMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileMode", ID: &iFileModeTypeEnum, Members: &mFileModeTypeEnum, Type: smithy.ShapeTypeEnum, Ext: &ePutFileInput_fileMode})
+var sPutFileInput_parentCommitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentCommitId", ID: &i_CommitId, Type: smithy.ShapeTypeString, Ext: &ePutFileInput_parentCommitId})
+var sPutFileInput_commitMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitMessage", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ePutFileInput_commitMessage})
+var sPutFileInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString, Ext: &ePutFileInput_name})
+var sPutFileInput_email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "email", ID: &i_Email, Type: smithy.ShapeTypeString, Ext: &ePutFileInput_email})
+var sPutFileOutput_commitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ePutFileOutput_commitId})
+var sPutFileOutput_blobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ePutFileOutput_blobId})
+var sPutFileOutput_treeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "treeId", ID: &i_ObjectId, Type: smithy.ShapeTypeString, Ext: &ePutFileOutput_treeId})
+var sPutRepositoryTriggersInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &ePutRepositoryTriggersInput_repositoryName})
+var sPutRepositoryTriggersInput_triggers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "triggers", ID: &i_RepositoryTriggersList, Members: &m_RepositoryTriggersList, Type: smithy.ShapeTypeList, Ext: &ePutRepositoryTriggersInput_triggers})
+var sPutRepositoryTriggersOutput_configurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configurationId", ID: &i_RepositoryTriggersConfigurationId, Type: smithy.ShapeTypeString, Ext: &ePutRepositoryTriggersOutput_configurationId})
+var sTagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eTagResourceInput_resourceArn})
+var sTagResourceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceInput_tags})
+var sTestRepositoryTriggersInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eTestRepositoryTriggersInput_repositoryName})
+var sTestRepositoryTriggersInput_triggers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "triggers", ID: &i_RepositoryTriggersList, Members: &m_RepositoryTriggersList, Type: smithy.ShapeTypeList, Ext: &eTestRepositoryTriggersInput_triggers})
+var sTestRepositoryTriggersOutput_successfulExecutions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successfulExecutions", ID: &i_RepositoryTriggerNameList, Members: &m_RepositoryTriggerNameList, Type: smithy.ShapeTypeList, Ext: &eTestRepositoryTriggersOutput_successfulExecutions})
+var sTestRepositoryTriggersOutput_failedExecutions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failedExecutions", ID: &i_RepositoryTriggerExecutionFailureList, Members: &m_RepositoryTriggerExecutionFailureList, Type: smithy.ShapeTypeList, Ext: &eTestRepositoryTriggersOutput_failedExecutions})
+var sUntagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUntagResourceInput_resourceArn})
+var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeysList, Members: &m_TagKeysList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceInput_tagKeys})
+var sUpdateApprovalRuleTemplateContentInput_approvalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &eUpdateApprovalRuleTemplateContentInput_approvalRuleTemplateName})
+var sUpdateApprovalRuleTemplateContentInput_newRuleContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newRuleContent", ID: &i_ApprovalRuleTemplateContent, Type: smithy.ShapeTypeString, Ext: &eUpdateApprovalRuleTemplateContentInput_newRuleContent})
+var sUpdateApprovalRuleTemplateContentInput_existingRuleContentSha256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "existingRuleContentSha256", ID: &i_RuleContentSha256, Type: smithy.ShapeTypeString, Ext: &eUpdateApprovalRuleTemplateContentInput_existingRuleContentSha256})
+var sUpdateApprovalRuleTemplateContentOutput_approvalRuleTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplate", ID: &iApprovalRuleTemplate, Members: &mApprovalRuleTemplate, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApprovalRuleTemplateContentOutput_approvalRuleTemplate})
+var sUpdateApprovalRuleTemplateDescriptionInput_approvalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &eUpdateApprovalRuleTemplateDescriptionInput_approvalRuleTemplateName})
+var sUpdateApprovalRuleTemplateDescriptionInput_approvalRuleTemplateDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplateDescription", ID: &i_ApprovalRuleTemplateDescription, Type: smithy.ShapeTypeString, Ext: &eUpdateApprovalRuleTemplateDescriptionInput_approvalRuleTemplateDescription})
+var sUpdateApprovalRuleTemplateDescriptionOutput_approvalRuleTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplate", ID: &iApprovalRuleTemplate, Members: &mApprovalRuleTemplate, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApprovalRuleTemplateDescriptionOutput_approvalRuleTemplate})
+var sUpdateApprovalRuleTemplateNameInput_oldApprovalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oldApprovalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &eUpdateApprovalRuleTemplateNameInput_oldApprovalRuleTemplateName})
+var sUpdateApprovalRuleTemplateNameInput_newApprovalRuleTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newApprovalRuleTemplateName", ID: &i_ApprovalRuleTemplateName, Type: smithy.ShapeTypeString, Ext: &eUpdateApprovalRuleTemplateNameInput_newApprovalRuleTemplateName})
+var sUpdateApprovalRuleTemplateNameOutput_approvalRuleTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleTemplate", ID: &iApprovalRuleTemplate, Members: &mApprovalRuleTemplate, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApprovalRuleTemplateNameOutput_approvalRuleTemplate})
+var sUpdateCommentInput_commentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commentId", ID: &i_CommentId, Type: smithy.ShapeTypeString, Ext: &eUpdateCommentInput_commentId})
+var sUpdateCommentInput_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_Content, Type: smithy.ShapeTypeString, Ext: &eUpdateCommentInput_content})
+var sUpdateCommentOutput_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &iComment, Members: &mComment, Type: smithy.ShapeTypeStructure, Ext: &eUpdateCommentOutput_comment})
+var sUpdateDefaultBranchInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eUpdateDefaultBranchInput_repositoryName})
+var sUpdateDefaultBranchInput_defaultBranchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultBranchName", ID: &i_BranchName, Type: smithy.ShapeTypeString, Ext: &eUpdateDefaultBranchInput_defaultBranchName})
+var sUpdatePullRequestApprovalRuleContentInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &eUpdatePullRequestApprovalRuleContentInput_pullRequestId})
+var sUpdatePullRequestApprovalRuleContentInput_approvalRuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRuleName", ID: &i_ApprovalRuleName, Type: smithy.ShapeTypeString, Ext: &eUpdatePullRequestApprovalRuleContentInput_approvalRuleName})
+var sUpdatePullRequestApprovalRuleContentInput_existingRuleContentSha256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "existingRuleContentSha256", ID: &i_RuleContentSha256, Type: smithy.ShapeTypeString, Ext: &eUpdatePullRequestApprovalRuleContentInput_existingRuleContentSha256})
+var sUpdatePullRequestApprovalRuleContentInput_newRuleContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newRuleContent", ID: &i_ApprovalRuleContent, Type: smithy.ShapeTypeString, Ext: &eUpdatePullRequestApprovalRuleContentInput_newRuleContent})
+var sUpdatePullRequestApprovalRuleContentOutput_approvalRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalRule", ID: &iApprovalRule, Members: &mApprovalRule, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePullRequestApprovalRuleContentOutput_approvalRule})
+var sUpdatePullRequestApprovalStateInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &eUpdatePullRequestApprovalStateInput_pullRequestId})
+var sUpdatePullRequestApprovalStateInput_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_RevisionId, Type: smithy.ShapeTypeString, Ext: &eUpdatePullRequestApprovalStateInput_revisionId})
+var sUpdatePullRequestApprovalStateInput_approvalState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalState", ID: &iApprovalState, Members: &mApprovalState, Type: smithy.ShapeTypeEnum, Ext: &eUpdatePullRequestApprovalStateInput_approvalState})
+var sUpdatePullRequestDescriptionInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &eUpdatePullRequestDescriptionInput_pullRequestId})
+var sUpdatePullRequestDescriptionInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdatePullRequestDescriptionInput_description})
+var sUpdatePullRequestDescriptionOutput_pullRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequest", ID: &iPullRequest, Members: &mPullRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePullRequestDescriptionOutput_pullRequest})
+var sUpdatePullRequestStatusInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &eUpdatePullRequestStatusInput_pullRequestId})
+var sUpdatePullRequestStatusInput_pullRequestStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestStatus", ID: &iPullRequestStatusEnum, Members: &mPullRequestStatusEnum, Type: smithy.ShapeTypeEnum, Ext: &eUpdatePullRequestStatusInput_pullRequestStatus})
+var sUpdatePullRequestStatusOutput_pullRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequest", ID: &iPullRequest, Members: &mPullRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePullRequestStatusOutput_pullRequest})
+var sUpdatePullRequestTitleInput_pullRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestId", ID: &i_PullRequestId, Type: smithy.ShapeTypeString, Ext: &eUpdatePullRequestTitleInput_pullRequestId})
+var sUpdatePullRequestTitleInput_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_Title, Type: smithy.ShapeTypeString, Ext: &eUpdatePullRequestTitleInput_title})
+var sUpdatePullRequestTitleOutput_pullRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequest", ID: &iPullRequest, Members: &mPullRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePullRequestTitleOutput_pullRequest})
+var sUpdateRepositoryDescriptionInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eUpdateRepositoryDescriptionInput_repositoryName})
+var sUpdateRepositoryDescriptionInput_repositoryDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryDescription", ID: &i_RepositoryDescription, Type: smithy.ShapeTypeString, Ext: &eUpdateRepositoryDescriptionInput_repositoryDescription})
+var sUpdateRepositoryEncryptionKeyInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eUpdateRepositoryEncryptionKeyInput_repositoryName})
+var sUpdateRepositoryEncryptionKeyInput_kmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &eUpdateRepositoryEncryptionKeyInput_kmsKeyId})
+var sUpdateRepositoryEncryptionKeyOutput_repositoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryId", ID: &i_RepositoryId, Type: smithy.ShapeTypeString, Ext: &eUpdateRepositoryEncryptionKeyOutput_repositoryId})
+var sUpdateRepositoryEncryptionKeyOutput_kmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &eUpdateRepositoryEncryptionKeyOutput_kmsKeyId})
+var sUpdateRepositoryEncryptionKeyOutput_originalKmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originalKmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString, Ext: &eUpdateRepositoryEncryptionKeyOutput_originalKmsKeyId})
+var sUpdateRepositoryNameInput_oldName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oldName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eUpdateRepositoryNameInput_oldName})
+var sUpdateRepositoryNameInput_newName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString, Ext: &eUpdateRepositoryNameInput_newName})
 
 var AssociateApprovalRuleTemplateWithRepository = &sAssociateApprovalRuleTemplateWithRepository
 

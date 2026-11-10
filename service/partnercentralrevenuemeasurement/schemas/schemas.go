@@ -7,9 +7,491 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [483]smithy.SchemaExtensions
+var (
+	eCreateMarketplaceRevenueShare                                                           smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareAllocation                                                 smithy.SchemaExtensions
+	eCreateRevenueAttribution                                                                smithy.SchemaExtensions
+	eGetMarketplaceRevenueShare                                                              smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareAllocation                                                    smithy.SchemaExtensions
+	eGetRevenueAttribution                                                                   smithy.SchemaExtensions
+	eGetRevenueAttributionAllocation                                                         smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationsTask                                                    smithy.SchemaExtensions
+	eListMarketplaceRevenueShareAllocations                                                  smithy.SchemaExtensions
+	eListMarketplaceRevenueShares                                                            smithy.SchemaExtensions
+	eListRevenueAttributionAllocations                                                       smithy.SchemaExtensions
+	eListRevenueAttributions                                                                 smithy.SchemaExtensions
+	eListTagsForResource                                                                     smithy.SchemaExtensions
+	eStartRevenueAttributionAllocationsTask                                                  smithy.SchemaExtensions
+	eTagResource                                                                             smithy.SchemaExtensions
+	eUntagResource                                                                           smithy.SchemaExtensions
+	eUpdateMarketplaceRevenueShareAllocation                                                 smithy.SchemaExtensions
+	eUpdateRevenueAttribution                                                                smithy.SchemaExtensions
+	e_PartnerCentralRevenueMeasurement                                                       smithy.SchemaExtensions
+	eAccessDeniedException                                                                   smithy.SchemaExtensions
+	eAccessDeniedException_Message                                                           smithy.SchemaExtensions
+	eAccessDeniedException_Reason                                                            smithy.SchemaExtensions
+	eAccessDeniedExceptionReason                                                             smithy.SchemaExtensions
+	eAccessDeniedExceptionReason_ACCESS_DENIED                                               smithy.SchemaExtensions
+	e_AllocationCount                                                                        smithy.SchemaExtensions
+	e_AllocationEffectiveDateString                                                          smithy.SchemaExtensions
+	eAllocationStatus                                                                        smithy.SchemaExtensions
+	eAllocationStatus_ACTIVE                                                                 smithy.SchemaExtensions
+	eAllocationStatus_INACTIVE                                                               smithy.SchemaExtensions
+	eAttributionSortBy                                                                       smithy.SchemaExtensions
+	eAttributionSortBy_LAST_MODIFIED_DATE                                                    smithy.SchemaExtensions
+	eAttributionSummary                                                                      smithy.SchemaExtensions
+	eAttributionSummary_Arn                                                                  smithy.SchemaExtensions
+	eAttributionSummary_Id                                                                   smithy.SchemaExtensions
+	eAttributionSummary_Catalog                                                              smithy.SchemaExtensions
+	eAttributionSummary_Name                                                                 smithy.SchemaExtensions
+	eAttributionSummary_TenancyModel                                                         smithy.SchemaExtensions
+	eAttributionSummary_MarketplaceProduct                                                   smithy.SchemaExtensions
+	eAttributionSummary_CreatedDate                                                          smithy.SchemaExtensions
+	eAttributionSummary_LastModifiedDate                                                     smithy.SchemaExtensions
+	eAttributionSummary_LatestRevision                                                       smithy.SchemaExtensions
+	eAttributionSummary_EffectiveFrom                                                        smithy.SchemaExtensions
+	eAttributionSummary_EffectiveUntil                                                       smithy.SchemaExtensions
+	eAttributionSummary_TotalActiveRevenueAttributionAllocationCount                         smithy.SchemaExtensions
+	eAttributionSummary_TotalRevenueAttributionAllocationCount                               smithy.SchemaExtensions
+	eCatalogName                                                                             smithy.SchemaExtensions
+	eCatalogName_AWS                                                                         smithy.SchemaExtensions
+	eCatalogName_SANDBOX                                                                     smithy.SchemaExtensions
+	e_ClientToken                                                                            smithy.SchemaExtensions
+	eConflictException                                                                       smithy.SchemaExtensions
+	eConflictException_Message                                                               smithy.SchemaExtensions
+	eConflictException_Reason                                                                smithy.SchemaExtensions
+	eConflictExceptionReason                                                                 smithy.SchemaExtensions
+	eConflictExceptionReason_CONFLICT_CLIENT_TOKEN                                           smithy.SchemaExtensions
+	eConflictExceptionReason_CONCURRENT_MODIFICATION                                         smithy.SchemaExtensions
+	eConflictExceptionReason_RESOURCE_ALREADY_EXISTS                                         smithy.SchemaExtensions
+	eConflictExceptionReason_REVISION_MISMATCH                                               smithy.SchemaExtensions
+	e_CustomerAwsAccountId                                                                   smithy.SchemaExtensions
+	e_CustomerAwsAccountIdFilterList                                                         smithy.SchemaExtensions
+	e_CustomerAwsAccountIdFilterList_member                                                  smithy.SchemaExtensions
+	e_EntityIdentifier                                                                       smithy.SchemaExtensions
+	e_EntityIdentifierFilterList                                                             smithy.SchemaExtensions
+	e_EntityIdentifierFilterList_member                                                      smithy.SchemaExtensions
+	eEntityType                                                                              smithy.SchemaExtensions
+	eEntityType_OFFER                                                                        smithy.SchemaExtensions
+	eEntityType_OPPORTUNITY                                                                  smithy.SchemaExtensions
+	e_EntityTypeFilterList                                                                   smithy.SchemaExtensions
+	e_EntityTypeFilterList_member                                                            smithy.SchemaExtensions
+	eFieldValidationCode                                                                     smithy.SchemaExtensions
+	eFieldValidationCode_REQUIRED_FIELD_MISSING                                              smithy.SchemaExtensions
+	eFieldValidationCode_DUPLICATE_VALUE                                                     smithy.SchemaExtensions
+	eFieldValidationCode_INVALID_VALUE                                                       smithy.SchemaExtensions
+	eFieldValidationCode_INVALID_STRING_FORMAT                                               smithy.SchemaExtensions
+	eFieldValidationCode_TOO_MANY_VALUES                                                     smithy.SchemaExtensions
+	eFieldValidationCode_ACTION_NOT_PERMITTED                                                smithy.SchemaExtensions
+	eFieldValidationCode_INVALID_ENUM_VALUE                                                  smithy.SchemaExtensions
+	eFieldValidationCode_INVALID_NUMBER_FORMAT                                               smithy.SchemaExtensions
+	eFieldValidationCode_INVALID_STRING_LENGTH                                               smithy.SchemaExtensions
+	eInternalServerException                                                                 smithy.SchemaExtensions
+	eInternalServerException_Message                                                         smithy.SchemaExtensions
+	e_MarketplaceProductId                                                                   smithy.SchemaExtensions
+	e_MarketplaceProductIdList                                                               smithy.SchemaExtensions
+	e_MarketplaceProductIdList_member                                                        smithy.SchemaExtensions
+	eMarketplaceProductSummary                                                               smithy.SchemaExtensions
+	eMarketplaceProductSummary_ProductId                                                     smithy.SchemaExtensions
+	eMarketplaceProductSummary_ProductCode                                                   smithy.SchemaExtensions
+	eMarketplaceProductSummary_ProductName                                                   smithy.SchemaExtensions
+	e_MarketplaceRevenueShareAllocationId                                                    smithy.SchemaExtensions
+	eMarketplaceRevenueShareAllocationSortField                                              smithy.SchemaExtensions
+	eMarketplaceRevenueShareAllocationSortField_EFFECTIVE_FROM                               smithy.SchemaExtensions
+	eMarketplaceRevenueShareAllocationSummary                                                smithy.SchemaExtensions
+	eMarketplaceRevenueShareAllocationSummary_MarketplaceRevenueShareAllocationId            smithy.SchemaExtensions
+	eMarketplaceRevenueShareAllocationSummary_ProductId                                      smithy.SchemaExtensions
+	eMarketplaceRevenueShareAllocationSummary_ProductName                                    smithy.SchemaExtensions
+	eMarketplaceRevenueShareAllocationSummary_Arn                                            smithy.SchemaExtensions
+	eMarketplaceRevenueShareAllocationSummary_EffectiveFrom                                  smithy.SchemaExtensions
+	eMarketplaceRevenueShareAllocationSummary_EffectiveUntil                                 smithy.SchemaExtensions
+	eMarketplaceRevenueShareAllocationSummary_RevenueSharePercent                            smithy.SchemaExtensions
+	eMarketplaceRevenueShareAllocationSummary_Status                                         smithy.SchemaExtensions
+	eMarketplaceRevenueShareAllocationSummary_CreatedDate                                    smithy.SchemaExtensions
+	eMarketplaceRevenueShareAllocationSummary_LastModifiedDate                               smithy.SchemaExtensions
+	e_MarketplaceRevenueShareAllocationSummaryList                                           smithy.SchemaExtensions
+	e_MarketplaceRevenueShareAllocationSummaryList_member                                    smithy.SchemaExtensions
+	eMarketplaceRevenueShareSortBy                                                           smithy.SchemaExtensions
+	eMarketplaceRevenueShareSortBy_LAST_MODIFIED_DATE                                        smithy.SchemaExtensions
+	eMarketplaceRevenueShareSummary                                                          smithy.SchemaExtensions
+	eMarketplaceRevenueShareSummary_ProductId                                                smithy.SchemaExtensions
+	eMarketplaceRevenueShareSummary_Arn                                                      smithy.SchemaExtensions
+	eMarketplaceRevenueShareSummary_Catalog                                                  smithy.SchemaExtensions
+	eMarketplaceRevenueShareSummary_ProductCode                                              smithy.SchemaExtensions
+	eMarketplaceRevenueShareSummary_ProductName                                              smithy.SchemaExtensions
+	eMarketplaceRevenueShareSummary_CreatedDate                                              smithy.SchemaExtensions
+	eMarketplaceRevenueShareSummary_LastModifiedDate                                         smithy.SchemaExtensions
+	eMarketplaceRevenueShareSummary_LatestRevision                                           smithy.SchemaExtensions
+	eMarketplaceRevenueShareSummary_TotalActiveMarketplaceRevenueShareAllocationCount        smithy.SchemaExtensions
+	eMarketplaceRevenueShareSummary_TotalMarketplaceRevenueShareAllocationCount              smithy.SchemaExtensions
+	e_MarketplaceRevenueShareSummaryList                                                     smithy.SchemaExtensions
+	e_MarketplaceRevenueShareSummaryList_member                                              smithy.SchemaExtensions
+	e_MarketplaceRevenueShareTagList                                                         smithy.SchemaExtensions
+	e_MarketplaceRevenueShareTagList_member                                                  smithy.SchemaExtensions
+	e_NextToken                                                                              smithy.SchemaExtensions
+	e_ProductCodeList                                                                        smithy.SchemaExtensions
+	e_ProductCodeList_member                                                                 smithy.SchemaExtensions
+	e_ResourceARN                                                                            smithy.SchemaExtensions
+	eResourceNotFoundException                                                               smithy.SchemaExtensions
+	eResourceNotFoundException_Message                                                       smithy.SchemaExtensions
+	eResourceNotFoundException_Reason                                                        smithy.SchemaExtensions
+	eResourceNotFoundExceptionReason                                                         smithy.SchemaExtensions
+	eResourceNotFoundExceptionReason_RESOURCE_NOT_FOUND                                      smithy.SchemaExtensions
+	eRevenueAttributionAllocationAction                                                      smithy.SchemaExtensions
+	eRevenueAttributionAllocationAction_CREATE                                               smithy.SchemaExtensions
+	eRevenueAttributionAllocationAction_UPDATE                                               smithy.SchemaExtensions
+	eRevenueAttributionAllocationErrorCode                                                   smithy.SchemaExtensions
+	eRevenueAttributionAllocationErrorCode_ALLOCATION_CAP_EXCEEDED                           smithy.SchemaExtensions
+	eRevenueAttributionAllocationErrorCode_RESOURCE_NOT_FOUND                                smithy.SchemaExtensions
+	eRevenueAttributionAllocationErrorCode_IMMUTABLE_ALLOCATION                              smithy.SchemaExtensions
+	eRevenueAttributionAllocationErrorCode_ACCESS_DENIED                                     smithy.SchemaExtensions
+	eRevenueAttributionAllocationErrorCode_INVALID_VALUE                                     smithy.SchemaExtensions
+	eRevenueAttributionAllocationErrorCode_CONCURRENT_MODIFICATION                           smithy.SchemaExtensions
+	eRevenueAttributionAllocationErrorCode_INTERNAL_ERROR                                    smithy.SchemaExtensions
+	eRevenueAttributionAllocationErrorDetail                                                 smithy.SchemaExtensions
+	eRevenueAttributionAllocationErrorDetail_RevenueAttributionAllocationId                  smithy.SchemaExtensions
+	eRevenueAttributionAllocationErrorDetail_EntityType                                      smithy.SchemaExtensions
+	eRevenueAttributionAllocationErrorDetail_EntityId                                        smithy.SchemaExtensions
+	eRevenueAttributionAllocationErrorDetail_CustomerAwsAccountId                            smithy.SchemaExtensions
+	eRevenueAttributionAllocationErrorDetail_EffectiveFrom                                   smithy.SchemaExtensions
+	eRevenueAttributionAllocationErrorDetail_EffectiveUntil                                  smithy.SchemaExtensions
+	eRevenueAttributionAllocationErrorDetail_Action                                          smithy.SchemaExtensions
+	eRevenueAttributionAllocationErrorDetail_ErrorCode                                       smithy.SchemaExtensions
+	eRevenueAttributionAllocationErrorDetail_ErrorMessage                                    smithy.SchemaExtensions
+	e_RevenueAttributionAllocationErrorDetailList                                            smithy.SchemaExtensions
+	e_RevenueAttributionAllocationErrorDetailList_member                                     smithy.SchemaExtensions
+	e_RevenueAttributionAllocationId                                                         smithy.SchemaExtensions
+	eRevenueAttributionAllocationSortField                                                   smithy.SchemaExtensions
+	eRevenueAttributionAllocationSortField_EFFECTIVE_FROM                                    smithy.SchemaExtensions
+	eRevenueAttributionAllocationSummary                                                     smithy.SchemaExtensions
+	eRevenueAttributionAllocationSummary_RevenueAttributionAllocationId                      smithy.SchemaExtensions
+	eRevenueAttributionAllocationSummary_RevenueAttributionIdentifier                        smithy.SchemaExtensions
+	eRevenueAttributionAllocationSummary_EntityType                                          smithy.SchemaExtensions
+	eRevenueAttributionAllocationSummary_EntityIdentifier                                    smithy.SchemaExtensions
+	eRevenueAttributionAllocationSummary_EntityName                                          smithy.SchemaExtensions
+	eRevenueAttributionAllocationSummary_CustomerAwsAccountId                                smithy.SchemaExtensions
+	eRevenueAttributionAllocationSummary_RevenueSharePercent                                 smithy.SchemaExtensions
+	eRevenueAttributionAllocationSummary_EffectiveFrom                                       smithy.SchemaExtensions
+	eRevenueAttributionAllocationSummary_EffectiveUntil                                      smithy.SchemaExtensions
+	eRevenueAttributionAllocationSummary_Status                                              smithy.SchemaExtensions
+	e_RevenueAttributionAllocationSummaryList                                                smithy.SchemaExtensions
+	e_RevenueAttributionAllocationSummaryList_member                                         smithy.SchemaExtensions
+	e_RevenueAttributionAllocationTaskId                                                     smithy.SchemaExtensions
+	eRevenueAttributionAllocationTaskStatus                                                  smithy.SchemaExtensions
+	eRevenueAttributionAllocationTaskStatus_IN_PROGRESS                                      smithy.SchemaExtensions
+	eRevenueAttributionAllocationTaskStatus_COMPLETE                                         smithy.SchemaExtensions
+	eRevenueAttributionAllocationTaskStatus_FAILED                                           smithy.SchemaExtensions
+	e_RevenueAttributionId                                                                   smithy.SchemaExtensions
+	e_RevenueAttributionIdentifier                                                           smithy.SchemaExtensions
+	e_RevenueAttributionIdentifierList                                                       smithy.SchemaExtensions
+	e_RevenueAttributionIdentifierList_member                                                smithy.SchemaExtensions
+	e_RevenueAttributionSummaries                                                            smithy.SchemaExtensions
+	e_RevenueAttributionSummaries_member                                                     smithy.SchemaExtensions
+	eRevenueShareAllocation                                                                  smithy.SchemaExtensions
+	eRevenueShareAllocation_Action                                                           smithy.SchemaExtensions
+	eRevenueShareAllocation_RevenueAttributionAllocationId                                   smithy.SchemaExtensions
+	eRevenueShareAllocation_EntityType                                                       smithy.SchemaExtensions
+	eRevenueShareAllocation_EntityIdentifier                                                 smithy.SchemaExtensions
+	eRevenueShareAllocation_CustomerAwsAccountId                                             smithy.SchemaExtensions
+	eRevenueShareAllocation_RevenueSharePercent                                              smithy.SchemaExtensions
+	eRevenueShareAllocation_EffectiveFrom                                                    smithy.SchemaExtensions
+	eRevenueShareAllocation_EffectiveUntil                                                   smithy.SchemaExtensions
+	eRevenueShareAllocation_Status                                                           smithy.SchemaExtensions
+	e_RevenueShareAllocationChangeList                                                       smithy.SchemaExtensions
+	e_RevenueShareAllocationChangeList_member                                                smithy.SchemaExtensions
+	e_RevenueSharePercent                                                                    smithy.SchemaExtensions
+	e_RevisionToken                                                                          smithy.SchemaExtensions
+	eServiceQuotaExceededException                                                           smithy.SchemaExtensions
+	eServiceQuotaExceededException_Message                                                   smithy.SchemaExtensions
+	eServiceQuotaExceededException_Reason                                                    smithy.SchemaExtensions
+	eServiceQuotaExceededExceptionReason                                                     smithy.SchemaExtensions
+	eServiceQuotaExceededExceptionReason_ATTRIBUTION_LIMIT_EXCEEDED                          smithy.SchemaExtensions
+	eServiceQuotaExceededExceptionReason_TAG_LIMIT_EXCEEDED                                  smithy.SchemaExtensions
+	eSortOrder                                                                               smithy.SchemaExtensions
+	eSortOrder_ASCENDING                                                                     smithy.SchemaExtensions
+	eSortOrder_DESCENDING                                                                    smithy.SchemaExtensions
+	eTag                                                                                     smithy.SchemaExtensions
+	eTag_Key                                                                                 smithy.SchemaExtensions
+	eTag_Value                                                                               smithy.SchemaExtensions
+	e_TagKey                                                                                 smithy.SchemaExtensions
+	e_TagKeyList                                                                             smithy.SchemaExtensions
+	e_TagKeyList_member                                                                      smithy.SchemaExtensions
+	e_TagList                                                                                smithy.SchemaExtensions
+	e_TagList_member                                                                         smithy.SchemaExtensions
+	e_TagValue                                                                               smithy.SchemaExtensions
+	eTenancyModel                                                                            smithy.SchemaExtensions
+	eTenancyModel_MULTI_TENANT                                                               smithy.SchemaExtensions
+	eTenancyModel_SINGLE_TENANT                                                              smithy.SchemaExtensions
+	eThrottlingException                                                                     smithy.SchemaExtensions
+	eThrottlingException_Message                                                             smithy.SchemaExtensions
+	eThrottlingException_ServiceCode                                                         smithy.SchemaExtensions
+	eThrottlingException_QuotaCode                                                           smithy.SchemaExtensions
+	eValidationException                                                                     smithy.SchemaExtensions
+	eValidationException_Message                                                             smithy.SchemaExtensions
+	eValidationException_Reason                                                              smithy.SchemaExtensions
+	eValidationException_FieldList                                                           smithy.SchemaExtensions
+	eValidationExceptionField                                                                smithy.SchemaExtensions
+	eValidationExceptionField_Name                                                           smithy.SchemaExtensions
+	eValidationExceptionField_Message                                                        smithy.SchemaExtensions
+	eValidationExceptionField_Code                                                           smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                                                           smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member                                                    smithy.SchemaExtensions
+	eValidationExceptionReason                                                               smithy.SchemaExtensions
+	eValidationExceptionReason_REQUEST_VALIDATION_FAILED                                     smithy.SchemaExtensions
+	eValidationExceptionReason_BUSINESS_VALIDATION_FAILED                                    smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareAllocationInput                                            smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareAllocationInput_Catalog                                    smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareAllocationInput_ProductId                                  smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareAllocationInput_ClientToken                                smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareAllocationInput_EffectiveFrom                              smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareAllocationInput_EffectiveUntil                             smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareAllocationInput_RevenueSharePercent                        smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareAllocationOutput                                           smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId       smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareAllocationOutput_ProductId                                 smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareAllocationOutput_ProductName                               smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareAllocationOutput_Arn                                       smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareAllocationOutput_EffectiveFrom                             smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareAllocationOutput_EffectiveUntil                            smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareAllocationOutput_RevenueSharePercent                       smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareAllocationOutput_Status                                    smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareAllocationOutput_CreatedDate                               smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareAllocationOutput_LastModifiedDate                          smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision     smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareInput                                                      smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareInput_Catalog                                              smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareInput_ClientToken                                          smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareInput_ProductId                                            smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareInput_Tags                                                 smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareOutput                                                     smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareOutput_ProductId                                           smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareOutput_Arn                                                 smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareOutput_Catalog                                             smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareOutput_ProductCode                                         smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareOutput_ProductName                                         smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareOutput_CreatedDate                                         smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareOutput_LastModifiedDate                                    smithy.SchemaExtensions
+	eCreateMarketplaceRevenueShareOutput_Revision                                            smithy.SchemaExtensions
+	eCreateRevenueAttributionInput                                                           smithy.SchemaExtensions
+	eCreateRevenueAttributionInput_Catalog                                                   smithy.SchemaExtensions
+	eCreateRevenueAttributionInput_ClientToken                                               smithy.SchemaExtensions
+	eCreateRevenueAttributionInput_Name                                                      smithy.SchemaExtensions
+	eCreateRevenueAttributionInput_Description                                               smithy.SchemaExtensions
+	eCreateRevenueAttributionInput_TenancyModel                                              smithy.SchemaExtensions
+	eCreateRevenueAttributionInput_ProductIdentifier                                         smithy.SchemaExtensions
+	eCreateRevenueAttributionInput_Tags                                                      smithy.SchemaExtensions
+	eCreateRevenueAttributionOutput                                                          smithy.SchemaExtensions
+	eCreateRevenueAttributionOutput_Id                                                       smithy.SchemaExtensions
+	eCreateRevenueAttributionOutput_Arn                                                      smithy.SchemaExtensions
+	eCreateRevenueAttributionOutput_Name                                                     smithy.SchemaExtensions
+	eCreateRevenueAttributionOutput_Description                                              smithy.SchemaExtensions
+	eCreateRevenueAttributionOutput_TenancyModel                                             smithy.SchemaExtensions
+	eCreateRevenueAttributionOutput_MarketplaceProduct                                       smithy.SchemaExtensions
+	eCreateRevenueAttributionOutput_Revision                                                 smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareAllocationInput                                               smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareAllocationInput_Catalog                                       smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareAllocationInput_ProductId                                     smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareAllocationId           smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareRevision               smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareAllocationOutput                                              smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId          smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareAllocationOutput_ProductId                                    smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareAllocationOutput_ProductName                                  smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareAllocationOutput_Arn                                          smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareAllocationOutput_EffectiveFrom                                smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareAllocationOutput_EffectiveUntil                               smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareAllocationOutput_RevenueSharePercent                          smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareAllocationOutput_Status                                       smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareAllocationOutput_CreatedDate                                  smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareAllocationOutput_LastModifiedDate                             smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision        smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareInput                                                         smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareInput_Catalog                                                 smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareInput_ProductId                                               smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareInput_Revision                                                smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareOutput                                                        smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareOutput_ProductId                                              smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareOutput_Arn                                                    smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareOutput_Catalog                                                smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareOutput_ProductCode                                            smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareOutput_ProductName                                            smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareOutput_CreatedDate                                            smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareOutput_LastModifiedDate                                       smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareOutput_Revision                                               smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareOutput_LatestRevision                                         smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareOutput_TotalActiveMarketplaceRevenueShareAllocationCount      smithy.SchemaExtensions
+	eGetMarketplaceRevenueShareOutput_TotalMarketplaceRevenueShareAllocationCount            smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationInput                                                    smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationInput_Catalog                                            smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationInput_RevenueAttributionIdentifier                       smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationInput_RevenueAttributionAllocationId                     smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationInput_RevenueAttributionRevision                         smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationOutput                                                   smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationOutput_RevenueAttributionAllocationId                    smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationOutput_RevenueAttributionIdentifier                      smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationOutput_EntityType                                        smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationOutput_EntityIdentifier                                  smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationOutput_EntityName                                        smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationOutput_CustomerAwsAccountId                              smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationOutput_RevenueSharePercent                               smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationOutput_EffectiveFrom                                     smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationOutput_EffectiveUntil                                    smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationOutput_Status                                            smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationOutput_CreatedDate                                       smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationOutput_LastModifiedDate                                  smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationOutput_RevenueAttributionRevision                        smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationOutput_RevenueAttributionLatestRevision                  smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationsTaskInput                                               smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationsTaskInput_Catalog                                       smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationsTaskInput_RevenueAttributionIdentifier                  smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationsTaskOutput                                              smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationsTaskOutput_TaskId                                       smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationsTaskOutput_Status                                       smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationsTaskOutput_Catalog                                      smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationsTaskOutput_RevenueAttributionArn                        smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationsTaskOutput_StartedAt                                    smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationsTaskOutput_EndedAt                                      smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationsTaskOutput_TotalRevenueAttributionAllocationRecords     smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationsTaskOutput_Description                                  smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationsTaskOutput_RevenueAttributionLatestRevision             smithy.SchemaExtensions
+	eGetRevenueAttributionAllocationsTaskOutput_ErrorDetailList                              smithy.SchemaExtensions
+	eGetRevenueAttributionInput                                                              smithy.SchemaExtensions
+	eGetRevenueAttributionInput_Catalog                                                      smithy.SchemaExtensions
+	eGetRevenueAttributionInput_Identifier                                                   smithy.SchemaExtensions
+	eGetRevenueAttributionInput_Revision                                                     smithy.SchemaExtensions
+	eGetRevenueAttributionOutput                                                             smithy.SchemaExtensions
+	eGetRevenueAttributionOutput_Arn                                                         smithy.SchemaExtensions
+	eGetRevenueAttributionOutput_Id                                                          smithy.SchemaExtensions
+	eGetRevenueAttributionOutput_Catalog                                                     smithy.SchemaExtensions
+	eGetRevenueAttributionOutput_Name                                                        smithy.SchemaExtensions
+	eGetRevenueAttributionOutput_Description                                                 smithy.SchemaExtensions
+	eGetRevenueAttributionOutput_TenancyModel                                                smithy.SchemaExtensions
+	eGetRevenueAttributionOutput_MarketplaceProduct                                          smithy.SchemaExtensions
+	eGetRevenueAttributionOutput_CreatedDate                                                 smithy.SchemaExtensions
+	eGetRevenueAttributionOutput_LastModifiedDate                                            smithy.SchemaExtensions
+	eGetRevenueAttributionOutput_Revision                                                    smithy.SchemaExtensions
+	eGetRevenueAttributionOutput_LatestRevision                                              smithy.SchemaExtensions
+	eGetRevenueAttributionOutput_EffectiveFrom                                               smithy.SchemaExtensions
+	eGetRevenueAttributionOutput_EffectiveUntil                                              smithy.SchemaExtensions
+	eGetRevenueAttributionOutput_TotalActiveRevenueAttributionAllocationCount                smithy.SchemaExtensions
+	eGetRevenueAttributionOutput_TotalRevenueAttributionAllocationCount                      smithy.SchemaExtensions
+	eListMarketplaceRevenueShareAllocationsInput                                             smithy.SchemaExtensions
+	eListMarketplaceRevenueShareAllocationsInput_Catalog                                     smithy.SchemaExtensions
+	eListMarketplaceRevenueShareAllocationsInput_ProductId                                   smithy.SchemaExtensions
+	eListMarketplaceRevenueShareAllocationsInput_Status                                      smithy.SchemaExtensions
+	eListMarketplaceRevenueShareAllocationsInput_AfterEffectiveFrom                          smithy.SchemaExtensions
+	eListMarketplaceRevenueShareAllocationsInput_BeforeEffectiveFrom                         smithy.SchemaExtensions
+	eListMarketplaceRevenueShareAllocationsInput_SortBy                                      smithy.SchemaExtensions
+	eListMarketplaceRevenueShareAllocationsInput_SortOrder                                   smithy.SchemaExtensions
+	eListMarketplaceRevenueShareAllocationsInput_MaxResults                                  smithy.SchemaExtensions
+	eListMarketplaceRevenueShareAllocationsInput_NextToken                                   smithy.SchemaExtensions
+	eListMarketplaceRevenueShareAllocationsInput_MarketplaceRevenueShareRevision             smithy.SchemaExtensions
+	eListMarketplaceRevenueShareAllocationsOutput                                            smithy.SchemaExtensions
+	eListMarketplaceRevenueShareAllocationsOutput_MarketplaceRevenueShareAllocationSummaries smithy.SchemaExtensions
+	eListMarketplaceRevenueShareAllocationsOutput_NextToken                                  smithy.SchemaExtensions
+	eListMarketplaceRevenueSharesInput                                                       smithy.SchemaExtensions
+	eListMarketplaceRevenueSharesInput_Catalog                                               smithy.SchemaExtensions
+	eListMarketplaceRevenueSharesInput_ProductIds                                            smithy.SchemaExtensions
+	eListMarketplaceRevenueSharesInput_ProductCodes                                          smithy.SchemaExtensions
+	eListMarketplaceRevenueSharesInput_MaxResults                                            smithy.SchemaExtensions
+	eListMarketplaceRevenueSharesInput_NextToken                                             smithy.SchemaExtensions
+	eListMarketplaceRevenueSharesInput_SortBy                                                smithy.SchemaExtensions
+	eListMarketplaceRevenueSharesInput_SortOrder                                             smithy.SchemaExtensions
+	eListMarketplaceRevenueSharesInput_CreatedAfter                                          smithy.SchemaExtensions
+	eListMarketplaceRevenueSharesInput_CreatedBefore                                         smithy.SchemaExtensions
+	eListMarketplaceRevenueSharesOutput                                                      smithy.SchemaExtensions
+	eListMarketplaceRevenueSharesOutput_MarketplaceRevenueShareSummaries                     smithy.SchemaExtensions
+	eListMarketplaceRevenueSharesOutput_NextToken                                            smithy.SchemaExtensions
+	eListRevenueAttributionAllocationsInput                                                  smithy.SchemaExtensions
+	eListRevenueAttributionAllocationsInput_Catalog                                          smithy.SchemaExtensions
+	eListRevenueAttributionAllocationsInput_RevenueAttributionIdentifier                     smithy.SchemaExtensions
+	eListRevenueAttributionAllocationsInput_EntityTypeFilters                                smithy.SchemaExtensions
+	eListRevenueAttributionAllocationsInput_EntityIdentifierFilters                          smithy.SchemaExtensions
+	eListRevenueAttributionAllocationsInput_CustomerAwsAccountIdFilters                      smithy.SchemaExtensions
+	eListRevenueAttributionAllocationsInput_StatusFilter                                     smithy.SchemaExtensions
+	eListRevenueAttributionAllocationsInput_AfterEffectiveFrom                               smithy.SchemaExtensions
+	eListRevenueAttributionAllocationsInput_BeforeEffectiveFrom                              smithy.SchemaExtensions
+	eListRevenueAttributionAllocationsInput_AfterEffectiveUntil                              smithy.SchemaExtensions
+	eListRevenueAttributionAllocationsInput_BeforeEffectiveUntil                             smithy.SchemaExtensions
+	eListRevenueAttributionAllocationsInput_SortBy                                           smithy.SchemaExtensions
+	eListRevenueAttributionAllocationsInput_SortOrder                                        smithy.SchemaExtensions
+	eListRevenueAttributionAllocationsInput_RevenueAttributionRevision                       smithy.SchemaExtensions
+	eListRevenueAttributionAllocationsInput_MaxResults                                       smithy.SchemaExtensions
+	eListRevenueAttributionAllocationsInput_NextToken                                        smithy.SchemaExtensions
+	eListRevenueAttributionAllocationsOutput                                                 smithy.SchemaExtensions
+	eListRevenueAttributionAllocationsOutput_RevenueAttributionAllocationSummaries           smithy.SchemaExtensions
+	eListRevenueAttributionAllocationsOutput_NextToken                                       smithy.SchemaExtensions
+	eListRevenueAttributionsInput                                                            smithy.SchemaExtensions
+	eListRevenueAttributionsInput_Catalog                                                    smithy.SchemaExtensions
+	eListRevenueAttributionsInput_Identifiers                                                smithy.SchemaExtensions
+	eListRevenueAttributionsInput_CreatedAfter                                               smithy.SchemaExtensions
+	eListRevenueAttributionsInput_CreatedBefore                                              smithy.SchemaExtensions
+	eListRevenueAttributionsInput_SortBy                                                     smithy.SchemaExtensions
+	eListRevenueAttributionsInput_SortOrder                                                  smithy.SchemaExtensions
+	eListRevenueAttributionsInput_MaxResults                                                 smithy.SchemaExtensions
+	eListRevenueAttributionsInput_NextToken                                                  smithy.SchemaExtensions
+	eListRevenueAttributionsOutput                                                           smithy.SchemaExtensions
+	eListRevenueAttributionsOutput_RevenueAttributionSummaries                               smithy.SchemaExtensions
+	eListRevenueAttributionsOutput_NextToken                                                 smithy.SchemaExtensions
+	eListTagsForResourceInput                                                                smithy.SchemaExtensions
+	eListTagsForResourceInput_resourceArn                                                    smithy.SchemaExtensions
+	eListTagsForResourceOutput                                                               smithy.SchemaExtensions
+	eListTagsForResourceOutput_tags                                                          smithy.SchemaExtensions
+	eStartRevenueAttributionAllocationsTaskInput                                             smithy.SchemaExtensions
+	eStartRevenueAttributionAllocationsTaskInput_Catalog                                     smithy.SchemaExtensions
+	eStartRevenueAttributionAllocationsTaskInput_RevenueAttributionIdentifier                smithy.SchemaExtensions
+	eStartRevenueAttributionAllocationsTaskInput_RevenueAttributionRevision                  smithy.SchemaExtensions
+	eStartRevenueAttributionAllocationsTaskInput_RevenueShareAllocations                     smithy.SchemaExtensions
+	eStartRevenueAttributionAllocationsTaskInput_ClientToken                                 smithy.SchemaExtensions
+	eStartRevenueAttributionAllocationsTaskInput_Description                                 smithy.SchemaExtensions
+	eStartRevenueAttributionAllocationsTaskOutput                                            smithy.SchemaExtensions
+	eStartRevenueAttributionAllocationsTaskOutput_TaskId                                     smithy.SchemaExtensions
+	eStartRevenueAttributionAllocationsTaskOutput_Status                                     smithy.SchemaExtensions
+	eStartRevenueAttributionAllocationsTaskOutput_Catalog                                    smithy.SchemaExtensions
+	eStartRevenueAttributionAllocationsTaskOutput_RevenueAttributionArn                      smithy.SchemaExtensions
+	eStartRevenueAttributionAllocationsTaskOutput_StartedAt                                  smithy.SchemaExtensions
+	eStartRevenueAttributionAllocationsTaskOutput_TotalRevenueAttributionAllocationRecords   smithy.SchemaExtensions
+	eTagResourceInput                                                                        smithy.SchemaExtensions
+	eTagResourceInput_resourceArn                                                            smithy.SchemaExtensions
+	eTagResourceInput_tags                                                                   smithy.SchemaExtensions
+	eUntagResourceInput                                                                      smithy.SchemaExtensions
+	eUntagResourceInput_resourceArn                                                          smithy.SchemaExtensions
+	eUntagResourceInput_tagKeys                                                              smithy.SchemaExtensions
+	eUpdateMarketplaceRevenueShareAllocationInput                                            smithy.SchemaExtensions
+	eUpdateMarketplaceRevenueShareAllocationInput_Catalog                                    smithy.SchemaExtensions
+	eUpdateMarketplaceRevenueShareAllocationInput_ProductId                                  smithy.SchemaExtensions
+	eUpdateMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareAllocationId        smithy.SchemaExtensions
+	eUpdateMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareRevision            smithy.SchemaExtensions
+	eUpdateMarketplaceRevenueShareAllocationInput_ClientToken                                smithy.SchemaExtensions
+	eUpdateMarketplaceRevenueShareAllocationInput_EffectiveFrom                              smithy.SchemaExtensions
+	eUpdateMarketplaceRevenueShareAllocationInput_EffectiveUntil                             smithy.SchemaExtensions
+	eUpdateMarketplaceRevenueShareAllocationInput_RevenueSharePercent                        smithy.SchemaExtensions
+	eUpdateMarketplaceRevenueShareAllocationInput_Status                                     smithy.SchemaExtensions
+	eUpdateMarketplaceRevenueShareAllocationOutput                                           smithy.SchemaExtensions
+	eUpdateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId       smithy.SchemaExtensions
+	eUpdateMarketplaceRevenueShareAllocationOutput_ProductId                                 smithy.SchemaExtensions
+	eUpdateMarketplaceRevenueShareAllocationOutput_ProductName                               smithy.SchemaExtensions
+	eUpdateMarketplaceRevenueShareAllocationOutput_Arn                                       smithy.SchemaExtensions
+	eUpdateMarketplaceRevenueShareAllocationOutput_EffectiveFrom                             smithy.SchemaExtensions
+	eUpdateMarketplaceRevenueShareAllocationOutput_EffectiveUntil                            smithy.SchemaExtensions
+	eUpdateMarketplaceRevenueShareAllocationOutput_RevenueSharePercent                       smithy.SchemaExtensions
+	eUpdateMarketplaceRevenueShareAllocationOutput_Status                                    smithy.SchemaExtensions
+	eUpdateMarketplaceRevenueShareAllocationOutput_CreatedDate                               smithy.SchemaExtensions
+	eUpdateMarketplaceRevenueShareAllocationOutput_LastModifiedDate                          smithy.SchemaExtensions
+	eUpdateMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision     smithy.SchemaExtensions
+	eUpdateRevenueAttributionInput                                                           smithy.SchemaExtensions
+	eUpdateRevenueAttributionInput_Catalog                                                   smithy.SchemaExtensions
+	eUpdateRevenueAttributionInput_Identifier                                                smithy.SchemaExtensions
+	eUpdateRevenueAttributionInput_ClientToken                                               smithy.SchemaExtensions
+	eUpdateRevenueAttributionInput_Description                                               smithy.SchemaExtensions
+	eUpdateRevenueAttributionInput_Revision                                                  smithy.SchemaExtensions
+	eUpdateRevenueAttributionOutput                                                          smithy.SchemaExtensions
+	eUpdateRevenueAttributionOutput_Id                                                       smithy.SchemaExtensions
+	eUpdateRevenueAttributionOutput_Arn                                                      smithy.SchemaExtensions
+	eUpdateRevenueAttributionOutput_Description                                              smithy.SchemaExtensions
+	eUpdateRevenueAttributionOutput_LastModifiedDate                                         smithy.SchemaExtensions
+	eUpdateRevenueAttributionOutput_LatestRevision                                           smithy.SchemaExtensions
+)
 
 var (
 	iCreateMarketplaceRevenueShare                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralrevenuemeasurement", Name: "CreateMarketplaceRevenueShare"}
@@ -341,490 +823,490 @@ var mUpdateMarketplaceRevenueShareAllocationOutput = smithy.SchemaMembers{List: 
 var mUpdateRevenueAttributionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRevenueAttributionInput_Catalog, &sUpdateRevenueAttributionInput_Identifier, &sUpdateRevenueAttributionInput_ClientToken, &sUpdateRevenueAttributionInput_Description, &sUpdateRevenueAttributionInput_Revision}}
 var mUpdateRevenueAttributionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRevenueAttributionOutput_Id, &sUpdateRevenueAttributionOutput_Arn, &sUpdateRevenueAttributionOutput_Description, &sUpdateRevenueAttributionOutput_LastModifiedDate, &sUpdateRevenueAttributionOutput_LatestRevision}}
 
-var sCreateMarketplaceRevenueShare = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMarketplaceRevenueShare, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCreateMarketplaceRevenueShareAllocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMarketplaceRevenueShareAllocation, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sCreateRevenueAttribution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRevenueAttribution, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sGetMarketplaceRevenueShare = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMarketplaceRevenueShare, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sGetMarketplaceRevenueShareAllocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMarketplaceRevenueShareAllocation, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sGetRevenueAttribution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevenueAttribution, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sGetRevenueAttributionAllocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevenueAttributionAllocation, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sGetRevenueAttributionAllocationsTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevenueAttributionAllocationsTask, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sListMarketplaceRevenueShareAllocations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMarketplaceRevenueShareAllocations, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sListMarketplaceRevenueShares = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMarketplaceRevenueShares, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sListRevenueAttributionAllocations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRevenueAttributionAllocations, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sListRevenueAttributions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRevenueAttributions, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sStartRevenueAttributionAllocationsTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRevenueAttributionAllocationsTask, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sUpdateMarketplaceRevenueShareAllocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMarketplaceRevenueShareAllocation, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sUpdateRevenueAttribution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRevenueAttribution, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var s_PartnerCentralRevenueMeasurement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartnerCentralRevenueMeasurement, Type: smithy.ShapeTypeService, Ext: &ext[18]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &ext[19]})
-var sAccessDeniedExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedExceptionReason, Members: &mAccessDeniedExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[22]})
-var s_AllocationCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AllocationCount, Type: smithy.ShapeTypeInteger, Ext: &ext[24]})
-var s_AllocationEffectiveDateString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[25]})
-var sAllocationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAllocationStatus, Members: &mAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[26]})
-var sAttributionSortBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttributionSortBy, Members: &mAttributionSortBy, Type: smithy.ShapeTypeEnum, Ext: &ext[29]})
-var sAttributionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttributionSummary, Members: &mAttributionSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[31]})
-var sCatalogName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &ext[45]})
-var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[48]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &ext[49]})
-var sConflictExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictExceptionReason, Members: &mConflictExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[52]})
-var s_CustomerAwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerAwsAccountId, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var s_CustomerAwsAccountIdFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerAwsAccountIdFilterList, Members: &m_CustomerAwsAccountIdFilterList, Type: smithy.ShapeTypeList, Ext: &ext[58]})
-var s_EntityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[60]})
-var s_EntityIdentifierFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityIdentifierFilterList, Members: &m_EntityIdentifierFilterList, Type: smithy.ShapeTypeList, Ext: &ext[61]})
-var sEntityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeEnum, Ext: &ext[63]})
-var s_EntityTypeFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityTypeFilterList, Members: &m_EntityTypeFilterList, Type: smithy.ShapeTypeList, Ext: &ext[66]})
-var sFieldValidationCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFieldValidationCode, Members: &mFieldValidationCode, Type: smithy.ShapeTypeEnum, Ext: &ext[68]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &ext[78]})
-var s_MarketplaceProductId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &ext[80]})
-var s_MarketplaceProductIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MarketplaceProductIdList, Members: &m_MarketplaceProductIdList, Type: smithy.ShapeTypeList, Ext: &ext[81]})
-var sMarketplaceProductSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMarketplaceProductSummary, Members: &mMarketplaceProductSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[83]})
-var s_MarketplaceRevenueShareAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MarketplaceRevenueShareAllocationId, Type: smithy.ShapeTypeString, Ext: &ext[87]})
-var sMarketplaceRevenueShareAllocationSortField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMarketplaceRevenueShareAllocationSortField, Members: &mMarketplaceRevenueShareAllocationSortField, Type: smithy.ShapeTypeEnum, Ext: &ext[88]})
-var sMarketplaceRevenueShareAllocationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMarketplaceRevenueShareAllocationSummary, Members: &mMarketplaceRevenueShareAllocationSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[90]})
-var s_MarketplaceRevenueShareAllocationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MarketplaceRevenueShareAllocationSummaryList, Members: &m_MarketplaceRevenueShareAllocationSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[101]})
-var sMarketplaceRevenueShareSortBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMarketplaceRevenueShareSortBy, Members: &mMarketplaceRevenueShareSortBy, Type: smithy.ShapeTypeEnum, Ext: &ext[103]})
-var sMarketplaceRevenueShareSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMarketplaceRevenueShareSummary, Members: &mMarketplaceRevenueShareSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[105]})
-var s_MarketplaceRevenueShareSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MarketplaceRevenueShareSummaryList, Members: &m_MarketplaceRevenueShareSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[116]})
-var s_MarketplaceRevenueShareTagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MarketplaceRevenueShareTagList, Members: &m_MarketplaceRevenueShareTagList, Type: smithy.ShapeTypeList, Ext: &ext[118]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[120]})
-var s_ProductCodeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProductCodeList, Members: &m_ProductCodeList, Type: smithy.ShapeTypeList, Ext: &ext[121]})
-var s_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceARN, Type: smithy.ShapeTypeString, Ext: &ext[123]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &ext[124]})
-var sResourceNotFoundExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundExceptionReason, Members: &mResourceNotFoundExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[127]})
-var sRevenueAttributionAllocationAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevenueAttributionAllocationAction, Members: &mRevenueAttributionAllocationAction, Type: smithy.ShapeTypeEnum, Ext: &ext[129]})
-var sRevenueAttributionAllocationErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevenueAttributionAllocationErrorCode, Members: &mRevenueAttributionAllocationErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[132]})
-var sRevenueAttributionAllocationErrorDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevenueAttributionAllocationErrorDetail, Members: &mRevenueAttributionAllocationErrorDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[140]})
-var s_RevenueAttributionAllocationErrorDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevenueAttributionAllocationErrorDetailList, Members: &m_RevenueAttributionAllocationErrorDetailList, Type: smithy.ShapeTypeList, Ext: &ext[150]})
-var s_RevenueAttributionAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevenueAttributionAllocationId, Type: smithy.ShapeTypeString, Ext: &ext[152]})
-var sRevenueAttributionAllocationSortField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevenueAttributionAllocationSortField, Members: &mRevenueAttributionAllocationSortField, Type: smithy.ShapeTypeEnum, Ext: &ext[153]})
-var sRevenueAttributionAllocationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevenueAttributionAllocationSummary, Members: &mRevenueAttributionAllocationSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[155]})
-var s_RevenueAttributionAllocationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevenueAttributionAllocationSummaryList, Members: &m_RevenueAttributionAllocationSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[166]})
-var s_RevenueAttributionAllocationTaskId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevenueAttributionAllocationTaskId, Type: smithy.ShapeTypeString, Ext: &ext[168]})
-var sRevenueAttributionAllocationTaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevenueAttributionAllocationTaskStatus, Members: &mRevenueAttributionAllocationTaskStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[169]})
-var s_RevenueAttributionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevenueAttributionId, Type: smithy.ShapeTypeString, Ext: &ext[173]})
-var s_RevenueAttributionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevenueAttributionIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[174]})
-var s_RevenueAttributionIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevenueAttributionIdentifierList, Members: &m_RevenueAttributionIdentifierList, Type: smithy.ShapeTypeList, Ext: &ext[175]})
-var s_RevenueAttributionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevenueAttributionSummaries, Members: &m_RevenueAttributionSummaries, Type: smithy.ShapeTypeList, Ext: &ext[177]})
-var sRevenueShareAllocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevenueShareAllocation, Members: &mRevenueShareAllocation, Type: smithy.ShapeTypeStructure, Ext: &ext[179]})
-var s_RevenueShareAllocationChangeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevenueShareAllocationChangeList, Members: &m_RevenueShareAllocationChangeList, Type: smithy.ShapeTypeList, Ext: &ext[189]})
-var s_RevenueSharePercent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevenueSharePercent, Type: smithy.ShapeTypeString, Ext: &ext[191]})
-var s_RevisionToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &ext[192]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &ext[193]})
-var sServiceQuotaExceededExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededExceptionReason, Members: &mServiceQuotaExceededExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[196]})
-var sSortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &ext[199]})
-var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[202]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[205]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[206]})
-var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[208]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[210]})
-var sTenancyModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTenancyModel, Members: &mTenancyModel, Type: smithy.ShapeTypeEnum, Ext: &ext[211]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &ext[214]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &ext[218]})
-var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[222]})
-var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[226]})
-var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[228]})
-var sCreateMarketplaceRevenueShareAllocationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMarketplaceRevenueShareAllocationInput, Members: &mCreateMarketplaceRevenueShareAllocationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[231]})
-var sCreateMarketplaceRevenueShareAllocationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMarketplaceRevenueShareAllocationOutput, Members: &mCreateMarketplaceRevenueShareAllocationOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[238]})
-var sCreateMarketplaceRevenueShareInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMarketplaceRevenueShareInput, Members: &mCreateMarketplaceRevenueShareInput, Type: smithy.ShapeTypeStructure, Ext: &ext[250]})
-var sCreateMarketplaceRevenueShareOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMarketplaceRevenueShareOutput, Members: &mCreateMarketplaceRevenueShareOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[255]})
-var sCreateRevenueAttributionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRevenueAttributionInput, Members: &mCreateRevenueAttributionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[264]})
-var sCreateRevenueAttributionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRevenueAttributionOutput, Members: &mCreateRevenueAttributionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[272]})
-var sGetMarketplaceRevenueShareAllocationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMarketplaceRevenueShareAllocationInput, Members: &mGetMarketplaceRevenueShareAllocationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[280]})
-var sGetMarketplaceRevenueShareAllocationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMarketplaceRevenueShareAllocationOutput, Members: &mGetMarketplaceRevenueShareAllocationOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[285]})
-var sGetMarketplaceRevenueShareInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMarketplaceRevenueShareInput, Members: &mGetMarketplaceRevenueShareInput, Type: smithy.ShapeTypeStructure, Ext: &ext[297]})
-var sGetMarketplaceRevenueShareOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMarketplaceRevenueShareOutput, Members: &mGetMarketplaceRevenueShareOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[301]})
-var sGetRevenueAttributionAllocationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevenueAttributionAllocationInput, Members: &mGetRevenueAttributionAllocationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[313]})
-var sGetRevenueAttributionAllocationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevenueAttributionAllocationOutput, Members: &mGetRevenueAttributionAllocationOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[318]})
-var sGetRevenueAttributionAllocationsTaskInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevenueAttributionAllocationsTaskInput, Members: &mGetRevenueAttributionAllocationsTaskInput, Type: smithy.ShapeTypeStructure, Ext: &ext[333]})
-var sGetRevenueAttributionAllocationsTaskOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevenueAttributionAllocationsTaskOutput, Members: &mGetRevenueAttributionAllocationsTaskOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[336]})
-var sGetRevenueAttributionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevenueAttributionInput, Members: &mGetRevenueAttributionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[347]})
-var sGetRevenueAttributionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevenueAttributionOutput, Members: &mGetRevenueAttributionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[351]})
-var sListMarketplaceRevenueShareAllocationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMarketplaceRevenueShareAllocationsInput, Members: &mListMarketplaceRevenueShareAllocationsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[367]})
-var sListMarketplaceRevenueShareAllocationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMarketplaceRevenueShareAllocationsOutput, Members: &mListMarketplaceRevenueShareAllocationsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[378]})
-var sListMarketplaceRevenueSharesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMarketplaceRevenueSharesInput, Members: &mListMarketplaceRevenueSharesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[381]})
-var sListMarketplaceRevenueSharesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMarketplaceRevenueSharesOutput, Members: &mListMarketplaceRevenueSharesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[391]})
-var sListRevenueAttributionAllocationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRevenueAttributionAllocationsInput, Members: &mListRevenueAttributionAllocationsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[394]})
-var sListRevenueAttributionAllocationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRevenueAttributionAllocationsOutput, Members: &mListRevenueAttributionAllocationsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[410]})
-var sListRevenueAttributionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRevenueAttributionsInput, Members: &mListRevenueAttributionsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[413]})
-var sListRevenueAttributionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRevenueAttributionsOutput, Members: &mListRevenueAttributionsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[422]})
-var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[425]})
-var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[427]})
-var sStartRevenueAttributionAllocationsTaskInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRevenueAttributionAllocationsTaskInput, Members: &mStartRevenueAttributionAllocationsTaskInput, Type: smithy.ShapeTypeStructure, Ext: &ext[429]})
-var sStartRevenueAttributionAllocationsTaskOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRevenueAttributionAllocationsTaskOutput, Members: &mStartRevenueAttributionAllocationsTaskOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[436]})
-var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[443]})
-var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[446]})
-var sUpdateMarketplaceRevenueShareAllocationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMarketplaceRevenueShareAllocationInput, Members: &mUpdateMarketplaceRevenueShareAllocationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[449]})
-var sUpdateMarketplaceRevenueShareAllocationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMarketplaceRevenueShareAllocationOutput, Members: &mUpdateMarketplaceRevenueShareAllocationOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[459]})
-var sUpdateRevenueAttributionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRevenueAttributionInput, Members: &mUpdateRevenueAttributionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[471]})
-var sUpdateRevenueAttributionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRevenueAttributionOutput, Members: &mUpdateRevenueAttributionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[477]})
+var sCreateMarketplaceRevenueShare = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMarketplaceRevenueShare, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateMarketplaceRevenueShare})
+var sCreateMarketplaceRevenueShareAllocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMarketplaceRevenueShareAllocation, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateMarketplaceRevenueShareAllocation})
+var sCreateRevenueAttribution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRevenueAttribution, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateRevenueAttribution})
+var sGetMarketplaceRevenueShare = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMarketplaceRevenueShare, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eGetMarketplaceRevenueShare})
+var sGetMarketplaceRevenueShareAllocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMarketplaceRevenueShareAllocation, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eGetMarketplaceRevenueShareAllocation})
+var sGetRevenueAttribution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevenueAttribution, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eGetRevenueAttribution})
+var sGetRevenueAttributionAllocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevenueAttributionAllocation, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eGetRevenueAttributionAllocation})
+var sGetRevenueAttributionAllocationsTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevenueAttributionAllocationsTask, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eGetRevenueAttributionAllocationsTask})
+var sListMarketplaceRevenueShareAllocations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMarketplaceRevenueShareAllocations, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eListMarketplaceRevenueShareAllocations})
+var sListMarketplaceRevenueShares = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMarketplaceRevenueShares, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eListMarketplaceRevenueShares})
+var sListRevenueAttributionAllocations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRevenueAttributionAllocations, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eListRevenueAttributionAllocations})
+var sListRevenueAttributions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRevenueAttributions, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eListRevenueAttributions})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sStartRevenueAttributionAllocationsTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRevenueAttributionAllocationsTask, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eStartRevenueAttributionAllocationsTask})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateMarketplaceRevenueShareAllocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMarketplaceRevenueShareAllocation, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eUpdateMarketplaceRevenueShareAllocation})
+var sUpdateRevenueAttribution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRevenueAttribution, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRevenueAttribution})
+var s_PartnerCentralRevenueMeasurement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartnerCentralRevenueMeasurement, Type: smithy.ShapeTypeService, Ext: &e_PartnerCentralRevenueMeasurement})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDeniedExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedExceptionReason, Members: &mAccessDeniedExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eAccessDeniedExceptionReason})
+var s_AllocationCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AllocationCount, Type: smithy.ShapeTypeInteger, Ext: &e_AllocationCount})
+var s_AllocationEffectiveDateString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &e_AllocationEffectiveDateString})
+var sAllocationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAllocationStatus, Members: &mAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &eAllocationStatus})
+var sAttributionSortBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttributionSortBy, Members: &mAttributionSortBy, Type: smithy.ShapeTypeEnum, Ext: &eAttributionSortBy})
+var sAttributionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttributionSummary, Members: &mAttributionSummary, Type: smithy.ShapeTypeStructure, Ext: &eAttributionSummary})
+var sCatalogName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &eCatalogName})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConflictExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictExceptionReason, Members: &mConflictExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eConflictExceptionReason})
+var s_CustomerAwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerAwsAccountId, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &e_CustomerAwsAccountId})
+var s_CustomerAwsAccountIdFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerAwsAccountIdFilterList, Members: &m_CustomerAwsAccountIdFilterList, Type: smithy.ShapeTypeList, Ext: &e_CustomerAwsAccountIdFilterList})
+var s_EntityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString, Ext: &e_EntityIdentifier})
+var s_EntityIdentifierFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityIdentifierFilterList, Members: &m_EntityIdentifierFilterList, Type: smithy.ShapeTypeList, Ext: &e_EntityIdentifierFilterList})
+var sEntityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeEnum, Ext: &eEntityType})
+var s_EntityTypeFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityTypeFilterList, Members: &m_EntityTypeFilterList, Type: smithy.ShapeTypeList, Ext: &e_EntityTypeFilterList})
+var sFieldValidationCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFieldValidationCode, Members: &mFieldValidationCode, Type: smithy.ShapeTypeEnum, Ext: &eFieldValidationCode})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var s_MarketplaceProductId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &e_MarketplaceProductId})
+var s_MarketplaceProductIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MarketplaceProductIdList, Members: &m_MarketplaceProductIdList, Type: smithy.ShapeTypeList, Ext: &e_MarketplaceProductIdList})
+var sMarketplaceProductSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMarketplaceProductSummary, Members: &mMarketplaceProductSummary, Type: smithy.ShapeTypeStructure, Ext: &eMarketplaceProductSummary})
+var s_MarketplaceRevenueShareAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MarketplaceRevenueShareAllocationId, Type: smithy.ShapeTypeString, Ext: &e_MarketplaceRevenueShareAllocationId})
+var sMarketplaceRevenueShareAllocationSortField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMarketplaceRevenueShareAllocationSortField, Members: &mMarketplaceRevenueShareAllocationSortField, Type: smithy.ShapeTypeEnum, Ext: &eMarketplaceRevenueShareAllocationSortField})
+var sMarketplaceRevenueShareAllocationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMarketplaceRevenueShareAllocationSummary, Members: &mMarketplaceRevenueShareAllocationSummary, Type: smithy.ShapeTypeStructure, Ext: &eMarketplaceRevenueShareAllocationSummary})
+var s_MarketplaceRevenueShareAllocationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MarketplaceRevenueShareAllocationSummaryList, Members: &m_MarketplaceRevenueShareAllocationSummaryList, Type: smithy.ShapeTypeList, Ext: &e_MarketplaceRevenueShareAllocationSummaryList})
+var sMarketplaceRevenueShareSortBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMarketplaceRevenueShareSortBy, Members: &mMarketplaceRevenueShareSortBy, Type: smithy.ShapeTypeEnum, Ext: &eMarketplaceRevenueShareSortBy})
+var sMarketplaceRevenueShareSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMarketplaceRevenueShareSummary, Members: &mMarketplaceRevenueShareSummary, Type: smithy.ShapeTypeStructure, Ext: &eMarketplaceRevenueShareSummary})
+var s_MarketplaceRevenueShareSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MarketplaceRevenueShareSummaryList, Members: &m_MarketplaceRevenueShareSummaryList, Type: smithy.ShapeTypeList, Ext: &e_MarketplaceRevenueShareSummaryList})
+var s_MarketplaceRevenueShareTagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MarketplaceRevenueShareTagList, Members: &m_MarketplaceRevenueShareTagList, Type: smithy.ShapeTypeList, Ext: &e_MarketplaceRevenueShareTagList})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var s_ProductCodeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProductCodeList, Members: &m_ProductCodeList, Type: smithy.ShapeTypeList, Ext: &e_ProductCodeList})
+var s_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceARN, Type: smithy.ShapeTypeString, Ext: &e_ResourceARN})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceNotFoundExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundExceptionReason, Members: &mResourceNotFoundExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eResourceNotFoundExceptionReason})
+var sRevenueAttributionAllocationAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevenueAttributionAllocationAction, Members: &mRevenueAttributionAllocationAction, Type: smithy.ShapeTypeEnum, Ext: &eRevenueAttributionAllocationAction})
+var sRevenueAttributionAllocationErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevenueAttributionAllocationErrorCode, Members: &mRevenueAttributionAllocationErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eRevenueAttributionAllocationErrorCode})
+var sRevenueAttributionAllocationErrorDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevenueAttributionAllocationErrorDetail, Members: &mRevenueAttributionAllocationErrorDetail, Type: smithy.ShapeTypeStructure, Ext: &eRevenueAttributionAllocationErrorDetail})
+var s_RevenueAttributionAllocationErrorDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevenueAttributionAllocationErrorDetailList, Members: &m_RevenueAttributionAllocationErrorDetailList, Type: smithy.ShapeTypeList, Ext: &e_RevenueAttributionAllocationErrorDetailList})
+var s_RevenueAttributionAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevenueAttributionAllocationId, Type: smithy.ShapeTypeString, Ext: &e_RevenueAttributionAllocationId})
+var sRevenueAttributionAllocationSortField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevenueAttributionAllocationSortField, Members: &mRevenueAttributionAllocationSortField, Type: smithy.ShapeTypeEnum, Ext: &eRevenueAttributionAllocationSortField})
+var sRevenueAttributionAllocationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevenueAttributionAllocationSummary, Members: &mRevenueAttributionAllocationSummary, Type: smithy.ShapeTypeStructure, Ext: &eRevenueAttributionAllocationSummary})
+var s_RevenueAttributionAllocationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevenueAttributionAllocationSummaryList, Members: &m_RevenueAttributionAllocationSummaryList, Type: smithy.ShapeTypeList, Ext: &e_RevenueAttributionAllocationSummaryList})
+var s_RevenueAttributionAllocationTaskId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevenueAttributionAllocationTaskId, Type: smithy.ShapeTypeString, Ext: &e_RevenueAttributionAllocationTaskId})
+var sRevenueAttributionAllocationTaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevenueAttributionAllocationTaskStatus, Members: &mRevenueAttributionAllocationTaskStatus, Type: smithy.ShapeTypeEnum, Ext: &eRevenueAttributionAllocationTaskStatus})
+var s_RevenueAttributionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevenueAttributionId, Type: smithy.ShapeTypeString, Ext: &e_RevenueAttributionId})
+var s_RevenueAttributionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevenueAttributionIdentifier, Type: smithy.ShapeTypeString, Ext: &e_RevenueAttributionIdentifier})
+var s_RevenueAttributionIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevenueAttributionIdentifierList, Members: &m_RevenueAttributionIdentifierList, Type: smithy.ShapeTypeList, Ext: &e_RevenueAttributionIdentifierList})
+var s_RevenueAttributionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevenueAttributionSummaries, Members: &m_RevenueAttributionSummaries, Type: smithy.ShapeTypeList, Ext: &e_RevenueAttributionSummaries})
+var sRevenueShareAllocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevenueShareAllocation, Members: &mRevenueShareAllocation, Type: smithy.ShapeTypeStructure, Ext: &eRevenueShareAllocation})
+var s_RevenueShareAllocationChangeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevenueShareAllocationChangeList, Members: &m_RevenueShareAllocationChangeList, Type: smithy.ShapeTypeList, Ext: &e_RevenueShareAllocationChangeList})
+var s_RevenueSharePercent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevenueSharePercent, Type: smithy.ShapeTypeString, Ext: &e_RevenueSharePercent})
+var s_RevisionToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &e_RevisionToken})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sServiceQuotaExceededExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededExceptionReason, Members: &mServiceQuotaExceededExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eServiceQuotaExceededExceptionReason})
+var sSortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &eSortOrder})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTenancyModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTenancyModel, Members: &mTenancyModel, Type: smithy.ShapeTypeEnum, Ext: &eTenancyModel})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
+var sCreateMarketplaceRevenueShareAllocationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMarketplaceRevenueShareAllocationInput, Members: &mCreateMarketplaceRevenueShareAllocationInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateMarketplaceRevenueShareAllocationInput})
+var sCreateMarketplaceRevenueShareAllocationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMarketplaceRevenueShareAllocationOutput, Members: &mCreateMarketplaceRevenueShareAllocationOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateMarketplaceRevenueShareAllocationOutput})
+var sCreateMarketplaceRevenueShareInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMarketplaceRevenueShareInput, Members: &mCreateMarketplaceRevenueShareInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateMarketplaceRevenueShareInput})
+var sCreateMarketplaceRevenueShareOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMarketplaceRevenueShareOutput, Members: &mCreateMarketplaceRevenueShareOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateMarketplaceRevenueShareOutput})
+var sCreateRevenueAttributionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRevenueAttributionInput, Members: &mCreateRevenueAttributionInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateRevenueAttributionInput})
+var sCreateRevenueAttributionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRevenueAttributionOutput, Members: &mCreateRevenueAttributionOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateRevenueAttributionOutput})
+var sGetMarketplaceRevenueShareAllocationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMarketplaceRevenueShareAllocationInput, Members: &mGetMarketplaceRevenueShareAllocationInput, Type: smithy.ShapeTypeStructure, Ext: &eGetMarketplaceRevenueShareAllocationInput})
+var sGetMarketplaceRevenueShareAllocationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMarketplaceRevenueShareAllocationOutput, Members: &mGetMarketplaceRevenueShareAllocationOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetMarketplaceRevenueShareAllocationOutput})
+var sGetMarketplaceRevenueShareInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMarketplaceRevenueShareInput, Members: &mGetMarketplaceRevenueShareInput, Type: smithy.ShapeTypeStructure, Ext: &eGetMarketplaceRevenueShareInput})
+var sGetMarketplaceRevenueShareOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMarketplaceRevenueShareOutput, Members: &mGetMarketplaceRevenueShareOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetMarketplaceRevenueShareOutput})
+var sGetRevenueAttributionAllocationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevenueAttributionAllocationInput, Members: &mGetRevenueAttributionAllocationInput, Type: smithy.ShapeTypeStructure, Ext: &eGetRevenueAttributionAllocationInput})
+var sGetRevenueAttributionAllocationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevenueAttributionAllocationOutput, Members: &mGetRevenueAttributionAllocationOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetRevenueAttributionAllocationOutput})
+var sGetRevenueAttributionAllocationsTaskInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevenueAttributionAllocationsTaskInput, Members: &mGetRevenueAttributionAllocationsTaskInput, Type: smithy.ShapeTypeStructure, Ext: &eGetRevenueAttributionAllocationsTaskInput})
+var sGetRevenueAttributionAllocationsTaskOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevenueAttributionAllocationsTaskOutput, Members: &mGetRevenueAttributionAllocationsTaskOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetRevenueAttributionAllocationsTaskOutput})
+var sGetRevenueAttributionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevenueAttributionInput, Members: &mGetRevenueAttributionInput, Type: smithy.ShapeTypeStructure, Ext: &eGetRevenueAttributionInput})
+var sGetRevenueAttributionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevenueAttributionOutput, Members: &mGetRevenueAttributionOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetRevenueAttributionOutput})
+var sListMarketplaceRevenueShareAllocationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMarketplaceRevenueShareAllocationsInput, Members: &mListMarketplaceRevenueShareAllocationsInput, Type: smithy.ShapeTypeStructure, Ext: &eListMarketplaceRevenueShareAllocationsInput})
+var sListMarketplaceRevenueShareAllocationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMarketplaceRevenueShareAllocationsOutput, Members: &mListMarketplaceRevenueShareAllocationsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListMarketplaceRevenueShareAllocationsOutput})
+var sListMarketplaceRevenueSharesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMarketplaceRevenueSharesInput, Members: &mListMarketplaceRevenueSharesInput, Type: smithy.ShapeTypeStructure, Ext: &eListMarketplaceRevenueSharesInput})
+var sListMarketplaceRevenueSharesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMarketplaceRevenueSharesOutput, Members: &mListMarketplaceRevenueSharesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListMarketplaceRevenueSharesOutput})
+var sListRevenueAttributionAllocationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRevenueAttributionAllocationsInput, Members: &mListRevenueAttributionAllocationsInput, Type: smithy.ShapeTypeStructure, Ext: &eListRevenueAttributionAllocationsInput})
+var sListRevenueAttributionAllocationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRevenueAttributionAllocationsOutput, Members: &mListRevenueAttributionAllocationsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListRevenueAttributionAllocationsOutput})
+var sListRevenueAttributionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRevenueAttributionsInput, Members: &mListRevenueAttributionsInput, Type: smithy.ShapeTypeStructure, Ext: &eListRevenueAttributionsInput})
+var sListRevenueAttributionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRevenueAttributionsOutput, Members: &mListRevenueAttributionsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListRevenueAttributionsOutput})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceInput})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceOutput})
+var sStartRevenueAttributionAllocationsTaskInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRevenueAttributionAllocationsTaskInput, Members: &mStartRevenueAttributionAllocationsTaskInput, Type: smithy.ShapeTypeStructure, Ext: &eStartRevenueAttributionAllocationsTaskInput})
+var sStartRevenueAttributionAllocationsTaskOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRevenueAttributionAllocationsTaskOutput, Members: &mStartRevenueAttributionAllocationsTaskOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartRevenueAttributionAllocationsTaskOutput})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceInput})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceInput})
+var sUpdateMarketplaceRevenueShareAllocationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMarketplaceRevenueShareAllocationInput, Members: &mUpdateMarketplaceRevenueShareAllocationInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMarketplaceRevenueShareAllocationInput})
+var sUpdateMarketplaceRevenueShareAllocationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMarketplaceRevenueShareAllocationOutput, Members: &mUpdateMarketplaceRevenueShareAllocationOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMarketplaceRevenueShareAllocationOutput})
+var sUpdateRevenueAttributionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRevenueAttributionInput, Members: &mUpdateRevenueAttributionInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRevenueAttributionInput})
+var sUpdateRevenueAttributionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRevenueAttributionOutput, Members: &mUpdateRevenueAttributionOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRevenueAttributionOutput})
 
-var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[20]})
-var sAccessDeniedException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iAccessDeniedExceptionReason, Members: &mAccessDeniedExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[21]})
-var sAccessDeniedExceptionReason_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[23]})
-var sAllocationStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[27]})
-var sAllocationStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
-var sAttributionSortBy_LAST_MODIFIED_DATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAST_MODIFIED_DATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[30]})
-var sAttributionSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var sAttributionSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RevenueAttributionId, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var sAttributionSummary_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &ext[34]})
-var sAttributionSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var sAttributionSummary_TenancyModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TenancyModel", ID: &iTenancyModel, Members: &mTenancyModel, Type: smithy.ShapeTypeEnum, Ext: &ext[36]})
-var sAttributionSummary_MarketplaceProduct = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceProduct", ID: &iMarketplaceProductSummary, Members: &mMarketplaceProductSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var sAttributionSummary_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[38]})
-var sAttributionSummary_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[39]})
-var sAttributionSummary_LatestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var sAttributionSummary_EffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[41]})
-var sAttributionSummary_EffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var sAttributionSummary_TotalActiveRevenueAttributionAllocationCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalActiveRevenueAttributionAllocationCount", ID: &i_AllocationCount, Type: smithy.ShapeTypeInteger, Ext: &ext[43]})
-var sAttributionSummary_TotalRevenueAttributionAllocationCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalRevenueAttributionAllocationCount", ID: &i_AllocationCount, Type: smithy.ShapeTypeInteger, Ext: &ext[44]})
-var sCatalogName_AWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[46]})
-var sCatalogName_SANDBOX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SANDBOX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[47]})
-var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[50]})
-var sConflictException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iConflictExceptionReason, Members: &mConflictExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[51]})
-var sConflictExceptionReason_CONFLICT_CLIENT_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFLICT_CLIENT_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[53]})
-var sConflictExceptionReason_CONCURRENT_MODIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONCURRENT_MODIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[54]})
-var sConflictExceptionReason_RESOURCE_ALREADY_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_ALREADY_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[55]})
-var sConflictExceptionReason_REVISION_MISMATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVISION_MISMATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[56]})
-var s_CustomerAwsAccountIdFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CustomerAwsAccountId, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[59]})
-var s_EntityIdentifierFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[62]})
-var sEntityType_OFFER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OFFER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[64]})
-var sEntityType_OPPORTUNITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPPORTUNITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[65]})
-var s_EntityTypeFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeEnum, Ext: &ext[67]})
-var sFieldValidationCode_REQUIRED_FIELD_MISSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUIRED_FIELD_MISSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[69]})
-var sFieldValidationCode_DUPLICATE_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUPLICATE_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[70]})
-var sFieldValidationCode_INVALID_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[71]})
-var sFieldValidationCode_INVALID_STRING_FORMAT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_STRING_FORMAT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sFieldValidationCode_TOO_MANY_VALUES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOO_MANY_VALUES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[73]})
-var sFieldValidationCode_ACTION_NOT_PERMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTION_NOT_PERMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var sFieldValidationCode_INVALID_ENUM_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ENUM_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[75]})
-var sFieldValidationCode_INVALID_NUMBER_FORMAT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_NUMBER_FORMAT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[76]})
-var sFieldValidationCode_INVALID_STRING_LENGTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_STRING_LENGTH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
-var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[79]})
-var s_MarketplaceProductIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &ext[82]})
-var sMarketplaceProductSummary_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[84]})
-var sMarketplaceProductSummary_ProductCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[85]})
-var sMarketplaceProductSummary_ProductName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[86]})
-var sMarketplaceRevenueShareAllocationSortField_EFFECTIVE_FROM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EFFECTIVE_FROM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[89]})
-var sMarketplaceRevenueShareAllocationSummary_MarketplaceRevenueShareAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceRevenueShareAllocationId", ID: &i_MarketplaceRevenueShareAllocationId, Type: smithy.ShapeTypeString, Ext: &ext[91]})
-var sMarketplaceRevenueShareAllocationSummary_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &ext[92]})
-var sMarketplaceRevenueShareAllocationSummary_ProductName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[93]})
-var sMarketplaceRevenueShareAllocationSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[94]})
-var sMarketplaceRevenueShareAllocationSummary_EffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[95]})
-var sMarketplaceRevenueShareAllocationSummary_EffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[96]})
-var sMarketplaceRevenueShareAllocationSummary_RevenueSharePercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueSharePercent", ID: &i_RevenueSharePercent, Type: smithy.ShapeTypeString, Ext: &ext[97]})
-var sMarketplaceRevenueShareAllocationSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAllocationStatus, Members: &mAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[98]})
-var sMarketplaceRevenueShareAllocationSummary_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[99]})
-var sMarketplaceRevenueShareAllocationSummary_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[100]})
-var s_MarketplaceRevenueShareAllocationSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMarketplaceRevenueShareAllocationSummary, Members: &mMarketplaceRevenueShareAllocationSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[102]})
-var sMarketplaceRevenueShareSortBy_LAST_MODIFIED_DATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAST_MODIFIED_DATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[104]})
-var sMarketplaceRevenueShareSummary_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &ext[106]})
-var sMarketplaceRevenueShareSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[107]})
-var sMarketplaceRevenueShareSummary_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &ext[108]})
-var sMarketplaceRevenueShareSummary_ProductCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[109]})
-var sMarketplaceRevenueShareSummary_ProductName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[110]})
-var sMarketplaceRevenueShareSummary_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[111]})
-var sMarketplaceRevenueShareSummary_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[112]})
-var sMarketplaceRevenueShareSummary_LatestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestRevision", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[113]})
-var sMarketplaceRevenueShareSummary_TotalActiveMarketplaceRevenueShareAllocationCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalActiveMarketplaceRevenueShareAllocationCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[114]})
-var sMarketplaceRevenueShareSummary_TotalMarketplaceRevenueShareAllocationCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalMarketplaceRevenueShareAllocationCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[115]})
-var s_MarketplaceRevenueShareSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMarketplaceRevenueShareSummary, Members: &mMarketplaceRevenueShareSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[117]})
-var s_MarketplaceRevenueShareTagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[119]})
-var s_ProductCodeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[122]})
-var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[125]})
-var sResourceNotFoundException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iResourceNotFoundExceptionReason, Members: &mResourceNotFoundExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[126]})
-var sResourceNotFoundExceptionReason_RESOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[128]})
-var sRevenueAttributionAllocationAction_CREATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[130]})
-var sRevenueAttributionAllocationAction_UPDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[131]})
-var sRevenueAttributionAllocationErrorCode_ALLOCATION_CAP_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOCATION_CAP_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[133]})
-var sRevenueAttributionAllocationErrorCode_RESOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[134]})
-var sRevenueAttributionAllocationErrorCode_IMMUTABLE_ALLOCATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMMUTABLE_ALLOCATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[135]})
-var sRevenueAttributionAllocationErrorCode_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[136]})
-var sRevenueAttributionAllocationErrorCode_INVALID_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[137]})
-var sRevenueAttributionAllocationErrorCode_CONCURRENT_MODIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONCURRENT_MODIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[138]})
-var sRevenueAttributionAllocationErrorCode_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[139]})
-var sRevenueAttributionAllocationErrorDetail_RevenueAttributionAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionAllocationId", ID: &i_RevenueAttributionAllocationId, Type: smithy.ShapeTypeString, Ext: &ext[141]})
-var sRevenueAttributionAllocationErrorDetail_EntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityType", ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeEnum, Ext: &ext[142]})
-var sRevenueAttributionAllocationErrorDetail_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[143]})
-var sRevenueAttributionAllocationErrorDetail_CustomerAwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerAwsAccountId", ID: &i_CustomerAwsAccountId, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[144]})
-var sRevenueAttributionAllocationErrorDetail_EffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[145]})
-var sRevenueAttributionAllocationErrorDetail_EffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[146]})
-var sRevenueAttributionAllocationErrorDetail_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iRevenueAttributionAllocationAction, Members: &mRevenueAttributionAllocationAction, Type: smithy.ShapeTypeEnum, Ext: &ext[147]})
-var sRevenueAttributionAllocationErrorDetail_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &iRevenueAttributionAllocationErrorCode, Members: &mRevenueAttributionAllocationErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[148]})
-var sRevenueAttributionAllocationErrorDetail_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[149]})
-var s_RevenueAttributionAllocationErrorDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRevenueAttributionAllocationErrorDetail, Members: &mRevenueAttributionAllocationErrorDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[151]})
-var sRevenueAttributionAllocationSortField_EFFECTIVE_FROM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EFFECTIVE_FROM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[154]})
-var sRevenueAttributionAllocationSummary_RevenueAttributionAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionAllocationId", ID: &i_RevenueAttributionAllocationId, Type: smithy.ShapeTypeString, Ext: &ext[156]})
-var sRevenueAttributionAllocationSummary_RevenueAttributionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionIdentifier", ID: &i_RevenueAttributionIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[157]})
-var sRevenueAttributionAllocationSummary_EntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityType", ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeEnum, Ext: &ext[158]})
-var sRevenueAttributionAllocationSummary_EntityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityIdentifier", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[159]})
-var sRevenueAttributionAllocationSummary_EntityName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[160]})
-var sRevenueAttributionAllocationSummary_CustomerAwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerAwsAccountId", ID: &i_CustomerAwsAccountId, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[161]})
-var sRevenueAttributionAllocationSummary_RevenueSharePercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueSharePercent", ID: &i_RevenueSharePercent, Type: smithy.ShapeTypeString, Ext: &ext[162]})
-var sRevenueAttributionAllocationSummary_EffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[163]})
-var sRevenueAttributionAllocationSummary_EffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[164]})
-var sRevenueAttributionAllocationSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAllocationStatus, Members: &mAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[165]})
-var s_RevenueAttributionAllocationSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRevenueAttributionAllocationSummary, Members: &mRevenueAttributionAllocationSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[167]})
-var sRevenueAttributionAllocationTaskStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[170]})
-var sRevenueAttributionAllocationTaskStatus_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[171]})
-var sRevenueAttributionAllocationTaskStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[172]})
-var s_RevenueAttributionIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RevenueAttributionIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[176]})
-var s_RevenueAttributionSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttributionSummary, Members: &mAttributionSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[178]})
-var sRevenueShareAllocation_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iRevenueAttributionAllocationAction, Members: &mRevenueAttributionAllocationAction, Type: smithy.ShapeTypeEnum, Ext: &ext[180]})
-var sRevenueShareAllocation_RevenueAttributionAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionAllocationId", ID: &i_RevenueAttributionAllocationId, Type: smithy.ShapeTypeString, Ext: &ext[181]})
-var sRevenueShareAllocation_EntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityType", ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeEnum, Ext: &ext[182]})
-var sRevenueShareAllocation_EntityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityIdentifier", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[183]})
-var sRevenueShareAllocation_CustomerAwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerAwsAccountId", ID: &i_CustomerAwsAccountId, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[184]})
-var sRevenueShareAllocation_RevenueSharePercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueSharePercent", ID: &i_RevenueSharePercent, Type: smithy.ShapeTypeString, Ext: &ext[185]})
-var sRevenueShareAllocation_EffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[186]})
-var sRevenueShareAllocation_EffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[187]})
-var sRevenueShareAllocation_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAllocationStatus, Members: &mAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[188]})
-var s_RevenueShareAllocationChangeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRevenueShareAllocation, Members: &mRevenueShareAllocation, Type: smithy.ShapeTypeStructure, Ext: &ext[190]})
-var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[194]})
-var sServiceQuotaExceededException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iServiceQuotaExceededExceptionReason, Members: &mServiceQuotaExceededExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[195]})
-var sServiceQuotaExceededExceptionReason_ATTRIBUTION_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATTRIBUTION_LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[197]})
-var sServiceQuotaExceededExceptionReason_TAG_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TAG_LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[198]})
-var sSortOrder_ASCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[200]})
-var sSortOrder_DESCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[201]})
-var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[203]})
-var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[204]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[207]})
-var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[209]})
-var sTenancyModel_MULTI_TENANT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTI_TENANT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[212]})
-var sTenancyModel_SINGLE_TENANT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_TENANT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[213]})
-var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[215]})
-var sThrottlingException_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[216]})
-var sThrottlingException_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[217]})
-var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[219]})
-var sValidationException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[220]})
-var sValidationException_FieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[221]})
-var sValidationExceptionField_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[223]})
-var sValidationExceptionField_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[224]})
-var sValidationExceptionField_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iFieldValidationCode, Members: &mFieldValidationCode, Type: smithy.ShapeTypeEnum, Ext: &ext[225]})
-var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[227]})
-var sValidationExceptionReason_REQUEST_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUEST_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[229]})
-var sValidationExceptionReason_BUSINESS_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUSINESS_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[230]})
-var sCreateMarketplaceRevenueShareAllocationInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &ext[232]})
-var sCreateMarketplaceRevenueShareAllocationInput_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &ext[233]})
-var sCreateMarketplaceRevenueShareAllocationInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[234]})
-var sCreateMarketplaceRevenueShareAllocationInput_EffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[235]})
-var sCreateMarketplaceRevenueShareAllocationInput_EffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[236]})
-var sCreateMarketplaceRevenueShareAllocationInput_RevenueSharePercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueSharePercent", ID: &i_RevenueSharePercent, Type: smithy.ShapeTypeString, Ext: &ext[237]})
-var sCreateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceRevenueShareAllocationId", ID: &i_MarketplaceRevenueShareAllocationId, Type: smithy.ShapeTypeString, Ext: &ext[239]})
-var sCreateMarketplaceRevenueShareAllocationOutput_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &ext[240]})
-var sCreateMarketplaceRevenueShareAllocationOutput_ProductName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[241]})
-var sCreateMarketplaceRevenueShareAllocationOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[242]})
-var sCreateMarketplaceRevenueShareAllocationOutput_EffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[243]})
-var sCreateMarketplaceRevenueShareAllocationOutput_EffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[244]})
-var sCreateMarketplaceRevenueShareAllocationOutput_RevenueSharePercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueSharePercent", ID: &i_RevenueSharePercent, Type: smithy.ShapeTypeString, Ext: &ext[245]})
-var sCreateMarketplaceRevenueShareAllocationOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAllocationStatus, Members: &mAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[246]})
-var sCreateMarketplaceRevenueShareAllocationOutput_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[247]})
-var sCreateMarketplaceRevenueShareAllocationOutput_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[248]})
-var sCreateMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestMarketplaceRevenueShareRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &ext[249]})
-var sCreateMarketplaceRevenueShareInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &ext[251]})
-var sCreateMarketplaceRevenueShareInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[252]})
-var sCreateMarketplaceRevenueShareInput_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &ext[253]})
-var sCreateMarketplaceRevenueShareInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_MarketplaceRevenueShareTagList, Members: &m_MarketplaceRevenueShareTagList, Type: smithy.ShapeTypeList, Ext: &ext[254]})
-var sCreateMarketplaceRevenueShareOutput_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &ext[256]})
-var sCreateMarketplaceRevenueShareOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[257]})
-var sCreateMarketplaceRevenueShareOutput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &ext[258]})
-var sCreateMarketplaceRevenueShareOutput_ProductCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[259]})
-var sCreateMarketplaceRevenueShareOutput_ProductName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[260]})
-var sCreateMarketplaceRevenueShareOutput_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[261]})
-var sCreateMarketplaceRevenueShareOutput_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[262]})
-var sCreateMarketplaceRevenueShareOutput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[263]})
-var sCreateRevenueAttributionInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &ext[265]})
-var sCreateRevenueAttributionInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[266]})
-var sCreateRevenueAttributionInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[267]})
-var sCreateRevenueAttributionInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[268]})
-var sCreateRevenueAttributionInput_TenancyModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TenancyModel", ID: &iTenancyModel, Members: &mTenancyModel, Type: smithy.ShapeTypeEnum, Ext: &ext[269]})
-var sCreateRevenueAttributionInput_ProductIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[270]})
-var sCreateRevenueAttributionInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[271]})
-var sCreateRevenueAttributionOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RevenueAttributionId, Type: smithy.ShapeTypeString, Ext: &ext[273]})
-var sCreateRevenueAttributionOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[274]})
-var sCreateRevenueAttributionOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[275]})
-var sCreateRevenueAttributionOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[276]})
-var sCreateRevenueAttributionOutput_TenancyModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TenancyModel", ID: &iTenancyModel, Members: &mTenancyModel, Type: smithy.ShapeTypeEnum, Ext: &ext[277]})
-var sCreateRevenueAttributionOutput_MarketplaceProduct = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceProduct", ID: &iMarketplaceProductSummary, Members: &mMarketplaceProductSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[278]})
-var sCreateRevenueAttributionOutput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &ext[279]})
-var sGetMarketplaceRevenueShareAllocationInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &ext[281]})
-var sGetMarketplaceRevenueShareAllocationInput_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &ext[282]})
-var sGetMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceRevenueShareAllocationId", ID: &i_MarketplaceRevenueShareAllocationId, Type: smithy.ShapeTypeString, Ext: &ext[283]})
-var sGetMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceRevenueShareRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &ext[284]})
-var sGetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceRevenueShareAllocationId", ID: &i_MarketplaceRevenueShareAllocationId, Type: smithy.ShapeTypeString, Ext: &ext[286]})
-var sGetMarketplaceRevenueShareAllocationOutput_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &ext[287]})
-var sGetMarketplaceRevenueShareAllocationOutput_ProductName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[288]})
-var sGetMarketplaceRevenueShareAllocationOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[289]})
-var sGetMarketplaceRevenueShareAllocationOutput_EffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[290]})
-var sGetMarketplaceRevenueShareAllocationOutput_EffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[291]})
-var sGetMarketplaceRevenueShareAllocationOutput_RevenueSharePercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueSharePercent", ID: &i_RevenueSharePercent, Type: smithy.ShapeTypeString, Ext: &ext[292]})
-var sGetMarketplaceRevenueShareAllocationOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAllocationStatus, Members: &mAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[293]})
-var sGetMarketplaceRevenueShareAllocationOutput_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[294]})
-var sGetMarketplaceRevenueShareAllocationOutput_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[295]})
-var sGetMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestMarketplaceRevenueShareRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &ext[296]})
-var sGetMarketplaceRevenueShareInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &ext[298]})
-var sGetMarketplaceRevenueShareInput_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &ext[299]})
-var sGetMarketplaceRevenueShareInput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[300]})
-var sGetMarketplaceRevenueShareOutput_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &ext[302]})
-var sGetMarketplaceRevenueShareOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[303]})
-var sGetMarketplaceRevenueShareOutput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &ext[304]})
-var sGetMarketplaceRevenueShareOutput_ProductCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[305]})
-var sGetMarketplaceRevenueShareOutput_ProductName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[306]})
-var sGetMarketplaceRevenueShareOutput_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[307]})
-var sGetMarketplaceRevenueShareOutput_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[308]})
-var sGetMarketplaceRevenueShareOutput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[309]})
-var sGetMarketplaceRevenueShareOutput_LatestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestRevision", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[310]})
-var sGetMarketplaceRevenueShareOutput_TotalActiveMarketplaceRevenueShareAllocationCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalActiveMarketplaceRevenueShareAllocationCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[311]})
-var sGetMarketplaceRevenueShareOutput_TotalMarketplaceRevenueShareAllocationCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalMarketplaceRevenueShareAllocationCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[312]})
-var sGetRevenueAttributionAllocationInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &ext[314]})
-var sGetRevenueAttributionAllocationInput_RevenueAttributionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionIdentifier", ID: &i_RevenueAttributionIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[315]})
-var sGetRevenueAttributionAllocationInput_RevenueAttributionAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionAllocationId", ID: &i_RevenueAttributionAllocationId, Type: smithy.ShapeTypeString, Ext: &ext[316]})
-var sGetRevenueAttributionAllocationInput_RevenueAttributionRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &ext[317]})
-var sGetRevenueAttributionAllocationOutput_RevenueAttributionAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionAllocationId", ID: &i_RevenueAttributionAllocationId, Type: smithy.ShapeTypeString, Ext: &ext[319]})
-var sGetRevenueAttributionAllocationOutput_RevenueAttributionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionIdentifier", ID: &i_RevenueAttributionIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[320]})
-var sGetRevenueAttributionAllocationOutput_EntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityType", ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeEnum, Ext: &ext[321]})
-var sGetRevenueAttributionAllocationOutput_EntityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityIdentifier", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[322]})
-var sGetRevenueAttributionAllocationOutput_EntityName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[323]})
-var sGetRevenueAttributionAllocationOutput_CustomerAwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerAwsAccountId", ID: &i_CustomerAwsAccountId, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[324]})
-var sGetRevenueAttributionAllocationOutput_RevenueSharePercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueSharePercent", ID: &i_RevenueSharePercent, Type: smithy.ShapeTypeString, Ext: &ext[325]})
-var sGetRevenueAttributionAllocationOutput_EffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[326]})
-var sGetRevenueAttributionAllocationOutput_EffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[327]})
-var sGetRevenueAttributionAllocationOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAllocationStatus, Members: &mAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[328]})
-var sGetRevenueAttributionAllocationOutput_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[329]})
-var sGetRevenueAttributionAllocationOutput_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[330]})
-var sGetRevenueAttributionAllocationOutput_RevenueAttributionRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &ext[331]})
-var sGetRevenueAttributionAllocationOutput_RevenueAttributionLatestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionLatestRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &ext[332]})
-var sGetRevenueAttributionAllocationsTaskInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &ext[334]})
-var sGetRevenueAttributionAllocationsTaskInput_RevenueAttributionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionIdentifier", ID: &i_RevenueAttributionIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[335]})
-var sGetRevenueAttributionAllocationsTaskOutput_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &i_RevenueAttributionAllocationTaskId, Type: smithy.ShapeTypeString, Ext: &ext[337]})
-var sGetRevenueAttributionAllocationsTaskOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRevenueAttributionAllocationTaskStatus, Members: &mRevenueAttributionAllocationTaskStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[338]})
-var sGetRevenueAttributionAllocationsTaskOutput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &ext[339]})
-var sGetRevenueAttributionAllocationsTaskOutput_RevenueAttributionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[340]})
-var sGetRevenueAttributionAllocationsTaskOutput_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[341]})
-var sGetRevenueAttributionAllocationsTaskOutput_EndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[342]})
-var sGetRevenueAttributionAllocationsTaskOutput_TotalRevenueAttributionAllocationRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalRevenueAttributionAllocationRecords", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[343]})
-var sGetRevenueAttributionAllocationsTaskOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[344]})
-var sGetRevenueAttributionAllocationsTaskOutput_RevenueAttributionLatestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionLatestRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &ext[345]})
-var sGetRevenueAttributionAllocationsTaskOutput_ErrorDetailList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorDetailList", ID: &i_RevenueAttributionAllocationErrorDetailList, Members: &m_RevenueAttributionAllocationErrorDetailList, Type: smithy.ShapeTypeList, Ext: &ext[346]})
-var sGetRevenueAttributionInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &ext[348]})
-var sGetRevenueAttributionInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_RevenueAttributionIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[349]})
-var sGetRevenueAttributionInput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &ext[350]})
-var sGetRevenueAttributionOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[352]})
-var sGetRevenueAttributionOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RevenueAttributionId, Type: smithy.ShapeTypeString, Ext: &ext[353]})
-var sGetRevenueAttributionOutput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &ext[354]})
-var sGetRevenueAttributionOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[355]})
-var sGetRevenueAttributionOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[356]})
-var sGetRevenueAttributionOutput_TenancyModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TenancyModel", ID: &iTenancyModel, Members: &mTenancyModel, Type: smithy.ShapeTypeEnum, Ext: &ext[357]})
-var sGetRevenueAttributionOutput_MarketplaceProduct = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceProduct", ID: &iMarketplaceProductSummary, Members: &mMarketplaceProductSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[358]})
-var sGetRevenueAttributionOutput_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[359]})
-var sGetRevenueAttributionOutput_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[360]})
-var sGetRevenueAttributionOutput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &ext[361]})
-var sGetRevenueAttributionOutput_LatestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &ext[362]})
-var sGetRevenueAttributionOutput_EffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[363]})
-var sGetRevenueAttributionOutput_EffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[364]})
-var sGetRevenueAttributionOutput_TotalActiveRevenueAttributionAllocationCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalActiveRevenueAttributionAllocationCount", ID: &i_AllocationCount, Type: smithy.ShapeTypeInteger, Ext: &ext[365]})
-var sGetRevenueAttributionOutput_TotalRevenueAttributionAllocationCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalRevenueAttributionAllocationCount", ID: &i_AllocationCount, Type: smithy.ShapeTypeInteger, Ext: &ext[366]})
-var sListMarketplaceRevenueShareAllocationsInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &ext[368]})
-var sListMarketplaceRevenueShareAllocationsInput_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &ext[369]})
-var sListMarketplaceRevenueShareAllocationsInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAllocationStatus, Members: &mAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[370]})
-var sListMarketplaceRevenueShareAllocationsInput_AfterEffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterEffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[371]})
-var sListMarketplaceRevenueShareAllocationsInput_BeforeEffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeforeEffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[372]})
-var sListMarketplaceRevenueShareAllocationsInput_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iMarketplaceRevenueShareAllocationSortField, Members: &mMarketplaceRevenueShareAllocationSortField, Type: smithy.ShapeTypeEnum, Ext: &ext[373]})
-var sListMarketplaceRevenueShareAllocationsInput_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &ext[374]})
-var sListMarketplaceRevenueShareAllocationsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[375]})
-var sListMarketplaceRevenueShareAllocationsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[376]})
-var sListMarketplaceRevenueShareAllocationsInput_MarketplaceRevenueShareRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceRevenueShareRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &ext[377]})
-var sListMarketplaceRevenueShareAllocationsOutput_MarketplaceRevenueShareAllocationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceRevenueShareAllocationSummaries", ID: &i_MarketplaceRevenueShareAllocationSummaryList, Members: &m_MarketplaceRevenueShareAllocationSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[379]})
-var sListMarketplaceRevenueShareAllocationsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[380]})
-var sListMarketplaceRevenueSharesInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &ext[382]})
-var sListMarketplaceRevenueSharesInput_ProductIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductIds", ID: &i_MarketplaceProductIdList, Members: &m_MarketplaceProductIdList, Type: smithy.ShapeTypeList, Ext: &ext[383]})
-var sListMarketplaceRevenueSharesInput_ProductCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductCodes", ID: &i_ProductCodeList, Members: &m_ProductCodeList, Type: smithy.ShapeTypeList, Ext: &ext[384]})
-var sListMarketplaceRevenueSharesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[385]})
-var sListMarketplaceRevenueSharesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[386]})
-var sListMarketplaceRevenueSharesInput_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iMarketplaceRevenueShareSortBy, Members: &mMarketplaceRevenueShareSortBy, Type: smithy.ShapeTypeEnum, Ext: &ext[387]})
-var sListMarketplaceRevenueSharesInput_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &ext[388]})
-var sListMarketplaceRevenueSharesInput_CreatedAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAfter", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[389]})
-var sListMarketplaceRevenueSharesInput_CreatedBefore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBefore", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[390]})
-var sListMarketplaceRevenueSharesOutput_MarketplaceRevenueShareSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceRevenueShareSummaries", ID: &i_MarketplaceRevenueShareSummaryList, Members: &m_MarketplaceRevenueShareSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[392]})
-var sListMarketplaceRevenueSharesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[393]})
-var sListRevenueAttributionAllocationsInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &ext[395]})
-var sListRevenueAttributionAllocationsInput_RevenueAttributionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionIdentifier", ID: &i_RevenueAttributionIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[396]})
-var sListRevenueAttributionAllocationsInput_EntityTypeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityTypeFilters", ID: &i_EntityTypeFilterList, Members: &m_EntityTypeFilterList, Type: smithy.ShapeTypeList, Ext: &ext[397]})
-var sListRevenueAttributionAllocationsInput_EntityIdentifierFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityIdentifierFilters", ID: &i_EntityIdentifierFilterList, Members: &m_EntityIdentifierFilterList, Type: smithy.ShapeTypeList, Ext: &ext[398]})
-var sListRevenueAttributionAllocationsInput_CustomerAwsAccountIdFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerAwsAccountIdFilters", ID: &i_CustomerAwsAccountIdFilterList, Members: &m_CustomerAwsAccountIdFilterList, Type: smithy.ShapeTypeList, Ext: &ext[399]})
-var sListRevenueAttributionAllocationsInput_StatusFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusFilter", ID: &iAllocationStatus, Members: &mAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[400]})
-var sListRevenueAttributionAllocationsInput_AfterEffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterEffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[401]})
-var sListRevenueAttributionAllocationsInput_BeforeEffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeforeEffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[402]})
-var sListRevenueAttributionAllocationsInput_AfterEffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterEffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[403]})
-var sListRevenueAttributionAllocationsInput_BeforeEffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeforeEffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[404]})
-var sListRevenueAttributionAllocationsInput_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iRevenueAttributionAllocationSortField, Members: &mRevenueAttributionAllocationSortField, Type: smithy.ShapeTypeEnum, Ext: &ext[405]})
-var sListRevenueAttributionAllocationsInput_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &ext[406]})
-var sListRevenueAttributionAllocationsInput_RevenueAttributionRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &ext[407]})
-var sListRevenueAttributionAllocationsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[408]})
-var sListRevenueAttributionAllocationsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[409]})
-var sListRevenueAttributionAllocationsOutput_RevenueAttributionAllocationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionAllocationSummaries", ID: &i_RevenueAttributionAllocationSummaryList, Members: &m_RevenueAttributionAllocationSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[411]})
-var sListRevenueAttributionAllocationsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[412]})
-var sListRevenueAttributionsInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &ext[414]})
-var sListRevenueAttributionsInput_Identifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifiers", ID: &i_RevenueAttributionIdentifierList, Members: &m_RevenueAttributionIdentifierList, Type: smithy.ShapeTypeList, Ext: &ext[415]})
-var sListRevenueAttributionsInput_CreatedAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAfter", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[416]})
-var sListRevenueAttributionsInput_CreatedBefore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBefore", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[417]})
-var sListRevenueAttributionsInput_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iAttributionSortBy, Members: &mAttributionSortBy, Type: smithy.ShapeTypeEnum, Ext: &ext[418]})
-var sListRevenueAttributionsInput_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &ext[419]})
-var sListRevenueAttributionsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[420]})
-var sListRevenueAttributionsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[421]})
-var sListRevenueAttributionsOutput_RevenueAttributionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionSummaries", ID: &i_RevenueAttributionSummaries, Members: &m_RevenueAttributionSummaries, Type: smithy.ShapeTypeList, Ext: &ext[423]})
-var sListRevenueAttributionsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[424]})
-var sListTagsForResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceARN, Type: smithy.ShapeTypeString, Ext: &ext[426]})
-var sListTagsForResourceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[428]})
-var sStartRevenueAttributionAllocationsTaskInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &ext[430]})
-var sStartRevenueAttributionAllocationsTaskInput_RevenueAttributionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionIdentifier", ID: &i_RevenueAttributionIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[431]})
-var sStartRevenueAttributionAllocationsTaskInput_RevenueAttributionRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &ext[432]})
-var sStartRevenueAttributionAllocationsTaskInput_RevenueShareAllocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueShareAllocations", ID: &i_RevenueShareAllocationChangeList, Members: &m_RevenueShareAllocationChangeList, Type: smithy.ShapeTypeList, Ext: &ext[433]})
-var sStartRevenueAttributionAllocationsTaskInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[434]})
-var sStartRevenueAttributionAllocationsTaskInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[435]})
-var sStartRevenueAttributionAllocationsTaskOutput_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &i_RevenueAttributionAllocationTaskId, Type: smithy.ShapeTypeString, Ext: &ext[437]})
-var sStartRevenueAttributionAllocationsTaskOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRevenueAttributionAllocationTaskStatus, Members: &mRevenueAttributionAllocationTaskStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[438]})
-var sStartRevenueAttributionAllocationsTaskOutput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &ext[439]})
-var sStartRevenueAttributionAllocationsTaskOutput_RevenueAttributionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[440]})
-var sStartRevenueAttributionAllocationsTaskOutput_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[441]})
-var sStartRevenueAttributionAllocationsTaskOutput_TotalRevenueAttributionAllocationRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalRevenueAttributionAllocationRecords", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[442]})
-var sTagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceARN, Type: smithy.ShapeTypeString, Ext: &ext[444]})
-var sTagResourceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[445]})
-var sUntagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceARN, Type: smithy.ShapeTypeString, Ext: &ext[447]})
-var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[448]})
-var sUpdateMarketplaceRevenueShareAllocationInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &ext[450]})
-var sUpdateMarketplaceRevenueShareAllocationInput_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &ext[451]})
-var sUpdateMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceRevenueShareAllocationId", ID: &i_MarketplaceRevenueShareAllocationId, Type: smithy.ShapeTypeString, Ext: &ext[452]})
-var sUpdateMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceRevenueShareRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &ext[453]})
-var sUpdateMarketplaceRevenueShareAllocationInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[454]})
-var sUpdateMarketplaceRevenueShareAllocationInput_EffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[455]})
-var sUpdateMarketplaceRevenueShareAllocationInput_EffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[456]})
-var sUpdateMarketplaceRevenueShareAllocationInput_RevenueSharePercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueSharePercent", ID: &i_RevenueSharePercent, Type: smithy.ShapeTypeString, Ext: &ext[457]})
-var sUpdateMarketplaceRevenueShareAllocationInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAllocationStatus, Members: &mAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[458]})
-var sUpdateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceRevenueShareAllocationId", ID: &i_MarketplaceRevenueShareAllocationId, Type: smithy.ShapeTypeString, Ext: &ext[460]})
-var sUpdateMarketplaceRevenueShareAllocationOutput_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &ext[461]})
-var sUpdateMarketplaceRevenueShareAllocationOutput_ProductName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[462]})
-var sUpdateMarketplaceRevenueShareAllocationOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[463]})
-var sUpdateMarketplaceRevenueShareAllocationOutput_EffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[464]})
-var sUpdateMarketplaceRevenueShareAllocationOutput_EffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &ext[465]})
-var sUpdateMarketplaceRevenueShareAllocationOutput_RevenueSharePercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueSharePercent", ID: &i_RevenueSharePercent, Type: smithy.ShapeTypeString, Ext: &ext[466]})
-var sUpdateMarketplaceRevenueShareAllocationOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAllocationStatus, Members: &mAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[467]})
-var sUpdateMarketplaceRevenueShareAllocationOutput_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[468]})
-var sUpdateMarketplaceRevenueShareAllocationOutput_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[469]})
-var sUpdateMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestMarketplaceRevenueShareRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &ext[470]})
-var sUpdateRevenueAttributionInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &ext[472]})
-var sUpdateRevenueAttributionInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_RevenueAttributionIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[473]})
-var sUpdateRevenueAttributionInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[474]})
-var sUpdateRevenueAttributionInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[475]})
-var sUpdateRevenueAttributionInput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &ext[476]})
-var sUpdateRevenueAttributionOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RevenueAttributionId, Type: smithy.ShapeTypeString, Ext: &ext[478]})
-var sUpdateRevenueAttributionOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[479]})
-var sUpdateRevenueAttributionOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[480]})
-var sUpdateRevenueAttributionOutput_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[481]})
-var sUpdateRevenueAttributionOutput_LatestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &ext[482]})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var sAccessDeniedException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iAccessDeniedExceptionReason, Members: &mAccessDeniedExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eAccessDeniedException_Reason})
+var sAccessDeniedExceptionReason_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedExceptionReason_ACCESS_DENIED})
+var sAllocationStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAllocationStatus_ACTIVE})
+var sAllocationStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAllocationStatus_INACTIVE})
+var sAttributionSortBy_LAST_MODIFIED_DATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAST_MODIFIED_DATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAttributionSortBy_LAST_MODIFIED_DATE})
+var sAttributionSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAttributionSummary_Arn})
+var sAttributionSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RevenueAttributionId, Type: smithy.ShapeTypeString, Ext: &eAttributionSummary_Id})
+var sAttributionSummary_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &eAttributionSummary_Catalog})
+var sAttributionSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAttributionSummary_Name})
+var sAttributionSummary_TenancyModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TenancyModel", ID: &iTenancyModel, Members: &mTenancyModel, Type: smithy.ShapeTypeEnum, Ext: &eAttributionSummary_TenancyModel})
+var sAttributionSummary_MarketplaceProduct = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceProduct", ID: &iMarketplaceProductSummary, Members: &mMarketplaceProductSummary, Type: smithy.ShapeTypeStructure, Ext: &eAttributionSummary_MarketplaceProduct})
+var sAttributionSummary_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAttributionSummary_CreatedDate})
+var sAttributionSummary_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAttributionSummary_LastModifiedDate})
+var sAttributionSummary_LatestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &eAttributionSummary_LatestRevision})
+var sAttributionSummary_EffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eAttributionSummary_EffectiveFrom})
+var sAttributionSummary_EffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eAttributionSummary_EffectiveUntil})
+var sAttributionSummary_TotalActiveRevenueAttributionAllocationCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalActiveRevenueAttributionAllocationCount", ID: &i_AllocationCount, Type: smithy.ShapeTypeInteger, Ext: &eAttributionSummary_TotalActiveRevenueAttributionAllocationCount})
+var sAttributionSummary_TotalRevenueAttributionAllocationCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalRevenueAttributionAllocationCount", ID: &i_AllocationCount, Type: smithy.ShapeTypeInteger, Ext: &eAttributionSummary_TotalRevenueAttributionAllocationCount})
+var sCatalogName_AWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCatalogName_AWS})
+var sCatalogName_SANDBOX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SANDBOX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCatalogName_SANDBOX})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var sConflictException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iConflictExceptionReason, Members: &mConflictExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eConflictException_Reason})
+var sConflictExceptionReason_CONFLICT_CLIENT_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFLICT_CLIENT_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictExceptionReason_CONFLICT_CLIENT_TOKEN})
+var sConflictExceptionReason_CONCURRENT_MODIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONCURRENT_MODIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictExceptionReason_CONCURRENT_MODIFICATION})
+var sConflictExceptionReason_RESOURCE_ALREADY_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_ALREADY_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictExceptionReason_RESOURCE_ALREADY_EXISTS})
+var sConflictExceptionReason_REVISION_MISMATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVISION_MISMATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConflictExceptionReason_REVISION_MISMATCH})
+var s_CustomerAwsAccountIdFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CustomerAwsAccountId, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_CustomerAwsAccountIdFilterList_member})
+var s_EntityIdentifierFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString, Ext: &e_EntityIdentifierFilterList_member})
+var sEntityType_OFFER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OFFER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEntityType_OFFER})
+var sEntityType_OPPORTUNITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPPORTUNITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEntityType_OPPORTUNITY})
+var s_EntityTypeFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeEnum, Ext: &e_EntityTypeFilterList_member})
+var sFieldValidationCode_REQUIRED_FIELD_MISSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUIRED_FIELD_MISSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFieldValidationCode_REQUIRED_FIELD_MISSING})
+var sFieldValidationCode_DUPLICATE_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUPLICATE_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFieldValidationCode_DUPLICATE_VALUE})
+var sFieldValidationCode_INVALID_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFieldValidationCode_INVALID_VALUE})
+var sFieldValidationCode_INVALID_STRING_FORMAT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_STRING_FORMAT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFieldValidationCode_INVALID_STRING_FORMAT})
+var sFieldValidationCode_TOO_MANY_VALUES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOO_MANY_VALUES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFieldValidationCode_TOO_MANY_VALUES})
+var sFieldValidationCode_ACTION_NOT_PERMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTION_NOT_PERMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFieldValidationCode_ACTION_NOT_PERMITTED})
+var sFieldValidationCode_INVALID_ENUM_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ENUM_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFieldValidationCode_INVALID_ENUM_VALUE})
+var sFieldValidationCode_INVALID_NUMBER_FORMAT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_NUMBER_FORMAT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFieldValidationCode_INVALID_NUMBER_FORMAT})
+var sFieldValidationCode_INVALID_STRING_LENGTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_STRING_LENGTH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFieldValidationCode_INVALID_STRING_LENGTH})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var s_MarketplaceProductIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &e_MarketplaceProductIdList_member})
+var sMarketplaceProductSummary_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMarketplaceProductSummary_ProductId})
+var sMarketplaceProductSummary_ProductCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMarketplaceProductSummary_ProductCode})
+var sMarketplaceProductSummary_ProductName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMarketplaceProductSummary_ProductName})
+var sMarketplaceRevenueShareAllocationSortField_EFFECTIVE_FROM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EFFECTIVE_FROM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMarketplaceRevenueShareAllocationSortField_EFFECTIVE_FROM})
+var sMarketplaceRevenueShareAllocationSummary_MarketplaceRevenueShareAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceRevenueShareAllocationId", ID: &i_MarketplaceRevenueShareAllocationId, Type: smithy.ShapeTypeString, Ext: &eMarketplaceRevenueShareAllocationSummary_MarketplaceRevenueShareAllocationId})
+var sMarketplaceRevenueShareAllocationSummary_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &eMarketplaceRevenueShareAllocationSummary_ProductId})
+var sMarketplaceRevenueShareAllocationSummary_ProductName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMarketplaceRevenueShareAllocationSummary_ProductName})
+var sMarketplaceRevenueShareAllocationSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMarketplaceRevenueShareAllocationSummary_Arn})
+var sMarketplaceRevenueShareAllocationSummary_EffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eMarketplaceRevenueShareAllocationSummary_EffectiveFrom})
+var sMarketplaceRevenueShareAllocationSummary_EffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eMarketplaceRevenueShareAllocationSummary_EffectiveUntil})
+var sMarketplaceRevenueShareAllocationSummary_RevenueSharePercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueSharePercent", ID: &i_RevenueSharePercent, Type: smithy.ShapeTypeString, Ext: &eMarketplaceRevenueShareAllocationSummary_RevenueSharePercent})
+var sMarketplaceRevenueShareAllocationSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAllocationStatus, Members: &mAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &eMarketplaceRevenueShareAllocationSummary_Status})
+var sMarketplaceRevenueShareAllocationSummary_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMarketplaceRevenueShareAllocationSummary_CreatedDate})
+var sMarketplaceRevenueShareAllocationSummary_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMarketplaceRevenueShareAllocationSummary_LastModifiedDate})
+var s_MarketplaceRevenueShareAllocationSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMarketplaceRevenueShareAllocationSummary, Members: &mMarketplaceRevenueShareAllocationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_MarketplaceRevenueShareAllocationSummaryList_member})
+var sMarketplaceRevenueShareSortBy_LAST_MODIFIED_DATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAST_MODIFIED_DATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMarketplaceRevenueShareSortBy_LAST_MODIFIED_DATE})
+var sMarketplaceRevenueShareSummary_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &eMarketplaceRevenueShareSummary_ProductId})
+var sMarketplaceRevenueShareSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMarketplaceRevenueShareSummary_Arn})
+var sMarketplaceRevenueShareSummary_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &eMarketplaceRevenueShareSummary_Catalog})
+var sMarketplaceRevenueShareSummary_ProductCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMarketplaceRevenueShareSummary_ProductCode})
+var sMarketplaceRevenueShareSummary_ProductName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMarketplaceRevenueShareSummary_ProductName})
+var sMarketplaceRevenueShareSummary_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMarketplaceRevenueShareSummary_CreatedDate})
+var sMarketplaceRevenueShareSummary_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMarketplaceRevenueShareSummary_LastModifiedDate})
+var sMarketplaceRevenueShareSummary_LatestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestRevision", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eMarketplaceRevenueShareSummary_LatestRevision})
+var sMarketplaceRevenueShareSummary_TotalActiveMarketplaceRevenueShareAllocationCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalActiveMarketplaceRevenueShareAllocationCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eMarketplaceRevenueShareSummary_TotalActiveMarketplaceRevenueShareAllocationCount})
+var sMarketplaceRevenueShareSummary_TotalMarketplaceRevenueShareAllocationCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalMarketplaceRevenueShareAllocationCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eMarketplaceRevenueShareSummary_TotalMarketplaceRevenueShareAllocationCount})
+var s_MarketplaceRevenueShareSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMarketplaceRevenueShareSummary, Members: &mMarketplaceRevenueShareSummary, Type: smithy.ShapeTypeStructure, Ext: &e_MarketplaceRevenueShareSummaryList_member})
+var s_MarketplaceRevenueShareTagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_MarketplaceRevenueShareTagList_member})
+var s_ProductCodeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_ProductCodeList_member})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sResourceNotFoundException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iResourceNotFoundExceptionReason, Members: &mResourceNotFoundExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eResourceNotFoundException_Reason})
+var sResourceNotFoundExceptionReason_RESOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundExceptionReason_RESOURCE_NOT_FOUND})
+var sRevenueAttributionAllocationAction_CREATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevenueAttributionAllocationAction_CREATE})
+var sRevenueAttributionAllocationAction_UPDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevenueAttributionAllocationAction_UPDATE})
+var sRevenueAttributionAllocationErrorCode_ALLOCATION_CAP_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOCATION_CAP_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevenueAttributionAllocationErrorCode_ALLOCATION_CAP_EXCEEDED})
+var sRevenueAttributionAllocationErrorCode_RESOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevenueAttributionAllocationErrorCode_RESOURCE_NOT_FOUND})
+var sRevenueAttributionAllocationErrorCode_IMMUTABLE_ALLOCATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMMUTABLE_ALLOCATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevenueAttributionAllocationErrorCode_IMMUTABLE_ALLOCATION})
+var sRevenueAttributionAllocationErrorCode_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevenueAttributionAllocationErrorCode_ACCESS_DENIED})
+var sRevenueAttributionAllocationErrorCode_INVALID_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevenueAttributionAllocationErrorCode_INVALID_VALUE})
+var sRevenueAttributionAllocationErrorCode_CONCURRENT_MODIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONCURRENT_MODIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevenueAttributionAllocationErrorCode_CONCURRENT_MODIFICATION})
+var sRevenueAttributionAllocationErrorCode_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevenueAttributionAllocationErrorCode_INTERNAL_ERROR})
+var sRevenueAttributionAllocationErrorDetail_RevenueAttributionAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionAllocationId", ID: &i_RevenueAttributionAllocationId, Type: smithy.ShapeTypeString, Ext: &eRevenueAttributionAllocationErrorDetail_RevenueAttributionAllocationId})
+var sRevenueAttributionAllocationErrorDetail_EntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityType", ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeEnum, Ext: &eRevenueAttributionAllocationErrorDetail_EntityType})
+var sRevenueAttributionAllocationErrorDetail_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString, Ext: &eRevenueAttributionAllocationErrorDetail_EntityId})
+var sRevenueAttributionAllocationErrorDetail_CustomerAwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerAwsAccountId", ID: &i_CustomerAwsAccountId, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eRevenueAttributionAllocationErrorDetail_CustomerAwsAccountId})
+var sRevenueAttributionAllocationErrorDetail_EffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eRevenueAttributionAllocationErrorDetail_EffectiveFrom})
+var sRevenueAttributionAllocationErrorDetail_EffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eRevenueAttributionAllocationErrorDetail_EffectiveUntil})
+var sRevenueAttributionAllocationErrorDetail_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iRevenueAttributionAllocationAction, Members: &mRevenueAttributionAllocationAction, Type: smithy.ShapeTypeEnum, Ext: &eRevenueAttributionAllocationErrorDetail_Action})
+var sRevenueAttributionAllocationErrorDetail_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &iRevenueAttributionAllocationErrorCode, Members: &mRevenueAttributionAllocationErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eRevenueAttributionAllocationErrorDetail_ErrorCode})
+var sRevenueAttributionAllocationErrorDetail_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRevenueAttributionAllocationErrorDetail_ErrorMessage})
+var s_RevenueAttributionAllocationErrorDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRevenueAttributionAllocationErrorDetail, Members: &mRevenueAttributionAllocationErrorDetail, Type: smithy.ShapeTypeStructure, Ext: &e_RevenueAttributionAllocationErrorDetailList_member})
+var sRevenueAttributionAllocationSortField_EFFECTIVE_FROM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EFFECTIVE_FROM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevenueAttributionAllocationSortField_EFFECTIVE_FROM})
+var sRevenueAttributionAllocationSummary_RevenueAttributionAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionAllocationId", ID: &i_RevenueAttributionAllocationId, Type: smithy.ShapeTypeString, Ext: &eRevenueAttributionAllocationSummary_RevenueAttributionAllocationId})
+var sRevenueAttributionAllocationSummary_RevenueAttributionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionIdentifier", ID: &i_RevenueAttributionIdentifier, Type: smithy.ShapeTypeString, Ext: &eRevenueAttributionAllocationSummary_RevenueAttributionIdentifier})
+var sRevenueAttributionAllocationSummary_EntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityType", ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeEnum, Ext: &eRevenueAttributionAllocationSummary_EntityType})
+var sRevenueAttributionAllocationSummary_EntityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityIdentifier", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString, Ext: &eRevenueAttributionAllocationSummary_EntityIdentifier})
+var sRevenueAttributionAllocationSummary_EntityName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRevenueAttributionAllocationSummary_EntityName})
+var sRevenueAttributionAllocationSummary_CustomerAwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerAwsAccountId", ID: &i_CustomerAwsAccountId, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eRevenueAttributionAllocationSummary_CustomerAwsAccountId})
+var sRevenueAttributionAllocationSummary_RevenueSharePercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueSharePercent", ID: &i_RevenueSharePercent, Type: smithy.ShapeTypeString, Ext: &eRevenueAttributionAllocationSummary_RevenueSharePercent})
+var sRevenueAttributionAllocationSummary_EffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eRevenueAttributionAllocationSummary_EffectiveFrom})
+var sRevenueAttributionAllocationSummary_EffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eRevenueAttributionAllocationSummary_EffectiveUntil})
+var sRevenueAttributionAllocationSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAllocationStatus, Members: &mAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &eRevenueAttributionAllocationSummary_Status})
+var s_RevenueAttributionAllocationSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRevenueAttributionAllocationSummary, Members: &mRevenueAttributionAllocationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_RevenueAttributionAllocationSummaryList_member})
+var sRevenueAttributionAllocationTaskStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevenueAttributionAllocationTaskStatus_IN_PROGRESS})
+var sRevenueAttributionAllocationTaskStatus_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevenueAttributionAllocationTaskStatus_COMPLETE})
+var sRevenueAttributionAllocationTaskStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevenueAttributionAllocationTaskStatus_FAILED})
+var s_RevenueAttributionIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RevenueAttributionIdentifier, Type: smithy.ShapeTypeString, Ext: &e_RevenueAttributionIdentifierList_member})
+var s_RevenueAttributionSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttributionSummary, Members: &mAttributionSummary, Type: smithy.ShapeTypeStructure, Ext: &e_RevenueAttributionSummaries_member})
+var sRevenueShareAllocation_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iRevenueAttributionAllocationAction, Members: &mRevenueAttributionAllocationAction, Type: smithy.ShapeTypeEnum, Ext: &eRevenueShareAllocation_Action})
+var sRevenueShareAllocation_RevenueAttributionAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionAllocationId", ID: &i_RevenueAttributionAllocationId, Type: smithy.ShapeTypeString, Ext: &eRevenueShareAllocation_RevenueAttributionAllocationId})
+var sRevenueShareAllocation_EntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityType", ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeEnum, Ext: &eRevenueShareAllocation_EntityType})
+var sRevenueShareAllocation_EntityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityIdentifier", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString, Ext: &eRevenueShareAllocation_EntityIdentifier})
+var sRevenueShareAllocation_CustomerAwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerAwsAccountId", ID: &i_CustomerAwsAccountId, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eRevenueShareAllocation_CustomerAwsAccountId})
+var sRevenueShareAllocation_RevenueSharePercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueSharePercent", ID: &i_RevenueSharePercent, Type: smithy.ShapeTypeString, Ext: &eRevenueShareAllocation_RevenueSharePercent})
+var sRevenueShareAllocation_EffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eRevenueShareAllocation_EffectiveFrom})
+var sRevenueShareAllocation_EffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eRevenueShareAllocation_EffectiveUntil})
+var sRevenueShareAllocation_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAllocationStatus, Members: &mAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &eRevenueShareAllocation_Status})
+var s_RevenueShareAllocationChangeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRevenueShareAllocation, Members: &mRevenueShareAllocation, Type: smithy.ShapeTypeStructure, Ext: &e_RevenueShareAllocationChangeList_member})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_Message})
+var sServiceQuotaExceededException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iServiceQuotaExceededExceptionReason, Members: &mServiceQuotaExceededExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eServiceQuotaExceededException_Reason})
+var sServiceQuotaExceededExceptionReason_ATTRIBUTION_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATTRIBUTION_LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededExceptionReason_ATTRIBUTION_LIMIT_EXCEEDED})
+var sServiceQuotaExceededExceptionReason_TAG_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TAG_LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededExceptionReason_TAG_LIMIT_EXCEEDED})
+var sSortOrder_ASCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortOrder_ASCENDING})
+var sSortOrder_DESCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSortOrder_DESCENDING})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var sTenancyModel_MULTI_TENANT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTI_TENANT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTenancyModel_MULTI_TENANT})
+var sTenancyModel_SINGLE_TENANT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_TENANT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTenancyModel_SINGLE_TENANT})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var sThrottlingException_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_ServiceCode})
+var sThrottlingException_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_QuotaCode})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sValidationException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_Reason})
+var sValidationException_FieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_FieldList})
+var sValidationExceptionField_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_Name})
+var sValidationExceptionField_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_Message})
+var sValidationExceptionField_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iFieldValidationCode, Members: &mFieldValidationCode, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionField_Code})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var sValidationExceptionReason_REQUEST_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUEST_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_REQUEST_VALIDATION_FAILED})
+var sValidationExceptionReason_BUSINESS_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUSINESS_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_BUSINESS_VALIDATION_FAILED})
+var sCreateMarketplaceRevenueShareAllocationInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &eCreateMarketplaceRevenueShareAllocationInput_Catalog})
+var sCreateMarketplaceRevenueShareAllocationInput_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &eCreateMarketplaceRevenueShareAllocationInput_ProductId})
+var sCreateMarketplaceRevenueShareAllocationInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateMarketplaceRevenueShareAllocationInput_ClientToken})
+var sCreateMarketplaceRevenueShareAllocationInput_EffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eCreateMarketplaceRevenueShareAllocationInput_EffectiveFrom})
+var sCreateMarketplaceRevenueShareAllocationInput_EffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eCreateMarketplaceRevenueShareAllocationInput_EffectiveUntil})
+var sCreateMarketplaceRevenueShareAllocationInput_RevenueSharePercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueSharePercent", ID: &i_RevenueSharePercent, Type: smithy.ShapeTypeString, Ext: &eCreateMarketplaceRevenueShareAllocationInput_RevenueSharePercent})
+var sCreateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceRevenueShareAllocationId", ID: &i_MarketplaceRevenueShareAllocationId, Type: smithy.ShapeTypeString, Ext: &eCreateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId})
+var sCreateMarketplaceRevenueShareAllocationOutput_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &eCreateMarketplaceRevenueShareAllocationOutput_ProductId})
+var sCreateMarketplaceRevenueShareAllocationOutput_ProductName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateMarketplaceRevenueShareAllocationOutput_ProductName})
+var sCreateMarketplaceRevenueShareAllocationOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateMarketplaceRevenueShareAllocationOutput_Arn})
+var sCreateMarketplaceRevenueShareAllocationOutput_EffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eCreateMarketplaceRevenueShareAllocationOutput_EffectiveFrom})
+var sCreateMarketplaceRevenueShareAllocationOutput_EffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eCreateMarketplaceRevenueShareAllocationOutput_EffectiveUntil})
+var sCreateMarketplaceRevenueShareAllocationOutput_RevenueSharePercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueSharePercent", ID: &i_RevenueSharePercent, Type: smithy.ShapeTypeString, Ext: &eCreateMarketplaceRevenueShareAllocationOutput_RevenueSharePercent})
+var sCreateMarketplaceRevenueShareAllocationOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAllocationStatus, Members: &mAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateMarketplaceRevenueShareAllocationOutput_Status})
+var sCreateMarketplaceRevenueShareAllocationOutput_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateMarketplaceRevenueShareAllocationOutput_CreatedDate})
+var sCreateMarketplaceRevenueShareAllocationOutput_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateMarketplaceRevenueShareAllocationOutput_LastModifiedDate})
+var sCreateMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestMarketplaceRevenueShareRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &eCreateMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision})
+var sCreateMarketplaceRevenueShareInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &eCreateMarketplaceRevenueShareInput_Catalog})
+var sCreateMarketplaceRevenueShareInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateMarketplaceRevenueShareInput_ClientToken})
+var sCreateMarketplaceRevenueShareInput_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &eCreateMarketplaceRevenueShareInput_ProductId})
+var sCreateMarketplaceRevenueShareInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_MarketplaceRevenueShareTagList, Members: &m_MarketplaceRevenueShareTagList, Type: smithy.ShapeTypeList, Ext: &eCreateMarketplaceRevenueShareInput_Tags})
+var sCreateMarketplaceRevenueShareOutput_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &eCreateMarketplaceRevenueShareOutput_ProductId})
+var sCreateMarketplaceRevenueShareOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateMarketplaceRevenueShareOutput_Arn})
+var sCreateMarketplaceRevenueShareOutput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &eCreateMarketplaceRevenueShareOutput_Catalog})
+var sCreateMarketplaceRevenueShareOutput_ProductCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateMarketplaceRevenueShareOutput_ProductCode})
+var sCreateMarketplaceRevenueShareOutput_ProductName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateMarketplaceRevenueShareOutput_ProductName})
+var sCreateMarketplaceRevenueShareOutput_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateMarketplaceRevenueShareOutput_CreatedDate})
+var sCreateMarketplaceRevenueShareOutput_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateMarketplaceRevenueShareOutput_LastModifiedDate})
+var sCreateMarketplaceRevenueShareOutput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eCreateMarketplaceRevenueShareOutput_Revision})
+var sCreateRevenueAttributionInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &eCreateRevenueAttributionInput_Catalog})
+var sCreateRevenueAttributionInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateRevenueAttributionInput_ClientToken})
+var sCreateRevenueAttributionInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateRevenueAttributionInput_Name})
+var sCreateRevenueAttributionInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateRevenueAttributionInput_Description})
+var sCreateRevenueAttributionInput_TenancyModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TenancyModel", ID: &iTenancyModel, Members: &mTenancyModel, Type: smithy.ShapeTypeEnum, Ext: &eCreateRevenueAttributionInput_TenancyModel})
+var sCreateRevenueAttributionInput_ProductIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateRevenueAttributionInput_ProductIdentifier})
+var sCreateRevenueAttributionInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateRevenueAttributionInput_Tags})
+var sCreateRevenueAttributionOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RevenueAttributionId, Type: smithy.ShapeTypeString, Ext: &eCreateRevenueAttributionOutput_Id})
+var sCreateRevenueAttributionOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateRevenueAttributionOutput_Arn})
+var sCreateRevenueAttributionOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateRevenueAttributionOutput_Name})
+var sCreateRevenueAttributionOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateRevenueAttributionOutput_Description})
+var sCreateRevenueAttributionOutput_TenancyModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TenancyModel", ID: &iTenancyModel, Members: &mTenancyModel, Type: smithy.ShapeTypeEnum, Ext: &eCreateRevenueAttributionOutput_TenancyModel})
+var sCreateRevenueAttributionOutput_MarketplaceProduct = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceProduct", ID: &iMarketplaceProductSummary, Members: &mMarketplaceProductSummary, Type: smithy.ShapeTypeStructure, Ext: &eCreateRevenueAttributionOutput_MarketplaceProduct})
+var sCreateRevenueAttributionOutput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &eCreateRevenueAttributionOutput_Revision})
+var sGetMarketplaceRevenueShareAllocationInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &eGetMarketplaceRevenueShareAllocationInput_Catalog})
+var sGetMarketplaceRevenueShareAllocationInput_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &eGetMarketplaceRevenueShareAllocationInput_ProductId})
+var sGetMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceRevenueShareAllocationId", ID: &i_MarketplaceRevenueShareAllocationId, Type: smithy.ShapeTypeString, Ext: &eGetMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareAllocationId})
+var sGetMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceRevenueShareRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &eGetMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareRevision})
+var sGetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceRevenueShareAllocationId", ID: &i_MarketplaceRevenueShareAllocationId, Type: smithy.ShapeTypeString, Ext: &eGetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId})
+var sGetMarketplaceRevenueShareAllocationOutput_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &eGetMarketplaceRevenueShareAllocationOutput_ProductId})
+var sGetMarketplaceRevenueShareAllocationOutput_ProductName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMarketplaceRevenueShareAllocationOutput_ProductName})
+var sGetMarketplaceRevenueShareAllocationOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMarketplaceRevenueShareAllocationOutput_Arn})
+var sGetMarketplaceRevenueShareAllocationOutput_EffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eGetMarketplaceRevenueShareAllocationOutput_EffectiveFrom})
+var sGetMarketplaceRevenueShareAllocationOutput_EffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eGetMarketplaceRevenueShareAllocationOutput_EffectiveUntil})
+var sGetMarketplaceRevenueShareAllocationOutput_RevenueSharePercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueSharePercent", ID: &i_RevenueSharePercent, Type: smithy.ShapeTypeString, Ext: &eGetMarketplaceRevenueShareAllocationOutput_RevenueSharePercent})
+var sGetMarketplaceRevenueShareAllocationOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAllocationStatus, Members: &mAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetMarketplaceRevenueShareAllocationOutput_Status})
+var sGetMarketplaceRevenueShareAllocationOutput_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMarketplaceRevenueShareAllocationOutput_CreatedDate})
+var sGetMarketplaceRevenueShareAllocationOutput_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMarketplaceRevenueShareAllocationOutput_LastModifiedDate})
+var sGetMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestMarketplaceRevenueShareRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &eGetMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision})
+var sGetMarketplaceRevenueShareInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &eGetMarketplaceRevenueShareInput_Catalog})
+var sGetMarketplaceRevenueShareInput_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &eGetMarketplaceRevenueShareInput_ProductId})
+var sGetMarketplaceRevenueShareInput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetMarketplaceRevenueShareInput_Revision})
+var sGetMarketplaceRevenueShareOutput_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &eGetMarketplaceRevenueShareOutput_ProductId})
+var sGetMarketplaceRevenueShareOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMarketplaceRevenueShareOutput_Arn})
+var sGetMarketplaceRevenueShareOutput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &eGetMarketplaceRevenueShareOutput_Catalog})
+var sGetMarketplaceRevenueShareOutput_ProductCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMarketplaceRevenueShareOutput_ProductCode})
+var sGetMarketplaceRevenueShareOutput_ProductName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMarketplaceRevenueShareOutput_ProductName})
+var sGetMarketplaceRevenueShareOutput_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMarketplaceRevenueShareOutput_CreatedDate})
+var sGetMarketplaceRevenueShareOutput_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMarketplaceRevenueShareOutput_LastModifiedDate})
+var sGetMarketplaceRevenueShareOutput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetMarketplaceRevenueShareOutput_Revision})
+var sGetMarketplaceRevenueShareOutput_LatestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestRevision", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetMarketplaceRevenueShareOutput_LatestRevision})
+var sGetMarketplaceRevenueShareOutput_TotalActiveMarketplaceRevenueShareAllocationCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalActiveMarketplaceRevenueShareAllocationCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetMarketplaceRevenueShareOutput_TotalActiveMarketplaceRevenueShareAllocationCount})
+var sGetMarketplaceRevenueShareOutput_TotalMarketplaceRevenueShareAllocationCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalMarketplaceRevenueShareAllocationCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetMarketplaceRevenueShareOutput_TotalMarketplaceRevenueShareAllocationCount})
+var sGetRevenueAttributionAllocationInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &eGetRevenueAttributionAllocationInput_Catalog})
+var sGetRevenueAttributionAllocationInput_RevenueAttributionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionIdentifier", ID: &i_RevenueAttributionIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionAllocationInput_RevenueAttributionIdentifier})
+var sGetRevenueAttributionAllocationInput_RevenueAttributionAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionAllocationId", ID: &i_RevenueAttributionAllocationId, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionAllocationInput_RevenueAttributionAllocationId})
+var sGetRevenueAttributionAllocationInput_RevenueAttributionRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionAllocationInput_RevenueAttributionRevision})
+var sGetRevenueAttributionAllocationOutput_RevenueAttributionAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionAllocationId", ID: &i_RevenueAttributionAllocationId, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionAllocationOutput_RevenueAttributionAllocationId})
+var sGetRevenueAttributionAllocationOutput_RevenueAttributionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionIdentifier", ID: &i_RevenueAttributionIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionAllocationOutput_RevenueAttributionIdentifier})
+var sGetRevenueAttributionAllocationOutput_EntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityType", ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeEnum, Ext: &eGetRevenueAttributionAllocationOutput_EntityType})
+var sGetRevenueAttributionAllocationOutput_EntityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityIdentifier", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionAllocationOutput_EntityIdentifier})
+var sGetRevenueAttributionAllocationOutput_EntityName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionAllocationOutput_EntityName})
+var sGetRevenueAttributionAllocationOutput_CustomerAwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerAwsAccountId", ID: &i_CustomerAwsAccountId, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionAllocationOutput_CustomerAwsAccountId})
+var sGetRevenueAttributionAllocationOutput_RevenueSharePercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueSharePercent", ID: &i_RevenueSharePercent, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionAllocationOutput_RevenueSharePercent})
+var sGetRevenueAttributionAllocationOutput_EffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionAllocationOutput_EffectiveFrom})
+var sGetRevenueAttributionAllocationOutput_EffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionAllocationOutput_EffectiveUntil})
+var sGetRevenueAttributionAllocationOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAllocationStatus, Members: &mAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetRevenueAttributionAllocationOutput_Status})
+var sGetRevenueAttributionAllocationOutput_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetRevenueAttributionAllocationOutput_CreatedDate})
+var sGetRevenueAttributionAllocationOutput_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetRevenueAttributionAllocationOutput_LastModifiedDate})
+var sGetRevenueAttributionAllocationOutput_RevenueAttributionRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionAllocationOutput_RevenueAttributionRevision})
+var sGetRevenueAttributionAllocationOutput_RevenueAttributionLatestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionLatestRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionAllocationOutput_RevenueAttributionLatestRevision})
+var sGetRevenueAttributionAllocationsTaskInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &eGetRevenueAttributionAllocationsTaskInput_Catalog})
+var sGetRevenueAttributionAllocationsTaskInput_RevenueAttributionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionIdentifier", ID: &i_RevenueAttributionIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionAllocationsTaskInput_RevenueAttributionIdentifier})
+var sGetRevenueAttributionAllocationsTaskOutput_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &i_RevenueAttributionAllocationTaskId, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionAllocationsTaskOutput_TaskId})
+var sGetRevenueAttributionAllocationsTaskOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRevenueAttributionAllocationTaskStatus, Members: &mRevenueAttributionAllocationTaskStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetRevenueAttributionAllocationsTaskOutput_Status})
+var sGetRevenueAttributionAllocationsTaskOutput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &eGetRevenueAttributionAllocationsTaskOutput_Catalog})
+var sGetRevenueAttributionAllocationsTaskOutput_RevenueAttributionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionAllocationsTaskOutput_RevenueAttributionArn})
+var sGetRevenueAttributionAllocationsTaskOutput_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetRevenueAttributionAllocationsTaskOutput_StartedAt})
+var sGetRevenueAttributionAllocationsTaskOutput_EndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetRevenueAttributionAllocationsTaskOutput_EndedAt})
+var sGetRevenueAttributionAllocationsTaskOutput_TotalRevenueAttributionAllocationRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalRevenueAttributionAllocationRecords", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eGetRevenueAttributionAllocationsTaskOutput_TotalRevenueAttributionAllocationRecords})
+var sGetRevenueAttributionAllocationsTaskOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionAllocationsTaskOutput_Description})
+var sGetRevenueAttributionAllocationsTaskOutput_RevenueAttributionLatestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionLatestRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionAllocationsTaskOutput_RevenueAttributionLatestRevision})
+var sGetRevenueAttributionAllocationsTaskOutput_ErrorDetailList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorDetailList", ID: &i_RevenueAttributionAllocationErrorDetailList, Members: &m_RevenueAttributionAllocationErrorDetailList, Type: smithy.ShapeTypeList, Ext: &eGetRevenueAttributionAllocationsTaskOutput_ErrorDetailList})
+var sGetRevenueAttributionInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &eGetRevenueAttributionInput_Catalog})
+var sGetRevenueAttributionInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_RevenueAttributionIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionInput_Identifier})
+var sGetRevenueAttributionInput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionInput_Revision})
+var sGetRevenueAttributionOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionOutput_Arn})
+var sGetRevenueAttributionOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RevenueAttributionId, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionOutput_Id})
+var sGetRevenueAttributionOutput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &eGetRevenueAttributionOutput_Catalog})
+var sGetRevenueAttributionOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionOutput_Name})
+var sGetRevenueAttributionOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionOutput_Description})
+var sGetRevenueAttributionOutput_TenancyModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TenancyModel", ID: &iTenancyModel, Members: &mTenancyModel, Type: smithy.ShapeTypeEnum, Ext: &eGetRevenueAttributionOutput_TenancyModel})
+var sGetRevenueAttributionOutput_MarketplaceProduct = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceProduct", ID: &iMarketplaceProductSummary, Members: &mMarketplaceProductSummary, Type: smithy.ShapeTypeStructure, Ext: &eGetRevenueAttributionOutput_MarketplaceProduct})
+var sGetRevenueAttributionOutput_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetRevenueAttributionOutput_CreatedDate})
+var sGetRevenueAttributionOutput_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetRevenueAttributionOutput_LastModifiedDate})
+var sGetRevenueAttributionOutput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionOutput_Revision})
+var sGetRevenueAttributionOutput_LatestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionOutput_LatestRevision})
+var sGetRevenueAttributionOutput_EffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionOutput_EffectiveFrom})
+var sGetRevenueAttributionOutput_EffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eGetRevenueAttributionOutput_EffectiveUntil})
+var sGetRevenueAttributionOutput_TotalActiveRevenueAttributionAllocationCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalActiveRevenueAttributionAllocationCount", ID: &i_AllocationCount, Type: smithy.ShapeTypeInteger, Ext: &eGetRevenueAttributionOutput_TotalActiveRevenueAttributionAllocationCount})
+var sGetRevenueAttributionOutput_TotalRevenueAttributionAllocationCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalRevenueAttributionAllocationCount", ID: &i_AllocationCount, Type: smithy.ShapeTypeInteger, Ext: &eGetRevenueAttributionOutput_TotalRevenueAttributionAllocationCount})
+var sListMarketplaceRevenueShareAllocationsInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &eListMarketplaceRevenueShareAllocationsInput_Catalog})
+var sListMarketplaceRevenueShareAllocationsInput_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &eListMarketplaceRevenueShareAllocationsInput_ProductId})
+var sListMarketplaceRevenueShareAllocationsInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAllocationStatus, Members: &mAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &eListMarketplaceRevenueShareAllocationsInput_Status})
+var sListMarketplaceRevenueShareAllocationsInput_AfterEffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterEffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eListMarketplaceRevenueShareAllocationsInput_AfterEffectiveFrom})
+var sListMarketplaceRevenueShareAllocationsInput_BeforeEffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeforeEffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eListMarketplaceRevenueShareAllocationsInput_BeforeEffectiveFrom})
+var sListMarketplaceRevenueShareAllocationsInput_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iMarketplaceRevenueShareAllocationSortField, Members: &mMarketplaceRevenueShareAllocationSortField, Type: smithy.ShapeTypeEnum, Ext: &eListMarketplaceRevenueShareAllocationsInput_SortBy})
+var sListMarketplaceRevenueShareAllocationsInput_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &eListMarketplaceRevenueShareAllocationsInput_SortOrder})
+var sListMarketplaceRevenueShareAllocationsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListMarketplaceRevenueShareAllocationsInput_MaxResults})
+var sListMarketplaceRevenueShareAllocationsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListMarketplaceRevenueShareAllocationsInput_NextToken})
+var sListMarketplaceRevenueShareAllocationsInput_MarketplaceRevenueShareRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceRevenueShareRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &eListMarketplaceRevenueShareAllocationsInput_MarketplaceRevenueShareRevision})
+var sListMarketplaceRevenueShareAllocationsOutput_MarketplaceRevenueShareAllocationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceRevenueShareAllocationSummaries", ID: &i_MarketplaceRevenueShareAllocationSummaryList, Members: &m_MarketplaceRevenueShareAllocationSummaryList, Type: smithy.ShapeTypeList, Ext: &eListMarketplaceRevenueShareAllocationsOutput_MarketplaceRevenueShareAllocationSummaries})
+var sListMarketplaceRevenueShareAllocationsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListMarketplaceRevenueShareAllocationsOutput_NextToken})
+var sListMarketplaceRevenueSharesInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &eListMarketplaceRevenueSharesInput_Catalog})
+var sListMarketplaceRevenueSharesInput_ProductIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductIds", ID: &i_MarketplaceProductIdList, Members: &m_MarketplaceProductIdList, Type: smithy.ShapeTypeList, Ext: &eListMarketplaceRevenueSharesInput_ProductIds})
+var sListMarketplaceRevenueSharesInput_ProductCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductCodes", ID: &i_ProductCodeList, Members: &m_ProductCodeList, Type: smithy.ShapeTypeList, Ext: &eListMarketplaceRevenueSharesInput_ProductCodes})
+var sListMarketplaceRevenueSharesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListMarketplaceRevenueSharesInput_MaxResults})
+var sListMarketplaceRevenueSharesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListMarketplaceRevenueSharesInput_NextToken})
+var sListMarketplaceRevenueSharesInput_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iMarketplaceRevenueShareSortBy, Members: &mMarketplaceRevenueShareSortBy, Type: smithy.ShapeTypeEnum, Ext: &eListMarketplaceRevenueSharesInput_SortBy})
+var sListMarketplaceRevenueSharesInput_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &eListMarketplaceRevenueSharesInput_SortOrder})
+var sListMarketplaceRevenueSharesInput_CreatedAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAfter", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListMarketplaceRevenueSharesInput_CreatedAfter})
+var sListMarketplaceRevenueSharesInput_CreatedBefore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBefore", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListMarketplaceRevenueSharesInput_CreatedBefore})
+var sListMarketplaceRevenueSharesOutput_MarketplaceRevenueShareSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceRevenueShareSummaries", ID: &i_MarketplaceRevenueShareSummaryList, Members: &m_MarketplaceRevenueShareSummaryList, Type: smithy.ShapeTypeList, Ext: &eListMarketplaceRevenueSharesOutput_MarketplaceRevenueShareSummaries})
+var sListMarketplaceRevenueSharesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListMarketplaceRevenueSharesOutput_NextToken})
+var sListRevenueAttributionAllocationsInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &eListRevenueAttributionAllocationsInput_Catalog})
+var sListRevenueAttributionAllocationsInput_RevenueAttributionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionIdentifier", ID: &i_RevenueAttributionIdentifier, Type: smithy.ShapeTypeString, Ext: &eListRevenueAttributionAllocationsInput_RevenueAttributionIdentifier})
+var sListRevenueAttributionAllocationsInput_EntityTypeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityTypeFilters", ID: &i_EntityTypeFilterList, Members: &m_EntityTypeFilterList, Type: smithy.ShapeTypeList, Ext: &eListRevenueAttributionAllocationsInput_EntityTypeFilters})
+var sListRevenueAttributionAllocationsInput_EntityIdentifierFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityIdentifierFilters", ID: &i_EntityIdentifierFilterList, Members: &m_EntityIdentifierFilterList, Type: smithy.ShapeTypeList, Ext: &eListRevenueAttributionAllocationsInput_EntityIdentifierFilters})
+var sListRevenueAttributionAllocationsInput_CustomerAwsAccountIdFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerAwsAccountIdFilters", ID: &i_CustomerAwsAccountIdFilterList, Members: &m_CustomerAwsAccountIdFilterList, Type: smithy.ShapeTypeList, Ext: &eListRevenueAttributionAllocationsInput_CustomerAwsAccountIdFilters})
+var sListRevenueAttributionAllocationsInput_StatusFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusFilter", ID: &iAllocationStatus, Members: &mAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &eListRevenueAttributionAllocationsInput_StatusFilter})
+var sListRevenueAttributionAllocationsInput_AfterEffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterEffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eListRevenueAttributionAllocationsInput_AfterEffectiveFrom})
+var sListRevenueAttributionAllocationsInput_BeforeEffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeforeEffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eListRevenueAttributionAllocationsInput_BeforeEffectiveFrom})
+var sListRevenueAttributionAllocationsInput_AfterEffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterEffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eListRevenueAttributionAllocationsInput_AfterEffectiveUntil})
+var sListRevenueAttributionAllocationsInput_BeforeEffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeforeEffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eListRevenueAttributionAllocationsInput_BeforeEffectiveUntil})
+var sListRevenueAttributionAllocationsInput_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iRevenueAttributionAllocationSortField, Members: &mRevenueAttributionAllocationSortField, Type: smithy.ShapeTypeEnum, Ext: &eListRevenueAttributionAllocationsInput_SortBy})
+var sListRevenueAttributionAllocationsInput_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &eListRevenueAttributionAllocationsInput_SortOrder})
+var sListRevenueAttributionAllocationsInput_RevenueAttributionRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &eListRevenueAttributionAllocationsInput_RevenueAttributionRevision})
+var sListRevenueAttributionAllocationsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListRevenueAttributionAllocationsInput_MaxResults})
+var sListRevenueAttributionAllocationsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRevenueAttributionAllocationsInput_NextToken})
+var sListRevenueAttributionAllocationsOutput_RevenueAttributionAllocationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionAllocationSummaries", ID: &i_RevenueAttributionAllocationSummaryList, Members: &m_RevenueAttributionAllocationSummaryList, Type: smithy.ShapeTypeList, Ext: &eListRevenueAttributionAllocationsOutput_RevenueAttributionAllocationSummaries})
+var sListRevenueAttributionAllocationsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRevenueAttributionAllocationsOutput_NextToken})
+var sListRevenueAttributionsInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &eListRevenueAttributionsInput_Catalog})
+var sListRevenueAttributionsInput_Identifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifiers", ID: &i_RevenueAttributionIdentifierList, Members: &m_RevenueAttributionIdentifierList, Type: smithy.ShapeTypeList, Ext: &eListRevenueAttributionsInput_Identifiers})
+var sListRevenueAttributionsInput_CreatedAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAfter", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListRevenueAttributionsInput_CreatedAfter})
+var sListRevenueAttributionsInput_CreatedBefore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBefore", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eListRevenueAttributionsInput_CreatedBefore})
+var sListRevenueAttributionsInput_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iAttributionSortBy, Members: &mAttributionSortBy, Type: smithy.ShapeTypeEnum, Ext: &eListRevenueAttributionsInput_SortBy})
+var sListRevenueAttributionsInput_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum, Ext: &eListRevenueAttributionsInput_SortOrder})
+var sListRevenueAttributionsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListRevenueAttributionsInput_MaxResults})
+var sListRevenueAttributionsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRevenueAttributionsInput_NextToken})
+var sListRevenueAttributionsOutput_RevenueAttributionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionSummaries", ID: &i_RevenueAttributionSummaries, Members: &m_RevenueAttributionSummaries, Type: smithy.ShapeTypeList, Ext: &eListRevenueAttributionsOutput_RevenueAttributionSummaries})
+var sListRevenueAttributionsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRevenueAttributionsOutput_NextToken})
+var sListTagsForResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceARN, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceInput_resourceArn})
+var sListTagsForResourceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceOutput_tags})
+var sStartRevenueAttributionAllocationsTaskInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &eStartRevenueAttributionAllocationsTaskInput_Catalog})
+var sStartRevenueAttributionAllocationsTaskInput_RevenueAttributionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionIdentifier", ID: &i_RevenueAttributionIdentifier, Type: smithy.ShapeTypeString, Ext: &eStartRevenueAttributionAllocationsTaskInput_RevenueAttributionIdentifier})
+var sStartRevenueAttributionAllocationsTaskInput_RevenueAttributionRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &eStartRevenueAttributionAllocationsTaskInput_RevenueAttributionRevision})
+var sStartRevenueAttributionAllocationsTaskInput_RevenueShareAllocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueShareAllocations", ID: &i_RevenueShareAllocationChangeList, Members: &m_RevenueShareAllocationChangeList, Type: smithy.ShapeTypeList, Ext: &eStartRevenueAttributionAllocationsTaskInput_RevenueShareAllocations})
+var sStartRevenueAttributionAllocationsTaskInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eStartRevenueAttributionAllocationsTaskInput_ClientToken})
+var sStartRevenueAttributionAllocationsTaskInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eStartRevenueAttributionAllocationsTaskInput_Description})
+var sStartRevenueAttributionAllocationsTaskOutput_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &i_RevenueAttributionAllocationTaskId, Type: smithy.ShapeTypeString, Ext: &eStartRevenueAttributionAllocationsTaskOutput_TaskId})
+var sStartRevenueAttributionAllocationsTaskOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRevenueAttributionAllocationTaskStatus, Members: &mRevenueAttributionAllocationTaskStatus, Type: smithy.ShapeTypeEnum, Ext: &eStartRevenueAttributionAllocationsTaskOutput_Status})
+var sStartRevenueAttributionAllocationsTaskOutput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &eStartRevenueAttributionAllocationsTaskOutput_Catalog})
+var sStartRevenueAttributionAllocationsTaskOutput_RevenueAttributionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueAttributionArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eStartRevenueAttributionAllocationsTaskOutput_RevenueAttributionArn})
+var sStartRevenueAttributionAllocationsTaskOutput_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eStartRevenueAttributionAllocationsTaskOutput_StartedAt})
+var sStartRevenueAttributionAllocationsTaskOutput_TotalRevenueAttributionAllocationRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalRevenueAttributionAllocationRecords", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eStartRevenueAttributionAllocationsTaskOutput_TotalRevenueAttributionAllocationRecords})
+var sTagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceARN, Type: smithy.ShapeTypeString, Ext: &eTagResourceInput_resourceArn})
+var sTagResourceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceInput_tags})
+var sUntagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceARN, Type: smithy.ShapeTypeString, Ext: &eUntagResourceInput_resourceArn})
+var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceInput_tagKeys})
+var sUpdateMarketplaceRevenueShareAllocationInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &eUpdateMarketplaceRevenueShareAllocationInput_Catalog})
+var sUpdateMarketplaceRevenueShareAllocationInput_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &eUpdateMarketplaceRevenueShareAllocationInput_ProductId})
+var sUpdateMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceRevenueShareAllocationId", ID: &i_MarketplaceRevenueShareAllocationId, Type: smithy.ShapeTypeString, Ext: &eUpdateMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareAllocationId})
+var sUpdateMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceRevenueShareRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &eUpdateMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareRevision})
+var sUpdateMarketplaceRevenueShareAllocationInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eUpdateMarketplaceRevenueShareAllocationInput_ClientToken})
+var sUpdateMarketplaceRevenueShareAllocationInput_EffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eUpdateMarketplaceRevenueShareAllocationInput_EffectiveFrom})
+var sUpdateMarketplaceRevenueShareAllocationInput_EffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eUpdateMarketplaceRevenueShareAllocationInput_EffectiveUntil})
+var sUpdateMarketplaceRevenueShareAllocationInput_RevenueSharePercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueSharePercent", ID: &i_RevenueSharePercent, Type: smithy.ShapeTypeString, Ext: &eUpdateMarketplaceRevenueShareAllocationInput_RevenueSharePercent})
+var sUpdateMarketplaceRevenueShareAllocationInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAllocationStatus, Members: &mAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateMarketplaceRevenueShareAllocationInput_Status})
+var sUpdateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceRevenueShareAllocationId", ID: &i_MarketplaceRevenueShareAllocationId, Type: smithy.ShapeTypeString, Ext: &eUpdateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId})
+var sUpdateMarketplaceRevenueShareAllocationOutput_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_MarketplaceProductId, Type: smithy.ShapeTypeString, Ext: &eUpdateMarketplaceRevenueShareAllocationOutput_ProductId})
+var sUpdateMarketplaceRevenueShareAllocationOutput_ProductName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateMarketplaceRevenueShareAllocationOutput_ProductName})
+var sUpdateMarketplaceRevenueShareAllocationOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateMarketplaceRevenueShareAllocationOutput_Arn})
+var sUpdateMarketplaceRevenueShareAllocationOutput_EffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveFrom", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eUpdateMarketplaceRevenueShareAllocationOutput_EffectiveFrom})
+var sUpdateMarketplaceRevenueShareAllocationOutput_EffectiveUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveUntil", ID: &i_AllocationEffectiveDateString, Type: smithy.ShapeTypeString, Ext: &eUpdateMarketplaceRevenueShareAllocationOutput_EffectiveUntil})
+var sUpdateMarketplaceRevenueShareAllocationOutput_RevenueSharePercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevenueSharePercent", ID: &i_RevenueSharePercent, Type: smithy.ShapeTypeString, Ext: &eUpdateMarketplaceRevenueShareAllocationOutput_RevenueSharePercent})
+var sUpdateMarketplaceRevenueShareAllocationOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAllocationStatus, Members: &mAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateMarketplaceRevenueShareAllocationOutput_Status})
+var sUpdateMarketplaceRevenueShareAllocationOutput_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateMarketplaceRevenueShareAllocationOutput_CreatedDate})
+var sUpdateMarketplaceRevenueShareAllocationOutput_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateMarketplaceRevenueShareAllocationOutput_LastModifiedDate})
+var sUpdateMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestMarketplaceRevenueShareRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &eUpdateMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision})
+var sUpdateRevenueAttributionInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &iCatalogName, Members: &mCatalogName, Type: smithy.ShapeTypeEnum, Ext: &eUpdateRevenueAttributionInput_Catalog})
+var sUpdateRevenueAttributionInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_RevenueAttributionIdentifier, Type: smithy.ShapeTypeString, Ext: &eUpdateRevenueAttributionInput_Identifier})
+var sUpdateRevenueAttributionInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eUpdateRevenueAttributionInput_ClientToken})
+var sUpdateRevenueAttributionInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateRevenueAttributionInput_Description})
+var sUpdateRevenueAttributionInput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &eUpdateRevenueAttributionInput_Revision})
+var sUpdateRevenueAttributionOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RevenueAttributionId, Type: smithy.ShapeTypeString, Ext: &eUpdateRevenueAttributionOutput_Id})
+var sUpdateRevenueAttributionOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateRevenueAttributionOutput_Arn})
+var sUpdateRevenueAttributionOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateRevenueAttributionOutput_Description})
+var sUpdateRevenueAttributionOutput_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateRevenueAttributionOutput_LastModifiedDate})
+var sUpdateRevenueAttributionOutput_LatestRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestRevision", ID: &i_RevisionToken, Type: smithy.ShapeTypeString, Ext: &eUpdateRevenueAttributionOutput_LatestRevision})
 
 var CreateMarketplaceRevenueShare = &sCreateMarketplaceRevenueShare
 

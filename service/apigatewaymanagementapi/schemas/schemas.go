@@ -7,9 +7,34 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [26]smithy.SchemaExtensions
+var (
+	eDeleteConnection                     smithy.SchemaExtensions
+	eGetConnection                        smithy.SchemaExtensions
+	ePostToConnection                     smithy.SchemaExtensions
+	e_ApiGatewayManagementApi             smithy.SchemaExtensions
+	e___string                            smithy.SchemaExtensions
+	e___timestampIso8601                  smithy.SchemaExtensions
+	e_Data                                smithy.SchemaExtensions
+	eForbiddenException                   smithy.SchemaExtensions
+	eGoneException                        smithy.SchemaExtensions
+	eIdentity                             smithy.SchemaExtensions
+	eIdentity_SourceIp                    smithy.SchemaExtensions
+	eIdentity_UserAgent                   smithy.SchemaExtensions
+	eLimitExceededException               smithy.SchemaExtensions
+	ePayloadTooLargeException             smithy.SchemaExtensions
+	ePayloadTooLargeException_Message     smithy.SchemaExtensions
+	eDeleteConnectionRequest              smithy.SchemaExtensions
+	eDeleteConnectionRequest_ConnectionId smithy.SchemaExtensions
+	eGetConnectionRequest                 smithy.SchemaExtensions
+	eGetConnectionRequest_ConnectionId    smithy.SchemaExtensions
+	eGetConnectionResponse                smithy.SchemaExtensions
+	eGetConnectionResponse_ConnectedAt    smithy.SchemaExtensions
+	eGetConnectionResponse_Identity       smithy.SchemaExtensions
+	eGetConnectionResponse_LastActiveAt   smithy.SchemaExtensions
+	ePostToConnectionRequest              smithy.SchemaExtensions
+	ePostToConnectionRequest_Data         smithy.SchemaExtensions
+	ePostToConnectionRequest_ConnectionId smithy.SchemaExtensions
+)
 
 var (
 	iDeleteConnection         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewaymanagementapi", Name: "DeleteConnection"}
@@ -60,33 +85,33 @@ var mGetConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCon
 var mGetConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConnectionResponse_ConnectedAt, &sGetConnectionResponse_Identity, &sGetConnectionResponse_LastActiveAt}}
 var mPostToConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPostToConnectionRequest_Data, &sPostToConnectionRequest_ConnectionId}}
 
-var sDeleteConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnection, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sGetConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnection, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sPostToConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostToConnection, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var s_ApiGatewayManagementApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApiGatewayManagementApi, Type: smithy.ShapeTypeService, Ext: &ext[3]})
-var s___string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___string, Type: smithy.ShapeTypeString, Ext: &ext[4]})
-var s___timestampIso8601 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___timestampIso8601, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &ext[5]})
-var s_Data = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Data, Type: smithy.ShapeTypeBlob, Ext: &ext[6]})
-var sForbiddenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForbiddenException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &ext[7]})
-var sGoneException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGoneException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &ext[8]})
-var sIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure, Ext: &ext[9]})
-var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &ext[12]})
-var sPayloadTooLargeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPayloadTooLargeException, Members: &mPayloadTooLargeException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &ext[13]})
-var sDeleteConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectionRequest, Members: &mDeleteConnectionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[15]})
-var sGetConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectionRequest, Members: &mGetConnectionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[17]})
-var sGetConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectionResponse, Members: &mGetConnectionResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[19]})
-var sPostToConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostToConnectionRequest, Members: &mPostToConnectionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[23]})
+var sDeleteConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnection, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eDeleteConnection})
+var sGetConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnection, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eGetConnection})
+var sPostToConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostToConnection, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ePostToConnection})
+var s_ApiGatewayManagementApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApiGatewayManagementApi, Type: smithy.ShapeTypeService, Ext: &e_ApiGatewayManagementApi})
+var s___string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___string, Type: smithy.ShapeTypeString, Ext: &e___string})
+var s___timestampIso8601 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___timestampIso8601, Traits: &t3, Type: smithy.ShapeTypeTimestamp, Ext: &e___timestampIso8601})
+var s_Data = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Data, Type: smithy.ShapeTypeBlob, Ext: &e_Data})
+var sForbiddenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForbiddenException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eForbiddenException})
+var sGoneException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGoneException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eGoneException})
+var sIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure, Ext: &eIdentity})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var sPayloadTooLargeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPayloadTooLargeException, Members: &mPayloadTooLargeException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &ePayloadTooLargeException})
+var sDeleteConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectionRequest, Members: &mDeleteConnectionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteConnectionRequest})
+var sGetConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectionRequest, Members: &mGetConnectionRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetConnectionRequest})
+var sGetConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectionResponse, Members: &mGetConnectionResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetConnectionResponse})
+var sPostToConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostToConnectionRequest, Members: &mPostToConnectionRequest, Type: smithy.ShapeTypeStructure, Ext: &ePostToConnectionRequest})
 
-var sIdentity_SourceIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceIp", ID: &i___string, Traits: &t6, Type: smithy.ShapeTypeString, Ext: &ext[10]})
-var sIdentity_UserAgent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserAgent", ID: &i___string, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &ext[11]})
-var sPayloadTooLargeException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &ext[14]})
-var sDeleteConnectionRequest_ConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionId", ID: &i___string, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &ext[16]})
-var sGetConnectionRequest_ConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionId", ID: &i___string, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &ext[18]})
-var sGetConnectionResponse_ConnectedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectedAt", ID: &i___timestampIso8601, Traits: &t12, Type: smithy.ShapeTypeTimestamp, Ext: &ext[20]})
-var sGetConnectionResponse_Identity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identity", ID: &iIdentity, Members: &mIdentity, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &ext[21]})
-var sGetConnectionResponse_LastActiveAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastActiveAt", ID: &i___timestampIso8601, Traits: &t14, Type: smithy.ShapeTypeTimestamp, Ext: &ext[22]})
-var sPostToConnectionRequest_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &i_Data, Traits: &t15, Type: smithy.ShapeTypeBlob, Ext: &ext[24]})
-var sPostToConnectionRequest_ConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionId", ID: &i___string, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &ext[25]})
+var sIdentity_SourceIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceIp", ID: &i___string, Traits: &t6, Type: smithy.ShapeTypeString, Ext: &eIdentity_SourceIp})
+var sIdentity_UserAgent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserAgent", ID: &i___string, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &eIdentity_UserAgent})
+var sPayloadTooLargeException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t10, Type: smithy.ShapeTypeString, Ext: &ePayloadTooLargeException_Message})
+var sDeleteConnectionRequest_ConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionId", ID: &i___string, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &eDeleteConnectionRequest_ConnectionId})
+var sGetConnectionRequest_ConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionId", ID: &i___string, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &eGetConnectionRequest_ConnectionId})
+var sGetConnectionResponse_ConnectedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectedAt", ID: &i___timestampIso8601, Traits: &t12, Type: smithy.ShapeTypeTimestamp, Ext: &eGetConnectionResponse_ConnectedAt})
+var sGetConnectionResponse_Identity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identity", ID: &iIdentity, Members: &mIdentity, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eGetConnectionResponse_Identity})
+var sGetConnectionResponse_LastActiveAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastActiveAt", ID: &i___timestampIso8601, Traits: &t14, Type: smithy.ShapeTypeTimestamp, Ext: &eGetConnectionResponse_LastActiveAt})
+var sPostToConnectionRequest_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &i_Data, Traits: &t15, Type: smithy.ShapeTypeBlob, Ext: &ePostToConnectionRequest_Data})
+var sPostToConnectionRequest_ConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionId", ID: &i___string, Traits: &t11, Type: smithy.ShapeTypeString, Ext: &ePostToConnectionRequest_ConnectionId})
 
 var DeleteConnection = &sDeleteConnection
 

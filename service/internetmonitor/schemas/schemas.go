@@ -7,9 +7,336 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [328]smithy.SchemaExtensions
+var (
+	eCreateMonitor                                           smithy.SchemaExtensions
+	eDeleteMonitor                                           smithy.SchemaExtensions
+	eGetHealthEvent                                          smithy.SchemaExtensions
+	eGetInternetEvent                                        smithy.SchemaExtensions
+	eGetMonitor                                              smithy.SchemaExtensions
+	eGetQueryResults                                         smithy.SchemaExtensions
+	eGetQueryStatus                                          smithy.SchemaExtensions
+	eListHealthEvents                                        smithy.SchemaExtensions
+	eListInternetEvents                                      smithy.SchemaExtensions
+	eListMonitors                                            smithy.SchemaExtensions
+	eListTagsForResource                                     smithy.SchemaExtensions
+	eStartQuery                                              smithy.SchemaExtensions
+	eStopQuery                                               smithy.SchemaExtensions
+	eTagResource                                             smithy.SchemaExtensions
+	eUntagResource                                           smithy.SchemaExtensions
+	eUpdateMonitor                                           smithy.SchemaExtensions
+	e_InternetMonitor20210603                                smithy.SchemaExtensions
+	eAccessDeniedException                                   smithy.SchemaExtensions
+	eAccessDeniedException_message                           smithy.SchemaExtensions
+	e_AccountId                                              smithy.SchemaExtensions
+	e_Arn                                                    smithy.SchemaExtensions
+	eAvailabilityMeasurement                                 smithy.SchemaExtensions
+	eAvailabilityMeasurement_ExperienceScore                 smithy.SchemaExtensions
+	eAvailabilityMeasurement_PercentOfTotalTrafficImpacted   smithy.SchemaExtensions
+	eAvailabilityMeasurement_PercentOfClientLocationImpacted smithy.SchemaExtensions
+	eBadRequestException                                     smithy.SchemaExtensions
+	eBadRequestException_message                             smithy.SchemaExtensions
+	eClientLocation                                          smithy.SchemaExtensions
+	eClientLocation_ASName                                   smithy.SchemaExtensions
+	eClientLocation_ASNumber                                 smithy.SchemaExtensions
+	eClientLocation_Country                                  smithy.SchemaExtensions
+	eClientLocation_Subdivision                              smithy.SchemaExtensions
+	eClientLocation_Metro                                    smithy.SchemaExtensions
+	eClientLocation_City                                     smithy.SchemaExtensions
+	eClientLocation_Latitude                                 smithy.SchemaExtensions
+	eClientLocation_Longitude                                smithy.SchemaExtensions
+	eConflictException                                       smithy.SchemaExtensions
+	eConflictException_message                               smithy.SchemaExtensions
+	e_FilterList                                             smithy.SchemaExtensions
+	e_FilterList_member                                      smithy.SchemaExtensions
+	eFilterParameter                                         smithy.SchemaExtensions
+	eFilterParameter_Field                                   smithy.SchemaExtensions
+	eFilterParameter_Operator                                smithy.SchemaExtensions
+	eFilterParameter_Values                                  smithy.SchemaExtensions
+	e_FilterParameters                                       smithy.SchemaExtensions
+	e_FilterParameters_member                                smithy.SchemaExtensions
+	eHealthEvent                                             smithy.SchemaExtensions
+	eHealthEvent_EventArn                                    smithy.SchemaExtensions
+	eHealthEvent_EventId                                     smithy.SchemaExtensions
+	eHealthEvent_StartedAt                                   smithy.SchemaExtensions
+	eHealthEvent_EndedAt                                     smithy.SchemaExtensions
+	eHealthEvent_CreatedAt                                   smithy.SchemaExtensions
+	eHealthEvent_LastUpdatedAt                               smithy.SchemaExtensions
+	eHealthEvent_ImpactedLocations                           smithy.SchemaExtensions
+	eHealthEvent_Status                                      smithy.SchemaExtensions
+	eHealthEvent_PercentOfTotalTrafficImpacted               smithy.SchemaExtensions
+	eHealthEvent_ImpactType                                  smithy.SchemaExtensions
+	eHealthEvent_HealthScoreThreshold                        smithy.SchemaExtensions
+	e_HealthEventImpactType                                  smithy.SchemaExtensions
+	e_HealthEventList                                        smithy.SchemaExtensions
+	e_HealthEventList_member                                 smithy.SchemaExtensions
+	e_HealthEventName                                        smithy.SchemaExtensions
+	eHealthEventsConfig                                      smithy.SchemaExtensions
+	eHealthEventsConfig_AvailabilityScoreThreshold           smithy.SchemaExtensions
+	eHealthEventsConfig_PerformanceScoreThreshold            smithy.SchemaExtensions
+	eHealthEventsConfig_AvailabilityLocalHealthEventsConfig  smithy.SchemaExtensions
+	eHealthEventsConfig_PerformanceLocalHealthEventsConfig   smithy.SchemaExtensions
+	e_HealthEventStatus                                      smithy.SchemaExtensions
+	eImpactedLocation                                        smithy.SchemaExtensions
+	eImpactedLocation_ASName                                 smithy.SchemaExtensions
+	eImpactedLocation_ASNumber                               smithy.SchemaExtensions
+	eImpactedLocation_Country                                smithy.SchemaExtensions
+	eImpactedLocation_Subdivision                            smithy.SchemaExtensions
+	eImpactedLocation_Metro                                  smithy.SchemaExtensions
+	eImpactedLocation_City                                   smithy.SchemaExtensions
+	eImpactedLocation_Latitude                               smithy.SchemaExtensions
+	eImpactedLocation_Longitude                              smithy.SchemaExtensions
+	eImpactedLocation_CountryCode                            smithy.SchemaExtensions
+	eImpactedLocation_SubdivisionCode                        smithy.SchemaExtensions
+	eImpactedLocation_ServiceLocation                        smithy.SchemaExtensions
+	eImpactedLocation_Status                                 smithy.SchemaExtensions
+	eImpactedLocation_CausedBy                               smithy.SchemaExtensions
+	eImpactedLocation_InternetHealth                         smithy.SchemaExtensions
+	eImpactedLocation_Ipv4Prefixes                           smithy.SchemaExtensions
+	e_ImpactedLocationsList                                  smithy.SchemaExtensions
+	e_ImpactedLocationsList_member                           smithy.SchemaExtensions
+	eInternalServerErrorException                            smithy.SchemaExtensions
+	eInternalServerErrorException_message                    smithy.SchemaExtensions
+	eInternalServerException                                 smithy.SchemaExtensions
+	eInternalServerException_message                         smithy.SchemaExtensions
+	e_InternetEventId                                        smithy.SchemaExtensions
+	e_InternetEventMaxResults                                smithy.SchemaExtensions
+	e_InternetEventsList                                     smithy.SchemaExtensions
+	e_InternetEventsList_member                              smithy.SchemaExtensions
+	e_InternetEventStatus                                    smithy.SchemaExtensions
+	eInternetEventSummary                                    smithy.SchemaExtensions
+	eInternetEventSummary_EventId                            smithy.SchemaExtensions
+	eInternetEventSummary_EventArn                           smithy.SchemaExtensions
+	eInternetEventSummary_StartedAt                          smithy.SchemaExtensions
+	eInternetEventSummary_EndedAt                            smithy.SchemaExtensions
+	eInternetEventSummary_ClientLocation                     smithy.SchemaExtensions
+	eInternetEventSummary_EventType                          smithy.SchemaExtensions
+	eInternetEventSummary_EventStatus                        smithy.SchemaExtensions
+	e_InternetEventType                                      smithy.SchemaExtensions
+	eInternetHealth                                          smithy.SchemaExtensions
+	eInternetHealth_Availability                             smithy.SchemaExtensions
+	eInternetHealth_Performance                              smithy.SchemaExtensions
+	eInternetMeasurementsLogDelivery                         smithy.SchemaExtensions
+	eInternetMeasurementsLogDelivery_S3Config                smithy.SchemaExtensions
+	e_Ipv4PrefixList                                         smithy.SchemaExtensions
+	e_Ipv4PrefixList_member                                  smithy.SchemaExtensions
+	eLimitExceededException                                  smithy.SchemaExtensions
+	eLimitExceededException_message                          smithy.SchemaExtensions
+	eLocalHealthEventsConfig                                 smithy.SchemaExtensions
+	eLocalHealthEventsConfig_Status                          smithy.SchemaExtensions
+	eLocalHealthEventsConfig_HealthScoreThreshold            smithy.SchemaExtensions
+	eLocalHealthEventsConfig_MinTrafficImpact                smithy.SchemaExtensions
+	e_LocalHealthEventsConfigStatus                          smithy.SchemaExtensions
+	e_LogDeliveryStatus                                      smithy.SchemaExtensions
+	e_MaxCityNetworksToMonitor                               smithy.SchemaExtensions
+	e_MaxResults                                             smithy.SchemaExtensions
+	eMonitor                                                 smithy.SchemaExtensions
+	eMonitor_MonitorName                                     smithy.SchemaExtensions
+	eMonitor_MonitorArn                                      smithy.SchemaExtensions
+	eMonitor_Status                                          smithy.SchemaExtensions
+	eMonitor_ProcessingStatus                                smithy.SchemaExtensions
+	e_MonitorArn                                             smithy.SchemaExtensions
+	e_MonitorConfigState                                     smithy.SchemaExtensions
+	e_MonitorList                                            smithy.SchemaExtensions
+	e_MonitorList_member                                     smithy.SchemaExtensions
+	e_MonitorProcessingStatusCode                            smithy.SchemaExtensions
+	eNetwork                                                 smithy.SchemaExtensions
+	eNetwork_ASName                                          smithy.SchemaExtensions
+	eNetwork_ASNumber                                        smithy.SchemaExtensions
+	eNetworkImpairment                                       smithy.SchemaExtensions
+	eNetworkImpairment_Networks                              smithy.SchemaExtensions
+	eNetworkImpairment_AsPath                                smithy.SchemaExtensions
+	eNetworkImpairment_NetworkEventType                      smithy.SchemaExtensions
+	e_NetworkList                                            smithy.SchemaExtensions
+	e_NetworkList_member                                     smithy.SchemaExtensions
+	eNotFoundException                                       smithy.SchemaExtensions
+	eNotFoundException_message                               smithy.SchemaExtensions
+	e_Operator                                               smithy.SchemaExtensions
+	e_Percentage                                             smithy.SchemaExtensions
+	ePerformanceMeasurement                                  smithy.SchemaExtensions
+	ePerformanceMeasurement_ExperienceScore                  smithy.SchemaExtensions
+	ePerformanceMeasurement_PercentOfTotalTrafficImpacted    smithy.SchemaExtensions
+	ePerformanceMeasurement_PercentOfClientLocationImpacted  smithy.SchemaExtensions
+	ePerformanceMeasurement_RoundTripTime                    smithy.SchemaExtensions
+	e_QueryData                                              smithy.SchemaExtensions
+	e_QueryData_member                                       smithy.SchemaExtensions
+	eQueryField                                              smithy.SchemaExtensions
+	eQueryField_Name                                         smithy.SchemaExtensions
+	eQueryField_Type                                         smithy.SchemaExtensions
+	e_QueryFields                                            smithy.SchemaExtensions
+	e_QueryFields_member                                     smithy.SchemaExtensions
+	e_QueryMaxResults                                        smithy.SchemaExtensions
+	e_QueryRow                                               smithy.SchemaExtensions
+	e_QueryRow_member                                        smithy.SchemaExtensions
+	e_QueryStatus                                            smithy.SchemaExtensions
+	e_QueryType                                              smithy.SchemaExtensions
+	e_ResourceName                                           smithy.SchemaExtensions
+	eResourceNotFoundException                               smithy.SchemaExtensions
+	eResourceNotFoundException_message                       smithy.SchemaExtensions
+	eRoundTripTime                                           smithy.SchemaExtensions
+	eRoundTripTime_P50                                       smithy.SchemaExtensions
+	eRoundTripTime_P90                                       smithy.SchemaExtensions
+	eRoundTripTime_P95                                       smithy.SchemaExtensions
+	eS3Config                                                smithy.SchemaExtensions
+	eS3Config_BucketName                                     smithy.SchemaExtensions
+	eS3Config_BucketPrefix                                   smithy.SchemaExtensions
+	eS3Config_LogDeliveryStatus                              smithy.SchemaExtensions
+	e_SetOfARNs                                              smithy.SchemaExtensions
+	e_SetOfARNs_member                                       smithy.SchemaExtensions
+	e_TagKey                                                 smithy.SchemaExtensions
+	e_TagKeys                                                smithy.SchemaExtensions
+	e_TagKeys_member                                         smithy.SchemaExtensions
+	e_TagMap                                                 smithy.SchemaExtensions
+	e_TagMap_key                                             smithy.SchemaExtensions
+	e_TagMap_value                                           smithy.SchemaExtensions
+	e_TagValue                                               smithy.SchemaExtensions
+	eThrottlingException                                     smithy.SchemaExtensions
+	eThrottlingException_message                             smithy.SchemaExtensions
+	eTooManyRequestsException                                smithy.SchemaExtensions
+	eTooManyRequestsException_message                        smithy.SchemaExtensions
+	e_TrafficPercentageToMonitor                             smithy.SchemaExtensions
+	e_TriangulationEventType                                 smithy.SchemaExtensions
+	eValidationException                                     smithy.SchemaExtensions
+	eValidationException_message                             smithy.SchemaExtensions
+	eCreateMonitorInput                                      smithy.SchemaExtensions
+	eCreateMonitorInput_MonitorName                          smithy.SchemaExtensions
+	eCreateMonitorInput_Resources                            smithy.SchemaExtensions
+	eCreateMonitorInput_ClientToken                          smithy.SchemaExtensions
+	eCreateMonitorInput_Tags                                 smithy.SchemaExtensions
+	eCreateMonitorInput_MaxCityNetworksToMonitor             smithy.SchemaExtensions
+	eCreateMonitorInput_InternetMeasurementsLogDelivery      smithy.SchemaExtensions
+	eCreateMonitorInput_TrafficPercentageToMonitor           smithy.SchemaExtensions
+	eCreateMonitorInput_HealthEventsConfig                   smithy.SchemaExtensions
+	eCreateMonitorOutput                                     smithy.SchemaExtensions
+	eCreateMonitorOutput_Arn                                 smithy.SchemaExtensions
+	eCreateMonitorOutput_Status                              smithy.SchemaExtensions
+	eDeleteMonitorInput                                      smithy.SchemaExtensions
+	eDeleteMonitorInput_MonitorName                          smithy.SchemaExtensions
+	eDeleteMonitorOutput                                     smithy.SchemaExtensions
+	eGetHealthEventInput                                     smithy.SchemaExtensions
+	eGetHealthEventInput_MonitorName                         smithy.SchemaExtensions
+	eGetHealthEventInput_EventId                             smithy.SchemaExtensions
+	eGetHealthEventInput_LinkedAccountId                     smithy.SchemaExtensions
+	eGetHealthEventOutput                                    smithy.SchemaExtensions
+	eGetHealthEventOutput_EventArn                           smithy.SchemaExtensions
+	eGetHealthEventOutput_EventId                            smithy.SchemaExtensions
+	eGetHealthEventOutput_StartedAt                          smithy.SchemaExtensions
+	eGetHealthEventOutput_EndedAt                            smithy.SchemaExtensions
+	eGetHealthEventOutput_CreatedAt                          smithy.SchemaExtensions
+	eGetHealthEventOutput_LastUpdatedAt                      smithy.SchemaExtensions
+	eGetHealthEventOutput_ImpactedLocations                  smithy.SchemaExtensions
+	eGetHealthEventOutput_Status                             smithy.SchemaExtensions
+	eGetHealthEventOutput_PercentOfTotalTrafficImpacted      smithy.SchemaExtensions
+	eGetHealthEventOutput_ImpactType                         smithy.SchemaExtensions
+	eGetHealthEventOutput_HealthScoreThreshold               smithy.SchemaExtensions
+	eGetInternetEventInput                                   smithy.SchemaExtensions
+	eGetInternetEventInput_EventId                           smithy.SchemaExtensions
+	eGetInternetEventOutput                                  smithy.SchemaExtensions
+	eGetInternetEventOutput_EventId                          smithy.SchemaExtensions
+	eGetInternetEventOutput_EventArn                         smithy.SchemaExtensions
+	eGetInternetEventOutput_StartedAt                        smithy.SchemaExtensions
+	eGetInternetEventOutput_EndedAt                          smithy.SchemaExtensions
+	eGetInternetEventOutput_ClientLocation                   smithy.SchemaExtensions
+	eGetInternetEventOutput_EventType                        smithy.SchemaExtensions
+	eGetInternetEventOutput_EventStatus                      smithy.SchemaExtensions
+	eGetMonitorInput                                         smithy.SchemaExtensions
+	eGetMonitorInput_MonitorName                             smithy.SchemaExtensions
+	eGetMonitorInput_LinkedAccountId                         smithy.SchemaExtensions
+	eGetMonitorOutput                                        smithy.SchemaExtensions
+	eGetMonitorOutput_MonitorName                            smithy.SchemaExtensions
+	eGetMonitorOutput_MonitorArn                             smithy.SchemaExtensions
+	eGetMonitorOutput_Resources                              smithy.SchemaExtensions
+	eGetMonitorOutput_Status                                 smithy.SchemaExtensions
+	eGetMonitorOutput_CreatedAt                              smithy.SchemaExtensions
+	eGetMonitorOutput_ModifiedAt                             smithy.SchemaExtensions
+	eGetMonitorOutput_ProcessingStatus                       smithy.SchemaExtensions
+	eGetMonitorOutput_ProcessingStatusInfo                   smithy.SchemaExtensions
+	eGetMonitorOutput_Tags                                   smithy.SchemaExtensions
+	eGetMonitorOutput_MaxCityNetworksToMonitor               smithy.SchemaExtensions
+	eGetMonitorOutput_InternetMeasurementsLogDelivery        smithy.SchemaExtensions
+	eGetMonitorOutput_TrafficPercentageToMonitor             smithy.SchemaExtensions
+	eGetMonitorOutput_HealthEventsConfig                     smithy.SchemaExtensions
+	eGetQueryResultsInput                                    smithy.SchemaExtensions
+	eGetQueryResultsInput_MonitorName                        smithy.SchemaExtensions
+	eGetQueryResultsInput_QueryId                            smithy.SchemaExtensions
+	eGetQueryResultsInput_NextToken                          smithy.SchemaExtensions
+	eGetQueryResultsInput_MaxResults                         smithy.SchemaExtensions
+	eGetQueryResultsOutput                                   smithy.SchemaExtensions
+	eGetQueryResultsOutput_Fields                            smithy.SchemaExtensions
+	eGetQueryResultsOutput_Data                              smithy.SchemaExtensions
+	eGetQueryResultsOutput_NextToken                         smithy.SchemaExtensions
+	eGetQueryStatusInput                                     smithy.SchemaExtensions
+	eGetQueryStatusInput_MonitorName                         smithy.SchemaExtensions
+	eGetQueryStatusInput_QueryId                             smithy.SchemaExtensions
+	eGetQueryStatusOutput                                    smithy.SchemaExtensions
+	eGetQueryStatusOutput_Status                             smithy.SchemaExtensions
+	eListHealthEventsInput                                   smithy.SchemaExtensions
+	eListHealthEventsInput_MonitorName                       smithy.SchemaExtensions
+	eListHealthEventsInput_StartTime                         smithy.SchemaExtensions
+	eListHealthEventsInput_EndTime                           smithy.SchemaExtensions
+	eListHealthEventsInput_NextToken                         smithy.SchemaExtensions
+	eListHealthEventsInput_MaxResults                        smithy.SchemaExtensions
+	eListHealthEventsInput_EventStatus                       smithy.SchemaExtensions
+	eListHealthEventsInput_LinkedAccountId                   smithy.SchemaExtensions
+	eListHealthEventsOutput                                  smithy.SchemaExtensions
+	eListHealthEventsOutput_HealthEvents                     smithy.SchemaExtensions
+	eListHealthEventsOutput_NextToken                        smithy.SchemaExtensions
+	eListInternetEventsInput                                 smithy.SchemaExtensions
+	eListInternetEventsInput_NextToken                       smithy.SchemaExtensions
+	eListInternetEventsInput_MaxResults                      smithy.SchemaExtensions
+	eListInternetEventsInput_StartTime                       smithy.SchemaExtensions
+	eListInternetEventsInput_EndTime                         smithy.SchemaExtensions
+	eListInternetEventsInput_EventStatus                     smithy.SchemaExtensions
+	eListInternetEventsInput_EventType                       smithy.SchemaExtensions
+	eListInternetEventsOutput                                smithy.SchemaExtensions
+	eListInternetEventsOutput_InternetEvents                 smithy.SchemaExtensions
+	eListInternetEventsOutput_NextToken                      smithy.SchemaExtensions
+	eListMonitorsInput                                       smithy.SchemaExtensions
+	eListMonitorsInput_NextToken                             smithy.SchemaExtensions
+	eListMonitorsInput_MaxResults                            smithy.SchemaExtensions
+	eListMonitorsInput_MonitorStatus                         smithy.SchemaExtensions
+	eListMonitorsInput_IncludeLinkedAccounts                 smithy.SchemaExtensions
+	eListMonitorsOutput                                      smithy.SchemaExtensions
+	eListMonitorsOutput_Monitors                             smithy.SchemaExtensions
+	eListMonitorsOutput_NextToken                            smithy.SchemaExtensions
+	eListTagsForResourceInput                                smithy.SchemaExtensions
+	eListTagsForResourceInput_ResourceArn                    smithy.SchemaExtensions
+	eListTagsForResourceOutput                               smithy.SchemaExtensions
+	eListTagsForResourceOutput_Tags                          smithy.SchemaExtensions
+	eStartQueryInput                                         smithy.SchemaExtensions
+	eStartQueryInput_MonitorName                             smithy.SchemaExtensions
+	eStartQueryInput_StartTime                               smithy.SchemaExtensions
+	eStartQueryInput_EndTime                                 smithy.SchemaExtensions
+	eStartQueryInput_QueryType                               smithy.SchemaExtensions
+	eStartQueryInput_FilterParameters                        smithy.SchemaExtensions
+	eStartQueryInput_LinkedAccountId                         smithy.SchemaExtensions
+	eStartQueryOutput                                        smithy.SchemaExtensions
+	eStartQueryOutput_QueryId                                smithy.SchemaExtensions
+	eStopQueryInput                                          smithy.SchemaExtensions
+	eStopQueryInput_MonitorName                              smithy.SchemaExtensions
+	eStopQueryInput_QueryId                                  smithy.SchemaExtensions
+	eStopQueryOutput                                         smithy.SchemaExtensions
+	eTagResourceInput                                        smithy.SchemaExtensions
+	eTagResourceInput_ResourceArn                            smithy.SchemaExtensions
+	eTagResourceInput_Tags                                   smithy.SchemaExtensions
+	eTagResourceOutput                                       smithy.SchemaExtensions
+	eUntagResourceInput                                      smithy.SchemaExtensions
+	eUntagResourceInput_ResourceArn                          smithy.SchemaExtensions
+	eUntagResourceInput_TagKeys                              smithy.SchemaExtensions
+	eUntagResourceOutput                                     smithy.SchemaExtensions
+	eUpdateMonitorInput                                      smithy.SchemaExtensions
+	eUpdateMonitorInput_MonitorName                          smithy.SchemaExtensions
+	eUpdateMonitorInput_ResourcesToAdd                       smithy.SchemaExtensions
+	eUpdateMonitorInput_ResourcesToRemove                    smithy.SchemaExtensions
+	eUpdateMonitorInput_Status                               smithy.SchemaExtensions
+	eUpdateMonitorInput_ClientToken                          smithy.SchemaExtensions
+	eUpdateMonitorInput_MaxCityNetworksToMonitor             smithy.SchemaExtensions
+	eUpdateMonitorInput_InternetMeasurementsLogDelivery      smithy.SchemaExtensions
+	eUpdateMonitorInput_TrafficPercentageToMonitor           smithy.SchemaExtensions
+	eUpdateMonitorInput_HealthEventsConfig                   smithy.SchemaExtensions
+	eUpdateMonitorOutput                                     smithy.SchemaExtensions
+	eUpdateMonitorOutput_MonitorArn                          smithy.SchemaExtensions
+	eUpdateMonitorOutput_Status                              smithy.SchemaExtensions
+)
 
 var (
 	iCreateMonitor                   = smithy.ShapeID{Namespace: "com.amazonaws.internetmonitor", Name: "CreateMonitor"}
@@ -290,335 +617,335 @@ var mUpdateMonitorInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMo
 }}
 var mUpdateMonitorOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMonitorOutput_MonitorArn, &sUpdateMonitorOutput_Status}}
 
-var sCreateMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMonitor, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sDeleteMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMonitor, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sGetHealthEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHealthEvent, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sGetInternetEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInternetEvent, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sGetMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMonitor, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sGetQueryResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResults, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sGetQueryStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatus, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sListHealthEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHealthEvents, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sListInternetEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInternetEvents, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sListMonitors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMonitors, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sStartQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQuery, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sStopQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQuery, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sUpdateMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMonitor, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var s_InternetMonitor20210603 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InternetMonitor20210603, Type: smithy.ShapeTypeService, Ext: &ext[16]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &ext[17]})
-var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[19]})
-var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[20]})
-var sAvailabilityMeasurement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAvailabilityMeasurement, Members: &mAvailabilityMeasurement, Type: smithy.ShapeTypeStructure, Ext: &ext[21]})
-var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &ext[25]})
-var sClientLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientLocation, Members: &mClientLocation, Type: smithy.ShapeTypeStructure, Ext: &ext[27]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &ext[36]})
-var s_FilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &ext[38]})
-var sFilterParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterParameter, Members: &mFilterParameter, Type: smithy.ShapeTypeStructure, Ext: &ext[40]})
-var s_FilterParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterParameters, Members: &m_FilterParameters, Type: smithy.ShapeTypeList, Ext: &ext[44]})
-var sHealthEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthEvent, Members: &mHealthEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[46]})
-var s_HealthEventImpactType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthEventImpactType, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var s_HealthEventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthEventList, Members: &m_HealthEventList, Type: smithy.ShapeTypeList, Ext: &ext[59]})
-var s_HealthEventName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthEventName, Type: smithy.ShapeTypeString, Ext: &ext[61]})
-var sHealthEventsConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthEventsConfig, Members: &mHealthEventsConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[62]})
-var s_HealthEventStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthEventStatus, Type: smithy.ShapeTypeString, Ext: &ext[67]})
-var sImpactedLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImpactedLocation, Members: &mImpactedLocation, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var s_ImpactedLocationsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImpactedLocationsList, Members: &m_ImpactedLocationsList, Type: smithy.ShapeTypeList, Ext: &ext[84]})
-var sInternalServerErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerErrorException, Members: &mInternalServerErrorException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &ext[86]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &ext[88]})
-var s_InternetEventId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InternetEventId, Type: smithy.ShapeTypeString, Ext: &ext[90]})
-var s_InternetEventMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InternetEventMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[91]})
-var s_InternetEventsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InternetEventsList, Members: &m_InternetEventsList, Type: smithy.ShapeTypeList, Ext: &ext[92]})
-var s_InternetEventStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InternetEventStatus, Type: smithy.ShapeTypeString, Ext: &ext[94]})
-var sInternetEventSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternetEventSummary, Members: &mInternetEventSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[95]})
-var s_InternetEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InternetEventType, Type: smithy.ShapeTypeString, Ext: &ext[103]})
-var sInternetHealth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternetHealth, Members: &mInternetHealth, Type: smithy.ShapeTypeStructure, Ext: &ext[104]})
-var sInternetMeasurementsLogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternetMeasurementsLogDelivery, Members: &mInternetMeasurementsLogDelivery, Type: smithy.ShapeTypeStructure, Ext: &ext[107]})
-var s_Ipv4PrefixList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ipv4PrefixList, Members: &m_Ipv4PrefixList, Type: smithy.ShapeTypeList, Ext: &ext[109]})
-var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &ext[111]})
-var sLocalHealthEventsConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLocalHealthEventsConfig, Members: &mLocalHealthEventsConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[113]})
-var s_LocalHealthEventsConfigStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocalHealthEventsConfigStatus, Type: smithy.ShapeTypeString, Ext: &ext[117]})
-var s_LogDeliveryStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogDeliveryStatus, Type: smithy.ShapeTypeString, Ext: &ext[118]})
-var s_MaxCityNetworksToMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxCityNetworksToMonitor, Type: smithy.ShapeTypeInteger, Ext: &ext[119]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[120]})
-var sMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitor, Members: &mMonitor, Type: smithy.ShapeTypeStructure, Ext: &ext[121]})
-var s_MonitorArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &ext[126]})
-var s_MonitorConfigState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonitorConfigState, Type: smithy.ShapeTypeString, Ext: &ext[127]})
-var s_MonitorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonitorList, Members: &m_MonitorList, Type: smithy.ShapeTypeList, Ext: &ext[128]})
-var s_MonitorProcessingStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonitorProcessingStatusCode, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var sNetwork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetwork, Members: &mNetwork, Type: smithy.ShapeTypeStructure, Ext: &ext[131]})
-var sNetworkImpairment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkImpairment, Members: &mNetworkImpairment, Type: smithy.ShapeTypeStructure, Ext: &ext[134]})
-var s_NetworkList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkList, Members: &m_NetworkList, Type: smithy.ShapeTypeList, Ext: &ext[138]})
-var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &ext[140]})
-var s_Operator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Operator, Type: smithy.ShapeTypeString, Ext: &ext[142]})
-var s_Percentage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &ext[143]})
-var sPerformanceMeasurement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPerformanceMeasurement, Members: &mPerformanceMeasurement, Type: smithy.ShapeTypeStructure, Ext: &ext[144]})
-var s_QueryData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryData, Members: &m_QueryData, Type: smithy.ShapeTypeList, Ext: &ext[149]})
-var sQueryField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryField, Members: &mQueryField, Type: smithy.ShapeTypeStructure, Ext: &ext[151]})
-var s_QueryFields = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryFields, Members: &m_QueryFields, Type: smithy.ShapeTypeList, Ext: &ext[154]})
-var s_QueryMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryMaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[156]})
-var s_QueryRow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryRow, Members: &m_QueryRow, Type: smithy.ShapeTypeList, Ext: &ext[157]})
-var s_QueryStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryStatus, Type: smithy.ShapeTypeString, Ext: &ext[159]})
-var s_QueryType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryType, Type: smithy.ShapeTypeString, Ext: &ext[160]})
-var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[161]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &ext[162]})
-var sRoundTripTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoundTripTime, Members: &mRoundTripTime, Type: smithy.ShapeTypeStructure, Ext: &ext[164]})
-var sS3Config = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Config, Members: &mS3Config, Type: smithy.ShapeTypeStructure, Ext: &ext[168]})
-var s_SetOfARNs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SetOfARNs, Members: &m_SetOfARNs, Type: smithy.ShapeTypeList, Ext: &ext[172]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[174]})
-var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &ext[175]})
-var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[177]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[180]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &ext[181]})
-var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &ext[183]})
-var s_TrafficPercentageToMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrafficPercentageToMonitor, Type: smithy.ShapeTypeInteger, Ext: &ext[185]})
-var s_TriangulationEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TriangulationEventType, Type: smithy.ShapeTypeString, Ext: &ext[186]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &ext[187]})
-var sCreateMonitorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMonitorInput, Members: &mCreateMonitorInput, Type: smithy.ShapeTypeStructure, Ext: &ext[189]})
-var sCreateMonitorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMonitorOutput, Members: &mCreateMonitorOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[198]})
-var sDeleteMonitorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMonitorInput, Members: &mDeleteMonitorInput, Type: smithy.ShapeTypeStructure, Ext: &ext[201]})
-var sDeleteMonitorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMonitorOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[203]})
-var sGetHealthEventInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHealthEventInput, Members: &mGetHealthEventInput, Type: smithy.ShapeTypeStructure, Ext: &ext[204]})
-var sGetHealthEventOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHealthEventOutput, Members: &mGetHealthEventOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[208]})
-var sGetInternetEventInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInternetEventInput, Members: &mGetInternetEventInput, Type: smithy.ShapeTypeStructure, Ext: &ext[220]})
-var sGetInternetEventOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInternetEventOutput, Members: &mGetInternetEventOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[222]})
-var sGetMonitorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMonitorInput, Members: &mGetMonitorInput, Type: smithy.ShapeTypeStructure, Ext: &ext[230]})
-var sGetMonitorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMonitorOutput, Members: &mGetMonitorOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[233]})
-var sGetQueryResultsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsInput, Members: &mGetQueryResultsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[247]})
-var sGetQueryResultsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsOutput, Members: &mGetQueryResultsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[252]})
-var sGetQueryStatusInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatusInput, Members: &mGetQueryStatusInput, Type: smithy.ShapeTypeStructure, Ext: &ext[256]})
-var sGetQueryStatusOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatusOutput, Members: &mGetQueryStatusOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[259]})
-var sListHealthEventsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHealthEventsInput, Members: &mListHealthEventsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[261]})
-var sListHealthEventsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHealthEventsOutput, Members: &mListHealthEventsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[269]})
-var sListInternetEventsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInternetEventsInput, Members: &mListInternetEventsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[272]})
-var sListInternetEventsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInternetEventsOutput, Members: &mListInternetEventsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[279]})
-var sListMonitorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMonitorsInput, Members: &mListMonitorsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[282]})
-var sListMonitorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMonitorsOutput, Members: &mListMonitorsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[287]})
-var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[290]})
-var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[292]})
-var sStartQueryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryInput, Members: &mStartQueryInput, Type: smithy.ShapeTypeStructure, Ext: &ext[294]})
-var sStartQueryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryOutput, Members: &mStartQueryOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[301]})
-var sStopQueryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryInput, Members: &mStopQueryInput, Type: smithy.ShapeTypeStructure, Ext: &ext[303]})
-var sStopQueryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[306]})
-var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[307]})
-var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[310]})
-var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[311]})
-var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[314]})
-var sUpdateMonitorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMonitorInput, Members: &mUpdateMonitorInput, Type: smithy.ShapeTypeStructure, Ext: &ext[315]})
-var sUpdateMonitorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMonitorOutput, Members: &mUpdateMonitorOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[325]})
+var sCreateMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMonitor, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateMonitor})
+var sDeleteMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMonitor, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eDeleteMonitor})
+var sGetHealthEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHealthEvent, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eGetHealthEvent})
+var sGetInternetEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInternetEvent, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eGetInternetEvent})
+var sGetMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMonitor, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eGetMonitor})
+var sGetQueryResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResults, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eGetQueryResults})
+var sGetQueryStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatus, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eGetQueryStatus})
+var sListHealthEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHealthEvents, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eListHealthEvents})
+var sListInternetEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInternetEvents, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eListInternetEvents})
+var sListMonitors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMonitors, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eListMonitors})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sStartQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQuery, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eStartQuery})
+var sStopQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQuery, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eStopQuery})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMonitor, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eUpdateMonitor})
+var s_InternetMonitor20210603 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InternetMonitor20210603, Type: smithy.ShapeTypeService, Ext: &e_InternetMonitor20210603})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountId})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var sAvailabilityMeasurement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAvailabilityMeasurement, Members: &mAvailabilityMeasurement, Type: smithy.ShapeTypeStructure, Ext: &eAvailabilityMeasurement})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eBadRequestException})
+var sClientLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientLocation, Members: &mClientLocation, Type: smithy.ShapeTypeStructure, Ext: &eClientLocation})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var s_FilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &e_FilterList})
+var sFilterParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterParameter, Members: &mFilterParameter, Type: smithy.ShapeTypeStructure, Ext: &eFilterParameter})
+var s_FilterParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterParameters, Members: &m_FilterParameters, Type: smithy.ShapeTypeList, Ext: &e_FilterParameters})
+var sHealthEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthEvent, Members: &mHealthEvent, Type: smithy.ShapeTypeStructure, Ext: &eHealthEvent})
+var s_HealthEventImpactType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthEventImpactType, Type: smithy.ShapeTypeString, Ext: &e_HealthEventImpactType})
+var s_HealthEventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthEventList, Members: &m_HealthEventList, Type: smithy.ShapeTypeList, Ext: &e_HealthEventList})
+var s_HealthEventName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthEventName, Type: smithy.ShapeTypeString, Ext: &e_HealthEventName})
+var sHealthEventsConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthEventsConfig, Members: &mHealthEventsConfig, Type: smithy.ShapeTypeStructure, Ext: &eHealthEventsConfig})
+var s_HealthEventStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthEventStatus, Type: smithy.ShapeTypeString, Ext: &e_HealthEventStatus})
+var sImpactedLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImpactedLocation, Members: &mImpactedLocation, Type: smithy.ShapeTypeStructure, Ext: &eImpactedLocation})
+var s_ImpactedLocationsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImpactedLocationsList, Members: &m_ImpactedLocationsList, Type: smithy.ShapeTypeList, Ext: &e_ImpactedLocationsList})
+var sInternalServerErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerErrorException, Members: &mInternalServerErrorException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerErrorException})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t20, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var s_InternetEventId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InternetEventId, Type: smithy.ShapeTypeString, Ext: &e_InternetEventId})
+var s_InternetEventMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InternetEventMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_InternetEventMaxResults})
+var s_InternetEventsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InternetEventsList, Members: &m_InternetEventsList, Type: smithy.ShapeTypeList, Ext: &e_InternetEventsList})
+var s_InternetEventStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InternetEventStatus, Type: smithy.ShapeTypeString, Ext: &e_InternetEventStatus})
+var sInternetEventSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternetEventSummary, Members: &mInternetEventSummary, Type: smithy.ShapeTypeStructure, Ext: &eInternetEventSummary})
+var s_InternetEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InternetEventType, Type: smithy.ShapeTypeString, Ext: &e_InternetEventType})
+var sInternetHealth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternetHealth, Members: &mInternetHealth, Type: smithy.ShapeTypeStructure, Ext: &eInternetHealth})
+var sInternetMeasurementsLogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternetMeasurementsLogDelivery, Members: &mInternetMeasurementsLogDelivery, Type: smithy.ShapeTypeStructure, Ext: &eInternetMeasurementsLogDelivery})
+var s_Ipv4PrefixList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ipv4PrefixList, Members: &m_Ipv4PrefixList, Type: smithy.ShapeTypeList, Ext: &e_Ipv4PrefixList})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t16, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var sLocalHealthEventsConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLocalHealthEventsConfig, Members: &mLocalHealthEventsConfig, Type: smithy.ShapeTypeStructure, Ext: &eLocalHealthEventsConfig})
+var s_LocalHealthEventsConfigStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocalHealthEventsConfigStatus, Type: smithy.ShapeTypeString, Ext: &e_LocalHealthEventsConfigStatus})
+var s_LogDeliveryStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogDeliveryStatus, Type: smithy.ShapeTypeString, Ext: &e_LogDeliveryStatus})
+var s_MaxCityNetworksToMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxCityNetworksToMonitor, Type: smithy.ShapeTypeInteger, Ext: &e_MaxCityNetworksToMonitor})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var sMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitor, Members: &mMonitor, Type: smithy.ShapeTypeStructure, Ext: &eMonitor})
+var s_MonitorArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &e_MonitorArn})
+var s_MonitorConfigState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonitorConfigState, Type: smithy.ShapeTypeString, Ext: &e_MonitorConfigState})
+var s_MonitorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonitorList, Members: &m_MonitorList, Type: smithy.ShapeTypeList, Ext: &e_MonitorList})
+var s_MonitorProcessingStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonitorProcessingStatusCode, Type: smithy.ShapeTypeString, Ext: &e_MonitorProcessingStatusCode})
+var sNetwork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetwork, Members: &mNetwork, Type: smithy.ShapeTypeStructure, Ext: &eNetwork})
+var sNetworkImpairment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkImpairment, Members: &mNetworkImpairment, Type: smithy.ShapeTypeStructure, Ext: &eNetworkImpairment})
+var s_NetworkList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkList, Members: &m_NetworkList, Type: smithy.ShapeTypeList, Ext: &e_NetworkList})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &eNotFoundException})
+var s_Operator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Operator, Type: smithy.ShapeTypeString, Ext: &e_Operator})
+var s_Percentage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &e_Percentage})
+var sPerformanceMeasurement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPerformanceMeasurement, Members: &mPerformanceMeasurement, Type: smithy.ShapeTypeStructure, Ext: &ePerformanceMeasurement})
+var s_QueryData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryData, Members: &m_QueryData, Type: smithy.ShapeTypeList, Ext: &e_QueryData})
+var sQueryField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryField, Members: &mQueryField, Type: smithy.ShapeTypeStructure, Ext: &eQueryField})
+var s_QueryFields = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryFields, Members: &m_QueryFields, Type: smithy.ShapeTypeList, Ext: &e_QueryFields})
+var s_QueryMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryMaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_QueryMaxResults})
+var s_QueryRow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryRow, Members: &m_QueryRow, Type: smithy.ShapeTypeList, Ext: &e_QueryRow})
+var s_QueryStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryStatus, Type: smithy.ShapeTypeString, Ext: &e_QueryStatus})
+var s_QueryType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryType, Type: smithy.ShapeTypeString, Ext: &e_QueryType})
+var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &e_ResourceName})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t21, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sRoundTripTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoundTripTime, Members: &mRoundTripTime, Type: smithy.ShapeTypeStructure, Ext: &eRoundTripTime})
+var sS3Config = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Config, Members: &mS3Config, Type: smithy.ShapeTypeStructure, Ext: &eS3Config})
+var s_SetOfARNs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SetOfARNs, Members: &m_SetOfARNs, Type: smithy.ShapeTypeList, Ext: &e_SetOfARNs})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList, Ext: &e_TagKeys})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &eTooManyRequestsException})
+var s_TrafficPercentageToMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrafficPercentageToMonitor, Type: smithy.ShapeTypeInteger, Ext: &e_TrafficPercentageToMonitor})
+var s_TriangulationEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TriangulationEventType, Type: smithy.ShapeTypeString, Ext: &e_TriangulationEventType})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sCreateMonitorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMonitorInput, Members: &mCreateMonitorInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateMonitorInput})
+var sCreateMonitorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMonitorOutput, Members: &mCreateMonitorOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateMonitorOutput})
+var sDeleteMonitorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMonitorInput, Members: &mDeleteMonitorInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMonitorInput})
+var sDeleteMonitorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMonitorOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteMonitorOutput})
+var sGetHealthEventInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHealthEventInput, Members: &mGetHealthEventInput, Type: smithy.ShapeTypeStructure, Ext: &eGetHealthEventInput})
+var sGetHealthEventOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHealthEventOutput, Members: &mGetHealthEventOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetHealthEventOutput})
+var sGetInternetEventInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInternetEventInput, Members: &mGetInternetEventInput, Type: smithy.ShapeTypeStructure, Ext: &eGetInternetEventInput})
+var sGetInternetEventOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInternetEventOutput, Members: &mGetInternetEventOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetInternetEventOutput})
+var sGetMonitorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMonitorInput, Members: &mGetMonitorInput, Type: smithy.ShapeTypeStructure, Ext: &eGetMonitorInput})
+var sGetMonitorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMonitorOutput, Members: &mGetMonitorOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetMonitorOutput})
+var sGetQueryResultsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsInput, Members: &mGetQueryResultsInput, Type: smithy.ShapeTypeStructure, Ext: &eGetQueryResultsInput})
+var sGetQueryResultsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsOutput, Members: &mGetQueryResultsOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetQueryResultsOutput})
+var sGetQueryStatusInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatusInput, Members: &mGetQueryStatusInput, Type: smithy.ShapeTypeStructure, Ext: &eGetQueryStatusInput})
+var sGetQueryStatusOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryStatusOutput, Members: &mGetQueryStatusOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetQueryStatusOutput})
+var sListHealthEventsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHealthEventsInput, Members: &mListHealthEventsInput, Type: smithy.ShapeTypeStructure, Ext: &eListHealthEventsInput})
+var sListHealthEventsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHealthEventsOutput, Members: &mListHealthEventsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListHealthEventsOutput})
+var sListInternetEventsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInternetEventsInput, Members: &mListInternetEventsInput, Type: smithy.ShapeTypeStructure, Ext: &eListInternetEventsInput})
+var sListInternetEventsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInternetEventsOutput, Members: &mListInternetEventsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListInternetEventsOutput})
+var sListMonitorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMonitorsInput, Members: &mListMonitorsInput, Type: smithy.ShapeTypeStructure, Ext: &eListMonitorsInput})
+var sListMonitorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMonitorsOutput, Members: &mListMonitorsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListMonitorsOutput})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceInput})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceOutput})
+var sStartQueryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryInput, Members: &mStartQueryInput, Type: smithy.ShapeTypeStructure, Ext: &eStartQueryInput})
+var sStartQueryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryOutput, Members: &mStartQueryOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartQueryOutput})
+var sStopQueryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryInput, Members: &mStopQueryInput, Type: smithy.ShapeTypeStructure, Ext: &eStopQueryInput})
+var sStopQueryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryOutput, Type: smithy.ShapeTypeStructure, Ext: &eStopQueryOutput})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceInput})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceOutput})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceInput})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceOutput})
+var sUpdateMonitorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMonitorInput, Members: &mUpdateMonitorInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMonitorInput})
+var sUpdateMonitorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMonitorOutput, Members: &mUpdateMonitorOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMonitorOutput})
 
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[18]})
-var sAvailabilityMeasurement_ExperienceScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExperienceScore", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[22]})
-var sAvailabilityMeasurement_PercentOfTotalTrafficImpacted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentOfTotalTrafficImpacted", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[23]})
-var sAvailabilityMeasurement_PercentOfClientLocationImpacted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentOfClientLocationImpacted", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[24]})
-var sBadRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var sClientLocation_ASName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[28]})
-var sClientLocation_ASNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASNumber", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[29]})
-var sClientLocation_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[30]})
-var sClientLocation_Subdivision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdivision", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var sClientLocation_Metro = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metro", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var sClientLocation_City = smithy.NewStaticSchema(smithy.StaticSchema{Member: "City", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var sClientLocation_Latitude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Latitude", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[34]})
-var sClientLocation_Longitude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Longitude", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[35]})
-var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[37]})
-var s_FilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[39]})
-var sFilterParameter_Field = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Field", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[41]})
-var sFilterParameter_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &i_Operator, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var sFilterParameter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &ext[43]})
-var s_FilterParameters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilterParameter, Members: &mFilterParameter, Type: smithy.ShapeTypeStructure, Ext: &ext[45]})
-var sHealthEvent_EventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[47]})
-var sHealthEvent_EventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventId", ID: &i_HealthEventName, Type: smithy.ShapeTypeString, Ext: &ext[48]})
-var sHealthEvent_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &ext[49]})
-var sHealthEvent_EndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &ext[50]})
-var sHealthEvent_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &ext[51]})
-var sHealthEvent_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &ext[52]})
-var sHealthEvent_ImpactedLocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpactedLocations", ID: &i_ImpactedLocationsList, Members: &m_ImpactedLocationsList, Type: smithy.ShapeTypeList, Ext: &ext[53]})
-var sHealthEvent_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_HealthEventStatus, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var sHealthEvent_PercentOfTotalTrafficImpacted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentOfTotalTrafficImpacted", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[55]})
-var sHealthEvent_ImpactType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpactType", ID: &i_HealthEventImpactType, Type: smithy.ShapeTypeString, Ext: &ext[56]})
-var sHealthEvent_HealthScoreThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthScoreThreshold", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &ext[57]})
-var s_HealthEventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHealthEvent, Members: &mHealthEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[60]})
-var sHealthEventsConfig_AvailabilityScoreThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityScoreThreshold", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &ext[63]})
-var sHealthEventsConfig_PerformanceScoreThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerformanceScoreThreshold", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &ext[64]})
-var sHealthEventsConfig_AvailabilityLocalHealthEventsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityLocalHealthEventsConfig", ID: &iLocalHealthEventsConfig, Members: &mLocalHealthEventsConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[65]})
-var sHealthEventsConfig_PerformanceLocalHealthEventsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerformanceLocalHealthEventsConfig", ID: &iLocalHealthEventsConfig, Members: &mLocalHealthEventsConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[66]})
-var sImpactedLocation_ASName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var sImpactedLocation_ASNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASNumber", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[70]})
-var sImpactedLocation_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[71]})
-var sImpactedLocation_Subdivision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdivision", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[72]})
-var sImpactedLocation_Metro = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metro", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[73]})
-var sImpactedLocation_City = smithy.NewStaticSchema(smithy.StaticSchema{Member: "City", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[74]})
-var sImpactedLocation_Latitude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Latitude", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[75]})
-var sImpactedLocation_Longitude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Longitude", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[76]})
-var sImpactedLocation_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountryCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[77]})
-var sImpactedLocation_SubdivisionCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubdivisionCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[78]})
-var sImpactedLocation_ServiceLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceLocation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[79]})
-var sImpactedLocation_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_HealthEventStatus, Type: smithy.ShapeTypeString, Ext: &ext[80]})
-var sImpactedLocation_CausedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CausedBy", ID: &iNetworkImpairment, Members: &mNetworkImpairment, Type: smithy.ShapeTypeStructure, Ext: &ext[81]})
-var sImpactedLocation_InternetHealth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternetHealth", ID: &iInternetHealth, Members: &mInternetHealth, Type: smithy.ShapeTypeStructure, Ext: &ext[82]})
-var sImpactedLocation_Ipv4Prefixes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ipv4Prefixes", ID: &i_Ipv4PrefixList, Members: &m_Ipv4PrefixList, Type: smithy.ShapeTypeList, Ext: &ext[83]})
-var s_ImpactedLocationsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iImpactedLocation, Members: &mImpactedLocation, Type: smithy.ShapeTypeStructure, Ext: &ext[85]})
-var sInternalServerErrorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[87]})
-var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[89]})
-var s_InternetEventsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInternetEventSummary, Members: &mInternetEventSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[93]})
-var sInternetEventSummary_EventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventId", ID: &i_InternetEventId, Type: smithy.ShapeTypeString, Ext: &ext[96]})
-var sInternetEventSummary_EventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[97]})
-var sInternetEventSummary_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &ext[98]})
-var sInternetEventSummary_EndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &ext[99]})
-var sInternetEventSummary_ClientLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientLocation", ID: &iClientLocation, Members: &mClientLocation, Type: smithy.ShapeTypeStructure, Ext: &ext[100]})
-var sInternetEventSummary_EventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventType", ID: &i_InternetEventType, Type: smithy.ShapeTypeString, Ext: &ext[101]})
-var sInternetEventSummary_EventStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventStatus", ID: &i_InternetEventStatus, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var sInternetHealth_Availability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Availability", ID: &iAvailabilityMeasurement, Members: &mAvailabilityMeasurement, Type: smithy.ShapeTypeStructure, Ext: &ext[105]})
-var sInternetHealth_Performance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Performance", ID: &iPerformanceMeasurement, Members: &mPerformanceMeasurement, Type: smithy.ShapeTypeStructure, Ext: &ext[106]})
-var sInternetMeasurementsLogDelivery_S3Config = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Config", ID: &iS3Config, Members: &mS3Config, Type: smithy.ShapeTypeStructure, Ext: &ext[108]})
-var s_Ipv4PrefixList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[110]})
-var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[112]})
-var sLocalHealthEventsConfig_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_LocalHealthEventsConfigStatus, Type: smithy.ShapeTypeString, Ext: &ext[114]})
-var sLocalHealthEventsConfig_HealthScoreThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthScoreThreshold", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &ext[115]})
-var sLocalHealthEventsConfig_MinTrafficImpact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinTrafficImpact", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &ext[116]})
-var sMonitor_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[122]})
-var sMonitor_MonitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorArn", ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &ext[123]})
-var sMonitor_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_MonitorConfigState, Type: smithy.ShapeTypeString, Ext: &ext[124]})
-var sMonitor_ProcessingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcessingStatus", ID: &i_MonitorProcessingStatusCode, Type: smithy.ShapeTypeString, Ext: &ext[125]})
-var s_MonitorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMonitor, Members: &mMonitor, Type: smithy.ShapeTypeStructure, Ext: &ext[129]})
-var sNetwork_ASName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[132]})
-var sNetwork_ASNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASNumber", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[133]})
-var sNetworkImpairment_Networks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Networks", ID: &i_NetworkList, Members: &m_NetworkList, Type: smithy.ShapeTypeList, Ext: &ext[135]})
-var sNetworkImpairment_AsPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AsPath", ID: &i_NetworkList, Members: &m_NetworkList, Type: smithy.ShapeTypeList, Ext: &ext[136]})
-var sNetworkImpairment_NetworkEventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkEventType", ID: &i_TriangulationEventType, Type: smithy.ShapeTypeString, Ext: &ext[137]})
-var s_NetworkList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNetwork, Members: &mNetwork, Type: smithy.ShapeTypeStructure, Ext: &ext[139]})
-var sNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[141]})
-var sPerformanceMeasurement_ExperienceScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExperienceScore", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[145]})
-var sPerformanceMeasurement_PercentOfTotalTrafficImpacted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentOfTotalTrafficImpacted", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[146]})
-var sPerformanceMeasurement_PercentOfClientLocationImpacted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentOfClientLocationImpacted", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[147]})
-var sPerformanceMeasurement_RoundTripTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoundTripTime", ID: &iRoundTripTime, Members: &mRoundTripTime, Type: smithy.ShapeTypeStructure, Ext: &ext[148]})
-var s_QueryData_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_QueryRow, Members: &m_QueryRow, Type: smithy.ShapeTypeList, Ext: &ext[150]})
-var sQueryField_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[152]})
-var sQueryField_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[153]})
-var s_QueryFields_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQueryField, Members: &mQueryField, Type: smithy.ShapeTypeStructure, Ext: &ext[155]})
-var s_QueryRow_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[158]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[163]})
-var sRoundTripTime_P50 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "P50", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[165]})
-var sRoundTripTime_P90 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "P90", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[166]})
-var sRoundTripTime_P95 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "P95", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[167]})
-var sS3Config_BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[169]})
-var sS3Config_BucketPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketPrefix", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[170]})
-var sS3Config_LogDeliveryStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogDeliveryStatus", ID: &i_LogDeliveryStatus, Type: smithy.ShapeTypeString, Ext: &ext[171]})
-var s_SetOfARNs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[173]})
-var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[176]})
-var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[178]})
-var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[179]})
-var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[182]})
-var sTooManyRequestsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[184]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[188]})
-var sCreateMonitorInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[190]})
-var sCreateMonitorInput_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &i_SetOfARNs, Members: &m_SetOfARNs, Type: smithy.ShapeTypeList, Ext: &ext[191]})
-var sCreateMonitorInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[192]})
-var sCreateMonitorInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[193]})
-var sCreateMonitorInput_MaxCityNetworksToMonitor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCityNetworksToMonitor", ID: &i_MaxCityNetworksToMonitor, Type: smithy.ShapeTypeInteger, Ext: &ext[194]})
-var sCreateMonitorInput_InternetMeasurementsLogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternetMeasurementsLogDelivery", ID: &iInternetMeasurementsLogDelivery, Members: &mInternetMeasurementsLogDelivery, Type: smithy.ShapeTypeStructure, Ext: &ext[195]})
-var sCreateMonitorInput_TrafficPercentageToMonitor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficPercentageToMonitor", ID: &i_TrafficPercentageToMonitor, Type: smithy.ShapeTypeInteger, Ext: &ext[196]})
-var sCreateMonitorInput_HealthEventsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthEventsConfig", ID: &iHealthEventsConfig, Members: &mHealthEventsConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[197]})
-var sCreateMonitorOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &ext[199]})
-var sCreateMonitorOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_MonitorConfigState, Type: smithy.ShapeTypeString, Ext: &ext[200]})
-var sDeleteMonitorInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[202]})
-var sGetHealthEventInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[205]})
-var sGetHealthEventInput_EventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventId", ID: &i_HealthEventName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[206]})
-var sGetHealthEventInput_LinkedAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkedAccountId", ID: &i_AccountId, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &ext[207]})
-var sGetHealthEventOutput_EventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[209]})
-var sGetHealthEventOutput_EventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventId", ID: &i_HealthEventName, Type: smithy.ShapeTypeString, Ext: &ext[210]})
-var sGetHealthEventOutput_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &ext[211]})
-var sGetHealthEventOutput_EndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &ext[212]})
-var sGetHealthEventOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &ext[213]})
-var sGetHealthEventOutput_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &ext[214]})
-var sGetHealthEventOutput_ImpactedLocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpactedLocations", ID: &i_ImpactedLocationsList, Members: &m_ImpactedLocationsList, Type: smithy.ShapeTypeList, Ext: &ext[215]})
-var sGetHealthEventOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_HealthEventStatus, Type: smithy.ShapeTypeString, Ext: &ext[216]})
-var sGetHealthEventOutput_PercentOfTotalTrafficImpacted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentOfTotalTrafficImpacted", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[217]})
-var sGetHealthEventOutput_ImpactType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpactType", ID: &i_HealthEventImpactType, Type: smithy.ShapeTypeString, Ext: &ext[218]})
-var sGetHealthEventOutput_HealthScoreThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthScoreThreshold", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &ext[219]})
-var sGetInternetEventInput_EventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventId", ID: &i_InternetEventId, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[221]})
-var sGetInternetEventOutput_EventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventId", ID: &i_InternetEventId, Type: smithy.ShapeTypeString, Ext: &ext[223]})
-var sGetInternetEventOutput_EventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[224]})
-var sGetInternetEventOutput_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &ext[225]})
-var sGetInternetEventOutput_EndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &ext[226]})
-var sGetInternetEventOutput_ClientLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientLocation", ID: &iClientLocation, Members: &mClientLocation, Type: smithy.ShapeTypeStructure, Ext: &ext[227]})
-var sGetInternetEventOutput_EventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventType", ID: &i_InternetEventType, Type: smithy.ShapeTypeString, Ext: &ext[228]})
-var sGetInternetEventOutput_EventStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventStatus", ID: &i_InternetEventStatus, Type: smithy.ShapeTypeString, Ext: &ext[229]})
-var sGetMonitorInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[231]})
-var sGetMonitorInput_LinkedAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkedAccountId", ID: &i_AccountId, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &ext[232]})
-var sGetMonitorOutput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &ext[234]})
-var sGetMonitorOutput_MonitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorArn", ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &ext[235]})
-var sGetMonitorOutput_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &i_SetOfARNs, Members: &m_SetOfARNs, Type: smithy.ShapeTypeList, Ext: &ext[236]})
-var sGetMonitorOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_MonitorConfigState, Type: smithy.ShapeTypeString, Ext: &ext[237]})
-var sGetMonitorOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &ext[238]})
-var sGetMonitorOutput_ModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifiedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &ext[239]})
-var sGetMonitorOutput_ProcessingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcessingStatus", ID: &i_MonitorProcessingStatusCode, Type: smithy.ShapeTypeString, Ext: &ext[240]})
-var sGetMonitorOutput_ProcessingStatusInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcessingStatusInfo", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[241]})
-var sGetMonitorOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[242]})
-var sGetMonitorOutput_MaxCityNetworksToMonitor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCityNetworksToMonitor", ID: &i_MaxCityNetworksToMonitor, Type: smithy.ShapeTypeInteger, Ext: &ext[243]})
-var sGetMonitorOutput_InternetMeasurementsLogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternetMeasurementsLogDelivery", ID: &iInternetMeasurementsLogDelivery, Members: &mInternetMeasurementsLogDelivery, Type: smithy.ShapeTypeStructure, Ext: &ext[244]})
-var sGetMonitorOutput_TrafficPercentageToMonitor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficPercentageToMonitor", ID: &i_TrafficPercentageToMonitor, Type: smithy.ShapeTypeInteger, Ext: &ext[245]})
-var sGetMonitorOutput_HealthEventsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthEventsConfig", ID: &iHealthEventsConfig, Members: &mHealthEventsConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[246]})
-var sGetQueryResultsInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[248]})
-var sGetQueryResultsInput_QueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryId", ID: &pString, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[249]})
-var sGetQueryResultsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &ext[250]})
-var sGetQueryResultsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_QueryMaxResults, Traits: &t26, Type: smithy.ShapeTypeInteger, Ext: &ext[251]})
-var sGetQueryResultsOutput_Fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fields", ID: &i_QueryFields, Members: &m_QueryFields, Type: smithy.ShapeTypeList, Ext: &ext[253]})
-var sGetQueryResultsOutput_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &i_QueryData, Members: &m_QueryData, Type: smithy.ShapeTypeList, Ext: &ext[254]})
-var sGetQueryResultsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[255]})
-var sGetQueryStatusInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[257]})
-var sGetQueryStatusInput_QueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryId", ID: &pString, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[258]})
-var sGetQueryStatusOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_QueryStatus, Type: smithy.ShapeTypeString, Ext: &ext[260]})
-var sListHealthEventsInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[262]})
-var sListHealthEventsInput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Traits: &t27, Type: smithy.ShapeTypeTimestamp, Ext: &ext[263]})
-var sListHealthEventsInput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &ext[264]})
-var sListHealthEventsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &ext[265]})
-var sListHealthEventsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t26, Type: smithy.ShapeTypeInteger, Ext: &ext[266]})
-var sListHealthEventsInput_EventStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventStatus", ID: &i_HealthEventStatus, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &ext[267]})
-var sListHealthEventsInput_LinkedAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkedAccountId", ID: &i_AccountId, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &ext[268]})
-var sListHealthEventsOutput_HealthEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthEvents", ID: &i_HealthEventList, Members: &m_HealthEventList, Type: smithy.ShapeTypeList, Ext: &ext[270]})
-var sListHealthEventsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[271]})
-var sListInternetEventsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &ext[273]})
-var sListInternetEventsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_InternetEventMaxResults, Traits: &t30, Type: smithy.ShapeTypeInteger, Ext: &ext[274]})
-var sListInternetEventsInput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Traits: &t27, Type: smithy.ShapeTypeTimestamp, Ext: &ext[275]})
-var sListInternetEventsInput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &ext[276]})
-var sListInternetEventsInput_EventStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventStatus", ID: &pString, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &ext[277]})
-var sListInternetEventsInput_EventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventType", ID: &pString, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &ext[278]})
-var sListInternetEventsOutput_InternetEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternetEvents", ID: &i_InternetEventsList, Members: &m_InternetEventsList, Type: smithy.ShapeTypeList, Ext: &ext[280]})
-var sListInternetEventsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[281]})
-var sListMonitorsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &ext[283]})
-var sListMonitorsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t26, Type: smithy.ShapeTypeInteger, Ext: &ext[284]})
-var sListMonitorsInput_MonitorStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorStatus", ID: &pString, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ext[285]})
-var sListMonitorsInput_IncludeLinkedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeLinkedAccounts", ID: &pBoolean, Traits: &t33, Type: smithy.ShapeTypeBoolean, Ext: &ext[286]})
-var sListMonitorsOutput_Monitors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Monitors", ID: &i_MonitorList, Members: &m_MonitorList, Type: smithy.ShapeTypeList, Ext: &ext[288]})
-var sListMonitorsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[289]})
-var sListTagsForResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_MonitorArn, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[291]})
-var sListTagsForResourceOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[293]})
-var sStartQueryInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[295]})
-var sStartQueryInput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &ext[296]})
-var sStartQueryInput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &ext[297]})
-var sStartQueryInput_QueryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryType", ID: &i_QueryType, Type: smithy.ShapeTypeString, Ext: &ext[298]})
-var sStartQueryInput_FilterParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterParameters", ID: &i_FilterParameters, Members: &m_FilterParameters, Type: smithy.ShapeTypeList, Ext: &ext[299]})
-var sStartQueryInput_LinkedAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkedAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[300]})
-var sStartQueryOutput_QueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[302]})
-var sStopQueryInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[304]})
-var sStopQueryInput_QueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryId", ID: &pString, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[305]})
-var sTagResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_MonitorArn, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[308]})
-var sTagResourceInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[309]})
-var sUntagResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_MonitorArn, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[312]})
-var sUntagResourceInput_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Traits: &t34, Type: smithy.ShapeTypeList, Ext: &ext[313]})
-var sUpdateMonitorInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &ext[316]})
-var sUpdateMonitorInput_ResourcesToAdd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourcesToAdd", ID: &i_SetOfARNs, Members: &m_SetOfARNs, Type: smithy.ShapeTypeList, Ext: &ext[317]})
-var sUpdateMonitorInput_ResourcesToRemove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourcesToRemove", ID: &i_SetOfARNs, Members: &m_SetOfARNs, Type: smithy.ShapeTypeList, Ext: &ext[318]})
-var sUpdateMonitorInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_MonitorConfigState, Type: smithy.ShapeTypeString, Ext: &ext[319]})
-var sUpdateMonitorInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[320]})
-var sUpdateMonitorInput_MaxCityNetworksToMonitor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCityNetworksToMonitor", ID: &i_MaxCityNetworksToMonitor, Type: smithy.ShapeTypeInteger, Ext: &ext[321]})
-var sUpdateMonitorInput_InternetMeasurementsLogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternetMeasurementsLogDelivery", ID: &iInternetMeasurementsLogDelivery, Members: &mInternetMeasurementsLogDelivery, Type: smithy.ShapeTypeStructure, Ext: &ext[322]})
-var sUpdateMonitorInput_TrafficPercentageToMonitor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficPercentageToMonitor", ID: &i_TrafficPercentageToMonitor, Type: smithy.ShapeTypeInteger, Ext: &ext[323]})
-var sUpdateMonitorInput_HealthEventsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthEventsConfig", ID: &iHealthEventsConfig, Members: &mHealthEventsConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[324]})
-var sUpdateMonitorOutput_MonitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorArn", ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &ext[326]})
-var sUpdateMonitorOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_MonitorConfigState, Type: smithy.ShapeTypeString, Ext: &ext[327]})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAvailabilityMeasurement_ExperienceScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExperienceScore", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eAvailabilityMeasurement_ExperienceScore})
+var sAvailabilityMeasurement_PercentOfTotalTrafficImpacted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentOfTotalTrafficImpacted", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eAvailabilityMeasurement_PercentOfTotalTrafficImpacted})
+var sAvailabilityMeasurement_PercentOfClientLocationImpacted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentOfClientLocationImpacted", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eAvailabilityMeasurement_PercentOfClientLocationImpacted})
+var sBadRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBadRequestException_message})
+var sClientLocation_ASName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eClientLocation_ASName})
+var sClientLocation_ASNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASNumber", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eClientLocation_ASNumber})
+var sClientLocation_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eClientLocation_Country})
+var sClientLocation_Subdivision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdivision", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eClientLocation_Subdivision})
+var sClientLocation_Metro = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metro", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eClientLocation_Metro})
+var sClientLocation_City = smithy.NewStaticSchema(smithy.StaticSchema{Member: "City", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eClientLocation_City})
+var sClientLocation_Latitude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Latitude", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eClientLocation_Latitude})
+var sClientLocation_Longitude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Longitude", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eClientLocation_Longitude})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var s_FilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_FilterList_member})
+var sFilterParameter_Field = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Field", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFilterParameter_Field})
+var sFilterParameter_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &i_Operator, Type: smithy.ShapeTypeString, Ext: &eFilterParameter_Operator})
+var sFilterParameter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList, Ext: &eFilterParameter_Values})
+var s_FilterParameters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilterParameter, Members: &mFilterParameter, Type: smithy.ShapeTypeStructure, Ext: &e_FilterParameters_member})
+var sHealthEvent_EventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eHealthEvent_EventArn})
+var sHealthEvent_EventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventId", ID: &i_HealthEventName, Type: smithy.ShapeTypeString, Ext: &eHealthEvent_EventId})
+var sHealthEvent_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eHealthEvent_StartedAt})
+var sHealthEvent_EndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eHealthEvent_EndedAt})
+var sHealthEvent_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eHealthEvent_CreatedAt})
+var sHealthEvent_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eHealthEvent_LastUpdatedAt})
+var sHealthEvent_ImpactedLocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpactedLocations", ID: &i_ImpactedLocationsList, Members: &m_ImpactedLocationsList, Type: smithy.ShapeTypeList, Ext: &eHealthEvent_ImpactedLocations})
+var sHealthEvent_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_HealthEventStatus, Type: smithy.ShapeTypeString, Ext: &eHealthEvent_Status})
+var sHealthEvent_PercentOfTotalTrafficImpacted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentOfTotalTrafficImpacted", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eHealthEvent_PercentOfTotalTrafficImpacted})
+var sHealthEvent_ImpactType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpactType", ID: &i_HealthEventImpactType, Type: smithy.ShapeTypeString, Ext: &eHealthEvent_ImpactType})
+var sHealthEvent_HealthScoreThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthScoreThreshold", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &eHealthEvent_HealthScoreThreshold})
+var s_HealthEventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHealthEvent, Members: &mHealthEvent, Type: smithy.ShapeTypeStructure, Ext: &e_HealthEventList_member})
+var sHealthEventsConfig_AvailabilityScoreThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityScoreThreshold", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &eHealthEventsConfig_AvailabilityScoreThreshold})
+var sHealthEventsConfig_PerformanceScoreThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerformanceScoreThreshold", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &eHealthEventsConfig_PerformanceScoreThreshold})
+var sHealthEventsConfig_AvailabilityLocalHealthEventsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityLocalHealthEventsConfig", ID: &iLocalHealthEventsConfig, Members: &mLocalHealthEventsConfig, Type: smithy.ShapeTypeStructure, Ext: &eHealthEventsConfig_AvailabilityLocalHealthEventsConfig})
+var sHealthEventsConfig_PerformanceLocalHealthEventsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerformanceLocalHealthEventsConfig", ID: &iLocalHealthEventsConfig, Members: &mLocalHealthEventsConfig, Type: smithy.ShapeTypeStructure, Ext: &eHealthEventsConfig_PerformanceLocalHealthEventsConfig})
+var sImpactedLocation_ASName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eImpactedLocation_ASName})
+var sImpactedLocation_ASNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASNumber", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eImpactedLocation_ASNumber})
+var sImpactedLocation_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eImpactedLocation_Country})
+var sImpactedLocation_Subdivision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subdivision", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eImpactedLocation_Subdivision})
+var sImpactedLocation_Metro = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metro", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eImpactedLocation_Metro})
+var sImpactedLocation_City = smithy.NewStaticSchema(smithy.StaticSchema{Member: "City", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eImpactedLocation_City})
+var sImpactedLocation_Latitude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Latitude", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eImpactedLocation_Latitude})
+var sImpactedLocation_Longitude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Longitude", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eImpactedLocation_Longitude})
+var sImpactedLocation_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountryCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eImpactedLocation_CountryCode})
+var sImpactedLocation_SubdivisionCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubdivisionCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eImpactedLocation_SubdivisionCode})
+var sImpactedLocation_ServiceLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceLocation", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eImpactedLocation_ServiceLocation})
+var sImpactedLocation_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_HealthEventStatus, Type: smithy.ShapeTypeString, Ext: &eImpactedLocation_Status})
+var sImpactedLocation_CausedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CausedBy", ID: &iNetworkImpairment, Members: &mNetworkImpairment, Type: smithy.ShapeTypeStructure, Ext: &eImpactedLocation_CausedBy})
+var sImpactedLocation_InternetHealth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternetHealth", ID: &iInternetHealth, Members: &mInternetHealth, Type: smithy.ShapeTypeStructure, Ext: &eImpactedLocation_InternetHealth})
+var sImpactedLocation_Ipv4Prefixes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ipv4Prefixes", ID: &i_Ipv4PrefixList, Members: &m_Ipv4PrefixList, Type: smithy.ShapeTypeList, Ext: &eImpactedLocation_Ipv4Prefixes})
+var s_ImpactedLocationsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iImpactedLocation, Members: &mImpactedLocation, Type: smithy.ShapeTypeStructure, Ext: &e_ImpactedLocationsList_member})
+var sInternalServerErrorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerErrorException_message})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var s_InternetEventsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInternetEventSummary, Members: &mInternetEventSummary, Type: smithy.ShapeTypeStructure, Ext: &e_InternetEventsList_member})
+var sInternetEventSummary_EventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventId", ID: &i_InternetEventId, Type: smithy.ShapeTypeString, Ext: &eInternetEventSummary_EventId})
+var sInternetEventSummary_EventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eInternetEventSummary_EventArn})
+var sInternetEventSummary_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eInternetEventSummary_StartedAt})
+var sInternetEventSummary_EndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eInternetEventSummary_EndedAt})
+var sInternetEventSummary_ClientLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientLocation", ID: &iClientLocation, Members: &mClientLocation, Type: smithy.ShapeTypeStructure, Ext: &eInternetEventSummary_ClientLocation})
+var sInternetEventSummary_EventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventType", ID: &i_InternetEventType, Type: smithy.ShapeTypeString, Ext: &eInternetEventSummary_EventType})
+var sInternetEventSummary_EventStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventStatus", ID: &i_InternetEventStatus, Type: smithy.ShapeTypeString, Ext: &eInternetEventSummary_EventStatus})
+var sInternetHealth_Availability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Availability", ID: &iAvailabilityMeasurement, Members: &mAvailabilityMeasurement, Type: smithy.ShapeTypeStructure, Ext: &eInternetHealth_Availability})
+var sInternetHealth_Performance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Performance", ID: &iPerformanceMeasurement, Members: &mPerformanceMeasurement, Type: smithy.ShapeTypeStructure, Ext: &eInternetHealth_Performance})
+var sInternetMeasurementsLogDelivery_S3Config = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Config", ID: &iS3Config, Members: &mS3Config, Type: smithy.ShapeTypeStructure, Ext: &eInternetMeasurementsLogDelivery_S3Config})
+var s_Ipv4PrefixList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_Ipv4PrefixList_member})
+var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_message})
+var sLocalHealthEventsConfig_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_LocalHealthEventsConfigStatus, Type: smithy.ShapeTypeString, Ext: &eLocalHealthEventsConfig_Status})
+var sLocalHealthEventsConfig_HealthScoreThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthScoreThreshold", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &eLocalHealthEventsConfig_HealthScoreThreshold})
+var sLocalHealthEventsConfig_MinTrafficImpact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinTrafficImpact", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &eLocalHealthEventsConfig_MinTrafficImpact})
+var sMonitor_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eMonitor_MonitorName})
+var sMonitor_MonitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorArn", ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &eMonitor_MonitorArn})
+var sMonitor_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_MonitorConfigState, Type: smithy.ShapeTypeString, Ext: &eMonitor_Status})
+var sMonitor_ProcessingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcessingStatus", ID: &i_MonitorProcessingStatusCode, Type: smithy.ShapeTypeString, Ext: &eMonitor_ProcessingStatus})
+var s_MonitorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMonitor, Members: &mMonitor, Type: smithy.ShapeTypeStructure, Ext: &e_MonitorList_member})
+var sNetwork_ASName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eNetwork_ASName})
+var sNetwork_ASNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASNumber", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eNetwork_ASNumber})
+var sNetworkImpairment_Networks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Networks", ID: &i_NetworkList, Members: &m_NetworkList, Type: smithy.ShapeTypeList, Ext: &eNetworkImpairment_Networks})
+var sNetworkImpairment_AsPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AsPath", ID: &i_NetworkList, Members: &m_NetworkList, Type: smithy.ShapeTypeList, Ext: &eNetworkImpairment_AsPath})
+var sNetworkImpairment_NetworkEventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkEventType", ID: &i_TriangulationEventType, Type: smithy.ShapeTypeString, Ext: &eNetworkImpairment_NetworkEventType})
+var s_NetworkList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNetwork, Members: &mNetwork, Type: smithy.ShapeTypeStructure, Ext: &e_NetworkList_member})
+var sNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eNotFoundException_message})
+var sPerformanceMeasurement_ExperienceScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExperienceScore", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ePerformanceMeasurement_ExperienceScore})
+var sPerformanceMeasurement_PercentOfTotalTrafficImpacted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentOfTotalTrafficImpacted", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ePerformanceMeasurement_PercentOfTotalTrafficImpacted})
+var sPerformanceMeasurement_PercentOfClientLocationImpacted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentOfClientLocationImpacted", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ePerformanceMeasurement_PercentOfClientLocationImpacted})
+var sPerformanceMeasurement_RoundTripTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoundTripTime", ID: &iRoundTripTime, Members: &mRoundTripTime, Type: smithy.ShapeTypeStructure, Ext: &ePerformanceMeasurement_RoundTripTime})
+var s_QueryData_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_QueryRow, Members: &m_QueryRow, Type: smithy.ShapeTypeList, Ext: &e_QueryData_member})
+var sQueryField_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eQueryField_Name})
+var sQueryField_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eQueryField_Type})
+var s_QueryFields_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQueryField, Members: &mQueryField, Type: smithy.ShapeTypeStructure, Ext: &e_QueryFields_member})
+var s_QueryRow_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_QueryRow_member})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sRoundTripTime_P50 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "P50", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eRoundTripTime_P50})
+var sRoundTripTime_P90 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "P90", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eRoundTripTime_P90})
+var sRoundTripTime_P95 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "P95", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eRoundTripTime_P95})
+var sS3Config_BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eS3Config_BucketName})
+var sS3Config_BucketPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketPrefix", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eS3Config_BucketPrefix})
+var sS3Config_LogDeliveryStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogDeliveryStatus", ID: &i_LogDeliveryStatus, Type: smithy.ShapeTypeString, Ext: &eS3Config_LogDeliveryStatus})
+var s_SetOfARNs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_SetOfARNs_member})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeys_member})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sTooManyRequestsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTooManyRequestsException_message})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sCreateMonitorInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eCreateMonitorInput_MonitorName})
+var sCreateMonitorInput_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &i_SetOfARNs, Members: &m_SetOfARNs, Type: smithy.ShapeTypeList, Ext: &eCreateMonitorInput_Resources})
+var sCreateMonitorInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateMonitorInput_ClientToken})
+var sCreateMonitorInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateMonitorInput_Tags})
+var sCreateMonitorInput_MaxCityNetworksToMonitor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCityNetworksToMonitor", ID: &i_MaxCityNetworksToMonitor, Type: smithy.ShapeTypeInteger, Ext: &eCreateMonitorInput_MaxCityNetworksToMonitor})
+var sCreateMonitorInput_InternetMeasurementsLogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternetMeasurementsLogDelivery", ID: &iInternetMeasurementsLogDelivery, Members: &mInternetMeasurementsLogDelivery, Type: smithy.ShapeTypeStructure, Ext: &eCreateMonitorInput_InternetMeasurementsLogDelivery})
+var sCreateMonitorInput_TrafficPercentageToMonitor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficPercentageToMonitor", ID: &i_TrafficPercentageToMonitor, Type: smithy.ShapeTypeInteger, Ext: &eCreateMonitorInput_TrafficPercentageToMonitor})
+var sCreateMonitorInput_HealthEventsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthEventsConfig", ID: &iHealthEventsConfig, Members: &mHealthEventsConfig, Type: smithy.ShapeTypeStructure, Ext: &eCreateMonitorInput_HealthEventsConfig})
+var sCreateMonitorOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &eCreateMonitorOutput_Arn})
+var sCreateMonitorOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_MonitorConfigState, Type: smithy.ShapeTypeString, Ext: &eCreateMonitorOutput_Status})
+var sDeleteMonitorInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eDeleteMonitorInput_MonitorName})
+var sGetHealthEventInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eGetHealthEventInput_MonitorName})
+var sGetHealthEventInput_EventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventId", ID: &i_HealthEventName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eGetHealthEventInput_EventId})
+var sGetHealthEventInput_LinkedAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkedAccountId", ID: &i_AccountId, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &eGetHealthEventInput_LinkedAccountId})
+var sGetHealthEventOutput_EventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetHealthEventOutput_EventArn})
+var sGetHealthEventOutput_EventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventId", ID: &i_HealthEventName, Type: smithy.ShapeTypeString, Ext: &eGetHealthEventOutput_EventId})
+var sGetHealthEventOutput_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eGetHealthEventOutput_StartedAt})
+var sGetHealthEventOutput_EndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eGetHealthEventOutput_EndedAt})
+var sGetHealthEventOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eGetHealthEventOutput_CreatedAt})
+var sGetHealthEventOutput_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eGetHealthEventOutput_LastUpdatedAt})
+var sGetHealthEventOutput_ImpactedLocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpactedLocations", ID: &i_ImpactedLocationsList, Members: &m_ImpactedLocationsList, Type: smithy.ShapeTypeList, Ext: &eGetHealthEventOutput_ImpactedLocations})
+var sGetHealthEventOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_HealthEventStatus, Type: smithy.ShapeTypeString, Ext: &eGetHealthEventOutput_Status})
+var sGetHealthEventOutput_PercentOfTotalTrafficImpacted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentOfTotalTrafficImpacted", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eGetHealthEventOutput_PercentOfTotalTrafficImpacted})
+var sGetHealthEventOutput_ImpactType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpactType", ID: &i_HealthEventImpactType, Type: smithy.ShapeTypeString, Ext: &eGetHealthEventOutput_ImpactType})
+var sGetHealthEventOutput_HealthScoreThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthScoreThreshold", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &eGetHealthEventOutput_HealthScoreThreshold})
+var sGetInternetEventInput_EventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventId", ID: &i_InternetEventId, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eGetInternetEventInput_EventId})
+var sGetInternetEventOutput_EventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventId", ID: &i_InternetEventId, Type: smithy.ShapeTypeString, Ext: &eGetInternetEventOutput_EventId})
+var sGetInternetEventOutput_EventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetInternetEventOutput_EventArn})
+var sGetInternetEventOutput_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eGetInternetEventOutput_StartedAt})
+var sGetInternetEventOutput_EndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eGetInternetEventOutput_EndedAt})
+var sGetInternetEventOutput_ClientLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientLocation", ID: &iClientLocation, Members: &mClientLocation, Type: smithy.ShapeTypeStructure, Ext: &eGetInternetEventOutput_ClientLocation})
+var sGetInternetEventOutput_EventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventType", ID: &i_InternetEventType, Type: smithy.ShapeTypeString, Ext: &eGetInternetEventOutput_EventType})
+var sGetInternetEventOutput_EventStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventStatus", ID: &i_InternetEventStatus, Type: smithy.ShapeTypeString, Ext: &eGetInternetEventOutput_EventStatus})
+var sGetMonitorInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eGetMonitorInput_MonitorName})
+var sGetMonitorInput_LinkedAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkedAccountId", ID: &i_AccountId, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &eGetMonitorInput_LinkedAccountId})
+var sGetMonitorOutput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Type: smithy.ShapeTypeString, Ext: &eGetMonitorOutput_MonitorName})
+var sGetMonitorOutput_MonitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorArn", ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &eGetMonitorOutput_MonitorArn})
+var sGetMonitorOutput_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &i_SetOfARNs, Members: &m_SetOfARNs, Type: smithy.ShapeTypeList, Ext: &eGetMonitorOutput_Resources})
+var sGetMonitorOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_MonitorConfigState, Type: smithy.ShapeTypeString, Ext: &eGetMonitorOutput_Status})
+var sGetMonitorOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMonitorOutput_CreatedAt})
+var sGetMonitorOutput_ModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifiedAt", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMonitorOutput_ModifiedAt})
+var sGetMonitorOutput_ProcessingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcessingStatus", ID: &i_MonitorProcessingStatusCode, Type: smithy.ShapeTypeString, Ext: &eGetMonitorOutput_ProcessingStatus})
+var sGetMonitorOutput_ProcessingStatusInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcessingStatusInfo", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetMonitorOutput_ProcessingStatusInfo})
+var sGetMonitorOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eGetMonitorOutput_Tags})
+var sGetMonitorOutput_MaxCityNetworksToMonitor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCityNetworksToMonitor", ID: &i_MaxCityNetworksToMonitor, Type: smithy.ShapeTypeInteger, Ext: &eGetMonitorOutput_MaxCityNetworksToMonitor})
+var sGetMonitorOutput_InternetMeasurementsLogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternetMeasurementsLogDelivery", ID: &iInternetMeasurementsLogDelivery, Members: &mInternetMeasurementsLogDelivery, Type: smithy.ShapeTypeStructure, Ext: &eGetMonitorOutput_InternetMeasurementsLogDelivery})
+var sGetMonitorOutput_TrafficPercentageToMonitor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficPercentageToMonitor", ID: &i_TrafficPercentageToMonitor, Type: smithy.ShapeTypeInteger, Ext: &eGetMonitorOutput_TrafficPercentageToMonitor})
+var sGetMonitorOutput_HealthEventsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthEventsConfig", ID: &iHealthEventsConfig, Members: &mHealthEventsConfig, Type: smithy.ShapeTypeStructure, Ext: &eGetMonitorOutput_HealthEventsConfig})
+var sGetQueryResultsInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eGetQueryResultsInput_MonitorName})
+var sGetQueryResultsInput_QueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryId", ID: &pString, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eGetQueryResultsInput_QueryId})
+var sGetQueryResultsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &eGetQueryResultsInput_NextToken})
+var sGetQueryResultsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_QueryMaxResults, Traits: &t26, Type: smithy.ShapeTypeInteger, Ext: &eGetQueryResultsInput_MaxResults})
+var sGetQueryResultsOutput_Fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fields", ID: &i_QueryFields, Members: &m_QueryFields, Type: smithy.ShapeTypeList, Ext: &eGetQueryResultsOutput_Fields})
+var sGetQueryResultsOutput_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &i_QueryData, Members: &m_QueryData, Type: smithy.ShapeTypeList, Ext: &eGetQueryResultsOutput_Data})
+var sGetQueryResultsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetQueryResultsOutput_NextToken})
+var sGetQueryStatusInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eGetQueryStatusInput_MonitorName})
+var sGetQueryStatusInput_QueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryId", ID: &pString, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eGetQueryStatusInput_QueryId})
+var sGetQueryStatusOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_QueryStatus, Type: smithy.ShapeTypeString, Ext: &eGetQueryStatusOutput_Status})
+var sListHealthEventsInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eListHealthEventsInput_MonitorName})
+var sListHealthEventsInput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Traits: &t27, Type: smithy.ShapeTypeTimestamp, Ext: &eListHealthEventsInput_StartTime})
+var sListHealthEventsInput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eListHealthEventsInput_EndTime})
+var sListHealthEventsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &eListHealthEventsInput_NextToken})
+var sListHealthEventsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t26, Type: smithy.ShapeTypeInteger, Ext: &eListHealthEventsInput_MaxResults})
+var sListHealthEventsInput_EventStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventStatus", ID: &i_HealthEventStatus, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eListHealthEventsInput_EventStatus})
+var sListHealthEventsInput_LinkedAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkedAccountId", ID: &i_AccountId, Traits: &t24, Type: smithy.ShapeTypeString, Ext: &eListHealthEventsInput_LinkedAccountId})
+var sListHealthEventsOutput_HealthEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthEvents", ID: &i_HealthEventList, Members: &m_HealthEventList, Type: smithy.ShapeTypeList, Ext: &eListHealthEventsOutput_HealthEvents})
+var sListHealthEventsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListHealthEventsOutput_NextToken})
+var sListInternetEventsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &eListInternetEventsInput_NextToken})
+var sListInternetEventsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_InternetEventMaxResults, Traits: &t30, Type: smithy.ShapeTypeInteger, Ext: &eListInternetEventsInput_MaxResults})
+var sListInternetEventsInput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Traits: &t27, Type: smithy.ShapeTypeTimestamp, Ext: &eListInternetEventsInput_StartTime})
+var sListInternetEventsInput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eListInternetEventsInput_EndTime})
+var sListInternetEventsInput_EventStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventStatus", ID: &pString, Traits: &t29, Type: smithy.ShapeTypeString, Ext: &eListInternetEventsInput_EventStatus})
+var sListInternetEventsInput_EventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventType", ID: &pString, Traits: &t31, Type: smithy.ShapeTypeString, Ext: &eListInternetEventsInput_EventType})
+var sListInternetEventsOutput_InternetEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternetEvents", ID: &i_InternetEventsList, Members: &m_InternetEventsList, Type: smithy.ShapeTypeList, Ext: &eListInternetEventsOutput_InternetEvents})
+var sListInternetEventsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListInternetEventsOutput_NextToken})
+var sListMonitorsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Traits: &t25, Type: smithy.ShapeTypeString, Ext: &eListMonitorsInput_NextToken})
+var sListMonitorsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t26, Type: smithy.ShapeTypeInteger, Ext: &eListMonitorsInput_MaxResults})
+var sListMonitorsInput_MonitorStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorStatus", ID: &pString, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &eListMonitorsInput_MonitorStatus})
+var sListMonitorsInput_IncludeLinkedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeLinkedAccounts", ID: &pBoolean, Traits: &t33, Type: smithy.ShapeTypeBoolean, Ext: &eListMonitorsInput_IncludeLinkedAccounts})
+var sListMonitorsOutput_Monitors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Monitors", ID: &i_MonitorList, Members: &m_MonitorList, Type: smithy.ShapeTypeList, Ext: &eListMonitorsOutput_Monitors})
+var sListMonitorsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListMonitorsOutput_NextToken})
+var sListTagsForResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_MonitorArn, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceInput_ResourceArn})
+var sListTagsForResourceOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceOutput_Tags})
+var sStartQueryInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eStartQueryInput_MonitorName})
+var sStartQueryInput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eStartQueryInput_StartTime})
+var sStartQueryInput_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Traits: &t19, Type: smithy.ShapeTypeTimestamp, Ext: &eStartQueryInput_EndTime})
+var sStartQueryInput_QueryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryType", ID: &i_QueryType, Type: smithy.ShapeTypeString, Ext: &eStartQueryInput_QueryType})
+var sStartQueryInput_FilterParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterParameters", ID: &i_FilterParameters, Members: &m_FilterParameters, Type: smithy.ShapeTypeList, Ext: &eStartQueryInput_FilterParameters})
+var sStartQueryInput_LinkedAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkedAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eStartQueryInput_LinkedAccountId})
+var sStartQueryOutput_QueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eStartQueryOutput_QueryId})
+var sStopQueryInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eStopQueryInput_MonitorName})
+var sStopQueryInput_QueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryId", ID: &pString, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eStopQueryInput_QueryId})
+var sTagResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_MonitorArn, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eTagResourceInput_ResourceArn})
+var sTagResourceInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceInput_Tags})
+var sUntagResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_MonitorArn, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eUntagResourceInput_ResourceArn})
+var sUntagResourceInput_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Traits: &t34, Type: smithy.ShapeTypeList, Ext: &eUntagResourceInput_TagKeys})
+var sUpdateMonitorInput_MonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorName", ID: &i_ResourceName, Traits: &t23, Type: smithy.ShapeTypeString, Ext: &eUpdateMonitorInput_MonitorName})
+var sUpdateMonitorInput_ResourcesToAdd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourcesToAdd", ID: &i_SetOfARNs, Members: &m_SetOfARNs, Type: smithy.ShapeTypeList, Ext: &eUpdateMonitorInput_ResourcesToAdd})
+var sUpdateMonitorInput_ResourcesToRemove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourcesToRemove", ID: &i_SetOfARNs, Members: &m_SetOfARNs, Type: smithy.ShapeTypeList, Ext: &eUpdateMonitorInput_ResourcesToRemove})
+var sUpdateMonitorInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_MonitorConfigState, Type: smithy.ShapeTypeString, Ext: &eUpdateMonitorInput_Status})
+var sUpdateMonitorInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateMonitorInput_ClientToken})
+var sUpdateMonitorInput_MaxCityNetworksToMonitor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCityNetworksToMonitor", ID: &i_MaxCityNetworksToMonitor, Type: smithy.ShapeTypeInteger, Ext: &eUpdateMonitorInput_MaxCityNetworksToMonitor})
+var sUpdateMonitorInput_InternetMeasurementsLogDelivery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternetMeasurementsLogDelivery", ID: &iInternetMeasurementsLogDelivery, Members: &mInternetMeasurementsLogDelivery, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMonitorInput_InternetMeasurementsLogDelivery})
+var sUpdateMonitorInput_TrafficPercentageToMonitor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficPercentageToMonitor", ID: &i_TrafficPercentageToMonitor, Type: smithy.ShapeTypeInteger, Ext: &eUpdateMonitorInput_TrafficPercentageToMonitor})
+var sUpdateMonitorInput_HealthEventsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthEventsConfig", ID: &iHealthEventsConfig, Members: &mHealthEventsConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateMonitorInput_HealthEventsConfig})
+var sUpdateMonitorOutput_MonitorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitorArn", ID: &i_MonitorArn, Type: smithy.ShapeTypeString, Ext: &eUpdateMonitorOutput_MonitorArn})
+var sUpdateMonitorOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_MonitorConfigState, Type: smithy.ShapeTypeString, Ext: &eUpdateMonitorOutput_Status})
 
 var CreateMonitor = &sCreateMonitor
 

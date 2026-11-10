@@ -7,9 +7,195 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [187]smithy.SchemaExtensions
+var (
+	eAcceptPrimaryEmailUpdate                                smithy.SchemaExtensions
+	eDeleteAlternateContact                                  smithy.SchemaExtensions
+	eDisableRegion                                           smithy.SchemaExtensions
+	eEnableRegion                                            smithy.SchemaExtensions
+	eGetAccountInformation                                   smithy.SchemaExtensions
+	eGetAlternateContact                                     smithy.SchemaExtensions
+	eGetContactInformation                                   smithy.SchemaExtensions
+	eGetGovCloudAccountInformation                           smithy.SchemaExtensions
+	eGetPrimaryEmail                                         smithy.SchemaExtensions
+	eGetPrimaryEmailUpdateStatus                             smithy.SchemaExtensions
+	eGetRegionOptStatus                                      smithy.SchemaExtensions
+	eListRegions                                             smithy.SchemaExtensions
+	ePutAccountName                                          smithy.SchemaExtensions
+	ePutAlternateContact                                     smithy.SchemaExtensions
+	ePutContactInformation                                   smithy.SchemaExtensions
+	eSendPhoneNumberVerification                             smithy.SchemaExtensions
+	eStartPrimaryEmailUpdate                                 smithy.SchemaExtensions
+	eVerifyPhoneNumber                                       smithy.SchemaExtensions
+	e_Account                                                smithy.SchemaExtensions
+	eAccessDeniedException                                   smithy.SchemaExtensions
+	eAccessDeniedException_message                           smithy.SchemaExtensions
+	eAccessDeniedException_errorType                         smithy.SchemaExtensions
+	e_AccountCreatedDate                                     smithy.SchemaExtensions
+	e_AccountId                                              smithy.SchemaExtensions
+	e_AccountName                                            smithy.SchemaExtensions
+	e_AccountState                                           smithy.SchemaExtensions
+	e_AddressLine                                            smithy.SchemaExtensions
+	eAlternateContact                                        smithy.SchemaExtensions
+	eAlternateContact_Name                                   smithy.SchemaExtensions
+	eAlternateContact_Title                                  smithy.SchemaExtensions
+	eAlternateContact_EmailAddress                           smithy.SchemaExtensions
+	eAlternateContact_PhoneNumber                            smithy.SchemaExtensions
+	eAlternateContact_AlternateContactType                   smithy.SchemaExtensions
+	e_AlternateContactType                                   smithy.SchemaExtensions
+	e_AwsAccountState                                        smithy.SchemaExtensions
+	e_City                                                   smithy.SchemaExtensions
+	e_CompanyName                                            smithy.SchemaExtensions
+	eConflictException                                       smithy.SchemaExtensions
+	eConflictException_message                               smithy.SchemaExtensions
+	eConflictException_errorType                             smithy.SchemaExtensions
+	eContactInformation                                      smithy.SchemaExtensions
+	eContactInformation_FullName                             smithy.SchemaExtensions
+	eContactInformation_AddressLine1                         smithy.SchemaExtensions
+	eContactInformation_AddressLine2                         smithy.SchemaExtensions
+	eContactInformation_AddressLine3                         smithy.SchemaExtensions
+	eContactInformation_City                                 smithy.SchemaExtensions
+	eContactInformation_StateOrRegion                        smithy.SchemaExtensions
+	eContactInformation_DistrictOrCounty                     smithy.SchemaExtensions
+	eContactInformation_PostalCode                           smithy.SchemaExtensions
+	eContactInformation_CountryCode                          smithy.SchemaExtensions
+	eContactInformation_PhoneNumber                          smithy.SchemaExtensions
+	eContactInformation_CompanyName                          smithy.SchemaExtensions
+	eContactInformation_WebsiteUrl                           smithy.SchemaExtensions
+	e_ContactInformationPhoneNumber                          smithy.SchemaExtensions
+	e_CountryCode                                            smithy.SchemaExtensions
+	e_DistrictOrCounty                                       smithy.SchemaExtensions
+	e_EmailAddress                                           smithy.SchemaExtensions
+	e_FullName                                               smithy.SchemaExtensions
+	eInternalServerException                                 smithy.SchemaExtensions
+	eInternalServerException_message                         smithy.SchemaExtensions
+	eInternalServerException_errorType                       smithy.SchemaExtensions
+	e_Name                                                   smithy.SchemaExtensions
+	e_Otp                                                    smithy.SchemaExtensions
+	e_PhoneNumber                                            smithy.SchemaExtensions
+	e_PhoneNumberVerificationStatus                          smithy.SchemaExtensions
+	e_PostalCode                                             smithy.SchemaExtensions
+	e_PrimaryEmailAddress                                    smithy.SchemaExtensions
+	e_PrimaryEmailUpdateStatus                               smithy.SchemaExtensions
+	eRegion                                                  smithy.SchemaExtensions
+	eRegion_RegionName                                       smithy.SchemaExtensions
+	eRegion_RegionOptStatus                                  smithy.SchemaExtensions
+	e_RegionName                                             smithy.SchemaExtensions
+	e_RegionOptList                                          smithy.SchemaExtensions
+	e_RegionOptList_member                                   smithy.SchemaExtensions
+	e_RegionOptStatus                                        smithy.SchemaExtensions
+	e_RegionOptStatusList                                    smithy.SchemaExtensions
+	e_RegionOptStatusList_member                             smithy.SchemaExtensions
+	eResourceNotFoundException                               smithy.SchemaExtensions
+	eResourceNotFoundException_message                       smithy.SchemaExtensions
+	eResourceNotFoundException_errorType                     smithy.SchemaExtensions
+	eResourceUnavailableException                            smithy.SchemaExtensions
+	eResourceUnavailableException_message                    smithy.SchemaExtensions
+	eResourceUnavailableException_errorType                  smithy.SchemaExtensions
+	e_SensitiveString                                        smithy.SchemaExtensions
+	e_StateOrRegion                                          smithy.SchemaExtensions
+	e_Title                                                  smithy.SchemaExtensions
+	eTooManyRequestsException                                smithy.SchemaExtensions
+	eTooManyRequestsException_message                        smithy.SchemaExtensions
+	eTooManyRequestsException_errorType                      smithy.SchemaExtensions
+	eValidationException                                     smithy.SchemaExtensions
+	eValidationException_message                             smithy.SchemaExtensions
+	eValidationException_reason                              smithy.SchemaExtensions
+	eValidationException_fieldList                           smithy.SchemaExtensions
+	eValidationExceptionField                                smithy.SchemaExtensions
+	eValidationExceptionField_name                           smithy.SchemaExtensions
+	eValidationExceptionField_message                        smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                           smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member                    smithy.SchemaExtensions
+	e_ValidationExceptionReason                              smithy.SchemaExtensions
+	e_WebsiteUrl                                             smithy.SchemaExtensions
+	eAcceptPrimaryEmailUpdateRequest                         smithy.SchemaExtensions
+	eAcceptPrimaryEmailUpdateRequest_AccountId               smithy.SchemaExtensions
+	eAcceptPrimaryEmailUpdateRequest_PrimaryEmail            smithy.SchemaExtensions
+	eAcceptPrimaryEmailUpdateRequest_Otp                     smithy.SchemaExtensions
+	eAcceptPrimaryEmailUpdateResponse                        smithy.SchemaExtensions
+	eAcceptPrimaryEmailUpdateResponse_Status                 smithy.SchemaExtensions
+	eDeleteAlternateContactRequest                           smithy.SchemaExtensions
+	eDeleteAlternateContactRequest_AlternateContactType      smithy.SchemaExtensions
+	eDeleteAlternateContactRequest_AccountId                 smithy.SchemaExtensions
+	eDisableRegionRequest                                    smithy.SchemaExtensions
+	eDisableRegionRequest_AccountId                          smithy.SchemaExtensions
+	eDisableRegionRequest_RegionName                         smithy.SchemaExtensions
+	eEnableRegionRequest                                     smithy.SchemaExtensions
+	eEnableRegionRequest_AccountId                           smithy.SchemaExtensions
+	eEnableRegionRequest_RegionName                          smithy.SchemaExtensions
+	eGetAccountInformationRequest                            smithy.SchemaExtensions
+	eGetAccountInformationRequest_AccountId                  smithy.SchemaExtensions
+	eGetAccountInformationResponse                           smithy.SchemaExtensions
+	eGetAccountInformationResponse_AccountId                 smithy.SchemaExtensions
+	eGetAccountInformationResponse_AccountName               smithy.SchemaExtensions
+	eGetAccountInformationResponse_AccountCreatedDate        smithy.SchemaExtensions
+	eGetAccountInformationResponse_AccountState              smithy.SchemaExtensions
+	eGetAlternateContactRequest                              smithy.SchemaExtensions
+	eGetAlternateContactRequest_AlternateContactType         smithy.SchemaExtensions
+	eGetAlternateContactRequest_AccountId                    smithy.SchemaExtensions
+	eGetAlternateContactResponse                             smithy.SchemaExtensions
+	eGetAlternateContactResponse_AlternateContact            smithy.SchemaExtensions
+	eGetContactInformationRequest                            smithy.SchemaExtensions
+	eGetContactInformationRequest_AccountId                  smithy.SchemaExtensions
+	eGetContactInformationResponse                           smithy.SchemaExtensions
+	eGetContactInformationResponse_ContactInformation        smithy.SchemaExtensions
+	eGetContactInformationResponse_VerificationStatus        smithy.SchemaExtensions
+	eGetGovCloudAccountInformationRequest                    smithy.SchemaExtensions
+	eGetGovCloudAccountInformationRequest_StandardAccountId  smithy.SchemaExtensions
+	eGetGovCloudAccountInformationResponse                   smithy.SchemaExtensions
+	eGetGovCloudAccountInformationResponse_GovCloudAccountId smithy.SchemaExtensions
+	eGetGovCloudAccountInformationResponse_AccountState      smithy.SchemaExtensions
+	eGetPrimaryEmailRequest                                  smithy.SchemaExtensions
+	eGetPrimaryEmailRequest_AccountId                        smithy.SchemaExtensions
+	eGetPrimaryEmailResponse                                 smithy.SchemaExtensions
+	eGetPrimaryEmailResponse_PrimaryEmail                    smithy.SchemaExtensions
+	eGetPrimaryEmailUpdateStatusRequest                      smithy.SchemaExtensions
+	eGetPrimaryEmailUpdateStatusRequest_AccountId            smithy.SchemaExtensions
+	eGetPrimaryEmailUpdateStatusResponse                     smithy.SchemaExtensions
+	eGetPrimaryEmailUpdateStatusResponse_Status              smithy.SchemaExtensions
+	eGetPrimaryEmailUpdateStatusResponse_UpdatedAt           smithy.SchemaExtensions
+	eGetRegionOptStatusRequest                               smithy.SchemaExtensions
+	eGetRegionOptStatusRequest_AccountId                     smithy.SchemaExtensions
+	eGetRegionOptStatusRequest_RegionName                    smithy.SchemaExtensions
+	eGetRegionOptStatusResponse                              smithy.SchemaExtensions
+	eGetRegionOptStatusResponse_RegionName                   smithy.SchemaExtensions
+	eGetRegionOptStatusResponse_RegionOptStatus              smithy.SchemaExtensions
+	eListRegionsRequest                                      smithy.SchemaExtensions
+	eListRegionsRequest_AccountId                            smithy.SchemaExtensions
+	eListRegionsRequest_MaxResults                           smithy.SchemaExtensions
+	eListRegionsRequest_NextToken                            smithy.SchemaExtensions
+	eListRegionsRequest_RegionOptStatusContains              smithy.SchemaExtensions
+	eListRegionsResponse                                     smithy.SchemaExtensions
+	eListRegionsResponse_NextToken                           smithy.SchemaExtensions
+	eListRegionsResponse_Regions                             smithy.SchemaExtensions
+	ePutAccountNameRequest                                   smithy.SchemaExtensions
+	ePutAccountNameRequest_AccountName                       smithy.SchemaExtensions
+	ePutAccountNameRequest_AccountId                         smithy.SchemaExtensions
+	ePutAlternateContactRequest                              smithy.SchemaExtensions
+	ePutAlternateContactRequest_Name                         smithy.SchemaExtensions
+	ePutAlternateContactRequest_Title                        smithy.SchemaExtensions
+	ePutAlternateContactRequest_EmailAddress                 smithy.SchemaExtensions
+	ePutAlternateContactRequest_PhoneNumber                  smithy.SchemaExtensions
+	ePutAlternateContactRequest_AlternateContactType         smithy.SchemaExtensions
+	ePutAlternateContactRequest_AccountId                    smithy.SchemaExtensions
+	ePutContactInformationRequest                            smithy.SchemaExtensions
+	ePutContactInformationRequest_ContactInformation         smithy.SchemaExtensions
+	ePutContactInformationRequest_AccountId                  smithy.SchemaExtensions
+	eSendPhoneNumberVerificationRequest                      smithy.SchemaExtensions
+	eSendPhoneNumberVerificationRequest_AccountId            smithy.SchemaExtensions
+	eSendPhoneNumberVerificationResponse                     smithy.SchemaExtensions
+	eSendPhoneNumberVerificationResponse_Status              smithy.SchemaExtensions
+	eStartPrimaryEmailUpdateRequest                          smithy.SchemaExtensions
+	eStartPrimaryEmailUpdateRequest_AccountId                smithy.SchemaExtensions
+	eStartPrimaryEmailUpdateRequest_PrimaryEmail             smithy.SchemaExtensions
+	eStartPrimaryEmailUpdateResponse                         smithy.SchemaExtensions
+	eStartPrimaryEmailUpdateResponse_Status                  smithy.SchemaExtensions
+	eVerifyPhoneNumberRequest                                smithy.SchemaExtensions
+	eVerifyPhoneNumberRequest_AccountId                      smithy.SchemaExtensions
+	eVerifyPhoneNumberRequest_Otp                            smithy.SchemaExtensions
+	eVerifyPhoneNumberResponse                               smithy.SchemaExtensions
+	eVerifyPhoneNumberResponse_Status                        smithy.SchemaExtensions
+)
 
 var (
 	iAcceptPrimaryEmailUpdate              = smithy.ShapeID{Namespace: "com.amazonaws.account", Name: "AcceptPrimaryEmailUpdate"}
@@ -223,194 +409,194 @@ var mStartPrimaryEmailUpdateResponse = smithy.SchemaMembers{List: []*smithy.Sche
 var mVerifyPhoneNumberRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sVerifyPhoneNumberRequest_AccountId, &sVerifyPhoneNumberRequest_Otp}}
 var mVerifyPhoneNumberResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sVerifyPhoneNumberResponse_Status}}
 
-var sAcceptPrimaryEmailUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptPrimaryEmailUpdate, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sDeleteAlternateContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAlternateContact, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sDisableRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableRegion, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sEnableRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableRegion, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sGetAccountInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountInformation, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sGetAlternateContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAlternateContact, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sGetContactInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContactInformation, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sGetGovCloudAccountInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGovCloudAccountInformation, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sGetPrimaryEmail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPrimaryEmail, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sGetPrimaryEmailUpdateStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPrimaryEmailUpdateStatus, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sGetRegionOptStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRegionOptStatus, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sListRegions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRegions, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sPutAccountName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccountName, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sPutAlternateContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAlternateContact, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sPutContactInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutContactInformation, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sSendPhoneNumberVerification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendPhoneNumberVerification, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sStartPrimaryEmailUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPrimaryEmailUpdate, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sVerifyPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifyPhoneNumber, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var s_Account = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Account, Type: smithy.ShapeTypeService, Ext: &ext[18]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &ext[19]})
-var s_AccountCreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountCreatedDate, Traits: &t20, Type: smithy.ShapeTypeTimestamp, Ext: &ext[22]})
-var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[23]})
-var s_AccountName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountName, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[24]})
-var s_AccountState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountState, Type: smithy.ShapeTypeString, Ext: &ext[25]})
-var s_AddressLine = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddressLine, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var sAlternateContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlternateContact, Members: &mAlternateContact, Type: smithy.ShapeTypeStructure, Ext: &ext[27]})
-var s_AlternateContactType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlternateContactType, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var s_AwsAccountState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsAccountState, Type: smithy.ShapeTypeString, Ext: &ext[34]})
-var s_City = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_City, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var s_CompanyName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CompanyName, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var sContactInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContactInformation, Members: &mContactInformation, Type: smithy.ShapeTypeStructure, Ext: &ext[40]})
-var s_ContactInformationPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactInformationPhoneNumber, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[53]})
-var s_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CountryCode, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var s_DistrictOrCounty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DistrictOrCounty, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var s_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailAddress, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[56]})
-var s_FullName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FullName, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &ext[58]})
-var s_Name = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Name, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[61]})
-var s_Otp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Otp, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[62]})
-var s_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumber, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[63]})
-var s_PhoneNumberVerificationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberVerificationStatus, Type: smithy.ShapeTypeString, Ext: &ext[64]})
-var s_PostalCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PostalCode, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[65]})
-var s_PrimaryEmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrimaryEmailAddress, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[66]})
-var s_PrimaryEmailUpdateStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrimaryEmailUpdateStatus, Type: smithy.ShapeTypeString, Ext: &ext[67]})
-var sRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegion, Members: &mRegion, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var s_RegionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionName, Type: smithy.ShapeTypeString, Ext: &ext[71]})
-var s_RegionOptList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionOptList, Members: &m_RegionOptList, Type: smithy.ShapeTypeList, Ext: &ext[72]})
-var s_RegionOptStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionOptStatus, Type: smithy.ShapeTypeString, Ext: &ext[74]})
-var s_RegionOptStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionOptStatusList, Members: &m_RegionOptStatusList, Type: smithy.ShapeTypeList, Ext: &ext[75]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
-var sResourceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceUnavailableException, Members: &mResourceUnavailableException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var s_SensitiveString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveString, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var s_StateOrRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StateOrRegion, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[84]})
-var s_Title = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Title, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[85]})
-var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &ext[86]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &ext[89]})
-var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[93]})
-var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[96]})
-var s_ValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionReason, Type: smithy.ShapeTypeString, Ext: &ext[98]})
-var s_WebsiteUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebsiteUrl, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[99]})
-var sAcceptPrimaryEmailUpdateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptPrimaryEmailUpdateRequest, Members: &mAcceptPrimaryEmailUpdateRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[100]})
-var sAcceptPrimaryEmailUpdateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptPrimaryEmailUpdateResponse, Members: &mAcceptPrimaryEmailUpdateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[104]})
-var sDeleteAlternateContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAlternateContactRequest, Members: &mDeleteAlternateContactRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[106]})
-var sDisableRegionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableRegionRequest, Members: &mDisableRegionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[109]})
-var sEnableRegionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableRegionRequest, Members: &mEnableRegionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[112]})
-var sGetAccountInformationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountInformationRequest, Members: &mGetAccountInformationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[115]})
-var sGetAccountInformationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountInformationResponse, Members: &mGetAccountInformationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[117]})
-var sGetAlternateContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAlternateContactRequest, Members: &mGetAlternateContactRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[122]})
-var sGetAlternateContactResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAlternateContactResponse, Members: &mGetAlternateContactResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[125]})
-var sGetContactInformationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContactInformationRequest, Members: &mGetContactInformationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[127]})
-var sGetContactInformationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContactInformationResponse, Members: &mGetContactInformationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[129]})
-var sGetGovCloudAccountInformationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGovCloudAccountInformationRequest, Members: &mGetGovCloudAccountInformationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[132]})
-var sGetGovCloudAccountInformationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGovCloudAccountInformationResponse, Members: &mGetGovCloudAccountInformationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[134]})
-var sGetPrimaryEmailRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPrimaryEmailRequest, Members: &mGetPrimaryEmailRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[137]})
-var sGetPrimaryEmailResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPrimaryEmailResponse, Members: &mGetPrimaryEmailResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[139]})
-var sGetPrimaryEmailUpdateStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPrimaryEmailUpdateStatusRequest, Members: &mGetPrimaryEmailUpdateStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[141]})
-var sGetPrimaryEmailUpdateStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPrimaryEmailUpdateStatusResponse, Members: &mGetPrimaryEmailUpdateStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[143]})
-var sGetRegionOptStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRegionOptStatusRequest, Members: &mGetRegionOptStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[146]})
-var sGetRegionOptStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRegionOptStatusResponse, Members: &mGetRegionOptStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[149]})
-var sListRegionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRegionsRequest, Members: &mListRegionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[152]})
-var sListRegionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRegionsResponse, Members: &mListRegionsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[157]})
-var sPutAccountNameRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccountNameRequest, Members: &mPutAccountNameRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[160]})
-var sPutAlternateContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAlternateContactRequest, Members: &mPutAlternateContactRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[163]})
-var sPutContactInformationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutContactInformationRequest, Members: &mPutContactInformationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[170]})
-var sSendPhoneNumberVerificationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendPhoneNumberVerificationRequest, Members: &mSendPhoneNumberVerificationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[173]})
-var sSendPhoneNumberVerificationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendPhoneNumberVerificationResponse, Members: &mSendPhoneNumberVerificationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[175]})
-var sStartPrimaryEmailUpdateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPrimaryEmailUpdateRequest, Members: &mStartPrimaryEmailUpdateRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[177]})
-var sStartPrimaryEmailUpdateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPrimaryEmailUpdateResponse, Members: &mStartPrimaryEmailUpdateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[180]})
-var sVerifyPhoneNumberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifyPhoneNumberRequest, Members: &mVerifyPhoneNumberRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[182]})
-var sVerifyPhoneNumberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifyPhoneNumberResponse, Members: &mVerifyPhoneNumberResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[185]})
+var sAcceptPrimaryEmailUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptPrimaryEmailUpdate, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eAcceptPrimaryEmailUpdate})
+var sDeleteAlternateContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAlternateContact, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eDeleteAlternateContact})
+var sDisableRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableRegion, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eDisableRegion})
+var sEnableRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableRegion, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eEnableRegion})
+var sGetAccountInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountInformation, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eGetAccountInformation})
+var sGetAlternateContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAlternateContact, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eGetAlternateContact})
+var sGetContactInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContactInformation, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eGetContactInformation})
+var sGetGovCloudAccountInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGovCloudAccountInformation, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eGetGovCloudAccountInformation})
+var sGetPrimaryEmail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPrimaryEmail, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eGetPrimaryEmail})
+var sGetPrimaryEmailUpdateStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPrimaryEmailUpdateStatus, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eGetPrimaryEmailUpdateStatus})
+var sGetRegionOptStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRegionOptStatus, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eGetRegionOptStatus})
+var sListRegions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRegions, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eListRegions})
+var sPutAccountName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccountName, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ePutAccountName})
+var sPutAlternateContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAlternateContact, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ePutAlternateContact})
+var sPutContactInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutContactInformation, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ePutContactInformation})
+var sSendPhoneNumberVerification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendPhoneNumberVerification, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eSendPhoneNumberVerification})
+var sStartPrimaryEmailUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPrimaryEmailUpdate, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eStartPrimaryEmailUpdate})
+var sVerifyPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifyPhoneNumber, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eVerifyPhoneNumber})
+var s_Account = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Account, Type: smithy.ShapeTypeService, Ext: &e_Account})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var s_AccountCreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountCreatedDate, Traits: &t20, Type: smithy.ShapeTypeTimestamp, Ext: &e_AccountCreatedDate})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountId})
+var s_AccountName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountName, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_AccountName})
+var s_AccountState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountState, Type: smithy.ShapeTypeString, Ext: &e_AccountState})
+var s_AddressLine = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddressLine, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_AddressLine})
+var sAlternateContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlternateContact, Members: &mAlternateContact, Type: smithy.ShapeTypeStructure, Ext: &eAlternateContact})
+var s_AlternateContactType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlternateContactType, Type: smithy.ShapeTypeString, Ext: &e_AlternateContactType})
+var s_AwsAccountState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsAccountState, Type: smithy.ShapeTypeString, Ext: &e_AwsAccountState})
+var s_City = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_City, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_City})
+var s_CompanyName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CompanyName, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_CompanyName})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sContactInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContactInformation, Members: &mContactInformation, Type: smithy.ShapeTypeStructure, Ext: &eContactInformation})
+var s_ContactInformationPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactInformationPhoneNumber, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_ContactInformationPhoneNumber})
+var s_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CountryCode, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_CountryCode})
+var s_DistrictOrCounty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DistrictOrCounty, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_DistrictOrCounty})
+var s_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailAddress, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_EmailAddress})
+var s_FullName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FullName, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_FullName})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var s_Name = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Name, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_Name})
+var s_Otp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Otp, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_Otp})
+var s_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumber, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_PhoneNumber})
+var s_PhoneNumberVerificationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberVerificationStatus, Type: smithy.ShapeTypeString, Ext: &e_PhoneNumberVerificationStatus})
+var s_PostalCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PostalCode, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_PostalCode})
+var s_PrimaryEmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrimaryEmailAddress, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_PrimaryEmailAddress})
+var s_PrimaryEmailUpdateStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrimaryEmailUpdateStatus, Type: smithy.ShapeTypeString, Ext: &e_PrimaryEmailUpdateStatus})
+var sRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegion, Members: &mRegion, Type: smithy.ShapeTypeStructure, Ext: &eRegion})
+var s_RegionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionName, Type: smithy.ShapeTypeString, Ext: &e_RegionName})
+var s_RegionOptList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionOptList, Members: &m_RegionOptList, Type: smithy.ShapeTypeList, Ext: &e_RegionOptList})
+var s_RegionOptStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionOptStatus, Type: smithy.ShapeTypeString, Ext: &e_RegionOptStatus})
+var s_RegionOptStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionOptStatusList, Members: &m_RegionOptStatusList, Type: smithy.ShapeTypeList, Ext: &e_RegionOptStatusList})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceUnavailableException, Members: &mResourceUnavailableException, Traits: &t26, Type: smithy.ShapeTypeStructure, Ext: &eResourceUnavailableException})
+var s_SensitiveString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveString, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_SensitiveString})
+var s_StateOrRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StateOrRegion, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_StateOrRegion})
+var s_Title = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Title, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_Title})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eTooManyRequestsException})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t28, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var s_ValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionReason, Type: smithy.ShapeTypeString, Ext: &e_ValidationExceptionReason})
+var s_WebsiteUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebsiteUrl, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_WebsiteUrl})
+var sAcceptPrimaryEmailUpdateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptPrimaryEmailUpdateRequest, Members: &mAcceptPrimaryEmailUpdateRequest, Type: smithy.ShapeTypeStructure, Ext: &eAcceptPrimaryEmailUpdateRequest})
+var sAcceptPrimaryEmailUpdateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptPrimaryEmailUpdateResponse, Members: &mAcceptPrimaryEmailUpdateResponse, Type: smithy.ShapeTypeStructure, Ext: &eAcceptPrimaryEmailUpdateResponse})
+var sDeleteAlternateContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAlternateContactRequest, Members: &mDeleteAlternateContactRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteAlternateContactRequest})
+var sDisableRegionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableRegionRequest, Members: &mDisableRegionRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisableRegionRequest})
+var sEnableRegionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableRegionRequest, Members: &mEnableRegionRequest, Type: smithy.ShapeTypeStructure, Ext: &eEnableRegionRequest})
+var sGetAccountInformationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountInformationRequest, Members: &mGetAccountInformationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAccountInformationRequest})
+var sGetAccountInformationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountInformationResponse, Members: &mGetAccountInformationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAccountInformationResponse})
+var sGetAlternateContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAlternateContactRequest, Members: &mGetAlternateContactRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAlternateContactRequest})
+var sGetAlternateContactResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAlternateContactResponse, Members: &mGetAlternateContactResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAlternateContactResponse})
+var sGetContactInformationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContactInformationRequest, Members: &mGetContactInformationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetContactInformationRequest})
+var sGetContactInformationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetContactInformationResponse, Members: &mGetContactInformationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetContactInformationResponse})
+var sGetGovCloudAccountInformationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGovCloudAccountInformationRequest, Members: &mGetGovCloudAccountInformationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetGovCloudAccountInformationRequest})
+var sGetGovCloudAccountInformationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGovCloudAccountInformationResponse, Members: &mGetGovCloudAccountInformationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetGovCloudAccountInformationResponse})
+var sGetPrimaryEmailRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPrimaryEmailRequest, Members: &mGetPrimaryEmailRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetPrimaryEmailRequest})
+var sGetPrimaryEmailResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPrimaryEmailResponse, Members: &mGetPrimaryEmailResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetPrimaryEmailResponse})
+var sGetPrimaryEmailUpdateStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPrimaryEmailUpdateStatusRequest, Members: &mGetPrimaryEmailUpdateStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetPrimaryEmailUpdateStatusRequest})
+var sGetPrimaryEmailUpdateStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPrimaryEmailUpdateStatusResponse, Members: &mGetPrimaryEmailUpdateStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetPrimaryEmailUpdateStatusResponse})
+var sGetRegionOptStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRegionOptStatusRequest, Members: &mGetRegionOptStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRegionOptStatusRequest})
+var sGetRegionOptStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRegionOptStatusResponse, Members: &mGetRegionOptStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRegionOptStatusResponse})
+var sListRegionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRegionsRequest, Members: &mListRegionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRegionsRequest})
+var sListRegionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRegionsResponse, Members: &mListRegionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRegionsResponse})
+var sPutAccountNameRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccountNameRequest, Members: &mPutAccountNameRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutAccountNameRequest})
+var sPutAlternateContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAlternateContactRequest, Members: &mPutAlternateContactRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutAlternateContactRequest})
+var sPutContactInformationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutContactInformationRequest, Members: &mPutContactInformationRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutContactInformationRequest})
+var sSendPhoneNumberVerificationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendPhoneNumberVerificationRequest, Members: &mSendPhoneNumberVerificationRequest, Type: smithy.ShapeTypeStructure, Ext: &eSendPhoneNumberVerificationRequest})
+var sSendPhoneNumberVerificationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendPhoneNumberVerificationResponse, Members: &mSendPhoneNumberVerificationResponse, Type: smithy.ShapeTypeStructure, Ext: &eSendPhoneNumberVerificationResponse})
+var sStartPrimaryEmailUpdateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPrimaryEmailUpdateRequest, Members: &mStartPrimaryEmailUpdateRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartPrimaryEmailUpdateRequest})
+var sStartPrimaryEmailUpdateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPrimaryEmailUpdateResponse, Members: &mStartPrimaryEmailUpdateResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartPrimaryEmailUpdateResponse})
+var sVerifyPhoneNumberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifyPhoneNumberRequest, Members: &mVerifyPhoneNumberRequest, Type: smithy.ShapeTypeStructure, Ext: &eVerifyPhoneNumberRequest})
+var sVerifyPhoneNumberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifyPhoneNumberResponse, Members: &mVerifyPhoneNumberResponse, Type: smithy.ShapeTypeStructure, Ext: &eVerifyPhoneNumberResponse})
 
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[20]})
-var sAccessDeniedException_errorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorType", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[21]})
-var sAlternateContact_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[28]})
-var sAlternateContact_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_Title, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[29]})
-var sAlternateContact_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailAddress", ID: &i_EmailAddress, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[30]})
-var sAlternateContact_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &i_PhoneNumber, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var sAlternateContact_AlternateContactType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlternateContactType", ID: &i_AlternateContactType, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[38]})
-var sConflictException_errorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorType", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[39]})
-var sContactInformation_FullName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FullName", ID: &i_FullName, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[41]})
-var sContactInformation_AddressLine1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressLine1", ID: &i_AddressLine, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var sContactInformation_AddressLine2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressLine2", ID: &i_AddressLine, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[43]})
-var sContactInformation_AddressLine3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressLine3", ID: &i_AddressLine, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var sContactInformation_City = smithy.NewStaticSchema(smithy.StaticSchema{Member: "City", ID: &i_City, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var sContactInformation_StateOrRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateOrRegion", ID: &i_StateOrRegion, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[46]})
-var sContactInformation_DistrictOrCounty = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DistrictOrCounty", ID: &i_DistrictOrCounty, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[47]})
-var sContactInformation_PostalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCode", ID: &i_PostalCode, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[48]})
-var sContactInformation_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountryCode", ID: &i_CountryCode, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[49]})
-var sContactInformation_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &i_ContactInformationPhoneNumber, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[50]})
-var sContactInformation_CompanyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompanyName", ID: &i_CompanyName, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[51]})
-var sContactInformation_WebsiteUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebsiteUrl", ID: &i_WebsiteUrl, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[59]})
-var sInternalServerException_errorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorType", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[60]})
-var sRegion_RegionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionName", ID: &i_RegionName, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var sRegion_RegionOptStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionOptStatus", ID: &i_RegionOptStatus, Type: smithy.ShapeTypeString, Ext: &ext[70]})
-var s_RegionOptList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRegion, Members: &mRegion, Type: smithy.ShapeTypeStructure, Ext: &ext[73]})
-var s_RegionOptStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RegionOptStatus, Type: smithy.ShapeTypeString, Ext: &ext[76]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[78]})
-var sResourceNotFoundException_errorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorType", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[79]})
-var sResourceUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[81]})
-var sResourceUnavailableException_errorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorType", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[82]})
-var sTooManyRequestsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[87]})
-var sTooManyRequestsException_errorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorType", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &ext[88]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_SensitiveString, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[90]})
-var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_ValidationExceptionReason, Type: smithy.ShapeTypeString, Ext: &ext[91]})
-var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[92]})
-var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[94]})
-var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_SensitiveString, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[95]})
-var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[97]})
-var sAcceptPrimaryEmailUpdateRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[101]})
-var sAcceptPrimaryEmailUpdateRequest_PrimaryEmail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryEmail", ID: &i_PrimaryEmailAddress, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var sAcceptPrimaryEmailUpdateRequest_Otp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Otp", ID: &i_Otp, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[103]})
-var sAcceptPrimaryEmailUpdateResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_PrimaryEmailUpdateStatus, Type: smithy.ShapeTypeString, Ext: &ext[105]})
-var sDeleteAlternateContactRequest_AlternateContactType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlternateContactType", ID: &i_AlternateContactType, Type: smithy.ShapeTypeString, Ext: &ext[107]})
-var sDeleteAlternateContactRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[108]})
-var sDisableRegionRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[110]})
-var sDisableRegionRequest_RegionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionName", ID: &i_RegionName, Type: smithy.ShapeTypeString, Ext: &ext[111]})
-var sEnableRegionRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[113]})
-var sEnableRegionRequest_RegionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionName", ID: &i_RegionName, Type: smithy.ShapeTypeString, Ext: &ext[114]})
-var sGetAccountInformationRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[116]})
-var sGetAccountInformationResponse_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[118]})
-var sGetAccountInformationResponse_AccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountName", ID: &i_AccountName, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[119]})
-var sGetAccountInformationResponse_AccountCreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountCreatedDate", ID: &i_AccountCreatedDate, Traits: &t29, Type: smithy.ShapeTypeTimestamp, Ext: &ext[120]})
-var sGetAccountInformationResponse_AccountState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountState", ID: &i_AccountState, Type: smithy.ShapeTypeString, Ext: &ext[121]})
-var sGetAlternateContactRequest_AlternateContactType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlternateContactType", ID: &i_AlternateContactType, Type: smithy.ShapeTypeString, Ext: &ext[123]})
-var sGetAlternateContactRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[124]})
-var sGetAlternateContactResponse_AlternateContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlternateContact", ID: &iAlternateContact, Members: &mAlternateContact, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var sGetContactInformationRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[128]})
-var sGetContactInformationResponse_ContactInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactInformation", ID: &iContactInformation, Members: &mContactInformation, Type: smithy.ShapeTypeStructure, Ext: &ext[130]})
-var sGetContactInformationResponse_VerificationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VerificationStatus", ID: &i_PhoneNumberVerificationStatus, Type: smithy.ShapeTypeString, Ext: &ext[131]})
-var sGetGovCloudAccountInformationRequest_StandardAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StandardAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[133]})
-var sGetGovCloudAccountInformationResponse_GovCloudAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GovCloudAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[135]})
-var sGetGovCloudAccountInformationResponse_AccountState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountState", ID: &i_AwsAccountState, Type: smithy.ShapeTypeString, Ext: &ext[136]})
-var sGetPrimaryEmailRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var sGetPrimaryEmailResponse_PrimaryEmail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryEmail", ID: &i_PrimaryEmailAddress, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[140]})
-var sGetPrimaryEmailUpdateStatusRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[142]})
-var sGetPrimaryEmailUpdateStatusResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_PrimaryEmailUpdateStatus, Type: smithy.ShapeTypeString, Ext: &ext[144]})
-var sGetPrimaryEmailUpdateStatusResponse_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[145]})
-var sGetRegionOptStatusRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[147]})
-var sGetRegionOptStatusRequest_RegionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionName", ID: &i_RegionName, Type: smithy.ShapeTypeString, Ext: &ext[148]})
-var sGetRegionOptStatusResponse_RegionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionName", ID: &i_RegionName, Type: smithy.ShapeTypeString, Ext: &ext[150]})
-var sGetRegionOptStatusResponse_RegionOptStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionOptStatus", ID: &i_RegionOptStatus, Type: smithy.ShapeTypeString, Ext: &ext[151]})
-var sListRegionsRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[153]})
-var sListRegionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[154]})
-var sListRegionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[155]})
-var sListRegionsRequest_RegionOptStatusContains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionOptStatusContains", ID: &i_RegionOptStatusList, Members: &m_RegionOptStatusList, Type: smithy.ShapeTypeList, Ext: &ext[156]})
-var sListRegionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[158]})
-var sListRegionsResponse_Regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Regions", ID: &i_RegionOptList, Members: &m_RegionOptList, Type: smithy.ShapeTypeList, Ext: &ext[159]})
-var sPutAccountNameRequest_AccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountName", ID: &i_AccountName, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[161]})
-var sPutAccountNameRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[162]})
-var sPutAlternateContactRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[164]})
-var sPutAlternateContactRequest_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_Title, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[165]})
-var sPutAlternateContactRequest_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailAddress", ID: &i_EmailAddress, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[166]})
-var sPutAlternateContactRequest_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &i_PhoneNumber, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[167]})
-var sPutAlternateContactRequest_AlternateContactType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlternateContactType", ID: &i_AlternateContactType, Type: smithy.ShapeTypeString, Ext: &ext[168]})
-var sPutAlternateContactRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[169]})
-var sPutContactInformationRequest_ContactInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactInformation", ID: &iContactInformation, Members: &mContactInformation, Type: smithy.ShapeTypeStructure, Ext: &ext[171]})
-var sPutContactInformationRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[172]})
-var sSendPhoneNumberVerificationRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[174]})
-var sSendPhoneNumberVerificationResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_PhoneNumberVerificationStatus, Type: smithy.ShapeTypeString, Ext: &ext[176]})
-var sStartPrimaryEmailUpdateRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[178]})
-var sStartPrimaryEmailUpdateRequest_PrimaryEmail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryEmail", ID: &i_PrimaryEmailAddress, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[179]})
-var sStartPrimaryEmailUpdateResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_PrimaryEmailUpdateStatus, Type: smithy.ShapeTypeString, Ext: &ext[181]})
-var sVerifyPhoneNumberRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[183]})
-var sVerifyPhoneNumberRequest_Otp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Otp", ID: &i_Otp, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[184]})
-var sVerifyPhoneNumberResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_PhoneNumberVerificationStatus, Type: smithy.ShapeTypeString, Ext: &ext[186]})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAccessDeniedException_errorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorType", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_errorType})
+var sAlternateContact_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eAlternateContact_Name})
+var sAlternateContact_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_Title, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eAlternateContact_Title})
+var sAlternateContact_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailAddress", ID: &i_EmailAddress, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eAlternateContact_EmailAddress})
+var sAlternateContact_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &i_PhoneNumber, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eAlternateContact_PhoneNumber})
+var sAlternateContact_AlternateContactType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlternateContactType", ID: &i_AlternateContactType, Type: smithy.ShapeTypeString, Ext: &eAlternateContact_AlternateContactType})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictException_errorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorType", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eConflictException_errorType})
+var sContactInformation_FullName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FullName", ID: &i_FullName, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eContactInformation_FullName})
+var sContactInformation_AddressLine1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressLine1", ID: &i_AddressLine, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eContactInformation_AddressLine1})
+var sContactInformation_AddressLine2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressLine2", ID: &i_AddressLine, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eContactInformation_AddressLine2})
+var sContactInformation_AddressLine3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressLine3", ID: &i_AddressLine, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eContactInformation_AddressLine3})
+var sContactInformation_City = smithy.NewStaticSchema(smithy.StaticSchema{Member: "City", ID: &i_City, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eContactInformation_City})
+var sContactInformation_StateOrRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateOrRegion", ID: &i_StateOrRegion, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eContactInformation_StateOrRegion})
+var sContactInformation_DistrictOrCounty = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DistrictOrCounty", ID: &i_DistrictOrCounty, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eContactInformation_DistrictOrCounty})
+var sContactInformation_PostalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCode", ID: &i_PostalCode, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eContactInformation_PostalCode})
+var sContactInformation_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountryCode", ID: &i_CountryCode, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eContactInformation_CountryCode})
+var sContactInformation_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &i_ContactInformationPhoneNumber, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eContactInformation_PhoneNumber})
+var sContactInformation_CompanyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompanyName", ID: &i_CompanyName, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eContactInformation_CompanyName})
+var sContactInformation_WebsiteUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebsiteUrl", ID: &i_WebsiteUrl, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eContactInformation_WebsiteUrl})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sInternalServerException_errorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorType", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_errorType})
+var sRegion_RegionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionName", ID: &i_RegionName, Type: smithy.ShapeTypeString, Ext: &eRegion_RegionName})
+var sRegion_RegionOptStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionOptStatus", ID: &i_RegionOptStatus, Type: smithy.ShapeTypeString, Ext: &eRegion_RegionOptStatus})
+var s_RegionOptList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRegion, Members: &mRegion, Type: smithy.ShapeTypeStructure, Ext: &e_RegionOptList_member})
+var s_RegionOptStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RegionOptStatus, Type: smithy.ShapeTypeString, Ext: &e_RegionOptStatusList_member})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceNotFoundException_errorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorType", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_errorType})
+var sResourceUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceUnavailableException_message})
+var sResourceUnavailableException_errorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorType", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eResourceUnavailableException_errorType})
+var sTooManyRequestsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTooManyRequestsException_message})
+var sTooManyRequestsException_errorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorType", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString, Ext: &eTooManyRequestsException_errorType})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_SensitiveString, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_ValidationExceptionReason, Type: smithy.ShapeTypeString, Ext: &eValidationException_reason})
+var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_fieldList})
+var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_name})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_SensitiveString, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_message})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var sAcceptPrimaryEmailUpdateRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eAcceptPrimaryEmailUpdateRequest_AccountId})
+var sAcceptPrimaryEmailUpdateRequest_PrimaryEmail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryEmail", ID: &i_PrimaryEmailAddress, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eAcceptPrimaryEmailUpdateRequest_PrimaryEmail})
+var sAcceptPrimaryEmailUpdateRequest_Otp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Otp", ID: &i_Otp, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eAcceptPrimaryEmailUpdateRequest_Otp})
+var sAcceptPrimaryEmailUpdateResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_PrimaryEmailUpdateStatus, Type: smithy.ShapeTypeString, Ext: &eAcceptPrimaryEmailUpdateResponse_Status})
+var sDeleteAlternateContactRequest_AlternateContactType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlternateContactType", ID: &i_AlternateContactType, Type: smithy.ShapeTypeString, Ext: &eDeleteAlternateContactRequest_AlternateContactType})
+var sDeleteAlternateContactRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDeleteAlternateContactRequest_AccountId})
+var sDisableRegionRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eDisableRegionRequest_AccountId})
+var sDisableRegionRequest_RegionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionName", ID: &i_RegionName, Type: smithy.ShapeTypeString, Ext: &eDisableRegionRequest_RegionName})
+var sEnableRegionRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eEnableRegionRequest_AccountId})
+var sEnableRegionRequest_RegionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionName", ID: &i_RegionName, Type: smithy.ShapeTypeString, Ext: &eEnableRegionRequest_RegionName})
+var sGetAccountInformationRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eGetAccountInformationRequest_AccountId})
+var sGetAccountInformationResponse_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eGetAccountInformationResponse_AccountId})
+var sGetAccountInformationResponse_AccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountName", ID: &i_AccountName, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eGetAccountInformationResponse_AccountName})
+var sGetAccountInformationResponse_AccountCreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountCreatedDate", ID: &i_AccountCreatedDate, Traits: &t29, Type: smithy.ShapeTypeTimestamp, Ext: &eGetAccountInformationResponse_AccountCreatedDate})
+var sGetAccountInformationResponse_AccountState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountState", ID: &i_AccountState, Type: smithy.ShapeTypeString, Ext: &eGetAccountInformationResponse_AccountState})
+var sGetAlternateContactRequest_AlternateContactType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlternateContactType", ID: &i_AlternateContactType, Type: smithy.ShapeTypeString, Ext: &eGetAlternateContactRequest_AlternateContactType})
+var sGetAlternateContactRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eGetAlternateContactRequest_AccountId})
+var sGetAlternateContactResponse_AlternateContact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlternateContact", ID: &iAlternateContact, Members: &mAlternateContact, Type: smithy.ShapeTypeStructure, Ext: &eGetAlternateContactResponse_AlternateContact})
+var sGetContactInformationRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eGetContactInformationRequest_AccountId})
+var sGetContactInformationResponse_ContactInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactInformation", ID: &iContactInformation, Members: &mContactInformation, Type: smithy.ShapeTypeStructure, Ext: &eGetContactInformationResponse_ContactInformation})
+var sGetContactInformationResponse_VerificationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VerificationStatus", ID: &i_PhoneNumberVerificationStatus, Type: smithy.ShapeTypeString, Ext: &eGetContactInformationResponse_VerificationStatus})
+var sGetGovCloudAccountInformationRequest_StandardAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StandardAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eGetGovCloudAccountInformationRequest_StandardAccountId})
+var sGetGovCloudAccountInformationResponse_GovCloudAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GovCloudAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eGetGovCloudAccountInformationResponse_GovCloudAccountId})
+var sGetGovCloudAccountInformationResponse_AccountState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountState", ID: &i_AwsAccountState, Type: smithy.ShapeTypeString, Ext: &eGetGovCloudAccountInformationResponse_AccountState})
+var sGetPrimaryEmailRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eGetPrimaryEmailRequest_AccountId})
+var sGetPrimaryEmailResponse_PrimaryEmail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryEmail", ID: &i_PrimaryEmailAddress, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eGetPrimaryEmailResponse_PrimaryEmail})
+var sGetPrimaryEmailUpdateStatusRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eGetPrimaryEmailUpdateStatusRequest_AccountId})
+var sGetPrimaryEmailUpdateStatusResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_PrimaryEmailUpdateStatus, Type: smithy.ShapeTypeString, Ext: &eGetPrimaryEmailUpdateStatusResponse_Status})
+var sGetPrimaryEmailUpdateStatusResponse_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetPrimaryEmailUpdateStatusResponse_UpdatedAt})
+var sGetRegionOptStatusRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eGetRegionOptStatusRequest_AccountId})
+var sGetRegionOptStatusRequest_RegionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionName", ID: &i_RegionName, Type: smithy.ShapeTypeString, Ext: &eGetRegionOptStatusRequest_RegionName})
+var sGetRegionOptStatusResponse_RegionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionName", ID: &i_RegionName, Type: smithy.ShapeTypeString, Ext: &eGetRegionOptStatusResponse_RegionName})
+var sGetRegionOptStatusResponse_RegionOptStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionOptStatus", ID: &i_RegionOptStatus, Type: smithy.ShapeTypeString, Ext: &eGetRegionOptStatusResponse_RegionOptStatus})
+var sListRegionsRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eListRegionsRequest_AccountId})
+var sListRegionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListRegionsRequest_MaxResults})
+var sListRegionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListRegionsRequest_NextToken})
+var sListRegionsRequest_RegionOptStatusContains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionOptStatusContains", ID: &i_RegionOptStatusList, Members: &m_RegionOptStatusList, Type: smithy.ShapeTypeList, Ext: &eListRegionsRequest_RegionOptStatusContains})
+var sListRegionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListRegionsResponse_NextToken})
+var sListRegionsResponse_Regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Regions", ID: &i_RegionOptList, Members: &m_RegionOptList, Type: smithy.ShapeTypeList, Ext: &eListRegionsResponse_Regions})
+var sPutAccountNameRequest_AccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountName", ID: &i_AccountName, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ePutAccountNameRequest_AccountName})
+var sPutAccountNameRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ePutAccountNameRequest_AccountId})
+var sPutAlternateContactRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ePutAlternateContactRequest_Name})
+var sPutAlternateContactRequest_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_Title, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ePutAlternateContactRequest_Title})
+var sPutAlternateContactRequest_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailAddress", ID: &i_EmailAddress, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ePutAlternateContactRequest_EmailAddress})
+var sPutAlternateContactRequest_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &i_PhoneNumber, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ePutAlternateContactRequest_PhoneNumber})
+var sPutAlternateContactRequest_AlternateContactType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlternateContactType", ID: &i_AlternateContactType, Type: smithy.ShapeTypeString, Ext: &ePutAlternateContactRequest_AlternateContactType})
+var sPutAlternateContactRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ePutAlternateContactRequest_AccountId})
+var sPutContactInformationRequest_ContactInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactInformation", ID: &iContactInformation, Members: &mContactInformation, Type: smithy.ShapeTypeStructure, Ext: &ePutContactInformationRequest_ContactInformation})
+var sPutContactInformationRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ePutContactInformationRequest_AccountId})
+var sSendPhoneNumberVerificationRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eSendPhoneNumberVerificationRequest_AccountId})
+var sSendPhoneNumberVerificationResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_PhoneNumberVerificationStatus, Type: smithy.ShapeTypeString, Ext: &eSendPhoneNumberVerificationResponse_Status})
+var sStartPrimaryEmailUpdateRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eStartPrimaryEmailUpdateRequest_AccountId})
+var sStartPrimaryEmailUpdateRequest_PrimaryEmail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryEmail", ID: &i_PrimaryEmailAddress, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eStartPrimaryEmailUpdateRequest_PrimaryEmail})
+var sStartPrimaryEmailUpdateResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_PrimaryEmailUpdateStatus, Type: smithy.ShapeTypeString, Ext: &eStartPrimaryEmailUpdateResponse_Status})
+var sVerifyPhoneNumberRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eVerifyPhoneNumberRequest_AccountId})
+var sVerifyPhoneNumberRequest_Otp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Otp", ID: &i_Otp, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eVerifyPhoneNumberRequest_Otp})
+var sVerifyPhoneNumberResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_PhoneNumberVerificationStatus, Type: smithy.ShapeTypeString, Ext: &eVerifyPhoneNumberResponse_Status})
 
 var AcceptPrimaryEmailUpdate = &sAcceptPrimaryEmailUpdate
 

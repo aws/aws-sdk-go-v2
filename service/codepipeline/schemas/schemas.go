@@ -7,9 +7,1310 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [1302]smithy.SchemaExtensions
+var (
+	eAcknowledgeJob                                             smithy.SchemaExtensions
+	eAcknowledgeThirdPartyJob                                   smithy.SchemaExtensions
+	eCreateCustomActionType                                     smithy.SchemaExtensions
+	eCreatePipeline                                             smithy.SchemaExtensions
+	eDeleteCustomActionType                                     smithy.SchemaExtensions
+	eDeletePipeline                                             smithy.SchemaExtensions
+	eDeleteWebhook                                              smithy.SchemaExtensions
+	eDeregisterWebhookWithThirdParty                            smithy.SchemaExtensions
+	eDisableStageTransition                                     smithy.SchemaExtensions
+	eEnableStageTransition                                      smithy.SchemaExtensions
+	eGetActionType                                              smithy.SchemaExtensions
+	eGetJobDetails                                              smithy.SchemaExtensions
+	eGetPipeline                                                smithy.SchemaExtensions
+	eGetPipelineExecution                                       smithy.SchemaExtensions
+	eGetPipelineState                                           smithy.SchemaExtensions
+	eGetThirdPartyJobDetails                                    smithy.SchemaExtensions
+	eListActionExecutions                                       smithy.SchemaExtensions
+	eListActionTypes                                            smithy.SchemaExtensions
+	eListDeployActionExecutionTargets                           smithy.SchemaExtensions
+	eListPipelineExecutions                                     smithy.SchemaExtensions
+	eListPipelines                                              smithy.SchemaExtensions
+	eListRuleExecutions                                         smithy.SchemaExtensions
+	eListRuleTypes                                              smithy.SchemaExtensions
+	eListTagsForResource                                        smithy.SchemaExtensions
+	eListWebhooks                                               smithy.SchemaExtensions
+	eOverrideStageCondition                                     smithy.SchemaExtensions
+	ePollForJobs                                                smithy.SchemaExtensions
+	ePollForThirdPartyJobs                                      smithy.SchemaExtensions
+	ePutActionRevision                                          smithy.SchemaExtensions
+	ePutApprovalResult                                          smithy.SchemaExtensions
+	ePutJobFailureResult                                        smithy.SchemaExtensions
+	ePutJobSuccessResult                                        smithy.SchemaExtensions
+	ePutThirdPartyJobFailureResult                              smithy.SchemaExtensions
+	ePutThirdPartyJobSuccessResult                              smithy.SchemaExtensions
+	ePutWebhook                                                 smithy.SchemaExtensions
+	eRegisterWebhookWithThirdParty                              smithy.SchemaExtensions
+	eRetryStageExecution                                        smithy.SchemaExtensions
+	eRollbackStage                                              smithy.SchemaExtensions
+	eStartPipelineExecution                                     smithy.SchemaExtensions
+	eStopPipelineExecution                                      smithy.SchemaExtensions
+	eTagResource                                                smithy.SchemaExtensions
+	eUntagResource                                              smithy.SchemaExtensions
+	eUpdateActionType                                           smithy.SchemaExtensions
+	eUpdatePipeline                                             smithy.SchemaExtensions
+	e_CodePipeline_20150709                                     smithy.SchemaExtensions
+	e_AccessKeyId                                               smithy.SchemaExtensions
+	e_AccountId                                                 smithy.SchemaExtensions
+	eActionCategory                                             smithy.SchemaExtensions
+	eActionCategory_Source                                      smithy.SchemaExtensions
+	eActionCategory_Build                                       smithy.SchemaExtensions
+	eActionCategory_Deploy                                      smithy.SchemaExtensions
+	eActionCategory_Test                                        smithy.SchemaExtensions
+	eActionCategory_Invoke                                      smithy.SchemaExtensions
+	eActionCategory_Approval                                    smithy.SchemaExtensions
+	eActionCategory_Compute                                     smithy.SchemaExtensions
+	eActionConfiguration                                        smithy.SchemaExtensions
+	eActionConfiguration_configuration                          smithy.SchemaExtensions
+	e_ActionConfigurationKey                                    smithy.SchemaExtensions
+	e_ActionConfigurationMap                                    smithy.SchemaExtensions
+	e_ActionConfigurationMap_key                                smithy.SchemaExtensions
+	e_ActionConfigurationMap_value                              smithy.SchemaExtensions
+	eActionConfigurationProperty                                smithy.SchemaExtensions
+	eActionConfigurationProperty_name                           smithy.SchemaExtensions
+	eActionConfigurationProperty_required                       smithy.SchemaExtensions
+	eActionConfigurationProperty_key                            smithy.SchemaExtensions
+	eActionConfigurationProperty_secret                         smithy.SchemaExtensions
+	eActionConfigurationProperty_queryable                      smithy.SchemaExtensions
+	eActionConfigurationProperty_description                    smithy.SchemaExtensions
+	eActionConfigurationProperty_type                           smithy.SchemaExtensions
+	e_ActionConfigurationPropertyList                           smithy.SchemaExtensions
+	e_ActionConfigurationPropertyList_member                    smithy.SchemaExtensions
+	eActionConfigurationPropertyType                            smithy.SchemaExtensions
+	eActionConfigurationPropertyType_String                     smithy.SchemaExtensions
+	eActionConfigurationPropertyType_Number                     smithy.SchemaExtensions
+	eActionConfigurationPropertyType_Boolean                    smithy.SchemaExtensions
+	e_ActionConfigurationQueryableValue                         smithy.SchemaExtensions
+	e_ActionConfigurationValue                                  smithy.SchemaExtensions
+	eActionContext                                              smithy.SchemaExtensions
+	eActionContext_name                                         smithy.SchemaExtensions
+	eActionContext_actionExecutionId                            smithy.SchemaExtensions
+	eActionDeclaration                                          smithy.SchemaExtensions
+	eActionDeclaration_name                                     smithy.SchemaExtensions
+	eActionDeclaration_actionTypeId                             smithy.SchemaExtensions
+	eActionDeclaration_runOrder                                 smithy.SchemaExtensions
+	eActionDeclaration_configuration                            smithy.SchemaExtensions
+	eActionDeclaration_commands                                 smithy.SchemaExtensions
+	eActionDeclaration_outputArtifacts                          smithy.SchemaExtensions
+	eActionDeclaration_inputArtifacts                           smithy.SchemaExtensions
+	eActionDeclaration_outputVariables                          smithy.SchemaExtensions
+	eActionDeclaration_roleArn                                  smithy.SchemaExtensions
+	eActionDeclaration_region                                   smithy.SchemaExtensions
+	eActionDeclaration_namespace                                smithy.SchemaExtensions
+	eActionDeclaration_timeoutInMinutes                         smithy.SchemaExtensions
+	eActionDeclaration_environmentVariables                     smithy.SchemaExtensions
+	eActionExecution                                            smithy.SchemaExtensions
+	eActionExecution_actionExecutionId                          smithy.SchemaExtensions
+	eActionExecution_status                                     smithy.SchemaExtensions
+	eActionExecution_summary                                    smithy.SchemaExtensions
+	eActionExecution_lastStatusChange                           smithy.SchemaExtensions
+	eActionExecution_token                                      smithy.SchemaExtensions
+	eActionExecution_lastUpdatedBy                              smithy.SchemaExtensions
+	eActionExecution_externalExecutionId                        smithy.SchemaExtensions
+	eActionExecution_externalExecutionUrl                       smithy.SchemaExtensions
+	eActionExecution_percentComplete                            smithy.SchemaExtensions
+	eActionExecution_errorDetails                               smithy.SchemaExtensions
+	eActionExecution_logStreamARN                               smithy.SchemaExtensions
+	eActionExecutionDetail                                      smithy.SchemaExtensions
+	eActionExecutionDetail_pipelineExecutionId                  smithy.SchemaExtensions
+	eActionExecutionDetail_actionExecutionId                    smithy.SchemaExtensions
+	eActionExecutionDetail_pipelineVersion                      smithy.SchemaExtensions
+	eActionExecutionDetail_stageName                            smithy.SchemaExtensions
+	eActionExecutionDetail_actionName                           smithy.SchemaExtensions
+	eActionExecutionDetail_startTime                            smithy.SchemaExtensions
+	eActionExecutionDetail_lastUpdateTime                       smithy.SchemaExtensions
+	eActionExecutionDetail_updatedBy                            smithy.SchemaExtensions
+	eActionExecutionDetail_status                               smithy.SchemaExtensions
+	eActionExecutionDetail_input                                smithy.SchemaExtensions
+	eActionExecutionDetail_output                               smithy.SchemaExtensions
+	e_ActionExecutionDetailList                                 smithy.SchemaExtensions
+	e_ActionExecutionDetailList_member                          smithy.SchemaExtensions
+	eActionExecutionFilter                                      smithy.SchemaExtensions
+	eActionExecutionFilter_pipelineExecutionId                  smithy.SchemaExtensions
+	eActionExecutionFilter_latestInPipelineExecution            smithy.SchemaExtensions
+	e_ActionExecutionId                                         smithy.SchemaExtensions
+	eActionExecutionInput                                       smithy.SchemaExtensions
+	eActionExecutionInput_actionTypeId                          smithy.SchemaExtensions
+	eActionExecutionInput_configuration                         smithy.SchemaExtensions
+	eActionExecutionInput_resolvedConfiguration                 smithy.SchemaExtensions
+	eActionExecutionInput_roleArn                               smithy.SchemaExtensions
+	eActionExecutionInput_region                                smithy.SchemaExtensions
+	eActionExecutionInput_inputArtifacts                        smithy.SchemaExtensions
+	eActionExecutionInput_namespace                             smithy.SchemaExtensions
+	eActionExecutionNotFoundException                           smithy.SchemaExtensions
+	eActionExecutionNotFoundException_message                   smithy.SchemaExtensions
+	eActionExecutionOutput                                      smithy.SchemaExtensions
+	eActionExecutionOutput_outputArtifacts                      smithy.SchemaExtensions
+	eActionExecutionOutput_executionResult                      smithy.SchemaExtensions
+	eActionExecutionOutput_outputVariables                      smithy.SchemaExtensions
+	eActionExecutionResult                                      smithy.SchemaExtensions
+	eActionExecutionResult_externalExecutionId                  smithy.SchemaExtensions
+	eActionExecutionResult_externalExecutionSummary             smithy.SchemaExtensions
+	eActionExecutionResult_externalExecutionUrl                 smithy.SchemaExtensions
+	eActionExecutionResult_errorDetails                         smithy.SchemaExtensions
+	eActionExecutionResult_logStreamARN                         smithy.SchemaExtensions
+	eActionExecutionStatus                                      smithy.SchemaExtensions
+	eActionExecutionStatus_InProgress                           smithy.SchemaExtensions
+	eActionExecutionStatus_Abandoned                            smithy.SchemaExtensions
+	eActionExecutionStatus_Succeeded                            smithy.SchemaExtensions
+	eActionExecutionStatus_Failed                               smithy.SchemaExtensions
+	e_ActionExecutionToken                                      smithy.SchemaExtensions
+	e_ActionName                                                smithy.SchemaExtensions
+	e_ActionNamespace                                           smithy.SchemaExtensions
+	eActionNotFoundException                                    smithy.SchemaExtensions
+	eActionNotFoundException_message                            smithy.SchemaExtensions
+	eActionOwner                                                smithy.SchemaExtensions
+	eActionOwner_AWS                                            smithy.SchemaExtensions
+	eActionOwner_ThirdParty                                     smithy.SchemaExtensions
+	eActionOwner_Custom                                         smithy.SchemaExtensions
+	e_ActionProvider                                            smithy.SchemaExtensions
+	eActionRevision                                             smithy.SchemaExtensions
+	eActionRevision_revisionId                                  smithy.SchemaExtensions
+	eActionRevision_revisionChangeId                            smithy.SchemaExtensions
+	eActionRevision_created                                     smithy.SchemaExtensions
+	e_ActionRunOrder                                            smithy.SchemaExtensions
+	eActionState                                                smithy.SchemaExtensions
+	eActionState_actionName                                     smithy.SchemaExtensions
+	eActionState_currentRevision                                smithy.SchemaExtensions
+	eActionState_latestExecution                                smithy.SchemaExtensions
+	eActionState_entityUrl                                      smithy.SchemaExtensions
+	eActionState_revisionUrl                                    smithy.SchemaExtensions
+	e_ActionStateList                                           smithy.SchemaExtensions
+	e_ActionStateList_member                                    smithy.SchemaExtensions
+	e_ActionTimeout                                             smithy.SchemaExtensions
+	eActionType                                                 smithy.SchemaExtensions
+	eActionType_id                                              smithy.SchemaExtensions
+	eActionType_settings                                        smithy.SchemaExtensions
+	eActionType_actionConfigurationProperties                   smithy.SchemaExtensions
+	eActionType_inputArtifactDetails                            smithy.SchemaExtensions
+	eActionType_outputArtifactDetails                           smithy.SchemaExtensions
+	eActionTypeArtifactDetails                                  smithy.SchemaExtensions
+	eActionTypeArtifactDetails_minimumCount                     smithy.SchemaExtensions
+	eActionTypeArtifactDetails_maximumCount                     smithy.SchemaExtensions
+	eActionTypeDeclaration                                      smithy.SchemaExtensions
+	eActionTypeDeclaration_description                          smithy.SchemaExtensions
+	eActionTypeDeclaration_executor                             smithy.SchemaExtensions
+	eActionTypeDeclaration_id                                   smithy.SchemaExtensions
+	eActionTypeDeclaration_inputArtifactDetails                 smithy.SchemaExtensions
+	eActionTypeDeclaration_outputArtifactDetails                smithy.SchemaExtensions
+	eActionTypeDeclaration_permissions                          smithy.SchemaExtensions
+	eActionTypeDeclaration_properties                           smithy.SchemaExtensions
+	eActionTypeDeclaration_urls                                 smithy.SchemaExtensions
+	e_ActionTypeDescription                                     smithy.SchemaExtensions
+	eActionTypeExecutor                                         smithy.SchemaExtensions
+	eActionTypeExecutor_configuration                           smithy.SchemaExtensions
+	eActionTypeExecutor_type                                    smithy.SchemaExtensions
+	eActionTypeExecutor_policyStatementsTemplate                smithy.SchemaExtensions
+	eActionTypeExecutor_jobTimeout                              smithy.SchemaExtensions
+	eActionTypeId                                               smithy.SchemaExtensions
+	eActionTypeId_category                                      smithy.SchemaExtensions
+	eActionTypeId_owner                                         smithy.SchemaExtensions
+	eActionTypeId_provider                                      smithy.SchemaExtensions
+	eActionTypeId_version                                       smithy.SchemaExtensions
+	eActionTypeIdentifier                                       smithy.SchemaExtensions
+	eActionTypeIdentifier_category                              smithy.SchemaExtensions
+	eActionTypeIdentifier_owner                                 smithy.SchemaExtensions
+	eActionTypeIdentifier_provider                              smithy.SchemaExtensions
+	eActionTypeIdentifier_version                               smithy.SchemaExtensions
+	e_ActionTypeList                                            smithy.SchemaExtensions
+	e_ActionTypeList_member                                     smithy.SchemaExtensions
+	eActionTypeNotFoundException                                smithy.SchemaExtensions
+	eActionTypeNotFoundException_message                        smithy.SchemaExtensions
+	e_ActionTypeOwner                                           smithy.SchemaExtensions
+	eActionTypePermissions                                      smithy.SchemaExtensions
+	eActionTypePermissions_allowedAccounts                      smithy.SchemaExtensions
+	e_ActionTypeProperties                                      smithy.SchemaExtensions
+	e_ActionTypeProperties_member                               smithy.SchemaExtensions
+	eActionTypeProperty                                         smithy.SchemaExtensions
+	eActionTypeProperty_name                                    smithy.SchemaExtensions
+	eActionTypeProperty_optional                                smithy.SchemaExtensions
+	eActionTypeProperty_key                                     smithy.SchemaExtensions
+	eActionTypeProperty_noEcho                                  smithy.SchemaExtensions
+	eActionTypeProperty_queryable                               smithy.SchemaExtensions
+	eActionTypeProperty_description                             smithy.SchemaExtensions
+	eActionTypeSettings                                         smithy.SchemaExtensions
+	eActionTypeSettings_thirdPartyConfigurationUrl              smithy.SchemaExtensions
+	eActionTypeSettings_entityUrlTemplate                       smithy.SchemaExtensions
+	eActionTypeSettings_executionUrlTemplate                    smithy.SchemaExtensions
+	eActionTypeSettings_revisionUrlTemplate                     smithy.SchemaExtensions
+	eActionTypeUrls                                             smithy.SchemaExtensions
+	eActionTypeUrls_configurationUrl                            smithy.SchemaExtensions
+	eActionTypeUrls_entityUrlTemplate                           smithy.SchemaExtensions
+	eActionTypeUrls_executionUrlTemplate                        smithy.SchemaExtensions
+	eActionTypeUrls_revisionUrlTemplate                         smithy.SchemaExtensions
+	e_AllowedAccount                                            smithy.SchemaExtensions
+	e_AllowedAccounts                                           smithy.SchemaExtensions
+	e_AllowedAccounts_member                                    smithy.SchemaExtensions
+	eApprovalAlreadyCompletedException                          smithy.SchemaExtensions
+	eApprovalAlreadyCompletedException_message                  smithy.SchemaExtensions
+	eApprovalResult                                             smithy.SchemaExtensions
+	eApprovalResult_summary                                     smithy.SchemaExtensions
+	eApprovalResult_status                                      smithy.SchemaExtensions
+	eApprovalStatus                                             smithy.SchemaExtensions
+	eApprovalStatus_Approved                                    smithy.SchemaExtensions
+	eApprovalStatus_Rejected                                    smithy.SchemaExtensions
+	e_ApprovalSummary                                           smithy.SchemaExtensions
+	e_ApprovalToken                                             smithy.SchemaExtensions
+	eArtifact                                                   smithy.SchemaExtensions
+	eArtifact_name                                              smithy.SchemaExtensions
+	eArtifact_revision                                          smithy.SchemaExtensions
+	eArtifact_location                                          smithy.SchemaExtensions
+	eArtifactDetail                                             smithy.SchemaExtensions
+	eArtifactDetail_name                                        smithy.SchemaExtensions
+	eArtifactDetail_s3location                                  smithy.SchemaExtensions
+	e_ArtifactDetailList                                        smithy.SchemaExtensions
+	e_ArtifactDetailList_member                                 smithy.SchemaExtensions
+	eArtifactDetails                                            smithy.SchemaExtensions
+	eArtifactDetails_minimumCount                               smithy.SchemaExtensions
+	eArtifactDetails_maximumCount                               smithy.SchemaExtensions
+	e_ArtifactList                                              smithy.SchemaExtensions
+	e_ArtifactList_member                                       smithy.SchemaExtensions
+	eArtifactLocation                                           smithy.SchemaExtensions
+	eArtifactLocation_type                                      smithy.SchemaExtensions
+	eArtifactLocation_s3Location                                smithy.SchemaExtensions
+	eArtifactLocationType                                       smithy.SchemaExtensions
+	eArtifactLocationType_S3                                    smithy.SchemaExtensions
+	e_ArtifactName                                              smithy.SchemaExtensions
+	eArtifactRevision                                           smithy.SchemaExtensions
+	eArtifactRevision_name                                      smithy.SchemaExtensions
+	eArtifactRevision_revisionId                                smithy.SchemaExtensions
+	eArtifactRevision_revisionChangeIdentifier                  smithy.SchemaExtensions
+	eArtifactRevision_revisionSummary                           smithy.SchemaExtensions
+	eArtifactRevision_created                                   smithy.SchemaExtensions
+	eArtifactRevision_revisionUrl                               smithy.SchemaExtensions
+	e_ArtifactRevisionList                                      smithy.SchemaExtensions
+	e_ArtifactRevisionList_member                               smithy.SchemaExtensions
+	eArtifactStore                                              smithy.SchemaExtensions
+	eArtifactStore_type                                         smithy.SchemaExtensions
+	eArtifactStore_location                                     smithy.SchemaExtensions
+	eArtifactStore_encryptionKey                                smithy.SchemaExtensions
+	e_ArtifactStoreLocation                                     smithy.SchemaExtensions
+	e_ArtifactStoreMap                                          smithy.SchemaExtensions
+	e_ArtifactStoreMap_key                                      smithy.SchemaExtensions
+	e_ArtifactStoreMap_value                                    smithy.SchemaExtensions
+	eArtifactStoreType                                          smithy.SchemaExtensions
+	eArtifactStoreType_S3                                       smithy.SchemaExtensions
+	e_AWSRegionName                                             smithy.SchemaExtensions
+	eAWSSessionCredentials                                      smithy.SchemaExtensions
+	eAWSSessionCredentials_accessKeyId                          smithy.SchemaExtensions
+	eAWSSessionCredentials_secretAccessKey                      smithy.SchemaExtensions
+	eAWSSessionCredentials_sessionToken                         smithy.SchemaExtensions
+	eBeforeEntryConditions                                      smithy.SchemaExtensions
+	eBeforeEntryConditions_conditions                           smithy.SchemaExtensions
+	eBlockerDeclaration                                         smithy.SchemaExtensions
+	eBlockerDeclaration_name                                    smithy.SchemaExtensions
+	eBlockerDeclaration_type                                    smithy.SchemaExtensions
+	e_BlockerName                                               smithy.SchemaExtensions
+	eBlockerType                                                smithy.SchemaExtensions
+	eBlockerType_Schedule                                       smithy.SchemaExtensions
+	e_Boolean                                                   smithy.SchemaExtensions
+	e_ClientId                                                  smithy.SchemaExtensions
+	e_ClientRequestToken                                        smithy.SchemaExtensions
+	e_ClientToken                                               smithy.SchemaExtensions
+	e_Code                                                      smithy.SchemaExtensions
+	e_Command                                                   smithy.SchemaExtensions
+	e_CommandList                                               smithy.SchemaExtensions
+	e_CommandList_member                                        smithy.SchemaExtensions
+	eConcurrentModificationException                            smithy.SchemaExtensions
+	eConcurrentModificationException_message                    smithy.SchemaExtensions
+	eConcurrentPipelineExecutionsLimitExceededException         smithy.SchemaExtensions
+	eConcurrentPipelineExecutionsLimitExceededException_message smithy.SchemaExtensions
+	eCondition                                                  smithy.SchemaExtensions
+	eCondition_result                                           smithy.SchemaExtensions
+	eCondition_rules                                            smithy.SchemaExtensions
+	eConditionExecution                                         smithy.SchemaExtensions
+	eConditionExecution_status                                  smithy.SchemaExtensions
+	eConditionExecution_summary                                 smithy.SchemaExtensions
+	eConditionExecution_lastStatusChange                        smithy.SchemaExtensions
+	eConditionExecutionStatus                                   smithy.SchemaExtensions
+	eConditionExecutionStatus_InProgress                        smithy.SchemaExtensions
+	eConditionExecutionStatus_Failed                            smithy.SchemaExtensions
+	eConditionExecutionStatus_Errored                           smithy.SchemaExtensions
+	eConditionExecutionStatus_Succeeded                         smithy.SchemaExtensions
+	eConditionExecutionStatus_Cancelled                         smithy.SchemaExtensions
+	eConditionExecutionStatus_Abandoned                         smithy.SchemaExtensions
+	eConditionExecutionStatus_Overridden                        smithy.SchemaExtensions
+	e_ConditionList                                             smithy.SchemaExtensions
+	e_ConditionList_member                                      smithy.SchemaExtensions
+	eConditionNotOverridableException                           smithy.SchemaExtensions
+	eConditionNotOverridableException_message                   smithy.SchemaExtensions
+	eConditionState                                             smithy.SchemaExtensions
+	eConditionState_latestExecution                             smithy.SchemaExtensions
+	eConditionState_ruleStates                                  smithy.SchemaExtensions
+	e_ConditionStateList                                        smithy.SchemaExtensions
+	e_ConditionStateList_member                                 smithy.SchemaExtensions
+	eConditionType                                              smithy.SchemaExtensions
+	eConditionType_BEFORE_ENTRY                                 smithy.SchemaExtensions
+	eConditionType_ON_SUCCESS                                   smithy.SchemaExtensions
+	eConflictException                                          smithy.SchemaExtensions
+	eConflictException_message                                  smithy.SchemaExtensions
+	e_ContinuationToken                                         smithy.SchemaExtensions
+	eCurrentRevision                                            smithy.SchemaExtensions
+	eCurrentRevision_revision                                   smithy.SchemaExtensions
+	eCurrentRevision_changeIdentifier                           smithy.SchemaExtensions
+	eCurrentRevision_created                                    smithy.SchemaExtensions
+	eCurrentRevision_revisionSummary                            smithy.SchemaExtensions
+	eDeployActionExecutionTarget                                smithy.SchemaExtensions
+	eDeployActionExecutionTarget_targetId                       smithy.SchemaExtensions
+	eDeployActionExecutionTarget_targetType                     smithy.SchemaExtensions
+	eDeployActionExecutionTarget_status                         smithy.SchemaExtensions
+	eDeployActionExecutionTarget_startTime                      smithy.SchemaExtensions
+	eDeployActionExecutionTarget_endTime                        smithy.SchemaExtensions
+	eDeployActionExecutionTarget_events                         smithy.SchemaExtensions
+	e_DeployActionExecutionTargetList                           smithy.SchemaExtensions
+	e_DeployActionExecutionTargetList_member                    smithy.SchemaExtensions
+	eDeployTargetEvent                                          smithy.SchemaExtensions
+	eDeployTargetEvent_name                                     smithy.SchemaExtensions
+	eDeployTargetEvent_status                                   smithy.SchemaExtensions
+	eDeployTargetEvent_startTime                                smithy.SchemaExtensions
+	eDeployTargetEvent_endTime                                  smithy.SchemaExtensions
+	eDeployTargetEvent_context                                  smithy.SchemaExtensions
+	eDeployTargetEventContext                                   smithy.SchemaExtensions
+	eDeployTargetEventContext_ssmCommandId                      smithy.SchemaExtensions
+	eDeployTargetEventContext_message                           smithy.SchemaExtensions
+	e_DeployTargetEventList                                     smithy.SchemaExtensions
+	e_DeployTargetEventList_member                              smithy.SchemaExtensions
+	e_Description                                               smithy.SchemaExtensions
+	e_DisabledReason                                            smithy.SchemaExtensions
+	eDuplicatedStopRequestException                             smithy.SchemaExtensions
+	eDuplicatedStopRequestException_message                     smithy.SchemaExtensions
+	e_Enabled                                                   smithy.SchemaExtensions
+	eEncryptionKey                                              smithy.SchemaExtensions
+	eEncryptionKey_id                                           smithy.SchemaExtensions
+	eEncryptionKey_type                                         smithy.SchemaExtensions
+	e_EncryptionKeyId                                           smithy.SchemaExtensions
+	eEncryptionKeyType                                          smithy.SchemaExtensions
+	eEncryptionKeyType_KMS                                      smithy.SchemaExtensions
+	eEnvironmentVariable                                        smithy.SchemaExtensions
+	eEnvironmentVariable_name                                   smithy.SchemaExtensions
+	eEnvironmentVariable_value                                  smithy.SchemaExtensions
+	eEnvironmentVariable_type                                   smithy.SchemaExtensions
+	e_EnvironmentVariableList                                   smithy.SchemaExtensions
+	e_EnvironmentVariableList_member                            smithy.SchemaExtensions
+	e_EnvironmentVariableName                                   smithy.SchemaExtensions
+	eEnvironmentVariableType                                    smithy.SchemaExtensions
+	eEnvironmentVariableType_PLAINTEXT                          smithy.SchemaExtensions
+	eEnvironmentVariableType_SECRETS_MANAGER                    smithy.SchemaExtensions
+	e_EnvironmentVariableValue                                  smithy.SchemaExtensions
+	eErrorDetails                                               smithy.SchemaExtensions
+	eErrorDetails_code                                          smithy.SchemaExtensions
+	eErrorDetails_message                                       smithy.SchemaExtensions
+	eExecutionDetails                                           smithy.SchemaExtensions
+	eExecutionDetails_summary                                   smithy.SchemaExtensions
+	eExecutionDetails_externalExecutionId                       smithy.SchemaExtensions
+	eExecutionDetails_percentComplete                           smithy.SchemaExtensions
+	e_ExecutionId                                               smithy.SchemaExtensions
+	eExecutionMode                                              smithy.SchemaExtensions
+	eExecutionMode_QUEUED                                       smithy.SchemaExtensions
+	eExecutionMode_SUPERSEDED                                   smithy.SchemaExtensions
+	eExecutionMode_PARALLEL                                     smithy.SchemaExtensions
+	e_ExecutionSummary                                          smithy.SchemaExtensions
+	eExecutionTrigger                                           smithy.SchemaExtensions
+	eExecutionTrigger_triggerType                               smithy.SchemaExtensions
+	eExecutionTrigger_triggerDetail                             smithy.SchemaExtensions
+	eExecutionType                                              smithy.SchemaExtensions
+	eExecutionType_STANDARD                                     smithy.SchemaExtensions
+	eExecutionType_ROLLBACK                                     smithy.SchemaExtensions
+	eExecutorConfiguration                                      smithy.SchemaExtensions
+	eExecutorConfiguration_lambdaExecutorConfiguration          smithy.SchemaExtensions
+	eExecutorConfiguration_jobWorkerExecutorConfiguration       smithy.SchemaExtensions
+	eExecutorType                                               smithy.SchemaExtensions
+	eExecutorType_JobWorker                                     smithy.SchemaExtensions
+	eExecutorType_Lambda                                        smithy.SchemaExtensions
+	e_ExternalExecutionId                                       smithy.SchemaExtensions
+	e_ExternalExecutionSummary                                  smithy.SchemaExtensions
+	eFailureConditions                                          smithy.SchemaExtensions
+	eFailureConditions_result                                   smithy.SchemaExtensions
+	eFailureConditions_retryConfiguration                       smithy.SchemaExtensions
+	eFailureConditions_conditions                               smithy.SchemaExtensions
+	eFailureDetails                                             smithy.SchemaExtensions
+	eFailureDetails_type                                        smithy.SchemaExtensions
+	eFailureDetails_message                                     smithy.SchemaExtensions
+	eFailureDetails_externalExecutionId                         smithy.SchemaExtensions
+	eFailureType                                                smithy.SchemaExtensions
+	eFailureType_JobFailed                                      smithy.SchemaExtensions
+	eFailureType_ConfigurationError                             smithy.SchemaExtensions
+	eFailureType_PermissionError                                smithy.SchemaExtensions
+	eFailureType_RevisionOutOfSync                              smithy.SchemaExtensions
+	eFailureType_RevisionUnavailable                            smithy.SchemaExtensions
+	eFailureType_SystemUnavailable                              smithy.SchemaExtensions
+	e_FilePath                                                  smithy.SchemaExtensions
+	e_FilePathList                                              smithy.SchemaExtensions
+	e_FilePathList_member                                       smithy.SchemaExtensions
+	eGitBranchFilterCriteria                                    smithy.SchemaExtensions
+	eGitBranchFilterCriteria_includes                           smithy.SchemaExtensions
+	eGitBranchFilterCriteria_excludes                           smithy.SchemaExtensions
+	e_GitBranchNamePattern                                      smithy.SchemaExtensions
+	e_GitBranchPatternList                                      smithy.SchemaExtensions
+	e_GitBranchPatternList_member                               smithy.SchemaExtensions
+	eGitConfiguration                                           smithy.SchemaExtensions
+	eGitConfiguration_sourceActionName                          smithy.SchemaExtensions
+	eGitConfiguration_push                                      smithy.SchemaExtensions
+	eGitConfiguration_pullRequest                               smithy.SchemaExtensions
+	eGitFilePathFilterCriteria                                  smithy.SchemaExtensions
+	eGitFilePathFilterCriteria_includes                         smithy.SchemaExtensions
+	eGitFilePathFilterCriteria_excludes                         smithy.SchemaExtensions
+	e_GitFilePathPattern                                        smithy.SchemaExtensions
+	e_GitFilePathPatternList                                    smithy.SchemaExtensions
+	e_GitFilePathPatternList_member                             smithy.SchemaExtensions
+	eGitPullRequestEventType                                    smithy.SchemaExtensions
+	eGitPullRequestEventType_OPEN                               smithy.SchemaExtensions
+	eGitPullRequestEventType_UPDATED                            smithy.SchemaExtensions
+	eGitPullRequestEventType_CLOSED                             smithy.SchemaExtensions
+	e_GitPullRequestEventTypeList                               smithy.SchemaExtensions
+	e_GitPullRequestEventTypeList_member                        smithy.SchemaExtensions
+	eGitPullRequestFilter                                       smithy.SchemaExtensions
+	eGitPullRequestFilter_events                                smithy.SchemaExtensions
+	eGitPullRequestFilter_branches                              smithy.SchemaExtensions
+	eGitPullRequestFilter_filePaths                             smithy.SchemaExtensions
+	e_GitPullRequestFilterList                                  smithy.SchemaExtensions
+	e_GitPullRequestFilterList_member                           smithy.SchemaExtensions
+	eGitPushFilter                                              smithy.SchemaExtensions
+	eGitPushFilter_tags                                         smithy.SchemaExtensions
+	eGitPushFilter_branches                                     smithy.SchemaExtensions
+	eGitPushFilter_filePaths                                    smithy.SchemaExtensions
+	e_GitPushFilterList                                         smithy.SchemaExtensions
+	e_GitPushFilterList_member                                  smithy.SchemaExtensions
+	eGitTagFilterCriteria                                       smithy.SchemaExtensions
+	eGitTagFilterCriteria_includes                              smithy.SchemaExtensions
+	eGitTagFilterCriteria_excludes                              smithy.SchemaExtensions
+	e_GitTagNamePattern                                         smithy.SchemaExtensions
+	e_GitTagPatternList                                         smithy.SchemaExtensions
+	e_GitTagPatternList_member                                  smithy.SchemaExtensions
+	eInputArtifact                                              smithy.SchemaExtensions
+	eInputArtifact_name                                         smithy.SchemaExtensions
+	e_InputArtifactList                                         smithy.SchemaExtensions
+	e_InputArtifactList_member                                  smithy.SchemaExtensions
+	eInvalidActionDeclarationException                          smithy.SchemaExtensions
+	eInvalidActionDeclarationException_message                  smithy.SchemaExtensions
+	eInvalidApprovalTokenException                              smithy.SchemaExtensions
+	eInvalidApprovalTokenException_message                      smithy.SchemaExtensions
+	eInvalidArnException                                        smithy.SchemaExtensions
+	eInvalidArnException_message                                smithy.SchemaExtensions
+	eInvalidBlockerDeclarationException                         smithy.SchemaExtensions
+	eInvalidBlockerDeclarationException_message                 smithy.SchemaExtensions
+	eInvalidClientTokenException                                smithy.SchemaExtensions
+	eInvalidClientTokenException_message                        smithy.SchemaExtensions
+	eInvalidJobException                                        smithy.SchemaExtensions
+	eInvalidJobException_message                                smithy.SchemaExtensions
+	eInvalidJobStateException                                   smithy.SchemaExtensions
+	eInvalidJobStateException_message                           smithy.SchemaExtensions
+	eInvalidNextTokenException                                  smithy.SchemaExtensions
+	eInvalidNextTokenException_message                          smithy.SchemaExtensions
+	eInvalidNonceException                                      smithy.SchemaExtensions
+	eInvalidNonceException_message                              smithy.SchemaExtensions
+	eInvalidStageDeclarationException                           smithy.SchemaExtensions
+	eInvalidStageDeclarationException_message                   smithy.SchemaExtensions
+	eInvalidStructureException                                  smithy.SchemaExtensions
+	eInvalidStructureException_message                          smithy.SchemaExtensions
+	eInvalidTagsException                                       smithy.SchemaExtensions
+	eInvalidTagsException_message                               smithy.SchemaExtensions
+	eInvalidWebhookAuthenticationParametersException            smithy.SchemaExtensions
+	eInvalidWebhookAuthenticationParametersException_message    smithy.SchemaExtensions
+	eInvalidWebhookFilterPatternException                       smithy.SchemaExtensions
+	eInvalidWebhookFilterPatternException_message               smithy.SchemaExtensions
+	eJob                                                        smithy.SchemaExtensions
+	eJob_id                                                     smithy.SchemaExtensions
+	eJob_data                                                   smithy.SchemaExtensions
+	eJob_nonce                                                  smithy.SchemaExtensions
+	eJob_accountId                                              smithy.SchemaExtensions
+	eJobData                                                    smithy.SchemaExtensions
+	eJobData_actionTypeId                                       smithy.SchemaExtensions
+	eJobData_actionConfiguration                                smithy.SchemaExtensions
+	eJobData_pipelineContext                                    smithy.SchemaExtensions
+	eJobData_inputArtifacts                                     smithy.SchemaExtensions
+	eJobData_outputArtifacts                                    smithy.SchemaExtensions
+	eJobData_artifactCredentials                                smithy.SchemaExtensions
+	eJobData_continuationToken                                  smithy.SchemaExtensions
+	eJobData_encryptionKey                                      smithy.SchemaExtensions
+	eJobDetails                                                 smithy.SchemaExtensions
+	eJobDetails_id                                              smithy.SchemaExtensions
+	eJobDetails_data                                            smithy.SchemaExtensions
+	eJobDetails_accountId                                       smithy.SchemaExtensions
+	e_JobId                                                     smithy.SchemaExtensions
+	e_JobList                                                   smithy.SchemaExtensions
+	e_JobList_member                                            smithy.SchemaExtensions
+	eJobNotFoundException                                       smithy.SchemaExtensions
+	eJobNotFoundException_message                               smithy.SchemaExtensions
+	eJobStatus                                                  smithy.SchemaExtensions
+	eJobStatus_Created                                          smithy.SchemaExtensions
+	eJobStatus_Queued                                           smithy.SchemaExtensions
+	eJobStatus_Dispatched                                       smithy.SchemaExtensions
+	eJobStatus_InProgress                                       smithy.SchemaExtensions
+	eJobStatus_TimedOut                                         smithy.SchemaExtensions
+	eJobStatus_Succeeded                                        smithy.SchemaExtensions
+	eJobStatus_Failed                                           smithy.SchemaExtensions
+	e_JobTimeout                                                smithy.SchemaExtensions
+	eJobWorkerExecutorConfiguration                             smithy.SchemaExtensions
+	eJobWorkerExecutorConfiguration_pollingAccounts             smithy.SchemaExtensions
+	eJobWorkerExecutorConfiguration_pollingServicePrincipals    smithy.SchemaExtensions
+	e_JsonPath                                                  smithy.SchemaExtensions
+	eLambdaExecutorConfiguration                                smithy.SchemaExtensions
+	eLambdaExecutorConfiguration_lambdaFunctionArn              smithy.SchemaExtensions
+	e_LambdaFunctionArn                                         smithy.SchemaExtensions
+	e_LastChangedAt                                             smithy.SchemaExtensions
+	e_LastChangedBy                                             smithy.SchemaExtensions
+	e_LastUpdatedBy                                             smithy.SchemaExtensions
+	eLatestInPipelineExecutionFilter                            smithy.SchemaExtensions
+	eLatestInPipelineExecutionFilter_pipelineExecutionId        smithy.SchemaExtensions
+	eLatestInPipelineExecutionFilter_startTimeRange             smithy.SchemaExtensions
+	eLimitExceededException                                     smithy.SchemaExtensions
+	eLimitExceededException_message                             smithy.SchemaExtensions
+	eListWebhookItem                                            smithy.SchemaExtensions
+	eListWebhookItem_definition                                 smithy.SchemaExtensions
+	eListWebhookItem_url                                        smithy.SchemaExtensions
+	eListWebhookItem_errorMessage                               smithy.SchemaExtensions
+	eListWebhookItem_errorCode                                  smithy.SchemaExtensions
+	eListWebhookItem_lastTriggered                              smithy.SchemaExtensions
+	eListWebhookItem_arn                                        smithy.SchemaExtensions
+	eListWebhookItem_tags                                       smithy.SchemaExtensions
+	e_LogStreamARN                                              smithy.SchemaExtensions
+	e_MatchEquals                                               smithy.SchemaExtensions
+	e_MaxBatchSize                                              smithy.SchemaExtensions
+	e_MaximumActionTypeArtifactCount                            smithy.SchemaExtensions
+	e_MaximumArtifactCount                                      smithy.SchemaExtensions
+	e_MaxPipelines                                              smithy.SchemaExtensions
+	e_MaxResults                                                smithy.SchemaExtensions
+	e_Message                                                   smithy.SchemaExtensions
+	e_MinimumActionTypeArtifactCount                            smithy.SchemaExtensions
+	e_MinimumArtifactCount                                      smithy.SchemaExtensions
+	e_NextToken                                                 smithy.SchemaExtensions
+	e_Nonce                                                     smithy.SchemaExtensions
+	eNotLatestPipelineExecutionException                        smithy.SchemaExtensions
+	eNotLatestPipelineExecutionException_message                smithy.SchemaExtensions
+	eOutputArtifact                                             smithy.SchemaExtensions
+	eOutputArtifact_name                                        smithy.SchemaExtensions
+	eOutputArtifact_files                                       smithy.SchemaExtensions
+	e_OutputArtifactList                                        smithy.SchemaExtensions
+	e_OutputArtifactList_member                                 smithy.SchemaExtensions
+	e_OutputVariable                                            smithy.SchemaExtensions
+	e_OutputVariableList                                        smithy.SchemaExtensions
+	e_OutputVariableList_member                                 smithy.SchemaExtensions
+	e_OutputVariablesKey                                        smithy.SchemaExtensions
+	e_OutputVariablesMap                                        smithy.SchemaExtensions
+	e_OutputVariablesMap_key                                    smithy.SchemaExtensions
+	e_OutputVariablesMap_value                                  smithy.SchemaExtensions
+	eOutputVariablesSizeExceededException                       smithy.SchemaExtensions
+	eOutputVariablesSizeExceededException_message               smithy.SchemaExtensions
+	e_OutputVariablesValue                                      smithy.SchemaExtensions
+	e_Percentage                                                smithy.SchemaExtensions
+	e_PipelineArn                                               smithy.SchemaExtensions
+	ePipelineContext                                            smithy.SchemaExtensions
+	ePipelineContext_pipelineName                               smithy.SchemaExtensions
+	ePipelineContext_stage                                      smithy.SchemaExtensions
+	ePipelineContext_action                                     smithy.SchemaExtensions
+	ePipelineContext_pipelineArn                                smithy.SchemaExtensions
+	ePipelineContext_pipelineExecutionId                        smithy.SchemaExtensions
+	ePipelineDeclaration                                        smithy.SchemaExtensions
+	ePipelineDeclaration_name                                   smithy.SchemaExtensions
+	ePipelineDeclaration_roleArn                                smithy.SchemaExtensions
+	ePipelineDeclaration_artifactStore                          smithy.SchemaExtensions
+	ePipelineDeclaration_artifactStores                         smithy.SchemaExtensions
+	ePipelineDeclaration_stages                                 smithy.SchemaExtensions
+	ePipelineDeclaration_version                                smithy.SchemaExtensions
+	ePipelineDeclaration_executionMode                          smithy.SchemaExtensions
+	ePipelineDeclaration_pipelineType                           smithy.SchemaExtensions
+	ePipelineDeclaration_variables                              smithy.SchemaExtensions
+	ePipelineDeclaration_triggers                               smithy.SchemaExtensions
+	ePipelineExecution                                          smithy.SchemaExtensions
+	ePipelineExecution_pipelineName                             smithy.SchemaExtensions
+	ePipelineExecution_pipelineVersion                          smithy.SchemaExtensions
+	ePipelineExecution_pipelineExecutionId                      smithy.SchemaExtensions
+	ePipelineExecution_status                                   smithy.SchemaExtensions
+	ePipelineExecution_statusSummary                            smithy.SchemaExtensions
+	ePipelineExecution_artifactRevisions                        smithy.SchemaExtensions
+	ePipelineExecution_variables                                smithy.SchemaExtensions
+	ePipelineExecution_trigger                                  smithy.SchemaExtensions
+	ePipelineExecution_executionMode                            smithy.SchemaExtensions
+	ePipelineExecution_executionType                            smithy.SchemaExtensions
+	ePipelineExecution_rollbackMetadata                         smithy.SchemaExtensions
+	ePipelineExecutionFilter                                    smithy.SchemaExtensions
+	ePipelineExecutionFilter_succeededInStage                   smithy.SchemaExtensions
+	e_PipelineExecutionId                                       smithy.SchemaExtensions
+	ePipelineExecutionNotFoundException                         smithy.SchemaExtensions
+	ePipelineExecutionNotFoundException_message                 smithy.SchemaExtensions
+	ePipelineExecutionNotStoppableException                     smithy.SchemaExtensions
+	ePipelineExecutionNotStoppableException_message             smithy.SchemaExtensions
+	ePipelineExecutionOutdatedException                         smithy.SchemaExtensions
+	ePipelineExecutionOutdatedException_message                 smithy.SchemaExtensions
+	ePipelineExecutionStatus                                    smithy.SchemaExtensions
+	ePipelineExecutionStatus_Cancelled                          smithy.SchemaExtensions
+	ePipelineExecutionStatus_InProgress                         smithy.SchemaExtensions
+	ePipelineExecutionStatus_Stopped                            smithy.SchemaExtensions
+	ePipelineExecutionStatus_Stopping                           smithy.SchemaExtensions
+	ePipelineExecutionStatus_Succeeded                          smithy.SchemaExtensions
+	ePipelineExecutionStatus_Superseded                         smithy.SchemaExtensions
+	ePipelineExecutionStatus_Failed                             smithy.SchemaExtensions
+	e_PipelineExecutionStatusSummary                            smithy.SchemaExtensions
+	ePipelineExecutionSummary                                   smithy.SchemaExtensions
+	ePipelineExecutionSummary_pipelineExecutionId               smithy.SchemaExtensions
+	ePipelineExecutionSummary_status                            smithy.SchemaExtensions
+	ePipelineExecutionSummary_statusSummary                     smithy.SchemaExtensions
+	ePipelineExecutionSummary_startTime                         smithy.SchemaExtensions
+	ePipelineExecutionSummary_lastUpdateTime                    smithy.SchemaExtensions
+	ePipelineExecutionSummary_sourceRevisions                   smithy.SchemaExtensions
+	ePipelineExecutionSummary_trigger                           smithy.SchemaExtensions
+	ePipelineExecutionSummary_stopTrigger                       smithy.SchemaExtensions
+	ePipelineExecutionSummary_executionMode                     smithy.SchemaExtensions
+	ePipelineExecutionSummary_executionType                     smithy.SchemaExtensions
+	ePipelineExecutionSummary_rollbackMetadata                  smithy.SchemaExtensions
+	e_PipelineExecutionSummaryList                              smithy.SchemaExtensions
+	e_PipelineExecutionSummaryList_member                       smithy.SchemaExtensions
+	e_PipelineList                                              smithy.SchemaExtensions
+	e_PipelineList_member                                       smithy.SchemaExtensions
+	ePipelineMetadata                                           smithy.SchemaExtensions
+	ePipelineMetadata_pipelineArn                               smithy.SchemaExtensions
+	ePipelineMetadata_created                                   smithy.SchemaExtensions
+	ePipelineMetadata_updated                                   smithy.SchemaExtensions
+	ePipelineMetadata_pollingDisabledAt                         smithy.SchemaExtensions
+	e_PipelineName                                              smithy.SchemaExtensions
+	ePipelineNameInUseException                                 smithy.SchemaExtensions
+	ePipelineNameInUseException_message                         smithy.SchemaExtensions
+	ePipelineNotFoundException                                  smithy.SchemaExtensions
+	ePipelineNotFoundException_message                          smithy.SchemaExtensions
+	ePipelineRollbackMetadata                                   smithy.SchemaExtensions
+	ePipelineRollbackMetadata_rollbackTargetPipelineExecutionId smithy.SchemaExtensions
+	e_PipelineStageDeclarationList                              smithy.SchemaExtensions
+	e_PipelineStageDeclarationList_member                       smithy.SchemaExtensions
+	ePipelineSummary                                            smithy.SchemaExtensions
+	ePipelineSummary_name                                       smithy.SchemaExtensions
+	ePipelineSummary_version                                    smithy.SchemaExtensions
+	ePipelineSummary_pipelineType                               smithy.SchemaExtensions
+	ePipelineSummary_executionMode                              smithy.SchemaExtensions
+	ePipelineSummary_created                                    smithy.SchemaExtensions
+	ePipelineSummary_updated                                    smithy.SchemaExtensions
+	ePipelineTriggerDeclaration                                 smithy.SchemaExtensions
+	ePipelineTriggerDeclaration_providerType                    smithy.SchemaExtensions
+	ePipelineTriggerDeclaration_gitConfiguration                smithy.SchemaExtensions
+	e_PipelineTriggerDeclarationList                            smithy.SchemaExtensions
+	e_PipelineTriggerDeclarationList_member                     smithy.SchemaExtensions
+	ePipelineTriggerProviderType                                smithy.SchemaExtensions
+	ePipelineTriggerProviderType_CodeStarSourceConnection       smithy.SchemaExtensions
+	ePipelineType                                               smithy.SchemaExtensions
+	ePipelineType_V1                                            smithy.SchemaExtensions
+	ePipelineType_V2                                            smithy.SchemaExtensions
+	ePipelineVariable                                           smithy.SchemaExtensions
+	ePipelineVariable_name                                      smithy.SchemaExtensions
+	ePipelineVariable_value                                     smithy.SchemaExtensions
+	ePipelineVariableDeclaration                                smithy.SchemaExtensions
+	ePipelineVariableDeclaration_name                           smithy.SchemaExtensions
+	ePipelineVariableDeclaration_defaultValue                   smithy.SchemaExtensions
+	ePipelineVariableDeclaration_description                    smithy.SchemaExtensions
+	e_PipelineVariableDeclarationList                           smithy.SchemaExtensions
+	e_PipelineVariableDeclarationList_member                    smithy.SchemaExtensions
+	e_PipelineVariableDescription                               smithy.SchemaExtensions
+	e_PipelineVariableList                                      smithy.SchemaExtensions
+	e_PipelineVariableList_member                               smithy.SchemaExtensions
+	e_PipelineVariableName                                      smithy.SchemaExtensions
+	e_PipelineVariableValue                                     smithy.SchemaExtensions
+	e_PipelineVersion                                           smithy.SchemaExtensions
+	ePipelineVersionNotFoundException                           smithy.SchemaExtensions
+	ePipelineVersionNotFoundException_message                   smithy.SchemaExtensions
+	e_PolicyStatementsTemplate                                  smithy.SchemaExtensions
+	e_PollingAccountList                                        smithy.SchemaExtensions
+	e_PollingAccountList_member                                 smithy.SchemaExtensions
+	e_PollingServicePrincipalList                               smithy.SchemaExtensions
+	e_PollingServicePrincipalList_member                        smithy.SchemaExtensions
+	e_PropertyDescription                                       smithy.SchemaExtensions
+	e_QueryParamMap                                             smithy.SchemaExtensions
+	e_QueryParamMap_key                                         smithy.SchemaExtensions
+	e_QueryParamMap_value                                       smithy.SchemaExtensions
+	eRequestFailedException                                     smithy.SchemaExtensions
+	eRequestFailedException_message                             smithy.SchemaExtensions
+	e_ResolvedActionConfigurationMap                            smithy.SchemaExtensions
+	e_ResolvedActionConfigurationMap_key                        smithy.SchemaExtensions
+	e_ResolvedActionConfigurationMap_value                      smithy.SchemaExtensions
+	eResolvedPipelineVariable                                   smithy.SchemaExtensions
+	eResolvedPipelineVariable_name                              smithy.SchemaExtensions
+	eResolvedPipelineVariable_resolvedValue                     smithy.SchemaExtensions
+	e_ResolvedPipelineVariableList                              smithy.SchemaExtensions
+	e_ResolvedPipelineVariableList_member                       smithy.SchemaExtensions
+	e_ResolvedRuleConfigurationMap                              smithy.SchemaExtensions
+	e_ResolvedRuleConfigurationMap_key                          smithy.SchemaExtensions
+	e_ResolvedRuleConfigurationMap_value                        smithy.SchemaExtensions
+	e_ResourceArn                                               smithy.SchemaExtensions
+	eResourceNotFoundException                                  smithy.SchemaExtensions
+	eResourceNotFoundException_message                          smithy.SchemaExtensions
+	eResult                                                     smithy.SchemaExtensions
+	eResult_ROLLBACK                                            smithy.SchemaExtensions
+	eResult_FAIL                                                smithy.SchemaExtensions
+	eResult_RETRY                                               smithy.SchemaExtensions
+	eResult_SKIP                                                smithy.SchemaExtensions
+	e_RetryAttempt                                              smithy.SchemaExtensions
+	eRetryConfiguration                                         smithy.SchemaExtensions
+	eRetryConfiguration_retryMode                               smithy.SchemaExtensions
+	eRetryStageMetadata                                         smithy.SchemaExtensions
+	eRetryStageMetadata_autoStageRetryAttempt                   smithy.SchemaExtensions
+	eRetryStageMetadata_manualStageRetryAttempt                 smithy.SchemaExtensions
+	eRetryStageMetadata_latestRetryTrigger                      smithy.SchemaExtensions
+	eRetryTrigger                                               smithy.SchemaExtensions
+	eRetryTrigger_AutomatedStageRetry                           smithy.SchemaExtensions
+	eRetryTrigger_ManualStageRetry                              smithy.SchemaExtensions
+	e_Revision                                                  smithy.SchemaExtensions
+	e_RevisionChangeIdentifier                                  smithy.SchemaExtensions
+	e_RevisionSummary                                           smithy.SchemaExtensions
+	e_RoleArn                                                   smithy.SchemaExtensions
+	eRuleCategory                                               smithy.SchemaExtensions
+	eRuleCategory_Rule                                          smithy.SchemaExtensions
+	e_RuleConfigurationKey                                      smithy.SchemaExtensions
+	e_RuleConfigurationMap                                      smithy.SchemaExtensions
+	e_RuleConfigurationMap_key                                  smithy.SchemaExtensions
+	e_RuleConfigurationMap_value                                smithy.SchemaExtensions
+	eRuleConfigurationProperty                                  smithy.SchemaExtensions
+	eRuleConfigurationProperty_name                             smithy.SchemaExtensions
+	eRuleConfigurationProperty_required                         smithy.SchemaExtensions
+	eRuleConfigurationProperty_key                              smithy.SchemaExtensions
+	eRuleConfigurationProperty_secret                           smithy.SchemaExtensions
+	eRuleConfigurationProperty_queryable                        smithy.SchemaExtensions
+	eRuleConfigurationProperty_description                      smithy.SchemaExtensions
+	eRuleConfigurationProperty_type                             smithy.SchemaExtensions
+	e_RuleConfigurationPropertyList                             smithy.SchemaExtensions
+	e_RuleConfigurationPropertyList_member                      smithy.SchemaExtensions
+	eRuleConfigurationPropertyType                              smithy.SchemaExtensions
+	eRuleConfigurationPropertyType_String                       smithy.SchemaExtensions
+	eRuleConfigurationPropertyType_Number                       smithy.SchemaExtensions
+	eRuleConfigurationPropertyType_Boolean                      smithy.SchemaExtensions
+	e_RuleConfigurationValue                                    smithy.SchemaExtensions
+	eRuleDeclaration                                            smithy.SchemaExtensions
+	eRuleDeclaration_name                                       smithy.SchemaExtensions
+	eRuleDeclaration_ruleTypeId                                 smithy.SchemaExtensions
+	eRuleDeclaration_configuration                              smithy.SchemaExtensions
+	eRuleDeclaration_commands                                   smithy.SchemaExtensions
+	eRuleDeclaration_inputArtifacts                             smithy.SchemaExtensions
+	eRuleDeclaration_roleArn                                    smithy.SchemaExtensions
+	eRuleDeclaration_region                                     smithy.SchemaExtensions
+	eRuleDeclaration_timeoutInMinutes                           smithy.SchemaExtensions
+	e_RuleDeclarationList                                       smithy.SchemaExtensions
+	e_RuleDeclarationList_member                                smithy.SchemaExtensions
+	eRuleExecution                                              smithy.SchemaExtensions
+	eRuleExecution_ruleExecutionId                              smithy.SchemaExtensions
+	eRuleExecution_status                                       smithy.SchemaExtensions
+	eRuleExecution_summary                                      smithy.SchemaExtensions
+	eRuleExecution_lastStatusChange                             smithy.SchemaExtensions
+	eRuleExecution_token                                        smithy.SchemaExtensions
+	eRuleExecution_lastUpdatedBy                                smithy.SchemaExtensions
+	eRuleExecution_externalExecutionId                          smithy.SchemaExtensions
+	eRuleExecution_externalExecutionUrl                         smithy.SchemaExtensions
+	eRuleExecution_errorDetails                                 smithy.SchemaExtensions
+	eRuleExecutionDetail                                        smithy.SchemaExtensions
+	eRuleExecutionDetail_pipelineExecutionId                    smithy.SchemaExtensions
+	eRuleExecutionDetail_ruleExecutionId                        smithy.SchemaExtensions
+	eRuleExecutionDetail_pipelineVersion                        smithy.SchemaExtensions
+	eRuleExecutionDetail_stageName                              smithy.SchemaExtensions
+	eRuleExecutionDetail_ruleName                               smithy.SchemaExtensions
+	eRuleExecutionDetail_startTime                              smithy.SchemaExtensions
+	eRuleExecutionDetail_lastUpdateTime                         smithy.SchemaExtensions
+	eRuleExecutionDetail_updatedBy                              smithy.SchemaExtensions
+	eRuleExecutionDetail_status                                 smithy.SchemaExtensions
+	eRuleExecutionDetail_input                                  smithy.SchemaExtensions
+	eRuleExecutionDetail_output                                 smithy.SchemaExtensions
+	e_RuleExecutionDetailList                                   smithy.SchemaExtensions
+	e_RuleExecutionDetailList_member                            smithy.SchemaExtensions
+	eRuleExecutionFilter                                        smithy.SchemaExtensions
+	eRuleExecutionFilter_pipelineExecutionId                    smithy.SchemaExtensions
+	eRuleExecutionFilter_latestInPipelineExecution              smithy.SchemaExtensions
+	e_RuleExecutionId                                           smithy.SchemaExtensions
+	eRuleExecutionInput                                         smithy.SchemaExtensions
+	eRuleExecutionInput_ruleTypeId                              smithy.SchemaExtensions
+	eRuleExecutionInput_configuration                           smithy.SchemaExtensions
+	eRuleExecutionInput_resolvedConfiguration                   smithy.SchemaExtensions
+	eRuleExecutionInput_roleArn                                 smithy.SchemaExtensions
+	eRuleExecutionInput_region                                  smithy.SchemaExtensions
+	eRuleExecutionInput_inputArtifacts                          smithy.SchemaExtensions
+	eRuleExecutionOutput                                        smithy.SchemaExtensions
+	eRuleExecutionOutput_executionResult                        smithy.SchemaExtensions
+	eRuleExecutionResult                                        smithy.SchemaExtensions
+	eRuleExecutionResult_externalExecutionId                    smithy.SchemaExtensions
+	eRuleExecutionResult_externalExecutionSummary               smithy.SchemaExtensions
+	eRuleExecutionResult_externalExecutionUrl                   smithy.SchemaExtensions
+	eRuleExecutionResult_errorDetails                           smithy.SchemaExtensions
+	eRuleExecutionStatus                                        smithy.SchemaExtensions
+	eRuleExecutionStatus_InProgress                             smithy.SchemaExtensions
+	eRuleExecutionStatus_Abandoned                              smithy.SchemaExtensions
+	eRuleExecutionStatus_Succeeded                              smithy.SchemaExtensions
+	eRuleExecutionStatus_Failed                                 smithy.SchemaExtensions
+	e_RuleExecutionToken                                        smithy.SchemaExtensions
+	e_RuleName                                                  smithy.SchemaExtensions
+	eRuleOwner                                                  smithy.SchemaExtensions
+	eRuleOwner_AWS                                              smithy.SchemaExtensions
+	e_RuleProvider                                              smithy.SchemaExtensions
+	eRuleRevision                                               smithy.SchemaExtensions
+	eRuleRevision_revisionId                                    smithy.SchemaExtensions
+	eRuleRevision_revisionChangeId                              smithy.SchemaExtensions
+	eRuleRevision_created                                       smithy.SchemaExtensions
+	eRuleState                                                  smithy.SchemaExtensions
+	eRuleState_ruleName                                         smithy.SchemaExtensions
+	eRuleState_currentRevision                                  smithy.SchemaExtensions
+	eRuleState_latestExecution                                  smithy.SchemaExtensions
+	eRuleState_entityUrl                                        smithy.SchemaExtensions
+	eRuleState_revisionUrl                                      smithy.SchemaExtensions
+	e_RuleStateList                                             smithy.SchemaExtensions
+	e_RuleStateList_member                                      smithy.SchemaExtensions
+	e_RuleTimeout                                               smithy.SchemaExtensions
+	eRuleType                                                   smithy.SchemaExtensions
+	eRuleType_id                                                smithy.SchemaExtensions
+	eRuleType_settings                                          smithy.SchemaExtensions
+	eRuleType_ruleConfigurationProperties                       smithy.SchemaExtensions
+	eRuleType_inputArtifactDetails                              smithy.SchemaExtensions
+	eRuleTypeId                                                 smithy.SchemaExtensions
+	eRuleTypeId_category                                        smithy.SchemaExtensions
+	eRuleTypeId_owner                                           smithy.SchemaExtensions
+	eRuleTypeId_provider                                        smithy.SchemaExtensions
+	eRuleTypeId_version                                         smithy.SchemaExtensions
+	e_RuleTypeList                                              smithy.SchemaExtensions
+	e_RuleTypeList_member                                       smithy.SchemaExtensions
+	eRuleTypeSettings                                           smithy.SchemaExtensions
+	eRuleTypeSettings_thirdPartyConfigurationUrl                smithy.SchemaExtensions
+	eRuleTypeSettings_entityUrlTemplate                         smithy.SchemaExtensions
+	eRuleTypeSettings_executionUrlTemplate                      smithy.SchemaExtensions
+	eRuleTypeSettings_revisionUrlTemplate                       smithy.SchemaExtensions
+	eS3ArtifactLocation                                         smithy.SchemaExtensions
+	eS3ArtifactLocation_bucketName                              smithy.SchemaExtensions
+	eS3ArtifactLocation_objectKey                               smithy.SchemaExtensions
+	e_S3Bucket                                                  smithy.SchemaExtensions
+	e_S3BucketName                                              smithy.SchemaExtensions
+	e_S3Key                                                     smithy.SchemaExtensions
+	eS3Location                                                 smithy.SchemaExtensions
+	eS3Location_bucket                                          smithy.SchemaExtensions
+	eS3Location_key                                             smithy.SchemaExtensions
+	e_S3ObjectKey                                               smithy.SchemaExtensions
+	e_SecretAccessKey                                           smithy.SchemaExtensions
+	e_ServicePrincipal                                          smithy.SchemaExtensions
+	e_SessionToken                                              smithy.SchemaExtensions
+	eSourceRevision                                             smithy.SchemaExtensions
+	eSourceRevision_actionName                                  smithy.SchemaExtensions
+	eSourceRevision_revisionId                                  smithy.SchemaExtensions
+	eSourceRevision_revisionSummary                             smithy.SchemaExtensions
+	eSourceRevision_revisionUrl                                 smithy.SchemaExtensions
+	e_SourceRevisionList                                        smithy.SchemaExtensions
+	e_SourceRevisionList_member                                 smithy.SchemaExtensions
+	eSourceRevisionOverride                                     smithy.SchemaExtensions
+	eSourceRevisionOverride_actionName                          smithy.SchemaExtensions
+	eSourceRevisionOverride_revisionType                        smithy.SchemaExtensions
+	eSourceRevisionOverride_revisionValue                       smithy.SchemaExtensions
+	e_SourceRevisionOverrideList                                smithy.SchemaExtensions
+	e_SourceRevisionOverrideList_member                         smithy.SchemaExtensions
+	eSourceRevisionType                                         smithy.SchemaExtensions
+	eSourceRevisionType_COMMIT_ID                               smithy.SchemaExtensions
+	eSourceRevisionType_IMAGE_DIGEST                            smithy.SchemaExtensions
+	eSourceRevisionType_S3_OBJECT_VERSION_ID                    smithy.SchemaExtensions
+	eSourceRevisionType_S3_OBJECT_KEY                           smithy.SchemaExtensions
+	e_StageActionDeclarationList                                smithy.SchemaExtensions
+	e_StageActionDeclarationList_member                         smithy.SchemaExtensions
+	e_StageBlockerDeclarationList                               smithy.SchemaExtensions
+	e_StageBlockerDeclarationList_member                        smithy.SchemaExtensions
+	eStageConditionsExecution                                   smithy.SchemaExtensions
+	eStageConditionsExecution_status                            smithy.SchemaExtensions
+	eStageConditionsExecution_summary                           smithy.SchemaExtensions
+	eStageConditionState                                        smithy.SchemaExtensions
+	eStageConditionState_latestExecution                        smithy.SchemaExtensions
+	eStageConditionState_conditionStates                        smithy.SchemaExtensions
+	eStageContext                                               smithy.SchemaExtensions
+	eStageContext_name                                          smithy.SchemaExtensions
+	eStageDeclaration                                           smithy.SchemaExtensions
+	eStageDeclaration_name                                      smithy.SchemaExtensions
+	eStageDeclaration_blockers                                  smithy.SchemaExtensions
+	eStageDeclaration_actions                                   smithy.SchemaExtensions
+	eStageDeclaration_onFailure                                 smithy.SchemaExtensions
+	eStageDeclaration_onSuccess                                 smithy.SchemaExtensions
+	eStageDeclaration_beforeEntry                               smithy.SchemaExtensions
+	eStageExecution                                             smithy.SchemaExtensions
+	eStageExecution_pipelineExecutionId                         smithy.SchemaExtensions
+	eStageExecution_status                                      smithy.SchemaExtensions
+	eStageExecution_type                                        smithy.SchemaExtensions
+	e_StageExecutionList                                        smithy.SchemaExtensions
+	e_StageExecutionList_member                                 smithy.SchemaExtensions
+	eStageExecutionStatus                                       smithy.SchemaExtensions
+	eStageExecutionStatus_Cancelled                             smithy.SchemaExtensions
+	eStageExecutionStatus_InProgress                            smithy.SchemaExtensions
+	eStageExecutionStatus_Failed                                smithy.SchemaExtensions
+	eStageExecutionStatus_Stopped                               smithy.SchemaExtensions
+	eStageExecutionStatus_Stopping                              smithy.SchemaExtensions
+	eStageExecutionStatus_Succeeded                             smithy.SchemaExtensions
+	eStageExecutionStatus_Skipped                               smithy.SchemaExtensions
+	e_StageName                                                 smithy.SchemaExtensions
+	eStageNotFoundException                                     smithy.SchemaExtensions
+	eStageNotFoundException_message                             smithy.SchemaExtensions
+	eStageNotRetryableException                                 smithy.SchemaExtensions
+	eStageNotRetryableException_message                         smithy.SchemaExtensions
+	eStageRetryMode                                             smithy.SchemaExtensions
+	eStageRetryMode_FAILED_ACTIONS                              smithy.SchemaExtensions
+	eStageRetryMode_ALL_ACTIONS                                 smithy.SchemaExtensions
+	eStageState                                                 smithy.SchemaExtensions
+	eStageState_stageName                                       smithy.SchemaExtensions
+	eStageState_inboundExecution                                smithy.SchemaExtensions
+	eStageState_inboundExecutions                               smithy.SchemaExtensions
+	eStageState_inboundTransitionState                          smithy.SchemaExtensions
+	eStageState_actionStates                                    smithy.SchemaExtensions
+	eStageState_latestExecution                                 smithy.SchemaExtensions
+	eStageState_beforeEntryConditionState                       smithy.SchemaExtensions
+	eStageState_onSuccessConditionState                         smithy.SchemaExtensions
+	eStageState_onFailureConditionState                         smithy.SchemaExtensions
+	eStageState_retryStageMetadata                              smithy.SchemaExtensions
+	e_StageStateList                                            smithy.SchemaExtensions
+	e_StageStateList_member                                     smithy.SchemaExtensions
+	eStageTransitionType                                        smithy.SchemaExtensions
+	eStageTransitionType_Inbound                                smithy.SchemaExtensions
+	eStageTransitionType_Outbound                               smithy.SchemaExtensions
+	eStartTimeRange                                             smithy.SchemaExtensions
+	eStartTimeRange_Latest                                      smithy.SchemaExtensions
+	eStartTimeRange_All                                         smithy.SchemaExtensions
+	eStopExecutionTrigger                                       smithy.SchemaExtensions
+	eStopExecutionTrigger_reason                                smithy.SchemaExtensions
+	e_StopPipelineExecutionReason                               smithy.SchemaExtensions
+	e_String                                                    smithy.SchemaExtensions
+	eSucceededInStageFilter                                     smithy.SchemaExtensions
+	eSucceededInStageFilter_stageName                           smithy.SchemaExtensions
+	eSuccessConditions                                          smithy.SchemaExtensions
+	eSuccessConditions_conditions                               smithy.SchemaExtensions
+	eTag                                                        smithy.SchemaExtensions
+	eTag_key                                                    smithy.SchemaExtensions
+	eTag_value                                                  smithy.SchemaExtensions
+	e_TagKey                                                    smithy.SchemaExtensions
+	e_TagKeyList                                                smithy.SchemaExtensions
+	e_TagKeyList_member                                         smithy.SchemaExtensions
+	e_TagList                                                   smithy.SchemaExtensions
+	e_TagList_member                                            smithy.SchemaExtensions
+	e_TagValue                                                  smithy.SchemaExtensions
+	eTargetFilter                                               smithy.SchemaExtensions
+	eTargetFilter_name                                          smithy.SchemaExtensions
+	eTargetFilter_values                                        smithy.SchemaExtensions
+	e_TargetFilterList                                          smithy.SchemaExtensions
+	e_TargetFilterList_member                                   smithy.SchemaExtensions
+	eTargetFilterName                                           smithy.SchemaExtensions
+	eTargetFilterName_TARGET_STATUS                             smithy.SchemaExtensions
+	e_TargetFilterValue                                         smithy.SchemaExtensions
+	e_TargetFilterValueList                                     smithy.SchemaExtensions
+	e_TargetFilterValueList_member                              smithy.SchemaExtensions
+	eThirdPartyJob                                              smithy.SchemaExtensions
+	eThirdPartyJob_clientId                                     smithy.SchemaExtensions
+	eThirdPartyJob_jobId                                        smithy.SchemaExtensions
+	eThirdPartyJobData                                          smithy.SchemaExtensions
+	eThirdPartyJobData_actionTypeId                             smithy.SchemaExtensions
+	eThirdPartyJobData_actionConfiguration                      smithy.SchemaExtensions
+	eThirdPartyJobData_pipelineContext                          smithy.SchemaExtensions
+	eThirdPartyJobData_inputArtifacts                           smithy.SchemaExtensions
+	eThirdPartyJobData_outputArtifacts                          smithy.SchemaExtensions
+	eThirdPartyJobData_artifactCredentials                      smithy.SchemaExtensions
+	eThirdPartyJobData_continuationToken                        smithy.SchemaExtensions
+	eThirdPartyJobData_encryptionKey                            smithy.SchemaExtensions
+	eThirdPartyJobDetails                                       smithy.SchemaExtensions
+	eThirdPartyJobDetails_id                                    smithy.SchemaExtensions
+	eThirdPartyJobDetails_data                                  smithy.SchemaExtensions
+	eThirdPartyJobDetails_nonce                                 smithy.SchemaExtensions
+	e_ThirdPartyJobId                                           smithy.SchemaExtensions
+	e_ThirdPartyJobList                                         smithy.SchemaExtensions
+	e_ThirdPartyJobList_member                                  smithy.SchemaExtensions
+	e_Time                                                      smithy.SchemaExtensions
+	e_Timestamp                                                 smithy.SchemaExtensions
+	eTooManyTagsException                                       smithy.SchemaExtensions
+	eTooManyTagsException_message                               smithy.SchemaExtensions
+	eTransitionState                                            smithy.SchemaExtensions
+	eTransitionState_enabled                                    smithy.SchemaExtensions
+	eTransitionState_lastChangedBy                              smithy.SchemaExtensions
+	eTransitionState_lastChangedAt                              smithy.SchemaExtensions
+	eTransitionState_disabledReason                             smithy.SchemaExtensions
+	e_TriggerDetail                                             smithy.SchemaExtensions
+	eTriggerType                                                smithy.SchemaExtensions
+	eTriggerType_CreatePipeline                                 smithy.SchemaExtensions
+	eTriggerType_StartPipelineExecution                         smithy.SchemaExtensions
+	eTriggerType_PollForSourceChanges                           smithy.SchemaExtensions
+	eTriggerType_Webhook                                        smithy.SchemaExtensions
+	eTriggerType_CloudWatchEvent                                smithy.SchemaExtensions
+	eTriggerType_PutActionRevision                              smithy.SchemaExtensions
+	eTriggerType_WebhookV2                                      smithy.SchemaExtensions
+	eTriggerType_ManualRollback                                 smithy.SchemaExtensions
+	eTriggerType_AutomatedRollback                              smithy.SchemaExtensions
+	eUnableToRollbackStageException                             smithy.SchemaExtensions
+	eUnableToRollbackStageException_message                     smithy.SchemaExtensions
+	e_Url                                                       smithy.SchemaExtensions
+	e_UrlTemplate                                               smithy.SchemaExtensions
+	eValidationException                                        smithy.SchemaExtensions
+	eValidationException_message                                smithy.SchemaExtensions
+	e_Version                                                   smithy.SchemaExtensions
+	e_WebhookArn                                                smithy.SchemaExtensions
+	eWebhookAuthConfiguration                                   smithy.SchemaExtensions
+	eWebhookAuthConfiguration_AllowedIPRange                    smithy.SchemaExtensions
+	eWebhookAuthConfiguration_SecretToken                       smithy.SchemaExtensions
+	e_WebhookAuthConfigurationAllowedIPRange                    smithy.SchemaExtensions
+	e_WebhookAuthConfigurationSecretToken                       smithy.SchemaExtensions
+	eWebhookAuthenticationType                                  smithy.SchemaExtensions
+	eWebhookAuthenticationType_GITHUB_HMAC                      smithy.SchemaExtensions
+	eWebhookAuthenticationType_IP                               smithy.SchemaExtensions
+	eWebhookAuthenticationType_UNAUTHENTICATED                  smithy.SchemaExtensions
+	eWebhookDefinition                                          smithy.SchemaExtensions
+	eWebhookDefinition_name                                     smithy.SchemaExtensions
+	eWebhookDefinition_targetPipeline                           smithy.SchemaExtensions
+	eWebhookDefinition_targetAction                             smithy.SchemaExtensions
+	eWebhookDefinition_filters                                  smithy.SchemaExtensions
+	eWebhookDefinition_authentication                           smithy.SchemaExtensions
+	eWebhookDefinition_authenticationConfiguration              smithy.SchemaExtensions
+	e_WebhookErrorCode                                          smithy.SchemaExtensions
+	e_WebhookErrorMessage                                       smithy.SchemaExtensions
+	eWebhookFilterRule                                          smithy.SchemaExtensions
+	eWebhookFilterRule_jsonPath                                 smithy.SchemaExtensions
+	eWebhookFilterRule_matchEquals                              smithy.SchemaExtensions
+	e_WebhookFilters                                            smithy.SchemaExtensions
+	e_WebhookFilters_member                                     smithy.SchemaExtensions
+	e_WebhookLastTriggered                                      smithy.SchemaExtensions
+	e_WebhookList                                               smithy.SchemaExtensions
+	e_WebhookList_member                                        smithy.SchemaExtensions
+	e_WebhookName                                               smithy.SchemaExtensions
+	eWebhookNotFoundException                                   smithy.SchemaExtensions
+	e_WebhookUrl                                                smithy.SchemaExtensions
+	eAcknowledgeJobInput                                        smithy.SchemaExtensions
+	eAcknowledgeJobInput_jobId                                  smithy.SchemaExtensions
+	eAcknowledgeJobInput_nonce                                  smithy.SchemaExtensions
+	eAcknowledgeJobOutput                                       smithy.SchemaExtensions
+	eAcknowledgeJobOutput_status                                smithy.SchemaExtensions
+	eAcknowledgeThirdPartyJobInput                              smithy.SchemaExtensions
+	eAcknowledgeThirdPartyJobInput_jobId                        smithy.SchemaExtensions
+	eAcknowledgeThirdPartyJobInput_nonce                        smithy.SchemaExtensions
+	eAcknowledgeThirdPartyJobInput_clientToken                  smithy.SchemaExtensions
+	eAcknowledgeThirdPartyJobOutput                             smithy.SchemaExtensions
+	eAcknowledgeThirdPartyJobOutput_status                      smithy.SchemaExtensions
+	eCreateCustomActionTypeInput                                smithy.SchemaExtensions
+	eCreateCustomActionTypeInput_category                       smithy.SchemaExtensions
+	eCreateCustomActionTypeInput_provider                       smithy.SchemaExtensions
+	eCreateCustomActionTypeInput_version                        smithy.SchemaExtensions
+	eCreateCustomActionTypeInput_settings                       smithy.SchemaExtensions
+	eCreateCustomActionTypeInput_configurationProperties        smithy.SchemaExtensions
+	eCreateCustomActionTypeInput_inputArtifactDetails           smithy.SchemaExtensions
+	eCreateCustomActionTypeInput_outputArtifactDetails          smithy.SchemaExtensions
+	eCreateCustomActionTypeInput_tags                           smithy.SchemaExtensions
+	eCreateCustomActionTypeOutput                               smithy.SchemaExtensions
+	eCreateCustomActionTypeOutput_actionType                    smithy.SchemaExtensions
+	eCreateCustomActionTypeOutput_tags                          smithy.SchemaExtensions
+	eCreatePipelineInput                                        smithy.SchemaExtensions
+	eCreatePipelineInput_pipeline                               smithy.SchemaExtensions
+	eCreatePipelineInput_tags                                   smithy.SchemaExtensions
+	eCreatePipelineOutput                                       smithy.SchemaExtensions
+	eCreatePipelineOutput_pipeline                              smithy.SchemaExtensions
+	eCreatePipelineOutput_tags                                  smithy.SchemaExtensions
+	eDeleteCustomActionTypeInput                                smithy.SchemaExtensions
+	eDeleteCustomActionTypeInput_category                       smithy.SchemaExtensions
+	eDeleteCustomActionTypeInput_provider                       smithy.SchemaExtensions
+	eDeleteCustomActionTypeInput_version                        smithy.SchemaExtensions
+	eDeletePipelineInput                                        smithy.SchemaExtensions
+	eDeletePipelineInput_name                                   smithy.SchemaExtensions
+	eDeleteWebhookInput                                         smithy.SchemaExtensions
+	eDeleteWebhookInput_name                                    smithy.SchemaExtensions
+	eDeleteWebhookOutput                                        smithy.SchemaExtensions
+	eDeregisterWebhookWithThirdPartyInput                       smithy.SchemaExtensions
+	eDeregisterWebhookWithThirdPartyInput_webhookName           smithy.SchemaExtensions
+	eDeregisterWebhookWithThirdPartyOutput                      smithy.SchemaExtensions
+	eDisableStageTransitionInput                                smithy.SchemaExtensions
+	eDisableStageTransitionInput_pipelineName                   smithy.SchemaExtensions
+	eDisableStageTransitionInput_stageName                      smithy.SchemaExtensions
+	eDisableStageTransitionInput_transitionType                 smithy.SchemaExtensions
+	eDisableStageTransitionInput_reason                         smithy.SchemaExtensions
+	eEnableStageTransitionInput                                 smithy.SchemaExtensions
+	eEnableStageTransitionInput_pipelineName                    smithy.SchemaExtensions
+	eEnableStageTransitionInput_stageName                       smithy.SchemaExtensions
+	eEnableStageTransitionInput_transitionType                  smithy.SchemaExtensions
+	eGetActionTypeInput                                         smithy.SchemaExtensions
+	eGetActionTypeInput_category                                smithy.SchemaExtensions
+	eGetActionTypeInput_owner                                   smithy.SchemaExtensions
+	eGetActionTypeInput_provider                                smithy.SchemaExtensions
+	eGetActionTypeInput_version                                 smithy.SchemaExtensions
+	eGetActionTypeOutput                                        smithy.SchemaExtensions
+	eGetActionTypeOutput_actionType                             smithy.SchemaExtensions
+	eGetJobDetailsInput                                         smithy.SchemaExtensions
+	eGetJobDetailsInput_jobId                                   smithy.SchemaExtensions
+	eGetJobDetailsOutput                                        smithy.SchemaExtensions
+	eGetJobDetailsOutput_jobDetails                             smithy.SchemaExtensions
+	eGetPipelineExecutionInput                                  smithy.SchemaExtensions
+	eGetPipelineExecutionInput_pipelineName                     smithy.SchemaExtensions
+	eGetPipelineExecutionInput_pipelineExecutionId              smithy.SchemaExtensions
+	eGetPipelineExecutionOutput                                 smithy.SchemaExtensions
+	eGetPipelineExecutionOutput_pipelineExecution               smithy.SchemaExtensions
+	eGetPipelineInput                                           smithy.SchemaExtensions
+	eGetPipelineInput_name                                      smithy.SchemaExtensions
+	eGetPipelineInput_version                                   smithy.SchemaExtensions
+	eGetPipelineOutput                                          smithy.SchemaExtensions
+	eGetPipelineOutput_pipeline                                 smithy.SchemaExtensions
+	eGetPipelineOutput_metadata                                 smithy.SchemaExtensions
+	eGetPipelineStateInput                                      smithy.SchemaExtensions
+	eGetPipelineStateInput_name                                 smithy.SchemaExtensions
+	eGetPipelineStateOutput                                     smithy.SchemaExtensions
+	eGetPipelineStateOutput_pipelineName                        smithy.SchemaExtensions
+	eGetPipelineStateOutput_pipelineVersion                     smithy.SchemaExtensions
+	eGetPipelineStateOutput_stageStates                         smithy.SchemaExtensions
+	eGetPipelineStateOutput_created                             smithy.SchemaExtensions
+	eGetPipelineStateOutput_updated                             smithy.SchemaExtensions
+	eGetThirdPartyJobDetailsInput                               smithy.SchemaExtensions
+	eGetThirdPartyJobDetailsInput_jobId                         smithy.SchemaExtensions
+	eGetThirdPartyJobDetailsInput_clientToken                   smithy.SchemaExtensions
+	eGetThirdPartyJobDetailsOutput                              smithy.SchemaExtensions
+	eGetThirdPartyJobDetailsOutput_jobDetails                   smithy.SchemaExtensions
+	eListActionExecutionsInput                                  smithy.SchemaExtensions
+	eListActionExecutionsInput_pipelineName                     smithy.SchemaExtensions
+	eListActionExecutionsInput_filter                           smithy.SchemaExtensions
+	eListActionExecutionsInput_maxResults                       smithy.SchemaExtensions
+	eListActionExecutionsInput_nextToken                        smithy.SchemaExtensions
+	eListActionExecutionsOutput                                 smithy.SchemaExtensions
+	eListActionExecutionsOutput_actionExecutionDetails          smithy.SchemaExtensions
+	eListActionExecutionsOutput_nextToken                       smithy.SchemaExtensions
+	eListActionTypesInput                                       smithy.SchemaExtensions
+	eListActionTypesInput_actionOwnerFilter                     smithy.SchemaExtensions
+	eListActionTypesInput_nextToken                             smithy.SchemaExtensions
+	eListActionTypesInput_regionFilter                          smithy.SchemaExtensions
+	eListActionTypesOutput                                      smithy.SchemaExtensions
+	eListActionTypesOutput_actionTypes                          smithy.SchemaExtensions
+	eListActionTypesOutput_nextToken                            smithy.SchemaExtensions
+	eListDeployActionExecutionTargetsInput                      smithy.SchemaExtensions
+	eListDeployActionExecutionTargetsInput_pipelineName         smithy.SchemaExtensions
+	eListDeployActionExecutionTargetsInput_actionExecutionId    smithy.SchemaExtensions
+	eListDeployActionExecutionTargetsInput_filters              smithy.SchemaExtensions
+	eListDeployActionExecutionTargetsInput_maxResults           smithy.SchemaExtensions
+	eListDeployActionExecutionTargetsInput_nextToken            smithy.SchemaExtensions
+	eListDeployActionExecutionTargetsOutput                     smithy.SchemaExtensions
+	eListDeployActionExecutionTargetsOutput_targets             smithy.SchemaExtensions
+	eListDeployActionExecutionTargetsOutput_nextToken           smithy.SchemaExtensions
+	eListPipelineExecutionsInput                                smithy.SchemaExtensions
+	eListPipelineExecutionsInput_pipelineName                   smithy.SchemaExtensions
+	eListPipelineExecutionsInput_maxResults                     smithy.SchemaExtensions
+	eListPipelineExecutionsInput_filter                         smithy.SchemaExtensions
+	eListPipelineExecutionsInput_nextToken                      smithy.SchemaExtensions
+	eListPipelineExecutionsOutput                               smithy.SchemaExtensions
+	eListPipelineExecutionsOutput_pipelineExecutionSummaries    smithy.SchemaExtensions
+	eListPipelineExecutionsOutput_nextToken                     smithy.SchemaExtensions
+	eListPipelinesInput                                         smithy.SchemaExtensions
+	eListPipelinesInput_nextToken                               smithy.SchemaExtensions
+	eListPipelinesInput_maxResults                              smithy.SchemaExtensions
+	eListPipelinesOutput                                        smithy.SchemaExtensions
+	eListPipelinesOutput_pipelines                              smithy.SchemaExtensions
+	eListPipelinesOutput_nextToken                              smithy.SchemaExtensions
+	eListRuleExecutionsInput                                    smithy.SchemaExtensions
+	eListRuleExecutionsInput_pipelineName                       smithy.SchemaExtensions
+	eListRuleExecutionsInput_filter                             smithy.SchemaExtensions
+	eListRuleExecutionsInput_maxResults                         smithy.SchemaExtensions
+	eListRuleExecutionsInput_nextToken                          smithy.SchemaExtensions
+	eListRuleExecutionsOutput                                   smithy.SchemaExtensions
+	eListRuleExecutionsOutput_ruleExecutionDetails              smithy.SchemaExtensions
+	eListRuleExecutionsOutput_nextToken                         smithy.SchemaExtensions
+	eListRuleTypesInput                                         smithy.SchemaExtensions
+	eListRuleTypesInput_ruleOwnerFilter                         smithy.SchemaExtensions
+	eListRuleTypesInput_regionFilter                            smithy.SchemaExtensions
+	eListRuleTypesOutput                                        smithy.SchemaExtensions
+	eListRuleTypesOutput_ruleTypes                              smithy.SchemaExtensions
+	eListTagsForResourceInput                                   smithy.SchemaExtensions
+	eListTagsForResourceInput_resourceArn                       smithy.SchemaExtensions
+	eListTagsForResourceInput_nextToken                         smithy.SchemaExtensions
+	eListTagsForResourceInput_maxResults                        smithy.SchemaExtensions
+	eListTagsForResourceOutput                                  smithy.SchemaExtensions
+	eListTagsForResourceOutput_tags                             smithy.SchemaExtensions
+	eListTagsForResourceOutput_nextToken                        smithy.SchemaExtensions
+	eListWebhooksInput                                          smithy.SchemaExtensions
+	eListWebhooksInput_NextToken                                smithy.SchemaExtensions
+	eListWebhooksInput_MaxResults                               smithy.SchemaExtensions
+	eListWebhooksOutput                                         smithy.SchemaExtensions
+	eListWebhooksOutput_webhooks                                smithy.SchemaExtensions
+	eListWebhooksOutput_NextToken                               smithy.SchemaExtensions
+	eOverrideStageConditionInput                                smithy.SchemaExtensions
+	eOverrideStageConditionInput_pipelineName                   smithy.SchemaExtensions
+	eOverrideStageConditionInput_stageName                      smithy.SchemaExtensions
+	eOverrideStageConditionInput_pipelineExecutionId            smithy.SchemaExtensions
+	eOverrideStageConditionInput_conditionType                  smithy.SchemaExtensions
+	ePollForJobsInput                                           smithy.SchemaExtensions
+	ePollForJobsInput_actionTypeId                              smithy.SchemaExtensions
+	ePollForJobsInput_maxBatchSize                              smithy.SchemaExtensions
+	ePollForJobsInput_queryParam                                smithy.SchemaExtensions
+	ePollForJobsOutput                                          smithy.SchemaExtensions
+	ePollForJobsOutput_jobs                                     smithy.SchemaExtensions
+	ePollForThirdPartyJobsInput                                 smithy.SchemaExtensions
+	ePollForThirdPartyJobsInput_actionTypeId                    smithy.SchemaExtensions
+	ePollForThirdPartyJobsInput_maxBatchSize                    smithy.SchemaExtensions
+	ePollForThirdPartyJobsOutput                                smithy.SchemaExtensions
+	ePollForThirdPartyJobsOutput_jobs                           smithy.SchemaExtensions
+	ePutActionRevisionInput                                     smithy.SchemaExtensions
+	ePutActionRevisionInput_pipelineName                        smithy.SchemaExtensions
+	ePutActionRevisionInput_stageName                           smithy.SchemaExtensions
+	ePutActionRevisionInput_actionName                          smithy.SchemaExtensions
+	ePutActionRevisionInput_actionRevision                      smithy.SchemaExtensions
+	ePutActionRevisionOutput                                    smithy.SchemaExtensions
+	ePutActionRevisionOutput_newRevision                        smithy.SchemaExtensions
+	ePutActionRevisionOutput_pipelineExecutionId                smithy.SchemaExtensions
+	ePutApprovalResultInput                                     smithy.SchemaExtensions
+	ePutApprovalResultInput_pipelineName                        smithy.SchemaExtensions
+	ePutApprovalResultInput_stageName                           smithy.SchemaExtensions
+	ePutApprovalResultInput_actionName                          smithy.SchemaExtensions
+	ePutApprovalResultInput_result                              smithy.SchemaExtensions
+	ePutApprovalResultInput_token                               smithy.SchemaExtensions
+	ePutApprovalResultOutput                                    smithy.SchemaExtensions
+	ePutApprovalResultOutput_approvedAt                         smithy.SchemaExtensions
+	ePutJobFailureResultInput                                   smithy.SchemaExtensions
+	ePutJobFailureResultInput_jobId                             smithy.SchemaExtensions
+	ePutJobFailureResultInput_failureDetails                    smithy.SchemaExtensions
+	ePutJobSuccessResultInput                                   smithy.SchemaExtensions
+	ePutJobSuccessResultInput_jobId                             smithy.SchemaExtensions
+	ePutJobSuccessResultInput_currentRevision                   smithy.SchemaExtensions
+	ePutJobSuccessResultInput_continuationToken                 smithy.SchemaExtensions
+	ePutJobSuccessResultInput_executionDetails                  smithy.SchemaExtensions
+	ePutJobSuccessResultInput_outputVariables                   smithy.SchemaExtensions
+	ePutThirdPartyJobFailureResultInput                         smithy.SchemaExtensions
+	ePutThirdPartyJobFailureResultInput_jobId                   smithy.SchemaExtensions
+	ePutThirdPartyJobFailureResultInput_clientToken             smithy.SchemaExtensions
+	ePutThirdPartyJobFailureResultInput_failureDetails          smithy.SchemaExtensions
+	ePutThirdPartyJobSuccessResultInput                         smithy.SchemaExtensions
+	ePutThirdPartyJobSuccessResultInput_jobId                   smithy.SchemaExtensions
+	ePutThirdPartyJobSuccessResultInput_clientToken             smithy.SchemaExtensions
+	ePutThirdPartyJobSuccessResultInput_currentRevision         smithy.SchemaExtensions
+	ePutThirdPartyJobSuccessResultInput_continuationToken       smithy.SchemaExtensions
+	ePutThirdPartyJobSuccessResultInput_executionDetails        smithy.SchemaExtensions
+	ePutWebhookInput                                            smithy.SchemaExtensions
+	ePutWebhookInput_webhook                                    smithy.SchemaExtensions
+	ePutWebhookInput_tags                                       smithy.SchemaExtensions
+	ePutWebhookOutput                                           smithy.SchemaExtensions
+	ePutWebhookOutput_webhook                                   smithy.SchemaExtensions
+	eRegisterWebhookWithThirdPartyInput                         smithy.SchemaExtensions
+	eRegisterWebhookWithThirdPartyInput_webhookName             smithy.SchemaExtensions
+	eRegisterWebhookWithThirdPartyOutput                        smithy.SchemaExtensions
+	eRetryStageExecutionInput                                   smithy.SchemaExtensions
+	eRetryStageExecutionInput_pipelineName                      smithy.SchemaExtensions
+	eRetryStageExecutionInput_stageName                         smithy.SchemaExtensions
+	eRetryStageExecutionInput_pipelineExecutionId               smithy.SchemaExtensions
+	eRetryStageExecutionInput_retryMode                         smithy.SchemaExtensions
+	eRetryStageExecutionOutput                                  smithy.SchemaExtensions
+	eRetryStageExecutionOutput_pipelineExecutionId              smithy.SchemaExtensions
+	eRollbackStageInput                                         smithy.SchemaExtensions
+	eRollbackStageInput_pipelineName                            smithy.SchemaExtensions
+	eRollbackStageInput_stageName                               smithy.SchemaExtensions
+	eRollbackStageInput_targetPipelineExecutionId               smithy.SchemaExtensions
+	eRollbackStageOutput                                        smithy.SchemaExtensions
+	eRollbackStageOutput_pipelineExecutionId                    smithy.SchemaExtensions
+	eStartPipelineExecutionInput                                smithy.SchemaExtensions
+	eStartPipelineExecutionInput_name                           smithy.SchemaExtensions
+	eStartPipelineExecutionInput_variables                      smithy.SchemaExtensions
+	eStartPipelineExecutionInput_clientRequestToken             smithy.SchemaExtensions
+	eStartPipelineExecutionInput_sourceRevisions                smithy.SchemaExtensions
+	eStartPipelineExecutionOutput                               smithy.SchemaExtensions
+	eStartPipelineExecutionOutput_pipelineExecutionId           smithy.SchemaExtensions
+	eStopPipelineExecutionInput                                 smithy.SchemaExtensions
+	eStopPipelineExecutionInput_pipelineName                    smithy.SchemaExtensions
+	eStopPipelineExecutionInput_pipelineExecutionId             smithy.SchemaExtensions
+	eStopPipelineExecutionInput_abandon                         smithy.SchemaExtensions
+	eStopPipelineExecutionInput_reason                          smithy.SchemaExtensions
+	eStopPipelineExecutionOutput                                smithy.SchemaExtensions
+	eStopPipelineExecutionOutput_pipelineExecutionId            smithy.SchemaExtensions
+	eTagResourceInput                                           smithy.SchemaExtensions
+	eTagResourceInput_resourceArn                               smithy.SchemaExtensions
+	eTagResourceInput_tags                                      smithy.SchemaExtensions
+	eTagResourceOutput                                          smithy.SchemaExtensions
+	eUntagResourceInput                                         smithy.SchemaExtensions
+	eUntagResourceInput_resourceArn                             smithy.SchemaExtensions
+	eUntagResourceInput_tagKeys                                 smithy.SchemaExtensions
+	eUntagResourceOutput                                        smithy.SchemaExtensions
+	eUpdateActionTypeInput                                      smithy.SchemaExtensions
+	eUpdateActionTypeInput_actionType                           smithy.SchemaExtensions
+	eUpdatePipelineInput                                        smithy.SchemaExtensions
+	eUpdatePipelineInput_pipeline                               smithy.SchemaExtensions
+	eUpdatePipelineOutput                                       smithy.SchemaExtensions
+	eUpdatePipelineOutput_pipeline                              smithy.SchemaExtensions
+)
 
 var (
 	iAcknowledgeJob                                     = smithy.ShapeID{Namespace: "com.amazonaws.codepipeline", Name: "AcknowledgeJob"}
@@ -857,1309 +2158,1309 @@ var mUpdateActionTypeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdat
 var mUpdatePipelineInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePipelineInput_pipeline}}
 var mUpdatePipelineOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePipelineOutput_pipeline}}
 
-var sAcknowledgeJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcknowledgeJob, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sAcknowledgeThirdPartyJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcknowledgeThirdPartyJob, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sCreateCustomActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomActionType, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sCreatePipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePipeline, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sDeleteCustomActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomActionType, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sDeletePipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePipeline, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sDeleteWebhook = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWebhook, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sDeregisterWebhookWithThirdParty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterWebhookWithThirdParty, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sDisableStageTransition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableStageTransition, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sEnableStageTransition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableStageTransition, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sGetActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetActionType, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sGetJobDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetJobDetails, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sGetPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipeline, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sGetPipelineExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineExecution, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sGetPipelineState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineState, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sGetThirdPartyJobDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetThirdPartyJobDetails, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sListActionExecutions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActionExecutions, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sListActionTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActionTypes, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sListDeployActionExecutionTargets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeployActionExecutionTargets, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sListPipelineExecutions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelineExecutions, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var sListPipelines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelines, Type: smithy.ShapeTypeOperation, Ext: &ext[20]})
-var sListRuleExecutions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleExecutions, Type: smithy.ShapeTypeOperation, Ext: &ext[21]})
-var sListRuleTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleTypes, Type: smithy.ShapeTypeOperation, Ext: &ext[22]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &ext[23]})
-var sListWebhooks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWebhooks, Type: smithy.ShapeTypeOperation, Ext: &ext[24]})
-var sOverrideStageCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOverrideStageCondition, Type: smithy.ShapeTypeOperation, Ext: &ext[25]})
-var sPollForJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPollForJobs, Type: smithy.ShapeTypeOperation, Ext: &ext[26]})
-var sPollForThirdPartyJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPollForThirdPartyJobs, Type: smithy.ShapeTypeOperation, Ext: &ext[27]})
-var sPutActionRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutActionRevision, Type: smithy.ShapeTypeOperation, Ext: &ext[28]})
-var sPutApprovalResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutApprovalResult, Type: smithy.ShapeTypeOperation, Ext: &ext[29]})
-var sPutJobFailureResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutJobFailureResult, Type: smithy.ShapeTypeOperation, Ext: &ext[30]})
-var sPutJobSuccessResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutJobSuccessResult, Type: smithy.ShapeTypeOperation, Ext: &ext[31]})
-var sPutThirdPartyJobFailureResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutThirdPartyJobFailureResult, Type: smithy.ShapeTypeOperation, Ext: &ext[32]})
-var sPutThirdPartyJobSuccessResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutThirdPartyJobSuccessResult, Type: smithy.ShapeTypeOperation, Ext: &ext[33]})
-var sPutWebhook = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutWebhook, Type: smithy.ShapeTypeOperation, Ext: &ext[34]})
-var sRegisterWebhookWithThirdParty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterWebhookWithThirdParty, Type: smithy.ShapeTypeOperation, Ext: &ext[35]})
-var sRetryStageExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryStageExecution, Type: smithy.ShapeTypeOperation, Ext: &ext[36]})
-var sRollbackStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRollbackStage, Type: smithy.ShapeTypeOperation, Ext: &ext[37]})
-var sStartPipelineExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPipelineExecution, Type: smithy.ShapeTypeOperation, Ext: &ext[38]})
-var sStopPipelineExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopPipelineExecution, Type: smithy.ShapeTypeOperation, Ext: &ext[39]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[40]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[41]})
-var sUpdateActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateActionType, Type: smithy.ShapeTypeOperation, Ext: &ext[42]})
-var sUpdatePipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePipeline, Type: smithy.ShapeTypeOperation, Ext: &ext[43]})
-var s_CodePipeline_20150709 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodePipeline_20150709, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &ext[44]})
-var s_AccessKeyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessKeyId, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[46]})
-var sActionCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionCategory, Members: &mActionCategory, Type: smithy.ShapeTypeEnum, Ext: &ext[47]})
-var sActionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionConfiguration, Members: &mActionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[55]})
-var s_ActionConfigurationKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionConfigurationKey, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var s_ActionConfigurationMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionConfigurationMap, Members: &m_ActionConfigurationMap, Type: smithy.ShapeTypeMap, Ext: &ext[58]})
-var sActionConfigurationProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionConfigurationProperty, Members: &mActionConfigurationProperty, Type: smithy.ShapeTypeStructure, Ext: &ext[61]})
-var s_ActionConfigurationPropertyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionConfigurationPropertyList, Members: &m_ActionConfigurationPropertyList, Type: smithy.ShapeTypeList, Ext: &ext[69]})
-var sActionConfigurationPropertyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionConfigurationPropertyType, Members: &mActionConfigurationPropertyType, Type: smithy.ShapeTypeEnum, Ext: &ext[71]})
-var s_ActionConfigurationQueryableValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionConfigurationQueryableValue, Type: smithy.ShapeTypeString, Ext: &ext[75]})
-var s_ActionConfigurationValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionConfigurationValue, Type: smithy.ShapeTypeString, Ext: &ext[76]})
-var sActionContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionContext, Members: &mActionContext, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
-var sActionDeclaration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionDeclaration, Members: &mActionDeclaration, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var sActionExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionExecution, Members: &mActionExecution, Type: smithy.ShapeTypeStructure, Ext: &ext[94]})
-var sActionExecutionDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionExecutionDetail, Members: &mActionExecutionDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[106]})
-var s_ActionExecutionDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionExecutionDetailList, Members: &m_ActionExecutionDetailList, Type: smithy.ShapeTypeList, Ext: &ext[118]})
-var sActionExecutionFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionExecutionFilter, Members: &mActionExecutionFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var s_ActionExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[123]})
-var sActionExecutionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionExecutionInput, Members: &mActionExecutionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[124]})
-var sActionExecutionNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionExecutionNotFoundException, Members: &mActionExecutionNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[132]})
-var sActionExecutionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionExecutionOutput, Members: &mActionExecutionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[134]})
-var sActionExecutionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionExecutionResult, Members: &mActionExecutionResult, Type: smithy.ShapeTypeStructure, Ext: &ext[138]})
-var sActionExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionExecutionStatus, Members: &mActionExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[144]})
-var s_ActionExecutionToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionExecutionToken, Type: smithy.ShapeTypeString, Ext: &ext[149]})
-var s_ActionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &ext[150]})
-var s_ActionNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionNamespace, Type: smithy.ShapeTypeString, Ext: &ext[151]})
-var sActionNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionNotFoundException, Members: &mActionNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[152]})
-var sActionOwner = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionOwner, Members: &mActionOwner, Type: smithy.ShapeTypeEnum, Ext: &ext[154]})
-var s_ActionProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionProvider, Type: smithy.ShapeTypeString, Ext: &ext[158]})
-var sActionRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionRevision, Members: &mActionRevision, Type: smithy.ShapeTypeStructure, Ext: &ext[159]})
-var s_ActionRunOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionRunOrder, Type: smithy.ShapeTypeInteger, Ext: &ext[163]})
-var sActionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionState, Members: &mActionState, Type: smithy.ShapeTypeStructure, Ext: &ext[164]})
-var s_ActionStateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionStateList, Members: &m_ActionStateList, Type: smithy.ShapeTypeList, Ext: &ext[170]})
-var s_ActionTimeout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionTimeout, Type: smithy.ShapeTypeInteger, Ext: &ext[172]})
-var sActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionType, Members: &mActionType, Type: smithy.ShapeTypeStructure, Ext: &ext[173]})
-var sActionTypeArtifactDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionTypeArtifactDetails, Members: &mActionTypeArtifactDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[179]})
-var sActionTypeDeclaration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionTypeDeclaration, Members: &mActionTypeDeclaration, Type: smithy.ShapeTypeStructure, Ext: &ext[182]})
-var s_ActionTypeDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionTypeDescription, Type: smithy.ShapeTypeString, Ext: &ext[191]})
-var sActionTypeExecutor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionTypeExecutor, Members: &mActionTypeExecutor, Type: smithy.ShapeTypeStructure, Ext: &ext[192]})
-var sActionTypeId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionTypeId, Members: &mActionTypeId, Type: smithy.ShapeTypeStructure, Ext: &ext[197]})
-var sActionTypeIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionTypeIdentifier, Members: &mActionTypeIdentifier, Type: smithy.ShapeTypeStructure, Ext: &ext[202]})
-var s_ActionTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionTypeList, Members: &m_ActionTypeList, Type: smithy.ShapeTypeList, Ext: &ext[207]})
-var sActionTypeNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionTypeNotFoundException, Members: &mActionTypeNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[209]})
-var s_ActionTypeOwner = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionTypeOwner, Type: smithy.ShapeTypeString, Ext: &ext[211]})
-var sActionTypePermissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionTypePermissions, Members: &mActionTypePermissions, Type: smithy.ShapeTypeStructure, Ext: &ext[212]})
-var s_ActionTypeProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionTypeProperties, Members: &m_ActionTypeProperties, Type: smithy.ShapeTypeList, Ext: &ext[214]})
-var sActionTypeProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionTypeProperty, Members: &mActionTypeProperty, Type: smithy.ShapeTypeStructure, Ext: &ext[216]})
-var sActionTypeSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionTypeSettings, Members: &mActionTypeSettings, Type: smithy.ShapeTypeStructure, Ext: &ext[223]})
-var sActionTypeUrls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionTypeUrls, Members: &mActionTypeUrls, Type: smithy.ShapeTypeStructure, Ext: &ext[228]})
-var s_AllowedAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AllowedAccount, Type: smithy.ShapeTypeString, Ext: &ext[233]})
-var s_AllowedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AllowedAccounts, Members: &m_AllowedAccounts, Type: smithy.ShapeTypeList, Ext: &ext[234]})
-var sApprovalAlreadyCompletedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalAlreadyCompletedException, Members: &mApprovalAlreadyCompletedException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[236]})
-var sApprovalResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalResult, Members: &mApprovalResult, Type: smithy.ShapeTypeStructure, Ext: &ext[238]})
-var sApprovalStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalStatus, Members: &mApprovalStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[241]})
-var s_ApprovalSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalSummary, Type: smithy.ShapeTypeString, Ext: &ext[244]})
-var s_ApprovalToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalToken, Type: smithy.ShapeTypeString, Ext: &ext[245]})
-var sArtifact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifact, Members: &mArtifact, Type: smithy.ShapeTypeStructure, Ext: &ext[246]})
-var sArtifactDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifactDetail, Members: &mArtifactDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[250]})
-var s_ArtifactDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArtifactDetailList, Members: &m_ArtifactDetailList, Type: smithy.ShapeTypeList, Ext: &ext[253]})
-var sArtifactDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifactDetails, Members: &mArtifactDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[255]})
-var s_ArtifactList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArtifactList, Members: &m_ArtifactList, Type: smithy.ShapeTypeList, Ext: &ext[258]})
-var sArtifactLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifactLocation, Members: &mArtifactLocation, Type: smithy.ShapeTypeStructure, Ext: &ext[260]})
-var sArtifactLocationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifactLocationType, Members: &mArtifactLocationType, Type: smithy.ShapeTypeEnum, Ext: &ext[263]})
-var s_ArtifactName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArtifactName, Type: smithy.ShapeTypeString, Ext: &ext[265]})
-var sArtifactRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifactRevision, Members: &mArtifactRevision, Type: smithy.ShapeTypeStructure, Ext: &ext[266]})
-var s_ArtifactRevisionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArtifactRevisionList, Members: &m_ArtifactRevisionList, Type: smithy.ShapeTypeList, Ext: &ext[273]})
-var sArtifactStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifactStore, Members: &mArtifactStore, Type: smithy.ShapeTypeStructure, Ext: &ext[275]})
-var s_ArtifactStoreLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArtifactStoreLocation, Type: smithy.ShapeTypeString, Ext: &ext[279]})
-var s_ArtifactStoreMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArtifactStoreMap, Members: &m_ArtifactStoreMap, Type: smithy.ShapeTypeMap, Ext: &ext[280]})
-var sArtifactStoreType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifactStoreType, Members: &mArtifactStoreType, Type: smithy.ShapeTypeEnum, Ext: &ext[283]})
-var s_AWSRegionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSRegionName, Type: smithy.ShapeTypeString, Ext: &ext[285]})
-var sAWSSessionCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAWSSessionCredentials, Members: &mAWSSessionCredentials, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[286]})
-var sBeforeEntryConditions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBeforeEntryConditions, Members: &mBeforeEntryConditions, Type: smithy.ShapeTypeStructure, Ext: &ext[290]})
-var sBlockerDeclaration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlockerDeclaration, Members: &mBlockerDeclaration, Type: smithy.ShapeTypeStructure, Ext: &ext[292]})
-var s_BlockerName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockerName, Type: smithy.ShapeTypeString, Ext: &ext[295]})
-var sBlockerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlockerType, Members: &mBlockerType, Type: smithy.ShapeTypeEnum, Ext: &ext[296]})
-var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[298]})
-var s_ClientId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientId, Type: smithy.ShapeTypeString, Ext: &ext[299]})
-var s_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString, Ext: &ext[300]})
-var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[301]})
-var s_Code = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Code, Type: smithy.ShapeTypeString, Ext: &ext[302]})
-var s_Command = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Command, Type: smithy.ShapeTypeString, Ext: &ext[303]})
-var s_CommandList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommandList, Members: &m_CommandList, Type: smithy.ShapeTypeList, Ext: &ext[304]})
-var sConcurrentModificationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentModificationException, Members: &mConcurrentModificationException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[306]})
-var sConcurrentPipelineExecutionsLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentPipelineExecutionsLimitExceededException, Members: &mConcurrentPipelineExecutionsLimitExceededException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[308]})
-var sCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCondition, Members: &mCondition, Type: smithy.ShapeTypeStructure, Ext: &ext[310]})
-var sConditionExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConditionExecution, Members: &mConditionExecution, Type: smithy.ShapeTypeStructure, Ext: &ext[313]})
-var sConditionExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConditionExecutionStatus, Members: &mConditionExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[317]})
-var s_ConditionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConditionList, Members: &m_ConditionList, Type: smithy.ShapeTypeList, Ext: &ext[325]})
-var sConditionNotOverridableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConditionNotOverridableException, Members: &mConditionNotOverridableException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[327]})
-var sConditionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConditionState, Members: &mConditionState, Type: smithy.ShapeTypeStructure, Ext: &ext[329]})
-var s_ConditionStateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConditionStateList, Members: &m_ConditionStateList, Type: smithy.ShapeTypeList, Ext: &ext[332]})
-var sConditionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConditionType, Members: &mConditionType, Type: smithy.ShapeTypeEnum, Ext: &ext[334]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &ext[337]})
-var s_ContinuationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContinuationToken, Type: smithy.ShapeTypeString, Ext: &ext[339]})
-var sCurrentRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCurrentRevision, Members: &mCurrentRevision, Type: smithy.ShapeTypeStructure, Ext: &ext[340]})
-var sDeployActionExecutionTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeployActionExecutionTarget, Members: &mDeployActionExecutionTarget, Type: smithy.ShapeTypeStructure, Ext: &ext[345]})
-var s_DeployActionExecutionTargetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeployActionExecutionTargetList, Members: &m_DeployActionExecutionTargetList, Type: smithy.ShapeTypeList, Ext: &ext[352]})
-var sDeployTargetEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeployTargetEvent, Members: &mDeployTargetEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[354]})
-var sDeployTargetEventContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeployTargetEventContext, Members: &mDeployTargetEventContext, Type: smithy.ShapeTypeStructure, Ext: &ext[360]})
-var s_DeployTargetEventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeployTargetEventList, Members: &m_DeployTargetEventList, Type: smithy.ShapeTypeList, Ext: &ext[363]})
-var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[365]})
-var s_DisabledReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DisabledReason, Type: smithy.ShapeTypeString, Ext: &ext[366]})
-var sDuplicatedStopRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplicatedStopRequestException, Members: &mDuplicatedStopRequestException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[367]})
-var s_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[369]})
-var sEncryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionKey, Members: &mEncryptionKey, Type: smithy.ShapeTypeStructure, Ext: &ext[370]})
-var s_EncryptionKeyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionKeyId, Type: smithy.ShapeTypeString, Ext: &ext[373]})
-var sEncryptionKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionKeyType, Members: &mEncryptionKeyType, Type: smithy.ShapeTypeEnum, Ext: &ext[374]})
-var sEnvironmentVariable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentVariable, Members: &mEnvironmentVariable, Type: smithy.ShapeTypeStructure, Ext: &ext[376]})
-var s_EnvironmentVariableList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentVariableList, Members: &m_EnvironmentVariableList, Type: smithy.ShapeTypeList, Ext: &ext[380]})
-var s_EnvironmentVariableName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentVariableName, Type: smithy.ShapeTypeString, Ext: &ext[382]})
-var sEnvironmentVariableType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentVariableType, Members: &mEnvironmentVariableType, Type: smithy.ShapeTypeEnum, Ext: &ext[383]})
-var s_EnvironmentVariableValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentVariableValue, Type: smithy.ShapeTypeString, Ext: &ext[386]})
-var sErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorDetails, Members: &mErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[387]})
-var sExecutionDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionDetails, Members: &mExecutionDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[390]})
-var s_ExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[394]})
-var sExecutionMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionMode, Members: &mExecutionMode, Type: smithy.ShapeTypeEnum, Ext: &ext[395]})
-var s_ExecutionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutionSummary, Type: smithy.ShapeTypeString, Ext: &ext[399]})
-var sExecutionTrigger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionTrigger, Members: &mExecutionTrigger, Type: smithy.ShapeTypeStructure, Ext: &ext[400]})
-var sExecutionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionType, Members: &mExecutionType, Type: smithy.ShapeTypeEnum, Ext: &ext[403]})
-var sExecutorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutorConfiguration, Members: &mExecutorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[406]})
-var sExecutorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutorType, Members: &mExecutorType, Type: smithy.ShapeTypeEnum, Ext: &ext[409]})
-var s_ExternalExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[412]})
-var s_ExternalExecutionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalExecutionSummary, Type: smithy.ShapeTypeString, Ext: &ext[413]})
-var sFailureConditions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailureConditions, Members: &mFailureConditions, Type: smithy.ShapeTypeStructure, Ext: &ext[414]})
-var sFailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailureDetails, Members: &mFailureDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[418]})
-var sFailureType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailureType, Members: &mFailureType, Type: smithy.ShapeTypeEnum, Ext: &ext[422]})
-var s_FilePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilePath, Type: smithy.ShapeTypeString, Ext: &ext[429]})
-var s_FilePathList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilePathList, Members: &m_FilePathList, Type: smithy.ShapeTypeList, Ext: &ext[430]})
-var sGitBranchFilterCriteria = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGitBranchFilterCriteria, Members: &mGitBranchFilterCriteria, Type: smithy.ShapeTypeStructure, Ext: &ext[432]})
-var s_GitBranchNamePattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GitBranchNamePattern, Type: smithy.ShapeTypeString, Ext: &ext[435]})
-var s_GitBranchPatternList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GitBranchPatternList, Members: &m_GitBranchPatternList, Type: smithy.ShapeTypeList, Ext: &ext[436]})
-var sGitConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGitConfiguration, Members: &mGitConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[438]})
-var sGitFilePathFilterCriteria = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGitFilePathFilterCriteria, Members: &mGitFilePathFilterCriteria, Type: smithy.ShapeTypeStructure, Ext: &ext[442]})
-var s_GitFilePathPattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GitFilePathPattern, Type: smithy.ShapeTypeString, Ext: &ext[445]})
-var s_GitFilePathPatternList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GitFilePathPatternList, Members: &m_GitFilePathPatternList, Type: smithy.ShapeTypeList, Ext: &ext[446]})
-var sGitPullRequestEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGitPullRequestEventType, Members: &mGitPullRequestEventType, Type: smithy.ShapeTypeEnum, Ext: &ext[448]})
-var s_GitPullRequestEventTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GitPullRequestEventTypeList, Members: &m_GitPullRequestEventTypeList, Type: smithy.ShapeTypeList, Ext: &ext[452]})
-var sGitPullRequestFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGitPullRequestFilter, Members: &mGitPullRequestFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[454]})
-var s_GitPullRequestFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GitPullRequestFilterList, Members: &m_GitPullRequestFilterList, Type: smithy.ShapeTypeList, Ext: &ext[458]})
-var sGitPushFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGitPushFilter, Members: &mGitPushFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[460]})
-var s_GitPushFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GitPushFilterList, Members: &m_GitPushFilterList, Type: smithy.ShapeTypeList, Ext: &ext[464]})
-var sGitTagFilterCriteria = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGitTagFilterCriteria, Members: &mGitTagFilterCriteria, Type: smithy.ShapeTypeStructure, Ext: &ext[466]})
-var s_GitTagNamePattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GitTagNamePattern, Type: smithy.ShapeTypeString, Ext: &ext[469]})
-var s_GitTagPatternList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GitTagPatternList, Members: &m_GitTagPatternList, Type: smithy.ShapeTypeList, Ext: &ext[470]})
-var sInputArtifact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputArtifact, Members: &mInputArtifact, Type: smithy.ShapeTypeStructure, Ext: &ext[472]})
-var s_InputArtifactList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InputArtifactList, Members: &m_InputArtifactList, Type: smithy.ShapeTypeList, Ext: &ext[474]})
-var sInvalidActionDeclarationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidActionDeclarationException, Members: &mInvalidActionDeclarationException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[476]})
-var sInvalidApprovalTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidApprovalTokenException, Members: &mInvalidApprovalTokenException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[478]})
-var sInvalidArnException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidArnException, Members: &mInvalidArnException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[480]})
-var sInvalidBlockerDeclarationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidBlockerDeclarationException, Members: &mInvalidBlockerDeclarationException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[482]})
-var sInvalidClientTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidClientTokenException, Members: &mInvalidClientTokenException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[484]})
-var sInvalidJobException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidJobException, Members: &mInvalidJobException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[486]})
-var sInvalidJobStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidJobStateException, Members: &mInvalidJobStateException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[488]})
-var sInvalidNextTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidNextTokenException, Members: &mInvalidNextTokenException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[490]})
-var sInvalidNonceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidNonceException, Members: &mInvalidNonceException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[492]})
-var sInvalidStageDeclarationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidStageDeclarationException, Members: &mInvalidStageDeclarationException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[494]})
-var sInvalidStructureException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidStructureException, Members: &mInvalidStructureException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[496]})
-var sInvalidTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTagsException, Members: &mInvalidTagsException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[498]})
-var sInvalidWebhookAuthenticationParametersException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidWebhookAuthenticationParametersException, Members: &mInvalidWebhookAuthenticationParametersException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[500]})
-var sInvalidWebhookFilterPatternException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidWebhookFilterPatternException, Members: &mInvalidWebhookFilterPatternException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[502]})
-var sJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJob, Members: &mJob, Type: smithy.ShapeTypeStructure, Ext: &ext[504]})
-var sJobData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobData, Members: &mJobData, Type: smithy.ShapeTypeStructure, Ext: &ext[509]})
-var sJobDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobDetails, Members: &mJobDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[518]})
-var s_JobId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &ext[522]})
-var s_JobList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobList, Members: &m_JobList, Type: smithy.ShapeTypeList, Ext: &ext[523]})
-var sJobNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobNotFoundException, Members: &mJobNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[525]})
-var sJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[527]})
-var s_JobTimeout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobTimeout, Type: smithy.ShapeTypeInteger, Ext: &ext[535]})
-var sJobWorkerExecutorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobWorkerExecutorConfiguration, Members: &mJobWorkerExecutorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[536]})
-var s_JsonPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JsonPath, Type: smithy.ShapeTypeString, Ext: &ext[539]})
-var sLambdaExecutorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaExecutorConfiguration, Members: &mLambdaExecutorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[540]})
-var s_LambdaFunctionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LambdaFunctionArn, Type: smithy.ShapeTypeString, Ext: &ext[542]})
-var s_LastChangedAt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastChangedAt, Type: smithy.ShapeTypeTimestamp, Ext: &ext[543]})
-var s_LastChangedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastChangedBy, Type: smithy.ShapeTypeString, Ext: &ext[544]})
-var s_LastUpdatedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastUpdatedBy, Type: smithy.ShapeTypeString, Ext: &ext[545]})
-var sLatestInPipelineExecutionFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLatestInPipelineExecutionFilter, Members: &mLatestInPipelineExecutionFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[546]})
-var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[549]})
-var sListWebhookItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWebhookItem, Members: &mListWebhookItem, Type: smithy.ShapeTypeStructure, Ext: &ext[551]})
-var s_LogStreamARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogStreamARN, Type: smithy.ShapeTypeString, Ext: &ext[559]})
-var s_MatchEquals = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MatchEquals, Type: smithy.ShapeTypeString, Ext: &ext[560]})
-var s_MaxBatchSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxBatchSize, Type: smithy.ShapeTypeInteger, Ext: &ext[561]})
-var s_MaximumActionTypeArtifactCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaximumActionTypeArtifactCount, Type: smithy.ShapeTypeInteger, Ext: &ext[562]})
-var s_MaximumArtifactCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaximumArtifactCount, Type: smithy.ShapeTypeInteger, Ext: &ext[563]})
-var s_MaxPipelines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxPipelines, Type: smithy.ShapeTypeInteger, Ext: &ext[564]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[565]})
-var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[566]})
-var s_MinimumActionTypeArtifactCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MinimumActionTypeArtifactCount, Type: smithy.ShapeTypeInteger, Ext: &ext[567]})
-var s_MinimumArtifactCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MinimumArtifactCount, Type: smithy.ShapeTypeInteger, Ext: &ext[568]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[569]})
-var s_Nonce = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Nonce, Type: smithy.ShapeTypeString, Ext: &ext[570]})
-var sNotLatestPipelineExecutionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotLatestPipelineExecutionException, Members: &mNotLatestPipelineExecutionException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[571]})
-var sOutputArtifact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputArtifact, Members: &mOutputArtifact, Type: smithy.ShapeTypeStructure, Ext: &ext[573]})
-var s_OutputArtifactList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputArtifactList, Members: &m_OutputArtifactList, Type: smithy.ShapeTypeList, Ext: &ext[576]})
-var s_OutputVariable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputVariable, Type: smithy.ShapeTypeString, Ext: &ext[578]})
-var s_OutputVariableList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputVariableList, Members: &m_OutputVariableList, Type: smithy.ShapeTypeList, Ext: &ext[579]})
-var s_OutputVariablesKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputVariablesKey, Type: smithy.ShapeTypeString, Ext: &ext[581]})
-var s_OutputVariablesMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputVariablesMap, Members: &m_OutputVariablesMap, Type: smithy.ShapeTypeMap, Ext: &ext[582]})
-var sOutputVariablesSizeExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputVariablesSizeExceededException, Members: &mOutputVariablesSizeExceededException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[585]})
-var s_OutputVariablesValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputVariablesValue, Type: smithy.ShapeTypeString, Ext: &ext[587]})
-var s_Percentage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Percentage, Type: smithy.ShapeTypeInteger, Ext: &ext[588]})
-var s_PipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineArn, Type: smithy.ShapeTypeString, Ext: &ext[589]})
-var sPipelineContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineContext, Members: &mPipelineContext, Type: smithy.ShapeTypeStructure, Ext: &ext[590]})
-var sPipelineDeclaration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineDeclaration, Members: &mPipelineDeclaration, Type: smithy.ShapeTypeStructure, Ext: &ext[596]})
-var sPipelineExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineExecution, Members: &mPipelineExecution, Type: smithy.ShapeTypeStructure, Ext: &ext[607]})
-var sPipelineExecutionFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineExecutionFilter, Members: &mPipelineExecutionFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[619]})
-var s_PipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[621]})
-var sPipelineExecutionNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineExecutionNotFoundException, Members: &mPipelineExecutionNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[622]})
-var sPipelineExecutionNotStoppableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineExecutionNotStoppableException, Members: &mPipelineExecutionNotStoppableException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[624]})
-var sPipelineExecutionOutdatedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineExecutionOutdatedException, Members: &mPipelineExecutionOutdatedException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[626]})
-var sPipelineExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineExecutionStatus, Members: &mPipelineExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[628]})
-var s_PipelineExecutionStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineExecutionStatusSummary, Type: smithy.ShapeTypeString, Ext: &ext[636]})
-var sPipelineExecutionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineExecutionSummary, Members: &mPipelineExecutionSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[637]})
-var s_PipelineExecutionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineExecutionSummaryList, Members: &m_PipelineExecutionSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[649]})
-var s_PipelineList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineList, Members: &m_PipelineList, Type: smithy.ShapeTypeList, Ext: &ext[651]})
-var sPipelineMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineMetadata, Members: &mPipelineMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[653]})
-var s_PipelineName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[658]})
-var sPipelineNameInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineNameInUseException, Members: &mPipelineNameInUseException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[659]})
-var sPipelineNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineNotFoundException, Members: &mPipelineNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[661]})
-var sPipelineRollbackMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineRollbackMetadata, Members: &mPipelineRollbackMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[663]})
-var s_PipelineStageDeclarationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineStageDeclarationList, Members: &m_PipelineStageDeclarationList, Type: smithy.ShapeTypeList, Ext: &ext[665]})
-var sPipelineSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineSummary, Members: &mPipelineSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[667]})
-var sPipelineTriggerDeclaration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineTriggerDeclaration, Members: &mPipelineTriggerDeclaration, Type: smithy.ShapeTypeStructure, Ext: &ext[674]})
-var s_PipelineTriggerDeclarationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineTriggerDeclarationList, Members: &m_PipelineTriggerDeclarationList, Type: smithy.ShapeTypeList, Ext: &ext[677]})
-var sPipelineTriggerProviderType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineTriggerProviderType, Members: &mPipelineTriggerProviderType, Type: smithy.ShapeTypeEnum, Ext: &ext[679]})
-var sPipelineType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineType, Members: &mPipelineType, Type: smithy.ShapeTypeEnum, Ext: &ext[681]})
-var sPipelineVariable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineVariable, Members: &mPipelineVariable, Type: smithy.ShapeTypeStructure, Ext: &ext[684]})
-var sPipelineVariableDeclaration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineVariableDeclaration, Members: &mPipelineVariableDeclaration, Type: smithy.ShapeTypeStructure, Ext: &ext[687]})
-var s_PipelineVariableDeclarationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineVariableDeclarationList, Members: &m_PipelineVariableDeclarationList, Type: smithy.ShapeTypeList, Ext: &ext[691]})
-var s_PipelineVariableDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineVariableDescription, Type: smithy.ShapeTypeString, Ext: &ext[693]})
-var s_PipelineVariableList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineVariableList, Members: &m_PipelineVariableList, Type: smithy.ShapeTypeList, Ext: &ext[694]})
-var s_PipelineVariableName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineVariableName, Type: smithy.ShapeTypeString, Ext: &ext[696]})
-var s_PipelineVariableValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineVariableValue, Type: smithy.ShapeTypeString, Ext: &ext[697]})
-var s_PipelineVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineVersion, Type: smithy.ShapeTypeInteger, Ext: &ext[698]})
-var sPipelineVersionNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineVersionNotFoundException, Members: &mPipelineVersionNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[699]})
-var s_PolicyStatementsTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyStatementsTemplate, Type: smithy.ShapeTypeString, Ext: &ext[701]})
-var s_PollingAccountList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PollingAccountList, Members: &m_PollingAccountList, Type: smithy.ShapeTypeList, Ext: &ext[702]})
-var s_PollingServicePrincipalList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PollingServicePrincipalList, Members: &m_PollingServicePrincipalList, Type: smithy.ShapeTypeList, Ext: &ext[704]})
-var s_PropertyDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PropertyDescription, Type: smithy.ShapeTypeString, Ext: &ext[706]})
-var s_QueryParamMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryParamMap, Members: &m_QueryParamMap, Type: smithy.ShapeTypeMap, Ext: &ext[707]})
-var sRequestFailedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestFailedException, Members: &mRequestFailedException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[710]})
-var s_ResolvedActionConfigurationMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResolvedActionConfigurationMap, Members: &m_ResolvedActionConfigurationMap, Type: smithy.ShapeTypeMap, Ext: &ext[712]})
-var sResolvedPipelineVariable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolvedPipelineVariable, Members: &mResolvedPipelineVariable, Type: smithy.ShapeTypeStructure, Ext: &ext[715]})
-var s_ResolvedPipelineVariableList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResolvedPipelineVariableList, Members: &m_ResolvedPipelineVariableList, Type: smithy.ShapeTypeList, Ext: &ext[718]})
-var s_ResolvedRuleConfigurationMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResolvedRuleConfigurationMap, Members: &m_ResolvedRuleConfigurationMap, Type: smithy.ShapeTypeMap, Ext: &ext[720]})
-var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[723]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[724]})
-var sResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResult, Members: &mResult, Type: smithy.ShapeTypeEnum, Ext: &ext[726]})
-var s_RetryAttempt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetryAttempt, Type: smithy.ShapeTypeInteger, Ext: &ext[731]})
-var sRetryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryConfiguration, Members: &mRetryConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[732]})
-var sRetryStageMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryStageMetadata, Members: &mRetryStageMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[734]})
-var sRetryTrigger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryTrigger, Members: &mRetryTrigger, Type: smithy.ShapeTypeEnum, Ext: &ext[738]})
-var s_Revision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &ext[741]})
-var s_RevisionChangeIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevisionChangeIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[742]})
-var s_RevisionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevisionSummary, Type: smithy.ShapeTypeString, Ext: &ext[743]})
-var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[744]})
-var sRuleCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleCategory, Members: &mRuleCategory, Type: smithy.ShapeTypeEnum, Ext: &ext[745]})
-var s_RuleConfigurationKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleConfigurationKey, Type: smithy.ShapeTypeString, Ext: &ext[747]})
-var s_RuleConfigurationMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleConfigurationMap, Members: &m_RuleConfigurationMap, Type: smithy.ShapeTypeMap, Ext: &ext[748]})
-var sRuleConfigurationProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleConfigurationProperty, Members: &mRuleConfigurationProperty, Type: smithy.ShapeTypeStructure, Ext: &ext[751]})
-var s_RuleConfigurationPropertyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleConfigurationPropertyList, Members: &m_RuleConfigurationPropertyList, Type: smithy.ShapeTypeList, Ext: &ext[759]})
-var sRuleConfigurationPropertyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleConfigurationPropertyType, Members: &mRuleConfigurationPropertyType, Type: smithy.ShapeTypeEnum, Ext: &ext[761]})
-var s_RuleConfigurationValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleConfigurationValue, Type: smithy.ShapeTypeString, Ext: &ext[765]})
-var sRuleDeclaration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleDeclaration, Members: &mRuleDeclaration, Type: smithy.ShapeTypeStructure, Ext: &ext[766]})
-var s_RuleDeclarationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleDeclarationList, Members: &m_RuleDeclarationList, Type: smithy.ShapeTypeList, Ext: &ext[775]})
-var sRuleExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleExecution, Members: &mRuleExecution, Type: smithy.ShapeTypeStructure, Ext: &ext[777]})
-var sRuleExecutionDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleExecutionDetail, Members: &mRuleExecutionDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[787]})
-var s_RuleExecutionDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleExecutionDetailList, Members: &m_RuleExecutionDetailList, Type: smithy.ShapeTypeList, Ext: &ext[799]})
-var sRuleExecutionFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleExecutionFilter, Members: &mRuleExecutionFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[801]})
-var s_RuleExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[804]})
-var sRuleExecutionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleExecutionInput, Members: &mRuleExecutionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[805]})
-var sRuleExecutionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleExecutionOutput, Members: &mRuleExecutionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[812]})
-var sRuleExecutionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleExecutionResult, Members: &mRuleExecutionResult, Type: smithy.ShapeTypeStructure, Ext: &ext[814]})
-var sRuleExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleExecutionStatus, Members: &mRuleExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[819]})
-var s_RuleExecutionToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleExecutionToken, Type: smithy.ShapeTypeString, Ext: &ext[824]})
-var s_RuleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleName, Type: smithy.ShapeTypeString, Ext: &ext[825]})
-var sRuleOwner = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleOwner, Members: &mRuleOwner, Type: smithy.ShapeTypeEnum, Ext: &ext[826]})
-var s_RuleProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleProvider, Type: smithy.ShapeTypeString, Ext: &ext[828]})
-var sRuleRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleRevision, Members: &mRuleRevision, Type: smithy.ShapeTypeStructure, Ext: &ext[829]})
-var sRuleState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleState, Members: &mRuleState, Type: smithy.ShapeTypeStructure, Ext: &ext[833]})
-var s_RuleStateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleStateList, Members: &m_RuleStateList, Type: smithy.ShapeTypeList, Ext: &ext[839]})
-var s_RuleTimeout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleTimeout, Type: smithy.ShapeTypeInteger, Ext: &ext[841]})
-var sRuleType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleType, Members: &mRuleType, Type: smithy.ShapeTypeStructure, Ext: &ext[842]})
-var sRuleTypeId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleTypeId, Members: &mRuleTypeId, Type: smithy.ShapeTypeStructure, Ext: &ext[847]})
-var s_RuleTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleTypeList, Members: &m_RuleTypeList, Type: smithy.ShapeTypeList, Ext: &ext[852]})
-var sRuleTypeSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleTypeSettings, Members: &mRuleTypeSettings, Type: smithy.ShapeTypeStructure, Ext: &ext[854]})
-var sS3ArtifactLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3ArtifactLocation, Members: &mS3ArtifactLocation, Type: smithy.ShapeTypeStructure, Ext: &ext[859]})
-var s_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Bucket, Type: smithy.ShapeTypeString, Ext: &ext[862]})
-var s_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &ext[863]})
-var s_S3Key = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Key, Type: smithy.ShapeTypeString, Ext: &ext[864]})
-var sS3Location = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &ext[865]})
-var s_S3ObjectKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3ObjectKey, Type: smithy.ShapeTypeString, Ext: &ext[868]})
-var s_SecretAccessKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretAccessKey, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[869]})
-var s_ServicePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServicePrincipal, Type: smithy.ShapeTypeString, Ext: &ext[870]})
-var s_SessionToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionToken, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &ext[871]})
-var sSourceRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceRevision, Members: &mSourceRevision, Type: smithy.ShapeTypeStructure, Ext: &ext[872]})
-var s_SourceRevisionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceRevisionList, Members: &m_SourceRevisionList, Type: smithy.ShapeTypeList, Ext: &ext[877]})
-var sSourceRevisionOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceRevisionOverride, Members: &mSourceRevisionOverride, Type: smithy.ShapeTypeStructure, Ext: &ext[879]})
-var s_SourceRevisionOverrideList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceRevisionOverrideList, Members: &m_SourceRevisionOverrideList, Type: smithy.ShapeTypeList, Ext: &ext[883]})
-var sSourceRevisionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceRevisionType, Members: &mSourceRevisionType, Type: smithy.ShapeTypeEnum, Ext: &ext[885]})
-var s_StageActionDeclarationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StageActionDeclarationList, Members: &m_StageActionDeclarationList, Type: smithy.ShapeTypeList, Ext: &ext[890]})
-var s_StageBlockerDeclarationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StageBlockerDeclarationList, Members: &m_StageBlockerDeclarationList, Type: smithy.ShapeTypeList, Ext: &ext[892]})
-var sStageConditionsExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStageConditionsExecution, Members: &mStageConditionsExecution, Type: smithy.ShapeTypeStructure, Ext: &ext[894]})
-var sStageConditionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStageConditionState, Members: &mStageConditionState, Type: smithy.ShapeTypeStructure, Ext: &ext[897]})
-var sStageContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStageContext, Members: &mStageContext, Type: smithy.ShapeTypeStructure, Ext: &ext[900]})
-var sStageDeclaration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStageDeclaration, Members: &mStageDeclaration, Type: smithy.ShapeTypeStructure, Ext: &ext[902]})
-var sStageExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStageExecution, Members: &mStageExecution, Type: smithy.ShapeTypeStructure, Ext: &ext[909]})
-var s_StageExecutionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StageExecutionList, Members: &m_StageExecutionList, Type: smithy.ShapeTypeList, Ext: &ext[913]})
-var sStageExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStageExecutionStatus, Members: &mStageExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[915]})
-var s_StageName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &ext[923]})
-var sStageNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStageNotFoundException, Members: &mStageNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[924]})
-var sStageNotRetryableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStageNotRetryableException, Members: &mStageNotRetryableException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[926]})
-var sStageRetryMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStageRetryMode, Members: &mStageRetryMode, Type: smithy.ShapeTypeEnum, Ext: &ext[928]})
-var sStageState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStageState, Members: &mStageState, Type: smithy.ShapeTypeStructure, Ext: &ext[931]})
-var s_StageStateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StageStateList, Members: &m_StageStateList, Type: smithy.ShapeTypeList, Ext: &ext[942]})
-var sStageTransitionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStageTransitionType, Members: &mStageTransitionType, Type: smithy.ShapeTypeEnum, Ext: &ext[944]})
-var sStartTimeRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartTimeRange, Members: &mStartTimeRange, Type: smithy.ShapeTypeEnum, Ext: &ext[947]})
-var sStopExecutionTrigger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopExecutionTrigger, Members: &mStopExecutionTrigger, Type: smithy.ShapeTypeStructure, Ext: &ext[950]})
-var s_StopPipelineExecutionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StopPipelineExecutionReason, Type: smithy.ShapeTypeString, Ext: &ext[952]})
-var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[953]})
-var sSucceededInStageFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSucceededInStageFilter, Members: &mSucceededInStageFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[954]})
-var sSuccessConditions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuccessConditions, Members: &mSuccessConditions, Type: smithy.ShapeTypeStructure, Ext: &ext[956]})
-var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[958]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[961]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[962]})
-var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[964]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[966]})
-var sTargetFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetFilter, Members: &mTargetFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[967]})
-var s_TargetFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetFilterList, Members: &m_TargetFilterList, Type: smithy.ShapeTypeList, Ext: &ext[970]})
-var sTargetFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetFilterName, Members: &mTargetFilterName, Type: smithy.ShapeTypeEnum, Ext: &ext[972]})
-var s_TargetFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetFilterValue, Type: smithy.ShapeTypeString, Ext: &ext[974]})
-var s_TargetFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetFilterValueList, Members: &m_TargetFilterValueList, Type: smithy.ShapeTypeList, Ext: &ext[975]})
-var sThirdPartyJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThirdPartyJob, Members: &mThirdPartyJob, Type: smithy.ShapeTypeStructure, Ext: &ext[977]})
-var sThirdPartyJobData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThirdPartyJobData, Members: &mThirdPartyJobData, Type: smithy.ShapeTypeStructure, Ext: &ext[980]})
-var sThirdPartyJobDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThirdPartyJobDetails, Members: &mThirdPartyJobDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[989]})
-var s_ThirdPartyJobId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThirdPartyJobId, Type: smithy.ShapeTypeString, Ext: &ext[993]})
-var s_ThirdPartyJobList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThirdPartyJobList, Members: &m_ThirdPartyJobList, Type: smithy.ShapeTypeList, Ext: &ext[994]})
-var s_Time = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &ext[996]})
-var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[997]})
-var sTooManyTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsException, Members: &mTooManyTagsException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[998]})
-var sTransitionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransitionState, Members: &mTransitionState, Type: smithy.ShapeTypeStructure, Ext: &ext[1000]})
-var s_TriggerDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TriggerDetail, Type: smithy.ShapeTypeString, Ext: &ext[1005]})
-var sTriggerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTriggerType, Members: &mTriggerType, Type: smithy.ShapeTypeEnum, Ext: &ext[1006]})
-var sUnableToRollbackStageException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnableToRollbackStageException, Members: &mUnableToRollbackStageException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[1016]})
-var s_Url = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &ext[1018]})
-var s_UrlTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UrlTemplate, Type: smithy.ShapeTypeString, Ext: &ext[1019]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[1020]})
-var s_Version = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &ext[1022]})
-var s_WebhookArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebhookArn, Type: smithy.ShapeTypeString, Ext: &ext[1023]})
-var sWebhookAuthConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebhookAuthConfiguration, Members: &mWebhookAuthConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[1024]})
-var s_WebhookAuthConfigurationAllowedIPRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebhookAuthConfigurationAllowedIPRange, Type: smithy.ShapeTypeString, Ext: &ext[1027]})
-var s_WebhookAuthConfigurationSecretToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebhookAuthConfigurationSecretToken, Type: smithy.ShapeTypeString, Ext: &ext[1028]})
-var sWebhookAuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebhookAuthenticationType, Members: &mWebhookAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &ext[1029]})
-var sWebhookDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebhookDefinition, Members: &mWebhookDefinition, Type: smithy.ShapeTypeStructure, Ext: &ext[1033]})
-var s_WebhookErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebhookErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[1040]})
-var s_WebhookErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebhookErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[1041]})
-var sWebhookFilterRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebhookFilterRule, Members: &mWebhookFilterRule, Type: smithy.ShapeTypeStructure, Ext: &ext[1042]})
-var s_WebhookFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebhookFilters, Members: &m_WebhookFilters, Type: smithy.ShapeTypeList, Ext: &ext[1045]})
-var s_WebhookLastTriggered = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebhookLastTriggered, Type: smithy.ShapeTypeTimestamp, Ext: &ext[1047]})
-var s_WebhookList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebhookList, Members: &m_WebhookList, Type: smithy.ShapeTypeList, Ext: &ext[1048]})
-var s_WebhookName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebhookName, Type: smithy.ShapeTypeString, Ext: &ext[1050]})
-var sWebhookNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebhookNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[1051]})
-var s_WebhookUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebhookUrl, Type: smithy.ShapeTypeString, Ext: &ext[1052]})
-var sAcknowledgeJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcknowledgeJobInput, Members: &mAcknowledgeJobInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1053]})
-var sAcknowledgeJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcknowledgeJobOutput, Members: &mAcknowledgeJobOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1056]})
-var sAcknowledgeThirdPartyJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcknowledgeThirdPartyJobInput, Members: &mAcknowledgeThirdPartyJobInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1058]})
-var sAcknowledgeThirdPartyJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcknowledgeThirdPartyJobOutput, Members: &mAcknowledgeThirdPartyJobOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1062]})
-var sCreateCustomActionTypeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomActionTypeInput, Members: &mCreateCustomActionTypeInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1064]})
-var sCreateCustomActionTypeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomActionTypeOutput, Members: &mCreateCustomActionTypeOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1073]})
-var sCreatePipelineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePipelineInput, Members: &mCreatePipelineInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1076]})
-var sCreatePipelineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePipelineOutput, Members: &mCreatePipelineOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1079]})
-var sDeleteCustomActionTypeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomActionTypeInput, Members: &mDeleteCustomActionTypeInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1082]})
-var sDeletePipelineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePipelineInput, Members: &mDeletePipelineInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1086]})
-var sDeleteWebhookInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWebhookInput, Members: &mDeleteWebhookInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1088]})
-var sDeleteWebhookOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWebhookOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1090]})
-var sDeregisterWebhookWithThirdPartyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterWebhookWithThirdPartyInput, Members: &mDeregisterWebhookWithThirdPartyInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1091]})
-var sDeregisterWebhookWithThirdPartyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterWebhookWithThirdPartyOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1093]})
-var sDisableStageTransitionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableStageTransitionInput, Members: &mDisableStageTransitionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1094]})
-var sEnableStageTransitionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableStageTransitionInput, Members: &mEnableStageTransitionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1099]})
-var sGetActionTypeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetActionTypeInput, Members: &mGetActionTypeInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1103]})
-var sGetActionTypeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetActionTypeOutput, Members: &mGetActionTypeOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1108]})
-var sGetJobDetailsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetJobDetailsInput, Members: &mGetJobDetailsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1110]})
-var sGetJobDetailsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetJobDetailsOutput, Members: &mGetJobDetailsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1112]})
-var sGetPipelineExecutionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineExecutionInput, Members: &mGetPipelineExecutionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1114]})
-var sGetPipelineExecutionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineExecutionOutput, Members: &mGetPipelineExecutionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1117]})
-var sGetPipelineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineInput, Members: &mGetPipelineInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1119]})
-var sGetPipelineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineOutput, Members: &mGetPipelineOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1122]})
-var sGetPipelineStateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineStateInput, Members: &mGetPipelineStateInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1125]})
-var sGetPipelineStateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineStateOutput, Members: &mGetPipelineStateOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1127]})
-var sGetThirdPartyJobDetailsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetThirdPartyJobDetailsInput, Members: &mGetThirdPartyJobDetailsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1133]})
-var sGetThirdPartyJobDetailsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetThirdPartyJobDetailsOutput, Members: &mGetThirdPartyJobDetailsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1136]})
-var sListActionExecutionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActionExecutionsInput, Members: &mListActionExecutionsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1138]})
-var sListActionExecutionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActionExecutionsOutput, Members: &mListActionExecutionsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1143]})
-var sListActionTypesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActionTypesInput, Members: &mListActionTypesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1146]})
-var sListActionTypesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActionTypesOutput, Members: &mListActionTypesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1150]})
-var sListDeployActionExecutionTargetsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeployActionExecutionTargetsInput, Members: &mListDeployActionExecutionTargetsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1153]})
-var sListDeployActionExecutionTargetsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeployActionExecutionTargetsOutput, Members: &mListDeployActionExecutionTargetsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1159]})
-var sListPipelineExecutionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelineExecutionsInput, Members: &mListPipelineExecutionsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1162]})
-var sListPipelineExecutionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelineExecutionsOutput, Members: &mListPipelineExecutionsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1167]})
-var sListPipelinesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelinesInput, Members: &mListPipelinesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1170]})
-var sListPipelinesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelinesOutput, Members: &mListPipelinesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1173]})
-var sListRuleExecutionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleExecutionsInput, Members: &mListRuleExecutionsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1176]})
-var sListRuleExecutionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleExecutionsOutput, Members: &mListRuleExecutionsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1181]})
-var sListRuleTypesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleTypesInput, Members: &mListRuleTypesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1184]})
-var sListRuleTypesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleTypesOutput, Members: &mListRuleTypesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1187]})
-var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1189]})
-var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1193]})
-var sListWebhooksInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWebhooksInput, Members: &mListWebhooksInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1196]})
-var sListWebhooksOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWebhooksOutput, Members: &mListWebhooksOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1199]})
-var sOverrideStageConditionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOverrideStageConditionInput, Members: &mOverrideStageConditionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1202]})
-var sPollForJobsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPollForJobsInput, Members: &mPollForJobsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1207]})
-var sPollForJobsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPollForJobsOutput, Members: &mPollForJobsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1211]})
-var sPollForThirdPartyJobsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPollForThirdPartyJobsInput, Members: &mPollForThirdPartyJobsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1213]})
-var sPollForThirdPartyJobsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPollForThirdPartyJobsOutput, Members: &mPollForThirdPartyJobsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1216]})
-var sPutActionRevisionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutActionRevisionInput, Members: &mPutActionRevisionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1218]})
-var sPutActionRevisionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutActionRevisionOutput, Members: &mPutActionRevisionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1223]})
-var sPutApprovalResultInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutApprovalResultInput, Members: &mPutApprovalResultInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1226]})
-var sPutApprovalResultOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutApprovalResultOutput, Members: &mPutApprovalResultOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1232]})
-var sPutJobFailureResultInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutJobFailureResultInput, Members: &mPutJobFailureResultInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1234]})
-var sPutJobSuccessResultInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutJobSuccessResultInput, Members: &mPutJobSuccessResultInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1237]})
-var sPutThirdPartyJobFailureResultInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutThirdPartyJobFailureResultInput, Members: &mPutThirdPartyJobFailureResultInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1243]})
-var sPutThirdPartyJobSuccessResultInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutThirdPartyJobSuccessResultInput, Members: &mPutThirdPartyJobSuccessResultInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1247]})
-var sPutWebhookInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutWebhookInput, Members: &mPutWebhookInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1253]})
-var sPutWebhookOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutWebhookOutput, Members: &mPutWebhookOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1256]})
-var sRegisterWebhookWithThirdPartyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterWebhookWithThirdPartyInput, Members: &mRegisterWebhookWithThirdPartyInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1258]})
-var sRegisterWebhookWithThirdPartyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterWebhookWithThirdPartyOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1260]})
-var sRetryStageExecutionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryStageExecutionInput, Members: &mRetryStageExecutionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1261]})
-var sRetryStageExecutionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryStageExecutionOutput, Members: &mRetryStageExecutionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1266]})
-var sRollbackStageInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRollbackStageInput, Members: &mRollbackStageInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1268]})
-var sRollbackStageOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRollbackStageOutput, Members: &mRollbackStageOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1272]})
-var sStartPipelineExecutionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPipelineExecutionInput, Members: &mStartPipelineExecutionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1274]})
-var sStartPipelineExecutionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPipelineExecutionOutput, Members: &mStartPipelineExecutionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1279]})
-var sStopPipelineExecutionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopPipelineExecutionInput, Members: &mStopPipelineExecutionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1281]})
-var sStopPipelineExecutionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopPipelineExecutionOutput, Members: &mStopPipelineExecutionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1286]})
-var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1288]})
-var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1291]})
-var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1292]})
-var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1295]})
-var sUpdateActionTypeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateActionTypeInput, Members: &mUpdateActionTypeInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1296]})
-var sUpdatePipelineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePipelineInput, Members: &mUpdatePipelineInput, Type: smithy.ShapeTypeStructure, Ext: &ext[1298]})
-var sUpdatePipelineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePipelineOutput, Members: &mUpdatePipelineOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[1300]})
+var sAcknowledgeJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcknowledgeJob, Type: smithy.ShapeTypeOperation, Ext: &eAcknowledgeJob})
+var sAcknowledgeThirdPartyJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcknowledgeThirdPartyJob, Type: smithy.ShapeTypeOperation, Ext: &eAcknowledgeThirdPartyJob})
+var sCreateCustomActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomActionType, Type: smithy.ShapeTypeOperation, Ext: &eCreateCustomActionType})
+var sCreatePipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePipeline, Type: smithy.ShapeTypeOperation, Ext: &eCreatePipeline})
+var sDeleteCustomActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomActionType, Type: smithy.ShapeTypeOperation, Ext: &eDeleteCustomActionType})
+var sDeletePipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePipeline, Type: smithy.ShapeTypeOperation, Ext: &eDeletePipeline})
+var sDeleteWebhook = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWebhook, Type: smithy.ShapeTypeOperation, Ext: &eDeleteWebhook})
+var sDeregisterWebhookWithThirdParty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterWebhookWithThirdParty, Type: smithy.ShapeTypeOperation, Ext: &eDeregisterWebhookWithThirdParty})
+var sDisableStageTransition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableStageTransition, Type: smithy.ShapeTypeOperation, Ext: &eDisableStageTransition})
+var sEnableStageTransition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableStageTransition, Type: smithy.ShapeTypeOperation, Ext: &eEnableStageTransition})
+var sGetActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetActionType, Type: smithy.ShapeTypeOperation, Ext: &eGetActionType})
+var sGetJobDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetJobDetails, Type: smithy.ShapeTypeOperation, Ext: &eGetJobDetails})
+var sGetPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipeline, Type: smithy.ShapeTypeOperation, Ext: &eGetPipeline})
+var sGetPipelineExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineExecution, Type: smithy.ShapeTypeOperation, Ext: &eGetPipelineExecution})
+var sGetPipelineState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineState, Type: smithy.ShapeTypeOperation, Ext: &eGetPipelineState})
+var sGetThirdPartyJobDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetThirdPartyJobDetails, Type: smithy.ShapeTypeOperation, Ext: &eGetThirdPartyJobDetails})
+var sListActionExecutions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActionExecutions, Type: smithy.ShapeTypeOperation, Ext: &eListActionExecutions})
+var sListActionTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActionTypes, Type: smithy.ShapeTypeOperation, Ext: &eListActionTypes})
+var sListDeployActionExecutionTargets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeployActionExecutionTargets, Type: smithy.ShapeTypeOperation, Ext: &eListDeployActionExecutionTargets})
+var sListPipelineExecutions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelineExecutions, Type: smithy.ShapeTypeOperation, Ext: &eListPipelineExecutions})
+var sListPipelines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelines, Type: smithy.ShapeTypeOperation, Ext: &eListPipelines})
+var sListRuleExecutions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleExecutions, Type: smithy.ShapeTypeOperation, Ext: &eListRuleExecutions})
+var sListRuleTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleTypes, Type: smithy.ShapeTypeOperation, Ext: &eListRuleTypes})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sListWebhooks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWebhooks, Type: smithy.ShapeTypeOperation, Ext: &eListWebhooks})
+var sOverrideStageCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOverrideStageCondition, Type: smithy.ShapeTypeOperation, Ext: &eOverrideStageCondition})
+var sPollForJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPollForJobs, Type: smithy.ShapeTypeOperation, Ext: &ePollForJobs})
+var sPollForThirdPartyJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPollForThirdPartyJobs, Type: smithy.ShapeTypeOperation, Ext: &ePollForThirdPartyJobs})
+var sPutActionRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutActionRevision, Type: smithy.ShapeTypeOperation, Ext: &ePutActionRevision})
+var sPutApprovalResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutApprovalResult, Type: smithy.ShapeTypeOperation, Ext: &ePutApprovalResult})
+var sPutJobFailureResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutJobFailureResult, Type: smithy.ShapeTypeOperation, Ext: &ePutJobFailureResult})
+var sPutJobSuccessResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutJobSuccessResult, Type: smithy.ShapeTypeOperation, Ext: &ePutJobSuccessResult})
+var sPutThirdPartyJobFailureResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutThirdPartyJobFailureResult, Type: smithy.ShapeTypeOperation, Ext: &ePutThirdPartyJobFailureResult})
+var sPutThirdPartyJobSuccessResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutThirdPartyJobSuccessResult, Type: smithy.ShapeTypeOperation, Ext: &ePutThirdPartyJobSuccessResult})
+var sPutWebhook = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutWebhook, Type: smithy.ShapeTypeOperation, Ext: &ePutWebhook})
+var sRegisterWebhookWithThirdParty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterWebhookWithThirdParty, Type: smithy.ShapeTypeOperation, Ext: &eRegisterWebhookWithThirdParty})
+var sRetryStageExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryStageExecution, Type: smithy.ShapeTypeOperation, Ext: &eRetryStageExecution})
+var sRollbackStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRollbackStage, Type: smithy.ShapeTypeOperation, Ext: &eRollbackStage})
+var sStartPipelineExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPipelineExecution, Type: smithy.ShapeTypeOperation, Ext: &eStartPipelineExecution})
+var sStopPipelineExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopPipelineExecution, Type: smithy.ShapeTypeOperation, Ext: &eStopPipelineExecution})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateActionType, Type: smithy.ShapeTypeOperation, Ext: &eUpdateActionType})
+var sUpdatePipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePipeline, Type: smithy.ShapeTypeOperation, Ext: &eUpdatePipeline})
+var s_CodePipeline_20150709 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodePipeline_20150709, Traits: &t0, Type: smithy.ShapeTypeService, Ext: &e_CodePipeline_20150709})
+var s_AccessKeyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessKeyId, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_AccessKeyId})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_AccountId})
+var sActionCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionCategory, Members: &mActionCategory, Type: smithy.ShapeTypeEnum, Ext: &eActionCategory})
+var sActionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionConfiguration, Members: &mActionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eActionConfiguration})
+var s_ActionConfigurationKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionConfigurationKey, Type: smithy.ShapeTypeString, Ext: &e_ActionConfigurationKey})
+var s_ActionConfigurationMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionConfigurationMap, Members: &m_ActionConfigurationMap, Type: smithy.ShapeTypeMap, Ext: &e_ActionConfigurationMap})
+var sActionConfigurationProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionConfigurationProperty, Members: &mActionConfigurationProperty, Type: smithy.ShapeTypeStructure, Ext: &eActionConfigurationProperty})
+var s_ActionConfigurationPropertyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionConfigurationPropertyList, Members: &m_ActionConfigurationPropertyList, Type: smithy.ShapeTypeList, Ext: &e_ActionConfigurationPropertyList})
+var sActionConfigurationPropertyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionConfigurationPropertyType, Members: &mActionConfigurationPropertyType, Type: smithy.ShapeTypeEnum, Ext: &eActionConfigurationPropertyType})
+var s_ActionConfigurationQueryableValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionConfigurationQueryableValue, Type: smithy.ShapeTypeString, Ext: &e_ActionConfigurationQueryableValue})
+var s_ActionConfigurationValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionConfigurationValue, Type: smithy.ShapeTypeString, Ext: &e_ActionConfigurationValue})
+var sActionContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionContext, Members: &mActionContext, Type: smithy.ShapeTypeStructure, Ext: &eActionContext})
+var sActionDeclaration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionDeclaration, Members: &mActionDeclaration, Type: smithy.ShapeTypeStructure, Ext: &eActionDeclaration})
+var sActionExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionExecution, Members: &mActionExecution, Type: smithy.ShapeTypeStructure, Ext: &eActionExecution})
+var sActionExecutionDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionExecutionDetail, Members: &mActionExecutionDetail, Type: smithy.ShapeTypeStructure, Ext: &eActionExecutionDetail})
+var s_ActionExecutionDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionExecutionDetailList, Members: &m_ActionExecutionDetailList, Type: smithy.ShapeTypeList, Ext: &e_ActionExecutionDetailList})
+var sActionExecutionFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionExecutionFilter, Members: &mActionExecutionFilter, Type: smithy.ShapeTypeStructure, Ext: &eActionExecutionFilter})
+var s_ActionExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionExecutionId, Type: smithy.ShapeTypeString, Ext: &e_ActionExecutionId})
+var sActionExecutionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionExecutionInput, Members: &mActionExecutionInput, Type: smithy.ShapeTypeStructure, Ext: &eActionExecutionInput})
+var sActionExecutionNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionExecutionNotFoundException, Members: &mActionExecutionNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eActionExecutionNotFoundException})
+var sActionExecutionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionExecutionOutput, Members: &mActionExecutionOutput, Type: smithy.ShapeTypeStructure, Ext: &eActionExecutionOutput})
+var sActionExecutionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionExecutionResult, Members: &mActionExecutionResult, Type: smithy.ShapeTypeStructure, Ext: &eActionExecutionResult})
+var sActionExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionExecutionStatus, Members: &mActionExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &eActionExecutionStatus})
+var s_ActionExecutionToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionExecutionToken, Type: smithy.ShapeTypeString, Ext: &e_ActionExecutionToken})
+var s_ActionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &e_ActionName})
+var s_ActionNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionNamespace, Type: smithy.ShapeTypeString, Ext: &e_ActionNamespace})
+var sActionNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionNotFoundException, Members: &mActionNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eActionNotFoundException})
+var sActionOwner = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionOwner, Members: &mActionOwner, Type: smithy.ShapeTypeEnum, Ext: &eActionOwner})
+var s_ActionProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionProvider, Type: smithy.ShapeTypeString, Ext: &e_ActionProvider})
+var sActionRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionRevision, Members: &mActionRevision, Type: smithy.ShapeTypeStructure, Ext: &eActionRevision})
+var s_ActionRunOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionRunOrder, Type: smithy.ShapeTypeInteger, Ext: &e_ActionRunOrder})
+var sActionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionState, Members: &mActionState, Type: smithy.ShapeTypeStructure, Ext: &eActionState})
+var s_ActionStateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionStateList, Members: &m_ActionStateList, Type: smithy.ShapeTypeList, Ext: &e_ActionStateList})
+var s_ActionTimeout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionTimeout, Type: smithy.ShapeTypeInteger, Ext: &e_ActionTimeout})
+var sActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionType, Members: &mActionType, Type: smithy.ShapeTypeStructure, Ext: &eActionType})
+var sActionTypeArtifactDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionTypeArtifactDetails, Members: &mActionTypeArtifactDetails, Type: smithy.ShapeTypeStructure, Ext: &eActionTypeArtifactDetails})
+var sActionTypeDeclaration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionTypeDeclaration, Members: &mActionTypeDeclaration, Type: smithy.ShapeTypeStructure, Ext: &eActionTypeDeclaration})
+var s_ActionTypeDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionTypeDescription, Type: smithy.ShapeTypeString, Ext: &e_ActionTypeDescription})
+var sActionTypeExecutor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionTypeExecutor, Members: &mActionTypeExecutor, Type: smithy.ShapeTypeStructure, Ext: &eActionTypeExecutor})
+var sActionTypeId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionTypeId, Members: &mActionTypeId, Type: smithy.ShapeTypeStructure, Ext: &eActionTypeId})
+var sActionTypeIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionTypeIdentifier, Members: &mActionTypeIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eActionTypeIdentifier})
+var s_ActionTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionTypeList, Members: &m_ActionTypeList, Type: smithy.ShapeTypeList, Ext: &e_ActionTypeList})
+var sActionTypeNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionTypeNotFoundException, Members: &mActionTypeNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eActionTypeNotFoundException})
+var s_ActionTypeOwner = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionTypeOwner, Type: smithy.ShapeTypeString, Ext: &e_ActionTypeOwner})
+var sActionTypePermissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionTypePermissions, Members: &mActionTypePermissions, Type: smithy.ShapeTypeStructure, Ext: &eActionTypePermissions})
+var s_ActionTypeProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionTypeProperties, Members: &m_ActionTypeProperties, Type: smithy.ShapeTypeList, Ext: &e_ActionTypeProperties})
+var sActionTypeProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionTypeProperty, Members: &mActionTypeProperty, Type: smithy.ShapeTypeStructure, Ext: &eActionTypeProperty})
+var sActionTypeSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionTypeSettings, Members: &mActionTypeSettings, Type: smithy.ShapeTypeStructure, Ext: &eActionTypeSettings})
+var sActionTypeUrls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionTypeUrls, Members: &mActionTypeUrls, Type: smithy.ShapeTypeStructure, Ext: &eActionTypeUrls})
+var s_AllowedAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AllowedAccount, Type: smithy.ShapeTypeString, Ext: &e_AllowedAccount})
+var s_AllowedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AllowedAccounts, Members: &m_AllowedAccounts, Type: smithy.ShapeTypeList, Ext: &e_AllowedAccounts})
+var sApprovalAlreadyCompletedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalAlreadyCompletedException, Members: &mApprovalAlreadyCompletedException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eApprovalAlreadyCompletedException})
+var sApprovalResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalResult, Members: &mApprovalResult, Type: smithy.ShapeTypeStructure, Ext: &eApprovalResult})
+var sApprovalStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalStatus, Members: &mApprovalStatus, Type: smithy.ShapeTypeEnum, Ext: &eApprovalStatus})
+var s_ApprovalSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalSummary, Type: smithy.ShapeTypeString, Ext: &e_ApprovalSummary})
+var s_ApprovalToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalToken, Type: smithy.ShapeTypeString, Ext: &e_ApprovalToken})
+var sArtifact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifact, Members: &mArtifact, Type: smithy.ShapeTypeStructure, Ext: &eArtifact})
+var sArtifactDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifactDetail, Members: &mArtifactDetail, Type: smithy.ShapeTypeStructure, Ext: &eArtifactDetail})
+var s_ArtifactDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArtifactDetailList, Members: &m_ArtifactDetailList, Type: smithy.ShapeTypeList, Ext: &e_ArtifactDetailList})
+var sArtifactDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifactDetails, Members: &mArtifactDetails, Type: smithy.ShapeTypeStructure, Ext: &eArtifactDetails})
+var s_ArtifactList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArtifactList, Members: &m_ArtifactList, Type: smithy.ShapeTypeList, Ext: &e_ArtifactList})
+var sArtifactLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifactLocation, Members: &mArtifactLocation, Type: smithy.ShapeTypeStructure, Ext: &eArtifactLocation})
+var sArtifactLocationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifactLocationType, Members: &mArtifactLocationType, Type: smithy.ShapeTypeEnum, Ext: &eArtifactLocationType})
+var s_ArtifactName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArtifactName, Type: smithy.ShapeTypeString, Ext: &e_ArtifactName})
+var sArtifactRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifactRevision, Members: &mArtifactRevision, Type: smithy.ShapeTypeStructure, Ext: &eArtifactRevision})
+var s_ArtifactRevisionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArtifactRevisionList, Members: &m_ArtifactRevisionList, Type: smithy.ShapeTypeList, Ext: &e_ArtifactRevisionList})
+var sArtifactStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifactStore, Members: &mArtifactStore, Type: smithy.ShapeTypeStructure, Ext: &eArtifactStore})
+var s_ArtifactStoreLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArtifactStoreLocation, Type: smithy.ShapeTypeString, Ext: &e_ArtifactStoreLocation})
+var s_ArtifactStoreMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArtifactStoreMap, Members: &m_ArtifactStoreMap, Type: smithy.ShapeTypeMap, Ext: &e_ArtifactStoreMap})
+var sArtifactStoreType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifactStoreType, Members: &mArtifactStoreType, Type: smithy.ShapeTypeEnum, Ext: &eArtifactStoreType})
+var s_AWSRegionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSRegionName, Type: smithy.ShapeTypeString, Ext: &e_AWSRegionName})
+var sAWSSessionCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAWSSessionCredentials, Members: &mAWSSessionCredentials, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eAWSSessionCredentials})
+var sBeforeEntryConditions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBeforeEntryConditions, Members: &mBeforeEntryConditions, Type: smithy.ShapeTypeStructure, Ext: &eBeforeEntryConditions})
+var sBlockerDeclaration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlockerDeclaration, Members: &mBlockerDeclaration, Type: smithy.ShapeTypeStructure, Ext: &eBlockerDeclaration})
+var s_BlockerName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockerName, Type: smithy.ShapeTypeString, Ext: &e_BlockerName})
+var sBlockerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlockerType, Members: &mBlockerType, Type: smithy.ShapeTypeEnum, Ext: &eBlockerType})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &e_Boolean})
+var s_ClientId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientId, Type: smithy.ShapeTypeString, Ext: &e_ClientId})
+var s_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString, Ext: &e_ClientRequestToken})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
+var s_Code = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Code, Type: smithy.ShapeTypeString, Ext: &e_Code})
+var s_Command = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Command, Type: smithy.ShapeTypeString, Ext: &e_Command})
+var s_CommandList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommandList, Members: &m_CommandList, Type: smithy.ShapeTypeList, Ext: &e_CommandList})
+var sConcurrentModificationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentModificationException, Members: &mConcurrentModificationException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eConcurrentModificationException})
+var sConcurrentPipelineExecutionsLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentPipelineExecutionsLimitExceededException, Members: &mConcurrentPipelineExecutionsLimitExceededException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eConcurrentPipelineExecutionsLimitExceededException})
+var sCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCondition, Members: &mCondition, Type: smithy.ShapeTypeStructure, Ext: &eCondition})
+var sConditionExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConditionExecution, Members: &mConditionExecution, Type: smithy.ShapeTypeStructure, Ext: &eConditionExecution})
+var sConditionExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConditionExecutionStatus, Members: &mConditionExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &eConditionExecutionStatus})
+var s_ConditionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConditionList, Members: &m_ConditionList, Type: smithy.ShapeTypeList, Ext: &e_ConditionList})
+var sConditionNotOverridableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConditionNotOverridableException, Members: &mConditionNotOverridableException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eConditionNotOverridableException})
+var sConditionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConditionState, Members: &mConditionState, Type: smithy.ShapeTypeStructure, Ext: &eConditionState})
+var s_ConditionStateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConditionStateList, Members: &m_ConditionStateList, Type: smithy.ShapeTypeList, Ext: &e_ConditionStateList})
+var sConditionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConditionType, Members: &mConditionType, Type: smithy.ShapeTypeEnum, Ext: &eConditionType})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var s_ContinuationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContinuationToken, Type: smithy.ShapeTypeString, Ext: &e_ContinuationToken})
+var sCurrentRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCurrentRevision, Members: &mCurrentRevision, Type: smithy.ShapeTypeStructure, Ext: &eCurrentRevision})
+var sDeployActionExecutionTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeployActionExecutionTarget, Members: &mDeployActionExecutionTarget, Type: smithy.ShapeTypeStructure, Ext: &eDeployActionExecutionTarget})
+var s_DeployActionExecutionTargetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeployActionExecutionTargetList, Members: &m_DeployActionExecutionTargetList, Type: smithy.ShapeTypeList, Ext: &e_DeployActionExecutionTargetList})
+var sDeployTargetEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeployTargetEvent, Members: &mDeployTargetEvent, Type: smithy.ShapeTypeStructure, Ext: &eDeployTargetEvent})
+var sDeployTargetEventContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeployTargetEventContext, Members: &mDeployTargetEventContext, Type: smithy.ShapeTypeStructure, Ext: &eDeployTargetEventContext})
+var s_DeployTargetEventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeployTargetEventList, Members: &m_DeployTargetEventList, Type: smithy.ShapeTypeList, Ext: &e_DeployTargetEventList})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &e_Description})
+var s_DisabledReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DisabledReason, Type: smithy.ShapeTypeString, Ext: &e_DisabledReason})
+var sDuplicatedStopRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplicatedStopRequestException, Members: &mDuplicatedStopRequestException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eDuplicatedStopRequestException})
+var s_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &e_Enabled})
+var sEncryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionKey, Members: &mEncryptionKey, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionKey})
+var s_EncryptionKeyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionKeyId, Type: smithy.ShapeTypeString, Ext: &e_EncryptionKeyId})
+var sEncryptionKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionKeyType, Members: &mEncryptionKeyType, Type: smithy.ShapeTypeEnum, Ext: &eEncryptionKeyType})
+var sEnvironmentVariable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentVariable, Members: &mEnvironmentVariable, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentVariable})
+var s_EnvironmentVariableList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentVariableList, Members: &m_EnvironmentVariableList, Type: smithy.ShapeTypeList, Ext: &e_EnvironmentVariableList})
+var s_EnvironmentVariableName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentVariableName, Type: smithy.ShapeTypeString, Ext: &e_EnvironmentVariableName})
+var sEnvironmentVariableType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentVariableType, Members: &mEnvironmentVariableType, Type: smithy.ShapeTypeEnum, Ext: &eEnvironmentVariableType})
+var s_EnvironmentVariableValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentVariableValue, Type: smithy.ShapeTypeString, Ext: &e_EnvironmentVariableValue})
+var sErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorDetails, Members: &mErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &eErrorDetails})
+var sExecutionDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionDetails, Members: &mExecutionDetails, Type: smithy.ShapeTypeStructure, Ext: &eExecutionDetails})
+var s_ExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutionId, Type: smithy.ShapeTypeString, Ext: &e_ExecutionId})
+var sExecutionMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionMode, Members: &mExecutionMode, Type: smithy.ShapeTypeEnum, Ext: &eExecutionMode})
+var s_ExecutionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutionSummary, Type: smithy.ShapeTypeString, Ext: &e_ExecutionSummary})
+var sExecutionTrigger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionTrigger, Members: &mExecutionTrigger, Type: smithy.ShapeTypeStructure, Ext: &eExecutionTrigger})
+var sExecutionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionType, Members: &mExecutionType, Type: smithy.ShapeTypeEnum, Ext: &eExecutionType})
+var sExecutorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutorConfiguration, Members: &mExecutorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExecutorConfiguration})
+var sExecutorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutorType, Members: &mExecutorType, Type: smithy.ShapeTypeEnum, Ext: &eExecutorType})
+var s_ExternalExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalExecutionId, Type: smithy.ShapeTypeString, Ext: &e_ExternalExecutionId})
+var s_ExternalExecutionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalExecutionSummary, Type: smithy.ShapeTypeString, Ext: &e_ExternalExecutionSummary})
+var sFailureConditions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailureConditions, Members: &mFailureConditions, Type: smithy.ShapeTypeStructure, Ext: &eFailureConditions})
+var sFailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailureDetails, Members: &mFailureDetails, Type: smithy.ShapeTypeStructure, Ext: &eFailureDetails})
+var sFailureType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailureType, Members: &mFailureType, Type: smithy.ShapeTypeEnum, Ext: &eFailureType})
+var s_FilePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilePath, Type: smithy.ShapeTypeString, Ext: &e_FilePath})
+var s_FilePathList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilePathList, Members: &m_FilePathList, Type: smithy.ShapeTypeList, Ext: &e_FilePathList})
+var sGitBranchFilterCriteria = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGitBranchFilterCriteria, Members: &mGitBranchFilterCriteria, Type: smithy.ShapeTypeStructure, Ext: &eGitBranchFilterCriteria})
+var s_GitBranchNamePattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GitBranchNamePattern, Type: smithy.ShapeTypeString, Ext: &e_GitBranchNamePattern})
+var s_GitBranchPatternList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GitBranchPatternList, Members: &m_GitBranchPatternList, Type: smithy.ShapeTypeList, Ext: &e_GitBranchPatternList})
+var sGitConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGitConfiguration, Members: &mGitConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGitConfiguration})
+var sGitFilePathFilterCriteria = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGitFilePathFilterCriteria, Members: &mGitFilePathFilterCriteria, Type: smithy.ShapeTypeStructure, Ext: &eGitFilePathFilterCriteria})
+var s_GitFilePathPattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GitFilePathPattern, Type: smithy.ShapeTypeString, Ext: &e_GitFilePathPattern})
+var s_GitFilePathPatternList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GitFilePathPatternList, Members: &m_GitFilePathPatternList, Type: smithy.ShapeTypeList, Ext: &e_GitFilePathPatternList})
+var sGitPullRequestEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGitPullRequestEventType, Members: &mGitPullRequestEventType, Type: smithy.ShapeTypeEnum, Ext: &eGitPullRequestEventType})
+var s_GitPullRequestEventTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GitPullRequestEventTypeList, Members: &m_GitPullRequestEventTypeList, Type: smithy.ShapeTypeList, Ext: &e_GitPullRequestEventTypeList})
+var sGitPullRequestFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGitPullRequestFilter, Members: &mGitPullRequestFilter, Type: smithy.ShapeTypeStructure, Ext: &eGitPullRequestFilter})
+var s_GitPullRequestFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GitPullRequestFilterList, Members: &m_GitPullRequestFilterList, Type: smithy.ShapeTypeList, Ext: &e_GitPullRequestFilterList})
+var sGitPushFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGitPushFilter, Members: &mGitPushFilter, Type: smithy.ShapeTypeStructure, Ext: &eGitPushFilter})
+var s_GitPushFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GitPushFilterList, Members: &m_GitPushFilterList, Type: smithy.ShapeTypeList, Ext: &e_GitPushFilterList})
+var sGitTagFilterCriteria = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGitTagFilterCriteria, Members: &mGitTagFilterCriteria, Type: smithy.ShapeTypeStructure, Ext: &eGitTagFilterCriteria})
+var s_GitTagNamePattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GitTagNamePattern, Type: smithy.ShapeTypeString, Ext: &e_GitTagNamePattern})
+var s_GitTagPatternList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GitTagPatternList, Members: &m_GitTagPatternList, Type: smithy.ShapeTypeList, Ext: &e_GitTagPatternList})
+var sInputArtifact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputArtifact, Members: &mInputArtifact, Type: smithy.ShapeTypeStructure, Ext: &eInputArtifact})
+var s_InputArtifactList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InputArtifactList, Members: &m_InputArtifactList, Type: smithy.ShapeTypeList, Ext: &e_InputArtifactList})
+var sInvalidActionDeclarationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidActionDeclarationException, Members: &mInvalidActionDeclarationException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInvalidActionDeclarationException})
+var sInvalidApprovalTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidApprovalTokenException, Members: &mInvalidApprovalTokenException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInvalidApprovalTokenException})
+var sInvalidArnException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidArnException, Members: &mInvalidArnException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInvalidArnException})
+var sInvalidBlockerDeclarationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidBlockerDeclarationException, Members: &mInvalidBlockerDeclarationException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInvalidBlockerDeclarationException})
+var sInvalidClientTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidClientTokenException, Members: &mInvalidClientTokenException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInvalidClientTokenException})
+var sInvalidJobException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidJobException, Members: &mInvalidJobException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInvalidJobException})
+var sInvalidJobStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidJobStateException, Members: &mInvalidJobStateException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInvalidJobStateException})
+var sInvalidNextTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidNextTokenException, Members: &mInvalidNextTokenException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInvalidNextTokenException})
+var sInvalidNonceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidNonceException, Members: &mInvalidNonceException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInvalidNonceException})
+var sInvalidStageDeclarationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidStageDeclarationException, Members: &mInvalidStageDeclarationException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInvalidStageDeclarationException})
+var sInvalidStructureException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidStructureException, Members: &mInvalidStructureException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInvalidStructureException})
+var sInvalidTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTagsException, Members: &mInvalidTagsException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInvalidTagsException})
+var sInvalidWebhookAuthenticationParametersException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidWebhookAuthenticationParametersException, Members: &mInvalidWebhookAuthenticationParametersException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInvalidWebhookAuthenticationParametersException})
+var sInvalidWebhookFilterPatternException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidWebhookFilterPatternException, Members: &mInvalidWebhookFilterPatternException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInvalidWebhookFilterPatternException})
+var sJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJob, Members: &mJob, Type: smithy.ShapeTypeStructure, Ext: &eJob})
+var sJobData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobData, Members: &mJobData, Type: smithy.ShapeTypeStructure, Ext: &eJobData})
+var sJobDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobDetails, Members: &mJobDetails, Type: smithy.ShapeTypeStructure, Ext: &eJobDetails})
+var s_JobId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &e_JobId})
+var s_JobList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobList, Members: &m_JobList, Type: smithy.ShapeTypeList, Ext: &e_JobList})
+var sJobNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobNotFoundException, Members: &mJobNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eJobNotFoundException})
+var sJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eJobStatus})
+var s_JobTimeout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobTimeout, Type: smithy.ShapeTypeInteger, Ext: &e_JobTimeout})
+var sJobWorkerExecutorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobWorkerExecutorConfiguration, Members: &mJobWorkerExecutorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eJobWorkerExecutorConfiguration})
+var s_JsonPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JsonPath, Type: smithy.ShapeTypeString, Ext: &e_JsonPath})
+var sLambdaExecutorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaExecutorConfiguration, Members: &mLambdaExecutorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eLambdaExecutorConfiguration})
+var s_LambdaFunctionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LambdaFunctionArn, Type: smithy.ShapeTypeString, Ext: &e_LambdaFunctionArn})
+var s_LastChangedAt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastChangedAt, Type: smithy.ShapeTypeTimestamp, Ext: &e_LastChangedAt})
+var s_LastChangedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastChangedBy, Type: smithy.ShapeTypeString, Ext: &e_LastChangedBy})
+var s_LastUpdatedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastUpdatedBy, Type: smithy.ShapeTypeString, Ext: &e_LastUpdatedBy})
+var sLatestInPipelineExecutionFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLatestInPipelineExecutionFilter, Members: &mLatestInPipelineExecutionFilter, Type: smithy.ShapeTypeStructure, Ext: &eLatestInPipelineExecutionFilter})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var sListWebhookItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWebhookItem, Members: &mListWebhookItem, Type: smithy.ShapeTypeStructure, Ext: &eListWebhookItem})
+var s_LogStreamARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogStreamARN, Type: smithy.ShapeTypeString, Ext: &e_LogStreamARN})
+var s_MatchEquals = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MatchEquals, Type: smithy.ShapeTypeString, Ext: &e_MatchEquals})
+var s_MaxBatchSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxBatchSize, Type: smithy.ShapeTypeInteger, Ext: &e_MaxBatchSize})
+var s_MaximumActionTypeArtifactCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaximumActionTypeArtifactCount, Type: smithy.ShapeTypeInteger, Ext: &e_MaximumActionTypeArtifactCount})
+var s_MaximumArtifactCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaximumArtifactCount, Type: smithy.ShapeTypeInteger, Ext: &e_MaximumArtifactCount})
+var s_MaxPipelines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxPipelines, Type: smithy.ShapeTypeInteger, Ext: &e_MaxPipelines})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &e_Message})
+var s_MinimumActionTypeArtifactCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MinimumActionTypeArtifactCount, Type: smithy.ShapeTypeInteger, Ext: &e_MinimumActionTypeArtifactCount})
+var s_MinimumArtifactCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MinimumArtifactCount, Type: smithy.ShapeTypeInteger, Ext: &e_MinimumArtifactCount})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var s_Nonce = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Nonce, Type: smithy.ShapeTypeString, Ext: &e_Nonce})
+var sNotLatestPipelineExecutionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotLatestPipelineExecutionException, Members: &mNotLatestPipelineExecutionException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eNotLatestPipelineExecutionException})
+var sOutputArtifact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputArtifact, Members: &mOutputArtifact, Type: smithy.ShapeTypeStructure, Ext: &eOutputArtifact})
+var s_OutputArtifactList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputArtifactList, Members: &m_OutputArtifactList, Type: smithy.ShapeTypeList, Ext: &e_OutputArtifactList})
+var s_OutputVariable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputVariable, Type: smithy.ShapeTypeString, Ext: &e_OutputVariable})
+var s_OutputVariableList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputVariableList, Members: &m_OutputVariableList, Type: smithy.ShapeTypeList, Ext: &e_OutputVariableList})
+var s_OutputVariablesKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputVariablesKey, Type: smithy.ShapeTypeString, Ext: &e_OutputVariablesKey})
+var s_OutputVariablesMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputVariablesMap, Members: &m_OutputVariablesMap, Type: smithy.ShapeTypeMap, Ext: &e_OutputVariablesMap})
+var sOutputVariablesSizeExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputVariablesSizeExceededException, Members: &mOutputVariablesSizeExceededException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eOutputVariablesSizeExceededException})
+var s_OutputVariablesValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputVariablesValue, Type: smithy.ShapeTypeString, Ext: &e_OutputVariablesValue})
+var s_Percentage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Percentage, Type: smithy.ShapeTypeInteger, Ext: &e_Percentage})
+var s_PipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineArn, Type: smithy.ShapeTypeString, Ext: &e_PipelineArn})
+var sPipelineContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineContext, Members: &mPipelineContext, Type: smithy.ShapeTypeStructure, Ext: &ePipelineContext})
+var sPipelineDeclaration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineDeclaration, Members: &mPipelineDeclaration, Type: smithy.ShapeTypeStructure, Ext: &ePipelineDeclaration})
+var sPipelineExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineExecution, Members: &mPipelineExecution, Type: smithy.ShapeTypeStructure, Ext: &ePipelineExecution})
+var sPipelineExecutionFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineExecutionFilter, Members: &mPipelineExecutionFilter, Type: smithy.ShapeTypeStructure, Ext: &ePipelineExecutionFilter})
+var s_PipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &e_PipelineExecutionId})
+var sPipelineExecutionNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineExecutionNotFoundException, Members: &mPipelineExecutionNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ePipelineExecutionNotFoundException})
+var sPipelineExecutionNotStoppableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineExecutionNotStoppableException, Members: &mPipelineExecutionNotStoppableException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ePipelineExecutionNotStoppableException})
+var sPipelineExecutionOutdatedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineExecutionOutdatedException, Members: &mPipelineExecutionOutdatedException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ePipelineExecutionOutdatedException})
+var sPipelineExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineExecutionStatus, Members: &mPipelineExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &ePipelineExecutionStatus})
+var s_PipelineExecutionStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineExecutionStatusSummary, Type: smithy.ShapeTypeString, Ext: &e_PipelineExecutionStatusSummary})
+var sPipelineExecutionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineExecutionSummary, Members: &mPipelineExecutionSummary, Type: smithy.ShapeTypeStructure, Ext: &ePipelineExecutionSummary})
+var s_PipelineExecutionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineExecutionSummaryList, Members: &m_PipelineExecutionSummaryList, Type: smithy.ShapeTypeList, Ext: &e_PipelineExecutionSummaryList})
+var s_PipelineList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineList, Members: &m_PipelineList, Type: smithy.ShapeTypeList, Ext: &e_PipelineList})
+var sPipelineMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineMetadata, Members: &mPipelineMetadata, Type: smithy.ShapeTypeStructure, Ext: &ePipelineMetadata})
+var s_PipelineName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &e_PipelineName})
+var sPipelineNameInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineNameInUseException, Members: &mPipelineNameInUseException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ePipelineNameInUseException})
+var sPipelineNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineNotFoundException, Members: &mPipelineNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ePipelineNotFoundException})
+var sPipelineRollbackMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineRollbackMetadata, Members: &mPipelineRollbackMetadata, Type: smithy.ShapeTypeStructure, Ext: &ePipelineRollbackMetadata})
+var s_PipelineStageDeclarationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineStageDeclarationList, Members: &m_PipelineStageDeclarationList, Type: smithy.ShapeTypeList, Ext: &e_PipelineStageDeclarationList})
+var sPipelineSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineSummary, Members: &mPipelineSummary, Type: smithy.ShapeTypeStructure, Ext: &ePipelineSummary})
+var sPipelineTriggerDeclaration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineTriggerDeclaration, Members: &mPipelineTriggerDeclaration, Type: smithy.ShapeTypeStructure, Ext: &ePipelineTriggerDeclaration})
+var s_PipelineTriggerDeclarationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineTriggerDeclarationList, Members: &m_PipelineTriggerDeclarationList, Type: smithy.ShapeTypeList, Ext: &e_PipelineTriggerDeclarationList})
+var sPipelineTriggerProviderType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineTriggerProviderType, Members: &mPipelineTriggerProviderType, Type: smithy.ShapeTypeEnum, Ext: &ePipelineTriggerProviderType})
+var sPipelineType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineType, Members: &mPipelineType, Type: smithy.ShapeTypeEnum, Ext: &ePipelineType})
+var sPipelineVariable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineVariable, Members: &mPipelineVariable, Type: smithy.ShapeTypeStructure, Ext: &ePipelineVariable})
+var sPipelineVariableDeclaration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineVariableDeclaration, Members: &mPipelineVariableDeclaration, Type: smithy.ShapeTypeStructure, Ext: &ePipelineVariableDeclaration})
+var s_PipelineVariableDeclarationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineVariableDeclarationList, Members: &m_PipelineVariableDeclarationList, Type: smithy.ShapeTypeList, Ext: &e_PipelineVariableDeclarationList})
+var s_PipelineVariableDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineVariableDescription, Type: smithy.ShapeTypeString, Ext: &e_PipelineVariableDescription})
+var s_PipelineVariableList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineVariableList, Members: &m_PipelineVariableList, Type: smithy.ShapeTypeList, Ext: &e_PipelineVariableList})
+var s_PipelineVariableName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineVariableName, Type: smithy.ShapeTypeString, Ext: &e_PipelineVariableName})
+var s_PipelineVariableValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineVariableValue, Type: smithy.ShapeTypeString, Ext: &e_PipelineVariableValue})
+var s_PipelineVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineVersion, Type: smithy.ShapeTypeInteger, Ext: &e_PipelineVersion})
+var sPipelineVersionNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineVersionNotFoundException, Members: &mPipelineVersionNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ePipelineVersionNotFoundException})
+var s_PolicyStatementsTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyStatementsTemplate, Type: smithy.ShapeTypeString, Ext: &e_PolicyStatementsTemplate})
+var s_PollingAccountList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PollingAccountList, Members: &m_PollingAccountList, Type: smithy.ShapeTypeList, Ext: &e_PollingAccountList})
+var s_PollingServicePrincipalList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PollingServicePrincipalList, Members: &m_PollingServicePrincipalList, Type: smithy.ShapeTypeList, Ext: &e_PollingServicePrincipalList})
+var s_PropertyDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PropertyDescription, Type: smithy.ShapeTypeString, Ext: &e_PropertyDescription})
+var s_QueryParamMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryParamMap, Members: &m_QueryParamMap, Type: smithy.ShapeTypeMap, Ext: &e_QueryParamMap})
+var sRequestFailedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestFailedException, Members: &mRequestFailedException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eRequestFailedException})
+var s_ResolvedActionConfigurationMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResolvedActionConfigurationMap, Members: &m_ResolvedActionConfigurationMap, Type: smithy.ShapeTypeMap, Ext: &e_ResolvedActionConfigurationMap})
+var sResolvedPipelineVariable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolvedPipelineVariable, Members: &mResolvedPipelineVariable, Type: smithy.ShapeTypeStructure, Ext: &eResolvedPipelineVariable})
+var s_ResolvedPipelineVariableList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResolvedPipelineVariableList, Members: &m_ResolvedPipelineVariableList, Type: smithy.ShapeTypeList, Ext: &e_ResolvedPipelineVariableList})
+var s_ResolvedRuleConfigurationMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResolvedRuleConfigurationMap, Members: &m_ResolvedRuleConfigurationMap, Type: smithy.ShapeTypeMap, Ext: &e_ResolvedRuleConfigurationMap})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &e_ResourceArn})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResult, Members: &mResult, Type: smithy.ShapeTypeEnum, Ext: &eResult})
+var s_RetryAttempt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetryAttempt, Type: smithy.ShapeTypeInteger, Ext: &e_RetryAttempt})
+var sRetryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryConfiguration, Members: &mRetryConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eRetryConfiguration})
+var sRetryStageMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryStageMetadata, Members: &mRetryStageMetadata, Type: smithy.ShapeTypeStructure, Ext: &eRetryStageMetadata})
+var sRetryTrigger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryTrigger, Members: &mRetryTrigger, Type: smithy.ShapeTypeEnum, Ext: &eRetryTrigger})
+var s_Revision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &e_Revision})
+var s_RevisionChangeIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevisionChangeIdentifier, Type: smithy.ShapeTypeString, Ext: &e_RevisionChangeIdentifier})
+var s_RevisionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevisionSummary, Type: smithy.ShapeTypeString, Ext: &e_RevisionSummary})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &e_RoleArn})
+var sRuleCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleCategory, Members: &mRuleCategory, Type: smithy.ShapeTypeEnum, Ext: &eRuleCategory})
+var s_RuleConfigurationKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleConfigurationKey, Type: smithy.ShapeTypeString, Ext: &e_RuleConfigurationKey})
+var s_RuleConfigurationMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleConfigurationMap, Members: &m_RuleConfigurationMap, Type: smithy.ShapeTypeMap, Ext: &e_RuleConfigurationMap})
+var sRuleConfigurationProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleConfigurationProperty, Members: &mRuleConfigurationProperty, Type: smithy.ShapeTypeStructure, Ext: &eRuleConfigurationProperty})
+var s_RuleConfigurationPropertyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleConfigurationPropertyList, Members: &m_RuleConfigurationPropertyList, Type: smithy.ShapeTypeList, Ext: &e_RuleConfigurationPropertyList})
+var sRuleConfigurationPropertyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleConfigurationPropertyType, Members: &mRuleConfigurationPropertyType, Type: smithy.ShapeTypeEnum, Ext: &eRuleConfigurationPropertyType})
+var s_RuleConfigurationValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleConfigurationValue, Type: smithy.ShapeTypeString, Ext: &e_RuleConfigurationValue})
+var sRuleDeclaration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleDeclaration, Members: &mRuleDeclaration, Type: smithy.ShapeTypeStructure, Ext: &eRuleDeclaration})
+var s_RuleDeclarationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleDeclarationList, Members: &m_RuleDeclarationList, Type: smithy.ShapeTypeList, Ext: &e_RuleDeclarationList})
+var sRuleExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleExecution, Members: &mRuleExecution, Type: smithy.ShapeTypeStructure, Ext: &eRuleExecution})
+var sRuleExecutionDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleExecutionDetail, Members: &mRuleExecutionDetail, Type: smithy.ShapeTypeStructure, Ext: &eRuleExecutionDetail})
+var s_RuleExecutionDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleExecutionDetailList, Members: &m_RuleExecutionDetailList, Type: smithy.ShapeTypeList, Ext: &e_RuleExecutionDetailList})
+var sRuleExecutionFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleExecutionFilter, Members: &mRuleExecutionFilter, Type: smithy.ShapeTypeStructure, Ext: &eRuleExecutionFilter})
+var s_RuleExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleExecutionId, Type: smithy.ShapeTypeString, Ext: &e_RuleExecutionId})
+var sRuleExecutionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleExecutionInput, Members: &mRuleExecutionInput, Type: smithy.ShapeTypeStructure, Ext: &eRuleExecutionInput})
+var sRuleExecutionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleExecutionOutput, Members: &mRuleExecutionOutput, Type: smithy.ShapeTypeStructure, Ext: &eRuleExecutionOutput})
+var sRuleExecutionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleExecutionResult, Members: &mRuleExecutionResult, Type: smithy.ShapeTypeStructure, Ext: &eRuleExecutionResult})
+var sRuleExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleExecutionStatus, Members: &mRuleExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &eRuleExecutionStatus})
+var s_RuleExecutionToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleExecutionToken, Type: smithy.ShapeTypeString, Ext: &e_RuleExecutionToken})
+var s_RuleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleName, Type: smithy.ShapeTypeString, Ext: &e_RuleName})
+var sRuleOwner = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleOwner, Members: &mRuleOwner, Type: smithy.ShapeTypeEnum, Ext: &eRuleOwner})
+var s_RuleProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleProvider, Type: smithy.ShapeTypeString, Ext: &e_RuleProvider})
+var sRuleRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleRevision, Members: &mRuleRevision, Type: smithy.ShapeTypeStructure, Ext: &eRuleRevision})
+var sRuleState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleState, Members: &mRuleState, Type: smithy.ShapeTypeStructure, Ext: &eRuleState})
+var s_RuleStateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleStateList, Members: &m_RuleStateList, Type: smithy.ShapeTypeList, Ext: &e_RuleStateList})
+var s_RuleTimeout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleTimeout, Type: smithy.ShapeTypeInteger, Ext: &e_RuleTimeout})
+var sRuleType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleType, Members: &mRuleType, Type: smithy.ShapeTypeStructure, Ext: &eRuleType})
+var sRuleTypeId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleTypeId, Members: &mRuleTypeId, Type: smithy.ShapeTypeStructure, Ext: &eRuleTypeId})
+var s_RuleTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleTypeList, Members: &m_RuleTypeList, Type: smithy.ShapeTypeList, Ext: &e_RuleTypeList})
+var sRuleTypeSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleTypeSettings, Members: &mRuleTypeSettings, Type: smithy.ShapeTypeStructure, Ext: &eRuleTypeSettings})
+var sS3ArtifactLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3ArtifactLocation, Members: &mS3ArtifactLocation, Type: smithy.ShapeTypeStructure, Ext: &eS3ArtifactLocation})
+var s_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Bucket, Type: smithy.ShapeTypeString, Ext: &e_S3Bucket})
+var s_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &e_S3BucketName})
+var s_S3Key = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Key, Type: smithy.ShapeTypeString, Ext: &e_S3Key})
+var sS3Location = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eS3Location})
+var s_S3ObjectKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3ObjectKey, Type: smithy.ShapeTypeString, Ext: &e_S3ObjectKey})
+var s_SecretAccessKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretAccessKey, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_SecretAccessKey})
+var s_ServicePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServicePrincipal, Type: smithy.ShapeTypeString, Ext: &e_ServicePrincipal})
+var s_SessionToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionToken, Traits: &t1, Type: smithy.ShapeTypeString, Ext: &e_SessionToken})
+var sSourceRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceRevision, Members: &mSourceRevision, Type: smithy.ShapeTypeStructure, Ext: &eSourceRevision})
+var s_SourceRevisionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceRevisionList, Members: &m_SourceRevisionList, Type: smithy.ShapeTypeList, Ext: &e_SourceRevisionList})
+var sSourceRevisionOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceRevisionOverride, Members: &mSourceRevisionOverride, Type: smithy.ShapeTypeStructure, Ext: &eSourceRevisionOverride})
+var s_SourceRevisionOverrideList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceRevisionOverrideList, Members: &m_SourceRevisionOverrideList, Type: smithy.ShapeTypeList, Ext: &e_SourceRevisionOverrideList})
+var sSourceRevisionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceRevisionType, Members: &mSourceRevisionType, Type: smithy.ShapeTypeEnum, Ext: &eSourceRevisionType})
+var s_StageActionDeclarationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StageActionDeclarationList, Members: &m_StageActionDeclarationList, Type: smithy.ShapeTypeList, Ext: &e_StageActionDeclarationList})
+var s_StageBlockerDeclarationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StageBlockerDeclarationList, Members: &m_StageBlockerDeclarationList, Type: smithy.ShapeTypeList, Ext: &e_StageBlockerDeclarationList})
+var sStageConditionsExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStageConditionsExecution, Members: &mStageConditionsExecution, Type: smithy.ShapeTypeStructure, Ext: &eStageConditionsExecution})
+var sStageConditionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStageConditionState, Members: &mStageConditionState, Type: smithy.ShapeTypeStructure, Ext: &eStageConditionState})
+var sStageContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStageContext, Members: &mStageContext, Type: smithy.ShapeTypeStructure, Ext: &eStageContext})
+var sStageDeclaration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStageDeclaration, Members: &mStageDeclaration, Type: smithy.ShapeTypeStructure, Ext: &eStageDeclaration})
+var sStageExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStageExecution, Members: &mStageExecution, Type: smithy.ShapeTypeStructure, Ext: &eStageExecution})
+var s_StageExecutionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StageExecutionList, Members: &m_StageExecutionList, Type: smithy.ShapeTypeList, Ext: &e_StageExecutionList})
+var sStageExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStageExecutionStatus, Members: &mStageExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &eStageExecutionStatus})
+var s_StageName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &e_StageName})
+var sStageNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStageNotFoundException, Members: &mStageNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eStageNotFoundException})
+var sStageNotRetryableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStageNotRetryableException, Members: &mStageNotRetryableException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eStageNotRetryableException})
+var sStageRetryMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStageRetryMode, Members: &mStageRetryMode, Type: smithy.ShapeTypeEnum, Ext: &eStageRetryMode})
+var sStageState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStageState, Members: &mStageState, Type: smithy.ShapeTypeStructure, Ext: &eStageState})
+var s_StageStateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StageStateList, Members: &m_StageStateList, Type: smithy.ShapeTypeList, Ext: &e_StageStateList})
+var sStageTransitionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStageTransitionType, Members: &mStageTransitionType, Type: smithy.ShapeTypeEnum, Ext: &eStageTransitionType})
+var sStartTimeRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartTimeRange, Members: &mStartTimeRange, Type: smithy.ShapeTypeEnum, Ext: &eStartTimeRange})
+var sStopExecutionTrigger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopExecutionTrigger, Members: &mStopExecutionTrigger, Type: smithy.ShapeTypeStructure, Ext: &eStopExecutionTrigger})
+var s_StopPipelineExecutionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StopPipelineExecutionReason, Type: smithy.ShapeTypeString, Ext: &e_StopPipelineExecutionReason})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var sSucceededInStageFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSucceededInStageFilter, Members: &mSucceededInStageFilter, Type: smithy.ShapeTypeStructure, Ext: &eSucceededInStageFilter})
+var sSuccessConditions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuccessConditions, Members: &mSuccessConditions, Type: smithy.ShapeTypeStructure, Ext: &eSuccessConditions})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTargetFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetFilter, Members: &mTargetFilter, Type: smithy.ShapeTypeStructure, Ext: &eTargetFilter})
+var s_TargetFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetFilterList, Members: &m_TargetFilterList, Type: smithy.ShapeTypeList, Ext: &e_TargetFilterList})
+var sTargetFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetFilterName, Members: &mTargetFilterName, Type: smithy.ShapeTypeEnum, Ext: &eTargetFilterName})
+var s_TargetFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetFilterValue, Type: smithy.ShapeTypeString, Ext: &e_TargetFilterValue})
+var s_TargetFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetFilterValueList, Members: &m_TargetFilterValueList, Type: smithy.ShapeTypeList, Ext: &e_TargetFilterValueList})
+var sThirdPartyJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThirdPartyJob, Members: &mThirdPartyJob, Type: smithy.ShapeTypeStructure, Ext: &eThirdPartyJob})
+var sThirdPartyJobData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThirdPartyJobData, Members: &mThirdPartyJobData, Type: smithy.ShapeTypeStructure, Ext: &eThirdPartyJobData})
+var sThirdPartyJobDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThirdPartyJobDetails, Members: &mThirdPartyJobDetails, Type: smithy.ShapeTypeStructure, Ext: &eThirdPartyJobDetails})
+var s_ThirdPartyJobId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThirdPartyJobId, Type: smithy.ShapeTypeString, Ext: &e_ThirdPartyJobId})
+var s_ThirdPartyJobList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThirdPartyJobList, Members: &m_ThirdPartyJobList, Type: smithy.ShapeTypeList, Ext: &e_ThirdPartyJobList})
+var s_Time = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &e_Time})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var sTooManyTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsException, Members: &mTooManyTagsException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eTooManyTagsException})
+var sTransitionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransitionState, Members: &mTransitionState, Type: smithy.ShapeTypeStructure, Ext: &eTransitionState})
+var s_TriggerDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TriggerDetail, Type: smithy.ShapeTypeString, Ext: &e_TriggerDetail})
+var sTriggerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTriggerType, Members: &mTriggerType, Type: smithy.ShapeTypeEnum, Ext: &eTriggerType})
+var sUnableToRollbackStageException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnableToRollbackStageException, Members: &mUnableToRollbackStageException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eUnableToRollbackStageException})
+var s_Url = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &e_Url})
+var s_UrlTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UrlTemplate, Type: smithy.ShapeTypeString, Ext: &e_UrlTemplate})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var s_Version = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &e_Version})
+var s_WebhookArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebhookArn, Type: smithy.ShapeTypeString, Ext: &e_WebhookArn})
+var sWebhookAuthConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebhookAuthConfiguration, Members: &mWebhookAuthConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eWebhookAuthConfiguration})
+var s_WebhookAuthConfigurationAllowedIPRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebhookAuthConfigurationAllowedIPRange, Type: smithy.ShapeTypeString, Ext: &e_WebhookAuthConfigurationAllowedIPRange})
+var s_WebhookAuthConfigurationSecretToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebhookAuthConfigurationSecretToken, Type: smithy.ShapeTypeString, Ext: &e_WebhookAuthConfigurationSecretToken})
+var sWebhookAuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebhookAuthenticationType, Members: &mWebhookAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eWebhookAuthenticationType})
+var sWebhookDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebhookDefinition, Members: &mWebhookDefinition, Type: smithy.ShapeTypeStructure, Ext: &eWebhookDefinition})
+var s_WebhookErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebhookErrorCode, Type: smithy.ShapeTypeString, Ext: &e_WebhookErrorCode})
+var s_WebhookErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebhookErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_WebhookErrorMessage})
+var sWebhookFilterRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebhookFilterRule, Members: &mWebhookFilterRule, Type: smithy.ShapeTypeStructure, Ext: &eWebhookFilterRule})
+var s_WebhookFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebhookFilters, Members: &m_WebhookFilters, Type: smithy.ShapeTypeList, Ext: &e_WebhookFilters})
+var s_WebhookLastTriggered = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebhookLastTriggered, Type: smithy.ShapeTypeTimestamp, Ext: &e_WebhookLastTriggered})
+var s_WebhookList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebhookList, Members: &m_WebhookList, Type: smithy.ShapeTypeList, Ext: &e_WebhookList})
+var s_WebhookName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebhookName, Type: smithy.ShapeTypeString, Ext: &e_WebhookName})
+var sWebhookNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebhookNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eWebhookNotFoundException})
+var s_WebhookUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebhookUrl, Type: smithy.ShapeTypeString, Ext: &e_WebhookUrl})
+var sAcknowledgeJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcknowledgeJobInput, Members: &mAcknowledgeJobInput, Type: smithy.ShapeTypeStructure, Ext: &eAcknowledgeJobInput})
+var sAcknowledgeJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcknowledgeJobOutput, Members: &mAcknowledgeJobOutput, Type: smithy.ShapeTypeStructure, Ext: &eAcknowledgeJobOutput})
+var sAcknowledgeThirdPartyJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcknowledgeThirdPartyJobInput, Members: &mAcknowledgeThirdPartyJobInput, Type: smithy.ShapeTypeStructure, Ext: &eAcknowledgeThirdPartyJobInput})
+var sAcknowledgeThirdPartyJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcknowledgeThirdPartyJobOutput, Members: &mAcknowledgeThirdPartyJobOutput, Type: smithy.ShapeTypeStructure, Ext: &eAcknowledgeThirdPartyJobOutput})
+var sCreateCustomActionTypeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomActionTypeInput, Members: &mCreateCustomActionTypeInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateCustomActionTypeInput})
+var sCreateCustomActionTypeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomActionTypeOutput, Members: &mCreateCustomActionTypeOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateCustomActionTypeOutput})
+var sCreatePipelineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePipelineInput, Members: &mCreatePipelineInput, Type: smithy.ShapeTypeStructure, Ext: &eCreatePipelineInput})
+var sCreatePipelineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePipelineOutput, Members: &mCreatePipelineOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreatePipelineOutput})
+var sDeleteCustomActionTypeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomActionTypeInput, Members: &mDeleteCustomActionTypeInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteCustomActionTypeInput})
+var sDeletePipelineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePipelineInput, Members: &mDeletePipelineInput, Type: smithy.ShapeTypeStructure, Ext: &eDeletePipelineInput})
+var sDeleteWebhookInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWebhookInput, Members: &mDeleteWebhookInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteWebhookInput})
+var sDeleteWebhookOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWebhookOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteWebhookOutput})
+var sDeregisterWebhookWithThirdPartyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterWebhookWithThirdPartyInput, Members: &mDeregisterWebhookWithThirdPartyInput, Type: smithy.ShapeTypeStructure, Ext: &eDeregisterWebhookWithThirdPartyInput})
+var sDeregisterWebhookWithThirdPartyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterWebhookWithThirdPartyOutput, Type: smithy.ShapeTypeStructure, Ext: &eDeregisterWebhookWithThirdPartyOutput})
+var sDisableStageTransitionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableStageTransitionInput, Members: &mDisableStageTransitionInput, Type: smithy.ShapeTypeStructure, Ext: &eDisableStageTransitionInput})
+var sEnableStageTransitionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableStageTransitionInput, Members: &mEnableStageTransitionInput, Type: smithy.ShapeTypeStructure, Ext: &eEnableStageTransitionInput})
+var sGetActionTypeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetActionTypeInput, Members: &mGetActionTypeInput, Type: smithy.ShapeTypeStructure, Ext: &eGetActionTypeInput})
+var sGetActionTypeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetActionTypeOutput, Members: &mGetActionTypeOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetActionTypeOutput})
+var sGetJobDetailsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetJobDetailsInput, Members: &mGetJobDetailsInput, Type: smithy.ShapeTypeStructure, Ext: &eGetJobDetailsInput})
+var sGetJobDetailsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetJobDetailsOutput, Members: &mGetJobDetailsOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetJobDetailsOutput})
+var sGetPipelineExecutionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineExecutionInput, Members: &mGetPipelineExecutionInput, Type: smithy.ShapeTypeStructure, Ext: &eGetPipelineExecutionInput})
+var sGetPipelineExecutionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineExecutionOutput, Members: &mGetPipelineExecutionOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetPipelineExecutionOutput})
+var sGetPipelineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineInput, Members: &mGetPipelineInput, Type: smithy.ShapeTypeStructure, Ext: &eGetPipelineInput})
+var sGetPipelineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineOutput, Members: &mGetPipelineOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetPipelineOutput})
+var sGetPipelineStateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineStateInput, Members: &mGetPipelineStateInput, Type: smithy.ShapeTypeStructure, Ext: &eGetPipelineStateInput})
+var sGetPipelineStateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPipelineStateOutput, Members: &mGetPipelineStateOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetPipelineStateOutput})
+var sGetThirdPartyJobDetailsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetThirdPartyJobDetailsInput, Members: &mGetThirdPartyJobDetailsInput, Type: smithy.ShapeTypeStructure, Ext: &eGetThirdPartyJobDetailsInput})
+var sGetThirdPartyJobDetailsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetThirdPartyJobDetailsOutput, Members: &mGetThirdPartyJobDetailsOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetThirdPartyJobDetailsOutput})
+var sListActionExecutionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActionExecutionsInput, Members: &mListActionExecutionsInput, Type: smithy.ShapeTypeStructure, Ext: &eListActionExecutionsInput})
+var sListActionExecutionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActionExecutionsOutput, Members: &mListActionExecutionsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListActionExecutionsOutput})
+var sListActionTypesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActionTypesInput, Members: &mListActionTypesInput, Type: smithy.ShapeTypeStructure, Ext: &eListActionTypesInput})
+var sListActionTypesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActionTypesOutput, Members: &mListActionTypesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListActionTypesOutput})
+var sListDeployActionExecutionTargetsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeployActionExecutionTargetsInput, Members: &mListDeployActionExecutionTargetsInput, Type: smithy.ShapeTypeStructure, Ext: &eListDeployActionExecutionTargetsInput})
+var sListDeployActionExecutionTargetsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeployActionExecutionTargetsOutput, Members: &mListDeployActionExecutionTargetsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListDeployActionExecutionTargetsOutput})
+var sListPipelineExecutionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelineExecutionsInput, Members: &mListPipelineExecutionsInput, Type: smithy.ShapeTypeStructure, Ext: &eListPipelineExecutionsInput})
+var sListPipelineExecutionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelineExecutionsOutput, Members: &mListPipelineExecutionsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListPipelineExecutionsOutput})
+var sListPipelinesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelinesInput, Members: &mListPipelinesInput, Type: smithy.ShapeTypeStructure, Ext: &eListPipelinesInput})
+var sListPipelinesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipelinesOutput, Members: &mListPipelinesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListPipelinesOutput})
+var sListRuleExecutionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleExecutionsInput, Members: &mListRuleExecutionsInput, Type: smithy.ShapeTypeStructure, Ext: &eListRuleExecutionsInput})
+var sListRuleExecutionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleExecutionsOutput, Members: &mListRuleExecutionsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListRuleExecutionsOutput})
+var sListRuleTypesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleTypesInput, Members: &mListRuleTypesInput, Type: smithy.ShapeTypeStructure, Ext: &eListRuleTypesInput})
+var sListRuleTypesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleTypesOutput, Members: &mListRuleTypesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListRuleTypesOutput})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceInput})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceOutput})
+var sListWebhooksInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWebhooksInput, Members: &mListWebhooksInput, Type: smithy.ShapeTypeStructure, Ext: &eListWebhooksInput})
+var sListWebhooksOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWebhooksOutput, Members: &mListWebhooksOutput, Type: smithy.ShapeTypeStructure, Ext: &eListWebhooksOutput})
+var sOverrideStageConditionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOverrideStageConditionInput, Members: &mOverrideStageConditionInput, Type: smithy.ShapeTypeStructure, Ext: &eOverrideStageConditionInput})
+var sPollForJobsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPollForJobsInput, Members: &mPollForJobsInput, Type: smithy.ShapeTypeStructure, Ext: &ePollForJobsInput})
+var sPollForJobsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPollForJobsOutput, Members: &mPollForJobsOutput, Type: smithy.ShapeTypeStructure, Ext: &ePollForJobsOutput})
+var sPollForThirdPartyJobsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPollForThirdPartyJobsInput, Members: &mPollForThirdPartyJobsInput, Type: smithy.ShapeTypeStructure, Ext: &ePollForThirdPartyJobsInput})
+var sPollForThirdPartyJobsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPollForThirdPartyJobsOutput, Members: &mPollForThirdPartyJobsOutput, Type: smithy.ShapeTypeStructure, Ext: &ePollForThirdPartyJobsOutput})
+var sPutActionRevisionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutActionRevisionInput, Members: &mPutActionRevisionInput, Type: smithy.ShapeTypeStructure, Ext: &ePutActionRevisionInput})
+var sPutActionRevisionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutActionRevisionOutput, Members: &mPutActionRevisionOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutActionRevisionOutput})
+var sPutApprovalResultInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutApprovalResultInput, Members: &mPutApprovalResultInput, Type: smithy.ShapeTypeStructure, Ext: &ePutApprovalResultInput})
+var sPutApprovalResultOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutApprovalResultOutput, Members: &mPutApprovalResultOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutApprovalResultOutput})
+var sPutJobFailureResultInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutJobFailureResultInput, Members: &mPutJobFailureResultInput, Type: smithy.ShapeTypeStructure, Ext: &ePutJobFailureResultInput})
+var sPutJobSuccessResultInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutJobSuccessResultInput, Members: &mPutJobSuccessResultInput, Type: smithy.ShapeTypeStructure, Ext: &ePutJobSuccessResultInput})
+var sPutThirdPartyJobFailureResultInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutThirdPartyJobFailureResultInput, Members: &mPutThirdPartyJobFailureResultInput, Type: smithy.ShapeTypeStructure, Ext: &ePutThirdPartyJobFailureResultInput})
+var sPutThirdPartyJobSuccessResultInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutThirdPartyJobSuccessResultInput, Members: &mPutThirdPartyJobSuccessResultInput, Type: smithy.ShapeTypeStructure, Ext: &ePutThirdPartyJobSuccessResultInput})
+var sPutWebhookInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutWebhookInput, Members: &mPutWebhookInput, Type: smithy.ShapeTypeStructure, Ext: &ePutWebhookInput})
+var sPutWebhookOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutWebhookOutput, Members: &mPutWebhookOutput, Type: smithy.ShapeTypeStructure, Ext: &ePutWebhookOutput})
+var sRegisterWebhookWithThirdPartyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterWebhookWithThirdPartyInput, Members: &mRegisterWebhookWithThirdPartyInput, Type: smithy.ShapeTypeStructure, Ext: &eRegisterWebhookWithThirdPartyInput})
+var sRegisterWebhookWithThirdPartyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterWebhookWithThirdPartyOutput, Type: smithy.ShapeTypeStructure, Ext: &eRegisterWebhookWithThirdPartyOutput})
+var sRetryStageExecutionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryStageExecutionInput, Members: &mRetryStageExecutionInput, Type: smithy.ShapeTypeStructure, Ext: &eRetryStageExecutionInput})
+var sRetryStageExecutionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryStageExecutionOutput, Members: &mRetryStageExecutionOutput, Type: smithy.ShapeTypeStructure, Ext: &eRetryStageExecutionOutput})
+var sRollbackStageInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRollbackStageInput, Members: &mRollbackStageInput, Type: smithy.ShapeTypeStructure, Ext: &eRollbackStageInput})
+var sRollbackStageOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRollbackStageOutput, Members: &mRollbackStageOutput, Type: smithy.ShapeTypeStructure, Ext: &eRollbackStageOutput})
+var sStartPipelineExecutionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPipelineExecutionInput, Members: &mStartPipelineExecutionInput, Type: smithy.ShapeTypeStructure, Ext: &eStartPipelineExecutionInput})
+var sStartPipelineExecutionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPipelineExecutionOutput, Members: &mStartPipelineExecutionOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartPipelineExecutionOutput})
+var sStopPipelineExecutionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopPipelineExecutionInput, Members: &mStopPipelineExecutionInput, Type: smithy.ShapeTypeStructure, Ext: &eStopPipelineExecutionInput})
+var sStopPipelineExecutionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopPipelineExecutionOutput, Members: &mStopPipelineExecutionOutput, Type: smithy.ShapeTypeStructure, Ext: &eStopPipelineExecutionOutput})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceInput})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceOutput})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceInput})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceOutput})
+var sUpdateActionTypeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateActionTypeInput, Members: &mUpdateActionTypeInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateActionTypeInput})
+var sUpdatePipelineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePipelineInput, Members: &mUpdatePipelineInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePipelineInput})
+var sUpdatePipelineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePipelineOutput, Members: &mUpdatePipelineOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePipelineOutput})
 
-var sActionCategory_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[48]})
-var sActionCategory_Build = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Build", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[49]})
-var sActionCategory_Deploy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deploy", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[50]})
-var sActionCategory_Test = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Test", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[51]})
-var sActionCategory_Invoke = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Invoke", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[52]})
-var sActionCategory_Approval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Approval", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[53]})
-var sActionCategory_Compute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Compute", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[54]})
-var sActionConfiguration_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &i_ActionConfigurationMap, Members: &m_ActionConfigurationMap, Type: smithy.ShapeTypeMap, Ext: &ext[56]})
-var s_ActionConfigurationMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ActionConfigurationKey, Type: smithy.ShapeTypeString, Ext: &ext[59]})
-var s_ActionConfigurationMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ActionConfigurationValue, Type: smithy.ShapeTypeString, Ext: &ext[60]})
-var sActionConfigurationProperty_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ActionConfigurationKey, Type: smithy.ShapeTypeString, Ext: &ext[62]})
-var sActionConfigurationProperty_required = smithy.NewStaticSchema(smithy.StaticSchema{Member: "required", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[63]})
-var sActionConfigurationProperty_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[64]})
-var sActionConfigurationProperty_secret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secret", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[65]})
-var sActionConfigurationProperty_queryable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[66]})
-var sActionConfigurationProperty_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[67]})
-var sActionConfigurationProperty_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iActionConfigurationPropertyType, Members: &mActionConfigurationPropertyType, Type: smithy.ShapeTypeEnum, Ext: &ext[68]})
-var s_ActionConfigurationPropertyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActionConfigurationProperty, Members: &mActionConfigurationProperty, Type: smithy.ShapeTypeStructure, Ext: &ext[70]})
-var sActionConfigurationPropertyType_String = smithy.NewStaticSchema(smithy.StaticSchema{Member: "String", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sActionConfigurationPropertyType_Number = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Number", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[73]})
-var sActionConfigurationPropertyType_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Boolean", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var sActionContext_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &ext[78]})
-var sActionContext_actionExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionExecutionId", ID: &i_ActionExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[79]})
-var sActionDeclaration_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &ext[81]})
-var sActionDeclaration_actionTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionTypeId", ID: &iActionTypeId, Members: &mActionTypeId, Type: smithy.ShapeTypeStructure, Ext: &ext[82]})
-var sActionDeclaration_runOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runOrder", ID: &i_ActionRunOrder, Type: smithy.ShapeTypeInteger, Ext: &ext[83]})
-var sActionDeclaration_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &i_ActionConfigurationMap, Members: &m_ActionConfigurationMap, Type: smithy.ShapeTypeMap, Ext: &ext[84]})
-var sActionDeclaration_commands = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commands", ID: &i_CommandList, Members: &m_CommandList, Type: smithy.ShapeTypeList, Ext: &ext[85]})
-var sActionDeclaration_outputArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputArtifacts", ID: &i_OutputArtifactList, Members: &m_OutputArtifactList, Type: smithy.ShapeTypeList, Ext: &ext[86]})
-var sActionDeclaration_inputArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputArtifacts", ID: &i_InputArtifactList, Members: &m_InputArtifactList, Type: smithy.ShapeTypeList, Ext: &ext[87]})
-var sActionDeclaration_outputVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputVariables", ID: &i_OutputVariableList, Members: &m_OutputVariableList, Type: smithy.ShapeTypeList, Ext: &ext[88]})
-var sActionDeclaration_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[89]})
-var sActionDeclaration_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_AWSRegionName, Type: smithy.ShapeTypeString, Ext: &ext[90]})
-var sActionDeclaration_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_ActionNamespace, Type: smithy.ShapeTypeString, Ext: &ext[91]})
-var sActionDeclaration_timeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutInMinutes", ID: &i_ActionTimeout, Type: smithy.ShapeTypeInteger, Ext: &ext[92]})
-var sActionDeclaration_environmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentVariables", ID: &i_EnvironmentVariableList, Members: &m_EnvironmentVariableList, Type: smithy.ShapeTypeList, Ext: &ext[93]})
-var sActionExecution_actionExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionExecutionId", ID: &i_ActionExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[95]})
-var sActionExecution_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iActionExecutionStatus, Members: &mActionExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[96]})
-var sActionExecution_summary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summary", ID: &i_ExecutionSummary, Type: smithy.ShapeTypeString, Ext: &ext[97]})
-var sActionExecution_lastStatusChange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastStatusChange", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[98]})
-var sActionExecution_token = smithy.NewStaticSchema(smithy.StaticSchema{Member: "token", ID: &i_ActionExecutionToken, Type: smithy.ShapeTypeString, Ext: &ext[99]})
-var sActionExecution_lastUpdatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedBy", ID: &i_LastUpdatedBy, Type: smithy.ShapeTypeString, Ext: &ext[100]})
-var sActionExecution_externalExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalExecutionId", ID: &i_ExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[101]})
-var sActionExecution_externalExecutionUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalExecutionUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var sActionExecution_percentComplete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "percentComplete", ID: &i_Percentage, Type: smithy.ShapeTypeInteger, Ext: &ext[103]})
-var sActionExecution_errorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorDetails", ID: &iErrorDetails, Members: &mErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[104]})
-var sActionExecution_logStreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logStreamARN", ID: &i_LogStreamARN, Type: smithy.ShapeTypeString, Ext: &ext[105]})
-var sActionExecutionDetail_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[107]})
-var sActionExecutionDetail_actionExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionExecutionId", ID: &i_ActionExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[108]})
-var sActionExecutionDetail_pipelineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineVersion", ID: &i_PipelineVersion, Type: smithy.ShapeTypeInteger, Ext: &ext[109]})
-var sActionExecutionDetail_stageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stageName", ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &ext[110]})
-var sActionExecutionDetail_actionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionName", ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &ext[111]})
-var sActionExecutionDetail_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[112]})
-var sActionExecutionDetail_lastUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[113]})
-var sActionExecutionDetail_updatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedBy", ID: &i_LastUpdatedBy, Type: smithy.ShapeTypeString, Ext: &ext[114]})
-var sActionExecutionDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iActionExecutionStatus, Members: &mActionExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[115]})
-var sActionExecutionDetail_input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "input", ID: &iActionExecutionInput, Members: &mActionExecutionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[116]})
-var sActionExecutionDetail_output = smithy.NewStaticSchema(smithy.StaticSchema{Member: "output", ID: &iActionExecutionOutput, Members: &mActionExecutionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[117]})
-var s_ActionExecutionDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActionExecutionDetail, Members: &mActionExecutionDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[119]})
-var sActionExecutionFilter_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[121]})
-var sActionExecutionFilter_latestInPipelineExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestInPipelineExecution", ID: &iLatestInPipelineExecutionFilter, Members: &mLatestInPipelineExecutionFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[122]})
-var sActionExecutionInput_actionTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionTypeId", ID: &iActionTypeId, Members: &mActionTypeId, Type: smithy.ShapeTypeStructure, Ext: &ext[125]})
-var sActionExecutionInput_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &i_ActionConfigurationMap, Members: &m_ActionConfigurationMap, Type: smithy.ShapeTypeMap, Ext: &ext[126]})
-var sActionExecutionInput_resolvedConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolvedConfiguration", ID: &i_ResolvedActionConfigurationMap, Members: &m_ResolvedActionConfigurationMap, Type: smithy.ShapeTypeMap, Ext: &ext[127]})
-var sActionExecutionInput_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[128]})
-var sActionExecutionInput_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_AWSRegionName, Type: smithy.ShapeTypeString, Ext: &ext[129]})
-var sActionExecutionInput_inputArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputArtifacts", ID: &i_ArtifactDetailList, Members: &m_ArtifactDetailList, Type: smithy.ShapeTypeList, Ext: &ext[130]})
-var sActionExecutionInput_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_ActionNamespace, Type: smithy.ShapeTypeString, Ext: &ext[131]})
-var sActionExecutionNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[133]})
-var sActionExecutionOutput_outputArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputArtifacts", ID: &i_ArtifactDetailList, Members: &m_ArtifactDetailList, Type: smithy.ShapeTypeList, Ext: &ext[135]})
-var sActionExecutionOutput_executionResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionResult", ID: &iActionExecutionResult, Members: &mActionExecutionResult, Type: smithy.ShapeTypeStructure, Ext: &ext[136]})
-var sActionExecutionOutput_outputVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputVariables", ID: &i_OutputVariablesMap, Members: &m_OutputVariablesMap, Type: smithy.ShapeTypeMap, Ext: &ext[137]})
-var sActionExecutionResult_externalExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalExecutionId", ID: &i_ExternalExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[139]})
-var sActionExecutionResult_externalExecutionSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalExecutionSummary", ID: &i_ExternalExecutionSummary, Type: smithy.ShapeTypeString, Ext: &ext[140]})
-var sActionExecutionResult_externalExecutionUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalExecutionUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &ext[141]})
-var sActionExecutionResult_errorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorDetails", ID: &iErrorDetails, Members: &mErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[142]})
-var sActionExecutionResult_logStreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logStreamARN", ID: &i_LogStreamARN, Type: smithy.ShapeTypeString, Ext: &ext[143]})
-var sActionExecutionStatus_InProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[145]})
-var sActionExecutionStatus_Abandoned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Abandoned", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[146]})
-var sActionExecutionStatus_Succeeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Succeeded", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[147]})
-var sActionExecutionStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[148]})
-var sActionNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[153]})
-var sActionOwner_AWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[155]})
-var sActionOwner_ThirdParty = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThirdParty", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[156]})
-var sActionOwner_Custom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Custom", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[157]})
-var sActionRevision_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &ext[160]})
-var sActionRevision_revisionChangeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionChangeId", ID: &i_RevisionChangeIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[161]})
-var sActionRevision_created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "created", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[162]})
-var sActionState_actionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionName", ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &ext[165]})
-var sActionState_currentRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentRevision", ID: &iActionRevision, Members: &mActionRevision, Type: smithy.ShapeTypeStructure, Ext: &ext[166]})
-var sActionState_latestExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestExecution", ID: &iActionExecution, Members: &mActionExecution, Type: smithy.ShapeTypeStructure, Ext: &ext[167]})
-var sActionState_entityUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &ext[168]})
-var sActionState_revisionUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &ext[169]})
-var s_ActionStateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActionState, Members: &mActionState, Type: smithy.ShapeTypeStructure, Ext: &ext[171]})
-var sActionType_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &iActionTypeId, Members: &mActionTypeId, Type: smithy.ShapeTypeStructure, Ext: &ext[174]})
-var sActionType_settings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "settings", ID: &iActionTypeSettings, Members: &mActionTypeSettings, Type: smithy.ShapeTypeStructure, Ext: &ext[175]})
-var sActionType_actionConfigurationProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionConfigurationProperties", ID: &i_ActionConfigurationPropertyList, Members: &m_ActionConfigurationPropertyList, Type: smithy.ShapeTypeList, Ext: &ext[176]})
-var sActionType_inputArtifactDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputArtifactDetails", ID: &iArtifactDetails, Members: &mArtifactDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[177]})
-var sActionType_outputArtifactDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputArtifactDetails", ID: &iArtifactDetails, Members: &mArtifactDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[178]})
-var sActionTypeArtifactDetails_minimumCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minimumCount", ID: &i_MinimumActionTypeArtifactCount, Type: smithy.ShapeTypeInteger, Ext: &ext[180]})
-var sActionTypeArtifactDetails_maximumCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumCount", ID: &i_MaximumActionTypeArtifactCount, Type: smithy.ShapeTypeInteger, Ext: &ext[181]})
-var sActionTypeDeclaration_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ActionTypeDescription, Type: smithy.ShapeTypeString, Ext: &ext[183]})
-var sActionTypeDeclaration_executor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executor", ID: &iActionTypeExecutor, Members: &mActionTypeExecutor, Type: smithy.ShapeTypeStructure, Ext: &ext[184]})
-var sActionTypeDeclaration_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &iActionTypeIdentifier, Members: &mActionTypeIdentifier, Type: smithy.ShapeTypeStructure, Ext: &ext[185]})
-var sActionTypeDeclaration_inputArtifactDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputArtifactDetails", ID: &iActionTypeArtifactDetails, Members: &mActionTypeArtifactDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[186]})
-var sActionTypeDeclaration_outputArtifactDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputArtifactDetails", ID: &iActionTypeArtifactDetails, Members: &mActionTypeArtifactDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[187]})
-var sActionTypeDeclaration_permissions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissions", ID: &iActionTypePermissions, Members: &mActionTypePermissions, Type: smithy.ShapeTypeStructure, Ext: &ext[188]})
-var sActionTypeDeclaration_properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "properties", ID: &i_ActionTypeProperties, Members: &m_ActionTypeProperties, Type: smithy.ShapeTypeList, Ext: &ext[189]})
-var sActionTypeDeclaration_urls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "urls", ID: &iActionTypeUrls, Members: &mActionTypeUrls, Type: smithy.ShapeTypeStructure, Ext: &ext[190]})
-var sActionTypeExecutor_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iExecutorConfiguration, Members: &mExecutorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[193]})
-var sActionTypeExecutor_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iExecutorType, Members: &mExecutorType, Type: smithy.ShapeTypeEnum, Ext: &ext[194]})
-var sActionTypeExecutor_policyStatementsTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStatementsTemplate", ID: &i_PolicyStatementsTemplate, Type: smithy.ShapeTypeString, Ext: &ext[195]})
-var sActionTypeExecutor_jobTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobTimeout", ID: &i_JobTimeout, Type: smithy.ShapeTypeInteger, Ext: &ext[196]})
-var sActionTypeId_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &iActionCategory, Members: &mActionCategory, Type: smithy.ShapeTypeEnum, Ext: &ext[198]})
-var sActionTypeId_owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owner", ID: &iActionOwner, Members: &mActionOwner, Type: smithy.ShapeTypeEnum, Ext: &ext[199]})
-var sActionTypeId_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &i_ActionProvider, Type: smithy.ShapeTypeString, Ext: &ext[200]})
-var sActionTypeId_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &ext[201]})
-var sActionTypeIdentifier_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &iActionCategory, Members: &mActionCategory, Type: smithy.ShapeTypeEnum, Ext: &ext[203]})
-var sActionTypeIdentifier_owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owner", ID: &i_ActionTypeOwner, Type: smithy.ShapeTypeString, Ext: &ext[204]})
-var sActionTypeIdentifier_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &i_ActionProvider, Type: smithy.ShapeTypeString, Ext: &ext[205]})
-var sActionTypeIdentifier_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &ext[206]})
-var s_ActionTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActionType, Members: &mActionType, Type: smithy.ShapeTypeStructure, Ext: &ext[208]})
-var sActionTypeNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[210]})
-var sActionTypePermissions_allowedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedAccounts", ID: &i_AllowedAccounts, Members: &m_AllowedAccounts, Type: smithy.ShapeTypeList, Ext: &ext[213]})
-var s_ActionTypeProperties_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActionTypeProperty, Members: &mActionTypeProperty, Type: smithy.ShapeTypeStructure, Ext: &ext[215]})
-var sActionTypeProperty_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ActionConfigurationKey, Type: smithy.ShapeTypeString, Ext: &ext[217]})
-var sActionTypeProperty_optional = smithy.NewStaticSchema(smithy.StaticSchema{Member: "optional", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[218]})
-var sActionTypeProperty_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[219]})
-var sActionTypeProperty_noEcho = smithy.NewStaticSchema(smithy.StaticSchema{Member: "noEcho", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[220]})
-var sActionTypeProperty_queryable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[221]})
-var sActionTypeProperty_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_PropertyDescription, Type: smithy.ShapeTypeString, Ext: &ext[222]})
-var sActionTypeSettings_thirdPartyConfigurationUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thirdPartyConfigurationUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &ext[224]})
-var sActionTypeSettings_entityUrlTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityUrlTemplate", ID: &i_UrlTemplate, Type: smithy.ShapeTypeString, Ext: &ext[225]})
-var sActionTypeSettings_executionUrlTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionUrlTemplate", ID: &i_UrlTemplate, Type: smithy.ShapeTypeString, Ext: &ext[226]})
-var sActionTypeSettings_revisionUrlTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionUrlTemplate", ID: &i_UrlTemplate, Type: smithy.ShapeTypeString, Ext: &ext[227]})
-var sActionTypeUrls_configurationUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configurationUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &ext[229]})
-var sActionTypeUrls_entityUrlTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityUrlTemplate", ID: &i_UrlTemplate, Type: smithy.ShapeTypeString, Ext: &ext[230]})
-var sActionTypeUrls_executionUrlTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionUrlTemplate", ID: &i_UrlTemplate, Type: smithy.ShapeTypeString, Ext: &ext[231]})
-var sActionTypeUrls_revisionUrlTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionUrlTemplate", ID: &i_UrlTemplate, Type: smithy.ShapeTypeString, Ext: &ext[232]})
-var s_AllowedAccounts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AllowedAccount, Type: smithy.ShapeTypeString, Ext: &ext[235]})
-var sApprovalAlreadyCompletedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[237]})
-var sApprovalResult_summary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summary", ID: &i_ApprovalSummary, Type: smithy.ShapeTypeString, Ext: &ext[239]})
-var sApprovalResult_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iApprovalStatus, Members: &mApprovalStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[240]})
-var sApprovalStatus_Approved = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Approved", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[242]})
-var sApprovalStatus_Rejected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rejected", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[243]})
-var sArtifact_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ArtifactName, Type: smithy.ShapeTypeString, Ext: &ext[247]})
-var sArtifact_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &ext[248]})
-var sArtifact_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &iArtifactLocation, Members: &mArtifactLocation, Type: smithy.ShapeTypeStructure, Ext: &ext[249]})
-var sArtifactDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ArtifactName, Type: smithy.ShapeTypeString, Ext: &ext[251]})
-var sArtifactDetail_s3location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3location", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &ext[252]})
-var s_ArtifactDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iArtifactDetail, Members: &mArtifactDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[254]})
-var sArtifactDetails_minimumCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minimumCount", ID: &i_MinimumArtifactCount, Type: smithy.ShapeTypeInteger, Ext: &ext[256]})
-var sArtifactDetails_maximumCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumCount", ID: &i_MaximumArtifactCount, Type: smithy.ShapeTypeInteger, Ext: &ext[257]})
-var s_ArtifactList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iArtifact, Members: &mArtifact, Type: smithy.ShapeTypeStructure, Ext: &ext[259]})
-var sArtifactLocation_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iArtifactLocationType, Members: &mArtifactLocationType, Type: smithy.ShapeTypeEnum, Ext: &ext[261]})
-var sArtifactLocation_s3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Location", ID: &iS3ArtifactLocation, Members: &mS3ArtifactLocation, Type: smithy.ShapeTypeStructure, Ext: &ext[262]})
-var sArtifactLocationType_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[264]})
-var sArtifactRevision_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ArtifactName, Type: smithy.ShapeTypeString, Ext: &ext[267]})
-var sArtifactRevision_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &ext[268]})
-var sArtifactRevision_revisionChangeIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionChangeIdentifier", ID: &i_RevisionChangeIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[269]})
-var sArtifactRevision_revisionSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionSummary", ID: &i_RevisionSummary, Type: smithy.ShapeTypeString, Ext: &ext[270]})
-var sArtifactRevision_created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "created", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[271]})
-var sArtifactRevision_revisionUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &ext[272]})
-var s_ArtifactRevisionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iArtifactRevision, Members: &mArtifactRevision, Type: smithy.ShapeTypeStructure, Ext: &ext[274]})
-var sArtifactStore_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iArtifactStoreType, Members: &mArtifactStoreType, Type: smithy.ShapeTypeEnum, Ext: &ext[276]})
-var sArtifactStore_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_ArtifactStoreLocation, Type: smithy.ShapeTypeString, Ext: &ext[277]})
-var sArtifactStore_encryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKey", ID: &iEncryptionKey, Members: &mEncryptionKey, Type: smithy.ShapeTypeStructure, Ext: &ext[278]})
-var s_ArtifactStoreMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AWSRegionName, Type: smithy.ShapeTypeString, Ext: &ext[281]})
-var s_ArtifactStoreMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iArtifactStore, Members: &mArtifactStore, Type: smithy.ShapeTypeStructure, Ext: &ext[282]})
-var sArtifactStoreType_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[284]})
-var sAWSSessionCredentials_accessKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessKeyId", ID: &i_AccessKeyId, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[287]})
-var sAWSSessionCredentials_secretAccessKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretAccessKey", ID: &i_SecretAccessKey, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[288]})
-var sAWSSessionCredentials_sessionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionToken", ID: &i_SessionToken, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &ext[289]})
-var sBeforeEntryConditions_conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conditions", ID: &i_ConditionList, Members: &m_ConditionList, Type: smithy.ShapeTypeList, Ext: &ext[291]})
-var sBlockerDeclaration_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_BlockerName, Type: smithy.ShapeTypeString, Ext: &ext[293]})
-var sBlockerDeclaration_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iBlockerType, Members: &mBlockerType, Type: smithy.ShapeTypeEnum, Ext: &ext[294]})
-var sBlockerType_Schedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schedule", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[297]})
-var s_CommandList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Command, Type: smithy.ShapeTypeString, Ext: &ext[305]})
-var sConcurrentModificationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[307]})
-var sConcurrentPipelineExecutionsLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[309]})
-var sCondition_result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "result", ID: &iResult, Members: &mResult, Type: smithy.ShapeTypeEnum, Ext: &ext[311]})
-var sCondition_rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rules", ID: &i_RuleDeclarationList, Members: &m_RuleDeclarationList, Type: smithy.ShapeTypeList, Ext: &ext[312]})
-var sConditionExecution_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iConditionExecutionStatus, Members: &mConditionExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[314]})
-var sConditionExecution_summary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summary", ID: &i_ExecutionSummary, Type: smithy.ShapeTypeString, Ext: &ext[315]})
-var sConditionExecution_lastStatusChange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastStatusChange", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[316]})
-var sConditionExecutionStatus_InProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[318]})
-var sConditionExecutionStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[319]})
-var sConditionExecutionStatus_Errored = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errored", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[320]})
-var sConditionExecutionStatus_Succeeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Succeeded", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[321]})
-var sConditionExecutionStatus_Cancelled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cancelled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[322]})
-var sConditionExecutionStatus_Abandoned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Abandoned", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[323]})
-var sConditionExecutionStatus_Overridden = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Overridden", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[324]})
-var s_ConditionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCondition, Members: &mCondition, Type: smithy.ShapeTypeStructure, Ext: &ext[326]})
-var sConditionNotOverridableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[328]})
-var sConditionState_latestExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestExecution", ID: &iConditionExecution, Members: &mConditionExecution, Type: smithy.ShapeTypeStructure, Ext: &ext[330]})
-var sConditionState_ruleStates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleStates", ID: &i_RuleStateList, Members: &m_RuleStateList, Type: smithy.ShapeTypeList, Ext: &ext[331]})
-var s_ConditionStateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConditionState, Members: &mConditionState, Type: smithy.ShapeTypeStructure, Ext: &ext[333]})
-var sConditionType_BEFORE_ENTRY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEFORE_ENTRY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[335]})
-var sConditionType_ON_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ON_SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[336]})
-var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[338]})
-var sCurrentRevision_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &ext[341]})
-var sCurrentRevision_changeIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "changeIdentifier", ID: &i_RevisionChangeIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[342]})
-var sCurrentRevision_created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "created", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &ext[343]})
-var sCurrentRevision_revisionSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionSummary", ID: &i_RevisionSummary, Type: smithy.ShapeTypeString, Ext: &ext[344]})
-var sDeployActionExecutionTarget_targetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[346]})
-var sDeployActionExecutionTarget_targetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[347]})
-var sDeployActionExecutionTarget_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[348]})
-var sDeployActionExecutionTarget_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[349]})
-var sDeployActionExecutionTarget_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[350]})
-var sDeployActionExecutionTarget_events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "events", ID: &i_DeployTargetEventList, Members: &m_DeployTargetEventList, Type: smithy.ShapeTypeList, Ext: &ext[351]})
-var s_DeployActionExecutionTargetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeployActionExecutionTarget, Members: &mDeployActionExecutionTarget, Type: smithy.ShapeTypeStructure, Ext: &ext[353]})
-var sDeployTargetEvent_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[355]})
-var sDeployTargetEvent_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[356]})
-var sDeployTargetEvent_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[357]})
-var sDeployTargetEvent_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[358]})
-var sDeployTargetEvent_context = smithy.NewStaticSchema(smithy.StaticSchema{Member: "context", ID: &iDeployTargetEventContext, Members: &mDeployTargetEventContext, Type: smithy.ShapeTypeStructure, Ext: &ext[359]})
-var sDeployTargetEventContext_ssmCommandId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ssmCommandId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[361]})
-var sDeployTargetEventContext_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[362]})
-var s_DeployTargetEventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeployTargetEvent, Members: &mDeployTargetEvent, Type: smithy.ShapeTypeStructure, Ext: &ext[364]})
-var sDuplicatedStopRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[368]})
-var sEncryptionKey_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_EncryptionKeyId, Type: smithy.ShapeTypeString, Ext: &ext[371]})
-var sEncryptionKey_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iEncryptionKeyType, Members: &mEncryptionKeyType, Type: smithy.ShapeTypeEnum, Ext: &ext[372]})
-var sEncryptionKeyType_KMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[375]})
-var sEnvironmentVariable_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_EnvironmentVariableName, Type: smithy.ShapeTypeString, Ext: &ext[377]})
-var sEnvironmentVariable_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_EnvironmentVariableValue, Type: smithy.ShapeTypeString, Ext: &ext[378]})
-var sEnvironmentVariable_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iEnvironmentVariableType, Members: &mEnvironmentVariableType, Type: smithy.ShapeTypeEnum, Ext: &ext[379]})
-var s_EnvironmentVariableList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnvironmentVariable, Members: &mEnvironmentVariable, Type: smithy.ShapeTypeStructure, Ext: &ext[381]})
-var sEnvironmentVariableType_PLAINTEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PLAINTEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[384]})
-var sEnvironmentVariableType_SECRETS_MANAGER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECRETS_MANAGER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[385]})
-var sErrorDetails_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_Code, Type: smithy.ShapeTypeString, Ext: &ext[388]})
-var sErrorDetails_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[389]})
-var sExecutionDetails_summary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summary", ID: &i_ExecutionSummary, Type: smithy.ShapeTypeString, Ext: &ext[391]})
-var sExecutionDetails_externalExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalExecutionId", ID: &i_ExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[392]})
-var sExecutionDetails_percentComplete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "percentComplete", ID: &i_Percentage, Type: smithy.ShapeTypeInteger, Ext: &ext[393]})
-var sExecutionMode_QUEUED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUEUED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[396]})
-var sExecutionMode_SUPERSEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUPERSEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[397]})
-var sExecutionMode_PARALLEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARALLEL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[398]})
-var sExecutionTrigger_triggerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "triggerType", ID: &iTriggerType, Members: &mTriggerType, Type: smithy.ShapeTypeEnum, Ext: &ext[401]})
-var sExecutionTrigger_triggerDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "triggerDetail", ID: &i_TriggerDetail, Type: smithy.ShapeTypeString, Ext: &ext[402]})
-var sExecutionType_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[404]})
-var sExecutionType_ROLLBACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLLBACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[405]})
-var sExecutorConfiguration_lambdaExecutorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaExecutorConfiguration", ID: &iLambdaExecutorConfiguration, Members: &mLambdaExecutorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[407]})
-var sExecutorConfiguration_jobWorkerExecutorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobWorkerExecutorConfiguration", ID: &iJobWorkerExecutorConfiguration, Members: &mJobWorkerExecutorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[408]})
-var sExecutorType_JobWorker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobWorker", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[410]})
-var sExecutorType_Lambda = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lambda", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[411]})
-var sFailureConditions_result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "result", ID: &iResult, Members: &mResult, Type: smithy.ShapeTypeEnum, Ext: &ext[415]})
-var sFailureConditions_retryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryConfiguration", ID: &iRetryConfiguration, Members: &mRetryConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[416]})
-var sFailureConditions_conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conditions", ID: &i_ConditionList, Members: &m_ConditionList, Type: smithy.ShapeTypeList, Ext: &ext[417]})
-var sFailureDetails_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iFailureType, Members: &mFailureType, Type: smithy.ShapeTypeEnum, Ext: &ext[419]})
-var sFailureDetails_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[420]})
-var sFailureDetails_externalExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalExecutionId", ID: &i_ExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[421]})
-var sFailureType_JobFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[423]})
-var sFailureType_ConfigurationError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationError", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[424]})
-var sFailureType_PermissionError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PermissionError", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[425]})
-var sFailureType_RevisionOutOfSync = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevisionOutOfSync", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[426]})
-var sFailureType_RevisionUnavailable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevisionUnavailable", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[427]})
-var sFailureType_SystemUnavailable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SystemUnavailable", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[428]})
-var s_FilePathList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FilePath, Type: smithy.ShapeTypeString, Ext: &ext[431]})
-var sGitBranchFilterCriteria_includes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includes", ID: &i_GitBranchPatternList, Members: &m_GitBranchPatternList, Type: smithy.ShapeTypeList, Ext: &ext[433]})
-var sGitBranchFilterCriteria_excludes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "excludes", ID: &i_GitBranchPatternList, Members: &m_GitBranchPatternList, Type: smithy.ShapeTypeList, Ext: &ext[434]})
-var s_GitBranchPatternList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GitBranchNamePattern, Type: smithy.ShapeTypeString, Ext: &ext[437]})
-var sGitConfiguration_sourceActionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceActionName", ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &ext[439]})
-var sGitConfiguration_push = smithy.NewStaticSchema(smithy.StaticSchema{Member: "push", ID: &i_GitPushFilterList, Members: &m_GitPushFilterList, Type: smithy.ShapeTypeList, Ext: &ext[440]})
-var sGitConfiguration_pullRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequest", ID: &i_GitPullRequestFilterList, Members: &m_GitPullRequestFilterList, Type: smithy.ShapeTypeList, Ext: &ext[441]})
-var sGitFilePathFilterCriteria_includes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includes", ID: &i_GitFilePathPatternList, Members: &m_GitFilePathPatternList, Type: smithy.ShapeTypeList, Ext: &ext[443]})
-var sGitFilePathFilterCriteria_excludes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "excludes", ID: &i_GitFilePathPatternList, Members: &m_GitFilePathPatternList, Type: smithy.ShapeTypeList, Ext: &ext[444]})
-var s_GitFilePathPatternList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GitFilePathPattern, Type: smithy.ShapeTypeString, Ext: &ext[447]})
-var sGitPullRequestEventType_OPEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[449]})
-var sGitPullRequestEventType_UPDATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[450]})
-var sGitPullRequestEventType_CLOSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOSED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[451]})
-var s_GitPullRequestEventTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGitPullRequestEventType, Members: &mGitPullRequestEventType, Type: smithy.ShapeTypeEnum, Ext: &ext[453]})
-var sGitPullRequestFilter_events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "events", ID: &i_GitPullRequestEventTypeList, Members: &m_GitPullRequestEventTypeList, Type: smithy.ShapeTypeList, Ext: &ext[455]})
-var sGitPullRequestFilter_branches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branches", ID: &iGitBranchFilterCriteria, Members: &mGitBranchFilterCriteria, Type: smithy.ShapeTypeStructure, Ext: &ext[456]})
-var sGitPullRequestFilter_filePaths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePaths", ID: &iGitFilePathFilterCriteria, Members: &mGitFilePathFilterCriteria, Type: smithy.ShapeTypeStructure, Ext: &ext[457]})
-var s_GitPullRequestFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGitPullRequestFilter, Members: &mGitPullRequestFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[459]})
-var sGitPushFilter_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &iGitTagFilterCriteria, Members: &mGitTagFilterCriteria, Type: smithy.ShapeTypeStructure, Ext: &ext[461]})
-var sGitPushFilter_branches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branches", ID: &iGitBranchFilterCriteria, Members: &mGitBranchFilterCriteria, Type: smithy.ShapeTypeStructure, Ext: &ext[462]})
-var sGitPushFilter_filePaths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePaths", ID: &iGitFilePathFilterCriteria, Members: &mGitFilePathFilterCriteria, Type: smithy.ShapeTypeStructure, Ext: &ext[463]})
-var s_GitPushFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGitPushFilter, Members: &mGitPushFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[465]})
-var sGitTagFilterCriteria_includes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includes", ID: &i_GitTagPatternList, Members: &m_GitTagPatternList, Type: smithy.ShapeTypeList, Ext: &ext[467]})
-var sGitTagFilterCriteria_excludes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "excludes", ID: &i_GitTagPatternList, Members: &m_GitTagPatternList, Type: smithy.ShapeTypeList, Ext: &ext[468]})
-var s_GitTagPatternList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GitTagNamePattern, Type: smithy.ShapeTypeString, Ext: &ext[471]})
-var sInputArtifact_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ArtifactName, Type: smithy.ShapeTypeString, Ext: &ext[473]})
-var s_InputArtifactList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInputArtifact, Members: &mInputArtifact, Type: smithy.ShapeTypeStructure, Ext: &ext[475]})
-var sInvalidActionDeclarationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[477]})
-var sInvalidApprovalTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[479]})
-var sInvalidArnException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[481]})
-var sInvalidBlockerDeclarationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[483]})
-var sInvalidClientTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[485]})
-var sInvalidJobException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[487]})
-var sInvalidJobStateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[489]})
-var sInvalidNextTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[491]})
-var sInvalidNonceException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[493]})
-var sInvalidStageDeclarationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[495]})
-var sInvalidStructureException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[497]})
-var sInvalidTagsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[499]})
-var sInvalidWebhookAuthenticationParametersException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[501]})
-var sInvalidWebhookFilterPatternException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[503]})
-var sJob_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &ext[505]})
-var sJob_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &iJobData, Members: &mJobData, Type: smithy.ShapeTypeStructure, Ext: &ext[506]})
-var sJob_nonce = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nonce", ID: &i_Nonce, Type: smithy.ShapeTypeString, Ext: &ext[507]})
-var sJob_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[508]})
-var sJobData_actionTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionTypeId", ID: &iActionTypeId, Members: &mActionTypeId, Type: smithy.ShapeTypeStructure, Ext: &ext[510]})
-var sJobData_actionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionConfiguration", ID: &iActionConfiguration, Members: &mActionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[511]})
-var sJobData_pipelineContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineContext", ID: &iPipelineContext, Members: &mPipelineContext, Type: smithy.ShapeTypeStructure, Ext: &ext[512]})
-var sJobData_inputArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputArtifacts", ID: &i_ArtifactList, Members: &m_ArtifactList, Type: smithy.ShapeTypeList, Ext: &ext[513]})
-var sJobData_outputArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputArtifacts", ID: &i_ArtifactList, Members: &m_ArtifactList, Type: smithy.ShapeTypeList, Ext: &ext[514]})
-var sJobData_artifactCredentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "artifactCredentials", ID: &iAWSSessionCredentials, Members: &mAWSSessionCredentials, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[515]})
-var sJobData_continuationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "continuationToken", ID: &i_ContinuationToken, Type: smithy.ShapeTypeString, Ext: &ext[516]})
-var sJobData_encryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKey", ID: &iEncryptionKey, Members: &mEncryptionKey, Type: smithy.ShapeTypeStructure, Ext: &ext[517]})
-var sJobDetails_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &ext[519]})
-var sJobDetails_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &iJobData, Members: &mJobData, Type: smithy.ShapeTypeStructure, Ext: &ext[520]})
-var sJobDetails_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[521]})
-var s_JobList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iJob, Members: &mJob, Type: smithy.ShapeTypeStructure, Ext: &ext[524]})
-var sJobNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[526]})
-var sJobStatus_Created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Created", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[528]})
-var sJobStatus_Queued = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Queued", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[529]})
-var sJobStatus_Dispatched = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dispatched", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[530]})
-var sJobStatus_InProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[531]})
-var sJobStatus_TimedOut = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimedOut", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[532]})
-var sJobStatus_Succeeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Succeeded", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[533]})
-var sJobStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[534]})
-var sJobWorkerExecutorConfiguration_pollingAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pollingAccounts", ID: &i_PollingAccountList, Members: &m_PollingAccountList, Type: smithy.ShapeTypeList, Ext: &ext[537]})
-var sJobWorkerExecutorConfiguration_pollingServicePrincipals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pollingServicePrincipals", ID: &i_PollingServicePrincipalList, Members: &m_PollingServicePrincipalList, Type: smithy.ShapeTypeList, Ext: &ext[538]})
-var sLambdaExecutorConfiguration_lambdaFunctionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaFunctionArn", ID: &i_LambdaFunctionArn, Type: smithy.ShapeTypeString, Ext: &ext[541]})
-var sLatestInPipelineExecutionFilter_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[547]})
-var sLatestInPipelineExecutionFilter_startTimeRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTimeRange", ID: &iStartTimeRange, Members: &mStartTimeRange, Type: smithy.ShapeTypeEnum, Ext: &ext[548]})
-var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[550]})
-var sListWebhookItem_definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "definition", ID: &iWebhookDefinition, Members: &mWebhookDefinition, Type: smithy.ShapeTypeStructure, Ext: &ext[552]})
-var sListWebhookItem_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &i_WebhookUrl, Type: smithy.ShapeTypeString, Ext: &ext[553]})
-var sListWebhookItem_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_WebhookErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[554]})
-var sListWebhookItem_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_WebhookErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[555]})
-var sListWebhookItem_lastTriggered = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastTriggered", ID: &i_WebhookLastTriggered, Type: smithy.ShapeTypeTimestamp, Ext: &ext[556]})
-var sListWebhookItem_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_WebhookArn, Type: smithy.ShapeTypeString, Ext: &ext[557]})
-var sListWebhookItem_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[558]})
-var sNotLatestPipelineExecutionException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[572]})
-var sOutputArtifact_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ArtifactName, Type: smithy.ShapeTypeString, Ext: &ext[574]})
-var sOutputArtifact_files = smithy.NewStaticSchema(smithy.StaticSchema{Member: "files", ID: &i_FilePathList, Members: &m_FilePathList, Type: smithy.ShapeTypeList, Ext: &ext[575]})
-var s_OutputArtifactList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOutputArtifact, Members: &mOutputArtifact, Type: smithy.ShapeTypeStructure, Ext: &ext[577]})
-var s_OutputVariableList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OutputVariable, Type: smithy.ShapeTypeString, Ext: &ext[580]})
-var s_OutputVariablesMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_OutputVariablesKey, Type: smithy.ShapeTypeString, Ext: &ext[583]})
-var s_OutputVariablesMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_OutputVariablesValue, Type: smithy.ShapeTypeString, Ext: &ext[584]})
-var sOutputVariablesSizeExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[586]})
-var sPipelineContext_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[591]})
-var sPipelineContext_stage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stage", ID: &iStageContext, Members: &mStageContext, Type: smithy.ShapeTypeStructure, Ext: &ext[592]})
-var sPipelineContext_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iActionContext, Members: &mActionContext, Type: smithy.ShapeTypeStructure, Ext: &ext[593]})
-var sPipelineContext_pipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineArn", ID: &i_PipelineArn, Type: smithy.ShapeTypeString, Ext: &ext[594]})
-var sPipelineContext_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[595]})
-var sPipelineDeclaration_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[597]})
-var sPipelineDeclaration_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[598]})
-var sPipelineDeclaration_artifactStore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "artifactStore", ID: &iArtifactStore, Members: &mArtifactStore, Type: smithy.ShapeTypeStructure, Ext: &ext[599]})
-var sPipelineDeclaration_artifactStores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "artifactStores", ID: &i_ArtifactStoreMap, Members: &m_ArtifactStoreMap, Type: smithy.ShapeTypeMap, Ext: &ext[600]})
-var sPipelineDeclaration_stages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stages", ID: &i_PipelineStageDeclarationList, Members: &m_PipelineStageDeclarationList, Type: smithy.ShapeTypeList, Ext: &ext[601]})
-var sPipelineDeclaration_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_PipelineVersion, Type: smithy.ShapeTypeInteger, Ext: &ext[602]})
-var sPipelineDeclaration_executionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionMode", ID: &iExecutionMode, Members: &mExecutionMode, Type: smithy.ShapeTypeEnum, Ext: &ext[603]})
-var sPipelineDeclaration_pipelineType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineType", ID: &iPipelineType, Members: &mPipelineType, Type: smithy.ShapeTypeEnum, Ext: &ext[604]})
-var sPipelineDeclaration_variables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variables", ID: &i_PipelineVariableDeclarationList, Members: &m_PipelineVariableDeclarationList, Type: smithy.ShapeTypeList, Ext: &ext[605]})
-var sPipelineDeclaration_triggers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "triggers", ID: &i_PipelineTriggerDeclarationList, Members: &m_PipelineTriggerDeclarationList, Type: smithy.ShapeTypeList, Ext: &ext[606]})
-var sPipelineExecution_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[608]})
-var sPipelineExecution_pipelineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineVersion", ID: &i_PipelineVersion, Type: smithy.ShapeTypeInteger, Ext: &ext[609]})
-var sPipelineExecution_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[610]})
-var sPipelineExecution_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iPipelineExecutionStatus, Members: &mPipelineExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[611]})
-var sPipelineExecution_statusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummary", ID: &i_PipelineExecutionStatusSummary, Type: smithy.ShapeTypeString, Ext: &ext[612]})
-var sPipelineExecution_artifactRevisions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "artifactRevisions", ID: &i_ArtifactRevisionList, Members: &m_ArtifactRevisionList, Type: smithy.ShapeTypeList, Ext: &ext[613]})
-var sPipelineExecution_variables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variables", ID: &i_ResolvedPipelineVariableList, Members: &m_ResolvedPipelineVariableList, Type: smithy.ShapeTypeList, Ext: &ext[614]})
-var sPipelineExecution_trigger = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trigger", ID: &iExecutionTrigger, Members: &mExecutionTrigger, Type: smithy.ShapeTypeStructure, Ext: &ext[615]})
-var sPipelineExecution_executionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionMode", ID: &iExecutionMode, Members: &mExecutionMode, Type: smithy.ShapeTypeEnum, Ext: &ext[616]})
-var sPipelineExecution_executionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionType", ID: &iExecutionType, Members: &mExecutionType, Type: smithy.ShapeTypeEnum, Ext: &ext[617]})
-var sPipelineExecution_rollbackMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rollbackMetadata", ID: &iPipelineRollbackMetadata, Members: &mPipelineRollbackMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[618]})
-var sPipelineExecutionFilter_succeededInStage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "succeededInStage", ID: &iSucceededInStageFilter, Members: &mSucceededInStageFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[620]})
-var sPipelineExecutionNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[623]})
-var sPipelineExecutionNotStoppableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[625]})
-var sPipelineExecutionOutdatedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[627]})
-var sPipelineExecutionStatus_Cancelled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cancelled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[629]})
-var sPipelineExecutionStatus_InProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[630]})
-var sPipelineExecutionStatus_Stopped = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stopped", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[631]})
-var sPipelineExecutionStatus_Stopping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stopping", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[632]})
-var sPipelineExecutionStatus_Succeeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Succeeded", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[633]})
-var sPipelineExecutionStatus_Superseded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Superseded", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[634]})
-var sPipelineExecutionStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[635]})
-var sPipelineExecutionSummary_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[638]})
-var sPipelineExecutionSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iPipelineExecutionStatus, Members: &mPipelineExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[639]})
-var sPipelineExecutionSummary_statusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummary", ID: &i_PipelineExecutionStatusSummary, Type: smithy.ShapeTypeString, Ext: &ext[640]})
-var sPipelineExecutionSummary_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[641]})
-var sPipelineExecutionSummary_lastUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[642]})
-var sPipelineExecutionSummary_sourceRevisions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceRevisions", ID: &i_SourceRevisionList, Members: &m_SourceRevisionList, Type: smithy.ShapeTypeList, Ext: &ext[643]})
-var sPipelineExecutionSummary_trigger = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trigger", ID: &iExecutionTrigger, Members: &mExecutionTrigger, Type: smithy.ShapeTypeStructure, Ext: &ext[644]})
-var sPipelineExecutionSummary_stopTrigger = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stopTrigger", ID: &iStopExecutionTrigger, Members: &mStopExecutionTrigger, Type: smithy.ShapeTypeStructure, Ext: &ext[645]})
-var sPipelineExecutionSummary_executionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionMode", ID: &iExecutionMode, Members: &mExecutionMode, Type: smithy.ShapeTypeEnum, Ext: &ext[646]})
-var sPipelineExecutionSummary_executionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionType", ID: &iExecutionType, Members: &mExecutionType, Type: smithy.ShapeTypeEnum, Ext: &ext[647]})
-var sPipelineExecutionSummary_rollbackMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rollbackMetadata", ID: &iPipelineRollbackMetadata, Members: &mPipelineRollbackMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[648]})
-var s_PipelineExecutionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPipelineExecutionSummary, Members: &mPipelineExecutionSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[650]})
-var s_PipelineList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPipelineSummary, Members: &mPipelineSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[652]})
-var sPipelineMetadata_pipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineArn", ID: &i_PipelineArn, Type: smithy.ShapeTypeString, Ext: &ext[654]})
-var sPipelineMetadata_created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "created", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[655]})
-var sPipelineMetadata_updated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updated", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[656]})
-var sPipelineMetadata_pollingDisabledAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pollingDisabledAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[657]})
-var sPipelineNameInUseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[660]})
-var sPipelineNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[662]})
-var sPipelineRollbackMetadata_rollbackTargetPipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rollbackTargetPipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[664]})
-var s_PipelineStageDeclarationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStageDeclaration, Members: &mStageDeclaration, Type: smithy.ShapeTypeStructure, Ext: &ext[666]})
-var sPipelineSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[668]})
-var sPipelineSummary_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_PipelineVersion, Type: smithy.ShapeTypeInteger, Ext: &ext[669]})
-var sPipelineSummary_pipelineType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineType", ID: &iPipelineType, Members: &mPipelineType, Type: smithy.ShapeTypeEnum, Ext: &ext[670]})
-var sPipelineSummary_executionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionMode", ID: &iExecutionMode, Members: &mExecutionMode, Type: smithy.ShapeTypeEnum, Ext: &ext[671]})
-var sPipelineSummary_created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "created", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[672]})
-var sPipelineSummary_updated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updated", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[673]})
-var sPipelineTriggerDeclaration_providerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "providerType", ID: &iPipelineTriggerProviderType, Members: &mPipelineTriggerProviderType, Type: smithy.ShapeTypeEnum, Ext: &ext[675]})
-var sPipelineTriggerDeclaration_gitConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gitConfiguration", ID: &iGitConfiguration, Members: &mGitConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[676]})
-var s_PipelineTriggerDeclarationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPipelineTriggerDeclaration, Members: &mPipelineTriggerDeclaration, Type: smithy.ShapeTypeStructure, Ext: &ext[678]})
-var sPipelineTriggerProviderType_CodeStarSourceConnection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeStarSourceConnection", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[680]})
-var sPipelineType_V1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "V1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[682]})
-var sPipelineType_V2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "V2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[683]})
-var sPipelineVariable_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PipelineVariableName, Type: smithy.ShapeTypeString, Ext: &ext[685]})
-var sPipelineVariable_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_PipelineVariableValue, Type: smithy.ShapeTypeString, Ext: &ext[686]})
-var sPipelineVariableDeclaration_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PipelineVariableName, Type: smithy.ShapeTypeString, Ext: &ext[688]})
-var sPipelineVariableDeclaration_defaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultValue", ID: &i_PipelineVariableValue, Type: smithy.ShapeTypeString, Ext: &ext[689]})
-var sPipelineVariableDeclaration_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_PipelineVariableDescription, Type: smithy.ShapeTypeString, Ext: &ext[690]})
-var s_PipelineVariableDeclarationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPipelineVariableDeclaration, Members: &mPipelineVariableDeclaration, Type: smithy.ShapeTypeStructure, Ext: &ext[692]})
-var s_PipelineVariableList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPipelineVariable, Members: &mPipelineVariable, Type: smithy.ShapeTypeStructure, Ext: &ext[695]})
-var sPipelineVersionNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[700]})
-var s_PollingAccountList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &ext[703]})
-var s_PollingServicePrincipalList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ServicePrincipal, Type: smithy.ShapeTypeString, Ext: &ext[705]})
-var s_QueryParamMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ActionConfigurationKey, Type: smithy.ShapeTypeString, Ext: &ext[708]})
-var s_QueryParamMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ActionConfigurationQueryableValue, Type: smithy.ShapeTypeString, Ext: &ext[709]})
-var sRequestFailedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[711]})
-var s_ResolvedActionConfigurationMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[713]})
-var s_ResolvedActionConfigurationMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[714]})
-var sResolvedPipelineVariable_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[716]})
-var sResolvedPipelineVariable_resolvedValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolvedValue", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[717]})
-var s_ResolvedPipelineVariableList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResolvedPipelineVariable, Members: &mResolvedPipelineVariable, Type: smithy.ShapeTypeStructure, Ext: &ext[719]})
-var s_ResolvedRuleConfigurationMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[721]})
-var s_ResolvedRuleConfigurationMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[722]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[725]})
-var sResult_ROLLBACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLLBACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[727]})
-var sResult_FAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[728]})
-var sResult_RETRY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RETRY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[729]})
-var sResult_SKIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SKIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[730]})
-var sRetryConfiguration_retryMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryMode", ID: &iStageRetryMode, Members: &mStageRetryMode, Type: smithy.ShapeTypeEnum, Ext: &ext[733]})
-var sRetryStageMetadata_autoStageRetryAttempt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoStageRetryAttempt", ID: &i_RetryAttempt, Type: smithy.ShapeTypeInteger, Ext: &ext[735]})
-var sRetryStageMetadata_manualStageRetryAttempt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "manualStageRetryAttempt", ID: &i_RetryAttempt, Type: smithy.ShapeTypeInteger, Ext: &ext[736]})
-var sRetryStageMetadata_latestRetryTrigger = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestRetryTrigger", ID: &iRetryTrigger, Members: &mRetryTrigger, Type: smithy.ShapeTypeEnum, Ext: &ext[737]})
-var sRetryTrigger_AutomatedStageRetry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomatedStageRetry", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[739]})
-var sRetryTrigger_ManualStageRetry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManualStageRetry", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[740]})
-var sRuleCategory_Rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rule", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[746]})
-var s_RuleConfigurationMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_RuleConfigurationKey, Type: smithy.ShapeTypeString, Ext: &ext[749]})
-var s_RuleConfigurationMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_RuleConfigurationValue, Type: smithy.ShapeTypeString, Ext: &ext[750]})
-var sRuleConfigurationProperty_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RuleConfigurationKey, Type: smithy.ShapeTypeString, Ext: &ext[752]})
-var sRuleConfigurationProperty_required = smithy.NewStaticSchema(smithy.StaticSchema{Member: "required", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[753]})
-var sRuleConfigurationProperty_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[754]})
-var sRuleConfigurationProperty_secret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secret", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[755]})
-var sRuleConfigurationProperty_queryable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[756]})
-var sRuleConfigurationProperty_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[757]})
-var sRuleConfigurationProperty_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iRuleConfigurationPropertyType, Members: &mRuleConfigurationPropertyType, Type: smithy.ShapeTypeEnum, Ext: &ext[758]})
-var s_RuleConfigurationPropertyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleConfigurationProperty, Members: &mRuleConfigurationProperty, Type: smithy.ShapeTypeStructure, Ext: &ext[760]})
-var sRuleConfigurationPropertyType_String = smithy.NewStaticSchema(smithy.StaticSchema{Member: "String", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[762]})
-var sRuleConfigurationPropertyType_Number = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Number", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[763]})
-var sRuleConfigurationPropertyType_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Boolean", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[764]})
-var sRuleDeclaration_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RuleName, Type: smithy.ShapeTypeString, Ext: &ext[767]})
-var sRuleDeclaration_ruleTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleTypeId", ID: &iRuleTypeId, Members: &mRuleTypeId, Type: smithy.ShapeTypeStructure, Ext: &ext[768]})
-var sRuleDeclaration_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &i_RuleConfigurationMap, Members: &m_RuleConfigurationMap, Type: smithy.ShapeTypeMap, Ext: &ext[769]})
-var sRuleDeclaration_commands = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commands", ID: &i_CommandList, Members: &m_CommandList, Type: smithy.ShapeTypeList, Ext: &ext[770]})
-var sRuleDeclaration_inputArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputArtifacts", ID: &i_InputArtifactList, Members: &m_InputArtifactList, Type: smithy.ShapeTypeList, Ext: &ext[771]})
-var sRuleDeclaration_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[772]})
-var sRuleDeclaration_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_AWSRegionName, Type: smithy.ShapeTypeString, Ext: &ext[773]})
-var sRuleDeclaration_timeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutInMinutes", ID: &i_RuleTimeout, Type: smithy.ShapeTypeInteger, Ext: &ext[774]})
-var s_RuleDeclarationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleDeclaration, Members: &mRuleDeclaration, Type: smithy.ShapeTypeStructure, Ext: &ext[776]})
-var sRuleExecution_ruleExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleExecutionId", ID: &i_RuleExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[778]})
-var sRuleExecution_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRuleExecutionStatus, Members: &mRuleExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[779]})
-var sRuleExecution_summary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summary", ID: &i_ExecutionSummary, Type: smithy.ShapeTypeString, Ext: &ext[780]})
-var sRuleExecution_lastStatusChange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastStatusChange", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[781]})
-var sRuleExecution_token = smithy.NewStaticSchema(smithy.StaticSchema{Member: "token", ID: &i_RuleExecutionToken, Type: smithy.ShapeTypeString, Ext: &ext[782]})
-var sRuleExecution_lastUpdatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedBy", ID: &i_LastUpdatedBy, Type: smithy.ShapeTypeString, Ext: &ext[783]})
-var sRuleExecution_externalExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalExecutionId", ID: &i_ExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[784]})
-var sRuleExecution_externalExecutionUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalExecutionUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &ext[785]})
-var sRuleExecution_errorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorDetails", ID: &iErrorDetails, Members: &mErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[786]})
-var sRuleExecutionDetail_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[788]})
-var sRuleExecutionDetail_ruleExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleExecutionId", ID: &i_RuleExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[789]})
-var sRuleExecutionDetail_pipelineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineVersion", ID: &i_PipelineVersion, Type: smithy.ShapeTypeInteger, Ext: &ext[790]})
-var sRuleExecutionDetail_stageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stageName", ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &ext[791]})
-var sRuleExecutionDetail_ruleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleName", ID: &i_RuleName, Type: smithy.ShapeTypeString, Ext: &ext[792]})
-var sRuleExecutionDetail_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[793]})
-var sRuleExecutionDetail_lastUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[794]})
-var sRuleExecutionDetail_updatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedBy", ID: &i_LastUpdatedBy, Type: smithy.ShapeTypeString, Ext: &ext[795]})
-var sRuleExecutionDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRuleExecutionStatus, Members: &mRuleExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[796]})
-var sRuleExecutionDetail_input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "input", ID: &iRuleExecutionInput, Members: &mRuleExecutionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[797]})
-var sRuleExecutionDetail_output = smithy.NewStaticSchema(smithy.StaticSchema{Member: "output", ID: &iRuleExecutionOutput, Members: &mRuleExecutionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[798]})
-var s_RuleExecutionDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleExecutionDetail, Members: &mRuleExecutionDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[800]})
-var sRuleExecutionFilter_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[802]})
-var sRuleExecutionFilter_latestInPipelineExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestInPipelineExecution", ID: &iLatestInPipelineExecutionFilter, Members: &mLatestInPipelineExecutionFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[803]})
-var sRuleExecutionInput_ruleTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleTypeId", ID: &iRuleTypeId, Members: &mRuleTypeId, Type: smithy.ShapeTypeStructure, Ext: &ext[806]})
-var sRuleExecutionInput_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &i_RuleConfigurationMap, Members: &m_RuleConfigurationMap, Type: smithy.ShapeTypeMap, Ext: &ext[807]})
-var sRuleExecutionInput_resolvedConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolvedConfiguration", ID: &i_ResolvedRuleConfigurationMap, Members: &m_ResolvedRuleConfigurationMap, Type: smithy.ShapeTypeMap, Ext: &ext[808]})
-var sRuleExecutionInput_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ext[809]})
-var sRuleExecutionInput_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_AWSRegionName, Type: smithy.ShapeTypeString, Ext: &ext[810]})
-var sRuleExecutionInput_inputArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputArtifacts", ID: &i_ArtifactDetailList, Members: &m_ArtifactDetailList, Type: smithy.ShapeTypeList, Ext: &ext[811]})
-var sRuleExecutionOutput_executionResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionResult", ID: &iRuleExecutionResult, Members: &mRuleExecutionResult, Type: smithy.ShapeTypeStructure, Ext: &ext[813]})
-var sRuleExecutionResult_externalExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalExecutionId", ID: &i_ExternalExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[815]})
-var sRuleExecutionResult_externalExecutionSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalExecutionSummary", ID: &i_ExternalExecutionSummary, Type: smithy.ShapeTypeString, Ext: &ext[816]})
-var sRuleExecutionResult_externalExecutionUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalExecutionUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &ext[817]})
-var sRuleExecutionResult_errorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorDetails", ID: &iErrorDetails, Members: &mErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[818]})
-var sRuleExecutionStatus_InProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[820]})
-var sRuleExecutionStatus_Abandoned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Abandoned", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[821]})
-var sRuleExecutionStatus_Succeeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Succeeded", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[822]})
-var sRuleExecutionStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[823]})
-var sRuleOwner_AWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[827]})
-var sRuleRevision_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &ext[830]})
-var sRuleRevision_revisionChangeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionChangeId", ID: &i_RevisionChangeIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[831]})
-var sRuleRevision_created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "created", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[832]})
-var sRuleState_ruleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleName", ID: &i_RuleName, Type: smithy.ShapeTypeString, Ext: &ext[834]})
-var sRuleState_currentRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentRevision", ID: &iRuleRevision, Members: &mRuleRevision, Type: smithy.ShapeTypeStructure, Ext: &ext[835]})
-var sRuleState_latestExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestExecution", ID: &iRuleExecution, Members: &mRuleExecution, Type: smithy.ShapeTypeStructure, Ext: &ext[836]})
-var sRuleState_entityUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &ext[837]})
-var sRuleState_revisionUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &ext[838]})
-var s_RuleStateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleState, Members: &mRuleState, Type: smithy.ShapeTypeStructure, Ext: &ext[840]})
-var sRuleType_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &iRuleTypeId, Members: &mRuleTypeId, Type: smithy.ShapeTypeStructure, Ext: &ext[843]})
-var sRuleType_settings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "settings", ID: &iRuleTypeSettings, Members: &mRuleTypeSettings, Type: smithy.ShapeTypeStructure, Ext: &ext[844]})
-var sRuleType_ruleConfigurationProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleConfigurationProperties", ID: &i_RuleConfigurationPropertyList, Members: &m_RuleConfigurationPropertyList, Type: smithy.ShapeTypeList, Ext: &ext[845]})
-var sRuleType_inputArtifactDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputArtifactDetails", ID: &iArtifactDetails, Members: &mArtifactDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[846]})
-var sRuleTypeId_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &iRuleCategory, Members: &mRuleCategory, Type: smithy.ShapeTypeEnum, Ext: &ext[848]})
-var sRuleTypeId_owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owner", ID: &iRuleOwner, Members: &mRuleOwner, Type: smithy.ShapeTypeEnum, Ext: &ext[849]})
-var sRuleTypeId_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &i_RuleProvider, Type: smithy.ShapeTypeString, Ext: &ext[850]})
-var sRuleTypeId_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &ext[851]})
-var s_RuleTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleType, Members: &mRuleType, Type: smithy.ShapeTypeStructure, Ext: &ext[853]})
-var sRuleTypeSettings_thirdPartyConfigurationUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thirdPartyConfigurationUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &ext[855]})
-var sRuleTypeSettings_entityUrlTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityUrlTemplate", ID: &i_UrlTemplate, Type: smithy.ShapeTypeString, Ext: &ext[856]})
-var sRuleTypeSettings_executionUrlTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionUrlTemplate", ID: &i_UrlTemplate, Type: smithy.ShapeTypeString, Ext: &ext[857]})
-var sRuleTypeSettings_revisionUrlTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionUrlTemplate", ID: &i_UrlTemplate, Type: smithy.ShapeTypeString, Ext: &ext[858]})
-var sS3ArtifactLocation_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &ext[860]})
-var sS3ArtifactLocation_objectKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectKey", ID: &i_S3ObjectKey, Type: smithy.ShapeTypeString, Ext: &ext[861]})
-var sS3Location_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString, Ext: &ext[866]})
-var sS3Location_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_S3Key, Type: smithy.ShapeTypeString, Ext: &ext[867]})
-var sSourceRevision_actionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionName", ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &ext[873]})
-var sSourceRevision_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &ext[874]})
-var sSourceRevision_revisionSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionSummary", ID: &i_RevisionSummary, Type: smithy.ShapeTypeString, Ext: &ext[875]})
-var sSourceRevision_revisionUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &ext[876]})
-var s_SourceRevisionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSourceRevision, Members: &mSourceRevision, Type: smithy.ShapeTypeStructure, Ext: &ext[878]})
-var sSourceRevisionOverride_actionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionName", ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &ext[880]})
-var sSourceRevisionOverride_revisionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionType", ID: &iSourceRevisionType, Members: &mSourceRevisionType, Type: smithy.ShapeTypeEnum, Ext: &ext[881]})
-var sSourceRevisionOverride_revisionValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionValue", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &ext[882]})
-var s_SourceRevisionOverrideList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSourceRevisionOverride, Members: &mSourceRevisionOverride, Type: smithy.ShapeTypeStructure, Ext: &ext[884]})
-var sSourceRevisionType_COMMIT_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMMIT_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[886]})
-var sSourceRevisionType_IMAGE_DIGEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMAGE_DIGEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[887]})
-var sSourceRevisionType_S3_OBJECT_VERSION_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3_OBJECT_VERSION_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[888]})
-var sSourceRevisionType_S3_OBJECT_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3_OBJECT_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[889]})
-var s_StageActionDeclarationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActionDeclaration, Members: &mActionDeclaration, Type: smithy.ShapeTypeStructure, Ext: &ext[891]})
-var s_StageBlockerDeclarationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBlockerDeclaration, Members: &mBlockerDeclaration, Type: smithy.ShapeTypeStructure, Ext: &ext[893]})
-var sStageConditionsExecution_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iConditionExecutionStatus, Members: &mConditionExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[895]})
-var sStageConditionsExecution_summary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summary", ID: &i_ExecutionSummary, Type: smithy.ShapeTypeString, Ext: &ext[896]})
-var sStageConditionState_latestExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestExecution", ID: &iStageConditionsExecution, Members: &mStageConditionsExecution, Type: smithy.ShapeTypeStructure, Ext: &ext[898]})
-var sStageConditionState_conditionStates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conditionStates", ID: &i_ConditionStateList, Members: &m_ConditionStateList, Type: smithy.ShapeTypeList, Ext: &ext[899]})
-var sStageContext_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &ext[901]})
-var sStageDeclaration_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &ext[903]})
-var sStageDeclaration_blockers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockers", ID: &i_StageBlockerDeclarationList, Members: &m_StageBlockerDeclarationList, Type: smithy.ShapeTypeList, Ext: &ext[904]})
-var sStageDeclaration_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &i_StageActionDeclarationList, Members: &m_StageActionDeclarationList, Type: smithy.ShapeTypeList, Ext: &ext[905]})
-var sStageDeclaration_onFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "onFailure", ID: &iFailureConditions, Members: &mFailureConditions, Type: smithy.ShapeTypeStructure, Ext: &ext[906]})
-var sStageDeclaration_onSuccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "onSuccess", ID: &iSuccessConditions, Members: &mSuccessConditions, Type: smithy.ShapeTypeStructure, Ext: &ext[907]})
-var sStageDeclaration_beforeEntry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeEntry", ID: &iBeforeEntryConditions, Members: &mBeforeEntryConditions, Type: smithy.ShapeTypeStructure, Ext: &ext[908]})
-var sStageExecution_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[910]})
-var sStageExecution_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStageExecutionStatus, Members: &mStageExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[911]})
-var sStageExecution_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iExecutionType, Members: &mExecutionType, Type: smithy.ShapeTypeEnum, Ext: &ext[912]})
-var s_StageExecutionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStageExecution, Members: &mStageExecution, Type: smithy.ShapeTypeStructure, Ext: &ext[914]})
-var sStageExecutionStatus_Cancelled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cancelled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[916]})
-var sStageExecutionStatus_InProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[917]})
-var sStageExecutionStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[918]})
-var sStageExecutionStatus_Stopped = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stopped", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[919]})
-var sStageExecutionStatus_Stopping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stopping", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[920]})
-var sStageExecutionStatus_Succeeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Succeeded", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[921]})
-var sStageExecutionStatus_Skipped = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Skipped", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[922]})
-var sStageNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[925]})
-var sStageNotRetryableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[927]})
-var sStageRetryMode_FAILED_ACTIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_ACTIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[929]})
-var sStageRetryMode_ALL_ACTIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL_ACTIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[930]})
-var sStageState_stageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stageName", ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &ext[932]})
-var sStageState_inboundExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inboundExecution", ID: &iStageExecution, Members: &mStageExecution, Type: smithy.ShapeTypeStructure, Ext: &ext[933]})
-var sStageState_inboundExecutions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inboundExecutions", ID: &i_StageExecutionList, Members: &m_StageExecutionList, Type: smithy.ShapeTypeList, Ext: &ext[934]})
-var sStageState_inboundTransitionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inboundTransitionState", ID: &iTransitionState, Members: &mTransitionState, Type: smithy.ShapeTypeStructure, Ext: &ext[935]})
-var sStageState_actionStates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionStates", ID: &i_ActionStateList, Members: &m_ActionStateList, Type: smithy.ShapeTypeList, Ext: &ext[936]})
-var sStageState_latestExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestExecution", ID: &iStageExecution, Members: &mStageExecution, Type: smithy.ShapeTypeStructure, Ext: &ext[937]})
-var sStageState_beforeEntryConditionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeEntryConditionState", ID: &iStageConditionState, Members: &mStageConditionState, Type: smithy.ShapeTypeStructure, Ext: &ext[938]})
-var sStageState_onSuccessConditionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "onSuccessConditionState", ID: &iStageConditionState, Members: &mStageConditionState, Type: smithy.ShapeTypeStructure, Ext: &ext[939]})
-var sStageState_onFailureConditionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "onFailureConditionState", ID: &iStageConditionState, Members: &mStageConditionState, Type: smithy.ShapeTypeStructure, Ext: &ext[940]})
-var sStageState_retryStageMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryStageMetadata", ID: &iRetryStageMetadata, Members: &mRetryStageMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[941]})
-var s_StageStateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStageState, Members: &mStageState, Type: smithy.ShapeTypeStructure, Ext: &ext[943]})
-var sStageTransitionType_Inbound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Inbound", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[945]})
-var sStageTransitionType_Outbound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Outbound", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[946]})
-var sStartTimeRange_Latest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Latest", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[948]})
-var sStartTimeRange_All = smithy.NewStaticSchema(smithy.StaticSchema{Member: "All", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[949]})
-var sStopExecutionTrigger_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_StopPipelineExecutionReason, Type: smithy.ShapeTypeString, Ext: &ext[951]})
-var sSucceededInStageFilter_stageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stageName", ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &ext[955]})
-var sSuccessConditions_conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conditions", ID: &i_ConditionList, Members: &m_ConditionList, Type: smithy.ShapeTypeList, Ext: &ext[957]})
-var sTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[959]})
-var sTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[960]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[963]})
-var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[965]})
-var sTargetFilter_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &iTargetFilterName, Members: &mTargetFilterName, Type: smithy.ShapeTypeEnum, Ext: &ext[968]})
-var sTargetFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_TargetFilterValueList, Members: &m_TargetFilterValueList, Type: smithy.ShapeTypeList, Ext: &ext[969]})
-var s_TargetFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTargetFilter, Members: &mTargetFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[971]})
-var sTargetFilterName_TARGET_STATUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TARGET_STATUS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[973]})
-var s_TargetFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TargetFilterValue, Type: smithy.ShapeTypeString, Ext: &ext[976]})
-var sThirdPartyJob_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_ClientId, Type: smithy.ShapeTypeString, Ext: &ext[978]})
-var sThirdPartyJob_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &ext[979]})
-var sThirdPartyJobData_actionTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionTypeId", ID: &iActionTypeId, Members: &mActionTypeId, Type: smithy.ShapeTypeStructure, Ext: &ext[981]})
-var sThirdPartyJobData_actionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionConfiguration", ID: &iActionConfiguration, Members: &mActionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[982]})
-var sThirdPartyJobData_pipelineContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineContext", ID: &iPipelineContext, Members: &mPipelineContext, Type: smithy.ShapeTypeStructure, Ext: &ext[983]})
-var sThirdPartyJobData_inputArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputArtifacts", ID: &i_ArtifactList, Members: &m_ArtifactList, Type: smithy.ShapeTypeList, Ext: &ext[984]})
-var sThirdPartyJobData_outputArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputArtifacts", ID: &i_ArtifactList, Members: &m_ArtifactList, Type: smithy.ShapeTypeList, Ext: &ext[985]})
-var sThirdPartyJobData_artifactCredentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "artifactCredentials", ID: &iAWSSessionCredentials, Members: &mAWSSessionCredentials, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[986]})
-var sThirdPartyJobData_continuationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "continuationToken", ID: &i_ContinuationToken, Type: smithy.ShapeTypeString, Ext: &ext[987]})
-var sThirdPartyJobData_encryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKey", ID: &iEncryptionKey, Members: &mEncryptionKey, Type: smithy.ShapeTypeStructure, Ext: &ext[988]})
-var sThirdPartyJobDetails_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ThirdPartyJobId, Type: smithy.ShapeTypeString, Ext: &ext[990]})
-var sThirdPartyJobDetails_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &iThirdPartyJobData, Members: &mThirdPartyJobData, Type: smithy.ShapeTypeStructure, Ext: &ext[991]})
-var sThirdPartyJobDetails_nonce = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nonce", ID: &i_Nonce, Type: smithy.ShapeTypeString, Ext: &ext[992]})
-var s_ThirdPartyJobList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iThirdPartyJob, Members: &mThirdPartyJob, Type: smithy.ShapeTypeStructure, Ext: &ext[995]})
-var sTooManyTagsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[999]})
-var sTransitionState_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[1001]})
-var sTransitionState_lastChangedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastChangedBy", ID: &i_LastChangedBy, Type: smithy.ShapeTypeString, Ext: &ext[1002]})
-var sTransitionState_lastChangedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastChangedAt", ID: &i_LastChangedAt, Type: smithy.ShapeTypeTimestamp, Ext: &ext[1003]})
-var sTransitionState_disabledReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "disabledReason", ID: &i_DisabledReason, Type: smithy.ShapeTypeString, Ext: &ext[1004]})
-var sTriggerType_CreatePipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatePipeline", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[1007]})
-var sTriggerType_StartPipelineExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartPipelineExecution", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[1008]})
-var sTriggerType_PollForSourceChanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PollForSourceChanges", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[1009]})
-var sTriggerType_Webhook = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Webhook", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[1010]})
-var sTriggerType_CloudWatchEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchEvent", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[1011]})
-var sTriggerType_PutActionRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PutActionRevision", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[1012]})
-var sTriggerType_WebhookV2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebhookV2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[1013]})
-var sTriggerType_ManualRollback = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManualRollback", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[1014]})
-var sTriggerType_AutomatedRollback = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomatedRollback", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[1015]})
-var sUnableToRollbackStageException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[1017]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ext[1021]})
-var sWebhookAuthConfiguration_AllowedIPRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowedIPRange", ID: &i_WebhookAuthConfigurationAllowedIPRange, Type: smithy.ShapeTypeString, Ext: &ext[1025]})
-var sWebhookAuthConfiguration_SecretToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretToken", ID: &i_WebhookAuthConfigurationSecretToken, Type: smithy.ShapeTypeString, Ext: &ext[1026]})
-var sWebhookAuthenticationType_GITHUB_HMAC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB_HMAC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[1030]})
-var sWebhookAuthenticationType_IP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[1031]})
-var sWebhookAuthenticationType_UNAUTHENTICATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNAUTHENTICATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[1032]})
-var sWebhookDefinition_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_WebhookName, Type: smithy.ShapeTypeString, Ext: &ext[1034]})
-var sWebhookDefinition_targetPipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetPipeline", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[1035]})
-var sWebhookDefinition_targetAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetAction", ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &ext[1036]})
-var sWebhookDefinition_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_WebhookFilters, Members: &m_WebhookFilters, Type: smithy.ShapeTypeList, Ext: &ext[1037]})
-var sWebhookDefinition_authentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authentication", ID: &iWebhookAuthenticationType, Members: &mWebhookAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &ext[1038]})
-var sWebhookDefinition_authenticationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authenticationConfiguration", ID: &iWebhookAuthConfiguration, Members: &mWebhookAuthConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[1039]})
-var sWebhookFilterRule_jsonPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jsonPath", ID: &i_JsonPath, Type: smithy.ShapeTypeString, Ext: &ext[1043]})
-var sWebhookFilterRule_matchEquals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "matchEquals", ID: &i_MatchEquals, Type: smithy.ShapeTypeString, Ext: &ext[1044]})
-var s_WebhookFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWebhookFilterRule, Members: &mWebhookFilterRule, Type: smithy.ShapeTypeStructure, Ext: &ext[1046]})
-var s_WebhookList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListWebhookItem, Members: &mListWebhookItem, Type: smithy.ShapeTypeStructure, Ext: &ext[1049]})
-var sAcknowledgeJobInput_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &ext[1054]})
-var sAcknowledgeJobInput_nonce = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nonce", ID: &i_Nonce, Type: smithy.ShapeTypeString, Ext: &ext[1055]})
-var sAcknowledgeJobOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[1057]})
-var sAcknowledgeThirdPartyJobInput_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_ThirdPartyJobId, Type: smithy.ShapeTypeString, Ext: &ext[1059]})
-var sAcknowledgeThirdPartyJobInput_nonce = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nonce", ID: &i_Nonce, Type: smithy.ShapeTypeString, Ext: &ext[1060]})
-var sAcknowledgeThirdPartyJobInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[1061]})
-var sAcknowledgeThirdPartyJobOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[1063]})
-var sCreateCustomActionTypeInput_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &iActionCategory, Members: &mActionCategory, Type: smithy.ShapeTypeEnum, Ext: &ext[1065]})
-var sCreateCustomActionTypeInput_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &i_ActionProvider, Type: smithy.ShapeTypeString, Ext: &ext[1066]})
-var sCreateCustomActionTypeInput_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &ext[1067]})
-var sCreateCustomActionTypeInput_settings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "settings", ID: &iActionTypeSettings, Members: &mActionTypeSettings, Type: smithy.ShapeTypeStructure, Ext: &ext[1068]})
-var sCreateCustomActionTypeInput_configurationProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configurationProperties", ID: &i_ActionConfigurationPropertyList, Members: &m_ActionConfigurationPropertyList, Type: smithy.ShapeTypeList, Ext: &ext[1069]})
-var sCreateCustomActionTypeInput_inputArtifactDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputArtifactDetails", ID: &iArtifactDetails, Members: &mArtifactDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[1070]})
-var sCreateCustomActionTypeInput_outputArtifactDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputArtifactDetails", ID: &iArtifactDetails, Members: &mArtifactDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[1071]})
-var sCreateCustomActionTypeInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[1072]})
-var sCreateCustomActionTypeOutput_actionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionType", ID: &iActionType, Members: &mActionType, Type: smithy.ShapeTypeStructure, Ext: &ext[1074]})
-var sCreateCustomActionTypeOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[1075]})
-var sCreatePipelineInput_pipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipeline", ID: &iPipelineDeclaration, Members: &mPipelineDeclaration, Type: smithy.ShapeTypeStructure, Ext: &ext[1077]})
-var sCreatePipelineInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[1078]})
-var sCreatePipelineOutput_pipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipeline", ID: &iPipelineDeclaration, Members: &mPipelineDeclaration, Type: smithy.ShapeTypeStructure, Ext: &ext[1080]})
-var sCreatePipelineOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[1081]})
-var sDeleteCustomActionTypeInput_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &iActionCategory, Members: &mActionCategory, Type: smithy.ShapeTypeEnum, Ext: &ext[1083]})
-var sDeleteCustomActionTypeInput_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &i_ActionProvider, Type: smithy.ShapeTypeString, Ext: &ext[1084]})
-var sDeleteCustomActionTypeInput_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &ext[1085]})
-var sDeletePipelineInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[1087]})
-var sDeleteWebhookInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_WebhookName, Type: smithy.ShapeTypeString, Ext: &ext[1089]})
-var sDeregisterWebhookWithThirdPartyInput_webhookName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "webhookName", ID: &i_WebhookName, Type: smithy.ShapeTypeString, Ext: &ext[1092]})
-var sDisableStageTransitionInput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[1095]})
-var sDisableStageTransitionInput_stageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stageName", ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &ext[1096]})
-var sDisableStageTransitionInput_transitionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transitionType", ID: &iStageTransitionType, Members: &mStageTransitionType, Type: smithy.ShapeTypeEnum, Ext: &ext[1097]})
-var sDisableStageTransitionInput_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_DisabledReason, Type: smithy.ShapeTypeString, Ext: &ext[1098]})
-var sEnableStageTransitionInput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[1100]})
-var sEnableStageTransitionInput_stageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stageName", ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &ext[1101]})
-var sEnableStageTransitionInput_transitionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transitionType", ID: &iStageTransitionType, Members: &mStageTransitionType, Type: smithy.ShapeTypeEnum, Ext: &ext[1102]})
-var sGetActionTypeInput_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &iActionCategory, Members: &mActionCategory, Type: smithy.ShapeTypeEnum, Ext: &ext[1104]})
-var sGetActionTypeInput_owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owner", ID: &i_ActionTypeOwner, Type: smithy.ShapeTypeString, Ext: &ext[1105]})
-var sGetActionTypeInput_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &i_ActionProvider, Type: smithy.ShapeTypeString, Ext: &ext[1106]})
-var sGetActionTypeInput_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &ext[1107]})
-var sGetActionTypeOutput_actionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionType", ID: &iActionTypeDeclaration, Members: &mActionTypeDeclaration, Type: smithy.ShapeTypeStructure, Ext: &ext[1109]})
-var sGetJobDetailsInput_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &ext[1111]})
-var sGetJobDetailsOutput_jobDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobDetails", ID: &iJobDetails, Members: &mJobDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[1113]})
-var sGetPipelineExecutionInput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[1115]})
-var sGetPipelineExecutionInput_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[1116]})
-var sGetPipelineExecutionOutput_pipelineExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecution", ID: &iPipelineExecution, Members: &mPipelineExecution, Type: smithy.ShapeTypeStructure, Ext: &ext[1118]})
-var sGetPipelineInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[1120]})
-var sGetPipelineInput_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_PipelineVersion, Type: smithy.ShapeTypeInteger, Ext: &ext[1121]})
-var sGetPipelineOutput_pipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipeline", ID: &iPipelineDeclaration, Members: &mPipelineDeclaration, Type: smithy.ShapeTypeStructure, Ext: &ext[1123]})
-var sGetPipelineOutput_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &iPipelineMetadata, Members: &mPipelineMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[1124]})
-var sGetPipelineStateInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[1126]})
-var sGetPipelineStateOutput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[1128]})
-var sGetPipelineStateOutput_pipelineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineVersion", ID: &i_PipelineVersion, Type: smithy.ShapeTypeInteger, Ext: &ext[1129]})
-var sGetPipelineStateOutput_stageStates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stageStates", ID: &i_StageStateList, Members: &m_StageStateList, Type: smithy.ShapeTypeList, Ext: &ext[1130]})
-var sGetPipelineStateOutput_created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "created", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[1131]})
-var sGetPipelineStateOutput_updated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updated", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[1132]})
-var sGetThirdPartyJobDetailsInput_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_ThirdPartyJobId, Type: smithy.ShapeTypeString, Ext: &ext[1134]})
-var sGetThirdPartyJobDetailsInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[1135]})
-var sGetThirdPartyJobDetailsOutput_jobDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobDetails", ID: &iThirdPartyJobDetails, Members: &mThirdPartyJobDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[1137]})
-var sListActionExecutionsInput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[1139]})
-var sListActionExecutionsInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iActionExecutionFilter, Members: &mActionExecutionFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[1140]})
-var sListActionExecutionsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1141]})
-var sListActionExecutionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1142]})
-var sListActionExecutionsOutput_actionExecutionDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionExecutionDetails", ID: &i_ActionExecutionDetailList, Members: &m_ActionExecutionDetailList, Type: smithy.ShapeTypeList, Ext: &ext[1144]})
-var sListActionExecutionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1145]})
-var sListActionTypesInput_actionOwnerFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionOwnerFilter", ID: &iActionOwner, Members: &mActionOwner, Type: smithy.ShapeTypeEnum, Ext: &ext[1147]})
-var sListActionTypesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1148]})
-var sListActionTypesInput_regionFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regionFilter", ID: &i_AWSRegionName, Type: smithy.ShapeTypeString, Ext: &ext[1149]})
-var sListActionTypesOutput_actionTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionTypes", ID: &i_ActionTypeList, Members: &m_ActionTypeList, Type: smithy.ShapeTypeList, Ext: &ext[1151]})
-var sListActionTypesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1152]})
-var sListDeployActionExecutionTargetsInput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[1154]})
-var sListDeployActionExecutionTargetsInput_actionExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionExecutionId", ID: &i_ActionExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[1155]})
-var sListDeployActionExecutionTargetsInput_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_TargetFilterList, Members: &m_TargetFilterList, Type: smithy.ShapeTypeList, Ext: &ext[1156]})
-var sListDeployActionExecutionTargetsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1157]})
-var sListDeployActionExecutionTargetsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1158]})
-var sListDeployActionExecutionTargetsOutput_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_DeployActionExecutionTargetList, Members: &m_DeployActionExecutionTargetList, Type: smithy.ShapeTypeList, Ext: &ext[1160]})
-var sListDeployActionExecutionTargetsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1161]})
-var sListPipelineExecutionsInput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[1163]})
-var sListPipelineExecutionsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1164]})
-var sListPipelineExecutionsInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iPipelineExecutionFilter, Members: &mPipelineExecutionFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[1165]})
-var sListPipelineExecutionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1166]})
-var sListPipelineExecutionsOutput_pipelineExecutionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionSummaries", ID: &i_PipelineExecutionSummaryList, Members: &m_PipelineExecutionSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[1168]})
-var sListPipelineExecutionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1169]})
-var sListPipelinesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1171]})
-var sListPipelinesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxPipelines, Type: smithy.ShapeTypeInteger, Ext: &ext[1172]})
-var sListPipelinesOutput_pipelines = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelines", ID: &i_PipelineList, Members: &m_PipelineList, Type: smithy.ShapeTypeList, Ext: &ext[1174]})
-var sListPipelinesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1175]})
-var sListRuleExecutionsInput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[1177]})
-var sListRuleExecutionsInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iRuleExecutionFilter, Members: &mRuleExecutionFilter, Type: smithy.ShapeTypeStructure, Ext: &ext[1178]})
-var sListRuleExecutionsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1179]})
-var sListRuleExecutionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1180]})
-var sListRuleExecutionsOutput_ruleExecutionDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleExecutionDetails", ID: &i_RuleExecutionDetailList, Members: &m_RuleExecutionDetailList, Type: smithy.ShapeTypeList, Ext: &ext[1182]})
-var sListRuleExecutionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1183]})
-var sListRuleTypesInput_ruleOwnerFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleOwnerFilter", ID: &iRuleOwner, Members: &mRuleOwner, Type: smithy.ShapeTypeEnum, Ext: &ext[1185]})
-var sListRuleTypesInput_regionFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regionFilter", ID: &i_AWSRegionName, Type: smithy.ShapeTypeString, Ext: &ext[1186]})
-var sListRuleTypesOutput_ruleTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleTypes", ID: &i_RuleTypeList, Members: &m_RuleTypeList, Type: smithy.ShapeTypeList, Ext: &ext[1188]})
-var sListTagsForResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1190]})
-var sListTagsForResourceInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1191]})
-var sListTagsForResourceInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1192]})
-var sListTagsForResourceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[1194]})
-var sListTagsForResourceOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1195]})
-var sListWebhooksInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1197]})
-var sListWebhooksInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[1198]})
-var sListWebhooksOutput_webhooks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "webhooks", ID: &i_WebhookList, Members: &m_WebhookList, Type: smithy.ShapeTypeList, Ext: &ext[1200]})
-var sListWebhooksOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[1201]})
-var sOverrideStageConditionInput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[1203]})
-var sOverrideStageConditionInput_stageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stageName", ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &ext[1204]})
-var sOverrideStageConditionInput_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[1205]})
-var sOverrideStageConditionInput_conditionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conditionType", ID: &iConditionType, Members: &mConditionType, Type: smithy.ShapeTypeEnum, Ext: &ext[1206]})
-var sPollForJobsInput_actionTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionTypeId", ID: &iActionTypeId, Members: &mActionTypeId, Type: smithy.ShapeTypeStructure, Ext: &ext[1208]})
-var sPollForJobsInput_maxBatchSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxBatchSize", ID: &i_MaxBatchSize, Type: smithy.ShapeTypeInteger, Ext: &ext[1209]})
-var sPollForJobsInput_queryParam = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryParam", ID: &i_QueryParamMap, Members: &m_QueryParamMap, Type: smithy.ShapeTypeMap, Ext: &ext[1210]})
-var sPollForJobsOutput_jobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobs", ID: &i_JobList, Members: &m_JobList, Type: smithy.ShapeTypeList, Ext: &ext[1212]})
-var sPollForThirdPartyJobsInput_actionTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionTypeId", ID: &iActionTypeId, Members: &mActionTypeId, Type: smithy.ShapeTypeStructure, Ext: &ext[1214]})
-var sPollForThirdPartyJobsInput_maxBatchSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxBatchSize", ID: &i_MaxBatchSize, Type: smithy.ShapeTypeInteger, Ext: &ext[1215]})
-var sPollForThirdPartyJobsOutput_jobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobs", ID: &i_ThirdPartyJobList, Members: &m_ThirdPartyJobList, Type: smithy.ShapeTypeList, Ext: &ext[1217]})
-var sPutActionRevisionInput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[1219]})
-var sPutActionRevisionInput_stageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stageName", ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &ext[1220]})
-var sPutActionRevisionInput_actionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionName", ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &ext[1221]})
-var sPutActionRevisionInput_actionRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionRevision", ID: &iActionRevision, Members: &mActionRevision, Type: smithy.ShapeTypeStructure, Ext: &ext[1222]})
-var sPutActionRevisionOutput_newRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newRevision", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[1224]})
-var sPutActionRevisionOutput_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[1225]})
-var sPutApprovalResultInput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[1227]})
-var sPutApprovalResultInput_stageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stageName", ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &ext[1228]})
-var sPutApprovalResultInput_actionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionName", ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &ext[1229]})
-var sPutApprovalResultInput_result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "result", ID: &iApprovalResult, Members: &mApprovalResult, Type: smithy.ShapeTypeStructure, Ext: &ext[1230]})
-var sPutApprovalResultInput_token = smithy.NewStaticSchema(smithy.StaticSchema{Member: "token", ID: &i_ApprovalToken, Type: smithy.ShapeTypeString, Ext: &ext[1231]})
-var sPutApprovalResultOutput_approvedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[1233]})
-var sPutJobFailureResultInput_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &ext[1235]})
-var sPutJobFailureResultInput_failureDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureDetails", ID: &iFailureDetails, Members: &mFailureDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[1236]})
-var sPutJobSuccessResultInput_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &ext[1238]})
-var sPutJobSuccessResultInput_currentRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentRevision", ID: &iCurrentRevision, Members: &mCurrentRevision, Type: smithy.ShapeTypeStructure, Ext: &ext[1239]})
-var sPutJobSuccessResultInput_continuationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "continuationToken", ID: &i_ContinuationToken, Type: smithy.ShapeTypeString, Ext: &ext[1240]})
-var sPutJobSuccessResultInput_executionDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionDetails", ID: &iExecutionDetails, Members: &mExecutionDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[1241]})
-var sPutJobSuccessResultInput_outputVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputVariables", ID: &i_OutputVariablesMap, Members: &m_OutputVariablesMap, Type: smithy.ShapeTypeMap, Ext: &ext[1242]})
-var sPutThirdPartyJobFailureResultInput_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_ThirdPartyJobId, Type: smithy.ShapeTypeString, Ext: &ext[1244]})
-var sPutThirdPartyJobFailureResultInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[1245]})
-var sPutThirdPartyJobFailureResultInput_failureDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureDetails", ID: &iFailureDetails, Members: &mFailureDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[1246]})
-var sPutThirdPartyJobSuccessResultInput_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_ThirdPartyJobId, Type: smithy.ShapeTypeString, Ext: &ext[1248]})
-var sPutThirdPartyJobSuccessResultInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[1249]})
-var sPutThirdPartyJobSuccessResultInput_currentRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentRevision", ID: &iCurrentRevision, Members: &mCurrentRevision, Type: smithy.ShapeTypeStructure, Ext: &ext[1250]})
-var sPutThirdPartyJobSuccessResultInput_continuationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "continuationToken", ID: &i_ContinuationToken, Type: smithy.ShapeTypeString, Ext: &ext[1251]})
-var sPutThirdPartyJobSuccessResultInput_executionDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionDetails", ID: &iExecutionDetails, Members: &mExecutionDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[1252]})
-var sPutWebhookInput_webhook = smithy.NewStaticSchema(smithy.StaticSchema{Member: "webhook", ID: &iWebhookDefinition, Members: &mWebhookDefinition, Type: smithy.ShapeTypeStructure, Ext: &ext[1254]})
-var sPutWebhookInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[1255]})
-var sPutWebhookOutput_webhook = smithy.NewStaticSchema(smithy.StaticSchema{Member: "webhook", ID: &iListWebhookItem, Members: &mListWebhookItem, Type: smithy.ShapeTypeStructure, Ext: &ext[1257]})
-var sRegisterWebhookWithThirdPartyInput_webhookName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "webhookName", ID: &i_WebhookName, Type: smithy.ShapeTypeString, Ext: &ext[1259]})
-var sRetryStageExecutionInput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[1262]})
-var sRetryStageExecutionInput_stageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stageName", ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &ext[1263]})
-var sRetryStageExecutionInput_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[1264]})
-var sRetryStageExecutionInput_retryMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryMode", ID: &iStageRetryMode, Members: &mStageRetryMode, Type: smithy.ShapeTypeEnum, Ext: &ext[1265]})
-var sRetryStageExecutionOutput_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[1267]})
-var sRollbackStageInput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[1269]})
-var sRollbackStageInput_stageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stageName", ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &ext[1270]})
-var sRollbackStageInput_targetPipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetPipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[1271]})
-var sRollbackStageOutput_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[1273]})
-var sStartPipelineExecutionInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[1275]})
-var sStartPipelineExecutionInput_variables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variables", ID: &i_PipelineVariableList, Members: &m_PipelineVariableList, Type: smithy.ShapeTypeList, Ext: &ext[1276]})
-var sStartPipelineExecutionInput_clientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString, Ext: &ext[1277]})
-var sStartPipelineExecutionInput_sourceRevisions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceRevisions", ID: &i_SourceRevisionOverrideList, Members: &m_SourceRevisionOverrideList, Type: smithy.ShapeTypeList, Ext: &ext[1278]})
-var sStartPipelineExecutionOutput_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[1280]})
-var sStopPipelineExecutionInput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ext[1282]})
-var sStopPipelineExecutionInput_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[1283]})
-var sStopPipelineExecutionInput_abandon = smithy.NewStaticSchema(smithy.StaticSchema{Member: "abandon", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[1284]})
-var sStopPipelineExecutionInput_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_StopPipelineExecutionReason, Type: smithy.ShapeTypeString, Ext: &ext[1285]})
-var sStopPipelineExecutionOutput_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &ext[1287]})
-var sTagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1289]})
-var sTagResourceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[1290]})
-var sUntagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[1293]})
-var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[1294]})
-var sUpdateActionTypeInput_actionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionType", ID: &iActionTypeDeclaration, Members: &mActionTypeDeclaration, Type: smithy.ShapeTypeStructure, Ext: &ext[1297]})
-var sUpdatePipelineInput_pipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipeline", ID: &iPipelineDeclaration, Members: &mPipelineDeclaration, Type: smithy.ShapeTypeStructure, Ext: &ext[1299]})
-var sUpdatePipelineOutput_pipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipeline", ID: &iPipelineDeclaration, Members: &mPipelineDeclaration, Type: smithy.ShapeTypeStructure, Ext: &ext[1301]})
+var sActionCategory_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionCategory_Source})
+var sActionCategory_Build = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Build", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionCategory_Build})
+var sActionCategory_Deploy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deploy", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionCategory_Deploy})
+var sActionCategory_Test = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Test", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionCategory_Test})
+var sActionCategory_Invoke = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Invoke", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionCategory_Invoke})
+var sActionCategory_Approval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Approval", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionCategory_Approval})
+var sActionCategory_Compute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Compute", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionCategory_Compute})
+var sActionConfiguration_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &i_ActionConfigurationMap, Members: &m_ActionConfigurationMap, Type: smithy.ShapeTypeMap, Ext: &eActionConfiguration_configuration})
+var s_ActionConfigurationMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ActionConfigurationKey, Type: smithy.ShapeTypeString, Ext: &e_ActionConfigurationMap_key})
+var s_ActionConfigurationMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ActionConfigurationValue, Type: smithy.ShapeTypeString, Ext: &e_ActionConfigurationMap_value})
+var sActionConfigurationProperty_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ActionConfigurationKey, Type: smithy.ShapeTypeString, Ext: &eActionConfigurationProperty_name})
+var sActionConfigurationProperty_required = smithy.NewStaticSchema(smithy.StaticSchema{Member: "required", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eActionConfigurationProperty_required})
+var sActionConfigurationProperty_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eActionConfigurationProperty_key})
+var sActionConfigurationProperty_secret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secret", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eActionConfigurationProperty_secret})
+var sActionConfigurationProperty_queryable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eActionConfigurationProperty_queryable})
+var sActionConfigurationProperty_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eActionConfigurationProperty_description})
+var sActionConfigurationProperty_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iActionConfigurationPropertyType, Members: &mActionConfigurationPropertyType, Type: smithy.ShapeTypeEnum, Ext: &eActionConfigurationProperty_type})
+var s_ActionConfigurationPropertyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActionConfigurationProperty, Members: &mActionConfigurationProperty, Type: smithy.ShapeTypeStructure, Ext: &e_ActionConfigurationPropertyList_member})
+var sActionConfigurationPropertyType_String = smithy.NewStaticSchema(smithy.StaticSchema{Member: "String", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionConfigurationPropertyType_String})
+var sActionConfigurationPropertyType_Number = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Number", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionConfigurationPropertyType_Number})
+var sActionConfigurationPropertyType_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Boolean", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionConfigurationPropertyType_Boolean})
+var sActionContext_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &eActionContext_name})
+var sActionContext_actionExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionExecutionId", ID: &i_ActionExecutionId, Type: smithy.ShapeTypeString, Ext: &eActionContext_actionExecutionId})
+var sActionDeclaration_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &eActionDeclaration_name})
+var sActionDeclaration_actionTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionTypeId", ID: &iActionTypeId, Members: &mActionTypeId, Type: smithy.ShapeTypeStructure, Ext: &eActionDeclaration_actionTypeId})
+var sActionDeclaration_runOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runOrder", ID: &i_ActionRunOrder, Type: smithy.ShapeTypeInteger, Ext: &eActionDeclaration_runOrder})
+var sActionDeclaration_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &i_ActionConfigurationMap, Members: &m_ActionConfigurationMap, Type: smithy.ShapeTypeMap, Ext: &eActionDeclaration_configuration})
+var sActionDeclaration_commands = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commands", ID: &i_CommandList, Members: &m_CommandList, Type: smithy.ShapeTypeList, Ext: &eActionDeclaration_commands})
+var sActionDeclaration_outputArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputArtifacts", ID: &i_OutputArtifactList, Members: &m_OutputArtifactList, Type: smithy.ShapeTypeList, Ext: &eActionDeclaration_outputArtifacts})
+var sActionDeclaration_inputArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputArtifacts", ID: &i_InputArtifactList, Members: &m_InputArtifactList, Type: smithy.ShapeTypeList, Ext: &eActionDeclaration_inputArtifacts})
+var sActionDeclaration_outputVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputVariables", ID: &i_OutputVariableList, Members: &m_OutputVariableList, Type: smithy.ShapeTypeList, Ext: &eActionDeclaration_outputVariables})
+var sActionDeclaration_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eActionDeclaration_roleArn})
+var sActionDeclaration_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_AWSRegionName, Type: smithy.ShapeTypeString, Ext: &eActionDeclaration_region})
+var sActionDeclaration_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_ActionNamespace, Type: smithy.ShapeTypeString, Ext: &eActionDeclaration_namespace})
+var sActionDeclaration_timeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutInMinutes", ID: &i_ActionTimeout, Type: smithy.ShapeTypeInteger, Ext: &eActionDeclaration_timeoutInMinutes})
+var sActionDeclaration_environmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentVariables", ID: &i_EnvironmentVariableList, Members: &m_EnvironmentVariableList, Type: smithy.ShapeTypeList, Ext: &eActionDeclaration_environmentVariables})
+var sActionExecution_actionExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionExecutionId", ID: &i_ActionExecutionId, Type: smithy.ShapeTypeString, Ext: &eActionExecution_actionExecutionId})
+var sActionExecution_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iActionExecutionStatus, Members: &mActionExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &eActionExecution_status})
+var sActionExecution_summary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summary", ID: &i_ExecutionSummary, Type: smithy.ShapeTypeString, Ext: &eActionExecution_summary})
+var sActionExecution_lastStatusChange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastStatusChange", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eActionExecution_lastStatusChange})
+var sActionExecution_token = smithy.NewStaticSchema(smithy.StaticSchema{Member: "token", ID: &i_ActionExecutionToken, Type: smithy.ShapeTypeString, Ext: &eActionExecution_token})
+var sActionExecution_lastUpdatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedBy", ID: &i_LastUpdatedBy, Type: smithy.ShapeTypeString, Ext: &eActionExecution_lastUpdatedBy})
+var sActionExecution_externalExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalExecutionId", ID: &i_ExecutionId, Type: smithy.ShapeTypeString, Ext: &eActionExecution_externalExecutionId})
+var sActionExecution_externalExecutionUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalExecutionUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &eActionExecution_externalExecutionUrl})
+var sActionExecution_percentComplete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "percentComplete", ID: &i_Percentage, Type: smithy.ShapeTypeInteger, Ext: &eActionExecution_percentComplete})
+var sActionExecution_errorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorDetails", ID: &iErrorDetails, Members: &mErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &eActionExecution_errorDetails})
+var sActionExecution_logStreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logStreamARN", ID: &i_LogStreamARN, Type: smithy.ShapeTypeString, Ext: &eActionExecution_logStreamARN})
+var sActionExecutionDetail_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &eActionExecutionDetail_pipelineExecutionId})
+var sActionExecutionDetail_actionExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionExecutionId", ID: &i_ActionExecutionId, Type: smithy.ShapeTypeString, Ext: &eActionExecutionDetail_actionExecutionId})
+var sActionExecutionDetail_pipelineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineVersion", ID: &i_PipelineVersion, Type: smithy.ShapeTypeInteger, Ext: &eActionExecutionDetail_pipelineVersion})
+var sActionExecutionDetail_stageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stageName", ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &eActionExecutionDetail_stageName})
+var sActionExecutionDetail_actionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionName", ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &eActionExecutionDetail_actionName})
+var sActionExecutionDetail_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eActionExecutionDetail_startTime})
+var sActionExecutionDetail_lastUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eActionExecutionDetail_lastUpdateTime})
+var sActionExecutionDetail_updatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedBy", ID: &i_LastUpdatedBy, Type: smithy.ShapeTypeString, Ext: &eActionExecutionDetail_updatedBy})
+var sActionExecutionDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iActionExecutionStatus, Members: &mActionExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &eActionExecutionDetail_status})
+var sActionExecutionDetail_input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "input", ID: &iActionExecutionInput, Members: &mActionExecutionInput, Type: smithy.ShapeTypeStructure, Ext: &eActionExecutionDetail_input})
+var sActionExecutionDetail_output = smithy.NewStaticSchema(smithy.StaticSchema{Member: "output", ID: &iActionExecutionOutput, Members: &mActionExecutionOutput, Type: smithy.ShapeTypeStructure, Ext: &eActionExecutionDetail_output})
+var s_ActionExecutionDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActionExecutionDetail, Members: &mActionExecutionDetail, Type: smithy.ShapeTypeStructure, Ext: &e_ActionExecutionDetailList_member})
+var sActionExecutionFilter_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &eActionExecutionFilter_pipelineExecutionId})
+var sActionExecutionFilter_latestInPipelineExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestInPipelineExecution", ID: &iLatestInPipelineExecutionFilter, Members: &mLatestInPipelineExecutionFilter, Type: smithy.ShapeTypeStructure, Ext: &eActionExecutionFilter_latestInPipelineExecution})
+var sActionExecutionInput_actionTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionTypeId", ID: &iActionTypeId, Members: &mActionTypeId, Type: smithy.ShapeTypeStructure, Ext: &eActionExecutionInput_actionTypeId})
+var sActionExecutionInput_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &i_ActionConfigurationMap, Members: &m_ActionConfigurationMap, Type: smithy.ShapeTypeMap, Ext: &eActionExecutionInput_configuration})
+var sActionExecutionInput_resolvedConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolvedConfiguration", ID: &i_ResolvedActionConfigurationMap, Members: &m_ResolvedActionConfigurationMap, Type: smithy.ShapeTypeMap, Ext: &eActionExecutionInput_resolvedConfiguration})
+var sActionExecutionInput_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eActionExecutionInput_roleArn})
+var sActionExecutionInput_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_AWSRegionName, Type: smithy.ShapeTypeString, Ext: &eActionExecutionInput_region})
+var sActionExecutionInput_inputArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputArtifacts", ID: &i_ArtifactDetailList, Members: &m_ArtifactDetailList, Type: smithy.ShapeTypeList, Ext: &eActionExecutionInput_inputArtifacts})
+var sActionExecutionInput_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_ActionNamespace, Type: smithy.ShapeTypeString, Ext: &eActionExecutionInput_namespace})
+var sActionExecutionNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eActionExecutionNotFoundException_message})
+var sActionExecutionOutput_outputArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputArtifacts", ID: &i_ArtifactDetailList, Members: &m_ArtifactDetailList, Type: smithy.ShapeTypeList, Ext: &eActionExecutionOutput_outputArtifacts})
+var sActionExecutionOutput_executionResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionResult", ID: &iActionExecutionResult, Members: &mActionExecutionResult, Type: smithy.ShapeTypeStructure, Ext: &eActionExecutionOutput_executionResult})
+var sActionExecutionOutput_outputVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputVariables", ID: &i_OutputVariablesMap, Members: &m_OutputVariablesMap, Type: smithy.ShapeTypeMap, Ext: &eActionExecutionOutput_outputVariables})
+var sActionExecutionResult_externalExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalExecutionId", ID: &i_ExternalExecutionId, Type: smithy.ShapeTypeString, Ext: &eActionExecutionResult_externalExecutionId})
+var sActionExecutionResult_externalExecutionSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalExecutionSummary", ID: &i_ExternalExecutionSummary, Type: smithy.ShapeTypeString, Ext: &eActionExecutionResult_externalExecutionSummary})
+var sActionExecutionResult_externalExecutionUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalExecutionUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &eActionExecutionResult_externalExecutionUrl})
+var sActionExecutionResult_errorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorDetails", ID: &iErrorDetails, Members: &mErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &eActionExecutionResult_errorDetails})
+var sActionExecutionResult_logStreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logStreamARN", ID: &i_LogStreamARN, Type: smithy.ShapeTypeString, Ext: &eActionExecutionResult_logStreamARN})
+var sActionExecutionStatus_InProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionExecutionStatus_InProgress})
+var sActionExecutionStatus_Abandoned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Abandoned", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionExecutionStatus_Abandoned})
+var sActionExecutionStatus_Succeeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Succeeded", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionExecutionStatus_Succeeded})
+var sActionExecutionStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionExecutionStatus_Failed})
+var sActionNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eActionNotFoundException_message})
+var sActionOwner_AWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionOwner_AWS})
+var sActionOwner_ThirdParty = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThirdParty", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionOwner_ThirdParty})
+var sActionOwner_Custom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Custom", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eActionOwner_Custom})
+var sActionRevision_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &eActionRevision_revisionId})
+var sActionRevision_revisionChangeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionChangeId", ID: &i_RevisionChangeIdentifier, Type: smithy.ShapeTypeString, Ext: &eActionRevision_revisionChangeId})
+var sActionRevision_created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "created", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eActionRevision_created})
+var sActionState_actionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionName", ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &eActionState_actionName})
+var sActionState_currentRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentRevision", ID: &iActionRevision, Members: &mActionRevision, Type: smithy.ShapeTypeStructure, Ext: &eActionState_currentRevision})
+var sActionState_latestExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestExecution", ID: &iActionExecution, Members: &mActionExecution, Type: smithy.ShapeTypeStructure, Ext: &eActionState_latestExecution})
+var sActionState_entityUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &eActionState_entityUrl})
+var sActionState_revisionUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &eActionState_revisionUrl})
+var s_ActionStateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActionState, Members: &mActionState, Type: smithy.ShapeTypeStructure, Ext: &e_ActionStateList_member})
+var sActionType_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &iActionTypeId, Members: &mActionTypeId, Type: smithy.ShapeTypeStructure, Ext: &eActionType_id})
+var sActionType_settings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "settings", ID: &iActionTypeSettings, Members: &mActionTypeSettings, Type: smithy.ShapeTypeStructure, Ext: &eActionType_settings})
+var sActionType_actionConfigurationProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionConfigurationProperties", ID: &i_ActionConfigurationPropertyList, Members: &m_ActionConfigurationPropertyList, Type: smithy.ShapeTypeList, Ext: &eActionType_actionConfigurationProperties})
+var sActionType_inputArtifactDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputArtifactDetails", ID: &iArtifactDetails, Members: &mArtifactDetails, Type: smithy.ShapeTypeStructure, Ext: &eActionType_inputArtifactDetails})
+var sActionType_outputArtifactDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputArtifactDetails", ID: &iArtifactDetails, Members: &mArtifactDetails, Type: smithy.ShapeTypeStructure, Ext: &eActionType_outputArtifactDetails})
+var sActionTypeArtifactDetails_minimumCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minimumCount", ID: &i_MinimumActionTypeArtifactCount, Type: smithy.ShapeTypeInteger, Ext: &eActionTypeArtifactDetails_minimumCount})
+var sActionTypeArtifactDetails_maximumCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumCount", ID: &i_MaximumActionTypeArtifactCount, Type: smithy.ShapeTypeInteger, Ext: &eActionTypeArtifactDetails_maximumCount})
+var sActionTypeDeclaration_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ActionTypeDescription, Type: smithy.ShapeTypeString, Ext: &eActionTypeDeclaration_description})
+var sActionTypeDeclaration_executor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executor", ID: &iActionTypeExecutor, Members: &mActionTypeExecutor, Type: smithy.ShapeTypeStructure, Ext: &eActionTypeDeclaration_executor})
+var sActionTypeDeclaration_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &iActionTypeIdentifier, Members: &mActionTypeIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eActionTypeDeclaration_id})
+var sActionTypeDeclaration_inputArtifactDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputArtifactDetails", ID: &iActionTypeArtifactDetails, Members: &mActionTypeArtifactDetails, Type: smithy.ShapeTypeStructure, Ext: &eActionTypeDeclaration_inputArtifactDetails})
+var sActionTypeDeclaration_outputArtifactDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputArtifactDetails", ID: &iActionTypeArtifactDetails, Members: &mActionTypeArtifactDetails, Type: smithy.ShapeTypeStructure, Ext: &eActionTypeDeclaration_outputArtifactDetails})
+var sActionTypeDeclaration_permissions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissions", ID: &iActionTypePermissions, Members: &mActionTypePermissions, Type: smithy.ShapeTypeStructure, Ext: &eActionTypeDeclaration_permissions})
+var sActionTypeDeclaration_properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "properties", ID: &i_ActionTypeProperties, Members: &m_ActionTypeProperties, Type: smithy.ShapeTypeList, Ext: &eActionTypeDeclaration_properties})
+var sActionTypeDeclaration_urls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "urls", ID: &iActionTypeUrls, Members: &mActionTypeUrls, Type: smithy.ShapeTypeStructure, Ext: &eActionTypeDeclaration_urls})
+var sActionTypeExecutor_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iExecutorConfiguration, Members: &mExecutorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eActionTypeExecutor_configuration})
+var sActionTypeExecutor_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iExecutorType, Members: &mExecutorType, Type: smithy.ShapeTypeEnum, Ext: &eActionTypeExecutor_type})
+var sActionTypeExecutor_policyStatementsTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyStatementsTemplate", ID: &i_PolicyStatementsTemplate, Type: smithy.ShapeTypeString, Ext: &eActionTypeExecutor_policyStatementsTemplate})
+var sActionTypeExecutor_jobTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobTimeout", ID: &i_JobTimeout, Type: smithy.ShapeTypeInteger, Ext: &eActionTypeExecutor_jobTimeout})
+var sActionTypeId_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &iActionCategory, Members: &mActionCategory, Type: smithy.ShapeTypeEnum, Ext: &eActionTypeId_category})
+var sActionTypeId_owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owner", ID: &iActionOwner, Members: &mActionOwner, Type: smithy.ShapeTypeEnum, Ext: &eActionTypeId_owner})
+var sActionTypeId_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &i_ActionProvider, Type: smithy.ShapeTypeString, Ext: &eActionTypeId_provider})
+var sActionTypeId_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eActionTypeId_version})
+var sActionTypeIdentifier_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &iActionCategory, Members: &mActionCategory, Type: smithy.ShapeTypeEnum, Ext: &eActionTypeIdentifier_category})
+var sActionTypeIdentifier_owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owner", ID: &i_ActionTypeOwner, Type: smithy.ShapeTypeString, Ext: &eActionTypeIdentifier_owner})
+var sActionTypeIdentifier_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &i_ActionProvider, Type: smithy.ShapeTypeString, Ext: &eActionTypeIdentifier_provider})
+var sActionTypeIdentifier_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eActionTypeIdentifier_version})
+var s_ActionTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActionType, Members: &mActionType, Type: smithy.ShapeTypeStructure, Ext: &e_ActionTypeList_member})
+var sActionTypeNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eActionTypeNotFoundException_message})
+var sActionTypePermissions_allowedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedAccounts", ID: &i_AllowedAccounts, Members: &m_AllowedAccounts, Type: smithy.ShapeTypeList, Ext: &eActionTypePermissions_allowedAccounts})
+var s_ActionTypeProperties_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActionTypeProperty, Members: &mActionTypeProperty, Type: smithy.ShapeTypeStructure, Ext: &e_ActionTypeProperties_member})
+var sActionTypeProperty_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ActionConfigurationKey, Type: smithy.ShapeTypeString, Ext: &eActionTypeProperty_name})
+var sActionTypeProperty_optional = smithy.NewStaticSchema(smithy.StaticSchema{Member: "optional", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eActionTypeProperty_optional})
+var sActionTypeProperty_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eActionTypeProperty_key})
+var sActionTypeProperty_noEcho = smithy.NewStaticSchema(smithy.StaticSchema{Member: "noEcho", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eActionTypeProperty_noEcho})
+var sActionTypeProperty_queryable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eActionTypeProperty_queryable})
+var sActionTypeProperty_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_PropertyDescription, Type: smithy.ShapeTypeString, Ext: &eActionTypeProperty_description})
+var sActionTypeSettings_thirdPartyConfigurationUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thirdPartyConfigurationUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &eActionTypeSettings_thirdPartyConfigurationUrl})
+var sActionTypeSettings_entityUrlTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityUrlTemplate", ID: &i_UrlTemplate, Type: smithy.ShapeTypeString, Ext: &eActionTypeSettings_entityUrlTemplate})
+var sActionTypeSettings_executionUrlTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionUrlTemplate", ID: &i_UrlTemplate, Type: smithy.ShapeTypeString, Ext: &eActionTypeSettings_executionUrlTemplate})
+var sActionTypeSettings_revisionUrlTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionUrlTemplate", ID: &i_UrlTemplate, Type: smithy.ShapeTypeString, Ext: &eActionTypeSettings_revisionUrlTemplate})
+var sActionTypeUrls_configurationUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configurationUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &eActionTypeUrls_configurationUrl})
+var sActionTypeUrls_entityUrlTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityUrlTemplate", ID: &i_UrlTemplate, Type: smithy.ShapeTypeString, Ext: &eActionTypeUrls_entityUrlTemplate})
+var sActionTypeUrls_executionUrlTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionUrlTemplate", ID: &i_UrlTemplate, Type: smithy.ShapeTypeString, Ext: &eActionTypeUrls_executionUrlTemplate})
+var sActionTypeUrls_revisionUrlTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionUrlTemplate", ID: &i_UrlTemplate, Type: smithy.ShapeTypeString, Ext: &eActionTypeUrls_revisionUrlTemplate})
+var s_AllowedAccounts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AllowedAccount, Type: smithy.ShapeTypeString, Ext: &e_AllowedAccounts_member})
+var sApprovalAlreadyCompletedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eApprovalAlreadyCompletedException_message})
+var sApprovalResult_summary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summary", ID: &i_ApprovalSummary, Type: smithy.ShapeTypeString, Ext: &eApprovalResult_summary})
+var sApprovalResult_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iApprovalStatus, Members: &mApprovalStatus, Type: smithy.ShapeTypeEnum, Ext: &eApprovalResult_status})
+var sApprovalStatus_Approved = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Approved", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApprovalStatus_Approved})
+var sApprovalStatus_Rejected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rejected", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApprovalStatus_Rejected})
+var sArtifact_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ArtifactName, Type: smithy.ShapeTypeString, Ext: &eArtifact_name})
+var sArtifact_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &eArtifact_revision})
+var sArtifact_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &iArtifactLocation, Members: &mArtifactLocation, Type: smithy.ShapeTypeStructure, Ext: &eArtifact_location})
+var sArtifactDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ArtifactName, Type: smithy.ShapeTypeString, Ext: &eArtifactDetail_name})
+var sArtifactDetail_s3location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3location", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure, Ext: &eArtifactDetail_s3location})
+var s_ArtifactDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iArtifactDetail, Members: &mArtifactDetail, Type: smithy.ShapeTypeStructure, Ext: &e_ArtifactDetailList_member})
+var sArtifactDetails_minimumCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minimumCount", ID: &i_MinimumArtifactCount, Type: smithy.ShapeTypeInteger, Ext: &eArtifactDetails_minimumCount})
+var sArtifactDetails_maximumCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumCount", ID: &i_MaximumArtifactCount, Type: smithy.ShapeTypeInteger, Ext: &eArtifactDetails_maximumCount})
+var s_ArtifactList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iArtifact, Members: &mArtifact, Type: smithy.ShapeTypeStructure, Ext: &e_ArtifactList_member})
+var sArtifactLocation_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iArtifactLocationType, Members: &mArtifactLocationType, Type: smithy.ShapeTypeEnum, Ext: &eArtifactLocation_type})
+var sArtifactLocation_s3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Location", ID: &iS3ArtifactLocation, Members: &mS3ArtifactLocation, Type: smithy.ShapeTypeStructure, Ext: &eArtifactLocation_s3Location})
+var sArtifactLocationType_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eArtifactLocationType_S3})
+var sArtifactRevision_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ArtifactName, Type: smithy.ShapeTypeString, Ext: &eArtifactRevision_name})
+var sArtifactRevision_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &eArtifactRevision_revisionId})
+var sArtifactRevision_revisionChangeIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionChangeIdentifier", ID: &i_RevisionChangeIdentifier, Type: smithy.ShapeTypeString, Ext: &eArtifactRevision_revisionChangeIdentifier})
+var sArtifactRevision_revisionSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionSummary", ID: &i_RevisionSummary, Type: smithy.ShapeTypeString, Ext: &eArtifactRevision_revisionSummary})
+var sArtifactRevision_created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "created", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eArtifactRevision_created})
+var sArtifactRevision_revisionUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &eArtifactRevision_revisionUrl})
+var s_ArtifactRevisionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iArtifactRevision, Members: &mArtifactRevision, Type: smithy.ShapeTypeStructure, Ext: &e_ArtifactRevisionList_member})
+var sArtifactStore_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iArtifactStoreType, Members: &mArtifactStoreType, Type: smithy.ShapeTypeEnum, Ext: &eArtifactStore_type})
+var sArtifactStore_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_ArtifactStoreLocation, Type: smithy.ShapeTypeString, Ext: &eArtifactStore_location})
+var sArtifactStore_encryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKey", ID: &iEncryptionKey, Members: &mEncryptionKey, Type: smithy.ShapeTypeStructure, Ext: &eArtifactStore_encryptionKey})
+var s_ArtifactStoreMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AWSRegionName, Type: smithy.ShapeTypeString, Ext: &e_ArtifactStoreMap_key})
+var s_ArtifactStoreMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iArtifactStore, Members: &mArtifactStore, Type: smithy.ShapeTypeStructure, Ext: &e_ArtifactStoreMap_value})
+var sArtifactStoreType_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eArtifactStoreType_S3})
+var sAWSSessionCredentials_accessKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessKeyId", ID: &i_AccessKeyId, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eAWSSessionCredentials_accessKeyId})
+var sAWSSessionCredentials_secretAccessKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretAccessKey", ID: &i_SecretAccessKey, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eAWSSessionCredentials_secretAccessKey})
+var sAWSSessionCredentials_sessionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionToken", ID: &i_SessionToken, Traits: &t3, Type: smithy.ShapeTypeString, Ext: &eAWSSessionCredentials_sessionToken})
+var sBeforeEntryConditions_conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conditions", ID: &i_ConditionList, Members: &m_ConditionList, Type: smithy.ShapeTypeList, Ext: &eBeforeEntryConditions_conditions})
+var sBlockerDeclaration_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_BlockerName, Type: smithy.ShapeTypeString, Ext: &eBlockerDeclaration_name})
+var sBlockerDeclaration_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iBlockerType, Members: &mBlockerType, Type: smithy.ShapeTypeEnum, Ext: &eBlockerDeclaration_type})
+var sBlockerType_Schedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schedule", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBlockerType_Schedule})
+var s_CommandList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Command, Type: smithy.ShapeTypeString, Ext: &e_CommandList_member})
+var sConcurrentModificationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eConcurrentModificationException_message})
+var sConcurrentPipelineExecutionsLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eConcurrentPipelineExecutionsLimitExceededException_message})
+var sCondition_result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "result", ID: &iResult, Members: &mResult, Type: smithy.ShapeTypeEnum, Ext: &eCondition_result})
+var sCondition_rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rules", ID: &i_RuleDeclarationList, Members: &m_RuleDeclarationList, Type: smithy.ShapeTypeList, Ext: &eCondition_rules})
+var sConditionExecution_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iConditionExecutionStatus, Members: &mConditionExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &eConditionExecution_status})
+var sConditionExecution_summary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summary", ID: &i_ExecutionSummary, Type: smithy.ShapeTypeString, Ext: &eConditionExecution_summary})
+var sConditionExecution_lastStatusChange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastStatusChange", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eConditionExecution_lastStatusChange})
+var sConditionExecutionStatus_InProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConditionExecutionStatus_InProgress})
+var sConditionExecutionStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConditionExecutionStatus_Failed})
+var sConditionExecutionStatus_Errored = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errored", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConditionExecutionStatus_Errored})
+var sConditionExecutionStatus_Succeeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Succeeded", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConditionExecutionStatus_Succeeded})
+var sConditionExecutionStatus_Cancelled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cancelled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConditionExecutionStatus_Cancelled})
+var sConditionExecutionStatus_Abandoned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Abandoned", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConditionExecutionStatus_Abandoned})
+var sConditionExecutionStatus_Overridden = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Overridden", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConditionExecutionStatus_Overridden})
+var s_ConditionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCondition, Members: &mCondition, Type: smithy.ShapeTypeStructure, Ext: &e_ConditionList_member})
+var sConditionNotOverridableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eConditionNotOverridableException_message})
+var sConditionState_latestExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestExecution", ID: &iConditionExecution, Members: &mConditionExecution, Type: smithy.ShapeTypeStructure, Ext: &eConditionState_latestExecution})
+var sConditionState_ruleStates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleStates", ID: &i_RuleStateList, Members: &m_RuleStateList, Type: smithy.ShapeTypeList, Ext: &eConditionState_ruleStates})
+var s_ConditionStateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConditionState, Members: &mConditionState, Type: smithy.ShapeTypeStructure, Ext: &e_ConditionStateList_member})
+var sConditionType_BEFORE_ENTRY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEFORE_ENTRY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConditionType_BEFORE_ENTRY})
+var sConditionType_ON_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ON_SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eConditionType_ON_SUCCESS})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sCurrentRevision_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &eCurrentRevision_revision})
+var sCurrentRevision_changeIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "changeIdentifier", ID: &i_RevisionChangeIdentifier, Type: smithy.ShapeTypeString, Ext: &eCurrentRevision_changeIdentifier})
+var sCurrentRevision_created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "created", ID: &i_Time, Type: smithy.ShapeTypeTimestamp, Ext: &eCurrentRevision_created})
+var sCurrentRevision_revisionSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionSummary", ID: &i_RevisionSummary, Type: smithy.ShapeTypeString, Ext: &eCurrentRevision_revisionSummary})
+var sDeployActionExecutionTarget_targetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeployActionExecutionTarget_targetId})
+var sDeployActionExecutionTarget_targetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeployActionExecutionTarget_targetType})
+var sDeployActionExecutionTarget_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeployActionExecutionTarget_status})
+var sDeployActionExecutionTarget_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDeployActionExecutionTarget_startTime})
+var sDeployActionExecutionTarget_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDeployActionExecutionTarget_endTime})
+var sDeployActionExecutionTarget_events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "events", ID: &i_DeployTargetEventList, Members: &m_DeployTargetEventList, Type: smithy.ShapeTypeList, Ext: &eDeployActionExecutionTarget_events})
+var s_DeployActionExecutionTargetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeployActionExecutionTarget, Members: &mDeployActionExecutionTarget, Type: smithy.ShapeTypeStructure, Ext: &e_DeployActionExecutionTargetList_member})
+var sDeployTargetEvent_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeployTargetEvent_name})
+var sDeployTargetEvent_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeployTargetEvent_status})
+var sDeployTargetEvent_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDeployTargetEvent_startTime})
+var sDeployTargetEvent_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDeployTargetEvent_endTime})
+var sDeployTargetEvent_context = smithy.NewStaticSchema(smithy.StaticSchema{Member: "context", ID: &iDeployTargetEventContext, Members: &mDeployTargetEventContext, Type: smithy.ShapeTypeStructure, Ext: &eDeployTargetEvent_context})
+var sDeployTargetEventContext_ssmCommandId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ssmCommandId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeployTargetEventContext_ssmCommandId})
+var sDeployTargetEventContext_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eDeployTargetEventContext_message})
+var s_DeployTargetEventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeployTargetEvent, Members: &mDeployTargetEvent, Type: smithy.ShapeTypeStructure, Ext: &e_DeployTargetEventList_member})
+var sDuplicatedStopRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eDuplicatedStopRequestException_message})
+var sEncryptionKey_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_EncryptionKeyId, Type: smithy.ShapeTypeString, Ext: &eEncryptionKey_id})
+var sEncryptionKey_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iEncryptionKeyType, Members: &mEncryptionKeyType, Type: smithy.ShapeTypeEnum, Ext: &eEncryptionKey_type})
+var sEncryptionKeyType_KMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionKeyType_KMS})
+var sEnvironmentVariable_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_EnvironmentVariableName, Type: smithy.ShapeTypeString, Ext: &eEnvironmentVariable_name})
+var sEnvironmentVariable_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_EnvironmentVariableValue, Type: smithy.ShapeTypeString, Ext: &eEnvironmentVariable_value})
+var sEnvironmentVariable_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iEnvironmentVariableType, Members: &mEnvironmentVariableType, Type: smithy.ShapeTypeEnum, Ext: &eEnvironmentVariable_type})
+var s_EnvironmentVariableList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnvironmentVariable, Members: &mEnvironmentVariable, Type: smithy.ShapeTypeStructure, Ext: &e_EnvironmentVariableList_member})
+var sEnvironmentVariableType_PLAINTEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PLAINTEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentVariableType_PLAINTEXT})
+var sEnvironmentVariableType_SECRETS_MANAGER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECRETS_MANAGER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEnvironmentVariableType_SECRETS_MANAGER})
+var sErrorDetails_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_Code, Type: smithy.ShapeTypeString, Ext: &eErrorDetails_code})
+var sErrorDetails_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eErrorDetails_message})
+var sExecutionDetails_summary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summary", ID: &i_ExecutionSummary, Type: smithy.ShapeTypeString, Ext: &eExecutionDetails_summary})
+var sExecutionDetails_externalExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalExecutionId", ID: &i_ExecutionId, Type: smithy.ShapeTypeString, Ext: &eExecutionDetails_externalExecutionId})
+var sExecutionDetails_percentComplete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "percentComplete", ID: &i_Percentage, Type: smithy.ShapeTypeInteger, Ext: &eExecutionDetails_percentComplete})
+var sExecutionMode_QUEUED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUEUED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExecutionMode_QUEUED})
+var sExecutionMode_SUPERSEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUPERSEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExecutionMode_SUPERSEDED})
+var sExecutionMode_PARALLEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARALLEL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExecutionMode_PARALLEL})
+var sExecutionTrigger_triggerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "triggerType", ID: &iTriggerType, Members: &mTriggerType, Type: smithy.ShapeTypeEnum, Ext: &eExecutionTrigger_triggerType})
+var sExecutionTrigger_triggerDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "triggerDetail", ID: &i_TriggerDetail, Type: smithy.ShapeTypeString, Ext: &eExecutionTrigger_triggerDetail})
+var sExecutionType_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExecutionType_STANDARD})
+var sExecutionType_ROLLBACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLLBACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExecutionType_ROLLBACK})
+var sExecutorConfiguration_lambdaExecutorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaExecutorConfiguration", ID: &iLambdaExecutorConfiguration, Members: &mLambdaExecutorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExecutorConfiguration_lambdaExecutorConfiguration})
+var sExecutorConfiguration_jobWorkerExecutorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobWorkerExecutorConfiguration", ID: &iJobWorkerExecutorConfiguration, Members: &mJobWorkerExecutorConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eExecutorConfiguration_jobWorkerExecutorConfiguration})
+var sExecutorType_JobWorker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobWorker", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExecutorType_JobWorker})
+var sExecutorType_Lambda = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lambda", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExecutorType_Lambda})
+var sFailureConditions_result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "result", ID: &iResult, Members: &mResult, Type: smithy.ShapeTypeEnum, Ext: &eFailureConditions_result})
+var sFailureConditions_retryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryConfiguration", ID: &iRetryConfiguration, Members: &mRetryConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eFailureConditions_retryConfiguration})
+var sFailureConditions_conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conditions", ID: &i_ConditionList, Members: &m_ConditionList, Type: smithy.ShapeTypeList, Ext: &eFailureConditions_conditions})
+var sFailureDetails_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iFailureType, Members: &mFailureType, Type: smithy.ShapeTypeEnum, Ext: &eFailureDetails_type})
+var sFailureDetails_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eFailureDetails_message})
+var sFailureDetails_externalExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalExecutionId", ID: &i_ExecutionId, Type: smithy.ShapeTypeString, Ext: &eFailureDetails_externalExecutionId})
+var sFailureType_JobFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureType_JobFailed})
+var sFailureType_ConfigurationError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationError", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureType_ConfigurationError})
+var sFailureType_PermissionError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PermissionError", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureType_PermissionError})
+var sFailureType_RevisionOutOfSync = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevisionOutOfSync", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureType_RevisionOutOfSync})
+var sFailureType_RevisionUnavailable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevisionUnavailable", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureType_RevisionUnavailable})
+var sFailureType_SystemUnavailable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SystemUnavailable", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFailureType_SystemUnavailable})
+var s_FilePathList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FilePath, Type: smithy.ShapeTypeString, Ext: &e_FilePathList_member})
+var sGitBranchFilterCriteria_includes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includes", ID: &i_GitBranchPatternList, Members: &m_GitBranchPatternList, Type: smithy.ShapeTypeList, Ext: &eGitBranchFilterCriteria_includes})
+var sGitBranchFilterCriteria_excludes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "excludes", ID: &i_GitBranchPatternList, Members: &m_GitBranchPatternList, Type: smithy.ShapeTypeList, Ext: &eGitBranchFilterCriteria_excludes})
+var s_GitBranchPatternList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GitBranchNamePattern, Type: smithy.ShapeTypeString, Ext: &e_GitBranchPatternList_member})
+var sGitConfiguration_sourceActionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceActionName", ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &eGitConfiguration_sourceActionName})
+var sGitConfiguration_push = smithy.NewStaticSchema(smithy.StaticSchema{Member: "push", ID: &i_GitPushFilterList, Members: &m_GitPushFilterList, Type: smithy.ShapeTypeList, Ext: &eGitConfiguration_push})
+var sGitConfiguration_pullRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequest", ID: &i_GitPullRequestFilterList, Members: &m_GitPullRequestFilterList, Type: smithy.ShapeTypeList, Ext: &eGitConfiguration_pullRequest})
+var sGitFilePathFilterCriteria_includes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includes", ID: &i_GitFilePathPatternList, Members: &m_GitFilePathPatternList, Type: smithy.ShapeTypeList, Ext: &eGitFilePathFilterCriteria_includes})
+var sGitFilePathFilterCriteria_excludes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "excludes", ID: &i_GitFilePathPatternList, Members: &m_GitFilePathPatternList, Type: smithy.ShapeTypeList, Ext: &eGitFilePathFilterCriteria_excludes})
+var s_GitFilePathPatternList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GitFilePathPattern, Type: smithy.ShapeTypeString, Ext: &e_GitFilePathPatternList_member})
+var sGitPullRequestEventType_OPEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGitPullRequestEventType_OPEN})
+var sGitPullRequestEventType_UPDATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGitPullRequestEventType_UPDATED})
+var sGitPullRequestEventType_CLOSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOSED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGitPullRequestEventType_CLOSED})
+var s_GitPullRequestEventTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGitPullRequestEventType, Members: &mGitPullRequestEventType, Type: smithy.ShapeTypeEnum, Ext: &e_GitPullRequestEventTypeList_member})
+var sGitPullRequestFilter_events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "events", ID: &i_GitPullRequestEventTypeList, Members: &m_GitPullRequestEventTypeList, Type: smithy.ShapeTypeList, Ext: &eGitPullRequestFilter_events})
+var sGitPullRequestFilter_branches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branches", ID: &iGitBranchFilterCriteria, Members: &mGitBranchFilterCriteria, Type: smithy.ShapeTypeStructure, Ext: &eGitPullRequestFilter_branches})
+var sGitPullRequestFilter_filePaths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePaths", ID: &iGitFilePathFilterCriteria, Members: &mGitFilePathFilterCriteria, Type: smithy.ShapeTypeStructure, Ext: &eGitPullRequestFilter_filePaths})
+var s_GitPullRequestFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGitPullRequestFilter, Members: &mGitPullRequestFilter, Type: smithy.ShapeTypeStructure, Ext: &e_GitPullRequestFilterList_member})
+var sGitPushFilter_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &iGitTagFilterCriteria, Members: &mGitTagFilterCriteria, Type: smithy.ShapeTypeStructure, Ext: &eGitPushFilter_tags})
+var sGitPushFilter_branches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branches", ID: &iGitBranchFilterCriteria, Members: &mGitBranchFilterCriteria, Type: smithy.ShapeTypeStructure, Ext: &eGitPushFilter_branches})
+var sGitPushFilter_filePaths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePaths", ID: &iGitFilePathFilterCriteria, Members: &mGitFilePathFilterCriteria, Type: smithy.ShapeTypeStructure, Ext: &eGitPushFilter_filePaths})
+var s_GitPushFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGitPushFilter, Members: &mGitPushFilter, Type: smithy.ShapeTypeStructure, Ext: &e_GitPushFilterList_member})
+var sGitTagFilterCriteria_includes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includes", ID: &i_GitTagPatternList, Members: &m_GitTagPatternList, Type: smithy.ShapeTypeList, Ext: &eGitTagFilterCriteria_includes})
+var sGitTagFilterCriteria_excludes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "excludes", ID: &i_GitTagPatternList, Members: &m_GitTagPatternList, Type: smithy.ShapeTypeList, Ext: &eGitTagFilterCriteria_excludes})
+var s_GitTagPatternList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GitTagNamePattern, Type: smithy.ShapeTypeString, Ext: &e_GitTagPatternList_member})
+var sInputArtifact_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ArtifactName, Type: smithy.ShapeTypeString, Ext: &eInputArtifact_name})
+var s_InputArtifactList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInputArtifact, Members: &mInputArtifact, Type: smithy.ShapeTypeStructure, Ext: &e_InputArtifactList_member})
+var sInvalidActionDeclarationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidActionDeclarationException_message})
+var sInvalidApprovalTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidApprovalTokenException_message})
+var sInvalidArnException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidArnException_message})
+var sInvalidBlockerDeclarationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidBlockerDeclarationException_message})
+var sInvalidClientTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidClientTokenException_message})
+var sInvalidJobException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidJobException_message})
+var sInvalidJobStateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidJobStateException_message})
+var sInvalidNextTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidNextTokenException_message})
+var sInvalidNonceException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidNonceException_message})
+var sInvalidStageDeclarationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidStageDeclarationException_message})
+var sInvalidStructureException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidStructureException_message})
+var sInvalidTagsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidTagsException_message})
+var sInvalidWebhookAuthenticationParametersException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidWebhookAuthenticationParametersException_message})
+var sInvalidWebhookFilterPatternException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eInvalidWebhookFilterPatternException_message})
+var sJob_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eJob_id})
+var sJob_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &iJobData, Members: &mJobData, Type: smithy.ShapeTypeStructure, Ext: &eJob_data})
+var sJob_nonce = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nonce", ID: &i_Nonce, Type: smithy.ShapeTypeString, Ext: &eJob_nonce})
+var sJob_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eJob_accountId})
+var sJobData_actionTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionTypeId", ID: &iActionTypeId, Members: &mActionTypeId, Type: smithy.ShapeTypeStructure, Ext: &eJobData_actionTypeId})
+var sJobData_actionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionConfiguration", ID: &iActionConfiguration, Members: &mActionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eJobData_actionConfiguration})
+var sJobData_pipelineContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineContext", ID: &iPipelineContext, Members: &mPipelineContext, Type: smithy.ShapeTypeStructure, Ext: &eJobData_pipelineContext})
+var sJobData_inputArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputArtifacts", ID: &i_ArtifactList, Members: &m_ArtifactList, Type: smithy.ShapeTypeList, Ext: &eJobData_inputArtifacts})
+var sJobData_outputArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputArtifacts", ID: &i_ArtifactList, Members: &m_ArtifactList, Type: smithy.ShapeTypeList, Ext: &eJobData_outputArtifacts})
+var sJobData_artifactCredentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "artifactCredentials", ID: &iAWSSessionCredentials, Members: &mAWSSessionCredentials, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eJobData_artifactCredentials})
+var sJobData_continuationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "continuationToken", ID: &i_ContinuationToken, Type: smithy.ShapeTypeString, Ext: &eJobData_continuationToken})
+var sJobData_encryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKey", ID: &iEncryptionKey, Members: &mEncryptionKey, Type: smithy.ShapeTypeStructure, Ext: &eJobData_encryptionKey})
+var sJobDetails_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eJobDetails_id})
+var sJobDetails_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &iJobData, Members: &mJobData, Type: smithy.ShapeTypeStructure, Ext: &eJobDetails_data})
+var sJobDetails_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &eJobDetails_accountId})
+var s_JobList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iJob, Members: &mJob, Type: smithy.ShapeTypeStructure, Ext: &e_JobList_member})
+var sJobNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eJobNotFoundException_message})
+var sJobStatus_Created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Created", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_Created})
+var sJobStatus_Queued = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Queued", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_Queued})
+var sJobStatus_Dispatched = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dispatched", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_Dispatched})
+var sJobStatus_InProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_InProgress})
+var sJobStatus_TimedOut = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimedOut", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_TimedOut})
+var sJobStatus_Succeeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Succeeded", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_Succeeded})
+var sJobStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eJobStatus_Failed})
+var sJobWorkerExecutorConfiguration_pollingAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pollingAccounts", ID: &i_PollingAccountList, Members: &m_PollingAccountList, Type: smithy.ShapeTypeList, Ext: &eJobWorkerExecutorConfiguration_pollingAccounts})
+var sJobWorkerExecutorConfiguration_pollingServicePrincipals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pollingServicePrincipals", ID: &i_PollingServicePrincipalList, Members: &m_PollingServicePrincipalList, Type: smithy.ShapeTypeList, Ext: &eJobWorkerExecutorConfiguration_pollingServicePrincipals})
+var sLambdaExecutorConfiguration_lambdaFunctionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaFunctionArn", ID: &i_LambdaFunctionArn, Type: smithy.ShapeTypeString, Ext: &eLambdaExecutorConfiguration_lambdaFunctionArn})
+var sLatestInPipelineExecutionFilter_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &eLatestInPipelineExecutionFilter_pipelineExecutionId})
+var sLatestInPipelineExecutionFilter_startTimeRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTimeRange", ID: &iStartTimeRange, Members: &mStartTimeRange, Type: smithy.ShapeTypeEnum, Ext: &eLatestInPipelineExecutionFilter_startTimeRange})
+var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_message})
+var sListWebhookItem_definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "definition", ID: &iWebhookDefinition, Members: &mWebhookDefinition, Type: smithy.ShapeTypeStructure, Ext: &eListWebhookItem_definition})
+var sListWebhookItem_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &i_WebhookUrl, Type: smithy.ShapeTypeString, Ext: &eListWebhookItem_url})
+var sListWebhookItem_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_WebhookErrorMessage, Type: smithy.ShapeTypeString, Ext: &eListWebhookItem_errorMessage})
+var sListWebhookItem_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_WebhookErrorCode, Type: smithy.ShapeTypeString, Ext: &eListWebhookItem_errorCode})
+var sListWebhookItem_lastTriggered = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastTriggered", ID: &i_WebhookLastTriggered, Type: smithy.ShapeTypeTimestamp, Ext: &eListWebhookItem_lastTriggered})
+var sListWebhookItem_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_WebhookArn, Type: smithy.ShapeTypeString, Ext: &eListWebhookItem_arn})
+var sListWebhookItem_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListWebhookItem_tags})
+var sNotLatestPipelineExecutionException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eNotLatestPipelineExecutionException_message})
+var sOutputArtifact_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ArtifactName, Type: smithy.ShapeTypeString, Ext: &eOutputArtifact_name})
+var sOutputArtifact_files = smithy.NewStaticSchema(smithy.StaticSchema{Member: "files", ID: &i_FilePathList, Members: &m_FilePathList, Type: smithy.ShapeTypeList, Ext: &eOutputArtifact_files})
+var s_OutputArtifactList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOutputArtifact, Members: &mOutputArtifact, Type: smithy.ShapeTypeStructure, Ext: &e_OutputArtifactList_member})
+var s_OutputVariableList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OutputVariable, Type: smithy.ShapeTypeString, Ext: &e_OutputVariableList_member})
+var s_OutputVariablesMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_OutputVariablesKey, Type: smithy.ShapeTypeString, Ext: &e_OutputVariablesMap_key})
+var s_OutputVariablesMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_OutputVariablesValue, Type: smithy.ShapeTypeString, Ext: &e_OutputVariablesMap_value})
+var sOutputVariablesSizeExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eOutputVariablesSizeExceededException_message})
+var sPipelineContext_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ePipelineContext_pipelineName})
+var sPipelineContext_stage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stage", ID: &iStageContext, Members: &mStageContext, Type: smithy.ShapeTypeStructure, Ext: &ePipelineContext_stage})
+var sPipelineContext_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iActionContext, Members: &mActionContext, Type: smithy.ShapeTypeStructure, Ext: &ePipelineContext_action})
+var sPipelineContext_pipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineArn", ID: &i_PipelineArn, Type: smithy.ShapeTypeString, Ext: &ePipelineContext_pipelineArn})
+var sPipelineContext_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &ePipelineContext_pipelineExecutionId})
+var sPipelineDeclaration_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ePipelineDeclaration_name})
+var sPipelineDeclaration_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &ePipelineDeclaration_roleArn})
+var sPipelineDeclaration_artifactStore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "artifactStore", ID: &iArtifactStore, Members: &mArtifactStore, Type: smithy.ShapeTypeStructure, Ext: &ePipelineDeclaration_artifactStore})
+var sPipelineDeclaration_artifactStores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "artifactStores", ID: &i_ArtifactStoreMap, Members: &m_ArtifactStoreMap, Type: smithy.ShapeTypeMap, Ext: &ePipelineDeclaration_artifactStores})
+var sPipelineDeclaration_stages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stages", ID: &i_PipelineStageDeclarationList, Members: &m_PipelineStageDeclarationList, Type: smithy.ShapeTypeList, Ext: &ePipelineDeclaration_stages})
+var sPipelineDeclaration_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_PipelineVersion, Type: smithy.ShapeTypeInteger, Ext: &ePipelineDeclaration_version})
+var sPipelineDeclaration_executionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionMode", ID: &iExecutionMode, Members: &mExecutionMode, Type: smithy.ShapeTypeEnum, Ext: &ePipelineDeclaration_executionMode})
+var sPipelineDeclaration_pipelineType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineType", ID: &iPipelineType, Members: &mPipelineType, Type: smithy.ShapeTypeEnum, Ext: &ePipelineDeclaration_pipelineType})
+var sPipelineDeclaration_variables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variables", ID: &i_PipelineVariableDeclarationList, Members: &m_PipelineVariableDeclarationList, Type: smithy.ShapeTypeList, Ext: &ePipelineDeclaration_variables})
+var sPipelineDeclaration_triggers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "triggers", ID: &i_PipelineTriggerDeclarationList, Members: &m_PipelineTriggerDeclarationList, Type: smithy.ShapeTypeList, Ext: &ePipelineDeclaration_triggers})
+var sPipelineExecution_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ePipelineExecution_pipelineName})
+var sPipelineExecution_pipelineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineVersion", ID: &i_PipelineVersion, Type: smithy.ShapeTypeInteger, Ext: &ePipelineExecution_pipelineVersion})
+var sPipelineExecution_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &ePipelineExecution_pipelineExecutionId})
+var sPipelineExecution_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iPipelineExecutionStatus, Members: &mPipelineExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &ePipelineExecution_status})
+var sPipelineExecution_statusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummary", ID: &i_PipelineExecutionStatusSummary, Type: smithy.ShapeTypeString, Ext: &ePipelineExecution_statusSummary})
+var sPipelineExecution_artifactRevisions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "artifactRevisions", ID: &i_ArtifactRevisionList, Members: &m_ArtifactRevisionList, Type: smithy.ShapeTypeList, Ext: &ePipelineExecution_artifactRevisions})
+var sPipelineExecution_variables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variables", ID: &i_ResolvedPipelineVariableList, Members: &m_ResolvedPipelineVariableList, Type: smithy.ShapeTypeList, Ext: &ePipelineExecution_variables})
+var sPipelineExecution_trigger = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trigger", ID: &iExecutionTrigger, Members: &mExecutionTrigger, Type: smithy.ShapeTypeStructure, Ext: &ePipelineExecution_trigger})
+var sPipelineExecution_executionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionMode", ID: &iExecutionMode, Members: &mExecutionMode, Type: smithy.ShapeTypeEnum, Ext: &ePipelineExecution_executionMode})
+var sPipelineExecution_executionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionType", ID: &iExecutionType, Members: &mExecutionType, Type: smithy.ShapeTypeEnum, Ext: &ePipelineExecution_executionType})
+var sPipelineExecution_rollbackMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rollbackMetadata", ID: &iPipelineRollbackMetadata, Members: &mPipelineRollbackMetadata, Type: smithy.ShapeTypeStructure, Ext: &ePipelineExecution_rollbackMetadata})
+var sPipelineExecutionFilter_succeededInStage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "succeededInStage", ID: &iSucceededInStageFilter, Members: &mSucceededInStageFilter, Type: smithy.ShapeTypeStructure, Ext: &ePipelineExecutionFilter_succeededInStage})
+var sPipelineExecutionNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ePipelineExecutionNotFoundException_message})
+var sPipelineExecutionNotStoppableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ePipelineExecutionNotStoppableException_message})
+var sPipelineExecutionOutdatedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ePipelineExecutionOutdatedException_message})
+var sPipelineExecutionStatus_Cancelled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cancelled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePipelineExecutionStatus_Cancelled})
+var sPipelineExecutionStatus_InProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePipelineExecutionStatus_InProgress})
+var sPipelineExecutionStatus_Stopped = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stopped", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePipelineExecutionStatus_Stopped})
+var sPipelineExecutionStatus_Stopping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stopping", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePipelineExecutionStatus_Stopping})
+var sPipelineExecutionStatus_Succeeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Succeeded", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePipelineExecutionStatus_Succeeded})
+var sPipelineExecutionStatus_Superseded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Superseded", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePipelineExecutionStatus_Superseded})
+var sPipelineExecutionStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePipelineExecutionStatus_Failed})
+var sPipelineExecutionSummary_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &ePipelineExecutionSummary_pipelineExecutionId})
+var sPipelineExecutionSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iPipelineExecutionStatus, Members: &mPipelineExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &ePipelineExecutionSummary_status})
+var sPipelineExecutionSummary_statusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummary", ID: &i_PipelineExecutionStatusSummary, Type: smithy.ShapeTypeString, Ext: &ePipelineExecutionSummary_statusSummary})
+var sPipelineExecutionSummary_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePipelineExecutionSummary_startTime})
+var sPipelineExecutionSummary_lastUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePipelineExecutionSummary_lastUpdateTime})
+var sPipelineExecutionSummary_sourceRevisions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceRevisions", ID: &i_SourceRevisionList, Members: &m_SourceRevisionList, Type: smithy.ShapeTypeList, Ext: &ePipelineExecutionSummary_sourceRevisions})
+var sPipelineExecutionSummary_trigger = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trigger", ID: &iExecutionTrigger, Members: &mExecutionTrigger, Type: smithy.ShapeTypeStructure, Ext: &ePipelineExecutionSummary_trigger})
+var sPipelineExecutionSummary_stopTrigger = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stopTrigger", ID: &iStopExecutionTrigger, Members: &mStopExecutionTrigger, Type: smithy.ShapeTypeStructure, Ext: &ePipelineExecutionSummary_stopTrigger})
+var sPipelineExecutionSummary_executionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionMode", ID: &iExecutionMode, Members: &mExecutionMode, Type: smithy.ShapeTypeEnum, Ext: &ePipelineExecutionSummary_executionMode})
+var sPipelineExecutionSummary_executionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionType", ID: &iExecutionType, Members: &mExecutionType, Type: smithy.ShapeTypeEnum, Ext: &ePipelineExecutionSummary_executionType})
+var sPipelineExecutionSummary_rollbackMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rollbackMetadata", ID: &iPipelineRollbackMetadata, Members: &mPipelineRollbackMetadata, Type: smithy.ShapeTypeStructure, Ext: &ePipelineExecutionSummary_rollbackMetadata})
+var s_PipelineExecutionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPipelineExecutionSummary, Members: &mPipelineExecutionSummary, Type: smithy.ShapeTypeStructure, Ext: &e_PipelineExecutionSummaryList_member})
+var s_PipelineList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPipelineSummary, Members: &mPipelineSummary, Type: smithy.ShapeTypeStructure, Ext: &e_PipelineList_member})
+var sPipelineMetadata_pipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineArn", ID: &i_PipelineArn, Type: smithy.ShapeTypeString, Ext: &ePipelineMetadata_pipelineArn})
+var sPipelineMetadata_created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "created", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePipelineMetadata_created})
+var sPipelineMetadata_updated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updated", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePipelineMetadata_updated})
+var sPipelineMetadata_pollingDisabledAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pollingDisabledAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePipelineMetadata_pollingDisabledAt})
+var sPipelineNameInUseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ePipelineNameInUseException_message})
+var sPipelineNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ePipelineNotFoundException_message})
+var sPipelineRollbackMetadata_rollbackTargetPipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rollbackTargetPipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &ePipelineRollbackMetadata_rollbackTargetPipelineExecutionId})
+var s_PipelineStageDeclarationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStageDeclaration, Members: &mStageDeclaration, Type: smithy.ShapeTypeStructure, Ext: &e_PipelineStageDeclarationList_member})
+var sPipelineSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ePipelineSummary_name})
+var sPipelineSummary_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_PipelineVersion, Type: smithy.ShapeTypeInteger, Ext: &ePipelineSummary_version})
+var sPipelineSummary_pipelineType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineType", ID: &iPipelineType, Members: &mPipelineType, Type: smithy.ShapeTypeEnum, Ext: &ePipelineSummary_pipelineType})
+var sPipelineSummary_executionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionMode", ID: &iExecutionMode, Members: &mExecutionMode, Type: smithy.ShapeTypeEnum, Ext: &ePipelineSummary_executionMode})
+var sPipelineSummary_created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "created", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePipelineSummary_created})
+var sPipelineSummary_updated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updated", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePipelineSummary_updated})
+var sPipelineTriggerDeclaration_providerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "providerType", ID: &iPipelineTriggerProviderType, Members: &mPipelineTriggerProviderType, Type: smithy.ShapeTypeEnum, Ext: &ePipelineTriggerDeclaration_providerType})
+var sPipelineTriggerDeclaration_gitConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gitConfiguration", ID: &iGitConfiguration, Members: &mGitConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePipelineTriggerDeclaration_gitConfiguration})
+var s_PipelineTriggerDeclarationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPipelineTriggerDeclaration, Members: &mPipelineTriggerDeclaration, Type: smithy.ShapeTypeStructure, Ext: &e_PipelineTriggerDeclarationList_member})
+var sPipelineTriggerProviderType_CodeStarSourceConnection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeStarSourceConnection", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePipelineTriggerProviderType_CodeStarSourceConnection})
+var sPipelineType_V1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "V1", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePipelineType_V1})
+var sPipelineType_V2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "V2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePipelineType_V2})
+var sPipelineVariable_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PipelineVariableName, Type: smithy.ShapeTypeString, Ext: &ePipelineVariable_name})
+var sPipelineVariable_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_PipelineVariableValue, Type: smithy.ShapeTypeString, Ext: &ePipelineVariable_value})
+var sPipelineVariableDeclaration_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PipelineVariableName, Type: smithy.ShapeTypeString, Ext: &ePipelineVariableDeclaration_name})
+var sPipelineVariableDeclaration_defaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultValue", ID: &i_PipelineVariableValue, Type: smithy.ShapeTypeString, Ext: &ePipelineVariableDeclaration_defaultValue})
+var sPipelineVariableDeclaration_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_PipelineVariableDescription, Type: smithy.ShapeTypeString, Ext: &ePipelineVariableDeclaration_description})
+var s_PipelineVariableDeclarationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPipelineVariableDeclaration, Members: &mPipelineVariableDeclaration, Type: smithy.ShapeTypeStructure, Ext: &e_PipelineVariableDeclarationList_member})
+var s_PipelineVariableList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPipelineVariable, Members: &mPipelineVariable, Type: smithy.ShapeTypeStructure, Ext: &e_PipelineVariableList_member})
+var sPipelineVersionNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &ePipelineVersionNotFoundException_message})
+var s_PollingAccountList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccountId, Type: smithy.ShapeTypeString, Ext: &e_PollingAccountList_member})
+var s_PollingServicePrincipalList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ServicePrincipal, Type: smithy.ShapeTypeString, Ext: &e_PollingServicePrincipalList_member})
+var s_QueryParamMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ActionConfigurationKey, Type: smithy.ShapeTypeString, Ext: &e_QueryParamMap_key})
+var s_QueryParamMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ActionConfigurationQueryableValue, Type: smithy.ShapeTypeString, Ext: &e_QueryParamMap_value})
+var sRequestFailedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eRequestFailedException_message})
+var s_ResolvedActionConfigurationMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_ResolvedActionConfigurationMap_key})
+var s_ResolvedActionConfigurationMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_ResolvedActionConfigurationMap_value})
+var sResolvedPipelineVariable_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResolvedPipelineVariable_name})
+var sResolvedPipelineVariable_resolvedValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolvedValue", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResolvedPipelineVariable_resolvedValue})
+var s_ResolvedPipelineVariableList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResolvedPipelineVariable, Members: &mResolvedPipelineVariable, Type: smithy.ShapeTypeStructure, Ext: &e_ResolvedPipelineVariableList_member})
+var s_ResolvedRuleConfigurationMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_ResolvedRuleConfigurationMap_key})
+var s_ResolvedRuleConfigurationMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_ResolvedRuleConfigurationMap_value})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResult_ROLLBACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLLBACK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResult_ROLLBACK})
+var sResult_FAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResult_FAIL})
+var sResult_RETRY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RETRY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResult_RETRY})
+var sResult_SKIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SKIP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResult_SKIP})
+var sRetryConfiguration_retryMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryMode", ID: &iStageRetryMode, Members: &mStageRetryMode, Type: smithy.ShapeTypeEnum, Ext: &eRetryConfiguration_retryMode})
+var sRetryStageMetadata_autoStageRetryAttempt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoStageRetryAttempt", ID: &i_RetryAttempt, Type: smithy.ShapeTypeInteger, Ext: &eRetryStageMetadata_autoStageRetryAttempt})
+var sRetryStageMetadata_manualStageRetryAttempt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "manualStageRetryAttempt", ID: &i_RetryAttempt, Type: smithy.ShapeTypeInteger, Ext: &eRetryStageMetadata_manualStageRetryAttempt})
+var sRetryStageMetadata_latestRetryTrigger = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestRetryTrigger", ID: &iRetryTrigger, Members: &mRetryTrigger, Type: smithy.ShapeTypeEnum, Ext: &eRetryStageMetadata_latestRetryTrigger})
+var sRetryTrigger_AutomatedStageRetry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomatedStageRetry", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetryTrigger_AutomatedStageRetry})
+var sRetryTrigger_ManualStageRetry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManualStageRetry", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetryTrigger_ManualStageRetry})
+var sRuleCategory_Rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rule", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleCategory_Rule})
+var s_RuleConfigurationMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_RuleConfigurationKey, Type: smithy.ShapeTypeString, Ext: &e_RuleConfigurationMap_key})
+var s_RuleConfigurationMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_RuleConfigurationValue, Type: smithy.ShapeTypeString, Ext: &e_RuleConfigurationMap_value})
+var sRuleConfigurationProperty_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RuleConfigurationKey, Type: smithy.ShapeTypeString, Ext: &eRuleConfigurationProperty_name})
+var sRuleConfigurationProperty_required = smithy.NewStaticSchema(smithy.StaticSchema{Member: "required", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eRuleConfigurationProperty_required})
+var sRuleConfigurationProperty_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eRuleConfigurationProperty_key})
+var sRuleConfigurationProperty_secret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secret", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eRuleConfigurationProperty_secret})
+var sRuleConfigurationProperty_queryable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eRuleConfigurationProperty_queryable})
+var sRuleConfigurationProperty_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eRuleConfigurationProperty_description})
+var sRuleConfigurationProperty_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iRuleConfigurationPropertyType, Members: &mRuleConfigurationPropertyType, Type: smithy.ShapeTypeEnum, Ext: &eRuleConfigurationProperty_type})
+var s_RuleConfigurationPropertyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleConfigurationProperty, Members: &mRuleConfigurationProperty, Type: smithy.ShapeTypeStructure, Ext: &e_RuleConfigurationPropertyList_member})
+var sRuleConfigurationPropertyType_String = smithy.NewStaticSchema(smithy.StaticSchema{Member: "String", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleConfigurationPropertyType_String})
+var sRuleConfigurationPropertyType_Number = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Number", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleConfigurationPropertyType_Number})
+var sRuleConfigurationPropertyType_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Boolean", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleConfigurationPropertyType_Boolean})
+var sRuleDeclaration_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RuleName, Type: smithy.ShapeTypeString, Ext: &eRuleDeclaration_name})
+var sRuleDeclaration_ruleTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleTypeId", ID: &iRuleTypeId, Members: &mRuleTypeId, Type: smithy.ShapeTypeStructure, Ext: &eRuleDeclaration_ruleTypeId})
+var sRuleDeclaration_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &i_RuleConfigurationMap, Members: &m_RuleConfigurationMap, Type: smithy.ShapeTypeMap, Ext: &eRuleDeclaration_configuration})
+var sRuleDeclaration_commands = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commands", ID: &i_CommandList, Members: &m_CommandList, Type: smithy.ShapeTypeList, Ext: &eRuleDeclaration_commands})
+var sRuleDeclaration_inputArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputArtifacts", ID: &i_InputArtifactList, Members: &m_InputArtifactList, Type: smithy.ShapeTypeList, Ext: &eRuleDeclaration_inputArtifacts})
+var sRuleDeclaration_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eRuleDeclaration_roleArn})
+var sRuleDeclaration_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_AWSRegionName, Type: smithy.ShapeTypeString, Ext: &eRuleDeclaration_region})
+var sRuleDeclaration_timeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutInMinutes", ID: &i_RuleTimeout, Type: smithy.ShapeTypeInteger, Ext: &eRuleDeclaration_timeoutInMinutes})
+var s_RuleDeclarationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleDeclaration, Members: &mRuleDeclaration, Type: smithy.ShapeTypeStructure, Ext: &e_RuleDeclarationList_member})
+var sRuleExecution_ruleExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleExecutionId", ID: &i_RuleExecutionId, Type: smithy.ShapeTypeString, Ext: &eRuleExecution_ruleExecutionId})
+var sRuleExecution_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRuleExecutionStatus, Members: &mRuleExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &eRuleExecution_status})
+var sRuleExecution_summary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summary", ID: &i_ExecutionSummary, Type: smithy.ShapeTypeString, Ext: &eRuleExecution_summary})
+var sRuleExecution_lastStatusChange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastStatusChange", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRuleExecution_lastStatusChange})
+var sRuleExecution_token = smithy.NewStaticSchema(smithy.StaticSchema{Member: "token", ID: &i_RuleExecutionToken, Type: smithy.ShapeTypeString, Ext: &eRuleExecution_token})
+var sRuleExecution_lastUpdatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedBy", ID: &i_LastUpdatedBy, Type: smithy.ShapeTypeString, Ext: &eRuleExecution_lastUpdatedBy})
+var sRuleExecution_externalExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalExecutionId", ID: &i_ExecutionId, Type: smithy.ShapeTypeString, Ext: &eRuleExecution_externalExecutionId})
+var sRuleExecution_externalExecutionUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalExecutionUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &eRuleExecution_externalExecutionUrl})
+var sRuleExecution_errorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorDetails", ID: &iErrorDetails, Members: &mErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &eRuleExecution_errorDetails})
+var sRuleExecutionDetail_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &eRuleExecutionDetail_pipelineExecutionId})
+var sRuleExecutionDetail_ruleExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleExecutionId", ID: &i_RuleExecutionId, Type: smithy.ShapeTypeString, Ext: &eRuleExecutionDetail_ruleExecutionId})
+var sRuleExecutionDetail_pipelineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineVersion", ID: &i_PipelineVersion, Type: smithy.ShapeTypeInteger, Ext: &eRuleExecutionDetail_pipelineVersion})
+var sRuleExecutionDetail_stageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stageName", ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &eRuleExecutionDetail_stageName})
+var sRuleExecutionDetail_ruleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleName", ID: &i_RuleName, Type: smithy.ShapeTypeString, Ext: &eRuleExecutionDetail_ruleName})
+var sRuleExecutionDetail_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRuleExecutionDetail_startTime})
+var sRuleExecutionDetail_lastUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRuleExecutionDetail_lastUpdateTime})
+var sRuleExecutionDetail_updatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedBy", ID: &i_LastUpdatedBy, Type: smithy.ShapeTypeString, Ext: &eRuleExecutionDetail_updatedBy})
+var sRuleExecutionDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRuleExecutionStatus, Members: &mRuleExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &eRuleExecutionDetail_status})
+var sRuleExecutionDetail_input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "input", ID: &iRuleExecutionInput, Members: &mRuleExecutionInput, Type: smithy.ShapeTypeStructure, Ext: &eRuleExecutionDetail_input})
+var sRuleExecutionDetail_output = smithy.NewStaticSchema(smithy.StaticSchema{Member: "output", ID: &iRuleExecutionOutput, Members: &mRuleExecutionOutput, Type: smithy.ShapeTypeStructure, Ext: &eRuleExecutionDetail_output})
+var s_RuleExecutionDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleExecutionDetail, Members: &mRuleExecutionDetail, Type: smithy.ShapeTypeStructure, Ext: &e_RuleExecutionDetailList_member})
+var sRuleExecutionFilter_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &eRuleExecutionFilter_pipelineExecutionId})
+var sRuleExecutionFilter_latestInPipelineExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestInPipelineExecution", ID: &iLatestInPipelineExecutionFilter, Members: &mLatestInPipelineExecutionFilter, Type: smithy.ShapeTypeStructure, Ext: &eRuleExecutionFilter_latestInPipelineExecution})
+var sRuleExecutionInput_ruleTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleTypeId", ID: &iRuleTypeId, Members: &mRuleTypeId, Type: smithy.ShapeTypeStructure, Ext: &eRuleExecutionInput_ruleTypeId})
+var sRuleExecutionInput_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &i_RuleConfigurationMap, Members: &m_RuleConfigurationMap, Type: smithy.ShapeTypeMap, Ext: &eRuleExecutionInput_configuration})
+var sRuleExecutionInput_resolvedConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolvedConfiguration", ID: &i_ResolvedRuleConfigurationMap, Members: &m_ResolvedRuleConfigurationMap, Type: smithy.ShapeTypeMap, Ext: &eRuleExecutionInput_resolvedConfiguration})
+var sRuleExecutionInput_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString, Ext: &eRuleExecutionInput_roleArn})
+var sRuleExecutionInput_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_AWSRegionName, Type: smithy.ShapeTypeString, Ext: &eRuleExecutionInput_region})
+var sRuleExecutionInput_inputArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputArtifacts", ID: &i_ArtifactDetailList, Members: &m_ArtifactDetailList, Type: smithy.ShapeTypeList, Ext: &eRuleExecutionInput_inputArtifacts})
+var sRuleExecutionOutput_executionResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionResult", ID: &iRuleExecutionResult, Members: &mRuleExecutionResult, Type: smithy.ShapeTypeStructure, Ext: &eRuleExecutionOutput_executionResult})
+var sRuleExecutionResult_externalExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalExecutionId", ID: &i_ExternalExecutionId, Type: smithy.ShapeTypeString, Ext: &eRuleExecutionResult_externalExecutionId})
+var sRuleExecutionResult_externalExecutionSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalExecutionSummary", ID: &i_ExternalExecutionSummary, Type: smithy.ShapeTypeString, Ext: &eRuleExecutionResult_externalExecutionSummary})
+var sRuleExecutionResult_externalExecutionUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalExecutionUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &eRuleExecutionResult_externalExecutionUrl})
+var sRuleExecutionResult_errorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorDetails", ID: &iErrorDetails, Members: &mErrorDetails, Type: smithy.ShapeTypeStructure, Ext: &eRuleExecutionResult_errorDetails})
+var sRuleExecutionStatus_InProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleExecutionStatus_InProgress})
+var sRuleExecutionStatus_Abandoned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Abandoned", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleExecutionStatus_Abandoned})
+var sRuleExecutionStatus_Succeeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Succeeded", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleExecutionStatus_Succeeded})
+var sRuleExecutionStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleExecutionStatus_Failed})
+var sRuleOwner_AWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuleOwner_AWS})
+var sRuleRevision_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &eRuleRevision_revisionId})
+var sRuleRevision_revisionChangeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionChangeId", ID: &i_RevisionChangeIdentifier, Type: smithy.ShapeTypeString, Ext: &eRuleRevision_revisionChangeId})
+var sRuleRevision_created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "created", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRuleRevision_created})
+var sRuleState_ruleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleName", ID: &i_RuleName, Type: smithy.ShapeTypeString, Ext: &eRuleState_ruleName})
+var sRuleState_currentRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentRevision", ID: &iRuleRevision, Members: &mRuleRevision, Type: smithy.ShapeTypeStructure, Ext: &eRuleState_currentRevision})
+var sRuleState_latestExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestExecution", ID: &iRuleExecution, Members: &mRuleExecution, Type: smithy.ShapeTypeStructure, Ext: &eRuleState_latestExecution})
+var sRuleState_entityUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &eRuleState_entityUrl})
+var sRuleState_revisionUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &eRuleState_revisionUrl})
+var s_RuleStateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleState, Members: &mRuleState, Type: smithy.ShapeTypeStructure, Ext: &e_RuleStateList_member})
+var sRuleType_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &iRuleTypeId, Members: &mRuleTypeId, Type: smithy.ShapeTypeStructure, Ext: &eRuleType_id})
+var sRuleType_settings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "settings", ID: &iRuleTypeSettings, Members: &mRuleTypeSettings, Type: smithy.ShapeTypeStructure, Ext: &eRuleType_settings})
+var sRuleType_ruleConfigurationProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleConfigurationProperties", ID: &i_RuleConfigurationPropertyList, Members: &m_RuleConfigurationPropertyList, Type: smithy.ShapeTypeList, Ext: &eRuleType_ruleConfigurationProperties})
+var sRuleType_inputArtifactDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputArtifactDetails", ID: &iArtifactDetails, Members: &mArtifactDetails, Type: smithy.ShapeTypeStructure, Ext: &eRuleType_inputArtifactDetails})
+var sRuleTypeId_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &iRuleCategory, Members: &mRuleCategory, Type: smithy.ShapeTypeEnum, Ext: &eRuleTypeId_category})
+var sRuleTypeId_owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owner", ID: &iRuleOwner, Members: &mRuleOwner, Type: smithy.ShapeTypeEnum, Ext: &eRuleTypeId_owner})
+var sRuleTypeId_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &i_RuleProvider, Type: smithy.ShapeTypeString, Ext: &eRuleTypeId_provider})
+var sRuleTypeId_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eRuleTypeId_version})
+var s_RuleTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuleType, Members: &mRuleType, Type: smithy.ShapeTypeStructure, Ext: &e_RuleTypeList_member})
+var sRuleTypeSettings_thirdPartyConfigurationUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thirdPartyConfigurationUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &eRuleTypeSettings_thirdPartyConfigurationUrl})
+var sRuleTypeSettings_entityUrlTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityUrlTemplate", ID: &i_UrlTemplate, Type: smithy.ShapeTypeString, Ext: &eRuleTypeSettings_entityUrlTemplate})
+var sRuleTypeSettings_executionUrlTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionUrlTemplate", ID: &i_UrlTemplate, Type: smithy.ShapeTypeString, Ext: &eRuleTypeSettings_executionUrlTemplate})
+var sRuleTypeSettings_revisionUrlTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionUrlTemplate", ID: &i_UrlTemplate, Type: smithy.ShapeTypeString, Ext: &eRuleTypeSettings_revisionUrlTemplate})
+var sS3ArtifactLocation_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString, Ext: &eS3ArtifactLocation_bucketName})
+var sS3ArtifactLocation_objectKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectKey", ID: &i_S3ObjectKey, Type: smithy.ShapeTypeString, Ext: &eS3ArtifactLocation_objectKey})
+var sS3Location_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString, Ext: &eS3Location_bucket})
+var sS3Location_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_S3Key, Type: smithy.ShapeTypeString, Ext: &eS3Location_key})
+var sSourceRevision_actionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionName", ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &eSourceRevision_actionName})
+var sSourceRevision_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &eSourceRevision_revisionId})
+var sSourceRevision_revisionSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionSummary", ID: &i_RevisionSummary, Type: smithy.ShapeTypeString, Ext: &eSourceRevision_revisionSummary})
+var sSourceRevision_revisionUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionUrl", ID: &i_Url, Type: smithy.ShapeTypeString, Ext: &eSourceRevision_revisionUrl})
+var s_SourceRevisionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSourceRevision, Members: &mSourceRevision, Type: smithy.ShapeTypeStructure, Ext: &e_SourceRevisionList_member})
+var sSourceRevisionOverride_actionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionName", ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &eSourceRevisionOverride_actionName})
+var sSourceRevisionOverride_revisionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionType", ID: &iSourceRevisionType, Members: &mSourceRevisionType, Type: smithy.ShapeTypeEnum, Ext: &eSourceRevisionOverride_revisionType})
+var sSourceRevisionOverride_revisionValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionValue", ID: &i_Revision, Type: smithy.ShapeTypeString, Ext: &eSourceRevisionOverride_revisionValue})
+var s_SourceRevisionOverrideList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSourceRevisionOverride, Members: &mSourceRevisionOverride, Type: smithy.ShapeTypeStructure, Ext: &e_SourceRevisionOverrideList_member})
+var sSourceRevisionType_COMMIT_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMMIT_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceRevisionType_COMMIT_ID})
+var sSourceRevisionType_IMAGE_DIGEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMAGE_DIGEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceRevisionType_IMAGE_DIGEST})
+var sSourceRevisionType_S3_OBJECT_VERSION_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3_OBJECT_VERSION_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceRevisionType_S3_OBJECT_VERSION_ID})
+var sSourceRevisionType_S3_OBJECT_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3_OBJECT_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSourceRevisionType_S3_OBJECT_KEY})
+var s_StageActionDeclarationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActionDeclaration, Members: &mActionDeclaration, Type: smithy.ShapeTypeStructure, Ext: &e_StageActionDeclarationList_member})
+var s_StageBlockerDeclarationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBlockerDeclaration, Members: &mBlockerDeclaration, Type: smithy.ShapeTypeStructure, Ext: &e_StageBlockerDeclarationList_member})
+var sStageConditionsExecution_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iConditionExecutionStatus, Members: &mConditionExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &eStageConditionsExecution_status})
+var sStageConditionsExecution_summary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summary", ID: &i_ExecutionSummary, Type: smithy.ShapeTypeString, Ext: &eStageConditionsExecution_summary})
+var sStageConditionState_latestExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestExecution", ID: &iStageConditionsExecution, Members: &mStageConditionsExecution, Type: smithy.ShapeTypeStructure, Ext: &eStageConditionState_latestExecution})
+var sStageConditionState_conditionStates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conditionStates", ID: &i_ConditionStateList, Members: &m_ConditionStateList, Type: smithy.ShapeTypeList, Ext: &eStageConditionState_conditionStates})
+var sStageContext_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &eStageContext_name})
+var sStageDeclaration_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &eStageDeclaration_name})
+var sStageDeclaration_blockers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockers", ID: &i_StageBlockerDeclarationList, Members: &m_StageBlockerDeclarationList, Type: smithy.ShapeTypeList, Ext: &eStageDeclaration_blockers})
+var sStageDeclaration_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &i_StageActionDeclarationList, Members: &m_StageActionDeclarationList, Type: smithy.ShapeTypeList, Ext: &eStageDeclaration_actions})
+var sStageDeclaration_onFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "onFailure", ID: &iFailureConditions, Members: &mFailureConditions, Type: smithy.ShapeTypeStructure, Ext: &eStageDeclaration_onFailure})
+var sStageDeclaration_onSuccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "onSuccess", ID: &iSuccessConditions, Members: &mSuccessConditions, Type: smithy.ShapeTypeStructure, Ext: &eStageDeclaration_onSuccess})
+var sStageDeclaration_beforeEntry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeEntry", ID: &iBeforeEntryConditions, Members: &mBeforeEntryConditions, Type: smithy.ShapeTypeStructure, Ext: &eStageDeclaration_beforeEntry})
+var sStageExecution_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &eStageExecution_pipelineExecutionId})
+var sStageExecution_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStageExecutionStatus, Members: &mStageExecutionStatus, Type: smithy.ShapeTypeEnum, Ext: &eStageExecution_status})
+var sStageExecution_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iExecutionType, Members: &mExecutionType, Type: smithy.ShapeTypeEnum, Ext: &eStageExecution_type})
+var s_StageExecutionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStageExecution, Members: &mStageExecution, Type: smithy.ShapeTypeStructure, Ext: &e_StageExecutionList_member})
+var sStageExecutionStatus_Cancelled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cancelled", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStageExecutionStatus_Cancelled})
+var sStageExecutionStatus_InProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStageExecutionStatus_InProgress})
+var sStageExecutionStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStageExecutionStatus_Failed})
+var sStageExecutionStatus_Stopped = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stopped", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStageExecutionStatus_Stopped})
+var sStageExecutionStatus_Stopping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stopping", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStageExecutionStatus_Stopping})
+var sStageExecutionStatus_Succeeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Succeeded", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStageExecutionStatus_Succeeded})
+var sStageExecutionStatus_Skipped = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Skipped", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStageExecutionStatus_Skipped})
+var sStageNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eStageNotFoundException_message})
+var sStageNotRetryableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eStageNotRetryableException_message})
+var sStageRetryMode_FAILED_ACTIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_ACTIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStageRetryMode_FAILED_ACTIONS})
+var sStageRetryMode_ALL_ACTIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL_ACTIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStageRetryMode_ALL_ACTIONS})
+var sStageState_stageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stageName", ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &eStageState_stageName})
+var sStageState_inboundExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inboundExecution", ID: &iStageExecution, Members: &mStageExecution, Type: smithy.ShapeTypeStructure, Ext: &eStageState_inboundExecution})
+var sStageState_inboundExecutions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inboundExecutions", ID: &i_StageExecutionList, Members: &m_StageExecutionList, Type: smithy.ShapeTypeList, Ext: &eStageState_inboundExecutions})
+var sStageState_inboundTransitionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inboundTransitionState", ID: &iTransitionState, Members: &mTransitionState, Type: smithy.ShapeTypeStructure, Ext: &eStageState_inboundTransitionState})
+var sStageState_actionStates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionStates", ID: &i_ActionStateList, Members: &m_ActionStateList, Type: smithy.ShapeTypeList, Ext: &eStageState_actionStates})
+var sStageState_latestExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestExecution", ID: &iStageExecution, Members: &mStageExecution, Type: smithy.ShapeTypeStructure, Ext: &eStageState_latestExecution})
+var sStageState_beforeEntryConditionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeEntryConditionState", ID: &iStageConditionState, Members: &mStageConditionState, Type: smithy.ShapeTypeStructure, Ext: &eStageState_beforeEntryConditionState})
+var sStageState_onSuccessConditionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "onSuccessConditionState", ID: &iStageConditionState, Members: &mStageConditionState, Type: smithy.ShapeTypeStructure, Ext: &eStageState_onSuccessConditionState})
+var sStageState_onFailureConditionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "onFailureConditionState", ID: &iStageConditionState, Members: &mStageConditionState, Type: smithy.ShapeTypeStructure, Ext: &eStageState_onFailureConditionState})
+var sStageState_retryStageMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryStageMetadata", ID: &iRetryStageMetadata, Members: &mRetryStageMetadata, Type: smithy.ShapeTypeStructure, Ext: &eStageState_retryStageMetadata})
+var s_StageStateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStageState, Members: &mStageState, Type: smithy.ShapeTypeStructure, Ext: &e_StageStateList_member})
+var sStageTransitionType_Inbound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Inbound", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStageTransitionType_Inbound})
+var sStageTransitionType_Outbound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Outbound", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStageTransitionType_Outbound})
+var sStartTimeRange_Latest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Latest", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStartTimeRange_Latest})
+var sStartTimeRange_All = smithy.NewStaticSchema(smithy.StaticSchema{Member: "All", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStartTimeRange_All})
+var sStopExecutionTrigger_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_StopPipelineExecutionReason, Type: smithy.ShapeTypeString, Ext: &eStopExecutionTrigger_reason})
+var sSucceededInStageFilter_stageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stageName", ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &eSucceededInStageFilter_stageName})
+var sSuccessConditions_conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conditions", ID: &i_ConditionList, Members: &m_ConditionList, Type: smithy.ShapeTypeList, Ext: &eSuccessConditions_conditions})
+var sTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_key})
+var sTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_value})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var sTargetFilter_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &iTargetFilterName, Members: &mTargetFilterName, Type: smithy.ShapeTypeEnum, Ext: &eTargetFilter_name})
+var sTargetFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_TargetFilterValueList, Members: &m_TargetFilterValueList, Type: smithy.ShapeTypeList, Ext: &eTargetFilter_values})
+var s_TargetFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTargetFilter, Members: &mTargetFilter, Type: smithy.ShapeTypeStructure, Ext: &e_TargetFilterList_member})
+var sTargetFilterName_TARGET_STATUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TARGET_STATUS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTargetFilterName_TARGET_STATUS})
+var s_TargetFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TargetFilterValue, Type: smithy.ShapeTypeString, Ext: &e_TargetFilterValueList_member})
+var sThirdPartyJob_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_ClientId, Type: smithy.ShapeTypeString, Ext: &eThirdPartyJob_clientId})
+var sThirdPartyJob_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eThirdPartyJob_jobId})
+var sThirdPartyJobData_actionTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionTypeId", ID: &iActionTypeId, Members: &mActionTypeId, Type: smithy.ShapeTypeStructure, Ext: &eThirdPartyJobData_actionTypeId})
+var sThirdPartyJobData_actionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionConfiguration", ID: &iActionConfiguration, Members: &mActionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eThirdPartyJobData_actionConfiguration})
+var sThirdPartyJobData_pipelineContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineContext", ID: &iPipelineContext, Members: &mPipelineContext, Type: smithy.ShapeTypeStructure, Ext: &eThirdPartyJobData_pipelineContext})
+var sThirdPartyJobData_inputArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputArtifacts", ID: &i_ArtifactList, Members: &m_ArtifactList, Type: smithy.ShapeTypeList, Ext: &eThirdPartyJobData_inputArtifacts})
+var sThirdPartyJobData_outputArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputArtifacts", ID: &i_ArtifactList, Members: &m_ArtifactList, Type: smithy.ShapeTypeList, Ext: &eThirdPartyJobData_outputArtifacts})
+var sThirdPartyJobData_artifactCredentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "artifactCredentials", ID: &iAWSSessionCredentials, Members: &mAWSSessionCredentials, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eThirdPartyJobData_artifactCredentials})
+var sThirdPartyJobData_continuationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "continuationToken", ID: &i_ContinuationToken, Type: smithy.ShapeTypeString, Ext: &eThirdPartyJobData_continuationToken})
+var sThirdPartyJobData_encryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKey", ID: &iEncryptionKey, Members: &mEncryptionKey, Type: smithy.ShapeTypeStructure, Ext: &eThirdPartyJobData_encryptionKey})
+var sThirdPartyJobDetails_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ThirdPartyJobId, Type: smithy.ShapeTypeString, Ext: &eThirdPartyJobDetails_id})
+var sThirdPartyJobDetails_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &iThirdPartyJobData, Members: &mThirdPartyJobData, Type: smithy.ShapeTypeStructure, Ext: &eThirdPartyJobDetails_data})
+var sThirdPartyJobDetails_nonce = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nonce", ID: &i_Nonce, Type: smithy.ShapeTypeString, Ext: &eThirdPartyJobDetails_nonce})
+var s_ThirdPartyJobList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iThirdPartyJob, Members: &mThirdPartyJob, Type: smithy.ShapeTypeStructure, Ext: &e_ThirdPartyJobList_member})
+var sTooManyTagsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eTooManyTagsException_message})
+var sTransitionState_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &eTransitionState_enabled})
+var sTransitionState_lastChangedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastChangedBy", ID: &i_LastChangedBy, Type: smithy.ShapeTypeString, Ext: &eTransitionState_lastChangedBy})
+var sTransitionState_lastChangedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastChangedAt", ID: &i_LastChangedAt, Type: smithy.ShapeTypeTimestamp, Ext: &eTransitionState_lastChangedAt})
+var sTransitionState_disabledReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "disabledReason", ID: &i_DisabledReason, Type: smithy.ShapeTypeString, Ext: &eTransitionState_disabledReason})
+var sTriggerType_CreatePipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatePipeline", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTriggerType_CreatePipeline})
+var sTriggerType_StartPipelineExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartPipelineExecution", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTriggerType_StartPipelineExecution})
+var sTriggerType_PollForSourceChanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PollForSourceChanges", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTriggerType_PollForSourceChanges})
+var sTriggerType_Webhook = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Webhook", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTriggerType_Webhook})
+var sTriggerType_CloudWatchEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchEvent", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTriggerType_CloudWatchEvent})
+var sTriggerType_PutActionRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PutActionRevision", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTriggerType_PutActionRevision})
+var sTriggerType_WebhookV2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebhookV2", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTriggerType_WebhookV2})
+var sTriggerType_ManualRollback = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManualRollback", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTriggerType_ManualRollback})
+var sTriggerType_AutomatedRollback = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomatedRollback", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTriggerType_AutomatedRollback})
+var sUnableToRollbackStageException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eUnableToRollbackStageException_message})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Message, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sWebhookAuthConfiguration_AllowedIPRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowedIPRange", ID: &i_WebhookAuthConfigurationAllowedIPRange, Type: smithy.ShapeTypeString, Ext: &eWebhookAuthConfiguration_AllowedIPRange})
+var sWebhookAuthConfiguration_SecretToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretToken", ID: &i_WebhookAuthConfigurationSecretToken, Type: smithy.ShapeTypeString, Ext: &eWebhookAuthConfiguration_SecretToken})
+var sWebhookAuthenticationType_GITHUB_HMAC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB_HMAC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWebhookAuthenticationType_GITHUB_HMAC})
+var sWebhookAuthenticationType_IP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWebhookAuthenticationType_IP})
+var sWebhookAuthenticationType_UNAUTHENTICATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNAUTHENTICATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWebhookAuthenticationType_UNAUTHENTICATED})
+var sWebhookDefinition_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_WebhookName, Type: smithy.ShapeTypeString, Ext: &eWebhookDefinition_name})
+var sWebhookDefinition_targetPipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetPipeline", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &eWebhookDefinition_targetPipeline})
+var sWebhookDefinition_targetAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetAction", ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &eWebhookDefinition_targetAction})
+var sWebhookDefinition_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_WebhookFilters, Members: &m_WebhookFilters, Type: smithy.ShapeTypeList, Ext: &eWebhookDefinition_filters})
+var sWebhookDefinition_authentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authentication", ID: &iWebhookAuthenticationType, Members: &mWebhookAuthenticationType, Type: smithy.ShapeTypeEnum, Ext: &eWebhookDefinition_authentication})
+var sWebhookDefinition_authenticationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authenticationConfiguration", ID: &iWebhookAuthConfiguration, Members: &mWebhookAuthConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eWebhookDefinition_authenticationConfiguration})
+var sWebhookFilterRule_jsonPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jsonPath", ID: &i_JsonPath, Type: smithy.ShapeTypeString, Ext: &eWebhookFilterRule_jsonPath})
+var sWebhookFilterRule_matchEquals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "matchEquals", ID: &i_MatchEquals, Type: smithy.ShapeTypeString, Ext: &eWebhookFilterRule_matchEquals})
+var s_WebhookFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWebhookFilterRule, Members: &mWebhookFilterRule, Type: smithy.ShapeTypeStructure, Ext: &e_WebhookFilters_member})
+var s_WebhookList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListWebhookItem, Members: &mListWebhookItem, Type: smithy.ShapeTypeStructure, Ext: &e_WebhookList_member})
+var sAcknowledgeJobInput_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eAcknowledgeJobInput_jobId})
+var sAcknowledgeJobInput_nonce = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nonce", ID: &i_Nonce, Type: smithy.ShapeTypeString, Ext: &eAcknowledgeJobInput_nonce})
+var sAcknowledgeJobOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eAcknowledgeJobOutput_status})
+var sAcknowledgeThirdPartyJobInput_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_ThirdPartyJobId, Type: smithy.ShapeTypeString, Ext: &eAcknowledgeThirdPartyJobInput_jobId})
+var sAcknowledgeThirdPartyJobInput_nonce = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nonce", ID: &i_Nonce, Type: smithy.ShapeTypeString, Ext: &eAcknowledgeThirdPartyJobInput_nonce})
+var sAcknowledgeThirdPartyJobInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eAcknowledgeThirdPartyJobInput_clientToken})
+var sAcknowledgeThirdPartyJobOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum, Ext: &eAcknowledgeThirdPartyJobOutput_status})
+var sCreateCustomActionTypeInput_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &iActionCategory, Members: &mActionCategory, Type: smithy.ShapeTypeEnum, Ext: &eCreateCustomActionTypeInput_category})
+var sCreateCustomActionTypeInput_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &i_ActionProvider, Type: smithy.ShapeTypeString, Ext: &eCreateCustomActionTypeInput_provider})
+var sCreateCustomActionTypeInput_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eCreateCustomActionTypeInput_version})
+var sCreateCustomActionTypeInput_settings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "settings", ID: &iActionTypeSettings, Members: &mActionTypeSettings, Type: smithy.ShapeTypeStructure, Ext: &eCreateCustomActionTypeInput_settings})
+var sCreateCustomActionTypeInput_configurationProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configurationProperties", ID: &i_ActionConfigurationPropertyList, Members: &m_ActionConfigurationPropertyList, Type: smithy.ShapeTypeList, Ext: &eCreateCustomActionTypeInput_configurationProperties})
+var sCreateCustomActionTypeInput_inputArtifactDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputArtifactDetails", ID: &iArtifactDetails, Members: &mArtifactDetails, Type: smithy.ShapeTypeStructure, Ext: &eCreateCustomActionTypeInput_inputArtifactDetails})
+var sCreateCustomActionTypeInput_outputArtifactDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputArtifactDetails", ID: &iArtifactDetails, Members: &mArtifactDetails, Type: smithy.ShapeTypeStructure, Ext: &eCreateCustomActionTypeInput_outputArtifactDetails})
+var sCreateCustomActionTypeInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateCustomActionTypeInput_tags})
+var sCreateCustomActionTypeOutput_actionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionType", ID: &iActionType, Members: &mActionType, Type: smithy.ShapeTypeStructure, Ext: &eCreateCustomActionTypeOutput_actionType})
+var sCreateCustomActionTypeOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateCustomActionTypeOutput_tags})
+var sCreatePipelineInput_pipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipeline", ID: &iPipelineDeclaration, Members: &mPipelineDeclaration, Type: smithy.ShapeTypeStructure, Ext: &eCreatePipelineInput_pipeline})
+var sCreatePipelineInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreatePipelineInput_tags})
+var sCreatePipelineOutput_pipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipeline", ID: &iPipelineDeclaration, Members: &mPipelineDeclaration, Type: smithy.ShapeTypeStructure, Ext: &eCreatePipelineOutput_pipeline})
+var sCreatePipelineOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreatePipelineOutput_tags})
+var sDeleteCustomActionTypeInput_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &iActionCategory, Members: &mActionCategory, Type: smithy.ShapeTypeEnum, Ext: &eDeleteCustomActionTypeInput_category})
+var sDeleteCustomActionTypeInput_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &i_ActionProvider, Type: smithy.ShapeTypeString, Ext: &eDeleteCustomActionTypeInput_provider})
+var sDeleteCustomActionTypeInput_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eDeleteCustomActionTypeInput_version})
+var sDeletePipelineInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &eDeletePipelineInput_name})
+var sDeleteWebhookInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_WebhookName, Type: smithy.ShapeTypeString, Ext: &eDeleteWebhookInput_name})
+var sDeregisterWebhookWithThirdPartyInput_webhookName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "webhookName", ID: &i_WebhookName, Type: smithy.ShapeTypeString, Ext: &eDeregisterWebhookWithThirdPartyInput_webhookName})
+var sDisableStageTransitionInput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &eDisableStageTransitionInput_pipelineName})
+var sDisableStageTransitionInput_stageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stageName", ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &eDisableStageTransitionInput_stageName})
+var sDisableStageTransitionInput_transitionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transitionType", ID: &iStageTransitionType, Members: &mStageTransitionType, Type: smithy.ShapeTypeEnum, Ext: &eDisableStageTransitionInput_transitionType})
+var sDisableStageTransitionInput_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_DisabledReason, Type: smithy.ShapeTypeString, Ext: &eDisableStageTransitionInput_reason})
+var sEnableStageTransitionInput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &eEnableStageTransitionInput_pipelineName})
+var sEnableStageTransitionInput_stageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stageName", ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &eEnableStageTransitionInput_stageName})
+var sEnableStageTransitionInput_transitionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transitionType", ID: &iStageTransitionType, Members: &mStageTransitionType, Type: smithy.ShapeTypeEnum, Ext: &eEnableStageTransitionInput_transitionType})
+var sGetActionTypeInput_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &iActionCategory, Members: &mActionCategory, Type: smithy.ShapeTypeEnum, Ext: &eGetActionTypeInput_category})
+var sGetActionTypeInput_owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owner", ID: &i_ActionTypeOwner, Type: smithy.ShapeTypeString, Ext: &eGetActionTypeInput_owner})
+var sGetActionTypeInput_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &i_ActionProvider, Type: smithy.ShapeTypeString, Ext: &eGetActionTypeInput_provider})
+var sGetActionTypeInput_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString, Ext: &eGetActionTypeInput_version})
+var sGetActionTypeOutput_actionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionType", ID: &iActionTypeDeclaration, Members: &mActionTypeDeclaration, Type: smithy.ShapeTypeStructure, Ext: &eGetActionTypeOutput_actionType})
+var sGetJobDetailsInput_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &eGetJobDetailsInput_jobId})
+var sGetJobDetailsOutput_jobDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobDetails", ID: &iJobDetails, Members: &mJobDetails, Type: smithy.ShapeTypeStructure, Ext: &eGetJobDetailsOutput_jobDetails})
+var sGetPipelineExecutionInput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &eGetPipelineExecutionInput_pipelineName})
+var sGetPipelineExecutionInput_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &eGetPipelineExecutionInput_pipelineExecutionId})
+var sGetPipelineExecutionOutput_pipelineExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecution", ID: &iPipelineExecution, Members: &mPipelineExecution, Type: smithy.ShapeTypeStructure, Ext: &eGetPipelineExecutionOutput_pipelineExecution})
+var sGetPipelineInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &eGetPipelineInput_name})
+var sGetPipelineInput_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_PipelineVersion, Type: smithy.ShapeTypeInteger, Ext: &eGetPipelineInput_version})
+var sGetPipelineOutput_pipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipeline", ID: &iPipelineDeclaration, Members: &mPipelineDeclaration, Type: smithy.ShapeTypeStructure, Ext: &eGetPipelineOutput_pipeline})
+var sGetPipelineOutput_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &iPipelineMetadata, Members: &mPipelineMetadata, Type: smithy.ShapeTypeStructure, Ext: &eGetPipelineOutput_metadata})
+var sGetPipelineStateInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &eGetPipelineStateInput_name})
+var sGetPipelineStateOutput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &eGetPipelineStateOutput_pipelineName})
+var sGetPipelineStateOutput_pipelineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineVersion", ID: &i_PipelineVersion, Type: smithy.ShapeTypeInteger, Ext: &eGetPipelineStateOutput_pipelineVersion})
+var sGetPipelineStateOutput_stageStates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stageStates", ID: &i_StageStateList, Members: &m_StageStateList, Type: smithy.ShapeTypeList, Ext: &eGetPipelineStateOutput_stageStates})
+var sGetPipelineStateOutput_created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "created", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetPipelineStateOutput_created})
+var sGetPipelineStateOutput_updated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updated", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetPipelineStateOutput_updated})
+var sGetThirdPartyJobDetailsInput_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_ThirdPartyJobId, Type: smithy.ShapeTypeString, Ext: &eGetThirdPartyJobDetailsInput_jobId})
+var sGetThirdPartyJobDetailsInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eGetThirdPartyJobDetailsInput_clientToken})
+var sGetThirdPartyJobDetailsOutput_jobDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobDetails", ID: &iThirdPartyJobDetails, Members: &mThirdPartyJobDetails, Type: smithy.ShapeTypeStructure, Ext: &eGetThirdPartyJobDetailsOutput_jobDetails})
+var sListActionExecutionsInput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &eListActionExecutionsInput_pipelineName})
+var sListActionExecutionsInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iActionExecutionFilter, Members: &mActionExecutionFilter, Type: smithy.ShapeTypeStructure, Ext: &eListActionExecutionsInput_filter})
+var sListActionExecutionsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListActionExecutionsInput_maxResults})
+var sListActionExecutionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListActionExecutionsInput_nextToken})
+var sListActionExecutionsOutput_actionExecutionDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionExecutionDetails", ID: &i_ActionExecutionDetailList, Members: &m_ActionExecutionDetailList, Type: smithy.ShapeTypeList, Ext: &eListActionExecutionsOutput_actionExecutionDetails})
+var sListActionExecutionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListActionExecutionsOutput_nextToken})
+var sListActionTypesInput_actionOwnerFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionOwnerFilter", ID: &iActionOwner, Members: &mActionOwner, Type: smithy.ShapeTypeEnum, Ext: &eListActionTypesInput_actionOwnerFilter})
+var sListActionTypesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListActionTypesInput_nextToken})
+var sListActionTypesInput_regionFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regionFilter", ID: &i_AWSRegionName, Type: smithy.ShapeTypeString, Ext: &eListActionTypesInput_regionFilter})
+var sListActionTypesOutput_actionTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionTypes", ID: &i_ActionTypeList, Members: &m_ActionTypeList, Type: smithy.ShapeTypeList, Ext: &eListActionTypesOutput_actionTypes})
+var sListActionTypesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListActionTypesOutput_nextToken})
+var sListDeployActionExecutionTargetsInput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &eListDeployActionExecutionTargetsInput_pipelineName})
+var sListDeployActionExecutionTargetsInput_actionExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionExecutionId", ID: &i_ActionExecutionId, Type: smithy.ShapeTypeString, Ext: &eListDeployActionExecutionTargetsInput_actionExecutionId})
+var sListDeployActionExecutionTargetsInput_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_TargetFilterList, Members: &m_TargetFilterList, Type: smithy.ShapeTypeList, Ext: &eListDeployActionExecutionTargetsInput_filters})
+var sListDeployActionExecutionTargetsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListDeployActionExecutionTargetsInput_maxResults})
+var sListDeployActionExecutionTargetsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDeployActionExecutionTargetsInput_nextToken})
+var sListDeployActionExecutionTargetsOutput_targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targets", ID: &i_DeployActionExecutionTargetList, Members: &m_DeployActionExecutionTargetList, Type: smithy.ShapeTypeList, Ext: &eListDeployActionExecutionTargetsOutput_targets})
+var sListDeployActionExecutionTargetsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDeployActionExecutionTargetsOutput_nextToken})
+var sListPipelineExecutionsInput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &eListPipelineExecutionsInput_pipelineName})
+var sListPipelineExecutionsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListPipelineExecutionsInput_maxResults})
+var sListPipelineExecutionsInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iPipelineExecutionFilter, Members: &mPipelineExecutionFilter, Type: smithy.ShapeTypeStructure, Ext: &eListPipelineExecutionsInput_filter})
+var sListPipelineExecutionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPipelineExecutionsInput_nextToken})
+var sListPipelineExecutionsOutput_pipelineExecutionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionSummaries", ID: &i_PipelineExecutionSummaryList, Members: &m_PipelineExecutionSummaryList, Type: smithy.ShapeTypeList, Ext: &eListPipelineExecutionsOutput_pipelineExecutionSummaries})
+var sListPipelineExecutionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPipelineExecutionsOutput_nextToken})
+var sListPipelinesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPipelinesInput_nextToken})
+var sListPipelinesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxPipelines, Type: smithy.ShapeTypeInteger, Ext: &eListPipelinesInput_maxResults})
+var sListPipelinesOutput_pipelines = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelines", ID: &i_PipelineList, Members: &m_PipelineList, Type: smithy.ShapeTypeList, Ext: &eListPipelinesOutput_pipelines})
+var sListPipelinesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListPipelinesOutput_nextToken})
+var sListRuleExecutionsInput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &eListRuleExecutionsInput_pipelineName})
+var sListRuleExecutionsInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iRuleExecutionFilter, Members: &mRuleExecutionFilter, Type: smithy.ShapeTypeStructure, Ext: &eListRuleExecutionsInput_filter})
+var sListRuleExecutionsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListRuleExecutionsInput_maxResults})
+var sListRuleExecutionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRuleExecutionsInput_nextToken})
+var sListRuleExecutionsOutput_ruleExecutionDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleExecutionDetails", ID: &i_RuleExecutionDetailList, Members: &m_RuleExecutionDetailList, Type: smithy.ShapeTypeList, Ext: &eListRuleExecutionsOutput_ruleExecutionDetails})
+var sListRuleExecutionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRuleExecutionsOutput_nextToken})
+var sListRuleTypesInput_ruleOwnerFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleOwnerFilter", ID: &iRuleOwner, Members: &mRuleOwner, Type: smithy.ShapeTypeEnum, Ext: &eListRuleTypesInput_ruleOwnerFilter})
+var sListRuleTypesInput_regionFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regionFilter", ID: &i_AWSRegionName, Type: smithy.ShapeTypeString, Ext: &eListRuleTypesInput_regionFilter})
+var sListRuleTypesOutput_ruleTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleTypes", ID: &i_RuleTypeList, Members: &m_RuleTypeList, Type: smithy.ShapeTypeList, Ext: &eListRuleTypesOutput_ruleTypes})
+var sListTagsForResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceInput_resourceArn})
+var sListTagsForResourceInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceInput_nextToken})
+var sListTagsForResourceInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListTagsForResourceInput_maxResults})
+var sListTagsForResourceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceOutput_tags})
+var sListTagsForResourceOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceOutput_nextToken})
+var sListWebhooksInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListWebhooksInput_NextToken})
+var sListWebhooksInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListWebhooksInput_MaxResults})
+var sListWebhooksOutput_webhooks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "webhooks", ID: &i_WebhookList, Members: &m_WebhookList, Type: smithy.ShapeTypeList, Ext: &eListWebhooksOutput_webhooks})
+var sListWebhooksOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListWebhooksOutput_NextToken})
+var sOverrideStageConditionInput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &eOverrideStageConditionInput_pipelineName})
+var sOverrideStageConditionInput_stageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stageName", ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &eOverrideStageConditionInput_stageName})
+var sOverrideStageConditionInput_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &eOverrideStageConditionInput_pipelineExecutionId})
+var sOverrideStageConditionInput_conditionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conditionType", ID: &iConditionType, Members: &mConditionType, Type: smithy.ShapeTypeEnum, Ext: &eOverrideStageConditionInput_conditionType})
+var sPollForJobsInput_actionTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionTypeId", ID: &iActionTypeId, Members: &mActionTypeId, Type: smithy.ShapeTypeStructure, Ext: &ePollForJobsInput_actionTypeId})
+var sPollForJobsInput_maxBatchSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxBatchSize", ID: &i_MaxBatchSize, Type: smithy.ShapeTypeInteger, Ext: &ePollForJobsInput_maxBatchSize})
+var sPollForJobsInput_queryParam = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryParam", ID: &i_QueryParamMap, Members: &m_QueryParamMap, Type: smithy.ShapeTypeMap, Ext: &ePollForJobsInput_queryParam})
+var sPollForJobsOutput_jobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobs", ID: &i_JobList, Members: &m_JobList, Type: smithy.ShapeTypeList, Ext: &ePollForJobsOutput_jobs})
+var sPollForThirdPartyJobsInput_actionTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionTypeId", ID: &iActionTypeId, Members: &mActionTypeId, Type: smithy.ShapeTypeStructure, Ext: &ePollForThirdPartyJobsInput_actionTypeId})
+var sPollForThirdPartyJobsInput_maxBatchSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxBatchSize", ID: &i_MaxBatchSize, Type: smithy.ShapeTypeInteger, Ext: &ePollForThirdPartyJobsInput_maxBatchSize})
+var sPollForThirdPartyJobsOutput_jobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobs", ID: &i_ThirdPartyJobList, Members: &m_ThirdPartyJobList, Type: smithy.ShapeTypeList, Ext: &ePollForThirdPartyJobsOutput_jobs})
+var sPutActionRevisionInput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ePutActionRevisionInput_pipelineName})
+var sPutActionRevisionInput_stageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stageName", ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &ePutActionRevisionInput_stageName})
+var sPutActionRevisionInput_actionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionName", ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &ePutActionRevisionInput_actionName})
+var sPutActionRevisionInput_actionRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionRevision", ID: &iActionRevision, Members: &mActionRevision, Type: smithy.ShapeTypeStructure, Ext: &ePutActionRevisionInput_actionRevision})
+var sPutActionRevisionOutput_newRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newRevision", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &ePutActionRevisionOutput_newRevision})
+var sPutActionRevisionOutput_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &ePutActionRevisionOutput_pipelineExecutionId})
+var sPutApprovalResultInput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &ePutApprovalResultInput_pipelineName})
+var sPutApprovalResultInput_stageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stageName", ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &ePutApprovalResultInput_stageName})
+var sPutApprovalResultInput_actionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionName", ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &ePutApprovalResultInput_actionName})
+var sPutApprovalResultInput_result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "result", ID: &iApprovalResult, Members: &mApprovalResult, Type: smithy.ShapeTypeStructure, Ext: &ePutApprovalResultInput_result})
+var sPutApprovalResultInput_token = smithy.NewStaticSchema(smithy.StaticSchema{Member: "token", ID: &i_ApprovalToken, Type: smithy.ShapeTypeString, Ext: &ePutApprovalResultInput_token})
+var sPutApprovalResultOutput_approvedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ePutApprovalResultOutput_approvedAt})
+var sPutJobFailureResultInput_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &ePutJobFailureResultInput_jobId})
+var sPutJobFailureResultInput_failureDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureDetails", ID: &iFailureDetails, Members: &mFailureDetails, Type: smithy.ShapeTypeStructure, Ext: &ePutJobFailureResultInput_failureDetails})
+var sPutJobSuccessResultInput_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Type: smithy.ShapeTypeString, Ext: &ePutJobSuccessResultInput_jobId})
+var sPutJobSuccessResultInput_currentRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentRevision", ID: &iCurrentRevision, Members: &mCurrentRevision, Type: smithy.ShapeTypeStructure, Ext: &ePutJobSuccessResultInput_currentRevision})
+var sPutJobSuccessResultInput_continuationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "continuationToken", ID: &i_ContinuationToken, Type: smithy.ShapeTypeString, Ext: &ePutJobSuccessResultInput_continuationToken})
+var sPutJobSuccessResultInput_executionDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionDetails", ID: &iExecutionDetails, Members: &mExecutionDetails, Type: smithy.ShapeTypeStructure, Ext: &ePutJobSuccessResultInput_executionDetails})
+var sPutJobSuccessResultInput_outputVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputVariables", ID: &i_OutputVariablesMap, Members: &m_OutputVariablesMap, Type: smithy.ShapeTypeMap, Ext: &ePutJobSuccessResultInput_outputVariables})
+var sPutThirdPartyJobFailureResultInput_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_ThirdPartyJobId, Type: smithy.ShapeTypeString, Ext: &ePutThirdPartyJobFailureResultInput_jobId})
+var sPutThirdPartyJobFailureResultInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ePutThirdPartyJobFailureResultInput_clientToken})
+var sPutThirdPartyJobFailureResultInput_failureDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureDetails", ID: &iFailureDetails, Members: &mFailureDetails, Type: smithy.ShapeTypeStructure, Ext: &ePutThirdPartyJobFailureResultInput_failureDetails})
+var sPutThirdPartyJobSuccessResultInput_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_ThirdPartyJobId, Type: smithy.ShapeTypeString, Ext: &ePutThirdPartyJobSuccessResultInput_jobId})
+var sPutThirdPartyJobSuccessResultInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ePutThirdPartyJobSuccessResultInput_clientToken})
+var sPutThirdPartyJobSuccessResultInput_currentRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentRevision", ID: &iCurrentRevision, Members: &mCurrentRevision, Type: smithy.ShapeTypeStructure, Ext: &ePutThirdPartyJobSuccessResultInput_currentRevision})
+var sPutThirdPartyJobSuccessResultInput_continuationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "continuationToken", ID: &i_ContinuationToken, Type: smithy.ShapeTypeString, Ext: &ePutThirdPartyJobSuccessResultInput_continuationToken})
+var sPutThirdPartyJobSuccessResultInput_executionDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionDetails", ID: &iExecutionDetails, Members: &mExecutionDetails, Type: smithy.ShapeTypeStructure, Ext: &ePutThirdPartyJobSuccessResultInput_executionDetails})
+var sPutWebhookInput_webhook = smithy.NewStaticSchema(smithy.StaticSchema{Member: "webhook", ID: &iWebhookDefinition, Members: &mWebhookDefinition, Type: smithy.ShapeTypeStructure, Ext: &ePutWebhookInput_webhook})
+var sPutWebhookInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ePutWebhookInput_tags})
+var sPutWebhookOutput_webhook = smithy.NewStaticSchema(smithy.StaticSchema{Member: "webhook", ID: &iListWebhookItem, Members: &mListWebhookItem, Type: smithy.ShapeTypeStructure, Ext: &ePutWebhookOutput_webhook})
+var sRegisterWebhookWithThirdPartyInput_webhookName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "webhookName", ID: &i_WebhookName, Type: smithy.ShapeTypeString, Ext: &eRegisterWebhookWithThirdPartyInput_webhookName})
+var sRetryStageExecutionInput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &eRetryStageExecutionInput_pipelineName})
+var sRetryStageExecutionInput_stageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stageName", ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &eRetryStageExecutionInput_stageName})
+var sRetryStageExecutionInput_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &eRetryStageExecutionInput_pipelineExecutionId})
+var sRetryStageExecutionInput_retryMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryMode", ID: &iStageRetryMode, Members: &mStageRetryMode, Type: smithy.ShapeTypeEnum, Ext: &eRetryStageExecutionInput_retryMode})
+var sRetryStageExecutionOutput_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &eRetryStageExecutionOutput_pipelineExecutionId})
+var sRollbackStageInput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &eRollbackStageInput_pipelineName})
+var sRollbackStageInput_stageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stageName", ID: &i_StageName, Type: smithy.ShapeTypeString, Ext: &eRollbackStageInput_stageName})
+var sRollbackStageInput_targetPipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetPipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &eRollbackStageInput_targetPipelineExecutionId})
+var sRollbackStageOutput_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &eRollbackStageOutput_pipelineExecutionId})
+var sStartPipelineExecutionInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &eStartPipelineExecutionInput_name})
+var sStartPipelineExecutionInput_variables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "variables", ID: &i_PipelineVariableList, Members: &m_PipelineVariableList, Type: smithy.ShapeTypeList, Ext: &eStartPipelineExecutionInput_variables})
+var sStartPipelineExecutionInput_clientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString, Ext: &eStartPipelineExecutionInput_clientRequestToken})
+var sStartPipelineExecutionInput_sourceRevisions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceRevisions", ID: &i_SourceRevisionOverrideList, Members: &m_SourceRevisionOverrideList, Type: smithy.ShapeTypeList, Ext: &eStartPipelineExecutionInput_sourceRevisions})
+var sStartPipelineExecutionOutput_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &eStartPipelineExecutionOutput_pipelineExecutionId})
+var sStopPipelineExecutionInput_pipelineName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineName", ID: &i_PipelineName, Type: smithy.ShapeTypeString, Ext: &eStopPipelineExecutionInput_pipelineName})
+var sStopPipelineExecutionInput_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &eStopPipelineExecutionInput_pipelineExecutionId})
+var sStopPipelineExecutionInput_abandon = smithy.NewStaticSchema(smithy.StaticSchema{Member: "abandon", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean, Ext: &eStopPipelineExecutionInput_abandon})
+var sStopPipelineExecutionInput_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_StopPipelineExecutionReason, Type: smithy.ShapeTypeString, Ext: &eStopPipelineExecutionInput_reason})
+var sStopPipelineExecutionOutput_pipelineExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineExecutionId", ID: &i_PipelineExecutionId, Type: smithy.ShapeTypeString, Ext: &eStopPipelineExecutionOutput_pipelineExecutionId})
+var sTagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eTagResourceInput_resourceArn})
+var sTagResourceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceInput_tags})
+var sUntagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString, Ext: &eUntagResourceInput_resourceArn})
+var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceInput_tagKeys})
+var sUpdateActionTypeInput_actionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionType", ID: &iActionTypeDeclaration, Members: &mActionTypeDeclaration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateActionTypeInput_actionType})
+var sUpdatePipelineInput_pipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipeline", ID: &iPipelineDeclaration, Members: &mPipelineDeclaration, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePipelineInput_pipeline})
+var sUpdatePipelineOutput_pipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipeline", ID: &iPipelineDeclaration, Members: &mPipelineDeclaration, Type: smithy.ShapeTypeStructure, Ext: &eUpdatePipelineOutput_pipeline})
 
 var AcknowledgeJob = &sAcknowledgeJob
 

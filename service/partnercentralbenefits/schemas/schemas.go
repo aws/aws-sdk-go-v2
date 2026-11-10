@@ -7,9 +7,536 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [528]smithy.SchemaExtensions
+var (
+	eAmendBenefitApplication                                                  smithy.SchemaExtensions
+	eAssociateBenefitApplicationResource                                      smithy.SchemaExtensions
+	eCancelBenefitApplication                                                 smithy.SchemaExtensions
+	eCreateBenefitApplication                                                 smithy.SchemaExtensions
+	eDisassociateBenefitApplicationResource                                   smithy.SchemaExtensions
+	eGetBenefit                                                               smithy.SchemaExtensions
+	eGetBenefitAllocation                                                     smithy.SchemaExtensions
+	eGetBenefitApplication                                                    smithy.SchemaExtensions
+	eListBenefitAllocations                                                   smithy.SchemaExtensions
+	eListBenefitApplications                                                  smithy.SchemaExtensions
+	eListBenefits                                                             smithy.SchemaExtensions
+	eListTagsForResource                                                      smithy.SchemaExtensions
+	eRecallBenefitApplication                                                 smithy.SchemaExtensions
+	eSubmitBenefitApplication                                                 smithy.SchemaExtensions
+	eTagResource                                                              smithy.SchemaExtensions
+	eUntagResource                                                            smithy.SchemaExtensions
+	eUpdateBenefitApplication                                                 smithy.SchemaExtensions
+	e_PartnerCentralBenefitsService                                           smithy.SchemaExtensions
+	eAccessDeniedException                                                    smithy.SchemaExtensions
+	eAccessDeniedException_Message                                            smithy.SchemaExtensions
+	eAccessDetails                                                            smithy.SchemaExtensions
+	eAccessDetails_Description                                                smithy.SchemaExtensions
+	eAmendment                                                                smithy.SchemaExtensions
+	eAmendment_FieldPath                                                      smithy.SchemaExtensions
+	eAmendment_NewValue                                                       smithy.SchemaExtensions
+	e_AmendmentList                                                           smithy.SchemaExtensions
+	e_AmendmentList_member                                                    smithy.SchemaExtensions
+	e_Arn                                                                     smithy.SchemaExtensions
+	e_Arns                                                                    smithy.SchemaExtensions
+	e_Arns_member                                                             smithy.SchemaExtensions
+	eAssociatedResource                                                       smithy.SchemaExtensions
+	eAssociatedResource_ResourceType                                          smithy.SchemaExtensions
+	eAssociatedResource_ResourceIdentifier                                    smithy.SchemaExtensions
+	eAssociatedResource_ResourceArn                                           smithy.SchemaExtensions
+	e_AssociatedResources                                                     smithy.SchemaExtensions
+	e_AssociatedResources_member                                              smithy.SchemaExtensions
+	e_Attributes                                                              smithy.SchemaExtensions
+	e_Attributes_key                                                          smithy.SchemaExtensions
+	e_Attributes_value                                                        smithy.SchemaExtensions
+	e_BenefitAllocationArn                                                    smithy.SchemaExtensions
+	e_BenefitAllocationId                                                     smithy.SchemaExtensions
+	e_BenefitAllocationIdentifier                                             smithy.SchemaExtensions
+	e_BenefitAllocationName                                                   smithy.SchemaExtensions
+	eBenefitAllocationStatus                                                  smithy.SchemaExtensions
+	eBenefitAllocationStatus_ACTIVE                                           smithy.SchemaExtensions
+	eBenefitAllocationStatus_INACTIVE                                         smithy.SchemaExtensions
+	eBenefitAllocationStatus_FULFILLED                                        smithy.SchemaExtensions
+	e_BenefitAllocationStatusList                                             smithy.SchemaExtensions
+	e_BenefitAllocationStatusList_member                                      smithy.SchemaExtensions
+	e_BenefitAllocationSummaries                                              smithy.SchemaExtensions
+	e_BenefitAllocationSummaries_member                                       smithy.SchemaExtensions
+	eBenefitAllocationSummary                                                 smithy.SchemaExtensions
+	eBenefitAllocationSummary_Id                                              smithy.SchemaExtensions
+	eBenefitAllocationSummary_Catalog                                         smithy.SchemaExtensions
+	eBenefitAllocationSummary_Arn                                             smithy.SchemaExtensions
+	eBenefitAllocationSummary_Status                                          smithy.SchemaExtensions
+	eBenefitAllocationSummary_StatusReason                                    smithy.SchemaExtensions
+	eBenefitAllocationSummary_Name                                            smithy.SchemaExtensions
+	eBenefitAllocationSummary_BenefitId                                       smithy.SchemaExtensions
+	eBenefitAllocationSummary_BenefitApplicationId                            smithy.SchemaExtensions
+	eBenefitAllocationSummary_FulfillmentTypes                                smithy.SchemaExtensions
+	eBenefitAllocationSummary_CreatedAt                                       smithy.SchemaExtensions
+	eBenefitAllocationSummary_ExpiresAt                                       smithy.SchemaExtensions
+	eBenefitAllocationSummary_ApplicableBenefitIds                            smithy.SchemaExtensions
+	e_BenefitApplicationDescription                                           smithy.SchemaExtensions
+	e_BenefitApplicationId                                                    smithy.SchemaExtensions
+	e_BenefitApplicationIdentifier                                            smithy.SchemaExtensions
+	e_BenefitApplicationIdentifierList                                        smithy.SchemaExtensions
+	e_BenefitApplicationIdentifierList_member                                 smithy.SchemaExtensions
+	e_BenefitApplicationName                                                  smithy.SchemaExtensions
+	e_BenefitApplicationStage                                                 smithy.SchemaExtensions
+	eBenefitApplicationStatus                                                 smithy.SchemaExtensions
+	eBenefitApplicationStatus_PENDING_SUBMISSION                              smithy.SchemaExtensions
+	eBenefitApplicationStatus_IN_REVIEW                                       smithy.SchemaExtensions
+	eBenefitApplicationStatus_ACTION_REQUIRED                                 smithy.SchemaExtensions
+	eBenefitApplicationStatus_APPROVED                                        smithy.SchemaExtensions
+	eBenefitApplicationStatus_REJECTED                                        smithy.SchemaExtensions
+	eBenefitApplicationStatus_CANCELED                                        smithy.SchemaExtensions
+	e_BenefitApplicationSummaries                                             smithy.SchemaExtensions
+	e_BenefitApplicationSummaries_member                                      smithy.SchemaExtensions
+	eBenefitApplicationSummary                                                smithy.SchemaExtensions
+	eBenefitApplicationSummary_Catalog                                        smithy.SchemaExtensions
+	eBenefitApplicationSummary_Name                                           smithy.SchemaExtensions
+	eBenefitApplicationSummary_Id                                             smithy.SchemaExtensions
+	eBenefitApplicationSummary_Arn                                            smithy.SchemaExtensions
+	eBenefitApplicationSummary_BenefitId                                      smithy.SchemaExtensions
+	eBenefitApplicationSummary_Programs                                       smithy.SchemaExtensions
+	eBenefitApplicationSummary_FulfillmentTypes                               smithy.SchemaExtensions
+	eBenefitApplicationSummary_Status                                         smithy.SchemaExtensions
+	eBenefitApplicationSummary_Stage                                          smithy.SchemaExtensions
+	eBenefitApplicationSummary_CreatedAt                                      smithy.SchemaExtensions
+	eBenefitApplicationSummary_UpdatedAt                                      smithy.SchemaExtensions
+	eBenefitApplicationSummary_BenefitApplicationDetails                      smithy.SchemaExtensions
+	eBenefitApplicationSummary_AssociatedResources                            smithy.SchemaExtensions
+	e_BenefitId                                                               smithy.SchemaExtensions
+	e_BenefitIdentifiers                                                      smithy.SchemaExtensions
+	e_BenefitIdentifiers_member                                               smithy.SchemaExtensions
+	e_BenefitIds                                                              smithy.SchemaExtensions
+	e_BenefitIds_member                                                       smithy.SchemaExtensions
+	eBenefitStatus                                                            smithy.SchemaExtensions
+	eBenefitStatus_ACTIVE                                                     smithy.SchemaExtensions
+	eBenefitStatus_INACTIVE                                                   smithy.SchemaExtensions
+	e_BenefitStatuses                                                         smithy.SchemaExtensions
+	e_BenefitStatuses_member                                                  smithy.SchemaExtensions
+	e_BenefitSummaries                                                        smithy.SchemaExtensions
+	e_BenefitSummaries_member                                                 smithy.SchemaExtensions
+	eBenefitSummary                                                           smithy.SchemaExtensions
+	eBenefitSummary_Id                                                        smithy.SchemaExtensions
+	eBenefitSummary_Catalog                                                   smithy.SchemaExtensions
+	eBenefitSummary_Arn                                                       smithy.SchemaExtensions
+	eBenefitSummary_Name                                                      smithy.SchemaExtensions
+	eBenefitSummary_Description                                               smithy.SchemaExtensions
+	eBenefitSummary_Programs                                                  smithy.SchemaExtensions
+	eBenefitSummary_FulfillmentTypes                                          smithy.SchemaExtensions
+	eBenefitSummary_Status                                                    smithy.SchemaExtensions
+	e_CatalogName                                                             smithy.SchemaExtensions
+	eConflictException                                                        smithy.SchemaExtensions
+	eConflictException_Message                                                smithy.SchemaExtensions
+	eConsumableDetails                                                        smithy.SchemaExtensions
+	eConsumableDetails_AllocatedAmount                                        smithy.SchemaExtensions
+	eConsumableDetails_RemainingAmount                                        smithy.SchemaExtensions
+	eConsumableDetails_UtilizedAmount                                         smithy.SchemaExtensions
+	eConsumableDetails_IssuanceDetails                                        smithy.SchemaExtensions
+	eContact                                                                  smithy.SchemaExtensions
+	eContact_Email                                                            smithy.SchemaExtensions
+	eContact_FirstName                                                        smithy.SchemaExtensions
+	eContact_LastName                                                         smithy.SchemaExtensions
+	eContact_BusinessTitle                                                    smithy.SchemaExtensions
+	eContact_Phone                                                            smithy.SchemaExtensions
+	e_ContactEmail                                                            smithy.SchemaExtensions
+	e_ContactFirstName                                                        smithy.SchemaExtensions
+	e_ContactLastName                                                         smithy.SchemaExtensions
+	e_ContactPhone                                                            smithy.SchemaExtensions
+	e_Contacts                                                                smithy.SchemaExtensions
+	e_Contacts_member                                                         smithy.SchemaExtensions
+	eCreditCode                                                               smithy.SchemaExtensions
+	eCreditCode_AwsAccountId                                                  smithy.SchemaExtensions
+	eCreditCode_Value                                                         smithy.SchemaExtensions
+	eCreditCode_AwsCreditCode                                                 smithy.SchemaExtensions
+	eCreditCode_Status                                                        smithy.SchemaExtensions
+	eCreditCode_IssuedAt                                                      smithy.SchemaExtensions
+	eCreditCode_ExpiresAt                                                     smithy.SchemaExtensions
+	e_CreditCodes                                                             smithy.SchemaExtensions
+	e_CreditCodes_member                                                      smithy.SchemaExtensions
+	eCreditDetails                                                            smithy.SchemaExtensions
+	eCreditDetails_AllocatedAmount                                            smithy.SchemaExtensions
+	eCreditDetails_IssuedAmount                                               smithy.SchemaExtensions
+	eCreditDetails_Codes                                                      smithy.SchemaExtensions
+	eCurrencyCode                                                             smithy.SchemaExtensions
+	eCurrencyCode_AED                                                         smithy.SchemaExtensions
+	eCurrencyCode_AMD                                                         smithy.SchemaExtensions
+	eCurrencyCode_ARS                                                         smithy.SchemaExtensions
+	eCurrencyCode_AUD                                                         smithy.SchemaExtensions
+	eCurrencyCode_AWG                                                         smithy.SchemaExtensions
+	eCurrencyCode_AZN                                                         smithy.SchemaExtensions
+	eCurrencyCode_BBD                                                         smithy.SchemaExtensions
+	eCurrencyCode_BDT                                                         smithy.SchemaExtensions
+	eCurrencyCode_BGN                                                         smithy.SchemaExtensions
+	eCurrencyCode_BMD                                                         smithy.SchemaExtensions
+	eCurrencyCode_BND                                                         smithy.SchemaExtensions
+	eCurrencyCode_BOB                                                         smithy.SchemaExtensions
+	eCurrencyCode_BRL                                                         smithy.SchemaExtensions
+	eCurrencyCode_BSD                                                         smithy.SchemaExtensions
+	eCurrencyCode_BYR                                                         smithy.SchemaExtensions
+	eCurrencyCode_BZD                                                         smithy.SchemaExtensions
+	eCurrencyCode_CAD                                                         smithy.SchemaExtensions
+	eCurrencyCode_CHF                                                         smithy.SchemaExtensions
+	eCurrencyCode_CLP                                                         smithy.SchemaExtensions
+	eCurrencyCode_CNY                                                         smithy.SchemaExtensions
+	eCurrencyCode_COP                                                         smithy.SchemaExtensions
+	eCurrencyCode_CRC                                                         smithy.SchemaExtensions
+	eCurrencyCode_CZK                                                         smithy.SchemaExtensions
+	eCurrencyCode_DKK                                                         smithy.SchemaExtensions
+	eCurrencyCode_DOP                                                         smithy.SchemaExtensions
+	eCurrencyCode_EEK                                                         smithy.SchemaExtensions
+	eCurrencyCode_EGP                                                         smithy.SchemaExtensions
+	eCurrencyCode_EUR                                                         smithy.SchemaExtensions
+	eCurrencyCode_GBP                                                         smithy.SchemaExtensions
+	eCurrencyCode_GEL                                                         smithy.SchemaExtensions
+	eCurrencyCode_GHS                                                         smithy.SchemaExtensions
+	eCurrencyCode_GTQ                                                         smithy.SchemaExtensions
+	eCurrencyCode_GYD                                                         smithy.SchemaExtensions
+	eCurrencyCode_HKD                                                         smithy.SchemaExtensions
+	eCurrencyCode_HNL                                                         smithy.SchemaExtensions
+	eCurrencyCode_HRK                                                         smithy.SchemaExtensions
+	eCurrencyCode_HTG                                                         smithy.SchemaExtensions
+	eCurrencyCode_HUF                                                         smithy.SchemaExtensions
+	eCurrencyCode_IDR                                                         smithy.SchemaExtensions
+	eCurrencyCode_ILS                                                         smithy.SchemaExtensions
+	eCurrencyCode_INR                                                         smithy.SchemaExtensions
+	eCurrencyCode_ISK                                                         smithy.SchemaExtensions
+	eCurrencyCode_JMD                                                         smithy.SchemaExtensions
+	eCurrencyCode_JPY                                                         smithy.SchemaExtensions
+	eCurrencyCode_KES                                                         smithy.SchemaExtensions
+	eCurrencyCode_KHR                                                         smithy.SchemaExtensions
+	eCurrencyCode_KRW                                                         smithy.SchemaExtensions
+	eCurrencyCode_KYD                                                         smithy.SchemaExtensions
+	eCurrencyCode_KZT                                                         smithy.SchemaExtensions
+	eCurrencyCode_LBP                                                         smithy.SchemaExtensions
+	eCurrencyCode_LKR                                                         smithy.SchemaExtensions
+	eCurrencyCode_LTL                                                         smithy.SchemaExtensions
+	eCurrencyCode_LVL                                                         smithy.SchemaExtensions
+	eCurrencyCode_MAD                                                         smithy.SchemaExtensions
+	eCurrencyCode_MNT                                                         smithy.SchemaExtensions
+	eCurrencyCode_MOP                                                         smithy.SchemaExtensions
+	eCurrencyCode_MUR                                                         smithy.SchemaExtensions
+	eCurrencyCode_MVR                                                         smithy.SchemaExtensions
+	eCurrencyCode_MXN                                                         smithy.SchemaExtensions
+	eCurrencyCode_MYR                                                         smithy.SchemaExtensions
+	eCurrencyCode_NAD                                                         smithy.SchemaExtensions
+	eCurrencyCode_NGN                                                         smithy.SchemaExtensions
+	eCurrencyCode_NIO                                                         smithy.SchemaExtensions
+	eCurrencyCode_NOK                                                         smithy.SchemaExtensions
+	eCurrencyCode_NZD                                                         smithy.SchemaExtensions
+	eCurrencyCode_PAB                                                         smithy.SchemaExtensions
+	eCurrencyCode_PEN                                                         smithy.SchemaExtensions
+	eCurrencyCode_PHP                                                         smithy.SchemaExtensions
+	eCurrencyCode_PKR                                                         smithy.SchemaExtensions
+	eCurrencyCode_PLN                                                         smithy.SchemaExtensions
+	eCurrencyCode_PYG                                                         smithy.SchemaExtensions
+	eCurrencyCode_QAR                                                         smithy.SchemaExtensions
+	eCurrencyCode_RON                                                         smithy.SchemaExtensions
+	eCurrencyCode_RUB                                                         smithy.SchemaExtensions
+	eCurrencyCode_SAR                                                         smithy.SchemaExtensions
+	eCurrencyCode_SEK                                                         smithy.SchemaExtensions
+	eCurrencyCode_SGD                                                         smithy.SchemaExtensions
+	eCurrencyCode_SIT                                                         smithy.SchemaExtensions
+	eCurrencyCode_SKK                                                         smithy.SchemaExtensions
+	eCurrencyCode_THB                                                         smithy.SchemaExtensions
+	eCurrencyCode_TND                                                         smithy.SchemaExtensions
+	eCurrencyCode_TRY                                                         smithy.SchemaExtensions
+	eCurrencyCode_TTD                                                         smithy.SchemaExtensions
+	eCurrencyCode_TWD                                                         smithy.SchemaExtensions
+	eCurrencyCode_TZS                                                         smithy.SchemaExtensions
+	eCurrencyCode_UAH                                                         smithy.SchemaExtensions
+	eCurrencyCode_USD                                                         smithy.SchemaExtensions
+	eCurrencyCode_UYU                                                         smithy.SchemaExtensions
+	eCurrencyCode_UZS                                                         smithy.SchemaExtensions
+	eCurrencyCode_VND                                                         smithy.SchemaExtensions
+	eCurrencyCode_XAF                                                         smithy.SchemaExtensions
+	eCurrencyCode_XCD                                                         smithy.SchemaExtensions
+	eCurrencyCode_XOF                                                         smithy.SchemaExtensions
+	eCurrencyCode_XPF                                                         smithy.SchemaExtensions
+	eCurrencyCode_ZAR                                                         smithy.SchemaExtensions
+	eDisbursementDetails                                                      smithy.SchemaExtensions
+	eDisbursementDetails_DisbursedAmount                                      smithy.SchemaExtensions
+	eDisbursementDetails_IssuanceDetails                                      smithy.SchemaExtensions
+	eFileDetail                                                               smithy.SchemaExtensions
+	eFileDetail_FileURI                                                       smithy.SchemaExtensions
+	eFileDetail_BusinessUseCase                                               smithy.SchemaExtensions
+	eFileDetail_FileName                                                      smithy.SchemaExtensions
+	eFileDetail_FileStatus                                                    smithy.SchemaExtensions
+	eFileDetail_FileStatusReason                                              smithy.SchemaExtensions
+	eFileDetail_FileType                                                      smithy.SchemaExtensions
+	eFileDetail_CreatedBy                                                     smithy.SchemaExtensions
+	eFileDetail_CreatedAt                                                     smithy.SchemaExtensions
+	e_FileDetails                                                             smithy.SchemaExtensions
+	e_FileDetails_member                                                      smithy.SchemaExtensions
+	eFileInput                                                                smithy.SchemaExtensions
+	eFileInput_FileURI                                                        smithy.SchemaExtensions
+	eFileInput_BusinessUseCase                                                smithy.SchemaExtensions
+	e_FileInputDetails                                                        smithy.SchemaExtensions
+	e_FileInputDetails_member                                                 smithy.SchemaExtensions
+	eFileType                                                                 smithy.SchemaExtensions
+	eFileType_DOC                                                             smithy.SchemaExtensions
+	eFileType_DOCX                                                            smithy.SchemaExtensions
+	eFileType_XLSX                                                            smithy.SchemaExtensions
+	eFileType_PPTX                                                            smithy.SchemaExtensions
+	eFileType_PDF                                                             smithy.SchemaExtensions
+	eFileType_PNG                                                             smithy.SchemaExtensions
+	eFileType_JPG                                                             smithy.SchemaExtensions
+	eFileType_SVG                                                             smithy.SchemaExtensions
+	eFileType_CSV                                                             smithy.SchemaExtensions
+	e_FileURI                                                                 smithy.SchemaExtensions
+	eFulfillmentDetails                                                       smithy.SchemaExtensions
+	eFulfillmentDetails_DisbursementDetails                                   smithy.SchemaExtensions
+	eFulfillmentDetails_ConsumableDetails                                     smithy.SchemaExtensions
+	eFulfillmentDetails_CreditDetails                                         smithy.SchemaExtensions
+	eFulfillmentDetails_AccessDetails                                         smithy.SchemaExtensions
+	eFulfillmentType                                                          smithy.SchemaExtensions
+	eFulfillmentType_CREDITS                                                  smithy.SchemaExtensions
+	eFulfillmentType_CASH                                                     smithy.SchemaExtensions
+	eFulfillmentType_ACCESS                                                   smithy.SchemaExtensions
+	e_FulfillmentTypes                                                        smithy.SchemaExtensions
+	e_FulfillmentTypes_member                                                 smithy.SchemaExtensions
+	eInternalServerException                                                  smithy.SchemaExtensions
+	eInternalServerException_Message                                          smithy.SchemaExtensions
+	eIssuanceDetail                                                           smithy.SchemaExtensions
+	eIssuanceDetail_IssuanceId                                                smithy.SchemaExtensions
+	eIssuanceDetail_IssuanceAmount                                            smithy.SchemaExtensions
+	eIssuanceDetail_IssuedAt                                                  smithy.SchemaExtensions
+	eMonetaryValue                                                            smithy.SchemaExtensions
+	eMonetaryValue_Amount                                                     smithy.SchemaExtensions
+	eMonetaryValue_CurrencyCode                                               smithy.SchemaExtensions
+	e_Program                                                                 smithy.SchemaExtensions
+	e_Programs                                                                smithy.SchemaExtensions
+	e_Programs_member                                                         smithy.SchemaExtensions
+	eResourceNotFoundException                                                smithy.SchemaExtensions
+	eResourceNotFoundException_Message                                        smithy.SchemaExtensions
+	eResourceType                                                             smithy.SchemaExtensions
+	eResourceType_OPPORTUNITY                                                 smithy.SchemaExtensions
+	eResourceType_BENEFIT_ALLOCATION                                          smithy.SchemaExtensions
+	eServiceQuotaExceededException                                            smithy.SchemaExtensions
+	eServiceQuotaExceededException_Message                                    smithy.SchemaExtensions
+	eServiceQuotaExceededException_ResourceId                                 smithy.SchemaExtensions
+	eServiceQuotaExceededException_ResourceType                               smithy.SchemaExtensions
+	eServiceQuotaExceededException_QuotaCode                                  smithy.SchemaExtensions
+	e_Stages                                                                  smithy.SchemaExtensions
+	e_Stages_member                                                           smithy.SchemaExtensions
+	e_Statuses                                                                smithy.SchemaExtensions
+	e_Statuses_member                                                         smithy.SchemaExtensions
+	e_StatusReasonCode                                                        smithy.SchemaExtensions
+	e_StatusReasonCodes                                                       smithy.SchemaExtensions
+	e_StatusReasonCodes_member                                                smithy.SchemaExtensions
+	eTag                                                                      smithy.SchemaExtensions
+	eTag_Key                                                                  smithy.SchemaExtensions
+	eTag_Value                                                                smithy.SchemaExtensions
+	e_TaggableResourceArn                                                     smithy.SchemaExtensions
+	e_TagKey                                                                  smithy.SchemaExtensions
+	e_TagKeyList                                                              smithy.SchemaExtensions
+	e_TagKeyList_member                                                       smithy.SchemaExtensions
+	e_Tags                                                                    smithy.SchemaExtensions
+	e_Tags_member                                                             smithy.SchemaExtensions
+	e_TagValue                                                                smithy.SchemaExtensions
+	eThrottlingException                                                      smithy.SchemaExtensions
+	eThrottlingException_Message                                              smithy.SchemaExtensions
+	e_Timestamp                                                               smithy.SchemaExtensions
+	eValidationException                                                      smithy.SchemaExtensions
+	eValidationException_Message                                              smithy.SchemaExtensions
+	eValidationException_Reason                                               smithy.SchemaExtensions
+	eValidationException_FieldList                                            smithy.SchemaExtensions
+	eValidationExceptionErrorCode                                             smithy.SchemaExtensions
+	eValidationExceptionErrorCode_REQUIRED_FIELD_MISSING                      smithy.SchemaExtensions
+	eValidationExceptionErrorCode_INVALID_ENUM_VALUE                          smithy.SchemaExtensions
+	eValidationExceptionErrorCode_INVALID_STRING_FORMAT                       smithy.SchemaExtensions
+	eValidationExceptionErrorCode_INVALID_VALUE                               smithy.SchemaExtensions
+	eValidationExceptionErrorCode_NOT_ENOUGH_VALUES                           smithy.SchemaExtensions
+	eValidationExceptionErrorCode_TOO_MANY_VALUES                             smithy.SchemaExtensions
+	eValidationExceptionErrorCode_INVALID_RESOURCE_STATE                      smithy.SchemaExtensions
+	eValidationExceptionErrorCode_DUPLICATE_KEY_VALUE                         smithy.SchemaExtensions
+	eValidationExceptionErrorCode_VALUE_OUT_OF_RANGE                          smithy.SchemaExtensions
+	eValidationExceptionErrorCode_ACTION_NOT_PERMITTED                        smithy.SchemaExtensions
+	eValidationExceptionField                                                 smithy.SchemaExtensions
+	eValidationExceptionField_Name                                            smithy.SchemaExtensions
+	eValidationExceptionField_Message                                         smithy.SchemaExtensions
+	eValidationExceptionField_Code                                            smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                                            smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member                                     smithy.SchemaExtensions
+	eValidationExceptionReason                                                smithy.SchemaExtensions
+	eValidationExceptionReason_UNKNOWN_OPERATION                              smithy.SchemaExtensions
+	eValidationExceptionReason_CANNOT_PARSE                                   smithy.SchemaExtensions
+	eValidationExceptionReason_FIELD_VALIDATION_FAILED                        smithy.SchemaExtensions
+	eValidationExceptionReason_OTHER                                          smithy.SchemaExtensions
+	eValidationExceptionReason_BUSINESS_VALIDATION_FAILED                     smithy.SchemaExtensions
+	eAmendBenefitApplicationInput                                             smithy.SchemaExtensions
+	eAmendBenefitApplicationInput_Catalog                                     smithy.SchemaExtensions
+	eAmendBenefitApplicationInput_ClientToken                                 smithy.SchemaExtensions
+	eAmendBenefitApplicationInput_Revision                                    smithy.SchemaExtensions
+	eAmendBenefitApplicationInput_Identifier                                  smithy.SchemaExtensions
+	eAmendBenefitApplicationInput_AmendmentReason                             smithy.SchemaExtensions
+	eAmendBenefitApplicationInput_Amendments                                  smithy.SchemaExtensions
+	eAmendBenefitApplicationOutput                                            smithy.SchemaExtensions
+	eAssociateBenefitApplicationResourceInput                                 smithy.SchemaExtensions
+	eAssociateBenefitApplicationResourceInput_Catalog                         smithy.SchemaExtensions
+	eAssociateBenefitApplicationResourceInput_BenefitApplicationIdentifier    smithy.SchemaExtensions
+	eAssociateBenefitApplicationResourceInput_ResourceArn                     smithy.SchemaExtensions
+	eAssociateBenefitApplicationResourceOutput                                smithy.SchemaExtensions
+	eAssociateBenefitApplicationResourceOutput_Id                             smithy.SchemaExtensions
+	eAssociateBenefitApplicationResourceOutput_Arn                            smithy.SchemaExtensions
+	eAssociateBenefitApplicationResourceOutput_Revision                       smithy.SchemaExtensions
+	eCancelBenefitApplicationInput                                            smithy.SchemaExtensions
+	eCancelBenefitApplicationInput_Catalog                                    smithy.SchemaExtensions
+	eCancelBenefitApplicationInput_ClientToken                                smithy.SchemaExtensions
+	eCancelBenefitApplicationInput_Identifier                                 smithy.SchemaExtensions
+	eCancelBenefitApplicationInput_Reason                                     smithy.SchemaExtensions
+	eCancelBenefitApplicationOutput                                           smithy.SchemaExtensions
+	eCreateBenefitApplicationInput                                            smithy.SchemaExtensions
+	eCreateBenefitApplicationInput_Catalog                                    smithy.SchemaExtensions
+	eCreateBenefitApplicationInput_ClientToken                                smithy.SchemaExtensions
+	eCreateBenefitApplicationInput_Name                                       smithy.SchemaExtensions
+	eCreateBenefitApplicationInput_Description                                smithy.SchemaExtensions
+	eCreateBenefitApplicationInput_BenefitIdentifier                          smithy.SchemaExtensions
+	eCreateBenefitApplicationInput_FulfillmentTypes                           smithy.SchemaExtensions
+	eCreateBenefitApplicationInput_BenefitApplicationDetails                  smithy.SchemaExtensions
+	eCreateBenefitApplicationInput_Tags                                       smithy.SchemaExtensions
+	eCreateBenefitApplicationInput_AssociatedResources                        smithy.SchemaExtensions
+	eCreateBenefitApplicationInput_PartnerContacts                            smithy.SchemaExtensions
+	eCreateBenefitApplicationInput_FileDetails                                smithy.SchemaExtensions
+	eCreateBenefitApplicationOutput                                           smithy.SchemaExtensions
+	eCreateBenefitApplicationOutput_Id                                        smithy.SchemaExtensions
+	eCreateBenefitApplicationOutput_Arn                                       smithy.SchemaExtensions
+	eCreateBenefitApplicationOutput_Revision                                  smithy.SchemaExtensions
+	eDisassociateBenefitApplicationResourceInput                              smithy.SchemaExtensions
+	eDisassociateBenefitApplicationResourceInput_Catalog                      smithy.SchemaExtensions
+	eDisassociateBenefitApplicationResourceInput_BenefitApplicationIdentifier smithy.SchemaExtensions
+	eDisassociateBenefitApplicationResourceInput_ResourceArn                  smithy.SchemaExtensions
+	eDisassociateBenefitApplicationResourceOutput                             smithy.SchemaExtensions
+	eDisassociateBenefitApplicationResourceOutput_Id                          smithy.SchemaExtensions
+	eDisassociateBenefitApplicationResourceOutput_Arn                         smithy.SchemaExtensions
+	eDisassociateBenefitApplicationResourceOutput_Revision                    smithy.SchemaExtensions
+	eGetBenefitAllocationInput                                                smithy.SchemaExtensions
+	eGetBenefitAllocationInput_Catalog                                        smithy.SchemaExtensions
+	eGetBenefitAllocationInput_Identifier                                     smithy.SchemaExtensions
+	eGetBenefitAllocationOutput                                               smithy.SchemaExtensions
+	eGetBenefitAllocationOutput_Id                                            smithy.SchemaExtensions
+	eGetBenefitAllocationOutput_Catalog                                       smithy.SchemaExtensions
+	eGetBenefitAllocationOutput_Arn                                           smithy.SchemaExtensions
+	eGetBenefitAllocationOutput_Name                                          smithy.SchemaExtensions
+	eGetBenefitAllocationOutput_Description                                   smithy.SchemaExtensions
+	eGetBenefitAllocationOutput_Status                                        smithy.SchemaExtensions
+	eGetBenefitAllocationOutput_StatusReason                                  smithy.SchemaExtensions
+	eGetBenefitAllocationOutput_BenefitApplicationId                          smithy.SchemaExtensions
+	eGetBenefitAllocationOutput_BenefitId                                     smithy.SchemaExtensions
+	eGetBenefitAllocationOutput_FulfillmentType                               smithy.SchemaExtensions
+	eGetBenefitAllocationOutput_ApplicableBenefitIds                          smithy.SchemaExtensions
+	eGetBenefitAllocationOutput_FulfillmentDetail                             smithy.SchemaExtensions
+	eGetBenefitAllocationOutput_CreatedAt                                     smithy.SchemaExtensions
+	eGetBenefitAllocationOutput_UpdatedAt                                     smithy.SchemaExtensions
+	eGetBenefitAllocationOutput_StartsAt                                      smithy.SchemaExtensions
+	eGetBenefitAllocationOutput_ExpiresAt                                     smithy.SchemaExtensions
+	eGetBenefitApplicationInput                                               smithy.SchemaExtensions
+	eGetBenefitApplicationInput_Catalog                                       smithy.SchemaExtensions
+	eGetBenefitApplicationInput_Identifier                                    smithy.SchemaExtensions
+	eGetBenefitApplicationOutput                                              smithy.SchemaExtensions
+	eGetBenefitApplicationOutput_Id                                           smithy.SchemaExtensions
+	eGetBenefitApplicationOutput_Arn                                          smithy.SchemaExtensions
+	eGetBenefitApplicationOutput_Catalog                                      smithy.SchemaExtensions
+	eGetBenefitApplicationOutput_BenefitId                                    smithy.SchemaExtensions
+	eGetBenefitApplicationOutput_Name                                         smithy.SchemaExtensions
+	eGetBenefitApplicationOutput_Description                                  smithy.SchemaExtensions
+	eGetBenefitApplicationOutput_FulfillmentTypes                             smithy.SchemaExtensions
+	eGetBenefitApplicationOutput_BenefitApplicationDetails                    smithy.SchemaExtensions
+	eGetBenefitApplicationOutput_Programs                                     smithy.SchemaExtensions
+	eGetBenefitApplicationOutput_Status                                       smithy.SchemaExtensions
+	eGetBenefitApplicationOutput_Stage                                        smithy.SchemaExtensions
+	eGetBenefitApplicationOutput_StatusReason                                 smithy.SchemaExtensions
+	eGetBenefitApplicationOutput_StatusReasonCode                             smithy.SchemaExtensions
+	eGetBenefitApplicationOutput_StatusReasonCodes                            smithy.SchemaExtensions
+	eGetBenefitApplicationOutput_CreatedAt                                    smithy.SchemaExtensions
+	eGetBenefitApplicationOutput_UpdatedAt                                    smithy.SchemaExtensions
+	eGetBenefitApplicationOutput_Revision                                     smithy.SchemaExtensions
+	eGetBenefitApplicationOutput_AssociatedResources                          smithy.SchemaExtensions
+	eGetBenefitApplicationOutput_PartnerContacts                              smithy.SchemaExtensions
+	eGetBenefitApplicationOutput_FileDetails                                  smithy.SchemaExtensions
+	eGetBenefitInput                                                          smithy.SchemaExtensions
+	eGetBenefitInput_Catalog                                                  smithy.SchemaExtensions
+	eGetBenefitInput_Identifier                                               smithy.SchemaExtensions
+	eGetBenefitOutput                                                         smithy.SchemaExtensions
+	eGetBenefitOutput_Id                                                      smithy.SchemaExtensions
+	eGetBenefitOutput_Catalog                                                 smithy.SchemaExtensions
+	eGetBenefitOutput_Arn                                                     smithy.SchemaExtensions
+	eGetBenefitOutput_Name                                                    smithy.SchemaExtensions
+	eGetBenefitOutput_Description                                             smithy.SchemaExtensions
+	eGetBenefitOutput_Programs                                                smithy.SchemaExtensions
+	eGetBenefitOutput_FulfillmentTypes                                        smithy.SchemaExtensions
+	eGetBenefitOutput_BenefitRequestSchema                                    smithy.SchemaExtensions
+	eGetBenefitOutput_Status                                                  smithy.SchemaExtensions
+	eListBenefitAllocationsInput                                              smithy.SchemaExtensions
+	eListBenefitAllocationsInput_Catalog                                      smithy.SchemaExtensions
+	eListBenefitAllocationsInput_FulfillmentTypes                             smithy.SchemaExtensions
+	eListBenefitAllocationsInput_BenefitIdentifiers                           smithy.SchemaExtensions
+	eListBenefitAllocationsInput_BenefitApplicationIdentifiers                smithy.SchemaExtensions
+	eListBenefitAllocationsInput_Status                                       smithy.SchemaExtensions
+	eListBenefitAllocationsInput_MaxResults                                   smithy.SchemaExtensions
+	eListBenefitAllocationsInput_NextToken                                    smithy.SchemaExtensions
+	eListBenefitAllocationsOutput                                             smithy.SchemaExtensions
+	eListBenefitAllocationsOutput_BenefitAllocationSummaries                  smithy.SchemaExtensions
+	eListBenefitAllocationsOutput_NextToken                                   smithy.SchemaExtensions
+	eListBenefitApplicationsInput                                             smithy.SchemaExtensions
+	eListBenefitApplicationsInput_Catalog                                     smithy.SchemaExtensions
+	eListBenefitApplicationsInput_Programs                                    smithy.SchemaExtensions
+	eListBenefitApplicationsInput_FulfillmentTypes                            smithy.SchemaExtensions
+	eListBenefitApplicationsInput_BenefitIdentifiers                          smithy.SchemaExtensions
+	eListBenefitApplicationsInput_Status                                      smithy.SchemaExtensions
+	eListBenefitApplicationsInput_Stages                                      smithy.SchemaExtensions
+	eListBenefitApplicationsInput_AssociatedResources                         smithy.SchemaExtensions
+	eListBenefitApplicationsInput_AssociatedResourceArns                      smithy.SchemaExtensions
+	eListBenefitApplicationsInput_MaxResults                                  smithy.SchemaExtensions
+	eListBenefitApplicationsInput_NextToken                                   smithy.SchemaExtensions
+	eListBenefitApplicationsOutput                                            smithy.SchemaExtensions
+	eListBenefitApplicationsOutput_BenefitApplicationSummaries                smithy.SchemaExtensions
+	eListBenefitApplicationsOutput_NextToken                                  smithy.SchemaExtensions
+	eListBenefitsInput                                                        smithy.SchemaExtensions
+	eListBenefitsInput_Catalog                                                smithy.SchemaExtensions
+	eListBenefitsInput_Programs                                               smithy.SchemaExtensions
+	eListBenefitsInput_FulfillmentTypes                                       smithy.SchemaExtensions
+	eListBenefitsInput_Status                                                 smithy.SchemaExtensions
+	eListBenefitsInput_MaxResults                                             smithy.SchemaExtensions
+	eListBenefitsInput_NextToken                                              smithy.SchemaExtensions
+	eListBenefitsOutput                                                       smithy.SchemaExtensions
+	eListBenefitsOutput_BenefitSummaries                                      smithy.SchemaExtensions
+	eListBenefitsOutput_NextToken                                             smithy.SchemaExtensions
+	eListTagsForResourceRequest                                               smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceArn                                   smithy.SchemaExtensions
+	eListTagsForResourceResponse                                              smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                                         smithy.SchemaExtensions
+	eRecallBenefitApplicationInput                                            smithy.SchemaExtensions
+	eRecallBenefitApplicationInput_Catalog                                    smithy.SchemaExtensions
+	eRecallBenefitApplicationInput_ClientToken                                smithy.SchemaExtensions
+	eRecallBenefitApplicationInput_Identifier                                 smithy.SchemaExtensions
+	eRecallBenefitApplicationInput_Reason                                     smithy.SchemaExtensions
+	eRecallBenefitApplicationOutput                                           smithy.SchemaExtensions
+	eSubmitBenefitApplicationInput                                            smithy.SchemaExtensions
+	eSubmitBenefitApplicationInput_Catalog                                    smithy.SchemaExtensions
+	eSubmitBenefitApplicationInput_Identifier                                 smithy.SchemaExtensions
+	eSubmitBenefitApplicationOutput                                           smithy.SchemaExtensions
+	eTagResourceRequest                                                       smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                                           smithy.SchemaExtensions
+	eTagResourceRequest_tags                                                  smithy.SchemaExtensions
+	eTagResourceResponse                                                      smithy.SchemaExtensions
+	eUntagResourceRequest                                                     smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                                         smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                                             smithy.SchemaExtensions
+	eUntagResourceResponse                                                    smithy.SchemaExtensions
+	eUpdateBenefitApplicationInput                                            smithy.SchemaExtensions
+	eUpdateBenefitApplicationInput_Catalog                                    smithy.SchemaExtensions
+	eUpdateBenefitApplicationInput_ClientToken                                smithy.SchemaExtensions
+	eUpdateBenefitApplicationInput_Name                                       smithy.SchemaExtensions
+	eUpdateBenefitApplicationInput_Description                                smithy.SchemaExtensions
+	eUpdateBenefitApplicationInput_Identifier                                 smithy.SchemaExtensions
+	eUpdateBenefitApplicationInput_Revision                                   smithy.SchemaExtensions
+	eUpdateBenefitApplicationInput_BenefitApplicationDetails                  smithy.SchemaExtensions
+	eUpdateBenefitApplicationInput_PartnerContacts                            smithy.SchemaExtensions
+	eUpdateBenefitApplicationInput_FileDetails                                smithy.SchemaExtensions
+	eUpdateBenefitApplicationOutput                                           smithy.SchemaExtensions
+	eUpdateBenefitApplicationOutput_Id                                        smithy.SchemaExtensions
+	eUpdateBenefitApplicationOutput_Arn                                       smithy.SchemaExtensions
+	eUpdateBenefitApplicationOutput_Revision                                  smithy.SchemaExtensions
+)
 
 var (
 	iAmendBenefitApplication                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralbenefits", Name: "AmendBenefitApplication"}
@@ -355,535 +882,535 @@ var mUpdateBenefitApplicationInput = smithy.SchemaMembers{List: []*smithy.Schema
 }}
 var mUpdateBenefitApplicationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBenefitApplicationOutput_Id, &sUpdateBenefitApplicationOutput_Arn, &sUpdateBenefitApplicationOutput_Revision}}
 
-var sAmendBenefitApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmendBenefitApplication, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sAssociateBenefitApplicationResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateBenefitApplicationResource, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sCancelBenefitApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelBenefitApplication, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sCreateBenefitApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBenefitApplication, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sDisassociateBenefitApplicationResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateBenefitApplicationResource, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sGetBenefit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBenefit, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sGetBenefitAllocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBenefitAllocation, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sGetBenefitApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBenefitApplication, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sListBenefitAllocations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBenefitAllocations, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sListBenefitApplications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBenefitApplications, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sListBenefits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBenefits, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sRecallBenefitApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecallBenefitApplication, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sSubmitBenefitApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubmitBenefitApplication, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sUpdateBenefitApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBenefitApplication, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var s_PartnerCentralBenefitsService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartnerCentralBenefitsService, Type: smithy.ShapeTypeService, Ext: &ext[17]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &ext[18]})
-var sAccessDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDetails, Members: &mAccessDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[20]})
-var sAmendment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmendment, Members: &mAmendment, Type: smithy.ShapeTypeStructure, Ext: &ext[22]})
-var s_AmendmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmendmentList, Members: &m_AmendmentList, Type: smithy.ShapeTypeList, Ext: &ext[25]})
-var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[27]})
-var s_Arns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arns, Members: &m_Arns, Type: smithy.ShapeTypeList, Ext: &ext[28]})
-var sAssociatedResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatedResource, Members: &mAssociatedResource, Type: smithy.ShapeTypeStructure, Ext: &ext[30]})
-var s_AssociatedResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociatedResources, Members: &m_AssociatedResources, Type: smithy.ShapeTypeList, Ext: &ext[34]})
-var s_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &ext[36]})
-var s_BenefitAllocationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitAllocationArn, Type: smithy.ShapeTypeString, Ext: &ext[39]})
-var s_BenefitAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitAllocationId, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var s_BenefitAllocationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitAllocationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[41]})
-var s_BenefitAllocationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitAllocationName, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var sBenefitAllocationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBenefitAllocationStatus, Members: &mBenefitAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[43]})
-var s_BenefitAllocationStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitAllocationStatusList, Members: &m_BenefitAllocationStatusList, Type: smithy.ShapeTypeList, Ext: &ext[47]})
-var s_BenefitAllocationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitAllocationSummaries, Members: &m_BenefitAllocationSummaries, Type: smithy.ShapeTypeList, Ext: &ext[49]})
-var sBenefitAllocationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBenefitAllocationSummary, Members: &mBenefitAllocationSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[51]})
-var s_BenefitApplicationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitApplicationDescription, Type: smithy.ShapeTypeString, Ext: &ext[64]})
-var s_BenefitApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitApplicationId, Type: smithy.ShapeTypeString, Ext: &ext[65]})
-var s_BenefitApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitApplicationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[66]})
-var s_BenefitApplicationIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitApplicationIdentifierList, Members: &m_BenefitApplicationIdentifierList, Type: smithy.ShapeTypeList, Ext: &ext[67]})
-var s_BenefitApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitApplicationName, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var s_BenefitApplicationStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitApplicationStage, Type: smithy.ShapeTypeString, Ext: &ext[70]})
-var sBenefitApplicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBenefitApplicationStatus, Members: &mBenefitApplicationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[71]})
-var s_BenefitApplicationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitApplicationSummaries, Members: &m_BenefitApplicationSummaries, Type: smithy.ShapeTypeList, Ext: &ext[78]})
-var sBenefitApplicationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBenefitApplicationSummary, Members: &mBenefitApplicationSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var s_BenefitId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitId, Type: smithy.ShapeTypeString, Ext: &ext[94]})
-var s_BenefitIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitIdentifiers, Members: &m_BenefitIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[95]})
-var s_BenefitIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitIds, Members: &m_BenefitIds, Type: smithy.ShapeTypeList, Ext: &ext[97]})
-var sBenefitStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBenefitStatus, Members: &mBenefitStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[99]})
-var s_BenefitStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitStatuses, Members: &m_BenefitStatuses, Type: smithy.ShapeTypeList, Ext: &ext[102]})
-var s_BenefitSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitSummaries, Members: &m_BenefitSummaries, Type: smithy.ShapeTypeList, Ext: &ext[104]})
-var sBenefitSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBenefitSummary, Members: &mBenefitSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[106]})
-var s_CatalogName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &ext[115]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &ext[116]})
-var sConsumableDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConsumableDetails, Members: &mConsumableDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[118]})
-var sContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContact, Members: &mContact, Type: smithy.ShapeTypeStructure, Ext: &ext[123]})
-var s_ContactEmail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactEmail, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[129]})
-var s_ContactFirstName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactFirstName, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var s_ContactLastName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactLastName, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[131]})
-var s_ContactPhone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactPhone, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[132]})
-var s_Contacts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Contacts, Members: &m_Contacts, Type: smithy.ShapeTypeList, Ext: &ext[133]})
-var sCreditCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreditCode, Members: &mCreditCode, Type: smithy.ShapeTypeStructure, Ext: &ext[135]})
-var s_CreditCodes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreditCodes, Members: &m_CreditCodes, Type: smithy.ShapeTypeList, Ext: &ext[142]})
-var sCreditDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreditDetails, Members: &mCreditDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[144]})
-var sCurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCurrencyCode, Members: &mCurrencyCode, Type: smithy.ShapeTypeEnum, Ext: &ext[148]})
-var sDisbursementDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisbursementDetails, Members: &mDisbursementDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[244]})
-var sFileDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileDetail, Members: &mFileDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[247]})
-var s_FileDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileDetails, Members: &m_FileDetails, Type: smithy.ShapeTypeList, Ext: &ext[256]})
-var sFileInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileInput, Members: &mFileInput, Type: smithy.ShapeTypeStructure, Ext: &ext[258]})
-var s_FileInputDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileInputDetails, Members: &m_FileInputDetails, Type: smithy.ShapeTypeList, Ext: &ext[261]})
-var sFileType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileType, Members: &mFileType, Type: smithy.ShapeTypeEnum, Ext: &ext[263]})
-var s_FileURI = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileURI, Type: smithy.ShapeTypeString, Ext: &ext[273]})
-var sFulfillmentDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFulfillmentDetails, Members: &mFulfillmentDetails, Type: smithy.ShapeTypeUnion, Ext: &ext[274]})
-var sFulfillmentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFulfillmentType, Members: &mFulfillmentType, Type: smithy.ShapeTypeEnum, Ext: &ext[279]})
-var s_FulfillmentTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FulfillmentTypes, Members: &m_FulfillmentTypes, Type: smithy.ShapeTypeList, Ext: &ext[283]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &ext[285]})
-var sIssuanceDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIssuanceDetail, Members: &mIssuanceDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[287]})
-var sMonetaryValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonetaryValue, Members: &mMonetaryValue, Type: smithy.ShapeTypeStructure, Ext: &ext[291]})
-var s_Program = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Program, Type: smithy.ShapeTypeString, Ext: &ext[294]})
-var s_Programs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Programs, Members: &m_Programs, Type: smithy.ShapeTypeList, Ext: &ext[295]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &ext[297]})
-var sResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &ext[299]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &ext[302]})
-var s_Stages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Stages, Members: &m_Stages, Type: smithy.ShapeTypeList, Ext: &ext[307]})
-var s_Statuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Statuses, Members: &m_Statuses, Type: smithy.ShapeTypeList, Ext: &ext[309]})
-var s_StatusReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusReasonCode, Type: smithy.ShapeTypeString, Ext: &ext[311]})
-var s_StatusReasonCodes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusReasonCodes, Members: &m_StatusReasonCodes, Type: smithy.ShapeTypeList, Ext: &ext[312]})
-var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[314]})
-var s_TaggableResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[317]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[318]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[319]})
-var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &ext[321]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[323]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &ext[324]})
-var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Traits: &t26, Type: smithy.ShapeTypeTimestamp, Ext: &ext[326]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &ext[327]})
-var sValidationExceptionErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionErrorCode, Members: &mValidationExceptionErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[331]})
-var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[342]})
-var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[346]})
-var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[348]})
-var sAmendBenefitApplicationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmendBenefitApplicationInput, Members: &mAmendBenefitApplicationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[354]})
-var sAmendBenefitApplicationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmendBenefitApplicationOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[361]})
-var sAssociateBenefitApplicationResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateBenefitApplicationResourceInput, Members: &mAssociateBenefitApplicationResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[362]})
-var sAssociateBenefitApplicationResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateBenefitApplicationResourceOutput, Members: &mAssociateBenefitApplicationResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[366]})
-var sCancelBenefitApplicationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelBenefitApplicationInput, Members: &mCancelBenefitApplicationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[370]})
-var sCancelBenefitApplicationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelBenefitApplicationOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[375]})
-var sCreateBenefitApplicationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBenefitApplicationInput, Members: &mCreateBenefitApplicationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[376]})
-var sCreateBenefitApplicationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBenefitApplicationOutput, Members: &mCreateBenefitApplicationOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[388]})
-var sDisassociateBenefitApplicationResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateBenefitApplicationResourceInput, Members: &mDisassociateBenefitApplicationResourceInput, Type: smithy.ShapeTypeStructure, Ext: &ext[392]})
-var sDisassociateBenefitApplicationResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateBenefitApplicationResourceOutput, Members: &mDisassociateBenefitApplicationResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[396]})
-var sGetBenefitAllocationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBenefitAllocationInput, Members: &mGetBenefitAllocationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[400]})
-var sGetBenefitAllocationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBenefitAllocationOutput, Members: &mGetBenefitAllocationOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[403]})
-var sGetBenefitApplicationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBenefitApplicationInput, Members: &mGetBenefitApplicationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[420]})
-var sGetBenefitApplicationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBenefitApplicationOutput, Members: &mGetBenefitApplicationOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[423]})
-var sGetBenefitInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBenefitInput, Members: &mGetBenefitInput, Type: smithy.ShapeTypeStructure, Ext: &ext[444]})
-var sGetBenefitOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBenefitOutput, Members: &mGetBenefitOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[447]})
-var sListBenefitAllocationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBenefitAllocationsInput, Members: &mListBenefitAllocationsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[457]})
-var sListBenefitAllocationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBenefitAllocationsOutput, Members: &mListBenefitAllocationsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[465]})
-var sListBenefitApplicationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBenefitApplicationsInput, Members: &mListBenefitApplicationsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[468]})
-var sListBenefitApplicationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBenefitApplicationsOutput, Members: &mListBenefitApplicationsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[479]})
-var sListBenefitsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBenefitsInput, Members: &mListBenefitsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[482]})
-var sListBenefitsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBenefitsOutput, Members: &mListBenefitsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[489]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[492]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[494]})
-var sRecallBenefitApplicationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecallBenefitApplicationInput, Members: &mRecallBenefitApplicationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[496]})
-var sRecallBenefitApplicationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecallBenefitApplicationOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[501]})
-var sSubmitBenefitApplicationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubmitBenefitApplicationInput, Members: &mSubmitBenefitApplicationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[502]})
-var sSubmitBenefitApplicationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubmitBenefitApplicationOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[505]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[506]})
-var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[509]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[510]})
-var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[513]})
-var sUpdateBenefitApplicationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBenefitApplicationInput, Members: &mUpdateBenefitApplicationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[514]})
-var sUpdateBenefitApplicationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBenefitApplicationOutput, Members: &mUpdateBenefitApplicationOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[524]})
+var sAmendBenefitApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmendBenefitApplication, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eAmendBenefitApplication})
+var sAssociateBenefitApplicationResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateBenefitApplicationResource, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eAssociateBenefitApplicationResource})
+var sCancelBenefitApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelBenefitApplication, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCancelBenefitApplication})
+var sCreateBenefitApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBenefitApplication, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateBenefitApplication})
+var sDisassociateBenefitApplicationResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateBenefitApplicationResource, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateBenefitApplicationResource})
+var sGetBenefit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBenefit, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eGetBenefit})
+var sGetBenefitAllocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBenefitAllocation, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eGetBenefitAllocation})
+var sGetBenefitApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBenefitApplication, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eGetBenefitApplication})
+var sListBenefitAllocations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBenefitAllocations, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eListBenefitAllocations})
+var sListBenefitApplications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBenefitApplications, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eListBenefitApplications})
+var sListBenefits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBenefits, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eListBenefits})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sRecallBenefitApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecallBenefitApplication, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eRecallBenefitApplication})
+var sSubmitBenefitApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubmitBenefitApplication, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eSubmitBenefitApplication})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateBenefitApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBenefitApplication, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eUpdateBenefitApplication})
+var s_PartnerCentralBenefitsService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartnerCentralBenefitsService, Type: smithy.ShapeTypeService, Ext: &e_PartnerCentralBenefitsService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccessDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDetails, Members: &mAccessDetails, Type: smithy.ShapeTypeStructure, Ext: &eAccessDetails})
+var sAmendment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmendment, Members: &mAmendment, Type: smithy.ShapeTypeStructure, Ext: &eAmendment})
+var s_AmendmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmendmentList, Members: &m_AmendmentList, Type: smithy.ShapeTypeList, Ext: &e_AmendmentList})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var s_Arns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arns, Members: &m_Arns, Type: smithy.ShapeTypeList, Ext: &e_Arns})
+var sAssociatedResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatedResource, Members: &mAssociatedResource, Type: smithy.ShapeTypeStructure, Ext: &eAssociatedResource})
+var s_AssociatedResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociatedResources, Members: &m_AssociatedResources, Type: smithy.ShapeTypeList, Ext: &e_AssociatedResources})
+var s_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &e_Attributes})
+var s_BenefitAllocationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitAllocationArn, Type: smithy.ShapeTypeString, Ext: &e_BenefitAllocationArn})
+var s_BenefitAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitAllocationId, Type: smithy.ShapeTypeString, Ext: &e_BenefitAllocationId})
+var s_BenefitAllocationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitAllocationIdentifier, Type: smithy.ShapeTypeString, Ext: &e_BenefitAllocationIdentifier})
+var s_BenefitAllocationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitAllocationName, Type: smithy.ShapeTypeString, Ext: &e_BenefitAllocationName})
+var sBenefitAllocationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBenefitAllocationStatus, Members: &mBenefitAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &eBenefitAllocationStatus})
+var s_BenefitAllocationStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitAllocationStatusList, Members: &m_BenefitAllocationStatusList, Type: smithy.ShapeTypeList, Ext: &e_BenefitAllocationStatusList})
+var s_BenefitAllocationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitAllocationSummaries, Members: &m_BenefitAllocationSummaries, Type: smithy.ShapeTypeList, Ext: &e_BenefitAllocationSummaries})
+var sBenefitAllocationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBenefitAllocationSummary, Members: &mBenefitAllocationSummary, Type: smithy.ShapeTypeStructure, Ext: &eBenefitAllocationSummary})
+var s_BenefitApplicationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitApplicationDescription, Type: smithy.ShapeTypeString, Ext: &e_BenefitApplicationDescription})
+var s_BenefitApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitApplicationId, Type: smithy.ShapeTypeString, Ext: &e_BenefitApplicationId})
+var s_BenefitApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitApplicationIdentifier, Type: smithy.ShapeTypeString, Ext: &e_BenefitApplicationIdentifier})
+var s_BenefitApplicationIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitApplicationIdentifierList, Members: &m_BenefitApplicationIdentifierList, Type: smithy.ShapeTypeList, Ext: &e_BenefitApplicationIdentifierList})
+var s_BenefitApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitApplicationName, Type: smithy.ShapeTypeString, Ext: &e_BenefitApplicationName})
+var s_BenefitApplicationStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitApplicationStage, Type: smithy.ShapeTypeString, Ext: &e_BenefitApplicationStage})
+var sBenefitApplicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBenefitApplicationStatus, Members: &mBenefitApplicationStatus, Type: smithy.ShapeTypeEnum, Ext: &eBenefitApplicationStatus})
+var s_BenefitApplicationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitApplicationSummaries, Members: &m_BenefitApplicationSummaries, Type: smithy.ShapeTypeList, Ext: &e_BenefitApplicationSummaries})
+var sBenefitApplicationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBenefitApplicationSummary, Members: &mBenefitApplicationSummary, Type: smithy.ShapeTypeStructure, Ext: &eBenefitApplicationSummary})
+var s_BenefitId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitId, Type: smithy.ShapeTypeString, Ext: &e_BenefitId})
+var s_BenefitIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitIdentifiers, Members: &m_BenefitIdentifiers, Type: smithy.ShapeTypeList, Ext: &e_BenefitIdentifiers})
+var s_BenefitIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitIds, Members: &m_BenefitIds, Type: smithy.ShapeTypeList, Ext: &e_BenefitIds})
+var sBenefitStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBenefitStatus, Members: &mBenefitStatus, Type: smithy.ShapeTypeEnum, Ext: &eBenefitStatus})
+var s_BenefitStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitStatuses, Members: &m_BenefitStatuses, Type: smithy.ShapeTypeList, Ext: &e_BenefitStatuses})
+var s_BenefitSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BenefitSummaries, Members: &m_BenefitSummaries, Type: smithy.ShapeTypeList, Ext: &e_BenefitSummaries})
+var sBenefitSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBenefitSummary, Members: &mBenefitSummary, Type: smithy.ShapeTypeStructure, Ext: &eBenefitSummary})
+var s_CatalogName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &e_CatalogName})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var sConsumableDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConsumableDetails, Members: &mConsumableDetails, Type: smithy.ShapeTypeStructure, Ext: &eConsumableDetails})
+var sContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContact, Members: &mContact, Type: smithy.ShapeTypeStructure, Ext: &eContact})
+var s_ContactEmail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactEmail, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_ContactEmail})
+var s_ContactFirstName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactFirstName, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_ContactFirstName})
+var s_ContactLastName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactLastName, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_ContactLastName})
+var s_ContactPhone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactPhone, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &e_ContactPhone})
+var s_Contacts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Contacts, Members: &m_Contacts, Type: smithy.ShapeTypeList, Ext: &e_Contacts})
+var sCreditCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreditCode, Members: &mCreditCode, Type: smithy.ShapeTypeStructure, Ext: &eCreditCode})
+var s_CreditCodes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreditCodes, Members: &m_CreditCodes, Type: smithy.ShapeTypeList, Ext: &e_CreditCodes})
+var sCreditDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreditDetails, Members: &mCreditDetails, Type: smithy.ShapeTypeStructure, Ext: &eCreditDetails})
+var sCurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCurrencyCode, Members: &mCurrencyCode, Type: smithy.ShapeTypeEnum, Ext: &eCurrencyCode})
+var sDisbursementDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisbursementDetails, Members: &mDisbursementDetails, Type: smithy.ShapeTypeStructure, Ext: &eDisbursementDetails})
+var sFileDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileDetail, Members: &mFileDetail, Type: smithy.ShapeTypeStructure, Ext: &eFileDetail})
+var s_FileDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileDetails, Members: &m_FileDetails, Type: smithy.ShapeTypeList, Ext: &e_FileDetails})
+var sFileInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileInput, Members: &mFileInput, Type: smithy.ShapeTypeStructure, Ext: &eFileInput})
+var s_FileInputDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileInputDetails, Members: &m_FileInputDetails, Type: smithy.ShapeTypeList, Ext: &e_FileInputDetails})
+var sFileType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileType, Members: &mFileType, Type: smithy.ShapeTypeEnum, Ext: &eFileType})
+var s_FileURI = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileURI, Type: smithy.ShapeTypeString, Ext: &e_FileURI})
+var sFulfillmentDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFulfillmentDetails, Members: &mFulfillmentDetails, Type: smithy.ShapeTypeUnion, Ext: &eFulfillmentDetails})
+var sFulfillmentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFulfillmentType, Members: &mFulfillmentType, Type: smithy.ShapeTypeEnum, Ext: &eFulfillmentType})
+var s_FulfillmentTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FulfillmentTypes, Members: &m_FulfillmentTypes, Type: smithy.ShapeTypeList, Ext: &e_FulfillmentTypes})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t22, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sIssuanceDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIssuanceDetail, Members: &mIssuanceDetail, Type: smithy.ShapeTypeStructure, Ext: &eIssuanceDetail})
+var sMonetaryValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonetaryValue, Members: &mMonetaryValue, Type: smithy.ShapeTypeStructure, Ext: &eMonetaryValue})
+var s_Program = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Program, Type: smithy.ShapeTypeString, Ext: &e_Program})
+var s_Programs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Programs, Members: &m_Programs, Type: smithy.ShapeTypeList, Ext: &e_Programs})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t23, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eResourceType})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t24, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var s_Stages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Stages, Members: &m_Stages, Type: smithy.ShapeTypeList, Ext: &e_Stages})
+var s_Statuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Statuses, Members: &m_Statuses, Type: smithy.ShapeTypeList, Ext: &e_Statuses})
+var s_StatusReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusReasonCode, Type: smithy.ShapeTypeString, Ext: &e_StatusReasonCode})
+var s_StatusReasonCodes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusReasonCodes, Members: &m_StatusReasonCodes, Type: smithy.ShapeTypeList, Ext: &e_StatusReasonCodes})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var s_TaggableResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString, Ext: &e_TaggableResourceArn})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &e_Tags})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t25, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Traits: &t26, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t27, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationExceptionErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionErrorCode, Members: &mValidationExceptionErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionErrorCode})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
+var sAmendBenefitApplicationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmendBenefitApplicationInput, Members: &mAmendBenefitApplicationInput, Type: smithy.ShapeTypeStructure, Ext: &eAmendBenefitApplicationInput})
+var sAmendBenefitApplicationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmendBenefitApplicationOutput, Type: smithy.ShapeTypeStructure, Ext: &eAmendBenefitApplicationOutput})
+var sAssociateBenefitApplicationResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateBenefitApplicationResourceInput, Members: &mAssociateBenefitApplicationResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eAssociateBenefitApplicationResourceInput})
+var sAssociateBenefitApplicationResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateBenefitApplicationResourceOutput, Members: &mAssociateBenefitApplicationResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eAssociateBenefitApplicationResourceOutput})
+var sCancelBenefitApplicationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelBenefitApplicationInput, Members: &mCancelBenefitApplicationInput, Type: smithy.ShapeTypeStructure, Ext: &eCancelBenefitApplicationInput})
+var sCancelBenefitApplicationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelBenefitApplicationOutput, Type: smithy.ShapeTypeStructure, Ext: &eCancelBenefitApplicationOutput})
+var sCreateBenefitApplicationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBenefitApplicationInput, Members: &mCreateBenefitApplicationInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateBenefitApplicationInput})
+var sCreateBenefitApplicationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBenefitApplicationOutput, Members: &mCreateBenefitApplicationOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateBenefitApplicationOutput})
+var sDisassociateBenefitApplicationResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateBenefitApplicationResourceInput, Members: &mDisassociateBenefitApplicationResourceInput, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateBenefitApplicationResourceInput})
+var sDisassociateBenefitApplicationResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateBenefitApplicationResourceOutput, Members: &mDisassociateBenefitApplicationResourceOutput, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateBenefitApplicationResourceOutput})
+var sGetBenefitAllocationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBenefitAllocationInput, Members: &mGetBenefitAllocationInput, Type: smithy.ShapeTypeStructure, Ext: &eGetBenefitAllocationInput})
+var sGetBenefitAllocationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBenefitAllocationOutput, Members: &mGetBenefitAllocationOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetBenefitAllocationOutput})
+var sGetBenefitApplicationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBenefitApplicationInput, Members: &mGetBenefitApplicationInput, Type: smithy.ShapeTypeStructure, Ext: &eGetBenefitApplicationInput})
+var sGetBenefitApplicationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBenefitApplicationOutput, Members: &mGetBenefitApplicationOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetBenefitApplicationOutput})
+var sGetBenefitInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBenefitInput, Members: &mGetBenefitInput, Type: smithy.ShapeTypeStructure, Ext: &eGetBenefitInput})
+var sGetBenefitOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBenefitOutput, Members: &mGetBenefitOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetBenefitOutput})
+var sListBenefitAllocationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBenefitAllocationsInput, Members: &mListBenefitAllocationsInput, Type: smithy.ShapeTypeStructure, Ext: &eListBenefitAllocationsInput})
+var sListBenefitAllocationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBenefitAllocationsOutput, Members: &mListBenefitAllocationsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListBenefitAllocationsOutput})
+var sListBenefitApplicationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBenefitApplicationsInput, Members: &mListBenefitApplicationsInput, Type: smithy.ShapeTypeStructure, Ext: &eListBenefitApplicationsInput})
+var sListBenefitApplicationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBenefitApplicationsOutput, Members: &mListBenefitApplicationsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListBenefitApplicationsOutput})
+var sListBenefitsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBenefitsInput, Members: &mListBenefitsInput, Type: smithy.ShapeTypeStructure, Ext: &eListBenefitsInput})
+var sListBenefitsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBenefitsOutput, Members: &mListBenefitsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListBenefitsOutput})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sRecallBenefitApplicationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecallBenefitApplicationInput, Members: &mRecallBenefitApplicationInput, Type: smithy.ShapeTypeStructure, Ext: &eRecallBenefitApplicationInput})
+var sRecallBenefitApplicationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecallBenefitApplicationOutput, Type: smithy.ShapeTypeStructure, Ext: &eRecallBenefitApplicationOutput})
+var sSubmitBenefitApplicationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubmitBenefitApplicationInput, Members: &mSubmitBenefitApplicationInput, Type: smithy.ShapeTypeStructure, Ext: &eSubmitBenefitApplicationInput})
+var sSubmitBenefitApplicationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubmitBenefitApplicationOutput, Type: smithy.ShapeTypeStructure, Ext: &eSubmitBenefitApplicationOutput})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateBenefitApplicationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBenefitApplicationInput, Members: &mUpdateBenefitApplicationInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBenefitApplicationInput})
+var sUpdateBenefitApplicationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBenefitApplicationOutput, Members: &mUpdateBenefitApplicationOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateBenefitApplicationOutput})
 
-var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[19]})
-var sAccessDetails_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[21]})
-var sAmendment_FieldPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FieldPath", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[23]})
-var sAmendment_NewValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[24]})
-var s_AmendmentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAmendment, Members: &mAmendment, Type: smithy.ShapeTypeStructure, Ext: &ext[26]})
-var s_Arns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[29]})
-var sAssociatedResource_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &ext[31]})
-var sAssociatedResource_ResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var sAssociatedResource_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var s_AssociatedResources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssociatedResource, Members: &mAssociatedResource, Type: smithy.ShapeTypeStructure, Ext: &ext[35]})
-var s_Attributes_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[37]})
-var s_Attributes_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[38]})
-var sBenefitAllocationStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[44]})
-var sBenefitAllocationStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[45]})
-var sBenefitAllocationStatus_FULFILLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULFILLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[46]})
-var s_BenefitAllocationStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBenefitAllocationStatus, Members: &mBenefitAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[48]})
-var s_BenefitAllocationSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBenefitAllocationSummary, Members: &mBenefitAllocationSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[50]})
-var sBenefitAllocationSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_BenefitAllocationId, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var sBenefitAllocationSummary_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &ext[53]})
-var sBenefitAllocationSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var sBenefitAllocationSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iBenefitAllocationStatus, Members: &mBenefitAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[55]})
-var sBenefitAllocationSummary_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[56]})
-var sBenefitAllocationSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_BenefitAllocationName, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var sBenefitAllocationSummary_BenefitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitId", ID: &i_BenefitId, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var sBenefitAllocationSummary_BenefitApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitApplicationId", ID: &i_BenefitApplicationId, Type: smithy.ShapeTypeString, Ext: &ext[59]})
-var sBenefitAllocationSummary_FulfillmentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FulfillmentTypes", ID: &i_FulfillmentTypes, Members: &m_FulfillmentTypes, Type: smithy.ShapeTypeList, Ext: &ext[60]})
-var sBenefitAllocationSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[61]})
-var sBenefitAllocationSummary_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[62]})
-var sBenefitAllocationSummary_ApplicableBenefitIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicableBenefitIds", ID: &i_BenefitIds, Members: &m_BenefitIds, Type: smithy.ShapeTypeList, Ext: &ext[63]})
-var s_BenefitApplicationIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BenefitApplicationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[68]})
-var sBenefitApplicationStatus_PENDING_SUBMISSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_SUBMISSION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sBenefitApplicationStatus_IN_REVIEW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_REVIEW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[73]})
-var sBenefitApplicationStatus_ACTION_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTION_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var sBenefitApplicationStatus_APPROVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPROVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[75]})
-var sBenefitApplicationStatus_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[76]})
-var sBenefitApplicationStatus_CANCELED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
-var s_BenefitApplicationSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBenefitApplicationSummary, Members: &mBenefitApplicationSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[79]})
-var sBenefitApplicationSummary_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &ext[81]})
-var sBenefitApplicationSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_BenefitApplicationName, Type: smithy.ShapeTypeString, Ext: &ext[82]})
-var sBenefitApplicationSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_BenefitApplicationId, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var sBenefitApplicationSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[84]})
-var sBenefitApplicationSummary_BenefitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitId", ID: &i_BenefitId, Type: smithy.ShapeTypeString, Ext: &ext[85]})
-var sBenefitApplicationSummary_Programs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Programs", ID: &i_Programs, Members: &m_Programs, Type: smithy.ShapeTypeList, Ext: &ext[86]})
-var sBenefitApplicationSummary_FulfillmentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FulfillmentTypes", ID: &i_FulfillmentTypes, Members: &m_FulfillmentTypes, Type: smithy.ShapeTypeList, Ext: &ext[87]})
-var sBenefitApplicationSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iBenefitApplicationStatus, Members: &mBenefitApplicationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[88]})
-var sBenefitApplicationSummary_Stage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stage", ID: &i_BenefitApplicationStage, Type: smithy.ShapeTypeString, Ext: &ext[89]})
-var sBenefitApplicationSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[90]})
-var sBenefitApplicationSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[91]})
-var sBenefitApplicationSummary_BenefitApplicationDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitApplicationDetails", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &ext[92]})
-var sBenefitApplicationSummary_AssociatedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedResources", ID: &i_Arns, Members: &m_Arns, Type: smithy.ShapeTypeList, Ext: &ext[93]})
-var s_BenefitIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BenefitId, Type: smithy.ShapeTypeString, Ext: &ext[96]})
-var s_BenefitIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BenefitId, Type: smithy.ShapeTypeString, Ext: &ext[98]})
-var sBenefitStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[100]})
-var sBenefitStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[101]})
-var s_BenefitStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBenefitStatus, Members: &mBenefitStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[103]})
-var s_BenefitSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBenefitSummary, Members: &mBenefitSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[105]})
-var sBenefitSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[107]})
-var sBenefitSummary_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &ext[108]})
-var sBenefitSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[109]})
-var sBenefitSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[110]})
-var sBenefitSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[111]})
-var sBenefitSummary_Programs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Programs", ID: &i_Programs, Members: &m_Programs, Type: smithy.ShapeTypeList, Ext: &ext[112]})
-var sBenefitSummary_FulfillmentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FulfillmentTypes", ID: &i_FulfillmentTypes, Members: &m_FulfillmentTypes, Type: smithy.ShapeTypeList, Ext: &ext[113]})
-var sBenefitSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iBenefitStatus, Members: &mBenefitStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[114]})
-var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[117]})
-var sConsumableDetails_AllocatedAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllocatedAmount", ID: &iMonetaryValue, Members: &mMonetaryValue, Type: smithy.ShapeTypeStructure, Ext: &ext[119]})
-var sConsumableDetails_RemainingAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemainingAmount", ID: &iMonetaryValue, Members: &mMonetaryValue, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var sConsumableDetails_UtilizedAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UtilizedAmount", ID: &iMonetaryValue, Members: &mMonetaryValue, Type: smithy.ShapeTypeStructure, Ext: &ext[121]})
-var sConsumableDetails_IssuanceDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssuanceDetails", ID: &iIssuanceDetail, Members: &mIssuanceDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[122]})
-var sContact_Email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Email", ID: &i_ContactEmail, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &ext[124]})
-var sContact_FirstName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirstName", ID: &i_ContactFirstName, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &ext[125]})
-var sContact_LastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastName", ID: &i_ContactLastName, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &ext[126]})
-var sContact_BusinessTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BusinessTitle", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[127]})
-var sContact_Phone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Phone", ID: &i_ContactPhone, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &ext[128]})
-var s_Contacts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContact, Members: &mContact, Type: smithy.ShapeTypeStructure, Ext: &ext[134]})
-var sCreditCode_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsAccountId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[136]})
-var sCreditCode_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &iMonetaryValue, Members: &mMonetaryValue, Type: smithy.ShapeTypeStructure, Ext: &ext[137]})
-var sCreditCode_AwsCreditCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsCreditCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var sCreditCode_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iBenefitAllocationStatus, Members: &mBenefitAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[139]})
-var sCreditCode_IssuedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssuedAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[140]})
-var sCreditCode_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[141]})
-var s_CreditCodes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCreditCode, Members: &mCreditCode, Type: smithy.ShapeTypeStructure, Ext: &ext[143]})
-var sCreditDetails_AllocatedAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllocatedAmount", ID: &iMonetaryValue, Members: &mMonetaryValue, Type: smithy.ShapeTypeStructure, Ext: &ext[145]})
-var sCreditDetails_IssuedAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssuedAmount", ID: &iMonetaryValue, Members: &mMonetaryValue, Type: smithy.ShapeTypeStructure, Ext: &ext[146]})
-var sCreditDetails_Codes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Codes", ID: &i_CreditCodes, Members: &m_CreditCodes, Type: smithy.ShapeTypeList, Ext: &ext[147]})
-var sCurrencyCode_AED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[149]})
-var sCurrencyCode_AMD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[150]})
-var sCurrencyCode_ARS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[151]})
-var sCurrencyCode_AUD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[152]})
-var sCurrencyCode_AWG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[153]})
-var sCurrencyCode_AZN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[154]})
-var sCurrencyCode_BBD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BBD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[155]})
-var sCurrencyCode_BDT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BDT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[156]})
-var sCurrencyCode_BGN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BGN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[157]})
-var sCurrencyCode_BMD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BMD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[158]})
-var sCurrencyCode_BND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[159]})
-var sCurrencyCode_BOB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[160]})
-var sCurrencyCode_BRL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BRL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[161]})
-var sCurrencyCode_BSD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BSD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[162]})
-var sCurrencyCode_BYR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BYR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[163]})
-var sCurrencyCode_BZD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BZD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[164]})
-var sCurrencyCode_CAD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CAD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[165]})
-var sCurrencyCode_CHF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[166]})
-var sCurrencyCode_CLP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[167]})
-var sCurrencyCode_CNY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CNY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[168]})
-var sCurrencyCode_COP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[169]})
-var sCurrencyCode_CRC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CRC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[170]})
-var sCurrencyCode_CZK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CZK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[171]})
-var sCurrencyCode_DKK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DKK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[172]})
-var sCurrencyCode_DOP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[173]})
-var sCurrencyCode_EEK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EEK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[174]})
-var sCurrencyCode_EGP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EGP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[175]})
-var sCurrencyCode_EUR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EUR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[176]})
-var sCurrencyCode_GBP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GBP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[177]})
-var sCurrencyCode_GEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GEL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[178]})
-var sCurrencyCode_GHS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GHS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[179]})
-var sCurrencyCode_GTQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GTQ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[180]})
-var sCurrencyCode_GYD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GYD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[181]})
-var sCurrencyCode_HKD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HKD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[182]})
-var sCurrencyCode_HNL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HNL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[183]})
-var sCurrencyCode_HRK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HRK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[184]})
-var sCurrencyCode_HTG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[185]})
-var sCurrencyCode_HUF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HUF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[186]})
-var sCurrencyCode_IDR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IDR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[187]})
-var sCurrencyCode_ILS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[188]})
-var sCurrencyCode_INR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[189]})
-var sCurrencyCode_ISK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ISK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[190]})
-var sCurrencyCode_JMD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JMD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[191]})
-var sCurrencyCode_JPY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JPY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[192]})
-var sCurrencyCode_KES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[193]})
-var sCurrencyCode_KHR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KHR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[194]})
-var sCurrencyCode_KRW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KRW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[195]})
-var sCurrencyCode_KYD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KYD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[196]})
-var sCurrencyCode_KZT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KZT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[197]})
-var sCurrencyCode_LBP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LBP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[198]})
-var sCurrencyCode_LKR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LKR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[199]})
-var sCurrencyCode_LTL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LTL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[200]})
-var sCurrencyCode_LVL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LVL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[201]})
-var sCurrencyCode_MAD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[202]})
-var sCurrencyCode_MNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[203]})
-var sCurrencyCode_MOP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MOP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[204]})
-var sCurrencyCode_MUR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MUR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[205]})
-var sCurrencyCode_MVR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MVR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[206]})
-var sCurrencyCode_MXN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MXN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[207]})
-var sCurrencyCode_MYR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MYR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[208]})
-var sCurrencyCode_NAD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NAD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[209]})
-var sCurrencyCode_NGN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NGN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[210]})
-var sCurrencyCode_NIO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NIO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[211]})
-var sCurrencyCode_NOK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[212]})
-var sCurrencyCode_NZD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NZD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[213]})
-var sCurrencyCode_PAB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[214]})
-var sCurrencyCode_PEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[215]})
-var sCurrencyCode_PHP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PHP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[216]})
-var sCurrencyCode_PKR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PKR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[217]})
-var sCurrencyCode_PLN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PLN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[218]})
-var sCurrencyCode_PYG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PYG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[219]})
-var sCurrencyCode_QAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[220]})
-var sCurrencyCode_RON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[221]})
-var sCurrencyCode_RUB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[222]})
-var sCurrencyCode_SAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[223]})
-var sCurrencyCode_SEK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[224]})
-var sCurrencyCode_SGD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SGD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[225]})
-var sCurrencyCode_SIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[226]})
-var sCurrencyCode_SKK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SKK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[227]})
-var sCurrencyCode_THB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "THB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[228]})
-var sCurrencyCode_TND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[229]})
-var sCurrencyCode_TRY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[230]})
-var sCurrencyCode_TTD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TTD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[231]})
-var sCurrencyCode_TWD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TWD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[232]})
-var sCurrencyCode_TZS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TZS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[233]})
-var sCurrencyCode_UAH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UAH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[234]})
-var sCurrencyCode_USD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[235]})
-var sCurrencyCode_UYU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UYU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[236]})
-var sCurrencyCode_UZS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UZS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[237]})
-var sCurrencyCode_VND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[238]})
-var sCurrencyCode_XAF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XAF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[239]})
-var sCurrencyCode_XCD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XCD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[240]})
-var sCurrencyCode_XOF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XOF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[241]})
-var sCurrencyCode_XPF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XPF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[242]})
-var sCurrencyCode_ZAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[243]})
-var sDisbursementDetails_DisbursedAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisbursedAmount", ID: &iMonetaryValue, Members: &mMonetaryValue, Type: smithy.ShapeTypeStructure, Ext: &ext[245]})
-var sDisbursementDetails_IssuanceDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssuanceDetails", ID: &iIssuanceDetail, Members: &mIssuanceDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[246]})
-var sFileDetail_FileURI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileURI", ID: &i_FileURI, Type: smithy.ShapeTypeString, Ext: &ext[248]})
-var sFileDetail_BusinessUseCase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BusinessUseCase", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[249]})
-var sFileDetail_FileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[250]})
-var sFileDetail_FileStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileStatus", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[251]})
-var sFileDetail_FileStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileStatusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[252]})
-var sFileDetail_FileType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileType", ID: &iFileType, Members: &mFileType, Type: smithy.ShapeTypeEnum, Ext: &ext[253]})
-var sFileDetail_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[254]})
-var sFileDetail_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[255]})
-var s_FileDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFileDetail, Members: &mFileDetail, Type: smithy.ShapeTypeStructure, Ext: &ext[257]})
-var sFileInput_FileURI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileURI", ID: &i_FileURI, Type: smithy.ShapeTypeString, Ext: &ext[259]})
-var sFileInput_BusinessUseCase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BusinessUseCase", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[260]})
-var s_FileInputDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFileInput, Members: &mFileInput, Type: smithy.ShapeTypeStructure, Ext: &ext[262]})
-var sFileType_DOC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[264]})
-var sFileType_DOCX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOCX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[265]})
-var sFileType_XLSX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XLSX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[266]})
-var sFileType_PPTX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PPTX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[267]})
-var sFileType_PDF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PDF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[268]})
-var sFileType_PNG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PNG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[269]})
-var sFileType_JPG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JPG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[270]})
-var sFileType_SVG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SVG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[271]})
-var sFileType_CSV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CSV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[272]})
-var sFulfillmentDetails_DisbursementDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisbursementDetails", ID: &iDisbursementDetails, Members: &mDisbursementDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[275]})
-var sFulfillmentDetails_ConsumableDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumableDetails", ID: &iConsumableDetails, Members: &mConsumableDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[276]})
-var sFulfillmentDetails_CreditDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreditDetails", ID: &iCreditDetails, Members: &mCreditDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[277]})
-var sFulfillmentDetails_AccessDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessDetails", ID: &iAccessDetails, Members: &mAccessDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[278]})
-var sFulfillmentType_CREDITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREDITS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[280]})
-var sFulfillmentType_CASH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CASH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[281]})
-var sFulfillmentType_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[282]})
-var s_FulfillmentTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFulfillmentType, Members: &mFulfillmentType, Type: smithy.ShapeTypeEnum, Ext: &ext[284]})
-var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[286]})
-var sIssuanceDetail_IssuanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssuanceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[288]})
-var sIssuanceDetail_IssuanceAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssuanceAmount", ID: &iMonetaryValue, Members: &mMonetaryValue, Type: smithy.ShapeTypeStructure, Ext: &ext[289]})
-var sIssuanceDetail_IssuedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssuedAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[290]})
-var sMonetaryValue_Amount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Amount", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[292]})
-var sMonetaryValue_CurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrencyCode", ID: &iCurrencyCode, Members: &mCurrencyCode, Type: smithy.ShapeTypeEnum, Ext: &ext[293]})
-var s_Programs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Program, Type: smithy.ShapeTypeString, Ext: &ext[296]})
-var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[298]})
-var sResourceType_OPPORTUNITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPPORTUNITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[300]})
-var sResourceType_BENEFIT_ALLOCATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BENEFIT_ALLOCATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[301]})
-var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[303]})
-var sServiceQuotaExceededException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[304]})
-var sServiceQuotaExceededException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[305]})
-var sServiceQuotaExceededException_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[306]})
-var s_Stages_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BenefitApplicationStage, Type: smithy.ShapeTypeString, Ext: &ext[308]})
-var s_Statuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBenefitApplicationStatus, Members: &mBenefitApplicationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[310]})
-var s_StatusReasonCodes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_StatusReasonCode, Type: smithy.ShapeTypeString, Ext: &ext[313]})
-var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[315]})
-var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[316]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[320]})
-var s_Tags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[322]})
-var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[325]})
-var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[328]})
-var sValidationException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[329]})
-var sValidationException_FieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[330]})
-var sValidationExceptionErrorCode_REQUIRED_FIELD_MISSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUIRED_FIELD_MISSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[332]})
-var sValidationExceptionErrorCode_INVALID_ENUM_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ENUM_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[333]})
-var sValidationExceptionErrorCode_INVALID_STRING_FORMAT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_STRING_FORMAT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[334]})
-var sValidationExceptionErrorCode_INVALID_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[335]})
-var sValidationExceptionErrorCode_NOT_ENOUGH_VALUES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_ENOUGH_VALUES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[336]})
-var sValidationExceptionErrorCode_TOO_MANY_VALUES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOO_MANY_VALUES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[337]})
-var sValidationExceptionErrorCode_INVALID_RESOURCE_STATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_RESOURCE_STATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[338]})
-var sValidationExceptionErrorCode_DUPLICATE_KEY_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUPLICATE_KEY_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[339]})
-var sValidationExceptionErrorCode_VALUE_OUT_OF_RANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALUE_OUT_OF_RANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[340]})
-var sValidationExceptionErrorCode_ACTION_NOT_PERMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTION_NOT_PERMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[341]})
-var sValidationExceptionField_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[343]})
-var sValidationExceptionField_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[344]})
-var sValidationExceptionField_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iValidationExceptionErrorCode, Members: &mValidationExceptionErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[345]})
-var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[347]})
-var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[349]})
-var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[350]})
-var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[351]})
-var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[352]})
-var sValidationExceptionReason_BUSINESS_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUSINESS_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[353]})
-var sAmendBenefitApplicationInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &ext[355]})
-var sAmendBenefitApplicationInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[356]})
-var sAmendBenefitApplicationInput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[357]})
-var sAmendBenefitApplicationInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_BenefitApplicationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[358]})
-var sAmendBenefitApplicationInput_AmendmentReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AmendmentReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[359]})
-var sAmendBenefitApplicationInput_Amendments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Amendments", ID: &i_AmendmentList, Members: &m_AmendmentList, Type: smithy.ShapeTypeList, Ext: &ext[360]})
-var sAssociateBenefitApplicationResourceInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &ext[363]})
-var sAssociateBenefitApplicationResourceInput_BenefitApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitApplicationIdentifier", ID: &i_BenefitApplicationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[364]})
-var sAssociateBenefitApplicationResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[365]})
-var sAssociateBenefitApplicationResourceOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_BenefitApplicationId, Type: smithy.ShapeTypeString, Ext: &ext[367]})
-var sAssociateBenefitApplicationResourceOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[368]})
-var sAssociateBenefitApplicationResourceOutput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[369]})
-var sCancelBenefitApplicationInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &ext[371]})
-var sCancelBenefitApplicationInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[372]})
-var sCancelBenefitApplicationInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_BenefitApplicationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[373]})
-var sCancelBenefitApplicationInput_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[374]})
-var sCreateBenefitApplicationInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &ext[377]})
-var sCreateBenefitApplicationInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[378]})
-var sCreateBenefitApplicationInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_BenefitApplicationName, Type: smithy.ShapeTypeString, Ext: &ext[379]})
-var sCreateBenefitApplicationInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_BenefitApplicationDescription, Type: smithy.ShapeTypeString, Ext: &ext[380]})
-var sCreateBenefitApplicationInput_BenefitIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[381]})
-var sCreateBenefitApplicationInput_FulfillmentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FulfillmentTypes", ID: &i_FulfillmentTypes, Members: &m_FulfillmentTypes, Type: smithy.ShapeTypeList, Ext: &ext[382]})
-var sCreateBenefitApplicationInput_BenefitApplicationDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitApplicationDetails", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &ext[383]})
-var sCreateBenefitApplicationInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &ext[384]})
-var sCreateBenefitApplicationInput_AssociatedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedResources", ID: &i_Arns, Members: &m_Arns, Type: smithy.ShapeTypeList, Ext: &ext[385]})
-var sCreateBenefitApplicationInput_PartnerContacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartnerContacts", ID: &i_Contacts, Members: &m_Contacts, Type: smithy.ShapeTypeList, Ext: &ext[386]})
-var sCreateBenefitApplicationInput_FileDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileDetails", ID: &i_FileInputDetails, Members: &m_FileInputDetails, Type: smithy.ShapeTypeList, Ext: &ext[387]})
-var sCreateBenefitApplicationOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_BenefitApplicationId, Type: smithy.ShapeTypeString, Ext: &ext[389]})
-var sCreateBenefitApplicationOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[390]})
-var sCreateBenefitApplicationOutput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[391]})
-var sDisassociateBenefitApplicationResourceInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &ext[393]})
-var sDisassociateBenefitApplicationResourceInput_BenefitApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitApplicationIdentifier", ID: &i_BenefitApplicationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[394]})
-var sDisassociateBenefitApplicationResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[395]})
-var sDisassociateBenefitApplicationResourceOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_BenefitApplicationId, Type: smithy.ShapeTypeString, Ext: &ext[397]})
-var sDisassociateBenefitApplicationResourceOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[398]})
-var sDisassociateBenefitApplicationResourceOutput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[399]})
-var sGetBenefitAllocationInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &ext[401]})
-var sGetBenefitAllocationInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_BenefitAllocationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[402]})
-var sGetBenefitAllocationOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_BenefitAllocationId, Type: smithy.ShapeTypeString, Ext: &ext[404]})
-var sGetBenefitAllocationOutput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &ext[405]})
-var sGetBenefitAllocationOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BenefitAllocationArn, Type: smithy.ShapeTypeString, Ext: &ext[406]})
-var sGetBenefitAllocationOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[407]})
-var sGetBenefitAllocationOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[408]})
-var sGetBenefitAllocationOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iBenefitAllocationStatus, Members: &mBenefitAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[409]})
-var sGetBenefitAllocationOutput_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[410]})
-var sGetBenefitAllocationOutput_BenefitApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitApplicationId", ID: &i_BenefitApplicationId, Type: smithy.ShapeTypeString, Ext: &ext[411]})
-var sGetBenefitAllocationOutput_BenefitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitId", ID: &i_BenefitId, Type: smithy.ShapeTypeString, Ext: &ext[412]})
-var sGetBenefitAllocationOutput_FulfillmentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FulfillmentType", ID: &iFulfillmentType, Members: &mFulfillmentType, Type: smithy.ShapeTypeEnum, Ext: &ext[413]})
-var sGetBenefitAllocationOutput_ApplicableBenefitIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicableBenefitIds", ID: &i_BenefitIdentifiers, Members: &m_BenefitIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[414]})
-var sGetBenefitAllocationOutput_FulfillmentDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FulfillmentDetail", ID: &iFulfillmentDetails, Members: &mFulfillmentDetails, Type: smithy.ShapeTypeUnion, Ext: &ext[415]})
-var sGetBenefitAllocationOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[416]})
-var sGetBenefitAllocationOutput_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[417]})
-var sGetBenefitAllocationOutput_StartsAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartsAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[418]})
-var sGetBenefitAllocationOutput_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[419]})
-var sGetBenefitApplicationInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &ext[421]})
-var sGetBenefitApplicationInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_BenefitApplicationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[422]})
-var sGetBenefitApplicationOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_BenefitApplicationId, Type: smithy.ShapeTypeString, Ext: &ext[424]})
-var sGetBenefitApplicationOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[425]})
-var sGetBenefitApplicationOutput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &ext[426]})
-var sGetBenefitApplicationOutput_BenefitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitId", ID: &i_BenefitId, Type: smithy.ShapeTypeString, Ext: &ext[427]})
-var sGetBenefitApplicationOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_BenefitApplicationName, Type: smithy.ShapeTypeString, Ext: &ext[428]})
-var sGetBenefitApplicationOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_BenefitApplicationDescription, Type: smithy.ShapeTypeString, Ext: &ext[429]})
-var sGetBenefitApplicationOutput_FulfillmentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FulfillmentTypes", ID: &i_FulfillmentTypes, Members: &m_FulfillmentTypes, Type: smithy.ShapeTypeList, Ext: &ext[430]})
-var sGetBenefitApplicationOutput_BenefitApplicationDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitApplicationDetails", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &ext[431]})
-var sGetBenefitApplicationOutput_Programs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Programs", ID: &i_Programs, Members: &m_Programs, Type: smithy.ShapeTypeList, Ext: &ext[432]})
-var sGetBenefitApplicationOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iBenefitApplicationStatus, Members: &mBenefitApplicationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[433]})
-var sGetBenefitApplicationOutput_Stage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stage", ID: &i_BenefitApplicationStage, Type: smithy.ShapeTypeString, Ext: &ext[434]})
-var sGetBenefitApplicationOutput_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[435]})
-var sGetBenefitApplicationOutput_StatusReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReasonCode", ID: &i_StatusReasonCode, Type: smithy.ShapeTypeString, Ext: &ext[436]})
-var sGetBenefitApplicationOutput_StatusReasonCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReasonCodes", ID: &i_StatusReasonCodes, Members: &m_StatusReasonCodes, Type: smithy.ShapeTypeList, Ext: &ext[437]})
-var sGetBenefitApplicationOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[438]})
-var sGetBenefitApplicationOutput_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &ext[439]})
-var sGetBenefitApplicationOutput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[440]})
-var sGetBenefitApplicationOutput_AssociatedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedResources", ID: &i_Arns, Members: &m_Arns, Type: smithy.ShapeTypeList, Ext: &ext[441]})
-var sGetBenefitApplicationOutput_PartnerContacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartnerContacts", ID: &i_Contacts, Members: &m_Contacts, Type: smithy.ShapeTypeList, Ext: &ext[442]})
-var sGetBenefitApplicationOutput_FileDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileDetails", ID: &i_FileDetails, Members: &m_FileDetails, Type: smithy.ShapeTypeList, Ext: &ext[443]})
-var sGetBenefitInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &ext[445]})
-var sGetBenefitInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[446]})
-var sGetBenefitOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[448]})
-var sGetBenefitOutput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &ext[449]})
-var sGetBenefitOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[450]})
-var sGetBenefitOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[451]})
-var sGetBenefitOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[452]})
-var sGetBenefitOutput_Programs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Programs", ID: &i_Programs, Members: &m_Programs, Type: smithy.ShapeTypeList, Ext: &ext[453]})
-var sGetBenefitOutput_FulfillmentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FulfillmentTypes", ID: &i_FulfillmentTypes, Members: &m_FulfillmentTypes, Type: smithy.ShapeTypeList, Ext: &ext[454]})
-var sGetBenefitOutput_BenefitRequestSchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitRequestSchema", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &ext[455]})
-var sGetBenefitOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iBenefitStatus, Members: &mBenefitStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[456]})
-var sListBenefitAllocationsInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &ext[458]})
-var sListBenefitAllocationsInput_FulfillmentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FulfillmentTypes", ID: &i_FulfillmentTypes, Members: &m_FulfillmentTypes, Type: smithy.ShapeTypeList, Ext: &ext[459]})
-var sListBenefitAllocationsInput_BenefitIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitIdentifiers", ID: &i_BenefitIdentifiers, Members: &m_BenefitIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[460]})
-var sListBenefitAllocationsInput_BenefitApplicationIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitApplicationIdentifiers", ID: &i_BenefitApplicationIdentifierList, Members: &m_BenefitApplicationIdentifierList, Type: smithy.ShapeTypeList, Ext: &ext[461]})
-var sListBenefitAllocationsInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_BenefitAllocationStatusList, Members: &m_BenefitAllocationStatusList, Type: smithy.ShapeTypeList, Ext: &ext[462]})
-var sListBenefitAllocationsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[463]})
-var sListBenefitAllocationsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[464]})
-var sListBenefitAllocationsOutput_BenefitAllocationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitAllocationSummaries", ID: &i_BenefitAllocationSummaries, Members: &m_BenefitAllocationSummaries, Type: smithy.ShapeTypeList, Ext: &ext[466]})
-var sListBenefitAllocationsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[467]})
-var sListBenefitApplicationsInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &ext[469]})
-var sListBenefitApplicationsInput_Programs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Programs", ID: &i_Programs, Members: &m_Programs, Type: smithy.ShapeTypeList, Ext: &ext[470]})
-var sListBenefitApplicationsInput_FulfillmentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FulfillmentTypes", ID: &i_FulfillmentTypes, Members: &m_FulfillmentTypes, Type: smithy.ShapeTypeList, Ext: &ext[471]})
-var sListBenefitApplicationsInput_BenefitIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitIdentifiers", ID: &i_BenefitIdentifiers, Members: &m_BenefitIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[472]})
-var sListBenefitApplicationsInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Statuses, Members: &m_Statuses, Type: smithy.ShapeTypeList, Ext: &ext[473]})
-var sListBenefitApplicationsInput_Stages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stages", ID: &i_Stages, Members: &m_Stages, Type: smithy.ShapeTypeList, Ext: &ext[474]})
-var sListBenefitApplicationsInput_AssociatedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedResources", ID: &i_AssociatedResources, Members: &m_AssociatedResources, Type: smithy.ShapeTypeList, Ext: &ext[475]})
-var sListBenefitApplicationsInput_AssociatedResourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedResourceArns", ID: &i_Arns, Members: &m_Arns, Type: smithy.ShapeTypeList, Ext: &ext[476]})
-var sListBenefitApplicationsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[477]})
-var sListBenefitApplicationsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[478]})
-var sListBenefitApplicationsOutput_BenefitApplicationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitApplicationSummaries", ID: &i_BenefitApplicationSummaries, Members: &m_BenefitApplicationSummaries, Type: smithy.ShapeTypeList, Ext: &ext[480]})
-var sListBenefitApplicationsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[481]})
-var sListBenefitsInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &ext[483]})
-var sListBenefitsInput_Programs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Programs", ID: &i_Programs, Members: &m_Programs, Type: smithy.ShapeTypeList, Ext: &ext[484]})
-var sListBenefitsInput_FulfillmentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FulfillmentTypes", ID: &i_FulfillmentTypes, Members: &m_FulfillmentTypes, Type: smithy.ShapeTypeList, Ext: &ext[485]})
-var sListBenefitsInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_BenefitStatuses, Members: &m_BenefitStatuses, Type: smithy.ShapeTypeList, Ext: &ext[486]})
-var sListBenefitsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[487]})
-var sListBenefitsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[488]})
-var sListBenefitsOutput_BenefitSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitSummaries", ID: &i_BenefitSummaries, Members: &m_BenefitSummaries, Type: smithy.ShapeTypeList, Ext: &ext[490]})
-var sListBenefitsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[491]})
-var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[493]})
-var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &ext[495]})
-var sRecallBenefitApplicationInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &ext[497]})
-var sRecallBenefitApplicationInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[498]})
-var sRecallBenefitApplicationInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_BenefitApplicationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[499]})
-var sRecallBenefitApplicationInput_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[500]})
-var sSubmitBenefitApplicationInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &ext[503]})
-var sSubmitBenefitApplicationInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_BenefitApplicationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[504]})
-var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[507]})
-var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &ext[508]})
-var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString, Ext: &ext[511]})
-var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[512]})
-var sUpdateBenefitApplicationInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &ext[515]})
-var sUpdateBenefitApplicationInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[516]})
-var sUpdateBenefitApplicationInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_BenefitApplicationName, Type: smithy.ShapeTypeString, Ext: &ext[517]})
-var sUpdateBenefitApplicationInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_BenefitApplicationDescription, Type: smithy.ShapeTypeString, Ext: &ext[518]})
-var sUpdateBenefitApplicationInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_BenefitApplicationIdentifier, Type: smithy.ShapeTypeString, Ext: &ext[519]})
-var sUpdateBenefitApplicationInput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[520]})
-var sUpdateBenefitApplicationInput_BenefitApplicationDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitApplicationDetails", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &ext[521]})
-var sUpdateBenefitApplicationInput_PartnerContacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartnerContacts", ID: &i_Contacts, Members: &m_Contacts, Type: smithy.ShapeTypeList, Ext: &ext[522]})
-var sUpdateBenefitApplicationInput_FileDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileDetails", ID: &i_FileInputDetails, Members: &m_FileInputDetails, Type: smithy.ShapeTypeList, Ext: &ext[523]})
-var sUpdateBenefitApplicationOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_BenefitApplicationId, Type: smithy.ShapeTypeString, Ext: &ext[525]})
-var sUpdateBenefitApplicationOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[526]})
-var sUpdateBenefitApplicationOutput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[527]})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var sAccessDetails_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDetails_Description})
+var sAmendment_FieldPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FieldPath", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAmendment_FieldPath})
+var sAmendment_NewValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewValue", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAmendment_NewValue})
+var s_AmendmentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAmendment, Members: &mAmendment, Type: smithy.ShapeTypeStructure, Ext: &e_AmendmentList_member})
+var s_Arns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arns_member})
+var sAssociatedResource_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum, Ext: &eAssociatedResource_ResourceType})
+var sAssociatedResource_ResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAssociatedResource_ResourceIdentifier})
+var sAssociatedResource_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eAssociatedResource_ResourceArn})
+var s_AssociatedResources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssociatedResource, Members: &mAssociatedResource, Type: smithy.ShapeTypeStructure, Ext: &e_AssociatedResources_member})
+var s_Attributes_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_Attributes_key})
+var s_Attributes_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_Attributes_value})
+var sBenefitAllocationStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBenefitAllocationStatus_ACTIVE})
+var sBenefitAllocationStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBenefitAllocationStatus_INACTIVE})
+var sBenefitAllocationStatus_FULFILLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULFILLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBenefitAllocationStatus_FULFILLED})
+var s_BenefitAllocationStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBenefitAllocationStatus, Members: &mBenefitAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &e_BenefitAllocationStatusList_member})
+var s_BenefitAllocationSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBenefitAllocationSummary, Members: &mBenefitAllocationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_BenefitAllocationSummaries_member})
+var sBenefitAllocationSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_BenefitAllocationId, Type: smithy.ShapeTypeString, Ext: &eBenefitAllocationSummary_Id})
+var sBenefitAllocationSummary_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &eBenefitAllocationSummary_Catalog})
+var sBenefitAllocationSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBenefitAllocationSummary_Arn})
+var sBenefitAllocationSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iBenefitAllocationStatus, Members: &mBenefitAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &eBenefitAllocationSummary_Status})
+var sBenefitAllocationSummary_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBenefitAllocationSummary_StatusReason})
+var sBenefitAllocationSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_BenefitAllocationName, Type: smithy.ShapeTypeString, Ext: &eBenefitAllocationSummary_Name})
+var sBenefitAllocationSummary_BenefitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitId", ID: &i_BenefitId, Type: smithy.ShapeTypeString, Ext: &eBenefitAllocationSummary_BenefitId})
+var sBenefitAllocationSummary_BenefitApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitApplicationId", ID: &i_BenefitApplicationId, Type: smithy.ShapeTypeString, Ext: &eBenefitAllocationSummary_BenefitApplicationId})
+var sBenefitAllocationSummary_FulfillmentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FulfillmentTypes", ID: &i_FulfillmentTypes, Members: &m_FulfillmentTypes, Type: smithy.ShapeTypeList, Ext: &eBenefitAllocationSummary_FulfillmentTypes})
+var sBenefitAllocationSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eBenefitAllocationSummary_CreatedAt})
+var sBenefitAllocationSummary_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eBenefitAllocationSummary_ExpiresAt})
+var sBenefitAllocationSummary_ApplicableBenefitIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicableBenefitIds", ID: &i_BenefitIds, Members: &m_BenefitIds, Type: smithy.ShapeTypeList, Ext: &eBenefitAllocationSummary_ApplicableBenefitIds})
+var s_BenefitApplicationIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BenefitApplicationIdentifier, Type: smithy.ShapeTypeString, Ext: &e_BenefitApplicationIdentifierList_member})
+var sBenefitApplicationStatus_PENDING_SUBMISSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_SUBMISSION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBenefitApplicationStatus_PENDING_SUBMISSION})
+var sBenefitApplicationStatus_IN_REVIEW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_REVIEW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBenefitApplicationStatus_IN_REVIEW})
+var sBenefitApplicationStatus_ACTION_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTION_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBenefitApplicationStatus_ACTION_REQUIRED})
+var sBenefitApplicationStatus_APPROVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPROVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBenefitApplicationStatus_APPROVED})
+var sBenefitApplicationStatus_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBenefitApplicationStatus_REJECTED})
+var sBenefitApplicationStatus_CANCELED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBenefitApplicationStatus_CANCELED})
+var s_BenefitApplicationSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBenefitApplicationSummary, Members: &mBenefitApplicationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_BenefitApplicationSummaries_member})
+var sBenefitApplicationSummary_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &eBenefitApplicationSummary_Catalog})
+var sBenefitApplicationSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_BenefitApplicationName, Type: smithy.ShapeTypeString, Ext: &eBenefitApplicationSummary_Name})
+var sBenefitApplicationSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_BenefitApplicationId, Type: smithy.ShapeTypeString, Ext: &eBenefitApplicationSummary_Id})
+var sBenefitApplicationSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBenefitApplicationSummary_Arn})
+var sBenefitApplicationSummary_BenefitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitId", ID: &i_BenefitId, Type: smithy.ShapeTypeString, Ext: &eBenefitApplicationSummary_BenefitId})
+var sBenefitApplicationSummary_Programs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Programs", ID: &i_Programs, Members: &m_Programs, Type: smithy.ShapeTypeList, Ext: &eBenefitApplicationSummary_Programs})
+var sBenefitApplicationSummary_FulfillmentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FulfillmentTypes", ID: &i_FulfillmentTypes, Members: &m_FulfillmentTypes, Type: smithy.ShapeTypeList, Ext: &eBenefitApplicationSummary_FulfillmentTypes})
+var sBenefitApplicationSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iBenefitApplicationStatus, Members: &mBenefitApplicationStatus, Type: smithy.ShapeTypeEnum, Ext: &eBenefitApplicationSummary_Status})
+var sBenefitApplicationSummary_Stage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stage", ID: &i_BenefitApplicationStage, Type: smithy.ShapeTypeString, Ext: &eBenefitApplicationSummary_Stage})
+var sBenefitApplicationSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eBenefitApplicationSummary_CreatedAt})
+var sBenefitApplicationSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eBenefitApplicationSummary_UpdatedAt})
+var sBenefitApplicationSummary_BenefitApplicationDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitApplicationDetails", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeMap, Ext: &eBenefitApplicationSummary_BenefitApplicationDetails})
+var sBenefitApplicationSummary_AssociatedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedResources", ID: &i_Arns, Members: &m_Arns, Type: smithy.ShapeTypeList, Ext: &eBenefitApplicationSummary_AssociatedResources})
+var s_BenefitIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BenefitId, Type: smithy.ShapeTypeString, Ext: &e_BenefitIdentifiers_member})
+var s_BenefitIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BenefitId, Type: smithy.ShapeTypeString, Ext: &e_BenefitIds_member})
+var sBenefitStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBenefitStatus_ACTIVE})
+var sBenefitStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBenefitStatus_INACTIVE})
+var s_BenefitStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBenefitStatus, Members: &mBenefitStatus, Type: smithy.ShapeTypeEnum, Ext: &e_BenefitStatuses_member})
+var s_BenefitSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBenefitSummary, Members: &mBenefitSummary, Type: smithy.ShapeTypeStructure, Ext: &e_BenefitSummaries_member})
+var sBenefitSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBenefitSummary_Id})
+var sBenefitSummary_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &eBenefitSummary_Catalog})
+var sBenefitSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBenefitSummary_Arn})
+var sBenefitSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBenefitSummary_Name})
+var sBenefitSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBenefitSummary_Description})
+var sBenefitSummary_Programs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Programs", ID: &i_Programs, Members: &m_Programs, Type: smithy.ShapeTypeList, Ext: &eBenefitSummary_Programs})
+var sBenefitSummary_FulfillmentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FulfillmentTypes", ID: &i_FulfillmentTypes, Members: &m_FulfillmentTypes, Type: smithy.ShapeTypeList, Ext: &eBenefitSummary_FulfillmentTypes})
+var sBenefitSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iBenefitStatus, Members: &mBenefitStatus, Type: smithy.ShapeTypeEnum, Ext: &eBenefitSummary_Status})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var sConsumableDetails_AllocatedAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllocatedAmount", ID: &iMonetaryValue, Members: &mMonetaryValue, Type: smithy.ShapeTypeStructure, Ext: &eConsumableDetails_AllocatedAmount})
+var sConsumableDetails_RemainingAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemainingAmount", ID: &iMonetaryValue, Members: &mMonetaryValue, Type: smithy.ShapeTypeStructure, Ext: &eConsumableDetails_RemainingAmount})
+var sConsumableDetails_UtilizedAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UtilizedAmount", ID: &iMonetaryValue, Members: &mMonetaryValue, Type: smithy.ShapeTypeStructure, Ext: &eConsumableDetails_UtilizedAmount})
+var sConsumableDetails_IssuanceDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssuanceDetails", ID: &iIssuanceDetail, Members: &mIssuanceDetail, Type: smithy.ShapeTypeStructure, Ext: &eConsumableDetails_IssuanceDetails})
+var sContact_Email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Email", ID: &i_ContactEmail, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eContact_Email})
+var sContact_FirstName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirstName", ID: &i_ContactFirstName, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eContact_FirstName})
+var sContact_LastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastName", ID: &i_ContactLastName, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eContact_LastName})
+var sContact_BusinessTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BusinessTitle", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eContact_BusinessTitle})
+var sContact_Phone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Phone", ID: &i_ContactPhone, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eContact_Phone})
+var s_Contacts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContact, Members: &mContact, Type: smithy.ShapeTypeStructure, Ext: &e_Contacts_member})
+var sCreditCode_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsAccountId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreditCode_AwsAccountId})
+var sCreditCode_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &iMonetaryValue, Members: &mMonetaryValue, Type: smithy.ShapeTypeStructure, Ext: &eCreditCode_Value})
+var sCreditCode_AwsCreditCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsCreditCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreditCode_AwsCreditCode})
+var sCreditCode_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iBenefitAllocationStatus, Members: &mBenefitAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreditCode_Status})
+var sCreditCode_IssuedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssuedAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eCreditCode_IssuedAt})
+var sCreditCode_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eCreditCode_ExpiresAt})
+var s_CreditCodes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCreditCode, Members: &mCreditCode, Type: smithy.ShapeTypeStructure, Ext: &e_CreditCodes_member})
+var sCreditDetails_AllocatedAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllocatedAmount", ID: &iMonetaryValue, Members: &mMonetaryValue, Type: smithy.ShapeTypeStructure, Ext: &eCreditDetails_AllocatedAmount})
+var sCreditDetails_IssuedAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssuedAmount", ID: &iMonetaryValue, Members: &mMonetaryValue, Type: smithy.ShapeTypeStructure, Ext: &eCreditDetails_IssuedAmount})
+var sCreditDetails_Codes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Codes", ID: &i_CreditCodes, Members: &m_CreditCodes, Type: smithy.ShapeTypeList, Ext: &eCreditDetails_Codes})
+var sCurrencyCode_AED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_AED})
+var sCurrencyCode_AMD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_AMD})
+var sCurrencyCode_ARS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_ARS})
+var sCurrencyCode_AUD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_AUD})
+var sCurrencyCode_AWG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_AWG})
+var sCurrencyCode_AZN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_AZN})
+var sCurrencyCode_BBD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BBD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_BBD})
+var sCurrencyCode_BDT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BDT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_BDT})
+var sCurrencyCode_BGN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BGN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_BGN})
+var sCurrencyCode_BMD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BMD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_BMD})
+var sCurrencyCode_BND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_BND})
+var sCurrencyCode_BOB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_BOB})
+var sCurrencyCode_BRL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BRL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_BRL})
+var sCurrencyCode_BSD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BSD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_BSD})
+var sCurrencyCode_BYR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BYR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_BYR})
+var sCurrencyCode_BZD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BZD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_BZD})
+var sCurrencyCode_CAD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CAD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_CAD})
+var sCurrencyCode_CHF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_CHF})
+var sCurrencyCode_CLP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_CLP})
+var sCurrencyCode_CNY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CNY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_CNY})
+var sCurrencyCode_COP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_COP})
+var sCurrencyCode_CRC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CRC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_CRC})
+var sCurrencyCode_CZK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CZK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_CZK})
+var sCurrencyCode_DKK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DKK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_DKK})
+var sCurrencyCode_DOP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_DOP})
+var sCurrencyCode_EEK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EEK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_EEK})
+var sCurrencyCode_EGP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EGP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_EGP})
+var sCurrencyCode_EUR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EUR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_EUR})
+var sCurrencyCode_GBP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GBP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_GBP})
+var sCurrencyCode_GEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GEL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_GEL})
+var sCurrencyCode_GHS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GHS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_GHS})
+var sCurrencyCode_GTQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GTQ", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_GTQ})
+var sCurrencyCode_GYD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GYD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_GYD})
+var sCurrencyCode_HKD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HKD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_HKD})
+var sCurrencyCode_HNL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HNL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_HNL})
+var sCurrencyCode_HRK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HRK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_HRK})
+var sCurrencyCode_HTG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_HTG})
+var sCurrencyCode_HUF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HUF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_HUF})
+var sCurrencyCode_IDR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IDR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_IDR})
+var sCurrencyCode_ILS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_ILS})
+var sCurrencyCode_INR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_INR})
+var sCurrencyCode_ISK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ISK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_ISK})
+var sCurrencyCode_JMD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JMD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_JMD})
+var sCurrencyCode_JPY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JPY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_JPY})
+var sCurrencyCode_KES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_KES})
+var sCurrencyCode_KHR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KHR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_KHR})
+var sCurrencyCode_KRW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KRW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_KRW})
+var sCurrencyCode_KYD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KYD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_KYD})
+var sCurrencyCode_KZT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KZT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_KZT})
+var sCurrencyCode_LBP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LBP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_LBP})
+var sCurrencyCode_LKR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LKR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_LKR})
+var sCurrencyCode_LTL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LTL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_LTL})
+var sCurrencyCode_LVL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LVL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_LVL})
+var sCurrencyCode_MAD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_MAD})
+var sCurrencyCode_MNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_MNT})
+var sCurrencyCode_MOP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MOP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_MOP})
+var sCurrencyCode_MUR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MUR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_MUR})
+var sCurrencyCode_MVR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MVR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_MVR})
+var sCurrencyCode_MXN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MXN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_MXN})
+var sCurrencyCode_MYR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MYR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_MYR})
+var sCurrencyCode_NAD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NAD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_NAD})
+var sCurrencyCode_NGN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NGN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_NGN})
+var sCurrencyCode_NIO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NIO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_NIO})
+var sCurrencyCode_NOK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_NOK})
+var sCurrencyCode_NZD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NZD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_NZD})
+var sCurrencyCode_PAB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_PAB})
+var sCurrencyCode_PEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_PEN})
+var sCurrencyCode_PHP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PHP", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_PHP})
+var sCurrencyCode_PKR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PKR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_PKR})
+var sCurrencyCode_PLN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PLN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_PLN})
+var sCurrencyCode_PYG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PYG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_PYG})
+var sCurrencyCode_QAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_QAR})
+var sCurrencyCode_RON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_RON})
+var sCurrencyCode_RUB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_RUB})
+var sCurrencyCode_SAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_SAR})
+var sCurrencyCode_SEK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_SEK})
+var sCurrencyCode_SGD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SGD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_SGD})
+var sCurrencyCode_SIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_SIT})
+var sCurrencyCode_SKK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SKK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_SKK})
+var sCurrencyCode_THB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "THB", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_THB})
+var sCurrencyCode_TND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_TND})
+var sCurrencyCode_TRY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_TRY})
+var sCurrencyCode_TTD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TTD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_TTD})
+var sCurrencyCode_TWD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TWD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_TWD})
+var sCurrencyCode_TZS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TZS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_TZS})
+var sCurrencyCode_UAH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UAH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_UAH})
+var sCurrencyCode_USD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_USD})
+var sCurrencyCode_UYU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UYU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_UYU})
+var sCurrencyCode_UZS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UZS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_UZS})
+var sCurrencyCode_VND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_VND})
+var sCurrencyCode_XAF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XAF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_XAF})
+var sCurrencyCode_XCD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XCD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_XCD})
+var sCurrencyCode_XOF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XOF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_XOF})
+var sCurrencyCode_XPF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XPF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_XPF})
+var sCurrencyCode_ZAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZAR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eCurrencyCode_ZAR})
+var sDisbursementDetails_DisbursedAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisbursedAmount", ID: &iMonetaryValue, Members: &mMonetaryValue, Type: smithy.ShapeTypeStructure, Ext: &eDisbursementDetails_DisbursedAmount})
+var sDisbursementDetails_IssuanceDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssuanceDetails", ID: &iIssuanceDetail, Members: &mIssuanceDetail, Type: smithy.ShapeTypeStructure, Ext: &eDisbursementDetails_IssuanceDetails})
+var sFileDetail_FileURI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileURI", ID: &i_FileURI, Type: smithy.ShapeTypeString, Ext: &eFileDetail_FileURI})
+var sFileDetail_BusinessUseCase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BusinessUseCase", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFileDetail_BusinessUseCase})
+var sFileDetail_FileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFileDetail_FileName})
+var sFileDetail_FileStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileStatus", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFileDetail_FileStatus})
+var sFileDetail_FileStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileStatusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFileDetail_FileStatusReason})
+var sFileDetail_FileType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileType", ID: &iFileType, Members: &mFileType, Type: smithy.ShapeTypeEnum, Ext: &eFileDetail_FileType})
+var sFileDetail_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFileDetail_CreatedBy})
+var sFileDetail_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eFileDetail_CreatedAt})
+var s_FileDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFileDetail, Members: &mFileDetail, Type: smithy.ShapeTypeStructure, Ext: &e_FileDetails_member})
+var sFileInput_FileURI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileURI", ID: &i_FileURI, Type: smithy.ShapeTypeString, Ext: &eFileInput_FileURI})
+var sFileInput_BusinessUseCase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BusinessUseCase", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFileInput_BusinessUseCase})
+var s_FileInputDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFileInput, Members: &mFileInput, Type: smithy.ShapeTypeStructure, Ext: &e_FileInputDetails_member})
+var sFileType_DOC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFileType_DOC})
+var sFileType_DOCX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOCX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFileType_DOCX})
+var sFileType_XLSX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XLSX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFileType_XLSX})
+var sFileType_PPTX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PPTX", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFileType_PPTX})
+var sFileType_PDF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PDF", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFileType_PDF})
+var sFileType_PNG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PNG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFileType_PNG})
+var sFileType_JPG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JPG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFileType_JPG})
+var sFileType_SVG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SVG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFileType_SVG})
+var sFileType_CSV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CSV", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFileType_CSV})
+var sFulfillmentDetails_DisbursementDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisbursementDetails", ID: &iDisbursementDetails, Members: &mDisbursementDetails, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentDetails_DisbursementDetails})
+var sFulfillmentDetails_ConsumableDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumableDetails", ID: &iConsumableDetails, Members: &mConsumableDetails, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentDetails_ConsumableDetails})
+var sFulfillmentDetails_CreditDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreditDetails", ID: &iCreditDetails, Members: &mCreditDetails, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentDetails_CreditDetails})
+var sFulfillmentDetails_AccessDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessDetails", ID: &iAccessDetails, Members: &mAccessDetails, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentDetails_AccessDetails})
+var sFulfillmentType_CREDITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREDITS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentType_CREDITS})
+var sFulfillmentType_CASH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CASH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentType_CASH})
+var sFulfillmentType_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eFulfillmentType_ACCESS})
+var s_FulfillmentTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFulfillmentType, Members: &mFulfillmentType, Type: smithy.ShapeTypeEnum, Ext: &e_FulfillmentTypes_member})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var sIssuanceDetail_IssuanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssuanceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eIssuanceDetail_IssuanceId})
+var sIssuanceDetail_IssuanceAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssuanceAmount", ID: &iMonetaryValue, Members: &mMonetaryValue, Type: smithy.ShapeTypeStructure, Ext: &eIssuanceDetail_IssuanceAmount})
+var sIssuanceDetail_IssuedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssuedAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eIssuanceDetail_IssuedAt})
+var sMonetaryValue_Amount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Amount", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eMonetaryValue_Amount})
+var sMonetaryValue_CurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrencyCode", ID: &iCurrencyCode, Members: &mCurrencyCode, Type: smithy.ShapeTypeEnum, Ext: &eMonetaryValue_CurrencyCode})
+var s_Programs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Program, Type: smithy.ShapeTypeString, Ext: &e_Programs_member})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sResourceType_OPPORTUNITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPPORTUNITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceType_OPPORTUNITY})
+var sResourceType_BENEFIT_ALLOCATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BENEFIT_ALLOCATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceType_BENEFIT_ALLOCATION})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_Message})
+var sServiceQuotaExceededException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_ResourceId})
+var sServiceQuotaExceededException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_ResourceType})
+var sServiceQuotaExceededException_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_QuotaCode})
+var s_Stages_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BenefitApplicationStage, Type: smithy.ShapeTypeString, Ext: &e_Stages_member})
+var s_Statuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBenefitApplicationStatus, Members: &mBenefitApplicationStatus, Type: smithy.ShapeTypeEnum, Ext: &e_Statuses_member})
+var s_StatusReasonCodes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_StatusReasonCode, Type: smithy.ShapeTypeString, Ext: &e_StatusReasonCodes_member})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_Tags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_Tags_member})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sValidationException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_Reason})
+var sValidationException_FieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_FieldList})
+var sValidationExceptionErrorCode_REQUIRED_FIELD_MISSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUIRED_FIELD_MISSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionErrorCode_REQUIRED_FIELD_MISSING})
+var sValidationExceptionErrorCode_INVALID_ENUM_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ENUM_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionErrorCode_INVALID_ENUM_VALUE})
+var sValidationExceptionErrorCode_INVALID_STRING_FORMAT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_STRING_FORMAT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionErrorCode_INVALID_STRING_FORMAT})
+var sValidationExceptionErrorCode_INVALID_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionErrorCode_INVALID_VALUE})
+var sValidationExceptionErrorCode_NOT_ENOUGH_VALUES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_ENOUGH_VALUES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionErrorCode_NOT_ENOUGH_VALUES})
+var sValidationExceptionErrorCode_TOO_MANY_VALUES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOO_MANY_VALUES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionErrorCode_TOO_MANY_VALUES})
+var sValidationExceptionErrorCode_INVALID_RESOURCE_STATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_RESOURCE_STATE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionErrorCode_INVALID_RESOURCE_STATE})
+var sValidationExceptionErrorCode_DUPLICATE_KEY_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUPLICATE_KEY_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionErrorCode_DUPLICATE_KEY_VALUE})
+var sValidationExceptionErrorCode_VALUE_OUT_OF_RANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALUE_OUT_OF_RANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionErrorCode_VALUE_OUT_OF_RANGE})
+var sValidationExceptionErrorCode_ACTION_NOT_PERMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTION_NOT_PERMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionErrorCode_ACTION_NOT_PERMITTED})
+var sValidationExceptionField_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_Name})
+var sValidationExceptionField_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_Message})
+var sValidationExceptionField_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iValidationExceptionErrorCode, Members: &mValidationExceptionErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionField_Code})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_UNKNOWN_OPERATION})
+var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_CANNOT_PARSE})
+var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_FIELD_VALIDATION_FAILED})
+var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_OTHER})
+var sValidationExceptionReason_BUSINESS_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUSINESS_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_BUSINESS_VALIDATION_FAILED})
+var sAmendBenefitApplicationInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &eAmendBenefitApplicationInput_Catalog})
+var sAmendBenefitApplicationInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAmendBenefitApplicationInput_ClientToken})
+var sAmendBenefitApplicationInput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAmendBenefitApplicationInput_Revision})
+var sAmendBenefitApplicationInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_BenefitApplicationIdentifier, Type: smithy.ShapeTypeString, Ext: &eAmendBenefitApplicationInput_Identifier})
+var sAmendBenefitApplicationInput_AmendmentReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AmendmentReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAmendBenefitApplicationInput_AmendmentReason})
+var sAmendBenefitApplicationInput_Amendments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Amendments", ID: &i_AmendmentList, Members: &m_AmendmentList, Type: smithy.ShapeTypeList, Ext: &eAmendBenefitApplicationInput_Amendments})
+var sAssociateBenefitApplicationResourceInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &eAssociateBenefitApplicationResourceInput_Catalog})
+var sAssociateBenefitApplicationResourceInput_BenefitApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitApplicationIdentifier", ID: &i_BenefitApplicationIdentifier, Type: smithy.ShapeTypeString, Ext: &eAssociateBenefitApplicationResourceInput_BenefitApplicationIdentifier})
+var sAssociateBenefitApplicationResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eAssociateBenefitApplicationResourceInput_ResourceArn})
+var sAssociateBenefitApplicationResourceOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_BenefitApplicationId, Type: smithy.ShapeTypeString, Ext: &eAssociateBenefitApplicationResourceOutput_Id})
+var sAssociateBenefitApplicationResourceOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAssociateBenefitApplicationResourceOutput_Arn})
+var sAssociateBenefitApplicationResourceOutput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAssociateBenefitApplicationResourceOutput_Revision})
+var sCancelBenefitApplicationInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &eCancelBenefitApplicationInput_Catalog})
+var sCancelBenefitApplicationInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCancelBenefitApplicationInput_ClientToken})
+var sCancelBenefitApplicationInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_BenefitApplicationIdentifier, Type: smithy.ShapeTypeString, Ext: &eCancelBenefitApplicationInput_Identifier})
+var sCancelBenefitApplicationInput_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCancelBenefitApplicationInput_Reason})
+var sCreateBenefitApplicationInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &eCreateBenefitApplicationInput_Catalog})
+var sCreateBenefitApplicationInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateBenefitApplicationInput_ClientToken})
+var sCreateBenefitApplicationInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_BenefitApplicationName, Type: smithy.ShapeTypeString, Ext: &eCreateBenefitApplicationInput_Name})
+var sCreateBenefitApplicationInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_BenefitApplicationDescription, Type: smithy.ShapeTypeString, Ext: &eCreateBenefitApplicationInput_Description})
+var sCreateBenefitApplicationInput_BenefitIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitIdentifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateBenefitApplicationInput_BenefitIdentifier})
+var sCreateBenefitApplicationInput_FulfillmentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FulfillmentTypes", ID: &i_FulfillmentTypes, Members: &m_FulfillmentTypes, Type: smithy.ShapeTypeList, Ext: &eCreateBenefitApplicationInput_FulfillmentTypes})
+var sCreateBenefitApplicationInput_BenefitApplicationDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitApplicationDetails", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &eCreateBenefitApplicationInput_BenefitApplicationDetails})
+var sCreateBenefitApplicationInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eCreateBenefitApplicationInput_Tags})
+var sCreateBenefitApplicationInput_AssociatedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedResources", ID: &i_Arns, Members: &m_Arns, Type: smithy.ShapeTypeList, Ext: &eCreateBenefitApplicationInput_AssociatedResources})
+var sCreateBenefitApplicationInput_PartnerContacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartnerContacts", ID: &i_Contacts, Members: &m_Contacts, Type: smithy.ShapeTypeList, Ext: &eCreateBenefitApplicationInput_PartnerContacts})
+var sCreateBenefitApplicationInput_FileDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileDetails", ID: &i_FileInputDetails, Members: &m_FileInputDetails, Type: smithy.ShapeTypeList, Ext: &eCreateBenefitApplicationInput_FileDetails})
+var sCreateBenefitApplicationOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_BenefitApplicationId, Type: smithy.ShapeTypeString, Ext: &eCreateBenefitApplicationOutput_Id})
+var sCreateBenefitApplicationOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateBenefitApplicationOutput_Arn})
+var sCreateBenefitApplicationOutput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCreateBenefitApplicationOutput_Revision})
+var sDisassociateBenefitApplicationResourceInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &eDisassociateBenefitApplicationResourceInput_Catalog})
+var sDisassociateBenefitApplicationResourceInput_BenefitApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitApplicationIdentifier", ID: &i_BenefitApplicationIdentifier, Type: smithy.ShapeTypeString, Ext: &eDisassociateBenefitApplicationResourceInput_BenefitApplicationIdentifier})
+var sDisassociateBenefitApplicationResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDisassociateBenefitApplicationResourceInput_ResourceArn})
+var sDisassociateBenefitApplicationResourceOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_BenefitApplicationId, Type: smithy.ShapeTypeString, Ext: &eDisassociateBenefitApplicationResourceOutput_Id})
+var sDisassociateBenefitApplicationResourceOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDisassociateBenefitApplicationResourceOutput_Arn})
+var sDisassociateBenefitApplicationResourceOutput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eDisassociateBenefitApplicationResourceOutput_Revision})
+var sGetBenefitAllocationInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &eGetBenefitAllocationInput_Catalog})
+var sGetBenefitAllocationInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_BenefitAllocationIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetBenefitAllocationInput_Identifier})
+var sGetBenefitAllocationOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_BenefitAllocationId, Type: smithy.ShapeTypeString, Ext: &eGetBenefitAllocationOutput_Id})
+var sGetBenefitAllocationOutput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &eGetBenefitAllocationOutput_Catalog})
+var sGetBenefitAllocationOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_BenefitAllocationArn, Type: smithy.ShapeTypeString, Ext: &eGetBenefitAllocationOutput_Arn})
+var sGetBenefitAllocationOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetBenefitAllocationOutput_Name})
+var sGetBenefitAllocationOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetBenefitAllocationOutput_Description})
+var sGetBenefitAllocationOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iBenefitAllocationStatus, Members: &mBenefitAllocationStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetBenefitAllocationOutput_Status})
+var sGetBenefitAllocationOutput_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetBenefitAllocationOutput_StatusReason})
+var sGetBenefitAllocationOutput_BenefitApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitApplicationId", ID: &i_BenefitApplicationId, Type: smithy.ShapeTypeString, Ext: &eGetBenefitAllocationOutput_BenefitApplicationId})
+var sGetBenefitAllocationOutput_BenefitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitId", ID: &i_BenefitId, Type: smithy.ShapeTypeString, Ext: &eGetBenefitAllocationOutput_BenefitId})
+var sGetBenefitAllocationOutput_FulfillmentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FulfillmentType", ID: &iFulfillmentType, Members: &mFulfillmentType, Type: smithy.ShapeTypeEnum, Ext: &eGetBenefitAllocationOutput_FulfillmentType})
+var sGetBenefitAllocationOutput_ApplicableBenefitIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicableBenefitIds", ID: &i_BenefitIdentifiers, Members: &m_BenefitIdentifiers, Type: smithy.ShapeTypeList, Ext: &eGetBenefitAllocationOutput_ApplicableBenefitIds})
+var sGetBenefitAllocationOutput_FulfillmentDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FulfillmentDetail", ID: &iFulfillmentDetails, Members: &mFulfillmentDetails, Type: smithy.ShapeTypeUnion, Ext: &eGetBenefitAllocationOutput_FulfillmentDetail})
+var sGetBenefitAllocationOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eGetBenefitAllocationOutput_CreatedAt})
+var sGetBenefitAllocationOutput_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eGetBenefitAllocationOutput_UpdatedAt})
+var sGetBenefitAllocationOutput_StartsAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartsAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eGetBenefitAllocationOutput_StartsAt})
+var sGetBenefitAllocationOutput_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eGetBenefitAllocationOutput_ExpiresAt})
+var sGetBenefitApplicationInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &eGetBenefitApplicationInput_Catalog})
+var sGetBenefitApplicationInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_BenefitApplicationIdentifier, Type: smithy.ShapeTypeString, Ext: &eGetBenefitApplicationInput_Identifier})
+var sGetBenefitApplicationOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_BenefitApplicationId, Type: smithy.ShapeTypeString, Ext: &eGetBenefitApplicationOutput_Id})
+var sGetBenefitApplicationOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetBenefitApplicationOutput_Arn})
+var sGetBenefitApplicationOutput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &eGetBenefitApplicationOutput_Catalog})
+var sGetBenefitApplicationOutput_BenefitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitId", ID: &i_BenefitId, Type: smithy.ShapeTypeString, Ext: &eGetBenefitApplicationOutput_BenefitId})
+var sGetBenefitApplicationOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_BenefitApplicationName, Type: smithy.ShapeTypeString, Ext: &eGetBenefitApplicationOutput_Name})
+var sGetBenefitApplicationOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_BenefitApplicationDescription, Type: smithy.ShapeTypeString, Ext: &eGetBenefitApplicationOutput_Description})
+var sGetBenefitApplicationOutput_FulfillmentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FulfillmentTypes", ID: &i_FulfillmentTypes, Members: &m_FulfillmentTypes, Type: smithy.ShapeTypeList, Ext: &eGetBenefitApplicationOutput_FulfillmentTypes})
+var sGetBenefitApplicationOutput_BenefitApplicationDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitApplicationDetails", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &eGetBenefitApplicationOutput_BenefitApplicationDetails})
+var sGetBenefitApplicationOutput_Programs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Programs", ID: &i_Programs, Members: &m_Programs, Type: smithy.ShapeTypeList, Ext: &eGetBenefitApplicationOutput_Programs})
+var sGetBenefitApplicationOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iBenefitApplicationStatus, Members: &mBenefitApplicationStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetBenefitApplicationOutput_Status})
+var sGetBenefitApplicationOutput_Stage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stage", ID: &i_BenefitApplicationStage, Type: smithy.ShapeTypeString, Ext: &eGetBenefitApplicationOutput_Stage})
+var sGetBenefitApplicationOutput_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetBenefitApplicationOutput_StatusReason})
+var sGetBenefitApplicationOutput_StatusReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReasonCode", ID: &i_StatusReasonCode, Type: smithy.ShapeTypeString, Ext: &eGetBenefitApplicationOutput_StatusReasonCode})
+var sGetBenefitApplicationOutput_StatusReasonCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReasonCodes", ID: &i_StatusReasonCodes, Members: &m_StatusReasonCodes, Type: smithy.ShapeTypeList, Ext: &eGetBenefitApplicationOutput_StatusReasonCodes})
+var sGetBenefitApplicationOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eGetBenefitApplicationOutput_CreatedAt})
+var sGetBenefitApplicationOutput_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp, Ext: &eGetBenefitApplicationOutput_UpdatedAt})
+var sGetBenefitApplicationOutput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetBenefitApplicationOutput_Revision})
+var sGetBenefitApplicationOutput_AssociatedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedResources", ID: &i_Arns, Members: &m_Arns, Type: smithy.ShapeTypeList, Ext: &eGetBenefitApplicationOutput_AssociatedResources})
+var sGetBenefitApplicationOutput_PartnerContacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartnerContacts", ID: &i_Contacts, Members: &m_Contacts, Type: smithy.ShapeTypeList, Ext: &eGetBenefitApplicationOutput_PartnerContacts})
+var sGetBenefitApplicationOutput_FileDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileDetails", ID: &i_FileDetails, Members: &m_FileDetails, Type: smithy.ShapeTypeList, Ext: &eGetBenefitApplicationOutput_FileDetails})
+var sGetBenefitInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &eGetBenefitInput_Catalog})
+var sGetBenefitInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetBenefitInput_Identifier})
+var sGetBenefitOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetBenefitOutput_Id})
+var sGetBenefitOutput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &eGetBenefitOutput_Catalog})
+var sGetBenefitOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetBenefitOutput_Arn})
+var sGetBenefitOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetBenefitOutput_Name})
+var sGetBenefitOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eGetBenefitOutput_Description})
+var sGetBenefitOutput_Programs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Programs", ID: &i_Programs, Members: &m_Programs, Type: smithy.ShapeTypeList, Ext: &eGetBenefitOutput_Programs})
+var sGetBenefitOutput_FulfillmentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FulfillmentTypes", ID: &i_FulfillmentTypes, Members: &m_FulfillmentTypes, Type: smithy.ShapeTypeList, Ext: &eGetBenefitOutput_FulfillmentTypes})
+var sGetBenefitOutput_BenefitRequestSchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitRequestSchema", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &eGetBenefitOutput_BenefitRequestSchema})
+var sGetBenefitOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iBenefitStatus, Members: &mBenefitStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetBenefitOutput_Status})
+var sListBenefitAllocationsInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &eListBenefitAllocationsInput_Catalog})
+var sListBenefitAllocationsInput_FulfillmentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FulfillmentTypes", ID: &i_FulfillmentTypes, Members: &m_FulfillmentTypes, Type: smithy.ShapeTypeList, Ext: &eListBenefitAllocationsInput_FulfillmentTypes})
+var sListBenefitAllocationsInput_BenefitIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitIdentifiers", ID: &i_BenefitIdentifiers, Members: &m_BenefitIdentifiers, Type: smithy.ShapeTypeList, Ext: &eListBenefitAllocationsInput_BenefitIdentifiers})
+var sListBenefitAllocationsInput_BenefitApplicationIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitApplicationIdentifiers", ID: &i_BenefitApplicationIdentifierList, Members: &m_BenefitApplicationIdentifierList, Type: smithy.ShapeTypeList, Ext: &eListBenefitAllocationsInput_BenefitApplicationIdentifiers})
+var sListBenefitAllocationsInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_BenefitAllocationStatusList, Members: &m_BenefitAllocationStatusList, Type: smithy.ShapeTypeList, Ext: &eListBenefitAllocationsInput_Status})
+var sListBenefitAllocationsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListBenefitAllocationsInput_MaxResults})
+var sListBenefitAllocationsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListBenefitAllocationsInput_NextToken})
+var sListBenefitAllocationsOutput_BenefitAllocationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitAllocationSummaries", ID: &i_BenefitAllocationSummaries, Members: &m_BenefitAllocationSummaries, Type: smithy.ShapeTypeList, Ext: &eListBenefitAllocationsOutput_BenefitAllocationSummaries})
+var sListBenefitAllocationsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListBenefitAllocationsOutput_NextToken})
+var sListBenefitApplicationsInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &eListBenefitApplicationsInput_Catalog})
+var sListBenefitApplicationsInput_Programs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Programs", ID: &i_Programs, Members: &m_Programs, Type: smithy.ShapeTypeList, Ext: &eListBenefitApplicationsInput_Programs})
+var sListBenefitApplicationsInput_FulfillmentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FulfillmentTypes", ID: &i_FulfillmentTypes, Members: &m_FulfillmentTypes, Type: smithy.ShapeTypeList, Ext: &eListBenefitApplicationsInput_FulfillmentTypes})
+var sListBenefitApplicationsInput_BenefitIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitIdentifiers", ID: &i_BenefitIdentifiers, Members: &m_BenefitIdentifiers, Type: smithy.ShapeTypeList, Ext: &eListBenefitApplicationsInput_BenefitIdentifiers})
+var sListBenefitApplicationsInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Statuses, Members: &m_Statuses, Type: smithy.ShapeTypeList, Ext: &eListBenefitApplicationsInput_Status})
+var sListBenefitApplicationsInput_Stages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stages", ID: &i_Stages, Members: &m_Stages, Type: smithy.ShapeTypeList, Ext: &eListBenefitApplicationsInput_Stages})
+var sListBenefitApplicationsInput_AssociatedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedResources", ID: &i_AssociatedResources, Members: &m_AssociatedResources, Type: smithy.ShapeTypeList, Ext: &eListBenefitApplicationsInput_AssociatedResources})
+var sListBenefitApplicationsInput_AssociatedResourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedResourceArns", ID: &i_Arns, Members: &m_Arns, Type: smithy.ShapeTypeList, Ext: &eListBenefitApplicationsInput_AssociatedResourceArns})
+var sListBenefitApplicationsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListBenefitApplicationsInput_MaxResults})
+var sListBenefitApplicationsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListBenefitApplicationsInput_NextToken})
+var sListBenefitApplicationsOutput_BenefitApplicationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitApplicationSummaries", ID: &i_BenefitApplicationSummaries, Members: &m_BenefitApplicationSummaries, Type: smithy.ShapeTypeList, Ext: &eListBenefitApplicationsOutput_BenefitApplicationSummaries})
+var sListBenefitApplicationsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListBenefitApplicationsOutput_NextToken})
+var sListBenefitsInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &eListBenefitsInput_Catalog})
+var sListBenefitsInput_Programs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Programs", ID: &i_Programs, Members: &m_Programs, Type: smithy.ShapeTypeList, Ext: &eListBenefitsInput_Programs})
+var sListBenefitsInput_FulfillmentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FulfillmentTypes", ID: &i_FulfillmentTypes, Members: &m_FulfillmentTypes, Type: smithy.ShapeTypeList, Ext: &eListBenefitsInput_FulfillmentTypes})
+var sListBenefitsInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_BenefitStatuses, Members: &m_BenefitStatuses, Type: smithy.ShapeTypeList, Ext: &eListBenefitsInput_Status})
+var sListBenefitsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eListBenefitsInput_MaxResults})
+var sListBenefitsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListBenefitsInput_NextToken})
+var sListBenefitsOutput_BenefitSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitSummaries", ID: &i_BenefitSummaries, Members: &m_BenefitSummaries, Type: smithy.ShapeTypeList, Ext: &eListBenefitsOutput_BenefitSummaries})
+var sListBenefitsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eListBenefitsOutput_NextToken})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_tags})
+var sRecallBenefitApplicationInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &eRecallBenefitApplicationInput_Catalog})
+var sRecallBenefitApplicationInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRecallBenefitApplicationInput_ClientToken})
+var sRecallBenefitApplicationInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_BenefitApplicationIdentifier, Type: smithy.ShapeTypeString, Ext: &eRecallBenefitApplicationInput_Identifier})
+var sRecallBenefitApplicationInput_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRecallBenefitApplicationInput_Reason})
+var sSubmitBenefitApplicationInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &eSubmitBenefitApplicationInput_Catalog})
+var sSubmitBenefitApplicationInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_BenefitApplicationIdentifier, Type: smithy.ShapeTypeString, Ext: &eSubmitBenefitApplicationInput_Identifier})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_tags})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUpdateBenefitApplicationInput_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogName, Type: smithy.ShapeTypeString, Ext: &eUpdateBenefitApplicationInput_Catalog})
+var sUpdateBenefitApplicationInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateBenefitApplicationInput_ClientToken})
+var sUpdateBenefitApplicationInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_BenefitApplicationName, Type: smithy.ShapeTypeString, Ext: &eUpdateBenefitApplicationInput_Name})
+var sUpdateBenefitApplicationInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_BenefitApplicationDescription, Type: smithy.ShapeTypeString, Ext: &eUpdateBenefitApplicationInput_Description})
+var sUpdateBenefitApplicationInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_BenefitApplicationIdentifier, Type: smithy.ShapeTypeString, Ext: &eUpdateBenefitApplicationInput_Identifier})
+var sUpdateBenefitApplicationInput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateBenefitApplicationInput_Revision})
+var sUpdateBenefitApplicationInput_BenefitApplicationDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BenefitApplicationDetails", ID: &pDocument, Type: smithy.ShapeTypeDocument, Ext: &eUpdateBenefitApplicationInput_BenefitApplicationDetails})
+var sUpdateBenefitApplicationInput_PartnerContacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartnerContacts", ID: &i_Contacts, Members: &m_Contacts, Type: smithy.ShapeTypeList, Ext: &eUpdateBenefitApplicationInput_PartnerContacts})
+var sUpdateBenefitApplicationInput_FileDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileDetails", ID: &i_FileInputDetails, Members: &m_FileInputDetails, Type: smithy.ShapeTypeList, Ext: &eUpdateBenefitApplicationInput_FileDetails})
+var sUpdateBenefitApplicationOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_BenefitApplicationId, Type: smithy.ShapeTypeString, Ext: &eUpdateBenefitApplicationOutput_Id})
+var sUpdateBenefitApplicationOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateBenefitApplicationOutput_Arn})
+var sUpdateBenefitApplicationOutput_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eUpdateBenefitApplicationOutput_Revision})
 
 var AmendBenefitApplication = &sAmendBenefitApplication
 

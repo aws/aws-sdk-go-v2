@@ -7,9 +7,56 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [48]smithy.SchemaExtensions
+var (
+	eAssumeRoleForPodIdentity                                smithy.SchemaExtensions
+	e_EKSAuthFrontend                                        smithy.SchemaExtensions
+	eAccessDeniedException                                   smithy.SchemaExtensions
+	eAccessDeniedException_message                           smithy.SchemaExtensions
+	eAssumedRoleUser                                         smithy.SchemaExtensions
+	eAssumedRoleUser_arn                                     smithy.SchemaExtensions
+	eAssumedRoleUser_assumeRoleId                            smithy.SchemaExtensions
+	e_ClusterName                                            smithy.SchemaExtensions
+	eCredentials                                             smithy.SchemaExtensions
+	eCredentials_sessionToken                                smithy.SchemaExtensions
+	eCredentials_secretAccessKey                             smithy.SchemaExtensions
+	eCredentials_accessKeyId                                 smithy.SchemaExtensions
+	eCredentials_expiration                                  smithy.SchemaExtensions
+	eExpiredTokenException                                   smithy.SchemaExtensions
+	eExpiredTokenException_message                           smithy.SchemaExtensions
+	eInternalServerException                                 smithy.SchemaExtensions
+	eInternalServerException_message                         smithy.SchemaExtensions
+	eInvalidParameterException                               smithy.SchemaExtensions
+	eInvalidParameterException_message                       smithy.SchemaExtensions
+	eInvalidRequestException                                 smithy.SchemaExtensions
+	eInvalidRequestException_message                         smithy.SchemaExtensions
+	eInvalidTokenException                                   smithy.SchemaExtensions
+	eInvalidTokenException_message                           smithy.SchemaExtensions
+	e_JwtToken                                               smithy.SchemaExtensions
+	ePodIdentityAssociation                                  smithy.SchemaExtensions
+	ePodIdentityAssociation_associationArn                   smithy.SchemaExtensions
+	ePodIdentityAssociation_associationId                    smithy.SchemaExtensions
+	eResourceNotFoundException                               smithy.SchemaExtensions
+	eResourceNotFoundException_message                       smithy.SchemaExtensions
+	eServiceUnavailableException                             smithy.SchemaExtensions
+	eServiceUnavailableException_message                     smithy.SchemaExtensions
+	eSubject                                                 smithy.SchemaExtensions
+	eSubject_namespace                                       smithy.SchemaExtensions
+	eSubject_serviceAccount                                  smithy.SchemaExtensions
+	eThrottlingException                                     smithy.SchemaExtensions
+	eThrottlingException_message                             smithy.SchemaExtensions
+	eAssumeRoleForPodIdentityRequest                         smithy.SchemaExtensions
+	eAssumeRoleForPodIdentityRequest_clusterName             smithy.SchemaExtensions
+	eAssumeRoleForPodIdentityRequest_token                   smithy.SchemaExtensions
+	eAssumeRoleForPodIdentityRequest_eksNodeName             smithy.SchemaExtensions
+	eAssumeRoleForPodIdentityRequest_instanceId              smithy.SchemaExtensions
+	eAssumeRoleForPodIdentityRequest_zone                    smithy.SchemaExtensions
+	eAssumeRoleForPodIdentityResponse                        smithy.SchemaExtensions
+	eAssumeRoleForPodIdentityResponse_subject                smithy.SchemaExtensions
+	eAssumeRoleForPodIdentityResponse_audience               smithy.SchemaExtensions
+	eAssumeRoleForPodIdentityResponse_podIdentityAssociation smithy.SchemaExtensions
+	eAssumeRoleForPodIdentityResponse_assumedRoleUser        smithy.SchemaExtensions
+	eAssumeRoleForPodIdentityResponse_credentials            smithy.SchemaExtensions
+)
 
 var (
 	iAssumeRoleForPodIdentity         = smithy.ShapeID{Namespace: "com.amazonaws.eksauth", Name: "AssumeRoleForPodIdentity"}
@@ -63,55 +110,55 @@ var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottl
 var mAssumeRoleForPodIdentityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssumeRoleForPodIdentityRequest_clusterName, &sAssumeRoleForPodIdentityRequest_token, &sAssumeRoleForPodIdentityRequest_eksNodeName, &sAssumeRoleForPodIdentityRequest_instanceId, &sAssumeRoleForPodIdentityRequest_zone}}
 var mAssumeRoleForPodIdentityResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssumeRoleForPodIdentityResponse_subject, &sAssumeRoleForPodIdentityResponse_audience, &sAssumeRoleForPodIdentityResponse_podIdentityAssociation, &sAssumeRoleForPodIdentityResponse_assumedRoleUser, &sAssumeRoleForPodIdentityResponse_credentials}}
 
-var sAssumeRoleForPodIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssumeRoleForPodIdentity, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var s_EKSAuthFrontend = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EKSAuthFrontend, Type: smithy.ShapeTypeService, Ext: &ext[1]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[2]})
-var sAssumedRoleUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssumedRoleUser, Members: &mAssumedRoleUser, Type: smithy.ShapeTypeStructure, Ext: &ext[4]})
-var s_ClusterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClusterName, Type: smithy.ShapeTypeString, Ext: &ext[7]})
-var sCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCredentials, Members: &mCredentials, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[8]})
-var sExpiredTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpiredTokenException, Members: &mExpiredTokenException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[13]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[15]})
-var sInvalidParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterException, Members: &mInvalidParameterException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[17]})
-var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[19]})
-var sInvalidTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTokenException, Members: &mInvalidTokenException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[21]})
-var s_JwtToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JwtToken, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &ext[23]})
-var sPodIdentityAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPodIdentityAssociation, Members: &mPodIdentityAssociation, Type: smithy.ShapeTypeStructure, Ext: &ext[24]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &ext[27]})
-var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &ext[29]})
-var sSubject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubject, Members: &mSubject, Type: smithy.ShapeTypeStructure, Ext: &ext[31]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &ext[34]})
-var sAssumeRoleForPodIdentityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssumeRoleForPodIdentityRequest, Members: &mAssumeRoleForPodIdentityRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[36]})
-var sAssumeRoleForPodIdentityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssumeRoleForPodIdentityResponse, Members: &mAssumeRoleForPodIdentityResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[42]})
+var sAssumeRoleForPodIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssumeRoleForPodIdentity, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eAssumeRoleForPodIdentity})
+var s_EKSAuthFrontend = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EKSAuthFrontend, Type: smithy.ShapeTypeService, Ext: &e_EKSAuthFrontend})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAssumedRoleUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssumedRoleUser, Members: &mAssumedRoleUser, Type: smithy.ShapeTypeStructure, Ext: &eAssumedRoleUser})
+var s_ClusterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClusterName, Type: smithy.ShapeTypeString, Ext: &e_ClusterName})
+var sCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCredentials, Members: &mCredentials, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eCredentials})
+var sExpiredTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpiredTokenException, Members: &mExpiredTokenException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eExpiredTokenException})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var sInvalidParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterException, Members: &mInvalidParameterException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidParameterException})
+var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRequestException})
+var sInvalidTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTokenException, Members: &mInvalidTokenException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidTokenException})
+var s_JwtToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JwtToken, Traits: &t2, Type: smithy.ShapeTypeString, Ext: &e_JwtToken})
+var sPodIdentityAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPodIdentityAssociation, Members: &mPodIdentityAssociation, Type: smithy.ShapeTypeStructure, Ext: &ePodIdentityAssociation})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eServiceUnavailableException})
+var sSubject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubject, Members: &mSubject, Type: smithy.ShapeTypeStructure, Ext: &eSubject})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var sAssumeRoleForPodIdentityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssumeRoleForPodIdentityRequest, Members: &mAssumeRoleForPodIdentityRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssumeRoleForPodIdentityRequest})
+var sAssumeRoleForPodIdentityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssumeRoleForPodIdentityResponse, Members: &mAssumeRoleForPodIdentityResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssumeRoleForPodIdentityResponse})
 
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[3]})
-var sAssumedRoleUser_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[5]})
-var sAssumedRoleUser_assumeRoleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assumeRoleId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[6]})
-var sCredentials_sessionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[9]})
-var sCredentials_secretAccessKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretAccessKey", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[10]})
-var sCredentials_accessKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessKeyId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[11]})
-var sCredentials_expiration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiration", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[12]})
-var sExpiredTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[14]})
-var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[16]})
-var sInvalidParameterException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[18]})
-var sInvalidRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[20]})
-var sInvalidTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[22]})
-var sPodIdentityAssociation_associationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[25]})
-var sPodIdentityAssociation_associationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[28]})
-var sServiceUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[30]})
-var sSubject_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var sSubject_serviceAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceAccount", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var sAssumeRoleForPodIdentityRequest_clusterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterName", ID: &i_ClusterName, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &ext[37]})
-var sAssumeRoleForPodIdentityRequest_token = smithy.NewStaticSchema(smithy.StaticSchema{Member: "token", ID: &i_JwtToken, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &ext[38]})
-var sAssumeRoleForPodIdentityRequest_eksNodeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eksNodeName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[39]})
-var sAssumeRoleForPodIdentityRequest_instanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var sAssumeRoleForPodIdentityRequest_zone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zone", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[41]})
-var sAssumeRoleForPodIdentityResponse_subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subject", ID: &iSubject, Members: &mSubject, Type: smithy.ShapeTypeStructure, Ext: &ext[43]})
-var sAssumeRoleForPodIdentityResponse_audience = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audience", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var sAssumeRoleForPodIdentityResponse_podIdentityAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "podIdentityAssociation", ID: &iPodIdentityAssociation, Members: &mPodIdentityAssociation, Type: smithy.ShapeTypeStructure, Ext: &ext[45]})
-var sAssumeRoleForPodIdentityResponse_assumedRoleUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assumedRoleUser", ID: &iAssumedRoleUser, Members: &mAssumedRoleUser, Type: smithy.ShapeTypeStructure, Ext: &ext[46]})
-var sAssumeRoleForPodIdentityResponse_credentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "credentials", ID: &iCredentials, Members: &mCredentials, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &ext[47]})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAssumedRoleUser_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAssumedRoleUser_arn})
+var sAssumedRoleUser_assumeRoleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assumeRoleId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAssumedRoleUser_assumeRoleId})
+var sCredentials_sessionToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionToken", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCredentials_sessionToken})
+var sCredentials_secretAccessKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretAccessKey", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCredentials_secretAccessKey})
+var sCredentials_accessKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessKeyId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCredentials_accessKeyId})
+var sCredentials_expiration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiration", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCredentials_expiration})
+var sExpiredTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eExpiredTokenException_message})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sInvalidParameterException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInvalidParameterException_message})
+var sInvalidRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInvalidRequestException_message})
+var sInvalidTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInvalidTokenException_message})
+var sPodIdentityAssociation_associationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePodIdentityAssociation_associationArn})
+var sPodIdentityAssociation_associationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ePodIdentityAssociation_associationId})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sServiceUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceUnavailableException_message})
+var sSubject_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSubject_namespace})
+var sSubject_serviceAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceAccount", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSubject_serviceAccount})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sAssumeRoleForPodIdentityRequest_clusterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterName", ID: &i_ClusterName, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleForPodIdentityRequest_clusterName})
+var sAssumeRoleForPodIdentityRequest_token = smithy.NewStaticSchema(smithy.StaticSchema{Member: "token", ID: &i_JwtToken, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleForPodIdentityRequest_token})
+var sAssumeRoleForPodIdentityRequest_eksNodeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eksNodeName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleForPodIdentityRequest_eksNodeName})
+var sAssumeRoleForPodIdentityRequest_instanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleForPodIdentityRequest_instanceId})
+var sAssumeRoleForPodIdentityRequest_zone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zone", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleForPodIdentityRequest_zone})
+var sAssumeRoleForPodIdentityResponse_subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subject", ID: &iSubject, Members: &mSubject, Type: smithy.ShapeTypeStructure, Ext: &eAssumeRoleForPodIdentityResponse_subject})
+var sAssumeRoleForPodIdentityResponse_audience = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audience", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAssumeRoleForPodIdentityResponse_audience})
+var sAssumeRoleForPodIdentityResponse_podIdentityAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "podIdentityAssociation", ID: &iPodIdentityAssociation, Members: &mPodIdentityAssociation, Type: smithy.ShapeTypeStructure, Ext: &eAssumeRoleForPodIdentityResponse_podIdentityAssociation})
+var sAssumeRoleForPodIdentityResponse_assumedRoleUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assumedRoleUser", ID: &iAssumedRoleUser, Members: &mAssumedRoleUser, Type: smithy.ShapeTypeStructure, Ext: &eAssumeRoleForPodIdentityResponse_assumedRoleUser})
+var sAssumeRoleForPodIdentityResponse_credentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "credentials", ID: &iCredentials, Members: &mCredentials, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eAssumeRoleForPodIdentityResponse_credentials})
 
 var AssumeRoleForPodIdentity = &sAssumeRoleForPodIdentity
 

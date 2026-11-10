@@ -7,9 +7,150 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [142]smithy.SchemaExtensions
+var (
+	eCreateRescoreExecutionPlan                            smithy.SchemaExtensions
+	eDeleteRescoreExecutionPlan                            smithy.SchemaExtensions
+	eDescribeRescoreExecutionPlan                          smithy.SchemaExtensions
+	eListRescoreExecutionPlans                             smithy.SchemaExtensions
+	eListTagsForResource                                   smithy.SchemaExtensions
+	eRescore                                               smithy.SchemaExtensions
+	eTagResource                                           smithy.SchemaExtensions
+	eUntagResource                                         smithy.SchemaExtensions
+	eUpdateRescoreExecutionPlan                            smithy.SchemaExtensions
+	e_AWSKendraRerankingFrontendService                    smithy.SchemaExtensions
+	eAccessDeniedException                                 smithy.SchemaExtensions
+	eAccessDeniedException_Message                         smithy.SchemaExtensions
+	e_AmazonResourceName                                   smithy.SchemaExtensions
+	e_BodyTokensList                                       smithy.SchemaExtensions
+	e_BodyTokensList_member                                smithy.SchemaExtensions
+	eCapacityUnitsConfiguration                            smithy.SchemaExtensions
+	eCapacityUnitsConfiguration_RescoreCapacityUnits       smithy.SchemaExtensions
+	e_ClientTokenName                                      smithy.SchemaExtensions
+	eConflictException                                     smithy.SchemaExtensions
+	eConflictException_Message                             smithy.SchemaExtensions
+	e_Description                                          smithy.SchemaExtensions
+	eDocument                                              smithy.SchemaExtensions
+	eDocument_Id                                           smithy.SchemaExtensions
+	eDocument_GroupId                                      smithy.SchemaExtensions
+	eDocument_Title                                        smithy.SchemaExtensions
+	eDocument_Body                                         smithy.SchemaExtensions
+	eDocument_TokenizedTitle                               smithy.SchemaExtensions
+	eDocument_TokenizedBody                                smithy.SchemaExtensions
+	eDocument_OriginalScore                                smithy.SchemaExtensions
+	e_DocumentBody                                         smithy.SchemaExtensions
+	e_DocumentId                                           smithy.SchemaExtensions
+	e_DocumentList                                         smithy.SchemaExtensions
+	e_DocumentList_member                                  smithy.SchemaExtensions
+	e_DocumentTitle                                        smithy.SchemaExtensions
+	e_ErrorMessage                                         smithy.SchemaExtensions
+	e_Float                                                smithy.SchemaExtensions
+	e_GroupId                                              smithy.SchemaExtensions
+	eInternalServerException                               smithy.SchemaExtensions
+	eInternalServerException_Message                       smithy.SchemaExtensions
+	e_MaxResultsIntegerForListRescoreExecutionPlansRequest smithy.SchemaExtensions
+	e_NextToken                                            smithy.SchemaExtensions
+	e_RescoreCapacityUnit                                  smithy.SchemaExtensions
+	e_RescoreExecutionPlanArn                              smithy.SchemaExtensions
+	e_RescoreExecutionPlanId                               smithy.SchemaExtensions
+	e_RescoreExecutionPlanName                             smithy.SchemaExtensions
+	eRescoreExecutionPlanStatus                            smithy.SchemaExtensions
+	eRescoreExecutionPlanStatus_CREATING                   smithy.SchemaExtensions
+	eRescoreExecutionPlanStatus_UPDATING                   smithy.SchemaExtensions
+	eRescoreExecutionPlanStatus_ACTIVE                     smithy.SchemaExtensions
+	eRescoreExecutionPlanStatus_DELETING                   smithy.SchemaExtensions
+	eRescoreExecutionPlanStatus_FAILED                     smithy.SchemaExtensions
+	eRescoreExecutionPlanSummary                           smithy.SchemaExtensions
+	eRescoreExecutionPlanSummary_Name                      smithy.SchemaExtensions
+	eRescoreExecutionPlanSummary_Id                        smithy.SchemaExtensions
+	eRescoreExecutionPlanSummary_CreatedAt                 smithy.SchemaExtensions
+	eRescoreExecutionPlanSummary_UpdatedAt                 smithy.SchemaExtensions
+	eRescoreExecutionPlanSummary_Status                    smithy.SchemaExtensions
+	e_RescoreExecutionPlanSummaryList                      smithy.SchemaExtensions
+	e_RescoreExecutionPlanSummaryList_member               smithy.SchemaExtensions
+	e_RescoreId                                            smithy.SchemaExtensions
+	eRescoreResultItem                                     smithy.SchemaExtensions
+	eRescoreResultItem_DocumentId                          smithy.SchemaExtensions
+	eRescoreResultItem_Score                               smithy.SchemaExtensions
+	e_RescoreResultItemList                                smithy.SchemaExtensions
+	e_RescoreResultItemList_member                         smithy.SchemaExtensions
+	eResourceNotFoundException                             smithy.SchemaExtensions
+	eResourceNotFoundException_Message                     smithy.SchemaExtensions
+	eResourceUnavailableException                          smithy.SchemaExtensions
+	eResourceUnavailableException_Message                  smithy.SchemaExtensions
+	e_SearchQuery                                          smithy.SchemaExtensions
+	eServiceQuotaExceededException                         smithy.SchemaExtensions
+	eServiceQuotaExceededException_Message                 smithy.SchemaExtensions
+	eTag                                                   smithy.SchemaExtensions
+	eTag_Key                                               smithy.SchemaExtensions
+	eTag_Value                                             smithy.SchemaExtensions
+	e_TagKey                                               smithy.SchemaExtensions
+	e_TagKeyList                                           smithy.SchemaExtensions
+	e_TagKeyList_member                                    smithy.SchemaExtensions
+	e_TagList                                              smithy.SchemaExtensions
+	e_TagList_member                                       smithy.SchemaExtensions
+	e_TagValue                                             smithy.SchemaExtensions
+	eThrottlingException                                   smithy.SchemaExtensions
+	eThrottlingException_Message                           smithy.SchemaExtensions
+	e_Timestamp                                            smithy.SchemaExtensions
+	e_TitleTokensList                                      smithy.SchemaExtensions
+	e_TitleTokensList_member                               smithy.SchemaExtensions
+	e_Tokens                                               smithy.SchemaExtensions
+	eValidationException                                   smithy.SchemaExtensions
+	eValidationException_Message                           smithy.SchemaExtensions
+	eCreateRescoreExecutionPlanRequest                     smithy.SchemaExtensions
+	eCreateRescoreExecutionPlanRequest_Name                smithy.SchemaExtensions
+	eCreateRescoreExecutionPlanRequest_Description         smithy.SchemaExtensions
+	eCreateRescoreExecutionPlanRequest_CapacityUnits       smithy.SchemaExtensions
+	eCreateRescoreExecutionPlanRequest_Tags                smithy.SchemaExtensions
+	eCreateRescoreExecutionPlanRequest_ClientToken         smithy.SchemaExtensions
+	eCreateRescoreExecutionPlanResponse                    smithy.SchemaExtensions
+	eCreateRescoreExecutionPlanResponse_Id                 smithy.SchemaExtensions
+	eCreateRescoreExecutionPlanResponse_Arn                smithy.SchemaExtensions
+	eDeleteRescoreExecutionPlanRequest                     smithy.SchemaExtensions
+	eDeleteRescoreExecutionPlanRequest_Id                  smithy.SchemaExtensions
+	eDescribeRescoreExecutionPlanRequest                   smithy.SchemaExtensions
+	eDescribeRescoreExecutionPlanRequest_Id                smithy.SchemaExtensions
+	eDescribeRescoreExecutionPlanResponse                  smithy.SchemaExtensions
+	eDescribeRescoreExecutionPlanResponse_Id               smithy.SchemaExtensions
+	eDescribeRescoreExecutionPlanResponse_Arn              smithy.SchemaExtensions
+	eDescribeRescoreExecutionPlanResponse_Name             smithy.SchemaExtensions
+	eDescribeRescoreExecutionPlanResponse_Description      smithy.SchemaExtensions
+	eDescribeRescoreExecutionPlanResponse_CapacityUnits    smithy.SchemaExtensions
+	eDescribeRescoreExecutionPlanResponse_CreatedAt        smithy.SchemaExtensions
+	eDescribeRescoreExecutionPlanResponse_UpdatedAt        smithy.SchemaExtensions
+	eDescribeRescoreExecutionPlanResponse_Status           smithy.SchemaExtensions
+	eDescribeRescoreExecutionPlanResponse_ErrorMessage     smithy.SchemaExtensions
+	eListRescoreExecutionPlansRequest                      smithy.SchemaExtensions
+	eListRescoreExecutionPlansRequest_NextToken            smithy.SchemaExtensions
+	eListRescoreExecutionPlansRequest_MaxResults           smithy.SchemaExtensions
+	eListRescoreExecutionPlansResponse                     smithy.SchemaExtensions
+	eListRescoreExecutionPlansResponse_SummaryItems        smithy.SchemaExtensions
+	eListRescoreExecutionPlansResponse_NextToken           smithy.SchemaExtensions
+	eListTagsForResourceRequest                            smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceARN                smithy.SchemaExtensions
+	eListTagsForResourceResponse                           smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                      smithy.SchemaExtensions
+	eRescoreRequest                                        smithy.SchemaExtensions
+	eRescoreRequest_RescoreExecutionPlanId                 smithy.SchemaExtensions
+	eRescoreRequest_SearchQuery                            smithy.SchemaExtensions
+	eRescoreRequest_Documents                              smithy.SchemaExtensions
+	eRescoreResult                                         smithy.SchemaExtensions
+	eRescoreResult_RescoreId                               smithy.SchemaExtensions
+	eRescoreResult_ResultItems                             smithy.SchemaExtensions
+	eTagResourceRequest                                    smithy.SchemaExtensions
+	eTagResourceRequest_ResourceARN                        smithy.SchemaExtensions
+	eTagResourceRequest_Tags                               smithy.SchemaExtensions
+	eTagResourceResponse                                   smithy.SchemaExtensions
+	eUntagResourceRequest                                  smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceARN                      smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                          smithy.SchemaExtensions
+	eUntagResourceResponse                                 smithy.SchemaExtensions
+	eUpdateRescoreExecutionPlanRequest                     smithy.SchemaExtensions
+	eUpdateRescoreExecutionPlanRequest_Id                  smithy.SchemaExtensions
+	eUpdateRescoreExecutionPlanRequest_Name                smithy.SchemaExtensions
+	eUpdateRescoreExecutionPlanRequest_Description         smithy.SchemaExtensions
+	eUpdateRescoreExecutionPlanRequest_CapacityUnits       smithy.SchemaExtensions
+)
 
 var (
 	iCreateRescoreExecutionPlan                            = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "CreateRescoreExecutionPlan"}
@@ -151,149 +292,149 @@ var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResou
 var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceARN, &sUntagResourceRequest_TagKeys}}
 var mUpdateRescoreExecutionPlanRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRescoreExecutionPlanRequest_Id, &sUpdateRescoreExecutionPlanRequest_Name, &sUpdateRescoreExecutionPlanRequest_Description, &sUpdateRescoreExecutionPlanRequest_CapacityUnits}}
 
-var sCreateRescoreExecutionPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRescoreExecutionPlan, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sDeleteRescoreExecutionPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRescoreExecutionPlan, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sDescribeRescoreExecutionPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRescoreExecutionPlan, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sListRescoreExecutionPlans = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRescoreExecutionPlans, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sRescore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRescore, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sUpdateRescoreExecutionPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRescoreExecutionPlan, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var s_AWSKendraRerankingFrontendService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSKendraRerankingFrontendService, Type: smithy.ShapeTypeService, Ext: &ext[9]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &ext[10]})
-var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[12]})
-var s_BodyTokensList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BodyTokensList, Members: &m_BodyTokensList, Type: smithy.ShapeTypeList, Ext: &ext[13]})
-var sCapacityUnitsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacityUnitsConfiguration, Members: &mCapacityUnitsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[15]})
-var s_ClientTokenName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientTokenName, Type: smithy.ShapeTypeString, Ext: &ext[17]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &ext[18]})
-var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[20]})
-var sDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocument, Members: &mDocument, Type: smithy.ShapeTypeStructure, Ext: &ext[21]})
-var s_DocumentBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DocumentBody, Type: smithy.ShapeTypeString, Ext: &ext[29]})
-var s_DocumentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DocumentId, Type: smithy.ShapeTypeString, Ext: &ext[30]})
-var s_DocumentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DocumentList, Members: &m_DocumentList, Type: smithy.ShapeTypeList, Ext: &ext[31]})
-var s_DocumentTitle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DocumentTitle, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[34]})
-var s_Float = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Float, Type: smithy.ShapeTypeFloat, Ext: &ext[35]})
-var s_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupId, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var s_MaxResultsIntegerForListRescoreExecutionPlansRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsIntegerForListRescoreExecutionPlansRequest, Type: smithy.ShapeTypeInteger, Ext: &ext[39]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var s_RescoreCapacityUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RescoreCapacityUnit, Type: smithy.ShapeTypeInteger, Ext: &ext[41]})
-var s_RescoreExecutionPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RescoreExecutionPlanArn, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var s_RescoreExecutionPlanId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RescoreExecutionPlanId, Type: smithy.ShapeTypeString, Ext: &ext[43]})
-var s_RescoreExecutionPlanName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RescoreExecutionPlanName, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var sRescoreExecutionPlanStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRescoreExecutionPlanStatus, Members: &mRescoreExecutionPlanStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[45]})
-var sRescoreExecutionPlanSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRescoreExecutionPlanSummary, Members: &mRescoreExecutionPlanSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[51]})
-var s_RescoreExecutionPlanSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RescoreExecutionPlanSummaryList, Members: &m_RescoreExecutionPlanSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[57]})
-var s_RescoreId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RescoreId, Type: smithy.ShapeTypeString, Ext: &ext[59]})
-var sRescoreResultItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRescoreResultItem, Members: &mRescoreResultItem, Type: smithy.ShapeTypeStructure, Ext: &ext[60]})
-var s_RescoreResultItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RescoreResultItemList, Members: &m_RescoreResultItemList, Type: smithy.ShapeTypeList, Ext: &ext[63]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &ext[65]})
-var sResourceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceUnavailableException, Members: &mResourceUnavailableException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &ext[67]})
-var s_SearchQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchQuery, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &ext[70]})
-var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[75]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[76]})
-var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[78]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[80]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &ext[81]})
-var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[83]})
-var s_TitleTokensList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TitleTokensList, Members: &m_TitleTokensList, Type: smithy.ShapeTypeList, Ext: &ext[84]})
-var s_Tokens = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tokens, Type: smithy.ShapeTypeString, Ext: &ext[86]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &ext[87]})
-var sCreateRescoreExecutionPlanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRescoreExecutionPlanRequest, Members: &mCreateRescoreExecutionPlanRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[89]})
-var sCreateRescoreExecutionPlanResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRescoreExecutionPlanResponse, Members: &mCreateRescoreExecutionPlanResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[95]})
-var sDeleteRescoreExecutionPlanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRescoreExecutionPlanRequest, Members: &mDeleteRescoreExecutionPlanRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[98]})
-var sDescribeRescoreExecutionPlanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRescoreExecutionPlanRequest, Members: &mDescribeRescoreExecutionPlanRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[100]})
-var sDescribeRescoreExecutionPlanResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRescoreExecutionPlanResponse, Members: &mDescribeRescoreExecutionPlanResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[102]})
-var sListRescoreExecutionPlansRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRescoreExecutionPlansRequest, Members: &mListRescoreExecutionPlansRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[112]})
-var sListRescoreExecutionPlansResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRescoreExecutionPlansResponse, Members: &mListRescoreExecutionPlansResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[115]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[118]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var sRescoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRescoreRequest, Members: &mRescoreRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[122]})
-var sRescoreResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRescoreResult, Members: &mRescoreResult, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[129]})
-var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[132]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[133]})
-var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[136]})
-var sUpdateRescoreExecutionPlanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRescoreExecutionPlanRequest, Members: &mUpdateRescoreExecutionPlanRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[137]})
+var sCreateRescoreExecutionPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRescoreExecutionPlan, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateRescoreExecutionPlan})
+var sDeleteRescoreExecutionPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRescoreExecutionPlan, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eDeleteRescoreExecutionPlan})
+var sDescribeRescoreExecutionPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRescoreExecutionPlan, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eDescribeRescoreExecutionPlan})
+var sListRescoreExecutionPlans = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRescoreExecutionPlans, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eListRescoreExecutionPlans})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sRescore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRescore, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eRescore})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateRescoreExecutionPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRescoreExecutionPlan, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRescoreExecutionPlan})
+var s_AWSKendraRerankingFrontendService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSKendraRerankingFrontendService, Type: smithy.ShapeTypeService, Ext: &e_AWSKendraRerankingFrontendService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &e_AmazonResourceName})
+var s_BodyTokensList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BodyTokensList, Members: &m_BodyTokensList, Type: smithy.ShapeTypeList, Ext: &e_BodyTokensList})
+var sCapacityUnitsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacityUnitsConfiguration, Members: &mCapacityUnitsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCapacityUnitsConfiguration})
+var s_ClientTokenName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientTokenName, Type: smithy.ShapeTypeString, Ext: &e_ClientTokenName})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &e_Description})
+var sDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocument, Members: &mDocument, Type: smithy.ShapeTypeStructure, Ext: &eDocument})
+var s_DocumentBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DocumentBody, Type: smithy.ShapeTypeString, Ext: &e_DocumentBody})
+var s_DocumentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DocumentId, Type: smithy.ShapeTypeString, Ext: &e_DocumentId})
+var s_DocumentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DocumentList, Members: &m_DocumentList, Type: smithy.ShapeTypeList, Ext: &e_DocumentList})
+var s_DocumentTitle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DocumentTitle, Type: smithy.ShapeTypeString, Ext: &e_DocumentTitle})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var s_Float = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Float, Type: smithy.ShapeTypeFloat, Ext: &e_Float})
+var s_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupId, Type: smithy.ShapeTypeString, Ext: &e_GroupId})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var s_MaxResultsIntegerForListRescoreExecutionPlansRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsIntegerForListRescoreExecutionPlansRequest, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResultsIntegerForListRescoreExecutionPlansRequest})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var s_RescoreCapacityUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RescoreCapacityUnit, Type: smithy.ShapeTypeInteger, Ext: &e_RescoreCapacityUnit})
+var s_RescoreExecutionPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RescoreExecutionPlanArn, Type: smithy.ShapeTypeString, Ext: &e_RescoreExecutionPlanArn})
+var s_RescoreExecutionPlanId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RescoreExecutionPlanId, Type: smithy.ShapeTypeString, Ext: &e_RescoreExecutionPlanId})
+var s_RescoreExecutionPlanName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RescoreExecutionPlanName, Type: smithy.ShapeTypeString, Ext: &e_RescoreExecutionPlanName})
+var sRescoreExecutionPlanStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRescoreExecutionPlanStatus, Members: &mRescoreExecutionPlanStatus, Type: smithy.ShapeTypeEnum, Ext: &eRescoreExecutionPlanStatus})
+var sRescoreExecutionPlanSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRescoreExecutionPlanSummary, Members: &mRescoreExecutionPlanSummary, Type: smithy.ShapeTypeStructure, Ext: &eRescoreExecutionPlanSummary})
+var s_RescoreExecutionPlanSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RescoreExecutionPlanSummaryList, Members: &m_RescoreExecutionPlanSummaryList, Type: smithy.ShapeTypeList, Ext: &e_RescoreExecutionPlanSummaryList})
+var s_RescoreId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RescoreId, Type: smithy.ShapeTypeString, Ext: &e_RescoreId})
+var sRescoreResultItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRescoreResultItem, Members: &mRescoreResultItem, Type: smithy.ShapeTypeStructure, Ext: &eRescoreResultItem})
+var s_RescoreResultItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RescoreResultItemList, Members: &m_RescoreResultItemList, Type: smithy.ShapeTypeList, Ext: &e_RescoreResultItemList})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceUnavailableException, Members: &mResourceUnavailableException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eResourceUnavailableException})
+var s_SearchQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchQuery, Type: smithy.ShapeTypeString, Ext: &e_SearchQuery})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t10, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var s_TitleTokensList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TitleTokensList, Members: &m_TitleTokensList, Type: smithy.ShapeTypeList, Ext: &e_TitleTokensList})
+var s_Tokens = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tokens, Type: smithy.ShapeTypeString, Ext: &e_Tokens})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sCreateRescoreExecutionPlanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRescoreExecutionPlanRequest, Members: &mCreateRescoreExecutionPlanRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateRescoreExecutionPlanRequest})
+var sCreateRescoreExecutionPlanResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRescoreExecutionPlanResponse, Members: &mCreateRescoreExecutionPlanResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateRescoreExecutionPlanResponse})
+var sDeleteRescoreExecutionPlanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRescoreExecutionPlanRequest, Members: &mDeleteRescoreExecutionPlanRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteRescoreExecutionPlanRequest})
+var sDescribeRescoreExecutionPlanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRescoreExecutionPlanRequest, Members: &mDescribeRescoreExecutionPlanRequest, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRescoreExecutionPlanRequest})
+var sDescribeRescoreExecutionPlanResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRescoreExecutionPlanResponse, Members: &mDescribeRescoreExecutionPlanResponse, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRescoreExecutionPlanResponse})
+var sListRescoreExecutionPlansRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRescoreExecutionPlansRequest, Members: &mListRescoreExecutionPlansRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRescoreExecutionPlansRequest})
+var sListRescoreExecutionPlansResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRescoreExecutionPlansResponse, Members: &mListRescoreExecutionPlansResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRescoreExecutionPlansResponse})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sRescoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRescoreRequest, Members: &mRescoreRequest, Type: smithy.ShapeTypeStructure, Ext: &eRescoreRequest})
+var sRescoreResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRescoreResult, Members: &mRescoreResult, Type: smithy.ShapeTypeStructure, Ext: &eRescoreResult})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateRescoreExecutionPlanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRescoreExecutionPlanRequest, Members: &mUpdateRescoreExecutionPlanRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRescoreExecutionPlanRequest})
 
-var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[11]})
-var s_BodyTokensList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Tokens, Type: smithy.ShapeTypeString, Ext: &ext[14]})
-var sCapacityUnitsConfiguration_RescoreCapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RescoreCapacityUnits", ID: &i_RescoreCapacityUnit, Type: smithy.ShapeTypeInteger, Ext: &ext[16]})
-var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[19]})
-var sDocument_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_DocumentId, Type: smithy.ShapeTypeString, Ext: &ext[22]})
-var sDocument_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_GroupId, Type: smithy.ShapeTypeString, Ext: &ext[23]})
-var sDocument_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_DocumentTitle, Type: smithy.ShapeTypeString, Ext: &ext[24]})
-var sDocument_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &i_DocumentBody, Type: smithy.ShapeTypeString, Ext: &ext[25]})
-var sDocument_TokenizedTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TokenizedTitle", ID: &i_TitleTokensList, Members: &m_TitleTokensList, Type: smithy.ShapeTypeList, Ext: &ext[26]})
-var sDocument_TokenizedBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TokenizedBody", ID: &i_BodyTokensList, Members: &m_BodyTokensList, Type: smithy.ShapeTypeList, Ext: &ext[27]})
-var sDocument_OriginalScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginalScore", ID: &i_Float, Type: smithy.ShapeTypeFloat, Ext: &ext[28]})
-var s_DocumentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDocument, Members: &mDocument, Type: smithy.ShapeTypeStructure, Ext: &ext[32]})
-var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[38]})
-var sRescoreExecutionPlanStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[46]})
-var sRescoreExecutionPlanStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[47]})
-var sRescoreExecutionPlanStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[48]})
-var sRescoreExecutionPlanStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[49]})
-var sRescoreExecutionPlanStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[50]})
-var sRescoreExecutionPlanSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RescoreExecutionPlanName, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var sRescoreExecutionPlanSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RescoreExecutionPlanId, Type: smithy.ShapeTypeString, Ext: &ext[53]})
-var sRescoreExecutionPlanSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[54]})
-var sRescoreExecutionPlanSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[55]})
-var sRescoreExecutionPlanSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRescoreExecutionPlanStatus, Members: &mRescoreExecutionPlanStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[56]})
-var s_RescoreExecutionPlanSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRescoreExecutionPlanSummary, Members: &mRescoreExecutionPlanSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[58]})
-var sRescoreResultItem_DocumentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentId", ID: &i_DocumentId, Type: smithy.ShapeTypeString, Ext: &ext[61]})
-var sRescoreResultItem_Score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Score", ID: &i_Float, Type: smithy.ShapeTypeFloat, Ext: &ext[62]})
-var s_RescoreResultItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRescoreResultItem, Members: &mRescoreResultItem, Type: smithy.ShapeTypeStructure, Ext: &ext[64]})
-var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[66]})
-var sResourceUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[68]})
-var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[71]})
-var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[73]})
-var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[74]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[77]})
-var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[79]})
-var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[82]})
-var s_TitleTokensList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Tokens, Type: smithy.ShapeTypeString, Ext: &ext[85]})
-var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[88]})
-var sCreateRescoreExecutionPlanRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RescoreExecutionPlanName, Type: smithy.ShapeTypeString, Ext: &ext[90]})
-var sCreateRescoreExecutionPlanRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[91]})
-var sCreateRescoreExecutionPlanRequest_CapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityUnits", ID: &iCapacityUnitsConfiguration, Members: &mCapacityUnitsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[92]})
-var sCreateRescoreExecutionPlanRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[93]})
-var sCreateRescoreExecutionPlanRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientTokenName, Type: smithy.ShapeTypeString, Ext: &ext[94]})
-var sCreateRescoreExecutionPlanResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RescoreExecutionPlanId, Type: smithy.ShapeTypeString, Ext: &ext[96]})
-var sCreateRescoreExecutionPlanResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_RescoreExecutionPlanArn, Type: smithy.ShapeTypeString, Ext: &ext[97]})
-var sDeleteRescoreExecutionPlanRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RescoreExecutionPlanId, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &ext[99]})
-var sDescribeRescoreExecutionPlanRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RescoreExecutionPlanId, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &ext[101]})
-var sDescribeRescoreExecutionPlanResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RescoreExecutionPlanId, Type: smithy.ShapeTypeString, Ext: &ext[103]})
-var sDescribeRescoreExecutionPlanResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_RescoreExecutionPlanArn, Type: smithy.ShapeTypeString, Ext: &ext[104]})
-var sDescribeRescoreExecutionPlanResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RescoreExecutionPlanName, Type: smithy.ShapeTypeString, Ext: &ext[105]})
-var sDescribeRescoreExecutionPlanResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[106]})
-var sDescribeRescoreExecutionPlanResponse_CapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityUnits", ID: &iCapacityUnitsConfiguration, Members: &mCapacityUnitsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[107]})
-var sDescribeRescoreExecutionPlanResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[108]})
-var sDescribeRescoreExecutionPlanResponse_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[109]})
-var sDescribeRescoreExecutionPlanResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRescoreExecutionPlanStatus, Members: &mRescoreExecutionPlanStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[110]})
-var sDescribeRescoreExecutionPlanResponse_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[111]})
-var sListRescoreExecutionPlansRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[113]})
-var sListRescoreExecutionPlansRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsIntegerForListRescoreExecutionPlansRequest, Traits: &t15, Type: smithy.ShapeTypeInteger, Ext: &ext[114]})
-var sListRescoreExecutionPlansResponse_SummaryItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SummaryItems", ID: &i_RescoreExecutionPlanSummaryList, Members: &m_RescoreExecutionPlanSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[116]})
-var sListRescoreExecutionPlansResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[117]})
-var sListTagsForResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[119]})
-var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[121]})
-var sRescoreRequest_RescoreExecutionPlanId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RescoreExecutionPlanId", ID: &i_RescoreExecutionPlanId, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &ext[123]})
-var sRescoreRequest_SearchQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchQuery", ID: &i_SearchQuery, Type: smithy.ShapeTypeString, Ext: &ext[124]})
-var sRescoreRequest_Documents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Documents", ID: &i_DocumentList, Members: &m_DocumentList, Type: smithy.ShapeTypeList, Ext: &ext[125]})
-var sRescoreResult_RescoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RescoreId", ID: &i_RescoreId, Type: smithy.ShapeTypeString, Ext: &ext[127]})
-var sRescoreResult_ResultItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultItems", ID: &i_RescoreResultItemList, Members: &m_RescoreResultItemList, Type: smithy.ShapeTypeList, Ext: &ext[128]})
-var sTagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[131]})
-var sUntagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[134]})
-var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[135]})
-var sUpdateRescoreExecutionPlanRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RescoreExecutionPlanId, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var sUpdateRescoreExecutionPlanRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RescoreExecutionPlanName, Type: smithy.ShapeTypeString, Ext: &ext[139]})
-var sUpdateRescoreExecutionPlanRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[140]})
-var sUpdateRescoreExecutionPlanRequest_CapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityUnits", ID: &iCapacityUnitsConfiguration, Members: &mCapacityUnitsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[141]})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var s_BodyTokensList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Tokens, Type: smithy.ShapeTypeString, Ext: &e_BodyTokensList_member})
+var sCapacityUnitsConfiguration_RescoreCapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RescoreCapacityUnits", ID: &i_RescoreCapacityUnit, Type: smithy.ShapeTypeInteger, Ext: &eCapacityUnitsConfiguration_RescoreCapacityUnits})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var sDocument_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_DocumentId, Type: smithy.ShapeTypeString, Ext: &eDocument_Id})
+var sDocument_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_GroupId, Type: smithy.ShapeTypeString, Ext: &eDocument_GroupId})
+var sDocument_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_DocumentTitle, Type: smithy.ShapeTypeString, Ext: &eDocument_Title})
+var sDocument_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &i_DocumentBody, Type: smithy.ShapeTypeString, Ext: &eDocument_Body})
+var sDocument_TokenizedTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TokenizedTitle", ID: &i_TitleTokensList, Members: &m_TitleTokensList, Type: smithy.ShapeTypeList, Ext: &eDocument_TokenizedTitle})
+var sDocument_TokenizedBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TokenizedBody", ID: &i_BodyTokensList, Members: &m_BodyTokensList, Type: smithy.ShapeTypeList, Ext: &eDocument_TokenizedBody})
+var sDocument_OriginalScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginalScore", ID: &i_Float, Type: smithy.ShapeTypeFloat, Ext: &eDocument_OriginalScore})
+var s_DocumentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDocument, Members: &mDocument, Type: smithy.ShapeTypeStructure, Ext: &e_DocumentList_member})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var sRescoreExecutionPlanStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRescoreExecutionPlanStatus_CREATING})
+var sRescoreExecutionPlanStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRescoreExecutionPlanStatus_UPDATING})
+var sRescoreExecutionPlanStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRescoreExecutionPlanStatus_ACTIVE})
+var sRescoreExecutionPlanStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRescoreExecutionPlanStatus_DELETING})
+var sRescoreExecutionPlanStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRescoreExecutionPlanStatus_FAILED})
+var sRescoreExecutionPlanSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RescoreExecutionPlanName, Type: smithy.ShapeTypeString, Ext: &eRescoreExecutionPlanSummary_Name})
+var sRescoreExecutionPlanSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RescoreExecutionPlanId, Type: smithy.ShapeTypeString, Ext: &eRescoreExecutionPlanSummary_Id})
+var sRescoreExecutionPlanSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRescoreExecutionPlanSummary_CreatedAt})
+var sRescoreExecutionPlanSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eRescoreExecutionPlanSummary_UpdatedAt})
+var sRescoreExecutionPlanSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRescoreExecutionPlanStatus, Members: &mRescoreExecutionPlanStatus, Type: smithy.ShapeTypeEnum, Ext: &eRescoreExecutionPlanSummary_Status})
+var s_RescoreExecutionPlanSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRescoreExecutionPlanSummary, Members: &mRescoreExecutionPlanSummary, Type: smithy.ShapeTypeStructure, Ext: &e_RescoreExecutionPlanSummaryList_member})
+var sRescoreResultItem_DocumentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentId", ID: &i_DocumentId, Type: smithy.ShapeTypeString, Ext: &eRescoreResultItem_DocumentId})
+var sRescoreResultItem_Score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Score", ID: &i_Float, Type: smithy.ShapeTypeFloat, Ext: &eRescoreResultItem_Score})
+var s_RescoreResultItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRescoreResultItem, Members: &mRescoreResultItem, Type: smithy.ShapeTypeStructure, Ext: &e_RescoreResultItemList_member})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sResourceUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceUnavailableException_Message})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_Message})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var s_TitleTokensList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Tokens, Type: smithy.ShapeTypeString, Ext: &e_TitleTokensList_member})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sCreateRescoreExecutionPlanRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RescoreExecutionPlanName, Type: smithy.ShapeTypeString, Ext: &eCreateRescoreExecutionPlanRequest_Name})
+var sCreateRescoreExecutionPlanRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateRescoreExecutionPlanRequest_Description})
+var sCreateRescoreExecutionPlanRequest_CapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityUnits", ID: &iCapacityUnitsConfiguration, Members: &mCapacityUnitsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateRescoreExecutionPlanRequest_CapacityUnits})
+var sCreateRescoreExecutionPlanRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateRescoreExecutionPlanRequest_Tags})
+var sCreateRescoreExecutionPlanRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientTokenName, Type: smithy.ShapeTypeString, Ext: &eCreateRescoreExecutionPlanRequest_ClientToken})
+var sCreateRescoreExecutionPlanResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RescoreExecutionPlanId, Type: smithy.ShapeTypeString, Ext: &eCreateRescoreExecutionPlanResponse_Id})
+var sCreateRescoreExecutionPlanResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_RescoreExecutionPlanArn, Type: smithy.ShapeTypeString, Ext: &eCreateRescoreExecutionPlanResponse_Arn})
+var sDeleteRescoreExecutionPlanRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RescoreExecutionPlanId, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eDeleteRescoreExecutionPlanRequest_Id})
+var sDescribeRescoreExecutionPlanRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RescoreExecutionPlanId, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eDescribeRescoreExecutionPlanRequest_Id})
+var sDescribeRescoreExecutionPlanResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RescoreExecutionPlanId, Type: smithy.ShapeTypeString, Ext: &eDescribeRescoreExecutionPlanResponse_Id})
+var sDescribeRescoreExecutionPlanResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_RescoreExecutionPlanArn, Type: smithy.ShapeTypeString, Ext: &eDescribeRescoreExecutionPlanResponse_Arn})
+var sDescribeRescoreExecutionPlanResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RescoreExecutionPlanName, Type: smithy.ShapeTypeString, Ext: &eDescribeRescoreExecutionPlanResponse_Name})
+var sDescribeRescoreExecutionPlanResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eDescribeRescoreExecutionPlanResponse_Description})
+var sDescribeRescoreExecutionPlanResponse_CapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityUnits", ID: &iCapacityUnitsConfiguration, Members: &mCapacityUnitsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDescribeRescoreExecutionPlanResponse_CapacityUnits})
+var sDescribeRescoreExecutionPlanResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeRescoreExecutionPlanResponse_CreatedAt})
+var sDescribeRescoreExecutionPlanResponse_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDescribeRescoreExecutionPlanResponse_UpdatedAt})
+var sDescribeRescoreExecutionPlanResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRescoreExecutionPlanStatus, Members: &mRescoreExecutionPlanStatus, Type: smithy.ShapeTypeEnum, Ext: &eDescribeRescoreExecutionPlanResponse_Status})
+var sDescribeRescoreExecutionPlanResponse_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eDescribeRescoreExecutionPlanResponse_ErrorMessage})
+var sListRescoreExecutionPlansRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eListRescoreExecutionPlansRequest_NextToken})
+var sListRescoreExecutionPlansRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsIntegerForListRescoreExecutionPlansRequest, Traits: &t15, Type: smithy.ShapeTypeInteger, Ext: &eListRescoreExecutionPlansRequest_MaxResults})
+var sListRescoreExecutionPlansResponse_SummaryItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SummaryItems", ID: &i_RescoreExecutionPlanSummaryList, Members: &m_RescoreExecutionPlanSummaryList, Type: smithy.ShapeTypeList, Ext: &eListRescoreExecutionPlansResponse_SummaryItems})
+var sListRescoreExecutionPlansResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRescoreExecutionPlansResponse_NextToken})
+var sListTagsForResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceARN})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_Tags})
+var sRescoreRequest_RescoreExecutionPlanId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RescoreExecutionPlanId", ID: &i_RescoreExecutionPlanId, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eRescoreRequest_RescoreExecutionPlanId})
+var sRescoreRequest_SearchQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchQuery", ID: &i_SearchQuery, Type: smithy.ShapeTypeString, Ext: &eRescoreRequest_SearchQuery})
+var sRescoreRequest_Documents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Documents", ID: &i_DocumentList, Members: &m_DocumentList, Type: smithy.ShapeTypeList, Ext: &eRescoreRequest_Documents})
+var sRescoreResult_RescoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RescoreId", ID: &i_RescoreId, Type: smithy.ShapeTypeString, Ext: &eRescoreResult_RescoreId})
+var sRescoreResult_ResultItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultItems", ID: &i_RescoreResultItemList, Members: &m_RescoreResultItemList, Type: smithy.ShapeTypeList, Ext: &eRescoreResult_ResultItems})
+var sTagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceARN})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_Tags})
+var sUntagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceARN})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUpdateRescoreExecutionPlanRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RescoreExecutionPlanId, Traits: &t13, Type: smithy.ShapeTypeString, Ext: &eUpdateRescoreExecutionPlanRequest_Id})
+var sUpdateRescoreExecutionPlanRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RescoreExecutionPlanName, Type: smithy.ShapeTypeString, Ext: &eUpdateRescoreExecutionPlanRequest_Name})
+var sUpdateRescoreExecutionPlanRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateRescoreExecutionPlanRequest_Description})
+var sUpdateRescoreExecutionPlanRequest_CapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityUnits", ID: &iCapacityUnitsConfiguration, Members: &mCapacityUnitsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRescoreExecutionPlanRequest_CapacityUnits})
 
 var CreateRescoreExecutionPlan = &sCreateRescoreExecutionPlan
 

@@ -7,9 +7,370 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [362]smithy.SchemaExtensions
+var (
+	eCreateLifecyclePolicy                               smithy.SchemaExtensions
+	eDeleteLifecyclePolicy                               smithy.SchemaExtensions
+	eGetLifecyclePolicies                                smithy.SchemaExtensions
+	eGetLifecyclePolicy                                  smithy.SchemaExtensions
+	eListTagsForResource                                 smithy.SchemaExtensions
+	eTagResource                                         smithy.SchemaExtensions
+	eUntagResource                                       smithy.SchemaExtensions
+	eUpdateLifecyclePolicy                               smithy.SchemaExtensions
+	e_dlm_20180112                                       smithy.SchemaExtensions
+	eAction                                              smithy.SchemaExtensions
+	eAction_Name                                         smithy.SchemaExtensions
+	eAction_CrossRegionCopy                              smithy.SchemaExtensions
+	e_ActionList                                         smithy.SchemaExtensions
+	e_ActionList_member                                  smithy.SchemaExtensions
+	e_ActionName                                         smithy.SchemaExtensions
+	eArchiveRetainRule                                   smithy.SchemaExtensions
+	eArchiveRetainRule_RetentionArchiveTier              smithy.SchemaExtensions
+	eArchiveRule                                         smithy.SchemaExtensions
+	eArchiveRule_RetainRule                              smithy.SchemaExtensions
+	e_AvailabilityZone                                   smithy.SchemaExtensions
+	e_AvailabilityZoneId                                 smithy.SchemaExtensions
+	e_AvailabilityZoneIdList                             smithy.SchemaExtensions
+	e_AvailabilityZoneIdList_member                      smithy.SchemaExtensions
+	e_AvailabilityZoneList                               smithy.SchemaExtensions
+	e_AvailabilityZoneList_member                        smithy.SchemaExtensions
+	e_AwsAccountId                                       smithy.SchemaExtensions
+	e_CmkArn                                             smithy.SchemaExtensions
+	e_CopyTags                                           smithy.SchemaExtensions
+	e_CopyTagsNullable                                   smithy.SchemaExtensions
+	e_Count                                              smithy.SchemaExtensions
+	e_CreateInterval                                     smithy.SchemaExtensions
+	eCreateRule                                          smithy.SchemaExtensions
+	eCreateRule_Location                                 smithy.SchemaExtensions
+	eCreateRule_Interval                                 smithy.SchemaExtensions
+	eCreateRule_IntervalUnit                             smithy.SchemaExtensions
+	eCreateRule_Times                                    smithy.SchemaExtensions
+	eCreateRule_CronExpression                           smithy.SchemaExtensions
+	eCreateRule_Scripts                                  smithy.SchemaExtensions
+	e_CronExpression                                     smithy.SchemaExtensions
+	eCrossRegionCopyAction                               smithy.SchemaExtensions
+	eCrossRegionCopyAction_Target                        smithy.SchemaExtensions
+	eCrossRegionCopyAction_EncryptionConfiguration       smithy.SchemaExtensions
+	eCrossRegionCopyAction_RetainRule                    smithy.SchemaExtensions
+	e_CrossRegionCopyActionList                          smithy.SchemaExtensions
+	e_CrossRegionCopyActionList_member                   smithy.SchemaExtensions
+	eCrossRegionCopyDeprecateRule                        smithy.SchemaExtensions
+	eCrossRegionCopyDeprecateRule_Interval               smithy.SchemaExtensions
+	eCrossRegionCopyDeprecateRule_IntervalUnit           smithy.SchemaExtensions
+	eCrossRegionCopyRetainRule                           smithy.SchemaExtensions
+	eCrossRegionCopyRetainRule_Interval                  smithy.SchemaExtensions
+	eCrossRegionCopyRetainRule_IntervalUnit              smithy.SchemaExtensions
+	eCrossRegionCopyRule                                 smithy.SchemaExtensions
+	eCrossRegionCopyRule_TargetRegion                    smithy.SchemaExtensions
+	eCrossRegionCopyRule_Target                          smithy.SchemaExtensions
+	eCrossRegionCopyRule_Encrypted                       smithy.SchemaExtensions
+	eCrossRegionCopyRule_CmkArn                          smithy.SchemaExtensions
+	eCrossRegionCopyRule_CopyTags                        smithy.SchemaExtensions
+	eCrossRegionCopyRule_RetainRule                      smithy.SchemaExtensions
+	eCrossRegionCopyRule_DeprecateRule                   smithy.SchemaExtensions
+	e_CrossRegionCopyRules                               smithy.SchemaExtensions
+	e_CrossRegionCopyRules_member                        smithy.SchemaExtensions
+	eCrossRegionCopyTarget                               smithy.SchemaExtensions
+	eCrossRegionCopyTarget_TargetRegion                  smithy.SchemaExtensions
+	e_CrossRegionCopyTargetList                          smithy.SchemaExtensions
+	e_CrossRegionCopyTargetList_member                   smithy.SchemaExtensions
+	eDefaultPoliciesTypeValues                           smithy.SchemaExtensions
+	eDefaultPoliciesTypeValues_VOLUME                    smithy.SchemaExtensions
+	eDefaultPoliciesTypeValues_INSTANCE                  smithy.SchemaExtensions
+	eDefaultPoliciesTypeValues_ALL                       smithy.SchemaExtensions
+	e_DefaultPolicy                                      smithy.SchemaExtensions
+	eDefaultPolicyTypeValues                             smithy.SchemaExtensions
+	eDefaultPolicyTypeValues_VOLUME                      smithy.SchemaExtensions
+	eDefaultPolicyTypeValues_INSTANCE                    smithy.SchemaExtensions
+	eDeprecateRule                                       smithy.SchemaExtensions
+	eDeprecateRule_Count                                 smithy.SchemaExtensions
+	eDeprecateRule_Interval                              smithy.SchemaExtensions
+	eDeprecateRule_IntervalUnit                          smithy.SchemaExtensions
+	e_DescriptionRegex                                   smithy.SchemaExtensions
+	e_Encrypted                                          smithy.SchemaExtensions
+	eEncryptionConfiguration                             smithy.SchemaExtensions
+	eEncryptionConfiguration_Encrypted                   smithy.SchemaExtensions
+	eEncryptionConfiguration_CmkArn                      smithy.SchemaExtensions
+	e_ErrorCode                                          smithy.SchemaExtensions
+	e_ErrorMessage                                       smithy.SchemaExtensions
+	eEventParameters                                     smithy.SchemaExtensions
+	eEventParameters_EventType                           smithy.SchemaExtensions
+	eEventParameters_SnapshotOwner                       smithy.SchemaExtensions
+	eEventParameters_DescriptionRegex                    smithy.SchemaExtensions
+	eEventSource                                         smithy.SchemaExtensions
+	eEventSource_Type                                    smithy.SchemaExtensions
+	eEventSource_Parameters                              smithy.SchemaExtensions
+	eEventSourceValues                                   smithy.SchemaExtensions
+	eEventSourceValues_MANAGED_CWE                       smithy.SchemaExtensions
+	eEventTypeValues                                     smithy.SchemaExtensions
+	eEventTypeValues_SHARE_SNAPSHOT                      smithy.SchemaExtensions
+	e_ExcludeBootVolume                                  smithy.SchemaExtensions
+	e_ExcludeBootVolumes                                 smithy.SchemaExtensions
+	e_ExcludeDataVolumeTagList                           smithy.SchemaExtensions
+	e_ExcludeDataVolumeTagList_member                    smithy.SchemaExtensions
+	e_ExcludeTagsList                                    smithy.SchemaExtensions
+	e_ExcludeTagsList_member                             smithy.SchemaExtensions
+	e_ExcludeVolumeTypesList                             smithy.SchemaExtensions
+	e_ExcludeVolumeTypesList_member                      smithy.SchemaExtensions
+	eExclusions                                          smithy.SchemaExtensions
+	eExclusions_ExcludeBootVolumes                       smithy.SchemaExtensions
+	eExclusions_ExcludeVolumeTypes                       smithy.SchemaExtensions
+	eExclusions_ExcludeTags                              smithy.SchemaExtensions
+	e_ExecuteOperationOnScriptFailure                    smithy.SchemaExtensions
+	e_ExecutionHandler                                   smithy.SchemaExtensions
+	eExecutionHandlerServiceValues                       smithy.SchemaExtensions
+	eExecutionHandlerServiceValues_AWS_SYSTEMS_MANAGER   smithy.SchemaExtensions
+	e_ExecutionRoleArn                                   smithy.SchemaExtensions
+	e_ExtendDeletion                                     smithy.SchemaExtensions
+	eFastRestoreRule                                     smithy.SchemaExtensions
+	eFastRestoreRule_Count                               smithy.SchemaExtensions
+	eFastRestoreRule_Interval                            smithy.SchemaExtensions
+	eFastRestoreRule_IntervalUnit                        smithy.SchemaExtensions
+	eFastRestoreRule_AvailabilityZones                   smithy.SchemaExtensions
+	eFastRestoreRule_AvailabilityZoneIds                 smithy.SchemaExtensions
+	eGettablePolicyStateValues                           smithy.SchemaExtensions
+	eGettablePolicyStateValues_ENABLED                   smithy.SchemaExtensions
+	eGettablePolicyStateValues_DISABLED                  smithy.SchemaExtensions
+	eGettablePolicyStateValues_ERROR                     smithy.SchemaExtensions
+	eInternalServerException                             smithy.SchemaExtensions
+	eInternalServerException_Message                     smithy.SchemaExtensions
+	eInternalServerException_Code                        smithy.SchemaExtensions
+	e_Interval                                           smithy.SchemaExtensions
+	eIntervalUnitValues                                  smithy.SchemaExtensions
+	eIntervalUnitValues_HOURS                            smithy.SchemaExtensions
+	eInvalidRequestException                             smithy.SchemaExtensions
+	eInvalidRequestException_Message                     smithy.SchemaExtensions
+	eInvalidRequestException_Code                        smithy.SchemaExtensions
+	eInvalidRequestException_RequiredParameters          smithy.SchemaExtensions
+	eInvalidRequestException_MutuallyExclusiveParameters smithy.SchemaExtensions
+	eLifecyclePolicy                                     smithy.SchemaExtensions
+	eLifecyclePolicy_PolicyId                            smithy.SchemaExtensions
+	eLifecyclePolicy_Description                         smithy.SchemaExtensions
+	eLifecyclePolicy_State                               smithy.SchemaExtensions
+	eLifecyclePolicy_StatusMessage                       smithy.SchemaExtensions
+	eLifecyclePolicy_ExecutionRoleArn                    smithy.SchemaExtensions
+	eLifecyclePolicy_DateCreated                         smithy.SchemaExtensions
+	eLifecyclePolicy_DateModified                        smithy.SchemaExtensions
+	eLifecyclePolicy_PolicyDetails                       smithy.SchemaExtensions
+	eLifecyclePolicy_Tags                                smithy.SchemaExtensions
+	eLifecyclePolicy_PolicyArn                           smithy.SchemaExtensions
+	eLifecyclePolicy_DefaultPolicy                       smithy.SchemaExtensions
+	eLifecyclePolicySummary                              smithy.SchemaExtensions
+	eLifecyclePolicySummary_PolicyId                     smithy.SchemaExtensions
+	eLifecyclePolicySummary_Description                  smithy.SchemaExtensions
+	eLifecyclePolicySummary_State                        smithy.SchemaExtensions
+	eLifecyclePolicySummary_Tags                         smithy.SchemaExtensions
+	eLifecyclePolicySummary_PolicyType                   smithy.SchemaExtensions
+	eLifecyclePolicySummary_DefaultPolicy                smithy.SchemaExtensions
+	e_LifecyclePolicySummaryList                         smithy.SchemaExtensions
+	e_LifecyclePolicySummaryList_member                  smithy.SchemaExtensions
+	eLimitExceededException                              smithy.SchemaExtensions
+	eLimitExceededException_Message                      smithy.SchemaExtensions
+	eLimitExceededException_Code                         smithy.SchemaExtensions
+	eLimitExceededException_ResourceType                 smithy.SchemaExtensions
+	eLocationValues                                      smithy.SchemaExtensions
+	eLocationValues_CLOUD                                smithy.SchemaExtensions
+	eLocationValues_OUTPOST_LOCAL                        smithy.SchemaExtensions
+	eLocationValues_LOCAL_ZONE                           smithy.SchemaExtensions
+	e_NoReboot                                           smithy.SchemaExtensions
+	e_Parameter                                          smithy.SchemaExtensions
+	e_ParameterList                                      smithy.SchemaExtensions
+	e_ParameterList_member                               smithy.SchemaExtensions
+	eParameters                                          smithy.SchemaExtensions
+	eParameters_ExcludeBootVolume                        smithy.SchemaExtensions
+	eParameters_NoReboot                                 smithy.SchemaExtensions
+	eParameters_ExcludeDataVolumeTags                    smithy.SchemaExtensions
+	e_PolicyArn                                          smithy.SchemaExtensions
+	e_PolicyDescription                                  smithy.SchemaExtensions
+	ePolicyDetails                                       smithy.SchemaExtensions
+	ePolicyDetails_PolicyType                            smithy.SchemaExtensions
+	ePolicyDetails_ResourceTypes                         smithy.SchemaExtensions
+	ePolicyDetails_ResourceLocations                     smithy.SchemaExtensions
+	ePolicyDetails_TargetTags                            smithy.SchemaExtensions
+	ePolicyDetails_Schedules                             smithy.SchemaExtensions
+	ePolicyDetails_Parameters                            smithy.SchemaExtensions
+	ePolicyDetails_EventSource                           smithy.SchemaExtensions
+	ePolicyDetails_Actions                               smithy.SchemaExtensions
+	ePolicyDetails_PolicyLanguage                        smithy.SchemaExtensions
+	ePolicyDetails_ResourceType                          smithy.SchemaExtensions
+	ePolicyDetails_CreateInterval                        smithy.SchemaExtensions
+	ePolicyDetails_RetainInterval                        smithy.SchemaExtensions
+	ePolicyDetails_CopyTags                              smithy.SchemaExtensions
+	ePolicyDetails_CrossRegionCopyTargets                smithy.SchemaExtensions
+	ePolicyDetails_ExtendDeletion                        smithy.SchemaExtensions
+	ePolicyDetails_Exclusions                            smithy.SchemaExtensions
+	e_PolicyId                                           smithy.SchemaExtensions
+	e_PolicyIdList                                       smithy.SchemaExtensions
+	e_PolicyIdList_member                                smithy.SchemaExtensions
+	ePolicyLanguageValues                                smithy.SchemaExtensions
+	ePolicyLanguageValues_SIMPLIFIED                     smithy.SchemaExtensions
+	ePolicyLanguageValues_STANDARD                       smithy.SchemaExtensions
+	ePolicyTypeValues                                    smithy.SchemaExtensions
+	ePolicyTypeValues_EBS_SNAPSHOT_MANAGEMENT            smithy.SchemaExtensions
+	ePolicyTypeValues_IMAGE_MANAGEMENT                   smithy.SchemaExtensions
+	ePolicyTypeValues_EVENT_BASED_POLICY                 smithy.SchemaExtensions
+	e_ResourceLocationList                               smithy.SchemaExtensions
+	e_ResourceLocationList_member                        smithy.SchemaExtensions
+	eResourceLocationValues                              smithy.SchemaExtensions
+	eResourceLocationValues_CLOUD                        smithy.SchemaExtensions
+	eResourceLocationValues_OUTPOST                      smithy.SchemaExtensions
+	eResourceLocationValues_LOCAL_ZONE                   smithy.SchemaExtensions
+	eResourceNotFoundException                           smithy.SchemaExtensions
+	eResourceNotFoundException_Message                   smithy.SchemaExtensions
+	eResourceNotFoundException_Code                      smithy.SchemaExtensions
+	eResourceNotFoundException_ResourceType              smithy.SchemaExtensions
+	eResourceNotFoundException_ResourceIds               smithy.SchemaExtensions
+	eResourceTypeValues                                  smithy.SchemaExtensions
+	eResourceTypeValues_VOLUME                           smithy.SchemaExtensions
+	eResourceTypeValues_INSTANCE                         smithy.SchemaExtensions
+	e_ResourceTypeValuesList                             smithy.SchemaExtensions
+	e_ResourceTypeValuesList_member                      smithy.SchemaExtensions
+	e_RetainInterval                                     smithy.SchemaExtensions
+	eRetainRule                                          smithy.SchemaExtensions
+	eRetainRule_Count                                    smithy.SchemaExtensions
+	eRetainRule_Interval                                 smithy.SchemaExtensions
+	eRetainRule_IntervalUnit                             smithy.SchemaExtensions
+	eRetentionArchiveTier                                smithy.SchemaExtensions
+	eRetentionArchiveTier_Count                          smithy.SchemaExtensions
+	eRetentionArchiveTier_Interval                       smithy.SchemaExtensions
+	eRetentionArchiveTier_IntervalUnit                   smithy.SchemaExtensions
+	eRetentionIntervalUnitValues                         smithy.SchemaExtensions
+	eRetentionIntervalUnitValues_DAYS                    smithy.SchemaExtensions
+	eRetentionIntervalUnitValues_WEEKS                   smithy.SchemaExtensions
+	eRetentionIntervalUnitValues_MONTHS                  smithy.SchemaExtensions
+	eRetentionIntervalUnitValues_YEARS                   smithy.SchemaExtensions
+	eSchedule                                            smithy.SchemaExtensions
+	eSchedule_Name                                       smithy.SchemaExtensions
+	eSchedule_CopyTags                                   smithy.SchemaExtensions
+	eSchedule_TagsToAdd                                  smithy.SchemaExtensions
+	eSchedule_VariableTags                               smithy.SchemaExtensions
+	eSchedule_CreateRule                                 smithy.SchemaExtensions
+	eSchedule_RetainRule                                 smithy.SchemaExtensions
+	eSchedule_FastRestoreRule                            smithy.SchemaExtensions
+	eSchedule_CrossRegionCopyRules                       smithy.SchemaExtensions
+	eSchedule_ShareRules                                 smithy.SchemaExtensions
+	eSchedule_DeprecateRule                              smithy.SchemaExtensions
+	eSchedule_ArchiveRule                                smithy.SchemaExtensions
+	e_ScheduleList                                       smithy.SchemaExtensions
+	e_ScheduleList_member                                smithy.SchemaExtensions
+	e_ScheduleName                                       smithy.SchemaExtensions
+	eScript                                              smithy.SchemaExtensions
+	eScript_Stages                                       smithy.SchemaExtensions
+	eScript_ExecutionHandlerService                      smithy.SchemaExtensions
+	eScript_ExecutionHandler                             smithy.SchemaExtensions
+	eScript_ExecuteOperationOnScriptFailure              smithy.SchemaExtensions
+	eScript_ExecutionTimeout                             smithy.SchemaExtensions
+	eScript_MaximumRetryCount                            smithy.SchemaExtensions
+	e_ScriptExecutionTimeout                             smithy.SchemaExtensions
+	e_ScriptMaximumRetryCount                            smithy.SchemaExtensions
+	e_ScriptsList                                        smithy.SchemaExtensions
+	e_ScriptsList_member                                 smithy.SchemaExtensions
+	eSettablePolicyStateValues                           smithy.SchemaExtensions
+	eSettablePolicyStateValues_ENABLED                   smithy.SchemaExtensions
+	eSettablePolicyStateValues_DISABLED                  smithy.SchemaExtensions
+	eShareRule                                           smithy.SchemaExtensions
+	eShareRule_TargetAccounts                            smithy.SchemaExtensions
+	eShareRule_UnshareInterval                           smithy.SchemaExtensions
+	eShareRule_UnshareIntervalUnit                       smithy.SchemaExtensions
+	e_ShareRules                                         smithy.SchemaExtensions
+	e_ShareRules_member                                  smithy.SchemaExtensions
+	e_ShareTargetAccountList                             smithy.SchemaExtensions
+	e_ShareTargetAccountList_member                      smithy.SchemaExtensions
+	e_SnapshotOwnerList                                  smithy.SchemaExtensions
+	e_SnapshotOwnerList_member                           smithy.SchemaExtensions
+	e_StagesList                                         smithy.SchemaExtensions
+	e_StagesList_member                                  smithy.SchemaExtensions
+	eStageValues                                         smithy.SchemaExtensions
+	eStageValues_PRE                                     smithy.SchemaExtensions
+	eStageValues_POST                                    smithy.SchemaExtensions
+	e_StandardTierRetainRuleCount                        smithy.SchemaExtensions
+	e_StandardTierRetainRuleInterval                     smithy.SchemaExtensions
+	e_StatusMessage                                      smithy.SchemaExtensions
+	e_String                                             smithy.SchemaExtensions
+	eTag                                                 smithy.SchemaExtensions
+	eTag_Key                                             smithy.SchemaExtensions
+	eTag_Value                                           smithy.SchemaExtensions
+	e_TagFilter                                          smithy.SchemaExtensions
+	e_TagKey                                             smithy.SchemaExtensions
+	e_TagKeyList                                         smithy.SchemaExtensions
+	e_TagKeyList_member                                  smithy.SchemaExtensions
+	e_TagMap                                             smithy.SchemaExtensions
+	e_TagMap_key                                         smithy.SchemaExtensions
+	e_TagMap_value                                       smithy.SchemaExtensions
+	e_TagsToAddFilterList                                smithy.SchemaExtensions
+	e_TagsToAddFilterList_member                         smithy.SchemaExtensions
+	e_TagsToAddList                                      smithy.SchemaExtensions
+	e_TagsToAddList_member                               smithy.SchemaExtensions
+	e_TagValue                                           smithy.SchemaExtensions
+	e_Target                                             smithy.SchemaExtensions
+	e_TargetRegion                                       smithy.SchemaExtensions
+	e_TargetTagList                                      smithy.SchemaExtensions
+	e_TargetTagList_member                               smithy.SchemaExtensions
+	e_TargetTagsFilterList                               smithy.SchemaExtensions
+	e_TargetTagsFilterList_member                        smithy.SchemaExtensions
+	e_Time                                               smithy.SchemaExtensions
+	e_TimesList                                          smithy.SchemaExtensions
+	e_TimesList_member                                   smithy.SchemaExtensions
+	e_Timestamp                                          smithy.SchemaExtensions
+	e_VariableTagsList                                   smithy.SchemaExtensions
+	e_VariableTagsList_member                            smithy.SchemaExtensions
+	e_VolumeTypeValues                                   smithy.SchemaExtensions
+	eCreateLifecyclePolicyRequest                        smithy.SchemaExtensions
+	eCreateLifecyclePolicyRequest_ExecutionRoleArn       smithy.SchemaExtensions
+	eCreateLifecyclePolicyRequest_Description            smithy.SchemaExtensions
+	eCreateLifecyclePolicyRequest_State                  smithy.SchemaExtensions
+	eCreateLifecyclePolicyRequest_PolicyDetails          smithy.SchemaExtensions
+	eCreateLifecyclePolicyRequest_Tags                   smithy.SchemaExtensions
+	eCreateLifecyclePolicyRequest_DefaultPolicy          smithy.SchemaExtensions
+	eCreateLifecyclePolicyRequest_CreateInterval         smithy.SchemaExtensions
+	eCreateLifecyclePolicyRequest_RetainInterval         smithy.SchemaExtensions
+	eCreateLifecyclePolicyRequest_CopyTags               smithy.SchemaExtensions
+	eCreateLifecyclePolicyRequest_ExtendDeletion         smithy.SchemaExtensions
+	eCreateLifecyclePolicyRequest_CrossRegionCopyTargets smithy.SchemaExtensions
+	eCreateLifecyclePolicyRequest_Exclusions             smithy.SchemaExtensions
+	eCreateLifecyclePolicyResponse                       smithy.SchemaExtensions
+	eCreateLifecyclePolicyResponse_PolicyId              smithy.SchemaExtensions
+	eDeleteLifecyclePolicyRequest                        smithy.SchemaExtensions
+	eDeleteLifecyclePolicyRequest_PolicyId               smithy.SchemaExtensions
+	eDeleteLifecyclePolicyResponse                       smithy.SchemaExtensions
+	eGetLifecyclePoliciesRequest                         smithy.SchemaExtensions
+	eGetLifecyclePoliciesRequest_PolicyIds               smithy.SchemaExtensions
+	eGetLifecyclePoliciesRequest_State                   smithy.SchemaExtensions
+	eGetLifecyclePoliciesRequest_ResourceTypes           smithy.SchemaExtensions
+	eGetLifecyclePoliciesRequest_TargetTags              smithy.SchemaExtensions
+	eGetLifecyclePoliciesRequest_TagsToAdd               smithy.SchemaExtensions
+	eGetLifecyclePoliciesRequest_DefaultPolicyType       smithy.SchemaExtensions
+	eGetLifecyclePoliciesResponse                        smithy.SchemaExtensions
+	eGetLifecyclePoliciesResponse_Policies               smithy.SchemaExtensions
+	eGetLifecyclePolicyRequest                           smithy.SchemaExtensions
+	eGetLifecyclePolicyRequest_PolicyId                  smithy.SchemaExtensions
+	eGetLifecyclePolicyResponse                          smithy.SchemaExtensions
+	eGetLifecyclePolicyResponse_Policy                   smithy.SchemaExtensions
+	eListTagsForResourceRequest                          smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn              smithy.SchemaExtensions
+	eListTagsForResourceResponse                         smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                    smithy.SchemaExtensions
+	eTagResourceRequest                                  smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                      smithy.SchemaExtensions
+	eTagResourceRequest_Tags                             smithy.SchemaExtensions
+	eTagResourceResponse                                 smithy.SchemaExtensions
+	eUntagResourceRequest                                smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                    smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                        smithy.SchemaExtensions
+	eUntagResourceResponse                               smithy.SchemaExtensions
+	eUpdateLifecyclePolicyRequest                        smithy.SchemaExtensions
+	eUpdateLifecyclePolicyRequest_PolicyId               smithy.SchemaExtensions
+	eUpdateLifecyclePolicyRequest_ExecutionRoleArn       smithy.SchemaExtensions
+	eUpdateLifecyclePolicyRequest_State                  smithy.SchemaExtensions
+	eUpdateLifecyclePolicyRequest_Description            smithy.SchemaExtensions
+	eUpdateLifecyclePolicyRequest_PolicyDetails          smithy.SchemaExtensions
+	eUpdateLifecyclePolicyRequest_CreateInterval         smithy.SchemaExtensions
+	eUpdateLifecyclePolicyRequest_RetainInterval         smithy.SchemaExtensions
+	eUpdateLifecyclePolicyRequest_CopyTags               smithy.SchemaExtensions
+	eUpdateLifecyclePolicyRequest_ExtendDeletion         smithy.SchemaExtensions
+	eUpdateLifecyclePolicyRequest_CrossRegionCopyTargets smithy.SchemaExtensions
+	eUpdateLifecyclePolicyRequest_Exclusions             smithy.SchemaExtensions
+	eUpdateLifecyclePolicyResponse                       smithy.SchemaExtensions
+)
 
 var (
 	iCreateLifecyclePolicy            = smithy.ShapeID{Namespace: "com.amazonaws.dlm", Name: "CreateLifecyclePolicy"}
@@ -294,369 +655,369 @@ var mUpdateLifecyclePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{
 	5, 7, 0, 9, 0, 0, 10, 0,
 }}
 
-var sCreateLifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLifecyclePolicy, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sDeleteLifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLifecyclePolicy, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sGetLifecyclePolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLifecyclePolicies, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sGetLifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLifecyclePolicy, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sUpdateLifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLifecyclePolicy, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var s_dlm_20180112 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_dlm_20180112, Type: smithy.ShapeTypeService, Ext: &ext[8]})
-var sAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &ext[9]})
-var s_ActionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionList, Members: &m_ActionList, Type: smithy.ShapeTypeList, Ext: &ext[12]})
-var s_ActionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &ext[14]})
-var sArchiveRetainRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArchiveRetainRule, Members: &mArchiveRetainRule, Type: smithy.ShapeTypeStructure, Ext: &ext[15]})
-var sArchiveRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArchiveRule, Members: &mArchiveRule, Type: smithy.ShapeTypeStructure, Ext: &ext[17]})
-var s_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[19]})
-var s_AvailabilityZoneId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZoneId, Type: smithy.ShapeTypeString, Ext: &ext[20]})
-var s_AvailabilityZoneIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZoneIdList, Members: &m_AvailabilityZoneIdList, Type: smithy.ShapeTypeList, Ext: &ext[21]})
-var s_AvailabilityZoneList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZoneList, Members: &m_AvailabilityZoneList, Type: smithy.ShapeTypeList, Ext: &ext[23]})
-var s_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &ext[25]})
-var s_CmkArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CmkArn, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var s_CopyTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CopyTags, Type: smithy.ShapeTypeBoolean, Ext: &ext[27]})
-var s_CopyTagsNullable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CopyTagsNullable, Type: smithy.ShapeTypeBoolean, Ext: &ext[28]})
-var s_Count = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &ext[29]})
-var s_CreateInterval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateInterval, Type: smithy.ShapeTypeInteger, Ext: &ext[30]})
-var sCreateRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRule, Members: &mCreateRule, Type: smithy.ShapeTypeStructure, Ext: &ext[31]})
-var s_CronExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CronExpression, Type: smithy.ShapeTypeString, Ext: &ext[38]})
-var sCrossRegionCopyAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCrossRegionCopyAction, Members: &mCrossRegionCopyAction, Type: smithy.ShapeTypeStructure, Ext: &ext[39]})
-var s_CrossRegionCopyActionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CrossRegionCopyActionList, Members: &m_CrossRegionCopyActionList, Type: smithy.ShapeTypeList, Ext: &ext[43]})
-var sCrossRegionCopyDeprecateRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCrossRegionCopyDeprecateRule, Members: &mCrossRegionCopyDeprecateRule, Type: smithy.ShapeTypeStructure, Ext: &ext[45]})
-var sCrossRegionCopyRetainRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCrossRegionCopyRetainRule, Members: &mCrossRegionCopyRetainRule, Type: smithy.ShapeTypeStructure, Ext: &ext[48]})
-var sCrossRegionCopyRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCrossRegionCopyRule, Members: &mCrossRegionCopyRule, Type: smithy.ShapeTypeStructure, Ext: &ext[51]})
-var s_CrossRegionCopyRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CrossRegionCopyRules, Members: &m_CrossRegionCopyRules, Type: smithy.ShapeTypeList, Ext: &ext[59]})
-var sCrossRegionCopyTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCrossRegionCopyTarget, Members: &mCrossRegionCopyTarget, Type: smithy.ShapeTypeStructure, Ext: &ext[61]})
-var s_CrossRegionCopyTargetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CrossRegionCopyTargetList, Members: &m_CrossRegionCopyTargetList, Type: smithy.ShapeTypeList, Ext: &ext[63]})
-var sDefaultPoliciesTypeValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefaultPoliciesTypeValues, Members: &mDefaultPoliciesTypeValues, Type: smithy.ShapeTypeEnum, Ext: &ext[65]})
-var s_DefaultPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DefaultPolicy, Type: smithy.ShapeTypeBoolean, Ext: &ext[69]})
-var sDefaultPolicyTypeValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefaultPolicyTypeValues, Members: &mDefaultPolicyTypeValues, Type: smithy.ShapeTypeEnum, Ext: &ext[70]})
-var sDeprecateRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeprecateRule, Members: &mDeprecateRule, Type: smithy.ShapeTypeStructure, Ext: &ext[73]})
-var s_DescriptionRegex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescriptionRegex, Type: smithy.ShapeTypeString, Ext: &ext[77]})
-var s_Encrypted = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Encrypted, Type: smithy.ShapeTypeBoolean, Ext: &ext[78]})
-var sEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[79]})
-var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[82]})
-var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var sEventParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventParameters, Members: &mEventParameters, Type: smithy.ShapeTypeStructure, Ext: &ext[84]})
-var sEventSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventSource, Members: &mEventSource, Type: smithy.ShapeTypeStructure, Ext: &ext[88]})
-var sEventSourceValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventSourceValues, Members: &mEventSourceValues, Type: smithy.ShapeTypeEnum, Ext: &ext[91]})
-var sEventTypeValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventTypeValues, Members: &mEventTypeValues, Type: smithy.ShapeTypeEnum, Ext: &ext[93]})
-var s_ExcludeBootVolume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludeBootVolume, Type: smithy.ShapeTypeBoolean, Ext: &ext[95]})
-var s_ExcludeBootVolumes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludeBootVolumes, Type: smithy.ShapeTypeBoolean, Ext: &ext[96]})
-var s_ExcludeDataVolumeTagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludeDataVolumeTagList, Members: &m_ExcludeDataVolumeTagList, Type: smithy.ShapeTypeList, Ext: &ext[97]})
-var s_ExcludeTagsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludeTagsList, Members: &m_ExcludeTagsList, Type: smithy.ShapeTypeList, Ext: &ext[99]})
-var s_ExcludeVolumeTypesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludeVolumeTypesList, Members: &m_ExcludeVolumeTypesList, Type: smithy.ShapeTypeList, Ext: &ext[101]})
-var sExclusions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExclusions, Members: &mExclusions, Type: smithy.ShapeTypeStructure, Ext: &ext[103]})
-var s_ExecuteOperationOnScriptFailure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecuteOperationOnScriptFailure, Type: smithy.ShapeTypeBoolean, Ext: &ext[107]})
-var s_ExecutionHandler = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutionHandler, Type: smithy.ShapeTypeString, Ext: &ext[108]})
-var sExecutionHandlerServiceValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionHandlerServiceValues, Members: &mExecutionHandlerServiceValues, Type: smithy.ShapeTypeEnum, Ext: &ext[109]})
-var s_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[111]})
-var s_ExtendDeletion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtendDeletion, Type: smithy.ShapeTypeBoolean, Ext: &ext[112]})
-var sFastRestoreRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFastRestoreRule, Members: &mFastRestoreRule, Type: smithy.ShapeTypeStructure, Ext: &ext[113]})
-var sGettablePolicyStateValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGettablePolicyStateValues, Members: &mGettablePolicyStateValues, Type: smithy.ShapeTypeEnum, Ext: &ext[119]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &ext[123]})
-var s_Interval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Interval, Type: smithy.ShapeTypeInteger, Ext: &ext[126]})
-var sIntervalUnitValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntervalUnitValues, Members: &mIntervalUnitValues, Type: smithy.ShapeTypeEnum, Ext: &ext[127]})
-var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &ext[129]})
-var sLifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLifecyclePolicy, Members: &mLifecyclePolicy, Type: smithy.ShapeTypeStructure, Ext: &ext[134]})
-var sLifecyclePolicySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLifecyclePolicySummary, Members: &mLifecyclePolicySummary, Type: smithy.ShapeTypeStructure, Ext: &ext[146]})
-var s_LifecyclePolicySummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LifecyclePolicySummaryList, Members: &m_LifecyclePolicySummaryList, Type: smithy.ShapeTypeList, Ext: &ext[153]})
-var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &ext[155]})
-var sLocationValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLocationValues, Members: &mLocationValues, Type: smithy.ShapeTypeEnum, Ext: &ext[159]})
-var s_NoReboot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NoReboot, Type: smithy.ShapeTypeBoolean, Ext: &ext[163]})
-var s_Parameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Parameter, Type: smithy.ShapeTypeString, Ext: &ext[164]})
-var s_ParameterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParameterList, Members: &m_ParameterList, Type: smithy.ShapeTypeList, Ext: &ext[165]})
-var sParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParameters, Members: &mParameters, Type: smithy.ShapeTypeStructure, Ext: &ext[167]})
-var s_PolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyArn, Type: smithy.ShapeTypeString, Ext: &ext[171]})
-var s_PolicyDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyDescription, Type: smithy.ShapeTypeString, Ext: &ext[172]})
-var sPolicyDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyDetails, Members: &mPolicyDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[173]})
-var s_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &ext[190]})
-var s_PolicyIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyIdList, Members: &m_PolicyIdList, Type: smithy.ShapeTypeList, Ext: &ext[191]})
-var sPolicyLanguageValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyLanguageValues, Members: &mPolicyLanguageValues, Type: smithy.ShapeTypeEnum, Ext: &ext[193]})
-var sPolicyTypeValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyTypeValues, Members: &mPolicyTypeValues, Type: smithy.ShapeTypeEnum, Ext: &ext[196]})
-var s_ResourceLocationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceLocationList, Members: &m_ResourceLocationList, Type: smithy.ShapeTypeList, Ext: &ext[200]})
-var sResourceLocationValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceLocationValues, Members: &mResourceLocationValues, Type: smithy.ShapeTypeEnum, Ext: &ext[202]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &ext[206]})
-var sResourceTypeValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceTypeValues, Members: &mResourceTypeValues, Type: smithy.ShapeTypeEnum, Ext: &ext[211]})
-var s_ResourceTypeValuesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTypeValuesList, Members: &m_ResourceTypeValuesList, Type: smithy.ShapeTypeList, Ext: &ext[214]})
-var s_RetainInterval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetainInterval, Type: smithy.ShapeTypeInteger, Ext: &ext[216]})
-var sRetainRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetainRule, Members: &mRetainRule, Type: smithy.ShapeTypeStructure, Ext: &ext[217]})
-var sRetentionArchiveTier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetentionArchiveTier, Members: &mRetentionArchiveTier, Type: smithy.ShapeTypeStructure, Ext: &ext[221]})
-var sRetentionIntervalUnitValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetentionIntervalUnitValues, Members: &mRetentionIntervalUnitValues, Type: smithy.ShapeTypeEnum, Ext: &ext[225]})
-var sSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchedule, Members: &mSchedule, Type: smithy.ShapeTypeStructure, Ext: &ext[230]})
-var s_ScheduleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduleList, Members: &m_ScheduleList, Type: smithy.ShapeTypeList, Ext: &ext[242]})
-var s_ScheduleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduleName, Type: smithy.ShapeTypeString, Ext: &ext[244]})
-var sScript = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScript, Members: &mScript, Type: smithy.ShapeTypeStructure, Ext: &ext[245]})
-var s_ScriptExecutionTimeout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScriptExecutionTimeout, Type: smithy.ShapeTypeInteger, Ext: &ext[252]})
-var s_ScriptMaximumRetryCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScriptMaximumRetryCount, Type: smithy.ShapeTypeInteger, Ext: &ext[253]})
-var s_ScriptsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScriptsList, Members: &m_ScriptsList, Type: smithy.ShapeTypeList, Ext: &ext[254]})
-var sSettablePolicyStateValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSettablePolicyStateValues, Members: &mSettablePolicyStateValues, Type: smithy.ShapeTypeEnum, Ext: &ext[256]})
-var sShareRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShareRule, Members: &mShareRule, Type: smithy.ShapeTypeStructure, Ext: &ext[259]})
-var s_ShareRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShareRules, Members: &m_ShareRules, Type: smithy.ShapeTypeList, Ext: &ext[263]})
-var s_ShareTargetAccountList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShareTargetAccountList, Members: &m_ShareTargetAccountList, Type: smithy.ShapeTypeList, Ext: &ext[265]})
-var s_SnapshotOwnerList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnapshotOwnerList, Members: &m_SnapshotOwnerList, Type: smithy.ShapeTypeList, Ext: &ext[267]})
-var s_StagesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StagesList, Members: &m_StagesList, Type: smithy.ShapeTypeList, Ext: &ext[269]})
-var sStageValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStageValues, Members: &mStageValues, Type: smithy.ShapeTypeEnum, Ext: &ext[271]})
-var s_StandardTierRetainRuleCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StandardTierRetainRuleCount, Type: smithy.ShapeTypeInteger, Ext: &ext[274]})
-var s_StandardTierRetainRuleInterval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StandardTierRetainRuleInterval, Type: smithy.ShapeTypeInteger, Ext: &ext[275]})
-var s_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusMessage, Type: smithy.ShapeTypeString, Ext: &ext[276]})
-var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[277]})
-var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[278]})
-var s_TagFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagFilter, Type: smithy.ShapeTypeString, Ext: &ext[281]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[282]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[283]})
-var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[285]})
-var s_TagsToAddFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagsToAddFilterList, Members: &m_TagsToAddFilterList, Type: smithy.ShapeTypeList, Ext: &ext[288]})
-var s_TagsToAddList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagsToAddList, Members: &m_TagsToAddList, Type: smithy.ShapeTypeList, Ext: &ext[290]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[292]})
-var s_Target = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Target, Type: smithy.ShapeTypeString, Ext: &ext[293]})
-var s_TargetRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetRegion, Type: smithy.ShapeTypeString, Ext: &ext[294]})
-var s_TargetTagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetTagList, Members: &m_TargetTagList, Type: smithy.ShapeTypeList, Ext: &ext[295]})
-var s_TargetTagsFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetTagsFilterList, Members: &m_TargetTagsFilterList, Type: smithy.ShapeTypeList, Ext: &ext[297]})
-var s_Time = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Time, Type: smithy.ShapeTypeString, Ext: &ext[299]})
-var s_TimesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimesList, Members: &m_TimesList, Type: smithy.ShapeTypeList, Ext: &ext[300]})
-var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Traits: &t13, Type: smithy.ShapeTypeTimestamp, Ext: &ext[302]})
-var s_VariableTagsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VariableTagsList, Members: &m_VariableTagsList, Type: smithy.ShapeTypeList, Ext: &ext[303]})
-var s_VolumeTypeValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumeTypeValues, Type: smithy.ShapeTypeString, Ext: &ext[305]})
-var sCreateLifecyclePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLifecyclePolicyRequest, Members: &mCreateLifecyclePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[306]})
-var sCreateLifecyclePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLifecyclePolicyResponse, Members: &mCreateLifecyclePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[319]})
-var sDeleteLifecyclePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLifecyclePolicyRequest, Members: &mDeleteLifecyclePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[321]})
-var sDeleteLifecyclePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLifecyclePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[323]})
-var sGetLifecyclePoliciesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLifecyclePoliciesRequest, Members: &mGetLifecyclePoliciesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[324]})
-var sGetLifecyclePoliciesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLifecyclePoliciesResponse, Members: &mGetLifecyclePoliciesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[331]})
-var sGetLifecyclePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLifecyclePolicyRequest, Members: &mGetLifecyclePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[333]})
-var sGetLifecyclePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLifecyclePolicyResponse, Members: &mGetLifecyclePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[335]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[337]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[339]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[341]})
-var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[344]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[345]})
-var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[348]})
-var sUpdateLifecyclePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLifecyclePolicyRequest, Members: &mUpdateLifecyclePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[349]})
-var sUpdateLifecyclePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLifecyclePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[361]})
+var sCreateLifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLifecyclePolicy, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateLifecyclePolicy})
+var sDeleteLifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLifecyclePolicy, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eDeleteLifecyclePolicy})
+var sGetLifecyclePolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLifecyclePolicies, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eGetLifecyclePolicies})
+var sGetLifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLifecyclePolicy, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eGetLifecyclePolicy})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateLifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLifecyclePolicy, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eUpdateLifecyclePolicy})
+var s_dlm_20180112 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_dlm_20180112, Type: smithy.ShapeTypeService, Ext: &e_dlm_20180112})
+var sAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &eAction})
+var s_ActionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionList, Members: &m_ActionList, Type: smithy.ShapeTypeList, Ext: &e_ActionList})
+var s_ActionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &e_ActionName})
+var sArchiveRetainRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArchiveRetainRule, Members: &mArchiveRetainRule, Type: smithy.ShapeTypeStructure, Ext: &eArchiveRetainRule})
+var sArchiveRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArchiveRule, Members: &mArchiveRule, Type: smithy.ShapeTypeStructure, Ext: &eArchiveRule})
+var s_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &e_AvailabilityZone})
+var s_AvailabilityZoneId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZoneId, Type: smithy.ShapeTypeString, Ext: &e_AvailabilityZoneId})
+var s_AvailabilityZoneIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZoneIdList, Members: &m_AvailabilityZoneIdList, Type: smithy.ShapeTypeList, Ext: &e_AvailabilityZoneIdList})
+var s_AvailabilityZoneList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZoneList, Members: &m_AvailabilityZoneList, Type: smithy.ShapeTypeList, Ext: &e_AvailabilityZoneList})
+var s_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &e_AwsAccountId})
+var s_CmkArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CmkArn, Type: smithy.ShapeTypeString, Ext: &e_CmkArn})
+var s_CopyTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CopyTags, Type: smithy.ShapeTypeBoolean, Ext: &e_CopyTags})
+var s_CopyTagsNullable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CopyTagsNullable, Type: smithy.ShapeTypeBoolean, Ext: &e_CopyTagsNullable})
+var s_Count = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &e_Count})
+var s_CreateInterval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateInterval, Type: smithy.ShapeTypeInteger, Ext: &e_CreateInterval})
+var sCreateRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRule, Members: &mCreateRule, Type: smithy.ShapeTypeStructure, Ext: &eCreateRule})
+var s_CronExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CronExpression, Type: smithy.ShapeTypeString, Ext: &e_CronExpression})
+var sCrossRegionCopyAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCrossRegionCopyAction, Members: &mCrossRegionCopyAction, Type: smithy.ShapeTypeStructure, Ext: &eCrossRegionCopyAction})
+var s_CrossRegionCopyActionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CrossRegionCopyActionList, Members: &m_CrossRegionCopyActionList, Type: smithy.ShapeTypeList, Ext: &e_CrossRegionCopyActionList})
+var sCrossRegionCopyDeprecateRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCrossRegionCopyDeprecateRule, Members: &mCrossRegionCopyDeprecateRule, Type: smithy.ShapeTypeStructure, Ext: &eCrossRegionCopyDeprecateRule})
+var sCrossRegionCopyRetainRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCrossRegionCopyRetainRule, Members: &mCrossRegionCopyRetainRule, Type: smithy.ShapeTypeStructure, Ext: &eCrossRegionCopyRetainRule})
+var sCrossRegionCopyRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCrossRegionCopyRule, Members: &mCrossRegionCopyRule, Type: smithy.ShapeTypeStructure, Ext: &eCrossRegionCopyRule})
+var s_CrossRegionCopyRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CrossRegionCopyRules, Members: &m_CrossRegionCopyRules, Type: smithy.ShapeTypeList, Ext: &e_CrossRegionCopyRules})
+var sCrossRegionCopyTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCrossRegionCopyTarget, Members: &mCrossRegionCopyTarget, Type: smithy.ShapeTypeStructure, Ext: &eCrossRegionCopyTarget})
+var s_CrossRegionCopyTargetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CrossRegionCopyTargetList, Members: &m_CrossRegionCopyTargetList, Type: smithy.ShapeTypeList, Ext: &e_CrossRegionCopyTargetList})
+var sDefaultPoliciesTypeValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefaultPoliciesTypeValues, Members: &mDefaultPoliciesTypeValues, Type: smithy.ShapeTypeEnum, Ext: &eDefaultPoliciesTypeValues})
+var s_DefaultPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DefaultPolicy, Type: smithy.ShapeTypeBoolean, Ext: &e_DefaultPolicy})
+var sDefaultPolicyTypeValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefaultPolicyTypeValues, Members: &mDefaultPolicyTypeValues, Type: smithy.ShapeTypeEnum, Ext: &eDefaultPolicyTypeValues})
+var sDeprecateRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeprecateRule, Members: &mDeprecateRule, Type: smithy.ShapeTypeStructure, Ext: &eDeprecateRule})
+var s_DescriptionRegex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescriptionRegex, Type: smithy.ShapeTypeString, Ext: &e_DescriptionRegex})
+var s_Encrypted = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Encrypted, Type: smithy.ShapeTypeBoolean, Ext: &e_Encrypted})
+var sEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionConfiguration})
+var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &e_ErrorCode})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var sEventParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventParameters, Members: &mEventParameters, Type: smithy.ShapeTypeStructure, Ext: &eEventParameters})
+var sEventSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventSource, Members: &mEventSource, Type: smithy.ShapeTypeStructure, Ext: &eEventSource})
+var sEventSourceValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventSourceValues, Members: &mEventSourceValues, Type: smithy.ShapeTypeEnum, Ext: &eEventSourceValues})
+var sEventTypeValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventTypeValues, Members: &mEventTypeValues, Type: smithy.ShapeTypeEnum, Ext: &eEventTypeValues})
+var s_ExcludeBootVolume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludeBootVolume, Type: smithy.ShapeTypeBoolean, Ext: &e_ExcludeBootVolume})
+var s_ExcludeBootVolumes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludeBootVolumes, Type: smithy.ShapeTypeBoolean, Ext: &e_ExcludeBootVolumes})
+var s_ExcludeDataVolumeTagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludeDataVolumeTagList, Members: &m_ExcludeDataVolumeTagList, Type: smithy.ShapeTypeList, Ext: &e_ExcludeDataVolumeTagList})
+var s_ExcludeTagsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludeTagsList, Members: &m_ExcludeTagsList, Type: smithy.ShapeTypeList, Ext: &e_ExcludeTagsList})
+var s_ExcludeVolumeTypesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludeVolumeTypesList, Members: &m_ExcludeVolumeTypesList, Type: smithy.ShapeTypeList, Ext: &e_ExcludeVolumeTypesList})
+var sExclusions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExclusions, Members: &mExclusions, Type: smithy.ShapeTypeStructure, Ext: &eExclusions})
+var s_ExecuteOperationOnScriptFailure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecuteOperationOnScriptFailure, Type: smithy.ShapeTypeBoolean, Ext: &e_ExecuteOperationOnScriptFailure})
+var s_ExecutionHandler = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutionHandler, Type: smithy.ShapeTypeString, Ext: &e_ExecutionHandler})
+var sExecutionHandlerServiceValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionHandlerServiceValues, Members: &mExecutionHandlerServiceValues, Type: smithy.ShapeTypeEnum, Ext: &eExecutionHandlerServiceValues})
+var s_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &e_ExecutionRoleArn})
+var s_ExtendDeletion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtendDeletion, Type: smithy.ShapeTypeBoolean, Ext: &e_ExtendDeletion})
+var sFastRestoreRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFastRestoreRule, Members: &mFastRestoreRule, Type: smithy.ShapeTypeStructure, Ext: &eFastRestoreRule})
+var sGettablePolicyStateValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGettablePolicyStateValues, Members: &mGettablePolicyStateValues, Type: smithy.ShapeTypeEnum, Ext: &eGettablePolicyStateValues})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var s_Interval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Interval, Type: smithy.ShapeTypeInteger, Ext: &e_Interval})
+var sIntervalUnitValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntervalUnitValues, Members: &mIntervalUnitValues, Type: smithy.ShapeTypeEnum, Ext: &eIntervalUnitValues})
+var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t9, Type: smithy.ShapeTypeStructure, Ext: &eInvalidRequestException})
+var sLifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLifecyclePolicy, Members: &mLifecyclePolicy, Type: smithy.ShapeTypeStructure, Ext: &eLifecyclePolicy})
+var sLifecyclePolicySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLifecyclePolicySummary, Members: &mLifecyclePolicySummary, Type: smithy.ShapeTypeStructure, Ext: &eLifecyclePolicySummary})
+var s_LifecyclePolicySummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LifecyclePolicySummaryList, Members: &m_LifecyclePolicySummaryList, Type: smithy.ShapeTypeList, Ext: &e_LifecyclePolicySummaryList})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t11, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var sLocationValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLocationValues, Members: &mLocationValues, Type: smithy.ShapeTypeEnum, Ext: &eLocationValues})
+var s_NoReboot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NoReboot, Type: smithy.ShapeTypeBoolean, Ext: &e_NoReboot})
+var s_Parameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Parameter, Type: smithy.ShapeTypeString, Ext: &e_Parameter})
+var s_ParameterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParameterList, Members: &m_ParameterList, Type: smithy.ShapeTypeList, Ext: &e_ParameterList})
+var sParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParameters, Members: &mParameters, Type: smithy.ShapeTypeStructure, Ext: &eParameters})
+var s_PolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyArn, Type: smithy.ShapeTypeString, Ext: &e_PolicyArn})
+var s_PolicyDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyDescription, Type: smithy.ShapeTypeString, Ext: &e_PolicyDescription})
+var sPolicyDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyDetails, Members: &mPolicyDetails, Type: smithy.ShapeTypeStructure, Ext: &ePolicyDetails})
+var s_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &e_PolicyId})
+var s_PolicyIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyIdList, Members: &m_PolicyIdList, Type: smithy.ShapeTypeList, Ext: &e_PolicyIdList})
+var sPolicyLanguageValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyLanguageValues, Members: &mPolicyLanguageValues, Type: smithy.ShapeTypeEnum, Ext: &ePolicyLanguageValues})
+var sPolicyTypeValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyTypeValues, Members: &mPolicyTypeValues, Type: smithy.ShapeTypeEnum, Ext: &ePolicyTypeValues})
+var s_ResourceLocationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceLocationList, Members: &m_ResourceLocationList, Type: smithy.ShapeTypeList, Ext: &e_ResourceLocationList})
+var sResourceLocationValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceLocationValues, Members: &mResourceLocationValues, Type: smithy.ShapeTypeEnum, Ext: &eResourceLocationValues})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t12, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sResourceTypeValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceTypeValues, Members: &mResourceTypeValues, Type: smithy.ShapeTypeEnum, Ext: &eResourceTypeValues})
+var s_ResourceTypeValuesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTypeValuesList, Members: &m_ResourceTypeValuesList, Type: smithy.ShapeTypeList, Ext: &e_ResourceTypeValuesList})
+var s_RetainInterval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetainInterval, Type: smithy.ShapeTypeInteger, Ext: &e_RetainInterval})
+var sRetainRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetainRule, Members: &mRetainRule, Type: smithy.ShapeTypeStructure, Ext: &eRetainRule})
+var sRetentionArchiveTier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetentionArchiveTier, Members: &mRetentionArchiveTier, Type: smithy.ShapeTypeStructure, Ext: &eRetentionArchiveTier})
+var sRetentionIntervalUnitValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetentionIntervalUnitValues, Members: &mRetentionIntervalUnitValues, Type: smithy.ShapeTypeEnum, Ext: &eRetentionIntervalUnitValues})
+var sSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchedule, Members: &mSchedule, Type: smithy.ShapeTypeStructure, Ext: &eSchedule})
+var s_ScheduleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduleList, Members: &m_ScheduleList, Type: smithy.ShapeTypeList, Ext: &e_ScheduleList})
+var s_ScheduleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduleName, Type: smithy.ShapeTypeString, Ext: &e_ScheduleName})
+var sScript = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScript, Members: &mScript, Type: smithy.ShapeTypeStructure, Ext: &eScript})
+var s_ScriptExecutionTimeout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScriptExecutionTimeout, Type: smithy.ShapeTypeInteger, Ext: &e_ScriptExecutionTimeout})
+var s_ScriptMaximumRetryCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScriptMaximumRetryCount, Type: smithy.ShapeTypeInteger, Ext: &e_ScriptMaximumRetryCount})
+var s_ScriptsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScriptsList, Members: &m_ScriptsList, Type: smithy.ShapeTypeList, Ext: &e_ScriptsList})
+var sSettablePolicyStateValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSettablePolicyStateValues, Members: &mSettablePolicyStateValues, Type: smithy.ShapeTypeEnum, Ext: &eSettablePolicyStateValues})
+var sShareRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShareRule, Members: &mShareRule, Type: smithy.ShapeTypeStructure, Ext: &eShareRule})
+var s_ShareRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShareRules, Members: &m_ShareRules, Type: smithy.ShapeTypeList, Ext: &e_ShareRules})
+var s_ShareTargetAccountList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShareTargetAccountList, Members: &m_ShareTargetAccountList, Type: smithy.ShapeTypeList, Ext: &e_ShareTargetAccountList})
+var s_SnapshotOwnerList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnapshotOwnerList, Members: &m_SnapshotOwnerList, Type: smithy.ShapeTypeList, Ext: &e_SnapshotOwnerList})
+var s_StagesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StagesList, Members: &m_StagesList, Type: smithy.ShapeTypeList, Ext: &e_StagesList})
+var sStageValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStageValues, Members: &mStageValues, Type: smithy.ShapeTypeEnum, Ext: &eStageValues})
+var s_StandardTierRetainRuleCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StandardTierRetainRuleCount, Type: smithy.ShapeTypeInteger, Ext: &e_StandardTierRetainRuleCount})
+var s_StandardTierRetainRuleInterval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StandardTierRetainRuleInterval, Type: smithy.ShapeTypeInteger, Ext: &e_StandardTierRetainRuleInterval})
+var s_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusMessage, Type: smithy.ShapeTypeString, Ext: &e_StatusMessage})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var s_TagFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagFilter, Type: smithy.ShapeTypeString, Ext: &e_TagFilter})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagsToAddFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagsToAddFilterList, Members: &m_TagsToAddFilterList, Type: smithy.ShapeTypeList, Ext: &e_TagsToAddFilterList})
+var s_TagsToAddList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagsToAddList, Members: &m_TagsToAddList, Type: smithy.ShapeTypeList, Ext: &e_TagsToAddList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_Target = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Target, Type: smithy.ShapeTypeString, Ext: &e_Target})
+var s_TargetRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetRegion, Type: smithy.ShapeTypeString, Ext: &e_TargetRegion})
+var s_TargetTagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetTagList, Members: &m_TargetTagList, Type: smithy.ShapeTypeList, Ext: &e_TargetTagList})
+var s_TargetTagsFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetTagsFilterList, Members: &m_TargetTagsFilterList, Type: smithy.ShapeTypeList, Ext: &e_TargetTagsFilterList})
+var s_Time = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Time, Type: smithy.ShapeTypeString, Ext: &e_Time})
+var s_TimesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimesList, Members: &m_TimesList, Type: smithy.ShapeTypeList, Ext: &e_TimesList})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Traits: &t13, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var s_VariableTagsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VariableTagsList, Members: &m_VariableTagsList, Type: smithy.ShapeTypeList, Ext: &e_VariableTagsList})
+var s_VolumeTypeValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumeTypeValues, Type: smithy.ShapeTypeString, Ext: &e_VolumeTypeValues})
+var sCreateLifecyclePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLifecyclePolicyRequest, Members: &mCreateLifecyclePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateLifecyclePolicyRequest})
+var sCreateLifecyclePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLifecyclePolicyResponse, Members: &mCreateLifecyclePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateLifecyclePolicyResponse})
+var sDeleteLifecyclePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLifecyclePolicyRequest, Members: &mDeleteLifecyclePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLifecyclePolicyRequest})
+var sDeleteLifecyclePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLifecyclePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteLifecyclePolicyResponse})
+var sGetLifecyclePoliciesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLifecyclePoliciesRequest, Members: &mGetLifecyclePoliciesRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetLifecyclePoliciesRequest})
+var sGetLifecyclePoliciesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLifecyclePoliciesResponse, Members: &mGetLifecyclePoliciesResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetLifecyclePoliciesResponse})
+var sGetLifecyclePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLifecyclePolicyRequest, Members: &mGetLifecyclePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetLifecyclePolicyRequest})
+var sGetLifecyclePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLifecyclePolicyResponse, Members: &mGetLifecyclePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetLifecyclePolicyResponse})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateLifecyclePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLifecyclePolicyRequest, Members: &mUpdateLifecyclePolicyRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLifecyclePolicyRequest})
+var sUpdateLifecyclePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLifecyclePolicyResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLifecyclePolicyResponse})
 
-var sAction_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &ext[10]})
-var sAction_CrossRegionCopy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossRegionCopy", ID: &i_CrossRegionCopyActionList, Members: &m_CrossRegionCopyActionList, Type: smithy.ShapeTypeList, Ext: &ext[11]})
-var s_ActionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &ext[13]})
-var sArchiveRetainRule_RetentionArchiveTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionArchiveTier", ID: &iRetentionArchiveTier, Members: &mRetentionArchiveTier, Type: smithy.ShapeTypeStructure, Ext: &ext[16]})
-var sArchiveRule_RetainRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetainRule", ID: &iArchiveRetainRule, Members: &mArchiveRetainRule, Type: smithy.ShapeTypeStructure, Ext: &ext[18]})
-var s_AvailabilityZoneIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AvailabilityZoneId, Type: smithy.ShapeTypeString, Ext: &ext[22]})
-var s_AvailabilityZoneList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &ext[24]})
-var sCreateRule_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &iLocationValues, Members: &mLocationValues, Type: smithy.ShapeTypeEnum, Ext: &ext[32]})
-var sCreateRule_Interval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Interval", ID: &i_Interval, Type: smithy.ShapeTypeInteger, Ext: &ext[33]})
-var sCreateRule_IntervalUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntervalUnit", ID: &iIntervalUnitValues, Members: &mIntervalUnitValues, Type: smithy.ShapeTypeEnum, Ext: &ext[34]})
-var sCreateRule_Times = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Times", ID: &i_TimesList, Members: &m_TimesList, Type: smithy.ShapeTypeList, Ext: &ext[35]})
-var sCreateRule_CronExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CronExpression", ID: &i_CronExpression, Type: smithy.ShapeTypeString, Ext: &ext[36]})
-var sCreateRule_Scripts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scripts", ID: &i_ScriptsList, Members: &m_ScriptsList, Type: smithy.ShapeTypeList, Ext: &ext[37]})
-var sCrossRegionCopyAction_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_Target, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var sCrossRegionCopyAction_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[41]})
-var sCrossRegionCopyAction_RetainRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetainRule", ID: &iCrossRegionCopyRetainRule, Members: &mCrossRegionCopyRetainRule, Type: smithy.ShapeTypeStructure, Ext: &ext[42]})
-var s_CrossRegionCopyActionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCrossRegionCopyAction, Members: &mCrossRegionCopyAction, Type: smithy.ShapeTypeStructure, Ext: &ext[44]})
-var sCrossRegionCopyDeprecateRule_Interval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Interval", ID: &i_Interval, Type: smithy.ShapeTypeInteger, Ext: &ext[46]})
-var sCrossRegionCopyDeprecateRule_IntervalUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntervalUnit", ID: &iRetentionIntervalUnitValues, Members: &mRetentionIntervalUnitValues, Type: smithy.ShapeTypeEnum, Ext: &ext[47]})
-var sCrossRegionCopyRetainRule_Interval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Interval", ID: &i_Interval, Type: smithy.ShapeTypeInteger, Ext: &ext[49]})
-var sCrossRegionCopyRetainRule_IntervalUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntervalUnit", ID: &iRetentionIntervalUnitValues, Members: &mRetentionIntervalUnitValues, Type: smithy.ShapeTypeEnum, Ext: &ext[50]})
-var sCrossRegionCopyRule_TargetRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetRegion", ID: &i_TargetRegion, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var sCrossRegionCopyRule_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_Target, Type: smithy.ShapeTypeString, Ext: &ext[53]})
-var sCrossRegionCopyRule_Encrypted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encrypted", ID: &i_Encrypted, Type: smithy.ShapeTypeBoolean, Ext: &ext[54]})
-var sCrossRegionCopyRule_CmkArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmkArn", ID: &i_CmkArn, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var sCrossRegionCopyRule_CopyTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTags", ID: &i_CopyTagsNullable, Type: smithy.ShapeTypeBoolean, Ext: &ext[56]})
-var sCrossRegionCopyRule_RetainRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetainRule", ID: &iCrossRegionCopyRetainRule, Members: &mCrossRegionCopyRetainRule, Type: smithy.ShapeTypeStructure, Ext: &ext[57]})
-var sCrossRegionCopyRule_DeprecateRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeprecateRule", ID: &iCrossRegionCopyDeprecateRule, Members: &mCrossRegionCopyDeprecateRule, Type: smithy.ShapeTypeStructure, Ext: &ext[58]})
-var s_CrossRegionCopyRules_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCrossRegionCopyRule, Members: &mCrossRegionCopyRule, Type: smithy.ShapeTypeStructure, Ext: &ext[60]})
-var sCrossRegionCopyTarget_TargetRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetRegion", ID: &i_TargetRegion, Type: smithy.ShapeTypeString, Ext: &ext[62]})
-var s_CrossRegionCopyTargetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCrossRegionCopyTarget, Members: &mCrossRegionCopyTarget, Type: smithy.ShapeTypeStructure, Ext: &ext[64]})
-var sDefaultPoliciesTypeValues_VOLUME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOLUME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[66]})
-var sDefaultPoliciesTypeValues_INSTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[67]})
-var sDefaultPoliciesTypeValues_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var sDefaultPolicyTypeValues_VOLUME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOLUME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[71]})
-var sDefaultPolicyTypeValues_INSTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sDeprecateRule_Count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Count", ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &ext[74]})
-var sDeprecateRule_Interval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Interval", ID: &i_Interval, Type: smithy.ShapeTypeInteger, Ext: &ext[75]})
-var sDeprecateRule_IntervalUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntervalUnit", ID: &iRetentionIntervalUnitValues, Members: &mRetentionIntervalUnitValues, Type: smithy.ShapeTypeEnum, Ext: &ext[76]})
-var sEncryptionConfiguration_Encrypted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encrypted", ID: &i_Encrypted, Type: smithy.ShapeTypeBoolean, Ext: &ext[80]})
-var sEncryptionConfiguration_CmkArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmkArn", ID: &i_CmkArn, Type: smithy.ShapeTypeString, Ext: &ext[81]})
-var sEventParameters_EventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventType", ID: &iEventTypeValues, Members: &mEventTypeValues, Type: smithy.ShapeTypeEnum, Ext: &ext[85]})
-var sEventParameters_SnapshotOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotOwner", ID: &i_SnapshotOwnerList, Members: &m_SnapshotOwnerList, Type: smithy.ShapeTypeList, Ext: &ext[86]})
-var sEventParameters_DescriptionRegex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DescriptionRegex", ID: &i_DescriptionRegex, Type: smithy.ShapeTypeString, Ext: &ext[87]})
-var sEventSource_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iEventSourceValues, Members: &mEventSourceValues, Type: smithy.ShapeTypeEnum, Ext: &ext[89]})
-var sEventSource_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &iEventParameters, Members: &mEventParameters, Type: smithy.ShapeTypeStructure, Ext: &ext[90]})
-var sEventSourceValues_MANAGED_CWE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANAGED_CWE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[92]})
-var sEventTypeValues_SHARE_SNAPSHOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHARE_SNAPSHOT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[94]})
-var s_ExcludeDataVolumeTagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[98]})
-var s_ExcludeTagsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[100]})
-var s_ExcludeVolumeTypesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_VolumeTypeValues, Type: smithy.ShapeTypeString, Ext: &ext[102]})
-var sExclusions_ExcludeBootVolumes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeBootVolumes", ID: &i_ExcludeBootVolumes, Type: smithy.ShapeTypeBoolean, Ext: &ext[104]})
-var sExclusions_ExcludeVolumeTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeVolumeTypes", ID: &i_ExcludeVolumeTypesList, Members: &m_ExcludeVolumeTypesList, Type: smithy.ShapeTypeList, Ext: &ext[105]})
-var sExclusions_ExcludeTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeTags", ID: &i_ExcludeTagsList, Members: &m_ExcludeTagsList, Type: smithy.ShapeTypeList, Ext: &ext[106]})
-var sExecutionHandlerServiceValues_AWS_SYSTEMS_MANAGER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_SYSTEMS_MANAGER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[110]})
-var sFastRestoreRule_Count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Count", ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &ext[114]})
-var sFastRestoreRule_Interval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Interval", ID: &i_Interval, Type: smithy.ShapeTypeInteger, Ext: &ext[115]})
-var sFastRestoreRule_IntervalUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntervalUnit", ID: &iRetentionIntervalUnitValues, Members: &mRetentionIntervalUnitValues, Type: smithy.ShapeTypeEnum, Ext: &ext[116]})
-var sFastRestoreRule_AvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZones", ID: &i_AvailabilityZoneList, Members: &m_AvailabilityZoneList, Type: smithy.ShapeTypeList, Ext: &ext[117]})
-var sFastRestoreRule_AvailabilityZoneIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneIds", ID: &i_AvailabilityZoneIdList, Members: &m_AvailabilityZoneIdList, Type: smithy.ShapeTypeList, Ext: &ext[118]})
-var sGettablePolicyStateValues_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var sGettablePolicyStateValues_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[121]})
-var sGettablePolicyStateValues_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[122]})
-var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[124]})
-var sInternalServerException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[125]})
-var sIntervalUnitValues_HOURS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOURS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[128]})
-var sInvalidRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var sInvalidRequestException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[131]})
-var sInvalidRequestException_RequiredParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequiredParameters", ID: &i_ParameterList, Members: &m_ParameterList, Type: smithy.ShapeTypeList, Ext: &ext[132]})
-var sInvalidRequestException_MutuallyExclusiveParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MutuallyExclusiveParameters", ID: &i_ParameterList, Members: &m_ParameterList, Type: smithy.ShapeTypeList, Ext: &ext[133]})
-var sLifecyclePolicy_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &ext[135]})
-var sLifecyclePolicy_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PolicyDescription, Type: smithy.ShapeTypeString, Ext: &ext[136]})
-var sLifecyclePolicy_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iGettablePolicyStateValues, Members: &mGettablePolicyStateValues, Type: smithy.ShapeTypeEnum, Ext: &ext[137]})
-var sLifecyclePolicy_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var sLifecyclePolicy_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[139]})
-var sLifecyclePolicy_DateCreated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateCreated", ID: &i_Timestamp, Traits: &t10, Type: smithy.ShapeTypeTimestamp, Ext: &ext[140]})
-var sLifecyclePolicy_DateModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateModified", ID: &i_Timestamp, Traits: &t10, Type: smithy.ShapeTypeTimestamp, Ext: &ext[141]})
-var sLifecyclePolicy_PolicyDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyDetails", ID: &iPolicyDetails, Members: &mPolicyDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[142]})
-var sLifecyclePolicy_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[143]})
-var sLifecyclePolicy_PolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyArn", ID: &i_PolicyArn, Type: smithy.ShapeTypeString, Ext: &ext[144]})
-var sLifecyclePolicy_DefaultPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultPolicy", ID: &i_DefaultPolicy, Type: smithy.ShapeTypeBoolean, Ext: &ext[145]})
-var sLifecyclePolicySummary_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &ext[147]})
-var sLifecyclePolicySummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PolicyDescription, Type: smithy.ShapeTypeString, Ext: &ext[148]})
-var sLifecyclePolicySummary_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iGettablePolicyStateValues, Members: &mGettablePolicyStateValues, Type: smithy.ShapeTypeEnum, Ext: &ext[149]})
-var sLifecyclePolicySummary_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[150]})
-var sLifecyclePolicySummary_PolicyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyType", ID: &iPolicyTypeValues, Members: &mPolicyTypeValues, Type: smithy.ShapeTypeEnum, Ext: &ext[151]})
-var sLifecyclePolicySummary_DefaultPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultPolicy", ID: &i_DefaultPolicy, Type: smithy.ShapeTypeBoolean, Ext: &ext[152]})
-var s_LifecyclePolicySummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLifecyclePolicySummary, Members: &mLifecyclePolicySummary, Type: smithy.ShapeTypeStructure, Ext: &ext[154]})
-var sLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[156]})
-var sLimitExceededException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[157]})
-var sLimitExceededException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[158]})
-var sLocationValues_CLOUD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOUD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[160]})
-var sLocationValues_OUTPOST_LOCAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OUTPOST_LOCAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[161]})
-var sLocationValues_LOCAL_ZONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCAL_ZONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[162]})
-var s_ParameterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Parameter, Type: smithy.ShapeTypeString, Ext: &ext[166]})
-var sParameters_ExcludeBootVolume = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeBootVolume", ID: &i_ExcludeBootVolume, Type: smithy.ShapeTypeBoolean, Ext: &ext[168]})
-var sParameters_NoReboot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NoReboot", ID: &i_NoReboot, Type: smithy.ShapeTypeBoolean, Ext: &ext[169]})
-var sParameters_ExcludeDataVolumeTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeDataVolumeTags", ID: &i_ExcludeDataVolumeTagList, Members: &m_ExcludeDataVolumeTagList, Type: smithy.ShapeTypeList, Ext: &ext[170]})
-var sPolicyDetails_PolicyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyType", ID: &iPolicyTypeValues, Members: &mPolicyTypeValues, Type: smithy.ShapeTypeEnum, Ext: &ext[174]})
-var sPolicyDetails_ResourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTypes", ID: &i_ResourceTypeValuesList, Members: &m_ResourceTypeValuesList, Type: smithy.ShapeTypeList, Ext: &ext[175]})
-var sPolicyDetails_ResourceLocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceLocations", ID: &i_ResourceLocationList, Members: &m_ResourceLocationList, Type: smithy.ShapeTypeList, Ext: &ext[176]})
-var sPolicyDetails_TargetTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetTags", ID: &i_TargetTagList, Members: &m_TargetTagList, Type: smithy.ShapeTypeList, Ext: &ext[177]})
-var sPolicyDetails_Schedules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schedules", ID: &i_ScheduleList, Members: &m_ScheduleList, Type: smithy.ShapeTypeList, Ext: &ext[178]})
-var sPolicyDetails_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &iParameters, Members: &mParameters, Type: smithy.ShapeTypeStructure, Ext: &ext[179]})
-var sPolicyDetails_EventSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSource", ID: &iEventSource, Members: &mEventSource, Type: smithy.ShapeTypeStructure, Ext: &ext[180]})
-var sPolicyDetails_Actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Actions", ID: &i_ActionList, Members: &m_ActionList, Type: smithy.ShapeTypeList, Ext: &ext[181]})
-var sPolicyDetails_PolicyLanguage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyLanguage", ID: &iPolicyLanguageValues, Members: &mPolicyLanguageValues, Type: smithy.ShapeTypeEnum, Ext: &ext[182]})
-var sPolicyDetails_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceTypeValues, Members: &mResourceTypeValues, Type: smithy.ShapeTypeEnum, Ext: &ext[183]})
-var sPolicyDetails_CreateInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateInterval", ID: &i_CreateInterval, Type: smithy.ShapeTypeInteger, Ext: &ext[184]})
-var sPolicyDetails_RetainInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetainInterval", ID: &i_RetainInterval, Type: smithy.ShapeTypeInteger, Ext: &ext[185]})
-var sPolicyDetails_CopyTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTags", ID: &i_CopyTagsNullable, Type: smithy.ShapeTypeBoolean, Ext: &ext[186]})
-var sPolicyDetails_CrossRegionCopyTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossRegionCopyTargets", ID: &i_CrossRegionCopyTargetList, Members: &m_CrossRegionCopyTargetList, Type: smithy.ShapeTypeList, Ext: &ext[187]})
-var sPolicyDetails_ExtendDeletion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtendDeletion", ID: &i_ExtendDeletion, Type: smithy.ShapeTypeBoolean, Ext: &ext[188]})
-var sPolicyDetails_Exclusions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Exclusions", ID: &iExclusions, Members: &mExclusions, Type: smithy.ShapeTypeStructure, Ext: &ext[189]})
-var s_PolicyIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &ext[192]})
-var sPolicyLanguageValues_SIMPLIFIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIMPLIFIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[194]})
-var sPolicyLanguageValues_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[195]})
-var sPolicyTypeValues_EBS_SNAPSHOT_MANAGEMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EBS_SNAPSHOT_MANAGEMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[197]})
-var sPolicyTypeValues_IMAGE_MANAGEMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMAGE_MANAGEMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[198]})
-var sPolicyTypeValues_EVENT_BASED_POLICY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVENT_BASED_POLICY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[199]})
-var s_ResourceLocationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceLocationValues, Members: &mResourceLocationValues, Type: smithy.ShapeTypeEnum, Ext: &ext[201]})
-var sResourceLocationValues_CLOUD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOUD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[203]})
-var sResourceLocationValues_OUTPOST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OUTPOST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[204]})
-var sResourceLocationValues_LOCAL_ZONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCAL_ZONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[205]})
-var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[207]})
-var sResourceNotFoundException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[208]})
-var sResourceNotFoundException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[209]})
-var sResourceNotFoundException_ResourceIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceIds", ID: &i_PolicyIdList, Members: &m_PolicyIdList, Type: smithy.ShapeTypeList, Ext: &ext[210]})
-var sResourceTypeValues_VOLUME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOLUME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[212]})
-var sResourceTypeValues_INSTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[213]})
-var s_ResourceTypeValuesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceTypeValues, Members: &mResourceTypeValues, Type: smithy.ShapeTypeEnum, Ext: &ext[215]})
-var sRetainRule_Count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Count", ID: &i_StandardTierRetainRuleCount, Type: smithy.ShapeTypeInteger, Ext: &ext[218]})
-var sRetainRule_Interval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Interval", ID: &i_StandardTierRetainRuleInterval, Type: smithy.ShapeTypeInteger, Ext: &ext[219]})
-var sRetainRule_IntervalUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntervalUnit", ID: &iRetentionIntervalUnitValues, Members: &mRetentionIntervalUnitValues, Type: smithy.ShapeTypeEnum, Ext: &ext[220]})
-var sRetentionArchiveTier_Count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Count", ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &ext[222]})
-var sRetentionArchiveTier_Interval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Interval", ID: &i_Interval, Type: smithy.ShapeTypeInteger, Ext: &ext[223]})
-var sRetentionArchiveTier_IntervalUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntervalUnit", ID: &iRetentionIntervalUnitValues, Members: &mRetentionIntervalUnitValues, Type: smithy.ShapeTypeEnum, Ext: &ext[224]})
-var sRetentionIntervalUnitValues_DAYS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAYS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[226]})
-var sRetentionIntervalUnitValues_WEEKS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEEKS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[227]})
-var sRetentionIntervalUnitValues_MONTHS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONTHS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[228]})
-var sRetentionIntervalUnitValues_YEARS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YEARS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[229]})
-var sSchedule_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ScheduleName, Type: smithy.ShapeTypeString, Ext: &ext[231]})
-var sSchedule_CopyTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTags", ID: &i_CopyTags, Type: smithy.ShapeTypeBoolean, Ext: &ext[232]})
-var sSchedule_TagsToAdd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagsToAdd", ID: &i_TagsToAddList, Members: &m_TagsToAddList, Type: smithy.ShapeTypeList, Ext: &ext[233]})
-var sSchedule_VariableTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VariableTags", ID: &i_VariableTagsList, Members: &m_VariableTagsList, Type: smithy.ShapeTypeList, Ext: &ext[234]})
-var sSchedule_CreateRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateRule", ID: &iCreateRule, Members: &mCreateRule, Type: smithy.ShapeTypeStructure, Ext: &ext[235]})
-var sSchedule_RetainRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetainRule", ID: &iRetainRule, Members: &mRetainRule, Type: smithy.ShapeTypeStructure, Ext: &ext[236]})
-var sSchedule_FastRestoreRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FastRestoreRule", ID: &iFastRestoreRule, Members: &mFastRestoreRule, Type: smithy.ShapeTypeStructure, Ext: &ext[237]})
-var sSchedule_CrossRegionCopyRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossRegionCopyRules", ID: &i_CrossRegionCopyRules, Members: &m_CrossRegionCopyRules, Type: smithy.ShapeTypeList, Ext: &ext[238]})
-var sSchedule_ShareRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShareRules", ID: &i_ShareRules, Members: &m_ShareRules, Type: smithy.ShapeTypeList, Ext: &ext[239]})
-var sSchedule_DeprecateRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeprecateRule", ID: &iDeprecateRule, Members: &mDeprecateRule, Type: smithy.ShapeTypeStructure, Ext: &ext[240]})
-var sSchedule_ArchiveRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveRule", ID: &iArchiveRule, Members: &mArchiveRule, Type: smithy.ShapeTypeStructure, Ext: &ext[241]})
-var s_ScheduleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSchedule, Members: &mSchedule, Type: smithy.ShapeTypeStructure, Ext: &ext[243]})
-var sScript_Stages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stages", ID: &i_StagesList, Members: &m_StagesList, Type: smithy.ShapeTypeList, Ext: &ext[246]})
-var sScript_ExecutionHandlerService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionHandlerService", ID: &iExecutionHandlerServiceValues, Members: &mExecutionHandlerServiceValues, Type: smithy.ShapeTypeEnum, Ext: &ext[247]})
-var sScript_ExecutionHandler = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionHandler", ID: &i_ExecutionHandler, Type: smithy.ShapeTypeString, Ext: &ext[248]})
-var sScript_ExecuteOperationOnScriptFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecuteOperationOnScriptFailure", ID: &i_ExecuteOperationOnScriptFailure, Type: smithy.ShapeTypeBoolean, Ext: &ext[249]})
-var sScript_ExecutionTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionTimeout", ID: &i_ScriptExecutionTimeout, Type: smithy.ShapeTypeInteger, Ext: &ext[250]})
-var sScript_MaximumRetryCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumRetryCount", ID: &i_ScriptMaximumRetryCount, Type: smithy.ShapeTypeInteger, Ext: &ext[251]})
-var s_ScriptsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iScript, Members: &mScript, Type: smithy.ShapeTypeStructure, Ext: &ext[255]})
-var sSettablePolicyStateValues_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[257]})
-var sSettablePolicyStateValues_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[258]})
-var sShareRule_TargetAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetAccounts", ID: &i_ShareTargetAccountList, Members: &m_ShareTargetAccountList, Type: smithy.ShapeTypeList, Ext: &ext[260]})
-var sShareRule_UnshareInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnshareInterval", ID: &i_Interval, Type: smithy.ShapeTypeInteger, Ext: &ext[261]})
-var sShareRule_UnshareIntervalUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnshareIntervalUnit", ID: &iRetentionIntervalUnitValues, Members: &mRetentionIntervalUnitValues, Type: smithy.ShapeTypeEnum, Ext: &ext[262]})
-var s_ShareRules_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iShareRule, Members: &mShareRule, Type: smithy.ShapeTypeStructure, Ext: &ext[264]})
-var s_ShareTargetAccountList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &ext[266]})
-var s_SnapshotOwnerList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &ext[268]})
-var s_StagesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStageValues, Members: &mStageValues, Type: smithy.ShapeTypeEnum, Ext: &ext[270]})
-var sStageValues_PRE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[272]})
-var sStageValues_POST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[273]})
-var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[279]})
-var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[280]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[284]})
-var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[286]})
-var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[287]})
-var s_TagsToAddFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagFilter, Type: smithy.ShapeTypeString, Ext: &ext[289]})
-var s_TagsToAddList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[291]})
-var s_TargetTagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[296]})
-var s_TargetTagsFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagFilter, Type: smithy.ShapeTypeString, Ext: &ext[298]})
-var s_TimesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Time, Type: smithy.ShapeTypeString, Ext: &ext[301]})
-var s_VariableTagsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[304]})
-var sCreateLifecyclePolicyRequest_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[307]})
-var sCreateLifecyclePolicyRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PolicyDescription, Type: smithy.ShapeTypeString, Ext: &ext[308]})
-var sCreateLifecyclePolicyRequest_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iSettablePolicyStateValues, Members: &mSettablePolicyStateValues, Type: smithy.ShapeTypeEnum, Ext: &ext[309]})
-var sCreateLifecyclePolicyRequest_PolicyDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyDetails", ID: &iPolicyDetails, Members: &mPolicyDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[310]})
-var sCreateLifecyclePolicyRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[311]})
-var sCreateLifecyclePolicyRequest_DefaultPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultPolicy", ID: &iDefaultPolicyTypeValues, Members: &mDefaultPolicyTypeValues, Type: smithy.ShapeTypeEnum, Ext: &ext[312]})
-var sCreateLifecyclePolicyRequest_CreateInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateInterval", ID: &i_CreateInterval, Type: smithy.ShapeTypeInteger, Ext: &ext[313]})
-var sCreateLifecyclePolicyRequest_RetainInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetainInterval", ID: &i_RetainInterval, Type: smithy.ShapeTypeInteger, Ext: &ext[314]})
-var sCreateLifecyclePolicyRequest_CopyTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTags", ID: &i_CopyTagsNullable, Type: smithy.ShapeTypeBoolean, Ext: &ext[315]})
-var sCreateLifecyclePolicyRequest_ExtendDeletion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtendDeletion", ID: &i_ExtendDeletion, Type: smithy.ShapeTypeBoolean, Ext: &ext[316]})
-var sCreateLifecyclePolicyRequest_CrossRegionCopyTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossRegionCopyTargets", ID: &i_CrossRegionCopyTargetList, Members: &m_CrossRegionCopyTargetList, Type: smithy.ShapeTypeList, Ext: &ext[317]})
-var sCreateLifecyclePolicyRequest_Exclusions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Exclusions", ID: &iExclusions, Members: &mExclusions, Type: smithy.ShapeTypeStructure, Ext: &ext[318]})
-var sCreateLifecyclePolicyResponse_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &ext[320]})
-var sDeleteLifecyclePolicyRequest_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyId", ID: &i_PolicyId, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[322]})
-var sGetLifecyclePoliciesRequest_PolicyIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyIds", ID: &i_PolicyIdList, Members: &m_PolicyIdList, Traits: &t15, Type: smithy.ShapeTypeList, Ext: &ext[325]})
-var sGetLifecyclePoliciesRequest_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iGettablePolicyStateValues, Members: &mGettablePolicyStateValues, Traits: &t16, Type: smithy.ShapeTypeEnum, Ext: &ext[326]})
-var sGetLifecyclePoliciesRequest_ResourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTypes", ID: &i_ResourceTypeValuesList, Members: &m_ResourceTypeValuesList, Traits: &t17, Type: smithy.ShapeTypeList, Ext: &ext[327]})
-var sGetLifecyclePoliciesRequest_TargetTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetTags", ID: &i_TargetTagsFilterList, Members: &m_TargetTagsFilterList, Traits: &t18, Type: smithy.ShapeTypeList, Ext: &ext[328]})
-var sGetLifecyclePoliciesRequest_TagsToAdd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagsToAdd", ID: &i_TagsToAddFilterList, Members: &m_TagsToAddFilterList, Traits: &t19, Type: smithy.ShapeTypeList, Ext: &ext[329]})
-var sGetLifecyclePoliciesRequest_DefaultPolicyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultPolicyType", ID: &iDefaultPoliciesTypeValues, Members: &mDefaultPoliciesTypeValues, Traits: &t20, Type: smithy.ShapeTypeEnum, Ext: &ext[330]})
-var sGetLifecyclePoliciesResponse_Policies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policies", ID: &i_LifecyclePolicySummaryList, Members: &m_LifecyclePolicySummaryList, Type: smithy.ShapeTypeList, Ext: &ext[332]})
-var sGetLifecyclePolicyRequest_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyId", ID: &i_PolicyId, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[334]})
-var sGetLifecyclePolicyResponse_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &iLifecyclePolicy, Members: &mLifecyclePolicy, Type: smithy.ShapeTypeStructure, Ext: &ext[336]})
-var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_PolicyArn, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[338]})
-var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[340]})
-var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_PolicyArn, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[342]})
-var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[343]})
-var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_PolicyArn, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[346]})
-var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t21, Type: smithy.ShapeTypeList, Ext: &ext[347]})
-var sUpdateLifecyclePolicyRequest_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyId", ID: &i_PolicyId, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &ext[350]})
-var sUpdateLifecyclePolicyRequest_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &ext[351]})
-var sUpdateLifecyclePolicyRequest_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iSettablePolicyStateValues, Members: &mSettablePolicyStateValues, Type: smithy.ShapeTypeEnum, Ext: &ext[352]})
-var sUpdateLifecyclePolicyRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PolicyDescription, Type: smithy.ShapeTypeString, Ext: &ext[353]})
-var sUpdateLifecyclePolicyRequest_PolicyDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyDetails", ID: &iPolicyDetails, Members: &mPolicyDetails, Type: smithy.ShapeTypeStructure, Ext: &ext[354]})
-var sUpdateLifecyclePolicyRequest_CreateInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateInterval", ID: &i_CreateInterval, Type: smithy.ShapeTypeInteger, Ext: &ext[355]})
-var sUpdateLifecyclePolicyRequest_RetainInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetainInterval", ID: &i_RetainInterval, Type: smithy.ShapeTypeInteger, Ext: &ext[356]})
-var sUpdateLifecyclePolicyRequest_CopyTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTags", ID: &i_CopyTagsNullable, Type: smithy.ShapeTypeBoolean, Ext: &ext[357]})
-var sUpdateLifecyclePolicyRequest_ExtendDeletion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtendDeletion", ID: &i_ExtendDeletion, Type: smithy.ShapeTypeBoolean, Ext: &ext[358]})
-var sUpdateLifecyclePolicyRequest_CrossRegionCopyTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossRegionCopyTargets", ID: &i_CrossRegionCopyTargetList, Members: &m_CrossRegionCopyTargetList, Type: smithy.ShapeTypeList, Ext: &ext[359]})
-var sUpdateLifecyclePolicyRequest_Exclusions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Exclusions", ID: &iExclusions, Members: &mExclusions, Type: smithy.ShapeTypeStructure, Ext: &ext[360]})
+var sAction_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ActionName, Type: smithy.ShapeTypeString, Ext: &eAction_Name})
+var sAction_CrossRegionCopy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossRegionCopy", ID: &i_CrossRegionCopyActionList, Members: &m_CrossRegionCopyActionList, Type: smithy.ShapeTypeList, Ext: &eAction_CrossRegionCopy})
+var s_ActionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeStructure, Ext: &e_ActionList_member})
+var sArchiveRetainRule_RetentionArchiveTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionArchiveTier", ID: &iRetentionArchiveTier, Members: &mRetentionArchiveTier, Type: smithy.ShapeTypeStructure, Ext: &eArchiveRetainRule_RetentionArchiveTier})
+var sArchiveRule_RetainRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetainRule", ID: &iArchiveRetainRule, Members: &mArchiveRetainRule, Type: smithy.ShapeTypeStructure, Ext: &eArchiveRule_RetainRule})
+var s_AvailabilityZoneIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AvailabilityZoneId, Type: smithy.ShapeTypeString, Ext: &e_AvailabilityZoneIdList_member})
+var s_AvailabilityZoneList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString, Ext: &e_AvailabilityZoneList_member})
+var sCreateRule_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &iLocationValues, Members: &mLocationValues, Type: smithy.ShapeTypeEnum, Ext: &eCreateRule_Location})
+var sCreateRule_Interval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Interval", ID: &i_Interval, Type: smithy.ShapeTypeInteger, Ext: &eCreateRule_Interval})
+var sCreateRule_IntervalUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntervalUnit", ID: &iIntervalUnitValues, Members: &mIntervalUnitValues, Type: smithy.ShapeTypeEnum, Ext: &eCreateRule_IntervalUnit})
+var sCreateRule_Times = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Times", ID: &i_TimesList, Members: &m_TimesList, Type: smithy.ShapeTypeList, Ext: &eCreateRule_Times})
+var sCreateRule_CronExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CronExpression", ID: &i_CronExpression, Type: smithy.ShapeTypeString, Ext: &eCreateRule_CronExpression})
+var sCreateRule_Scripts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scripts", ID: &i_ScriptsList, Members: &m_ScriptsList, Type: smithy.ShapeTypeList, Ext: &eCreateRule_Scripts})
+var sCrossRegionCopyAction_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_Target, Type: smithy.ShapeTypeString, Ext: &eCrossRegionCopyAction_Target})
+var sCrossRegionCopyAction_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCrossRegionCopyAction_EncryptionConfiguration})
+var sCrossRegionCopyAction_RetainRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetainRule", ID: &iCrossRegionCopyRetainRule, Members: &mCrossRegionCopyRetainRule, Type: smithy.ShapeTypeStructure, Ext: &eCrossRegionCopyAction_RetainRule})
+var s_CrossRegionCopyActionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCrossRegionCopyAction, Members: &mCrossRegionCopyAction, Type: smithy.ShapeTypeStructure, Ext: &e_CrossRegionCopyActionList_member})
+var sCrossRegionCopyDeprecateRule_Interval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Interval", ID: &i_Interval, Type: smithy.ShapeTypeInteger, Ext: &eCrossRegionCopyDeprecateRule_Interval})
+var sCrossRegionCopyDeprecateRule_IntervalUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntervalUnit", ID: &iRetentionIntervalUnitValues, Members: &mRetentionIntervalUnitValues, Type: smithy.ShapeTypeEnum, Ext: &eCrossRegionCopyDeprecateRule_IntervalUnit})
+var sCrossRegionCopyRetainRule_Interval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Interval", ID: &i_Interval, Type: smithy.ShapeTypeInteger, Ext: &eCrossRegionCopyRetainRule_Interval})
+var sCrossRegionCopyRetainRule_IntervalUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntervalUnit", ID: &iRetentionIntervalUnitValues, Members: &mRetentionIntervalUnitValues, Type: smithy.ShapeTypeEnum, Ext: &eCrossRegionCopyRetainRule_IntervalUnit})
+var sCrossRegionCopyRule_TargetRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetRegion", ID: &i_TargetRegion, Type: smithy.ShapeTypeString, Ext: &eCrossRegionCopyRule_TargetRegion})
+var sCrossRegionCopyRule_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_Target, Type: smithy.ShapeTypeString, Ext: &eCrossRegionCopyRule_Target})
+var sCrossRegionCopyRule_Encrypted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encrypted", ID: &i_Encrypted, Type: smithy.ShapeTypeBoolean, Ext: &eCrossRegionCopyRule_Encrypted})
+var sCrossRegionCopyRule_CmkArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmkArn", ID: &i_CmkArn, Type: smithy.ShapeTypeString, Ext: &eCrossRegionCopyRule_CmkArn})
+var sCrossRegionCopyRule_CopyTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTags", ID: &i_CopyTagsNullable, Type: smithy.ShapeTypeBoolean, Ext: &eCrossRegionCopyRule_CopyTags})
+var sCrossRegionCopyRule_RetainRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetainRule", ID: &iCrossRegionCopyRetainRule, Members: &mCrossRegionCopyRetainRule, Type: smithy.ShapeTypeStructure, Ext: &eCrossRegionCopyRule_RetainRule})
+var sCrossRegionCopyRule_DeprecateRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeprecateRule", ID: &iCrossRegionCopyDeprecateRule, Members: &mCrossRegionCopyDeprecateRule, Type: smithy.ShapeTypeStructure, Ext: &eCrossRegionCopyRule_DeprecateRule})
+var s_CrossRegionCopyRules_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCrossRegionCopyRule, Members: &mCrossRegionCopyRule, Type: smithy.ShapeTypeStructure, Ext: &e_CrossRegionCopyRules_member})
+var sCrossRegionCopyTarget_TargetRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetRegion", ID: &i_TargetRegion, Type: smithy.ShapeTypeString, Ext: &eCrossRegionCopyTarget_TargetRegion})
+var s_CrossRegionCopyTargetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCrossRegionCopyTarget, Members: &mCrossRegionCopyTarget, Type: smithy.ShapeTypeStructure, Ext: &e_CrossRegionCopyTargetList_member})
+var sDefaultPoliciesTypeValues_VOLUME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOLUME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDefaultPoliciesTypeValues_VOLUME})
+var sDefaultPoliciesTypeValues_INSTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDefaultPoliciesTypeValues_INSTANCE})
+var sDefaultPoliciesTypeValues_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDefaultPoliciesTypeValues_ALL})
+var sDefaultPolicyTypeValues_VOLUME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOLUME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDefaultPolicyTypeValues_VOLUME})
+var sDefaultPolicyTypeValues_INSTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDefaultPolicyTypeValues_INSTANCE})
+var sDeprecateRule_Count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Count", ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &eDeprecateRule_Count})
+var sDeprecateRule_Interval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Interval", ID: &i_Interval, Type: smithy.ShapeTypeInteger, Ext: &eDeprecateRule_Interval})
+var sDeprecateRule_IntervalUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntervalUnit", ID: &iRetentionIntervalUnitValues, Members: &mRetentionIntervalUnitValues, Type: smithy.ShapeTypeEnum, Ext: &eDeprecateRule_IntervalUnit})
+var sEncryptionConfiguration_Encrypted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encrypted", ID: &i_Encrypted, Type: smithy.ShapeTypeBoolean, Ext: &eEncryptionConfiguration_Encrypted})
+var sEncryptionConfiguration_CmkArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmkArn", ID: &i_CmkArn, Type: smithy.ShapeTypeString, Ext: &eEncryptionConfiguration_CmkArn})
+var sEventParameters_EventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventType", ID: &iEventTypeValues, Members: &mEventTypeValues, Type: smithy.ShapeTypeEnum, Ext: &eEventParameters_EventType})
+var sEventParameters_SnapshotOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotOwner", ID: &i_SnapshotOwnerList, Members: &m_SnapshotOwnerList, Type: smithy.ShapeTypeList, Ext: &eEventParameters_SnapshotOwner})
+var sEventParameters_DescriptionRegex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DescriptionRegex", ID: &i_DescriptionRegex, Type: smithy.ShapeTypeString, Ext: &eEventParameters_DescriptionRegex})
+var sEventSource_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iEventSourceValues, Members: &mEventSourceValues, Type: smithy.ShapeTypeEnum, Ext: &eEventSource_Type})
+var sEventSource_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &iEventParameters, Members: &mEventParameters, Type: smithy.ShapeTypeStructure, Ext: &eEventSource_Parameters})
+var sEventSourceValues_MANAGED_CWE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANAGED_CWE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventSourceValues_MANAGED_CWE})
+var sEventTypeValues_SHARE_SNAPSHOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHARE_SNAPSHOT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventTypeValues_SHARE_SNAPSHOT})
+var s_ExcludeDataVolumeTagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_ExcludeDataVolumeTagList_member})
+var s_ExcludeTagsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_ExcludeTagsList_member})
+var s_ExcludeVolumeTypesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_VolumeTypeValues, Type: smithy.ShapeTypeString, Ext: &e_ExcludeVolumeTypesList_member})
+var sExclusions_ExcludeBootVolumes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeBootVolumes", ID: &i_ExcludeBootVolumes, Type: smithy.ShapeTypeBoolean, Ext: &eExclusions_ExcludeBootVolumes})
+var sExclusions_ExcludeVolumeTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeVolumeTypes", ID: &i_ExcludeVolumeTypesList, Members: &m_ExcludeVolumeTypesList, Type: smithy.ShapeTypeList, Ext: &eExclusions_ExcludeVolumeTypes})
+var sExclusions_ExcludeTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeTags", ID: &i_ExcludeTagsList, Members: &m_ExcludeTagsList, Type: smithy.ShapeTypeList, Ext: &eExclusions_ExcludeTags})
+var sExecutionHandlerServiceValues_AWS_SYSTEMS_MANAGER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_SYSTEMS_MANAGER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExecutionHandlerServiceValues_AWS_SYSTEMS_MANAGER})
+var sFastRestoreRule_Count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Count", ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &eFastRestoreRule_Count})
+var sFastRestoreRule_Interval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Interval", ID: &i_Interval, Type: smithy.ShapeTypeInteger, Ext: &eFastRestoreRule_Interval})
+var sFastRestoreRule_IntervalUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntervalUnit", ID: &iRetentionIntervalUnitValues, Members: &mRetentionIntervalUnitValues, Type: smithy.ShapeTypeEnum, Ext: &eFastRestoreRule_IntervalUnit})
+var sFastRestoreRule_AvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZones", ID: &i_AvailabilityZoneList, Members: &m_AvailabilityZoneList, Type: smithy.ShapeTypeList, Ext: &eFastRestoreRule_AvailabilityZones})
+var sFastRestoreRule_AvailabilityZoneIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZoneIds", ID: &i_AvailabilityZoneIdList, Members: &m_AvailabilityZoneIdList, Type: smithy.ShapeTypeList, Ext: &eFastRestoreRule_AvailabilityZoneIds})
+var sGettablePolicyStateValues_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGettablePolicyStateValues_ENABLED})
+var sGettablePolicyStateValues_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGettablePolicyStateValues_DISABLED})
+var sGettablePolicyStateValues_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eGettablePolicyStateValues_ERROR})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var sInternalServerException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Code})
+var sIntervalUnitValues_HOURS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOURS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIntervalUnitValues_HOURS})
+var sInvalidRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidRequestException_Message})
+var sInvalidRequestException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eInvalidRequestException_Code})
+var sInvalidRequestException_RequiredParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequiredParameters", ID: &i_ParameterList, Members: &m_ParameterList, Type: smithy.ShapeTypeList, Ext: &eInvalidRequestException_RequiredParameters})
+var sInvalidRequestException_MutuallyExclusiveParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MutuallyExclusiveParameters", ID: &i_ParameterList, Members: &m_ParameterList, Type: smithy.ShapeTypeList, Ext: &eInvalidRequestException_MutuallyExclusiveParameters})
+var sLifecyclePolicy_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &eLifecyclePolicy_PolicyId})
+var sLifecyclePolicy_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PolicyDescription, Type: smithy.ShapeTypeString, Ext: &eLifecyclePolicy_Description})
+var sLifecyclePolicy_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iGettablePolicyStateValues, Members: &mGettablePolicyStateValues, Type: smithy.ShapeTypeEnum, Ext: &eLifecyclePolicy_State})
+var sLifecyclePolicy_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString, Ext: &eLifecyclePolicy_StatusMessage})
+var sLifecyclePolicy_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &eLifecyclePolicy_ExecutionRoleArn})
+var sLifecyclePolicy_DateCreated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateCreated", ID: &i_Timestamp, Traits: &t10, Type: smithy.ShapeTypeTimestamp, Ext: &eLifecyclePolicy_DateCreated})
+var sLifecyclePolicy_DateModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateModified", ID: &i_Timestamp, Traits: &t10, Type: smithy.ShapeTypeTimestamp, Ext: &eLifecyclePolicy_DateModified})
+var sLifecyclePolicy_PolicyDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyDetails", ID: &iPolicyDetails, Members: &mPolicyDetails, Type: smithy.ShapeTypeStructure, Ext: &eLifecyclePolicy_PolicyDetails})
+var sLifecyclePolicy_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eLifecyclePolicy_Tags})
+var sLifecyclePolicy_PolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyArn", ID: &i_PolicyArn, Type: smithy.ShapeTypeString, Ext: &eLifecyclePolicy_PolicyArn})
+var sLifecyclePolicy_DefaultPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultPolicy", ID: &i_DefaultPolicy, Type: smithy.ShapeTypeBoolean, Ext: &eLifecyclePolicy_DefaultPolicy})
+var sLifecyclePolicySummary_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &eLifecyclePolicySummary_PolicyId})
+var sLifecyclePolicySummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PolicyDescription, Type: smithy.ShapeTypeString, Ext: &eLifecyclePolicySummary_Description})
+var sLifecyclePolicySummary_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iGettablePolicyStateValues, Members: &mGettablePolicyStateValues, Type: smithy.ShapeTypeEnum, Ext: &eLifecyclePolicySummary_State})
+var sLifecyclePolicySummary_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eLifecyclePolicySummary_Tags})
+var sLifecyclePolicySummary_PolicyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyType", ID: &iPolicyTypeValues, Members: &mPolicyTypeValues, Type: smithy.ShapeTypeEnum, Ext: &eLifecyclePolicySummary_PolicyType})
+var sLifecyclePolicySummary_DefaultPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultPolicy", ID: &i_DefaultPolicy, Type: smithy.ShapeTypeBoolean, Ext: &eLifecyclePolicySummary_DefaultPolicy})
+var s_LifecyclePolicySummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLifecyclePolicySummary, Members: &mLifecyclePolicySummary, Type: smithy.ShapeTypeStructure, Ext: &e_LifecyclePolicySummaryList_member})
+var sLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_Message})
+var sLimitExceededException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_Code})
+var sLimitExceededException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_ResourceType})
+var sLocationValues_CLOUD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOUD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLocationValues_CLOUD})
+var sLocationValues_OUTPOST_LOCAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OUTPOST_LOCAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLocationValues_OUTPOST_LOCAL})
+var sLocationValues_LOCAL_ZONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCAL_ZONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eLocationValues_LOCAL_ZONE})
+var s_ParameterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Parameter, Type: smithy.ShapeTypeString, Ext: &e_ParameterList_member})
+var sParameters_ExcludeBootVolume = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeBootVolume", ID: &i_ExcludeBootVolume, Type: smithy.ShapeTypeBoolean, Ext: &eParameters_ExcludeBootVolume})
+var sParameters_NoReboot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NoReboot", ID: &i_NoReboot, Type: smithy.ShapeTypeBoolean, Ext: &eParameters_NoReboot})
+var sParameters_ExcludeDataVolumeTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeDataVolumeTags", ID: &i_ExcludeDataVolumeTagList, Members: &m_ExcludeDataVolumeTagList, Type: smithy.ShapeTypeList, Ext: &eParameters_ExcludeDataVolumeTags})
+var sPolicyDetails_PolicyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyType", ID: &iPolicyTypeValues, Members: &mPolicyTypeValues, Type: smithy.ShapeTypeEnum, Ext: &ePolicyDetails_PolicyType})
+var sPolicyDetails_ResourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTypes", ID: &i_ResourceTypeValuesList, Members: &m_ResourceTypeValuesList, Type: smithy.ShapeTypeList, Ext: &ePolicyDetails_ResourceTypes})
+var sPolicyDetails_ResourceLocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceLocations", ID: &i_ResourceLocationList, Members: &m_ResourceLocationList, Type: smithy.ShapeTypeList, Ext: &ePolicyDetails_ResourceLocations})
+var sPolicyDetails_TargetTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetTags", ID: &i_TargetTagList, Members: &m_TargetTagList, Type: smithy.ShapeTypeList, Ext: &ePolicyDetails_TargetTags})
+var sPolicyDetails_Schedules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schedules", ID: &i_ScheduleList, Members: &m_ScheduleList, Type: smithy.ShapeTypeList, Ext: &ePolicyDetails_Schedules})
+var sPolicyDetails_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &iParameters, Members: &mParameters, Type: smithy.ShapeTypeStructure, Ext: &ePolicyDetails_Parameters})
+var sPolicyDetails_EventSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSource", ID: &iEventSource, Members: &mEventSource, Type: smithy.ShapeTypeStructure, Ext: &ePolicyDetails_EventSource})
+var sPolicyDetails_Actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Actions", ID: &i_ActionList, Members: &m_ActionList, Type: smithy.ShapeTypeList, Ext: &ePolicyDetails_Actions})
+var sPolicyDetails_PolicyLanguage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyLanguage", ID: &iPolicyLanguageValues, Members: &mPolicyLanguageValues, Type: smithy.ShapeTypeEnum, Ext: &ePolicyDetails_PolicyLanguage})
+var sPolicyDetails_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceTypeValues, Members: &mResourceTypeValues, Type: smithy.ShapeTypeEnum, Ext: &ePolicyDetails_ResourceType})
+var sPolicyDetails_CreateInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateInterval", ID: &i_CreateInterval, Type: smithy.ShapeTypeInteger, Ext: &ePolicyDetails_CreateInterval})
+var sPolicyDetails_RetainInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetainInterval", ID: &i_RetainInterval, Type: smithy.ShapeTypeInteger, Ext: &ePolicyDetails_RetainInterval})
+var sPolicyDetails_CopyTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTags", ID: &i_CopyTagsNullable, Type: smithy.ShapeTypeBoolean, Ext: &ePolicyDetails_CopyTags})
+var sPolicyDetails_CrossRegionCopyTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossRegionCopyTargets", ID: &i_CrossRegionCopyTargetList, Members: &m_CrossRegionCopyTargetList, Type: smithy.ShapeTypeList, Ext: &ePolicyDetails_CrossRegionCopyTargets})
+var sPolicyDetails_ExtendDeletion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtendDeletion", ID: &i_ExtendDeletion, Type: smithy.ShapeTypeBoolean, Ext: &ePolicyDetails_ExtendDeletion})
+var sPolicyDetails_Exclusions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Exclusions", ID: &iExclusions, Members: &mExclusions, Type: smithy.ShapeTypeStructure, Ext: &ePolicyDetails_Exclusions})
+var s_PolicyIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &e_PolicyIdList_member})
+var sPolicyLanguageValues_SIMPLIFIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIMPLIFIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePolicyLanguageValues_SIMPLIFIED})
+var sPolicyLanguageValues_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePolicyLanguageValues_STANDARD})
+var sPolicyTypeValues_EBS_SNAPSHOT_MANAGEMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EBS_SNAPSHOT_MANAGEMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePolicyTypeValues_EBS_SNAPSHOT_MANAGEMENT})
+var sPolicyTypeValues_IMAGE_MANAGEMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMAGE_MANAGEMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePolicyTypeValues_IMAGE_MANAGEMENT})
+var sPolicyTypeValues_EVENT_BASED_POLICY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVENT_BASED_POLICY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePolicyTypeValues_EVENT_BASED_POLICY})
+var s_ResourceLocationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceLocationValues, Members: &mResourceLocationValues, Type: smithy.ShapeTypeEnum, Ext: &e_ResourceLocationList_member})
+var sResourceLocationValues_CLOUD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOUD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceLocationValues_CLOUD})
+var sResourceLocationValues_OUTPOST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OUTPOST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceLocationValues_OUTPOST})
+var sResourceLocationValues_LOCAL_ZONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCAL_ZONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceLocationValues_LOCAL_ZONE})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sResourceNotFoundException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Code})
+var sResourceNotFoundException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_ResourceType})
+var sResourceNotFoundException_ResourceIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceIds", ID: &i_PolicyIdList, Members: &m_PolicyIdList, Type: smithy.ShapeTypeList, Ext: &eResourceNotFoundException_ResourceIds})
+var sResourceTypeValues_VOLUME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOLUME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceTypeValues_VOLUME})
+var sResourceTypeValues_INSTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eResourceTypeValues_INSTANCE})
+var s_ResourceTypeValuesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceTypeValues, Members: &mResourceTypeValues, Type: smithy.ShapeTypeEnum, Ext: &e_ResourceTypeValuesList_member})
+var sRetainRule_Count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Count", ID: &i_StandardTierRetainRuleCount, Type: smithy.ShapeTypeInteger, Ext: &eRetainRule_Count})
+var sRetainRule_Interval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Interval", ID: &i_StandardTierRetainRuleInterval, Type: smithy.ShapeTypeInteger, Ext: &eRetainRule_Interval})
+var sRetainRule_IntervalUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntervalUnit", ID: &iRetentionIntervalUnitValues, Members: &mRetentionIntervalUnitValues, Type: smithy.ShapeTypeEnum, Ext: &eRetainRule_IntervalUnit})
+var sRetentionArchiveTier_Count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Count", ID: &i_Count, Type: smithy.ShapeTypeInteger, Ext: &eRetentionArchiveTier_Count})
+var sRetentionArchiveTier_Interval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Interval", ID: &i_Interval, Type: smithy.ShapeTypeInteger, Ext: &eRetentionArchiveTier_Interval})
+var sRetentionArchiveTier_IntervalUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntervalUnit", ID: &iRetentionIntervalUnitValues, Members: &mRetentionIntervalUnitValues, Type: smithy.ShapeTypeEnum, Ext: &eRetentionArchiveTier_IntervalUnit})
+var sRetentionIntervalUnitValues_DAYS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAYS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetentionIntervalUnitValues_DAYS})
+var sRetentionIntervalUnitValues_WEEKS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEEKS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetentionIntervalUnitValues_WEEKS})
+var sRetentionIntervalUnitValues_MONTHS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONTHS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetentionIntervalUnitValues_MONTHS})
+var sRetentionIntervalUnitValues_YEARS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YEARS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRetentionIntervalUnitValues_YEARS})
+var sSchedule_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ScheduleName, Type: smithy.ShapeTypeString, Ext: &eSchedule_Name})
+var sSchedule_CopyTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTags", ID: &i_CopyTags, Type: smithy.ShapeTypeBoolean, Ext: &eSchedule_CopyTags})
+var sSchedule_TagsToAdd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagsToAdd", ID: &i_TagsToAddList, Members: &m_TagsToAddList, Type: smithy.ShapeTypeList, Ext: &eSchedule_TagsToAdd})
+var sSchedule_VariableTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VariableTags", ID: &i_VariableTagsList, Members: &m_VariableTagsList, Type: smithy.ShapeTypeList, Ext: &eSchedule_VariableTags})
+var sSchedule_CreateRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateRule", ID: &iCreateRule, Members: &mCreateRule, Type: smithy.ShapeTypeStructure, Ext: &eSchedule_CreateRule})
+var sSchedule_RetainRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetainRule", ID: &iRetainRule, Members: &mRetainRule, Type: smithy.ShapeTypeStructure, Ext: &eSchedule_RetainRule})
+var sSchedule_FastRestoreRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FastRestoreRule", ID: &iFastRestoreRule, Members: &mFastRestoreRule, Type: smithy.ShapeTypeStructure, Ext: &eSchedule_FastRestoreRule})
+var sSchedule_CrossRegionCopyRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossRegionCopyRules", ID: &i_CrossRegionCopyRules, Members: &m_CrossRegionCopyRules, Type: smithy.ShapeTypeList, Ext: &eSchedule_CrossRegionCopyRules})
+var sSchedule_ShareRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShareRules", ID: &i_ShareRules, Members: &m_ShareRules, Type: smithy.ShapeTypeList, Ext: &eSchedule_ShareRules})
+var sSchedule_DeprecateRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeprecateRule", ID: &iDeprecateRule, Members: &mDeprecateRule, Type: smithy.ShapeTypeStructure, Ext: &eSchedule_DeprecateRule})
+var sSchedule_ArchiveRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveRule", ID: &iArchiveRule, Members: &mArchiveRule, Type: smithy.ShapeTypeStructure, Ext: &eSchedule_ArchiveRule})
+var s_ScheduleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSchedule, Members: &mSchedule, Type: smithy.ShapeTypeStructure, Ext: &e_ScheduleList_member})
+var sScript_Stages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stages", ID: &i_StagesList, Members: &m_StagesList, Type: smithy.ShapeTypeList, Ext: &eScript_Stages})
+var sScript_ExecutionHandlerService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionHandlerService", ID: &iExecutionHandlerServiceValues, Members: &mExecutionHandlerServiceValues, Type: smithy.ShapeTypeEnum, Ext: &eScript_ExecutionHandlerService})
+var sScript_ExecutionHandler = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionHandler", ID: &i_ExecutionHandler, Type: smithy.ShapeTypeString, Ext: &eScript_ExecutionHandler})
+var sScript_ExecuteOperationOnScriptFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecuteOperationOnScriptFailure", ID: &i_ExecuteOperationOnScriptFailure, Type: smithy.ShapeTypeBoolean, Ext: &eScript_ExecuteOperationOnScriptFailure})
+var sScript_ExecutionTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionTimeout", ID: &i_ScriptExecutionTimeout, Type: smithy.ShapeTypeInteger, Ext: &eScript_ExecutionTimeout})
+var sScript_MaximumRetryCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumRetryCount", ID: &i_ScriptMaximumRetryCount, Type: smithy.ShapeTypeInteger, Ext: &eScript_MaximumRetryCount})
+var s_ScriptsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iScript, Members: &mScript, Type: smithy.ShapeTypeStructure, Ext: &e_ScriptsList_member})
+var sSettablePolicyStateValues_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSettablePolicyStateValues_ENABLED})
+var sSettablePolicyStateValues_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSettablePolicyStateValues_DISABLED})
+var sShareRule_TargetAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetAccounts", ID: &i_ShareTargetAccountList, Members: &m_ShareTargetAccountList, Type: smithy.ShapeTypeList, Ext: &eShareRule_TargetAccounts})
+var sShareRule_UnshareInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnshareInterval", ID: &i_Interval, Type: smithy.ShapeTypeInteger, Ext: &eShareRule_UnshareInterval})
+var sShareRule_UnshareIntervalUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnshareIntervalUnit", ID: &iRetentionIntervalUnitValues, Members: &mRetentionIntervalUnitValues, Type: smithy.ShapeTypeEnum, Ext: &eShareRule_UnshareIntervalUnit})
+var s_ShareRules_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iShareRule, Members: &mShareRule, Type: smithy.ShapeTypeStructure, Ext: &e_ShareRules_member})
+var s_ShareTargetAccountList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &e_ShareTargetAccountList_member})
+var s_SnapshotOwnerList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString, Ext: &e_SnapshotOwnerList_member})
+var s_StagesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStageValues, Members: &mStageValues, Type: smithy.ShapeTypeEnum, Ext: &e_StagesList_member})
+var sStageValues_PRE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStageValues_PRE})
+var sStageValues_POST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStageValues_POST})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var s_TagsToAddFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagFilter, Type: smithy.ShapeTypeString, Ext: &e_TagsToAddFilterList_member})
+var s_TagsToAddList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagsToAddList_member})
+var s_TargetTagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TargetTagList_member})
+var s_TargetTagsFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagFilter, Type: smithy.ShapeTypeString, Ext: &e_TargetTagsFilterList_member})
+var s_TimesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Time, Type: smithy.ShapeTypeString, Ext: &e_TimesList_member})
+var s_VariableTagsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_VariableTagsList_member})
+var sCreateLifecyclePolicyRequest_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &eCreateLifecyclePolicyRequest_ExecutionRoleArn})
+var sCreateLifecyclePolicyRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PolicyDescription, Type: smithy.ShapeTypeString, Ext: &eCreateLifecyclePolicyRequest_Description})
+var sCreateLifecyclePolicyRequest_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iSettablePolicyStateValues, Members: &mSettablePolicyStateValues, Type: smithy.ShapeTypeEnum, Ext: &eCreateLifecyclePolicyRequest_State})
+var sCreateLifecyclePolicyRequest_PolicyDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyDetails", ID: &iPolicyDetails, Members: &mPolicyDetails, Type: smithy.ShapeTypeStructure, Ext: &eCreateLifecyclePolicyRequest_PolicyDetails})
+var sCreateLifecyclePolicyRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateLifecyclePolicyRequest_Tags})
+var sCreateLifecyclePolicyRequest_DefaultPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultPolicy", ID: &iDefaultPolicyTypeValues, Members: &mDefaultPolicyTypeValues, Type: smithy.ShapeTypeEnum, Ext: &eCreateLifecyclePolicyRequest_DefaultPolicy})
+var sCreateLifecyclePolicyRequest_CreateInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateInterval", ID: &i_CreateInterval, Type: smithy.ShapeTypeInteger, Ext: &eCreateLifecyclePolicyRequest_CreateInterval})
+var sCreateLifecyclePolicyRequest_RetainInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetainInterval", ID: &i_RetainInterval, Type: smithy.ShapeTypeInteger, Ext: &eCreateLifecyclePolicyRequest_RetainInterval})
+var sCreateLifecyclePolicyRequest_CopyTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTags", ID: &i_CopyTagsNullable, Type: smithy.ShapeTypeBoolean, Ext: &eCreateLifecyclePolicyRequest_CopyTags})
+var sCreateLifecyclePolicyRequest_ExtendDeletion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtendDeletion", ID: &i_ExtendDeletion, Type: smithy.ShapeTypeBoolean, Ext: &eCreateLifecyclePolicyRequest_ExtendDeletion})
+var sCreateLifecyclePolicyRequest_CrossRegionCopyTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossRegionCopyTargets", ID: &i_CrossRegionCopyTargetList, Members: &m_CrossRegionCopyTargetList, Type: smithy.ShapeTypeList, Ext: &eCreateLifecyclePolicyRequest_CrossRegionCopyTargets})
+var sCreateLifecyclePolicyRequest_Exclusions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Exclusions", ID: &iExclusions, Members: &mExclusions, Type: smithy.ShapeTypeStructure, Ext: &eCreateLifecyclePolicyRequest_Exclusions})
+var sCreateLifecyclePolicyResponse_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString, Ext: &eCreateLifecyclePolicyResponse_PolicyId})
+var sDeleteLifecyclePolicyRequest_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyId", ID: &i_PolicyId, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eDeleteLifecyclePolicyRequest_PolicyId})
+var sGetLifecyclePoliciesRequest_PolicyIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyIds", ID: &i_PolicyIdList, Members: &m_PolicyIdList, Traits: &t15, Type: smithy.ShapeTypeList, Ext: &eGetLifecyclePoliciesRequest_PolicyIds})
+var sGetLifecyclePoliciesRequest_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iGettablePolicyStateValues, Members: &mGettablePolicyStateValues, Traits: &t16, Type: smithy.ShapeTypeEnum, Ext: &eGetLifecyclePoliciesRequest_State})
+var sGetLifecyclePoliciesRequest_ResourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTypes", ID: &i_ResourceTypeValuesList, Members: &m_ResourceTypeValuesList, Traits: &t17, Type: smithy.ShapeTypeList, Ext: &eGetLifecyclePoliciesRequest_ResourceTypes})
+var sGetLifecyclePoliciesRequest_TargetTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetTags", ID: &i_TargetTagsFilterList, Members: &m_TargetTagsFilterList, Traits: &t18, Type: smithy.ShapeTypeList, Ext: &eGetLifecyclePoliciesRequest_TargetTags})
+var sGetLifecyclePoliciesRequest_TagsToAdd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagsToAdd", ID: &i_TagsToAddFilterList, Members: &m_TagsToAddFilterList, Traits: &t19, Type: smithy.ShapeTypeList, Ext: &eGetLifecyclePoliciesRequest_TagsToAdd})
+var sGetLifecyclePoliciesRequest_DefaultPolicyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultPolicyType", ID: &iDefaultPoliciesTypeValues, Members: &mDefaultPoliciesTypeValues, Traits: &t20, Type: smithy.ShapeTypeEnum, Ext: &eGetLifecyclePoliciesRequest_DefaultPolicyType})
+var sGetLifecyclePoliciesResponse_Policies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policies", ID: &i_LifecyclePolicySummaryList, Members: &m_LifecyclePolicySummaryList, Type: smithy.ShapeTypeList, Ext: &eGetLifecyclePoliciesResponse_Policies})
+var sGetLifecyclePolicyRequest_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyId", ID: &i_PolicyId, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eGetLifecyclePolicyRequest_PolicyId})
+var sGetLifecyclePolicyResponse_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &iLifecyclePolicy, Members: &mLifecyclePolicy, Type: smithy.ShapeTypeStructure, Ext: &eGetLifecyclePolicyResponse_Policy})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_PolicyArn, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_Tags})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_PolicyArn, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_Tags})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_PolicyArn, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t21, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUpdateLifecyclePolicyRequest_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyId", ID: &i_PolicyId, Traits: &t14, Type: smithy.ShapeTypeString, Ext: &eUpdateLifecyclePolicyRequest_PolicyId})
+var sUpdateLifecyclePolicyRequest_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ExecutionRoleArn, Type: smithy.ShapeTypeString, Ext: &eUpdateLifecyclePolicyRequest_ExecutionRoleArn})
+var sUpdateLifecyclePolicyRequest_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iSettablePolicyStateValues, Members: &mSettablePolicyStateValues, Type: smithy.ShapeTypeEnum, Ext: &eUpdateLifecyclePolicyRequest_State})
+var sUpdateLifecyclePolicyRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PolicyDescription, Type: smithy.ShapeTypeString, Ext: &eUpdateLifecyclePolicyRequest_Description})
+var sUpdateLifecyclePolicyRequest_PolicyDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyDetails", ID: &iPolicyDetails, Members: &mPolicyDetails, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLifecyclePolicyRequest_PolicyDetails})
+var sUpdateLifecyclePolicyRequest_CreateInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateInterval", ID: &i_CreateInterval, Type: smithy.ShapeTypeInteger, Ext: &eUpdateLifecyclePolicyRequest_CreateInterval})
+var sUpdateLifecyclePolicyRequest_RetainInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetainInterval", ID: &i_RetainInterval, Type: smithy.ShapeTypeInteger, Ext: &eUpdateLifecyclePolicyRequest_RetainInterval})
+var sUpdateLifecyclePolicyRequest_CopyTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTags", ID: &i_CopyTagsNullable, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateLifecyclePolicyRequest_CopyTags})
+var sUpdateLifecyclePolicyRequest_ExtendDeletion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExtendDeletion", ID: &i_ExtendDeletion, Type: smithy.ShapeTypeBoolean, Ext: &eUpdateLifecyclePolicyRequest_ExtendDeletion})
+var sUpdateLifecyclePolicyRequest_CrossRegionCopyTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossRegionCopyTargets", ID: &i_CrossRegionCopyTargetList, Members: &m_CrossRegionCopyTargetList, Type: smithy.ShapeTypeList, Ext: &eUpdateLifecyclePolicyRequest_CrossRegionCopyTargets})
+var sUpdateLifecyclePolicyRequest_Exclusions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Exclusions", ID: &iExclusions, Members: &mExclusions, Type: smithy.ShapeTypeStructure, Ext: &eUpdateLifecyclePolicyRequest_Exclusions})
 
 var CreateLifecyclePolicy = &sCreateLifecyclePolicy
 

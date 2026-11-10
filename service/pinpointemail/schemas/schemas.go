@@ -7,9 +7,584 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [576]smithy.SchemaExtensions
+var (
+	eCreateConfigurationSet                                                       smithy.SchemaExtensions
+	eCreateConfigurationSetEventDestination                                       smithy.SchemaExtensions
+	eCreateDedicatedIpPool                                                        smithy.SchemaExtensions
+	eCreateDeliverabilityTestReport                                               smithy.SchemaExtensions
+	eCreateEmailIdentity                                                          smithy.SchemaExtensions
+	eDeleteConfigurationSet                                                       smithy.SchemaExtensions
+	eDeleteConfigurationSetEventDestination                                       smithy.SchemaExtensions
+	eDeleteDedicatedIpPool                                                        smithy.SchemaExtensions
+	eDeleteEmailIdentity                                                          smithy.SchemaExtensions
+	eGetAccount                                                                   smithy.SchemaExtensions
+	eGetBlacklistReports                                                          smithy.SchemaExtensions
+	eGetConfigurationSet                                                          smithy.SchemaExtensions
+	eGetConfigurationSetEventDestinations                                         smithy.SchemaExtensions
+	eGetDedicatedIp                                                               smithy.SchemaExtensions
+	eGetDedicatedIps                                                              smithy.SchemaExtensions
+	eGetDeliverabilityDashboardOptions                                            smithy.SchemaExtensions
+	eGetDeliverabilityTestReport                                                  smithy.SchemaExtensions
+	eGetDomainDeliverabilityCampaign                                              smithy.SchemaExtensions
+	eGetDomainStatisticsReport                                                    smithy.SchemaExtensions
+	eGetEmailIdentity                                                             smithy.SchemaExtensions
+	eListConfigurationSets                                                        smithy.SchemaExtensions
+	eListDedicatedIpPools                                                         smithy.SchemaExtensions
+	eListDeliverabilityTestReports                                                smithy.SchemaExtensions
+	eListDomainDeliverabilityCampaigns                                            smithy.SchemaExtensions
+	eListEmailIdentities                                                          smithy.SchemaExtensions
+	eListTagsForResource                                                          smithy.SchemaExtensions
+	ePutAccountDedicatedIpWarmupAttributes                                        smithy.SchemaExtensions
+	ePutAccountSendingAttributes                                                  smithy.SchemaExtensions
+	ePutConfigurationSetDeliveryOptions                                           smithy.SchemaExtensions
+	ePutConfigurationSetReputationOptions                                         smithy.SchemaExtensions
+	ePutConfigurationSetSendingOptions                                            smithy.SchemaExtensions
+	ePutConfigurationSetTrackingOptions                                           smithy.SchemaExtensions
+	ePutDedicatedIpInPool                                                         smithy.SchemaExtensions
+	ePutDedicatedIpWarmupAttributes                                               smithy.SchemaExtensions
+	ePutDeliverabilityDashboardOption                                             smithy.SchemaExtensions
+	ePutEmailIdentityDkimAttributes                                               smithy.SchemaExtensions
+	ePutEmailIdentityFeedbackAttributes                                           smithy.SchemaExtensions
+	ePutEmailIdentityMailFromAttributes                                           smithy.SchemaExtensions
+	eSendEmail                                                                    smithy.SchemaExtensions
+	eTagResource                                                                  smithy.SchemaExtensions
+	eUntagResource                                                                smithy.SchemaExtensions
+	eUpdateConfigurationSetEventDestination                                       smithy.SchemaExtensions
+	e_AmazonPinpointEmailService                                                  smithy.SchemaExtensions
+	eAccountSuspendedException                                                    smithy.SchemaExtensions
+	eAccountSuspendedException_message                                            smithy.SchemaExtensions
+	eAlreadyExistsException                                                       smithy.SchemaExtensions
+	eAlreadyExistsException_message                                               smithy.SchemaExtensions
+	e_AmazonResourceName                                                          smithy.SchemaExtensions
+	eBadRequestException                                                          smithy.SchemaExtensions
+	eBadRequestException_message                                                  smithy.SchemaExtensions
+	eBehaviorOnMxFailure                                                          smithy.SchemaExtensions
+	eBehaviorOnMxFailure_USE_DEFAULT_VALUE                                        smithy.SchemaExtensions
+	eBehaviorOnMxFailure_REJECT_MESSAGE                                           smithy.SchemaExtensions
+	e_BlacklistEntries                                                            smithy.SchemaExtensions
+	e_BlacklistEntries_member                                                     smithy.SchemaExtensions
+	eBlacklistEntry                                                               smithy.SchemaExtensions
+	eBlacklistEntry_RblName                                                       smithy.SchemaExtensions
+	eBlacklistEntry_ListingTime                                                   smithy.SchemaExtensions
+	eBlacklistEntry_Description                                                   smithy.SchemaExtensions
+	e_BlacklistingDescription                                                     smithy.SchemaExtensions
+	e_BlacklistItemName                                                           smithy.SchemaExtensions
+	e_BlacklistItemNames                                                          smithy.SchemaExtensions
+	e_BlacklistItemNames_member                                                   smithy.SchemaExtensions
+	e_BlacklistReport                                                             smithy.SchemaExtensions
+	e_BlacklistReport_key                                                         smithy.SchemaExtensions
+	e_BlacklistReport_value                                                       smithy.SchemaExtensions
+	eBody                                                                         smithy.SchemaExtensions
+	eBody_Text                                                                    smithy.SchemaExtensions
+	eBody_Html                                                                    smithy.SchemaExtensions
+	e_CampaignId                                                                  smithy.SchemaExtensions
+	e_Charset                                                                     smithy.SchemaExtensions
+	eCloudWatchDestination                                                        smithy.SchemaExtensions
+	eCloudWatchDestination_DimensionConfigurations                                smithy.SchemaExtensions
+	eCloudWatchDimensionConfiguration                                             smithy.SchemaExtensions
+	eCloudWatchDimensionConfiguration_DimensionName                               smithy.SchemaExtensions
+	eCloudWatchDimensionConfiguration_DimensionValueSource                        smithy.SchemaExtensions
+	eCloudWatchDimensionConfiguration_DefaultDimensionValue                       smithy.SchemaExtensions
+	e_CloudWatchDimensionConfigurations                                           smithy.SchemaExtensions
+	e_CloudWatchDimensionConfigurations_member                                    smithy.SchemaExtensions
+	eConcurrentModificationException                                              smithy.SchemaExtensions
+	eConcurrentModificationException_message                                      smithy.SchemaExtensions
+	e_ConfigurationSetName                                                        smithy.SchemaExtensions
+	e_ConfigurationSetNameList                                                    smithy.SchemaExtensions
+	e_ConfigurationSetNameList_member                                             smithy.SchemaExtensions
+	eContent                                                                      smithy.SchemaExtensions
+	eContent_Data                                                                 smithy.SchemaExtensions
+	eContent_Charset                                                              smithy.SchemaExtensions
+	e_CustomRedirectDomain                                                        smithy.SchemaExtensions
+	eDailyVolume                                                                  smithy.SchemaExtensions
+	eDailyVolume_StartDate                                                        smithy.SchemaExtensions
+	eDailyVolume_VolumeStatistics                                                 smithy.SchemaExtensions
+	eDailyVolume_DomainIspPlacements                                              smithy.SchemaExtensions
+	e_DailyVolumes                                                                smithy.SchemaExtensions
+	e_DailyVolumes_member                                                         smithy.SchemaExtensions
+	eDedicatedIp                                                                  smithy.SchemaExtensions
+	eDedicatedIp_Ip                                                               smithy.SchemaExtensions
+	eDedicatedIp_WarmupStatus                                                     smithy.SchemaExtensions
+	eDedicatedIp_WarmupPercentage                                                 smithy.SchemaExtensions
+	eDedicatedIp_PoolName                                                         smithy.SchemaExtensions
+	e_DedicatedIpList                                                             smithy.SchemaExtensions
+	e_DedicatedIpList_member                                                      smithy.SchemaExtensions
+	e_DefaultDimensionValue                                                       smithy.SchemaExtensions
+	eDeliverabilityDashboardAccountStatus                                         smithy.SchemaExtensions
+	eDeliverabilityDashboardAccountStatus_ACTIVE                                  smithy.SchemaExtensions
+	eDeliverabilityDashboardAccountStatus_PENDING_EXPIRATION                      smithy.SchemaExtensions
+	eDeliverabilityDashboardAccountStatus_DISABLED                                smithy.SchemaExtensions
+	eDeliverabilityTestReport                                                     smithy.SchemaExtensions
+	eDeliverabilityTestReport_ReportId                                            smithy.SchemaExtensions
+	eDeliverabilityTestReport_ReportName                                          smithy.SchemaExtensions
+	eDeliverabilityTestReport_Subject                                             smithy.SchemaExtensions
+	eDeliverabilityTestReport_FromEmailAddress                                    smithy.SchemaExtensions
+	eDeliverabilityTestReport_CreateDate                                          smithy.SchemaExtensions
+	eDeliverabilityTestReport_DeliverabilityTestStatus                            smithy.SchemaExtensions
+	e_DeliverabilityTestReports                                                   smithy.SchemaExtensions
+	e_DeliverabilityTestReports_member                                            smithy.SchemaExtensions
+	eDeliverabilityTestStatus                                                     smithy.SchemaExtensions
+	eDeliverabilityTestStatus_IN_PROGRESS                                         smithy.SchemaExtensions
+	eDeliverabilityTestStatus_COMPLETED                                           smithy.SchemaExtensions
+	e_DeliverabilityTestSubject                                                   smithy.SchemaExtensions
+	eDeliveryOptions                                                              smithy.SchemaExtensions
+	eDeliveryOptions_TlsPolicy                                                    smithy.SchemaExtensions
+	eDeliveryOptions_SendingPoolName                                              smithy.SchemaExtensions
+	eDestination                                                                  smithy.SchemaExtensions
+	eDestination_ToAddresses                                                      smithy.SchemaExtensions
+	eDestination_CcAddresses                                                      smithy.SchemaExtensions
+	eDestination_BccAddresses                                                     smithy.SchemaExtensions
+	e_DimensionName                                                               smithy.SchemaExtensions
+	eDimensionValueSource                                                         smithy.SchemaExtensions
+	eDimensionValueSource_MESSAGE_TAG                                             smithy.SchemaExtensions
+	eDimensionValueSource_EMAIL_HEADER                                            smithy.SchemaExtensions
+	eDimensionValueSource_LINK_TAG                                                smithy.SchemaExtensions
+	eDkimAttributes                                                               smithy.SchemaExtensions
+	eDkimAttributes_SigningEnabled                                                smithy.SchemaExtensions
+	eDkimAttributes_Status                                                        smithy.SchemaExtensions
+	eDkimAttributes_Tokens                                                        smithy.SchemaExtensions
+	eDkimStatus                                                                   smithy.SchemaExtensions
+	eDkimStatus_PENDING                                                           smithy.SchemaExtensions
+	eDkimStatus_SUCCESS                                                           smithy.SchemaExtensions
+	eDkimStatus_FAILED                                                            smithy.SchemaExtensions
+	eDkimStatus_TEMPORARY_FAILURE                                                 smithy.SchemaExtensions
+	eDkimStatus_NOT_STARTED                                                       smithy.SchemaExtensions
+	e_DnsToken                                                                    smithy.SchemaExtensions
+	e_DnsTokenList                                                                smithy.SchemaExtensions
+	e_DnsTokenList_member                                                         smithy.SchemaExtensions
+	e_Domain                                                                      smithy.SchemaExtensions
+	eDomainDeliverabilityCampaign                                                 smithy.SchemaExtensions
+	eDomainDeliverabilityCampaign_CampaignId                                      smithy.SchemaExtensions
+	eDomainDeliverabilityCampaign_ImageUrl                                        smithy.SchemaExtensions
+	eDomainDeliverabilityCampaign_Subject                                         smithy.SchemaExtensions
+	eDomainDeliverabilityCampaign_FromAddress                                     smithy.SchemaExtensions
+	eDomainDeliverabilityCampaign_SendingIps                                      smithy.SchemaExtensions
+	eDomainDeliverabilityCampaign_FirstSeenDateTime                               smithy.SchemaExtensions
+	eDomainDeliverabilityCampaign_LastSeenDateTime                                smithy.SchemaExtensions
+	eDomainDeliverabilityCampaign_InboxCount                                      smithy.SchemaExtensions
+	eDomainDeliverabilityCampaign_SpamCount                                       smithy.SchemaExtensions
+	eDomainDeliverabilityCampaign_ReadRate                                        smithy.SchemaExtensions
+	eDomainDeliverabilityCampaign_DeleteRate                                      smithy.SchemaExtensions
+	eDomainDeliverabilityCampaign_ReadDeleteRate                                  smithy.SchemaExtensions
+	eDomainDeliverabilityCampaign_ProjectedVolume                                 smithy.SchemaExtensions
+	eDomainDeliverabilityCampaign_Esps                                            smithy.SchemaExtensions
+	e_DomainDeliverabilityCampaignList                                            smithy.SchemaExtensions
+	e_DomainDeliverabilityCampaignList_member                                     smithy.SchemaExtensions
+	eDomainDeliverabilityTrackingOption                                           smithy.SchemaExtensions
+	eDomainDeliverabilityTrackingOption_Domain                                    smithy.SchemaExtensions
+	eDomainDeliverabilityTrackingOption_SubscriptionStartDate                     smithy.SchemaExtensions
+	eDomainDeliverabilityTrackingOption_InboxPlacementTrackingOption              smithy.SchemaExtensions
+	e_DomainDeliverabilityTrackingOptions                                         smithy.SchemaExtensions
+	e_DomainDeliverabilityTrackingOptions_member                                  smithy.SchemaExtensions
+	eDomainIspPlacement                                                           smithy.SchemaExtensions
+	eDomainIspPlacement_IspName                                                   smithy.SchemaExtensions
+	eDomainIspPlacement_InboxRawCount                                             smithy.SchemaExtensions
+	eDomainIspPlacement_SpamRawCount                                              smithy.SchemaExtensions
+	eDomainIspPlacement_InboxPercentage                                           smithy.SchemaExtensions
+	eDomainIspPlacement_SpamPercentage                                            smithy.SchemaExtensions
+	e_DomainIspPlacements                                                         smithy.SchemaExtensions
+	e_DomainIspPlacements_member                                                  smithy.SchemaExtensions
+	e_EmailAddress                                                                smithy.SchemaExtensions
+	e_EmailAddressList                                                            smithy.SchemaExtensions
+	e_EmailAddressList_member                                                     smithy.SchemaExtensions
+	eEmailContent                                                                 smithy.SchemaExtensions
+	eEmailContent_Simple                                                          smithy.SchemaExtensions
+	eEmailContent_Raw                                                             smithy.SchemaExtensions
+	eEmailContent_Template                                                        smithy.SchemaExtensions
+	e_Enabled                                                                     smithy.SchemaExtensions
+	e_ErrorMessage                                                                smithy.SchemaExtensions
+	e_Esp                                                                         smithy.SchemaExtensions
+	e_Esps                                                                        smithy.SchemaExtensions
+	e_Esps_member                                                                 smithy.SchemaExtensions
+	eEventDestination                                                             smithy.SchemaExtensions
+	eEventDestination_Name                                                        smithy.SchemaExtensions
+	eEventDestination_Enabled                                                     smithy.SchemaExtensions
+	eEventDestination_MatchingEventTypes                                          smithy.SchemaExtensions
+	eEventDestination_KinesisFirehoseDestination                                  smithy.SchemaExtensions
+	eEventDestination_CloudWatchDestination                                       smithy.SchemaExtensions
+	eEventDestination_SnsDestination                                              smithy.SchemaExtensions
+	eEventDestination_PinpointDestination                                         smithy.SchemaExtensions
+	eEventDestinationDefinition                                                   smithy.SchemaExtensions
+	eEventDestinationDefinition_Enabled                                           smithy.SchemaExtensions
+	eEventDestinationDefinition_MatchingEventTypes                                smithy.SchemaExtensions
+	eEventDestinationDefinition_KinesisFirehoseDestination                        smithy.SchemaExtensions
+	eEventDestinationDefinition_CloudWatchDestination                             smithy.SchemaExtensions
+	eEventDestinationDefinition_SnsDestination                                    smithy.SchemaExtensions
+	eEventDestinationDefinition_PinpointDestination                               smithy.SchemaExtensions
+	e_EventDestinationName                                                        smithy.SchemaExtensions
+	e_EventDestinations                                                           smithy.SchemaExtensions
+	e_EventDestinations_member                                                    smithy.SchemaExtensions
+	eEventType                                                                    smithy.SchemaExtensions
+	eEventType_SEND                                                               smithy.SchemaExtensions
+	eEventType_REJECT                                                             smithy.SchemaExtensions
+	eEventType_BOUNCE                                                             smithy.SchemaExtensions
+	eEventType_COMPLAINT                                                          smithy.SchemaExtensions
+	eEventType_DELIVERY                                                           smithy.SchemaExtensions
+	eEventType_OPEN                                                               smithy.SchemaExtensions
+	eEventType_CLICK                                                              smithy.SchemaExtensions
+	eEventType_RENDERING_FAILURE                                                  smithy.SchemaExtensions
+	e_EventTypes                                                                  smithy.SchemaExtensions
+	e_EventTypes_member                                                           smithy.SchemaExtensions
+	e_GeneralEnforcementStatus                                                    smithy.SchemaExtensions
+	e_Identity                                                                    smithy.SchemaExtensions
+	eIdentityInfo                                                                 smithy.SchemaExtensions
+	eIdentityInfo_IdentityType                                                    smithy.SchemaExtensions
+	eIdentityInfo_IdentityName                                                    smithy.SchemaExtensions
+	eIdentityInfo_SendingEnabled                                                  smithy.SchemaExtensions
+	e_IdentityInfoList                                                            smithy.SchemaExtensions
+	e_IdentityInfoList_member                                                     smithy.SchemaExtensions
+	eIdentityType                                                                 smithy.SchemaExtensions
+	eIdentityType_EMAIL_ADDRESS                                                   smithy.SchemaExtensions
+	eIdentityType_DOMAIN                                                          smithy.SchemaExtensions
+	eIdentityType_MANAGED_DOMAIN                                                  smithy.SchemaExtensions
+	e_ImageUrl                                                                    smithy.SchemaExtensions
+	eInboxPlacementTrackingOption                                                 smithy.SchemaExtensions
+	eInboxPlacementTrackingOption_Global                                          smithy.SchemaExtensions
+	eInboxPlacementTrackingOption_TrackedIsps                                     smithy.SchemaExtensions
+	e_Ip                                                                          smithy.SchemaExtensions
+	e_IpList                                                                      smithy.SchemaExtensions
+	e_IpList_member                                                               smithy.SchemaExtensions
+	e_IspName                                                                     smithy.SchemaExtensions
+	e_IspNameList                                                                 smithy.SchemaExtensions
+	e_IspNameList_member                                                          smithy.SchemaExtensions
+	eIspPlacement                                                                 smithy.SchemaExtensions
+	eIspPlacement_IspName                                                         smithy.SchemaExtensions
+	eIspPlacement_PlacementStatistics                                             smithy.SchemaExtensions
+	e_IspPlacements                                                               smithy.SchemaExtensions
+	e_IspPlacements_member                                                        smithy.SchemaExtensions
+	eKinesisFirehoseDestination                                                   smithy.SchemaExtensions
+	eKinesisFirehoseDestination_IamRoleArn                                        smithy.SchemaExtensions
+	eKinesisFirehoseDestination_DeliveryStreamArn                                 smithy.SchemaExtensions
+	e_LastFreshStart                                                              smithy.SchemaExtensions
+	eLimitExceededException                                                       smithy.SchemaExtensions
+	eLimitExceededException_message                                               smithy.SchemaExtensions
+	e_ListOfDedicatedIpPools                                                      smithy.SchemaExtensions
+	e_ListOfDedicatedIpPools_member                                               smithy.SchemaExtensions
+	eMailFromAttributes                                                           smithy.SchemaExtensions
+	eMailFromAttributes_MailFromDomain                                            smithy.SchemaExtensions
+	eMailFromAttributes_MailFromDomainStatus                                      smithy.SchemaExtensions
+	eMailFromAttributes_BehaviorOnMxFailure                                       smithy.SchemaExtensions
+	e_MailFromDomainName                                                          smithy.SchemaExtensions
+	eMailFromDomainNotVerifiedException                                           smithy.SchemaExtensions
+	eMailFromDomainNotVerifiedException_message                                   smithy.SchemaExtensions
+	eMailFromDomainStatus                                                         smithy.SchemaExtensions
+	eMailFromDomainStatus_PENDING                                                 smithy.SchemaExtensions
+	eMailFromDomainStatus_SUCCESS                                                 smithy.SchemaExtensions
+	eMailFromDomainStatus_FAILED                                                  smithy.SchemaExtensions
+	eMailFromDomainStatus_TEMPORARY_FAILURE                                       smithy.SchemaExtensions
+	e_Max24HourSend                                                               smithy.SchemaExtensions
+	e_MaxItems                                                                    smithy.SchemaExtensions
+	e_MaxSendRate                                                                 smithy.SchemaExtensions
+	eMessage                                                                      smithy.SchemaExtensions
+	eMessage_Subject                                                              smithy.SchemaExtensions
+	eMessage_Body                                                                 smithy.SchemaExtensions
+	e_MessageContent                                                              smithy.SchemaExtensions
+	e_MessageData                                                                 smithy.SchemaExtensions
+	eMessageRejected                                                              smithy.SchemaExtensions
+	eMessageRejected_message                                                      smithy.SchemaExtensions
+	eMessageTag                                                                   smithy.SchemaExtensions
+	eMessageTag_Name                                                              smithy.SchemaExtensions
+	eMessageTag_Value                                                             smithy.SchemaExtensions
+	e_MessageTagList                                                              smithy.SchemaExtensions
+	e_MessageTagList_member                                                       smithy.SchemaExtensions
+	e_MessageTagName                                                              smithy.SchemaExtensions
+	e_MessageTagValue                                                             smithy.SchemaExtensions
+	e_NextToken                                                                   smithy.SchemaExtensions
+	eNotFoundException                                                            smithy.SchemaExtensions
+	eNotFoundException_message                                                    smithy.SchemaExtensions
+	e_OutboundMessageId                                                           smithy.SchemaExtensions
+	eOverallVolume                                                                smithy.SchemaExtensions
+	eOverallVolume_VolumeStatistics                                               smithy.SchemaExtensions
+	eOverallVolume_ReadRatePercent                                                smithy.SchemaExtensions
+	eOverallVolume_DomainIspPlacements                                            smithy.SchemaExtensions
+	e_Percentage                                                                  smithy.SchemaExtensions
+	e_Percentage100Wrapper                                                        smithy.SchemaExtensions
+	ePinpointDestination                                                          smithy.SchemaExtensions
+	ePinpointDestination_ApplicationArn                                           smithy.SchemaExtensions
+	ePlacementStatistics                                                          smithy.SchemaExtensions
+	ePlacementStatistics_InboxPercentage                                          smithy.SchemaExtensions
+	ePlacementStatistics_SpamPercentage                                           smithy.SchemaExtensions
+	ePlacementStatistics_MissingPercentage                                        smithy.SchemaExtensions
+	ePlacementStatistics_SpfPercentage                                            smithy.SchemaExtensions
+	ePlacementStatistics_DkimPercentage                                           smithy.SchemaExtensions
+	e_PoolName                                                                    smithy.SchemaExtensions
+	eRawMessage                                                                   smithy.SchemaExtensions
+	eRawMessage_Data                                                              smithy.SchemaExtensions
+	e_RawMessageData                                                              smithy.SchemaExtensions
+	e_RblName                                                                     smithy.SchemaExtensions
+	e_ReportId                                                                    smithy.SchemaExtensions
+	e_ReportName                                                                  smithy.SchemaExtensions
+	eReputationOptions                                                            smithy.SchemaExtensions
+	eReputationOptions_ReputationMetricsEnabled                                   smithy.SchemaExtensions
+	eReputationOptions_LastFreshStart                                             smithy.SchemaExtensions
+	eSendingOptions                                                               smithy.SchemaExtensions
+	eSendingOptions_SendingEnabled                                                smithy.SchemaExtensions
+	eSendingPausedException                                                       smithy.SchemaExtensions
+	eSendingPausedException_message                                               smithy.SchemaExtensions
+	e_SendingPoolName                                                             smithy.SchemaExtensions
+	eSendQuota                                                                    smithy.SchemaExtensions
+	eSendQuota_Max24HourSend                                                      smithy.SchemaExtensions
+	eSendQuota_MaxSendRate                                                        smithy.SchemaExtensions
+	eSendQuota_SentLast24Hours                                                    smithy.SchemaExtensions
+	e_SentLast24Hours                                                             smithy.SchemaExtensions
+	eSnsDestination                                                               smithy.SchemaExtensions
+	eSnsDestination_TopicArn                                                      smithy.SchemaExtensions
+	e_Subject                                                                     smithy.SchemaExtensions
+	eTag                                                                          smithy.SchemaExtensions
+	eTag_Key                                                                      smithy.SchemaExtensions
+	eTag_Value                                                                    smithy.SchemaExtensions
+	e_TagKey                                                                      smithy.SchemaExtensions
+	e_TagKeyList                                                                  smithy.SchemaExtensions
+	e_TagKeyList_member                                                           smithy.SchemaExtensions
+	e_TagList                                                                     smithy.SchemaExtensions
+	e_TagList_member                                                              smithy.SchemaExtensions
+	e_TagValue                                                                    smithy.SchemaExtensions
+	eTemplate                                                                     smithy.SchemaExtensions
+	eTemplate_TemplateArn                                                         smithy.SchemaExtensions
+	eTemplate_TemplateData                                                        smithy.SchemaExtensions
+	e_TemplateArn                                                                 smithy.SchemaExtensions
+	e_TemplateData                                                                smithy.SchemaExtensions
+	e_Timestamp                                                                   smithy.SchemaExtensions
+	eTlsPolicy                                                                    smithy.SchemaExtensions
+	eTlsPolicy_REQUIRE                                                            smithy.SchemaExtensions
+	eTlsPolicy_OPTIONAL                                                           smithy.SchemaExtensions
+	eTooManyRequestsException                                                     smithy.SchemaExtensions
+	eTooManyRequestsException_message                                             smithy.SchemaExtensions
+	eTrackingOptions                                                              smithy.SchemaExtensions
+	eTrackingOptions_CustomRedirectDomain                                         smithy.SchemaExtensions
+	e_Volume                                                                      smithy.SchemaExtensions
+	eVolumeStatistics                                                             smithy.SchemaExtensions
+	eVolumeStatistics_InboxRawCount                                               smithy.SchemaExtensions
+	eVolumeStatistics_SpamRawCount                                                smithy.SchemaExtensions
+	eVolumeStatistics_ProjectedInbox                                              smithy.SchemaExtensions
+	eVolumeStatistics_ProjectedSpam                                               smithy.SchemaExtensions
+	eWarmupStatus                                                                 smithy.SchemaExtensions
+	eWarmupStatus_IN_PROGRESS                                                     smithy.SchemaExtensions
+	eWarmupStatus_DONE                                                            smithy.SchemaExtensions
+	eCreateConfigurationSetEventDestinationRequest                                smithy.SchemaExtensions
+	eCreateConfigurationSetEventDestinationRequest_ConfigurationSetName           smithy.SchemaExtensions
+	eCreateConfigurationSetEventDestinationRequest_EventDestinationName           smithy.SchemaExtensions
+	eCreateConfigurationSetEventDestinationRequest_EventDestination               smithy.SchemaExtensions
+	eCreateConfigurationSetEventDestinationResponse                               smithy.SchemaExtensions
+	eCreateConfigurationSetRequest                                                smithy.SchemaExtensions
+	eCreateConfigurationSetRequest_ConfigurationSetName                           smithy.SchemaExtensions
+	eCreateConfigurationSetRequest_TrackingOptions                                smithy.SchemaExtensions
+	eCreateConfigurationSetRequest_DeliveryOptions                                smithy.SchemaExtensions
+	eCreateConfigurationSetRequest_ReputationOptions                              smithy.SchemaExtensions
+	eCreateConfigurationSetRequest_SendingOptions                                 smithy.SchemaExtensions
+	eCreateConfigurationSetRequest_Tags                                           smithy.SchemaExtensions
+	eCreateConfigurationSetResponse                                               smithy.SchemaExtensions
+	eCreateDedicatedIpPoolRequest                                                 smithy.SchemaExtensions
+	eCreateDedicatedIpPoolRequest_PoolName                                        smithy.SchemaExtensions
+	eCreateDedicatedIpPoolRequest_Tags                                            smithy.SchemaExtensions
+	eCreateDedicatedIpPoolResponse                                                smithy.SchemaExtensions
+	eCreateDeliverabilityTestReportRequest                                        smithy.SchemaExtensions
+	eCreateDeliverabilityTestReportRequest_ReportName                             smithy.SchemaExtensions
+	eCreateDeliverabilityTestReportRequest_FromEmailAddress                       smithy.SchemaExtensions
+	eCreateDeliverabilityTestReportRequest_Content                                smithy.SchemaExtensions
+	eCreateDeliverabilityTestReportRequest_Tags                                   smithy.SchemaExtensions
+	eCreateDeliverabilityTestReportResponse                                       smithy.SchemaExtensions
+	eCreateDeliverabilityTestReportResponse_ReportId                              smithy.SchemaExtensions
+	eCreateDeliverabilityTestReportResponse_DeliverabilityTestStatus              smithy.SchemaExtensions
+	eCreateEmailIdentityRequest                                                   smithy.SchemaExtensions
+	eCreateEmailIdentityRequest_EmailIdentity                                     smithy.SchemaExtensions
+	eCreateEmailIdentityRequest_Tags                                              smithy.SchemaExtensions
+	eCreateEmailIdentityResponse                                                  smithy.SchemaExtensions
+	eCreateEmailIdentityResponse_IdentityType                                     smithy.SchemaExtensions
+	eCreateEmailIdentityResponse_VerifiedForSendingStatus                         smithy.SchemaExtensions
+	eCreateEmailIdentityResponse_DkimAttributes                                   smithy.SchemaExtensions
+	eDeleteConfigurationSetEventDestinationRequest                                smithy.SchemaExtensions
+	eDeleteConfigurationSetEventDestinationRequest_ConfigurationSetName           smithy.SchemaExtensions
+	eDeleteConfigurationSetEventDestinationRequest_EventDestinationName           smithy.SchemaExtensions
+	eDeleteConfigurationSetEventDestinationResponse                               smithy.SchemaExtensions
+	eDeleteConfigurationSetRequest                                                smithy.SchemaExtensions
+	eDeleteConfigurationSetRequest_ConfigurationSetName                           smithy.SchemaExtensions
+	eDeleteConfigurationSetResponse                                               smithy.SchemaExtensions
+	eDeleteDedicatedIpPoolRequest                                                 smithy.SchemaExtensions
+	eDeleteDedicatedIpPoolRequest_PoolName                                        smithy.SchemaExtensions
+	eDeleteDedicatedIpPoolResponse                                                smithy.SchemaExtensions
+	eDeleteEmailIdentityRequest                                                   smithy.SchemaExtensions
+	eDeleteEmailIdentityRequest_EmailIdentity                                     smithy.SchemaExtensions
+	eDeleteEmailIdentityResponse                                                  smithy.SchemaExtensions
+	eGetAccountRequest                                                            smithy.SchemaExtensions
+	eGetAccountResponse                                                           smithy.SchemaExtensions
+	eGetAccountResponse_SendQuota                                                 smithy.SchemaExtensions
+	eGetAccountResponse_SendingEnabled                                            smithy.SchemaExtensions
+	eGetAccountResponse_DedicatedIpAutoWarmupEnabled                              smithy.SchemaExtensions
+	eGetAccountResponse_EnforcementStatus                                         smithy.SchemaExtensions
+	eGetAccountResponse_ProductionAccessEnabled                                   smithy.SchemaExtensions
+	eGetBlacklistReportsRequest                                                   smithy.SchemaExtensions
+	eGetBlacklistReportsRequest_BlacklistItemNames                                smithy.SchemaExtensions
+	eGetBlacklistReportsResponse                                                  smithy.SchemaExtensions
+	eGetBlacklistReportsResponse_BlacklistReport                                  smithy.SchemaExtensions
+	eGetConfigurationSetEventDestinationsRequest                                  smithy.SchemaExtensions
+	eGetConfigurationSetEventDestinationsRequest_ConfigurationSetName             smithy.SchemaExtensions
+	eGetConfigurationSetEventDestinationsResponse                                 smithy.SchemaExtensions
+	eGetConfigurationSetEventDestinationsResponse_EventDestinations               smithy.SchemaExtensions
+	eGetConfigurationSetRequest                                                   smithy.SchemaExtensions
+	eGetConfigurationSetRequest_ConfigurationSetName                              smithy.SchemaExtensions
+	eGetConfigurationSetResponse                                                  smithy.SchemaExtensions
+	eGetConfigurationSetResponse_ConfigurationSetName                             smithy.SchemaExtensions
+	eGetConfigurationSetResponse_TrackingOptions                                  smithy.SchemaExtensions
+	eGetConfigurationSetResponse_DeliveryOptions                                  smithy.SchemaExtensions
+	eGetConfigurationSetResponse_ReputationOptions                                smithy.SchemaExtensions
+	eGetConfigurationSetResponse_SendingOptions                                   smithy.SchemaExtensions
+	eGetConfigurationSetResponse_Tags                                             smithy.SchemaExtensions
+	eGetDedicatedIpRequest                                                        smithy.SchemaExtensions
+	eGetDedicatedIpRequest_Ip                                                     smithy.SchemaExtensions
+	eGetDedicatedIpResponse                                                       smithy.SchemaExtensions
+	eGetDedicatedIpResponse_DedicatedIp                                           smithy.SchemaExtensions
+	eGetDedicatedIpsRequest                                                       smithy.SchemaExtensions
+	eGetDedicatedIpsRequest_PoolName                                              smithy.SchemaExtensions
+	eGetDedicatedIpsRequest_NextToken                                             smithy.SchemaExtensions
+	eGetDedicatedIpsRequest_PageSize                                              smithy.SchemaExtensions
+	eGetDedicatedIpsResponse                                                      smithy.SchemaExtensions
+	eGetDedicatedIpsResponse_DedicatedIps                                         smithy.SchemaExtensions
+	eGetDedicatedIpsResponse_NextToken                                            smithy.SchemaExtensions
+	eGetDeliverabilityDashboardOptionsRequest                                     smithy.SchemaExtensions
+	eGetDeliverabilityDashboardOptionsResponse                                    smithy.SchemaExtensions
+	eGetDeliverabilityDashboardOptionsResponse_DashboardEnabled                   smithy.SchemaExtensions
+	eGetDeliverabilityDashboardOptionsResponse_SubscriptionExpiryDate             smithy.SchemaExtensions
+	eGetDeliverabilityDashboardOptionsResponse_AccountStatus                      smithy.SchemaExtensions
+	eGetDeliverabilityDashboardOptionsResponse_ActiveSubscribedDomains            smithy.SchemaExtensions
+	eGetDeliverabilityDashboardOptionsResponse_PendingExpirationSubscribedDomains smithy.SchemaExtensions
+	eGetDeliverabilityTestReportRequest                                           smithy.SchemaExtensions
+	eGetDeliverabilityTestReportRequest_ReportId                                  smithy.SchemaExtensions
+	eGetDeliverabilityTestReportResponse                                          smithy.SchemaExtensions
+	eGetDeliverabilityTestReportResponse_DeliverabilityTestReport                 smithy.SchemaExtensions
+	eGetDeliverabilityTestReportResponse_OverallPlacement                         smithy.SchemaExtensions
+	eGetDeliverabilityTestReportResponse_IspPlacements                            smithy.SchemaExtensions
+	eGetDeliverabilityTestReportResponse_Message                                  smithy.SchemaExtensions
+	eGetDeliverabilityTestReportResponse_Tags                                     smithy.SchemaExtensions
+	eGetDomainDeliverabilityCampaignRequest                                       smithy.SchemaExtensions
+	eGetDomainDeliverabilityCampaignRequest_CampaignId                            smithy.SchemaExtensions
+	eGetDomainDeliverabilityCampaignResponse                                      smithy.SchemaExtensions
+	eGetDomainDeliverabilityCampaignResponse_DomainDeliverabilityCampaign         smithy.SchemaExtensions
+	eGetDomainStatisticsReportRequest                                             smithy.SchemaExtensions
+	eGetDomainStatisticsReportRequest_Domain                                      smithy.SchemaExtensions
+	eGetDomainStatisticsReportRequest_StartDate                                   smithy.SchemaExtensions
+	eGetDomainStatisticsReportRequest_EndDate                                     smithy.SchemaExtensions
+	eGetDomainStatisticsReportResponse                                            smithy.SchemaExtensions
+	eGetDomainStatisticsReportResponse_OverallVolume                              smithy.SchemaExtensions
+	eGetDomainStatisticsReportResponse_DailyVolumes                               smithy.SchemaExtensions
+	eGetEmailIdentityRequest                                                      smithy.SchemaExtensions
+	eGetEmailIdentityRequest_EmailIdentity                                        smithy.SchemaExtensions
+	eGetEmailIdentityResponse                                                     smithy.SchemaExtensions
+	eGetEmailIdentityResponse_IdentityType                                        smithy.SchemaExtensions
+	eGetEmailIdentityResponse_FeedbackForwardingStatus                            smithy.SchemaExtensions
+	eGetEmailIdentityResponse_VerifiedForSendingStatus                            smithy.SchemaExtensions
+	eGetEmailIdentityResponse_DkimAttributes                                      smithy.SchemaExtensions
+	eGetEmailIdentityResponse_MailFromAttributes                                  smithy.SchemaExtensions
+	eGetEmailIdentityResponse_Tags                                                smithy.SchemaExtensions
+	eListConfigurationSetsRequest                                                 smithy.SchemaExtensions
+	eListConfigurationSetsRequest_NextToken                                       smithy.SchemaExtensions
+	eListConfigurationSetsRequest_PageSize                                        smithy.SchemaExtensions
+	eListConfigurationSetsResponse                                                smithy.SchemaExtensions
+	eListConfigurationSetsResponse_ConfigurationSets                              smithy.SchemaExtensions
+	eListConfigurationSetsResponse_NextToken                                      smithy.SchemaExtensions
+	eListDedicatedIpPoolsRequest                                                  smithy.SchemaExtensions
+	eListDedicatedIpPoolsRequest_NextToken                                        smithy.SchemaExtensions
+	eListDedicatedIpPoolsRequest_PageSize                                         smithy.SchemaExtensions
+	eListDedicatedIpPoolsResponse                                                 smithy.SchemaExtensions
+	eListDedicatedIpPoolsResponse_DedicatedIpPools                                smithy.SchemaExtensions
+	eListDedicatedIpPoolsResponse_NextToken                                       smithy.SchemaExtensions
+	eListDeliverabilityTestReportsRequest                                         smithy.SchemaExtensions
+	eListDeliverabilityTestReportsRequest_NextToken                               smithy.SchemaExtensions
+	eListDeliverabilityTestReportsRequest_PageSize                                smithy.SchemaExtensions
+	eListDeliverabilityTestReportsResponse                                        smithy.SchemaExtensions
+	eListDeliverabilityTestReportsResponse_DeliverabilityTestReports              smithy.SchemaExtensions
+	eListDeliverabilityTestReportsResponse_NextToken                              smithy.SchemaExtensions
+	eListDomainDeliverabilityCampaignsRequest                                     smithy.SchemaExtensions
+	eListDomainDeliverabilityCampaignsRequest_StartDate                           smithy.SchemaExtensions
+	eListDomainDeliverabilityCampaignsRequest_EndDate                             smithy.SchemaExtensions
+	eListDomainDeliverabilityCampaignsRequest_SubscribedDomain                    smithy.SchemaExtensions
+	eListDomainDeliverabilityCampaignsRequest_NextToken                           smithy.SchemaExtensions
+	eListDomainDeliverabilityCampaignsRequest_PageSize                            smithy.SchemaExtensions
+	eListDomainDeliverabilityCampaignsResponse                                    smithy.SchemaExtensions
+	eListDomainDeliverabilityCampaignsResponse_DomainDeliverabilityCampaigns      smithy.SchemaExtensions
+	eListDomainDeliverabilityCampaignsResponse_NextToken                          smithy.SchemaExtensions
+	eListEmailIdentitiesRequest                                                   smithy.SchemaExtensions
+	eListEmailIdentitiesRequest_NextToken                                         smithy.SchemaExtensions
+	eListEmailIdentitiesRequest_PageSize                                          smithy.SchemaExtensions
+	eListEmailIdentitiesResponse                                                  smithy.SchemaExtensions
+	eListEmailIdentitiesResponse_EmailIdentities                                  smithy.SchemaExtensions
+	eListEmailIdentitiesResponse_NextToken                                        smithy.SchemaExtensions
+	eListTagsForResourceRequest                                                   smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn                                       smithy.SchemaExtensions
+	eListTagsForResourceResponse                                                  smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                                             smithy.SchemaExtensions
+	ePutAccountDedicatedIpWarmupAttributesRequest                                 smithy.SchemaExtensions
+	ePutAccountDedicatedIpWarmupAttributesRequest_AutoWarmupEnabled               smithy.SchemaExtensions
+	ePutAccountDedicatedIpWarmupAttributesResponse                                smithy.SchemaExtensions
+	ePutAccountSendingAttributesRequest                                           smithy.SchemaExtensions
+	ePutAccountSendingAttributesRequest_SendingEnabled                            smithy.SchemaExtensions
+	ePutAccountSendingAttributesResponse                                          smithy.SchemaExtensions
+	ePutConfigurationSetDeliveryOptionsRequest                                    smithy.SchemaExtensions
+	ePutConfigurationSetDeliveryOptionsRequest_ConfigurationSetName               smithy.SchemaExtensions
+	ePutConfigurationSetDeliveryOptionsRequest_TlsPolicy                          smithy.SchemaExtensions
+	ePutConfigurationSetDeliveryOptionsRequest_SendingPoolName                    smithy.SchemaExtensions
+	ePutConfigurationSetDeliveryOptionsResponse                                   smithy.SchemaExtensions
+	ePutConfigurationSetReputationOptionsRequest                                  smithy.SchemaExtensions
+	ePutConfigurationSetReputationOptionsRequest_ConfigurationSetName             smithy.SchemaExtensions
+	ePutConfigurationSetReputationOptionsRequest_ReputationMetricsEnabled         smithy.SchemaExtensions
+	ePutConfigurationSetReputationOptionsResponse                                 smithy.SchemaExtensions
+	ePutConfigurationSetSendingOptionsRequest                                     smithy.SchemaExtensions
+	ePutConfigurationSetSendingOptionsRequest_ConfigurationSetName                smithy.SchemaExtensions
+	ePutConfigurationSetSendingOptionsRequest_SendingEnabled                      smithy.SchemaExtensions
+	ePutConfigurationSetSendingOptionsResponse                                    smithy.SchemaExtensions
+	ePutConfigurationSetTrackingOptionsRequest                                    smithy.SchemaExtensions
+	ePutConfigurationSetTrackingOptionsRequest_ConfigurationSetName               smithy.SchemaExtensions
+	ePutConfigurationSetTrackingOptionsRequest_CustomRedirectDomain               smithy.SchemaExtensions
+	ePutConfigurationSetTrackingOptionsResponse                                   smithy.SchemaExtensions
+	ePutDedicatedIpInPoolRequest                                                  smithy.SchemaExtensions
+	ePutDedicatedIpInPoolRequest_Ip                                               smithy.SchemaExtensions
+	ePutDedicatedIpInPoolRequest_DestinationPoolName                              smithy.SchemaExtensions
+	ePutDedicatedIpInPoolResponse                                                 smithy.SchemaExtensions
+	ePutDedicatedIpWarmupAttributesRequest                                        smithy.SchemaExtensions
+	ePutDedicatedIpWarmupAttributesRequest_Ip                                     smithy.SchemaExtensions
+	ePutDedicatedIpWarmupAttributesRequest_WarmupPercentage                       smithy.SchemaExtensions
+	ePutDedicatedIpWarmupAttributesResponse                                       smithy.SchemaExtensions
+	ePutDeliverabilityDashboardOptionRequest                                      smithy.SchemaExtensions
+	ePutDeliverabilityDashboardOptionRequest_DashboardEnabled                     smithy.SchemaExtensions
+	ePutDeliverabilityDashboardOptionRequest_SubscribedDomains                    smithy.SchemaExtensions
+	ePutDeliverabilityDashboardOptionResponse                                     smithy.SchemaExtensions
+	ePutEmailIdentityDkimAttributesRequest                                        smithy.SchemaExtensions
+	ePutEmailIdentityDkimAttributesRequest_EmailIdentity                          smithy.SchemaExtensions
+	ePutEmailIdentityDkimAttributesRequest_SigningEnabled                         smithy.SchemaExtensions
+	ePutEmailIdentityDkimAttributesResponse                                       smithy.SchemaExtensions
+	ePutEmailIdentityFeedbackAttributesRequest                                    smithy.SchemaExtensions
+	ePutEmailIdentityFeedbackAttributesRequest_EmailIdentity                      smithy.SchemaExtensions
+	ePutEmailIdentityFeedbackAttributesRequest_EmailForwardingEnabled             smithy.SchemaExtensions
+	ePutEmailIdentityFeedbackAttributesResponse                                   smithy.SchemaExtensions
+	ePutEmailIdentityMailFromAttributesRequest                                    smithy.SchemaExtensions
+	ePutEmailIdentityMailFromAttributesRequest_EmailIdentity                      smithy.SchemaExtensions
+	ePutEmailIdentityMailFromAttributesRequest_MailFromDomain                     smithy.SchemaExtensions
+	ePutEmailIdentityMailFromAttributesRequest_BehaviorOnMxFailure                smithy.SchemaExtensions
+	ePutEmailIdentityMailFromAttributesResponse                                   smithy.SchemaExtensions
+	eSendEmailRequest                                                             smithy.SchemaExtensions
+	eSendEmailRequest_FromEmailAddress                                            smithy.SchemaExtensions
+	eSendEmailRequest_Destination                                                 smithy.SchemaExtensions
+	eSendEmailRequest_ReplyToAddresses                                            smithy.SchemaExtensions
+	eSendEmailRequest_FeedbackForwardingEmailAddress                              smithy.SchemaExtensions
+	eSendEmailRequest_Content                                                     smithy.SchemaExtensions
+	eSendEmailRequest_EmailTags                                                   smithy.SchemaExtensions
+	eSendEmailRequest_ConfigurationSetName                                        smithy.SchemaExtensions
+	eSendEmailResponse                                                            smithy.SchemaExtensions
+	eSendEmailResponse_MessageId                                                  smithy.SchemaExtensions
+	eTagResourceRequest                                                           smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                                               smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                                      smithy.SchemaExtensions
+	eTagResourceResponse                                                          smithy.SchemaExtensions
+	eUntagResourceRequest                                                         smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                                             smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                                 smithy.SchemaExtensions
+	eUntagResourceResponse                                                        smithy.SchemaExtensions
+	eUpdateConfigurationSetEventDestinationRequest                                smithy.SchemaExtensions
+	eUpdateConfigurationSetEventDestinationRequest_ConfigurationSetName           smithy.SchemaExtensions
+	eUpdateConfigurationSetEventDestinationRequest_EventDestinationName           smithy.SchemaExtensions
+	eUpdateConfigurationSetEventDestinationRequest_EventDestination               smithy.SchemaExtensions
+	eUpdateConfigurationSetEventDestinationResponse                               smithy.SchemaExtensions
+)
 
 var (
 	iCreateConfigurationSet                         = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "CreateConfigurationSet"}
@@ -555,583 +1130,583 @@ var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResou
 var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
 var mUpdateConfigurationSetEventDestinationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConfigurationSetEventDestinationRequest_ConfigurationSetName, &sUpdateConfigurationSetEventDestinationRequest_EventDestinationName, &sUpdateConfigurationSetEventDestinationRequest_EventDestination}}
 
-var sCreateConfigurationSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationSet, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCreateConfigurationSetEventDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationSetEventDestination, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sCreateDedicatedIpPool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDedicatedIpPool, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sCreateDeliverabilityTestReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDeliverabilityTestReport, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sCreateEmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEmailIdentity, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sDeleteConfigurationSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationSet, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sDeleteConfigurationSetEventDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationSetEventDestination, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sDeleteDedicatedIpPool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDedicatedIpPool, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sDeleteEmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEmailIdentity, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sGetAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccount, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sGetBlacklistReports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBlacklistReports, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sGetConfigurationSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationSet, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sGetConfigurationSetEventDestinations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationSetEventDestinations, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sGetDedicatedIp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDedicatedIp, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sGetDedicatedIps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDedicatedIps, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sGetDeliverabilityDashboardOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeliverabilityDashboardOptions, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sGetDeliverabilityTestReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeliverabilityTestReport, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sGetDomainDeliverabilityCampaign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainDeliverabilityCampaign, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sGetDomainStatisticsReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainStatisticsReport, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sGetEmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEmailIdentity, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var sListConfigurationSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationSets, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &ext[20]})
-var sListDedicatedIpPools = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDedicatedIpPools, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &ext[21]})
-var sListDeliverabilityTestReports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeliverabilityTestReports, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &ext[22]})
-var sListDomainDeliverabilityCampaigns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainDeliverabilityCampaigns, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &ext[23]})
-var sListEmailIdentities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEmailIdentities, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &ext[24]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &ext[25]})
-var sPutAccountDedicatedIpWarmupAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccountDedicatedIpWarmupAttributes, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &ext[26]})
-var sPutAccountSendingAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccountSendingAttributes, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &ext[27]})
-var sPutConfigurationSetDeliveryOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetDeliveryOptions, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &ext[28]})
-var sPutConfigurationSetReputationOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetReputationOptions, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &ext[29]})
-var sPutConfigurationSetSendingOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetSendingOptions, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &ext[30]})
-var sPutConfigurationSetTrackingOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetTrackingOptions, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &ext[31]})
-var sPutDedicatedIpInPool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDedicatedIpInPool, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &ext[32]})
-var sPutDedicatedIpWarmupAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDedicatedIpWarmupAttributes, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &ext[33]})
-var sPutDeliverabilityDashboardOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDeliverabilityDashboardOption, Traits: &t34, Type: smithy.ShapeTypeOperation, Ext: &ext[34]})
-var sPutEmailIdentityDkimAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityDkimAttributes, Traits: &t35, Type: smithy.ShapeTypeOperation, Ext: &ext[35]})
-var sPutEmailIdentityFeedbackAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityFeedbackAttributes, Traits: &t36, Type: smithy.ShapeTypeOperation, Ext: &ext[36]})
-var sPutEmailIdentityMailFromAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityMailFromAttributes, Traits: &t37, Type: smithy.ShapeTypeOperation, Ext: &ext[37]})
-var sSendEmail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendEmail, Traits: &t38, Type: smithy.ShapeTypeOperation, Ext: &ext[38]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t39, Type: smithy.ShapeTypeOperation, Ext: &ext[39]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t40, Type: smithy.ShapeTypeOperation, Ext: &ext[40]})
-var sUpdateConfigurationSetEventDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfigurationSetEventDestination, Traits: &t41, Type: smithy.ShapeTypeOperation, Ext: &ext[41]})
-var s_AmazonPinpointEmailService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonPinpointEmailService, Type: smithy.ShapeTypeService, Ext: &ext[42]})
-var sAccountSuspendedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountSuspendedException, Members: &mAccountSuspendedException, Traits: &t42, Type: smithy.ShapeTypeStructure, Ext: &ext[43]})
-var sAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlreadyExistsException, Members: &mAlreadyExistsException, Traits: &t42, Type: smithy.ShapeTypeStructure, Ext: &ext[45]})
-var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[47]})
-var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t42, Type: smithy.ShapeTypeStructure, Ext: &ext[48]})
-var sBehaviorOnMxFailure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBehaviorOnMxFailure, Members: &mBehaviorOnMxFailure, Type: smithy.ShapeTypeEnum, Ext: &ext[50]})
-var s_BlacklistEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlacklistEntries, Members: &m_BlacklistEntries, Type: smithy.ShapeTypeList, Ext: &ext[53]})
-var sBlacklistEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlacklistEntry, Members: &mBlacklistEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[55]})
-var s_BlacklistingDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlacklistingDescription, Type: smithy.ShapeTypeString, Ext: &ext[59]})
-var s_BlacklistItemName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlacklistItemName, Type: smithy.ShapeTypeString, Ext: &ext[60]})
-var s_BlacklistItemNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlacklistItemNames, Members: &m_BlacklistItemNames, Type: smithy.ShapeTypeList, Ext: &ext[61]})
-var s_BlacklistReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlacklistReport, Members: &m_BlacklistReport, Type: smithy.ShapeTypeMap, Ext: &ext[63]})
-var sBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBody, Members: &mBody, Type: smithy.ShapeTypeStructure, Ext: &ext[66]})
-var s_CampaignId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CampaignId, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var s_Charset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Charset, Type: smithy.ShapeTypeString, Ext: &ext[70]})
-var sCloudWatchDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudWatchDestination, Members: &mCloudWatchDestination, Type: smithy.ShapeTypeStructure, Ext: &ext[71]})
-var sCloudWatchDimensionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudWatchDimensionConfiguration, Members: &mCloudWatchDimensionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[73]})
-var s_CloudWatchDimensionConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudWatchDimensionConfigurations, Members: &m_CloudWatchDimensionConfigurations, Type: smithy.ShapeTypeList, Ext: &ext[77]})
-var sConcurrentModificationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentModificationException, Members: &mConcurrentModificationException, Traits: &t43, Type: smithy.ShapeTypeStructure, Ext: &ext[79]})
-var s_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationSetName, Type: smithy.ShapeTypeString, Ext: &ext[81]})
-var s_ConfigurationSetNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationSetNameList, Members: &m_ConfigurationSetNameList, Type: smithy.ShapeTypeList, Ext: &ext[82]})
-var sContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContent, Members: &mContent, Type: smithy.ShapeTypeStructure, Ext: &ext[84]})
-var s_CustomRedirectDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomRedirectDomain, Type: smithy.ShapeTypeString, Ext: &ext[87]})
-var sDailyVolume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDailyVolume, Members: &mDailyVolume, Type: smithy.ShapeTypeStructure, Ext: &ext[88]})
-var s_DailyVolumes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DailyVolumes, Members: &m_DailyVolumes, Type: smithy.ShapeTypeList, Ext: &ext[92]})
-var sDedicatedIp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDedicatedIp, Members: &mDedicatedIp, Type: smithy.ShapeTypeStructure, Ext: &ext[94]})
-var s_DedicatedIpList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DedicatedIpList, Members: &m_DedicatedIpList, Type: smithy.ShapeTypeList, Ext: &ext[99]})
-var s_DefaultDimensionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DefaultDimensionValue, Type: smithy.ShapeTypeString, Ext: &ext[101]})
-var sDeliverabilityDashboardAccountStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliverabilityDashboardAccountStatus, Members: &mDeliverabilityDashboardAccountStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[102]})
-var sDeliverabilityTestReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliverabilityTestReport, Members: &mDeliverabilityTestReport, Type: smithy.ShapeTypeStructure, Ext: &ext[106]})
-var s_DeliverabilityTestReports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeliverabilityTestReports, Members: &m_DeliverabilityTestReports, Type: smithy.ShapeTypeList, Ext: &ext[113]})
-var sDeliverabilityTestStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliverabilityTestStatus, Members: &mDeliverabilityTestStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[115]})
-var s_DeliverabilityTestSubject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeliverabilityTestSubject, Type: smithy.ShapeTypeString, Ext: &ext[118]})
-var sDeliveryOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliveryOptions, Members: &mDeliveryOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[119]})
-var sDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeStructure, Ext: &ext[122]})
-var s_DimensionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionName, Type: smithy.ShapeTypeString, Ext: &ext[126]})
-var sDimensionValueSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimensionValueSource, Members: &mDimensionValueSource, Type: smithy.ShapeTypeEnum, Ext: &ext[127]})
-var sDkimAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDkimAttributes, Members: &mDkimAttributes, Type: smithy.ShapeTypeStructure, Ext: &ext[131]})
-var sDkimStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDkimStatus, Members: &mDkimStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[135]})
-var s_DnsToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DnsToken, Type: smithy.ShapeTypeString, Ext: &ext[141]})
-var s_DnsTokenList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DnsTokenList, Members: &m_DnsTokenList, Type: smithy.ShapeTypeList, Ext: &ext[142]})
-var s_Domain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Domain, Type: smithy.ShapeTypeString, Ext: &ext[144]})
-var sDomainDeliverabilityCampaign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainDeliverabilityCampaign, Members: &mDomainDeliverabilityCampaign, Type: smithy.ShapeTypeStructure, Ext: &ext[145]})
-var s_DomainDeliverabilityCampaignList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainDeliverabilityCampaignList, Members: &m_DomainDeliverabilityCampaignList, Type: smithy.ShapeTypeList, Ext: &ext[160]})
-var sDomainDeliverabilityTrackingOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainDeliverabilityTrackingOption, Members: &mDomainDeliverabilityTrackingOption, Type: smithy.ShapeTypeStructure, Ext: &ext[162]})
-var s_DomainDeliverabilityTrackingOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainDeliverabilityTrackingOptions, Members: &m_DomainDeliverabilityTrackingOptions, Type: smithy.ShapeTypeList, Ext: &ext[166]})
-var sDomainIspPlacement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainIspPlacement, Members: &mDomainIspPlacement, Type: smithy.ShapeTypeStructure, Ext: &ext[168]})
-var s_DomainIspPlacements = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainIspPlacements, Members: &m_DomainIspPlacements, Type: smithy.ShapeTypeList, Ext: &ext[174]})
-var s_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailAddress, Type: smithy.ShapeTypeString, Ext: &ext[176]})
-var s_EmailAddressList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailAddressList, Members: &m_EmailAddressList, Type: smithy.ShapeTypeList, Ext: &ext[177]})
-var sEmailContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmailContent, Members: &mEmailContent, Type: smithy.ShapeTypeStructure, Ext: &ext[179]})
-var s_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[183]})
-var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[184]})
-var s_Esp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Esp, Type: smithy.ShapeTypeString, Ext: &ext[185]})
-var s_Esps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Esps, Members: &m_Esps, Type: smithy.ShapeTypeList, Ext: &ext[186]})
-var sEventDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventDestination, Members: &mEventDestination, Type: smithy.ShapeTypeStructure, Ext: &ext[188]})
-var sEventDestinationDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventDestinationDefinition, Members: &mEventDestinationDefinition, Type: smithy.ShapeTypeStructure, Ext: &ext[196]})
-var s_EventDestinationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventDestinationName, Type: smithy.ShapeTypeString, Ext: &ext[203]})
-var s_EventDestinations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventDestinations, Members: &m_EventDestinations, Type: smithy.ShapeTypeList, Ext: &ext[204]})
-var sEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeEnum, Ext: &ext[206]})
-var s_EventTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTypes, Members: &m_EventTypes, Type: smithy.ShapeTypeList, Ext: &ext[215]})
-var s_GeneralEnforcementStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GeneralEnforcementStatus, Type: smithy.ShapeTypeString, Ext: &ext[217]})
-var s_Identity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Identity, Type: smithy.ShapeTypeString, Ext: &ext[218]})
-var sIdentityInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentityInfo, Members: &mIdentityInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[219]})
-var s_IdentityInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityInfoList, Members: &m_IdentityInfoList, Type: smithy.ShapeTypeList, Ext: &ext[223]})
-var sIdentityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentityType, Members: &mIdentityType, Type: smithy.ShapeTypeEnum, Ext: &ext[225]})
-var s_ImageUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImageUrl, Type: smithy.ShapeTypeString, Ext: &ext[229]})
-var sInboxPlacementTrackingOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInboxPlacementTrackingOption, Members: &mInboxPlacementTrackingOption, Type: smithy.ShapeTypeStructure, Ext: &ext[230]})
-var s_Ip = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ip, Type: smithy.ShapeTypeString, Ext: &ext[233]})
-var s_IpList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpList, Members: &m_IpList, Type: smithy.ShapeTypeList, Ext: &ext[234]})
-var s_IspName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IspName, Type: smithy.ShapeTypeString, Ext: &ext[236]})
-var s_IspNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IspNameList, Members: &m_IspNameList, Type: smithy.ShapeTypeList, Ext: &ext[237]})
-var sIspPlacement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIspPlacement, Members: &mIspPlacement, Type: smithy.ShapeTypeStructure, Ext: &ext[239]})
-var s_IspPlacements = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IspPlacements, Members: &m_IspPlacements, Type: smithy.ShapeTypeList, Ext: &ext[242]})
-var sKinesisFirehoseDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKinesisFirehoseDestination, Members: &mKinesisFirehoseDestination, Type: smithy.ShapeTypeStructure, Ext: &ext[244]})
-var s_LastFreshStart = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastFreshStart, Type: smithy.ShapeTypeTimestamp, Ext: &ext[247]})
-var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t42, Type: smithy.ShapeTypeStructure, Ext: &ext[248]})
-var s_ListOfDedicatedIpPools = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfDedicatedIpPools, Members: &m_ListOfDedicatedIpPools, Type: smithy.ShapeTypeList, Ext: &ext[250]})
-var sMailFromAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMailFromAttributes, Members: &mMailFromAttributes, Type: smithy.ShapeTypeStructure, Ext: &ext[252]})
-var s_MailFromDomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MailFromDomainName, Type: smithy.ShapeTypeString, Ext: &ext[256]})
-var sMailFromDomainNotVerifiedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMailFromDomainNotVerifiedException, Members: &mMailFromDomainNotVerifiedException, Traits: &t42, Type: smithy.ShapeTypeStructure, Ext: &ext[257]})
-var sMailFromDomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMailFromDomainStatus, Members: &mMailFromDomainStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[259]})
-var s_Max24HourSend = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Max24HourSend, Type: smithy.ShapeTypeDouble, Ext: &ext[264]})
-var s_MaxItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxItems, Type: smithy.ShapeTypeInteger, Ext: &ext[265]})
-var s_MaxSendRate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxSendRate, Type: smithy.ShapeTypeDouble, Ext: &ext[266]})
-var sMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessage, Members: &mMessage, Type: smithy.ShapeTypeStructure, Ext: &ext[267]})
-var s_MessageContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageContent, Type: smithy.ShapeTypeString, Ext: &ext[270]})
-var s_MessageData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageData, Type: smithy.ShapeTypeString, Ext: &ext[271]})
-var sMessageRejected = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageRejected, Members: &mMessageRejected, Traits: &t42, Type: smithy.ShapeTypeStructure, Ext: &ext[272]})
-var sMessageTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageTag, Members: &mMessageTag, Type: smithy.ShapeTypeStructure, Ext: &ext[274]})
-var s_MessageTagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageTagList, Members: &m_MessageTagList, Type: smithy.ShapeTypeList, Ext: &ext[277]})
-var s_MessageTagName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageTagName, Type: smithy.ShapeTypeString, Ext: &ext[279]})
-var s_MessageTagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageTagValue, Type: smithy.ShapeTypeString, Ext: &ext[280]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[281]})
-var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t44, Type: smithy.ShapeTypeStructure, Ext: &ext[282]})
-var s_OutboundMessageId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutboundMessageId, Type: smithy.ShapeTypeString, Ext: &ext[284]})
-var sOverallVolume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOverallVolume, Members: &mOverallVolume, Type: smithy.ShapeTypeStructure, Ext: &ext[285]})
-var s_Percentage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &ext[289]})
-var s_Percentage100Wrapper = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Percentage100Wrapper, Type: smithy.ShapeTypeInteger, Ext: &ext[290]})
-var sPinpointDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPinpointDestination, Members: &mPinpointDestination, Type: smithy.ShapeTypeStructure, Ext: &ext[291]})
-var sPlacementStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlacementStatistics, Members: &mPlacementStatistics, Type: smithy.ShapeTypeStructure, Ext: &ext[293]})
-var s_PoolName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PoolName, Type: smithy.ShapeTypeString, Ext: &ext[299]})
-var sRawMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRawMessage, Members: &mRawMessage, Type: smithy.ShapeTypeStructure, Ext: &ext[300]})
-var s_RawMessageData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RawMessageData, Type: smithy.ShapeTypeBlob, Ext: &ext[302]})
-var s_RblName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RblName, Type: smithy.ShapeTypeString, Ext: &ext[303]})
-var s_ReportId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportId, Type: smithy.ShapeTypeString, Ext: &ext[304]})
-var s_ReportName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportName, Type: smithy.ShapeTypeString, Ext: &ext[305]})
-var sReputationOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReputationOptions, Members: &mReputationOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[306]})
-var sSendingOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendingOptions, Members: &mSendingOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[309]})
-var sSendingPausedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendingPausedException, Members: &mSendingPausedException, Traits: &t42, Type: smithy.ShapeTypeStructure, Ext: &ext[311]})
-var s_SendingPoolName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SendingPoolName, Type: smithy.ShapeTypeString, Ext: &ext[313]})
-var sSendQuota = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendQuota, Members: &mSendQuota, Type: smithy.ShapeTypeStructure, Ext: &ext[314]})
-var s_SentLast24Hours = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SentLast24Hours, Type: smithy.ShapeTypeDouble, Ext: &ext[318]})
-var sSnsDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnsDestination, Members: &mSnsDestination, Type: smithy.ShapeTypeStructure, Ext: &ext[319]})
-var s_Subject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Subject, Type: smithy.ShapeTypeString, Ext: &ext[321]})
-var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[322]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[325]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[326]})
-var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[328]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[330]})
-var sTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplate, Members: &mTemplate, Type: smithy.ShapeTypeStructure, Ext: &ext[331]})
-var s_TemplateArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateArn, Type: smithy.ShapeTypeString, Ext: &ext[334]})
-var s_TemplateData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateData, Type: smithy.ShapeTypeString, Ext: &ext[335]})
-var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[336]})
-var sTlsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTlsPolicy, Members: &mTlsPolicy, Type: smithy.ShapeTypeEnum, Ext: &ext[337]})
-var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t45, Type: smithy.ShapeTypeStructure, Ext: &ext[340]})
-var sTrackingOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrackingOptions, Members: &mTrackingOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[342]})
-var s_Volume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Volume, Type: smithy.ShapeTypeLong, Ext: &ext[344]})
-var sVolumeStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVolumeStatistics, Members: &mVolumeStatistics, Type: smithy.ShapeTypeStructure, Ext: &ext[345]})
-var sWarmupStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWarmupStatus, Members: &mWarmupStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[350]})
-var sCreateConfigurationSetEventDestinationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationSetEventDestinationRequest, Members: &mCreateConfigurationSetEventDestinationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[353]})
-var sCreateConfigurationSetEventDestinationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationSetEventDestinationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[357]})
-var sCreateConfigurationSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationSetRequest, Members: &mCreateConfigurationSetRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[358]})
-var sCreateConfigurationSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationSetResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[365]})
-var sCreateDedicatedIpPoolRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDedicatedIpPoolRequest, Members: &mCreateDedicatedIpPoolRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[366]})
-var sCreateDedicatedIpPoolResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDedicatedIpPoolResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[369]})
-var sCreateDeliverabilityTestReportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDeliverabilityTestReportRequest, Members: &mCreateDeliverabilityTestReportRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[370]})
-var sCreateDeliverabilityTestReportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDeliverabilityTestReportResponse, Members: &mCreateDeliverabilityTestReportResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[375]})
-var sCreateEmailIdentityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEmailIdentityRequest, Members: &mCreateEmailIdentityRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[378]})
-var sCreateEmailIdentityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEmailIdentityResponse, Members: &mCreateEmailIdentityResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[381]})
-var sDeleteConfigurationSetEventDestinationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationSetEventDestinationRequest, Members: &mDeleteConfigurationSetEventDestinationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[385]})
-var sDeleteConfigurationSetEventDestinationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationSetEventDestinationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[388]})
-var sDeleteConfigurationSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationSetRequest, Members: &mDeleteConfigurationSetRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[389]})
-var sDeleteConfigurationSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationSetResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[391]})
-var sDeleteDedicatedIpPoolRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDedicatedIpPoolRequest, Members: &mDeleteDedicatedIpPoolRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[392]})
-var sDeleteDedicatedIpPoolResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDedicatedIpPoolResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[394]})
-var sDeleteEmailIdentityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEmailIdentityRequest, Members: &mDeleteEmailIdentityRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[395]})
-var sDeleteEmailIdentityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEmailIdentityResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[397]})
-var sGetAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[398]})
-var sGetAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountResponse, Members: &mGetAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[399]})
-var sGetBlacklistReportsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBlacklistReportsRequest, Members: &mGetBlacklistReportsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[405]})
-var sGetBlacklistReportsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBlacklistReportsResponse, Members: &mGetBlacklistReportsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[407]})
-var sGetConfigurationSetEventDestinationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationSetEventDestinationsRequest, Members: &mGetConfigurationSetEventDestinationsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[409]})
-var sGetConfigurationSetEventDestinationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationSetEventDestinationsResponse, Members: &mGetConfigurationSetEventDestinationsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[411]})
-var sGetConfigurationSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationSetRequest, Members: &mGetConfigurationSetRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[413]})
-var sGetConfigurationSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationSetResponse, Members: &mGetConfigurationSetResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[415]})
-var sGetDedicatedIpRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDedicatedIpRequest, Members: &mGetDedicatedIpRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[422]})
-var sGetDedicatedIpResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDedicatedIpResponse, Members: &mGetDedicatedIpResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[424]})
-var sGetDedicatedIpsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDedicatedIpsRequest, Members: &mGetDedicatedIpsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[426]})
-var sGetDedicatedIpsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDedicatedIpsResponse, Members: &mGetDedicatedIpsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[430]})
-var sGetDeliverabilityDashboardOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeliverabilityDashboardOptionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[433]})
-var sGetDeliverabilityDashboardOptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeliverabilityDashboardOptionsResponse, Members: &mGetDeliverabilityDashboardOptionsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[434]})
-var sGetDeliverabilityTestReportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeliverabilityTestReportRequest, Members: &mGetDeliverabilityTestReportRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[440]})
-var sGetDeliverabilityTestReportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeliverabilityTestReportResponse, Members: &mGetDeliverabilityTestReportResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[442]})
-var sGetDomainDeliverabilityCampaignRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainDeliverabilityCampaignRequest, Members: &mGetDomainDeliverabilityCampaignRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[448]})
-var sGetDomainDeliverabilityCampaignResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainDeliverabilityCampaignResponse, Members: &mGetDomainDeliverabilityCampaignResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[450]})
-var sGetDomainStatisticsReportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainStatisticsReportRequest, Members: &mGetDomainStatisticsReportRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[452]})
-var sGetDomainStatisticsReportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainStatisticsReportResponse, Members: &mGetDomainStatisticsReportResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[456]})
-var sGetEmailIdentityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEmailIdentityRequest, Members: &mGetEmailIdentityRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[459]})
-var sGetEmailIdentityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEmailIdentityResponse, Members: &mGetEmailIdentityResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[461]})
-var sListConfigurationSetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationSetsRequest, Members: &mListConfigurationSetsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[468]})
-var sListConfigurationSetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationSetsResponse, Members: &mListConfigurationSetsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[471]})
-var sListDedicatedIpPoolsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDedicatedIpPoolsRequest, Members: &mListDedicatedIpPoolsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[474]})
-var sListDedicatedIpPoolsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDedicatedIpPoolsResponse, Members: &mListDedicatedIpPoolsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[477]})
-var sListDeliverabilityTestReportsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeliverabilityTestReportsRequest, Members: &mListDeliverabilityTestReportsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[480]})
-var sListDeliverabilityTestReportsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeliverabilityTestReportsResponse, Members: &mListDeliverabilityTestReportsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[483]})
-var sListDomainDeliverabilityCampaignsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainDeliverabilityCampaignsRequest, Members: &mListDomainDeliverabilityCampaignsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[486]})
-var sListDomainDeliverabilityCampaignsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainDeliverabilityCampaignsResponse, Members: &mListDomainDeliverabilityCampaignsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[492]})
-var sListEmailIdentitiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEmailIdentitiesRequest, Members: &mListEmailIdentitiesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[495]})
-var sListEmailIdentitiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEmailIdentitiesResponse, Members: &mListEmailIdentitiesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[498]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[501]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[503]})
-var sPutAccountDedicatedIpWarmupAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccountDedicatedIpWarmupAttributesRequest, Members: &mPutAccountDedicatedIpWarmupAttributesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[505]})
-var sPutAccountDedicatedIpWarmupAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccountDedicatedIpWarmupAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[507]})
-var sPutAccountSendingAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccountSendingAttributesRequest, Members: &mPutAccountSendingAttributesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[508]})
-var sPutAccountSendingAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccountSendingAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[510]})
-var sPutConfigurationSetDeliveryOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetDeliveryOptionsRequest, Members: &mPutConfigurationSetDeliveryOptionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[511]})
-var sPutConfigurationSetDeliveryOptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetDeliveryOptionsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[515]})
-var sPutConfigurationSetReputationOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetReputationOptionsRequest, Members: &mPutConfigurationSetReputationOptionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[516]})
-var sPutConfigurationSetReputationOptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetReputationOptionsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[519]})
-var sPutConfigurationSetSendingOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetSendingOptionsRequest, Members: &mPutConfigurationSetSendingOptionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[520]})
-var sPutConfigurationSetSendingOptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetSendingOptionsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[523]})
-var sPutConfigurationSetTrackingOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetTrackingOptionsRequest, Members: &mPutConfigurationSetTrackingOptionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[524]})
-var sPutConfigurationSetTrackingOptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetTrackingOptionsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[527]})
-var sPutDedicatedIpInPoolRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDedicatedIpInPoolRequest, Members: &mPutDedicatedIpInPoolRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[528]})
-var sPutDedicatedIpInPoolResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDedicatedIpInPoolResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[531]})
-var sPutDedicatedIpWarmupAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDedicatedIpWarmupAttributesRequest, Members: &mPutDedicatedIpWarmupAttributesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[532]})
-var sPutDedicatedIpWarmupAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDedicatedIpWarmupAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[535]})
-var sPutDeliverabilityDashboardOptionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDeliverabilityDashboardOptionRequest, Members: &mPutDeliverabilityDashboardOptionRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[536]})
-var sPutDeliverabilityDashboardOptionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDeliverabilityDashboardOptionResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[539]})
-var sPutEmailIdentityDkimAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityDkimAttributesRequest, Members: &mPutEmailIdentityDkimAttributesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[540]})
-var sPutEmailIdentityDkimAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityDkimAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[543]})
-var sPutEmailIdentityFeedbackAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityFeedbackAttributesRequest, Members: &mPutEmailIdentityFeedbackAttributesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[544]})
-var sPutEmailIdentityFeedbackAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityFeedbackAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[547]})
-var sPutEmailIdentityMailFromAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityMailFromAttributesRequest, Members: &mPutEmailIdentityMailFromAttributesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[548]})
-var sPutEmailIdentityMailFromAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityMailFromAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[552]})
-var sSendEmailRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendEmailRequest, Members: &mSendEmailRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[553]})
-var sSendEmailResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendEmailResponse, Members: &mSendEmailResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[561]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[563]})
-var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[566]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[567]})
-var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[570]})
-var sUpdateConfigurationSetEventDestinationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfigurationSetEventDestinationRequest, Members: &mUpdateConfigurationSetEventDestinationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[571]})
-var sUpdateConfigurationSetEventDestinationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfigurationSetEventDestinationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[575]})
+var sCreateConfigurationSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationSet, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eCreateConfigurationSet})
+var sCreateConfigurationSetEventDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationSetEventDestination, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateConfigurationSetEventDestination})
+var sCreateDedicatedIpPool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDedicatedIpPool, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateDedicatedIpPool})
+var sCreateDeliverabilityTestReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDeliverabilityTestReport, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateDeliverabilityTestReport})
+var sCreateEmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEmailIdentity, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreateEmailIdentity})
+var sDeleteConfigurationSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationSet, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eDeleteConfigurationSet})
+var sDeleteConfigurationSetEventDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationSetEventDestination, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eDeleteConfigurationSetEventDestination})
+var sDeleteDedicatedIpPool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDedicatedIpPool, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDeleteDedicatedIpPool})
+var sDeleteEmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEmailIdentity, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDeleteEmailIdentity})
+var sGetAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccount, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eGetAccount})
+var sGetBlacklistReports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBlacklistReports, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eGetBlacklistReports})
+var sGetConfigurationSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationSet, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eGetConfigurationSet})
+var sGetConfigurationSetEventDestinations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationSetEventDestinations, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eGetConfigurationSetEventDestinations})
+var sGetDedicatedIp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDedicatedIp, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eGetDedicatedIp})
+var sGetDedicatedIps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDedicatedIps, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eGetDedicatedIps})
+var sGetDeliverabilityDashboardOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeliverabilityDashboardOptions, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eGetDeliverabilityDashboardOptions})
+var sGetDeliverabilityTestReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeliverabilityTestReport, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eGetDeliverabilityTestReport})
+var sGetDomainDeliverabilityCampaign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainDeliverabilityCampaign, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eGetDomainDeliverabilityCampaign})
+var sGetDomainStatisticsReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainStatisticsReport, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eGetDomainStatisticsReport})
+var sGetEmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEmailIdentity, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eGetEmailIdentity})
+var sListConfigurationSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationSets, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eListConfigurationSets})
+var sListDedicatedIpPools = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDedicatedIpPools, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eListDedicatedIpPools})
+var sListDeliverabilityTestReports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeliverabilityTestReports, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eListDeliverabilityTestReports})
+var sListDomainDeliverabilityCampaigns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainDeliverabilityCampaigns, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eListDomainDeliverabilityCampaigns})
+var sListEmailIdentities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEmailIdentities, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eListEmailIdentities})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sPutAccountDedicatedIpWarmupAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccountDedicatedIpWarmupAttributes, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &ePutAccountDedicatedIpWarmupAttributes})
+var sPutAccountSendingAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccountSendingAttributes, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &ePutAccountSendingAttributes})
+var sPutConfigurationSetDeliveryOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetDeliveryOptions, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &ePutConfigurationSetDeliveryOptions})
+var sPutConfigurationSetReputationOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetReputationOptions, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &ePutConfigurationSetReputationOptions})
+var sPutConfigurationSetSendingOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetSendingOptions, Traits: &t30, Type: smithy.ShapeTypeOperation, Ext: &ePutConfigurationSetSendingOptions})
+var sPutConfigurationSetTrackingOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetTrackingOptions, Traits: &t31, Type: smithy.ShapeTypeOperation, Ext: &ePutConfigurationSetTrackingOptions})
+var sPutDedicatedIpInPool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDedicatedIpInPool, Traits: &t32, Type: smithy.ShapeTypeOperation, Ext: &ePutDedicatedIpInPool})
+var sPutDedicatedIpWarmupAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDedicatedIpWarmupAttributes, Traits: &t33, Type: smithy.ShapeTypeOperation, Ext: &ePutDedicatedIpWarmupAttributes})
+var sPutDeliverabilityDashboardOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDeliverabilityDashboardOption, Traits: &t34, Type: smithy.ShapeTypeOperation, Ext: &ePutDeliverabilityDashboardOption})
+var sPutEmailIdentityDkimAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityDkimAttributes, Traits: &t35, Type: smithy.ShapeTypeOperation, Ext: &ePutEmailIdentityDkimAttributes})
+var sPutEmailIdentityFeedbackAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityFeedbackAttributes, Traits: &t36, Type: smithy.ShapeTypeOperation, Ext: &ePutEmailIdentityFeedbackAttributes})
+var sPutEmailIdentityMailFromAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityMailFromAttributes, Traits: &t37, Type: smithy.ShapeTypeOperation, Ext: &ePutEmailIdentityMailFromAttributes})
+var sSendEmail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendEmail, Traits: &t38, Type: smithy.ShapeTypeOperation, Ext: &eSendEmail})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t39, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t40, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateConfigurationSetEventDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfigurationSetEventDestination, Traits: &t41, Type: smithy.ShapeTypeOperation, Ext: &eUpdateConfigurationSetEventDestination})
+var s_AmazonPinpointEmailService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonPinpointEmailService, Type: smithy.ShapeTypeService, Ext: &e_AmazonPinpointEmailService})
+var sAccountSuspendedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountSuspendedException, Members: &mAccountSuspendedException, Traits: &t42, Type: smithy.ShapeTypeStructure, Ext: &eAccountSuspendedException})
+var sAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlreadyExistsException, Members: &mAlreadyExistsException, Traits: &t42, Type: smithy.ShapeTypeStructure, Ext: &eAlreadyExistsException})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &e_AmazonResourceName})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t42, Type: smithy.ShapeTypeStructure, Ext: &eBadRequestException})
+var sBehaviorOnMxFailure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBehaviorOnMxFailure, Members: &mBehaviorOnMxFailure, Type: smithy.ShapeTypeEnum, Ext: &eBehaviorOnMxFailure})
+var s_BlacklistEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlacklistEntries, Members: &m_BlacklistEntries, Type: smithy.ShapeTypeList, Ext: &e_BlacklistEntries})
+var sBlacklistEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlacklistEntry, Members: &mBlacklistEntry, Type: smithy.ShapeTypeStructure, Ext: &eBlacklistEntry})
+var s_BlacklistingDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlacklistingDescription, Type: smithy.ShapeTypeString, Ext: &e_BlacklistingDescription})
+var s_BlacklistItemName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlacklistItemName, Type: smithy.ShapeTypeString, Ext: &e_BlacklistItemName})
+var s_BlacklistItemNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlacklistItemNames, Members: &m_BlacklistItemNames, Type: smithy.ShapeTypeList, Ext: &e_BlacklistItemNames})
+var s_BlacklistReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlacklistReport, Members: &m_BlacklistReport, Type: smithy.ShapeTypeMap, Ext: &e_BlacklistReport})
+var sBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBody, Members: &mBody, Type: smithy.ShapeTypeStructure, Ext: &eBody})
+var s_CampaignId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CampaignId, Type: smithy.ShapeTypeString, Ext: &e_CampaignId})
+var s_Charset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Charset, Type: smithy.ShapeTypeString, Ext: &e_Charset})
+var sCloudWatchDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudWatchDestination, Members: &mCloudWatchDestination, Type: smithy.ShapeTypeStructure, Ext: &eCloudWatchDestination})
+var sCloudWatchDimensionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudWatchDimensionConfiguration, Members: &mCloudWatchDimensionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCloudWatchDimensionConfiguration})
+var s_CloudWatchDimensionConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudWatchDimensionConfigurations, Members: &m_CloudWatchDimensionConfigurations, Type: smithy.ShapeTypeList, Ext: &e_CloudWatchDimensionConfigurations})
+var sConcurrentModificationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentModificationException, Members: &mConcurrentModificationException, Traits: &t43, Type: smithy.ShapeTypeStructure, Ext: &eConcurrentModificationException})
+var s_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationSetName, Type: smithy.ShapeTypeString, Ext: &e_ConfigurationSetName})
+var s_ConfigurationSetNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationSetNameList, Members: &m_ConfigurationSetNameList, Type: smithy.ShapeTypeList, Ext: &e_ConfigurationSetNameList})
+var sContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContent, Members: &mContent, Type: smithy.ShapeTypeStructure, Ext: &eContent})
+var s_CustomRedirectDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomRedirectDomain, Type: smithy.ShapeTypeString, Ext: &e_CustomRedirectDomain})
+var sDailyVolume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDailyVolume, Members: &mDailyVolume, Type: smithy.ShapeTypeStructure, Ext: &eDailyVolume})
+var s_DailyVolumes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DailyVolumes, Members: &m_DailyVolumes, Type: smithy.ShapeTypeList, Ext: &e_DailyVolumes})
+var sDedicatedIp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDedicatedIp, Members: &mDedicatedIp, Type: smithy.ShapeTypeStructure, Ext: &eDedicatedIp})
+var s_DedicatedIpList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DedicatedIpList, Members: &m_DedicatedIpList, Type: smithy.ShapeTypeList, Ext: &e_DedicatedIpList})
+var s_DefaultDimensionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DefaultDimensionValue, Type: smithy.ShapeTypeString, Ext: &e_DefaultDimensionValue})
+var sDeliverabilityDashboardAccountStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliverabilityDashboardAccountStatus, Members: &mDeliverabilityDashboardAccountStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeliverabilityDashboardAccountStatus})
+var sDeliverabilityTestReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliverabilityTestReport, Members: &mDeliverabilityTestReport, Type: smithy.ShapeTypeStructure, Ext: &eDeliverabilityTestReport})
+var s_DeliverabilityTestReports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeliverabilityTestReports, Members: &m_DeliverabilityTestReports, Type: smithy.ShapeTypeList, Ext: &e_DeliverabilityTestReports})
+var sDeliverabilityTestStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliverabilityTestStatus, Members: &mDeliverabilityTestStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeliverabilityTestStatus})
+var s_DeliverabilityTestSubject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeliverabilityTestSubject, Type: smithy.ShapeTypeString, Ext: &e_DeliverabilityTestSubject})
+var sDeliveryOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliveryOptions, Members: &mDeliveryOptions, Type: smithy.ShapeTypeStructure, Ext: &eDeliveryOptions})
+var sDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeStructure, Ext: &eDestination})
+var s_DimensionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionName, Type: smithy.ShapeTypeString, Ext: &e_DimensionName})
+var sDimensionValueSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimensionValueSource, Members: &mDimensionValueSource, Type: smithy.ShapeTypeEnum, Ext: &eDimensionValueSource})
+var sDkimAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDkimAttributes, Members: &mDkimAttributes, Type: smithy.ShapeTypeStructure, Ext: &eDkimAttributes})
+var sDkimStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDkimStatus, Members: &mDkimStatus, Type: smithy.ShapeTypeEnum, Ext: &eDkimStatus})
+var s_DnsToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DnsToken, Type: smithy.ShapeTypeString, Ext: &e_DnsToken})
+var s_DnsTokenList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DnsTokenList, Members: &m_DnsTokenList, Type: smithy.ShapeTypeList, Ext: &e_DnsTokenList})
+var s_Domain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Domain, Type: smithy.ShapeTypeString, Ext: &e_Domain})
+var sDomainDeliverabilityCampaign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainDeliverabilityCampaign, Members: &mDomainDeliverabilityCampaign, Type: smithy.ShapeTypeStructure, Ext: &eDomainDeliverabilityCampaign})
+var s_DomainDeliverabilityCampaignList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainDeliverabilityCampaignList, Members: &m_DomainDeliverabilityCampaignList, Type: smithy.ShapeTypeList, Ext: &e_DomainDeliverabilityCampaignList})
+var sDomainDeliverabilityTrackingOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainDeliverabilityTrackingOption, Members: &mDomainDeliverabilityTrackingOption, Type: smithy.ShapeTypeStructure, Ext: &eDomainDeliverabilityTrackingOption})
+var s_DomainDeliverabilityTrackingOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainDeliverabilityTrackingOptions, Members: &m_DomainDeliverabilityTrackingOptions, Type: smithy.ShapeTypeList, Ext: &e_DomainDeliverabilityTrackingOptions})
+var sDomainIspPlacement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainIspPlacement, Members: &mDomainIspPlacement, Type: smithy.ShapeTypeStructure, Ext: &eDomainIspPlacement})
+var s_DomainIspPlacements = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainIspPlacements, Members: &m_DomainIspPlacements, Type: smithy.ShapeTypeList, Ext: &e_DomainIspPlacements})
+var s_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailAddress, Type: smithy.ShapeTypeString, Ext: &e_EmailAddress})
+var s_EmailAddressList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailAddressList, Members: &m_EmailAddressList, Type: smithy.ShapeTypeList, Ext: &e_EmailAddressList})
+var sEmailContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmailContent, Members: &mEmailContent, Type: smithy.ShapeTypeStructure, Ext: &eEmailContent})
+var s_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &e_Enabled})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var s_Esp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Esp, Type: smithy.ShapeTypeString, Ext: &e_Esp})
+var s_Esps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Esps, Members: &m_Esps, Type: smithy.ShapeTypeList, Ext: &e_Esps})
+var sEventDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventDestination, Members: &mEventDestination, Type: smithy.ShapeTypeStructure, Ext: &eEventDestination})
+var sEventDestinationDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventDestinationDefinition, Members: &mEventDestinationDefinition, Type: smithy.ShapeTypeStructure, Ext: &eEventDestinationDefinition})
+var s_EventDestinationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventDestinationName, Type: smithy.ShapeTypeString, Ext: &e_EventDestinationName})
+var s_EventDestinations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventDestinations, Members: &m_EventDestinations, Type: smithy.ShapeTypeList, Ext: &e_EventDestinations})
+var sEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeEnum, Ext: &eEventType})
+var s_EventTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTypes, Members: &m_EventTypes, Type: smithy.ShapeTypeList, Ext: &e_EventTypes})
+var s_GeneralEnforcementStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GeneralEnforcementStatus, Type: smithy.ShapeTypeString, Ext: &e_GeneralEnforcementStatus})
+var s_Identity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Identity, Type: smithy.ShapeTypeString, Ext: &e_Identity})
+var sIdentityInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentityInfo, Members: &mIdentityInfo, Type: smithy.ShapeTypeStructure, Ext: &eIdentityInfo})
+var s_IdentityInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityInfoList, Members: &m_IdentityInfoList, Type: smithy.ShapeTypeList, Ext: &e_IdentityInfoList})
+var sIdentityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentityType, Members: &mIdentityType, Type: smithy.ShapeTypeEnum, Ext: &eIdentityType})
+var s_ImageUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImageUrl, Type: smithy.ShapeTypeString, Ext: &e_ImageUrl})
+var sInboxPlacementTrackingOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInboxPlacementTrackingOption, Members: &mInboxPlacementTrackingOption, Type: smithy.ShapeTypeStructure, Ext: &eInboxPlacementTrackingOption})
+var s_Ip = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ip, Type: smithy.ShapeTypeString, Ext: &e_Ip})
+var s_IpList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpList, Members: &m_IpList, Type: smithy.ShapeTypeList, Ext: &e_IpList})
+var s_IspName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IspName, Type: smithy.ShapeTypeString, Ext: &e_IspName})
+var s_IspNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IspNameList, Members: &m_IspNameList, Type: smithy.ShapeTypeList, Ext: &e_IspNameList})
+var sIspPlacement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIspPlacement, Members: &mIspPlacement, Type: smithy.ShapeTypeStructure, Ext: &eIspPlacement})
+var s_IspPlacements = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IspPlacements, Members: &m_IspPlacements, Type: smithy.ShapeTypeList, Ext: &e_IspPlacements})
+var sKinesisFirehoseDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKinesisFirehoseDestination, Members: &mKinesisFirehoseDestination, Type: smithy.ShapeTypeStructure, Ext: &eKinesisFirehoseDestination})
+var s_LastFreshStart = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastFreshStart, Type: smithy.ShapeTypeTimestamp, Ext: &e_LastFreshStart})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t42, Type: smithy.ShapeTypeStructure, Ext: &eLimitExceededException})
+var s_ListOfDedicatedIpPools = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfDedicatedIpPools, Members: &m_ListOfDedicatedIpPools, Type: smithy.ShapeTypeList, Ext: &e_ListOfDedicatedIpPools})
+var sMailFromAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMailFromAttributes, Members: &mMailFromAttributes, Type: smithy.ShapeTypeStructure, Ext: &eMailFromAttributes})
+var s_MailFromDomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MailFromDomainName, Type: smithy.ShapeTypeString, Ext: &e_MailFromDomainName})
+var sMailFromDomainNotVerifiedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMailFromDomainNotVerifiedException, Members: &mMailFromDomainNotVerifiedException, Traits: &t42, Type: smithy.ShapeTypeStructure, Ext: &eMailFromDomainNotVerifiedException})
+var sMailFromDomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMailFromDomainStatus, Members: &mMailFromDomainStatus, Type: smithy.ShapeTypeEnum, Ext: &eMailFromDomainStatus})
+var s_Max24HourSend = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Max24HourSend, Type: smithy.ShapeTypeDouble, Ext: &e_Max24HourSend})
+var s_MaxItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxItems, Type: smithy.ShapeTypeInteger, Ext: &e_MaxItems})
+var s_MaxSendRate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxSendRate, Type: smithy.ShapeTypeDouble, Ext: &e_MaxSendRate})
+var sMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessage, Members: &mMessage, Type: smithy.ShapeTypeStructure, Ext: &eMessage})
+var s_MessageContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageContent, Type: smithy.ShapeTypeString, Ext: &e_MessageContent})
+var s_MessageData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageData, Type: smithy.ShapeTypeString, Ext: &e_MessageData})
+var sMessageRejected = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageRejected, Members: &mMessageRejected, Traits: &t42, Type: smithy.ShapeTypeStructure, Ext: &eMessageRejected})
+var sMessageTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageTag, Members: &mMessageTag, Type: smithy.ShapeTypeStructure, Ext: &eMessageTag})
+var s_MessageTagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageTagList, Members: &m_MessageTagList, Type: smithy.ShapeTypeList, Ext: &e_MessageTagList})
+var s_MessageTagName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageTagName, Type: smithy.ShapeTypeString, Ext: &e_MessageTagName})
+var s_MessageTagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageTagValue, Type: smithy.ShapeTypeString, Ext: &e_MessageTagValue})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t44, Type: smithy.ShapeTypeStructure, Ext: &eNotFoundException})
+var s_OutboundMessageId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutboundMessageId, Type: smithy.ShapeTypeString, Ext: &e_OutboundMessageId})
+var sOverallVolume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOverallVolume, Members: &mOverallVolume, Type: smithy.ShapeTypeStructure, Ext: &eOverallVolume})
+var s_Percentage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &e_Percentage})
+var s_Percentage100Wrapper = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Percentage100Wrapper, Type: smithy.ShapeTypeInteger, Ext: &e_Percentage100Wrapper})
+var sPinpointDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPinpointDestination, Members: &mPinpointDestination, Type: smithy.ShapeTypeStructure, Ext: &ePinpointDestination})
+var sPlacementStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlacementStatistics, Members: &mPlacementStatistics, Type: smithy.ShapeTypeStructure, Ext: &ePlacementStatistics})
+var s_PoolName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PoolName, Type: smithy.ShapeTypeString, Ext: &e_PoolName})
+var sRawMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRawMessage, Members: &mRawMessage, Type: smithy.ShapeTypeStructure, Ext: &eRawMessage})
+var s_RawMessageData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RawMessageData, Type: smithy.ShapeTypeBlob, Ext: &e_RawMessageData})
+var s_RblName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RblName, Type: smithy.ShapeTypeString, Ext: &e_RblName})
+var s_ReportId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportId, Type: smithy.ShapeTypeString, Ext: &e_ReportId})
+var s_ReportName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportName, Type: smithy.ShapeTypeString, Ext: &e_ReportName})
+var sReputationOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReputationOptions, Members: &mReputationOptions, Type: smithy.ShapeTypeStructure, Ext: &eReputationOptions})
+var sSendingOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendingOptions, Members: &mSendingOptions, Type: smithy.ShapeTypeStructure, Ext: &eSendingOptions})
+var sSendingPausedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendingPausedException, Members: &mSendingPausedException, Traits: &t42, Type: smithy.ShapeTypeStructure, Ext: &eSendingPausedException})
+var s_SendingPoolName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SendingPoolName, Type: smithy.ShapeTypeString, Ext: &e_SendingPoolName})
+var sSendQuota = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendQuota, Members: &mSendQuota, Type: smithy.ShapeTypeStructure, Ext: &eSendQuota})
+var s_SentLast24Hours = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SentLast24Hours, Type: smithy.ShapeTypeDouble, Ext: &e_SentLast24Hours})
+var sSnsDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnsDestination, Members: &mSnsDestination, Type: smithy.ShapeTypeStructure, Ext: &eSnsDestination})
+var s_Subject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Subject, Type: smithy.ShapeTypeString, Ext: &e_Subject})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &e_TagList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplate, Members: &mTemplate, Type: smithy.ShapeTypeStructure, Ext: &eTemplate})
+var s_TemplateArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateArn, Type: smithy.ShapeTypeString, Ext: &e_TemplateArn})
+var s_TemplateData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateData, Type: smithy.ShapeTypeString, Ext: &e_TemplateData})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &e_Timestamp})
+var sTlsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTlsPolicy, Members: &mTlsPolicy, Type: smithy.ShapeTypeEnum, Ext: &eTlsPolicy})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t45, Type: smithy.ShapeTypeStructure, Ext: &eTooManyRequestsException})
+var sTrackingOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrackingOptions, Members: &mTrackingOptions, Type: smithy.ShapeTypeStructure, Ext: &eTrackingOptions})
+var s_Volume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Volume, Type: smithy.ShapeTypeLong, Ext: &e_Volume})
+var sVolumeStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVolumeStatistics, Members: &mVolumeStatistics, Type: smithy.ShapeTypeStructure, Ext: &eVolumeStatistics})
+var sWarmupStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWarmupStatus, Members: &mWarmupStatus, Type: smithy.ShapeTypeEnum, Ext: &eWarmupStatus})
+var sCreateConfigurationSetEventDestinationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationSetEventDestinationRequest, Members: &mCreateConfigurationSetEventDestinationRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateConfigurationSetEventDestinationRequest})
+var sCreateConfigurationSetEventDestinationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationSetEventDestinationResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateConfigurationSetEventDestinationResponse})
+var sCreateConfigurationSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationSetRequest, Members: &mCreateConfigurationSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateConfigurationSetRequest})
+var sCreateConfigurationSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateConfigurationSetResponse})
+var sCreateDedicatedIpPoolRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDedicatedIpPoolRequest, Members: &mCreateDedicatedIpPoolRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateDedicatedIpPoolRequest})
+var sCreateDedicatedIpPoolResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDedicatedIpPoolResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateDedicatedIpPoolResponse})
+var sCreateDeliverabilityTestReportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDeliverabilityTestReportRequest, Members: &mCreateDeliverabilityTestReportRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateDeliverabilityTestReportRequest})
+var sCreateDeliverabilityTestReportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDeliverabilityTestReportResponse, Members: &mCreateDeliverabilityTestReportResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateDeliverabilityTestReportResponse})
+var sCreateEmailIdentityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEmailIdentityRequest, Members: &mCreateEmailIdentityRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateEmailIdentityRequest})
+var sCreateEmailIdentityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEmailIdentityResponse, Members: &mCreateEmailIdentityResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateEmailIdentityResponse})
+var sDeleteConfigurationSetEventDestinationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationSetEventDestinationRequest, Members: &mDeleteConfigurationSetEventDestinationRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteConfigurationSetEventDestinationRequest})
+var sDeleteConfigurationSetEventDestinationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationSetEventDestinationResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteConfigurationSetEventDestinationResponse})
+var sDeleteConfigurationSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationSetRequest, Members: &mDeleteConfigurationSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteConfigurationSetRequest})
+var sDeleteConfigurationSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteConfigurationSetResponse})
+var sDeleteDedicatedIpPoolRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDedicatedIpPoolRequest, Members: &mDeleteDedicatedIpPoolRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDedicatedIpPoolRequest})
+var sDeleteDedicatedIpPoolResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDedicatedIpPoolResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteDedicatedIpPoolResponse})
+var sDeleteEmailIdentityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEmailIdentityRequest, Members: &mDeleteEmailIdentityRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteEmailIdentityRequest})
+var sDeleteEmailIdentityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEmailIdentityResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteEmailIdentityResponse})
+var sGetAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAccountRequest})
+var sGetAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountResponse, Members: &mGetAccountResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAccountResponse})
+var sGetBlacklistReportsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBlacklistReportsRequest, Members: &mGetBlacklistReportsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetBlacklistReportsRequest})
+var sGetBlacklistReportsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBlacklistReportsResponse, Members: &mGetBlacklistReportsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetBlacklistReportsResponse})
+var sGetConfigurationSetEventDestinationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationSetEventDestinationsRequest, Members: &mGetConfigurationSetEventDestinationsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetConfigurationSetEventDestinationsRequest})
+var sGetConfigurationSetEventDestinationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationSetEventDestinationsResponse, Members: &mGetConfigurationSetEventDestinationsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetConfigurationSetEventDestinationsResponse})
+var sGetConfigurationSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationSetRequest, Members: &mGetConfigurationSetRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetConfigurationSetRequest})
+var sGetConfigurationSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationSetResponse, Members: &mGetConfigurationSetResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetConfigurationSetResponse})
+var sGetDedicatedIpRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDedicatedIpRequest, Members: &mGetDedicatedIpRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDedicatedIpRequest})
+var sGetDedicatedIpResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDedicatedIpResponse, Members: &mGetDedicatedIpResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDedicatedIpResponse})
+var sGetDedicatedIpsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDedicatedIpsRequest, Members: &mGetDedicatedIpsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDedicatedIpsRequest})
+var sGetDedicatedIpsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDedicatedIpsResponse, Members: &mGetDedicatedIpsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDedicatedIpsResponse})
+var sGetDeliverabilityDashboardOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeliverabilityDashboardOptionsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDeliverabilityDashboardOptionsRequest})
+var sGetDeliverabilityDashboardOptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeliverabilityDashboardOptionsResponse, Members: &mGetDeliverabilityDashboardOptionsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDeliverabilityDashboardOptionsResponse})
+var sGetDeliverabilityTestReportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeliverabilityTestReportRequest, Members: &mGetDeliverabilityTestReportRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDeliverabilityTestReportRequest})
+var sGetDeliverabilityTestReportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeliverabilityTestReportResponse, Members: &mGetDeliverabilityTestReportResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDeliverabilityTestReportResponse})
+var sGetDomainDeliverabilityCampaignRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainDeliverabilityCampaignRequest, Members: &mGetDomainDeliverabilityCampaignRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDomainDeliverabilityCampaignRequest})
+var sGetDomainDeliverabilityCampaignResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainDeliverabilityCampaignResponse, Members: &mGetDomainDeliverabilityCampaignResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDomainDeliverabilityCampaignResponse})
+var sGetDomainStatisticsReportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainStatisticsReportRequest, Members: &mGetDomainStatisticsReportRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetDomainStatisticsReportRequest})
+var sGetDomainStatisticsReportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainStatisticsReportResponse, Members: &mGetDomainStatisticsReportResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetDomainStatisticsReportResponse})
+var sGetEmailIdentityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEmailIdentityRequest, Members: &mGetEmailIdentityRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetEmailIdentityRequest})
+var sGetEmailIdentityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEmailIdentityResponse, Members: &mGetEmailIdentityResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetEmailIdentityResponse})
+var sListConfigurationSetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationSetsRequest, Members: &mListConfigurationSetsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListConfigurationSetsRequest})
+var sListConfigurationSetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationSetsResponse, Members: &mListConfigurationSetsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListConfigurationSetsResponse})
+var sListDedicatedIpPoolsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDedicatedIpPoolsRequest, Members: &mListDedicatedIpPoolsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDedicatedIpPoolsRequest})
+var sListDedicatedIpPoolsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDedicatedIpPoolsResponse, Members: &mListDedicatedIpPoolsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDedicatedIpPoolsResponse})
+var sListDeliverabilityTestReportsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeliverabilityTestReportsRequest, Members: &mListDeliverabilityTestReportsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDeliverabilityTestReportsRequest})
+var sListDeliverabilityTestReportsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeliverabilityTestReportsResponse, Members: &mListDeliverabilityTestReportsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDeliverabilityTestReportsResponse})
+var sListDomainDeliverabilityCampaignsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainDeliverabilityCampaignsRequest, Members: &mListDomainDeliverabilityCampaignsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListDomainDeliverabilityCampaignsRequest})
+var sListDomainDeliverabilityCampaignsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainDeliverabilityCampaignsResponse, Members: &mListDomainDeliverabilityCampaignsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListDomainDeliverabilityCampaignsResponse})
+var sListEmailIdentitiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEmailIdentitiesRequest, Members: &mListEmailIdentitiesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListEmailIdentitiesRequest})
+var sListEmailIdentitiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEmailIdentitiesResponse, Members: &mListEmailIdentitiesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListEmailIdentitiesResponse})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sPutAccountDedicatedIpWarmupAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccountDedicatedIpWarmupAttributesRequest, Members: &mPutAccountDedicatedIpWarmupAttributesRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutAccountDedicatedIpWarmupAttributesRequest})
+var sPutAccountDedicatedIpWarmupAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccountDedicatedIpWarmupAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutAccountDedicatedIpWarmupAttributesResponse})
+var sPutAccountSendingAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccountSendingAttributesRequest, Members: &mPutAccountSendingAttributesRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutAccountSendingAttributesRequest})
+var sPutAccountSendingAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccountSendingAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutAccountSendingAttributesResponse})
+var sPutConfigurationSetDeliveryOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetDeliveryOptionsRequest, Members: &mPutConfigurationSetDeliveryOptionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutConfigurationSetDeliveryOptionsRequest})
+var sPutConfigurationSetDeliveryOptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetDeliveryOptionsResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutConfigurationSetDeliveryOptionsResponse})
+var sPutConfigurationSetReputationOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetReputationOptionsRequest, Members: &mPutConfigurationSetReputationOptionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutConfigurationSetReputationOptionsRequest})
+var sPutConfigurationSetReputationOptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetReputationOptionsResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutConfigurationSetReputationOptionsResponse})
+var sPutConfigurationSetSendingOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetSendingOptionsRequest, Members: &mPutConfigurationSetSendingOptionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutConfigurationSetSendingOptionsRequest})
+var sPutConfigurationSetSendingOptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetSendingOptionsResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutConfigurationSetSendingOptionsResponse})
+var sPutConfigurationSetTrackingOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetTrackingOptionsRequest, Members: &mPutConfigurationSetTrackingOptionsRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutConfigurationSetTrackingOptionsRequest})
+var sPutConfigurationSetTrackingOptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetTrackingOptionsResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutConfigurationSetTrackingOptionsResponse})
+var sPutDedicatedIpInPoolRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDedicatedIpInPoolRequest, Members: &mPutDedicatedIpInPoolRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutDedicatedIpInPoolRequest})
+var sPutDedicatedIpInPoolResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDedicatedIpInPoolResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutDedicatedIpInPoolResponse})
+var sPutDedicatedIpWarmupAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDedicatedIpWarmupAttributesRequest, Members: &mPutDedicatedIpWarmupAttributesRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutDedicatedIpWarmupAttributesRequest})
+var sPutDedicatedIpWarmupAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDedicatedIpWarmupAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutDedicatedIpWarmupAttributesResponse})
+var sPutDeliverabilityDashboardOptionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDeliverabilityDashboardOptionRequest, Members: &mPutDeliverabilityDashboardOptionRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutDeliverabilityDashboardOptionRequest})
+var sPutDeliverabilityDashboardOptionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDeliverabilityDashboardOptionResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutDeliverabilityDashboardOptionResponse})
+var sPutEmailIdentityDkimAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityDkimAttributesRequest, Members: &mPutEmailIdentityDkimAttributesRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutEmailIdentityDkimAttributesRequest})
+var sPutEmailIdentityDkimAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityDkimAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutEmailIdentityDkimAttributesResponse})
+var sPutEmailIdentityFeedbackAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityFeedbackAttributesRequest, Members: &mPutEmailIdentityFeedbackAttributesRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutEmailIdentityFeedbackAttributesRequest})
+var sPutEmailIdentityFeedbackAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityFeedbackAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutEmailIdentityFeedbackAttributesResponse})
+var sPutEmailIdentityMailFromAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityMailFromAttributesRequest, Members: &mPutEmailIdentityMailFromAttributesRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutEmailIdentityMailFromAttributesRequest})
+var sPutEmailIdentityMailFromAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityMailFromAttributesResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutEmailIdentityMailFromAttributesResponse})
+var sSendEmailRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendEmailRequest, Members: &mSendEmailRequest, Type: smithy.ShapeTypeStructure, Ext: &eSendEmailRequest})
+var sSendEmailResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendEmailResponse, Members: &mSendEmailResponse, Type: smithy.ShapeTypeStructure, Ext: &eSendEmailResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateConfigurationSetEventDestinationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfigurationSetEventDestinationRequest, Members: &mUpdateConfigurationSetEventDestinationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConfigurationSetEventDestinationRequest})
+var sUpdateConfigurationSetEventDestinationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfigurationSetEventDestinationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConfigurationSetEventDestinationResponse})
 
-var sAccountSuspendedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var sAlreadyExistsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[46]})
-var sBadRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[49]})
-var sBehaviorOnMxFailure_USE_DEFAULT_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USE_DEFAULT_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[51]})
-var sBehaviorOnMxFailure_REJECT_MESSAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECT_MESSAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[52]})
-var s_BlacklistEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBlacklistEntry, Members: &mBlacklistEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[54]})
-var sBlacklistEntry_RblName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RblName", ID: &i_RblName, Type: smithy.ShapeTypeString, Ext: &ext[56]})
-var sBlacklistEntry_ListingTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListingTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[57]})
-var sBlacklistEntry_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_BlacklistingDescription, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var s_BlacklistItemNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BlacklistItemName, Type: smithy.ShapeTypeString, Ext: &ext[62]})
-var s_BlacklistReport_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_BlacklistItemName, Type: smithy.ShapeTypeString, Ext: &ext[64]})
-var s_BlacklistReport_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_BlacklistEntries, Members: &m_BlacklistEntries, Type: smithy.ShapeTypeList, Ext: &ext[65]})
-var sBody_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &iContent, Members: &mContent, Type: smithy.ShapeTypeStructure, Ext: &ext[67]})
-var sBody_Html = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Html", ID: &iContent, Members: &mContent, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var sCloudWatchDestination_DimensionConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DimensionConfigurations", ID: &i_CloudWatchDimensionConfigurations, Members: &m_CloudWatchDimensionConfigurations, Type: smithy.ShapeTypeList, Ext: &ext[72]})
-var sCloudWatchDimensionConfiguration_DimensionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DimensionName", ID: &i_DimensionName, Type: smithy.ShapeTypeString, Ext: &ext[74]})
-var sCloudWatchDimensionConfiguration_DimensionValueSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DimensionValueSource", ID: &iDimensionValueSource, Members: &mDimensionValueSource, Type: smithy.ShapeTypeEnum, Ext: &ext[75]})
-var sCloudWatchDimensionConfiguration_DefaultDimensionValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultDimensionValue", ID: &i_DefaultDimensionValue, Type: smithy.ShapeTypeString, Ext: &ext[76]})
-var s_CloudWatchDimensionConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCloudWatchDimensionConfiguration, Members: &mCloudWatchDimensionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[78]})
-var sConcurrentModificationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[80]})
-var s_ConfigurationSetNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ConfigurationSetName, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var sContent_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &i_MessageData, Type: smithy.ShapeTypeString, Ext: &ext[85]})
-var sContent_Charset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Charset", ID: &i_Charset, Type: smithy.ShapeTypeString, Ext: &ext[86]})
-var sDailyVolume_StartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[89]})
-var sDailyVolume_VolumeStatistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeStatistics", ID: &iVolumeStatistics, Members: &mVolumeStatistics, Type: smithy.ShapeTypeStructure, Ext: &ext[90]})
-var sDailyVolume_DomainIspPlacements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainIspPlacements", ID: &i_DomainIspPlacements, Members: &m_DomainIspPlacements, Type: smithy.ShapeTypeList, Ext: &ext[91]})
-var s_DailyVolumes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDailyVolume, Members: &mDailyVolume, Type: smithy.ShapeTypeStructure, Ext: &ext[93]})
-var sDedicatedIp_Ip = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ip", ID: &i_Ip, Type: smithy.ShapeTypeString, Ext: &ext[95]})
-var sDedicatedIp_WarmupStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WarmupStatus", ID: &iWarmupStatus, Members: &mWarmupStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[96]})
-var sDedicatedIp_WarmupPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WarmupPercentage", ID: &i_Percentage100Wrapper, Type: smithy.ShapeTypeInteger, Ext: &ext[97]})
-var sDedicatedIp_PoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolName", ID: &i_PoolName, Type: smithy.ShapeTypeString, Ext: &ext[98]})
-var s_DedicatedIpList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDedicatedIp, Members: &mDedicatedIp, Type: smithy.ShapeTypeStructure, Ext: &ext[100]})
-var sDeliverabilityDashboardAccountStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[103]})
-var sDeliverabilityDashboardAccountStatus_PENDING_EXPIRATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_EXPIRATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[104]})
-var sDeliverabilityDashboardAccountStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[105]})
-var sDeliverabilityTestReport_ReportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportId", ID: &i_ReportId, Type: smithy.ShapeTypeString, Ext: &ext[107]})
-var sDeliverabilityTestReport_ReportName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportName", ID: &i_ReportName, Type: smithy.ShapeTypeString, Ext: &ext[108]})
-var sDeliverabilityTestReport_Subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subject", ID: &i_DeliverabilityTestSubject, Type: smithy.ShapeTypeString, Ext: &ext[109]})
-var sDeliverabilityTestReport_FromEmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FromEmailAddress", ID: &i_EmailAddress, Type: smithy.ShapeTypeString, Ext: &ext[110]})
-var sDeliverabilityTestReport_CreateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[111]})
-var sDeliverabilityTestReport_DeliverabilityTestStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliverabilityTestStatus", ID: &iDeliverabilityTestStatus, Members: &mDeliverabilityTestStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[112]})
-var s_DeliverabilityTestReports_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeliverabilityTestReport, Members: &mDeliverabilityTestReport, Type: smithy.ShapeTypeStructure, Ext: &ext[114]})
-var sDeliverabilityTestStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[116]})
-var sDeliverabilityTestStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[117]})
-var sDeliveryOptions_TlsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsPolicy", ID: &iTlsPolicy, Members: &mTlsPolicy, Type: smithy.ShapeTypeEnum, Ext: &ext[120]})
-var sDeliveryOptions_SendingPoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingPoolName", ID: &i_PoolName, Type: smithy.ShapeTypeString, Ext: &ext[121]})
-var sDestination_ToAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ToAddresses", ID: &i_EmailAddressList, Members: &m_EmailAddressList, Type: smithy.ShapeTypeList, Ext: &ext[123]})
-var sDestination_CcAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CcAddresses", ID: &i_EmailAddressList, Members: &m_EmailAddressList, Type: smithy.ShapeTypeList, Ext: &ext[124]})
-var sDestination_BccAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BccAddresses", ID: &i_EmailAddressList, Members: &m_EmailAddressList, Type: smithy.ShapeTypeList, Ext: &ext[125]})
-var sDimensionValueSource_MESSAGE_TAG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MESSAGE_TAG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[128]})
-var sDimensionValueSource_EMAIL_HEADER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMAIL_HEADER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[129]})
-var sDimensionValueSource_LINK_TAG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINK_TAG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[130]})
-var sDkimAttributes_SigningEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[132]})
-var sDkimAttributes_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iDkimStatus, Members: &mDkimStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[133]})
-var sDkimAttributes_Tokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tokens", ID: &i_DnsTokenList, Members: &m_DnsTokenList, Type: smithy.ShapeTypeList, Ext: &ext[134]})
-var sDkimStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[136]})
-var sDkimStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[137]})
-var sDkimStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[138]})
-var sDkimStatus_TEMPORARY_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEMPORARY_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[139]})
-var sDkimStatus_NOT_STARTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_STARTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[140]})
-var s_DnsTokenList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DnsToken, Type: smithy.ShapeTypeString, Ext: &ext[143]})
-var sDomainDeliverabilityCampaign_CampaignId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CampaignId", ID: &i_CampaignId, Type: smithy.ShapeTypeString, Ext: &ext[146]})
-var sDomainDeliverabilityCampaign_ImageUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageUrl", ID: &i_ImageUrl, Type: smithy.ShapeTypeString, Ext: &ext[147]})
-var sDomainDeliverabilityCampaign_Subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subject", ID: &i_Subject, Type: smithy.ShapeTypeString, Ext: &ext[148]})
-var sDomainDeliverabilityCampaign_FromAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FromAddress", ID: &i_Identity, Type: smithy.ShapeTypeString, Ext: &ext[149]})
-var sDomainDeliverabilityCampaign_SendingIps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingIps", ID: &i_IpList, Members: &m_IpList, Type: smithy.ShapeTypeList, Ext: &ext[150]})
-var sDomainDeliverabilityCampaign_FirstSeenDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirstSeenDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[151]})
-var sDomainDeliverabilityCampaign_LastSeenDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastSeenDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[152]})
-var sDomainDeliverabilityCampaign_InboxCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboxCount", ID: &i_Volume, Type: smithy.ShapeTypeLong, Ext: &ext[153]})
-var sDomainDeliverabilityCampaign_SpamCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpamCount", ID: &i_Volume, Type: smithy.ShapeTypeLong, Ext: &ext[154]})
-var sDomainDeliverabilityCampaign_ReadRate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadRate", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &ext[155]})
-var sDomainDeliverabilityCampaign_DeleteRate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteRate", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &ext[156]})
-var sDomainDeliverabilityCampaign_ReadDeleteRate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadDeleteRate", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &ext[157]})
-var sDomainDeliverabilityCampaign_ProjectedVolume = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProjectedVolume", ID: &i_Volume, Type: smithy.ShapeTypeLong, Ext: &ext[158]})
-var sDomainDeliverabilityCampaign_Esps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Esps", ID: &i_Esps, Members: &m_Esps, Type: smithy.ShapeTypeList, Ext: &ext[159]})
-var s_DomainDeliverabilityCampaignList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainDeliverabilityCampaign, Members: &mDomainDeliverabilityCampaign, Type: smithy.ShapeTypeStructure, Ext: &ext[161]})
-var sDomainDeliverabilityTrackingOption_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_Domain, Type: smithy.ShapeTypeString, Ext: &ext[163]})
-var sDomainDeliverabilityTrackingOption_SubscriptionStartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionStartDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[164]})
-var sDomainDeliverabilityTrackingOption_InboxPlacementTrackingOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboxPlacementTrackingOption", ID: &iInboxPlacementTrackingOption, Members: &mInboxPlacementTrackingOption, Type: smithy.ShapeTypeStructure, Ext: &ext[165]})
-var s_DomainDeliverabilityTrackingOptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainDeliverabilityTrackingOption, Members: &mDomainDeliverabilityTrackingOption, Type: smithy.ShapeTypeStructure, Ext: &ext[167]})
-var sDomainIspPlacement_IspName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IspName", ID: &i_IspName, Type: smithy.ShapeTypeString, Ext: &ext[169]})
-var sDomainIspPlacement_InboxRawCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboxRawCount", ID: &i_Volume, Type: smithy.ShapeTypeLong, Ext: &ext[170]})
-var sDomainIspPlacement_SpamRawCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpamRawCount", ID: &i_Volume, Type: smithy.ShapeTypeLong, Ext: &ext[171]})
-var sDomainIspPlacement_InboxPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboxPercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &ext[172]})
-var sDomainIspPlacement_SpamPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpamPercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &ext[173]})
-var s_DomainIspPlacements_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainIspPlacement, Members: &mDomainIspPlacement, Type: smithy.ShapeTypeStructure, Ext: &ext[175]})
-var s_EmailAddressList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EmailAddress, Type: smithy.ShapeTypeString, Ext: &ext[178]})
-var sEmailContent_Simple = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Simple", ID: &iMessage, Members: &mMessage, Type: smithy.ShapeTypeStructure, Ext: &ext[180]})
-var sEmailContent_Raw = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Raw", ID: &iRawMessage, Members: &mRawMessage, Type: smithy.ShapeTypeStructure, Ext: &ext[181]})
-var sEmailContent_Template = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Template", ID: &iTemplate, Members: &mTemplate, Type: smithy.ShapeTypeStructure, Ext: &ext[182]})
-var s_Esps_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Esp, Type: smithy.ShapeTypeString, Ext: &ext[187]})
-var sEventDestination_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventDestinationName, Type: smithy.ShapeTypeString, Ext: &ext[189]})
-var sEventDestination_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[190]})
-var sEventDestination_MatchingEventTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchingEventTypes", ID: &i_EventTypes, Members: &m_EventTypes, Type: smithy.ShapeTypeList, Ext: &ext[191]})
-var sEventDestination_KinesisFirehoseDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisFirehoseDestination", ID: &iKinesisFirehoseDestination, Members: &mKinesisFirehoseDestination, Type: smithy.ShapeTypeStructure, Ext: &ext[192]})
-var sEventDestination_CloudWatchDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchDestination", ID: &iCloudWatchDestination, Members: &mCloudWatchDestination, Type: smithy.ShapeTypeStructure, Ext: &ext[193]})
-var sEventDestination_SnsDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsDestination", ID: &iSnsDestination, Members: &mSnsDestination, Type: smithy.ShapeTypeStructure, Ext: &ext[194]})
-var sEventDestination_PinpointDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PinpointDestination", ID: &iPinpointDestination, Members: &mPinpointDestination, Type: smithy.ShapeTypeStructure, Ext: &ext[195]})
-var sEventDestinationDefinition_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[197]})
-var sEventDestinationDefinition_MatchingEventTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchingEventTypes", ID: &i_EventTypes, Members: &m_EventTypes, Type: smithy.ShapeTypeList, Ext: &ext[198]})
-var sEventDestinationDefinition_KinesisFirehoseDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisFirehoseDestination", ID: &iKinesisFirehoseDestination, Members: &mKinesisFirehoseDestination, Type: smithy.ShapeTypeStructure, Ext: &ext[199]})
-var sEventDestinationDefinition_CloudWatchDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchDestination", ID: &iCloudWatchDestination, Members: &mCloudWatchDestination, Type: smithy.ShapeTypeStructure, Ext: &ext[200]})
-var sEventDestinationDefinition_SnsDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsDestination", ID: &iSnsDestination, Members: &mSnsDestination, Type: smithy.ShapeTypeStructure, Ext: &ext[201]})
-var sEventDestinationDefinition_PinpointDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PinpointDestination", ID: &iPinpointDestination, Members: &mPinpointDestination, Type: smithy.ShapeTypeStructure, Ext: &ext[202]})
-var s_EventDestinations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventDestination, Members: &mEventDestination, Type: smithy.ShapeTypeStructure, Ext: &ext[205]})
-var sEventType_SEND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[207]})
-var sEventType_REJECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[208]})
-var sEventType_BOUNCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOUNCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[209]})
-var sEventType_COMPLAINT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLAINT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[210]})
-var sEventType_DELIVERY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELIVERY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[211]})
-var sEventType_OPEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[212]})
-var sEventType_CLICK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLICK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[213]})
-var sEventType_RENDERING_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RENDERING_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[214]})
-var s_EventTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeEnum, Ext: &ext[216]})
-var sIdentityInfo_IdentityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityType", ID: &iIdentityType, Members: &mIdentityType, Type: smithy.ShapeTypeEnum, Ext: &ext[220]})
-var sIdentityInfo_IdentityName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityName", ID: &i_Identity, Type: smithy.ShapeTypeString, Ext: &ext[221]})
-var sIdentityInfo_SendingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[222]})
-var s_IdentityInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIdentityInfo, Members: &mIdentityInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[224]})
-var sIdentityType_EMAIL_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMAIL_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[226]})
-var sIdentityType_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[227]})
-var sIdentityType_MANAGED_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANAGED_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[228]})
-var sInboxPlacementTrackingOption_Global = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Global", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[231]})
-var sInboxPlacementTrackingOption_TrackedIsps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrackedIsps", ID: &i_IspNameList, Members: &m_IspNameList, Type: smithy.ShapeTypeList, Ext: &ext[232]})
-var s_IpList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Ip, Type: smithy.ShapeTypeString, Ext: &ext[235]})
-var s_IspNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_IspName, Type: smithy.ShapeTypeString, Ext: &ext[238]})
-var sIspPlacement_IspName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IspName", ID: &i_IspName, Type: smithy.ShapeTypeString, Ext: &ext[240]})
-var sIspPlacement_PlacementStatistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlacementStatistics", ID: &iPlacementStatistics, Members: &mPlacementStatistics, Type: smithy.ShapeTypeStructure, Ext: &ext[241]})
-var s_IspPlacements_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIspPlacement, Members: &mIspPlacement, Type: smithy.ShapeTypeStructure, Ext: &ext[243]})
-var sKinesisFirehoseDestination_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[245]})
-var sKinesisFirehoseDestination_DeliveryStreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStreamArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[246]})
-var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[249]})
-var s_ListOfDedicatedIpPools_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PoolName, Type: smithy.ShapeTypeString, Ext: &ext[251]})
-var sMailFromAttributes_MailFromDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MailFromDomain", ID: &i_MailFromDomainName, Type: smithy.ShapeTypeString, Ext: &ext[253]})
-var sMailFromAttributes_MailFromDomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MailFromDomainStatus", ID: &iMailFromDomainStatus, Members: &mMailFromDomainStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[254]})
-var sMailFromAttributes_BehaviorOnMxFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BehaviorOnMxFailure", ID: &iBehaviorOnMxFailure, Members: &mBehaviorOnMxFailure, Type: smithy.ShapeTypeEnum, Ext: &ext[255]})
-var sMailFromDomainNotVerifiedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[258]})
-var sMailFromDomainStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[260]})
-var sMailFromDomainStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[261]})
-var sMailFromDomainStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[262]})
-var sMailFromDomainStatus_TEMPORARY_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEMPORARY_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[263]})
-var sMessage_Subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subject", ID: &iContent, Members: &mContent, Type: smithy.ShapeTypeStructure, Ext: &ext[268]})
-var sMessage_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &iBody, Members: &mBody, Type: smithy.ShapeTypeStructure, Ext: &ext[269]})
-var sMessageRejected_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[273]})
-var sMessageTag_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_MessageTagName, Type: smithy.ShapeTypeString, Ext: &ext[275]})
-var sMessageTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_MessageTagValue, Type: smithy.ShapeTypeString, Ext: &ext[276]})
-var s_MessageTagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMessageTag, Members: &mMessageTag, Type: smithy.ShapeTypeStructure, Ext: &ext[278]})
-var sNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[283]})
-var sOverallVolume_VolumeStatistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeStatistics", ID: &iVolumeStatistics, Members: &mVolumeStatistics, Type: smithy.ShapeTypeStructure, Ext: &ext[286]})
-var sOverallVolume_ReadRatePercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadRatePercent", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &ext[287]})
-var sOverallVolume_DomainIspPlacements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainIspPlacements", ID: &i_DomainIspPlacements, Members: &m_DomainIspPlacements, Type: smithy.ShapeTypeList, Ext: &ext[288]})
-var sPinpointDestination_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[292]})
-var sPlacementStatistics_InboxPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboxPercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &ext[294]})
-var sPlacementStatistics_SpamPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpamPercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &ext[295]})
-var sPlacementStatistics_MissingPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MissingPercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &ext[296]})
-var sPlacementStatistics_SpfPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpfPercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &ext[297]})
-var sPlacementStatistics_DkimPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DkimPercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &ext[298]})
-var sRawMessage_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &i_RawMessageData, Type: smithy.ShapeTypeBlob, Ext: &ext[301]})
-var sReputationOptions_ReputationMetricsEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReputationMetricsEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[307]})
-var sReputationOptions_LastFreshStart = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastFreshStart", ID: &i_LastFreshStart, Type: smithy.ShapeTypeTimestamp, Ext: &ext[308]})
-var sSendingOptions_SendingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[310]})
-var sSendingPausedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[312]})
-var sSendQuota_Max24HourSend = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Max24HourSend", ID: &i_Max24HourSend, Type: smithy.ShapeTypeDouble, Ext: &ext[315]})
-var sSendQuota_MaxSendRate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxSendRate", ID: &i_MaxSendRate, Type: smithy.ShapeTypeDouble, Ext: &ext[316]})
-var sSendQuota_SentLast24Hours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SentLast24Hours", ID: &i_SentLast24Hours, Type: smithy.ShapeTypeDouble, Ext: &ext[317]})
-var sSnsDestination_TopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[320]})
-var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[323]})
-var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[324]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[327]})
-var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[329]})
-var sTemplate_TemplateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateArn", ID: &i_TemplateArn, Type: smithy.ShapeTypeString, Ext: &ext[332]})
-var sTemplate_TemplateData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateData", ID: &i_TemplateData, Type: smithy.ShapeTypeString, Ext: &ext[333]})
-var sTlsPolicy_REQUIRE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUIRE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[338]})
-var sTlsPolicy_OPTIONAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPTIONAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[339]})
-var sTooManyRequestsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[341]})
-var sTrackingOptions_CustomRedirectDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomRedirectDomain", ID: &i_CustomRedirectDomain, Type: smithy.ShapeTypeString, Ext: &ext[343]})
-var sVolumeStatistics_InboxRawCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboxRawCount", ID: &i_Volume, Type: smithy.ShapeTypeLong, Ext: &ext[346]})
-var sVolumeStatistics_SpamRawCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpamRawCount", ID: &i_Volume, Type: smithy.ShapeTypeLong, Ext: &ext[347]})
-var sVolumeStatistics_ProjectedInbox = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProjectedInbox", ID: &i_Volume, Type: smithy.ShapeTypeLong, Ext: &ext[348]})
-var sVolumeStatistics_ProjectedSpam = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProjectedSpam", ID: &i_Volume, Type: smithy.ShapeTypeLong, Ext: &ext[349]})
-var sWarmupStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[351]})
-var sWarmupStatus_DONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[352]})
-var sCreateConfigurationSetEventDestinationRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[354]})
-var sCreateConfigurationSetEventDestinationRequest_EventDestinationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDestinationName", ID: &i_EventDestinationName, Type: smithy.ShapeTypeString, Ext: &ext[355]})
-var sCreateConfigurationSetEventDestinationRequest_EventDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDestination", ID: &iEventDestinationDefinition, Members: &mEventDestinationDefinition, Type: smithy.ShapeTypeStructure, Ext: &ext[356]})
-var sCreateConfigurationSetRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Type: smithy.ShapeTypeString, Ext: &ext[359]})
-var sCreateConfigurationSetRequest_TrackingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrackingOptions", ID: &iTrackingOptions, Members: &mTrackingOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[360]})
-var sCreateConfigurationSetRequest_DeliveryOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryOptions", ID: &iDeliveryOptions, Members: &mDeliveryOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[361]})
-var sCreateConfigurationSetRequest_ReputationOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReputationOptions", ID: &iReputationOptions, Members: &mReputationOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[362]})
-var sCreateConfigurationSetRequest_SendingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingOptions", ID: &iSendingOptions, Members: &mSendingOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[363]})
-var sCreateConfigurationSetRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[364]})
-var sCreateDedicatedIpPoolRequest_PoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolName", ID: &i_PoolName, Type: smithy.ShapeTypeString, Ext: &ext[367]})
-var sCreateDedicatedIpPoolRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[368]})
-var sCreateDeliverabilityTestReportRequest_ReportName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportName", ID: &i_ReportName, Type: smithy.ShapeTypeString, Ext: &ext[371]})
-var sCreateDeliverabilityTestReportRequest_FromEmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FromEmailAddress", ID: &i_EmailAddress, Type: smithy.ShapeTypeString, Ext: &ext[372]})
-var sCreateDeliverabilityTestReportRequest_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &iEmailContent, Members: &mEmailContent, Type: smithy.ShapeTypeStructure, Ext: &ext[373]})
-var sCreateDeliverabilityTestReportRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[374]})
-var sCreateDeliverabilityTestReportResponse_ReportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportId", ID: &i_ReportId, Type: smithy.ShapeTypeString, Ext: &ext[376]})
-var sCreateDeliverabilityTestReportResponse_DeliverabilityTestStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliverabilityTestStatus", ID: &iDeliverabilityTestStatus, Members: &mDeliverabilityTestStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[377]})
-var sCreateEmailIdentityRequest_EmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailIdentity", ID: &i_Identity, Type: smithy.ShapeTypeString, Ext: &ext[379]})
-var sCreateEmailIdentityRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[380]})
-var sCreateEmailIdentityResponse_IdentityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityType", ID: &iIdentityType, Members: &mIdentityType, Type: smithy.ShapeTypeEnum, Ext: &ext[382]})
-var sCreateEmailIdentityResponse_VerifiedForSendingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VerifiedForSendingStatus", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[383]})
-var sCreateEmailIdentityResponse_DkimAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DkimAttributes", ID: &iDkimAttributes, Members: &mDkimAttributes, Type: smithy.ShapeTypeStructure, Ext: &ext[384]})
-var sDeleteConfigurationSetEventDestinationRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[386]})
-var sDeleteConfigurationSetEventDestinationRequest_EventDestinationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDestinationName", ID: &i_EventDestinationName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[387]})
-var sDeleteConfigurationSetRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[390]})
-var sDeleteDedicatedIpPoolRequest_PoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolName", ID: &i_PoolName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[393]})
-var sDeleteEmailIdentityRequest_EmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailIdentity", ID: &i_Identity, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[396]})
-var sGetAccountResponse_SendQuota = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendQuota", ID: &iSendQuota, Members: &mSendQuota, Type: smithy.ShapeTypeStructure, Ext: &ext[400]})
-var sGetAccountResponse_SendingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[401]})
-var sGetAccountResponse_DedicatedIpAutoWarmupEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DedicatedIpAutoWarmupEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[402]})
-var sGetAccountResponse_EnforcementStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnforcementStatus", ID: &i_GeneralEnforcementStatus, Type: smithy.ShapeTypeString, Ext: &ext[403]})
-var sGetAccountResponse_ProductionAccessEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductionAccessEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[404]})
-var sGetBlacklistReportsRequest_BlacklistItemNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlacklistItemNames", ID: &i_BlacklistItemNames, Members: &m_BlacklistItemNames, Traits: &t47, Type: smithy.ShapeTypeList, Ext: &ext[406]})
-var sGetBlacklistReportsResponse_BlacklistReport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlacklistReport", ID: &i_BlacklistReport, Members: &m_BlacklistReport, Type: smithy.ShapeTypeMap, Ext: &ext[408]})
-var sGetConfigurationSetEventDestinationsRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[410]})
-var sGetConfigurationSetEventDestinationsResponse_EventDestinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDestinations", ID: &i_EventDestinations, Members: &m_EventDestinations, Type: smithy.ShapeTypeList, Ext: &ext[412]})
-var sGetConfigurationSetRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[414]})
-var sGetConfigurationSetResponse_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Type: smithy.ShapeTypeString, Ext: &ext[416]})
-var sGetConfigurationSetResponse_TrackingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrackingOptions", ID: &iTrackingOptions, Members: &mTrackingOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[417]})
-var sGetConfigurationSetResponse_DeliveryOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryOptions", ID: &iDeliveryOptions, Members: &mDeliveryOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[418]})
-var sGetConfigurationSetResponse_ReputationOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReputationOptions", ID: &iReputationOptions, Members: &mReputationOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[419]})
-var sGetConfigurationSetResponse_SendingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingOptions", ID: &iSendingOptions, Members: &mSendingOptions, Type: smithy.ShapeTypeStructure, Ext: &ext[420]})
-var sGetConfigurationSetResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[421]})
-var sGetDedicatedIpRequest_Ip = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ip", ID: &i_Ip, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[423]})
-var sGetDedicatedIpResponse_DedicatedIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DedicatedIp", ID: &iDedicatedIp, Members: &mDedicatedIp, Type: smithy.ShapeTypeStructure, Ext: &ext[425]})
-var sGetDedicatedIpsRequest_PoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolName", ID: &i_PoolName, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &ext[427]})
-var sGetDedicatedIpsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &ext[428]})
-var sGetDedicatedIpsRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_MaxItems, Traits: &t50, Type: smithy.ShapeTypeInteger, Ext: &ext[429]})
-var sGetDedicatedIpsResponse_DedicatedIps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DedicatedIps", ID: &i_DedicatedIpList, Members: &m_DedicatedIpList, Type: smithy.ShapeTypeList, Ext: &ext[431]})
-var sGetDedicatedIpsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[432]})
-var sGetDeliverabilityDashboardOptionsResponse_DashboardEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashboardEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[435]})
-var sGetDeliverabilityDashboardOptionsResponse_SubscriptionExpiryDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionExpiryDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[436]})
-var sGetDeliverabilityDashboardOptionsResponse_AccountStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountStatus", ID: &iDeliverabilityDashboardAccountStatus, Members: &mDeliverabilityDashboardAccountStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[437]})
-var sGetDeliverabilityDashboardOptionsResponse_ActiveSubscribedDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveSubscribedDomains", ID: &i_DomainDeliverabilityTrackingOptions, Members: &m_DomainDeliverabilityTrackingOptions, Type: smithy.ShapeTypeList, Ext: &ext[438]})
-var sGetDeliverabilityDashboardOptionsResponse_PendingExpirationSubscribedDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingExpirationSubscribedDomains", ID: &i_DomainDeliverabilityTrackingOptions, Members: &m_DomainDeliverabilityTrackingOptions, Type: smithy.ShapeTypeList, Ext: &ext[439]})
-var sGetDeliverabilityTestReportRequest_ReportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportId", ID: &i_ReportId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[441]})
-var sGetDeliverabilityTestReportResponse_DeliverabilityTestReport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliverabilityTestReport", ID: &iDeliverabilityTestReport, Members: &mDeliverabilityTestReport, Type: smithy.ShapeTypeStructure, Ext: &ext[443]})
-var sGetDeliverabilityTestReportResponse_OverallPlacement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OverallPlacement", ID: &iPlacementStatistics, Members: &mPlacementStatistics, Type: smithy.ShapeTypeStructure, Ext: &ext[444]})
-var sGetDeliverabilityTestReportResponse_IspPlacements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IspPlacements", ID: &i_IspPlacements, Members: &m_IspPlacements, Type: smithy.ShapeTypeList, Ext: &ext[445]})
-var sGetDeliverabilityTestReportResponse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_MessageContent, Type: smithy.ShapeTypeString, Ext: &ext[446]})
-var sGetDeliverabilityTestReportResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[447]})
-var sGetDomainDeliverabilityCampaignRequest_CampaignId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CampaignId", ID: &i_CampaignId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[449]})
-var sGetDomainDeliverabilityCampaignResponse_DomainDeliverabilityCampaign = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainDeliverabilityCampaign", ID: &iDomainDeliverabilityCampaign, Members: &mDomainDeliverabilityCampaign, Type: smithy.ShapeTypeStructure, Ext: &ext[451]})
-var sGetDomainStatisticsReportRequest_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_Identity, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[453]})
-var sGetDomainStatisticsReportRequest_StartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDate", ID: &i_Timestamp, Traits: &t51, Type: smithy.ShapeTypeTimestamp, Ext: &ext[454]})
-var sGetDomainStatisticsReportRequest_EndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndDate", ID: &i_Timestamp, Traits: &t52, Type: smithy.ShapeTypeTimestamp, Ext: &ext[455]})
-var sGetDomainStatisticsReportResponse_OverallVolume = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OverallVolume", ID: &iOverallVolume, Members: &mOverallVolume, Type: smithy.ShapeTypeStructure, Ext: &ext[457]})
-var sGetDomainStatisticsReportResponse_DailyVolumes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DailyVolumes", ID: &i_DailyVolumes, Members: &m_DailyVolumes, Type: smithy.ShapeTypeList, Ext: &ext[458]})
-var sGetEmailIdentityRequest_EmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailIdentity", ID: &i_Identity, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[460]})
-var sGetEmailIdentityResponse_IdentityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityType", ID: &iIdentityType, Members: &mIdentityType, Type: smithy.ShapeTypeEnum, Ext: &ext[462]})
-var sGetEmailIdentityResponse_FeedbackForwardingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeedbackForwardingStatus", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[463]})
-var sGetEmailIdentityResponse_VerifiedForSendingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VerifiedForSendingStatus", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[464]})
-var sGetEmailIdentityResponse_DkimAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DkimAttributes", ID: &iDkimAttributes, Members: &mDkimAttributes, Type: smithy.ShapeTypeStructure, Ext: &ext[465]})
-var sGetEmailIdentityResponse_MailFromAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MailFromAttributes", ID: &iMailFromAttributes, Members: &mMailFromAttributes, Type: smithy.ShapeTypeStructure, Ext: &ext[466]})
-var sGetEmailIdentityResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[467]})
-var sListConfigurationSetsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &ext[469]})
-var sListConfigurationSetsRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_MaxItems, Traits: &t50, Type: smithy.ShapeTypeInteger, Ext: &ext[470]})
-var sListConfigurationSetsResponse_ConfigurationSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSets", ID: &i_ConfigurationSetNameList, Members: &m_ConfigurationSetNameList, Type: smithy.ShapeTypeList, Ext: &ext[472]})
-var sListConfigurationSetsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[473]})
-var sListDedicatedIpPoolsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &ext[475]})
-var sListDedicatedIpPoolsRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_MaxItems, Traits: &t50, Type: smithy.ShapeTypeInteger, Ext: &ext[476]})
-var sListDedicatedIpPoolsResponse_DedicatedIpPools = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DedicatedIpPools", ID: &i_ListOfDedicatedIpPools, Members: &m_ListOfDedicatedIpPools, Type: smithy.ShapeTypeList, Ext: &ext[478]})
-var sListDedicatedIpPoolsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[479]})
-var sListDeliverabilityTestReportsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &ext[481]})
-var sListDeliverabilityTestReportsRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_MaxItems, Traits: &t50, Type: smithy.ShapeTypeInteger, Ext: &ext[482]})
-var sListDeliverabilityTestReportsResponse_DeliverabilityTestReports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliverabilityTestReports", ID: &i_DeliverabilityTestReports, Members: &m_DeliverabilityTestReports, Type: smithy.ShapeTypeList, Ext: &ext[484]})
-var sListDeliverabilityTestReportsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[485]})
-var sListDomainDeliverabilityCampaignsRequest_StartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDate", ID: &i_Timestamp, Traits: &t51, Type: smithy.ShapeTypeTimestamp, Ext: &ext[487]})
-var sListDomainDeliverabilityCampaignsRequest_EndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndDate", ID: &i_Timestamp, Traits: &t52, Type: smithy.ShapeTypeTimestamp, Ext: &ext[488]})
-var sListDomainDeliverabilityCampaignsRequest_SubscribedDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscribedDomain", ID: &i_Domain, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[489]})
-var sListDomainDeliverabilityCampaignsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &ext[490]})
-var sListDomainDeliverabilityCampaignsRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_MaxItems, Traits: &t50, Type: smithy.ShapeTypeInteger, Ext: &ext[491]})
-var sListDomainDeliverabilityCampaignsResponse_DomainDeliverabilityCampaigns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainDeliverabilityCampaigns", ID: &i_DomainDeliverabilityCampaignList, Members: &m_DomainDeliverabilityCampaignList, Type: smithy.ShapeTypeList, Ext: &ext[493]})
-var sListDomainDeliverabilityCampaignsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[494]})
-var sListEmailIdentitiesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &ext[496]})
-var sListEmailIdentitiesRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_MaxItems, Traits: &t50, Type: smithy.ShapeTypeInteger, Ext: &ext[497]})
-var sListEmailIdentitiesResponse_EmailIdentities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailIdentities", ID: &i_IdentityInfoList, Members: &m_IdentityInfoList, Type: smithy.ShapeTypeList, Ext: &ext[499]})
-var sListEmailIdentitiesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[500]})
-var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &ext[502]})
-var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[504]})
-var sPutAccountDedicatedIpWarmupAttributesRequest_AutoWarmupEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoWarmupEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[506]})
-var sPutAccountSendingAttributesRequest_SendingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[509]})
-var sPutConfigurationSetDeliveryOptionsRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[512]})
-var sPutConfigurationSetDeliveryOptionsRequest_TlsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsPolicy", ID: &iTlsPolicy, Members: &mTlsPolicy, Type: smithy.ShapeTypeEnum, Ext: &ext[513]})
-var sPutConfigurationSetDeliveryOptionsRequest_SendingPoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingPoolName", ID: &i_SendingPoolName, Type: smithy.ShapeTypeString, Ext: &ext[514]})
-var sPutConfigurationSetReputationOptionsRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[517]})
-var sPutConfigurationSetReputationOptionsRequest_ReputationMetricsEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReputationMetricsEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[518]})
-var sPutConfigurationSetSendingOptionsRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[521]})
-var sPutConfigurationSetSendingOptionsRequest_SendingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[522]})
-var sPutConfigurationSetTrackingOptionsRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[525]})
-var sPutConfigurationSetTrackingOptionsRequest_CustomRedirectDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomRedirectDomain", ID: &i_CustomRedirectDomain, Type: smithy.ShapeTypeString, Ext: &ext[526]})
-var sPutDedicatedIpInPoolRequest_Ip = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ip", ID: &i_Ip, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[529]})
-var sPutDedicatedIpInPoolRequest_DestinationPoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationPoolName", ID: &i_PoolName, Type: smithy.ShapeTypeString, Ext: &ext[530]})
-var sPutDedicatedIpWarmupAttributesRequest_Ip = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ip", ID: &i_Ip, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[533]})
-var sPutDedicatedIpWarmupAttributesRequest_WarmupPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WarmupPercentage", ID: &i_Percentage100Wrapper, Type: smithy.ShapeTypeInteger, Ext: &ext[534]})
-var sPutDeliverabilityDashboardOptionRequest_DashboardEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashboardEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[537]})
-var sPutDeliverabilityDashboardOptionRequest_SubscribedDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscribedDomains", ID: &i_DomainDeliverabilityTrackingOptions, Members: &m_DomainDeliverabilityTrackingOptions, Type: smithy.ShapeTypeList, Ext: &ext[538]})
-var sPutEmailIdentityDkimAttributesRequest_EmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailIdentity", ID: &i_Identity, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[541]})
-var sPutEmailIdentityDkimAttributesRequest_SigningEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[542]})
-var sPutEmailIdentityFeedbackAttributesRequest_EmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailIdentity", ID: &i_Identity, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[545]})
-var sPutEmailIdentityFeedbackAttributesRequest_EmailForwardingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailForwardingEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ext[546]})
-var sPutEmailIdentityMailFromAttributesRequest_EmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailIdentity", ID: &i_Identity, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[549]})
-var sPutEmailIdentityMailFromAttributesRequest_MailFromDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MailFromDomain", ID: &i_MailFromDomainName, Type: smithy.ShapeTypeString, Ext: &ext[550]})
-var sPutEmailIdentityMailFromAttributesRequest_BehaviorOnMxFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BehaviorOnMxFailure", ID: &iBehaviorOnMxFailure, Members: &mBehaviorOnMxFailure, Type: smithy.ShapeTypeEnum, Ext: &ext[551]})
-var sSendEmailRequest_FromEmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FromEmailAddress", ID: &i_EmailAddress, Type: smithy.ShapeTypeString, Ext: &ext[554]})
-var sSendEmailRequest_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeStructure, Ext: &ext[555]})
-var sSendEmailRequest_ReplyToAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplyToAddresses", ID: &i_EmailAddressList, Members: &m_EmailAddressList, Type: smithy.ShapeTypeList, Ext: &ext[556]})
-var sSendEmailRequest_FeedbackForwardingEmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeedbackForwardingEmailAddress", ID: &i_EmailAddress, Type: smithy.ShapeTypeString, Ext: &ext[557]})
-var sSendEmailRequest_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &iEmailContent, Members: &mEmailContent, Type: smithy.ShapeTypeStructure, Ext: &ext[558]})
-var sSendEmailRequest_EmailTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailTags", ID: &i_MessageTagList, Members: &m_MessageTagList, Type: smithy.ShapeTypeList, Ext: &ext[559]})
-var sSendEmailRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Type: smithy.ShapeTypeString, Ext: &ext[560]})
-var sSendEmailResponse_MessageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageId", ID: &i_OutboundMessageId, Type: smithy.ShapeTypeString, Ext: &ext[562]})
-var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[564]})
-var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &ext[565]})
-var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &ext[568]})
-var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t54, Type: smithy.ShapeTypeList, Ext: &ext[569]})
-var sUpdateConfigurationSetEventDestinationRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[572]})
-var sUpdateConfigurationSetEventDestinationRequest_EventDestinationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDestinationName", ID: &i_EventDestinationName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ext[573]})
-var sUpdateConfigurationSetEventDestinationRequest_EventDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDestination", ID: &iEventDestinationDefinition, Members: &mEventDestinationDefinition, Type: smithy.ShapeTypeStructure, Ext: &ext[574]})
+var sAccountSuspendedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAccountSuspendedException_message})
+var sAlreadyExistsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eAlreadyExistsException_message})
+var sBadRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eBadRequestException_message})
+var sBehaviorOnMxFailure_USE_DEFAULT_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USE_DEFAULT_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBehaviorOnMxFailure_USE_DEFAULT_VALUE})
+var sBehaviorOnMxFailure_REJECT_MESSAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECT_MESSAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eBehaviorOnMxFailure_REJECT_MESSAGE})
+var s_BlacklistEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBlacklistEntry, Members: &mBlacklistEntry, Type: smithy.ShapeTypeStructure, Ext: &e_BlacklistEntries_member})
+var sBlacklistEntry_RblName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RblName", ID: &i_RblName, Type: smithy.ShapeTypeString, Ext: &eBlacklistEntry_RblName})
+var sBlacklistEntry_ListingTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListingTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eBlacklistEntry_ListingTime})
+var sBlacklistEntry_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_BlacklistingDescription, Type: smithy.ShapeTypeString, Ext: &eBlacklistEntry_Description})
+var s_BlacklistItemNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BlacklistItemName, Type: smithy.ShapeTypeString, Ext: &e_BlacklistItemNames_member})
+var s_BlacklistReport_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_BlacklistItemName, Type: smithy.ShapeTypeString, Ext: &e_BlacklistReport_key})
+var s_BlacklistReport_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_BlacklistEntries, Members: &m_BlacklistEntries, Type: smithy.ShapeTypeList, Ext: &e_BlacklistReport_value})
+var sBody_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &iContent, Members: &mContent, Type: smithy.ShapeTypeStructure, Ext: &eBody_Text})
+var sBody_Html = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Html", ID: &iContent, Members: &mContent, Type: smithy.ShapeTypeStructure, Ext: &eBody_Html})
+var sCloudWatchDestination_DimensionConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DimensionConfigurations", ID: &i_CloudWatchDimensionConfigurations, Members: &m_CloudWatchDimensionConfigurations, Type: smithy.ShapeTypeList, Ext: &eCloudWatchDestination_DimensionConfigurations})
+var sCloudWatchDimensionConfiguration_DimensionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DimensionName", ID: &i_DimensionName, Type: smithy.ShapeTypeString, Ext: &eCloudWatchDimensionConfiguration_DimensionName})
+var sCloudWatchDimensionConfiguration_DimensionValueSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DimensionValueSource", ID: &iDimensionValueSource, Members: &mDimensionValueSource, Type: smithy.ShapeTypeEnum, Ext: &eCloudWatchDimensionConfiguration_DimensionValueSource})
+var sCloudWatchDimensionConfiguration_DefaultDimensionValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultDimensionValue", ID: &i_DefaultDimensionValue, Type: smithy.ShapeTypeString, Ext: &eCloudWatchDimensionConfiguration_DefaultDimensionValue})
+var s_CloudWatchDimensionConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCloudWatchDimensionConfiguration, Members: &mCloudWatchDimensionConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_CloudWatchDimensionConfigurations_member})
+var sConcurrentModificationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eConcurrentModificationException_message})
+var s_ConfigurationSetNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ConfigurationSetName, Type: smithy.ShapeTypeString, Ext: &e_ConfigurationSetNameList_member})
+var sContent_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &i_MessageData, Type: smithy.ShapeTypeString, Ext: &eContent_Data})
+var sContent_Charset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Charset", ID: &i_Charset, Type: smithy.ShapeTypeString, Ext: &eContent_Charset})
+var sDailyVolume_StartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDailyVolume_StartDate})
+var sDailyVolume_VolumeStatistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeStatistics", ID: &iVolumeStatistics, Members: &mVolumeStatistics, Type: smithy.ShapeTypeStructure, Ext: &eDailyVolume_VolumeStatistics})
+var sDailyVolume_DomainIspPlacements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainIspPlacements", ID: &i_DomainIspPlacements, Members: &m_DomainIspPlacements, Type: smithy.ShapeTypeList, Ext: &eDailyVolume_DomainIspPlacements})
+var s_DailyVolumes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDailyVolume, Members: &mDailyVolume, Type: smithy.ShapeTypeStructure, Ext: &e_DailyVolumes_member})
+var sDedicatedIp_Ip = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ip", ID: &i_Ip, Type: smithy.ShapeTypeString, Ext: &eDedicatedIp_Ip})
+var sDedicatedIp_WarmupStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WarmupStatus", ID: &iWarmupStatus, Members: &mWarmupStatus, Type: smithy.ShapeTypeEnum, Ext: &eDedicatedIp_WarmupStatus})
+var sDedicatedIp_WarmupPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WarmupPercentage", ID: &i_Percentage100Wrapper, Type: smithy.ShapeTypeInteger, Ext: &eDedicatedIp_WarmupPercentage})
+var sDedicatedIp_PoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolName", ID: &i_PoolName, Type: smithy.ShapeTypeString, Ext: &eDedicatedIp_PoolName})
+var s_DedicatedIpList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDedicatedIp, Members: &mDedicatedIp, Type: smithy.ShapeTypeStructure, Ext: &e_DedicatedIpList_member})
+var sDeliverabilityDashboardAccountStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliverabilityDashboardAccountStatus_ACTIVE})
+var sDeliverabilityDashboardAccountStatus_PENDING_EXPIRATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_EXPIRATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliverabilityDashboardAccountStatus_PENDING_EXPIRATION})
+var sDeliverabilityDashboardAccountStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliverabilityDashboardAccountStatus_DISABLED})
+var sDeliverabilityTestReport_ReportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportId", ID: &i_ReportId, Type: smithy.ShapeTypeString, Ext: &eDeliverabilityTestReport_ReportId})
+var sDeliverabilityTestReport_ReportName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportName", ID: &i_ReportName, Type: smithy.ShapeTypeString, Ext: &eDeliverabilityTestReport_ReportName})
+var sDeliverabilityTestReport_Subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subject", ID: &i_DeliverabilityTestSubject, Type: smithy.ShapeTypeString, Ext: &eDeliverabilityTestReport_Subject})
+var sDeliverabilityTestReport_FromEmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FromEmailAddress", ID: &i_EmailAddress, Type: smithy.ShapeTypeString, Ext: &eDeliverabilityTestReport_FromEmailAddress})
+var sDeliverabilityTestReport_CreateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDeliverabilityTestReport_CreateDate})
+var sDeliverabilityTestReport_DeliverabilityTestStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliverabilityTestStatus", ID: &iDeliverabilityTestStatus, Members: &mDeliverabilityTestStatus, Type: smithy.ShapeTypeEnum, Ext: &eDeliverabilityTestReport_DeliverabilityTestStatus})
+var s_DeliverabilityTestReports_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeliverabilityTestReport, Members: &mDeliverabilityTestReport, Type: smithy.ShapeTypeStructure, Ext: &e_DeliverabilityTestReports_member})
+var sDeliverabilityTestStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliverabilityTestStatus_IN_PROGRESS})
+var sDeliverabilityTestStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDeliverabilityTestStatus_COMPLETED})
+var sDeliveryOptions_TlsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsPolicy", ID: &iTlsPolicy, Members: &mTlsPolicy, Type: smithy.ShapeTypeEnum, Ext: &eDeliveryOptions_TlsPolicy})
+var sDeliveryOptions_SendingPoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingPoolName", ID: &i_PoolName, Type: smithy.ShapeTypeString, Ext: &eDeliveryOptions_SendingPoolName})
+var sDestination_ToAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ToAddresses", ID: &i_EmailAddressList, Members: &m_EmailAddressList, Type: smithy.ShapeTypeList, Ext: &eDestination_ToAddresses})
+var sDestination_CcAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CcAddresses", ID: &i_EmailAddressList, Members: &m_EmailAddressList, Type: smithy.ShapeTypeList, Ext: &eDestination_CcAddresses})
+var sDestination_BccAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BccAddresses", ID: &i_EmailAddressList, Members: &m_EmailAddressList, Type: smithy.ShapeTypeList, Ext: &eDestination_BccAddresses})
+var sDimensionValueSource_MESSAGE_TAG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MESSAGE_TAG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimensionValueSource_MESSAGE_TAG})
+var sDimensionValueSource_EMAIL_HEADER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMAIL_HEADER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimensionValueSource_EMAIL_HEADER})
+var sDimensionValueSource_LINK_TAG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINK_TAG", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDimensionValueSource_LINK_TAG})
+var sDkimAttributes_SigningEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &eDkimAttributes_SigningEnabled})
+var sDkimAttributes_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iDkimStatus, Members: &mDkimStatus, Type: smithy.ShapeTypeEnum, Ext: &eDkimAttributes_Status})
+var sDkimAttributes_Tokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tokens", ID: &i_DnsTokenList, Members: &m_DnsTokenList, Type: smithy.ShapeTypeList, Ext: &eDkimAttributes_Tokens})
+var sDkimStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDkimStatus_PENDING})
+var sDkimStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDkimStatus_SUCCESS})
+var sDkimStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDkimStatus_FAILED})
+var sDkimStatus_TEMPORARY_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEMPORARY_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDkimStatus_TEMPORARY_FAILURE})
+var sDkimStatus_NOT_STARTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_STARTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eDkimStatus_NOT_STARTED})
+var s_DnsTokenList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DnsToken, Type: smithy.ShapeTypeString, Ext: &e_DnsTokenList_member})
+var sDomainDeliverabilityCampaign_CampaignId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CampaignId", ID: &i_CampaignId, Type: smithy.ShapeTypeString, Ext: &eDomainDeliverabilityCampaign_CampaignId})
+var sDomainDeliverabilityCampaign_ImageUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageUrl", ID: &i_ImageUrl, Type: smithy.ShapeTypeString, Ext: &eDomainDeliverabilityCampaign_ImageUrl})
+var sDomainDeliverabilityCampaign_Subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subject", ID: &i_Subject, Type: smithy.ShapeTypeString, Ext: &eDomainDeliverabilityCampaign_Subject})
+var sDomainDeliverabilityCampaign_FromAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FromAddress", ID: &i_Identity, Type: smithy.ShapeTypeString, Ext: &eDomainDeliverabilityCampaign_FromAddress})
+var sDomainDeliverabilityCampaign_SendingIps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingIps", ID: &i_IpList, Members: &m_IpList, Type: smithy.ShapeTypeList, Ext: &eDomainDeliverabilityCampaign_SendingIps})
+var sDomainDeliverabilityCampaign_FirstSeenDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirstSeenDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDomainDeliverabilityCampaign_FirstSeenDateTime})
+var sDomainDeliverabilityCampaign_LastSeenDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastSeenDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDomainDeliverabilityCampaign_LastSeenDateTime})
+var sDomainDeliverabilityCampaign_InboxCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboxCount", ID: &i_Volume, Type: smithy.ShapeTypeLong, Ext: &eDomainDeliverabilityCampaign_InboxCount})
+var sDomainDeliverabilityCampaign_SpamCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpamCount", ID: &i_Volume, Type: smithy.ShapeTypeLong, Ext: &eDomainDeliverabilityCampaign_SpamCount})
+var sDomainDeliverabilityCampaign_ReadRate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadRate", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &eDomainDeliverabilityCampaign_ReadRate})
+var sDomainDeliverabilityCampaign_DeleteRate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteRate", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &eDomainDeliverabilityCampaign_DeleteRate})
+var sDomainDeliverabilityCampaign_ReadDeleteRate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadDeleteRate", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &eDomainDeliverabilityCampaign_ReadDeleteRate})
+var sDomainDeliverabilityCampaign_ProjectedVolume = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProjectedVolume", ID: &i_Volume, Type: smithy.ShapeTypeLong, Ext: &eDomainDeliverabilityCampaign_ProjectedVolume})
+var sDomainDeliverabilityCampaign_Esps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Esps", ID: &i_Esps, Members: &m_Esps, Type: smithy.ShapeTypeList, Ext: &eDomainDeliverabilityCampaign_Esps})
+var s_DomainDeliverabilityCampaignList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainDeliverabilityCampaign, Members: &mDomainDeliverabilityCampaign, Type: smithy.ShapeTypeStructure, Ext: &e_DomainDeliverabilityCampaignList_member})
+var sDomainDeliverabilityTrackingOption_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_Domain, Type: smithy.ShapeTypeString, Ext: &eDomainDeliverabilityTrackingOption_Domain})
+var sDomainDeliverabilityTrackingOption_SubscriptionStartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionStartDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eDomainDeliverabilityTrackingOption_SubscriptionStartDate})
+var sDomainDeliverabilityTrackingOption_InboxPlacementTrackingOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboxPlacementTrackingOption", ID: &iInboxPlacementTrackingOption, Members: &mInboxPlacementTrackingOption, Type: smithy.ShapeTypeStructure, Ext: &eDomainDeliverabilityTrackingOption_InboxPlacementTrackingOption})
+var s_DomainDeliverabilityTrackingOptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainDeliverabilityTrackingOption, Members: &mDomainDeliverabilityTrackingOption, Type: smithy.ShapeTypeStructure, Ext: &e_DomainDeliverabilityTrackingOptions_member})
+var sDomainIspPlacement_IspName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IspName", ID: &i_IspName, Type: smithy.ShapeTypeString, Ext: &eDomainIspPlacement_IspName})
+var sDomainIspPlacement_InboxRawCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboxRawCount", ID: &i_Volume, Type: smithy.ShapeTypeLong, Ext: &eDomainIspPlacement_InboxRawCount})
+var sDomainIspPlacement_SpamRawCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpamRawCount", ID: &i_Volume, Type: smithy.ShapeTypeLong, Ext: &eDomainIspPlacement_SpamRawCount})
+var sDomainIspPlacement_InboxPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboxPercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &eDomainIspPlacement_InboxPercentage})
+var sDomainIspPlacement_SpamPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpamPercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &eDomainIspPlacement_SpamPercentage})
+var s_DomainIspPlacements_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainIspPlacement, Members: &mDomainIspPlacement, Type: smithy.ShapeTypeStructure, Ext: &e_DomainIspPlacements_member})
+var s_EmailAddressList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EmailAddress, Type: smithy.ShapeTypeString, Ext: &e_EmailAddressList_member})
+var sEmailContent_Simple = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Simple", ID: &iMessage, Members: &mMessage, Type: smithy.ShapeTypeStructure, Ext: &eEmailContent_Simple})
+var sEmailContent_Raw = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Raw", ID: &iRawMessage, Members: &mRawMessage, Type: smithy.ShapeTypeStructure, Ext: &eEmailContent_Raw})
+var sEmailContent_Template = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Template", ID: &iTemplate, Members: &mTemplate, Type: smithy.ShapeTypeStructure, Ext: &eEmailContent_Template})
+var s_Esps_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Esp, Type: smithy.ShapeTypeString, Ext: &e_Esps_member})
+var sEventDestination_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventDestinationName, Type: smithy.ShapeTypeString, Ext: &eEventDestination_Name})
+var sEventDestination_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &eEventDestination_Enabled})
+var sEventDestination_MatchingEventTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchingEventTypes", ID: &i_EventTypes, Members: &m_EventTypes, Type: smithy.ShapeTypeList, Ext: &eEventDestination_MatchingEventTypes})
+var sEventDestination_KinesisFirehoseDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisFirehoseDestination", ID: &iKinesisFirehoseDestination, Members: &mKinesisFirehoseDestination, Type: smithy.ShapeTypeStructure, Ext: &eEventDestination_KinesisFirehoseDestination})
+var sEventDestination_CloudWatchDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchDestination", ID: &iCloudWatchDestination, Members: &mCloudWatchDestination, Type: smithy.ShapeTypeStructure, Ext: &eEventDestination_CloudWatchDestination})
+var sEventDestination_SnsDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsDestination", ID: &iSnsDestination, Members: &mSnsDestination, Type: smithy.ShapeTypeStructure, Ext: &eEventDestination_SnsDestination})
+var sEventDestination_PinpointDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PinpointDestination", ID: &iPinpointDestination, Members: &mPinpointDestination, Type: smithy.ShapeTypeStructure, Ext: &eEventDestination_PinpointDestination})
+var sEventDestinationDefinition_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &eEventDestinationDefinition_Enabled})
+var sEventDestinationDefinition_MatchingEventTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchingEventTypes", ID: &i_EventTypes, Members: &m_EventTypes, Type: smithy.ShapeTypeList, Ext: &eEventDestinationDefinition_MatchingEventTypes})
+var sEventDestinationDefinition_KinesisFirehoseDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisFirehoseDestination", ID: &iKinesisFirehoseDestination, Members: &mKinesisFirehoseDestination, Type: smithy.ShapeTypeStructure, Ext: &eEventDestinationDefinition_KinesisFirehoseDestination})
+var sEventDestinationDefinition_CloudWatchDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchDestination", ID: &iCloudWatchDestination, Members: &mCloudWatchDestination, Type: smithy.ShapeTypeStructure, Ext: &eEventDestinationDefinition_CloudWatchDestination})
+var sEventDestinationDefinition_SnsDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsDestination", ID: &iSnsDestination, Members: &mSnsDestination, Type: smithy.ShapeTypeStructure, Ext: &eEventDestinationDefinition_SnsDestination})
+var sEventDestinationDefinition_PinpointDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PinpointDestination", ID: &iPinpointDestination, Members: &mPinpointDestination, Type: smithy.ShapeTypeStructure, Ext: &eEventDestinationDefinition_PinpointDestination})
+var s_EventDestinations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventDestination, Members: &mEventDestination, Type: smithy.ShapeTypeStructure, Ext: &e_EventDestinations_member})
+var sEventType_SEND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventType_SEND})
+var sEventType_REJECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventType_REJECT})
+var sEventType_BOUNCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOUNCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventType_BOUNCE})
+var sEventType_COMPLAINT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLAINT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventType_COMPLAINT})
+var sEventType_DELIVERY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELIVERY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventType_DELIVERY})
+var sEventType_OPEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventType_OPEN})
+var sEventType_CLICK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLICK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventType_CLICK})
+var sEventType_RENDERING_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RENDERING_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eEventType_RENDERING_FAILURE})
+var s_EventTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeEnum, Ext: &e_EventTypes_member})
+var sIdentityInfo_IdentityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityType", ID: &iIdentityType, Members: &mIdentityType, Type: smithy.ShapeTypeEnum, Ext: &eIdentityInfo_IdentityType})
+var sIdentityInfo_IdentityName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityName", ID: &i_Identity, Type: smithy.ShapeTypeString, Ext: &eIdentityInfo_IdentityName})
+var sIdentityInfo_SendingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &eIdentityInfo_SendingEnabled})
+var s_IdentityInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIdentityInfo, Members: &mIdentityInfo, Type: smithy.ShapeTypeStructure, Ext: &e_IdentityInfoList_member})
+var sIdentityType_EMAIL_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMAIL_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIdentityType_EMAIL_ADDRESS})
+var sIdentityType_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIdentityType_DOMAIN})
+var sIdentityType_MANAGED_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANAGED_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eIdentityType_MANAGED_DOMAIN})
+var sInboxPlacementTrackingOption_Global = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Global", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &eInboxPlacementTrackingOption_Global})
+var sInboxPlacementTrackingOption_TrackedIsps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrackedIsps", ID: &i_IspNameList, Members: &m_IspNameList, Type: smithy.ShapeTypeList, Ext: &eInboxPlacementTrackingOption_TrackedIsps})
+var s_IpList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Ip, Type: smithy.ShapeTypeString, Ext: &e_IpList_member})
+var s_IspNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_IspName, Type: smithy.ShapeTypeString, Ext: &e_IspNameList_member})
+var sIspPlacement_IspName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IspName", ID: &i_IspName, Type: smithy.ShapeTypeString, Ext: &eIspPlacement_IspName})
+var sIspPlacement_PlacementStatistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlacementStatistics", ID: &iPlacementStatistics, Members: &mPlacementStatistics, Type: smithy.ShapeTypeStructure, Ext: &eIspPlacement_PlacementStatistics})
+var s_IspPlacements_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIspPlacement, Members: &mIspPlacement, Type: smithy.ShapeTypeStructure, Ext: &e_IspPlacements_member})
+var sKinesisFirehoseDestination_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eKinesisFirehoseDestination_IamRoleArn})
+var sKinesisFirehoseDestination_DeliveryStreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStreamArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eKinesisFirehoseDestination_DeliveryStreamArn})
+var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eLimitExceededException_message})
+var s_ListOfDedicatedIpPools_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PoolName, Type: smithy.ShapeTypeString, Ext: &e_ListOfDedicatedIpPools_member})
+var sMailFromAttributes_MailFromDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MailFromDomain", ID: &i_MailFromDomainName, Type: smithy.ShapeTypeString, Ext: &eMailFromAttributes_MailFromDomain})
+var sMailFromAttributes_MailFromDomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MailFromDomainStatus", ID: &iMailFromDomainStatus, Members: &mMailFromDomainStatus, Type: smithy.ShapeTypeEnum, Ext: &eMailFromAttributes_MailFromDomainStatus})
+var sMailFromAttributes_BehaviorOnMxFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BehaviorOnMxFailure", ID: &iBehaviorOnMxFailure, Members: &mBehaviorOnMxFailure, Type: smithy.ShapeTypeEnum, Ext: &eMailFromAttributes_BehaviorOnMxFailure})
+var sMailFromDomainNotVerifiedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eMailFromDomainNotVerifiedException_message})
+var sMailFromDomainStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMailFromDomainStatus_PENDING})
+var sMailFromDomainStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMailFromDomainStatus_SUCCESS})
+var sMailFromDomainStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMailFromDomainStatus_FAILED})
+var sMailFromDomainStatus_TEMPORARY_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEMPORARY_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eMailFromDomainStatus_TEMPORARY_FAILURE})
+var sMessage_Subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subject", ID: &iContent, Members: &mContent, Type: smithy.ShapeTypeStructure, Ext: &eMessage_Subject})
+var sMessage_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &iBody, Members: &mBody, Type: smithy.ShapeTypeStructure, Ext: &eMessage_Body})
+var sMessageRejected_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eMessageRejected_message})
+var sMessageTag_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_MessageTagName, Type: smithy.ShapeTypeString, Ext: &eMessageTag_Name})
+var sMessageTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_MessageTagValue, Type: smithy.ShapeTypeString, Ext: &eMessageTag_Value})
+var s_MessageTagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMessageTag, Members: &mMessageTag, Type: smithy.ShapeTypeStructure, Ext: &e_MessageTagList_member})
+var sNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eNotFoundException_message})
+var sOverallVolume_VolumeStatistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeStatistics", ID: &iVolumeStatistics, Members: &mVolumeStatistics, Type: smithy.ShapeTypeStructure, Ext: &eOverallVolume_VolumeStatistics})
+var sOverallVolume_ReadRatePercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadRatePercent", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &eOverallVolume_ReadRatePercent})
+var sOverallVolume_DomainIspPlacements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainIspPlacements", ID: &i_DomainIspPlacements, Members: &m_DomainIspPlacements, Type: smithy.ShapeTypeList, Ext: &eOverallVolume_DomainIspPlacements})
+var sPinpointDestination_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ePinpointDestination_ApplicationArn})
+var sPlacementStatistics_InboxPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboxPercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &ePlacementStatistics_InboxPercentage})
+var sPlacementStatistics_SpamPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpamPercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &ePlacementStatistics_SpamPercentage})
+var sPlacementStatistics_MissingPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MissingPercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &ePlacementStatistics_MissingPercentage})
+var sPlacementStatistics_SpfPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpfPercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &ePlacementStatistics_SpfPercentage})
+var sPlacementStatistics_DkimPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DkimPercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble, Ext: &ePlacementStatistics_DkimPercentage})
+var sRawMessage_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &i_RawMessageData, Type: smithy.ShapeTypeBlob, Ext: &eRawMessage_Data})
+var sReputationOptions_ReputationMetricsEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReputationMetricsEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &eReputationOptions_ReputationMetricsEnabled})
+var sReputationOptions_LastFreshStart = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastFreshStart", ID: &i_LastFreshStart, Type: smithy.ShapeTypeTimestamp, Ext: &eReputationOptions_LastFreshStart})
+var sSendingOptions_SendingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &eSendingOptions_SendingEnabled})
+var sSendingPausedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eSendingPausedException_message})
+var sSendQuota_Max24HourSend = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Max24HourSend", ID: &i_Max24HourSend, Type: smithy.ShapeTypeDouble, Ext: &eSendQuota_Max24HourSend})
+var sSendQuota_MaxSendRate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxSendRate", ID: &i_MaxSendRate, Type: smithy.ShapeTypeDouble, Ext: &eSendQuota_MaxSendRate})
+var sSendQuota_SentLast24Hours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SentLast24Hours", ID: &i_SentLast24Hours, Type: smithy.ShapeTypeDouble, Ext: &eSendQuota_SentLast24Hours})
+var sSnsDestination_TopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eSnsDestination_TopicArn})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_TagList_member})
+var sTemplate_TemplateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateArn", ID: &i_TemplateArn, Type: smithy.ShapeTypeString, Ext: &eTemplate_TemplateArn})
+var sTemplate_TemplateData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateData", ID: &i_TemplateData, Type: smithy.ShapeTypeString, Ext: &eTemplate_TemplateData})
+var sTlsPolicy_REQUIRE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUIRE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTlsPolicy_REQUIRE})
+var sTlsPolicy_OPTIONAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPTIONAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eTlsPolicy_OPTIONAL})
+var sTooManyRequestsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eTooManyRequestsException_message})
+var sTrackingOptions_CustomRedirectDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomRedirectDomain", ID: &i_CustomRedirectDomain, Type: smithy.ShapeTypeString, Ext: &eTrackingOptions_CustomRedirectDomain})
+var sVolumeStatistics_InboxRawCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboxRawCount", ID: &i_Volume, Type: smithy.ShapeTypeLong, Ext: &eVolumeStatistics_InboxRawCount})
+var sVolumeStatistics_SpamRawCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpamRawCount", ID: &i_Volume, Type: smithy.ShapeTypeLong, Ext: &eVolumeStatistics_SpamRawCount})
+var sVolumeStatistics_ProjectedInbox = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProjectedInbox", ID: &i_Volume, Type: smithy.ShapeTypeLong, Ext: &eVolumeStatistics_ProjectedInbox})
+var sVolumeStatistics_ProjectedSpam = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProjectedSpam", ID: &i_Volume, Type: smithy.ShapeTypeLong, Ext: &eVolumeStatistics_ProjectedSpam})
+var sWarmupStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWarmupStatus_IN_PROGRESS})
+var sWarmupStatus_DONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DONE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eWarmupStatus_DONE})
+var sCreateConfigurationSetEventDestinationRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eCreateConfigurationSetEventDestinationRequest_ConfigurationSetName})
+var sCreateConfigurationSetEventDestinationRequest_EventDestinationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDestinationName", ID: &i_EventDestinationName, Type: smithy.ShapeTypeString, Ext: &eCreateConfigurationSetEventDestinationRequest_EventDestinationName})
+var sCreateConfigurationSetEventDestinationRequest_EventDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDestination", ID: &iEventDestinationDefinition, Members: &mEventDestinationDefinition, Type: smithy.ShapeTypeStructure, Ext: &eCreateConfigurationSetEventDestinationRequest_EventDestination})
+var sCreateConfigurationSetRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Type: smithy.ShapeTypeString, Ext: &eCreateConfigurationSetRequest_ConfigurationSetName})
+var sCreateConfigurationSetRequest_TrackingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrackingOptions", ID: &iTrackingOptions, Members: &mTrackingOptions, Type: smithy.ShapeTypeStructure, Ext: &eCreateConfigurationSetRequest_TrackingOptions})
+var sCreateConfigurationSetRequest_DeliveryOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryOptions", ID: &iDeliveryOptions, Members: &mDeliveryOptions, Type: smithy.ShapeTypeStructure, Ext: &eCreateConfigurationSetRequest_DeliveryOptions})
+var sCreateConfigurationSetRequest_ReputationOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReputationOptions", ID: &iReputationOptions, Members: &mReputationOptions, Type: smithy.ShapeTypeStructure, Ext: &eCreateConfigurationSetRequest_ReputationOptions})
+var sCreateConfigurationSetRequest_SendingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingOptions", ID: &iSendingOptions, Members: &mSendingOptions, Type: smithy.ShapeTypeStructure, Ext: &eCreateConfigurationSetRequest_SendingOptions})
+var sCreateConfigurationSetRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateConfigurationSetRequest_Tags})
+var sCreateDedicatedIpPoolRequest_PoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolName", ID: &i_PoolName, Type: smithy.ShapeTypeString, Ext: &eCreateDedicatedIpPoolRequest_PoolName})
+var sCreateDedicatedIpPoolRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateDedicatedIpPoolRequest_Tags})
+var sCreateDeliverabilityTestReportRequest_ReportName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportName", ID: &i_ReportName, Type: smithy.ShapeTypeString, Ext: &eCreateDeliverabilityTestReportRequest_ReportName})
+var sCreateDeliverabilityTestReportRequest_FromEmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FromEmailAddress", ID: &i_EmailAddress, Type: smithy.ShapeTypeString, Ext: &eCreateDeliverabilityTestReportRequest_FromEmailAddress})
+var sCreateDeliverabilityTestReportRequest_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &iEmailContent, Members: &mEmailContent, Type: smithy.ShapeTypeStructure, Ext: &eCreateDeliverabilityTestReportRequest_Content})
+var sCreateDeliverabilityTestReportRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateDeliverabilityTestReportRequest_Tags})
+var sCreateDeliverabilityTestReportResponse_ReportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportId", ID: &i_ReportId, Type: smithy.ShapeTypeString, Ext: &eCreateDeliverabilityTestReportResponse_ReportId})
+var sCreateDeliverabilityTestReportResponse_DeliverabilityTestStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliverabilityTestStatus", ID: &iDeliverabilityTestStatus, Members: &mDeliverabilityTestStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateDeliverabilityTestReportResponse_DeliverabilityTestStatus})
+var sCreateEmailIdentityRequest_EmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailIdentity", ID: &i_Identity, Type: smithy.ShapeTypeString, Ext: &eCreateEmailIdentityRequest_EmailIdentity})
+var sCreateEmailIdentityRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eCreateEmailIdentityRequest_Tags})
+var sCreateEmailIdentityResponse_IdentityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityType", ID: &iIdentityType, Members: &mIdentityType, Type: smithy.ShapeTypeEnum, Ext: &eCreateEmailIdentityResponse_IdentityType})
+var sCreateEmailIdentityResponse_VerifiedForSendingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VerifiedForSendingStatus", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &eCreateEmailIdentityResponse_VerifiedForSendingStatus})
+var sCreateEmailIdentityResponse_DkimAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DkimAttributes", ID: &iDkimAttributes, Members: &mDkimAttributes, Type: smithy.ShapeTypeStructure, Ext: &eCreateEmailIdentityResponse_DkimAttributes})
+var sDeleteConfigurationSetEventDestinationRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eDeleteConfigurationSetEventDestinationRequest_ConfigurationSetName})
+var sDeleteConfigurationSetEventDestinationRequest_EventDestinationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDestinationName", ID: &i_EventDestinationName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eDeleteConfigurationSetEventDestinationRequest_EventDestinationName})
+var sDeleteConfigurationSetRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eDeleteConfigurationSetRequest_ConfigurationSetName})
+var sDeleteDedicatedIpPoolRequest_PoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolName", ID: &i_PoolName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eDeleteDedicatedIpPoolRequest_PoolName})
+var sDeleteEmailIdentityRequest_EmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailIdentity", ID: &i_Identity, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eDeleteEmailIdentityRequest_EmailIdentity})
+var sGetAccountResponse_SendQuota = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendQuota", ID: &iSendQuota, Members: &mSendQuota, Type: smithy.ShapeTypeStructure, Ext: &eGetAccountResponse_SendQuota})
+var sGetAccountResponse_SendingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &eGetAccountResponse_SendingEnabled})
+var sGetAccountResponse_DedicatedIpAutoWarmupEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DedicatedIpAutoWarmupEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &eGetAccountResponse_DedicatedIpAutoWarmupEnabled})
+var sGetAccountResponse_EnforcementStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnforcementStatus", ID: &i_GeneralEnforcementStatus, Type: smithy.ShapeTypeString, Ext: &eGetAccountResponse_EnforcementStatus})
+var sGetAccountResponse_ProductionAccessEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductionAccessEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &eGetAccountResponse_ProductionAccessEnabled})
+var sGetBlacklistReportsRequest_BlacklistItemNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlacklistItemNames", ID: &i_BlacklistItemNames, Members: &m_BlacklistItemNames, Traits: &t47, Type: smithy.ShapeTypeList, Ext: &eGetBlacklistReportsRequest_BlacklistItemNames})
+var sGetBlacklistReportsResponse_BlacklistReport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlacklistReport", ID: &i_BlacklistReport, Members: &m_BlacklistReport, Type: smithy.ShapeTypeMap, Ext: &eGetBlacklistReportsResponse_BlacklistReport})
+var sGetConfigurationSetEventDestinationsRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eGetConfigurationSetEventDestinationsRequest_ConfigurationSetName})
+var sGetConfigurationSetEventDestinationsResponse_EventDestinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDestinations", ID: &i_EventDestinations, Members: &m_EventDestinations, Type: smithy.ShapeTypeList, Ext: &eGetConfigurationSetEventDestinationsResponse_EventDestinations})
+var sGetConfigurationSetRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eGetConfigurationSetRequest_ConfigurationSetName})
+var sGetConfigurationSetResponse_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Type: smithy.ShapeTypeString, Ext: &eGetConfigurationSetResponse_ConfigurationSetName})
+var sGetConfigurationSetResponse_TrackingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrackingOptions", ID: &iTrackingOptions, Members: &mTrackingOptions, Type: smithy.ShapeTypeStructure, Ext: &eGetConfigurationSetResponse_TrackingOptions})
+var sGetConfigurationSetResponse_DeliveryOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryOptions", ID: &iDeliveryOptions, Members: &mDeliveryOptions, Type: smithy.ShapeTypeStructure, Ext: &eGetConfigurationSetResponse_DeliveryOptions})
+var sGetConfigurationSetResponse_ReputationOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReputationOptions", ID: &iReputationOptions, Members: &mReputationOptions, Type: smithy.ShapeTypeStructure, Ext: &eGetConfigurationSetResponse_ReputationOptions})
+var sGetConfigurationSetResponse_SendingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingOptions", ID: &iSendingOptions, Members: &mSendingOptions, Type: smithy.ShapeTypeStructure, Ext: &eGetConfigurationSetResponse_SendingOptions})
+var sGetConfigurationSetResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eGetConfigurationSetResponse_Tags})
+var sGetDedicatedIpRequest_Ip = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ip", ID: &i_Ip, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eGetDedicatedIpRequest_Ip})
+var sGetDedicatedIpResponse_DedicatedIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DedicatedIp", ID: &iDedicatedIp, Members: &mDedicatedIp, Type: smithy.ShapeTypeStructure, Ext: &eGetDedicatedIpResponse_DedicatedIp})
+var sGetDedicatedIpsRequest_PoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolName", ID: &i_PoolName, Traits: &t48, Type: smithy.ShapeTypeString, Ext: &eGetDedicatedIpsRequest_PoolName})
+var sGetDedicatedIpsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eGetDedicatedIpsRequest_NextToken})
+var sGetDedicatedIpsRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_MaxItems, Traits: &t50, Type: smithy.ShapeTypeInteger, Ext: &eGetDedicatedIpsRequest_PageSize})
+var sGetDedicatedIpsResponse_DedicatedIps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DedicatedIps", ID: &i_DedicatedIpList, Members: &m_DedicatedIpList, Type: smithy.ShapeTypeList, Ext: &eGetDedicatedIpsResponse_DedicatedIps})
+var sGetDedicatedIpsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetDedicatedIpsResponse_NextToken})
+var sGetDeliverabilityDashboardOptionsResponse_DashboardEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashboardEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &eGetDeliverabilityDashboardOptionsResponse_DashboardEnabled})
+var sGetDeliverabilityDashboardOptionsResponse_SubscriptionExpiryDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionExpiryDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetDeliverabilityDashboardOptionsResponse_SubscriptionExpiryDate})
+var sGetDeliverabilityDashboardOptionsResponse_AccountStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountStatus", ID: &iDeliverabilityDashboardAccountStatus, Members: &mDeliverabilityDashboardAccountStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetDeliverabilityDashboardOptionsResponse_AccountStatus})
+var sGetDeliverabilityDashboardOptionsResponse_ActiveSubscribedDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveSubscribedDomains", ID: &i_DomainDeliverabilityTrackingOptions, Members: &m_DomainDeliverabilityTrackingOptions, Type: smithy.ShapeTypeList, Ext: &eGetDeliverabilityDashboardOptionsResponse_ActiveSubscribedDomains})
+var sGetDeliverabilityDashboardOptionsResponse_PendingExpirationSubscribedDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingExpirationSubscribedDomains", ID: &i_DomainDeliverabilityTrackingOptions, Members: &m_DomainDeliverabilityTrackingOptions, Type: smithy.ShapeTypeList, Ext: &eGetDeliverabilityDashboardOptionsResponse_PendingExpirationSubscribedDomains})
+var sGetDeliverabilityTestReportRequest_ReportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportId", ID: &i_ReportId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eGetDeliverabilityTestReportRequest_ReportId})
+var sGetDeliverabilityTestReportResponse_DeliverabilityTestReport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliverabilityTestReport", ID: &iDeliverabilityTestReport, Members: &mDeliverabilityTestReport, Type: smithy.ShapeTypeStructure, Ext: &eGetDeliverabilityTestReportResponse_DeliverabilityTestReport})
+var sGetDeliverabilityTestReportResponse_OverallPlacement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OverallPlacement", ID: &iPlacementStatistics, Members: &mPlacementStatistics, Type: smithy.ShapeTypeStructure, Ext: &eGetDeliverabilityTestReportResponse_OverallPlacement})
+var sGetDeliverabilityTestReportResponse_IspPlacements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IspPlacements", ID: &i_IspPlacements, Members: &m_IspPlacements, Type: smithy.ShapeTypeList, Ext: &eGetDeliverabilityTestReportResponse_IspPlacements})
+var sGetDeliverabilityTestReportResponse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_MessageContent, Type: smithy.ShapeTypeString, Ext: &eGetDeliverabilityTestReportResponse_Message})
+var sGetDeliverabilityTestReportResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eGetDeliverabilityTestReportResponse_Tags})
+var sGetDomainDeliverabilityCampaignRequest_CampaignId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CampaignId", ID: &i_CampaignId, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eGetDomainDeliverabilityCampaignRequest_CampaignId})
+var sGetDomainDeliverabilityCampaignResponse_DomainDeliverabilityCampaign = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainDeliverabilityCampaign", ID: &iDomainDeliverabilityCampaign, Members: &mDomainDeliverabilityCampaign, Type: smithy.ShapeTypeStructure, Ext: &eGetDomainDeliverabilityCampaignResponse_DomainDeliverabilityCampaign})
+var sGetDomainStatisticsReportRequest_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_Identity, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eGetDomainStatisticsReportRequest_Domain})
+var sGetDomainStatisticsReportRequest_StartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDate", ID: &i_Timestamp, Traits: &t51, Type: smithy.ShapeTypeTimestamp, Ext: &eGetDomainStatisticsReportRequest_StartDate})
+var sGetDomainStatisticsReportRequest_EndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndDate", ID: &i_Timestamp, Traits: &t52, Type: smithy.ShapeTypeTimestamp, Ext: &eGetDomainStatisticsReportRequest_EndDate})
+var sGetDomainStatisticsReportResponse_OverallVolume = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OverallVolume", ID: &iOverallVolume, Members: &mOverallVolume, Type: smithy.ShapeTypeStructure, Ext: &eGetDomainStatisticsReportResponse_OverallVolume})
+var sGetDomainStatisticsReportResponse_DailyVolumes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DailyVolumes", ID: &i_DailyVolumes, Members: &m_DailyVolumes, Type: smithy.ShapeTypeList, Ext: &eGetDomainStatisticsReportResponse_DailyVolumes})
+var sGetEmailIdentityRequest_EmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailIdentity", ID: &i_Identity, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eGetEmailIdentityRequest_EmailIdentity})
+var sGetEmailIdentityResponse_IdentityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityType", ID: &iIdentityType, Members: &mIdentityType, Type: smithy.ShapeTypeEnum, Ext: &eGetEmailIdentityResponse_IdentityType})
+var sGetEmailIdentityResponse_FeedbackForwardingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeedbackForwardingStatus", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &eGetEmailIdentityResponse_FeedbackForwardingStatus})
+var sGetEmailIdentityResponse_VerifiedForSendingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VerifiedForSendingStatus", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &eGetEmailIdentityResponse_VerifiedForSendingStatus})
+var sGetEmailIdentityResponse_DkimAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DkimAttributes", ID: &iDkimAttributes, Members: &mDkimAttributes, Type: smithy.ShapeTypeStructure, Ext: &eGetEmailIdentityResponse_DkimAttributes})
+var sGetEmailIdentityResponse_MailFromAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MailFromAttributes", ID: &iMailFromAttributes, Members: &mMailFromAttributes, Type: smithy.ShapeTypeStructure, Ext: &eGetEmailIdentityResponse_MailFromAttributes})
+var sGetEmailIdentityResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eGetEmailIdentityResponse_Tags})
+var sListConfigurationSetsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eListConfigurationSetsRequest_NextToken})
+var sListConfigurationSetsRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_MaxItems, Traits: &t50, Type: smithy.ShapeTypeInteger, Ext: &eListConfigurationSetsRequest_PageSize})
+var sListConfigurationSetsResponse_ConfigurationSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSets", ID: &i_ConfigurationSetNameList, Members: &m_ConfigurationSetNameList, Type: smithy.ShapeTypeList, Ext: &eListConfigurationSetsResponse_ConfigurationSets})
+var sListConfigurationSetsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListConfigurationSetsResponse_NextToken})
+var sListDedicatedIpPoolsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eListDedicatedIpPoolsRequest_NextToken})
+var sListDedicatedIpPoolsRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_MaxItems, Traits: &t50, Type: smithy.ShapeTypeInteger, Ext: &eListDedicatedIpPoolsRequest_PageSize})
+var sListDedicatedIpPoolsResponse_DedicatedIpPools = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DedicatedIpPools", ID: &i_ListOfDedicatedIpPools, Members: &m_ListOfDedicatedIpPools, Type: smithy.ShapeTypeList, Ext: &eListDedicatedIpPoolsResponse_DedicatedIpPools})
+var sListDedicatedIpPoolsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDedicatedIpPoolsResponse_NextToken})
+var sListDeliverabilityTestReportsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eListDeliverabilityTestReportsRequest_NextToken})
+var sListDeliverabilityTestReportsRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_MaxItems, Traits: &t50, Type: smithy.ShapeTypeInteger, Ext: &eListDeliverabilityTestReportsRequest_PageSize})
+var sListDeliverabilityTestReportsResponse_DeliverabilityTestReports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliverabilityTestReports", ID: &i_DeliverabilityTestReports, Members: &m_DeliverabilityTestReports, Type: smithy.ShapeTypeList, Ext: &eListDeliverabilityTestReportsResponse_DeliverabilityTestReports})
+var sListDeliverabilityTestReportsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDeliverabilityTestReportsResponse_NextToken})
+var sListDomainDeliverabilityCampaignsRequest_StartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDate", ID: &i_Timestamp, Traits: &t51, Type: smithy.ShapeTypeTimestamp, Ext: &eListDomainDeliverabilityCampaignsRequest_StartDate})
+var sListDomainDeliverabilityCampaignsRequest_EndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndDate", ID: &i_Timestamp, Traits: &t52, Type: smithy.ShapeTypeTimestamp, Ext: &eListDomainDeliverabilityCampaignsRequest_EndDate})
+var sListDomainDeliverabilityCampaignsRequest_SubscribedDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscribedDomain", ID: &i_Domain, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eListDomainDeliverabilityCampaignsRequest_SubscribedDomain})
+var sListDomainDeliverabilityCampaignsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eListDomainDeliverabilityCampaignsRequest_NextToken})
+var sListDomainDeliverabilityCampaignsRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_MaxItems, Traits: &t50, Type: smithy.ShapeTypeInteger, Ext: &eListDomainDeliverabilityCampaignsRequest_PageSize})
+var sListDomainDeliverabilityCampaignsResponse_DomainDeliverabilityCampaigns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainDeliverabilityCampaigns", ID: &i_DomainDeliverabilityCampaignList, Members: &m_DomainDeliverabilityCampaignList, Type: smithy.ShapeTypeList, Ext: &eListDomainDeliverabilityCampaignsResponse_DomainDeliverabilityCampaigns})
+var sListDomainDeliverabilityCampaignsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListDomainDeliverabilityCampaignsResponse_NextToken})
+var sListEmailIdentitiesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t49, Type: smithy.ShapeTypeString, Ext: &eListEmailIdentitiesRequest_NextToken})
+var sListEmailIdentitiesRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_MaxItems, Traits: &t50, Type: smithy.ShapeTypeInteger, Ext: &eListEmailIdentitiesRequest_PageSize})
+var sListEmailIdentitiesResponse_EmailIdentities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailIdentities", ID: &i_IdentityInfoList, Members: &m_IdentityInfoList, Type: smithy.ShapeTypeList, Ext: &eListEmailIdentitiesResponse_EmailIdentities})
+var sListEmailIdentitiesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListEmailIdentitiesResponse_NextToken})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_Tags})
+var sPutAccountDedicatedIpWarmupAttributesRequest_AutoWarmupEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoWarmupEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ePutAccountDedicatedIpWarmupAttributesRequest_AutoWarmupEnabled})
+var sPutAccountSendingAttributesRequest_SendingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ePutAccountSendingAttributesRequest_SendingEnabled})
+var sPutConfigurationSetDeliveryOptionsRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ePutConfigurationSetDeliveryOptionsRequest_ConfigurationSetName})
+var sPutConfigurationSetDeliveryOptionsRequest_TlsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsPolicy", ID: &iTlsPolicy, Members: &mTlsPolicy, Type: smithy.ShapeTypeEnum, Ext: &ePutConfigurationSetDeliveryOptionsRequest_TlsPolicy})
+var sPutConfigurationSetDeliveryOptionsRequest_SendingPoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingPoolName", ID: &i_SendingPoolName, Type: smithy.ShapeTypeString, Ext: &ePutConfigurationSetDeliveryOptionsRequest_SendingPoolName})
+var sPutConfigurationSetReputationOptionsRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ePutConfigurationSetReputationOptionsRequest_ConfigurationSetName})
+var sPutConfigurationSetReputationOptionsRequest_ReputationMetricsEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReputationMetricsEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ePutConfigurationSetReputationOptionsRequest_ReputationMetricsEnabled})
+var sPutConfigurationSetSendingOptionsRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ePutConfigurationSetSendingOptionsRequest_ConfigurationSetName})
+var sPutConfigurationSetSendingOptionsRequest_SendingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ePutConfigurationSetSendingOptionsRequest_SendingEnabled})
+var sPutConfigurationSetTrackingOptionsRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ePutConfigurationSetTrackingOptionsRequest_ConfigurationSetName})
+var sPutConfigurationSetTrackingOptionsRequest_CustomRedirectDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomRedirectDomain", ID: &i_CustomRedirectDomain, Type: smithy.ShapeTypeString, Ext: &ePutConfigurationSetTrackingOptionsRequest_CustomRedirectDomain})
+var sPutDedicatedIpInPoolRequest_Ip = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ip", ID: &i_Ip, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ePutDedicatedIpInPoolRequest_Ip})
+var sPutDedicatedIpInPoolRequest_DestinationPoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationPoolName", ID: &i_PoolName, Type: smithy.ShapeTypeString, Ext: &ePutDedicatedIpInPoolRequest_DestinationPoolName})
+var sPutDedicatedIpWarmupAttributesRequest_Ip = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ip", ID: &i_Ip, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ePutDedicatedIpWarmupAttributesRequest_Ip})
+var sPutDedicatedIpWarmupAttributesRequest_WarmupPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WarmupPercentage", ID: &i_Percentage100Wrapper, Type: smithy.ShapeTypeInteger, Ext: &ePutDedicatedIpWarmupAttributesRequest_WarmupPercentage})
+var sPutDeliverabilityDashboardOptionRequest_DashboardEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashboardEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ePutDeliverabilityDashboardOptionRequest_DashboardEnabled})
+var sPutDeliverabilityDashboardOptionRequest_SubscribedDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscribedDomains", ID: &i_DomainDeliverabilityTrackingOptions, Members: &m_DomainDeliverabilityTrackingOptions, Type: smithy.ShapeTypeList, Ext: &ePutDeliverabilityDashboardOptionRequest_SubscribedDomains})
+var sPutEmailIdentityDkimAttributesRequest_EmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailIdentity", ID: &i_Identity, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ePutEmailIdentityDkimAttributesRequest_EmailIdentity})
+var sPutEmailIdentityDkimAttributesRequest_SigningEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ePutEmailIdentityDkimAttributesRequest_SigningEnabled})
+var sPutEmailIdentityFeedbackAttributesRequest_EmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailIdentity", ID: &i_Identity, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ePutEmailIdentityFeedbackAttributesRequest_EmailIdentity})
+var sPutEmailIdentityFeedbackAttributesRequest_EmailForwardingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailForwardingEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean, Ext: &ePutEmailIdentityFeedbackAttributesRequest_EmailForwardingEnabled})
+var sPutEmailIdentityMailFromAttributesRequest_EmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailIdentity", ID: &i_Identity, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &ePutEmailIdentityMailFromAttributesRequest_EmailIdentity})
+var sPutEmailIdentityMailFromAttributesRequest_MailFromDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MailFromDomain", ID: &i_MailFromDomainName, Type: smithy.ShapeTypeString, Ext: &ePutEmailIdentityMailFromAttributesRequest_MailFromDomain})
+var sPutEmailIdentityMailFromAttributesRequest_BehaviorOnMxFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BehaviorOnMxFailure", ID: &iBehaviorOnMxFailure, Members: &mBehaviorOnMxFailure, Type: smithy.ShapeTypeEnum, Ext: &ePutEmailIdentityMailFromAttributesRequest_BehaviorOnMxFailure})
+var sSendEmailRequest_FromEmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FromEmailAddress", ID: &i_EmailAddress, Type: smithy.ShapeTypeString, Ext: &eSendEmailRequest_FromEmailAddress})
+var sSendEmailRequest_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeStructure, Ext: &eSendEmailRequest_Destination})
+var sSendEmailRequest_ReplyToAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplyToAddresses", ID: &i_EmailAddressList, Members: &m_EmailAddressList, Type: smithy.ShapeTypeList, Ext: &eSendEmailRequest_ReplyToAddresses})
+var sSendEmailRequest_FeedbackForwardingEmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeedbackForwardingEmailAddress", ID: &i_EmailAddress, Type: smithy.ShapeTypeString, Ext: &eSendEmailRequest_FeedbackForwardingEmailAddress})
+var sSendEmailRequest_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &iEmailContent, Members: &mEmailContent, Type: smithy.ShapeTypeStructure, Ext: &eSendEmailRequest_Content})
+var sSendEmailRequest_EmailTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailTags", ID: &i_MessageTagList, Members: &m_MessageTagList, Type: smithy.ShapeTypeList, Ext: &eSendEmailRequest_EmailTags})
+var sSendEmailRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Type: smithy.ShapeTypeString, Ext: &eSendEmailRequest_ConfigurationSetName})
+var sSendEmailResponse_MessageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageId", ID: &i_OutboundMessageId, Type: smithy.ShapeTypeString, Ext: &eSendEmailResponse_MessageId})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_Tags})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Traits: &t53, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t54, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUpdateConfigurationSetEventDestinationRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eUpdateConfigurationSetEventDestinationRequest_ConfigurationSetName})
+var sUpdateConfigurationSetEventDestinationRequest_EventDestinationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDestinationName", ID: &i_EventDestinationName, Traits: &t46, Type: smithy.ShapeTypeString, Ext: &eUpdateConfigurationSetEventDestinationRequest_EventDestinationName})
+var sUpdateConfigurationSetEventDestinationRequest_EventDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDestination", ID: &iEventDestinationDefinition, Members: &mEventDestinationDefinition, Type: smithy.ShapeTypeStructure, Ext: &eUpdateConfigurationSetEventDestinationRequest_EventDestination})
 
 var CreateConfigurationSet = &sCreateConfigurationSet
 

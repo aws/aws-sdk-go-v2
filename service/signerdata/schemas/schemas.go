@@ -7,9 +7,38 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [30]smithy.SchemaExtensions
+var (
+	eGetRevocationStatus                           smithy.SchemaExtensions
+	e_SignerDataPlane                              smithy.SchemaExtensions
+	eAccessDeniedException                         smithy.SchemaExtensions
+	eAccessDeniedException_message                 smithy.SchemaExtensions
+	eAccessDeniedException_code                    smithy.SchemaExtensions
+	e_Arn                                          smithy.SchemaExtensions
+	e_CertificateHash                              smithy.SchemaExtensions
+	e_CertificateHashes                            smithy.SchemaExtensions
+	e_CertificateHashes_member                     smithy.SchemaExtensions
+	eInternalServiceErrorException                 smithy.SchemaExtensions
+	eInternalServiceErrorException_message         smithy.SchemaExtensions
+	eInternalServiceErrorException_code            smithy.SchemaExtensions
+	e_PlatformId                                   smithy.SchemaExtensions
+	e_RevokedEntities                              smithy.SchemaExtensions
+	e_RevokedEntities_member                       smithy.SchemaExtensions
+	e_RevokedEntity                                smithy.SchemaExtensions
+	eTooManyRequestsException                      smithy.SchemaExtensions
+	eTooManyRequestsException_message              smithy.SchemaExtensions
+	eTooManyRequestsException_code                 smithy.SchemaExtensions
+	eValidationException                           smithy.SchemaExtensions
+	eValidationException_message                   smithy.SchemaExtensions
+	eValidationException_code                      smithy.SchemaExtensions
+	eGetRevocationStatusRequest                    smithy.SchemaExtensions
+	eGetRevocationStatusRequest_signatureTimestamp smithy.SchemaExtensions
+	eGetRevocationStatusRequest_platformId         smithy.SchemaExtensions
+	eGetRevocationStatusRequest_profileVersionArn  smithy.SchemaExtensions
+	eGetRevocationStatusRequest_jobArn             smithy.SchemaExtensions
+	eGetRevocationStatusRequest_certificateHashes  smithy.SchemaExtensions
+	eGetRevocationStatusResponse                   smithy.SchemaExtensions
+	eGetRevocationStatusResponse_revokedEntities   smithy.SchemaExtensions
+)
 
 var (
 	iGetRevocationStatus           = smithy.ShapeID{Namespace: "com.amazonaws.signerdata", Name: "GetRevocationStatus"}
@@ -52,37 +81,37 @@ var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidat
 var mGetRevocationStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRevocationStatusRequest_signatureTimestamp, &sGetRevocationStatusRequest_platformId, &sGetRevocationStatusRequest_profileVersionArn, &sGetRevocationStatusRequest_jobArn, &sGetRevocationStatusRequest_certificateHashes}}
 var mGetRevocationStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRevocationStatusResponse_revokedEntities}}
 
-var sGetRevocationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevocationStatus, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var s_SignerDataPlane = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SignerDataPlane, Type: smithy.ShapeTypeService, Ext: &ext[1]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[2]})
-var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[5]})
-var s_CertificateHash = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateHash, Type: smithy.ShapeTypeString, Ext: &ext[6]})
-var s_CertificateHashes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateHashes, Members: &m_CertificateHashes, Type: smithy.ShapeTypeList, Ext: &ext[7]})
-var sInternalServiceErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServiceErrorException, Members: &mInternalServiceErrorException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[9]})
-var s_PlatformId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlatformId, Type: smithy.ShapeTypeString, Ext: &ext[12]})
-var s_RevokedEntities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevokedEntities, Members: &m_RevokedEntities, Type: smithy.ShapeTypeList, Ext: &ext[13]})
-var s_RevokedEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevokedEntity, Type: smithy.ShapeTypeString, Ext: &ext[15]})
-var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[16]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &ext[19]})
-var sGetRevocationStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevocationStatusRequest, Members: &mGetRevocationStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[22]})
-var sGetRevocationStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevocationStatusResponse, Members: &mGetRevocationStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
+var sGetRevocationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevocationStatus, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eGetRevocationStatus})
+var s_SignerDataPlane = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SignerDataPlane, Type: smithy.ShapeTypeService, Ext: &e_SignerDataPlane})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var s_CertificateHash = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateHash, Type: smithy.ShapeTypeString, Ext: &e_CertificateHash})
+var s_CertificateHashes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateHashes, Members: &m_CertificateHashes, Type: smithy.ShapeTypeList, Ext: &e_CertificateHashes})
+var sInternalServiceErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServiceErrorException, Members: &mInternalServiceErrorException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInternalServiceErrorException})
+var s_PlatformId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlatformId, Type: smithy.ShapeTypeString, Ext: &e_PlatformId})
+var s_RevokedEntities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevokedEntities, Members: &m_RevokedEntities, Type: smithy.ShapeTypeList, Ext: &e_RevokedEntities})
+var s_RevokedEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevokedEntity, Type: smithy.ShapeTypeString, Ext: &e_RevokedEntity})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eTooManyRequestsException})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sGetRevocationStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevocationStatusRequest, Members: &mGetRevocationStatusRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRevocationStatusRequest})
+var sGetRevocationStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevocationStatusResponse, Members: &mGetRevocationStatusResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRevocationStatusResponse})
 
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[3]})
-var sAccessDeniedException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[4]})
-var s_CertificateHashes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CertificateHash, Type: smithy.ShapeTypeString, Ext: &ext[8]})
-var sInternalServiceErrorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[10]})
-var sInternalServiceErrorException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[11]})
-var s_RevokedEntities_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RevokedEntity, Type: smithy.ShapeTypeString, Ext: &ext[14]})
-var sTooManyRequestsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[17]})
-var sTooManyRequestsException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[18]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[20]})
-var sValidationException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[21]})
-var sGetRevocationStatusRequest_signatureTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signatureTimestamp", ID: &pTimestamp, Traits: &t5, Type: smithy.ShapeTypeTimestamp, Ext: &ext[23]})
-var sGetRevocationStatusRequest_platformId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platformId", ID: &i_PlatformId, Traits: &t6, Type: smithy.ShapeTypeString, Ext: &ext[24]})
-var sGetRevocationStatusRequest_profileVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileVersionArn", ID: &i_Arn, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &ext[25]})
-var sGetRevocationStatusRequest_jobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobArn", ID: &i_Arn, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var sGetRevocationStatusRequest_certificateHashes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificateHashes", ID: &i_CertificateHashes, Members: &m_CertificateHashes, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &ext[27]})
-var sGetRevocationStatusResponse_revokedEntities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revokedEntities", ID: &i_RevokedEntities, Members: &m_RevokedEntities, Type: smithy.ShapeTypeList, Ext: &ext[29]})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAccessDeniedException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_code})
+var s_CertificateHashes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CertificateHash, Type: smithy.ShapeTypeString, Ext: &e_CertificateHashes_member})
+var sInternalServiceErrorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServiceErrorException_message})
+var sInternalServiceErrorException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServiceErrorException_code})
+var s_RevokedEntities_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RevokedEntity, Type: smithy.ShapeTypeString, Ext: &e_RevokedEntities_member})
+var sTooManyRequestsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTooManyRequestsException_message})
+var sTooManyRequestsException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eTooManyRequestsException_code})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_code})
+var sGetRevocationStatusRequest_signatureTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signatureTimestamp", ID: &pTimestamp, Traits: &t5, Type: smithy.ShapeTypeTimestamp, Ext: &eGetRevocationStatusRequest_signatureTimestamp})
+var sGetRevocationStatusRequest_platformId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platformId", ID: &i_PlatformId, Traits: &t6, Type: smithy.ShapeTypeString, Ext: &eGetRevocationStatusRequest_platformId})
+var sGetRevocationStatusRequest_profileVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileVersionArn", ID: &i_Arn, Traits: &t7, Type: smithy.ShapeTypeString, Ext: &eGetRevocationStatusRequest_profileVersionArn})
+var sGetRevocationStatusRequest_jobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobArn", ID: &i_Arn, Traits: &t8, Type: smithy.ShapeTypeString, Ext: &eGetRevocationStatusRequest_jobArn})
+var sGetRevocationStatusRequest_certificateHashes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificateHashes", ID: &i_CertificateHashes, Members: &m_CertificateHashes, Traits: &t9, Type: smithy.ShapeTypeList, Ext: &eGetRevocationStatusRequest_certificateHashes})
+var sGetRevocationStatusResponse_revokedEntities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revokedEntities", ID: &i_RevokedEntities, Members: &m_RevokedEntities, Type: smithy.ShapeTypeList, Ext: &eGetRevocationStatusResponse_revokedEntities})
 
 var GetRevocationStatus = &sGetRevocationStatus
 

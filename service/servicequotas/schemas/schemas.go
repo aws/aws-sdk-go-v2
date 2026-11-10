@@ -7,9 +7,418 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [410]smithy.SchemaExtensions
+var (
+	eAssociateServiceQuotaTemplate                                                                smithy.SchemaExtensions
+	eCreateSupportCase                                                                            smithy.SchemaExtensions
+	eDeleteServiceQuotaIncreaseRequestFromTemplate                                                smithy.SchemaExtensions
+	eDisassociateServiceQuotaTemplate                                                             smithy.SchemaExtensions
+	eGetAssociationForServiceQuotaTemplate                                                        smithy.SchemaExtensions
+	eGetAutoManagementConfiguration                                                               smithy.SchemaExtensions
+	eGetAWSDefaultServiceQuota                                                                    smithy.SchemaExtensions
+	eGetQuotaUtilizationReport                                                                    smithy.SchemaExtensions
+	eGetRequestedServiceQuotaChange                                                               smithy.SchemaExtensions
+	eGetServiceQuota                                                                              smithy.SchemaExtensions
+	eGetServiceQuotaIncreaseRequestFromTemplate                                                   smithy.SchemaExtensions
+	eListAWSDefaultServiceQuotas                                                                  smithy.SchemaExtensions
+	eListRequestedServiceQuotaChangeHistory                                                       smithy.SchemaExtensions
+	eListRequestedServiceQuotaChangeHistoryByQuota                                                smithy.SchemaExtensions
+	eListServiceQuotaIncreaseRequestsInTemplate                                                   smithy.SchemaExtensions
+	eListServiceQuotas                                                                            smithy.SchemaExtensions
+	eListServices                                                                                 smithy.SchemaExtensions
+	eListTagsForResource                                                                          smithy.SchemaExtensions
+	ePutServiceQuotaIncreaseRequestIntoTemplate                                                   smithy.SchemaExtensions
+	eRequestServiceQuotaIncrease                                                                  smithy.SchemaExtensions
+	eStartAutoManagement                                                                          smithy.SchemaExtensions
+	eStartQuotaUtilizationReport                                                                  smithy.SchemaExtensions
+	eStopAutoManagement                                                                           smithy.SchemaExtensions
+	eTagResource                                                                                  smithy.SchemaExtensions
+	eUntagResource                                                                                smithy.SchemaExtensions
+	eUpdateAutoManagement                                                                         smithy.SchemaExtensions
+	e_ServiceQuotasV20190624                                                                      smithy.SchemaExtensions
+	eAccessDeniedException                                                                        smithy.SchemaExtensions
+	eAccessDeniedException_Message                                                                smithy.SchemaExtensions
+	eAdjustableAtLevelEnum                                                                        smithy.SchemaExtensions
+	eAdjustableAtLevelEnum_ACCOUNT                                                                smithy.SchemaExtensions
+	eAdjustableAtLevelEnum_PER_RESOURCE                                                           smithy.SchemaExtensions
+	eAdjustableAtLevelEnum_ALL                                                                    smithy.SchemaExtensions
+	e_AmazonResourceName                                                                          smithy.SchemaExtensions
+	eAppliedLevelEnum                                                                             smithy.SchemaExtensions
+	eAppliedLevelEnum_ACCOUNT                                                                     smithy.SchemaExtensions
+	eAppliedLevelEnum_RESOURCE                                                                    smithy.SchemaExtensions
+	eAppliedLevelEnum_ALL                                                                         smithy.SchemaExtensions
+	e_AppliedValue                                                                                smithy.SchemaExtensions
+	e_AwsRegion                                                                                   smithy.SchemaExtensions
+	eAWSServiceAccessNotEnabledException                                                          smithy.SchemaExtensions
+	eAWSServiceAccessNotEnabledException_Message                                                  smithy.SchemaExtensions
+	e_CustomerServiceEngagementId                                                                 smithy.SchemaExtensions
+	e_DateTime                                                                                    smithy.SchemaExtensions
+	e_DefaultValue                                                                                smithy.SchemaExtensions
+	eDependencyAccessDeniedException                                                              smithy.SchemaExtensions
+	eDependencyAccessDeniedException_Message                                                      smithy.SchemaExtensions
+	eErrorCode                                                                                    smithy.SchemaExtensions
+	eErrorCode_DEPENDENCY_ACCESS_DENIED_ERROR                                                     smithy.SchemaExtensions
+	eErrorCode_DEPENDENCY_THROTTLING_ERROR                                                        smithy.SchemaExtensions
+	eErrorCode_DEPENDENCY_SERVICE_ERROR                                                           smithy.SchemaExtensions
+	eErrorCode_SERVICE_QUOTA_NOT_AVAILABLE_ERROR                                                  smithy.SchemaExtensions
+	e_ErrorMessage                                                                                smithy.SchemaExtensions
+	eErrorReason                                                                                  smithy.SchemaExtensions
+	eErrorReason_ErrorCode                                                                        smithy.SchemaExtensions
+	eErrorReason_ErrorMessage                                                                     smithy.SchemaExtensions
+	e_ExceptionMessage                                                                            smithy.SchemaExtensions
+	e_ExcludedLimit                                                                               smithy.SchemaExtensions
+	e_ExcludedQuotaList                                                                           smithy.SchemaExtensions
+	e_ExcludedQuotaList_member                                                                    smithy.SchemaExtensions
+	e_ExcludedService                                                                             smithy.SchemaExtensions
+	e_ExclusionList                                                                               smithy.SchemaExtensions
+	e_ExclusionList_key                                                                           smithy.SchemaExtensions
+	e_ExclusionList_value                                                                         smithy.SchemaExtensions
+	e_ExclusionQuotaList                                                                          smithy.SchemaExtensions
+	e_ExclusionQuotaList_key                                                                      smithy.SchemaExtensions
+	e_ExclusionQuotaList_value                                                                    smithy.SchemaExtensions
+	e_GlobalQuota                                                                                 smithy.SchemaExtensions
+	eIllegalArgumentException                                                                     smithy.SchemaExtensions
+	eIllegalArgumentException_Message                                                             smithy.SchemaExtensions
+	e_InputTagKeys                                                                                smithy.SchemaExtensions
+	e_InputTagKeys_member                                                                         smithy.SchemaExtensions
+	e_InputTags                                                                                   smithy.SchemaExtensions
+	e_InputTags_member                                                                            smithy.SchemaExtensions
+	eInvalidPaginationTokenException                                                              smithy.SchemaExtensions
+	eInvalidPaginationTokenException_Message                                                      smithy.SchemaExtensions
+	eInvalidResourceStateException                                                                smithy.SchemaExtensions
+	eInvalidResourceStateException_Message                                                        smithy.SchemaExtensions
+	e_MaxResults                                                                                  smithy.SchemaExtensions
+	e_MaxResultsUtilization                                                                       smithy.SchemaExtensions
+	e_MetricDimensionName                                                                         smithy.SchemaExtensions
+	e_MetricDimensionsMapDefinition                                                               smithy.SchemaExtensions
+	e_MetricDimensionsMapDefinition_key                                                           smithy.SchemaExtensions
+	e_MetricDimensionsMapDefinition_value                                                         smithy.SchemaExtensions
+	e_MetricDimensionValue                                                                        smithy.SchemaExtensions
+	eMetricInfo                                                                                   smithy.SchemaExtensions
+	eMetricInfo_MetricNamespace                                                                   smithy.SchemaExtensions
+	eMetricInfo_MetricName                                                                        smithy.SchemaExtensions
+	eMetricInfo_MetricDimensions                                                                  smithy.SchemaExtensions
+	eMetricInfo_MetricStatisticRecommendation                                                     smithy.SchemaExtensions
+	e_NextToken                                                                                   smithy.SchemaExtensions
+	eNoAvailableOrganizationException                                                             smithy.SchemaExtensions
+	eNoAvailableOrganizationException_Message                                                     smithy.SchemaExtensions
+	eNoSuchResourceException                                                                      smithy.SchemaExtensions
+	eNoSuchResourceException_Message                                                              smithy.SchemaExtensions
+	eOptInLevel                                                                                   smithy.SchemaExtensions
+	eOptInLevel_ACCOUNT                                                                           smithy.SchemaExtensions
+	eOptInStatus                                                                                  smithy.SchemaExtensions
+	eOptInStatus_ENABLED                                                                          smithy.SchemaExtensions
+	eOptInStatus_DISABLED                                                                         smithy.SchemaExtensions
+	eOptInType                                                                                    smithy.SchemaExtensions
+	eOptInType_NotifyOnly                                                                         smithy.SchemaExtensions
+	eOptInType_NotifyAndAdjust                                                                    smithy.SchemaExtensions
+	eOrganizationNotInAllFeaturesModeException                                                    smithy.SchemaExtensions
+	eOrganizationNotInAllFeaturesModeException_Message                                            smithy.SchemaExtensions
+	e_OutputTags                                                                                  smithy.SchemaExtensions
+	e_OutputTags_member                                                                           smithy.SchemaExtensions
+	ePeriodUnit                                                                                   smithy.SchemaExtensions
+	ePeriodUnit_MICROSECOND                                                                       smithy.SchemaExtensions
+	ePeriodUnit_MILLISECOND                                                                       smithy.SchemaExtensions
+	ePeriodUnit_SECOND                                                                            smithy.SchemaExtensions
+	ePeriodUnit_MINUTE                                                                            smithy.SchemaExtensions
+	ePeriodUnit_HOUR                                                                              smithy.SchemaExtensions
+	ePeriodUnit_DAY                                                                               smithy.SchemaExtensions
+	ePeriodUnit_WEEK                                                                              smithy.SchemaExtensions
+	e_PeriodValue                                                                                 smithy.SchemaExtensions
+	e_QuotaAdjustable                                                                             smithy.SchemaExtensions
+	e_QuotaArn                                                                                    smithy.SchemaExtensions
+	e_QuotaCode                                                                                   smithy.SchemaExtensions
+	e_QuotaContextId                                                                              smithy.SchemaExtensions
+	eQuotaContextInfo                                                                             smithy.SchemaExtensions
+	eQuotaContextInfo_ContextScope                                                                smithy.SchemaExtensions
+	eQuotaContextInfo_ContextScopeType                                                            smithy.SchemaExtensions
+	eQuotaContextInfo_ContextId                                                                   smithy.SchemaExtensions
+	eQuotaContextInfo_AdjustableAtLevel                                                           smithy.SchemaExtensions
+	eQuotaContextScope                                                                            smithy.SchemaExtensions
+	eQuotaContextScope_RESOURCE                                                                   smithy.SchemaExtensions
+	eQuotaContextScope_ACCOUNT                                                                    smithy.SchemaExtensions
+	e_QuotaContextScopeType                                                                       smithy.SchemaExtensions
+	e_QuotaDescription                                                                            smithy.SchemaExtensions
+	eQuotaExceededException                                                                       smithy.SchemaExtensions
+	eQuotaExceededException_Message                                                               smithy.SchemaExtensions
+	eQuotaInfo                                                                                    smithy.SchemaExtensions
+	eQuotaInfo_QuotaCode                                                                          smithy.SchemaExtensions
+	eQuotaInfo_QuotaName                                                                          smithy.SchemaExtensions
+	e_QuotaInfoList                                                                               smithy.SchemaExtensions
+	e_QuotaInfoList_member                                                                        smithy.SchemaExtensions
+	e_QuotaMetricName                                                                             smithy.SchemaExtensions
+	e_QuotaMetricNamespace                                                                        smithy.SchemaExtensions
+	e_QuotaName                                                                                   smithy.SchemaExtensions
+	eQuotaPeriod                                                                                  smithy.SchemaExtensions
+	eQuotaPeriod_PeriodValue                                                                      smithy.SchemaExtensions
+	eQuotaPeriod_PeriodUnit                                                                       smithy.SchemaExtensions
+	e_QuotaUnit                                                                                   smithy.SchemaExtensions
+	eQuotaUtilizationInfo                                                                         smithy.SchemaExtensions
+	eQuotaUtilizationInfo_QuotaCode                                                               smithy.SchemaExtensions
+	eQuotaUtilizationInfo_ServiceCode                                                             smithy.SchemaExtensions
+	eQuotaUtilizationInfo_QuotaName                                                               smithy.SchemaExtensions
+	eQuotaUtilizationInfo_Namespace                                                               smithy.SchemaExtensions
+	eQuotaUtilizationInfo_Utilization                                                             smithy.SchemaExtensions
+	eQuotaUtilizationInfo_DefaultValue                                                            smithy.SchemaExtensions
+	eQuotaUtilizationInfo_AppliedValue                                                            smithy.SchemaExtensions
+	eQuotaUtilizationInfo_ServiceName                                                             smithy.SchemaExtensions
+	eQuotaUtilizationInfo_Adjustable                                                              smithy.SchemaExtensions
+	e_QuotaUtilizationInfoList                                                                    smithy.SchemaExtensions
+	e_QuotaUtilizationInfoList_member                                                             smithy.SchemaExtensions
+	e_QuotaValue                                                                                  smithy.SchemaExtensions
+	e_ReportErrorCode                                                                             smithy.SchemaExtensions
+	e_ReportErrorMessage                                                                          smithy.SchemaExtensions
+	e_ReportId                                                                                    smithy.SchemaExtensions
+	e_ReportMessage                                                                               smithy.SchemaExtensions
+	eReportStatus                                                                                 smithy.SchemaExtensions
+	eReportStatus_PENDING                                                                         smithy.SchemaExtensions
+	eReportStatus_IN_PROGRESS                                                                     smithy.SchemaExtensions
+	eReportStatus_COMPLETED                                                                       smithy.SchemaExtensions
+	eReportStatus_FAILED                                                                          smithy.SchemaExtensions
+	eRequestedServiceQuotaChange                                                                  smithy.SchemaExtensions
+	eRequestedServiceQuotaChange_Id                                                               smithy.SchemaExtensions
+	eRequestedServiceQuotaChange_RequestType                                                      smithy.SchemaExtensions
+	eRequestedServiceQuotaChange_CaseId                                                           smithy.SchemaExtensions
+	eRequestedServiceQuotaChange_ServiceCode                                                      smithy.SchemaExtensions
+	eRequestedServiceQuotaChange_ServiceName                                                      smithy.SchemaExtensions
+	eRequestedServiceQuotaChange_QuotaCode                                                        smithy.SchemaExtensions
+	eRequestedServiceQuotaChange_QuotaName                                                        smithy.SchemaExtensions
+	eRequestedServiceQuotaChange_DesiredValue                                                     smithy.SchemaExtensions
+	eRequestedServiceQuotaChange_Status                                                           smithy.SchemaExtensions
+	eRequestedServiceQuotaChange_Created                                                          smithy.SchemaExtensions
+	eRequestedServiceQuotaChange_LastUpdated                                                      smithy.SchemaExtensions
+	eRequestedServiceQuotaChange_Requester                                                        smithy.SchemaExtensions
+	eRequestedServiceQuotaChange_QuotaArn                                                         smithy.SchemaExtensions
+	eRequestedServiceQuotaChange_GlobalQuota                                                      smithy.SchemaExtensions
+	eRequestedServiceQuotaChange_Unit                                                             smithy.SchemaExtensions
+	eRequestedServiceQuotaChange_QuotaRequestedAtLevel                                            smithy.SchemaExtensions
+	eRequestedServiceQuotaChange_QuotaContext                                                     smithy.SchemaExtensions
+	e_RequestedServiceQuotaChangeHistoryListDefinition                                            smithy.SchemaExtensions
+	e_RequestedServiceQuotaChangeHistoryListDefinition_member                                     smithy.SchemaExtensions
+	e_Requester                                                                                   smithy.SchemaExtensions
+	e_RequestId                                                                                   smithy.SchemaExtensions
+	eRequestStatus                                                                                smithy.SchemaExtensions
+	eRequestStatus_PENDING                                                                        smithy.SchemaExtensions
+	eRequestStatus_CASE_OPENED                                                                    smithy.SchemaExtensions
+	eRequestStatus_APPROVED                                                                       smithy.SchemaExtensions
+	eRequestStatus_DENIED                                                                         smithy.SchemaExtensions
+	eRequestStatus_CASE_CLOSED                                                                    smithy.SchemaExtensions
+	eRequestStatus_NOT_APPROVED                                                                   smithy.SchemaExtensions
+	eRequestStatus_INVALID_REQUEST                                                                smithy.SchemaExtensions
+	eRequestType                                                                                  smithy.SchemaExtensions
+	eRequestType_AutomaticManagement                                                              smithy.SchemaExtensions
+	eResourceAlreadyExistsException                                                               smithy.SchemaExtensions
+	eResourceAlreadyExistsException_Message                                                       smithy.SchemaExtensions
+	e_ServiceCode                                                                                 smithy.SchemaExtensions
+	eServiceException                                                                             smithy.SchemaExtensions
+	eServiceException_Message                                                                     smithy.SchemaExtensions
+	eServiceInfo                                                                                  smithy.SchemaExtensions
+	eServiceInfo_ServiceCode                                                                      smithy.SchemaExtensions
+	eServiceInfo_ServiceName                                                                      smithy.SchemaExtensions
+	e_ServiceInfoListDefinition                                                                   smithy.SchemaExtensions
+	e_ServiceInfoListDefinition_member                                                            smithy.SchemaExtensions
+	e_ServiceName                                                                                 smithy.SchemaExtensions
+	eServiceQuota                                                                                 smithy.SchemaExtensions
+	eServiceQuota_ServiceCode                                                                     smithy.SchemaExtensions
+	eServiceQuota_ServiceName                                                                     smithy.SchemaExtensions
+	eServiceQuota_QuotaArn                                                                        smithy.SchemaExtensions
+	eServiceQuota_QuotaCode                                                                       smithy.SchemaExtensions
+	eServiceQuota_QuotaName                                                                       smithy.SchemaExtensions
+	eServiceQuota_Value                                                                           smithy.SchemaExtensions
+	eServiceQuota_Unit                                                                            smithy.SchemaExtensions
+	eServiceQuota_Adjustable                                                                      smithy.SchemaExtensions
+	eServiceQuota_GlobalQuota                                                                     smithy.SchemaExtensions
+	eServiceQuota_UsageMetric                                                                     smithy.SchemaExtensions
+	eServiceQuota_Period                                                                          smithy.SchemaExtensions
+	eServiceQuota_ErrorReason                                                                     smithy.SchemaExtensions
+	eServiceQuota_QuotaAppliedAtLevel                                                             smithy.SchemaExtensions
+	eServiceQuota_QuotaContext                                                                    smithy.SchemaExtensions
+	eServiceQuota_Description                                                                     smithy.SchemaExtensions
+	eServiceQuotaIncreaseRequestInTemplate                                                        smithy.SchemaExtensions
+	eServiceQuotaIncreaseRequestInTemplate_ServiceCode                                            smithy.SchemaExtensions
+	eServiceQuotaIncreaseRequestInTemplate_ServiceName                                            smithy.SchemaExtensions
+	eServiceQuotaIncreaseRequestInTemplate_QuotaCode                                              smithy.SchemaExtensions
+	eServiceQuotaIncreaseRequestInTemplate_QuotaName                                              smithy.SchemaExtensions
+	eServiceQuotaIncreaseRequestInTemplate_DesiredValue                                           smithy.SchemaExtensions
+	eServiceQuotaIncreaseRequestInTemplate_AwsRegion                                              smithy.SchemaExtensions
+	eServiceQuotaIncreaseRequestInTemplate_Unit                                                   smithy.SchemaExtensions
+	eServiceQuotaIncreaseRequestInTemplate_GlobalQuota                                            smithy.SchemaExtensions
+	e_ServiceQuotaIncreaseRequestInTemplateList                                                   smithy.SchemaExtensions
+	e_ServiceQuotaIncreaseRequestInTemplateList_member                                            smithy.SchemaExtensions
+	e_ServiceQuotaListDefinition                                                                  smithy.SchemaExtensions
+	e_ServiceQuotaListDefinition_member                                                           smithy.SchemaExtensions
+	eServiceQuotaTemplateAssociationStatus                                                        smithy.SchemaExtensions
+	eServiceQuotaTemplateAssociationStatus_ASSOCIATED                                             smithy.SchemaExtensions
+	eServiceQuotaTemplateAssociationStatus_DISASSOCIATED                                          smithy.SchemaExtensions
+	eServiceQuotaTemplateNotInUseException                                                        smithy.SchemaExtensions
+	eServiceQuotaTemplateNotInUseException_Message                                                smithy.SchemaExtensions
+	e_Statistic                                                                                   smithy.SchemaExtensions
+	e_SupportCaseAllowed                                                                          smithy.SchemaExtensions
+	eTag                                                                                          smithy.SchemaExtensions
+	eTag_Key                                                                                      smithy.SchemaExtensions
+	eTag_Value                                                                                    smithy.SchemaExtensions
+	e_TagKey                                                                                      smithy.SchemaExtensions
+	eTagPolicyViolationException                                                                  smithy.SchemaExtensions
+	eTagPolicyViolationException_Message                                                          smithy.SchemaExtensions
+	e_TagValue                                                                                    smithy.SchemaExtensions
+	eTemplatesNotAvailableInRegionException                                                       smithy.SchemaExtensions
+	eTemplatesNotAvailableInRegionException_Message                                               smithy.SchemaExtensions
+	eTooManyRequestsException                                                                     smithy.SchemaExtensions
+	eTooManyRequestsException_Message                                                             smithy.SchemaExtensions
+	eTooManyTagsException                                                                         smithy.SchemaExtensions
+	eTooManyTagsException_Message                                                                 smithy.SchemaExtensions
+	e_TotalCount                                                                                  smithy.SchemaExtensions
+	e_UtilizationPct                                                                              smithy.SchemaExtensions
+	eAssociateServiceQuotaTemplateRequest                                                         smithy.SchemaExtensions
+	eAssociateServiceQuotaTemplateResponse                                                        smithy.SchemaExtensions
+	eCreateSupportCaseRequest                                                                     smithy.SchemaExtensions
+	eCreateSupportCaseRequest_RequestId                                                           smithy.SchemaExtensions
+	eCreateSupportCaseResponse                                                                    smithy.SchemaExtensions
+	eDeleteServiceQuotaIncreaseRequestFromTemplateRequest                                         smithy.SchemaExtensions
+	eDeleteServiceQuotaIncreaseRequestFromTemplateRequest_ServiceCode                             smithy.SchemaExtensions
+	eDeleteServiceQuotaIncreaseRequestFromTemplateRequest_QuotaCode                               smithy.SchemaExtensions
+	eDeleteServiceQuotaIncreaseRequestFromTemplateRequest_AwsRegion                               smithy.SchemaExtensions
+	eDeleteServiceQuotaIncreaseRequestFromTemplateResponse                                        smithy.SchemaExtensions
+	eDisassociateServiceQuotaTemplateRequest                                                      smithy.SchemaExtensions
+	eDisassociateServiceQuotaTemplateResponse                                                     smithy.SchemaExtensions
+	eGetAssociationForServiceQuotaTemplateRequest                                                 smithy.SchemaExtensions
+	eGetAssociationForServiceQuotaTemplateResponse                                                smithy.SchemaExtensions
+	eGetAssociationForServiceQuotaTemplateResponse_ServiceQuotaTemplateAssociationStatus          smithy.SchemaExtensions
+	eGetAutoManagementConfigurationRequest                                                        smithy.SchemaExtensions
+	eGetAutoManagementConfigurationResponse                                                       smithy.SchemaExtensions
+	eGetAutoManagementConfigurationResponse_OptInLevel                                            smithy.SchemaExtensions
+	eGetAutoManagementConfigurationResponse_OptInType                                             smithy.SchemaExtensions
+	eGetAutoManagementConfigurationResponse_NotificationArn                                       smithy.SchemaExtensions
+	eGetAutoManagementConfigurationResponse_OptInStatus                                           smithy.SchemaExtensions
+	eGetAutoManagementConfigurationResponse_ExclusionList                                         smithy.SchemaExtensions
+	eGetAWSDefaultServiceQuotaRequest                                                             smithy.SchemaExtensions
+	eGetAWSDefaultServiceQuotaRequest_ServiceCode                                                 smithy.SchemaExtensions
+	eGetAWSDefaultServiceQuotaRequest_QuotaCode                                                   smithy.SchemaExtensions
+	eGetAWSDefaultServiceQuotaResponse                                                            smithy.SchemaExtensions
+	eGetAWSDefaultServiceQuotaResponse_Quota                                                      smithy.SchemaExtensions
+	eGetQuotaUtilizationReportRequest                                                             smithy.SchemaExtensions
+	eGetQuotaUtilizationReportRequest_ReportId                                                    smithy.SchemaExtensions
+	eGetQuotaUtilizationReportRequest_NextToken                                                   smithy.SchemaExtensions
+	eGetQuotaUtilizationReportRequest_MaxResults                                                  smithy.SchemaExtensions
+	eGetQuotaUtilizationReportResponse                                                            smithy.SchemaExtensions
+	eGetQuotaUtilizationReportResponse_ReportId                                                   smithy.SchemaExtensions
+	eGetQuotaUtilizationReportResponse_Status                                                     smithy.SchemaExtensions
+	eGetQuotaUtilizationReportResponse_GeneratedAt                                                smithy.SchemaExtensions
+	eGetQuotaUtilizationReportResponse_TotalCount                                                 smithy.SchemaExtensions
+	eGetQuotaUtilizationReportResponse_Quotas                                                     smithy.SchemaExtensions
+	eGetQuotaUtilizationReportResponse_NextToken                                                  smithy.SchemaExtensions
+	eGetQuotaUtilizationReportResponse_ErrorCode                                                  smithy.SchemaExtensions
+	eGetQuotaUtilizationReportResponse_ErrorMessage                                               smithy.SchemaExtensions
+	eGetRequestedServiceQuotaChangeRequest                                                        smithy.SchemaExtensions
+	eGetRequestedServiceQuotaChangeRequest_RequestId                                              smithy.SchemaExtensions
+	eGetRequestedServiceQuotaChangeResponse                                                       smithy.SchemaExtensions
+	eGetRequestedServiceQuotaChangeResponse_RequestedQuota                                        smithy.SchemaExtensions
+	eGetServiceQuotaIncreaseRequestFromTemplateRequest                                            smithy.SchemaExtensions
+	eGetServiceQuotaIncreaseRequestFromTemplateRequest_ServiceCode                                smithy.SchemaExtensions
+	eGetServiceQuotaIncreaseRequestFromTemplateRequest_QuotaCode                                  smithy.SchemaExtensions
+	eGetServiceQuotaIncreaseRequestFromTemplateRequest_AwsRegion                                  smithy.SchemaExtensions
+	eGetServiceQuotaIncreaseRequestFromTemplateResponse                                           smithy.SchemaExtensions
+	eGetServiceQuotaIncreaseRequestFromTemplateResponse_ServiceQuotaIncreaseRequestInTemplate     smithy.SchemaExtensions
+	eGetServiceQuotaRequest                                                                       smithy.SchemaExtensions
+	eGetServiceQuotaRequest_ServiceCode                                                           smithy.SchemaExtensions
+	eGetServiceQuotaRequest_QuotaCode                                                             smithy.SchemaExtensions
+	eGetServiceQuotaRequest_ContextId                                                             smithy.SchemaExtensions
+	eGetServiceQuotaResponse                                                                      smithy.SchemaExtensions
+	eGetServiceQuotaResponse_Quota                                                                smithy.SchemaExtensions
+	eListAWSDefaultServiceQuotasRequest                                                           smithy.SchemaExtensions
+	eListAWSDefaultServiceQuotasRequest_ServiceCode                                               smithy.SchemaExtensions
+	eListAWSDefaultServiceQuotasRequest_NextToken                                                 smithy.SchemaExtensions
+	eListAWSDefaultServiceQuotasRequest_MaxResults                                                smithy.SchemaExtensions
+	eListAWSDefaultServiceQuotasResponse                                                          smithy.SchemaExtensions
+	eListAWSDefaultServiceQuotasResponse_NextToken                                                smithy.SchemaExtensions
+	eListAWSDefaultServiceQuotasResponse_Quotas                                                   smithy.SchemaExtensions
+	eListRequestedServiceQuotaChangeHistoryByQuotaRequest                                         smithy.SchemaExtensions
+	eListRequestedServiceQuotaChangeHistoryByQuotaRequest_ServiceCode                             smithy.SchemaExtensions
+	eListRequestedServiceQuotaChangeHistoryByQuotaRequest_QuotaCode                               smithy.SchemaExtensions
+	eListRequestedServiceQuotaChangeHistoryByQuotaRequest_Status                                  smithy.SchemaExtensions
+	eListRequestedServiceQuotaChangeHistoryByQuotaRequest_NextToken                               smithy.SchemaExtensions
+	eListRequestedServiceQuotaChangeHistoryByQuotaRequest_MaxResults                              smithy.SchemaExtensions
+	eListRequestedServiceQuotaChangeHistoryByQuotaRequest_QuotaRequestedAtLevel                   smithy.SchemaExtensions
+	eListRequestedServiceQuotaChangeHistoryByQuotaResponse                                        smithy.SchemaExtensions
+	eListRequestedServiceQuotaChangeHistoryByQuotaResponse_NextToken                              smithy.SchemaExtensions
+	eListRequestedServiceQuotaChangeHistoryByQuotaResponse_RequestedQuotas                        smithy.SchemaExtensions
+	eListRequestedServiceQuotaChangeHistoryRequest                                                smithy.SchemaExtensions
+	eListRequestedServiceQuotaChangeHistoryRequest_ServiceCode                                    smithy.SchemaExtensions
+	eListRequestedServiceQuotaChangeHistoryRequest_Status                                         smithy.SchemaExtensions
+	eListRequestedServiceQuotaChangeHistoryRequest_NextToken                                      smithy.SchemaExtensions
+	eListRequestedServiceQuotaChangeHistoryRequest_MaxResults                                     smithy.SchemaExtensions
+	eListRequestedServiceQuotaChangeHistoryRequest_QuotaRequestedAtLevel                          smithy.SchemaExtensions
+	eListRequestedServiceQuotaChangeHistoryResponse                                               smithy.SchemaExtensions
+	eListRequestedServiceQuotaChangeHistoryResponse_NextToken                                     smithy.SchemaExtensions
+	eListRequestedServiceQuotaChangeHistoryResponse_RequestedQuotas                               smithy.SchemaExtensions
+	eListServiceQuotaIncreaseRequestsInTemplateRequest                                            smithy.SchemaExtensions
+	eListServiceQuotaIncreaseRequestsInTemplateRequest_ServiceCode                                smithy.SchemaExtensions
+	eListServiceQuotaIncreaseRequestsInTemplateRequest_AwsRegion                                  smithy.SchemaExtensions
+	eListServiceQuotaIncreaseRequestsInTemplateRequest_NextToken                                  smithy.SchemaExtensions
+	eListServiceQuotaIncreaseRequestsInTemplateRequest_MaxResults                                 smithy.SchemaExtensions
+	eListServiceQuotaIncreaseRequestsInTemplateResponse                                           smithy.SchemaExtensions
+	eListServiceQuotaIncreaseRequestsInTemplateResponse_ServiceQuotaIncreaseRequestInTemplateList smithy.SchemaExtensions
+	eListServiceQuotaIncreaseRequestsInTemplateResponse_NextToken                                 smithy.SchemaExtensions
+	eListServiceQuotasRequest                                                                     smithy.SchemaExtensions
+	eListServiceQuotasRequest_ServiceCode                                                         smithy.SchemaExtensions
+	eListServiceQuotasRequest_NextToken                                                           smithy.SchemaExtensions
+	eListServiceQuotasRequest_MaxResults                                                          smithy.SchemaExtensions
+	eListServiceQuotasRequest_QuotaCode                                                           smithy.SchemaExtensions
+	eListServiceQuotasRequest_QuotaAppliedAtLevel                                                 smithy.SchemaExtensions
+	eListServiceQuotasResponse                                                                    smithy.SchemaExtensions
+	eListServiceQuotasResponse_NextToken                                                          smithy.SchemaExtensions
+	eListServiceQuotasResponse_Quotas                                                             smithy.SchemaExtensions
+	eListServicesRequest                                                                          smithy.SchemaExtensions
+	eListServicesRequest_NextToken                                                                smithy.SchemaExtensions
+	eListServicesRequest_MaxResults                                                               smithy.SchemaExtensions
+	eListServicesResponse                                                                         smithy.SchemaExtensions
+	eListServicesResponse_NextToken                                                               smithy.SchemaExtensions
+	eListServicesResponse_Services                                                                smithy.SchemaExtensions
+	eListTagsForResourceRequest                                                                   smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceARN                                                       smithy.SchemaExtensions
+	eListTagsForResourceResponse                                                                  smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                                                             smithy.SchemaExtensions
+	ePutServiceQuotaIncreaseRequestIntoTemplateRequest                                            smithy.SchemaExtensions
+	ePutServiceQuotaIncreaseRequestIntoTemplateRequest_QuotaCode                                  smithy.SchemaExtensions
+	ePutServiceQuotaIncreaseRequestIntoTemplateRequest_ServiceCode                                smithy.SchemaExtensions
+	ePutServiceQuotaIncreaseRequestIntoTemplateRequest_AwsRegion                                  smithy.SchemaExtensions
+	ePutServiceQuotaIncreaseRequestIntoTemplateRequest_DesiredValue                               smithy.SchemaExtensions
+	ePutServiceQuotaIncreaseRequestIntoTemplateResponse                                           smithy.SchemaExtensions
+	ePutServiceQuotaIncreaseRequestIntoTemplateResponse_ServiceQuotaIncreaseRequestInTemplate     smithy.SchemaExtensions
+	eRequestServiceQuotaIncreaseRequest                                                           smithy.SchemaExtensions
+	eRequestServiceQuotaIncreaseRequest_ServiceCode                                               smithy.SchemaExtensions
+	eRequestServiceQuotaIncreaseRequest_QuotaCode                                                 smithy.SchemaExtensions
+	eRequestServiceQuotaIncreaseRequest_DesiredValue                                              smithy.SchemaExtensions
+	eRequestServiceQuotaIncreaseRequest_ContextId                                                 smithy.SchemaExtensions
+	eRequestServiceQuotaIncreaseRequest_SupportCaseAllowed                                        smithy.SchemaExtensions
+	eRequestServiceQuotaIncreaseResponse                                                          smithy.SchemaExtensions
+	eRequestServiceQuotaIncreaseResponse_RequestedQuota                                           smithy.SchemaExtensions
+	eStartAutoManagementRequest                                                                   smithy.SchemaExtensions
+	eStartAutoManagementRequest_OptInLevel                                                        smithy.SchemaExtensions
+	eStartAutoManagementRequest_OptInType                                                         smithy.SchemaExtensions
+	eStartAutoManagementRequest_NotificationArn                                                   smithy.SchemaExtensions
+	eStartAutoManagementRequest_ExclusionList                                                     smithy.SchemaExtensions
+	eStartAutoManagementResponse                                                                  smithy.SchemaExtensions
+	eStartQuotaUtilizationReportRequest                                                           smithy.SchemaExtensions
+	eStartQuotaUtilizationReportResponse                                                          smithy.SchemaExtensions
+	eStartQuotaUtilizationReportResponse_ReportId                                                 smithy.SchemaExtensions
+	eStartQuotaUtilizationReportResponse_Status                                                   smithy.SchemaExtensions
+	eStartQuotaUtilizationReportResponse_Message                                                  smithy.SchemaExtensions
+	eStopAutoManagementRequest                                                                    smithy.SchemaExtensions
+	eStopAutoManagementResponse                                                                   smithy.SchemaExtensions
+	eTagResourceRequest                                                                           smithy.SchemaExtensions
+	eTagResourceRequest_ResourceARN                                                               smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                                                      smithy.SchemaExtensions
+	eTagResourceResponse                                                                          smithy.SchemaExtensions
+	eUntagResourceRequest                                                                         smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceARN                                                             smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                                                 smithy.SchemaExtensions
+	eUntagResourceResponse                                                                        smithy.SchemaExtensions
+	eUpdateAutoManagementRequest                                                                  smithy.SchemaExtensions
+	eUpdateAutoManagementRequest_OptInType                                                        smithy.SchemaExtensions
+	eUpdateAutoManagementRequest_NotificationArn                                                  smithy.SchemaExtensions
+	eUpdateAutoManagementRequest_ExclusionList                                                    smithy.SchemaExtensions
+	eUpdateAutoManagementResponse                                                                 smithy.SchemaExtensions
+)
 
 var (
 	iAssociateServiceQuotaTemplate                         = smithy.ShapeID{Namespace: "com.amazonaws.servicequotas", Name: "AssociateServiceQuotaTemplate"}
@@ -299,417 +708,417 @@ var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResou
 var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceARN, &sUntagResourceRequest_TagKeys}}
 var mUpdateAutoManagementRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAutoManagementRequest_OptInType, &sUpdateAutoManagementRequest_NotificationArn, &sUpdateAutoManagementRequest_ExclusionList}}
 
-var sAssociateServiceQuotaTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateServiceQuotaTemplate, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCreateSupportCase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSupportCase, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sDeleteServiceQuotaIncreaseRequestFromTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceQuotaIncreaseRequestFromTemplate, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sDisassociateServiceQuotaTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateServiceQuotaTemplate, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sGetAssociationForServiceQuotaTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssociationForServiceQuotaTemplate, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sGetAutoManagementConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAutoManagementConfiguration, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sGetAWSDefaultServiceQuota = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAWSDefaultServiceQuota, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sGetQuotaUtilizationReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQuotaUtilizationReport, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sGetRequestedServiceQuotaChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRequestedServiceQuotaChange, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sGetServiceQuota = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceQuota, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sGetServiceQuotaIncreaseRequestFromTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceQuotaIncreaseRequestFromTemplate, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sListAWSDefaultServiceQuotas = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAWSDefaultServiceQuotas, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sListRequestedServiceQuotaChangeHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRequestedServiceQuotaChangeHistory, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sListRequestedServiceQuotaChangeHistoryByQuota = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRequestedServiceQuotaChangeHistoryByQuota, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sListServiceQuotaIncreaseRequestsInTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceQuotaIncreaseRequestsInTemplate, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sListServiceQuotas = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceQuotas, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sListServices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServices, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sPutServiceQuotaIncreaseRequestIntoTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutServiceQuotaIncreaseRequestIntoTemplate, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sRequestServiceQuotaIncrease = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestServiceQuotaIncrease, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var sStartAutoManagement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAutoManagement, Type: smithy.ShapeTypeOperation, Ext: &ext[20]})
-var sStartQuotaUtilizationReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQuotaUtilizationReport, Type: smithy.ShapeTypeOperation, Ext: &ext[21]})
-var sStopAutoManagement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopAutoManagement, Type: smithy.ShapeTypeOperation, Ext: &ext[22]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[23]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &ext[24]})
-var sUpdateAutoManagement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAutoManagement, Type: smithy.ShapeTypeOperation, Ext: &ext[25]})
-var s_ServiceQuotasV20190624 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceQuotasV20190624, Type: smithy.ShapeTypeService, Ext: &ext[26]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[27]})
-var sAdjustableAtLevelEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdjustableAtLevelEnum, Members: &mAdjustableAtLevelEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[29]})
-var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[33]})
-var sAppliedLevelEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppliedLevelEnum, Members: &mAppliedLevelEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[34]})
-var s_AppliedValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppliedValue, Type: smithy.ShapeTypeDouble, Ext: &ext[38]})
-var s_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &ext[39]})
-var sAWSServiceAccessNotEnabledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAWSServiceAccessNotEnabledException, Members: &mAWSServiceAccessNotEnabledException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[40]})
-var s_CustomerServiceEngagementId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerServiceEngagementId, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var s_DateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[43]})
-var s_DefaultValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DefaultValue, Type: smithy.ShapeTypeDouble, Ext: &ext[44]})
-var sDependencyAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDependencyAccessDeniedException, Members: &mDependencyAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[45]})
-var sErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[47]})
-var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var sErrorReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorReason, Members: &mErrorReason, Type: smithy.ShapeTypeStructure, Ext: &ext[53]})
-var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[56]})
-var s_ExcludedLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludedLimit, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var s_ExcludedQuotaList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludedQuotaList, Members: &m_ExcludedQuotaList, Type: smithy.ShapeTypeList, Ext: &ext[58]})
-var s_ExcludedService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludedService, Type: smithy.ShapeTypeString, Ext: &ext[60]})
-var s_ExclusionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExclusionList, Members: &m_ExclusionList, Type: smithy.ShapeTypeMap, Ext: &ext[61]})
-var s_ExclusionQuotaList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExclusionQuotaList, Members: &m_ExclusionQuotaList, Type: smithy.ShapeTypeMap, Ext: &ext[64]})
-var s_GlobalQuota = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GlobalQuota, Type: smithy.ShapeTypeBoolean, Ext: &ext[67]})
-var sIllegalArgumentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIllegalArgumentException, Members: &mIllegalArgumentException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var s_InputTagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InputTagKeys, Members: &m_InputTagKeys, Type: smithy.ShapeTypeList, Ext: &ext[70]})
-var s_InputTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InputTags, Members: &m_InputTags, Type: smithy.ShapeTypeList, Ext: &ext[72]})
-var sInvalidPaginationTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidPaginationTokenException, Members: &mInvalidPaginationTokenException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var sInvalidResourceStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidResourceStateException, Members: &mInvalidResourceStateException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[76]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[78]})
-var s_MaxResultsUtilization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsUtilization, Type: smithy.ShapeTypeInteger, Ext: &ext[79]})
-var s_MetricDimensionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricDimensionName, Type: smithy.ShapeTypeString, Ext: &ext[80]})
-var s_MetricDimensionsMapDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricDimensionsMapDefinition, Members: &m_MetricDimensionsMapDefinition, Type: smithy.ShapeTypeMap, Ext: &ext[81]})
-var s_MetricDimensionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricDimensionValue, Type: smithy.ShapeTypeString, Ext: &ext[84]})
-var sMetricInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricInfo, Members: &mMetricInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[85]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[90]})
-var sNoAvailableOrganizationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoAvailableOrganizationException, Members: &mNoAvailableOrganizationException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[91]})
-var sNoSuchResourceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoSuchResourceException, Members: &mNoSuchResourceException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[93]})
-var sOptInLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptInLevel, Members: &mOptInLevel, Type: smithy.ShapeTypeEnum, Ext: &ext[95]})
-var sOptInStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptInStatus, Members: &mOptInStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[97]})
-var sOptInType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptInType, Members: &mOptInType, Type: smithy.ShapeTypeEnum, Ext: &ext[100]})
-var sOrganizationNotInAllFeaturesModeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationNotInAllFeaturesModeException, Members: &mOrganizationNotInAllFeaturesModeException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[103]})
-var s_OutputTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputTags, Members: &m_OutputTags, Type: smithy.ShapeTypeList, Ext: &ext[105]})
-var sPeriodUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPeriodUnit, Members: &mPeriodUnit, Type: smithy.ShapeTypeEnum, Ext: &ext[107]})
-var s_PeriodValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PeriodValue, Type: smithy.ShapeTypeInteger, Ext: &ext[115]})
-var s_QuotaAdjustable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaAdjustable, Type: smithy.ShapeTypeBoolean, Ext: &ext[116]})
-var s_QuotaArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaArn, Type: smithy.ShapeTypeString, Ext: &ext[117]})
-var s_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &ext[118]})
-var s_QuotaContextId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaContextId, Type: smithy.ShapeTypeString, Ext: &ext[119]})
-var sQuotaContextInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuotaContextInfo, Members: &mQuotaContextInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var sQuotaContextScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuotaContextScope, Members: &mQuotaContextScope, Type: smithy.ShapeTypeEnum, Ext: &ext[125]})
-var s_QuotaContextScopeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaContextScopeType, Type: smithy.ShapeTypeString, Ext: &ext[128]})
-var s_QuotaDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaDescription, Type: smithy.ShapeTypeString, Ext: &ext[129]})
-var sQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuotaExceededException, Members: &mQuotaExceededException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &ext[130]})
-var sQuotaInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuotaInfo, Members: &mQuotaInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[132]})
-var s_QuotaInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaInfoList, Members: &m_QuotaInfoList, Type: smithy.ShapeTypeList, Ext: &ext[135]})
-var s_QuotaMetricName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaMetricName, Type: smithy.ShapeTypeString, Ext: &ext[137]})
-var s_QuotaMetricNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaMetricNamespace, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var s_QuotaName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaName, Type: smithy.ShapeTypeString, Ext: &ext[139]})
-var sQuotaPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuotaPeriod, Members: &mQuotaPeriod, Type: smithy.ShapeTypeStructure, Ext: &ext[140]})
-var s_QuotaUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaUnit, Type: smithy.ShapeTypeString, Ext: &ext[143]})
-var sQuotaUtilizationInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuotaUtilizationInfo, Members: &mQuotaUtilizationInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[144]})
-var s_QuotaUtilizationInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaUtilizationInfoList, Members: &m_QuotaUtilizationInfoList, Type: smithy.ShapeTypeList, Ext: &ext[154]})
-var s_QuotaValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaValue, Type: smithy.ShapeTypeDouble, Ext: &ext[156]})
-var s_ReportErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[157]})
-var s_ReportErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[158]})
-var s_ReportId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportId, Type: smithy.ShapeTypeString, Ext: &ext[159]})
-var s_ReportMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportMessage, Type: smithy.ShapeTypeString, Ext: &ext[160]})
-var sReportStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportStatus, Members: &mReportStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[161]})
-var sRequestedServiceQuotaChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestedServiceQuotaChange, Members: &mRequestedServiceQuotaChange, Type: smithy.ShapeTypeStructure, Ext: &ext[166]})
-var s_RequestedServiceQuotaChangeHistoryListDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestedServiceQuotaChangeHistoryListDefinition, Members: &m_RequestedServiceQuotaChangeHistoryListDefinition, Type: smithy.ShapeTypeList, Ext: &ext[184]})
-var s_Requester = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Requester, Type: smithy.ShapeTypeString, Ext: &ext[186]})
-var s_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &ext[187]})
-var sRequestStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestStatus, Members: &mRequestStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[188]})
-var sRequestType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestType, Members: &mRequestType, Type: smithy.ShapeTypeEnum, Ext: &ext[196]})
-var sResourceAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceAlreadyExistsException, Members: &mResourceAlreadyExistsException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[198]})
-var s_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &ext[200]})
-var sServiceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceException, Members: &mServiceException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &ext[201]})
-var sServiceInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceInfo, Members: &mServiceInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[203]})
-var s_ServiceInfoListDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceInfoListDefinition, Members: &m_ServiceInfoListDefinition, Type: smithy.ShapeTypeList, Ext: &ext[206]})
-var s_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &ext[208]})
-var sServiceQuota = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuota, Members: &mServiceQuota, Type: smithy.ShapeTypeStructure, Ext: &ext[209]})
-var sServiceQuotaIncreaseRequestInTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaIncreaseRequestInTemplate, Members: &mServiceQuotaIncreaseRequestInTemplate, Type: smithy.ShapeTypeStructure, Ext: &ext[225]})
-var s_ServiceQuotaIncreaseRequestInTemplateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceQuotaIncreaseRequestInTemplateList, Members: &m_ServiceQuotaIncreaseRequestInTemplateList, Type: smithy.ShapeTypeList, Ext: &ext[234]})
-var s_ServiceQuotaListDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceQuotaListDefinition, Members: &m_ServiceQuotaListDefinition, Type: smithy.ShapeTypeList, Ext: &ext[236]})
-var sServiceQuotaTemplateAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaTemplateAssociationStatus, Members: &mServiceQuotaTemplateAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[238]})
-var sServiceQuotaTemplateNotInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaTemplateNotInUseException, Members: &mServiceQuotaTemplateNotInUseException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[241]})
-var s_Statistic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Statistic, Type: smithy.ShapeTypeString, Ext: &ext[243]})
-var s_SupportCaseAllowed = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportCaseAllowed, Type: smithy.ShapeTypeBoolean, Ext: &ext[244]})
-var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[245]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[248]})
-var sTagPolicyViolationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagPolicyViolationException, Members: &mTagPolicyViolationException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &ext[249]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[251]})
-var sTemplatesNotAvailableInRegionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplatesNotAvailableInRegionException, Members: &mTemplatesNotAvailableInRegionException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[252]})
-var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &ext[254]})
-var sTooManyTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsException, Members: &mTooManyTagsException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[256]})
-var s_TotalCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TotalCount, Type: smithy.ShapeTypeInteger, Ext: &ext[258]})
-var s_UtilizationPct = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UtilizationPct, Type: smithy.ShapeTypeDouble, Ext: &ext[259]})
-var sAssociateServiceQuotaTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateServiceQuotaTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[260]})
-var sAssociateServiceQuotaTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateServiceQuotaTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[261]})
-var sCreateSupportCaseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSupportCaseRequest, Members: &mCreateSupportCaseRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[262]})
-var sCreateSupportCaseResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSupportCaseResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[264]})
-var sDeleteServiceQuotaIncreaseRequestFromTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceQuotaIncreaseRequestFromTemplateRequest, Members: &mDeleteServiceQuotaIncreaseRequestFromTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[265]})
-var sDeleteServiceQuotaIncreaseRequestFromTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceQuotaIncreaseRequestFromTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[269]})
-var sDisassociateServiceQuotaTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateServiceQuotaTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[270]})
-var sDisassociateServiceQuotaTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateServiceQuotaTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[271]})
-var sGetAssociationForServiceQuotaTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssociationForServiceQuotaTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[272]})
-var sGetAssociationForServiceQuotaTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssociationForServiceQuotaTemplateResponse, Members: &mGetAssociationForServiceQuotaTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[273]})
-var sGetAutoManagementConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAutoManagementConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[275]})
-var sGetAutoManagementConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAutoManagementConfigurationResponse, Members: &mGetAutoManagementConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[276]})
-var sGetAWSDefaultServiceQuotaRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAWSDefaultServiceQuotaRequest, Members: &mGetAWSDefaultServiceQuotaRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[282]})
-var sGetAWSDefaultServiceQuotaResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAWSDefaultServiceQuotaResponse, Members: &mGetAWSDefaultServiceQuotaResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[285]})
-var sGetQuotaUtilizationReportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQuotaUtilizationReportRequest, Members: &mGetQuotaUtilizationReportRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[287]})
-var sGetQuotaUtilizationReportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQuotaUtilizationReportResponse, Members: &mGetQuotaUtilizationReportResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[291]})
-var sGetRequestedServiceQuotaChangeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRequestedServiceQuotaChangeRequest, Members: &mGetRequestedServiceQuotaChangeRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[300]})
-var sGetRequestedServiceQuotaChangeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRequestedServiceQuotaChangeResponse, Members: &mGetRequestedServiceQuotaChangeResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[302]})
-var sGetServiceQuotaIncreaseRequestFromTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceQuotaIncreaseRequestFromTemplateRequest, Members: &mGetServiceQuotaIncreaseRequestFromTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[304]})
-var sGetServiceQuotaIncreaseRequestFromTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceQuotaIncreaseRequestFromTemplateResponse, Members: &mGetServiceQuotaIncreaseRequestFromTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[308]})
-var sGetServiceQuotaRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceQuotaRequest, Members: &mGetServiceQuotaRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[310]})
-var sGetServiceQuotaResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceQuotaResponse, Members: &mGetServiceQuotaResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[314]})
-var sListAWSDefaultServiceQuotasRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAWSDefaultServiceQuotasRequest, Members: &mListAWSDefaultServiceQuotasRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[316]})
-var sListAWSDefaultServiceQuotasResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAWSDefaultServiceQuotasResponse, Members: &mListAWSDefaultServiceQuotasResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[320]})
-var sListRequestedServiceQuotaChangeHistoryByQuotaRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRequestedServiceQuotaChangeHistoryByQuotaRequest, Members: &mListRequestedServiceQuotaChangeHistoryByQuotaRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[323]})
-var sListRequestedServiceQuotaChangeHistoryByQuotaResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRequestedServiceQuotaChangeHistoryByQuotaResponse, Members: &mListRequestedServiceQuotaChangeHistoryByQuotaResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[330]})
-var sListRequestedServiceQuotaChangeHistoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRequestedServiceQuotaChangeHistoryRequest, Members: &mListRequestedServiceQuotaChangeHistoryRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[333]})
-var sListRequestedServiceQuotaChangeHistoryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRequestedServiceQuotaChangeHistoryResponse, Members: &mListRequestedServiceQuotaChangeHistoryResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[339]})
-var sListServiceQuotaIncreaseRequestsInTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceQuotaIncreaseRequestsInTemplateRequest, Members: &mListServiceQuotaIncreaseRequestsInTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[342]})
-var sListServiceQuotaIncreaseRequestsInTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceQuotaIncreaseRequestsInTemplateResponse, Members: &mListServiceQuotaIncreaseRequestsInTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[347]})
-var sListServiceQuotasRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceQuotasRequest, Members: &mListServiceQuotasRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[350]})
-var sListServiceQuotasResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceQuotasResponse, Members: &mListServiceQuotasResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[356]})
-var sListServicesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicesRequest, Members: &mListServicesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[359]})
-var sListServicesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicesResponse, Members: &mListServicesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[362]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[365]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[367]})
-var sPutServiceQuotaIncreaseRequestIntoTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutServiceQuotaIncreaseRequestIntoTemplateRequest, Members: &mPutServiceQuotaIncreaseRequestIntoTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[369]})
-var sPutServiceQuotaIncreaseRequestIntoTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutServiceQuotaIncreaseRequestIntoTemplateResponse, Members: &mPutServiceQuotaIncreaseRequestIntoTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[374]})
-var sRequestServiceQuotaIncreaseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestServiceQuotaIncreaseRequest, Members: &mRequestServiceQuotaIncreaseRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[376]})
-var sRequestServiceQuotaIncreaseResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestServiceQuotaIncreaseResponse, Members: &mRequestServiceQuotaIncreaseResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[382]})
-var sStartAutoManagementRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAutoManagementRequest, Members: &mStartAutoManagementRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[384]})
-var sStartAutoManagementResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAutoManagementResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[389]})
-var sStartQuotaUtilizationReportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQuotaUtilizationReportRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[390]})
-var sStartQuotaUtilizationReportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQuotaUtilizationReportResponse, Members: &mStartQuotaUtilizationReportResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[391]})
-var sStopAutoManagementRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopAutoManagementRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[395]})
-var sStopAutoManagementResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopAutoManagementResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[396]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[397]})
-var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[400]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[401]})
-var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[404]})
-var sUpdateAutoManagementRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAutoManagementRequest, Members: &mUpdateAutoManagementRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[405]})
-var sUpdateAutoManagementResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAutoManagementResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[409]})
+var sAssociateServiceQuotaTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateServiceQuotaTemplate, Type: smithy.ShapeTypeOperation, Ext: &eAssociateServiceQuotaTemplate})
+var sCreateSupportCase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSupportCase, Type: smithy.ShapeTypeOperation, Ext: &eCreateSupportCase})
+var sDeleteServiceQuotaIncreaseRequestFromTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceQuotaIncreaseRequestFromTemplate, Type: smithy.ShapeTypeOperation, Ext: &eDeleteServiceQuotaIncreaseRequestFromTemplate})
+var sDisassociateServiceQuotaTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateServiceQuotaTemplate, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateServiceQuotaTemplate})
+var sGetAssociationForServiceQuotaTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssociationForServiceQuotaTemplate, Type: smithy.ShapeTypeOperation, Ext: &eGetAssociationForServiceQuotaTemplate})
+var sGetAutoManagementConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAutoManagementConfiguration, Type: smithy.ShapeTypeOperation, Ext: &eGetAutoManagementConfiguration})
+var sGetAWSDefaultServiceQuota = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAWSDefaultServiceQuota, Type: smithy.ShapeTypeOperation, Ext: &eGetAWSDefaultServiceQuota})
+var sGetQuotaUtilizationReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQuotaUtilizationReport, Type: smithy.ShapeTypeOperation, Ext: &eGetQuotaUtilizationReport})
+var sGetRequestedServiceQuotaChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRequestedServiceQuotaChange, Type: smithy.ShapeTypeOperation, Ext: &eGetRequestedServiceQuotaChange})
+var sGetServiceQuota = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceQuota, Type: smithy.ShapeTypeOperation, Ext: &eGetServiceQuota})
+var sGetServiceQuotaIncreaseRequestFromTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceQuotaIncreaseRequestFromTemplate, Type: smithy.ShapeTypeOperation, Ext: &eGetServiceQuotaIncreaseRequestFromTemplate})
+var sListAWSDefaultServiceQuotas = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAWSDefaultServiceQuotas, Type: smithy.ShapeTypeOperation, Ext: &eListAWSDefaultServiceQuotas})
+var sListRequestedServiceQuotaChangeHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRequestedServiceQuotaChangeHistory, Type: smithy.ShapeTypeOperation, Ext: &eListRequestedServiceQuotaChangeHistory})
+var sListRequestedServiceQuotaChangeHistoryByQuota = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRequestedServiceQuotaChangeHistoryByQuota, Type: smithy.ShapeTypeOperation, Ext: &eListRequestedServiceQuotaChangeHistoryByQuota})
+var sListServiceQuotaIncreaseRequestsInTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceQuotaIncreaseRequestsInTemplate, Type: smithy.ShapeTypeOperation, Ext: &eListServiceQuotaIncreaseRequestsInTemplate})
+var sListServiceQuotas = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceQuotas, Type: smithy.ShapeTypeOperation, Ext: &eListServiceQuotas})
+var sListServices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServices, Type: smithy.ShapeTypeOperation, Ext: &eListServices})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sPutServiceQuotaIncreaseRequestIntoTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutServiceQuotaIncreaseRequestIntoTemplate, Type: smithy.ShapeTypeOperation, Ext: &ePutServiceQuotaIncreaseRequestIntoTemplate})
+var sRequestServiceQuotaIncrease = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestServiceQuotaIncrease, Type: smithy.ShapeTypeOperation, Ext: &eRequestServiceQuotaIncrease})
+var sStartAutoManagement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAutoManagement, Type: smithy.ShapeTypeOperation, Ext: &eStartAutoManagement})
+var sStartQuotaUtilizationReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQuotaUtilizationReport, Type: smithy.ShapeTypeOperation, Ext: &eStartQuotaUtilizationReport})
+var sStopAutoManagement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopAutoManagement, Type: smithy.ShapeTypeOperation, Ext: &eStopAutoManagement})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateAutoManagement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAutoManagement, Type: smithy.ShapeTypeOperation, Ext: &eUpdateAutoManagement})
+var s_ServiceQuotasV20190624 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceQuotasV20190624, Type: smithy.ShapeTypeService, Ext: &e_ServiceQuotasV20190624})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAdjustableAtLevelEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdjustableAtLevelEnum, Members: &mAdjustableAtLevelEnum, Type: smithy.ShapeTypeEnum, Ext: &eAdjustableAtLevelEnum})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &e_AmazonResourceName})
+var sAppliedLevelEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppliedLevelEnum, Members: &mAppliedLevelEnum, Type: smithy.ShapeTypeEnum, Ext: &eAppliedLevelEnum})
+var s_AppliedValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppliedValue, Type: smithy.ShapeTypeDouble, Ext: &e_AppliedValue})
+var s_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &e_AwsRegion})
+var sAWSServiceAccessNotEnabledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAWSServiceAccessNotEnabledException, Members: &mAWSServiceAccessNotEnabledException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eAWSServiceAccessNotEnabledException})
+var s_CustomerServiceEngagementId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerServiceEngagementId, Type: smithy.ShapeTypeString, Ext: &e_CustomerServiceEngagementId})
+var s_DateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &e_DateTime})
+var s_DefaultValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DefaultValue, Type: smithy.ShapeTypeDouble, Ext: &e_DefaultValue})
+var sDependencyAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDependencyAccessDeniedException, Members: &mDependencyAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eDependencyAccessDeniedException})
+var sErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eErrorCode})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var sErrorReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorReason, Members: &mErrorReason, Type: smithy.ShapeTypeStructure, Ext: &eErrorReason})
+var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &e_ExceptionMessage})
+var s_ExcludedLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludedLimit, Type: smithy.ShapeTypeString, Ext: &e_ExcludedLimit})
+var s_ExcludedQuotaList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludedQuotaList, Members: &m_ExcludedQuotaList, Type: smithy.ShapeTypeList, Ext: &e_ExcludedQuotaList})
+var s_ExcludedService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludedService, Type: smithy.ShapeTypeString, Ext: &e_ExcludedService})
+var s_ExclusionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExclusionList, Members: &m_ExclusionList, Type: smithy.ShapeTypeMap, Ext: &e_ExclusionList})
+var s_ExclusionQuotaList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExclusionQuotaList, Members: &m_ExclusionQuotaList, Type: smithy.ShapeTypeMap, Ext: &e_ExclusionQuotaList})
+var s_GlobalQuota = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GlobalQuota, Type: smithy.ShapeTypeBoolean, Ext: &e_GlobalQuota})
+var sIllegalArgumentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIllegalArgumentException, Members: &mIllegalArgumentException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eIllegalArgumentException})
+var s_InputTagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InputTagKeys, Members: &m_InputTagKeys, Type: smithy.ShapeTypeList, Ext: &e_InputTagKeys})
+var s_InputTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InputTags, Members: &m_InputTags, Type: smithy.ShapeTypeList, Ext: &e_InputTags})
+var sInvalidPaginationTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidPaginationTokenException, Members: &mInvalidPaginationTokenException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eInvalidPaginationTokenException})
+var sInvalidResourceStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidResourceStateException, Members: &mInvalidResourceStateException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eInvalidResourceStateException})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_MaxResultsUtilization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsUtilization, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResultsUtilization})
+var s_MetricDimensionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricDimensionName, Type: smithy.ShapeTypeString, Ext: &e_MetricDimensionName})
+var s_MetricDimensionsMapDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricDimensionsMapDefinition, Members: &m_MetricDimensionsMapDefinition, Type: smithy.ShapeTypeMap, Ext: &e_MetricDimensionsMapDefinition})
+var s_MetricDimensionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricDimensionValue, Type: smithy.ShapeTypeString, Ext: &e_MetricDimensionValue})
+var sMetricInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricInfo, Members: &mMetricInfo, Type: smithy.ShapeTypeStructure, Ext: &eMetricInfo})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sNoAvailableOrganizationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoAvailableOrganizationException, Members: &mNoAvailableOrganizationException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eNoAvailableOrganizationException})
+var sNoSuchResourceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoSuchResourceException, Members: &mNoSuchResourceException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eNoSuchResourceException})
+var sOptInLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptInLevel, Members: &mOptInLevel, Type: smithy.ShapeTypeEnum, Ext: &eOptInLevel})
+var sOptInStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptInStatus, Members: &mOptInStatus, Type: smithy.ShapeTypeEnum, Ext: &eOptInStatus})
+var sOptInType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptInType, Members: &mOptInType, Type: smithy.ShapeTypeEnum, Ext: &eOptInType})
+var sOrganizationNotInAllFeaturesModeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationNotInAllFeaturesModeException, Members: &mOrganizationNotInAllFeaturesModeException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eOrganizationNotInAllFeaturesModeException})
+var s_OutputTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputTags, Members: &m_OutputTags, Type: smithy.ShapeTypeList, Ext: &e_OutputTags})
+var sPeriodUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPeriodUnit, Members: &mPeriodUnit, Type: smithy.ShapeTypeEnum, Ext: &ePeriodUnit})
+var s_PeriodValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PeriodValue, Type: smithy.ShapeTypeInteger, Ext: &e_PeriodValue})
+var s_QuotaAdjustable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaAdjustable, Type: smithy.ShapeTypeBoolean, Ext: &e_QuotaAdjustable})
+var s_QuotaArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaArn, Type: smithy.ShapeTypeString, Ext: &e_QuotaArn})
+var s_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &e_QuotaCode})
+var s_QuotaContextId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaContextId, Type: smithy.ShapeTypeString, Ext: &e_QuotaContextId})
+var sQuotaContextInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuotaContextInfo, Members: &mQuotaContextInfo, Type: smithy.ShapeTypeStructure, Ext: &eQuotaContextInfo})
+var sQuotaContextScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuotaContextScope, Members: &mQuotaContextScope, Type: smithy.ShapeTypeEnum, Ext: &eQuotaContextScope})
+var s_QuotaContextScopeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaContextScopeType, Type: smithy.ShapeTypeString, Ext: &e_QuotaContextScopeType})
+var s_QuotaDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaDescription, Type: smithy.ShapeTypeString, Ext: &e_QuotaDescription})
+var sQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuotaExceededException, Members: &mQuotaExceededException, Traits: &t4, Type: smithy.ShapeTypeStructure, Ext: &eQuotaExceededException})
+var sQuotaInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuotaInfo, Members: &mQuotaInfo, Type: smithy.ShapeTypeStructure, Ext: &eQuotaInfo})
+var s_QuotaInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaInfoList, Members: &m_QuotaInfoList, Type: smithy.ShapeTypeList, Ext: &e_QuotaInfoList})
+var s_QuotaMetricName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaMetricName, Type: smithy.ShapeTypeString, Ext: &e_QuotaMetricName})
+var s_QuotaMetricNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaMetricNamespace, Type: smithy.ShapeTypeString, Ext: &e_QuotaMetricNamespace})
+var s_QuotaName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaName, Type: smithy.ShapeTypeString, Ext: &e_QuotaName})
+var sQuotaPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuotaPeriod, Members: &mQuotaPeriod, Type: smithy.ShapeTypeStructure, Ext: &eQuotaPeriod})
+var s_QuotaUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaUnit, Type: smithy.ShapeTypeString, Ext: &e_QuotaUnit})
+var sQuotaUtilizationInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuotaUtilizationInfo, Members: &mQuotaUtilizationInfo, Type: smithy.ShapeTypeStructure, Ext: &eQuotaUtilizationInfo})
+var s_QuotaUtilizationInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaUtilizationInfoList, Members: &m_QuotaUtilizationInfoList, Type: smithy.ShapeTypeList, Ext: &e_QuotaUtilizationInfoList})
+var s_QuotaValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaValue, Type: smithy.ShapeTypeDouble, Ext: &e_QuotaValue})
+var s_ReportErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportErrorCode, Type: smithy.ShapeTypeString, Ext: &e_ReportErrorCode})
+var s_ReportErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ReportErrorMessage})
+var s_ReportId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportId, Type: smithy.ShapeTypeString, Ext: &e_ReportId})
+var s_ReportMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportMessage, Type: smithy.ShapeTypeString, Ext: &e_ReportMessage})
+var sReportStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportStatus, Members: &mReportStatus, Type: smithy.ShapeTypeEnum, Ext: &eReportStatus})
+var sRequestedServiceQuotaChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestedServiceQuotaChange, Members: &mRequestedServiceQuotaChange, Type: smithy.ShapeTypeStructure, Ext: &eRequestedServiceQuotaChange})
+var s_RequestedServiceQuotaChangeHistoryListDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestedServiceQuotaChangeHistoryListDefinition, Members: &m_RequestedServiceQuotaChangeHistoryListDefinition, Type: smithy.ShapeTypeList, Ext: &e_RequestedServiceQuotaChangeHistoryListDefinition})
+var s_Requester = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Requester, Type: smithy.ShapeTypeString, Ext: &e_Requester})
+var s_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &e_RequestId})
+var sRequestStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestStatus, Members: &mRequestStatus, Type: smithy.ShapeTypeEnum, Ext: &eRequestStatus})
+var sRequestType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestType, Members: &mRequestType, Type: smithy.ShapeTypeEnum, Ext: &eRequestType})
+var sResourceAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceAlreadyExistsException, Members: &mResourceAlreadyExistsException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eResourceAlreadyExistsException})
+var s_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &e_ServiceCode})
+var sServiceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceException, Members: &mServiceException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eServiceException})
+var sServiceInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceInfo, Members: &mServiceInfo, Type: smithy.ShapeTypeStructure, Ext: &eServiceInfo})
+var s_ServiceInfoListDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceInfoListDefinition, Members: &m_ServiceInfoListDefinition, Type: smithy.ShapeTypeList, Ext: &e_ServiceInfoListDefinition})
+var s_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &e_ServiceName})
+var sServiceQuota = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuota, Members: &mServiceQuota, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuota})
+var sServiceQuotaIncreaseRequestInTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaIncreaseRequestInTemplate, Members: &mServiceQuotaIncreaseRequestInTemplate, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaIncreaseRequestInTemplate})
+var s_ServiceQuotaIncreaseRequestInTemplateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceQuotaIncreaseRequestInTemplateList, Members: &m_ServiceQuotaIncreaseRequestInTemplateList, Type: smithy.ShapeTypeList, Ext: &e_ServiceQuotaIncreaseRequestInTemplateList})
+var s_ServiceQuotaListDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceQuotaListDefinition, Members: &m_ServiceQuotaListDefinition, Type: smithy.ShapeTypeList, Ext: &e_ServiceQuotaListDefinition})
+var sServiceQuotaTemplateAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaTemplateAssociationStatus, Members: &mServiceQuotaTemplateAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &eServiceQuotaTemplateAssociationStatus})
+var sServiceQuotaTemplateNotInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaTemplateNotInUseException, Members: &mServiceQuotaTemplateNotInUseException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaTemplateNotInUseException})
+var s_Statistic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Statistic, Type: smithy.ShapeTypeString, Ext: &e_Statistic})
+var s_SupportCaseAllowed = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportCaseAllowed, Type: smithy.ShapeTypeBoolean, Ext: &e_SupportCaseAllowed})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &eTag})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var sTagPolicyViolationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagPolicyViolationException, Members: &mTagPolicyViolationException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eTagPolicyViolationException})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sTemplatesNotAvailableInRegionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplatesNotAvailableInRegionException, Members: &mTemplatesNotAvailableInRegionException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eTemplatesNotAvailableInRegionException})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eTooManyRequestsException})
+var sTooManyTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsException, Members: &mTooManyTagsException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eTooManyTagsException})
+var s_TotalCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TotalCount, Type: smithy.ShapeTypeInteger, Ext: &e_TotalCount})
+var s_UtilizationPct = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UtilizationPct, Type: smithy.ShapeTypeDouble, Ext: &e_UtilizationPct})
+var sAssociateServiceQuotaTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateServiceQuotaTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &eAssociateServiceQuotaTemplateRequest})
+var sAssociateServiceQuotaTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateServiceQuotaTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eAssociateServiceQuotaTemplateResponse})
+var sCreateSupportCaseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSupportCaseRequest, Members: &mCreateSupportCaseRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateSupportCaseRequest})
+var sCreateSupportCaseResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSupportCaseResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateSupportCaseResponse})
+var sDeleteServiceQuotaIncreaseRequestFromTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceQuotaIncreaseRequestFromTemplateRequest, Members: &mDeleteServiceQuotaIncreaseRequestFromTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &eDeleteServiceQuotaIncreaseRequestFromTemplateRequest})
+var sDeleteServiceQuotaIncreaseRequestFromTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceQuotaIncreaseRequestFromTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eDeleteServiceQuotaIncreaseRequestFromTemplateResponse})
+var sDisassociateServiceQuotaTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateServiceQuotaTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateServiceQuotaTemplateRequest})
+var sDisassociateServiceQuotaTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateServiceQuotaTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateServiceQuotaTemplateResponse})
+var sGetAssociationForServiceQuotaTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssociationForServiceQuotaTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAssociationForServiceQuotaTemplateRequest})
+var sGetAssociationForServiceQuotaTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssociationForServiceQuotaTemplateResponse, Members: &mGetAssociationForServiceQuotaTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAssociationForServiceQuotaTemplateResponse})
+var sGetAutoManagementConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAutoManagementConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAutoManagementConfigurationRequest})
+var sGetAutoManagementConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAutoManagementConfigurationResponse, Members: &mGetAutoManagementConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAutoManagementConfigurationResponse})
+var sGetAWSDefaultServiceQuotaRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAWSDefaultServiceQuotaRequest, Members: &mGetAWSDefaultServiceQuotaRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAWSDefaultServiceQuotaRequest})
+var sGetAWSDefaultServiceQuotaResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAWSDefaultServiceQuotaResponse, Members: &mGetAWSDefaultServiceQuotaResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAWSDefaultServiceQuotaResponse})
+var sGetQuotaUtilizationReportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQuotaUtilizationReportRequest, Members: &mGetQuotaUtilizationReportRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetQuotaUtilizationReportRequest})
+var sGetQuotaUtilizationReportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQuotaUtilizationReportResponse, Members: &mGetQuotaUtilizationReportResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetQuotaUtilizationReportResponse})
+var sGetRequestedServiceQuotaChangeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRequestedServiceQuotaChangeRequest, Members: &mGetRequestedServiceQuotaChangeRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRequestedServiceQuotaChangeRequest})
+var sGetRequestedServiceQuotaChangeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRequestedServiceQuotaChangeResponse, Members: &mGetRequestedServiceQuotaChangeResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRequestedServiceQuotaChangeResponse})
+var sGetServiceQuotaIncreaseRequestFromTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceQuotaIncreaseRequestFromTemplateRequest, Members: &mGetServiceQuotaIncreaseRequestFromTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetServiceQuotaIncreaseRequestFromTemplateRequest})
+var sGetServiceQuotaIncreaseRequestFromTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceQuotaIncreaseRequestFromTemplateResponse, Members: &mGetServiceQuotaIncreaseRequestFromTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetServiceQuotaIncreaseRequestFromTemplateResponse})
+var sGetServiceQuotaRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceQuotaRequest, Members: &mGetServiceQuotaRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetServiceQuotaRequest})
+var sGetServiceQuotaResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceQuotaResponse, Members: &mGetServiceQuotaResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetServiceQuotaResponse})
+var sListAWSDefaultServiceQuotasRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAWSDefaultServiceQuotasRequest, Members: &mListAWSDefaultServiceQuotasRequest, Type: smithy.ShapeTypeStructure, Ext: &eListAWSDefaultServiceQuotasRequest})
+var sListAWSDefaultServiceQuotasResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAWSDefaultServiceQuotasResponse, Members: &mListAWSDefaultServiceQuotasResponse, Type: smithy.ShapeTypeStructure, Ext: &eListAWSDefaultServiceQuotasResponse})
+var sListRequestedServiceQuotaChangeHistoryByQuotaRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRequestedServiceQuotaChangeHistoryByQuotaRequest, Members: &mListRequestedServiceQuotaChangeHistoryByQuotaRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRequestedServiceQuotaChangeHistoryByQuotaRequest})
+var sListRequestedServiceQuotaChangeHistoryByQuotaResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRequestedServiceQuotaChangeHistoryByQuotaResponse, Members: &mListRequestedServiceQuotaChangeHistoryByQuotaResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRequestedServiceQuotaChangeHistoryByQuotaResponse})
+var sListRequestedServiceQuotaChangeHistoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRequestedServiceQuotaChangeHistoryRequest, Members: &mListRequestedServiceQuotaChangeHistoryRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRequestedServiceQuotaChangeHistoryRequest})
+var sListRequestedServiceQuotaChangeHistoryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRequestedServiceQuotaChangeHistoryResponse, Members: &mListRequestedServiceQuotaChangeHistoryResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRequestedServiceQuotaChangeHistoryResponse})
+var sListServiceQuotaIncreaseRequestsInTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceQuotaIncreaseRequestsInTemplateRequest, Members: &mListServiceQuotaIncreaseRequestsInTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &eListServiceQuotaIncreaseRequestsInTemplateRequest})
+var sListServiceQuotaIncreaseRequestsInTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceQuotaIncreaseRequestsInTemplateResponse, Members: &mListServiceQuotaIncreaseRequestsInTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &eListServiceQuotaIncreaseRequestsInTemplateResponse})
+var sListServiceQuotasRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceQuotasRequest, Members: &mListServiceQuotasRequest, Type: smithy.ShapeTypeStructure, Ext: &eListServiceQuotasRequest})
+var sListServiceQuotasResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceQuotasResponse, Members: &mListServiceQuotasResponse, Type: smithy.ShapeTypeStructure, Ext: &eListServiceQuotasResponse})
+var sListServicesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicesRequest, Members: &mListServicesRequest, Type: smithy.ShapeTypeStructure, Ext: &eListServicesRequest})
+var sListServicesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicesResponse, Members: &mListServicesResponse, Type: smithy.ShapeTypeStructure, Ext: &eListServicesResponse})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sPutServiceQuotaIncreaseRequestIntoTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutServiceQuotaIncreaseRequestIntoTemplateRequest, Members: &mPutServiceQuotaIncreaseRequestIntoTemplateRequest, Type: smithy.ShapeTypeStructure, Ext: &ePutServiceQuotaIncreaseRequestIntoTemplateRequest})
+var sPutServiceQuotaIncreaseRequestIntoTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutServiceQuotaIncreaseRequestIntoTemplateResponse, Members: &mPutServiceQuotaIncreaseRequestIntoTemplateResponse, Type: smithy.ShapeTypeStructure, Ext: &ePutServiceQuotaIncreaseRequestIntoTemplateResponse})
+var sRequestServiceQuotaIncreaseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestServiceQuotaIncreaseRequest, Members: &mRequestServiceQuotaIncreaseRequest, Type: smithy.ShapeTypeStructure, Ext: &eRequestServiceQuotaIncreaseRequest})
+var sRequestServiceQuotaIncreaseResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestServiceQuotaIncreaseResponse, Members: &mRequestServiceQuotaIncreaseResponse, Type: smithy.ShapeTypeStructure, Ext: &eRequestServiceQuotaIncreaseResponse})
+var sStartAutoManagementRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAutoManagementRequest, Members: &mStartAutoManagementRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartAutoManagementRequest})
+var sStartAutoManagementResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAutoManagementResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartAutoManagementResponse})
+var sStartQuotaUtilizationReportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQuotaUtilizationReportRequest, Type: smithy.ShapeTypeStructure, Ext: &eStartQuotaUtilizationReportRequest})
+var sStartQuotaUtilizationReportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQuotaUtilizationReportResponse, Members: &mStartQuotaUtilizationReportResponse, Type: smithy.ShapeTypeStructure, Ext: &eStartQuotaUtilizationReportResponse})
+var sStopAutoManagementRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopAutoManagementRequest, Type: smithy.ShapeTypeStructure, Ext: &eStopAutoManagementRequest})
+var sStopAutoManagementResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopAutoManagementResponse, Type: smithy.ShapeTypeStructure, Ext: &eStopAutoManagementResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateAutoManagementRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAutoManagementRequest, Members: &mUpdateAutoManagementRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAutoManagementRequest})
+var sUpdateAutoManagementResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAutoManagementResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAutoManagementResponse})
 
-var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[28]})
-var sAdjustableAtLevelEnum_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[30]})
-var sAdjustableAtLevelEnum_PER_RESOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PER_RESOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[31]})
-var sAdjustableAtLevelEnum_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[32]})
-var sAppliedLevelEnum_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[35]})
-var sAppliedLevelEnum_RESOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[36]})
-var sAppliedLevelEnum_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var sAWSServiceAccessNotEnabledException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[41]})
-var sDependencyAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[46]})
-var sErrorCode_DEPENDENCY_ACCESS_DENIED_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPENDENCY_ACCESS_DENIED_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[48]})
-var sErrorCode_DEPENDENCY_THROTTLING_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPENDENCY_THROTTLING_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[49]})
-var sErrorCode_DEPENDENCY_SERVICE_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPENDENCY_SERVICE_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[50]})
-var sErrorCode_SERVICE_QUOTA_NOT_AVAILABLE_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_QUOTA_NOT_AVAILABLE_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[51]})
-var sErrorReason_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[54]})
-var sErrorReason_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[55]})
-var s_ExcludedQuotaList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ExcludedLimit, Type: smithy.ShapeTypeString, Ext: &ext[59]})
-var s_ExclusionList_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExcludedService, Type: smithy.ShapeTypeString, Ext: &ext[62]})
-var s_ExclusionList_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ExcludedQuotaList, Members: &m_ExcludedQuotaList, Type: smithy.ShapeTypeList, Ext: &ext[63]})
-var s_ExclusionQuotaList_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExcludedService, Type: smithy.ShapeTypeString, Ext: &ext[65]})
-var s_ExclusionQuotaList_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_QuotaInfoList, Members: &m_QuotaInfoList, Type: smithy.ShapeTypeList, Ext: &ext[66]})
-var sIllegalArgumentException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[69]})
-var s_InputTagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[71]})
-var s_InputTags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[73]})
-var sInvalidPaginationTokenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[75]})
-var sInvalidResourceStateException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[77]})
-var s_MetricDimensionsMapDefinition_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_MetricDimensionName, Type: smithy.ShapeTypeString, Ext: &ext[82]})
-var s_MetricDimensionsMapDefinition_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_MetricDimensionValue, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var sMetricInfo_MetricNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricNamespace", ID: &i_QuotaMetricNamespace, Type: smithy.ShapeTypeString, Ext: &ext[86]})
-var sMetricInfo_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_QuotaMetricName, Type: smithy.ShapeTypeString, Ext: &ext[87]})
-var sMetricInfo_MetricDimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricDimensions", ID: &i_MetricDimensionsMapDefinition, Members: &m_MetricDimensionsMapDefinition, Type: smithy.ShapeTypeMap, Ext: &ext[88]})
-var sMetricInfo_MetricStatisticRecommendation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricStatisticRecommendation", ID: &i_Statistic, Type: smithy.ShapeTypeString, Ext: &ext[89]})
-var sNoAvailableOrganizationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[92]})
-var sNoSuchResourceException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[94]})
-var sOptInLevel_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[96]})
-var sOptInStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[98]})
-var sOptInStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[99]})
-var sOptInType_NotifyOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotifyOnly", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[101]})
-var sOptInType_NotifyAndAdjust = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotifyAndAdjust", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[102]})
-var sOrganizationNotInAllFeaturesModeException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[104]})
-var s_OutputTags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &ext[106]})
-var sPeriodUnit_MICROSECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MICROSECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[108]})
-var sPeriodUnit_MILLISECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MILLISECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[109]})
-var sPeriodUnit_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[110]})
-var sPeriodUnit_MINUTE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MINUTE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[111]})
-var sPeriodUnit_HOUR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOUR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[112]})
-var sPeriodUnit_DAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[113]})
-var sPeriodUnit_WEEK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEEK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[114]})
-var sQuotaContextInfo_ContextScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContextScope", ID: &iQuotaContextScope, Members: &mQuotaContextScope, Type: smithy.ShapeTypeEnum, Ext: &ext[121]})
-var sQuotaContextInfo_ContextScopeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContextScopeType", ID: &i_QuotaContextScopeType, Type: smithy.ShapeTypeString, Ext: &ext[122]})
-var sQuotaContextInfo_ContextId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContextId", ID: &i_QuotaContextId, Type: smithy.ShapeTypeString, Ext: &ext[123]})
-var sQuotaContextInfo_AdjustableAtLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdjustableAtLevel", ID: &iAdjustableAtLevelEnum, Members: &mAdjustableAtLevelEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[124]})
-var sQuotaContextScope_RESOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var sQuotaContextScope_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[127]})
-var sQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[131]})
-var sQuotaInfo_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &ext[133]})
-var sQuotaInfo_QuotaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaName", ID: &i_QuotaName, Type: smithy.ShapeTypeString, Ext: &ext[134]})
-var s_QuotaInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQuotaInfo, Members: &mQuotaInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[136]})
-var sQuotaPeriod_PeriodValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeriodValue", ID: &i_PeriodValue, Type: smithy.ShapeTypeInteger, Ext: &ext[141]})
-var sQuotaPeriod_PeriodUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeriodUnit", ID: &iPeriodUnit, Members: &mPeriodUnit, Type: smithy.ShapeTypeEnum, Ext: &ext[142]})
-var sQuotaUtilizationInfo_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &ext[145]})
-var sQuotaUtilizationInfo_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &ext[146]})
-var sQuotaUtilizationInfo_QuotaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaName", ID: &i_QuotaName, Type: smithy.ShapeTypeString, Ext: &ext[147]})
-var sQuotaUtilizationInfo_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_QuotaMetricNamespace, Type: smithy.ShapeTypeString, Ext: &ext[148]})
-var sQuotaUtilizationInfo_Utilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Utilization", ID: &i_UtilizationPct, Type: smithy.ShapeTypeDouble, Ext: &ext[149]})
-var sQuotaUtilizationInfo_DefaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultValue", ID: &i_DefaultValue, Type: smithy.ShapeTypeDouble, Ext: &ext[150]})
-var sQuotaUtilizationInfo_AppliedValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppliedValue", ID: &i_AppliedValue, Type: smithy.ShapeTypeDouble, Ext: &ext[151]})
-var sQuotaUtilizationInfo_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &ext[152]})
-var sQuotaUtilizationInfo_Adjustable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Adjustable", ID: &i_QuotaAdjustable, Type: smithy.ShapeTypeBoolean, Ext: &ext[153]})
-var s_QuotaUtilizationInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQuotaUtilizationInfo, Members: &mQuotaUtilizationInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[155]})
-var sReportStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[162]})
-var sReportStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[163]})
-var sReportStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[164]})
-var sReportStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[165]})
-var sRequestedServiceQuotaChange_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &ext[167]})
-var sRequestedServiceQuotaChange_RequestType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestType", ID: &iRequestType, Members: &mRequestType, Type: smithy.ShapeTypeEnum, Ext: &ext[168]})
-var sRequestedServiceQuotaChange_CaseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaseId", ID: &i_CustomerServiceEngagementId, Type: smithy.ShapeTypeString, Ext: &ext[169]})
-var sRequestedServiceQuotaChange_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &ext[170]})
-var sRequestedServiceQuotaChange_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &ext[171]})
-var sRequestedServiceQuotaChange_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &ext[172]})
-var sRequestedServiceQuotaChange_QuotaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaName", ID: &i_QuotaName, Type: smithy.ShapeTypeString, Ext: &ext[173]})
-var sRequestedServiceQuotaChange_DesiredValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredValue", ID: &i_QuotaValue, Type: smithy.ShapeTypeDouble, Ext: &ext[174]})
-var sRequestedServiceQuotaChange_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRequestStatus, Members: &mRequestStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[175]})
-var sRequestedServiceQuotaChange_Created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Created", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[176]})
-var sRequestedServiceQuotaChange_LastUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdated", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[177]})
-var sRequestedServiceQuotaChange_Requester = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Requester", ID: &i_Requester, Type: smithy.ShapeTypeString, Ext: &ext[178]})
-var sRequestedServiceQuotaChange_QuotaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaArn", ID: &i_QuotaArn, Type: smithy.ShapeTypeString, Ext: &ext[179]})
-var sRequestedServiceQuotaChange_GlobalQuota = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalQuota", ID: &i_GlobalQuota, Type: smithy.ShapeTypeBoolean, Ext: &ext[180]})
-var sRequestedServiceQuotaChange_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &i_QuotaUnit, Type: smithy.ShapeTypeString, Ext: &ext[181]})
-var sRequestedServiceQuotaChange_QuotaRequestedAtLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaRequestedAtLevel", ID: &iAppliedLevelEnum, Members: &mAppliedLevelEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[182]})
-var sRequestedServiceQuotaChange_QuotaContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaContext", ID: &iQuotaContextInfo, Members: &mQuotaContextInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[183]})
-var s_RequestedServiceQuotaChangeHistoryListDefinition_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRequestedServiceQuotaChange, Members: &mRequestedServiceQuotaChange, Type: smithy.ShapeTypeStructure, Ext: &ext[185]})
-var sRequestStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[189]})
-var sRequestStatus_CASE_OPENED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CASE_OPENED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[190]})
-var sRequestStatus_APPROVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPROVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[191]})
-var sRequestStatus_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[192]})
-var sRequestStatus_CASE_CLOSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CASE_CLOSED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[193]})
-var sRequestStatus_NOT_APPROVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_APPROVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[194]})
-var sRequestStatus_INVALID_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[195]})
-var sRequestType_AutomaticManagement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomaticManagement", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[197]})
-var sResourceAlreadyExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[199]})
-var sServiceException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[202]})
-var sServiceInfo_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &ext[204]})
-var sServiceInfo_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &ext[205]})
-var s_ServiceInfoListDefinition_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceInfo, Members: &mServiceInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[207]})
-var sServiceQuota_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &ext[210]})
-var sServiceQuota_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &ext[211]})
-var sServiceQuota_QuotaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaArn", ID: &i_QuotaArn, Type: smithy.ShapeTypeString, Ext: &ext[212]})
-var sServiceQuota_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &ext[213]})
-var sServiceQuota_QuotaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaName", ID: &i_QuotaName, Type: smithy.ShapeTypeString, Ext: &ext[214]})
-var sServiceQuota_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_QuotaValue, Type: smithy.ShapeTypeDouble, Ext: &ext[215]})
-var sServiceQuota_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &i_QuotaUnit, Type: smithy.ShapeTypeString, Ext: &ext[216]})
-var sServiceQuota_Adjustable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Adjustable", ID: &i_QuotaAdjustable, Type: smithy.ShapeTypeBoolean, Ext: &ext[217]})
-var sServiceQuota_GlobalQuota = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalQuota", ID: &i_GlobalQuota, Type: smithy.ShapeTypeBoolean, Ext: &ext[218]})
-var sServiceQuota_UsageMetric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageMetric", ID: &iMetricInfo, Members: &mMetricInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[219]})
-var sServiceQuota_Period = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Period", ID: &iQuotaPeriod, Members: &mQuotaPeriod, Type: smithy.ShapeTypeStructure, Ext: &ext[220]})
-var sServiceQuota_ErrorReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorReason", ID: &iErrorReason, Members: &mErrorReason, Type: smithy.ShapeTypeStructure, Ext: &ext[221]})
-var sServiceQuota_QuotaAppliedAtLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaAppliedAtLevel", ID: &iAppliedLevelEnum, Members: &mAppliedLevelEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[222]})
-var sServiceQuota_QuotaContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaContext", ID: &iQuotaContextInfo, Members: &mQuotaContextInfo, Type: smithy.ShapeTypeStructure, Ext: &ext[223]})
-var sServiceQuota_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_QuotaDescription, Type: smithy.ShapeTypeString, Ext: &ext[224]})
-var sServiceQuotaIncreaseRequestInTemplate_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &ext[226]})
-var sServiceQuotaIncreaseRequestInTemplate_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &ext[227]})
-var sServiceQuotaIncreaseRequestInTemplate_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &ext[228]})
-var sServiceQuotaIncreaseRequestInTemplate_QuotaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaName", ID: &i_QuotaName, Type: smithy.ShapeTypeString, Ext: &ext[229]})
-var sServiceQuotaIncreaseRequestInTemplate_DesiredValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredValue", ID: &i_QuotaValue, Type: smithy.ShapeTypeDouble, Ext: &ext[230]})
-var sServiceQuotaIncreaseRequestInTemplate_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsRegion", ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &ext[231]})
-var sServiceQuotaIncreaseRequestInTemplate_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &i_QuotaUnit, Type: smithy.ShapeTypeString, Ext: &ext[232]})
-var sServiceQuotaIncreaseRequestInTemplate_GlobalQuota = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalQuota", ID: &i_GlobalQuota, Type: smithy.ShapeTypeBoolean, Ext: &ext[233]})
-var s_ServiceQuotaIncreaseRequestInTemplateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceQuotaIncreaseRequestInTemplate, Members: &mServiceQuotaIncreaseRequestInTemplate, Type: smithy.ShapeTypeStructure, Ext: &ext[235]})
-var s_ServiceQuotaListDefinition_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceQuota, Members: &mServiceQuota, Type: smithy.ShapeTypeStructure, Ext: &ext[237]})
-var sServiceQuotaTemplateAssociationStatus_ASSOCIATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASSOCIATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[239]})
-var sServiceQuotaTemplateAssociationStatus_DISASSOCIATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISASSOCIATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[240]})
-var sServiceQuotaTemplateNotInUseException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[242]})
-var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[246]})
-var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[247]})
-var sTagPolicyViolationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[250]})
-var sTemplatesNotAvailableInRegionException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[253]})
-var sTooManyRequestsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[255]})
-var sTooManyTagsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &ext[257]})
-var sCreateSupportCaseRequest_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &ext[263]})
-var sDeleteServiceQuotaIncreaseRequestFromTemplateRequest_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &ext[266]})
-var sDeleteServiceQuotaIncreaseRequestFromTemplateRequest_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &ext[267]})
-var sDeleteServiceQuotaIncreaseRequestFromTemplateRequest_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsRegion", ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &ext[268]})
-var sGetAssociationForServiceQuotaTemplateResponse_ServiceQuotaTemplateAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceQuotaTemplateAssociationStatus", ID: &iServiceQuotaTemplateAssociationStatus, Members: &mServiceQuotaTemplateAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[274]})
-var sGetAutoManagementConfigurationResponse_OptInLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptInLevel", ID: &iOptInLevel, Members: &mOptInLevel, Type: smithy.ShapeTypeEnum, Ext: &ext[277]})
-var sGetAutoManagementConfigurationResponse_OptInType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptInType", ID: &iOptInType, Members: &mOptInType, Type: smithy.ShapeTypeEnum, Ext: &ext[278]})
-var sGetAutoManagementConfigurationResponse_NotificationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[279]})
-var sGetAutoManagementConfigurationResponse_OptInStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptInStatus", ID: &iOptInStatus, Members: &mOptInStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[280]})
-var sGetAutoManagementConfigurationResponse_ExclusionList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExclusionList", ID: &i_ExclusionQuotaList, Members: &m_ExclusionQuotaList, Type: smithy.ShapeTypeMap, Ext: &ext[281]})
-var sGetAWSDefaultServiceQuotaRequest_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &ext[283]})
-var sGetAWSDefaultServiceQuotaRequest_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &ext[284]})
-var sGetAWSDefaultServiceQuotaResponse_Quota = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Quota", ID: &iServiceQuota, Members: &mServiceQuota, Type: smithy.ShapeTypeStructure, Ext: &ext[286]})
-var sGetQuotaUtilizationReportRequest_ReportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportId", ID: &i_ReportId, Type: smithy.ShapeTypeString, Ext: &ext[288]})
-var sGetQuotaUtilizationReportRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[289]})
-var sGetQuotaUtilizationReportRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsUtilization, Type: smithy.ShapeTypeInteger, Ext: &ext[290]})
-var sGetQuotaUtilizationReportResponse_ReportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportId", ID: &i_ReportId, Type: smithy.ShapeTypeString, Ext: &ext[292]})
-var sGetQuotaUtilizationReportResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iReportStatus, Members: &mReportStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[293]})
-var sGetQuotaUtilizationReportResponse_GeneratedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeneratedAt", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &ext[294]})
-var sGetQuotaUtilizationReportResponse_TotalCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalCount", ID: &i_TotalCount, Type: smithy.ShapeTypeInteger, Ext: &ext[295]})
-var sGetQuotaUtilizationReportResponse_Quotas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Quotas", ID: &i_QuotaUtilizationInfoList, Members: &m_QuotaUtilizationInfoList, Type: smithy.ShapeTypeList, Ext: &ext[296]})
-var sGetQuotaUtilizationReportResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[297]})
-var sGetQuotaUtilizationReportResponse_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ReportErrorCode, Type: smithy.ShapeTypeString, Ext: &ext[298]})
-var sGetQuotaUtilizationReportResponse_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ReportErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[299]})
-var sGetRequestedServiceQuotaChangeRequest_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &ext[301]})
-var sGetRequestedServiceQuotaChangeResponse_RequestedQuota = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestedQuota", ID: &iRequestedServiceQuotaChange, Members: &mRequestedServiceQuotaChange, Type: smithy.ShapeTypeStructure, Ext: &ext[303]})
-var sGetServiceQuotaIncreaseRequestFromTemplateRequest_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &ext[305]})
-var sGetServiceQuotaIncreaseRequestFromTemplateRequest_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &ext[306]})
-var sGetServiceQuotaIncreaseRequestFromTemplateRequest_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsRegion", ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &ext[307]})
-var sGetServiceQuotaIncreaseRequestFromTemplateResponse_ServiceQuotaIncreaseRequestInTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceQuotaIncreaseRequestInTemplate", ID: &iServiceQuotaIncreaseRequestInTemplate, Members: &mServiceQuotaIncreaseRequestInTemplate, Type: smithy.ShapeTypeStructure, Ext: &ext[309]})
-var sGetServiceQuotaRequest_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &ext[311]})
-var sGetServiceQuotaRequest_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &ext[312]})
-var sGetServiceQuotaRequest_ContextId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContextId", ID: &i_QuotaContextId, Type: smithy.ShapeTypeString, Ext: &ext[313]})
-var sGetServiceQuotaResponse_Quota = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Quota", ID: &iServiceQuota, Members: &mServiceQuota, Type: smithy.ShapeTypeStructure, Ext: &ext[315]})
-var sListAWSDefaultServiceQuotasRequest_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &ext[317]})
-var sListAWSDefaultServiceQuotasRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[318]})
-var sListAWSDefaultServiceQuotasRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[319]})
-var sListAWSDefaultServiceQuotasResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[321]})
-var sListAWSDefaultServiceQuotasResponse_Quotas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Quotas", ID: &i_ServiceQuotaListDefinition, Members: &m_ServiceQuotaListDefinition, Type: smithy.ShapeTypeList, Ext: &ext[322]})
-var sListRequestedServiceQuotaChangeHistoryByQuotaRequest_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &ext[324]})
-var sListRequestedServiceQuotaChangeHistoryByQuotaRequest_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &ext[325]})
-var sListRequestedServiceQuotaChangeHistoryByQuotaRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRequestStatus, Members: &mRequestStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[326]})
-var sListRequestedServiceQuotaChangeHistoryByQuotaRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[327]})
-var sListRequestedServiceQuotaChangeHistoryByQuotaRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[328]})
-var sListRequestedServiceQuotaChangeHistoryByQuotaRequest_QuotaRequestedAtLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaRequestedAtLevel", ID: &iAppliedLevelEnum, Members: &mAppliedLevelEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[329]})
-var sListRequestedServiceQuotaChangeHistoryByQuotaResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[331]})
-var sListRequestedServiceQuotaChangeHistoryByQuotaResponse_RequestedQuotas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestedQuotas", ID: &i_RequestedServiceQuotaChangeHistoryListDefinition, Members: &m_RequestedServiceQuotaChangeHistoryListDefinition, Type: smithy.ShapeTypeList, Ext: &ext[332]})
-var sListRequestedServiceQuotaChangeHistoryRequest_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &ext[334]})
-var sListRequestedServiceQuotaChangeHistoryRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRequestStatus, Members: &mRequestStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[335]})
-var sListRequestedServiceQuotaChangeHistoryRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[336]})
-var sListRequestedServiceQuotaChangeHistoryRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[337]})
-var sListRequestedServiceQuotaChangeHistoryRequest_QuotaRequestedAtLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaRequestedAtLevel", ID: &iAppliedLevelEnum, Members: &mAppliedLevelEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[338]})
-var sListRequestedServiceQuotaChangeHistoryResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[340]})
-var sListRequestedServiceQuotaChangeHistoryResponse_RequestedQuotas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestedQuotas", ID: &i_RequestedServiceQuotaChangeHistoryListDefinition, Members: &m_RequestedServiceQuotaChangeHistoryListDefinition, Type: smithy.ShapeTypeList, Ext: &ext[341]})
-var sListServiceQuotaIncreaseRequestsInTemplateRequest_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &ext[343]})
-var sListServiceQuotaIncreaseRequestsInTemplateRequest_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsRegion", ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &ext[344]})
-var sListServiceQuotaIncreaseRequestsInTemplateRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[345]})
-var sListServiceQuotaIncreaseRequestsInTemplateRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[346]})
-var sListServiceQuotaIncreaseRequestsInTemplateResponse_ServiceQuotaIncreaseRequestInTemplateList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceQuotaIncreaseRequestInTemplateList", ID: &i_ServiceQuotaIncreaseRequestInTemplateList, Members: &m_ServiceQuotaIncreaseRequestInTemplateList, Type: smithy.ShapeTypeList, Ext: &ext[348]})
-var sListServiceQuotaIncreaseRequestsInTemplateResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[349]})
-var sListServiceQuotasRequest_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &ext[351]})
-var sListServiceQuotasRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[352]})
-var sListServiceQuotasRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[353]})
-var sListServiceQuotasRequest_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &ext[354]})
-var sListServiceQuotasRequest_QuotaAppliedAtLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaAppliedAtLevel", ID: &iAppliedLevelEnum, Members: &mAppliedLevelEnum, Type: smithy.ShapeTypeEnum, Ext: &ext[355]})
-var sListServiceQuotasResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[357]})
-var sListServiceQuotasResponse_Quotas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Quotas", ID: &i_ServiceQuotaListDefinition, Members: &m_ServiceQuotaListDefinition, Type: smithy.ShapeTypeList, Ext: &ext[358]})
-var sListServicesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[360]})
-var sListServicesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[361]})
-var sListServicesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[363]})
-var sListServicesResponse_Services = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Services", ID: &i_ServiceInfoListDefinition, Members: &m_ServiceInfoListDefinition, Type: smithy.ShapeTypeList, Ext: &ext[364]})
-var sListTagsForResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[366]})
-var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_OutputTags, Members: &m_OutputTags, Type: smithy.ShapeTypeList, Ext: &ext[368]})
-var sPutServiceQuotaIncreaseRequestIntoTemplateRequest_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &ext[370]})
-var sPutServiceQuotaIncreaseRequestIntoTemplateRequest_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &ext[371]})
-var sPutServiceQuotaIncreaseRequestIntoTemplateRequest_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsRegion", ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &ext[372]})
-var sPutServiceQuotaIncreaseRequestIntoTemplateRequest_DesiredValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredValue", ID: &i_QuotaValue, Type: smithy.ShapeTypeDouble, Ext: &ext[373]})
-var sPutServiceQuotaIncreaseRequestIntoTemplateResponse_ServiceQuotaIncreaseRequestInTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceQuotaIncreaseRequestInTemplate", ID: &iServiceQuotaIncreaseRequestInTemplate, Members: &mServiceQuotaIncreaseRequestInTemplate, Type: smithy.ShapeTypeStructure, Ext: &ext[375]})
-var sRequestServiceQuotaIncreaseRequest_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &ext[377]})
-var sRequestServiceQuotaIncreaseRequest_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &ext[378]})
-var sRequestServiceQuotaIncreaseRequest_DesiredValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredValue", ID: &i_QuotaValue, Type: smithy.ShapeTypeDouble, Ext: &ext[379]})
-var sRequestServiceQuotaIncreaseRequest_ContextId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContextId", ID: &i_QuotaContextId, Type: smithy.ShapeTypeString, Ext: &ext[380]})
-var sRequestServiceQuotaIncreaseRequest_SupportCaseAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportCaseAllowed", ID: &i_SupportCaseAllowed, Type: smithy.ShapeTypeBoolean, Ext: &ext[381]})
-var sRequestServiceQuotaIncreaseResponse_RequestedQuota = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestedQuota", ID: &iRequestedServiceQuotaChange, Members: &mRequestedServiceQuotaChange, Type: smithy.ShapeTypeStructure, Ext: &ext[383]})
-var sStartAutoManagementRequest_OptInLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptInLevel", ID: &iOptInLevel, Members: &mOptInLevel, Type: smithy.ShapeTypeEnum, Ext: &ext[385]})
-var sStartAutoManagementRequest_OptInType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptInType", ID: &iOptInType, Members: &mOptInType, Type: smithy.ShapeTypeEnum, Ext: &ext[386]})
-var sStartAutoManagementRequest_NotificationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[387]})
-var sStartAutoManagementRequest_ExclusionList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExclusionList", ID: &i_ExclusionList, Members: &m_ExclusionList, Type: smithy.ShapeTypeMap, Ext: &ext[388]})
-var sStartQuotaUtilizationReportResponse_ReportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportId", ID: &i_ReportId, Type: smithy.ShapeTypeString, Ext: &ext[392]})
-var sStartQuotaUtilizationReportResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iReportStatus, Members: &mReportStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[393]})
-var sStartQuotaUtilizationReportResponse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ReportMessage, Type: smithy.ShapeTypeString, Ext: &ext[394]})
-var sTagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[398]})
-var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_InputTags, Members: &m_InputTags, Type: smithy.ShapeTypeList, Ext: &ext[399]})
-var sUntagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[402]})
-var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_InputTagKeys, Members: &m_InputTagKeys, Type: smithy.ShapeTypeList, Ext: &ext[403]})
-var sUpdateAutoManagementRequest_OptInType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptInType", ID: &iOptInType, Members: &mOptInType, Type: smithy.ShapeTypeEnum, Ext: &ext[406]})
-var sUpdateAutoManagementRequest_NotificationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &ext[407]})
-var sUpdateAutoManagementRequest_ExclusionList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExclusionList", ID: &i_ExclusionList, Members: &m_ExclusionList, Type: smithy.ShapeTypeMap, Ext: &ext[408]})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var sAdjustableAtLevelEnum_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdjustableAtLevelEnum_ACCOUNT})
+var sAdjustableAtLevelEnum_PER_RESOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PER_RESOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdjustableAtLevelEnum_PER_RESOURCE})
+var sAdjustableAtLevelEnum_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAdjustableAtLevelEnum_ALL})
+var sAppliedLevelEnum_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAppliedLevelEnum_ACCOUNT})
+var sAppliedLevelEnum_RESOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAppliedLevelEnum_RESOURCE})
+var sAppliedLevelEnum_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAppliedLevelEnum_ALL})
+var sAWSServiceAccessNotEnabledException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eAWSServiceAccessNotEnabledException_Message})
+var sDependencyAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eDependencyAccessDeniedException_Message})
+var sErrorCode_DEPENDENCY_ACCESS_DENIED_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPENDENCY_ACCESS_DENIED_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_DEPENDENCY_ACCESS_DENIED_ERROR})
+var sErrorCode_DEPENDENCY_THROTTLING_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPENDENCY_THROTTLING_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_DEPENDENCY_THROTTLING_ERROR})
+var sErrorCode_DEPENDENCY_SERVICE_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPENDENCY_SERVICE_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_DEPENDENCY_SERVICE_ERROR})
+var sErrorCode_SERVICE_QUOTA_NOT_AVAILABLE_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_QUOTA_NOT_AVAILABLE_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_SERVICE_QUOTA_NOT_AVAILABLE_ERROR})
+var sErrorReason_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eErrorReason_ErrorCode})
+var sErrorReason_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eErrorReason_ErrorMessage})
+var s_ExcludedQuotaList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ExcludedLimit, Type: smithy.ShapeTypeString, Ext: &e_ExcludedQuotaList_member})
+var s_ExclusionList_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExcludedService, Type: smithy.ShapeTypeString, Ext: &e_ExclusionList_key})
+var s_ExclusionList_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ExcludedQuotaList, Members: &m_ExcludedQuotaList, Type: smithy.ShapeTypeList, Ext: &e_ExclusionList_value})
+var s_ExclusionQuotaList_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExcludedService, Type: smithy.ShapeTypeString, Ext: &e_ExclusionQuotaList_key})
+var s_ExclusionQuotaList_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_QuotaInfoList, Members: &m_QuotaInfoList, Type: smithy.ShapeTypeList, Ext: &e_ExclusionQuotaList_value})
+var sIllegalArgumentException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eIllegalArgumentException_Message})
+var s_InputTagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_InputTagKeys_member})
+var s_InputTags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_InputTags_member})
+var sInvalidPaginationTokenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidPaginationTokenException_Message})
+var sInvalidResourceStateException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eInvalidResourceStateException_Message})
+var s_MetricDimensionsMapDefinition_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_MetricDimensionName, Type: smithy.ShapeTypeString, Ext: &e_MetricDimensionsMapDefinition_key})
+var s_MetricDimensionsMapDefinition_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_MetricDimensionValue, Type: smithy.ShapeTypeString, Ext: &e_MetricDimensionsMapDefinition_value})
+var sMetricInfo_MetricNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricNamespace", ID: &i_QuotaMetricNamespace, Type: smithy.ShapeTypeString, Ext: &eMetricInfo_MetricNamespace})
+var sMetricInfo_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_QuotaMetricName, Type: smithy.ShapeTypeString, Ext: &eMetricInfo_MetricName})
+var sMetricInfo_MetricDimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricDimensions", ID: &i_MetricDimensionsMapDefinition, Members: &m_MetricDimensionsMapDefinition, Type: smithy.ShapeTypeMap, Ext: &eMetricInfo_MetricDimensions})
+var sMetricInfo_MetricStatisticRecommendation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricStatisticRecommendation", ID: &i_Statistic, Type: smithy.ShapeTypeString, Ext: &eMetricInfo_MetricStatisticRecommendation})
+var sNoAvailableOrganizationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eNoAvailableOrganizationException_Message})
+var sNoSuchResourceException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eNoSuchResourceException_Message})
+var sOptInLevel_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOptInLevel_ACCOUNT})
+var sOptInStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOptInStatus_ENABLED})
+var sOptInStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOptInStatus_DISABLED})
+var sOptInType_NotifyOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotifyOnly", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOptInType_NotifyOnly})
+var sOptInType_NotifyAndAdjust = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotifyAndAdjust", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eOptInType_NotifyAndAdjust})
+var sOrganizationNotInAllFeaturesModeException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eOrganizationNotInAllFeaturesModeException_Message})
+var s_OutputTags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure, Ext: &e_OutputTags_member})
+var sPeriodUnit_MICROSECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MICROSECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePeriodUnit_MICROSECOND})
+var sPeriodUnit_MILLISECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MILLISECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePeriodUnit_MILLISECOND})
+var sPeriodUnit_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePeriodUnit_SECOND})
+var sPeriodUnit_MINUTE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MINUTE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePeriodUnit_MINUTE})
+var sPeriodUnit_HOUR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOUR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePeriodUnit_HOUR})
+var sPeriodUnit_DAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePeriodUnit_DAY})
+var sPeriodUnit_WEEK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEEK", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ePeriodUnit_WEEK})
+var sQuotaContextInfo_ContextScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContextScope", ID: &iQuotaContextScope, Members: &mQuotaContextScope, Type: smithy.ShapeTypeEnum, Ext: &eQuotaContextInfo_ContextScope})
+var sQuotaContextInfo_ContextScopeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContextScopeType", ID: &i_QuotaContextScopeType, Type: smithy.ShapeTypeString, Ext: &eQuotaContextInfo_ContextScopeType})
+var sQuotaContextInfo_ContextId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContextId", ID: &i_QuotaContextId, Type: smithy.ShapeTypeString, Ext: &eQuotaContextInfo_ContextId})
+var sQuotaContextInfo_AdjustableAtLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdjustableAtLevel", ID: &iAdjustableAtLevelEnum, Members: &mAdjustableAtLevelEnum, Type: smithy.ShapeTypeEnum, Ext: &eQuotaContextInfo_AdjustableAtLevel})
+var sQuotaContextScope_RESOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQuotaContextScope_RESOURCE})
+var sQuotaContextScope_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eQuotaContextScope_ACCOUNT})
+var sQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eQuotaExceededException_Message})
+var sQuotaInfo_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &eQuotaInfo_QuotaCode})
+var sQuotaInfo_QuotaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaName", ID: &i_QuotaName, Type: smithy.ShapeTypeString, Ext: &eQuotaInfo_QuotaName})
+var s_QuotaInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQuotaInfo, Members: &mQuotaInfo, Type: smithy.ShapeTypeStructure, Ext: &e_QuotaInfoList_member})
+var sQuotaPeriod_PeriodValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeriodValue", ID: &i_PeriodValue, Type: smithy.ShapeTypeInteger, Ext: &eQuotaPeriod_PeriodValue})
+var sQuotaPeriod_PeriodUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeriodUnit", ID: &iPeriodUnit, Members: &mPeriodUnit, Type: smithy.ShapeTypeEnum, Ext: &eQuotaPeriod_PeriodUnit})
+var sQuotaUtilizationInfo_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &eQuotaUtilizationInfo_QuotaCode})
+var sQuotaUtilizationInfo_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &eQuotaUtilizationInfo_ServiceCode})
+var sQuotaUtilizationInfo_QuotaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaName", ID: &i_QuotaName, Type: smithy.ShapeTypeString, Ext: &eQuotaUtilizationInfo_QuotaName})
+var sQuotaUtilizationInfo_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_QuotaMetricNamespace, Type: smithy.ShapeTypeString, Ext: &eQuotaUtilizationInfo_Namespace})
+var sQuotaUtilizationInfo_Utilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Utilization", ID: &i_UtilizationPct, Type: smithy.ShapeTypeDouble, Ext: &eQuotaUtilizationInfo_Utilization})
+var sQuotaUtilizationInfo_DefaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultValue", ID: &i_DefaultValue, Type: smithy.ShapeTypeDouble, Ext: &eQuotaUtilizationInfo_DefaultValue})
+var sQuotaUtilizationInfo_AppliedValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppliedValue", ID: &i_AppliedValue, Type: smithy.ShapeTypeDouble, Ext: &eQuotaUtilizationInfo_AppliedValue})
+var sQuotaUtilizationInfo_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &eQuotaUtilizationInfo_ServiceName})
+var sQuotaUtilizationInfo_Adjustable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Adjustable", ID: &i_QuotaAdjustable, Type: smithy.ShapeTypeBoolean, Ext: &eQuotaUtilizationInfo_Adjustable})
+var s_QuotaUtilizationInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQuotaUtilizationInfo, Members: &mQuotaUtilizationInfo, Type: smithy.ShapeTypeStructure, Ext: &e_QuotaUtilizationInfoList_member})
+var sReportStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportStatus_PENDING})
+var sReportStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportStatus_IN_PROGRESS})
+var sReportStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportStatus_COMPLETED})
+var sReportStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReportStatus_FAILED})
+var sRequestedServiceQuotaChange_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &eRequestedServiceQuotaChange_Id})
+var sRequestedServiceQuotaChange_RequestType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestType", ID: &iRequestType, Members: &mRequestType, Type: smithy.ShapeTypeEnum, Ext: &eRequestedServiceQuotaChange_RequestType})
+var sRequestedServiceQuotaChange_CaseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaseId", ID: &i_CustomerServiceEngagementId, Type: smithy.ShapeTypeString, Ext: &eRequestedServiceQuotaChange_CaseId})
+var sRequestedServiceQuotaChange_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &eRequestedServiceQuotaChange_ServiceCode})
+var sRequestedServiceQuotaChange_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &eRequestedServiceQuotaChange_ServiceName})
+var sRequestedServiceQuotaChange_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &eRequestedServiceQuotaChange_QuotaCode})
+var sRequestedServiceQuotaChange_QuotaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaName", ID: &i_QuotaName, Type: smithy.ShapeTypeString, Ext: &eRequestedServiceQuotaChange_QuotaName})
+var sRequestedServiceQuotaChange_DesiredValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredValue", ID: &i_QuotaValue, Type: smithy.ShapeTypeDouble, Ext: &eRequestedServiceQuotaChange_DesiredValue})
+var sRequestedServiceQuotaChange_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRequestStatus, Members: &mRequestStatus, Type: smithy.ShapeTypeEnum, Ext: &eRequestedServiceQuotaChange_Status})
+var sRequestedServiceQuotaChange_Created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Created", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eRequestedServiceQuotaChange_Created})
+var sRequestedServiceQuotaChange_LastUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdated", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eRequestedServiceQuotaChange_LastUpdated})
+var sRequestedServiceQuotaChange_Requester = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Requester", ID: &i_Requester, Type: smithy.ShapeTypeString, Ext: &eRequestedServiceQuotaChange_Requester})
+var sRequestedServiceQuotaChange_QuotaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaArn", ID: &i_QuotaArn, Type: smithy.ShapeTypeString, Ext: &eRequestedServiceQuotaChange_QuotaArn})
+var sRequestedServiceQuotaChange_GlobalQuota = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalQuota", ID: &i_GlobalQuota, Type: smithy.ShapeTypeBoolean, Ext: &eRequestedServiceQuotaChange_GlobalQuota})
+var sRequestedServiceQuotaChange_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &i_QuotaUnit, Type: smithy.ShapeTypeString, Ext: &eRequestedServiceQuotaChange_Unit})
+var sRequestedServiceQuotaChange_QuotaRequestedAtLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaRequestedAtLevel", ID: &iAppliedLevelEnum, Members: &mAppliedLevelEnum, Type: smithy.ShapeTypeEnum, Ext: &eRequestedServiceQuotaChange_QuotaRequestedAtLevel})
+var sRequestedServiceQuotaChange_QuotaContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaContext", ID: &iQuotaContextInfo, Members: &mQuotaContextInfo, Type: smithy.ShapeTypeStructure, Ext: &eRequestedServiceQuotaChange_QuotaContext})
+var s_RequestedServiceQuotaChangeHistoryListDefinition_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRequestedServiceQuotaChange, Members: &mRequestedServiceQuotaChange, Type: smithy.ShapeTypeStructure, Ext: &e_RequestedServiceQuotaChangeHistoryListDefinition_member})
+var sRequestStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequestStatus_PENDING})
+var sRequestStatus_CASE_OPENED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CASE_OPENED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequestStatus_CASE_OPENED})
+var sRequestStatus_APPROVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPROVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequestStatus_APPROVED})
+var sRequestStatus_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequestStatus_DENIED})
+var sRequestStatus_CASE_CLOSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CASE_CLOSED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequestStatus_CASE_CLOSED})
+var sRequestStatus_NOT_APPROVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_APPROVED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequestStatus_NOT_APPROVED})
+var sRequestStatus_INVALID_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequestStatus_INVALID_REQUEST})
+var sRequestType_AutomaticManagement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomaticManagement", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRequestType_AutomaticManagement})
+var sResourceAlreadyExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eResourceAlreadyExistsException_Message})
+var sServiceException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eServiceException_Message})
+var sServiceInfo_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &eServiceInfo_ServiceCode})
+var sServiceInfo_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &eServiceInfo_ServiceName})
+var s_ServiceInfoListDefinition_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceInfo, Members: &mServiceInfo, Type: smithy.ShapeTypeStructure, Ext: &e_ServiceInfoListDefinition_member})
+var sServiceQuota_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &eServiceQuota_ServiceCode})
+var sServiceQuota_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &eServiceQuota_ServiceName})
+var sServiceQuota_QuotaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaArn", ID: &i_QuotaArn, Type: smithy.ShapeTypeString, Ext: &eServiceQuota_QuotaArn})
+var sServiceQuota_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &eServiceQuota_QuotaCode})
+var sServiceQuota_QuotaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaName", ID: &i_QuotaName, Type: smithy.ShapeTypeString, Ext: &eServiceQuota_QuotaName})
+var sServiceQuota_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_QuotaValue, Type: smithy.ShapeTypeDouble, Ext: &eServiceQuota_Value})
+var sServiceQuota_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &i_QuotaUnit, Type: smithy.ShapeTypeString, Ext: &eServiceQuota_Unit})
+var sServiceQuota_Adjustable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Adjustable", ID: &i_QuotaAdjustable, Type: smithy.ShapeTypeBoolean, Ext: &eServiceQuota_Adjustable})
+var sServiceQuota_GlobalQuota = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalQuota", ID: &i_GlobalQuota, Type: smithy.ShapeTypeBoolean, Ext: &eServiceQuota_GlobalQuota})
+var sServiceQuota_UsageMetric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageMetric", ID: &iMetricInfo, Members: &mMetricInfo, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuota_UsageMetric})
+var sServiceQuota_Period = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Period", ID: &iQuotaPeriod, Members: &mQuotaPeriod, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuota_Period})
+var sServiceQuota_ErrorReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorReason", ID: &iErrorReason, Members: &mErrorReason, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuota_ErrorReason})
+var sServiceQuota_QuotaAppliedAtLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaAppliedAtLevel", ID: &iAppliedLevelEnum, Members: &mAppliedLevelEnum, Type: smithy.ShapeTypeEnum, Ext: &eServiceQuota_QuotaAppliedAtLevel})
+var sServiceQuota_QuotaContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaContext", ID: &iQuotaContextInfo, Members: &mQuotaContextInfo, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuota_QuotaContext})
+var sServiceQuota_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_QuotaDescription, Type: smithy.ShapeTypeString, Ext: &eServiceQuota_Description})
+var sServiceQuotaIncreaseRequestInTemplate_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaIncreaseRequestInTemplate_ServiceCode})
+var sServiceQuotaIncreaseRequestInTemplate_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &i_ServiceName, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaIncreaseRequestInTemplate_ServiceName})
+var sServiceQuotaIncreaseRequestInTemplate_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaIncreaseRequestInTemplate_QuotaCode})
+var sServiceQuotaIncreaseRequestInTemplate_QuotaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaName", ID: &i_QuotaName, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaIncreaseRequestInTemplate_QuotaName})
+var sServiceQuotaIncreaseRequestInTemplate_DesiredValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredValue", ID: &i_QuotaValue, Type: smithy.ShapeTypeDouble, Ext: &eServiceQuotaIncreaseRequestInTemplate_DesiredValue})
+var sServiceQuotaIncreaseRequestInTemplate_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsRegion", ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaIncreaseRequestInTemplate_AwsRegion})
+var sServiceQuotaIncreaseRequestInTemplate_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &i_QuotaUnit, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaIncreaseRequestInTemplate_Unit})
+var sServiceQuotaIncreaseRequestInTemplate_GlobalQuota = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalQuota", ID: &i_GlobalQuota, Type: smithy.ShapeTypeBoolean, Ext: &eServiceQuotaIncreaseRequestInTemplate_GlobalQuota})
+var s_ServiceQuotaIncreaseRequestInTemplateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceQuotaIncreaseRequestInTemplate, Members: &mServiceQuotaIncreaseRequestInTemplate, Type: smithy.ShapeTypeStructure, Ext: &e_ServiceQuotaIncreaseRequestInTemplateList_member})
+var s_ServiceQuotaListDefinition_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceQuota, Members: &mServiceQuota, Type: smithy.ShapeTypeStructure, Ext: &e_ServiceQuotaListDefinition_member})
+var sServiceQuotaTemplateAssociationStatus_ASSOCIATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASSOCIATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaTemplateAssociationStatus_ASSOCIATED})
+var sServiceQuotaTemplateAssociationStatus_DISASSOCIATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISASSOCIATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaTemplateAssociationStatus_DISASSOCIATED})
+var sServiceQuotaTemplateNotInUseException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaTemplateNotInUseException_Message})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &eTag_Key})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &eTag_Value})
+var sTagPolicyViolationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eTagPolicyViolationException_Message})
+var sTemplatesNotAvailableInRegionException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eTemplatesNotAvailableInRegionException_Message})
+var sTooManyRequestsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eTooManyRequestsException_Message})
+var sTooManyTagsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString, Ext: &eTooManyTagsException_Message})
+var sCreateSupportCaseRequest_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &eCreateSupportCaseRequest_RequestId})
+var sDeleteServiceQuotaIncreaseRequestFromTemplateRequest_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &eDeleteServiceQuotaIncreaseRequestFromTemplateRequest_ServiceCode})
+var sDeleteServiceQuotaIncreaseRequestFromTemplateRequest_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &eDeleteServiceQuotaIncreaseRequestFromTemplateRequest_QuotaCode})
+var sDeleteServiceQuotaIncreaseRequestFromTemplateRequest_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsRegion", ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &eDeleteServiceQuotaIncreaseRequestFromTemplateRequest_AwsRegion})
+var sGetAssociationForServiceQuotaTemplateResponse_ServiceQuotaTemplateAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceQuotaTemplateAssociationStatus", ID: &iServiceQuotaTemplateAssociationStatus, Members: &mServiceQuotaTemplateAssociationStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetAssociationForServiceQuotaTemplateResponse_ServiceQuotaTemplateAssociationStatus})
+var sGetAutoManagementConfigurationResponse_OptInLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptInLevel", ID: &iOptInLevel, Members: &mOptInLevel, Type: smithy.ShapeTypeEnum, Ext: &eGetAutoManagementConfigurationResponse_OptInLevel})
+var sGetAutoManagementConfigurationResponse_OptInType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptInType", ID: &iOptInType, Members: &mOptInType, Type: smithy.ShapeTypeEnum, Ext: &eGetAutoManagementConfigurationResponse_OptInType})
+var sGetAutoManagementConfigurationResponse_NotificationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eGetAutoManagementConfigurationResponse_NotificationArn})
+var sGetAutoManagementConfigurationResponse_OptInStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptInStatus", ID: &iOptInStatus, Members: &mOptInStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetAutoManagementConfigurationResponse_OptInStatus})
+var sGetAutoManagementConfigurationResponse_ExclusionList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExclusionList", ID: &i_ExclusionQuotaList, Members: &m_ExclusionQuotaList, Type: smithy.ShapeTypeMap, Ext: &eGetAutoManagementConfigurationResponse_ExclusionList})
+var sGetAWSDefaultServiceQuotaRequest_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &eGetAWSDefaultServiceQuotaRequest_ServiceCode})
+var sGetAWSDefaultServiceQuotaRequest_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &eGetAWSDefaultServiceQuotaRequest_QuotaCode})
+var sGetAWSDefaultServiceQuotaResponse_Quota = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Quota", ID: &iServiceQuota, Members: &mServiceQuota, Type: smithy.ShapeTypeStructure, Ext: &eGetAWSDefaultServiceQuotaResponse_Quota})
+var sGetQuotaUtilizationReportRequest_ReportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportId", ID: &i_ReportId, Type: smithy.ShapeTypeString, Ext: &eGetQuotaUtilizationReportRequest_ReportId})
+var sGetQuotaUtilizationReportRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetQuotaUtilizationReportRequest_NextToken})
+var sGetQuotaUtilizationReportRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsUtilization, Type: smithy.ShapeTypeInteger, Ext: &eGetQuotaUtilizationReportRequest_MaxResults})
+var sGetQuotaUtilizationReportResponse_ReportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportId", ID: &i_ReportId, Type: smithy.ShapeTypeString, Ext: &eGetQuotaUtilizationReportResponse_ReportId})
+var sGetQuotaUtilizationReportResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iReportStatus, Members: &mReportStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetQuotaUtilizationReportResponse_Status})
+var sGetQuotaUtilizationReportResponse_GeneratedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeneratedAt", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp, Ext: &eGetQuotaUtilizationReportResponse_GeneratedAt})
+var sGetQuotaUtilizationReportResponse_TotalCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalCount", ID: &i_TotalCount, Type: smithy.ShapeTypeInteger, Ext: &eGetQuotaUtilizationReportResponse_TotalCount})
+var sGetQuotaUtilizationReportResponse_Quotas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Quotas", ID: &i_QuotaUtilizationInfoList, Members: &m_QuotaUtilizationInfoList, Type: smithy.ShapeTypeList, Ext: &eGetQuotaUtilizationReportResponse_Quotas})
+var sGetQuotaUtilizationReportResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetQuotaUtilizationReportResponse_NextToken})
+var sGetQuotaUtilizationReportResponse_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ReportErrorCode, Type: smithy.ShapeTypeString, Ext: &eGetQuotaUtilizationReportResponse_ErrorCode})
+var sGetQuotaUtilizationReportResponse_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ReportErrorMessage, Type: smithy.ShapeTypeString, Ext: &eGetQuotaUtilizationReportResponse_ErrorMessage})
+var sGetRequestedServiceQuotaChangeRequest_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString, Ext: &eGetRequestedServiceQuotaChangeRequest_RequestId})
+var sGetRequestedServiceQuotaChangeResponse_RequestedQuota = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestedQuota", ID: &iRequestedServiceQuotaChange, Members: &mRequestedServiceQuotaChange, Type: smithy.ShapeTypeStructure, Ext: &eGetRequestedServiceQuotaChangeResponse_RequestedQuota})
+var sGetServiceQuotaIncreaseRequestFromTemplateRequest_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &eGetServiceQuotaIncreaseRequestFromTemplateRequest_ServiceCode})
+var sGetServiceQuotaIncreaseRequestFromTemplateRequest_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &eGetServiceQuotaIncreaseRequestFromTemplateRequest_QuotaCode})
+var sGetServiceQuotaIncreaseRequestFromTemplateRequest_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsRegion", ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &eGetServiceQuotaIncreaseRequestFromTemplateRequest_AwsRegion})
+var sGetServiceQuotaIncreaseRequestFromTemplateResponse_ServiceQuotaIncreaseRequestInTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceQuotaIncreaseRequestInTemplate", ID: &iServiceQuotaIncreaseRequestInTemplate, Members: &mServiceQuotaIncreaseRequestInTemplate, Type: smithy.ShapeTypeStructure, Ext: &eGetServiceQuotaIncreaseRequestFromTemplateResponse_ServiceQuotaIncreaseRequestInTemplate})
+var sGetServiceQuotaRequest_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &eGetServiceQuotaRequest_ServiceCode})
+var sGetServiceQuotaRequest_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &eGetServiceQuotaRequest_QuotaCode})
+var sGetServiceQuotaRequest_ContextId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContextId", ID: &i_QuotaContextId, Type: smithy.ShapeTypeString, Ext: &eGetServiceQuotaRequest_ContextId})
+var sGetServiceQuotaResponse_Quota = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Quota", ID: &iServiceQuota, Members: &mServiceQuota, Type: smithy.ShapeTypeStructure, Ext: &eGetServiceQuotaResponse_Quota})
+var sListAWSDefaultServiceQuotasRequest_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &eListAWSDefaultServiceQuotasRequest_ServiceCode})
+var sListAWSDefaultServiceQuotasRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListAWSDefaultServiceQuotasRequest_NextToken})
+var sListAWSDefaultServiceQuotasRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListAWSDefaultServiceQuotasRequest_MaxResults})
+var sListAWSDefaultServiceQuotasResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListAWSDefaultServiceQuotasResponse_NextToken})
+var sListAWSDefaultServiceQuotasResponse_Quotas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Quotas", ID: &i_ServiceQuotaListDefinition, Members: &m_ServiceQuotaListDefinition, Type: smithy.ShapeTypeList, Ext: &eListAWSDefaultServiceQuotasResponse_Quotas})
+var sListRequestedServiceQuotaChangeHistoryByQuotaRequest_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &eListRequestedServiceQuotaChangeHistoryByQuotaRequest_ServiceCode})
+var sListRequestedServiceQuotaChangeHistoryByQuotaRequest_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &eListRequestedServiceQuotaChangeHistoryByQuotaRequest_QuotaCode})
+var sListRequestedServiceQuotaChangeHistoryByQuotaRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRequestStatus, Members: &mRequestStatus, Type: smithy.ShapeTypeEnum, Ext: &eListRequestedServiceQuotaChangeHistoryByQuotaRequest_Status})
+var sListRequestedServiceQuotaChangeHistoryByQuotaRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRequestedServiceQuotaChangeHistoryByQuotaRequest_NextToken})
+var sListRequestedServiceQuotaChangeHistoryByQuotaRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListRequestedServiceQuotaChangeHistoryByQuotaRequest_MaxResults})
+var sListRequestedServiceQuotaChangeHistoryByQuotaRequest_QuotaRequestedAtLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaRequestedAtLevel", ID: &iAppliedLevelEnum, Members: &mAppliedLevelEnum, Type: smithy.ShapeTypeEnum, Ext: &eListRequestedServiceQuotaChangeHistoryByQuotaRequest_QuotaRequestedAtLevel})
+var sListRequestedServiceQuotaChangeHistoryByQuotaResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRequestedServiceQuotaChangeHistoryByQuotaResponse_NextToken})
+var sListRequestedServiceQuotaChangeHistoryByQuotaResponse_RequestedQuotas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestedQuotas", ID: &i_RequestedServiceQuotaChangeHistoryListDefinition, Members: &m_RequestedServiceQuotaChangeHistoryListDefinition, Type: smithy.ShapeTypeList, Ext: &eListRequestedServiceQuotaChangeHistoryByQuotaResponse_RequestedQuotas})
+var sListRequestedServiceQuotaChangeHistoryRequest_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &eListRequestedServiceQuotaChangeHistoryRequest_ServiceCode})
+var sListRequestedServiceQuotaChangeHistoryRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRequestStatus, Members: &mRequestStatus, Type: smithy.ShapeTypeEnum, Ext: &eListRequestedServiceQuotaChangeHistoryRequest_Status})
+var sListRequestedServiceQuotaChangeHistoryRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRequestedServiceQuotaChangeHistoryRequest_NextToken})
+var sListRequestedServiceQuotaChangeHistoryRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListRequestedServiceQuotaChangeHistoryRequest_MaxResults})
+var sListRequestedServiceQuotaChangeHistoryRequest_QuotaRequestedAtLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaRequestedAtLevel", ID: &iAppliedLevelEnum, Members: &mAppliedLevelEnum, Type: smithy.ShapeTypeEnum, Ext: &eListRequestedServiceQuotaChangeHistoryRequest_QuotaRequestedAtLevel})
+var sListRequestedServiceQuotaChangeHistoryResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListRequestedServiceQuotaChangeHistoryResponse_NextToken})
+var sListRequestedServiceQuotaChangeHistoryResponse_RequestedQuotas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestedQuotas", ID: &i_RequestedServiceQuotaChangeHistoryListDefinition, Members: &m_RequestedServiceQuotaChangeHistoryListDefinition, Type: smithy.ShapeTypeList, Ext: &eListRequestedServiceQuotaChangeHistoryResponse_RequestedQuotas})
+var sListServiceQuotaIncreaseRequestsInTemplateRequest_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &eListServiceQuotaIncreaseRequestsInTemplateRequest_ServiceCode})
+var sListServiceQuotaIncreaseRequestsInTemplateRequest_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsRegion", ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &eListServiceQuotaIncreaseRequestsInTemplateRequest_AwsRegion})
+var sListServiceQuotaIncreaseRequestsInTemplateRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListServiceQuotaIncreaseRequestsInTemplateRequest_NextToken})
+var sListServiceQuotaIncreaseRequestsInTemplateRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListServiceQuotaIncreaseRequestsInTemplateRequest_MaxResults})
+var sListServiceQuotaIncreaseRequestsInTemplateResponse_ServiceQuotaIncreaseRequestInTemplateList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceQuotaIncreaseRequestInTemplateList", ID: &i_ServiceQuotaIncreaseRequestInTemplateList, Members: &m_ServiceQuotaIncreaseRequestInTemplateList, Type: smithy.ShapeTypeList, Ext: &eListServiceQuotaIncreaseRequestsInTemplateResponse_ServiceQuotaIncreaseRequestInTemplateList})
+var sListServiceQuotaIncreaseRequestsInTemplateResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListServiceQuotaIncreaseRequestsInTemplateResponse_NextToken})
+var sListServiceQuotasRequest_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &eListServiceQuotasRequest_ServiceCode})
+var sListServiceQuotasRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListServiceQuotasRequest_NextToken})
+var sListServiceQuotasRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListServiceQuotasRequest_MaxResults})
+var sListServiceQuotasRequest_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &eListServiceQuotasRequest_QuotaCode})
+var sListServiceQuotasRequest_QuotaAppliedAtLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaAppliedAtLevel", ID: &iAppliedLevelEnum, Members: &mAppliedLevelEnum, Type: smithy.ShapeTypeEnum, Ext: &eListServiceQuotasRequest_QuotaAppliedAtLevel})
+var sListServiceQuotasResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListServiceQuotasResponse_NextToken})
+var sListServiceQuotasResponse_Quotas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Quotas", ID: &i_ServiceQuotaListDefinition, Members: &m_ServiceQuotaListDefinition, Type: smithy.ShapeTypeList, Ext: &eListServiceQuotasResponse_Quotas})
+var sListServicesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListServicesRequest_NextToken})
+var sListServicesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListServicesRequest_MaxResults})
+var sListServicesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListServicesResponse_NextToken})
+var sListServicesResponse_Services = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Services", ID: &i_ServiceInfoListDefinition, Members: &m_ServiceInfoListDefinition, Type: smithy.ShapeTypeList, Ext: &eListServicesResponse_Services})
+var sListTagsForResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceARN})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_OutputTags, Members: &m_OutputTags, Type: smithy.ShapeTypeList, Ext: &eListTagsForResourceResponse_Tags})
+var sPutServiceQuotaIncreaseRequestIntoTemplateRequest_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &ePutServiceQuotaIncreaseRequestIntoTemplateRequest_QuotaCode})
+var sPutServiceQuotaIncreaseRequestIntoTemplateRequest_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &ePutServiceQuotaIncreaseRequestIntoTemplateRequest_ServiceCode})
+var sPutServiceQuotaIncreaseRequestIntoTemplateRequest_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsRegion", ID: &i_AwsRegion, Type: smithy.ShapeTypeString, Ext: &ePutServiceQuotaIncreaseRequestIntoTemplateRequest_AwsRegion})
+var sPutServiceQuotaIncreaseRequestIntoTemplateRequest_DesiredValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredValue", ID: &i_QuotaValue, Type: smithy.ShapeTypeDouble, Ext: &ePutServiceQuotaIncreaseRequestIntoTemplateRequest_DesiredValue})
+var sPutServiceQuotaIncreaseRequestIntoTemplateResponse_ServiceQuotaIncreaseRequestInTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceQuotaIncreaseRequestInTemplate", ID: &iServiceQuotaIncreaseRequestInTemplate, Members: &mServiceQuotaIncreaseRequestInTemplate, Type: smithy.ShapeTypeStructure, Ext: &ePutServiceQuotaIncreaseRequestIntoTemplateResponse_ServiceQuotaIncreaseRequestInTemplate})
+var sRequestServiceQuotaIncreaseRequest_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString, Ext: &eRequestServiceQuotaIncreaseRequest_ServiceCode})
+var sRequestServiceQuotaIncreaseRequest_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString, Ext: &eRequestServiceQuotaIncreaseRequest_QuotaCode})
+var sRequestServiceQuotaIncreaseRequest_DesiredValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredValue", ID: &i_QuotaValue, Type: smithy.ShapeTypeDouble, Ext: &eRequestServiceQuotaIncreaseRequest_DesiredValue})
+var sRequestServiceQuotaIncreaseRequest_ContextId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContextId", ID: &i_QuotaContextId, Type: smithy.ShapeTypeString, Ext: &eRequestServiceQuotaIncreaseRequest_ContextId})
+var sRequestServiceQuotaIncreaseRequest_SupportCaseAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportCaseAllowed", ID: &i_SupportCaseAllowed, Type: smithy.ShapeTypeBoolean, Ext: &eRequestServiceQuotaIncreaseRequest_SupportCaseAllowed})
+var sRequestServiceQuotaIncreaseResponse_RequestedQuota = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestedQuota", ID: &iRequestedServiceQuotaChange, Members: &mRequestedServiceQuotaChange, Type: smithy.ShapeTypeStructure, Ext: &eRequestServiceQuotaIncreaseResponse_RequestedQuota})
+var sStartAutoManagementRequest_OptInLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptInLevel", ID: &iOptInLevel, Members: &mOptInLevel, Type: smithy.ShapeTypeEnum, Ext: &eStartAutoManagementRequest_OptInLevel})
+var sStartAutoManagementRequest_OptInType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptInType", ID: &iOptInType, Members: &mOptInType, Type: smithy.ShapeTypeEnum, Ext: &eStartAutoManagementRequest_OptInType})
+var sStartAutoManagementRequest_NotificationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eStartAutoManagementRequest_NotificationArn})
+var sStartAutoManagementRequest_ExclusionList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExclusionList", ID: &i_ExclusionList, Members: &m_ExclusionList, Type: smithy.ShapeTypeMap, Ext: &eStartAutoManagementRequest_ExclusionList})
+var sStartQuotaUtilizationReportResponse_ReportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportId", ID: &i_ReportId, Type: smithy.ShapeTypeString, Ext: &eStartQuotaUtilizationReportResponse_ReportId})
+var sStartQuotaUtilizationReportResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iReportStatus, Members: &mReportStatus, Type: smithy.ShapeTypeEnum, Ext: &eStartQuotaUtilizationReportResponse_Status})
+var sStartQuotaUtilizationReportResponse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ReportMessage, Type: smithy.ShapeTypeString, Ext: &eStartQuotaUtilizationReportResponse_Message})
+var sTagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceARN})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_InputTags, Members: &m_InputTags, Type: smithy.ShapeTypeList, Ext: &eTagResourceRequest_Tags})
+var sUntagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceARN})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_InputTagKeys, Members: &m_InputTagKeys, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUpdateAutoManagementRequest_OptInType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptInType", ID: &iOptInType, Members: &mOptInType, Type: smithy.ShapeTypeEnum, Ext: &eUpdateAutoManagementRequest_OptInType})
+var sUpdateAutoManagementRequest_NotificationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString, Ext: &eUpdateAutoManagementRequest_NotificationArn})
+var sUpdateAutoManagementRequest_ExclusionList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExclusionList", ID: &i_ExclusionList, Members: &m_ExclusionList, Type: smithy.ShapeTypeMap, Ext: &eUpdateAutoManagementRequest_ExclusionList})
 
 var AssociateServiceQuotaTemplate = &sAssociateServiceQuotaTemplate
 

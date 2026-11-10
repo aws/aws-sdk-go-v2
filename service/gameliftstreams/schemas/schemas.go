@@ -7,9 +7,673 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [665]smithy.SchemaExtensions
+var (
+	eAddStreamGroupLocations                                        smithy.SchemaExtensions
+	eAssociateApplications                                          smithy.SchemaExtensions
+	eCreateApplication                                              smithy.SchemaExtensions
+	eCreateStreamGroup                                              smithy.SchemaExtensions
+	eCreateStreamSessionAdminShell                                  smithy.SchemaExtensions
+	eCreateStreamSessionConnection                                  smithy.SchemaExtensions
+	eCreateStreamUrl                                                smithy.SchemaExtensions
+	eDeleteApplication                                              smithy.SchemaExtensions
+	eDeleteStreamGroup                                              smithy.SchemaExtensions
+	eDisassociateApplications                                       smithy.SchemaExtensions
+	eExportStreamSessionFiles                                       smithy.SchemaExtensions
+	eGetApplication                                                 smithy.SchemaExtensions
+	eGetStreamGroup                                                 smithy.SchemaExtensions
+	eGetStreamSession                                               smithy.SchemaExtensions
+	eGetStreamUrl                                                   smithy.SchemaExtensions
+	eListApplications                                               smithy.SchemaExtensions
+	eListApplicationShaderCaches                                    smithy.SchemaExtensions
+	eListStreamGroups                                               smithy.SchemaExtensions
+	eListStreamSessions                                             smithy.SchemaExtensions
+	eListStreamSessionsByAccount                                    smithy.SchemaExtensions
+	eListStreamUrls                                                 smithy.SchemaExtensions
+	eListTagsForResource                                            smithy.SchemaExtensions
+	eRemoveStreamGroupLocations                                     smithy.SchemaExtensions
+	eRevokeStreamUrl                                                smithy.SchemaExtensions
+	eStartStreamSession                                             smithy.SchemaExtensions
+	eTagResource                                                    smithy.SchemaExtensions
+	eTerminateStreamSession                                         smithy.SchemaExtensions
+	eUntagResource                                                  smithy.SchemaExtensions
+	eUpdateApplication                                              smithy.SchemaExtensions
+	eUpdateStreamGroup                                              smithy.SchemaExtensions
+	e_GameLiftStreams                                               smithy.SchemaExtensions
+	eAccessDeniedException                                          smithy.SchemaExtensions
+	eAccessDeniedException_Message                                  smithy.SchemaExtensions
+	e_AlwaysOnCapacity                                              smithy.SchemaExtensions
+	e_ApplicationLogOutputUri                                       smithy.SchemaExtensions
+	e_ApplicationSourceUri                                          smithy.SchemaExtensions
+	eApplicationStatus                                              smithy.SchemaExtensions
+	eApplicationStatus_INITIALIZED                                  smithy.SchemaExtensions
+	eApplicationStatus_PROCESSING                                   smithy.SchemaExtensions
+	eApplicationStatus_READY                                        smithy.SchemaExtensions
+	eApplicationStatus_DELETING                                     smithy.SchemaExtensions
+	eApplicationStatus_ERROR                                        smithy.SchemaExtensions
+	eApplicationStatusReason                                        smithy.SchemaExtensions
+	eApplicationStatusReason_INTERNAL_ERROR                         smithy.SchemaExtensions
+	eApplicationStatusReason_ACCESS_DENIED                          smithy.SchemaExtensions
+	eApplicationStatusReason_SOURCE_MODIFIED                        smithy.SchemaExtensions
+	eApplicationSummary                                             smithy.SchemaExtensions
+	eApplicationSummary_Arn                                         smithy.SchemaExtensions
+	eApplicationSummary_Id                                          smithy.SchemaExtensions
+	eApplicationSummary_Description                                 smithy.SchemaExtensions
+	eApplicationSummary_Status                                      smithy.SchemaExtensions
+	eApplicationSummary_CreatedAt                                   smithy.SchemaExtensions
+	eApplicationSummary_LastUpdatedAt                               smithy.SchemaExtensions
+	eApplicationSummary_RuntimeEnvironment                          smithy.SchemaExtensions
+	e_ApplicationSummaryList                                        smithy.SchemaExtensions
+	e_ApplicationSummaryList_member                                 smithy.SchemaExtensions
+	e_Arn                                                           smithy.SchemaExtensions
+	e_ArnList                                                       smithy.SchemaExtensions
+	e_ArnList_member                                                smithy.SchemaExtensions
+	e_CapacityValue                                                 smithy.SchemaExtensions
+	e_ClientToken                                                   smithy.SchemaExtensions
+	eConflictException                                              smithy.SchemaExtensions
+	eConflictException_Message                                      smithy.SchemaExtensions
+	e_ConnectionTimeoutSeconds                                      smithy.SchemaExtensions
+	eDefaultApplication                                             smithy.SchemaExtensions
+	eDefaultApplication_Id                                          smithy.SchemaExtensions
+	eDefaultApplication_Arn                                         smithy.SchemaExtensions
+	e_Description                                                   smithy.SchemaExtensions
+	eDisplayConfiguration                                           smithy.SchemaExtensions
+	eDisplayConfiguration_Resolution                                smithy.SchemaExtensions
+	e_EnvironmentVariables                                          smithy.SchemaExtensions
+	e_EnvironmentVariables_key                                      smithy.SchemaExtensions
+	e_EnvironmentVariables_value                                    smithy.SchemaExtensions
+	e_ExecutablePath                                                smithy.SchemaExtensions
+	eExportFilesMetadata                                            smithy.SchemaExtensions
+	eExportFilesMetadata_Status                                     smithy.SchemaExtensions
+	eExportFilesMetadata_StatusReason                               smithy.SchemaExtensions
+	eExportFilesMetadata_OutputUri                                  smithy.SchemaExtensions
+	e_ExportFilesReason                                             smithy.SchemaExtensions
+	eExportFilesStatus                                              smithy.SchemaExtensions
+	eExportFilesStatus_SUCCEEDED                                    smithy.SchemaExtensions
+	eExportFilesStatus_FAILED                                       smithy.SchemaExtensions
+	eExportFilesStatus_PENDING                                      smithy.SchemaExtensions
+	e_FileLocationUri                                               smithy.SchemaExtensions
+	e_FilePath                                                      smithy.SchemaExtensions
+	e_FilePaths                                                     smithy.SchemaExtensions
+	e_FilePaths_member                                              smithy.SchemaExtensions
+	e_GameLaunchArgList                                             smithy.SchemaExtensions
+	e_GameLaunchArgList_member                                      smithy.SchemaExtensions
+	e_IamRoleArn                                                    smithy.SchemaExtensions
+	e_Id                                                            smithy.SchemaExtensions
+	e_Identifier                                                    smithy.SchemaExtensions
+	e_Identifiers                                                   smithy.SchemaExtensions
+	e_Identifiers_member                                            smithy.SchemaExtensions
+	eInternalServerException                                        smithy.SchemaExtensions
+	eInternalServerException_Message                                smithy.SchemaExtensions
+	e_Ipv4CidrBlock                                                 smithy.SchemaExtensions
+	e_Ipv4CidrBlockList                                             smithy.SchemaExtensions
+	e_Ipv4CidrBlockList_member                                      smithy.SchemaExtensions
+	eLocationConfiguration                                          smithy.SchemaExtensions
+	eLocationConfiguration_LocationName                             smithy.SchemaExtensions
+	eLocationConfiguration_AlwaysOnCapacity                         smithy.SchemaExtensions
+	eLocationConfiguration_OnDemandCapacity                         smithy.SchemaExtensions
+	eLocationConfiguration_TargetIdleCapacity                       smithy.SchemaExtensions
+	eLocationConfiguration_MaximumCapacity                          smithy.SchemaExtensions
+	eLocationConfiguration_VpcTransitConfiguration                  smithy.SchemaExtensions
+	e_LocationConfigurations                                        smithy.SchemaExtensions
+	e_LocationConfigurations_member                                 smithy.SchemaExtensions
+	e_LocationList                                                  smithy.SchemaExtensions
+	e_LocationList_member                                           smithy.SchemaExtensions
+	e_LocationName                                                  smithy.SchemaExtensions
+	e_LocationsList                                                 smithy.SchemaExtensions
+	e_LocationsList_member                                          smithy.SchemaExtensions
+	eLocationState                                                  smithy.SchemaExtensions
+	eLocationState_LocationName                                     smithy.SchemaExtensions
+	eLocationState_Status                                           smithy.SchemaExtensions
+	eLocationState_AlwaysOnCapacity                                 smithy.SchemaExtensions
+	eLocationState_OnDemandCapacity                                 smithy.SchemaExtensions
+	eLocationState_TargetIdleCapacity                               smithy.SchemaExtensions
+	eLocationState_MaximumCapacity                                  smithy.SchemaExtensions
+	eLocationState_RequestedCapacity                                smithy.SchemaExtensions
+	eLocationState_AllocatedCapacity                                smithy.SchemaExtensions
+	eLocationState_IdleCapacity                                     smithy.SchemaExtensions
+	eLocationState_InternalVpcIpv4CidrBlock                         smithy.SchemaExtensions
+	eLocationState_VpcTransitConfiguration                          smithy.SchemaExtensions
+	e_LocationStates                                                smithy.SchemaExtensions
+	e_LocationStates_member                                         smithy.SchemaExtensions
+	e_MaximumCapacity                                               smithy.SchemaExtensions
+	e_MaxResults                                                    smithy.SchemaExtensions
+	e_NextToken                                                     smithy.SchemaExtensions
+	e_OnDemandCapacity                                              smithy.SchemaExtensions
+	e_OutputUri                                                     smithy.SchemaExtensions
+	ePerformanceStatsConfiguration                                  smithy.SchemaExtensions
+	ePerformanceStatsConfiguration_SharedWithClient                 smithy.SchemaExtensions
+	eProtocol                                                       smithy.SchemaExtensions
+	eProtocol_WEBRTC                                                smithy.SchemaExtensions
+	e_RemainingUses                                                 smithy.SchemaExtensions
+	eReplicationStatus                                              smithy.SchemaExtensions
+	eReplicationStatus_Location                                     smithy.SchemaExtensions
+	eReplicationStatus_Status                                       smithy.SchemaExtensions
+	e_ReplicationStatuses                                           smithy.SchemaExtensions
+	e_ReplicationStatuses_member                                    smithy.SchemaExtensions
+	eReplicationStatusType                                          smithy.SchemaExtensions
+	eReplicationStatusType_REPLICATING                              smithy.SchemaExtensions
+	eReplicationStatusType_COMPLETED                                smithy.SchemaExtensions
+	eResolution                                                     smithy.SchemaExtensions
+	eResolution_Width                                               smithy.SchemaExtensions
+	eResolution_Height                                              smithy.SchemaExtensions
+	e_ResolutionHeight                                              smithy.SchemaExtensions
+	e_ResolutionWidth                                               smithy.SchemaExtensions
+	eResourceNotFoundException                                      smithy.SchemaExtensions
+	eResourceNotFoundException_Message                              smithy.SchemaExtensions
+	eRevocationMode                                                 smithy.SchemaExtensions
+	eRevocationMode_REVOKE_URL                                      smithy.SchemaExtensions
+	eRevocationMode_REVOKE_AND_TERMINATE_SESSIONS                   smithy.SchemaExtensions
+	eRuntimeEnvironment                                             smithy.SchemaExtensions
+	eRuntimeEnvironment_Type                                        smithy.SchemaExtensions
+	eRuntimeEnvironment_Version                                     smithy.SchemaExtensions
+	eRuntimeEnvironmentType                                         smithy.SchemaExtensions
+	eRuntimeEnvironmentType_PROTON                                  smithy.SchemaExtensions
+	eRuntimeEnvironmentType_WINDOWS                                 smithy.SchemaExtensions
+	eRuntimeEnvironmentType_UBUNTU                                  smithy.SchemaExtensions
+	e_RuntimeEnvironmentVersion                                     smithy.SchemaExtensions
+	eServiceQuotaExceededException                                  smithy.SchemaExtensions
+	eServiceQuotaExceededException_Message                          smithy.SchemaExtensions
+	e_SessionId                                                     smithy.SchemaExtensions
+	e_SessionLengthSeconds                                          smithy.SchemaExtensions
+	eShaderCacheStatus                                              smithy.SchemaExtensions
+	eShaderCacheStatus_INITIALIZED                                  smithy.SchemaExtensions
+	eShaderCacheStatus_PROCESSING                                   smithy.SchemaExtensions
+	eShaderCacheStatus_READY                                        smithy.SchemaExtensions
+	eShaderCacheStatus_DELETING                                     smithy.SchemaExtensions
+	eShaderCacheStatus_ERROR                                        smithy.SchemaExtensions
+	eShaderCacheSummary                                             smithy.SchemaExtensions
+	eShaderCacheSummary_Identifier                                  smithy.SchemaExtensions
+	eShaderCacheSummary_ApplicationArn                              smithy.SchemaExtensions
+	eShaderCacheSummary_Status                                      smithy.SchemaExtensions
+	eShaderCacheSummary_LastUpdatedAt                               smithy.SchemaExtensions
+	eShaderCacheSummary_StorageBytes                                smithy.SchemaExtensions
+	eShaderCacheSummary_AssociatedStreamGroups                      smithy.SchemaExtensions
+	e_ShaderCacheSummaryList                                        smithy.SchemaExtensions
+	e_ShaderCacheSummaryList_member                                 smithy.SchemaExtensions
+	e_SignalRequest                                                 smithy.SchemaExtensions
+	e_SignalResponse                                                smithy.SchemaExtensions
+	eStreamClass                                                    smithy.SchemaExtensions
+	eStreamClass_gen4n_high                                         smithy.SchemaExtensions
+	eStreamClass_gen4n_ultra                                        smithy.SchemaExtensions
+	eStreamClass_gen4n_win2022                                      smithy.SchemaExtensions
+	eStreamClass_gen5n_high                                         smithy.SchemaExtensions
+	eStreamClass_gen5n_ultra                                        smithy.SchemaExtensions
+	eStreamClass_gen5n_win2022                                      smithy.SchemaExtensions
+	eStreamClass_gen6n_small                                        smithy.SchemaExtensions
+	eStreamClass_gen6n_medium                                       smithy.SchemaExtensions
+	eStreamClass_gen6n_high                                         smithy.SchemaExtensions
+	eStreamClass_gen6n_ultra                                        smithy.SchemaExtensions
+	eStreamClass_gen6n_ultra_win2022                                smithy.SchemaExtensions
+	eStreamClass_gen6n_pro                                          smithy.SchemaExtensions
+	eStreamClass_gen6n_pro_win2022                                  smithy.SchemaExtensions
+	eStreamClass_gen6n_small_win2022                                smithy.SchemaExtensions
+	eStreamClass_gen6n_medium_win2022                               smithy.SchemaExtensions
+	eStreamClass_gen6e_pro                                          smithy.SchemaExtensions
+	eStreamClass_gen6e_pro_win2022                                  smithy.SchemaExtensions
+	eStreamGroupLocationStatus                                      smithy.SchemaExtensions
+	eStreamGroupLocationStatus_ACTIVATING                           smithy.SchemaExtensions
+	eStreamGroupLocationStatus_ACTIVE                               smithy.SchemaExtensions
+	eStreamGroupLocationStatus_ERROR                                smithy.SchemaExtensions
+	eStreamGroupLocationStatus_REMOVING                             smithy.SchemaExtensions
+	eStreamGroupStatus                                              smithy.SchemaExtensions
+	eStreamGroupStatus_ACTIVATING                                   smithy.SchemaExtensions
+	eStreamGroupStatus_UPDATING_LOCATIONS                           smithy.SchemaExtensions
+	eStreamGroupStatus_ACTIVE                                       smithy.SchemaExtensions
+	eStreamGroupStatus_ACTIVE_WITH_ERRORS                           smithy.SchemaExtensions
+	eStreamGroupStatus_ERROR                                        smithy.SchemaExtensions
+	eStreamGroupStatus_DELETING                                     smithy.SchemaExtensions
+	eStreamGroupStatus_EXPIRED                                      smithy.SchemaExtensions
+	eStreamGroupStatusReason                                        smithy.SchemaExtensions
+	eStreamGroupStatusReason_INTERNAL_ERROR                         smithy.SchemaExtensions
+	eStreamGroupStatusReason_NO_AVAILABLE_INSTANCES                 smithy.SchemaExtensions
+	eStreamGroupSummary                                             smithy.SchemaExtensions
+	eStreamGroupSummary_Arn                                         smithy.SchemaExtensions
+	eStreamGroupSummary_Id                                          smithy.SchemaExtensions
+	eStreamGroupSummary_Description                                 smithy.SchemaExtensions
+	eStreamGroupSummary_DefaultApplication                          smithy.SchemaExtensions
+	eStreamGroupSummary_StreamClass                                 smithy.SchemaExtensions
+	eStreamGroupSummary_Status                                      smithy.SchemaExtensions
+	eStreamGroupSummary_CreatedAt                                   smithy.SchemaExtensions
+	eStreamGroupSummary_LastUpdatedAt                               smithy.SchemaExtensions
+	eStreamGroupSummary_ExpiresAt                                   smithy.SchemaExtensions
+	e_StreamGroupSummaryList                                        smithy.SchemaExtensions
+	e_StreamGroupSummaryList_member                                 smithy.SchemaExtensions
+	eStreamSessionAccessNotReadyException                           smithy.SchemaExtensions
+	eStreamSessionAccessNotReadyException_Message                   smithy.SchemaExtensions
+	eStreamSessionStatus                                            smithy.SchemaExtensions
+	eStreamSessionStatus_ACTIVATING                                 smithy.SchemaExtensions
+	eStreamSessionStatus_ACTIVE                                     smithy.SchemaExtensions
+	eStreamSessionStatus_CONNECTED                                  smithy.SchemaExtensions
+	eStreamSessionStatus_PENDING_CLIENT_RECONNECTION                smithy.SchemaExtensions
+	eStreamSessionStatus_RECONNECTING                               smithy.SchemaExtensions
+	eStreamSessionStatus_TERMINATING                                smithy.SchemaExtensions
+	eStreamSessionStatus_TERMINATED                                 smithy.SchemaExtensions
+	eStreamSessionStatus_ERROR                                      smithy.SchemaExtensions
+	eStreamSessionStatusReason                                      smithy.SchemaExtensions
+	eStreamSessionStatusReason_INTERNAL_ERROR                       smithy.SchemaExtensions
+	eStreamSessionStatusReason_INVALID_SIGNAL_REQUEST               smithy.SchemaExtensions
+	eStreamSessionStatusReason_PLACEMENT_TIMEOUT                    smithy.SchemaExtensions
+	eStreamSessionStatusReason_APP_LOG_S3_DESTINATION_ERROR         smithy.SchemaExtensions
+	eStreamSessionStatusReason_ASSUME_ROLE_FAILED                   smithy.SchemaExtensions
+	eStreamSessionStatusReason_APPLICATION_EXIT                     smithy.SchemaExtensions
+	eStreamSessionStatusReason_CONNECTION_TIMEOUT                   smithy.SchemaExtensions
+	eStreamSessionStatusReason_RECONNECTION_TIMEOUT                 smithy.SchemaExtensions
+	eStreamSessionStatusReason_MAX_SESSION_LENGTH_TIMEOUT           smithy.SchemaExtensions
+	eStreamSessionStatusReason_IDLE_TIMEOUT                         smithy.SchemaExtensions
+	eStreamSessionStatusReason_API_TERMINATED                       smithy.SchemaExtensions
+	e_StreamSessionStreamUrl                                        smithy.SchemaExtensions
+	eStreamSessionSummary                                           smithy.SchemaExtensions
+	eStreamSessionSummary_Arn                                       smithy.SchemaExtensions
+	eStreamSessionSummary_UserId                                    smithy.SchemaExtensions
+	eStreamSessionSummary_Status                                    smithy.SchemaExtensions
+	eStreamSessionSummary_StatusReason                              smithy.SchemaExtensions
+	eStreamSessionSummary_Protocol                                  smithy.SchemaExtensions
+	eStreamSessionSummary_LastUpdatedAt                             smithy.SchemaExtensions
+	eStreamSessionSummary_CreatedAt                                 smithy.SchemaExtensions
+	eStreamSessionSummary_ApplicationArn                            smithy.SchemaExtensions
+	eStreamSessionSummary_ExportFilesMetadata                       smithy.SchemaExtensions
+	eStreamSessionSummary_Location                                  smithy.SchemaExtensions
+	eStreamSessionSummary_RoleArn                                   smithy.SchemaExtensions
+	e_StreamSessionSummaryList                                      smithy.SchemaExtensions
+	e_StreamSessionSummaryList_member                               smithy.SchemaExtensions
+	e_StreamUrl                                                     smithy.SchemaExtensions
+	eStreamUrlStatus                                                smithy.SchemaExtensions
+	eStreamUrlStatus_ACTIVE                                         smithy.SchemaExtensions
+	eStreamUrlStatus_EXPIRED                                        smithy.SchemaExtensions
+	eStreamUrlStatus_REVOKED                                        smithy.SchemaExtensions
+	eStreamUrlStatus_LIMIT_REACHED                                  smithy.SchemaExtensions
+	eStreamUrlStatusReason                                          smithy.SchemaExtensions
+	eStreamUrlStatusReason_USER_REVOKED                             smithy.SchemaExtensions
+	eStreamUrlStatusReason_REVOKED_AND_TERMINATING_SESSIONS         smithy.SchemaExtensions
+	eStreamUrlStatusReason_REVOKED_AND_SESSIONS_TERMINATED          smithy.SchemaExtensions
+	eStreamUrlStatusReason_STREAM_GROUP_DELETED                     smithy.SchemaExtensions
+	eStreamUrlStatusReason_APPLICATION_DELETED                      smithy.SchemaExtensions
+	eStreamUrlSummary                                               smithy.SchemaExtensions
+	eStreamUrlSummary_Arn                                           smithy.SchemaExtensions
+	eStreamUrlSummary_StreamUrlId                                   smithy.SchemaExtensions
+	eStreamUrlSummary_StreamUrl                                     smithy.SchemaExtensions
+	eStreamUrlSummary_Status                                        smithy.SchemaExtensions
+	eStreamUrlSummary_StatusReason                                  smithy.SchemaExtensions
+	eStreamUrlSummary_ExpiresAt                                     smithy.SchemaExtensions
+	eStreamUrlSummary_CreatedAt                                     smithy.SchemaExtensions
+	eStreamUrlSummary_UsageLimit                                    smithy.SchemaExtensions
+	eStreamUrlSummary_RemainingUses                                 smithy.SchemaExtensions
+	eStreamUrlSummary_StreamGroupArn                                smithy.SchemaExtensions
+	eStreamUrlSummary_ApplicationArn                                smithy.SchemaExtensions
+	eStreamUrlSummary_SessionLengthSeconds                          smithy.SchemaExtensions
+	eStreamUrlSummary_Description                                   smithy.SchemaExtensions
+	e_StreamUrlSummaryList                                          smithy.SchemaExtensions
+	e_StreamUrlSummaryList_member                                   smithy.SchemaExtensions
+	e_TagKey                                                        smithy.SchemaExtensions
+	e_TagKeyList                                                    smithy.SchemaExtensions
+	e_TagKeyList_member                                             smithy.SchemaExtensions
+	e_Tags                                                          smithy.SchemaExtensions
+	e_Tags_key                                                      smithy.SchemaExtensions
+	e_Tags_value                                                    smithy.SchemaExtensions
+	e_TagValue                                                      smithy.SchemaExtensions
+	e_TargetIdleCapacity                                            smithy.SchemaExtensions
+	eThrottlingException                                            smithy.SchemaExtensions
+	eThrottlingException_Message                                    smithy.SchemaExtensions
+	e_TokenValue                                                    smithy.SchemaExtensions
+	e_UrlExpiresAfterMinutes                                        smithy.SchemaExtensions
+	e_UsageLimit                                                    smithy.SchemaExtensions
+	e_UserId                                                        smithy.SchemaExtensions
+	eValidationException                                            smithy.SchemaExtensions
+	eValidationException_Message                                    smithy.SchemaExtensions
+	e_VpcId                                                         smithy.SchemaExtensions
+	eVpcTransitConfiguration                                        smithy.SchemaExtensions
+	eVpcTransitConfiguration_VpcId                                  smithy.SchemaExtensions
+	eVpcTransitConfiguration_Ipv4CidrBlocks                         smithy.SchemaExtensions
+	eVpcTransitConfigurationResponse                                smithy.SchemaExtensions
+	eVpcTransitConfigurationResponse_VpcId                          smithy.SchemaExtensions
+	eVpcTransitConfigurationResponse_Ipv4CidrBlocks                 smithy.SchemaExtensions
+	eVpcTransitConfigurationResponse_TransitGatewayId               smithy.SchemaExtensions
+	eVpcTransitConfigurationResponse_TransitGatewayResourceShareArn smithy.SchemaExtensions
+	e_WebSdkProtocolUrl                                             smithy.SchemaExtensions
+	eAddStreamGroupLocationsInput                                   smithy.SchemaExtensions
+	eAddStreamGroupLocationsInput_Identifier                        smithy.SchemaExtensions
+	eAddStreamGroupLocationsInput_LocationConfigurations            smithy.SchemaExtensions
+	eAddStreamGroupLocationsOutput                                  smithy.SchemaExtensions
+	eAddStreamGroupLocationsOutput_Identifier                       smithy.SchemaExtensions
+	eAddStreamGroupLocationsOutput_Locations                        smithy.SchemaExtensions
+	eAssociateApplicationsInput                                     smithy.SchemaExtensions
+	eAssociateApplicationsInput_Identifier                          smithy.SchemaExtensions
+	eAssociateApplicationsInput_ApplicationIdentifiers              smithy.SchemaExtensions
+	eAssociateApplicationsOutput                                    smithy.SchemaExtensions
+	eAssociateApplicationsOutput_Arn                                smithy.SchemaExtensions
+	eAssociateApplicationsOutput_ApplicationArns                    smithy.SchemaExtensions
+	eCreateApplicationInput                                         smithy.SchemaExtensions
+	eCreateApplicationInput_Description                             smithy.SchemaExtensions
+	eCreateApplicationInput_RuntimeEnvironment                      smithy.SchemaExtensions
+	eCreateApplicationInput_ExecutablePath                          smithy.SchemaExtensions
+	eCreateApplicationInput_ApplicationSourceUri                    smithy.SchemaExtensions
+	eCreateApplicationInput_ApplicationLogPaths                     smithy.SchemaExtensions
+	eCreateApplicationInput_ApplicationLogOutputUri                 smithy.SchemaExtensions
+	eCreateApplicationInput_Tags                                    smithy.SchemaExtensions
+	eCreateApplicationInput_ClientToken                             smithy.SchemaExtensions
+	eCreateApplicationOutput                                        smithy.SchemaExtensions
+	eCreateApplicationOutput_Arn                                    smithy.SchemaExtensions
+	eCreateApplicationOutput_Description                            smithy.SchemaExtensions
+	eCreateApplicationOutput_RuntimeEnvironment                     smithy.SchemaExtensions
+	eCreateApplicationOutput_ExecutablePath                         smithy.SchemaExtensions
+	eCreateApplicationOutput_ApplicationLogPaths                    smithy.SchemaExtensions
+	eCreateApplicationOutput_ApplicationLogOutputUri                smithy.SchemaExtensions
+	eCreateApplicationOutput_ApplicationSourceUri                   smithy.SchemaExtensions
+	eCreateApplicationOutput_Id                                     smithy.SchemaExtensions
+	eCreateApplicationOutput_Status                                 smithy.SchemaExtensions
+	eCreateApplicationOutput_StatusReason                           smithy.SchemaExtensions
+	eCreateApplicationOutput_ReplicationStatuses                    smithy.SchemaExtensions
+	eCreateApplicationOutput_CreatedAt                              smithy.SchemaExtensions
+	eCreateApplicationOutput_LastUpdatedAt                          smithy.SchemaExtensions
+	eCreateApplicationOutput_AssociatedStreamGroups                 smithy.SchemaExtensions
+	eCreateStreamGroupInput                                         smithy.SchemaExtensions
+	eCreateStreamGroupInput_Description                             smithy.SchemaExtensions
+	eCreateStreamGroupInput_StreamClass                             smithy.SchemaExtensions
+	eCreateStreamGroupInput_DefaultApplicationIdentifier            smithy.SchemaExtensions
+	eCreateStreamGroupInput_LocationConfigurations                  smithy.SchemaExtensions
+	eCreateStreamGroupInput_Tags                                    smithy.SchemaExtensions
+	eCreateStreamGroupInput_ClientToken                             smithy.SchemaExtensions
+	eCreateStreamGroupOutput                                        smithy.SchemaExtensions
+	eCreateStreamGroupOutput_Arn                                    smithy.SchemaExtensions
+	eCreateStreamGroupOutput_Description                            smithy.SchemaExtensions
+	eCreateStreamGroupOutput_DefaultApplication                     smithy.SchemaExtensions
+	eCreateStreamGroupOutput_LocationStates                         smithy.SchemaExtensions
+	eCreateStreamGroupOutput_StreamClass                            smithy.SchemaExtensions
+	eCreateStreamGroupOutput_Id                                     smithy.SchemaExtensions
+	eCreateStreamGroupOutput_Status                                 smithy.SchemaExtensions
+	eCreateStreamGroupOutput_StatusReason                           smithy.SchemaExtensions
+	eCreateStreamGroupOutput_LastUpdatedAt                          smithy.SchemaExtensions
+	eCreateStreamGroupOutput_CreatedAt                              smithy.SchemaExtensions
+	eCreateStreamGroupOutput_ExpiresAt                              smithy.SchemaExtensions
+	eCreateStreamGroupOutput_AssociatedApplications                 smithy.SchemaExtensions
+	eCreateStreamSessionAdminShellInput                             smithy.SchemaExtensions
+	eCreateStreamSessionAdminShellInput_Identifier                  smithy.SchemaExtensions
+	eCreateStreamSessionAdminShellInput_StreamSessionIdentifier     smithy.SchemaExtensions
+	eCreateStreamSessionAdminShellOutput                            smithy.SchemaExtensions
+	eCreateStreamSessionAdminShellOutput_SessionId                  smithy.SchemaExtensions
+	eCreateStreamSessionAdminShellOutput_StreamUrl                  smithy.SchemaExtensions
+	eCreateStreamSessionAdminShellOutput_TokenValue                 smithy.SchemaExtensions
+	eCreateStreamSessionConnectionInput                             smithy.SchemaExtensions
+	eCreateStreamSessionConnectionInput_ClientToken                 smithy.SchemaExtensions
+	eCreateStreamSessionConnectionInput_Identifier                  smithy.SchemaExtensions
+	eCreateStreamSessionConnectionInput_StreamSessionIdentifier     smithy.SchemaExtensions
+	eCreateStreamSessionConnectionInput_SignalRequest               smithy.SchemaExtensions
+	eCreateStreamSessionConnectionOutput                            smithy.SchemaExtensions
+	eCreateStreamSessionConnectionOutput_SignalResponse             smithy.SchemaExtensions
+	eCreateStreamUrlInput                                           smithy.SchemaExtensions
+	eCreateStreamUrlInput_Identifier                                smithy.SchemaExtensions
+	eCreateStreamUrlInput_ApplicationIdentifier                     smithy.SchemaExtensions
+	eCreateStreamUrlInput_Protocol                                  smithy.SchemaExtensions
+	eCreateStreamUrlInput_UrlExpiresAfterMinutes                    smithy.SchemaExtensions
+	eCreateStreamUrlInput_UsageLimit                                smithy.SchemaExtensions
+	eCreateStreamUrlInput_Description                               smithy.SchemaExtensions
+	eCreateStreamUrlInput_Locations                                 smithy.SchemaExtensions
+	eCreateStreamUrlInput_SessionLengthSeconds                      smithy.SchemaExtensions
+	eCreateStreamUrlInput_AdditionalLaunchArgs                      smithy.SchemaExtensions
+	eCreateStreamUrlInput_AdditionalEnvironmentVariables            smithy.SchemaExtensions
+	eCreateStreamUrlInput_RoleArn                                   smithy.SchemaExtensions
+	eCreateStreamUrlInput_DisplayConfiguration                      smithy.SchemaExtensions
+	eCreateStreamUrlInput_ClientToken                               smithy.SchemaExtensions
+	eCreateStreamUrlOutput                                          smithy.SchemaExtensions
+	eCreateStreamUrlOutput_Arn                                      smithy.SchemaExtensions
+	eCreateStreamUrlOutput_StreamUrlId                              smithy.SchemaExtensions
+	eCreateStreamUrlOutput_StreamUrl                                smithy.SchemaExtensions
+	eCreateStreamUrlOutput_Status                                   smithy.SchemaExtensions
+	eCreateStreamUrlOutput_StatusReason                             smithy.SchemaExtensions
+	eCreateStreamUrlOutput_ExpiresAt                                smithy.SchemaExtensions
+	eCreateStreamUrlOutput_CreatedAt                                smithy.SchemaExtensions
+	eCreateStreamUrlOutput_UsageLimit                               smithy.SchemaExtensions
+	eCreateStreamUrlOutput_RemainingUses                            smithy.SchemaExtensions
+	eCreateStreamUrlOutput_StreamGroupArn                           smithy.SchemaExtensions
+	eCreateStreamUrlOutput_ApplicationArn                           smithy.SchemaExtensions
+	eCreateStreamUrlOutput_Protocol                                 smithy.SchemaExtensions
+	eCreateStreamUrlOutput_Locations                                smithy.SchemaExtensions
+	eCreateStreamUrlOutput_SessionLengthSeconds                     smithy.SchemaExtensions
+	eCreateStreamUrlOutput_Description                              smithy.SchemaExtensions
+	eCreateStreamUrlOutput_AdditionalLaunchArgs                     smithy.SchemaExtensions
+	eCreateStreamUrlOutput_AdditionalEnvironmentVariables           smithy.SchemaExtensions
+	eCreateStreamUrlOutput_RoleArn                                  smithy.SchemaExtensions
+	eCreateStreamUrlOutput_DisplayConfiguration                     smithy.SchemaExtensions
+	eDeleteApplicationInput                                         smithy.SchemaExtensions
+	eDeleteApplicationInput_Identifier                              smithy.SchemaExtensions
+	eDeleteStreamGroupInput                                         smithy.SchemaExtensions
+	eDeleteStreamGroupInput_Identifier                              smithy.SchemaExtensions
+	eDisassociateApplicationsInput                                  smithy.SchemaExtensions
+	eDisassociateApplicationsInput_Identifier                       smithy.SchemaExtensions
+	eDisassociateApplicationsInput_ApplicationIdentifiers           smithy.SchemaExtensions
+	eDisassociateApplicationsOutput                                 smithy.SchemaExtensions
+	eDisassociateApplicationsOutput_Arn                             smithy.SchemaExtensions
+	eDisassociateApplicationsOutput_ApplicationArns                 smithy.SchemaExtensions
+	eExportStreamSessionFilesInput                                  smithy.SchemaExtensions
+	eExportStreamSessionFilesInput_Identifier                       smithy.SchemaExtensions
+	eExportStreamSessionFilesInput_StreamSessionIdentifier          smithy.SchemaExtensions
+	eExportStreamSessionFilesInput_OutputUri                        smithy.SchemaExtensions
+	eExportStreamSessionFilesOutput                                 smithy.SchemaExtensions
+	eGetApplicationInput                                            smithy.SchemaExtensions
+	eGetApplicationInput_Identifier                                 smithy.SchemaExtensions
+	eGetApplicationOutput                                           smithy.SchemaExtensions
+	eGetApplicationOutput_Arn                                       smithy.SchemaExtensions
+	eGetApplicationOutput_Description                               smithy.SchemaExtensions
+	eGetApplicationOutput_RuntimeEnvironment                        smithy.SchemaExtensions
+	eGetApplicationOutput_ExecutablePath                            smithy.SchemaExtensions
+	eGetApplicationOutput_ApplicationLogPaths                       smithy.SchemaExtensions
+	eGetApplicationOutput_ApplicationLogOutputUri                   smithy.SchemaExtensions
+	eGetApplicationOutput_ApplicationSourceUri                      smithy.SchemaExtensions
+	eGetApplicationOutput_Id                                        smithy.SchemaExtensions
+	eGetApplicationOutput_Status                                    smithy.SchemaExtensions
+	eGetApplicationOutput_StatusReason                              smithy.SchemaExtensions
+	eGetApplicationOutput_ReplicationStatuses                       smithy.SchemaExtensions
+	eGetApplicationOutput_CreatedAt                                 smithy.SchemaExtensions
+	eGetApplicationOutput_LastUpdatedAt                             smithy.SchemaExtensions
+	eGetApplicationOutput_AssociatedStreamGroups                    smithy.SchemaExtensions
+	eGetStreamGroupInput                                            smithy.SchemaExtensions
+	eGetStreamGroupInput_Identifier                                 smithy.SchemaExtensions
+	eGetStreamGroupOutput                                           smithy.SchemaExtensions
+	eGetStreamGroupOutput_Arn                                       smithy.SchemaExtensions
+	eGetStreamGroupOutput_Description                               smithy.SchemaExtensions
+	eGetStreamGroupOutput_DefaultApplication                        smithy.SchemaExtensions
+	eGetStreamGroupOutput_LocationStates                            smithy.SchemaExtensions
+	eGetStreamGroupOutput_StreamClass                               smithy.SchemaExtensions
+	eGetStreamGroupOutput_Id                                        smithy.SchemaExtensions
+	eGetStreamGroupOutput_Status                                    smithy.SchemaExtensions
+	eGetStreamGroupOutput_StatusReason                              smithy.SchemaExtensions
+	eGetStreamGroupOutput_LastUpdatedAt                             smithy.SchemaExtensions
+	eGetStreamGroupOutput_CreatedAt                                 smithy.SchemaExtensions
+	eGetStreamGroupOutput_ExpiresAt                                 smithy.SchemaExtensions
+	eGetStreamGroupOutput_AssociatedApplications                    smithy.SchemaExtensions
+	eGetStreamSessionInput                                          smithy.SchemaExtensions
+	eGetStreamSessionInput_Identifier                               smithy.SchemaExtensions
+	eGetStreamSessionInput_StreamSessionIdentifier                  smithy.SchemaExtensions
+	eGetStreamSessionOutput                                         smithy.SchemaExtensions
+	eGetStreamSessionOutput_Arn                                     smithy.SchemaExtensions
+	eGetStreamSessionOutput_Description                             smithy.SchemaExtensions
+	eGetStreamSessionOutput_StreamGroupId                           smithy.SchemaExtensions
+	eGetStreamSessionOutput_UserId                                  smithy.SchemaExtensions
+	eGetStreamSessionOutput_Status                                  smithy.SchemaExtensions
+	eGetStreamSessionOutput_StatusReason                            smithy.SchemaExtensions
+	eGetStreamSessionOutput_Protocol                                smithy.SchemaExtensions
+	eGetStreamSessionOutput_Location                                smithy.SchemaExtensions
+	eGetStreamSessionOutput_SignalRequest                           smithy.SchemaExtensions
+	eGetStreamSessionOutput_SignalResponse                          smithy.SchemaExtensions
+	eGetStreamSessionOutput_ConnectionTimeoutSeconds                smithy.SchemaExtensions
+	eGetStreamSessionOutput_SessionLengthSeconds                    smithy.SchemaExtensions
+	eGetStreamSessionOutput_AdditionalLaunchArgs                    smithy.SchemaExtensions
+	eGetStreamSessionOutput_AdditionalEnvironmentVariables          smithy.SchemaExtensions
+	eGetStreamSessionOutput_PerformanceStatsConfiguration           smithy.SchemaExtensions
+	eGetStreamSessionOutput_LogFileLocationUri                      smithy.SchemaExtensions
+	eGetStreamSessionOutput_WebSdkProtocolUrl                       smithy.SchemaExtensions
+	eGetStreamSessionOutput_LastUpdatedAt                           smithy.SchemaExtensions
+	eGetStreamSessionOutput_CreatedAt                               smithy.SchemaExtensions
+	eGetStreamSessionOutput_ApplicationArn                          smithy.SchemaExtensions
+	eGetStreamSessionOutput_ExportFilesMetadata                     smithy.SchemaExtensions
+	eGetStreamSessionOutput_RoleArn                                 smithy.SchemaExtensions
+	eGetStreamSessionOutput_DisplayConfiguration                    smithy.SchemaExtensions
+	eGetStreamUrlInput                                              smithy.SchemaExtensions
+	eGetStreamUrlInput_Identifier                                   smithy.SchemaExtensions
+	eGetStreamUrlInput_StreamUrlIdentifier                          smithy.SchemaExtensions
+	eGetStreamUrlOutput                                             smithy.SchemaExtensions
+	eGetStreamUrlOutput_Arn                                         smithy.SchemaExtensions
+	eGetStreamUrlOutput_StreamUrlId                                 smithy.SchemaExtensions
+	eGetStreamUrlOutput_StreamUrl                                   smithy.SchemaExtensions
+	eGetStreamUrlOutput_Status                                      smithy.SchemaExtensions
+	eGetStreamUrlOutput_StatusReason                                smithy.SchemaExtensions
+	eGetStreamUrlOutput_ExpiresAt                                   smithy.SchemaExtensions
+	eGetStreamUrlOutput_CreatedAt                                   smithy.SchemaExtensions
+	eGetStreamUrlOutput_UsageLimit                                  smithy.SchemaExtensions
+	eGetStreamUrlOutput_RemainingUses                               smithy.SchemaExtensions
+	eGetStreamUrlOutput_StreamGroupArn                              smithy.SchemaExtensions
+	eGetStreamUrlOutput_ApplicationArn                              smithy.SchemaExtensions
+	eGetStreamUrlOutput_Protocol                                    smithy.SchemaExtensions
+	eGetStreamUrlOutput_Locations                                   smithy.SchemaExtensions
+	eGetStreamUrlOutput_SessionLengthSeconds                        smithy.SchemaExtensions
+	eGetStreamUrlOutput_Description                                 smithy.SchemaExtensions
+	eGetStreamUrlOutput_AdditionalLaunchArgs                        smithy.SchemaExtensions
+	eGetStreamUrlOutput_AdditionalEnvironmentVariables              smithy.SchemaExtensions
+	eGetStreamUrlOutput_RoleArn                                     smithy.SchemaExtensions
+	eGetStreamUrlOutput_DisplayConfiguration                        smithy.SchemaExtensions
+	eGetStreamUrlOutput_StreamSessions                              smithy.SchemaExtensions
+	eListApplicationShaderCachesInput                               smithy.SchemaExtensions
+	eListApplicationShaderCachesInput_Identifier                    smithy.SchemaExtensions
+	eListApplicationShaderCachesOutput                              smithy.SchemaExtensions
+	eListApplicationShaderCachesOutput_Items                        smithy.SchemaExtensions
+	eListApplicationsInput                                          smithy.SchemaExtensions
+	eListApplicationsInput_NextToken                                smithy.SchemaExtensions
+	eListApplicationsInput_MaxResults                               smithy.SchemaExtensions
+	eListApplicationsOutput                                         smithy.SchemaExtensions
+	eListApplicationsOutput_Items                                   smithy.SchemaExtensions
+	eListApplicationsOutput_NextToken                               smithy.SchemaExtensions
+	eListStreamGroupsInput                                          smithy.SchemaExtensions
+	eListStreamGroupsInput_NextToken                                smithy.SchemaExtensions
+	eListStreamGroupsInput_MaxResults                               smithy.SchemaExtensions
+	eListStreamGroupsOutput                                         smithy.SchemaExtensions
+	eListStreamGroupsOutput_Items                                   smithy.SchemaExtensions
+	eListStreamGroupsOutput_NextToken                               smithy.SchemaExtensions
+	eListStreamSessionsByAccountInput                               smithy.SchemaExtensions
+	eListStreamSessionsByAccountInput_Status                        smithy.SchemaExtensions
+	eListStreamSessionsByAccountInput_ExportFilesStatus             smithy.SchemaExtensions
+	eListStreamSessionsByAccountInput_NextToken                     smithy.SchemaExtensions
+	eListStreamSessionsByAccountInput_MaxResults                    smithy.SchemaExtensions
+	eListStreamSessionsByAccountOutput                              smithy.SchemaExtensions
+	eListStreamSessionsByAccountOutput_Items                        smithy.SchemaExtensions
+	eListStreamSessionsByAccountOutput_NextToken                    smithy.SchemaExtensions
+	eListStreamSessionsInput                                        smithy.SchemaExtensions
+	eListStreamSessionsInput_Status                                 smithy.SchemaExtensions
+	eListStreamSessionsInput_ExportFilesStatus                      smithy.SchemaExtensions
+	eListStreamSessionsInput_NextToken                              smithy.SchemaExtensions
+	eListStreamSessionsInput_MaxResults                             smithy.SchemaExtensions
+	eListStreamSessionsInput_Identifier                             smithy.SchemaExtensions
+	eListStreamSessionsOutput                                       smithy.SchemaExtensions
+	eListStreamSessionsOutput_Items                                 smithy.SchemaExtensions
+	eListStreamSessionsOutput_NextToken                             smithy.SchemaExtensions
+	eListStreamUrlsInput                                            smithy.SchemaExtensions
+	eListStreamUrlsInput_Status                                     smithy.SchemaExtensions
+	eListStreamUrlsInput_StreamGroupIdentifier                      smithy.SchemaExtensions
+	eListStreamUrlsInput_NextToken                                  smithy.SchemaExtensions
+	eListStreamUrlsInput_MaxResults                                 smithy.SchemaExtensions
+	eListStreamUrlsOutput                                           smithy.SchemaExtensions
+	eListStreamUrlsOutput_Items                                     smithy.SchemaExtensions
+	eListStreamUrlsOutput_NextToken                                 smithy.SchemaExtensions
+	eListTagsForResourceRequest                                     smithy.SchemaExtensions
+	eListTagsForResourceRequest_ResourceArn                         smithy.SchemaExtensions
+	eListTagsForResourceResponse                                    smithy.SchemaExtensions
+	eListTagsForResourceResponse_Tags                               smithy.SchemaExtensions
+	eRemoveStreamGroupLocationsInput                                smithy.SchemaExtensions
+	eRemoveStreamGroupLocationsInput_Identifier                     smithy.SchemaExtensions
+	eRemoveStreamGroupLocationsInput_Locations                      smithy.SchemaExtensions
+	eRevokeStreamUrlInput                                           smithy.SchemaExtensions
+	eRevokeStreamUrlInput_Identifier                                smithy.SchemaExtensions
+	eRevokeStreamUrlInput_StreamUrlIdentifier                       smithy.SchemaExtensions
+	eRevokeStreamUrlInput_RevocationMode                            smithy.SchemaExtensions
+	eStartStreamSessionInput                                        smithy.SchemaExtensions
+	eStartStreamSessionInput_ClientToken                            smithy.SchemaExtensions
+	eStartStreamSessionInput_Description                            smithy.SchemaExtensions
+	eStartStreamSessionInput_Identifier                             smithy.SchemaExtensions
+	eStartStreamSessionInput_Protocol                               smithy.SchemaExtensions
+	eStartStreamSessionInput_SignalRequest                          smithy.SchemaExtensions
+	eStartStreamSessionInput_ApplicationIdentifier                  smithy.SchemaExtensions
+	eStartStreamSessionInput_UserId                                 smithy.SchemaExtensions
+	eStartStreamSessionInput_Locations                              smithy.SchemaExtensions
+	eStartStreamSessionInput_ConnectionTimeoutSeconds               smithy.SchemaExtensions
+	eStartStreamSessionInput_SessionLengthSeconds                   smithy.SchemaExtensions
+	eStartStreamSessionInput_AdditionalLaunchArgs                   smithy.SchemaExtensions
+	eStartStreamSessionInput_AdditionalEnvironmentVariables         smithy.SchemaExtensions
+	eStartStreamSessionInput_PerformanceStatsConfiguration          smithy.SchemaExtensions
+	eStartStreamSessionInput_RoleArn                                smithy.SchemaExtensions
+	eStartStreamSessionInput_DisplayConfiguration                   smithy.SchemaExtensions
+	eStartStreamSessionOutput                                       smithy.SchemaExtensions
+	eStartStreamSessionOutput_Arn                                   smithy.SchemaExtensions
+	eStartStreamSessionOutput_Description                           smithy.SchemaExtensions
+	eStartStreamSessionOutput_StreamGroupId                         smithy.SchemaExtensions
+	eStartStreamSessionOutput_UserId                                smithy.SchemaExtensions
+	eStartStreamSessionOutput_Status                                smithy.SchemaExtensions
+	eStartStreamSessionOutput_StatusReason                          smithy.SchemaExtensions
+	eStartStreamSessionOutput_Protocol                              smithy.SchemaExtensions
+	eStartStreamSessionOutput_Location                              smithy.SchemaExtensions
+	eStartStreamSessionOutput_SignalRequest                         smithy.SchemaExtensions
+	eStartStreamSessionOutput_SignalResponse                        smithy.SchemaExtensions
+	eStartStreamSessionOutput_ConnectionTimeoutSeconds              smithy.SchemaExtensions
+	eStartStreamSessionOutput_SessionLengthSeconds                  smithy.SchemaExtensions
+	eStartStreamSessionOutput_AdditionalLaunchArgs                  smithy.SchemaExtensions
+	eStartStreamSessionOutput_AdditionalEnvironmentVariables        smithy.SchemaExtensions
+	eStartStreamSessionOutput_PerformanceStatsConfiguration         smithy.SchemaExtensions
+	eStartStreamSessionOutput_LogFileLocationUri                    smithy.SchemaExtensions
+	eStartStreamSessionOutput_WebSdkProtocolUrl                     smithy.SchemaExtensions
+	eStartStreamSessionOutput_LastUpdatedAt                         smithy.SchemaExtensions
+	eStartStreamSessionOutput_CreatedAt                             smithy.SchemaExtensions
+	eStartStreamSessionOutput_ApplicationArn                        smithy.SchemaExtensions
+	eStartStreamSessionOutput_ExportFilesMetadata                   smithy.SchemaExtensions
+	eStartStreamSessionOutput_RoleArn                               smithy.SchemaExtensions
+	eStartStreamSessionOutput_DisplayConfiguration                  smithy.SchemaExtensions
+	eTagResourceRequest                                             smithy.SchemaExtensions
+	eTagResourceRequest_ResourceArn                                 smithy.SchemaExtensions
+	eTagResourceRequest_Tags                                        smithy.SchemaExtensions
+	eTagResourceResponse                                            smithy.SchemaExtensions
+	eTerminateStreamSessionInput                                    smithy.SchemaExtensions
+	eTerminateStreamSessionInput_Identifier                         smithy.SchemaExtensions
+	eTerminateStreamSessionInput_StreamSessionIdentifier            smithy.SchemaExtensions
+	eUntagResourceRequest                                           smithy.SchemaExtensions
+	eUntagResourceRequest_ResourceArn                               smithy.SchemaExtensions
+	eUntagResourceRequest_TagKeys                                   smithy.SchemaExtensions
+	eUntagResourceResponse                                          smithy.SchemaExtensions
+	eUpdateApplicationInput                                         smithy.SchemaExtensions
+	eUpdateApplicationInput_Identifier                              smithy.SchemaExtensions
+	eUpdateApplicationInput_Description                             smithy.SchemaExtensions
+	eUpdateApplicationInput_ApplicationLogPaths                     smithy.SchemaExtensions
+	eUpdateApplicationInput_ApplicationLogOutputUri                 smithy.SchemaExtensions
+	eUpdateApplicationOutput                                        smithy.SchemaExtensions
+	eUpdateApplicationOutput_Arn                                    smithy.SchemaExtensions
+	eUpdateApplicationOutput_Description                            smithy.SchemaExtensions
+	eUpdateApplicationOutput_RuntimeEnvironment                     smithy.SchemaExtensions
+	eUpdateApplicationOutput_ExecutablePath                         smithy.SchemaExtensions
+	eUpdateApplicationOutput_ApplicationLogPaths                    smithy.SchemaExtensions
+	eUpdateApplicationOutput_ApplicationLogOutputUri                smithy.SchemaExtensions
+	eUpdateApplicationOutput_ApplicationSourceUri                   smithy.SchemaExtensions
+	eUpdateApplicationOutput_Id                                     smithy.SchemaExtensions
+	eUpdateApplicationOutput_Status                                 smithy.SchemaExtensions
+	eUpdateApplicationOutput_StatusReason                           smithy.SchemaExtensions
+	eUpdateApplicationOutput_ReplicationStatuses                    smithy.SchemaExtensions
+	eUpdateApplicationOutput_CreatedAt                              smithy.SchemaExtensions
+	eUpdateApplicationOutput_LastUpdatedAt                          smithy.SchemaExtensions
+	eUpdateApplicationOutput_AssociatedStreamGroups                 smithy.SchemaExtensions
+	eUpdateStreamGroupInput                                         smithy.SchemaExtensions
+	eUpdateStreamGroupInput_Identifier                              smithy.SchemaExtensions
+	eUpdateStreamGroupInput_LocationConfigurations                  smithy.SchemaExtensions
+	eUpdateStreamGroupInput_Description                             smithy.SchemaExtensions
+	eUpdateStreamGroupInput_DefaultApplicationIdentifier            smithy.SchemaExtensions
+	eUpdateStreamGroupOutput                                        smithy.SchemaExtensions
+	eUpdateStreamGroupOutput_Arn                                    smithy.SchemaExtensions
+	eUpdateStreamGroupOutput_Description                            smithy.SchemaExtensions
+	eUpdateStreamGroupOutput_DefaultApplication                     smithy.SchemaExtensions
+	eUpdateStreamGroupOutput_LocationStates                         smithy.SchemaExtensions
+	eUpdateStreamGroupOutput_StreamClass                            smithy.SchemaExtensions
+	eUpdateStreamGroupOutput_Id                                     smithy.SchemaExtensions
+	eUpdateStreamGroupOutput_Status                                 smithy.SchemaExtensions
+	eUpdateStreamGroupOutput_StatusReason                           smithy.SchemaExtensions
+	eUpdateStreamGroupOutput_LastUpdatedAt                          smithy.SchemaExtensions
+	eUpdateStreamGroupOutput_CreatedAt                              smithy.SchemaExtensions
+	eUpdateStreamGroupOutput_ExpiresAt                              smithy.SchemaExtensions
+	eUpdateStreamGroupOutput_AssociatedApplications                 smithy.SchemaExtensions
+)
 
 var (
 	iAddStreamGroupLocations              = smithy.ShapeID{Namespace: "com.amazonaws.gameliftstreams", Name: "AddStreamGroupLocations"}
@@ -482,672 +1146,672 @@ var mUpdateStreamGroupOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpd
 	0, 0, 3, 0, 10, 0, 11, 0,
 }}
 
-var sAddStreamGroupLocations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddStreamGroupLocations, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sAssociateApplications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateApplications, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sCreateApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApplication, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sCreateStreamGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamGroup, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sCreateStreamSessionAdminShell = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamSessionAdminShell, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sCreateStreamSessionConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamSessionConnection, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sCreateStreamUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamUrl, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sDeleteApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApplication, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sDeleteStreamGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteStreamGroup, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sDisassociateApplications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateApplications, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sExportStreamSessionFiles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportStreamSessionFiles, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sGetApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApplication, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sGetStreamGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamGroup, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var sGetStreamSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamSession, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &ext[13]})
-var sGetStreamUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamUrl, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &ext[14]})
-var sListApplications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplications, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &ext[15]})
-var sListApplicationShaderCaches = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplicationShaderCaches, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &ext[16]})
-var sListStreamGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamGroups, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &ext[17]})
-var sListStreamSessions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamSessions, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &ext[18]})
-var sListStreamSessionsByAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamSessionsByAccount, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &ext[19]})
-var sListStreamUrls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamUrls, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &ext[20]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &ext[21]})
-var sRemoveStreamGroupLocations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveStreamGroupLocations, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &ext[22]})
-var sRevokeStreamUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeStreamUrl, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &ext[23]})
-var sStartStreamSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartStreamSession, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &ext[24]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &ext[25]})
-var sTerminateStreamSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateStreamSession, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &ext[26]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &ext[27]})
-var sUpdateApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApplication, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &ext[28]})
-var sUpdateStreamGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStreamGroup, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &ext[29]})
-var s_GameLiftStreams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GameLiftStreams, Type: smithy.ShapeTypeService, Ext: &ext[30]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &ext[31]})
-var s_AlwaysOnCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlwaysOnCapacity, Type: smithy.ShapeTypeInteger, Ext: &ext[33]})
-var s_ApplicationLogOutputUri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationLogOutputUri, Type: smithy.ShapeTypeString, Ext: &ext[34]})
-var s_ApplicationSourceUri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationSourceUri, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var sApplicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationStatus, Members: &mApplicationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[36]})
-var sApplicationStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationStatusReason, Members: &mApplicationStatusReason, Type: smithy.ShapeTypeEnum, Ext: &ext[42]})
-var sApplicationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationSummary, Members: &mApplicationSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[46]})
-var s_ApplicationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationSummaryList, Members: &m_ApplicationSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[54]})
-var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[56]})
-var s_ArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &ext[57]})
-var s_CapacityValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapacityValue, Type: smithy.ShapeTypeInteger, Ext: &ext[59]})
-var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[60]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &ext[61]})
-var s_ConnectionTimeoutSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionTimeoutSeconds, Type: smithy.ShapeTypeInteger, Ext: &ext[63]})
-var sDefaultApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefaultApplication, Members: &mDefaultApplication, Type: smithy.ShapeTypeStructure, Ext: &ext[64]})
-var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[67]})
-var sDisplayConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisplayConfiguration, Members: &mDisplayConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var s_EnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Type: smithy.ShapeTypeMap, Ext: &ext[70]})
-var s_ExecutablePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutablePath, Type: smithy.ShapeTypeString, Ext: &ext[73]})
-var sExportFilesMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportFilesMetadata, Members: &mExportFilesMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[74]})
-var s_ExportFilesReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExportFilesReason, Type: smithy.ShapeTypeString, Ext: &ext[78]})
-var sExportFilesStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportFilesStatus, Members: &mExportFilesStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[79]})
-var s_FileLocationUri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileLocationUri, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var s_FilePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilePath, Type: smithy.ShapeTypeString, Ext: &ext[84]})
-var s_FilePaths = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilePaths, Members: &m_FilePaths, Type: smithy.ShapeTypeList, Ext: &ext[85]})
-var s_GameLaunchArgList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GameLaunchArgList, Members: &m_GameLaunchArgList, Type: smithy.ShapeTypeList, Ext: &ext[87]})
-var s_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamRoleArn, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ext[89]})
-var s_Id = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &ext[90]})
-var s_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &ext[91]})
-var s_Identifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Identifiers, Members: &m_Identifiers, Type: smithy.ShapeTypeList, Ext: &ext[92]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &ext[94]})
-var s_Ipv4CidrBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ipv4CidrBlock, Type: smithy.ShapeTypeString, Ext: &ext[96]})
-var s_Ipv4CidrBlockList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ipv4CidrBlockList, Members: &m_Ipv4CidrBlockList, Type: smithy.ShapeTypeList, Ext: &ext[97]})
-var sLocationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLocationConfiguration, Members: &mLocationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[99]})
-var s_LocationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocationConfigurations, Members: &m_LocationConfigurations, Type: smithy.ShapeTypeList, Ext: &ext[106]})
-var s_LocationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocationList, Members: &m_LocationList, Type: smithy.ShapeTypeList, Ext: &ext[108]})
-var s_LocationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocationName, Type: smithy.ShapeTypeString, Ext: &ext[110]})
-var s_LocationsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocationsList, Members: &m_LocationsList, Type: smithy.ShapeTypeList, Ext: &ext[111]})
-var sLocationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLocationState, Members: &mLocationState, Type: smithy.ShapeTypeStructure, Ext: &ext[113]})
-var s_LocationStates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocationStates, Members: &m_LocationStates, Type: smithy.ShapeTypeList, Ext: &ext[125]})
-var s_MaximumCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaximumCapacity, Type: smithy.ShapeTypeInteger, Ext: &ext[127]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[128]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[129]})
-var s_OnDemandCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OnDemandCapacity, Type: smithy.ShapeTypeInteger, Ext: &ext[130]})
-var s_OutputUri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputUri, Type: smithy.ShapeTypeString, Ext: &ext[131]})
-var sPerformanceStatsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPerformanceStatsConfiguration, Members: &mPerformanceStatsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[132]})
-var sProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &ext[134]})
-var s_RemainingUses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RemainingUses, Type: smithy.ShapeTypeInteger, Ext: &ext[136]})
-var sReplicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationStatus, Members: &mReplicationStatus, Type: smithy.ShapeTypeStructure, Ext: &ext[137]})
-var s_ReplicationStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplicationStatuses, Members: &m_ReplicationStatuses, Type: smithy.ShapeTypeList, Ext: &ext[140]})
-var sReplicationStatusType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationStatusType, Members: &mReplicationStatusType, Type: smithy.ShapeTypeEnum, Ext: &ext[142]})
-var sResolution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolution, Members: &mResolution, Type: smithy.ShapeTypeStructure, Ext: &ext[145]})
-var s_ResolutionHeight = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResolutionHeight, Type: smithy.ShapeTypeInteger, Ext: &ext[148]})
-var s_ResolutionWidth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResolutionWidth, Type: smithy.ShapeTypeInteger, Ext: &ext[149]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t34, Type: smithy.ShapeTypeStructure, Ext: &ext[150]})
-var sRevocationMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevocationMode, Members: &mRevocationMode, Type: smithy.ShapeTypeEnum, Ext: &ext[152]})
-var sRuntimeEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuntimeEnvironment, Members: &mRuntimeEnvironment, Type: smithy.ShapeTypeStructure, Ext: &ext[155]})
-var sRuntimeEnvironmentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuntimeEnvironmentType, Members: &mRuntimeEnvironmentType, Type: smithy.ShapeTypeEnum, Ext: &ext[158]})
-var s_RuntimeEnvironmentVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuntimeEnvironmentVersion, Type: smithy.ShapeTypeString, Ext: &ext[162]})
-var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t35, Type: smithy.ShapeTypeStructure, Ext: &ext[163]})
-var s_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionId, Type: smithy.ShapeTypeString, Ext: &ext[165]})
-var s_SessionLengthSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionLengthSeconds, Type: smithy.ShapeTypeInteger, Ext: &ext[166]})
-var sShaderCacheStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShaderCacheStatus, Members: &mShaderCacheStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[167]})
-var sShaderCacheSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShaderCacheSummary, Members: &mShaderCacheSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[173]})
-var s_ShaderCacheSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShaderCacheSummaryList, Members: &m_ShaderCacheSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[180]})
-var s_SignalRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SignalRequest, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ext[182]})
-var s_SignalResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SignalResponse, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ext[183]})
-var sStreamClass = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamClass, Members: &mStreamClass, Type: smithy.ShapeTypeEnum, Ext: &ext[184]})
-var sStreamGroupLocationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamGroupLocationStatus, Members: &mStreamGroupLocationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[202]})
-var sStreamGroupStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamGroupStatus, Members: &mStreamGroupStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[207]})
-var sStreamGroupStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamGroupStatusReason, Members: &mStreamGroupStatusReason, Type: smithy.ShapeTypeEnum, Ext: &ext[215]})
-var sStreamGroupSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamGroupSummary, Members: &mStreamGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[218]})
-var s_StreamGroupSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamGroupSummaryList, Members: &m_StreamGroupSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[228]})
-var sStreamSessionAccessNotReadyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamSessionAccessNotReadyException, Members: &mStreamSessionAccessNotReadyException, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &ext[230]})
-var sStreamSessionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamSessionStatus, Members: &mStreamSessionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[232]})
-var sStreamSessionStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamSessionStatusReason, Members: &mStreamSessionStatusReason, Type: smithy.ShapeTypeEnum, Ext: &ext[241]})
-var s_StreamSessionStreamUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamSessionStreamUrl, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ext[253]})
-var sStreamSessionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamSessionSummary, Members: &mStreamSessionSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[254]})
-var s_StreamSessionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamSessionSummaryList, Members: &m_StreamSessionSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[266]})
-var s_StreamUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamUrl, Type: smithy.ShapeTypeString, Ext: &ext[268]})
-var sStreamUrlStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamUrlStatus, Members: &mStreamUrlStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[269]})
-var sStreamUrlStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamUrlStatusReason, Members: &mStreamUrlStatusReason, Type: smithy.ShapeTypeEnum, Ext: &ext[274]})
-var sStreamUrlSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamUrlSummary, Members: &mStreamUrlSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[280]})
-var s_StreamUrlSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamUrlSummaryList, Members: &m_StreamUrlSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[294]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[296]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[297]})
-var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[299]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[302]})
-var s_TargetIdleCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetIdleCapacity, Type: smithy.ShapeTypeInteger, Ext: &ext[303]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &ext[304]})
-var s_TokenValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TokenValue, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &ext[306]})
-var s_UrlExpiresAfterMinutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UrlExpiresAfterMinutes, Type: smithy.ShapeTypeInteger, Ext: &ext[307]})
-var s_UsageLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UsageLimit, Type: smithy.ShapeTypeInteger, Ext: &ext[308]})
-var s_UserId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserId, Type: smithy.ShapeTypeString, Ext: &ext[309]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t38, Type: smithy.ShapeTypeStructure, Ext: &ext[310]})
-var s_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &ext[312]})
-var sVpcTransitConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcTransitConfiguration, Members: &mVpcTransitConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[313]})
-var sVpcTransitConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcTransitConfigurationResponse, Members: &mVpcTransitConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[316]})
-var s_WebSdkProtocolUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebSdkProtocolUrl, Type: smithy.ShapeTypeString, Ext: &ext[321]})
-var sAddStreamGroupLocationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddStreamGroupLocationsInput, Members: &mAddStreamGroupLocationsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[322]})
-var sAddStreamGroupLocationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddStreamGroupLocationsOutput, Members: &mAddStreamGroupLocationsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[325]})
-var sAssociateApplicationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateApplicationsInput, Members: &mAssociateApplicationsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[328]})
-var sAssociateApplicationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateApplicationsOutput, Members: &mAssociateApplicationsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[331]})
-var sCreateApplicationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApplicationInput, Members: &mCreateApplicationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[334]})
-var sCreateApplicationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApplicationOutput, Members: &mCreateApplicationOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[343]})
-var sCreateStreamGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamGroupInput, Members: &mCreateStreamGroupInput, Type: smithy.ShapeTypeStructure, Ext: &ext[358]})
-var sCreateStreamGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamGroupOutput, Members: &mCreateStreamGroupOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[365]})
-var sCreateStreamSessionAdminShellInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamSessionAdminShellInput, Members: &mCreateStreamSessionAdminShellInput, Type: smithy.ShapeTypeStructure, Ext: &ext[378]})
-var sCreateStreamSessionAdminShellOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamSessionAdminShellOutput, Members: &mCreateStreamSessionAdminShellOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[381]})
-var sCreateStreamSessionConnectionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamSessionConnectionInput, Members: &mCreateStreamSessionConnectionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[385]})
-var sCreateStreamSessionConnectionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamSessionConnectionOutput, Members: &mCreateStreamSessionConnectionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[390]})
-var sCreateStreamUrlInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamUrlInput, Members: &mCreateStreamUrlInput, Type: smithy.ShapeTypeStructure, Ext: &ext[392]})
-var sCreateStreamUrlOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamUrlOutput, Members: &mCreateStreamUrlOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[406]})
-var sDeleteApplicationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApplicationInput, Members: &mDeleteApplicationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[426]})
-var sDeleteStreamGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteStreamGroupInput, Members: &mDeleteStreamGroupInput, Type: smithy.ShapeTypeStructure, Ext: &ext[428]})
-var sDisassociateApplicationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateApplicationsInput, Members: &mDisassociateApplicationsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[430]})
-var sDisassociateApplicationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateApplicationsOutput, Members: &mDisassociateApplicationsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[433]})
-var sExportStreamSessionFilesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportStreamSessionFilesInput, Members: &mExportStreamSessionFilesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[436]})
-var sExportStreamSessionFilesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportStreamSessionFilesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[440]})
-var sGetApplicationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApplicationInput, Members: &mGetApplicationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[441]})
-var sGetApplicationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApplicationOutput, Members: &mGetApplicationOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[443]})
-var sGetStreamGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamGroupInput, Members: &mGetStreamGroupInput, Type: smithy.ShapeTypeStructure, Ext: &ext[458]})
-var sGetStreamGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamGroupOutput, Members: &mGetStreamGroupOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[460]})
-var sGetStreamSessionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamSessionInput, Members: &mGetStreamSessionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[473]})
-var sGetStreamSessionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamSessionOutput, Members: &mGetStreamSessionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[476]})
-var sGetStreamUrlInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamUrlInput, Members: &mGetStreamUrlInput, Type: smithy.ShapeTypeStructure, Ext: &ext[500]})
-var sGetStreamUrlOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamUrlOutput, Members: &mGetStreamUrlOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[503]})
-var sListApplicationShaderCachesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplicationShaderCachesInput, Members: &mListApplicationShaderCachesInput, Type: smithy.ShapeTypeStructure, Ext: &ext[524]})
-var sListApplicationShaderCachesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplicationShaderCachesOutput, Members: &mListApplicationShaderCachesOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[526]})
-var sListApplicationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplicationsInput, Members: &mListApplicationsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[528]})
-var sListApplicationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplicationsOutput, Members: &mListApplicationsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[531]})
-var sListStreamGroupsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamGroupsInput, Members: &mListStreamGroupsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[534]})
-var sListStreamGroupsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamGroupsOutput, Members: &mListStreamGroupsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[537]})
-var sListStreamSessionsByAccountInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamSessionsByAccountInput, Members: &mListStreamSessionsByAccountInput, Type: smithy.ShapeTypeStructure, Ext: &ext[540]})
-var sListStreamSessionsByAccountOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamSessionsByAccountOutput, Members: &mListStreamSessionsByAccountOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[545]})
-var sListStreamSessionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamSessionsInput, Members: &mListStreamSessionsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[548]})
-var sListStreamSessionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamSessionsOutput, Members: &mListStreamSessionsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[554]})
-var sListStreamUrlsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamUrlsInput, Members: &mListStreamUrlsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[557]})
-var sListStreamUrlsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamUrlsOutput, Members: &mListStreamUrlsOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[562]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[565]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[567]})
-var sRemoveStreamGroupLocationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveStreamGroupLocationsInput, Members: &mRemoveStreamGroupLocationsInput, Type: smithy.ShapeTypeStructure, Ext: &ext[569]})
-var sRevokeStreamUrlInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeStreamUrlInput, Members: &mRevokeStreamUrlInput, Type: smithy.ShapeTypeStructure, Ext: &ext[572]})
-var sStartStreamSessionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartStreamSessionInput, Members: &mStartStreamSessionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[576]})
-var sStartStreamSessionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartStreamSessionOutput, Members: &mStartStreamSessionOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[592]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[616]})
-var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[619]})
-var sTerminateStreamSessionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateStreamSessionInput, Members: &mTerminateStreamSessionInput, Type: smithy.ShapeTypeStructure, Ext: &ext[620]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[623]})
-var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[626]})
-var sUpdateApplicationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApplicationInput, Members: &mUpdateApplicationInput, Type: smithy.ShapeTypeStructure, Ext: &ext[627]})
-var sUpdateApplicationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApplicationOutput, Members: &mUpdateApplicationOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[632]})
-var sUpdateStreamGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStreamGroupInput, Members: &mUpdateStreamGroupInput, Type: smithy.ShapeTypeStructure, Ext: &ext[647]})
-var sUpdateStreamGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStreamGroupOutput, Members: &mUpdateStreamGroupOutput, Type: smithy.ShapeTypeStructure, Ext: &ext[652]})
+var sAddStreamGroupLocations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddStreamGroupLocations, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eAddStreamGroupLocations})
+var sAssociateApplications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateApplications, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eAssociateApplications})
+var sCreateApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApplication, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateApplication})
+var sCreateStreamGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamGroup, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eCreateStreamGroup})
+var sCreateStreamSessionAdminShell = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamSessionAdminShell, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eCreateStreamSessionAdminShell})
+var sCreateStreamSessionConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamSessionConnection, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eCreateStreamSessionConnection})
+var sCreateStreamUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamUrl, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eCreateStreamUrl})
+var sDeleteApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApplication, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eDeleteApplication})
+var sDeleteStreamGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteStreamGroup, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eDeleteStreamGroup})
+var sDisassociateApplications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateApplications, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eDisassociateApplications})
+var sExportStreamSessionFiles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportStreamSessionFiles, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eExportStreamSessionFiles})
+var sGetApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApplication, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eGetApplication})
+var sGetStreamGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamGroup, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eGetStreamGroup})
+var sGetStreamSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamSession, Traits: &t13, Type: smithy.ShapeTypeOperation, Ext: &eGetStreamSession})
+var sGetStreamUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamUrl, Traits: &t14, Type: smithy.ShapeTypeOperation, Ext: &eGetStreamUrl})
+var sListApplications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplications, Traits: &t15, Type: smithy.ShapeTypeOperation, Ext: &eListApplications})
+var sListApplicationShaderCaches = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplicationShaderCaches, Traits: &t16, Type: smithy.ShapeTypeOperation, Ext: &eListApplicationShaderCaches})
+var sListStreamGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamGroups, Traits: &t17, Type: smithy.ShapeTypeOperation, Ext: &eListStreamGroups})
+var sListStreamSessions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamSessions, Traits: &t18, Type: smithy.ShapeTypeOperation, Ext: &eListStreamSessions})
+var sListStreamSessionsByAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamSessionsByAccount, Traits: &t19, Type: smithy.ShapeTypeOperation, Ext: &eListStreamSessionsByAccount})
+var sListStreamUrls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamUrls, Traits: &t20, Type: smithy.ShapeTypeOperation, Ext: &eListStreamUrls})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t21, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sRemoveStreamGroupLocations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveStreamGroupLocations, Traits: &t22, Type: smithy.ShapeTypeOperation, Ext: &eRemoveStreamGroupLocations})
+var sRevokeStreamUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeStreamUrl, Traits: &t23, Type: smithy.ShapeTypeOperation, Ext: &eRevokeStreamUrl})
+var sStartStreamSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartStreamSession, Traits: &t24, Type: smithy.ShapeTypeOperation, Ext: &eStartStreamSession})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t25, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sTerminateStreamSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateStreamSession, Traits: &t26, Type: smithy.ShapeTypeOperation, Ext: &eTerminateStreamSession})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t27, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApplication, Traits: &t28, Type: smithy.ShapeTypeOperation, Ext: &eUpdateApplication})
+var sUpdateStreamGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStreamGroup, Traits: &t29, Type: smithy.ShapeTypeOperation, Ext: &eUpdateStreamGroup})
+var s_GameLiftStreams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GameLiftStreams, Type: smithy.ShapeTypeService, Ext: &e_GameLiftStreams})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t30, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var s_AlwaysOnCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlwaysOnCapacity, Type: smithy.ShapeTypeInteger, Ext: &e_AlwaysOnCapacity})
+var s_ApplicationLogOutputUri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationLogOutputUri, Type: smithy.ShapeTypeString, Ext: &e_ApplicationLogOutputUri})
+var s_ApplicationSourceUri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationSourceUri, Type: smithy.ShapeTypeString, Ext: &e_ApplicationSourceUri})
+var sApplicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationStatus, Members: &mApplicationStatus, Type: smithy.ShapeTypeEnum, Ext: &eApplicationStatus})
+var sApplicationStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationStatusReason, Members: &mApplicationStatusReason, Type: smithy.ShapeTypeEnum, Ext: &eApplicationStatusReason})
+var sApplicationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationSummary, Members: &mApplicationSummary, Type: smithy.ShapeTypeStructure, Ext: &eApplicationSummary})
+var s_ApplicationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationSummaryList, Members: &m_ApplicationSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ApplicationSummaryList})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var s_ArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &e_ArnList})
+var s_CapacityValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapacityValue, Type: smithy.ShapeTypeInteger, Ext: &e_CapacityValue})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var s_ConnectionTimeoutSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionTimeoutSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_ConnectionTimeoutSeconds})
+var sDefaultApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefaultApplication, Members: &mDefaultApplication, Type: smithy.ShapeTypeStructure, Ext: &eDefaultApplication})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &e_Description})
+var sDisplayConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisplayConfiguration, Members: &mDisplayConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eDisplayConfiguration})
+var s_EnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Type: smithy.ShapeTypeMap, Ext: &e_EnvironmentVariables})
+var s_ExecutablePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutablePath, Type: smithy.ShapeTypeString, Ext: &e_ExecutablePath})
+var sExportFilesMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportFilesMetadata, Members: &mExportFilesMetadata, Type: smithy.ShapeTypeStructure, Ext: &eExportFilesMetadata})
+var s_ExportFilesReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExportFilesReason, Type: smithy.ShapeTypeString, Ext: &e_ExportFilesReason})
+var sExportFilesStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportFilesStatus, Members: &mExportFilesStatus, Type: smithy.ShapeTypeEnum, Ext: &eExportFilesStatus})
+var s_FileLocationUri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileLocationUri, Type: smithy.ShapeTypeString, Ext: &e_FileLocationUri})
+var s_FilePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilePath, Type: smithy.ShapeTypeString, Ext: &e_FilePath})
+var s_FilePaths = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilePaths, Members: &m_FilePaths, Type: smithy.ShapeTypeList, Ext: &e_FilePaths})
+var s_GameLaunchArgList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GameLaunchArgList, Members: &m_GameLaunchArgList, Type: smithy.ShapeTypeList, Ext: &e_GameLaunchArgList})
+var s_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamRoleArn, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &e_IamRoleArn})
+var s_Id = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &e_Id})
+var s_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &e_Identifier})
+var s_Identifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Identifiers, Members: &m_Identifiers, Type: smithy.ShapeTypeList, Ext: &e_Identifiers})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t33, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var s_Ipv4CidrBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ipv4CidrBlock, Type: smithy.ShapeTypeString, Ext: &e_Ipv4CidrBlock})
+var s_Ipv4CidrBlockList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ipv4CidrBlockList, Members: &m_Ipv4CidrBlockList, Type: smithy.ShapeTypeList, Ext: &e_Ipv4CidrBlockList})
+var sLocationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLocationConfiguration, Members: &mLocationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eLocationConfiguration})
+var s_LocationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocationConfigurations, Members: &m_LocationConfigurations, Type: smithy.ShapeTypeList, Ext: &e_LocationConfigurations})
+var s_LocationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocationList, Members: &m_LocationList, Type: smithy.ShapeTypeList, Ext: &e_LocationList})
+var s_LocationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocationName, Type: smithy.ShapeTypeString, Ext: &e_LocationName})
+var s_LocationsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocationsList, Members: &m_LocationsList, Type: smithy.ShapeTypeList, Ext: &e_LocationsList})
+var sLocationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLocationState, Members: &mLocationState, Type: smithy.ShapeTypeStructure, Ext: &eLocationState})
+var s_LocationStates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocationStates, Members: &m_LocationStates, Type: smithy.ShapeTypeList, Ext: &e_LocationStates})
+var s_MaximumCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaximumCapacity, Type: smithy.ShapeTypeInteger, Ext: &e_MaximumCapacity})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var s_OnDemandCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OnDemandCapacity, Type: smithy.ShapeTypeInteger, Ext: &e_OnDemandCapacity})
+var s_OutputUri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputUri, Type: smithy.ShapeTypeString, Ext: &e_OutputUri})
+var sPerformanceStatsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPerformanceStatsConfiguration, Members: &mPerformanceStatsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ePerformanceStatsConfiguration})
+var sProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &eProtocol})
+var s_RemainingUses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RemainingUses, Type: smithy.ShapeTypeInteger, Ext: &e_RemainingUses})
+var sReplicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationStatus, Members: &mReplicationStatus, Type: smithy.ShapeTypeStructure, Ext: &eReplicationStatus})
+var s_ReplicationStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplicationStatuses, Members: &m_ReplicationStatuses, Type: smithy.ShapeTypeList, Ext: &e_ReplicationStatuses})
+var sReplicationStatusType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationStatusType, Members: &mReplicationStatusType, Type: smithy.ShapeTypeEnum, Ext: &eReplicationStatusType})
+var sResolution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolution, Members: &mResolution, Type: smithy.ShapeTypeStructure, Ext: &eResolution})
+var s_ResolutionHeight = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResolutionHeight, Type: smithy.ShapeTypeInteger, Ext: &e_ResolutionHeight})
+var s_ResolutionWidth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResolutionWidth, Type: smithy.ShapeTypeInteger, Ext: &e_ResolutionWidth})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t34, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var sRevocationMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevocationMode, Members: &mRevocationMode, Type: smithy.ShapeTypeEnum, Ext: &eRevocationMode})
+var sRuntimeEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuntimeEnvironment, Members: &mRuntimeEnvironment, Type: smithy.ShapeTypeStructure, Ext: &eRuntimeEnvironment})
+var sRuntimeEnvironmentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuntimeEnvironmentType, Members: &mRuntimeEnvironmentType, Type: smithy.ShapeTypeEnum, Ext: &eRuntimeEnvironmentType})
+var s_RuntimeEnvironmentVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuntimeEnvironmentVersion, Type: smithy.ShapeTypeString, Ext: &e_RuntimeEnvironmentVersion})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t35, Type: smithy.ShapeTypeStructure, Ext: &eServiceQuotaExceededException})
+var s_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionId, Type: smithy.ShapeTypeString, Ext: &e_SessionId})
+var s_SessionLengthSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionLengthSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_SessionLengthSeconds})
+var sShaderCacheStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShaderCacheStatus, Members: &mShaderCacheStatus, Type: smithy.ShapeTypeEnum, Ext: &eShaderCacheStatus})
+var sShaderCacheSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShaderCacheSummary, Members: &mShaderCacheSummary, Type: smithy.ShapeTypeStructure, Ext: &eShaderCacheSummary})
+var s_ShaderCacheSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShaderCacheSummaryList, Members: &m_ShaderCacheSummaryList, Type: smithy.ShapeTypeList, Ext: &e_ShaderCacheSummaryList})
+var s_SignalRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SignalRequest, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &e_SignalRequest})
+var s_SignalResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SignalResponse, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &e_SignalResponse})
+var sStreamClass = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamClass, Members: &mStreamClass, Type: smithy.ShapeTypeEnum, Ext: &eStreamClass})
+var sStreamGroupLocationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamGroupLocationStatus, Members: &mStreamGroupLocationStatus, Type: smithy.ShapeTypeEnum, Ext: &eStreamGroupLocationStatus})
+var sStreamGroupStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamGroupStatus, Members: &mStreamGroupStatus, Type: smithy.ShapeTypeEnum, Ext: &eStreamGroupStatus})
+var sStreamGroupStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamGroupStatusReason, Members: &mStreamGroupStatusReason, Type: smithy.ShapeTypeEnum, Ext: &eStreamGroupStatusReason})
+var sStreamGroupSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamGroupSummary, Members: &mStreamGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &eStreamGroupSummary})
+var s_StreamGroupSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamGroupSummaryList, Members: &m_StreamGroupSummaryList, Type: smithy.ShapeTypeList, Ext: &e_StreamGroupSummaryList})
+var sStreamSessionAccessNotReadyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamSessionAccessNotReadyException, Members: &mStreamSessionAccessNotReadyException, Traits: &t31, Type: smithy.ShapeTypeStructure, Ext: &eStreamSessionAccessNotReadyException})
+var sStreamSessionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamSessionStatus, Members: &mStreamSessionStatus, Type: smithy.ShapeTypeEnum, Ext: &eStreamSessionStatus})
+var sStreamSessionStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamSessionStatusReason, Members: &mStreamSessionStatusReason, Type: smithy.ShapeTypeEnum, Ext: &eStreamSessionStatusReason})
+var s_StreamSessionStreamUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamSessionStreamUrl, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &e_StreamSessionStreamUrl})
+var sStreamSessionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamSessionSummary, Members: &mStreamSessionSummary, Type: smithy.ShapeTypeStructure, Ext: &eStreamSessionSummary})
+var s_StreamSessionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamSessionSummaryList, Members: &m_StreamSessionSummaryList, Type: smithy.ShapeTypeList, Ext: &e_StreamSessionSummaryList})
+var s_StreamUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamUrl, Type: smithy.ShapeTypeString, Ext: &e_StreamUrl})
+var sStreamUrlStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamUrlStatus, Members: &mStreamUrlStatus, Type: smithy.ShapeTypeEnum, Ext: &eStreamUrlStatus})
+var sStreamUrlStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamUrlStatusReason, Members: &mStreamUrlStatusReason, Type: smithy.ShapeTypeEnum, Ext: &eStreamUrlStatusReason})
+var sStreamUrlSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamUrlSummary, Members: &mStreamUrlSummary, Type: smithy.ShapeTypeStructure, Ext: &eStreamUrlSummary})
+var s_StreamUrlSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamUrlSummaryList, Members: &m_StreamUrlSummaryList, Type: smithy.ShapeTypeList, Ext: &e_StreamUrlSummaryList})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &e_Tags})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var s_TargetIdleCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetIdleCapacity, Type: smithy.ShapeTypeInteger, Ext: &e_TargetIdleCapacity})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t37, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var s_TokenValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TokenValue, Traits: &t32, Type: smithy.ShapeTypeString, Ext: &e_TokenValue})
+var s_UrlExpiresAfterMinutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UrlExpiresAfterMinutes, Type: smithy.ShapeTypeInteger, Ext: &e_UrlExpiresAfterMinutes})
+var s_UsageLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UsageLimit, Type: smithy.ShapeTypeInteger, Ext: &e_UsageLimit})
+var s_UserId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserId, Type: smithy.ShapeTypeString, Ext: &e_UserId})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t38, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var s_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &e_VpcId})
+var sVpcTransitConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcTransitConfiguration, Members: &mVpcTransitConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eVpcTransitConfiguration})
+var sVpcTransitConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcTransitConfigurationResponse, Members: &mVpcTransitConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eVpcTransitConfigurationResponse})
+var s_WebSdkProtocolUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebSdkProtocolUrl, Type: smithy.ShapeTypeString, Ext: &e_WebSdkProtocolUrl})
+var sAddStreamGroupLocationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddStreamGroupLocationsInput, Members: &mAddStreamGroupLocationsInput, Type: smithy.ShapeTypeStructure, Ext: &eAddStreamGroupLocationsInput})
+var sAddStreamGroupLocationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddStreamGroupLocationsOutput, Members: &mAddStreamGroupLocationsOutput, Type: smithy.ShapeTypeStructure, Ext: &eAddStreamGroupLocationsOutput})
+var sAssociateApplicationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateApplicationsInput, Members: &mAssociateApplicationsInput, Type: smithy.ShapeTypeStructure, Ext: &eAssociateApplicationsInput})
+var sAssociateApplicationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateApplicationsOutput, Members: &mAssociateApplicationsOutput, Type: smithy.ShapeTypeStructure, Ext: &eAssociateApplicationsOutput})
+var sCreateApplicationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApplicationInput, Members: &mCreateApplicationInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateApplicationInput})
+var sCreateApplicationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApplicationOutput, Members: &mCreateApplicationOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateApplicationOutput})
+var sCreateStreamGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamGroupInput, Members: &mCreateStreamGroupInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateStreamGroupInput})
+var sCreateStreamGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamGroupOutput, Members: &mCreateStreamGroupOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateStreamGroupOutput})
+var sCreateStreamSessionAdminShellInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamSessionAdminShellInput, Members: &mCreateStreamSessionAdminShellInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateStreamSessionAdminShellInput})
+var sCreateStreamSessionAdminShellOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamSessionAdminShellOutput, Members: &mCreateStreamSessionAdminShellOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateStreamSessionAdminShellOutput})
+var sCreateStreamSessionConnectionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamSessionConnectionInput, Members: &mCreateStreamSessionConnectionInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateStreamSessionConnectionInput})
+var sCreateStreamSessionConnectionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamSessionConnectionOutput, Members: &mCreateStreamSessionConnectionOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateStreamSessionConnectionOutput})
+var sCreateStreamUrlInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamUrlInput, Members: &mCreateStreamUrlInput, Type: smithy.ShapeTypeStructure, Ext: &eCreateStreamUrlInput})
+var sCreateStreamUrlOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamUrlOutput, Members: &mCreateStreamUrlOutput, Type: smithy.ShapeTypeStructure, Ext: &eCreateStreamUrlOutput})
+var sDeleteApplicationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApplicationInput, Members: &mDeleteApplicationInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteApplicationInput})
+var sDeleteStreamGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteStreamGroupInput, Members: &mDeleteStreamGroupInput, Type: smithy.ShapeTypeStructure, Ext: &eDeleteStreamGroupInput})
+var sDisassociateApplicationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateApplicationsInput, Members: &mDisassociateApplicationsInput, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateApplicationsInput})
+var sDisassociateApplicationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateApplicationsOutput, Members: &mDisassociateApplicationsOutput, Type: smithy.ShapeTypeStructure, Ext: &eDisassociateApplicationsOutput})
+var sExportStreamSessionFilesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportStreamSessionFilesInput, Members: &mExportStreamSessionFilesInput, Type: smithy.ShapeTypeStructure, Ext: &eExportStreamSessionFilesInput})
+var sExportStreamSessionFilesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportStreamSessionFilesOutput, Type: smithy.ShapeTypeStructure, Ext: &eExportStreamSessionFilesOutput})
+var sGetApplicationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApplicationInput, Members: &mGetApplicationInput, Type: smithy.ShapeTypeStructure, Ext: &eGetApplicationInput})
+var sGetApplicationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApplicationOutput, Members: &mGetApplicationOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetApplicationOutput})
+var sGetStreamGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamGroupInput, Members: &mGetStreamGroupInput, Type: smithy.ShapeTypeStructure, Ext: &eGetStreamGroupInput})
+var sGetStreamGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamGroupOutput, Members: &mGetStreamGroupOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetStreamGroupOutput})
+var sGetStreamSessionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamSessionInput, Members: &mGetStreamSessionInput, Type: smithy.ShapeTypeStructure, Ext: &eGetStreamSessionInput})
+var sGetStreamSessionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamSessionOutput, Members: &mGetStreamSessionOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetStreamSessionOutput})
+var sGetStreamUrlInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamUrlInput, Members: &mGetStreamUrlInput, Type: smithy.ShapeTypeStructure, Ext: &eGetStreamUrlInput})
+var sGetStreamUrlOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamUrlOutput, Members: &mGetStreamUrlOutput, Type: smithy.ShapeTypeStructure, Ext: &eGetStreamUrlOutput})
+var sListApplicationShaderCachesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplicationShaderCachesInput, Members: &mListApplicationShaderCachesInput, Type: smithy.ShapeTypeStructure, Ext: &eListApplicationShaderCachesInput})
+var sListApplicationShaderCachesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplicationShaderCachesOutput, Members: &mListApplicationShaderCachesOutput, Type: smithy.ShapeTypeStructure, Ext: &eListApplicationShaderCachesOutput})
+var sListApplicationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplicationsInput, Members: &mListApplicationsInput, Type: smithy.ShapeTypeStructure, Ext: &eListApplicationsInput})
+var sListApplicationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplicationsOutput, Members: &mListApplicationsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListApplicationsOutput})
+var sListStreamGroupsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamGroupsInput, Members: &mListStreamGroupsInput, Type: smithy.ShapeTypeStructure, Ext: &eListStreamGroupsInput})
+var sListStreamGroupsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamGroupsOutput, Members: &mListStreamGroupsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListStreamGroupsOutput})
+var sListStreamSessionsByAccountInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamSessionsByAccountInput, Members: &mListStreamSessionsByAccountInput, Type: smithy.ShapeTypeStructure, Ext: &eListStreamSessionsByAccountInput})
+var sListStreamSessionsByAccountOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamSessionsByAccountOutput, Members: &mListStreamSessionsByAccountOutput, Type: smithy.ShapeTypeStructure, Ext: &eListStreamSessionsByAccountOutput})
+var sListStreamSessionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamSessionsInput, Members: &mListStreamSessionsInput, Type: smithy.ShapeTypeStructure, Ext: &eListStreamSessionsInput})
+var sListStreamSessionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamSessionsOutput, Members: &mListStreamSessionsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListStreamSessionsOutput})
+var sListStreamUrlsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamUrlsInput, Members: &mListStreamUrlsInput, Type: smithy.ShapeTypeStructure, Ext: &eListStreamUrlsInput})
+var sListStreamUrlsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamUrlsOutput, Members: &mListStreamUrlsOutput, Type: smithy.ShapeTypeStructure, Ext: &eListStreamUrlsOutput})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sRemoveStreamGroupLocationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveStreamGroupLocationsInput, Members: &mRemoveStreamGroupLocationsInput, Type: smithy.ShapeTypeStructure, Ext: &eRemoveStreamGroupLocationsInput})
+var sRevokeStreamUrlInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeStreamUrlInput, Members: &mRevokeStreamUrlInput, Type: smithy.ShapeTypeStructure, Ext: &eRevokeStreamUrlInput})
+var sStartStreamSessionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartStreamSessionInput, Members: &mStartStreamSessionInput, Type: smithy.ShapeTypeStructure, Ext: &eStartStreamSessionInput})
+var sStartStreamSessionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartStreamSessionOutput, Members: &mStartStreamSessionOutput, Type: smithy.ShapeTypeStructure, Ext: &eStartStreamSessionOutput})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sTerminateStreamSessionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateStreamSessionInput, Members: &mTerminateStreamSessionInput, Type: smithy.ShapeTypeStructure, Ext: &eTerminateStreamSessionInput})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateApplicationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApplicationInput, Members: &mUpdateApplicationInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApplicationInput})
+var sUpdateApplicationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApplicationOutput, Members: &mUpdateApplicationOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApplicationOutput})
+var sUpdateStreamGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStreamGroupInput, Members: &mUpdateStreamGroupInput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateStreamGroupInput})
+var sUpdateStreamGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStreamGroupOutput, Members: &mUpdateStreamGroupOutput, Type: smithy.ShapeTypeStructure, Ext: &eUpdateStreamGroupOutput})
 
-var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var sApplicationStatus_INITIALIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INITIALIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var sApplicationStatus_PROCESSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROCESSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[38]})
-var sApplicationStatus_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[39]})
-var sApplicationStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[40]})
-var sApplicationStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[41]})
-var sApplicationStatusReason_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[43]})
-var sApplicationStatusReason_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[44]})
-var sApplicationStatusReason_SOURCE_MODIFIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOURCE_MODIFIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[45]})
-var sApplicationSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &ext[47]})
-var sApplicationSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &ext[48]})
-var sApplicationSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[49]})
-var sApplicationSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iApplicationStatus, Members: &mApplicationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[50]})
-var sApplicationSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[51]})
-var sApplicationSummary_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[52]})
-var sApplicationSummary_RuntimeEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuntimeEnvironment", ID: &iRuntimeEnvironment, Members: &mRuntimeEnvironment, Type: smithy.ShapeTypeStructure, Ext: &ext[53]})
-var s_ApplicationSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApplicationSummary, Members: &mApplicationSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[55]})
-var s_ArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[58]})
-var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[62]})
-var sDefaultApplication_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &ext[65]})
-var sDefaultApplication_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[66]})
-var sDisplayConfiguration_Resolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resolution", ID: &iResolution, Members: &mResolution, Type: smithy.ShapeTypeStructure, Ext: &ext[69]})
-var s_EnvironmentVariables_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[71]})
-var s_EnvironmentVariables_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[72]})
-var sExportFilesMetadata_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iExportFilesStatus, Members: &mExportFilesStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[75]})
-var sExportFilesMetadata_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &i_ExportFilesReason, Type: smithy.ShapeTypeString, Ext: &ext[76]})
-var sExportFilesMetadata_OutputUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputUri", ID: &i_OutputUri, Type: smithy.ShapeTypeString, Ext: &ext[77]})
-var sExportFilesStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var sExportFilesStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[81]})
-var sExportFilesStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[82]})
-var s_FilePaths_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FilePath, Type: smithy.ShapeTypeString, Ext: &ext[86]})
-var s_GameLaunchArgList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[88]})
-var s_Identifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &ext[93]})
-var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[95]})
-var s_Ipv4CidrBlockList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Ipv4CidrBlock, Type: smithy.ShapeTypeString, Ext: &ext[98]})
-var sLocationConfiguration_LocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationName", ID: &i_LocationName, Type: smithy.ShapeTypeString, Ext: &ext[100]})
-var sLocationConfiguration_AlwaysOnCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlwaysOnCapacity", ID: &i_AlwaysOnCapacity, Type: smithy.ShapeTypeInteger, Ext: &ext[101]})
-var sLocationConfiguration_OnDemandCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnDemandCapacity", ID: &i_OnDemandCapacity, Type: smithy.ShapeTypeInteger, Ext: &ext[102]})
-var sLocationConfiguration_TargetIdleCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetIdleCapacity", ID: &i_TargetIdleCapacity, Type: smithy.ShapeTypeInteger, Ext: &ext[103]})
-var sLocationConfiguration_MaximumCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumCapacity", ID: &i_MaximumCapacity, Type: smithy.ShapeTypeInteger, Ext: &ext[104]})
-var sLocationConfiguration_VpcTransitConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcTransitConfiguration", ID: &iVpcTransitConfiguration, Members: &mVpcTransitConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[105]})
-var s_LocationConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLocationConfiguration, Members: &mLocationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[107]})
-var s_LocationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LocationName, Type: smithy.ShapeTypeString, Ext: &ext[109]})
-var s_LocationsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[112]})
-var sLocationState_LocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationName", ID: &i_LocationName, Type: smithy.ShapeTypeString, Ext: &ext[114]})
-var sLocationState_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamGroupLocationStatus, Members: &mStreamGroupLocationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[115]})
-var sLocationState_AlwaysOnCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlwaysOnCapacity", ID: &i_AlwaysOnCapacity, Type: smithy.ShapeTypeInteger, Ext: &ext[116]})
-var sLocationState_OnDemandCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnDemandCapacity", ID: &i_OnDemandCapacity, Type: smithy.ShapeTypeInteger, Ext: &ext[117]})
-var sLocationState_TargetIdleCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetIdleCapacity", ID: &i_TargetIdleCapacity, Type: smithy.ShapeTypeInteger, Ext: &ext[118]})
-var sLocationState_MaximumCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumCapacity", ID: &i_MaximumCapacity, Type: smithy.ShapeTypeInteger, Ext: &ext[119]})
-var sLocationState_RequestedCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestedCapacity", ID: &i_CapacityValue, Type: smithy.ShapeTypeInteger, Ext: &ext[120]})
-var sLocationState_AllocatedCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllocatedCapacity", ID: &i_CapacityValue, Type: smithy.ShapeTypeInteger, Ext: &ext[121]})
-var sLocationState_IdleCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdleCapacity", ID: &i_CapacityValue, Type: smithy.ShapeTypeInteger, Ext: &ext[122]})
-var sLocationState_InternalVpcIpv4CidrBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternalVpcIpv4CidrBlock", ID: &i_Ipv4CidrBlock, Type: smithy.ShapeTypeString, Ext: &ext[123]})
-var sLocationState_VpcTransitConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcTransitConfiguration", ID: &iVpcTransitConfigurationResponse, Members: &mVpcTransitConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[124]})
-var s_LocationStates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLocationState, Members: &mLocationState, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var sPerformanceStatsConfiguration_SharedWithClient = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedWithClient", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ext[133]})
-var sProtocol_WEBRTC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEBRTC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[135]})
-var sReplicationStatus_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &i_LocationName, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var sReplicationStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iReplicationStatusType, Members: &mReplicationStatusType, Type: smithy.ShapeTypeEnum, Ext: &ext[139]})
-var s_ReplicationStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReplicationStatus, Members: &mReplicationStatus, Type: smithy.ShapeTypeStructure, Ext: &ext[141]})
-var sReplicationStatusType_REPLICATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPLICATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[143]})
-var sReplicationStatusType_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[144]})
-var sResolution_Width = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Width", ID: &i_ResolutionWidth, Type: smithy.ShapeTypeInteger, Ext: &ext[146]})
-var sResolution_Height = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Height", ID: &i_ResolutionHeight, Type: smithy.ShapeTypeInteger, Ext: &ext[147]})
-var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[151]})
-var sRevocationMode_REVOKE_URL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVOKE_URL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[153]})
-var sRevocationMode_REVOKE_AND_TERMINATE_SESSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVOKE_AND_TERMINATE_SESSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[154]})
-var sRuntimeEnvironment_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRuntimeEnvironmentType, Members: &mRuntimeEnvironmentType, Type: smithy.ShapeTypeEnum, Ext: &ext[156]})
-var sRuntimeEnvironment_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_RuntimeEnvironmentVersion, Type: smithy.ShapeTypeString, Ext: &ext[157]})
-var sRuntimeEnvironmentType_PROTON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROTON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[159]})
-var sRuntimeEnvironmentType_WINDOWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[160]})
-var sRuntimeEnvironmentType_UBUNTU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UBUNTU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[161]})
-var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[164]})
-var sShaderCacheStatus_INITIALIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INITIALIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[168]})
-var sShaderCacheStatus_PROCESSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROCESSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[169]})
-var sShaderCacheStatus_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[170]})
-var sShaderCacheStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[171]})
-var sShaderCacheStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[172]})
-var sShaderCacheSummary_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &ext[174]})
-var sShaderCacheSummary_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[175]})
-var sShaderCacheSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iShaderCacheStatus, Members: &mShaderCacheStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[176]})
-var sShaderCacheSummary_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[177]})
-var sShaderCacheSummary_StorageBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageBytes", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[178]})
-var sShaderCacheSummary_AssociatedStreamGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedStreamGroups", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &ext[179]})
-var s_ShaderCacheSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iShaderCacheSummary, Members: &mShaderCacheSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[181]})
-var sStreamClass_gen4n_high = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen4n_high", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[185]})
-var sStreamClass_gen4n_ultra = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen4n_ultra", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[186]})
-var sStreamClass_gen4n_win2022 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen4n_win2022", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[187]})
-var sStreamClass_gen5n_high = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen5n_high", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[188]})
-var sStreamClass_gen5n_ultra = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen5n_ultra", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[189]})
-var sStreamClass_gen5n_win2022 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen5n_win2022", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[190]})
-var sStreamClass_gen6n_small = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen6n_small", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[191]})
-var sStreamClass_gen6n_medium = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen6n_medium", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[192]})
-var sStreamClass_gen6n_high = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen6n_high", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[193]})
-var sStreamClass_gen6n_ultra = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen6n_ultra", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[194]})
-var sStreamClass_gen6n_ultra_win2022 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen6n_ultra_win2022", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[195]})
-var sStreamClass_gen6n_pro = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen6n_pro", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[196]})
-var sStreamClass_gen6n_pro_win2022 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen6n_pro_win2022", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[197]})
-var sStreamClass_gen6n_small_win2022 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen6n_small_win2022", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[198]})
-var sStreamClass_gen6n_medium_win2022 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen6n_medium_win2022", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[199]})
-var sStreamClass_gen6e_pro = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen6e_pro", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[200]})
-var sStreamClass_gen6e_pro_win2022 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen6e_pro_win2022", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[201]})
-var sStreamGroupLocationStatus_ACTIVATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[203]})
-var sStreamGroupLocationStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[204]})
-var sStreamGroupLocationStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[205]})
-var sStreamGroupLocationStatus_REMOVING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REMOVING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[206]})
-var sStreamGroupStatus_ACTIVATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[208]})
-var sStreamGroupStatus_UPDATING_LOCATIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING_LOCATIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[209]})
-var sStreamGroupStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[210]})
-var sStreamGroupStatus_ACTIVE_WITH_ERRORS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE_WITH_ERRORS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[211]})
-var sStreamGroupStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[212]})
-var sStreamGroupStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[213]})
-var sStreamGroupStatus_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[214]})
-var sStreamGroupStatusReason_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[216]})
-var sStreamGroupStatusReason_NO_AVAILABLE_INSTANCES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_AVAILABLE_INSTANCES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[217]})
-var sStreamGroupSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &ext[219]})
-var sStreamGroupSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &ext[220]})
-var sStreamGroupSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[221]})
-var sStreamGroupSummary_DefaultApplication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultApplication", ID: &iDefaultApplication, Members: &mDefaultApplication, Type: smithy.ShapeTypeStructure, Ext: &ext[222]})
-var sStreamGroupSummary_StreamClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamClass", ID: &iStreamClass, Members: &mStreamClass, Type: smithy.ShapeTypeEnum, Ext: &ext[223]})
-var sStreamGroupSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamGroupStatus, Members: &mStreamGroupStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[224]})
-var sStreamGroupSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[225]})
-var sStreamGroupSummary_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[226]})
-var sStreamGroupSummary_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[227]})
-var s_StreamGroupSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStreamGroupSummary, Members: &mStreamGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[229]})
-var sStreamSessionAccessNotReadyException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[231]})
-var sStreamSessionStatus_ACTIVATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[233]})
-var sStreamSessionStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[234]})
-var sStreamSessionStatus_CONNECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONNECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[235]})
-var sStreamSessionStatus_PENDING_CLIENT_RECONNECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_CLIENT_RECONNECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[236]})
-var sStreamSessionStatus_RECONNECTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECONNECTING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[237]})
-var sStreamSessionStatus_TERMINATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[238]})
-var sStreamSessionStatus_TERMINATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[239]})
-var sStreamSessionStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[240]})
-var sStreamSessionStatusReason_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[242]})
-var sStreamSessionStatusReason_INVALID_SIGNAL_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_SIGNAL_REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[243]})
-var sStreamSessionStatusReason_PLACEMENT_TIMEOUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PLACEMENT_TIMEOUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[244]})
-var sStreamSessionStatusReason_APP_LOG_S3_DESTINATION_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APP_LOG_S3_DESTINATION_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[245]})
-var sStreamSessionStatusReason_ASSUME_ROLE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASSUME_ROLE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[246]})
-var sStreamSessionStatusReason_APPLICATION_EXIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPLICATION_EXIT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[247]})
-var sStreamSessionStatusReason_CONNECTION_TIMEOUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONNECTION_TIMEOUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[248]})
-var sStreamSessionStatusReason_RECONNECTION_TIMEOUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECONNECTION_TIMEOUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[249]})
-var sStreamSessionStatusReason_MAX_SESSION_LENGTH_TIMEOUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAX_SESSION_LENGTH_TIMEOUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[250]})
-var sStreamSessionStatusReason_IDLE_TIMEOUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IDLE_TIMEOUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[251]})
-var sStreamSessionStatusReason_API_TERMINATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "API_TERMINATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[252]})
-var sStreamSessionSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[255]})
-var sStreamSessionSummary_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_UserId, Type: smithy.ShapeTypeString, Ext: &ext[256]})
-var sStreamSessionSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamSessionStatus, Members: &mStreamSessionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[257]})
-var sStreamSessionSummary_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iStreamSessionStatusReason, Members: &mStreamSessionStatusReason, Type: smithy.ShapeTypeEnum, Ext: &ext[258]})
-var sStreamSessionSummary_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &ext[259]})
-var sStreamSessionSummary_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[260]})
-var sStreamSessionSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[261]})
-var sStreamSessionSummary_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[262]})
-var sStreamSessionSummary_ExportFilesMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportFilesMetadata", ID: &iExportFilesMetadata, Members: &mExportFilesMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[263]})
-var sStreamSessionSummary_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &i_LocationName, Type: smithy.ShapeTypeString, Ext: &ext[264]})
-var sStreamSessionSummary_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[265]})
-var s_StreamSessionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStreamSessionSummary, Members: &mStreamSessionSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[267]})
-var sStreamUrlStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[270]})
-var sStreamUrlStatus_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[271]})
-var sStreamUrlStatus_REVOKED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVOKED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[272]})
-var sStreamUrlStatus_LIMIT_REACHED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LIMIT_REACHED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[273]})
-var sStreamUrlStatusReason_USER_REVOKED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER_REVOKED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[275]})
-var sStreamUrlStatusReason_REVOKED_AND_TERMINATING_SESSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVOKED_AND_TERMINATING_SESSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[276]})
-var sStreamUrlStatusReason_REVOKED_AND_SESSIONS_TERMINATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVOKED_AND_SESSIONS_TERMINATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[277]})
-var sStreamUrlStatusReason_STREAM_GROUP_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STREAM_GROUP_DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[278]})
-var sStreamUrlStatusReason_APPLICATION_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPLICATION_DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[279]})
-var sStreamUrlSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[281]})
-var sStreamUrlSummary_StreamUrlId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamUrlId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &ext[282]})
-var sStreamUrlSummary_StreamUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamUrl", ID: &i_StreamSessionStreamUrl, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[283]})
-var sStreamUrlSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamUrlStatus, Members: &mStreamUrlStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[284]})
-var sStreamUrlSummary_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iStreamUrlStatusReason, Members: &mStreamUrlStatusReason, Type: smithy.ShapeTypeEnum, Ext: &ext[285]})
-var sStreamUrlSummary_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[286]})
-var sStreamUrlSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[287]})
-var sStreamUrlSummary_UsageLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageLimit", ID: &i_UsageLimit, Type: smithy.ShapeTypeInteger, Ext: &ext[288]})
-var sStreamUrlSummary_RemainingUses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemainingUses", ID: &i_RemainingUses, Type: smithy.ShapeTypeInteger, Ext: &ext[289]})
-var sStreamUrlSummary_StreamGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamGroupArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[290]})
-var sStreamUrlSummary_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[291]})
-var sStreamUrlSummary_SessionLengthSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionLengthSeconds", ID: &i_SessionLengthSeconds, Type: smithy.ShapeTypeInteger, Ext: &ext[292]})
-var sStreamUrlSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[293]})
-var s_StreamUrlSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStreamUrlSummary, Members: &mStreamUrlSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[295]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[298]})
-var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[300]})
-var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[301]})
-var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[305]})
-var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[311]})
-var sVpcTransitConfiguration_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &ext[314]})
-var sVpcTransitConfiguration_Ipv4CidrBlocks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ipv4CidrBlocks", ID: &i_Ipv4CidrBlockList, Members: &m_Ipv4CidrBlockList, Type: smithy.ShapeTypeList, Ext: &ext[315]})
-var sVpcTransitConfigurationResponse_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &ext[317]})
-var sVpcTransitConfigurationResponse_Ipv4CidrBlocks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ipv4CidrBlocks", ID: &i_Ipv4CidrBlockList, Members: &m_Ipv4CidrBlockList, Type: smithy.ShapeTypeList, Ext: &ext[318]})
-var sVpcTransitConfigurationResponse_TransitGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[319]})
-var sVpcTransitConfigurationResponse_TransitGatewayResourceShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayResourceShareArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[320]})
-var sAddStreamGroupLocationsInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[323]})
-var sAddStreamGroupLocationsInput_LocationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationConfigurations", ID: &i_LocationConfigurations, Members: &m_LocationConfigurations, Type: smithy.ShapeTypeList, Ext: &ext[324]})
-var sAddStreamGroupLocationsOutput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &ext[326]})
-var sAddStreamGroupLocationsOutput_Locations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locations", ID: &i_LocationStates, Members: &m_LocationStates, Type: smithy.ShapeTypeList, Ext: &ext[327]})
-var sAssociateApplicationsInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[329]})
-var sAssociateApplicationsInput_ApplicationIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationIdentifiers", ID: &i_Identifiers, Members: &m_Identifiers, Type: smithy.ShapeTypeList, Ext: &ext[330]})
-var sAssociateApplicationsOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[332]})
-var sAssociateApplicationsOutput_ApplicationArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArns", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &ext[333]})
-var sCreateApplicationInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[335]})
-var sCreateApplicationInput_RuntimeEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuntimeEnvironment", ID: &iRuntimeEnvironment, Members: &mRuntimeEnvironment, Type: smithy.ShapeTypeStructure, Ext: &ext[336]})
-var sCreateApplicationInput_ExecutablePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutablePath", ID: &i_ExecutablePath, Type: smithy.ShapeTypeString, Ext: &ext[337]})
-var sCreateApplicationInput_ApplicationSourceUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationSourceUri", ID: &i_ApplicationSourceUri, Type: smithy.ShapeTypeString, Ext: &ext[338]})
-var sCreateApplicationInput_ApplicationLogPaths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationLogPaths", ID: &i_FilePaths, Members: &m_FilePaths, Type: smithy.ShapeTypeList, Ext: &ext[339]})
-var sCreateApplicationInput_ApplicationLogOutputUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationLogOutputUri", ID: &i_ApplicationLogOutputUri, Type: smithy.ShapeTypeString, Ext: &ext[340]})
-var sCreateApplicationInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[341]})
-var sCreateApplicationInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[342]})
-var sCreateApplicationOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &ext[344]})
-var sCreateApplicationOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[345]})
-var sCreateApplicationOutput_RuntimeEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuntimeEnvironment", ID: &iRuntimeEnvironment, Members: &mRuntimeEnvironment, Type: smithy.ShapeTypeStructure, Ext: &ext[346]})
-var sCreateApplicationOutput_ExecutablePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutablePath", ID: &i_ExecutablePath, Type: smithy.ShapeTypeString, Ext: &ext[347]})
-var sCreateApplicationOutput_ApplicationLogPaths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationLogPaths", ID: &i_FilePaths, Members: &m_FilePaths, Type: smithy.ShapeTypeList, Ext: &ext[348]})
-var sCreateApplicationOutput_ApplicationLogOutputUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationLogOutputUri", ID: &i_ApplicationLogOutputUri, Type: smithy.ShapeTypeString, Ext: &ext[349]})
-var sCreateApplicationOutput_ApplicationSourceUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationSourceUri", ID: &i_ApplicationSourceUri, Type: smithy.ShapeTypeString, Ext: &ext[350]})
-var sCreateApplicationOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &ext[351]})
-var sCreateApplicationOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iApplicationStatus, Members: &mApplicationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[352]})
-var sCreateApplicationOutput_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iApplicationStatusReason, Members: &mApplicationStatusReason, Type: smithy.ShapeTypeEnum, Ext: &ext[353]})
-var sCreateApplicationOutput_ReplicationStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationStatuses", ID: &i_ReplicationStatuses, Members: &m_ReplicationStatuses, Type: smithy.ShapeTypeList, Ext: &ext[354]})
-var sCreateApplicationOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[355]})
-var sCreateApplicationOutput_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[356]})
-var sCreateApplicationOutput_AssociatedStreamGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedStreamGroups", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &ext[357]})
-var sCreateStreamGroupInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[359]})
-var sCreateStreamGroupInput_StreamClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamClass", ID: &iStreamClass, Members: &mStreamClass, Type: smithy.ShapeTypeEnum, Ext: &ext[360]})
-var sCreateStreamGroupInput_DefaultApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultApplicationIdentifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &ext[361]})
-var sCreateStreamGroupInput_LocationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationConfigurations", ID: &i_LocationConfigurations, Members: &m_LocationConfigurations, Type: smithy.ShapeTypeList, Ext: &ext[362]})
-var sCreateStreamGroupInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[363]})
-var sCreateStreamGroupInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[364]})
-var sCreateStreamGroupOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &ext[366]})
-var sCreateStreamGroupOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[367]})
-var sCreateStreamGroupOutput_DefaultApplication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultApplication", ID: &iDefaultApplication, Members: &mDefaultApplication, Type: smithy.ShapeTypeStructure, Ext: &ext[368]})
-var sCreateStreamGroupOutput_LocationStates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationStates", ID: &i_LocationStates, Members: &m_LocationStates, Type: smithy.ShapeTypeList, Ext: &ext[369]})
-var sCreateStreamGroupOutput_StreamClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamClass", ID: &iStreamClass, Members: &mStreamClass, Type: smithy.ShapeTypeEnum, Ext: &ext[370]})
-var sCreateStreamGroupOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &ext[371]})
-var sCreateStreamGroupOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamGroupStatus, Members: &mStreamGroupStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[372]})
-var sCreateStreamGroupOutput_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iStreamGroupStatusReason, Members: &mStreamGroupStatusReason, Type: smithy.ShapeTypeEnum, Ext: &ext[373]})
-var sCreateStreamGroupOutput_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[374]})
-var sCreateStreamGroupOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[375]})
-var sCreateStreamGroupOutput_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[376]})
-var sCreateStreamGroupOutput_AssociatedApplications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedApplications", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &ext[377]})
-var sCreateStreamSessionAdminShellInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[379]})
-var sCreateStreamSessionAdminShellInput_StreamSessionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamSessionIdentifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[380]})
-var sCreateStreamSessionAdminShellOutput_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_SessionId, Type: smithy.ShapeTypeString, Ext: &ext[382]})
-var sCreateStreamSessionAdminShellOutput_StreamUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamUrl", ID: &i_StreamUrl, Type: smithy.ShapeTypeString, Ext: &ext[383]})
-var sCreateStreamSessionAdminShellOutput_TokenValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TokenValue", ID: &i_TokenValue, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[384]})
-var sCreateStreamSessionConnectionInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[386]})
-var sCreateStreamSessionConnectionInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[387]})
-var sCreateStreamSessionConnectionInput_StreamSessionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamSessionIdentifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[388]})
-var sCreateStreamSessionConnectionInput_SignalRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalRequest", ID: &i_SignalRequest, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[389]})
-var sCreateStreamSessionConnectionOutput_SignalResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalResponse", ID: &i_SignalResponse, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[391]})
-var sCreateStreamUrlInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[393]})
-var sCreateStreamUrlInput_ApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationIdentifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &ext[394]})
-var sCreateStreamUrlInput_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &ext[395]})
-var sCreateStreamUrlInput_UrlExpiresAfterMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UrlExpiresAfterMinutes", ID: &i_UrlExpiresAfterMinutes, Type: smithy.ShapeTypeInteger, Ext: &ext[396]})
-var sCreateStreamUrlInput_UsageLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageLimit", ID: &i_UsageLimit, Type: smithy.ShapeTypeInteger, Ext: &ext[397]})
-var sCreateStreamUrlInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[398]})
-var sCreateStreamUrlInput_Locations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locations", ID: &i_LocationList, Members: &m_LocationList, Type: smithy.ShapeTypeList, Ext: &ext[399]})
-var sCreateStreamUrlInput_SessionLengthSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionLengthSeconds", ID: &i_SessionLengthSeconds, Type: smithy.ShapeTypeInteger, Ext: &ext[400]})
-var sCreateStreamUrlInput_AdditionalLaunchArgs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalLaunchArgs", ID: &i_GameLaunchArgList, Members: &m_GameLaunchArgList, Type: smithy.ShapeTypeList, Ext: &ext[401]})
-var sCreateStreamUrlInput_AdditionalEnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalEnvironmentVariables", ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Type: smithy.ShapeTypeMap, Ext: &ext[402]})
-var sCreateStreamUrlInput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[403]})
-var sCreateStreamUrlInput_DisplayConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayConfiguration", ID: &iDisplayConfiguration, Members: &mDisplayConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[404]})
-var sCreateStreamUrlInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[405]})
-var sCreateStreamUrlOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[407]})
-var sCreateStreamUrlOutput_StreamUrlId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamUrlId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &ext[408]})
-var sCreateStreamUrlOutput_StreamUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamUrl", ID: &i_StreamSessionStreamUrl, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[409]})
-var sCreateStreamUrlOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamUrlStatus, Members: &mStreamUrlStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[410]})
-var sCreateStreamUrlOutput_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iStreamUrlStatusReason, Members: &mStreamUrlStatusReason, Type: smithy.ShapeTypeEnum, Ext: &ext[411]})
-var sCreateStreamUrlOutput_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[412]})
-var sCreateStreamUrlOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[413]})
-var sCreateStreamUrlOutput_UsageLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageLimit", ID: &i_UsageLimit, Type: smithy.ShapeTypeInteger, Ext: &ext[414]})
-var sCreateStreamUrlOutput_RemainingUses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemainingUses", ID: &i_RemainingUses, Type: smithy.ShapeTypeInteger, Ext: &ext[415]})
-var sCreateStreamUrlOutput_StreamGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamGroupArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[416]})
-var sCreateStreamUrlOutput_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[417]})
-var sCreateStreamUrlOutput_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &ext[418]})
-var sCreateStreamUrlOutput_Locations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locations", ID: &i_LocationList, Members: &m_LocationList, Type: smithy.ShapeTypeList, Ext: &ext[419]})
-var sCreateStreamUrlOutput_SessionLengthSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionLengthSeconds", ID: &i_SessionLengthSeconds, Type: smithy.ShapeTypeInteger, Ext: &ext[420]})
-var sCreateStreamUrlOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[421]})
-var sCreateStreamUrlOutput_AdditionalLaunchArgs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalLaunchArgs", ID: &i_GameLaunchArgList, Members: &m_GameLaunchArgList, Type: smithy.ShapeTypeList, Ext: &ext[422]})
-var sCreateStreamUrlOutput_AdditionalEnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalEnvironmentVariables", ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Type: smithy.ShapeTypeMap, Ext: &ext[423]})
-var sCreateStreamUrlOutput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[424]})
-var sCreateStreamUrlOutput_DisplayConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayConfiguration", ID: &iDisplayConfiguration, Members: &mDisplayConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[425]})
-var sDeleteApplicationInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[427]})
-var sDeleteStreamGroupInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[429]})
-var sDisassociateApplicationsInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[431]})
-var sDisassociateApplicationsInput_ApplicationIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationIdentifiers", ID: &i_Identifiers, Members: &m_Identifiers, Type: smithy.ShapeTypeList, Ext: &ext[432]})
-var sDisassociateApplicationsOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[434]})
-var sDisassociateApplicationsOutput_ApplicationArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArns", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &ext[435]})
-var sExportStreamSessionFilesInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[437]})
-var sExportStreamSessionFilesInput_StreamSessionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamSessionIdentifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[438]})
-var sExportStreamSessionFilesInput_OutputUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputUri", ID: &i_OutputUri, Type: smithy.ShapeTypeString, Ext: &ext[439]})
-var sGetApplicationInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[442]})
-var sGetApplicationOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &ext[444]})
-var sGetApplicationOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[445]})
-var sGetApplicationOutput_RuntimeEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuntimeEnvironment", ID: &iRuntimeEnvironment, Members: &mRuntimeEnvironment, Type: smithy.ShapeTypeStructure, Ext: &ext[446]})
-var sGetApplicationOutput_ExecutablePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutablePath", ID: &i_ExecutablePath, Type: smithy.ShapeTypeString, Ext: &ext[447]})
-var sGetApplicationOutput_ApplicationLogPaths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationLogPaths", ID: &i_FilePaths, Members: &m_FilePaths, Type: smithy.ShapeTypeList, Ext: &ext[448]})
-var sGetApplicationOutput_ApplicationLogOutputUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationLogOutputUri", ID: &i_ApplicationLogOutputUri, Type: smithy.ShapeTypeString, Ext: &ext[449]})
-var sGetApplicationOutput_ApplicationSourceUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationSourceUri", ID: &i_ApplicationSourceUri, Type: smithy.ShapeTypeString, Ext: &ext[450]})
-var sGetApplicationOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &ext[451]})
-var sGetApplicationOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iApplicationStatus, Members: &mApplicationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[452]})
-var sGetApplicationOutput_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iApplicationStatusReason, Members: &mApplicationStatusReason, Type: smithy.ShapeTypeEnum, Ext: &ext[453]})
-var sGetApplicationOutput_ReplicationStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationStatuses", ID: &i_ReplicationStatuses, Members: &m_ReplicationStatuses, Type: smithy.ShapeTypeList, Ext: &ext[454]})
-var sGetApplicationOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[455]})
-var sGetApplicationOutput_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[456]})
-var sGetApplicationOutput_AssociatedStreamGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedStreamGroups", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &ext[457]})
-var sGetStreamGroupInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[459]})
-var sGetStreamGroupOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &ext[461]})
-var sGetStreamGroupOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[462]})
-var sGetStreamGroupOutput_DefaultApplication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultApplication", ID: &iDefaultApplication, Members: &mDefaultApplication, Type: smithy.ShapeTypeStructure, Ext: &ext[463]})
-var sGetStreamGroupOutput_LocationStates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationStates", ID: &i_LocationStates, Members: &m_LocationStates, Type: smithy.ShapeTypeList, Ext: &ext[464]})
-var sGetStreamGroupOutput_StreamClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamClass", ID: &iStreamClass, Members: &mStreamClass, Type: smithy.ShapeTypeEnum, Ext: &ext[465]})
-var sGetStreamGroupOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &ext[466]})
-var sGetStreamGroupOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamGroupStatus, Members: &mStreamGroupStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[467]})
-var sGetStreamGroupOutput_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iStreamGroupStatusReason, Members: &mStreamGroupStatusReason, Type: smithy.ShapeTypeEnum, Ext: &ext[468]})
-var sGetStreamGroupOutput_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[469]})
-var sGetStreamGroupOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[470]})
-var sGetStreamGroupOutput_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[471]})
-var sGetStreamGroupOutput_AssociatedApplications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedApplications", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &ext[472]})
-var sGetStreamSessionInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[474]})
-var sGetStreamSessionInput_StreamSessionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamSessionIdentifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[475]})
-var sGetStreamSessionOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[477]})
-var sGetStreamSessionOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[478]})
-var sGetStreamSessionOutput_StreamGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamGroupId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &ext[479]})
-var sGetStreamSessionOutput_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_UserId, Type: smithy.ShapeTypeString, Ext: &ext[480]})
-var sGetStreamSessionOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamSessionStatus, Members: &mStreamSessionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[481]})
-var sGetStreamSessionOutput_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iStreamSessionStatusReason, Members: &mStreamSessionStatusReason, Type: smithy.ShapeTypeEnum, Ext: &ext[482]})
-var sGetStreamSessionOutput_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &ext[483]})
-var sGetStreamSessionOutput_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &i_LocationName, Type: smithy.ShapeTypeString, Ext: &ext[484]})
-var sGetStreamSessionOutput_SignalRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalRequest", ID: &i_SignalRequest, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[485]})
-var sGetStreamSessionOutput_SignalResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalResponse", ID: &i_SignalResponse, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[486]})
-var sGetStreamSessionOutput_ConnectionTimeoutSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionTimeoutSeconds", ID: &i_ConnectionTimeoutSeconds, Type: smithy.ShapeTypeInteger, Ext: &ext[487]})
-var sGetStreamSessionOutput_SessionLengthSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionLengthSeconds", ID: &i_SessionLengthSeconds, Type: smithy.ShapeTypeInteger, Ext: &ext[488]})
-var sGetStreamSessionOutput_AdditionalLaunchArgs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalLaunchArgs", ID: &i_GameLaunchArgList, Members: &m_GameLaunchArgList, Type: smithy.ShapeTypeList, Ext: &ext[489]})
-var sGetStreamSessionOutput_AdditionalEnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalEnvironmentVariables", ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Type: smithy.ShapeTypeMap, Ext: &ext[490]})
-var sGetStreamSessionOutput_PerformanceStatsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerformanceStatsConfiguration", ID: &iPerformanceStatsConfiguration, Members: &mPerformanceStatsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[491]})
-var sGetStreamSessionOutput_LogFileLocationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogFileLocationUri", ID: &i_FileLocationUri, Type: smithy.ShapeTypeString, Ext: &ext[492]})
-var sGetStreamSessionOutput_WebSdkProtocolUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebSdkProtocolUrl", ID: &i_WebSdkProtocolUrl, Type: smithy.ShapeTypeString, Ext: &ext[493]})
-var sGetStreamSessionOutput_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[494]})
-var sGetStreamSessionOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[495]})
-var sGetStreamSessionOutput_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[496]})
-var sGetStreamSessionOutput_ExportFilesMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportFilesMetadata", ID: &iExportFilesMetadata, Members: &mExportFilesMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[497]})
-var sGetStreamSessionOutput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[498]})
-var sGetStreamSessionOutput_DisplayConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayConfiguration", ID: &iDisplayConfiguration, Members: &mDisplayConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[499]})
-var sGetStreamUrlInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[501]})
-var sGetStreamUrlInput_StreamUrlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamUrlIdentifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[502]})
-var sGetStreamUrlOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[504]})
-var sGetStreamUrlOutput_StreamUrlId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamUrlId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &ext[505]})
-var sGetStreamUrlOutput_StreamUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamUrl", ID: &i_StreamSessionStreamUrl, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[506]})
-var sGetStreamUrlOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamUrlStatus, Members: &mStreamUrlStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[507]})
-var sGetStreamUrlOutput_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iStreamUrlStatusReason, Members: &mStreamUrlStatusReason, Type: smithy.ShapeTypeEnum, Ext: &ext[508]})
-var sGetStreamUrlOutput_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[509]})
-var sGetStreamUrlOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[510]})
-var sGetStreamUrlOutput_UsageLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageLimit", ID: &i_UsageLimit, Type: smithy.ShapeTypeInteger, Ext: &ext[511]})
-var sGetStreamUrlOutput_RemainingUses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemainingUses", ID: &i_RemainingUses, Type: smithy.ShapeTypeInteger, Ext: &ext[512]})
-var sGetStreamUrlOutput_StreamGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamGroupArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[513]})
-var sGetStreamUrlOutput_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[514]})
-var sGetStreamUrlOutput_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &ext[515]})
-var sGetStreamUrlOutput_Locations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locations", ID: &i_LocationList, Members: &m_LocationList, Type: smithy.ShapeTypeList, Ext: &ext[516]})
-var sGetStreamUrlOutput_SessionLengthSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionLengthSeconds", ID: &i_SessionLengthSeconds, Type: smithy.ShapeTypeInteger, Ext: &ext[517]})
-var sGetStreamUrlOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[518]})
-var sGetStreamUrlOutput_AdditionalLaunchArgs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalLaunchArgs", ID: &i_GameLaunchArgList, Members: &m_GameLaunchArgList, Type: smithy.ShapeTypeList, Ext: &ext[519]})
-var sGetStreamUrlOutput_AdditionalEnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalEnvironmentVariables", ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Type: smithy.ShapeTypeMap, Ext: &ext[520]})
-var sGetStreamUrlOutput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[521]})
-var sGetStreamUrlOutput_DisplayConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayConfiguration", ID: &iDisplayConfiguration, Members: &mDisplayConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[522]})
-var sGetStreamUrlOutput_StreamSessions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamSessions", ID: &i_StreamSessionSummaryList, Members: &m_StreamSessionSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[523]})
-var sListApplicationShaderCachesInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[525]})
-var sListApplicationShaderCachesOutput_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_ShaderCacheSummaryList, Members: &m_ShaderCacheSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[527]})
-var sListApplicationsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &ext[529]})
-var sListApplicationsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t41, Type: smithy.ShapeTypeInteger, Ext: &ext[530]})
-var sListApplicationsOutput_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_ApplicationSummaryList, Members: &m_ApplicationSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[532]})
-var sListApplicationsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[533]})
-var sListStreamGroupsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &ext[535]})
-var sListStreamGroupsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t41, Type: smithy.ShapeTypeInteger, Ext: &ext[536]})
-var sListStreamGroupsOutput_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_StreamGroupSummaryList, Members: &m_StreamGroupSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[538]})
-var sListStreamGroupsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[539]})
-var sListStreamSessionsByAccountInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamSessionStatus, Members: &mStreamSessionStatus, Traits: &t42, Type: smithy.ShapeTypeEnum, Ext: &ext[541]})
-var sListStreamSessionsByAccountInput_ExportFilesStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportFilesStatus", ID: &iExportFilesStatus, Members: &mExportFilesStatus, Traits: &t43, Type: smithy.ShapeTypeEnum, Ext: &ext[542]})
-var sListStreamSessionsByAccountInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &ext[543]})
-var sListStreamSessionsByAccountInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t41, Type: smithy.ShapeTypeInteger, Ext: &ext[544]})
-var sListStreamSessionsByAccountOutput_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_StreamSessionSummaryList, Members: &m_StreamSessionSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[546]})
-var sListStreamSessionsByAccountOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[547]})
-var sListStreamSessionsInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamSessionStatus, Members: &mStreamSessionStatus, Traits: &t42, Type: smithy.ShapeTypeEnum, Ext: &ext[549]})
-var sListStreamSessionsInput_ExportFilesStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportFilesStatus", ID: &iExportFilesStatus, Members: &mExportFilesStatus, Traits: &t43, Type: smithy.ShapeTypeEnum, Ext: &ext[550]})
-var sListStreamSessionsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &ext[551]})
-var sListStreamSessionsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t41, Type: smithy.ShapeTypeInteger, Ext: &ext[552]})
-var sListStreamSessionsInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[553]})
-var sListStreamSessionsOutput_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_StreamSessionSummaryList, Members: &m_StreamSessionSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[555]})
-var sListStreamSessionsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[556]})
-var sListStreamUrlsInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamUrlStatus, Members: &mStreamUrlStatus, Traits: &t42, Type: smithy.ShapeTypeEnum, Ext: &ext[558]})
-var sListStreamUrlsInput_StreamGroupIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamGroupIdentifier", ID: &i_Identifier, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &ext[559]})
-var sListStreamUrlsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &ext[560]})
-var sListStreamUrlsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t41, Type: smithy.ShapeTypeInteger, Ext: &ext[561]})
-var sListStreamUrlsOutput_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_StreamUrlSummaryList, Members: &m_StreamUrlSummaryList, Type: smithy.ShapeTypeList, Ext: &ext[563]})
-var sListStreamUrlsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[564]})
-var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[566]})
-var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[568]})
-var sRemoveStreamGroupLocationsInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[570]})
-var sRemoveStreamGroupLocationsInput_Locations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locations", ID: &i_LocationsList, Members: &m_LocationsList, Traits: &t45, Type: smithy.ShapeTypeList, Ext: &ext[571]})
-var sRevokeStreamUrlInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[573]})
-var sRevokeStreamUrlInput_StreamUrlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamUrlIdentifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[574]})
-var sRevokeStreamUrlInput_RevocationMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevocationMode", ID: &iRevocationMode, Members: &mRevocationMode, Type: smithy.ShapeTypeEnum, Ext: &ext[575]})
-var sStartStreamSessionInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[577]})
-var sStartStreamSessionInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[578]})
-var sStartStreamSessionInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[579]})
-var sStartStreamSessionInput_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &ext[580]})
-var sStartStreamSessionInput_SignalRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalRequest", ID: &i_SignalRequest, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[581]})
-var sStartStreamSessionInput_ApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationIdentifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &ext[582]})
-var sStartStreamSessionInput_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_UserId, Type: smithy.ShapeTypeString, Ext: &ext[583]})
-var sStartStreamSessionInput_Locations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locations", ID: &i_LocationList, Members: &m_LocationList, Type: smithy.ShapeTypeList, Ext: &ext[584]})
-var sStartStreamSessionInput_ConnectionTimeoutSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionTimeoutSeconds", ID: &i_ConnectionTimeoutSeconds, Type: smithy.ShapeTypeInteger, Ext: &ext[585]})
-var sStartStreamSessionInput_SessionLengthSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionLengthSeconds", ID: &i_SessionLengthSeconds, Type: smithy.ShapeTypeInteger, Ext: &ext[586]})
-var sStartStreamSessionInput_AdditionalLaunchArgs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalLaunchArgs", ID: &i_GameLaunchArgList, Members: &m_GameLaunchArgList, Type: smithy.ShapeTypeList, Ext: &ext[587]})
-var sStartStreamSessionInput_AdditionalEnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalEnvironmentVariables", ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Type: smithy.ShapeTypeMap, Ext: &ext[588]})
-var sStartStreamSessionInput_PerformanceStatsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerformanceStatsConfiguration", ID: &iPerformanceStatsConfiguration, Members: &mPerformanceStatsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[589]})
-var sStartStreamSessionInput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[590]})
-var sStartStreamSessionInput_DisplayConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayConfiguration", ID: &iDisplayConfiguration, Members: &mDisplayConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[591]})
-var sStartStreamSessionOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[593]})
-var sStartStreamSessionOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[594]})
-var sStartStreamSessionOutput_StreamGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamGroupId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &ext[595]})
-var sStartStreamSessionOutput_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_UserId, Type: smithy.ShapeTypeString, Ext: &ext[596]})
-var sStartStreamSessionOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamSessionStatus, Members: &mStreamSessionStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[597]})
-var sStartStreamSessionOutput_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iStreamSessionStatusReason, Members: &mStreamSessionStatusReason, Type: smithy.ShapeTypeEnum, Ext: &ext[598]})
-var sStartStreamSessionOutput_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &ext[599]})
-var sStartStreamSessionOutput_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &i_LocationName, Type: smithy.ShapeTypeString, Ext: &ext[600]})
-var sStartStreamSessionOutput_SignalRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalRequest", ID: &i_SignalRequest, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[601]})
-var sStartStreamSessionOutput_SignalResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalResponse", ID: &i_SignalResponse, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[602]})
-var sStartStreamSessionOutput_ConnectionTimeoutSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionTimeoutSeconds", ID: &i_ConnectionTimeoutSeconds, Type: smithy.ShapeTypeInteger, Ext: &ext[603]})
-var sStartStreamSessionOutput_SessionLengthSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionLengthSeconds", ID: &i_SessionLengthSeconds, Type: smithy.ShapeTypeInteger, Ext: &ext[604]})
-var sStartStreamSessionOutput_AdditionalLaunchArgs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalLaunchArgs", ID: &i_GameLaunchArgList, Members: &m_GameLaunchArgList, Type: smithy.ShapeTypeList, Ext: &ext[605]})
-var sStartStreamSessionOutput_AdditionalEnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalEnvironmentVariables", ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Type: smithy.ShapeTypeMap, Ext: &ext[606]})
-var sStartStreamSessionOutput_PerformanceStatsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerformanceStatsConfiguration", ID: &iPerformanceStatsConfiguration, Members: &mPerformanceStatsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[607]})
-var sStartStreamSessionOutput_LogFileLocationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogFileLocationUri", ID: &i_FileLocationUri, Type: smithy.ShapeTypeString, Ext: &ext[608]})
-var sStartStreamSessionOutput_WebSdkProtocolUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebSdkProtocolUrl", ID: &i_WebSdkProtocolUrl, Type: smithy.ShapeTypeString, Ext: &ext[609]})
-var sStartStreamSessionOutput_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[610]})
-var sStartStreamSessionOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[611]})
-var sStartStreamSessionOutput_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[612]})
-var sStartStreamSessionOutput_ExportFilesMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportFilesMetadata", ID: &iExportFilesMetadata, Members: &mExportFilesMetadata, Type: smithy.ShapeTypeStructure, Ext: &ext[613]})
-var sStartStreamSessionOutput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &ext[614]})
-var sStartStreamSessionOutput_DisplayConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayConfiguration", ID: &iDisplayConfiguration, Members: &mDisplayConfiguration, Type: smithy.ShapeTypeStructure, Ext: &ext[615]})
-var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[617]})
-var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &ext[618]})
-var sTerminateStreamSessionInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[621]})
-var sTerminateStreamSessionInput_StreamSessionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamSessionIdentifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[622]})
-var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[624]})
-var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t46, Type: smithy.ShapeTypeList, Ext: &ext[625]})
-var sUpdateApplicationInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[628]})
-var sUpdateApplicationInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[629]})
-var sUpdateApplicationInput_ApplicationLogPaths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationLogPaths", ID: &i_FilePaths, Members: &m_FilePaths, Type: smithy.ShapeTypeList, Ext: &ext[630]})
-var sUpdateApplicationInput_ApplicationLogOutputUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationLogOutputUri", ID: &i_ApplicationLogOutputUri, Type: smithy.ShapeTypeString, Ext: &ext[631]})
-var sUpdateApplicationOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &ext[633]})
-var sUpdateApplicationOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[634]})
-var sUpdateApplicationOutput_RuntimeEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuntimeEnvironment", ID: &iRuntimeEnvironment, Members: &mRuntimeEnvironment, Type: smithy.ShapeTypeStructure, Ext: &ext[635]})
-var sUpdateApplicationOutput_ExecutablePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutablePath", ID: &i_ExecutablePath, Type: smithy.ShapeTypeString, Ext: &ext[636]})
-var sUpdateApplicationOutput_ApplicationLogPaths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationLogPaths", ID: &i_FilePaths, Members: &m_FilePaths, Type: smithy.ShapeTypeList, Ext: &ext[637]})
-var sUpdateApplicationOutput_ApplicationLogOutputUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationLogOutputUri", ID: &i_ApplicationLogOutputUri, Type: smithy.ShapeTypeString, Ext: &ext[638]})
-var sUpdateApplicationOutput_ApplicationSourceUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationSourceUri", ID: &i_ApplicationSourceUri, Type: smithy.ShapeTypeString, Ext: &ext[639]})
-var sUpdateApplicationOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &ext[640]})
-var sUpdateApplicationOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iApplicationStatus, Members: &mApplicationStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[641]})
-var sUpdateApplicationOutput_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iApplicationStatusReason, Members: &mApplicationStatusReason, Type: smithy.ShapeTypeEnum, Ext: &ext[642]})
-var sUpdateApplicationOutput_ReplicationStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationStatuses", ID: &i_ReplicationStatuses, Members: &m_ReplicationStatuses, Type: smithy.ShapeTypeList, Ext: &ext[643]})
-var sUpdateApplicationOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[644]})
-var sUpdateApplicationOutput_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[645]})
-var sUpdateApplicationOutput_AssociatedStreamGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedStreamGroups", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &ext[646]})
-var sUpdateStreamGroupInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &ext[648]})
-var sUpdateStreamGroupInput_LocationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationConfigurations", ID: &i_LocationConfigurations, Members: &m_LocationConfigurations, Type: smithy.ShapeTypeList, Ext: &ext[649]})
-var sUpdateStreamGroupInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[650]})
-var sUpdateStreamGroupInput_DefaultApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultApplicationIdentifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &ext[651]})
-var sUpdateStreamGroupOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &ext[653]})
-var sUpdateStreamGroupOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &ext[654]})
-var sUpdateStreamGroupOutput_DefaultApplication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultApplication", ID: &iDefaultApplication, Members: &mDefaultApplication, Type: smithy.ShapeTypeStructure, Ext: &ext[655]})
-var sUpdateStreamGroupOutput_LocationStates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationStates", ID: &i_LocationStates, Members: &m_LocationStates, Type: smithy.ShapeTypeList, Ext: &ext[656]})
-var sUpdateStreamGroupOutput_StreamClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamClass", ID: &iStreamClass, Members: &mStreamClass, Type: smithy.ShapeTypeEnum, Ext: &ext[657]})
-var sUpdateStreamGroupOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &ext[658]})
-var sUpdateStreamGroupOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamGroupStatus, Members: &mStreamGroupStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[659]})
-var sUpdateStreamGroupOutput_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iStreamGroupStatusReason, Members: &mStreamGroupStatusReason, Type: smithy.ShapeTypeEnum, Ext: &ext[660]})
-var sUpdateStreamGroupOutput_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[661]})
-var sUpdateStreamGroupOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[662]})
-var sUpdateStreamGroupOutput_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[663]})
-var sUpdateStreamGroupOutput_AssociatedApplications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedApplications", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &ext[664]})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_Message})
+var sApplicationStatus_INITIALIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INITIALIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApplicationStatus_INITIALIZED})
+var sApplicationStatus_PROCESSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROCESSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApplicationStatus_PROCESSING})
+var sApplicationStatus_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApplicationStatus_READY})
+var sApplicationStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApplicationStatus_DELETING})
+var sApplicationStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApplicationStatus_ERROR})
+var sApplicationStatusReason_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApplicationStatusReason_INTERNAL_ERROR})
+var sApplicationStatusReason_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApplicationStatusReason_ACCESS_DENIED})
+var sApplicationStatusReason_SOURCE_MODIFIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOURCE_MODIFIED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eApplicationStatusReason_SOURCE_MODIFIED})
+var sApplicationSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eApplicationSummary_Arn})
+var sApplicationSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eApplicationSummary_Id})
+var sApplicationSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eApplicationSummary_Description})
+var sApplicationSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iApplicationStatus, Members: &mApplicationStatus, Type: smithy.ShapeTypeEnum, Ext: &eApplicationSummary_Status})
+var sApplicationSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eApplicationSummary_CreatedAt})
+var sApplicationSummary_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eApplicationSummary_LastUpdatedAt})
+var sApplicationSummary_RuntimeEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuntimeEnvironment", ID: &iRuntimeEnvironment, Members: &mRuntimeEnvironment, Type: smithy.ShapeTypeStructure, Ext: &eApplicationSummary_RuntimeEnvironment})
+var s_ApplicationSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApplicationSummary, Members: &mApplicationSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ApplicationSummaryList_member})
+var s_ArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_ArnList_member})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_Message})
+var sDefaultApplication_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eDefaultApplication_Id})
+var sDefaultApplication_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDefaultApplication_Arn})
+var sDisplayConfiguration_Resolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resolution", ID: &iResolution, Members: &mResolution, Type: smithy.ShapeTypeStructure, Ext: &eDisplayConfiguration_Resolution})
+var s_EnvironmentVariables_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_EnvironmentVariables_key})
+var s_EnvironmentVariables_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_EnvironmentVariables_value})
+var sExportFilesMetadata_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iExportFilesStatus, Members: &mExportFilesStatus, Type: smithy.ShapeTypeEnum, Ext: &eExportFilesMetadata_Status})
+var sExportFilesMetadata_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &i_ExportFilesReason, Type: smithy.ShapeTypeString, Ext: &eExportFilesMetadata_StatusReason})
+var sExportFilesMetadata_OutputUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputUri", ID: &i_OutputUri, Type: smithy.ShapeTypeString, Ext: &eExportFilesMetadata_OutputUri})
+var sExportFilesStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExportFilesStatus_SUCCEEDED})
+var sExportFilesStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExportFilesStatus_FAILED})
+var sExportFilesStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eExportFilesStatus_PENDING})
+var s_FilePaths_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FilePath, Type: smithy.ShapeTypeString, Ext: &e_FilePaths_member})
+var s_GameLaunchArgList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_GameLaunchArgList_member})
+var s_Identifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &e_Identifiers_member})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_Message})
+var s_Ipv4CidrBlockList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Ipv4CidrBlock, Type: smithy.ShapeTypeString, Ext: &e_Ipv4CidrBlockList_member})
+var sLocationConfiguration_LocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationName", ID: &i_LocationName, Type: smithy.ShapeTypeString, Ext: &eLocationConfiguration_LocationName})
+var sLocationConfiguration_AlwaysOnCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlwaysOnCapacity", ID: &i_AlwaysOnCapacity, Type: smithy.ShapeTypeInteger, Ext: &eLocationConfiguration_AlwaysOnCapacity})
+var sLocationConfiguration_OnDemandCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnDemandCapacity", ID: &i_OnDemandCapacity, Type: smithy.ShapeTypeInteger, Ext: &eLocationConfiguration_OnDemandCapacity})
+var sLocationConfiguration_TargetIdleCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetIdleCapacity", ID: &i_TargetIdleCapacity, Type: smithy.ShapeTypeInteger, Ext: &eLocationConfiguration_TargetIdleCapacity})
+var sLocationConfiguration_MaximumCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumCapacity", ID: &i_MaximumCapacity, Type: smithy.ShapeTypeInteger, Ext: &eLocationConfiguration_MaximumCapacity})
+var sLocationConfiguration_VpcTransitConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcTransitConfiguration", ID: &iVpcTransitConfiguration, Members: &mVpcTransitConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eLocationConfiguration_VpcTransitConfiguration})
+var s_LocationConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLocationConfiguration, Members: &mLocationConfiguration, Type: smithy.ShapeTypeStructure, Ext: &e_LocationConfigurations_member})
+var s_LocationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LocationName, Type: smithy.ShapeTypeString, Ext: &e_LocationList_member})
+var s_LocationsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_LocationsList_member})
+var sLocationState_LocationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationName", ID: &i_LocationName, Type: smithy.ShapeTypeString, Ext: &eLocationState_LocationName})
+var sLocationState_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamGroupLocationStatus, Members: &mStreamGroupLocationStatus, Type: smithy.ShapeTypeEnum, Ext: &eLocationState_Status})
+var sLocationState_AlwaysOnCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlwaysOnCapacity", ID: &i_AlwaysOnCapacity, Type: smithy.ShapeTypeInteger, Ext: &eLocationState_AlwaysOnCapacity})
+var sLocationState_OnDemandCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnDemandCapacity", ID: &i_OnDemandCapacity, Type: smithy.ShapeTypeInteger, Ext: &eLocationState_OnDemandCapacity})
+var sLocationState_TargetIdleCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetIdleCapacity", ID: &i_TargetIdleCapacity, Type: smithy.ShapeTypeInteger, Ext: &eLocationState_TargetIdleCapacity})
+var sLocationState_MaximumCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumCapacity", ID: &i_MaximumCapacity, Type: smithy.ShapeTypeInteger, Ext: &eLocationState_MaximumCapacity})
+var sLocationState_RequestedCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestedCapacity", ID: &i_CapacityValue, Type: smithy.ShapeTypeInteger, Ext: &eLocationState_RequestedCapacity})
+var sLocationState_AllocatedCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllocatedCapacity", ID: &i_CapacityValue, Type: smithy.ShapeTypeInteger, Ext: &eLocationState_AllocatedCapacity})
+var sLocationState_IdleCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdleCapacity", ID: &i_CapacityValue, Type: smithy.ShapeTypeInteger, Ext: &eLocationState_IdleCapacity})
+var sLocationState_InternalVpcIpv4CidrBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternalVpcIpv4CidrBlock", ID: &i_Ipv4CidrBlock, Type: smithy.ShapeTypeString, Ext: &eLocationState_InternalVpcIpv4CidrBlock})
+var sLocationState_VpcTransitConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcTransitConfiguration", ID: &iVpcTransitConfigurationResponse, Members: &mVpcTransitConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eLocationState_VpcTransitConfiguration})
+var s_LocationStates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLocationState, Members: &mLocationState, Type: smithy.ShapeTypeStructure, Ext: &e_LocationStates_member})
+var sPerformanceStatsConfiguration_SharedWithClient = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedWithClient", ID: &pBoolean, Type: smithy.ShapeTypeBoolean, Ext: &ePerformanceStatsConfiguration_SharedWithClient})
+var sProtocol_WEBRTC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEBRTC", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eProtocol_WEBRTC})
+var sReplicationStatus_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &i_LocationName, Type: smithy.ShapeTypeString, Ext: &eReplicationStatus_Location})
+var sReplicationStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iReplicationStatusType, Members: &mReplicationStatusType, Type: smithy.ShapeTypeEnum, Ext: &eReplicationStatus_Status})
+var s_ReplicationStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReplicationStatus, Members: &mReplicationStatus, Type: smithy.ShapeTypeStructure, Ext: &e_ReplicationStatuses_member})
+var sReplicationStatusType_REPLICATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPLICATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReplicationStatusType_REPLICATING})
+var sReplicationStatusType_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eReplicationStatusType_COMPLETED})
+var sResolution_Width = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Width", ID: &i_ResolutionWidth, Type: smithy.ShapeTypeInteger, Ext: &eResolution_Width})
+var sResolution_Height = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Height", ID: &i_ResolutionHeight, Type: smithy.ShapeTypeInteger, Ext: &eResolution_Height})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_Message})
+var sRevocationMode_REVOKE_URL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVOKE_URL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevocationMode_REVOKE_URL})
+var sRevocationMode_REVOKE_AND_TERMINATE_SESSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVOKE_AND_TERMINATE_SESSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRevocationMode_REVOKE_AND_TERMINATE_SESSIONS})
+var sRuntimeEnvironment_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRuntimeEnvironmentType, Members: &mRuntimeEnvironmentType, Type: smithy.ShapeTypeEnum, Ext: &eRuntimeEnvironment_Type})
+var sRuntimeEnvironment_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_RuntimeEnvironmentVersion, Type: smithy.ShapeTypeString, Ext: &eRuntimeEnvironment_Version})
+var sRuntimeEnvironmentType_PROTON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROTON", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuntimeEnvironmentType_PROTON})
+var sRuntimeEnvironmentType_WINDOWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuntimeEnvironmentType_WINDOWS})
+var sRuntimeEnvironmentType_UBUNTU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UBUNTU", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRuntimeEnvironmentType_UBUNTU})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eServiceQuotaExceededException_Message})
+var sShaderCacheStatus_INITIALIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INITIALIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShaderCacheStatus_INITIALIZED})
+var sShaderCacheStatus_PROCESSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROCESSING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShaderCacheStatus_PROCESSING})
+var sShaderCacheStatus_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShaderCacheStatus_READY})
+var sShaderCacheStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShaderCacheStatus_DELETING})
+var sShaderCacheStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eShaderCacheStatus_ERROR})
+var sShaderCacheSummary_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eShaderCacheSummary_Identifier})
+var sShaderCacheSummary_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eShaderCacheSummary_ApplicationArn})
+var sShaderCacheSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iShaderCacheStatus, Members: &mShaderCacheStatus, Type: smithy.ShapeTypeEnum, Ext: &eShaderCacheSummary_Status})
+var sShaderCacheSummary_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eShaderCacheSummary_LastUpdatedAt})
+var sShaderCacheSummary_StorageBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageBytes", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eShaderCacheSummary_StorageBytes})
+var sShaderCacheSummary_AssociatedStreamGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedStreamGroups", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &eShaderCacheSummary_AssociatedStreamGroups})
+var s_ShaderCacheSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iShaderCacheSummary, Members: &mShaderCacheSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ShaderCacheSummaryList_member})
+var sStreamClass_gen4n_high = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen4n_high", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamClass_gen4n_high})
+var sStreamClass_gen4n_ultra = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen4n_ultra", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamClass_gen4n_ultra})
+var sStreamClass_gen4n_win2022 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen4n_win2022", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamClass_gen4n_win2022})
+var sStreamClass_gen5n_high = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen5n_high", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamClass_gen5n_high})
+var sStreamClass_gen5n_ultra = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen5n_ultra", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamClass_gen5n_ultra})
+var sStreamClass_gen5n_win2022 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen5n_win2022", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamClass_gen5n_win2022})
+var sStreamClass_gen6n_small = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen6n_small", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamClass_gen6n_small})
+var sStreamClass_gen6n_medium = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen6n_medium", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamClass_gen6n_medium})
+var sStreamClass_gen6n_high = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen6n_high", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamClass_gen6n_high})
+var sStreamClass_gen6n_ultra = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen6n_ultra", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamClass_gen6n_ultra})
+var sStreamClass_gen6n_ultra_win2022 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen6n_ultra_win2022", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamClass_gen6n_ultra_win2022})
+var sStreamClass_gen6n_pro = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen6n_pro", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamClass_gen6n_pro})
+var sStreamClass_gen6n_pro_win2022 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen6n_pro_win2022", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamClass_gen6n_pro_win2022})
+var sStreamClass_gen6n_small_win2022 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen6n_small_win2022", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamClass_gen6n_small_win2022})
+var sStreamClass_gen6n_medium_win2022 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen6n_medium_win2022", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamClass_gen6n_medium_win2022})
+var sStreamClass_gen6e_pro = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen6e_pro", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamClass_gen6e_pro})
+var sStreamClass_gen6e_pro_win2022 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gen6e_pro_win2022", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamClass_gen6e_pro_win2022})
+var sStreamGroupLocationStatus_ACTIVATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamGroupLocationStatus_ACTIVATING})
+var sStreamGroupLocationStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamGroupLocationStatus_ACTIVE})
+var sStreamGroupLocationStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamGroupLocationStatus_ERROR})
+var sStreamGroupLocationStatus_REMOVING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REMOVING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamGroupLocationStatus_REMOVING})
+var sStreamGroupStatus_ACTIVATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamGroupStatus_ACTIVATING})
+var sStreamGroupStatus_UPDATING_LOCATIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING_LOCATIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamGroupStatus_UPDATING_LOCATIONS})
+var sStreamGroupStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamGroupStatus_ACTIVE})
+var sStreamGroupStatus_ACTIVE_WITH_ERRORS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE_WITH_ERRORS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamGroupStatus_ACTIVE_WITH_ERRORS})
+var sStreamGroupStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamGroupStatus_ERROR})
+var sStreamGroupStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamGroupStatus_DELETING})
+var sStreamGroupStatus_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamGroupStatus_EXPIRED})
+var sStreamGroupStatusReason_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamGroupStatusReason_INTERNAL_ERROR})
+var sStreamGroupStatusReason_NO_AVAILABLE_INSTANCES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_AVAILABLE_INSTANCES", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamGroupStatusReason_NO_AVAILABLE_INSTANCES})
+var sStreamGroupSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eStreamGroupSummary_Arn})
+var sStreamGroupSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eStreamGroupSummary_Id})
+var sStreamGroupSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eStreamGroupSummary_Description})
+var sStreamGroupSummary_DefaultApplication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultApplication", ID: &iDefaultApplication, Members: &mDefaultApplication, Type: smithy.ShapeTypeStructure, Ext: &eStreamGroupSummary_DefaultApplication})
+var sStreamGroupSummary_StreamClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamClass", ID: &iStreamClass, Members: &mStreamClass, Type: smithy.ShapeTypeEnum, Ext: &eStreamGroupSummary_StreamClass})
+var sStreamGroupSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamGroupStatus, Members: &mStreamGroupStatus, Type: smithy.ShapeTypeEnum, Ext: &eStreamGroupSummary_Status})
+var sStreamGroupSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eStreamGroupSummary_CreatedAt})
+var sStreamGroupSummary_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eStreamGroupSummary_LastUpdatedAt})
+var sStreamGroupSummary_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eStreamGroupSummary_ExpiresAt})
+var s_StreamGroupSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStreamGroupSummary, Members: &mStreamGroupSummary, Type: smithy.ShapeTypeStructure, Ext: &e_StreamGroupSummaryList_member})
+var sStreamSessionAccessNotReadyException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eStreamSessionAccessNotReadyException_Message})
+var sStreamSessionStatus_ACTIVATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamSessionStatus_ACTIVATING})
+var sStreamSessionStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamSessionStatus_ACTIVE})
+var sStreamSessionStatus_CONNECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONNECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamSessionStatus_CONNECTED})
+var sStreamSessionStatus_PENDING_CLIENT_RECONNECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_CLIENT_RECONNECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamSessionStatus_PENDING_CLIENT_RECONNECTION})
+var sStreamSessionStatus_RECONNECTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECONNECTING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamSessionStatus_RECONNECTING})
+var sStreamSessionStatus_TERMINATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINATING", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamSessionStatus_TERMINATING})
+var sStreamSessionStatus_TERMINATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamSessionStatus_TERMINATED})
+var sStreamSessionStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamSessionStatus_ERROR})
+var sStreamSessionStatusReason_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamSessionStatusReason_INTERNAL_ERROR})
+var sStreamSessionStatusReason_INVALID_SIGNAL_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_SIGNAL_REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamSessionStatusReason_INVALID_SIGNAL_REQUEST})
+var sStreamSessionStatusReason_PLACEMENT_TIMEOUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PLACEMENT_TIMEOUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamSessionStatusReason_PLACEMENT_TIMEOUT})
+var sStreamSessionStatusReason_APP_LOG_S3_DESTINATION_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APP_LOG_S3_DESTINATION_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamSessionStatusReason_APP_LOG_S3_DESTINATION_ERROR})
+var sStreamSessionStatusReason_ASSUME_ROLE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASSUME_ROLE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamSessionStatusReason_ASSUME_ROLE_FAILED})
+var sStreamSessionStatusReason_APPLICATION_EXIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPLICATION_EXIT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamSessionStatusReason_APPLICATION_EXIT})
+var sStreamSessionStatusReason_CONNECTION_TIMEOUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONNECTION_TIMEOUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamSessionStatusReason_CONNECTION_TIMEOUT})
+var sStreamSessionStatusReason_RECONNECTION_TIMEOUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECONNECTION_TIMEOUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamSessionStatusReason_RECONNECTION_TIMEOUT})
+var sStreamSessionStatusReason_MAX_SESSION_LENGTH_TIMEOUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAX_SESSION_LENGTH_TIMEOUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamSessionStatusReason_MAX_SESSION_LENGTH_TIMEOUT})
+var sStreamSessionStatusReason_IDLE_TIMEOUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IDLE_TIMEOUT", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamSessionStatusReason_IDLE_TIMEOUT})
+var sStreamSessionStatusReason_API_TERMINATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "API_TERMINATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamSessionStatusReason_API_TERMINATED})
+var sStreamSessionSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eStreamSessionSummary_Arn})
+var sStreamSessionSummary_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_UserId, Type: smithy.ShapeTypeString, Ext: &eStreamSessionSummary_UserId})
+var sStreamSessionSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamSessionStatus, Members: &mStreamSessionStatus, Type: smithy.ShapeTypeEnum, Ext: &eStreamSessionSummary_Status})
+var sStreamSessionSummary_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iStreamSessionStatusReason, Members: &mStreamSessionStatusReason, Type: smithy.ShapeTypeEnum, Ext: &eStreamSessionSummary_StatusReason})
+var sStreamSessionSummary_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &eStreamSessionSummary_Protocol})
+var sStreamSessionSummary_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eStreamSessionSummary_LastUpdatedAt})
+var sStreamSessionSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eStreamSessionSummary_CreatedAt})
+var sStreamSessionSummary_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eStreamSessionSummary_ApplicationArn})
+var sStreamSessionSummary_ExportFilesMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportFilesMetadata", ID: &iExportFilesMetadata, Members: &mExportFilesMetadata, Type: smithy.ShapeTypeStructure, Ext: &eStreamSessionSummary_ExportFilesMetadata})
+var sStreamSessionSummary_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &i_LocationName, Type: smithy.ShapeTypeString, Ext: &eStreamSessionSummary_Location})
+var sStreamSessionSummary_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eStreamSessionSummary_RoleArn})
+var s_StreamSessionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStreamSessionSummary, Members: &mStreamSessionSummary, Type: smithy.ShapeTypeStructure, Ext: &e_StreamSessionSummaryList_member})
+var sStreamUrlStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamUrlStatus_ACTIVE})
+var sStreamUrlStatus_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamUrlStatus_EXPIRED})
+var sStreamUrlStatus_REVOKED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVOKED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamUrlStatus_REVOKED})
+var sStreamUrlStatus_LIMIT_REACHED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LIMIT_REACHED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamUrlStatus_LIMIT_REACHED})
+var sStreamUrlStatusReason_USER_REVOKED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER_REVOKED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamUrlStatusReason_USER_REVOKED})
+var sStreamUrlStatusReason_REVOKED_AND_TERMINATING_SESSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVOKED_AND_TERMINATING_SESSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamUrlStatusReason_REVOKED_AND_TERMINATING_SESSIONS})
+var sStreamUrlStatusReason_REVOKED_AND_SESSIONS_TERMINATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVOKED_AND_SESSIONS_TERMINATED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamUrlStatusReason_REVOKED_AND_SESSIONS_TERMINATED})
+var sStreamUrlStatusReason_STREAM_GROUP_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STREAM_GROUP_DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamUrlStatusReason_STREAM_GROUP_DELETED})
+var sStreamUrlStatusReason_APPLICATION_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPLICATION_DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStreamUrlStatusReason_APPLICATION_DELETED})
+var sStreamUrlSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eStreamUrlSummary_Arn})
+var sStreamUrlSummary_StreamUrlId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamUrlId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eStreamUrlSummary_StreamUrlId})
+var sStreamUrlSummary_StreamUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamUrl", ID: &i_StreamSessionStreamUrl, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eStreamUrlSummary_StreamUrl})
+var sStreamUrlSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamUrlStatus, Members: &mStreamUrlStatus, Type: smithy.ShapeTypeEnum, Ext: &eStreamUrlSummary_Status})
+var sStreamUrlSummary_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iStreamUrlStatusReason, Members: &mStreamUrlStatusReason, Type: smithy.ShapeTypeEnum, Ext: &eStreamUrlSummary_StatusReason})
+var sStreamUrlSummary_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eStreamUrlSummary_ExpiresAt})
+var sStreamUrlSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eStreamUrlSummary_CreatedAt})
+var sStreamUrlSummary_UsageLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageLimit", ID: &i_UsageLimit, Type: smithy.ShapeTypeInteger, Ext: &eStreamUrlSummary_UsageLimit})
+var sStreamUrlSummary_RemainingUses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemainingUses", ID: &i_RemainingUses, Type: smithy.ShapeTypeInteger, Ext: &eStreamUrlSummary_RemainingUses})
+var sStreamUrlSummary_StreamGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamGroupArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eStreamUrlSummary_StreamGroupArn})
+var sStreamUrlSummary_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eStreamUrlSummary_ApplicationArn})
+var sStreamUrlSummary_SessionLengthSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionLengthSeconds", ID: &i_SessionLengthSeconds, Type: smithy.ShapeTypeInteger, Ext: &eStreamUrlSummary_SessionLengthSeconds})
+var sStreamUrlSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eStreamUrlSummary_Description})
+var s_StreamUrlSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStreamUrlSummary, Members: &mStreamUrlSummary, Type: smithy.ShapeTypeStructure, Ext: &e_StreamUrlSummaryList_member})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_Tags_key})
+var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_Tags_value})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_Message})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_Message})
+var sVpcTransitConfiguration_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &eVpcTransitConfiguration_VpcId})
+var sVpcTransitConfiguration_Ipv4CidrBlocks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ipv4CidrBlocks", ID: &i_Ipv4CidrBlockList, Members: &m_Ipv4CidrBlockList, Type: smithy.ShapeTypeList, Ext: &eVpcTransitConfiguration_Ipv4CidrBlocks})
+var sVpcTransitConfigurationResponse_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString, Ext: &eVpcTransitConfigurationResponse_VpcId})
+var sVpcTransitConfigurationResponse_Ipv4CidrBlocks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ipv4CidrBlocks", ID: &i_Ipv4CidrBlockList, Members: &m_Ipv4CidrBlockList, Type: smithy.ShapeTypeList, Ext: &eVpcTransitConfigurationResponse_Ipv4CidrBlocks})
+var sVpcTransitConfigurationResponse_TransitGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eVpcTransitConfigurationResponse_TransitGatewayId})
+var sVpcTransitConfigurationResponse_TransitGatewayResourceShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayResourceShareArn", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eVpcTransitConfigurationResponse_TransitGatewayResourceShareArn})
+var sAddStreamGroupLocationsInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eAddStreamGroupLocationsInput_Identifier})
+var sAddStreamGroupLocationsInput_LocationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationConfigurations", ID: &i_LocationConfigurations, Members: &m_LocationConfigurations, Type: smithy.ShapeTypeList, Ext: &eAddStreamGroupLocationsInput_LocationConfigurations})
+var sAddStreamGroupLocationsOutput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eAddStreamGroupLocationsOutput_Identifier})
+var sAddStreamGroupLocationsOutput_Locations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locations", ID: &i_LocationStates, Members: &m_LocationStates, Type: smithy.ShapeTypeList, Ext: &eAddStreamGroupLocationsOutput_Locations})
+var sAssociateApplicationsInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eAssociateApplicationsInput_Identifier})
+var sAssociateApplicationsInput_ApplicationIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationIdentifiers", ID: &i_Identifiers, Members: &m_Identifiers, Type: smithy.ShapeTypeList, Ext: &eAssociateApplicationsInput_ApplicationIdentifiers})
+var sAssociateApplicationsOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eAssociateApplicationsOutput_Arn})
+var sAssociateApplicationsOutput_ApplicationArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArns", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &eAssociateApplicationsOutput_ApplicationArns})
+var sCreateApplicationInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationInput_Description})
+var sCreateApplicationInput_RuntimeEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuntimeEnvironment", ID: &iRuntimeEnvironment, Members: &mRuntimeEnvironment, Type: smithy.ShapeTypeStructure, Ext: &eCreateApplicationInput_RuntimeEnvironment})
+var sCreateApplicationInput_ExecutablePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutablePath", ID: &i_ExecutablePath, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationInput_ExecutablePath})
+var sCreateApplicationInput_ApplicationSourceUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationSourceUri", ID: &i_ApplicationSourceUri, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationInput_ApplicationSourceUri})
+var sCreateApplicationInput_ApplicationLogPaths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationLogPaths", ID: &i_FilePaths, Members: &m_FilePaths, Type: smithy.ShapeTypeList, Ext: &eCreateApplicationInput_ApplicationLogPaths})
+var sCreateApplicationInput_ApplicationLogOutputUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationLogOutputUri", ID: &i_ApplicationLogOutputUri, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationInput_ApplicationLogOutputUri})
+var sCreateApplicationInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateApplicationInput_Tags})
+var sCreateApplicationInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationInput_ClientToken})
+var sCreateApplicationOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationOutput_Arn})
+var sCreateApplicationOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationOutput_Description})
+var sCreateApplicationOutput_RuntimeEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuntimeEnvironment", ID: &iRuntimeEnvironment, Members: &mRuntimeEnvironment, Type: smithy.ShapeTypeStructure, Ext: &eCreateApplicationOutput_RuntimeEnvironment})
+var sCreateApplicationOutput_ExecutablePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutablePath", ID: &i_ExecutablePath, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationOutput_ExecutablePath})
+var sCreateApplicationOutput_ApplicationLogPaths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationLogPaths", ID: &i_FilePaths, Members: &m_FilePaths, Type: smithy.ShapeTypeList, Ext: &eCreateApplicationOutput_ApplicationLogPaths})
+var sCreateApplicationOutput_ApplicationLogOutputUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationLogOutputUri", ID: &i_ApplicationLogOutputUri, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationOutput_ApplicationLogOutputUri})
+var sCreateApplicationOutput_ApplicationSourceUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationSourceUri", ID: &i_ApplicationSourceUri, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationOutput_ApplicationSourceUri})
+var sCreateApplicationOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eCreateApplicationOutput_Id})
+var sCreateApplicationOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iApplicationStatus, Members: &mApplicationStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateApplicationOutput_Status})
+var sCreateApplicationOutput_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iApplicationStatusReason, Members: &mApplicationStatusReason, Type: smithy.ShapeTypeEnum, Ext: &eCreateApplicationOutput_StatusReason})
+var sCreateApplicationOutput_ReplicationStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationStatuses", ID: &i_ReplicationStatuses, Members: &m_ReplicationStatuses, Type: smithy.ShapeTypeList, Ext: &eCreateApplicationOutput_ReplicationStatuses})
+var sCreateApplicationOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateApplicationOutput_CreatedAt})
+var sCreateApplicationOutput_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateApplicationOutput_LastUpdatedAt})
+var sCreateApplicationOutput_AssociatedStreamGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedStreamGroups", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &eCreateApplicationOutput_AssociatedStreamGroups})
+var sCreateStreamGroupInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateStreamGroupInput_Description})
+var sCreateStreamGroupInput_StreamClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamClass", ID: &iStreamClass, Members: &mStreamClass, Type: smithy.ShapeTypeEnum, Ext: &eCreateStreamGroupInput_StreamClass})
+var sCreateStreamGroupInput_DefaultApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultApplicationIdentifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eCreateStreamGroupInput_DefaultApplicationIdentifier})
+var sCreateStreamGroupInput_LocationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationConfigurations", ID: &i_LocationConfigurations, Members: &m_LocationConfigurations, Type: smithy.ShapeTypeList, Ext: &eCreateStreamGroupInput_LocationConfigurations})
+var sCreateStreamGroupInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eCreateStreamGroupInput_Tags})
+var sCreateStreamGroupInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateStreamGroupInput_ClientToken})
+var sCreateStreamGroupOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eCreateStreamGroupOutput_Arn})
+var sCreateStreamGroupOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateStreamGroupOutput_Description})
+var sCreateStreamGroupOutput_DefaultApplication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultApplication", ID: &iDefaultApplication, Members: &mDefaultApplication, Type: smithy.ShapeTypeStructure, Ext: &eCreateStreamGroupOutput_DefaultApplication})
+var sCreateStreamGroupOutput_LocationStates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationStates", ID: &i_LocationStates, Members: &m_LocationStates, Type: smithy.ShapeTypeList, Ext: &eCreateStreamGroupOutput_LocationStates})
+var sCreateStreamGroupOutput_StreamClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamClass", ID: &iStreamClass, Members: &mStreamClass, Type: smithy.ShapeTypeEnum, Ext: &eCreateStreamGroupOutput_StreamClass})
+var sCreateStreamGroupOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eCreateStreamGroupOutput_Id})
+var sCreateStreamGroupOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamGroupStatus, Members: &mStreamGroupStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateStreamGroupOutput_Status})
+var sCreateStreamGroupOutput_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iStreamGroupStatusReason, Members: &mStreamGroupStatusReason, Type: smithy.ShapeTypeEnum, Ext: &eCreateStreamGroupOutput_StatusReason})
+var sCreateStreamGroupOutput_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateStreamGroupOutput_LastUpdatedAt})
+var sCreateStreamGroupOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateStreamGroupOutput_CreatedAt})
+var sCreateStreamGroupOutput_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateStreamGroupOutput_ExpiresAt})
+var sCreateStreamGroupOutput_AssociatedApplications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedApplications", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &eCreateStreamGroupOutput_AssociatedApplications})
+var sCreateStreamSessionAdminShellInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eCreateStreamSessionAdminShellInput_Identifier})
+var sCreateStreamSessionAdminShellInput_StreamSessionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamSessionIdentifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eCreateStreamSessionAdminShellInput_StreamSessionIdentifier})
+var sCreateStreamSessionAdminShellOutput_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_SessionId, Type: smithy.ShapeTypeString, Ext: &eCreateStreamSessionAdminShellOutput_SessionId})
+var sCreateStreamSessionAdminShellOutput_StreamUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamUrl", ID: &i_StreamUrl, Type: smithy.ShapeTypeString, Ext: &eCreateStreamSessionAdminShellOutput_StreamUrl})
+var sCreateStreamSessionAdminShellOutput_TokenValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TokenValue", ID: &i_TokenValue, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eCreateStreamSessionAdminShellOutput_TokenValue})
+var sCreateStreamSessionConnectionInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateStreamSessionConnectionInput_ClientToken})
+var sCreateStreamSessionConnectionInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eCreateStreamSessionConnectionInput_Identifier})
+var sCreateStreamSessionConnectionInput_StreamSessionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamSessionIdentifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eCreateStreamSessionConnectionInput_StreamSessionIdentifier})
+var sCreateStreamSessionConnectionInput_SignalRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalRequest", ID: &i_SignalRequest, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eCreateStreamSessionConnectionInput_SignalRequest})
+var sCreateStreamSessionConnectionOutput_SignalResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalResponse", ID: &i_SignalResponse, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eCreateStreamSessionConnectionOutput_SignalResponse})
+var sCreateStreamUrlInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eCreateStreamUrlInput_Identifier})
+var sCreateStreamUrlInput_ApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationIdentifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eCreateStreamUrlInput_ApplicationIdentifier})
+var sCreateStreamUrlInput_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &eCreateStreamUrlInput_Protocol})
+var sCreateStreamUrlInput_UrlExpiresAfterMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UrlExpiresAfterMinutes", ID: &i_UrlExpiresAfterMinutes, Type: smithy.ShapeTypeInteger, Ext: &eCreateStreamUrlInput_UrlExpiresAfterMinutes})
+var sCreateStreamUrlInput_UsageLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageLimit", ID: &i_UsageLimit, Type: smithy.ShapeTypeInteger, Ext: &eCreateStreamUrlInput_UsageLimit})
+var sCreateStreamUrlInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateStreamUrlInput_Description})
+var sCreateStreamUrlInput_Locations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locations", ID: &i_LocationList, Members: &m_LocationList, Type: smithy.ShapeTypeList, Ext: &eCreateStreamUrlInput_Locations})
+var sCreateStreamUrlInput_SessionLengthSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionLengthSeconds", ID: &i_SessionLengthSeconds, Type: smithy.ShapeTypeInteger, Ext: &eCreateStreamUrlInput_SessionLengthSeconds})
+var sCreateStreamUrlInput_AdditionalLaunchArgs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalLaunchArgs", ID: &i_GameLaunchArgList, Members: &m_GameLaunchArgList, Type: smithy.ShapeTypeList, Ext: &eCreateStreamUrlInput_AdditionalLaunchArgs})
+var sCreateStreamUrlInput_AdditionalEnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalEnvironmentVariables", ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Type: smithy.ShapeTypeMap, Ext: &eCreateStreamUrlInput_AdditionalEnvironmentVariables})
+var sCreateStreamUrlInput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eCreateStreamUrlInput_RoleArn})
+var sCreateStreamUrlInput_DisplayConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayConfiguration", ID: &iDisplayConfiguration, Members: &mDisplayConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateStreamUrlInput_DisplayConfiguration})
+var sCreateStreamUrlInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateStreamUrlInput_ClientToken})
+var sCreateStreamUrlOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateStreamUrlOutput_Arn})
+var sCreateStreamUrlOutput_StreamUrlId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamUrlId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eCreateStreamUrlOutput_StreamUrlId})
+var sCreateStreamUrlOutput_StreamUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamUrl", ID: &i_StreamSessionStreamUrl, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eCreateStreamUrlOutput_StreamUrl})
+var sCreateStreamUrlOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamUrlStatus, Members: &mStreamUrlStatus, Type: smithy.ShapeTypeEnum, Ext: &eCreateStreamUrlOutput_Status})
+var sCreateStreamUrlOutput_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iStreamUrlStatusReason, Members: &mStreamUrlStatusReason, Type: smithy.ShapeTypeEnum, Ext: &eCreateStreamUrlOutput_StatusReason})
+var sCreateStreamUrlOutput_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateStreamUrlOutput_ExpiresAt})
+var sCreateStreamUrlOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eCreateStreamUrlOutput_CreatedAt})
+var sCreateStreamUrlOutput_UsageLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageLimit", ID: &i_UsageLimit, Type: smithy.ShapeTypeInteger, Ext: &eCreateStreamUrlOutput_UsageLimit})
+var sCreateStreamUrlOutput_RemainingUses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemainingUses", ID: &i_RemainingUses, Type: smithy.ShapeTypeInteger, Ext: &eCreateStreamUrlOutput_RemainingUses})
+var sCreateStreamUrlOutput_StreamGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamGroupArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateStreamUrlOutput_StreamGroupArn})
+var sCreateStreamUrlOutput_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eCreateStreamUrlOutput_ApplicationArn})
+var sCreateStreamUrlOutput_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &eCreateStreamUrlOutput_Protocol})
+var sCreateStreamUrlOutput_Locations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locations", ID: &i_LocationList, Members: &m_LocationList, Type: smithy.ShapeTypeList, Ext: &eCreateStreamUrlOutput_Locations})
+var sCreateStreamUrlOutput_SessionLengthSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionLengthSeconds", ID: &i_SessionLengthSeconds, Type: smithy.ShapeTypeInteger, Ext: &eCreateStreamUrlOutput_SessionLengthSeconds})
+var sCreateStreamUrlOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eCreateStreamUrlOutput_Description})
+var sCreateStreamUrlOutput_AdditionalLaunchArgs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalLaunchArgs", ID: &i_GameLaunchArgList, Members: &m_GameLaunchArgList, Type: smithy.ShapeTypeList, Ext: &eCreateStreamUrlOutput_AdditionalLaunchArgs})
+var sCreateStreamUrlOutput_AdditionalEnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalEnvironmentVariables", ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Type: smithy.ShapeTypeMap, Ext: &eCreateStreamUrlOutput_AdditionalEnvironmentVariables})
+var sCreateStreamUrlOutput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eCreateStreamUrlOutput_RoleArn})
+var sCreateStreamUrlOutput_DisplayConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayConfiguration", ID: &iDisplayConfiguration, Members: &mDisplayConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eCreateStreamUrlOutput_DisplayConfiguration})
+var sDeleteApplicationInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eDeleteApplicationInput_Identifier})
+var sDeleteStreamGroupInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eDeleteStreamGroupInput_Identifier})
+var sDisassociateApplicationsInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eDisassociateApplicationsInput_Identifier})
+var sDisassociateApplicationsInput_ApplicationIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationIdentifiers", ID: &i_Identifiers, Members: &m_Identifiers, Type: smithy.ShapeTypeList, Ext: &eDisassociateApplicationsInput_ApplicationIdentifiers})
+var sDisassociateApplicationsOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eDisassociateApplicationsOutput_Arn})
+var sDisassociateApplicationsOutput_ApplicationArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArns", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &eDisassociateApplicationsOutput_ApplicationArns})
+var sExportStreamSessionFilesInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eExportStreamSessionFilesInput_Identifier})
+var sExportStreamSessionFilesInput_StreamSessionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamSessionIdentifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eExportStreamSessionFilesInput_StreamSessionIdentifier})
+var sExportStreamSessionFilesInput_OutputUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputUri", ID: &i_OutputUri, Type: smithy.ShapeTypeString, Ext: &eExportStreamSessionFilesInput_OutputUri})
+var sGetApplicationInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eGetApplicationInput_Identifier})
+var sGetApplicationOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eGetApplicationOutput_Arn})
+var sGetApplicationOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eGetApplicationOutput_Description})
+var sGetApplicationOutput_RuntimeEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuntimeEnvironment", ID: &iRuntimeEnvironment, Members: &mRuntimeEnvironment, Type: smithy.ShapeTypeStructure, Ext: &eGetApplicationOutput_RuntimeEnvironment})
+var sGetApplicationOutput_ExecutablePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutablePath", ID: &i_ExecutablePath, Type: smithy.ShapeTypeString, Ext: &eGetApplicationOutput_ExecutablePath})
+var sGetApplicationOutput_ApplicationLogPaths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationLogPaths", ID: &i_FilePaths, Members: &m_FilePaths, Type: smithy.ShapeTypeList, Ext: &eGetApplicationOutput_ApplicationLogPaths})
+var sGetApplicationOutput_ApplicationLogOutputUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationLogOutputUri", ID: &i_ApplicationLogOutputUri, Type: smithy.ShapeTypeString, Ext: &eGetApplicationOutput_ApplicationLogOutputUri})
+var sGetApplicationOutput_ApplicationSourceUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationSourceUri", ID: &i_ApplicationSourceUri, Type: smithy.ShapeTypeString, Ext: &eGetApplicationOutput_ApplicationSourceUri})
+var sGetApplicationOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eGetApplicationOutput_Id})
+var sGetApplicationOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iApplicationStatus, Members: &mApplicationStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetApplicationOutput_Status})
+var sGetApplicationOutput_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iApplicationStatusReason, Members: &mApplicationStatusReason, Type: smithy.ShapeTypeEnum, Ext: &eGetApplicationOutput_StatusReason})
+var sGetApplicationOutput_ReplicationStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationStatuses", ID: &i_ReplicationStatuses, Members: &m_ReplicationStatuses, Type: smithy.ShapeTypeList, Ext: &eGetApplicationOutput_ReplicationStatuses})
+var sGetApplicationOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetApplicationOutput_CreatedAt})
+var sGetApplicationOutput_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetApplicationOutput_LastUpdatedAt})
+var sGetApplicationOutput_AssociatedStreamGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedStreamGroups", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &eGetApplicationOutput_AssociatedStreamGroups})
+var sGetStreamGroupInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eGetStreamGroupInput_Identifier})
+var sGetStreamGroupOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eGetStreamGroupOutput_Arn})
+var sGetStreamGroupOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eGetStreamGroupOutput_Description})
+var sGetStreamGroupOutput_DefaultApplication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultApplication", ID: &iDefaultApplication, Members: &mDefaultApplication, Type: smithy.ShapeTypeStructure, Ext: &eGetStreamGroupOutput_DefaultApplication})
+var sGetStreamGroupOutput_LocationStates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationStates", ID: &i_LocationStates, Members: &m_LocationStates, Type: smithy.ShapeTypeList, Ext: &eGetStreamGroupOutput_LocationStates})
+var sGetStreamGroupOutput_StreamClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamClass", ID: &iStreamClass, Members: &mStreamClass, Type: smithy.ShapeTypeEnum, Ext: &eGetStreamGroupOutput_StreamClass})
+var sGetStreamGroupOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eGetStreamGroupOutput_Id})
+var sGetStreamGroupOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamGroupStatus, Members: &mStreamGroupStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetStreamGroupOutput_Status})
+var sGetStreamGroupOutput_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iStreamGroupStatusReason, Members: &mStreamGroupStatusReason, Type: smithy.ShapeTypeEnum, Ext: &eGetStreamGroupOutput_StatusReason})
+var sGetStreamGroupOutput_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetStreamGroupOutput_LastUpdatedAt})
+var sGetStreamGroupOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetStreamGroupOutput_CreatedAt})
+var sGetStreamGroupOutput_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetStreamGroupOutput_ExpiresAt})
+var sGetStreamGroupOutput_AssociatedApplications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedApplications", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &eGetStreamGroupOutput_AssociatedApplications})
+var sGetStreamSessionInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eGetStreamSessionInput_Identifier})
+var sGetStreamSessionInput_StreamSessionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamSessionIdentifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eGetStreamSessionInput_StreamSessionIdentifier})
+var sGetStreamSessionOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetStreamSessionOutput_Arn})
+var sGetStreamSessionOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eGetStreamSessionOutput_Description})
+var sGetStreamSessionOutput_StreamGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamGroupId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eGetStreamSessionOutput_StreamGroupId})
+var sGetStreamSessionOutput_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_UserId, Type: smithy.ShapeTypeString, Ext: &eGetStreamSessionOutput_UserId})
+var sGetStreamSessionOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamSessionStatus, Members: &mStreamSessionStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetStreamSessionOutput_Status})
+var sGetStreamSessionOutput_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iStreamSessionStatusReason, Members: &mStreamSessionStatusReason, Type: smithy.ShapeTypeEnum, Ext: &eGetStreamSessionOutput_StatusReason})
+var sGetStreamSessionOutput_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &eGetStreamSessionOutput_Protocol})
+var sGetStreamSessionOutput_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &i_LocationName, Type: smithy.ShapeTypeString, Ext: &eGetStreamSessionOutput_Location})
+var sGetStreamSessionOutput_SignalRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalRequest", ID: &i_SignalRequest, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eGetStreamSessionOutput_SignalRequest})
+var sGetStreamSessionOutput_SignalResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalResponse", ID: &i_SignalResponse, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eGetStreamSessionOutput_SignalResponse})
+var sGetStreamSessionOutput_ConnectionTimeoutSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionTimeoutSeconds", ID: &i_ConnectionTimeoutSeconds, Type: smithy.ShapeTypeInteger, Ext: &eGetStreamSessionOutput_ConnectionTimeoutSeconds})
+var sGetStreamSessionOutput_SessionLengthSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionLengthSeconds", ID: &i_SessionLengthSeconds, Type: smithy.ShapeTypeInteger, Ext: &eGetStreamSessionOutput_SessionLengthSeconds})
+var sGetStreamSessionOutput_AdditionalLaunchArgs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalLaunchArgs", ID: &i_GameLaunchArgList, Members: &m_GameLaunchArgList, Type: smithy.ShapeTypeList, Ext: &eGetStreamSessionOutput_AdditionalLaunchArgs})
+var sGetStreamSessionOutput_AdditionalEnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalEnvironmentVariables", ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Type: smithy.ShapeTypeMap, Ext: &eGetStreamSessionOutput_AdditionalEnvironmentVariables})
+var sGetStreamSessionOutput_PerformanceStatsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerformanceStatsConfiguration", ID: &iPerformanceStatsConfiguration, Members: &mPerformanceStatsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetStreamSessionOutput_PerformanceStatsConfiguration})
+var sGetStreamSessionOutput_LogFileLocationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogFileLocationUri", ID: &i_FileLocationUri, Type: smithy.ShapeTypeString, Ext: &eGetStreamSessionOutput_LogFileLocationUri})
+var sGetStreamSessionOutput_WebSdkProtocolUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebSdkProtocolUrl", ID: &i_WebSdkProtocolUrl, Type: smithy.ShapeTypeString, Ext: &eGetStreamSessionOutput_WebSdkProtocolUrl})
+var sGetStreamSessionOutput_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetStreamSessionOutput_LastUpdatedAt})
+var sGetStreamSessionOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetStreamSessionOutput_CreatedAt})
+var sGetStreamSessionOutput_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetStreamSessionOutput_ApplicationArn})
+var sGetStreamSessionOutput_ExportFilesMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportFilesMetadata", ID: &iExportFilesMetadata, Members: &mExportFilesMetadata, Type: smithy.ShapeTypeStructure, Ext: &eGetStreamSessionOutput_ExportFilesMetadata})
+var sGetStreamSessionOutput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eGetStreamSessionOutput_RoleArn})
+var sGetStreamSessionOutput_DisplayConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayConfiguration", ID: &iDisplayConfiguration, Members: &mDisplayConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetStreamSessionOutput_DisplayConfiguration})
+var sGetStreamUrlInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eGetStreamUrlInput_Identifier})
+var sGetStreamUrlInput_StreamUrlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamUrlIdentifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eGetStreamUrlInput_StreamUrlIdentifier})
+var sGetStreamUrlOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetStreamUrlOutput_Arn})
+var sGetStreamUrlOutput_StreamUrlId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamUrlId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eGetStreamUrlOutput_StreamUrlId})
+var sGetStreamUrlOutput_StreamUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamUrl", ID: &i_StreamSessionStreamUrl, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eGetStreamUrlOutput_StreamUrl})
+var sGetStreamUrlOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamUrlStatus, Members: &mStreamUrlStatus, Type: smithy.ShapeTypeEnum, Ext: &eGetStreamUrlOutput_Status})
+var sGetStreamUrlOutput_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iStreamUrlStatusReason, Members: &mStreamUrlStatusReason, Type: smithy.ShapeTypeEnum, Ext: &eGetStreamUrlOutput_StatusReason})
+var sGetStreamUrlOutput_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetStreamUrlOutput_ExpiresAt})
+var sGetStreamUrlOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetStreamUrlOutput_CreatedAt})
+var sGetStreamUrlOutput_UsageLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageLimit", ID: &i_UsageLimit, Type: smithy.ShapeTypeInteger, Ext: &eGetStreamUrlOutput_UsageLimit})
+var sGetStreamUrlOutput_RemainingUses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemainingUses", ID: &i_RemainingUses, Type: smithy.ShapeTypeInteger, Ext: &eGetStreamUrlOutput_RemainingUses})
+var sGetStreamUrlOutput_StreamGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamGroupArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetStreamUrlOutput_StreamGroupArn})
+var sGetStreamUrlOutput_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetStreamUrlOutput_ApplicationArn})
+var sGetStreamUrlOutput_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &eGetStreamUrlOutput_Protocol})
+var sGetStreamUrlOutput_Locations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locations", ID: &i_LocationList, Members: &m_LocationList, Type: smithy.ShapeTypeList, Ext: &eGetStreamUrlOutput_Locations})
+var sGetStreamUrlOutput_SessionLengthSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionLengthSeconds", ID: &i_SessionLengthSeconds, Type: smithy.ShapeTypeInteger, Ext: &eGetStreamUrlOutput_SessionLengthSeconds})
+var sGetStreamUrlOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eGetStreamUrlOutput_Description})
+var sGetStreamUrlOutput_AdditionalLaunchArgs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalLaunchArgs", ID: &i_GameLaunchArgList, Members: &m_GameLaunchArgList, Type: smithy.ShapeTypeList, Ext: &eGetStreamUrlOutput_AdditionalLaunchArgs})
+var sGetStreamUrlOutput_AdditionalEnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalEnvironmentVariables", ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Type: smithy.ShapeTypeMap, Ext: &eGetStreamUrlOutput_AdditionalEnvironmentVariables})
+var sGetStreamUrlOutput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eGetStreamUrlOutput_RoleArn})
+var sGetStreamUrlOutput_DisplayConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayConfiguration", ID: &iDisplayConfiguration, Members: &mDisplayConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eGetStreamUrlOutput_DisplayConfiguration})
+var sGetStreamUrlOutput_StreamSessions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamSessions", ID: &i_StreamSessionSummaryList, Members: &m_StreamSessionSummaryList, Type: smithy.ShapeTypeList, Ext: &eGetStreamUrlOutput_StreamSessions})
+var sListApplicationShaderCachesInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eListApplicationShaderCachesInput_Identifier})
+var sListApplicationShaderCachesOutput_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_ShaderCacheSummaryList, Members: &m_ShaderCacheSummaryList, Type: smithy.ShapeTypeList, Ext: &eListApplicationShaderCachesOutput_Items})
+var sListApplicationsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListApplicationsInput_NextToken})
+var sListApplicationsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t41, Type: smithy.ShapeTypeInteger, Ext: &eListApplicationsInput_MaxResults})
+var sListApplicationsOutput_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_ApplicationSummaryList, Members: &m_ApplicationSummaryList, Type: smithy.ShapeTypeList, Ext: &eListApplicationsOutput_Items})
+var sListApplicationsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListApplicationsOutput_NextToken})
+var sListStreamGroupsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListStreamGroupsInput_NextToken})
+var sListStreamGroupsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t41, Type: smithy.ShapeTypeInteger, Ext: &eListStreamGroupsInput_MaxResults})
+var sListStreamGroupsOutput_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_StreamGroupSummaryList, Members: &m_StreamGroupSummaryList, Type: smithy.ShapeTypeList, Ext: &eListStreamGroupsOutput_Items})
+var sListStreamGroupsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListStreamGroupsOutput_NextToken})
+var sListStreamSessionsByAccountInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamSessionStatus, Members: &mStreamSessionStatus, Traits: &t42, Type: smithy.ShapeTypeEnum, Ext: &eListStreamSessionsByAccountInput_Status})
+var sListStreamSessionsByAccountInput_ExportFilesStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportFilesStatus", ID: &iExportFilesStatus, Members: &mExportFilesStatus, Traits: &t43, Type: smithy.ShapeTypeEnum, Ext: &eListStreamSessionsByAccountInput_ExportFilesStatus})
+var sListStreamSessionsByAccountInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListStreamSessionsByAccountInput_NextToken})
+var sListStreamSessionsByAccountInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t41, Type: smithy.ShapeTypeInteger, Ext: &eListStreamSessionsByAccountInput_MaxResults})
+var sListStreamSessionsByAccountOutput_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_StreamSessionSummaryList, Members: &m_StreamSessionSummaryList, Type: smithy.ShapeTypeList, Ext: &eListStreamSessionsByAccountOutput_Items})
+var sListStreamSessionsByAccountOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListStreamSessionsByAccountOutput_NextToken})
+var sListStreamSessionsInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamSessionStatus, Members: &mStreamSessionStatus, Traits: &t42, Type: smithy.ShapeTypeEnum, Ext: &eListStreamSessionsInput_Status})
+var sListStreamSessionsInput_ExportFilesStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportFilesStatus", ID: &iExportFilesStatus, Members: &mExportFilesStatus, Traits: &t43, Type: smithy.ShapeTypeEnum, Ext: &eListStreamSessionsInput_ExportFilesStatus})
+var sListStreamSessionsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListStreamSessionsInput_NextToken})
+var sListStreamSessionsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t41, Type: smithy.ShapeTypeInteger, Ext: &eListStreamSessionsInput_MaxResults})
+var sListStreamSessionsInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eListStreamSessionsInput_Identifier})
+var sListStreamSessionsOutput_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_StreamSessionSummaryList, Members: &m_StreamSessionSummaryList, Type: smithy.ShapeTypeList, Ext: &eListStreamSessionsOutput_Items})
+var sListStreamSessionsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListStreamSessionsOutput_NextToken})
+var sListStreamUrlsInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamUrlStatus, Members: &mStreamUrlStatus, Traits: &t42, Type: smithy.ShapeTypeEnum, Ext: &eListStreamUrlsInput_Status})
+var sListStreamUrlsInput_StreamGroupIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamGroupIdentifier", ID: &i_Identifier, Traits: &t44, Type: smithy.ShapeTypeString, Ext: &eListStreamUrlsInput_StreamGroupIdentifier})
+var sListStreamUrlsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t40, Type: smithy.ShapeTypeString, Ext: &eListStreamUrlsInput_NextToken})
+var sListStreamUrlsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t41, Type: smithy.ShapeTypeInteger, Ext: &eListStreamUrlsInput_MaxResults})
+var sListStreamUrlsOutput_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_StreamUrlSummaryList, Members: &m_StreamUrlSummaryList, Type: smithy.ShapeTypeList, Ext: &eListStreamUrlsOutput_Items})
+var sListStreamUrlsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListStreamUrlsOutput_NextToken})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_ResourceArn})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_Tags})
+var sRemoveStreamGroupLocationsInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eRemoveStreamGroupLocationsInput_Identifier})
+var sRemoveStreamGroupLocationsInput_Locations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locations", ID: &i_LocationsList, Members: &m_LocationsList, Traits: &t45, Type: smithy.ShapeTypeList, Ext: &eRemoveStreamGroupLocationsInput_Locations})
+var sRevokeStreamUrlInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eRevokeStreamUrlInput_Identifier})
+var sRevokeStreamUrlInput_StreamUrlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamUrlIdentifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eRevokeStreamUrlInput_StreamUrlIdentifier})
+var sRevokeStreamUrlInput_RevocationMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevocationMode", ID: &iRevocationMode, Members: &mRevocationMode, Type: smithy.ShapeTypeEnum, Ext: &eRevokeStreamUrlInput_RevocationMode})
+var sStartStreamSessionInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eStartStreamSessionInput_ClientToken})
+var sStartStreamSessionInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eStartStreamSessionInput_Description})
+var sStartStreamSessionInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eStartStreamSessionInput_Identifier})
+var sStartStreamSessionInput_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &eStartStreamSessionInput_Protocol})
+var sStartStreamSessionInput_SignalRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalRequest", ID: &i_SignalRequest, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eStartStreamSessionInput_SignalRequest})
+var sStartStreamSessionInput_ApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationIdentifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eStartStreamSessionInput_ApplicationIdentifier})
+var sStartStreamSessionInput_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_UserId, Type: smithy.ShapeTypeString, Ext: &eStartStreamSessionInput_UserId})
+var sStartStreamSessionInput_Locations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Locations", ID: &i_LocationList, Members: &m_LocationList, Type: smithy.ShapeTypeList, Ext: &eStartStreamSessionInput_Locations})
+var sStartStreamSessionInput_ConnectionTimeoutSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionTimeoutSeconds", ID: &i_ConnectionTimeoutSeconds, Type: smithy.ShapeTypeInteger, Ext: &eStartStreamSessionInput_ConnectionTimeoutSeconds})
+var sStartStreamSessionInput_SessionLengthSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionLengthSeconds", ID: &i_SessionLengthSeconds, Type: smithy.ShapeTypeInteger, Ext: &eStartStreamSessionInput_SessionLengthSeconds})
+var sStartStreamSessionInput_AdditionalLaunchArgs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalLaunchArgs", ID: &i_GameLaunchArgList, Members: &m_GameLaunchArgList, Type: smithy.ShapeTypeList, Ext: &eStartStreamSessionInput_AdditionalLaunchArgs})
+var sStartStreamSessionInput_AdditionalEnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalEnvironmentVariables", ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Type: smithy.ShapeTypeMap, Ext: &eStartStreamSessionInput_AdditionalEnvironmentVariables})
+var sStartStreamSessionInput_PerformanceStatsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerformanceStatsConfiguration", ID: &iPerformanceStatsConfiguration, Members: &mPerformanceStatsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eStartStreamSessionInput_PerformanceStatsConfiguration})
+var sStartStreamSessionInput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eStartStreamSessionInput_RoleArn})
+var sStartStreamSessionInput_DisplayConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayConfiguration", ID: &iDisplayConfiguration, Members: &mDisplayConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eStartStreamSessionInput_DisplayConfiguration})
+var sStartStreamSessionOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eStartStreamSessionOutput_Arn})
+var sStartStreamSessionOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eStartStreamSessionOutput_Description})
+var sStartStreamSessionOutput_StreamGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamGroupId", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eStartStreamSessionOutput_StreamGroupId})
+var sStartStreamSessionOutput_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_UserId, Type: smithy.ShapeTypeString, Ext: &eStartStreamSessionOutput_UserId})
+var sStartStreamSessionOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamSessionStatus, Members: &mStreamSessionStatus, Type: smithy.ShapeTypeEnum, Ext: &eStartStreamSessionOutput_Status})
+var sStartStreamSessionOutput_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iStreamSessionStatusReason, Members: &mStreamSessionStatusReason, Type: smithy.ShapeTypeEnum, Ext: &eStartStreamSessionOutput_StatusReason})
+var sStartStreamSessionOutput_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum, Ext: &eStartStreamSessionOutput_Protocol})
+var sStartStreamSessionOutput_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &i_LocationName, Type: smithy.ShapeTypeString, Ext: &eStartStreamSessionOutput_Location})
+var sStartStreamSessionOutput_SignalRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalRequest", ID: &i_SignalRequest, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eStartStreamSessionOutput_SignalRequest})
+var sStartStreamSessionOutput_SignalResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalResponse", ID: &i_SignalResponse, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eStartStreamSessionOutput_SignalResponse})
+var sStartStreamSessionOutput_ConnectionTimeoutSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionTimeoutSeconds", ID: &i_ConnectionTimeoutSeconds, Type: smithy.ShapeTypeInteger, Ext: &eStartStreamSessionOutput_ConnectionTimeoutSeconds})
+var sStartStreamSessionOutput_SessionLengthSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionLengthSeconds", ID: &i_SessionLengthSeconds, Type: smithy.ShapeTypeInteger, Ext: &eStartStreamSessionOutput_SessionLengthSeconds})
+var sStartStreamSessionOutput_AdditionalLaunchArgs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalLaunchArgs", ID: &i_GameLaunchArgList, Members: &m_GameLaunchArgList, Type: smithy.ShapeTypeList, Ext: &eStartStreamSessionOutput_AdditionalLaunchArgs})
+var sStartStreamSessionOutput_AdditionalEnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalEnvironmentVariables", ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Type: smithy.ShapeTypeMap, Ext: &eStartStreamSessionOutput_AdditionalEnvironmentVariables})
+var sStartStreamSessionOutput_PerformanceStatsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerformanceStatsConfiguration", ID: &iPerformanceStatsConfiguration, Members: &mPerformanceStatsConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eStartStreamSessionOutput_PerformanceStatsConfiguration})
+var sStartStreamSessionOutput_LogFileLocationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogFileLocationUri", ID: &i_FileLocationUri, Type: smithy.ShapeTypeString, Ext: &eStartStreamSessionOutput_LogFileLocationUri})
+var sStartStreamSessionOutput_WebSdkProtocolUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebSdkProtocolUrl", ID: &i_WebSdkProtocolUrl, Type: smithy.ShapeTypeString, Ext: &eStartStreamSessionOutput_WebSdkProtocolUrl})
+var sStartStreamSessionOutput_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eStartStreamSessionOutput_LastUpdatedAt})
+var sStartStreamSessionOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eStartStreamSessionOutput_CreatedAt})
+var sStartStreamSessionOutput_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eStartStreamSessionOutput_ApplicationArn})
+var sStartStreamSessionOutput_ExportFilesMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportFilesMetadata", ID: &iExportFilesMetadata, Members: &mExportFilesMetadata, Type: smithy.ShapeTypeStructure, Ext: &eStartStreamSessionOutput_ExportFilesMetadata})
+var sStartStreamSessionOutput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Traits: &t36, Type: smithy.ShapeTypeString, Ext: &eStartStreamSessionOutput_RoleArn})
+var sStartStreamSessionOutput_DisplayConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayConfiguration", ID: &iDisplayConfiguration, Members: &mDisplayConfiguration, Type: smithy.ShapeTypeStructure, Ext: &eStartStreamSessionOutput_DisplayConfiguration})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_ResourceArn})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_Tags})
+var sTerminateStreamSessionInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eTerminateStreamSessionInput_Identifier})
+var sTerminateStreamSessionInput_StreamSessionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamSessionIdentifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eTerminateStreamSessionInput_StreamSessionIdentifier})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_ResourceArn})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t46, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_TagKeys})
+var sUpdateApplicationInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationInput_Identifier})
+var sUpdateApplicationInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationInput_Description})
+var sUpdateApplicationInput_ApplicationLogPaths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationLogPaths", ID: &i_FilePaths, Members: &m_FilePaths, Type: smithy.ShapeTypeList, Ext: &eUpdateApplicationInput_ApplicationLogPaths})
+var sUpdateApplicationInput_ApplicationLogOutputUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationLogOutputUri", ID: &i_ApplicationLogOutputUri, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationInput_ApplicationLogOutputUri})
+var sUpdateApplicationOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationOutput_Arn})
+var sUpdateApplicationOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationOutput_Description})
+var sUpdateApplicationOutput_RuntimeEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuntimeEnvironment", ID: &iRuntimeEnvironment, Members: &mRuntimeEnvironment, Type: smithy.ShapeTypeStructure, Ext: &eUpdateApplicationOutput_RuntimeEnvironment})
+var sUpdateApplicationOutput_ExecutablePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutablePath", ID: &i_ExecutablePath, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationOutput_ExecutablePath})
+var sUpdateApplicationOutput_ApplicationLogPaths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationLogPaths", ID: &i_FilePaths, Members: &m_FilePaths, Type: smithy.ShapeTypeList, Ext: &eUpdateApplicationOutput_ApplicationLogPaths})
+var sUpdateApplicationOutput_ApplicationLogOutputUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationLogOutputUri", ID: &i_ApplicationLogOutputUri, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationOutput_ApplicationLogOutputUri})
+var sUpdateApplicationOutput_ApplicationSourceUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationSourceUri", ID: &i_ApplicationSourceUri, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationOutput_ApplicationSourceUri})
+var sUpdateApplicationOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eUpdateApplicationOutput_Id})
+var sUpdateApplicationOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iApplicationStatus, Members: &mApplicationStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateApplicationOutput_Status})
+var sUpdateApplicationOutput_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iApplicationStatusReason, Members: &mApplicationStatusReason, Type: smithy.ShapeTypeEnum, Ext: &eUpdateApplicationOutput_StatusReason})
+var sUpdateApplicationOutput_ReplicationStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationStatuses", ID: &i_ReplicationStatuses, Members: &m_ReplicationStatuses, Type: smithy.ShapeTypeList, Ext: &eUpdateApplicationOutput_ReplicationStatuses})
+var sUpdateApplicationOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateApplicationOutput_CreatedAt})
+var sUpdateApplicationOutput_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateApplicationOutput_LastUpdatedAt})
+var sUpdateApplicationOutput_AssociatedStreamGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedStreamGroups", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &eUpdateApplicationOutput_AssociatedStreamGroups})
+var sUpdateStreamGroupInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Traits: &t39, Type: smithy.ShapeTypeString, Ext: &eUpdateStreamGroupInput_Identifier})
+var sUpdateStreamGroupInput_LocationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationConfigurations", ID: &i_LocationConfigurations, Members: &m_LocationConfigurations, Type: smithy.ShapeTypeList, Ext: &eUpdateStreamGroupInput_LocationConfigurations})
+var sUpdateStreamGroupInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateStreamGroupInput_Description})
+var sUpdateStreamGroupInput_DefaultApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultApplicationIdentifier", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eUpdateStreamGroupInput_DefaultApplicationIdentifier})
+var sUpdateStreamGroupOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Identifier, Type: smithy.ShapeTypeString, Ext: &eUpdateStreamGroupOutput_Arn})
+var sUpdateStreamGroupOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString, Ext: &eUpdateStreamGroupOutput_Description})
+var sUpdateStreamGroupOutput_DefaultApplication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultApplication", ID: &iDefaultApplication, Members: &mDefaultApplication, Type: smithy.ShapeTypeStructure, Ext: &eUpdateStreamGroupOutput_DefaultApplication})
+var sUpdateStreamGroupOutput_LocationStates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationStates", ID: &i_LocationStates, Members: &m_LocationStates, Type: smithy.ShapeTypeList, Ext: &eUpdateStreamGroupOutput_LocationStates})
+var sUpdateStreamGroupOutput_StreamClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamClass", ID: &iStreamClass, Members: &mStreamClass, Type: smithy.ShapeTypeEnum, Ext: &eUpdateStreamGroupOutput_StreamClass})
+var sUpdateStreamGroupOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString, Ext: &eUpdateStreamGroupOutput_Id})
+var sUpdateStreamGroupOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStreamGroupStatus, Members: &mStreamGroupStatus, Type: smithy.ShapeTypeEnum, Ext: &eUpdateStreamGroupOutput_Status})
+var sUpdateStreamGroupOutput_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iStreamGroupStatusReason, Members: &mStreamGroupStatusReason, Type: smithy.ShapeTypeEnum, Ext: &eUpdateStreamGroupOutput_StatusReason})
+var sUpdateStreamGroupOutput_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateStreamGroupOutput_LastUpdatedAt})
+var sUpdateStreamGroupOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateStreamGroupOutput_CreatedAt})
+var sUpdateStreamGroupOutput_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eUpdateStreamGroupOutput_ExpiresAt})
+var sUpdateStreamGroupOutput_AssociatedApplications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedApplications", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList, Ext: &eUpdateStreamGroupOutput_AssociatedApplications})
 
 var AddStreamGroupLocations = &sAddStreamGroupLocations
 

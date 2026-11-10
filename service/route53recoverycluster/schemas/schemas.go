@@ -7,9 +7,100 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [92]smithy.SchemaExtensions
+var (
+	eGetRoutingControlState                                             smithy.SchemaExtensions
+	eListRoutingControls                                                smithy.SchemaExtensions
+	eUpdateRoutingControlState                                          smithy.SchemaExtensions
+	eUpdateRoutingControlStates                                         smithy.SchemaExtensions
+	e_ToggleCustomerAPI                                                 smithy.SchemaExtensions
+	eAccessDeniedException                                              smithy.SchemaExtensions
+	eAccessDeniedException_message                                      smithy.SchemaExtensions
+	e_Arn                                                               smithy.SchemaExtensions
+	e_Arns                                                              smithy.SchemaExtensions
+	e_Arns_member                                                       smithy.SchemaExtensions
+	eConflictException                                                  smithy.SchemaExtensions
+	eConflictException_message                                          smithy.SchemaExtensions
+	eConflictException_resourceId                                       smithy.SchemaExtensions
+	eConflictException_resourceType                                     smithy.SchemaExtensions
+	e_ControlPanelName                                                  smithy.SchemaExtensions
+	eEndpointTemporarilyUnavailableException                            smithy.SchemaExtensions
+	eEndpointTemporarilyUnavailableException_message                    smithy.SchemaExtensions
+	eInternalServerException                                            smithy.SchemaExtensions
+	eInternalServerException_message                                    smithy.SchemaExtensions
+	eInternalServerException_retryAfterSeconds                          smithy.SchemaExtensions
+	e_MaxResults                                                        smithy.SchemaExtensions
+	e_Owner                                                             smithy.SchemaExtensions
+	e_PageToken                                                         smithy.SchemaExtensions
+	eResourceNotFoundException                                          smithy.SchemaExtensions
+	eResourceNotFoundException_message                                  smithy.SchemaExtensions
+	eResourceNotFoundException_resourceId                               smithy.SchemaExtensions
+	eResourceNotFoundException_resourceType                             smithy.SchemaExtensions
+	e_RetryAfterSeconds                                                 smithy.SchemaExtensions
+	eRoutingControl                                                     smithy.SchemaExtensions
+	eRoutingControl_ControlPanelArn                                     smithy.SchemaExtensions
+	eRoutingControl_ControlPanelName                                    smithy.SchemaExtensions
+	eRoutingControl_RoutingControlArn                                   smithy.SchemaExtensions
+	eRoutingControl_RoutingControlName                                  smithy.SchemaExtensions
+	eRoutingControl_RoutingControlState                                 smithy.SchemaExtensions
+	eRoutingControl_Owner                                               smithy.SchemaExtensions
+	e_RoutingControlName                                                smithy.SchemaExtensions
+	e_RoutingControls                                                   smithy.SchemaExtensions
+	e_RoutingControls_member                                            smithy.SchemaExtensions
+	eRoutingControlState                                                smithy.SchemaExtensions
+	eRoutingControlState_On                                             smithy.SchemaExtensions
+	eRoutingControlState_Off                                            smithy.SchemaExtensions
+	eServiceLimitExceededException                                      smithy.SchemaExtensions
+	eServiceLimitExceededException_message                              smithy.SchemaExtensions
+	eServiceLimitExceededException_resourceId                           smithy.SchemaExtensions
+	eServiceLimitExceededException_resourceType                         smithy.SchemaExtensions
+	eServiceLimitExceededException_limitCode                            smithy.SchemaExtensions
+	eServiceLimitExceededException_serviceCode                          smithy.SchemaExtensions
+	e_String                                                            smithy.SchemaExtensions
+	eThrottlingException                                                smithy.SchemaExtensions
+	eThrottlingException_message                                        smithy.SchemaExtensions
+	eThrottlingException_retryAfterSeconds                              smithy.SchemaExtensions
+	e_UpdateRoutingControlStateEntries                                  smithy.SchemaExtensions
+	e_UpdateRoutingControlStateEntries_member                           smithy.SchemaExtensions
+	eUpdateRoutingControlStateEntry                                     smithy.SchemaExtensions
+	eUpdateRoutingControlStateEntry_RoutingControlArn                   smithy.SchemaExtensions
+	eUpdateRoutingControlStateEntry_RoutingControlState                 smithy.SchemaExtensions
+	eValidationException                                                smithy.SchemaExtensions
+	eValidationException_message                                        smithy.SchemaExtensions
+	eValidationException_reason                                         smithy.SchemaExtensions
+	eValidationException_fields                                         smithy.SchemaExtensions
+	eValidationExceptionField                                           smithy.SchemaExtensions
+	eValidationExceptionField_name                                      smithy.SchemaExtensions
+	eValidationExceptionField_message                                   smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                                      smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member                               smithy.SchemaExtensions
+	eValidationExceptionReason                                          smithy.SchemaExtensions
+	eValidationExceptionReason_UNKNOWN_OPERATION                        smithy.SchemaExtensions
+	eValidationExceptionReason_CANNOT_PARSE                             smithy.SchemaExtensions
+	eValidationExceptionReason_FIELD_VALIDATION_FAILED                  smithy.SchemaExtensions
+	eValidationExceptionReason_OTHER                                    smithy.SchemaExtensions
+	eGetRoutingControlStateRequest                                      smithy.SchemaExtensions
+	eGetRoutingControlStateRequest_RoutingControlArn                    smithy.SchemaExtensions
+	eGetRoutingControlStateResponse                                     smithy.SchemaExtensions
+	eGetRoutingControlStateResponse_RoutingControlArn                   smithy.SchemaExtensions
+	eGetRoutingControlStateResponse_RoutingControlState                 smithy.SchemaExtensions
+	eGetRoutingControlStateResponse_RoutingControlName                  smithy.SchemaExtensions
+	eListRoutingControlsRequest                                         smithy.SchemaExtensions
+	eListRoutingControlsRequest_ControlPanelArn                         smithy.SchemaExtensions
+	eListRoutingControlsRequest_NextToken                               smithy.SchemaExtensions
+	eListRoutingControlsRequest_MaxResults                              smithy.SchemaExtensions
+	eListRoutingControlsResponse                                        smithy.SchemaExtensions
+	eListRoutingControlsResponse_RoutingControls                        smithy.SchemaExtensions
+	eListRoutingControlsResponse_NextToken                              smithy.SchemaExtensions
+	eUpdateRoutingControlStateRequest                                   smithy.SchemaExtensions
+	eUpdateRoutingControlStateRequest_RoutingControlArn                 smithy.SchemaExtensions
+	eUpdateRoutingControlStateRequest_RoutingControlState               smithy.SchemaExtensions
+	eUpdateRoutingControlStateRequest_SafetyRulesToOverride             smithy.SchemaExtensions
+	eUpdateRoutingControlStateResponse                                  smithy.SchemaExtensions
+	eUpdateRoutingControlStatesRequest                                  smithy.SchemaExtensions
+	eUpdateRoutingControlStatesRequest_UpdateRoutingControlStateEntries smithy.SchemaExtensions
+	eUpdateRoutingControlStatesRequest_SafetyRulesToOverride            smithy.SchemaExtensions
+	eUpdateRoutingControlStatesResponse                                 smithy.SchemaExtensions
+)
 
 var (
 	iGetRoutingControlState                  = smithy.ShapeID{Namespace: "com.amazonaws.route53recoverycluster", Name: "GetRoutingControlState"}
@@ -87,99 +178,99 @@ var mListRoutingControlsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&
 var mUpdateRoutingControlStateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRoutingControlStateRequest_RoutingControlArn, &sUpdateRoutingControlStateRequest_RoutingControlState, &sUpdateRoutingControlStateRequest_SafetyRulesToOverride}}
 var mUpdateRoutingControlStatesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRoutingControlStatesRequest_UpdateRoutingControlStateEntries, &sUpdateRoutingControlStatesRequest_SafetyRulesToOverride}}
 
-var sGetRoutingControlState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoutingControlState, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sListRoutingControls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoutingControls, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sUpdateRoutingControlState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoutingControlState, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sUpdateRoutingControlStates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoutingControlStates, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var s_ToggleCustomerAPI = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ToggleCustomerAPI, Type: smithy.ShapeTypeService, Ext: &ext[4]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &ext[5]})
-var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[7]})
-var s_Arns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arns, Members: &m_Arns, Type: smithy.ShapeTypeList, Ext: &ext[8]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &ext[10]})
-var s_ControlPanelName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlPanelName, Type: smithy.ShapeTypeString, Ext: &ext[14]})
-var sEndpointTemporarilyUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointTemporarilyUnavailableException, Members: &mEndpointTemporarilyUnavailableException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &ext[15]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &ext[17]})
-var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[20]})
-var s_Owner = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Owner, Type: smithy.ShapeTypeString, Ext: &ext[21]})
-var s_PageToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PageToken, Type: smithy.ShapeTypeString, Ext: &ext[22]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &ext[23]})
-var s_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetryAfterSeconds, Type: smithy.ShapeTypeInteger, Ext: &ext[27]})
-var sRoutingControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoutingControl, Members: &mRoutingControl, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
-var s_RoutingControlName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoutingControlName, Type: smithy.ShapeTypeString, Ext: &ext[35]})
-var s_RoutingControls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoutingControls, Members: &m_RoutingControls, Type: smithy.ShapeTypeList, Ext: &ext[36]})
-var sRoutingControlState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoutingControlState, Members: &mRoutingControlState, Type: smithy.ShapeTypeEnum, Ext: &ext[38]})
-var sServiceLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLimitExceededException, Members: &mServiceLimitExceededException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &ext[41]})
-var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[47]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &ext[48]})
-var s_UpdateRoutingControlStateEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateRoutingControlStateEntries, Members: &m_UpdateRoutingControlStateEntries, Type: smithy.ShapeTypeList, Ext: &ext[51]})
-var sUpdateRoutingControlStateEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoutingControlStateEntry, Members: &mUpdateRoutingControlStateEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[53]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &ext[56]})
-var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[60]})
-var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[63]})
-var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[65]})
-var sGetRoutingControlStateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoutingControlStateRequest, Members: &mGetRoutingControlStateRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[70]})
-var sGetRoutingControlStateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoutingControlStateResponse, Members: &mGetRoutingControlStateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[72]})
-var sListRoutingControlsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoutingControlsRequest, Members: &mListRoutingControlsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[76]})
-var sListRoutingControlsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoutingControlsResponse, Members: &mListRoutingControlsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[80]})
-var sUpdateRoutingControlStateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoutingControlStateRequest, Members: &mUpdateRoutingControlStateRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[83]})
-var sUpdateRoutingControlStateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoutingControlStateResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[87]})
-var sUpdateRoutingControlStatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoutingControlStatesRequest, Members: &mUpdateRoutingControlStatesRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[88]})
-var sUpdateRoutingControlStatesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoutingControlStatesResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[91]})
+var sGetRoutingControlState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoutingControlState, Type: smithy.ShapeTypeOperation, Ext: &eGetRoutingControlState})
+var sListRoutingControls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoutingControls, Type: smithy.ShapeTypeOperation, Ext: &eListRoutingControls})
+var sUpdateRoutingControlState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoutingControlState, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRoutingControlState})
+var sUpdateRoutingControlStates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoutingControlStates, Type: smithy.ShapeTypeOperation, Ext: &eUpdateRoutingControlStates})
+var s_ToggleCustomerAPI = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ToggleCustomerAPI, Type: smithy.ShapeTypeService, Ext: &e_ToggleCustomerAPI})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arn})
+var s_Arns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arns, Members: &m_Arns, Type: smithy.ShapeTypeList, Ext: &e_Arns})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t1, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var s_ControlPanelName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlPanelName, Type: smithy.ShapeTypeString, Ext: &e_ControlPanelName})
+var sEndpointTemporarilyUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointTemporarilyUnavailableException, Members: &mEndpointTemporarilyUnavailableException, Traits: &t2, Type: smithy.ShapeTypeStructure, Ext: &eEndpointTemporarilyUnavailableException})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t3, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &e_MaxResults})
+var s_Owner = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Owner, Type: smithy.ShapeTypeString, Ext: &e_Owner})
+var s_PageToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PageToken, Type: smithy.ShapeTypeString, Ext: &e_PageToken})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t5, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var s_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetryAfterSeconds, Type: smithy.ShapeTypeInteger, Ext: &e_RetryAfterSeconds})
+var sRoutingControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoutingControl, Members: &mRoutingControl, Type: smithy.ShapeTypeStructure, Ext: &eRoutingControl})
+var s_RoutingControlName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoutingControlName, Type: smithy.ShapeTypeString, Ext: &e_RoutingControlName})
+var s_RoutingControls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoutingControls, Members: &m_RoutingControls, Type: smithy.ShapeTypeList, Ext: &e_RoutingControls})
+var sRoutingControlState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoutingControlState, Members: &mRoutingControlState, Type: smithy.ShapeTypeEnum, Ext: &eRoutingControlState})
+var sServiceLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLimitExceededException, Members: &mServiceLimitExceededException, Traits: &t6, Type: smithy.ShapeTypeStructure, Ext: &eServiceLimitExceededException})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString, Ext: &e_String})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t7, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var s_UpdateRoutingControlStateEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateRoutingControlStateEntries, Members: &m_UpdateRoutingControlStateEntries, Type: smithy.ShapeTypeList, Ext: &e_UpdateRoutingControlStateEntries})
+var sUpdateRoutingControlStateEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoutingControlStateEntry, Members: &mUpdateRoutingControlStateEntry, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRoutingControlStateEntry})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t8, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
+var sGetRoutingControlStateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoutingControlStateRequest, Members: &mGetRoutingControlStateRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetRoutingControlStateRequest})
+var sGetRoutingControlStateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoutingControlStateResponse, Members: &mGetRoutingControlStateResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetRoutingControlStateResponse})
+var sListRoutingControlsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoutingControlsRequest, Members: &mListRoutingControlsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListRoutingControlsRequest})
+var sListRoutingControlsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoutingControlsResponse, Members: &mListRoutingControlsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListRoutingControlsResponse})
+var sUpdateRoutingControlStateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoutingControlStateRequest, Members: &mUpdateRoutingControlStateRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRoutingControlStateRequest})
+var sUpdateRoutingControlStateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoutingControlStateResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRoutingControlStateResponse})
+var sUpdateRoutingControlStatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoutingControlStatesRequest, Members: &mUpdateRoutingControlStatesRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRoutingControlStatesRequest})
+var sUpdateRoutingControlStatesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoutingControlStatesResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateRoutingControlStatesResponse})
 
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[6]})
-var s_Arns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[9]})
-var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[11]})
-var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[12]})
-var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[13]})
-var sEndpointTemporarilyUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[16]})
-var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[18]})
-var sInternalServerException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &i_RetryAfterSeconds, Traits: &t4, Type: smithy.ShapeTypeInteger, Ext: &ext[19]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[24]})
-var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[25]})
-var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[26]})
-var sRoutingControl_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[29]})
-var sRoutingControl_ControlPanelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelName", ID: &i_ControlPanelName, Type: smithy.ShapeTypeString, Ext: &ext[30]})
-var sRoutingControl_RoutingControlArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[31]})
-var sRoutingControl_RoutingControlName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlName", ID: &i_RoutingControlName, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var sRoutingControl_RoutingControlState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlState", ID: &iRoutingControlState, Members: &mRoutingControlState, Type: smithy.ShapeTypeEnum, Ext: &ext[33]})
-var sRoutingControl_Owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Owner", ID: &i_Owner, Type: smithy.ShapeTypeString, Ext: &ext[34]})
-var s_RoutingControls_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRoutingControl, Members: &mRoutingControl, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var sRoutingControlState_On = smithy.NewStaticSchema(smithy.StaticSchema{Member: "On", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[39]})
-var sRoutingControlState_Off = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Off", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[40]})
-var sServiceLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[42]})
-var sServiceLimitExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[43]})
-var sServiceLimitExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[44]})
-var sServiceLimitExceededException_limitCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "limitCode", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[45]})
-var sServiceLimitExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[46]})
-var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[49]})
-var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &i_RetryAfterSeconds, Traits: &t4, Type: smithy.ShapeTypeInteger, Ext: &ext[50]})
-var s_UpdateRoutingControlStateEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUpdateRoutingControlStateEntry, Members: &mUpdateRoutingControlStateEntry, Type: smithy.ShapeTypeStructure, Ext: &ext[52]})
-var sUpdateRoutingControlStateEntry_RoutingControlArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var sUpdateRoutingControlStateEntry_RoutingControlState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlState", ID: &iRoutingControlState, Members: &mRoutingControlState, Type: smithy.ShapeTypeEnum, Ext: &ext[55]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[57]})
-var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[58]})
-var sValidationException_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[59]})
-var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[61]})
-var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &ext[62]})
-var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[64]})
-var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[66]})
-var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[67]})
-var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[69]})
-var sGetRoutingControlStateRequest_RoutingControlArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[71]})
-var sGetRoutingControlStateResponse_RoutingControlArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[73]})
-var sGetRoutingControlStateResponse_RoutingControlState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlState", ID: &iRoutingControlState, Members: &mRoutingControlState, Type: smithy.ShapeTypeEnum, Ext: &ext[74]})
-var sGetRoutingControlStateResponse_RoutingControlName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlName", ID: &i_RoutingControlName, Type: smithy.ShapeTypeString, Ext: &ext[75]})
-var sListRoutingControlsRequest_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[77]})
-var sListRoutingControlsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PageToken, Type: smithy.ShapeTypeString, Ext: &ext[78]})
-var sListRoutingControlsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &ext[79]})
-var sListRoutingControlsResponse_RoutingControls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControls", ID: &i_RoutingControls, Members: &m_RoutingControls, Type: smithy.ShapeTypeList, Ext: &ext[81]})
-var sListRoutingControlsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PageToken, Type: smithy.ShapeTypeString, Ext: &ext[82]})
-var sUpdateRoutingControlStateRequest_RoutingControlArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &ext[84]})
-var sUpdateRoutingControlStateRequest_RoutingControlState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlState", ID: &iRoutingControlState, Members: &mRoutingControlState, Type: smithy.ShapeTypeEnum, Ext: &ext[85]})
-var sUpdateRoutingControlStateRequest_SafetyRulesToOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SafetyRulesToOverride", ID: &i_Arns, Members: &m_Arns, Type: smithy.ShapeTypeList, Ext: &ext[86]})
-var sUpdateRoutingControlStatesRequest_UpdateRoutingControlStateEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateRoutingControlStateEntries", ID: &i_UpdateRoutingControlStateEntries, Members: &m_UpdateRoutingControlStateEntries, Type: smithy.ShapeTypeList, Ext: &ext[89]})
-var sUpdateRoutingControlStatesRequest_SafetyRulesToOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SafetyRulesToOverride", ID: &i_Arns, Members: &m_Arns, Type: smithy.ShapeTypeList, Ext: &ext[90]})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var s_Arns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &e_Arns_member})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceId})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceType})
+var sEndpointTemporarilyUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eEndpointTemporarilyUnavailableException_message})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sInternalServerException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &i_RetryAfterSeconds, Traits: &t4, Type: smithy.ShapeTypeInteger, Ext: &eInternalServerException_retryAfterSeconds})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceId})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceType})
+var sRoutingControl_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eRoutingControl_ControlPanelArn})
+var sRoutingControl_ControlPanelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelName", ID: &i_ControlPanelName, Type: smithy.ShapeTypeString, Ext: &eRoutingControl_ControlPanelName})
+var sRoutingControl_RoutingControlArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eRoutingControl_RoutingControlArn})
+var sRoutingControl_RoutingControlName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlName", ID: &i_RoutingControlName, Type: smithy.ShapeTypeString, Ext: &eRoutingControl_RoutingControlName})
+var sRoutingControl_RoutingControlState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlState", ID: &iRoutingControlState, Members: &mRoutingControlState, Type: smithy.ShapeTypeEnum, Ext: &eRoutingControl_RoutingControlState})
+var sRoutingControl_Owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Owner", ID: &i_Owner, Type: smithy.ShapeTypeString, Ext: &eRoutingControl_Owner})
+var s_RoutingControls_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRoutingControl, Members: &mRoutingControl, Type: smithy.ShapeTypeStructure, Ext: &e_RoutingControls_member})
+var sRoutingControlState_On = smithy.NewStaticSchema(smithy.StaticSchema{Member: "On", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRoutingControlState_On})
+var sRoutingControlState_Off = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Off", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eRoutingControlState_Off})
+var sServiceLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceLimitExceededException_message})
+var sServiceLimitExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceLimitExceededException_resourceId})
+var sServiceLimitExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceLimitExceededException_resourceType})
+var sServiceLimitExceededException_limitCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "limitCode", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceLimitExceededException_limitCode})
+var sServiceLimitExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eServiceLimitExceededException_serviceCode})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &i_RetryAfterSeconds, Traits: &t4, Type: smithy.ShapeTypeInteger, Ext: &eThrottlingException_retryAfterSeconds})
+var s_UpdateRoutingControlStateEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUpdateRoutingControlStateEntry, Members: &mUpdateRoutingControlStateEntry, Type: smithy.ShapeTypeStructure, Ext: &e_UpdateRoutingControlStateEntries_member})
+var sUpdateRoutingControlStateEntry_RoutingControlArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateRoutingControlStateEntry_RoutingControlArn})
+var sUpdateRoutingControlStateEntry_RoutingControlState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlState", ID: &iRoutingControlState, Members: &mRoutingControlState, Type: smithy.ShapeTypeEnum, Ext: &eUpdateRoutingControlStateEntry_RoutingControlState})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_reason})
+var sValidationException_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_fields})
+var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_name})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_message})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_UNKNOWN_OPERATION})
+var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_CANNOT_PARSE})
+var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_FIELD_VALIDATION_FAILED})
+var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_OTHER})
+var sGetRoutingControlStateRequest_RoutingControlArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetRoutingControlStateRequest_RoutingControlArn})
+var sGetRoutingControlStateResponse_RoutingControlArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eGetRoutingControlStateResponse_RoutingControlArn})
+var sGetRoutingControlStateResponse_RoutingControlState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlState", ID: &iRoutingControlState, Members: &mRoutingControlState, Type: smithy.ShapeTypeEnum, Ext: &eGetRoutingControlStateResponse_RoutingControlState})
+var sGetRoutingControlStateResponse_RoutingControlName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlName", ID: &i_RoutingControlName, Type: smithy.ShapeTypeString, Ext: &eGetRoutingControlStateResponse_RoutingControlName})
+var sListRoutingControlsRequest_ControlPanelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlPanelArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eListRoutingControlsRequest_ControlPanelArn})
+var sListRoutingControlsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PageToken, Type: smithy.ShapeTypeString, Ext: &eListRoutingControlsRequest_NextToken})
+var sListRoutingControlsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger, Ext: &eListRoutingControlsRequest_MaxResults})
+var sListRoutingControlsResponse_RoutingControls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControls", ID: &i_RoutingControls, Members: &m_RoutingControls, Type: smithy.ShapeTypeList, Ext: &eListRoutingControlsResponse_RoutingControls})
+var sListRoutingControlsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PageToken, Type: smithy.ShapeTypeString, Ext: &eListRoutingControlsResponse_NextToken})
+var sUpdateRoutingControlStateRequest_RoutingControlArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlArn", ID: &i_Arn, Type: smithy.ShapeTypeString, Ext: &eUpdateRoutingControlStateRequest_RoutingControlArn})
+var sUpdateRoutingControlStateRequest_RoutingControlState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingControlState", ID: &iRoutingControlState, Members: &mRoutingControlState, Type: smithy.ShapeTypeEnum, Ext: &eUpdateRoutingControlStateRequest_RoutingControlState})
+var sUpdateRoutingControlStateRequest_SafetyRulesToOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SafetyRulesToOverride", ID: &i_Arns, Members: &m_Arns, Type: smithy.ShapeTypeList, Ext: &eUpdateRoutingControlStateRequest_SafetyRulesToOverride})
+var sUpdateRoutingControlStatesRequest_UpdateRoutingControlStateEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateRoutingControlStateEntries", ID: &i_UpdateRoutingControlStateEntries, Members: &m_UpdateRoutingControlStateEntries, Type: smithy.ShapeTypeList, Ext: &eUpdateRoutingControlStatesRequest_UpdateRoutingControlStateEntries})
+var sUpdateRoutingControlStatesRequest_SafetyRulesToOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SafetyRulesToOverride", ID: &i_Arns, Members: &m_Arns, Type: smithy.ShapeTypeList, Ext: &eUpdateRoutingControlStatesRequest_SafetyRulesToOverride})
 
 var GetRoutingControlState = &sGetRoutingControlState
 

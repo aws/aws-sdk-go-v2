@@ -7,9 +7,302 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-// Codec extensions of the schemas. The array is zero, so it takes no space in the
-// binary.
-var ext [294]smithy.SchemaExtensions
+var (
+	eBatchGetFindings                                    smithy.SchemaExtensions
+	eCreateScan                                          smithy.SchemaExtensions
+	eCreateUploadUrl                                     smithy.SchemaExtensions
+	eGetAccountConfiguration                             smithy.SchemaExtensions
+	eGetFindings                                         smithy.SchemaExtensions
+	eGetMetricsSummary                                   smithy.SchemaExtensions
+	eGetScan                                             smithy.SchemaExtensions
+	eListFindingsMetrics                                 smithy.SchemaExtensions
+	eListScans                                           smithy.SchemaExtensions
+	eListTagsForResource                                 smithy.SchemaExtensions
+	eTagResource                                         smithy.SchemaExtensions
+	eUntagResource                                       smithy.SchemaExtensions
+	eUpdateAccountConfiguration                          smithy.SchemaExtensions
+	e_AwsCodeGuruSecurity                                smithy.SchemaExtensions
+	eAccessDeniedException                               smithy.SchemaExtensions
+	eAccessDeniedException_errorCode                     smithy.SchemaExtensions
+	eAccessDeniedException_message                       smithy.SchemaExtensions
+	eAccessDeniedException_resourceId                    smithy.SchemaExtensions
+	eAccessDeniedException_resourceType                  smithy.SchemaExtensions
+	eAccountFindingsMetric                               smithy.SchemaExtensions
+	eAccountFindingsMetric_date                          smithy.SchemaExtensions
+	eAccountFindingsMetric_newFindings                   smithy.SchemaExtensions
+	eAccountFindingsMetric_closedFindings                smithy.SchemaExtensions
+	eAccountFindingsMetric_openFindings                  smithy.SchemaExtensions
+	eAccountFindingsMetric_meanTimeToClose               smithy.SchemaExtensions
+	eAnalysisType                                        smithy.SchemaExtensions
+	eAnalysisType_SECURITY                               smithy.SchemaExtensions
+	eAnalysisType_ALL                                    smithy.SchemaExtensions
+	eBatchGetFindingsError                               smithy.SchemaExtensions
+	eBatchGetFindingsError_scanName                      smithy.SchemaExtensions
+	eBatchGetFindingsError_findingId                     smithy.SchemaExtensions
+	eBatchGetFindingsError_errorCode                     smithy.SchemaExtensions
+	eBatchGetFindingsError_message                       smithy.SchemaExtensions
+	e_BatchGetFindingsErrors                             smithy.SchemaExtensions
+	e_BatchGetFindingsErrors_member                      smithy.SchemaExtensions
+	e_CategoriesWithMostFindings                         smithy.SchemaExtensions
+	e_CategoriesWithMostFindings_member                  smithy.SchemaExtensions
+	eCategoryWithFindingNum                              smithy.SchemaExtensions
+	eCategoryWithFindingNum_categoryName                 smithy.SchemaExtensions
+	eCategoryWithFindingNum_findingNumber                smithy.SchemaExtensions
+	e_ClientToken                                        smithy.SchemaExtensions
+	eCodeLine                                            smithy.SchemaExtensions
+	eCodeLine_number                                     smithy.SchemaExtensions
+	eCodeLine_content                                    smithy.SchemaExtensions
+	e_CodeSnippet                                        smithy.SchemaExtensions
+	e_CodeSnippet_member                                 smithy.SchemaExtensions
+	eConflictException                                   smithy.SchemaExtensions
+	eConflictException_errorCode                         smithy.SchemaExtensions
+	eConflictException_message                           smithy.SchemaExtensions
+	eConflictException_resourceId                        smithy.SchemaExtensions
+	eConflictException_resourceType                      smithy.SchemaExtensions
+	e_DetectorTags                                       smithy.SchemaExtensions
+	e_DetectorTags_member                                smithy.SchemaExtensions
+	eEncryptionConfig                                    smithy.SchemaExtensions
+	eEncryptionConfig_kmsKeyArn                          smithy.SchemaExtensions
+	eErrorCode                                           smithy.SchemaExtensions
+	eErrorCode_DUPLICATE_IDENTIFIER                      smithy.SchemaExtensions
+	eErrorCode_ITEM_DOES_NOT_EXIST                       smithy.SchemaExtensions
+	eErrorCode_INTERNAL_ERROR                            smithy.SchemaExtensions
+	eErrorCode_INVALID_FINDING_ID                        smithy.SchemaExtensions
+	eErrorCode_INVALID_SCAN_NAME                         smithy.SchemaExtensions
+	e_ErrorMessage                                       smithy.SchemaExtensions
+	eFilePath                                            smithy.SchemaExtensions
+	eFilePath_name                                       smithy.SchemaExtensions
+	eFilePath_path                                       smithy.SchemaExtensions
+	eFilePath_startLine                                  smithy.SchemaExtensions
+	eFilePath_endLine                                    smithy.SchemaExtensions
+	eFilePath_codeSnippet                                smithy.SchemaExtensions
+	eFinding                                             smithy.SchemaExtensions
+	eFinding_createdAt                                   smithy.SchemaExtensions
+	eFinding_description                                 smithy.SchemaExtensions
+	eFinding_generatorId                                 smithy.SchemaExtensions
+	eFinding_id                                          smithy.SchemaExtensions
+	eFinding_updatedAt                                   smithy.SchemaExtensions
+	eFinding_type                                        smithy.SchemaExtensions
+	eFinding_status                                      smithy.SchemaExtensions
+	eFinding_resource                                    smithy.SchemaExtensions
+	eFinding_vulnerability                               smithy.SchemaExtensions
+	eFinding_severity                                    smithy.SchemaExtensions
+	eFinding_remediation                                 smithy.SchemaExtensions
+	eFinding_title                                       smithy.SchemaExtensions
+	eFinding_detectorTags                                smithy.SchemaExtensions
+	eFinding_detectorId                                  smithy.SchemaExtensions
+	eFinding_detectorName                                smithy.SchemaExtensions
+	eFinding_ruleId                                      smithy.SchemaExtensions
+	eFindingIdentifier                                   smithy.SchemaExtensions
+	eFindingIdentifier_scanName                          smithy.SchemaExtensions
+	eFindingIdentifier_findingId                         smithy.SchemaExtensions
+	e_FindingIdentifiers                                 smithy.SchemaExtensions
+	e_FindingIdentifiers_member                          smithy.SchemaExtensions
+	eFindingMetricsValuePerSeverity                      smithy.SchemaExtensions
+	eFindingMetricsValuePerSeverity_info                 smithy.SchemaExtensions
+	eFindingMetricsValuePerSeverity_low                  smithy.SchemaExtensions
+	eFindingMetricsValuePerSeverity_medium               smithy.SchemaExtensions
+	eFindingMetricsValuePerSeverity_high                 smithy.SchemaExtensions
+	eFindingMetricsValuePerSeverity_critical             smithy.SchemaExtensions
+	e_Findings                                           smithy.SchemaExtensions
+	e_Findings_member                                    smithy.SchemaExtensions
+	e_FindingsMetricList                                 smithy.SchemaExtensions
+	e_FindingsMetricList_member                          smithy.SchemaExtensions
+	e_HeaderKey                                          smithy.SchemaExtensions
+	e_HeaderValue                                        smithy.SchemaExtensions
+	eInternalServerException                             smithy.SchemaExtensions
+	eInternalServerException_error                       smithy.SchemaExtensions
+	eInternalServerException_message                     smithy.SchemaExtensions
+	e_KmsKeyArn                                          smithy.SchemaExtensions
+	eMetricsSummary                                      smithy.SchemaExtensions
+	eMetricsSummary_date                                 smithy.SchemaExtensions
+	eMetricsSummary_openFindings                         smithy.SchemaExtensions
+	eMetricsSummary_categoriesWithMostFindings           smithy.SchemaExtensions
+	eMetricsSummary_scansWithMostOpenFindings            smithy.SchemaExtensions
+	eMetricsSummary_scansWithMostOpenCriticalFindings    smithy.SchemaExtensions
+	e_NextToken                                          smithy.SchemaExtensions
+	eRecommendation                                      smithy.SchemaExtensions
+	eRecommendation_text                                 smithy.SchemaExtensions
+	eRecommendation_url                                  smithy.SchemaExtensions
+	e_ReferenceUrls                                      smithy.SchemaExtensions
+	e_ReferenceUrls_member                               smithy.SchemaExtensions
+	e_RelatedVulnerabilities                             smithy.SchemaExtensions
+	e_RelatedVulnerabilities_member                      smithy.SchemaExtensions
+	eRemediation                                         smithy.SchemaExtensions
+	eRemediation_recommendation                          smithy.SchemaExtensions
+	eRemediation_suggestedFixes                          smithy.SchemaExtensions
+	e_RequestHeaderMap                                   smithy.SchemaExtensions
+	e_RequestHeaderMap_key                               smithy.SchemaExtensions
+	e_RequestHeaderMap_value                             smithy.SchemaExtensions
+	eResource                                            smithy.SchemaExtensions
+	eResource_id                                         smithy.SchemaExtensions
+	eResource_subResourceId                              smithy.SchemaExtensions
+	eResourceId                                          smithy.SchemaExtensions
+	eResourceId_codeArtifactId                           smithy.SchemaExtensions
+	eResourceNotFoundException                           smithy.SchemaExtensions
+	eResourceNotFoundException_errorCode                 smithy.SchemaExtensions
+	eResourceNotFoundException_message                   smithy.SchemaExtensions
+	eResourceNotFoundException_resourceId                smithy.SchemaExtensions
+	eResourceNotFoundException_resourceType              smithy.SchemaExtensions
+	e_S3Url                                              smithy.SchemaExtensions
+	e_ScanName                                           smithy.SchemaExtensions
+	e_ScanNameArn                                        smithy.SchemaExtensions
+	eScanNameWithFindingNum                              smithy.SchemaExtensions
+	eScanNameWithFindingNum_scanName                     smithy.SchemaExtensions
+	eScanNameWithFindingNum_findingNumber                smithy.SchemaExtensions
+	eScanState                                           smithy.SchemaExtensions
+	eScanState_IN_PROGRESS                               smithy.SchemaExtensions
+	eScanState_SUCCESSFUL                                smithy.SchemaExtensions
+	eScanState_FAILED                                    smithy.SchemaExtensions
+	e_ScanSummaries                                      smithy.SchemaExtensions
+	e_ScanSummaries_member                               smithy.SchemaExtensions
+	eScanSummary                                         smithy.SchemaExtensions
+	eScanSummary_scanState                               smithy.SchemaExtensions
+	eScanSummary_createdAt                               smithy.SchemaExtensions
+	eScanSummary_updatedAt                               smithy.SchemaExtensions
+	eScanSummary_scanName                                smithy.SchemaExtensions
+	eScanSummary_runId                                   smithy.SchemaExtensions
+	eScanSummary_scanNameArn                             smithy.SchemaExtensions
+	e_ScansWithMostOpenCriticalFindings                  smithy.SchemaExtensions
+	e_ScansWithMostOpenCriticalFindings_member           smithy.SchemaExtensions
+	e_ScansWithMostOpenFindings                          smithy.SchemaExtensions
+	e_ScansWithMostOpenFindings_member                   smithy.SchemaExtensions
+	eScanType                                            smithy.SchemaExtensions
+	eScanType_STANDARD                                   smithy.SchemaExtensions
+	eScanType_EXPRESS                                    smithy.SchemaExtensions
+	eSeverity                                            smithy.SchemaExtensions
+	eSeverity_CRITICAL                                   smithy.SchemaExtensions
+	eSeverity_HIGH                                       smithy.SchemaExtensions
+	eSeverity_MEDIUM                                     smithy.SchemaExtensions
+	eSeverity_LOW                                        smithy.SchemaExtensions
+	eSeverity_INFO                                       smithy.SchemaExtensions
+	eStatus                                              smithy.SchemaExtensions
+	eStatus_CLOSED                                       smithy.SchemaExtensions
+	eStatus_OPEN                                         smithy.SchemaExtensions
+	eStatus_ALL                                          smithy.SchemaExtensions
+	eSuggestedFix                                        smithy.SchemaExtensions
+	eSuggestedFix_description                            smithy.SchemaExtensions
+	eSuggestedFix_code                                   smithy.SchemaExtensions
+	e_SuggestedFixes                                     smithy.SchemaExtensions
+	e_SuggestedFixes_member                              smithy.SchemaExtensions
+	e_TagKey                                             smithy.SchemaExtensions
+	e_TagKeyList                                         smithy.SchemaExtensions
+	e_TagKeyList_member                                  smithy.SchemaExtensions
+	e_TagMap                                             smithy.SchemaExtensions
+	e_TagMap_key                                         smithy.SchemaExtensions
+	e_TagMap_value                                       smithy.SchemaExtensions
+	e_TagValue                                           smithy.SchemaExtensions
+	eThrottlingException                                 smithy.SchemaExtensions
+	eThrottlingException_errorCode                       smithy.SchemaExtensions
+	eThrottlingException_message                         smithy.SchemaExtensions
+	eThrottlingException_serviceCode                     smithy.SchemaExtensions
+	eThrottlingException_quotaCode                       smithy.SchemaExtensions
+	e_Uuid                                               smithy.SchemaExtensions
+	eValidationException                                 smithy.SchemaExtensions
+	eValidationException_errorCode                       smithy.SchemaExtensions
+	eValidationException_message                         smithy.SchemaExtensions
+	eValidationException_reason                          smithy.SchemaExtensions
+	eValidationException_fieldList                       smithy.SchemaExtensions
+	eValidationExceptionField                            smithy.SchemaExtensions
+	eValidationExceptionField_name                       smithy.SchemaExtensions
+	eValidationExceptionField_message                    smithy.SchemaExtensions
+	e_ValidationExceptionFieldList                       smithy.SchemaExtensions
+	e_ValidationExceptionFieldList_member                smithy.SchemaExtensions
+	eValidationExceptionReason                           smithy.SchemaExtensions
+	eValidationExceptionReason_UNKNOWN_OPERATION         smithy.SchemaExtensions
+	eValidationExceptionReason_CANNOT_PARSE              smithy.SchemaExtensions
+	eValidationExceptionReason_FIELD_VALIDATION_FAILED   smithy.SchemaExtensions
+	eValidationExceptionReason_OTHER                     smithy.SchemaExtensions
+	eValidationExceptionReason_LAMBDA_CODE_SHA_MISMATCH  smithy.SchemaExtensions
+	eVulnerability                                       smithy.SchemaExtensions
+	eVulnerability_referenceUrls                         smithy.SchemaExtensions
+	eVulnerability_relatedVulnerabilities                smithy.SchemaExtensions
+	eVulnerability_id                                    smithy.SchemaExtensions
+	eVulnerability_filePath                              smithy.SchemaExtensions
+	eVulnerability_itemCount                             smithy.SchemaExtensions
+	eBatchGetFindingsRequest                             smithy.SchemaExtensions
+	eBatchGetFindingsRequest_findingIdentifiers          smithy.SchemaExtensions
+	eBatchGetFindingsResponse                            smithy.SchemaExtensions
+	eBatchGetFindingsResponse_findings                   smithy.SchemaExtensions
+	eBatchGetFindingsResponse_failedFindings             smithy.SchemaExtensions
+	eCreateScanRequest                                   smithy.SchemaExtensions
+	eCreateScanRequest_clientToken                       smithy.SchemaExtensions
+	eCreateScanRequest_resourceId                        smithy.SchemaExtensions
+	eCreateScanRequest_scanName                          smithy.SchemaExtensions
+	eCreateScanRequest_scanType                          smithy.SchemaExtensions
+	eCreateScanRequest_analysisType                      smithy.SchemaExtensions
+	eCreateScanRequest_tags                              smithy.SchemaExtensions
+	eCreateScanResponse                                  smithy.SchemaExtensions
+	eCreateScanResponse_scanName                         smithy.SchemaExtensions
+	eCreateScanResponse_runId                            smithy.SchemaExtensions
+	eCreateScanResponse_resourceId                       smithy.SchemaExtensions
+	eCreateScanResponse_scanState                        smithy.SchemaExtensions
+	eCreateScanResponse_scanNameArn                      smithy.SchemaExtensions
+	eCreateUploadUrlRequest                              smithy.SchemaExtensions
+	eCreateUploadUrlRequest_scanName                     smithy.SchemaExtensions
+	eCreateUploadUrlResponse                             smithy.SchemaExtensions
+	eCreateUploadUrlResponse_s3Url                       smithy.SchemaExtensions
+	eCreateUploadUrlResponse_requestHeaders              smithy.SchemaExtensions
+	eCreateUploadUrlResponse_codeArtifactId              smithy.SchemaExtensions
+	eGetAccountConfigurationRequest                      smithy.SchemaExtensions
+	eGetAccountConfigurationResponse                     smithy.SchemaExtensions
+	eGetAccountConfigurationResponse_encryptionConfig    smithy.SchemaExtensions
+	eGetFindingsRequest                                  smithy.SchemaExtensions
+	eGetFindingsRequest_scanName                         smithy.SchemaExtensions
+	eGetFindingsRequest_nextToken                        smithy.SchemaExtensions
+	eGetFindingsRequest_maxResults                       smithy.SchemaExtensions
+	eGetFindingsRequest_status                           smithy.SchemaExtensions
+	eGetFindingsResponse                                 smithy.SchemaExtensions
+	eGetFindingsResponse_findings                        smithy.SchemaExtensions
+	eGetFindingsResponse_nextToken                       smithy.SchemaExtensions
+	eGetMetricsSummaryRequest                            smithy.SchemaExtensions
+	eGetMetricsSummaryRequest_date                       smithy.SchemaExtensions
+	eGetMetricsSummaryResponse                           smithy.SchemaExtensions
+	eGetMetricsSummaryResponse_metricsSummary            smithy.SchemaExtensions
+	eGetScanRequest                                      smithy.SchemaExtensions
+	eGetScanRequest_scanName                             smithy.SchemaExtensions
+	eGetScanRequest_runId                                smithy.SchemaExtensions
+	eGetScanResponse                                     smithy.SchemaExtensions
+	eGetScanResponse_scanName                            smithy.SchemaExtensions
+	eGetScanResponse_runId                               smithy.SchemaExtensions
+	eGetScanResponse_scanState                           smithy.SchemaExtensions
+	eGetScanResponse_createdAt                           smithy.SchemaExtensions
+	eGetScanResponse_analysisType                        smithy.SchemaExtensions
+	eGetScanResponse_updatedAt                           smithy.SchemaExtensions
+	eGetScanResponse_numberOfRevisions                   smithy.SchemaExtensions
+	eGetScanResponse_scanNameArn                         smithy.SchemaExtensions
+	eGetScanResponse_errorMessage                        smithy.SchemaExtensions
+	eListFindingsMetricsRequest                          smithy.SchemaExtensions
+	eListFindingsMetricsRequest_nextToken                smithy.SchemaExtensions
+	eListFindingsMetricsRequest_maxResults               smithy.SchemaExtensions
+	eListFindingsMetricsRequest_startDate                smithy.SchemaExtensions
+	eListFindingsMetricsRequest_endDate                  smithy.SchemaExtensions
+	eListFindingsMetricsResponse                         smithy.SchemaExtensions
+	eListFindingsMetricsResponse_findingsMetrics         smithy.SchemaExtensions
+	eListFindingsMetricsResponse_nextToken               smithy.SchemaExtensions
+	eListScansRequest                                    smithy.SchemaExtensions
+	eListScansRequest_nextToken                          smithy.SchemaExtensions
+	eListScansRequest_maxResults                         smithy.SchemaExtensions
+	eListScansResponse                                   smithy.SchemaExtensions
+	eListScansResponse_summaries                         smithy.SchemaExtensions
+	eListScansResponse_nextToken                         smithy.SchemaExtensions
+	eListTagsForResourceRequest                          smithy.SchemaExtensions
+	eListTagsForResourceRequest_resourceArn              smithy.SchemaExtensions
+	eListTagsForResourceResponse                         smithy.SchemaExtensions
+	eListTagsForResourceResponse_tags                    smithy.SchemaExtensions
+	eTagResourceRequest                                  smithy.SchemaExtensions
+	eTagResourceRequest_resourceArn                      smithy.SchemaExtensions
+	eTagResourceRequest_tags                             smithy.SchemaExtensions
+	eTagResourceResponse                                 smithy.SchemaExtensions
+	eUntagResourceRequest                                smithy.SchemaExtensions
+	eUntagResourceRequest_resourceArn                    smithy.SchemaExtensions
+	eUntagResourceRequest_tagKeys                        smithy.SchemaExtensions
+	eUntagResourceResponse                               smithy.SchemaExtensions
+	eUpdateAccountConfigurationRequest                   smithy.SchemaExtensions
+	eUpdateAccountConfigurationRequest_encryptionConfig  smithy.SchemaExtensions
+	eUpdateAccountConfigurationResponse                  smithy.SchemaExtensions
+	eUpdateAccountConfigurationResponse_encryptionConfig smithy.SchemaExtensions
+)
 
 var (
 	iBatchGetFindings                   = smithy.ShapeID{Namespace: "com.amazonaws.codegurusecurity", Name: "BatchGetFindings"}
@@ -257,301 +550,301 @@ var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagR
 var mUpdateAccountConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAccountConfigurationRequest_encryptionConfig}}
 var mUpdateAccountConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAccountConfigurationResponse_encryptionConfig}}
 
-var sBatchGetFindings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetFindings, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &ext[0]})
-var sCreateScan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateScan, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &ext[1]})
-var sCreateUploadUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUploadUrl, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &ext[2]})
-var sGetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountConfiguration, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &ext[3]})
-var sGetFindings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFindings, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &ext[4]})
-var sGetMetricsSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricsSummary, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &ext[5]})
-var sGetScan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetScan, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &ext[6]})
-var sListFindingsMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFindingsMetrics, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &ext[7]})
-var sListScans = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScans, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &ext[8]})
-var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &ext[9]})
-var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &ext[10]})
-var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &ext[11]})
-var sUpdateAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountConfiguration, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &ext[12]})
-var s_AwsCodeGuruSecurity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsCodeGuruSecurity, Type: smithy.ShapeTypeService, Ext: &ext[13]})
-var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &ext[14]})
-var sAccountFindingsMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountFindingsMetric, Members: &mAccountFindingsMetric, Type: smithy.ShapeTypeStructure, Ext: &ext[19]})
-var sAnalysisType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalysisType, Members: &mAnalysisType, Type: smithy.ShapeTypeEnum, Ext: &ext[25]})
-var sBatchGetFindingsError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetFindingsError, Members: &mBatchGetFindingsError, Type: smithy.ShapeTypeStructure, Ext: &ext[28]})
-var s_BatchGetFindingsErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetFindingsErrors, Members: &m_BatchGetFindingsErrors, Type: smithy.ShapeTypeList, Ext: &ext[33]})
-var s_CategoriesWithMostFindings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CategoriesWithMostFindings, Members: &m_CategoriesWithMostFindings, Type: smithy.ShapeTypeList, Ext: &ext[35]})
-var sCategoryWithFindingNum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCategoryWithFindingNum, Members: &mCategoryWithFindingNum, Type: smithy.ShapeTypeStructure, Ext: &ext[37]})
-var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[40]})
-var sCodeLine = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeLine, Members: &mCodeLine, Type: smithy.ShapeTypeStructure, Ext: &ext[41]})
-var s_CodeSnippet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeSnippet, Members: &m_CodeSnippet, Type: smithy.ShapeTypeList, Ext: &ext[44]})
-var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &ext[46]})
-var s_DetectorTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DetectorTags, Members: &m_DetectorTags, Type: smithy.ShapeTypeList, Ext: &ext[51]})
-var sEncryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionConfig, Members: &mEncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[53]})
-var sErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[55]})
-var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[61]})
-var sFilePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilePath, Members: &mFilePath, Type: smithy.ShapeTypeStructure, Ext: &ext[62]})
-var sFinding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFinding, Members: &mFinding, Type: smithy.ShapeTypeStructure, Ext: &ext[68]})
-var sFindingIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFindingIdentifier, Members: &mFindingIdentifier, Type: smithy.ShapeTypeStructure, Ext: &ext[85]})
-var s_FindingIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingIdentifiers, Members: &m_FindingIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[88]})
-var sFindingMetricsValuePerSeverity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFindingMetricsValuePerSeverity, Members: &mFindingMetricsValuePerSeverity, Type: smithy.ShapeTypeStructure, Ext: &ext[90]})
-var s_Findings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Findings, Members: &m_Findings, Type: smithy.ShapeTypeList, Ext: &ext[96]})
-var s_FindingsMetricList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingsMetricList, Members: &m_FindingsMetricList, Type: smithy.ShapeTypeList, Ext: &ext[98]})
-var s_HeaderKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HeaderKey, Type: smithy.ShapeTypeString, Ext: &ext[100]})
-var s_HeaderValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HeaderValue, Type: smithy.ShapeTypeString, Ext: &ext[101]})
-var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &ext[102]})
-var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &ext[105]})
-var sMetricsSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricsSummary, Members: &mMetricsSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[106]})
-var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[112]})
-var sRecommendation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecommendation, Members: &mRecommendation, Type: smithy.ShapeTypeStructure, Ext: &ext[113]})
-var s_ReferenceUrls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReferenceUrls, Members: &m_ReferenceUrls, Type: smithy.ShapeTypeList, Ext: &ext[116]})
-var s_RelatedVulnerabilities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelatedVulnerabilities, Members: &m_RelatedVulnerabilities, Type: smithy.ShapeTypeList, Ext: &ext[118]})
-var sRemediation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemediation, Members: &mRemediation, Type: smithy.ShapeTypeStructure, Ext: &ext[120]})
-var s_RequestHeaderMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestHeaderMap, Members: &m_RequestHeaderMap, Traits: &t16, Type: smithy.ShapeTypeMap, Ext: &ext[123]})
-var sResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResource, Members: &mResource, Type: smithy.ShapeTypeStructure, Ext: &ext[126]})
-var sResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceId, Members: &mResourceId, Type: smithy.ShapeTypeUnion, Ext: &ext[129]})
-var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &ext[131]})
-var s_S3Url = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Url, Traits: &t16, Type: smithy.ShapeTypeString, Ext: &ext[136]})
-var s_ScanName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScanName, Type: smithy.ShapeTypeString, Ext: &ext[137]})
-var s_ScanNameArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScanNameArn, Type: smithy.ShapeTypeString, Ext: &ext[138]})
-var sScanNameWithFindingNum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScanNameWithFindingNum, Members: &mScanNameWithFindingNum, Type: smithy.ShapeTypeStructure, Ext: &ext[139]})
-var sScanState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScanState, Members: &mScanState, Type: smithy.ShapeTypeEnum, Ext: &ext[142]})
-var s_ScanSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScanSummaries, Members: &m_ScanSummaries, Type: smithy.ShapeTypeList, Ext: &ext[146]})
-var sScanSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScanSummary, Members: &mScanSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[148]})
-var s_ScansWithMostOpenCriticalFindings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScansWithMostOpenCriticalFindings, Members: &m_ScansWithMostOpenCriticalFindings, Type: smithy.ShapeTypeList, Ext: &ext[155]})
-var s_ScansWithMostOpenFindings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScansWithMostOpenFindings, Members: &m_ScansWithMostOpenFindings, Type: smithy.ShapeTypeList, Ext: &ext[157]})
-var sScanType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScanType, Members: &mScanType, Type: smithy.ShapeTypeEnum, Ext: &ext[159]})
-var sSeverity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSeverity, Members: &mSeverity, Type: smithy.ShapeTypeEnum, Ext: &ext[162]})
-var sStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[168]})
-var sSuggestedFix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestedFix, Members: &mSuggestedFix, Type: smithy.ShapeTypeStructure, Ext: &ext[172]})
-var s_SuggestedFixes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SuggestedFixes, Members: &m_SuggestedFixes, Type: smithy.ShapeTypeList, Ext: &ext[175]})
-var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[177]})
-var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &ext[178]})
-var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[180]})
-var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[183]})
-var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &ext[184]})
-var s_Uuid = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &ext[189]})
-var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &ext[190]})
-var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[195]})
-var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[198]})
-var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[200]})
-var sVulnerability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVulnerability, Members: &mVulnerability, Type: smithy.ShapeTypeStructure, Ext: &ext[206]})
-var sBatchGetFindingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetFindingsRequest, Members: &mBatchGetFindingsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[212]})
-var sBatchGetFindingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetFindingsResponse, Members: &mBatchGetFindingsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[214]})
-var sCreateScanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateScanRequest, Members: &mCreateScanRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[217]})
-var sCreateScanResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateScanResponse, Members: &mCreateScanResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[224]})
-var sCreateUploadUrlRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUploadUrlRequest, Members: &mCreateUploadUrlRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[230]})
-var sCreateUploadUrlResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUploadUrlResponse, Members: &mCreateUploadUrlResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[232]})
-var sGetAccountConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[236]})
-var sGetAccountConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountConfigurationResponse, Members: &mGetAccountConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[237]})
-var sGetFindingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFindingsRequest, Members: &mGetFindingsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[239]})
-var sGetFindingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFindingsResponse, Members: &mGetFindingsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[244]})
-var sGetMetricsSummaryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricsSummaryRequest, Members: &mGetMetricsSummaryRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[247]})
-var sGetMetricsSummaryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricsSummaryResponse, Members: &mGetMetricsSummaryResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[249]})
-var sGetScanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetScanRequest, Members: &mGetScanRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[251]})
-var sGetScanResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetScanResponse, Members: &mGetScanResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[254]})
-var sListFindingsMetricsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFindingsMetricsRequest, Members: &mListFindingsMetricsRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[264]})
-var sListFindingsMetricsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFindingsMetricsResponse, Members: &mListFindingsMetricsResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[269]})
-var sListScansRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScansRequest, Members: &mListScansRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[272]})
-var sListScansResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScansResponse, Members: &mListScansResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[275]})
-var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[278]})
-var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[280]})
-var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[282]})
-var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[285]})
-var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[286]})
-var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[289]})
-var sUpdateAccountConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountConfigurationRequest, Members: &mUpdateAccountConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &ext[290]})
-var sUpdateAccountConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountConfigurationResponse, Members: &mUpdateAccountConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &ext[292]})
+var sBatchGetFindings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetFindings, Traits: &t0, Type: smithy.ShapeTypeOperation, Ext: &eBatchGetFindings})
+var sCreateScan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateScan, Traits: &t1, Type: smithy.ShapeTypeOperation, Ext: &eCreateScan})
+var sCreateUploadUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUploadUrl, Traits: &t2, Type: smithy.ShapeTypeOperation, Ext: &eCreateUploadUrl})
+var sGetAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountConfiguration, Traits: &t3, Type: smithy.ShapeTypeOperation, Ext: &eGetAccountConfiguration})
+var sGetFindings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFindings, Traits: &t4, Type: smithy.ShapeTypeOperation, Ext: &eGetFindings})
+var sGetMetricsSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricsSummary, Traits: &t5, Type: smithy.ShapeTypeOperation, Ext: &eGetMetricsSummary})
+var sGetScan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetScan, Traits: &t6, Type: smithy.ShapeTypeOperation, Ext: &eGetScan})
+var sListFindingsMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFindingsMetrics, Traits: &t7, Type: smithy.ShapeTypeOperation, Ext: &eListFindingsMetrics})
+var sListScans = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScans, Traits: &t8, Type: smithy.ShapeTypeOperation, Ext: &eListScans})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t9, Type: smithy.ShapeTypeOperation, Ext: &eListTagsForResource})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t10, Type: smithy.ShapeTypeOperation, Ext: &eTagResource})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t11, Type: smithy.ShapeTypeOperation, Ext: &eUntagResource})
+var sUpdateAccountConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountConfiguration, Traits: &t12, Type: smithy.ShapeTypeOperation, Ext: &eUpdateAccountConfiguration})
+var s_AwsCodeGuruSecurity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsCodeGuruSecurity, Type: smithy.ShapeTypeService, Ext: &e_AwsCodeGuruSecurity})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t13, Type: smithy.ShapeTypeStructure, Ext: &eAccessDeniedException})
+var sAccountFindingsMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountFindingsMetric, Members: &mAccountFindingsMetric, Type: smithy.ShapeTypeStructure, Ext: &eAccountFindingsMetric})
+var sAnalysisType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalysisType, Members: &mAnalysisType, Type: smithy.ShapeTypeEnum, Ext: &eAnalysisType})
+var sBatchGetFindingsError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetFindingsError, Members: &mBatchGetFindingsError, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetFindingsError})
+var s_BatchGetFindingsErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetFindingsErrors, Members: &m_BatchGetFindingsErrors, Type: smithy.ShapeTypeList, Ext: &e_BatchGetFindingsErrors})
+var s_CategoriesWithMostFindings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CategoriesWithMostFindings, Members: &m_CategoriesWithMostFindings, Type: smithy.ShapeTypeList, Ext: &e_CategoriesWithMostFindings})
+var sCategoryWithFindingNum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCategoryWithFindingNum, Members: &mCategoryWithFindingNum, Type: smithy.ShapeTypeStructure, Ext: &eCategoryWithFindingNum})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &e_ClientToken})
+var sCodeLine = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeLine, Members: &mCodeLine, Type: smithy.ShapeTypeStructure, Ext: &eCodeLine})
+var s_CodeSnippet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeSnippet, Members: &m_CodeSnippet, Type: smithy.ShapeTypeList, Ext: &e_CodeSnippet})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t14, Type: smithy.ShapeTypeStructure, Ext: &eConflictException})
+var s_DetectorTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DetectorTags, Members: &m_DetectorTags, Type: smithy.ShapeTypeList, Ext: &e_DetectorTags})
+var sEncryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionConfig, Members: &mEncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &eEncryptionConfig})
+var sErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eErrorCode})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &e_ErrorMessage})
+var sFilePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilePath, Members: &mFilePath, Type: smithy.ShapeTypeStructure, Ext: &eFilePath})
+var sFinding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFinding, Members: &mFinding, Type: smithy.ShapeTypeStructure, Ext: &eFinding})
+var sFindingIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFindingIdentifier, Members: &mFindingIdentifier, Type: smithy.ShapeTypeStructure, Ext: &eFindingIdentifier})
+var s_FindingIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingIdentifiers, Members: &m_FindingIdentifiers, Type: smithy.ShapeTypeList, Ext: &e_FindingIdentifiers})
+var sFindingMetricsValuePerSeverity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFindingMetricsValuePerSeverity, Members: &mFindingMetricsValuePerSeverity, Type: smithy.ShapeTypeStructure, Ext: &eFindingMetricsValuePerSeverity})
+var s_Findings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Findings, Members: &m_Findings, Type: smithy.ShapeTypeList, Ext: &e_Findings})
+var s_FindingsMetricList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingsMetricList, Members: &m_FindingsMetricList, Type: smithy.ShapeTypeList, Ext: &e_FindingsMetricList})
+var s_HeaderKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HeaderKey, Type: smithy.ShapeTypeString, Ext: &e_HeaderKey})
+var s_HeaderValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HeaderValue, Type: smithy.ShapeTypeString, Ext: &e_HeaderValue})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t15, Type: smithy.ShapeTypeStructure, Ext: &eInternalServerException})
+var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &e_KmsKeyArn})
+var sMetricsSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricsSummary, Members: &mMetricsSummary, Type: smithy.ShapeTypeStructure, Ext: &eMetricsSummary})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &e_NextToken})
+var sRecommendation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecommendation, Members: &mRecommendation, Type: smithy.ShapeTypeStructure, Ext: &eRecommendation})
+var s_ReferenceUrls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReferenceUrls, Members: &m_ReferenceUrls, Type: smithy.ShapeTypeList, Ext: &e_ReferenceUrls})
+var s_RelatedVulnerabilities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelatedVulnerabilities, Members: &m_RelatedVulnerabilities, Type: smithy.ShapeTypeList, Ext: &e_RelatedVulnerabilities})
+var sRemediation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemediation, Members: &mRemediation, Type: smithy.ShapeTypeStructure, Ext: &eRemediation})
+var s_RequestHeaderMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestHeaderMap, Members: &m_RequestHeaderMap, Traits: &t16, Type: smithy.ShapeTypeMap, Ext: &e_RequestHeaderMap})
+var sResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResource, Members: &mResource, Type: smithy.ShapeTypeStructure, Ext: &eResource})
+var sResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceId, Members: &mResourceId, Type: smithy.ShapeTypeUnion, Ext: &eResourceId})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t17, Type: smithy.ShapeTypeStructure, Ext: &eResourceNotFoundException})
+var s_S3Url = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Url, Traits: &t16, Type: smithy.ShapeTypeString, Ext: &e_S3Url})
+var s_ScanName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScanName, Type: smithy.ShapeTypeString, Ext: &e_ScanName})
+var s_ScanNameArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScanNameArn, Type: smithy.ShapeTypeString, Ext: &e_ScanNameArn})
+var sScanNameWithFindingNum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScanNameWithFindingNum, Members: &mScanNameWithFindingNum, Type: smithy.ShapeTypeStructure, Ext: &eScanNameWithFindingNum})
+var sScanState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScanState, Members: &mScanState, Type: smithy.ShapeTypeEnum, Ext: &eScanState})
+var s_ScanSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScanSummaries, Members: &m_ScanSummaries, Type: smithy.ShapeTypeList, Ext: &e_ScanSummaries})
+var sScanSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScanSummary, Members: &mScanSummary, Type: smithy.ShapeTypeStructure, Ext: &eScanSummary})
+var s_ScansWithMostOpenCriticalFindings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScansWithMostOpenCriticalFindings, Members: &m_ScansWithMostOpenCriticalFindings, Type: smithy.ShapeTypeList, Ext: &e_ScansWithMostOpenCriticalFindings})
+var s_ScansWithMostOpenFindings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScansWithMostOpenFindings, Members: &m_ScansWithMostOpenFindings, Type: smithy.ShapeTypeList, Ext: &e_ScansWithMostOpenFindings})
+var sScanType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScanType, Members: &mScanType, Type: smithy.ShapeTypeEnum, Ext: &eScanType})
+var sSeverity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSeverity, Members: &mSeverity, Type: smithy.ShapeTypeEnum, Ext: &eSeverity})
+var sStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eStatus})
+var sSuggestedFix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuggestedFix, Members: &mSuggestedFix, Type: smithy.ShapeTypeStructure, Ext: &eSuggestedFix})
+var s_SuggestedFixes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SuggestedFixes, Members: &m_SuggestedFixes, Type: smithy.ShapeTypeList, Ext: &e_SuggestedFixes})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKey})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList, Ext: &e_TagKeyList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &e_TagMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagValue})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t18, Type: smithy.ShapeTypeStructure, Ext: &eThrottlingException})
+var s_Uuid = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &e_Uuid})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t19, Type: smithy.ShapeTypeStructure, Ext: &eValidationException})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionField})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &e_ValidationExceptionFieldList})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationExceptionReason})
+var sVulnerability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVulnerability, Members: &mVulnerability, Type: smithy.ShapeTypeStructure, Ext: &eVulnerability})
+var sBatchGetFindingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetFindingsRequest, Members: &mBatchGetFindingsRequest, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetFindingsRequest})
+var sBatchGetFindingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetFindingsResponse, Members: &mBatchGetFindingsResponse, Type: smithy.ShapeTypeStructure, Ext: &eBatchGetFindingsResponse})
+var sCreateScanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateScanRequest, Members: &mCreateScanRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateScanRequest})
+var sCreateScanResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateScanResponse, Members: &mCreateScanResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateScanResponse})
+var sCreateUploadUrlRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUploadUrlRequest, Members: &mCreateUploadUrlRequest, Type: smithy.ShapeTypeStructure, Ext: &eCreateUploadUrlRequest})
+var sCreateUploadUrlResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUploadUrlResponse, Members: &mCreateUploadUrlResponse, Type: smithy.ShapeTypeStructure, Ext: &eCreateUploadUrlResponse})
+var sGetAccountConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetAccountConfigurationRequest})
+var sGetAccountConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountConfigurationResponse, Members: &mGetAccountConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetAccountConfigurationResponse})
+var sGetFindingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFindingsRequest, Members: &mGetFindingsRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetFindingsRequest})
+var sGetFindingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFindingsResponse, Members: &mGetFindingsResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetFindingsResponse})
+var sGetMetricsSummaryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricsSummaryRequest, Members: &mGetMetricsSummaryRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetMetricsSummaryRequest})
+var sGetMetricsSummaryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetricsSummaryResponse, Members: &mGetMetricsSummaryResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetMetricsSummaryResponse})
+var sGetScanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetScanRequest, Members: &mGetScanRequest, Type: smithy.ShapeTypeStructure, Ext: &eGetScanRequest})
+var sGetScanResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetScanResponse, Members: &mGetScanResponse, Type: smithy.ShapeTypeStructure, Ext: &eGetScanResponse})
+var sListFindingsMetricsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFindingsMetricsRequest, Members: &mListFindingsMetricsRequest, Type: smithy.ShapeTypeStructure, Ext: &eListFindingsMetricsRequest})
+var sListFindingsMetricsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFindingsMetricsResponse, Members: &mListFindingsMetricsResponse, Type: smithy.ShapeTypeStructure, Ext: &eListFindingsMetricsResponse})
+var sListScansRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScansRequest, Members: &mListScansRequest, Type: smithy.ShapeTypeStructure, Ext: &eListScansRequest})
+var sListScansResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScansResponse, Members: &mListScansResponse, Type: smithy.ShapeTypeStructure, Ext: &eListScansResponse})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceRequest})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eListTagsForResourceResponse})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceRequest})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eTagResourceResponse})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceRequest})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure, Ext: &eUntagResourceResponse})
+var sUpdateAccountConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountConfigurationRequest, Members: &mUpdateAccountConfigurationRequest, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAccountConfigurationRequest})
+var sUpdateAccountConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountConfigurationResponse, Members: &mUpdateAccountConfigurationResponse, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAccountConfigurationResponse})
 
-var sAccessDeniedException_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[15]})
-var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[16]})
-var sAccessDeniedException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[17]})
-var sAccessDeniedException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[18]})
-var sAccountFindingsMetric_date = smithy.NewStaticSchema(smithy.StaticSchema{Member: "date", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[20]})
-var sAccountFindingsMetric_newFindings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newFindings", ID: &iFindingMetricsValuePerSeverity, Members: &mFindingMetricsValuePerSeverity, Type: smithy.ShapeTypeStructure, Ext: &ext[21]})
-var sAccountFindingsMetric_closedFindings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "closedFindings", ID: &iFindingMetricsValuePerSeverity, Members: &mFindingMetricsValuePerSeverity, Type: smithy.ShapeTypeStructure, Ext: &ext[22]})
-var sAccountFindingsMetric_openFindings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openFindings", ID: &iFindingMetricsValuePerSeverity, Members: &mFindingMetricsValuePerSeverity, Type: smithy.ShapeTypeStructure, Ext: &ext[23]})
-var sAccountFindingsMetric_meanTimeToClose = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meanTimeToClose", ID: &iFindingMetricsValuePerSeverity, Members: &mFindingMetricsValuePerSeverity, Type: smithy.ShapeTypeStructure, Ext: &ext[24]})
-var sAnalysisType_SECURITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECURITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[26]})
-var sAnalysisType_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[27]})
-var sBatchGetFindingsError_scanName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanName", ID: &i_ScanName, Type: smithy.ShapeTypeString, Ext: &ext[29]})
-var sBatchGetFindingsError_findingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findingId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[30]})
-var sBatchGetFindingsError_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &ext[31]})
-var sBatchGetFindingsError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[32]})
-var s_BatchGetFindingsErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchGetFindingsError, Members: &mBatchGetFindingsError, Type: smithy.ShapeTypeStructure, Ext: &ext[34]})
-var s_CategoriesWithMostFindings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCategoryWithFindingNum, Members: &mCategoryWithFindingNum, Type: smithy.ShapeTypeStructure, Ext: &ext[36]})
-var sCategoryWithFindingNum_categoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categoryName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[38]})
-var sCategoryWithFindingNum_findingNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findingNumber", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[39]})
-var sCodeLine_number = smithy.NewStaticSchema(smithy.StaticSchema{Member: "number", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[42]})
-var sCodeLine_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[43]})
-var s_CodeSnippet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCodeLine, Members: &mCodeLine, Type: smithy.ShapeTypeStructure, Ext: &ext[45]})
-var sConflictException_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[47]})
-var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[48]})
-var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[49]})
-var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[50]})
-var s_DetectorTags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[52]})
-var sEncryptionConfig_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &ext[54]})
-var sErrorCode_DUPLICATE_IDENTIFIER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUPLICATE_IDENTIFIER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[56]})
-var sErrorCode_ITEM_DOES_NOT_EXIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ITEM_DOES_NOT_EXIST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[57]})
-var sErrorCode_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[58]})
-var sErrorCode_INVALID_FINDING_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_FINDING_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[59]})
-var sErrorCode_INVALID_SCAN_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_SCAN_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[60]})
-var sFilePath_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[63]})
-var sFilePath_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[64]})
-var sFilePath_startLine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startLine", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[65]})
-var sFilePath_endLine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endLine", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[66]})
-var sFilePath_codeSnippet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeSnippet", ID: &i_CodeSnippet, Members: &m_CodeSnippet, Type: smithy.ShapeTypeList, Ext: &ext[67]})
-var sFinding_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[69]})
-var sFinding_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[70]})
-var sFinding_generatorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "generatorId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[71]})
-var sFinding_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[72]})
-var sFinding_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[73]})
-var sFinding_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[74]})
-var sFinding_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &ext[75]})
-var sFinding_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &iResource, Members: &mResource, Type: smithy.ShapeTypeStructure, Ext: &ext[76]})
-var sFinding_vulnerability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vulnerability", ID: &iVulnerability, Members: &mVulnerability, Type: smithy.ShapeTypeStructure, Ext: &ext[77]})
-var sFinding_severity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "severity", ID: &iSeverity, Members: &mSeverity, Type: smithy.ShapeTypeEnum, Ext: &ext[78]})
-var sFinding_remediation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remediation", ID: &iRemediation, Members: &mRemediation, Type: smithy.ShapeTypeStructure, Ext: &ext[79]})
-var sFinding_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[80]})
-var sFinding_detectorTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorTags", ID: &i_DetectorTags, Members: &m_DetectorTags, Type: smithy.ShapeTypeList, Ext: &ext[81]})
-var sFinding_detectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[82]})
-var sFinding_detectorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[83]})
-var sFinding_ruleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[84]})
-var sFindingIdentifier_scanName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[86]})
-var sFindingIdentifier_findingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findingId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[87]})
-var s_FindingIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFindingIdentifier, Members: &mFindingIdentifier, Type: smithy.ShapeTypeStructure, Ext: &ext[89]})
-var sFindingMetricsValuePerSeverity_info = smithy.NewStaticSchema(smithy.StaticSchema{Member: "info", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[91]})
-var sFindingMetricsValuePerSeverity_low = smithy.NewStaticSchema(smithy.StaticSchema{Member: "low", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[92]})
-var sFindingMetricsValuePerSeverity_medium = smithy.NewStaticSchema(smithy.StaticSchema{Member: "medium", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[93]})
-var sFindingMetricsValuePerSeverity_high = smithy.NewStaticSchema(smithy.StaticSchema{Member: "high", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[94]})
-var sFindingMetricsValuePerSeverity_critical = smithy.NewStaticSchema(smithy.StaticSchema{Member: "critical", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &ext[95]})
-var s_Findings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFinding, Members: &mFinding, Type: smithy.ShapeTypeStructure, Ext: &ext[97]})
-var s_FindingsMetricList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccountFindingsMetric, Members: &mAccountFindingsMetric, Type: smithy.ShapeTypeStructure, Ext: &ext[99]})
-var sInternalServerException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[103]})
-var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[104]})
-var sMetricsSummary_date = smithy.NewStaticSchema(smithy.StaticSchema{Member: "date", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[107]})
-var sMetricsSummary_openFindings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openFindings", ID: &iFindingMetricsValuePerSeverity, Members: &mFindingMetricsValuePerSeverity, Type: smithy.ShapeTypeStructure, Ext: &ext[108]})
-var sMetricsSummary_categoriesWithMostFindings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categoriesWithMostFindings", ID: &i_CategoriesWithMostFindings, Members: &m_CategoriesWithMostFindings, Type: smithy.ShapeTypeList, Ext: &ext[109]})
-var sMetricsSummary_scansWithMostOpenFindings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scansWithMostOpenFindings", ID: &i_ScansWithMostOpenFindings, Members: &m_ScansWithMostOpenFindings, Type: smithy.ShapeTypeList, Ext: &ext[110]})
-var sMetricsSummary_scansWithMostOpenCriticalFindings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scansWithMostOpenCriticalFindings", ID: &i_ScansWithMostOpenCriticalFindings, Members: &m_ScansWithMostOpenCriticalFindings, Type: smithy.ShapeTypeList, Ext: &ext[111]})
-var sRecommendation_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[114]})
-var sRecommendation_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[115]})
-var s_ReferenceUrls_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[117]})
-var s_RelatedVulnerabilities_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[119]})
-var sRemediation_recommendation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendation", ID: &iRecommendation, Members: &mRecommendation, Type: smithy.ShapeTypeStructure, Ext: &ext[121]})
-var sRemediation_suggestedFixes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "suggestedFixes", ID: &i_SuggestedFixes, Members: &m_SuggestedFixes, Type: smithy.ShapeTypeList, Ext: &ext[122]})
-var s_RequestHeaderMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_HeaderKey, Type: smithy.ShapeTypeString, Ext: &ext[124]})
-var s_RequestHeaderMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_HeaderValue, Type: smithy.ShapeTypeString, Ext: &ext[125]})
-var sResource_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[127]})
-var sResource_subResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subResourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[128]})
-var sResourceId_codeArtifactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeArtifactId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &ext[130]})
-var sResourceNotFoundException_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[132]})
-var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[133]})
-var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[134]})
-var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[135]})
-var sScanNameWithFindingNum_scanName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[140]})
-var sScanNameWithFindingNum_findingNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findingNumber", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[141]})
-var sScanState_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[143]})
-var sScanState_SUCCESSFUL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESSFUL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[144]})
-var sScanState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[145]})
-var s_ScanSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iScanSummary, Members: &mScanSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[147]})
-var sScanSummary_scanState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanState", ID: &iScanState, Members: &mScanState, Type: smithy.ShapeTypeEnum, Ext: &ext[149]})
-var sScanSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[150]})
-var sScanSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[151]})
-var sScanSummary_scanName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanName", ID: &i_ScanName, Type: smithy.ShapeTypeString, Ext: &ext[152]})
-var sScanSummary_runId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &ext[153]})
-var sScanSummary_scanNameArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanNameArn", ID: &i_ScanNameArn, Type: smithy.ShapeTypeString, Ext: &ext[154]})
-var s_ScansWithMostOpenCriticalFindings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iScanNameWithFindingNum, Members: &mScanNameWithFindingNum, Type: smithy.ShapeTypeStructure, Ext: &ext[156]})
-var s_ScansWithMostOpenFindings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iScanNameWithFindingNum, Members: &mScanNameWithFindingNum, Type: smithy.ShapeTypeStructure, Ext: &ext[158]})
-var sScanType_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[160]})
-var sScanType_EXPRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[161]})
-var sSeverity_CRITICAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CRITICAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[163]})
-var sSeverity_HIGH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIGH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[164]})
-var sSeverity_MEDIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[165]})
-var sSeverity_LOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[166]})
-var sSeverity_INFO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[167]})
-var sStatus_CLOSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOSED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[169]})
-var sStatus_OPEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[170]})
-var sStatus_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[171]})
-var sSuggestedFix_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[173]})
-var sSuggestedFix_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[174]})
-var s_SuggestedFixes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSuggestedFix, Members: &mSuggestedFix, Type: smithy.ShapeTypeStructure, Ext: &ext[176]})
-var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[179]})
-var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &ext[181]})
-var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &ext[182]})
-var sThrottlingException_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[185]})
-var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[186]})
-var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[187]})
-var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[188]})
-var sValidationException_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[191]})
-var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[192]})
-var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &ext[193]})
-var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &ext[194]})
-var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[196]})
-var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[197]})
-var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &ext[199]})
-var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[201]})
-var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[202]})
-var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[203]})
-var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[204]})
-var sValidationExceptionReason_LAMBDA_CODE_SHA_MISMATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAMBDA_CODE_SHA_MISMATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &ext[205]})
-var sVulnerability_referenceUrls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "referenceUrls", ID: &i_ReferenceUrls, Members: &m_ReferenceUrls, Type: smithy.ShapeTypeList, Ext: &ext[207]})
-var sVulnerability_relatedVulnerabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedVulnerabilities", ID: &i_RelatedVulnerabilities, Members: &m_RelatedVulnerabilities, Type: smithy.ShapeTypeList, Ext: &ext[208]})
-var sVulnerability_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &ext[209]})
-var sVulnerability_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &iFilePath, Members: &mFilePath, Type: smithy.ShapeTypeStructure, Ext: &ext[210]})
-var sVulnerability_itemCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "itemCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &ext[211]})
-var sBatchGetFindingsRequest_findingIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findingIdentifiers", ID: &i_FindingIdentifiers, Members: &m_FindingIdentifiers, Type: smithy.ShapeTypeList, Ext: &ext[213]})
-var sBatchGetFindingsResponse_findings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findings", ID: &i_Findings, Members: &m_Findings, Type: smithy.ShapeTypeList, Ext: &ext[215]})
-var sBatchGetFindingsResponse_failedFindings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failedFindings", ID: &i_BatchGetFindingsErrors, Members: &m_BatchGetFindingsErrors, Type: smithy.ShapeTypeList, Ext: &ext[216]})
-var sCreateScanRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &ext[218]})
-var sCreateScanRequest_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &iResourceId, Members: &mResourceId, Type: smithy.ShapeTypeUnion, Ext: &ext[219]})
-var sCreateScanRequest_scanName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanName", ID: &i_ScanName, Type: smithy.ShapeTypeString, Ext: &ext[220]})
-var sCreateScanRequest_scanType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanType", ID: &iScanType, Members: &mScanType, Type: smithy.ShapeTypeEnum, Ext: &ext[221]})
-var sCreateScanRequest_analysisType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "analysisType", ID: &iAnalysisType, Members: &mAnalysisType, Type: smithy.ShapeTypeEnum, Ext: &ext[222]})
-var sCreateScanRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[223]})
-var sCreateScanResponse_scanName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanName", ID: &i_ScanName, Type: smithy.ShapeTypeString, Ext: &ext[225]})
-var sCreateScanResponse_runId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &ext[226]})
-var sCreateScanResponse_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &iResourceId, Members: &mResourceId, Type: smithy.ShapeTypeUnion, Ext: &ext[227]})
-var sCreateScanResponse_scanState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanState", ID: &iScanState, Members: &mScanState, Type: smithy.ShapeTypeEnum, Ext: &ext[228]})
-var sCreateScanResponse_scanNameArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanNameArn", ID: &i_ScanNameArn, Type: smithy.ShapeTypeString, Ext: &ext[229]})
-var sCreateUploadUrlRequest_scanName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanName", ID: &i_ScanName, Type: smithy.ShapeTypeString, Ext: &ext[231]})
-var sCreateUploadUrlResponse_s3Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Url", ID: &i_S3Url, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &ext[233]})
-var sCreateUploadUrlResponse_requestHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestHeaders", ID: &i_RequestHeaderMap, Members: &m_RequestHeaderMap, Traits: &t20, Type: smithy.ShapeTypeMap, Ext: &ext[234]})
-var sCreateUploadUrlResponse_codeArtifactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeArtifactId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &ext[235]})
-var sGetAccountConfigurationResponse_encryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfig", ID: &iEncryptionConfig, Members: &mEncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[238]})
-var sGetFindingsRequest_scanName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanName", ID: &i_ScanName, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[240]})
-var sGetFindingsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[241]})
-var sGetFindingsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t23, Type: smithy.ShapeTypeInteger, Ext: &ext[242]})
-var sGetFindingsRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStatus, Members: &mStatus, Traits: &t24, Type: smithy.ShapeTypeEnum, Ext: &ext[243]})
-var sGetFindingsResponse_findings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findings", ID: &i_Findings, Members: &m_Findings, Type: smithy.ShapeTypeList, Ext: &ext[245]})
-var sGetFindingsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[246]})
-var sGetMetricsSummaryRequest_date = smithy.NewStaticSchema(smithy.StaticSchema{Member: "date", ID: &pTimestamp, Traits: &t25, Type: smithy.ShapeTypeTimestamp, Ext: &ext[248]})
-var sGetMetricsSummaryResponse_metricsSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricsSummary", ID: &iMetricsSummary, Members: &mMetricsSummary, Type: smithy.ShapeTypeStructure, Ext: &ext[250]})
-var sGetScanRequest_scanName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanName", ID: &i_ScanName, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[252]})
-var sGetScanRequest_runId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runId", ID: &i_Uuid, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &ext[253]})
-var sGetScanResponse_scanName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanName", ID: &i_ScanName, Type: smithy.ShapeTypeString, Ext: &ext[255]})
-var sGetScanResponse_runId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &ext[256]})
-var sGetScanResponse_scanState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanState", ID: &iScanState, Members: &mScanState, Type: smithy.ShapeTypeEnum, Ext: &ext[257]})
-var sGetScanResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[258]})
-var sGetScanResponse_analysisType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "analysisType", ID: &iAnalysisType, Members: &mAnalysisType, Type: smithy.ShapeTypeEnum, Ext: &ext[259]})
-var sGetScanResponse_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &ext[260]})
-var sGetScanResponse_numberOfRevisions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numberOfRevisions", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &ext[261]})
-var sGetScanResponse_scanNameArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanNameArn", ID: &i_ScanNameArn, Type: smithy.ShapeTypeString, Ext: &ext[262]})
-var sGetScanResponse_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &ext[263]})
-var sListFindingsMetricsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[265]})
-var sListFindingsMetricsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t23, Type: smithy.ShapeTypeInteger, Ext: &ext[266]})
-var sListFindingsMetricsRequest_startDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startDate", ID: &pTimestamp, Traits: &t27, Type: smithy.ShapeTypeTimestamp, Ext: &ext[267]})
-var sListFindingsMetricsRequest_endDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endDate", ID: &pTimestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &ext[268]})
-var sListFindingsMetricsResponse_findingsMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findingsMetrics", ID: &i_FindingsMetricList, Members: &m_FindingsMetricList, Type: smithy.ShapeTypeList, Ext: &ext[270]})
-var sListFindingsMetricsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[271]})
-var sListScansRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &ext[273]})
-var sListScansRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t23, Type: smithy.ShapeTypeInteger, Ext: &ext[274]})
-var sListScansResponse_summaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summaries", ID: &i_ScanSummaries, Members: &m_ScanSummaries, Type: smithy.ShapeTypeList, Ext: &ext[276]})
-var sListScansResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &ext[277]})
-var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ScanNameArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[279]})
-var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[281]})
-var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ScanNameArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[283]})
-var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &ext[284]})
-var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ScanNameArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &ext[287]})
-var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t29, Type: smithy.ShapeTypeList, Ext: &ext[288]})
-var sUpdateAccountConfigurationRequest_encryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfig", ID: &iEncryptionConfig, Members: &mEncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[291]})
-var sUpdateAccountConfigurationResponse_encryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfig", ID: &iEncryptionConfig, Members: &mEncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &ext[293]})
+var sAccessDeniedException_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_errorCode})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_message})
+var sAccessDeniedException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_resourceId})
+var sAccessDeniedException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eAccessDeniedException_resourceType})
+var sAccountFindingsMetric_date = smithy.NewStaticSchema(smithy.StaticSchema{Member: "date", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eAccountFindingsMetric_date})
+var sAccountFindingsMetric_newFindings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newFindings", ID: &iFindingMetricsValuePerSeverity, Members: &mFindingMetricsValuePerSeverity, Type: smithy.ShapeTypeStructure, Ext: &eAccountFindingsMetric_newFindings})
+var sAccountFindingsMetric_closedFindings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "closedFindings", ID: &iFindingMetricsValuePerSeverity, Members: &mFindingMetricsValuePerSeverity, Type: smithy.ShapeTypeStructure, Ext: &eAccountFindingsMetric_closedFindings})
+var sAccountFindingsMetric_openFindings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openFindings", ID: &iFindingMetricsValuePerSeverity, Members: &mFindingMetricsValuePerSeverity, Type: smithy.ShapeTypeStructure, Ext: &eAccountFindingsMetric_openFindings})
+var sAccountFindingsMetric_meanTimeToClose = smithy.NewStaticSchema(smithy.StaticSchema{Member: "meanTimeToClose", ID: &iFindingMetricsValuePerSeverity, Members: &mFindingMetricsValuePerSeverity, Type: smithy.ShapeTypeStructure, Ext: &eAccountFindingsMetric_meanTimeToClose})
+var sAnalysisType_SECURITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECURITY", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisType_SECURITY})
+var sAnalysisType_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eAnalysisType_ALL})
+var sBatchGetFindingsError_scanName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanName", ID: &i_ScanName, Type: smithy.ShapeTypeString, Ext: &eBatchGetFindingsError_scanName})
+var sBatchGetFindingsError_findingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findingId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBatchGetFindingsError_findingId})
+var sBatchGetFindingsError_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum, Ext: &eBatchGetFindingsError_errorCode})
+var sBatchGetFindingsError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eBatchGetFindingsError_message})
+var s_BatchGetFindingsErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchGetFindingsError, Members: &mBatchGetFindingsError, Type: smithy.ShapeTypeStructure, Ext: &e_BatchGetFindingsErrors_member})
+var s_CategoriesWithMostFindings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCategoryWithFindingNum, Members: &mCategoryWithFindingNum, Type: smithy.ShapeTypeStructure, Ext: &e_CategoriesWithMostFindings_member})
+var sCategoryWithFindingNum_categoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categoryName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCategoryWithFindingNum_categoryName})
+var sCategoryWithFindingNum_findingNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findingNumber", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eCategoryWithFindingNum_findingNumber})
+var sCodeLine_number = smithy.NewStaticSchema(smithy.StaticSchema{Member: "number", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eCodeLine_number})
+var sCodeLine_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eCodeLine_content})
+var s_CodeSnippet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCodeLine, Members: &mCodeLine, Type: smithy.ShapeTypeStructure, Ext: &e_CodeSnippet_member})
+var sConflictException_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_errorCode})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_message})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceId})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eConflictException_resourceType})
+var s_DetectorTags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_DetectorTags_member})
+var sEncryptionConfig_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString, Ext: &eEncryptionConfig_kmsKeyArn})
+var sErrorCode_DUPLICATE_IDENTIFIER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUPLICATE_IDENTIFIER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_DUPLICATE_IDENTIFIER})
+var sErrorCode_ITEM_DOES_NOT_EXIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ITEM_DOES_NOT_EXIST", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_ITEM_DOES_NOT_EXIST})
+var sErrorCode_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_INTERNAL_ERROR})
+var sErrorCode_INVALID_FINDING_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_FINDING_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_INVALID_FINDING_ID})
+var sErrorCode_INVALID_SCAN_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_SCAN_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eErrorCode_INVALID_SCAN_NAME})
+var sFilePath_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFilePath_name})
+var sFilePath_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFilePath_path})
+var sFilePath_startLine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startLine", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eFilePath_startLine})
+var sFilePath_endLine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endLine", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eFilePath_endLine})
+var sFilePath_codeSnippet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeSnippet", ID: &i_CodeSnippet, Members: &m_CodeSnippet, Type: smithy.ShapeTypeList, Ext: &eFilePath_codeSnippet})
+var sFinding_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eFinding_createdAt})
+var sFinding_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFinding_description})
+var sFinding_generatorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "generatorId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFinding_generatorId})
+var sFinding_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFinding_id})
+var sFinding_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eFinding_updatedAt})
+var sFinding_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFinding_type})
+var sFinding_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum, Ext: &eFinding_status})
+var sFinding_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &iResource, Members: &mResource, Type: smithy.ShapeTypeStructure, Ext: &eFinding_resource})
+var sFinding_vulnerability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vulnerability", ID: &iVulnerability, Members: &mVulnerability, Type: smithy.ShapeTypeStructure, Ext: &eFinding_vulnerability})
+var sFinding_severity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "severity", ID: &iSeverity, Members: &mSeverity, Type: smithy.ShapeTypeEnum, Ext: &eFinding_severity})
+var sFinding_remediation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remediation", ID: &iRemediation, Members: &mRemediation, Type: smithy.ShapeTypeStructure, Ext: &eFinding_remediation})
+var sFinding_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFinding_title})
+var sFinding_detectorTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorTags", ID: &i_DetectorTags, Members: &m_DetectorTags, Type: smithy.ShapeTypeList, Ext: &eFinding_detectorTags})
+var sFinding_detectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFinding_detectorId})
+var sFinding_detectorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detectorName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFinding_detectorName})
+var sFinding_ruleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFinding_ruleId})
+var sFindingIdentifier_scanName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFindingIdentifier_scanName})
+var sFindingIdentifier_findingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findingId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eFindingIdentifier_findingId})
+var s_FindingIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFindingIdentifier, Members: &mFindingIdentifier, Type: smithy.ShapeTypeStructure, Ext: &e_FindingIdentifiers_member})
+var sFindingMetricsValuePerSeverity_info = smithy.NewStaticSchema(smithy.StaticSchema{Member: "info", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eFindingMetricsValuePerSeverity_info})
+var sFindingMetricsValuePerSeverity_low = smithy.NewStaticSchema(smithy.StaticSchema{Member: "low", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eFindingMetricsValuePerSeverity_low})
+var sFindingMetricsValuePerSeverity_medium = smithy.NewStaticSchema(smithy.StaticSchema{Member: "medium", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eFindingMetricsValuePerSeverity_medium})
+var sFindingMetricsValuePerSeverity_high = smithy.NewStaticSchema(smithy.StaticSchema{Member: "high", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eFindingMetricsValuePerSeverity_high})
+var sFindingMetricsValuePerSeverity_critical = smithy.NewStaticSchema(smithy.StaticSchema{Member: "critical", ID: &pDouble, Type: smithy.ShapeTypeDouble, Ext: &eFindingMetricsValuePerSeverity_critical})
+var s_Findings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFinding, Members: &mFinding, Type: smithy.ShapeTypeStructure, Ext: &e_Findings_member})
+var s_FindingsMetricList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccountFindingsMetric, Members: &mAccountFindingsMetric, Type: smithy.ShapeTypeStructure, Ext: &e_FindingsMetricList_member})
+var sInternalServerException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_error})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eInternalServerException_message})
+var sMetricsSummary_date = smithy.NewStaticSchema(smithy.StaticSchema{Member: "date", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eMetricsSummary_date})
+var sMetricsSummary_openFindings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openFindings", ID: &iFindingMetricsValuePerSeverity, Members: &mFindingMetricsValuePerSeverity, Type: smithy.ShapeTypeStructure, Ext: &eMetricsSummary_openFindings})
+var sMetricsSummary_categoriesWithMostFindings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categoriesWithMostFindings", ID: &i_CategoriesWithMostFindings, Members: &m_CategoriesWithMostFindings, Type: smithy.ShapeTypeList, Ext: &eMetricsSummary_categoriesWithMostFindings})
+var sMetricsSummary_scansWithMostOpenFindings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scansWithMostOpenFindings", ID: &i_ScansWithMostOpenFindings, Members: &m_ScansWithMostOpenFindings, Type: smithy.ShapeTypeList, Ext: &eMetricsSummary_scansWithMostOpenFindings})
+var sMetricsSummary_scansWithMostOpenCriticalFindings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scansWithMostOpenCriticalFindings", ID: &i_ScansWithMostOpenCriticalFindings, Members: &m_ScansWithMostOpenCriticalFindings, Type: smithy.ShapeTypeList, Ext: &eMetricsSummary_scansWithMostOpenCriticalFindings})
+var sRecommendation_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRecommendation_text})
+var sRecommendation_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eRecommendation_url})
+var s_ReferenceUrls_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_ReferenceUrls_member})
+var s_RelatedVulnerabilities_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString, Ext: &e_RelatedVulnerabilities_member})
+var sRemediation_recommendation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendation", ID: &iRecommendation, Members: &mRecommendation, Type: smithy.ShapeTypeStructure, Ext: &eRemediation_recommendation})
+var sRemediation_suggestedFixes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "suggestedFixes", ID: &i_SuggestedFixes, Members: &m_SuggestedFixes, Type: smithy.ShapeTypeList, Ext: &eRemediation_suggestedFixes})
+var s_RequestHeaderMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_HeaderKey, Type: smithy.ShapeTypeString, Ext: &e_RequestHeaderMap_key})
+var s_RequestHeaderMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_HeaderValue, Type: smithy.ShapeTypeString, Ext: &e_RequestHeaderMap_value})
+var sResource_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResource_id})
+var sResource_subResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subResourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResource_subResourceId})
+var sResourceId_codeArtifactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeArtifactId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eResourceId_codeArtifactId})
+var sResourceNotFoundException_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_errorCode})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_message})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceId})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eResourceNotFoundException_resourceType})
+var sScanNameWithFindingNum_scanName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanName", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eScanNameWithFindingNum_scanName})
+var sScanNameWithFindingNum_findingNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findingNumber", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eScanNameWithFindingNum_findingNumber})
+var sScanState_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScanState_IN_PROGRESS})
+var sScanState_SUCCESSFUL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESSFUL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScanState_SUCCESSFUL})
+var sScanState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScanState_FAILED})
+var s_ScanSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iScanSummary, Members: &mScanSummary, Type: smithy.ShapeTypeStructure, Ext: &e_ScanSummaries_member})
+var sScanSummary_scanState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanState", ID: &iScanState, Members: &mScanState, Type: smithy.ShapeTypeEnum, Ext: &eScanSummary_scanState})
+var sScanSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eScanSummary_createdAt})
+var sScanSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eScanSummary_updatedAt})
+var sScanSummary_scanName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanName", ID: &i_ScanName, Type: smithy.ShapeTypeString, Ext: &eScanSummary_scanName})
+var sScanSummary_runId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eScanSummary_runId})
+var sScanSummary_scanNameArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanNameArn", ID: &i_ScanNameArn, Type: smithy.ShapeTypeString, Ext: &eScanSummary_scanNameArn})
+var s_ScansWithMostOpenCriticalFindings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iScanNameWithFindingNum, Members: &mScanNameWithFindingNum, Type: smithy.ShapeTypeStructure, Ext: &e_ScansWithMostOpenCriticalFindings_member})
+var s_ScansWithMostOpenFindings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iScanNameWithFindingNum, Members: &mScanNameWithFindingNum, Type: smithy.ShapeTypeStructure, Ext: &e_ScansWithMostOpenFindings_member})
+var sScanType_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScanType_STANDARD})
+var sScanType_EXPRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eScanType_EXPRESS})
+var sSeverity_CRITICAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CRITICAL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSeverity_CRITICAL})
+var sSeverity_HIGH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIGH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSeverity_HIGH})
+var sSeverity_MEDIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSeverity_MEDIUM})
+var sSeverity_LOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOW", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSeverity_LOW})
+var sSeverity_INFO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFO", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eSeverity_INFO})
+var sStatus_CLOSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOSED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_CLOSED})
+var sStatus_OPEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPEN", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_OPEN})
+var sStatus_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eStatus_ALL})
+var sSuggestedFix_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSuggestedFix_description})
+var sSuggestedFix_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eSuggestedFix_code})
+var s_SuggestedFixes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSuggestedFix, Members: &mSuggestedFix, Type: smithy.ShapeTypeStructure, Ext: &e_SuggestedFixes_member})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagKeyList_member})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString, Ext: &e_TagMap_key})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString, Ext: &e_TagMap_value})
+var sThrottlingException_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_errorCode})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_message})
+var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_serviceCode})
+var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eThrottlingException_quotaCode})
+var sValidationException_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_errorCode})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationException_message})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum, Ext: &eValidationException_reason})
+var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList, Ext: &eValidationException_fieldList})
+var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_name})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eValidationExceptionField_message})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure, Ext: &e_ValidationExceptionFieldList_member})
+var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_UNKNOWN_OPERATION})
+var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_CANNOT_PARSE})
+var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_FIELD_VALIDATION_FAILED})
+var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_OTHER})
+var sValidationExceptionReason_LAMBDA_CODE_SHA_MISMATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAMBDA_CODE_SHA_MISMATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure, Ext: &eValidationExceptionReason_LAMBDA_CODE_SHA_MISMATCH})
+var sVulnerability_referenceUrls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "referenceUrls", ID: &i_ReferenceUrls, Members: &m_ReferenceUrls, Type: smithy.ShapeTypeList, Ext: &eVulnerability_referenceUrls})
+var sVulnerability_relatedVulnerabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedVulnerabilities", ID: &i_RelatedVulnerabilities, Members: &m_RelatedVulnerabilities, Type: smithy.ShapeTypeList, Ext: &eVulnerability_relatedVulnerabilities})
+var sVulnerability_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString, Ext: &eVulnerability_id})
+var sVulnerability_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &iFilePath, Members: &mFilePath, Type: smithy.ShapeTypeStructure, Ext: &eVulnerability_filePath})
+var sVulnerability_itemCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "itemCount", ID: &pInteger, Type: smithy.ShapeTypeInteger, Ext: &eVulnerability_itemCount})
+var sBatchGetFindingsRequest_findingIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findingIdentifiers", ID: &i_FindingIdentifiers, Members: &m_FindingIdentifiers, Type: smithy.ShapeTypeList, Ext: &eBatchGetFindingsRequest_findingIdentifiers})
+var sBatchGetFindingsResponse_findings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findings", ID: &i_Findings, Members: &m_Findings, Type: smithy.ShapeTypeList, Ext: &eBatchGetFindingsResponse_findings})
+var sBatchGetFindingsResponse_failedFindings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failedFindings", ID: &i_BatchGetFindingsErrors, Members: &m_BatchGetFindingsErrors, Type: smithy.ShapeTypeList, Ext: &eBatchGetFindingsResponse_failedFindings})
+var sCreateScanRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString, Ext: &eCreateScanRequest_clientToken})
+var sCreateScanRequest_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &iResourceId, Members: &mResourceId, Type: smithy.ShapeTypeUnion, Ext: &eCreateScanRequest_resourceId})
+var sCreateScanRequest_scanName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanName", ID: &i_ScanName, Type: smithy.ShapeTypeString, Ext: &eCreateScanRequest_scanName})
+var sCreateScanRequest_scanType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanType", ID: &iScanType, Members: &mScanType, Type: smithy.ShapeTypeEnum, Ext: &eCreateScanRequest_scanType})
+var sCreateScanRequest_analysisType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "analysisType", ID: &iAnalysisType, Members: &mAnalysisType, Type: smithy.ShapeTypeEnum, Ext: &eCreateScanRequest_analysisType})
+var sCreateScanRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eCreateScanRequest_tags})
+var sCreateScanResponse_scanName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanName", ID: &i_ScanName, Type: smithy.ShapeTypeString, Ext: &eCreateScanResponse_scanName})
+var sCreateScanResponse_runId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eCreateScanResponse_runId})
+var sCreateScanResponse_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &iResourceId, Members: &mResourceId, Type: smithy.ShapeTypeUnion, Ext: &eCreateScanResponse_resourceId})
+var sCreateScanResponse_scanState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanState", ID: &iScanState, Members: &mScanState, Type: smithy.ShapeTypeEnum, Ext: &eCreateScanResponse_scanState})
+var sCreateScanResponse_scanNameArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanNameArn", ID: &i_ScanNameArn, Type: smithy.ShapeTypeString, Ext: &eCreateScanResponse_scanNameArn})
+var sCreateUploadUrlRequest_scanName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanName", ID: &i_ScanName, Type: smithy.ShapeTypeString, Ext: &eCreateUploadUrlRequest_scanName})
+var sCreateUploadUrlResponse_s3Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Url", ID: &i_S3Url, Traits: &t20, Type: smithy.ShapeTypeString, Ext: &eCreateUploadUrlResponse_s3Url})
+var sCreateUploadUrlResponse_requestHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestHeaders", ID: &i_RequestHeaderMap, Members: &m_RequestHeaderMap, Traits: &t20, Type: smithy.ShapeTypeMap, Ext: &eCreateUploadUrlResponse_requestHeaders})
+var sCreateUploadUrlResponse_codeArtifactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeArtifactId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eCreateUploadUrlResponse_codeArtifactId})
+var sGetAccountConfigurationResponse_encryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfig", ID: &iEncryptionConfig, Members: &mEncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &eGetAccountConfigurationResponse_encryptionConfig})
+var sGetFindingsRequest_scanName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanName", ID: &i_ScanName, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eGetFindingsRequest_scanName})
+var sGetFindingsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eGetFindingsRequest_nextToken})
+var sGetFindingsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t23, Type: smithy.ShapeTypeInteger, Ext: &eGetFindingsRequest_maxResults})
+var sGetFindingsRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStatus, Members: &mStatus, Traits: &t24, Type: smithy.ShapeTypeEnum, Ext: &eGetFindingsRequest_status})
+var sGetFindingsResponse_findings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findings", ID: &i_Findings, Members: &m_Findings, Type: smithy.ShapeTypeList, Ext: &eGetFindingsResponse_findings})
+var sGetFindingsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eGetFindingsResponse_nextToken})
+var sGetMetricsSummaryRequest_date = smithy.NewStaticSchema(smithy.StaticSchema{Member: "date", ID: &pTimestamp, Traits: &t25, Type: smithy.ShapeTypeTimestamp, Ext: &eGetMetricsSummaryRequest_date})
+var sGetMetricsSummaryResponse_metricsSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricsSummary", ID: &iMetricsSummary, Members: &mMetricsSummary, Type: smithy.ShapeTypeStructure, Ext: &eGetMetricsSummaryResponse_metricsSummary})
+var sGetScanRequest_scanName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanName", ID: &i_ScanName, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eGetScanRequest_scanName})
+var sGetScanRequest_runId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runId", ID: &i_Uuid, Traits: &t26, Type: smithy.ShapeTypeString, Ext: &eGetScanRequest_runId})
+var sGetScanResponse_scanName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanName", ID: &i_ScanName, Type: smithy.ShapeTypeString, Ext: &eGetScanResponse_scanName})
+var sGetScanResponse_runId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runId", ID: &i_Uuid, Type: smithy.ShapeTypeString, Ext: &eGetScanResponse_runId})
+var sGetScanResponse_scanState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanState", ID: &iScanState, Members: &mScanState, Type: smithy.ShapeTypeEnum, Ext: &eGetScanResponse_scanState})
+var sGetScanResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetScanResponse_createdAt})
+var sGetScanResponse_analysisType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "analysisType", ID: &iAnalysisType, Members: &mAnalysisType, Type: smithy.ShapeTypeEnum, Ext: &eGetScanResponse_analysisType})
+var sGetScanResponse_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp, Ext: &eGetScanResponse_updatedAt})
+var sGetScanResponse_numberOfRevisions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numberOfRevisions", ID: &pLong, Type: smithy.ShapeTypeLong, Ext: &eGetScanResponse_numberOfRevisions})
+var sGetScanResponse_scanNameArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanNameArn", ID: &i_ScanNameArn, Type: smithy.ShapeTypeString, Ext: &eGetScanResponse_scanNameArn})
+var sGetScanResponse_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString, Ext: &eGetScanResponse_errorMessage})
+var sListFindingsMetricsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eListFindingsMetricsRequest_nextToken})
+var sListFindingsMetricsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t23, Type: smithy.ShapeTypeInteger, Ext: &eListFindingsMetricsRequest_maxResults})
+var sListFindingsMetricsRequest_startDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startDate", ID: &pTimestamp, Traits: &t27, Type: smithy.ShapeTypeTimestamp, Ext: &eListFindingsMetricsRequest_startDate})
+var sListFindingsMetricsRequest_endDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endDate", ID: &pTimestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp, Ext: &eListFindingsMetricsRequest_endDate})
+var sListFindingsMetricsResponse_findingsMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findingsMetrics", ID: &i_FindingsMetricList, Members: &m_FindingsMetricList, Type: smithy.ShapeTypeList, Ext: &eListFindingsMetricsResponse_findingsMetrics})
+var sListFindingsMetricsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListFindingsMetricsResponse_nextToken})
+var sListScansRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t22, Type: smithy.ShapeTypeString, Ext: &eListScansRequest_nextToken})
+var sListScansRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t23, Type: smithy.ShapeTypeInteger, Ext: &eListScansRequest_maxResults})
+var sListScansResponse_summaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summaries", ID: &i_ScanSummaries, Members: &m_ScanSummaries, Type: smithy.ShapeTypeList, Ext: &eListScansResponse_summaries})
+var sListScansResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString, Ext: &eListScansResponse_nextToken})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ScanNameArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eListTagsForResourceRequest_resourceArn})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eListTagsForResourceResponse_tags})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ScanNameArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eTagResourceRequest_resourceArn})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap, Ext: &eTagResourceRequest_tags})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ScanNameArn, Traits: &t21, Type: smithy.ShapeTypeString, Ext: &eUntagResourceRequest_resourceArn})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t29, Type: smithy.ShapeTypeList, Ext: &eUntagResourceRequest_tagKeys})
+var sUpdateAccountConfigurationRequest_encryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfig", ID: &iEncryptionConfig, Members: &mEncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAccountConfigurationRequest_encryptionConfig})
+var sUpdateAccountConfigurationResponse_encryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfig", ID: &iEncryptionConfig, Members: &mEncryptionConfig, Type: smithy.ShapeTypeStructure, Ext: &eUpdateAccountConfigurationResponse_encryptionConfig})
 
 var BatchGetFindings = &sBatchGetFindings
 
